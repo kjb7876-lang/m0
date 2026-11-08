@@ -35,6 +35,34 @@ W.api.set(true);W.calls.length=0;W.drawProp()({id:'tree',path:'assets/r99/outdoo
  ok('3D recorder: shadow copies are recorded in a ground-aligned scope without bodyPath (the prop itself keeps its body scope)');}
 {const src2=require('fs').readFileSync(require('path').join(__dirname,'..','..','client-source','prop-shadow-r329.js'),'utf8');
  if(!/SG\.pointVisible\(c\.wx,c\.wy\)\)\{stats\.hidden/.test(src2))throw new Error('sight check');ok('props hidden by flashlight sight cast no shadow');
- if(!/sy=LEN\*\(\.85\+\.3\*L\.k\)\*\(L\.y>\.2\?-\.6:1\)/.test(src2))throw new Error('flip');ok('light above the prop flips the silhouette downward (away from light)');
+ // R412(사용자 2026-11-08 "그림자는 조형물앞이 아닌 뒷쪽에"): 앞(아래)으로 뒤집어 눕히던 갈래는 없어야 하고, 위(뒤)에 있는 빛은 버리고 보는 사람 쪽 빛(뒤로)을 쓴다
+ if(/L\.y>\.2\?-\.6:1/.test(src2)||!/const w=L0&&!back\?Math\.max\(0,Math\.min\(1,\(-L0\.y-\.15\)\/\.35\)\):0/.test(src2)||!/oy=Math\.min\(oy,-h\*\.05\)/.test(src2))throw new Error('shadow must stay behind');
+ {const tr=[];const c5={save(){},restore(){},translate(x,y){tr.push([x,y]);},scale(a,b){tr.push(['s',a,b]);}};const win={__STORYWORLD_LIGHT_ATMOS_R300__:{lightsOf:()=>[{x:3,y:1,r:3,prop:true}]}};
+  const W5=new Function('window','localStorage','ctx','project','src','room',`let drawProp=function(p){sprite(p.path,p.x*10,p.y*10,80,{alpha:1});},sprite=()=>{},drawAssetFrame3=()=>{};${src2}\n;return {drawProp:()=>drawProp};`)(win,{getItem:()=>null,setItem(){}},c5,(x,y)=>({x:x*10,y:y*10}),src2,{});
+  W5.drawProp()({id:'statue',path:'assets/x/statue.webp',x:3,y:4});const t0=tr.find(v=>v[0]!=='s'),s0=tr.find(v=>v[0]==='s');
+  if(!(t0&&t0[1]<40&&s0&&s0[2]>0))throw new Error('light above → shadow must still fall behind (up), upright: '+JSON.stringify(tr.slice(0,3)));}
+ ok('light behind the prop (screen above) no longer throws the shadow in front; shadows always fall behind (R412)');
  if(/Math\.round\(x\)\s*,\s*kind:'effect'/.test(src2)||!/'r329:shadow:'\+\(c\?\.self\?\.id\?\?\(Number\.isFinite\(c\?\.wx\)/.test(src2))throw new Error('scope id');ok('shadow scope id uses prop id / world position, stable while the camera pans');}
+// R412 심사(7분야): 옆빛에서 옆으로 서던 검은 쌍둥이·구멍처럼 검던 그림자 — 한 장 알파 ≤.3, 옆 밀기 ≤ 키의 .3, 늘 위(뒤)로, 앞빛만 서서히 섞기, 뒷벽 조형물은 기본 그림자
+{const run=(lights,prop,extra={})=>{const tr=[],al=[];const c={save(){},restore(){},translate(x,y){tr.push([x,y]);},scale(a,b){tr.push(['s',a,b]);}};const win={__STORYWORLD_LIGHT_ATMOS_R300__:{lightsOf:()=>lights},...(extra.win||{})};
+  const W=new Function('window','localStorage','ctx','project','src','room',`let drawProp=function(p){sprite(p.path,p.x*10,p.y*10,80,{alpha:1});},sprite=(path,x,y,h,o)=>__a.push(o&&o.alpha),drawAssetFrame3=()=>{};const __a=arguments[6];${src}\n;return {drawProp:()=>drawProp};`)(win,{getItem:()=>null,setItem(){}},c,(x,y)=>({x:x*10,y:y*10}),src,extra.room||{},al);
+  W.drawProp()(prop);return{t:tr.filter(v=>v[0]!=='s'),s:tr.filter(v=>v[0]==='s'),a:al};};
+ const h=80,P={id:'statue',path:'assets/x/statue.webp',x:3,y:4};
+ // 같은 화면 줄 옆빛(L0.y=0): 기본 그림자 — 옆 .12h·위 .1h, 한 장 알파 .25
+ let r=run([{x:1,y:4,r:3,prop:true}],P);assert(r.t[0]&&Math.abs(r.t[0][0]-(30-2))<=h*.3+.01&&r.t[0][1]<=40-h*.05,JSON.stringify(r.t.slice(0,2)));assert(r.a.slice(0,2).every(a=>a<=.3)&&r.a[2]===1,JSON.stringify(r.a));
+ // 앞(아래) 대각선 빛: 섞여도 옆 밀기는 키의 .3 을 넘지 않는다
+ r=run([{x:1,y:5,r:3,prop:true}],P);assert(r.t[0]&&r.t[0][0]-(30-2)<=h*.3+.01&&r.t[0][1]<40,JSON.stringify(r.t.slice(0,2)));
+ // 바로 앞(아래) 빛: 그림자가 뚜렷이 위(뒤)로
+ r=run([{x:3,y:6,r:3,prop:true}],P);assert(r.t[0]&&r.t[0][1]<40-10&&Math.abs(r.t[0][0]-(30-2))<1,JSON.stringify(r.t.slice(0,2)));
+ // 뒷벽 1.2칸 안(R406 walls)에 등을 댄 조형물은 빛과 상관없이 기본 그림자
+ const R406={walls:()=>[{dx:0,dy:-1,side:'-y',d:.6}]};r=run([{x:3,y:6,r:3,prop:true}],P,{win:{__STORYWORLD_PROPS_PLACE_R406__:R406},room:{exploration:{}}});
+ assert(r.t[0]&&Math.abs(r.t[0][1]-(40-h*.1))<.01&&Math.abs(r.t[0][0]-(30-2+h*.12))<.01,JSON.stringify(r.t.slice(0,2)));
+ ok('R412 review: shadows are light (≤.3 alpha per copy), lean at most .3h sideways, always fall up/behind, blend in front lights smoothly; wall-backed props keep the default shadow');}
+// R412: R111(벽 간격)·R412 가 숨은 r111To 자리에 그리는 조형물도 그림자가 붙어야 한다(x·y 로 맞추면 2px 넘게 어긋나 빠졌다)
+{const d6=[];const win={__STORYWORLD_PROPS_TIDY_R412__:{spotOf:p=>p.r111To||p,footOf:p=>p.r111To||p,mirrored:p=>!!p.r303Flip}};
+ const W6=new Function('window','localStorage','ctx','project','src',`let drawProp=function(p){const t=p.r111To||p;sprite(p.path,t.x*10,t.y*10,80,{alpha:1});},sprite=(path,x,y,h,o)=>__d.push(o&&o.filter||'none'),drawAssetFrame3=()=>{};const __d=arguments[5];${src}\n;return {drawProp:()=>drawProp};`)(win,{getItem:()=>null,setItem(){}},{save(){},restore(){},translate(){},scale(){}},(x,y)=>({x:x*10,y:y*10}),src,d6);
+ W6.drawProp()({id:'shelf',path:'assets/x/shelf.webp',x:2,y:5,r111To:{x:2.6,y:5}});assert.strictEqual(d6.filter(f=>f==='brightness(0)').length,2,JSON.stringify(d6));
+ const d7=[];const W7=new Function('window','localStorage','ctx','project','src',`let drawProp=function(p){const t=p.r111To||p;sprite(p.path,t.x*10,t.y*10,80,{alpha:1});},sprite=(path,x,y,h,o)=>__d.push(o&&o.filter||'none'),drawAssetFrame3=()=>{};const __d=arguments[5];${src}\n;return {drawProp:()=>drawProp};`)({},{getItem:()=>null,setItem(){}},{save(){},restore(){},translate(){},scale(){}},(x,y)=>({x:x*10,y:y*10}),src,d7);
+ W7.drawProp()({id:'shelf',path:'assets/x/shelf.webp',x:2,y:5});assert.strictEqual(d7.filter(f=>f==='brightness(0)').length,2,JSON.stringify(d7));
+ ok('props drawn at their R111/R412 spot (r111To) still cast shadows (matched by the draw spot); without R412 the x/y match is unchanged');}
 console.log(JSON.stringify({ok:true,checks:n,method:'static + CPU fake globals; headless capture separately; no GPU or device'}));

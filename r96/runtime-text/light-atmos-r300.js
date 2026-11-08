@@ -41,14 +41,15 @@ const lightCache=new WeakMap(),wallCache=new WeakMap();
 const FIRE=/brazier|torch|candle|lantern|sconce|campfire|bonfire|altar|shrine/i,NOT=/door|beast|ailment|vfx/i;
 function isLight(p){try{const f=window.__STORYWORLD_DARK_R123__?.isLight;if(typeof f==='function')return !!f(p);}catch(_){}
  return !!p&&p.visible!==false&&(['brazier','torch','candle','lantern'].includes(p.r74Prop||p.r105Prop||p.r115Prop)||(typeof p.path==='string'&&FIRE.test(p.path)&&!NOT.test(p.path)));}
-function lightsOf(r){if(!r)return[];const n=r.props?.length||0;let c=lightCache.get(r);if(c&&c.n===n)return c.list;
- const list=(r.props||[]).filter(isLight).filter(p=>Number.isFinite(p.x+p.y)).map(p=>({x:p.x,y:p.y,r:3,prop:true}));
+function lightsOf(r){if(!r)return[];const n=r.props?.length||0,T=window.__STORYWORLD_PROPS_TIDY_R412__,v=T?.ver?.()||0;let c=lightCache.get(r);if(c&&c.n===n&&c.v===v)return c.list;
+ /* R412 심사: R412 가 옮긴 등불은 보이는 발 자리(footOf)에서 빛나고, 옮기거나 등불을 뺄 때마다(ver) 목록을 새로 읽는다 */
+ const list=(r.props||[]).filter(isLight).filter(p=>Number.isFinite(p.x+p.y)).map(p=>{let f=p;try{f=T?.footOf?.(p)||p;}catch(_){}return{x:f.x,y:f.y,r:3,prop:true};});
  const L=r.exploration,cells=L?.floorCells;let wall=L&&wallCache.get(L);
  if(!wall||wall.cells!==cells){const w=[];if(Array.isArray(cells)&&cells.length){const set=new Set(cells.map(q=>q[0]+':'+q[1]));
    for(const[a,b]of cells){if(set.has(a+':'+(b-1))&&set.has((a-1)+':'+b))continue;if(!set.has((a+1)+':'+b)||!set.has(a+':'+(b+1)))continue;if(((a*7+b*13)%5)!==0)continue;w.push({x:a+.6,y:b+.6,r:2.2});}}
   wall={cells,list:w};if(L)wallCache.set(L,wall);}
  for(const w of wall.list){if(list.length>=80)break;if(list.some(q=>Math.hypot(q.x-w.x,q.y-w.y)<9))continue;list.push(w);}
- c={n,list};lightCache.set(r,c);return list;}
+ c={n,v,list};lightCache.set(r,c);return list;}
 function nearest(list,x,y,cap){if(list.length<=cap)return list.slice();return list.map(l=>[l,(l.x-x)**2+(l.y-y)**2]).sort((a,b)=>a[1]-b[1]).slice(0,cap).map(a=>a[0]);}
 
 // ---- 오프스크린 텍스처 ----

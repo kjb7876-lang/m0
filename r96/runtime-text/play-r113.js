@@ -149,7 +149,7 @@ const WALL_DECOR=/banner|flag|relief|plaque|sign|tapestr|torch|sconce|window|fra
 const FIXED_ID=/^(ward-|r83|door|gate|portal|exit|r92:light|r103|chest)/;
 const spots=new Map();
 function wallClose(x,y,c,tall){if(blockedAt(x,y,c))return true;if(tall)for(const[dx,dy]of[[.8,.8],[.8,0],[0,.8]])if(blockedAt(x+dx,y+dy,.18))return true;return false;}
-function wallSpot(owner,bh,dpr){const id=String(owner.id||'');if(spots.has(id))return spots.get(id);let out=null;
+function wallSpot(owner,bh,dpr){const id=String(owner.id||'');{const p0=propById(id);if(p0&&p0.r111To)return null;}/* R412 심사: R111·R412 가 나중에 r111To(그리는 자리)를 정하면 그 자리를 따른다 — 먼저 잡아 둔 자리로 몸만 옮겨 그림자와 떨어지던 것 */if(spots.has(id))return spots.get(id);let out=null;
  try{const raw=id.replace(/^prop:/,''),p=propById(id),path=String(owner.bodyPath||owner.sourcePath||p?.path||p?.art||'');
   if(!FIXED_ID.test(raw)&&!WALL_DECOR.test(path)&&!(p&&(p.r111To||p.solid!==false&&!p.r80PresentationOnly&&!p.r81PresentationOnly))&&Number.isFinite(owner.x+owner.y)){
    const tall=bh/dpr>90,c=tall?.72:.55;
