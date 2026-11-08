@@ -363,6 +363,177 @@
    "bytes": 867448,
    "sha256": "35bc9f0f4d99300a12912ad146872d7597d75d1b9824350bfae9a9b3f77ac27c",
    "added": "R129"
+  },
+  "swampmud": {
+   "family": "SW-TILE-B07",
+   "regions": [
+    "dist02"
+   ],
+   "floor": {
+    "batch": "SW-TILE-B07",
+    "source": "swamp_outdoor_floor.png",
+    "sha256": "87bb573ccbf5e7450c3663565fe6ee399cfc41c86c2f648a7cd4f33969b88199",
+    "decodedRgbSha256": "4362e2c1b4178ff0f0204341774f399abff08fa9fd8322d5a420092ba56b6ee6",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "바닥",
+    "environment": "실외 자연경계"
+   },
+   "wall": {
+    "batch": "SW-TILE-B07",
+    "source": "swamp_outdoor_wall.png",
+    "sha256": "e729ba1c42c9ae67fa887707680dcd519f7436e10974b1af1bee4df0e3cbf24d",
+    "decodedRgbSha256": "769b58d62085604fd232b47c99ee35365fbd7279bbf582558f52732755b90f04",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "벽",
+    "environment": "실외 자연경계"
+   },
+   "file": "swampmud.webp",
+   "bytes": 571034,
+   "sha256": "0e2f4460291157766cf3d42e1faa912b56cd79f52a9294b061213ea8226d691e",
+   "added": "R405"
+  },
+  "gravepath": {
+   "family": "SW-TILE-B03",
+   "regions": [
+    "kair09"
+   ],
+   "floor": {
+    "batch": "SW-TILE-B03",
+    "source": "grave_outdoor_floor.png",
+    "sha256": "f98a8924b1b8505089454aac206cb5cbb6153fcc4428814b00b24e188aecfbee",
+    "decodedRgbSha256": "79cccf823d3f51dee18516e6b0c6bee5fe020762727ea6f342a655630a769f08",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "흙길",
+    "environment": "실외"
+   },
+   "wall": {
+    "batch": "SW-TILE-B03",
+    "source": "grave_outdoor_wall.png",
+    "sha256": "e1f7222da698e8fa2247eab167030e75a51a5209221fbec29c84bc9693113b1e",
+    "decodedRgbSha256": "7fdbcb3acfc9dfa2797e428ba88263332c4372565f013d15b79779707ffd7509",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "경계벽",
+    "environment": "실외"
+   },
+   "file": "gravepath.webp",
+   "bytes": 652868,
+   "sha256": "8dcafe5bfafae9b8a50a0023c07d48b36787f7ace341d4aeec437318baa5eeda",
+   "added": "R405"
+  },
+  "theatre": {
+   "family": "SW-TILE-B03",
+   "regions": [
+    "ep1b05"
+   ],
+   "floor": {
+    "batch": "SW-TILE-B03",
+    "source": "theatre_indoor_floor.png",
+    "sha256": "95994c7a93aa5c41fc4d51369940839e89e547cc6a73e6df7869d362fbfa1ec4",
+    "decodedRgbSha256": "6747648c810ab9314fa524d9ea44d444c80103dc49742c02ff324cf3de87cac9",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "바닥",
+    "environment": "실내",
+    "brightness": 1.9
+   },
+   "wall": {
+    "batch": "SW-TILE-B03",
+    "source": "theatre_indoor_wall.png",
+    "sha256": "58ecb655945e74161af20b0d93126d42b86c315c801ed40336c018b3321637b2",
+    "decodedRgbSha256": "ce6cbc1d00b4a1949fdbe188fd842a97e713614ef2b6d5729208d6a4493aa88d",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "벽",
+    "environment": "실내"
+   },
+   "file": "theatre.webp",
+   "bytes": 495786,
+   "sha256": "d2dcbb0fe62af24086735cae6c1a8f36f3dfafa253e01ce81f28f7bedde59924",
+   "added": "R405"
+  },
+  "hotel": {
+   "family": "SW-TILE-B05",
+   "regions": [
+    "murder02"
+   ],
+   "floor": {
+    "batch": "SW-TILE-B05",
+    "source": "hotel_indoor_floor.png",
+    "sha256": "6510bef6e3e83ccb31f48cb5e8f8301785fb4cc07e330d16edf879cd220948ee",
+    "decodedRgbSha256": "256a0ef97f97a6f6575d3f2d3434ea042af89499a50549ac40bb436806039a91",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "바닥",
+    "environment": "실내"
+   },
+   "wall": {
+    "batch": "SW-TILE-B05",
+    "source": "hotel_indoor_wall.png",
+    "sha256": "0ce75973cd798c0befafee06e41150479c0d32ffd74f7f611b4e426ce3a6d9ca",
+    "decodedRgbSha256": "72ca39c45a1eb6e76f8d701e9d01bfce7c55d570884cdfe0babdac44fb3b7c8a",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "벽",
+    "environment": "실내"
+   },
+   "file": "hotel.webp",
+   "bytes": 493774,
+   "sha256": "29e90d9505898538e4871c590f93a915e8c6bb166196d401a9066193be20ae9a",
+   "added": "R405"
+  },
+  "rooftop": {
+   "family": "SW-TILE-B05",
+   "regions": [
+    "murder03"
+   ],
+   "floor": {
+    "batch": "SW-TILE-B05",
+    "source": "roof_outdoor_floor.png",
+    "sha256": "a76b9930032cf7610d4d73d78ab49a161e808231b9e89a6df9c4b9fdcb10bb29",
+    "decodedRgbSha256": "4809ba6114daf1ba251745daf03111f1719663bd744bc8d221af6f528fd2db79",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "바닥",
+    "environment": "실외"
+   },
+   "wall": {
+    "batch": "SW-TILE-B05",
+    "source": "roof_outdoor_wall.png",
+    "sha256": "bde9fd75f4b95e4e151ffa8f9fa12ad4362f2ad4ea5b7aa412fd48d269c1ca69",
+    "decodedRgbSha256": "4fb22cd58237ed6a2facd41e7b663bb6ba4dfb4c7054963dc1b89973d298f493",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "낮은 난간벽",
+    "environment": "실외"
+   },
+   "file": "rooftop.webp",
+   "bytes": 601506,
+   "sha256": "7b8494d591d4f064b49971e0e6150c1dcde39c917ed3c4511f3f025642996119",
+   "added": "R405"
   }
  }
 }

@@ -41,7 +41,7 @@ const ZONES={
  // R210 — 나머지 1부 야외 지역(사용자 "나머지맵들도 작업 … 모든맵이 화풍이 비슷해야함"). 통로 넓히기는 하지 않는다(맵 레이아웃·전수 검사 그대로), 불룩도 중간.
  // 늪지대의 뿔악마: 이끼 흙·진흙 바닥, 물 먹은 이끼 둔덕, 마른 나무
  dist02:{decalMix:{near:[[2,3],[11,4],[5,1],[6,1]],open:[[10,4],[9,1],[11,4],[5,1],[6,1],[0,1]]},decalDensity:10,tufts:['assets/r138/props/weed.webp',.13,1/22],seed:0x5d0202,tint:[.78,.86,.7],topK:1.9,floorK:.98,hiTop:1.2,loTop:.4,bulge:1.1,widen:false,web:false,pillars:false,trees:'dead',boulders:1/150,
-  tex:{floorA:['assets/r118/tiles/meadow.webp',0],floorB:['assets/r99/outdoor/ground-moss.webp',0],rock:['assets/r99/outdoor/surround-moss.webp',-1],face:['assets/r99/outdoor/ground-moss.webp',1]},
+  tex:{floorA:['assets/r118/tiles/swampmud.webp',0],floorB:['assets/r99/outdoor/ground-moss.webp',0],rock:['assets/r99/outdoor/surround-moss.webp',-1],face:['assets/r118/tiles/swampmud.webp',1]},/* R405: 드라이브 SW-TILE B07 늪 진흙 바닥·흙 절개면(전엔 풀밭 meadow) */
   patches:[['soil_rock_transition_01','base',.3,1/120,.5],['garden_soil_paving_transition_01','floor',.34,1/300,.8]]},
  // 무너진 성: 성 돌바닥·정원 돌길, 벽면은 성 벽돌, 윗면은 무너진 잔해 — 건축물이라 불룩 작게(hub 처럼)
  dist03:{decalMix:{near:[[5,3],[6,3],[0,2],[8,1]],open:[[0,3],[5,3],[6,2],[7,2],[8,1],[1,.4]]},decalDensity:12,seed:0x5d0303,tint:[.92,.86,.8],floorBGain:1.04,hiTop:1.75,loTop:.55,bulge:.7,widen:false,web:false,pillars:false,boulders:1/110,floorK:1.1,topK:2.0,
