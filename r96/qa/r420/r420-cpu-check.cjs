@@ -15,6 +15,13 @@ ok('region entry still loads the current hero (awakening included via heroPaths)
 const code=src.split('\n').filter(l=>!l.trim().startsWith('//')).join('\n');ok('no game ctx.filter / no blur or drop-shadow',!/ctx\.filter|drop-shadow|blur\(/.test(code));
 ok('does not touch saves, damage, maps',!/hitEnemy|damage|saveGame|localStorage\.removeItem|enterRegion|regionById\[/.test(src));
 
+// 전투 집중 HUD(사용자 2026-11-08): PC(pointer:fine, 781px+)만, 보스 체력 띠·메뉴는 안 옅게, 밝기·색은 그대로
+ok('focus HUD is PC-only (pointer:fine, min-width 781px)',src.includes("FOCUS_MQ='(min-width:781px) and (pointer:fine)'"));
+ok('focus HUD on by default',/DEF=Object\.freeze\(\{[^}]*focus:true/.test(src));
+ok('combat fade keeps the boss bar and menu',src.includes('header:not(:hover)>*:not(#bossbar):not(nav){opacity:.32}'));
+ok('focus HUD extends the game view under the footer',src.includes("body.r420-focus #stage{bottom:0!important}"));
+ok('focus HUD does not change brightness or colour of the game view',!/r420-focus[^']*#stage\{[^}]*filter/.test(src)&&!/r420-focus[^']*(canvas|#game)\{/.test(src));
+ok('focus HUD can be turned off in settings',src.includes('id="r420Focus"'));
 // 샌드박스 실행
 function run(store){const listeners=[];const stage={style:{filter:''}};const els={};
  const ctx={globalAlpha:1,measureText:t=>({width:String(t).length*8})};const drawn=[];

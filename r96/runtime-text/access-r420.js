@@ -6,17 +6,22 @@
 //  ③ 지역에 들어온 직후 영웅이 포탈 위에 서 있으면 포탈 이름표('이전 시작점 · …')가 영웅 몸을 가렸다 →
 //     이름표가 영웅 몸 상자와 겹칠 때만 38% 로 옅게 그린다(글은 남김). 터치 기기에서는 'C · 이동' 대신 '버튼 · 이동'.
 //  ④ 모바일 나침반 '길잡이 ON · 탭: 끄기' 가 '끄/기' 로 갈라지던 줄바꿈을 막는다.
+//  ⑤ 전투 집중 HUD(PC, 사용자 2026-11-08 "전투에 집중, HUD 를 줄여 호러 분위기는 유지"): 기본 켬.
+//     머리띠 64→44px(부제 줄 숨김, 보스 체력 띠는 안 옅게), 게임 화면을 아래 HUD 뒤까지 넓히고(720p 기준 504→676px),
+//     아래 HUD·알림 띠는 위가 투명해지는 검은 그라데이션으로. 근처에 살아 있는 적이 있으면
+//     머리띠와 HUD 의 부수 글(경험치·성장·EGO 문구)을 옅게 해 전투만 남긴다(마우스를 올리면 다시 또렷).
+//     밝기·색은 그대로(어둠 유지). 모바일(터치)·좁은 화면은 원래 배치를 쓴다.
 // 그림 자산·충돌·피해·저장·서사·맵 순서는 그대로. 게임 ctx.filter 를 쓰지 않는다(CSS filter 는 #stage 요소에만).
 (()=>{'use strict';
 if(window.__STORYWORLD_ACCESS_R420__)return;
 const REV='R420-access-1',KEY='storyworld.r420.access';
-const DEF=Object.freeze({bright:100,text:'base'});
+const DEF=Object.freeze({bright:100,text:'base',focus:true});
 const TEXT_SCALE=Object.freeze({base:null,large:{k:1.25,min:12},xl:{k:1.45,min:13}});
 const TEXT_KO=Object.freeze({base:'기본',large:'크게',xl:'아주 크게'});
 const stats={errors:0,lastError:null,labelsFaded:0,textScaled:0};
 const fail=e=>{stats.errors++;stats.lastError=String(e&&e.message||e).slice(0,160);};
 let prefs={...DEF};
-try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object'){if(Number.isFinite(+s.bright))prefs.bright=Math.max(70,Math.min(160,Math.round(+s.bright)));if(TEXT_SCALE.hasOwnProperty(s.text))prefs.text=s.text;}}catch(_){}
+try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object'){if(Number.isFinite(+s.bright))prefs.bright=Math.max(70,Math.min(160,Math.round(+s.bright)));if(TEXT_SCALE.hasOwnProperty(s.text))prefs.text=s.text;if(typeof s.focus==='boolean')prefs.focus=s.focus;}}catch(_){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}};
 const coarse=()=>{try{return matchMedia('(pointer:coarse)').matches;}catch(_){return false;}};
 
@@ -50,16 +55,41 @@ function wrapExits(){if(typeof drawExits!=='function'||drawExits.__r420)return;c
   try{return base.apply(this,a);}finally{if(own)c.fillText=ft;else delete c.fillText;}};
  wrapped.__r420=true;drawExits=wrapped;}
 
+// ⑤ 전투 집중 HUD --------------------------------------------------------------------------
+const FOCUS_MQ='(min-width:781px) and (pointer:fine)';
+const focusOn=()=>{try{return prefs.focus&&matchMedia(FOCUS_MQ).matches;}catch(_){return false;}};
+let focusWas=null,combatWas=false;
+function applyFocus(){try{const on=focusOn();const b=document.body;if(!b)return;
+ if(on!==focusWas){focusWas=on;b.classList.toggle('r420-focus',on);if(!on)b.classList.remove('r420-combat');
+  try{if(typeof resize==='function')resize();}catch(e){fail(e);}try{dispatchEvent(new Event('resize'));}catch(_){}}
+ if(!on)return;let fight=false;
+ try{if(typeof room!=='undefined'&&room&&Array.isArray(room.enemies)&&typeof player!=='undefined'&&player&&!(typeof modal!=='undefined'&&modal)){for(const e of room.enemies){if(!(e&&e.hp>0)||e.hero||e.ally)continue;if(Math.hypot(e.x-player.x,e.y-player.y)<8.5){fight=true;break;}}}}catch(e){fail(e);}
+ if(fight!==combatWas){combatWas=fight;b.classList.toggle('r420-combat',fight);stats.combatToggles=(stats.combatToggles||0)+1;}}catch(e){fail(e);}}
+const FOCUS_CSS='@media '+FOCUS_MQ+'{'
+ +'body.r420-focus{--notice-space-r63r2:30px}'
+ +'@media (min-height:681px){body.r420-focus{--top:44px}body.r420-focus header{height:44px!important}}'+'body.r420-focus header #bossbar{padding-top:2px!important;padding-bottom:3px!important}body.r420-focus header #bossbar #bossTitle{margin-bottom:1px!important;line-height:1.1!important}'
+ +'body.r420-focus #stage{bottom:0!important}'
+ +'body.r420-focus header .brand small,body.r420-focus #regionSub{display:none!important}'
+ +'html body.r420-focus header{background:linear-gradient(#06090df2,#06090dd9)!important;border-bottom:1px solid #3a332a!important;box-shadow:0 6px 14px #0008!important}'
+ +'html body.r420-focus footer{background:linear-gradient(#06090d00,#06090db8 30%,#06090df0 70%)!important;border-top:0!important;box-shadow:none!important}'
+ +'body.r420-focus #noticeShelfR63R2{background:none!important;border-top:0!important;box-shadow:none!important;text-shadow:0 1px 3px #000,0 0 6px #000}'
+ +'body.r420-focus header>*,body.r420-focus #xpText,body.r420-focus #buildText,body.r420-focus #awakeText,body.r420-focus .hotbar kbd,body.r420-focus .hotbar .label,body.r420-focus #noticeShelfR63R2{transition:opacity .45s ease}'
+ +'body.r420-focus.r420-combat header:not(:hover)>*:not(#bossbar):not(nav){opacity:.32}'
+ +'body.r420-focus.r420-combat #xpText,body.r420-focus.r420-combat #buildText,body.r420-focus.r420-combat #awakeText,body.r420-focus.r420-combat #noticeShelfR63R2{opacity:.35}'
+ +'body.r420-focus.r420-combat footer:not(:hover) .hotbar kbd,body.r420-focus.r420-combat footer:not(:hover) .hotbar .label{opacity:.55}'
+ +'}';
+
 // ④ CSS + 설정 창 ----------------------------------------------------------------------------
 function css(){if(document.getElementById('accessR420Css'))return;const s=document.createElement('style');s.id='accessR420Css';
  s.textContent='@media (pointer:coarse){#navCompassR100 .guideR101{white-space:nowrap;max-width:none}}'
  +'#accessR420 .r420-row{display:flex;align-items:center;gap:.5em;flex-wrap:wrap;margin:.25em 0}'
  +'#accessR420 input[type=range]{accent-color:#b08a4e;width:180px}#accessR420 .r420-val{min-width:3.2em;color:#e6d3a8}'
- +'#accessR420 .r420-hint{font-size:12px;color:#a99d86;margin:.1em 0 .4em}';
+ +'#accessR420 .r420-hint{font-size:12px;color:#a99d86;margin:.1em 0 .4em}'+FOCUS_CSS;
  document.head.appendChild(s);}
 function sectionHTML(){return'<section id="accessR420"><div class="r420-row"><label for="r420Bright">화면 밝기</label><input type="range" id="r420Bright" min="70" max="160" step="5" value="'+prefs.bright+'" aria-label="화면 밝기"><span class="r420-val" id="r420BrightVal">'+prefs.bright+'%</span><button type="button" data-r420-bright-reset>100%</button></div>'
  +'<p class="r420-hint">어두운 장면에서 바닥 무늬가 겨우 보이고 검은색은 검게 남을 만큼 맞추세요. 기본 100%.</p>'
- +'<div class="r420-row" role="radiogroup" aria-label="글자 크기">글자 크기 '+Object.keys(TEXT_SCALE).map(k=>'<button type="button" data-r420-text="'+k+'" aria-pressed="'+(prefs.text===k)+'" class="'+(prefs.text===k?'active':'')+'">'+TEXT_KO[k]+'</button>').join(' ')+'</div></section>';}
+ +'<div class="r420-row" role="radiogroup" aria-label="글자 크기">글자 크기 '+Object.keys(TEXT_SCALE).map(k=>'<button type="button" data-r420-text="'+k+'" aria-pressed="'+(prefs.text===k)+'" class="'+(prefs.text===k?'active':'')+'">'+TEXT_KO[k]+'</button>').join(' ')+'</div>'
+ +'<label class="r420-row"><input type="checkbox" id="r420Focus" '+(prefs.focus?'checked':'')+'> 전투 집중 HUD(PC: 머리띠 얇게·게임 화면 넓게·전투 중 부수 글 옅게)</label></section>';}
 function inject(){try{const panel=document.getElementById('panel');if(!panel||panel.querySelector('#accessR420'))return!!panel?.querySelector('#accessR420');
  const anchor=panel.querySelector('#quickSettingsR114 .r114-volumes')||panel.querySelector('#quickSettingsR114');if(!anchor)return false;
  const box=document.createElement('div');box.innerHTML=sectionHTML();const sec=box.firstElementChild;
@@ -68,11 +98,12 @@ function inject(){try{const panel=document.getElementById('panel');if(!panel||pa
  const set=v=>{prefs.bright=Math.max(70,Math.min(160,Math.round(+v)||100));r.value=prefs.bright;val.textContent=prefs.bright+'%';applyBright();save();};
  r.addEventListener('input',()=>set(r.value));sec.querySelector('[data-r420-bright-reset]').onclick=ev=>{ev.preventDefault();set(100);};
  for(const b of sec.querySelectorAll('[data-r420-text]'))b.onclick=ev=>{ev.preventDefault();prefs.text=b.dataset.r420Text;save();for(const o of sec.querySelectorAll('[data-r420-text]')){const on=o===b;o.classList.toggle('active',on);o.setAttribute('aria-pressed',String(on));}applyText();};
+ const f=sec.querySelector('#r420Focus');if(f)f.onchange=()=>{prefs.focus=!!f.checked;save();applyFocus();};
  return true;}catch(e){fail(e);return true;}}
 if(typeof openPanel==='function'){const opBase=openPanel;openPanel=function(html,...a){const res=opBase.call(this,html,...a);
  try{if(typeof html==='string'&&/설정/.test(html)){let n=0;const tryIt=()=>{if(!inject()&&++n<20)requestAnimationFrame(tryIt);};tryIt();}}catch(e){fail(e);}return res;};}
 
-css();applyBright();wrapExits();
+css();applyBright();wrapExits();applyFocus();setInterval(applyFocus,250);
 setInterval(()=>{wrapExits();if(prefs.text!=='base')applyText();},1000);
-window.__STORYWORLD_ACCESS_R420__=Object.freeze({revision:REV,prefs:()=>({...prefs}),set(p){if(p&&typeof p==='object'){if(Number.isFinite(+p.bright))prefs.bright=Math.max(70,Math.min(160,Math.round(+p.bright)));if(TEXT_SCALE.hasOwnProperty(p.text))prefs.text=p.text;save();applyBright();applyText();}return{...prefs};},stats:()=>({...stats,scaled:scaled.size})});
+window.__STORYWORLD_ACCESS_R420__=Object.freeze({revision:REV,prefs:()=>({...prefs}),set(p){if(p&&typeof p==='object'){if(Number.isFinite(+p.bright))prefs.bright=Math.max(70,Math.min(160,Math.round(+p.bright)));if(TEXT_SCALE.hasOwnProperty(p.text))prefs.text=p.text;if(typeof p.focus==='boolean')prefs.focus=p.focus;save();applyBright();applyText();applyFocus();}return{...prefs};},stats:()=>({...stats,scaled:scaled.size})});
 })();
