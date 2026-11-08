@@ -1,0 +1,32 @@
+{
+  "build": {
+    "files": 6701,
+    "bytes": 1058039905,
+    "runtimeManifestSHA256": "7c556b345b58e2b1f85f65c9f911b2cb34bc4b4b753968f33a5bf51e88b1ec12",
+    "sourceCommit": "af67f3d872a8aca0c5592e2d6174722fe64581b6"
+  },
+  "passed": true,
+  "runs": [
+    {
+      "name": "sin-art-cpu",
+      "script": "r96/qa/sin-room-art/art-cpu-check.cjs",
+      "exitCode": 0,
+      "log": "sin-art-cpu.log",
+      "sha256": "9432795dd59ce3fae93e8bb3c00e1f3990b0215ff2564a0327945ffbe551e591"
+    },
+    {
+      "name": "sin-art-runtime",
+      "script": "r96/qa/sin-room-art/runtime-check.cjs",
+      "exitCode": 0,
+      "log": "sin-art-runtime.log",
+      "sha256": "a9774935ca246ddd7bf84b542d061d645dc74580770992e26671281ba6508374"
+    },
+    {
+      "name": "seven-cpu",
+      "script": "r96/qa/seven-sins/bossrooms-cpu-check.cjs",
+      "exitCode": 0,
+      "log": "seven-cpu.log",
+      "sha256": "045913b80d9ac635c03dd2d4cad3e3342f931f9254cbbc22de71a9aeba2bda96"
+    }
+  ]
+}
