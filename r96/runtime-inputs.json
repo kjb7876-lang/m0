@@ -6021,6 +6021,17 @@
     "assets/r411/fx/hit-teleport.webp",
     "assets/r411/fx/index.json",
     "access-r420.js",
+    "theme-fx-r430.js",
+    "assets/r430/arc.webp",
+    "assets/r430/blight.webp",
+    "assets/r430/brand.webp",
+    "assets/r430/fire-loop.webp",
+    "assets/r430/fissure.webp",
+    "assets/r430/frost.webp",
+    "assets/r430/mist-loop.webp",
+    "assets/r430/rift.webp",
+    "assets/r430/tendril.webp",
+    "assets/r430/index.json",
     "guide-clear-r426.js"
   ],
   "mediaPaths": [
@@ -7096,5 +7107,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "d04f670866098993ea18b0376e490fd6072cf2c122910802942052b4f1ac2bda"
+  "runtimeManifestSHA256": "31512b92df297e0ca69839106387902c0e2d6c60ab4c90252321738d6f1ed474"
 }
