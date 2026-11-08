@@ -97,7 +97,7 @@ function play(r,opt={}){if(open||typeof document==='undefined')return false;if(!
  return true;}
 // 발록이 결전의 날에서 쓰러지는 순간(R317 과 같은 조건). R317 장면이 열렸으면 영상이 준비됐을 때만 바꾼다.
 const cineOn=()=>{try{return window.__STORYWORLD_CINEMA_MODE_R370__?.prefs?.().on===true;}catch(_){return false;}};
-// R425: seen 은 한 판(새 게임)마다 비우고, 영화 모드에서는 seen 이어도 튼다(사용자 2026-11-08 '초천사 권능 시네마틱 안 나옴').
+// R426: seen 은 한 판(새 게임)마다 비우고, 영화 모드에서는 seen 이어도 튼다(사용자 2026-11-08 '초천사 권능 시네마틱 안 나옴').
 if(typeof newGame==='function'){const b=newGame;newGame=function(...a){if(prefs.seen){prefs.seen=false;save();}return b.apply(this,a);};}
 function takeOver(r){if(!prefs.on||(prefs.seen&&!cineOn())||!eligible(r))return false;const old=typeof document!=='undefined'&&document.getElementById('r317Cinema'),v=pre;
  if(old){if(!v||v.error||v.readyState<2){stats.keptR317++;return false;}

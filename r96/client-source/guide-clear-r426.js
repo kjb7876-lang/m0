@@ -1,4 +1,4 @@
-// R425 — 길잡이(자동 진행) 중 적이 보이면 확실히 처리하고 다음으로 이동(사용자 2026-11-08 "모든 길잡이 진행중에 적이보이면 적을확실하게 처리하고 다음 이동을하도록").
+// R426 — 길잡이(자동 진행) 중 적이 보이면 확실히 처리하고 다음으로 이동(사용자 2026-11-08 "모든 길잡이 진행중에 적이보이면 적을확실하게 처리하고 다음 이동을하도록").
 //  원인: 엔진 R75 길잡이(guideStep)는 지역 단계가 '집결/보스(room.engaged)'이거나 선행 조건이 남았을 때만 적을 목표로 삼고,
 //   그 밖에는 눈앞에 적이 있어도 제단·포탈·문(R272·R222·R365·R261 등 덧붙인 목표)으로 걸어간다. R390 으로 적은 끝까지 쫓아오지만
 //   영웅은 공격 명령(command/target)을 받지 못해 적을 끌고 다니거나 다음 지역으로 넘어갔다.
@@ -7,10 +7,10 @@
 //   고른 적이 있으면 엔진과 같은 방식(command=target=적 id)으로 공격 명령만 주고 원래 길잡이 목표(이동)는 이번 차례 건너뛴다.
 //   적이 없으면 원래 길잡이가 그대로 움직인다. 엔진 liveEnemies()(보스는 room.engaged 때만)와 숨은(hidden) 몹 규칙은 그대로 따른다.
 //  막힘 방지: 같은 적을 8초 동안 다가가지도 깎지도 못하면 그 적은 15초 쉬고(벽 너머·닿을 수 없는 자리) 길잡이를 이어 간다.
-//  끄기: localStorage storyworld.r425.clear = {"on":false}. 손으로 움직이면 엔진이 길잡이를 끄므로 이 오버레이도 쉰다.
+//  끄기: localStorage storyworld.r426.clear = {"on":false}. 손으로 움직이면 엔진이 길잡이를 끄므로 이 오버레이도 쉰다.
 (()=>{'use strict';
-if(window.__STORYWORLD_GUIDE_CLEAR_R425__)return;
-const REV='R425-clear-1',KEY='storyworld.r425.clear',SIGHT=10,CHASE=16,STALL=8,REST=15,EVERY=.25;
+if(window.__STORYWORLD_GUIDE_CLEAR_R426__)return;
+const REV='R426-clear-1',KEY='storyworld.r426.clear',SIGHT=10,CHASE=16,STALL=8,REST=15,EVERY=.25;
 const stats={picks:0,kept:0,gaveUp:0,passes:0,yields:0,menuToggles:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const G=(f,d)=>{try{const v=f();return v===undefined?d:v;}catch(_){return d;}};
@@ -50,13 +50,13 @@ try{if(typeof guideStep==='function'){const base=guideStep;guideStep=function(dt
 //  메뉴 '진행' 묶음의 길잡이 단추 바로 뒤에 둔다(R339 묶음 메뉴가 다시 짜도 묶음 안에 있으면 그대로 둔다). 설정 창의 영화 모드 줄과 같은 스위치(R370 set).
 const cine=()=>window.__STORYWORLD_CINEMA_MODE_R370__||null,cineOn=()=>G(()=>cine()?.prefs?.().on===true,false);
 function menuButton(){try{const C=cine();if(!C||typeof document==='undefined')return null;const panel=document.getElementById('panel');if(!panel||!panel.querySelector('#menuClose'))return null;
- let b=document.getElementById('menuCinemaR425');
- if(!b){b=document.createElement('button');b.id='menuCinemaR425';b.type='button';b.addEventListener('click',()=>{try{const on=!cineOn();C.set({on});stats.menuToggles++;
+ let b=document.getElementById('menuCinemaR426');
+ if(!b){b=document.createElement('button');b.id='menuCinemaR426';b.type='button';b.addEventListener('click',()=>{try{const on=!cineOn();C.set({on});stats.menuToggles++;
    try{if(typeof closePanel==='function')closePanel();}catch(_){}try{if(typeof toast==='function')toast('영화 길잡이 모드 '+(on?'켬 · 길잡이가 서사를 들려주며 진행합니다':'끔'),2.2);}catch(_){}}catch(e){fail(e);}});}
  b.textContent='영화 길잡이 모드 '+(cineOn()?'끄기':'켜기');
  const g=document.getElementById('menuGuide');if(g&&g.nextElementSibling!==b)g.insertAdjacentElement('afterend',b);else if(!g&&!b.isConnected)panel.querySelector('.actions')?.appendChild(b);
  return b;}catch(e){fail(e);return null;}}
 try{if(typeof showMenu==='function'){const base=showMenu;showMenu=function(...a){const r=base.apply(this,a);menuButton();try{setTimeout(menuButton,80);setTimeout(menuButton,400);}catch(_){}return r;};}}catch(e){fail(e);}
-window.__STORYWORLD_GUIDE_CLEAR_R425__=Object.freeze({menuButton,revision:REV,SIGHT,CHASE,STALL,REST,set,pick,visible,
+window.__STORYWORLD_GUIDE_CLEAR_R426__=Object.freeze({menuButton,revision:REV,SIGHT,CHASE,STALL,REST,set,pick,visible,
  inspect:()=>({revision:REV,prefs:{...prefs},focus:focus?.id??null,banned:[...banned.keys()],stats:{...stats},lastError})});
 })();

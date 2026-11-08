@@ -6021,7 +6021,7 @@
     "assets/r411/fx/hit-teleport.webp",
     "assets/r411/fx/index.json",
     "access-r420.js",
-    "guide-clear-r425.js"
+    "guide-clear-r426.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -7096,5 +7096,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "012b6d0cd48f559aaaf74d233c16e7edb1c88b0d7de4e155305a8dea054c3734"
+  "runtimeManifestSHA256": "d04f670866098993ea18b0376e490fd6072cf2c122910802942052b4f1ac2bda"
 }

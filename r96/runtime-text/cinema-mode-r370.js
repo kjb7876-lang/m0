@@ -73,7 +73,7 @@ function tickZone(){const k=zoneKey(),t=now(),dt=Math.min(1,t-zone.last);zone.la
   zone={key:k,t0:t,active:0,last:t};reserve.length=0;heard.clear();}}
 const remainingInZone=()=>Math.max(0,estimate(zone.key)-zone.active);
 // ── 대기열·음성 ──
-// R425: 한 지역에 머무는 동안 이미 대기열에 넣었거나 읽은 문장은 다시 넣지 않는다(결전의 날에서 같은 서사가 두 번 들리던 문제 —
+// R426: 한 지역에 머무는 동안 이미 대기열에 넣었거나 읽은 문장은 다시 넣지 않는다(결전의 날에서 같은 서사가 두 번 들리던 문제 —
 //  원인: cinema-sync(R384)가 보스전 중에 보스 서사('post')를 미리 흘리는데, 엔진은 보스가 죽어 지역을 마칠 때 같은 'post' 장면을
 //  다시 playScenes 한다 → 보스가 죽으면 같은 음성이 두 번. 장면 열쇠(key)와 문장 글자 둘 다로 막는다). 지역을 옮기면 비운다.
 const heard=new Set(),norm=t=>String(t||'').replace(/\s+/g,' ').trim();

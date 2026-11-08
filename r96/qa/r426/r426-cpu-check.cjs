@@ -1,13 +1,13 @@
-// R425 — 길잡이 중 보이는 적은 끝까지 처리하고 이동(guide-clear-r425) + 결전의 날: 같은 서사 두 번(R370 rev 6 문장 중복 막기),
+// R426 — 길잡이 중 보이는 적은 끝까지 처리하고 이동(guide-clear-r426) + 결전의 날: 같은 서사 두 번(R370 rev 6 문장 중복 막기),
 //  초천사 배신 시네마틱 '본 적 있음'이 기기 전체에 영구 저장돼 다시 안 나오던 문제(R317·R368: 새 게임마다 비움·영화 모드는 늘).
 // CPU 에서 가짜 엔진에 붙여 본다. 실제 음성·자연 플레이·GPU·모바일은 미검증.
 const fs=require('fs'),path=require('path'),vm=require('vm');const R=path.join(__dirname,'..','..'),ROOT=path.join(R,'..');
 const C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8'),RT=f=>fs.readFileSync(path.join(R,'runtime-text',f),'utf8');
 const checks=[];const ok=(name,pass,detail)=>checks.push({name,pass:!!pass,detail});
-const GC=C('guide-clear-r425.js'),CIN=C('cinema-mode-r370.js'),R317=C('maps-palace-slum-r317.js'),R368=C('betrayal-video-r368.js'),html=RT('index.html');
-ok('runtime copies match client-source',['guide-clear-r425.js','cinema-mode-r370.js','maps-palace-slum-r317.js','betrayal-video-r368.js'].every(f=>RT(f)===C(f)));
-ok('index.html loads guide-clear-r425 once, right after aggro-chase-r390 (outside every guideStep wrapper)',html.split('"./guide-clear-r425.js"').length===2&&/aggro-chase-r390\.js"><\/script><script src="\.\/guide-clear-r425\.js"><\/script>/.test(html));
-ok('public verify list, runtime inputs, Pages CPU step',fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').includes("'guide-clear-r425.js',")&&JSON.parse(RT('../runtime-inputs.json')).textPaths.includes('guide-clear-r425.js')&&/node r96\/qa\/r425\/r425-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8')));
+const GC=C('guide-clear-r426.js'),CIN=C('cinema-mode-r370.js'),R317=C('maps-palace-slum-r317.js'),R368=C('betrayal-video-r368.js'),html=RT('index.html');
+ok('runtime copies match client-source',['guide-clear-r426.js','cinema-mode-r370.js','maps-palace-slum-r317.js','betrayal-video-r368.js'].every(f=>RT(f)===C(f)));
+ok('index.html loads guide-clear-r426 once, right after aggro-chase-r390 (outside every guideStep wrapper)',html.split('"./guide-clear-r426.js"').length===2&&/aggro-chase-r390\.js"><\/script><script src="\.\/guide-clear-r426\.js"><\/script>/.test(html));
+ok('public verify list, runtime inputs, Pages CPU step',fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').includes("'guide-clear-r426.js',")&&JSON.parse(RT('../runtime-inputs.json')).textPaths.includes('guide-clear-r426.js')&&/node r96\/qa\/r426\/r426-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8')));
 ok('no eval / new Function',!/\beval\s*\(|new Function/.test(GC));
 // ── 길잡이: 적 고르기(순수 판단) ──
 function gc(o={}){const sb={localStorage:{getItem:()=>o.prefs?JSON.stringify(o.prefs):null,setItem(){}},Math,JSON,String,Array,Set,Map,Object,Number};sb.window=sb;
@@ -17,7 +17,7 @@ function gc(o={}){const sb={localStorage:{getItem:()=>o.prefs?JSON.stringify(o.p
   function distance(a,b){return Math.hypot(a.x-b.x,a.y-b.y);}function clearLine(a,b){return !__wall.has(b.id);}
   function liveEnemies(){return room.enemies.filter(e=>e.hp>0&&(!e.boss||room.engaged));}
   function guideStep(dt){__base++;}`,sb);vm.runInContext(GC,sb);
- return{sb,api:sb.__STORYWORLD_GUIDE_CLEAR_R425__,ev:s=>vm.runInContext(s,sb),step:(n=1,dt=.3)=>{for(let i=0;i<n;i++){vm.runInContext(`time+=${dt};guideStep(${dt})`,sb);}}};}
+ return{sb,api:sb.__STORYWORLD_GUIDE_CLEAR_R426__,ev:s=>vm.runInContext(s,sb),step:(n=1,dt=.3)=>{for(let i=0;i<n;i++){vm.runInContext(`time+=${dt};guideStep(${dt})`,sb);}}};}
 {const {api}=gc();const P=(rows,o)=>api.pick(rows,{x:0,y:0},o)?.enemy?.id??null;
  const A={id:'a',x:5,y:0,hp:9},B={id:'b',x:3,y:0,hp:9},Far={id:'f',x:14,y:0,hp:9},H={id:'h',x:1,y:0,hp:9,spawnState:'hidden'},D={id:'d',x:1,y:0,hp:9,deadRecorded:true};
  ok('nearest visible enemy within 10 tiles with a clear line is picked',P([A,B])==='b');
@@ -78,13 +78,13 @@ ok('R368: seen no longer blocks in 영화 모드, and a new game clears it',/\(p
 {const els={};const mk=(id)=>{const e={id,children:[],listeners:{},textContent:'',isConnected:false,parent:null,nextElementSibling:null,
   addEventListener(k,f){this.listeners[k]=f;},insertAdjacentElement(_,b){b.isConnected=true;b.parent=this.parent;this.nextElementSibling=b;},appendChild(b){b.isConnected=true;b.parent=this;this.children.push(b);},querySelector(q){return q==='#menuClose'?els.menuClose:q==='.actions'?els.actions:null;}};if(id)els[id]=e;return e;};
  mk('panel');mk('menuClose');mk('actions');const g=mk('menuGuide');g.isConnected=true;let created=null;
- const doc={getElementById:id=>els[id]&&(els[id].isConnected||['panel','menuClose','menuGuide'].includes(id))?els[id]:(id==='menuCinemaR425'?created:null),createElement:()=>{created=mk(null);return created;}};
+ const doc={getElementById:id=>els[id]&&(els[id].isConnected||['panel','menuClose','menuGuide'].includes(id))?els[id]:(id==='menuCinemaR426'?created:null),createElement:()=>{created=mk(null);return created;}};
  let on=false,closed=0,toasts=[];const sb={document:doc,setTimeout:()=>0,localStorage:{getItem:()=>null,setItem(){}},Math,JSON,String,Array,Set,Map,Object,Number};sb.window=sb;
  sb.__STORYWORLD_CINEMA_MODE_R370__={prefs:()=>({on}),set:p=>{on=p.on;return{on};}};vm.createContext(sb);
  vm.runInContext(`var guide=false,modal=false,loading=false,time=0,command=null,target=null,route=[],player={x:0,y:0,hp:100},room={enemies:[]};
   function guideStep(){}function liveEnemies(){return[];}function showMenu(){return 'menu';}`,sb);sb.closePanel=()=>closed++;sb.toast=t=>toasts.push(t);vm.runInContext(GC,sb);
  const r=sb.showMenu();const b=created;
- ok('menu: "영화 길잡이 모드 켜기" button is placed right after the 길잡이 button',r==='menu'&&b&&b.id==='menuCinemaR425'&&g.nextElementSibling===b&&b.textContent==='영화 길잡이 모드 켜기',b&&b.textContent);
+ ok('menu: "영화 길잡이 모드 켜기" button is placed right after the 길잡이 button',r==='menu'&&b&&b.id==='menuCinemaR426'&&g.nextElementSibling===b&&b.textContent==='영화 길잡이 모드 켜기',b&&b.textContent);
  b.listeners.click();ok('…click turns cinema guide mode on, closes the menu and says so',on===true&&closed===1&&/켬/.test(toasts[0]||''));
  sb.showMenu();ok('…next time the menu shows "끄기" and reuses the same button',created===b&&b.textContent==='영화 길잡이 모드 끄기');
  b.listeners.click();ok('…and turns it off again',on===false&&closed===2);}

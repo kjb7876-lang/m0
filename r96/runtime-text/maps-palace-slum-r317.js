@@ -112,7 +112,7 @@ function play(r){if(active||(seen&&!cineOn())||!eligible(r)||r.id!=='ep1a09b'||t
 const balrog=e=>!!(e?.boss&&!e.midboss&&/발록|balrog/i.test(String(e.name||'')+' '+String(e.nativeId||'')+' '+String(e.kind||'')));
 if(typeof killEnemy==='function'){const b=killEnemy;killEnemy=function(e,...a){const r=typeof room!=='undefined'?room:null,trigger=eligible(r)&&r.id==='ep1a09b'&&balrog(e)&&!e.deadRecorded&&typeof started!=='undefined'&&started&&!(typeof loading!=='undefined'&&loading);const out=b.call(this,e,...a);
  if(trigger&&e.hp<=0&&e.deadRecorded&&r===(typeof room!=='undefined'?room:null))try{play(r);}catch(err){fail(err);finish(true);}return out;};}
-// R425: '본 적 있음'을 기기 전체가 아니라 한 판(새 게임)마다로 — 새 게임을 시작하면 다시 나온다(영화 모드에서는 늘 나온다).
+// R426: '본 적 있음'을 기기 전체가 아니라 한 판(새 게임)마다로 — 새 게임을 시작하면 다시 나온다(영화 모드에서는 늘 나온다).
 if(typeof newGame==='function'){const b=newGame;newGame=function(...a){seen=false;try{localStorage.removeItem(KEY);}catch(_){}return b.apply(this,a);};}
 if(typeof tick==='function'){const b=tick;tick=function(...a){if(active){try{update(performance.now());}catch(e){fail(e);finish(true);}if(active)return;}return b.apply(this,a);};}
 window.__STORYWORLD_MAPS_PALACE_SLUM_R317__=Object.freeze({revision:REV,KEY,PATHS,CAPTIONS,WALL_TEXT,themeLayout,plan,apply,bgmGain,next,skip:()=>finish(true),update,
