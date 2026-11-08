@@ -52,7 +52,7 @@
   const spec=r.exploration.worldR78,normal=controlled(r),saved=pending?.worldMazeR81?.rooms?.[layerKey(r.id,r.layer)];
   if(normal){const old=pending?.rooms?.[layerKey(r.id,r.layer)];states.set(r,saved?clean(saved):{version:1,phase:r.cleared||completed(r.id,r.layer)?'done':old?.engaged?'boss':'route',route:null,rallied:[],doorStoryDone:!!old?.engaged,exitStoryDone:false});}
   const s=state(r);if(s?.phase==='done')return r;
-  const majors=(r.enemies||[]).filter(e=>alive(e)&&major(e)),used=[],bossPoints=r.exploration.worldWardR81?.bossPoints||[{x:16,y:10},{x:24,y:13},{x:20,y:8},{x:13,y:15},{x:23,y:16}];
+  const majors=(r.enemies||[]).filter(e=>alive(e)&&major(e)).sort((a,b)=>(b.boss?1:0)-(a.boss?1:0)),used=[]/* R431: 보스가 첫 자리(보스방 가운데)를 먼저 차지 — 중간보스가 가운데를 가져가 보스가 옆으로 밀리던 것 고침 */,bossPoints=r.exploration.worldWardR81?.bossPoints||[{x:16,y:10},{x:24,y:13},{x:20,y:8},{x:13,y:15},{x:23,y:16}];
   majors.forEach((e,i)=>{const p=choose(r,e,bossPoints[i%bossPoints.length],i,used);if(!p){metrics.unplaced++;throw Error('R81 major placement blocked: '+r.id+':'+e.id);}setPosition(e,p);used.push({...p,radius:coreRadius(e)});if(normal&&!['boss','exit','exitStory','done'].includes(s.phase))e.spawnState='hidden';if(e.boss)metrics.bossMoved++;else metrics.midbossMoved++;});
   const ordinary=(r.enemies||[]).filter(e=>alive(e)&&!major(e)&&!e.persona&&!e.trial&&!e.cosmic&&!e.r61Summoned&&!e.r61Clone&&Number.isInteger(e.r75Pack)),spots=routeSpots(r);
   ordinary.forEach((e,i)=>{const route=i%2+1,points=spots[route],preferred=points[Math.floor(i/2)%points.length],p=choose(r,e,preferred,i,used);if(!p){metrics.unplaced++;throw Error('R81 ordinary placement blocked: '+r.id+':'+e.id);}setPosition(e,p);used.push({...p,radius:coreRadius(e)});e.wardRouteR81=route;

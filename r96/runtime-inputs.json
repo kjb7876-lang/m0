@@ -6045,7 +6045,13 @@
     "assets/r425/clean/assets/generated-v31224/actors-normalized/692e4ae01c29_bulmyeongwi_idle.webp",
     "assets/r425/clean/assets/generated-v31224/actors-normalized/80f5ab6bab50_balrog-idle.webp",
     "assets/r425/clean/assets/generated-v31224/actors-normalized/9756e6d5958a_Monster_FallenAngelKnight_Guard.webp",
-    "assets/r425/clean/assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp"
+    "assets/r425/clean/assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp",
+    "boss-arena-r431.js",
+    "assets/r431/black-burst.webp",
+    "assets/r431/black-flare.webp",
+    "assets/r431/black-trail.webp",
+    "assets/r431/black-wreath.webp",
+    "assets/r431/index.json"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -7120,5 +7126,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "c1d0bd805e45d766f29ff015428a5eb6b6fd66c566b18af389078f6b7981b294"
+  "runtimeManifestSHA256": "8b80e06ad027dab5861557f5a20ff952e0e94a5eda4770ed47f60883ece76797"
 }
