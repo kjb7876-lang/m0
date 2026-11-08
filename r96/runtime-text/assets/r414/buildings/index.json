@@ -506,12 +506,35 @@
    "dotsStatus": "REVIEW_CANDIDATE_LAYOUT_TARGET_DEVIATION_RUNTIME_UNVERIFIED",
    "canonLines": []
   },
+  "teacup-room-floral-porcelain-wall": {
+   "reason": "R406 벽 자리가 목표 표식(기억의 전투) 바로 뒤라 영웅·표식 글자를 가림(7분야 심사 R414-2)",
+   "dotsStatus": "REVIEW_CANDIDATE_PROJECTION_MATCH_UNVERIFIED",
+   "canonLines": [
+    873
+   ]
+  },
   "twin-castle-mixed-masonry-wall": {
    "reason": "이음벽 부품(단독 건물·소품 아님)",
    "dotsStatus": "REVIEW_WALL_SEAM_CANDIDATE_RUNTIME_UNVERIFIED",
    "canonLines": [
     615,
     760
+   ]
+  },
+  "R00-damaged-platform-pa-speaker": {
+   "reason": "R406 벽 자리가 목표 표식(기억 표식)·길잡이 화살표 시작점과 겹침(7분야 심사 R414-2)",
+   "dotsStatus": "REVIEW_STATIC_PROP_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    2236
+   ]
+  },
+  "S04-steel-elevator-entrance": {
+   "reason": "S04 출구 표식 곁에 문이 둘로 보이고 벽 없이 바닥에 홀로 섬(7분야 심사 R414-2)",
+   "dotsStatus": "REVIEW_CLOSED_DOOR_STATIC_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    1103,
+    1105,
+    1205
    ]
   },
   "R11-gallery-cathedral-building": {

@@ -1,4 +1,4 @@
-// R414 CPU check: 드라이브 건물 후보를 야외 꿈 지역의 뒤쪽 바닥 끝 너머에 영웅 2배 이상 키로 세우기 + 소품 7종(R406 행) + R299 건축물 키.
+// R414 CPU check: 드라이브 건물 후보를 야외 꿈 지역의 뒤쪽 바닥 끝 너머에 영웅 2배 이상 키로 세우기 + 소품 4종(R406 행) + R299 건축물 키.
 //  사용자 2026-11-08 "구글드라이브자산 적절히 크기조절해서 배치 특히 건물자산의 경우 최소영웅2배높이이상".
 const fs=require('fs'),path=require('path'),vm=require('vm'),crypto=require('crypto');
 const R=path.join(__dirname,'..','..'),C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8'),RT=f=>fs.readFileSync(path.join(R,'runtime-text',f),'utf8');
@@ -27,12 +27,12 @@ const files=[...B.map(([,v])=>v),...Object.values(PIDX.props)];
 const bad=files.filter(v=>{const p=path.join(R,'runtime-text',v.path);if(!fs.existsSync(p))return true;const b=fs.readFileSync(p);const s=webpSize(b);return crypto.createHash('sha256').update(b).digest('hex')!==v.sha256||b.length!==v.bytes||!s||s[0]!==v.size[0]||s[1]!==v.size[1]||Math.max(...s)>(v.path.includes('/buildings/')?600:384);});
 ok('every derived file exists, matches its sha256/bytes/size and stays within 600 px (buildings) / 384 px (props)',!bad.length,bad.map(v=>v.path));
 ok('provenance: Dots id, PNG sha256 checked against MANIFEST, status and canon lines kept',files.every(v=>v.dotsId&&/^[0-9a-f]{64}$/.test(v.pngSHA256)&&v.manifestChecked===true&&v.dotsStatus&&Array.isArray(v.canonLines)));
-ok('held candidates carry a reason (14)',Object.keys(IDX.held).length===14&&Object.values(IDX.held).every(h=>h.reason&&h.reason.length>6));
+ok('held candidates carry a reason (17)',Object.keys(IDX.held).length===17&&Object.values(IDX.held).every(h=>h.reason&&h.reason.length>6));
 const raw=RT('assets/r414/buildings/index.json')+RT('assets/r414/props/index.json');
 const ids=(raw.replace(/[0-9a-f]{64}/g,'').match(/[A-Za-z0-9_-]{24,}/g)||[]).filter(t=>/[0-9]/.test(t)&&/[a-z]/.test(t)&&/[A-Z]/.test(t)&&!/^[A-Za-z0-9]+(-[a-z0-9]+)+$/.test(t));
 ok('no Drive file ids or URLs in the public index (Dots slugs like R02-gray-school-building-shell are fine)',!/drive\.google|docs\.google/.test(raw)&&!ids.length,ids);
 const P=Object.entries(PIDX.props);
-ok('7 props in the R406 row format (zone/mode/axis/height/path)',P.length===7&&P.every(([,v])=>zones.has(v.zone)&&['wall','inner'].includes(v.mode)&&v.height>0&&/^assets\/r414\/props\/[a-z0-9-]+\.webp$/.test(v.path)));
+ok('4 props in the R406 row format (zone/mode/axis/height/path)',P.length===4&&P.every(([,v])=>zones.has(v.zone)&&['wall','inner'].includes(v.mode)&&v.height>0&&/^assets\/r414\/props\/[a-z0-9-]+\.webp$/.test(v.path)));
 ok('prop file names avoid the door/gate/wall words other overlays snap to walls',[...P,...B].every(([,v])=>!/(^|[\W_])(gate|door|wall)s?([\W_]|$)/i.test(v.path.split('/').pop().replace('.webp',''))));
 ok('R406 also reads the R414 prop index',/IDXS=\[IDX,'\.\/assets\/r408\/props\/index\.json','\.\/assets\/r414\/props\/index\.json'\]/.test(C('props-place-r406.js')));
 const r299=C('env-props-r299.js');const big=k=>+(r299.match(new RegExp('\\b'+k+':\\{h:(\\d+)'))||[])[1];
@@ -86,6 +86,9 @@ async function run(){
  ok('zones without a building row are left alone',!r3.props.some(p=>p.r414Building));
  const r4=roomFor('outdoor'),sb4=load({room:r4,pref:'{"on":false}'});sb4.draw();await new Promise(r=>setTimeout(r,0));await new Promise(r=>setTimeout(r,0));sb4.draw();
  ok('off switch storyworld.r414.buildings {"on":false} adds nothing',!r4.props.some(p=>p.r414Building));
+ {const X=sb1.__STORYWORLD_DRIVE_BUILDINGS_R414__;sb1.room=r1;const ph={id:'r123:z:lift',r123Deco:{kind:'lift'}},art={id:'r123:z:t',r123Deco:{kind:'teacup'},path:'assets/r126/props/teacup.webp'};
+  ok('in a room with R414 buildings, R123 code-drawn placeholders (no art path) keep their main look (not drawn); R123 art props are untouched',X.hidePlaceholder(ph)===true&&X.hidePlaceholder(art)===false&&X.hidePlaceholder({id:'tree'})===false);
+  sb4.room=r4;ok('rooms without R414 buildings leave R123 placeholders alone',sb4.__STORYWORLD_DRIVE_BUILDINGS_R414__.hidePlaceholder(ph)===false);}
  const fails=checks.filter(c=>!c.pass);for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass||c.detail===undefined?'':' :: '+JSON.stringify(c.detail).slice(0,400)));
  console.log('R414 CPU '+(checks.length-fails.length)+'/'+checks.length);if(fails.length)process.exit(1);}
 run().catch(e=>{console.error(e);process.exit(1);});

@@ -11,7 +11,7 @@
 //  · storyworld.r414.buildings = {"on":false} 이면 끈다(이미 놓인 건물은 다음 입장부터 빠짐).
 (()=>{'use strict';
 if(window.__STORYWORLD_DRIVE_BUILDINGS_R414__)return;
-const REV='R414-buildings-1',KEY='storyworld.r414.buildings',IDX='./assets/r414/buildings/index.json';
+const REV='R414-buildings-2',KEY='storyworld.r414.buildings',IDX='./assets/r414/buildings/index.json';
 const HERO_PX=66,MIN_PX=2*HERO_PX,PX_PER_UNIT=34,MARGIN=1.5,MAX_BACK=8,STEP=.25,MIN_COORD=-1.5;// project(): 화면 x = (x−y)·TILE(34)·zoom
 const prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;}catch(_){}
 const stats={rooms:0,placed:0,skipped:0,notOutdoor:0,noSpot:0,errors:0};let lastError=null,ROWS=null,idxState='idle';
@@ -60,10 +60,15 @@ function apply(r){if(!prefs.on||!ROWS||!r?.exploration||!Array.isArray(r.props))
   r.props.push(q);try{if(typeof addImage==='function')addImage(row.v.path,'R414 drive building');}catch(_){}stats.placed++;rep.placed.push({name:s.name,x:s.x,y:s.y,side:s.side,back:s.back,height:row.height});}}
 function tick(){if(!live())return;if(idxState==='idle')loadIndex();if(idxState==='ready')apply(room);}
 
-function install(){if(typeof draw!=='function')return false;const db=draw;draw=function(...a){try{tick();}catch(e){fail(e);}return db.apply(this,a);};return true;}
+// R414-2: R123 코드 그림 장식(원화 없는 승강기 문·액자 등)은 main 화면에서 보이지 않는다(3D 기록기 깊이 아래로 묻힘, 원인 미검증).
+//  건물을 세운 지역에서만 그것이 드러나 회색 판·금빛 액자가 영웅 곁에 떠 보였다(7분야 심사 R414-2) → 건물을 세운 방에서는 main 과 같게 그리지 않는다.
+const hidePlaceholder=p=>!!(p&&p.r123Deco&&!p.path&&typeof room!=='undefined'&&room&&reports.get(room)?.placed?.length);
+function install(){if(typeof draw!=='function')return false;const db=draw;draw=function(...a){try{tick();}catch(e){fail(e);}return db.apply(this,a);};
+ if(typeof drawProp==='function'){const dp=drawProp;drawProp=function(p,...a){try{if(hidePlaceholder(p)){stats.placeholdersKept=(stats.placeholdersKept||0)+1;return;}}catch(e){fail(e);}return dp.apply(this,[p,...a]);};}
+ return true;}
 let installed=false;const tryInstall=()=>{if(!installed)installed=install();return installed;};
 if(!tryInstall()){let n=0;const t=setInterval(()=>{if(tryInstall()||++n>200)clearInterval(t);},100);}
 function set(o={}){if(typeof o.on==='boolean')prefs.on=o.on;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
 function inspect(){const r=typeof room!=='undefined'?room:null;return{revision:REV,prefs:{...prefs},index:idxState,rows:ROWS?Object.keys(ROWS).length:0,stats:{...stats},room:r?reports.get(r)||null:null,lastError};}
-window.__STORYWORLD_DRIVE_BUILDINGS_R414__=Object.freeze({revision:REV,plan,apply,inspect,set,HERO_PX,MIN_PX});
+window.__STORYWORLD_DRIVE_BUILDINGS_R414__=Object.freeze({revision:REV,plan,apply,inspect,set,hidePlaceholder,HERO_PX,MIN_PX});
 })();

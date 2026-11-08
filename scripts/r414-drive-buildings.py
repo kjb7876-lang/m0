@@ -53,15 +53,15 @@ BUILDINGS = {
 }
 # small props -> R406 rows (mode wall: flush to a back wall, art parallel to the -y wall; inner: open floor near the anchor)
 PROPS = {
-  'teacup-room-floral-porcelain-wall': ('floral-porcelain-panel', 'sz115-S01-1', 'wall', 'y', 96),
-  'R00-damaged-platform-pa-speaker': ('platform-speaker', 'sz115-RA-1', 'wall', 'y', 46),
-  'S04-steel-elevator-entrance': ('steel-elevator', 'sz115-S04-2', 'wall', 'y', 100),
   'R07-fallen-ceiling-rafters': ('fallen-rafters', 'sz115-RD-1', 'inner', None, 52),
   'S05-residence-streetlamp-unlit': ('residence-lamppost', 'sz115-S05-4', 'inner', None, 140),
   'S05-residence-heavy-entry-door': ('residence-entry', 'sz115-S05-4', 'wall', 'y', 100),
   'S05-packed-departure-bag': ('departure-bag', 'sz115-S05-4', 'inner', None, 24),
 }
 HELD = {
+  'S04-steel-elevator-entrance': 'S04 출구 표식 곁에 문이 둘로 보이고 벽 없이 바닥에 홀로 섬(7분야 심사 R414-2)',
+  'R00-damaged-platform-pa-speaker': 'R406 벽 자리가 목표 표식(기억 표식)·길잡이 화살표 시작점과 겹침(7분야 심사 R414-2)',
+  'teacup-room-floral-porcelain-wall': 'R406 벽 자리가 목표 표식(기억의 전투) 바로 뒤라 영웅·표식 글자를 가림(7분야 심사 R414-2)',
   'S05-residence-entrance-eave-candidate': '처마 부품(단독 건물·소품 아님)',
   'twin-castle-mixed-masonry-wall': '이음벽 부품(단독 건물·소품 아님)',
   'R11-gallery-cathedral-building': '원문 장면(RD-7 성당 제단)이 실내형 — 같은 장소의 피해 변형을 야외 RD-6 에 배치',

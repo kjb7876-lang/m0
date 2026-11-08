@@ -24364,8 +24364,8 @@
     },
     {
       "path": "assets/r414/buildings/index.json",
-      "bytes": 17652,
-      "sha256": "1c1f589fb2301a80ee97d2e0e8e4007e3630950e9bf9cb7faf519133798e9e14"
+      "bytes": 18472,
+      "sha256": "64f9246fff5780f1123cf30a24ee5b27d451a8ec155bbb8b316daf1d7977b203"
     },
     {
       "path": "assets/r414/buildings/inner-keep-ruin.webp",
@@ -24453,19 +24453,9 @@
       "sha256": "508dcb3ec132f1edfeef89a04cdad33a1c53f873feaeca1ce379eac613fc2012"
     },
     {
-      "path": "assets/r414/props/floral-porcelain-panel.webp",
-      "bytes": 23178,
-      "sha256": "51909e699d74010cdb73acc9259784fb3b8112ac68f4dc3cf3ff8419b89aa6c0"
-    },
-    {
       "path": "assets/r414/props/index.json",
-      "bytes": 4525,
-      "sha256": "f51fb73090594d4e465748bc570ee9e00a92c70fbc3835078c42a3acb0c099ba"
-    },
-    {
-      "path": "assets/r414/props/platform-speaker.webp",
-      "bytes": 42862,
-      "sha256": "e8960396c7e55e0d8c0506e472b2f276757c06abfa787fd783d1869a18b9ed60"
+      "bytes": 2646,
+      "sha256": "55fcf318399f817c402ecfc87afdbcaba902c9d13b39b687859a5b1d0c7ff0af"
     },
     {
       "path": "assets/r414/props/residence-entry.webp",
@@ -24476,11 +24466,6 @@
       "path": "assets/r414/props/residence-lamppost.webp",
       "bytes": 8172,
       "sha256": "617e5a6bb05ea19bcd733016673aafffdda032f6b01d55c4cb07d2fcdd090908"
-    },
-    {
-      "path": "assets/r414/props/steel-elevator.webp",
-      "bytes": 18904,
-      "sha256": "658ea319d211e3d7b7c7b7acbdbe2917d53f1d8730a0020ebe5f83a8728eaa07"
     },
     {
       "path": "assets/r430/arc.webp",
@@ -33199,8 +33184,8 @@
     },
     {
       "path": "drive-buildings-r414.js",
-      "bytes": 8317,
-      "sha256": "0e7fd6e4bfb9ed010ace3d967913b99183a886b01427e4e031328ba3c566966d"
+      "bytes": 9060,
+      "sha256": "090b3bddb7965aa092291910bc5ee30c1051556adb2d7dbd869a371ba6923cac"
     },
     {
       "path": "drive-props-r138.js",
@@ -34288,8 +34273,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6857,
-  "totalBytes": 1085664644,
+  "fileCount": 6854,
+  "totalBytes": 1085579384,
   "webHTMLSha256": "cc7d7f4cf458298db520be365f32fb3bf850e2272c8026a6a15328da80c17e82",
   "largest": [
     {
