@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "fullSuite": true,
+  "groups": 58,
+  "expectedGroups": 58,
+  "passedGroups": 58,
+  "passedChecks": 742,
+  "totalChecks": 742,
+  "sourceUnchangedDuringRun": true,
+  "changedFiles": [],
+  "failedGroups": [],
+  "startedAt": "2026-11-07T23:33:58.750Z",
+  "completedAt": "2026-11-07T23:47:47.965Z",
+  "suitePath": "/workspace/m0-release/r96/qa/r95/sin-room-release/suite.json",
+  "suiteSHA256": "72133cf3bbb800b3f64b052d249de02b1e1733174acb3782df286fce180cd1c3",
+  "runtimeManifestSHA256": "3bc723bdbadc3113a3d58f3a512878532baf560cf4bc6693d15f2b838a3f9849",
+  "sourceCommitAtBuild": "5b1b04cd3bffc39a47cfca3aed051bbc2a05f73f",
+  "scope": "Inherited CPU/NodeVM/ThreeCPU/image/hash tests only; no browser/device/natural-play claim."
+}

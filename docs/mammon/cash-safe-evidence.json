@@ -1,0 +1,1318 @@
+{
+  "baseCommit": "2add93baeda3e925a810c93c04159e69ca2a3cdf",
+  "revision": "mammon-bossroom-v2",
+  "build": {
+    "files": 6611,
+    "bytes": 1032152168,
+    "runtimeManifestSHA256": "4bf4430287a22609a99b09a9fbc9a6638b228fc69923c94f069a185b33a79b1a",
+    "sourceCommit": "2add93baeda3e925a810c93c04159e69ca2a3cdf"
+  },
+  "runtimeChecks": {
+    "boot": {
+      "booted": true,
+      "bootError": null,
+      "errors": [],
+      "warnings": [
+        "저장소 내레이션은 부분 제공입니다. 누락 또는 원문 불일치 장면은 텍스트로 진행합니다."
+      ],
+      "player": true
+    },
+    "collisions": {
+      "overlay": "mammon-bossroom-v2",
+      "safe": true,
+      "desk": true,
+      "drawers": true,
+      "centre": false,
+      "spots": [
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    "before": {
+      "zone": "ep1b06",
+      "phase": {
+        "version": 1,
+        "phase": "route",
+        "route": null,
+        "rallied": [],
+        "doorStoryDone": false,
+        "exitStoryDone": false
+      },
+      "opened": [],
+      "bosses": [
+        {
+          "id": "ep1b06:b06-boss",
+          "hp": 19365.559999999998
+        }
+      ],
+      "overlay": "mammon-bossroom-v2",
+      "position": {
+        "x": 85.5334063180891,
+        "y": 60.09267260298719
+      }
+    },
+    "after": {
+      "zone": "ep1b06",
+      "phase": {
+        "version": 1,
+        "phase": "route",
+        "route": null,
+        "rallied": [],
+        "doorStoryDone": false,
+        "exitStoryDone": false,
+        "champions": [
+          {
+            "id": "ep1b06:ward-champion-r81:b06-f1",
+            "hp": 4726.0199999999995,
+            "maxHp": 4726.0199999999995,
+            "x": 3.141007704883215,
+            "y": 5.128344993004475,
+            "deadRecorded": false,
+            "spawnState": "active"
+          },
+          {
+            "id": "ep1b06:ward-champion-r81:b06-c1",
+            "hp": 4726.0199999999995,
+            "maxHp": 4726.0199999999995,
+            "x": 48.257700594253855,
+            "y": 6.24196209494545,
+            "deadRecorded": false,
+            "spawnState": "active"
+          },
+          {
+            "id": "ep1b06:ward-champion-r81:b06-f2",
+            "hp": 4726.0199999999995,
+            "maxHp": 4726.0199999999995,
+            "x": 22.5,
+            "y": 76.5,
+            "deadRecorded": false,
+            "spawnState": "active"
+          }
+        ]
+      },
+      "opened": [],
+      "bosses": [
+        {
+          "id": "ep1b06:b06-boss",
+          "hp": 19365.559999999998
+        }
+      ],
+      "overlay": "mammon-bossroom-v2",
+      "position": {
+        "x": 85.5334063180891,
+        "y": 60.09267260298719
+      }
+    },
+    "inspect": {
+      "revision": "mammon-bossroom-v2",
+      "stats": {
+        "layouts": 3,
+        "scenes": 0,
+        "errors": 0
+      },
+      "lastError": null
+    },
+    "scope": "CPU VM; assisted 777 entry and native restore; not natural boss completion"
+  },
+  "checks": {
+    "mammonCPU": "PASS",
+    "compiledGameVM": "PASS before final material and handle cosmetic edits",
+    "loadOrder": "22 passed",
+    "diffCheck": "PASS"
+  },
+  "captures": [
+    {
+      "file": "/workspace/mammon-evidence/cash-safe-pc.png",
+      "sha256": "8f57b7a282efc9c2e8d9bff7052a9c6b1392393acaf56e83d1c15e2cfb8d3659",
+      "bytes": 1378827,
+      "state": {
+        "zone": "ep1b06",
+        "errors": [],
+        "mammon": {
+          "revision": "mammon-bossroom-v2",
+          "stats": {
+            "layouts": 3,
+            "scenes": 1,
+            "errors": 0
+          },
+          "lastError": null
+        },
+        "renderer": "Full compiled region path / eight heroes and preserved EGO; GPU unverified",
+        "layout": "mammon-bossroom-v2",
+        "walls": [
+          {
+            "id": "r219-wall:6",
+            "x": 21,
+            "y": 6,
+            "width": 24,
+            "depth": 0.24,
+            "height": 2.85,
+            "angle": 0,
+            "endpoints": [
+              [
+                9,
+                6
+              ],
+              [
+                33,
+                6
+              ]
+            ],
+            "annex": true,
+            "worldWardR81": true,
+            "storyMapR171": true,
+            "analyticBounds12": [
+              9,
+              5.88,
+              33,
+              6.12
+            ],
+            "path": "assets/r74/materials.png",
+            "r219": true,
+            "r224Room": true,
+            "r115Wall": 1.3
+          },
+          {
+            "id": "r219-wall:15",
+            "x": 11.5,
+            "y": 20,
+            "width": 11,
+            "depth": 0.24,
+            "height": 2.85,
+            "angle": 0,
+            "endpoints": [
+              [
+                6,
+                20
+              ],
+              [
+                17,
+                20
+              ]
+            ],
+            "annex": true,
+            "worldWardR81": true,
+            "storyMapR171": true,
+            "analyticBounds12": [
+              6,
+              19.88,
+              17,
+              20.12
+            ],
+            "path": "assets/r74/materials.png",
+            "r219": true,
+            "r224Room": true,
+            "r115Wall": 1.3
+          },
+          {
+            "id": "r219-wall:99",
+            "x": 6,
+            "y": 15.5,
+            "width": 0.24,
+            "depth": 9,
+            "height": 2.85,
+            "angle": 0,
+            "endpoints": [
+              [
+                6,
+                11
+              ],
+              [
+                6,
+                20
+              ]
+            ],
+            "annex": true,
+            "worldWardR81": true,
+            "storyMapR171": true,
+            "analyticBounds12": [
+              5.88,
+              11,
+              6.12,
+              20
+            ],
+            "path": "assets/r74/materials.png",
+            "r219": true,
+            "r224Room": true,
+            "r115Wall": 1.3
+          },
+          {
+            "id": "mammon:desk",
+            "x": 14,
+            "y": 6.85,
+            "width": 5,
+            "depth": 1.4,
+            "height": 0.01,
+            "r115Wall": 1.02,
+            "angle": 0,
+            "analyticBounds12": [
+              11.5,
+              6.1499999999999995,
+              16.5,
+              7.55
+            ],
+            "mammonFurniture": true
+          },
+          {
+            "id": "mammon:drawers",
+            "x": 6.85,
+            "y": 15,
+            "width": 1.4,
+            "depth": 4,
+            "height": 0.01,
+            "r115Wall": 1.35,
+            "angle": 0,
+            "analyticBounds12": [
+              6.1499999999999995,
+              13,
+              7.55,
+              17
+            ],
+            "mammonFurniture": true
+          },
+          {
+            "id": "mammon:safe",
+            "x": 22,
+            "y": 7.1,
+            "width": 2.4,
+            "depth": 1.8,
+            "height": 0.01,
+            "r115Wall": 2.1,
+            "angle": 0,
+            "analyticBounds12": [
+              20.8,
+              6.199999999999999,
+              23.2,
+              8
+            ],
+            "mammonFurniture": true
+          }
+        ],
+        "camera": {
+          "x": 16,
+          "y": 13,
+          "zoom": 0.8133333333333332,
+          "player": {
+            "x": 16,
+            "y": 13
+          }
+        },
+        "drawCalls": 58,
+        "props": [
+          {
+            "id": "r224:furn:ep1b06:0",
+            "solid": false,
+            "flags": [
+              "r80Dressing",
+              "r80Art",
+              "r80PresentationOnly"
+            ]
+          },
+          {
+            "id": "r224:furn:ep1b06:1",
+            "solid": false,
+            "flags": [
+              "r80Dressing",
+              "r80Art",
+              "r80PresentationOnly"
+            ]
+          },
+          {
+            "id": "r224:furn:ep1b06:2",
+            "solid": false,
+            "flags": [
+              "r80Dressing",
+              "r80Art",
+              "r80PresentationOnly"
+            ]
+          },
+          {
+            "id": "r224:furn:ep1b06:3",
+            "solid": false,
+            "flags": [
+              "r80Dressing",
+              "r80Art",
+              "r80PresentationOnly"
+            ]
+          }
+        ],
+        "door": [
+          {
+            "id": "r74:ep1b06:door-0",
+            "x": 20,
+            "y": 20,
+            "solid": false,
+            "autoTargetEligible6": false,
+            "visible": true,
+            "r74Door": {
+              "id": "door-0",
+              "x": 20,
+              "y": 20,
+              "width": 6,
+              "depth": 0.24,
+              "axis": "y",
+              "reach": 3,
+              "closed": true,
+              "edge": [
+                0,
+                2
+              ],
+              "name": "보스 구역 문",
+              "r81WardDoor": true,
+              "r78BossDoor": true
+            }
+          },
+          {
+            "id": "r74:ep1b06:door-1",
+            "x": 85.5,
+            "y": 64,
+            "solid": false,
+            "autoTargetEligible6": false,
+            "visible": true,
+            "r74Door": {
+              "id": "door-1",
+              "x": 85.5,
+              "y": 64,
+              "width": 5,
+              "depth": 0.24,
+              "axis": "y",
+              "reach": 3,
+              "closed": true,
+              "edge": [
+                3,
+                16
+              ],
+              "name": "앞방 문",
+              "r81WardDoor": true
+            }
+          },
+          {
+            "id": "r74:ep1b06:door-2",
+            "x": 5,
+            "y": 6,
+            "solid": false,
+            "autoTargetEligible6": false,
+            "visible": true,
+            "r74Door": {
+              "id": "door-2",
+              "x": 5,
+              "y": 6,
+              "width": 8,
+              "depth": 0.24,
+              "axis": "y",
+              "reach": 3,
+              "closed": true,
+              "edge": [
+                0,
+                1
+              ],
+              "name": "다음 구역 문",
+              "r81WardDoor": true
+            }
+          }
+        ]
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "/workspace/mammon-evidence/cash-safe-mobile.png",
+      "sha256": "7b476b5731ddb3a1aa82c4a014e7b024784cbe5d247a0be430089e07cbd76024",
+      "bytes": 2873986,
+      "state": {
+        "zone": "ep1b06",
+        "errors": [],
+        "mammon": {
+          "revision": "mammon-bossroom-v2",
+          "stats": {
+            "layouts": 3,
+            "scenes": 1,
+            "errors": 0
+          },
+          "lastError": null
+        },
+        "renderer": "Full compiled region path / eight heroes and preserved EGO; GPU unverified",
+        "layout": "mammon-bossroom-v2",
+        "walls": [
+          {
+            "id": "r219-wall:6",
+            "x": 21,
+            "y": 6,
+            "width": 24,
+            "depth": 0.24,
+            "height": 2.85,
+            "angle": 0,
+            "endpoints": [
+              [
+                9,
+                6
+              ],
+              [
+                33,
+                6
+              ]
+            ],
+            "annex": true,
+            "worldWardR81": true,
+            "storyMapR171": true,
+            "analyticBounds12": [
+              9,
+              5.88,
+              33,
+              6.12
+            ],
+            "path": "assets/r74/materials.png",
+            "r219": true,
+            "r224Room": true,
+            "r115Wall": 1.3
+          },
+          {
+            "id": "r219-wall:15",
+            "x": 11.5,
+            "y": 20,
+            "width": 11,
+            "depth": 0.24,
+            "height": 2.85,
+            "angle": 0,
+            "endpoints": [
+              [
+                6,
+                20
+              ],
+              [
+                17,
+                20
+              ]
+            ],
+            "annex": true,
+            "worldWardR81": true,
+            "storyMapR171": true,
+            "analyticBounds12": [
+              6,
+              19.88,
+              17,
+              20.12
+            ],
+            "path": "assets/r74/materials.png",
+            "r219": true,
+            "r224Room": true,
+            "r115Wall": 1.3
+          },
+          {
+            "id": "r219-wall:99",
+            "x": 6,
+            "y": 15.5,
+            "width": 0.24,
+            "depth": 9,
+            "height": 2.85,
+            "angle": 0,
+            "endpoints": [
+              [
+                6,
+                11
+              ],
+              [
+                6,
+                20
+              ]
+            ],
+            "annex": true,
+            "worldWardR81": true,
+            "storyMapR171": true,
+            "analyticBounds12": [
+              5.88,
+              11,
+              6.12,
+              20
+            ],
+            "path": "assets/r74/materials.png",
+            "r219": true,
+            "r224Room": true,
+            "r115Wall": 1.3
+          },
+          {
+            "id": "mammon:desk",
+            "x": 14,
+            "y": 6.85,
+            "width": 5,
+            "depth": 1.4,
+            "height": 0.01,
+            "r115Wall": 1.02,
+            "angle": 0,
+            "analyticBounds12": [
+              11.5,
+              6.1499999999999995,
+              16.5,
+              7.55
+            ],
+            "mammonFurniture": true
+          },
+          {
+            "id": "mammon:drawers",
+            "x": 6.85,
+            "y": 15,
+            "width": 1.4,
+            "depth": 4,
+            "height": 0.01,
+            "r115Wall": 1.35,
+            "angle": 0,
+            "analyticBounds12": [
+              6.1499999999999995,
+              13,
+              7.55,
+              17
+            ],
+            "mammonFurniture": true
+          },
+          {
+            "id": "mammon:safe",
+            "x": 22,
+            "y": 7.1,
+            "width": 2.4,
+            "depth": 1.8,
+            "height": 0.01,
+            "r115Wall": 2.1,
+            "angle": 0,
+            "analyticBounds12": [
+              20.8,
+              6.199999999999999,
+              23.2,
+              8
+            ],
+            "mammonFurniture": true
+          }
+        ],
+        "camera": {
+          "x": 16,
+          "y": 13,
+          "zoom": 0.8,
+          "player": {
+            "x": 16,
+            "y": 13
+          }
+        },
+        "drawCalls": 42,
+        "props": [
+          {
+            "id": "r224:furn:ep1b06:0",
+            "solid": false,
+            "flags": [
+              "r80Dressing",
+              "r80Art",
+              "r80PresentationOnly"
+            ]
+          },
+          {
+            "id": "r224:furn:ep1b06:1",
+            "solid": false,
+            "flags": [
+              "r80Dressing",
+              "r80Art",
+              "r80PresentationOnly"
+            ]
+          },
+          {
+            "id": "r224:furn:ep1b06:2",
+            "solid": false,
+            "flags": [
+              "r80Dressing",
+              "r80Art",
+              "r80PresentationOnly"
+            ]
+          },
+          {
+            "id": "r224:furn:ep1b06:3",
+            "solid": false,
+            "flags": [
+              "r80Dressing",
+              "r80Art",
+              "r80PresentationOnly"
+            ]
+          }
+        ],
+        "door": [
+          {
+            "id": "r74:ep1b06:door-0",
+            "x": 20,
+            "y": 20,
+            "solid": false,
+            "autoTargetEligible6": false,
+            "visible": true,
+            "r74Door": {
+              "id": "door-0",
+              "x": 20,
+              "y": 20,
+              "width": 6,
+              "depth": 0.24,
+              "axis": "y",
+              "reach": 3,
+              "closed": true,
+              "edge": [
+                0,
+                2
+              ],
+              "name": "보스 구역 문",
+              "r81WardDoor": true,
+              "r78BossDoor": true
+            }
+          },
+          {
+            "id": "r74:ep1b06:door-1",
+            "x": 85.5,
+            "y": 64,
+            "solid": false,
+            "autoTargetEligible6": false,
+            "visible": true,
+            "r74Door": {
+              "id": "door-1",
+              "x": 85.5,
+              "y": 64,
+              "width": 5,
+              "depth": 0.24,
+              "axis": "y",
+              "reach": 3,
+              "closed": true,
+              "edge": [
+                3,
+                16
+              ],
+              "name": "앞방 문",
+              "r81WardDoor": true
+            }
+          },
+          {
+            "id": "r74:ep1b06:door-2",
+            "x": 5,
+            "y": 6,
+            "solid": false,
+            "autoTargetEligible6": false,
+            "visible": true,
+            "r74Door": {
+              "id": "door-2",
+              "x": 5,
+              "y": 6,
+              "width": 8,
+              "depth": 0.24,
+              "axis": "y",
+              "reach": 3,
+              "closed": true,
+              "edge": [
+                0,
+                1
+              ],
+              "name": "다음 구역 문",
+              "r81WardDoor": true
+            }
+          }
+        ]
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "/workspace/mammon-evidence/cash-safe-final-pc.png",
+      "sha256": "7a700cb305c12841e61ace2a10afc2f8324be4b8856c1b955cc3aeeab742f0f7",
+      "bytes": 1516168,
+      "state": {
+        "zone": "ep1b06",
+        "errors": [],
+        "mammon": {
+          "revision": "mammon-bossroom-v2",
+          "stats": {
+            "layouts": 3,
+            "scenes": 1,
+            "errors": 0
+          },
+          "lastError": null
+        },
+        "renderer": "Full compiled region path / eight heroes and preserved EGO; GPU unverified",
+        "layout": "mammon-bossroom-v2",
+        "walls": [
+          {
+            "id": "r219-wall:6",
+            "x": 21,
+            "y": 6,
+            "width": 24,
+            "depth": 0.24,
+            "height": 2.85,
+            "angle": 0,
+            "endpoints": [
+              [
+                9,
+                6
+              ],
+              [
+                33,
+                6
+              ]
+            ],
+            "annex": true,
+            "worldWardR81": true,
+            "storyMapR171": true,
+            "analyticBounds12": [
+              9,
+              5.88,
+              33,
+              6.12
+            ],
+            "path": "assets/r74/materials.png",
+            "r219": true,
+            "r224Room": true,
+            "r115Wall": 1.3
+          },
+          {
+            "id": "r219-wall:15",
+            "x": 11.5,
+            "y": 20,
+            "width": 11,
+            "depth": 0.24,
+            "height": 2.85,
+            "angle": 0,
+            "endpoints": [
+              [
+                6,
+                20
+              ],
+              [
+                17,
+                20
+              ]
+            ],
+            "annex": true,
+            "worldWardR81": true,
+            "storyMapR171": true,
+            "analyticBounds12": [
+              6,
+              19.88,
+              17,
+              20.12
+            ],
+            "path": "assets/r74/materials.png",
+            "r219": true,
+            "r224Room": true,
+            "r115Wall": 1.3
+          },
+          {
+            "id": "r219-wall:99",
+            "x": 6,
+            "y": 15.5,
+            "width": 0.24,
+            "depth": 9,
+            "height": 2.85,
+            "angle": 0,
+            "endpoints": [
+              [
+                6,
+                11
+              ],
+              [
+                6,
+                20
+              ]
+            ],
+            "annex": true,
+            "worldWardR81": true,
+            "storyMapR171": true,
+            "analyticBounds12": [
+              5.88,
+              11,
+              6.12,
+              20
+            ],
+            "path": "assets/r74/materials.png",
+            "r219": true,
+            "r224Room": true,
+            "r115Wall": 1.3
+          },
+          {
+            "id": "mammon:desk",
+            "x": 14,
+            "y": 6.85,
+            "width": 5,
+            "depth": 1.4,
+            "height": 0.01,
+            "r115Wall": 1.02,
+            "angle": 0,
+            "analyticBounds12": [
+              11.5,
+              6.1499999999999995,
+              16.5,
+              7.55
+            ],
+            "mammonFurniture": true
+          },
+          {
+            "id": "mammon:drawers",
+            "x": 6.85,
+            "y": 15,
+            "width": 1.4,
+            "depth": 4,
+            "height": 0.01,
+            "r115Wall": 1.35,
+            "angle": 0,
+            "analyticBounds12": [
+              6.1499999999999995,
+              13,
+              7.55,
+              17
+            ],
+            "mammonFurniture": true
+          },
+          {
+            "id": "mammon:safe",
+            "x": 22,
+            "y": 7.1,
+            "width": 2.4,
+            "depth": 1.8,
+            "height": 0.01,
+            "r115Wall": 2.1,
+            "angle": 0,
+            "analyticBounds12": [
+              20.8,
+              6.199999999999999,
+              23.2,
+              8
+            ],
+            "mammonFurniture": true
+          }
+        ],
+        "camera": {
+          "x": 16,
+          "y": 13,
+          "zoom": 0.8133333333333332,
+          "player": {
+            "x": 16,
+            "y": 13
+          }
+        },
+        "drawCalls": 58,
+        "props": [
+          {
+            "id": "r224:furn:ep1b06:0",
+            "solid": false,
+            "flags": [
+              "r80Dressing",
+              "r80Art",
+              "r80PresentationOnly"
+            ]
+          },
+          {
+            "id": "r224:furn:ep1b06:1",
+            "solid": false,
+            "flags": [
+              "r80Dressing",
+              "r80Art",
+              "r80PresentationOnly"
+            ]
+          },
+          {
+            "id": "r224:furn:ep1b06:2",
+            "solid": false,
+            "flags": [
+              "r80Dressing",
+              "r80Art",
+              "r80PresentationOnly"
+            ]
+          },
+          {
+            "id": "r224:furn:ep1b06:3",
+            "solid": false,
+            "flags": [
+              "r80Dressing",
+              "r80Art",
+              "r80PresentationOnly"
+            ]
+          }
+        ],
+        "door": [
+          {
+            "id": "r74:ep1b06:door-0",
+            "x": 20,
+            "y": 20,
+            "solid": false,
+            "autoTargetEligible6": false,
+            "visible": true,
+            "r74Door": {
+              "id": "door-0",
+              "x": 20,
+              "y": 20,
+              "width": 6,
+              "depth": 0.24,
+              "axis": "y",
+              "reach": 3,
+              "closed": true,
+              "edge": [
+                0,
+                2
+              ],
+              "name": "보스 구역 문",
+              "r81WardDoor": true,
+              "r78BossDoor": true
+            }
+          },
+          {
+            "id": "r74:ep1b06:door-1",
+            "x": 85.5,
+            "y": 64,
+            "solid": false,
+            "autoTargetEligible6": false,
+            "visible": true,
+            "r74Door": {
+              "id": "door-1",
+              "x": 85.5,
+              "y": 64,
+              "width": 5,
+              "depth": 0.24,
+              "axis": "y",
+              "reach": 3,
+              "closed": true,
+              "edge": [
+                3,
+                16
+              ],
+              "name": "앞방 문",
+              "r81WardDoor": true
+            }
+          },
+          {
+            "id": "r74:ep1b06:door-2",
+            "x": 5,
+            "y": 6,
+            "solid": false,
+            "autoTargetEligible6": false,
+            "visible": true,
+            "r74Door": {
+              "id": "door-2",
+              "x": 5,
+              "y": 6,
+              "width": 8,
+              "depth": 0.24,
+              "axis": "y",
+              "reach": 3,
+              "closed": true,
+              "edge": [
+                0,
+                1
+              ],
+              "name": "다음 구역 문",
+              "r81WardDoor": true
+            }
+          }
+        ]
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "/workspace/mammon-evidence/cash-safe-detail-mobile.png",
+      "sha256": "c5517d3b66d597abbf07f00a38a25f7e1bc9889ac987cf03d7acfdce5f9b3f56",
+      "bytes": 2598195,
+      "state": {
+        "zone": "ep1b06",
+        "errors": [],
+        "mammon": {
+          "revision": "mammon-bossroom-v2",
+          "stats": {
+            "layouts": 3,
+            "scenes": 1,
+            "errors": 0
+          },
+          "lastError": null
+        },
+        "renderer": "Full compiled region path / eight heroes and preserved EGO; GPU unverified",
+        "layout": "mammon-bossroom-v2",
+        "walls": [
+          {
+            "id": "r219-wall:6",
+            "x": 21,
+            "y": 6,
+            "width": 24,
+            "depth": 0.24,
+            "height": 2.85,
+            "angle": 0,
+            "endpoints": [
+              [
+                9,
+                6
+              ],
+              [
+                33,
+                6
+              ]
+            ],
+            "annex": true,
+            "worldWardR81": true,
+            "storyMapR171": true,
+            "analyticBounds12": [
+              9,
+              5.88,
+              33,
+              6.12
+            ],
+            "path": "assets/r74/materials.png",
+            "r219": true,
+            "r224Room": true,
+            "r115Wall": 1.3
+          },
+          {
+            "id": "r219-wall:15",
+            "x": 11.5,
+            "y": 20,
+            "width": 11,
+            "depth": 0.24,
+            "height": 2.85,
+            "angle": 0,
+            "endpoints": [
+              [
+                6,
+                20
+              ],
+              [
+                17,
+                20
+              ]
+            ],
+            "annex": true,
+            "worldWardR81": true,
+            "storyMapR171": true,
+            "analyticBounds12": [
+              6,
+              19.88,
+              17,
+              20.12
+            ],
+            "path": "assets/r74/materials.png",
+            "r219": true,
+            "r224Room": true,
+            "r115Wall": 1.3
+          },
+          {
+            "id": "r219-wall:99",
+            "x": 6,
+            "y": 15.5,
+            "width": 0.24,
+            "depth": 9,
+            "height": 2.85,
+            "angle": 0,
+            "endpoints": [
+              [
+                6,
+                11
+              ],
+              [
+                6,
+                20
+              ]
+            ],
+            "annex": true,
+            "worldWardR81": true,
+            "storyMapR171": true,
+            "analyticBounds12": [
+              5.88,
+              11,
+              6.12,
+              20
+            ],
+            "path": "assets/r74/materials.png",
+            "r219": true,
+            "r224Room": true,
+            "r115Wall": 1.3
+          },
+          {
+            "id": "mammon:desk",
+            "x": 14,
+            "y": 6.85,
+            "width": 5,
+            "depth": 1.4,
+            "height": 0.01,
+            "r115Wall": 1.02,
+            "angle": 0,
+            "analyticBounds12": [
+              11.5,
+              6.1499999999999995,
+              16.5,
+              7.55
+            ],
+            "mammonFurniture": true
+          },
+          {
+            "id": "mammon:drawers",
+            "x": 6.85,
+            "y": 15,
+            "width": 1.4,
+            "depth": 4,
+            "height": 0.01,
+            "r115Wall": 1.35,
+            "angle": 0,
+            "analyticBounds12": [
+              6.1499999999999995,
+              13,
+              7.55,
+              17
+            ],
+            "mammonFurniture": true
+          },
+          {
+            "id": "mammon:safe",
+            "x": 22,
+            "y": 7.1,
+            "width": 2.4,
+            "depth": 1.8,
+            "height": 0.01,
+            "r115Wall": 2.1,
+            "angle": 0,
+            "analyticBounds12": [
+              20.8,
+              6.199999999999999,
+              23.2,
+              8
+            ],
+            "mammonFurniture": true
+          }
+        ],
+        "camera": {
+          "x": 21,
+          "y": 10,
+          "zoom": 0.8,
+          "player": {
+            "x": 21,
+            "y": 10
+          }
+        },
+        "drawCalls": 34,
+        "props": [
+          {
+            "id": "r224:furn:ep1b06:0",
+            "solid": false,
+            "flags": [
+              "r80Dressing",
+              "r80Art",
+              "r80PresentationOnly"
+            ]
+          },
+          {
+            "id": "r224:furn:ep1b06:1",
+            "solid": false,
+            "flags": [
+              "r80Dressing",
+              "r80Art",
+              "r80PresentationOnly"
+            ]
+          },
+          {
+            "id": "r224:furn:ep1b06:2",
+            "solid": false,
+            "flags": [
+              "r80Dressing",
+              "r80Art",
+              "r80PresentationOnly"
+            ]
+          },
+          {
+            "id": "r224:furn:ep1b06:3",
+            "solid": false,
+            "flags": [
+              "r80Dressing",
+              "r80Art",
+              "r80PresentationOnly"
+            ]
+          }
+        ],
+        "door": [
+          {
+            "id": "r74:ep1b06:door-0",
+            "x": 20,
+            "y": 20,
+            "solid": false,
+            "autoTargetEligible6": false,
+            "visible": true,
+            "r74Door": {
+              "id": "door-0",
+              "x": 20,
+              "y": 20,
+              "width": 6,
+              "depth": 0.24,
+              "axis": "y",
+              "reach": 3,
+              "closed": true,
+              "edge": [
+                0,
+                2
+              ],
+              "name": "보스 구역 문",
+              "r81WardDoor": true,
+              "r78BossDoor": true
+            }
+          },
+          {
+            "id": "r74:ep1b06:door-1",
+            "x": 85.5,
+            "y": 64,
+            "solid": false,
+            "autoTargetEligible6": false,
+            "visible": true,
+            "r74Door": {
+              "id": "door-1",
+              "x": 85.5,
+              "y": 64,
+              "width": 5,
+              "depth": 0.24,
+              "axis": "y",
+              "reach": 3,
+              "closed": true,
+              "edge": [
+                3,
+                16
+              ],
+              "name": "앞방 문",
+              "r81WardDoor": true
+            }
+          },
+          {
+            "id": "r74:ep1b06:door-2",
+            "x": 5,
+            "y": 6,
+            "solid": false,
+            "autoTargetEligible6": false,
+            "visible": true,
+            "r74Door": {
+              "id": "door-2",
+              "x": 5,
+              "y": 6,
+              "width": 8,
+              "depth": 0.24,
+              "axis": "y",
+              "reach": 3,
+              "closed": true,
+              "edge": [
+                0,
+                1
+              ],
+              "name": "다음 구역 문",
+              "r81WardDoor": true
+            }
+          }
+        ]
+      },
+      "pageErrors": []
+    }
+  ],
+  "reviewScores": {
+    "art": 7.4,
+    "staging": 8.2,
+    "camera": 8.0,
+    "interior": 8.1,
+    "light": 7.9,
+    "vfx": 8.0,
+    "ux": 8.0
+  },
+  "reviewMean": 7.942857142857143,
+  "limits": [
+    "Headless assisted entry with paused simulation; not natural combat",
+    "Physical device and GPU performance unverified",
+    "Latest remote main and Claude work unverified: prior GitHub proxy 403; no retry or bypass",
+    "No push, merge or public deployment",
+    "Build sourceCommit is pre-change HEAD; receipt covers uncommitted current files",
+    "Review preceded final handle and material improvements"
+  ]
+}

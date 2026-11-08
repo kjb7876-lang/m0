@@ -1,0 +1,15 @@
+{
+  "assets": [
+    {
+      "path": "r96/runtime-text/assets/r118/tiles/school.webp",
+      "sha256": "4e4548da43da1aebb11574040fdf5778993970c15249e93cb27373d9f7680777",
+      "bytes": 271798,
+      "origin": "existing repository asset; original unchanged",
+      "use": "read-only 0,0,1024,1024 crop for new furniture wood",
+      "applied": true
+    }
+  ],
+  "newImageAssets": [],
+  "newProceduralGeometry": "six room furniture groups in seven-sins-bossrooms.js",
+  "limitations": "Mesh furniture is current local implementation; it is not a new hand-painted sprite asset delivery."
+}

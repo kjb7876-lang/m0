@@ -53,6 +53,16 @@ jobs:
           PY
       - name: Check registered Mammon artwork and native map
         run: node r96/qa/mammon-miniature-pilot/check.cjs
+      - name: Seven sin boss rooms scope, collision and save compatibility
+        run: |
+          node r96/qa/seven-sins/bossrooms-cpu-check.cjs
+          node r96/qa/seven-sins/bossrooms-runtime-check.cjs
+          node r96/qa/sin-room-art/art-cpu-check.cjs
+          node r96/qa/sin-room-art/runtime-check.cjs
+      - name: Mammon boss room scope, collision and save compatibility
+        run: |
+          node r96/qa/mammon/bossroom-cpu-check.cjs
+          node r96/qa/mammon/bossroom-runtime-check.cjs
       - name: R323 terrain value separation and renderer budget preservation
         run: node r96/qa/r323/terrain-readability-cpu-check.cjs
       - name: R324 boss meteor painted sprites CPU check

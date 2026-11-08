@@ -1,0 +1,18 @@
+'use strict';
+const assert=require('assert/strict'),fs=require('fs'),path=require('path');const {createHarness}=require('../harness.cjs');
+(async()=>{const h=createHarness({timeoutMs:120000}),run=s=>h.run(s);const build=JSON.parse(fs.readFileSync(path.resolve(__dirname,'../../build-result.json'),'utf8'));const boot=await h.boot();assert(boot.booted&&!boot.errors.length);console.log('PASS native boot');
+const zones=['ep1b02','ep1b03','ep1b04','ep1b05','ep1b06','ep1b07','ep1b08'],results=[];
+await run("newGame('hwando')");run('for(let i=0;i<80&&storyScene;i++)advanceScene();if(modal&&!storyScene)closePanel(true);');
+for(const id of zones){
+ const collisions=run(`(()=>{const id=${JSON.stringify(id)},L=__STORYWORLD_EXPLORATION__.layout(id,'STORY'),A=StoryPhase1,props=id==='ep1b06'?__STORYWORLD_MAMMON_BOSSROOM__.furniture:id==='ep1b08'?__STORYWORLD_SIN_BOSSROOMS__.themes[id].props:__STORYWORLD_SIN_ROOM_ART__.themes[id].props;return {overlay:L.sinBossroom||L.mammonBossroom,furniture:props.map(p=>({id:p.id||p.key,blocked:A.explorationBlocked(L,p.x,p.y,.3)})),centre:A.explorationBlocked(L,16,13,.3),spots:L.worldWardR81.bossPoints.map(p=>A.explorationBlocked(L,p.x,p.y,.5))};})()`);
+ assert(collisions.overlay,id+' overlay');assert(collisions.furniture.every(p=>p.blocked),id+' native furniture collision');assert(!collisions.centre,id+' center free');assert(collisions.spots.every(v=>!v),id+' boss positions free');
+ await run("__STORYWORLD_CHEAT777__.activate('777')");await run(`__STORYWORLD_CHEAT777__.go(${JSON.stringify(id)},'STORY')`);if(run('__STORYWORLD_PROGRESSION_R71__.difficultyState().open')){run("__STORYWORLD_PROGRESSION_R71__.selectDifficulty('normal')");await run('__STORYWORLD_PROGRESSION_R71__.confirmDifficulty()');}
+ run('for(let i=0;i<80&&storyScene;i++)advanceScene();if(modal&&!storyScene)closePanel(true);auto=false;guide=false;');
+ const snapshot=()=>JSON.parse(JSON.stringify(run(`({zone,phase:__STORYWORLD_WORLD_COMBAT_R78__.state(room),opened:__STORYWORLD_WORLD_R74__.openedFor(zone,layer),bosses:room.enemies.filter(e=>e.boss).map(e=>({id:e.id,hp:e.hp})),overlay:room.exploration.sinBossroom||room.exploration.mammonBossroom,position:{x:player.x,y:player.y}})`)));
+ const wallHeights=run('room.exploration.walls.filter(w=>w.sinFurniture||w.mammonFurniture).map(w=>({id:w.id,height:w.height}))');assert(wallHeights.every(w=>w.height<=.011),id+' collision-only native walls stay floor-height after regional dressing');
+ const before=snapshot();assert.equal(before.zone,id);assert(before.overlay);assert(before.bosses.length>0,id+' boss present');h.context.saved=JSON.parse(JSON.stringify(run('serializeSave()')));await run('restoreSave(saved)');const after=snapshot();assert.equal(after.zone,before.zone);assert.deepEqual(after.opened,before.opened);assert.deepEqual(after.bosses,before.bosses);assert.equal(after.phase.phase,before.phase.phase);assert.equal(after.overlay,before.overlay);
+ results.push({id,collisions,wallHeights,before,after});console.log('PASS',id,'native furniture and boss collision, assisted normal entry, save restore of boss HP/door state/phase/overlay');
+}
+assert.equal(run('__STORYWORLD_SIN_BOSSROOMS__.inspect().stats.errors'),0);assert.equal(run('__STORYWORLD_SIN_ROOM_ART__.inspect().stats.errors'),0);
+fs.writeFileSync(path.join(__dirname,'runtime-results.json'),JSON.stringify({build,boot,results,inspect:run('__STORYWORLD_SIN_BOSSROOMS__.inspect()'),scope:'CPU VM; assisted 777 normal entry and native restore for seven rooms; not natural boss completion or GPU/device validation'},null,2)+'\n');
+})().catch(e=>{console.error(e);process.exitCode=1});

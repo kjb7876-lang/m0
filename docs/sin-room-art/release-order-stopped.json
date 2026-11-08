@@ -1,0 +1,33 @@
+{
+  "status": "STOPPED",
+  "reason": "stopped for necessary HTML format fix after strict whitespace assertions failed; mandatory final full suite will run in remote CI",
+  "runtimeManifestSHA256": "7c556b345b58e2b1f85f65c9f911b2cb34bc4b4b753968f33a5bf51e88b1ec12",
+  "stoppedAt": "2026-11-08T00:22:45.764908+00:00",
+  "ownedParentPid": 44932,
+  "ownedDescendantPids": [
+    57514,
+    57895,
+    58367
+  ],
+  "completedGroupLines": [
+    "hospital-maze PASS 29/29",
+    "world-runtime PASS 23/23",
+    "hospital-layout PASS 14/14",
+    "hospital-cold PASS 7/7",
+    "hospital-champions PASS 10/10",
+    "manual-input PASS 6/6",
+    "ego-health PASS 6/6",
+    "world-geometry PASS 9/9",
+    "brain-and-roofs PASS 12/12",
+    "hospital-migration PASS 9/9",
+    "camera-motion PASS 10/10",
+    "opening-refuge PASS 11/11",
+    "projectile PASS 13/13",
+    "world-cold PASS 6/6",
+    "environment PASS 17/17",
+    "hospital-start-777 PASS 9/9",
+    "legacy-save PASS 9/9"
+  ],
+  "fullSuitePassed": false,
+  "old3bc58GroupPassPreserved": true
+}

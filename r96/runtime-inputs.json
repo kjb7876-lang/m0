@@ -5901,7 +5901,17 @@
     "assets/r380/mobs/legacy-m124-silverless-shadow-v4.webp",
     "assets/r380/mobs/legacy-m130-slime-cult01-v2.webp",
     "assets/r380/mobs/legacy-m130-slime-cult05-v2.webp",
-    "assets/r380/mobs/legacy-m134-nightmare-v4.webp"
+    "assets/r380/mobs/legacy-m134-nightmare-v4.webp",
+    "mammon-bossroom.js",
+    "seven-sins-bossrooms.js",
+    "sin-room-art.js",
+    "assets/sin-rooms/index.json",
+    "assets/sin-rooms/sloth-home.png",
+    "assets/sin-rooms/envy-home.png",
+    "assets/sin-rooms/glutton-kitchen.png",
+    "assets/sin-rooms/lust-bar.png",
+    "assets/sin-rooms/mammon-office.png",
+    "assets/sin-rooms/wrath-restaurant.png"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -6976,5 +6986,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "bf7be21bc1e730bf32848c0beb47ceadf5c2c17fb9d3ef9c2f3cfa4f127aa6e8"
+  "runtimeManifestSHA256": "d95d4222fd6bf94fa998490f50e8adb8eacb09a661066c5ad4ad1e7388b17eca"
 }

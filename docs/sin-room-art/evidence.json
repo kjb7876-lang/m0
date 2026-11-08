@@ -1,0 +1,1133 @@
+{
+  "build": {
+    "files": 6620,
+    "bytes": 1043039521,
+    "runtimeManifestSHA256": "78ab31f9eb61309bd30e03e3e28e1e658ed9dbb29d2101e40d3e0825b29247a9",
+    "sourceCommit": "a625cc91a187966ba91b22f0b2f541c349300a90"
+  },
+  "sourceHashes": {
+    "r96/client-source/sin-room-art.js": "70d190184818ff8118c8c5232038ea8a7c23a249c706971c09a3f65044305a67",
+    "r96/client-source/mammon-bossroom.js": "14cad4c9e35c8914edf9d076c81261cbbad4a7e067040df6b399751c470a7764",
+    "r96/client-source/seven-sins-bossrooms.js": "f6f539296fd11946a0688a5d82be7bf68b32f5c8d560aff5369e92f7dd439fc5",
+    "r96/runtime-text/index.html": "a5f993a9fd78f9301bbdec5e8594684f4f642cb05dce3c0f751ae1b4d019437d",
+    "r96/runtime-manifest.json": "78ab31f9eb61309bd30e03e3e28e1e658ed9dbb29d2101e40d3e0825b29247a9",
+    "r96/runtime-inputs.json": "2d9d6d2f66c492deec8a7ea651ce741a7bf7668de31dfadabfc8af439395e654"
+  },
+  "evidenceRoot": "/workspace/sin-room-art-evidence",
+  "beforeScope": "21 unmodified v1 captures from prior local build, not final source",
+  "afterScope": "21 full-build Chromium headless paused/777-assisted captures from final manifest; no physical device/natural play",
+  "checks": [
+    {
+      "file": "after-ep1b02-mobile-detail.json",
+      "zone": "ep1b02",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 3,
+      "camera": {
+        "x": 21,
+        "y": 10,
+        "zoom": 0.8,
+        "player": {
+          "x": 21,
+          "y": 10
+        }
+      },
+      "ownPropCount": 4,
+      "checkedVisibleArtCommands": 3,
+      "gameErrors": 0,
+      "pageErrors": 0,
+      "failedResources": 0
+    },
+    {
+      "file": "after-ep1b02-mobile.json",
+      "zone": "ep1b02",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 3,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "ownPropCount": 4,
+      "checkedVisibleArtCommands": 2,
+      "gameErrors": 0,
+      "pageErrors": 0,
+      "failedResources": 0
+    },
+    {
+      "file": "after-ep1b02-pc.json",
+      "zone": "ep1b02",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "deviceScaleFactor": 1,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "ownPropCount": 4,
+      "checkedVisibleArtCommands": 4,
+      "gameErrors": 0,
+      "pageErrors": 0,
+      "failedResources": 0
+    },
+    {
+      "file": "after-ep1b03-mobile-detail.json",
+      "zone": "ep1b03",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 3,
+      "camera": {
+        "x": 21,
+        "y": 10,
+        "zoom": 0.8,
+        "player": {
+          "x": 21,
+          "y": 10
+        }
+      },
+      "ownPropCount": 4,
+      "checkedVisibleArtCommands": 3,
+      "gameErrors": 0,
+      "pageErrors": 0,
+      "failedResources": 0
+    },
+    {
+      "file": "after-ep1b03-mobile.json",
+      "zone": "ep1b03",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 3,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "ownPropCount": 4,
+      "checkedVisibleArtCommands": 2,
+      "gameErrors": 0,
+      "pageErrors": 0,
+      "failedResources": 0
+    },
+    {
+      "file": "after-ep1b03-pc.json",
+      "zone": "ep1b03",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "deviceScaleFactor": 1,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "ownPropCount": 4,
+      "checkedVisibleArtCommands": 4,
+      "gameErrors": 0,
+      "pageErrors": 0,
+      "failedResources": 0
+    },
+    {
+      "file": "after-ep1b04-mobile-detail.json",
+      "zone": "ep1b04",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 3,
+      "camera": {
+        "x": 21,
+        "y": 10,
+        "zoom": 0.8,
+        "player": {
+          "x": 21,
+          "y": 10
+        }
+      },
+      "ownPropCount": 4,
+      "checkedVisibleArtCommands": 3,
+      "gameErrors": 0,
+      "pageErrors": 0,
+      "failedResources": 0
+    },
+    {
+      "file": "after-ep1b04-mobile.json",
+      "zone": "ep1b04",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 3,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "ownPropCount": 4,
+      "checkedVisibleArtCommands": 2,
+      "gameErrors": 0,
+      "pageErrors": 0,
+      "failedResources": 0
+    },
+    {
+      "file": "after-ep1b04-pc.json",
+      "zone": "ep1b04",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "deviceScaleFactor": 1,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "ownPropCount": 4,
+      "checkedVisibleArtCommands": 4,
+      "gameErrors": 0,
+      "pageErrors": 0,
+      "failedResources": 0
+    },
+    {
+      "file": "after-ep1b05-mobile-detail.json",
+      "zone": "ep1b05",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 3,
+      "camera": {
+        "x": 21,
+        "y": 10,
+        "zoom": 0.8,
+        "player": {
+          "x": 21,
+          "y": 10
+        }
+      },
+      "ownPropCount": 4,
+      "checkedVisibleArtCommands": 2,
+      "gameErrors": 0,
+      "pageErrors": 0,
+      "failedResources": 0
+    },
+    {
+      "file": "after-ep1b05-mobile.json",
+      "zone": "ep1b05",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 3,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "ownPropCount": 4,
+      "checkedVisibleArtCommands": 1,
+      "gameErrors": 0,
+      "pageErrors": 0,
+      "failedResources": 0
+    },
+    {
+      "file": "after-ep1b05-pc.json",
+      "zone": "ep1b05",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "deviceScaleFactor": 1,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "ownPropCount": 4,
+      "checkedVisibleArtCommands": 4,
+      "gameErrors": 0,
+      "pageErrors": 0,
+      "failedResources": 0
+    },
+    {
+      "file": "after-ep1b06-mobile-detail.json",
+      "zone": "ep1b06",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 3,
+      "camera": {
+        "x": 21,
+        "y": 10,
+        "zoom": 0.8,
+        "player": {
+          "x": 21,
+          "y": 10
+        }
+      },
+      "ownPropCount": 4,
+      "checkedVisibleArtCommands": 3,
+      "gameErrors": 0,
+      "pageErrors": 0,
+      "failedResources": 0
+    },
+    {
+      "file": "after-ep1b06-mobile.json",
+      "zone": "ep1b06",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 3,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "ownPropCount": 4,
+      "checkedVisibleArtCommands": 2,
+      "gameErrors": 0,
+      "pageErrors": 0,
+      "failedResources": 0
+    },
+    {
+      "file": "after-ep1b06-pc.json",
+      "zone": "ep1b06",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "deviceScaleFactor": 1,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "ownPropCount": 4,
+      "checkedVisibleArtCommands": 4,
+      "gameErrors": 0,
+      "pageErrors": 0,
+      "failedResources": 0
+    },
+    {
+      "file": "after-ep1b07-mobile-detail.json",
+      "zone": "ep1b07",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 3,
+      "camera": {
+        "x": 21,
+        "y": 10,
+        "zoom": 0.8,
+        "player": {
+          "x": 21,
+          "y": 10
+        }
+      },
+      "ownPropCount": 4,
+      "checkedVisibleArtCommands": 2,
+      "gameErrors": 0,
+      "pageErrors": 0,
+      "failedResources": 0
+    },
+    {
+      "file": "after-ep1b07-mobile.json",
+      "zone": "ep1b07",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 3,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "ownPropCount": 4,
+      "checkedVisibleArtCommands": 2,
+      "gameErrors": 0,
+      "pageErrors": 0,
+      "failedResources": 0
+    },
+    {
+      "file": "after-ep1b07-pc.json",
+      "zone": "ep1b07",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "deviceScaleFactor": 1,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "ownPropCount": 4,
+      "checkedVisibleArtCommands": 4,
+      "gameErrors": 0,
+      "pageErrors": 0,
+      "failedResources": 0
+    },
+    {
+      "file": "after-ep1b08-mobile-detail.json",
+      "zone": "ep1b08",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 3,
+      "camera": {
+        "x": 21,
+        "y": 10,
+        "zoom": 0.8,
+        "player": {
+          "x": 21,
+          "y": 10
+        }
+      },
+      "ownPropCount": 0,
+      "checkedVisibleArtCommands": 0,
+      "gameErrors": 0,
+      "pageErrors": 0,
+      "failedResources": 0
+    },
+    {
+      "file": "after-ep1b08-mobile.json",
+      "zone": "ep1b08",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 3,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "ownPropCount": 0,
+      "checkedVisibleArtCommands": 0,
+      "gameErrors": 0,
+      "pageErrors": 0,
+      "failedResources": 0
+    },
+    {
+      "file": "after-ep1b08-pc.json",
+      "zone": "ep1b08",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "deviceScaleFactor": 1,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "ownPropCount": 0,
+      "checkedVisibleArtCommands": 0,
+      "gameErrors": 0,
+      "pageErrors": 0,
+      "failedResources": 0
+    }
+  ],
+  "files": [
+    {
+      "file": "after-ep1b02-mobile-detail.json",
+      "bytes": 8026,
+      "sha256": "3298befb29e1edf376769ac2c5467c726492b56e69c166354dae5a0bc3e71df3"
+    },
+    {
+      "file": "after-ep1b02-mobile-detail.png",
+      "bytes": 2719340,
+      "sha256": "8c424befc6c2fba72994dc996f5be948d6b198fc863ca6c52408f82ebd6ec6e6",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "after-ep1b02-mobile.json",
+      "bytes": 6920,
+      "sha256": "cb34e66935a509f77d5c0c6ba6e09c0c2bca0f2a4d89f023cc52027bcb4d6450"
+    },
+    {
+      "file": "after-ep1b02-mobile.png",
+      "bytes": 2808946,
+      "sha256": "09de5c14d9ff7a54f21e5cb5ab8a0af5afea0d460d7aead86edb1239f9fe0c52",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "after-ep1b02-pc.json",
+      "bytes": 9167,
+      "sha256": "6b1fad82fbcf7cf466ba5f65b33180ae61668ae592c601dfc956a12defbc2dee"
+    },
+    {
+      "file": "after-ep1b02-pc.png",
+      "bytes": 2383390,
+      "sha256": "04f3951152272915d1bc4e602c465326caf2013065b0e1567174afb56cac3f64",
+      "dimensions": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "file": "after-ep1b03-mobile-detail.json",
+      "bytes": 8207,
+      "sha256": "d65d7315c210f9b6969b907a516a9ae2292c845e62fc48aed26f9a71fb2d3090"
+    },
+    {
+      "file": "after-ep1b03-mobile-detail.png",
+      "bytes": 2729217,
+      "sha256": "6e997f64cb81627395c96044528eefd71deb9d79ebcf9558910e23a1d3a26913",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "after-ep1b03-mobile.json",
+      "bytes": 7174,
+      "sha256": "15ed5a418593b195ea3be6111cde5614f8190052e94bfda5ad51a8978f32f8d1"
+    },
+    {
+      "file": "after-ep1b03-mobile.png",
+      "bytes": 2817037,
+      "sha256": "9411eb1e4079ced8a4c504ea153ca813ee05eb51feebb775241a2f1dd9851f4f",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "after-ep1b03-pc.json",
+      "bytes": 9274,
+      "sha256": "0dae81e0942119a6fef9ee4f4d5bf21b2223d95763e12cd30662885d8f165519"
+    },
+    {
+      "file": "after-ep1b03-pc.png",
+      "bytes": 2535670,
+      "sha256": "6b6ad8532773930962493c8856d475944284319ed3f384f5db605775c7c61ca2",
+      "dimensions": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "file": "after-ep1b04-mobile-detail.json",
+      "bytes": 8220,
+      "sha256": "96553347706936aac2b2881b6c7f83491018556e72cb711fcccc5cd01defe142"
+    },
+    {
+      "file": "after-ep1b04-mobile-detail.png",
+      "bytes": 2768984,
+      "sha256": "ab1536c7f5b2d1a6c58c00763cbdbf9d2b2e9bea102a2de97d31a287e57effac",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "after-ep1b04-mobile.json",
+      "bytes": 7193,
+      "sha256": "f5b07c35febdea505348e433a80e37c233f07a3bc46ad170ce5743e95dcb6525"
+    },
+    {
+      "file": "after-ep1b04-mobile.png",
+      "bytes": 2876754,
+      "sha256": "8a041fef1a5c5dce09642352d83c01b13e2646329fdeb7ced53ab3927c8779e2",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "after-ep1b04-pc.json",
+      "bytes": 9283,
+      "sha256": "e81aaa1241b84462805d395a8d2c252a616cb922c5123eaa18283eaa4b36438b"
+    },
+    {
+      "file": "after-ep1b04-pc.png",
+      "bytes": 2441860,
+      "sha256": "f91665a5feb4985f8da6d8e80017a561e6bea4c10a5d68dfa8e8efa00b184550",
+      "dimensions": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "file": "after-ep1b05-mobile-detail.json",
+      "bytes": 7153,
+      "sha256": "87954a08bf469b27996a9d3b3853c53cbbc9c23367e1c304e3071200170b87ea"
+    },
+    {
+      "file": "after-ep1b05-mobile-detail.png",
+      "bytes": 2841888,
+      "sha256": "87b8576ca238b3210206adea603c7b21eb98770b183fd05da9b1129c14e1f5c4",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "after-ep1b05-mobile.json",
+      "bytes": 6113,
+      "sha256": "40af738a696cb550b00e7fff53a6265d506ea47f359385652e40888fa716db2d"
+    },
+    {
+      "file": "after-ep1b05-mobile.png",
+      "bytes": 3117842,
+      "sha256": "38ca756c0d1caa56f1427d2dfef21af9c167b9d661aeacb0eca55026e8860fdd",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "after-ep1b05-pc.json",
+      "bytes": 9238,
+      "sha256": "a75f0e67c61e4d324cdf2a9b0c6ffd6df26ee538bedd3ea082d93d27a23a4470"
+    },
+    {
+      "file": "after-ep1b05-pc.png",
+      "bytes": 2697162,
+      "sha256": "fa6e4eb5ab868fbd2169af67328ee0ab5e72f62f2f7eb82d17d6fbe868a29930",
+      "dimensions": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "file": "after-ep1b06-mobile-detail.json",
+      "bytes": 8327,
+      "sha256": "c02ac164724b5f31882dd1087a7f5f9059328cbc08e19b4293475d39aaf7ed4c"
+    },
+    {
+      "file": "after-ep1b06-mobile-detail.png",
+      "bytes": 2680362,
+      "sha256": "b708c92108da06881c878e3f97d1bb52c6114981afe15fb5e3974dd087818088",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "after-ep1b06-mobile.json",
+      "bytes": 7275,
+      "sha256": "145d78e375c118887c95e0669a0fb4116d519749d58778bade8dc5ec2d4407c2"
+    },
+    {
+      "file": "after-ep1b06-mobile.png",
+      "bytes": 2825810,
+      "sha256": "6d72b113fca4b23d4363de81e497365930d2bea8320e30b7459aa608b4449fd0",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "after-ep1b06-pc.json",
+      "bytes": 9362,
+      "sha256": "7253f18df71a790a08622b1d82ed237046e5915deb70c42401e2aa31a77ca128"
+    },
+    {
+      "file": "after-ep1b06-pc.png",
+      "bytes": 2448952,
+      "sha256": "4145ebd89cf24aa63b7283447534a8b7ca6a4438bfc5d69e6555c9f36d9c3f17",
+      "dimensions": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "file": "after-ep1b07-mobile-detail.json",
+      "bytes": 7198,
+      "sha256": "cbf9acc8d916e969ebe9ec5749592b1f9dd5a7a210f6969ad1af459c0a360f95"
+    },
+    {
+      "file": "after-ep1b07-mobile-detail.png",
+      "bytes": 2729180,
+      "sha256": "496fbf5780615cacbf0ff1839b76c7d1d3d86675279ad499a56659f754ecb7cd",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "after-ep1b07-mobile.json",
+      "bytes": 7190,
+      "sha256": "de37b356bddce3fe096cbe637a44436f8502929deb3429e51273ccec196ec1b7"
+    },
+    {
+      "file": "after-ep1b07-mobile.png",
+      "bytes": 2743403,
+      "sha256": "3b6ae03144b8e090ad1d9bec7b15cf2cd3f4531d33ae6cbc7dd8cc5267086cca",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "after-ep1b07-pc.json",
+      "bytes": 9281,
+      "sha256": "cf83c9a0a2426eea915e2bf41d60f6c42bcf9b3f186807691d41ef460c6364d6"
+    },
+    {
+      "file": "after-ep1b07-pc.png",
+      "bytes": 2501336,
+      "sha256": "3ff794fb094f9f161397d711aae8a81a96c7bf9b2cb8d91c89870fdb196b122f",
+      "dimensions": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "file": "after-ep1b08-mobile-detail.json",
+      "bytes": 4244,
+      "sha256": "b41a2be3636b7cbda1c8203be68c7590b31a511f408677be45442206c156cdeb"
+    },
+    {
+      "file": "after-ep1b08-mobile-detail.png",
+      "bytes": 2923026,
+      "sha256": "117976a1eca9bb39769da3e7571c048c2ecf65bc26094ea3fa37f9d96195235a",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "after-ep1b08-mobile.json",
+      "bytes": 4244,
+      "sha256": "5f9f8f05ae4239f47a9d5df5f441b2130b692e4943c27d24d102d0626eb0a10d"
+    },
+    {
+      "file": "after-ep1b08-mobile.png",
+      "bytes": 2942611,
+      "sha256": "1a2b2bb4d938f0216e8142f7e73f7bae7c9f56580a87ad35e131c4770c62b531",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "after-ep1b08-pc.json",
+      "bytes": 4260,
+      "sha256": "21d0389151292876d44de347de664ed09cebbf96f617ddb343b6b8f18a6c2a6d"
+    },
+    {
+      "file": "after-ep1b08-pc.png",
+      "bytes": 2527070,
+      "sha256": "98d26640115767796d636d70247e24ac760a8e308fbdb34f6af6f8999f5b2d40",
+      "dimensions": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "file": "before-ep1b02-mobile-detail.json",
+      "bytes": 2556,
+      "sha256": "1cdd1959a898767e74d580fa0634b0ebd5285b9cf6e13b495f2dd5537a45c1e5"
+    },
+    {
+      "file": "before-ep1b02-mobile-detail.png",
+      "bytes": 2580122,
+      "sha256": "d918700dbf17232a90588e8e7b4563a37f70f733faa0f63c3e19db427c91dc9a",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "before-ep1b02-mobile.json",
+      "bytes": 2549,
+      "sha256": "8ef697b5a576841268eabb26b5a997e05e5a220b9338f4fb058e5206529ea7da"
+    },
+    {
+      "file": "before-ep1b02-mobile.png",
+      "bytes": 2701958,
+      "sha256": "a0b8b8fc78f2aa0a513431759aad0881c55d5344703924637679e3cf2b64c32a",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "before-ep1b02-pc.json",
+      "bytes": 2562,
+      "sha256": "65f4350f8220f3478bdb8329643815455df109c265781dd2528a4aa268080eb3"
+    },
+    {
+      "file": "before-ep1b02-pc.png",
+      "bytes": 2357634,
+      "sha256": "9f385aaf28ac22cf2bd7975a650ceebf98b7acf0d57c64b6f0cc58e81c80c169",
+      "dimensions": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "file": "before-ep1b03-mobile-detail.json",
+      "bytes": 2571,
+      "sha256": "b1067e01659c680b67fbfb52bd42bc4a9f6c09d4ef026b3b4dcbb40e2081c360"
+    },
+    {
+      "file": "before-ep1b03-mobile-detail.png",
+      "bytes": 2590195,
+      "sha256": "157405a29f8abc41a8e1738230092544043e45cfa0ea673cd59307d72f90d641",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "before-ep1b03-mobile.json",
+      "bytes": 2564,
+      "sha256": "21b126aadf3567bb7ba505adcc60c4ccb5e2dd9bef8f6a6ddd07125f2cd98cc2"
+    },
+    {
+      "file": "before-ep1b03-mobile.png",
+      "bytes": 2721534,
+      "sha256": "c2110b7739d57f01d364dc9744bb15f17d098dddbc2cd4a68af4cfbb149067ad",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "before-ep1b03-pc.json",
+      "bytes": 2577,
+      "sha256": "d5a5f624a1315caeae1cb14a015e84d50b7c8d1b0ead7f9fcebafc4a8133076e"
+    },
+    {
+      "file": "before-ep1b03-pc.png",
+      "bytes": 2398156,
+      "sha256": "3eb45ac3ced418d107d56a7138cc294c0802d50afc62374de6fff09c056c651b",
+      "dimensions": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "file": "before-ep1b04-mobile-detail.json",
+      "bytes": 2561,
+      "sha256": "94b4fbb8110437ea8325a95bc9c7b74ad86788aed386f5048e2913ad752d26e1"
+    },
+    {
+      "file": "before-ep1b04-mobile-detail.png",
+      "bytes": 2588587,
+      "sha256": "650a3e53b59ada1bbe50d829777cfb9d23654f1bfe9f90ad7bd8500d42240a4f",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "before-ep1b04-mobile.json",
+      "bytes": 2554,
+      "sha256": "f0654a11a4476b2ae26a043c420664bf945b8af735d534516dc6f517d22760a9"
+    },
+    {
+      "file": "before-ep1b04-mobile.png",
+      "bytes": 2775945,
+      "sha256": "669dae45cff27ee3ba7c5e672c363d178f2669bc683ac11a435257d57b9815f2",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "before-ep1b04-pc.json",
+      "bytes": 2567,
+      "sha256": "a16576cdd9882551f014320534acd59d44d2095a98683bc93ea086f903b13a6d"
+    },
+    {
+      "file": "before-ep1b04-pc.png",
+      "bytes": 2534347,
+      "sha256": "0fb38959bf61752402da4d2d759ba46ffa8f51e56f79e536b37327b375887248",
+      "dimensions": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "file": "before-ep1b05-mobile-detail.json",
+      "bytes": 2567,
+      "sha256": "e82558e9d7ca79cc248f172cd5e064d61062b240ea76e4fda21f777f17cbe22e"
+    },
+    {
+      "file": "before-ep1b05-mobile-detail.png",
+      "bytes": 2710820,
+      "sha256": "9036703fdb3a918410f5725e8f95dae425df11961b28f6060be268d23a493a04",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "before-ep1b05-mobile.json",
+      "bytes": 2560,
+      "sha256": "797e879c5b9b8ff702f2c7f862d733a9e033c40e985a230c26d9e5f94a6e86ac"
+    },
+    {
+      "file": "before-ep1b05-mobile.png",
+      "bytes": 2888716,
+      "sha256": "5dd663deab5473b659dcbcb7a2b014ac9f0d177069efa92cce2a807de925986c",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "before-ep1b05-pc.json",
+      "bytes": 2573,
+      "sha256": "7fa49bfd2d7eec312afff41a5a959ac087a68391d7d53236f366508d01f772b4"
+    },
+    {
+      "file": "before-ep1b05-pc.png",
+      "bytes": 2798894,
+      "sha256": "f88ed825f8fe64c9052497174ba25fc0deca69766268a5302cab1af6cc7a99c9",
+      "dimensions": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "file": "before-ep1b06-mobile-detail.json",
+      "bytes": 2246,
+      "sha256": "1c92354cbe1d2dfbbf530920ea48d8bf124a72042de38d39f0a4b32fda7ce33c"
+    },
+    {
+      "file": "before-ep1b06-mobile-detail.png",
+      "bytes": 2576288,
+      "sha256": "2ab45f0c315f3104677d9c8a76c8b06d81fa13a952950a516782650469d2362e",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "before-ep1b06-mobile.json",
+      "bytes": 2239,
+      "sha256": "aa997e4b75ad5febec6f6b3abfdf5bf023792fc93c14beee1b709fa88f4160cf"
+    },
+    {
+      "file": "before-ep1b06-mobile.png",
+      "bytes": 2745020,
+      "sha256": "21db70de6101fc73cdc8087f2fcec3d028d514816b79c9a1d845e1169405e69b",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "before-ep1b06-pc.json",
+      "bytes": 2252,
+      "sha256": "4827a41f8385b5c07d3b2b419e4d23e5a8f0b7e185c0d5f0e55b87de9eb51cef"
+    },
+    {
+      "file": "before-ep1b06-pc.png",
+      "bytes": 2520771,
+      "sha256": "e8d7fc511c4afd45185fafef9895b8557ca26ebd452c44a9a0375da6b3581413",
+      "dimensions": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "file": "before-ep1b07-mobile-detail.json",
+      "bytes": 2575,
+      "sha256": "3ff388ce8f7c6954e6925e0d3bb763f6a93817c0e64dd474e81c871d24343bf6"
+    },
+    {
+      "file": "before-ep1b07-mobile-detail.png",
+      "bytes": 2611118,
+      "sha256": "89f2b57edb62db4af29596c943d0a70812bbccd0377c55090cde840dea224d81",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "before-ep1b07-mobile.json",
+      "bytes": 2568,
+      "sha256": "49ff70509b20325f44964384124fe014c6629be0ae88ef3a141dbb90daae3807"
+    },
+    {
+      "file": "before-ep1b07-mobile.png",
+      "bytes": 2674225,
+      "sha256": "d984196f532eed6670e84daced3f570bb54492ecb6c7268f7d8f86df79ab24fe",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "before-ep1b07-pc.json",
+      "bytes": 2581,
+      "sha256": "e81ab782481d0400b5f28dcb2c95c36130b8a3c5f3692da9b31f00475f004386"
+    },
+    {
+      "file": "before-ep1b07-pc.png",
+      "bytes": 2440781,
+      "sha256": "9e4119f1026e5347b5eb5f74f90ae711181bfa014f78a4490f5ad5aa7c816608",
+      "dimensions": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "file": "before-ep1b08-mobile-detail.json",
+      "bytes": 2585,
+      "sha256": "45478ec4ed7d778e8b15471b84cc15ca07ce409c99c48030530e7e65927c116e"
+    },
+    {
+      "file": "before-ep1b08-mobile-detail.png",
+      "bytes": 2920359,
+      "sha256": "4183147f6aa9188ef61652591499286e8382041a24261fefb7e325bee0d77e30",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "before-ep1b08-mobile.json",
+      "bytes": 2578,
+      "sha256": "a775c6ac9af2c584613696e0a98bac53f2fd3919269857c1fe35b2df101ff101"
+    },
+    {
+      "file": "before-ep1b08-mobile.png",
+      "bytes": 2940224,
+      "sha256": "2de95e93ed6d37207d1b696ed5ff50bef8b03f8f4db952f2bea5a99cbd3fabc1",
+      "dimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "file": "before-ep1b08-pc.json",
+      "bytes": 2591,
+      "sha256": "38e73f1d7df7b8bfb149a8d3c61958bb0258d2db31d7c654b7ec3e3f2810edeb"
+    },
+    {
+      "file": "before-ep1b08-pc.png",
+      "bytes": 2591621,
+      "sha256": "de02b50bc98ef024d44ecd384c1af36094486e77ba1df9f4fc76cac0c7a317e0",
+      "dimensions": [
+        1920,
+        1080
+      ]
+    }
+  ],
+  "deliveryRoot": "/workspace/sin-room-art-delivery",
+  "boards": [
+    {
+      "file": "sin-room-art-mobile-01.png",
+      "bytes": 2534945,
+      "sha256": "ce3d809682b4b508d3b8a90d7989be6ab554bd29f78d40da3a31db3d4d311503",
+      "dimensions": [
+        1680,
+        2190
+      ]
+    },
+    {
+      "file": "sin-room-art-mobile-02.png",
+      "bytes": 2046890,
+      "sha256": "0785cdaad9539485b312073fa2ee0126511ce86a4c9996f7ac957ff03e7f169d",
+      "dimensions": [
+        1680,
+        2217
+      ]
+    },
+    {
+      "file": "sin-room-art-pc-01.png",
+      "bytes": 4120100,
+      "sha256": "9b24641c2d1e2825e044ba2e1a93fbc312870f2049772bd0f71446e07353b633",
+      "dimensions": [
+        1984,
+        2897
+      ]
+    },
+    {
+      "file": "sin-room-art-pc-02.png",
+      "bytes": 3036042,
+      "sha256": "318f3638488e1ea59b11864b88b96ed1feeab1b6a0c3ddac2961be23c1b72521",
+      "dimensions": [
+        1984,
+        2269
+      ]
+    }
+  ]
+}
