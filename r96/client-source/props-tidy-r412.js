@@ -25,7 +25,7 @@
 //   그 뒤에도 벽 개수·높이 합(서명)이 바뀌면 그 방 조형물을 다시 잰다. 서사 소품: R117 장면 등불은 솎지 않고, R406 보스 소품은 숨기지 않는다.
 (()=>{'use strict';
 if(window.__STORYWORLD_PROPS_TIDY_R412__)return;
-const REV='R412-props-tidy-10',KEY='storyworld.r412.props';
+const REV='R412-props-tidy-10d',KEY='storyworld.r412.props';
 const prefs={on:true,unwall:true,lamps:true,face:true};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(prefs))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={rooms:0,measured:0,embedded:0,unwalled:0,stuck:0,hidden:0,unseen:0,lampsSeen:0,lampsRemoved:0,faced:0,remeasured:0,refooted:0,wallWaits:0,errors:0};let lastError=null;
@@ -190,6 +190,8 @@ function unwall(r,rep,sampler=samplesOf,budget=14){const L=r.exploration,avoid=a
     const n=embedded(L,x,y,S,lim,ind);if(n<=lim&&(!best||n<best.n)&&!covered(p,x,y,feet))best={x,y,n,s};}}
   if(cut){p.r412Tries=tries+1;if(!again)delete p.r412Sig;pending++;break;}
   p.r412Wall=1;counted();if(!p.r412Emb){p.r412Emb=1;stats.embedded++;rep.embedded++;}// 벽에 든 조형물은 한 번만 센다(벽이 바뀌어 다시 잰 것 포함)
+  // R412-10d 심사: 벽에 기대는 가구(캐비닛·선반·장롱)는 0.6칸 넘게 끌어내면 바닥 한가운데 홀로 선 것처럼 보인다 → 그만큼 못 붙이면 R303 처럼 숨긴다
+  if(best&&best.s>WALL_FURN_MAX&&WALL_FURN.test(String(p.id||'')+' '+artOf(p))&&!p.r406Boss&&!SCENE(p)){p.r303Hide='r412-wall';feet.delete(p);stats.hidden++;rep.hidden=(rep.hidden||0)+1;stats.wallFurnHidden=(stats.wallFurnHidden||0)+1;continue;}
   if(best){const was0={x:fx,y:fy,embedded:+(n0/S.length).toFixed(3)};try{was0.via=setFoot(p,best.x,best.y,on,F);const v=footOf(p,on,F);p.r412Foot=[v.x,v.y];const first=!p.r412Moved;p.r412Moved=first?was0:{...p.r412Moved,via:was0.via,again:(p.r412Moved.again||0)+1};feet.set(p,{x:best.x,y:best.y});if(first){stats.unwalled++;rep.unwalled++;}}catch(e){fail(e);}}
   else{stats.stuck++;p.r412Foot=[fx,fy];const sid=String(p.id||artOf(p)).slice(-48);if(!rep.stuck.includes(sid))rep.stuck.push(sid);
    // 1.8칸 안에 벽 밖 자리가 없고 그림의 15% 넘게 벽 속이면 그 장식은 숨긴다(R303 이 벽 자리를 못 찾은 장식을 숨기는 것과 같은 표시)
@@ -198,9 +200,10 @@ function unwall(r,rep,sampler=samplesOf,budget=14){const L=r.exploration,avoid=a
 
 // ② 등불 솎기
 // 정본 장면에 골라 놓은 서사 소품(R80 장면 소품·R81 장면)은 등불이어도 솎지 않는다(R412-10 심사: dist03 의식 고리 곁 붉은 촛대·화로가 빠져 장면 초점광이 사라짐)
+const WALL_FURN=/cabinet|shelf|shelves|bookcase|wardrobe|locker|cupboard/i,WALL_FURN_MAX=.6;
 const SCENE=p=>!!(p&&(p.r80Dressing||/^r8[01]:scene:/.test(String(p.id||''))));
 function lamps(r,rep,indoor){const L=r.exploration,on=r111On(),F=flipCtx(),list=(r.props||[]).filter(p=>shown(p)&&!untouchable(p)&&!OWN_PAINT(p)&&!p.r117Scene&&!SCENE(p)&&Number.isFinite(p?.x+p?.y)&&isLamp(p));stats.lampsSeen+=list.length;rep.lamps=list.length;if(list.length<2)return;
- const floor=(L.floorCells||[]).length||400,SP=indoor?6.5:8,cap=Math.max(indoor?1:2,Math.round(floor/(indoor?110:320)));
+ const floor=(L.floorCells||[]).length||400,SP=indoor?6.5:8,cap=Math.max(2,Math.round(floor/(indoor?110:320)))/* R412-10d 심사: 실내도 등불 둘은 남긴다(murder01 유일한 등이 빠지던 것) */;
  const others=(r.props||[]).filter(q=>shown(q)&&!isLamp(q)&&Number.isFinite(q?.x+q?.y)&&!q.terrainWall).map(q=>footOf(q,on,F));
  const W=R406()?.walls;
  const score=p=>{const v=footOf(p,on,F),w=typeof W==='function'?(W(L,v.x,v.y)[0]?.d??9):9;let f=9;for(const q of others){const d=Math.hypot(q.x-v.x,q.y-v.y);if(d<f)f=d;}
