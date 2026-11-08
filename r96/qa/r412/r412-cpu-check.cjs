@@ -204,16 +204,18 @@ ok('R329 matches the shadow to the R111/R412 draw spot (r111To), not x/y, and ta
 // ① 입장 직후: 아직 안 잰 조형물은 감추고(HOLD_MS), 잰 뒤에는 FADE_MS 동안 나타난다. 잴 때(bodyOf)는 감추지 않는다.
 {let T=1000;const calls=[];const ctx={globalAlpha:1,_s:[],save(){this._s.push(this.globalAlpha);},restore(){this.globalAlpha=this._s.pop();}};
  const sb2={window:{StoryPhase1:{explorationBlocked:()=>false},__STORYWORLD_PROPS_PLACE_R406__:{walls:()=>[],indoorOf:()=>false}},localStorage:{getItem:()=>null,setItem(){}},setTimeout:()=>0,performance:{now:()=>T},
-  Math,JSON,String,Object,Number,Array,Set,Map,WeakMap,Error,RegExp,ctx,loading:false,room:{id:'h',exploration:{floorCells:[[0,0]],worldR74:{doors:[]}},props:[]},
+  Math,JSON,String,Object,Number,Array,Set,Map,WeakMap,Error,RegExp,ctx,loading:false,started:true,room:{id:'h',exploration:{floorCells:[[0,0]],worldR74:{doors:[]}},props:[]},
   drawProp:function(p){calls.push([p.id,ctx.globalAlpha]);},makeRoom:function(){return sb2.__made;}};
  vm.createContext(sb2);vm.runInContext(src,sb2);const Y=sb2.window.__STORYWORLD_PROPS_TIDY_R412__;
  const p={id:'r74:z:scenery:1',x:3,y:3,path:'assets/x/statue.webp'};sb2.room.props.push(p);
- vm.runInContext('drawProp(room.props[0])',sb2);ok('unmeasured props near the room start are held back (not drawn) instead of popping later',calls.length===0&&p.r412Held>0,{calls});
+ vm.runInContext('drawProp(room.props[0])',sb2);ok('unmeasured props near the room start are held back (drawn almost invisible, HELD_ALPHA) instead of popping later',calls.length===1&&calls[0][1]===Y.HELD_ALPHA&&Y.drawState(p).held>0,{calls});
+ calls.length=0;
  p.r412Wall=1;T+=10;vm.runInContext('drawProp(room.props[0])',sb2);const a1=calls[0]&&calls[0][1];
  T+=Y.FADE_MS+5;vm.runInContext('drawProp(room.props[0])',sb2);const a2=calls[1]&&calls[1][1];
- ok('once measured they fade in over FADE_MS (alpha ramps from near 0 to 1), then draw normally',a1<.2&&a2===1&&!p.r412FadeT,{a1,a2});
+ ok('once measured they fade in over FADE_MS (alpha ramps from near 0 to 1), then draw normally',a1<.2&&a2===1&&!Y.drawState(p).fadeT,{a1,a2});
+ ok('drawing never writes onto the prop object (R86 door check compares props JSON before/after drawing)',JSON.stringify(p)===JSON.stringify({id:'r74:z:scenery:1',x:3,y:3,path:'assets/x/statue.webp',r412Wall:1}),p);
  const q={id:'r74:z:scenery:2',x:5,y:5,path:'assets/x/statue.webp',r412Wall:1};sb2.room.props.push(q);vm.runInContext('drawProp(room.props[1])',sb2);const n0=calls.length;
- q.r303Flip=true;q.r412FadeT=T;T+=50;vm.runInContext('drawProp(room.props[1])',sb2);ok('a change to an already-drawn prop (move/flip) fades the new look in instead of snapping',calls.length===n0+1&&calls[n0][1]>0&&calls[n0][1]<1,{a:calls[n0]});
+ q.r303Flip=true;Y.changed(q);T+=50;vm.runInContext('drawProp(room.props[1])',sb2);ok('a change to an already-drawn prop (move/flip) fades the new look in instead of snapping',calls.length===n0+1&&calls[n0][1]>0&&calls[n0][1]<1,{a:calls[n0]});
  T+=Y.HOLD_MS+10;const z={id:'r74:z:scenery:3',x:7,y:7,path:'assets/x/statue.webp'};sb2.room.props.push(z);vm.runInContext('drawProp(room.props[2])',sb2);ok('after HOLD_MS unmeasured props draw normally (never hidden for long)',calls[calls.length-1][0]==='r74:z:scenery:3'&&calls[calls.length-1][1]===1);
  const w={id:'r74:z:wall-banner:4',x:2,y:2,path:'assets/x/banner.webp'};T=sb2.performance.now();sb2.room={...sb2.room,props:[w]};vm.runInContext('drawProp(room.props[0])',sb2);ok('wall dressing (WALLISH) and untouchable props are never held',calls[calls.length-1][0]==='r74:z:wall-banner:4');
  ok('bodyOf measuring passes through the hold (measuring counter around its drawProp calls)',/ctx=g;measuring\+\+;/.test(src)&&/try\{drawProp\(p\);if\(!rec\.length\)drawProp\(p\);\}finally\{measuring--;\}/.test(src));
@@ -221,7 +223,9 @@ ok('R329 matches the shadow to the R111/R412 draw spot (r111To), not x/y, and ta
  const cells=[];for(let x=0;x<20;x++)for(let y=0;y<20;y++)cells.push([x,y]);const lampsP=[];for(let i=0;i<5;i++)lampsP.push({id:'lamp'+i,x:3+i*2,y:10,path:'assets/r406/lights/lantern-bulb-post.png'});
  const sofa={id:'r224:furn:m:0',x:1,y:6,path:'assets/world-r80/r80-148.webp',r224Furniture:true};sb2.window.__STORYWORLD_PROPS_PLACE_R406__={walls:(L,x,y)=>x<2?[{dx:-1,dy:0,side:'-x',d:.7}]:[{dx:0,dy:-1,side:'-y',d:3}],indoorOf:()=>true};
  sb2.__made={id:'made',exploration:{floorCells:cells,worldR74:{doors:[]}},props:[...lampsP,sofa]};const made=vm.runInContext('makeRoom()',sb2);
- ok('makeRoom hook: lamps are thinned and wall furniture faced before the first frame (no late pop)',Array.isArray(made.r412Lamps)&&made.r412Lamps.length>=1&&sofa.r303Flip===true&&Y.inspect().stats.early>=1,{lamps:made.r412Lamps&&made.r412Lamps.length,flip:sofa.r303Flip});}
+ ok('makeRoom hook: lamps are thinned and wall furniture faced before the first frame (no late pop)',Array.isArray(made.r412Lamps)&&made.r412Lamps.length>=1&&sofa.r303Flip===true&&Y.inspect().stats.early>=1,{lamps:made.r412Lamps&&made.r412Lamps.length,flip:sofa.r303Flip});
+ sb2.started=false;const sofa2={id:'r224:furn:m:1',x:1,y:6,path:'assets/world-r80/r80-148.webp',r224Furniture:true},lp2=lampsP.map(q=>({id:q.id+'b',x:q.x,y:q.y,path:q.path}));sb2.__made={id:'made2',exploration:{floorCells:cells,worldR74:{doors:[]}},props:[...lp2,sofa2]};const before2=JSON.stringify(sb2.__made.props),made2=vm.runInContext('makeRoom()',sb2);sb2.started=true;
+ ok('outside live play (test harness getRoom, game not started) makeRoom leaves props untouched',JSON.stringify(made2.props)===before2&&!made2.r412Lamps);}
 // ③ 옮길 자리 앞 이웃이 그림의 1/4 넘게 덮으면 버린다
 {const sb3={window:{},localStorage:{getItem:()=>null,setItem(){}},setTimeout:()=>0,Math,JSON,String,Object,Number,Array,Set,Map,WeakMap,Error,RegExp,zoom:1,project:(x,y)=>({x:(x-y)*34,y:(x+y)*17})};
  vm.createContext(sb3);vm.runInContext(src,sb3);const Z=sb3.window.__STORYWORLD_PROPS_TIDY_R412__;

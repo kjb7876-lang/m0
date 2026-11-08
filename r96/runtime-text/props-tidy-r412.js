@@ -25,7 +25,7 @@
 //   그 뒤에도 벽 개수·높이 합(서명)이 바뀌면 그 방 조형물을 다시 잰다. 서사 소품: R117 장면 등불은 솎지 않고, R406 보스 소품은 숨기지 않는다.
 (()=>{'use strict';
 if(window.__STORYWORLD_PROPS_TIDY_R412__)return;
-const REV='R412-props-tidy-9',KEY='storyworld.r412.props';
+const REV='R412-props-tidy-10',KEY='storyworld.r412.props';
 const prefs={on:true,unwall:true,lamps:true,face:true};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(prefs))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={rooms:0,measured:0,embedded:0,unwalled:0,stuck:0,hidden:0,unseen:0,lampsSeen:0,lampsRemoved:0,faced:0,remeasured:0,refooted:0,wallWaits:0,errors:0};let lastError=null;
@@ -55,7 +55,10 @@ function spotOf(p,on=r111On()){const t=p&&p.r111To;return on&&t&&Number.isFinite
 // 보이는 발 자리: 그리는 자리를 x·y 의 화면 세로선에 비춘 곳(뒤집힌 소품만)
 function footOf(p,on=r111On(),F=flipCtx()){const t=spotOf(p,on);if(t===p)return p;if(!mirrored(p,F))return t;return{x:p.x+(t.y-p.y),y:p.y+(t.x-p.x)};}
 // 보이는 발 자리를 (x,y)로: R111 이 켜져 있으면 숨은 r111To 만(뒤집힌 소품은 거울 반대로), 아니면 x·y
-function setFoot(p,x,y,on=r111On(),F=flipCtx()){if(p&&p.r412Drawn===visit)p.r412FadeT=now();/* 이미 보인 것은 새 자리에 0.2초 동안 나타나게 */ver++;if(on&&!OWN_PAINT(p)){let dx=x-p.x,dy=y-p.y;if(mirrored(p,F))[dx,dy]=[dy,dx];Object.defineProperty(p,'r111To',{value:{x:+(p.x+dx).toFixed(3),y:+(p.y+dy).toFixed(3)},configurable:true});return 'r111To';}p.x=+x.toFixed(3);p.y=+y.toFixed(3);return 'xy';}
+// 그리기 상태(감춤·보임·나타나기)는 조형물 객체가 아니라 WeakMap 에 둔다(R412-10: 그리기가 조형물 JSON 을 바꾸면 R86 문 검사가 깨진다)
+const DS=new WeakMap();function ds(p){let d=DS.get(p);if(!d)DS.set(p,d={held:0,drawn:0,fadeT:0,eligV:0,elig:false});return d;}
+function changed(p){if(p&&DS.get(p)?.drawn===visit)ds(p).fadeT=now();}
+function setFoot(p,x,y,on=r111On(),F=flipCtx()){changed(p);/* 이미 보인 것은 새 자리에 0.2초 동안 나타나게 */ver++;if(on&&!OWN_PAINT(p)){let dx=x-p.x,dy=y-p.y;if(mirrored(p,F))[dx,dy]=[dy,dx];Object.defineProperty(p,'r111To',{value:{x:+(p.x+dx).toFixed(3),y:+(p.y+dy).toFixed(3)},configurable:true});return 'r111To';}p.x=+x.toFixed(3);p.y=+y.toFixed(3);return 'xy';}
 
 // ---- 분류 ------------------------------------------------------------------------------------------
 const artOf=p=>String(p?.r81NativeSkin?.path||p?.path||p?.r74Prop||'');
@@ -222,7 +225,7 @@ function face(r,rep){const L=r.exploration,W=R406()?.walls;if(typeof W!=='functi
  for(const p of r.props){if(!p||p.r412Face||!shown(p)||untouchable(p)||OWN_PAINT(p)||!Number.isFinite(p.x+p.y))continue;p.r412Face=1;const art=artOf(p),cab=p.r303Wall==='w'||p.r303Wall==='n';
   if(!cab&&(!R80ART.test(art)||FREE_STANDING.test(art)))continue;
   let side=cab?(p.r303Wall==='w'?'-x':'-y'):null;if(!side){const back=W(L,p.x,p.y).filter(q=>(q.dx<0||q.dy<0)&&q.d<=1.2)[0];if(!back)continue;side=back.side;}
-  const flip=(NATIVE_X.test(art)?side==='-y':side==='-x')!==r140Flips(p,F);if(!!p.r303Flip!==flip){const v=footOf(p,on,F),had=on&&p.r111To,m0=mirrored(p,F);if(p.r412Drawn===visit)p.r412FadeT=now();ver++;if(flip)p.r303Flip=true;else delete p.r303Flip;
+  const flip=(NATIVE_X.test(art)?side==='-y':side==='-x')!==r140Flips(p,F);if(!!p.r303Flip!==flip){const v=footOf(p,on,F),had=on&&p.r111To,m0=mirrored(p,F);changed(p);ver++;if(flip)p.r303Flip=true;else delete p.r303Flip;
    const m1=mirrored(p,F),k=m0!==m1?pivotShift(p,art):0;if(Math.abs(k)>.01){const d=m1?k:-k;setFoot(p,v.x+d,v.y-d,on,F);p.r412Pivot=+d.toFixed(3);}else if(had)setFoot(p,v.x,v.y,on,F);/* 그림만 뒤집고 몸 자리는 그대로 */stats.faced++;rep.faced++;}p.r412Face=side;}}
 // R303·R406 이 이 방을 먼저 다 본 뒤에 손댄다(그 둘이 옮기고 뒤집은 결과 위에서 재고 맞춘다)
 function ready(r){try{const a=R303(),b=R406();const ra=!a||a.inspect?.().on===false||!!a.inspect?.().room,rb=!b||b.inspect?.().prefs?.on===false||!!b.inspect?.().room;return ra&&rb;}catch(_){return true;}}
@@ -240,23 +243,28 @@ function refoot(r,rep){if(!prefs.unwall)return 0;const on=r111On(),F=flipCtx();l
 function newRep(r,sig){return{room:r.id,zone:r.exploration.samongR115?.zone||null,indoor:indoorOf(r),embedded:0,unwalled:0,stuck:[],hidden:0,lamps:0,lampsRemoved:0,lampsKept:0,faced:0,n:-1,pending:0,waiting:0,lampsDone:false,wallSig:sig,remeasured:0};}
 // R412 심사(VFX): 입장 뒤 0.9~12초 늦게 등불이 꺼지고 가구가 뒤집히던 팝 → 방을 만들 때(첫 그리기 전) R303·R406 을 먼저 마치게 하고 방향·등불을 바로 정한다
 //  (둘 다 그림·R115 벽 높이가 필요 없다). 벽 빼기(unwall)는 그림을 그려 봐야 해서 아래 그리기 감싸기로 잠깐 감췄다가 나타나게 한다.
-function early(r){if(!prefs.on||!r?.exploration||!Array.isArray(r.props))return;fresh();
+// 실제 플레이(started)에서만: 게임을 시작하지 않은 검사 하네스의 getRoom 은 조형물 자리·목록을 그대로 둔다(R412-10)
+function early(r){if(!prefs.on||!r?.exploration||!Array.isArray(r.props))return;if(typeof started==='undefined'||!started)return;fresh();
  try{R303()?.apply?.(r);}catch(e){fail(e);}try{R406()?.apply?.(r);}catch(e){fail(e);}
  let rep=reports.get(r);if(!rep||done.get(r)!==r.exploration){rep=newRep(r,wallSig(r.exploration));reports.set(r,rep);done.set(r,r.exploration);stats.rooms++;}
  try{if(prefs.face)face(r,rep);if(prefs.lamps&&!rep.lampsDone){lamps(r,rep,rep.indoor);rep.lampsDone=true;}stats.early=(stats.early||0)+1;}catch(e){fail(e);}rep.n=-1;}
 try{if(typeof makeRoom==='function'){const base=makeRoom;makeRoom=function(...a){const r=base.apply(this,a);try{early(r);}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
 // 그리기 감싸기: ① 방에 들어온 뒤 HOLD_MS 안에는 아직 안 잰(벽 빼기 대상) 조형물을 그리지 않는다 → 잰 자리에서 FADE_MS 동안 나타난다.
-//  ② 이미 보인 조형물을 옮기거나 뒤집으면(r412FadeT) 새 모습이 FADE_MS 동안 나타난다. bodyOf 로 잴 때는 그대로 그린다.
+//  ② 이미 보인 조형물을 옮기거나 뒤집으면(changed → fadeT) 새 모습이 FADE_MS 동안 나타난다. bodyOf 로 잴 때는 그대로 그린다.
 const HOLD_MS=2500,FADE_MS=200;
-function holdable(p){if(p.r412EligV!==visit){p.r412EligV=visit;p.r412Elig=!!(shown(p)&&!untouchable(p)&&!OWN_PAINT(p)&&Number.isFinite(p.x+p.y)&&!WALLISH.test(String(p.id||'')+' '+artOf(p)));}return p.r412Elig;}
+function holdable(p,d){if(d.eligV!==visit){d.eligV=visit;d.elig=!!(shown(p)&&!untouchable(p)&&!OWN_PAINT(p)&&Number.isFinite(p.x+p.y)&&!WALLISH.test(String(p.id||'')+' '+artOf(p)));}return d.elig;}
+// 감출 때도 그리기는 한다(아주 옅게): 그리기 명령을 세는 검사·그림 미리 읽기가 끊기지 않게(R412-10)
+const HELD_ALPHA=.04;
+function faint(base,self,args,k){ctx.save();try{ctx.globalAlpha*=k;return base.apply(self,args);}finally{ctx.restore();}}
 function installDraw(){if(typeof drawProp!=='function')return false;const base=drawProp;
  drawProp=function(p,...a){if(!p||measuring||!prefs.on||!prefs.unwall||typeof room==='undefined'||!room)return base.apply(this,[p,...a]);
   try{if(room!==lastRoom){lastRoom=room;visit++;visitAt=now();}
-   if(!p.r412Wall&&now()-visitAt<HOLD_MS&&!loading&&holdable(p)){p.r412Held=visit;stats.held=(stats.held||0)+1;return;}
-   if(p.r412Held===visit&&p.r412Wall){p.r412Held=0;if(p.r412Drawn!==visit)p.r412FadeT=now();}
-   const t=p.r412FadeT?(now()-p.r412FadeT)/FADE_MS:1;p.r412Drawn=visit;
-   if(t<1&&t>=0){const k=Math.max(.04,t*t*(3-2*t));ctx.save();try{ctx.globalAlpha*=k;return base.apply(this,[p,...a]);}finally{ctx.restore();}}
-   if(p.r412FadeT)p.r412FadeT=0;}catch(e){fail(e);}
+   const d=ds(p);
+   if(!p.r412Wall&&now()-visitAt<HOLD_MS&&!loading&&holdable(p,d)){d.held=visit;stats.held=(stats.held||0)+1;return faint(base,this,[p,...a],HELD_ALPHA);}
+   if(d.held===visit&&p.r412Wall){d.held=0;if(d.drawn!==visit)d.fadeT=now();}
+   const t=d.fadeT?(now()-d.fadeT)/FADE_MS:1;d.drawn=visit;
+   if(t<1&&t>=0)return faint(base,this,[p,...a],Math.max(HELD_ALPHA,t*t*(3-2*t)));
+   if(d.fadeT)d.fadeT=0;}catch(e){fail(e);}
   return base.apply(this,[p,...a]);};return true;}
 let drawInstalled=false;try{drawInstalled=installDraw();}catch(e){fail(e);}
 function apply(r,opt={}){if(!prefs.on||!r?.exploration||!Array.isArray(r.props))return null;fresh();const L=r.exploration;
@@ -285,6 +293,6 @@ function step(d){let next=900;
  if(next===0&&IDLE)IDLE(step,{timeout:100});else setTimeout(step,next||32);}
 setTimeout(step,0);
 function set(o={}){for(const k of Object.keys(prefs))if(typeof o[k]==='boolean')prefs[k]=o[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
-window.__STORYWORLD_PROPS_TIDY_R412__=Object.freeze({revision:REV,set,apply,early,covered,rectAt,isFlame,NATIVE_X,HOLD_MS,FADE_MS,ver:()=>ver,isLamp,untouchable,samplesOf,embedded,solidAt,inWallBox,bodyOf,r140Flips,mirrored,spotOf,footOf,pathD,wallSig,wallsDressed,WALLISH,LAMP,R80ART,WALL_H,
+window.__STORYWORLD_PROPS_TIDY_R412__=Object.freeze({revision:REV,set,apply,early,covered,rectAt,isFlame,NATIVE_X,HOLD_MS,FADE_MS,ver:()=>ver,isLamp,untouchable,drawState:p=>({...ds(p)}),changed,HELD_ALPHA,samplesOf,embedded,solidAt,inWallBox,bodyOf,r140Flips,mirrored,spotOf,footOf,pathD,wallSig,wallsDressed,WALLISH,LAMP,R80ART,WALL_H,
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},room:typeof room!=='undefined'&&room?(reports.get(room)||null):null,lastError,collisionChanged:false,savesTouched:false})});
 })();
