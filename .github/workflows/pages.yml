@@ -414,6 +414,8 @@ jobs:
         run: node r96/qa/r406/r406-cpu-check.cjs
       - name: R409 combat readability (enemy/hero outlines, cast sigil behind caster, big hero FX veiled over enemies) CPU check
         run: node r96/qa/r409/r409-cpu-check.cjs
+      - name: R420 view options (brightness slider, text size, portal label fade near hero, lazy hero awakening art) CPU check
+        run: node r96/qa/r420/r420-cpu-check.cjs
       - name: R381 recorded narration voice (Qwen3-TTS Sohee) for cinema mode CPU check
         run: node r96/qa/r381/r381-cpu-check.cjs
       - name: R376 real difficulty + cinema HUD CPU check
