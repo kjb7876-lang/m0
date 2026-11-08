@@ -5916,7 +5916,35 @@
     "assets/r118/tiles/hotel.webp",
     "assets/r118/tiles/rooftop.webp",
     "assets/r118/tiles/swampmud.webp",
-    "assets/r118/tiles/theatre.webp"
+    "assets/r118/tiles/theatre.webp",
+    "props-place-r406.js",
+    "assets/r406/lights/lantern-bulb-hang.png",
+    "assets/r406/lights/lantern-bulb-post.png",
+    "assets/r406/props/bleacher.webp",
+    "assets/r406/props/dining-set.webp",
+    "assets/r406/props/duel-wall.webp",
+    "assets/r406/props/gilded-shells.webp",
+    "assets/r406/props/gold-chair.webp",
+    "assets/r406/props/index.json",
+    "assets/r406/props/judgment-altar.webp",
+    "assets/r406/props/judgment-scale.webp",
+    "assets/r406/props/kitchen-bench.webp",
+    "assets/r406/props/lectern.webp",
+    "assets/r406/props/record-book.webp",
+    "assets/r406/props/ribbon-chair.webp",
+    "assets/r406/props/ring-section.webp",
+    "assets/r406/props/server-cooler.webp",
+    "assets/r406/props/seventh-trumpet.webp",
+    "assets/r406/props/sewing-box.webp",
+    "assets/r406/props/spectator-stand.webp",
+    "assets/r406/props/tailor-window.webp",
+    "assets/r406/props/teapot.webp",
+    "assets/r406/props/tethered-chair.webp",
+    "assets/r406/props/throne-dais.webp",
+    "assets/r406/props/time-platform.webp",
+    "assets/r406/props/uniform-display.webp",
+    "assets/r406/props/verdict-fissure.webp",
+    "assets/r406/props/victory-coat.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -6991,5 +7019,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "1f9ba733604b1fb150c9e3856d125770da5db78a90f4661e12b3b798fe72dd36"
+  "runtimeManifestSHA256": "6dccb9964eec850c321f32890e448ef15262c9ed61aa76049ceb5d181ce0f281"
 }
