@@ -76,7 +76,7 @@ const ZONES={
  // 잠들지 못하는 마을(4부): 바닷가 마을 — 포장 돌길·모래, 낮은 언덕, 둔덕 위 풀
  last302:{seed:0x5d3020,tint:[.9,.88,.84],floorBGain:1.03,topK:1.9,floorK:1.05,hiTop:1.4,loTop:.5,bulge:.8,widen:false,web:false,pillars:false,boulders:1/130,
   decalMix:{near:[[5,3],[6,3],[2,1],[11,1]],open:[[0,2],[5,3],[6,2],[7,2]]},decalDensity:13,tufts:['assets/r138/props/weed.webp',.1,1/60],
-  tex:{floorA:['assets/r99/outdoor/ground-paving.webp',0],floorB:['assets/r118/tiles/sandgold.webp',0],rock:['assets/r99/outdoor/surround-cliff.webp',-1],face:['assets/r99/outdoor/ground-cliff.webp',1]}},
+  tex:{floorA:['assets/r118/tiles/sleepport.webp',0],floorB:['assets/r118/tiles/sandgold.webp',0],rock:['assets/r99/outdoor/surround-cliff.webp',-1],face:['assets/r99/outdoor/ground-cliff.webp',1]}},/* R407: 드라이브 SW-TILE B19 포구 젖은 모래(전엔 포장 돌길) */
  // 한약과 불면귀(4부): 약초 마을 — 돌길·풀밭, 살아 있는 나무 몇 그루
  last303:{seed:0x5d3030,tint:[.88,.9,.8],floorBGain:1.02,topK:1.9,floorK:1.03,hiTop:1.4,loTop:.48,bulge:.85,widen:false,web:false,pillars:false,trees:'living',boulders:1/150,
   decalMix:{near:[[2,2],[11,2],[5,2],[6,2]],open:[[0,1],[11,2],[5,2],[6,2],[7,1]]},decalDensity:12,tufts:['assets/r138/props/weed.webp',.11,1/40],
@@ -107,7 +107,7 @@ const ZONES={
  // 타락천사 기사(4부, coast): 바닷가 성채 — 포장 돌·모래, 바위 둔덕
  last301:{seed:0x5d3010,tint:[.88,.88,.9],floorBGain:1.03,hiTop:1.6,loTop:.5,bulge:.8,widen:false,web:false,pillars:false,boulders:1/140,floorK:1.05,topK:2.0,
   decalMix:{near:[[5,3],[6,3],[0,2],[8,.6]],open:[[0,3],[5,3],[6,2],[7,2],[8,.5]]},decalDensity:13,
-  tex:{floorA:['assets/r99/outdoor/ground-paving.webp',0],floorB:['assets/r118/tiles/sandgold.webp',0],rock:['assets/r99/outdoor/surround-cliff.webp',-1],face:['assets/r118/tiles/castle.webp',1]}},
+  tex:{floorA:['assets/r118/tiles/blackkeep.webp',0],floorB:['assets/r118/tiles/sandgold.webp',0],rock:['assets/r99/outdoor/surround-cliff.webp',-1],face:['assets/r118/tiles/blackkeep.webp',1]}},/* R407: 드라이브 SW-TILE B19 해안 성채 슬레이트(전엔 포장 돌길·성 벽돌) */
  // 성 안에 소환된 의목사(hando, stone): 성 안뜰 — 성 돌바닥, 잔해 윗면
  hando01:{seed:0x5d6010,tint:[.9,.86,.84],floorBGain:1.03,hiTop:1.75,loTop:.55,bulge:.7,widen:false,web:false,pillars:false,boulders:1/130,floorK:1.1,topK:2.0,
   decalMix:{near:[[5,3],[6,3],[0,2],[8,1]],open:[[0,3],[5,3],[6,2],[7,2],[8,.6]]},decalDensity:13,
