@@ -25,7 +25,7 @@
 //    기술은 전투라서 그래픽 품질과 상관없이 그린다. 협동 손님은 시전·판정을 하지 않는다(R330 과 같음).
 (()=>{'use strict';
 if(window.__STORYWORLD_THEME_FX_R430__)return;
-const REV='R430-theme-fx-2-r431',KEY='storyworld.r430.themefx',D='assets/r430/',CELL=192;
+const REV='R430-theme-fx-3-r431',KEY='storyworld.r430.themefx',D='assets/r430/',CELL=192;
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const stats={rooms:0,spots:0,draws:0,bursts:0,skippedQuality:0,errors:0,dots:0,dotSerial:0};let lastError=null,last=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const fin=v=>Number.isFinite(v),T=()=>typeof time==='number'?time:0;
@@ -135,7 +135,7 @@ function afflict(a,key,owner){const d=ST[key];if(!d||!a||!(a.hp>0))return false;
   if(d.atk&&a===player)try{player.attackCD=Math.min(.9,Math.max(0,Number(player.attackCD)||0)+d.atk);}catch(_){}}
  else{cur.until=Math.max(cur.until,t+d.dur);if(owner)cur.owner=owner;}return true;}
 function dotHit(a,key,s){const d=ST[key];let mh=100;try{mh=Math.max(1,Number(maxHP())||100);}catch(_){}
- const dmg=mh*d.dmg*(easy()?.6:1),src={type:'r431-status',status:key,r431:true,owner:s.owner?.id,coopEventR62:'r431:'+key+':'+(++stats.dotSerial)};
+ const dmg=mh*d.dmg*(easy()?.6:1),src={type:'r431-status',status:key,r431:true,periodic:true,dot:true,/* R71 이 최대 체력 기준 도트를 다시 키우지 않게(Codex 리뷰) */owner:s.owner?.id,coopEventR62:'r431:'+key+':'+(++stats.dotSerial)};
  const run=()=>{const inv=player.invincible,why=player.invReason;let sh;try{sh=shake;}catch(_){}const r=hurt(dmg,src);
   if(r==='hit'||r==='blocked'){player.invincible=inv;player.invReason=why;try{if(sh!==undefined)shake=sh;}catch(_){}}return r;};
  try{const c=COOP();if(c?.mode?.()==='host'&&typeof c.withPlayer==='function')c.withPlayer(a,run);else if(a===player)run();stats.dots++;}catch(e){fail(e);}}
@@ -162,7 +162,8 @@ function castSkill(e,kind,tg){const t=T(),K=KIND[kind],n=e.hp/Math.max(1,e.maxHp
  stats.casts=(stats.casts||0)+1;try{if(typeof toast==='function'&&stats.casts<=3)toast('보스 기술 · '+(SKILL_NAME[kind]||kind)+' — '+(e.name||'보스'),2.2);}catch(_){}
  for(const n2 of[K.sheet])image(n2);}
 function tickSkill(){const t=T();casts=casts.filter(c=>c.room===room&&t<c.end&&(c.sigil?bossLive(c.owner):true));
- if(!skillOn||guest()||typeof room==='undefined'||!room||typeof layer!=='undefined'&&layer!=='STORY')return;const kind=skillKind(room.id);if(!kind)return;
+ /* 협동: 기술 자리는 스냅숏으로 손님에게 가지 않으므로 협동 중에는 쓰지 않는다(보이지 않는 피해 방지 — Codex 리뷰, 멀티 보류 중) */let co='off';try{co=COOP()?.mode?.()||'off';}catch(_){}
+ if(!skillOn||co!=='off'||typeof room==='undefined'||!room||typeof layer!=='undefined'&&layer!=='STORY')return;const kind=skillKind(room.id);if(!kind)return;
  for(const e of room.enemies||[]){if(!bossLive(e))continue;let tg=null,bd=1e9;for(const a of heroes()){if(!(a&&a.hp>0))continue;const d=Math.hypot(a.x-e.x,a.y-e.y);if(d<bd){bd=d;tg=a;}}
   if(!tg||bd>11){if(e.r431Next)e.r431Next=Math.max(e.r431Next,t+2);continue;}
   if(!e.r431Next){e.r431Next=t+4+Math.random()*2;continue;}

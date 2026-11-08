@@ -17,6 +17,8 @@ ok('4 black-flame sheets exist, hash = index = manifest',Object.keys(idx.fx).len
 ok('no forbidden CSS filters',!/drop-shadow|blur\(/.test(src+fxs));
 ok('boss placed first (takes the boss-room centre point)',/filter\(e=>alive\(e\)&&major\(e\)\)\.sort\(\(a,b\)=>\(b\.boss\?1:0\)-\(a\.boss\?1:0\)\)/.test(C('world-combat-r78.js')));
 ok('R114 exposes throwInfo',/throwInfo:t=>\{const i=throwInfo\.get\(t\)/.test(C('combat-r114.js')));
+ok('status ticks marked periodic (no R71 re-normalisation)',/type:'r431-status'[^}]*periodic:true,dot:true/.test(fxs));
+ok('boss skill off in co-op (areas are not replicated to guests)',/co!=='off'/.test(fxs));
 ok('Mammon vault excluded (leash + skill)',/room\.id==='ep1b06'/.test(src)&&/id==='ep1b06'/.test(fxs));
 // ---- 가짜 게임 ----
 let t=0;const effects=[],draws=[],hurts=[];
@@ -46,7 +48,7 @@ ok('effects last 6 s after a 0.9 s warning',cs.every(c=>Math.abs(c.end-c.start-6
 ok('first effect lands on the hero',cs.some(c=>Math.hypot(c.x-player.x,c.y-player.y)<1.5));
 // 닿음 → 상태이상 + 도트(무적·흔들림 안 줌)
 step(1.2);const st=A.status();ok('touching skill effect gives 화상 (burn)',!!st.burn,JSON.stringify(st));
-ok('DoT goes through hurt and stays small',hurts.length>=1&&hurts.every(h=>h.d<=500*.02+1e-9),hurts.length);
+ok('DoT goes through hurt and stays small',hurts.length>=1&&hurts.every(h=>h.s.periodic===true)&&hurts.every(h=>h.d<=500*.02+1e-9),hurts.length);
 ok('DoT does not grant i-frames or shake',player.invincible===0&&sb.shake===0);
 const n0=hurts.length;player.x=35;player.y=35;step(8);const n1=hurts.length;step(2);ok('status ends after leaving (no endless DoT)',hurts.length===n1&&!A.status().burn,hurts.length-n0);
 ok('cast cooldown 12-15 s',(()=>{const k=A.casts().length;return true;})());
