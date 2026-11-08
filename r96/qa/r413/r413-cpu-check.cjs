@@ -39,6 +39,8 @@ const roomOf=(walls,o={})=>({id:o.id||'kair02',layer:o.layer||'STORY',exploratio
  const w2=world({room:r,r204:{zone:'kair02',decorOnly:true}});w2.sb.drawProp({id:'d',r74Door:d});ok('...but detail-only R204 regions (original walls) still get lintels',w2.scopes.length===1);}
 {const d=door(),r=roomOf(wallsOf(2.85,2.85));r.exploration.r204Widened={added:3};const w=world({room:r,r204:{zone:'kair01',decorOnly:false}});w.sb.drawProp({id:'d',r74Door:d});
  ok('R204-widened (organic) layouts are skipped from the first frame, before R204 has built its 3D state for this region',w.scopes.length===0&&w.X.inspect().stats.skipped===1);}
+{const d=door(),r=roomOf(wallsOf(2.85,3.31));delete r.exploration.surface.art.path;const w=world({room:r});w.sb.drawProp({id:'d',r74Door:d});
+ ok('wall art not ready yet: no band at all (never a flat grey stand-in that would float over the door)',w.scopes.length===0&&w.X.inspect().stats.skipped===1&&!/#687874|fillStyle/.test(code));}
 {const d=door(),r=roomOf(wallsOf(2.85,2.85),{layer:'DREAM'}),w=world({room:r});w.sb.drawProp({id:'d',r74Door:d});ok('samong (DREAM) doors, where R83 is off, are left alone',w.scopes.length===0);}
 {const d=door(),walls=[{id:'f',x:16.6,y:20,width:.3,depth:.3,height:.01},{id:'deco',x:23.4,y:20,width:.3,depth:.3,height:3.5,decorative:true},...wallsOf(2.85,3.15)],r=roomOf(walls),w=world({room:r});
  ok('furniture collision boxes and decorative walls are not jamb walls',w.X.jambTop(r.exploration,d)===2.85);}

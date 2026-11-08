@@ -7,7 +7,7 @@
 //  사몽(R83 꺼짐)은 그대로. 끄기: localStorage['storyworld.r413.doors']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_DOORS_FIT_R413__)return;
-const REV='R413-doors-2',KEY='storyworld.r413.doors',DOOR_H=2.7,JAMB=.24,MIN_GAP=.04,MAX_TOP=4.2;
+const REV='R413-doors-3',KEY='storyworld.r413.doors',DOOR_H=2.7,JAMB=.24,MIN_GAP=.04,MAX_TOP=4.2;
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const stats={lintels:0,skipped:0,culled:0,errors:0};let lastError=null,last=null;const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 const R83=()=>window.__STORYWORLD_WORLD_DOORS_R83__,R74=()=>window.__STORYWORLD_WORLD_R74__;
@@ -23,7 +23,6 @@ function jambTop(L,d){if(!L||!d)return null;const sig=wallSig(L);let m=memo.get(
  const t=hs.length?Math.min(...hs):null;m.tops.set(k,t);return t;}
 // R204 유기 지형: 넓힌 배치(r204Widened)는 들어온 첫 프레임부터 안다 — R204 3D 상태(__r204)는 몇 프레임 뒤에 생기므로 그 전에 띠가 한 번 그려지지 않게.
 const dark=r=>{try{if(r.exploration?.r204Widened)return true;const st=window.__STORYWORLD_PHASE1__?.controller?.state?.three?.__r204;return !!(st&&st.zone===r.id&&!st.decorOnly&&!st.failed);}catch(_){return false;}};
-function polygon(ps){ctx.beginPath();ps.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.closePath();}
 function onScreen(ps){return Math.max(...ps.map(p=>p.x))>=-16&&Math.min(...ps.map(p=>p.x))<=W+16&&Math.max(...ps.map(p=>p.y))>=-16&&Math.min(...ps.map(p=>p.y))<=H+16;}
 // R83 벽 띠와 같은 붙이기: 벽 그림을 띠 비율대로 잘라(R347 cropRect) 네 꼭짓점에 맞춘다
 function patch(image,rect0,ps,key){const T=R83(),rect=typeof T?.cropRect==='function'?T.cropRect(rect0,ps,key):rect0,[sx,sy,sw,sh]=rect,[a,b,,d]=ps;ctx.save();try{ctx.transform((b.x-a.x)/sw,(b.y-a.y)/sw,(d.x-a.x)/sh,(d.y-a.y)/sh,a.x,a.y);ctx.drawImage(image,sx,sy,sw,sh,0,0,sw,sh);}finally{ctx.restore();}}
@@ -33,9 +32,10 @@ function lintel(p,r){const T=R83(),d=p?.r74Door;if(!T||!d||typeof T.geometry!=='
  const along=u=>d.axis==='x'?{x:d.x+fo,y:d.y+u}:{x:d.x+u,y:d.y+fo},a=along(-width/2-JAMB),b=along(width/2+JAMB);
  const ps=[T.point(a,top),T.point(b,top),T.point(b,DOOR_H),T.point(a,DOOR_H)];if(!onScreen(ps)){stats.culled++;return false;}
  const art=L.surface?.art,wall=art?.path&&typeof readyImage==='function'?readyImage(art.path)?.image:null;
+ if(!wall||!Array.isArray(art.wallRect)){stats.skipped++;return false;}// 벽 그림이 아직 없으면 띠를 그리지 않는다(평평한 회색 판으로 뜨지 않게, 심사 지적)
  const owner={id:'r83-ward-door:'+p.id+':r413-lintel',kind:'prop',x:(a.x+b.x)/2,y:(a.y+b.y)/2,alive:true,bodyPath:art?.path,r83WardDoor:true,doorFaceOffsetR86:fo,doorId:d.id,doorOpen:open,r83DoorPart:'r413-lintel',
   r83DoorPlane:{ax:a.x,ay:a.y,bx:b.x,by:b.y},r83WallTint:art?.r81Palette?.wall,groundAligned:false,r413Lintel:true};
- const paint=()=>{ctx.save();try{if(wall&&art.wallRect)patch(wall,art.wallRect,ps,'r413-lintel');else{polygon(ps);ctx.fillStyle='#687874';ctx.fill();}}finally{ctx.restore();}};
+ const paint=()=>{ctx.save();try{patch(wall,art.wallRect,ps,'r413-lintel');}finally{ctx.restore();}};
  ctx.save();try{const m=ctx.getTransform();ctx.setTransform(m.a,m.b,m.c,m.d,0,0);if(typeof ctx.scope==='function')ctx.scope(owner,paint);else paint();}finally{ctx.restore();}
  stats.lintels++;last={room:r.id,door:d.id,top,gap:+(top-DOOR_H).toFixed(3),width:+width.toFixed(2)};return true;}
 if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){const out=base.apply(this,[p,...a]);try{if(on&&p?.r74Door&&typeof room!=='undefined'&&R83()?.enabled?.(room,p))lintel(p,room);}catch(e){fail(e);}return out;};}
