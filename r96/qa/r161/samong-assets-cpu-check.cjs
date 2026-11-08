@@ -12,7 +12,7 @@ vm.createContext(tsb);vm.runInContext(C('world-tiles-r118.js'),tsb);const T=tsb.
 ok('S-02 keeps its school floor',T.rowOf('sz115-S02-3').file==='school');
 ok('S-01-1 keeps rosehouse',T.rowOf('sz115-S01-1').file==='rosehouse');
 ok('other samong zones get the blood memory tile',['sz115-P-2','sz115-S04-3','sz115-RA-1','sz115-M-2'].every(k=>T.rowOf(k)?.file==='blood-memory'&&T.rowOf(k)?.dir==='assets/r161/tiles/'));
-ok('STORY regions without a row stay untouched (no early-map use)',T.rowOf('dist01')?.file==='cave'&&T.rowOf('ep1a08')===null&&T.rowOf('dist02')===null);
+ok('STORY regions without a row stay untouched (no early-map use)',T.rowOf('dist01')?.file==='cave'&&T.rowOf('ep1a08')===null&&T.rowOf('dist04')===null); // R405: dist02 now has its own swamp tile
 // puppet selection
 const room={samongR103:{key:'sz115-S04-3',ep:4},enemies:[],props:[],exploration:{floorCells:[],entry:{x:0,y:0}}};
 const sb={window:{__STORYWORLD_DRIVE_ART_R105__:{artFor:e=>e.r105?'x':null}},localStorage:{getItem(){return null;},setItem(){}},room,time:0,readyImage:()=>null,drawEnemy(){},drawProp(){},tick(){},Math,JSON,String,Object,Number,Date,Promise};

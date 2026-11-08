@@ -37,7 +37,13 @@
   'sz115-S03-1':{file:'sparring',floor:0xe4e8f0,wall:0xe6e8e6}, 'sz115-S03-2':{file:'sparring',floor:0xe4e8f0,wall:0xe6e8e6}, 'sz115-S03-3':{file:'sparring',floor:0xe4e8f0,wall:0xe6e8e6}, // S-03 대련장
   'sz115-S03-5':{file:'asphalt',floor:0xffffff},                // S-03 스물세 해 전 빗속 (젖은 금 간 아스팔트, R120)
   'sz115-S05-1':{file:'gyeongseong',floor:0xf0e6e0,wall:0xece0dc},    // S-05 전차 지나는 술집
-  'sz115-S04-12':{file:'cement14',wall:0xe8e8e8}                    // S-04 14층 벽 너머 신호: 무도장 시멘트 벽(Drive 2026-10-30, R129)
+  'sz115-S04-12':{file:'cement14',wall:0xe8e8e8},                   // S-04 14층 벽 너머 신호: 무도장 시멘트 벽(Drive 2026-10-30, R129)
+  // R405: 드라이브 SW-TILE B03·B05·B07(2026-11-07/08, scripts/r405-tiles.py) — 전용 바닥이 없던 다섯 지역. 실외 경계벽은 실외 지역에만.
+  dist02:{file:'swampmud',floor:0xe8e8e0,wall:0xe4e0dc},        // 늪지대의 뿔악마: 진흙·뿌리 흙 절개면
+  kair09:{file:'gravepath',floor:0xe8e4e0,wall:0xe0e0e0},       // 망각의 묘지: 흙길·돌 경계벽
+  ep1b05:{file:'theatre',floor:0xffffff,wall:0xeeeaea},         // 붉은 하이힐: 붉은 무대 마루·커튼 벽
+  murder02:{file:'hotel',floor:0xe8e6e4,wall:0xe2e0dc},         // 장민재와 새빛호텔: 복도 석재 타일·얼룩진 벽
+  murder03:{file:'rooftop',floor:0xe0e4e2,wall:0xe0e0e0}        // 옥상의 순환: 방수 도장 바닥·콘크리트 난간벽
  };
  // S-02 밤의 출석부 school: wood floor only (the catalog wall is a non-tileable plaster-over-panel design).
  for(let i=1;i<=8;i++)REGIONS['sz115-S02-'+i]={file:'school',floor:0xece4dc};
