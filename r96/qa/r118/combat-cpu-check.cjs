@@ -84,7 +84,7 @@ const foe=(id,x,y,o={})=>({id,x,y,hp:100,maxHp:100,spawnState:'active',radius:.3
  check('release makes an enemy shot with the Drive sword art',shot&&shot.asset==='assets/r118/drive/violet-sword.png'&&shot.r118Weapon?.mode==='spin'&&shot.damage===7,JSON.stringify(shot));
  sb.calls.drawImage.length=0;sb.drawProjectile(shot);sb.drawProjectile({id:9});
  check('weapon shots are drawn with their own spinning art; other shots untouched',sb.calls.drawImage[0]==='assets/r118/drive/violet-sword.png'&&sb.calls.drawProj.includes('base'));
- check('사탄 has the three wrath manifests, 루시퍼 the mask shard',(()=>{const t=JSON.parse(fs.readFileSync(path.join(RT,'assets/r118/drive/index.json'),'utf8')).tracks;return t.filter(x=>x.owner==='b07-boss').length===3&&t.find(x=>x.id==='lucifer-shard').owner==='a11-boss';})());
+ check('분노의 귀 has the three wrath manifests, 루시퍼 the mask shard',(()=>{const t=JSON.parse(fs.readFileSync(path.join(RT,'assets/r118/drive/index.json'),'utf8')).tracks;return t.filter(x=>x.owner==='b07-boss').length===3&&t.find(x=>x.id==='lucifer-shard').owner==='a11-boss';})());
 
  // ③ 영웅 방향
  const H=sb.__STORYWORLD_CURRENT_HERO__;sb.window.__STORYWORLD_COOP_SIM_R62__=undefined;

@@ -19,8 +19,8 @@
     },
     {
       "path": "approved-mobs-r380.js",
-      "bytes": 20138,
-      "sha256": "6d413a5e2b64e453f11bf914a350d229523f213c4f724b8aae07aa3325820385"
+      "bytes": 21023,
+      "sha256": "b06786133fb1ec2b505641fd542be4c4a236f5b7b4d25fc6021fba4a3ff143af"
     },
     {
       "path": "art-drive-r105.js",
@@ -13189,8 +13189,8 @@
     },
     {
       "path": "assets/r248/r248-report.json",
-      "bytes": 42454,
-      "sha256": "e96380c95a71f4c7159c94f5da6badc5289bb815030e222560e1e2487192ce6b"
+      "bytes": 42468,
+      "sha256": "d9fad4fed1f780f8faa872035ac0c29ac8ffe402701bea8b678587b0ff207762"
     },
     {
       "path": "assets/r251/circle.webp",
@@ -13944,13 +13944,13 @@
     },
     {
       "path": "assets/r306/mob-art-variants.json",
-      "bytes": 5111529,
-      "sha256": "e0b1d2c9898da034657d95efbd6aed760e6bc5281dc823969885a8f2fc0620b9"
+      "bytes": 5111543,
+      "sha256": "7155e6f47378cc9115a2b43eeab02e6f1956578599e1206ea0e07759e8839ac4"
     },
     {
       "path": "assets/r306/pixel/index.json",
-      "bytes": 48316,
-      "sha256": "7fa40a4d1b8a45083fefcc532be752f6a87110490898a2ab6d99652e26f10338"
+      "bytes": 48330,
+      "sha256": "1b78f095d59ebccd4d0ebf79bbc074f1052bde764cf88b63ec00f2f86e60f858"
     },
     {
       "path": "assets/r306/pixel/p003969d46a2c.webp",
@@ -32064,8 +32064,8 @@
     },
     {
       "path": "bosses-r104-data.js",
-      "bytes": 23577,
-      "sha256": "0532ab8aa0e10c46f2ec832ad879688a37f39bef58972030b62726b57d66fe56"
+      "bytes": 23584,
+      "sha256": "4080be736347850afbe307eba085ca92f943ebdde6019e127dfdf4b766209321"
     },
     {
       "path": "bosses-r104.js",
@@ -32579,8 +32579,8 @@
     },
     {
       "path": "combat-r118.js",
-      "bytes": 25654,
-      "sha256": "92e7ead27ff9b1b26768f26b2747b73246035b630756be44a5dc6e83cca341c6"
+      "bytes": 25661,
+      "sha256": "a4b6c761a6efb393fa165c357684519dde0b6334f746ff967e0cef6dff2ecad1"
     },
     {
       "path": "combat-r137.js",
@@ -33054,8 +33054,8 @@
     },
     {
       "path": "mob-art-variants-r306-data.js",
-      "bytes": 977001,
-      "sha256": "b13fb95c2c53a99ca962cec970f3d69849092f136cc384f92fda06e78e03efbd"
+      "bytes": 977015,
+      "sha256": "c212e820d5a5716068e9cbfa8c986b837f03459d5021a4bcfedb5274acdc3a87"
     },
     {
       "path": "mob-art-variants-r306.js",
@@ -33139,8 +33139,8 @@
     },
     {
       "path": "mob-unique-r248-data.js",
-      "bytes": 19823,
-      "sha256": "23eb5ae5c5f3b3593edb8044558281e098f96e090d4b2b634cb994356b75a764"
+      "bytes": 19830,
+      "sha256": "4540583442b417f9176ae5a4008fd32e0f60735275f1b659c1ddcc5aee7c0719"
     },
     {
       "path": "mob-unique-r248.js",
@@ -33199,8 +33199,8 @@
     },
     {
       "path": "palette-r114-data.js",
-      "bytes": 91808,
-      "sha256": "2359958ca49956c52dc6e1668b83dac90363103ee8d3985ccfccf6c6956c1db3"
+      "bytes": 91822,
+      "sha256": "de63802ac87e49b1b3b276e2f35e57aaad58d8e5c9258ac9b46561c8c9dd0c1d"
     },
     {
       "path": "perf-groups-r266.js",
@@ -33684,8 +33684,8 @@
     },
     {
       "path": "weapons-r114-data.js",
-      "bytes": 2282,
-      "sha256": "fe62ed14f9106add75ec981d946c90249748f9e217e2d5c99443df4d2cb813cd"
+      "bytes": 2289,
+      "sha256": "c5c36aca43b2752cd421eafe6a96a6c2eeed748de946182c66526fe86d5ea1ea"
     },
     {
       "path": "webgl-fallback-r221.js",
@@ -33759,7 +33759,7 @@
     }
   ],
   "fileCount": 6751,
-  "totalBytes": 1066744233,
+  "totalBytes": 1066745216,
   "webHTMLSha256": "09ad215245ff7e6f5774e330e1df14ee0fe94519ffcab87f8b3075725085c925",
   "largest": [
     {
