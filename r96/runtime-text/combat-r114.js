@@ -144,10 +144,12 @@ const hideable=p=>!!p&&!p.solid&&!p.terrainWall&&!p.blocking&&p.visible!==false&
 function hideProp(p){if(!p||p.r114Hidden)return;p.r114Hidden={visible:Object.prototype.hasOwnProperty.call(p,'visible')?p.visible:undefined,room};p.visible=false;hidden.push(p);stats.propsHidden++;}
 function restoreProps(){for(const p of hidden.splice(0)){const h=p.r114Hidden;if(!h)continue;if(h.visible===undefined)delete p.visible;else p.visible=h.visible;delete p.r114Hidden;}}
 function adoptThrow(e,a){const g=echo.get(e)||{count:0,readyAt:0};g.props=(g.props||0)+1;echo.set(e,g);
- const w=WEAP[e.nativeId],src=propSource(a),canHide=hideable(src),useWeapon=!!w&&(!canHide||g.props%2===0),pl=palette(e);
+ // R471: 칠죄 보스(나태·질투)는 방 가구 대신 정본에 적힌 물건(쓰레기·냉장고·소파·침대 / 유리 조각)을 몸에서 뽑아 던진다.
+ let r471=null;try{r471=window.__STORYWORLD_CANON_THROW_R471__?.pick?.(e,a)||null;}catch(_){r471=null;}if(r471){a.path=r471.path;a.prop=null;a.frame=null;}
+ const w=r471?null:WEAP[e.nativeId],src=r471?null:propSource(a),canHide=hideable(src),useWeapon=!!w&&(!canHide||g.props%2===0),pl=palette(e);
  const H=typeof actorHeight==='function'?actorHeight():60,body=H*(e.boss?2.05:1)*(Number(e.defScale)||1);
  const info={kind:useWeapon?'weapon':'prop',weapon:useWeapon?w:null,prop:useWeapon?null:src,path:a.path,col:pl?.gp||null,col2:pl?.gs||null,
-  height:useWeapon?Math.max(H*.45,w.size*body):Math.max(H*.5,finite(src?.height,H*.9)),body,owner:e};
+  height:useWeapon?Math.max(H*.45,w.size*body):Math.max(H*.5,finite(r471?r471.height:src?.height,H*.9)),body,owner:e,r471:r471?r471.key:null};
  a.r114={throw:info.kind};throwInfo.set(a.token,info);if(throwInfo.size>40)throwInfo.delete(throwInfo.keys().next().value);
  if(Number.isFinite(a.damage))a.damage*=useWeapon?1.35:1.15;
  if(!useWeapon&&canHide)hideProp(src);stats[useWeapon?'weaponThrows':'propThrows']++;}

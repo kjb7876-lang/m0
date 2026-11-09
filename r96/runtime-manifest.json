@@ -32918,6 +32918,11 @@
       "sha256": "a65a4c7b138967a152e9b8368af1e4936464883c5b4b40b9c5816487c8e11bda"
     },
     {
+      "path": "canon-throw-r471.js",
+      "bytes": 3629,
+      "sha256": "98cf4e3cf10b13b13df73b9f0e60b09c35f839c1b96d851a3f8418582fd79f0b"
+    },
+    {
       "path": "cave-r204.js",
       "bytes": 129700,
       "sha256": "9d29057ada666d47e8d2c7b4cc6c9db95b4dbc81b2c4006b78161d986fbdea8f"
@@ -33429,8 +33434,8 @@
     },
     {
       "path": "combat-r114.js",
-      "bytes": 37665,
-      "sha256": "d42ba722a91c3910a61c4d6c4ff23ef8dd75b8c808d4391bd40dd2d997e49846"
+      "bytes": 38052,
+      "sha256": "0970d4c58ff41dcf3faae7b3e271d0305a03c8b74a740d5fcf05fa1835bf3cbd"
     },
     {
       "path": "combat-r118.js",
@@ -33869,8 +33874,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6571857,
-      "sha256": "038031fd5455ee6443fdd8dde08ba1bc5247b307e8bf92afb8cc29984636bb59"
+      "bytes": 6571949,
+      "sha256": "d4a57baf70df645a3669aa8a2d91e01256b5f267ce097706e6e141638e1dc0dc"
     },
     {
       "path": "intro-r140.js",
@@ -34388,6 +34393,11 @@
       "sha256": "6436054059e14e2008a98d6950172a515e18a2e985027b069c8f65aa5d25291c"
     },
     {
+      "path": "seal-vision-r472.js",
+      "bytes": 5501,
+      "sha256": "af0a1f8395c6650faaba4be31737461a56d69be3e8e539aadce812819f4323a1"
+    },
+    {
       "path": "seven-sins-bossrooms.js",
       "bytes": 14689,
       "sha256": "f6f539296fd11946a0688a5d82be7bf68b32f5c8d560aff5369e92f7dd439fc5"
@@ -34703,9 +34713,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6940,
-  "totalBytes": 1091859958,
-  "webHTMLSha256": "038031fd5455ee6443fdd8dde08ba1bc5247b307e8bf92afb8cc29984636bb59",
+  "fileCount": 6942,
+  "totalBytes": 1091869567,
+  "webHTMLSha256": "d4a57baf70df645a3669aa8a2d91e01256b5f267ce097706e6e141638e1dc0dc",
   "largest": [
     {
       "path": "index.html",
