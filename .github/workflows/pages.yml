@@ -430,6 +430,8 @@ jobs:
         run: node r96/qa/r434/r434-cpu-check.cjs
       - name: R435 surfaces (floor anti-repeat noise, wall base AO + grime band, bright floor knee, wall height gradient + top edge light) CPU check
         run: node r96/qa/r435/r435-cpu-check.cjs
+      - name: R438 sin boss rooms tidy (no shared R224 furniture in boss rooms, zone-only furniture, no lamps mid-floor) CPU check
+        run: node r96/qa/r438/r438-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
         run: node r96/qa/r430/r430-cpu-check.cjs
       - name: R431 boss-room center fights + theme boss skill 6s + touch status/DoT + black-flame prop throws CPU check
@@ -491,6 +493,8 @@ jobs:
         run: node r96/qa/r349/hwando-arc-cpu-check.cjs
       - name: R436 Hwando down-walk v2 CPU check
         run: node r96/qa/r436/hwando-walk-s-cpu-check.cjs
+      - name: R439 Hwando attack blade-tip speck cleanup CPU check
+        run: node r96/qa/r439/hwando-tip-cpu-check.cjs
       - name: R352 orphaned field-wave enemies wake near the hero CPU check
         run: node r96/qa/r352/wave-orphans-cpu-check.cjs
       - name: R280 stranded required enemy rescue and 777 forward range CPU check

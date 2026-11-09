@@ -6119,7 +6119,10 @@
     "assets/r415/props/student-desk.webp",
     "assets/r415/props/swamp-bed.webp",
     "assets/r415/props/two-chair.webp",
-    "assets/r415/props/waiting-bench.webp"
+    "assets/r415/props/waiting-bench.webp",
+    "bossroom-tidy-r438.js",
+    "assets/r439/hwando/attack-e.webp",
+    "assets/r439/hwando/index.json"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -7194,5 +7197,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "6cbe1f04eef0ad242b4049659779660b4612689818eeffee8ccc2aa882ea855f"
+  "runtimeManifestSHA256": "9ea6aa136d3f59334d1e720b48947434467eef1cd62669b5be208d8cbdef1f1a"
 }

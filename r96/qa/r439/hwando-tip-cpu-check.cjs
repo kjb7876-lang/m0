@@ -1,0 +1,21 @@
+// R439 환도 공격 검끝 점 지우기 — 파생 시트 무결성·연결·끄기 정적 검사(GPU·실기기 아님). 픽셀 검사는 scripts/r439-hwando-blade-tip.py 출력과 PR 비교 그림.
+const fs=require('fs'),path=require('path'),vm=require('vm'),crypto=require('crypto');const R=path.join(__dirname,'..','..');
+const RT=f=>path.join(R,'runtime-text',f),C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8');
+const checks=[];const ok=(n,p,d)=>checks.push({name:n,pass:!!p,detail:d});const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+const I=JSON.parse(fs.readFileSync(RT('assets/r439/hwando/index.json'),'utf8')),B=fs.readFileSync(RT('assets/r439/hwando/attack-e.webp')),S=fs.readFileSync(RT(I.source));
+const O=JSON.parse(fs.readFileSync(RT('assets/r271/hwando/index.json'),'utf8')).anims.attack.e;
+ok('derived sheet exists, sha256/bytes match index',B.length===I.bytes&&sha(B)===I.sha256);
+ok('source is the R283 attack-e sheet, unchanged',I.source==='assets/r283/hwando/r271/attack-e.webp'&&sha(S)===I.source_sha256);
+ok('same atlas/cell/frame count as R271 attack E (anchor reused)',I.n===O.n&&I.cell[0]===O.cell[0]&&I.cell[1]===O.cell[1]&&I.atlas[0]===O.atlas[0]&&I.atlas[1]===O.atlas[1],{I,O:{n:O.n,cell:O.cell}});
+ok('lossless WebP (VP8L) with RIFF header',B.slice(0,4).toString()==='RIFF'&&B.slice(8,12).toString()==='WEBP'&&B.slice(12,16).toString()==='VP8L');
+ok('fix touched specks and removed the loose tip only',I.specks_neutralised>0&&I.specks_neutralised<2000&&I.loose_tip_px_removed>0&&I.loose_tip_px_removed<120,I);
+const ls={};const sb={window:{},localStorage:{getItem:k=>ls[k]??null,setItem:(k,v)=>{ls[k]=v;}},console};sb.window=sb;vm.createContext(sb);vm.runInContext(C('hwando-r283.js'),sb);
+const H=sb.window.__STORYWORLD_HWANDO_R283__;
+ok('attack E path goes to R439; other clips unchanged',H.path('assets/r271/hwando/','attack-e.webp')==='assets/r439/hwando/attack-e.webp'&&H.path('assets/r271/hwando/','walk-e.webp')==='assets/r283/hwando/r271/walk-e.webp'&&H.path('assets/r242/hwando/','hit-e.webp')==='assets/r283/hwando/r242/hit-e.webp');
+const sb2={window:{},localStorage:{getItem:k=>k==='storyworld.r439.hwandoTip'?'{"on":false}':null,setItem(){}},console};sb2.window=sb2;vm.createContext(sb2);vm.runInContext(C('hwando-r283.js'),sb2);
+ok('off switch storyworld.r439.hwandoTip → R283 sheet',sb2.window.__STORYWORLD_HWANDO_R283__.path('assets/r271/hwando/','attack-e.webp')==='assets/r283/hwando/r271/attack-e.webp');
+const man=fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8'),inp=fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8');
+ok('asset listed in runtime manifest/inputs',man.includes('assets/r439/hwando/attack-e.webp')&&inp.includes('assets/r439/hwando/attack-e.webp'));
+ok('CI runs this check',fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('r96/qa/r439/hwando-tip-cpu-check.cjs'));
+const fail=checks.filter(c=>!c.pass);for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail||'')));
+console.log(`${checks.length-fail.length}/${checks.length}`);if(fail.length)process.exit(1);
