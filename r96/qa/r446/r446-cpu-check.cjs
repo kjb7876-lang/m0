@@ -14,6 +14,7 @@ ok('R83 exposes doorHeight for R413',/doorHeight:\(\)=>DH\(\)/.test(d83));
 const d413=C('doors-fit-r413.js');
 ok('R413 lintel starts at the R83 door height',/DOOR_H=Number\(T\?\.doorHeight\?\.\(\)\)\|\|2\.7/.test(d413)&&!/const REV=[^\n]*DOOR_H=2\.7/.test(d413));
 ok('R446 3D lintel: clones the parallel jamb wall mesh (same material), shrinks to door span, door top → wall top, falls back to the 2D band',/function lintel3d\(/.test(d413)&&/if\(lintel3d\(r,L,d,top,DOOR_H\)\)return true;/.test(d413)&&/new t\.T\.Mesh\(g,m0\.material\)/.test(d413)&&/m\.position\.set\(d\.x,DH\+hgt\/2,d\.y\)/.test(d413));
+ok('R446 3D lintel cache follows its source jamb (rebuilt wall row or swapped fade material) instead of keeping a stale material',/r446SrcId:src\.w\.id/.test(d413)&&/t\.wallRows\.get\?\.\(have\.userData\.r446SrcId\)\?\.mesh===hs/.test(d413)&&/if\(have\.material!==hs\.material\)have\.material=hs\.material;/.test(d413));
 ok('R446 3D lintel only from walls parallel to the door, unrotated',/if\(spanX\?!\(w\.width>w\.depth\):!\(w\.depth>w\.width\)\)continue;/.test(d413)&&/if\(alongX!==spanX\)return false;/.test(d413));
 ok('R446 3D lintels cleared when the room changes',/room\?\.exploration!==L3room\)\{clear3d\(\)/.test(d413));
 const p115=C('play-r115.js');
