@@ -3,13 +3,13 @@
  *  이 오버레이는 같은 나무 그림(R204 가 이미 읽은 지역 나무 12장)으로
  *   ① 나무마다 둘레 0.8~2.1칸에 덤불 2~3덩이를 모으고(나무 그림 윗부분 수관만 땅에 앉힘, 아래쪽은 어둡게 — 땅 그늘),
  *   ② 나무가 없는 뒤쪽 대지 가장자리(바닥에서 0.9~2.4칸)에 작은 숲(큰 나무 1 + 덤불 2)을 더한다.
- *  뒤쪽 높은 대지(R204 topHeight ≥ 1.05)에만 놓는다 — 카메라 쪽 낮은 대지에는 두지 않아 영웅·몹을 가리지 않는다. 문 둘레는 비운다.
+ *  뒤쪽 높은 대지(R204 topHeight ≥ 1.05)에만 놓는다 — 카메라 쪽 낮은 대지에는 두지 않아 영웅·몹을 가리지 않는다. 문 둘레(4.5칸, 문 앞 카메라 쪽 띠)는 비운다.
  *  보기만 바꾼다: 충돌·문·몹·저장·카메라 그대로. 그림(재질)마다 메시 1개로 묶어 그리기 호출은 지역당 최대 12번(나무 그림 수)이다.
  *  저사양(settings.lowFx)은 같은 배치에서 절반만. 끄기: localStorage storyworld.r481.grove = {"on":false}. 맘몬(ep1b06)·실내는 다루지 않는다.
  * Canonical source; copied to runtime-text by scripts/sync-r99.py. */
 (()=>{'use strict';
 if(window.__STORYWORLD_GROVE_R481__)return;
-const REV='R481-grove-2',CROWN_V0=.45,KEY='storyworld.r481.grove';
+const REV='R481-grove-3',CROWN_V0=.45,KEY='storyworld.r481.grove';
 let prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;}catch(e){}
 // R204 가 나무를 심는 실외 지역(cave-r204 ZONES 의 trees). 맘몬 ep1b06 은 Codex 몫이라 늘 뺀다(ep1b06b 눈보라 숲은 다른 지역).
 const ZONES=new Set(['dist00','dist02','dist04','last304','last305','kair05','last303','ep1b06b']),NEVER=new Set(['ep1b06']);
@@ -20,7 +20,8 @@ function rng(seed){let h=(seed>>>0)||1;return()=>{h^=h<<13;h>>>=0;h^=h>>>17;h^=h
 // 순수 배치: 장(W·H), 신호 거리 fv(바닥 안 +), 대지 높이 top, 문 [x,y,r], 기존 나무 {x,y}, 시드, 그림 수 → 심을 자리 [{x,y,h,s,shade,mat}]
 function plan({W,H,fv,top,doors=[],trees=[],seed=1,mats=1}){
  const rnd=rng((seed^0x481a77)>>>0),cap=Math.min(320,Math.round(trees.length*3.2)+60),out=[],M=Math.max(1,mats|0);
- const doorOk=(x,y)=>doors.every(d=>Math.hypot(d[0]-x,d[1]-y)>=Math.max(3.5,(+d[2]||0)));
+ // 문 둘레: R204 nearDoorR443 와 같은 규칙(4.5칸 + 문 앞 카메라 쪽 13칸 띠는 키 큰 것 금지) — 문이 숲에 묻히지 않게
+ const doorOk=(x,y)=>doors.every(d=>{const dx=x-d[0],dy=y-d[1],r=Math.max(3.5,+d[2]||0);if(Math.hypot(dx,dy)<Math.max(4.5,r))return false;const fwd=dx+dy,side=Math.abs(dx-dy);return !(fwd>0&&fwd<13&&side<r+2);});
  const free=(x,y,minNew)=>out.every(p=>Math.hypot(p.x-x,p.y-y)>=minNew)&&trees.every(t=>Math.hypot(t.x-x,t.y-y)>=.6);
  const okAt=(x,y,lo=-6,hi=-.9)=>{if(x<.5||y<.5||x>W-.5||y>H-.5)return false;const v=fv(x,y);return v<=hi&&v>=lo&&top(x,y)>=1.05&&doorOk(x,y);};
  const put=(x,y,s,shade)=>{out.push({x:+x.toFixed(3),y:+y.toFixed(3),h:top(x,y),s:+s.toFixed(3),shade:+shade.toFixed(3),mat:Math.floor(rnd()*M)});};

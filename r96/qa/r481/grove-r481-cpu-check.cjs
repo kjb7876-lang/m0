@@ -30,7 +30,7 @@ ok('places something',P.length>0);
 ok('cap respected (≤ 3.2 per tree + 60, never > 320)',P.length<=Math.min(320,trees.length*3.2+60));
 ok('every spot is on plateau ring −6 ≤ fv ≤ −0.9',P.length>0&&P.every(p=>{const v=fv(p.x,p.y);return v<=-.9&&v>=-6;}));
 ok('every spot is on high back plateau (top ≥ 1.05, never camera side)',P.length>0&&P.every(p=>top(p.x,p.y)>=1.05));
-ok('door clearings kept (≥ 3.5 from door)',P.every(p=>Math.hypot(p.x-20,p.y-9.5)>=3.5));
+ok('door clearings kept (≥ 4.5 from door, nothing tall in the 13-tile band in front of it — same rule as R204 nearDoorR443)',P.every(p=>{const dx=p.x-20,dy=p.y-9.5,f=dx+dy,sd=Math.abs(dx-dy);return Math.hypot(dx,dy)>=4.5&&!(f>0&&f<13&&sd<5.5);}));
 ok('no stacking (new spots ≥ .7 apart, ≥ .6 from trees)',P.every((p,i)=>P.every((q,j)=>i===j||Math.hypot(p.x-q.x,p.y-q.y)>=.7)&&trees.every(t=>Math.hypot(t.x-p.x,t.y-p.y)>=.6)));
 ok('understory smaller than canopy (scale .3..1.0 of its tree)',P.length>0&&P.every(p=>p.s>=.3&&p.s<=1.0));
 ok('understory is darker (shade .6..1.0)',P.length>0&&P.every(p=>p.shade>=.6&&p.shade<=1));
