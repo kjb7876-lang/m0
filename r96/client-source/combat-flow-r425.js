@@ -332,7 +332,7 @@ function atkVec(e){const a=e.attack;let g=null;if(a&&Number.isFinite(a.angle))g=
  const p0=project(e.x,e.y);let p1;if(g!=null)p1=project(e.x+Math.cos(g),e.y+Math.sin(g));else{const p=typeof player==='object'?player:null;if(!p)return null;p1=project(p.x,p.y);}
  const vx=p1.x-p0.x,vy=p1.y-p0.y,n=Math.hypot(vx,vy);return n>1e-6?{x:vx/n,y:vy/n}:null;}
 function atkLeft(e){const a=e.attack;let sd=null;if(a&&Number.isFinite(a.angle))sd=Math.cos(a.angle)-Math.sin(a.angle);else if(e.rangedWindup>0&&Number.isFinite(e.rangedAim))sd=Math.cos(e.rangedAim)-Math.sin(e.rangedAim);
- if(sd==null||Math.abs(sd)<.05){const r443=window.__STORYWORLD_ENEMY_FACE_R443__?.left?.(e);if(typeof r443==='boolean')return r443;const p=typeof player==='object'?player:null;if(!p)return null;sd=(p.x-p.y)-(e.x-e.y);if(Math.abs(sd)<.02)return null;}return sd<0;}
+ if(sd==null||Math.abs(sd)<.05){const r444=window.__STORYWORLD_ENEMY_FACE_R444__?.left?.(e);if(typeof r444==='boolean')return r444;const p=typeof player==='object'?player:null;if(!p)return null;sd=(p.x-p.y)-(e.x-e.y);if(Math.abs(sd)<.02)return null;}return sd<0;}
 function sameArt(c,b){return c?.kind==='image'&&c.owner?.kind==='enemy'&&Array.isArray(c.points)&&(c===b||(c.image&&c.image===b.image&&String(c.sourceRect||'')===String(b.sourceRect||'')));}
 function swapCell(c,A,B,img){const P=c.points,W=A.sourceRect[2],H=A.sourceRect[3],ex=[(P[1][0]-P[0][0])/W,(P[1][1]-P[0][1])/W],ey=[(P[3][0]-P[0][0])/H,(P[3][1]-P[0][1])/H];
  const F=[P[0][0]+A.pivot[0]*ex[0]+A.pivot[1]*ey[0],P[0][1]+A.pivot[0]*ex[1]+A.pivot[1]*ey[1]],at=(u,v)=>[F[0]+(u-B.pivot[0])*ex[0]+(v-B.pivot[1])*ey[0],F[1]+(u-B.pivot[0])*ex[1]+(v-B.pivot[1])*ey[1]];

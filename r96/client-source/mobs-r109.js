@@ -138,7 +138,7 @@ const STRIP_FACE={'M004-attack':'L','assets/rc137/mob-attacks-01.png#627,0':'L',
 const stripKey=f=>{const p=String(f?.path||'').replace(/^\.\//,''),m=/\/(M\d+|PAPER)-(attack|move|idle|hit)\.png$/.exec(p);if(m)return m[1]+'-'+m[2];const r=f?.assetFrame?.sourceRect;return r?p+'#'+r[0]+','+r[1]:null;};
 const motionR51=window.__STORYWORLD_ENEMY_MOTION_R51__;
 if(motionR51&&typeof motionR51.flip==='function')window.__STORYWORLD_ENEMY_MOTION_R51__=Object.freeze({...motionR51,flip(e,f,fallback){
- try{if(f&&e&&!major(e)&&(e.attack||e.rangedWindup>0)&&typeof player!=='undefined'&&player){const art=STRIP_FACE[stripKey(f)];if(art){const r443=window.__STORYWORLD_ENEMY_FACE_R443__?.left?.(e),du=(player.x-player.y)-(e.x-e.y),left=typeof r443==='boolean'?r443:du<0;stats.stripFlips++;return art==='L'?left:!left;}}}catch(err){fail(err);}
+ try{if(f&&e&&!major(e)&&(e.attack||e.rangedWindup>0)&&typeof player!=='undefined'&&player){const art=STRIP_FACE[stripKey(f)];if(art){const r444=window.__STORYWORLD_ENEMY_FACE_R444__?.left?.(e),du=(player.x-player.y)-(e.x-e.y),left=typeof r444==='boolean'?r444:du<0;stats.stripFlips++;return art==='L'?left:!left;}}}catch(err){fail(err);}
  return motionR51.flip(e,f,fallback);}});
 
 // ---- R110 영웅 가림 방지: 영웅보다 앞(화면 아래쪽)에 선 적의 그림이 영웅 몸통을 덮으면 그 적만 반투명하게 그린다 ----

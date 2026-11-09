@@ -9,7 +9,7 @@ await p.evaluate(()=>{window.__probe={rows:[]};const P=window.__probe;
    const atk=e.attack?e.attack.angle:(e.rangedWindup>0?e.rangedAim:(e.r61Action&&time<e.r61Action.endAt?e.r61Action.angle:null));
    const side=a=>{if(a==null)return null;const c=Math.cos(a),s2=Math.sin(a),X=c-s2;return Math.abs(X)<.15?null:X>0?'right':'left';};
    const ps=(player.x-player.y)-(e.x-e.y);
-   P.rows.push({id:e.id,n:e.name,t:time,dir:P.read,sx,sy,atk:side(atk),phase:e.attack?(e.meleeStageQuality||'atk'):e.rangedWindup>0?'rwind':null,hero:Math.abs(ps)<.3?null:ps>0?'right':'left',boss:!!(e.boss||e.midboss),f:window.__STORYWORLD_ENEMY_FACE_R443__?.state?.(e),seq:P.seq,reads:P.reads.join('')});
+   P.rows.push({id:e.id,n:e.name,t:time,dir:P.read,sx,sy,atk:side(atk),phase:e.attack?(e.meleeStageQuality||'atk'):e.rangedWindup>0?'rwind':null,hero:Math.abs(ps)<.3?null:ps>0?'right':'left',boss:!!(e.boss||e.midboss),f:window.__STORYWORLD_ENEMY_FACE_R444__?.state?.(e),seq:P.seq,reads:P.reads.join('')});
    P.st.set(e,{x:e.x-e.y,y:(e.x+e.y)/2});}};P.st=new Map();});
 for(const z of zones){try{await go(p,z);await p.evaluate(()=>{window.__probe.rows=[];player.hp=1e9;window.__probe.st=new Map();});
  // 영웅을 가장 가까운 몹 무리 쪽으로 옮기고, 8방향으로 돌며 끌어들인다

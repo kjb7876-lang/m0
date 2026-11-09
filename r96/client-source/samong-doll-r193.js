@@ -30,7 +30,7 @@ const FRAME=Object.freeze({path:ART,assetFrame:{sourceRect:[0,0,W,Hh],pivot:[PX,
 function install(){const S=window.__STORYWORLD_STORY_COMBAT_R54__;if(!S||typeof S.frameFor!=='function')return false;if(S.__r193)return true;
  window.__STORYWORLD_STORY_COMBAT_R54__=Object.freeze({...S,__r193:true,frameFor(e,f){if(prefs.on&&e?.r193Doll){stats.draws++;
    try{if(typeof readyImage==='function'&&!readyImage(ART)&&typeof ensureImages==='function')Promise.resolve(ensureImages([ART])).catch(()=>{});}catch(_){}
-   return {...FRAME,flip:(()=>{const r443=window.__STORYWORLD_ENEMY_FACE_R443__?.left?.(e);return typeof r443==='boolean'?r443:!!(typeof player!=='undefined'&&player&&player.x-player.y<e.x-e.y);})()};}return S.frameFor(e,f);}});return true;}
+   return {...FRAME,flip:(()=>{const r444=window.__STORYWORLD_ENEMY_FACE_R444__?.left?.(e);return typeof r444==='boolean'?r444:!!(typeof player!=='undefined'&&player&&player.x-player.y<e.x-e.y);})()};}return S.frameFor(e,f);}});return true;}
 let tries=0;(function arm(){let ok=false;try{ok=install();}catch(e){fail(e);}if(!ok&&++tries<80)setTimeout(arm,250);})();
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
 window.__STORYWORLD_SAMONG_DOLL_R193__=Object.freeze({revision:REV,set,make,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError})});

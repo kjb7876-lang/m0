@@ -1,4 +1,4 @@
-// R443 적 방향 한 곳에서 정하기 — 사용자 2026-11-09 "적이 이동하거나 공격할 때 실제 행동과 다른 방향의 이미지가 출력되는 문제" + "몬스터그림자는 없애".
+// R444 적 방향 한 곳에서 정하기 — 사용자 2026-11-09 "적이 이동하거나 공격할 때 실제 행동과 다른 방향의 이미지가 출력되는 문제" + "몬스터그림자는 없애".
 //  헤드리스 전수(그리는 순간 쓰인 방향 vs 실제 이동 vs 공격 각도)로 찾은 원인:
 //   · 상태 간 덮어쓰기: 엔진 tickEnemies 는 목표 쪽 벡터(충돌 처리 전)로, R98 은 영웅 쪽으로, R268/R286 은 블링크 뒤 영웅 쪽으로, R425 는 지그재그 다리 쪽으로
 //     e.direction 을 쓰고, 그릴 때 R113·R137 이 다시 '영웅 쪽'으로 바꾼다. 그림 공급자(R106·R109·R193·R200·R208·R375)도 저마다 영웅 위치로 좌우를 정한다.
@@ -14,12 +14,12 @@
 //     영웅 곁(공격 거리+1.2칸)에서 옆걸음·뒷걸음(영웅 쪽 성분 < 0.35)이거나 멈춰 있으면 영웅 쪽(무감대 0.4칸·0.22초).
 //     피격·넉백·순간이동·스폰·재사용: 위치 튐(속도×3+0.15칸 초과)은 걸음으로 보지 않는다. 블링크한 쪽이 정한 방향은 받아들인다. 죽으면 그대로 굳힌다.
 //   · 몹 그림자: 모든 몹·보스의 접촉 그림자를 그리지 않는다(R206 'all', R306 픽셀판 그림자 포함). 끄기 {"shadows":true}.
-//   · 디버그: localStorage storyworld.r443.face {"debug":true} 또는 설정 hitboxes → 몹 위에 상태·좌우·이동(초록)·조준(빨강) 화살표·판정 원뿔.
+//   · 디버그: localStorage storyworld.r444.face {"debug":true} 또는 설정 hitboxes → 몹 위에 상태·좌우·이동(초록)·조준(빨강) 화살표·판정 원뿔.
 //  맡지 않는 것: 페르소나·움직이지 않는 구조물 적(R170 탑·R446 기둥 등)·맘몬 구역.
-//  끄기: localStorage storyworld.r443.face {"on":false}.
+//  끄기: localStorage storyworld.r444.face {"on":false}.
 (()=>{'use strict';
-if(window.__STORYWORLD_ENEMY_FACE_R443__)return;
-const REV='R443-face-3',KEY='storyworld.r443.face';
+if(window.__STORYWORLD_ENEMY_FACE_R444__)return;
+const REV='R444-face-3',KEY='storyworld.r444.face';
 let prefs={on:true,debug:false,shadows:false};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={updates:0,spawns:0,jumps:0,turns:0,attackLocks:0,draws:0,owner:{},errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0;
@@ -87,6 +87,6 @@ function debugDraw(e,s){if(!(e.hp>0)||typeof project!=='function'||typeof ctx!==
   ctx.font='10px monospace';ctx.textAlign='center';ctx.fillStyle='#fff';const st=e.attack?(e.meleeStageQuality||'atk'):e.rangedWindup>0?'aim':e.hitTimer>0?'hit':e.moving?'move':'idle';
   ctx.fillText(st+' · '+s.owner+' · '+(s.side==='left'?'◀':'▶')+(s.d4?' '+s.d4[0]:''),q.x,q.y+14);}finally{ctx.restore();}}
 function set(p={}){for(const k of['on','debug','shadows'])if(typeof p[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
-window.__STORYWORLD_ENEMY_FACE_R443__=Object.freeze({revision:REV,left,side,d4,state:e=>{const s=state(e);return s?{side:s.side,d4:s.d4,owner:s.owner,aim:s.aim,vx:s.vx,vy:s.vy}:null;},
+window.__STORYWORLD_ENEMY_FACE_R444__=Object.freeze({revision:REV,left,side,d4,state:e=>{const s=state(e);return s?{side:s.side,d4:s.d4,owner:s.owner,aim:s.aim,vx:s.vx,vy:s.vy}:null;},
  owns:managed,noShadows,set,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats,owner:{...stats.owner}},lastError})});
 })();

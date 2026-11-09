@@ -20,5 +20,5 @@ await p.waitForTimeout(2500);await shot('windup-hero-behind');
 console.log(tag,'windup',JSON.stringify(await p.evaluate(()=>({dir:window.__E.direction,stage:window.__E.meleeStageQuality,el:window.__E.attack?.elapsed}))));
 // ② 공격 끝 → 걷기: 영웅은 왼쪽, 몹은 오른쪽(화면)으로 걷는다
 await p.evaluate(()=>{const e=window.__E;e.attack=null;e.state='idle';window.__SLOW=1;window.__walk=setInterval(()=>{e.attack=null;e.cd=9;const nx=e.x+.05,ny=e.y-.05;if(!blocked(nx,ny,.3)){e.x=nx;e.y=ny;}player.x=e.x-2.6;player.y=e.y+2.6;cam={x:e.x,y:e.y};},40);});
-await p.waitForTimeout(1500);await shot('walk-away');console.log(tag,'walk',JSON.stringify(await p.evaluate(()=>({dir:window.__E.direction,sh:window.__STORYWORLD_ENEMY_FACE_R443__?.inspect?.().stats.shadowsSkipped}))));
+await p.waitForTimeout(1500);await shot('walk-away');console.log(tag,'walk',JSON.stringify(await p.evaluate(()=>({dir:window.__E.direction,sh:window.__STORYWORLD_ENEMY_FACE_R444__?.inspect?.().stats.shadowsSkipped}))));
 await b.close();
