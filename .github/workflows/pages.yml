@@ -460,6 +460,8 @@ jobs:
         run: node r96/qa/r453/actor-tone-r453-cpu-check.cjs
       - name: R492 lag (R409 outline bake by one distance transform instead of dozens of drawImage dilations; same rim rule, size, colours) CPU check
         run: node r96/qa/r492/r492-cpu-check.cjs
+      - name: R493 lag (keep compiled shader programs pinned so material churn stops relinking the same programs) CPU check
+        run: node r96/qa/r493/r493-cpu-check.cjs
       - name: R444 enemy facing authority (attack side = hitbox angle, walk = real displacement, strafe faces hero, no mob shadows) CPU check
         run: node r96/qa/r444/r444-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
@@ -541,8 +543,12 @@ jobs:
         run: node r96/qa/r462/mob-death-cpu-check.cjs
       - name: R481 outdoor groves (understory around trees, small woods on bare back rims) CPU check
         run: node r96/qa/r481/grove-r481-cpu-check.cjs
+      - name: R482 worn trails from entry to doors/altar on outdoor floors CPU check
+        run: node r96/qa/r482/trail-r482-cpu-check.cjs
       - name: R501 settings conflicts (title settings kept after continue, flashlight box drives the sight mode) CPU check
         run: node r96/qa/r501/r501-cpu-check.cjs
+      - name: R502 L key sight cycle skips the invisible auto step (glow, full, torch, flashlight) CPU check
+        run: node r96/qa/r502/r502-cpu-check.cjs
       - name: R471 sin bosses throw the objects the canon names (sloth heap/fridge/sofa/bed pending, envy glass) instead of room furniture CPU check
         run: node r96/qa/r471/canon-throw-cpu-check.cjs
       - name: R472 chairman enrage seals the hero's sight (canon eyes and body sealed), lifts on scene/death/room change CPU check
