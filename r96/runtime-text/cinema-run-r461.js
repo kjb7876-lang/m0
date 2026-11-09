@@ -1,7 +1,7 @@
-// R454 — 영화 모드를 별도 입구로(사용자 2026-11-09 "영화모드를 픽셀모드처럼 아예따로빼서 진행가능하게" → 중간안 승인 "응 너추천대로 진행해",
+// R461 — 영화 모드를 별도 입구로(사용자 2026-11-09 "영화모드를 픽셀모드처럼 아예따로빼서 진행가능하게" → 중간안 승인 "응 너추천대로 진행해",
 //  이어서 "영화모드에는 영웅의 기억 적힌대로 그영웅으로만 플레이하도록").
 //  ① 입구: 처음 화면에 '영화 모드로 시작' 단추(R306 '픽셀 모드로 시작'과 같은 방식). 영화 모드는 이제 '기록(세이브)의 성격'이다.
-//     · 영화 모드로 시작한 기록은 저장에 playModeR454:'cinema' 가 남고, 이어하기로 불러오면 영화 모드가 다시 켜진다.
+//     · 영화 모드로 시작한 기록은 저장에 playModeR461:'cinema' 가 남고, 이어하기로 불러오면 영화 모드가 다시 켜진다.
 //     · 일반 기록에서는 영화 모드(R370)가 켜지지 않는다. 예전처럼 설정에서 켜 둔 값(localStorage)이 남아 있어도 처음 실릴 때 끈다.
 //       → 일반 플레이에 영화 모드 전용 동작(R384 전투 맞추기·리젠·보스 체력 바닥·지역 이동 잠금, R376 화면 정리, R450 박자 자막 끄기)이 섞이지 않는다.
 //     · 설정의 '영화 모드' 칸은 영화 기록에서만 쓸 수 있다(끄면 잠시 멈춤, 다시 켜면 이어 봄). 일반 기록에서는 잠겨 있고 처음 화면 입구를 알려 준다.
@@ -14,10 +14,10 @@
 //     · 그 밖에 영웅 이름이 아닌 화자(EGO·윤하람·도겸 등)는 바꾸지 않고 지금 영웅을 그대로 둔다(처음엔 시작할 때 고른 영웅).
 //     · 거점의 '영웅 변경'은 영화 기록에서 막는다(서사가 정한 영웅으로만).
 //  ③ 서사 문장·밸런스·맵 순서는 바꾸지 않는다. 판정·전투 값은 그대로이고, 영화 모드 전용 동작은 원래 파일(R370/R376/R384)이 켜짐 여부로 스스로 가린다.
-//  끄기: localStorage storyworld.r454.run {"lock":false}(영웅 고정만 끔).
+//  끄기: localStorage storyworld.r461.run {"lock":false}(영웅 고정만 끔).
 (()=>{'use strict';
-if(window.__STORYWORLD_CINEMA_RUN_R454__)return;
-const REV='R454-run-1',KEY='storyworld.r454.run',FIELD='playModeR454';
+if(window.__STORYWORLD_CINEMA_RUN_R461__)return;
+const REV='R461-run-1',KEY='storyworld.r461.run',FIELD='playModeR461';
 const stats={titleButtons:0,cinemaStarts:0,normalStarts:0,restoresCinema:0,restoresNormal:0,legacyOff:0,refusedOn:0,paused:0,resumed:0,heroLocks:0,heroSame:0,heroUnmapped:0,heroBlocked:0,carried:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const G=(f,d)=>{try{const v=f();return v===undefined?d:v;}catch(_){return d;}};
@@ -106,9 +106,9 @@ try{if(typeof restoreSave==='function'){const base=restoreSave;restoreSave=async
   if(run==='cinema'){stats.restoresCinema++;turn(true);warm();}else stats.restoresNormal++;return result;};}}catch(e){fail(e);}
 try{if(typeof serializeSave==='function'){const base=serializeSave;serializeSave=function(...a){const raw=base.apply(this,a);try{if(run==='cinema'&&raw&&typeof raw==='object')raw[FIELD]='cinema';}catch(e){fail(e);}return raw;};}}catch(e){fail(e);}
 // ── 처음 화면 입구 ──
-function titleChoice(){try{const panel=document.getElementById('panel'),normal=document.getElementById('campaignNew54')||document.getElementById('newBtn');if(!panel||!normal||document.getElementById('cinemaStartR454'))return;
+function titleChoice(){try{const panel=document.getElementById('panel'),normal=document.getElementById('campaignNew54')||document.getElementById('newBtn');if(!panel||!normal||document.getElementById('cinemaStartR461'))return;
  const action=normal.onclick;if(typeof action!=='function')return;normal.onclick=function(...a){pending=null;return action.apply(this,a);};
- const b=document.createElement('button');b.id='cinemaStartR454';b.type='button';b.textContent='영화 모드로 시작';
+ const b=document.createElement('button');b.id='cinemaStartR461';b.type='button';b.textContent='영화 모드로 시작';
  b.title='길잡이가 플레이하고 서사를 자막·음성으로 들려줍니다. 지역마다 서사에 적힌 기억의 영웅으로 진행합니다';
  b.onclick=function(...a){const r=action.apply(normal,a);pending='cinema';return r;};
  const px=document.getElementById('pixelStartR306');if(px&&px.parentNode)px.parentNode.insertBefore(b,px.nextSibling);else (normal.parentNode||panel).appendChild(b);stats.titleButtons++;}catch(e){fail(e);}}
@@ -117,13 +117,13 @@ try{if(typeof showMenu==='function'){const base=showMenu;showMenu=function(...a)
 document.addEventListener?.('click',event=>{if(['slotCancelR73','heroBack','campaignContinue54','continueBtn','campaignImport54','importBtn','slotsBackR73'].includes(event.target?.id))pending=null;},true);
 titleChoice();
 // ── 설정 칸 ──
-try{if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const r=base.apply(this,a);try{const c=document.getElementById('r370Cinema');if(c&&!c.dataset.r454){c.dataset.r454='1';
-  const label=c.closest('label')||c.parentNode;const note=document.createElement('small');note.id='r454CinemaNote';note.style.cssText='display:block;opacity:.75;margin-left:22px';
+try{if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const r=base.apply(this,a);try{const c=document.getElementById('r370Cinema');if(c&&!c.dataset.r461){c.dataset.r461='1';
+  const label=c.closest('label')||c.parentNode;const note=document.createElement('small');note.id='r461CinemaNote';note.style.cssText='display:block;opacity:.75;margin-left:22px';
   if(run!=='cinema'){c.checked=false;c.disabled=true;note.textContent='영화 모드는 처음 화면의 \'영화 모드로 시작\'으로 따로 진행합니다';}
   else{c.checked=cinemaOn();const own=c.onchange;c.onchange=function(...x){if(c.checked)stats.resumed++;else stats.paused++;return own?.apply(this,x);};note.textContent='영화 모드 기록 · 끄면 잠시 멈추고, 다시 켜면 이어 봅니다';}
   label?.parentNode?.insertBefore(note,label.nextSibling);}}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
 function set(p={}){if(typeof p.lock==='boolean')prefs.lock=p.lock;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return {...prefs};}
-window.__STORYWORLD_CINEMA_RUN_R454__=Object.freeze({revision:REV,FIELD,set,
+window.__STORYWORLD_CINEMA_RUN_R461__=Object.freeze({revision:REV,FIELD,set,
  run:()=>run,active:()=>run==='cinema',
  pure:Object.freeze({speaker,heroFor,firstHero,carry}),
  inspect:()=>({revision:REV,run,pending,prefs:{...prefs},cinemaOn:cinemaOn(),hero:G(()=>player?.hero,null),zone:zoneKey(),decided:Object.fromEntries(decided),stats:{...stats},lastError})});
