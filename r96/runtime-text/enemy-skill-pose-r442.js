@@ -23,5 +23,5 @@ function install(){const S=window.__STORYWORLD_STORY_COMBAT_R54__;if(!S||S.__r44
   try{const r=base.call(this,e,f);stats.frames++;return r;}finally{if(had)e.attack=prev;else delete e.attack;}}});return true;}
 install();
 function set(k,v){prefs[k]=!!v;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
-window.__STORYWORLD_ENEMY_SKILL_POSE_R442__=Object.freeze({revision:REV,mark,set,active:e=>!!marks.get(e),inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},installed:!!window.__STORYWORLD_STORY_COMBAT_R54__?.__r442,lastError,browser:false,GPU:false})});
+window.__STORYWORLD_ENEMY_SKILL_POSE_R442__=Object.freeze({revision:REV,mark,set,active:e=>!!marks.get(e),angle:e=>{const m=marks.get(e);if(!m)return null;const el=T()-m.t0;return el>=0&&el<m.dur?m.angle:null;}/* R444: 기술 동작 동안 몸 좌우를 기술 방향에 맞춘다 */,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},installed:!!window.__STORYWORLD_STORY_COMBAT_R54__?.__r442,lastError,browser:false,GPU:false})});
 })();
