@@ -527,6 +527,8 @@ jobs:
         run: node r96/qa/r450/battle-beats-cpu-check.cjs
       - name: R462 mobs without a death motion burn away or burst in blood and leave a corpse CPU check
         run: node r96/qa/r462/mob-death-cpu-check.cjs
+      - name: R481 outdoor groves (understory around trees, small woods on bare back rims) CPU check
+        run: node r96/qa/r481/grove-r481-cpu-check.cjs
       - name: R440 Hwando hit pose (no old art) and hero rim blade cleanup CPU check
         run: node r96/qa/r440/r440-cpu-check.cjs
       - name: R446 seven pillars moved to their own map as stationary attacking towers CPU check
