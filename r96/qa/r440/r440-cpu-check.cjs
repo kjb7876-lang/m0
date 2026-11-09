@@ -1,17 +1,11 @@
-// R440 환도 피격 옛 그림 제거·영웅 테 칼날 정리 — 정적·CPU 검사(GPU·실기기 아님, 헤드리스 화면은 PR 비교 그림).
+// R440 환도 옛 그림 튐(지역 진입 직후 엔진 캐시 공백) 막기·영웅 테 칼날 정리(피격 그림은 사용자 판단으로 그대로) — 정적·CPU 검사(GPU·실기기 아님, 헤드리스 화면은 PR 비교 그림).
 const fs=require('fs'),path=require('path'),vm=require('vm');const R=path.join(__dirname,'..','..');
 const C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8'),RT=f=>fs.readFileSync(path.join(R,'runtime-text',f),'utf8');
 const checks=[];const ok=(n,p,d)=>checks.push({name:n,pass:!!p,detail:d});
 const h=C('hwando-r271.js'),c=C('combat-read-r409.js');
 ok('runtime copies match client-source',RT('hwando-r271.js')===h&&RT('combat-read-r409.js')===c);
-// ① 피격: R242 옛 그림 대신 지금 그림(R283 선 자세) + 움찔, 옛 피격 분기보다 먼저
-const iNew=h.indexOf('if(S.hit&&!moving&&HIT_NEW&&P277())'),iOld=h.indexOf("if(S.hit&&!moving){const d=S.hit.dir,h=res('hit',d)");
-ok('new hit branch runs before the old R242 hit branch',iNew>0&&iOld>iNew);
-ok('new hit draws the current walk stand pose (R283 idle), not anim hit',/return draw\(rec,st,best,'walk',dd,I\?Math\.min\(I\.frame,wA\.n-1\):wA\.n-1,\{dx\}\)/.test(h.slice(iNew,iOld)));
-ok('recoil pushes away from the enemy side and is small (≤5% body height, 0.32 s)',/dx=\(dd==='e'\?-1:1\)\*want\(\)\*\.05\*/.test(h)&&/dur=\.32/.test(h));
-ok('draw() applies opt.dx to the screen x only',/fx=q\.x\+\(\+opt\.dx\|\|0\)/.test(h));
-ok('off switch storyworld.r440.hwandoHit restores the old hit',/storyworld\.r440\.hwandoHit/.test(h)&&/HIT_NEW=false/.test(h));
-ok('no gameplay writes in the hit branch',!/player\.(hp|x|y|hurtAnim)\s*=/.test(h.slice(iNew,iOld)));
+ok('loaded hwando art is kept (KEEP) and reused when the engine cache is empty after entering a region',/const KEEP=new Map\(\)/.test(h)&&/KEEP\.set\(p,row\.image\)/.test(h)&&/const k=KEEP\.get\(p\);if\(k&&\(k\.naturalWidth\|\|k\.width\)\)/.test(h));
+ok('hit art left as R242 (user 2026-11-09: old hit pose is fine)',!/HIT_NEW|storyworld\.r440\.hwandoHit/.test(h));
 // ② 테: 환도만, 끄기, 캐시 키 분리
 ok('blade cut only for hwando, pref bladeRim restores, cache key separated',/BLADE_HEROES=new Set\(\['hwando'\]\)/.test(c)&&/prefs\.bladeRim===true/.test(c)&&/bladeCut\(\)\?':b':''/.test(c)&&/'castBehind','bladeRim'\]/.test(c));
 ok('enemy outline untouched (blade cut only when side===hero)',/if\(side==='hero'&&bladeCut\(\)\)/.test(c));
