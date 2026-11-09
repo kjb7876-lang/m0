@@ -9,7 +9,7 @@
 // 끄기(R271 그대로): localStorage['storyworld.r277.hwando']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_HWANDO_R277__)return;
-const REV='R277-hwando-3',KEY='storyworld.r277.hwando';
+const REV='R277-hwando-4',KEY='storyworld.r277.hwando';
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const stats={idleHold:0,upAttack:0,attack:0};let lastH='e';
 // 대기: 걷기 클립 마지막 칸
@@ -20,9 +20,12 @@ const side=(dx,th)=>{const d=Math.abs(+dx||0)>th?(dx>0?'e':'w'):lastH;lastH=d;re
 // R425(사용자 2026-11-08 "환도영웅 멈춰서 위나 아래 공격할 때 예전 모션 나오는 문제 — 공격 시에는 항상 좌나 우 공격 모션이 나가도록"):
 //  위 공격도 옛 R242 공격 N 원화 대신 아래와 같은 규칙(겨눈 적의 화면 가로 차이 부호, 작으면 마지막 좌·우)으로 좌·우 공격을 쓴다. 이동·피격의 위(n) 그림은 그대로.
 function attackDir(dir,dx){stats.attack++;if(dir==='e'||dir==='w'){lastH=dir;return dir;}if(dir==='n'){stats.upAttack++;return side(dx,2);}stats.downAttack=(stats.downAttack||0)+1;return side(dx,2);}
-function walkDir(dir,vx){if(dir==='e'||dir==='w'){lastH=dir;return dir;}if(dir==='n')return 'n';stats.downWalk=(stats.downWalk||0)+1;return side(vx,.6);}
+// R436(사용자 2026-11-09 "환도영웅 아래이동모션으로 적용해줘"): 아래 걷기만 새 남향 걷기 v2(assets/r436/hwando/walk-s.webp)로 그린다.
+//  가로 성분으로 마지막 좌·우(lastH)는 계속 갱신 — 멈추면 R283 좌·우 선 자세로 서고, 공격·피격·대시는 R349/R425 그대로 좌·우. 끄기: localStorage['storyworld.r436.hwandoWalkS']='{"on":false}'
+let walkS=true;try{const s=JSON.parse(localStorage.getItem('storyworld.r436.hwandoWalkS')||'null');if(s&&s.on===false)walkS=false;}catch(_){}
+function walkDir(dir,vx){if(dir==='e'||dir==='w'){lastH=dir;return dir;}if(dir==='n')return 'n';stats.downWalk=(stats.downWalk||0)+1;const h=side(vx,.6);return walkS?'s':h;}
 const down=()=>lastH;
 function face(dir){if(dir==='e'||dir==='w')lastH=dir;}
-window.__STORYWORLD_HWANDO_R277__=Object.freeze({revision:REV,on:()=>on,idle,attackDir,walkDir,down,face,inspect:()=>({revision:REV,on,lastH,stats:{...stats}}),
+window.__STORYWORLD_HWANDO_R277__=Object.freeze({revision:REV,on:()=>on,idle,attackDir,walkDir,down,face,walkS:()=>walkS,inspect:()=>({revision:REV,on,walkS,lastH,stats:{...stats}}),
  set:v=>{on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}});
 })();

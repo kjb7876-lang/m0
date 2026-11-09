@@ -15,6 +15,10 @@ const REV='R271-hwando-1',KEY='storyworld.r271.hwando',BASE='assets/r271/hwando/
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const stats={frames:0,walk:0,idle:0,attack:0,hit:0,skill:0,fallback:0,waiting:0,errors:0,dupRemoved:0,loads:0,last:null};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 let IDX=null,idxReq=false;
+/* R436: 아래 걷기 v2 — 별도 색인(assets/r436/hwando/index.json, R271 몸 키 180·발 기준점·R283 색 목표에 맞춘 6키) */
+const WS_BASE='assets/r436/hwando/';let WS=null,wsReq=false;
+function loadWalkS(){if(WS||wsReq||typeof fetch!=='function')return;wsReq=true;fetch(WS_BASE+'index.json').then(r=>r.ok?r.json():null).then(j=>{if(j?.walk?.s?.file)WS=j.walk.s;else wsReq=false;}).catch(e=>{wsReq=false;fail(e);});}
+const wsRes=()=>WS?{A:WS,base:WS_BASE,mir:false}:null;
 function loadIndex(){if(IDX||idxReq||typeof fetch!=='function')return;idxReq=true;fetch(BASE+'index.json').then(r=>r.ok?r.json():null).then(j=>{if(j&&j.anims)IDX=j;else idxReq=false;}).catch(e=>{idxReq=false;fail(e);});}
 const solo=()=>{let m=null;try{m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();}catch(_){}return !m||m==='off';};
 const T=()=>typeof time==='number'?time:0;
@@ -37,7 +41,7 @@ function track(){const t=T();if(S.x!=null){const dx=player.x-S.x,dy=player.y-S.y
    const nd=dirFromVec(v[0],v[1]);if(nd!==S.walkDir){S.pend=(S.pendDir===nd?(S.pend||0)+1:1);S.pendDir=nd;if(S.pend>=2){S.walkDir=nd;S.pend=0;}}else S.pend=0;}}
  S.x=player.x;S.y=player.y;}
 const want=()=>(typeof actorHeight==='function'?actorHeight():66)*((window.__STORYWORLD_VISUAL_R119__?.inspect?.()?.stats?.standRatio)||.98);
-function draw(rec,st,best,anim,dir,frame,opt={}){if(dir==='s'){const P=P277();if(P?.down)dir=P.down();}/* R349: 아래 그림은 쓰지 않는다(위·좌·우만) */const R=res(anim,dir);if(!R)return false;const A=R.A,p=(window.__STORYWORLD_HWANDO_R283__?.path?.(R.base,A.file))||R.base+A.file,im=image(p);/* R283 색 맞춘 파생본 */if(!im){/* R345: 공격·피격 그림이 아직 안 받아졌으면 엔진 옛 그림 대신 이미 받은 같은 방향 걷기 선 자세로(옛 그림이 한 순간 튀지 않게) */if(!opt.fb&&anim!=='walk'){stats.standIn=(stats.standIn||0)+1;const w=res('walk',dir)?.A;if(w&&draw(rec,st,best,'walk',dir,Math.min(3,w.n-1),{fb:true}))return true;}return false;}
+function draw(rec,st,best,anim,dir,frame,opt={}){const ws=anim==='walk'&&dir==='s'&&opt.s?wsRes():null;/* R436: 아래 걷기만 새 v2 */if(dir==='s'&&!ws){const P=P277();if(P?.down)dir=P.down();}/* R349: 그 밖의 아래 그림은 쓰지 않는다(위·좌·우만) */const R=ws||res(anim,dir);if(!R)return false;const A=R.A,p=(window.__STORYWORLD_HWANDO_R283__?.path?.(R.base,A.file))||R.base+A.file,im=image(p);/* R283 색 맞춘 파생본 */if(!im){/* R345: 공격·피격 그림이 아직 안 받아졌으면 엔진 옛 그림 대신 이미 받은 같은 방향 걷기 선 자세로(옛 그림이 한 순간 튀지 않게) */if(!opt.fb&&anim!=='walk'){stats.standIn=(stats.standIn||0)+1;const w=res('walk',dir)?.A;if(w&&draw(rec,st,best,'walk',dir,Math.min(3,w.n-1),{fb:true}))return true;}return false;}
  const n=A.n,fr=((frame%n)+n)%n,cw=A.cell[0],ch=A.cell[1],col=fr%A.cols,row=Math.floor(fr/A.cols);
  const body=R.body||A.body||180,w=want(),k=w/body,ky=opt.breath?k*(1+.008*Math.sin(T()*2.2)):k;
  const q=project(player.x,player.y),lift=Math.min(Math.max(+player.visualLiftPx||0,0),w*.65),fx=q.x,fy=q.y-lift,f=R.mir?-1:1,[ax,ay]=A.anchor;
@@ -48,10 +52,11 @@ function draw(rec,st,best,anim,dir,frame,opt={}){if(dir==='s'){const P=P277();if
  stats.frames++;stats[anim]=(stats[anim]||0)+1;if(R.old)stats.fallback++;stats.last={anim,dir,frame:fr,old:!!R.old};return true;}
 function frameAt(ms,tms,loop){const tot=ms.reduce((a,b)=>a+b,0);let t=loop?((tms%tot)+tot)%tot:Math.min(tms,tot-1);for(let i=0;i<ms.length;i++){if(t<ms[i])return i;t-=ms[i];}return ms.length-1;}
 function contactStart(ms){let c=ms.findIndex((m,i)=>i>1&&m<=40);if(c<0)c=Math.floor(ms.length*.4);let pre=0;for(let i=0;i<c;i++)pre+=ms[i];return Math.max(0,pre-90);}
-const BODY_ART=/hero_direction|hero-authored|assets\/heroes\/|r91\/walk\/|r93\/idle\/|r119\/heroes\/|r121\/(?:heroes|walk)\/|r128\/gunner\/|r130\/[a-z]+\/|r143\/attack\/|r242\/hwando\/|r271\/hwando\/|awakening|^blob:/;
+const BODY_ART=/r436\/hwando\/|hero_direction|hero-authored|assets\/heroes\/|r91\/walk\/|r93\/idle\/|r119\/heroes\/|r121\/(?:heroes|walk)\/|r128\/gunner\/|r130\/[a-z]+\/|r143\/attack\/|r242\/hwando\/|r271\/hwando\/|awakening|^blob:/;
 function pickBody(rec,st){let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!BODY_ART.test(String(c.sourcePath||c.image?.src||'')))continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}return best;}
 let preloaded=null;
 function preload(){if(!IDX||preloaded===room)return;preloaded=room;for(const a of (P277()?['walk']:['walk','idle']))for(const d of ['n','s','e','w']){const A=IDX.anims[a]?.[d];if(A?.file)image((window.__STORYWORLD_HWANDO_R283__?.path?.(BASE,A.file))||BASE+A.file);}
+ if(WS)image(WS_BASE+WS.file);/* R436 */
  /* R345: 공격·피격(새 팩 → R242 대체 포함)도 미리 받는다 — 처음 휘두르거나 맞는 순간 옛 그림이 튀던 원인 */for(const a of ['attack','hit'])for(const d of ['n','s','e','w']){const R=res(a,d);if(R?.A?.file)image((window.__STORYWORLD_HWANDO_R283__?.path?.(R.base,R.A.file))||R.base+R.A.file);}}
 const atkOf=d=>res('attack',d)?.A;
 function choose(rec,st){const best=pickBody(rec,st);if(!best)return;const t=T(),ms=1000;
@@ -65,11 +70,11 @@ function choose(rec,st){const best=pickBody(rec,st);if(!best)return;const t=T(),
  if(S.swing){const a=atkOf(S.swing.dir),el=(t-S.swing.t0)*ms/S.swing.scale+S.swing.off,tot=a.ms.reduce((x,y)=>x+y,0);
   if(el<tot&&!(moving&&t-S.swing.t0>.35)){S.dir=S.swing.dir;return draw(rec,st,best,'attack',S.swing.dir,frameAt(a.ms,el,false));}S.swing=null;}
  if(S.hit&&!moving){const d=S.hit.dir,h=res('hit',d)?.A,el=(t-S.hit.t0)*ms/.6;if(h&&el<h.ms.reduce((x,y)=>x+y,0)){S.dir=d;return draw(rec,st,best,'hit',d,frameAt(h.ms,el,false));}S.hit=null;}
- if(moving){const P=P277();S.dir=P?.walkDir?P.walkDir(S.walkDir,S.sx):S.walkDir;P?.face(S.dir);const R=res('walk',S.dir),k=want()/(R?.A?.body||180),per=(IDX.anims.walk?.stride?.px_per_frame||12.8)*k;return draw(rec,st,best,'walk',S.dir,Math.floor(S.dist/Math.max(1,per)));}
+ if(moving){const P=P277();S.dir=P?.walkDir?P.walkDir(S.walkDir,S.sx):S.walkDir;P?.face(S.dir);const ws=S.dir==='s'?wsRes():null,R=ws||res('walk',S.dir),k=want()/(R?.A?.body||180),fps=R?.A?.frames_per_stride,per=(IDX.anims.walk?.stride?.px_per_frame||12.8)*k*(fps?(IDX.anims.walk?.stride?.frames_per_stride||12)/fps:1);/* R436: 6키 = 두 걸음 → 칸당 거리 2배(보폭 같게) */return draw(rec,st,best,'walk',S.dir,Math.floor(S.dist/Math.max(1,per)),{s:!!ws});}
  const fd=enemyDir()||S.dir;S.dir=fd;const P=P277();if(P){P.face(fd);const I=window.__STORYWORLD_HWANDO_R283__?.idle?.(P),dd=I?I.dir:fd;S.dir=dd;/* R354: 날개(R101) 등이 실제로 그린 선 자세 방향을 보게 */const w=res('walk',dd)?.A;if(!w)return;P.idle(dd);return draw(rec,st,best,'walk',dd,I?Math.min(I.frame,w.n-1):w.n-1);}/* R283: 좌·우 걷기의 선 자세 칸 *//* R277: 걷기 마지막 칸으로 멈춘 대기 */const a=res('idle',fd)?.A;if(!a)return;
  return draw(rec,st,best,'idle',fd,frameAt(a.ms,t*ms,true),{breath:true});}
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
- try{if(on&&st>=0&&solo()&&player?.hero==='hwando'&&player.hp>0){loadIndex();if(IDX)choose(rec,st);}}catch(e){fail(e);}return r;};}
+ try{if(on&&st>=0&&solo()&&player?.hero==='hwando'&&player.hp>0){loadIndex();if(P277()?.walkS?.())loadWalkS();if(IDX)choose(rec,st);}}catch(e){fail(e);}return r;};}
 loadIndex();
 window.__STORYWORLD_HWANDO_R271__=Object.freeze({revision:REV,active:()=>on&&!!IDX&&typeof player==='object'&&player?.hero==='hwando'&&solo(),index:()=>IDX,state:()=>({...S,swing:S.swing&&{...S.swing},hit:S.hit&&{...S.hit}}),
  inspect:()=>({revision:REV,on,ready:!!IDX,stats:{...stats},lastError}),set:v=>{on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}});
