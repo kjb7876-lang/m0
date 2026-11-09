@@ -32704,8 +32704,8 @@
     },
     {
       "path": "bossroom-tidy-r438.js",
-      "bytes": 6252,
-      "sha256": "8cee34e7620a1739bc09341a55d63ebab78963b8e5f315c44781ad7954cf81e8"
+      "bytes": 6788,
+      "sha256": "3186529a679460f8bf5d5548ce12276df7695f29a6ad63c0bee313a728f2cd7a"
     },
     {
       "path": "cave-r204.js",
@@ -34149,8 +34149,8 @@
     },
     {
       "path": "sin-room-art.js",
-      "bytes": 21177,
-      "sha256": "d96b307fde52cb5ab3078ffb5bdf95cea089b3652ad2b7370339724a135527c2"
+      "bytes": 21384,
+      "sha256": "133f857207384b8191536117384ed8932847b4c48b7b966e9b07b53ee98fb78c"
     },
     {
       "path": "skill-fx-r292.js",
@@ -34409,8 +34409,8 @@
     },
     {
       "path": "world-doors-r83.js",
-      "bytes": 13713,
-      "sha256": "908ad9b40af76a68438a2888c39824c99f211f08ae2d376cfbe77aab11973012"
+      "bytes": 14746,
+      "sha256": "1bdf66b7540696e54ce7b44f7eae36c80ff9b6e8396bcc3031035035b2ad1151"
     },
     {
       "path": "world-environment-r81.js",
@@ -34454,7 +34454,7 @@
     }
   ],
   "fileCount": 6890,
-  "totalBytes": 1090417626,
+  "totalBytes": 1090419402,
   "webHTMLSha256": "c66bbdc1ca5fdbb563ae9fc2600844336f442f25b993327887968624f1deca7d",
   "largest": [
     {

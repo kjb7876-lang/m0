@@ -9,8 +9,8 @@
 //   · 같은 범위에서 보스방 틀 바깥(어둠 띠)에 선 장면 장식(r80Dressing·r8[01]:scene:)을 뺀다. 틀 안 장면 소품은 그대로.
 //   · 나태·질투·탐식 지역(ep1b02·03·04)의 나머지 방에서는 R224 공용 가구 중 그 지역 그림만 남긴다(질투=깨진 거울, 나태=소파·쓰레기, 탐식=레인지·쓰레기).
 //  R443(사용자 2026-11-09 06:36Z 색욕 레퍼런스 그림 "이런식으로 적절하게 배치하란말이야 뺄껀 과감히 빼고"):
-//   · 색욕(ep1b05) 라운지 소품(R406/R408)은 보스 목표 지점 둘레에서 매번 뽑혀 자리가 흔들렸다 → 고정 자리: 바 앞 극장 의자 줄·칵테일 탁자, 서벽 커튼과 그 아래 하이힐, 동남 모서리 스포트라이트.
-//     가면 판·가린 거울·긴 무대는 뺀다(visible=false — R406 이 다시 만들지 않게 객체는 둔다).
+//   · 색욕(ep1b05) 라운지 소품(R406/R408)은 보스 목표 지점 둘레에서 매번 뽑혀 자리가 흔들렸다 → 레퍼런스 그림 좌표로 고정: 바 앞 극장 의자 줄, 칵테일 탁자, 하이힐, 동쪽 스포트라이트.
+//     커튼은 보스 문 문짝 대신 쓴다(world-doors-r83). 가면 판·가린 거울·긴 무대·벽 커튼은 뺀다(visible=false — R406 이 다시 만들지 않게 객체는 둔다).
 //   · 색욕 모이는 방(gatherBounds+3)의 R224 공용 가구도 뺀다.
 //  끄기: localStorage['storyworld.r438.bossroom']='{"on":false}'
 (()=>{'use strict';
@@ -22,11 +22,14 @@ const prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');
 const stats={rooms:0,furniture:0,offTheme:0,outside:0,errors:0};let lastError=null,last=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const done=new WeakMap();
 // R443 색욕 라운지 고정 자리(null = 뺌). 바닥 소품 그림은 기본이 남서(화면 왼쪽 아래)를 본다. 커튼은 서벽(-x)에 붙인다.
-const LUST=Object.freeze({'lounge-seats':{x:11.9,y:10.1},'cocktail-table':{x:9.9,y:12.7},'red-heels':{x:8.5,y:17.4},'stage-spot':{x:24.3,y:17.4},'red-curtain':{x:6.65,y:16.1,wall:'-x',flip:true},
- 'mask-panel':null,'veiled-mirror':null,'stage-long':null});
+// R443(06:49Z "이미지처럼 각도랑 위치 정확하게 … 문 대신 커튼"): 레퍼런스 그림 좌표·좌우 방향 그대로. 커튼은 보스 문(door-0) 문짝 자리에 그린다(world-doors-r83) → 벽 소품 커튼은 뺀다.
+const LUST=Object.freeze({'lounge-seats':{x:13.1,y:10.2},'cocktail-table':{x:14.8,y:13.9},'red-heels':{x:15.1,y:15.6},'stage-spot':{x:25.5,y:15.8,flip:true},
+ 'red-curtain':null,'mask-panel':null,'veiled-mirror':null,'stage-long':null});
 const GATHER_CLEAR=new Set(['ep1b05']);
 function lust(r){let n=0;if(r.id!=='ep1b05')return 0;for(const q of r.props){const k=q?.r406Boss;if(!k||!(k in LUST))continue;const v=LUST[k];
   if(v===null){if(q.visible!==false||!q.r443Hidden){q.visible=false;q.r443Hidden=true;n++;}continue;}
+  // 사용자가 정한 자리라 R169 길 비우기(입구→목표 길 1.15칸 안 장식 숨김)에서 뺀다 — r169Hidden 표시는 남겨 다시 숨기지 않게 한다.
+  if(q.visible===false||!q.r169Hidden){q.visible=true;q.r169Hidden=true;}
   if(q.x!==v.x||q.y!==v.y||q.r443Placed!==true){q.r443From=q.r443From||{x:q.x,y:q.y};q.x=v.x;q.y=v.y;q.r443Placed=true;if(v.wall)q.r406Wall=v.wall;if(v.flip)q.r303Flip=true;else delete q.r303Flip;n++;}}
  stats.lust=(stats.lust||0)+n;return n;}
 const bounds=r=>{const b=r?.exploration?.worldWardR81?.bossBounds;return Array.isArray(b)&&b.length===4&&b.every(Number.isFinite)?b:null;};
