@@ -23,7 +23,8 @@ const stats={rooms:0,furniture:0,offTheme:0,outside:0,errors:0};let lastError=nu
 const done=new WeakMap();
 // R443 색욕 라운지 고정 자리(null = 뺌). 바닥 소품 그림은 기본이 남서(화면 왼쪽 아래)를 본다. 커튼은 서벽(-x)에 붙인다.
 // R443(06:49Z "이미지처럼 각도랑 위치 정확하게 … 문 대신 커튼"): 레퍼런스 그림 좌표·좌우 방향 그대로. 커튼은 보스 문(door-0) 문짝 자리에 그린다(world-doors-r83) → 벽 소품 커튼은 뺀다.
-const LUST=Object.freeze({'lounge-seats':{x:13.1,y:10.2},'cocktail-table':{x:14.8,y:13.9},'red-heels':{x:15.1,y:15.6},'stage-spot':{x:25.5,y:15.8,flip:true},
+// R450(사용자 2026-11-09 10:08Z 표시 그림): 의자 줄은 서벽에 붙여 벽과 나란히(뒤집어 방 안쪽을 봄), 잔·간이탁자는 부스 소파 앞으로.
+const LUST=Object.freeze({'lounge-seats':{x:6.95,y:12.8,flip:true},'cocktail-table':{x:23.4,y:11.1},'red-heels':{x:15.1,y:15.6},'stage-spot':{x:25.5,y:15.8,flip:true},
  'red-curtain':null,'mask-panel':null,'veiled-mirror':null,'stage-long':null});
 const GATHER_CLEAR=new Set(['ep1b05']);
 function lust(r){let n=0;if(r.id!=='ep1b05')return 0;for(const q of r.props){const k=q?.r406Boss;if(!k||!(k in LUST))continue;const v=LUST[k];

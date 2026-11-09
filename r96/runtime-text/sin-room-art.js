@@ -50,7 +50,7 @@ const themes={
   {...prop('gSofaN',25.3,25.75,3.0,1.2,101,1.1),atlas:'envyLounge',cell:'sofaN',fit:'lobby',back:true},{...prop('gTableN',25.3,27.55,2.0,.9,83,.9),atlas:'envyLounge',cell:'tableN',fit:'lobby'},
   {...prop('gSofaW',1.75,31.5,1.2,3.0,118,1.1),atlas:'envyLounge',cell:'sofaW',wall:'west',fit:'lobby',back:true},{...prop('gTableW',3.55,31.5,.9,2.0,83,.9),atlas:'envyLounge',cell:'tableW',wall:'west',fit:'lobby'}]},
  ep1b04:{name:'탐식의 호텔 주방',atlas:'glutton',props:[prop('prep',12.9,7.15,4.0,1.7,165,1.15),prop('range',18.7,7.1,3.0,1.4,165,1.55),prop('fridge',23.7,7.0,1.7,1.3,150,2.35),prop('trolley',7.1,15.4,1.5,1.55,112,1.1,true)]},
- ep1b05:{name:'색욕의 호텔 고급 바',atlas:'lust',props:[prop('bar',13.1,7.15,4.0,1.5,170,1.3),prop('backbar',16.8,6.95,2.4,.95,170,2.4),{...prop('booth',23.3,8.5,1.65,3.5,165,1.4,true),wall:'west'},{...prop('trolley',11.6,14.7,1.25,1.4,112,.95,true),wall:'west'}]},
+ ep1b05:{name:'색욕의 호텔 고급 바',atlas:'lust',props:[prop('bar',13.1,7.15,4.0,1.5,170,1.3),{...prop('booth',23.3,8.5,1.65,3.5,165,1.4,true),wall:'west'},{...prop('trolley',21.7,10.9,1.25,1.4,112,.95,true),wall:'west'}]},// R450 사용자 2026-11-09 10:08Z: 술병 진열대(backbar) 삭제, 잔 수레(trolley)는 소파(부스) 앞으로
  ep1b06:{name:'맘몬의 호텔 사장실과 금고',atlas:'mammon',props:[prop('desk',14,7.35,5,1.4,160,1.02,true,true),prop('chair',18,7.4,1.2,1.2,130,1.7),prop('drawers',6.85,15,1.4,4,140,1.35,true,true),prop('trolley',24.5,7,1,1.2,100,1.1)]},
  ep1b07:{name:'불타는 호텔 식당',atlas:'wrath',props:[prop('table',13.1,7.3,3.9,1.7,170,1.05),prop('buffet',21.6,7.1,4.0,1.65,165,1.45),prop('chairs',9.6,26.1,2.2,1.5,132,1.1),{...prop('table2',9.1,30.3,3.9,1.7,170,1.05),cell:'table'},{...prop('table3',19.3,32.1,3.9,1.7,170,1.05),cell:'table'},prop('booth',7.2,17.2,1.8,3.75,170,1.35,true)]}
 };

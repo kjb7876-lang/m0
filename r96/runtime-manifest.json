@@ -32914,8 +32914,8 @@
     },
     {
       "path": "bossroom-tidy-r438.js",
-      "bytes": 6788,
-      "sha256": "3186529a679460f8bf5d5548ce12276df7695f29a6ad63c0bee313a728f2cd7a"
+      "bytes": 6974,
+      "sha256": "f9ebb7032cd8162e2721db8181853717db330c642f5803c943001c2530a721e7"
     },
     {
       "path": "cave-r204.js",
@@ -34369,8 +34369,8 @@
     },
     {
       "path": "sin-room-art.js",
-      "bytes": 21384,
-      "sha256": "133f857207384b8191536117384ed8932847b4c48b7b966e9b07b53ee98fb78c"
+      "bytes": 21460,
+      "sha256": "a9700651cf1cb4c7b5ebe31d327ec3197981e937d0084c46f2f4052ecc8641c6"
     },
     {
       "path": "skill-attack-r440.js",
@@ -34679,7 +34679,7 @@
     }
   ],
   "fileCount": 6935,
-  "totalBytes": 1091731155,
+  "totalBytes": 1091731417,
   "webHTMLSha256": "498f9011d0eb96b3372bcad410d9e10640e0ab89f0896a807b70ee358cc900c5",
   "largest": [
     {
