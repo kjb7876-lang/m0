@@ -29,10 +29,11 @@ function tintedSheet(name,im,t){const q=c=>(c||[0,0,0]).map(v=>Math.max(0,Math.m
    px[i]=r;px[i+1]=gg;px[i+2]=b;}
   g.putImageData(d,0,0);c.__storyworldStaticTint=true;}catch(e){fail(e);c=im;}// 못 물들이면(오염된 캔버스 등) 원본을 캐시해 매 프레임 다시 시도하지 않는다
  tinted.set(key,c);if(tinted.size>40)tinted.delete(tinted.keys().next().value);stats.tinted=(stats.tinted||0)+1;return c;}
-// play(이름, 바닥 x, y, {h: 화면에서의 키(px, 기본 영웅 키 배수 k), k, delay(초), rate(재생 속도), alpha, flip, loop, key(같은 key 는 하나만), z(띄움 px)})
+// play(이름, 바닥 x, y, {h: 화면에서의 키(px, 기본 영웅 키 배수 k), k, delay(초), rate(재생 속도), alpha, flip, loop, key(같은 key 는 하나만), z(띄움 px), until(이 시각에 지움), fade(until 전 이 초 동안 옅어짐, R440)})
+// R440: 반복(loop) 시트를 until 없이 부르면 지역을 나갈 때까지 바닥에 남는다(피의 육망성 소환 균열 문 = 사용자 '빨간 원 계속 남음'). 반복 시트에는 until 을 꼭 준다.
 function play(name,x,y,o={}){if(!prefs.on||!meta?.[name]||!Number.isFinite(x+y))return null;image(name);
  if(o.key){const old=list.find(e=>e.key===o.key);if(old){old.x=x;old.y=y;if(o.until)old.until=o.until;return old;}}
- if(list.length>=MAX)list.shift();const e={name,x,y,t0:T()+(o.delay||0),rate:o.rate||1,k:o.k||1,h:o.h||0,alpha:o.alpha??1,flip:!!o.flip,loop:o.loop??!!meta[name].loop,key:o.key||null,z:o.z||0,until:o.until||0,tint:o.tint||null};list.push(e);stats.plays++;arm();return e;}
+ if(list.length>=MAX)list.shift();const e={name,x,y,t0:T()+(o.delay||0),rate:o.rate||1,k:o.k||1,h:o.h||0,alpha:o.alpha??1,flip:!!o.flip,loop:o.loop??!!meta[name].loop,key:o.key||null,z:o.z||0,until:o.until||0,fade:o.fade||0,tint:o.tint||null};list.push(e);stats.plays++;arm();return e;}
 // R177: 화면 자리에 진행도(0~1)로 한 칸을 바로 그린다 — 이미 진행도를 가진 기존 연출(영웅 스킬 무늬)을 프레임 애니메이션으로 바꿀 때. 그림이 아직 없으면 false.
 function frameAt(name,u,x,y,o={}){const m=meta?.[name];if(!m||!prefs.on||typeof ctx==='undefined'||!ctx)return false;const raw=image(name);if(!raw)return false;
  const n=m.frames,fr=Math.max(0,Math.min(n-1,Math.floor(u*n)));const im=o.tint?tintedSheet(name,raw,o.tint):raw;const[fw,fh]=m.frame,[px,py]=m.pivot,s=(o.h||H()*1.9)/fh,sx=(fr%m.columns)*fw,sy=Math.floor(fr/m.columns)*fh;
@@ -42,7 +43,7 @@ function arm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)&&!eff
 function drawAll(){if(typeof ctx==='undefined'||!ctx||typeof project!=='function')return;const t=T();
  for(const e of list){const m=meta?.[e.name];if(!m)continue;const age=(t-e.t0)*e.rate;if(age<0)continue;const n=m.frames;let fr=Math.floor(age*m.fps);if(e.loop)fr%=n;else if(fr>=n)continue;
   const raw=image(e.name);if(!raw){stats.skipped++;continue;}const im=e.tint?tintedSheet(e.name,raw,e.tint):raw;const[fw,fh]=m.frame,[px,py]=m.pivot,want=e.h||H()*e.k*1.9,s=want/fh,q=project(e.x,e.y),sx=(fr%m.columns)*fw,sy=Math.floor(fr/m.columns)*fh;
-  ctx.save();try{const run=()=>{ctx.globalAlpha*=e.alpha;ctx.translate(q.x,q.y-e.z);ctx.scale(e.flip?-s:s,s);ctx.drawImage(im,sx,sy,fw,fh,-px,-py,fw,fh);};
+  ctx.save();try{const run=()=>{ctx.globalAlpha*=e.alpha*(e.fade>0&&e.until?Math.max(0,Math.min(1,(e.until-t)/e.fade)):1);ctx.translate(q.x,q.y-e.z);ctx.scale(e.flip?-s:s,s);ctx.drawImage(im,sx,sy,fw,fh,-px,-py,fw,fh);};
    if(typeof ctx.scope==='function')ctx.scope({id:'r163:'+e.name+':'+e.t0,kind:'effect',x:e.x,y:e.y,r163:true},run);else run();stats.drawn++;}catch(err){fail(err);}finally{ctx.restore();}}}
 try{
  if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e&&e.type==='r163-pixelfx'){try{drawAll();}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};}

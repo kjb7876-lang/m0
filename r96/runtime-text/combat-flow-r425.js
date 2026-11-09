@@ -62,10 +62,10 @@ function punchK(s){const a=T()-s.hitAt;if(!prefs.punch||a<0||a>.12)return 0;retu
 //    원래 R40/R41 읽기 쉬운 공격 신호(머리 위 '근접 공격 준비'·'원거리 조준' 상자와 테두리, 검은 조준선·점선, 표적 고리·눈금, 몸의 검은 방향 화살표)와
 //    엔진 e.tell 표적 표식(target-mark), R116 돌진 표적 인장을 기본으로 지운다. 켜면 ①의 배율을 되돌려 조준선·표적 고리가 실제 표적을 가리키게 둔다.
 //    장판(위험 지대) 예고·적 스킬 원화 연출(R98·FINAL42)은 그대로(R98 범위 선은 원래 기본 꺼짐 — 아래 설정이 함께 켜고 끈다). 판정·피해·시점은 그대로.
-const TELE_WORLD=new Set(['rgba(12,10,12,.92)','rgba(16,12,14,.92)','#e2b17d']),TELE_BODY=new Set(['rgba(12,10,12,.95)','#e2c18b','#bd8065','#b89a71']),TELE_TEXT=new Set(['원거리 조준','근접 공격 준비']);
+const TELE_WORLD=new Set(['rgba(12,10,12,.92)','rgba(16,12,14,.92)','#e2b17d','rgba(211,193,151,.72)'/* R440: R52 돌진 길 */]),TELE_BODY=new Set(['rgba(12,10,12,.95)','#e2c18b','#bd8065','#b89a71']),TELE_TEXT=new Set(['원거리 조준','근접 공격 준비']);
 function teleKind(c){if(!c||c.owner?.kind==='enemy')return null;const y=c.style||{};
  if(c.kind==='stroke'){const k=y.strokeStyle;if(TELE_WORLD.has(k))return 'world';if(k==='#d79b70')return c.paths?.length===1&&c.paths[0]?.points?.length===2?'world':'body';return TELE_BODY.has(k)?'body':null;}
- if(c.kind==='fill'&&y.fillStyle==='rgba(14,13,15,.92)')return 'body';if(c.kind==='text'&&TELE_TEXT.has(c.text))return 'body';return null;}
+ if(c.kind==='fill'&&y.fillStyle==='rgba(14,13,15,.92)')return 'body';if(c.kind==='fill'&&y.fillStyle==='rgba(186,165,119,.075)')return 'world';/* R440: R52 돌진 길 속 */if(c.kind==='text'&&TELE_TEXT.has(c.text))return 'body';return null;}
 function bboxOf(c){let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9,n=0;const add=p=>{if(Array.isArray(p)){x0=Math.min(x0,p[0]);x1=Math.max(x1,p[0]);y0=Math.min(y0,p[1]);y1=Math.max(y1,p[1]);n++;}};
  if(Array.isArray(c.points))c.points.forEach(add);if(Array.isArray(c.paths))for(const pa of c.paths)if(Array.isArray(pa?.points))pa.points.forEach(add);return n?[x0,y0,x1,y1]:null;}
 function isBar(c,e,fx,fy,SX,SY){if(c.kind!=='fill'||c.owner?.kind!=='enemy'||!Array.isArray(c.paths)||c.paths.length!==1||typeof c.style?.fillStyle!=='string')return false;const P=c.paths[0]?.points;if(!Array.isArray(P)||P.length<4||P.length>5)return false;
@@ -105,6 +105,11 @@ if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a
  try{post(e,cmds,st0,fx,fy,sx*k,sy*k,sx,sy,teleOff,headBar,s);}catch(err){fail(err);}
  try{if(XD.has(e)){const b=bodyCmd(cmds,st0);if(b)s.box=boxOf(b);}}catch(err){fail(err);}
  return r;};}
+// R440(사용자 2026-11-09 "이런 아래에 빨간 예비표시 안생기도록 이거랑 하얀실선직사각형 돌진예비표시도"):
+//  · 엔진 적 시전·장판·원거리의 바닥 예고 그림(drawNativeGroundArt154 를 'warning'·'flight' 단계로 부름 — 시전 그림을 발사 길·장판 모양으로 눕혀 옅게 깐 불꽃빛 띠·원)을
+//    예고 표시를 끄면 그리지 않는다. 터지는 순간('active')·잔흔('recovery')·맞은 자리('confirmed-contact')는 그대로. 판정·피해·시간은 그대로.
+//  · 엔진 R52 돌진 길(하얀 실선 직사각형 + 화살촉, 선 rgba(211,193,151,.72)·속 rgba(186,165,119,.075))은 위 teleKind 'world' 로 같이 지운다.
+if(typeof drawNativeGroundArt154==='function'){const base=drawNativeGroundArt154;drawNativeGroundArt154=function(path,rect,g,alpha,stage,...a){try{if(!prefs.tele&&solo()&&(stage==='warning'||stage==='flight')){stats.groundTeleHidden=(stats.groundTeleHidden||0)+1;return false;}}catch(_){}return base.apply(this,[path,rect,g,alpha,stage,...a]);};}
 // R116 돌진 표적 인장(fx 'sigil' + VFX.mark) — 예고 표시를 끄면 그리지 않는다
 if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(fe,...a){try{if(!prefs.tele&&fe?.type==='sigil'&&typeof VFX!=='undefined'&&VFX?.mark&&fe.asset===VFX.mark&&(+fe.size||1)>1.02){stats.teleHidden=(stats.teleHidden||0)+1;return;}}catch(_){}return base.apply(this,[fe,...a]);};}
 // ---- 타격감: 영웅 쪽 공격이 실제로 피해를 준 순간 ----
@@ -360,7 +365,7 @@ if(typeof urlFor==='function'){const ub=urlFor;urlFor=function(path,...a){try{co
 function teleSet(v){set('tele',!!v);try{window.__STORYWORLD_VFX_R98__?.set?.({telegraph:!!v});}catch(_){}try{window.__STORYWORLD_COMBAT_R170__?.set?.({quietTells:!v});}catch(_){}return prefs.tele;}
 function injectTele(n){try{const panel=document.getElementById('panel');if(!panel)return false;if(panel.querySelector('#r425Tele'))return true;
  const host=panel.querySelector('#accessR420')||(n>=3?panel.querySelector('#quickSettingsR114'):null);if(!host)return false;
- const lab=document.createElement('label');lab.className='r420-row';lab.id='r425TeleRow';lab.innerHTML='<input type="checkbox" id="r425Tele"'+(prefs.tele?' checked':'')+'> 적 공격·돌진 예고 표시(머리 위 상자·검은 조준선·표적 고리, 기본 꺼짐)';
+ const lab=document.createElement('label');lab.className='r420-row';lab.id='r425TeleRow';lab.innerHTML='<input type="checkbox" id="r425Tele"'+(prefs.tele?' checked':'')+'> 적 공격·돌진 예고 표시(머리 위 상자·검은 조준선·표적 고리·바닥 예고 띠·돌진 길, 기본 꺼짐)';
  host.appendChild(lab);lab.querySelector('input').onchange=ev=>teleSet(!!ev.target.checked);stats.teleUi=(stats.teleUi||0)+1;return true;}catch(e){fail(e);return true;}}
 if(typeof openPanel==='function'){const opBase=openPanel;openPanel=function(html,...a){try{if(typeof html==='string'&&html.indexOf('츠바메가에시')>=0){renameDefs();html=html.replace(/츠바메가에시/g,'바람베기');stats.renamedHtml=(stats.renamedHtml||0)+1;}}catch(e){fail(e);}const res=opBase.call(this,html,...a);try{if(typeof html==='string'&&/설정/.test(html)){let n=0;const go=()=>{if(!injectTele(n)&&++n<24)requestAnimationFrame(go);};requestAnimationFrame(go);}}catch(e){fail(e);}return res;};}
 function set(k,v){prefs[k]=v!==false;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return prefs[k];}
