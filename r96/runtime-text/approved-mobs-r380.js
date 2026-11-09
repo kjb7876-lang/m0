@@ -124,7 +124,7 @@ function cellFor(e,m){if(attacking(e))return m.attack[Math.floor(progress(e)*m.a
 const MOVE=new WeakMap();
 function moveLeft(e){const sx=e.x-e.y,t=T();let m=MOVE.get(e);if(!m){MOVE.set(e,m={sx,t,left:null,at:-9});return null;}
  const d=sx-m.sx;if(Math.abs(d)>.004){m.left=d<0;m.at=t;m.sx=sx;}else if(t-m.at>.35)m.sx=sx;m.t=t;return e.moving&&m.left!=null&&t-m.at<.35?m.left:null;}
-function faceLeft(e){const mv=e&&prefs.face!==false?moveLeft(e):null;if(attacking(e)&&Number.isFinite(e.attack.angle)){const sd=Math.cos(e.attack.angle)-Math.sin(e.attack.angle);if(Math.abs(sd)>.05)return sd<0;}
+function faceLeft(e){const r444=window.__STORYWORLD_ENEMY_FACE_R444__?.left?.(e);if(typeof r444==='boolean')return r444;/* R444: 좌우는 enemy-face-r444 한 곳에서(공격 판정 각·충돌 뒤 실제 걸음·영웅 쪽) — 꺼지면 아래 R441 규칙 */const mv=e&&prefs.face!==false?moveLeft(e):null;if(attacking(e)&&Number.isFinite(e.attack.angle)){const sd=Math.cos(e.attack.angle)-Math.sin(e.attack.angle);if(Math.abs(sd)>.05)return sd<0;}
  if(mv!=null&&!(e.rangedWindup>0))return mv;
  try{return !!(player&&(player.x-player.y)<(e.x-e.y));}catch(_){return false;}}
 function frameOf(e,m,id){const [cw,ch]=m.cell,[px,py]=m.pivot,vh=m.visibleHeight||150,k=cellFor(e,m),cols=m.cols||k+1,sx=(k%cols)*cw,sy=Math.floor(k/cols)*ch;

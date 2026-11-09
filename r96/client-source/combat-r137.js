@@ -93,7 +93,7 @@
   if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){if(!e)return base.apply(this,arguments);
    const ds=e.defScale,dir=e.direction;let scaled=false,turned=false;
    try{if(prefs.midbossScale&&midClass(e)&&Number.isFinite(ds)){e.defScale=ds*.7;scaled=true;stats.midbossDraws++;}
-    if(prefs.faceAlways&&typeof player==='object'&&player&&inFight(e)){const want=toward(e);if(['left','right'].includes(want)&&e.direction!==want){e.direction=want;turned=true;stats.faced++;}}}catch(err){fail(err);}
+    if(prefs.faceAlways&&typeof player==='object'&&player&&inFight(e)&&!window.__STORYWORLD_ENEMY_FACE_R444__?.owns?.(e)){/* R444 이 맡은 몹은 그쪽이 정한다 */const want=toward(e);if(['left','right'].includes(want)&&e.direction!==want){e.direction=want;turned=true;stats.faced++;}}}catch(err){fail(err);}
    try{return base.apply(this,arguments);}finally{if(scaled)e.defScale=ds;if(turned)e.direction=dir;}};}
   if(typeof hurt==='function'){const base=hurt;hurt=function(value,source,...a){let added=false;if(value>0)hurtAt=T();
    if(solo()){swapBind(source);
