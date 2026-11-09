@@ -9,7 +9,7 @@ ok('source exists',!!src);
 try{ok('runtime copy matches source',src===RT(F));}catch(e){ok('runtime copy matches source',false);}
 try{new vm.Script(src);ok('syntax',!!src);}catch(e){ok('syntax '+e.message,false);}
 const html=RT('index.html');
-ok('script tag once, right after props-space-r449',html.split('"./'+F+'"').length===2&&html.includes('<script src="./props-space-r449.js"></script>\n<script src="./grove-r481.js"></script>')||html.includes('<script src="./props-space-r449.js"></script><script src="./grove-r481.js"></script>'));
+ok('script tag once, right after cave-r204',html.split('"./'+F+'"').length===2&&/<script src="\.\/cave-r204\.js"><\/script>\s*<script src="\.\/grove-r481\.js"><\/script>/.test(html));
 ok('loads after cave-r204',html.indexOf('"./cave-r204.js"')>=0&&html.indexOf('"./cave-r204.js"')<html.indexOf('"./'+F+'"'));
 ok('listed in verify-r96-public.py',/'grove-r481\.js'/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')));
 ok('CI runs this check',fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('node r96/qa/r481/grove-r481-cpu-check.cjs'));
@@ -58,5 +58,7 @@ if(API){class V3{constructor(x=0,y=0,z=0){this.x=x;this.y=y;this.z=z;}setFromMat
  ok('meshes are presentation-only on layer 2, depth-tested cutout',out&&out.children.every(m=>m.layer===2&&m.userData.presentationOnly===true&&m.material.alphaTest>=.4&&m.material.depthWrite===true));
  const quads=out?out.children.reduce((s,m)=>s+m.geometry.attr.position.array.length/12,0):0;ok('one quad per planted spot',quads===API.plan({W,H,fv,top,doors,trees:sp.map(s=>({x:s.position.x,y:s.position.z,h:s.position.y})),seed:0x5d0077,mats:3}).length);
  ok('quads face the camera (top edge along camera up)',out&&out.children.every(m=>{const a=m.geometry.attr.position.array;const dy=a[7]-a[1];return dy>0;}));
+ ok('understory quads use the crown crop (uv v starts ≥ .35), canopy trees use the whole picture',out&&out.children.some(m=>{const a=m.geometry.attr.uv.array;for(let i=1;i<a.length;i+=8)if(a[i]>=.35)return true;return false;})&&out.children.every(m=>{const a=m.geometry.attr.uv.array;for(let i=1;i<a.length;i+=8)if(!(Math.abs(a[i])<1e-9||a[i]>=.35))return false;return true;}));
+ ok('ground contact darker than crown (bottom vertex colour < top)',out&&out.children.every(m=>{const c=m.geometry.attr.color.array;return c[0]<c[6];}));
  ok('GPU resources registered for disposal',res.size>=out.children.length*2);}
 console.log(`\nR481 grove: ${pass} passed, ${fail} failed`);process.exit(fail?1:0);
