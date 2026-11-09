@@ -8,12 +8,15 @@
 //  ② 검은 불꽃: R114 의 보스급 조형물 던지기에 Dots core24 불꽃 시트를 검게 손질한 프레임 시트(assets/r431, scripts/r431-black-flame.py)를 입힌다.
 //     끌어당기는 동안 불길이 붙어 커지고, 날아가는 동안 꼬리 불길+휘감는 불길, 터지면 검은 폭발+솟는 검은 불꽃.
 //     솟는 불꽃(약 1.4초)에 닿으면 흑염 화상(작은 도트 — R430/R431 상태이상과 같은 규칙).
-//  · 끄기: localStorage['storyworld.r431.arena']='{"leash":false,"black":false}'
+//  ③ R443 (사용자 2026-11-09 "보스스폰이 c키입력하는곳에서 바로나타나게" · "보스방들어가면 c키입력하라고 파란색표시 있는곳 거기서 보스 나오면됨"):
+//     보스방에 들어서 보스를 부를 때(R78 beginBoss → summon3 'boss') 보스(없으면 보스방 우두머리인 첫 중간보스)를 보스방 안 파란 C 표시(room.objective = 제단) 자리 — 막혀 있으면 가장 가까운
+//     빈 자리 — 로 옮기고, 소환 문양 대기(0.9초)를 0.2초로 줄여 곧바로 실체화한다. 중간보스 자리·체력·패턴·저장·진행 순서는 그대로. 맘몬 금고(ep1b06) 제외.
+//  · 끄기: localStorage['storyworld.r431.arena']='{"leash":false,"black":false,"spawn":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_BOSS_ARENA_R431__)return;
-const REV='R431-boss-arena-1',KEY='storyworld.r431.arena',D='assets/r431/',ARENA=5;
-const prefs={leash:true,black:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object'){if(s.leash===false)prefs.leash=false;if(s.black===false)prefs.black=false;}}catch(_){}
-const stats={leashed:0,wreaths:0,trails:0,blasts:0,blastDraws:0,touches:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
+const REV='R431-boss-arena-2+R443',KEY='storyworld.r431.arena',D='assets/r431/',ARENA=5;
+const prefs={leash:true,black:true,spawn:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object'){if(s.leash===false)prefs.leash=false;if(s.black===false)prefs.black=false;if(s.spawn===false)prefs.spawn=false;}}catch(_){}
+const stats={markerSpawns:0,wreaths:0,trails:0,blasts:0,blastDraws:0,touches:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0,fin=Number.isFinite,clamp=(n,a=0,b=1)=>Math.max(a,Math.min(b,n));
 // ---- ① 가운데 목줄 -------------------------------------------------------------------------------
 function arena(e){if(!prefs.leash||!e||!e.boss||!(e.hp>0))return null;try{if(typeof room==='undefined'||!room||room.id==='ep1b06'||typeof layer!=='undefined'&&layer!=='STORY'||!room.enemies?.includes(e))return null;
@@ -22,6 +25,20 @@ function arena(e){if(!prefs.leash||!e||!e.boss||!(e.hp>0))return null;try{if(typ
  if(e.r431Arena===undefined)e.r431Arena=e.x>=bb[0]-1&&e.x<=bb[2]+1&&e.y>=bb[1]-1&&e.y<=bb[3]+1;if(!e.r431Arena)return null;return c;}catch(err){fail(err);return null;}}
 function clampGoal(e,goal){const c=arena(e);if(!c||!goal||!fin(goal.x+goal.y))return goal;const dx=goal.x-c.x,dy=goal.y-c.y,d=Math.hypot(dx,dy);if(d<=ARENA)return goal;
  stats.leashed++;let g={x:c.x+dx/d*ARENA,y:c.y+dy/d*ARENA};try{if(typeof blocked==='function'&&blocked(g.x,g.y,.3,room))g={x:c.x+dx/d*ARENA*.6,y:c.y+dy/d*ARENA*.6};}catch(_){}return g;}
+// ---- ③ 보스는 파란 C 표시 자리에서 바로 ---------------------------------------------------------
+function markerOf(r){const W=r?.exploration?.worldWardR81,bb=W?.bossBounds;if(!Array.isArray(bb)||bb.length!==4)return null;const o=r.objective;
+ if(o&&fin(o.x+o.y)&&o.x>=bb[0]&&o.x<=bb[2]&&o.y>=bb[1]&&o.y<=bb[3])return{x:o.x,y:o.y};const c=W.bossAnchor;return c&&fin(c.x+c.y)?{x:c.x,y:c.y}:null;}
+function freeAt(r,m,rad=.6){const ok=(x,y)=>{try{return typeof blocked!=='function'||!blocked(x,y,rad,r);}catch(_){return true;}};if(ok(m.x,m.y))return{x:m.x,y:m.y};
+ for(let d=.5;d<=3.01;d+=.5)for(let k=0;k<16;k++){const a=k/16*Math.PI*2+Math.PI*.25,x=m.x+Math.cos(a)*d,y=m.y+Math.sin(a)*d;if(ok(x,y))return{x,y};}return null;}
+let callN=0;
+function toMarker(list,stage,stamp){if(!prefs.spawn||stage!=='boss'||!Array.isArray(list))return false;try{if(typeof room==='undefined'||!room||room.id==='ep1b06'||typeof layer!=='undefined'&&layer!=='STORY')return false;
+ if(room.engaged||room.encounterStage==='summoning')return false;const W78=window.__STORYWORLD_WORLD_COMBAT_R78__;if(!W78?.controlled?.(room)||W78.state?.(room)?.phase!=='boss')return false;
+ const m=markerOf(room);if(!m)return false;let moved=false;
+ // 이끄는 적 하나: 보스가 있으면 보스, 없으면(초반 지역은 보스방 우두머리가 중간보스 표시) 첫 중간보스
+ const ok=e=>e&&e.hp>0&&e.spawnState==='hidden',lead=list.find(e=>ok(e)&&e.boss)||list.find(e=>ok(e)&&e.midboss);
+ for(const e of lead?[lead]:[]){const q=freeAt(room,m,Math.max(.45,Math.min(.9,Number(e.combatProfile?.bodyBlock?.r)||.6)));if(!q)continue;
+  e.x=e.homeX=q.x;e.y=e.homeY=q.y;e.nav=[];e.navAt=0;e.r431Arena=undefined;e.r443Marker={x:q.x,y:q.y};e.r443Call=stamp;moved=moved||q;stats.markerSpawns++;}
+ return moved;}catch(e){fail(e);return false;}}
 // ---- ② 검은 불꽃 -------------------------------------------------------------------------------
 const SH={trail:{f:'black-trail',cell:192,cols:6,n:24,fps:12.5,piv:[130.5,96]},wreath:{f:'black-wreath',cell:192,cols:6,n:10,fps:10,piv:[96,131]},
  burst:{f:'black-burst',cell:192,cols:6,n:24,fps:12.5,piv:[96,151.5]},flare:{f:'black-flare',cell:192,cols:6,n:24,fps:12.5,piv:[96,151.5]}};
@@ -59,8 +76,12 @@ try{
  if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e&&e.type==='r431-black-flame'){try{drawBlasts();}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};}
  if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{adopt();tickBlasts();}catch(e){fail(e);}return r;};}
  if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=function(...a){blasts=[];return base.apply(this,a);};}
+ if(typeof summon3==='function'){const base=summon3;summon3=function(list,stage,...a){const stamp=++callN,moved=toMarker(list,stage,stamp);const r=base.apply(this,[list,stage,...a]);
+  // 안쪽 RC150(placeMajorRight150)이 화면 구도용으로 보스를 영웅 오른쪽 3~4칸에 다시 옮긴다 → 그 뒤에 표시 자리로 되돌린다(구도 카메라는 매 프레임 실제 자리를 본다).
+  try{if(moved&&r!==false){for(const e of list)if(e?.r443Marker&&e.r443Call===stamp){e.x=e.homeX=e.r443Marker.x;e.y=e.homeY=e.r443Marker.y;e.nav=[];}
+   if(room.encounterStage==='summoning'&&room.activeEncounter==='boss')room.summonClock=Math.min(Number(room.summonClock)||.2,.2);/* 소환 문양은 원래 summon3 가 room.objective(= 이 표시)에 그린다 */}}catch(e){fail(e);}return r;};}
 }catch(e){fail(e);}
-function set(o){if(o&&typeof o.leash==='boolean')prefs.leash=o.leash;if(o&&typeof o.black==='boolean')prefs.black=o.black;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
-window.__STORYWORLD_BOSS_ARENA_R431__=Object.freeze({revision:REV,ARENA,set,prefs:()=>({...prefs}),arena:e=>arena(e),clampGoal,blast:(x,y,h)=>blast(x,y,{height:h||60}),
+function set(o){if(o&&typeof o.leash==='boolean')prefs.leash=o.leash;if(o&&typeof o.black==='boolean')prefs.black=o.black;if(o&&typeof o.spawn==='boolean')prefs.spawn=o.spawn;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
+window.__STORYWORLD_BOSS_ARENA_R431__=Object.freeze({revision:REV,ARENA,set,prefs:()=>({...prefs}),arena:e=>arena(e),clampGoal,markerOf:r=>markerOf(r||room),blast:(x,y,h)=>blast(x,y,{height:h||60}),
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},blasts:blasts.length,lastError,browserVerified:false,GPUVerified:false})});
 })();

@@ -7,7 +7,7 @@
 //  · 그림만 엔진 frameFor 사슬에 내준다. 판정·보상·저장은 그대로. storyworld.r380.mobs {on:false} 로 끈다(이동·개명은 새로 만드는 지역부터).
 (()=>{'use strict';
 if(window.__STORYWORLD_APPROVED_MOBS_R380__)return;
-const REV='R437',KEY='storyworld.r380.mobs',INDEX='assets/r380/mobs/index.json';
+const REV='R441',KEY='storyworld.r380.mobs',INDEX='assets/r380/mobs/index.json';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={assigned:0,frames:0,waiting:0,removed:0,added:0,renamed:0,reinstalls:0,errors:0,deaths:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 let idx=null;if(typeof fetch==='function')fetch(INDEX).then(r=>r.ok?r.json():null).then(j=>{if(j?.mobs)idx=j;}).catch(fail);
@@ -33,6 +33,11 @@ function bossNames(r){if(!r||!Array.isArray(r.enemies))return;for(const e of r.e
 // ── 이동·개명: 지역을 만들 때 한 번(결정적) ──
 function relocate(r,id,l){if(!prefs.on||!r||!Array.isArray(r.enemies)||l==='DREAM')return r;
  // 정본 계약(R81: 지역마다 3×10 무리, 적 id·능력치 불변)을 지키려고 몹을 빼거나 더하지 않고 이름·그림만 바꾼다.
+ // R441(사용자 2026-11-09 "망각거미가 아직도 거미동굴에 나오는문제"): R81 지역 수호자(중간보스 · 망각의 거미, id …:ward-champion-r81:dist01-sp1)는
+ //  예전에 빼는 방식일 때 세이브 복원 때문에 남겨 두었다. 지금은 이름·그림만 바꾸므로(id·수치·저장 그대로) 같은 방식으로 '중간보스 · 재 나방'으로 바꾼다
+ //  (알집지기·수호병 수호자는 이미 있어 셋이 겹치지 않게). R248 공격 효과 키는 옛 이름 그대로.
+ if(id==='dist01')for(const e of r.enemies)if(e&&!e.r380Renamed&&!e.boss&&e.wardChampionR81&&String(e.nativeId||'').startsWith('dist01-sp1')&&SPIDER.test(e.name||'')){
+  e.r380From=e.name;if(!e.r248Key)e.r248Key='망각의 거미';e.name='중간보스 · 재 나방';if(typeof e.r373Name==='string')e.r373Name='재 나방';e.r380Renamed=true;stats.removed++;}
  if(id==='dist01'){const sub=['재 나방','보랏빛 알집지기','거미줄에 묶인 수호병'];let k=0;
   for(const e of r.enemies)if(e&&!e.r380Renamed&&!e.boss&&!e.midboss&&!e.wardChampionR81&&!/중간보스|준보스/.test(e.name||'')&&String(e.nativeId||'').startsWith('dist01-sp1')&&SPIDER.test(e.name||'')){
    const n=sub[k%3]+' '+(Math.floor(k/3)+1);e.r380From=e.name;if(!e.r248Key)e.r248Key=String(e.name).replace(/ \d+$/,'').replace(/ (증원|추격대|우두머리|후속 증원)$/,'');e.name=n;e.r380Renamed=true;k++;stats.removed++;}}
@@ -114,7 +119,13 @@ function cellFor(e,m){if(attacking(e))return m.attack[Math.floor(progress(e)*m.a
  if(!(e.hp>0)||e.hitTimer>0)return m.move[0];
  if(e.moving)return m.move[Math.floor(T()*8+hash(e.id)*8)%m.move.length];
  return m.idle?.length&&m.idle[0]!==m.move[0]?m.idle[0]:m.move[Math.floor(T()*1.6+hash(e.id)*2)%Math.min(2,m.move.length)];}
-function faceLeft(e){if(attacking(e)&&Number.isFinite(e.attack.angle)){const sd=Math.cos(e.attack.angle)-Math.sin(e.attack.angle);if(Math.abs(sd)>.05)return sd<0;}
+// R441(사용자 2026-11-09 "왼쪽아래로 움직여야하는데 왜 오른쪽 아래로"): 걷는 동안은 영웅 쪽이 아니라 실제로 움직이는 화면 좌우로 본다
+//  (R425 X자 지그재그 다리마다 좌우가 바뀌는데 영웅 쪽만 보면 반은 뒷걸음처럼 보였다). 멈추면·공격하면 예전처럼 영웅·공격 방향.
+const MOVE=new WeakMap();
+function moveLeft(e){const sx=e.x-e.y,t=T();let m=MOVE.get(e);if(!m){MOVE.set(e,m={sx,t,left:null,at:-9});return null;}
+ const d=sx-m.sx;if(Math.abs(d)>.004){m.left=d<0;m.at=t;m.sx=sx;}else if(t-m.at>.35)m.sx=sx;m.t=t;return e.moving&&m.left!=null&&t-m.at<.35?m.left:null;}
+function faceLeft(e){const mv=e&&prefs.face!==false?moveLeft(e):null;if(attacking(e)&&Number.isFinite(e.attack.angle)){const sd=Math.cos(e.attack.angle)-Math.sin(e.attack.angle);if(Math.abs(sd)>.05)return sd<0;}
+ if(mv!=null&&!(e.rangedWindup>0))return mv;
  try{return !!(player&&(player.x-player.y)<(e.x-e.y));}catch(_){return false;}}
 function frameOf(e,m,id){const [cw,ch]=m.cell,[px,py]=m.pivot,vh=m.visibleHeight||150,k=cellFor(e,m),cols=m.cols||k+1,sx=(k%cols)*cw,sy=Math.floor(k/cols)*ch;
  const flip=faceLeft(e)!==(m.facing==='left');
