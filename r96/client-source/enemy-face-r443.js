@@ -15,10 +15,11 @@
 //     피격·넉백·순간이동·스폰·재사용: 위치 튐(속도×3+0.15칸 초과)은 걸음으로 보지 않는다. 블링크한 쪽이 정한 방향은 받아들인다. 죽으면 그대로 굳힌다.
 //   · 몹 그림자: 모든 몹·보스의 접촉 그림자를 그리지 않는다(R206 'all', R306 픽셀판 그림자 포함). 끄기 {"shadows":true}.
 //   · 디버그: localStorage storyworld.r443.face {"debug":true} 또는 설정 hitboxes → 몹 위에 상태·좌우·이동(초록)·조준(빨강) 화살표·판정 원뿔.
+//  맡지 않는 것: 페르소나·움직이지 않는 구조물 적(R170 탑·R446 기둥 등)·맘몬 구역.
 //  끄기: localStorage storyworld.r443.face {"on":false}.
 (()=>{'use strict';
 if(window.__STORYWORLD_ENEMY_FACE_R443__)return;
-const REV='R443-face-2',KEY='storyworld.r443.face';
+const REV='R443-face-3',KEY='storyworld.r443.face';
 let prefs={on:true,debug:false,shadows:false};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={updates:0,spawns:0,jumps:0,turns:0,attackLocks:0,draws:0,owner:{},errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0;
@@ -30,7 +31,11 @@ function atkAngle(e){const a=e.attack;if(a&&Number.isFinite(a.angle))return{g:a.
  const r=e.r61Action;if(r&&Number.isFinite(r.angle)&&T()<num(r.endAt,-1))return{g:r.angle,k:'r61'};return null;}
 const sideX=(dx,dy)=>dx-dy;// 화면 가로 성분(엔진 facing 과 같은 변환)
 function heroSide(e,p){const du=(p.x-p.y)-(e.x-e.y);return du<0?'left':'right';}
-function managed(e){return !!(prefs.on&&e&&!e.persona);}
+// 맡지 않는 것: 페르소나(엔진 8방향 그림), 움직이지 않는 구조물 적(R170 탑·R446 기둥·R75 탑·R251 원·R193 탑 — 조형물 그림을 그대로 그림),
+//  맘몬 구역(사용자 2026-11-07: 맘몬 맵은 다른 곳에서 작업 — R425·R438 과 같이 뺀다).
+function structure(e){return !!(e.r170Tower||e.r446Pillar||e.r75Tower||e.r251Circle||e.towerR193||e.r193Tower||e.prop||e.object);}
+function mammon(e){try{const id=String(typeof room==='object'&&room?room.id||'':'');return /mammon/i.test(id)||id==='ep1b06'||!!e.mammon||!!e.mammonR||/mammon/i.test(String(e.nativeId||''));}catch(_){return false;}}
+function managed(e){return !!(prefs.on&&e&&!e.persona&&!structure(e)&&!mammon(e));}
 function fresh(e,s){return !s||(s.hp<=0&&e.hp>0)||(s.ss!=='active'&&e.spawnState==='active'&&s.ss!==undefined);}
 function init(e){const p=P(),d=e.direction;const side=d==='left'||d==='right'?d:p?heroSide(e,p):'right';return{x:e.x,y:e.y,t:T(),vx:0,vy:0,side,d4:side==='left'?'west':'east',owner:'spawn',pend:null,since:T(),hp:e.hp,ss:e.spawnState,aim:null,mvx:0,mvy:0};}
 function update(e){let s=S.get(e);const t=T();

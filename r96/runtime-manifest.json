@@ -33544,8 +33544,8 @@
     },
     {
       "path": "enemy-face-r443.js",
-      "bytes": 10179,
-      "sha256": "f389f9ff8dc04ca2b8963d199b47e88b6267a1aff2604898a430e30430de15b1"
+      "bytes": 10967,
+      "sha256": "c5ffe241b9e4a13d244f604cb354b29d9b7a06da98e05f7567d1f4c402f6c6b2"
     },
     {
       "path": "enemy-hexagram-r341.js",
@@ -34619,7 +34619,7 @@
     }
   ],
   "fileCount": 6923,
-  "totalBytes": 1091396208,
+  "totalBytes": 1091396996,
   "webHTMLSha256": "9326976875ec7d9d6e69aa5404bb6e8e32e50e93d3afa96cd3804ba2156a9bea",
   "largest": [
     {

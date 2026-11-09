@@ -13,7 +13,7 @@ ok('loads after every face decider it overrides (R98·R113·R137·R268·R286·R3
 ok('listed in verify-r96-public.py',/'enemy-face-r443\.js'/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')));
 ok('pages.yml runs this check',/r96\/qa\/r443\/r443-cpu-check\.cjs/.test(fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8')));
 ok('presentation only: no hp/cd/attack/position/save writes',!/\be\.(?:hp|cd|attack|x|y|rangedAim|rangedWindup|speed)\s*=[^=]|saveGame|player\.[a-z]+\s*=[^=]/.test(src.replace(/\/\/.*$/mg,'')));
-ok('Mammon untouched',!/ep1b06|mammon|맘몬/i.test(src.replace(/\/\/.*$/mg,'')));
+ok('Mammon only appears as an exclusion',/function mammon\(e\)/.test(src)&&/!mammon\(e\)/.test(src));
 // ---- 동작: 가짜 엔진에서 drawEnemy 를 프레임마다 부른다 ----
 function env(){const E={console,Math,JSON,Number,String,Object,WeakMap,Map,Set,Array,localStorage:{getItem:()=>null,setItem:()=>{}},time:0,player:{x:0,y:0,hp:100},settings:{},shadowCalls:0,read:[]};
  E.window=E;E.drawEnemy=function(e){E.read.push(e.direction);E.shadow(1,2,3);};E.shadow=function(){E.shadowCalls++;};vm.createContext(E);vm.runInContext(src,E);return E;}
@@ -53,6 +53,8 @@ function frames(E,e,n,step,dt=1/60){for(let i=0;i<n;i++){E.time+=dt;if(step)step
 {const E=env();const e=mob({});frames(E,e,3);ok('monster contact shadows are skipped while drawing an enemy',E.shadowCalls===0);E.shadow();ok('non-enemy shadows (hero/props) still draw',E.shadowCalls===1);
  E.__STORYWORLD_ENEMY_FACE_R443__.set({shadows:true});frames(E,e,1);ok('{"shadows":true} brings mob shadows back',E.shadowCalls===2);}
 {const E=env();const e=mob({persona:true,direction:'back'});frames(E,e,3);ok('persona (own 8-way art) is left to the engine',E.read[E.read.length-1]==='back');}
+{const E=env();const tw=mob({r170Tower:{art:'x'},r446Pillar:true,direction:'front'});frames(E,tw,3);ok('stationary structure enemies (R170 tower / R446 pillar) are not managed: no facing, shadow left to R206',E.read[E.read.length-1]==='front'&&E.__STORYWORLD_ENEMY_FACE_R443__.left(tw)===null&&E.shadowCalls===3);}
+{const E=env();E.room={id:'ep1b06'};const e=mob({direction:'front'});frames(E,e,3);ok('Mammon zone (ep1b06) untouched',E.read[E.read.length-1]==='front'&&E.__STORYWORLD_ENEMY_FACE_R443__.left(e)===null);}
 {const E=env(),api=E.__STORYWORLD_ENEMY_FACE_R443__;const e=mob({});E.player.x=5;E.player.y=9;frames(E,e,1);frames(E,e,40,e=>{e.x+=1.6/60;e.y+=1.6/60;});ok('4-way sheets get south when walking clearly down-screen',api.d4(e)==='south');
  frames(E,e,40,e=>{e.x+=2/60;e.y-=2/60;});ok('4-way sheets get east when walking clearly right',api.d4(e)==='east');}
 {const E=env();E.__STORYWORLD_ENEMY_FACE_R443__.set({on:false});const e=mob({direction:'front'});frames(E,e,3);ok('{"on":false} leaves everything to the old rules',E.read[E.read.length-1]==='front'&&E.__STORYWORLD_ENEMY_FACE_R443__.left(e)===null);}
