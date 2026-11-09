@@ -1,0 +1,29 @@
+// R441·R442 CPU 검사: ① 환도 대각 걷기는 좌·우(세로 ±30° 안에서만 위·아래) ② 적 테마 기술 시전 때 R54 frameFor 사슬이 공격 칸을 고르고 e.attack 은 곧바로 되돌린다.
+const fs=require('fs'),path=require('path'),vm=require('vm');const R=path.join(__dirname,'..','..');
+const C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8'),RT=f=>fs.readFileSync(path.join(R,'runtime-text',f),'utf8');
+let pass=0,fail=0;const ok=(n,c)=>{if(c){pass++;console.log('PASS',n);}else{fail++;console.log('FAIL',n);}};
+for(const f of ['enemy-skill-pose-r442.js','hwando-r271.js','theme-fx-r430.js']){ok(f+' runtime copy matches source',C(f)===RT(f));try{new vm.Script(C(f));ok(f+' syntax',true);}catch(e){ok(f+' syntax '+e.message,false);}}
+const html=RT('index.html');ok('enemy-skill-pose-r442 tag once, after skill-attack-r440, before combat-r118 (outermost R54 frameFor)',html.split('"./enemy-skill-pose-r442.js"').length===2&&/<script src="\.\/skill-attack-r440\.js"><\/script><script src="\.\/enemy-skill-pose-r442\.js"><\/script>\s*<script src="\.\/combat-r118\.js">/.test(html));
+ok('listed in verify-r96-public.py',/'enemy-skill-pose-r442\.js'/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')));
+// ① 환도 걷기 방향
+{const src=C('hwando-r271.js'),m=/function dirFromVec[^\n]*\n(?:\/\/[^\n]*\n)*const DIAG441=[^\n]*\nfunction walkFromVec[^\n]*/.exec(src);ok('walkFromVec present and used by track()',!!m&&/const nd=walkFromVec\(v\[0\],v\[1\]\)/.test(src));
+ if(m){const e={localStorage:{getItem:()=>null}};vm.createContext(e);vm.runInContext(m[0]+';this.W=walkFromVec;',e);const W=e.W,deg=a=>W(Math.cos(a*Math.PI/180),Math.sin(a*Math.PI/180));
+  ok('pure right/left → e/w',deg(0)==='e'&&deg(180)==='w');ok('diagonals 45/135/225/315 → side',deg(45)==='e'&&deg(135)==='w'&&deg(225)==='w'&&deg(315)==='e');
+  ok('55° still side (vertical not clear)',deg(55)==='e'&&deg(-55)==='e');ok('within ±30° of vertical → s/n',deg(90)==='s'&&deg(65)==='s'&&deg(-90)==='n'&&deg(-115)==='n');
+  const e2={localStorage:{getItem:()=>'{"on":false}'}};vm.createContext(e2);vm.runInContext(m[0]+';this.W=walkFromVec;',e2);ok('switch off → old 45° split',e2.W(Math.cos(Math.PI*.3),Math.sin(Math.PI*.3))==='s');}}
+// ② 적 기술 동작
+ok('theme-fx castSkill marks the caster',/R442[^\n]*__STORYWORLD_ENEMY_SKILL_POSE_R442__\?\.mark\?\.\(e,Math\.atan2\(tg\.y-e\.y,tg\.x-e\.x\),WARN\)/.test(C('theme-fx-r430.js')));
+function env(){const seen=[];const e={window:{},localStorage:{getItem:()=>null,setItem(){}},time:5,player:{x:0,y:0},console};
+ e.window.__STORYWORLD_STORY_COMBAT_R54__=Object.freeze({x:1,frameFor(en,f){seen.push(en.attack?{el:en.attack.elapsed,r442:en.attack.r442}:null);if(!en.attack)return f;if(!en.attack.r442)return "REAL";const a=en.attack,s=a.shape154,fr=a.elapsed>=s.windup+s.active?3:a.elapsed>=s.windup?2:a.elapsed>=s.windup*.48?1:0;return{fr};}});
+ vm.createContext(e);vm.runInContext(C('enemy-skill-pose-r442.js'),e);e.seen=seen;return e;}
+{const e=env(),S=()=>e.window.__STORYWORLD_STORY_COMBAT_R54__,boss={hp:10,x:2,y:0};ok('installed as outermost frameFor, other fields kept',S().__r442===true&&S().x===1);
+ ok('no mark → untouched',S().frameFor(boss,'F')==='F'&&!('attack' in boss));
+ e.window.__STORYWORLD_ENEMY_SKILL_POSE_R442__.mark(boss,0,.9);const seq=[];for(const t of [5,5.25,5.46,5.62,5.85,5.95]){e.time=t;vm.runInContext('time='+t,e);const r=S().frameFor(boss,'F');seq.push(r?.fr??r);}
+ ok('ready→windup→contact→recovery→back to normal',JSON.stringify(seq)==='[0,1,2,3,3,"F"]');ok('attack token removed after every call',!('attack' in boss));
+ const b2={hp:10,x:1,y:1,attack:null};e.window.__STORYWORLD_ENEMY_SKILL_POSE_R442__.mark(b2,0,.9);vm.runInContext('time=5.1',e);S().frameFor(b2,'F');ok('existing null attack field restored as null',b2.attack===null&&'attack' in b2);
+ const b3={hp:10,attack:{elapsed:.1,angle:0}};const real=b3.attack;e.window.__STORYWORLD_ENEMY_SKILL_POSE_R442__.mark(b3,0,.9);S().frameFor(b3,'F');ok('real attack in progress is not overridden',b3.attack===real&&e.seen[e.seen.length-1]?.r442!==true);
+ const b4={hp:10,r61Action:{endAt:99}};e.window.__STORYWORLD_ENEMY_SKILL_POSE_R442__.mark(b4,0,.9);ok('R61 action in progress is not overridden',S().frameFor(b4,'F')==='F');
+ const b5={hp:0};ok('dead enemy not marked',e.window.__STORYWORLD_ENEMY_SKILL_POSE_R442__.mark(b5,0,.9)===false);}
+{const e=env();e.localStorage.getItem=()=>'{"on":false}';const e2={window:{__STORYWORLD_STORY_COMBAT_R54__:{frameFor:(en,f)=>en.attack?'A':f}},localStorage:{getItem:()=>'{"on":false}',setItem(){}},time:1};vm.createContext(e2);vm.runInContext(C('enemy-skill-pose-r442.js'),e2);const b={hp:5};e2.window.__STORYWORLD_ENEMY_SKILL_POSE_R442__.mark(b,0,.9);ok('can be switched off',e2.window.__STORYWORLD_STORY_COMBAT_R54__.frameFor(b,'F')==='F');}
+ok('no gameplay writes in R442 (damage/hp/cooldown/save)',!/\.hp\s*=[^=]|\.damage\s*=|saveGame|\.cd\s*=|r431Next\s*=/.test(C('enemy-skill-pose-r442.js')));
+console.log(JSON.stringify({ok:fail===0,checks:pass+fail,pass}));if(fail)process.exit(1);
