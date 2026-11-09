@@ -32863,6 +32863,11 @@
       "sha256": "5eb46b1d466fd2b4c3b5ee6dbf12e2148292a82ed842626d7ae2f2eb806a3058"
     },
     {
+      "path": "balrog-tear-r473.js",
+      "bytes": 3963,
+      "sha256": "cf1a56d28bf9e6e52f47259177adce9488f42c7190632cd5045e51ae4350be06"
+    },
+    {
       "path": "battle-beats-r450.js",
       "bytes": 8630,
       "sha256": "a549a2705a72236ccd5a30298bb873a439e00166ec10d6a2b332a67f60b4e658"
@@ -33874,8 +33879,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6571949,
-      "sha256": "d4a57baf70df645a3669aa8a2d91e01256b5f267ce097706e6e141638e1dc0dc"
+      "bytes": 6571995,
+      "sha256": "71fe9d302148dd28e767cc4014ec13d6ef72a0d776521284719f4e1b6f224535"
     },
     {
       "path": "intro-r140.js",
@@ -34713,9 +34718,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6942,
-  "totalBytes": 1091869567,
-  "webHTMLSha256": "d4a57baf70df645a3669aa8a2d91e01256b5f267ce097706e6e141638e1dc0dc",
+  "fileCount": 6943,
+  "totalBytes": 1091873576,
+  "webHTMLSha256": "71fe9d302148dd28e767cc4014ec13d6ef72a0d776521284719f4e1b6f224535",
   "largest": [
     {
       "path": "index.html",
