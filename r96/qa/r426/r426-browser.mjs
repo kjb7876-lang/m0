@@ -14,7 +14,7 @@ const p=await ctx.newPage();const errors=[];p.on('pageerror',e=>errors.push(Stri
 await p.goto(URL);await p.locator('#campaignNew54').click({timeout:120000});await p.locator('#slotConfirmR73').click();
 await p.waitForFunction(()=>started&&!loading,null,{timeout:180000});await p.waitForTimeout(800);
 await p.evaluate(()=>{for(let i=0;i<120&&storyScene;i++)advanceScene();if(modal)closePanel(true);});
-check('R426 loaded',await p.evaluate(()=>window.__STORYWORLD_GUIDE_CLEAR_R426__?.revision==='R426-clear-1'&&window.__STORYWORLD_CINEMA_MODE_R370__.inspect().revision==='R370-cinema-6'));
+check('R426 loaded',await p.evaluate(()=>window.__STORYWORLD_GUIDE_CLEAR_R426__?.revision==='R426-clear-2-R441'&&window.__STORYWORLD_CINEMA_MODE_R370__.inspect().revision==='R370-cinema-6'));
 // ① 메뉴
 const m=await p.evaluate(async()=>{showMenu();await new Promise(r=>setTimeout(r,600));const b=document.getElementById('menuCinemaR426'),g=document.getElementById('menuGuide');
  return{text:b?.textContent,afterGuide:g?.nextElementSibling===b,group:b?.closest('[data-r339]')?.dataset.r339||null,visible:!!(b&&b.offsetParent)};});
