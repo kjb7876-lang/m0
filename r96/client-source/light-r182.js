@@ -5,13 +5,16 @@
 //  환경 설정 창의 '시야' 고르기, L 키(전체 → 횃불 → 손전등 → 전체)로 바꾼다. 저장된 R58 시야 값(flashlight58)은 이 모드에 맞춰 둔다.
 (()=>{'use strict';
 if(window.__STORYWORLD_LIGHT_R182__)return;
-const REV='R335-light-7',KEY='storyworld.r182.light',MODES=['glow','auto','full','torch','flashlight'],NAME={glow:'은은한 원형(주변 밝고 멀수록 어둡게)',auto:'자동(미로만 횃불·손전등)',full:'전체(환하게)',torch:'횃불(원형)',flashlight:'손전등(부채꼴)'};
+const REV='R455-light-8',KEY='storyworld.r182.light',MODES=['glow','auto','full','torch','flashlight'],NAME={glow:'은은한 원형(주변 밝고 멀수록 어둡게)',auto:'자동(미로만 횃불·손전등)',full:'전체(환하게)',torch:'횃불(원형)',flashlight:'손전등(부채꼴)'};
 /* R254(사용자 2026-11-03 "미로맵만 횃불or손전등시야(시대상에맞게)이고 나머지상황은 모두전체보이는시야"): 기본은 '자동' — 미로 구역에서만 시대에 맞춰
    (현대·기계 = 손전등, 그 밖 = 횃불) 빛을 쓰고, 나머지는 모두 전체 시야. 예전에 저장된 값은 한 번 '자동'으로 옮긴다(v:254). 직접 고르면 그대로 따른다. */
 /* R335(사용자 2026-11-05 "플레이어 주변 밝고 멀수록 어두운 거 좋은 것 같아 이걸 기본으로"): 기본을 새 '은은한 원형(glow)'으로.
    횃불은 반경 5칸 밖이 86% 어둠이라 화면 밖 적이 안 보여 전투에 불리했다 → glow 는 시야 제한(R24)을 끄고(모두 보임) 영웅 둘레만 밝게, 멀수록 부드럽게 어둡게(가장자리 약 60%).
    예전 기본값 '자동'으로 저장돼 있던 것은 한 번 glow 로 옮기고(v:335), 사용자가 직접 고른 전체·횃불·손전등은 그대로 둔다. */
-let prefs={mode:'glow',v:335};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');if(s.v===335&&MODES.includes(s.mode))prefs.mode=s.mode;else if(s.v===254&&MODES.includes(s.mode)&&s.mode!=='auto')prefs.mode=s.mode;}catch(_){}
+/* R455(사용자 2026-11-09 "사몽쪽 미로나 여러구간에서 손전등켜진거 모드화로 바꾸고 스토리월드 모든맵에서 기본은 스토리모드 기본시야"): 손전등·횃불은 고를 때만 켜는 모드.
+   어느 맵이든 기본은 glow. 미로에서 손전등을 저절로 켜던 '자동'으로 저장된 값은 한 번 glow 로 옮기고(v:455), 직접 고른 전체·횃불·손전등은 그대로 둔다.
+   beam(): 지금 횃불·손전등 빛을 쓰는지 — 사몽 학교 원뿔(R123)·미로 안내 문구가 이것을 보고 따른다. */
+let prefs={mode:'glow',v:455};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');if((s.v===455||s.v===335)&&MODES.includes(s.mode)&&!(s.v===335&&s.mode==='auto'))prefs.mode=s.mode;else if(s.v===254&&MODES.includes(s.mode)&&s.mode!=='auto')prefs.mode=s.mode;}catch(_){}
 const stats={toggles:0,coneFrames:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 function inMaze(){try{if(typeof room==='undefined'||!room)return false;const x=room.samongR103;if(x){if(x.stage==='maze')return true;const z=window.__STORYWORLD_SAMONG_ZONES_R115__?.zone?.(x.zone);return z?.kind==='maze';}
   return !!(room.exploration?.mazeR72||room.exploration?.maze||/미로/.test(String(room.exploration?.name||'')));}catch(_){return false;}}
@@ -74,5 +77,6 @@ function torch(g,b){const o=project(player.x,player.y),U=(typeof TILE==='number'
  g.globalCompositeOperation='source-over';const w=g.createRadialGradient(o.x,o.y,0,o.x,o.y,rx);w.addColorStop(0,'rgba(255,190,110,.10)');w.addColorStop(1,'rgba(255,150,70,0)');
  g.save();g.translate(o.x,o.y);g.scale(1,.5);g.translate(-o.x,-o.y);g.fillStyle=w;g.beginPath();g.arc(o.x,o.y,rx,0,Math.PI*2);g.fill();g.restore();stats.torchFrames=(stats.torchFrames||0)+1;}
 let applyAt=0;(function loop(t){try{if(!(t-applyAt<500)){applyAt=t||0;const m=mode(),w=m!=='full'&&m!=='glow';/* R335: glow 도 full 처럼 R24 시야를 끈다(모바일 기본 flashlight58=true 포함 — Codex 리뷰) */if(typeof settings!=='undefined'&&settings&&(settings.flashlight58!==false)!==w)apply();}frame();}catch(e){fail(e);}requestAnimationFrame(loop);})(0);
-window.__STORYWORLD_LIGHT_R182__=Object.freeze({revision:REV,MODES,mode,choice:()=>prefs.mode,inMaze,mazeLight,set,toggle,apply,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError})});
+const beam=()=>{const m=mode();return m==='torch'||m==='flashlight';};
+window.__STORYWORLD_LIGHT_R182__=Object.freeze({revision:REV,MODES,mode,beam,choice:()=>prefs.mode,inMaze,mazeLight,set,toggle,apply,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError})});
 })();
