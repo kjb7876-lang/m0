@@ -444,8 +444,12 @@ jobs:
         run: node r96/qa/r451/r451-cpu-check.cjs
       - name: R452 one wall top, door frame 2.4 wrapped by a lintel with top face, void beyond walls near black CPU check
         run: node r96/qa/r452/r452-cpu-check.cjs
+      - name: R455 flashlight is an opt-in sight mode, glow default on every map (samong school cone, maze text) CPU check
+        run: node r96/qa/r455/r455-cpu-check.cjs
       - name: R441 lag (blocked memo per tick, R302 caller lookup without repeated full stacks, R409 outline cache by image address + bake budget per frame) CPU check
         run: node r96/qa/r441/r441-cpu-check.cjs
+      - name: R444 enemy facing authority (attack side = hitbox angle, walk = real displacement, strafe faces hero, no mob shadows) CPU check
+        run: node r96/qa/r444/r444-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
         run: node r96/qa/r430/r430-cpu-check.cjs
       - name: R431 boss-room center fights + theme boss skill 6s + touch status/DoT + black-flame prop throws CPU check
@@ -521,8 +525,8 @@ jobs:
         run: node r96/qa/r442/enemy-skill-diag-cpu-check.cjs
       - name: R450 boss fight story beats (canon lines at engage/half/enrage/defeat) + wrath bear→wolves→dragon CPU check
         run: node r96/qa/r450/battle-beats-cpu-check.cjs
-      - name: R455 mobs without a death motion burn away or burst in blood and leave a corpse CPU check
-        run: node r96/qa/r455/mob-death-cpu-check.cjs
+      - name: R462 mobs without a death motion burn away or burst in blood and leave a corpse CPU check
+        run: node r96/qa/r462/mob-death-cpu-check.cjs
       - name: R440 Hwando hit pose (no old art) and hero rim blade cleanup CPU check
         run: node r96/qa/r440/r440-cpu-check.cjs
       - name: R446 seven pillars moved to their own map as stationary attacking towers CPU check

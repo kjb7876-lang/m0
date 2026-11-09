@@ -68,14 +68,14 @@
  // Screen side of the hero (u = x - y). While engaged the side flips only past
  // a small dead band so a mob does not twitch when the hero walks under it.
  const face=new WeakMap();
- function wantLeft(e){let s=face.get(e);if(!s){s={left:null,u:null};face.set(e,s);}
+ function wantLeft(e){const r444=window.__STORYWORLD_ENEMY_FACE_R444__?.left?.(e);if(typeof r444==='boolean')return r444;/* R444 */let s=face.get(e);if(!s){s={left:null,u:null};face.set(e,s);}
   const u=e.x-e.y,du=(player.x-player.y)-u,engaged=Math.hypot(player.x-e.x,player.y-e.y)<9||!!e.attack||e.rangedWindup>0;
   if(engaged){if(s.left===null||Math.abs(du)>.3)s.left=du<0;}
   else if(s.u!==null&&Math.abs(u-s.u)>.004)s.left=u<s.u;else if(s.left===null)s.left=du<0;
   s.u=u;return s.left;}
  const motion=window.__STORYWORLD_ENEMY_MOTION_R51__;
  if(motion?.flip){const base=motion.flip;window.__STORYWORLD_ENEMY_MOTION_R51__=Object.freeze({...motion,flip(e,f,fallback){const out=base(e,f,fallback);
-  try{if(!prefs.facing||!e||!player||f?.r74Monster||f?.r51OrderlyPose||e.boss||e.midboss||e.persona||!(e.hp>0))return out;const row=artOf(e);if(row?.f!=='L'&&row?.f!=='R')return out;
+  try{if(!prefs.facing||!e||!player||f?.r74Monster||f?.r51OrderlyPose||e.boss||e.midboss||e.persona||!(e.hp>0))return out;/* R444: 자세 프레임은 R444 좌우가 그 프레임 그림 방향으로 이미 들어 있다(몹 기본 그림 행으로 다시 뒤집으면 반대가 됨) */if((f?.r54StoryPose||f?.r53HospitalPose||f?.r52RangedPose)&&window.__STORYWORLD_ENEMY_FACE_R444__?.owns?.(e))return out;const row=artOf(e);if(row?.f!=='L'&&row?.f!=='R')return out;
    const left=wantLeft(e);stats.flips++;return row.f==='R'?left:!left;}catch(err){fail(err);}return out;}});}
 
  // ---- flyers ----------------------------------------------------------------------

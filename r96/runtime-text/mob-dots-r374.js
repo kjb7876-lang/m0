@@ -33,7 +33,7 @@ function frameOf(e,m){const [cw,ch]=m.cell,[px,py]=m.pivot,vh=m.visibleHeight||1
  return {path:m.path,assetFrame:{sourceRect:[k*cw,0,cw,ch],pivot:[px,py],visibleHeight:vh},sourceAlphaCore:[k*cw,0,cw,ch],metricThreshold:16,sourcePixelsEdited:false,
   normalizedFullRectangleExtents:[-px/vh,-py/vh,(cw-px)/vh,(ch-py)/vh],r374Mob:m.id,r208Mob:m.id,flip:faceLeft(e)!==(m.facing==='left')};}
 // 공격 중에는 정해진 공격 방향(e.attack.angle)을 본다 — 영웅이 옆으로 피해도 휘두르는 쪽과 그림이 어긋나지 않게(R248 과 같은 식).
-function faceLeft(e){if(attacking(e)&&Number.isFinite(e.attack.angle)){const sd=Math.cos(e.attack.angle)-Math.sin(e.attack.angle);if(Math.abs(sd)>.05)return sd<0;}
+function faceLeft(e){const r444=window.__STORYWORLD_ENEMY_FACE_R444__?.left?.(e);if(typeof r444==='boolean')return r444;/* R444 */if(attacking(e)&&Number.isFinite(e.attack.angle)){const sd=Math.cos(e.attack.angle)-Math.sin(e.attack.angle);if(Math.abs(sd)>.05)return sd<0;}
  return !!(typeof player!=='undefined'&&player&&(player.x-player.y)<(e.x-e.y));}
 // 보스: 원래 고른 그림이 idle 이나 일반공격일 때만 바꾼다(경직·전환·비·죽음은 원래 그림).
 function bossOk(e,f){const p=String(f?.path||'');if(!(e.hp>0)||e.hitTimer>0)return false;

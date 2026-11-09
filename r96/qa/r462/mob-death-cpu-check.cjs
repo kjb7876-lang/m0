@@ -1,11 +1,11 @@
-// R455 CPU 검사: 일반 몹 죽음 = 자기 그림으로 불타 소멸 / 피 터짐 → 시체(사체) 남김. 다른 몹 그림을 빌리지 않는지, 보스는 그대로인지, 시체 수 제한·지역 이동 시 비움.
+// R462 CPU 검사: 일반 몹 죽음 = 자기 그림으로 불타 소멸 / 피 터짐 → 시체(사체) 남김. 다른 몹 그림을 빌리지 않는지, 보스는 그대로인지, 시체 수 제한·지역 이동 시 비움.
 const fs=require('fs'),path=require('path'),vm=require('vm');const R=path.join(__dirname,'..','..');
 const C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8'),RT=f=>fs.readFileSync(path.join(R,'runtime-text',f),'utf8');
 let pass=0,fail=0;const ok=(n,c)=>{if(c){pass++;console.log('PASS',n);}else{fail++;console.log('FAIL',n);}};
-const F='mob-death-r455.js',src=C(F);
+const F='mob-death-r462.js',src=C(F);
 ok('runtime copy matches source',src===RT(F));try{new vm.Script(src);ok('syntax',true);}catch(e){ok('syntax '+e.message,false);}
-const html=RT('index.html');ok('script tag once, right after cinema-run-r461, before combat-r118',html.split('"./'+F+'"').length===2&&html.includes('<script src="./cinema-run-r461.js"></script><script src="./mob-death-r455.js"></script>')&&html.indexOf('"./'+F+'"')<html.indexOf('"./combat-r118.js"'));
-ok('listed in verify-r96-public.py',/'mob-death-r455\.js'/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')));
+const html=RT('index.html');ok('script tag once, right after cinema-run-r461, before combat-r118',html.split('"./'+F+'"').length===2&&html.includes('<script src="./cinema-run-r461.js"></script><script src="./mob-death-r462.js"></script>')&&html.indexOf('"./'+F+'"')<html.indexOf('"./combat-r118.js"'));
+ok('listed in verify-r96-public.py',/'mob-death-r462\.js'/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')));
 ok('no gameplay writes (hp/damage/kill/save/reward)',!/\.hp\s*=[^=]|damage\s*=|killEnemy\s*\(|saveGame|gainXP|room\.kills/.test(src));
 ok('no monster shadow() drawing (R444 removed monster shadows)',!/shadow\(/.test(src.replace(/\/\*[\s\S]*?\*\//g,'').replace(/\/\/.*$/gm,'')));
 ok('Mammon zones untouched',!/ep1b06/.test(src));
@@ -23,7 +23,7 @@ function env(o={}){const calls=[];const g={window:{},localStorage:{getItem:()=>o
  function drawObjective(){calls.push('objective');}
  function enterRegion(){return 1;}`,g);
  vm.runInContext(src,g);return g;}
-const g=env(),M=g.__STORYWORLD_MOB_DEATH_R455__;ok('installed',M.inspect().installed);
+const g=env(),M=g.__STORYWORLD_MOB_DEATH_R462__;ok('installed',M.inspect().installed);
 // 분류
 const K=n=>M.kindOf({name:n});
 ok('flesh → blood (spider/hound/zombie/slime/goblin)',['망각의 거미','보랏빛 알집지기','분노의 사냥개','전극을 두른 좀비 수호기사','중립초원 슬라임','숲 고블린','피냄새 추적자'].every(n=>K(n)==='blood'));
@@ -33,7 +33,7 @@ const e={id:'m1',name:'망각의 거미 1',nativeId:'dist01-s9',hp:10,drawn:'ass
 vm.runInContext('drawEnemy',g)(e);ok('alive look remembered',M.inspect().stats.looks===1);
 const fx={type:'enemyBurnDeath',sourceId:'m1',x:3,y:4,age:.05,life:.72,bodyPath:'assets/other/goat-demon-dead.png'};
 g.calls.length=0;vm.runInContext('drawBurnDeath3',g)(fx);
-ok('blood kind, life extended',fx.r455?.kind==='blood'&&fx.life>=1.1);
+ok('blood kind, life extended',fx.r462?.kind==='blood'&&fx.life>=1.1);
 ok('dying body uses own art only (never engine foreign death frame)',g.calls.some(c=>c.startsWith('sprite:assets/r380/mobs/spider-own.webp'))&&!g.calls.some(c=>c.includes('goat-demon-dead')));
 ok('blood burst sheet drawn',g.calls.includes('ctx.drawImage:assets/r411/fx/boss-corpse-explosion.webp'));
 // 불: 엔진 불꽃은 몸 빼고
@@ -56,10 +56,10 @@ vm.runInContext('time=3+60',g);vm.runInContext('drawObjective',g)();ok('corpses 
 vm.runInContext('drawEnemy',g)({id:'q1',name:'숲 고블린',hp:3,drawn:'a.webp'});vm.runInContext('drawBurnDeath3',g)({type:'enemyBurnDeath',sourceId:'q1',x:1,y:1,age:.1,life:.72});
 vm.runInContext('room={id:"dist02"}',g);vm.runInContext('drawObjective',g)();ok('corpses cleared when room changes',M.inspect().corpses===0);
 // 저사양
-const gl=env({low:true}),Ml=gl.__STORYWORLD_MOB_DEATH_R455__;for(let i=0;i<20;i++){vm.runInContext('drawEnemy',gl)({id:'k'+i,name:'숲 고블린',hp:3,drawn:'g.webp'});vm.runInContext('drawBurnDeath3',gl)({type:'enemyBurnDeath',sourceId:'k'+i,x:i,y:1,age:.1,life:.72});}
+const gl=env({low:true}),Ml=gl.__STORYWORLD_MOB_DEATH_R462__;for(let i=0;i<20;i++){vm.runInContext('drawEnemy',gl)({id:'k'+i,name:'숲 고블린',hp:3,drawn:'g.webp'});vm.runInContext('drawBurnDeath3',gl)({type:'enemyBurnDeath',sourceId:'k'+i,x:i,y:1,age:.1,life:.72});}
 ok('low-fx corpse cap 10',Ml.inspect().corpses===10);
 // 끄기
 const go=env({prefs:{on:false}});vm.runInContext('drawEnemy',go)({id:'m1',name:'망각의 거미',hp:3,drawn:'s.webp'});const fo={type:'enemyBurnDeath',sourceId:'m1',x:1,y:1,age:.1,life:.72,bodyPath:'p.png'};go.calls.length=0;vm.runInContext('drawBurnDeath3',go)(fo);
 ok('off switch keeps engine death',go.calls.join()==='base:p.png'&&fo.life===.72);
-const gc=env({prefs:{corpses:false}});vm.runInContext('drawEnemy',gc)({id:'m1',name:'망각의 거미',hp:3,drawn:'s.webp'});vm.runInContext('drawBurnDeath3',gc)({type:'enemyBurnDeath',sourceId:'m1',x:1,y:1,age:.1,life:.72});ok('corpses:false → no corpse',gc.__STORYWORLD_MOB_DEATH_R455__.inspect().corpses===0);
-console.log(`R455 mob death: ${pass} pass, ${fail} fail`);process.exit(fail?1:0);
+const gc=env({prefs:{corpses:false}});vm.runInContext('drawEnemy',gc)({id:'m1',name:'망각의 거미',hp:3,drawn:'s.webp'});vm.runInContext('drawBurnDeath3',gc)({type:'enemyBurnDeath',sourceId:'m1',x:1,y:1,age:.1,life:.72});ok('corpses:false → no corpse',gc.__STORYWORLD_MOB_DEATH_R462__.inspect().corpses===0);
+console.log(`R462 mob death: ${pass} pass, ${fail} fail`);process.exit(fail?1:0);

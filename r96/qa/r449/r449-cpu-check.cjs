@@ -7,7 +7,7 @@ const F='props-space-r449.js',src=C(F);
 ok('runtime copy matches client source',RT(F)===src);
 try{new vm.Script(src);ok('syntax',true);}catch(e){ok('syntax '+e.message,false);}
 const html=RT('index.html');
-ok('script tag once, right after bossroom-tidy-r438 and before combat-read-r409',html.split('"./'+F+'"').length===2&&/<script src="\.\/bossroom-tidy-r438\.js"><\/script><script src="\.\/props-space-r449\.js"><\/script><script src="\.\/combat-read-r409\.js"><\/script>/.test(html));
+ok('script tag once, right after bossroom-tidy-r438 and before combat-read-r409',html.split('"./'+F+'"').length===2&&/<script src="\.\/bossroom-tidy-r438\.js"><\/script><script src="\.\/props-space-r449\.js"><\/script>(?:<script src="\.\/enemy-face-r444\.js"><\/script>)?<script src="\.\/combat-read-r409\.js"><\/script>/.test(html));
 ok('loads after the overlays it cooperates with (R140·R169·R224·R303·R406·R412)',['props-variety-r140.js','play-r169.js','cave-r204.js','props-fit-r303.js','props-place-r406.js','props-tidy-r412.js'].every(f=>html.indexOf('"./'+f+'"')>0&&html.indexOf('"./'+f+'"')<html.indexOf('"./'+F+'"')));
 ok('listed in verify-r96-public.py',/'props-space-r449\.js'/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')));
 ok('CI runs this check',/node r96\/qa\/r449\/r449-cpu-check\.cjs/.test(fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8')));

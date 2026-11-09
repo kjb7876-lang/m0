@@ -1,4 +1,4 @@
-// R455 — 사망 모션 없는 몹의 죽음 연출(사용자 2026-11-09 "사망모션 없는 몹들은 다른걸로 대체해서 적용하지말고 불타면서 소멸하거나
+// R462 — 사망 모션 없는 몹의 죽음 연출(사용자 2026-11-09 "사망모션 없는 몹들은 다른걸로 대체해서 적용하지말고 불타면서 소멸하거나
 //  피터지면서 소멸하고 시체나 사체남기도록").
 //  · 일반 몹(보스·중간보스·페르소나 제외)은 자기 사망 모션 그림이 없다. 엔진 죽음 불꽃(spawnBurnDeath3)은 몸 그림으로 profile.frames.death 를 쓰는데,
 //    이 그림이 다른 몹 그림일 때가 있다(R188·R375·R380 이 일부만 고침). → 몸은 '살아 있을 때 마지막으로 화면에 그려진 그 몹의 그림'만 쓴다.
@@ -10,10 +10,10 @@
 //  · 쓰러짐은 그 몹 자기 그림을 발밑 기준으로 눕히는 것(코드 회전·납작)이라 다른 몹 그림을 빌리지 않는다.
 //  · 시체는 바닥 층(제단 그리기 바로 뒤, 몸·영웅보다 아래)에 그린다. 한 방 최대 24구(저사양 10), 45초(저사양 15초) 뒤 4초에 걸쳐 사라진다. 지역을 옮기면 비운다.
 //  · 판정·보상·처치 수·저장·AI 는 그대로(그림만). 보스·중간보스는 원래 연출 그대로.
-//  · 끄기: localStorage['storyworld.r455.mobDeath']='{"on":false}' 뒤 새로고침. 시체만 끄기 {"corpses":false}.
+//  · 끄기: localStorage['storyworld.r462.mobDeath']='{"on":false}' 뒤 새로고침. 시체만 끄기 {"corpses":false}.
 (()=>{'use strict';
-if(window.__STORYWORLD_MOB_DEATH_R455__)return;
-const REV='R455-mobdeath-1',KEY='storyworld.r455.mobDeath';
+if(window.__STORYWORLD_MOB_DEATH_R462__)return;
+const REV='R462-mobdeath-1',KEY='storyworld.r462.mobDeath';
 let prefs={on:true,corpses:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={looks:0,fire:0,blood:0,noLook:0,corpses:0,corpseDraws:0,sheetDraws:0,cleared:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
@@ -34,11 +34,11 @@ const looks=new Map();let capturing=null;
 function remember(e,c){if(!e||!c)return;const prev=looks.get(e.id);if(!prev)stats.looks++;looks.delete(e.id);looks.set(e.id,c);
  if(looks.size>260){const it=looks.keys();for(let i=0;i<60;i++)looks.delete(it.next().value);}}
 function wrapDraws(){
- if(typeof sprite==='function'&&!sprite.__r455){const base=sprite;const w=function(path,x,y,height,opt){const c=capturing;if(c&&fin(height)&&height>=c.h&&path&&!/assets\/(?:vfx|r190|r411|r438|rc144)\//.test(String(path)))
-   {c.h=height;c.path=path;c.frame=null;c.flip=!!opt?.flip;c.x=x;c.y=y;}return base.apply(this,arguments);};w.__r455=true;try{sprite=w;}catch(_){}}
- if(typeof drawAssetFrame3==='function'&&!drawAssetFrame3.__r455){const base=drawAssetFrame3;const w=function(path,frame,x,y,height,opt){const c=capturing;if(c&&fin(height)&&height>=c.h&&path&&frame?.assetFrame)
-   {c.h=height;c.path=path;c.frame=frame;c.flip=!!opt?.flip;c.x=x;c.y=y;}return base.apply(this,arguments);};w.__r455=true;try{drawAssetFrame3=w;}catch(_){}}
- if(typeof drawEnemy==='function'&&!drawEnemy.__r455){const base=drawEnemy;const w=function(e,...a){
+ if(typeof sprite==='function'&&!sprite.__r462){const base=sprite;const w=function(path,x,y,height,opt){const c=capturing;if(c&&fin(height)&&height>=c.h&&path&&!/assets\/(?:vfx|r190|r411|r438|rc144)\//.test(String(path)))
+   {c.h=height;c.path=path;c.frame=null;c.flip=!!opt?.flip;c.x=x;c.y=y;}return base.apply(this,arguments);};w.__r462=true;try{sprite=w;}catch(_){}}
+ if(typeof drawAssetFrame3==='function'&&!drawAssetFrame3.__r462){const base=drawAssetFrame3;const w=function(path,frame,x,y,height,opt){const c=capturing;if(c&&fin(height)&&height>=c.h&&path&&frame?.assetFrame)
+   {c.h=height;c.path=path;c.frame=frame;c.flip=!!opt?.flip;c.x=x;c.y=y;}return base.apply(this,arguments);};w.__r462=true;try{drawAssetFrame3=w;}catch(_){}}
+ if(typeof drawEnemy==='function'&&!drawEnemy.__r462){const base=drawEnemy;const w=function(e,...a){
    if(!prefs.on||!e||major(e)||!(e.hp>0)||e.spawnState==='dead')return base.apply(this,[e,...a]);
    // 엔진 drawEnemy 는 그림을 window.__STORYWORLD_STORY_COMBAT_R54__.frameFor / __STORYWORLD_PHASE1_ART__.enemy 로 고른다(R380 등은 ctx.drawImage 로 바로 그림).
    //  그리는 동안만 둘을 엿보는 껍데기로 바꿔 '이번에 고른 그림'을 받아 적는다(값은 그대로 돌려줌).
@@ -55,8 +55,8 @@ function wrapDraws(){
        hh=(typeof actorHeight==='function'?actorHeight():60)*(e.combatProfile?.spriteRect?.height||1)*(e.defScale||1);
        look={path:f.path||e.path,frame:f,flip,h:hh/z};}
      if(look)remember(e,{id:e.id,name:e.name,nativeId:e.nativeId,dir:e.direction,...look});}catch(err){fail(err);}}};
-  w.__r455=true;try{drawEnemy=w;}catch(_){}}
- return typeof drawEnemy==='function'&&!!drawEnemy.__r455;}
+  w.__r462=true;try{drawEnemy=w;}catch(_){}}
+ return typeof drawEnemy==='function'&&!!drawEnemy.__r462;}
 // ---- 시트 ----------------------------------------------------------------------------------------------
 const SHEETS={fire:{p:'assets/r411/fx/boss-fire-wall.webp',cell:256,cols:6,frames:24,pivot:[128,175],vis:110},
  blood:{p:'assets/r411/fx/boss-corpse-explosion.webp',cell:256,cols:6,frames:24,pivot:[128,192],vis:150},
@@ -75,11 +75,11 @@ function body(look,x,y,hPx,o){const side=o.side||1,fall=ease(o.fall||0),ang=side
   if(!(look.frame&&drawAssetFrame3(look.path,look.frame,0,0,hPx,opt)))sprite(look.path,0,0,hPx,opt);}finally{ctx.restore();}}
 // ---- 죽는 순간(엔진 enemyBurnDeath 효과를 그대로 쓰되, 그리기만 바꿈) -----------------------------------------
 const LIFE={fire:1.7,blood:1.15},FALL={fire:[.3,.78],blood:[0,.24]};
-function adopt(fx){if(fx.r455!==undefined)return fx.r455;fx.r455=null;if(!prefs.on||fx.boss||fx.midboss)return null;
+function adopt(fx){if(fx.r462!==undefined)return fx.r462;fx.r462=null;if(!prefs.on||fx.boss||fx.midboss)return null;
  const look=looks.get(fx.sourceId);if(!look){stats.noLook++;return null;}
- const kind=kindOf(look),h=hash(fx.sourceId);fx.r455={kind,look,side:(look.flip?-1:1)*((h>>>3)&1?1:-1),seed:h};fx.life=Math.max(fx.life||0,LIFE[kind]);stats[kind]++;
- if(prefs.corpses)addCorpse(fx);return fx.r455;}
-function drawDying(fx,base){const R=fx.r455,look=R.look,q=project(fx.x,fx.y),z=typeof zoom==='number'&&zoom>0?zoom:1,hPx=Math.max(14,look.h*z),age=fx.age,[f0,f1]=FALL[R.kind],fall=clamp01((age-f0)/(f1-f0));
+ const kind=kindOf(look),h=hash(fx.sourceId);fx.r462={kind,look,side:(look.flip?-1:1)*((h>>>3)&1?1:-1),seed:h};fx.life=Math.max(fx.life||0,LIFE[kind]);stats[kind]++;
+ if(prefs.corpses)addCorpse(fx);return fx.r462;}
+function drawDying(fx,base){const R=fx.r462,look=R.look,q=project(fx.x,fx.y),z=typeof zoom==='number'&&zoom>0?zoom:1,hPx=Math.max(14,look.h*z),age=fx.age,[f0,f1]=FALL[R.kind],fall=clamp01((age-f0)/(f1-f0));
  if(R.kind==='fire'){
   // 엔진 불꽃·불티는 살리되 엔진 몸 그림(다른 몹일 수 있음)은 빼고 그린다
   const keep=fx.bodyPath;fx.bodyPath=null;try{base(fx);}finally{fx.bodyPath=keep;}
@@ -91,11 +91,11 @@ function drawDying(fx,base){const R=fx.r455,look=R.look,q=project(fx.x,fx.y),z=t
    body(look,q.x+shake,q.y,hPx,{side:R.side,fall,alpha:1,filter:`brightness(${flash}) saturate(.7)`});}
   const t=clamp01((age-.05)/(fx.life-.05));sheet('blood',Math.floor(t*24),q.x-R.side*hPx*.08,q.y+hPx*.02,hPx*.9,1,{flip:R.side<0});
  }}
-function wrapBurn(){if(typeof drawBurnDeath3!=='function'||drawBurnDeath3.__r455)return typeof drawBurnDeath3==='function';const base=drawBurnDeath3;
- const w=function(fx,...a){try{if(fx&&adopt(fx)){drawDying(fx,base);return;}}catch(err){fail(err);}return base.apply(this,[fx,...a]);};w.__r455=true;try{drawBurnDeath3=w;}catch(_){}return true;}
+function wrapBurn(){if(typeof drawBurnDeath3!=='function'||drawBurnDeath3.__r462)return typeof drawBurnDeath3==='function';const base=drawBurnDeath3;
+ const w=function(fx,...a){try{if(fx&&adopt(fx)){drawDying(fx,base);return;}}catch(err){fail(err);}return base.apply(this,[fx,...a]);};w.__r462=true;try{drawBurnDeath3=w;}catch(_){}return true;}
 // ---- 시체 ----------------------------------------------------------------------------------------------
 let corpses=[],corpseRoom=null;
-function addCorpse(fx){if(typeof room==='undefined'||!room)return;if(corpseRoom!==room){corpses=[];corpseRoom=room;}const R=fx.r455,max=low()?10:24;
+function addCorpse(fx){if(typeof room==='undefined'||!room)return;if(corpseRoom!==room){corpses=[];corpseRoom=room;}const R=fx.r462,max=low()?10:24;
  corpses.push({x:fx.x,y:fx.y,kind:R.kind,look:R.look,side:R.side,seed:R.seed,t0:T()+(R.kind==='fire'?FALL.fire[1]:FALL.blood[1])});stats.corpses++;
  while(corpses.length>max)corpses.shift();}
 function drawCorpses(){if(!prefs.on||!prefs.corpses||!corpses.length)return;if(typeof room==='undefined'||room!==corpseRoom){corpses=[];stats.cleared++;return;}
@@ -111,14 +111,14 @@ function drawCorpses(){if(!prefs.on||!prefs.corpses||!corpses.length)return;if(t
     const glow=clamp01(1-age/4.5);if(glow>0&&typeof texture==='function'&&typeof VFX!=='undefined'&&VFX.burnFlame){const fl=.75+.25*Math.sin(now*9+c.seed%7);
      texture(VFX.burnFlame,q.x-c.side*hPx*.12,q.y-hPx*.12,hPx*.5,hPx*.22,{alpha:.22*glow*fl*fade});}}
    stats.corpseDraws++;}catch(err){fail(err);}finally{ctx.restore();}}}
-function wrapObjective(){if(typeof drawObjective!=='function'||drawObjective.__r455)return typeof drawObjective==='function';const base=drawObjective;
- const w=function(...a){const r=base.apply(this,a);try{drawCorpses();}catch(err){fail(err);}return r;};w.__r455=true;try{drawObjective=w;}catch(_){}return true;}
+function wrapObjective(){if(typeof drawObjective!=='function'||drawObjective.__r462)return typeof drawObjective==='function';const base=drawObjective;
+ const w=function(...a){const r=base.apply(this,a);try{drawCorpses();}catch(err){fail(err);}return r;};w.__r462=true;try{drawObjective=w;}catch(_){}return true;}
 // ---- 설치 ----------------------------------------------------------------------------------------------
 let tries=0,ok=false;
 function install(){try{const a=wrapDraws(),b=wrapBurn(),c=wrapObjective();ok=a&&b&&c;}catch(e){fail(e);}return ok;}
 install();(function arm(){if(!ok&&++tries<80&&typeof setTimeout==='function')setTimeout(()=>{install();arm();},250);})();
 try{if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=function(...a){corpses=[];corpseRoom=null;return base.apply(this,a);};}}catch(e){fail(e);}
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
-window.__STORYWORLD_MOB_DEATH_R455__=Object.freeze({revision:REV,set,kindOf,
+window.__STORYWORLD_MOB_DEATH_R462__=Object.freeze({revision:REV,set,kindOf,
  inspect:()=>({revision:REV,installed:ok,prefs:{...prefs},corpses:corpses.length,stats:{...stats},lastError})});
 })();
