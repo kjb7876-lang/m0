@@ -1,8 +1,86 @@
 {
  "schema": "storyworld.r380.approvedmobs/v1",
- "revision": "R404",
+ "revision": "R437",
  "note": "사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.",
  "mobs": [
+  {
+   "id": "electrode-machine-knight-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/electrode-machine-knight-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    142.25,
+    240.5
+   ],
+   "visibleHeight": 196.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "ep1b08",
+    "name": "^(전극기계수호기사|전극을 두른 좀비 수호기사)"
+   },
+   "bytes": 279738,
+   "sha256": "cd1c1eb2d2e294339138238e0bdb1d6054ab1a43902d92d3a68f2e564e00268c",
+   "source": {
+    "zip": "SW-ep1b08-electrode-machine-knight-v1-02-frames-20261106.zip",
+    "zipSha256": "e340760c67e5c7fab059837c647c0f8d46529ccdc2e49cd4c3d33b97d1eb4ab6",
+    "frames": [
+     {
+      "file": "move-01.png",
+      "sha256": "443f903d97e8a87cabdd9679542321956287684c1db6b0298aef38d512769f99"
+     },
+     {
+      "file": "move-02.png",
+      "sha256": "5a49abbf1240dbf20083082d34acdaa8330d35d4fc515c450a499479b084637d"
+     },
+     {
+      "file": "move-03.png",
+      "sha256": "150ee1274ff83f633ce1c039b91c53635cc46cd399177938140967003c7e02eb"
+     },
+     {
+      "file": "move-04.png",
+      "sha256": "a4dac4f1766894cd19f67cd67e7e67f4a3c8e9523da522d1224c94533cf11d26"
+     },
+     {
+      "file": "attack-01.png",
+      "sha256": "7b36ca0831a463ce7584272f4a5c0f2f53e273c2649f66d0ca0e7bd1df7fe8ae"
+     },
+     {
+      "file": "attack-02.png",
+      "sha256": "aded352227b179bb3749a3c092f3c78e9c700288629ad2d100a830f9e0950efc"
+     },
+     {
+      "file": "attack-03.png",
+      "sha256": "9927596f418971bb974e40fa5934c640305b95b3308916d47315626cc67e1b39"
+     },
+     {
+      "file": "attack-04.png",
+      "sha256": "c0472da3935d03062dabeaef658e8e41b6d210e0dcf3ccf4caf698050d3efa2f"
+     }
+    ],
+    "bodyPx512": 409
+   },
+   "finalArt": false
+  },
   {
    "id": "dys-siege-gunner-v2",
    "kind": "strip",
