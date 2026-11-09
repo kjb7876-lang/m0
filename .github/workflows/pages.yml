@@ -436,6 +436,8 @@ jobs:
         run: node r96/qa/r435/r435-cpu-check.cjs
       - name: R438 sin boss rooms tidy (no shared R224 furniture in boss rooms, zone-only furniture, no lamps mid-floor) CPU check
         run: node r96/qa/r438/r438-cpu-check.cjs
+      - name: R449 props by room function (own wall clusters from map data per room name, R224 room furniture rested, empty junctions/yards/short corridors, same layout after load, cover fade) CPU check
+        run: node r96/qa/r449/r449-cpu-check.cjs
       - name: R441 lag (blocked memo per tick, R302 caller lookup without repeated full stacks, R409 outline cache by image address + bake budget per frame) CPU check
         run: node r96/qa/r441/r441-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
@@ -513,6 +515,8 @@ jobs:
         run: node r96/qa/r442/enemy-skill-diag-cpu-check.cjs
       - name: R440 Hwando hit pose (no old art) and hero rim blade cleanup CPU check
         run: node r96/qa/r440/r440-cpu-check.cjs
+      - name: R446 seven pillars moved to their own map as stationary attacking towers CPU check
+        run: node r96/qa/r446/r446-cpu-check.cjs
       - name: R352 orphaned field-wave enemies wake near the hero CPU check
         run: node r96/qa/r352/wave-orphans-cpu-check.cjs
       - name: R280 stranded required enemy rescue and 777 forward range CPU check
