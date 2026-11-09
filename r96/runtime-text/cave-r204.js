@@ -753,8 +753,10 @@ function before(r,frame){try{
 //  고정 시드로 고른 색 한 겹을 옅게 깔고, 가장자리 띠(0.35칸)는 조금 더 어둡게 해 방 경계가 깔개·타일 구역처럼 보이게 한다. 그림만(판정·길찾기 그대로).
 const RFLOOR={clinic:[[.62,.78,.8],[.82,.84,.78],[.55,.66,.72]],home:[[.62,.42,.26],[.74,.55,.36],[.5,.32,.24]],urban:[[.56,.56,.6],[.66,.6,.52],[.46,.5,.56]],
  forge:[[.62,.36,.2],[.5,.4,.3],[.7,.48,.26]],machine:[[.42,.52,.66],[.5,.56,.6],[.36,.44,.58]],cult:[[.5,.16,.18],[.36,.2,.3],[.58,.26,.2]]};
+// R435: 설원(ep1b09, R118 눈 질감)은 바깥 지면이라 방 깔개 띠가 눈 위에 그은 네모 선으로 보인다(사용자 2026-11-09 "설원쪽 … 네모난 선같은건 뭐야") → 깔지 않는다.
+const NATURAL_FLOOR_R435=new Set(['ep1b09']);
 const strHash=t=>{let h=2166136261;for(const ch of String(t)){h^=ch.charCodeAt(0);h=Math.imul(h,16777619);}return h>>>0;};
-function roomFloorMesh(T,rm,cfg,zid){if(prefs.rooms===false||prefs.roomFloors===false)return null;const R=rm?.exploration?.r224Rooms;if(!R?.length)return null;
+function roomFloorMesh(T,rm,cfg,zid){if(prefs.rooms===false||prefs.roomFloors===false||NATURAL_FLOOR_R435.has(zid))return null;const R=rm?.exploration?.r224Rooms;if(!R?.length)return null;
  const pal=(/^cult/.test(zid||'')?RFLOOR.cult:RFLOOR[cfg?.kind])||RFLOOR.urban;const pos=[],col=[],idx=[];let n=0,k=0;
  const quad=(x0,y0,x1,y1,c,a,y)=>{pos.push(x0,y,y0, x1,y,y0, x1,y,y1, x0,y,y1);for(let i=0;i<4;i++)col.push(c[0],c[1],c[2]);idx.push(n,n+2,n+1,n,n+3,n+2);n+=4;};
  for(const q of R){if(!(q.x1-q.x0>=2&&q.y1-q.y0>=2))continue;const h=strHash(zid+':'+q.id),c=pal[Math.abs(h)%pal.length],e=.35,y=.0102+(k++)*1e-5;
