@@ -64,7 +64,9 @@ ok('pages.yml runs this check',fs.readFileSync(path.join(R,'..','.github','workf
 {const src=C('combat-read-r409.js');ok('R409 bake budget source (6ms, ≥1 per frame, deferred count, frame reset)',/BAKE_BUDGET_MS=6/.test(src)&&/bakeFrame\.n>0&&bakeFrame\.ms>=BAKE_BUDGET_MS/.test(src)&&/stats\.bakeDeferred/.test(src)&&/bakeFrame\.n=0;bakeFrame\.ms=0;bakeFrame\.at=performance\.now\(\)/.test(src));
  let clock=0;const perf={now:()=>clock};
  const mkCanvas=()=>({width:0,height:0,getContext:()=>({drawImage(){clock+=0.05;},getImageData:(x,y,w,h)=>({data:new Uint8ClampedArray(w*h*4).fill(255)}),putImageData(){},fillRect(){},set fillStyle(v){},set globalCompositeOperation(v){}})});
- const ctx={console,Math,JSON,Map,Set,WeakMap,WeakSet,String,Number,Array,Object,performance:perf,setInterval:()=>0,document:{createElement:()=>mkCanvas()}};ctx.window=ctx;ctx.localStorage={getItem:()=>null,setItem(){}};vm.createContext(ctx);
+ const ctx={console,Math,JSON,Map,Set,WeakMap,WeakSet,String,Number,Array,Object,performance:perf,setInterval:()=>0,document:{createElement:()=>mkCanvas()}};ctx.window=ctx;
+ /* 이 가짜 시계는 drawImage 한 번에 0.05ms 를 센다 — 예전 불리기 길(drawImage 수십 번)로 예산 나누기를 본다. R492 거리 변환 길은 r492 검사가 따로 본다. */
+ ctx.localStorage={getItem:k=>k==='storyworld.r409.combatRead'?'{"fastBake":false}':null,setItem(){}};vm.createContext(ctx);
  vm.runInContext(src,ctx);const api=ctx.__STORYWORLD_COMBAT_READ_R409__;const img={width:200,height:200};
  api.process([{kind:'image'}]);/* 장면 시작 */let made=0,nul=0;for(let i=0;i<10;i++){const r=api.bake(img,i*10,0,60,80,4,'enemy');if(r)made++;else nul++;}
  const st1=api.inspect().stats;ok('one frame: bakes stop after the 6ms budget, rest deferred',made>=1&&made<10&&nul===10-made&&st1.bakeDeferred===nul,{made,nul,st:st1});
