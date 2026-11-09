@@ -24818,6 +24818,16 @@
       "sha256": "7335837597f04b56780fecb48ae6036ed908e4f816971574903e95d942772258"
     },
     {
+      "path": "assets/r445/slayer/index.json",
+      "bytes": 1699,
+      "sha256": "0dffb33e649584fcdfbc3a4049155692155523e15086f4c86625b97fadd0fe29"
+    },
+    {
+      "path": "assets/r445/slayer/walk-n.webp",
+      "bytes": 80236,
+      "sha256": "fa26994ea7e39a47506c2b4a56a20f90160f19fa2d628b0925583b71d14b4c57"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -34359,8 +34369,8 @@
     },
     {
       "path": "slayer-r351.js",
-      "bytes": 18843,
-      "sha256": "7f5b072ce0bb4e78dac3116a2a312d8acd770904c5970adfea202cab3f3a2b82"
+      "bytes": 20256,
+      "sha256": "0cc7b23fbb29744a71257bdf648d5d8adec0941e71b1dd9e03f5ea806c40f0cf"
     },
     {
       "path": "status-r96.js",
@@ -34628,8 +34638,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6925,
-  "totalBytes": 1091400932,
+  "fileCount": 6927,
+  "totalBytes": 1091484280,
   "webHTMLSha256": "3f231e2c9de2fe75ba237442214a88c7cb9b01c7bab190fb666837fc3338d024",
   "largest": [
     {
