@@ -46,6 +46,8 @@ const major=e=>!!(e?.boss||e?.persona||e?.cosmic||e?.trial);
 const R205=()=>window.__STORYWORLD_BOSS_R205__;let enrOnAt=-1,enrOn=true;
 function enr(e){if(!e?.r205Enraged||!(e.hp>0))return false;const t=T();if(t!==enrOnAt){enrOnAt=t;try{enrOn=R205()?.inspect?.()?.prefs?.enrage!==false;}catch(_){enrOn=true;}}return enrOn;}
 function band(e){const K=enr(e)?(+R205()?.constants?.ENRAGE_SIZE||2):1,b=major(e)?BANDS.boss:(e.midboss||e.wardChampionR81===true||/^중간보스\s*·/.test(String(e.name||'')))?BANDS.mid:/우두머리/.test(String(e.name||''))?BANDS.leader:BANDS.normal;return K===1?b:[b[0]*K,b[1]*K];}
+// R463(7대죄 보스 한 크기): sin-boss-art-r463 가 그 보스 그림 무리의 '보이는 키'(원본 px)와 한 점짜리 띠를 주면 시트 중앙값 대신 그것으로 맞춘다 — 대기·공격·자세가 바뀌어도 키가 튀지 않는다.
+const lock463=(e,b)=>{try{return window.__STORYWORLD_SIN_BOSS_ART_R463__?.sizeLock?.(e,b,enr(e)?(+R205()?.constants?.ENRAGE_SIZE||2):1)||null;}catch(_){return null;}};
 function excluded(e){try{const id=String(room?.id||'');if(/mammon/i.test(id)||e.mammon||e.mammonR||/mammon/i.test(String(e.nativeId||'')))return true;}catch(_){}return !!(e.samongDollR193||e.dollR193||e.towerR193||e.r193Doll||e.r193Tower||e.r170Tower||e.r75Tower||e.r251Circle||e.prop||e.object);}
 const ST=new WeakMap();// e -> {s, nat, hitAt, kx, barOff, barAt}
 function stOf(e){let s=ST.get(e);if(!s)ST.set(e,s={s:1,nat:0,hitAt:-9,kx:0});return s;}
@@ -97,7 +99,7 @@ if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a
  else{stats.skipped++;r=base.apply(this,[e,...a]);}
  if(cmds.length===st0)return r;
  try{if(e.hp>0){const bb=bodyCmd(cmds,st0);if(bb)s.art=artKey(bb);}}catch(err){fail(err);}
- try{if(doSize&&e.hp>0){const b=bodyCmd(cmds,st0);if(b){const fr=sheetFrac(b.image,b.sourceRect);if(fr){const box=Math.abs(b.points[3][1]-b.points[0][1]),nat=box*fr/Math.max(.01,sy),H=AH(),[lo,hi]=band(e);
+ try{if(doSize&&e.hp>0){const b=bodyCmd(cmds,st0);if(b){const L463=lock463(e,b),fr=L463?L463.frac:sheetFrac(b.image,b.sourceRect);if(fr){const box=Math.abs(b.points[3][1]-b.points[0][1]),nat=box*fr/Math.max(.01,sy),H=AH(),[lo,hi]=L463?L463.band:band(e);
    let want=Math.min(hi*H,Math.max(lo*H,nat));let ns=Math.min(SMAX,Math.max(SMIN,want/Math.max(1,nat)));
    if(Math.abs(ns-s.s)>.01){k=ns/s.s;rescale(cmds,st0,fx,fy,k);stats.refixed++;s.s=ns;}
    s.nat=nat;if(Math.abs(s.s-1)>.01)stats.scaled++;else stats.kept++;}}}}catch(err){fail(err);}
