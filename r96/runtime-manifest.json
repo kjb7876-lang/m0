@@ -13,6 +13,11 @@
       "sha256": "2139771ab44fb29db3f1d197672acd0388f8ac126719d0b2f32c4fe04ffce794"
     },
     {
+      "path": "actor-tone-r453.js",
+      "bytes": 9525,
+      "sha256": "c9156c6e2b4a53fb4b18764cf3286a61962a1f4142e5a65a368df87cedfc30ae"
+    },
+    {
       "path": "aggro-chase-r390.js",
       "bytes": 4645,
       "sha256": "4c5f3a3dc8f5ad7214dca02b5921f68362323b4a57578632180a9f4cb94f6b11"
@@ -33424,8 +33429,8 @@
     },
     {
       "path": "dark-r123.js",
-      "bytes": 15147,
-      "sha256": "441a5bcbc65168ebb4b492275fb0d747b4bf3b2a0c4dec32795de4ae86b006da"
+      "bytes": 15278,
+      "sha256": "ee3bc668c9752f47f6fe5fba131a55bcc9ede2d96ff6b8a98ae7ea3eda2f1c0c"
     },
     {
       "path": "data/actor-canvas-map-v31224.js",
@@ -33638,6 +33643,11 @@
       "sha256": "52460ef81b2bab2a1fc73251f343100be44b3301e1f75134d618aa2b6bc8d5c4"
     },
     {
+      "path": "ground-fringe-r452.js",
+      "bytes": 14836,
+      "sha256": "2f69e814cbc8866fe02ca5364a6b622e770634666df20eacc01c9919b46b6c91"
+    },
+    {
       "path": "growth-r103.js",
       "bytes": 19635,
       "sha256": "ed4c72fb93cd0f8c5988c07ea92dd2cedffcea5a768547b9234e8acf4aae0e71"
@@ -33809,8 +33819,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6571491,
-      "sha256": "d50992db3c93fb604a6e81efdbbb9a164d6f9e5b59c5202804933eed6750a714"
+      "bytes": 6571668,
+      "sha256": "8948a737880fbc69c54b57f71389a9ade0c5bd6ca927d111a6cc7c7a334dd231"
     },
     {
       "path": "intro-r140.js",
@@ -33844,13 +33854,18 @@
     },
     {
       "path": "light-atmos-r300.js",
-      "bytes": 19124,
-      "sha256": "d98627edfb27d309a0248419a36cc474dcdc3d278727791799c23d6f9628e36b"
+      "bytes": 19850,
+      "sha256": "fb3019e4ce54e652a9136ff6daf720c4e8a21737ecf1653b13ce4a6da5ebb26d"
     },
     {
       "path": "light-r182.js",
-      "bytes": 14158,
-      "sha256": "b5f04e4b139fa7615edab7fd4a0974501fea2c92bb40c2eb66f81616bf4ff94e"
+      "bytes": 14516,
+      "sha256": "57ed6c41062bc5546ba01aff47716b9ec44f9445c2e4ca720b14abf99ca3597d"
+    },
+    {
+      "path": "local-light-r451.js",
+      "bytes": 35394,
+      "sha256": "958b2045af7ac6bdeb1a99dbd36f090bf5c8d76ba81d8db491bdec6d042fc716"
     },
     {
       "path": "mammon-bossroom.js",
@@ -34558,6 +34573,11 @@
       "sha256": "c5c36aca43b2752cd421eafe6a96a6c2eeed748de946182c66526fe86d5ea1ea"
     },
     {
+      "path": "weather-r450.js",
+      "bytes": 31997,
+      "sha256": "1f069e713e0b1e6acd5403bc2455ac3f1facc57986b9de152d613b72bb2d2acc"
+    },
+    {
       "path": "webgl-fallback-r221.js",
       "bytes": 3901,
       "sha256": "67ebd91e7546a42eee300653d9bde372a287d00f1a96e0b40a3950730c04752e"
@@ -34614,8 +34634,8 @@
     },
     {
       "path": "world-retro-r89.js",
-      "bytes": 33079,
-      "sha256": "1c9f04f9f6cc117fceccdb2d47e05a870d79ee4b6e16b6c7f42b35f9da2a79cf"
+      "bytes": 33304,
+      "sha256": "f2e1a9b3b0afd270f82c5a219ff653ad18469382e23f215b521459ca26850e86"
     },
     {
       "path": "world-tiles-r118.js",
@@ -34628,9 +34648,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6925,
-  "totalBytes": 1091475059,
-  "webHTMLSha256": "d50992db3c93fb604a6e81efdbbb9a164d6f9e5b59c5202804933eed6750a714",
+  "fileCount": 6929,
+  "totalBytes": 1091568428,
+  "webHTMLSha256": "8948a737880fbc69c54b57f71389a9ade0c5bd6ca927d111a6cc7c7a334dd231",
   "largest": [
     {
       "path": "index.html",

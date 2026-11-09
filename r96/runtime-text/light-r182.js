@@ -53,9 +53,11 @@ function frame(){try{if(!want()){hide();return;}const c=canvas();if(!c)return;c.
 // R335 은은한 원형: 시야 제한 없이 영웅 둘레만 밝고 멀수록 어둡게(벽에 막히지 않는 부드러운 비네트). 가장자리 어둠 GLOW_EDGE, 완전히 밝은 반경 GLOW_IN 칸, 다 어두워지는 반경 GLOW_OUT 칸.
 const GLOW_IN=4.5,GLOW_OUT=13,GLOW_EDGE=.6;
 function glow(g,b){const o=project(player.x,player.y),U=(typeof TILE==='number'?TILE:34)*(typeof zoom==='number'?zoom:1),rx=GLOW_OUT*U*Math.SQRT2,cy=o.y-12*(typeof zoom==='number'?zoom:1);
- g.fillStyle='rgba(2,2,7,'+GLOW_EDGE+')';g.fillRect(0,0,b.width,b.height);g.globalCompositeOperation='destination-out';
+ let edge=GLOW_EDGE;try{edge=window.__STORYWORLD_LOCAL_LIGHT_R451__?.glowEdge?.(GLOW_EDGE)??GLOW_EDGE;}catch(e){fail(e);}/* R451: 국지 조명이 빛을 맡으면 가장자리 어둠을 가볍게(모양은 그대로) */
+ g.fillStyle='rgba(2,2,7,'+edge+')';g.fillRect(0,0,b.width,b.height);g.globalCompositeOperation='destination-out';
  const gr=g.createRadialGradient(o.x,cy,0,o.x,cy,rx),k=GLOW_IN/GLOW_OUT;gr.addColorStop(0,'rgba(0,0,0,1)');gr.addColorStop(k,'rgba(0,0,0,1)');gr.addColorStop(k+(1-k)*.45,'rgba(0,0,0,.55)');gr.addColorStop(1,'rgba(0,0,0,0)');
  g.fillStyle=gr;g.save();g.translate(o.x,cy);g.scale(1,.62);g.translate(-o.x,-cy);/* 눌린 좌표계에서 화면 전체(0~H)를 덮도록 역변환한 사각형 — 위쪽 띠가 비지 않게(Codex 리뷰) */g.fillRect(0,cy-cy/.62,b.width,b.height/.62+2);g.restore();
+ try{window.__STORYWORLD_LOCAL_LIGHT_R451__?.glowHoles?.(g);}catch(e){fail(e);}/* R451: 먼 등불은 원형 어둠 속에서도 보이게 */
  g.globalCompositeOperation='source-over';const w=g.createRadialGradient(o.x,cy,0,o.x,cy,GLOW_IN*U*1.3);w.addColorStop(0,'rgba(255,222,170,.06)');w.addColorStop(1,'rgba(255,222,170,0)');g.fillStyle=w;g.fillRect(0,0,b.width,b.height);stats.glowFrames=(stats.glowFrames||0)+1;}
 /* R208 횃불: 사용자 2026-11-01 "횃불시야(스포트라이트)모드하면 플레이어 주변부만 원형으로 확실하게 잘보이게".
    R24 둘레 시야는 반지름이 화면만 해서(8~18칸) 원이 안 보였고, R100 이 시야 밖을 32~58% 밝기로만 낮춰 흐릿했다.

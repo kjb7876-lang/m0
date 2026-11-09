@@ -436,6 +436,14 @@ jobs:
         run: node r96/qa/r438/r438-cpu-check.cjs
       - name: R441 lag (blocked memo per tick, R302 caller lookup without repeated full stacks, R409 outline cache by image address + bake budget per frame) CPU check
         run: node r96/qa/r441/r441-cpu-check.cjs
+      - name: R450 zone weather (63 story zones indoor/outdoor/cave/void, dust instead of rain indoors, canon weather, double-sided streaks) CPU check
+        run: node r96/qa/r450/r450-cpu-check.cjs
+      - name: R451 local light (wall-blocked light map, round pools, doorway leaks only, indoor flame -> bulb, light shoulder, old light layers yield) CPU check
+        run: node r96/qa/r451/r451-cpu-check.cjs
+      - name: R452 ground fringe (outdoor only, path/door/altar kept clear, room edge, approved weed art only, one draw) CPU check
+        run: node r96/qa/r452/r452-cpu-check.cjs
+      - name: R453 actor tone (hero/mob brightness + saturation from the floor light, screen top-left rim, no asset swap, restored after draw) CPU check
+        run: node r96/qa/r453/r453-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
         run: node r96/qa/r430/r430-cpu-check.cjs
       - name: R431 boss-room center fights + theme boss skill 6s + touch status/DoT + black-flame prop throws CPU check
