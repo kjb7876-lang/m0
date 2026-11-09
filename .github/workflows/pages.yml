@@ -428,6 +428,8 @@ jobs:
         run: node r96/qa/r425/r425-cpu-check.cjs
       - name: R434 readability (boss/midboss ground aura, calm HUD, one track title, hero palette rim) CPU check
         run: node r96/qa/r434/r434-cpu-check.cjs
+      - name: R435 surfaces (floor anti-repeat noise, wall base AO + grime band, bright floor knee, wall height gradient + top edge light) CPU check
+        run: node r96/qa/r435/r435-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
         run: node r96/qa/r430/r430-cpu-check.cjs
       - name: R431 boss-room center fights + theme boss skill 6s + touch status/DoT + black-flame prop throws CPU check
