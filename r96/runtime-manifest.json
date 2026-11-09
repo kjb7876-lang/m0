@@ -32698,6 +32698,11 @@
       "sha256": "1df0b490e44db39f4065db7c5dee91f6dad5116a72bba12610ae2a97701cf0e0"
     },
     {
+      "path": "bossroom-tidy-r438.js",
+      "bytes": 4472,
+      "sha256": "56419c401047052e69db2e8c46ac48d2271c45ce7520775b3b7422b99cb412b3"
+    },
+    {
       "path": "cave-r204.js",
       "bytes": 116381,
       "sha256": "37716fb8d9b6fa1a2637864da9da29bb0de418008a88dcb8f12670a175a9e9d8"
@@ -33629,8 +33634,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6571406,
-      "sha256": "6b6867c27b402e949dfd2f10b94152e1791b4cf15de55df5b8d3aac974fe6311"
+      "bytes": 6571453,
+      "sha256": "c66bbdc1ca5fdbb563ae9fc2600844336f442f25b993327887968624f1deca7d"
     },
     {
       "path": "intro-r140.js",
@@ -34139,8 +34144,8 @@
     },
     {
       "path": "sin-room-art.js",
-      "bytes": 15922,
-      "sha256": "70d190184818ff8118c8c5232038ea8a7c23a249c706971c09a3f65044305a67"
+      "bytes": 17102,
+      "sha256": "fdbb027ad13cb160b34d9a33e3416057da0286d6df739951bcf11f4b3f61c242"
     },
     {
       "path": "skill-fx-r292.js",
@@ -34339,8 +34344,8 @@
     },
     {
       "path": "visual-r92.js",
-      "bytes": 19144,
-      "sha256": "e6696df38287601bd74b1355d8ab0a028e2a2609f77a51a9aca0aee6f8368578"
+      "bytes": 19880,
+      "sha256": "2b64db6337a89da420e3620fffd5fe8ad24a3870b559c60db9dd98f48bb67c6a"
     },
     {
       "path": "visual-r93-ui.js",
@@ -34443,9 +34448,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6888,
-  "totalBytes": 1090291315,
-  "webHTMLSha256": "6b6867c27b402e949dfd2f10b94152e1791b4cf15de55df5b8d3aac974fe6311",
+  "fileCount": 6889,
+  "totalBytes": 1090297750,
+  "webHTMLSha256": "c66bbdc1ca5fdbb563ae9fc2600844336f442f25b993327887968624f1deca7d",
   "largest": [
     {
       "path": "index.html",

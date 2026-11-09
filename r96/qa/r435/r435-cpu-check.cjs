@@ -6,7 +6,7 @@ const F='surface-r435.js',src=C(F);
 ok('runtime copy matches client source',RT(F)===src);
 try{new vm.Script(src);ok('syntax',true);}catch(e){ok('syntax '+e.message,false);}
 const html=RT('index.html');
-ok('script tag once, right after readability-r434',html.split('"./'+F+'"').length===2&&/<script src="\.\/readability-r434\.js"><\/script><script src="\.\/surface-r435\.js"><\/script><script src="\.\/combat-read-r409\.js"><\/script>/.test(html));
+ok('script tag once, right after readability-r434',html.split('"./'+F+'"').length===2&&/<script src="\.\/readability-r434\.js"><\/script><script src="\.\/surface-r435\.js"><\/script>(?:<script src="\.\/bossroom-tidy-r438\.js"><\/script>)?<script src="\.\/combat-read-r409\.js"><\/script>/.test(html));
 ok('listed in verify-r96-public.py',/'surface-r435\.js'/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')));
 ok('presentation only: no gameplay/save writes, no new mesh/texture',!/\.hp\s*=[^=]|saveGame|localStorage\.setItem\((?!KEY)|new\s+\w*\.?(Mesh|Texture|DataTexture|CanvasTexture)\(/.test(src));
 ok('no ctx.filter drop-shadow/blur (Three legacy trap)',!/drop-shadow|blur\(/.test(src));
