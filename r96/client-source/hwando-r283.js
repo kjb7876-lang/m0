@@ -15,9 +15,13 @@ const OUT={'assets/r271/hwando/':'assets/r283/hwando/r271/','assets/r242/hwando/
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const stats={idle:0,recolored:0};
 // 그림 경로: 색 맞춘 파생본이 있으면 그 경로
-function path(base,file){const name=String(file||'').replace(/\.webp$/,'');if(on&&RECOLOR[base]?.includes(name)){stats.recolored++;return OUT[base]+file;}return base+file;}
+// R439(사용자 2026-11-09 "환도 공격모션 중에 검끝에 점 묻어 보이는 거 개선"): 공격 E(좌는 미러)는 칼끝 색 번짐·떨어진 칼끝 조각을 지운 파생본
+//  assets/r439/hwando/attack-e.webp(scripts/r439-hwando-blade-tip.py, 칼날 픽셀만 바뀜·칸 수/크기/발 기준점 그대로)을 쓴다. 끄기: localStorage['storyworld.r439.hwandoTip']='{"on":false}'
+let tip=true;try{const s=JSON.parse(localStorage.getItem('storyworld.r439.hwandoTip')||'null');if(s&&s.on===false)tip=false;}catch(_){}
+const TIP=Object.freeze({'assets/r283/hwando/r271/attack-e.webp':'assets/r439/hwando/attack-e.webp'});
+function path(base,file){const name=String(file||'').replace(/\.webp$/,'');if(on&&RECOLOR[base]?.includes(name)){stats.recolored++;const p=OUT[base]+file;if(tip&&TIP[p]){stats.tip=(stats.tip||0)+1;return TIP[p];}return p;}return base+file;}
 // 대기: 마지막으로 바라본 좌·우의 선 자세 칸
 function idle(P){if(!on)return null;stats.idle++;let h='e';try{h=P?.inspect?.()?.lastH||'e';}catch(_){}if(h!=='w')h='e';return {dir:h,frame:IDLE[h]};}
-window.__STORYWORLD_HWANDO_R283__=Object.freeze({revision:REV,IDLE,RECOLOR,on:()=>on,path,idle,inspect:()=>({revision:REV,on,stats:{...stats}}),
+window.__STORYWORLD_HWANDO_R283__=Object.freeze({revision:REV,IDLE,RECOLOR,TIP,tip:()=>tip,on:()=>on,path,idle,inspect:()=>({revision:REV,on,stats:{...stats}}),
  set:v=>{on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}});
 })();

@@ -1,0 +1,19 @@
+{
+ "revision": "R439",
+ "file": "attack-e.webp",
+ "source": "assets/r283/hwando/r271/attack-e.webp",
+ "source_sha256": "d8984e859e35d2bd3d3c5a60ee666dd5fed4ed1b0632550dc358a97149bd1bcb",
+ "sha256": "9916397a530eb3ab6fc6156965fc0e3791ba85667a96e7b46b7eac734a7805dd",
+ "bytes": 412272,
+ "atlas": [
+  3456,
+  214
+ ],
+ "n": 12,
+ "cell": [
+  288,
+  214
+ ],
+ "specks_neutralised": 474,
+ "loose_tip_px_removed": 49
+}
