@@ -33684,8 +33684,8 @@
     },
     {
       "path": "ground-fringe-r452.js",
-      "bytes": 14836,
-      "sha256": "2f69e814cbc8866fe02ca5364a6b622e770634666df20eacc01c9919b46b6c91"
+      "bytes": 16221,
+      "sha256": "59bbe9a9bd7de99944240d1401241331649ce37ce0fb17c1159876ea617ec6f6"
     },
     {
       "path": "growth-r103.js",
@@ -33859,8 +33859,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6571764,
-      "sha256": "b2e780a1e64960a521e9404e72528bd6fa9e5e1e2cab50c6c9fb6c847ffc487b"
+      "bytes": 6571809,
+      "sha256": "4a7cb1125749de8f97b4feb6aeadb66c8e8d4911b45f2da662ed2ecce254ad10"
     },
     {
       "path": "intro-r140.js",
@@ -33904,8 +33904,8 @@
     },
     {
       "path": "local-light-r451.js",
-      "bytes": 35394,
-      "sha256": "958b2045af7ac6bdeb1a99dbd36f090bf5c8d76ba81d8db491bdec6d042fc716"
+      "bytes": 36300,
+      "sha256": "a3c8fd56fa930e992bb57f1ee866adccb567fb22d5efb0d0721c67466dd10a80"
     },
     {
       "path": "mammon-bossroom.js",
@@ -34231,6 +34231,11 @@
       "path": "props-r272.js",
       "bytes": 3130,
       "sha256": "e96f1d1a81d305007ab3afb0ee884edf68259ae07e8e719781bd1d3803aec9c9"
+    },
+    {
+      "path": "props-space-r449.js",
+      "bytes": 33214,
+      "sha256": "312ac82420bdde5b6244c614cdf556ac234c7e97c9b699abef8f17feadc73ee8"
     },
     {
       "path": "props-static-r105.js",
@@ -34693,9 +34698,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6938,
-  "totalBytes": 1091836376,
-  "webHTMLSha256": "b2e780a1e64960a521e9404e72528bd6fa9e5e1e2cab50c6c9fb6c847ffc487b",
+  "fileCount": 6939,
+  "totalBytes": 1091871926,
+  "webHTMLSha256": "4a7cb1125749de8f97b4feb6aeadb66c8e8d4911b45f2da662ed2ecce254ad10",
   "largest": [
     {
       "path": "index.html",

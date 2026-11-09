@@ -434,6 +434,8 @@ jobs:
         run: node r96/qa/r435/r435-cpu-check.cjs
       - name: R438 sin boss rooms tidy (no shared R224 furniture in boss rooms, zone-only furniture, no lamps mid-floor) CPU check
         run: node r96/qa/r438/r438-cpu-check.cjs
+      - name: R449 props by room function (own wall clusters from map data per room name, R224 room furniture rested, empty junctions/yards/short corridors, same layout after load, cover fade) CPU check
+        run: node r96/qa/r449/r449-cpu-check.cjs
       - name: R441 lag (blocked memo per tick, R302 caller lookup without repeated full stacks, R409 outline cache by image address + bake budget per frame) CPU check
         run: node r96/qa/r441/r441-cpu-check.cjs
       - name: R450 zone weather (63 story zones indoor/outdoor/cave/void, dust instead of rain indoors, canon weather, double-sided streaks) CPU check

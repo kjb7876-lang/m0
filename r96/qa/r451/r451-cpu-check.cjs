@@ -51,6 +51,8 @@ ok('R335 glow keeps its shape; edge lighter + holes only when R451 owns',src('li
 {const s=src('local-light-r451.js');ok('mesh shader multiplies after dithering (after R89 grade)',s.includes("'#include <dithering_fragment>\\ngl_FragColor.rgb*=r451Light();'"));
  ok('sprite shader (R204 grass) multiplies after colorspace',s.includes("'#include <colorspace_fragment>\\ngl_FragColor.rgb*=r451Light();'")&&s.includes('isSpriteMaterial'));
  ok('map sampled as rgb/a (blocked texels do not darken edges)',s.includes('s.rgb/s.a*'));
+ ok('re-bakes only when the light list itself changes (R412 moving unrelated props 10~13s after entry → no bake)',/const lsig=list\.map\([^;]*l\.color\.map/.test(s)&&/else o451\.lights=lights;/.test(s)&&/key=\[room\.exploration\?\.floorCells\?\.length,lightCache\?\.lsig\]/.test(s));
+ ok('hidden props (r303Hide, e.g. R449 resting R224 braziers) give no light; hidden count re-collects lights',/const isLightProp=p=>\{if\(!p\|\|p\.r303Hide\)return false;/.test(s)&&/sig=\[[^\]]*r\.props\?\.length\|\|0,hid,/.test(s));
  ok('presentation only (no collision / gameplay writes)',!/floorCells\s*=|\.walls\s*=|\.push\(\s*\{[^}]*solid/.test(s)&&api.inspect().collisionChanged===false&&api.inspect().gameplayChanged===false);}
 ok('pages.yml runs this check',fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('node r96/qa/r451/r451-cpu-check.cjs'));
 done();

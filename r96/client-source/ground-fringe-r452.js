@@ -14,9 +14,9 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_GROUND_FRINGE_R452__)return;
 const A=window.StoryPhase1,C=A?.ThreeRenderer?.prototype;if(!A||!C)return;
-const REV='R452-fringe-1',KEY='storyworld.r452.fringe';
+const REV='R452-fringe-2',KEY='storyworld.r452.fringe';
 let prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');if(typeof s.on==='boolean')prefs.on=s.on;}catch(_){}
-const stats={builds:0,quads:0,spots:0,skippedPath:0,skippedAvoid:0,buildMs:0,errors:0};let lastError=null,disposed=false;
+const stats={builds:0,rebuilds:0,quads:0,spots:0,skippedPath:0,skippedAvoid:0,buildMs:0,errors:0};let lastError=null,disposed=false;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const finite=v=>Number.isFinite(v),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 function h32(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
@@ -52,14 +52,14 @@ async function loadArt(){if(artState!=='idle')return;artState='loading';
 
 // ---- 자리 고르기(순수 계산 — qa/r452 가 직접 시험) --------------------------------------------------------------------
 // cells [[x,y]…], spec FAM 한 줄, opt: {seed, path:Set('x,y'), avoid:[{x,y,r}], walls:[[x0,y0,x1,y1]…], fieldAt:(x,y)=>부호 거리(바닥 +), topAt:(x,y)=>둔덕 높이}
-function plan(cells,spec,opt={}){const S=new Set(cells.map(c=>c[0]+','+c[1])),has=(x,y)=>S.has(x+','+y),rnd=rng(opt.seed||1),path=opt.path||new Set(),avoid=opt.avoid||[],walls=opt.walls||[];
+function plan(cells,spec,opt={}){const S=new Set(cells.map(c=>c[0]+','+c[1])),has=(x,y)=>S.has(x+','+y),seed=(opt.seed||1)>>>0,path=opt.path||new Set(),avoid=opt.avoid||[],walls=opt.walls||[];
  const grid=new Map(),near=(x,y,r)=>{const gx=Math.floor(x*2),gy=Math.floor(y*2);for(let j=gy-2;j<=gy+2;j++)for(let i=gx-2;i<=gx+2;i++){const L=grid.get(i+','+j);if(L)for(const q of L)if(Math.hypot(q.x-x,q.y-y)<r)return true;}return false;};
  const put=q=>{const k=Math.floor(q.x*2)+','+Math.floor(q.y*2);let L=grid.get(k);if(!L)grid.set(k,L=[]);L.push(q);};
  const inWall=(x,y)=>walls.some(b=>x>b[0]-.12&&x<b[2]+.12&&y>b[1]-.12&&y<b[3]+.12);
  const onPath=(x,y)=>path.has(Math.floor(x)+','+Math.floor(y));
  const spots=[],counts={path:0,avoid:0};
  for(const[x,y]of cells)for(const[dx,dy]of[[1,0],[-1,0],[0,1],[0,-1]]){if(has(x+dx,y+dy))continue;
-  for(const t of[.25,.75]){if(rnd()>spec.rate)continue;
+  for(const t of[.25,.75]){const rnd=rng(h32(seed+':'+x+','+y+':'+dx+','+dy+':'+t));if(rnd()>spec.rate)continue;
    const ex=x+.5+dx*.5+(dy?t-.5:0),ey=y+.5+dy*.5+(dx?t-.5:0),front=dx>0||dy>0;// 앞쪽(카메라 쪽) 변: 둔덕이 화면에서 바닥 앞에 있다
    let px,py,h=.02,side='floor';
    if(opt.fieldAt&&opt.topAt&&rnd()<spec.top){const d=.32+rnd()*.38;px=ex+dx*d;py=ey+dy*d;const fv=opt.fieldAt(px,py);if(!(fv<-.1&&fv>-1.6))continue;h=opt.topAt(px,py);if(!(h>=.3))continue;side='top';
@@ -78,7 +78,7 @@ function build(r,frame,spec,F){const t0=performance.now(),T=r.T,L=frame.explorat
  const avoid=[];const pt=(q,rr)=>{if(q&&finite(q.x+q.y))avoid.push({x:q.x,y:q.y,r:rr});};
  for(const d of L.worldR74?.doors||[])pt(d,2.2);for(const d of F?.doors||[])if(Array.isArray(d))avoid.push({x:d[0],y:d[1],r:Math.max(2,(d[2]||3)-.6)});
  pt(rm?.altar,2.6);pt(rm?.objective,1.8);pt(L.entry,2.4);pt(L.entrance,2.4);pt(rm?.r72Entry,2.4);
- for(const p of rm?.props||[])if(p&&finite(p.x+p.y)&&p.visible!==false)pt(p,(p.interactive||p.r414Building?1.6:.9)+(Number(p.radius)||0));
+ for(const p of rm?.props||[])if(p&&finite(p.x+p.y)&&p.visible!==false&&!p.r303Hide)pt(p,(p.interactive||p.r414Building?1.6:.9)+(Number(p.radius)||0));
  for(const n of rm?.npcs||[])pt(n,1.8);
  const walls=[];for(const w of L.walls||[])if(w&&!w.decorative&&finite(w.x+w.y+w.width+w.depth))walls.push([w.x-w.width/2,w.y-w.depth/2,w.x+w.width/2,w.y+w.depth/2]);
  const{spots,counts}=plan(L.floorCells||[],spec,{seed:h32(String(z))^0x452,path,avoid,walls:useF?[]:walls,
@@ -86,7 +86,7 @@ function build(r,frame,spec,F){const t0=performance.now(),T=r.T,L=frame.explorat
  stats.skippedPath=counts.path;stats.skippedAvoid=counts.avoid;stats.spots=spots.length;
  // 카메라 방향(직교·고정 회전): 판은 화면과 평행(Sprite 와 같음) — 오른쪽·위 벡터. 법선은 카메라 쪽 수평(R451 이 세운 면으로 비춘다).
  r.camera.updateMatrixWorld();const e=r.camera.matrixWorld.elements,RX=[e[0],e[1],e[2]],UP=[e[4],e[5],e[6]],BK=[e[8],0,e[10]],bl=Math.hypot(BK[0],BK[2])||1;BK[0]/=bl;BK[2]/=bl;
- const pos=[],uv=[],col=[],nor=[],idx=[],rnd=rng(h32(String(z))^0x45201);let quads=0;
+ const pos=[],uv=[],col=[],nor=[],idx=[];let quads=0;
  const quad=(x,y,h,part,k,tint)=>{if(quads>=MAX_QUADS)return;const b=part.box,w=part.w*k/PPU,hh=part.h*k/PPU*1.1,cx=b.cx/part.w,cy=(b.y1-4)/part.h;// 밑동 기준점(그림 아래 끝)
   const base=pos.length/3;
   for(const[sx,sy]of[[0,0],[1,0],[1,1],[0,1]]){const ox=(sx-cx)*w,oy=(cy-sy)*hh;// sy=0 → 그림 위(캔버스 y 작음)
@@ -94,7 +94,7 @@ function build(r,frame,spec,F){const t0=performance.now(),T=r.T,L=frame.explorat
    uv.push(sx*part.w/atlas.W,1-(part.y+sy*part.h)/atlas.H);
    const ao=sy===1?.62:1;col.push(tint[0]*ao,tint[1]*ao,tint[2]*ao);nor.push(BK[0],0,BK[2]);}
   idx.push(base,base+3,base+1,base+1,base+3,base+2);quads++;};
- for(const s of spots){const n=1+(s.r<.45?1:0)+(s.r<.15?1:0),parts=atlas.parts;
+ for(const s of spots){const n=1+(s.r<.45?1:0)+(s.r<.15?1:0),parts=atlas.parts,rnd=rng(h32(z+':'+s.x+','+s.y)^0x45201);
   for(let i=0;i<n;i++){const part=parts[(h32(s.x+','+s.y+':'+i)>>>3)%parts.length],k0=spec.k[0]+(spec.k[1]-spec.k[0])*rnd(),k=(i?.62+rnd()*.2:1)*k0*(s.side==='top'&&s.front?.72:1);
    const along=i?(rnd()<.5?-1:1)*(.22+rnd()*.24):0,x=s.x+s.ax*along,y=s.y+s.ay*along,v=.86+rnd()*.24,warm=(rnd()-.5)*.08;
    quad(x,y,s.h+(i?.01:0),part,k,[clamp(spec.tint[0]*v+warm,0,1.2),clamp(spec.tint[1]*v,0,1.2),clamp(spec.tint[2]*v-warm,0,1.2)]);}}
@@ -108,15 +108,24 @@ function build(r,frame,spec,F){const t0=performance.now(),T=r.T,L=frame.explorat
  stats.builds++;stats.quads=quads;stats.buildMs=Math.round(performance.now()-t0);return mesh;}
 
 // ---- 한 프레임 ------------------------------------------------------------------------------------------------
+// 보이는 소품 자리 지문(순서 무관). R449 는 방을 처음 볼 때(0.4초 안) R224 가구를 숨기고 제 가구를 벽가에 붙이고, R414 건물·문 소품도 늦게 붙는다
+//  → 지문이 바뀌면 그 둘레를 다시 비워 판 묶음을 다시 만든다(0.5초마다 확인, 한 번 들어온 동안 4번까지). 난수는 후보·포기 자리마다 따로라 나머지 풀은 그대로.
+function propSig(rm){let n=0,h=0;for(const p of rm?.props||[])if(p&&p.visible!==false&&!p.r303Hide&&finite(p.x+p.y)){n++;h=(h+(Math.imul(Math.round(p.x*4)+7,73856093)^Math.imul(Math.round(p.y*4)+3,19349663)))|0;}return n+':'+h;}
+const REBUILD_MAX=4,CHECK_MS=500;
+function drop(r,st){const m=st?.mesh;if(!m)return;st.mesh=null;try{r.spatialRoot?.remove?.(m);for(const x of[m.geometry,m.material?.map,m.material]){if(!x)continue;r.spatialResources?.delete?.(x);x.dispose?.();}}catch(e){fail(e);}}
 function update(r,frame){if(disposed||!prefs.on||frame?.layer!=='STORY'||!r.spatialBuilt||!r.spatialRoot||!frame.exploration?.floorCells?.length)return;
- const st=r.__r452,z=frame.zone;if(st&&st.gen===r.sceneGeneration&&st.zone===z){if(st.mesh&&!st.mesh.parent)r.spatialRoot.add(st.mesh);return;}
+ const st=r.__r452,z=frame.zone;if(st&&st.gen===r.sceneGeneration&&st.zone===z){if(st.mesh&&!st.mesh.parent)r.spatialRoot.add(st.mesh);
+  if(st.spec&&st.rebuilds<REBUILD_MAX){const t=performance.now();if(t>=st.nextCheck){st.nextCheck=t+CHECK_MS;const rm=typeof room!=='undefined'&&room?.exploration===frame.exploration?room:null;
+   const sig=rm?propSig(rm):st.psig;if(sig!==st.psig){drop(r,st);st.psig=sig;st.rebuilds++;stats.rebuilds++;try{st.mesh=build(r,frame,st.spec,st.F);}catch(e){fail(e);}}}}
+  return;}
  const rm=typeof room!=='undefined'&&room?.exploration===frame.exploration?room:null;if(!rm)return;
  const spec=specFor(rm);if(!spec){r.__r452={gen:r.sceneGeneration,zone:z,mesh:null,skip:'place'};return;}
  if(artState==='idle')loadArt();if(artState!=='ready'){if(artState==='failed')r.__r452={gen:r.sceneGeneration,zone:z,mesh:null,skip:'art'};return;}
  // R204 둔덕 지역은 그 지형이 다 지어진 뒤(거리장) — 꺼져 있으면 거리장 없이 벽 밑에만
  const R204=window.__STORYWORLD_CAVE_R204__;let F=null;
  if(R204?.zones?.includes?.(z)&&R204?.inspect?.()?.prefs?.on!==false){const s4=r.__r204;if(!s4||s4.zone!==z||s4.gen!==r.sceneGeneration||s4.pending)return;if(!s4.failed)F=s4.F||null;}
- let mesh=null;try{mesh=build(r,frame,spec,F);}catch(e){fail(e);}r.__r452={gen:r.sceneGeneration,zone:z,mesh,withField:!!F};}
+ let mesh=null;const psig=propSig(rm);try{mesh=build(r,frame,spec,F);}catch(e){fail(e);}
+ r.__r452={gen:r.sceneGeneration,zone:z,mesh,withField:!!F,spec,F,psig,rebuilds:0,nextCheck:performance.now()+CHECK_MS};}
 const wrappedTargets=new WeakSet();
 function wrapFn(fn){const w=function(frame){try{if(!disposed&&this?.T&&this.scene&&this.__r452Frame!==frame){this.__r452Frame=frame;update(this,frame);}}catch(e){fail(e);}
   try{return fn.apply(this,arguments);}finally{if(this)this.__r452Frame=undefined;}};w.__r452=true;return w;}
@@ -126,7 +135,7 @@ const timer=typeof setInterval==='function'?setInterval(wrapAll,500):0;wrapAll()
 
 function set(p={}){if(typeof p.on==='boolean')prefs.on=p.on;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}
  try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(r?.__r452?.mesh)r.__r452.mesh.visible=prefs.on;}catch(_){}return{...prefs};}
-function dispose(){disposed=true;if(timer)clearInterval(timer);try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;const m=r?.__r452?.mesh;if(m){m.parent?.remove(m);m.geometry?.dispose?.();m.material?.map?.dispose?.();m.material?.dispose?.();}if(r)r.__r452=null;}catch(_){}}
+function dispose(){disposed=true;if(timer)clearInterval(timer);try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(r?.__r452)drop(r,r.__r452);if(r)r.__r452=null;}catch(_){}}
 window.__STORYWORLD_GROUND_FRINGE_R452__=Object.freeze({revision:REV,storageKey:KEY,families:FAM,art:ART,plan,set,dispose,
- inspect:()=>{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three,st=r?.__r452;return{revision:REV,prefs:{...prefs},art:artState,zone:st?.zone||null,skip:st?.skip||null,withField:!!st?.withField,quads:st?.mesh?stats.quads:0,stats:{...stats},lastError,collisionChanged:false,gameplayChanged:false,finalArt:false};}});
+ inspect:()=>{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three,st=r?.__r452;return{revision:REV,prefs:{...prefs},art:artState,zone:st?.zone||null,skip:st?.skip||null,withField:!!st?.withField,quads:st?.mesh?stats.quads:0,rebuilds:st?.rebuilds||0,stats:{...stats},lastError,collisionChanged:false,gameplayChanged:false,finalArt:false};}});
 })();

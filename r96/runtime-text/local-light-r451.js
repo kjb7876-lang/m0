@@ -16,7 +16,7 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_LOCAL_LIGHT_R451__)return;
 const A=window.StoryPhase1,C=A?.ThreeRenderer?.prototype;if(!A||!C)return;
-const REV='R451-local-light-1',KEY='storyworld.r451.localLight';
+const REV='R451-local-light-2',KEY='storyworld.r451.localLight';
 const DEFAULTS=Object.freeze({on:true,flicker:true});
 let prefs={...DEFAULTS};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');for(const k in DEFAULTS)if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={frames:0,owned:0,bakes:0,bakeMs:0,lights:0,lightsUsed:0,blockers:0,texels:0,patched:0,rowsLit:0,holes:0,stutters:0,errors:0};let lastError=null,disposed=false;
@@ -67,12 +67,14 @@ const FIRE_OK=new Set(['kair07','ep1b07']);
 // 빛이 닿는 거리(장소별): 실외 등불은 탁 트인 땅에 넓고 옅게 퍼진다(반지름 ×1.25·세기 ×1.12), 동굴은 그 사이, 건물 안은 방 크기 그대로.
 //  (보정 2026-11-09: 실외 화면이 89~92% 어두워 호러 규칙 70~85% 를 넘었다 → 등불 웅덩이를 넓혀 78~87%)
 const REACH=Object.freeze({out:Object.freeze({k:1.12,r:1.25}),cave:Object.freeze({k:1.05,r:1.12}),in:Object.freeze({k:1,r:1}),void:Object.freeze({k:1,r:1})});
-const isLightProp=p=>{try{const f=window.__STORYWORLD_DARK_R123__?.isLight;return typeof f==='function'&&!!f(p);}catch(_){return false;}};
+// 숨긴 소품(r303Hide: R303 문 곁·R412 벽 속·R449 공간 정리로 쉬는 R224 가구 — 화로 r80-039 포함)은 그려지지 않으니 빛도 내지 않는다.
+const isLightProp=p=>{if(!p||p.r303Hide)return false;try{const f=window.__STORYWORLD_DARK_R123__?.isLight;return typeof f==='function'&&!!f(p);}catch(_){return false;}};
 
-// 진짜 광원 목록(지역·소품 수가 바뀔 때만 다시 만든다)
+// 진짜 광원 목록(지역·소품 수·숨긴 소품 수가 바뀔 때만 다시 만든다 — R449 는 방을 처음 볼 때 R224 가구를 숨기고 제 가구를 붙인다)
 let lightCache=null;
 function collect(r){const L=r?.exploration;if(!L)return[];const r92=window.__STORYWORLD_VISUAL_R92__,r91=window.__STORYWORLD_VISUAL_R91__,T412=window.__STORYWORLD_PROPS_TIDY_R412__;
- const p92=r92?.lightPoints?.()||[],p91=r91?.lightPoints?.()||[],sig=[typeof zone!=='undefined'?zone:'',r.props?.length||0,p92.length,p91.length,T412?.ver?.()||0,!!r.altar].join('|');
+ let hid=0;for(const p of r.props||[])if(p&&p.r303Hide)hid++;
+ const p92=r92?.lightPoints?.()||[],p91=r91?.lightPoints?.()||[],sig=[typeof zone!=='undefined'?zone:'',r.props?.length||0,hid,p92.length,p91.length,T412?.ver?.()||0,!!r.altar].join('|');
  if(lightCache&&lightCache.room===r&&lightCache.layout===L&&lightCache.sig===sig)return lightCache.list;
  const fam=familyOf(r),place=placeKind(r),indoor=place==='in',fireOk=FIRE_OK.has(r.id),G=REACH[place]||REACH.out,list=[];
  const add=(x,y,label,color,src)=>{if(!finite(x)||!finite(y))return;if(list.some(q=>Math.hypot(q.x-x,q.y-y)<.6))return;const type=classify(label,fam,indoor,color,fireOk),T=TYPE[type];
@@ -83,7 +85,9 @@ function collect(r){const L=r?.exploration;if(!L)return[];const r92=window.__STO
  for(const p of r.props||[])if(isLightProp(p))add(p.x,p.y,[p.r74Prop,p.r105Prop,p.r115Prop,p.kind,p.id,p.path].join(' '),null,'prop');
  if(r.altar&&finite(r.altar.x+r.altar.y))add(r.altar.x,r.altar.y,'altar holy','','altar');
  for(const l of list)if(l.src==='altar'){l.type='holy';Object.assign(l,{color:TYPE.holy.c,k:TYPE.holy.k*G.k,r:TYPE.holy.r*G.r,fl:TYPE.holy.fl});}
- lightCache={room:r,layout:L,sig,list,fam,indoor,place};return list;}
+ // 굽기 열쇠는 실제 빛 목록(자리·종류·세기·반지름) — R412 가 등과 상관없는 소품을 옮겨 판이 바뀌어도(들어간 뒤 10~13초) 빛이 그대로면 다시 굽지 않는다
+ const lsig=list.map(l=>l.x.toFixed(2)+','+l.y.toFixed(2)+','+l.type+','+l.k.toFixed(3)+','+l.r.toFixed(2)+','+l.color.map(v=>(+v).toFixed(2)).join(':')).join('|');
+ lightCache={room:r,layout:L,sig,lsig,list,fam,indoor,place};return list;}
 
 // ---- 조명맵 굽기 -------------------------------------------------------------------------------------------------
 // 칸(a,b) = [a,a+1)×[b,b+1) (explorationBlocked 와 같음). 텍셀 = 1/S 칸. 막힌 텍셀: 바닥 칸 밖 + 벽 자리.
@@ -209,8 +213,9 @@ const reduced=f=>!!(f?.settings?.reducedMotion||typeof settings!=='undefined'&&s
 function wantFor(frame){return !disposed&&prefs.on&&!!frame&&frame.layer==='STORY'&&solo()&&!sightOn()&&typeof room!=='undefined'&&!!room?.exploration?.floorCells?.length;}
 function update(r,frame){const want=wantFor(frame);const u=uniforms(r.T);
  if(!want){o451.owned=false;u.r451On.value=0;return;}
- const lights=collect(room),key=[room.exploration?.floorCells?.length,lightCache?.sig].join('#');
+ const lights=collect(room),key=[room.exploration?.floorCells?.length,lightCache?.lsig].join('#');
  if(o451.key!==key||o451.layout!==room.exploration||!o451.tex){o451.key=key;o451.layout=room.exploration;o451.lights=lights;if(!bake(o451,r,room,lights)){o451.owned=false;u.r451On.value=0;return;}}
+ else o451.lights=lights;/* 같은 빛(굽기 그대로)이어도 목록은 새것으로 — 깜빡임·먼 등불 구멍·R453 이 쓰는 목록 */
  const t=performance.now();if(t>=o451.nextScan){o451.nextScan=t+500;try{patchScene(r);}catch(e){fail(e);}}
  const fam=lightCache?.fam||'regional',a=ambientFor(fam,lightCache?.place||'out');o451.amb=a;u.r451Amb.value.set(a.c[0]*a.k,a.c[1]*a.k,a.c[2]*a.k);
  const hero=frame.entities?.find?.(e=>e.hero&&finite(e.x+e.y))||(typeof player!=='undefined'&&player&&finite(player.x+player.y)?player:null);o451.hero=hero?{x:hero.x,y:hero.y}:null;

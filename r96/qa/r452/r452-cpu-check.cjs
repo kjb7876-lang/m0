@@ -24,6 +24,14 @@ ok('floor-side spots hug the outer edge (≤ .45 tile in)',A.spots.every(q=>q.x<
 ok('no spot inside a wall box',A.spots.every(q=>!(q.x>5.38&&q.x<6.62&&q.y>1.38&&q.y<2.62)));
 ok('spots spaced ≥ .62 tile',A.spots.every((q,i)=>A.spots.every((p,j)=>i===j||Math.hypot(p.x-q.x,p.y-q.y)>=.62-1e-9)));
 ok('same seed → same spots, other seed → different',JSON.stringify(A.spots)===JSON.stringify(B.spots)&&JSON.stringify(A.spots)!==JSON.stringify(Cc.spots));
+// 소품이 늦게 붙거나 숨겨져(R449 가구·R414 건물) 다시 만들 때: 난수가 후보마다 따로라 그 둘레 밖 풀은 그대로(뒤섞이지 않음)
+{const add={x:11.6,y:6,r:1.1},A2=api.plan(cells,spec,{...opt,avoid:[...opt.avoid,add]}),far=q=>Math.hypot(q.x-add.x,q.y-add.y)>2.6,key=q=>JSON.stringify(q);
+ const a=A.spots.filter(far).map(key),b=new Set(A2.spots.filter(far).map(key));
+ ok('a new avoid circle only changes spots near it (per-candidate random)',a.length>10&&a.every(k=>b.has(k))&&A2.spots.filter(far).length===a.length&&A2.spots.every(q=>Math.hypot(q.x-add.x,q.y-add.y)>=add.r),{far:a.length,kept:a.filter(k=>b.has(k)).length});}
+{const s=C('ground-fringe-r452.js');
+ ok('hidden props (r303Hide: R303 / R412 / R449 resting R224 furniture) do not reserve space',/p\.visible!==false&&!p\.r303Hide\)pt\(p,/.test(s));
+ ok('rebuilds when visible props change (R449 furniture, late R414 buildings), at most 4 times per visit, old mesh disposed',
+  /function propSig\(rm\)/.test(s)&&/REBUILD_MAX=4/.test(s)&&/if\(sig!==st\.psig\)\{drop\(r,st\);/.test(s)&&/r\.spatialResources\?\.delete\?\.\(x\);x\.dispose\?\.\(\);/.test(s));}
 // R204 둔덕 지역: 거리장(바닥 +, 둔덕 −)으로 둔덕 윗면 가장자리 또는 절벽 밑에만
 {const fieldAt=(x,y)=>Math.min(x,12-x,y,8-y),topAt=()=>1.2,T=api.plan(cells,spec,{...opt,fieldAt,topAt});const top=T.spots.filter(q=>q.side==='top'),fl=T.spots.filter(q=>q.side==='floor');
  ok('field mode: some on the bank top, some at the cliff foot',top.length>5&&fl.length>5,{top:top.length,floor:fl.length});
