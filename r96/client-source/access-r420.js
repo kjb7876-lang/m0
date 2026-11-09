@@ -77,10 +77,10 @@ const FOCUS_CSS='@media '+FOCUS_MQ+'{'
  +'html body.r420-focus header{background:linear-gradient(#06090df2,#06090dd9)!important;border-bottom:1px solid #3a332a!important;box-shadow:0 6px 14px #0008!important}'
  +'html body.r420-focus footer{background:linear-gradient(#06090d00,#06090db8 30%,#06090df0 70%)!important;border-top:0!important;box-shadow:none!important}'
  +'body.r420-focus #noticeShelfR63R2{background:none!important;border-top:0!important;box-shadow:none!important;text-shadow:0 1px 3px #000,0 0 6px #000}'
- +'body.r420-focus header>*,body.r420-focus #xpText,body.r420-focus #buildText,body.r420-focus #awakeText,body.r420-focus .hotbar kbd,body.r420-focus .hotbar .label,body.r420-focus #noticeShelfR63R2{transition:opacity .45s ease}'
+ +'body.r420-focus header>*,body.r420-focus #xpText,body.r420-focus #buildText,body.r420-focus #awakeText,body.r420-focus #noticeShelfR63R2{transition:opacity .45s ease}'
  +'body.r420-focus.r420-combat header:not(:hover)>*:not(#bossbar):not(nav){opacity:.32}'
  +'body.r420-focus.r420-combat #xpText,body.r420-focus.r420-combat #buildText,body.r420-focus.r420-combat #awakeText,body.r420-focus.r420-combat #noticeShelfR63R2{opacity:.35}'
- +'body.r420-focus.r420-combat footer:not(:hover) .hotbar kbd,body.r420-focus.r420-combat footer:not(:hover) .hotbar .label{opacity:.55}'
+ /* R441: 스킬 칸 글자(키·이름)도 싸울 때 옅게 하지 않음 — 쿨타임만 표시 */
  +'body.r420-focus #r177Doc{transition:opacity .45s ease}body.r420-focus.r420-combat #r177Doc:not(:hover){opacity:.4}'/* R421: 싸우는 동안 오른쪽 쪽지·기억 조각 종이(R177)가 화면 1/4 을 가리지 않게 옅게 — 마우스를 올리면 다시 또렷 */
  +'}';
 
