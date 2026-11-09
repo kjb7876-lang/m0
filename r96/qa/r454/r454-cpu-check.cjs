@@ -1,13 +1,13 @@
-// R451 영화 모드 별도 입구 검사: 처음 화면 입구·기록 성격 저장/불러오기·일반 기록에서 켜기 거절·서사 화자 영웅 고정(CPU, 가짜 엔진).
+// R454 영화 모드 별도 입구 검사: 처음 화면 입구·기록 성격 저장/불러오기·일반 기록에서 켜기 거절·서사 화자 영웅 고정(CPU, 가짜 엔진).
 const fs=require('fs'),path=require('path'),assert=require('assert');
 const root=path.resolve(__dirname,'../..');let n=0;const ok=m=>{n++;console.log('PASS',m);};
 const CS=f=>fs.readFileSync(path.join(root,'client-source',f),'utf8'),RT=f=>fs.readFileSync(path.join(root,'runtime-text',f),'utf8');
-const src=CS('cinema-run-r451.js');assert.strictEqual(src,RT('cinema-run-r451.js'));ok('client-source and runtime copies agree');
+const src=CS('cinema-run-r454.js');assert.strictEqual(src,RT('cinema-run-r454.js'));ok('client-source and runtime copies agree');
 const idx=RT('index.html');const at=k=>idx.indexOf('"./'+k+'"');
-assert(idx.split('"./cinema-run-r451.js"').length===2&&at('cinema-mode-r370.js')<at('cinema-run-r451.js')&&at('hud-cinema-r376.js')<at('cinema-run-r451.js')&&at('mob-art-variants-r306.js')<at('cinema-run-r451.js')&&at('cinema-run-r451.js')<at('combat-r118.js'));ok('loaded once, after R306/R370/R376, before combat-r118');
-assert(fs.readFileSync(path.join(root,'..','scripts','verify-r96-public.py'),'utf8').includes("'cinema-run-r451.js'"));ok('public verify list includes it');
-assert(fs.readFileSync(path.join(root,'..','.github','workflows','pages.yml'),'utf8').includes('r96/qa/r451/r451-cpu-check.cjs'));ok('Pages CPU step');
-assert(JSON.parse(fs.readFileSync(path.join(root,'runtime-inputs.json'),'utf8')).textPaths.some(p=>/cinema-run-r451\.js$/.test(p)));ok('runtime inputs list it');
+assert(idx.split('"./cinema-run-r454.js"').length===2&&at('cinema-mode-r370.js')<at('cinema-run-r454.js')&&at('hud-cinema-r376.js')<at('cinema-run-r454.js')&&at('mob-art-variants-r306.js')<at('cinema-run-r454.js')&&at('cinema-run-r454.js')<at('combat-r118.js'));ok('loaded once, after R306/R370/R376, before combat-r118');
+assert(fs.readFileSync(path.join(root,'..','scripts','verify-r96-public.py'),'utf8').includes("'cinema-run-r454.js'"));ok('public verify list includes it');
+assert(fs.readFileSync(path.join(root,'..','.github','workflows','pages.yml'),'utf8').includes('r96/qa/r454/r454-cpu-check.cjs'));ok('Pages CPU step');
+assert(JSON.parse(fs.readFileSync(path.join(root,'runtime-inputs.json'),'utf8')).textPaths.some(p=>/cinema-run-r454\.js$/.test(p)));ok('runtime inputs list it');
 // 가짜 엔진
 function boot(stored){const ls=new Map(Object.entries(stored||{}));const localStorage={getItem:k=>ls.has(k)?ls.get(k):null,setItem:(k,v)=>ls.set(k,String(v))};
  const win={};const toasts=[];const E={toast:(t)=>toasts.push(t)};
@@ -24,7 +24,7 @@ function boot(stored){const ls=new Map(Object.entries(stored||{}));const localSt
  const doc={getElementById:()=>null,addEventListener:()=>{},createElement:()=>({})};
  const live=new Function('window','localStorage','document','toast','HEROES','regionById',pre+src+';'+post)(win,localStorage,doc,E.toast,HEROES,regionById);
  const S=live;
- return {win,ls,S,toasts,rawCalls,cprefs:()=>cprefs,live,R:win.__STORYWORLD_CINEMA_RUN_R451__,C:win.__STORYWORLD_CINEMA_MODE_R370__};}
+ return {win,ls,S,toasts,rawCalls,cprefs:()=>cprefs,live,R:win.__STORYWORLD_CINEMA_RUN_R454__,C:win.__STORYWORLD_CINEMA_MODE_R370__};}
 (async()=>{
  // 순수 함수
  {const t=boot();const P=t.R.pure,H={hwando:{name:'환도'},seoha:{name:'윤서하'},gunner:{name:'기억사수'}};
@@ -37,7 +37,7 @@ function boot(stored){const ls=new Map(Object.entries(stored||{}));const localSt
  {const t=boot({'storyworld.r370.cinema':JSON.stringify({on:true})});assert.strictEqual(t.cprefs().on,false);ok('legacy cinema setting is turned off at load (normal play never inherits it)');}
  // 일반 기록: 켜기 거절, 영웅 고정 없음
  {const t=boot();await t.live.newGame()('hwando');assert.strictEqual(t.R.run(),'normal');t.C.set({on:true});assert.strictEqual(t.cprefs().on,false);assert(t.toasts.some(x=>/영화 모드로 시작/.test(x)));
-  await t.live.enterRegion()('kair01');assert.strictEqual(t.S.player.hero,'hwando');assert(!('playModeR451' in t.live.serializeSave()()));
+  await t.live.enterRegion()('kair01');assert.strictEqual(t.S.player.hero,'hwando');assert(!('playModeR454' in t.live.serializeSave()()));
   t.live.showHeroes()(false);assert.strictEqual(t.S.heroPanel,1);
   ok('normal run: turning cinema on from outside is refused, no hero lock, save carries no cinema flag, hero change allowed');}
  // 영화 기록: 입구 → 켜짐, 영웅 고정, 저장/불러오기
@@ -45,14 +45,14 @@ function boot(stored){const ls=new Map(Object.entries(stored||{}));const localSt
   // 입구 단추 대신 pending 을 흉내: titleChoice 는 DOM 이 없으면 아무것도 안 하므로 내부 상태를 newGame 직전에 cinema 로 둔다
   const pend=src.includes("pending='cinema'");assert(pend);
   // pending 을 바깥에서 둘 길이 없으니 restoreSave 로 영화 기록을 불러온다
-  await t.live.restoreSave()({hero:'slayer',zone:'hub',playModeR451:'cinema'});assert.strictEqual(t.R.run(),'cinema');assert.strictEqual(t.cprefs().on,true);
+  await t.live.restoreSave()({hero:'slayer',zone:'hub',playModeR454:'cinema'});assert.strictEqual(t.R.run(),'cinema');assert.strictEqual(t.cprefs().on,true);
   await t.live.enterRegion()('dist00');assert.strictEqual(t.S.player.hero,'slayer');
   await t.live.enterRegion()('kair01');await new Promise(r=>setTimeout(r,30));assert.strictEqual(t.S.player.hero,'seoha');
   await t.live.enterRegion()('restKairo');await new Promise(r=>setTimeout(r,30));assert.strictEqual(t.S.player.hero,'seoha');
   t.live.playScenes()([{narrator:'〈미카엘라의 기억〉',key:'x'}]);await new Promise(r=>setTimeout(r,30));assert.strictEqual(t.S.player.hero,'seoha');
   await t.live.enterRegion()('murder03');await new Promise(r=>setTimeout(r,30));assert.strictEqual(t.S.player.hero,'hwando');
   assert.strictEqual(await t.live.enterRegion()('cult01'),false);await new Promise(r=>setTimeout(r,30));assert.strictEqual(t.S.player.hero,'hwando');
-  assert.strictEqual(t.live.serializeSave()().playModeR451,'cinema');
+  assert.strictEqual(t.live.serializeSave()().playModeR454,'cinema');
   t.live.showHeroes()(false);assert.strictEqual(t.S.heroPanel,0);t.live.showHeroes()(true);assert.strictEqual(t.S.heroPanel,1);
   t.C.set({on:false});assert.strictEqual(t.cprefs().on,false);assert.strictEqual(t.R.run(),'cinema');t.C.set({on:true});assert.strictEqual(t.cprefs().on,true);
   await t.live.restoreSave()({hero:'hwando',zone:'hub'});assert.strictEqual(t.R.run(),'normal');assert.strictEqual(t.cprefs().on,false);
