@@ -115,3 +115,27 @@ css();applyBright();wrapExits();wrapHud();fixHint();applyFocus();setInterval(app
 setInterval(()=>{wrapExits();wrapHud();if(prefs.text!=='base')applyText();},1000);
 window.__STORYWORLD_ACCESS_R420__=Object.freeze({revision:REV,touchText,prefs:()=>({...prefs}),set(p){if(p&&typeof p==='object'){if(Number.isFinite(+p.bright))prefs.bright=Math.max(70,Math.min(160,Math.round(+p.bright)));if(TEXT_SCALE.hasOwnProperty(p.text))prefs.text=p.text;if(typeof p.focus==='boolean')prefs.focus=p.focus;save();applyBright();applyText();applyFocus();}return{...prefs};},stats:()=>({...stats,scaled:scaled.size})});
 })();
+
+/* R501-SETTINGS-START */
+/* R501(사용자 2026-11-09 "설정들 기능 하나씩 다 검증해봐서 충돌없도록"): 기본 설정(효과음·배경 음악·서사 음성·간소화 VFX·흔들림 줄이기·세 음량)은
+   세이브 안에 들어 있어서, 처음 화면이나 게임 중 설정 창에서 바꿔도 '이어하기'·슬롯 불러오기 때 세이브의 옛 값으로 되돌아갔다(헤드리스 실측: 네 값 모두 되돌아감).
+   설정 창에서 플레이어가 직접 바꾼 항목만 기기 설정(storyworld.r501.settings)으로 기억하고, 세이브를 불러올 때 그 항목만 세이브 값 위에 얹는다.
+   한 번도 안 바꾼 항목·코드가 바꾼 값(영화 모드 등)은 건드리지 않는다. 기억한 것이 없으면 예전과 똑같이 동작한다. */
+(()=>{'use strict';
+if(window.__STORYWORLD_SETTINGS_R501__)return;
+const REV='R501-settings-1',KEY='storyworld.r501.settings',BOOL=['sound','music','narration','lowFx','reducedMotion'],VOL=['volume','bgm','voice'];
+const stats={stored:0,merged:0,applied:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
+function clean(s){const o={};if(!s||typeof s!=='object'||Array.isArray(s))return o;for(const k of BOOL)if(typeof s[k]==='boolean')o[k]=s[k];
+ for(const k of VOL){const v=s[k];if(v===null||v===''||typeof v==='boolean')continue;const n=Number(v);if(Number.isFinite(n))o[k]=Math.min(1,Math.max(0,n));}return o;}
+function read(){try{return clean(JSON.parse(localStorage.getItem(KEY)||'null'));}catch(_){return {};}}
+function remember(keys){try{if(typeof settings==='undefined'||!settings)return;const cur=read(),add=clean(Object.fromEntries(keys.map(k=>[k,settings[k]])));if(!Object.keys(add).length)return;localStorage.setItem(KEY,JSON.stringify({...cur,...add}));stats.stored++;}catch(e){fail(e);}}
+function merge(raw){const g=read();if(!raw||typeof raw!=='object'||!Object.keys(g).length)return raw;const base=raw.settings&&typeof raw.settings==='object'&&!Array.isArray(raw.settings)?raw.settings:{};stats.merged++;return {...raw,settings:{...base,...g}};}
+function applyNow(){try{if(typeof settings==='undefined'||!settings)return;const g=read();if(Object.keys(g).length){Object.assign(settings,g);stats.applied++;}}catch(e){fail(e);}}
+function keysOf(el){const d=el?.dataset||{};if(d.setting&&BOOL.includes(d.setting))return [d.setting];if(d.volume&&VOL.includes(d.volume))return [d.volume];if(d.r114Preset)return ['lowFx'];return null;}
+function onUser(ev){try{const el=ev?.target;if(!el)return;/* 그래픽 품질 버튼은 누르면 설정 창을 다시 그려 버튼이 문서에서 빠진다 → 눌린 순간의 경로로 본다 */const inPanel=(typeof el.closest==='function'&&el.closest('#panel'))||(typeof ev.composedPath==='function'&&ev.composedPath().some(n=>n&&n.id==='panel'));if(!inPanel)return;const keys=keysOf(el);if(!keys)return;setTimeout(()=>remember(keys),0);}catch(e){fail(e);}}
+if(typeof document!=='undefined'&&typeof document.addEventListener==='function')for(const t of ['change','input','click'])document.addEventListener(t,onUser);
+if(typeof restoreSave==='function'){const base=restoreSave;restoreSave=function(input,...rest){let x=input;try{x=merge(input);}catch(e){fail(e);x=input;}return base.call(this,x,...rest);};}
+applyNow();
+window.__STORYWORLD_SETTINGS_R501__=Object.freeze({revision:REV,key:KEY,read,merge,clean,inspect:()=>({revision:REV,stored:read(),stats:{...stats},lastError})});
+})();
+/* R501-SETTINGS-END */
