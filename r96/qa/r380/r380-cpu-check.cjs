@@ -28,7 +28,10 @@ ctx.makeRoom=function(id,l){const mk=(name,nid,o={})=>({id:id+':'+name,name,nati
 vm.createContext(ctx);vm.runInContext('var window=this.window;'+src.replace("if(typeof fetch==='function')","window.__idx=(j)=>{idx=j};if(false)"),ctx);ctx.window.__idx(idx);
 const A=ctx.window.__STORYWORLD_APPROVED_MOBS_R380__,S=ctx.window.__STORYWORLD_STORY_COMBAT_R54__;
 const d1=ctx.makeRoom('dist01','STORY');const names=d1.enemies.map(e=>e.name);
-ok(!names.includes('망각의 거미 1')&&!names.includes('망각의 거미 증원 2')&&names.includes('재 나방 1')&&names.includes('보랏빛 알집지기 1'),'dist01 일반 망각의 거미를 승인 종으로 개명');ok(d1.enemies.length===7,'dist01 몹 수 그대로(R81 3×10 계약)');ok(names.includes('중간보스 · 망각의 거미')&&names.includes('망각의 거미 수호자'),'중간보스·R81 수호자는 남김(세이브 복원 보호, Codex P1)');
+ok(!names.includes('망각의 거미 1')&&!names.includes('망각의 거미 증원 2')&&names.includes('재 나방 1')&&names.includes('보랏빛 알집지기 1'),'dist01 일반 망각의 거미를 승인 종으로 개명');ok(d1.enemies.length===7,'dist01 몹 수 그대로(R81 3×10 계약)');ok(names.includes('중간보스 · 망각의 거미'),'엔진 중간보스(midboss)는 남김(세이브 복원 보호, Codex P1)');
+{const w=d1.enemies.find(e=>e.wardChampionR81);ok(w.name==='중간보스 · 재 나방'&&w.r380From==='망각의 거미 수호자'&&w.r248Key==='망각의 거미'&&w.id==='dist01:망각의 거미 수호자'&&!names.includes('망각의 거미 수호자'),'R441 R81 수호자 망각의 거미 → 중간보스 · 재 나방(이름만, id·수치 그대로)');
+ ctx.room={id:'dist01'};ok(S.frameFor(w,null)?.r380Mob==='ash-moth-v2','R441 수호자 재 나방 그림');ctx.room=undefined;}
+ok(idx.mobs.find(m=>m.id==='purple-eggkeeper-v1').facing==='left','R441 보랏빛 알집지기 그림은 왼쪽(아래)을 봄');
 ok(ctx.makeRoom('dist01','DREAM').enemies.length===7,'DREAM 층은 그대로');
 const u=ctx.makeRoom('u202','STORY');const mech=u.enemies.filter(e=>e.r380Mech);ok(mech.length===4&&mech.every((e,i)=>e.name==='기계화 망각거미 '+(i+1)),'u202 에 기계화 망각거미 4마리');
 ok(mech[0].r248Key==='가짜 자비 수집가','개명해도 R248 조회 키 유지(Codex P1)');ok(u.enemies.length===7&&mech.every(e=>!/r380/.test(e.id))&&mech[0].r380From==='가짜 자비 수집가 1','u202 몹 수·id 그대로, 이름만 바꿈(R81 계약)');
@@ -143,5 +146,11 @@ ctx.room={id:'dist01'};
 let got=null;ctx.spawnBurnDeath3=function(e){got=e.profile?.frames?.death;};A.installDeath();const prof={frames:{death:{path:'old'}}};const dz={id:'d',name:'재 나방',profile:prof,hp:0,x:1,y:1};ctx.spawnBurnDeath3(dz);
 ok(got?.r380Mob==='ash-moth-v2'&&dz.profile===prof,'죽음 불꽃에 새 그림, profile 복원');
 ok(idx.mobs.every(m=>Array.from({length:40},(_,i)=>A.cellFor({id:'probe'+i,hp:1,moving:i%2===1},m)).every(k=>Number.isInteger(k)&&k>=0)),'모든 시트 대기·이동 칸이 정수(한 장 이동 시트 포함, Codex P2)');
+// R441: 걷는 동안은 실제 화면 좌우 이동 쪽을 본다(영웅이 왼쪽이어도 오른쪽으로 걸으면 오른쪽), 멈추면 영웅 쪽.
+{ctx.room={id:'dist01'};ctx.player={x:0,y:5,hero:'hwando'};const e={id:'egg-mv-1',name:'보랏빛 알집지기 9',hp:10,x:5,y:5,moving:true};ctx.time=1;
+ const f0=S.frameFor(e,null);e.x+=.05;ctx.time=1.02;const f1=S.frameFor(e,null);
+ ok(f0?.r380Mob==='purple-eggkeeper-v1'&&f1.flip===true,'R441 알집지기(왼쪽 그림)가 화면 오른쪽으로 걸으면 뒤집어 오른쪽을 봄');
+ e.x-=.1;ctx.time=1.04;ok(S.frameFor(e,null).flip===false,'R441 화면 왼쪽으로 걸으면 원래 그림(왼쪽)');
+ e.moving=false;ctx.player={x:9,y:5};ctx.time=2;ok(S.frameFor(e,null).flip===true,'R441 멈추면 영웅 쪽(오른쪽)');ctx.room=undefined;ctx.time=undefined;}
 A.set({on:false});ok(f({name:'재 나방'})?.path==='base','끄기');
 console.log(`R380 CPU ${n-bad}/${n}`);if(bad)process.exit(1);
