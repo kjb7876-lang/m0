@@ -18058,6 +18058,11 @@
       "sha256": "6d24b885db748c7afc61fe5fae7dee144ac9e9bebbdf025551fbb73d321cfd2c"
     },
     {
+      "path": "assets/r381/voice/499d4249a735da64.mp3",
+      "bytes": 61224,
+      "sha256": "1e57593f03b9198b3f78c9b28498568a21f3c2041fa49511f36c5d3185320132"
+    },
+    {
       "path": "assets/r381/voice/49afef1daaf1f056.mp3",
       "bytes": 56424,
       "sha256": "a459dcfd50afac714baa85bc425209126f73d23bc20c0ca8d58e1f01119d042a"
@@ -21471,6 +21476,11 @@
       "path": "assets/r381/voice/b4aedebc63dd8a36.mp3",
       "bytes": 34560,
       "sha256": "a622368a38f69dffbfdeebe405c9102e3e32e3018bbf46cd95e88384bcfc121b"
+    },
+    {
+      "path": "assets/r381/voice/b4b2cc3d7d679251.mp3",
+      "bytes": 28032,
+      "sha256": "963dcb94586d53f39bda907492b8e2985f069cc01eafb5cadae5c6f7bbf0f601"
     },
     {
       "path": "assets/r381/voice/b5222c1fbfafab02.mp3",
@@ -34014,8 +34024,8 @@
     },
     {
       "path": "samong-text-r103.js",
-      "bytes": 567847,
-      "sha256": "33c277ac38ae2751184132d9612643cc000655ef11b11ffbc56fae0c710f4226"
+      "bytes": 567742,
+      "sha256": "6c4f13732c77f6f4c31ee88b955b1ba644afc5b0f745a78c59cc7d11698be73b"
     },
     {
       "path": "samong-ult-r139.js",
@@ -34034,8 +34044,8 @@
     },
     {
       "path": "samong-zones-r115-data.js",
-      "bytes": 80084,
-      "sha256": "61dbbc685d68c3ffe22ff4e0853c7d5de075da866b43fae8b097aa7697df5feb"
+      "bytes": 80039,
+      "sha256": "159932ccbc38d3051edaa4baa2d14d0ff331e38af5734c13a161532aa87ee745"
     },
     {
       "path": "samong-zones-r115.js",
@@ -34114,8 +34124,8 @@
     },
     {
       "path": "story-canon-r106-data.js",
-      "bytes": 173881,
-      "sha256": "3b7325de30a5bd12bab801b48d1e827f9d0a0ff0e8b25e7e2e734376e0a8d0b4"
+      "bytes": 173664,
+      "sha256": "e699e4160a7b84c5209dd52ed2bd47a8b40a788a6cc9ac5f8c618b3462780c01"
     },
     {
       "path": "story-canon-r106.js",
@@ -34279,8 +34289,8 @@
     },
     {
       "path": "voice-r381-data.js",
-      "bytes": 31284,
-      "sha256": "22ee62d77efa9b92c14b044b108d9d93410d276c39d974a699c55ef44b14ab56"
+      "bytes": 31322,
+      "sha256": "85d5a6621485a8e2c25d35dbe30c46569b26aca9b6d465a4612c0fc22b245b32"
     },
     {
       "path": "voice-r381.js",
@@ -34368,8 +34378,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6873,
-  "totalBytes": 1086885771,
+  "fileCount": 6875,
+  "totalBytes": 1086974698,
   "webHTMLSha256": "0e49800cfa2ca7de5a59778e2d0d81a46a3d5fb38b8db132e0468396d3ebda5a",
   "largest": [
     {
