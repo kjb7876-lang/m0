@@ -515,6 +515,8 @@ jobs:
         run: node r96/qa/r440/skill-attack-cpu-check.cjs
       - name: R441/R442 Hwando diagonal walk uses side motion + enemy theme skills play attack pose CPU check
         run: node r96/qa/r442/enemy-skill-diag-cpu-check.cjs
+      - name: R450 boss fight story beats (canon lines at engage/half/enrage/defeat) + wrath bear→wolves→dragon CPU check
+        run: node r96/qa/r450/battle-beats-cpu-check.cjs
       - name: R440 Hwando hit pose (no old art) and hero rim blade cleanup CPU check
         run: node r96/qa/r440/r440-cpu-check.cjs
       - name: R446 seven pillars moved to their own map as stationary attacking towers CPU check

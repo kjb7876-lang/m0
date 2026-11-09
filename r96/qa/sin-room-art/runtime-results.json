@@ -1,9 +1,9 @@
 {
   "build": {
-    "files": 6934,
-    "bytes": 1091721334,
-    "runtimeManifestSHA256": "7b74115b40d2cf8c537c0e39b83b43cc1ebffeee8e5b0cd3249b3abb29ea2894",
-    "sourceCommit": "3b94aefc1b2b596c586599a42564a5c46229758c"
+    "files": 6935,
+    "bytes": 1091731417,
+    "runtimeManifestSHA256": "977100a40c8fcf6e91df365aa47c179a2b6554d6f42a569753760686b7d1e3df",
+    "sourceCommit": "f9c97b7c777060b61c5c27a29166c4eac13ae1fa"
   },
   "boot": {
     "booted": true,
@@ -2554,14 +2554,6 @@
             "height": 170
           },
           {
-            "id": "sin-art:ep1b05:backbar",
-            "path": "assets/sin-rooms/lust-bar.png",
-            "key": "backbar",
-            "x": 16.8,
-            "y": 6.95,
-            "height": 170
-          },
-          {
             "id": "sin-art:ep1b05:booth",
             "path": "assets/sin-rooms/lust-bar.png",
             "key": "booth",
@@ -2573,8 +2565,8 @@
             "id": "sin-art:ep1b05:trolley",
             "path": "assets/sin-rooms/lust-bar.png",
             "key": "trolley",
-            "x": 11.6,
-            "y": 14.7,
+            "x": 21.7,
+            "y": 10.9,
             "height": 112
           }
         ],
@@ -2665,14 +2657,6 @@
             "height": 170
           },
           {
-            "id": "sin-art:ep1b05:backbar",
-            "path": "assets/sin-rooms/lust-bar.png",
-            "key": "backbar",
-            "x": 16.8,
-            "y": 6.95,
-            "height": 170
-          },
-          {
             "id": "sin-art:ep1b05:booth",
             "path": "assets/sin-rooms/lust-bar.png",
             "key": "booth",
@@ -2684,8 +2668,8 @@
             "id": "sin-art:ep1b05:trolley",
             "path": "assets/sin-rooms/lust-bar.png",
             "key": "trolley",
-            "x": 11.6,
-            "y": 14.7,
+            "x": 21.7,
+            "y": 10.9,
             "height": 112
           }
         ],
@@ -2704,11 +2688,6 @@
             "r98BaseHeight": 0.01
           },
           {
-            "id": "sin-art:ep1b05:backbar",
-            "height": 0.01,
-            "r98BaseHeight": 0.01
-          },
-          {
             "id": "sin-art:ep1b05:booth",
             "height": 0.01,
             "r98BaseHeight": 0.01
@@ -2722,10 +2701,6 @@
         "props": [
           {
             "key": "bar",
-            "blocked": true
-          },
-          {
-            "key": "backbar",
             "blocked": true
           },
           {
@@ -2814,71 +2789,6 @@
             ]
           },
           {
-            "id": "sin-art:ep1b05:backbar",
-            "expectedRect": [
-              805,
-              1,
-              397,
-              602
-            ],
-            "expectedPosition": {
-              "x": 16.8,
-              "y": 6.95
-            },
-            "expectedPoints": [
-              [
-                728.0684429530202,
-                232.10069351230428
-              ],
-              [
-                820.1688903803133,
-                232.10069351230428
-              ],
-              [
-                820.1688903803133,
-                371.75930648769577
-              ],
-              [
-                728.0684429530202,
-                371.75930648769577
-              ]
-            ],
-            "commands": [
-              {
-                "sourceRect": [
-                  805,
-                  1,
-                  397,
-                  602
-                ],
-                "points": [
-                  [
-                    728.0684429530202,
-                    232.10069351230428
-                  ],
-                  [
-                    820.1688903803133,
-                    232.10069351230428
-                  ],
-                  [
-                    820.1688903803133,
-                    371.75930648769577
-                  ],
-                  [
-                    728.0684429530202,
-                    371.75930648769577
-                  ]
-                ],
-                "owner": {
-                  "x": 16.8,
-                  "y": 6.95,
-                  "kind": "prop",
-                  "sinArt": true
-                }
-              }
-            ]
-          },
-          {
             "id": "sin-art:ep1b05:booth",
             "expectedRect": [
               47,
@@ -2952,25 +2862,25 @@
               549
             ],
             "expectedPosition": {
-              "x": 11.6,
-              "y": 14.7
+              "x": 21.7,
+              "y": 10.9
             },
             "expectedPoints": [
               [
-                452.4117814610191,
-                314.72472191528544
+                836.7931147943523,
+                401.83272191528545
               ],
               [
-                379.604218538981,
-                314.72472191528544
+                763.9855518723143,
+                401.83272191528545
               ],
               [
-                379.604218538981,
-                406.8246114180479
+                763.9855518723143,
+                493.9326114180479
               ],
               [
-                452.4117814610191,
-                406.8246114180479
+                836.7931147943523,
+                493.9326114180479
               ]
             ],
             "commands": [
@@ -2983,25 +2893,25 @@
                 ],
                 "points": [
                   [
-                    452.4117814610191,
-                    314.72472191528544
+                    836.7931147943523,
+                    401.83272191528545
                   ],
                   [
-                    379.604218538981,
-                    314.72472191528544
+                    763.9855518723143,
+                    401.83272191528545
                   ],
                   [
-                    379.604218538981,
-                    406.8246114180479
+                    763.9855518723143,
+                    493.9326114180479
                   ],
                   [
-                    452.4117814610191,
-                    406.8246114180479
+                    836.7931147943523,
+                    493.9326114180479
                   ]
                 ],
                 "owner": {
-                  "x": 11.6,
-                  "y": 14.7,
+                  "x": 21.7,
+                  "y": 10.9,
                   "kind": "prop",
                   "sinArt": true
                 }
@@ -3040,8 +2950,8 @@
           "enemyFaced": 6,
           "heroFaced": 0,
           "grounded": 0,
-          "groundScans": 24,
-          "wallMoves": 26,
+          "groundScans": 23,
+          "wallMoves": 25,
           "shadowsMoved": 36,
           "groundPx": 0,
           "thrownPops": 0,
@@ -3052,7 +2962,7 @@
           "debris": 0,
           "dust": 0,
           "particles": 0,
-          "sunk": 62,
+          "sunk": 60,
           "parts": 0,
           "failures": 0,
           "lastError": null
@@ -3565,8 +3475,8 @@
           "enemyFaced": 6,
           "heroFaced": 0,
           "grounded": 0,
-          "groundScans": 24,
-          "wallMoves": 26,
+          "groundScans": 23,
+          "wallMoves": 25,
           "shadowsMoved": 36,
           "groundPx": 0,
           "thrownPops": 0,
@@ -3577,7 +3487,7 @@
           "debris": 0,
           "dust": 0,
           "particles": 0,
-          "sunk": 62,
+          "sunk": 60,
           "parts": 0,
           "failures": 0,
           "lastError": null
@@ -3589,8 +3499,8 @@
           "enemyFaced": 10,
           "heroFaced": 0,
           "grounded": 0,
-          "groundScans": 29,
-          "wallMoves": 31,
+          "groundScans": 28,
+          "wallMoves": 30,
           "shadowsMoved": 48,
           "groundPx": 0,
           "thrownPops": 0,
@@ -3601,7 +3511,7 @@
           "debris": 0,
           "dust": 0,
           "particles": 0,
-          "sunk": 74,
+          "sunk": 72,
           "parts": 0,
           "failures": 0,
           "lastError": null
@@ -4304,8 +4214,8 @@
           "enemyFaced": 10,
           "heroFaced": 0,
           "grounded": 0,
-          "groundScans": 29,
-          "wallMoves": 31,
+          "groundScans": 28,
+          "wallMoves": 30,
           "shadowsMoved": 48,
           "groundPx": 0,
           "thrownPops": 0,
@@ -4316,7 +4226,7 @@
           "debris": 0,
           "dust": 0,
           "particles": 0,
-          "sunk": 74,
+          "sunk": 72,
           "parts": 0,
           "failures": 0,
           "lastError": null
@@ -4328,8 +4238,8 @@
           "enemyFaced": 10,
           "heroFaced": 0,
           "grounded": 0,
-          "groundScans": 34,
-          "wallMoves": 37,
+          "groundScans": 33,
+          "wallMoves": 36,
           "shadowsMoved": 66,
           "groundPx": 0,
           "thrownPops": 0,
@@ -4340,7 +4250,7 @@
           "debris": 0,
           "dust": 0,
           "particles": 0,
-          "sunk": 94,
+          "sunk": 92,
           "parts": 0,
           "failures": 0,
           "lastError": null
@@ -4354,10 +4264,10 @@
     "stats": {
       "layouts": 18,
       "rooms": 24,
-      "props": 140,
-      "draws": 210,
+      "props": 136,
+      "draws": 204,
       "hidden": 0,
-      "authoredCorrections": 68,
+      "authoredCorrections": 66,
       "wallMasksHidden": 0,
       "wallMasksRestored": 0,
       "errors": 0
