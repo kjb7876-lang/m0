@@ -33469,8 +33469,8 @@
     },
     {
       "path": "combat-read-r409.js",
-      "bytes": 18830,
-      "sha256": "9ac87d9d3b10aff849aa0637596904f3bce2b6ea2663499327968622600a2ccd"
+      "bytes": 25032,
+      "sha256": "3fc71e180661b19505ece34ae3ba74953db778211e7a6ae03db5505f01173764"
     },
     {
       "path": "crates-r108.js",
@@ -34739,7 +34739,7 @@
     }
   ],
   "fileCount": 6947,
-  "totalBytes": 1091916163,
+  "totalBytes": 1091922365,
   "webHTMLSha256": "39e80c22c562cadb1d7601f4a047e7980b0732e29fb160cdcfe4bab82241b6b6",
   "largest": [
     {
