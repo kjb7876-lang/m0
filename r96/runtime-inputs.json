@@ -6095,7 +6095,8 @@
     "assets/r438/fx/hero-barrier.webp",
     "assets/r438/fx/hero-cleanse.webp",
     "assets/r438/fx/hero-healing.webp",
-    "assets/r438/fx/index.json"
+    "assets/r438/fx/index.json",
+    "assets/r380/mobs/electrode-machine-knight-v1.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -7170,5 +7171,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "82d1059abd9abcf7b2707eff4ea8d40ee7698694e84677b49a7641c080820f2e"
+  "runtimeManifestSHA256": "ddc3f143c1ea3468ccfe52715171f9ca27f6b64eec359bd2410dd0ca0b056e93"
 }
