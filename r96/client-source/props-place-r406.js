@@ -16,7 +16,7 @@
 //  끄기: localStorage['storyworld.r406.props']='{"on":false}' (부분: place/bulbs/boss 각각 false)
 (()=>{'use strict';
 if(window.__STORYWORLD_PROPS_PLACE_R406__)return;
-const REV='R406-props-place-1',KEY='storyworld.r406.props',IDX='./assets/r406/props/index.json',IDXS=[IDX,'./assets/r408/props/index.json','./assets/r414/props/index.json'];// R414: 드라이브 재개 소품 7종(관사 가로등·정문·가방, 승강장 스피커, 승강기 문, 서까래, 꽃무늬 벽)도 같은 규칙으로// R408: 붉은 하이힐(ep1b05) 라운지 소품 — STORY 지역도 zone=지역 id 로 받는다
+const REV='R406-props-place-1',KEY='storyworld.r406.props',IDX='./assets/r406/props/index.json',IDXS=[IDX,'./assets/r408/props/index.json','./assets/r414/props/index.json','./assets/r415/props/index.json'];// R415: 드라이브 여백 수리·QA 후보 32종(교실 책상·우편함·병상·대합실 의자 등)을 이름이 맞는 사몽 구역에 같은 규칙으로 // R414: 드라이브 재개 소품 7종(관사 가로등·정문·가방, 승강장 스피커, 승강기 문, 서까래, 꽃무늬 벽)도 같은 규칙으로// R408: 붉은 하이힐(ep1b05) 라운지 소품 — STORY 지역도 zone=지역 id 로 받는다
 
 const prefs={on:true,place:true,bulbs:true,boss:true};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(prefs))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}

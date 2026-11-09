@@ -1,0 +1,553 @@
+{
+ "revision": "R415",
+ "method": "alpha 72..230 -> 0..255, 1px erode, edge RGB from solid neighbours, crop+4, long side <= 384, WebP q92",
+ "held": {
+  "chandelier": "R06-chandelier-layout-repair.png: ceiling fixture, cannot stand on the floor (R406 draws floor props only)"
+ },
+ "props": {
+  "r415-locker": {
+   "zone": "sz115-S02-1",
+   "mode": "wall",
+   "axis": "y",
+   "height": 62,
+   "path": "assets/r415/props/locker.webp",
+   "source": "S02-locker-layout-repair.png",
+   "pngSHA256": "8f08733e47b26eab268196b5fc66d16735ae84dd04f0da8a6595a64a16bfe043",
+   "manifestChecked": false,
+   "dotsStatus": "REVIEW_STATIC_LAYOUT_REPAIR",
+   "size": [
+    133,
+    384
+   ],
+   "bytes": 12494,
+   "sha256": "7b4d06fd1713c0d20a2a4c0a97d71332d7dac489c3063d54a1ecc0c906f5a176"
+  },
+  "r415-student-desk": {
+   "zone": "sz115-S02-3",
+   "mode": "inner",
+   "axis": null,
+   "height": 30,
+   "path": "assets/r415/props/student-desk.webp",
+   "source": "StoryWorld-resumed207-S02-student-desk-QA.zip",
+   "pngSHA256": "6e9707a2064a355700afd0195fabc14b08671a7c0e620845ea23b79d640203ac",
+   "manifestChecked": true,
+   "dotsStatus": "REVIEW_STATIC_RUNTIME_UNVERIFIED",
+   "size": [
+    384,
+    361
+   ],
+   "bytes": 22096,
+   "sha256": "979a52b4fbb0735e752807cc8dd866755be5c52706c9913a83027a09f001966b"
+  },
+  "r415-bulletin": {
+   "zone": "sz115-S02-4",
+   "mode": "wall",
+   "axis": "y",
+   "height": 44,
+   "path": "assets/r415/props/bulletin.webp",
+   "source": "S02-bulletin-layout-repair.png",
+   "pngSHA256": "63c67515a40d7780c8b2444c688d82f320abc9df8f67c42939b67567e70baf30",
+   "manifestChecked": false,
+   "dotsStatus": "REVIEW_STATIC_LAYOUT_REPAIR",
+   "size": [
+    384,
+    382
+   ],
+   "bytes": 43554,
+   "sha256": "6f10d7565c60066431c8328530e7571615eda24f3693304829c244540ce8f99d"
+  },
+  "r415-record-cabinet": {
+   "zone": "sz115-S02-8",
+   "mode": "wall",
+   "axis": "y",
+   "height": 46,
+   "path": "assets/r415/props/record-cabinet.webp",
+   "source": "S02-record-cabinet-layout-repair.png",
+   "pngSHA256": "cf9af30f9514e437bc5e89856d867872839bcf18c3323458581da57b34a2eabe",
+   "manifestChecked": false,
+   "dotsStatus": "REVIEW_STATIC_LAYOUT_REPAIR",
+   "size": [
+    382,
+    384
+   ],
+   "bytes": 39386,
+   "sha256": "2b7572b45a267c574b4eff9aaf32548dfe5a35bf0a54c2f0857dcbab2454fefd"
+  },
+  "r415-mailbox": {
+   "zone": "sz115-S04-2",
+   "mode": "wall",
+   "axis": "y",
+   "height": 48,
+   "path": "assets/r415/props/mailbox.webp",
+   "source": "S04-mailbox-layout-repair.png",
+   "pngSHA256": "a1fc2e93c3e06facaa8ab21bfa4ef0f053a4d0599f9daa307503e6025fe994ce",
+   "manifestChecked": false,
+   "dotsStatus": "REVIEW_STATIC_LAYOUT_REPAIR",
+   "size": [
+    365,
+    384
+   ],
+   "bytes": 51860,
+   "sha256": "bb4f28a29bb8fe78701a37dd0b616026af265fdaedbc219837bb4cb48e888af5"
+  },
+  "r415-lobby-counter": {
+   "zone": "sz115-S04-2",
+   "mode": "inner",
+   "axis": null,
+   "height": 34,
+   "path": "assets/r415/props/lobby-counter.webp",
+   "source": "S04-lobby-counter-layout-repair.png",
+   "pngSHA256": "d6a3f00fd26bced131f80de509e9fb8e959b18925fa0447a7f2da2e3dd678fa8",
+   "manifestChecked": false,
+   "dotsStatus": "REVIEW_STATIC_LAYOUT_REPAIR",
+   "size": [
+    384,
+    226
+   ],
+   "bytes": 22382,
+   "sha256": "c66a1c96417e837c892e1039813b747f4181300498d48384914dc0550a0f89f2"
+  },
+  "r415-memory-rack": {
+   "zone": "sz115-S04-9",
+   "mode": "wall",
+   "axis": "y",
+   "height": 26,
+   "path": "assets/r415/props/memory-rack.webp",
+   "source": "S04-memory-rack-layout-repair.png",
+   "pngSHA256": "b5f35e768991b2b82876885945e621fc8c64169da9b991d55c606a028ab57929",
+   "manifestChecked": false,
+   "dotsStatus": "REVIEW_STATIC_LAYOUT_REPAIR",
+   "size": [
+    384,
+    218
+   ],
+   "bytes": 30772,
+   "sha256": "bea407b509a9562821f33bf65265622112df806d8b58178ad0acb50aea95030e"
+  },
+  "r415-report-desk": {
+   "zone": "sz115-S05-3",
+   "mode": "inner",
+   "axis": null,
+   "height": 32,
+   "path": "assets/r415/props/report-desk.webp",
+   "source": "S05-report-desk-layout-repair.png",
+   "pngSHA256": "9a58d48aab729d0dba3caca007a4a4d3354b413078d61099131bedb637db4c9b",
+   "manifestChecked": false,
+   "dotsStatus": "REVIEW_STATIC_LAYOUT_REPAIR",
+   "size": [
+    384,
+    360
+   ],
+   "bytes": 35702,
+   "sha256": "4ef1a4b0cd318913b8036f9479dbdca4c4eb25df3b7d08aa1f184ae5a1991176"
+  },
+  "r415-display-window": {
+   "zone": "sz115-S05-2",
+   "mode": "wall",
+   "axis": "y",
+   "height": 70,
+   "path": "assets/r415/props/display-window.webp",
+   "source": "S05-display-window-layout-repair.png",
+   "pngSHA256": "acc54fa897dcd5c16a999cc8bd10271d15cfaeb63cae7d90f10c776373f74f24",
+   "manifestChecked": false,
+   "dotsStatus": "REVIEW_STATIC_LAYOUT_REPAIR",
+   "size": [
+    263,
+    384
+   ],
+   "bytes": 28632,
+   "sha256": "b6d2ad00f849afe75bc8f0edafe6f9f894e9e8e6cec5498029851340809843ea"
+  },
+  "r415-labcoat-chair": {
+   "zone": "sz115-S06-14",
+   "mode": "inner",
+   "axis": null,
+   "height": 44,
+   "path": "assets/r415/props/labcoat-chair.webp",
+   "source": "S06-labcoat-chair-layout-repair.png",
+   "pngSHA256": "f2c88e3a22d022a1143c7e67d1977f98d0e4850975e54060deb537491822e282",
+   "manifestChecked": false,
+   "dotsStatus": "REVIEW_STATIC_LAYOUT_REPAIR",
+   "size": [
+    238,
+    384
+   ],
+   "bytes": 33010,
+   "sha256": "35496c8ee946d9031b2c0687530b07f27bb897f68eced1accd0f217211adf5d4"
+  },
+  "r415-platform": {
+   "zone": "sz115-S06-11",
+   "mode": "inner",
+   "axis": null,
+   "height": 16,
+   "path": "assets/r415/props/platform.webp",
+   "source": "StoryWorld-resumed212-S06-platform-QA.zip",
+   "pngSHA256": "1ae52350f5931a944a04db68caedf32288577a78ada234ac93d5bf422122397c",
+   "manifestChecked": true,
+   "dotsStatus": "REVIEW_STATIC_RUNTIME_UNVERIFIED",
+   "size": [
+    384,
+    224
+   ],
+   "bytes": 14712,
+   "sha256": "ec63beebfaffe04d3bd7280cc56840dbc738fb14f5b1736506fb79a6012e01f0"
+  },
+  "r415-arrival-display": {
+   "zone": "sz115-RA-1",
+   "mode": "wall",
+   "axis": "y",
+   "height": 30,
+   "path": "assets/r415/props/arrival-display.webp",
+   "source": "StoryWorld-resumed217-R00-arrival-display-padding-repair.zip",
+   "pngSHA256": "36aa163561647221c3faa9ab6802a1468c143ebde9d0abdac9b0708044770852",
+   "manifestChecked": true,
+   "dotsStatus": "REVIEW_STATIC_TEXT_AND_CEILING_UNVERIFIED",
+   "size": [
+    384,
+    202
+   ],
+   "bytes": 10294,
+   "sha256": "0a517721c36c108d1af32863cc928c64e6197198d201e03f11b1f6f8dd3ed85e"
+  },
+  "r415-patient-bed": {
+   "zone": "sz115-RA-5",
+   "mode": "inner",
+   "axis": null,
+   "height": 34,
+   "path": "assets/r415/props/patient-bed.webp",
+   "source": "StoryWorld-resumed208-R02-patient-bed-QA.zip",
+   "pngSHA256": "ff22ee7b00ff45644b4a2dd5ba82708911deb35520a03b9347587d6d0842bd56",
+   "manifestChecked": true,
+   "dotsStatus": "REVIEW_STATIC_RUNTIME_UNVERIFIED",
+   "size": [
+    374,
+    384
+   ],
+   "bytes": 27750,
+   "sha256": "8cf208c2308d13a122f89cbbbd73152abd69e5d5d1db86d5890cb0b776c1a0cd"
+  },
+  "r415-two-chair": {
+   "zone": "sz115-RB-1",
+   "mode": "inner",
+   "axis": null,
+   "height": 40,
+   "path": "assets/r415/props/two-chair.webp",
+   "source": "R03-two-chair-layout-repair.png",
+   "pngSHA256": "05ad3d642b63b47641348198e92b64f4ab73ab91914f1273097f03ceef6b1b73",
+   "manifestChecked": false,
+   "dotsStatus": "REVIEW_STATIC_LAYOUT_REPAIR",
+   "size": [
+    374,
+    384
+   ],
+   "bytes": 40776,
+   "sha256": "4ce52234ce977b4bb3dedc4bf8ff5e2e492776aa1daec2fa74f13629fd7b945f"
+  },
+  "r415-cutting-block": {
+   "zone": "sz115-RB-4",
+   "mode": "inner",
+   "axis": null,
+   "height": 18,
+   "path": "assets/r415/props/cutting-block.webp",
+   "source": "StoryWorld-resumed201-R04-cutting-block-QA.zip",
+   "pngSHA256": "fce5c00d6376c4f949573d06a6c1cb2faaed2323c7d0f31e92584aed26a713f4",
+   "manifestChecked": true,
+   "dotsStatus": "REVIEW_STATIC_RUNTIME_UNVERIFIED",
+   "size": [
+    384,
+    255
+   ],
+   "bytes": 17784,
+   "sha256": "927a7968787cb5ea7738534efd7b648124b264091a423b21b9d8102f7248e39d"
+  },
+  "r415-swamp-bed": {
+   "zone": "sz115-RD-2",
+   "mode": "inner",
+   "axis": null,
+   "height": 32,
+   "path": "assets/r415/props/swamp-bed.webp",
+   "source": "R07-swamp-bed-layout-repair.png",
+   "pngSHA256": "c14d14d0b03f68c5fdd1614861e229eb889434d5cc32e9cfedafa9eab38fe07c",
+   "manifestChecked": false,
+   "dotsStatus": "REVIEW_STATIC_LAYOUT_REPAIR",
+   "size": [
+    384,
+    356
+   ],
+   "bytes": 30586,
+   "sha256": "d0b767e9412409083d96aa8b7e0ef5287644bcaf013b7e257fbd148c670d86ca"
+  },
+  "r415-grand-desk": {
+   "zone": "sz115-RD-4",
+   "mode": "inner",
+   "axis": null,
+   "height": 32,
+   "path": "assets/r415/props/grand-desk.webp",
+   "source": "R08-grand-desk-layout-repair.png",
+   "pngSHA256": "9e1df722e2bf777b7aa2ac8a4125d6593cbcea95445be19f554719929fed2e30",
+   "manifestChecked": false,
+   "dotsStatus": "REVIEW_STATIC_LAYOUT_REPAIR",
+   "size": [
+    384,
+    246
+   ],
+   "bytes": 31278,
+   "sha256": "8428211a0f280563deaafb349ecd23b8b25bfe4d97d271b875bc536d7b2b6e3f"
+  },
+  "r415-low-table": {
+   "zone": "sz115-RD-4",
+   "mode": "inner",
+   "axis": null,
+   "height": 20,
+   "path": "assets/r415/props/low-table.webp",
+   "source": "StoryWorld-resumed205-R08-low-table-QA.zip",
+   "pngSHA256": "280160865edc80efb4e788c6ac43a6480fe97b0440487a154e9fb7029286c687",
+   "manifestChecked": true,
+   "dotsStatus": "REVIEW_STATIC_NARRATIVE_PLACEMENT_UNVERIFIED",
+   "size": [
+    384,
+    271
+   ],
+   "bytes": 14160,
+   "sha256": "f12cc938da424ad384742dcc3ace619ac8ca35dbe473cad27408294ea64cdb1e"
+  },
+  "r415-bell": {
+   "zone": "sz115-RD-7",
+   "mode": "wall",
+   "axis": "y",
+   "height": 36,
+   "path": "assets/r415/props/bell.webp",
+   "source": "R09-bell-layout-repair.png",
+   "pngSHA256": "17984ea4e2281256cb32524f3afdf01b41ca3564f55be70ba4760eb78771ad33",
+   "manifestChecked": false,
+   "dotsStatus": "REVIEW_STATIC_LAYOUT_REPAIR",
+   "size": [
+    354,
+    384
+   ],
+   "bytes": 33088,
+   "sha256": "6e06ba44c7fdefcc8823bc941ddf5a03fdfd8ce98875dcbf6461ff3f8e26db9b"
+  },
+  "r415-waiting-bench": {
+   "zone": "sz115-RE-1",
+   "mode": "inner",
+   "axis": null,
+   "height": 30,
+   "path": "assets/r415/props/waiting-bench.webp",
+   "source": "R10-waiting-bench-layout-repair.png",
+   "pngSHA256": "aba8820bc5c7ae9073eb78a55e726a439b449cfb4fa79452b3ed9027c4c2b5e6",
+   "manifestChecked": false,
+   "dotsStatus": "REVIEW_STATIC_LAYOUT_REPAIR",
+   "size": [
+    384,
+    283
+   ],
+   "bytes": 25996,
+   "sha256": "d1630be5d176796fb71984111e92eba5e9b2389d29de10e7343a7fc53c0d76e6"
+  },
+  "r415-news-window": {
+   "zone": "sz115-RE-1",
+   "mode": "wall",
+   "axis": "y",
+   "height": 48,
+   "path": "assets/r415/props/news-window.webp",
+   "source": "R10-news-window-layout-repair.png",
+   "pngSHA256": "aeb568a8dda5b4c3401524bef29b18bdb7d9119882a27524d1335332cfc5d0d1",
+   "manifestChecked": false,
+   "dotsStatus": "REVIEW_STATIC_LAYOUT_REPAIR",
+   "size": [
+    384,
+    335
+   ],
+   "bytes": 55378,
+   "sha256": "b66ff4efef9a35d7c5fe88fa389bd491ad5ffa1bb8ac0f59c4ae646716a0bcd1"
+  },
+  "r415-manual-lever": {
+   "zone": "sz115-RE-1",
+   "mode": "wall",
+   "axis": "y",
+   "height": 30,
+   "path": "assets/r415/props/manual-lever.webp",
+   "source": "StoryWorld-resumed203-R10-manual-lever-QA.zip",
+   "pngSHA256": "5f3fa24c550268d3ce455bf52c40ab9a524edbba0afa591d048dc93da05fa615",
+   "manifestChecked": true,
+   "dotsStatus": "REVIEW_STATIC_DOOR_FIT_UNVERIFIED",
+   "size": [
+    332,
+    384
+   ],
+   "bytes": 26456,
+   "sha256": "ea0b99bc3a6001e54f8f7114830143370a6f49b31966c5161bc4e01963252f6b"
+  },
+  "r415-paper-bowl": {
+   "zone": "sz115-RF-2",
+   "mode": "inner",
+   "axis": null,
+   "height": 18,
+   "path": "assets/r415/props/paper-bowl.webp",
+   "source": "R11-paper-bowl-layout-repair.png",
+   "pngSHA256": "6755313004da22ebd19defbb02a4be4bca832c7c48dc6533003d16ddbdd95657",
+   "manifestChecked": false,
+   "dotsStatus": "REVIEW_STATIC_LAYOUT_REPAIR",
+   "size": [
+    384,
+    354
+   ],
+   "bytes": 46882,
+   "sha256": "e2a362ab4c5fd182c037816a1e13581b68bb4f254b3c3f784bf3ddb2216c0b2a"
+  },
+  "r415-paint-layer": {
+   "zone": "sz115-RF-3",
+   "mode": "inner",
+   "axis": null,
+   "height": 20,
+   "path": "assets/r415/props/paint-layer.webp",
+   "source": "R12-paint-layer-layout-repair.png",
+   "pngSHA256": "340764e9edc6ce203cbbe59c48f61ec8970a58272827bbd495228f2fa88c4ad2",
+   "manifestChecked": false,
+   "dotsStatus": "REVIEW_STATIC_LAYOUT_REPAIR",
+   "size": [
+    384,
+    347
+   ],
+   "bytes": 40196,
+   "sha256": "c7c10acdbacafe7f3357f6c4ac2b0f1ebac11f0c1063871af2aeeff07fce9cea"
+  },
+  "r415-empty-sleeve": {
+   "zone": "sz115-RG-3",
+   "mode": "inner",
+   "axis": null,
+   "height": 16,
+   "path": "assets/r415/props/empty-sleeve.webp",
+   "source": "R13-empty-sleeve-layout-repair.png",
+   "pngSHA256": "279ea8a6e721f768647179962d6a067a39ce2c641ea735085dde6faac2453791",
+   "manifestChecked": false,
+   "dotsStatus": "REVIEW_STATIC_LAYOUT_REPAIR",
+   "size": [
+    384,
+    364
+   ],
+   "bytes": 19776,
+   "sha256": "ac7b44a17f8f5a88ffac1fb2c621b5186d12de6e833ba033f75303768889cb82"
+  },
+  "r415-bent-hand": {
+   "zone": "sz115-RG-3",
+   "mode": "inner",
+   "axis": null,
+   "height": 22,
+   "path": "assets/r415/props/bent-hand.webp",
+   "source": "StoryWorld-resumed218-R13-bent-hand-padding-repair.zip",
+   "pngSHA256": "403379ee99b5aa443bc98fb5257a339fadd1e01c6764caee98472c6da3b774df",
+   "manifestChecked": true,
+   "dotsStatus": "REVIEW_STATIC_WIRE_FIT_UNVERIFIED",
+   "size": [
+    384,
+    325
+   ],
+   "bytes": 12756,
+   "sha256": "eb361f67df7a1cabb135a6d55be4004504410ba994dbab91cd15c396f8fae35f"
+  },
+  "r415-archive-shelf": {
+   "zone": "sz115-RG-5",
+   "mode": "wall",
+   "axis": "y",
+   "height": 28,
+   "path": "assets/r415/props/archive-shelf.webp",
+   "source": "R15-archive-shelf-layout-repair.png",
+   "pngSHA256": "ecb3e5304d6afdd6fc17f05ca94f60f12daf2e7ec3977971a398ec905964d22a",
+   "manifestChecked": false,
+   "dotsStatus": "REVIEW_STATIC_LAYOUT_REPAIR",
+   "size": [
+    384,
+    170
+   ],
+   "bytes": 21634,
+   "sha256": "f51e40b230e53a151b3103eebc892ff6998729e7b74d67c7994b7a44a7789dde"
+  },
+  "r415-burned-books": {
+   "zone": "sz115-RG-5",
+   "mode": "inner",
+   "axis": null,
+   "height": 16,
+   "path": "assets/r415/props/burned-books.webp",
+   "source": "R15-burned-books-layout-repair.png",
+   "pngSHA256": "eab3ee0ad03f75f12013de0b706b1fd79e747c87713a821431698aba9a0db3c4",
+   "manifestChecked": false,
+   "dotsStatus": "REVIEW_STATIC_LAYOUT_REPAIR",
+   "size": [
+    384,
+    241
+   ],
+   "bytes": 34478,
+   "sha256": "293f9c55fa117e0fec3cf20febb06bfe7758b6df1ce3db8bf164564f16cf5a8b"
+  },
+  "r415-machine-heart": {
+   "zone": "sz115-RG-5",
+   "mode": "inner",
+   "axis": null,
+   "height": 48,
+   "path": "assets/r415/props/machine-heart.webp",
+   "source": "R15-machine-heart-layout-repair.png",
+   "pngSHA256": "cb0ed5f38c416390c42bc88ae3f2beaf9e07062f2023eaee48a8263a63041f64",
+   "manifestChecked": false,
+   "dotsStatus": "REVIEW_STATIC_LAYOUT_REPAIR",
+   "size": [
+    384,
+    368
+   ],
+   "bytes": 70582,
+   "sha256": "44d42ca0d8b2f6ccb2cdb3f7707115e2d166349d344f6a1309e6a96c4055cf84"
+  },
+  "r415-genealogy": {
+   "zone": "sz115-RG-5",
+   "mode": "inner",
+   "axis": null,
+   "height": 14,
+   "path": "assets/r415/props/genealogy.webp",
+   "source": "StoryWorld-resumed216-R15-genealogy-halo-repair.zip",
+   "pngSHA256": "beb72bdfcc8294d062d5aa82bef233a8606535e0993dc99483f3cbe0a2198efc",
+   "manifestChecked": true,
+   "dotsStatus": "REVIEW_STATIC_RUNTIME_UNVERIFIED",
+   "size": [
+    384,
+    353
+   ],
+   "bytes": 33696,
+   "sha256": "0500f1a6071c1f436bc10fdc7056b7042b51e9ba15bce3c1c537e68be12fde3a"
+  },
+  "r415-monitor": {
+   "zone": "sz115-RG-9",
+   "mode": "inner",
+   "axis": null,
+   "height": 32,
+   "path": "assets/r415/props/monitor.webp",
+   "source": "R16-monitor-layout-repair.png",
+   "pngSHA256": "4220bdeeb0d4a872d0adb94cdbcd5d0242e38beffeba633af4abbcd2126cf840",
+   "manifestChecked": false,
+   "dotsStatus": "REVIEW_STATIC_LAYOUT_REPAIR",
+   "size": [
+    384,
+    374
+   ],
+   "bytes": 39236,
+   "sha256": "29cdbd7d53515035f3be6e0ac6d15afe966492b09be926d4d3c6f5d0910418c4"
+  },
+  "r415-care-table": {
+   "zone": "sz115-RG-9",
+   "mode": "inner",
+   "axis": null,
+   "height": 30,
+   "path": "assets/r415/props/care-table.webp",
+   "source": "StoryWorld-resumed204-R16-care-table-QA.zip",
+   "pngSHA256": "1ace0520ba13fc58936b7a3193065e3f5285917a3d021f38c7396c856589df70",
+   "manifestChecked": true,
+   "dotsStatus": "REVIEW_STATIC_RUNTIME_UNVERIFIED",
+   "size": [
+    315,
+    384
+   ],
+   "bytes": 27150,
+   "sha256": "0af94a7074ac37e62c7dab9011c1f25e9a6af24ba6218eb051570d4457af07a6"
+  }
+ }
+}
