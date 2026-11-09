@@ -34,7 +34,7 @@ ok('no Drive file ids or URLs in the public index (Dots slugs like R02-gray-scho
 const P=Object.entries(PIDX.props);
 ok('3 props in the R406 row format (zone/mode/axis/height/path)',P.length===3&&P.every(([,v])=>zones.has(v.zone)&&['wall','inner'].includes(v.mode)&&v.height>0&&/^assets\/r414\/props\/[a-z0-9-]+\.webp$/.test(v.path)));
 ok('prop file names avoid the door/gate/wall words other overlays snap to walls',[...P,...B].every(([,v])=>!/(^|[\W_])(gate|door|wall)s?([\W_]|$)/i.test(v.path.split('/').pop().replace('.webp',''))));
-ok('R406 also reads the R414 prop index',/IDXS=\[IDX,'\.\/assets\/r408\/props\/index\.json','\.\/assets\/r414\/props\/index\.json'\]/.test(C('props-place-r406.js')));
+ok('R406 also reads the R414 prop index',/IDXS=\[IDX,'\.\/assets\/r408\/props\/index\.json','\.\/assets\/r414\/props\/index\.json'(,'\.\/assets\/r4\d\d\/props\/index\.json')*\]/.test(C('props-place-r406.js')));
 const r299=C('env-props-r299.js');const big=k=>+(r299.match(new RegExp('\\b'+k+':\\{h:(\\d+)'))||[])[1];
 ok('R299 architecture (cathedral arch, obelisk) is at least 2x the hero',big('arch')>=132&&big('obelisk')>=132,{arch:big('arch'),obelisk:big('obelisk')});
 
