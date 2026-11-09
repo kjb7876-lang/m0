@@ -426,6 +426,8 @@ jobs:
         run: node r96/qa/r412/r412-cpu-check.cjs
       - name: R425 combat flow (mob size bands, hit punch, spear tips, spider X moves, upright crosses, gunner 120deg, slayer poses + blood cross R / tornado Q) CPU check
         run: node r96/qa/r425/r425-cpu-check.cjs
+      - name: R448 depth overlap (props in front cover the hero, hero silhouette shows through) CPU check
+        run: node r96/qa/r448/r448-cpu-check.cjs
       - name: R434 readability (boss/midboss ground aura, calm HUD, one track title, hero palette rim) CPU check
         run: node r96/qa/r434/r434-cpu-check.cjs
       - name: R435 surfaces (floor anti-repeat noise, wall base AO + grime band, bright floor knee, wall height gradient + top edge light) CPU check
