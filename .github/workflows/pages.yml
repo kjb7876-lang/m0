@@ -442,6 +442,8 @@ jobs:
         run: node r96/qa/r413/r413-cpu-check.cjs
       - name: R414 Drive buildings behind outdoor dream zones (>= 2x hero) CPU check
         run: node r96/qa/r414/r414-cpu-check.cjs
+      - name: R415 repaired Drive props CPU check
+        run: node r96/qa/r415/r415-cpu-check.cjs
       - name: R381 recorded narration voice (Qwen3-TTS Sohee) for cinema mode CPU check
         run: node r96/qa/r381/r381-cpu-check.cjs
       - name: R376 real difficulty + cinema HUD CPU check
