@@ -107,6 +107,8 @@ jobs:
         run: node r96/qa/r377/slayer-south-cpu-check.cjs
       - name: R389 slayer east (mirrored persona W) and toned south CPU check
         run: node r96/qa/r389/slayer-e-cpu-check.cjs
+      - name: R445 slayer north (rear) walk4 CPU check
+        run: node r96/qa/r445/slayer-walk-n-cpu-check.cjs
       - name: R356 Kairo homage (Seoha time-control passive, Kairo SFX) CPU check
         run: node r96/qa/r356/kairo-homage-cpu-check.cjs
       - name: R360 hospital ep1a08 unreachable-altar path miss memo CPU check
@@ -432,10 +434,14 @@ jobs:
         run: node r96/qa/r435/r435-cpu-check.cjs
       - name: R438 sin boss rooms tidy (no shared R224 furniture in boss rooms, zone-only furniture, no lamps mid-floor) CPU check
         run: node r96/qa/r438/r438-cpu-check.cjs
+      - name: R441 lag (blocked memo per tick, R302 caller lookup without repeated full stacks, R409 outline cache by image address + bake budget per frame) CPU check
+        run: node r96/qa/r441/r441-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
         run: node r96/qa/r430/r430-cpu-check.cjs
       - name: R431 boss-room center fights + theme boss skill 6s + touch status/DoT + black-flame prop throws CPU check
         run: node r96/qa/r431/r431-cpu-check.cjs
+      - name: R443 early-map height readability (camera-side ledge, R100 lid hidden in organic zones), rounded rock tips, clear door band, boss on the blue C marker CPU check
+        run: node r96/qa/r443/r443-cpu-check.cjs
       - name: R438 Drive core24 remaining sheets (boss melee shockwave/cold wave, enrage, status onset, R230 blink wraith dash, heal, barrier, room cleanse) CPU check
         run: node r96/qa/r438/fx-more-cpu-check.cjs
       - name: R413 door lintels up to the jamb wall top + R267 roof refit CPU check
@@ -497,8 +503,16 @@ jobs:
         run: node r96/qa/r436/hwando-walk-s-cpu-check.cjs
       - name: R439 Hwando attack blade-tip speck cleanup CPU check
         run: node r96/qa/r439/hwando-tip-cpu-check.cjs
+      - name: R447 R74 ash moth flaps its wings while moving CPU check
+        run: node r96/qa/r447/mob-flap-cpu-check.cjs
+      - name: R440 heroes play their attack motion while casting skills CPU check
+        run: node r96/qa/r440/skill-attack-cpu-check.cjs
+      - name: R441/R442 Hwando diagonal walk uses side motion + enemy theme skills play attack pose CPU check
+        run: node r96/qa/r442/enemy-skill-diag-cpu-check.cjs
       - name: R440 Hwando hit pose (no old art) and hero rim blade cleanup CPU check
         run: node r96/qa/r440/r440-cpu-check.cjs
+      - name: R446 seven pillars moved to their own map as stationary attacking towers CPU check
+        run: node r96/qa/r446/r446-cpu-check.cjs
       - name: R352 orphaned field-wave enemies wake near the hero CPU check
         run: node r96/qa/r352/wave-orphans-cpu-check.cjs
       - name: R280 stranded required enemy rescue and 777 forward range CPU check

@@ -41,10 +41,10 @@ skel_ref = 150 / old_body('assets/r208/mobs/web-bound-skeleton.webp', (130, 183)
 # 재 나방 v2 (256x320, 비행 4 + 공격 4)
 d = next(ST.glob('x-SW-m002*')) / 'frames'; n = [f'm002-flight-0{i}.png' for i in range(1, 5)] + [f'm002-attack-0{i}.png' for i in range(1, 5)]
 add('ash-moth-v2', 'strip', L(d, n), 8, .75, (128, 300), [0, 1, 2, 3], [4, 5, 6, 7], [0], 'right',
-    {'layer': 'STORY', 'zone': 'dist01', 'name': '^재 나방'}, fr(d, n), 1.2)  # 화면 확인(R380 스크린샷) 뒤 영웅보다 조금 큰 정도로
+    {'layer': 'STORY', 'zone': 'dist01', 'name': '^(중간보스 · )?재 나방'}, fr(d, n), 1.2)  # 화면 확인(R380 스크린샷) 뒤 영웅보다 조금 큰 정도로
 # 보랏빛 알집지기 실사풍 v1 (512x512, 이동 4 + 공격 4)
 d = next(ST.glob('x-보랏빛*')) / 'purple-eggkeeper-art-v1/frames'; n = [f'dist01-sp2-move-0{i}.png' for i in range(1, 5)] + [f'dist01-sp2-attack-0{i}.png' for i in range(1, 5)]
-add('purple-eggkeeper-v1', 'strip', L(d, n), 8, .5, (256, 448), [0, 1, 2, 3], [4, 5, 6, 7], [0], 'right',
+add('purple-eggkeeper-v1', 'strip', L(d, n), 8, .5, (256, 448), [0, 1, 2, 3], [4, 5, 6, 7], [0], 'left',  # R441: 그림이 왼쪽 아래를 봄(사용자 2026-11-09 지적)
     {'layer': 'STORY', 'zone': 'dist01', 'name': '보랏빛 알집지기'}, fr(d, n), spider_ref * 3.0)  # 알 주머니까지 몸이 커서 예전 거미 크기로 줄임
 # 거미줄에 묶인 수호병 검은안개 v4 일반·픽셀 (256x512, 이동 6 + 공격 5)
 for tag, g in (('', '일반'), ('-pixel', '픽셀')):
