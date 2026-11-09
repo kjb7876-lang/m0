@@ -108,23 +108,26 @@ function update(r,frame){const o=r.__r300;if(!o)return;
  if(!live){hideAll(o);return;}
  const B=budget(),t=performance.now()/1000,samong=frame.layer!=='STORY'||!!room.samongR103,sight=sightOn();stats.frames++;
  // 어둡게: 본편, 시야(횃불·손전등) 꺼짐일 때만.
- const dimOn=want('pools')&&!samong&&!sight;o.dim.visible=dimOn;if(dimOn){o.dim.material.uniforms.k.value=B.dim;stats.dimFrames++;}
+ const r451=(()=>{try{return !!window.__STORYWORLD_LOCAL_LIGHT_R451__?.owns?.();}catch(_){return false;}})();/* R451 국지 조명이 바탕빛·웅덩이를 맡는다 */
+ const dimOn=want('pools')&&!samong&&!sight&&!r451;o.dim.visible=dimOn;if(dimOn){o.dim.material.uniforms.k.value=B.dim;stats.dimFrames++;}
  // 빛 웅덩이
- let n=0;if(want('pools')&&!sight){if(t-o.pickAt>.5||!o.pick){o.pickAt=t;o.pick=nearest(lightsOf(room),player.x,player.y,B.pools);}
+ let n=0;if(want('pools')&&!sight&&!r451){if(t-o.pickAt>.5||!o.pick){o.pickAt=t;o.pick=nearest(lightsOf(room),player.x,player.y,B.pools);}
   const warm=samong?[1,.32,.2]:[1,.52,.22];
   for(const l of o.pick){if(n>=B.pools)break;const ph=(l.x*3.1+l.y*1.7)%6.283,fl=reduced()?1:.92+.05*Math.sin(t*7.9+ph)+.03*Math.sin(t*17.3+ph*2),rad=(l.r||3)*2*(l.prop?1.15:.95),k=B.poolGain*fl*(l.prop?1:.8);
    o.mat.makeScale(rad,1,rad);o.mat.setPosition(l.x,.03,l.y);o.pools.setMatrixAt(n,o.mat);o.color.setRGB(warm[0]*k,warm[1]*k,warm[2]*k);o.pools.setColorAt(n,o.color);n++;}}
  o.pools.count=n;o.pools.visible=n>0;if(n){o.pools.instanceMatrix.needsUpdate=true;o.pools.instanceColor.needsUpdate=true;}stats.pools=n;stats.poolsMax=Math.max(stats.poolsMax,n);
+ // R450 날씨: 지역 성격에 맞춰 떠도는 입자 색·양과 안개 세기를 받는다(병원 불티 → 끔(빛 둘레 먼지가 대신), 늪 → 황록 포자, 눈 지역 → 끔, 정본 안개 지역 → 짙게).
+ let wx=null;try{wx=window.__STORYWORLD_WEATHER_R450__?.r300?.(room,samong)||null;}catch(_){wx=null;}
  // 안개 띠
  const bands=want('fog')?B.fogBands:0;loadFog(o,r.T,samong);
- const fogCol=samong?[.34,.12,.11]:[.42,.39,.36],cx=Math.round(player.x),cy=Math.round(player.y);
+ const fogK=Number.isFinite(wx?.fog?.k)?wx.fog.k:1,fogCol=wx?.fog?.color||(samong?[.34,.12,.11]:[.42,.39,.36]),cx=Math.round(player.x),cy=Math.round(player.y);
  o.fog.forEach((f,i)=>{const on=i<bands;f.visible=on;if(!on)return;const u=f.material.uniforms,sp=reduced()?0:.006+i*.004;
-  f.position.x=cx;f.position.z=cy;u.center.value.set(cx,cy);u.radius.value=19;u.opacity.value=(samong?.13:.09)*(i?.7:1);u.color.value.setRGB(...fogCol);
+  f.position.x=cx;f.position.z=cy;u.center.value.set(cx,cy);u.radius.value=19;u.opacity.value=Math.min(.3,(samong?.13:.09)*(i?.7:1)*fogK);u.color.value.setRGB(...fogCol);
   u.off.value.set(t*sp*(i%2?-1:1),t*sp*.6);});stats.fogBands=bands;
  // 재·포자
- const motes=want('motes')?B.motes:0;o.motes.visible=motes>0;stats.motes=motes;
+ const mo=wx?.motes,motes=want('motes')&&mo!==false?Math.round(B.motes*(Number.isFinite(mo?.k)?mo.k:1)):0;o.motes.visible=motes>0;stats.motes=motes;
  if(motes){o.motes.geometry.setDrawRange(0,motes);const u=o.motes.material.uniforms;u.t.value=reduced()?0:t;u.center.value.set(player.x,0,player.y);
-  u.color.value.setRGB(...(samong?[.9,.24,.2]:[1,.62,.32]));u.size.value=2.4*Math.min(2,r.renderer?.getPixelRatio?.()||1);}
+  u.color.value.setRGB(...(mo?.color||(samong?[.9,.24,.2]:[1,.62,.32])));u.rise.value=Number.isFinite(mo?.rise)?mo.rise:.35;u.size.value=2.4*Math.min(2,r.renderer?.getPixelRatio?.()||1);}
  attach(r,o);}
 
 // ---- 렌더러 감싸기(프로토타입 + 인스턴스) ----
