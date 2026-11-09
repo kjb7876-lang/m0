@@ -35,5 +35,5 @@ const m=mk('ep1b06');api.tidy(m);ok('Mammon room unchanged',m.props.length===9);
 const s=mk('ep1a09');api.tidy(s);ok('non-sin region unchanged',s.props.length===9);
 const w=mk('ep1b07');api.tidy(w);const wi=w.props.map(q=>q.id);ok('wrath: boss-room furniture removed, no theme filter elsewhere',!wi.includes('r224:furn:ep1b07:0')&&wi.includes('r224:furn:ep1b07:2'));
 const sra=C('sin-room-art.js');ok('wrath loose chairs moved out of the boss room to the pre-boss gather room north wall',/prop\('chairs',9\.6,26\.1,2\.2,1\.5,132,1\.1\)/.test(sra)&&/prop\('table',13\.1,7\.3,/.test(sra)&&RT('sin-room-art.js')===sra);
-ok('wrath dining-table set repeated at the two gather-room spots, same orientation and atlas cell',/prop\('table2',9\.1,30\.3,3\.9,1\.7,170,1\.05\),prop\('table3',19\.3,32\.1,3\.9,1\.7,170,1\.05\)/.test(sra)&&/table2:cell\(\[17,12,618,558\]/.test(sra)&&/table:48,table2:48,table3:48/.test(sra));
+ok('wrath dining-table set repeated at the two gather-room spots, same orientation, same atlas cell (no new manifest cells)',/\{\.\.\.prop\('table2',9\.1,30\.3,3\.9,1\.7,170,1\.05\),cell:'table'\},\{\.\.\.prop\('table3',19\.3,32\.1,3\.9,1\.7,170,1\.05\),cell:'table'\}/.test(sra)&&!/table2:cell/.test(sra)&&/sinArtCell:p\.cell\|\|p\.key/.test(sra));
 console.log(n-bad+'/'+n+' ok');process.exit(bad?1:0);

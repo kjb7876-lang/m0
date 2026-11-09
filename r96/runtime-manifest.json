@@ -34079,8 +34079,8 @@
     },
     {
       "path": "sin-room-art.js",
-      "bytes": 17093,
-      "sha256": "7b9b6c3a456219e41474c850c47936f412600c714245d4283e884c01ca8c13ed"
+      "bytes": 17102,
+      "sha256": "fdbb027ad13cb160b34d9a33e3416057da0286d6df739951bcf11f4b3f61c242"
     },
     {
       "path": "skill-fx-r292.js",
@@ -34384,7 +34384,7 @@
     }
   ],
   "fileCount": 6876,
-  "totalBytes": 1087038780,
+  "totalBytes": 1087038789,
   "webHTMLSha256": "96375e189d8c4bcb33b618928d3b2763362f60225129c0a463f6ea2dd96747e8",
   "largest": [
     {
