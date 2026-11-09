@@ -1,9 +1,9 @@
 {
   "build": {
-    "files": 6701,
-    "bytes": 1058039905,
-    "runtimeManifestSHA256": "7c556b345b58e2b1f85f65c9f911b2cb34bc4b4b753968f33a5bf51e88b1ec12",
-    "sourceCommit": "af67f3d872a8aca0c5592e2d6174722fe64581b6"
+    "files": 6876,
+    "bytes": 1087038789,
+    "runtimeManifestSHA256": "fa19b83ec7b85340172df91ae47c71ad46d64c1101b379fecca62349bd42542a",
+    "sourceCommit": "edc22f5c82e4e1bb2796c54b6d4957d3f5092c78"
   },
   "boot": {
     "booted": true,
@@ -2863,9 +2863,25 @@
             "id": "sin-art:ep1b07:chairs",
             "path": "assets/sin-rooms/wrath-restaurant.png",
             "key": "chairs",
-            "x": 7.15,
-            "y": 13,
+            "x": 9.6,
+            "y": 26.1,
             "height": 132
+          },
+          {
+            "id": "sin-art:ep1b07:table2",
+            "path": "assets/sin-rooms/wrath-restaurant.png",
+            "key": "table2",
+            "x": 9.1,
+            "y": 30.3,
+            "height": 170
+          },
+          {
+            "id": "sin-art:ep1b07:table3",
+            "path": "assets/sin-rooms/wrath-restaurant.png",
+            "key": "table3",
+            "x": 19.3,
+            "y": 32.1,
+            "height": 170
           },
           {
             "id": "sin-art:ep1b07:booth",
@@ -2974,9 +2990,25 @@
             "id": "sin-art:ep1b07:chairs",
             "path": "assets/sin-rooms/wrath-restaurant.png",
             "key": "chairs",
-            "x": 7.15,
-            "y": 13,
+            "x": 9.6,
+            "y": 26.1,
             "height": 132
+          },
+          {
+            "id": "sin-art:ep1b07:table2",
+            "path": "assets/sin-rooms/wrath-restaurant.png",
+            "key": "table2",
+            "x": 9.1,
+            "y": 30.3,
+            "height": 170
+          },
+          {
+            "id": "sin-art:ep1b07:table3",
+            "path": "assets/sin-rooms/wrath-restaurant.png",
+            "key": "table3",
+            "x": 19.3,
+            "y": 32.1,
+            "height": 170
           },
           {
             "id": "sin-art:ep1b07:booth",
@@ -3012,6 +3044,16 @@
             "r98BaseHeight": 0.01
           },
           {
+            "id": "sin-art:ep1b07:table2",
+            "height": 0.01,
+            "r98BaseHeight": 0.01
+          },
+          {
+            "id": "sin-art:ep1b07:table3",
+            "height": 0.01,
+            "r98BaseHeight": 0.01
+          },
+          {
             "id": "sin-art:ep1b07:booth",
             "height": 0.01,
             "r98BaseHeight": 0.01
@@ -3028,6 +3070,14 @@
           },
           {
             "key": "chairs",
+            "blocked": true
+          },
+          {
+            "key": "table2",
+            "blocked": true
+          },
+          {
+            "key": "table3",
             "blocked": true
           },
           {
@@ -3185,25 +3235,25 @@
               558
             ],
             "expectedPosition": {
-              "x": 7.15,
-              "y": 13
+              "x": 9.6,
+              "y": 26.1
             },
             "expectedPoints": [
               [
-                397.04495652173915,
-                213.34385507246378
+                -11.630289855072412,
+                428.3485217391305
               ],
               [
-                282.87771014492756,
-                213.34385507246378
+                102.53695652173917,
+                428.3485217391305
               ],
               [
-                282.87771014492756,
-                321.8708115942029
+                102.53695652173917,
+                536.8754782608696
               ],
               [
-                397.04495652173915,
-                321.8708115942029
+                -11.630289855072412,
+                536.8754782608696
               ]
             ],
             "commands": [
@@ -3216,25 +3266,155 @@
                 ],
                 "points": [
                   [
-                    397.04495652173915,
-                    213.34385507246378
+                    -11.630289855072412,
+                    428.3485217391305
                   ],
                   [
-                    282.87771014492756,
-                    213.34385507246378
+                    102.53695652173917,
+                    428.3485217391305
                   ],
                   [
-                    282.87771014492756,
-                    321.8708115942029
+                    102.53695652173917,
+                    536.8754782608696
                   ],
                   [
-                    397.04495652173915,
-                    321.8708115942029
+                    -11.630289855072412,
+                    536.8754782608696
                   ]
                 ],
                 "owner": {
-                  "x": 7.15,
-                  "y": 13,
+                  "x": 9.6,
+                  "y": 26.1,
+                  "kind": "prop",
+                  "sinArt": true
+                }
+              }
+            ]
+          },
+          {
+            "id": "sin-art:ep1b07:table2",
+            "expectedRect": [
+              17,
+              12,
+              618,
+              558
+            ],
+            "expectedPosition": {
+              "x": 9.1,
+              "y": 30.3
+            },
+            "expectedPoints": [
+              [
+                -161.91660869565217,
+                448.4325507246376
+              ],
+              [
+                -7.118057971014508,
+                448.4325507246376
+              ],
+              [
+                -7.118057971014508,
+                588.202115942029
+              ],
+              [
+                -161.91660869565217,
+                588.202115942029
+              ]
+            ],
+            "commands": [
+              {
+                "sourceRect": [
+                  17,
+                  12,
+                  618,
+                  558
+                ],
+                "points": [
+                  [
+                    -161.91660869565217,
+                    448.4325507246376
+                  ],
+                  [
+                    -7.118057971014508,
+                    448.4325507246376
+                  ],
+                  [
+                    -7.118057971014508,
+                    588.202115942029
+                  ],
+                  [
+                    -161.91660869565217,
+                    588.202115942029
+                  ]
+                ],
+                "owner": {
+                  "x": 9.1,
+                  "y": 30.3,
+                  "kind": "prop",
+                  "sinArt": true
+                }
+              }
+            ]
+          },
+          {
+            "id": "sin-art:ep1b07:table3",
+            "expectedRect": [
+              17,
+              12,
+              618,
+              558
+            ],
+            "expectedPosition": {
+              "x": 19.3,
+              "y": 32.1
+            },
+            "expectedPoints": [
+              [
+                70.37139130434784,
+                614.3525507246377
+              ],
+              [
+                225.1699420289855,
+                614.3525507246377
+              ],
+              [
+                225.1699420289855,
+                754.122115942029
+              ],
+              [
+                70.37139130434784,
+                754.122115942029
+              ]
+            ],
+            "commands": [
+              {
+                "sourceRect": [
+                  17,
+                  12,
+                  618,
+                  558
+                ],
+                "points": [
+                  [
+                    70.37139130434784,
+                    614.3525507246377
+                  ],
+                  [
+                    225.1699420289855,
+                    614.3525507246377
+                  ],
+                  [
+                    225.1699420289855,
+                    754.122115942029
+                  ],
+                  [
+                    70.37139130434784,
+                    754.122115942029
+                  ]
+                ],
+                "owner": {
+                  "x": 19.3,
+                  "y": 32.1,
                   "kind": "prop",
                   "sinArt": true
                 }
@@ -3335,11 +3515,11 @@
           "blinkAway": 0,
           "danceFrames": 0,
           "danceAnchors": 0,
-          "enemyFaced": 12,
+          "enemyFaced": 10,
           "heroFaced": 0,
           "grounded": 0,
           "groundScans": 34,
-          "wallMoves": 28,
+          "wallMoves": 30,
           "shadowsMoved": 66,
           "groundPx": 0,
           "thrownPops": 0,
@@ -3350,7 +3530,7 @@
           "debris": 0,
           "dust": 0,
           "particles": 0,
-          "sunk": 86,
+          "sunk": 90,
           "parts": 0,
           "failures": 0,
           "lastError": null
@@ -3364,10 +3544,10 @@
     "stats": {
       "layouts": 18,
       "rooms": 24,
-      "props": 96,
-      "draws": 144,
+      "props": 104,
+      "draws": 156,
       "hidden": 0,
-      "authoredCorrections": 48,
+      "authoredCorrections": 52,
       "wallMasksHidden": 0,
       "wallMasksRestored": 0,
       "errors": 0
@@ -3379,6 +3559,8 @@
         "sin-art:ep1b07:table",
         "sin-art:ep1b07:buffet",
         "sin-art:ep1b07:chairs",
+        "sin-art:ep1b07:table2",
+        "sin-art:ep1b07:table3",
         "sin-art:ep1b07:booth"
       ]
     },
@@ -3464,10 +3646,24 @@
         },
         {
           "id": "sin-art:ep1b07:chairs",
-          "x": 7.15,
-          "y": 13,
+          "x": 9.6,
+          "y": 26.1,
           "path": "assets/sin-rooms/wrath-restaurant.png",
           "key": "chairs"
+        },
+        {
+          "id": "sin-art:ep1b07:table2",
+          "x": 9.1,
+          "y": 30.3,
+          "path": "assets/sin-rooms/wrath-restaurant.png",
+          "key": "table2"
+        },
+        {
+          "id": "sin-art:ep1b07:table3",
+          "x": 19.3,
+          "y": 32.1,
+          "path": "assets/sin-rooms/wrath-restaurant.png",
+          "key": "table3"
         },
         {
           "id": "sin-art:ep1b07:booth",

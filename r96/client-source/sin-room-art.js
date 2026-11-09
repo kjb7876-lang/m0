@@ -34,18 +34,20 @@ const GROUND_EDGE=Object.freeze({
 // x/y are native floor positions; width/depth are the solid furniture footprint.
 // Pixel heights use the same zoom-1 scale as native props (the hero is 66 px).
 const prop=(key,x,y,width,depth,height,wallHeight,flip=false,existingCollision=false)=>Object.freeze({key,x,y,width,depth,height,wallHeight,flip,existingCollision});
+// R438(사용자 2026-11-09 "의자같은경우는 중앙에 각도맞게" · "식탁이랑 의자를 같이 가야지"): 분노 식당의 쓰러진 의자 무리(식탁 없는 의자)를 보스방 왼쪽 벽에서 빼, 보스방 앞 몹 모이는 구역(gatherBounds [4,27,28,39]) 북쪽 벽에 붙인다 — 식탁 앞에 두면 식탁 그림 속 의자와 겹쳐 더 어수선했다(사용자 03:19Z "보스방이 작아서 배치가 다 어렵다면 보스방이전에 몹들이 몰리는 구역에 적절하게"). 보스방에는 의자가 그려진 식탁·찬장·부스(작은 식탁 포함) 세트만 남는다.
+//  같은 날 03:40Z "빨간색 원그린 조형물식탁을 아래 원두곳에 각도 맞게 배치": 같은 식탁 세트(의자 포함 그림)를 모이는 구역 두 곳(9.1,30.3)·(19.3,32.1)에 보스방 식탁과 같은 방향(긴 쪽이 x 축)으로 더 놓는다. 같은 그림 칸(table)을 cell 로 가리켜 다시 쓴다(그림·매니페스트 칸은 그대로).
 const themes={
  ep1b02:{name:'나태의 거주집',atlas:'sloth',props:[prop('sofa',13.0,7.15,4.4,1.65,165,1.25),prop('fridge',23.4,7.15,1.5,1.2,155,2.25),prop('tv',18.65,7.0,2.2,1.2,110,1.5),prop('bed',7.2,15.2,1.8,3.7,160,.85,true)]},
  ep1b03:{name:'질투의 거주집',atlas:'envy',props:[prop('settee',12.9,7.15,4.1,1.6,165,1.2),prop('mirror',23.6,6.9,1.5,.9,130,2.25),prop('console',18.5,7.0,2.6,1.25,142,1.3),prop('cabinet',7.05,14.2,1.3,1.5,148,2.15,true)]},
  ep1b04:{name:'탐식의 호텔 주방',atlas:'glutton',props:[prop('prep',12.9,7.15,4.0,1.7,165,1.15),prop('range',18.7,7.1,3.0,1.4,165,1.55),prop('fridge',23.7,7.0,1.7,1.3,150,2.35),prop('trolley',7.1,15.4,1.5,1.55,112,1.1,true)]},
  ep1b05:{name:'색욕의 호텔 고급 바',atlas:'lust',props:[prop('bar',13.1,7.15,4.0,1.5,170,1.3),prop('backbar',22.0,7.0,2.4,.95,170,2.4),prop('booth',7.15,13.8,1.65,3.5,165,1.4,true),prop('trolley',7.1,18.0,1.25,1.4,112,.95,true)]},
  ep1b06:{name:'맘몬의 호텔 사장실과 금고',atlas:'mammon',props:[prop('desk',14,7.35,5,1.4,160,1.02,true,true),prop('chair',18,7.4,1.2,1.2,130,1.7),prop('drawers',6.85,15,1.4,4,140,1.35,true,true),prop('trolley',24.5,7,1,1.2,100,1.1)]},
- ep1b07:{name:'불타는 호텔 식당',atlas:'wrath',props:[prop('table',13.1,7.3,3.9,1.7,170,1.05),prop('buffet',21.6,7.1,4.0,1.65,165,1.45),prop('chairs',7.15,13.0,1.9,2.15,132,1.1,true),prop('booth',7.2,17.2,1.8,3.75,170,1.35,true)]}
+ ep1b07:{name:'불타는 호텔 식당',atlas:'wrath',props:[prop('table',13.1,7.3,3.9,1.7,170,1.05),prop('buffet',21.6,7.1,4.0,1.65,165,1.45),prop('chairs',9.6,26.1,2.2,1.5,132,1.1),{...prop('table2',9.1,30.3,3.9,1.7,170,1.05),cell:'table'},{...prop('table3',19.3,32.1,3.9,1.7,170,1.05),cell:'table'},prop('booth',7.2,17.2,1.8,3.75,170,1.35,true)]}
 };
 for(const t of Object.values(themes)){Object.freeze(t.props);Object.freeze(t);}Object.freeze(themes);
 function propPlane(p){
- const t=themes[p.sinArtZone],c=t&&ATLAS[t.atlas]?.cells[p.sinArtKey];if(!c)return null;
- const tile=typeof TILE==='number'?TILE:34,offset=-GROUND_EDGE[t.atlas][p.sinArtKey]*p.height/c.visibleHeight/tile+.005;
+ const t=themes[p.sinArtZone],c=t&&ATLAS[t.atlas]?.cells[p.sinArtCell||p.sinArtKey];if(!c)return null;
+ const tile=typeof TILE==='number'?TILE:34,offset=-GROUND_EDGE[t.atlas][p.sinArtCell||p.sinArtKey]*p.height/c.visibleHeight/tile+.005;
  // Reuse the native vertical world-plane projection. This changes depth only:
  // unlike a camera-facing quad, tall furniture cannot lean through its wall.
  return p.x<8?{ax:p.x+offset,ay:p.y-1,bx:p.x+offset,by:p.y+1}:{ax:p.x-1,ay:p.y+offset,bx:p.x+1,by:p.y+offset};
@@ -129,7 +131,7 @@ function apply(r){
  r.props=r.props.filter(p=>!p.sinArt);
  if(typeof addImage==='function')addImage(a.path,'sin room '+t.atlas);
  for(const p of t.props){const item={id:'sin-art:'+r.id+':'+p.key,x:p.x,y:p.y,path:a.path,height:p.height,solid:false,visible:true,enabled:true,interactive:false,
-   autoTargetEligible6:false,r80PresentationOnly:true,sinArt:true,sinArtZone:r.id,sinArtKey:p.key,sinArtFlip:p.flip};r.props.push(item);items.push(item);}
+   autoTargetEligible6:false,r80PresentationOnly:true,sinArt:true,sinArtZone:r.id,sinArtKey:p.key,sinArtCell:p.cell||p.key,sinArtFlip:p.flip};r.props.push(item);items.push(item);}
  applied.set(r,{layout:r.exploration,props:r.props,items});stats.rooms++;stats.props+=items.length;last={zone:r.id,theme:t.name,props:items.map(p=>p.id)};
 }
 // Only overlapping, noninteractive decorative clutter is suppressed. Native
@@ -140,7 +142,7 @@ function covered(p,id){
  return !!(p.r80PresentationOnly||p.visualOnly6||p.decorative)&&!!themes[id]?.props.some(q=>Math.abs(p.x-q.x)<q.width/2+.25&&Math.abs(p.y-q.y)<q.depth/2+.25);
 }
 function drawOwn(p){
- const t=themes[p.sinArtZone],c=t&&ATLAS[t.atlas]?.cells[p.sinArtKey];if(!c)return;
+ const t=themes[p.sinArtZone],c=t&&ATLAS[t.atlas]?.cells[p.sinArtCell||p.sinArtKey];if(!c)return;
  const sight=window.__STORYWORLD_SIGHT24__;if(sight?.enabled&&!sight.pointVisible(p.x,p.y))return;
  const row=typeof readyImage==='function'?readyImage(p.path):null;if(!row){if(typeof addImage==='function')addImage(p.path);return;}
  const z=typeof zoom==='number'?zoom:1,q=project(p.x,p.y),scale=p.height*z/c.visibleHeight,w=c.sourceRect[2]*scale,h=c.sourceRect[3]*scale;
