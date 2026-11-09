@@ -33924,8 +33924,8 @@
     },
     {
       "path": "local-light-r451.js",
-      "bytes": 44746,
-      "sha256": "3605b4e89e244d08ae5272a4c4a458f9fa53a03c048fca87eaa5a4e7fc0e6a9a"
+      "bytes": 45641,
+      "sha256": "619bc915dad874df7a66ffe839d1f377f27d7dd00855a7d10ab4de94d3c2a4f5"
     },
     {
       "path": "mammon-bossroom.js",
@@ -33979,8 +33979,8 @@
     },
     {
       "path": "mob-death-r462.js",
-      "bytes": 15213,
-      "sha256": "a4094121658de24eb5a1ca5051515826850baef1ef4d14ef76c13a4377b1a3b7"
+      "bytes": 16203,
+      "sha256": "b878da812a8bc14a05108630b448be488b33547a7b806eec5f1e32f7e9e57c8f"
     },
     {
       "path": "mob-dots-r374.js",
@@ -34649,8 +34649,8 @@
     },
     {
       "path": "weather-r450.js",
-      "bytes": 32460,
-      "sha256": "41e5058b45439b5d356438179a1b181aeff3f602f013a4561543528afec9b7e2"
+      "bytes": 33143,
+      "sha256": "3cf949e405d6860f1fb81c05cad70e65bd2a90f2b577af588f39e14f20185159"
     },
     {
       "path": "webgl-fallback-r221.js",
@@ -34724,7 +34724,7 @@
     }
   ],
   "fileCount": 6944,
-  "totalBytes": 1091967126,
+  "totalBytes": 1091969694,
   "webHTMLSha256": "42eae74197c8711c66c4dde3c70f70384c48334594a8e4cb14f175058808acfb",
   "largest": [
     {

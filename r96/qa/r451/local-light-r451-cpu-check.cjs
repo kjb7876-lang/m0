@@ -83,6 +83,32 @@ ok('R448 cover rows (key r448:over:…, owner effect) take the prop light; ghost
  P.litRow('r448:ghost:hero:2:5',{kind:'effect'})===false&&P.litRow('r101:aura-back:hero:0',{kind:'effect'})===false&&P.litRow('hero:2:5',{kind:'hero'})===false&&P.litRow('r448:over:x',null)===false);
 ok('prop-row lighting walks rows with their keys (entries) through litRow',/for\(const \[key,row\] of r\.commands\?\.rows\?\.entries\?\.\(\)\|\|\[\]\)\{[^}]*if\(!litRow\(key,ow\)/.test(src('local-light-r451.js')));
 ok('R448 contract: covers/ghosts still keyed r448:over: / r448:ghost: with the original owner x·y',(()=>{const d=src('depth-overlap-r448.js');return d.includes("key:'r448:over:'+c.key,owner:{...c.owner,")&&d.includes("key:'r448:ghost:'+c.key,owner:{...c.owner,");})());
+// ⑩ main R462(#348) 사체: 주인 없는 'scene' 줄(화면 한가운데 기준)이라 빛 밖이었다 — 등 밑에선 바닥(×1.44)보다 어둡고 어두운 곳에선 바닥보다 밝게 떴다(헤드리스 실측).
+//  R462 가 3D 기록기에서 사체마다 주인(종류 scene, 바닥 x·y)·줄 열쇠 'r462:corpse:…' 를 달고, R451 은 그 줄에 바닥과 같은 빛을 곱한다. 불씨(screen 섞기)는 그대로.
+ok('R462 corpse rows (key r462:corpse:…, owner scene with x·y) take the floor light; plain scene rows and other kinds do not',P.litRow('r462:corpse:3:0',{kind:'scene',x:4,y:5})===true&&P.litRow('scene:4',{kind:'scene'})===false&&
+ P.litRow('r462:corpse:3:0',{kind:'effect'})===false&&P.litRow('r462:corpse:3:0',{kind:'hero'})===false&&P.litRow(7,{kind:'scene'})===false);
+ok('corpse glow (non-normal blending) stays unlit; the background-layer pass (mask 2) lights corpse rows only',/if\(ow\.kind==='scene'\)\{if\(m\.blending!==undefined&&m\.blending!==1\)continue;\}else if\(pass===2\)continue;/.test(src('local-light-r451.js'))&&/\(pass===2\|\|pass===4\|\|pass===8\)/.test(src('local-light-r451.js')));
+{const vm=require('vm'),d=src('mob-death-r462.js');
+ const run=withScope=>{const calls=[];const g={window:{},localStorage:{getItem:()=>null,setItem(){}},setTimeout(){},Date,console,Math,JSON,calls};g.window=g;vm.createContext(g);
+  vm.runInContext(`var time=0,zoom=1,settings={lowFx:false},room={id:'dist01'},effects=[],VFX={burnFlame:'assets/vfx/burn.png'};
+   var ctx={owner:{id:'scene',kind:'scene'},save(){},restore(){},translate(){},scale(){},rotate(){},drawImage(im){calls.push(['img',im.src,ctx.owner]);},globalAlpha:1,filter:'none'};
+   ${withScope?"ctx.scope=function(o,fn){const p=this.owner;this.owner=o;try{return fn();}finally{this.owner=p;}};":''}
+   function project(x,y){return{x:x*10,y:y*10};}function actorHeight(){return 60;}function readyImage(p){return{image:{src:p,naturalWidth:1536,naturalHeight:1024}};}
+   function sprite(p,x,y,h,opt){calls.push(['sprite',p,ctx.owner]);return true;}
+   function drawAssetFrame3(p,f,x,y,h,opt){calls.push(['frame',p,ctx.owner]);return true;}
+   function texture(){calls.push(['texture','',ctx.owner]);}
+   function drawEnemy(e){sprite(e.drawn,0,0,60,{flip:false});}
+   function drawBurnDeath3(fx){}
+   function drawObjective(){calls.push(['objective','',ctx.owner]);}
+   function enterRegion(){return 1;}`,g);
+  vm.runInContext(d,g);const M=g.__STORYWORLD_MOB_DEATH_R462__;
+  vm.runInContext('drawEnemy',g)({id:'m1',name:'망각의 거미 1',hp:10,drawn:'assets/r380/mobs/spider-own.webp'});vm.runInContext('drawBurnDeath3',g)({type:'enemyBurnDeath',sourceId:'m1',x:3,y:4,age:.05,life:.72});
+  vm.runInContext('drawEnemy',g)({id:'m2',name:'유리 망령',hp:5,drawn:'assets/r380/mobs/glass.webp'});vm.runInContext('drawBurnDeath3',g)({type:'enemyBurnDeath',sourceId:'m2',x:7,y:2,age:.5,life:.72});
+  vm.runInContext('time=3',g);calls.length=0;vm.runInContext('drawObjective',g)();return {M,calls:calls.slice()};};
+ const a=run(true),b=run(false),ca=a.calls.filter(c=>c[0]!=='objective'),cb=b.calls.filter(c=>c[0]!=='objective');
+ ok('R462 contract: on the 3D recorder (ctx.scope) every corpse draw (pool, body, ember) is owned by its own floor spot r462:corpse:<n> (scene, x·y)',a.M.corpseOwner==='r462:corpse:'&&ca.length>=5&&
+  ca.every(c=>c[2]&&c[2].kind==='scene'&&/^r462:corpse:\d+$/.test(c[2].id))&&ca.some(c=>c[2].x===3&&c[2].y===4)&&ca.some(c=>c[2].x===7&&c[2].y===2)&&new Set(ca.map(c=>c[2].id)).size===2&&ca.some(c=>c[0]==='texture')&&a.calls[0][2].id==='scene');
+ ok('R462 contract: plain 2D canvas (no ctx.scope) draws the same corpse calls with the default owner',cb.length===ca.length&&cb.every(c=>c[2].id==='scene')&&cb.map(c=>c[0]+c[1]).join()===ca.map(c=>c[0]+c[1]).join());}
 // ⑨ main R451(#331) 이 R204 낮은 돌 경계를 Sprite 대신 법선 없는 판 묶음 메시 'r451-border-runs:n|f' 로 바꿨다. 이름이 r451 로 시작해 예전 건너뛰기(^r451)에 걸리면
 //  빛을 못 받고 둘레보다 밝게 뜬다 → 세운 판(카메라 쪽 수평 법선, 앞 바닥 빛)으로 받는다. 효과 판(r450 비·r300 웅덩이·r89 화면 빛)은 그대로 건너뛴다.
 {const mat=(o={})=>({isMeshBasicMaterial:true,map:{},blending:1,...o}),mesh=(name,m=mat(),geo={attributes:{position:{}}})=>({isMesh:true,name,material:m,geometry:geo,userData:{}}),rows=new Set();

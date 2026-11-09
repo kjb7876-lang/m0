@@ -28,5 +28,17 @@ ok('void spaces get no precipitation',['u204','u203','kair08'].every(z=>!['rain'
  const B=api.budget||{},buf=v=>v.precip==='rain'?'streak':v.precip==='snow'||v.precip==='ash'?'flake':v.dust?'dust':null,half=c=>c.mobile<=c.pc*.5;
  ok('light: every count fits its one-draw buffer, mobile ≤ half of PC',Object.values(api.spec).every(v=>!v.count||B[buf(v)]>0&&v.count.pc<=B[buf(v)]&&half(v.count))&&
   Object.values(api.spec).every(v=>(!v.splash||v.splash.pc<=B.splash&&half(v.splash))&&(!v.gust||v.gust.count.pc<=B.gust&&half(v.gust.count))),B);}
+// 독립 심사 지적(11-09): 사몽 방의 room.id 는 빌린 본편 지역 id(samong-r103 id=ep.host)라, 자료 파일(108곳)에 없는 구역(S-02 시범·R162/R173 이 장마다 덧붙인 B·D·G)이
+//  본편 표·정본 날씨로 떨어졌다 — P '정화의 코어' 에 dist05 재, RC 에 ep1b03 "먼지 한 톨 없었다"·실내(R300 사몽 포자 꺼짐; R451·R452 는 사몽에서 쉼). R115 표 → 자료 → 이름만 순으로 찾고 R406 판정을 쓴다.
+{const room=(host,zone,style)=>({id:host,exploration:{samongR115:{zone},surface:{art:{r81Environment:style}}}});
+ ctx.__STORYWORLD_SAMONG_ZONES_R115__={zone:id=>id==='sz162-P-D'?{id,title:'정화의 코어',style:'stone'}:null};ctx.__STORYWORLD_PROPS_PLACE_R406__={indoorOf:()=>false};
+ const a=api.pick(room('dist05','sz162-P-D','stone')),b=api.pick(room('ep1b03','sz173-RC-G','domestic')),pb=api.placeOf(room('ep1b03','sz173-RC-G','domestic')),m=api.r300(room('ep1b03','sz173-RC-G','domestic'),true);
+ ok('samong zones outside the data file follow the samong rules, not the host story zone (no dist05 ash; no ep1b03 "not a speck of dust" / indoor)',a.kind==='none'&&a.source!=='canon'&&a.zone==='sz162-P-D'&&
+  b.kind==='none'&&b.source!=='canon'&&pb.kind==='out'&&pb.source==='samong-r406'&&(!m||m.motes!==false),{a,b,pb,m});
+ // 독립 심사 지적: 병원·집 양식이라도 R406 이 바깥이라 본 사몽 구역(봉합 정원·불탄 거리 등 11곳)은 먼지가 아니라 R300 사몽 포자 그대로
+ ctx.__STORYWORLD_SAMONG_ZONES_R115__={zone:id=>({id,title:'봉합 정원',style:'clinical'})};const g=api.pick(room('dist01','sz115-S01-2','clinical')),gm=api.r300(room('dist01','sz115-S01-2','clinical'),true);
+ ctx.__STORYWORLD_PROPS_PLACE_R406__={indoorOf:()=>true};const w=api.pick(room('dist01','sz115-S01-3','clinical'));
+ ok('outdoor samong zone with a clinical/domestic style gets no dust and keeps the samong spores; the same style indoors still gets dust',g.kind==='none'&&g.place==='out'&&(!gm||gm.motes!==false)&&w.kind==='dust'&&w.place==='in',{g,gm,w});
+ delete ctx.__STORYWORLD_SAMONG_ZONES_R115__;delete ctx.__STORYWORLD_PROPS_PLACE_R406__;}
 ok('pages.yml runs this check',fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('node r96/qa/r450/weather-r450-cpu-check.cjs'));
 done();

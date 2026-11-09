@@ -9,11 +9,12 @@
 //      → 피 웅덩이(R190 CC0 피 시트 한 칸) 위에 핏빛 시체가 남는다.
 //  · 쓰러짐은 그 몹 자기 그림을 발밑 기준으로 눕히는 것(코드 회전·납작)이라 다른 몹 그림을 빌리지 않는다.
 //  · 시체는 바닥 층(제단 그리기 바로 뒤, 몸·영웅보다 아래)에 그린다. 한 방 최대 24구(저사양 10), 45초(저사양 15초) 뒤 4초에 걸쳐 사라진다. 지역을 옮기면 비운다.
+//  · 3D 그리기에서는 사체마다 바닥 자리를 주인으로 달아(줄 열쇠 'r462:corpse:…') R451 국지 조명이 바닥과 같은 빛을 곱한다(R462-2).
 //  · 판정·보상·처치 수·저장·AI 는 그대로(그림만). 보스·중간보스는 원래 연출 그대로.
 //  · 끄기: localStorage['storyworld.r462.mobDeath']='{"on":false}' 뒤 새로고침. 시체만 끄기 {"corpses":false}.
 (()=>{'use strict';
 if(window.__STORYWORLD_MOB_DEATH_R462__)return;
-const REV='R462-mobdeath-1',KEY='storyworld.r462.mobDeath';
+const REV='R462-mobdeath-2',KEY='storyworld.r462.mobDeath';
 let prefs={on:true,corpses:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={looks:0,fire:0,blood:0,noLook:0,corpses:0,corpseDraws:0,sheetDraws:0,cleared:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
@@ -94,15 +95,19 @@ function drawDying(fx,base){const R=fx.r462,look=R.look,q=project(fx.x,fx.y),z=t
 function wrapBurn(){if(typeof drawBurnDeath3!=='function'||drawBurnDeath3.__r462)return typeof drawBurnDeath3==='function';const base=drawBurnDeath3;
  const w=function(fx,...a){try{if(fx&&adopt(fx)){drawDying(fx,base);return;}}catch(err){fail(err);}return base.apply(this,[fx,...a]);};w.__r462=true;try{drawBurnDeath3=w;}catch(_){}return true;}
 // ---- 시체 ----------------------------------------------------------------------------------------------
-let corpses=[],corpseRoom=null;
+let corpses=[],corpseRoom=null,corpseSerial=0;
+// 3D 기록기(ctx.scope 가 있을 때 = Three.js 그리기)에서는 사체마다 주인을 그 바닥 자리(x·y)로 달고 줄 열쇠를 'r462:corpse:<번호>:…' 로 한다
+//  → R451 국지 조명이 사체(웅덩이·그을음·몸)에도 바닥과 같은 빛을 곱한다. 주인이 없으면(기본 'scene') 빛 밖이라 등 밑에선 바닥보다 어둡고
+//  어두운 곳에선 바닥보다 밝게 뜬다. 주인 종류는 그대로 'scene' 이라 그리는 층·순서·화면 자리는 같다. 2D 캔버스는 그대로.
+const CORPSE_OWNER='r462:corpse:';
 function addCorpse(fx){if(typeof room==='undefined'||!room)return;if(corpseRoom!==room){corpses=[];corpseRoom=room;}const R=fx.r462,max=low()?10:24;
- corpses.push({x:fx.x,y:fx.y,kind:R.kind,look:R.look,side:R.side,seed:R.seed,t0:T()+(R.kind==='fire'?FALL.fire[1]:FALL.blood[1])});stats.corpses++;
+ corpses.push({x:fx.x,y:fx.y,kind:R.kind,look:R.look,side:R.side,seed:R.seed,uid:++corpseSerial,t0:T()+(R.kind==='fire'?FALL.fire[1]:FALL.blood[1])});stats.corpses++;
  while(corpses.length>max)corpses.shift();}
 function drawCorpses(){if(!prefs.on||!prefs.corpses||!corpses.length)return;if(typeof room==='undefined'||room!==corpseRoom){corpses=[];stats.cleared++;return;}
  const now=T(),stay=low()?15:45,z=typeof zoom==='number'&&zoom>0?zoom:1;
- corpses=corpses.filter(c=>now-c.t0<stay+4);
+ corpses=corpses.filter(c=>now-c.t0<stay+4);const scope=typeof ctx.scope==='function'?ctx.scope.bind(ctx):null;
  for(const c of corpses){const age=now-c.t0;if(age<0)continue;const q=project(c.x,c.y),hPx=Math.max(14,c.look.h*z),fade=age>stay?1-(age-stay)/4:1;if(fade<=0)continue;
-  ctx.save();try{
+  const one=()=>{ctx.save();try{
    if(c.kind==='blood'){const grow=clamp01(age/.9);sheet('pool',Math.round(3+grow*4),q.x-c.side*hPx*.1,q.y,hPx*(.55+.35*grow),.78*fade,{squash:.42,flip:(c.seed&1)===1});
     body(c.look,q.x,q.y,hPx,{side:c.side,fall:1,alpha:.95*fade,filter:'brightness(.68) saturate(1.2) contrast(1.06)'});}
    else{/* 그을린 바닥 자국: 피 웅덩이 칸을 검게(몬스터 그림자는 R444 가 없앴으므로 shadow() 는 쓰지 않음) */
@@ -110,7 +115,8 @@ function drawCorpses(){if(!prefs.on||!prefs.corpses||!corpses.length)return;if(t
     body(c.look,q.x,q.y,hPx,{side:c.side,fall:1,alpha:.96*fade,filter:'brightness(.42) saturate(.35) contrast(1.12)'});
     const glow=clamp01(1-age/4.5);if(glow>0&&typeof texture==='function'&&typeof VFX!=='undefined'&&VFX.burnFlame){const fl=.75+.25*Math.sin(now*9+c.seed%7);
      texture(VFX.burnFlame,q.x-c.side*hPx*.12,q.y-hPx*.12,hPx*.5,hPx*.22,{alpha:.22*glow*fl*fade});}}
-   stats.corpseDraws++;}catch(err){fail(err);}finally{ctx.restore();}}}
+   stats.corpseDraws++;}catch(err){fail(err);}finally{ctx.restore();}};
+  if(scope)scope({...ctx.owner,id:CORPSE_OWNER+c.uid,kind:'scene',x:c.x,y:c.y},one);else one();}}
 function wrapObjective(){if(typeof drawObjective!=='function'||drawObjective.__r462)return typeof drawObjective==='function';const base=drawObjective;
  const w=function(...a){const r=base.apply(this,a);try{drawCorpses();}catch(err){fail(err);}return r;};w.__r462=true;try{drawObjective=w;}catch(_){}return true;}
 // ---- 설치 ----------------------------------------------------------------------------------------------
@@ -119,6 +125,6 @@ function install(){try{const a=wrapDraws(),b=wrapBurn(),c=wrapObjective();ok=a&&
 install();(function arm(){if(!ok&&++tries<80&&typeof setTimeout==='function')setTimeout(()=>{install();arm();},250);})();
 try{if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=function(...a){corpses=[];corpseRoom=null;return base.apply(this,a);};}}catch(e){fail(e);}
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
-window.__STORYWORLD_MOB_DEATH_R462__=Object.freeze({revision:REV,set,kindOf,
+window.__STORYWORLD_MOB_DEATH_R462__=Object.freeze({revision:REV,set,kindOf,corpseOwner:CORPSE_OWNER,
  inspect:()=>({revision:REV,installed:ok,prefs:{...prefs},corpses:corpses.length,stats:{...stats},lastError})});
 })();

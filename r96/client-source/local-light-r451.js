@@ -17,10 +17,10 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_LOCAL_LIGHT_R451__)return;
 const A=window.StoryPhase1,C=A?.ThreeRenderer?.prototype;if(!A||!C)return;
-const REV='R451-local-light-5',KEY='storyworld.r451.localLight';
+const REV='R451-local-light-6',KEY='storyworld.r451.localLight';
 const DEFAULTS=Object.freeze({on:true,flicker:true});
 let prefs={...DEFAULTS};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');for(const k in DEFAULTS)if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
-const stats={frames:0,owned:0,bakes:0,bakeMs:0,deltas:0,deltaMs:0,deltaMaxMs:0,deltaLights:0,deltaTiles:0,lights:0,lightsUsed:0,blockers:0,texels:0,patched:0,scans:0,sigScans:0,rowsLit:0,coversLit:0,holes:0,stutters:0,errors:0};let lastError=null,disposed=false;
+const stats={frames:0,owned:0,bakes:0,bakeMs:0,deltas:0,deltaMs:0,deltaMaxMs:0,deltaLights:0,deltaTiles:0,lights:0,lightsUsed:0,blockers:0,texels:0,patched:0,scans:0,sigScans:0,rowsLit:0,coversLit:0,corpsesLit:0,holes:0,stutters:0,errors:0};let lastError=null,disposed=false;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),smooth=(a,b,x)=>{const t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t);},finite=v=>Number.isFinite(v);
 
@@ -284,15 +284,21 @@ function update(r,frame){const want=wantFor(frame);const u=uniforms(r.T);
 //  기록기가 덮개의 주인을 effect 로 바꾸고 id·r448 표시는 버리므로(실측: owner={kind,groundAligned,x,y,…}) 줄 열쇠(명령 key 'r448:over:…')로 알아본다.
 //  덮개의 주인 x·y 는 원래 조형물 것 그대로라 lightAt 값이 원본과 같다.
 const R448_COVER='r448:over:';
-function litRow(key,ow){if(!ow)return false;if(ow.kind==='prop')return true;return ow.kind==='effect'&&typeof key==='string'&&key.startsWith(R448_COVER);}
+// R462 사체(피 웅덩이·그을음·쓰러진 몸)도 바닥에 놓인 것이라 바닥과 같은 빛을 받는다. R462 가 3D 기록기에서 사체마다 주인(종류 'scene', 그 바닥 x·y)을 달고
+//  줄 열쇠를 'r462:corpse:…' 로 하므로 그것으로 알아본다(주인 없는 'scene' 줄은 화면 한가운데 기준이라 빛 자리를 모른다 → 건드리지 않음).
+//  갓 탄 사체 불씨(texture 'screen' 섞기)는 스스로 빛나는 것이라 그대로 둔다. 사체가 바탕 층(1)에 놓이는 방도 있어 그 층에서는 사체 줄만 본다.
+const R462_CORPSE='r462:corpse:';
+function litRow(key,ow){if(!ow)return false;if(ow.kind==='prop')return true;if(typeof key!=='string')return false;
+ if(ow.kind==='effect')return key.startsWith(R448_COVER);return ow.kind==='scene'&&key.startsWith(R462_CORPSE);}
 const GL_TOKEN={};
 function wrapGL(r){const gl=r.renderer;if(!gl||gl.r451Wrapped===GL_TOKEN)return;const base=gl.render;
  gl.render=function(scene,camera){const restore=[];
-  try{const pass=camera?.layers?.mask;if(o451.owned&&scene===r.scene&&camera===r.camera&&(pass===4||pass===8)){// 세계 층(2)·덧그림 층(3) 모두 — 그 층에 있는 소품 줄만
+  try{const pass=camera?.layers?.mask;if(o451.owned&&scene===r.scene&&camera===r.camera&&(pass===2||pass===4||pass===8)){// 세계 층(2)·덧그림 층(3) — 그 층에 있는 소품 줄, 바탕 층(1)은 사체 줄만
     if(pass===4)patchIfChanged(r,false);   // R91 은 벽 장식을 첫 세계 층 그리기 안에서 붙이고, R81 은 바깥 판을 프레임 만들 때 다시 만든다 — 그려지기 전에 바로 셰이더를 붙인다
     for(const [key,row] of r.commands?.rows?.entries?.()||[]){const ow=row?.geometryState?.owner,m=row?.mesh?.material;if(!litRow(key,ow)||!m?.color||!row.mesh.visible||!(row.mesh.layers.mask&pass)||!finite(ow.x+ow.y))continue;
+     if(ow.kind==='scene'){if(m.blending!==undefined&&m.blending!==1)continue;}else if(pass===2)continue;
      const L=lightAt(ow.x,ow.y);if(!L)continue;const k=[clamp(L[0],.3,1.5),clamp(L[1],.3,1.5),clamp(L[2],.3,1.5)];const rr=m.color.r,gg=m.color.g,bb=m.color.b;restore.push(()=>m.color.setRGB(rr,gg,bb));
-     m.color.setRGB(rr*k[0],gg*k[1],bb*k[2]);stats.rowsLit++;if(ow.kind!=='prop')stats.coversLit++;}}}catch(e){fail(e);}
+     m.color.setRGB(rr*k[0],gg*k[1],bb*k[2]);stats.rowsLit++;if(ow.kind==='scene')stats.corpsesLit++;else if(ow.kind!=='prop')stats.coversLit++;}}}catch(e){fail(e);}
   try{return base.call(this,scene,camera);}finally{for(let i=restore.length-1;i>=0;i--)restore[i]();}};
  gl.r451Wrapped=GL_TOKEN;}
 

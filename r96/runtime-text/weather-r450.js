@@ -11,7 +11,7 @@
 // 화면 표현만 바꾼다. 충돌·피해·저장·서사·맵 순서는 그대로. 게임 ctx.filter 는 쓰지 않는다(3D 장면 물체만).
 (()=>{'use strict';
 if(window.__STORYWORLD_WEATHER_R450__)return;
-const REV='R450-weather-3',KEY='storyworld.r450.weather';
+const REV='R450-weather-4',KEY='storyworld.r450.weather';
 const DEFAULTS=Object.freeze({on:true,precip:true,splash:true,dust:true});
 let prefs={...DEFAULTS};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s)for(const k in DEFAULTS)if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
@@ -63,7 +63,11 @@ const tier=()=>mobile()?'mobile':'pc';
 const lowFx=()=>!!(typeof settings!=='undefined'&&settings?.lowFx);
 const reduced=()=>!!(typeof settings!=='undefined'&&settings?.reducedMotion);
 function familyOf(r){try{const L=r?.exploration;return L?.surface?.art?.r81Environment||L?.worldWardR81?.environment?.family||window.__STORYWORLD_ENVIRONMENT_R81__?.specs?.[r?.id]?.family||(r?.id==='ep1a08'?'clinical':'regional');}catch(_){return 'regional';}}
-function samongZone(r){const z=r?.exploration?.samongR115?.zone;if(!z)return null;try{const d=window.__STORYWORLD_SAMONG_ZONES_R115_DATA__;for(const zs of Object.values(d?.chapters||{}))for(const q of zs||[])if(q?.id===z)return q;}catch(_){}return null;}
+// 사몽 방의 room.id 는 그 에피소드가 빌린 본편 지역 id 다(samong-r103 id=ep.host) → 구역을 못 찾으면 본편 표(PLACE)·정본 날씨(ZONES)로 잘못 떨어진다.
+//  R115 표(zone() — S-02 시범 구역·R162/R173 이 장마다 덧붙인 B·D·G 구역까지) → 자료 파일 → 그래도 없으면 이름만(사몽 구역으로는 다룸). R103 사몽 방도 사몽.
+function samongZone(r){const L=r?.exploration,z=L?.samongR115?.zone;if(!z)return L?.samongR103?{id:'samong-r103',title:''}:null;
+ try{const q=window.__STORYWORLD_SAMONG_ZONES_R115__?.zone?.(z);if(q)return q;}catch(_){}
+ try{const d=window.__STORYWORLD_SAMONG_ZONES_R115_DATA__;for(const zs of Object.values(d?.chapters||{}))for(const q of zs||[])if(q?.id===z)return q;}catch(_){}return{id:String(z),title:''};}
 // ---- 실내·실외(사용자 2026-11-09 "실내 실외구분도 잘해야해") ---------------------------------------------------------------
 // 본편 63곳을 정본 장면 문장·지역 이름·지도 양식(sourceEnvironmentKey)으로 하나씩 가렸다. R406 indoorOf 는 worldR74.mode 만 봐서
 //  병원(ep1a08)·미카엘라 쉼터 셋·흑장미단 성당 등이 '바깥'으로 잡혔다 → 날씨(R450)·조명(R451)·길가 장식(R452)은 이 표를 쓴다(사몽 구역은 R406 판정 그대로).
@@ -100,7 +104,7 @@ function pick(r){if(!r)return{kind:'none',why:'',source:'none'};const L=r.explor
  const fam=familyOf(r),pl=placeOf(r),ind=pl.kind!=='out',sz=samongZone(r);let kind='none',why='',source='family';
  if(sz){const t=String(sz.title||'');for(const[re,k]of SAMONG)if(re.test(t)){kind=k;why='사몽 구역 「'+t+'」';source='samong-title';break;}}
  else if(ZONES[r.id]){kind=ZONES[r.id].kind;why=ZONES[r.id].why;source='canon';}
- if(kind==='none'&&source==='family'&&FAMILY_KIND[fam])kind=FAMILY_KIND[fam];
+ if(kind==='none'&&source==='family'&&FAMILY_KIND[fam]&&pl.kind!=='out')kind=FAMILY_KIND[fam];   // 바깥(사몽 정원·거리 등 병원·집 양식이라도)은 먼지 대신 R300 입자 그대로
  if(ind&&PRECIP.has(kind)&&!(kind==='ash'&&INDOOR_ASH.has(r.id))){kind=kind==='ash'||pl.kind==='void'?'none':'dust';why=(why?why+' — ':'')+'하늘이 없는 곳('+pl.why+')이라 내리는 입자 대신 '+(kind==='dust'?'먼지':'없음');}
  if(source==='family'&&kind==='none'&&(pl.kind==='in'||pl.kind==='cave'))kind='dust';
  const v={kind,why,source,indoor:ind,place:pl.kind,placeWhy:pl.why,family:fam,zone:sz?.id||r.id};pickCache.set(r,{L,v});return v;}
