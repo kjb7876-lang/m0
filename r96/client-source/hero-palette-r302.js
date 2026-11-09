@@ -20,7 +20,7 @@
 //  끄기: localStorage['storyworld.r302.palette']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_HERO_PALETTE_R302__)return;
-const REV='R302-hero-palette-1',KEY='storyworld.r302.palette';
+const REV='R302-hero-palette-2',KEY='storyworld.r302.palette';
 const SILVER=[226,232,242],GOLD=[255,198,72];
 const PALETTE=Object.freeze({
  hwando:{main:[214,222,234],sub:GOLD,name:'실버',name2:'골드'},
@@ -57,7 +57,10 @@ try{
 }catch(e){fail(e);}
 // ---- ② R106 칠한 스프라이트 팔레트 ---------------------------------------------------------
 const decided=new Map(),SHORT=4,T111=/at threadSlash \(.*\/play-r111\.js:/,needFull=new Set();
-const shortOk=(file,stack)=>!!file&&!(file==='play-r111'&&!T111.test(String(stack)));
+// R441 렉: play-r111 은 4칸 스택이면 판정이 끝난다 — 은색실 threadSlash 는 스프라이트를 직접(3칸째) 또는 안쪽 cut 화살표로(4칸째) 부르고,
+//  같은 파일의 보스·자아 그림은 threadSlash 밖이다. 예전엔 threadSlash 가 4칸 안에 없으면 '더 깊을 수도' 하고 전체 스택을 늘 다시 잡아
+//  보스 그림 호출(헤드리스 dist00 12초 1,900번)마다 스택을 두 번 잡았다. 판정 결과는 같다(r441 검사가 threadSlash 구조를 확인).
+const shortOk=(file,stack)=>!!file;
 function mapPal(F,h,file){const S0=SP0;let P;try{P=S0.pal(F);}catch(_){return F;}if(!P||!P.a)return F;const C=PALETTE[h];
  let A,B;if(THREAD_FILES.has(file)){const second=isGold(P.a)||isGold(P.b)?THREAD.gold:THREAD.silver;A=C.main;B=second;}else{A=C.main;B=C.sub;}
  // 원래 어두운 쪽 → 두 색 중 어두운 쪽
@@ -96,9 +99,11 @@ function ownership(o,h){if(o?.enemy)return false;
  const values=[o?.sourceHero,o?.owner,o?.source,o?.hero].filter(v=>v!=null);
  if(!values.length)return null;
  return values.every(v=>v===h||v==='hero'||v==='player'||v===player);}
-function isHero(o,h,stack){const own=ownership(o,h);return own===null?heroCall(stack):own;}
+// R441 렉: 소유 정보가 있으면 스택을 잡지 않는다(예전엔 인자로 늘 먼저 잡았다). 잡을 땐 이 두 칸(lazyStack·isHero)만큼 한도를 늘려 같은 호출자 범위를 본다.
+function lazyStack(){const L=Error.stackTraceLimit;if(Number.isFinite(L))Error.stackTraceLimit=L+2;try{return new Error().stack;}finally{Error.stackTraceLimit=L;}}
+function isHero(o,h,stack){const own=ownership(o,h);return own===null?heroCall(typeof stack==='function'?stack():stack):own;}
 function wrapPX(){const X=window.__STORYWORLD_PIXELFX_R163__;if(!X||X.r302||X===PX0)return;PX0=X;
- const tint=(o,n)=>{const h=hero();if(!on||!h||!isHero(o,h,new Error().stack))return o;stats.pixelfx++;const C=PALETTE[h],r={...(o||{}),tint:{a:C.main,b:C.sub}};
+ const tint=(o,n)=>{const h=hero();if(!on||!h||!isHero(o,h,lazyStack))return o;stats.pixelfx++;const C=PALETTE[h],r={...(o||{}),tint:{a:C.main,b:C.sub}};
   if(FLASH.test(n)&&stripOn(h)){r.alpha=(r.alpha??1)*.45;r.k=(r.k||1)*.7;r.r302Flash=true;}return r;};
  window.__STORYWORLD_PIXELFX_R163__=Object.freeze({...X,r302:true,play:(n,x,y,o)=>{const t=tint(o||{},n);if(t?.r302Flash&&!flashOk())return null;return X.play(n,x,y,t);},frameAt:(n,u,x,y,o)=>X.frameAt(n,u,x,y,tint(o||{},n))});}
 // 영웅 띠(R292→R302)가 도는 동안: 그 영웅의 범용 적중 섬광(흰 burst·pixelfx hit/crit/flash)은 알파 .45·크기 .7, 0.4초에 2개까지(사용자 2026-11-04 환도 Q 흰 섬광이 띠를 덮음)
@@ -138,7 +143,7 @@ function markHero(e,h){e.r302=h;stats.fxMarked++;if(typeof e.color==='string')e.
 function mapColor(s,h){try{const S=SP0||window.__STORYWORLD_FX_SPRITES_R106__,c=S?.parseColour?.(s);if(!c)return s;const C=PALETTE[h],t=lum(c)>170?(lum(C.main)>lum(C.sub)?C.main:C.sub):(lum(C.main)>lum(C.sub)?C.sub:C.main);return'rgb('+t.join(',')+')';}catch(_){return s;}}
 try{
  if(typeof fx==='function'){const base=fx;fx=function(type,x,y,opt){const n0=typeof effects!=='undefined'&&Array.isArray(effects)?effects.length:0,res=base.apply(this,arguments);
-  try{const h=hero();if(on&&h&&FX_TYPES.has(type)){const mine=isHero(opt||{},h,new Error().stack);
+  try{const h=hero();if(on&&h&&FX_TYPES.has(type)){const mine=isHero(opt||{},h,lazyStack);
     if(mine)for(let i=effects.length-1;i>=n0;i--){const e=effects[i];if(e&&e.type===type&&!e.r302&&ownership(e,h)!==false){seenFx.add(e);markHero(e,h);break;}}}}catch(err){fail(err);}return res;};}
  if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){try{patchCtx(ctx);wrapSP();wrapPX();}catch(_){}if(e&&e.r302&&on){heroDraw++;try{return base.apply(this,[e,...a]);}finally{heroDraw--;}}return base.apply(this,[e,...a]);};}
  if(typeof tick==='function'){const base=tick;tick=function(...a){try{wrapSP();wrapPX();if(typeof ctx!=='undefined')patchCtx(ctx);}catch(e){fail(e);}const r=base.apply(this,a);try{markNew();}catch(e){fail(e);}return r;};}

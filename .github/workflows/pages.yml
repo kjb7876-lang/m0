@@ -434,6 +434,8 @@ jobs:
         run: node r96/qa/r438/r438-cpu-check.cjs
       - name: R447 props by room function (R224 room furniture as one wall cluster per room, empty junctions/yards/short corridors, rotation, cover fade) CPU check
         run: node r96/qa/r447/r447-cpu-check.cjs
+      - name: R441 lag (blocked memo per tick, R302 caller lookup without repeated full stacks, R409 outline cache by image address + bake budget per frame) CPU check
+        run: node r96/qa/r441/r441-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
         run: node r96/qa/r430/r430-cpu-check.cjs
       - name: R431 boss-room center fights + theme boss skill 6s + touch status/DoT + black-flame prop throws CPU check
@@ -499,6 +501,8 @@ jobs:
         run: node r96/qa/r436/hwando-walk-s-cpu-check.cjs
       - name: R439 Hwando attack blade-tip speck cleanup CPU check
         run: node r96/qa/r439/hwando-tip-cpu-check.cjs
+      - name: R440 Hwando hit pose (no old art) and hero rim blade cleanup CPU check
+        run: node r96/qa/r440/r440-cpu-check.cjs
       - name: R352 orphaned field-wave enemies wake near the hero CPU check
         run: node r96/qa/r352/wave-orphans-cpu-check.cjs
       - name: R280 stranded required enemy rescue and 777 forward range CPU check

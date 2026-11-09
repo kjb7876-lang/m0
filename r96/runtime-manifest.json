@@ -33404,8 +33404,8 @@
     },
     {
       "path": "combat-read-r409.js",
-      "bytes": 13966,
-      "sha256": "3e90636534277dcec8e778bb6b00b682e9c19e45779243f1da91a86a7b290c4c"
+      "bytes": 18830,
+      "sha256": "9ac87d9d3b10aff849aa0637596904f3bce2b6ea2663499327968622600a2ccd"
     },
     {
       "path": "crates-r108.js",
@@ -33674,8 +33674,8 @@
     },
     {
       "path": "hero-palette-r302.js",
-      "bytes": 17134,
-      "sha256": "c77b8384e2dc8aea4eeb747c3cb5c6d4e02280fd33e575974cf820dfbb63e25c"
+      "bytes": 18002,
+      "sha256": "2ea8e8a7ce318509928ed5776a7b38b0361d8a221acb2178c4c57882863379d9"
     },
     {
       "path": "hero-presentation-r83.js",
@@ -33779,8 +33779,8 @@
     },
     {
       "path": "hwando-r271.js",
-      "bytes": 12181,
-      "sha256": "56b4a3d7f25ed32abfcb1ac174c1e364742ceb16bae7cf86ee67b7995b170f70"
+      "bytes": 12724,
+      "sha256": "a2a7ff75d2e860c1ff14619b15a62acb455ed35e1f307348f64bc5114002c8c6"
     },
     {
       "path": "hwando-r277.js",
@@ -33799,8 +33799,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6571498,
-      "sha256": "42bfcbd48bf411aca0ac31b93ef90b67d5d455083cd7933ea8150576d77f998d"
+      "bytes": 6571536,
+      "sha256": "564a62082b09363ebaea428aaa43cc1528b169b40710d0982a3032610bebf0d2"
     },
     {
       "path": "intro-r140.js",
@@ -34071,6 +34071,11 @@
       "path": "perf-r367.js",
       "bytes": 7264,
       "sha256": "7770d6c1e840a8a083f8e08857858736d7c1984b34312a1aed13a06f72d76981"
+    },
+    {
+      "path": "perf-r441.js",
+      "bytes": 4197,
+      "sha256": "d36ec97a2d38e3700c00a6b50db5d41fba89022468359e5778aa8414d26fd30b"
     },
     {
       "path": "perf-r97.js",
@@ -34618,9 +34623,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6923,
-  "totalBytes": 1091410856,
-  "webHTMLSha256": "42bfcbd48bf411aca0ac31b93ef90b67d5d455083cd7933ea8150576d77f998d",
+  "fileCount": 6924,
+  "totalBytes": 1091421366,
+  "webHTMLSha256": "564a62082b09363ebaea428aaa43cc1528b169b40710d0982a3032610bebf0d2",
   "largest": [
     {
       "path": "index.html",
