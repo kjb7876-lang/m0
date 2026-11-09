@@ -19,7 +19,7 @@
 //  끄기: localStorage storyworld.r444.face {"on":false}.
 (()=>{'use strict';
 if(window.__STORYWORLD_ENEMY_FACE_R444__)return;
-const REV='R444-face-4',KEY='storyworld.r444.face';
+const REV='R444-face-5',KEY='storyworld.r444.face';
 let prefs={on:true,debug:false,shadows:false};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={updates:0,spawns:0,jumps:0,turns:0,attackLocks:0,draws:0,owner:{},errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0;
@@ -35,7 +35,8 @@ const sideX=(dx,dy)=>dx-dy;// 화면 가로 성분(엔진 facing 과 같은 변�
 function heroSide(e,p){const du=(p.x-p.y)-(e.x-e.y);return du<0?'left':'right';}
 // 맡지 않는 것: 페르소나(엔진 8방향 그림), 움직이지 않는 구조물 적(R170 탑·R446 기둥·R75 탑·R251 원·R193 탑 — 조형물 그림을 그대로 그림),
 //  맘몬 구역(사용자 2026-11-07: 맘몬 맵은 다른 곳에서 작업 — R425·R438 과 같이 뺀다).
-function structure(e){return !!(e.r170Tower||e.r446Pillar||e.r75Tower||e.r251Circle||e.towerR193||e.r193Tower||e.prop||e.object);}
+// 엔진 R75 무리의 10번째 몹(r75Tower: 제자리 원거리, 보통 몹 그림)은 맡는다 — 원거리 준비 동안 몸이 조준 쪽을 봐야 한다. R170 탑·R251 시전 원은 자기 깃발로 뺀다.
+function structure(e){return !!(e.r170Tower||e.r446Pillar||e.r251Circle||e.towerR193||e.r193Tower||e.prop||e.object);}
 function mammon(e){try{const id=String(typeof room==='object'&&room?room.id||'':'');return /mammon/i.test(id)||id==='ep1b06'||!!e.mammon||!!e.mammonR||/mammon/i.test(String(e.nativeId||''));}catch(_){return false;}}
 function managed(e){return !!(prefs.on&&e&&!e.persona&&!structure(e)&&!mammon(e));}
 function fresh(e,s){return !s||(s.hp<=0&&e.hp>0)||(s.ss!=='active'&&e.spawnState==='active'&&s.ss!==undefined);}

@@ -61,6 +61,9 @@ function frames(E,e,n,step,dt=1/60){for(let i=0;i<n;i++){E.time+=dt;if(step)step
  E.__STORYWORLD_ENEMY_FACE_R444__.set({shadows:true});frames(E,e,1);ok('{"shadows":true} brings mob shadows back',E.shadowCalls===2);}
 {const E=env();const e=mob({persona:true,direction:'back'});frames(E,e,3);ok('persona (own 8-way art) is left to the engine',E.read[E.read.length-1]==='back');}
 {const E=env();const tw=mob({r170Tower:{art:'x'},r446Pillar:true,direction:'front'});frames(E,tw,3);ok('stationary structure enemies (R170 tower / R446 pillar) are not managed: no facing, shadow left to R206',E.read[E.read.length-1]==='front'&&E.__STORYWORLD_ENEMY_FACE_R444__.left(tw)===null&&E.shadowCalls===3);}
+{const E=env(),api=E.__STORYWORLD_ENEMY_FACE_R444__;const t=mob({r75Tower:true,ai:'ranged',speed:0});E.player.x=2;E.player.y=8;frames(E,t,30);ok('R75 pack turret (r75Tower, ordinary mob art, speed 0) is managed and faces the hero while idle',api.left(t)===true);
+ t.rangedWindup=.6;t.rangedAim=0;frames(E,t,3);ok('R75 pack turret faces its ranged aim during the windup even with the hero behind',E.read[E.read.length-1]==='right'&&api.state(t).owner==='attack:ranged');t.rangedWindup=0;
+ const c=mob({r75Tower:true,r251Circle:true,speed:0,direction:'front'});frames(E,c,3);ok('R251 summoning circle (r75Tower + r251Circle) stays unmanaged',api.left(c)===null);}
 {const E=env();E.room={id:'ep1b06'};const e=mob({direction:'front'});frames(E,e,3);ok('Mammon zone (ep1b06) untouched',E.read[E.read.length-1]==='front'&&E.__STORYWORLD_ENEMY_FACE_R444__.left(e)===null);}
 {const E=env(),api=E.__STORYWORLD_ENEMY_FACE_R444__;const e=mob({});E.player.x=5;E.player.y=9;frames(E,e,1);frames(E,e,40,e=>{e.x+=1.6/60;e.y+=1.6/60;});ok('4-way sheets get south when walking clearly down-screen',api.d4(e)==='south');
  frames(E,e,40,e=>{e.x+=2/60;e.y-=2/60;});ok('4-way sheets get east when walking clearly right',api.d4(e)==='east');}
