@@ -24463,6 +24463,171 @@
       "sha256": "617e5a6bb05ea19bcd733016673aafffdda032f6b01d55c4cb07d2fcdd090908"
     },
     {
+      "path": "assets/r415/props/archive-shelf.webp",
+      "bytes": 26018,
+      "sha256": "a7165557db00ab8448b3690c496fc98df1a5e5b2e1f3ec58b6f44541298304fa"
+    },
+    {
+      "path": "assets/r415/props/arrival-display.webp",
+      "bytes": 14718,
+      "sha256": "8bd089c283bf6b88e563967b7ee558078e3efd8d5adab7ca08186721e0718d41"
+    },
+    {
+      "path": "assets/r415/props/bell.webp",
+      "bytes": 38086,
+      "sha256": "99f37978b9cf2d208080ced162b3f0e339b03d11ae3f3dec68cc15c2aa927728"
+    },
+    {
+      "path": "assets/r415/props/bent-hand.webp",
+      "bytes": 13998,
+      "sha256": "0291133fe50fc1bba431f27ab45785cd71eb629007a178db858769599b0db2f4"
+    },
+    {
+      "path": "assets/r415/props/bulletin.webp",
+      "bytes": 45196,
+      "sha256": "42d96d59d6a80adb48274c57a62058561d7aed322d3b22348026416c3bfec19a"
+    },
+    {
+      "path": "assets/r415/props/burned-books.webp",
+      "bytes": 36738,
+      "sha256": "9d0c144e36bea77e87878dddc7beca9732dd743f4ea1cdd2d95318cc1c8c1f13"
+    },
+    {
+      "path": "assets/r415/props/care-table.webp",
+      "bytes": 30080,
+      "sha256": "f4a5149f504a8cede672e9ad02a35814f4540e44f4c0a4e744568053a75f7c3f"
+    },
+    {
+      "path": "assets/r415/props/cutting-block.webp",
+      "bytes": 21434,
+      "sha256": "060684f1ef1a0586e01bf3273968a9e87248106d67c74ec7ba3f491191d68136"
+    },
+    {
+      "path": "assets/r415/props/display-window.webp",
+      "bytes": 34322,
+      "sha256": "77b87f9eaa215ef1cf72322afb3f001794176f61d0033453ffc66c44e74c8823"
+    },
+    {
+      "path": "assets/r415/props/empty-sleeve.webp",
+      "bytes": 22908,
+      "sha256": "99fdbf09cd1869e29644d4a0c68b36ef4c94540bfced4f3f0229e6eaee215c56"
+    },
+    {
+      "path": "assets/r415/props/genealogy.webp",
+      "bytes": 34942,
+      "sha256": "da3585c0cf3c11cafe30c43eaa842f63428cc4d82adf13f305ef7ba4f2bd86e5"
+    },
+    {
+      "path": "assets/r415/props/grand-desk.webp",
+      "bytes": 35928,
+      "sha256": "75faa5eb35489615abfe8c9dd54f98116e9fcfb5020bc07581b7cef9e3187afc"
+    },
+    {
+      "path": "assets/r415/props/index.json",
+      "bytes": 16598,
+      "sha256": "bcf71f60d11eead3cb41e0deaae5b9f1ca2b4bedb31bf760997be4080d74120c"
+    },
+    {
+      "path": "assets/r415/props/labcoat-chair.webp",
+      "bytes": 32032,
+      "sha256": "2afa31d116cfb86eb0abdb74dbda754bb919ee0946259b03d3017e319725adcf"
+    },
+    {
+      "path": "assets/r415/props/lobby-counter.webp",
+      "bytes": 29782,
+      "sha256": "501a58ca95e884b562010e62985027723ae13cf24bc667c80788bb1715d9cb72"
+    },
+    {
+      "path": "assets/r415/props/locker.webp",
+      "bytes": 16654,
+      "sha256": "70e5158fa50cac1f853ecabd79434a478bf8942d9a315a736699c61c00c75397"
+    },
+    {
+      "path": "assets/r415/props/low-table.webp",
+      "bytes": 15032,
+      "sha256": "c83fe534b5dbce24e867dfc85f97356a918d08e9b2429f76cee8c731676d2428"
+    },
+    {
+      "path": "assets/r415/props/machine-heart.webp",
+      "bytes": 66682,
+      "sha256": "3f8b0088f5e085869533148eb70790ed17078dd36ea049c70f06e8a204148657"
+    },
+    {
+      "path": "assets/r415/props/mailbox.webp",
+      "bytes": 51472,
+      "sha256": "15f9d0403aa4209e06d5e3b44da25f50b7823bdd222b8cd1ea2ab8a1dc692ff5"
+    },
+    {
+      "path": "assets/r415/props/manual-lever.webp",
+      "bytes": 29166,
+      "sha256": "9a2c2248ad74561decb7adb470724c83e0aa2ef5abd4071d0d07ad0e14704d54"
+    },
+    {
+      "path": "assets/r415/props/memory-rack.webp",
+      "bytes": 30062,
+      "sha256": "afa7023868a3d3888bbb0246196ea17913b990838a2266a9305b8b829b44a53c"
+    },
+    {
+      "path": "assets/r415/props/monitor.webp",
+      "bytes": 40382,
+      "sha256": "cd67441a11ce4b132028afed29d5a5874bfe829baca900739463c8e4a0f5a418"
+    },
+    {
+      "path": "assets/r415/props/news-window.webp",
+      "bytes": 54118,
+      "sha256": "7cb08cc635fd9660fe14a3be23887a4be5ae7e70a549324564e09784db005326"
+    },
+    {
+      "path": "assets/r415/props/paint-layer.webp",
+      "bytes": 41282,
+      "sha256": "f5bd2bc165cbedb0bf21c1175803223420e6a19c4c3393ada5f80ae09048c1b7"
+    },
+    {
+      "path": "assets/r415/props/paper-bowl.webp",
+      "bytes": 45176,
+      "sha256": "67ca55ba80edd3f8becaca89e97c6b741db0ed321b3efd4709a7bca7200dccbc"
+    },
+    {
+      "path": "assets/r415/props/patient-bed.webp",
+      "bytes": 29692,
+      "sha256": "3ea4263e63880d89f194d3d2c419e39d1db5109a6e54c6c63167ef647f4d7416"
+    },
+    {
+      "path": "assets/r415/props/platform.webp",
+      "bytes": 18632,
+      "sha256": "6f0bdc2b0624cb3bf9238461eb5773c2c5dccb13905539358b2fc3e39d09e5b7"
+    },
+    {
+      "path": "assets/r415/props/record-cabinet.webp",
+      "bytes": 39398,
+      "sha256": "4c70e015309efe44d9ff101c4da1b4b7695bda14a9665f3fb2a3c86d3a7fc5bd"
+    },
+    {
+      "path": "assets/r415/props/report-desk.webp",
+      "bytes": 35540,
+      "sha256": "de4887c217bbff4b8d3cc0bafca122c268385f3dae71c62373fa4fe0f20bdf1b"
+    },
+    {
+      "path": "assets/r415/props/student-desk.webp",
+      "bytes": 30302,
+      "sha256": "154fb12e62ee9711c8c57635638b04ae41d749583777747739b4cb382de852e7"
+    },
+    {
+      "path": "assets/r415/props/swamp-bed.webp",
+      "bytes": 32084,
+      "sha256": "ef541ebe9285ec209a7cc7a14af5537f9205f7d7a289beede67910e912760c34"
+    },
+    {
+      "path": "assets/r415/props/two-chair.webp",
+      "bytes": 44174,
+      "sha256": "bf4e97e536ed7a6a76b274027640228564d658fa02356c4e7db8ba7b098a4599"
+    },
+    {
+      "path": "assets/r415/props/waiting-bench.webp",
+      "bytes": 29174,
+      "sha256": "8e780ad63adc01d0f5c2dd138ca6b076627c20850aa9aff0d30fe4fa00174871"
+    },
+    {
       "path": "assets/r425/clean/assets/generated-v31224/actors-normalized/353a813314bc_Monster_FallenAngelKnight_MoveSide.webp",
       "bytes": 98980,
       "sha256": "77556d668b33f7256664f92b13e86af38eec0ca96ca2c0319a32622981c923f0"
@@ -33989,8 +34154,8 @@
     },
     {
       "path": "props-place-r406.js",
-      "bytes": 16373,
-      "sha256": "191baf49443bab677b5ad60533d4ad4b0899342a2cb2c236f6c501488358ea9a"
+      "bytes": 18022,
+      "sha256": "992da41544134d2861a984645104f7b3d8332bb07d287407ecf8fd342f1b4741"
     },
     {
       "path": "props-r102.js",
@@ -34453,8 +34618,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6890,
-  "totalBytes": 1090419402,
+  "fileCount": 6923,
+  "totalBytes": 1091502853,
   "webHTMLSha256": "c66bbdc1ca5fdbb563ae9fc2600844336f442f25b993327887968624f1deca7d",
   "largest": [
     {
