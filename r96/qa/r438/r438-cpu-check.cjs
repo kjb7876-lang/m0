@@ -1,0 +1,37 @@
+// R438 CPU check — 칠죄 보스방 조형물 정리(R224 공용 가구 빼기·지역 그림만·틀 밖 장면 장식 빼기) + R92 보스방 한가운데 등불 금지.
+'use strict';const fs=require('fs'),path=require('path'),vm=require('vm');
+const R=path.join(__dirname,'..','..'),C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8'),RT=f=>fs.readFileSync(path.join(R,'runtime-text',f),'utf8');
+let bad=0,n=0;const ok=(m,c)=>{n++;if(!c){bad++;console.log('FAIL',m);}else console.log('ok  ',m);};
+const F='bossroom-tidy-r438.js',src=C(F);
+ok('runtime copy matches client source',RT(F)===src);
+ok('visual-r92 runtime copy matches',RT('visual-r92.js')===C('visual-r92.js'));
+try{new vm.Script(src);ok('syntax',true);}catch(e){ok('syntax '+e.message,false);}
+const html=RT('index.html');
+ok('script tag once, right after surface-r435',html.split('"./'+F+'"').length===2&&/<script src="\.\/surface-r435\.js"><\/script><script src="\.\/bossroom-tidy-r438\.js"><\/script>/.test(html));
+ok('loads after sin-room-art and cave-r204',html.indexOf('sin-room-art.js')<html.indexOf(F)&&html.indexOf('cave-r204.js')<html.indexOf(F));
+ok('listed in verify-r96-public.py',/'bossroom-tidy-r438\.js'/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')));
+ok('Mammon ep1b06 untouched',!/'ep1b06'/.test(src.replace(/\/\/.*$/mg,'')));
+ok('presentation only: no hp/save/collision writes',!/\.hp\s*=[^=]|saveGame|\.walls\s*=|floorCells\s*=/.test(src));
+const r92=C('visual-r92.js');
+ok('R92: lamp posts deeper than 1.5 tiles inside a sin boss room frame become ceiling light (pool kept, post not drawn)',/l\.ceiling438=true/.test(r92)&&/bb=L0\?\.sinRoomArt&&r\?\.id!=='ep1b06'/.test(r92)&&/if\(l\.ceiling438\|\|!sightOk\(l\)\)return;/.test(r92)&&!/ceiling438/.test(r92.slice(r92.indexOf('lightPoints:'),r92.indexOf('lightPoints:')+200)));
+// 규칙 동작 — 가짜 방으로 tidy() 를 돌린다.
+const ctxObj={window:{},localStorage:{getItem:()=>null,setItem:()=>{}},setInterval:()=>0,console};ctxObj.window=ctxObj;vm.createContext(ctxObj);vm.runInContext(src,ctxObj);
+const api=ctxObj.__STORYWORLD_BOSSROOM_TIDY_R438__;ok('api exported',!!api&&typeof api.tidy==='function');
+const P=(id,x,y,extra)=>({id,x,y,...extra});
+const mk=(id)=>({id,layer:'STORY',exploration:{sinRoomArt:'sin-room-art-v1',worldWardR81:{bossBounds:[6,6,28,20]}},props:[
+ P('r224:furn:'+id+':0',20.3,6.85,{r224Furniture:true,r80Dressing:true,path:'assets/world-r80/r80-027.webp'}),
+ P('r224:furn:'+id+':1',26.7,6.85,{r224Furniture:true,r80Dressing:true,path:'assets/world-r80/r80-026.webp'}),
+ P('r224:furn:'+id+':2',1.85,50,{r224Furniture:true,r80Dressing:true,path:'assets/world-r80/r80-027.webp'}),
+ P('r224:furn:'+id+':3',1.85,60,{r224Furniture:true,r80Dressing:true,path:'assets/world-r80/r80-026.webp'}),
+ P('r81:scene:'+id+':4',30.5,8.5,{r80Dressing:true,path:'assets/world-r80/r80-026.webp'}),
+ P('r81:scene:'+id+':5',18,12,{r80Dressing:true,path:'assets/world-r80/r80-026.webp'}),
+ P('sin-art:'+id+':console',18.5,7,{sinArt:true}),P('r74:'+id+':door-0',20,20,{r74Door:true}),P('r103chest:STORY:'+id,26,8,{})]});
+const a=mk('ep1b03');api.tidy(a);const ids=a.props.map(q=>q.id);
+ok('envy: shared furniture inside boss frame+3 removed',!ids.includes('r224:furn:ep1b03:0')&&!ids.includes('r224:furn:ep1b03:1'));
+ok('envy: off-theme stove elsewhere removed, envy mirror elsewhere kept',!ids.includes('r224:furn:ep1b03:2')&&ids.includes('r224:furn:ep1b03:3'));
+ok('scene dressing in the dark margin removed, inside frame kept',!ids.includes('r81:scene:ep1b03:4')&&ids.includes('r81:scene:ep1b03:5'));
+ok('authored set, doors, chest kept',ids.includes('sin-art:ep1b03:console')&&ids.includes('r74:ep1b03:door-0')&&ids.includes('r103chest:STORY:ep1b03'));
+const m=mk('ep1b06');api.tidy(m);ok('Mammon room unchanged',m.props.length===9);
+const s=mk('ep1a09');api.tidy(s);ok('non-sin region unchanged',s.props.length===9);
+const w=mk('ep1b07');api.tidy(w);const wi=w.props.map(q=>q.id);ok('wrath: boss-room furniture removed, no theme filter elsewhere',!wi.includes('r224:furn:ep1b07:0')&&wi.includes('r224:furn:ep1b07:2'));
+console.log(n-bad+'/'+n+' ok');process.exit(bad?1:0);
