@@ -14,7 +14,7 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_NEON_LAUREN_R437__)return;
 if(typeof special!=='function'||typeof fx!=='function'||typeof drawEffect!=='function'||typeof tick!=='function'||typeof project!=='function')return;
-const REV='R437-neon-lauren-3',KEY='storyworld.r437.neonChain',SHEET='assets/r108/eden/lightning.webp',CELL=256;
+const REV='R437-neon-lauren-4',KEY='storyworld.r437.neonChain',SHEET='assets/r108/eden/lightning.webp',CELL=256;
 const MINT_DARK=[0x18,0xA8,0x9A],MINT_LIGHT=[0xB8,0xFF,0xF0];
 let enabled=true;try{if(localStorage.getItem(KEY)==='0')enabled=false;}catch(_){}
 const stats={casts:0,hops:0,linksHidden:0,dimmed:0,dimDraws:0,draws:0,errors:0,noSheet:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
@@ -76,7 +76,10 @@ let inQ=null;// 네온 Q 가 도는 동안 {origin, hit:Set}
 const DIM_TYPES=new Set(['burst','e568HeroImpact','pxfSprite','spark','flash']),DIM=.38;
 // e.alpha 를 읽지 않는 그리기(엔진 충격 그림·PXF 는 globalAlpha 를 바로 넣음)도 옅어지게, 이 효과를 그리는 동안만 ctx.globalAlpha 에 DIM 을 곱한다.
 const findAlpha=o=>{for(let q=o;q;q=Object.getPrototypeOf(q)){const d=Object.getOwnPropertyDescriptor(q,'globalAlpha');if(d)return {d,own:q===o};}return null;};
-const dimmedDraw=(c,run)=>{const f=findAlpha(c);if(!f)return run();const {d,own}=f;let back=d.get?d.get.call(c):d.value;
+const dimmedDraw=(c,run)=>{
+ // Three.js 기록기(DrawCommands)는 push 때 style() 로 globalAlpha 를 읽어 명령에 담는다 → 이 그리기가 남긴 명령의 style.globalAlpha 에 바로 곱한다.
+ if(Array.isArray(c.commands)&&typeof c.style==='function'){const st=c.commands.length;try{return run();}finally{for(let i=st;i<c.commands.length;i++){const m=c.commands[i];if(m&&m.style&&Number.isFinite(m.style.globalAlpha)){m.style={...m.style,globalAlpha:m.style.globalAlpha*DIM};stats.dimDraws++;}}}}
+ const f=findAlpha(c);if(!f)return run();const {d,own}=f;let back=d.get?d.get.call(c):d.value;
  const put=v=>{if(d.set)d.set.call(c,v);else back=v;};const raw=()=>d.get?d.get.call(c):back;
  const start=raw();try{Object.defineProperty(c,'globalAlpha',{configurable:true,enumerable:true,get(){return raw()/DIM;},set(v){put(Math.max(0,Math.min(1,Number(v)))*DIM);}});}catch(_){return run();}
  stats.dimDraws++;try{c.globalAlpha=start;return run();}

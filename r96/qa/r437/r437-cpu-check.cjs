@@ -22,6 +22,11 @@ ok('dimmed draw multiplies absolute globalAlpha and restores it',(()=>{const vm=
  const sb={started:true,room:{id:'t'},window:{},localStorage:{getItem:()=>null},player:{hero:'neon',x:0,y:0,specialCD:0},effects:[],ctx:c,special(){this.effects.push({type:'e568HeroImpact',age:0,life:1});this.player.specialCD=5;},fx(){},drawEffect(e){c.globalAlpha=.92;log.push(c.globalAlpha===.92?c._a:-1);},tick(){},project:(x,y)=>({x,y}),hitEnemy(){},liveEnemies:()=>[],clamp:(v,a,b)=>Math.max(a,Math.min(b,v))};
  sb.window=sb;sb.globalThis=sb;vm.createContext(sb);try{vm.runInContext(src,sb);sb.special();sb.drawEffect(sb.effects[0]);}catch(e){console.log('vm',e.message);return false;}
  return Math.abs(log[0]-.92*.38)<1e-6&&c.globalAlpha===1&&!Object.getOwnPropertyDescriptor(c,'globalAlpha');})());
+// Three.js 기록기 경로: push 때 style() 이 globalAlpha 를 읽는 DrawCommands 모양에서도 명령 alpha 가 DIM 배가 되는가
+ok('dimmed draw also reaches Three.js recorder command styles',(()=>{const vm=require('vm');class R{constructor(){this.globalAlpha=1;this.commands=[];}style(){return{globalAlpha:this.globalAlpha};}push(k){this.commands.push({kind:k,style:this.style()});}}const c=new R();
+ const sb={started:true,room:{id:'t'},window:{},localStorage:{getItem:()=>null},player:{hero:'neon',x:0,y:0,specialCD:0},effects:[],ctx:c,special(){this.effects.push({type:'e568HeroImpact',age:0,life:1});this.player.specialCD=5;},fx(){},drawEffect(e){c.globalAlpha=.92;c.push('image');c.globalAlpha=1;},tick(){},project:(x,y)=>({x,y}),hitEnemy(){},liveEnemies:()=>[],clamp:(v,a,b)=>Math.max(a,Math.min(b,v))};
+ sb.window=sb;sb.globalThis=sb;vm.createContext(sb);try{vm.runInContext(src,sb);sb.special();sb.drawEffect(sb.effects[0]);sb.drawEffect({type:'burst'});}catch(e){return false;}
+ return Math.abs(c.commands[0].style.globalAlpha-.92*.38)<1e-6&&c.commands[1].style.globalAlpha===.92;})());
 ok('no gameplay writes',!/\.hp\s*-?=|specialCD\s*=|\.damage\s*=|saveGame/.test(src));
 // ② 공격 시트
 for(const h of ['neon','lauren']){const I=JSON.parse(RT('assets/r437/attack/'+h+'/index.json')),E=I.directions.e,B=fs.readFileSync(path.join(R,'runtime-text',E.path));
