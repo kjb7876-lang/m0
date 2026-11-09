@@ -24,8 +24,8 @@
     },
     {
       "path": "approved-mobs-r380.js",
-      "bytes": 21023,
-      "sha256": "b06786133fb1ec2b505641fd542be4c4a236f5b7b4d25fc6021fba4a3ff143af"
+      "bytes": 21214,
+      "sha256": "dcf1ad3a2c175c0626918bbaf40fff709c655b02cd323641c94776dcfed12788"
     },
     {
       "path": "art-drive-r105.js",
@@ -15268,6 +15268,11 @@
       "sha256": "9790780db70b6ac6a3e1edd50fb4d5a562c2cbda3a4c197263d39cf99cb392c0"
     },
     {
+      "path": "assets/r380/mobs/electrode-machine-knight-v1.webp",
+      "bytes": 279738,
+      "sha256": "cd1c1eb2d2e294339138238e0bdb1d6054ab1a43902d92d3a68f2e564e00268c"
+    },
+    {
       "path": "assets/r380/mobs/false-heaven-guard-v1.webp",
       "bytes": 453210,
       "sha256": "3559064612af298e5cb3f4e9a8941aa05cb5ad36e82a8466b532a572ae8a6681"
@@ -15289,8 +15294,8 @@
     },
     {
       "path": "assets/r380/mobs/index.json",
-      "bytes": 182124,
-      "sha256": "3f99de69ed50e695d7315a507840a5c852f4af470e334c39aedf6e0d87adb7a2"
+      "bytes": 184030,
+      "sha256": "1a1e35d525677a8fb9f22d7adb45f010a199b90c8279f960b9f135c79fdd8fb1"
     },
     {
       "path": "assets/r380/mobs/jealousy-wraith-v1.webp",
@@ -24489,8 +24494,8 @@
     },
     {
       "path": "assets/r425/gaze.json",
-      "bytes": 13965,
-      "sha256": "4b3d029872a6fa988fb6e8c7db16a35f12227098204eabc0d4019ec940bf18f8"
+      "bytes": 14016,
+      "sha256": "2ed0ea9601d203bb54e40c29fac2a4bf20dae48d5cbcb3618b5c1fc24d62b3b5"
     },
     {
       "path": "assets/r425/hunter/attack-l.webp",
@@ -34408,8 +34413,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6881,
-  "totalBytes": 1087397355,
+  "fileCount": 6882,
+  "totalBytes": 1087679241,
   "webHTMLSha256": "d1c6b651337432d35f36898437e538380fe31929777786aeba8d094df42ce870",
   "largest": [
     {

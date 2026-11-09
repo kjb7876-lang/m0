@@ -7,7 +7,7 @@
 //  · 그림만 엔진 frameFor 사슬에 내준다. 판정·보상·저장은 그대로. storyworld.r380.mobs {on:false} 로 끈다(이동·개명은 새로 만드는 지역부터).
 (()=>{'use strict';
 if(window.__STORYWORLD_APPROVED_MOBS_R380__)return;
-const REV='R397',KEY='storyworld.r380.mobs',INDEX='assets/r380/mobs/index.json';
+const REV='R437',KEY='storyworld.r380.mobs',INDEX='assets/r380/mobs/index.json';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={assigned:0,frames:0,waiting:0,removed:0,added:0,renamed:0,reinstalls:0,errors:0,deaths:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 let idx=null;if(typeof fetch==='function')fetch(INDEX).then(r=>r.ok?r.json():null).then(j=>{if(j?.mobs)idx=j;}).catch(fail);
@@ -18,7 +18,8 @@ const T=()=>typeof time==='number'?time:performance.now()/1000;
 const hash=s=>{let h=2166136261;for(const c of String(s))h=Math.imul(h^c.charCodeAt(0),16777619);return (h>>>0)/4294967296;};
 const attacking=e=>!!(e?.attack&&Number.isFinite(e.attack.elapsed));
 const SPIDER=/망각의 거미/,MECH='기계화 망각거미';
-const RENAME=[['ep1a10','갈망의 도시짐승','약을 갈망하는 자'],['ep1a10','오만의 흰 가면','암시장의 수상한 자'],['dist02','늪에서 되살아난 전우','늪에서 되살아난 혼령체'],
+const RENAME=[['ep1b08','전극을 두른 좀비 수호기사','전극기계수호기사'],// R437 검수 목록 41 "하늘맵에는 전극기계수호기사" — 우두머리·번호 꼬리는 그대로
+ ['ep1a10','갈망의 도시짐승','약을 갈망하는 자'],['ep1a10','오만의 흰 가면','암시장의 수상한 자'],['dist02','늪에서 되살아난 전우','늪에서 되살아난 혼령체'],
  // R382: 검수 목록 v18 29·31·32·40·46·47·54–57·66·67 개명.
  ['ep1b02','미뤄 둔 시간의 형상','살아 움직이는 쓰레기들'],['ep1b03','찢어진 사진의 망령','질투로 얼룩진 망령'],['ep1b03','칼날과 유리 조각','추녀의 한탄'],
  ['ep1b09','인간의 뇌를 닮은 투명 연산 장치','걸어다니는 소형 로봇'],['ep1b09','설원 아래의 기계 다리','설원 잠복 보행기'],['u201','폭격기억 사이보그 사냥개','전쟁기계사냥개'],
