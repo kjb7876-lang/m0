@@ -27,9 +27,15 @@ const overlap=(a,b)=>Math.max(0,Math.min(a.x1,b.x1)-Math.max(a.x0,b.x0))*Math.ma
 const propMemo={props:null,map:null,n:-1};
 function propOf(id){try{const P=typeof room!=='undefined'&&room?room.props:null;if(!Array.isArray(P))return null;
  if(propMemo.props!==P||propMemo.n!==P.length){const m=new Map();for(const q of P)if(q&&q.id!=null)m.set('prop:'+q.id,q);propMemo.props=P;propMemo.map=m;propMemo.n=P.length;}return propMemo.map.get(String(id))||null;}catch(e){fail(e);return null;}}
-function heroCommands(commands){const out=[];for(const c of commands)if(c&&c.kind==='image'&&c.owner?.kind==='hero'&&!c.owner.r350&&!c.owner.r448)out.push(c);
- if(out.length>1&&out.some(c=>c.owner.id!==out[0].owner.id)){let best=null,bd=Infinity;try{for(const c of out){const d=Math.hypot((c.owner.x??0)-player.x,(c.owner.y??0)-player.y);if(d<bd){bd=d;best=c.owner.id;}}}catch(_){}return out.filter(c=>c.owner.id===best);}
- return out;}
+// 영웅 몸 그림만 고른다(R350 heroCommands 와 같은 순서): spatialRole 'body' → 경로에 영웅 id 가 든 것·원본 캔버스(mutable) → 가장 큰 그림.
+//  EGO·사몽·막기 때 엔진 drawHero 가 같은 주인으로 오라·결계 그림을 함께 기록하므로, 다 고르면 상자가 부풀고 오라까지 실루엣으로 다시 그렸다(Codex 리뷰).
+const area=c=>{const q=bbox(c);return q?(q.x1-q.x0)*(q.y1-q.y0):0;};
+function heroCommands(commands){const all=[];for(const c of commands)if(c&&c.kind==='image'&&c.owner?.kind==='hero'&&!c.owner.r350&&!c.owner.r448)all.push(c);if(!all.length)return all;
+ let mine=all;if(all.some(c=>c.owner.id!==all[0].owner.id)){let best=null,bd=Infinity;try{for(const c of all){const d=Math.hypot((c.owner.x??0)-player.x,(c.owner.y??0)-player.y);if(d<bd){bd=d;best=c.owner.id;}}}catch(_){}mine=all.filter(c=>c.owner.id===best);}
+ const body=mine.filter(c=>c.spatialRole==='body'||c.r350Lifted);if(body.length)return body;
+ let id='';try{id=String(player?.hero||'');}catch(_){}
+ const named=mine.filter(c=>c.mutable||(id&&String(c.sourcePath||'').includes(id)));if(named.length)return named;
+ return [mine.reduce((a,c)=>area(c)>area(a)?c:a)];}
 function process(commands){
  if(!on||!Array.isArray(commands)||!commands.length)return;stats.frames++;
  const heroes=heroCommands(commands);if(!heroes.length)return;
