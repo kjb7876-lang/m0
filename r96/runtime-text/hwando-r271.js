@@ -23,7 +23,10 @@ function loadIndex(){if(IDX||idxReq||typeof fetch!=='function')return;idxReq=tru
 const solo=()=>{let m=null;try{m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();}catch(_){}return !m||m==='off';};
 const T=()=>typeof time==='number'?time:0;
 const asked=new Map();
-function image(p){try{const row=typeof readyImage==='function'?readyImage(p):null;if(row?.image)return row.image;const t=Date.now();if(t-(asked.get(p)||0)>1000){asked.set(p,t);stats.loads++;if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});else if(typeof addImage==='function')addImage(p);}}catch(e){fail(e);}stats.waiting++;return null;}
+/* R440(사용자 2026-11-09 "환도영웅에 옛 이미지 갑자기 등장 버그"): 지역에 들어서면 엔진 그림 캐시가 다시 채워지는 몇 프레임 동안 readyImage 가 비어
+   R271 이 그리지 못하고 엔진 옛 그림(hero-authored v314 아틀라스)이 2~3프레임 튀었다 → 한 번 받은 환도 그림은 여기서 쥐고 있다가 그때 쓴다. */
+const KEEP=new Map();
+function image(p){try{const row=typeof readyImage==='function'?readyImage(p):null;if(row?.image){if(!KEEP.has(p))KEEP.set(p,row.image);return row.image;}{const k=KEEP.get(p);if(k&&(k.naturalWidth||k.width)){stats.kept=(stats.kept||0)+1;return k;}}const t=Date.now();if(t-(asked.get(p)||0)>1000){asked.set(p,t);stats.loads++;if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});else if(typeof addImage==='function')addImage(p);}}catch(e){fail(e);}stats.waiting++;return null;}
 // 동작·방향 → 그림 (새 팩 → W 는 E 미러 → R242 대체)
 function res(anim,dir){const N=IDX?.anims?.[anim];if(N?.[dir]?.file)return {A:N[dir],base:BASE,mir:false};if(dir==='w'&&N?.e?.file)return {A:N.e,base:BASE,mir:true};
  const O=window.__STORYWORLD_HWANDO_R242__?.index?.(),dk=dir==='w'?'e':dir,A=O?.anims?.[anim]?.[dk]||O?.anims?.[anim]?.s;if(!A)return null;return {A,base:OLD,mir:dir==='w',body:O.anims.walk?.[dk]?.body||A.body||180,old:true};}
