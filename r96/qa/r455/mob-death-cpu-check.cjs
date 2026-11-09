@@ -4,7 +4,7 @@ const C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8'),RT=f=>fs.readF
 let pass=0,fail=0;const ok=(n,c)=>{if(c){pass++;console.log('PASS',n);}else{fail++;console.log('FAIL',n);}};
 const F='mob-death-r455.js',src=C(F);
 ok('runtime copy matches source',src===RT(F));try{new vm.Script(src);ok('syntax',true);}catch(e){ok('syntax '+e.message,false);}
-const html=RT('index.html');ok('script tag once, right after depth-overlap-r448, before combat-r118',html.split('"./'+F+'"').length===2&&html.includes('<script src="./depth-overlap-r448.js"></script><script src="./mob-death-r455.js"></script>')&&html.indexOf('"./'+F+'"')<html.indexOf('"./combat-r118.js"'));
+const html=RT('index.html');ok('script tag once, right after cinema-run-r461, before combat-r118',html.split('"./'+F+'"').length===2&&html.includes('<script src="./cinema-run-r461.js"></script><script src="./mob-death-r455.js"></script>')&&html.indexOf('"./'+F+'"')<html.indexOf('"./combat-r118.js"'));
 ok('listed in verify-r96-public.py',/'mob-death-r455\.js'/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')));
 ok('no gameplay writes (hp/damage/kill/save/reward)',!/\.hp\s*=[^=]|damage\s*=|killEnemy\s*\(|saveGame|gainXP|room\.kills/.test(src));
 ok('no monster shadow() drawing (R444 removed monster shadows)',!/shadow\(/.test(src.replace(/\/\*[\s\S]*?\*\//g,'').replace(/\/\/.*$/gm,'')));
