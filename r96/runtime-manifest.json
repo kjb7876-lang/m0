@@ -32889,8 +32889,8 @@
     },
     {
       "path": "boss-arena-r431.js",
-      "bytes": 9754,
-      "sha256": "0507e2b6072442c171de08f0bb63ebe67dfd33aa6f3ee49dd392279cfa976d45"
+      "bytes": 13212,
+      "sha256": "b69a8451603bf3c840e301651d4a737ceb2a7441854318ba2926aaa7600982ef"
     },
     {
       "path": "boss-meteor-r241.js",
@@ -32919,8 +32919,8 @@
     },
     {
       "path": "cave-r204.js",
-      "bytes": 116381,
-      "sha256": "37716fb8d9b6fa1a2637864da9da29bb0de418008a88dcb8f12670a175a9e9d8"
+      "bytes": 123606,
+      "sha256": "2689a920fdf36817b1a17de4b5f35810711c596b27e3d4d2ae5e81de40f6da01"
     },
     {
       "path": "chunks/ep1a08-0-0.json",
@@ -33614,8 +33614,8 @@
     },
     {
       "path": "era-r191.js",
-      "bytes": 4378,
-      "sha256": "fb5c5aa6f554cff679e972461968048b6c736df115ac8e813e97a587169b7e85"
+      "bytes": 7455,
+      "sha256": "fe2689833ffe1f2151e9265128a066327b5e53257c355f3d7a3f5c52fbd1a383"
     },
     {
       "path": "feet-r143.js",
@@ -34224,8 +34224,8 @@
     },
     {
       "path": "props-static-r105.js",
-      "bytes": 6482,
-      "sha256": "29c89a776282d09cbe54b6392828bc8fa26596f63c1463697bee5cf72332f490"
+      "bytes": 13416,
+      "sha256": "f7ef0795a3fd7836bd39301c67d0adf2652659a0fe5a9ecebe7fb54c41437817"
     },
     {
       "path": "props-tidy-r412.js",
@@ -34679,7 +34679,7 @@
     }
   ],
   "fileCount": 6935,
-  "totalBytes": 1091731417,
+  "totalBytes": 1091752111,
   "webHTMLSha256": "498f9011d0eb96b3372bcad410d9e10640e0ab89f0896a807b70ee358cc900c5",
   "largest": [
     {
