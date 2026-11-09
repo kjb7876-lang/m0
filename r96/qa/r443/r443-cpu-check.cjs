@@ -18,6 +18,7 @@ ok('shader cache keys change with the edge option',/'r204-ground-v1'\+\(prefs\.e
 ok('no additive grey lift on plateau tops (multiplicative darkening only + lip)',!/vec3\(0\.06,0\.065,0\.075\)/.test(cave));
 // ---- ② 둥글게 + ③ 문 둘레 ----
 ok('pillars: rounded tip profile and none on low camera-side plateau or in the door band',/\[\[0,1\],\[\.45,\.76\],\[\.74,\.5\],\[\.9,\.3\],\[1,\.02\]\]/.test(cave)&&/nearDoorR443\(F,x,y,true\)\|\|topHeight\(F,cfg,x,y\)<\(cfg\.loTop\+cfg\.hiTop\)\/2/.test(cave));
+ok('lone 1-cell pillar next to a door: walls and cell change together in the layout hook (no invisible wall left)',/nx=dePillar\(nx\|\|L,L\)\|\|nx/.test(cave)&&/floorCells:\[\.\.\.ex\.floorCells,\.\.\.addCells\],walls:ex\.walls\.filter/.test(cave));
 ok('trees, uprights and boulders keep out of the door band',(cave.match(/nearDoorR443\(F,/g)||[]).length>=4);
 (async()=>{
  const sb={console,Math,JSON,Set,Map,WeakMap,Promise,Float32Array,Uint8Array,Int32Array,Array,Object,Number,String,Error,performance:{now:()=>0},setInterval:()=>0,localStorage:{_:{},getItem(k){return this._[k]??null;},setItem(k,v){this._[k]=v;}},

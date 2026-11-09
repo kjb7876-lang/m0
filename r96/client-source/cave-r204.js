@@ -311,6 +311,22 @@ function widen(ex,cfg,doorPts){const W=ex.bounds[2],H=ex.bounds[3],key=(x,y)=>x+
     if(dropSet.has(key(...a))||dropSet.has(key(...b))){keepWalls.push(unit(w,e,'r'+(n++)));blockedEdge.add(ek);}}}}
  const floorCells=[...ex.floorCells,...[...reachAdd].map(k=>k.split(',').map(Number))];
  const out={...ex,floorCells,walls:keepWalls,r204Widened:{added:reachAdd.size,dropped,wallsRemoved:removed,before:S.size,after:S.size+reachAdd.size}};Object.defineProperty(out,'r204Source',{value:ex});return out;}
+// R443 문 곁 외딴 1칸 기둥 빼기(사용자 2026-11-09 보스방 문 옆 네모 바위 덩어리에 "이것도 없애"): R171 틀은 보스방 문 안쪽(18..19,17..18)에 벽판 4장으로 둘러싼
+//  1칸 기둥을 두는데, R204 에서는 두께 1.4칸 네모 바위로 그려져 문 바로 옆에 각진 덩어리로 섰다. 문 둘레 5칸 안에서 사방 8칸이 모두 바닥인 외딴 1칸 상자만
+//  골라 벽판 4장을 빼고 그 칸을 바닥으로 더한다(그림과 충돌이 같이 — 보이지 않는 벽이 남지 않게). 문 벽·긴 벽·다른 칸막이는 그대로. 끄기 {round:false}.
+function dePillar(ex,src){if(prefs.round===false||!ex?.floorCells)return null;const key=(x,y)=>x+','+y,S=new Set(ex.floorCells.map(c=>key(c.x??c[0],c.y??c[1]))),doors=layoutDoorPoints(src||ex);
+ const cellOf=w=>{const e=w.endpoints;if(!e||e.length!==2||/door/i.test(String(w.id||'')))return null;const [[x0,y0],[x1,y1]]=e;if(![x0,y0,x1,y1].every(Number.isInteger))return null;
+  if(x0===x1&&Math.abs(y1-y0)===1)return [['v',x0,Math.min(y0,y1)]];if(y0===y1&&Math.abs(x1-x0)===1)return [['h',Math.min(x0,x1),y0]];return null;};
+ const edges=new Map();ex.walls.forEach((w,i)=>{const c=cellOf(w);if(c)edges.set(c[0].join(':'),i);});
+ const drop=new Set(),addCells=[];
+ for(const k of edges.keys()){const [t,x,y]=k.split(':');if(t!=='h')continue;const cx=+x,cy=+y;// 위 가장자리 h:x:y 로 상자 (cx,cy) 후보
+  const box=['h:'+cx+':'+cy,'h:'+cx+':'+(cy+1),'v:'+cx+':'+cy,'v:'+(cx+1)+':'+cy];if(!box.every(b=>edges.has(b)))continue;
+  let ring=true;for(let dy=-1;dy<=1&&ring;dy++)for(let dx=-1;dx<=1;dx++){if(!dx&&!dy)continue;if(!S.has(key(cx+dx,cy+dy))){ring=false;break;}}if(!ring)continue;
+  if(!doors.some(d=>Math.hypot(d[0]-cx-.5,d[1]-cy-.5)<5))continue;
+  for(const b of box)drop.add(edges.get(b));if(!S.has(key(cx,cy)))addCells.push([cx,cy]);}
+ if(!drop.size)return null;stats.pillarsRemoved=(stats.pillarsRemoved||0)+drop.size/4;
+ const out={...ex,floorCells:[...ex.floorCells,...addCells],walls:ex.walls.filter((w,i)=>!drop.has(i)),r204Widened:{...(ex.r204Widened||{added:0,dropped:0,wallsRemoved:0,before:S.size,after:S.size}),pillarsRemoved:drop.size/4}};
+ if(!ex.r204Source)Object.defineProperty(out,'r204Source',{value:ex});else Object.defineProperty(out,'r204Source',{value:ex.r204Source});return out;}
 // R219 실내 넓히기(사용자 2026-11-02 "이동가능한공간이 적고 벽지붕 같은 공간 너무 이질감이 있고 너무 많아서 … 맵 외곽쪽을 벽으로 채워서 여기가 진짜 내부라는 점이 들도록 모든실내맵"):
 //  디테일 전용(실내) 지역은 R171 병동 틀(68×70)에서 바닥이 42%뿐이고 나머지가 지붕 덮개였다. 바닥을 둘레로 최대 depth 칸(기본 3) 넓히되
 //  ① 길로 먼 두 곳(원래 바닥 위 4방향 길 거리 > 1.5×직선거리+4)이 만나는 자리는 1칸 벽(이음매)으로 남겨 방·구역 구분을 지키고
@@ -386,7 +402,7 @@ window.__STORYWORLD_LAYOUT_HOOK_R204__=(id,L)=>{try{if(!prefs.on||!solo()||!L?.f
     (현대·실내 디테일 전용과 첫 거점 hub 은 빼고)에 같은 넓히기를 쓴다. 안전 규칙(문 둘레·가장자리·긴 벽·두 통로 사이 얇은 벽·새 지름길 금지)은 그대로. */
  const allOn=prefs.widenAll!==false&&ZONES[id]&&!ZONES[id].decorOnly&&id!=='hub';
  if(!prefs.widen||!(ZONES[id]?.widen||allOn))return null;
- const nx=widen(L,ZONES[id]?.widen?ZONES[id]:{...ZONES[id],widenR:ZONES[id].widenR||1.5,widenHW:ZONES[id].widenHW||2},layoutDoorPoints(L));widened.set(L,nx);if(nx)stats.widened=nx.r204Widened;return nx;}catch(e){fail(e);return null;}};
+ let nx=widen(L,ZONES[id]?.widen?ZONES[id]:{...ZONES[id],widenR:ZONES[id].widenR||1.5,widenHW:ZONES[id].widenHW||2},layoutDoorPoints(L));nx=dePillar(nx||L,L)||nx;widened.set(L,nx);if(nx)stats.widened=nx.r204Widened;return nx;}catch(e){fail(e);return null;}};
 
 // ---- 게임 쪽 거리장: 이동 판정(blocked)과 렌더러가 같은 것을 쓴다 ------------------------------------
 // 첫 렌더 때(몹·조형물이 다 놓인 뒤) 만든다. 만들기 전에는 막는 것도 그리는 것도 없다(Legacy 렌더러도 그대로).
