@@ -33165,7 +33165,7 @@
     {
       "path": "combat-read-r409.js",
       "bytes": 13966,
-      "sha256": "6e1d7486b35de117ba91e0b244f0d968ddb593d9cc96468c1605cb595271d354"
+      "sha256": "3e90636534277dcec8e778bb6b00b682e9c19e45779243f1da91a86a7b290c4c"
     },
     {
       "path": "crates-r108.js",
@@ -33259,8 +33259,8 @@
     },
     {
       "path": "drive-buildings-r414.js",
-      "bytes": 9060,
-      "sha256": "090b3bddb7965aa092291910bc5ee30c1051556adb2d7dbd869a371ba6923cac"
+      "bytes": 9554,
+      "sha256": "3953e753725747314f0918aef50ac95d26ac7bd1d7f3c85ebc45df970a3f155b"
     },
     {
       "path": "drive-props-r138.js",
@@ -33555,7 +33555,7 @@
     {
       "path": "index.html",
       "bytes": 6571324,
-      "sha256": "e52b5a8ff46f0c1b7a57d44595636ec87aa2bb3491f2c0a7a47d5b53bcbbf1e5"
+      "sha256": "4647f9599ab93bb676af73f34ebd559c265c041a13500a73e9cf0ab91e4c852b"
     },
     {
       "path": "intro-r140.js",
@@ -33938,9 +33938,9 @@
       "sha256": "dbaa9a987f2cb916e0310aedc3770f2030ed9f3d58d6397ca999e012dae98e9b"
     },
     {
-      "path": "readability-r433.js",
+      "path": "readability-r434.js",
       "bytes": 8426,
-      "sha256": "9a863315b2b51060a2b21916f8fe6cbad67beb32d7a5c3b64e25fbdb887a1583"
+      "sha256": "793c1af3885d78dca5ce0a78c37a59ed5b2226688e9e206b95ec5bb15c299283"
     },
     {
       "path": "real-mode-r376.js",
@@ -34334,8 +34334,8 @@
     },
     {
       "path": "world-outdoor-r99.js",
-      "bytes": 15949,
-      "sha256": "0f8bd6d9180cb2c629a95df833775a0855b247e4c991dee958cd30846f036102"
+      "bytes": 16477,
+      "sha256": "a8ac44ab92391fecdb45bd386e43d0da8395a229e21f3fb21bee311a8eb32305"
     },
     {
       "path": "world-presentation-r81.js",
@@ -34364,8 +34364,8 @@
     }
   ],
   "fileCount": 6872,
-  "totalBytes": 1086875469,
-  "webHTMLSha256": "e52b5a8ff46f0c1b7a57d44595636ec87aa2bb3491f2c0a7a47d5b53bcbbf1e5",
+  "totalBytes": 1086876491,
+  "webHTMLSha256": "4647f9599ab93bb676af73f34ebd559c265c041a13500a73e9cf0ab91e4c852b",
   "largest": [
     {
       "path": "index.html",

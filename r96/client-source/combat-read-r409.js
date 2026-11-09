@@ -36,11 +36,11 @@ const overlap=(a,b)=>Math.max(0,Math.min(a.x1,b.x1)-Math.max(a.x0,b.x0))*Math.ma
 const LOOK={
  enemy:{outer:'rgba(170,22,26,0.62)',inner:'rgba(14,4,6,0.92)',k:1},
  hero:{outer:'rgba(255,232,170,0.55)',inner:'rgba(40,24,8,0.70)',k:.8}};
-// R433(사용자 2026-11-08 "보고한 바탕으로 개선" — 디아블로·이터널 리턴식 실루엣): 상아색 테는 옅은 영웅 그림과 갈색 바닥 위에서 거의 안 보였다.
+// R434(사용자 2026-11-08 "보고한 바탕으로 개선" — 디아블로·이터널 리턴식 실루엣): 상아색 테는 옅은 영웅 그림과 갈색 바닥 위에서 거의 안 보였다.
 //  → 영웅 테를 그 영웅 고유색(R302)의 차가운 빛으로(따뜻한 바닥과 보색 대비), 안쪽 선은 더 진하게·조금 두껍게.
-//  붉은 계열 고유색(미카엘라·슬레이어·헌터)은 적 테(핏빛)와 섞이지 않게 은색(보조색). 끄기: localStorage storyworld.r433.readability {"heroRim":false}.
+//  붉은 계열 고유색(미카엘라·슬레이어·헌터)은 적 테(핏빛)와 섞이지 않게 은색(보조색). 끄기: localStorage storyworld.r434.readability {"heroRim":false}.
 const RED_HERO=new Set(['michaela','slayer','hunter']);
-function heroRimOn(){try{return JSON.parse(localStorage.getItem('storyworld.r433.readability')||'{}').heroRim!==false;}catch(_){return true;}}
+function heroRimOn(){try{return JSON.parse(localStorage.getItem('storyworld.r434.readability')||'{}').heroRim!==false;}catch(_){return true;}}
 function heroLook(){try{if(!heroRimOn())return null;const id=typeof player!=='undefined'&&player?String(player.hero||''):'';const P=window.__STORYWORLD_HERO_PALETTE_R302__?.palette?.[id];if(!P)return null;
  const c=RED_HERO.has(id)?(P.sub||[226,232,242]):P.main;return{key:'hero:'+id,outer:'rgba('+c.join(',')+',0.72)',inner:'rgba(6,8,12,0.88)',k:1.05};}catch(_){return null;}}
 const BUCKETS=[1,2,3,4,6,8,11,15,20];

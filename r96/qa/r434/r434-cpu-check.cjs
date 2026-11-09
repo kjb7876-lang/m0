@@ -1,13 +1,13 @@
-// R433 CPU check — 등급 발밑 기운, 고요할 때 HUD 낮추기, 곡 이름 한 곳만, R409 영웅 고유색 테.
+// R434 CPU check — 등급 발밑 기운, 고요할 때 HUD 낮추기, 곡 이름 한 곳만, R409 영웅 고유색 테.
 'use strict';const fs=require('fs'),path=require('path'),vm=require('vm');
 const R=path.join(__dirname,'..','..'),C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8'),RT=f=>fs.readFileSync(path.join(R,'runtime-text',f),'utf8');
 let bad=0,n=0;const ok=(m,c)=>{n++;if(!c){bad++;console.log('FAIL',m);}else console.log('ok  ',m);};
-const F='readability-r433.js',src=C(F);
+const F='readability-r434.js',src=C(F);
 ok('runtime copy matches client source',RT(F)===src);
 try{new vm.Script(src);ok('syntax',true);}catch(e){ok('syntax '+e.message,false);}
 const html=RT('index.html');
-ok('script tag once, right after access-r420 and before combat-read-r409',html.split('"./'+F+'"').length===2&&/<script src="\.\/access-r420\.js"><\/script><script src="\.\/readability-r433\.js"><\/script><script src="\.\/combat-read-r409\.js"><\/script>/.test(html));
-ok('listed in verify-r96-public.py',/'readability-r433\.js'/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')));
+ok('script tag once, right after access-r420 and before combat-read-r409',html.split('"./'+F+'"').length===2&&/<script src="\.\/access-r420\.js"><\/script><script src="\.\/readability-r434\.js"><\/script><script src="\.\/combat-read-r409\.js"><\/script>/.test(html));
+ok('listed in verify-r96-public.py',/'readability-r434\.js'/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')));
 ok('presentation only: no damage/cooldown/hp/save writes',!/\.hp\s*=[^=]|attackCD\s*=|\.damage\s*=|saveGame|localStorage\.setItem\((?!KEY)/.test(src));
 ok('no hexagram/rune sprites (enemy aura uses glow/ring only)',!/'rune'|'runecross'|'hex'/.test(src));
 ok('Mammon vault skipped',/SKIP_REGION=new Set\(\['ep1b06'\]\)/.test(src));
@@ -27,7 +27,7 @@ function env(o={}){const draws=[],scopes=[],toasts=[];const S={on:()=>true,draw:
 {const t=env();t.e.drawEnemy({id:'b',x:1,y:1,hp:5,boss:true});ok('boss: deep ring + blood pulse, no glow (white core)',t.draws.length===2&&t.draws[1].F.b[0]===209&&!t.draws.some(d=>d.name==='glow'));}
 {const t=env();t.e.drawEnemy({id:'b',x:1,y:1,hp:0,boss:true});ok('dead boss: no aura',t.draws.length===0);}
 {const t=env({region:'ep1b06'});t.e.drawEnemy({id:'b',x:1,y:1,hp:5,boss:true});ok('Mammon vault: no aura',t.draws.length===0);}
-{const t=env({store:[['storyworld.r433.readability','{"rank":false}']]});t.e.drawEnemy({id:'b',x:1,y:1,hp:5,boss:true});ok('rank off switch',t.draws.length===0);}
+{const t=env({store:[['storyworld.r434.readability','{"rank":false}']]});t.e.drawEnemy({id:'b',x:1,y:1,hp:5,boss:true});ok('rank off switch',t.draws.length===0);}
 {const t=env();t.e.toast('♪ 쇼팽 — Chopin',2.6);t.e.toast('적 처치',2);ok('music toast skipped while header shows track; other toasts kept',t.toasts.length===1&&t.toasts[0]==='적 처치');}
 {const t=env({headerH:0});t.e.toast('♪ 쇼팽 — Chopin',2.6);ok('music toast kept when header hidden (mobile)',t.toasts.length===1);}
 // R409 hero rim uses hero palette, red heroes use silver

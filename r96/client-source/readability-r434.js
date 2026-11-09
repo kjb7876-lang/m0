@@ -1,4 +1,4 @@
-// R433 — 사용자 2026-11-08 "너가 보고한 바 바탕으로 개선"(리니지·디아블로·이터널 리턴·이터널 시티 대비 시각 조사 1~3번).
+// R434 — 사용자 2026-11-08 "너가 보고한 바 바탕으로 개선"(리니지·디아블로·이터널 리턴·이터널 시티 대비 시각 조사 1~3번).
 //  다른 게임의 그림·코드는 쓰지 않고 원리만 따른다. 판정·피해·AI·저장·서사·맵 순서는 그대로(그림·HUD 표시만).
 //  ① 등급 발밑 기운(디아블로 정예 표시·리니지 이름 색 원리): 살아 있는 중간보스(midboss·miniBoss·구역 수호·병원 강화 중간보스)는
 //     발밑에 핏빛 암적(#641B25 계열) 고리, 보스(boss·r104Boss·persona)는 같은 고리 위에 선혈 적색(#D12835)이 1.6초마다 짧게 맥동.
@@ -10,11 +10,11 @@
 //     적이 다가오거나, 키를 누르거나, 마우스를 HUD 에 올리면 곧바로 원래대로. 모바일·좁은 화면은 그대로.
 //  ③ 곡 이름 한 곳만: 지역에 들어올 때 같은 곡 이름이 머리띠(R313)·아래 알림(R195/R308 toast)·곡 소개 쪽지(R331)에 세 번 겹쳤다
 //     → 머리띠가 보이는 동안 '♪ ' 로 시작하는 알림 toast 만 건너뛴다(머리띠가 숨는 모바일 실플레이에서는 그대로).
-//  끄기: localStorage['storyworld.r433.readability']='{"rank":false,"calm":false,"bgmOnce":false,"heroRim":false}'
+//  끄기: localStorage['storyworld.r434.readability']='{"rank":false,"calm":false,"bgmOnce":false,"heroRim":false}'
 //  (heroRim 은 combat-read-r409 영웅 테 — 고유색 차가운 테 — 를 예전 상아색으로 되돌린다).
 (()=>{'use strict';
-if(window.__STORYWORLD_READABILITY_R433__)return;
-const REV='R433-readability-1',KEY='storyworld.r433.readability';
+if(window.__STORYWORLD_READABILITY_R434__)return;
+const REV='R434-readability-1',KEY='storyworld.r434.readability';
 const DEF={rank:true,calm:true,bgmOnce:true,heroRim:true};
 let prefs={...DEF};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object')for(const k of Object.keys(DEF))if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={auras:0,bossAuras:0,calmOn:0,calmOff:0,toastsSkipped:0,errors:0};let lastError=null;
@@ -40,7 +40,7 @@ function aura(e){const S=window.__STORYWORLD_FX_SPRITES_R106__;if(!S?.on?.()||ty
   if(boss&&engaged){const ph=(t%1.6)/1.6,k=Math.max(0,1-ph*1.6);/* 짧은 맥동, 나머지는 고요 */
    if(k>0)S.draw('ring',P.blood,q.x,q.y,R*2*(1+ph*.35),R*2*(1+ph*.35),{squash:.5,alpha:.55*k});}};
  const scope=ctx.scope;
- if(typeof scope==='function')scope.call(ctx,{id:'r433:rank:'+(e.id??Math.round(e.x*8)+','+Math.round(e.y*8)),kind:'effect',x:e.x,y:e.y,groundAligned:true,r433:true,enemy:true},paint);else paint();
+ if(typeof scope==='function')scope.call(ctx,{id:'r434:rank:'+(e.id??Math.round(e.x*8)+','+Math.round(e.y*8)),kind:'effect',x:e.x,y:e.y,groundAligned:true,r434:true,enemy:true},paint);else paint();
  stats.auras++;if(boss)stats.bossAuras++;}
 if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){if(prefs.rank&&e&&!SKIP_REGION.has(regionId())){try{aura(e);}catch(err){fail(err);}}return base.call(this,e,...a);};}
 
@@ -52,13 +52,13 @@ function enemyNear(){try{if(typeof room==='undefined'||!room||!Array.isArray(roo
 function tickCalm(){try{const b=document.body;if(!b)return;
  const want=prefs.calm&&b.classList.contains('r420-focus')&&!(typeof modal!=='undefined'&&modal)&&!(typeof storyScene!=='undefined'&&storyScene);
  let next=false;if(want){const n=nowS();if(enemyNear()||n-pokeT<CALM_AFTER){quietSince=null;}else{if(quietSince==null)quietSince=n;next=n-quietSince>=CALM_AFTER;}}else quietSince=null;
- if(next!==calm){calm=next;b.classList.toggle('r433-calm',calm);calm?stats.calmOn++:stats.calmOff++;}}catch(e){fail(e);}}
-const poke=()=>{pokeT=nowS();if(calm){calm=false;quietSince=null;try{document.body.classList.remove('r433-calm');stats.calmOff++;}catch(_){}}};
+ if(next!==calm){calm=next;b.classList.toggle('r434-calm',calm);calm?stats.calmOn++:stats.calmOff++;}}catch(e){fail(e);}}
+const poke=()=>{pokeT=nowS();if(calm){calm=false;quietSince=null;try{document.body.classList.remove('r434-calm');stats.calmOff++;}catch(_){}}};
 addEventListener('keydown',poke,true);
-function css(){if(document.getElementById('readabilityR433Css'))return;const s=document.createElement('style');s.id='readabilityR433Css';
+function css(){if(document.getElementById('readabilityR434Css'))return;const s=document.createElement('style');s.id='readabilityR434Css';
  s.textContent='@media (min-width:781px) and (pointer:fine){'
   +'body.r420-focus footer .hotbar{transition:opacity .6s ease,transform .6s ease;transform-origin:50% 100%}'
-  +'body.r420-focus.r433-calm footer:not(:hover) .hotbar{opacity:.45;transform:scale(.86)}'
+  +'body.r420-focus.r434-calm footer:not(:hover) .hotbar{opacity:.45;transform:scale(.86)}'
   +'}';
  (document.head||document.documentElement).appendChild(s);}
 css();setInterval(tickCalm,250);
@@ -66,11 +66,11 @@ css();setInterval(tickCalm,250);
 // ③ 곡 이름 한 곳만 ---------------------------------------------------------------------------
 function headerShowsBgm(){try{const H=window.__STORYWORLD_HUD_BGM_HWANDO_R313__;const txt=H?.currentText?.();if(!txt)return false;
  const h=document.querySelector('header');if(!h)return false;const r=h.getBoundingClientRect();return r.height>8&&getComputedStyle(h).display!=='none'&&getComputedStyle(h).visibility!=='hidden';}catch(e){fail(e);return false;}}
-function wrapToast(){if(typeof toast!=='function'||toast.__r433)return;const base=toast;const w=function(msg,...a){if(prefs.bgmOnce&&typeof msg==='string'&&msg.startsWith('♪ ')&&headerShowsBgm()){stats.toastsSkipped++;return;}return base.call(this,msg,...a);};w.__r433=true;
+function wrapToast(){if(typeof toast!=='function'||toast.__r434)return;const base=toast;const w=function(msg,...a){if(prefs.bgmOnce&&typeof msg==='string'&&msg.startsWith('♪ ')&&headerShowsBgm()){stats.toastsSkipped++;return;}return base.call(this,msg,...a);};w.__r434=true;
  for(const k of Object.keys(base))try{w[k]=base[k];}catch(_){}toast=w;}
 wrapToast();setInterval(wrapToast,1000);
 
-function set(p){if(p&&typeof p==='object')for(const k of Object.keys(DEF))if(typeof p[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}if(!prefs.calm){calm=false;try{document.body.classList.remove('r433-calm');}catch(_){}}return{...prefs};}
-window.__STORYWORLD_READABILITY_R433__=Object.freeze({revision:REV,set,isBoss,isMid,
+function set(p){if(p&&typeof p==='object')for(const k of Object.keys(DEF))if(typeof p[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}if(!prefs.calm){calm=false;try{document.body.classList.remove('r434-calm');}catch(_){}}return{...prefs};}
+window.__STORYWORLD_READABILITY_R434__=Object.freeze({revision:REV,set,isBoss,isMid,
  inspect:()=>({revision:REV,prefs:{...prefs},calm,stats:{...stats},lastError,presentationOnly:true,gameplayChanged:false,savesTouched:false})});
 })();
