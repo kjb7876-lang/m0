@@ -28,7 +28,7 @@
 //  끄기: localStorage['storyworld.r447.space']='{"on":false}' (부분: {"furnish":false} 가구 규칙만, {"fade":false} 가림 완화만)
 (()=>{'use strict';
 if(window.__STORYWORLD_PROPS_SPACE_R447__)return;
-const REV='R447-props-space-5',KEY='storyworld.r447.space';
+const REV='R447-props-space-6',KEY='storyworld.r447.space';
 const prefs={on:true,furnish:true,fade:true};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(prefs))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={regions:0,rooms:0,kept:0,hidden:0,skippedBoss:0,emptyRooms:0,rhythmEmpty:0,lateHidden:0,reloads:0,faded:0,errors:0};let lastError=null;
@@ -242,13 +242,17 @@ function targets(r){let m=targetMemo.get(r);if(m&&m.L===r.exploration&&m.n===r.p
  targetMemo.set(r,{L:r.exploration,n:r.props.length,list});return list;}
 function spotOf(p){const t=p.r111To;let on=true;try{on=window.__STORYWORLD_PLAY_R111__?.prefs?.().props!==false;}catch(_){}return on&&t&&fin(t.x+t.y)&&!(p.r299||p.r317||p.r138Lift)?t:p;}
 function coverAlpha(p){if(!prefs.on||!prefs.fade||!p||p.r303Hide||!(+p.height>=56)||typeof project!=='function'||typeof room==='undefined'||!room)return 1;
- const s=spotOf(p);if(!fin(s.x+s.y))return 1;const z=typeof zoom==='number'?zoom:1,hp=+p.height*z;let row=null;try{row=typeof readyImage==='function'?readyImage(p.path):null;}catch(_){}
+ const s=spotOf(p),sx=+s.x,sy=+s.y,depth=sx+sy-.15;if(!fin(depth))return 1;
+ // 먼저 세계 좌표로 거른다(뒤쪽·5칸 안) — 후보가 없으면 그림 크기·투영을 셈하지 않는다(매 프레임 키 큰 소품마다 도는 곳이라 할당·투영을 줄임)
+ let cand=null;
+ for(const e of room.enemies||[]){if(!e||!(e.hp>0)||e.visible===false||e.spawnState==='hidden')continue;const x=+e.x,y=+e.y;if(!(x+y<depth)||Math.abs(x-sx)>5||Math.abs(y-sy)>5)continue;(cand||(cand=[])).push(x,y,e.boss?2.05:1,.4);}
+ for(const t of targets(room)){if(!(t.x+t.y<depth)||Math.abs(t.x-sx)>5||Math.abs(t.y-sy)>5)continue;(cand||(cand=[])).push(t.x,t.y,t.h,.5);}
+ if(!cand)return 1;
+ const z=typeof zoom==='number'?zoom:1,hp=+p.height*z;let row=null;try{row=typeof readyImage==='function'?readyImage(p.path):null;}catch(_){}
  const cw=row?(row.crop?.w||row.image?.naturalWidth||0):0,ch=row?(row.crop?.h||row.image?.naturalHeight||0):0,wp=ch>0?hp*cw/ch:hp*.8;
- const q=project(s.x,s.y),left=q.x-wp*.42,right=q.x+wp*.42,top=q.y-hp*.92,depth=s.x+s.y,ah=typeof actorHeight==='function'?actorHeight():60;
- const hit=(x,y,h)=>{if(x+y>=depth-.15||Math.abs(x-s.x)>5||Math.abs(y-s.y)>5)return false;const e=project(x,y);if(e.x<left||e.x>right)return false;const mid=e.y-h*.5;return mid>top&&mid<q.y-4;};
- for(const e of room.enemies||[]){if(!e||!(e.hp>0)||e.visible===false||e.spawnState==='hidden'||!fin(e.x+e.y))continue;if(hit(e.x,e.y,ah*(e.boss?2.05:1)))return .4;}
- for(const t of targets(room))if(hit(t.x,t.y,ah*t.h))return .5;
- return 1;}
+ const q=project(sx,sy),left=q.x-wp*.42,right=q.x+wp*.42,top=q.y-hp*.92,ah=typeof actorHeight==='function'?actorHeight():60;let k=1;
+ for(let i=0;i<cand.length;i+=4){const e=project(cand[i],cand[i+1]);if(e.x<left||e.x>right)continue;const mid=e.y-ah*cand[i+2]*.5;if(mid>top&&mid<q.y-4&&cand[i+3]<k){k=cand[i+3];if(k<=.4)break;}}/* 몹·보스 .4, 문·제단·목표·상자 .5 */
+ return k;}
 
 // ---- 그리기 감싸기 ---------------------------------------------------------------------------------
 try{if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){
