@@ -14,7 +14,7 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_NEON_LAUREN_R437__)return;
 if(typeof special!=='function'||typeof fx!=='function'||typeof drawEffect!=='function'||typeof tick!=='function'||typeof project!=='function')return;
-const REV='R437-neon-lauren-4',KEY='storyworld.r437.neonChain',SHEET='assets/r108/eden/lightning.webp',CELL=256;
+const REV='R437-neon-lauren-5',KEY='storyworld.r437.neonChain',SHEET='assets/r108/eden/lightning.webp',CELL=256;
 const MINT_DARK=[0x18,0xA8,0x9A],MINT_LIGHT=[0xB8,0xFF,0xF0];
 let enabled=true;try{if(localStorage.getItem(KEY)==='0')enabled=false;}catch(_){}
 const stats={casts:0,hops:0,linksHidden:0,dimmed:0,dimDraws:0,draws:0,errors:0,noSheet:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
@@ -87,7 +87,8 @@ const dimmedDraw=(c,run)=>{
 const effectBase=drawEffect;drawEffect=function(e){if(e&&e.type==='r437-neon-chain'){try{drawAll();}catch(err){fail(err);}return;}
  if(e&&e.r437Dim&&enabled&&typeof ctx!=='undefined'&&ctx){const self=this,args=arguments;return dimmedDraw(ctx,()=>effectBase.apply(self,args));}
  return effectBase.apply(this,arguments);};
-const dimNew=n0=>{if(typeof effects==='undefined'||!Array.isArray(effects))return;for(let i=n0;i<effects.length;i++){const e=effects[i];if(e&&!e.r437Dim&&(DIM_TYPES.has(e.type)||/burst-impact|impact/.test(String(e.asset||e.src||'')))){e.r437Dim=true;stats.dimmed++;}}};
+// 엔진 fx() 는 상한(80/160)에서 맨 앞을 빼고 넣으므로 길이가 아니라 '전에 없던 효과'로 찾는다.
+const dimNew=old=>{if(typeof effects==='undefined'||!Array.isArray(effects))return;for(let i=0;i<effects.length;i++){const e=effects[i];if(old.has(e))continue;if(e&&!e.r437Dim&&(DIM_TYPES.has(e.type)||/burst-impact|impact/.test(String(e.asset||e.src||'')))){e.r437Dim=true;stats.dimmed++;}}};
 const tickBase=tick;tick=function(dt){const r=tickBase.call(this,dt);try{if(!mint&&enabled&&live()&&player.hero==='neon')sheet();/* 네온이면 미리 민트 사본을 만든다(첫 Q 에 빈 화면 방지) */const d=Number.isFinite(dt)?clamp(dt,0,.1):0;for(const c of list)c.t+=d;for(let i=list.length-1;i>=0;i--)if(list[i].t>list[i].life)list.splice(i,1);
  if(list.length&&typeof effects!=='undefined'&&Array.isArray(effects)&&!effects.includes(SENTINEL)){SENTINEL.age=0;effects.push(SENTINEL);}}catch(e){fail(e);}return r;};
 if(typeof enterRegion==='function'){const eb=enterRegion;enterRegion=async function(...a){const r=await eb.apply(this,a);if(r!==false)list.length=0;return r;};}
@@ -96,7 +97,7 @@ const fxBase=fx;fx=function(type,x,y,opt){if(inQ&&type==='link'){stats.linksHidd
 // Q 가 맞힌 적 모으기
 if(typeof hitEnemy==='function'){const hb=hitEnemy;hitEnemy=function(e,...a){const alive=!!(e&&e.hp>0),r=hb.call(this,e,...a);try{if(inQ&&alive&&e)inQ.hit.add(e);}catch(err){fail(err);}return r;};}
 const specialBase=special;special=function(...a){if(!live()||!ownsHero(player.hero)||player.specialCD>0||(window.__STORYWORLD_EGO151__?.inspect?.().state?.active))return specialBase.apply(this,a);
- const prev=inQ,before=player.specialCD,cur={origin:{x:player.x,y:player.y},hit:new Set()},n0=typeof effects!=='undefined'&&Array.isArray(effects)?effects.length:0;inQ=cur;let r;
+ const prev=inQ,before=player.specialCD,cur={origin:{x:player.x,y:player.y},hit:new Set()},n0=new Set(typeof effects!=='undefined'&&Array.isArray(effects)?effects:[]);inQ=cur;let r;
  try{r=specialBase.apply(this,a);}finally{inQ=prev;}
  try{if(enabled)dimNew(n0);}catch(err){fail(err);}
  try{if(player.specialCD>before&&cur.hit.size)launch(cur.origin,[...cur.hit]);}catch(err){fail(err);}return r;};
