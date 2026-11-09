@@ -225,7 +225,7 @@ function field(ex,cfg,protect){
  //  (보이는 바닥 ⊆ 걸을 수 있는 칸 — R204 약속): 불룩·잔물결·두껍게 하기로 생긴 뾰족한 끝만 깎이고, 칸 모서리 자체는 raw 까지만. 끄기 storyworld.r204.cave {round:false}.
  let rounded=0;if(prefs.round!==false){const RO=cfg.roundR??.6,dC=new Float32Array(N).fill(INF);for(let k=0;k<N;k++)if(f[k]<=-RO)dC[k]=0;pass(dC);
   for(let k=0;k<N;k++){const v=f[k];if(v>=0||v<-.6||!dC[k])continue;const d=dC[k]/R;if(d<=RO+.03||d>1.35)continue;const want=Math.min(.08,d-RO,raw[k]);if(want>v+.005){f[k]=want;rounded++;}}}
- stats.rounded=(stats.rounded||0)+rounded;
+ stats.tipsRounded=(stats.tipsRounded||0)+rounded;
  let mod=0;for(let k=0;k<N;k++)if(raw[k]>0&&raw[k]-f[k]>.3)mod++;
  return {W,H,GW,GH,f,raw,inside,walk,CW,G:blur(blur(blur(blur(f)))),bulgedCells:Math.round(mod/(R*R)),protect:prot.length};
 }
