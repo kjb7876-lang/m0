@@ -531,6 +531,8 @@ jobs:
         run: node r96/qa/r462/mob-death-cpu-check.cjs
       - name: R481 outdoor groves (understory around trees, small woods on bare back rims) CPU check
         run: node r96/qa/r481/grove-r481-cpu-check.cjs
+      - name: R501 settings conflicts (title settings kept after continue, flashlight box drives the sight mode) CPU check
+        run: node r96/qa/r501/r501-cpu-check.cjs
       - name: R471 sin bosses throw the objects the canon names (sloth heap/fridge/sofa/bed pending, envy glass) instead of room furniture CPU check
         run: node r96/qa/r471/canon-throw-cpu-check.cjs
       - name: R472 chairman enrage seals the hero's sight (canon eyes and body sealed), lifts on scene/death/room change CPU check
