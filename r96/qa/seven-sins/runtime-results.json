@@ -1,9 +1,9 @@
 {
   "build": {
-    "files": 6876,
-    "bytes": 1087038789,
-    "runtimeManifestSHA256": "fa19b83ec7b85340172df91ae47c71ad46d64c1101b379fecca62349bd42542a",
-    "sourceCommit": "edc22f5c82e4e1bb2796c54b6d4957d3f5092c78"
+    "files": 6880,
+    "bytes": 1087851887,
+    "runtimeManifestSHA256": "dd5633e49b18263e0d2b8c5a0a3d0b69a8c9cf562aec3aea59c9324565d63b8d",
+    "sourceCommit": "3ef02afe9724000ee322672cdd9efe41048678e7"
   },
   "boot": {
     "booted": true,
@@ -160,6 +160,42 @@
           {
             "id": "cabinet",
             "blocked": true
+          },
+          {
+            "id": "gWardrobe1",
+            "blocked": true
+          },
+          {
+            "id": "gWardrobe2",
+            "blocked": true
+          },
+          {
+            "id": "gMirror",
+            "blocked": true
+          },
+          {
+            "id": "gCabinet",
+            "blocked": true
+          },
+          {
+            "id": "gConsole",
+            "blocked": true
+          },
+          {
+            "id": "gSofaN",
+            "blocked": true
+          },
+          {
+            "id": "gTableN",
+            "blocked": true
+          },
+          {
+            "id": "gSofaW",
+            "blocked": true
+          },
+          {
+            "id": "gTableW",
+            "blocked": true
           }
         ],
         "centre": false,
@@ -186,6 +222,42 @@
         },
         {
           "id": "sin-art:ep1b03:cabinet",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b03:gWardrobe1",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b03:gWardrobe2",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b03:gMirror",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b03:gCabinet",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b03:gConsole",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b03:gSofaN",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b03:gTableN",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b03:gSofaW",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b03:gTableW",
           "height": 0.01
         }
       ],

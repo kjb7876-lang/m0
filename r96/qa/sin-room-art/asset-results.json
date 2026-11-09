@@ -88,5 +88,20 @@
       255
     ],
     "corner": 0
+  },
+  {
+    "theme": "envyLounge",
+    "path": "assets/sin-rooms/envy-lounge.webp",
+    "sha256": "36d7cac0fba5c5f2d76c8b12ed836635d32db7bd311edeb7ccb511d7dade568f",
+    "size": [
+      1024,
+      695
+    ],
+    "mode": "RGBA",
+    "alpha": [
+      0,
+      255
+    ],
+    "corner": 0
   }
 ]

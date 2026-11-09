@@ -28398,14 +28398,19 @@
       "sha256": "cdf8e6f68869de641ba7df9238e46fbbe8cd072dcd760b638b5746f69e193011"
     },
     {
+      "path": "assets/sin-rooms/envy-lounge.webp",
+      "bytes": 110630,
+      "sha256": "36d7cac0fba5c5f2d76c8b12ed836635d32db7bd311edeb7ccb511d7dade568f"
+    },
+    {
       "path": "assets/sin-rooms/glutton-kitchen.png",
       "bytes": 1509149,
       "sha256": "b75bac00de20dabd0e5b57835392eda05fe03e41f11a42d58b1204420de62a8d"
     },
     {
       "path": "assets/sin-rooms/index.json",
-      "bytes": 9015,
-      "sha256": "027e3526499f0d9c0c68c9b49d37111c3a00d86ed83fe1af7b5951aac70ea6b5"
+      "bytes": 11960,
+      "sha256": "f0aec1fd91e894faa782ab31bbe4584da417d261ead9ea8e276a523e338b64c0"
     },
     {
       "path": "assets/sin-rooms/lust-bar.png",
@@ -34094,8 +34099,8 @@
     },
     {
       "path": "sin-room-art.js",
-      "bytes": 17102,
-      "sha256": "fdbb027ad13cb160b34d9a33e3416057da0286d6df739951bcf11f4b3f61c242"
+      "bytes": 20885,
+      "sha256": "9f9f517be2fdf5eca16f43b2095c19d65055b2bf4f3c0132ae9f68527ea78efc"
     },
     {
       "path": "skill-fx-r292.js",
@@ -34294,8 +34299,8 @@
     },
     {
       "path": "visual-r92.js",
-      "bytes": 19880,
-      "sha256": "2b64db6337a89da420e3620fffd5fe8ad24a3870b559c60db9dd98f48bb67c6a"
+      "bytes": 20326,
+      "sha256": "b3d81166ef15cf1617ed319e1da923d7e39c0e1bacb7e255b735a767e903faa3"
     },
     {
       "path": "visual-r93-ui.js",
@@ -34398,8 +34403,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6879,
-  "totalBytes": 1087734083,
+  "fileCount": 6880,
+  "totalBytes": 1087851887,
   "webHTMLSha256": "96375e189d8c4bcb33b618928d3b2763362f60225129c0a463f6ea2dd96747e8",
   "largest": [
     {
