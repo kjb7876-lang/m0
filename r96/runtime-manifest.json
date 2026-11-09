@@ -32659,8 +32659,8 @@
     },
     {
       "path": "attack-anim-r143.js",
-      "bytes": 18020,
-      "sha256": "55dd3b0092336ef6374446a4f738e0a4fee5edd201bc6d1d76684dd1c97fe6a7"
+      "bytes": 18882,
+      "sha256": "3bdb605c04a9aa1cb40d113450539b98191cc67ceec4afd662b7c800c83818ca"
     },
     {
       "path": "audio-r108.js",
@@ -33563,6 +33563,11 @@
       "sha256": "577694609c82a750b62b6a970443df726e58919768f7a9dfb2a2add66a1dd133"
     },
     {
+      "path": "enemy-skill-pose-r442.js",
+      "bytes": 3182,
+      "sha256": "547bcc67ba068c0e34ae9ebe87d183c9a471e69c15d3f17eacaca18eebeda5d3"
+    },
+    {
       "path": "env-props-r299.js",
       "bytes": 12928,
       "sha256": "0bdf729e4cb743cb43a699032196a134273abf0aae9667ed4f266980ee9ce619"
@@ -33789,8 +33794,8 @@
     },
     {
       "path": "hwando-r271.js",
-      "bytes": 12724,
-      "sha256": "a2a7ff75d2e860c1ff14619b15a62acb455ed35e1f307348f64bc5114002c8c6"
+      "bytes": 13463,
+      "sha256": "dd88edafdb58ccaf99f88ffa49c830cba456607336c69c0a292647c9b91a74e7"
     },
     {
       "path": "hwando-r277.js",
@@ -33809,8 +33814,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6571491,
-      "sha256": "d50992db3c93fb604a6e81efdbbb9a164d6f9e5b59c5202804933eed6750a714"
+      "bytes": 6571587,
+      "sha256": "3f231e2c9de2fe75ba237442214a88c7cb9b01c7bab190fb666837fc3338d024"
     },
     {
       "path": "intro-r140.js",
@@ -34328,6 +34333,11 @@
       "sha256": "fdbb027ad13cb160b34d9a33e3416057da0286d6df739951bcf11f4b3f61c242"
     },
     {
+      "path": "skill-attack-r440.js",
+      "bytes": 4115,
+      "sha256": "1cacf913a2e66913a79c1aad34925c5dd2563cb4d09c0aaac7bed8868bd7a7c0"
+    },
+    {
       "path": "skill-fx-r292.js",
       "bytes": 12208,
       "sha256": "bfc841cf6fbf3f3ae99c8f0b71e60c8b194c1c6efedecb7cde3c65ad1b657ddd"
@@ -34429,8 +34439,8 @@
     },
     {
       "path": "theme-fx-r430.js",
-      "bytes": 26997,
-      "sha256": "32be9da80db36e8ad08d5745edc92243ba4ef3e76e2ae3f3a77e34f68191f9f6"
+      "bytes": 27224,
+      "sha256": "b129bd0b8144aced4316c42149acbfcd8dec40b973f5077d6b9f9333eb601b23"
     },
     {
       "path": "threads-r243.js",
@@ -34628,9 +34638,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6925,
-  "totalBytes": 1091477323,
-  "webHTMLSha256": "d50992db3c93fb604a6e81efdbbb9a164d6f9e5b59c5202804933eed6750a714",
+  "fileCount": 6927,
+  "totalBytes": 1091486544,
+  "webHTMLSha256": "3f231e2c9de2fe75ba237442214a88c7cb9b01c7bab190fb666837fc3338d024",
   "largest": [
     {
       "path": "index.html",
