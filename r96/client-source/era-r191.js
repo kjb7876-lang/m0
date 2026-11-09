@@ -31,15 +31,15 @@ try{if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...
 function set(o){prefs={...prefs,...o};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
 window.__STORYWORLD_ERA_R191__=Object.freeze({revision:REV,set,eraOf,apply,TECH,MODERN,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},era:typeof room!=='undefined'?eraOf(room):null,lastError})});
 })();
-// R443 — R74 순찰 '재 나방'(ash, 지도 그림 4칸: 접은 날개·날개 든 준비·펼친 공격·접은 회복)이 걷거나 쫓을 때 날갯짓하며 움직이게
+// R447 — R74 순찰 '재 나방'(ash, 지도 그림 4칸: 접은 날개·날개 든 준비·펼친 공격·접은 회복)이 걷거나 쫓을 때 날갯짓하며 움직이게
 //  (사용자 2026-11-09 "몹 날개짓하는 모션있는데 이동시 날갯짓하면서 이동하도록").
 //  · 원래는 공격하지 않을 때 늘 'idle'(날개 접은) 한 칸만 그려서, 날개를 퍼덕이는 그림은 공격 때만 보였다.
 //  · 움직이는 동안(엔진 e.moving, 또는 0.2초 안에 자리가 바뀜)만 그 몹의 기존 칸 [접음 → 듦 → 접음(회복) → 듦] 을 초당 9칸으로 돈다.
 //    공격 칸(펼쳐 할퀴기·가루)은 쓰지 않는다. 새 그림·칸 수 변경 없음. 공격·맞음·죽음·서 있음은 그대로. 판정·수치도 그대로(그림만).
-//  · 날개 없는 순찰 양식(root·clock·glass)은 건드리지 않는다. 끄기: localStorage['storyworld.r443.flap']='{"on":false}'.
+//  · 날개 없는 순찰 양식(root·clock·glass)은 건드리지 않는다. 끄기: localStorage['storyworld.r447.flap']='{"on":false}'.
 (()=>{'use strict';
-if(window.__STORYWORLD_MOB_FLAP_R443__)return;
-const REV='R443-flap-1',KEY='storyworld.r443.flap',FPS=9,FLAP=Object.freeze({ash:Object.freeze(['idle','windup','recover','windup'])});
+if(window.__STORYWORLD_MOB_FLAP_R447__)return;
+const REV='R447-flap-1',KEY='storyworld.r447.flap',FPS=9,FLAP=Object.freeze({ash:Object.freeze(['idle','windup','recover','windup'])});
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={flaps:0,installs:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const T=()=>typeof time==='number'?time:0,seen=new WeakMap();
@@ -47,11 +47,11 @@ function moving(e){if(e.moving)return true;const t=T();let s=seen.get(e);if(!s){
  if(Math.hypot(e.x-s.x,e.y-s.y)>.004){s.x=e.x;s.y=e.y;s.at=t;}return t-s.at<.2;}
 function flapPhase(e){const seq=FLAP[e?.r74Monster];if(!prefs.on||!seq||!(e.hp>0)||e.spawnState==='dead'||e.attack||e.rangedWindup>0||e.hitTimer>0||!moving(e))return null;
  const seed=typeof e.id==='string'?e.id.length*.37:0;return seq[Math.floor(T()*FPS+seed)%seq.length];}
-function install(){const A=window.__STORYWORLD_PHASE1_ART__,W=window.__STORYWORLD_WORLD_R74__;if(!A||typeof A.enemy!=='function'||typeof W?.atlasFrame!=='function')return false;if(A.__r443)return true;
- const base=A.enemy;window.__STORYWORLD_PHASE1_ART__=Object.freeze({...A,__r443:true,enemy(e){const r=base.call(this,e);try{if(r&&r.state==='idle'&&e?.r74Monster){const ph=flapPhase(e);
-   if(ph&&ph!=='idle'){const f=W.atlasFrame('monsters',e.r74Monster+':'+ph);if(f){stats.flaps++;return {...r,path:f.path,frame:{...f,flip:r.flip,r74Monster:true,r443Flap:ph},r443Flap:ph};}}}}catch(err){fail(err);}return r;}});
+function install(){const A=window.__STORYWORLD_PHASE1_ART__,W=window.__STORYWORLD_WORLD_R74__;if(!A||typeof A.enemy!=='function'||typeof W?.atlasFrame!=='function')return false;if(A.__r447)return true;
+ const base=A.enemy;window.__STORYWORLD_PHASE1_ART__=Object.freeze({...A,__r447:true,enemy(e){const r=base.call(this,e);try{if(r&&r.state==='idle'&&e?.r74Monster){const ph=flapPhase(e);
+   if(ph&&ph!=='idle'){const f=W.atlasFrame('monsters',e.r74Monster+':'+ph);if(f){stats.flaps++;return {...r,path:f.path,frame:{...f,flip:r.flip,r74Monster:true,r447Flap:ph},r447Flap:ph};}}}}catch(err){fail(err);}return r;}});
  stats.installs++;return true;}
 let tries=0;(function arm(){try{if(install())return;}catch(e){fail(e);}if(++tries<80&&typeof setTimeout==='function')setTimeout(arm,250);})();
 function set(o){prefs={...prefs,...o};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return {...prefs};}
-window.__STORYWORLD_MOB_FLAP_R443__=Object.freeze({revision:REV,FLAP,FPS,flapPhase,install,set,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},installed:!!window.__STORYWORLD_PHASE1_ART__?.__r443,lastError})});
+window.__STORYWORLD_MOB_FLAP_R447__=Object.freeze({revision:REV,FLAP,FPS,flapPhase,install,set,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},installed:!!window.__STORYWORLD_PHASE1_ART__?.__r447,lastError})});
 })();

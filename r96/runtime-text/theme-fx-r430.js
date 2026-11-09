@@ -159,6 +159,7 @@ function castSkill(e,kind,tg){const t=T(),K=KIND[kind],n=e.hp/Math.max(1,e.maxHp
  if(n>1)for(let i=0;i<8&&out.length<2;i++){const a=Math.random()*Math.PI*2,d=2.2+Math.random()*1.2,p=freeNear(tg.x+Math.cos(a)*d,tg.y+Math.sin(a)*d);if(p)out.push(p);}
  for(const p of out)casts.push({kind,x:p.x,y:p.y,size,flip:Math.random()<.5,phase:Math.random()*7,born:t+WARN,start:t+WARN,end:t+WARN+LIFE,owner:e,room,skill:true});
  casts.push({sigil:true,owner:e,t0:t,end:t+1,room});
+ /* R442: 기술을 쓸 때 보스 몸도 공격 동작(준비→타격→회수)을 한 번 — enemy-skill-pose-r442 */try{window.__STORYWORLD_ENEMY_SKILL_POSE_R442__?.mark?.(e,Math.atan2(tg.y-e.y,tg.x-e.x),WARN);}catch(_){}
  stats.casts=(stats.casts||0)+1;try{if(typeof toast==='function'&&stats.casts<=3)toast('보스 기술 · '+(SKILL_NAME[kind]||kind)+' — '+(e.name||'보스'),2.2);}catch(_){}
  for(const n2 of[K.sheet])image(n2);}
 function tickSkill(){const t=T();casts=casts.filter(c=>c.room===room&&t<c.end&&(c.sigil?bossLive(c.owner):true));
