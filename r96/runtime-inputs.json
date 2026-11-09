@@ -6100,7 +6100,40 @@
     "assets/r439/hwando/attack-e.webp",
     "assets/r439/hwando/index.json",
     "bossroom-tidy-r438.js",
-    "enemy-face-r443.js"
+    "enemy-face-r443.js",
+    "assets/r415/props/archive-shelf.webp",
+    "assets/r415/props/arrival-display.webp",
+    "assets/r415/props/bell.webp",
+    "assets/r415/props/bent-hand.webp",
+    "assets/r415/props/bulletin.webp",
+    "assets/r415/props/burned-books.webp",
+    "assets/r415/props/care-table.webp",
+    "assets/r415/props/cutting-block.webp",
+    "assets/r415/props/display-window.webp",
+    "assets/r415/props/empty-sleeve.webp",
+    "assets/r415/props/genealogy.webp",
+    "assets/r415/props/grand-desk.webp",
+    "assets/r415/props/index.json",
+    "assets/r415/props/labcoat-chair.webp",
+    "assets/r415/props/lobby-counter.webp",
+    "assets/r415/props/locker.webp",
+    "assets/r415/props/low-table.webp",
+    "assets/r415/props/machine-heart.webp",
+    "assets/r415/props/mailbox.webp",
+    "assets/r415/props/manual-lever.webp",
+    "assets/r415/props/memory-rack.webp",
+    "assets/r415/props/monitor.webp",
+    "assets/r415/props/news-window.webp",
+    "assets/r415/props/paint-layer.webp",
+    "assets/r415/props/paper-bowl.webp",
+    "assets/r415/props/patient-bed.webp",
+    "assets/r415/props/platform.webp",
+    "assets/r415/props/record-cabinet.webp",
+    "assets/r415/props/report-desk.webp",
+    "assets/r415/props/student-desk.webp",
+    "assets/r415/props/swamp-bed.webp",
+    "assets/r415/props/two-chair.webp",
+    "assets/r415/props/waiting-bench.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -7175,5 +7208,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "9fc719e46b61fa8e3fde9decf08223016c23c7f89d980f790f33c1ca8be068ef"
+  "runtimeManifestSHA256": "f83c0e54300cd04de8590780dad08c2493acd81c25712eeaa23060fe1b6981a9"
 }

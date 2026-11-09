@@ -51,20 +51,39 @@ const cache=new Map();/* key → canvas (삽입 순서 = 오래된 순) */
 const ids=new WeakMap();let idSerial=0;const imgId=im=>{let v=ids.get(im);if(!v){v=++idSerial;ids.set(im,v);}return v;};
 function makeCanvas(w,h){const c=document.createElement('canvas');c.width=w;c.height=h;return c;}
 // 알파 0.45 넘는 곳만 실루엣으로(그림 안 반투명 그림자·연기 띠에 테가 붙지 않게).
-function mask(src,sx,sy,sw,sh){const m=makeCanvas(sw,sh),g=m.getContext('2d',{willReadFrequently:true});g.drawImage(src,sx,sy,sw,sh,0,0,sw,sh);
- const d=g.getImageData(0,0,sw,sh),a=d.data;let solid=0;for(let i=0;i<a.length;i+=4){if(a[i+3]>115){a[i]=a[i+1]=a[i+2]=0;a[i+3]=255;solid++;}else a[i+3]=0;}
- g.putImageData(d,0,0);return solid>12?m:null;}
+// R440(사용자 2026-11-09 "영웅 잘 보이게 하는 선이 좀 잘리는 느낌, 어색"): 영웅 테가 가는 칼날(무채색 금속)까지 굵은 관처럼 감싸고,
+//  칼끝 옅은 픽셀(알파≤115)에서 뚝 끊겨 '잘린 막대'처럼 보였다 → 영웅 테 실루엣에서 '몸(굵은 부분) 밖의 가는 무채색 금속'을 뺀다.
+//  (환도만 — 아래 BLADE_HEROES) 굵은 부분 = 실루엣을 반지름 R(칸 높이의 2.2%)로 깎았다 다시 불린 것(열기). 무채색 = RGB 폭 < 26. 칼날 둘레 1px 도 함께 뺀다.
+//  망토 끝·손·장화(베이지·갈색)는 그대로 테를 받는다. 칼날은 바깥 색 테 없이 가는 어두운 선(안쪽 선의 2/3 두께)만 받아 은빛이 바닥 위에서도 읽힌다. 적 테는 바뀌지 않는다.
+//  끄기: localStorage storyworld.r409.combatRead {"bladeRim":true} (예전처럼 칼날도 감쌈).
+// 환도만: 망토가 베이지라 '가는 무채색' = 칼날로 가를 수 있다. 슬레이어·라우렌처럼 검은 옷의 가는 몸은 무채색이라 몸 테까지 빠져(헤드리스 확인) 넣지 않는다.
+const BLADE_HEROES=new Set(['hwando']);
+function bladeCut(){if(prefs.bladeRim===true)return false;try{return typeof player!=='undefined'&&BLADE_HEROES.has(String(player?.hero||''));}catch(_){return false;}}
+function morph(A,W,H,R,grow){const T=new Uint8Array(A.length),O=new Uint8Array(A.length);
+ for(let y=0;y<H;y++)for(let x=0;x<W;x++){let v=grow?0:1;for(let k=-R;k<=R&&(grow?!v:v);k++){const xx=x+k;const q=xx<0||xx>=W?0:A[y*W+xx];v=grow?(v|q):(v&q);}T[y*W+x]=v;}
+ for(let y=0;y<H;y++)for(let x=0;x<W;x++){let v=grow?0:1;for(let k=-R;k<=R&&(grow?!v:v);k++){const yy=y+k;const q=yy<0||yy>=H?0:T[yy*W+x];v=grow?(v|q):(v&q);}O[y*W+x]=v;}
+ return O;}
+function mask(src,sx,sy,sw,sh,side){const m=makeCanvas(sw,sh),g=m.getContext('2d',{willReadFrequently:true});g.drawImage(src,sx,sy,sw,sh,0,0,sw,sh);
+ const d=g.getImageData(0,0,sw,sh),a=d.data,N=sw*sh,S=new Uint8Array(N),B=new Uint8Array(N);for(let i=0,j=0;j<N;i+=4,j++)S[j]=a[i+3]>115?1:0;
+ if(side==='hero'&&bladeCut()){try{const R=Math.max(2,Math.round(sh*.022)),thick=morph(morph(S,sw,sh,R,false),sw,sh,R,true),steel=new Uint8Array(N);let n=0;
+  for(let i=0,j=0;j<N;i+=4,j++)if(S[j]&&!thick[j]&&Math.max(a[i],a[i+1],a[i+2])-Math.min(a[i],a[i+1],a[i+2])<26){steel[j]=1;n++;}
+  if(n){const near=morph(steel,sw,sh,1,true);for(let j=0;j<N;j++)if(near[j]&&!thick[j]){S[j]=0;if(a[j*4+3]>40)B[j]=1;}stats.bladeCut=(stats.bladeCut||0)+1;}}catch(e){fail(e);}}
+ let solid=0,nb=0,bd=null;for(let j=0;j<N;j++)if(B[j]){nb++;}
+ if(nb){const bm=makeCanvas(sw,sh),bg=bm.getContext('2d'),bdat=bg.createImageData(sw,sh);for(let j=0;j<N;j++)if(B[j])bdat.data[j*4+3]=255;bg.putImageData(bdat,0,0);bd=bm;}
+ for(let i=0,j=0;j<N;i+=4,j++){if(S[j]){a[i]=a[i+1]=a[i+2]=0;a[i+3]=255;solid++;}else a[i+3]=0;}
+ g.putImageData(d,0,0);if(solid<=12)return null;m.r440Blade=bd;return m;}
 function dilate(m,r,color,W,H,pad){const c=makeCanvas(W,H),g=c.getContext('2d');const n=r<=2?8:r<=6?12:16;
  for(let ring=r;ring>0;ring-=Math.max(1,r/2.5))for(let i=0;i<n;i++){const t=i/n*Math.PI*2;g.drawImage(m,pad+Math.cos(t)*ring,pad+Math.sin(t)*ring);}
  g.drawImage(m,pad,pad);g.globalCompositeOperation='source-in';g.fillStyle=color;g.fillRect(0,0,W,H);return c;}
 function bake(src,sx,sy,sw,sh,r,side){
  sx=Math.round(sx);sy=Math.round(sy);sw=Math.round(sw);sh=Math.round(sh);if(sw<4||sh<4)return null;
- const key=imgId(src)+':'+sx+','+sy+','+sw+','+sh+':'+r+':'+(side==='hero'?(heroLook()?.key||side):side);let hit=cache.get(key);
+ const key=imgId(src)+':'+sx+','+sy+','+sw+','+sh+':'+r+':'+(side==='hero'?(heroLook()?.key||side)+(bladeCut()?':b':''):side);let hit=cache.get(key);
  if(hit){cache.delete(key);cache.set(key,hit);return hit;}
  const pad=r+1,W=sw+pad*2,H=sh+pad*2;if(W*H>MAX_PX){stats.bakeSkipped++;return null;}
- const m=mask(src,sx,sy,sw,sh);if(!m){stats.bakeSkipped++;return null;}
+ const m=mask(src,sx,sy,sw,sh,side);if(!m){stats.bakeSkipped++;return null;}
  const L=(side==='hero'?heroLook():null)||LOOK[side],out=makeCanvas(W,H),g=out.getContext('2d');
  g.drawImage(dilate(m,r,L.outer,W,H,pad),0,0);g.drawImage(dilate(m,Math.max(1,Math.round(r*.45)),L.inner,W,H,pad),0,0);
+ /* R440: 칼날은 굵은 테 대신 가는 어두운 선만(바닥 위에서 칼이 사라지지 않게) */if(m.r440Blade){g.globalAlpha=.75;g.drawImage(dilate(m.r440Blade,Math.max(1,Math.round(r*.3)),L.inner,W,H,pad),0,0);g.globalAlpha=1;m.r440Blade.width=m.r440Blade.height=0;}
  g.drawImage(src,sx,sy,sw,sh,pad,pad,sw,sh);m.width=m.height=0;
  const row={canvas:out,pad,sw,sh};out.__storyworldStaticSource={path:'r409:outline:'+side+':'+key};
  cache.set(key,row);stats.baked++;
@@ -116,7 +135,7 @@ const wrapFn=fn=>{if(fn.__r409)return fn;const w=function(frame){if(depth===0){t
 try{const C=window.StoryPhase1?.ThreeRenderer?.prototype;if(C&&typeof C.render==='function')C.render=wrapFn(C.render);}catch(e){fail(e);}
 function wrapInst(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(r&&Object.prototype.hasOwnProperty.call(r,'render')&&!r.render.__r409&&!wrapped.has(r)){wrapped.add(r);r.render=wrapFn(r.render);}}catch(e){fail(e);}}
 setInterval(wrapInst,500);wrapInst();
-function set(p){for(const k of ['outline','enemyVeil','castBehind'])if(typeof p?.[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
+function set(p){for(const k of ['outline','enemyVeil','castBehind','bladeRim'])if(typeof p?.[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
 window.__STORYWORLD_COMBAT_READ_R409__=Object.freeze({revision:REV,set,process,bake,wrapRender:wrapFn,
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},cached:cache.size,lastVeiled:lastVeiled.slice(),lastError,presentationOnly:true,gameplayChanged:false,savesTouched:false}),
  resetStats:()=>{for(const k in stats)stats[k]=0;lastVeiled.length=0;}});
