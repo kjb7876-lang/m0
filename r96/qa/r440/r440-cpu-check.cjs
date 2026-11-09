@@ -7,7 +7,7 @@ ok('runtime copies match client-source',RT('hwando-r271.js')===h&&RT('combat-rea
 ok('loaded hwando art is kept (KEEP) and reused when the engine cache is empty after entering a region',/const KEEP=new Map\(\)/.test(h)&&/KEEP\.set\(p,row\.image\)/.test(h)&&/const k=KEEP\.get\(p\);if\(k&&\(k\.naturalWidth\|\|k\.width\)\)/.test(h));
 ok('hit art left as R242 (user 2026-11-09: old hit pose is fine)',!/HIT_NEW|storyworld\.r440\.hwandoHit/.test(h));
 // ② 테: 환도만, 끄기, 캐시 키 분리
-ok('blade cut only for hwando, pref bladeRim restores, cache key separated',/BLADE_HEROES=new Set\(\['hwando'\]\)/.test(c)&&/prefs\.bladeRim===true/.test(c)&&/bladeCut\(\)\?':b':''/.test(c)&&/'castBehind','bladeRim'\]/.test(c));
+ok('blade cut only for hwando, pref bladeRim restores, cache key separated',/BLADE_HEROES=new Set\(\['hwando'\]\)/.test(c)&&/prefs\.bladeRim===true/.test(c)&&/bladeCut\(\)\?':b':''/.test(c)&&/'castBehind','bladeRim'(?:,'fastBake')?\]/.test(c));
 ok('enemy outline untouched (blade cut only when side===hero)',/if\(side==='hero'&&bladeCut\(\)\)/.test(c));
 // morph: 굵은 덩어리는 열기 뒤에도 남고, 가는 선(칼날)은 사라진다
 const m=c.match(/function morph\([\s\S]*?\n return O;\}/);ok('morph() found',!!m);
