@@ -6151,6 +6151,8 @@
     "cinema-run-r461.js",
     "enemy-face-r444.js",
     "mob-death-r462.js",
+    "sin-boss-art-r463.js",
+    "sin-boss-art-r463-data.js",
     "weather-r450.js",
     "local-light-r451.js",
     "ground-fringe-r452.js",
@@ -7229,5 +7231,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "71430a3700c01752e333add291af9d932a3daa14f652133db8e6b2c78148fab4"
+  "runtimeManifestSHA256": "2de8ecde622313d3efee3634f040dbe09d224399175550c61a9b8c334d384df9"
 }
