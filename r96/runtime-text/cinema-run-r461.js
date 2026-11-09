@@ -18,7 +18,7 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_CINEMA_RUN_R461__)return;
 const REV='R461-run-1',KEY='storyworld.r461.run',FIELD='playModeR461';
-const stats={titleButtons:0,cinemaStarts:0,normalStarts:0,restoresCinema:0,restoresNormal:0,legacyOff:0,refusedOn:0,paused:0,resumed:0,heroLocks:0,heroSame:0,heroUnmapped:0,heroBlocked:0,carried:0,errors:0};let lastError=null;
+const stats={titleButtons:0,cinemaStarts:0,normalStarts:0,restoresCinema:0,restoresNormal:0,legacyOff:0,refusedOn:0,paused:0,resumed:0,heroLocks:0,heroSame:0,heroUnmapped:0,heroBlocked:0,carried:0,dropped:0,samongHostSkips:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const G=(f,d)=>{try{const v=f();return v===undefined?d:v;}catch(_){return d;}};
 let prefs={lock:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');if(typeof s?.lock==='boolean')prefs.lock=s.lock;}catch(_){}
@@ -56,11 +56,14 @@ const decided=new Map();// 지역 열쇠 → 정한 영웅(null = 영웅 화자 
 const zoneKey=()=>{try{const r=G(()=>room,null);if(!r)return'';return r.samongR115?.zone?('samong:'+r.samongR115.zone):(r.id||G(()=>zone,''));}catch(_){return'';}};
 let switching=null;
 let target=null;// 마지막으로 바라는 영웅(앞선 요청이 그림을 받는 사이 새 요청이 오면 새 것이 이긴다)
-async function become(id,why,early){if(!id||!G(()=>player,null))return false;target=id;
+// 리뷰 #346: 요청을 그 기록(세대·player 객체)에 묶는다. 새 게임·불러오기를 하면 세대가 바뀌어, 그림을 받던 앞 요청은 새 기록을 건드리지 않고 버려진다.
+let era=0;
+const live=(myEra,who)=>myEra===era&&run==='cinema'&&G(()=>player,null)===who;
+async function become(id,why,early){const who=G(()=>player,null);if(!id||!who||run!=='cinema')return false;const myEra=era;target=id;
  while(switching)try{await switching;}catch(_){}
- if(target!==id)return false;const p=G(()=>player,null);if(!p)return false;if(p.hero===id){stats.heroSame++;return false;}
+ if(target!==id||!live(myEra,who))return false;const p=who;if(p.hero===id){stats.heroSame++;return false;}
  switching=(async()=>{try{if(typeof ensureImages==='function'&&typeof heroPaths==='function')await ensureImages(heroPaths(id));
-   const q=G(()=>player,null);if(!q||q.hero===id||target!==id)return false;const want=early?null:decided.get(zoneKey());if(want&&want!==id)return false;/* 그림을 받는 사이 다른 영웅 지역으로 옮겼으면 버린다 */
+   if(!live(myEra,who)){stats.dropped++;return false;}const q=who;if(q.hero===id||target!==id)return false;const want=early?null:decided.get(zoneKey());if(want&&want!==id)return false;/* 그림을 받는 사이 다른 영웅 지역으로 옮겼으면 버린다 */
    try{stats.carried+=carry(q,q.hero,id,G(()=>UPGRADES,[]));}catch(e){fail(e);}
    q.hero=id;q.combo=0;q.ego=0;q.samong=0;q.shield=0;q.direction=q.direction||'front';
    stats.heroLocks++;try{if(typeof refreshIcons==='function')refreshIcons();}catch(e){fail(e);}
@@ -84,11 +87,13 @@ function decide(key,narrs){if(!lockOn()||!key||decided.has(key))return;const h=f
  decided.set(key,h);become(h,key);}
 // ── 엔진 연결 ── (잠긴 지역이면 엔진이 쉼터로 돌려보내므로 들어선 뒤 실제 방의 서사를 본다)
 try{if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(id,...a){
+  // 리뷰 #346: 사몽 구역은 본편 지도를 빌려(noStory) 들어서므로 그 지도의 화자로 정하지 않는다 — 구역 서사(playScenes)가 정한다.
+  const host=!!(a[1]&&a[1].noStory);if(host&&lockOn())stats.samongHostSkips++;
   // 들어서기 전에 그 지역 영웅으로 미리 바꾸기 시작한다(지도 불러오는 동안 그림을 받음). 못 들어가면 원래 영웅으로 되돌린다.
-  let prev=null,pre=null;try{if(lockOn()&&G(()=>regionById[id],null)){pre=firstHero(regionNarrators(id),G(()=>HEROES,{}),ALIAS,G(()=>player?.hero,null),modeFor(id,(a[1]&&a[1].layer)||G(()=>layer,'STORY')));if(pre){prev=G(()=>player?.hero,null);if(prev!==pre)become(pre,id,true);else pre=null;}}}catch(e){fail(e);}
+  let prev=null,pre=null;try{if(!host&&lockOn()&&G(()=>regionById[id],null)){pre=firstHero(regionNarrators(id),G(()=>HEROES,{}),ALIAS,G(()=>player?.hero,null),modeFor(id,(a[1]&&a[1].layer)||G(()=>layer,'STORY')));if(pre){prev=G(()=>player?.hero,null);if(prev!==pre)become(pre,id,true);else pre=null;}}}catch(e){fail(e);}
   let r;try{r=await base.call(this,id,...a);}catch(e){if(pre&&prev)become(prev,id,true);throw e;}
   if(r===false&&pre&&prev){try{become(prev,id,true);}catch(e){fail(e);}}
-  try{if(r!==false&&lockOn()){const rid=G(()=>room?.id,null)||id,key=zoneKey()||rid;decided.delete(key);decide(key,regionNarrators(rid));}}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
+  try{if(r!==false&&!host&&lockOn()){const rid=G(()=>room?.id,null)||id,key=zoneKey()||rid;decided.delete(key);decide(key,regionNarrators(rid));}}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
 try{if(typeof playScenes==='function'){const base=playScenes;playScenes=function(scenes,...a){
   try{if(lockOn()&&Array.isArray(scenes)&&!scenes.some(s=>/^journal:/.test(String(s?.key||''))))decide(zoneKey(),scenes.map(s=>s?.narrator).filter(Boolean));}catch(e){fail(e);}
   return base.call(this,scenes,...a);};}}catch(e){fail(e);}
@@ -96,11 +101,11 @@ try{if(typeof showHeroes==='function'){const base=showHeroes;showHeroes=function
   if(!isNew&&run==='cinema'&&prefs.lock){stats.heroBlocked++;try{if(typeof toast==='function')toast('영화 모드에서는 서사에 적힌 기억의 영웅으로만 진행합니다',2.6);}catch(_){}return;}
   return base.call(this,isNew,...a);};}}catch(e){fail(e);}
 // 기록 성격: 새 게임은 입구로, 불러오기는 저장값으로.
-try{if(typeof newGame==='function'){const base=newGame;newGame=async function(...a){const old=run;run=pending==='cinema'?'cinema':'normal';pending=null;decided.clear();
+try{if(typeof newGame==='function'){const base=newGame;newGame=async function(...a){era++;target=null;const old=run;run=pending==='cinema'?'cinema':'normal';pending=null;decided.clear();
   turn(false);let result;try{result=await base.apply(this,a);}catch(e){run=old;throw e;}
   if(result===false){run=old;return result;}
   if(run==='cinema'){stats.cinemaStarts++;turn(true);warm();}else stats.normalStarts++;return result;};}}catch(e){fail(e);}
-try{if(typeof restoreSave==='function'){const base=restoreSave;restoreSave=async function(raw,...a){const old=run;run=raw?.[FIELD]==='cinema'?'cinema':'normal';pending=null;decided.clear();
+try{if(typeof restoreSave==='function'){const base=restoreSave;restoreSave=async function(raw,...a){era++;target=null;const old=run;run=raw?.[FIELD]==='cinema'?'cinema':'normal';pending=null;decided.clear();
   turn(false);let result;try{result=await base.call(this,raw,...a);}catch(e){run=old;throw e;}
   if(result===false){run=old;return result;}
   if(run==='cinema'){stats.restoresCinema++;turn(true);warm();}else stats.restoresNormal++;return result;};}}catch(e){fail(e);}
