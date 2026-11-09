@@ -39,14 +39,14 @@ function world(id='ep1a09',kind=CLINIC){
  const enemies=[{id:'m1',x:50,y:10,homeX:50,homeY:10,hp:10},{id:'m2',x:52,y:11,homeX:52,homeY:11,hp:10}];
  return{id,layer:'STORY',exploration:L,props,enemies,objective:{x:100,y:10}};}
 const pathSet=new Set();for(let y=4;y<14;y++)pathSet.add('60,'+y);/* 대기실 서쪽 벽을 따라 가는 길 */
-function boot(){const drawn=[],asked=[],ready=new Set(['x.webp']);
+function boot(opt={}){const drawn=[],asked=[],ready=new Set(['x.webp']);
  const ctx={localStorage:{getItem:()=>null,setItem:()=>{}},setTimeout:()=>0,console,Math,JSON,Number,String,Object,Array,Set,Map,WeakMap,Promise,
   __STORYWORLD_ASSETS_R80_DATA__:{assets},__STORYWORLD_PLAY_R169__:{pathCells:()=>pathSet},
   StoryPhase1:{explorationBlocked:(L,x,y,r)=>{const S=new Set(L.floorCells.map(c=>c[0]+','+c[1]));for(const[dx,dy]of[[-r,-r],[r,-r],[-r,r],[r,r]])if(!S.has(Math.floor(x+dx)+','+Math.floor(y+dy)))return true;return false;}},
   readyImage:p=>ready.has(p)?{image:{naturalWidth:300,naturalHeight:400},path:p}:null,ensureImages:ps=>{asked.push(...ps);return Promise.resolve();},/* 그림은 처음엔 안 읽힘(엔진이 지운 상태) */
   project:(x,y)=>({x:(x-y)*32,y:(x+y)*16}),zoom:1,actorHeight:()=>60,loading:false,room:undefined,
   drawProp:function(p){drawn.push(p.id);},sprite:function(){}};
- ctx.window=ctx;vm.createContext(ctx);vm.runInContext(src,ctx);return{ctx,api:ctx.__STORYWORLD_PROPS_SPACE_R449__,drawn,asked};}
+ Object.assign(ctx,opt.extra||{});ctx.window=ctx;vm.createContext(ctx);if(opt.prelude)vm.runInContext(opt.prelude,ctx);vm.runInContext(src,ctx);return{ctx,api:ctx.__STORYWORLD_PROPS_SPACE_R449__,drawn,asked};}
 const {ctx,api,drawn,asked}=boot();
 ok('api exported',!!api&&typeof api.curate==='function'&&typeof api.coverAlpha==='function'&&typeof api.plan==='function');
 ok('space table: names → kinds',api.spaceOf('주사실')==='work'&&api.spaceOf('갈림길')==='junction'&&api.spaceOf('순환로')==='junction'&&api.spaceOf('계단참')==='junction'&&api.spaceOf('길목')==='corridor'&&api.spaceOf('그을린 복도')==='corridor'&&
@@ -125,12 +125,17 @@ for(const[label,mut]of[['Mammon ep1b06',w=>{w.id='ep1b06';}],['dream layer',w=>{
 drawn.length=0;const hid=w0.props.find(p=>p.r303Hide==='r449');ctx.drawProp(hid);ctx.drawProp(all[1]);
 ok('draw wrapper: rested pieces skipped, placed pieces drawn',!drawn.includes(hid.id)&&drawn.includes(all[1].id));
 // 가림 완화
-const tall={id:'t',path:'x.webp',x:10,y:10,height:80},w5={id:'z',layer:'STORY',exploration:{worldR74:{doors:[]}},props:[tall],enemies:[{x:9.2,y:9.2,hp:5}],objective:null};ctx.room=w5;
+// (배치한 지역의 처치 대기실 x60~74,y4~14 에서 — 보스방·모이는 방·맘몬은 옅게 하지 않음)
+const tall={id:'t',path:'x.webp',x:68,y:10,height:80};
+const w5=world('zfade');ctx.room=w5;api.curate(w5);w5.props.push(tall);w5.enemies=[{x:67.2,y:9.2,hp:5}];
 ok('cover fade: live mob behind a tall prop → .4',Math.abs(api.coverAlpha(tall)-.4)<1e-9);
 w5.enemies[0].hp=0;ok('cover fade: dead mob → no fade',api.coverAlpha(tall)===1);
-w5.enemies=[{x:10.6,y:10.6,hp:5}];ok('cover fade: mob in front → no fade',api.coverAlpha(tall)===1);
-const w6={id:'z2',layer:'STORY',exploration:{worldR74:{doors:[{x:9.3,y:9.3}]}},props:[tall],enemies:[],objective:null};ctx.room=w6;ok('cover fade: door behind → .5',Math.abs(api.coverAlpha(tall)-.5)<1e-9);
+w5.enemies=[{x:68.6,y:10.6,hp:5}];ok('cover fade: mob in front → no fade',api.coverAlpha(tall)===1);
+const w6=world('zfade2');w6.exploration.worldR74.doors.push({x:67.3,y:9.3,width:1});ctx.room=w6;api.curate(w6);w6.props.push(tall);w6.enemies=[];ok('cover fade: door behind → .5',Math.abs(api.coverAlpha(tall)-.5)<1e-9);
 ok('cover fade: short props never fade',api.coverAlpha({...tall,height:40})===1);
+{const tb={id:'tb',path:'x.webp',x:16,y:12,height:80},wb=world('zfade3');ctx.room=wb;api.curate(wb);wb.props.push(tb);wb.enemies=[{x:15.2,y:11.2,hp:5}];
+ const wm=world('ep1b06');ctx.room=wm;api.curate(wm);wm.props.push(tall);wm.enemies=[{x:67.2,y:9.2,hp:5}];const am=api.coverAlpha(tall);ctx.room=wb;
+ ok('cover fade: not inside the boss/gather rooms (boss-room thread) and not in Mammon ep1b06',api.coverAlpha(tb)===1&&am===1);}
 {const f={id:'ease'},a0=api.easeCover(f,.4,1000),a1=api.easeCover(f,.4,1075),a2=api.easeCover(f,.4,1200),b1=api.easeCover(f,1,1300),b2=api.easeCover(f,1,1700),c=api.easeCover({id:'calm'},1,1000);
  const good=a0===1&&Math.abs(a1-.7)<1e-9&&Math.abs(a2-.4)<1e-9&&Math.abs(b1-.65)<1e-9&&b2===1&&c===1;
  ok('cover fade eases in ~.15 s and back in ~.25 s (no pop)',good);if(!good)console.log('  ease',JSON.stringify({a0,a1,a2,b1,b2,c}));}
@@ -138,14 +143,9 @@ ok('draw wrapper eases the cover fade',/k=easeCover\(p,coverAlpha\(p\)\)/.test(s
 // 실제 그리기 길: R80 그림 가구(우리 가구 포함)는 drawAssetFrame3, 엔진 조형물은 sprite — 둘 다 옅게 그려져야 한다
 // (브라우저 실측: sprite 만 바꾸면 R80 가구엔 안 먹었다)
 {let T=1000;const got=[];
- const c3={localStorage:{getItem:()=>null,setItem:()=>{}},setTimeout:()=>0,console,Math,JSON,Number,String,Object,Array,Set,Map,WeakMap,Promise,__got:got,
-  __STORYWORLD_ASSETS_R80_DATA__:{assets},__STORYWORLD_PLAY_R169__:{pathCells:()=>new Set()},performance:{now:()=>T},
-  readyImage:p=>({image:{naturalWidth:300,naturalHeight:400},path:p}),project:(x,y)=>({x:(x-y)*32,y:(x+y)*16}),zoom:1,actorHeight:()=>60,loading:false,room:undefined};
- c3.window=c3;vm.createContext(c3);
- vm.runInContext("drawAssetFrame3=function(path,frame,x,y,h,o){__got.push(['frame',o&&o.alpha]);};sprite=function(path,x,y,h,o){__got.push(['sprite',o&&o.alpha]);};drawProp=function(p){if(p.r80Art)drawAssetFrame3(p.path,{},0,0,p.height,{alpha:1});else sprite(p.path,0,0,p.height,{alpha:1});};",c3);
- vm.runInContext(src,c3);
- const art={id:'a',path:'x.webp',x:10,y:10,height:80,r80Art:'r80-145'},eng={id:'e',path:'y.webp',x:12,y:12,height:80};
- c3.room={id:'z',layer:'STORY',exploration:{worldR74:{doors:[]}},props:[art,eng],enemies:[{x:9.2,y:9.2,hp:5},{x:11.2,y:11.2,hp:5}],objective:null};
+ const b3=boot({extra:{__got:got,performance:{now:()=>T}},prelude:"drawAssetFrame3=function(path,frame,x,y,h,o){__got.push(['frame',o&&o.alpha]);};sprite=function(path,x,y,h,o){__got.push(['sprite',o&&o.alpha]);};drawProp=function(p){if(p.r80Art)drawAssetFrame3(p.path,{},0,0,p.height,{alpha:1});else sprite(p.path,0,0,p.height,{alpha:1});};"}),c3=b3.ctx;
+ const art={id:'a',path:'x.webp',x:68,y:10,height:80,r80Art:'r80-145'},eng={id:'e',path:'y.webp',x:70,y:12,height:80};
+ const w3=world('zdraw');c3.room=w3;b3.api.curate(w3);w3.props.push(art,eng);w3.enemies=[{x:67.2,y:9.2,hp:5},{x:69.2,y:11.2,hp:5}];
  const frame=()=>{got.length=0;c3.drawProp(art);c3.drawProp(eng);return got.map(g=>g[0]+':'+(+g[1]).toFixed(2)).join(' ');};
  const f0=frame();T+=100;const f1=frame();T+=200;const f2=frame();
  const restored=String(c3.sprite).includes('__got')&&String(c3.drawAssetFrame3).includes('__got');

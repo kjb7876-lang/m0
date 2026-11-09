@@ -28,7 +28,7 @@
 //  끄기: localStorage['storyworld.r449.space']='{"on":false}' (부분: {"furnish":false} 가구 규칙만, {"fade":false} 가림 완화만)
 (()=>{'use strict';
 if(window.__STORYWORLD_PROPS_SPACE_R449__)return;
-const REV='R449-props-space-8',KEY='storyworld.r449.space';
+const REV='R449-props-space-9',KEY='storyworld.r449.space';
 const prefs={on:true,furnish:true,fade:true};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(prefs))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={regions:0,rooms:0,kept:0,hidden:0,skippedBoss:0,emptyRooms:0,rhythmEmpty:0,lateHidden:0,reloads:0,faded:0,errors:0};let lastError=null;
@@ -241,8 +241,10 @@ function targets(r){let m=targetMemo.get(r);if(m&&m.L===r.exploration&&m.n===r.p
  for(const p of r.props||[])if(p&&p.visible!==false&&!p.r303Hide&&(p.interactive||p.chestR103||/chest/i.test(String(p.id||'')))&&fin(p.x+p.y))list.push({x:p.x,y:p.y,h:.7});
  targetMemo.set(r,{L:r.exploration,n:r.props.length,list});return list;}
 function spotOf(p){const t=p.r111To;let on=true;try{on=window.__STORYWORLD_PLAY_R111__?.prefs?.().props!==false;}catch(_){}return on&&t&&fin(t.x+t.y)&&!(p.r299||p.r317||p.r138Lift)?t:p;}
-function coverAlpha(p){if(!prefs.on||!prefs.fade||!p||p.r303Hide||!(+p.height>=56)||typeof project!=='function'||typeof room==='undefined'||!room)return 1;
+function coverAlpha(p){if(!prefs.on||!prefs.fade||!p||p.r303Hide||!(+p.height>=56)||typeof project!=='function'||typeof room==='undefined'||!room||!eligible(room))return 1;
+ const st=done.get(room);if(!st||!st.planned||st.L!==room.exploration)return 1;
  const s=spotOf(p),sx=+s.x,sy=+s.y,depth=sx+sy-.15;if(!fin(depth))return 1;
+ if(inBoss(st,{x:sx,y:sy}))return 1;/* 배치를 맡은 방에서만 옅게 — 보스방·모이는 방(보스방 스레드 몫, 색욕 고정 배치 포함)·맘몬·사몽·꿈은 그대로 */
  // 먼저 세계 좌표로 거른다(뒤쪽·5칸 안) — 후보가 없으면 그림 크기·투영을 셈하지 않는다(매 프레임 키 큰 소품마다 도는 곳이라 할당·투영을 줄임)
  let cand=null;
  for(const e of room.enemies||[]){if(!e||!(e.hp>0)||e.visible===false||e.spawnState==='hidden')continue;const x=+e.x,y=+e.y;if(!(x+y<depth)||Math.abs(x-sx)>5||Math.abs(y-sy)>5)continue;(cand||(cand=[])).push(x,y,e.boss?2.05:1,.4);}
