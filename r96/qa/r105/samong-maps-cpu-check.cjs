@@ -80,7 +80,8 @@ check('markers and props stand on reachable floor with known art ('+markers+' ma
 const webpSize=b=>{const t=b.toString('ascii',12,16);if(t==='VP8X')return[1+b.readUIntLE(24,3),1+b.readUIntLE(27,3)];if(t==='VP8L'){const v=b.readUInt32LE(21);return[1+(v&0x3fff),1+((v>>14)&0x3fff)];}return[b.readUInt16LE(26)&0x3fff,b.readUInt16LE(28)&0x3fff];};
 let artMissing=[];for(const [k,a] of Object.entries(SP.art)){const p=path.join(ASSET,a.path);if(!fs.existsSync(p)){artMissing.push(a.path);continue;}const [w,h]=webpSize(fs.readFileSync(p));if(!(w>=256&&h>=256||k==='chain'&&w>=256))artMissing.push(a.path+' '+w+'x'+h);}
 check('static prop art files exist',!artMissing.length,artMissing.join(','));
-check('static plan: 7 pillars for dist03, weeds and hands for dist02',SP.plan.dist03.some(([k,n])=>k==='pillar'&&n===7)&&SP.plan.dist02.some(([k])=>k==='waterweed')&&SP.plan.dist02.some(([k])=>k==='hands'));
+// R446(사용자 2026-11-09): 기둥 일곱은 무너진 성(dist03)에서 빠지고 일곱 기둥(dist05) 공격 기둥으로 옮김 — qa/r446 이 따로 본다.
+check('static plan: dist03 keeps only the broken seal chains (pillars moved to dist05 by R446), weeds and hands for dist02',!SP.plan.dist03.some(([k])=>k==='pillar')&&SP.plan.dist03.some(([k])=>k==='chain')&&SP.plan.dist02.some(([k])=>k==='waterweed')&&SP.plan.dist02.some(([k])=>k==='hands'));
 // ---- R103 untouched ----
 check('R103 still exposes go/test/inspect',typeof SM.go==='function'&&typeof SM.test.go==='function'&&SM.GOAL===666&&SM.episodes.length===16);
 // ---- R105 drive art + boss FX (2026-10-27 batches) ----
