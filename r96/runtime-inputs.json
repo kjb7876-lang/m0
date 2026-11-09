@@ -6086,9 +6086,10 @@
     "assets/r436/hwando/walk-s.webp",
     "assets/r436/hwando/index.json",
     "surface-r435.js",
+    "bossroom-tidy-r438.js",
+    "assets/r380/mobs/electrode-machine-knight-v1.webp",
     "assets/r439/hwando/attack-e.webp",
-    "assets/r439/hwando/index.json",
-    "assets/r380/mobs/electrode-machine-knight-v1.webp"
+    "assets/r439/hwando/index.json"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -7163,5 +7164,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "5d8160ac05af8dbb2f9b07253618e645df7149b1f2cfacf3f2a0dcfea0bec8d2"
+  "runtimeManifestSHA256": "0bd63a1d554378dbdd16b2673c7b423dfe363e0a7a324084751b660de08c43a3"
 }
