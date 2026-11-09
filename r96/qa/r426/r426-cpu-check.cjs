@@ -16,7 +16,7 @@ function gc(o={}){const sb={localStorage:{getItem:()=>o.prefs?JSON.stringify(o.p
   room={id:'z',engaged:false,enemies:[]},__base=0,__wall=new Set();
   function distance(a,b){return Math.hypot(a.x-b.x,a.y-b.y);}function clearLine(a,b){return !__wall.has(b.id);}
   function liveEnemies(){return room.enemies.filter(e=>e.hp>0&&(!e.boss||room.engaged));}
-  function guideStep(dt){__base++;}`,sb);vm.runInContext(GC,sb);
+  function guideStep(dt){__base++;}`,sb);if(o.setup)vm.runInContext(o.setup,sb);vm.runInContext(GC,sb);
  return{sb,api:sb.__STORYWORLD_GUIDE_CLEAR_R426__,ev:s=>vm.runInContext(s,sb),step:(n=1,dt=.3)=>{for(let i=0;i<n;i++){vm.runInContext(`time+=${dt};guideStep(${dt})`,sb);}}};}
 {const {api}=gc();const P=(rows,o)=>api.pick(rows,{x:0,y:0},o)?.enemy?.id??null;
  const A={id:'a',x:5,y:0,hp:9},B={id:'b',x:3,y:0,hp:9},Far={id:'f',x:14,y:0,hp:9},H={id:'h',x:1,y:0,hp:9,spawnState:'hidden'},D={id:'d',x:1,y:0,hp:9,deadRecorded:true};
@@ -41,6 +41,32 @@ function gc(o={}){const sb={localStorage:{getItem:()=>o.prefs?JSON.stringify(o.p
  ok('R115 dodge step (command cleared, one-step route) is not overridden',F.ev('command')===null&&F.api.inspect().stats.yields===1);}
 {const F=gc({chase:true});F.ev("__wall.add('c');room.enemies.push({id:'c',x:12,y:0,hp:20,spotted:true})");F.step();ok('enemy chasing the hero from behind a wall is engaged',F.ev('command')==='c');}
 {const F=gc();F.ev("room.enemies.push({id:'m',x:6,y:0,hp:20})");F.step();F.ev("room={id:'z2',engaged:false,enemies:[]}");F.step();ok('room change clears focus',F.api.inspect().focus===null);}
+// ── R441: 가는 길의 적만 잡고, 구석 몹은 두고 중앙 집결실로 ──
+{const {api}=gc();
+ ok('R441 laneDist: distance to the path polyline',Math.abs(api.laneDist({x:5,y:2},[{x:0,y:0},{x:10,y:0}])-2)<1e-9&&Math.abs(api.laneDist({x:13,y:4},[{x:0,y:0},{x:10,y:0}])-5)<1e-9);
+ ok('R441 onPath: near the hero or within the lane of the path ahead',api.onPath({x:3,y:3},{x:0,y:0},4.2,null,{x:20,y:0})===true&&api.onPath({x:9,y:1},{x:0,y:0},9.1,[{x:20,y:0}],{x:20,y:0})===true&&api.onPath({x:6,y:8},{x:0,y:0},10,[{x:20,y:0}],{x:20,y:0})===false);}
+const WARD=(phase)=>`var __phase='${phase}';window.__STORYWORLD_WORLD_COMBAT_R78__={controlled:()=>true,state:()=>({phase:__phase})};room.exploration={worldWardR81:{gatherAnchor:{x:20,y:0}}};
+ var __paths=0;function findPath(a,b){__paths++;const n=Math.max(1,Math.ceil(Math.hypot(b.x-a.x,b.y-a.y)));return Array.from({length:n},(_,i)=>({x:a.x+(b.x-a.x)*(i+1)/n,y:a.y+(b.y-a.y)*(i+1)/n}));}`;
+{const F=gc({setup:WARD('route')});F.ev("room.enemies.push({id:'corner',x:6,y:8,hp:20},{id:'way',x:9,y:1,hp:20})");F.step();
+ ok('R441 route phase: the enemy on the way to the gather room is fought',F.ev('command')==='way'&&F.ev('__base')===0);
+ F.ev("room.enemies[1].hp=0");F.step(2);
+ ok('R441 …the corner enemy is left alone and the guide walks to the gather room instead',F.ev('command')===null&&F.ev('route.length')>0&&F.ev('route[route.length-1].x')===20&&F.ev('__base')===0&&F.api.inspect().stats.toRally>=1&&F.api.inspect().stats.skippedOffPath>=1,F.api.inspect());
+ F.ev("room.enemies[0].spotted=true");}
+{const F=gc({chase:true,setup:WARD('route')});F.ev("room.enemies.push({id:'corner',x:6,y:8,hp:20,spotted:true})");F.step();
+ ok('R441 an enemy that spotted the hero and chases it is still fought',F.ev('command')==='corner');}
+{const F=gc({setup:WARD('route')});F.ev("player.x=17;room.enemies.push({id:'corner',x:-8,y:-9,hp:20})");F.step();
+ ok('R441 at the gather room → the original guide takes over (rally trigger)',F.ev('__base')===1);}
+{const F=gc({setup:WARD('rally')});F.ev("room.enemies.push({id:'corner',x:6,y:8,hp:20})");F.step();
+ ok('R441 rally phase (survivors gathered) → every visible enemy is fought as before',F.ev('command')==='corner');}
+{const F=gc({setup:WARD('route')});F.ev("room.engaged=true;room.enemies.push({id:'corner',x:6,y:8,hp:20})");F.step();
+ ok('R441 engaged fight → unchanged',F.ev('command')==='corner');}
+{const F=gc({prefs:{path:false},setup:WARD('route')});F.ev("room.enemies.push({id:'corner',x:6,y:8,hp:20})");F.step();
+ ok('R441 pref path:false → old behaviour',F.ev('command')==='corner');}
+{const F=gc({setup:"room.exploration={worldWardR81:{gatherAnchor:{x:20,y:0}}};"});F.ev("room.enemies.push({id:'corner',x:6,y:8,hp:20})");F.step();
+ ok('R441 wave maps without the R78 ward (full clear is the real seal) → unchanged',F.ev('command')==='corner');}
+{const F=gc({setup:WARD('route')});F.ev("room.enemies.push({id:'corner',x:6,y:8,hp:-1})");for(let i=0;i<8;i++)F.step();
+ ok('R441 path is re-planned at most once a second (no findPath every turn)',F.ev('__paths')<=3,F.ev('__paths'));}
+ok('R441 revision',/REV='R426-clear-2-R441'/.test(GC));
 // ── R370 rev 6: 같은 문장 두 번 막기 ──
 function cin(full){let clock=0;const timers=[];const setT=(f,ms)=>{const t={at:clock+Math.max(0,ms||0)/1000,f,dead:false};timers.push(t);return t;};let su=null;const spoken=[];
  const ss={getVoices:()=>[{name:'ko',lang:'ko-KR'}],speak(u){spoken.push(u.text);su=u;setT(()=>{if(su===u){su=null;u.onend&&u.onend();}},u.text.length/(7*u.rate)*1000);},cancel(){su=null;},pause(){},resume(){},addEventListener(){}};

@@ -33419,8 +33419,8 @@
     },
     {
       "path": "guide-clear-r426.js",
-      "bytes": 6838,
-      "sha256": "c8b451857aee830961f18db259a0bffa01eec7e0e185f348a035cc12a51e9e13"
+      "bytes": 10958,
+      "sha256": "78bd331cc828048aba2510b0191b0194f80a28a7d802e9df421ba7131cd9caed"
     },
     {
       "path": "guide-difficulty-r189.js",
@@ -34399,7 +34399,7 @@
     }
   ],
   "fileCount": 6879,
-  "totalBytes": 1087734083,
+  "totalBytes": 1087738203,
   "webHTMLSha256": "96375e189d8c4bcb33b618928d3b2763362f60225129c0a463f6ea2dd96747e8",
   "largest": [
     {
