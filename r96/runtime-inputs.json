@@ -6090,7 +6090,8 @@
     "assets/r380/mobs/electrode-machine-knight-v1.webp",
     "assets/r439/hwando/attack-e.webp",
     "assets/r439/hwando/index.json",
-    "skill-attack-r440.js"
+    "skill-attack-r440.js",
+    "enemy-skill-pose-r442.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -7165,5 +7166,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "e35fd89d140fb9a561150369d261deebc1e36d34c77ef704ea8f97f822395b66"
+  "runtimeManifestSHA256": "3963eee3e2f61e1fff46abbe713bd656897ef03deb50a46d8e1ff53a7de007cd"
 }
