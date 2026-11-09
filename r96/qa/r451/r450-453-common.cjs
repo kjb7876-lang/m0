@@ -7,8 +7,8 @@ function wiring(ok,file){const src=C(file);ok(file+' runtime copy matches client
  ok(file+' runtime-manifest hash matches',M.get(file)===crypto.createHash('sha256').update(fs.readFileSync(path.join(RT,file))).digest('hex'));
  ok(file+' listed in runtime-inputs textPaths',JSON.parse(fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8')).textPaths.includes(file));
  const html=fs.readFileSync(path.join(RT,'index.html'),'utf8');
- ok(file+' loads once, in order perf-r441 → (R440 · R442) → R450 → R451 → R452 → R453 → combat-r118',html.split('./'+file).length===2&&
-  /<script src="\.\/perf-r441\.js"><\/script>(?:<script src="\.\/skill-attack-r440\.js"><\/script>)?(?:<script src="\.\/enemy-skill-pose-r442\.js"><\/script>)?<script src="\.\/weather-r450\.js"><\/script><script src="\.\/local-light-r451\.js"><\/script><script src="\.\/ground-fringe-r452\.js"><\/script><script src="\.\/actor-tone-r453\.js"><\/script>\s*<script src="\.\/combat-r118\.js">/.test(html)&&
+ ok(file+' loads once, in order perf-r441 → (R440 · R442 · R448) → R450 → R451 → R452 → R453 → combat-r118',html.split('./'+file).length===2&&
+  /<script src="\.\/perf-r441\.js"><\/script>(?:<script src="\.\/skill-attack-r440\.js"><\/script>)?(?:<script src="\.\/enemy-skill-pose-r442\.js"><\/script>)?(?:<script src="\.\/depth-overlap-r448\.js"><\/script>)?<script src="\.\/weather-r450\.js"><\/script><script src="\.\/local-light-r451\.js"><\/script><script src="\.\/ground-fringe-r452\.js"><\/script><script src="\.\/actor-tone-r453\.js"><\/script>\s*<script src="\.\/combat-r118\.js">/.test(html)&&
   html.indexOf('light-r182.js')<html.indexOf('weather-r450.js')&&html.indexOf('cave-r204.js')<html.indexOf('weather-r450.js')&&html.indexOf('combat-read-r409.js')<html.indexOf('actor-tone-r453.js'));
  ok(file+' never wraps R54 frameFor (R442 stays the outermost frameFor even though R450~R453 load after it)',!/frameFor|STORY_COMBAT_R54/.test(src.replace(/\/\/.*$/gm,'')));
  ok(file+' listed in verify-r96-public.py',fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8').includes("'"+file+"'"));}
