@@ -32629,8 +32629,8 @@
     },
     {
       "path": "cave-r204.js",
-      "bytes": 116089,
-      "sha256": "572d9c81c8e5f7fb54958dda78d86f613ce4ad79b8b2d37363a04fedd944cb05"
+      "bytes": 116381,
+      "sha256": "37716fb8d9b6fa1a2637864da9da29bb0de418008a88dcb8f12670a175a9e9d8"
     },
     {
       "path": "chunks/ep1a08-0-0.json",
@@ -33554,8 +33554,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6571324,
-      "sha256": "4647f9599ab93bb676af73f34ebd559c265c041a13500a73e9cf0ab91e4c852b"
+      "bytes": 6571365,
+      "sha256": "0e49800cfa2ca7de5a59778e2d0d81a46a3d5fb38b8db132e0468396d3ebda5a"
     },
     {
       "path": "intro-r140.js",
@@ -34158,6 +34158,11 @@
       "sha256": "38f7eb8714693e2728df62392bb8d67fd25817359d1babdf07a0e90eaa129a16"
     },
     {
+      "path": "surface-r435.js",
+      "bytes": 8947,
+      "sha256": "d8f8aae6834324a74f511e8296540889e8143696f339761963250a67ec2849af"
+    },
+    {
       "path": "terrain-readability-r323.js",
       "bytes": 5713,
       "sha256": "e64e34f0a20b9095ee7afeaef6dd7b6840be148d88bca4f81bcf3536de2aaa82"
@@ -34363,9 +34368,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6872,
-  "totalBytes": 1086876491,
-  "webHTMLSha256": "4647f9599ab93bb676af73f34ebd559c265c041a13500a73e9cf0ab91e4c852b",
+  "fileCount": 6873,
+  "totalBytes": 1086885771,
+  "webHTMLSha256": "0e49800cfa2ca7de5a59778e2d0d81a46a3d5fb38b8db132e0468396d3ebda5a",
   "largest": [
     {
       "path": "index.html",

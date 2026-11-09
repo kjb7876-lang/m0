@@ -16,6 +16,7 @@ const pos=g.position.array;let inside=true;for(let i=0;i<pos.length;i+=3){const 
 ok('quads stay inside their room rectangles',inside);
 ok('border strips and inner quad do not overlap (5 quads per room)',pos.length/12===10);
 {const rs=[0,1,2,3,4,5].map(i=>({id:i,x0:i*5,y0:0,x1:i*5+4,y1:4}));const g2=sb.f(T,{exploration:{r224Rooms:rs}},{kind:'home'},'ep1b02');const c2=g2.color.array,set=new Set(rs.map((r,i)=>c2.slice((i*5+4)*12,(i*5+4)*12+3).map(v=>v.toFixed(3)).join()));ok('different rooms get different tones (fixed seed per zone+room)',set.size>1,[...set]);}
+ok('snowfield ep1b09 gets no room rug bands (R435: they read as square lines on snow)',sb.f(T,{exploration:{r224Rooms:rooms}},{kind:'machine'},'ep1b09')===null&&sb.f(T,{exploration:{r224Rooms:rooms}},{kind:'machine'},'u201')!==null);
 sb.prefs.roomFloors=false;ok('can be switched off (storyworld.r204.cave roomFloors:false)',sb.f(T,{exploration:{r224Rooms:rooms}},{kind:'home'},'ep1b02')===null&&/prefs\.roomFloors=s\.roomFloors/.test(src));
 ok('mesh uses MultiplyBlending and is presentation only',/r228-room-floors/.test(src)&&/MultiplyBlending/.test(src)&&/rmesh\.userData\.presentationOnly=true/.test(src));
 const fail=checks.filter(c=>!c.pass);for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+String(JSON.stringify(c.detail)).slice(0,300)));

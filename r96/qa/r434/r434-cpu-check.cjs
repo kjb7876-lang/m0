@@ -6,7 +6,7 @@ const F='readability-r434.js',src=C(F);
 ok('runtime copy matches client source',RT(F)===src);
 try{new vm.Script(src);ok('syntax',true);}catch(e){ok('syntax '+e.message,false);}
 const html=RT('index.html');
-ok('script tag once, right after access-r420 and before combat-read-r409',html.split('"./'+F+'"').length===2&&/<script src="\.\/access-r420\.js"><\/script><script src="\.\/readability-r434\.js"><\/script><script src="\.\/combat-read-r409\.js"><\/script>/.test(html));
+ok('script tag once, right after access-r420 and before combat-read-r409',html.split('"./'+F+'"').length===2&&/<script src="\.\/access-r420\.js"><\/script><script src="\.\/readability-r434\.js"><\/script>(?:<script src="\.\/surface-r435\.js"><\/script>)?<script src="\.\/combat-read-r409\.js"><\/script>/.test(html));
 ok('listed in verify-r96-public.py',/'readability-r434\.js'/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')));
 ok('presentation only: no damage/cooldown/hp/save writes',!/\.hp\s*=[^=]|attackCD\s*=|\.damage\s*=|saveGame|localStorage\.setItem\((?!KEY)/.test(src));
 ok('no hexagram/rune sprites (enemy aura uses glow/ring only)',!/'rune'|'runecross'|'hex'/.test(src));
