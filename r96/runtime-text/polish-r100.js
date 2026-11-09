@@ -68,7 +68,7 @@
  // Screen side of the hero (u = x - y). While engaged the side flips only past
  // a small dead band so a mob does not twitch when the hero walks under it.
  const face=new WeakMap();
- function wantLeft(e){let s=face.get(e);if(!s){s={left:null,u:null};face.set(e,s);}
+ function wantLeft(e){const r444=window.__STORYWORLD_ENEMY_FACE_R444__?.left?.(e);if(typeof r444==='boolean')return r444;/* R444 */let s=face.get(e);if(!s){s={left:null,u:null};face.set(e,s);}
   const u=e.x-e.y,du=(player.x-player.y)-u,engaged=Math.hypot(player.x-e.x,player.y-e.y)<9||!!e.attack||e.rangedWindup>0;
   if(engaged){if(s.left===null||Math.abs(du)>.3)s.left=du<0;}
   else if(s.u!==null&&Math.abs(u-s.u)>.004)s.left=u<s.u;else if(s.left===null)s.left=du<0;

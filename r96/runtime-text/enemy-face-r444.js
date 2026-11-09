@@ -19,7 +19,7 @@
 //  끄기: localStorage storyworld.r444.face {"on":false}.
 (()=>{'use strict';
 if(window.__STORYWORLD_ENEMY_FACE_R444__)return;
-const REV='R444-face-3',KEY='storyworld.r444.face';
+const REV='R444-face-4',KEY='storyworld.r444.face';
 let prefs={on:true,debug:false,shadows:false};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={updates:0,spawns:0,jumps:0,turns:0,attackLocks:0,draws:0,owner:{},errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0;
@@ -28,7 +28,9 @@ const num=(v,d)=>Number.isFinite(Number(v))?Number(v):d;
 const S=new WeakMap();
 // 판정과 같은 각도: 근접 = e.attack.angle(meleeFootprint154 가 쓰는 값), 원거리 = rangedAim(투사체 방향), R61 동작 = a.angle(추적형은 R61 이 갱신).
 function atkAngle(e){const a=e.attack;if(a&&Number.isFinite(a.angle))return{g:a.angle,k:'melee'};if(e.rangedWindup>0&&Number.isFinite(e.rangedAim))return{g:e.rangedAim,k:'ranged'};
- const r=e.r61Action;if(r&&Number.isFinite(r.angle)&&T()<num(r.endAt,-1))return{g:r.angle,k:'r61'};return null;}
+ const r=e.r61Action;if(r&&Number.isFinite(r.angle)&&T()<num(r.endAt,-1))return{g:r.angle,k:'r61'};
+ // R442 보스 테마 기술 동작(0.9초): 기술이 떨어지는 쪽(theme-fx-r430 castSkill 의 대상 영웅)으로 — 몸 동작·장판 예고와 같은 방향
+ let k=null;try{k=window.__STORYWORLD_ENEMY_SKILL_POSE_R442__?.angle?.(e);}catch(_){}if(Number.isFinite(k))return{g:k,k:'skill'};return null;}
 const sideX=(dx,dy)=>dx-dy;// 화면 가로 성분(엔진 facing 과 같은 변환)
 function heroSide(e,p){const du=(p.x-p.y)-(e.x-e.y);return du<0?'left':'right';}
 // 맡지 않는 것: 페르소나(엔진 8방향 그림), 움직이지 않는 구조물 적(R170 탑·R446 기둥·R75 탑·R251 원·R193 탑 — 조형물 그림을 그대로 그림),
@@ -77,6 +79,20 @@ let cur=null;
 if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){if(!managed(e))return base.call(this,e,...a);
  const s=state(e);if(s&&(e.hp>0||s.owner==='dead'))e.direction=s.side;stats.draws++;const prev=cur;cur=e;
  try{return base.call(this,e,...a);}finally{cur=prev;if(s&&e.hp>0)e.direction=s.side;try{if(debugOn())debugDraw(e,s);}catch(err){fail(err);}}};}
+// ---- 자세 프레임: R54 이야기 전투 자세·R53 병원 자세는 프레임 안에 스스로 flip 을 넣는다(공격 중엔 판정 각, 아닐 땐 영웅·주시 각).
+//  공격이 아닐 때 걷는 쪽과 어긋나므로, 같은 그림 규칙(R54: bakedFacing left 면 오른쪽일 때 뒤집기·eight-way 는 그대로 / R53: 왼쪽일 때 뒤집기)에
+//  최종 좌우만 넣는다. 그림 고르기(준비·타격 칸, 앞·뒤 줄)는 그대로. 이 뒤의 덧씌우기(R93·R100·R106)도 같은 좌우를 쓴다. ----
+function poseFlip(e,r){if(!r||typeof r!=='object'||!(r.r54StoryPose||r.r53HospitalPose)||!managed(e)||!(e.hp>0))return r;const s=state(e);if(!s)return r;
+ let flip;if(r.r53HospitalPose)flip=s.side==='left';else{const b=r.assetFrame?.bakedFacing;if(b==='eight-way')return r;flip=b==='left'?s.side==='right':s.side==='left';}
+ if(flip===r.flip)return r;stats.poseFlips=(stats.poseFlips||0)+1;return{...r,flip};}
+function wrapPoses(){const S=window.__STORYWORLD_STORY_COMBAT_R54__;if(!S||typeof S.frameFor!=='function')return false;if(S.__r444)return true;const base=S.frameFor;
+ window.__STORYWORLD_STORY_COMBAT_R54__=Object.freeze({...S,__r444:true,frameFor(e,f){const r=base.call(this,e,f);try{return poseFlip(e,r);}catch(err){fail(err);return r;}}});return true;}
+wrapPoses();
+// R74 괴물 아틀라스(ep1a08 등): 프레임이 늘 영웅 쪽으로 뒤집혀 나왔다(공격 중에도). 그림은 오른쪽을 보는 옆모습이라 왼쪽일 때 뒤집는다.
+function wrapFlip(){const M=window.__STORYWORLD_ENEMY_MOTION_R51__;if(!M||typeof M.flip!=='function')return false;if(M.__r444)return true;const base=M.flip;
+ window.__STORYWORLD_ENEMY_MOTION_R51__=Object.freeze({...M,__r444:true,flip(e,f,fallback){const out=base.call(this,e,f,fallback);if(!f||!f.r74Monster||!managed(e)||!(e.hp>0))return out;
+  try{const s=state(e);if(!s)return out;stats.atlasFlips=(stats.atlasFlips||0)+1;return s.side==='left';}catch(err){fail(err);return out;}}});return true;}
+wrapFlip();
 // ---- 몬스터 그림자 없애기(사용자 2026-11-09 "/몬스터그림자는 없애") ----
 function noShadows(){return prefs.on&&!prefs.shadows;}
 if(typeof shadow==='function'){const base=shadow;shadow=function(...a){if(cur&&noShadows()){stats.shadowsSkipped=(stats.shadowsSkipped||0)+1;return;}return base.apply(this,a);};}
@@ -88,5 +104,5 @@ function debugDraw(e,s){if(!(e.hp>0)||typeof project!=='function'||typeof ctx!==
   ctx.fillText(st+' · '+s.owner+' · '+(s.side==='left'?'◀':'▶')+(s.d4?' '+s.d4[0]:''),q.x,q.y+14);}finally{ctx.restore();}}
 function set(p={}){for(const k of['on','debug','shadows'])if(typeof p[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
 window.__STORYWORLD_ENEMY_FACE_R444__=Object.freeze({revision:REV,left,side,d4,state:e=>{const s=state(e);return s?{side:s.side,d4:s.d4,owner:s.owner,aim:s.aim,vx:s.vx,vy:s.vy}:null;},
- owns:managed,noShadows,set,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats,owner:{...stats.owner}},lastError})});
+ owns:managed,noShadows,set,poseFlip,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats,owner:{...stats.owner}},lastError})});
 })();

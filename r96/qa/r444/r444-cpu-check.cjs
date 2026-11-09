@@ -4,9 +4,16 @@ const R=path.join(__dirname,'..','..'),C=f=>fs.readFileSync(path.join(R,'client-
 let bad=0,n=0;const ok=(m,c)=>{n++;if(!c){bad++;console.log('FAIL',m);}else console.log('ok  ',m);};
 const F='enemy-face-r444.js',src=C(F);
 ok('runtime copy matches client source',RT(F)===src);
-const PROV=['play-r113.js','combat-r137.js','play-r106.js','mobs-r109.js','samong-doll-r193.js','samong-shades-r200.js','story-mobs-r208.js','mob-dots-r375.js','samong-r161.js','combat-flow-r425.js','mob-art-variants-r306.js'];
+const PROV=['play-r113.js','combat-r137.js','play-r106.js','mobs-r109.js','samong-doll-r193.js','samong-shades-r200.js','story-mobs-r208.js','mob-dots-r375.js','samong-r161.js','combat-flow-r425.js','mob-art-variants-r306.js','approved-mobs-r380.js','mob-dots-r374.js','visual-r93.js','polish-r100.js','mob-unique-r248.js'];
 for(const f of PROV){ok(f+': runtime copy matches and defers to R444',RT(f)===C(f)&&C(f).includes('__STORYWORLD_ENEMY_FACE_R444__'));}
 try{new vm.Script(src);ok('syntax',true);}catch(e){ok('syntax '+e.message,false);}
+// 최종 뒤집기를 정하는 곳마다 R444 좌우를 먼저 묻는다(실측: 이 연결 전엔 R380 알집지기 17%, R93/R100 이 영웅 쪽으로 되돌림)
+ok('R380 approved sheets: faceLeft asks R444 first (before R441 moveLeft / attack / hero)',/function faceLeft\(e\)\{const r444=window\.__STORYWORLD_ENEMY_FACE_R444__\?\.left\?\.\(e\);if\(typeof r444==='boolean'\)return r444;/.test(C('approved-mobs-r380.js')));
+ok('R374 Dots sheets: faceLeft asks R444 first',/function faceLeft\(e\)\{const r444=window\.__STORYWORLD_ENEMY_FACE_R444__\?\.left\?\.\(e\);if\(typeof r444==='boolean'\)return r444;/.test(C('mob-dots-r374.js')));
+ok('R93 flip chain: side() uses R444 (art table keeps only the L/R/F polarity), bosses pass R444 through',/function side\(e,art\)\{const r444=window\.__STORYWORLD_ENEMY_FACE_R444__\?\.left\?\.\(e\);if\(typeof r444==='boolean'\)return r444\?-1:1;/.test(C('visual-r93.js'))&&/function bossHold\(e,native\)\{if\(window\.__STORYWORLD_ENEMY_FACE_R444__\?\.owns\?\.\(e\)\)return native;/.test(C('visual-r93.js')));
+ok('R248 self-drawn sheets (R290/R410 replacements): m.face follows R444 after its own rules',/\{const r444=window\.__STORYWORLD_ENEMY_FACE_R444__\?\.left\?\.\(e\);if\(typeof r444==='boolean'\)m\.face=r444\?-1:1;\}/.test(C('mob-unique-r248.js'))&&C('mob-unique-r248.js').indexOf('m.face=r444')>C('mob-unique-r248.js').indexOf('let fr=attackFrame(e)'));
+ok('R100 flip chain: wantLeft() uses R444',/function wantLeft\(e\)\{const r444=window\.__STORYWORLD_ENEMY_FACE_R444__\?\.left\?\.\(e\);if\(typeof r444==='boolean'\)return r444;/.test(C('polish-r100.js')));
+ok('R442 exposes the skill angle (read-only) and its runtime copy matches',/angle:e=>\{const m=marks\.get\(e\);if\(!m\)return null;const el=T\(\)-m\.t0;return el>=0&&el<m\.dur\?m\.angle:null;\}/.test(C('enemy-skill-pose-r442.js'))&&RT('enemy-skill-pose-r442.js')===C('enemy-skill-pose-r442.js'));
 const html=RT('index.html');
 ok('script tag once, right after bossroom-tidy-r438 and before combat-read-r409',html.split('"./'+F+'"').length===2&&/<script src="\.\/bossroom-tidy-r438\.js"><\/script><script src="\.\/enemy-face-r444\.js"><\/script><script src="\.\/combat-read-r409\.js"><\/script>/.test(html));
 ok('loads after every face decider it overrides (R98·R113·R137·R268·R286·R375·R380)',['combat-r98.js','play-r113.js','combat-r137.js','mob-gaze-r268.js','mob-motion-r286.js','mob-dots-r375.js','approved-mobs-r380.js'].every(f=>html.indexOf('"./'+f+'"')>0&&html.indexOf('"./'+f+'"')<html.indexOf('"./'+F+'"')));
@@ -57,5 +64,22 @@ function frames(E,e,n,step,dt=1/60){for(let i=0;i<n;i++){E.time+=dt;if(step)step
 {const E=env();E.room={id:'ep1b06'};const e=mob({direction:'front'});frames(E,e,3);ok('Mammon zone (ep1b06) untouched',E.read[E.read.length-1]==='front'&&E.__STORYWORLD_ENEMY_FACE_R444__.left(e)===null);}
 {const E=env(),api=E.__STORYWORLD_ENEMY_FACE_R444__;const e=mob({});E.player.x=5;E.player.y=9;frames(E,e,1);frames(E,e,40,e=>{e.x+=1.6/60;e.y+=1.6/60;});ok('4-way sheets get south when walking clearly down-screen',api.d4(e)==='south');
  frames(E,e,40,e=>{e.x+=2/60;e.y-=2/60;});ok('4-way sheets get east when walking clearly right',api.d4(e)==='east');}
+{const E=env(),api=E.__STORYWORLD_ENEMY_FACE_R444__;const e=mob({});E.player.x=-20;frames(E,e,1);frames(E,e,30,e=>{e.x-=2/60;});const walkSide=E.read[E.read.length-1];
+ // R442 보스 테마 기술(0.9초): 걸으며 시전해도 기술이 떨어지는 쪽(각 0 = 화면 오른쪽)을 본다 → 끝나면 다시 걸음
+ let sk=0;E.__STORYWORLD_ENEMY_SKILL_POSE_R442__={angle:()=>sk};frames(E,e,3,e=>{e.x-=2/60;});ok('R442 skill cast: body faces the skill target side while walking the other way',walkSide==='left'&&E.read[E.read.length-1]==='right'&&api.state(e).owner==='attack:skill');
+ sk=null;frames(E,e,30,e=>{e.x-=2/60;});ok('after the skill the walk side returns',E.read[E.read.length-1]==='left'&&api.state(e).owner==='move');}
+{// 자세 프레임(R54 이야기 전투 자세·R53 병원 자세): 프레임 안 flip 을 R444 좌우 + 그 자세의 그림 규칙으로
+ const E={console,Math,JSON,Number,String,Object,WeakMap,Map,Set,Array,localStorage:{getItem:()=>null,setItem:()=>{}},time:0,player:{x:-20,y:0,hp:100},settings:{},read:[]};E.window=E;
+ E.drawEnemy=function(e){E.read.push(e.direction);};E.shadow=function(){};E.__STORYWORLD_STORY_COMBAT_R54__=Object.freeze({__r380:true,frameFor:(e,f)=>f});E.__STORYWORLD_ENEMY_MOTION_R51__=Object.freeze({__r208:true,flip:(e,f,fb)=>f?.r74Monster?f.flip:fb});vm.createContext(E);vm.runInContext(src,E);
+ const S=E.__STORYWORLD_STORY_COMBAT_R54__,e=mob({});frames(E,e,1);frames(E,e,30,e=>{e.x+=2/60;});// 오른쪽으로 걷는 중(영웅은 왼쪽 멀리)
+ ok('pose wrapper installed outermost, other provider markers kept',S.__r444===true&&S.__r380===true);
+ const f0={path:'a.webp',flip:true,r54StoryPose:true,assetFrame:{}};const r0=S.frameFor(e,f0);ok('R54 story pose (right-facing art) walking right: flip off, original frame untouched',r0.flip===false&&f0.flip===true&&r0.r54StoryPose===true);
+ ok('R54 story pose with left-baked art walking right: flipped',S.frameFor(e,{flip:false,r54StoryPose:true,assetFrame:{bakedFacing:'left'}}).flip===true);
+ const f8={flip:false,r54StoryPose:true,assetFrame:{bakedFacing:'eight-way'}};ok('R54 eight-way bodies keep their own direction canvas',S.frameFor(e,f8)===f8);
+ ok('R53 hospital pose walking right: not flipped',S.frameFor(e,{flip:true,r53HospitalPose:true,assetFrame:{bakedFacing:'eight-way'}}).flip===false);
+ frames(E,e,40,e=>{e.x-=2/60;});ok('R53 hospital pose walking left: flipped',S.frameFor(e,{flip:false,r53HospitalPose:true,assetFrame:{bakedFacing:'eight-way'}}).flip===true);
+ const M=E.__STORYWORLD_ENEMY_MOTION_R51__;ok('R74 atlas flip rule installed outermost on the R51 chain (other markers kept)',M.__r444===true&&M.__r208===true);
+ ok('R74 monster atlas walking left: flipped by R444 side (the frame itself always faced the hero)',M.flip(e,{r74Monster:'m',flip:false},false)===true&&M.flip(e,{r208Mob:'x',flip:false},'FB')==='FB');
+ const pf={flip:true,r54StoryPose:true,assetFrame:{}};ok('persona / other frames untouched',S.frameFor(mob({persona:true}),pf)===pf&&S.frameFor(e,{flip:true,r208Mob:'x'}).flip===true);}
 {const E=env();E.__STORYWORLD_ENEMY_FACE_R444__.set({on:false});const e=mob({direction:'front'});frames(E,e,3);ok('{"on":false} leaves everything to the old rules',E.read[E.read.length-1]==='front'&&E.__STORYWORLD_ENEMY_FACE_R444__.left(e)===null);}
 console.log(`\nR444 enemy-face: ${n-bad}/${n} passed`);if(bad)process.exit(1);

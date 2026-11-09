@@ -91,13 +91,13 @@
  const artOf=e=>{const p=String(e?.profile?.frames?.idle?.path||e?.path||'').replace(/^\.\//,'');return ART_LEFT.has(p)?'L':ART_RIGHT.has(p)?'R':'F';};
  // Screen-horizontal offset of a world vector (same axis as native facing()).
  const screenX=(dx,dy)=>dx-dy;
- function side(e,art){const st=faces.get(e)||{side:0,pend:0,since:0};faces.set(e,st);let want=0,mag=0;
+ function side(e,art){const r444=window.__STORYWORLD_ENEMY_FACE_R444__?.left?.(e);if(typeof r444==='boolean')return r444?-1:1;/* R444: 좌우는 enemy-face-r444 한 곳에서 — 이 표는 그림 방향(L/R/F)만 정한다 */const st=faces.get(e)||{side:0,pend:0,since:0};faces.set(e,st);let want=0,mag=0;
   if(player&&player.hp>0&&Math.hypot(player.x-e.x,player.y-e.y)<NEAR){const sx=screenX(player.x-e.x,player.y-e.y);want=Math.sign(sx);mag=Math.abs(sx);}
   else if(e.moving&&(e.moveDX||e.moveDY)){const sx=screenX(e.moveDX||0,e.moveDY||0);want=Math.sign(sx);mag=Math.abs(sx)*8;}
   const threshold=art==='F'?.9:.35;
   if(want&&want!==st.side&&mag>threshold){if(st.pend!==want){st.pend=want;st.since=time;}if(!st.side||time-st.since>=HOLD){st.side=want;st.pend=0;}}else if(want===st.side)st.pend=0;
   return st.side;}
- function bossHold(e,native){const st=faces.get(e)||{side:native?-1:1,pend:0,since:0};faces.set(e,st);const want=native?-1:1;
+ function bossHold(e,native){if(window.__STORYWORLD_ENEMY_FACE_R444__?.owns?.(e))return native;/* R444 가 정한 좌우(e.direction·자세 프레임)를 그대로 — 머뭇거림은 R444 가 이미 둔다 */const st=faces.get(e)||{side:native?-1:1,pend:0,since:0};faces.set(e,st);const want=native?-1:1;
   if(e.attack||e.rangedWindup>0){st.side=want;st.pend=0;return native;}
   if(want!==st.side){if(st.pend!==want){st.pend=want;st.since=time;}if(time-st.since>=HOLD){st.side=want;st.pend=0;}}else st.pend=0;return st.side<0;}
  const motion=window.__STORYWORLD_ENEMY_MOTION_R51__;
