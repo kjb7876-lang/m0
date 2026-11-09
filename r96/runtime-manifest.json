@@ -9,8 +9,8 @@
     },
     {
       "path": "access-r420.js",
-      "bytes": 15366,
-      "sha256": "2139771ab44fb29db3f1d197672acd0388f8ac126719d0b2f32c4fe04ffce794"
+      "bytes": 18902,
+      "sha256": "bd72f0a05519273926284d268cf2de0b90dd7b53f95c62be9107f587c17966cb"
     },
     {
       "path": "aggro-chase-r390.js",
@@ -33919,8 +33919,8 @@
     },
     {
       "path": "light-r182.js",
-      "bytes": 14860,
-      "sha256": "6c5d6fef2c2c9e3a31314327922130361ed15543701e52431f9a1b9963b3db7c"
+      "bytes": 15969,
+      "sha256": "ba15e6d0c2e5e3bba4945f6874f64fefd2ca892c6c2f5b1404ede324492c360a"
     },
     {
       "path": "mammon-bossroom.js",
@@ -34729,7 +34729,7 @@
     }
   ],
   "fileCount": 6945,
-  "totalBytes": 1091891309,
+  "totalBytes": 1091895954,
   "webHTMLSha256": "e53aa63c67bb6cb21c48462c4a2ccbda3f8079be0262c939c3f53dc8cfbf2c35",
   "largest": [
     {
