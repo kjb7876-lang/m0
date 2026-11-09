@@ -432,6 +432,8 @@ jobs:
         run: node r96/qa/r435/r435-cpu-check.cjs
       - name: R438 sin boss rooms tidy (no shared R224 furniture in boss rooms, zone-only furniture, no lamps mid-floor) CPU check
         run: node r96/qa/r438/r438-cpu-check.cjs
+      - name: R447 props by room function (R224 room furniture as one wall cluster per room, empty junctions/yards/short corridors, rotation, cover fade) CPU check
+        run: node r96/qa/r447/r447-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
         run: node r96/qa/r430/r430-cpu-check.cjs
       - name: R431 boss-room center fights + theme boss skill 6s + touch status/DoT + black-flame prop throws CPU check
