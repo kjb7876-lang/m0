@@ -102,6 +102,23 @@ const placed3=shown(mine(w3));
 ok('envy region: only the envy mirror r80-026 is placed',placed3.length>0&&placed3.every(p=>p.r80Art==='r80-026'));
 ok('envy region: nothing placed inside boss frame+3',placed3.every(p=>!(p.x>=3&&p.x<=29&&p.y>=3&&p.y<=23)));
 // 맘몬·꿈 층·사몽 은 손대지 않는다
+// 격자 지역: 이름만 다른 10×10 방들(문 틈 없음, R169 길에서 먼 x 200~)
+function grid(id,names,kind,rect){const rooms=names.map((nm,i)=>rect&&rect[i]?{id:i,name:nm,...rect[i]}:{id:i,name:nm,x0:200+(i%6)*14,y0:4+Math.floor(i/6)*14,x1:210+(i%6)*14,y1:14+Math.floor(i/6)*14});
+ const cells=[];for(const q of rooms)for(let x=q.x0;x<q.x1;x++)for(let y=q.y0;y<q.y1;y++)cells.push([x,y]);
+ const L={floorCells:cells,r224Rooms:rooms.map(({id,x0,y0,x1,y1})=>({id,x0,y0,x1,y1})),worldR74:{rooms:rooms.map(q=>({id:q.id,name:q.name})),doors:[]},worldWardR81:{bossBounds:[6,6,26,20],gatherBounds:[4,27,28,39]}};
+ const props=kind.map((a,i)=>{const q=rooms[i%rooms.length];const s=assets['r80-'+a];return{id:'r224:furn:'+id+':'+i,path:s.path,x:q.x0+1.5+i*.01,y:q.y0+.85,height:64,solid:false,visible:true,r80Dressing:true,r224Furniture:true,r80Art:'r80-'+a};});
+ return{id,layer:'STORY',exploration:L,props,enemies:[]};}
+const count=(w,a)=>shown(mine(w)).filter(p=>p.r80Art==='r80-'+a).length;
+{const names=[...Array(20)].map(()=> '앞방').concat(['예배실']);const b7=boot(),w7=grid('ep1a99',names,CLINIC);b7.ctx.room=w7;const rp=b7.api.curate(w7);
+ const arts=Object.fromEntries(['146','145','149','148','142'].map(a=>[a,count(w7,a)]));const rep7=rp.rooms;
+ ok('same art at most 6 per region (cluster core capped → that room left empty, why=repeat)',Object.values(arts).every(n=>n<=6)&&arts['146']===6&&rep7.some(q=>q.why==='repeat'&&!q.pieces.length));
+ ok('story-named rooms take the art budget before generic connectors (예배실, last id, still furnished)',rep7.find(q=>q.name==='예배실').pieces.length>0&&/^146@/.test(rep7.find(q=>q.name==='예배실').pieces[0]));}
+{const names=['서재','서재','거울 회랑','정돈된 거실'],rect=[{x0:40,y0:40,x1:50,y1:50},{x0:54,y0:40,x1:64,y1:50},{x0:40,y0:54,x1:56,y1:60},{x0:60,y0:54,x1:70,y1:64}];
+ const b8=boot(),w8=grid('ep1b03',names,['024','026','027','025'],rect);w8.exploration.sinRoomArt='sin-room-art-v1';b8.ctx.room=w8;const rp=b8.api.curate(w8);const by=nm=>rp.rooms.filter(q=>q.name===nm);
+ ok('envy house: studies (서재) stay empty instead of a mirror each; mirror gallery and living room get the mirror',by('서재').every(q=>!q.pieces.length)&&by('거울 회랑')[0].pieces.length===1&&/^026@/.test(by('거울 회랑')[0].pieces[0])&&/^026@/.test(by('정돈된 거실')[0].pieces[0]||''));}
+// 계열을 모르는 지역(R224 가 공용 소파 r80-024 만 놓음): 계획 없음 → 소품 수가 바뀌어도 R224 가구는 그대로
+{const b6=boot(),w6=world('dist99',['024']);const s6=JSON.stringify(w6.props);b6.ctx.room=w6;b6.api.curate(w6);w6.props.push({id:'r103chest:STORY:dist99',x:70,y:8,chestR103:true});b6.api.curate(w6);b6.api.curate(w6);
+ ok('unknown furniture family: no plan, R224 furniture left as is even after props change',JSON.stringify(w6.props.slice(0,-1))===s6&&!w6.props.some(p=>p.r447Furniture||p.r303Hide));}
 for(const[label,mut]of[['Mammon ep1b06',w=>{w.id='ep1b06';}],['dream layer',w=>{w.layer='DREAM';}],['samong',w=>{w.exploration.samongR103={key:'x'};}]]){const b4=boot(),w4=world();mut(w4);const s4=JSON.stringify(w4.props);b4.ctx.room=w4;b4.api.curate(w4);ok(label+' untouched',JSON.stringify(w4.props)===s4);}
 // 그리기: 쉬는 가구는 안 그리고, 놓은 가구는 그린다
 drawn.length=0;const hid=w0.props.find(p=>p.r303Hide==='r447');ctx.drawProp(hid);ctx.drawProp(all[1]);

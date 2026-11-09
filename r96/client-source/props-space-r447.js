@@ -28,7 +28,7 @@
 //  끄기: localStorage['storyworld.r447.space']='{"on":false}' (부분: {"furnish":false} 가구 규칙만, {"fade":false} 가림 완화만)
 (()=>{'use strict';
 if(window.__STORYWORLD_PROPS_SPACE_R447__)return;
-const REV='R447-props-space-3',KEY='storyworld.r447.space';
+const REV='R447-props-space-4',KEY='storyworld.r447.space';
 const prefs={on:true,furnish:true,fade:true};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(prefs))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={regions:0,rooms:0,kept:0,hidden:0,skippedBoss:0,emptyRooms:0,rhythmEmpty:0,lateHidden:0,reloads:0,faded:0,errors:0};let lastError=null;
@@ -88,6 +88,9 @@ const THEME={ep1b02:/^02[45]$/,ep1b03:/^026$/,ep1b04:/^02[57]$/};
 // 그림 정면: 대부분의 R80 가구·의자·휠체어는 +y(화면 왼쪽 아래)를 본다. 소파 r80-024·쓰러진 기둥 r80-021(R412 NATIVE_X)과 침대 r80-142(긴 변·발치 +x)는 +x.
 //  → 뒤쪽 벽에 등을 대고 방(탁자) 쪽을 보게: +y 정면은 -x 벽(w)에서, +x 정면은 -y 벽(n)에서 좌우를 뒤집는다(R303·R406·R412 와 같은 규칙). 탁자 r80-146 은 대칭.
 const NATIVE_X=/^(021|024|142)$/,SYM=/^146$/;
+// 같은 그림 반복 상한: 한 지역에 같은 그림은 6점까지(같은 물건이 지역 전체에 줄지어 서는 것 줄이기).
+//  이름 붙은 방(주사실·서재·거울 회랑 …)을 먼저, R171 일반 연결 방(입구·앞방·길목·복도·작은 마당·계단참·다음 구역 문)을 나중에 채워 상한 몫이 이야기 공간에 먼저 간다.
+const ART_CAP=6,GENERIC=/^(입구|앞방|길목|복도|작은 마당|계단참|다음 구역 문)$/;
 
 // ---- 그림 ----------------------------------------------------------------------------------------
 function asset(id){const A=window.__STORYWORLD_ASSETS_R80_DATA__?.assets;const a=A&&A['r80-'+id];return a&&a.path?a:null;}
@@ -141,8 +144,9 @@ function plan(r,snap=snapshot(r)){const L=r?.exploration,R=L?.r224Rooms;if(!L||!
  const inSin=(x,y,m)=>!!B&&x>=B[0]-m&&x<=B[2]+m&&y>=B[1]-m&&y<=B[3]+m;
  const TT=T[kind],theme=sinOn?THEME[r.id]||null:null,F=floorSet(L);
  const info=new Map((L.worldR74?.rooms||[]).map(q=>[q.id,q])),avoid=layoutAvoid(r),path=pathOf(r),others=snap.others||[];
- const out={kind,rooms:[]},placed=[],nth={};
- const order=R.filter(q=>q&&fin(q.x0+q.y0+q.x1+q.y1)).sort((a,b)=>(a.id??0)-(b.id??0));
+ const out={kind,rooms:[]},placed=[],nth={},used={};
+ const gen=q=>GENERIC.test(String(info.get(q.id)?.name||info.get(q.id)?.purpose||'').trim())?1:0;
+ const order=R.filter(q=>q&&fin(q.x0+q.y0+q.x1+q.y1)).sort((a,b)=>gen(a)-gen(b)||(a.id??0)-(b.id??0));
  for(const rc of order){const nm=info.get(rc.id)?.name||info.get(rc.id)?.purpose||'',space=spaceOf(nm),w=rc.x1-rc.x0,d=rc.y1-rc.y0,area=w*d;
   const room={id:rc.id,name:nm,space,variant:-1,pieces:[],why:'',rect:[rc.x0,rc.y0,rc.x1,rc.y1]};out.rooms.push(room);
   if(space==='boss'||overlap(rc,W.bossBounds)||overlap(rc,W.gatherBounds)){room.why='boss';room.boss=true;continue;}/* 보스방 작업 몫: R224 가구 그대로 */
@@ -153,9 +157,11 @@ function plan(r,snap=snapshot(r)){const L=r?.exploration,R=L?.r224Rooms;if(!L||!
   const list=TT[space]||TT.room||[E];const k=nth[space]=(nth[space]??-1)+1,vi=k%list.length;room.variant=vi;/* 그 종류 첫 방은 늘 온전한 묶음 */
   let tpl=list[vi].slice();
   if(!tpl.length){room.why='rhythm';continue;}/* 같은 종류 방 사이 일부러 비움 */
-  if(theme){tpl=tpl.filter(q=>theme.test(q.art));if(!tpl.length&&['living','rest','storage','work','room'].includes(space)){const first=['024','025','026','027'].find(a=>theme.test(a));if(first)tpl=[P(first,0,WALL_D[first]||.6)];}}
+  if(theme){tpl=tpl.filter(q=>theme.test(q.art));if(!tpl.length&&['living','rest','work','room'].includes(space)){const first=['024','025','026','027'].find(a=>theme.test(a));if(first)tpl=[P(first,0,WALL_D[first]||.6)];}}
   const cap=Math.max(1,Math.min(4,Math.round(area/45)));/* R224 와 같은 방 크기별 상한(작은 방은 적게) */
   tpl=tpl.slice(0,cap);
+  if(tpl.length&&(used[tpl[0].art]||0)>=ART_CAP){room.why='repeat';continue;}/* 핵심 그림이 이미 지역 상한 — 이 방은 비운다 */
+  {const c={};tpl=tpl.filter((q,i)=>{const n=(used[q.art]||0)+(c[q.art]||0);if(i>0&&n>=ART_CAP)return false;c[q.art]=(c[q.art]||0)+1;return true;});}
   if(!tpl.length){room.why='none';continue;}
   const salt=h32(r.id+':'+rc.id);
   const free=(x,y,fx,fy,mine)=>{if(!inRect(rc,x,y,-.35))return false;if(blockedL(L,x,y,.3)||blockedL(L,fx,fy,.08))return false;
@@ -182,9 +188,9 @@ function plan(r,snap=snapshot(r)){const L=r?.exploration,R=L?.r224Rooms;if(!L||!
   let got=null;for(let k2=tpl.length;k2>=1&&!got;k2--)got=tryGroup(tpl.slice(0,k2),sides,null);
   const pieces=got?got.pcs.slice():[];
   // 큰 방: 맞은편 벽에 다른 그림 한 점
-  if(got&&area>=380&&pieces.length<cap){const usedArt=new Set(pieces.map(q=>q.art));const ex=(EXTRA[kind]||[]).find(a=>!usedArt.has(a)&&(!theme||theme.test(a)));
+  if(got&&area>=380&&pieces.length<cap){const usedArt=new Set(pieces.map(q=>q.art));const ex=(EXTRA[kind]||[]).find(a=>!usedArt.has(a)&&(!theme||theme.test(a))&&(used[a]||0)<ART_CAP);
    if(ex){const other=got.side==='n'?'w':'n';const g2=tryGroup([P(ex,0,WALL_D[ex]||.55)],[other,got.side],got);if(g2)pieces.push(...g2.pcs);}}
-  pieces.forEach((pc,i)=>{pc.id='r447:furn:'+r.id+':'+rc.id+':'+i;room.pieces.push(pc);});
+  pieces.forEach((pc,i)=>{pc.id='r447:furn:'+r.id+':'+rc.id+':'+i;room.pieces.push(pc);used[pc.art]=(used[pc.art]||0)+1;});
   if(!pieces.length)room.why='no-spot';}
  return out;}
 
@@ -200,6 +206,7 @@ function make(pc,rm){const a=asset(pc.art);if(!a)return null;
  if(pc.mirror!==r140Flips(p))p.r303Flip=true;return p;}
 const inBoss=(st,p)=>st.bossRects.some(b=>p.x>=b[0]-.01&&p.x<=b[2]+.01&&p.y>=b[1]-.01&&p.y<=b[3]+.01);
 function apply(r,st){const keepPaths=[],live=liveAvoid(r),have=new Set();let kept=0,rested=0,late=0;
+ if(!st.planned)return{kept,rested,late};/* 계열을 모르는 지역(R224 그림이 공용 소파뿐 등)은 R224 가구를 그대로 둔다 */
  for(const p of r.props){if(!p)continue;if(MINE(p)){have.add(p.id);continue;}
   if(p.r224Furniture&&!p.r303Hide&&!inBoss(st,p)){p.r303Hide='r447';rested++;}}
  for(const p of st.objs){if(!have.has(p.id))r.props.push(p);/* 처음, 또는 다른 모듈이 소품 배열을 새로 만들었을 때 */
