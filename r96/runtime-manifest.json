@@ -24818,36 +24818,6 @@
       "sha256": "7335837597f04b56780fecb48ae6036ed908e4f816971574903e95d942772258"
     },
     {
-      "path": "assets/r445/slayer-walk-n-src/README-KO.txt",
-      "bytes": 465,
-      "sha256": "2c30f1233d760a09a47f64278cf6dae2a7d351f54a2d230cde7fdc34cf4a177a"
-    },
-    {
-      "path": "assets/r445/slayer-walk-n-src/manifest.json",
-      "bytes": 2197,
-      "sha256": "e14a86f53eb22ddefcb1faf2909053bc1a46a00796662e7a1d166660db9ea029"
-    },
-    {
-      "path": "assets/r445/slayer-walk-n-src/walk-n-00.png",
-      "bytes": 26593,
-      "sha256": "256a3e6caa4507c0e1a849e5797753b7cc76d08589a893dfb676f148e737fbe4"
-    },
-    {
-      "path": "assets/r445/slayer-walk-n-src/walk-n-01.png",
-      "bytes": 27732,
-      "sha256": "ac8d976b4fe71ac986e0881f90382022fa563727deea015203683b47ed0d0171"
-    },
-    {
-      "path": "assets/r445/slayer-walk-n-src/walk-n-02.png",
-      "bytes": 27954,
-      "sha256": "a1c0c7690222563db128d68617bdd616cdb44cdfe233b98f662c8281cc5b3dfc"
-    },
-    {
-      "path": "assets/r445/slayer-walk-n-src/walk-n-03.png",
-      "bytes": 28197,
-      "sha256": "66e4fbcd907f4cec0aa20b73997d177cab296a231257ba4e8ec4630c14f44857"
-    },
-    {
       "path": "assets/r445/slayer/index.json",
       "bytes": 1699,
       "sha256": "0dffb33e649584fcdfbc3a4049155692155523e15086f4c86625b97fadd0fe29"
@@ -34658,8 +34628,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6931,
-  "totalBytes": 1091591274,
+  "fileCount": 6925,
+  "totalBytes": 1091478136,
   "webHTMLSha256": "d50992db3c93fb604a6e81efdbbb9a164d6f9e5b59c5202804933eed6750a714",
   "largest": [
     {
