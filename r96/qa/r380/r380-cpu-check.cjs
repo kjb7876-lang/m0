@@ -5,7 +5,7 @@ for(const f of ['approved-mobs-r380.js','mob-unique-r248.js','mob-preload-r260.j
 const html=RT('index.html');ok(/<script src="\.\/music-box-r378\.js"><\/script><script src="\.\/approved-mobs-r380\.js"><\/script>/.test(html)&&html.split('approved-mobs-r380.js').length===2,'스크립트 태그 한 번, R378 뒤');
 ok(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').includes("'approved-mobs-r380.js',"),'공개 확인 목록');
 const inputs=JSON.parse(fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8'));ok(inputs.textPaths.includes('approved-mobs-r380.js'),'런타임 입력 목록');
-const idx=JSON.parse(RT('assets/r380/mobs/index.json'));ok(idx.mobs.length===106,'106장(R404 레거시 6종 7장 + R403 디스토피아 특수3·레이저3 + R402 학생·스토리텔러 2 + R401 역행 신규 5종 8장 + R400 문턱 2 + R398 태양 순찰·골렘 v2·도장체 좌우 + R397 R200 S-04 복원 3 + R396 정원사·망령2 + R395 역행 신규 2 + R394 RE-3 백색 사수 좌우 2 + R393 역행 보스 2종 좌우 4 + R392 S-06 보스 2·순찰자 1 + R391 사몽 5 + R380 5 + R381 7 + R382 16 + R383 2 + R386 3 + R387 1 + R389 페르소나 보스 8 + 분신 8 + R390 디스토피아 5)');
+const idx=JSON.parse(RT('assets/r380/mobs/index.json'));ok(idx.mobs.length===107,'107장(R437 하늘맵 전극기계수호기사 1 + R404 레거시 6종 7장 + R403 디스토피아 특수3·레이저3 + R402 학생·스토리텔러 2 + R401 역행 신규 5종 8장 + R400 문턱 2 + R398 태양 순찰·골렘 v2·도장체 좌우 + R397 R200 S-04 복원 3 + R396 정원사·망령2 + R395 역행 신규 2 + R394 RE-3 백색 사수 좌우 2 + R393 역행 보스 2종 좌우 4 + R392 S-06 보스 2·순찰자 1 + R391 사몽 5 + R380 5 + R381 7 + R382 16 + R383 2 + R386 3 + R387 1 + R389 페르소나 보스 8 + 분신 8 + R390 디스토피아 5)');
 for(const m of idx.mobs){const p=path.join(R,'runtime-text',m.path);ok(fs.existsSync(p),m.id+' 파일');if(!fs.existsSync(p))continue;const b=fs.readFileSync(p);
  ok(crypto.createHash('sha256').update(b).digest('hex')===m.sha256&&b.length===m.bytes,m.id+' 해시·크기');ok(JSON.stringify(inputs).includes(m.path),m.id+' 런타임 입력');ok(m.finalArt===false,m.id+' 임시 표기');}
 ok(CS('mob-unique-r248.js').includes('s=sheetOf(e);if(s&&(')&&CS('mob-unique-r248.js').includes('__STORYWORLD_APPROVED_MOBS_R380__?.assign?.(e)))s=null;'),'R248 이 R380 몹을 덮어 그리지 않음');
@@ -23,6 +23,7 @@ ctx.makeRoom=function(id,l){const mk=(name,nid,o={})=>({id:id+':'+name,name,nati
  if(id==='dist00')return{exploration:{entry:{x:1.5,y:1.5},floorCells:Array.from({length:400},(_,k)=>[k%20,Math.floor(k/20)])},enemies:[mk('뿌리의 문지기','dist00-boss',{boss:true,x:3,y:3})]};
  if(id==='ep1a10')return{enemies:[mk('오만의 폐허핵','mb-ep1a10',{midboss:true,spawnState:'hidden',maxHp:36355,hp:36355,damage:40,r248Key:'오만의 폐허핵',combatProfile:{bodyBlock:{r:.6}}}),mk('약 1','a10-h1')]};
  if(id==='ep1a09')return{objective:{x:15,y:13},exploration:{entry:{x:1.5,y:1.5},floorCells:Array.from({length:400},(_,k)=>[k%20,Math.floor(k/20)])},enemies:[mk('주사실 감시환각 1','a09-o1',{x:19.5,y:19.5})]};
+ if(id==='ep1b08')return{enemies:[mk('전극을 두른 좀비 수호기사 2','b08-c1'),mk('전극을 두른 좀비 수호기사 우두머리','b08-c1',{r373Name:'전극을 두른 좀비 수호기사'}),mk('육망성의 흑마술 실험체 1','b08-v1')]};
  if(id==='u202')return{enemies:[1,2,3,4,5].map(i=>mk('가짜 자비 수집가 '+i,'u202-e1',{combatProfile:{attackShape:{r:1}}})).concat([mk('가짜 자비 수집가 우두머리','u202-e1'),mk('복종 봉인구 1','u202-e2')])};return{enemies:[]};};
 vm.createContext(ctx);vm.runInContext('var window=this.window;'+src.replace("if(typeof fetch==='function')","window.__idx=(j)=>{idx=j};if(false)"),ctx);ctx.window.__idx(idx);
 const A=ctx.window.__STORYWORLD_APPROVED_MOBS_R380__,S=ctx.window.__STORYWORLD_STORY_COMBAT_R54__;
@@ -133,6 +134,12 @@ ctx.room={id:'dist02'};ok(f({name:'재 나방'})?.path==='base','dist01 밖 같�
 ok(f({name:'재 나방',boss:true})?.path==='base','보스 제외');
 const m=idx.mobs.find(x=>x.id==='mech-oblivion-spider');const fr=A.frameOf({id:'a',hp:10,x:0,y:0,attack:{elapsed:.3,angle:0}},m);ok(m.attack.includes(Math.round(fr.assetFrame.sourceRect[0]/m.cell[0]+Math.round(fr.assetFrame.sourceRect[1]/m.cell[1])*m.cols)),'공격 칸(2줄 시트 좌표)');
 ctx.player={x:-3,y:0};ok(A.frameOf({id:'b',hp:10,x:3,y:0},m).flip===true,'영웅 왼쪽 → 왼쪽 보기');
+// R437 하늘맵 전극기계수호기사: ep1b08 '전극을 두른 좀비 수호기사'만 새 그림·새 이름, dist04 '되살아난 수호기사'(R385 가 옛 좀비 그림을 빌림)는 그대로
+ctx.room={id:'ep1b08'};{const b8=ctx.makeRoom('ep1b08','STORY'),[k1,k2,hx]=b8.enemies;ok(k1.name==='전극기계수호기사 2'&&k2.name==='전극기계수호기사 우두머리'&&k2.r373Name==='전극기계수호기사'&&hx.name==='육망성의 흑마술 실험체 1'&&b8.enemies.length===3,'R437 ep1b08 개명(번호·우두머리 꼬리 유지, 수 그대로)');
+ ok(S.frameFor(k2,null)?.r380Mob==='electrode-machine-knight-v1'&&S.frameFor({id:'ek9',name:'전극을 두른 좀비 수호기사 3',hp:10,x:3,y:0},null)?.r380Mob==='electrode-machine-knight-v1','R437 ep1b08 전극기계수호기사 시트(개명 전 이름도)');
+ ok(ctx.makeRoom('ep1b08','DREAM').enemies[0].name==='전극을 두른 좀비 수호기사 2','R437 DREAM 층은 그대로');}
+ctx.room={id:'dist04'};{const rz={id:'rz0',name:'되살아난 수호기사',nativeId:'dist04-c2',hp:10,x:3,y:0};ok(S.frameFor(rz,null)?.r380Mob!=='electrode-machine-knight-v1'&&rz.name==='되살아난 수호기사','R437 dist04 되살아난 수호기사는 그대로');}
+ctx.room={id:'dist01'};
 let got=null;ctx.spawnBurnDeath3=function(e){got=e.profile?.frames?.death;};A.installDeath();const prof={frames:{death:{path:'old'}}};const dz={id:'d',name:'재 나방',profile:prof,hp:0,x:1,y:1};ctx.spawnBurnDeath3(dz);
 ok(got?.r380Mob==='ash-moth-v2'&&dz.profile===prof,'죽음 불꽃에 새 그림, profile 복원');
 ok(idx.mobs.every(m=>Array.from({length:40},(_,i)=>A.cellFor({id:'probe'+i,hp:1,moving:i%2===1},m)).every(k=>Number.isInteger(k)&&k>=0)),'모든 시트 대기·이동 칸이 정수(한 장 이동 시트 포함, Codex P2)');

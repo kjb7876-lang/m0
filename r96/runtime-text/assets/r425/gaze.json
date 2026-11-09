@@ -4,7 +4,7 @@
 "default": "both",
 "counts": {
 "both": 82,
-"x": 79,
+"x": 80,
 "plus": 127
 },
 "classes": {
@@ -295,6 +295,7 @@
 "rc140/story-cycle-motions/mb-kair01-v31231.png": "plus",
 "rc140/story-cycle-motions/mb-kair04-v31231.png": "plus",
 "rc140/story-cycle-motions/u203-mid.png": "plus",
-"rc140/story-cycle-motions/u206-mid.png": "both"
+"rc140/story-cycle-motions/u206-mid.png": "both",
+"r380/mobs/electrode-machine-knight-v1.webp": "x"
 }
 }
