@@ -1,0 +1,36 @@
+// R448 겹침 검사: 영웅보다 앞(x+y 큼)에 있고 영웅 몸과 겹치는 조형물만 영웅 뒤 순서로 다시 덮고, 영웅 실루엣을 그 위에 반투명으로.
+const fs=require('fs'),path=require('path'),assert=require('assert');
+const root=path.resolve(__dirname,'../..');let n=0;const ok=m=>{n++;console.log('PASS',m);};
+const CS=f=>fs.readFileSync(path.join(root,'client-source',f),'utf8'),RT=f=>fs.readFileSync(path.join(root,'runtime-text',f),'utf8');
+const src=CS('depth-overlap-r448.js');assert.strictEqual(src,RT('depth-overlap-r448.js'));ok('client-source and runtime copies agree');
+const idx=RT('index.html');assert(idx.split('"./depth-overlap-r448.js"').length===2&&idx.indexOf('"./hero-visibility-r350.js"')<idx.indexOf('"./depth-overlap-r448.js"')&&idx.indexOf('"./depth-overlap-r448.js"')<idx.indexOf('"./combat-r118.js"'));ok('loaded once, after R350, before combat-r118');
+assert(fs.readFileSync(path.join(root,'..','scripts','verify-r96-public.py'),'utf8').includes("'depth-overlap-r448.js'"));ok('public verify list includes it');
+const img=(o)=>({kind:'image',key:o.key,order:o.order,spatialRole:o.role??null,owner:o.owner,sourcePath:o.src||'',points:o.pts,style:{globalAlpha:o.a??1}});
+const box=(x0,y0,x1,y1)=>[[x0,y0],[x1,y0],[x1,y1],[x0,y1]];
+const make=(props)=>{const win={};new Function('window','localStorage','room','player','setInterval',src)(win,{getItem:()=>null,setItem(){}},{props},{x:5,y:5,visible:true},()=>0);return win.__STORYWORLD_DEPTH_OVERLAP_R448__;};
+const hero=img({key:'hero:1:5',order:50,owner:{kind:'hero',id:'hero:1',x:5,y:5},src:'assets/hero.webp',pts:box(100,100,140,180)});
+const front=img({key:'prop:tree:0',order:60,role:'body',owner:{kind:'prop',id:'prop:tree',x:5.6,y:5.6},src:'assets/r99/outdoor/tree.webp',pts:box(80,40,180,200),a:.36});
+const behind=img({key:'prop:statue:0',order:40,role:'body',owner:{kind:'prop',id:'prop:statue',x:4.2,y:4.5},src:'assets/statue.webp',pts:box(90,60,150,170)});
+const rug=img({key:'prop:rug:0',order:61,role:'body',owner:{kind:'prop',id:'prop:rug',x:6,y:6},src:'assets/rug.webp',pts:box(90,150,160,200)});
+const far=img({key:'prop:far:0',order:62,role:'body',owner:{kind:'prop',id:'prop:far',x:9,y:9},src:'assets/barrel.webp',pts:box(300,300,340,360)});
+const wall=img({key:'prop:w:0',order:63,role:'body',owner:{kind:'prop',id:'prop:w',x:6,y:6},src:'assets/pillar.webp',pts:box(100,100,140,180)});
+const fx=img({key:'fx',order:70,owner:{kind:'effect',id:'skill'},pts:box(100,100,140,180)});
+const A=make([{id:'tree'},{id:'statue'},{id:'rug'},{id:'far'},{id:'w',terrainWall:true}]);
+const cmds=[behind,hero,front,rug,far,wall,fx];A.process(cmds);
+const added=cmds.slice(7);const over=added.filter(c=>c.key.startsWith('r448:over:')),ghost=added.filter(c=>c.key.startsWith('r448:ghost:'));
+assert.deepStrictEqual(over.map(c=>c.key),['r448:over:prop:tree:0']);ok('only the overlapping prop in front of the hero is re-drawn (not behind, flat rug, far, or terrain wall)');
+assert(over[0].order>hero.order&&over[0].order<fx.order&&over[0].spatialRole===null&&over[0].owner.kind==='effect'&&over[0].owner.r350===true);ok('cover goes right after the hero in the effect pass, before later skill effects, flagged so R350 does not veil it');
+assert(front.style.globalAlpha===1&&Math.abs(over[0].style.globalAlpha-.86)<.01);ok('engine hero-fade (.36) on the original is restored to 1; the clipped cover inside the hero box is .86');
+assert(ghost.length===1&&ghost[0].order>over[0].order&&ghost[0].order<fx.order&&ghost[0].style.globalAlpha>.4&&ghost[0].style.globalAlpha<.7);ok('hero silhouette (semi-transparent) drawn over the cover so the hero stays readable');
+assert(Array.isArray(over[0].clips)&&over[0].clips.length===1&&over[0].clips[0].paths[0].points.length===4&&over[0].clips[0].paths[0].points[0][0]<=100&&over[0].clips[0].paths[0].points[2][0]>=140);ok('cover is clipped to the hero box (does not paint over nearer mobs elsewhere — Codex review)');
+{const win={__STORYWORLD_SIGHT24__:{enabled:true,pointVisible:(x,y)=>!(x>5.5&&y>5.5)}};new Function('window','localStorage','room','player','setInterval',src)(win,{getItem:()=>null,setItem(){}},{props:[{id:'tree'}]},{x:5,y:5,visible:true},()=>0);
+ const c=[hero,front];win.__STORYWORLD_DEPTH_OVERLAP_R448__.process(c);assert.strictEqual(c.length,2);ok('props outside flashlight sight get no cover (Codex review)');}
+{const aura=img({key:'hero:1:2',order:48,owner:{kind:'hero',id:'hero:1',x:5,y:5},src:'assets/vfx/aura.webp',pts:box(60,60,220,220)});const body=img({key:'hero:1:5',order:50,owner:{kind:'hero',id:'hero:1',x:5,y:5},src:'assets/r283/hwando/walk-e.webp',pts:box(100,100,140,180)});
+ const side=img({key:'prop:side:0',order:60,role:'body',owner:{kind:'prop',id:'prop:side',x:6,y:6},src:'assets/statue.webp',pts:box(180,60,230,200)});
+ const win={};new Function('window','localStorage','room','player','setInterval',src)(win,{getItem:()=>null,setItem(){}},{props:[{id:'side'}]},{x:5,y:5,visible:true,hero:'hwando'},()=>0);
+ const c=[aura,body,side];win.__STORYWORLD_DEPTH_OVERLAP_R448__.process(c);assert.strictEqual(c.length,3,JSON.stringify(c.slice(3).map(x=>x.key)));
+ ok('hero aura/barrier images under the hero owner do not inflate the body box or get re-drawn (Codex review)');}
+const cmds2=[behind,hero,far,fx];A.process(cmds2);assert.strictEqual(cmds2.length,4);ok('nothing added when no prop covers the hero');
+A.set(false);const cmds3=[hero,front];A.process(cmds3);assert.strictEqual(cmds3.length,2);A.set(true);ok('toggle off disables it');
+assert(!/enemy/.test(src.replace(/\/\/.*$/gm,'').replace(/'[^']*'/g,'')));ok('mobs untouched (no enemy commands handled)');
+console.log(JSON.stringify({ok:true,checks:n,method:'static + CPU fake commands; headless capture separately; no GPU or device'}));
