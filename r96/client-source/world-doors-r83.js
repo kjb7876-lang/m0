@@ -2,7 +2,13 @@
  * native door states, interactions and collision remain authoritative. */
 (()=>{'use strict';
  if(window.__STORYWORLD_WORLD_DOORS_R83__)return;
- const DOORS=window.__STORYWORLD_WORLD_R74__,stats={doors:0,closed:0,open:0,planes:0,culled:0},HEIGHT=2.7,JAMB=.24,LEAF=HEIGHT-JAMB;
+ const DOORS=window.__STORYWORLD_WORLD_R74__,stats={doors:0,closed:0,open:0,planes:0,culled:0},JAMB=.24;
+ // R452(사용자 2026-11-09 "벽들 문높이 맞추고 문위에 벽이조금 감싸는 형태로 해서 벽을뚫고 문을 만든느낌"): 문틀 높이를 2.7 → 2.4 로 낮춰
+ //  벽(2.85) 윗선 아래로 0.45 남긴다 — 그 틈을 R413 상인방(벽 그림 띠+윗면)이 메워 벽이 문 위를 감싼다. 병원 진료문(ep1a08)은 2.7 그대로.
+ //  끄기: localStorage storyworld.r452.walls {"on":false}
+ let r452=true;try{const s=JSON.parse(localStorage.getItem('storyworld.r452.walls')||'null');if(s&&s.on===false)r452=false;}catch(_){}
+ const DH=()=>{if(!r452)return 2.7;try{return typeof room!=='undefined'&&room&&room.id!=='ep1a08'?2.4:2.7;}catch(_){return 2.7;}};
+
  const solo=()=>!window.__STORYWORLD_COOP_SIM_R62__?.mode||window.__STORYWORLD_COOP_SIM_R62__.mode()==='off';
  const hospital=(r,p)=>r?.id==='ep1a08'&&!!r.exploration?.hospitalDoorsB3&&!!p?.hospitalDoorFrameB3;
  const enabled=(r,p)=>solo()&&r?.layer==='STORY'&&(hospital(r,p)||!!r.exploration?.worldWardR81&&!!p?.r74Door);
@@ -24,7 +30,7 @@
  const leafAspect=k=>{const s=LEAF_SRC[k];return Math.hypot(s.b[0]-s.a[0],s.b[1]-s.a[1])/Math.hypot(s.c[0]-s.a[0],s.c[1]-s.a[1]);};
  const Z_PER_U=Math.sqrt(1.5)/Math.sqrt(1.25),MAX_STRETCH=1.12;
  /* 문 한 칸(문짝 전체)의 자연 폭(칸 단위): 병원 문은 외짝 둘이 한 칸 */
- const naturalBay=kind=>LEAF*Z_PER_U*leafAspect(kind)*(kind==='clinical'?2:1);
+ const naturalBay=kind=>(DH()-JAMB)*Z_PER_U*leafAspect(kind)*(kind==='clinical'?2:1);
  function bays(width,kind){const nat=naturalBay(kind);let best=null;for(let n=1;n<=8;n++){const bw=(width-(n-1)*JAMB)/n;if(bw<=.4)break;const cost=bw<nat?Math.log(nat/bw):.5*Math.log(Math.max(1,bw/(nat*MAX_STRETCH)));/* 줄이기는 그림이 찌그러지니 그대로, 넓히기는 12%까지 공짜·그 위는 기둥이 넓어질 뿐이라 반값 */if(!best||cost<best.cost-1e-9)best={n,bw,cost};}
   if(!best)best={n:1,bw:width,cost:0};const leafW=Math.min(best.bw,nat*MAX_STRETCH),pad=(best.bw-leafW)/2;return{n:best.n,bay:best.bw,leaf:leafW,pad,natural:nat,stretch:leafW/nat};}
  function geometry(d,open,clinical=false,metal=false){if(!d||!Number.isFinite(d.x+d.y+d.width+d.depth)||d.width<=0||d.depth<=0)throw Error('Invalid native ward door aperture');
@@ -32,22 +38,22 @@
   // behind the opaque front face; register art just outside that face.
   const width=d.axis==='x'?d.depth:d.width,faceOffset=(d.axis==='x'?d.width:d.depth)/2+.015,along=(u,v=0)=>d.axis==='x'?{x:d.x+faceOffset+v,y:d.y+u}:{x:d.x+u,y:d.y+faceOffset+v},at=(u,z)=>({...along(u),z}),parts=[];
   const strip=(id,u0,u1,z0,z1)=>parts.push({id,a:along(u0),b:along(u1),z0,z1,source:'wall'});
-  strip('left-jamb',-width/2-JAMB,-width/2,0,HEIGHT);strip('right-jamb',width/2,width/2+JAMB,0,HEIGHT);strip('header',-width/2,width/2,LEAF,HEIGHT);
-  const aperture=[at(-width/2,0),at(width/2,0),at(width/2,HEIGHT),at(-width/2,HEIGHT)];
+  strip('left-jamb',-width/2-JAMB,-width/2,0,DH());strip('right-jamb',width/2,width/2+JAMB,0,DH());strip('header',-width/2,width/2,(DH()-JAMB),DH());
+  const aperture=[at(-width/2,0),at(width/2,0),at(width/2,DH()),at(-width/2,DH())];
   if(!fitOn){
-   if(open){const left=along(-width/2),right=along(width/2);parts.push({id:'open-left',a:left,b:along(-width/2,width/2),z0:0,z1:LEAF,source:'leaf',half:0});parts.push({id:'open-right',a:right,b:along(width/2,width/2),z0:0,z1:LEAF,source:'leaf',half:1});}
-   else if(clinical){parts.push({id:'closed-left',a:along(-width/2),b:along(0),z0:0,z1:LEAF,source:'leaf'});parts.push({id:'closed-right',a:along(0),b:along(width/2),z0:0,z1:LEAF,source:'leaf'});}
-   else parts.push({id:'closed-leaf',a:along(-width/2),b:along(width/2),z0:0,z1:LEAF,source:'leaf'});
-   return{width,height:HEIGHT,faceOffset,aperture,parts,fit:null};}
+   if(open){const left=along(-width/2),right=along(width/2);parts.push({id:'open-left',a:left,b:along(-width/2,width/2),z0:0,z1:(DH()-JAMB),source:'leaf',half:0});parts.push({id:'open-right',a:right,b:along(width/2,width/2),z0:0,z1:(DH()-JAMB),source:'leaf',half:1});}
+   else if(clinical){parts.push({id:'closed-left',a:along(-width/2),b:along(0),z0:0,z1:(DH()-JAMB),source:'leaf'});parts.push({id:'closed-right',a:along(0),b:along(width/2),z0:0,z1:(DH()-JAMB),source:'leaf'});}
+   else parts.push({id:'closed-leaf',a:along(-width/2),b:along(width/2),z0:0,z1:(DH()-JAMB),source:'leaf'});
+   return{width,height:DH(),faceOffset,aperture,parts,fit:null};}
   const kind=clinical?'clinical':metal?'metal':'oak',B=bays(width,kind);
   if(open){/* 바깥 두 짝만, 원래 길이(쌍여닫이 반 칸·병원 외짝 한 짝)로 젖힌다 */const len=Math.min(width/2,B.leaf/2),left=along(-width/2),right=along(width/2);
-   parts.push({id:'open-left',a:left,b:along(-width/2,len),z0:0,z1:LEAF,source:'leaf',half:0});parts.push({id:'open-right',a:right,b:along(width/2,len),z0:0,z1:LEAF,source:'leaf',half:1});}
+   parts.push({id:'open-left',a:left,b:along(-width/2,len),z0:0,z1:(DH()-JAMB),source:'leaf',half:0});parts.push({id:'open-right',a:right,b:along(width/2,len),z0:0,z1:(DH()-JAMB),source:'leaf',half:1});}
   else for(let i=0;i<B.n;i++){const u0=-width/2+i*(B.bay+JAMB),l0=u0+B.pad,l1=l0+B.leaf,u1=u0+B.bay;
-   if(i>0)strip('mullion-'+i,u0-JAMB-B.pad,l0,0,LEAF);else if(B.pad>1e-6)strip('pad-left',u0,l0,0,LEAF);
-   if(i===B.n-1&&B.pad>1e-6)strip('pad-right',l1,u1,0,LEAF);
-   if(clinical){const m=(l0+l1)/2;parts.push({id:'closed-left-'+i,a:along(l0),b:along(m),z0:0,z1:LEAF,source:'leaf'});parts.push({id:'closed-right-'+i,a:along(m),b:along(l1),z0:0,z1:LEAF,source:'leaf'});}
-   else parts.push({id:'closed-leaf-'+i,a:along(l0),b:along(l1),z0:0,z1:LEAF,source:'leaf'});}
-  return{width,height:HEIGHT,faceOffset,aperture,parts,fit:{kind,bays:B.n,bay:B.bay,leaf:B.leaf,pad:B.pad,natural:B.natural,stretch:B.stretch}};
+   if(i>0)strip('mullion-'+i,u0-JAMB-B.pad,l0,0,(DH()-JAMB));else if(B.pad>1e-6)strip('pad-left',u0,l0,0,(DH()-JAMB));
+   if(i===B.n-1&&B.pad>1e-6)strip('pad-right',l1,u1,0,(DH()-JAMB));
+   if(clinical){const m=(l0+l1)/2;parts.push({id:'closed-left-'+i,a:along(l0),b:along(m),z0:0,z1:(DH()-JAMB),source:'leaf'});parts.push({id:'closed-right-'+i,a:along(m),b:along(l1),z0:0,z1:(DH()-JAMB),source:'leaf'});}
+   else parts.push({id:'closed-leaf-'+i,a:along(l0),b:along(l1),z0:0,z1:(DH()-JAMB),source:'leaf'});}
+  return{width,height:DH(),faceOffset,aperture,parts,fit:{kind,bays:B.n,bay:B.bay,leaf:B.leaf,pad:B.pad,natural:B.natural,stretch:B.stretch}};
  }
  const point=(p,z)=>{const q=project(p.x,p.y);return{x:q.x,y:q.y-z*TILE*Math.sqrt(1.5)*zoom};};
  const corners=p=>[point(p.a,p.z1),point(p.b,p.z1),point(p.b,p.z0),point(p.a,p.z0)];
@@ -95,5 +101,5 @@
  registerHospitalLeaf();
  const spatialBase=command?.applySpatialPolicy;if(spatialBase)command.applySpatialPolicy=function(row,c,...args){const result=spatialBase.call(this,row,c,...args);if(c.owner?.r83WardDoor)row.mesh.renderOrder=c.kind==='image'?2:1;return result;};
  const base=drawProp;drawProp=function(p,...args){if(enabled(room,p))return draw(p);return base.apply(this,[p,...args]);};
- window.__STORYWORLD_WORLD_DOORS_R83__=Object.freeze({curtainFor,CURTAIN_DOORS,enabled,geometry,point,draw,hospital,bays,naturalBay,cropRect,doorFitR347:()=>fitOn,inspect:()=>({revision:'R83',refinement:'R86',doorFit:fitOn?'R347':'off',stats:{...stats},wallHeight:HEIGHT,jamb:JAMB,physicalAperture:true,canvasImpactTranslation:false,collisionChanged:false,sourceBitmapsChanged:false,clinicalDoorPath:hospitalLeafPath,frontSurfaceRegistered:true,clinicalDoorsRegistered:true,browserVerified:false,GPUVerified:false})});
+ window.__STORYWORLD_WORLD_DOORS_R83__=Object.freeze({curtainFor,CURTAIN_DOORS,enabled,geometry,point,draw,hospital,bays,naturalBay,cropRect,doorFitR347:()=>fitOn,doorHeight:()=>DH(),inspect:()=>({revision:'R83',refinement:'R86',doorFit:fitOn?'R347':'off',stats:{...stats},wallHeight:DH(),jamb:JAMB,physicalAperture:true,canvasImpactTranslation:false,collisionChanged:false,sourceBitmapsChanged:false,clinicalDoorPath:hospitalLeafPath,frontSurfaceRegistered:true,clinicalDoorsRegistered:true,browserVerified:false,GPUVerified:false})});
 })();

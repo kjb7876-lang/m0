@@ -17,7 +17,7 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_LOCAL_LIGHT_R451__)return;
 const A=window.StoryPhase1,C=A?.ThreeRenderer?.prototype;if(!A||!C)return;
-const REV='R451-local-light-4',KEY='storyworld.r451.localLight';
+const REV='R451-local-light-5',KEY='storyworld.r451.localLight';
 const DEFAULTS=Object.freeze({on:true,flicker:true});
 let prefs={...DEFAULTS};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');for(const k in DEFAULTS)if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={frames:0,owned:0,bakes:0,bakeMs:0,deltas:0,deltaMs:0,deltaMaxMs:0,deltaLights:0,deltaTiles:0,lights:0,lightsUsed:0,blockers:0,texels:0,patched:0,scans:0,sigScans:0,rowsLit:0,coversLit:0,holes:0,stutters:0,errors:0};let lastError=null,disposed=false;
@@ -206,7 +206,10 @@ vec3 r451Light(){vec3 n=r451N;bool vert=abs(n.y)<.6;vec2 q=r451P.xz;
 `;
 // 맵 텍셀 알파 = 열린 칸(255)/막힌 칸(0). 선형 보간에서 막힌 텍셀(빛 0)이 섞여 벽가 바닥이 검게 번지지 않도록 rgb/a 로 되돌린다.
 const patched=new WeakMap();
-const SKIP_NAME=/^r(89-retro|300|450|451|453)|halo|fog|pool|-dim$|mote|haze|sky|decor-lit|glow|surgeon|marker|guidance|warn|telegraph|target|select|cursor|shadow-blob/i;
+const SKIP_NAME=/^r(89-retro|300|450)|halo|fog|pool|-dim$|mote|haze|sky|decor-lit|glow|surgeon|marker|guidance|warn|telegraph|target|select|cursor|shadow-blob/i;
+// 세운 판 묶음(법선 없는 판 여러 장을 한 덩어리로): R204 낮은 돌 경계 줄(main R451, 예전엔 Sprite 한 장씩). 판 그림처럼 카메라 쪽 수평 법선으로 앞 바닥 빛을 받는다.
+//  이름이 r451 로 시작해도 이 R451 의 것이 아니다 — 예전 이름 건너뛰기(^r451)에 걸려 빛을 못 받고 둘레보다 밝게 떠 보였다.
+const BOARD_NAME=/^r451-border-runs:/;
 function eligible(o,rowMeshes){if(o?.isSprite){const m=o.material,name=String(o.name||o.parent?.name||'');   // R204 풀 포기(Sprite) — 예전엔 R89 화면 빛이 함께 어둡게 했다
   if(!m?.isSpriteMaterial||!m.map||m.blending!==undefined&&m.blending!==1||o.userData?.r450||o.userData?.r451||SKIP_NAME.test(name))return null;return[m];}
  if(!o?.isMesh||o.isInstancedMesh&&!o.instanceMatrix)return null;if(rowMeshes.has(o))return null;const name=String(o.name||'');
@@ -216,8 +219,9 @@ function eligible(o,rowMeshes){if(o?.isSprite){const m=o.material,name=String(o.
   if(m.transparent&&!m.map&&!m.vertexColors)continue;                          // 맨 색 반투명(표시·안내 판)은 그대로
   if(m.blending!==undefined&&m.blending!==1)continue;                           // 더하기·곱하기 섞기(빛·그림자 효과)는 그대로
   ok.push(m);}
+ if(ok.length&&BOARD_NAME.test(name))ok.board=true;
  return ok.length?ok:null;}
-function patch(m,T){if(patched.has(m))return;const u=uniforms(T),before=m.onBeforeCompile,key=m.customProgramCacheKey;
+function patch(m,T,board){if(patched.has(m))return;const u=uniforms(T),before=m.onBeforeCompile,key=m.customProgramCacheKey;
  if(m.isSpriteMaterial){// 판 그림: 판 중심(발) 위치의 빛을 받는다. 세운 판이라 벽 옆면처럼(앞 바닥 빛) — 법선은 카메라 쪽 수평.
   const sw=function(shader,...args){if(typeof before==='function')before.call(this,shader,...args);Object.assign(shader.uniforms,u);
    if(!shader.vertexShader.includes('varying vec3 r451P;'))shader.vertexShader='varying vec3 r451P;varying vec3 r451N;\n'+shader.vertexShader.replace('#include <uv_vertex>','#include <uv_vertex>\n'+
@@ -226,13 +230,14 @@ function patch(m,T){if(patched.has(m))return;const u=uniforms(T),before=m.onBefo
   if(typeof before==='function')for(const k of Object.keys(before))sw[k]=before[k];
   m.onBeforeCompile=sw;m.customProgramCacheKey=function(){return(typeof key==='function'?key.call(this):'')+'|r451s';};m.needsUpdate=true;patched.set(m,true);stats.patched++;stats.sprites=(stats.sprites||0)+1;return;}
  const wrapper=function(shader,...args){if(typeof before==='function')before.call(this,shader,...args);Object.assign(shader.uniforms,u);
-  if(!shader.vertexShader.includes('varying vec3 r451P;'))shader.vertexShader='varying vec3 r451P;varying vec3 r451N;\n'+shader.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\n'+
-   '{vec4 r451W=vec4(transformed,1.);vec3 r451Nn=normal;\n#ifdef USE_INSTANCING\nr451W=instanceMatrix*r451W;r451Nn=mat3(instanceMatrix)*r451Nn;\n#endif\nr451W=modelMatrix*r451W;r451P=r451W.xyz;vec3 r451M=mat3(modelMatrix)*r451Nn;r451N=dot(r451M,r451M)>1e-8?normalize(r451M):vec3(0.,1.,0.);}');
+  if(!shader.vertexShader.includes('varying vec3 r451P;'))shader.vertexShader='varying vec3 r451P;varying vec3 r451N;\n'+shader.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\n'+(board?
+   '{vec4 r451W=modelMatrix*vec4(transformed,1.);r451P=r451W.xyz;vec3 r451V=-(transpose(mat3(viewMatrix))*vec3(0.,0.,-1.));r451V.y=0.;r451N=dot(r451V,r451V)>1e-6?normalize(r451V):vec3(0.,0.,1.);}':
+   '{vec4 r451W=vec4(transformed,1.);vec3 r451Nn=normal;\n#ifdef USE_INSTANCING\nr451W=instanceMatrix*r451W;r451Nn=mat3(instanceMatrix)*r451Nn;\n#endif\nr451W=modelMatrix*r451W;r451P=r451W.xyz;vec3 r451M=mat3(modelMatrix)*r451Nn;r451N=dot(r451M,r451M)>1e-8?normalize(r451M):vec3(0.,1.,0.);}'));
   if(!shader.fragmentShader.includes('uniform float r451On;')){shader.fragmentShader=HEAD+shader.fragmentShader.replace('#include <dithering_fragment>','#include <dithering_fragment>\ngl_FragColor.rgb*=r451Light();');}};
  if(typeof before==='function')for(const k of Object.keys(before))wrapper[k]=before[k];
- m.onBeforeCompile=wrapper;m.customProgramCacheKey=function(){return(typeof key==='function'?key.call(this):'')+'|r451';};m.needsUpdate=true;patched.set(m,true);stats.patched++;}
+ m.onBeforeCompile=wrapper;m.customProgramCacheKey=function(){return(typeof key==='function'?key.call(this):'')+(board?'|r451b':'|r451');};m.needsUpdate=true;patched.set(m,true);stats.patched++;if(board)stats.boards=(stats.boards||0)+1;}
 function patchScene(r){const T=r.T,rows=new WeakSet();for(const row of r.commands?.rows?.values?.()||[])if(row?.mesh)rows.add(row.mesh);
- r.scene.traverse(o=>{if(!(o.layers.mask&4))return;const ms=eligible(o,rows);if(ms)for(const m of ms)patch(m,T);});}
+ r.scene.traverse(o=>{if(!(o.layers.mask&4))return;const ms=eligible(o,rows);if(ms)for(const m of ms)patch(m,T,ms.board);});}
 // 장면 맨 윗단 자식 목록의 지문(자식 id 차례). 청크 지형·R452 풀·R91 벽 장식·R81 바깥 판처럼 새 덩어리가 붙거나 빠지면 바뀐다.
 //  바뀐 그 프레임에 셰이더를 붙인다 — 0.5초 타이머만 기다리면 새 재질이 그동안 빛 곱 없이(×1) 밝게 보였다가 어두워진다(독립 심사 지적).
 //  타이머 훑기는 그대로 둔다(묶음 안에 나중에 붙는 것·재질만 바꾸는 것).
@@ -329,7 +334,7 @@ if(typeof showSettings==='function'){const base=showSettings;showSettings=functi
 
 function dispose(){disposed=true;if(timer)clearInterval(timer);o451.owned=false;if(U)U.r451On.value=0;try{o451.tex?.dispose?.();}catch(_){}o451.tex=null;o451.data=null;o451.B=null;o451.grid=null;o451.layout=null;}
 window.__STORYWORLD_LOCAL_LIGHT_R451__=Object.freeze({revision:REV,storageKey:KEY,types:TYPE,ambient:AMB,ambientIn:AMB_IN,ambientCave:AMB_CAVE,prefs:()=>({...prefs}),set,owns,lightAt,lights,glowHoles,glowEdge,classify,ambientFor,dispose,
- pure:Object.freeze({wallBox,grid,seen,bell,shoulder,bakeAcc,bakeDelta,lightContrib,markTiles,lightKey,posHash,sceneSig,floorOwned,litRow,LMAX,KNEE,SHOULDER,TILE,FIRE_OK:[...FIRE_OK],REACH,GLOW_SCALE,GLOW_FAM}),
+ pure:Object.freeze({wallBox,grid,seen,bell,shoulder,bakeAcc,bakeDelta,lightContrib,markTiles,lightKey,posHash,sceneSig,floorOwned,litRow,eligible,LMAX,KNEE,SHOULDER,TILE,FIRE_OK:[...FIRE_OK],REACH,GLOW_SCALE,GLOW_FAM}),
  inspect:()=>({revision:REV,prefs:{...prefs},owned:o451.owned,stats:{...stats},lastError,family:lightCache?.fam||null,indoor:lightCache?.indoor??null,place:lightCache?.place||null,ambient:o451.amb,
   lights:o451.lights.map(l=>({x:+l.x.toFixed(2),y:+l.y.toFixed(2),type:l.type,src:l.src,id:l.id})),grid:o451.grid?{W:o451.grid.W,H:o451.grid.H,S:o451.grid.S}:null,
   collisionChanged:false,gameplayChanged:false,GPUVerified:false})});

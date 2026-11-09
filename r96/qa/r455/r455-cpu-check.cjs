@@ -1,0 +1,14 @@
+// R455 CPU check: 손전등은 고를 때만 켜는 시야 모드 — 모든 맵 기본은 은은한 원형(glow), 사몽 학교 부채꼴·미로 문구도 시야를 따른다.
+const fs=require('fs'),path=require('path'),vm=require('vm');const ROOT=path.resolve(__dirname,'../../');const C=f=>fs.readFileSync(path.join(ROOT,'client-source',f),'utf8'),RT=f=>fs.readFileSync(path.join(ROOT,'runtime-text',f),'utf8');
+let n=0,bad=0;const ok=(m,c)=>{n++;if(!c){bad++;console.log('FAIL '+m);}else console.log('PASS '+m);};
+function light(stored,roomObj){const store={};if(stored)store['storyworld.r182.light']=stored;const sb={console,Math,JSON,Object,Array,Number,String,RegExp,localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=v;}},window:{__STORYWORLD_SAMONG_ZONES_R115__:{zone:()=>({kind:'maze',style:'school'})}},document:{getElementById:()=>null,querySelector:()=>null},addEventListener(){},requestAnimationFrame(){},settings:{flashlight58:true},room:roomObj||{id:'x',samongR103:{zone:'sz-maze',stage:'maze'}},started:true,player:{x:1,y:1}};vm.createContext(sb);vm.runInContext(C('light-r182.js'),sb);return sb.window.__STORYWORLD_LIGHT_R182__;}
+{const L=light(null);ok('fresh save: glow everywhere, even in a samong maze; no beam',L.mode()==='glow'&&L.beam()===false);}
+{const L=light(JSON.stringify({mode:'auto',v:335}));ok('old auto (maze-only flashlight) save moves to glow once',L.choice()==='glow'&&L.beam()===false);}
+{const L=light(JSON.stringify({mode:'flashlight',v:335}));ok('an explicit flashlight choice is kept (flashlight is a mode the player picks)',L.mode()==='flashlight'&&L.beam()===true);}
+{const L=light(JSON.stringify({mode:'torch',v:335}));ok('an explicit torch choice is kept',L.mode()==='torch'&&L.beam()===true);}
+{const L=light(null);L.set({mode:'auto'});ok('auto picked after R455 is kept and still lights mazes',L.choice()==='auto'&&L.mode()==='flashlight'&&L.beam()===true);const L2=light(JSON.stringify({mode:'auto',v:455}));ok('…and survives a reload',L2.choice()==='auto');}
+const mood=C('samong-mood-r123.js');ok('samong school cone only when the sight mode is flashlight, and not on top of the R182 cone',/cone&&window\.__STORYWORLD_LIGHT_R182__\?\.mode\?\.\(\)==='flashlight'&&document\.getElementById\('r182Cone'\)\?\.style\.display!=='block'/.test(mood));
+const sm=C('samong-r103.js');ok('maze quest/hint/banner text follows the sight mode (no fixed "손전등" line)',/mazeWord=\(\)=>beamOn\(\)/.test(sm)&&!/'손전등이 비추는 쪽으로 출구/.test(sm)&&!/maze:'손전등 미로'/.test(sm));
+ok('R115 maze text follows the sight mode',!/'손전등이 비추는 쪽으로 출구를 찾으세요'/.test(C('samong-zones-r115.js')));
+for(const f of ['light-r182.js','samong-mood-r123.js','samong-r103.js','samong-zones-r115.js']){ok('parses · '+f,(()=>{try{new vm.Script(C(f));return true;}catch(e){return false;}})());ok('runtime copy matches · '+f,RT(f)===C(f));}
+console.log(bad?('R455 '+(n-bad)+'/'+n+' FAILED'):('R455 all '+n+' passed'));process.exit(bad?1:0);

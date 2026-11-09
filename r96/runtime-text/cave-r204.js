@@ -14,8 +14,8 @@
 (()=>{'use strict';
 const A=window.StoryPhase1,C=A?.ThreeRenderer?.prototype;
 if(!A||!C||window.__STORYWORLD_CAVE_R204__)return;
-const REV='R443-cave-1',KEY='storyworld.r204.cave';
-let prefs={on:true,widen:true,widenAll:true,skeleton:false,inflate:true,unify:true,rooms:true,roomFloors:true,edge:true,round:true};/* R220: 사용자 "벽에 기둥이 오히려 품질을 저하" → 기둥 골격(R218)은 기본 끔 */try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;if(typeof s?.widen==='boolean')prefs.widen=s.widen;if(typeof s?.skeleton==='boolean')prefs.skeleton=s.skeleton;if(typeof s?.inflate==='boolean')prefs.inflate=s.inflate;if(typeof s?.unify==='boolean')prefs.unify=s.unify;if(typeof s?.roomFloors==='boolean')prefs.roomFloors=s.roomFloors;if(typeof s?.edge==='boolean')prefs.edge=s.edge;if(typeof s?.round==='boolean')prefs.round=s.round;}catch(_){}
+const REV='R451-cave-1',KEY='storyworld.r204.cave';
+let prefs={on:true,widen:true,widenAll:true,skeleton:false,inflate:true,unify:true,rooms:true,roomFloors:true,edge:true,round:true};/* R220: 사용자 "벽에 기둥이 오히려 품질을 저하" → 기둥 골격(R218)은 기본 끔 */try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;if(typeof s?.widen==='boolean')prefs.widen=s.widen;if(typeof s?.skeleton==='boolean')prefs.skeleton=s.skeleton;if(typeof s?.inflate==='boolean')prefs.inflate=s.inflate;if(typeof s?.unify==='boolean')prefs.unify=s.unify;if(typeof s?.roomFloors==='boolean')prefs.roomFloors=s.roomFloors;if(typeof s?.borderRuns==='boolean')prefs.borderRuns=s.borderRuns;if(typeof s?.edge==='boolean')prefs.edge=s.edge;if(typeof s?.round==='boolean')prefs.round=s.round;}catch(_){}
 const orgPath=n=>n.includes('/')?n:'assets/r207/organic/'+n+'.png';/* R281: 이름 대신 경로를 준 데칼(assets/r281/…)도 받는다 */
 const stats={blocks:0,builds:0,buildMs:0,hidden:0,segments:0,pillars:0,decals:0,frames:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
@@ -670,11 +670,54 @@ function organicDecor(T,r,F,cfg,ims,rm){const rnd=rng(cfg.seed^0x0207),g=new T.G
  // 세운 그림(암벽 조각·낮은 돌 경계): 뒤쪽 높은 대지 가장자리만(카메라 쪽 낮은 대지·바닥엔 두지 않아 영웅·길을 가리지 않음). 바닥 기준점 = 그림 아래 끝 가운데.
  const ups=(cfg.uprights||[]).map(([name,sc])=>{const im=ims['org:'+name];if(!im)return null;const box=bboxOf(im),src=/garden/.test(name)?im:tintedCanvas(im,cfg.tint),t=new (src instanceof HTMLCanvasElement?T.CanvasTexture:T.Texture)(src);
   t.colorSpace=T.SRGBColorSpace;t.needsUpdate=true;r.spatialResources.add(t);const m=new T.SpriteMaterial({map:t,alphaTest:.4,depthWrite:true,toneMapped:false});r.spatialResources.add(m);return{m,box,sc};}).filter(Boolean);
- if(ups.length){const want=Math.round(F.W*F.H*(cfg.uprightRate||1/100)),placed=[];
+ if(ups.length&&prefs.borderRuns!==false){const rr=borderRuns(T,r,F,cfg,ups,clear,g);nu+=rr;}
+ else if(ups.length){const want=Math.round(F.W*F.H*(cfg.uprightRate||1/100)),placed=[];
   const [eLo,eHi]=cfg.uprightEdge||[-1.4,-.35];for(let t2=0;t2<want*40&&nu<want;t2++){const x=rnd()*F.W,y=rnd()*F.H,fv=at(F,F.f,x,y);if(fv>eHi||fv<eLo)continue;const h=topHeight(F,cfg,x,y);if(h<1.0)continue;if(!clear(x,y)||nearDoorR443(F,x,y,true)||placed.some(p=>Math.hypot(p[0]-x,p[1]-y)<2.6))continue;placed.push([x,y]);
    const u=ups[Math.floor(rnd()*ups.length)],sp=new T.Sprite(u.m),wpx=u.box.w*u.sc,hpx=u.box.h*u.sc,ppu=ISO_T*Math.SQRT2;// 화면 px → 월드 크기(정사영: 화면 1px ≈ 1/(34·√2) 단위)
    sp.scale.set(wpx/ppu,hpx/ppu*1.15,1);sp.center.set(u.box.cx/u.box.w,1-(u.box.y1-6)/u.box.h);sp.position.set(x,h-.05,y);sp.layers.set(2);sp.renderOrder=-26;sp.userData.r204=true;g.add(sp);nu++;}}
  stats.organicPatches=np;stats.organicUprights=nu;return(np||nu)?g:null;}
+
+// R451(사용자 2026-11-09 "성벽조형물 일자로 이어지게 단일로는 안쓰도록"): 낮은 돌 경계(garden_low_border)를 아무 데나 한 장씩 흩지 않고
+//  뒤쪽 높은 대지 가장자리의 곧은 구간을 따라 2장 이상 끝과 끝을 이어 한 줄로 세운다. 대지 가장자리가 월드 축(x·z)으로 곧으니
+//  줄도 그 축을 따른다. 그림 속 돌줄 기울기(화면 약 -0.33)가 등각 축 기울기(약 0.53)와 달라 그대로 이으면 계단처럼 어긋나므로,
+//  카메라 쪽을 보는 판(스프라이트와 같은 면)에 세로 기울임(shear)만 더해 돌줄이 축과 나란하게 한다(세로 모서리는 그대로 세로).
+//  반대 대각선 축은 좌우 뒤집어 쓴다. 곧은 구간이 2장 길이가 안 되면 아예 두지 않는다(단독 금지). 끄기: storyworld.r204.cave {"borderRuns":false}.
+const rowGeo=new WeakMap();
+function rowOf(im){let o=rowGeo.get(im);if(o)return o;const w=im.naturalWidth,h=im.naturalHeight,c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d');g.drawImage(im,0,0);const d=g.getImageData(0,0,w,h).data;
+ const cols=[];for(let x=0;x<w;x+=2){let b=-1;for(let y=h-1;y>=0;y--)if(d[(y*w+x)*4+3]>200){b=y;break;}if(b>=0)cols.push([x,b]);}
+ const x0=cols[0][0],x1=cols[cols.length-1][0],mid=cols.filter(q=>q[0]>x0+(x1-x0)*.12&&q[0]<x1-(x1-x0)*.12);
+ let mx=0,my=0;for(const q of mid){mx+=q[0];my+=q[1];}mx/=mid.length;my/=mid.length;let sxy=0,sxx=0;for(const q of mid){sxy+=(q[0]-mx)*(q[1]-my);sxx+=(q[0]-mx)**2;}
+ const m=sxx?sxy/sxx:0,ax=(x0+x1)/2;o={x0,x1,ax,ay:my+m*(ax-mx),m,w,h};rowGeo.set(im,o);return o;}
+function borderRuns(T,r,F,cfg,ups,clear,parent){const u=ups[0],im=u.m.map?.image;if(!im||!im.naturalWidth)return 0;const row=rowOf(im),rnd=rng(cfg.seed^0x0442);
+ const cam=r.camera;cam?.updateMatrixWorld?.();const e=cam?.matrixWorld?.elements;const nrm=v=>{const l=Math.hypot(v[0],v[1],v[2])||1;return v.map(q=>q/l);},R3=nrm(e?[e[0],e[1],e[2]]:[Math.SQRT1_2,0,-Math.SQRT1_2]),U3=nrm(e?[e[4],e[5],e[6]]:[-.3536,.866,-.3536]);
+ const ppu=ISO_T*Math.SQRT2,VS=1.15,want=Math.round(F.W*F.H*(cfg.uprightRate||1/100)),[eLo,eHi]=cfg.uprightEdge||[-1.4,-.35],lo=eLo-.35,hi=eHi+.05;
+ const okAt=(x,y)=>{if(x<0||y<0||x>F.W||y>F.H)return false;const fv=at(F,F.f,x,y);if(fv>hi||fv<lo)return false;if(topHeight(F,cfg,x,y)<1.0)return false;if(nearDoorR443(F,x,y,true))return false;return clear(x,y);};
+ const axes=[[1,0],[0,1]].map(([dx,dz])=>{const ud=dx*R3[0]+dz*R3[2],vd=dx*U3[0]+dz*U3[2];return{dx,dz,ud:Math.abs(ud),D:vd/ud};});
+ const cands=[];
+ for(const ax of axes){const s0=u.sc,L=(row.x1-row.x0)*s0/ppu*.87/ax.ud;const along=ax.dx?F.W:F.H,across=ax.dx?F.H:F.W,ST=.25;
+  for(let c=.5;c<across;c+=.5){let t0=-1;for(let t=0;t<=along+ST;t+=ST){const x=ax.dx?t:c,y=ax.dx?c:t;const ok=t<=along&&okAt(x,y);
+    if(ok&&t0<0)t0=t;else if(!ok&&t0>=0){const len=t-ST-t0,n=Math.floor((len+.2)/L);if(n>=2){let fs=0;const k=Math.round(len/ST);for(let i=0;i<=k;i++){const tt=t0+i*ST;fs+=Math.abs(at(F,F.f,ax.dx?tt:c,ax.dx?c:tt)-(eLo+eHi)/2);}
+      const mid=t0+len/2;cands.push({ax,c,a0:mid-n*L/2,n,L,score:n*10-fs/(k+1)});}t0=-1;}}}}
+ cands.sort((a,b)=>b.score-a.score);const taken=[],grid=new Map(),key=(x,y)=>Math.floor(x/2)+','+Math.floor(y/2);
+ const near=(x,y,d)=>{for(let i=-1;i<=1;i++)for(let j=-1;j<=1;j++){const b=grid.get((Math.floor(x/2)+i)+','+(Math.floor(y/2)+j));if(b)for(const p of b)if(Math.hypot(p[0]-x,p[1]-y)<d)return true;}return false;};
+ let total=0;const quads={n:[],f:[]};
+ for(const c0 of cands){const {ax,c,L}=c0;
+  // 다른 줄과 1.9칸 안으로 겹치는 조각(모서리에서 만나는 두 줄 등)은 끝에서 덜어 내고, 남은 가장 긴 연속 구간이 2장 이상일 때만 쓴다
+  const free=[];for(let i=0;i<c0.n;i++){let f=true;for(let t=c0.a0+i*L;t<=c0.a0+(i+1)*L+1e-6;t+=.5){const x=ax.dx?t:c,y=ax.dx?c:t;if(near(x,y,1.9)){f=false;break;}}free.push(f);}
+  let bs=-1,bn=0;for(let i=0;i<c0.n;){if(!free[i]){i++;continue;}let j=i;while(j<c0.n&&free[j])j++;if(j-i>bn){bn=j-i;bs=i;}i=j;}
+  if(bn<2||total+bn>want+1)continue;const cd={...c0,a0:c0.a0+bs*L,n:bn};
+  const pts=[];for(let t=cd.a0;t<=cd.a0+cd.n*L+1e-6;t+=.5)pts.push(ax.dx?[t,c]:[c,t]);
+  for(const p of pts){const k=key(p[0],p[1]);(grid.get(k)||grid.set(k,[]).get(k)).push(p);}taken.push(cd);total+=cd.n;
+  const flip=Math.sign(ax.D)!==Math.sign(-row.m*VS),sc=u.sc*(.97+rnd()*.06);
+  for(let i=0;i<cd.n;i++){const t=cd.a0+(i+.5)*L,x=ax.dx?t:c,y=ax.dx?c:t,h=topHeight(F,cfg,x,y)-.05;quads[flip?'f':'n'].push({x,y,h,sc,D:ax.D});}}
+ const s2=1/ppu;let n=0;
+ for(const side of ['n','f']){const list=quads[side];if(!list.length)continue;const flip=side==='f',mat=new T.MeshBasicMaterial({map:u.m.map,alphaTest:.4,depthWrite:true,toneMapped:false,side:T.DoubleSide,color:flip?new T.Color(.9,.9,.9):new T.Color(1,1,1)});r.spatialResources.add(mat);
+  const pos=[],uv=[],idx=[];let k=0;const rowS=-row.m*VS*(flip?-1:1);
+  for(const q of list){const corner=(ix,iy)=>{let uu=(ix-row.ax)*q.sc*s2,vv=-(iy-row.ay)*q.sc*s2*VS;if(flip)uu=-uu;vv+=(q.D-rowS)*uu;return[q.x+uu*R3[0]+vv*U3[0],q.h+uu*R3[1]+vv*U3[1],q.y+uu*R3[2]+vv*U3[2]];};
+   for(const v of [corner(0,0),corner(row.w,0),corner(row.w,row.h),corner(0,row.h)])pos.push(...v);uv.push(0,1,1,1,1,0,0,0);const b=k*4;idx.push(b,b+2,b+1,b,b+3,b+2);k++;}
+  const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));geo.setAttribute('uv',new T.Float32BufferAttribute(uv,2));geo.setIndex(idx);geo.computeBoundingSphere();r.spatialResources.add(geo);
+  const mesh=new T.Mesh(geo,mat);mesh.layers.set(2);mesh.renderOrder=-26;mesh.userData.r204=true;mesh.name='r451-border-runs:'+side;parent.add(mesh);n+=k;}
+ stats.borderRuns=taken.length;stats.borderRunSegments=n;stats.borderRunMin=taken.length?Math.min(...taken.map(q=>q.n)):0;return n;}
 
 // R212 풀 덤불(r138 weed): 절벽 밑 바닥(f .2~1.0) 가장자리에 세운 그림. 지역 색으로 살짝 누름. 문·소품 둘레는 비움.
 function tuftSprites(T,r,F,cfg,ims,rm){const im=ims.tuft;if(!im||!cfg.tufts)return null;const [,sc,rate]=cfg.tufts,rnd=rng(cfg.seed^0x7af7),g=new T.Group();
@@ -832,7 +875,7 @@ C.render=wrapFn(C.render);
 const wrappedRenderers=new WeakSet();
 function wrapInst(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(r&&Object.prototype.hasOwnProperty.call(r,'render')&&!wrappedRenderers.has(r)){wrappedRenderers.add(r);r.render=wrapFn(r.render);}}catch(e){fail(e);}}
 setInterval(wrapInst,500);wrapInst();
-function set(p){if(typeof p?.on==='boolean')prefs.on=p.on;if(typeof p?.widen==='boolean')prefs.widen=p.widen;if(typeof p?.skeleton==='boolean')prefs.skeleton=p.skeleton;if(typeof p?.inflate==='boolean')prefs.inflate=p.inflate;if(typeof p?.unify==='boolean')prefs.unify=p.unify;if(typeof p?.rooms==='boolean')prefs.rooms=p.rooms;if(typeof p?.edge==='boolean')prefs.edge=p.edge;if(typeof p?.round==='boolean')prefs.round=p.round;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
+function set(p){if(typeof p?.on==='boolean')prefs.on=p.on;if(typeof p?.widen==='boolean')prefs.widen=p.widen;if(typeof p?.skeleton==='boolean')prefs.skeleton=p.skeleton;if(typeof p?.inflate==='boolean')prefs.inflate=p.inflate;if(typeof p?.unify==='boolean')prefs.unify=p.unify;if(typeof p?.rooms==='boolean')prefs.rooms=p.rooms;if(typeof p?.borderRuns==='boolean')prefs.borderRuns=p.borderRuns;if(typeof p?.edge==='boolean')prefs.edge=p.edge;if(typeof p?.round==='boolean')prefs.round=p.round;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
 window.__STORYWORLD_CAVE_R204__=Object.freeze({revision:REV,set,skeletonPoints,inflate,interiorProps,furnish,zones:Object.keys(ZONES),field,topHeight:(F,z,x,y)=>topHeight(F,ZONES[z],x,y),at,
  inspect:()=>{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three,st=r?.__r204,F=st?.F;return{revision:REV,prefs:{...prefs},active:!!st?.group?.visible,zone:st?.zone||null,field:F?{ms:F.ms,bulgedCells:F.bulgedCells,protect:F.protect,size:[F.W,F.H]}:null,stats:{...stats},lastError};}});
 })();

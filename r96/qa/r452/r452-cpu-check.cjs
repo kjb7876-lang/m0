@@ -1,50 +1,27 @@
-// R452 CPU check: 길 가장자리 풀 덩어리 — 실외만, 길(R169) 칸·문·제단·소품 둘레는 비움, 바닥 바깥 변을 따라, 벽 속엔 없음, 같은 씨앗이면 같은 자리,
-//  승인 자산 두 장(r138 weed·r257 weed-opp)만·뒤집기 없음, 그리기 1번(판 묶음).
-const fs=require('fs'),path=require('path');const {R,RT,C,wiring,box,load,runner}=require('../r451/r450-453-common.cjs');
-const {ok,done}=runner('R452');
-wiring(ok,'ground-fringe-r452.js');
-const ctx=box();load(ctx,'ground-fringe-r452.js');const api=ctx.__STORYWORLD_GROUND_FRINGE_R452__;
-ok('api exposed',api&&api.revision.startsWith('R452')&&typeof api.plan==='function');
-// 실내·동굴·기억·눈·기계·대장간에는 풀이 없다(사용자 2026-11-09 "실내 실외구분도 잘해야해")
-ok('vegetation families only (no snow/neural/forge/memory/clinical/domestic/cave)',['snow','neural','forge','memory','clinical','domestic','cave'].every(f=>!api.families[f])&&['garden','swamp'].every(f=>api.families[f]));
-ok('only approved existing art: r138 weed + r257 weed-opp',api.art.length===2&&api.art[0].path==='assets/r138/props/weed.webp'&&api.art[1].path==='assets/r257/props/weed-opp.webp'&&api.art.every(a=>fs.existsSync(path.join(RT,a.path))));
-{const s=C('ground-fringe-r452.js');ok('places only where R450 says out',/function specFor\(r\)\{const kind=placeOf\(r\);if\(kind!=='out'\|\|/.test(s));
- ok('no flipping / rotation (r207·r257 rules)',!/scale\.x\s*=\s*-|\*\s*-1\s*:|flipY\s*=\s*false|rotation/.test(s.replace(/\/\/.*$/gm,'')));
- ok('one mesh per zone (single draw), layer 2, presentation only',/new T\.Mesh\(geo,mat\)/.test(s)&&(s.match(/new T\.Mesh\(/g)||[]).length===1&&s.includes("mesh.layers.set(2)")&&s.includes('presentationOnly=true'));}
-// 독립 심사 지적(2026-11-09): R81 '해안' 색 묶음에 든 도시 교차로(murder01)·빌라 옥상(murder03)에 늪 수초가 났다 → 뺀다.
-//  쉼터·마을(R78 안전 지역)은 바닥이 1번 층 옛 지도 그림이라 바닥 칸 가장자리와 그림 가장자리가 맞지 않는다 → 세계 층(R81) 바닥만.
-{const c3=box({__STORYWORLD_WEATHER_R450__:{placeOf:()=>({kind:'out'})}});load(c3,'ground-fringe-r452.js');const A3=c3.__STORYWORLD_GROUND_FRINGE_R452__;
- const ward=fam=>({floorCells:[[0,0],[1,0]],worldWardR81:{environment:{family:fam}}}),rm=(id,L)=>({id,exploration:L});
- ok('paved city (crossroads murder01, rooftop murder03) gets no grass; harbour village and garden still do',A3.specFor(rm('murder01',ward('coast')))===null&&A3.specFor(rm('murder03',ward('coast')))===null&&
-  A3.specFor(rm('last302',ward('coast')))===A3.families.coast&&A3.specFor(rm('dist00',ward('garden')))===A3.families.garden&&A3.noFringe.length===2);
- ok('rest zones / village (floor not on the R81 world layer) get no grass',A3.specFor(rm('village',{floorCells:[[0,0]]}))===null&&A3.specFor(rm('restKairo',{floorCells:[[0,0]],surface:{art:{r81Environment:'garden'}}}))===null&&
-  A3.specFor(rm('hub',{floorCells:[[0,0]],refugeR82:{}}))===A3.families.regional);}
-// 방 12×8, 길 = y 4 줄 전체, 제단(2,2) 둘레 1.5 비움, 가운데 기둥 벽
-const cells=[];for(let x=0;x<12;x++)for(let y=0;y<8;y++)cells.push([x,y]);
-const pathSet=new Set();for(let x=0;x<12;x++)pathSet.add(x+',4');
-const spec={rate:1,k:[.15,.2],tint:[1,1,1],top:.5},opt={seed:7,path:pathSet,avoid:[{x:2,y:2,r:1.5}],walls:[[5.5,1.5,6.5,2.5]]};
-const A=api.plan(cells,spec,opt),B=api.plan(cells,spec,opt),Cc=api.plan(cells,spec,{...opt,seed:8});
-ok('spots found along the room edge',A.spots.length>20,A.spots.length);
-ok('no spot inside a path cell',A.spots.every(q=>!pathSet.has(Math.floor(q.x)+','+Math.floor(q.y))),A.spots.filter(q=>pathSet.has(Math.floor(q.x)+','+Math.floor(q.y))));
-ok('path skips counted',A.counts.path>0);
-ok('no spot within the avoid radius (altar / doors / props)',A.spots.every(q=>Math.hypot(q.x-2,q.y-2)>=1.5));
-ok('floor-side spots hug the outer edge (≤ .45 tile in)',A.spots.every(q=>q.x<=.45||q.x>=11.55||q.y<=.45||q.y>=7.55));
-ok('no spot inside a wall box',A.spots.every(q=>!(q.x>5.38&&q.x<6.62&&q.y>1.38&&q.y<2.62)));
-ok('spots spaced ≥ .62 tile',A.spots.every((q,i)=>A.spots.every((p,j)=>i===j||Math.hypot(p.x-q.x,p.y-q.y)>=.62-1e-9)));
-ok('same seed → same spots, other seed → different',JSON.stringify(A.spots)===JSON.stringify(B.spots)&&JSON.stringify(A.spots)!==JSON.stringify(Cc.spots));
-// 소품이 늦게 붙거나 숨겨져(R449 가구·R414 건물) 다시 만들 때: 난수가 후보마다 따로라 그 둘레 밖 풀은 그대로(뒤섞이지 않음)
-{const add={x:11.6,y:6,r:1.1},A2=api.plan(cells,spec,{...opt,avoid:[...opt.avoid,add]}),far=q=>Math.hypot(q.x-add.x,q.y-add.y)>2.6,key=q=>JSON.stringify(q);
- const a=A.spots.filter(far).map(key),b=new Set(A2.spots.filter(far).map(key));
- ok('a new avoid circle only changes spots near it (per-candidate random)',a.length>10&&a.every(k=>b.has(k))&&A2.spots.filter(far).length===a.length&&A2.spots.every(q=>Math.hypot(q.x-add.x,q.y-add.y)>=add.r),{far:a.length,kept:a.filter(k=>b.has(k)).length});}
-{const s=C('ground-fringe-r452.js');
- ok('hidden props (r303Hide: R303 / R412 / R449 resting R224 furniture) do not reserve space',/p\.visible!==false&&!p\.r303Hide\)pt\(p,/.test(s));
- ok('rebuilds when visible props change (R449 furniture, late R414 buildings), at most 4 times per visit, old mesh disposed',
-  /function propSig\(rm\)/.test(s)&&/REBUILD_MAX=4/.test(s)&&/if\(sig!==st\.psig\)\{drop\(r,st\);/.test(s)&&/r\.spatialResources\?\.delete\?\.\(x\);x\.dispose\?\.\(\);/.test(s));}
-// R204 둔덕 지역: 거리장(바닥 +, 둔덕 −)으로 둔덕 윗면 가장자리 또는 절벽 밑에만
-{const fieldAt=(x,y)=>Math.min(x,12-x,y,8-y),topAt=()=>1.2,T=api.plan(cells,spec,{...opt,fieldAt,topAt});const top=T.spots.filter(q=>q.side==='top'),fl=T.spots.filter(q=>q.side==='floor');
- ok('field mode: some on the bank top, some at the cliff foot',top.length>5&&fl.length>5,{top:top.length,floor:fl.length});
- ok('bank-top spots are off the floor (field < −.1) and raised',top.every(q=>fieldAt(q.x,q.y)<-.1&&q.h===1.2));
- ok('cliff-foot spots are on the floor band (.04..0.8)',fl.every(q=>fieldAt(q.x,q.y)>.04&&fieldAt(q.x,q.y)<.8&&q.h<.05));
- ok('no low front bank tuft right in front of a path cell',top.filter(q=>q.front).every(q=>{const cx=q.x>12?11:q.x<0?0:Math.floor(q.x),cy=q.y>8?7:q.y<0?0:Math.floor(q.y);return !pathSet.has(cx+','+cy);}));}
-ok('pages.yml runs this check',fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('node r96/qa/r452/r452-cpu-check.cjs'));
-done();
+// R452 CPU check — 벽 윗선 한 높이·문틀 2.4(벽이 문 위를 감쌈)·상인방 윗면·벽 밖 빈 공간 검게.
+'use strict';const fs=require('fs'),path=require('path'),vm=require('vm');
+const R=path.join(__dirname,'..','..'),C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8'),RT=f=>fs.readFileSync(path.join(R,'runtime-text',f),'utf8');
+let bad=0,n=0;const ok=(m,c)=>{n++;if(!c){bad++;console.log('FAIL',m);}else console.log('ok  ',m);};
+for(const f of ['world-doors-r83.js','doors-fit-r413.js','play-r115.js','world-presentation-r81.js']){const s=C(f);ok(f+': runtime copy matches',RT(f)===s);try{new vm.Script(s);ok(f+': syntax',true);}catch(e){ok(f+': syntax '+e.message,false);}}
+const d83=C('world-doors-r83.js');
+ok('R83: no fixed HEIGHT/LEAF left, door height comes from DH()',!/\bHEIGHT\b/.test(d83)&&!/\bLEAF\b/.test(d83)&&(d83.match(/DH\(\)/g)||[]).length>=10);
+// DH: 일반 지역 2.4, 병원 ep1a08 2.7, 끄면 2.7
+const dh=(id,off)=>{const m=d83.match(/let r452=true;[^\n]*\n const DH=[^\n]*\n/);const sb={room:id?{id}:null,localStorage:{getItem:()=>off?'{"on":false}':null},JSON,out:0};vm.createContext(sb);vm.runInContext(m[0].replace(/\bconst DH/,'DH')+'out=DH();',sb);return sb.out;};
+ok('door frame 2.4 in story rooms',dh('ep1b02')===2.4&&dh('kair02')===2.4);
+ok('hospital ep1a08 keeps 2.7',dh('ep1a08')===2.7);
+ok('switch off → 2.7',dh('ep1b02',true)===2.7);
+ok('R83 exposes doorHeight for R413',/doorHeight:\(\)=>DH\(\)/.test(d83));
+const d413=C('doors-fit-r413.js');
+ok('R413 lintel starts at the R83 door height',/DOOR_H=Number\(T\?\.doorHeight\?\.\(\)\)\|\|2\.7/.test(d413)&&!/const REV=[^\n]*DOOR_H=2\.7/.test(d413));
+ok('R452 3D lintel: clones the parallel jamb wall mesh (same material), shrinks to door span, door top → wall top, falls back to the 2D band',/function lintel3d\(/.test(d413)&&/if\(lintel3d\(r,L,d,top,DOOR_H\)\)return true;/.test(d413)&&/new t\.T\.Mesh\(g,m0\.material\)/.test(d413)&&/m\.position\.set\(d\.x,DH\+hgt\/2,d\.y\)/.test(d413));
+ok('R452 3D lintel cache follows its source jamb (rebuilt wall row or swapped fade material) instead of keeping a stale material; set(false) removes cached lintels',/r452SrcId:src\.w\.id/.test(d413)&&/t\.wallRows\.get\?\.\(have\.userData\.r452SrcId\)\?\.mesh===hs/.test(d413)&&/if\(have\.material!==hs\.material\)have\.material=hs\.material;/.test(d413)&&/function set\(v\)\{on=v!==false;if\(!on\)\{try\{clear3d\(\);L3room=null;/.test(d413));
+ok('R452 3D lintel only from walls parallel to the door, unrotated',/if\(spanX\?!\(w\.width>w\.depth\):!\(w\.depth>w\.width\)\)continue;/.test(d413)&&/if\(alongX!==spanX\)return false;/.test(d413));
+ok('R452 3D lintels cleared when the room changes',/room\?\.exploration!==L3room\)\{clear3d\(\)/.test(d413));
+const p115=C('play-r115.js');
+ok('R115: one wall top (max(h0,2.85)), no ±18% jitter or door spikes while R452 is on; hospital untouched',/if\(r452Flat&&room\?\.id!=='ep1a08'\)h=Math\.max\(h0,DOOR\+\.15\);/.test(p115));
+const w81=C('world-presentation-r81.js');
+ok('void roof caps near black (not hospital core)',/if\(r452Void&&!L\.hospitalCoreB2\)m\.color\.setRGB\(\.011,\.0095,\.009\)/.test(w81));
+ok('ground void plane near black every frame (not hospital core)',/voidMaterialR81\.color\.setHex\(r452Void&&!L\.hospitalCoreB2\?0x0d0b0b:0x817985\)/.test(w81));
+ok('one off switch storyworld.r452.walls in all three',[d83,p115,w81].every(s=>/storyworld\.r452\.walls/.test(s)));
+ok('presentation only: no collision/door-state writes added',![d83,d413,w81].some(s=>/\.walls\s*=[^=]|floorCells\s*=[^=]|\.open\s*=[^=]/.test(s.split('R452')[1]||'')));
+console.log(bad?bad+' failed':'all '+n+' passed');process.exit(bad?1:0);

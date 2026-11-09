@@ -43,5 +43,5 @@ ok('rim only inside the silhouette, only where the top-left neighbour is open',/
  ok('enemy rows toned; every colour restored after the draw',eq(seen['enemy:7:1'],t)&&[...rows.values()].every(r=>eq([r.mesh.material.color.r,r.mesh.material.color.g,r.mesh.material.color.b],one))&&c2.__STORYWORLD_ACTOR_TONE_R453__.inspect().stats.ghosts===2);
  ok('actorKind: hero/enemy by owner kind, R448/R350 ghosts by key only',P.actorKind('r448:ghost:hero:2:5',{kind:'effect'})==='hero'&&P.actorKind('r350:ghost:hero:2:5',{kind:'effect'})==='hero'&&P.actorKind('hero:2:5',{kind:'hero'})==='hero'&&P.actorKind('e:1',{kind:'enemy'})==='enemy'&&
   P.actorKind('r101:aura-back:hero:0',{kind:'effect'})===null&&P.actorKind('r448:over:prop:a:3',{kind:'effect'})===null&&P.actorKind('r448:ghost:x',null)===null);}
-ok('pages.yml runs this check',fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('node r96/qa/r453/r453-cpu-check.cjs'));
+ok('pages.yml runs this check',fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('node r96/qa/r453/actor-tone-r453-cpu-check.cjs'));
 done();

@@ -430,6 +430,8 @@ jobs:
         run: node r96/qa/r425/r425-cpu-check.cjs
       - name: R448 depth overlap (props in front cover the hero, hero silhouette shows through) CPU check
         run: node r96/qa/r448/r448-cpu-check.cjs
+      - name: R461 cinema run (separate title entry, saved run mode, narrator hero lock) CPU check
+        run: node r96/qa/r461/r461-cpu-check.cjs
       - name: R434 readability (boss/midboss ground aura, calm HUD, one track title, hero palette rim) CPU check
         run: node r96/qa/r434/r434-cpu-check.cjs
       - name: R435 surfaces (floor anti-repeat noise, wall base AO + grime band, bright floor knee, wall height gradient + top edge light) CPU check
@@ -438,16 +440,24 @@ jobs:
         run: node r96/qa/r438/r438-cpu-check.cjs
       - name: R449 props by room function (own wall clusters from map data per room name, R224 room furniture rested, empty junctions/yards/short corridors, same layout after load, cover fade) CPU check
         run: node r96/qa/r449/r449-cpu-check.cjs
+      - name: R451 low stone wall borders laid as continuous straight runs (no lone single) CPU check
+        run: node r96/qa/r451/r451-cpu-check.cjs
+      - name: R452 one wall top, door frame 2.4 wrapped by a lintel with top face, void beyond walls near black CPU check
+        run: node r96/qa/r452/r452-cpu-check.cjs
+      - name: R455 flashlight is an opt-in sight mode, glow default on every map (samong school cone, maze text) CPU check
+        run: node r96/qa/r455/r455-cpu-check.cjs
       - name: R441 lag (blocked memo per tick, R302 caller lookup without repeated full stacks, R409 outline cache by image address + bake budget per frame) CPU check
         run: node r96/qa/r441/r441-cpu-check.cjs
       - name: R450 zone weather (63 story zones indoor/outdoor/cave/void, dust instead of rain indoors, canon weather, double-sided streaks) CPU check
-        run: node r96/qa/r450/r450-cpu-check.cjs
+        run: node r96/qa/r450/weather-r450-cpu-check.cjs
       - name: R451 local light (wall-blocked light map, round pools, doorway leaks only, indoor flame -> bulb, light shoulder, old light layers yield) CPU check
-        run: node r96/qa/r451/r451-cpu-check.cjs
+        run: node r96/qa/r451/local-light-r451-cpu-check.cjs
       - name: R452 ground fringe (outdoor only, path/door/altar kept clear, room edge, approved weed art only, one draw) CPU check
-        run: node r96/qa/r452/r452-cpu-check.cjs
+        run: node r96/qa/r452/ground-fringe-r452-cpu-check.cjs
       - name: R453 actor tone (hero/mob brightness + saturation from the floor light, screen top-left rim, no asset swap, restored after draw) CPU check
-        run: node r96/qa/r453/r453-cpu-check.cjs
+        run: node r96/qa/r453/actor-tone-r453-cpu-check.cjs
+      - name: R444 enemy facing authority (attack side = hitbox angle, walk = real displacement, strafe faces hero, no mob shadows) CPU check
+        run: node r96/qa/r444/r444-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
         run: node r96/qa/r430/r430-cpu-check.cjs
       - name: R431 boss-room center fights + theme boss skill 6s + touch status/DoT + black-flame prop throws CPU check

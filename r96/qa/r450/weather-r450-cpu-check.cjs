@@ -28,5 +28,5 @@ ok('void spaces get no precipitation',['u204','u203','kair08'].every(z=>!['rain'
  const B=api.budget||{},buf=v=>v.precip==='rain'?'streak':v.precip==='snow'||v.precip==='ash'?'flake':v.dust?'dust':null,half=c=>c.mobile<=c.pc*.5;
  ok('light: every count fits its one-draw buffer, mobile ≤ half of PC',Object.values(api.spec).every(v=>!v.count||B[buf(v)]>0&&v.count.pc<=B[buf(v)]&&half(v.count))&&
   Object.values(api.spec).every(v=>(!v.splash||v.splash.pc<=B.splash&&half(v.splash))&&(!v.gust||v.gust.count.pc<=B.gust&&half(v.gust.count))),B);}
-ok('pages.yml runs this check',fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('node r96/qa/r450/r450-cpu-check.cjs'));
+ok('pages.yml runs this check',fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('node r96/qa/r450/weather-r450-cpu-check.cjs'));
 done();
