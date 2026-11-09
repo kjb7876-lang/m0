@@ -499,6 +499,8 @@ jobs:
         run: node r96/qa/r439/hwando-tip-cpu-check.cjs
       - name: R440 Hwando hit pose (no old art) and hero rim blade cleanup CPU check
         run: node r96/qa/r440/r440-cpu-check.cjs
+      - name: R446 seven pillars moved to their own map as stationary attacking towers CPU check
+        run: node r96/qa/r446/r446-cpu-check.cjs
       - name: R352 orphaned field-wave enemies wake near the hero CPU check
         run: node r96/qa/r352/wave-orphans-cpu-check.cjs
       - name: R280 stranded required enemy rescue and 777 forward range CPU check
