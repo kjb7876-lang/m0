@@ -33259,8 +33259,8 @@
     },
     {
       "path": "drive-buildings-r414.js",
-      "bytes": 9060,
-      "sha256": "090b3bddb7965aa092291910bc5ee30c1051556adb2d7dbd869a371ba6923cac"
+      "bytes": 9554,
+      "sha256": "3953e753725747314f0918aef50ac95d26ac7bd1d7f3c85ebc45df970a3f155b"
     },
     {
       "path": "drive-props-r138.js",
@@ -34329,8 +34329,8 @@
     },
     {
       "path": "world-outdoor-r99.js",
-      "bytes": 15949,
-      "sha256": "0f8bd6d9180cb2c629a95df833775a0855b247e4c991dee958cd30846f036102"
+      "bytes": 16477,
+      "sha256": "a8ac44ab92391fecdb45bd386e43d0da8395a229e21f3fb21bee311a8eb32305"
     },
     {
       "path": "world-presentation-r81.js",
@@ -34359,7 +34359,7 @@
     }
   ],
   "fileCount": 6871,
-  "totalBytes": 1086865770,
+  "totalBytes": 1086866792,
   "webHTMLSha256": "e5e218ca2289bb07af31478713225d3e8c1876d79860549acf32ce4b63765db2",
   "largest": [
     {

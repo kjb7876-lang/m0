@@ -11,7 +11,7 @@
 //  · storyworld.r414.buildings = {"on":false} 이면 끈다(이미 놓인 건물은 다음 입장부터 빠짐).
 (()=>{'use strict';
 if(window.__STORYWORLD_DRIVE_BUILDINGS_R414__)return;
-const REV='R414-buildings-2',KEY='storyworld.r414.buildings',IDX='./assets/r414/buildings/index.json';
+const REV='R414-buildings-3',KEY='storyworld.r414.buildings',IDX='./assets/r414/buildings/index.json';
 const HERO_PX=66,MIN_PX=2*HERO_PX,PX_PER_UNIT=34,MARGIN=1.5,MAX_BACK=8,STEP=.25,MIN_COORD=-1.5;// project(): 화면 x = (x−y)·TILE(34)·zoom
 const prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;}catch(_){}
 const stats={rooms:0,placed:0,skipped:0,notOutdoor:0,noSpot:0,errors:0};let lastError=null,ROWS=null,idxState='idle';
@@ -64,7 +64,9 @@ function tick(){if(!live())return;if(idxState==='idle')loadIndex();if(idxState==
 //  건물을 세운 지역에서만 그것이 드러나 회색 판·금빛 액자가 영웅 곁에 떠 보였다(7분야 심사 R414-2) → 건물을 세운 방에서는 main 과 같게 그리지 않는다.
 const hidePlaceholder=p=>!!(p&&p.r123Deco&&!p.path&&typeof room!=='undefined'&&room&&reports.get(room)?.placed?.length);
 function install(){if(typeof draw!=='function')return false;const db=draw;draw=function(...a){try{tick();}catch(e){fail(e);}return db.apply(this,a);};
- if(typeof drawProp==='function'){const dp=drawProp;drawProp=function(p,...a){try{if(hidePlaceholder(p)){stats.placeholdersKept=(stats.placeholdersKept||0)+1;return;}}catch(e){fail(e);}return dp.apply(this,[p,...a]);};}
+ if(typeof drawProp==='function'){const dp=drawProp;drawProp=function(p,...a){try{if(hidePlaceholder(p)){stats.placeholdersKept=(stats.placeholdersKept||0)+1;return;}
+  // R433: 지역 진입 때 releaseImageMemory 가 건물 그림을 지워도(지역 keep 목록에 없음) 그릴 때 다시 요청한다 — 방·레이아웃이 그대로면 apply 가 다시 돌지 않아 영영 안 그려지던 틈.
+  if(p?.r414Building&&typeof readyImage==='function'&&!readyImage(p.path)&&typeof addImage==='function'&&!(typeof imageCache!=='undefined'&&imageCache.get(p.path)?.error)){addImage(p.path,'R414 drive building');stats.rerequested=(stats.rerequested||0)+1;}}catch(e){fail(e);}return dp.apply(this,[p,...a]);};}
  return true;}
 let installed=false;const tryInstall=()=>{if(!installed)installed=install();return installed;};
 if(!tryInstall()){let n=0;const t=setInterval(()=>{if(tryInstall()||++n>200)clearInterval(t);},100);}

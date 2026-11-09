@@ -74,7 +74,11 @@
   const frames=treeFrames(look.trees);if(typeof addImage==='function')for(const f of frames)try{addImage(f);}catch(_){}
   r.r99Trees=keep.map((p,i)=>{const q={id:'r99:tree:'+r.id+':'+i,path:frames[0],x:p.x,y:p.y,height:(look.trees==='living'?196:176)*(.86+(p.k%30)/100),solid:false,visible:true,enabled:true,r80PresentationOnly:true,r99Tree:{kind:look.trees,phase:p.k%FRAMES,rate:.8+(p.k%5)/10}};r.props.push(q);return q.id;});stats.trees+=keep.length;}
 
- function dress(r){if(!eligible(r))return r;const L=r.exploration,scene=L.r98Scene;if(L.r99Outdoor?.id===r.id)return r;const look=lookOf(r.id,scene);
+ function dress(r){if(!eligible(r))return r;const L=r.exploration,scene=L.r98Scene;
+  // R433: 사몽 구역은 레이아웃(L)을 캐시해 다시 쓰고 방 조형물 목록만 새로 만든다 → L 에 '이미 꾸밈' 표식이 남아 나무를 다시 심지 않아
+  //  재입장 때 나무 30그루가 사라졌다(봉합 정원 재현). 표식이 있어도 방에 심은 나무가 없으면 나무만 다시 심는다(바닥은 L 에 그대로 남아 있음).
+  if(L.r99Outdoor?.id===r.id){if(L.r99Outdoor.treeCount>0&&!r.r99Trees){const look=lookOf(r.id,scene);if(look){plant(r,look);stats.replanted=(stats.replanted||0)+1;}}return r;}
+  const look=lookOf(r.id,scene);
   L.r99Outdoor={id:r.id,family:scene.family,mode:scene.mode,ground:null,water:null,trees:null};if(!look)return r;
   ground(L,look);plant(r,look);L.r99Outdoor={id:r.id,family:scene.family,mode:scene.mode,ground:L.surface?.art?.r99Ground?.kind||null,water:prefs.water?look.water:null,surround:prefs.ground&&!look.water?look.surround||null:null,trees:r.r99Trees?look.trees:null,treeCount:r.r99Trees?.length||0};return r;}
  const makeBase=makeRoom;makeRoom=function(...args){const r=makeBase.apply(this,args);try{dress(r);}catch(e){fail(e);}return r;};
