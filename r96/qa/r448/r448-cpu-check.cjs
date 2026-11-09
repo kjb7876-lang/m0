@@ -30,6 +30,14 @@ assert(Array.isArray(over[0].clips)&&over[0].clips.length===1&&over[0].clips[0].
  const win={};new Function('window','localStorage','room','player','setInterval',src)(win,{getItem:()=>null,setItem(){}},{props:[{id:'side'}]},{x:5,y:5,visible:true,hero:'hwando'},()=>0);
  const c=[aura,body,side];win.__STORYWORLD_DEPTH_OVERLAP_R448__.process(c);assert.strictEqual(c.length,3,JSON.stringify(c.slice(3).map(x=>x.key)));
  ok('hero aura/barrier images under the hero owner do not inflate the body box or get re-drawn (Codex review)');}
+{const r80=img({key:'r80:0',order:60,role:'body',owner:{kind:'prop',id:'r80-prop:desk',x:5.6,y:5.6},src:'assets/r80/desk.webp',pts:box(80,40,180,200),a:.55});
+ const odd=img({key:'odd:0',order:61,role:'body',owner:{kind:'prop',id:'prop:odd',x:5.6,y:5.6},src:'assets/crate.webp',pts:box(80,40,180,200),a:.55});
+ const kept=img({key:'kept:0',order:62,role:'body',owner:{kind:'prop',id:'r80-prop:shelf',x:5.6,y:5.6},src:'assets/r80/shelf.webp',pts:box(80,40,180,200),a:.4});
+ const win={};new Function('window','localStorage','room','player','setInterval',src)(win,{getItem:()=>null,setItem(){}},{props:[{id:'desk'},{id:'odd'},{id:'shelf'}]},{x:5,y:5,visible:true},()=>0);
+ const c=[hero,r80,odd,kept];win.__STORYWORLD_DEPTH_OVERLAP_R448__.process(c);const ov=c.filter(x=>String(x.key).startsWith('r448:over:'));
+ assert(r80.style.globalAlpha===1&&ov.some(x=>x.key==='r448:over:r80:0'&&Math.abs(x.style.globalAlpha-.86)<.01));ok('R80 art hero-fade (.55, r80-prop owner) is restored to 1 like the engine .36 — no box seam (R449 thread report)');
+ assert(odd.style.globalAlpha===.55);ok('.55 on a non-R80 prop is not treated as a hero fade');
+ assert(kept.style.globalAlpha===.4&&!ov.some(x=>x.key==='r448:over:kept:0'));ok('props faded on purpose below .6 (R449 mob/door .4/.5) get no cover, so no box seam');}
 const cmds2=[behind,hero,far,fx];A.process(cmds2);assert.strictEqual(cmds2.length,4);ok('nothing added when no prop covers the hero');
 A.set(false);const cmds3=[hero,front];A.process(cmds3);assert.strictEqual(cmds3.length,2);A.set(true);ok('toggle off disables it');
 assert(!/enemy/.test(src.replace(/\/\/.*$/gm,'').replace(/'[^']*'/g,'')));ok('mobs untouched (no enemy commands handled)');
