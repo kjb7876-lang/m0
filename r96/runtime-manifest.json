@@ -33884,8 +33884,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6572215,
-      "sha256": "c10d656b4eed48683bd8f7c557766c247f32d49d310bd5fa5124d2eab86ec207"
+      "bytes": 6572254,
+      "sha256": "372848df7e4c6bdcb0dc956a74504f48dff9977c03153db4af107d3fe1fa61d0"
     },
     {
       "path": "intro-r140.js",
@@ -34553,6 +34553,11 @@
       "sha256": "9f472ece711b316ff74f8ddd19c1be1c9b75259d7419fb39fb78581f6604310c"
     },
     {
+      "path": "trail-r482.js",
+      "bytes": 10204,
+      "sha256": "e0c04d74ad92f2e3f1bd1cdaef68b1a3455ad338ccb7ee6f1bf8e4408cd64b4b"
+    },
+    {
       "path": "ui-upgrades-r222.js",
       "bytes": 8667,
       "sha256": "e4a29248249cedbeead2fd7760775904e5f5a609acdca33c70d89fb2d9607a2f"
@@ -34743,9 +34748,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6948,
-  "totalBytes": 1091925974,
-  "webHTMLSha256": "c10d656b4eed48683bd8f7c557766c247f32d49d310bd5fa5124d2eab86ec207",
+  "fileCount": 6949,
+  "totalBytes": 1091936217,
+  "webHTMLSha256": "372848df7e4c6bdcb0dc956a74504f48dff9977c03153db4af107d3fe1fa61d0",
   "largest": [
     {
       "path": "index.html",
