@@ -6090,9 +6090,7 @@
     "assets/r380/mobs/electrode-machine-knight-v1.webp",
     "assets/r439/hwando/attack-e.webp",
     "assets/r439/hwando/index.json",
-    "skill-attack-r440.js",
-    "enemy-skill-pose-r442.js",
-    "fx-more-r438.js",
+    "assets/sin-rooms/envy-lounge.webp",
     "assets/r438/fx/enemy-cold-wave.webp",
     "assets/r438/fx/enemy-curse-brand.webp",
     "assets/r438/fx/enemy-poison-mist.webp",
@@ -6102,6 +6100,7 @@
     "assets/r438/fx/hero-cleanse.webp",
     "assets/r438/fx/hero-healing.webp",
     "assets/r438/fx/index.json",
+    "fx-more-r438.js",
     "assets/r415/props/archive-shelf.webp",
     "assets/r415/props/arrival-display.webp",
     "assets/r415/props/bell.webp",
@@ -6136,8 +6135,16 @@
     "assets/r415/props/two-chair.webp",
     "assets/r415/props/waiting-bench.webp",
     "perf-r441.js",
+    "assets/r445/slayer-walk-n-src/README-KO.txt",
+    "assets/r445/slayer-walk-n-src/manifest.json",
+    "assets/r445/slayer-walk-n-src/walk-n-00.png",
+    "assets/r445/slayer-walk-n-src/walk-n-01.png",
+    "assets/r445/slayer-walk-n-src/walk-n-02.png",
+    "assets/r445/slayer-walk-n-src/walk-n-03.png",
     "assets/r445/slayer/index.json",
-    "assets/r445/slayer/walk-n.webp"
+    "assets/r445/slayer/walk-n.webp",
+    "enemy-skill-pose-r442.js",
+    "skill-attack-r440.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -7212,5 +7219,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "6bc7930f5247e7c831f70144ded946c676ab5652f2f4b33d5928876b55c2bac7"
+  "runtimeManifestSHA256": "7b74115b40d2cf8c537c0e39b83b43cc1ebffeee8e5b0cd3249b3abb29ea2894"
 }
