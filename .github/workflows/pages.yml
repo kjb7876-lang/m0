@@ -489,6 +489,8 @@ jobs:
         run: node r96/qa/r349/hwando-arc-cpu-check.cjs
       - name: R436 Hwando down-walk v2 CPU check
         run: node r96/qa/r436/hwando-walk-s-cpu-check.cjs
+      - name: R439 Hwando attack blade-tip speck cleanup CPU check
+        run: node r96/qa/r439/hwando-tip-cpu-check.cjs
       - name: R352 orphaned field-wave enemies wake near the hero CPU check
         run: node r96/qa/r352/wave-orphans-cpu-check.cjs
       - name: R280 stranded required enemy rescue and 777 forward range CPU check
