@@ -533,6 +533,8 @@ jobs:
         run: node r96/qa/r442/enemy-skill-diag-cpu-check.cjs
       - name: R450 boss fight story beats (canon lines at engage/half/enrage/defeat) + wrath bear→wolves→dragon CPU check
         run: node r96/qa/r450/battle-beats-cpu-check.cjs
+      - name: R462 mobs without a death motion burn away or burst in blood and leave a corpse CPU check
+        run: node r96/qa/r462/mob-death-cpu-check.cjs
       - name: R440 Hwando hit pose (no old art) and hero rim blade cleanup CPU check
         run: node r96/qa/r440/r440-cpu-check.cjs
       - name: R446 seven pillars moved to their own map as stationary attacking towers CPU check
