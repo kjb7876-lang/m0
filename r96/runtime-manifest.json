@@ -32439,8 +32439,8 @@
     },
     {
       "path": "attack-anim-r143.js",
-      "bytes": 18020,
-      "sha256": "55dd3b0092336ef6374446a4f738e0a4fee5edd201bc6d1d76684dd1c97fe6a7"
+      "bytes": 18882,
+      "sha256": "3bdb605c04a9aa1cb40d113450539b98191cc67ceec4afd662b7c800c83818ca"
     },
     {
       "path": "audio-r108.js",
@@ -33584,8 +33584,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6571412,
-      "sha256": "96375e189d8c4bcb33b618928d3b2763362f60225129c0a463f6ea2dd96747e8"
+      "bytes": 6571458,
+      "sha256": "976f36ee2b667adc55bdb18a5c374dc04cc1dbcf9a5d4e116ecff521d57f5e7c"
     },
     {
       "path": "intro-r140.js",
@@ -34098,6 +34098,11 @@
       "sha256": "fdbb027ad13cb160b34d9a33e3416057da0286d6df739951bcf11f4b3f61c242"
     },
     {
+      "path": "skill-attack-r440.js",
+      "bytes": 4115,
+      "sha256": "1cacf913a2e66913a79c1aad34925c5dd2563cb4d09c0aaac7bed8868bd7a7c0"
+    },
+    {
       "path": "skill-fx-r292.js",
       "bytes": 12208,
       "sha256": "bfc841cf6fbf3f3ae99c8f0b71e60c8b194c1c6efedecb7cde3c65ad1b657ddd"
@@ -34398,9 +34403,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6879,
-  "totalBytes": 1087734083,
-  "webHTMLSha256": "96375e189d8c4bcb33b618928d3b2763362f60225129c0a463f6ea2dd96747e8",
+  "fileCount": 6880,
+  "totalBytes": 1087739106,
+  "webHTMLSha256": "976f36ee2b667adc55bdb18a5c374dc04cc1dbcf9a5d4e116ecff521d57f5e7c",
   "largest": [
     {
       "path": "index.html",
