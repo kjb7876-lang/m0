@@ -5,7 +5,7 @@
 //  환경 설정 창의 '시야' 고르기, L 키(전체 → 횃불 → 손전등 → 전체)로 바꾼다. 저장된 R58 시야 값(flashlight58)은 이 모드에 맞춰 둔다.
 (()=>{'use strict';
 if(window.__STORYWORLD_LIGHT_R182__)return;
-const REV='R455-light-8',KEY='storyworld.r182.light',MODES=['glow','auto','full','torch','flashlight'],NAME={glow:'은은한 원형(주변 밝고 멀수록 어둡게)',auto:'자동(미로만 횃불·손전등)',full:'전체(환하게)',torch:'횃불(원형)',flashlight:'손전등(부채꼴)'};
+const REV='R501-light-9',KEY='storyworld.r182.light',MODES=['glow','auto','full','torch','flashlight'],NAME={glow:'은은한 원형(주변 밝고 멀수록 어둡게)',auto:'자동(미로만 횃불·손전등)',full:'전체(환하게)',torch:'횃불(원형)',flashlight:'손전등(부채꼴)'};
 /* R254(사용자 2026-11-03 "미로맵만 횃불or손전등시야(시대상에맞게)이고 나머지상황은 모두전체보이는시야"): 기본은 '자동' — 미로 구역에서만 시대에 맞춰
    (현대·기계 = 손전등, 그 밖 = 횃불) 빛을 쓰고, 나머지는 모두 전체 시야. 예전에 저장된 값은 한 번 '자동'으로 옮긴다(v:254). 직접 고르면 그대로 따른다. */
 /* R335(사용자 2026-11-05 "플레이어 주변 밝고 멀수록 어두운 거 좋은 것 같아 이걸 기본으로"): 기본을 새 '은은한 원형(glow)'으로.
@@ -29,7 +29,12 @@ function toggle(){set({mode:MODES[(MODES.indexOf(prefs.mode)+1)%MODES.length]});
 // ---- 설정 창 ----
 try{if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const r=base.apply(this,a);try{const grid=document.querySelector('#panel .settings')||document.querySelector('.settings');if(grid&&!document.getElementById('lightModeR182')){const label=document.createElement('label');label.textContent='시야 ';const sel=document.createElement('select');sel.id='lightModeR182';
    for(const m of MODES){const o=document.createElement('option');o.value=m;o.textContent=NAME[m];if(m===prefs.mode)o.selected=true;sel.appendChild(o);}sel.onchange=()=>{set({mode:sel.value});stats.toggles++;};label.appendChild(sel);
-   const hint=document.createElement('span');hint.className='small muted';hint.textContent=' (L 키로 바꿈)';label.appendChild(hint);grid.appendChild(label);}}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
+   const hint=document.createElement('span');hint.className='small muted';hint.textContent=' (L 키로 바꿈)';label.appendChild(hint);grid.appendChild(label);}}catch(e){fail(e);}
+   /* R501(사용자 2026-11-09 "설정들 기능 하나씩 다 검증해봐서 충돌없도록"): 예전 R58 '손전등 주변 시야' 체크는 이 시야 고르기가 0.5초마다 flashlight58 을 맞추는 바람에
+      눌러도 곧 되돌아갔다(헤드리스 실측: 켬 → 3초 뒤 꺼짐). 체크를 시야 고르기에 잇는다 — 켜면 손전등, 끄면 기본 은은한 원형. 고르기를 바꾸면 체크도 따라간다. */
+   try{const box=document.getElementById('flashlightModeR58'),sel=document.getElementById('lightModeR182');if(box){box.checked=beam();if(box.dataset&&!box.dataset.r501){box.dataset.r501='1';box.addEventListener('change',()=>{try{set({mode:boxMode(box.checked)});stats.toggles++;const s=document.getElementById('lightModeR182');if(s)s.value=prefs.mode;}catch(e){fail(e);}});}
+    if(sel&&sel.dataset&&!sel.dataset.r501){sel.dataset.r501='1';sel.addEventListener('change',()=>{try{const b=document.getElementById('flashlightModeR58');if(b)b.checked=beam();}catch(e){fail(e);}});}}}catch(e){fail(e);}
+   return r;};}}catch(e){fail(e);}
 addEventListener('keydown',e=>{try{if(e.repeat||e.ctrlKey||e.metaKey||e.altKey)return;if((e.key==='l'||e.key==='L'||e.code==='KeyL')&&!(e.target&&/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))&&typeof started!=='undefined'&&started&&!(typeof modal!=='undefined'&&modal))toggle();}catch(err){fail(err);}});
 // ---- 본편 손전등: 둘레 시야 위에 부채꼴 밖을 어둡게 ----
 let cv=null,dir={x:1,y:1};
@@ -80,5 +85,6 @@ function torch(g,b){const o=project(player.x,player.y),U=(typeof TILE==='number'
  g.save();g.translate(o.x,o.y);g.scale(1,.5);g.translate(-o.x,-o.y);g.fillStyle=w;g.beginPath();g.arc(o.x,o.y,rx,0,Math.PI*2);g.fill();g.restore();stats.torchFrames=(stats.torchFrames||0)+1;}
 let applyAt=0;(function loop(t){try{if(!(t-applyAt<500)){applyAt=t||0;const m=mode(),w=m!=='full'&&m!=='glow';/* R335: glow 도 full 처럼 R24 시야를 끈다(모바일 기본 flashlight58=true 포함 — Codex 리뷰) */if(typeof settings!=='undefined'&&settings&&(settings.flashlight58!==false)!==w)apply();}frame();}catch(e){fail(e);}requestAnimationFrame(loop);})(0);
 const beam=()=>{const m=mode();return m==='torch'||m==='flashlight';};
-window.__STORYWORLD_LIGHT_R182__=Object.freeze({revision:REV,MODES,mode,beam,choice:()=>prefs.mode,inMaze,mazeLight,set,toggle,apply,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError})});
+const boxMode=checked=>checked?'flashlight':'glow';
+window.__STORYWORLD_LIGHT_R182__=Object.freeze({revision:REV,MODES,mode,beam,choice:()=>prefs.mode,inMaze,mazeLight,set,toggle,apply,boxMode,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError})});
 })();
