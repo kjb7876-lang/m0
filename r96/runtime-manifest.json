@@ -33189,8 +33189,8 @@
     },
     {
       "path": "combat-read-r409.js",
-      "bytes": 13966,
-      "sha256": "3e90636534277dcec8e778bb6b00b682e9c19e45779243f1da91a86a7b290c4c"
+      "bytes": 16874,
+      "sha256": "1ecde0cc2f2bc5278bd00ff31cdb2b699b3ea8a8e6e0a3ef7bb08ebdf6b13b28"
     },
     {
       "path": "crates-r108.js",
@@ -33559,8 +33559,8 @@
     },
     {
       "path": "hwando-r271.js",
-      "bytes": 12181,
-      "sha256": "56b4a3d7f25ed32abfcb1ac174c1e364742ceb16bae7cf86ee67b7995b170f70"
+      "bytes": 13235,
+      "sha256": "7e1ea8c981d9f0fcf9cb70de384a4b6ad0e36806d3acb316759f2428619311bf"
     },
     {
       "path": "hwando-r277.js",
@@ -34394,7 +34394,7 @@
     }
   ],
   "fileCount": 6878,
-  "totalBytes": 1087727648,
+  "totalBytes": 1087731610,
   "webHTMLSha256": "0e49800cfa2ca7de5a59778e2d0d81a46a3d5fb38b8db132e0468396d3ebda5a",
   "largest": [
     {

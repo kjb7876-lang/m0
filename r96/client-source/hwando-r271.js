@@ -13,6 +13,7 @@
 if(window.__STORYWORLD_HWANDO_R271__)return;
 const REV='R271-hwando-1',KEY='storyworld.r271.hwando',BASE='assets/r271/hwando/',OLD='assets/r242/hwando/';
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
+let HIT_NEW=true;try{const s=JSON.parse(localStorage.getItem('storyworld.r440.hwandoHit')||'null');if(s&&s.on===false)HIT_NEW=false;}catch(_){}
 const stats={frames:0,walk:0,idle:0,attack:0,hit:0,skill:0,fallback:0,waiting:0,errors:0,dupRemoved:0,loads:0,last:null};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 let IDX=null,idxReq=false;
 /* R436: 아래 걷기 v2 — 별도 색인(assets/r436/hwando/index.json, R271 몸 키 180·발 기준점·R283 색 목표에 맞춘 6키) */
@@ -44,7 +45,7 @@ const want=()=>(typeof actorHeight==='function'?actorHeight():66)*((window.__STO
 function draw(rec,st,best,anim,dir,frame,opt={}){const ws=anim==='walk'&&dir==='s'&&opt.s?wsRes():null;/* R436: 아래 걷기만 새 v2 */if(dir==='s'&&!ws){const P=P277();if(P?.down)dir=P.down();}/* R349: 그 밖의 아래 그림은 쓰지 않는다(위·좌·우만) */const R=ws||res(anim,dir);if(!R)return false;const A=R.A,p=(window.__STORYWORLD_HWANDO_R283__?.path?.(R.base,A.file))||R.base+A.file,im=image(p);/* R283 색 맞춘 파생본 */if(!im){/* R345: 공격·피격 그림이 아직 안 받아졌으면 엔진 옛 그림 대신 이미 받은 같은 방향 걷기 선 자세로(옛 그림이 한 순간 튀지 않게) */if(!opt.fb&&anim!=='walk'){stats.standIn=(stats.standIn||0)+1;const w=res('walk',dir)?.A;if(w&&draw(rec,st,best,'walk',dir,Math.min(3,w.n-1),{fb:true}))return true;}return false;}
  const n=A.n,fr=((frame%n)+n)%n,cw=A.cell[0],ch=A.cell[1],col=fr%A.cols,row=Math.floor(fr/A.cols);
  const body=R.body||A.body||180,w=want(),k=w/body,ky=opt.breath?k*(1+.008*Math.sin(T()*2.2)):k;
- const q=project(player.x,player.y),lift=Math.min(Math.max(+player.visualLiftPx||0,0),w*.65),fx=q.x,fy=q.y-lift,f=R.mir?-1:1,[ax,ay]=A.anchor;
+ const q=project(player.x,player.y),lift=Math.min(Math.max(+player.visualLiftPx||0,0),w*.65),fx=q.x+(+opt.dx||0),fy=q.y-lift,f=R.mir?-1:1,[ax,ay]=A.anchor;
  const X=v=>fx+f*(v-ax)*k,Y=v=>fy+(v-ay)*ky,before=best.image;
  Object.assign(best,{image:im,sourcePath:p,immutableTint:null,sourceRect:[col*cw,row*ch,cw,ch],imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],
   points:[[X(0),Y(0)],[X(cw),Y(0)],[X(cw),Y(ch)],[X(0),Y(ch)]],r271:anim,r121Walk:anim==='walk',r277Hold:!!opt.hold});
@@ -69,6 +70,10 @@ function choose(rec,st){const best=pickBody(rec,st);if(!best)return;const t=T(),
  if(busy){const d=player.dashAnim>0?(enemyDir()||S.dir):aimDir();S.dir=d;stats.skill++;if(player.dashAnim>0)return draw(rec,st,best,'walk',d,3);const a=atkOf(d);return a&&draw(rec,st,best,'attack',d,Math.floor(a.n*(player.ultimateAnim>0?.55:.45)));}
  if(S.swing){const a=atkOf(S.swing.dir),el=(t-S.swing.t0)*ms/S.swing.scale+S.swing.off,tot=a.ms.reduce((x,y)=>x+y,0);
   if(el<tot&&!(moving&&t-S.swing.t0>.35)){S.dir=S.swing.dir;return draw(rec,st,best,'attack',S.swing.dir,frameAt(a.ms,el,false));}S.swing=null;}
+ /* R440(사용자 2026-11-09 "환도영웅에 옛 이미지 갑자기 등장 버그"): 피격은 새 팩에 없어 R242 옛 그림(두건·옷·칼 쥔 손이 다른 그림)이 맞을 때마다 튀었다.
+    → 지금 그림(R283 좌·우 선 자세)으로 서서, 적 반대쪽으로 짧게 밀렸다 돌아오는 움찔(0.32초, 몸 키 5%)로 보인다. 끄기: localStorage['storyworld.r440.hwandoHit']='{"on":false}' */
+ if(S.hit&&!moving&&HIT_NEW&&P277()){const P=P277(),el=t-S.hit.t0,dur=.32;if(el<dur){let d=S.hit.dir;if(d!=='e'&&d!=='w')d=P.down?.()||'e';P.face(d);const I=window.__STORYWORLD_HWANDO_R283__?.idle?.(P),dd=I?I.dir:d,wA=res('walk',dd)?.A;
+   if(wA){const u=el/dur,dx=(dd==='e'?-1:1)*want()*.05*Math.sin(Math.PI*Math.min(1,u*1.6))*(1-u*.35);S.dir=dd;stats.hitNew=(stats.hitNew||0)+1;return draw(rec,st,best,'walk',dd,I?Math.min(I.frame,wA.n-1):wA.n-1,{dx});}}S.hit=null;}
  if(S.hit&&!moving){const d=S.hit.dir,h=res('hit',d)?.A,el=(t-S.hit.t0)*ms/.6;if(h&&el<h.ms.reduce((x,y)=>x+y,0)){S.dir=d;return draw(rec,st,best,'hit',d,frameAt(h.ms,el,false));}S.hit=null;}
  if(moving){const P=P277();S.dir=P?.walkDir?P.walkDir(S.walkDir,S.sx):S.walkDir;P?.face(S.dir);const ws=S.dir==='s'?wsRes():null,R=ws||res('walk',S.dir),k=want()/(R?.A?.body||180),fps=R?.A?.frames_per_stride,per=(IDX.anims.walk?.stride?.px_per_frame||12.8)*k*(fps?(IDX.anims.walk?.stride?.frames_per_stride||12)/fps:1);/* R436: 6키 = 두 걸음 → 칸당 거리 2배(보폭 같게) */return draw(rec,st,best,'walk',S.dir,Math.floor(S.dist/Math.max(1,per)),{s:!!ws});}
  const fd=enemyDir()||S.dir;S.dir=fd;const P=P277();if(P){P.face(fd);const I=window.__STORYWORLD_HWANDO_R283__?.idle?.(P),dd=I?I.dir:fd;S.dir=dd;/* R354: 날개(R101) 등이 실제로 그린 선 자세 방향을 보게 */const w=res('walk',dd)?.A;if(!w)return;P.idle(dd);return draw(rec,st,best,'walk',dd,I?Math.min(I.frame,w.n-1):w.n-1);}/* R283: 좌·우 걷기의 선 자세 칸 *//* R277: 걷기 마지막 칸으로 멈춘 대기 */const a=res('idle',fd)?.A;if(!a)return;
