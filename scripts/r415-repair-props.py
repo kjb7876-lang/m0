@@ -20,6 +20,7 @@ from PIL import Image
 
 src = Path(sys.argv[1]); out = Path(sys.argv[2] if len(sys.argv) > 2 else 'r96/runtime-text/assets/r415/props')
 LO, HI, LONG = 72, 230, 384
+POP = (24, 236, 1.25, 6, .42)  # R415 read: value stretch lo/hi, saturation, halo px, halo alpha (DREAM draws props saturate(.5) brightness(.85) on brown floors)
 
 # name, Drive file, zone, mode, axis ('x' = art parallel to the -x wall, 'y' = the -y wall), draw height px (hero 66)
 PROPS = [
@@ -76,13 +77,35 @@ def clean(im):
     img = Image.fromarray(np.dstack([rgb, al]).clip(0, 255).astype(np.uint8), 'RGBA')
     box = img.getchannel('A').point(lambda v: 255 if v >= 16 else 0).getbbox()
     box = (max(0, box[0] - 4), max(0, box[1] - 4), min(img.width, box[2] + 4), min(img.height, box[3] + 4))
-    img = img.crop(box); s = min(1.0, LONG / max(img.size))
-    return img.resize((max(1, round(img.width * s)), max(1, round(img.height * s))), Image.LANCZOS)
+    img = img.crop(box); s = min(1.0, (LONG - 4 * POP[3]) / max(img.size))  # halo pads 2*POP[3] each side
+    return pop(img.resize((max(1, round(img.width * s)), max(1, round(img.height * s))), Image.LANCZOS))
+
+
+def pop(img):
+    """Floor separation: stretch value 2..98% -> POP lo..hi, lift saturation, soft dark halo under the outline."""
+    import numpy as np
+    from PIL import ImageFilter
+    lo, hi, sat, r, ha = POP
+    a = np.asarray(img).astype(np.float32); rgb, al = a[..., :3], a[..., 3]
+    lum = rgb @ np.array([.299, .587, .114], np.float32); m = al > 200
+    p2, p98 = np.percentile(lum[m], [2, 98]) if m.sum() > 50 else (0, 255)
+    nl = np.clip((lum - p2) / max(1, p98 - p2), 0, 1) * (hi - lo) + lo
+    rgb = rgb * (nl / np.maximum(lum, 1))[..., None]
+    g = (rgb @ np.array([.299, .587, .114], np.float32))[..., None]; rgb = np.clip(g + (rgb - g) * sat, 0, 255)
+    pad = r * 2; W, H = img.width + pad * 2, img.height + pad * 2
+    body = Image.new('L', (W, H)); body.paste(Image.fromarray(al.astype(np.uint8)), (pad, pad))
+    halo = np.asarray(body.filter(ImageFilter.MaxFilter(2 * (r // 2) + 1)).filter(ImageFilter.GaussianBlur(r / 2))).astype(np.float32) * ha
+    out = np.zeros((H, W, 4), np.float32); out[..., :3] = (18, 14, 12); out[..., 3] = halo
+    fa = np.zeros((H, W), np.float32); fa[pad:pad + img.height, pad:pad + img.width] = al / 255
+    fr = np.zeros((H, W, 3), np.float32); fr[pad:pad + img.height, pad:pad + img.width] = rgb
+    oa = fa + out[..., 3] / 255 * (1 - fa)
+    orgb = (fr * fa[..., None] + out[..., :3] * (out[..., 3:] / 255) * (1 - fa[..., None])) / np.maximum(oa, 1e-6)[..., None]
+    return Image.fromarray(np.dstack([orgb, oa * 255]).clip(0, 255).astype(np.uint8), 'RGBA')
 
 
 got = json.loads((src / 'got.json').read_text(encoding='utf-8'))
 out.mkdir(parents=True, exist_ok=True)
-index = {'revision': 'R415', 'method': f'alpha {LO}..{HI} -> 0..255, 1px erode, edge RGB from solid neighbours, crop+4, long side <= {LONG}, WebP q92',
+index = {'revision': 'R415', 'method': f'alpha {LO}..{HI} -> 0..255, 1px erode, edge RGB from solid neighbours, crop+4, long side <= {LONG}, value {POP[0]}..{POP[1]}, saturation x{POP[2]}, {POP[3]}px dark halo, WebP q92',
          'held': HELD, 'props': {}}
 for name, drive, zone, mode, axis, h in PROPS:
     png = src / 'raw' / (name + '.png'); data = png.read_bytes(); sha = hashlib.sha256(data).hexdigest()

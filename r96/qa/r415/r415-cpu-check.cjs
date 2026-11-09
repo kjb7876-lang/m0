@@ -26,5 +26,8 @@ ok('furniture never taller than the hero x1.1',P.every(([,v])=>v.height<=73));
 ok('chandelier held with a reason (ceiling fixture)',/ceiling/.test(idx.held?.chandelier||''));
 ok('rows do not reuse an R406 zone+name pair (no duplicate scene props)',new Set(P.map(([k,v])=>v.zone+k)).size===P.length);
 ok('R406 still draws these as presentation only (solid:false, interactive:false)',/solid:false,visible:true,enabled:true,interactive:false/.test(C('props-place-r406.js')));
+// R415 밑동 바로잡기: R111 footOf 가 다리 달린 가구를 키의 22%까지 내려 그려 3D 면이 바닥 밑으로 잠기던 것 — R406 소품만, R111 이 더한 만큼만 뺀다
+{const src=C('props-place-r406.js');ok('R406 foot fix undoes only the R111 foot shift, R406 rows only, with an off switch',
+ /prefs=\{[^}]*foot:true/.test(src)&&/!p\.r406Boss\)return base\.call/.test(src)&&/Math\.min\(\.22,1-f\)\*/.test(src)&&/f<\.97/.test(src)&&/finally\{sprite=s0;\}/.test(src)&&/foot:path=>feet\.get\(path\)/.test(C('play-r111.js'))&&/Math\.min\(\.22,1-f\)\*finite\(p\.height,60\)\*Z\(\)/.test(C('play-r111.js')));}
 const fails=checks.filter(c=>!c.pass);for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass||c.detail===undefined?'':' :: '+JSON.stringify(c.detail).slice(0,400)));
 console.log('R415 CPU '+(checks.length-fails.length)+'/'+checks.length);if(fails.length)process.exit(1);
