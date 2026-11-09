@@ -6150,7 +6150,9 @@
     "props-space-r449.js",
     "cinema-run-r461.js",
     "enemy-face-r444.js",
-    "mob-death-r462.js"
+    "mob-death-r462.js",
+    "sin-boss-art-r463.js",
+    "sin-boss-art-r463-data.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -7225,5 +7227,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "49036c68aad5903e83baeb6b14321e357268611cfc618eb6a9064d2b2d675d26"
+  "runtimeManifestSHA256": "c7053089c5f3a031ead1783ef8bd3f0642cd845f747e9295e5917c54a5076d55"
 }
