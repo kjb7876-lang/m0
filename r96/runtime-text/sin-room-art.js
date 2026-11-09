@@ -39,6 +39,7 @@ const GROUND_EDGE=Object.freeze({
 const prop=(key,x,y,width,depth,height,wallHeight,flip=false,existingCollision=false)=>Object.freeze({key,x,y,width,depth,height,wallHeight,flip,existingCollision});
 // R438(사용자 2026-11-09 "의자같은경우는 중앙에 각도맞게" · "식탁이랑 의자를 같이 가야지"): 분노 식당의 쓰러진 의자 무리(식탁 없는 의자)를 보스방 왼쪽 벽에서 빼, 보스방 앞 몹 모이는 구역(gatherBounds [4,27,28,39]) 북쪽 벽에 붙인다 — 식탁 앞에 두면 식탁 그림 속 의자와 겹쳐 더 어수선했다(사용자 03:19Z "보스방이 작아서 배치가 다 어렵다면 보스방이전에 몹들이 몰리는 구역에 적절하게"). 보스방에는 의자가 그려진 식탁·찬장·부스(작은 식탁 포함) 세트만 남는다.
 //  같은 날 03:40Z "빨간색 원그린 조형물식탁을 아래 원두곳에 각도 맞게 배치": 같은 식탁 세트(의자 포함 그림)를 모이는 구역 두 곳(9.1,30.3)·(19.3,32.1)에 보스방 식탁과 같은 방향(긴 쪽이 x 축)으로 더 놓는다. 같은 그림 칸(table)을 cell 로 가리켜 다시 쓴다(그림·매니페스트 칸은 그대로).
+// R443(사용자 2026-11-09 06:36Z 색욕 레퍼런스 "이런식으로 적절하게 배치 뺄껀 과감히 빼고"): 북벽에 바 → 뒷선반 → 부스(뒤집지 않고 남서쪽을 봄)를 한 줄로, 술 수레는 서벽 위쪽. 라운지 소품 고정 자리는 bossroom-tidy-r438.js.
 const themes={
  ep1b02:{name:'나태의 거주집',atlas:'sloth',props:[prop('sofa',13.0,7.15,4.4,1.65,165,1.25),prop('fridge',23.4,7.15,1.5,1.2,155,2.25),prop('tv',18.65,7.0,2.2,1.2,110,1.5),prop('bed',7.2,15.2,1.8,3.7,160,.85,true)]},
  ep1b03:{name:'질투의 거주집',atlas:'envy',props:[prop('settee',12.9,7.15,4.1,1.6,165,1.2),prop('mirror',23.6,6.9,1.5,.9,130,2.25),prop('console',18.5,7.0,2.6,1.25,142,1.3),prop('cabinet',7.05,14.2,1.3,1.5,148,2.15,true),
@@ -48,7 +49,7 @@ const themes={
   {...prop('gSofaN',25.3,25.75,3.0,1.2,101,1.1),atlas:'envyLounge',cell:'sofaN',fit:'lobby',back:true},{...prop('gTableN',25.3,27.55,2.0,.9,83,.9),atlas:'envyLounge',cell:'tableN',fit:'lobby'},
   {...prop('gSofaW',1.75,31.5,1.2,3.0,118,1.1),atlas:'envyLounge',cell:'sofaW',wall:'west',fit:'lobby',back:true},{...prop('gTableW',3.55,31.5,.9,2.0,83,.9),atlas:'envyLounge',cell:'tableW',wall:'west',fit:'lobby'}]},
  ep1b04:{name:'탐식의 호텔 주방',atlas:'glutton',props:[prop('prep',12.9,7.15,4.0,1.7,165,1.15),prop('range',18.7,7.1,3.0,1.4,165,1.55),prop('fridge',23.7,7.0,1.7,1.3,150,2.35),prop('trolley',7.1,15.4,1.5,1.55,112,1.1,true)]},
- ep1b05:{name:'색욕의 호텔 고급 바',atlas:'lust',props:[prop('bar',13.1,7.15,4.0,1.5,170,1.3),prop('backbar',22.0,7.0,2.4,.95,170,2.4),prop('booth',7.15,13.8,1.65,3.5,165,1.4,true),prop('trolley',7.1,18.0,1.25,1.4,112,.95,true)]},
+ ep1b05:{name:'색욕의 호텔 고급 바',atlas:'lust',props:[prop('bar',13.1,7.15,4.0,1.5,170,1.3),prop('backbar',17.95,6.95,2.4,.95,170,2.4),prop('booth',23.25,7.0,3.5,1.65,165,1.4),prop('trolley',7.1,12.9,1.25,1.4,112,.95,true)]},
  ep1b06:{name:'맘몬의 호텔 사장실과 금고',atlas:'mammon',props:[prop('desk',14,7.35,5,1.4,160,1.02,true,true),prop('chair',18,7.4,1.2,1.2,130,1.7),prop('drawers',6.85,15,1.4,4,140,1.35,true,true),prop('trolley',24.5,7,1,1.2,100,1.1)]},
  ep1b07:{name:'불타는 호텔 식당',atlas:'wrath',props:[prop('table',13.1,7.3,3.9,1.7,170,1.05),prop('buffet',21.6,7.1,4.0,1.65,165,1.45),prop('chairs',9.6,26.1,2.2,1.5,132,1.1),{...prop('table2',9.1,30.3,3.9,1.7,170,1.05),cell:'table'},{...prop('table3',19.3,32.1,3.9,1.7,170,1.05),cell:'table'},prop('booth',7.2,17.2,1.8,3.75,170,1.35,true)]}
 };
