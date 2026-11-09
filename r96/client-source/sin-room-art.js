@@ -34,13 +34,14 @@ const GROUND_EDGE=Object.freeze({
 // x/y are native floor positions; width/depth are the solid furniture footprint.
 // Pixel heights use the same zoom-1 scale as native props (the hero is 66 px).
 const prop=(key,x,y,width,depth,height,wallHeight,flip=false,existingCollision=false)=>Object.freeze({key,x,y,width,depth,height,wallHeight,flip,existingCollision});
+// R438(사용자 2026-11-09 "의자같은경우는 중앙에 각도맞게" · "식탁이랑 의자를 같이 가야지"): 분노 식당의 쓰러진 의자 무리(식탁 없는 의자)를 보스방 왼쪽 벽에서 빼, 보스방 앞 몹 모이는 구역(gatherBounds [4,27,28,39]) 북쪽 벽에 붙인다 — 식탁 앞에 두면 식탁 그림 속 의자와 겹쳐 더 어수선했다(사용자 03:19Z "보스방이 작아서 배치가 다 어렵다면 보스방이전에 몹들이 몰리는 구역에 적절하게"). 보스방에는 의자가 그려진 식탁·찬장·부스(작은 식탁 포함) 세트만 남는다.
 const themes={
  ep1b02:{name:'나태의 거주집',atlas:'sloth',props:[prop('sofa',13.0,7.15,4.4,1.65,165,1.25),prop('fridge',23.4,7.15,1.5,1.2,155,2.25),prop('tv',18.65,7.0,2.2,1.2,110,1.5),prop('bed',7.2,15.2,1.8,3.7,160,.85,true)]},
  ep1b03:{name:'질투의 거주집',atlas:'envy',props:[prop('settee',12.9,7.15,4.1,1.6,165,1.2),prop('mirror',23.6,6.9,1.5,.9,130,2.25),prop('console',18.5,7.0,2.6,1.25,142,1.3),prop('cabinet',7.05,14.2,1.3,1.5,148,2.15,true)]},
  ep1b04:{name:'탐식의 호텔 주방',atlas:'glutton',props:[prop('prep',12.9,7.15,4.0,1.7,165,1.15),prop('range',18.7,7.1,3.0,1.4,165,1.55),prop('fridge',23.7,7.0,1.7,1.3,150,2.35),prop('trolley',7.1,15.4,1.5,1.55,112,1.1,true)]},
  ep1b05:{name:'색욕의 호텔 고급 바',atlas:'lust',props:[prop('bar',13.1,7.15,4.0,1.5,170,1.3),prop('backbar',22.0,7.0,2.4,.95,170,2.4),prop('booth',7.15,13.8,1.65,3.5,165,1.4,true),prop('trolley',7.1,18.0,1.25,1.4,112,.95,true)]},
  ep1b06:{name:'맘몬의 호텔 사장실과 금고',atlas:'mammon',props:[prop('desk',14,7.35,5,1.4,160,1.02,true,true),prop('chair',18,7.4,1.2,1.2,130,1.7),prop('drawers',6.85,15,1.4,4,140,1.35,true,true),prop('trolley',24.5,7,1,1.2,100,1.1)]},
- ep1b07:{name:'불타는 호텔 식당',atlas:'wrath',props:[prop('table',13.1,7.3,3.9,1.7,170,1.05),prop('buffet',21.6,7.1,4.0,1.65,165,1.45),prop('chairs',7.15,13.0,1.9,2.15,132,1.1,true),prop('booth',7.2,17.2,1.8,3.75,170,1.35,true)]}
+ ep1b07:{name:'불타는 호텔 식당',atlas:'wrath',props:[prop('table',13.1,7.3,3.9,1.7,170,1.05),prop('buffet',21.6,7.1,4.0,1.65,165,1.45),prop('chairs',9.6,26.1,2.2,1.5,132,1.1),prop('booth',7.2,17.2,1.8,3.75,170,1.35,true)]}
 };
 for(const t of Object.values(themes)){Object.freeze(t.props);Object.freeze(t);}Object.freeze(themes);
 function propPlane(p){

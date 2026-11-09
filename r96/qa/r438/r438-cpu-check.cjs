@@ -34,4 +34,5 @@ ok('authored set, doors, chest kept',ids.includes('sin-art:ep1b03:console')&&ids
 const m=mk('ep1b06');api.tidy(m);ok('Mammon room unchanged',m.props.length===9);
 const s=mk('ep1a09');api.tidy(s);ok('non-sin region unchanged',s.props.length===9);
 const w=mk('ep1b07');api.tidy(w);const wi=w.props.map(q=>q.id);ok('wrath: boss-room furniture removed, no theme filter elsewhere',!wi.includes('r224:furn:ep1b07:0')&&wi.includes('r224:furn:ep1b07:2'));
+const sra=C('sin-room-art.js');ok('wrath loose chairs moved out of the boss room to the pre-boss gather room north wall',/prop\('chairs',9\.6,26\.1,2\.2,1\.5,132,1\.1\)/.test(sra)&&/prop\('table',13\.1,7\.3,/.test(sra)&&RT('sin-room-art.js')===sra);
 console.log(n-bad+'/'+n+' ok');process.exit(bad?1:0);
