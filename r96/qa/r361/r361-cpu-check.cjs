@@ -10,7 +10,9 @@ const NEW=fs.readFileSync(path.join(R,'client-source/hero-palette-r302.js'),'utf
 ok(fs.readFileSync(path.join(R,'runtime-text/hero-palette-r302.js'),'utf8')===NEW,'runtime copy matches client-source');
 // 예전 코드 되살리기: R361 블록을 원래 줄로(origin/main 4a258ab 의 R302 와 바이트까지 같아야 함 — 만들 때 확인)
 const swap=(s,a,b)=>{ok(s.split(a).length===2,'R361 piece present once: '+a.slice(0,40));return s.replace(a,()=>b);};
-let OLD=NEW;{const a=OLD.indexOf(' // R361 렉:'),b=OLD.indexOf(' // R111 also renders bosses');ok(a>0&&b>a,'R361 block present');
+// R441: shortOk 은 play-r111 도 4칸으로 판정을 끝내게 바뀌었다(threadSlash 는 3·4칸째에서만 그림을 부른다 — qa/r441 이 구조 확인).
+//  예전 코드 되살리기 전에 그 줄을 R361 모양으로 돌려 둔다(이 검사의 호출 모양들에서 판정은 R441 전후가 같다 — 아래 ①이 그대로 비교).
+let OLD=NEW.replace(/\n\/\/ R441 렉: play-r111[\s\S]*?const shortOk=\(file,stack\)=>!!file;/,()=>"\nconst shortOk=(file,stack)=>!!file&&!(file==='play-r111'&&!T111.test(String(stack)));");{const a=OLD.indexOf(' // R361 렉:'),b=OLD.indexOf(' // R111 also renders bosses');ok(a>0&&b>a,'R361 block present');
  OLD=OLD.slice(0,a)+' const stack=new Error().stack,file=callerFile(stack);\n'+OLD.slice(b);}
 OLD=swap(OLD,"const decided=new Map(),SHORT=4,T111=/at threadSlash \\(.*\\/play-r111\\.js:/,needFull=new Set();\nconst shortOk=(file,stack)=>!!file&&!(file==='play-r111'&&!T111.test(String(stack)));",'const decided=new Map();');
 OLD=swap(OLD,"(file==='play-r111'&&T111.test(String(stack)))","(file==='play-r111'&&/at threadSlash \\(.*\\/play-r111\\.js:/.test(String(stack)))");
@@ -86,9 +88,11 @@ for(const seed of [7,99,2024]){const a=drive(OLD,false,{shuffle:seed}).out,b=dri
  const E=engine(NEW),X=PALS[3],Y=PALS[2];const mk=(file,sh)=>E.run(file,'(function(){'+SHAPES[sh]+';return go;})()');
  const one=(go,F)=>{frames=0;caps=0;Error.prepareStackTrace=COUNT;try{E.g.ENG(()=>go(F));}finally{Error.prepareStackTrace=undefined;}return[caps,frames];};
  const boss=mk('play-r111.js','bossFn'),thr=mk('play-r111.js','threadSlash'),heroF=mk('skills-r209.js','bossFn');
- ok(JSON.stringify([one(boss,X),one(boss,X),one(boss,X)])==='[[2,14],[1,10],[1,10]]','R111 non-thread: short+full once, then full only');
+ // R441: 보스 함수도 4칸으로 판정 끝 — 예전 [[2,14],[1,10],[1,10]](두 번 잡고 그 뒤 늘 전체) → 늘 4칸 한 번
+ ok(JSON.stringify([one(boss,X),one(boss,X),one(boss,X)])==='[[1,4],[1,4],[1,4]]','R111 non-thread: short stack only (R441)');
  ok(JSON.stringify([one(thr,Y),one(thr,Y)])==='[[1,4],[1,4]]','R111 threadSlash found in the short stack');
- ok(JSON.stringify([one(heroF,X),one(heroF,X)])==='[[1,10],[1,4]]','remembered palette from another file: full once, then short again');}
+ // R441: 보스 호출이 더는 '전체 스택' 기억을 남기지 않으므로 다른 파일의 같은 팔레트도 처음부터 4칸
+ ok(JSON.stringify([one(heroF,X),one(heroF,X)])==='[[1,4],[1,4]]','same palette from another file: short stack (R441)');}
 // ③ 끄기·영웅 없음: 스택 안 잡음
 {const E=engine(NEW);const go=E.run('skills-r209.js',"(function(){return F=>__STORYWORLD_FX_SPRITES_R106__.draw('glow',F,0,0);})()");
  E.g.player.hero='nobody';caps=0;Error.prepareStackTrace=COUNT;try{go(PALS[0]);}finally{Error.prepareStackTrace=undefined;}ok(caps===0,'no hero: no capture');
