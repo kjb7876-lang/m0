@@ -24593,6 +24593,51 @@
       "sha256": "8d8837750e4201c1da00690c749f90ce7b672b53401225dd87c6035114a1382a"
     },
     {
+      "path": "assets/r438/fx/enemy-cold-wave.webp",
+      "bytes": 313642,
+      "sha256": "65e635585bc81d6322daa118b8ab48e7736b7865d8f1d7eb30fec257db021280"
+    },
+    {
+      "path": "assets/r438/fx/enemy-curse-brand.webp",
+      "bytes": 324156,
+      "sha256": "9f719e0d33a26306c55712d54f87b8a722e824c415c9cafe88be74cdccd7845b"
+    },
+    {
+      "path": "assets/r438/fx/enemy-poison-mist.webp",
+      "bytes": 293824,
+      "sha256": "27a8ad40de01e78f00ed22ff2f0c5a60168de53735350bc66674243ba2d0ab8a"
+    },
+    {
+      "path": "assets/r438/fx/enemy-shockwave.webp",
+      "bytes": 241778,
+      "sha256": "db01829840be9f122af573e90a3672403cd61a30046433539ce2dd51cf66c37d"
+    },
+    {
+      "path": "assets/r438/fx/enemy-wraith-dash.webp",
+      "bytes": 243916,
+      "sha256": "5de9cb0b1a505157dba887f59b281a2d9183d3ed39f04a4941b1a0b8d71a36a1"
+    },
+    {
+      "path": "assets/r438/fx/hero-barrier.webp",
+      "bytes": 496050,
+      "sha256": "89acec1a2d82e84953af23a2317fa138a3a5033c2655333eac2288381a8ae93a"
+    },
+    {
+      "path": "assets/r438/fx/hero-cleanse.webp",
+      "bytes": 277454,
+      "sha256": "4dad6a70dd39cd22e6ce9dc9b2aa17743bf29734d877f63c415c9e76146a49a2"
+    },
+    {
+      "path": "assets/r438/fx/hero-healing.webp",
+      "bytes": 377064,
+      "sha256": "86bcb3e8edfb6fdf08e982e8fbb44820c0f3bbd10fb927bfb9691643660c1f9c"
+    },
+    {
+      "path": "assets/r438/fx/index.json",
+      "bytes": 5553,
+      "sha256": "c03b002a5349f3c214b3625c2182a2c58313beb8dec7d6e423457e7513c4d969"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -33388,6 +33433,11 @@
       "sha256": "4f2940c38775a060408c87b9debcf4fbf53e6d01a515be08c92e93f7e320d597"
     },
     {
+      "path": "fx-more-r438.js",
+      "bytes": 12444,
+      "sha256": "8f9760a67584b4ab476a5083c2ac41bd4e917d682a16134037d14f8834278f97"
+    },
+    {
       "path": "fx-sprites-r106.js",
       "bytes": 13960,
       "sha256": "52460ef81b2bab2a1fc73251f343100be44b3301e1f75134d618aa2b6bc8d5c4"
@@ -33564,8 +33614,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6571365,
-      "sha256": "0e49800cfa2ca7de5a59778e2d0d81a46a3d5fb38b8db132e0468396d3ebda5a"
+      "bytes": 6571406,
+      "sha256": "6b6867c27b402e949dfd2f10b94152e1791b4cf15de55df5b8d3aac974fe6311"
     },
     {
       "path": "intro-r140.js",
@@ -34378,9 +34428,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6875,
-  "totalBytes": 1087032354,
-  "webHTMLSha256": "0e49800cfa2ca7de5a59778e2d0d81a46a3d5fb38b8db132e0468396d3ebda5a",
+  "fileCount": 6885,
+  "totalBytes": 1089618276,
+  "webHTMLSha256": "6b6867c27b402e949dfd2f10b94152e1791b4cf15de55df5b8d3aac974fe6311",
   "largest": [
     {
       "path": "index.html",
