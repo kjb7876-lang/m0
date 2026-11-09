@@ -1,0 +1,162 @@
+{
+ "passed": true,
+ "checks": [
+  {
+   "name": "runtime copy matches client-source",
+   "pass": true
+  },
+  {
+   "name": "index.html loads intro-tree-r309 exactly once",
+   "pass": true
+  },
+  {
+   "name": "old R140 video intro stays unloaded",
+   "pass": true
+  },
+  {
+   "name": "public verify list includes intro-tree-r309",
+   "pass": true
+  },
+  {
+   "name": "runtime inputs list it",
+   "pass": true
+  },
+  {
+   "name": "video runtime copy matches client-source",
+   "pass": true
+  },
+  {
+   "name": "index.html loads tree (fallback) then video, once each",
+   "pass": true
+  },
+  {
+   "name": "public verify list includes video overlay and assets/r309",
+   "pass": true
+  },
+  {
+   "name": "runtime inputs list video, poster and index",
+   "pass": true
+  },
+  {
+   "name": "asset index hashes and sizes match files",
+   "pass": true
+  },
+  {
+   "name": "joined opening is 19.5–19.6 s (two 10 s clips, 0.5 s crossfade)",
+   "pass": true,
+   "detail": "19.554s"
+  },
+  {
+   "name": "video is small and streamable (faststart, < 6 MB)",
+   "pass": true,
+   "detail": "5325543 bytes"
+  },
+  {
+   "name": "original uploads and the deleted 7 s opening are not shipped",
+   "pass": true
+  },
+  {
+   "name": "video plays after newGame resolves, never on load/save",
+   "pass": true
+  },
+  {
+   "name": "tree animation no longer wraps newGame or settings (fallback only)",
+   "pass": true
+  },
+  {
+   "name": "R376: no title text over the opening (video overlay empty, fallback empty), game title constant kept, old title gone",
+   "pass": true
+  },
+  {
+   "name": "video stops at the cut even if the file runs long, title from 6.6 s (R372: book part only), 1 s still hold then close",
+   "pass": true
+  },
+  {
+   "name": "skippable: button, pointer, Esc/Enter/Space; game keys blocked",
+   "pass": true
+  },
+  {
+   "name": "automation gate with explicit override, setting toggle",
+   "pass": true
+  },
+  {
+   "name": "autoplay-blocked → muted retry; error → tree fallback; stall → close",
+   "pass": true
+  },
+  {
+   "name": "BGM ducked only in memory and restored",
+   "pass": true
+  },
+  {
+   "name": "fallback animation still skippable",
+   "pass": true
+  },
+  {
+   "name": "fallback automation gate",
+   "pass": true
+  },
+  {
+   "name": "ten seconds long",
+   "pass": true
+  },
+  {
+   "name": "mobile budget: pixel ratio 1, no AA, low-power",
+   "pass": true
+  },
+  {
+   "name": "disposes renderer and geometry",
+   "pass": true
+  },
+  {
+   "name": "fallback uses no media files; no drop-shadow/blur filters anywhere",
+   "pass": true
+  },
+  {
+   "name": "API exposed",
+   "pass": true
+  },
+  {
+   "name": "desktop scene budget",
+   "pass": true,
+   "detail": "{\"segments\":291,\"angels\":10,\"particles\":380,\"tips\":84}"
+  },
+  {
+   "name": "mobile scene smaller",
+   "pass": true,
+   "detail": "{\"segments\":144,\"angels\":8,\"particles\":160,\"tips\":42}"
+  },
+  {
+   "name": "tree hidden at start, partly grown mid-way, fully grown at end",
+   "pass": true,
+   "detail": "0/262/291"
+  },
+  {
+   "name": "angels pure at start (halo on, white wings)",
+   "pass": true
+  },
+  {
+   "name": "every angel fallen by 10s (halo off, black wings, red eyes, dark robe)",
+   "pass": true
+  },
+  {
+   "name": "fall is staggered between 2.6s and 6.4s (done before the title)",
+   "pass": true,
+   "detail": "2.65,2.77,3.21,3.42,3.65,3.78,4.17,4.41,4.60,4.83"
+  },
+  {
+   "name": "sky turns from gold to blood red",
+   "pass": true,
+   "detail": "d9c49a→2a0605"
+  },
+  {
+   "name": "final camera low and not inside an angel",
+   "pass": true,
+   "detail": "y=1.50 nearest=5.92"
+  },
+  {
+   "name": "camera never passes through an angel",
+   "pass": true,
+   "detail": "5.28"
+  }
+ ]
+}
