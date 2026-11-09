@@ -107,6 +107,8 @@ jobs:
         run: node r96/qa/r377/slayer-south-cpu-check.cjs
       - name: R389 slayer east (mirrored persona W) and toned south CPU check
         run: node r96/qa/r389/slayer-e-cpu-check.cjs
+      - name: R445 slayer north (rear) walk4 CPU check
+        run: node r96/qa/r445/slayer-walk-n-cpu-check.cjs
       - name: R356 Kairo homage (Seoha time-control passive, Kairo SFX) CPU check
         run: node r96/qa/r356/kairo-homage-cpu-check.cjs
       - name: R360 hospital ep1a08 unreachable-altar path miss memo CPU check
@@ -499,6 +501,10 @@ jobs:
         run: node r96/qa/r436/hwando-walk-s-cpu-check.cjs
       - name: R439 Hwando attack blade-tip speck cleanup CPU check
         run: node r96/qa/r439/hwando-tip-cpu-check.cjs
+      - name: R440 heroes play their attack motion while casting skills CPU check
+        run: node r96/qa/r440/skill-attack-cpu-check.cjs
+      - name: R441/R442 Hwando diagonal walk uses side motion + enemy theme skills play attack pose CPU check
+        run: node r96/qa/r442/enemy-skill-diag-cpu-check.cjs
       - name: R440 Hwando hit pose (no old art) and hero rim blade cleanup CPU check
         run: node r96/qa/r440/r440-cpu-check.cjs
       - name: R446 seven pillars moved to their own map as stationary attacking towers CPU check
