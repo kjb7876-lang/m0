@@ -1,0 +1,119 @@
+{
+  "method": "CPU isolated shipped R73 slot transactions, controlled asynchronous restore backend and simulation/render spies. Synthetic saves/DOM only; no browser/natural-play claim.",
+  "checks": [
+    {
+      "name": "success: real native transaction remains pending after base opens gameplay",
+      "passed": true,
+      "detail": {
+        "active": 1,
+        "pending": 1,
+        "busy": true,
+        "operation": "load",
+        "transitionDepth": 1,
+        "message": "",
+        "legacyPreserved": true,
+        "audit": []
+      }
+    },
+    {
+      "name": "success: pending restore preserves simulation clock",
+      "passed": true,
+      "detail": {
+        "before": 40,
+        "after": 40
+      }
+    },
+    {
+      "name": "success: pending restore prevents player damage",
+      "passed": true
+    },
+    {
+      "name": "success: pending restore prevents enemy damage",
+      "passed": true
+    },
+    {
+      "name": "success: rendering remains available",
+      "passed": true
+    },
+    {
+      "name": "success: native transaction always releases",
+      "passed": true
+    },
+    {
+      "name": "success: success restores saved position or rejection restores prior position",
+      "passed": true,
+      "detail": {
+        "x": 30.25,
+        "y": 20,
+        "hp": 776,
+        "level": 1
+      }
+    },
+    {
+      "name": "success: normal simulation resumes with original delta",
+      "passed": true
+    },
+    {
+      "name": "success: save schema is unchanged",
+      "passed": true
+    },
+    {
+      "name": "reject: real native transaction remains pending after base opens gameplay",
+      "passed": true,
+      "detail": {
+        "active": 1,
+        "pending": 1,
+        "busy": true,
+        "operation": "load",
+        "transitionDepth": 1,
+        "message": "",
+        "legacyPreserved": true,
+        "audit": []
+      }
+    },
+    {
+      "name": "reject: pending restore preserves simulation clock",
+      "passed": true,
+      "detail": {
+        "before": 40,
+        "after": 40
+      }
+    },
+    {
+      "name": "reject: pending restore prevents player damage",
+      "passed": true
+    },
+    {
+      "name": "reject: pending restore prevents enemy damage",
+      "passed": true
+    },
+    {
+      "name": "reject: rendering remains available",
+      "passed": true
+    },
+    {
+      "name": "reject: native transaction always releases",
+      "passed": true
+    },
+    {
+      "name": "reject: success restores saved position or rejection restores prior position",
+      "passed": true,
+      "detail": {
+        "x": 15.25,
+        "y": 19,
+        "hp": 776,
+        "level": 1
+      }
+    },
+    {
+      "name": "reject: normal simulation resumes with original delta",
+      "passed": true
+    },
+    {
+      "name": "reject: save schema is unchanged",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "total": 18
+}
