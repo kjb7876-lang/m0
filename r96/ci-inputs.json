@@ -93,15 +93,15 @@
     {
       "path": "r96/ci-packs/inputs-018.bin",
       "bytes": 4194304,
-      "sha256": "8fedba1165dcc3c3100b31bd38dae66038a1bfa393388e8f9f6fc98c71c590c2"
+      "sha256": "998a5ba9d947523f76557ce4c4dcb5c76623928c17200d3d892d6a1f2c788507"
     },
     {
       "path": "r96/ci-packs/inputs-019.bin",
-      "bytes": 794764,
-      "sha256": "5f572338b21cb28c15985ac48dc3d5bff96c3bba811960c2b356fb568a521f7d"
+      "bytes": 763956,
+      "sha256": "e5ebfc78b3c9bbceacbdaa36debfd815220402c58fbc47825226bce3731bc027"
     }
   ],
-  "archiveSHA256": "8c9a90b877b1c68210c91e9c12a503763a8803940984833cdea1709126418923",
+  "archiveSHA256": "7d22360765cd4366681037c7f9a9bf6dc62836549266cdf130e84c7ee8f0afb7",
   "files": [
     {
       "path": "handoff/baseline-inputs/hospital-refinement-v4/harness.cjs",
@@ -5682,8 +5682,8 @@
     },
     {
       "path": "qa/r83/door-check.cjs",
-      "bytes": 13610,
-      "sha256": "e27d0fafaf906d190b0f48e9fd5b55a939ab1e69b26e57821b03f0dac438ac09"
+      "bytes": 14147,
+      "sha256": "7f658209b60328b2cb8d06b05dbb5a40e7283ded9def31ad813fbf35bbe1400c"
     },
     {
       "path": "qa/r83/door-geometry-evidence.json",
