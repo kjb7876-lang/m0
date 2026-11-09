@@ -102,7 +102,7 @@
   if(want!==st.side){if(st.pend!==want){st.pend=want;st.since=time;}if(time-st.since>=HOLD){st.side=want;st.pend=0;}}else st.pend=0;return st.side<0;}
  const motion=window.__STORYWORLD_ENEMY_MOTION_R51__;
  if(motion&&typeof motion.flip==='function')window.__STORYWORLD_ENEMY_MOTION_R51__=Object.freeze({...motion,flip(e,frame,fallback){const native=motion.flip(e,frame,fallback);
-  try{if(!e||e.hp<=0||zone==='ep1a08'||(typeof layer!=='undefined'&&layer!=='STORY'))return native;stats.facing=(stats.facing||0)+1;
+  try{if(!e||e.hp<=0||zone==='ep1a08'||(typeof layer!=='undefined'&&layer!=='STORY'))return native;/* R444: 자세 프레임(R54 이야기 전투·R53 병원·R52 원거리·R51 오더리)은 그 프레임의 그림 방향으로 R444 좌우가 이미 들어 있다 — 몹 기본 그림 표로 다시 뒤집지 않는다 */if((frame?.r54StoryPose||frame?.r53HospitalPose||frame?.r52RangedPose||frame?.r51OrderlyPose)&&window.__STORYWORLD_ENEMY_FACE_R444__?.owns?.(e))return native;stats.facing=(stats.facing||0)+1;
    if(e.boss||e.midboss||e.persona)return bossHold(e,native);
    const art=artOf(e),s=side(e,art);if(!s)return native;
    // Mirroring turns the art to the other side: right-facing and front art face

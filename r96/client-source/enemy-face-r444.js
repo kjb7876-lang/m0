@@ -19,7 +19,7 @@
 //  끄기: localStorage storyworld.r444.face {"on":false}.
 (()=>{'use strict';
 if(window.__STORYWORLD_ENEMY_FACE_R444__)return;
-const REV='R444-face-5',KEY='storyworld.r444.face';
+const REV='R444-face-6',KEY='storyworld.r444.face';
 let prefs={on:true,debug:false,shadows:false};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={updates:0,spawns:0,jumps:0,turns:0,attackLocks:0,draws:0,owner:{},errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0;
@@ -41,17 +41,22 @@ function mammon(e){try{const id=String(typeof room==='object'&&room?room.id||'':
 function managed(e){return !!(prefs.on&&e&&!e.persona&&!structure(e)&&!mammon(e));}
 function fresh(e,s){return !s||(s.hp<=0&&e.hp>0)||(s.ss!=='active'&&e.spawnState==='active'&&s.ss!==undefined);}
 function init(e){const p=P(),d=e.direction;const side=d==='left'||d==='right'?d:p?heroSide(e,p):'right';return{x:e.x,y:e.y,t:T(),vx:0,vy:0,side,d4:side==='left'?'west':'east',owner:'spawn',pend:null,since:T(),hp:e.hp,ss:e.spawnState,aim:null,mvx:0,mvy:0};}
+// 공격 판정 각도로 좌우를 묶는다(준비~후딜). 화면 세로에 가까운 각(|가로| ≤ .12)은 마지막 좌우를 둔다.
+function lockAttack(s,A){const X=sideX(Math.cos(A.g),Math.sin(A.g));if(s.aim===null)stats.attackLocks++;s.aim=A.g;s.owner='attack:'+A.k;s.pend=null;if(Math.abs(X)>.12)s.side=X>0?'right':'left';dir4(s,Math.cos(A.g),Math.sin(A.g),true);return s;}
+const live=e=>e.hp>0&&e.spawnState!=='dead';
 function update(e){let s=S.get(e);const t=T();
- if(fresh(e,s)){s=init(e);S.set(e,s);stats.spawns++;return s;}
- if(s.t===t)return s;stats.updates++;
+ if(fresh(e,s)){s=init(e);S.set(e,s);stats.spawns++;const A=live(e)?atkAngle(e):null;return A?lockAttack(s,A):s;}// 공격 중에 처음 보이면 바로 판정 쪽
+ // 같은 순간(게임 시간 그대로)에 공격 각이 새로 정해지거나 바뀌면 바로 따른다 — 그림과 판정이 한 프레임도 갈리지 않게(엔진 enemy-facing 검사는 한 순간에 8방향을 찔러 본다)
+ if(s.t===t){const A=live(e)?atkAngle(e):null;if(A&&A.g!==s.aim)lockAttack(s,A);return s;}
+ stats.updates++;
  const dt=Math.max(1e-3,t-s.t),dx=e.x-s.x,dy=e.y-s.y,dist=Math.hypot(dx,dy);s.x=e.x;s.y=e.y;s.t=t;s.hp=e.hp;s.ss=e.spawnState;
  if(!(e.hp>0)||e.spawnState==='dead'){s.owner='dead';s.pend=null;return s;}
  const sp=Math.max(.8,num(e.speed,2));
  if(dist>Math.max(.6,sp*dt*3+.15)){// 순간이동·넉백·스폰 자리 잡기: 걸음으로 보지 않는다. 블링크한 쪽(R230·R268·R286)이 정한 좌우는 받아들인다.
-  s.vx=s.vy=0;s.tele=t;s.pend=null;s.owner='warp';stats.jumps++;const d=e.direction;if(d==='left'||d==='right')s.side=d;return s;}
+  s.vx=s.vy=0;s.tele=t;s.pend=null;s.owner='warp';stats.jumps++;const A0=atkAngle(e);if(A0)return lockAttack(s,A0);const d=e.direction;if(d==='left'||d==='right')s.side=d;return s;}
  const k=1-Math.exp(-dt/.07);s.vx+=(dx/dt-s.vx)*k;s.vy+=(dy/dt-s.vy)*k;s.mvx=dx/dt;s.mvy=dy/dt;
  const A=atkAngle(e);
- if(A){const X=sideX(Math.cos(A.g),Math.sin(A.g));if(s.aim===null)stats.attackLocks++;s.aim=A.g;s.owner='attack:'+A.k;s.pend=null;if(Math.abs(X)>.12)s.side=X>0?'right':'left';dir4(s,Math.cos(A.g),Math.sin(A.g),true);return s;}
+ if(A)return lockAttack(s,A);
  s.aim=null;
  if(e.hitTimer>0||t-num(s.tele,-9)<.15){s.owner='hold';s.pend=null;return s;}
  const p=P(),tx=p?p.x-e.x:0,ty=p?p.y-.15-e.y:0,td=Math.hypot(tx,ty);

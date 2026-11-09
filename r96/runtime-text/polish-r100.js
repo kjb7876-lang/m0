@@ -75,7 +75,7 @@
   s.u=u;return s.left;}
  const motion=window.__STORYWORLD_ENEMY_MOTION_R51__;
  if(motion?.flip){const base=motion.flip;window.__STORYWORLD_ENEMY_MOTION_R51__=Object.freeze({...motion,flip(e,f,fallback){const out=base(e,f,fallback);
-  try{if(!prefs.facing||!e||!player||f?.r74Monster||f?.r51OrderlyPose||e.boss||e.midboss||e.persona||!(e.hp>0))return out;const row=artOf(e);if(row?.f!=='L'&&row?.f!=='R')return out;
+  try{if(!prefs.facing||!e||!player||f?.r74Monster||f?.r51OrderlyPose||e.boss||e.midboss||e.persona||!(e.hp>0))return out;/* R444: 자세 프레임은 R444 좌우가 그 프레임 그림 방향으로 이미 들어 있다(몹 기본 그림 행으로 다시 뒤집으면 반대가 됨) */if((f?.r54StoryPose||f?.r53HospitalPose||f?.r52RangedPose)&&window.__STORYWORLD_ENEMY_FACE_R444__?.owns?.(e))return out;const row=artOf(e);if(row?.f!=='L'&&row?.f!=='R')return out;
    const left=wantLeft(e);stats.flips++;return row.f==='R'?left:!left;}catch(err){fail(err);}return out;}});}
 
  // ---- flyers ----------------------------------------------------------------------

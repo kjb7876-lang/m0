@@ -13,6 +13,8 @@ ok('R374 Dots sheets: faceLeft asks R444 first',/function faceLeft\(e\)\{const r
 ok('R93 flip chain: side() uses R444 (art table keeps only the L/R/F polarity), bosses pass R444 through',/function side\(e,art\)\{const r444=window\.__STORYWORLD_ENEMY_FACE_R444__\?\.left\?\.\(e\);if\(typeof r444==='boolean'\)return r444\?-1:1;/.test(C('visual-r93.js'))&&/function bossHold\(e,native\)\{if\(window\.__STORYWORLD_ENEMY_FACE_R444__\?\.owns\?\.\(e\)\)return native;/.test(C('visual-r93.js')));
 ok('R248 self-drawn sheets (R290/R410 replacements): m.face follows R444 after its own rules',/\{const r444=window\.__STORYWORLD_ENEMY_FACE_R444__\?\.left\?\.\(e\);if\(typeof r444==='boolean'\)m\.face=r444\?-1:1;\}/.test(C('mob-unique-r248.js'))&&C('mob-unique-r248.js').indexOf('m.face=r444')>C('mob-unique-r248.js').indexOf('let fr=attackFrame(e)'));
 ok('R100 flip chain: wantLeft() uses R444',/function wantLeft\(e\)\{const r444=window\.__STORYWORLD_ENEMY_FACE_R444__\?\.left\?\.\(e\);if\(typeof r444==='boolean'\)return r444;/.test(C('polish-r100.js')));
+ok('R93 flip chain leaves pose frames (R54/R53/R52/R51) to R444 when R444 owns the mob (no re-flip by the base-art table)',/if\(\(frame\?\.r54StoryPose\|\|frame\?\.r53HospitalPose\|\|frame\?\.r52RangedPose\|\|frame\?\.r51OrderlyPose\)&&window\.__STORYWORLD_ENEMY_FACE_R444__\?\.owns\?\.\(e\)\)return native;/.test(C('visual-r93.js')));
+ok('R100 flip chain leaves pose frames (R54/R53/R52) to R444 when R444 owns the mob',/if\(\(f\?\.r54StoryPose\|\|f\?\.r53HospitalPose\|\|f\?\.r52RangedPose\)&&window\.__STORYWORLD_ENEMY_FACE_R444__\?\.owns\?\.\(e\)\)return out;/.test(C('polish-r100.js')));
 ok('R442 exposes the skill angle (read-only) and its runtime copy matches',/angle:e=>\{const m=marks\.get\(e\);if\(!m\)return null;const el=T\(\)-m\.t0;return el>=0&&el<m\.dur\?m\.angle:null;\}/.test(C('enemy-skill-pose-r442.js'))&&RT('enemy-skill-pose-r442.js')===C('enemy-skill-pose-r442.js'));
 const html=RT('index.html');
 ok('script tag once, right after bossroom-tidy-r438 and before combat-read-r409',html.split('"./'+F+'"').length===2&&/<script src="\.\/bossroom-tidy-r438\.js"><\/script><script src="\.\/enemy-face-r444\.js"><\/script><script src="\.\/combat-read-r409\.js"><\/script>/.test(html));
@@ -84,5 +86,14 @@ function frames(E,e,n,step,dt=1/60){for(let i=0;i<n;i++){E.time+=dt;if(step)step
  const M=E.__STORYWORLD_ENEMY_MOTION_R51__;ok('R74 atlas flip rule installed outermost on the R51 chain (other markers kept)',M.__r444===true&&M.__r208===true);
  ok('R74 monster atlas walking left: flipped by R444 side (the frame itself always faced the hero)',M.flip(e,{r74Monster:'m',flip:false},false)===true&&M.flip(e,{r208Mob:'x',flip:false},'FB')==='FB');
  const pf={flip:true,r54StoryPose:true,assetFrame:{}};ok('persona / other frames untouched',S.frameFor(mob({persona:true}),pf)===pf&&S.frameFor(e,{flip:true,r208Mob:'x'}).flip===true);}
+// 같은 순간(게임 시간 그대로)에 공격 각을 바꿔 그려도 바로 판정 쪽 — CI enemy-facing(R86 전수 검사)은 한 순간에 몹마다 8방향 공격을 찔러 본다(첫 CI 3/4 실패 원인)
+{const E=env(),api=E.__STORYWORLD_ENEMY_FACE_R444__;const e=mob({x:20,y:12,direction:'front'});E.time=3;let bad8=0;
+ for(let i=0;i<8;i++){const a=(i+.17)*Math.PI/4;E.player.x=e.x+Math.cos(a)*1.5;E.player.y=e.y+.15+Math.sin(a)*1.5;e.attack={angle:a,elapsed:.3,footprint154:{shape:'arc',angle:a,radius:1.2,width:.9}};e.direction='front';E.drawEnemy(e);
+  if(E.read[E.read.length-1]!==((Math.cos(a)-Math.sin(a))>0?'right':'left'))bad8++;}
+ ok('same moment: every new attack angle turns the body at once (8 probes at one game time)',bad8===0);
+ const f=mob({x:3,y:3,direction:'front',attack:{angle:Math.PI,elapsed:.1}});E.player.x=9;E.player.y=3;E.time+=1/60;E.drawEnemy(f);
+ ok('first sight mid-attack faces the hitbox, not the hero',E.read[E.read.length-1]==='left'&&api.state(f).owner==='attack:melee');
+ const g=mob({x:5,y:5});E.time+=1/60;E.drawEnemy(g);g.attack={angle:0,elapsed:.1};E.time+=1/60;E.drawEnemy(g);g.x-=4;g.direction='left';E.time+=1/60;E.drawEnemy(g);
+ ok('a jump during an attack keeps the hitbox side (blink then strike)',E.read[E.read.length-1]==='right'&&api.state(g).owner==='attack:melee');}
 {const E=env();E.__STORYWORLD_ENEMY_FACE_R444__.set({on:false});const e=mob({direction:'front'});frames(E,e,3);ok('{"on":false} leaves everything to the old rules',E.read[E.read.length-1]==='front'&&E.__STORYWORLD_ENEMY_FACE_R444__.left(e)===null);}
 console.log(`\nR444 enemy-face: ${n-bad}/${n} passed`);if(bad)process.exit(1);
