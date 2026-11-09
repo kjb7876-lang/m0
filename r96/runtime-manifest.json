@@ -33164,8 +33164,8 @@
     },
     {
       "path": "combat-read-r409.js",
-      "bytes": 12738,
-      "sha256": "c516f74ff56beeee9aa8f58499a926808e428fd93be3fd61454a2634eccbf501"
+      "bytes": 13966,
+      "sha256": "6e1d7486b35de117ba91e0b244f0d968ddb593d9cc96468c1605cb595271d354"
     },
     {
       "path": "crates-r108.js",
@@ -33554,8 +33554,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6571279,
-      "sha256": "e5e218ca2289bb07af31478713225d3e8c1876d79860549acf32ce4b63765db2"
+      "bytes": 6571324,
+      "sha256": "e52b5a8ff46f0c1b7a57d44595636ec87aa2bb3491f2c0a7a47d5b53bcbbf1e5"
     },
     {
       "path": "intro-r140.js",
@@ -33936,6 +33936,11 @@
       "path": "reach-r225.js",
       "bytes": 7865,
       "sha256": "dbaa9a987f2cb916e0310aedc3770f2030ed9f3d58d6397ca999e012dae98e9b"
+    },
+    {
+      "path": "readability-r433.js",
+      "bytes": 8426,
+      "sha256": "9a863315b2b51060a2b21916f8fe6cbad67beb32d7a5c3b64e25fbdb887a1583"
     },
     {
       "path": "real-mode-r376.js",
@@ -34358,9 +34363,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6871,
-  "totalBytes": 1086865770,
-  "webHTMLSha256": "e5e218ca2289bb07af31478713225d3e8c1876d79860549acf32ce4b63765db2",
+  "fileCount": 6872,
+  "totalBytes": 1086875469,
+  "webHTMLSha256": "e52b5a8ff46f0c1b7a57d44595636ec87aa2bb3491f2c0a7a47d5b53bcbbf1e5",
   "largest": [
     {
       "path": "index.html",

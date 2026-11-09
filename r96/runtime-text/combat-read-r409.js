@@ -16,7 +16,7 @@
 //  판정·피해·AI·저장·자산 원본은 바꾸지 않는다(그림만). 끄기: localStorage['storyworld.r409.combatRead']='{"outline":false,"enemyVeil":false,"castBehind":false}'.
 (()=>{'use strict';
 if(window.__STORYWORLD_COMBAT_READ_R409__)return;
-const REV='R409-combat-read-1',KEY='storyworld.r409.combatRead';
+const REV='R409-combat-read-2',KEY='storyworld.r409.combatRead';
 let prefs={outline:true,enemyVeil:true,castBehind:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={frames:0,enemyBodies:0,heroBodies:0,outlined:0,baked:0,bakeSkipped:0,cacheEvicted:0,veiled:0,castBehind:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
@@ -36,6 +36,13 @@ const overlap=(a,b)=>Math.max(0,Math.min(a.x1,b.x1)-Math.max(a.x0,b.x0))*Math.ma
 const LOOK={
  enemy:{outer:'rgba(170,22,26,0.62)',inner:'rgba(14,4,6,0.92)',k:1},
  hero:{outer:'rgba(255,232,170,0.55)',inner:'rgba(40,24,8,0.70)',k:.8}};
+// R433(사용자 2026-11-08 "보고한 바탕으로 개선" — 디아블로·이터널 리턴식 실루엣): 상아색 테는 옅은 영웅 그림과 갈색 바닥 위에서 거의 안 보였다.
+//  → 영웅 테를 그 영웅 고유색(R302)의 차가운 빛으로(따뜻한 바닥과 보색 대비), 안쪽 선은 더 진하게·조금 두껍게.
+//  붉은 계열 고유색(미카엘라·슬레이어·헌터)은 적 테(핏빛)와 섞이지 않게 은색(보조색). 끄기: localStorage storyworld.r433.readability {"heroRim":false}.
+const RED_HERO=new Set(['michaela','slayer','hunter']);
+function heroRimOn(){try{return JSON.parse(localStorage.getItem('storyworld.r433.readability')||'{}').heroRim!==false;}catch(_){return true;}}
+function heroLook(){try{if(!heroRimOn())return null;const id=typeof player!=='undefined'&&player?String(player.hero||''):'';const P=window.__STORYWORLD_HERO_PALETTE_R302__?.palette?.[id];if(!P)return null;
+ const c=RED_HERO.has(id)?(P.sub||[226,232,242]):P.main;return{key:'hero:'+id,outer:'rgba('+c.join(',')+',0.72)',inner:'rgba(6,8,12,0.88)',k:1.05};}catch(_){return null;}}
 const BUCKETS=[1,2,3,4,6,8,11,15,20];
 const bucket=v=>{for(const b of BUCKETS)if(v<=b)return b;return BUCKETS[BUCKETS.length-1];};
 const SCREEN_R=2.4;/* 화면에서 바깥 테 두께(px) — 1280×720 기준. 안쪽 선은 그 절반쯤 */
@@ -52,11 +59,11 @@ function dilate(m,r,color,W,H,pad){const c=makeCanvas(W,H),g=c.getContext('2d');
  g.drawImage(m,pad,pad);g.globalCompositeOperation='source-in';g.fillStyle=color;g.fillRect(0,0,W,H);return c;}
 function bake(src,sx,sy,sw,sh,r,side){
  sx=Math.round(sx);sy=Math.round(sy);sw=Math.round(sw);sh=Math.round(sh);if(sw<4||sh<4)return null;
- const key=imgId(src)+':'+sx+','+sy+','+sw+','+sh+':'+r+':'+side;let hit=cache.get(key);
+ const key=imgId(src)+':'+sx+','+sy+','+sw+','+sh+':'+r+':'+(side==='hero'?(heroLook()?.key||side):side);let hit=cache.get(key);
  if(hit){cache.delete(key);cache.set(key,hit);return hit;}
  const pad=r+1,W=sw+pad*2,H=sh+pad*2;if(W*H>MAX_PX){stats.bakeSkipped++;return null;}
  const m=mask(src,sx,sy,sw,sh);if(!m){stats.bakeSkipped++;return null;}
- const L=LOOK[side],out=makeCanvas(W,H),g=out.getContext('2d');
+ const L=(side==='hero'?heroLook():null)||LOOK[side],out=makeCanvas(W,H),g=out.getContext('2d');
  g.drawImage(dilate(m,r,L.outer,W,H,pad),0,0);g.drawImage(dilate(m,Math.max(1,Math.round(r*.45)),L.inner,W,H,pad),0,0);
  g.drawImage(src,sx,sy,sw,sh,pad,pad,sw,sh);m.width=m.height=0;
  const row={canvas:out,pad,sw,sh};out.__storyworldStaticSource={path:'r409:outline:'+side+':'+key};
@@ -73,7 +80,7 @@ function bodyOf(c,side){if(!c||c.kind!=='image'||c.mutable||c.owner?.r350||c.own
  const q=bbox(c);if(!q)return false;const w=q.x1-q.x0,h=q.y1-q.y0;if(w<14||h<18)return false;/* 아주 작은 표지·아이콘은 몸이 아니다 */
  return side==='hero'?c.owner?.kind==='hero':c.owner?.kind==='enemy';}
 function outline(c,side){const [sx,sy,sw,sh]=c.sourceRect,[a,b]=c.points,screenW=Math.hypot(b[0]-a[0],b[1]-a[1]);if(!(screenW>0))return false;
- const r=bucket(Math.max(1,SCREEN_R*LOOK[side].k*sw/screenW));const row=bake(c.image,sx,sy,sw,sh,r,side);if(!row)return false;
+ const r=bucket(Math.max(1,SCREEN_R*((side==='hero'?heroLook():null)||LOOK[side]).k*sw/screenW));const row=bake(c.image,sx,sy,sw,sh,r,side);if(!row)return false;
  c.image=row.canvas;c.mutable=false;c.sourcePath=row.canvas.__storyworldStaticSource.path;c.immutableTint=row.canvas.__storyworldStaticSource;
  c.sourceRect=[0,0,row.canvas.width,row.canvas.height];c.imageSize=[row.canvas.width,row.canvas.height];c.points=grow(c.points,sw,sh,row.pad);c.r409Outlined=side;stats.outlined++;return true;}
 const lastVeiled=[];
