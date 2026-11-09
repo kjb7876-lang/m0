@@ -6133,7 +6133,8 @@
     "assets/r415/props/swamp-bed.webp",
     "assets/r415/props/two-chair.webp",
     "assets/r415/props/waiting-bench.webp",
-    "enemy-face-r444.js"
+    "enemy-face-r444.js",
+    "perf-r441.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -7208,5 +7209,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "813d45178aa655e0c551ed4a782d0aded65fe945528056b4de15959eda672d13"
+  "runtimeManifestSHA256": "5646d6560279965e0b81d151aea60e55b386d7de30f62f0fd912628d40ee1f7f"
 }
