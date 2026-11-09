@@ -16,10 +16,10 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_LOCAL_LIGHT_R451__)return;
 const A=window.StoryPhase1,C=A?.ThreeRenderer?.prototype;if(!A||!C)return;
-const REV='R451-local-light-2',KEY='storyworld.r451.localLight';
+const REV='R451-local-light-3',KEY='storyworld.r451.localLight';
 const DEFAULTS=Object.freeze({on:true,flicker:true});
 let prefs={...DEFAULTS};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');for(const k in DEFAULTS)if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
-const stats={frames:0,owned:0,bakes:0,bakeMs:0,lights:0,lightsUsed:0,blockers:0,texels:0,patched:0,rowsLit:0,holes:0,stutters:0,errors:0};let lastError=null,disposed=false;
+const stats={frames:0,owned:0,bakes:0,bakeMs:0,lights:0,lightsUsed:0,blockers:0,texels:0,patched:0,rowsLit:0,coversLit:0,holes:0,stutters:0,errors:0};let lastError=null,disposed=false;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),smooth=(a,b,x)=>{const t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t);},finite=v=>Number.isFinite(v);
 
@@ -232,13 +232,18 @@ function update(r,frame){const want=wantFor(frame);const u=uniforms(r.T);
  u.r451On.value=1;o451.owned=true;stats.owned++;}
 
 // 바닥 소품(그림 명령 줄): 발밑 빛으로 색을 곱하고 그리기 뒤 되돌린다(R89 소품 어둡게와 같은 자리·방식).
+// R448 덮개(영웅 앞을 가리는 조형물 몸을 덧그림 층에 한 번 더 그린 것)도 같은 빛을 받아야 영웅 상자 안만 밝기가 튀지 않는다.
+//  기록기가 덮개의 주인을 effect 로 바꾸고 id·r448 표시는 버리므로(실측: owner={kind,groundAligned,x,y,…}) 줄 열쇠(명령 key 'r448:over:…')로 알아본다.
+//  덮개의 주인 x·y 는 원래 조형물 것 그대로라 lightAt 값이 원본과 같다.
+const R448_COVER='r448:over:';
+function litRow(key,ow){if(!ow)return false;if(ow.kind==='prop')return true;return ow.kind==='effect'&&typeof key==='string'&&key.startsWith(R448_COVER);}
 const GL_TOKEN={};
 function wrapGL(r){const gl=r.renderer;if(!gl||gl.r451Wrapped===GL_TOKEN)return;const base=gl.render;
  gl.render=function(scene,camera){const restore=[];
   try{const pass=camera?.layers?.mask;if(o451.owned&&scene===r.scene&&camera===r.camera&&(pass===4||pass===8)){// 세계 층(2)·덧그림 층(3) 모두 — 그 층에 있는 소품 줄만
-    for(const row of r.commands?.rows?.values?.()||[]){const ow=row.geometryState?.owner,m=row.mesh?.material;if(!ow||ow.kind!=='prop'||!m?.color||!row.mesh.visible||!(row.mesh.layers.mask&pass)||!finite(ow.x+ow.y))continue;
+    for(const [key,row] of r.commands?.rows?.entries?.()||[]){const ow=row?.geometryState?.owner,m=row?.mesh?.material;if(!litRow(key,ow)||!m?.color||!row.mesh.visible||!(row.mesh.layers.mask&pass)||!finite(ow.x+ow.y))continue;
      const L=lightAt(ow.x,ow.y);if(!L)continue;const k=[clamp(L[0],.3,1.5),clamp(L[1],.3,1.5),clamp(L[2],.3,1.5)];const rr=m.color.r,gg=m.color.g,bb=m.color.b;restore.push(()=>m.color.setRGB(rr,gg,bb));
-     m.color.setRGB(rr*k[0],gg*k[1],bb*k[2]);stats.rowsLit++;}}}catch(e){fail(e);}
+     m.color.setRGB(rr*k[0],gg*k[1],bb*k[2]);stats.rowsLit++;if(ow.kind!=='prop')stats.coversLit++;}}}catch(e){fail(e);}
   try{return base.call(this,scene,camera);}finally{for(let i=restore.length-1;i>=0;i--)restore[i]();}};
  gl.r451Wrapped=GL_TOKEN;}
 
@@ -280,7 +285,7 @@ if(typeof showSettings==='function'){const base=showSettings;showSettings=functi
 
 function dispose(){disposed=true;if(timer)clearInterval(timer);o451.owned=false;if(U)U.r451On.value=0;try{o451.tex?.dispose?.();}catch(_){}o451.tex=null;o451.grid=null;}
 window.__STORYWORLD_LOCAL_LIGHT_R451__=Object.freeze({revision:REV,storageKey:KEY,types:TYPE,ambient:AMB,ambientIn:AMB_IN,ambientCave:AMB_CAVE,prefs:()=>({...prefs}),set,owns,lightAt,lights,glowHoles,glowEdge,classify,ambientFor,dispose,
- pure:Object.freeze({wallBox,grid,seen,bell,shoulder,bakeAcc,LMAX,KNEE,SHOULDER,FIRE_OK:[...FIRE_OK],REACH,GLOW_SCALE,GLOW_FAM}),
+ pure:Object.freeze({wallBox,grid,seen,bell,shoulder,bakeAcc,litRow,LMAX,KNEE,SHOULDER,FIRE_OK:[...FIRE_OK],REACH,GLOW_SCALE,GLOW_FAM}),
  inspect:()=>({revision:REV,prefs:{...prefs},owned:o451.owned,stats:{...stats},lastError,family:lightCache?.fam||null,indoor:lightCache?.indoor??null,place:lightCache?.place||null,ambient:o451.amb,
   lights:o451.lights.map(l=>({x:+l.x.toFixed(2),y:+l.y.toFixed(2),type:l.type,src:l.src,id:l.id})),grid:o451.grid?{W:o451.grid.W,H:o451.grid.H,S:o451.grid.S}:null,
   collisionChanged:false,gameplayChanged:false,GPUVerified:false})});

@@ -54,5 +54,11 @@ ok('R335 glow keeps its shape; edge lighter + holes only when R451 owns',src('li
  ok('re-bakes only when the light list itself changes (R412 moving unrelated props 10~13s after entry → no bake)',/const lsig=list\.map\([^;]*l\.color\.map/.test(s)&&/else o451\.lights=lights;/.test(s)&&/key=\[room\.exploration\?\.floorCells\?\.length,lightCache\?\.lsig\]/.test(s));
  ok('hidden props (r303Hide, e.g. R449 resting R224 braziers) give no light; hidden count re-collects lights',/const isLightProp=p=>\{if\(!p\|\|p\.r303Hide\)return false;/.test(s)&&/sig=\[[^\]]*r\.props\?\.length\|\|0,hid,/.test(s));
  ok('presentation only (no collision / gameplay writes)',!/floorCells\s*=|\.walls\s*=|\.push\(\s*\{[^}]*solid/.test(s)&&api.inspect().collisionChanged===false&&api.inspect().gameplayChanged===false);}
+// ⑧ R448 덮개(영웅 앞을 가리는 조형물 몸을 덧그림 층에 한 번 더 그린 줄)도 원본과 같은 빛 — 아니면 영웅 상자 안만 밝기가 튄다(헤드리스 실측 1.00 대 1.07~1.12).
+//  기록기가 덮개 주인을 effect 로 바꾸고 id 를 버리므로 줄 열쇠로 알아본다. 영웅 실루엣·오라는 소품 빛을 받지 않는다(실루엣은 R453 몫).
+ok('R448 cover rows (key r448:over:…, owner effect) take the prop light; ghost, aura, hero rows do not',P.litRow('prop:r138:dist00:root:0:3',{kind:'prop'})===true&&P.litRow('r448:over:prop:r138:dist00:root:0:3',{kind:'effect'})===true&&
+ P.litRow('r448:ghost:hero:2:5',{kind:'effect'})===false&&P.litRow('r101:aura-back:hero:0',{kind:'effect'})===false&&P.litRow('hero:2:5',{kind:'hero'})===false&&P.litRow('r448:over:x',null)===false);
+ok('prop-row lighting walks rows with their keys (entries) through litRow',/for\(const \[key,row\] of r\.commands\?\.rows\?\.entries\?\.\(\)\|\|\[\]\)\{[^}]*if\(!litRow\(key,ow\)/.test(src('local-light-r451.js')));
+ok('R448 contract: covers/ghosts still keyed r448:over: / r448:ghost: with the original owner x·y',(()=>{const d=src('depth-overlap-r448.js');return d.includes("key:'r448:over:'+c.key,owner:{...c.owner,")&&d.includes("key:'r448:ghost:'+c.key,owner:{...c.owner,");})());
 ok('pages.yml runs this check',fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('node r96/qa/r451/r451-cpu-check.cjs'));
 done();

@@ -11,10 +11,10 @@
 //  끄기: 설정 '영웅·몹 빛 맞춤 (R453)' 또는 localStorage['storyworld.r453.actorTone']='{"on":false}'.
 (()=>{'use strict';
 if(window.__STORYWORLD_ACTOR_TONE_R453__)return;
-const REV='R453-actor-tone-1',KEY='storyworld.r453.actorTone';
+const REV='R453-actor-tone-2',KEY='storyworld.r453.actorTone';
 const DEFAULTS=Object.freeze({on:true,rim:true});
 let prefs={...DEFAULTS};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');for(const k in DEFAULTS)if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
-const stats={frames:0,actors:0,toned:0,rimmed:0,patched:0,sharedSkips:0,errors:0};let lastError=null,disposed=false;
+const stats={frames:0,actors:0,toned:0,ghosts:0,rimmed:0,patched:0,sharedSkips:0,errors:0};let lastError=null,disposed=false;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),finite=v=>Number.isFinite(v);
 const R451=()=>window.__STORYWORLD_LOCAL_LIGHT_R451__;
@@ -51,20 +51,25 @@ function patch(m){if(patched.has(m))return patched.get(m);const T=window.__STORY
 
 // ---- 그리기 ----------------------------------------------------------------------------------------------------
 const ACTOR=new Set(['hero','enemy']);
+// R448 실루엣(가려진 영웅을 앞 조형물 덮개 위에 .58 로 한 번 더 그린 것)도 영웅과 같은 빛·테를 받아야 조형물 뒤로 갈 때만 영웅이 밝아지지 않는다.
+//  기록기가 실루엣의 주인을 effect 로 바꾸고 id·r448 표시는 버리므로(실측: owner={kind,groundAligned,x,y,…}) 줄 열쇠(명령 key 'r448:ghost:…')로 알아본다.
+//  주인 x·y 는 영웅 것 그대로다. 오라·결계 같은 다른 효과 줄은 스스로 빛나는 것이라 건드리지 않는다.
+const R448_GHOST='r448:ghost:';
+function actorKind(key,ow){if(!ow)return null;if(ACTOR.has(ow.kind))return ow.kind;return ow.kind==='effect'&&typeof key==='string'&&key.startsWith(R448_GHOST)?'hero':null;}
 const GL_TOKEN={};
 function wrapGL(r){const gl=r.renderer;if(!gl||gl.r453Wrapped===GL_TOKEN)return;const base=gl.render;
  gl.render=function(scene,camera){const restore=[];
   // 영웅·몹 몸 그림은 대개 덧그림 층(3, 깊이 지운 뒤)에, 벽 뒤 등은 세계 층(2)에 있다 — 두 그리기 모두에서 그 층에 있는 줄만 맞춘다.
   try{const pass=camera?.layers?.mask;if(scene===r.scene&&camera===r.camera&&(pass===4||pass===8)){const on=owns();if(pass===8)stats.frames++;const seenMat=new Set(),seenF=new Set(),dpr=typeof gl.getPixelRatio==='function'?gl.getPixelRatio():1;
-    for(const row of r.commands?.rows?.values?.()||[]){const ow=row.geometryState?.owner,mesh=row.mesh,m=mesh?.material;
-     if(!ow||!ACTOR.has(ow.kind)||!m||!m.map||!m.color||ow.groundAligned===true||!mesh.visible||!(mesh.layers.mask&pass)||!finite(ow.x+ow.y))continue;
+    for(const [key,row] of r.commands?.rows?.entries?.()||[]){const ow=row?.geometryState?.owner,mesh=row?.mesh,m=mesh?.material,kind=actorKind(key,ow);
+     if(!kind||!m||!m.map||!m.color||ow.groundAligned===true||!mesh.visible||!(mesh.layers.mask&pass)||!finite(ow.x+ow.y))continue;
      stats.actors++;let u=patched.get(m);
      if(!on){if(u)u.r453RimK.value=0;continue;}
      if(!u&&prefs.rim)u=patch(m);
      if(seenMat.has(m)){stats.sharedSkips++;continue;}seenMat.add(m);
      const L=R451().lightAt(ow.x,ow.y);if(!L)continue;
-     const t=toneOf(L),rr=m.color.r,gg=m.color.g,bb=m.color.b;restore.push(()=>m.color.setRGB(rr,gg,bb));m.color.setRGB(rr*t[0],gg*t[1],bb*t[2]);stats.toned++;
-     const f=m.userData?.filter?.m;if(f?.elements&&!seenF.has(f)){seenF.add(f);const s=satOf(ow.kind,L);if(s<.999){const saved=f.elements.slice(),q=1-s,S=new f.constructor();
+     const t=toneOf(L),rr=m.color.r,gg=m.color.g,bb=m.color.b;restore.push(()=>m.color.setRGB(rr,gg,bb));m.color.setRGB(rr*t[0],gg*t[1],bb*t[2]);stats.toned++;if(ow.kind==='effect')stats.ghosts++;
+     const f=m.userData?.filter?.m;if(f?.elements&&!seenF.has(f)){seenF.add(f);const s=satOf(kind,L);if(s<.999){const saved=f.elements.slice(),q=1-s,S=new f.constructor();
        S.set(s+q*LR,q*LG,q*LB, q*LR,s+q*LG,q*LB, q*LR,q*LG,s+q*LB);f.multiply(S);restore.push(()=>f.fromArray(saved));}}
      if(u){if(prefs.rim){const avg=(L[0]+L[1]+L[2])/3,lit=clamp((avg-.7)/.6,0,1),mx=Math.max(L[0],L[1],L[2],1e-3);u.r453RimK.value=RIM_BASE+RIM_LIT*lit;
        u.r453RimC.value.set(RIM_C[0]*(.6+.4*L[0]/mx),RIM_C[1]*(.6+.4*L[1]/mx),RIM_C[2]*(.6+.4*L[2]/mx));u.r453RimPx.value=RIM_PX*clamp(dpr,1,3);stats.rimmed++;}
@@ -84,6 +89,6 @@ function settingsSection(){const panel=typeof document!=='undefined'&&document.g
  panel.appendChild(s);s.querySelectorAll('[data-r453]').forEach(el=>{el.checked=!!prefs[el.dataset.r453];el.onchange=()=>set({[el.dataset.r453]:el.checked});});}
 if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const r=base.apply(this,a);try{if(!disposed)settingsSection();}catch(e){fail(e);}return r;};}
 function dispose(){disposed=true;if(timer)clearInterval(timer);}
-window.__STORYWORLD_ACTOR_TONE_R453__=Object.freeze({revision:REV,storageKey:KEY,prefs:()=>({...prefs}),set,toneOf,satOf,dispose,pure:Object.freeze({toneOf,satOf,patch,RIM_GLSL,TMIN,TMAX,SAT}),
+window.__STORYWORLD_ACTOR_TONE_R453__=Object.freeze({revision:REV,storageKey:KEY,prefs:()=>({...prefs}),set,toneOf,satOf,dispose,pure:Object.freeze({toneOf,satOf,patch,actorKind,RIM_GLSL,TMIN,TMAX,SAT}),
  inspect:()=>({revision:REV,prefs:{...prefs},owns:owns(),stats:{...stats},lastError,assetsChanged:false,shadowsAdded:false,gameplayChanged:false,GPUVerified:false})});
 })();
