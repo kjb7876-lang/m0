@@ -135,5 +135,21 @@ ok('cover fade: short props never fade',api.coverAlpha({...tall,height:40})===1)
  const good=a0===1&&Math.abs(a1-.7)<1e-9&&Math.abs(a2-.4)<1e-9&&Math.abs(b1-.65)<1e-9&&b2===1&&c===1;
  ok('cover fade eases in ~.15 s and back in ~.25 s (no pop)',good);if(!good)console.log('  ease',JSON.stringify({a0,a1,a2,b1,b2,c}));}
 ok('draw wrapper eases the cover fade',/k=easeCover\(p,coverAlpha\(p\)\)/.test(src));
+// 실제 그리기 길: R80 그림 가구(우리 가구 포함)는 drawAssetFrame3, 엔진 조형물은 sprite — 둘 다 옅게 그려져야 한다
+// (브라우저 실측: sprite 만 바꾸면 R80 가구엔 안 먹었다)
+{let T=1000;const got=[];
+ const c3={localStorage:{getItem:()=>null,setItem:()=>{}},setTimeout:()=>0,console,Math,JSON,Number,String,Object,Array,Set,Map,WeakMap,Promise,__got:got,
+  __STORYWORLD_ASSETS_R80_DATA__:{assets},__STORYWORLD_PLAY_R169__:{pathCells:()=>new Set()},performance:{now:()=>T},
+  readyImage:p=>({image:{naturalWidth:300,naturalHeight:400},path:p}),project:(x,y)=>({x:(x-y)*32,y:(x+y)*16}),zoom:1,actorHeight:()=>60,loading:false,room:undefined};
+ c3.window=c3;vm.createContext(c3);
+ vm.runInContext("drawAssetFrame3=function(path,frame,x,y,h,o){__got.push(['frame',o&&o.alpha]);};sprite=function(path,x,y,h,o){__got.push(['sprite',o&&o.alpha]);};drawProp=function(p){if(p.r80Art)drawAssetFrame3(p.path,{},0,0,p.height,{alpha:1});else sprite(p.path,0,0,p.height,{alpha:1});};",c3);
+ vm.runInContext(src,c3);
+ const art={id:'a',path:'x.webp',x:10,y:10,height:80,r80Art:'r80-145'},eng={id:'e',path:'y.webp',x:12,y:12,height:80};
+ c3.room={id:'z',layer:'STORY',exploration:{worldR74:{doors:[]}},props:[art,eng],enemies:[{x:9.2,y:9.2,hp:5},{x:11.2,y:11.2,hp:5}],objective:null};
+ const frame=()=>{got.length=0;c3.drawProp(art);c3.drawProp(eng);return got.map(g=>g[0]+':'+(+g[1]).toFixed(2)).join(' ');};
+ const f0=frame();T+=100;const f1=frame();T+=200;const f2=frame();
+ const restored=String(c3.sprite).includes('__got')&&String(c3.drawAssetFrame3).includes('__got');
+ const good=f0==='frame:1.00 sprite:1.00'&&f1==='frame:0.60 sprite:0.60'&&f2==='frame:0.40 sprite:0.40'&&restored;
+ ok('cover fade reaches the real draw calls: R80 art (drawAssetFrame3) and engine props (sprite), originals restored',good);if(!good)console.log('  draws',JSON.stringify({f0,f1,f2,restored}));}
 const I=api.inspect();ok('inspect: no errors, collision/saves untouched flags',I.stats.errors===0&&!I.lastError&&I.collisionChanged===false&&I.savesTouched===false);
 console.log(n-bad+'/'+n+' ok');process.exit(bad?1:0);

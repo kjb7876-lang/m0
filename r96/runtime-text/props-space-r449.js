@@ -28,7 +28,7 @@
 //  끄기: localStorage['storyworld.r449.space']='{"on":false}' (부분: {"furnish":false} 가구 규칙만, {"fade":false} 가림 완화만)
 (()=>{'use strict';
 if(window.__STORYWORLD_PROPS_SPACE_R449__)return;
-const REV='R449-props-space-7',KEY='storyworld.r449.space';
+const REV='R449-props-space-8',KEY='storyworld.r449.space';
 const prefs={on:true,furnish:true,fade:true};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(prefs))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={regions:0,rooms:0,kept:0,hidden:0,skippedBoss:0,emptyRooms:0,rhythmEmpty:0,lateHidden:0,reloads:0,faded:0,errors:0};let lastError=null;
@@ -272,8 +272,12 @@ try{if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...
   if(p.r303Hide==='r449'||p.r303Hide==='r449x')return;
   if(MINE(p)&&p.path&&typeof readyImage==='function'&&!readyImage(p.path))ensure([p.path],'redraw');}
  let k=1;try{k=easeCover(p,coverAlpha(p));}catch(e){fail(e);}
- if(k<1&&typeof sprite==='function'){const sp=sprite;stats.faded++;sprite=function(path,x,y,h,o,...rest){return sp.call(this,path,x,y,h,{...(o||{}),alpha:Math.min(o?.alpha??1,k)},...rest);};
-  try{return base.call(this,p,...a);}finally{sprite=sp;}}
+ if(k<1){/* 엔진 조형물은 sprite, R80 그림 가구(우리 가구 포함)는 drawAssetFrame3 로 그린다 → 둘 다 그 한 번만 알파를 낮춘다(브라우저 실측: sprite 만 바꾸면 R80 가구엔 안 먹었음) */
+  const sp=typeof sprite==='function'?sprite:null,df=typeof drawAssetFrame3==='function'?drawAssetFrame3:null,dim=o=>({...(o||{}),alpha:Math.min(o?.alpha??1,k)});
+  stats.faded++;
+  if(sp)sprite=function(path,x,y,h,o,...rest){return sp.call(this,path,x,y,h,dim(o),...rest);};
+  if(df)drawAssetFrame3=function(path,frame,x,y,h,o,...rest){return df.call(this,path,frame,x,y,h,dim(o),...rest);};
+  try{return base.call(this,p,...a);}finally{if(sp)sprite=sp;if(df)drawAssetFrame3=df;}}
  return base.call(this,p,...a);};}}catch(e){fail(e);}
 // 처음 본 순간 계획 + 소품 수가 바뀌면 다시 적용(0.4초마다, 계획은 방마다 한 번)
 (function poll(){try{if(typeof room!=='undefined'&&room&&!(typeof loading!=='undefined'&&loading)&&eligible(room)&&room.props.some(p=>p?.r224Furniture))curate(room);}catch(e){fail(e);}setTimeout(poll,400);})();
