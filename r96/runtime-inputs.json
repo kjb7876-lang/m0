@@ -6087,7 +6087,8 @@
     "assets/r436/hwando/index.json",
     "surface-r435.js",
     "assets/r439/hwando/attack-e.webp",
-    "assets/r439/hwando/index.json"
+    "assets/r439/hwando/index.json",
+    "assets/r380/mobs/electrode-machine-knight-v1.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -7162,5 +7163,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "cf8ef2c3622a93912435ba1d9725e93319ac709509cea0b3387f21db32f658af"
+  "runtimeManifestSHA256": "5d8160ac05af8dbb2f9b07253618e645df7149b1f2cfacf3f2a0dcfea0bec8d2"
 }
