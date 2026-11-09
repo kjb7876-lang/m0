@@ -428,12 +428,16 @@ jobs:
         run: node r96/qa/r412/r412-cpu-check.cjs
       - name: R425 combat flow (mob size bands, hit punch, spear tips, spider X moves, upright crosses, gunner 120deg, slayer poses + blood cross R / tornado Q) CPU check
         run: node r96/qa/r425/r425-cpu-check.cjs
+      - name: R448 depth overlap (props in front cover the hero, hero silhouette shows through) CPU check
+        run: node r96/qa/r448/r448-cpu-check.cjs
       - name: R434 readability (boss/midboss ground aura, calm HUD, one track title, hero palette rim) CPU check
         run: node r96/qa/r434/r434-cpu-check.cjs
       - name: R435 surfaces (floor anti-repeat noise, wall base AO + grime band, bright floor knee, wall height gradient + top edge light) CPU check
         run: node r96/qa/r435/r435-cpu-check.cjs
       - name: R438 sin boss rooms tidy (no shared R224 furniture in boss rooms, zone-only furniture, no lamps mid-floor) CPU check
         run: node r96/qa/r438/r438-cpu-check.cjs
+      - name: R449 props by room function (own wall clusters from map data per room name, R224 room furniture rested, empty junctions/yards/short corridors, same layout after load, cover fade) CPU check
+        run: node r96/qa/r449/r449-cpu-check.cjs
       - name: R441 lag (blocked memo per tick, R302 caller lookup without repeated full stacks, R409 outline cache by image address + bake budget per frame) CPU check
         run: node r96/qa/r441/r441-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
