@@ -9,8 +9,8 @@
     },
     {
       "path": "access-r420.js",
-      "bytes": 15366,
-      "sha256": "2139771ab44fb29db3f1d197672acd0388f8ac126719d0b2f32c4fe04ffce794"
+      "bytes": 18902,
+      "sha256": "bd72f0a05519273926284d268cf2de0b90dd7b53f95c62be9107f587c17966cb"
     },
     {
       "path": "aggro-chase-r390.js",
@@ -33424,8 +33424,8 @@
     },
     {
       "path": "cinema-run-r461.js",
-      "bytes": 16286,
-      "sha256": "5889d58787a355e091f149ac413432038dc736ee354bd26dafe791ffd8de6b68"
+      "bytes": 16976,
+      "sha256": "2d096f35d719106daf13a220e30bb57f77b544e6db2e1abdf19297f08ba6a6a3"
     },
     {
       "path": "cinema-sync-r384.js",
@@ -33469,8 +33469,8 @@
     },
     {
       "path": "combat-read-r409.js",
-      "bytes": 18830,
-      "sha256": "9ac87d9d3b10aff849aa0637596904f3bce2b6ea2663499327968622600a2ccd"
+      "bytes": 25032,
+      "sha256": "3fc71e180661b19505ece34ae3ba74953db778211e7a6ae03db5505f01173764"
     },
     {
       "path": "crates-r108.js",
@@ -33708,6 +33708,11 @@
       "sha256": "52460ef81b2bab2a1fc73251f343100be44b3301e1f75134d618aa2b6bc8d5c4"
     },
     {
+      "path": "grove-r481.js",
+      "bytes": 10174,
+      "sha256": "87fd0bd490c899dbf7068d5176df4aca6a1e3ca58bd06e20923a46c26afc7ab8"
+    },
+    {
       "path": "growth-r103.js",
       "bytes": 19635,
       "sha256": "ed4c72fb93cd0f8c5988c07ea92dd2cedffcea5a768547b9234e8acf4aae0e71"
@@ -33879,8 +33884,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6572138,
-      "sha256": "01be97a2e82dbc6837be92ce20161138ab44c1227a608d4ab27840fbdde10a3e"
+      "bytes": 6572300,
+      "sha256": "d4c04af15ed1867b633c9598a5df55f63b5970c7df8b5ebe48d30087313d3e87"
     },
     {
       "path": "intro-r140.js",
@@ -33919,8 +33924,8 @@
     },
     {
       "path": "light-r182.js",
-      "bytes": 14860,
-      "sha256": "6c5d6fef2c2c9e3a31314327922130361ed15543701e52431f9a1b9963b3db7c"
+      "bytes": 16298,
+      "sha256": "e2a8a716f6cbd48c1856e6960c955b4b48e188ac8a34ee86dc86098f999e75b3"
     },
     {
       "path": "mammon-bossroom.js",
@@ -34161,6 +34166,11 @@
       "path": "perf-r441.js",
       "bytes": 4197,
       "sha256": "d36ec97a2d38e3700c00a6b50db5d41fba89022468359e5778aa8414d26fd30b"
+    },
+    {
+      "path": "perf-r493.js",
+      "bytes": 5302,
+      "sha256": "926290cc6fd73a0056e1639ae3e9df8dd98c71f05440fbf19364e63c9934c123"
     },
     {
       "path": "perf-r97.js",
@@ -34528,6 +34538,11 @@
       "sha256": "d8f8aae6834324a74f511e8296540889e8143696f339761963250a67ec2849af"
     },
     {
+      "path": "swamp-hands-r474.js",
+      "bytes": 8219,
+      "sha256": "13c441e1847a4d0fcaa96a568ec686f33075b6f1efbde3f06ad1112fcf42d73d"
+    },
+    {
       "path": "terrain-readability-r323.js",
       "bytes": 5713,
       "sha256": "e64e34f0a20b9095ee7afeaef6dd7b6840be148d88bca4f81bcf3536de2aaa82"
@@ -34541,6 +34556,11 @@
       "path": "threads-r243.js",
       "bytes": 7587,
       "sha256": "9f472ece711b316ff74f8ddd19c1be1c9b75259d7419fb39fb78581f6604310c"
+    },
+    {
+      "path": "trail-r482.js",
+      "bytes": 10204,
+      "sha256": "e0c04d74ad92f2e3f1bd1cdaef68b1a3455ad338ccb7ee6f1bf8e4408cd64b4b"
     },
     {
       "path": "ui-upgrades-r222.js",
@@ -34733,9 +34753,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6946,
-  "totalBytes": 1091903959,
-  "webHTMLSha256": "01be97a2e82dbc6837be92ce20161138ab44c1227a608d4ab27840fbdde10a3e",
+  "fileCount": 6950,
+  "totalBytes": 1091949886,
+  "webHTMLSha256": "d4c04af15ed1867b633c9598a5df55f63b5970c7df8b5ebe48d30087313d3e87",
   "largest": [
     {
       "path": "index.html",

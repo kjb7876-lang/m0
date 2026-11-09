@@ -6156,7 +6156,11 @@
     "sin-boss-art-r463.js",
     "canon-throw-r471.js",
     "seal-vision-r472.js",
-    "balrog-tear-r473.js"
+    "balrog-tear-r473.js",
+    "grove-r481.js",
+    "perf-r493.js",
+    "swamp-hands-r474.js",
+    "trail-r482.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -7231,5 +7235,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "e230286ee78d981c2849f9cb5f8ed02eafa11c653979e39408709f623f06c04b"
+  "runtimeManifestSHA256": "9d5956fd2008db62b2f23b7adbdca9b5b28c542b0177f386f93eeb73646d8cda"
 }
