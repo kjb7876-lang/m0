@@ -7,7 +7,7 @@
 //    - R430/R431 상태이상이 새로 걸린 순간: 타락 → 머리 위 저주 낙인, 중독·질병 → 발밑 독안개, 빙결·시간 왜곡 → 냉기파.
 //    - R230 몹 옆자리 블링크: 사라진 자리에서 나타난 자리로 망령 돌진(옆모습 시트라 좌우만 뒤집고 기울기는 ±35°까지).
 //  · 영웅 쪽
-//    - 체력이 한 번에 최대치의 6% 이상 차오름(물약·지역 정리 회복 등): 발밑 회복. 미카엘라는 자기 회복 그림이 있어 뺀다.
+//    - 체력이 한 번에 최대치의 6% 이상 차오름(잎 초록은 시트 단계에서 채도를 낮춘 은녹으로 — 호러 톤)(물약·지역 정리 회복 등): 발밑 회복. 미카엘라는 자기 회복 그림이 있어 뺀다.
 //    - 성흔 보호막(player.shield)이 새로 생기거나 1.5초 넘는 부활 보호가 걸림: 보호 결계.
 //    - 방의 적을 모두 쓰러뜨린 순간: 영웅 발밑 정화 파동(그 뒤 2초는 회복 그림을 겹치지 않음).
 //  · 맘몬의 금고(ep1b06)는 다른 작업 몫이라 보스 쪽(충격파·광폭화)을 뺀다. 환도·미카엘라 공격·네온·라우렌 공격 그림은 건드리지 않는다.
@@ -26,7 +26,7 @@ const roomId=()=>{try{return typeof room!=='undefined'&&room?room.id:'';}catch(_
 const SHEET={
  'enemy-shockwave':['enemy-shockwave.webp',[128,145],2,1.7,'enemy',0,false],
  'enemy-cold-wave':['enemy-cold-wave.webp',[128,175],1.6,1.5,'enemy',0,true],
- 'enemy-curse-brand':['enemy-curse-brand.webp',[128,128],1.1,1.4,'enemy',2.6,true],
+ 'enemy-curse-brand':['enemy-curse-brand.webp',[128,128],1.1,1.4,'enemy',3.1,true],
  'enemy-poison-mist':['enemy-poison-mist.webp',[128,160],1.5,1.5,'enemy',0,false],
  'enemy-wraith-dash':['enemy-wraith-dash.webp',[128,140],1.5,2.4,'enemy',.55,true],
  'hero-healing':['hero-healing.webp',[128,192],1.35,1.3,'hero',0,true],

@@ -24,11 +24,16 @@ for name,(folder,side) in USE.items():
             for sl in (np.s_[:3,:],np.s_[-3:,:],np.s_[:,:3],np.s_[:,-3:]):
                 edge+=int((cell[sl][...,3]>0).sum()); cell[sl]=0
     faint=int(((a[...,3]>0)&(a[...,3]<=3)).sum()); a[a[...,3]<=3]=0
+    recolor=None
+    if name=='hero-healing':
+        # 호러 톤 맞춤(R438 1차 심사 조명색채 7.7): 선명한 잎 초록을 명도는 두고 채도 45%로 낮춘 뒤 창백한 은녹(0.93,1.0,0.95)으로.
+        f=a[...,:3].astype(np.float32); g=(f*np.array([.299,.587,.114],np.float32)).sum(-1,keepdims=True)
+        f=(g*.55+f*.45)*np.array([.93,1.0,.95],np.float32); a[...,:3]=np.clip(f,0,255).astype(np.uint8); recolor='saturation 45% + pale silver-green tint'
     out=os.path.join(OUT,name+'.webp'); Image.fromarray(a,'RGBA').save(out,'WEBP',quality=90,alpha_quality=100,method=6)
     zp=glob.glob(os.path.join(ZIPS,folder+'_sheet_qa_hold.zip'))
     idx['fx'][name]=dict(file=name+'.webp',side=side,effect=m['effect_id'],nameKo=m.get('name_ko'),version=m.get('version'),status=m.get('status'),
         pivot=m.get('pivot_px'),placement=m.get('placement'),direction=m.get('direction'),loop=m.get('loop'),fps=m.get('fps'),
         sheetSha256=sha(sp),zipSha256=sha(zp[0]) if zp else None,outSha256=sha(out),bytes=os.path.getsize(out),
-        cleaned=dict(edgePixels=edge,faintPixels=faint))
+        cleaned=dict(edgePixels=edge,faintPixels=faint),recolor=recolor)
     print(name,side,os.path.getsize(out),'edge',edge,'faint',faint)
 json.dump(idx,open(os.path.join(OUT,'index.json'),'w'),ensure_ascii=False,indent=1)

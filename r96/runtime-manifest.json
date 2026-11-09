@@ -24629,13 +24629,13 @@
     },
     {
       "path": "assets/r438/fx/hero-healing.webp",
-      "bytes": 377064,
-      "sha256": "86bcb3e8edfb6fdf08e982e8fbb44820c0f3bbd10fb927bfb9691643660c1f9c"
+      "bytes": 354166,
+      "sha256": "f5c9b0b6290c576de51e4d31ed39ff2c1a5cabc4bf1c00fdeab9484c90a5ef54"
     },
     {
       "path": "assets/r438/fx/index.json",
-      "bytes": 5553,
-      "sha256": "c03b002a5349f3c214b3625c2182a2c58313beb8dec7d6e423457e7513c4d969"
+      "bytes": 5750,
+      "sha256": "bea44ba3d91a314cd960e0fbec4f25ba499e328076740a572ba8436489626ae9"
     },
     {
       "path": "assets/r74/effects.png",
@@ -33434,8 +33434,8 @@
     },
     {
       "path": "fx-more-r438.js",
-      "bytes": 12444,
-      "sha256": "8f9760a67584b4ab476a5083c2ac41bd4e917d682a16134037d14f8834278f97"
+      "bytes": 12524,
+      "sha256": "1a36b872fa238487d861920276e7c0b5637390c7e1ffd47eabd283b54007ea88"
     },
     {
       "path": "fx-sprites-r106.js",
@@ -34429,7 +34429,7 @@
     }
   ],
   "fileCount": 6885,
-  "totalBytes": 1089618276,
+  "totalBytes": 1089595655,
   "webHTMLSha256": "6b6867c27b402e949dfd2f10b94152e1791b4cf15de55df5b8d3aac974fe6311",
   "largest": [
     {

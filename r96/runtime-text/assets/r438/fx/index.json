@@ -31,7 +31,8 @@
    "cleaned": {
     "edgePixels": 0,
     "faintPixels": 0
-   }
+   },
+   "recolor": null
   },
   "enemy-curse-brand": {
    "file": "enemy-curse-brand.webp",
@@ -55,7 +56,8 @@
    "cleaned": {
     "edgePixels": 0,
     "faintPixels": 0
-   }
+   },
+   "recolor": null
   },
   "enemy-poison-mist": {
    "file": "enemy-poison-mist.webp",
@@ -79,7 +81,8 @@
    "cleaned": {
     "edgePixels": 0,
     "faintPixels": 0
-   }
+   },
+   "recolor": null
   },
   "enemy-cold-wave": {
    "file": "enemy-cold-wave.webp",
@@ -103,7 +106,8 @@
    "cleaned": {
     "edgePixels": 0,
     "faintPixels": 0
-   }
+   },
+   "recolor": null
   },
   "enemy-wraith-dash": {
    "file": "enemy-wraith-dash.webp",
@@ -127,7 +131,8 @@
    "cleaned": {
     "edgePixels": 0,
     "faintPixels": 0
-   }
+   },
+   "recolor": null
   },
   "hero-healing": {
    "file": "hero-healing.webp",
@@ -146,12 +151,13 @@
    "fps": 12.5,
    "sheetSha256": "0a773e04448ed21114a493d073604c25312dd177d7579197c9d6591e49247ee7",
    "zipSha256": "250c346d5ad81380a0e70dd2d9e4ae2f3bdbb8df05b1e678f5ce527a9b566e71",
-   "outSha256": "86bcb3e8edfb6fdf08e982e8fbb44820c0f3bbd10fb927bfb9691643660c1f9c",
-   "bytes": 377064,
+   "outSha256": "f5c9b0b6290c576de51e4d31ed39ff2c1a5cabc4bf1c00fdeab9484c90a5ef54",
+   "bytes": 354166,
    "cleaned": {
     "edgePixels": 0,
     "faintPixels": 0
-   }
+   },
+   "recolor": "saturation 45% + pale silver-green tint"
   },
   "hero-barrier": {
    "file": "hero-barrier.webp",
@@ -175,7 +181,8 @@
    "cleaned": {
     "edgePixels": 0,
     "faintPixels": 0
-   }
+   },
+   "recolor": null
   },
   "hero-cleanse": {
    "file": "hero-cleanse.webp",
@@ -199,7 +206,8 @@
    "cleaned": {
     "edgePixels": 0,
     "faintPixels": 0
-   }
+   },
+   "recolor": null
   }
  }
 }
