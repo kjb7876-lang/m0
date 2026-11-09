@@ -5,7 +5,7 @@
 //  고침(그림만, 판정·이동·배치·깊이 정렬 값은 그대로):
 //   1) 매 프레임 기록된 명령에서 영웅 몸 그림 상자를 구하고, 영웅보다 앞(엔진 그리기 순서와 같은 x+y 기준)에 있으면서
 //      그 상자와 겹치는 조형물 몸 그림(바닥에 눕는 깔개·핏자국·벽 덩어리 제외)을 영웅 바로 뒤 순서로 3번 패스에 한 번 더 그린다
-//      → 조형물이 실제로 영웅 앞을 가린다. 엔진이 .36 으로 옅게 한 원본과 합쳐 조형물은 약 .86 으로 보인다.
+//      → 조형물이 실제로 영웅 앞을 가린다. 엔진이 .36 으로 옅게 한 원본은 1 로 되돌리고, 덮개는 영웅 그림 상자 안으로만 잘라 .86 으로 덮는다.
 //   2) 가려진 영웅은 그 위에 반투명(.58) 실루엣으로 한 번 더 그려 위치·방향이 늘 읽히게 한다(전투 가독성).
 //   3) 스킬·이펙트(R350 이후 순서)는 그대로 그 위에 그린다. R350 가림 옅게·유령과 겹치지 않게 owner.r350 표시를 단다.
 //  몹은 이미 몸 패스(깊이 있음)라 건드리지 않는다. 조형물 옅게(R443 coverAlpha)·배치는 조형물 배치 스레드 몫이라 건드리지 않는다.
@@ -16,7 +16,7 @@ const REV='R448-depth-overlap-1',KEY='storyworld.r448.depthOverlap';
 let on=true;try{on=localStorage.getItem(KEY)!=='0';}catch(_){}
 const stats={frames:0,heroFound:0,covered:0,ghosts:0,skippedFlat:0,errors:0};let lastError=null;const last=[];const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 // 앞 조형물 덮개 진하기: 원본 알파 a0 와 합쳐 TARGET 이 되게(원본이 이미 1 이면 OVER 로)
-const TARGET=.86,OVER=.8,GHOST=.58,MIN_FRAC=.04,DEPTH_GAP=.05;
+const TARGET=.86,OVER=.86,GHOST=.58,ENGINE_FADE=.36,MIN_FRAC=.04,DEPTH_GAP=.05;
 // 바닥에 눕는 것(깔개·핏자국·웅덩이·금)은 서 있는 물체가 아니라 영웅을 가리면 안 된다
 const FLAT=/(?:^|[^a-z])(?:rugs?|carpets?|mats?|decals?|stains?|puddles?|blood|cracks?|floor|tiles?|shadow|ground|grass-patch|leaves|petals?)(?=[^a-z]|$)/i;
 // 벽에 붙는 것·벽 덩어리(문·문틀·창·액자·현판 등)는 엔진 벽 가림(R188)이 따로 다루고, 문 앞에 선 영웅을 문이 덮으면 안 된다
@@ -44,12 +44,19 @@ function process(commands){
   const o=c.owner;if(!Number.isFinite(o.x+o.y)||o.x+o.y<=hd+DEPTH_GAP)continue;
   const q=bbox(c);if(!q)continue;const f=overlap(q,core)/coreA;if(!(f>MIN_FRAC))continue;
   const p=propOf(o.id);if(p&&(p.terrainWall||p.visible===false||p.r303Hide))continue;
+  /* 손전등 시야(R24) 밖 조형물은 원본도 기록기에서 걸러지므로 덮개도 만들지 않는다(effect 로 바꾸면 그 거름을 건너뛴다 — Codex 리뷰) */
+  try{const SG=window.__STORYWORLD_SIGHT24__;if(SG?.enabled&&typeof SG.pointVisible==='function'&&!SG.pointVisible(o.x,o.y)){stats.hiddenSight=(stats.hiddenSight||0)+1;continue;}}catch(e){fail(e);}
   const name=String(c.sourcePath||'')+' '+String(o.id||'')+' '+String(p?.path||'')+' '+String(p?.r80Art||'');if(FLAT.test(name)||WALLISH.test(name)||p?.wallMounted){stats.skippedFlat++;continue;}
   over.push(c);}
  if(!over.length)return;
+ /* 덮개는 영웅 그림 상자 안으로만 자른다(깊이 없는 패스라 상자 밖의 더 앞 몹을 덮던 것 — Codex 리뷰). 기록기 clips 는 같은 화면 좌표의 닫힌 다각형 */
+ const P=2,heroClip={paths:[{points:[[box.x0-P,box.y0-P],[box.x1+P,box.y0-P],[box.x1+P,box.y1+P],[box.x0-P,box.y1+P]],closed:true}],rule:'nonzero'};
  over.sort((a,b)=>a.order-b.order);let i=0;last.length=0;
- for(const c of over){const a0=Math.max(0,Math.min(1,c.style?.globalAlpha??1)),a=a0>=.98?OVER:Math.max(0,Math.min(1,(TARGET-a0)/(1-a0)));if(a<=.01)continue;
-  last.push(String(c.owner.id).slice(0,48));commands.push({...c,key:'r448:over:'+c.key,owner:{...c.owner,kind:'effect',id:'r448:over:'+c.owner.id,r350:true,r448:true,groundAligned:false,bodyPath:null},spatialRole:null,order:hMax+.2+(i++)*.001,style:{...c.style,globalAlpha:a}});stats.covered++;}
+ for(const c of over){let a0=Math.max(0,Math.min(1,c.style?.globalAlpha??1));
+  /* 엔진 영웅 가림 옅게(.36)는 되돌린다: 덮개를 영웅 상자로 자르므로, 원본이 옅은 채면 상자 밖만 옅어 네모 경계가 보였다. 영웅은 실루엣으로 보인다. (R443/R447 몹 가림 옅게 .4·.5 는 그대로) */
+  if(Math.abs(a0-ENGINE_FADE)<.006){c.style={...c.style,globalAlpha:1};a0=1;stats.restored=(stats.restored||0)+1;}
+  const a=a0>=.98?OVER:Math.max(0,Math.min(1,(TARGET-a0)/(1-a0)));if(a<=.01)continue;
+  last.push(String(c.owner.id).slice(0,48));commands.push({...c,key:'r448:over:'+c.key,owner:{...c.owner,kind:'effect',id:'r448:over:'+c.owner.id,r350:true,r448:true,groundAligned:false,bodyPath:null},spatialRole:null,clips:[...(Array.isArray(c.clips)?c.clips:[]),heroClip],order:hMax+.2+(i++)*.001,style:{...c.style,globalAlpha:a}});stats.covered++;}
  // 가려진 영웅 실루엣(반투명) — 덮개 바로 위
  let j=0;for(const c of heroes){commands.push({...c,key:'r448:ghost:'+c.key,owner:{...c.owner,kind:'effect',id:'r448:ghost:'+c.owner.id,r350:true,r448:true,groundAligned:false,bodyPath:null},spatialRole:null,order:hMax+.5+(j++)*.001,style:{...c.style,globalAlpha:Math.max(0,Math.min(1,(c.style?.globalAlpha??1)*GHOST))}});stats.ghosts++;}
 }

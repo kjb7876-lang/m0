@@ -20,8 +20,11 @@ const cmds=[behind,hero,front,rug,far,wall,fx];A.process(cmds);
 const added=cmds.slice(7);const over=added.filter(c=>c.key.startsWith('r448:over:')),ghost=added.filter(c=>c.key.startsWith('r448:ghost:'));
 assert.deepStrictEqual(over.map(c=>c.key),['r448:over:prop:tree:0']);ok('only the overlapping prop in front of the hero is re-drawn (not behind, flat rug, far, or terrain wall)');
 assert(over[0].order>hero.order&&over[0].order<fx.order&&over[0].spatialRole===null&&over[0].owner.kind==='effect'&&over[0].owner.r350===true);ok('cover goes right after the hero in the effect pass, before later skill effects, flagged so R350 does not veil it');
-const tot=.36+over[0].style.globalAlpha*(1-.36);assert(Math.abs(tot-.86)<.01,tot);ok('faded original (.36) plus cover reads about .86');
+assert(front.style.globalAlpha===1&&Math.abs(over[0].style.globalAlpha-.86)<.01);ok('engine hero-fade (.36) on the original is restored to 1; the clipped cover inside the hero box is .86');
 assert(ghost.length===1&&ghost[0].order>over[0].order&&ghost[0].order<fx.order&&ghost[0].style.globalAlpha>.4&&ghost[0].style.globalAlpha<.7);ok('hero silhouette (semi-transparent) drawn over the cover so the hero stays readable');
+assert(Array.isArray(over[0].clips)&&over[0].clips.length===1&&over[0].clips[0].paths[0].points.length===4&&over[0].clips[0].paths[0].points[0][0]<=100&&over[0].clips[0].paths[0].points[2][0]>=140);ok('cover is clipped to the hero box (does not paint over nearer mobs elsewhere — Codex review)');
+{const win={__STORYWORLD_SIGHT24__:{enabled:true,pointVisible:(x,y)=>!(x>5.5&&y>5.5)}};new Function('window','localStorage','room','player','setInterval',src)(win,{getItem:()=>null,setItem(){}},{props:[{id:'tree'}]},{x:5,y:5,visible:true},()=>0);
+ const c=[hero,front];win.__STORYWORLD_DEPTH_OVERLAP_R448__.process(c);assert.strictEqual(c.length,2);ok('props outside flashlight sight get no cover (Codex review)');}
 const cmds2=[behind,hero,far,fx];A.process(cmds2);assert.strictEqual(cmds2.length,4);ok('nothing added when no prop covers the hero');
 A.set(false);const cmds3=[hero,front];A.process(cmds3);assert.strictEqual(cmds3.length,2);A.set(true);ok('toggle off disables it');
 assert(!/enemy/.test(src.replace(/\/\/.*$/gm,'').replace(/'[^']*'/g,'')));ok('mobs untouched (no enemy commands handled)');
