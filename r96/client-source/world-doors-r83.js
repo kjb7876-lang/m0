@@ -3,16 +3,21 @@
 (()=>{'use strict';
  if(window.__STORYWORLD_WORLD_DOORS_R83__)return;
  const DOORS=window.__STORYWORLD_WORLD_R74__,stats={doors:0,closed:0,open:0,planes:0,culled:0},JAMB=.24;
- // R446(사용자 2026-11-09 "벽들 문높이 맞추고 문위에 벽이조금 감싸는 형태로 해서 벽을뚫고 문을 만든느낌"): 문틀 높이를 2.7 → 2.4 로 낮춰
+ // R452(사용자 2026-11-09 "벽들 문높이 맞추고 문위에 벽이조금 감싸는 형태로 해서 벽을뚫고 문을 만든느낌"): 문틀 높이를 2.7 → 2.4 로 낮춰
  //  벽(2.85) 윗선 아래로 0.45 남긴다 — 그 틈을 R413 상인방(벽 그림 띠+윗면)이 메워 벽이 문 위를 감싼다. 병원 진료문(ep1a08)은 2.7 그대로.
- //  끄기: localStorage storyworld.r446.walls {"on":false}
- let r446=true;try{const s=JSON.parse(localStorage.getItem('storyworld.r446.walls')||'null');if(s&&s.on===false)r446=false;}catch(_){}
- const DH=()=>{if(!r446)return 2.7;try{return typeof room!=='undefined'&&room&&room.id!=='ep1a08'?2.4:2.7;}catch(_){return 2.7;}};
+ //  끄기: localStorage storyworld.r452.walls {"on":false}
+ let r452=true;try{const s=JSON.parse(localStorage.getItem('storyworld.r452.walls')||'null');if(s&&s.on===false)r452=false;}catch(_){}
+ const DH=()=>{if(!r452)return 2.7;try{return typeof room!=='undefined'&&room&&room.id!=='ep1a08'?2.4:2.7;}catch(_){return 2.7;}};
 
  const solo=()=>!window.__STORYWORLD_COOP_SIM_R62__?.mode||window.__STORYWORLD_COOP_SIM_R62__.mode()==='off';
  const hospital=(r,p)=>r?.id==='ep1a08'&&!!r.exploration?.hospitalDoorsB3&&!!p?.hospitalDoorFrameB3;
  const enabled=(r,p)=>solo()&&r?.layer==='STORY'&&(hospital(r,p)||!!r.exploration?.worldWardR81&&!!p?.r74Door);
  const hospitalLeafPath='assets/world-r80/r80-057.webp';
+ // R443(사용자 2026-11-09 06:49Z "문대신 커튼사용하는거야 문대용으로"): 색욕(ep1b05) 보스 문(door-0) 문짝 자리에 붉은 무대 커튼(R408 red-curtain)을 그린다.
+ //  문 열림·충돌·문틀(벽 띠)은 그대로, 문짝 그림만 바뀐다. 끄기: localStorage storyworld.r443.curtainDoor {on:false}
+ const CURTAIN_PATH='assets/r408/props/red-curtain.webp',CURTAIN_DOORS={ep1b05:'door-0'};
+ let curtainOn=true;try{const s=JSON.parse(localStorage.getItem('storyworld.r443.curtainDoor')||'null');if(s&&s.on===false)curtainOn=false;}catch(_){}
+ function curtainFor(r,d){if(!curtainOn||!r||r.layer!=='STORY'||CURTAIN_DOORS[r.id]!==d?.id)return null;const row=readyImage(CURTAIN_PATH);if(!row){try{addImage(CURTAIN_PATH,'R443 curtain door');}catch(_){}return null;}stats.curtains=(stats.curtains||0)+1;return row.image;}
  // R347: 문 그림을 늘리지 않는다(사용자 2026-11-05 "문이미지 너무늘어나 … 부자연스럽지 않게 적절하게 배치 및 입구간격조절").
  //  원래는 문짝 그림 한 장(가로:세로 ≈ .72)을 5~8칸 통로 폭 전체에 펴 발라 가로로 3~4배 늘어났다.
  //  이제 통로를 그림 비율에 가장 가까운 문 칸(bay) 여러 개로 나누고, 칸 사이에 돌기둥(문설주)을 세운다. 문짝은 칸 안에서
@@ -78,7 +83,7 @@
   for(const part of g.parts){const ps=corners(part);if(!onScreen(ps)){stats.culled++;continue;}const path=part.source==='wall'?art?.path:atlas.path,plane={ax:part.a.x,ay:part.a.y,bx:part.b.x,by:part.b.y},owner={id:'r83-ward-door:'+p.id+':'+part.id,kind:'prop',x:(part.a.x+part.b.x)/2,y:(part.a.y+part.b.y)/2,alive:true,bodyPath:path,r83WardDoor:true,hospitalDoorR86:clinical,doorFaceOffsetR86:g.faceOffset,doorId:d.id,doorOpen:open,r83DoorPart:part.id,r83DoorPlane:plane,r83WallTint:part.source==='wall'?r.exploration.surface?.art?.r81Palette?.wall:undefined,groundAligned:false},paint=()=>{ctx.save();try{
    if(open&&part.source==='leaf')ctx.globalAlpha*=.88;
    if(part.source==='wall'){if(darkFrame(r)){/* R264: 유기 지형(R204) 지역은 문틀을 어두운 바위색으로 — 원래 병동 벽 그림(밝은 회색)·대체색 #687874 가 검은 동굴·늪 바닥 위에서 흰 테두리처럼 떠 보였다(사용자 "문에 흰테두리가 있는문제") */polygon(ps);const top=ps[0],bot=ps[3]||ps[0],gr=ctx.createLinearGradient?ctx.createLinearGradient(top.x,top.y,bot.x,bot.y):null;if(gr){gr.addColorStop(0,'#2b2520');gr.addColorStop(1,'#16120f');ctx.fillStyle=gr;}else ctx.fillStyle='#211c18';ctx.fill();}else if(wall&&art.wallRect)affinePatch(wall,art.wallRect,ps,part.id);else{polygon(ps);ctx.fillStyle='#687874';ctx.fill();}}
-   else{polygon(ps);ctx.fillStyle=clinical?'#365154':metal?'#665b3d':'#584336';ctx.fill();if(leaf&&cell)leafPatch(leaf,cell,part,ps,metal,clinical);}
+   else{const cur=!clinical&&curtainFor(r,d);if(cur)affinePatch(cur,[0,0,cur.naturalWidth||cur.width,cur.naturalHeight||cur.height],ps,part.id+':curtain');else{polygon(ps);ctx.fillStyle=clinical?'#365154':metal?'#665b3d':'#584336';ctx.fill();if(leaf&&cell)leafPatch(leaf,cell,part,ps,metal,clinical);}}
    stats.planes++;
   }finally{ctx.restore();}};
   if(typeof ctx.scope==='function')ctx.scope(owner,paint);else paint();}
@@ -96,5 +101,5 @@
  registerHospitalLeaf();
  const spatialBase=command?.applySpatialPolicy;if(spatialBase)command.applySpatialPolicy=function(row,c,...args){const result=spatialBase.call(this,row,c,...args);if(c.owner?.r83WardDoor)row.mesh.renderOrder=c.kind==='image'?2:1;return result;};
  const base=drawProp;drawProp=function(p,...args){if(enabled(room,p))return draw(p);return base.apply(this,[p,...args]);};
- window.__STORYWORLD_WORLD_DOORS_R83__=Object.freeze({enabled,geometry,point,draw,hospital,bays,naturalBay,cropRect,doorFitR347:()=>fitOn,doorHeight:()=>DH(),inspect:()=>({revision:'R83',refinement:'R86',doorFit:fitOn?'R347':'off',stats:{...stats},wallHeight:DH(),jamb:JAMB,physicalAperture:true,canvasImpactTranslation:false,collisionChanged:false,sourceBitmapsChanged:false,clinicalDoorPath:hospitalLeafPath,frontSurfaceRegistered:true,clinicalDoorsRegistered:true,browserVerified:false,GPUVerified:false})});
+ window.__STORYWORLD_WORLD_DOORS_R83__=Object.freeze({curtainFor,CURTAIN_DOORS,enabled,geometry,point,draw,hospital,bays,naturalBay,cropRect,doorFitR347:()=>fitOn,doorHeight:()=>DH(),inspect:()=>({revision:'R83',refinement:'R86',doorFit:fitOn?'R347':'off',stats:{...stats},wallHeight:DH(),jamb:JAMB,physicalAperture:true,canvasImpactTranslation:false,collisionChanged:false,sourceBitmapsChanged:false,clinicalDoorPath:hospitalLeafPath,frontSurfaceRegistered:true,clinicalDoorsRegistered:true,browserVerified:false,GPUVerified:false})});
 })();

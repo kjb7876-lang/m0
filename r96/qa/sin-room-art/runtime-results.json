@@ -1,9 +1,9 @@
 {
   "build": {
-    "files": 6876,
-    "bytes": 1087038789,
-    "runtimeManifestSHA256": "fa19b83ec7b85340172df91ae47c71ad46d64c1101b379fecca62349bd42542a",
-    "sourceCommit": "edc22f5c82e4e1bb2796c54b6d4957d3f5092c78"
+    "files": 6934,
+    "bytes": 1091721334,
+    "runtimeManifestSHA256": "7b74115b40d2cf8c537c0e39b83b43cc1ebffeee8e5b0cd3249b3abb29ea2894",
+    "sourceCommit": "3b94aefc1b2b596c586599a42564a5c46229758c"
   },
   "boot": {
     "booted": true,
@@ -648,6 +648,78 @@
             "x": 7.05,
             "y": 14.2,
             "height": 148
+          },
+          {
+            "id": "sin-art:ep1b03:gWardrobe1",
+            "path": "assets/sin-rooms/envy-lounge.webp",
+            "key": "gWardrobe1",
+            "x": 2.45,
+            "y": 25.55,
+            "height": 150
+          },
+          {
+            "id": "sin-art:ep1b03:gWardrobe2",
+            "path": "assets/sin-rooms/envy-lounge.webp",
+            "key": "gWardrobe2",
+            "x": 4.15,
+            "y": 25.55,
+            "height": 150
+          },
+          {
+            "id": "sin-art:ep1b03:gMirror",
+            "path": "assets/sin-rooms/envy-home.png",
+            "key": "gMirror",
+            "x": 5.95,
+            "y": 25.5,
+            "height": 130
+          },
+          {
+            "id": "sin-art:ep1b03:gCabinet",
+            "path": "assets/sin-rooms/envy-home.png",
+            "key": "gCabinet",
+            "x": 9.4,
+            "y": 25.6,
+            "height": 148
+          },
+          {
+            "id": "sin-art:ep1b03:gConsole",
+            "path": "assets/sin-rooms/envy-home.png",
+            "key": "gConsole",
+            "x": 13.9,
+            "y": 25.7,
+            "height": 142
+          },
+          {
+            "id": "sin-art:ep1b03:gSofaN",
+            "path": "assets/sin-rooms/envy-lounge.webp",
+            "key": "gSofaN",
+            "x": 25.3,
+            "y": 25.75,
+            "height": 101
+          },
+          {
+            "id": "sin-art:ep1b03:gTableN",
+            "path": "assets/sin-rooms/envy-lounge.webp",
+            "key": "gTableN",
+            "x": 25.3,
+            "y": 27.55,
+            "height": 83
+          },
+          {
+            "id": "sin-art:ep1b03:gSofaW",
+            "path": "assets/sin-rooms/envy-lounge.webp",
+            "key": "gSofaW",
+            "x": 1.75,
+            "y": 31.5,
+            "height": 118
+          },
+          {
+            "id": "sin-art:ep1b03:gTableW",
+            "path": "assets/sin-rooms/envy-lounge.webp",
+            "key": "gTableW",
+            "x": 3.55,
+            "y": 31.5,
+            "height": 83
           }
         ],
         "nativeProps": [
@@ -759,6 +831,78 @@
             "x": 7.05,
             "y": 14.2,
             "height": 148
+          },
+          {
+            "id": "sin-art:ep1b03:gWardrobe1",
+            "path": "assets/sin-rooms/envy-lounge.webp",
+            "key": "gWardrobe1",
+            "x": 2.45,
+            "y": 25.55,
+            "height": 150
+          },
+          {
+            "id": "sin-art:ep1b03:gWardrobe2",
+            "path": "assets/sin-rooms/envy-lounge.webp",
+            "key": "gWardrobe2",
+            "x": 4.15,
+            "y": 25.55,
+            "height": 150
+          },
+          {
+            "id": "sin-art:ep1b03:gMirror",
+            "path": "assets/sin-rooms/envy-home.png",
+            "key": "gMirror",
+            "x": 5.95,
+            "y": 25.5,
+            "height": 130
+          },
+          {
+            "id": "sin-art:ep1b03:gCabinet",
+            "path": "assets/sin-rooms/envy-home.png",
+            "key": "gCabinet",
+            "x": 9.4,
+            "y": 25.6,
+            "height": 148
+          },
+          {
+            "id": "sin-art:ep1b03:gConsole",
+            "path": "assets/sin-rooms/envy-home.png",
+            "key": "gConsole",
+            "x": 13.9,
+            "y": 25.7,
+            "height": 142
+          },
+          {
+            "id": "sin-art:ep1b03:gSofaN",
+            "path": "assets/sin-rooms/envy-lounge.webp",
+            "key": "gSofaN",
+            "x": 25.3,
+            "y": 25.75,
+            "height": 101
+          },
+          {
+            "id": "sin-art:ep1b03:gTableN",
+            "path": "assets/sin-rooms/envy-lounge.webp",
+            "key": "gTableN",
+            "x": 25.3,
+            "y": 27.55,
+            "height": 83
+          },
+          {
+            "id": "sin-art:ep1b03:gSofaW",
+            "path": "assets/sin-rooms/envy-lounge.webp",
+            "key": "gSofaW",
+            "x": 1.75,
+            "y": 31.5,
+            "height": 118
+          },
+          {
+            "id": "sin-art:ep1b03:gTableW",
+            "path": "assets/sin-rooms/envy-lounge.webp",
+            "key": "gTableW",
+            "x": 3.55,
+            "y": 31.5,
+            "height": 83
           }
         ],
         "nativeProps": [
@@ -789,6 +933,51 @@
             "id": "sin-art:ep1b03:cabinet",
             "height": 0.01,
             "r98BaseHeight": 0.01
+          },
+          {
+            "id": "sin-art:ep1b03:gWardrobe1",
+            "height": 0.01,
+            "r98BaseHeight": 0.01
+          },
+          {
+            "id": "sin-art:ep1b03:gWardrobe2",
+            "height": 0.01,
+            "r98BaseHeight": 0.01
+          },
+          {
+            "id": "sin-art:ep1b03:gMirror",
+            "height": 0.01,
+            "r98BaseHeight": 0.01
+          },
+          {
+            "id": "sin-art:ep1b03:gCabinet",
+            "height": 0.01,
+            "r98BaseHeight": 0.01
+          },
+          {
+            "id": "sin-art:ep1b03:gConsole",
+            "height": 0.01,
+            "r98BaseHeight": 0.01
+          },
+          {
+            "id": "sin-art:ep1b03:gSofaN",
+            "height": 0.01,
+            "r98BaseHeight": 0.01
+          },
+          {
+            "id": "sin-art:ep1b03:gTableN",
+            "height": 0.01,
+            "r98BaseHeight": 0.01
+          },
+          {
+            "id": "sin-art:ep1b03:gSofaW",
+            "height": 0.01,
+            "r98BaseHeight": 0.01
+          },
+          {
+            "id": "sin-art:ep1b03:gTableW",
+            "height": 0.01,
+            "r98BaseHeight": 0.01
           }
         ],
         "props": [
@@ -806,6 +995,42 @@
           },
           {
             "key": "cabinet",
+            "blocked": true
+          },
+          {
+            "key": "gWardrobe1",
+            "blocked": true
+          },
+          {
+            "key": "gWardrobe2",
+            "blocked": true
+          },
+          {
+            "key": "gMirror",
+            "blocked": true
+          },
+          {
+            "key": "gCabinet",
+            "blocked": true
+          },
+          {
+            "key": "gConsole",
+            "blocked": true
+          },
+          {
+            "key": "gSofaN",
+            "blocked": true
+          },
+          {
+            "key": "gTableN",
+            "blocked": true
+          },
+          {
+            "key": "gSofaW",
+            "blocked": true
+          },
+          {
+            "key": "gTableW",
             "blocked": true
           }
         ],
@@ -1079,6 +1304,591 @@
                 }
               }
             ]
+          },
+          {
+            "id": "sin-art:ep1b03:gWardrobe1",
+            "expectedRect": [
+              2,
+              2,
+              202,
+              445
+            ],
+            "expectedPosition": {
+              "x": 2.45,
+              "y": 25.55
+            },
+            "expectedPoints": [
+              [
+                -164.7485543071161,
+                307.82666666666665
+              ],
+              [
+                -109.36877902621725,
+                307.82666666666665
+              ],
+              [
+                -109.36877902621725,
+                429.82666666666665
+              ],
+              [
+                -164.7485543071161,
+                429.82666666666665
+              ]
+            ],
+            "commands": [
+              {
+                "sourceRect": [
+                  2,
+                  2,
+                  202,
+                  445
+                ],
+                "points": [
+                  [
+                    -164.7485543071161,
+                    307.82666666666665
+                  ],
+                  [
+                    -109.36877902621725,
+                    307.82666666666665
+                  ],
+                  [
+                    -109.36877902621725,
+                    429.82666666666665
+                  ],
+                  [
+                    -164.7485543071161,
+                    429.82666666666665
+                  ]
+                ],
+                "owner": {
+                  "x": 2.45,
+                  "y": 25.55,
+                  "kind": "prop",
+                  "sinArt": true
+                }
+              }
+            ]
+          },
+          {
+            "id": "sin-art:ep1b03:gWardrobe2",
+            "expectedRect": [
+              2,
+              2,
+              202,
+              445
+            ],
+            "expectedPosition": {
+              "x": 4.15,
+              "y": 25.55
+            },
+            "expectedPoints": [
+              [
+                -117.73788764044932,
+                331.33200000000005
+              ],
+              [
+                -62.358112359550454,
+                331.33200000000005
+              ],
+              [
+                -62.358112359550454,
+                453.33200000000005
+              ],
+              [
+                -117.73788764044932,
+                453.33200000000005
+              ]
+            ],
+            "commands": [
+              {
+                "sourceRect": [
+                  2,
+                  2,
+                  202,
+                  445
+                ],
+                "points": [
+                  [
+                    -117.73788764044932,
+                    331.33200000000005
+                  ],
+                  [
+                    -62.358112359550454,
+                    331.33200000000005
+                  ],
+                  [
+                    -62.358112359550454,
+                    453.33200000000005
+                  ],
+                  [
+                    -117.73788764044932,
+                    453.33200000000005
+                  ]
+                ],
+                "owner": {
+                  "x": 4.15,
+                  "y": 25.55,
+                  "kind": "prop",
+                  "sinArt": true
+                }
+              }
+            ]
+          },
+          {
+            "id": "sin-art:ep1b03:gMirror",
+            "expectedRect": [
+              775,
+              63,
+              297,
+              476
+            ],
+            "expectedPosition": {
+              "x": 5.95,
+              "y": 25.5
+            },
+            "expectedPoints": [
+              [
+                -72.29656737588638,
+                371.12043971631203
+              ],
+              [
+                -5.482099290779992,
+                371.12043971631203
+              ],
+              [
+                -5.482099290779992,
+                478.2035602836879
+              ],
+              [
+                -72.29656737588638,
+                478.2035602836879
+              ]
+            ],
+            "commands": [
+              {
+                "sourceRect": [
+                  775,
+                  63,
+                  297,
+                  476
+                ],
+                "points": [
+                  [
+                    -72.29656737588638,
+                    371.12043971631203
+                  ],
+                  [
+                    -5.482099290779992,
+                    371.12043971631203
+                  ],
+                  [
+                    -5.482099290779992,
+                    478.2035602836879
+                  ],
+                  [
+                    -72.29656737588638,
+                    478.2035602836879
+                  ]
+                ],
+                "owner": {
+                  "x": 5.95,
+                  "y": 25.5,
+                  "kind": "prop",
+                  "sinArt": true
+                }
+              }
+            ]
+          },
+          {
+            "id": "sin-art:ep1b03:gCabinet",
+            "expectedRect": [
+              764,
+              639,
+              324,
+              509
+            ],
+            "expectedPosition": {
+              "x": 9.4,
+              "y": 25.6
+            },
+            "expectedPoints": [
+              [
+                14.980983432736892,
+                405.52206759443345
+              ],
+              [
+                92.51768323392973,
+                405.52206759443345
+              ],
+              [
+                92.51768323392973,
+                527.3312657388999
+              ],
+              [
+                14.980983432736892,
+                527.3312657388999
+              ]
+            ],
+            "commands": [
+              {
+                "sourceRect": [
+                  764,
+                  639,
+                  324,
+                  509
+                ],
+                "points": [
+                  [
+                    14.980983432736892,
+                    405.52206759443345
+                  ],
+                  [
+                    92.51768323392973,
+                    405.52206759443345
+                  ],
+                  [
+                    92.51768323392973,
+                    527.3312657388999
+                  ],
+                  [
+                    14.980983432736892,
+                    527.3312657388999
+                  ]
+                ],
+                "owner": {
+                  "x": 9.4,
+                  "y": 25.6,
+                  "kind": "prop",
+                  "sinArt": true
+                }
+              }
+            ]
+          },
+          {
+            "id": "sin-art:ep1b03:gConsole",
+            "expectedRect": [
+              117,
+              668,
+              429,
+              464
+            ],
+            "expectedPosition": {
+              "x": 13.9,
+              "y": 25.7
+            },
+            "expectedPoints": [
+              [
+                121.33378165938875,
+                473.96616011644835
+              ],
+              [
+                229.51421834061142,
+                473.96616011644835
+              ],
+              [
+                229.51421834061142,
+                590.9725065502183
+              ],
+              [
+                121.33378165938875,
+                590.9725065502183
+              ]
+            ],
+            "commands": [
+              {
+                "sourceRect": [
+                  117,
+                  668,
+                  429,
+                  464
+                ],
+                "points": [
+                  [
+                    121.33378165938875,
+                    473.96616011644835
+                  ],
+                  [
+                    229.51421834061142,
+                    473.96616011644835
+                  ],
+                  [
+                    229.51421834061142,
+                    590.9725065502183
+                  ],
+                  [
+                    121.33378165938875,
+                    590.9725065502183
+                  ]
+                ],
+                "owner": {
+                  "x": 13.9,
+                  "y": 25.7,
+                  "kind": "prop",
+                  "sinArt": true
+                }
+              }
+            ]
+          },
+          {
+            "id": "sin-art:ep1b03:gSofaN",
+            "expectedRect": [
+              2,
+              451,
+              342,
+              242
+            ],
+            "expectedPosition": {
+              "x": 25.3,
+              "y": 25.75
+            },
+            "expectedPoints": [
+              [
+                431.24354820936645,
+                666.3846666666667
+              ],
+              [
+                547.3351184573003,
+                666.3846666666667
+              ],
+              [
+                547.3351184573003,
+                748.5313333333334
+              ],
+              [
+                431.24354820936645,
+                748.5313333333334
+              ]
+            ],
+            "commands": [
+              {
+                "sourceRect": [
+                  2,
+                  451,
+                  342,
+                  242
+                ],
+                "points": [
+                  [
+                    431.24354820936645,
+                    666.3846666666667
+                  ],
+                  [
+                    547.3351184573003,
+                    666.3846666666667
+                  ],
+                  [
+                    547.3351184573003,
+                    748.5313333333334
+                  ],
+                  [
+                    431.24354820936645,
+                    748.5313333333334
+                  ]
+                ],
+                "owner": {
+                  "x": 25.3,
+                  "y": 25.75,
+                  "kind": "prop",
+                  "sinArt": true
+                }
+              }
+            ]
+          },
+          {
+            "id": "sin-art:ep1b03:gTableN",
+            "expectedRect": [
+              348,
+              451,
+              238,
+              200
+            ],
+            "expectedPosition": {
+              "x": 25.3,
+              "y": 27.55
+            },
+            "expectedPoints": [
+              [
+                399.34686666666664,
+                705.9126666666666
+              ],
+              [
+                479.6798,
+                705.9126666666666
+              ],
+              [
+                479.6798,
+                773.4193333333333
+              ],
+              [
+                399.34686666666664,
+                773.4193333333333
+              ]
+            ],
+            "commands": [
+              {
+                "sourceRect": [
+                  348,
+                  451,
+                  238,
+                  200
+                ],
+                "points": [
+                  [
+                    399.34686666666664,
+                    705.9126666666666
+                  ],
+                  [
+                    479.6798,
+                    705.9126666666666
+                  ],
+                  [
+                    479.6798,
+                    773.4193333333333
+                  ],
+                  [
+                    399.34686666666664,
+                    773.4193333333333
+                  ]
+                ],
+                "owner": {
+                  "x": 25.3,
+                  "y": 27.55,
+                  "kind": "prop",
+                  "sinArt": true
+                }
+              }
+            ]
+          },
+          {
+            "id": "sin-art:ep1b03:gSofaW",
+            "expectedRect": [
+              416,
+              2,
+              339,
+              283
+            ],
+            "expectedPosition": {
+              "x": 1.75,
+              "y": 31.5
+            },
+            "expectedPoints": [
+              [
+                -378.4355948174322,
+                406.44333333333327
+              ],
+              [
+                -263.4710718492343,
+                406.44333333333327
+              ],
+              [
+                -263.4710718492343,
+                502.41666666666663
+              ],
+              [
+                -378.4355948174322,
+                502.41666666666663
+              ]
+            ],
+            "commands": [
+              {
+                "sourceRect": [
+                  416,
+                  2,
+                  339,
+                  283
+                ],
+                "points": [
+                  [
+                    -378.4355948174322,
+                    406.44333333333327
+                  ],
+                  [
+                    -263.4710718492343,
+                    406.44333333333327
+                  ],
+                  [
+                    -263.4710718492343,
+                    502.41666666666663
+                  ],
+                  [
+                    -378.4355948174322,
+                    502.41666666666663
+                  ]
+                ],
+                "owner": {
+                  "x": 1.75,
+                  "y": 31.5,
+                  "kind": "prop",
+                  "sinArt": true
+                }
+              }
+            ]
+          },
+          {
+            "id": "sin-art:ep1b03:gTableW",
+            "expectedRect": [
+              590,
+              451,
+              258,
+              199
+            ],
+            "expectedPosition": {
+              "x": 3.55,
+              "y": 31.5
+            },
+            "expectedPoints": [
+              [
+                -314.9379363484088,
+                459.798
+              ],
+              [
+                -227.41673031825803,
+                459.798
+              ],
+              [
+                -227.41673031825803,
+                527.3046666666667
+              ],
+              [
+                -314.9379363484088,
+                527.3046666666667
+              ]
+            ],
+            "commands": [
+              {
+                "sourceRect": [
+                  590,
+                  451,
+                  258,
+                  199
+                ],
+                "points": [
+                  [
+                    -314.9379363484088,
+                    459.798
+                  ],
+                  [
+                    -227.41673031825803,
+                    459.798
+                  ],
+                  [
+                    -227.41673031825803,
+                    527.3046666666667
+                  ],
+                  [
+                    -314.9379363484088,
+                    527.3046666666667
+                  ]
+                ],
+                "owner": {
+                  "x": 3.55,
+                  "y": 31.5,
+                  "kind": "prop",
+                  "sinArt": true
+                }
+              }
+            ]
           }
         ],
         "groundBefore": {
@@ -1113,7 +1923,7 @@
           "heroFaced": 0,
           "grounded": 0,
           "groundScans": 12,
-          "wallMoves": 9,
+          "wallMoves": 16,
           "shadowsMoved": 18,
           "groundPx": 0,
           "thrownPops": 0,
@@ -1124,7 +1934,7 @@
           "debris": 0,
           "dust": 0,
           "particles": 0,
-          "sunk": 30,
+          "sunk": 34,
           "parts": 0,
           "failures": 0,
           "lastError": null
@@ -1648,7 +2458,7 @@
           "heroFaced": 0,
           "grounded": 0,
           "groundScans": 12,
-          "wallMoves": 9,
+          "wallMoves": 16,
           "shadowsMoved": 18,
           "groundPx": 0,
           "thrownPops": 0,
@@ -1659,7 +2469,7 @@
           "debris": 0,
           "dust": 0,
           "particles": 0,
-          "sunk": 30,
+          "sunk": 34,
           "parts": 0,
           "failures": 0,
           "lastError": null
@@ -1672,7 +2482,7 @@
           "heroFaced": 0,
           "grounded": 0,
           "groundScans": 18,
-          "wallMoves": 14,
+          "wallMoves": 21,
           "shadowsMoved": 30,
           "groundPx": 0,
           "thrownPops": 0,
@@ -1683,7 +2493,7 @@
           "debris": 0,
           "dust": 0,
           "particles": 0,
-          "sunk": 44,
+          "sunk": 48,
           "parts": 0,
           "failures": 0,
           "lastError": null
@@ -1747,24 +2557,24 @@
             "id": "sin-art:ep1b05:backbar",
             "path": "assets/sin-rooms/lust-bar.png",
             "key": "backbar",
-            "x": 22,
-            "y": 7,
+            "x": 16.8,
+            "y": 6.95,
             "height": 170
           },
           {
             "id": "sin-art:ep1b05:booth",
             "path": "assets/sin-rooms/lust-bar.png",
             "key": "booth",
-            "x": 7.15,
-            "y": 13.8,
+            "x": 23.3,
+            "y": 8.5,
             "height": 165
           },
           {
             "id": "sin-art:ep1b05:trolley",
             "path": "assets/sin-rooms/lust-bar.png",
             "key": "trolley",
-            "x": 7.1,
-            "y": 18,
+            "x": 11.6,
+            "y": 14.7,
             "height": 112
           }
         ],
@@ -1858,24 +2668,24 @@
             "id": "sin-art:ep1b05:backbar",
             "path": "assets/sin-rooms/lust-bar.png",
             "key": "backbar",
-            "x": 22,
-            "y": 7,
+            "x": 16.8,
+            "y": 6.95,
             "height": 170
           },
           {
             "id": "sin-art:ep1b05:booth",
             "path": "assets/sin-rooms/lust-bar.png",
             "key": "booth",
-            "x": 7.15,
-            "y": 13.8,
+            "x": 23.3,
+            "y": 8.5,
             "height": 165
           },
           {
             "id": "sin-art:ep1b05:trolley",
             "path": "assets/sin-rooms/lust-bar.png",
             "key": "trolley",
-            "x": 7.1,
-            "y": 18,
+            "x": 11.6,
+            "y": 14.7,
             "height": 112
           }
         ],
@@ -2012,25 +2822,25 @@
               602
             ],
             "expectedPosition": {
-              "x": 22,
-              "y": 7
+              "x": 16.8,
+              "y": 6.95
             },
             "expectedPoints": [
               [
-                870.4831096196867,
-                304.6906935123043
+                728.0684429530202,
+                232.10069351230428
               ],
               [
-                962.5835570469799,
-                304.6906935123043
+                820.1688903803133,
+                232.10069351230428
               ],
               [
-                962.5835570469799,
-                444.34930648769574
+                820.1688903803133,
+                371.75930648769577
               ],
               [
-                870.4831096196867,
-                444.34930648769574
+                728.0684429530202,
+                371.75930648769577
               ]
             ],
             "commands": [
@@ -2043,25 +2853,25 @@
                 ],
                 "points": [
                   [
-                    870.4831096196867,
-                    304.6906935123043
+                    728.0684429530202,
+                    232.10069351230428
                   ],
                   [
-                    962.5835570469799,
-                    304.6906935123043
+                    820.1688903803133,
+                    232.10069351230428
                   ],
                   [
-                    962.5835570469799,
-                    444.34930648769574
+                    820.1688903803133,
+                    371.75930648769577
                   ],
                   [
-                    870.4831096196867,
-                    444.34930648769574
+                    728.0684429530202,
+                    371.75930648769577
                   ]
                 ],
                 "owner": {
-                  "x": 22,
-                  "y": 7,
+                  "x": 16.8,
+                  "y": 6.95,
                   "kind": "prop",
                   "sinArt": true
                 }
@@ -2077,25 +2887,25 @@
               548
             ],
             "expectedPosition": {
-              "x": 7.15,
-              "y": 13.8
+              "x": 23.3,
+              "y": 8.5
             },
             "expectedPoints": [
               [
-                389.51929397293975,
-                197.40586223862243
+                982.6832939729399,
+                347.4251955719557
               ],
               [
-                246.15803936039367,
-                197.40586223862243
+                839.3220393603937,
+                347.4251955719557
               ],
               [
-                246.15803936039367,
-                333.091471094711
+                839.3220393603937,
+                483.1108044280443
               ],
               [
-                389.51929397293975,
-                333.091471094711
+                982.6832939729399,
+                483.1108044280443
               ]
             ],
             "commands": [
@@ -2108,25 +2918,25 @@
                 ],
                 "points": [
                   [
-                    389.51929397293975,
-                    197.40586223862243
+                    982.6832939729399,
+                    347.4251955719557
                   ],
                   [
-                    246.15803936039367,
-                    197.40586223862243
+                    839.3220393603937,
+                    347.4251955719557
                   ],
                   [
-                    246.15803936039367,
-                    333.091471094711
+                    839.3220393603937,
+                    483.1108044280443
                   ],
                   [
-                    389.51929397293975,
-                    333.091471094711
+                    982.6832939729399,
+                    483.1108044280443
                   ]
                 ],
                 "owner": {
-                  "x": 7.15,
-                  "y": 13.8,
+                  "x": 23.3,
+                  "y": 8.5,
                   "kind": "prop",
                   "sinArt": true
                 }
@@ -2142,25 +2952,25 @@
               549
             ],
             "expectedPosition": {
-              "x": 7.1,
-              "y": 18
+              "x": 11.6,
+              "y": 14.7
             },
             "expectedPoints": [
               [
-                236.71578146101916,
-                298.13272191528546
+                452.4117814610191,
+                314.72472191528544
               ],
               [
-                163.9082185389811,
-                298.13272191528546
+                379.604218538981,
+                314.72472191528544
               ],
               [
-                163.9082185389811,
-                390.2326114180479
+                379.604218538981,
+                406.8246114180479
               ],
               [
-                236.71578146101916,
-                390.2326114180479
+                452.4117814610191,
+                406.8246114180479
               ]
             ],
             "commands": [
@@ -2173,25 +2983,25 @@
                 ],
                 "points": [
                   [
-                    236.71578146101916,
-                    298.13272191528546
+                    452.4117814610191,
+                    314.72472191528544
                   ],
                   [
-                    163.9082185389811,
-                    298.13272191528546
+                    379.604218538981,
+                    314.72472191528544
                   ],
                   [
-                    163.9082185389811,
-                    390.2326114180479
+                    379.604218538981,
+                    406.8246114180479
                   ],
                   [
-                    236.71578146101916,
-                    390.2326114180479
+                    452.4117814610191,
+                    406.8246114180479
                   ]
                 ],
                 "owner": {
-                  "x": 7.1,
-                  "y": 18,
+                  "x": 11.6,
+                  "y": 14.7,
                   "kind": "prop",
                   "sinArt": true
                 }
@@ -2207,7 +3017,7 @@
           "heroFaced": 0,
           "grounded": 0,
           "groundScans": 18,
-          "wallMoves": 14,
+          "wallMoves": 21,
           "shadowsMoved": 30,
           "groundPx": 0,
           "thrownPops": 0,
@@ -2218,7 +3028,7 @@
           "debris": 0,
           "dust": 0,
           "particles": 0,
-          "sunk": 44,
+          "sunk": 48,
           "parts": 0,
           "failures": 0,
           "lastError": null
@@ -2231,7 +3041,7 @@
           "heroFaced": 0,
           "grounded": 0,
           "groundScans": 24,
-          "wallMoves": 19,
+          "wallMoves": 26,
           "shadowsMoved": 36,
           "groundPx": 0,
           "thrownPops": 0,
@@ -2242,7 +3052,7 @@
           "debris": 0,
           "dust": 0,
           "particles": 0,
-          "sunk": 58,
+          "sunk": 62,
           "parts": 0,
           "failures": 0,
           "lastError": null
@@ -2756,7 +3566,7 @@
           "heroFaced": 0,
           "grounded": 0,
           "groundScans": 24,
-          "wallMoves": 19,
+          "wallMoves": 26,
           "shadowsMoved": 36,
           "groundPx": 0,
           "thrownPops": 0,
@@ -2767,7 +3577,7 @@
           "debris": 0,
           "dust": 0,
           "particles": 0,
-          "sunk": 58,
+          "sunk": 62,
           "parts": 0,
           "failures": 0,
           "lastError": null
@@ -2780,7 +3590,7 @@
           "heroFaced": 0,
           "grounded": 0,
           "groundScans": 29,
-          "wallMoves": 24,
+          "wallMoves": 31,
           "shadowsMoved": 48,
           "groundPx": 0,
           "thrownPops": 0,
@@ -2791,7 +3601,7 @@
           "debris": 0,
           "dust": 0,
           "particles": 0,
-          "sunk": 70,
+          "sunk": 74,
           "parts": 0,
           "failures": 0,
           "lastError": null
@@ -3495,7 +4305,7 @@
           "heroFaced": 0,
           "grounded": 0,
           "groundScans": 29,
-          "wallMoves": 24,
+          "wallMoves": 31,
           "shadowsMoved": 48,
           "groundPx": 0,
           "thrownPops": 0,
@@ -3506,7 +4316,7 @@
           "debris": 0,
           "dust": 0,
           "particles": 0,
-          "sunk": 70,
+          "sunk": 74,
           "parts": 0,
           "failures": 0,
           "lastError": null
@@ -3519,7 +4329,7 @@
           "heroFaced": 0,
           "grounded": 0,
           "groundScans": 34,
-          "wallMoves": 30,
+          "wallMoves": 37,
           "shadowsMoved": 66,
           "groundPx": 0,
           "thrownPops": 0,
@@ -3530,7 +4340,7 @@
           "debris": 0,
           "dust": 0,
           "particles": 0,
-          "sunk": 90,
+          "sunk": 94,
           "parts": 0,
           "failures": 0,
           "lastError": null
@@ -3544,10 +4354,10 @@
     "stats": {
       "layouts": 18,
       "rooms": 24,
-      "props": 104,
-      "draws": 156,
+      "props": 140,
+      "draws": 210,
       "hidden": 0,
-      "authoredCorrections": 52,
+      "authoredCorrections": 68,
       "wallMasksHidden": 0,
       "wallMasksRestored": 0,
       "errors": 0
@@ -3625,6 +4435,18 @@
           "booth"
         ],
         "loaded": true
+      },
+      {
+        "path": "assets/sin-rooms/envy-lounge.webp",
+        "cells": [
+          "wardrobeN",
+          "wardrobeW",
+          "sofaW",
+          "sofaN",
+          "tableN",
+          "tableW"
+        ],
+        "loaded": false
       }
     ],
     "current": {

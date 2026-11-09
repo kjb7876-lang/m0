@@ -78,9 +78,9 @@
    if(renderer.voidMaterialR81){renderer.voidMaterialR81.map=texture;renderer.voidMaterialR81.needsUpdate=true;}
   }).catch(e=>{if(renderer.brainLeaseR82===lease)renderer.brainErrorR82=String(e);});
  }
- // R446(사용자 2026-11-09 "저 검은공간처럼 유휴공간을 검게 처리"): 바닥 칸 밖(벽 너머·맵 바깥) 덮개와 바닥 높이 빈 판을 바닥처럼 보이던 벽 그림 색 대신 거의 검게.
- //  끄기: localStorage storyworld.r446.walls {"on":false}. 진짜 병원(hospitalCoreB2)은 그대로.
- let r446Void=true;try{const s=JSON.parse(localStorage.getItem('storyworld.r446.walls')||'null');if(s&&s.on===false)r446Void=false;}catch(_){}
+ // R452(사용자 2026-11-09 "저 검은공간처럼 유휴공간을 검게 처리"): 바닥 칸 밖(벽 너머·맵 바깥) 덮개와 바닥 높이 빈 판을 바닥처럼 보이던 벽 그림 색 대신 거의 검게.
+ //  끄기: localStorage storyworld.r452.walls {"on":false}. 진짜 병원(hospitalCoreB2)은 그대로.
+ let r452Void=true;try{const s=JSON.parse(localStorage.getItem('storyworld.r452.walls')||'null');if(s&&s.on===false)r452Void=false;}catch(_){}
  function finishRoof(renderer,L){const mesh=renderer.hospitalRoofMeshR2,m=renderer.hospitalRoofMaterialR2;if(!mesh||!m)return;
   const T=renderer.T,source=L.hospitalCoreB2?(renderer.hospitalWallMaterial||renderer.wallMaterial):(renderer.wallCapMaterial61||renderer.wallMaterial),tile=L.surface?.art?.tileWorld||4.5;
   if(source?.map&&renderer.roofSourceR82!==source.map){
@@ -88,7 +88,7 @@
    const map=source.map.clone();map.wrapS=map.wrapT=T.MirroredRepeatWrapping;map.needsUpdate=true;map.userData={...map.userData,r82SameWallSource:true};renderer.spatialResources.add(map);renderer.roofTextureR82=map;renderer.roofSourceR82=source.map;m.map=map;m.needsUpdate=true;stats.roofMaterials++;
   }
   if(source?.color)m.color.copy(source.color).multiplyScalar(.94);else m.color.set(palette(L).roof);
-  if(r446Void&&!L.hospitalCoreB2)m.color.setRGB(.011,.0095,.009);/* R446: 벽 밖 빈 공간(지붕 덮개)을 거의 검게 — 벽 윗면 테두리만 남고 밖은 어둠 */
+  if(r452Void&&!L.hospitalCoreB2)m.color.setRGB(.011,.0095,.009);/* R452: 벽 밖 빈 공간(지붕 덮개)을 거의 검게 — 벽 윗면 테두리만 남고 밖은 어둠 */
   const g=mesh.geometry;if(!g.userData.r82WallUV){const p=g.attributes.position,uv=[];for(let i=0;i<p.count;i++)uv.push(p.getX(i)/tile,-p.getZ(i)/tile);g.setAttribute('uv',new T.Float32BufferAttribute(uv,2));g.userData.r82WallUV=true;}
   mesh.userData.r82WallMatched=true;
  }
@@ -98,7 +98,7 @@
   for(const mesh of renderer.fogRows?.values()||[])mesh.visible=false;
   const view=(renderer.visibleTerrainBounds||L.bounds).map((v,i)=>i<2?Math.floor(v/8)*8-16:Math.ceil(v/8)*8+16),tag=view.join(':'),plan=window.__STORYWORLD_HOSPITAL_A5__?.plan(L);if(!plan)return;
   finishRoof(renderer,L);finishPerimeter(renderer,L);brainTexture(renderer);
-  if(renderer.voidMaterialR81)renderer.voidMaterialR81.color.setHex(r446Void&&!L.hospitalCoreB2?0x0d0b0b:0x817985);
+  if(renderer.voidMaterialR81)renderer.voidMaterialR81.color.setHex(r452Void&&!L.hospitalCoreB2?0x0d0b0b:0x817985);
   if(renderer.voidLayoutR81===L&&renderer.voidBoundsR81===tag&&renderer.voidMeshR81)return;
   if(renderer.voidMeshR81){renderer.spatialRoot.remove(renderer.voidMeshR81);renderer.voidMeshR81.geometry.dispose();}
   const T=renderer.T,rects=[...plan.roofRects,...outsideRects(L.bounds,view)];

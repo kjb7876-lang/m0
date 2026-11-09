@@ -32,7 +32,7 @@ check('사몽 lines: 3 in 4 rerouted through dense clusters, weighted, rest rand
 // ⑧ 강화 모음
 check('skill-upgrade collection: groups, levels, +1 buttons, tier/W/E/R bars, view toggle',/스킬 강화 모음/.test(P)&&/data-r115up/.test(P)&&/data-r115view/.test(P)&&/r115bar/.test(P));
 // ⑨ 벽
-check('non-samong walls: R446 one wall top (old varied/door-spike rule only when storyworld.r446.walls is off)',/r446Flat&&room\?\.id!=='ep1a08'\)h=Math\.max\(h0,DOOR\+\.15\)/.test(P)&&/DOOR\+\.45/.test(P)&&/L\.samongR103\|\|L\.samongR115/.test(P));
+check('non-samong walls: R452 one wall top (old varied/door-spike rule only when storyworld.r452.walls is off)',/r452Flat&&room\?\.id!=='ep1a08'\)h=Math\.max\(h0,DOOR\+\.15\)/.test(P)&&/DOOR\+\.45/.test(P)&&/L\.samongR103\|\|L\.samongR115/.test(P));
 // R413: 벽 높이는 3D 벽을 짓기 전에(draw 앞) 정하고, 높이가 바뀐 벽의 묵은 모양은 다시 쓰지 않는다
 {const seen=[];const t={idleGeometry:new Map(),idleGeometryBytes:20,geometryBytes:()=>10,activated:0,activateTerrain(row){this.activated++;}};
  const geo=h=>{const g={disposed:false,boundingBox:{min:{y:-h/2},max:{y:h/2}},dispose(){this.disposed=true;}};return g;};
@@ -42,7 +42,7 @@ check('non-samong walls: R446 one wall top (old varied/door-spike rule only when
   DOMPoint:class{constructor(x,y){this.x=x;this.y=y;}},console,Math,JSON,Object,Array,Number,String,Boolean,Set,Map,WeakMap,WeakSet,RegExp,Error};
  sb.window=sb;sb.window.__STORYWORLD_PHASE1__={controller:{state:{three:t}}};vm.createContext(sb);vm.runInContext(P,sb);const A=sb.__STORYWORLD_PLAY_R115__;
  sb.draw();const first=seen[0]||[];
- check('R413/R446: walls are raised before the first 3D draw builds them (not on a later tick), all to one top (2.85, taller walls kept, no jitter / door spikes)',first.length===3&&first[0]===2.85&&first[1]===2.85&&first[2]===3.4&&first[2]===L.walls[2].height&&L.walls[0].r115Wall===1.3&&L.walls[1].r115Wall===2.7,JSON.stringify(first));
+ check('R413/R452: walls are raised before the first 3D draw builds them (not on a later tick), all to one top (2.85, taller walls kept, no jitter / door spikes)',first.length===3&&first[0]===2.85&&first[1]===2.85&&first[2]===3.4&&first[2]===L.walls[2].height&&L.walls[0].r115Wall===1.3&&L.walls[1].r115Wall===2.7,JSON.stringify(first));
  const old=geo(1.3),ok=geo(L.walls[1].height);t.idleGeometry.set('wall:w1',old);t.idleGeometry.set('wall:w2',ok);
  t.activateTerrain({descriptor:{terrain:L.walls}});
  check('R413: a cached wall shape built at the old height is dropped so the engine rebuilds it (no floating wall); fitting shapes are kept',

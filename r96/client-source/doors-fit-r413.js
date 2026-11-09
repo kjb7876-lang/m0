@@ -7,7 +7,7 @@
 //  사몽(R83 꺼짐)은 그대로. 끄기: localStorage['storyworld.r413.doors']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_DOORS_FIT_R413__)return;
-const REV='R446-doors-6',KEY='storyworld.r413.doors',JAMB=.24,MIN_GAP=.04,MAX_TOP=4.2;
+const REV='R452-doors-6',KEY='storyworld.r413.doors',JAMB=.24,MIN_GAP=.04,MAX_TOP=4.2;
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const stats={lintels:0,skipped:0,culled:0,errors:0};let lastError=null,last=null;const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 const R83=()=>window.__STORYWORLD_WORLD_DOORS_R83__,R74=()=>window.__STORYWORLD_WORLD_R74__;
@@ -39,7 +39,7 @@ function lintel(p,r){const T=R83(),d=p?.r74Door,DOOR_H=Number(T?.doorHeight?.())
  const paint=()=>{ctx.save();try{patch(wall,art.wallRect,ps,'r413-lintel');}finally{ctx.restore();}};
  ctx.save();try{const m=ctx.getTransform();ctx.setTransform(m.a,m.b,m.c,m.d,0,0);if(typeof ctx.scope==='function')ctx.scope(owner,paint);else paint();}finally{ctx.restore();}
  stats.lintels++;last={room:r.id,door:d.id,top,gap:+(top-DOOR_H).toFixed(3),width:+width.toFixed(2)};return true;}
-// R446(사용자 2026-11-09 "문위에 벽이조금 감싸는 형태로 해서 벽을뚫고 문을 만든느낌나게 문이랑 벽이랑 이어진느낌"): 문 위 상인방을 그림 띠 대신
+// R452(사용자 2026-11-09 "문위에 벽이조금 감싸는 형태로 해서 벽을뚫고 문을 만든느낌나게 문이랑 벽이랑 이어진느낌"): 문 위 상인방을 그림 띠 대신
 //  옆 문설주 벽 3D 메시를 그대로 복제(같은 재질·두께·윗면)해 문 폭만큼 줄이고 문틀 위(2.4)~벽 윗선 높이로 눌러 문 위에 얹는다 → 벽이 문 위를 감싸
 //  벽을 뚫고 낸 문처럼 이어진다. 옆 벽 메시가 아직 없으면(청크 미적재) 예전 그림 띠로 그린다. 그림만(충돌·문 열림·길찾기 그대로).
 const L3=new Map();let L3room=null;stats.lintels3d=0;
@@ -48,12 +48,12 @@ function wallRowAt(t,L,x,y,spanX){let best=null;for(const w of L.walls||[]){if(!
 function clear3d(t){for(const m of L3.values()){try{m.parent?.remove(m);m.geometry?.dispose?.();}catch(_){}}L3.clear();}
 function lintel3d(r,L,d,top,DH){try{const t=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(!t?.spatialRoot||!t.wallRows||!t.T)return false;
  if(L3room!==L){clear3d(t);L3room=L;}const key=d.id||[d.x,d.y].join(':');const have=L3.get(key);
- const hs=have?.userData?.r446Src;if(have&&have.userData.r446Top===top&&have.parent===t.spatialRoot&&hs&&t.wallRows.get?.(have.userData.r446SrcId)?.mesh===hs){/* R446: 원본 문설주 벽이 다시 만들어지거나 가림 재질이 바뀌면 그대로 따라간다 */if(have.material!==hs.material)have.material=hs.material;have.visible=true;return true;}if(have){have.parent?.remove(have);have.geometry?.dispose?.();L3.delete(key);}
+ const hs=have?.userData?.r452Src;if(have&&have.userData.r452Top===top&&have.parent===t.spatialRoot&&hs&&t.wallRows.get?.(have.userData.r452SrcId)?.mesh===hs){/* R452: 원본 문설주 벽이 다시 만들어지거나 가림 재질이 바뀌면 그대로 따라간다 */if(have.material!==hs.material)have.material=hs.material;have.visible=true;return true;}if(have){have.parent?.remove(have);have.geometry?.dispose?.();L3.delete(key);}
  const spanX=d.axis!=='x',jam=ends(d).map(([x,y])=>wallRowAt(t,L,x,y,spanX)).filter(Boolean);if(!jam.length)return false;const src=jam.sort((a,b)=>a.w.height-b.w.height)[0],m0=src.mesh,g0=m0.geometry;
  if(!g0.boundingBox)g0.computeBoundingBox();const bb=g0.boundingBox,sx=bb.max.x-bb.min.x,sz=bb.max.z-bb.min.z,sy=bb.max.y-bb.min.y;if(!(sy>.2))return false;
  const span=(d.axis==='x'?d.depth:d.width)+.04,hgt=top-DH;if(!(hgt>.04))return false;const alongX=sx>=sz;if(Math.abs(m0.rotation.y)>.01&&Math.abs(Math.abs(m0.rotation.y)-Math.PI)>.01)return false;if(alongX!==spanX)return false;
  const g=g0.clone();g.translate(-(bb.min.x+bb.max.x)/2,-(bb.min.y+bb.max.y)/2,-(bb.min.z+bb.max.z)/2);g.scale(alongX?span/sx:1,hgt/sy,alongX?1:span/sz);g.computeBoundingBox();g.computeBoundingSphere();
- const m=new t.T.Mesh(g,m0.material);m.position.set(d.x,DH+hgt/2,d.y);m.rotation.copy(m0.rotation);m.layers.mask=m0.layers.mask;m.renderOrder=m0.renderOrder;m.name='r446-lintel:'+key;m.userData={r446Top:top,r446Src:m0,r446SrcId:src.w.id,presentationOnly:true};
+ const m=new t.T.Mesh(g,m0.material);m.position.set(d.x,DH+hgt/2,d.y);m.rotation.copy(m0.rotation);m.layers.mask=m0.layers.mask;m.renderOrder=m0.renderOrder;m.name='r452-lintel:'+key;m.userData={r452Top:top,r452Src:m0,r452SrcId:src.w.id,presentationOnly:true};
  t.spatialRoot.add(m);L3.set(key,m);stats.lintels3d++;return true;}catch(e){fail(e);return false;}}
 if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){const out=base.apply(this,[p,...a]);try{if(L3.size&&typeof room!=='undefined'&&room?.exploration!==L3room){clear3d();L3room=room?.exploration||null;}if(on&&p?.r74Door&&typeof room!=='undefined'&&R83()?.enabled?.(room,p))lintel(p,room);}catch(e){fail(e);}return out;};}
 function set(v){on=v!==false;if(!on){try{clear3d();L3room=null;}catch(_){}}try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}
