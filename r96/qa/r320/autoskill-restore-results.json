@@ -1,0 +1,259 @@
+{
+  "method": "CPU: shipped native serialize/restore functions and mobile restore wrapper, isolated VM/DOM and synthetic legacy saves. Not browser or natural play.",
+  "checks": [
+    {
+      "name": "desktop OFF after fresh boot: async backend does not publish the option early",
+      "passed": true
+    },
+    {
+      "name": "desktop OFF after fresh boot: restored option",
+      "passed": true,
+      "detail": {
+        "expected": false,
+        "actual": false
+      }
+    },
+    {
+      "name": "desktop OFF after fresh boot: saved boolean remains serializable",
+      "passed": true
+    },
+    {
+      "name": "desktop OFF after fresh boot: auto basic and guide remain independent",
+      "passed": true,
+      "detail": {
+        "auto": false,
+        "guide": false
+      }
+    },
+    {
+      "name": "desktop OFF after fresh boot: normal new-game entry is untouched",
+      "passed": true
+    },
+    {
+      "name": "desktop ON after prior OFF: async backend does not publish the option early",
+      "passed": true
+    },
+    {
+      "name": "desktop ON after prior OFF: restored option",
+      "passed": true,
+      "detail": {
+        "expected": true,
+        "actual": true
+      }
+    },
+    {
+      "name": "desktop ON after prior OFF: saved boolean remains serializable",
+      "passed": true
+    },
+    {
+      "name": "desktop ON after prior OFF: auto basic and guide remain independent",
+      "passed": true,
+      "detail": {
+        "auto": true,
+        "guide": false
+      }
+    },
+    {
+      "name": "desktop ON after prior OFF: normal new-game entry is untouched",
+      "passed": true
+    },
+    {
+      "name": "legacy missing field uses fresh default: async backend does not publish the option early",
+      "passed": true
+    },
+    {
+      "name": "legacy missing field uses fresh default: restored option",
+      "passed": true,
+      "detail": {
+        "expected": true,
+        "actual": true
+      }
+    },
+    {
+      "name": "legacy missing field uses fresh default: saved boolean remains serializable",
+      "passed": true
+    },
+    {
+      "name": "legacy missing field uses fresh default: auto basic and guide remain independent",
+      "passed": true,
+      "detail": {
+        "auto": false,
+        "guide": false
+      }
+    },
+    {
+      "name": "legacy missing field uses fresh default: normal new-game entry is untouched",
+      "passed": true
+    },
+    {
+      "name": "legacy missing settings keeps current preference: async backend does not publish the option early",
+      "passed": true
+    },
+    {
+      "name": "legacy missing settings keeps current preference: restored option",
+      "passed": true,
+      "detail": {
+        "expected": false,
+        "actual": false
+      }
+    },
+    {
+      "name": "legacy missing settings keeps current preference: saved boolean remains serializable",
+      "passed": true
+    },
+    {
+      "name": "legacy missing settings keeps current preference: auto basic and guide remain independent",
+      "passed": true,
+      "detail": {
+        "auto": false,
+        "guide": false
+      }
+    },
+    {
+      "name": "legacy missing settings keeps current preference: normal new-game entry is untouched",
+      "passed": true
+    },
+    {
+      "name": "legacy string is not coerced: async backend does not publish the option early",
+      "passed": true
+    },
+    {
+      "name": "legacy string is not coerced: restored option",
+      "passed": true,
+      "detail": {
+        "expected": true,
+        "actual": true
+      }
+    },
+    {
+      "name": "legacy string is not coerced: saved boolean remains serializable",
+      "passed": true
+    },
+    {
+      "name": "legacy string is not coerced: auto basic and guide remain independent",
+      "passed": true,
+      "detail": {
+        "auto": false,
+        "guide": false
+      }
+    },
+    {
+      "name": "legacy string is not coerced: normal new-game entry is untouched",
+      "passed": true
+    },
+    {
+      "name": "legacy numeric field is not coerced: async backend does not publish the option early",
+      "passed": true
+    },
+    {
+      "name": "legacy numeric field is not coerced: restored option",
+      "passed": true,
+      "detail": {
+        "expected": false,
+        "actual": false
+      }
+    },
+    {
+      "name": "legacy numeric field is not coerced: saved boolean remains serializable",
+      "passed": true
+    },
+    {
+      "name": "legacy numeric field is not coerced: auto basic and guide remain independent",
+      "passed": true,
+      "detail": {
+        "auto": false,
+        "guide": false
+      }
+    },
+    {
+      "name": "legacy numeric field is not coerced: normal new-game entry is untouched",
+      "passed": true
+    },
+    {
+      "name": "mobile explicit OFF keeps existing precedence: async backend does not publish the option early",
+      "passed": true
+    },
+    {
+      "name": "mobile explicit OFF keeps existing precedence: restored option",
+      "passed": true,
+      "detail": {
+        "expected": false,
+        "actual": false
+      }
+    },
+    {
+      "name": "mobile explicit OFF keeps existing precedence: saved boolean remains serializable",
+      "passed": true
+    },
+    {
+      "name": "mobile explicit OFF keeps existing precedence: auto basic and guide remain independent",
+      "passed": true,
+      "detail": {
+        "auto": false,
+        "guide": false
+      }
+    },
+    {
+      "name": "mobile explicit OFF keeps existing precedence: normal new-game entry is untouched",
+      "passed": true
+    },
+    {
+      "name": "mobile explicit ON keeps existing precedence: async backend does not publish the option early",
+      "passed": true
+    },
+    {
+      "name": "mobile explicit ON keeps existing precedence: restored option",
+      "passed": true,
+      "detail": {
+        "expected": true,
+        "actual": true
+      }
+    },
+    {
+      "name": "mobile explicit ON keeps existing precedence: saved boolean remains serializable",
+      "passed": true
+    },
+    {
+      "name": "mobile explicit ON keeps existing precedence: auto basic and guide remain independent",
+      "passed": true,
+      "detail": {
+        "auto": false,
+        "guide": false
+      }
+    },
+    {
+      "name": "mobile explicit ON keeps existing precedence: normal new-game entry is untouched",
+      "passed": true
+    },
+    {
+      "name": "validation rejection: rejection is preserved",
+      "passed": true
+    },
+    {
+      "name": "validation rejection: rejected restore does not overwrite option",
+      "passed": true
+    },
+    {
+      "name": "late backend rejection: rejection is preserved",
+      "passed": true
+    },
+    {
+      "name": "late backend rejection: rejected restore does not overwrite option",
+      "passed": true
+    },
+    {
+      "name": "save schema/version is unchanged",
+      "passed": true
+    },
+    {
+      "name": "overlay installs once",
+      "passed": true
+    },
+    {
+      "name": "reloading overlay does not duplicate restore wrappers",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "total": 47
+}
