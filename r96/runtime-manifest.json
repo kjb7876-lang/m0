@@ -32863,6 +32863,11 @@
       "sha256": "5eb46b1d466fd2b4c3b5ee6dbf12e2148292a82ed842626d7ae2f2eb806a3058"
     },
     {
+      "path": "battle-beats-r450.js",
+      "bytes": 8630,
+      "sha256": "a549a2705a72236ccd5a30298bb873a439e00166ec10d6a2b332a67f60b4e658"
+    },
+    {
       "path": "betrayal-video-r368.js",
       "bytes": 14711,
       "sha256": "7c93a3ec51cb2b80492560842cf87847b38ef3bc11bc6b801e9cbc70139319bc"
@@ -32909,13 +32914,13 @@
     },
     {
       "path": "bossroom-tidy-r438.js",
-      "bytes": 6788,
-      "sha256": "3186529a679460f8bf5d5548ce12276df7695f29a6ad63c0bee313a728f2cd7a"
+      "bytes": 7006,
+      "sha256": "a65a4c7b138967a152e9b8368af1e4936464883c5b4b40b9c5816487c8e11bda"
     },
     {
       "path": "cave-r204.js",
-      "bytes": 123606,
-      "sha256": "2689a920fdf36817b1a17de4b5f35810711c596b27e3d4d2ae5e81de40f6da01"
+      "bytes": 129700,
+      "sha256": "9d29057ada666d47e8d2c7b4cc6c9db95b4dbc81b2c4006b78161d986fbdea8f"
     },
     {
       "path": "chunks/ep1a08-0-0.json",
@@ -33408,9 +33413,9 @@
       "sha256": "bce051ffa93b213817e50bacc4f5d4b0556c814357205616809583cfeb84d327"
     },
     {
-      "path": "cinema-run-r451.js",
-      "bytes": 13621,
-      "sha256": "dc25ed6b3e8428b35cc93cca1655cb5d4fcbaba45d6405da54fcabf360c10990"
+      "path": "cinema-run-r454.js",
+      "bytes": 16286,
+      "sha256": "0b326edac804a6bceeb45f9a0d26d25b0e2b3db78694722df56a35e62e0f9fa6"
     },
     {
       "path": "cinema-sync-r384.js",
@@ -33429,8 +33434,8 @@
     },
     {
       "path": "combat-r118.js",
-      "bytes": 25661,
-      "sha256": "a4b6c761a6efb393fa165c357684519dde0b6334f746ff967e0cef6dff2ecad1"
+      "bytes": 25826,
+      "sha256": "ef88feaf041770ed631ec94837d5fd7e2adc20147467a04646972999b31c05b4"
     },
     {
       "path": "combat-r137.js",
@@ -33544,8 +33549,8 @@
     },
     {
       "path": "doors-fit-r413.js",
-      "bytes": 6199,
-      "sha256": "37814a0f2b2ed31c2b4f1fea2794c7c46b384a1dab72c7a99cdb135f60e91553"
+      "bytes": 9625,
+      "sha256": "8c5245fc2e07de373931b53fa52264c5cd2ef63db4ba737e6445cde96e50db44"
     },
     {
       "path": "doors-r189.js",
@@ -33859,8 +33864,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6571723,
-      "sha256": "df1e15458bc8ae210d5640257002c5bbfdefbad650b5521f34435b5c9b72a42e"
+      "bytes": 6571770,
+      "sha256": "bf5e0756398dddc51710ce1a73dfc9ed5a465dbcad98aab83b4af07fa07c7adb"
     },
     {
       "path": "intro-r140.js",
@@ -34169,8 +34174,8 @@
     },
     {
       "path": "play-r115.js",
-      "bytes": 29471,
-      "sha256": "42854be1ddffbc98f43f45baa1e47582b786c7ac86012b47e0bca5785272e0b1"
+      "bytes": 30042,
+      "sha256": "ec28e89f8fda38cef5ad82659eb534773373a225ed300121df60fd04e658bf47"
     },
     {
       "path": "play-r169.js",
@@ -34379,8 +34384,8 @@
     },
     {
       "path": "sin-room-art.js",
-      "bytes": 21384,
-      "sha256": "133f857207384b8191536117384ed8932847b4c48b7b966e9b07b53ee98fb78c"
+      "bytes": 21460,
+      "sha256": "a9700651cf1cb4c7b5ebe31d327ec3197981e937d0084c46f2f4052ecc8641c6"
     },
     {
       "path": "skill-attack-r440.js",
@@ -34644,8 +34649,8 @@
     },
     {
       "path": "world-doors-r83.js",
-      "bytes": 14746,
-      "sha256": "1bdf66b7540696e54ce7b44f7eae36c80ff9b6e8396bcc3031035035b2ad1151"
+      "bytes": 15521,
+      "sha256": "0033bf272ba8b316d1818950c4f084d8ab1abc9b61f498b63597bc7d849be68a"
     },
     {
       "path": "world-environment-r81.js",
@@ -34664,8 +34669,8 @@
     },
     {
       "path": "world-presentation-r81.js",
-      "bytes": 14117,
-      "sha256": "dc8a937df213812fe4b171dc130eb743a5b10905e9a565c7ba966ed52692cfc9"
+      "bytes": 14880,
+      "sha256": "667c6b089c1014dcb4d41450a36c288926287722767458134722bea878a74cb7"
     },
     {
       "path": "world-r98.js",
@@ -34688,9 +34693,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6937,
-  "totalBytes": 1091801600,
-  "webHTMLSha256": "df1e15458bc8ae210d5640257002c5bbfdefbad650b5521f34435b5c9b72a42e",
+  "fileCount": 6938,
+  "totalBytes": 1091825030,
+  "webHTMLSha256": "bf5e0756398dddc51710ce1a73dfc9ed5a465dbcad98aab83b4af07fa07c7adb",
   "largest": [
     {
       "path": "index.html",

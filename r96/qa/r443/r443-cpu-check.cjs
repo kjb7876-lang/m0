@@ -24,7 +24,7 @@ ok('trees, uprights and boulders keep out of the door band',(cave.match(/nearDoo
  const sb={console,Math,JSON,Set,Map,WeakMap,Promise,Float32Array,Uint8Array,Int32Array,Array,Object,Number,String,Error,performance:{now:()=>0},setInterval:()=>0,localStorage:{_:{},getItem(k){return this._[k]??null;},setItem(k,v){this._[k]=v;}},
   window:{StoryPhase1:{ThreeRenderer:Object.assign(function(){},{prototype:{render(){}}}),attachSight24(){}}}};
  vm.createContext(sb);vm.runInContext(`var room=null,player={x:4.5,y:4.5};function blocked(){return false;}function makeRoom(id){return {id,layer:'STORY',props:[],enemies:[],exploration:null};}async function enterRegion(){return true;}`,sb);
- vm.runInContext(cave,sb);const API=sb.window.__STORYWORLD_CAVE_R204__;ok('cave API + revision',API&&/^R443-/.test(API.revision));
+ vm.runInContext(cave,sb);const API=sb.window.__STORYWORLD_CAVE_R204__;ok('cave API + revision',API&&/^R4(43|51)-/.test(API.revision));
  // 가상 지도: 큰 방 + 가운데로 뾰족하게 파고드는 1칸 폭 바위 혀(양옆이 바닥)
  const cells=[];for(let y=2;y<=22;y++)for(let x=2;x<=26;x++){if(x===14&&y>=2&&y<=12)continue;if((x===13||x===15)&&y<=6)continue;cells.push([x,y]);}
  const ex={bounds:[0,0,30,26],floorCells:cells,walls:[],entrance:{x:4.5,y:20.5},worldR74:{doors:[]}};
