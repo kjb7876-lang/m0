@@ -3,7 +3,8 @@
 //  풀이 경계에 겹쳐 자라고, 길 한가운데는 비어 있다.
 //  · 그림: 이미 게임에 쓰는 승인 자산 두 장만 — 늪 수초 덩어리(r138 weed)와 그 반대 방향 배치본(r257 weed-opp). 늘이기·회전·뒤집기 없이
 //    크기만 바꾼다(r207·r257 규칙). 새 그림이 아니므로 최종 아트가 아니다 — 덤불·꽃·잔돌 묶음은 Dots 요청 목록으로 남긴다.
-//  · 어디에: R450 PLACE 표의 실외(out) 지역 중 풀이 자랄 곳(정원·늪·해안·석조 폐허·마을; 잿더미는 마른 풀로 드물게).
+//  · 어디에: R450 PLACE 표의 실외(out) 지역 중 풀이 자랄 곳(정원·늪·해안·석조 폐허; 잿더미는 마른 풀로 드물게). 포장된 도시(교차로·옥상)와
+//    바닥이 옛 지도 그림인 쉼터·마을은 빼고, 바닥이 세계 층(R81)으로 그려지는 곳만.
 //    실내·동굴·기억 공간·눈·기계·대장간에는 놓지 않는다(사용자 2026-11-09 "실내 실외구분도 잘해야해").
 //  · 자리: 바닥 칸의 바깥 변(이웃이 바닥이 아닌 변)을 따라 반 칸마다 확률로 덩어리(1~3 포기)를 둔다.
 //    R204 둔덕 지형이 있는 지역은 그 거리장으로 둔덕 윗면 가장자리(경계선을 넘어 늘어짐) 또는 절벽 밑(바닥 쪽 0.2~0.4칸)에,
@@ -14,7 +15,7 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_GROUND_FRINGE_R452__)return;
 const A=window.StoryPhase1,C=A?.ThreeRenderer?.prototype;if(!A||!C)return;
-const REV='R452-fringe-2',KEY='storyworld.r452.fringe';
+const REV='R452-fringe-3',KEY='storyworld.r452.fringe';
 let prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');if(typeof s.on==='boolean')prefs.on=s.on;}catch(_){}
 const stats={builds:0,rebuilds:0,quads:0,spots:0,skippedPath:0,skippedAvoid:0,buildMs:0,errors:0};let lastError=null,disposed=false;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
@@ -37,7 +38,13 @@ const PPU=34*Math.SQRT2,MAX_QUADS=1500;
 function familyOf(r){try{const L=r?.exploration,z=typeof zone!=='undefined'?zone:null;
   return L?.surface?.art?.r81Environment||L?.worldWardR81?.environment?.family||window.__STORYWORLD_ENVIRONMENT_R81__?.specs?.[z]?.family||'regional';}catch(_){return'regional';}}
 function placeOf(r){try{const f=window.__STORYWORLD_WEATHER_R450__?.placeOf;if(typeof f==='function')return f(r)?.kind||null;}catch(_){}return null;}
-function specFor(r){const kind=placeOf(r);if(kind!=='out')return null;return FAM[familyOf(r)]||null;}
+// 포장된 도시(비 그친 교차로의 횡단보도·젖은 도로, 청록빌라 옥상)는 R81 이 색 묶음으로 '해안'에 넣었을 뿐 풀이 자랄 땅이 아니다(독립 심사 지적: 난간·차선을 따라 늪 수초).
+const NO_FRINGE=new Set(['murder01','murder03']);
+// 바닥이 세계 층(R81 길·R82 피난처·병원 B2)으로 그려지는 곳만 — 쉼터·마을(R78 안전 지역)은 바닥 대부분이 1번 층 옛 지도 그림이라
+//  바닥 칸 가장자리와 그림 속 가장자리가 맞지 않고, R451 국지 조명도 그곳은 맡지 않는다(예전 모습 그대로).
+function floorOwned(L){if(!L?.floorCells?.length)return false;try{const f=window.__STORYWORLD_WORLD_PRESENTATION_R81__?.eligible;if(typeof f==='function')return !!f(L);}catch(_){}
+ return !!(L.hospitalCoreB2||L.worldWardR81||L.refugeR82);}
+function specFor(r){const kind=placeOf(r);if(kind!=='out'||NO_FRINGE.has(r?.id)||!floorOwned(r?.exploration))return null;return FAM[familyOf(r)]||null;}
 
 // ---- 그림 묶음(두 장을 한 캔버스에) --------------------------------------------------------------------------------
 let artState='idle',atlas=null;
@@ -136,6 +143,6 @@ const timer=typeof setInterval==='function'?setInterval(wrapAll,500):0;wrapAll()
 function set(p={}){if(typeof p.on==='boolean')prefs.on=p.on;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}
  try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(r?.__r452?.mesh)r.__r452.mesh.visible=prefs.on;}catch(_){}return{...prefs};}
 function dispose(){disposed=true;if(timer)clearInterval(timer);try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(r?.__r452)drop(r,r.__r452);if(r)r.__r452=null;}catch(_){}}
-window.__STORYWORLD_GROUND_FRINGE_R452__=Object.freeze({revision:REV,storageKey:KEY,families:FAM,art:ART,plan,set,dispose,
+window.__STORYWORLD_GROUND_FRINGE_R452__=Object.freeze({revision:REV,storageKey:KEY,families:FAM,art:ART,plan,specFor,noFringe:[...NO_FRINGE],set,dispose,
  inspect:()=>{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three,st=r?.__r452;return{revision:REV,prefs:{...prefs},art:artState,zone:st?.zone||null,skip:st?.skip||null,withField:!!st?.withField,quads:st?.mesh?stats.quads:0,rebuilds:st?.rebuilds||0,stats:{...stats},lastError,collisionChanged:false,gameplayChanged:false,finalArt:false};}});
 })();

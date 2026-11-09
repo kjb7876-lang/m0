@@ -11,7 +11,7 @@
 // 화면 표현만 바꾼다. 충돌·피해·저장·서사·맵 순서는 그대로. 게임 ctx.filter 는 쓰지 않는다(3D 장면 물체만).
 (()=>{'use strict';
 if(window.__STORYWORLD_WEATHER_R450__)return;
-const REV='R450-weather-2',KEY='storyworld.r450.weather';
+const REV='R450-weather-3',KEY='storyworld.r450.weather';
 const DEFAULTS=Object.freeze({on:true,precip:true,splash:true,dust:true});
 let prefs={...DEFAULTS};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s)for(const k in DEFAULTS)if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
@@ -86,6 +86,9 @@ const PLACE=Object.freeze({
  cult04:['in','교주의 옥좌'],village:['out','완료된 꿈의 마을 광장']});
 // 불타는 호텔은 실내지만 정본이 불길 속이라 재·불티는 그대로 날린다.
 const INDOOR_ASH=new Set(['ep1b07']);
+// 검은 공방(kair07)은 실내라 재는 내리지 않지만, 화덕이 정본 불길(R451 도 불꽃을 그대로 두는 곳)이라 R300 화덕 불티(오르는 불씨)는 남긴다
+//  — 정본 재('같은 잿더미로')를 실내 규칙이 '없음'으로 바꾼 것을 "먼지 한 톨 없었다"(ep1b03)와 같이 읽어 불티까지 꺼지던 것(독립 심사 지적, main 에는 불티가 있었다).
+const EMBER_IN=new Set(['kair07']);
 function placeOf(r){if(!r)return{kind:'out',why:'',source:'none'};const sz=samongZone(r);
  if(!sz&&PLACE[r.id])return{kind:PLACE[r.id][0],why:PLACE[r.id][1],source:'table'};
  let ind=false;try{const f=window.__STORYWORLD_PROPS_PLACE_R406__?.indoorOf;if(typeof f==='function')ind=!!f(r);else ind=r?.exploration?.worldR74?.mode==='indoor';}catch(_){}
@@ -234,7 +237,7 @@ function update(r,frame){const o=r.__r450;if(!o)return;
 // ---- R300 떠도는 입자·안개 조절 훅 ---------------------------------------------------------------------------
 // R300 update 가 부른다. 돌려주는 값: {motes:false | {color,rise,k}, fog:{k,color}} 또는 null(그대로).
 function r300(r,samong){try{if(disposed||!prefs.on||!r)return null;const w=pick(r),spec=SPEC[w.kind]||{};const out={};
-  if(spec.precip==='snow'||w.kind==='none'&&w.source==='canon')out.motes=false;          // 눈 지역은 눈송이가, "먼지 한 톨 없었다"는 아무것도
+  if(spec.precip==='snow'||w.kind==='none'&&w.source==='canon'&&!EMBER_IN.has(r.id))out.motes=false;   // 눈 지역은 눈송이가, "먼지 한 톨 없었다"는 아무것도
   else if(spec.dust)out.motes=false;                                                       // 실내·동굴: R300 불티 대신 빛 둘레 먼지
   else if(!samong&&MOTE[w.family])out.motes=MOTE[w.family];
   if(spec.fog)out.fog=spec.fog;return out;}catch(e){fail(e);return null;}}

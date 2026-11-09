@@ -11,7 +11,7 @@
 //  끄기: 설정 '영웅·몹 빛 맞춤 (R453)' 또는 localStorage['storyworld.r453.actorTone']='{"on":false}'.
 (()=>{'use strict';
 if(window.__STORYWORLD_ACTOR_TONE_R453__)return;
-const REV='R453-actor-tone-2',KEY='storyworld.r453.actorTone';
+const REV='R453-actor-tone-3',KEY='storyworld.r453.actorTone';
 const DEFAULTS=Object.freeze({on:true,rim:true});
 let prefs={...DEFAULTS};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');for(const k in DEFAULTS)if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={frames:0,actors:0,toned:0,ghosts:0,rimmed:0,patched:0,sharedSkips:0,errors:0};let lastError=null,disposed=false;
@@ -54,15 +54,19 @@ const ACTOR=new Set(['hero','enemy']);
 // R448 실루엣(가려진 영웅을 앞 조형물 덮개 위에 .58 로 한 번 더 그린 것)도 영웅과 같은 빛·테를 받아야 조형물 뒤로 갈 때만 영웅이 밝아지지 않는다.
 //  기록기가 실루엣의 주인을 effect 로 바꾸고 id·r448 표시는 버리므로(실측: owner={kind,groundAligned,x,y,…}) 줄 열쇠(명령 key 'r448:ghost:…')로 알아본다.
 //  주인 x·y 는 영웅 것 그대로다. 오라·결계 같은 다른 효과 줄은 스스로 빛나는 것이라 건드리지 않는다.
-const R448_GHOST='r448:ghost:';
-function actorKind(key,ow){if(!ow)return null;if(ACTOR.has(ow.kind))return ow.kind;return ow.kind==='effect'&&typeof key==='string'&&key.startsWith(R448_GHOST)?'hero':null;}
+//  R350 '영웅 다시 보이기'(이펙트가 영웅을 많이 가리면 몸 명령을 맨 뒤에 반투명으로 한 번 더, 열쇠 'r350:ghost:…')도 같은 몸 그림이라 같이 맞춘다.
+const GHOST_KEYS=Object.freeze(['r448:ghost:','r350:ghost:']);
+function actorKind(key,ow){if(!ow)return null;if(ACTOR.has(ow.kind))return ow.kind;return ow.kind==='effect'&&typeof key==='string'&&GHOST_KEYS.some(p=>key.startsWith(p))?'hero':null;}
+// 몸 그림은 보통 섞기(source-over → NormalBlending 1)다. 영웅·몹 범위 안에서 그린 효과(표적 고리·결계·오라 — texture() 의 'screen' → CustomBlending)는
+//  스스로 빛나는 것이라 빛 맞춤·채도·테를 주지 않는다(독립 심사 지적: 어두운 곳에서 표적 고리·결계가 흐려짐 — 전투 정보).
+const bodyBlend=m=>m.blending===undefined||m.blending===1;
 const GL_TOKEN={};
 function wrapGL(r){const gl=r.renderer;if(!gl||gl.r453Wrapped===GL_TOKEN)return;const base=gl.render;
  gl.render=function(scene,camera){const restore=[];
   // 영웅·몹 몸 그림은 대개 덧그림 층(3, 깊이 지운 뒤)에, 벽 뒤 등은 세계 층(2)에 있다 — 두 그리기 모두에서 그 층에 있는 줄만 맞춘다.
   try{const pass=camera?.layers?.mask;if(scene===r.scene&&camera===r.camera&&(pass===4||pass===8)){const on=owns();if(pass===8)stats.frames++;const seenMat=new Set(),seenF=new Set(),dpr=typeof gl.getPixelRatio==='function'?gl.getPixelRatio():1;
     for(const [key,row] of r.commands?.rows?.entries?.()||[]){const ow=row?.geometryState?.owner,mesh=row?.mesh,m=mesh?.material,kind=actorKind(key,ow);
-     if(!kind||!m||!m.map||!m.color||ow.groundAligned===true||!mesh.visible||!(mesh.layers.mask&pass)||!finite(ow.x+ow.y))continue;
+     if(!kind||!m||!m.map||!m.color||!bodyBlend(m)||ow.groundAligned===true||!mesh.visible||!(mesh.layers.mask&pass)||!finite(ow.x+ow.y))continue;
      stats.actors++;let u=patched.get(m);
      if(!on){if(u)u.r453RimK.value=0;continue;}
      if(!u&&prefs.rim)u=patch(m);
@@ -89,6 +93,6 @@ function settingsSection(){const panel=typeof document!=='undefined'&&document.g
  panel.appendChild(s);s.querySelectorAll('[data-r453]').forEach(el=>{el.checked=!!prefs[el.dataset.r453];el.onchange=()=>set({[el.dataset.r453]:el.checked});});}
 if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const r=base.apply(this,a);try{if(!disposed)settingsSection();}catch(e){fail(e);}return r;};}
 function dispose(){disposed=true;if(timer)clearInterval(timer);}
-window.__STORYWORLD_ACTOR_TONE_R453__=Object.freeze({revision:REV,storageKey:KEY,prefs:()=>({...prefs}),set,toneOf,satOf,dispose,pure:Object.freeze({toneOf,satOf,patch,actorKind,RIM_GLSL,TMIN,TMAX,SAT}),
+window.__STORYWORLD_ACTOR_TONE_R453__=Object.freeze({revision:REV,storageKey:KEY,prefs:()=>({...prefs}),set,toneOf,satOf,dispose,pure:Object.freeze({toneOf,satOf,patch,actorKind,bodyBlend,GHOST_KEYS,RIM_GLSL,TMIN,TMAX,SAT}),
  inspect:()=>({revision:REV,prefs:{...prefs},owns:owns(),stats:{...stats},lastError,assetsChanged:false,shadowsAdded:false,gameplayChanged:false,GPUVerified:false})});
 })();

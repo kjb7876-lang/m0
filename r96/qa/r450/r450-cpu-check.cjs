@@ -17,6 +17,9 @@ ok('canon weather: blizzard forest, storm coast, drizzle field',K('ep1b06b').kin
 ok('indoors never rains or snows (dust instead)',ZONES63.filter(z=>P(z)==='in').every(z=>!['rain','drizzle','snow','blizzard','storm'].includes(K(z).kind)));
 ok('burning hotel keeps falling ash indoors (canon: inside the fire)',K('ep1b07').kind==='ash');
 ok('black workshop (indoor) gets no falling ash',K('kair07').kind!=='ash');
+// 독립 심사 지적: 실내 규칙이 정본 재를 '없음'으로 바꾸자 "먼지 한 톨 없었다"(ep1b03)와 같이 읽혀 R300 화덕 불티까지 꺼졌다 — 검은 공방은 정본 불길 자리라 불티는 남긴다.
+{const F=(id,fam)=>api.r300({id,exploration:{surface:{art:{r81Environment:fam}}}});const k7=F('kair07','forge'),b3=F('ep1b03','domestic');
+ ok('black workshop keeps the R300 forge embers (canon fire, main had them); "not a speck of dust" room still has none',k7&&k7.motes&&k7.motes.rise>0&&Math.abs(k7.motes.color[0]-1)<1e-9&&b3&&b3.motes===false,{k7,b3});}
 ok('hospital: dust under fluorescent light (canon line)',K('ep1a08').kind==='dust'&&/형광등/.test(K('ep1a08').why));
 ok('void spaces get no precipitation',['u204','u203','kair08'].every(z=>!['rain','drizzle','snow','blizzard','storm','ash'].includes(K(z).kind)));
 {const s=C('weather-r450.js');ok('rain streaks + splashes are double-sided (were culled)',(s.match(/side:T\.DoubleSide/g)||[]).length>=2);

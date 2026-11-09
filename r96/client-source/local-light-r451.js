@@ -7,19 +7,20 @@
 //   1) 진짜 광원만 모은다 — R92 세움 등(색 포함)·R91 벽 등·불 소품(R123 isLight)·제단. 종류별 색: 불꽃(따뜻·깜빡)·등잔·전구(고른 텅스텐)·형광등(임상, 차갑게)·
 //      기계(파랑)·꿈(보라)·성소(금빛). 실내 규칙(사용자 2026-11-08 "실내엔 불(화염) 없게, 있어도 전구등") — 실내의 불꽃 광원은 전구 빛으로 바꾼다.
 //   2) 지역마다 한 번 세계 좌표 조명맵(칸당 4텍셀)을 굽는다 — 걸을 수 있는 칸으로만 퍼지는 거리(다익스트라)라 벽 너머로 새지 않고, 모퉁이를 돌면 빨리 약해진다.
+//      광원마다 제 몫을 따로 구워 더하므로, 등 몇 개만 바뀌면(걷는 중 R91 벽 등이 청크 따라 다시 놓일 때 등) 그 등 둘레 타일만 다시 굽는다.
 //   3) 지형 재질(바닥·벽·덩어리 지형·벽 장식·바닥 무늬)에 셰이더 몇 줄을 붙여 색 × (지역 바탕빛 + 조명맵 + 영웅 둘레 빛) — 1 을 넘어 실제로 밝힌다.
 //      벽 옆면은 그 앞 바닥 칸의 빛을 받고(높을수록 약하게), 벽 윗면·지붕은 바탕빛 위주(검은 덩어리 → 길·방이 또렷). R89 색 보정 다음에 곱한다.
 //   4) 바닥 소품(그림 명령)은 발밑 빛으로 색을 곱한다(R89 가 하던 소품 어둡게를 대신). 영웅·몹은 R453 이 같은 빛을 받아 맞춘다.
 //   5) R451 이 켜져 있을 때만 R89 화면 빛 사각형·R300 지역 어둡게·빛 웅덩이·R123 가짜 불빛 타원을 쉰다(끄면 예전 그대로).
 //      R335 원형 어둠(사용자가 고른 기본)은 그대로 두고, 먼 등불 자리만 구멍을 내 어둠 속 불빛이 보이게 한다.
-//  본편(STORY)에서만 — 사몽(DREAM)·시야 제한(횃불·손전등) 모드는 예전 빛을 쓴다. 끄기: 설정 '국지 조명 (R451)' 또는 localStorage['storyworld.r451.localLight']='{"on":false}'.
+//  본편(STORY)에서만, 바닥이 세계 층(R81)으로 그려지는 지역만 — 사몽(DREAM)·시야 제한(횃불·손전등) 모드·쉼터·마을은 예전 빛을 쓴다. 끄기: 설정 '국지 조명 (R451)' 또는 localStorage['storyworld.r451.localLight']='{"on":false}'.
 (()=>{'use strict';
 if(window.__STORYWORLD_LOCAL_LIGHT_R451__)return;
 const A=window.StoryPhase1,C=A?.ThreeRenderer?.prototype;if(!A||!C)return;
-const REV='R451-local-light-3',KEY='storyworld.r451.localLight';
+const REV='R451-local-light-4',KEY='storyworld.r451.localLight';
 const DEFAULTS=Object.freeze({on:true,flicker:true});
 let prefs={...DEFAULTS};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');for(const k in DEFAULTS)if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
-const stats={frames:0,owned:0,bakes:0,bakeMs:0,lights:0,lightsUsed:0,blockers:0,texels:0,patched:0,rowsLit:0,coversLit:0,holes:0,stutters:0,errors:0};let lastError=null,disposed=false;
+const stats={frames:0,owned:0,bakes:0,bakeMs:0,deltas:0,deltaMs:0,deltaMaxMs:0,deltaLights:0,deltaTiles:0,lights:0,lightsUsed:0,blockers:0,texels:0,patched:0,scans:0,sigScans:0,rowsLit:0,coversLit:0,holes:0,stutters:0,errors:0};let lastError=null,disposed=false;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),smooth=(a,b,x)=>{const t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t);},finite=v=>Number.isFinite(v);
 
@@ -70,11 +71,13 @@ const REACH=Object.freeze({out:Object.freeze({k:1.12,r:1.25}),cave:Object.freeze
 // 숨긴 소품(r303Hide: R303 문 곁·R412 벽 속·R449 공간 정리로 쉬는 R224 가구 — 화로 r80-039 포함)은 그려지지 않으니 빛도 내지 않는다.
 const isLightProp=p=>{if(!p||p.r303Hide)return false;try{const f=window.__STORYWORLD_DARK_R123__?.isLight;return typeof f==='function'&&!!f(p);}catch(_){return false;}};
 
-// 진짜 광원 목록(지역·소품 수·숨긴 소품 수가 바뀔 때만 다시 만든다 — R449 는 방을 처음 볼 때 R224 가구를 숨기고 제 가구를 붙인다)
+// 진짜 광원 목록(지역·소품 수·숨긴 소품 수·등 자리가 바뀔 때만 다시 만든다 — R449 는 방을 처음 볼 때 R224 가구를 숨기고 제 가구를 붙인다)
+//  R91 벽 등은 지금 불러온 청크의 벽에만 놓이므로 걸으면 자리가 바뀐다(개수가 같아도) — 자리 해시로 알아챈다. 다시 굽기는 바뀐 등 몫만(bakeDelta).
 let lightCache=null;
+function posHash(ps){let h=ps.length|0;for(const p of ps)h=Math.imul(h,31)+Math.round((+p.x||0)*100)*7919+Math.round((+p.y||0)*100)|0;return h;}
 function collect(r){const L=r?.exploration;if(!L)return[];const r92=window.__STORYWORLD_VISUAL_R92__,r91=window.__STORYWORLD_VISUAL_R91__,T412=window.__STORYWORLD_PROPS_TIDY_R412__;
  let hid=0;for(const p of r.props||[])if(p&&p.r303Hide)hid++;
- const p92=r92?.lightPoints?.()||[],p91=r91?.lightPoints?.()||[],sig=[typeof zone!=='undefined'?zone:'',r.props?.length||0,hid,p92.length,p91.length,T412?.ver?.()||0,!!r.altar].join('|');
+ const p92=r92?.lightPoints?.()||[],p91=r91?.lightPoints?.()||[],sig=[typeof zone!=='undefined'?zone:'',r.props?.length||0,hid,posHash(p92),posHash(p91),T412?.ver?.()||0,!!r.altar].join('|');
  if(lightCache&&lightCache.room===r&&lightCache.layout===L&&lightCache.sig===sig)return lightCache.list;
  const fam=familyOf(r),place=placeKind(r),indoor=place==='in',fireOk=FIRE_OK.has(r.id),G=REACH[place]||REACH.out,list=[];
  const add=(x,y,label,color,src)=>{if(!finite(x)||!finite(y))return;if(list.some(q=>Math.hypot(q.x-x,q.y-y)<.6))return;const type=classify(label,fam,indoor,color,fireOk),T=TYPE[type];
@@ -95,8 +98,11 @@ function collect(r){const L=r?.exploration;if(!L)return[];const r92=window.__STO
 //  depth 를 '두께'로 읽으면 벽 둘레 5칸이 통째로 막혀 빛이 퍼지지 못한다(R451-1 실측: 벽 등 8개가 하나도 안 켜짐).
 //  허리 아래 가구 충돌(높이 1.2 미만: 조리대·수레 등)은 빛을 막지 않는다. 반 텍셀 넓혀 .24 얇은 벽도 텍셀 두 줄로 막는다.
 const LMAX=2,LOW_BLOCK=1.2;
-function heapPush(h,d,i){h.push([d,i]);let k=h.length-1;while(k>0){const p=(k-1)>>1;if(h[p][0]<=h[k][0])break;[h[p],h[k]]=[h[k],h[p]];k=p;}}
-function heapPop(h){const top=h[0],last=h.pop();if(h.length){h[0]=last;let k=0;for(;;){const l=2*k+1,r=l+1;let m=k;if(l<h.length&&h[l][0]<h[m][0])m=l;if(r<h.length&&h[r][0]<h[m][0])m=r;if(m===k)break;[h[m],h[k]]=[h[k],h[m]];k=m;}}return top;}
+// 다익스트라 더미(거리·텍셀 번호): 형식 배열 하나를 돌려 쓴다 — 칸마다 [d,i] 배열을 만들면 쓰레기 수거로 프레임이 튄다.
+let HD=new Float64Array(8192),HI=new Int32Array(8192),HN=0,HPD=0,DS=new Float64Array(8192);
+function hPush(d,i){if(HN>=HD.length){const nd=new Float64Array(HD.length*2),ni=new Int32Array(HD.length*2);nd.set(HD);ni.set(HI);HD=nd;HI=ni;}
+ let k=HN++;while(k>0){const p=(k-1)>>1;if(HD[p]<=d)break;HD[k]=HD[p];HI[k]=HI[p];k=p;}HD[k]=d;HI[k]=i;}
+function hPop(){const top=HI[0];HPD=HD[0];HN--;if(HN>0){const d=HD[HN],i=HI[HN];let k=0;for(;;){const l=2*k+1;if(l>=HN)break;const r=l+1,m=r<HN&&HD[r]<HD[l]?r:l;if(HD[m]>=d)break;HD[k]=HD[m];HI[k]=HI[m];k=m;}HD[k]=d;HI[k]=i;}return top;}
 function wallBox(w){if(!w||w.decorative)return null;if(finite(w.height)&&w.height<LOW_BLOCK)return null;
  if(finite(w.x+w.y+w.width+w.depth)&&w.width>0&&w.depth>0)return[w.x-w.width/2,w.y-w.depth/2,w.x+w.width/2,w.y+w.depth/2];
  if(Array.isArray(w.endpoints)&&w.endpoints.length===2){const[a,b]=w.endpoints,t=(finite(w.thickness)?w.thickness:.24)/2;if(!finite(a[0]+a[1]+b[0]+b[1]))return null;
@@ -114,38 +120,61 @@ function grid(L){const cells=L?.floorCells;if(!Array.isArray(cells)||!cells.leng
 // 씨앗 → 텍셀 직선이 열린 텍셀만 지나는지(반 텍셀 걸음). 벽은 늘 텍셀 두 줄 이상이라 대각선으로 새지 않는다.
 function seen(open,W,sx,sy,tx,ty){const dx=tx-sx,dy=ty-sy,n=Math.ceil(Math.max(Math.abs(dx),Math.abs(dy))*2);for(let s=1;s<n;s++){const f=s/n;if(!open[Math.floor(sy+dy*f)*W+Math.floor(sx+dx*f)])return false;}return true;}
 const bell=t=>t>=1?0:(1-t*t)*(1-t*t)*.72+(1-t)*(1-t)*(1-t)*.28;   // 종 모양 + 가까운 곳 조금 더 진하게
-// 순수 계산(텍스처 없이) — qa/r451 이 직접 시험한다. L: {floorCells, walls}, lights: [{x,y,r,k,color}] → {G, acc(rgb), used}
-function bakeAcc(L,lights){const G=grid(L);if(!G)return null;const{W,H,S,gx0,gy0,open}=G,acc=new Float32Array(W*H*3),dist=new Float64Array(W*H);/* 거리는 64비트 — 32비트로 반올림되면 꺼낸 값이 저장값보다 커져 'd>dist[k]' 로 건너뛴다 */
- const N8=[[1,0,1],[-1,0,1],[0,1,1],[0,-1,1],[1,1,Math.SQRT2],[1,-1,Math.SQRT2],[-1,1,Math.SQRT2],[-1,-1,Math.SQRT2]];let used=0;
- for(const l of lights){const R=l.r*S,lx=(l.x-gx0)*S,ly=(l.y-gy0)*S,i0=Math.max(0,Math.floor(lx-R-2)),i1=Math.min(W-1,Math.ceil(lx+R+2)),j0=Math.max(0,Math.floor(ly-R-2)),j1=Math.min(H-1,Math.ceil(ly+R+2));
-  for(let j=j0;j<=j1;j++)dist.fill(Infinity,j*W+i0,j*W+i1+1);
-  // 씨앗: 광원 텍셀 하나. 막혔으면(벽 등·벽 붙은 소품) 1.5칸 안에서 가장 가까운 열린 텍셀 하나 — 여러 개를 심으면 얇은 벽 너머로 샌다.
-  const h=[],seedR=1.5*S,li=Math.floor(lx),lj=Math.floor(ly);let sk=-1,sd=Infinity;
-  if(li>=0&&lj>=0&&li<W&&lj<H&&open[lj*W+li]){sk=lj*W+li;sd=Math.hypot(li+.5-lx,lj+.5-ly);}
-  else for(let j=Math.max(j0,Math.floor(ly-seedR));j<=Math.min(j1,Math.ceil(ly+seedR));j++)for(let i=Math.max(i0,Math.floor(lx-seedR));i<=Math.min(i1,Math.ceil(lx+seedR));i++){const k=j*W+i;if(!open[k])continue;
-   const d=Math.hypot(i+.5-lx,j+.5-ly);if(d<=seedR&&d<sd){sd=d;sk=k;}}
-  if(sk<0)continue;used++;dist[sk]=sd;heapPush(h,sd,sk);
-  while(h.length){const[d,k]=heapPop(h);if(d>dist[k])continue;const i=k%W,j=(k-i)/W;
-   for(const[di,dj,c]of N8){const ni=i+di,nj=j+dj;if(ni<i0||nj<j0||ni>i1||nj>j1)continue;const nk=nj*W+ni;if(!open[nk])continue;
-    if(di&&dj&&(!open[j*W+ni]||!open[nj*W+i]))continue;                       // 대각선으로 벽 모서리를 깎아 지나가지 않는다
-    const nd=d+c;if(nd<dist[nk]&&nd<=R){dist[nk]=nd;heapPush(h,nd,nk);}}}
-  // 보이는 텍셀은 직선거리(둥근 웅덩이·빛 그림자 경계), 모퉁이 뒤는 돌아간 거리로 약하게(반사광 정도)만.
-  const si=sk%W,sj=(sk-si)/W,sx=si+.5,sy=sj+.5,cr=l.color[0]*l.k,cg=l.color[1]*l.k,cb=l.color[2]*l.k;
-  for(let j=j0;j<=j1;j++)for(let i=i0;i<=i1;i++){const k=j*W+i,d=dist[k];if(!(d<=R))continue;const e=sd+Math.hypot(i+.5-sx,j+.5-sy);let f;
-   if(e<=R&&seen(open,W,sx,sy,i+.5,j+.5))f=bell(e/R);else f=bell(d/R)*.3*Math.exp(-Math.max(0,d-e)/(S*.9));
-   if(f>0){acc[k*3]+=cr*f;acc[k*3+1]+=cg*f;acc[k*3+2]+=cb*f;}}}
- // 한 번 부드럽게(열린 텍셀끼리만 [1,2,1]²) — 빛 그림자 경계가 계단처럼 보이지 않게, 벽 너머로는 섞지 않는다.
- const sm=new Float32Array(W*H*3),KW=[1,2,1];
- for(let j=0;j<H;j++)for(let i=0;i<W;i++){const k=j*W+i;if(!open[k])continue;let ws=0,a0=0,a1=0,a2=0;
-  for(let dj=-1;dj<=1;dj++){const y=j+dj;if(y<0||y>=H)continue;for(let di=-1;di<=1;di++){const x=i+di;if(x<0||x>=W)continue;const q=y*W+x;if(!open[q])continue;const w=KW[di+1]*KW[dj+1];ws+=w;a0+=acc[q*3]*w;a1+=acc[q*3+1]*w;a2+=acc[q*3+2]*w;}}
-  sm[k*3]=a0/ws;sm[k*3+1]=a1/ws;sm[k*3+2]=a2/ws;}
- acc.set(sm);
- return{G,acc,used};}
+const NDI=[1,-1,0,0,1,1,-1,-1],NDJ=[0,0,1,-1,1,-1,1,-1],NDC=[1,1,1,1,Math.SQRT2,Math.SQRT2,Math.SQRT2,Math.SQRT2],KW=[1,2,1],TILE=32;
+// 광원 하나의 몫(제 상자 안만): 걸을 수 있는 텍셀로만 퍼지는 거리(다익스트라) + 보이는 곳은 직선거리. → {i0,j0,i1,j1,bw,data(rgb)} 또는 null(묻힌 등)
+function lightContrib(G,l){const{W,H,S,gx0,gy0,open}=G,R=l.r*S,lx=(l.x-gx0)*S,ly=(l.y-gy0)*S;if(!(R>0)||!finite(lx+ly))return null;
+ const i0=Math.max(0,Math.floor(lx-R-2)),i1=Math.min(W-1,Math.ceil(lx+R+2)),j0=Math.max(0,Math.floor(ly-R-2)),j1=Math.min(H-1,Math.ceil(ly+R+2));if(i1<i0||j1<j0)return null;
+ // 씨앗: 광원 텍셀 하나. 막혔으면(벽 등·벽 붙은 소품) 1.5칸 안에서 가장 가까운 열린 텍셀 하나 — 여러 개를 심으면 얇은 벽 너머로 샌다.
+ const seedR=1.5*S,li=Math.floor(lx),lj=Math.floor(ly);let sk=-1,sd=Infinity;
+ if(li>=0&&lj>=0&&li<W&&lj<H&&open[lj*W+li]){sk=lj*W+li;sd=Math.hypot(li+.5-lx,lj+.5-ly);}
+ else for(let j=Math.max(j0,Math.floor(ly-seedR));j<=Math.min(j1,Math.ceil(ly+seedR));j++)for(let i=Math.max(i0,Math.floor(lx-seedR));i<=Math.min(i1,Math.ceil(lx+seedR));i++){const k=j*W+i;if(!open[k])continue;
+  const d=Math.hypot(i+.5-lx,j+.5-ly);if(d<=seedR&&d<sd){sd=d;sk=k;}}
+ if(sk<0)return null;
+ const bw=i1-i0+1,n=bw*(j1-j0+1),si=sk%W,sj=(sk-si)/W;if(DS.length<n)DS=new Float64Array(n*2);const dist=DS;dist.fill(Infinity,0,n);/* 거리는 64비트 — 32비트로 반올림되면 꺼낸 값이 저장값보다 커져 'd>dist' 로 건너뛴다 */
+ dist[(sj-j0)*bw+si-i0]=sd;HN=0;hPush(sd,sk);
+ while(HN>0){const k=hPop(),d=HPD,i=k%W,j=(k-i)/W;if(d>dist[(j-j0)*bw+i-i0])continue;
+  for(let q=0;q<8;q++){const di=NDI[q],dj=NDJ[q],ni=i+di,nj=j+dj;if(ni<i0||nj<j0||ni>i1||nj>j1)continue;const nk=nj*W+ni;if(!open[nk])continue;
+   if(di&&dj&&(!open[j*W+ni]||!open[nj*W+i]))continue;                        // 대각선으로 벽 모서리를 깎아 지나가지 않는다
+   const nd=d+NDC[q],nl=(nj-j0)*bw+ni-i0;if(nd<dist[nl]&&nd<=R){dist[nl]=nd;hPush(nd,nk);}}}
+ // 보이는 텍셀은 직선거리(둥근 웅덩이·빛 그림자 경계), 모퉁이 뒤는 돌아간 거리로 약하게(반사광 정도)만.
+ const sx=si+.5,sy=sj+.5,cr=l.color[0]*l.k,cg=l.color[1]*l.k,cb=l.color[2]*l.k,data=new Float32Array(n*3);
+ for(let j=j0;j<=j1;j++)for(let i=i0;i<=i1;i++){const q=(j-j0)*bw+i-i0,d=dist[q];if(!(d<=R))continue;const e=sd+Math.hypot(i+.5-sx,j+.5-sy);let f;
+  if(e<=R&&seen(open,W,sx,sy,i+.5,j+.5))f=bell(e/R);else f=bell(d/R)*.3*Math.exp(-Math.max(0,d-e)/(S*.9));
+  if(f>0){data[q*3]=cr*f;data[q*3+1]=cg*f;data[q*3+2]=cb*f;}}
+ return{i0,j0,i1,j1,bw,data};}
+// 몫 상자(+부드럽게 할 1텍셀)가 닿는 타일(32×32 텍셀) 번호들
+function markTiles(G,c,set){const nx=Math.ceil(G.W/TILE);for(let ty=Math.floor(Math.max(0,c.j0-1)/TILE);ty<=Math.floor(Math.min(G.H-1,c.j1+1)/TILE);ty++)for(let tx=Math.floor(Math.max(0,c.i0-1)/TILE);tx<=Math.floor(Math.min(G.W-1,c.i1+1)/TILE);tx++)set.add(ty*nx+tx);}
+// 타일 하나를 다시: (타일+1텍셀) 범위에 광원 몫을 더하고, 열린 텍셀끼리만 [1,2,1]² 로 부드럽게 → acc. 빛 그림자 경계가 계단처럼 보이지 않게, 벽 너머로는 섞지 않는다.
+function smoothTile(G,acc,cs,t){const{W,H,open}=G,nx=Math.ceil(W/TILE),tx=t%nx,ty=(t-tx)/nx,x0=tx*TILE,y0=ty*TILE,x1=Math.min(W-1,x0+TILE-1),y1=Math.min(H-1,y0+TILE-1);
+ const rx0=Math.max(0,x0-1),ry0=Math.max(0,y0-1),rx1=Math.min(W-1,x1+1),ry1=Math.min(H-1,y1+1),rw=rx1-rx0+1,raw=new Float32Array(rw*(ry1-ry0+1)*3);
+ for(const c of cs){const a0=Math.max(rx0,c.i0),a1=Math.min(rx1,c.i1),b0=Math.max(ry0,c.j0),b1=Math.min(ry1,c.j1);if(a1<a0||b1<b0)continue;
+  for(let j=b0;j<=b1;j++){let s=((j-c.j0)*c.bw+a0-c.i0)*3,d=((j-ry0)*rw+a0-rx0)*3;for(let i=a0;i<=a1;i++,s+=3,d+=3){raw[d]+=c.data[s];raw[d+1]+=c.data[s+1];raw[d+2]+=c.data[s+2];}}}
+ for(let j=y0;j<=y1;j++)for(let i=x0;i<=x1;i++){const k=j*W+i;if(!open[k]){acc[k*3]=acc[k*3+1]=acc[k*3+2]=0;continue;}let ws=0,a0=0,a1=0,a2=0;
+  for(let dj=-1;dj<=1;dj++){const y=j+dj;if(y<0||y>=H)continue;for(let di=-1;di<=1;di++){const x=i+di;if(x<0||x>=W||!open[y*W+x])continue;const w=KW[di+1]*KW[dj+1],q=((y-ry0)*rw+x-rx0)*3;ws+=w;a0+=raw[q]*w;a1+=raw[q+1]*w;a2+=raw[q+2]*w;}}
+  acc[k*3]=a0/ws;acc[k*3+1]=a1/ws;acc[k*3+2]=a2/ws;}}
+const lightKey=l=>(+l.x).toFixed(2)+','+(+l.y).toFixed(2)+','+l.type+','+(+l.k).toFixed(3)+','+(+l.r).toFixed(2)+','+l.color.map(v=>(+v).toFixed(2)).join(':');
+// 바뀐 빛만 다시: 빠진 등·새 등의 상자가 닿는 타일만 다시 더하고 부드럽게 한다(나머지 몫은 그대로 재사용). 결과는 처음부터 구운 것과 같다(qa/r451 검사).
+//  예전엔 등 하나만 바뀌어도 지역 전체를 다시 구웠다 — R91 벽 등이 청크 따라 다시 놓일 때마다 걷는 중에 30~60ms 멈춤(독립 심사 실측: 걸으면 굽기 4→14번).
+function bakeDelta(B,lights){const G=B.G,next=new Map(),dirty=new Set();let added=0,removed=0;
+ for(const l of lights){const key=lightKey(l);if(next.has(key))continue;if(B.contribs.has(key)){next.set(key,B.contribs.get(key));continue;}
+  const c=lightContrib(G,l);next.set(key,c);if(c){added++;markTiles(G,c,dirty);}}
+ for(const[key,c]of B.contribs)if(c&&!next.has(key)){removed++;markTiles(G,c,dirty);}
+ B.contribs=next;const cs=[...next.values()].filter(Boolean);B.used=cs.length;for(const t of dirty)smoothTile(G,B.acc,cs,t);
+ return{added,removed,tiles:dirty};}
+// 순수 계산(텍스처 없이) — qa/r451 이 직접 시험한다. L: {floorCells, walls}, lights: [{x,y,r,k,color}] → {G, acc(rgb), used, contribs, tiles}
+function bakeAcc(L,lights){const G=grid(L);if(!G)return null;const B={G,acc:new Float32Array(G.W*G.H*3),contribs:new Map(),used:0};B.tiles=bakeDelta(B,lights).tiles;return B;}
+function encodeTiles(G,acc,data,tiles){const{W,H}=G,nx=Math.ceil(W/TILE),s=255/LMAX;
+ for(const t of tiles){const tx=t%nx,ty=(t-tx)/nx,x0=tx*TILE,y0=ty*TILE,x1=Math.min(W-1,x0+TILE-1),y1=Math.min(H-1,y0+TILE-1);
+  for(let j=y0;j<=y1;j++)for(let i=x0;i<=x1;i++){const k=j*W+i;data[k*4]=Math.min(255,acc[k*3]*s);data[k*4+1]=Math.min(255,acc[k*3+1]*s);data[k*4+2]=Math.min(255,acc[k*3+2]*s);}}}
 function bake(o,r,rm,lights){const t0=performance.now(),B=bakeAcc(rm.exploration,lights);if(!B)return false;const{G,acc,used}=B,{W,H,S,gx0,gy0,open}=G;
- const data=new Uint8Array(W*H*4);for(let k=0;k<W*H;k++){data[k*4]=Math.min(255,acc[k*3]*255/LMAX);data[k*4+1]=Math.min(255,acc[k*3+1]*255/LMAX);data[k*4+2]=Math.min(255,acc[k*3+2]*255/LMAX);data[k*4+3]=open[k]?255:0;}
+ const data=new Uint8Array(W*H*4);for(let k=0;k<W*H;k++)data[k*4+3]=open[k]?255:0;encodeTiles(G,acc,data,B.tiles);
  const T=r.T;o.tex?.dispose?.();const tex=new T.DataTexture(data,W,H,T.RGBAFormat);tex.magFilter=T.LinearFilter;tex.minFilter=T.LinearFilter;tex.wrapS=tex.wrapT=T.ClampToEdgeWrapping;tex.generateMipmaps=false;tex.needsUpdate=true;
- o.tex=tex;o.grid={W,H,S,gx0,gy0,open,acc};U.r451Map.value=tex;U.r451Box.value.set(gx0,gy0,S/W,S/H);
+ o.tex=tex;o.data=data;o.B=B;o.grid={W,H,S,gx0,gy0,open,acc};U.r451Map.value=tex;U.r451Box.value.set(gx0,gy0,S/W,S/H);
  stats.bakes++;stats.bakeMs=Math.round(performance.now()-t0);stats.lights=lights.length;stats.lightsUsed=used;stats.blockers=G.walls;stats.texels=W*H;return true;}
+// 같은 지역에서 빛 목록만 바뀌었을 때: 바뀐 몫의 타일만 다시 굽고 텍스처는 그 자리에서 고친다(새로 만들지 않음).
+function rebake(o,lights){const t0=performance.now(),d=bakeDelta(o.B,lights);if(d.tiles.size){encodeTiles(o.B.G,o.B.acc,o.data,d.tiles);o.tex.needsUpdate=true;}
+ stats.deltas++;stats.deltaMs=Math.round((performance.now()-t0)*10)/10;stats.deltaMaxMs=Math.max(stats.deltaMaxMs,stats.deltaMs);stats.deltaLights+=d.added+d.removed;stats.deltaTiles+=d.tiles.size;
+ stats.lights=lights.length;stats.lightsUsed=o.B.used;return true;}
 // CPU 쪽 같은 빛(소품 색·R453 영웅·몹 색·R450 먼지): 칸 좌표 → [r,g,b] (바탕빛 + 조명맵 + 영웅 빛, 깜빡임 제외).
 function mapAt(x,y){const g=o451.grid;if(!g)return[0,0,0];const fx=(x-g.gx0)*g.S-.5,fy=(y-g.gy0)*g.S-.5,i=Math.floor(fx),j=Math.floor(fy),u=fx-i,v=fy-j,out=[0,0,0];let wsum=0;
  for(const[di,dj,w]of[[0,0,(1-u)*(1-v)],[1,0,u*(1-v)],[0,1,(1-u)*v],[1,1,u*v]]){const a=i+di,b=j+dj;if(a<0||b<0||a>=g.W||b>=g.H)continue;const k=b*g.W+a;if(!g.open[k])continue;wsum+=w;for(let c=0;c<3;c++)out[c]+=g.acc[k*3+c]*w;}
@@ -204,25 +233,39 @@ function patch(m,T){if(patched.has(m))return;const u=uniforms(T),before=m.onBefo
  m.onBeforeCompile=wrapper;m.customProgramCacheKey=function(){return(typeof key==='function'?key.call(this):'')+'|r451';};m.needsUpdate=true;patched.set(m,true);stats.patched++;}
 function patchScene(r){const T=r.T,rows=new WeakSet();for(const row of r.commands?.rows?.values?.()||[])if(row?.mesh)rows.add(row.mesh);
  r.scene.traverse(o=>{if(!(o.layers.mask&4))return;const ms=eligible(o,rows);if(ms)for(const m of ms)patch(m,T);});}
+// 장면 맨 윗단 자식 목록의 지문(자식 id 차례). 청크 지형·R452 풀·R91 벽 장식·R81 바깥 판처럼 새 덩어리가 붙거나 빠지면 바뀐다.
+//  바뀐 그 프레임에 셰이더를 붙인다 — 0.5초 타이머만 기다리면 새 재질이 그동안 빛 곱 없이(×1) 밝게 보였다가 어두워진다(독립 심사 지적).
+//  타이머 훑기는 그대로 둔다(묶음 안에 나중에 붙는 것·재질만 바꾸는 것).
+function sceneSig(r){let s=0;const a=r?.spatialRoot?.children,b=r?.scene?.children;
+ if(a)for(let i=0;i<a.length;i++)s=Math.imul(s,31)+a[i].id|0;if(b)for(let i=0;i<b.length;i++)s=Math.imul(s,31)+b[i].id|0;return s^(a?.length||0)<<16^(b?.length||0);}
+function patchIfChanged(r,timed){const t=performance.now(),ss=sceneSig(r);if(ss===o451.scanSig&&!(timed&&t>=o451.nextScan))return;
+ if(ss!==o451.scanSig)stats.sigScans++;o451.scanSig=ss;o451.nextScan=t+500;stats.scans++;try{patchScene(r);}catch(e){fail(e);}}
 
 // ---- 한 프레임 ------------------------------------------------------------------------------------------------
-const o451={owned:false,tex:null,grid:null,key:null,amb:AMB.regional,hero:null,heroK:1,lights:[],nextScan:0,scanSig:'',stutterAt:0,stutterIdx:-1,stutterUntil:0};
+const o451={owned:false,tex:null,data:null,B:null,grid:null,layout:null,cells:-1,lsig:null,amb:AMB.regional,hero:null,heroK:1,lights:[],nextScan:0,scanSig:0,stutterAt:0,stutterIdx:-1,stutterUntil:0};
 const solo=()=>{try{const m=window.__STORYWORLD_COOP_SIM_R62__?.mode;return !m||m()==='off';}catch(_){return true;}};
 const sightOn=()=>window.__STORYWORLD_SIGHT24__?.enabled===true;
 const reduced=f=>!!(f?.settings?.reducedMotion||typeof settings!=='undefined'&&settings?.reducedMotion);
-function wantFor(frame){return !disposed&&prefs.on&&!!frame&&frame.layer==='STORY'&&solo()&&!sightOn()&&typeof room!=='undefined'&&!!room?.exploration?.floorCells?.length;}
+// 바닥이 세계 층(R81 길·R82 피난처·병원 B2)으로 그려지는 지역만 맡는다 — R81 이 그 아래를 불투명 판으로 덮어 1번 층(옛 지도 그림)이 안 보이는 곳.
+//  쉼터·마을(R78 안전 지역: dreamRest·restEp1b·restU2·restLast3·restKairo·restHando·village)은 바닥 대부분이 1번 층 지도 그림이라 이 셰이더가 닿지 않는다.
+//  거기서 맡으면 R89 들고 다니는 빛·R300 어둡게만 꺼지고 바닥은 ×1 로 평평하게 밝아진다(독립 심사 지적, 헤드리스 실측 1.16~1.33배) → 예전 빛 그대로 둔다.
+function floorOwned(L){if(!L?.floorCells?.length)return false;try{const f=window.__STORYWORLD_WORLD_PRESENTATION_R81__?.eligible;if(typeof f==='function')return !!f(L);}catch(_){}
+ return !!(L.hospitalCoreB2||L.worldWardR81||L.refugeR82);}
+function wantFor(frame){return !disposed&&prefs.on&&!!frame&&frame.layer==='STORY'&&solo()&&!sightOn()&&typeof room!=='undefined'&&floorOwned(room?.exploration);}
 function update(r,frame){const want=wantFor(frame);const u=uniforms(r.T);
  if(!want){o451.owned=false;u.r451On.value=0;return;}
- const lights=collect(room),key=[room.exploration?.floorCells?.length,lightCache?.lsig].join('#');
- if(o451.key!==key||o451.layout!==room.exploration||!o451.tex){o451.key=key;o451.layout=room.exploration;o451.lights=lights;if(!bake(o451,r,room,lights)){o451.owned=false;u.r451On.value=0;return;}}
- else o451.lights=lights;/* 같은 빛(굽기 그대로)이어도 목록은 새것으로 — 깜빡임·먼 등불 구멍·R453 이 쓰는 목록 */
- const t=performance.now();if(t>=o451.nextScan){o451.nextScan=t+500;try{patchScene(r);}catch(e){fail(e);}}
+ const L=room.exploration,lights=collect(room),lsig=lightCache?.lsig;
+ if(o451.layout!==L||o451.cells!==L.floorCells.length||!o451.tex||!o451.B){o451.layout=L;o451.cells=L.floorCells.length;o451.lsig=lsig;o451.scanSig=0;   // 새 지역·새 바닥: 전부 굽고 바로 훑는다
+  if(!bake(o451,r,room,lights)){o451.owned=false;u.r451On.value=0;return;}}
+ else if(o451.lsig!==lsig){o451.lsig=lsig;rebake(o451,lights);}                // 같은 바닥에서 등만 바뀜: 바뀐 몫만
+ o451.lights=lights;/* 같은 빛(굽기 그대로)이어도 목록은 새것으로 — 깜빡임·먼 등불 구멍·R453 이 쓰는 목록 */
+ patchIfChanged(r,true);
  const fam=lightCache?.fam||'regional',a=ambientFor(fam,lightCache?.place||'out');o451.amb=a;u.r451Amb.value.set(a.c[0]*a.k,a.c[1]*a.k,a.c[2]*a.k);
  const hero=frame.entities?.find?.(e=>e.hero&&finite(e.x+e.y))||(typeof player!=='undefined'&&player&&finite(player.x+player.y)?player:null);o451.hero=hero?{x:hero.x,y:hero.y}:null;
  o451.heroK=fam==='snow'?.6:lightCache?.place==='cave'?1.1:1;
  if(hero){u.r451Hero.value.set(hero.x,hero.y,HERO.r,HERO.k*o451.heroK);u.r451HeroC.value.set(...HERO.c);}else u.r451Hero.value.w=0;
  // 깜빡임: 영웅에 가까운 불꽃·등잔 4개(화면 안 쪽). 형광등은 가끔 한 번 '툭' 꺼질 듯 떨린다(6~14초에 90ms, 공포 연출 — 움직임 줄이기에서는 없음).
- const tm=(frame.time??performance.now()/1000),calm=!prefs.flicker||reduced(frame);let n=0;
+ const t=performance.now(),tm=(frame.time??t/1000),calm=!prefs.flicker||reduced(frame);let n=0;
  if(hero){const near=o451.lights.filter(l=>(l.fl>0||l.stutter)&&Math.hypot(l.x-hero.x,l.y-hero.y)<16).sort((p,q)=>Math.hypot(p.x-hero.x,p.y-hero.y)-Math.hypot(q.x-hero.x,q.y-hero.y)).slice(0,4);
   for(const l of near){let w=0;if(!calm){if(l.fl>0)w=l.fl*(Math.sin(tm*7.3+l.ph)*.55+Math.sin(tm*13.1+l.ph*2.3)*.3+Math.sin(tm*2.1+l.ph*.7)*.15);
     else if(l.stutter){if(t>o451.stutterAt){o451.stutterAt=t+6000+((l.ph*1000)%8000);o451.stutterUntil=t+90;o451.stutterIdx=Math.round(l.x*31+l.y*17);stats.stutters++;}
@@ -241,6 +284,7 @@ const GL_TOKEN={};
 function wrapGL(r){const gl=r.renderer;if(!gl||gl.r451Wrapped===GL_TOKEN)return;const base=gl.render;
  gl.render=function(scene,camera){const restore=[];
   try{const pass=camera?.layers?.mask;if(o451.owned&&scene===r.scene&&camera===r.camera&&(pass===4||pass===8)){// 세계 층(2)·덧그림 층(3) 모두 — 그 층에 있는 소품 줄만
+    if(pass===4)patchIfChanged(r,false);   // R91 은 벽 장식을 첫 세계 층 그리기 안에서 붙이고, R81 은 바깥 판을 프레임 만들 때 다시 만든다 — 그려지기 전에 바로 셰이더를 붙인다
     for(const [key,row] of r.commands?.rows?.entries?.()||[]){const ow=row?.geometryState?.owner,m=row?.mesh?.material;if(!litRow(key,ow)||!m?.color||!row.mesh.visible||!(row.mesh.layers.mask&pass)||!finite(ow.x+ow.y))continue;
      const L=lightAt(ow.x,ow.y);if(!L)continue;const k=[clamp(L[0],.3,1.5),clamp(L[1],.3,1.5),clamp(L[2],.3,1.5)];const rr=m.color.r,gg=m.color.g,bb=m.color.b;restore.push(()=>m.color.setRGB(rr,gg,bb));
      m.color.setRGB(rr*k[0],gg*k[1],bb*k[2]);stats.rowsLit++;if(ow.kind!=='prop')stats.coversLit++;}}}catch(e){fail(e);}
@@ -255,7 +299,7 @@ function wrapOnce(target){if(!target||wrappedTargets.has(target)||typeof target.
 function wrapAll(){if(disposed)return;try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;const proto=r?Object.getPrototypeOf(r):C;
  wrapOnce(proto);if(r&&Object.prototype.hasOwnProperty.call(r,'render'))wrapOnce(r);}catch(e){fail(e);}}
 const timer=typeof setInterval==='function'?setInterval(wrapAll,500):0;wrapAll();
-try{const d=C.dispose;if(d&&!d.__r451){C.dispose=function(...a){try{o451.tex?.dispose?.();o451.tex=null;o451.grid=null;o451.key=null;}catch(_){}return d.apply(this,a);};C.dispose.__r451=true;}}catch(e){fail(e);}
+try{const d=C.dispose;if(d&&!d.__r451){C.dispose=function(...a){try{o451.tex?.dispose?.();o451.tex=null;o451.data=null;o451.B=null;o451.grid=null;o451.layout=null;o451.lsig=null;}catch(_){}return d.apply(this,a);};C.dispose.__r451=true;}}catch(e){fail(e);}
 
 // ---- 다른 층이 묻는 것 -------------------------------------------------------------------------------------------
 // owns(): R89 화면 빛·R300 어둡게·웅덩이·R123 가짜 불빛이 쉴지. 그리기 루프(R123·R182) 쪽에서도 부르므로 전역으로 판단한다.
@@ -283,9 +327,9 @@ function settingsSection(){const panel=typeof document!=='undefined'&&document.g
  panel.appendChild(s);s.querySelectorAll('[data-r451]').forEach(el=>{el.checked=!!prefs[el.dataset.r451];el.onchange=()=>set({[el.dataset.r451]:el.checked});});}
 if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const r=base.apply(this,a);try{if(!disposed)settingsSection();}catch(e){fail(e);}return r;};}
 
-function dispose(){disposed=true;if(timer)clearInterval(timer);o451.owned=false;if(U)U.r451On.value=0;try{o451.tex?.dispose?.();}catch(_){}o451.tex=null;o451.grid=null;}
+function dispose(){disposed=true;if(timer)clearInterval(timer);o451.owned=false;if(U)U.r451On.value=0;try{o451.tex?.dispose?.();}catch(_){}o451.tex=null;o451.data=null;o451.B=null;o451.grid=null;o451.layout=null;}
 window.__STORYWORLD_LOCAL_LIGHT_R451__=Object.freeze({revision:REV,storageKey:KEY,types:TYPE,ambient:AMB,ambientIn:AMB_IN,ambientCave:AMB_CAVE,prefs:()=>({...prefs}),set,owns,lightAt,lights,glowHoles,glowEdge,classify,ambientFor,dispose,
- pure:Object.freeze({wallBox,grid,seen,bell,shoulder,bakeAcc,litRow,LMAX,KNEE,SHOULDER,FIRE_OK:[...FIRE_OK],REACH,GLOW_SCALE,GLOW_FAM}),
+ pure:Object.freeze({wallBox,grid,seen,bell,shoulder,bakeAcc,bakeDelta,lightContrib,markTiles,lightKey,posHash,sceneSig,floorOwned,litRow,LMAX,KNEE,SHOULDER,TILE,FIRE_OK:[...FIRE_OK],REACH,GLOW_SCALE,GLOW_FAM}),
  inspect:()=>({revision:REV,prefs:{...prefs},owned:o451.owned,stats:{...stats},lastError,family:lightCache?.fam||null,indoor:lightCache?.indoor??null,place:lightCache?.place||null,ambient:o451.amb,
   lights:o451.lights.map(l=>({x:+l.x.toFixed(2),y:+l.y.toFixed(2),type:l.type,src:l.src,id:l.id})),grid:o451.grid?{W:o451.grid.W,H:o451.grid.H,S:o451.grid.S}:null,
   collisionChanged:false,gameplayChanged:false,GPUVerified:false})});

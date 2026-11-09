@@ -30,15 +30,18 @@ ok('rim only inside the silhouette, only where the top-left neighbour is open',/
 // R448 실루엣(가려진 영웅을 덮개 위에 .58 로 다시 그린 줄): 기록기가 주인을 effect 로 바꾸므로 줄 열쇠로 알아보고 영웅과 똑같이 맞춘다(헤드리스 실측 전 1.00 대 1.04~1.07).
 //  가짜 렌더러로 실제 그리기 감싸기를 돌려, 그리는 순간의 재질 색을 잰다. 오라·R448 덮개·바닥에 눕는 줄은 그대로, 그린 뒤 모두 되돌림.
 {class Col{constructor(){this.r=1;this.g=1;this.b=1;}setRGB(r,g,b){this.r=r;this.g=g;this.b=b;return this;}}
- const row=(kind,x,y,extra={})=>({mesh:{visible:true,layers:{mask:8},material:{map:{},color:new Col(),userData:{}}},geometryState:{owner:{kind,groundAligned:false,x,y,...extra}}});
- const rows=new Map([['hero:2:5',row('hero',3,4)],['r448:ghost:hero:2:5',row('effect',3,4)],['r101:aura-back:hero:0',row('effect',3,4)],['r448:over:prop:a:3',row('effect',3.5,4.5)],['enemy:7:1',row('enemy',6,4)],['hero:2:2',row('hero',3,4,{groundAligned:true})]]);
+ const row=(kind,x,y,extra={},blending)=>({mesh:{visible:true,layers:{mask:8},material:{map:{},color:new Col(),userData:{},...(blending!==undefined?{blending}:{})}},geometryState:{owner:{kind,groundAligned:false,x,y,...extra}}});
+ const rows=new Map([['hero:2:5',row('hero',3,4)],['r448:ghost:hero:2:5',row('effect',3,4)],['r101:aura-back:hero:0',row('effect',3,4)],['r448:over:prop:a:3',row('effect',3.5,4.5)],['enemy:7:1',row('enemy',6,4)],['hero:2:2',row('hero',3,4,{groundAligned:true})],
+  ['r350:ghost:hero:2:5',row('effect',3,4)],['hero:2:9',row('hero',3,4,{},5)],['enemy:7:4',row('enemy',6,4,{},5)],['hero:2:6',row('hero',3,4,{},1)]]);
  const seen={},three={T:{Vector3:V3},scene:{},camera:{layers:{mask:8}},commands:{rows},renderer:{getPixelRatio:()=>1,render(){for(const[k,r]of rows){const c=r.mesh.material.color;seen[k]=[c.r,c.g,c.b];}}}};
  const L=[.7,.8,.9],c2=box({__STORYWORLD_PHASE1__:{controller:{state:{three}}},__STORYWORLD_LOCAL_LIGHT_R451__:{owns:()=>true,lightAt:()=>L}});load(c2,'actor-tone-r453.js');
  three.renderer.render(three.scene,three.camera);const t=c2.__STORYWORLD_ACTOR_TONE_R453__.toneOf(L),eq=(a,b)=>!!a&&!!b&&a.every((v,i)=>Math.abs(v-b[i])<1e-9),one=[1,1,1];
- ok('R448 ghost row (key r448:ghost:…, owner effect) toned exactly like the hero it repeats',eq(seen['hero:2:5'],t)&&eq(seen['r448:ghost:hero:2:5'],t)&&t[0]<1,seen);
+ ok('R448 and R350 ghost rows (keys r448:ghost: / r350:ghost:, owner effect) toned exactly like the hero they repeat',eq(seen['hero:2:5'],t)&&eq(seen['r448:ghost:hero:2:5'],t)&&eq(seen['r350:ghost:hero:2:5'],t)&&t[0]<1,seen);
+ // 독립 심사 지적: 영웅·몹 범위 안에서 texture()('screen' → CustomBlending 5)로 그린 표적 고리·결계·오라까지 어둡게·흐리게 맞췄다 — 몸 그림(보통 섞기)만 맞춘다.
+ ok('screen-blended VFX in hero/enemy scope (barrier, aura, target ring) left alone; normal-blended body toned',eq(seen['hero:2:9'],one)&&eq(seen['enemy:7:4'],one)&&eq(seen['hero:2:6'],t)&&P.bodyBlend({})&&P.bodyBlend({blending:1})&&!P.bodyBlend({blending:5})&&!P.bodyBlend({blending:2}),seen);
  ok('aura effect, R448 prop cover and ground-aligned rows left alone',eq(seen['r101:aura-back:hero:0'],one)&&eq(seen['r448:over:prop:a:3'],one)&&eq(seen['hero:2:2'],one),seen);
- ok('enemy rows toned; every colour restored after the draw',eq(seen['enemy:7:1'],t)&&[...rows.values()].every(r=>eq([r.mesh.material.color.r,r.mesh.material.color.g,r.mesh.material.color.b],one))&&c2.__STORYWORLD_ACTOR_TONE_R453__.inspect().stats.ghosts===1);
- ok('actorKind: hero/enemy by owner kind, R448 ghost by key only',P.actorKind('r448:ghost:hero:2:5',{kind:'effect'})==='hero'&&P.actorKind('hero:2:5',{kind:'hero'})==='hero'&&P.actorKind('e:1',{kind:'enemy'})==='enemy'&&
+ ok('enemy rows toned; every colour restored after the draw',eq(seen['enemy:7:1'],t)&&[...rows.values()].every(r=>eq([r.mesh.material.color.r,r.mesh.material.color.g,r.mesh.material.color.b],one))&&c2.__STORYWORLD_ACTOR_TONE_R453__.inspect().stats.ghosts===2);
+ ok('actorKind: hero/enemy by owner kind, R448/R350 ghosts by key only',P.actorKind('r448:ghost:hero:2:5',{kind:'effect'})==='hero'&&P.actorKind('r350:ghost:hero:2:5',{kind:'effect'})==='hero'&&P.actorKind('hero:2:5',{kind:'hero'})==='hero'&&P.actorKind('e:1',{kind:'enemy'})==='enemy'&&
   P.actorKind('r101:aura-back:hero:0',{kind:'effect'})===null&&P.actorKind('r448:over:prop:a:3',{kind:'effect'})===null&&P.actorKind('r448:ghost:x',null)===null);}
 ok('pages.yml runs this check',fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('node r96/qa/r453/r453-cpu-check.cjs'));
 done();

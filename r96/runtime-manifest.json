@@ -14,8 +14,8 @@
     },
     {
       "path": "actor-tone-r453.js",
-      "bytes": 10335,
-      "sha256": "4160dc06ba93b9f08347fa1301db553110bb5142f5afeea343d9d1dc99a1e9f9"
+      "bytes": 11038,
+      "sha256": "cbec27cd041bd8a00a15a1c9d6b0fab35abf73bb8015b36302716c9639dc92b8"
     },
     {
       "path": "aggro-chase-r390.js",
@@ -33694,8 +33694,8 @@
     },
     {
       "path": "ground-fringe-r452.js",
-      "bytes": 16221,
-      "sha256": "59bbe9a9bd7de99944240d1401241331649ce37ce0fb17c1159876ea617ec6f6"
+      "bytes": 17307,
+      "sha256": "2d2d4bed92a0a4c641aabc1b9c99ebf9a7a754f0b2dda12cbe18d606bdf5fdd0"
     },
     {
       "path": "growth-r103.js",
@@ -33914,8 +33914,8 @@
     },
     {
       "path": "local-light-r451.js",
-      "bytes": 37006,
-      "sha256": "57be10a3eca6bd8d15a7e547542787465bf6d964fad1f252359bce9a802971cd"
+      "bytes": 43987,
+      "sha256": "902255d2c4daae67e769d86f8011a442e550364133c13b3fb49d847e3e780e91"
     },
     {
       "path": "mammon-bossroom.js",
@@ -34634,8 +34634,8 @@
     },
     {
       "path": "weather-r450.js",
-      "bytes": 31997,
-      "sha256": "1f069e713e0b1e6acd5403bc2455ac3f1facc57986b9de152d613b72bb2d2acc"
+      "bytes": 32460,
+      "sha256": "41e5058b45439b5d356438179a1b181aeff3f602f013a4561543528afec9b7e2"
     },
     {
       "path": "webgl-fallback-r221.js",
@@ -34709,7 +34709,7 @@
     }
   ],
   "fileCount": 6941,
-  "totalBytes": 1091894247,
+  "totalBytes": 1091903480,
   "webHTMLSha256": "8e05d0464b659fb23c09b591f8f812d2c08c2a4f75deb2394d64a01dc2698ef8",
   "largest": [
     {

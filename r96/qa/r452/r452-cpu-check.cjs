@@ -8,9 +8,17 @@ ok('api exposed',api&&api.revision.startsWith('R452')&&typeof api.plan==='functi
 // 실내·동굴·기억·눈·기계·대장간에는 풀이 없다(사용자 2026-11-09 "실내 실외구분도 잘해야해")
 ok('vegetation families only (no snow/neural/forge/memory/clinical/domestic/cave)',['snow','neural','forge','memory','clinical','domestic','cave'].every(f=>!api.families[f])&&['garden','swamp'].every(f=>api.families[f]));
 ok('only approved existing art: r138 weed + r257 weed-opp',api.art.length===2&&api.art[0].path==='assets/r138/props/weed.webp'&&api.art[1].path==='assets/r257/props/weed-opp.webp'&&api.art.every(a=>fs.existsSync(path.join(RT,a.path))));
-{const s=C('ground-fringe-r452.js');ok('places only where R450 says out',/function specFor\(r\)\{const kind=placeOf\(r\);if\(kind!=='out'\)return null;/.test(s));
+{const s=C('ground-fringe-r452.js');ok('places only where R450 says out',/function specFor\(r\)\{const kind=placeOf\(r\);if\(kind!=='out'\|\|/.test(s));
  ok('no flipping / rotation (r207·r257 rules)',!/scale\.x\s*=\s*-|\*\s*-1\s*:|flipY\s*=\s*false|rotation/.test(s.replace(/\/\/.*$/gm,'')));
  ok('one mesh per zone (single draw), layer 2, presentation only',/new T\.Mesh\(geo,mat\)/.test(s)&&(s.match(/new T\.Mesh\(/g)||[]).length===1&&s.includes("mesh.layers.set(2)")&&s.includes('presentationOnly=true'));}
+// 독립 심사 지적(2026-11-09): R81 '해안' 색 묶음에 든 도시 교차로(murder01)·빌라 옥상(murder03)에 늪 수초가 났다 → 뺀다.
+//  쉼터·마을(R78 안전 지역)은 바닥이 1번 층 옛 지도 그림이라 바닥 칸 가장자리와 그림 가장자리가 맞지 않는다 → 세계 층(R81) 바닥만.
+{const c3=box({__STORYWORLD_WEATHER_R450__:{placeOf:()=>({kind:'out'})}});load(c3,'ground-fringe-r452.js');const A3=c3.__STORYWORLD_GROUND_FRINGE_R452__;
+ const ward=fam=>({floorCells:[[0,0],[1,0]],worldWardR81:{environment:{family:fam}}}),rm=(id,L)=>({id,exploration:L});
+ ok('paved city (crossroads murder01, rooftop murder03) gets no grass; harbour village and garden still do',A3.specFor(rm('murder01',ward('coast')))===null&&A3.specFor(rm('murder03',ward('coast')))===null&&
+  A3.specFor(rm('last302',ward('coast')))===A3.families.coast&&A3.specFor(rm('dist00',ward('garden')))===A3.families.garden&&A3.noFringe.length===2);
+ ok('rest zones / village (floor not on the R81 world layer) get no grass',A3.specFor(rm('village',{floorCells:[[0,0]]}))===null&&A3.specFor(rm('restKairo',{floorCells:[[0,0]],surface:{art:{r81Environment:'garden'}}}))===null&&
+  A3.specFor(rm('hub',{floorCells:[[0,0]],refugeR82:{}}))===A3.families.regional);}
 // 방 12×8, 길 = y 4 줄 전체, 제단(2,2) 둘레 1.5 비움, 가운데 기둥 벽
 const cells=[];for(let x=0;x<12;x++)for(let y=0;y<8;y++)cells.push([x,y]);
 const pathSet=new Set();for(let x=0;x<12;x++)pathSet.add(x+',4');
