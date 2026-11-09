@@ -5,7 +5,7 @@
 //  환경 설정 창의 '시야' 고르기, L 키(전체 → 횃불 → 손전등 → 전체)로 바꾼다. 저장된 R58 시야 값(flashlight58)은 이 모드에 맞춰 둔다.
 (()=>{'use strict';
 if(window.__STORYWORLD_LIGHT_R182__)return;
-const REV='R501-light-9',KEY='storyworld.r182.light',MODES=['glow','auto','full','torch','flashlight'],NAME={glow:'은은한 원형(주변 밝고 멀수록 어둡게)',auto:'자동(미로만 횃불·손전등)',full:'전체(환하게)',torch:'횃불(원형)',flashlight:'손전등(부채꼴)'};
+const REV='R502-light-10',KEY='storyworld.r182.light',MODES=['glow','auto','full','torch','flashlight'],NAME={glow:'은은한 원형(주변 밝고 멀수록 어둡게)',auto:'자동(미로만 횃불·손전등)',full:'전체(환하게)',torch:'횃불(원형)',flashlight:'손전등(부채꼴)'};
 /* R254(사용자 2026-11-03 "미로맵만 횃불or손전등시야(시대상에맞게)이고 나머지상황은 모두전체보이는시야"): 기본은 '자동' — 미로 구역에서만 시대에 맞춰
    (현대·기계 = 손전등, 그 밖 = 횃불) 빛을 쓰고, 나머지는 모두 전체 시야. 예전에 저장된 값은 한 번 '자동'으로 옮긴다(v:254). 직접 고르면 그대로 따른다. */
 /* R335(사용자 2026-11-05 "플레이어 주변 밝고 멀수록 어두운 거 좋은 것 같아 이걸 기본으로"): 기본을 새 '은은한 원형(glow)'으로.
@@ -25,7 +25,9 @@ const mode=()=>prefs.mode==='auto'?(inMaze()?mazeLight():'full'):prefs.mode;
 function apply(){try{if(typeof settings==='undefined'||!settings)return;const want=mode()!=='full'&&mode()!=='glow';/* R185: 사몽 안에서 '전체'→횃불/손전등으로 바꿔도 바로 R24 시야를 켠다(예전에는 다음 구역까지 기다림 — Codex 리뷰) */
   if((settings.flashlight58!==false)!==want){settings.flashlight58=want;window.__STORYWORLD_SIGHT24__?.refresh?.();}document.getElementById('stage')?.classList.toggle('flashlight-black-r58',want);}catch(e){fail(e);}}
 function set(p){if(MODES.includes(p?.mode))prefs.mode=p.mode;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}apply();return{...prefs};}
-function toggle(){set({mode:MODES[(MODES.indexOf(prefs.mode)+1)%MODES.length]});stats.toggles++;try{if(typeof toast==='function')toast('시야: '+NAME[prefs.mode],1.6);}catch(_){}}
+/* R502: L 키는 은은한 원형 → 전체 → 횃불 → 손전등 → 은은한 원형. '자동'(미로에서만 빛)은 바깥에서 아무것도 안 바뀌어 L 이 안 먹는 것처럼 보였다 → 설정 창에서만 고른다. */
+const KEY_CYCLE=['glow','full','torch','flashlight'];
+function toggle(){const i=KEY_CYCLE.indexOf(prefs.mode);set({mode:i<0?'full':KEY_CYCLE[(i+1)%KEY_CYCLE.length]});stats.toggles++;try{if(typeof toast==='function')toast('시야: '+NAME[prefs.mode],1.6);}catch(_){}}
 // ---- 설정 창 ----
 try{if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const r=base.apply(this,a);try{const grid=document.querySelector('#panel .settings')||document.querySelector('.settings');if(grid&&!document.getElementById('lightModeR182')){const label=document.createElement('label');label.textContent='시야 ';const sel=document.createElement('select');sel.id='lightModeR182';
    for(const m of MODES){const o=document.createElement('option');o.value=m;o.textContent=NAME[m];if(m===prefs.mode)o.selected=true;sel.appendChild(o);}sel.onchange=()=>{set({mode:sel.value});stats.toggles++;};label.appendChild(sel);
