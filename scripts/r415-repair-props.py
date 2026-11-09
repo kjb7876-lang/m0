@@ -20,6 +20,7 @@ from PIL import Image
 
 src = Path(sys.argv[1]); out = Path(sys.argv[2] if len(sys.argv) > 2 else 'r96/runtime-text/assets/r415/props')
 LO, HI, LONG = 72, 230, 384
+H_SCALE = 1.3  # R415 review: realistic sizes read too small at the default camera zoom (camera 7.4 / art 7.5) -> x1.3, max 70
 POP = (24, 236, 1.25, 6, .42)  # R415 read: value stretch lo/hi, saturation, halo px, halo alpha (DREAM draws props saturate(.5) brightness(.85) on brown floors)
 
 # name, Drive file, zone, mode, axis ('x' = art parallel to the -x wall, 'y' = the -y wall), draw height px (hero 66)
@@ -116,7 +117,7 @@ for name, drive, zone, mode, axis, h in PROPS:
         assert man.get('sha256') in (None, sha), ('manifest mismatch', name)
     img = clean(Image.open(png)); key = 'r415-' + name
     p = out / (name + '.webp'); img.save(p, 'WEBP', quality=92, alpha_quality=100, method=6)
-    index['props'][key] = {'zone': zone, 'mode': mode, 'axis': axis, 'height': h, 'path': 'assets/r415/props/' + p.name,
+    index['props'][key] = {'zone': zone, 'mode': mode, 'axis': axis, 'height': min(70, round(h * H_SCALE)), 'path': 'assets/r415/props/' + p.name,
       'source': drive, 'pngSHA256': sha, 'manifestChecked': bool(man and man.get('sha256')),
       'dotsStatus': (man or {}).get('status') or 'REVIEW_STATIC_LAYOUT_REPAIR', 'size': list(img.size), 'bytes': p.stat().st_size,
       'sha256': hashlib.sha256(p.read_bytes()).hexdigest()}
