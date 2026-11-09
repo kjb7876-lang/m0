@@ -14,7 +14,7 @@ ok('CI runs this check',/node r96\/qa\/r447\/r447-cpu-check\.cjs/.test(fs.readFi
 const code=src.replace(/\/\/.*$/mg,'');
 ok('Mammon ep1b06·samong·dream layers excluded',/r\.id!=='ep1b06'/.test(code)&&/samongR103/.test(code)&&/r\.layer==='STORY'/.test(code));
 ok('presentation only: no hp/save/collision/solid writes, no props array replacement',!/\.hp\s*=[^=]|saveGame|serializeSave|restoreSave|\.walls\s*=|floorCells\s*=|\.solid\s*=|\.props\s*=[^=]|\.enemies\s*=[^=]/.test(code));
-ok('no per-frame re-plan: plan once per room+layout, re-apply only when the props count changes',/st\.L===r\.exploration&&!opt\.force\)\{if\(st\.sig!==sig\)/.test(code)&&/setTimeout\(poll,400\)/.test(code));
+ok('no per-frame re-plan: plan once per room+layout, re-apply only when the props count changes',/st\.L===r\.exploration&&!opt\.force\)\{(?:const sig=sigOf\(r\);)?if\(st\.sig!==sig\)/.test(code)&&/setTimeout\(poll,400\)/.test(code));
 ok('no randomness (deterministic rules)',!/Math\.random|Date\.now\(\)\s*%|crypto/.test(code.replace(/const t=Date\.now\(\)/,'')));
 ok('forge set has no indoor flame furnace r80-039',!/P\('039'/.test(code));
 
@@ -52,45 +52,54 @@ ok('api exported',!!api&&typeof api.curate==='function'&&typeof api.coverAlpha==
 ok('space table: names → kinds',api.spaceOf('주사실')==='work'&&api.spaceOf('갈림길')==='junction'&&api.spaceOf('순환로')==='junction'&&api.spaceOf('계단참')==='junction'&&api.spaceOf('길목')==='corridor'&&api.spaceOf('그을린 복도')==='corridor'&&
  api.spaceOf('처치 대기실')==='rest'&&api.spaceOf('외곽 쉼길')==='rest'&&api.spaceOf('작은 마당')==='yard'&&api.spaceOf('약품 보관실')==='storage'&&api.spaceOf('앞방')==='ante'&&api.spaceOf('방화 전실')==='ante'&&
  api.spaceOf('빈 방')==='living'&&api.spaceOf('입구')==='entry'&&api.spaceOf('다음 구역 문')==='entry'&&api.spaceOf('보스 전투실')==='boss'&&api.spaceOf('중앙 전투실')==='boss'&&api.spaceOf('')==='room');
-const sig=w=>w.props.filter(p=>p.r224Furniture).map(p=>p.id+'|'+p.path+'|'+(+p.x).toFixed(3)+','+(+p.y).toFixed(3)+'|'+(p.r303Hide||'')+'|'+(p.r303Flip?1:0)).sort().join(';');
 const w0=world();const before=JSON.parse(JSON.stringify(w0));ctx.room=w0;const rep=api.curate(w0);
-ok('curated with a report',!!rep&&rep.kind==='clinic'&&rep.kept>0);
-const byRoom=id=>w0.props.filter(p=>p.r224Furniture&&String(p.id)&&(p.r447?.from?{x:p.r447.from.x,y:p.r447.from.y}:p)&&w0.exploration.r224Rooms.find(q=>q.id===id)&&(()=>{const o=p.r447?.from||p,q=w0.exploration.r224Rooms.find(r=>r.id===id);return o.x>=q.x0&&o.x<=q.x1&&o.y>=q.y0&&o.y<=q.y1;})());
-const shown=list=>list.filter(p=>!p.r303Hide);const arts=list=>shown(list).map(p=>String(p.r80Art).slice(4));
-ok('ids, count and order of props preserved; nothing removed or added',w0.props.length===before.props.length&&w0.props.every((p,i)=>p.id===before.props[i].id));
-ok('non-R224 props untouched',w0.props.filter(p=>!p.r224Furniture).every(p=>JSON.stringify(p)===JSON.stringify(before.props.find(q=>q.id===p.id))));
-ok('R224 furniture stays non-solid; enemies untouched',w0.props.filter(p=>p.r224Furniture).every(p=>p.solid===false)&&JSON.stringify(w0.enemies)===JSON.stringify(before.enemies));
-ok('boss room and gather room furniture untouched (boss-room work owns them)',[0,2].every(id=>byRoom(id).every(p=>!p.r447&&!p.r303Hide&&JSON.stringify(p)===JSON.stringify(before.props.find(q=>q.id===p.id)))));
-ok('junction (갈림길) and yard (작은 마당) left empty',shown(byRoom(4)).length===0&&byRoom(4).length>0&&shown(byRoom(11)).length===0&&byRoom(11).length>0);
-ok('short corridor (4 tiles wide) left empty',shown(byRoom(6)).length===0);
-const work=arts(byRoom(3)),plan3=rep.rooms.find(q=>q.id===3);ok('injection room = bed (core first) + IV/monitor cluster on one wall',/^142@/.test(plan3.pieces[0])&&work.includes('142')&&work.length>=2&&work.every(a=>['142','141','143'].includes(a))&&new Set(shown(byRoom(3)).map(p=>p.r447.wall)).size===1);
-const rest=arts(byRoom(5));ok('waiting room = row of chairs (+wheelchair); chairs are the only repeat',rest.filter(a=>a==='145').length>=2&&rest.every(a=>['145','149'].includes(a)));
-ok('no other art repeats inside one room',[3,7,8,9,10].every(id=>{const a=arts(byRoom(id));return a.length===new Set(a).size;}));
-const ante=[7,8,9].map(id=>arts(byRoom(id)));ok('repeated anterooms rotate: full set, lighter variant, then an empty room',ante[0].join()==='146,145'&&ante[1].join()==='149'&&ante[2].length===0);
-const big=shown(byRoom(10));ok('big storage room: cabinet run + one different piece on the other wall',big.length>=2&&arts(byRoom(10))[0]==='148'&&new Set(big.map(p=>p.r447.wall)).size===2);
-const all=shown(w0.props.filter(p=>p.r447));
-ok('every placed piece sits inside its room rect, on free floor (body and foot)',all.every(p=>{const q=w0.exploration.r224Rooms.find(r=>r.id===byRoomId(p));return q&&p.x>q.x0&&p.x<q.x1&&p.y>q.y0&&p.y<q.y1&&!ctx.StoryPhase1.explorationBlocked(w0.exploration,p.x,p.y,.05);}));
-function byRoomId(p){const o=p.r447.from;return w0.exploration.r224Rooms.find(q=>o.x>=q.x0&&o.x<=q.x1&&o.y>=q.y0&&o.y<=q.y1).id;}
+ok('curated with a report',!!rep&&rep.kind==='clinic'&&rep.kept>0&&rep.placed>0);
+const mine=w=>w.props.filter(p=>p&&p.r447Furniture);const shown=list=>list.filter(p=>!p.r303Hide);
+const inR=(id,p,w=w0)=>{const q=w.exploration.r224Rooms.find(r=>r.id===id);return p.x>=q.x0&&p.x<=q.x1&&p.y>=q.y0&&p.y<=q.y1;};
+const ofRoom=(id,w=w0)=>mine(w).filter(p=>p.r447.room===id);const arts=list=>shown(list).map(p=>String(p.r80Art).slice(4));
+const r224In=(id,w=w0)=>w.props.filter(p=>p.r224Furniture&&inR(id,p,w));
+ok('original props keep ids, order and count; new furniture only appended (r447:furn:region:room:n)',before.props.every((p,i)=>w0.props[i]&&w0.props[i].id===p.id)&&w0.props.slice(before.props.length).every(p=>p.r447Furniture&&/^r447:furn:ep1a09:\d+:\d+$/.test(p.id)));
+ok('non-R224 props untouched',w0.props.slice(0,before.props.length).filter(p=>!p.r224Furniture).every(p=>JSON.stringify(p)===JSON.stringify(before.props.find(q=>q.id===p.id))));
+ok('R224 objects only rested (r303Hide), never moved/re-skinned/removed',w0.props.slice(0,before.props.length).filter(p=>p.r224Furniture).every(p=>{const b=before.props.find(q=>q.id===p.id);const c={...p};delete c.r303Hide;return JSON.stringify(c)===JSON.stringify(b)&&(!p.r303Hide||p.r303Hide==='r447');}));
+ok('new furniture is non-solid presentation; enemies untouched',mine(w0).every(p=>p.solid===false&&p.r80PresentationOnly===true)&&JSON.stringify(w0.enemies)===JSON.stringify(before.enemies));
+ok('boss room and gather room keep their R224 furniture (boss-room work owns them); no new pieces there',[0,2].every(id=>r224In(id).length>0&&r224In(id).every(p=>!p.r303Hide)&&ofRoom(id).length===0));
+ok('all R224 furniture outside boss/gather rooms rests',w0.props.filter(p=>p.r224Furniture&&!inR(0,p)&&!inR(2,p)).every(p=>p.r303Hide==='r447'));
+ok('junction (갈림길) and yard (작은 마당) left empty',ofRoom(4).length===0&&ofRoom(11).length===0&&r224In(4).length>0);
+ok('short corridor (4 tiles wide) left empty',ofRoom(6).length===0);
+const plan3=rep.rooms.find(q=>q.id===3),work=arts(ofRoom(3));
+ok('injection room = bed (core first) + IV/monitor cluster on one wall',/^142@/.test(plan3.pieces[0]||'')&&work.includes('142')&&work.length>=2&&work.every(a=>['142','141','143'].includes(a))&&new Set(ofRoom(3).map(p=>p.r447.wall)).size===1);
+const rest=arts(ofRoom(5));ok('waiting room = row of chairs (+wheelchair); chairs are the only repeat',rest.filter(a=>a==='145').length>=2&&rest.every(a=>['145','149'].includes(a)));
+ok('no other art repeats inside one room',[3,7,8,9,10].every(id=>{const a=arts(ofRoom(id));return a.length===new Set(a).size;}));
+const ante=[7,8,9].map(id=>arts(ofRoom(id)));ok('repeated anterooms rotate: full set, lighter variant, then an empty room',ante[0].join()==='146,145'&&ante[1].join()==='149'&&ante[2].length===0);
+const big=ofRoom(10);ok('big storage room: cabinet run + one different piece on the other wall',big.length>=2&&arts(big)[0]==='148'&&new Set(big.map(p=>p.r447.wall)).size===2);
+ok('room size cap like R224 (1 per 45 tiles, 1–4)',w0.exploration.r224Rooms.every(q=>ofRoom(q.id).length<=Math.max(1,Math.min(4,Math.round((q.x1-q.x0)*(q.y1-q.y0)/45)))));
+const all=shown(mine(w0));
+ok('every placed piece sits inside its room rect, on free floor',all.every(p=>{const q=w0.exploration.r224Rooms.find(r=>r.id===p.r447.room);return p.x>q.x0&&p.x<q.x1&&p.y>q.y0&&p.y<q.y1&&!ctx.StoryPhase1.explorationBlocked(w0.exploration,p.x,p.y,.05);}));
 ok('placed pieces keep clear of doors (1.6), entry (2.2), objective (2), door gaps in the back wall',all.every(p=>Math.hypot(p.x-89.5,p.y-9)>=1.6&&Math.hypot(p.x-44,p.y-14.5)>=2.2&&Math.hypot(p.x-100,p.y-10)>=2&&!(Math.abs(p.x-48.5)<1.4&&p.y<6)));
 ok('placed pieces keep off the R169 entry→goal path (>1.3 from path cells)',all.every(p=>[...pathSet].every(k=>{const[x,y]=k.split(',').map(Number);return Math.hypot(x+.5-p.x,y+.5-p.y)>=1.3;})));
-ok('plan ignores mobs (homes change on load): same placement with a full mob crowd',(()=>{const b=boot(),w=world();for(let i=0;i<12;i++)w.enemies.push({id:'x'+i,x:45+i,y:5+i%3,homeX:45+i,homeY:5+i%3,hp:9});b.ctx.room=w;b.api.curate(w);return sig(w)===sig(w0);})());
-ok('back to the wall: body .45–1.95 tiles from the n/w wall it belongs to',all.every(p=>{const q=w0.exploration.r224Rooms.find(r=>r.id===byRoomId(p));const d=p.r447.wall==='n'?p.y-q.y0:p.x-q.x0;return d>=.4&&d<=2.0;}));
-ok('facing: +y art mirrored on the -x wall, sofa/bed (+x) mirrored on the -y wall, R412 told the wall',all.every(p=>{const a=String(p.r80Art).slice(4),side=p.r447.wall==='n'?'-y':'-x',want=a==='146'?false:/^(021|024|142)$/.test(a)?side==='-y':side==='-x';return !!p.r303Flip===want&&p.r412Face===side&&p.r406Seen===1;}));
-ok('hidden surplus marked r303Hide=r447 (shadow/R92/R412 follow); kept images (evicted) requested again',w0.props.filter(p=>p.r224Furniture&&p.r303Hide).every(p=>p.r303Hide==='r447')&&all.every(p=>asked.includes(p.path))&&w0.props.filter(p=>p.r303Hide==='r447').every(p=>!asked.includes(p.path)||all.some(q=>q.path===p.path)));
-// 결정성: 같은 세계를 다시(소품 순서 섞고, 몹이 움직인 뒤) 만들어도 같은 결과
-const b2=boot(),w1=world();w1.props.reverse();w1.enemies.forEach(e=>{e.x+=3;e.y-=2;e.hp=0;});b2.ctx.room=w1;b2.api.curate(w1);
-ok('deterministic: same layout → same placement (prop order shuffled, mobs moved/dead as after a load)',sig(w1)===sig(w0));
-b2.api.curate(w1);ok('idempotent: curating again changes nothing',sig(w1)===sig(w0));
+ok('placed pieces keep clear of other props (.95)',all.every(p=>w0.props.filter(q=>!q.r224Furniture&&!q.r447Furniture&&q.path).every(q=>Math.hypot(q.x-p.x,q.y-p.y)>=.95)));
+ok('back to the wall: body .4–2 tiles from the n/w wall it belongs to',all.every(p=>{const q=w0.exploration.r224Rooms.find(r=>r.id===p.r447.room);const d=p.r447.wall==='n'?p.y-q.y0:p.x-q.x0;return d>=.4&&d<=2.0;}));
+ok('facing: +y art mirrored on the -x wall, sofa/bed (+x) mirrored on the -y wall, R412/R406 told',all.every(p=>{const a=String(p.r80Art).slice(4),side=p.r447.wall==='n'?'-y':'-x',want=a==='146'?false:/^(021|024|142)$/.test(a)?side==='-y':side==='-x';return !!p.r303Flip===want&&p.r412Face===side&&p.r406Seen===1;}));
+ok('kept images (evicted by the engine) requested again; rested R224 images not requested',all.every(p=>asked.includes(p.path))&&asked.every(x=>all.some(p=>p.path===x)));
+// 결정성: 같은 지도를 다시(소품 순서 섞고, 몹이 움직이거나 죽은 뒤, R224 가 다른 자리·개수로 놓아도) 만들어도 같은 결과
+const sig=w=>mine(w).map(p=>p.id+'|'+p.path+'|'+(+p.x).toFixed(3)+','+(+p.y).toFixed(3)+'|'+(p.r303Hide||'')+'|'+(p.r303Flip?1:0)).sort().join(';');
+const b2=boot(),w1=world();w1.props.reverse();w1.enemies.forEach(e=>{e.x+=3;e.y-=2;e.homeX+=3;e.hp=0;});
+const r224s=w1.props.filter(p=>p.r224Furniture);for(const p of r224s.slice(0,6))w1.props.splice(w1.props.indexOf(p),1);r224s[8].x+=1.3;/* R224 가 몇 점 덜 놓고 한 점은 다른 자리 */
+b2.ctx.room=w1;b2.api.curate(w1);
+ok('deterministic: same map → same placement (props shuffled, mobs moved/dead as after a load, R224 count/spots differ)',sig(w1)===sig(w0)&&sig(w0).length>0);
+b2.api.curate(w1);ok('idempotent: curating again adds nothing and moves nothing',sig(w1)===sig(w0)&&mine(w1).length===mine(w0).length);
+ok('plan ignores mobs: same placement with a full mob crowd',(()=>{const b=boot(),w=world();for(let i=0;i<12;i++)w.enemies.push({id:'x'+i,x:45+i,y:5+i%3,homeX:45+i,homeY:5+i%3,hp:9});b.ctx.room=w;b.api.curate(w);return sig(w)===sig(w0);})());
+// 소품 배열을 다른 모듈이 새로 만들어도 다시 들어간다
+const b5=boot(),w5b=world();b5.ctx.room=w5b;b5.api.curate(w5b);const n5=mine(w5b).length;w5b.props=w5b.props.filter(p=>!p.r447Furniture);b5.api.curate(w5b);
+ok('own pieces re-inserted if another module rebuilt the props array (same objects, no duplicates)',mine(w5b).length===n5&&new Set(mine(w5b).map(p=>p.id)).size===n5);
 // 나중에 붙은 상자: 곁의 한 점만 쉬고, 계획은 그대로; 상자가 없어지면 돌아온다
 const victim=all[0];const chest={id:'r103chest:STORY:ep1a09',x:victim.x+.4,y:victim.y+.2,chestR103:true};w0.props.push(chest);api.curate(w0);
-ok('late chest: only the piece next to it rests (r447x), others keep their place',victim.r303Hide==='r447x'&&all.filter(p=>p!==victim).every(p=>!p.r303Hide||p.r303Hide==='r447x'&&Math.hypot(p.x-chest.x,p.y-chest.y)<1.5));
-w0.props.pop();api.curate(w0);ok('late chest gone: the piece comes back at the same spot',!victim.r303Hide);
-// 칠죄(질투): 지역 그림(거울)만, 보스방 틀+3 칸 안 R224 는 R438 몫
-const b3=boot(),HOME=['024','026','027','025'],w3=world('ep1b03',HOME);w3.exploration.sinRoomArt='sin-room-art-v1';
-w3.exploration.r224Rooms.forEach(r=>{});b3.ctx.room=w3;const before3=JSON.parse(JSON.stringify(w3));b3.api.curate(w3);
-const placed3=w3.props.filter(p=>p.r447&&!p.r303Hide);
+ok('late chest: only the piece next to it rests (r447x), the rest keep their place',victim.r303Hide==='r447x'&&all.filter(p=>p!==victim).every(p=>!p.r303Hide||p.r303Hide==='r447x'&&Math.hypot(p.x-chest.x,p.y-chest.y)<1.5));
+w0.props.splice(w0.props.indexOf(chest),1);api.curate(w0);ok('late chest gone: the piece comes back at the same spot',!victim.r303Hide);
+// 칠죄(질투): 지역 그림(거울)만, 보스방 틀+3 칸 안에는 두지 않음
+const b3=boot(),HOME=['024','026','027','025'],w3=world('ep1b03',HOME);w3.exploration.sinRoomArt='sin-room-art-v1';b3.ctx.room=w3;b3.api.curate(w3);
+const placed3=shown(mine(w3));
 ok('envy region: only the envy mirror r80-026 is placed',placed3.length>0&&placed3.every(p=>p.r80Art==='r80-026'));
-ok('envy region: off-theme originals and boss frame+3 pieces left to R438 (not moved, not re-skinned)',w3.props.filter(p=>p.r224Furniture&&!/r80-026/.test(before3.props.find(q=>q.id===p.id).path)).every(p=>!p.r447));
 ok('envy region: nothing placed inside boss frame+3',placed3.every(p=>!(p.x>=3&&p.x<=29&&p.y>=3&&p.y<=23)));
 // 맘몬·꿈 층·사몽 은 손대지 않는다
 for(const[label,mut]of[['Mammon ep1b06',w=>{w.id='ep1b06';}],['dream layer',w=>{w.layer='DREAM';}],['samong',w=>{w.exploration.samongR103={key:'x'};}]]){const b4=boot(),w4=world();mut(w4);const s4=JSON.stringify(w4.props);b4.ctx.room=w4;b4.api.curate(w4);ok(label+' untouched',JSON.stringify(w4.props)===s4);}

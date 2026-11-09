@@ -14,19 +14,21 @@
 //      (진료실=침대+수액대+모니터, 대기실=의자 둘+휠체어, 약품 보관실=약장+사물함, 접수=탁자+의자, 거실=소파 …).
 //      같은 종류 방이 한 지역에 여러 개면 묶음을 돌려 쓰고 사이사이 비운 방을 둔다(같은 그림·같은 간격 반복 줄이기, 군집 사이 여백).
 //      묶음 자리는 벽 길이의 3할·7할 근처(가운데 대칭 피함), 문 틈·문·입구·제단·목표·R169 길·다른 조형물에서 떨어진 곳.
-//      가구는 모두 벽에서 2칸 안(대부분 1칸 안)이라 방 가운데 전투 공간은 비고, 폭 5칸 미만 방은 벽 소품 1점만.
+//      가구는 모두 벽에서 2칸 안(대부분 1칸 안)이라 방 가운데 전투 공간은 비고, 방 크기별 상한은 R224 와 같다(45칸당 1점, 1~4점, 폭 5칸 미만 방은 없음).
 //      큰 방(380칸↑)만 맞은편 벽에 다른 그림 한 점을 더 둔다. (몹 자리는 쓰지 않는다 — 불러오기 때 몹 집 자리가 저장 위치로 바뀌어 배치가 달라졌다.)
-//      R224 가 만든 소품 객체(id)를 그대로 다시 쓰고(그림·자리만 바꿈), 남는 것은 숨긴다(r303Hide='r447' — 그림자·R92·R412 도 따라 쉰다).
+//      계획한 가구는 새 소품 객체(id r447:furn:지역:방:번호, solid:false)로 넣고, 보스방·모이는 방 밖의 R224 가구는 쉬게 한다
+//      (r303Hide='r447' — 객체·id 는 배열에 그대로, 그림자·R92·R412 도 따라 쉰다). R224 객체를 다시 쓰지 않는 까닭: R224 는 그 순간 있던
+//      소품에 따라 자리를 건너뛰어, 같은 지역도 불러오기 때 개수·자리가 달라졌다(질투 지역 측정).
 //      보스 전투실·중앙 전투실(보스방·모이는 방)은 보스방 작업(R438·sin-room-art) 몫이라 손대지 않는다. 칠죄 지역 그림 제한(R438)은 지킨다.
 //      맘몬 지역(ep1b06)·사몽·꿈 층은 손대지 않는다.
 //   B. 남긴 가구 그림은 바로 읽고, 그릴 때 아직 없으면 1.5초 간격으로 다시 읽는다 → 방문·저장 불러오기마다 같은 모습.
 //   C. 키 큰 조형물(키 56px↑)이 그 뒤의 살아 있는 몹·보스, 문·제단·목표·상자를 화면에서 덮으면 엔진 영웅 규칙처럼 옅게(.4~.5) 그린다.
-//  결정성: 계획은 방을 처음 볼 때 한 번(지도·방 이름·문·입구·목표·제단·R169 길·R224 소품 id·처음 본 조형물만 씀, 몹·난수 없음).
+//  결정성: 계획은 방을 처음 볼 때 한 번(지도·방 이름·바닥·문·입구·목표·제단·R169 길·처음 본 조형물 자리·지역 계열만 씀, 몹·난수·R224 자리 없음).
 //   나중에 붙는 상자·상호작용·문 소품 곁(1.5~1.6칸)의 가구는 계획을 바꾸지 않고 그 점만 숨긴다 → 언제 붙든 같은 결과. 저장·불러오기·재입장 모두 같은 배치.
 //  끄기: localStorage['storyworld.r447.space']='{"on":false}' (부분: {"furnish":false} 가구 규칙만, {"fade":false} 가림 완화만)
 (()=>{'use strict';
 if(window.__STORYWORLD_PROPS_SPACE_R447__)return;
-const REV='R447-props-space-2',KEY='storyworld.r447.space';
+const REV='R447-props-space-3',KEY='storyworld.r447.space';
 const prefs={on:true,furnish:true,fade:true};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(prefs))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={regions:0,rooms:0,kept:0,hidden:0,skippedBoss:0,emptyRooms:0,rhythmEmpty:0,lateHidden:0,reloads:0,faded:0,errors:0};let lastError=null;
@@ -78,12 +80,11 @@ const EXTRA={clinic:['148','144','149'],home:['026','025'],urban:['056','051'],f
 const WALL_D={'024':.85,'025':.75,'026':.6,'027':.55,'051':.7,'056':.45};
 // 계열 판별: 지역 R224 가구(처음 그림)에서 그 계열에만 있는 그림 수로
 const KIND_ART={clinic:/r80-14[1-9]\.webp$/,home:/r80-02[567]\.webp$/,urban:/r80-05[146]\.webp$/,forge:/r80-(045|039|018)\.webp$/,machine:/r80-(001|002|151|152)\.webp$/,cult:/r80-(061|062|064|069)\.webp$/};
-function kindOf(list){const n={};for(const p of list){const s=String(orig(p).path||'');for(const[k,re]of Object.entries(KIND_ART))if(re.test(s))n[k]=(n[k]||0)+1;}
+function kindOf(list){const n={};for(const p of list){const s=String(p.path||'');for(const[k,re]of Object.entries(KIND_ART))if(re.test(s))n[k]=(n[k]||0)+1;}
  let best=null,bn=0;for(const k of Object.keys(KIND_ART))if((n[k]||0)>bn){bn=n[k];best=k;}return best;}
 // 칠죄 지역(R438 과 같은 규칙): 보스방 틀+3칸 안 R224 가구와 지역 그림에 안 맞는 R224 가구는 R438 이 뺀다 → 처음부터 쓰지 않는다(먼저 돌든 나중 돌든 같은 결과)
 const SIN=new Set(['ep1b02','ep1b03','ep1b04','ep1b05','ep1b07']),SIN_MARGIN=3;
 const THEME={ep1b02:/^02[45]$/,ep1b03:/^026$/,ep1b04:/^02[57]$/};
-const THEME_PATH={ep1b02:/r80-02[45]\.webp$/,ep1b03:/r80-026\.webp$/,ep1b04:/r80-02[57]\.webp$/};
 // 그림 정면: 대부분의 R80 가구·의자·휠체어는 +y(화면 왼쪽 아래)를 본다. 소파 r80-024·쓰러진 기둥 r80-021(R412 NATIVE_X)과 침대 r80-142(긴 변·발치 +x)는 +x.
 //  → 뒤쪽 벽에 등을 대고 방(탁자) 쪽을 보게: +y 정면은 -x 벽(w)에서, +x 정면은 -y 벽(n)에서 좌우를 뒤집는다(R303·R406·R412 와 같은 규칙). 탁자 r80-146 은 대칭.
 const NATIVE_X=/^(021|024|142)$/,SYM=/^146$/;
@@ -119,41 +120,42 @@ const nearPath=(S,x,y,rad)=>{if(!S)return false;const cx=Math.floor(x),cy=Math.f
 function openings(F,rc,side){const out=[];if(side==='n'){for(let x=rc.x0;x<rc.x1;x++)if(F.has(x+','+(rc.y0-1)))out.push(x+.5);}else{for(let y=rc.y0;y<rc.y1;y++)if(F.has((rc.x0-1)+','+y))out.push(y+.5);}return out;}
 const inRect=(rc,x,y,m=0)=>x>=rc.x0-m&&x<=rc.x1+m&&y>=rc.y0-m&&y<=rc.y1+m;
 const overlap=(rc,b)=>Array.isArray(b)&&b.length===4&&!(rc.x1<=b[0]||rc.x0>=b[2]||rc.y1<=b[1]||rc.y0>=b[3]);
-// R224 가 처음 놓은 자리·그림(이 오버레이가 바꾼 뒤에도)
-const orig=p=>p?.r447?.from||p;
-
 // ---- 대상 지역 -------------------------------------------------------------------------------------
 function eligible(r){return !!(prefs.on&&prefs.furnish&&r&&r.exploration&&Array.isArray(r.props)&&Array.isArray(r.exploration.r224Rooms)&&r.exploration.r224Rooms.length&&
  (!r.layer||r.layer==='STORY')&&!r.exploration.samongR103&&!r.exploration.samongR115&&!r.samongR103&&r.id!=='ep1b06');}
-// 방을 처음 볼 때 한 번 찍어 두는 것(이후 소품이 붙거나 옮겨져도 계획은 그대로). 몹은 쓰지 않는다(저장 불러오기 때 집 자리가 바뀜).
-function snapshot(r){const others=[];for(const p of r.props)if(p&&!p.r224Furniture&&p.path&&fin(p.x+p.y)&&!DOORISH(p)&&!KEYISH(p))others.push([+p.x,+p.y]);
+const MINE=p=>!!p&&p.r447Furniture===true;
+// 방을 처음 볼 때 한 번 찍어 두는 다른 조형물 자리(이후 소품이 붙거나 옮겨져도 계획은 그대로). 몹은 쓰지 않는다(저장 불러오기 때 집 자리가 바뀜).
+function snapshot(r){const others=[];for(const p of r.props)if(p&&!p.r224Furniture&&!MINE(p)&&p.path&&fin(p.x+p.y)&&!DOORISH(p)&&!KEYISH(p))others.push([+p.x,+p.y]);
  return{others};}
+// 지역 계열: R224 가 그 지역에 쓴 그림 계열. 처음 정한 답을 지역 id 로 기억한다(R438 이 일부를 빼도 같은 답).
+const kindMemo=new Map();
+function regionKind(r){if(kindMemo.has(r.id))return kindMemo.get(r.id);const k=kindOf(r.props.filter(p=>p&&p.r224Furniture));if(k)kindMemo.set(r.id,k);return k;}
 
 // ---- 한 지역 계획 ---------------------------------------------------------------------------------
-//  돌려주는 것: {kind, rooms:[{id,name,space,variant,why,pieces:[{id,art,x,y,wall,side,mirror}],hide:[id]}]}
+//  지도 자료(방 사각형·이름·바닥·문·입구·목표·제단·R169 길)와 처음 본 조형물 자리만 본다. R224 가 무엇을 어디에 몇 점 놓았는지는 보지 않는다
+//  (R224 는 그 순간 있던 소품에 따라 자리를 건너뛰어 불러오기 때 개수·자리가 달라졌다 — 질투 지역 측정).
+//  돌려주는 것: {kind, rooms:[{id,name,space,variant,why,boss,rect,pieces:[{id,art,x,y,wall,side,mirror}]}]}
 function plan(r,snap=snapshot(r)){const L=r?.exploration,R=L?.r224Rooms;if(!L||!Array.isArray(R)||!R.length||!Array.isArray(r.props))return null;
- const W=L.worldWardR81||{},sinOn=SIN.has(r.id)&&!!L.sinRoomArt,B=sinOn&&Array.isArray(W.bossBounds)&&W.bossBounds.length===4?W.bossBounds:null,themeP=sinOn?THEME_PATH[r.id]:null;
+ const kind=regionKind(r);if(!kind)return null;
+ const W=L.worldWardR81||{},sinOn=SIN.has(r.id)&&!!L.sinRoomArt,B=sinOn&&Array.isArray(W.bossBounds)&&W.bossBounds.length===4?W.bossBounds:null;
  const inSin=(x,y,m)=>!!B&&x>=B[0]-m&&x<=B[2]+m&&y>=B[1]-m&&y<=B[3]+m;
- const all=r.props.filter(p=>p&&p.r224Furniture&&fin(orig(p).x+orig(p).y));if(!all.length)return null;
- // R438 이 뺄 것은 처음부터 제외(쓰지도 숨기지도 않음 — R438 몫)
- const pool=all.filter(p=>{const o=orig(p);return !inSin(o.x,o.y,SIN_MARGIN)&&!(themeP&&!themeP.test(String(o.path||'')));});
- const kind=kindOf(all);if(!kind)return null;const TT=T[kind],theme=sinOn?THEME[r.id]||null:null,F=floorSet(L);
+ const TT=T[kind],theme=sinOn?THEME[r.id]||null:null,F=floorSet(L);
  const info=new Map((L.worldR74?.rooms||[]).map(q=>[q.id,q])),avoid=layoutAvoid(r),path=pathOf(r),others=snap.others||[];
  const out={kind,rooms:[]},placed=[],nth={};
- const byRoom=new Map();for(const p of pool){const o=orig(p),rc=R.find(q=>inRect(q,o.x,o.y,.01));if(!rc)continue;if(!byRoom.has(rc))byRoom.set(rc,[]);byRoom.get(rc).push(p);}
- const order=[...byRoom.keys()].sort((a,b)=>(a.id??0)-(b.id??0));
- for(const rc of order){const props=byRoom.get(rc).sort((a,b)=>String(a.id).localeCompare(String(b.id)));const nm=info.get(rc.id)?.name||info.get(rc.id)?.purpose||'';
-  const space=spaceOf(nm),room={id:rc.id,name:nm,space,variant:-1,pieces:[],hide:props.map(p=>p.id),why:''};out.rooms.push(room);
-  if(space==='boss'||overlap(rc,W.bossBounds)||overlap(rc,W.gatherBounds)){room.why='boss';room.hide=[];room.keep=props.map(p=>p.id);continue;}/* 보스방 작업 몫: 그대로 둔다 */
-  const w=rc.x1-rc.x0,d=rc.y1-rc.y0,area=w*d;
+ const order=R.filter(q=>q&&fin(q.x0+q.y0+q.x1+q.y1)).sort((a,b)=>(a.id??0)-(b.id??0));
+ for(const rc of order){const nm=info.get(rc.id)?.name||info.get(rc.id)?.purpose||'',space=spaceOf(nm),w=rc.x1-rc.x0,d=rc.y1-rc.y0,area=w*d;
+  const room={id:rc.id,name:nm,space,variant:-1,pieces:[],why:'',rect:[rc.x0,rc.y0,rc.x1,rc.y1]};out.rooms.push(room);
+  if(space==='boss'||overlap(rc,W.bossBounds)||overlap(rc,W.gatherBounds)){room.why='boss';room.boss=true;continue;}/* 보스방 작업 몫: R224 가구 그대로 */
+  if(w<5||d<5){room.why='small';continue;}/* R224 도 두지 않던 좁은 칸 */
+  if(B&&inSin(rc.x0,rc.y0,SIN_MARGIN)&&inSin(rc.x1,rc.y1,SIN_MARGIN)){room.why='sin-boss';continue;}/* 칠죄 보스방 둘레 — R438 몫 */
   if(space==='junction'||space==='yard'){room.why=space;continue;}
   if(space==='corridor'&&!(Math.max(w,d)>=12&&Math.min(w,d)>=5)){room.why='short-corridor';continue;}
   const list=TT[space]||TT.room||[E];const k=nth[space]=(nth[space]??-1)+1,vi=k%list.length;room.variant=vi;/* 그 종류 첫 방은 늘 온전한 묶음 */
   let tpl=list[vi].slice();
   if(!tpl.length){room.why='rhythm';continue;}/* 같은 종류 방 사이 일부러 비움 */
   if(theme){tpl=tpl.filter(q=>theme.test(q.art));if(!tpl.length&&['living','rest','storage','work','room'].includes(space)){const first=['024','025','026','027'].find(a=>theme.test(a));if(first)tpl=[P(first,0,WALL_D[first]||.6)];}}
-  if(Math.min(w,d)<5)tpl=tpl.filter(q=>q.d<=.8).slice(0,1);
-  tpl=tpl.slice(0,props.length);
+  const cap=Math.max(1,Math.min(4,Math.round(area/45)));/* R224 와 같은 방 크기별 상한(작은 방은 적게) */
+  tpl=tpl.slice(0,cap);
   if(!tpl.length){room.why='none';continue;}
   const salt=h32(r.id+':'+rc.id);
   const free=(x,y,fx,fy,mine)=>{if(!inRect(rc,x,y,-.35))return false;if(blockedL(L,x,y,.3)||blockedL(L,fx,fy,.08))return false;
@@ -170,7 +172,7 @@ function plan(r,snap=snapshot(r)){const L=r?.exploration,R=L?.r224Rooms;if(!L||!
      for(const q of group){const along=t+q.a*mir;if(along<start+.45||along>start+len-.45){ok=false;break;}
       if(ops.some(o=>Math.abs(o-along)<(q.d<=1.0?1.4:.9))){ok=false;break;}/* 뒤쪽 벽 문 틈 앞은 비운다 */
       const x=side==='n'?along:rc.x0+q.d,y=side==='n'?rc.y0+q.d:along,sd=side==='n'?'-y':'-x';
-      const mirror=SYM.test(q.art)?false:NATIVE_X.test(q.art)?sd==='-y':sd==='-x',k=mirror?pivotShift(q.art):0,fx=Math.abs(k)>.01?x+k:x,fy=Math.abs(k)>.01?y-k:y;
+      const mirror=SYM.test(q.art)?false:NATIVE_X.test(q.art)?sd==='-y':sd==='-x',kk=mirror?pivotShift(q.art):0,fx=Math.abs(kk)>.01?x+kk:x,fy=Math.abs(kk)>.01?y-kk:y;
       if(!free(x,y,fx,fy,mine)){ok=false;break;}
       const pc={x:fx,y:fy,bx:x,by:y,art:q.art,wall:side,side:sd,mirror,d:q.d};mine.push(pc);placed.push(pc);}
      if(ok)return{side,t,pcs:mine};for(const m of mine)placed.splice(placed.indexOf(m),1);}}
@@ -180,53 +182,44 @@ function plan(r,snap=snapshot(r)){const L=r?.exploration,R=L?.r224Rooms;if(!L||!
   let got=null;for(let k2=tpl.length;k2>=1&&!got;k2--)got=tryGroup(tpl.slice(0,k2),sides,null);
   const pieces=got?got.pcs.slice():[];
   // 큰 방: 맞은편 벽에 다른 그림 한 점
-  if(got&&area>=380&&pieces.length<props.length){const usedArt=new Set(pieces.map(q=>q.art));const ex=(EXTRA[kind]||[]).find(a=>!usedArt.has(a)&&(!theme||theme.test(a)));
+  if(got&&area>=380&&pieces.length<cap){const usedArt=new Set(pieces.map(q=>q.art));const ex=(EXTRA[kind]||[]).find(a=>!usedArt.has(a)&&(!theme||theme.test(a)));
    if(ex){const other=got.side==='n'?'w':'n';const g2=tryGroup([P(ex,0,WALL_D[ex]||.55)],[other,got.side],got);if(g2)pieces.push(...g2.pcs);}}
-  room.hide=[];
-  for(let i=0;i<props.length;i++){const p=props[i],pc=pieces[i];if(!pc){room.hide.push(p.id);continue;}pc.id=p.id;room.pieces.push(pc);}
+  pieces.forEach((pc,i)=>{pc.id='r447:furn:'+r.id+':'+rc.id+':'+i;room.pieces.push(pc);});
   if(!pieces.length)room.why='no-spot';}
  return out;}
 
-// ---- 적용(소품 id 로) -------------------------------------------------------------------------------
+// ---- 적용 ----------------------------------------------------------------------------------------
+//  계획한 가구는 새 소품 객체로 한 번 넣고(id r447:furn:지역:방:번호), 보스방·모이는 방 밖의 R224 가구는 쉬게 한다(객체·id 는 배열에 그대로).
 const done=new WeakMap();let lastPlan=null;
-const sigOf=r=>{let n=0;for(const p of r.props||[])if(p?.r224Furniture)n++;return r.props.length+':'+n;};
-function place(p,pc){const a=asset(pc.art);if(!a)return false;const first=!p.r447;
- if(first)p.r447={from:{x:p.x,y:p.y,path:p.path,r80Art:p.r80Art,height:p.height}};
- Object.assign(p.r447,{art:pc.art,wall:pc.wall});
- p.path=a.path;p.r80Art='r80-'+pc.art;p.height=64*(+a.scale||1);p.x=+pc.x.toFixed(3);p.y=+pc.y.toFixed(3);
- if(first){delete p.r303Hide;delete p.r303Moved;delete p.r303Wall;try{delete p.r111To;}catch(_){}delete p.r406Moved;delete p.r406Wall;
-  // R412 가 옛 자리에서 잰 벽 겹침은 버리고 새 자리에서 다시 재게(벽에 박히면 R412 가 살짝 뺀다)
-  delete p.r412Wall;delete p.r412Foot;delete p.r412Tries;delete p.r412Emb;delete p.r412Pivot;
-  if(p.r169Hidden){delete p.r169Hidden;p.visible=true;}}
- p.r406Seen=1;/* R406 은 다시 옮기지 않는다 */
- // 방향: R140(장식 반쪽 뒤집기)과 겹쳐 보이는 방향이 원하는 쪽이 되게 r303Flip 을 고르고, 벽(side)을 r412Face 에 적어 R412 face 가 다시 돌리지 않게 한다.
- if(pc.mirror!==r140Flips(p))p.r303Flip=true;else delete p.r303Flip;p.r412Face=pc.side;
- return true;}
-function apply(r,st){const keepPaths=[],live=liveAvoid(r),ids=st.assign,hideIds=st.hide;let kept=0,hidden=0,late=0;
- for(const p of r.props){if(!p||!p.r224Furniture)continue;const pc=ids.get(p.id);
-  if(pc){if(p.r303Hide==='r447')delete p.r303Hide;
-   if(!(p.r447&&p.r447.art===pc.art&&p.x===+pc.x.toFixed(3)&&p.y===+pc.y.toFixed(3))&&!place(p,pc)){p.r303Hide='r447';hidden++;continue;}
-   // 나중에 붙은 문·상자·상호작용 곁이면 이 한 점만 쉰다(계획은 그대로)
-   const near=live.some(([x,y,rr])=>Math.hypot(x-p.x,y-p.y)<rr);
-   if(near){if(!p.r303Hide){p.r303Hide='r447x';late++;}}else if(p.r303Hide==='r447x')delete p.r303Hide;
-   if(!p.r303Hide){keepPaths.push(p.path);kept++;}continue;}
-  if(st.skip.has(p.id))continue;/* 보스방·R438 몫 */
-  if(hideIds.has(p.id)||!st.known.has(p.id)){if(p.r303Hide!=='r447'){p.r303Hide='r447';hidden++;}}}
- if(late)stats.lateHidden+=late;ensure([...new Set(keepPaths)],'room furniture');return{kept,hidden,late};}
+const sigOf=r=>{let a=0,b=0;for(const p of r.props||[]){if(p?.r224Furniture)a++;else if(MINE(p))b++;}return r.props.length+':'+a+':'+b;};
+function make(pc,rm){const a=asset(pc.art);if(!a)return null;
+ const p={id:pc.id,path:a.path,x:+pc.x.toFixed(3),y:+pc.y.toFixed(3),height:64*(+a.scale||1),solid:false,visible:true,enabled:true,
+  r80Dressing:true,r80Art:'r80-'+pc.art,r80PresentationOnly:true,r447Furniture:true,r447:{room:rm.id,space:rm.space,wall:pc.wall,art:pc.art},
+  r406Seen:1/* R406 은 옮기지 않는다 */,r412Face:pc.side/* R412 face 가 다시 돌리지 않게 벽을 적는다 */};
+ // 방향: R140(장식 반쪽 뒤집기)과 겹쳐 보이는 방향이 원하는 쪽(벽에 등, 방 쪽 정면)이 되게 r303Flip 을 고른다
+ if(pc.mirror!==r140Flips(p))p.r303Flip=true;return p;}
+const inBoss=(st,p)=>st.bossRects.some(b=>p.x>=b[0]-.01&&p.x<=b[2]+.01&&p.y>=b[1]-.01&&p.y<=b[3]+.01);
+function apply(r,st){const keepPaths=[],live=liveAvoid(r),have=new Set();let kept=0,rested=0,late=0;
+ for(const p of r.props){if(!p)continue;if(MINE(p)){have.add(p.id);continue;}
+  if(p.r224Furniture&&!p.r303Hide&&!inBoss(st,p)){p.r303Hide='r447';rested++;}}
+ for(const p of st.objs){if(!have.has(p.id))r.props.push(p);/* 처음, 또는 다른 모듈이 소품 배열을 새로 만들었을 때 */
+  // 나중에 붙은 문·상자·상호작용 곁이면 이 한 점만 쉰다(계획은 그대로)
+  const near=live.some(([x,y,rr])=>Math.hypot(x-p.x,y-p.y)<rr);
+  if(near){if(!p.r303Hide){p.r303Hide='r447x';late++;}}else if(p.r303Hide==='r447x')delete p.r303Hide;
+  if(!p.r303Hide){keepPaths.push(p.path);kept++;}}
+ if(late)stats.lateHidden+=late;ensure([...new Set(keepPaths)],'room furniture');return{kept,rested,late};}
 function curate(r,opt={}){if(!eligible(r))return null;
- let st=done.get(r);const sig=sigOf(r);
- if(st&&st.L===r.exploration&&!opt.force){if(st.sig!==sig){st.sig=sig;try{apply(r,st);}catch(e){fail(e);}}return st.rep;}
- const snap=st&&st.L===r.exploration&&st.snap?st.snap:snapshot(r);let pl=null;try{pl=plan(r,snap);}catch(e){fail(e);}
- const assign=new Map(),hide=new Set(),skip=new Set(),known=new Set();
- if(pl)for(const rm of pl.rooms){for(const pc of rm.pieces){assign.set(pc.id,pc);known.add(pc.id);}for(const id of rm.hide){hide.add(id);known.add(id);}for(const id of rm.keep||[]){skip.add(id);known.add(id);}}
- // 계획 밖 R224 가구(칠죄 보스방 둘레·지역 그림 밖 — R438 몫, 방 사각형 밖)는 손대지 않는다
- for(const p of r.props)if(p&&p.r224Furniture&&!known.has(p.id)){skip.add(p.id);known.add(p.id);}
- st={L:r.exploration,sig,snap,assign,hide,skip,known,rep:null};done.set(r,st);
- if(!pl)return null;
- let res={kept:0,hidden:0,late:0};try{res=apply(r,st);}catch(e){fail(e);}
- stats.regions++;for(const rm of pl.rooms){if(rm.why==='boss'){stats.skippedBoss++;continue;}stats.rooms++;if(!rm.pieces.length)stats.emptyRooms++;if(rm.why==='rhythm')stats.rhythmEmpty++;}stats.kept+=res.kept;stats.hidden+=res.hidden;
- const rep={room:r.id,kind:pl.kind,kept:res.kept,hidden:res.hidden,late:res.late,rooms:pl.rooms.map(q=>({id:q.id,name:q.name,space:q.space,variant:q.variant,why:q.why||undefined,
-  pieces:q.pieces.map(c=>c.art+'@'+c.wall+':'+c.x.toFixed(2)+','+c.y.toFixed(2)+(c.mirror?'~':'')),hidden:q.hide.length}))};
+ let st=done.get(r);
+ if(st&&st.L===r.exploration&&!opt.force){const sig=sigOf(r);if(st.sig!==sig){try{apply(r,st);}catch(e){fail(e);}st.sig=sigOf(r);}return st.rep;}
+ if(st&&st.objs?.length){const ids=new Set(st.objs.map(p=>p.id));for(let i=r.props.length-1;i>=0;i--)if(ids.has(r.props[i]?.id))r.props.splice(i,1);}/* 지도가 바뀌면 다시 계획 */
+ const snap=snapshot(r);let pl=null;try{pl=plan(r,snap);}catch(e){fail(e);}
+ const objs=[];if(pl)for(const rm of pl.rooms)for(const pc of rm.pieces){const p=make(pc,rm);if(p)objs.push(p);}
+ st={L:r.exploration,sig:'',objs,bossRects:pl?pl.rooms.filter(q=>q.boss).map(q=>q.rect):[],planned:!!pl,rep:null};done.set(r,st);
+ if(!pl){st.sig=sigOf(r);return null;}
+ let res={kept:0,rested:0,late:0};try{res=apply(r,st);}catch(e){fail(e);}st.sig=sigOf(r);
+ stats.regions++;for(const rm of pl.rooms){if(rm.boss){stats.skippedBoss++;continue;}stats.rooms++;if(!rm.pieces.length)stats.emptyRooms++;if(rm.why==='rhythm')stats.rhythmEmpty++;}stats.kept+=res.kept;stats.hidden+=res.rested;
+ const rep={room:r.id,kind:pl.kind,kept:res.kept,rested:res.rested,late:res.late,placed:objs.length,rooms:pl.rooms.map(q=>({id:q.id,name:q.name,space:q.space,variant:q.variant,why:q.why||undefined,
+  pieces:q.pieces.map(c=>c.art+'@'+c.wall+':'+c.x.toFixed(2)+','+c.y.toFixed(2)+(c.mirror?'~':''))}))};
  st.rep=rep;lastPlan=rep;return rep;}
 
 // ---- 가림 완화 ------------------------------------------------------------------------------------
@@ -250,16 +243,16 @@ function coverAlpha(p){if(!prefs.on||!prefs.fade||!p||p.r303Hide||!(+p.height>=5
 // ---- 그리기 감싸기 ---------------------------------------------------------------------------------
 try{if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){
  if(!prefs.on||!p)return base.call(this,p,...a);
- if(p.r224Furniture&&typeof room!=='undefined'&&room){const st=done.get(room);
-  if(!st||st.L!==room.exploration){try{curate(room);}catch(e){fail(e);}}/* R224 가구가 처음 그려질 때(R406·R412 가 손대기 전) 바로 정리 */
-  else if(!st.known.has(p.id)){st.known.add(p.id);if(st.rep&&!p.r303Hide)p.r303Hide='r447';}/* 계획 뒤에 새로 붙은 R224 가구는 쉰다(계획은 그대로) */
+ if((p.r224Furniture||MINE(p))&&typeof room!=='undefined'&&room){let st=done.get(room);
+  if(!st||st.L!==room.exploration){try{curate(room);}catch(e){fail(e);}st=done.get(room);}/* R224 가구가 처음 그려질 때(R406·R412 가 손대기 전) 바로 정리 */
+  if(st&&st.planned&&p.r224Furniture&&!p.r303Hide&&!inBoss(st,p))p.r303Hide='r447';/* 계획 뒤에 새로 붙은 R224 가구도 쉰다 */
   if(p.r303Hide==='r447'||p.r303Hide==='r447x')return;
-  if(p.r447&&p.path&&typeof readyImage==='function'&&!readyImage(p.path))ensure([p.path],'redraw');}
+  if(MINE(p)&&p.path&&typeof readyImage==='function'&&!readyImage(p.path))ensure([p.path],'redraw');}
  let k=1;try{k=coverAlpha(p);}catch(e){fail(e);}
  if(k<1&&typeof sprite==='function'){const sp=sprite;stats.faded++;sprite=function(path,x,y,h,o,...rest){return sp.call(this,path,x,y,h,{...(o||{}),alpha:Math.min(o?.alpha??1,k)},...rest);};
   try{return base.call(this,p,...a);}finally{sprite=sp;}}
  return base.call(this,p,...a);};}}catch(e){fail(e);}
-// 처음 본 순간 찍기 + 소품 수가 바뀌면 다시 적용(0.4초마다, 계획은 방마다 한 번)
+// 처음 본 순간 계획 + 소품 수가 바뀌면 다시 적용(0.4초마다, 계획은 방마다 한 번)
 (function poll(){try{if(typeof room!=='undefined'&&room&&!(typeof loading!=='undefined'&&loading)&&eligible(room)&&room.props.some(p=>p?.r224Furniture))curate(room);}catch(e){fail(e);}setTimeout(poll,400);})();
 function set(o={}){for(const k of Object.keys(prefs))if(typeof o[k]==='boolean')prefs[k]=o[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
 window.__STORYWORLD_PROPS_SPACE_R447__=Object.freeze({revision:REV,set,plan,curate,eligible,snapshot,spaceOf,kindOf,coverAlpha,TEMPLATES:T,EXTRA,SPACE:SPACE.map(([k,re])=>[k,String(re)]),
