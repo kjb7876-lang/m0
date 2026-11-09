@@ -9,7 +9,7 @@
  * Canonical source; copied to runtime-text by scripts/sync-r99.py. */
 (()=>{'use strict';
 if(window.__STORYWORLD_GROVE_R481__)return;
-const REV='R481-grove-3',CROWN_V0=.45,KEY='storyworld.r481.grove';
+const REV='R481-grove-4',CROWN_V0=.45,KEY='storyworld.r481.grove';
 let prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;}catch(e){}
 // R204 가 나무를 심는 실외 지역(cave-r204 ZONES 의 trees). 맘몬 ep1b06 은 Codex 몫이라 늘 뺀다(ep1b06b 눈보라 숲은 다른 지역).
 const ZONES=new Set(['dist00','dist02','dist04','last304','last305','kair05','last303','ep1b06b']),NEVER=new Set(['ep1b06']);
@@ -61,13 +61,16 @@ function build(T,r,ctx,sprites){
   const src=maps[k],c=src.color||{r:1,g:1,b:1};
   const mat=new T.MeshBasicMaterial({map:src.map,alphaTest:Math.max(.45,+src.alphaTest||0),transparent:false,depthWrite:true,toneMapped:false,vertexColors:true,side:T.DoubleSide,color:new T.Color(c.r,c.g,c.b)});
   r.spatialResources?.add(geo);r.spatialResources?.add(mat);
+  // 시야(횃불) 마스크: R204 나무·풀처럼 시야 밖 덤불은 함께 어두워진다(Codex #354)
+  if(r.sightState24&&window.StoryPhase1?.attachSight24)window.StoryPhase1.attachSight24(mat,r.sightState24);
   const mesh=new T.Mesh(geo,mat);mesh.name='r481-grove-'+k;mesh.layers.set(2);mesh.renderOrder=-27;mesh.userData.presentationOnly=true;mesh.userData.r481=true;mesh.frustumCulled=true;g.add(mesh);}
- g.userData.spots=P.length;return g;}
+ g.userData.spots=P.length;g.userData.sightState=r.sightState24||null;return g;}
 let seen=null;
 function tick(){if(!prefs.on)return;try{
  const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three,st=r?.__r204,CAVE=window.__STORYWORLD_CAVE_R204__,T=r?.T;
  if(!r||!st||st.pending||!st.group||!st.F||!CAVE||!T||r.disposed)return;
  const tg=st.group.getObjectByName?.('r204-trees');const old=st.group.getObjectByName?.('r481-groves');
+ if(old&&r.sightState24&&old.userData.sightState!==r.sightState24){for(const m of old.children)window.StoryPhase1?.attachSight24?.(m.material,r.sightState24);old.userData.sightState=r.sightState24;}
  if(old){if(old.userData.camSig){r.camera?.updateMatrixWorld?.();const e=r.camera?.matrixWorld?.elements;const sig=e?[e[0],e[1],e[2],e[4],e[5],e[6]].map(v=>v.toFixed(3)).join(','):old.userData.camSig;if(sig!==old.userData.camSig){st.group.remove(old);}else return;}else return;}
  const key=st.gen+'|'+st.zone;if(seen===key&&!old)return;seen=key;
  if(!zoneOk(st.zone)||!tg||!tg.children?.length)return;
