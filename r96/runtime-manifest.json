@@ -24863,6 +24863,26 @@
       "sha256": "fa26994ea7e39a47506c2b4a56a20f90160f19fa2d628b0925583b71d14b4c57"
     },
     {
+      "path": "assets/r521/crutches.webp",
+      "bytes": 23246,
+      "sha256": "473d98539e3889f02443be8d6c32732ce9f5e4dc5b1a2c712c4fa5f0ce0e5cdd"
+    },
+    {
+      "path": "assets/r521/exam-lamp.webp",
+      "bytes": 18592,
+      "sha256": "6f1e58551a4cadd8aa241f9973db057bae96698f1d0a96b3e85da83542b62b92"
+    },
+    {
+      "path": "assets/r521/index.json",
+      "bytes": 2005,
+      "sha256": "d9465ac05de7cfcd08d6972cbdb94ae5c5ef16cd2cb6a45c628ce5d7448cecca"
+    },
+    {
+      "path": "assets/r521/overbed-table.webp",
+      "bytes": 19974,
+      "sha256": "3db430261733a3134dea95fb59b3f032ee3076f68dab9fe4d11ea7ce2ed35f11"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -33814,8 +33834,8 @@
     },
     {
       "path": "hospital-improvements-a5.js",
-      "bytes": 9944,
-      "sha256": "4f230549de98e78baf94f5db835ea93fc164e9e0c6a635a3f34f94833f4ea978"
+      "bytes": 10036,
+      "sha256": "2be99ffb46b1cef7019d6c96779b090a498a96930875fb91d4be03fc321b8196"
     },
     {
       "path": "hospital-maze-layout.js",
@@ -33836,6 +33856,11 @@
       "path": "hospital-pc-test.js",
       "bytes": 9996,
       "sha256": "7ec04f361d7abdbf67bae8b23bd3de95f5eafa287e121869926d53bf75355e22"
+    },
+    {
+      "path": "hospital-rooms-r521.js",
+      "bytes": 15119,
+      "sha256": "b0263a70ef0cf6976040f251acf7768050030fc820e4923353885c0cd295d6c3"
     },
     {
       "path": "hospital-settings-r84.js",
@@ -33894,8 +33919,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6572477,
-      "sha256": "913a4f1cb22b0c9669b7da0a75db86a30b44f19d8379487c3094ac6094abd37b"
+      "bytes": 6572525,
+      "sha256": "6264b143140b9daf27050a0af05e0e4cceed06a3e9094dc4d3c465964e6ef127"
     },
     {
       "path": "intro-r140.js",
@@ -34773,9 +34798,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6954,
-  "totalBytes": 1092062748,
-  "webHTMLSha256": "913a4f1cb22b0c9669b7da0a75db86a30b44f19d8379487c3094ac6094abd37b",
+  "fileCount": 6959,
+  "totalBytes": 1092141824,
+  "webHTMLSha256": "6264b143140b9daf27050a0af05e0e4cceed06a3e9094dc4d3c465964e6ef127",
   "largest": [
     {
       "path": "index.html",

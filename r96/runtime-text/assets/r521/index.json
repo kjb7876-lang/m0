@@ -1,0 +1,81 @@
+{
+ "source_zip": "StoryWorld_Isometric_Hospital_SmallProps8_20261022.zip",
+ "source_zip_sha256": "bdf752ffbfcb7a4661de8b0c8fa7a6cc63bcd301d9d709537389963a95507f2b",
+ "source_zip_bytes": 5960480,
+ "transform": "alpha>=8 bounding box +6px margin, proportional Lanczos resize to max 320, WebP q90; no repaint",
+ "note": "드라이브 원본은 읽기 전용, 파생본만 저장. 원본 README: original variants, pivots provisional.",
+ "assets": [
+  {
+   "key": "exam-lamp",
+   "file": "assets/r521/exam-lamp.webp",
+   "source": "hospital_exam_lamp.png",
+   "source_sha256": "0d2aee4efc43393cd1afe6be1563f2abf51c40efe4b40f680f91f059cd813c8f",
+   "source_size": [
+    1774,
+    887
+   ],
+   "crop_xyxy": [
+    601,
+    19,
+    1281,
+    865
+   ],
+   "output_size": [
+    257,
+    320
+   ],
+   "bytes": 18592,
+   "sha256": "6f1e58551a4cadd8aa241f9973db057bae96698f1d0a96b3e85da83542b62b92",
+   "use": "진료실·처치실 진찰등",
+   "applied": true
+  },
+  {
+   "key": "overbed-table",
+   "file": "assets/r521/overbed-table.webp",
+   "source": "hospital_overbed_meal_table.png",
+   "source_sha256": "143d32cec057482d7cefff7a497647acd4e97d819e3bdec282fae6f854620945",
+   "source_size": [
+    1760,
+    894
+   ],
+   "crop_xyxy": [
+    444,
+    43,
+    1330,
+    863
+   ],
+   "output_size": [
+    320,
+    296
+   ],
+   "bytes": 19974,
+   "sha256": "3db430261733a3134dea95fb59b3f032ee3076f68dab9fe4d11ea7ce2ed35f11",
+   "use": "병실 침대 곁 식판 탁자",
+   "applied": true
+  },
+  {
+   "key": "crutches",
+   "file": "assets/r521/crutches.webp",
+   "source": "hospital_crutch_pair.png",
+   "source_sha256": "b0965c96becc544e1c9be1286df9d00cf57ce1b23a473cb06b2533893e0732df",
+   "source_size": [
+    1774,
+    887
+   ],
+   "crop_xyxy": [
+    698,
+    4,
+    1111,
+    882
+   ],
+   "output_size": [
+    151,
+    320
+   ],
+   "bytes": 23246,
+   "sha256": "473d98539e3889f02443be8d6c32732ce9f5e4dc5b1a2c712c4fa5f0ce0e5cdd",
+   "use": "병실·대기 공간 벽에 기댄 목발",
+   "applied": true
+  }
+ ]
+}
