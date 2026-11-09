@@ -15,7 +15,7 @@ if(exists){
  // R114 adoptThrow 이 R471 을 먼저 묻고, 고르면 방 조형물(propSource)·무기를 쓰지 않는다
  const r114=C('combat-r114.js'),ad=r114.slice(r114.indexOf('function adoptThrow'),r114.indexOf('function adoptShots'));
  ok('R114 adoptThrow asks R471 before propSource',ad.includes('__STORYWORLD_CANON_THROW_R471__')&&ad.indexOf('__STORYWORLD_CANON_THROW_R471__')<ad.indexOf('propSource('));
- ok('R114 skips room prop and weapon when R471 picked',/src=\w+\?null:propSource\(a\)/.test(ad)&&/w=\w+\?null:WEAP/.test(ad));
+ ok('R114 skips room prop and weapon when R471 picked',/src=r471\?null:propSource\(a\)/.test(ad)&&/w=r471\?null:[^;]*WEAP/.test(ad));
  // 단위
  function env(ready){const g={localStorage:{_s:{},getItem(k){return this._s[k]??null;},setItem(k,v){this._s[k]=String(v);}},console};g.window=g;vm.createContext(g);
   g.readyImage=p=>ready(p)?{image:{naturalWidth:10,naturalHeight:10}}:null;vm.runInContext('var room={id:"ep1b02",enemies:[]};',g);vm.runInContext(src,g);return g;}

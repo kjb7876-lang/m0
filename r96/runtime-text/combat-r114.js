@@ -146,7 +146,7 @@ function restoreProps(){for(const p of hidden.splice(0)){const h=p.r114Hidden;if
 function adoptThrow(e,a){const g=echo.get(e)||{count:0,readyAt:0};g.props=(g.props||0)+1;echo.set(e,g);
  // R471: 칠죄 보스(나태·질투)는 방 가구 대신 정본에 적힌 물건(쓰레기·냉장고·소파·침대 / 유리 조각)을 몸에서 뽑아 던진다.
  let r471=null;try{r471=window.__STORYWORLD_CANON_THROW_R471__?.pick?.(e,a)||null;}catch(_){r471=null;}if(r471){a.path=r471.path;a.prop=null;a.frame=null;}
- const w=r471?null:WEAP[e.nativeId],src=r471?null:propSource(a),canHide=hideable(src),useWeapon=!!w&&(!canHide||g.props%2===0),pl=palette(e);
+ const w=r471?null:window.__STORYWORLD_SIN_BOSS_ART_R463__?.weaponOff?.(e)?null:WEAP[e.nativeId],src=r471?null:propSource(a),canHide=hideable(src),useWeapon=!!w&&(!canHide||g.props%2===0),pl=palette(e);
  const H=typeof actorHeight==='function'?actorHeight():60,body=H*(e.boss?2.05:1)*(Number(e.defScale)||1);
  const info={kind:useWeapon?'weapon':'prop',weapon:useWeapon?w:null,prop:useWeapon?null:src,path:a.path,col:pl?.gp||null,col2:pl?.gs||null,
   height:useWeapon?Math.max(H*.45,w.size*body):Math.max(H*.5,finite(r471?r471.height:src?.height,H*.9)),body,owner:e,r471:r471?r471.key:null};
