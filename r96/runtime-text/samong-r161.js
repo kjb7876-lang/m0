@@ -80,7 +80,7 @@ function drawPuppet(e,im){const dead=e.hp<=0||e.spawnState==='dead',age=T()-(Num
  const q=project(e.x,e.y),cp=e.combatProfile,size=(typeof actorHeight==='function'?actorHeight():60)*(cp?.spriteRect?.height||1)*(e.defScale||1),k=size/BODY,lift=Math.max(0,Math.min(size*.65,Number(e.visualLiftPx)||0));
  const m=e.r161||(e.r161={x:e.x,y:e.y,moving:0,face:1,seed:Math.random()*8});const dx=e.x-m.x,dy=e.y-m.y,sp=Math.hypot(dx,dy);
  if(sp>.002){m.moving=T()+.25;const sx=(dx-dy);if(Math.abs(sx)>.001)m.face=sx<0?-1:1;}else if(typeof player==='object'&&player){const s=(player.x-player.y)-(e.x-e.y);if(Math.abs(s)>.05&&T()>m.moving)m.face=s<0?-1:1;}
- m.x=e.x;m.y=e.y;
+ m.x=e.x;m.y=e.y;{const r443=window.__STORYWORLD_ENEMY_FACE_R443__?.left?.(e);if(typeof r443==='boolean')m.face=r443?-1:1;}/* R443: 걸음 떨림 없이 한 곳에서 */
  // R167: 찌르기 — 예고 동안 뒤로(-0.35칸), 공격 구간에 앞으로(+0.8칸), 회복 동안 제자리로. 판정 자리(e.x,e.y)는 그대로.
  const L=lunge(e);let ox=0,oy=0,lean=0,fr;
  if(L){const q2=project(e.x+Math.cos(L.angle)*L.d,e.y+Math.sin(L.angle)*L.d);ox=q2.x-q.x;oy=q2.y-q.y;const s=Math.cos(L.angle)-Math.sin(L.angle);if(Math.abs(s)>.05)m.face=s<0?-1:1;lean=L.lean;fr=L.d<0?1:5;}

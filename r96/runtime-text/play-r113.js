@@ -201,7 +201,7 @@ function install(){
  const enemyDust=new WeakMap();
  const drawBase=draw;draw=function(...a){scanBudget=lowFx()?2:6;const anc=prefs.ranged&&dance.anchor&&live()?dance.anchor:null;if(!anc)return drawBase.apply(this,a);
   const ox=player.x,oy=player.y;player.x=anc.x;player.y=anc.y;try{return drawBase.apply(this,a);}finally{player.x=ox;player.y=oy;}};
- if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){if(!prefs.facing||!live()||!inFight(e))return base.call(this,e,...a);
+ if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){if(!prefs.facing||!live()||!inFight(e)||window.__STORYWORLD_ENEMY_FACE_R443__?.owns?.(e))return base.call(this,e,...a);/* R443 이 맡은 몹은 그쪽이 정한다 */
   const keep=e.direction;try{e.direction=enemyFace(e);stats.enemyFaced++;}catch(err){fail(err);return base.call(this,e,...a);}try{return base.call(this,e,...a);}finally{e.direction=keep;}};}
  if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){if(!prefs.facing||!live()||player.hp<=0)return base.apply(this,a);let want=null;try{want=heroFace();}catch(err){fail(err);}
   if(!want)return base.apply(this,a);const keep=player.direction;player.direction=want;stats.heroFaced++;try{return base.apply(this,a);}finally{player.direction=keep;}};}

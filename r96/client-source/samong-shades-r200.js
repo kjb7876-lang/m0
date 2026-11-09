@@ -36,7 +36,7 @@ function cellFor(e,m){const n=m.move.length;
  return m.move[Math.floor(T()*1.6+hash(e.id)*2)%2];}
 function frameOf(e,m){const [cw,ch]=m.cell,[px,py]=m.pivot,vh=m.visibleHeight||150,k=cellFor(e,m);
  return {path:m.path,assetFrame:{sourceRect:[k*cw,0,cw,ch],pivot:[px,py],visibleHeight:vh},sourceAlphaCore:[k*cw,0,cw,ch],metricThreshold:16,sourcePixelsEdited:false,
-  normalizedFullRectangleExtents:[-px/vh,-py/vh,(cw-px)/vh,(ch-py)/vh],r200Shade:m.id,flip:!!(typeof player!=='undefined'&&player&&(player.x-player.y)<(e.x-e.y))};}
+  normalizedFullRectangleExtents:[-px/vh,-py/vh,(cw-px)/vh,(ch-py)/vh],r200Shade:m.id,flip:(()=>{const r443=window.__STORYWORLD_ENEMY_FACE_R443__?.left?.(e);return typeof r443==='boolean'?r443:!!(typeof player!=='undefined'&&player&&(player.x-player.y)<(e.x-e.y));})()};}
 function install(){const S=window.__STORYWORLD_STORY_COMBAT_R54__;if(!S||typeof S.frameFor!=='function')return false;if(S.__r200)return true;
  window.__STORYWORLD_STORY_COMBAT_R54__=Object.freeze({...S,__r200:true,frameFor(e,f){try{const m=prefs.on?assign(e):null;if(m){
    if(typeof readyImage==='function'&&!readyImage(m.path)&&typeof ensureImages==='function')Promise.resolve(ensureImages([m.path])).catch(()=>{});

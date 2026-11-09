@@ -50,7 +50,7 @@ function cellFor(e,m){const n=m.move.length;
  return m.move[Math.floor(T()*1.6+hash(e.id)*2)%2];}
 function frameOf(e,m){const [cw,ch]=m.cell,[px,py]=m.pivot,vh=m.visibleHeight||150,k=cellFor(e,m);
  return {path:m.path,assetFrame:{sourceRect:[k*cw,0,cw,ch],pivot:[px,py],visibleHeight:vh},sourceAlphaCore:[k*cw,0,cw,ch],metricThreshold:16,sourcePixelsEdited:false,
-  normalizedFullRectangleExtents:[-px/vh,-py/vh,(cw-px)/vh,(ch-py)/vh],r208Mob:m.id,flip:(!!(typeof player!=='undefined'&&player&&(player.x-player.y)<(e.x-e.y)))!==(m.facing==='left')};}/* R223: 왼쪽을 보는 그림은 반대로 */
+  normalizedFullRectangleExtents:[-px/vh,-py/vh,(cw-px)/vh,(ch-py)/vh],r208Mob:m.id,flip:((()=>{const r443=window.__STORYWORLD_ENEMY_FACE_R443__?.left?.(e);return typeof r443==='boolean'?r443:!!(typeof player!=='undefined'&&player&&(player.x-player.y)<(e.x-e.y));})())!==(m.facing==='left')};}/* R223: 왼쪽을 보는 그림은 반대로 */
 // 다른 덧씌우기가 나중에 frameFor 를 바꿔 끼워도 가장 바깥에 다시 선다(20초 동안 확인).
 function install(){const S=window.__STORYWORLD_STORY_COMBAT_R54__;if(!S||typeof S.frameFor!=='function')return false;if(S.__r208)return true;
  window.__STORYWORLD_STORY_COMBAT_R54__=Object.freeze({...S,__r208:true,frameFor(e,f){try{const m=prefs.on?assign(e):null;if(m){

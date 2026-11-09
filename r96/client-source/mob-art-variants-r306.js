@@ -25,6 +25,7 @@ function cachedShadow(s,im,fr){const key=s.path+':'+fr;let row=shadows.get(key);
  const bitmap=new Image();row={image:bitmap,ready:false};bitmap.onload=()=>{row.ready=true;};bitmap.onerror=()=>{shadows.delete(key);};shadows.set(key,row);bitmap.src=canvas.toDataURL('image/png');stats.shadowBuilt++;
  while(shadows.size>48)shadows.delete(shadows.keys().next().value);return null;}
 function paintShadow(e,s,im,fr,c,outer){
+ if(window.__STORYWORLD_ENEMY_FACE_R443__?.noShadows?.())return;/* R443 사용자 2026-11-09 몬스터 그림자 없애기 */
  if(!outer||typeof project!=='function'||typeof c.setTransform!=='function'||typeof c.save!=='function')return;
  const q=project(e.x,e.y),w=typeof W==='number'?W:0,h=typeof H==='number'?H:0,plan=shadowPlan(q.x,q.y,w,h);if(!plan){stats.shadowOutside++;return;}
  const small=w<960||(typeof matchMedia==='function'&&matchMedia('(pointer:coarse)').matches),height=(typeof actorHeight==='function'?actorHeight():60)*(e.combatProfile?.spriteRect?.height||1)*(e.defScale||1),size=Math.min(height,180),scale=size/Math.max(10,s.body/4),bitmap=small?null:cachedShadow(s,im,fr);

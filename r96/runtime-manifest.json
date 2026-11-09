@@ -33204,8 +33204,8 @@
     },
     {
       "path": "combat-flow-r425.js",
-      "bytes": 59053,
-      "sha256": "c8177e4a4ec77e28ca246c5d1c3fa579738ab69824bb6f0367e16807372a5b01"
+      "bytes": 59152,
+      "sha256": "7e9a023bb2e0de93e934a860a87c9f458f6b69d88ac070174c396b1b53a942f5"
     },
     {
       "path": "combat-r114.js",
@@ -33219,8 +33219,8 @@
     },
     {
       "path": "combat-r137.js",
-      "bytes": 17930,
-      "sha256": "5fcbfe4c833adf20a801bc3fe40b7a248235ffd87f1c55bccfe0f7579bc1b9fd"
+      "bytes": 18029,
+      "sha256": "25c5ccd6e1937a632277f3098e4f97accadfe32f6a428ae5f2b445e7a26666e5"
     },
     {
       "path": "combat-r160.js",
@@ -33376,6 +33376,11 @@
       "path": "ego-restore-health-r79.js",
       "bytes": 1215,
       "sha256": "ff8cbdd5af4146ffe677acf229d85897144d5f61061d981f02ecf4478d208b63"
+    },
+    {
+      "path": "enemy-face-r443.js",
+      "bytes": 10179,
+      "sha256": "f389f9ff8dc04ca2b8963d199b47e88b6267a1aff2604898a430e30430de15b1"
     },
     {
       "path": "enemy-hexagram-r341.js",
@@ -33634,8 +33639,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6571453,
-      "sha256": "c66bbdc1ca5fdbb563ae9fc2600844336f442f25b993327887968624f1deca7d"
+      "bytes": 6571497,
+      "sha256": "9326976875ec7d9d6e69aa5404bb6e8e32e50e93d3afa96cd3804ba2156a9bea"
     },
     {
       "path": "intro-r140.js",
@@ -33719,8 +33724,8 @@
     },
     {
       "path": "mob-art-variants-r306.js",
-      "bytes": 9678,
-      "sha256": "42fa2701bd7bf7868b4868ecc295ff9c7b03c1f531740d03c8fd807e21b156db"
+      "bytes": 9804,
+      "sha256": "0f661db180eda0e2cabbcb864203b6ce5223f115505baac891145c76757df168"
     },
     {
       "path": "mob-death-r188.js",
@@ -33734,8 +33739,8 @@
     },
     {
       "path": "mob-dots-r375.js",
-      "bytes": 7247,
-      "sha256": "1c273e30a206b314b8ca148caffb7641cef5d5c18e133427b370489bc10353e8"
+      "bytes": 7437,
+      "sha256": "677cb532768095885686c9a265c9875d52751588a55627e05785261fc80d3b51"
     },
     {
       "path": "mob-fix-r275.js",
@@ -33824,8 +33829,8 @@
     },
     {
       "path": "mobs-r109.js",
-      "bytes": 31220,
-      "sha256": "a84f94e7659c9741152f64df46a41beed1dc683e5bf3b918ac1588d20be42e4f"
+      "bytes": 31303,
+      "sha256": "ba32b638352f157a598aa0d47be3727ae51a0de0f00a25dc3b5550b41b1787ce"
     },
     {
       "path": "mobs-r112.js",
@@ -33924,8 +33929,8 @@
     },
     {
       "path": "play-r106.js",
-      "bytes": 10918,
-      "sha256": "20afb96be0bb600f891f57db59366f5631b20232b9fa84dd547d4901e863363f"
+      "bytes": 11083,
+      "sha256": "4f4f2b79dc73cccb36d4568a2631831a91c51ad7516acb44c706d06e3350eaa1"
     },
     {
       "path": "play-r111.js",
@@ -33934,8 +33939,8 @@
     },
     {
       "path": "play-r113.js",
-      "bytes": 27474,
-      "sha256": "0391259881940cd78829bafd41d8acd2c22c2ba32168f89e5f6fbc9b39ef9f1e"
+      "bytes": 27572,
+      "sha256": "223e41a516548bf8b6740c2c7add357d96b166dd68b5a7e8be92e136d2684ac1"
     },
     {
       "path": "play-r115.js",
@@ -34049,8 +34054,8 @@
     },
     {
       "path": "samong-doll-r193.js",
-      "bytes": 4649,
-      "sha256": "622d66089382ed5bf70afffae2f755e3a285e6662c9678bae2eb28c8df77f912"
+      "bytes": 4756,
+      "sha256": "ac2158d650f778fc410d406f43ec248cfb21b74e0869d55ad53f2350767561b3"
     },
     {
       "path": "samong-gate-r338.js",
@@ -34084,13 +34089,13 @@
     },
     {
       "path": "samong-r161.js",
-      "bytes": 19312,
-      "sha256": "3ed36affa312992fdb60f3040c21614ed1257b36cf8a0f1aa02152ee4ce0a403"
+      "bytes": 19464,
+      "sha256": "8caf46b3808f733ab48ba5185b4237af38ad371e3d4c44db525c8ad1f6e52adc"
     },
     {
       "path": "samong-shades-r200.js",
-      "bytes": 6620,
-      "sha256": "23f60529ffd820cb99046f5fc47af12d43bdee40472c317a0b33a96b5b0fd679"
+      "bytes": 6727,
+      "sha256": "8f6e466795ffc2e5449ec394d5132a9e3ca3a3cc998ff68efb2d5438e557717f"
     },
     {
       "path": "samong-text-r103.js",
@@ -34219,8 +34224,8 @@
     },
     {
       "path": "story-mobs-r208.js",
-      "bytes": 8679,
-      "sha256": "bb66304b3d13145e3f1eace2c87a2197b67ccc56013cdb998d9be2c276808348"
+      "bytes": 8786,
+      "sha256": "fd47f0294d56d0635d272a9370e67ad16c0b425603856ecd94fcd585c6318c24"
     },
     {
       "path": "story-reader-r122.js",
@@ -34448,9 +34453,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6889,
-  "totalBytes": 1090297750,
-  "webHTMLSha256": "c66bbdc1ca5fdbb563ae9fc2600844336f442f25b993327887968624f1deca7d",
+  "fileCount": 6890,
+  "totalBytes": 1090309306,
+  "webHTMLSha256": "9326976875ec7d9d6e69aa5404bb6e8e32e50e93d3afa96cd3804ba2156a9bea",
   "largest": [
     {
       "path": "index.html",

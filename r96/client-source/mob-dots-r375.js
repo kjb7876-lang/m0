@@ -22,7 +22,7 @@ function assign(e){if(!prefs.on||!idx||!e)return null;if(e.r375Mob)return idx.mo
  e.r375Checked=k;const m=match(e);if(!m)return null;e.r375Mob=m.id;stats.assigned++;return m;}
 function progress(e){const sh=e.attack.shape154||e.combatProfile?.attackShape||{},tot=Math.max(.2,(e.attack.castWindup150??sh.windup??.45)+(sh.active??.15)+(sh.recovery??.35));return Math.min(.999,Math.max(0,e.attack.elapsed/tot));}
 // 화면 방향: 공격 중엔 공격 각, 아니면 영웅 쪽. 등각 화면에서 sx=dx-dy(좌우), sy=dx+dy(아래가 +).
-function dirOf(e){let dx=0,dy=0;if(attacking(e)&&Number.isFinite(e.attack.angle)){dx=Math.cos(e.attack.angle);dy=Math.sin(e.attack.angle);}
+function dirOf(e){const r443=window.__STORYWORLD_ENEMY_FACE_R443__?.d4?.(e);if(r443)return r443;/* R443 */let dx=0,dy=0;if(attacking(e)&&Number.isFinite(e.attack.angle)){dx=Math.cos(e.attack.angle);dy=Math.sin(e.attack.angle);}
  else{try{if(typeof player!=='undefined'&&player){dx=player.x-e.x;dy=player.y-e.y;}}catch(_){}}
  const sx=dx-dy,sy=dx+dy;if(Math.abs(sx)>=Math.abs(sy)*.75||!(Math.abs(sy)>1e-6))return sx<0?'west':'east';return sy>0?'south':'north';}
 function cellFor(e,m){
@@ -40,7 +40,7 @@ function cellFor(e,m){
  return m.move[Math.floor(T()*1.6+hash(e.id)*2)%2];}
 function frameOf(e,m){const [cw,ch]=m.cell,[px,py]=m.pivot,vh=m.visibleHeight||150,k=cellFor(e,m);let row=0,flip=false;
  if(m.kind==='dirs4')row=m.rows[dirOf(e)]??0;
- else{let left=false;if(attacking(e)&&Number.isFinite(e.attack.angle)){const sd=Math.cos(e.attack.angle)-Math.sin(e.attack.angle);left=Math.abs(sd)>.05?sd<0:false;}else try{left=!!(player&&(player.x-player.y)<(e.x-e.y));}catch(_){}flip=left!==(m.facing==='left');}
+ else{let left=false;const r443=window.__STORYWORLD_ENEMY_FACE_R443__?.left?.(e);if(typeof r443==='boolean')left=r443;else if(attacking(e)&&Number.isFinite(e.attack.angle)){const sd=Math.cos(e.attack.angle)-Math.sin(e.attack.angle);left=Math.abs(sd)>.05?sd<0:false;}else try{left=!!(player&&(player.x-player.y)<(e.x-e.y));}catch(_){}flip=left!==(m.facing==='left');}
  return {path:m.path,assetFrame:{sourceRect:[k*cw,row*ch,cw,ch],pivot:[px,py],visibleHeight:vh},sourceAlphaCore:[k*cw,row*ch,cw,ch],metricThreshold:16,sourcePixelsEdited:false,
   normalizedFullRectangleExtents:[-px/vh,-py/vh,(cw-px)/vh,(ch-py)/vh],r375Mob:m.id,r208Mob:m.id,flip};}
 function install(){const S=window.__STORYWORLD_STORY_COMBAT_R54__;if(!S||typeof S.frameFor!=='function')return false;if(S.__r375)return true;
