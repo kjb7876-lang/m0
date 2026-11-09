@@ -17,7 +17,7 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_LOCAL_LIGHT_R451__)return;
 const A=window.StoryPhase1,C=A?.ThreeRenderer?.prototype;if(!A||!C)return;
-const REV='R451-local-light-8',KEY='storyworld.r451.localLight';
+const REV='R451-local-light-9',KEY='storyworld.r451.localLight';
 const DEFAULTS=Object.freeze({on:true,flicker:true});
 let prefs={...DEFAULTS};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');for(const k in DEFAULTS)if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={frames:0,owned:0,bakes:0,bakeMs:0,deltas:0,deltaMs:0,deltaMaxMs:0,deltaLights:0,deltaTiles:0,lights:0,lightsUsed:0,blockers:0,texels:0,patched:0,scans:0,sigScans:0,rowsLit:0,coversLit:0,corpsesLit:0,holes:0,stutters:0,errors:0};let lastError=null,disposed=false;
@@ -194,6 +194,9 @@ function uniforms(T){if(U)return U;U={r451On:{value:0},r451Map:{value:null},r451
  r451Hero:{value:new T.Vector4(0,0,6,0)},r451HeroC:{value:new T.Vector3(1,.93,.82)},r451Fl:{value:Array.from({length:4},()=>new T.Vector4(0,0,1,0))},r451Top:{value:.28}};return U;}
 const HEAD=`#define R451_KNEE ${KNEE}
 #define R451_SH ${SHOULDER}
+#ifndef R451_HKT
+#define R451_HKT .4
+#endif
 uniform float r451On;uniform sampler2D r451Map;uniform vec4 r451Box;uniform vec3 r451Amb;uniform vec4 r451Hero;uniform vec3 r451HeroC;uniform vec4 r451Fl[4];uniform float r451Top;
 varying vec3 r451P;varying vec3 r451N;
 vec3 r451Light(){vec3 n=r451N;bool vert=abs(n.y)<.6;vec2 q=r451P.xz;
@@ -202,7 +205,7 @@ vec3 r451Light(){vec3 n=r451N;bool vert=abs(n.y)<.6;vec2 q=r451P.xz;
  if(uv.x>0.&&uv.y>0.&&uv.x<1.&&uv.y<1.){vec4 s=texture2D(r451Map,uv);lm=s.a>.004?s.rgb/s.a*${LMAX}.:vec3(0.);}
  float f=1.;for(int i=0;i<4;i++){vec4 F=r451Fl[i];f+=F.w*(1.-smoothstep(0.,F.z,length(r451P.xz-F.xy)));}lm*=max(f,0.);
  float up=1.;if(vert)up=mix(1.,.5,smoothstep(1.1,3.,r451P.y));else if(r451P.y>.3)up=r451Top;lm*=up;
- float hd=length(r451P.xz-r451Hero.xy)/max(r451Hero.z,.1);float hk=r451Hero.w*(1.-smoothstep(0.,1.,hd))*(vert?.82:(r451P.y>.3?.4:1.));
+ float hd=length(r451P.xz-r451Hero.xy)/max(r451Hero.z,.1);float hk=r451Hero.w*(1.-smoothstep(0.,1.,hd))*(vert?.82:(r451P.y>.3?R451_HKT:1.));
  vec3 L=r451Amb+lm+r451HeroC*hk;L=mix(L,R451_KNEE+R451_SH*(1.-exp(-(L-R451_KNEE)/R451_SH)),step(vec3(R451_KNEE),L));
  return mix(vec3(1.),L,r451On);}
 `;
@@ -212,6 +215,10 @@ const SKIP_NAME=/^r(89-retro|300|450)|halo|fog|pool|-dim$|mote|haze|sky|decor-li
 // 세운 판 묶음(법선 없는 판 여러 장을 한 덩어리로): R204 낮은 돌 경계 줄(main R451, 예전엔 Sprite 한 장씩). 판 그림처럼 카메라 쪽 수평 법선으로 앞 바닥 빛을 받는다.
 //  이름이 r451 로 시작해도 이 R451 의 것이 아니다 — 예전 이름 건너뛰기(^r451)에 걸려 빛을 못 받고 둘레보다 밝게 떠 보였다.
 const BOARD_NAME=/^r451-border-runs:/;
+// main R481 숲 덩어리(덤불·가장자리 나무 판 묶음): 법선이 없어 바닥 갈래(위 방향)로 비추되, 영웅 빛 몫만 R204 나무 그림(Sprite, ×.82)과 같게 한다(R451-9, 독립 심사 지적:
+//  지붕 몫 ×.4 라 영웅이 지나갈 때 나무·풀은 약 1.3배 밝아지는데 바로 옆 덤불은 약 1.15배 — 영웅 1.2~2.5칸에서 나무가 덤불보다 9~15% 밝았다).
+//  등불 빛 몫(r451Top ×.28)은 그대로 둔다 — 세운 판으로 바꾸면 넓은 덤불 판이 밝은 바닥 칸 위에 걸칠 때 판 안에 빛 경계가 생길 수 있다. 덤불·나무 자리는 바닥에서 떨어져 등불 빛은 거의 0.
+const GROVE_NAME=/^r481-grove-/;
 function eligible(o,rowMeshes){if(o?.isSprite){const m=o.material,name=String(o.name||o.parent?.name||'');   // R204 풀 포기(Sprite) — 예전엔 R89 화면 빛이 함께 어둡게 했다
   if(!m?.isSpriteMaterial||!m.map||m.blending!==undefined&&m.blending!==1||o.userData?.r450||o.userData?.r451||SKIP_NAME.test(name))return null;return[m];}
  if(!o?.isMesh||o.isInstancedMesh&&!o.instanceMatrix)return null;if(rowMeshes.has(o))return null;const name=String(o.name||'');
@@ -222,8 +229,9 @@ function eligible(o,rowMeshes){if(o?.isSprite){const m=o.material,name=String(o.
   if(m.blending!==undefined&&m.blending!==1)continue;                           // 더하기·곱하기 섞기(빛·그림자 효과)는 그대로
   ok.push(m);}
  if(ok.length&&BOARD_NAME.test(name))ok.board=true;
+ else if(ok.length&&(GROVE_NAME.test(name)||o.userData?.r481===true))ok.grove=true;
  return ok.length?ok:null;}
-function patch(m,T,board){if(patched.has(m))return;const u=uniforms(T),before=m.onBeforeCompile,key=m.customProgramCacheKey;
+function patch(m,T,board,grove){if(patched.has(m))return;const u=uniforms(T),before=m.onBeforeCompile,key=m.customProgramCacheKey;
  if(m.isSpriteMaterial){// 판 그림: 판 중심(발) 위치의 빛을 받는다. 세운 판이라 벽 옆면처럼(앞 바닥 빛) — 법선은 카메라 쪽 수평.
   const sw=function(shader,...args){if(typeof before==='function')before.call(this,shader,...args);Object.assign(shader.uniforms,u);
    if(!shader.vertexShader.includes('varying vec3 r451P;'))shader.vertexShader='varying vec3 r451P;varying vec3 r451N;\n'+shader.vertexShader.replace('#include <uv_vertex>','#include <uv_vertex>\n'+
@@ -235,11 +243,11 @@ function patch(m,T,board){if(patched.has(m))return;const u=uniforms(T),before=m.
   if(!shader.vertexShader.includes('varying vec3 r451P;'))shader.vertexShader='varying vec3 r451P;varying vec3 r451N;\n'+shader.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\n'+(board?
    '{vec4 r451W=modelMatrix*vec4(transformed,1.);r451P=r451W.xyz;vec3 r451V=-(transpose(mat3(viewMatrix))*vec3(0.,0.,-1.));r451V.y=0.;r451N=dot(r451V,r451V)>1e-6?normalize(r451V):vec3(0.,0.,1.);}':
    '{vec4 r451W=vec4(transformed,1.);vec3 r451Nn=normal;\n#ifdef USE_INSTANCING\nr451W=instanceMatrix*r451W;r451Nn=mat3(instanceMatrix)*r451Nn;\n#endif\nr451W=modelMatrix*r451W;r451P=r451W.xyz;vec3 r451M=mat3(modelMatrix)*r451Nn;r451N=dot(r451M,r451M)>1e-8?normalize(r451M):vec3(0.,1.,0.);}'));
-  if(!shader.fragmentShader.includes('uniform float r451On;')){shader.fragmentShader=HEAD+shader.fragmentShader.replace('#include <dithering_fragment>','#include <dithering_fragment>\ngl_FragColor.rgb*=r451Light();');}};
+  if(!shader.fragmentShader.includes('uniform float r451On;')){shader.fragmentShader=(grove?'#define R451_HKT .82\n':'')+HEAD+shader.fragmentShader.replace('#include <dithering_fragment>','#include <dithering_fragment>\ngl_FragColor.rgb*=r451Light();');}};
  if(typeof before==='function')for(const k of Object.keys(before))wrapper[k]=before[k];
- m.onBeforeCompile=wrapper;m.customProgramCacheKey=function(){return(typeof key==='function'?key.call(this):'')+(board?'|r451b':'|r451');};m.needsUpdate=true;patched.set(m,true);stats.patched++;if(board)stats.boards=(stats.boards||0)+1;}
+ m.onBeforeCompile=wrapper;m.customProgramCacheKey=function(){return(typeof key==='function'?key.call(this):'')+(board?'|r451b':grove?'|r451g':'|r451');};m.needsUpdate=true;patched.set(m,true);stats.patched++;if(board)stats.boards=(stats.boards||0)+1;if(grove)stats.groves=(stats.groves||0)+1;}
 function patchScene(r){const T=r.T,rows=new WeakSet();for(const row of r.commands?.rows?.values?.()||[])if(row?.mesh)rows.add(row.mesh);
- r.scene.traverse(o=>{if(!(o.layers.mask&4))return;const ms=eligible(o,rows);if(ms)for(const m of ms)patch(m,T,ms.board);});}
+ r.scene.traverse(o=>{if(!(o.layers.mask&4))return;const ms=eligible(o,rows);if(ms)for(const m of ms)patch(m,T,ms.board,ms.grove);});}
 // 장면 맨 윗단 자식 목록의 지문(자식 id 차례). 청크 지형·R452 풀·R91 벽 장식·R81 바깥 판처럼 새 덩어리가 붙거나 빠지면 바뀐다.
 //  바뀐 그 프레임에 셰이더를 붙인다 — 0.5초 타이머만 기다리면 새 재질이 그동안 빛 곱 없이(×1) 밝게 보였다가 어두워진다(독립 심사 지적).
 //  R204 대지 묶음(r.__r204.group) 자식도 본다 — main R481 숲 덩어리는 R204 가 다 지은 뒤(0.4초 타이머) 그 묶음 안에 붙어 윗단 지문이 그대로라,
@@ -345,7 +353,7 @@ if(typeof showSettings==='function'){const base=showSettings;showSettings=functi
 
 function dispose(){disposed=true;if(timer)clearInterval(timer);o451.owned=false;if(U)U.r451On.value=0;try{o451.tex?.dispose?.();}catch(_){}o451.tex=null;o451.data=null;o451.B=null;o451.grid=null;o451.layout=null;}
 window.__STORYWORLD_LOCAL_LIGHT_R451__=Object.freeze({revision:REV,storageKey:KEY,types:TYPE,ambient:AMB,ambientIn:AMB_IN,ambientCave:AMB_CAVE,prefs:()=>({...prefs}),set,owns,lightAt,lights,glowHoles,glowEdge,classify,ambientFor,dispose,
- pure:Object.freeze({wallBox,grid,seen,bell,shoulder,bakeAcc,bakeDelta,lightContrib,markTiles,lightKey,posHash,sceneSig,floorOwned,litRow,eligible,drawnProp,LMAX,KNEE,SHOULDER,TILE,FIRE_OK:[...FIRE_OK],REACH,GLOW_SCALE,GLOW_FAM}),
+ pure:Object.freeze({wallBox,grid,seen,bell,shoulder,bakeAcc,bakeDelta,lightContrib,markTiles,lightKey,posHash,sceneSig,floorOwned,litRow,eligible,drawnProp,patchMaterial:patch,LMAX,KNEE,SHOULDER,TILE,FIRE_OK:[...FIRE_OK],REACH,GLOW_SCALE,GLOW_FAM}),
  inspect:()=>({revision:REV,prefs:{...prefs},owned:o451.owned,stats:{...stats},lastError,family:lightCache?.fam||null,indoor:lightCache?.indoor??null,place:lightCache?.place||null,ambient:o451.amb,
   lights:o451.lights.map(l=>({x:+l.x.toFixed(2),y:+l.y.toFixed(2),type:l.type,src:l.src,id:l.id})),grid:o451.grid?{W:o451.grid.W,H:o451.grid.H,S:o451.grid.S}:null,
   collisionChanged:false,gameplayChanged:false,GPUVerified:false})});

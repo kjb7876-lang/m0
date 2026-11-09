@@ -15,9 +15,9 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_GROUND_FRINGE_R452__)return;
 const A=window.StoryPhase1,C=A?.ThreeRenderer?.prototype;if(!A||!C)return;
-const REV='R452-fringe-3',KEY='storyworld.r452.fringe';
+const REV='R452-fringe-4',KEY='storyworld.r452.fringe';
 let prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');if(typeof s.on==='boolean')prefs.on=s.on;}catch(_){}
-const stats={builds:0,rebuilds:0,quads:0,spots:0,skippedPath:0,skippedAvoid:0,buildMs:0,errors:0};let lastError=null,disposed=false;
+const stats={builds:0,rebuilds:0,quads:0,spots:0,skippedPath:0,skippedAvoid:0,buildMs:0,sight:0,resight:0,errors:0};let lastError=null,disposed=false;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const finite=v=>Number.isFinite(v),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 function h32(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
@@ -78,6 +78,12 @@ function plan(cells,spec,opt={}){const S=new Set(cells.map(c=>c[0]+','+c[1])),ha
    const q={x:+px.toFixed(3),y:+py.toFixed(3),h:+h.toFixed(3),side,front,ax:dy?1:0,ay:dx?1:0,r:rnd()};put(q);spots.push(q);}}
  return{spots,counts};}
 
+// R24 시야(횃불·손전등) 마스크 — R481 덤불·R204 땅처럼 시야 밖 풀도 함께 어두워진다(R452-4, 독립 심사 지적: 없으면 검은 화면 구석·벽 뒤에
+//  풀만 바닥 가장자리를 따라 떠 보여 시야 모드가 숨기는 길 모양이 드러났다). 기본 'glow' 시야는 sightEnabled24=0 이라 ×1 — 그림 그대로.
+//  R451 셰이더는 이 위에 덧붙고 표식(__storySight24)을 옮겨 적어 같은 시야 상태로 두 번 붙지 않는다.
+//  한 재질에 한 번만 붙인다 — 이미 붙은 재질에 새 상태로 또 붙이면 셰이더 선언이 겹친다(시야 상태는 clearScene 에서만 새로 생기고, 그때 이 판 묶음도 새로 지어진다).
+function sight(mat,r){if(!mat||!r?.sightState24||typeof A.attachSight24!=='function'||mat.userData?.sight24)return false;
+ A.attachSight24(mat,r.sightState24);stats.sight++;return true;}
 // ---- 판 묶음 만들기 ------------------------------------------------------------------------------------------------
 function build(r,frame,spec,F){const t0=performance.now(),T=r.T,L=frame.exploration,z=frame.zone,rm=typeof room!=='undefined'&&room?.exploration===L?room:null;
  const R204=window.__STORYWORLD_CAVE_R204__,useF=!!(F&&R204?.at&&R204?.topHeight);
@@ -110,6 +116,7 @@ function build(r,frame,spec,F){const t0=performance.now(),T=r.T,L=frame.explorat
  geo.setAttribute('color',new T.Float32BufferAttribute(col,3));geo.setAttribute('normal',new T.Float32BufferAttribute(nor,3));geo.setIndex(idx);geo.computeBoundingSphere();
  const tex=new T.CanvasTexture(atlas.canvas);tex.colorSpace=T.SRGBColorSpace;tex.generateMipmaps=true;tex.minFilter=T.LinearMipmapLinearFilter;tex.magFilter=T.LinearFilter;
  const mat=new T.MeshBasicMaterial({map:tex,vertexColors:true,alphaTest:.4,transparent:false,depthWrite:true,side:T.DoubleSide,toneMapped:false});
+ sight(mat,r);                                                                   // 장면에 붙기 전(첫 컴파일부터 시야 마스크)
  const mesh=new T.Mesh(geo,mat);mesh.name='r452-fringe';mesh.layers.set(2);mesh.renderOrder=-24;mesh.userData.presentationOnly=true;mesh.userData.r452=true;
  for(const x of[geo,mat,tex])r.spatialResources?.add?.(x);r.spatialRoot.add(mesh);
  stats.builds++;stats.quads=quads;stats.buildMs=Math.round(performance.now()-t0);return mesh;}
@@ -122,6 +129,7 @@ const REBUILD_MAX=4,CHECK_MS=500;
 function drop(r,st){const m=st?.mesh;if(!m)return;st.mesh=null;try{r.spatialRoot?.remove?.(m);for(const x of[m.geometry,m.material?.map,m.material]){if(!x)continue;r.spatialResources?.delete?.(x);x.dispose?.();}}catch(e){fail(e);}}
 function update(r,frame){if(disposed||!prefs.on||frame?.layer!=='STORY'||!r.spatialBuilt||!r.spatialRoot||!frame.exploration?.floorCells?.length)return;
  const st=r.__r452,z=frame.zone;if(st&&st.gen===r.sceneGeneration&&st.zone===z){if(st.mesh&&!st.mesh.parent)r.spatialRoot.add(st.mesh);
+  if(st.mesh&&sight(st.mesh.material,r)){st.mesh.material.needsUpdate=true;stats.resight++;}  // 지을 때 시야 상태가 아직 없었음 → 붙이고 한 번 다시 컴파일
   if(st.spec&&st.rebuilds<REBUILD_MAX){const t=performance.now();if(t>=st.nextCheck){st.nextCheck=t+CHECK_MS;const rm=typeof room!=='undefined'&&room?.exploration===frame.exploration?room:null;
    const sig=rm?propSig(rm):st.psig;if(sig!==st.psig){drop(r,st);st.psig=sig;st.rebuilds++;stats.rebuilds++;try{st.mesh=build(r,frame,st.spec,st.F);}catch(e){fail(e);}}}}
   return;}
@@ -144,5 +152,5 @@ function set(p={}){if(typeof p.on==='boolean')prefs.on=p.on;try{localStorage.set
  try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(r?.__r452?.mesh)r.__r452.mesh.visible=prefs.on;}catch(_){}return{...prefs};}
 function dispose(){disposed=true;if(timer)clearInterval(timer);try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(r?.__r452)drop(r,r.__r452);if(r)r.__r452=null;}catch(_){}}
 window.__STORYWORLD_GROUND_FRINGE_R452__=Object.freeze({revision:REV,storageKey:KEY,families:FAM,art:ART,plan,specFor,noFringe:[...NO_FRINGE],set,dispose,
- inspect:()=>{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three,st=r?.__r452;return{revision:REV,prefs:{...prefs},art:artState,zone:st?.zone||null,skip:st?.skip||null,withField:!!st?.withField,quads:st?.mesh?stats.quads:0,rebuilds:st?.rebuilds||0,stats:{...stats},lastError,collisionChanged:false,gameplayChanged:false,finalArt:false};}});
+ inspect:()=>{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three,st=r?.__r452;return{revision:REV,prefs:{...prefs},art:artState,zone:st?.zone||null,skip:st?.skip||null,withField:!!st?.withField,quads:st?.mesh?stats.quads:0,rebuilds:st?.rebuilds||0,sightMasked:!!st?.mesh?.material?.userData?.sight24,stats:{...stats},lastError,collisionChanged:false,gameplayChanged:false,finalArt:false};}});
 })();

@@ -122,7 +122,26 @@ ok('corpse glow (non-normal blending) stays unlit; the background-layer pass (ma
  const br=P.eligible(mesh('r451-border-runs:n'),rows),bf=P.eligible(mesh('r451-border-runs:f'),rows),wall=P.eligible(mesh('wall-row',mat(),{attributes:{position:{},normal:{}}}),rows);
  ok('main R451 stone border runs (r451-border-runs:n|f) are lit as standing boards, not skipped',!!br&&br.board===true&&!!bf&&bf.board===true&&!!wall&&!wall.board);
  ok('effect planes stay unlit: r450 rain/splash, r300 dim/pools/fog/motes, r89 screen light',['r450-splash','r450-rain','r300-dim','r300-light-pools','r300-fog-0','r300-motes','r89-retro-light'].every(n=>P.eligible(mesh(n),rows)===null));
- const body=src('local-light-r451.js');ok('board shader: per-vertex world position with the camera-facing level normal (no normal attribute needed), own program key',/board\?\n?\s*'\{vec4 r451W=modelMatrix\*vec4\(transformed,1\.\);r451P=r451W\.xyz;vec3 r451V=-\(transpose\(mat3\(viewMatrix\)\)\*vec3\(0\.,0\.,-1\.\)\);r451V\.y=0\./.test(body)&&body.includes("(board?'|r451b':'|r451')")&&body.includes('patch(m,T,ms.board)'));
+ const body=src('local-light-r451.js');ok('board shader: per-vertex world position with the camera-facing level normal (no normal attribute needed), own program key',/board\?\n?\s*'\{vec4 r451W=modelMatrix\*vec4\(transformed,1\.\);r451P=r451W\.xyz;vec3 r451V=-\(transpose\(mat3\(viewMatrix\)\)\*vec3\(0\.,0\.,-1\.\)\);r451V\.y=0\./.test(body)&&body.includes("(board?'|r451b':grove?'|r451g':'|r451')")&&body.includes('patch(m,T,ms.board,ms.grove)'));
  ok('R204 contract: border runs are still meshes named r451-border-runs:<side> with no normal attribute',(()=>{const d=src('cave-r204.js');return d.includes("mesh.name='r451-border-runs:'+side")&&d.includes("geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));geo.setAttribute('uv',new T.Float32BufferAttribute(uv,2));geo.setIndex(idx);");})());}
+// ⑩ main R481 숲 덩어리(r481-grove-<k>, 법선 없는 판 묶음): 바닥 갈래(위 방향)로 비추되 영웅 빛 몫은 R204 나무 그림(Sprite)과 같은 ×.82(R451-9, 독립 심사 지적:
+//  지붕 몫 ×.4 라 영웅 1.2~2.5칸에서 나무가 바로 옆 덤불보다 9~15% 밝았다). 등불 빛 몫(r451Top)은 그대로 — 세운 판으로 바꾸지 않는다(넓은 덤불 판 안 빛 경계).
+{const mat=(o={})=>({isMeshBasicMaterial:true,map:{},blending:1,vertexColors:true,...o}),mesh=(name,ud={},geo={attributes:{position:{},color:{},uv:{}}})=>({isMesh:true,name,material:mat(),geometry:geo,userData:ud}),rows=new Set();
+ const g0=P.eligible(mesh('r481-grove-0',{r481:true}),rows),g1=P.eligible(mesh('r481-grove-3'),rows),gu=P.eligible(mesh('renamed-grove',{r481:true}),rows),br=P.eligible(mesh('r451-border-runs:n'),rows),wall=P.eligible(mesh('wall-row'),rows);
+ ok('R481 grove meshes (by name or userData.r481) are flagged grove, not board; border runs stay boards; other meshes neither',!!g0&&g0.grove===true&&!g0.board&&!!g1&&g1.grove===true&&!!gu&&gu.grove===true&&!!br&&br.board===true&&!br.grove&&!!wall&&!wall.grove&&!wall.board);
+ class V2{constructor(x=0,y=0){this.x=x;this.y=y;}set(x,y){this.x=x;this.y=y;return this;}}class V3 extends V2{constructor(x=0,y=0,z=0){super(x,y);this.z=z;}set(x,y,z){this.x=x;this.y=y;this.z=z;return this;}}
+ class V4 extends V3{constructor(x=0,y=0,z=0,w=0){super(x,y,z);this.w=w;}set(x,y,z,w){this.x=x;this.y=y;this.z=z;this.w=w;return this;}}
+ const T={Vector2:V2,Vector3:V3,Vector4:V4};
+ const run=(m,board,grove)=>{if(typeof P.patchMaterial!=='function')return{sh:{fragmentShader:'',vertexShader:''},key:null};P.patchMaterial(m,T,board,grove);const sh={uniforms:{},vertexShader:'void main(){\n#include <project_vertex>\n}',fragmentShader:'void main(){\n#include <dithering_fragment>\n}'};m.onBeforeCompile(sh);return{sh,key:m.customProgramCacheKey()};};
+ const mk=()=>({isMeshBasicMaterial:true,map:{},onBeforeCompile:function(){},customProgramCacheKey:()=>'base'});
+ const G=run(mk(),false,true),N=run(mk(),false,false),B=run(mk(),true,false);
+ // 앞쪽 #define 이 #ifndef 기본값(.4)을 이긴다 — 그림자 없이 셰이더 전처리 순서만 본다
+ const val=fs_=>{const d=fs_.indexOf('#define R451_HKT'),i=fs_.indexOf('#ifndef R451_HKT');return d>=0&&d<i?fs_.slice(d+17,fs_.indexOf('\n',d)).trim():fs_.includes('#ifndef R451_HKT\n#define R451_HKT .4\n#endif')?'.4':null;};
+ ok('grove shader: hero factor .82 (= R204 tree sprites) on raised non-vertical fragments; plain meshes keep .4 (roofs); boards keep the vertical .82 path',
+  val(G.sh.fragmentShader)==='.82'&&val(N.sh.fragmentShader)==='.4'&&val(B.sh.fragmentShader)==='.4'&&/\(vert\?\.82:\(r451P\.y>\.3\?R451_HKT:1\.\)\)/.test(G.sh.fragmentShader)&&G.sh.fragmentShader.includes('gl_FragColor.rgb*=r451Light();')&&
+  G.sh.vertexShader.includes('vec3 r451Nn=normal;')&&!G.sh.vertexShader.includes('r451V.y=0.;r451N=dot(r451V')&&B.sh.vertexShader.includes('r451V.y=0.;r451N=dot(r451V'),{G:val(G.sh.fragmentShader),N:val(N.sh.fragmentShader),B:val(B.sh.fragmentShader)});
+ ok('grove shader gets its own program key (|r451g) so it never shares a compiled program with plain |r451 meshes',G.key==='base|r451g'&&N.key==='base|r451'&&B.key==='base|r451b',{G:G.key,N:N.key,B:B.key});
+ const g=src('grove-r481.js');ok('R481 contract: grove meshes are still named r481-grove-<k> with userData.r481 and no normal attribute (so the floor branch + .82 hero factor applies)',
+  g.includes("mesh.name='r481-grove-'+k")&&g.includes('mesh.userData.r481=true')&&!/setAttribute\('normal'/.test(g));}
 ok('pages.yml runs this check',fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('node r96/qa/r451/local-light-r451-cpu-check.cjs'));
 done();

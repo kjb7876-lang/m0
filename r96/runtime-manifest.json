@@ -33714,8 +33714,8 @@
     },
     {
       "path": "ground-fringe-r452.js",
-      "bytes": 17307,
-      "sha256": "2d2d4bed92a0a4c641aabc1b9c99ebf9a7a754f0b2dda12cbe18d606bdf5fdd0"
+      "bytes": 18620,
+      "sha256": "d10b540b0babe8d57bd372597bb90bb6a6df889957531919d55add65243b00ed"
     },
     {
       "path": "grove-r481.js",
@@ -33939,8 +33939,8 @@
     },
     {
       "path": "local-light-r451.js",
-      "bytes": 46485,
-      "sha256": "ab320d042c6fa28da52ffcc00fcc1d298a297c84a54f194117b24661b934a2e8"
+      "bytes": 47454,
+      "sha256": "ec8962c30ebf636f4342d07a7f33ba062cb61d1235bb707ed76c0e3619431cb9"
     },
     {
       "path": "mammon-bossroom.js",
@@ -34754,7 +34754,7 @@
     }
   ],
   "fileCount": 6950,
-  "totalBytes": 1092022949,
+  "totalBytes": 1092025231,
   "webHTMLSha256": "3b18b1481d849ce2540be9c07ce69740556cc0ce30fcc3613313649dcf24b4ed",
   "largest": [
     {

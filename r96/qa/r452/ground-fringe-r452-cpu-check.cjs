@@ -47,4 +47,31 @@ ok('same seed → same spots, other seed → different',JSON.stringify(A.spots)=
  ok('cliff-foot spots are on the floor band (.04..0.8)',fl.every(q=>fieldAt(q.x,q.y)>.04&&fieldAt(q.x,q.y)<.8&&q.h<.05));
  ok('no low front bank tuft right in front of a path cell',top.filter(q=>q.front).every(q=>{const cx=q.x>12?11:q.x<0?0:Math.floor(q.x),cy=q.y>8?7:q.y<0?0:Math.floor(q.y);return !pathSet.has(cx+','+cy);}));}
 ok('pages.yml runs this check',fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('node r96/qa/r452/ground-fringe-r452-cpu-check.cjs'));
-done();
+// R24 시야(횃불·손전등) 마스크(R452-4, 독립 심사 지적): R481 덤불·R204 땅처럼 풀 재질에도 attachSight24 — 없으면 시야 밖 검은 구석·벽 뒤에 풀만 길 가장자리를 따라 떠 보였다.
+//  vm 상자에서 실제로 판 묶음을 지어 본다: 지을 때 한 번 붙고(장면에 붙기 전), 같은 상태로 다시 붙지 않으며, 지을 때 시야 상태가 없었으면 생긴 뒤 한 번 붙이고 다시 컴파일한다.
+(async()=>{try{
+ const T={SRGBColorSpace:'srgb',LinearMipmapLinearFilter:1008,LinearFilter:1006,DoubleSide:2,
+  BufferGeometry:class{constructor(){this.attributes={};}setAttribute(k,v){this.attributes[k]=v;}setIndex(i){this.index=i;}computeBoundingSphere(){}dispose(){}},
+  Float32BufferAttribute:class{constructor(a,n){this.array=a;this.itemSize=n;}},CanvasTexture:class{constructor(c){this.image=c;}dispose(){}},
+  MeshBasicMaterial:class{constructor(o){Object.assign(this,o);this.isMeshBasicMaterial=true;this.userData={};this.onBeforeCompile=function(){};this.needsUpdate=false;}dispose(){}},
+  Mesh:class{constructor(g,m){this.geometry=g;this.material=m;this.userData={};this.layers={mask:1,set(n){this.mask=1<<n;}};this.visible=true;this.parent=null;}}};
+ const canvas=()=>({width:0,height:0,getContext(){return{drawImage(){},getImageData(x,y,w,h){const d=new Uint8Array(w*h*4);for(let yy=h>>2;yy<h-(h>>3);yy++)for(let xx=w>>2;xx<w-(w>>2);xx++)d[(yy*w+xx)*4+3]=255;return{data:d};}};}});
+ class Img{constructor(){this.naturalWidth=128;this.naturalHeight=96;}set src(v){this._s=v;Promise.resolve().then(()=>this.onload&&this.onload());}get src(){return this._s;}}
+ const cellsS=[];for(let x=0;x<16;x++)for(let y=0;y<10;y++)if(x<3||y<3||x>12)cellsS.push([x,y]);
+ const L={floorCells:cellsS,walls:[],worldWardR81:{environment:{family:'garden'}}},rmS={id:'dist00',exploration:L,props:[],npcs:[]};
+ const mkBox=()=>{const calls=[];const c=box({Image:Img,document:{createElement:()=>canvas()},room:rmS,zone:'dist00',__STORYWORLD_WEATHER_R450__:{placeOf:()=>({kind:'out'})},__STORYWORLD_SIGHT24__:{enabled:true}});
+  // attachSight24 대역: 실제처럼 재질에 표식(userData.sight24·__storySight24)을 남긴다
+  c.StoryPhase1.attachSight24=(m,st)=>{calls.push({m,st});const b=m.onBeforeCompile;m.onBeforeCompile=function(sh){b.call(this,sh);};m.onBeforeCompile.__storySight24=st;m.userData.sight24={projected:false};return m;};
+  load(c,'ground-fringe-r452.js');const r=new c.StoryPhase1.ThreeRenderer(),kids=[];
+  Object.assign(r,{T,scene:{},spatialBuilt:true,sceneGeneration:1,spatialResources:new Set(),spatialRoot:{children:kids,add(m){m.parent=this;kids.push(m);},remove(m){const i=kids.indexOf(m);if(i>=0)kids.splice(i,1);m.parent=null;}},
+   camera:{updateMatrixWorld(){},matrixWorld:{elements:[.707,0,-.707,0,.408,.816,.408,0,.577,-.577,.577,0,0,0,0,1]}}});
+  c.__STORYWORLD_PHASE1__={controller:{state:{three:r}}};return{c,r,calls};};
+ const fr=()=>({layer:'STORY',exploration:L,zone:'dist00',entities:[]}),tick=()=>new Promise(ok=>setTimeout(ok,5));
+ {const{c,r,calls}=mkBox();const S={uniforms:{}};r.sightState24=S;r.render(fr());await tick();r.render(fr());const m=r.__r452?.mesh;
+  const atBuild=calls.length===1&&calls[0].st===S&&calls[0].m===m?.material&&m?.material?.needsUpdate===false;for(let i=0;i<4;i++)r.render(fr());
+  ok('sight mask attached to the grass material once at build (before it joins the scene), never again for the same sight state',!!m&&m.name==='r452-fringe'&&atBuild&&calls.length===1&&c.__STORYWORLD_GROUND_FRINGE_R452__.inspect().sightMasked===true,{built:!!m,calls:calls.length});}
+ {const{c,r,calls}=mkBox();r.sightState24=null;r.render(fr());await tick();r.render(fr());const m=r.__r452?.mesh,before=calls.length;const S={uniforms:{}};r.sightState24=S;r.render(fr());r.render(fr());
+  ok('no sight state at build → attached once when it appears, and the material recompiles (needsUpdate)',!!m&&before===0&&calls.length===1&&calls[0].st===S&&m.material.needsUpdate===true&&c.__STORYWORLD_GROUND_FRINGE_R452__.inspect().stats.resight===1,{before,after:calls.length});}
+ {const s2=C('ground-fringe-r452.js');ok('one attach per material (an attached material is never re-attached with a new state: duplicate shader declarations)',/function sight\(mat,r\)\{if\(!mat\|\|!r\?\.sightState24\|\|typeof A\.attachSight24!=='function'\|\|mat\.userData\?\.sight24\)return false;/.test(s2)&&/sight\(mat,r\);\s*\/\/[^\n]*\n const mesh=new T\.Mesh\(geo,mat\)/.test(s2));}
+}catch(e){ok('R452 sight-mask run',false,String(e&&e.stack||e));}
+done();})();
