@@ -74,6 +74,8 @@ ok('wraith dash tilt within ±35°',rots.every(d=>Math.abs(d.rot)<=.62));
 // ⑧ 저사양: 독안개·회복·블링크 생략, 동시 4개
 sb.settings.lowFx=true;const before=plays()['hero-healing'];A.play('hero-healing',1,1);ok('lowFx skips healing',plays()['hero-healing']===before);
 for(let i=0;i<9;i++)A.play('hero-barrier',i,1,{gap:0});ok('lowFx cap 4',A.inspect().active.length<=4,A.inspect().active.length);
+// ⑧-2 새 게임·이전 저장: 게임 시계가 뒤로 가도 간격 기록에 막히지 않음
+sb.settings.lowFx=false;t+=600;step();A.play('hero-barrier',3,3,{gap:2});const b0=plays()['hero-barrier'];t=10;step();ok('clock rewind clears throttle',A.play('hero-barrier',3,3,{gap:2})!==null&&plays()['hero-barrier']===b0+1&&A.inspect().stats.rewinds>=1);
 // ⑨ 끄기
 A.set(false);sb.settings.lowFx=false;const n0=JSON.stringify(plays());sb.hurt(5,sb.room.enemies[0]);ok('off switch',JSON.stringify(plays())===n0);
 ok('no runtime errors',A.inspect().stats.errors===0,A.inspect().lastError);

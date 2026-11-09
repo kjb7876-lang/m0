@@ -33449,8 +33449,8 @@
     },
     {
       "path": "fx-more-r438.js",
-      "bytes": 12524,
-      "sha256": "1a36b872fa238487d861920276e7c0b5637390c7e1ffd47eabd283b54007ea88"
+      "bytes": 12890,
+      "sha256": "caced1db7588774ad9b33b35366cce4b940ee8af29d743eba15df4c033e075d8"
     },
     {
       "path": "fx-sprites-r106.js",
@@ -34444,7 +34444,7 @@
     }
   ],
   "fileCount": 6888,
-  "totalBytes": 1090290949,
+  "totalBytes": 1090291315,
   "webHTMLSha256": "6b6867c27b402e949dfd2f10b94152e1791b4cf15de55df5b8d3aac974fe6311",
   "largest": [
     {

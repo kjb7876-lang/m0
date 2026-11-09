@@ -42,8 +42,10 @@ const list=[],SENT={type:'r438-sheet-fx',x:0,y:0,age:0,life:Infinity,r438Sentine
 let preloaded='';function preload(){const id=roomId();if(!id||preloaded===id||typeof ensureImages!=='function')return;preloaded=id;try{Promise.resolve(ensureImages(Object.values(SHEET).map(v=>DIR+v[0]))).catch(()=>{});}catch(_){}}
 function arm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)&&!effects.includes(SENT)){SENT.age=0;effects.push(SENT);}}catch(_){}}
 const lastAt=new Map();
+// 새 게임·이전 저장 불러오기로 게임 시계가 뒤로 가면 간격 기록·방 정착 시각을 비운다(이전 판 시각에 막혀 오래 안 나오는 일 방지).
+let clockT=-Infinity;function clock(){const t=T();if(t<clockT-.5){lastAt.clear();list.length=0;ridAt=t;cleanAt=-9;stats.rewinds=(stats.rewinds||0)+1;}clockT=t;return t;}
 function play(name,x,y,o={}){if(!prefs.on||!SHEET[name]||!fin(x)||!fin(y))return null;if(low()&&LOW_SKIP.has(name))return null;
- const t=T(),gap=o.gap??.5,k=name+(o.key||'');if(t-(lastAt.get(k)??-99)<gap){stats.throttled++;return null;}lastAt.set(k,t);
+ const t=clock(),gap=o.gap??.5,k=name+(o.key||'');if(t-(lastAt.get(k)??-99)<gap){stats.throttled++;return null;}lastAt.set(k,t);
  const cap=low()?4:8;if(list.length>=cap){stats.throttled++;list.shift();}
  image(name);const S=SHEET[name],e={name,x,y,size:fin(o.size)?o.size:1,flip:!!o.flip,angle:fin(o.angle)?o.angle:0,t0:t,speed:S[3]*(o.speed||1),follow:o.follow||null};
  list.push(e);stats.plays[name]=(stats.plays[name]||0)+1;arm();return e;}
@@ -98,7 +100,7 @@ function scanHero(){if(typeof player!=='object'||!player)return;const t=T(),id=r
 try{
  if(typeof hurt==='function'){const base=hurt;hurt=function(v,src,...a){const r=base.call(this,v,src,...a);try{onHurt(src,r);}catch(err){fail(err);}return r;};}
  if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e&&e.type==='r438-sheet-fx'){try{drawAll();}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};}
- if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{if(prefs.on){preload();scanEnrage();scanStatus();scanFlank();scanHero();const t=T();
+ if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{clock();if(prefs.on){preload();scanEnrage();scanStatus();scanFlank();scanHero();const t=T();
    for(let i=list.length-1;i>=0;i--){const e=list[i];if((t-e.t0)*e.speed>=DUR||t<e.t0-2)list.splice(i,1);}}
    if(list.length)arm();else if(typeof effects!=='undefined'&&Array.isArray(effects)){const i=effects.indexOf(SENT);if(i>=0)effects.splice(i,1);}}catch(e){fail(e);}return r;};}
  if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){const r=await base.apply(this,a);list.length=0;prevStatus=new Set();rid='';return r;};}
