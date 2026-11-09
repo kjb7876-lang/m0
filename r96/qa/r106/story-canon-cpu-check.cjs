@@ -4,10 +4,10 @@
 'use strict';
 const fs=require('fs'),path=require('path'),vm=require('vm'),crypto=require('crypto');
 const root=path.resolve(__dirname,'../../..'),R=p=>path.join(root,p);
-const SHA='98f9508dec6d4decf8489336b5799a9ccf9c8a071d8d633ff221937c9a4a1bda';// R180: 네오 도쿄(네오 서울 S-06) 삭제·경성의 밤 이후 각색본(2026-11-01) — 스토리 모드 문장은 R122 와 같고 사몽 S-06 이 디스토피아(DYS-01~13)로 바뀜. 이전 R122 390e9e35…
+const SHA='712db8d02b9bce730c2b1e20b1f5619a74cdb6c361aa981dae4d5260ebebf4c1';// R437: R180 정본에서 많이 어색한 문장만 손본 정본(① 32문장·②③④ 10곳, 문단 수·구간·경계 그대로). 이전 R180 98f9508d… — R180: 네오 도쿄(네오 서울 S-06) 삭제·경성의 밤 이후 각색본(2026-11-01) — 스토리 모드 문장은 R122 와 같고 사몽 S-06 이 디스토피아(DYS-01~13)로 바뀜. 이전 R122 390e9e35…
 let n=0,failed=0;const check=(name,ok,detail='')=>{n++;if(!ok)failed++;console.log((ok?'PASS ':'FAIL ')+name+(ok||!detail?'':' :: '+detail));};
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
-const canonPath=R('story-source/hapil-canon-20261101.txt'),canon=fs.readFileSync(canonPath);
+const canonPath=R('story-source/hapil-canon-r437-polish.txt'),canon=fs.readFileSync(canonPath);
 check('canon file hash is the improved canon',sha(canon)===SHA,sha(canon));
 const canonText=canon.toString('utf8').replace(/\r\n/g,'\n');
 const norm=s=>String(s).replace(/\s+/g,' ').trim();
@@ -50,7 +50,7 @@ check('multi-narrator zones split into segments ('+multi.length+')',multi.length
 const sctx={window:{}};vm.createContext(sctx);vm.runInContext(fs.readFileSync(R('r96/client-source/samong-text-r103.js'),'utf8'),sctx);
 const ST=sctx.window.__STORYWORLD_SAMONG_TEXT_R103__;
 // R115: 사몽~진료기록은 전편총집본(sha256 4db94112…)으로 만든다. 스토리 모드는 위 canon 그대로다.
-const SAMONG_SHA=SHA,samongCanon=fs.readFileSync(R('story-source/hapil-canon-20261101.txt'));
+const SAMONG_SHA=SHA,samongCanon=fs.readFileSync(R('story-source/hapil-canon-r437-polish.txt'));
 check('사몽 canon file hash is the 총집본',sha(samongCanon)===SAMONG_SHA,sha(samongCanon));
 const samongNorm=norm(samongCanon.toString('utf8').replace(/\r\n/g,'\n'));
 check('사몽 text module built from the 총집본',ST?.sha256===SAMONG_SHA&&Object.keys(ST.sections).length===45,ST?.sha256+' '+Object.keys(ST?.sections||{}).length);
