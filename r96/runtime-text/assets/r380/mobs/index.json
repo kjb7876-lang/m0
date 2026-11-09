@@ -1658,7 +1658,7 @@
    "actor": {
     "layer": "STORY",
     "zone": "dist01",
-    "name": "^재 나방"
+    "name": "^(중간보스 · )?재 나방"
    },
    "bytes": 143472,
    "sha256": "c18ae28458f03c9118a0207523a5d0ef1472db8db1516f4592c1dc4cec31f08a",
@@ -1727,7 +1727,7 @@
    "idle": [
     0
    ],
-   "facing": "right",
+   "facing": "left",
    "actor": {
     "layer": "STORY",
     "zone": "dist01",
