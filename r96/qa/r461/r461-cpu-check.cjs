@@ -14,9 +14,9 @@ function boot(stored){const ls=new Map(Object.entries(stored||{}));const localSt
  let cprefs={on:false};try{const s=JSON.parse(ls.get('storyworld.r370.cinema')||'{}');if(s.on===true)cprefs.on=true;}catch(_){}
  const rawCalls=[];win.__STORYWORLD_CINEMA_MODE_R370__=Object.freeze({prefs:()=>({...cprefs}),set(p){rawCalls.push({...p});if(typeof p.on==='boolean')cprefs.on=p.on;return {...cprefs};}});
  const HEROES={hwando:{name:'환도'},seoha:{name:'윤서하'},michaela:{name:'미카엘라'},gunner:{name:'기억사수'},slayer:{name:'슬레이어'}};
- const regionById={hub:{records:[]},dist00:{records:[{narrator:'〈EGO의 기억〉'}]},kair01:{records:[{narrator:'〈윤서하의 기억〉'}]},restKairo:{records:[{narrator:'〈윤서하의 기억〉'},{narrator:'〈미카엘라의 기억〉'}]},murder03:{records:[{narrator:'〈환도의 기억〉'},{narrator:'〈한이경의 기억〉'}]},cult01:{locked:true,records:[{narrator:'〈미카엘라의 기억〉'}]}};
+ const regionById={hub:{records:[]},dist00:{records:[{narrator:'〈EGO의 기억〉'}]},kair01:{records:[{narrator:'〈윤서하의 기억〉'}]},restKairo:{records:[{narrator:'〈윤서하의 기억〉'},{narrator:'〈미카엘라의 기억〉'}]},murder03:{records:[{narrator:'〈환도의 기억〉'},{narrator:'〈한이경의 기억〉'}]},cult01:{locked:true,records:[{narrator:'〈미카엘라의 기억〉'}]},ep1b05:{records:[{narrator:'〈의목사 A의 기억〉'}]}};
  const pre=`let player=null,room=null,zone='hub',saved=0,heroPanel=0;
- let enterRegion=async(id)=>{if(regionById[id]&&regionById[id].locked)return false;room={id};zone=id;return true;};let playScenes=(sc,done)=>{done&&done();};let showHeroes=(isNew)=>{heroPanel++;};
+ let enterRegion=async(id,from,opt)=>{if(regionById[id]&&regionById[id].locked)return false;room={id};zone=id;if(opt&&opt.samongZone)room.samongR115={zone:opt.samongZone};return true;};let playScenes=(sc,done)=>{done&&done();};let showHeroes=(isNew)=>{heroPanel++;};
  let newGame=async(id)=>{player={hero:id,level:7,xp:33};await enterRegion('hub');return true;};let restoreSave=async(raw)=>{player={hero:raw.hero,level:12,xp:5,upgrades:{a:1}};await enterRegion(raw.zone);return true;};
  let serializeSave=()=>({hero:player&&player.hero});let showTitle=()=>{},showMenu=()=>{},showSettings=()=>{};
  const ensureImages=async()=>{await new Promise(r=>setTimeout(r,3));},heroPaths=()=>[],refreshIcons=()=>{},saveGame=()=>{saved++;};`;
@@ -65,5 +65,19 @@ function boot(stored){const ls=new Map(Object.entries(stored||{}));const localSt
   t.C.set({on:false});assert.strictEqual(t.cprefs().on,false);assert.strictEqual(t.R.run(),'cinema');t.C.set({on:true});assert.strictEqual(t.cprefs().on,true);
   await t.live.restoreSave()({hero:'hwando',zone:'hub'});assert.strictEqual(t.R.run(),'normal');assert.strictEqual(t.cprefs().on,false);
   ok('cinema run: restore turns it on, EGO keeps current hero, 윤서하/환도 regions lock their hero once per region (level/upgrades shared), save flag kept, sanctuary hero change blocked, Esc = pause, normal save turns it off, refused entry restores the previous hero');}
+ // 리뷰 #346 ①: 영화 영웅 그림을 받는 사이 일반 기록을 불러오면 그 기록의 영웅·강화가 바뀌던 것
+ {const t=boot();await t.live.restoreSave()({hero:'hwando',zone:'hub',playModeR461:'cinema'});
+  t.live.enterRegion()('kair01');await new Promise(r=>setTimeout(r,0));
+  await t.live.restoreSave()({hero:'slayer',zone:'hub'});const before=JSON.stringify(t.S.player.upgrades);
+  await new Promise(r=>setTimeout(r,60));assert.strictEqual(t.R.run(),'normal');assert.strictEqual(t.S.player.hero,'slayer');assert.strictEqual(JSON.stringify(t.S.player.upgrades),before);
+  // 영화 → 다른 영화 기록도 앞 요청을 버린다
+  await t.live.restoreSave()({hero:'hwando',zone:'hub',playModeR461:'cinema'});t.live.enterRegion()('kair01');await new Promise(r=>setTimeout(r,0));
+  await t.live.restoreSave()({hero:'gunner',zone:'hub',playModeR461:'cinema'});await new Promise(r=>setTimeout(r,60));assert.strictEqual(t.S.player.hero,'gunner');
+  ok('a hero change still loading images is dropped when another save is restored (normal or cinema): hero and upgrades of the new save stay');}
+ // 리뷰 #346 ②: 사몽 구역은 빌려 쓰는 본편 지도(ep1b05 = 의목사 A)가 아니라 구역 서사(S-01 = 환도)로 정한다
+ {const t=boot();await t.live.restoreSave()({hero:'seoha',zone:'hub',playModeR461:'cinema'});
+  await t.live.enterRegion()('ep1b05',null,{layer:'DREAM',noStory:true,restore:true,samongZone:'S-01'});await new Promise(r=>setTimeout(r,40));
+  assert.strictEqual(t.S.player.hero,'seoha');t.live.playScenes()([{narrator:'환도의 기억',key:'samong:S-01:0'}]);await new Promise(r=>setTimeout(r,40));assert.strictEqual(t.S.player.hero,'hwando');
+  ok('samong zone: no decision from the borrowed host map (noStory entry), the zone narrative decides (S-01 환도 → hwando)');}
  console.log(n+' checks passed');
 })().catch(e=>{console.error(e);process.exit(1);});
