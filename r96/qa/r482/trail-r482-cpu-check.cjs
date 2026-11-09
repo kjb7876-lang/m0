@@ -39,5 +39,11 @@ ok('ribbon flat on ground (y=0)',Rb.pos.length>0&&Rb.pos.every((v,i)=>i%3!==1||v
 ok('valid triangle indices',Rb.idx.length>0&&Rb.idx.length%3===0&&Rb.idx.every(i=>i>=0&&i<Rb.pos.length/3));
 ok('zones: outdoor only, Mammon & cave & indoor excluded',API&&API.zoneOk('dist00')&&API.zoneOk('hub')&&!API.zoneOk('ep1b06')&&!API.zoneOk('dist01')&&!API.zoneOk('ep1a08')&&!API.zoneOk(undefined));
 ok('pref off disables',load({prefs:{on:false}}).__STORYWORLD_TRAIL_R482__?.enabled()===false&&API?.enabled()===true);
+// Codex #358: 바닥 칸 사이에 벽이 서 있는 지도(cave-r204 가 벽을 장에 그려 넣음)에서는 벽을 지나는 길을 내면 안 된다 — 벽 틈으로 돌아가야 한다
+{const cellsW=new Set();for(let y=0;y<10;y++)for(let x=0;x<20;x++)cellsW.add(x+','+y);
+ const clearW=(x,y)=>{const inWall=y<8;const dx=Math.abs(x-10.5)-.5;const dw=inWall?dx:Math.hypot(Math.max(dx,0),y-8);const de=Math.min(x,20-x,y,10-y);return Math.min(de,dw);};
+ const pw=API?API.findTrail(cellsW,clearW,{x:3.5,y:2.5},{x:17.5,y:2.5}):[];
+ const segOk=pw.length>1&&pw.every((q,i)=>{if(clearW(q.x,q.y)<=0)return false;if(!i)return true;const a=pw[i-1];for(let t=.25;t<1;t+=.25)if(clearW(a.x+(q.x-a.x)*t,a.y+(q.y-a.y)*t)<=0)return false;return true;});
+ ok('trail never crosses a wall between floor cells (goes round through the gap)',segOk&&pw.some(q=>q.y>=8));}
 const W2=P[0]?P[0].filter(q=>q.x>4&&q.x<16):[];ok('meanders in the open room (not a ruler-straight line: lateral spread ≥ .5)',W2.length>4&&(Math.max(...W2.map(q=>q.y))-Math.min(...W2.map(q=>q.y)))>=.5);
 console.log(`\nR482 trail: ${pass} passed, ${fail} failed`);process.exit(fail?1:0);

@@ -8,7 +8,7 @@
  * Canonical source; copied to runtime-text by scripts/sync-r99.py. */
 (()=>{'use strict';
 if(window.__STORYWORLD_TRAIL_R482__)return;
-const REV='R482-trail-3',KEY='storyworld.r482.trail';
+const REV='R482-trail-4',KEY='storyworld.r482.trail';
 let prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;}catch(e){}
 // R204 이 바닥을 그리는 실외 지역(정본 PLACE 'out'). 동굴 dist01·실내·기억 공간은 뺀다. 맘몬 ep1b06 은 Codex 몫.
 const ZONES=new Set(['hub','dist00','dist02','dist03','dist04','dist05','dist06','last304','last305','kair05','last302','last303','ep1b06b','kair04','last301','hando01','hando02']),NEVER=new Set(['ep1b06']);
@@ -27,7 +27,8 @@ function findTrail(cells,clear,from,to){
  while(open.length&&guard++<60000){const [,x,y]=pop(),k=key(x,y);if(done.has(k))continue;done.add(k);
   if(x===gx&&y===gy){const out=[];let c=k;while(c){const [a,b]=c.split(',').map(Number);out.push({x:a+.5,y:b+.5});c=came.get(c);}out.reverse();out[0]={x:from.x,y:from.y};out[out.length-1]={x:to.x,y:to.y};return out;}
   for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]]){const nx=x+dx,ny=y+dy,nk=key(nx,ny);if(!has(nx,ny)||done.has(nk))continue;if(dx&&dy&&(!has(x+dx,y)||!has(x,y+dy)))continue;
-   const c=clear(nx+.5,ny+.5),cost=Math.hypot(dx,dy)*(1+2.2/(Math.max(0,c)+.4)),ng=g.get(k)+cost;if(ng<(g.get(nk)??Infinity)){g.set(nk,ng);came.set(nk,k);push([ng+Math.hypot(gx-nx,gy-ny),nx,ny]);}}}
+   // 벽(장 안 거리 ≤ 0)은 지나지 않는다: 칸 가운데와 건너는 선의 가운데 둘 다 본다(Codex #358). 목표 칸(문 자리)만 예외.
+   const c=clear(nx+.5,ny+.5),goal=nx===gx&&ny===gy;if(!goal&&(c<=0||clear(x+.5+dx/2,y+.5+dy/2)<=0))continue;const cost=Math.hypot(dx,dy)*(1+2.2/(Math.max(0,c)+.4)),ng=g.get(k)+cost;if(ng<(g.get(nk)??Infinity)){g.set(nk,ng);came.set(nk,k);push([ng+Math.hypot(gx-nx,gy-ny),nx,ny]);}}}
  return[];}
 // 모서리 깎기 두 번 + .5칸 간격 다시 찍기 — 계단 모양 없이 부드럽게
 function smooth(pts){let p=pts;for(let it=0;it<2;it++){if(p.length<3)break;const q=[p[0]];for(let i=0;i<p.length-1;i++){const a=p[i],b=p[i+1];q.push({x:a.x*.75+b.x*.25,y:a.y*.75+b.y*.25},{x:a.x*.25+b.x*.75,y:a.y*.25+b.y*.75});}q.push(p[p.length-1]);p=q;}
