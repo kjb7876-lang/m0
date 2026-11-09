@@ -32919,8 +32919,8 @@
     },
     {
       "path": "cave-r204.js",
-      "bytes": 123606,
-      "sha256": "2689a920fdf36817b1a17de4b5f35810711c596b27e3d4d2ae5e81de40f6da01"
+      "bytes": 129700,
+      "sha256": "9d29057ada666d47e8d2c7b4cc6c9db95b4dbc81b2c4006b78161d986fbdea8f"
     },
     {
       "path": "chunks/ep1a08-0-0.json",
@@ -33544,8 +33544,8 @@
     },
     {
       "path": "doors-fit-r413.js",
-      "bytes": 6199,
-      "sha256": "37814a0f2b2ed31c2b4f1fea2794c7c46b384a1dab72c7a99cdb135f60e91553"
+      "bytes": 9625,
+      "sha256": "8c5245fc2e07de373931b53fa52264c5cd2ef63db4ba737e6445cde96e50db44"
     },
     {
       "path": "doors-r189.js",
@@ -34174,8 +34174,8 @@
     },
     {
       "path": "play-r115.js",
-      "bytes": 29471,
-      "sha256": "42854be1ddffbc98f43f45baa1e47582b786c7ac86012b47e0bca5785272e0b1"
+      "bytes": 30042,
+      "sha256": "ec28e89f8fda38cef5ad82659eb534773373a225ed300121df60fd04e658bf47"
     },
     {
       "path": "play-r169.js",
@@ -34649,8 +34649,8 @@
     },
     {
       "path": "world-doors-r83.js",
-      "bytes": 14746,
-      "sha256": "1bdf66b7540696e54ce7b44f7eae36c80ff9b6e8396bcc3031035035b2ad1151"
+      "bytes": 15521,
+      "sha256": "0033bf272ba8b316d1818950c4f084d8ab1abc9b61f498b63597bc7d849be68a"
     },
     {
       "path": "world-environment-r81.js",
@@ -34669,8 +34669,8 @@
     },
     {
       "path": "world-presentation-r81.js",
-      "bytes": 14117,
-      "sha256": "dc8a937df213812fe4b171dc130eb743a5b10905e9a565c7ba966ed52692cfc9"
+      "bytes": 14880,
+      "sha256": "667c6b089c1014dcb4d41450a36c288926287722767458134722bea878a74cb7"
     },
     {
       "path": "world-r98.js",
@@ -34694,7 +34694,7 @@
     }
   ],
   "fileCount": 6938,
-  "totalBytes": 1091814578,
+  "totalBytes": 1091826207,
   "webHTMLSha256": "4aa5d10c6b58166ce3f548560074499737070e73b83470fb34f13501eb1d2bbd",
   "largest": [
     {
