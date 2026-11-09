@@ -458,6 +458,8 @@ jobs:
         run: node r96/qa/r452/ground-fringe-r452-cpu-check.cjs
       - name: R453 actor tone (hero/mob brightness + saturation from the floor light, screen top-left rim, no asset swap, restored after draw) CPU check
         run: node r96/qa/r453/actor-tone-r453-cpu-check.cjs
+      - name: R492 lag (R409 outline bake by one distance transform instead of dozens of drawImage dilations; same rim rule, size, colours) CPU check
+        run: node r96/qa/r492/r492-cpu-check.cjs
       - name: R444 enemy facing authority (attack side = hitbox angle, walk = real displacement, strafe faces hero, no mob shadows) CPU check
         run: node r96/qa/r444/r444-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
