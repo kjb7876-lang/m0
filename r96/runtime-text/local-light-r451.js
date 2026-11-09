@@ -17,7 +17,7 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_LOCAL_LIGHT_R451__)return;
 const A=window.StoryPhase1,C=A?.ThreeRenderer?.prototype;if(!A||!C)return;
-const REV='R451-local-light-6',KEY='storyworld.r451.localLight';
+const REV='R451-local-light-7',KEY='storyworld.r451.localLight';
 const DEFAULTS=Object.freeze({on:true,flicker:true});
 let prefs={...DEFAULTS};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');for(const k in DEFAULTS)if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={frames:0,owned:0,bakes:0,bakeMs:0,deltas:0,deltaMs:0,deltaMaxMs:0,deltaLights:0,deltaTiles:0,lights:0,lightsUsed:0,blockers:0,texels:0,patched:0,scans:0,sigScans:0,rowsLit:0,coversLit:0,corpsesLit:0,holes:0,stutters:0,errors:0};let lastError=null,disposed=false;
@@ -69,14 +69,16 @@ const FIRE_OK=new Set(['kair07','ep1b07']);
 //  (보정 2026-11-09: 실외 화면이 89~92% 어두워 호러 규칙 70~85% 를 넘었다 → 등불 웅덩이를 넓혀 78~87%)
 const REACH=Object.freeze({out:Object.freeze({k:1.12,r:1.25}),cave:Object.freeze({k:1.05,r:1.12}),in:Object.freeze({k:1,r:1}),void:Object.freeze({k:1,r:1})});
 // 숨긴 소품(r303Hide: R303 문 곁·R412 벽 속·R449 공간 정리로 쉬는 R224 가구 — 화로 r80-039 포함)은 그려지지 않으니 빛도 내지 않는다.
-const isLightProp=p=>{if(!p||p.r303Hide)return false;try{const f=window.__STORYWORLD_DARK_R123__?.isLight;return typeof f==='function'&&!!f(p);}catch(_){return false;}};
+// 엔진 drawProp 이 건너뛰는 소품(visible:false·enabled:false·disabled·destroyed — R169 길 비우기, R438/R443 보스방 정리, R114 보스가 던진 가구)도 같다.
+const drawnProp=p=>!!p&&!p.r303Hide&&p.visible!==false&&p.enabled!==false&&p.disabled!==true&&p.destroyed!==true;
+const isLightProp=p=>{if(!drawnProp(p))return false;try{const f=window.__STORYWORLD_DARK_R123__?.isLight;return typeof f==='function'&&!!f(p);}catch(_){return false;}};
 
 // 진짜 광원 목록(지역·소품 수·숨긴 소품 수·등 자리가 바뀔 때만 다시 만든다 — R449 는 방을 처음 볼 때 R224 가구를 숨기고 제 가구를 붙인다)
 //  R91 벽 등은 지금 불러온 청크의 벽에만 놓이므로 걸으면 자리가 바뀐다(개수가 같아도) — 자리 해시로 알아챈다. 다시 굽기는 바뀐 등 몫만(bakeDelta).
 let lightCache=null;
 function posHash(ps){let h=ps.length|0;for(const p of ps)h=Math.imul(h,31)+Math.round((+p.x||0)*100)*7919+Math.round((+p.y||0)*100)|0;return h;}
 function collect(r){const L=r?.exploration;if(!L)return[];const r92=window.__STORYWORLD_VISUAL_R92__,r91=window.__STORYWORLD_VISUAL_R91__,T412=window.__STORYWORLD_PROPS_TIDY_R412__;
- let hid=0;for(const p of r.props||[])if(p&&p.r303Hide)hid++;
+ let hid=0;for(const p of r.props||[])if(p&&!drawnProp(p))hid++;
  const p92=r92?.lightPoints?.()||[],p91=r91?.lightPoints?.()||[],sig=[typeof zone!=='undefined'?zone:'',r.props?.length||0,hid,posHash(p92),posHash(p91),T412?.ver?.()||0,!!r.altar].join('|');
  if(lightCache&&lightCache.room===r&&lightCache.layout===L&&lightCache.sig===sig)return lightCache.list;
  const fam=familyOf(r),place=placeKind(r),indoor=place==='in',fireOk=FIRE_OK.has(r.id),G=REACH[place]||REACH.out,list=[];
@@ -340,7 +342,7 @@ if(typeof showSettings==='function'){const base=showSettings;showSettings=functi
 
 function dispose(){disposed=true;if(timer)clearInterval(timer);o451.owned=false;if(U)U.r451On.value=0;try{o451.tex?.dispose?.();}catch(_){}o451.tex=null;o451.data=null;o451.B=null;o451.grid=null;o451.layout=null;}
 window.__STORYWORLD_LOCAL_LIGHT_R451__=Object.freeze({revision:REV,storageKey:KEY,types:TYPE,ambient:AMB,ambientIn:AMB_IN,ambientCave:AMB_CAVE,prefs:()=>({...prefs}),set,owns,lightAt,lights,glowHoles,glowEdge,classify,ambientFor,dispose,
- pure:Object.freeze({wallBox,grid,seen,bell,shoulder,bakeAcc,bakeDelta,lightContrib,markTiles,lightKey,posHash,sceneSig,floorOwned,litRow,eligible,LMAX,KNEE,SHOULDER,TILE,FIRE_OK:[...FIRE_OK],REACH,GLOW_SCALE,GLOW_FAM}),
+ pure:Object.freeze({wallBox,grid,seen,bell,shoulder,bakeAcc,bakeDelta,lightContrib,markTiles,lightKey,posHash,sceneSig,floorOwned,litRow,eligible,drawnProp,LMAX,KNEE,SHOULDER,TILE,FIRE_OK:[...FIRE_OK],REACH,GLOW_SCALE,GLOW_FAM}),
  inspect:()=>({revision:REV,prefs:{...prefs},owned:o451.owned,stats:{...stats},lastError,family:lightCache?.fam||null,indoor:lightCache?.indoor??null,place:lightCache?.place||null,ambient:o451.amb,
   lights:o451.lights.map(l=>({x:+l.x.toFixed(2),y:+l.y.toFixed(2),type:l.type,src:l.src,id:l.id})),grid:o451.grid?{W:o451.grid.W,H:o451.grid.H,S:o451.grid.S}:null,
   collisionChanged:false,gameplayChanged:false,GPUVerified:false})});

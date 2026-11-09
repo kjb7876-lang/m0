@@ -33934,8 +33934,8 @@
     },
     {
       "path": "local-light-r451.js",
-      "bytes": 45641,
-      "sha256": "619bc915dad874df7a66ffe839d1f377f27d7dd00855a7d10ab4de94d3c2a4f5"
+      "bytes": 45953,
+      "sha256": "4d9225a9cf47dc6baf1c15c90682457cc6b811eb850a6f2c7e6105002ee21f6d"
     },
     {
       "path": "mammon-bossroom.js",
@@ -34749,7 +34749,7 @@
     }
   ],
   "fileCount": 6949,
-  "totalBytes": 1092000355,
+  "totalBytes": 1092000667,
   "webHTMLSha256": "93d6e55ae0086d61fd14385727980a73bb5cc906a2ab9562c97b5fd97f3eb370",
   "largest": [
     {
