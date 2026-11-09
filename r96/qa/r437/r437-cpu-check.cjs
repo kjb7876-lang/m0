@@ -33,7 +33,7 @@ for(const h of ['neon','lauren']){const I=JSON.parse(RT('assets/r437/attack/'+h+
  ok(h+' source recorded (zip sha256 + 6 frame hashes)',/^[0-9a-f]{64}$/.test(I.source.zip_sha256)&&I.source.frames_png_sha256.length===6);
  ok(h+' original R143 sheets kept',fs.existsSync(path.join(R,'runtime-text','assets/r143/attack/'+h+'/attack-e.webp')));}
 const P143=C('attack-anim-r143.js');
-ok('R143 place() uses R437 cell/foot/body for attack only',/attackSheet\?\.\(h,sd\)/.test(P143)&&/sourceRect:\[sx,0,CW,256\]/.test(P143)&&/X=v=>fx\+f\*\(v-FX\)\*k/.test(P143)&&/alt\?alt\.body:bodyOf\(im\)/.test(P143));
+ok('R143 place() uses R437 cell/foot/body for attack only, old sheet until R437 sheet is ready, R437 sheet preloaded',/attackSheet\?\.\(h,sd\)/.test(P143)&&/alt=altIm\?alt0:null/.test(P143)&&/attackSheet\?\.\(h,'e'\);if\(a\?\.path\)want\.push\(a\.path\)/.test(P143)&&/sourceRect:\[sx,0,CW,256\]/.test(P143)&&/X=v=>fx\+f\*\(v-FX\)\*k/.test(P143)&&/alt\?alt\.body:bodyOf\(im\)/.test(P143));
 ok('R425 spear-tip glow uses per-frame R437 tips; neon glow only on R437 frames',/tipFor\?\.\(best\.sourcePath,sr\)/.test(C('combat-flow-r425.js'))&&/neon:\{F:\{a:\[24,168,154\],b:\[184,255,240\]\},k:1\.3,needR437:true\}/.test(C('combat-flow-r425.js')));
 // ③ 초상화
 const PB=fs.readFileSync(path.join(R,'runtime-text','assets/r437/portrait/neon.webp'));
