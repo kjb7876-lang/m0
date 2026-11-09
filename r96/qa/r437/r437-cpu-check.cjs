@@ -16,7 +16,12 @@ ok('hops follow the actual Q hit targets, nearest-next order',/inQ\.hit\.add\(e\
 ok('engine link hidden only while neon Q runs',/if\(inQ&&type==='link'\)/.test(src));
 ok('R106 blue chain skipped for neon Q',/__STORYWORLD_NEON_LAUREN_R437__\?\.owns\?\.\(hero,slot\)\)return;/.test(C('fx-d2s-r106.js')));
 ok('R411 triangle hit sheet skipped for neon',/__STORYWORLD_NEON_LAUREN_R437__\?\.ownsHit\?\.\(player\.hero\)\)return;/.test(C('skill-sheets-r411.js')));
-ok('neon Q white hit flashes dimmed through engine e.alpha (only effects created by the Q cast)',/DIM_TYPES=new Set\(\['burst','e568HeroImpact'/.test(src)&&/e\.alpha=\(Number\.isFinite\(e\.alpha\)\?e\.alpha:1\)\*DIM/.test(src)&&/if\(enabled\)dimNew\(n0\)/.test(src));
+ok('neon Q white hit flashes dimmed at draw time (globalAlpha x DIM while drawing only Q-created flashes)',/DIM_TYPES=new Set\(\['burst','e568HeroImpact'/.test(src)&&/e&&e\.r437Dim&&enabled/.test(src)&&/dimmedDraw\(ctx,/.test(src)&&/if\(enabled\)dimNew\(n0\)/.test(src));
+// 그리기 단위 확인: 원본이 globalAlpha 를 바로 넣어도 DIM 이 곱해지고, 끝나면 원래 값으로 돌아오는가
+ok('dimmed draw multiplies absolute globalAlpha and restores it',(()=>{const vm=require('vm');const log=[];class C{constructor(){this._a=1;}get globalAlpha(){return this._a;}set globalAlpha(v){this._a=v;}}const c=new C();
+ const sb={started:true,room:{id:'t'},window:{},localStorage:{getItem:()=>null},player:{hero:'neon',x:0,y:0,specialCD:0},effects:[],ctx:c,special(){this.effects.push({type:'e568HeroImpact',age:0,life:1});this.player.specialCD=5;},fx(){},drawEffect(e){c.globalAlpha=.92;log.push(c.globalAlpha===.92?c._a:-1);},tick(){},project:(x,y)=>({x,y}),hitEnemy(){},liveEnemies:()=>[],clamp:(v,a,b)=>Math.max(a,Math.min(b,v))};
+ sb.window=sb;sb.globalThis=sb;vm.createContext(sb);try{vm.runInContext(src,sb);sb.special();sb.drawEffect(sb.effects[0]);}catch(e){console.log('vm',e.message);return false;}
+ return Math.abs(log[0]-.92*.38)<1e-6&&c.globalAlpha===1&&!Object.getOwnPropertyDescriptor(c,'globalAlpha');})());
 ok('no gameplay writes',!/\.hp\s*-?=|specialCD\s*=|\.damage\s*=|saveGame/.test(src));
 // ② 공격 시트
 for(const h of ['neon','lauren']){const I=JSON.parse(RT('assets/r437/attack/'+h+'/index.json')),E=I.directions.e,B=fs.readFileSync(path.join(R,'runtime-text',E.path));

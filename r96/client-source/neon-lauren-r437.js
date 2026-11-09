@@ -14,10 +14,10 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_NEON_LAUREN_R437__)return;
 if(typeof special!=='function'||typeof fx!=='function'||typeof drawEffect!=='function'||typeof tick!=='function'||typeof project!=='function')return;
-const REV='R437-neon-lauren-2',KEY='storyworld.r437.neonChain',SHEET='assets/r108/eden/lightning.webp',CELL=256;
+const REV='R437-neon-lauren-3',KEY='storyworld.r437.neonChain',SHEET='assets/r108/eden/lightning.webp',CELL=256;
 const MINT_DARK=[0x18,0xA8,0x9A],MINT_LIGHT=[0xB8,0xFF,0xF0];
 let enabled=true;try{if(localStorage.getItem(KEY)==='0')enabled=false;}catch(_){}
-const stats={casts:0,hops:0,linksHidden:0,dimmed:0,draws:0,errors:0,noSheet:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
+const stats={casts:0,hops:0,linksHidden:0,dimmed:0,dimDraws:0,draws:0,errors:0,noSheet:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const clamp=(v,a,b)=>Math.min(b,Math.max(a,v)),lerp=(a,b,t)=>a+(b-a)*t;
 const live=()=>typeof started!=='undefined'&&started&&typeof player!=='undefined'&&!!player&&typeof room!=='undefined'&&!!room;
 const lowFx=()=>!!(typeof settings!=='undefined'&&settings?.lowFx);
@@ -74,8 +74,17 @@ function drawAll(){const src=sheet();if(!src){if(list.length)stats.noSheet++;ret
 let inQ=null;// 네온 Q 가 도는 동안 {origin, hit:Set}
 // 네온 Q 가 만든 적중 흰 섬광(burst·e568HeroImpact·충돌 그림)은 체인을 덮지 않게 옅게 그린다(7분야 심사 고칠 점, 사용자 2026-11-09 "모두개선적용").
 const DIM_TYPES=new Set(['burst','e568HeroImpact','pxfSprite','spark','flash']),DIM=.38;
-const effectBase=drawEffect;drawEffect=function(e){if(e&&e.type==='r437-neon-chain'){try{drawAll();}catch(err){fail(err);}return;}return effectBase.apply(this,arguments);};
-const dimNew=n0=>{if(typeof effects==='undefined'||!Array.isArray(effects))return;for(let i=n0;i<effects.length;i++){const e=effects[i];if(e&&!e.r437Dim&&(DIM_TYPES.has(e.type)||/burst-impact|impact/.test(String(e.asset||e.src||'')))){e.r437Dim=true;e.alpha=(Number.isFinite(e.alpha)?e.alpha:1)*DIM;stats.dimmed++;}/* 엔진 drawEffect 는 e.alpha 를 곱한다 */}};
+// e.alpha 를 읽지 않는 그리기(엔진 충격 그림·PXF 는 globalAlpha 를 바로 넣음)도 옅어지게, 이 효과를 그리는 동안만 ctx.globalAlpha 에 DIM 을 곱한다.
+const findAlpha=o=>{for(let q=o;q;q=Object.getPrototypeOf(q)){const d=Object.getOwnPropertyDescriptor(q,'globalAlpha');if(d)return {d,own:q===o};}return null;};
+const dimmedDraw=(c,run)=>{const f=findAlpha(c);if(!f)return run();const {d,own}=f;let back=d.get?d.get.call(c):d.value;
+ const put=v=>{if(d.set)d.set.call(c,v);else back=v;};const raw=()=>d.get?d.get.call(c):back;
+ const start=raw();try{Object.defineProperty(c,'globalAlpha',{configurable:true,enumerable:true,get(){return raw()/DIM;},set(v){put(Math.max(0,Math.min(1,Number(v)))*DIM);}});}catch(_){return run();}
+ stats.dimDraws++;try{c.globalAlpha=start;return run();}
+ finally{if(own)Object.defineProperty(c,'globalAlpha',d);else delete c.globalAlpha;c.globalAlpha=start;}};
+const effectBase=drawEffect;drawEffect=function(e){if(e&&e.type==='r437-neon-chain'){try{drawAll();}catch(err){fail(err);}return;}
+ if(e&&e.r437Dim&&enabled&&typeof ctx!=='undefined'&&ctx){const self=this,args=arguments;return dimmedDraw(ctx,()=>effectBase.apply(self,args));}
+ return effectBase.apply(this,arguments);};
+const dimNew=n0=>{if(typeof effects==='undefined'||!Array.isArray(effects))return;for(let i=n0;i<effects.length;i++){const e=effects[i];if(e&&!e.r437Dim&&(DIM_TYPES.has(e.type)||/burst-impact|impact/.test(String(e.asset||e.src||'')))){e.r437Dim=true;stats.dimmed++;}}};
 const tickBase=tick;tick=function(dt){const r=tickBase.call(this,dt);try{if(!mint&&enabled&&live()&&player.hero==='neon')sheet();/* 네온이면 미리 민트 사본을 만든다(첫 Q 에 빈 화면 방지) */const d=Number.isFinite(dt)?clamp(dt,0,.1):0;for(const c of list)c.t+=d;for(let i=list.length-1;i>=0;i--)if(list[i].t>list[i].life)list.splice(i,1);
  if(list.length&&typeof effects!=='undefined'&&Array.isArray(effects)&&!effects.includes(SENTINEL)){SENTINEL.age=0;effects.push(SENTINEL);}}catch(e){fail(e);}return r;};
 if(typeof enterRegion==='function'){const eb=enterRegion;enterRegion=async function(...a){const r=await eb.apply(this,a);if(r!==false)list.length=0;return r;};}
