@@ -28,7 +28,7 @@
 //  끄기: localStorage['storyworld.r447.space']='{"on":false}' (부분: {"furnish":false} 가구 규칙만, {"fade":false} 가림 완화만)
 (()=>{'use strict';
 if(window.__STORYWORLD_PROPS_SPACE_R447__)return;
-const REV='R447-props-space-4',KEY='storyworld.r447.space';
+const REV='R447-props-space-5',KEY='storyworld.r447.space';
 const prefs={on:true,furnish:true,fade:true};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(prefs))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={regions:0,rooms:0,kept:0,hidden:0,skippedBoss:0,emptyRooms:0,rhythmEmpty:0,lateHidden:0,reloads:0,faded:0,errors:0};let lastError=null;
@@ -78,6 +78,9 @@ const T={
 // 큰 방 맞은편 벽 한 점(묶음과 다른 그림)
 const EXTRA={clinic:['148','144','149'],home:['026','025'],urban:['056','051'],forge:['018','045'],machine:['001','002','151'],cult:['069','062','064']};
 const WALL_D={'024':.85,'025':.75,'026':.6,'027':.55,'051':.7,'056':.45};
+// 벽에서 띄울 최소 거리(R412 3D 벽 박힘 재기로 실측: 8개 지역 120점, 3% 넘게 벽에 든 그림을 R412 가 밀어낸 거리를 더한 값).
+//  처음부터 그 자리에 두면 R412 가 옮기지 않는다 → 벽 높이(R115)가 올라가는 때와 상관없이 그리는 자리도 늘 같다(불러오기 전후 .4/.6 칸 차이 측정).
+const WALL_MIN={'018':1.2,'045':1.05,'069':.9,'148':.8,'001':.9,'002':.85,'027':.9,'054':.8,'075':.85,'151':.9,'026':.85,'025':.85,'141':.75};
 // 계열 판별: 지역 R224 가구(처음 그림)에서 그 계열에만 있는 그림 수로
 const KIND_ART={clinic:/r80-14[1-9]\.webp$/,home:/r80-02[567]\.webp$/,urban:/r80-05[146]\.webp$/,forge:/r80-(045|039|018)\.webp$/,machine:/r80-(001|002|151|152)\.webp$/,cult:/r80-(061|062|064|069)\.webp$/};
 function kindOf(list){const n={};for(const p of list){const s=String(p.path||'');for(const[k,re]of Object.entries(KIND_ART))if(re.test(s))n[k]=(n[k]||0)+1;}
@@ -175,8 +178,8 @@ function plan(r,snap=snapshot(r)){const L=r?.exploration,R=L?.r224Rooms;if(!L||!
     const pref=[.3,.7,.36,.64][salt%4];const cands=[];for(let t=start+1;t<=start+len-1+1e-6;t+=.25)cands.push(t);
     cands.sort((a,b)=>Math.abs((a-start)/len-pref)-Math.abs((b-start)/len-pref)||a-b);
     for(const t of cands){if(avoidT&&avoidT.side===side&&Math.abs(t-avoidT.t)<3)continue;const mine=[];let ok=true;
-     for(const q of group){const along=t+q.a*mir;if(along<start+.45||along>start+len-.45){ok=false;break;}
-      if(ops.some(o=>Math.abs(o-along)<(q.d<=1.0?1.4:.9))){ok=false;break;}/* 뒤쪽 벽 문 틈 앞은 비운다 */
+     for(const q0 of group){const q={...q0,d:Math.max(q0.d,WALL_MIN[q0.art]||0)},along=t+q.a*mir;if(along<start+.45||along>start+len-.45){ok=false;break;}
+      if(ops.some(o=>Math.abs(o-along)<(q0.d<=1.0?1.4:.9))){ok=false;break;}/* 뒤쪽 벽 문 틈 앞은 비운다(벽 가구는 1.4, 탁자처럼 떨어져 선 것은 .9) */
       const x=side==='n'?along:rc.x0+q.d,y=side==='n'?rc.y0+q.d:along,sd=side==='n'?'-y':'-x';
       const mirror=SYM.test(q.art)?false:NATIVE_X.test(q.art)?sd==='-y':sd==='-x',kk=mirror?pivotShift(q.art):0,fx=Math.abs(kk)>.01?x+kk:x,fy=Math.abs(kk)>.01?y-kk:y;
       if(!free(x,y,fx,fy,mine)){ok=false;break;}
