@@ -28,7 +28,7 @@
 //  끄기: localStorage['storyworld.r449.space']='{"on":false}' (부분: {"furnish":false} 가구 규칙만, {"fade":false} 가림 완화만)
 (()=>{'use strict';
 if(window.__STORYWORLD_PROPS_SPACE_R449__)return;
-const REV='R449-props-space-6',KEY='storyworld.r449.space';
+const REV='R449-props-space-7',KEY='storyworld.r449.space';
 const prefs={on:true,furnish:true,fade:true};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(prefs))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={regions:0,rooms:0,kept:0,hidden:0,skippedBoss:0,emptyRooms:0,rhythmEmpty:0,lateHidden:0,reloads:0,faded:0,errors:0};let lastError=null;
@@ -254,6 +254,15 @@ function coverAlpha(p){if(!prefs.on||!prefs.fade||!p||p.r303Hide||!(+p.height>=5
  for(let i=0;i<cand.length;i+=4){const e=project(cand[i],cand[i+1]);if(e.x<left||e.x>right)continue;const mid=e.y-ah*cand[i+2]*.5;if(mid>top&&mid<q.y-4&&cand[i+3]<k){k=cand[i+3];if(k<=.4)break;}}/* 몹·보스 .4, 문·제단·목표·상자 .5 */
  return k;}
 
+// 옅어짐을 툭 바꾸지 않고 짧게 이어 준다(옅어질 때 약 .15초, 돌아올 때 약 .25초) — 몹이 경계를 오가도 깜빡이지 않게
+const fadeMemo=new WeakMap(),clock=()=>{try{return performance.now();}catch(_){return Date.now();}};
+function easeCover(p,k,now){now=fin(now)?now:clock();let s=fadeMemo.get(p);
+ if(!s){if(!(k<1))return 1;s={a:1,t:now};fadeMemo.set(p,s);}
+ const dt=Math.min(.25,Math.max(0,(now-s.t)/1000));s.t=now;
+ s.a=k<s.a?Math.max(k,s.a-4*dt):Math.min(k,s.a+2.5*dt);
+ if(!(k<1)&&s.a>=1){fadeMemo.delete(p);return 1;}
+ return s.a;}
+
 // ---- 그리기 감싸기 ---------------------------------------------------------------------------------
 try{if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){
  if(!prefs.on||!p)return base.call(this,p,...a);
@@ -262,13 +271,13 @@ try{if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...
   if(st&&st.planned&&p.r224Furniture&&!p.r303Hide&&!inBoss(st,p))p.r303Hide='r449';/* 계획 뒤에 새로 붙은 R224 가구도 쉰다 */
   if(p.r303Hide==='r449'||p.r303Hide==='r449x')return;
   if(MINE(p)&&p.path&&typeof readyImage==='function'&&!readyImage(p.path))ensure([p.path],'redraw');}
- let k=1;try{k=coverAlpha(p);}catch(e){fail(e);}
+ let k=1;try{k=easeCover(p,coverAlpha(p));}catch(e){fail(e);}
  if(k<1&&typeof sprite==='function'){const sp=sprite;stats.faded++;sprite=function(path,x,y,h,o,...rest){return sp.call(this,path,x,y,h,{...(o||{}),alpha:Math.min(o?.alpha??1,k)},...rest);};
   try{return base.call(this,p,...a);}finally{sprite=sp;}}
  return base.call(this,p,...a);};}}catch(e){fail(e);}
 // 처음 본 순간 계획 + 소품 수가 바뀌면 다시 적용(0.4초마다, 계획은 방마다 한 번)
 (function poll(){try{if(typeof room!=='undefined'&&room&&!(typeof loading!=='undefined'&&loading)&&eligible(room)&&room.props.some(p=>p?.r224Furniture))curate(room);}catch(e){fail(e);}setTimeout(poll,400);})();
 function set(o={}){for(const k of Object.keys(prefs))if(typeof o[k]==='boolean')prefs[k]=o[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
-window.__STORYWORLD_PROPS_SPACE_R449__=Object.freeze({revision:REV,set,plan,curate,eligible,snapshot,spaceOf,kindOf,coverAlpha,TEMPLATES:T,EXTRA,SPACE:SPACE.map(([k,re])=>[k,String(re)]),
+window.__STORYWORLD_PROPS_SPACE_R449__=Object.freeze({revision:REV,set,plan,curate,eligible,snapshot,spaceOf,kindOf,coverAlpha,easeCover,TEMPLATES:T,EXTRA,SPACE:SPACE.map(([k,re])=>[k,String(re)]),
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},room:typeof room!=='undefined'&&room?(done.get(room)?.rep||null):null,last:lastPlan,lastError,collisionChanged:false,savesTouched:false})});
 })();

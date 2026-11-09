@@ -131,5 +131,9 @@ w5.enemies[0].hp=0;ok('cover fade: dead mob → no fade',api.coverAlpha(tall)===
 w5.enemies=[{x:10.6,y:10.6,hp:5}];ok('cover fade: mob in front → no fade',api.coverAlpha(tall)===1);
 const w6={id:'z2',layer:'STORY',exploration:{worldR74:{doors:[{x:9.3,y:9.3}]}},props:[tall],enemies:[],objective:null};ctx.room=w6;ok('cover fade: door behind → .5',Math.abs(api.coverAlpha(tall)-.5)<1e-9);
 ok('cover fade: short props never fade',api.coverAlpha({...tall,height:40})===1);
+{const f={id:'ease'},a0=api.easeCover(f,.4,1000),a1=api.easeCover(f,.4,1075),a2=api.easeCover(f,.4,1200),b1=api.easeCover(f,1,1300),b2=api.easeCover(f,1,1700),c=api.easeCover({id:'calm'},1,1000);
+ const good=a0===1&&Math.abs(a1-.7)<1e-9&&Math.abs(a2-.4)<1e-9&&Math.abs(b1-.65)<1e-9&&b2===1&&c===1;
+ ok('cover fade eases in ~.15 s and back in ~.25 s (no pop)',good);if(!good)console.log('  ease',JSON.stringify({a0,a1,a2,b1,b2,c}));}
+ok('draw wrapper eases the cover fade',/k=easeCover\(p,coverAlpha\(p\)\)/.test(src));
 const I=api.inspect();ok('inspect: no errors, collision/saves untouched flags',I.stats.errors===0&&!I.lastError&&I.collisionChanged===false&&I.savesTouched===false);
 console.log(n-bad+'/'+n+' ok');process.exit(bad?1:0);
