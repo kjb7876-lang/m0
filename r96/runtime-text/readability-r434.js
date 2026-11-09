@@ -57,7 +57,7 @@ const poke=()=>{pokeT=nowS();if(calm){calm=false;quietSince=null;try{document.bo
 addEventListener('keydown',poke,true);
 function css(){if(document.getElementById('readabilityR434Css'))return;const s=document.createElement('style');s.id='readabilityR434Css';
  s.textContent='@media (min-width:781px) and (pointer:fine){'
-  /* R441: 사용자 2026-11-09 — 스킬 아이콘은 늘 같은 크기·같은 밝기, 쿨타임만 표시(작아짐·옅어짐 모두 뺌). */
+  /* R442: 사용자 2026-11-09 — 스킬 아이콘은 늘 같은 크기·같은 밝기, 쿨타임만 표시(작아짐·옅어짐 모두 뺌). */
   +'}';
  (document.head||document.documentElement).appendChild(s);}
 css();setInterval(tickCalm,250);

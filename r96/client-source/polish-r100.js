@@ -176,7 +176,7 @@
 #touchActionsR100 button span{position:absolute;left:0;right:0;bottom:3px;font-size:10px;text-shadow:0 1px 2px #000;pointer-events:none}
 #touchActionsR100 button i{position:absolute;inset:0;background:#000a;display:none;align-items:center;justify-content:center;font-style:normal;font-size:15px;color:#fff;pointer-events:none}
 #touchActionsR100 button.cd i{display:flex}
-/* R441: 눌러도 크기·밝기 그대로 — 쿨타임만 표시 */
+/* R442: 눌러도 크기·밝기 그대로 — 쿨타임만 표시 */
 #ambienceR100{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
 #vignetteR100{position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(ellipse at 50% 52%,transparent 58%,rgba(4,6,8,.42) 100%)}
 @media (pointer:coarse){

@@ -80,7 +80,7 @@ const FOCUS_CSS='@media '+FOCUS_MQ+'{'
  +'body.r420-focus header>*,body.r420-focus #xpText,body.r420-focus #buildText,body.r420-focus #awakeText,body.r420-focus #noticeShelfR63R2{transition:opacity .45s ease}'
  +'body.r420-focus.r420-combat header:not(:hover)>*:not(#bossbar):not(nav){opacity:.32}'
  +'body.r420-focus.r420-combat #xpText,body.r420-focus.r420-combat #buildText,body.r420-focus.r420-combat #awakeText,body.r420-focus.r420-combat #noticeShelfR63R2{opacity:.35}'
- /* R441: 스킬 칸 글자(키·이름)도 싸울 때 옅게 하지 않음 — 쿨타임만 표시 */
+ /* R442: 스킬 칸 글자(키·이름)도 싸울 때 옅게 하지 않음 — 쿨타임만 표시 */
  +'body.r420-focus #r177Doc{transition:opacity .45s ease}body.r420-focus.r420-combat #r177Doc:not(:hover){opacity:.4}'/* R421: 싸우는 동안 오른쪽 쪽지·기억 조각 종이(R177)가 화면 1/4 을 가리지 않게 옅게 — 마우스를 올리면 다시 또렷 */
  +'}';
 
