@@ -48,6 +48,7 @@
 - **Three.js 기록기 CSS filter**: brightness·contrast·saturate·grayscale·hue-rotate 만 된다. `drop-shadow`·`blur` 를 게임 ctx.filter 에 쓰면 Three.js 가 Legacy 로 떨어져 화면이 검게 된다(오프스크린 캔버스에는 써도 됨).
 - **렌더러 render 감싸기**: perf-r97 이 렌더러 인스턴스에 render 를 복사해 두므로 prototype 만 감싸면 스크립트 순서에 따라 안 탄다 → 인스턴스 render 도 같이 감싼다(R186·R188 wrapInst).
 - **몹 그림 사슬**: 엔진 drawEnemy 는 `__STORYWORLD_STORY_COMBAT_R54__.frameFor(e,fallback)` 로 그림을 고른다. R92·R109·R116 덧씌우기는 hp>0 일 때만 바꾼다(R188 이 죽음까지 이어 줌).
+- **조형물 그리기 길**: R80 그림 조형물(R224·R449 가구 등)은 world-assets-r80 이 `drawAssetFrame3(path,frame,x,y,h,opt)` 로, 엔진 조형물은 `sprite` 로, sin-room-art 는 `ctx.drawImage` 로 그린다. 조형물 한 점의 알파·필터를 바꾸려면 그 한 번 동안 `sprite`·`drawAssetFrame3` 를 둘 다 바꾸고, 계산값이 아니라 실제 그리기 호출이 받은 값을 브라우저에서 재 본다(R449 때 `sprite` 만 바꿔 화면에 안 닿았음).
 - **R163 pixelfx `hit-flash` 시트는 섬광이 아니라 작은 인형(치비) 그림** — 쓰지 않는다. 시트는 쓰기 전에 반드시 이미지로 열어 본다.
 - **문자열 검사 함정**: 'outdoor' 안에 'door' 가 있다 — 낱말 경계 정규식을 쓴다.
 - **길잡이 난이도**: R77 `takeNextNormal` 은 원래 늘 'normal'(R189 가 지금 지역 난이도·설정값으로 바꿈). 지금 지역 난이도는 `room.difficultyR63`. `mapMode`·`setMapMode` 는 클로저 안이라 전역이 아니다.
