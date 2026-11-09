@@ -434,6 +434,8 @@ jobs:
         run: node r96/qa/r438/r438-cpu-check.cjs
       - name: R442 low stone wall borders laid as continuous straight runs (no lone single) CPU check
         run: node r96/qa/r442/r442-cpu-check.cjs
+      - name: R446 one wall top, door frame 2.4 wrapped by a lintel with top face, void beyond walls near black CPU check
+        run: node r96/qa/r446/r446-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
         run: node r96/qa/r430/r430-cpu-check.cjs
       - name: R431 boss-room center fights + theme boss skill 6s + touch status/DoT + black-flame prop throws CPU check

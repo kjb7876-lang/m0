@@ -33489,8 +33489,8 @@
     },
     {
       "path": "doors-fit-r413.js",
-      "bytes": 6199,
-      "sha256": "37814a0f2b2ed31c2b4f1fea2794c7c46b384a1dab72c7a99cdb135f60e91553"
+      "bytes": 9290,
+      "sha256": "6bd5871d2e31a8ffbe35ef165cc5d2dc31fe348ea42f550e0c39ef4484a9a00f"
     },
     {
       "path": "doors-r189.js",
@@ -34104,8 +34104,8 @@
     },
     {
       "path": "play-r115.js",
-      "bytes": 29471,
-      "sha256": "42854be1ddffbc98f43f45baa1e47582b786c7ac86012b47e0bca5785272e0b1"
+      "bytes": 30042,
+      "sha256": "fe3ca9a52152843e5a39582f8b4058f9b1aeedc9be514c1b7326a17dcefa8f17"
     },
     {
       "path": "play-r169.js",
@@ -34569,8 +34569,8 @@
     },
     {
       "path": "world-doors-r83.js",
-      "bytes": 13713,
-      "sha256": "908ad9b40af76a68438a2888c39824c99f211f08ae2d376cfbe77aab11973012"
+      "bytes": 14488,
+      "sha256": "99d8248c8a8b174ca5e6232018d6c5508e06b7fc9c11fbe5d4c5e86d113f4c9a"
     },
     {
       "path": "world-environment-r81.js",
@@ -34589,8 +34589,8 @@
     },
     {
       "path": "world-presentation-r81.js",
-      "bytes": 14117,
-      "sha256": "dc8a937df213812fe4b171dc130eb743a5b10905e9a565c7ba966ed52692cfc9"
+      "bytes": 14880,
+      "sha256": "c82c5de87c75dfdfe3d2b2f7e10c5402f0c48b77d4192a638182081825dc565e"
     },
     {
       "path": "world-r98.js",
@@ -34614,7 +34614,7 @@
     }
   ],
   "fileCount": 6922,
-  "totalBytes": 1091390705,
+  "totalBytes": 1091395905,
   "webHTMLSha256": "c66bbdc1ca5fdbb563ae9fc2600844336f442f25b993327887968624f1deca7d",
   "largest": [
     {
