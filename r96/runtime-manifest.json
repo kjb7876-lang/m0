@@ -32863,6 +32863,11 @@
       "sha256": "5eb46b1d466fd2b4c3b5ee6dbf12e2148292a82ed842626d7ae2f2eb806a3058"
     },
     {
+      "path": "balrog-tear-r473.js",
+      "bytes": 3963,
+      "sha256": "cf1a56d28bf9e6e52f47259177adce9488f42c7190632cd5045e51ae4350be06"
+    },
+    {
       "path": "battle-beats-r450.js",
       "bytes": 8630,
       "sha256": "a549a2705a72236ccd5a30298bb873a439e00166ec10d6a2b332a67f60b4e658"
@@ -32916,6 +32921,11 @@
       "path": "bossroom-tidy-r438.js",
       "bytes": 7006,
       "sha256": "a65a4c7b138967a152e9b8368af1e4936464883c5b4b40b9c5816487c8e11bda"
+    },
+    {
+      "path": "canon-throw-r471.js",
+      "bytes": 3629,
+      "sha256": "98cf4e3cf10b13b13df73b9f0e60b09c35f839c1b96d851a3f8418582fd79f0b"
     },
     {
       "path": "cave-r204.js",
@@ -33429,8 +33439,8 @@
     },
     {
       "path": "combat-r114.js",
-      "bytes": 37726,
-      "sha256": "59e38c0fde3ab1d1e3e20a89aa97478e1fb038ea3e4eb219b13164eec80f9f43"
+      "bytes": 38113,
+      "sha256": "3e52a69ddb1222288ef3701bc0ee0b86a8ec990c29381dbc24a53c02abc170c2"
     },
     {
       "path": "combat-r118.js",
@@ -33869,8 +33879,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6571954,
-      "sha256": "b4c3090399b7c2086f7f0dfa9f33031dfc9860fc8b291ed3d579caf3a3e08402"
+      "bytes": 6572092,
+      "sha256": "e53aa63c67bb6cb21c48462c4a2ccbda3f8079be0262c939c3f53dc8cfbf2c35"
     },
     {
       "path": "intro-r140.js",
@@ -34388,6 +34398,11 @@
       "sha256": "6436054059e14e2008a98d6950172a515e18a2e985027b069c8f65aa5d25291c"
     },
     {
+      "path": "seal-vision-r472.js",
+      "bytes": 5501,
+      "sha256": "af0a1f8395c6650faaba4be31737461a56d69be3e8e539aadce812819f4323a1"
+    },
+    {
       "path": "seven-sins-bossrooms.js",
       "bytes": 14689,
       "sha256": "f6f539296fd11946a0688a5d82be7bf68b32f5c8d560aff5369e92f7dd439fc5"
@@ -34713,9 +34728,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6942,
-  "totalBytes": 1091883203,
-  "webHTMLSha256": "b4c3090399b7c2086f7f0dfa9f33031dfc9860fc8b291ed3d579caf3a3e08402",
+  "fileCount": 6945,
+  "totalBytes": 1091896821,
+  "webHTMLSha256": "e53aa63c67bb6cb21c48462c4a2ccbda3f8079be0262c939c3f53dc8cfbf2c35",
   "largest": [
     {
       "path": "index.html",
