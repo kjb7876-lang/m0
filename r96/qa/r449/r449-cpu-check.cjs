@@ -1,16 +1,16 @@
-// R447 CPU check — 공간 기능별 조형물 배치(R224 방 가구를 방 이름·기능에 맞춘 한 묶음으로, 교차로·마당·짧은 통로 비움, 같은 종류 방 돌려쓰기)
+// R449 CPU check — 공간 기능별 조형물 배치(R224 방 가구를 방 이름·기능에 맞춘 한 묶음으로, 교차로·마당·짧은 통로 비움, 같은 종류 방 돌려쓰기)
 //  + 남긴 가구 그림 다시 읽기 + 키 큰 조형물이 몹·문·제단·상자를 가리면 옅게. 그리기 전용(충돌·저장·id 불변), 결정적(재입장·저장 불러오기 같은 결과).
 'use strict';const fs=require('fs'),path=require('path'),vm=require('vm');
 const R=path.join(__dirname,'..','..'),C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8'),RT=f=>fs.readFileSync(path.join(R,'runtime-text',f),'utf8');
 let bad=0,n=0;const ok=(m,c)=>{n++;if(!c){bad++;console.log('FAIL',m);}else console.log('ok  ',m);};
-const F='props-space-r447.js',src=C(F);
+const F='props-space-r449.js',src=C(F);
 ok('runtime copy matches client source',RT(F)===src);
 try{new vm.Script(src);ok('syntax',true);}catch(e){ok('syntax '+e.message,false);}
 const html=RT('index.html');
-ok('script tag once, right after bossroom-tidy-r438 and before combat-read-r409',html.split('"./'+F+'"').length===2&&/<script src="\.\/bossroom-tidy-r438\.js"><\/script><script src="\.\/props-space-r447\.js"><\/script><script src="\.\/combat-read-r409\.js"><\/script>/.test(html));
+ok('script tag once, right after bossroom-tidy-r438 and before combat-read-r409',html.split('"./'+F+'"').length===2&&/<script src="\.\/bossroom-tidy-r438\.js"><\/script><script src="\.\/props-space-r449\.js"><\/script><script src="\.\/combat-read-r409\.js"><\/script>/.test(html));
 ok('loads after the overlays it cooperates with (R140·R169·R224·R303·R406·R412)',['props-variety-r140.js','play-r169.js','cave-r204.js','props-fit-r303.js','props-place-r406.js','props-tidy-r412.js'].every(f=>html.indexOf('"./'+f+'"')>0&&html.indexOf('"./'+f+'"')<html.indexOf('"./'+F+'"')));
-ok('listed in verify-r96-public.py',/'props-space-r447\.js'/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')));
-ok('CI runs this check',/node r96\/qa\/r447\/r447-cpu-check\.cjs/.test(fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8')));
+ok('listed in verify-r96-public.py',/'props-space-r449\.js'/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')));
+ok('CI runs this check',/node r96\/qa\/r449\/r449-cpu-check\.cjs/.test(fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8')));
 const code=src.replace(/\/\/.*$/mg,'');
 ok('Mammon ep1b06·samong·dream layers excluded',/r\.id!=='ep1b06'/.test(code)&&/samongR103/.test(code)&&/r\.layer==='STORY'/.test(code));
 ok('presentation only: no hp/save/collision/solid writes, no props array replacement',!/\.hp\s*=[^=]|saveGame|serializeSave|restoreSave|\.walls\s*=|floorCells\s*=|\.solid\s*=|\.props\s*=[^=]|\.enemies\s*=[^=]/.test(code));
@@ -46,7 +46,7 @@ function boot(){const drawn=[],asked=[],ready=new Set(['x.webp']);
   readyImage:p=>ready.has(p)?{image:{naturalWidth:300,naturalHeight:400},path:p}:null,ensureImages:ps=>{asked.push(...ps);return Promise.resolve();},/* 그림은 처음엔 안 읽힘(엔진이 지운 상태) */
   project:(x,y)=>({x:(x-y)*32,y:(x+y)*16}),zoom:1,actorHeight:()=>60,loading:false,room:undefined,
   drawProp:function(p){drawn.push(p.id);},sprite:function(){}};
- ctx.window=ctx;vm.createContext(ctx);vm.runInContext(src,ctx);return{ctx,api:ctx.__STORYWORLD_PROPS_SPACE_R447__,drawn,asked};}
+ ctx.window=ctx;vm.createContext(ctx);vm.runInContext(src,ctx);return{ctx,api:ctx.__STORYWORLD_PROPS_SPACE_R449__,drawn,asked};}
 const {ctx,api,drawn,asked}=boot();
 ok('api exported',!!api&&typeof api.curate==='function'&&typeof api.coverAlpha==='function'&&typeof api.plan==='function');
 ok('space table: names → kinds',api.spaceOf('주사실')==='work'&&api.spaceOf('갈림길')==='junction'&&api.spaceOf('순환로')==='junction'&&api.spaceOf('계단참')==='junction'&&api.spaceOf('길목')==='corridor'&&api.spaceOf('그을린 복도')==='corridor'&&
@@ -54,33 +54,33 @@ ok('space table: names → kinds',api.spaceOf('주사실')==='work'&&api.spaceOf
  api.spaceOf('빈 방')==='living'&&api.spaceOf('입구')==='entry'&&api.spaceOf('다음 구역 문')==='entry'&&api.spaceOf('보스 전투실')==='boss'&&api.spaceOf('중앙 전투실')==='boss'&&api.spaceOf('')==='room');
 const w0=world();const before=JSON.parse(JSON.stringify(w0));ctx.room=w0;const rep=api.curate(w0);
 ok('curated with a report',!!rep&&rep.kind==='clinic'&&rep.kept>0&&rep.placed>0);
-const mine=w=>w.props.filter(p=>p&&p.r447Furniture);const shown=list=>list.filter(p=>!p.r303Hide);
+const mine=w=>w.props.filter(p=>p&&p.r449Furniture);const shown=list=>list.filter(p=>!p.r303Hide);
 const inR=(id,p,w=w0)=>{const q=w.exploration.r224Rooms.find(r=>r.id===id);return p.x>=q.x0&&p.x<=q.x1&&p.y>=q.y0&&p.y<=q.y1;};
-const ofRoom=(id,w=w0)=>mine(w).filter(p=>p.r447.room===id);const arts=list=>shown(list).map(p=>String(p.r80Art).slice(4));
+const ofRoom=(id,w=w0)=>mine(w).filter(p=>p.r449.room===id);const arts=list=>shown(list).map(p=>String(p.r80Art).slice(4));
 const r224In=(id,w=w0)=>w.props.filter(p=>p.r224Furniture&&inR(id,p,w));
-ok('original props keep ids, order and count; new furniture only appended (r447:furn:region:room:n)',before.props.every((p,i)=>w0.props[i]&&w0.props[i].id===p.id)&&w0.props.slice(before.props.length).every(p=>p.r447Furniture&&/^r447:furn:ep1a09:\d+:\d+$/.test(p.id)));
+ok('original props keep ids, order and count; new furniture only appended (r449:furn:region:room:n)',before.props.every((p,i)=>w0.props[i]&&w0.props[i].id===p.id)&&w0.props.slice(before.props.length).every(p=>p.r449Furniture&&/^r449:furn:ep1a09:\d+:\d+$/.test(p.id)));
 ok('non-R224 props untouched',w0.props.slice(0,before.props.length).filter(p=>!p.r224Furniture).every(p=>JSON.stringify(p)===JSON.stringify(before.props.find(q=>q.id===p.id))));
-ok('R224 objects only rested (r303Hide), never moved/re-skinned/removed',w0.props.slice(0,before.props.length).filter(p=>p.r224Furniture).every(p=>{const b=before.props.find(q=>q.id===p.id);const c={...p};delete c.r303Hide;return JSON.stringify(c)===JSON.stringify(b)&&(!p.r303Hide||p.r303Hide==='r447');}));
+ok('R224 objects only rested (r303Hide), never moved/re-skinned/removed',w0.props.slice(0,before.props.length).filter(p=>p.r224Furniture).every(p=>{const b=before.props.find(q=>q.id===p.id);const c={...p};delete c.r303Hide;return JSON.stringify(c)===JSON.stringify(b)&&(!p.r303Hide||p.r303Hide==='r449');}));
 ok('new furniture is non-solid presentation; enemies untouched',mine(w0).every(p=>p.solid===false&&p.r80PresentationOnly===true)&&JSON.stringify(w0.enemies)===JSON.stringify(before.enemies));
 ok('boss room and gather room keep their R224 furniture (boss-room work owns them); no new pieces there',[0,2].every(id=>r224In(id).length>0&&r224In(id).every(p=>!p.r303Hide)&&ofRoom(id).length===0));
-ok('all R224 furniture outside boss/gather rooms rests',w0.props.filter(p=>p.r224Furniture&&!inR(0,p)&&!inR(2,p)).every(p=>p.r303Hide==='r447'));
+ok('all R224 furniture outside boss/gather rooms rests',w0.props.filter(p=>p.r224Furniture&&!inR(0,p)&&!inR(2,p)).every(p=>p.r303Hide==='r449'));
 ok('junction (갈림길) and yard (작은 마당) left empty',ofRoom(4).length===0&&ofRoom(11).length===0&&r224In(4).length>0);
 ok('short corridor (4 tiles wide) left empty',ofRoom(6).length===0);
 const plan3=rep.rooms.find(q=>q.id===3),work=arts(ofRoom(3));
-ok('injection room = bed (core first) + IV/monitor cluster on one wall',/^142@/.test(plan3.pieces[0]||'')&&work.includes('142')&&work.length>=2&&work.every(a=>['142','141','143'].includes(a))&&new Set(ofRoom(3).map(p=>p.r447.wall)).size===1);
+ok('injection room = bed (core first) + IV/monitor cluster on one wall',/^142@/.test(plan3.pieces[0]||'')&&work.includes('142')&&work.length>=2&&work.every(a=>['142','141','143'].includes(a))&&new Set(ofRoom(3).map(p=>p.r449.wall)).size===1);
 const rest=arts(ofRoom(5));ok('waiting room = row of chairs (+wheelchair); chairs are the only repeat',rest.filter(a=>a==='145').length>=2&&rest.every(a=>['145','149'].includes(a)));
 ok('no other art repeats inside one room',[3,7,8,9,10].every(id=>{const a=arts(ofRoom(id));return a.length===new Set(a).size;}));
 const ante=[7,8,9].map(id=>arts(ofRoom(id)));ok('repeated anterooms rotate: full set, lighter variant, then an empty room',ante[0].join()==='146,145'&&ante[1].join()==='149'&&ante[2].length===0);
-const big=ofRoom(10);ok('big storage room: cabinet run + one different piece on the other wall',big.length>=2&&arts(big)[0]==='148'&&new Set(big.map(p=>p.r447.wall)).size===2);
+const big=ofRoom(10);ok('big storage room: cabinet run + one different piece on the other wall',big.length>=2&&arts(big)[0]==='148'&&new Set(big.map(p=>p.r449.wall)).size===2);
 ok('room size cap like R224 (1 per 45 tiles, 1–4)',w0.exploration.r224Rooms.every(q=>ofRoom(q.id).length<=Math.max(1,Math.min(4,Math.round((q.x1-q.x0)*(q.y1-q.y0)/45)))));
 const all=shown(mine(w0));
-ok('every placed piece sits inside its room rect, on free floor',all.every(p=>{const q=w0.exploration.r224Rooms.find(r=>r.id===p.r447.room);return p.x>q.x0&&p.x<q.x1&&p.y>q.y0&&p.y<q.y1&&!ctx.StoryPhase1.explorationBlocked(w0.exploration,p.x,p.y,.05);}));
+ok('every placed piece sits inside its room rect, on free floor',all.every(p=>{const q=w0.exploration.r224Rooms.find(r=>r.id===p.r449.room);return p.x>q.x0&&p.x<q.x1&&p.y>q.y0&&p.y<q.y1&&!ctx.StoryPhase1.explorationBlocked(w0.exploration,p.x,p.y,.05);}));
 ok('placed pieces keep clear of doors (1.6), entry (2.2), objective (2), door gaps in the back wall',all.every(p=>Math.hypot(p.x-89.5,p.y-9)>=1.6&&Math.hypot(p.x-44,p.y-14.5)>=2.2&&Math.hypot(p.x-100,p.y-10)>=2&&!(Math.abs(p.x-48.5)<1.4&&p.y<6)));
 ok('placed pieces keep off the R169 entry→goal path (>1.3 from path cells)',all.every(p=>[...pathSet].every(k=>{const[x,y]=k.split(',').map(Number);return Math.hypot(x+.5-p.x,y+.5-p.y)>=1.3;})));
-ok('placed pieces keep clear of other props (.95)',all.every(p=>w0.props.filter(q=>!q.r224Furniture&&!q.r447Furniture&&q.path).every(q=>Math.hypot(q.x-p.x,q.y-p.y)>=.95)));
-ok('back to the wall: body .4–2 tiles from the n/w wall it belongs to',all.every(p=>{const q=w0.exploration.r224Rooms.find(r=>r.id===p.r447.room);const d=p.r447.wall==='n'?p.y-q.y0:p.x-q.x0;return d>=.4&&d<=2.0;}));
-ok('wall clearance measured by R412 (cabinet 148 ≥ .8, IV stand 141 ≥ .75 from its wall) — R412 need not move it, so the draw spot is the same after load',(()=>{const MIN={'148':.8,'141':.75};const xs=all.filter(p=>MIN[String(p.r80Art).slice(4)]);return xs.length>=2&&xs.every(p=>{const q=w0.exploration.r224Rooms.find(r=>r.id===p.r447.room);const a=String(p.r80Art).slice(4);const d=(p.r447.wall==='n'?p.y-q.y0:p.x-q.x0);return d>=MIN[a]-.01;/* 가짜 그림은 발이 가운데라 pivotShift 0 */});})());
-ok('facing: +y art mirrored on the -x wall, sofa/bed (+x) mirrored on the -y wall, R412/R406 told',all.every(p=>{const a=String(p.r80Art).slice(4),side=p.r447.wall==='n'?'-y':'-x',want=a==='146'?false:/^(021|024|142)$/.test(a)?side==='-y':side==='-x';return !!p.r303Flip===want&&p.r412Face===side&&p.r406Seen===1;}));
+ok('placed pieces keep clear of other props (.95)',all.every(p=>w0.props.filter(q=>!q.r224Furniture&&!q.r449Furniture&&q.path).every(q=>Math.hypot(q.x-p.x,q.y-p.y)>=.95)));
+ok('back to the wall: body .4–2 tiles from the n/w wall it belongs to',all.every(p=>{const q=w0.exploration.r224Rooms.find(r=>r.id===p.r449.room);const d=p.r449.wall==='n'?p.y-q.y0:p.x-q.x0;return d>=.4&&d<=2.0;}));
+ok('wall clearance measured by R412 (cabinet 148 ≥ .8, IV stand 141 ≥ .75 from its wall) — R412 need not move it, so the draw spot is the same after load',(()=>{const MIN={'148':.8,'141':.75};const xs=all.filter(p=>MIN[String(p.r80Art).slice(4)]);return xs.length>=2&&xs.every(p=>{const q=w0.exploration.r224Rooms.find(r=>r.id===p.r449.room);const a=String(p.r80Art).slice(4);const d=(p.r449.wall==='n'?p.y-q.y0:p.x-q.x0);return d>=MIN[a]-.01;/* 가짜 그림은 발이 가운데라 pivotShift 0 */});})());
+ok('facing: +y art mirrored on the -x wall, sofa/bed (+x) mirrored on the -y wall, R412/R406 told',all.every(p=>{const a=String(p.r80Art).slice(4),side=p.r449.wall==='n'?'-y':'-x',want=a==='146'?false:/^(021|024|142)$/.test(a)?side==='-y':side==='-x';return !!p.r303Flip===want&&p.r412Face===side&&p.r406Seen===1;}));
 ok('kept images (evicted by the engine) requested again; rested R224 images not requested',all.every(p=>asked.includes(p.path))&&asked.every(x=>all.some(p=>p.path===x)));
 // 결정성: 같은 지도를 다시(소품 순서 섞고, 몹이 움직이거나 죽은 뒤, R224 가 다른 자리·개수로 놓아도) 만들어도 같은 결과
 const sig=w=>mine(w).map(p=>p.id+'|'+p.path+'|'+(+p.x).toFixed(3)+','+(+p.y).toFixed(3)+'|'+(p.r303Hide||'')+'|'+(p.r303Flip?1:0)).sort().join(';');
@@ -91,11 +91,11 @@ ok('deterministic: same map → same placement (props shuffled, mobs moved/dead 
 b2.api.curate(w1);ok('idempotent: curating again adds nothing and moves nothing',sig(w1)===sig(w0)&&mine(w1).length===mine(w0).length);
 ok('plan ignores mobs: same placement with a full mob crowd',(()=>{const b=boot(),w=world();for(let i=0;i<12;i++)w.enemies.push({id:'x'+i,x:45+i,y:5+i%3,homeX:45+i,homeY:5+i%3,hp:9});b.ctx.room=w;b.api.curate(w);return sig(w)===sig(w0);})());
 // 소품 배열을 다른 모듈이 새로 만들어도 다시 들어간다
-const b5=boot(),w5b=world();b5.ctx.room=w5b;b5.api.curate(w5b);const n5=mine(w5b).length;w5b.props=w5b.props.filter(p=>!p.r447Furniture);b5.api.curate(w5b);
+const b5=boot(),w5b=world();b5.ctx.room=w5b;b5.api.curate(w5b);const n5=mine(w5b).length;w5b.props=w5b.props.filter(p=>!p.r449Furniture);b5.api.curate(w5b);
 ok('own pieces re-inserted if another module rebuilt the props array (same objects, no duplicates)',mine(w5b).length===n5&&new Set(mine(w5b).map(p=>p.id)).size===n5);
 // 나중에 붙은 상자: 곁의 한 점만 쉬고, 계획은 그대로; 상자가 없어지면 돌아온다
 const victim=all[0];const chest={id:'r103chest:STORY:ep1a09',x:victim.x+.4,y:victim.y+.2,chestR103:true};w0.props.push(chest);api.curate(w0);
-ok('late chest: only the piece next to it rests (r447x), the rest keep their place',victim.r303Hide==='r447x'&&all.filter(p=>p!==victim).every(p=>!p.r303Hide||p.r303Hide==='r447x'&&Math.hypot(p.x-chest.x,p.y-chest.y)<1.5));
+ok('late chest: only the piece next to it rests (r449x), the rest keep their place',victim.r303Hide==='r449x'&&all.filter(p=>p!==victim).every(p=>!p.r303Hide||p.r303Hide==='r449x'&&Math.hypot(p.x-chest.x,p.y-chest.y)<1.5));
 w0.props.splice(w0.props.indexOf(chest),1);api.curate(w0);ok('late chest gone: the piece comes back at the same spot',!victim.r303Hide);
 // 칠죄(질투): 지역 그림(거울)만, 보스방 틀+3 칸 안에는 두지 않음
 const b3=boot(),HOME=['024','026','027','025'],w3=world('ep1b03',HOME);w3.exploration.sinRoomArt='sin-room-art-v1';b3.ctx.room=w3;b3.api.curate(w3);
@@ -119,10 +119,10 @@ const count=(w,a)=>shown(mine(w)).filter(p=>p.r80Art==='r80-'+a).length;
  ok('envy house: studies (서재) stay empty instead of a mirror each; mirror gallery and living room get the mirror',by('서재').every(q=>!q.pieces.length)&&by('거울 회랑')[0].pieces.length===1&&/^026@/.test(by('거울 회랑')[0].pieces[0])&&/^026@/.test(by('정돈된 거실')[0].pieces[0]||''));}
 // 계열을 모르는 지역(R224 가 공용 소파 r80-024 만 놓음): 계획 없음 → 소품 수가 바뀌어도 R224 가구는 그대로
 {const b6=boot(),w6=world('dist99',['024']);const s6=JSON.stringify(w6.props);b6.ctx.room=w6;b6.api.curate(w6);w6.props.push({id:'r103chest:STORY:dist99',x:70,y:8,chestR103:true});b6.api.curate(w6);b6.api.curate(w6);
- ok('unknown furniture family: no plan, R224 furniture left as is even after props change',JSON.stringify(w6.props.slice(0,-1))===s6&&!w6.props.some(p=>p.r447Furniture||p.r303Hide));}
+ ok('unknown furniture family: no plan, R224 furniture left as is even after props change',JSON.stringify(w6.props.slice(0,-1))===s6&&!w6.props.some(p=>p.r449Furniture||p.r303Hide));}
 for(const[label,mut]of[['Mammon ep1b06',w=>{w.id='ep1b06';}],['dream layer',w=>{w.layer='DREAM';}],['samong',w=>{w.exploration.samongR103={key:'x'};}]]){const b4=boot(),w4=world();mut(w4);const s4=JSON.stringify(w4.props);b4.ctx.room=w4;b4.api.curate(w4);ok(label+' untouched',JSON.stringify(w4.props)===s4);}
 // 그리기: 쉬는 가구는 안 그리고, 놓은 가구는 그린다
-drawn.length=0;const hid=w0.props.find(p=>p.r303Hide==='r447');ctx.drawProp(hid);ctx.drawProp(all[1]);
+drawn.length=0;const hid=w0.props.find(p=>p.r303Hide==='r449');ctx.drawProp(hid);ctx.drawProp(all[1]);
 ok('draw wrapper: rested pieces skipped, placed pieces drawn',!drawn.includes(hid.id)&&drawn.includes(all[1].id));
 // 가림 완화
 const tall={id:'t',path:'x.webp',x:10,y:10,height:80},w5={id:'z',layer:'STORY',exploration:{worldR74:{doors:[]}},props:[tall],enemies:[{x:9.2,y:9.2,hp:5}],objective:null};ctx.room=w5;

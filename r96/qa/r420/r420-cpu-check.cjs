@@ -4,7 +4,7 @@ const R=path.join(__dirname,'..','..'),C=f=>fs.readFileSync(path.join(R,'client-
 const checks=[];const ok=(n,p,d)=>checks.push({name:n,pass:!!p,detail:d});
 const F='access-r420.js',src=C(F);ok(F+' runtime copy matches',fs.readFileSync(path.join(RT,F),'utf8')===src);
 const html=fs.readFileSync(path.join(RT,'index.html'),'utf8');
-ok('loads after props-place/sin-room-art and right before combat-read-r409',/<script src="\.\/access-r420\.js"><\/script>(?:<script src="\.\/readability-r434\.js"><\/script>)?(?:<script src="\.\/surface-r435\.js"><\/script>)?(?:<script src="\.\/bossroom-tidy-r438\.js"><\/script>)?(?:<script src="\.\/props-space-r447\.js"><\/script>)?<script src="\.\/combat-read-r409\.js"><\/script>/.test(html)&&html.indexOf('cinema-r114.js')<html.indexOf(F)&&html.split(F).length===2);
+ok('loads after props-place/sin-room-art and right before combat-read-r409',/<script src="\.\/access-r420\.js"><\/script>(?:<script src="\.\/readability-r434\.js"><\/script>)?(?:<script src="\.\/surface-r435\.js"><\/script>)?(?:<script src="\.\/bossroom-tidy-r438\.js"><\/script>)?(?:<script src="\.\/props-space-r449\.js"><\/script>)?<script src="\.\/combat-read-r409\.js"><\/script>/.test(html)&&html.indexOf('cinema-r114.js')<html.indexOf(F)&&html.split(F).length===2);
 ok('listed in verify-r96-public.py',fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8').includes("'"+F+"'"));
 ok('pages.yml runs this check',fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('r96/qa/r420/r420-cpu-check.cjs'));
 const man=JSON.parse(fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8')),M=new Map(man.files.map(f=>[f.path,f.sha256]));
