@@ -24,8 +24,8 @@
     },
     {
       "path": "approved-mobs-r380.js",
-      "bytes": 21214,
-      "sha256": "dcf1ad3a2c175c0626918bbaf40fff709c655b02cd323641c94776dcfed12788"
+      "bytes": 22865,
+      "sha256": "6022f080c780379879235f34d42dc8d517413f3b557e06961fcb5f1f7bc6a98c"
     },
     {
       "path": "art-drive-r105.js",
@@ -15294,8 +15294,8 @@
     },
     {
       "path": "assets/r380/mobs/index.json",
-      "bytes": 184030,
-      "sha256": "1a1e35d525677a8fb9f22d7adb45f010a199b90c8279f960b9f135c79fdd8fb1"
+      "bytes": 184048,
+      "sha256": "457ca5ff6c403d7798d18f3dc39a905772c489615384f8ecba0deb8f21cff4b3"
     },
     {
       "path": "assets/r380/mobs/jealousy-wraith-v1.webp",
@@ -24818,6 +24818,16 @@
       "sha256": "7335837597f04b56780fecb48ae6036ed908e4f816971574903e95d942772258"
     },
     {
+      "path": "assets/r445/slayer/index.json",
+      "bytes": 1699,
+      "sha256": "0dffb33e649584fcdfbc3a4049155692155523e15086f4c86625b97fadd0fe29"
+    },
+    {
+      "path": "assets/r445/slayer/walk-n.webp",
+      "bytes": 80236,
+      "sha256": "fa26994ea7e39a47506c2b4a56a20f90160f19fa2d628b0925583b71d14b4c57"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -32649,8 +32659,8 @@
     },
     {
       "path": "attack-anim-r143.js",
-      "bytes": 18020,
-      "sha256": "55dd3b0092336ef6374446a4f738e0a4fee5edd201bc6d1d76684dd1c97fe6a7"
+      "bytes": 18882,
+      "sha256": "3bdb605c04a9aa1cb40d113450539b98191cc67ceec4afd662b7c800c83818ca"
     },
     {
       "path": "audio-r108.js",
@@ -33369,8 +33379,8 @@
     },
     {
       "path": "combat-flow-r425.js",
-      "bytes": 59152,
-      "sha256": "4fce1355fd65a7441be5afc53eef846c4310eefd64cf378b07b6b6c32af5a218"
+      "bytes": 59747,
+      "sha256": "08de2556012d8b33a720666977840eb073efadcba8feda2e52f010a735c57ed1"
     },
     {
       "path": "combat-r114.js",
@@ -33556,6 +33566,11 @@
       "path": "enemy-presentation-r86.js",
       "bytes": 6839,
       "sha256": "577694609c82a750b62b6a970443df726e58919768f7a9dfb2a2add66a1dd133"
+    },
+    {
+      "path": "enemy-skill-pose-r442.js",
+      "bytes": 3182,
+      "sha256": "547bcc67ba068c0e34ae9ebe87d183c9a471e69c15d3f17eacaca18eebeda5d3"
     },
     {
       "path": "env-props-r299.js",
@@ -33784,8 +33799,8 @@
     },
     {
       "path": "hwando-r271.js",
-      "bytes": 12724,
-      "sha256": "a2a7ff75d2e860c1ff14619b15a62acb455ed35e1f307348f64bc5114002c8c6"
+      "bytes": 13463,
+      "sha256": "dd88edafdb58ccaf99f88ffa49c830cba456607336c69c0a292647c9b91a74e7"
     },
     {
       "path": "hwando-r277.js",
@@ -33804,8 +33819,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6571535,
-      "sha256": "01676d1ae74d538782767bbb863dfe22ed3dd941b59d195b240cfd74ed9f209d"
+      "bytes": 6571631,
+      "sha256": "2a7da67e1da4bb01ebd17149e3376cc7fb250f2fd8cee2c4f7d41953b7ddeda0"
     },
     {
       "path": "intro-r140.js",
@@ -34323,6 +34338,11 @@
       "sha256": "fdbb027ad13cb160b34d9a33e3416057da0286d6df739951bcf11f4b3f61c242"
     },
     {
+      "path": "skill-attack-r440.js",
+      "bytes": 4115,
+      "sha256": "1cacf913a2e66913a79c1aad34925c5dd2563cb4d09c0aaac7bed8868bd7a7c0"
+    },
+    {
       "path": "skill-fx-r292.js",
       "bytes": 12208,
       "sha256": "bfc841cf6fbf3f3ae99c8f0b71e60c8b194c1c6efedecb7cde3c65ad1b657ddd"
@@ -34354,8 +34374,8 @@
     },
     {
       "path": "slayer-r351.js",
-      "bytes": 18843,
-      "sha256": "7f5b072ce0bb4e78dac3116a2a312d8acd770904c5970adfea202cab3f3a2b82"
+      "bytes": 20256,
+      "sha256": "0cc7b23fbb29744a71257bdf648d5d8adec0941e71b1dd9e03f5ea806c40f0cf"
     },
     {
       "path": "status-r96.js",
@@ -34424,8 +34444,8 @@
     },
     {
       "path": "theme-fx-r430.js",
-      "bytes": 26997,
-      "sha256": "32be9da80db36e8ad08d5745edc92243ba4ef3e76e2ae3f3a77e34f68191f9f6"
+      "bytes": 27224,
+      "sha256": "b129bd0b8144aced4316c42149acbfcd8dec40b973f5077d6b9f9333eb601b23"
     },
     {
       "path": "threads-r243.js",
@@ -34623,9 +34643,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6924,
-  "totalBytes": 1091404055,
-  "webHTMLSha256": "01676d1ae74d538782767bbb863dfe22ed3dd941b59d195b240cfd74ed9f209d",
+  "fileCount": 6928,
+  "totalBytes": 1091498888,
+  "webHTMLSha256": "2a7da67e1da4bb01ebd17149e3376cc7fb250f2fd8cee2c4f7d41953b7ddeda0",
   "largest": [
     {
       "path": "index.html",
