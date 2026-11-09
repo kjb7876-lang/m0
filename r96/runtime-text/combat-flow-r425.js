@@ -23,7 +23,7 @@
 if(window.__STORYWORLD_COMBAT_FLOW_R425__)return;
 const REV='R425-flow-8',KEY='storyworld.r425.flow';
 const BANDS={normal:[1.22,1.55],leader:[1.45,1.75],mid:[1.60,1.80],boss:[1.90,2.30]},SMIN=.55,SMAX=2.2;
-let prefs={size:true,punch:true,laurenTip:true,spiderX:true,gaze:true,gazeSlot:true,plant:true,hunter:true,bossBar:true,tele:false,samongCross:true,atkFace:true,clean:true};
+let prefs={face:true,size:true,punch:true,laurenTip:true,spiderX:true,gaze:true,gazeSlot:true,plant:true,hunter:true,bossBar:true,tele:false,samongCross:true,atkFace:true,clean:true};
 const solo=()=>{let m=null;try{m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();}catch(_){}return !m||m==='off';};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={scaled:0,kept:0,refixed:0,sheets:0,punches:0,tips:0,skipped:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0;
@@ -179,7 +179,10 @@ function steer(e,x0,y0,dt,t){const dx=e.x-x0,dy=e.y-y0,d=Math.hypot(dx,dy);if(!(
  const [a1,d1,a2]=bracket(cls,ang),d2=angD(ang,a2),L=d*(d1<=step*.18?1:Math.min(COMP,(Math.sin(d1*DEG)+Math.sin(d2*DEG))/Math.max(.2,Math.sin((d1+d2)*DEG))));
  const r=radius(e),ex=e.x,ey=e.y,go=a=>{const [wx,wy]=wDir(a);e.x=x0;e.y=y0;moveActor(e,wx*L,wy*L,r);return Math.hypot(e.x-x0,e.y-y0);};
  let moved=go(c);if(moved<L*.3){const alt=c===a1?a2:a1;moved=go(alt);if(moved<L*.3){e.x=ex;e.y=ey;g.cur=null;stats.gazeBlocked=(stats.gazeBlocked||0)+1;return false;}g.cur=alt;g.since=t;}
- g.lat+=latOf(ang,e.x-x0,e.y-y0);stats.gazeSteps=(stats.gazeSteps||0)+1;stats['gaze_'+cls]=(stats['gaze_'+cls]||0)+1;return true;}
+ g.lat+=latOf(ang,e.x-x0,e.y-y0);faceStep(e,e.x-x0,e.y-y0);stats.gazeSteps=(stats.gazeSteps||0)+1;stats['gaze_'+cls]=(stats['gaze_'+cls]||0)+1;return true;}
+// R441(사용자 2026-11-09 거미가 왼쪽 아래를 보고 오른쪽 아래로 감): 지그재그 다리는 엔진이 정한 평균 방향과 좌우가 다를 수 있다 →
+//  실제 걸음이 화면 좌·우로 뚜렷하면(엔진 facing 이 left/right) 그 쪽을 보게 한다. 위·아래(front/back)는 엔진 그대로. 끄기 '{"face":false}'.
+function faceStep(e,dx,dy){if(!prefs.face||typeof facing!=='function')return;const f=facing(dx,dy);if(f==='left'||f==='right'){if(e.direction!==f)stats.faceFixed=(stats.faceFixed||0)+1;e.direction=f;}}
 function spiderSlot(e,dt){/* 09:55 "거미 공격도 x자로": 영웅 곁에 멈춰 칠 때 영웅 기준 X자 자리로 천천히 기어가 X자 방향에서 문다 */
  const p=typeof player==='object'?player:null,ox=p&&e.x-p.x,oy=p&&e.y-p.y,od=p?Math.hypot(ox,oy):9;if(!p||od>2.6||od<.2||!(p.hp>0)||(typeof modal!=='undefined'&&modal)||(typeof loading!=='undefined'&&loading)||e.attack||e.rangedWindup>0||e.rest>0||(e.spawnState&&e.spawnState!=='active'))return;
  const [ba]=bracket('x',wAng(ox,oy)),[wx,wy]=wDir(ba),gx=p.x+wx*od-e.x,gy=p.y+wy*od-e.y,g=Math.hypot(gx,gy);

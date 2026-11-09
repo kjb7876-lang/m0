@@ -106,6 +106,10 @@ async function gazeChecks(){
  const dA=(a,b)=>{const d=Math.abs(((a-b)%360+360)%360);return d>180?360-d:d;};
  let w=walk(ex,0,3);ok('x-class walking screen-right zig-zags on the two tile-edge diagonals (X), same arrival (progress ≥ 0.9), leg speed ≤ 1.35×, average heading kept',w.seen.join()==='27,333'&&w.prog>=.9&&w.top<=1.351&&dA(w.net,0)<10,w);
  w=walk(ex,90,2);ok('x-class walking screen-down zig-zags on the lower X legs',w.seen.join()==='27,153'&&w.prog>=.9&&dA(w.net,90)<10,w);
+ {/* R441: 지그재그 다리마다 실제 화면 좌·우로 본다(거미가 왼쪽 아래를 보고 오른쪽 아래로 가던 문제) */const ff=env.facing;env.facing=(x,y)=>{const sx=x-y,sy=(x+y)*.5;return Math.abs(sx)>Math.abs(sy)*1.35?(sx>0?'right':'left'):sy>0?'front':'back';};
+  const [ux,uy]=wdir(90);env.room.enemies=[ex];ex.direction='front';env.__engine=()=>{ex.x+=ux*2/60;ex.y+=uy*2/60;};let good=0,bad=0;
+  for(let i=0;i<120;i++){const px=ex.x,py=ex.y;env.time+=1/60;env.tick(1/60);const sx=(ex.x-px)-(ex.y-py);if(Math.abs(sx)<1e-4)continue;if(ex.direction===(sx>0?'right':'left'))good++;else bad++;}
+  env.__engine=null;env.facing=ff;ok('R441 x-class zig-zag legs face their own screen side (down-right leg → right, down-left leg → left)',good>20&&bad===0&&F.inspect().prefs.face===true,{good,bad});}
  w=walk(ep,45,3);ok('plus-class walking diagonally goes in horizontal/vertical legs (+), arrival kept, average heading kept',w.seen.join()==='0,90'&&w.prog>=.9&&dA(w.net,45)<10,w);
  w=walk(eb,20,3);ok('both-class: 8 directions — screen 20° walks as 0°/27° legs, average ≈ 20°',w.seen.join()==='0,27'&&w.prog>=.95&&dA(w.net,20)<8,w);
  w=walk(eb,97,1);ok('both-class within ~8° (tile angle) of an allowed direction snaps to it (no zig-zag, no speed change)',w.seen.join()==='90'&&Math.abs(w.len-2)<.02,w);
