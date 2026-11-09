@@ -74,6 +74,10 @@ ok('R335 glow keeps its shape; edge lighter + holes only when R451 owns',src('li
 // ⑦-3 새 덩어리는 붙은 그 프레임에 셰이더(독립 심사 지적: 0.5초 타이머만 기다려 새 풀·벽 장식이 그동안 ×1 로 밝았다가 어두워짐)
 {const r={spatialRoot:{children:[{id:11},{id:12}]},scene:{children:[{id:3}]}},s0=P.sceneSig(r);r.spatialRoot.children.push({id:13});const s1=P.sceneSig(r);r.spatialRoot.children[2]={id:14};const s2=P.sceneSig(r);
  ok('scene fingerprint changes when a mesh is added or swapped (same count)',s0!==s1&&s1!==s2&&P.sceneSig(r)===s2);
+ // main R481 숲 덩어리는 R204 대지 묶음 안에(둘째 단) 늦게 붙는다 → 그 묶음 자식도 지문에 넣어 붙은 그 프레임에 셰이더(줄 메시가 사는 다른 묶음 둘째 단은 보지 않음)
+ {const g={id:20,children:[{id:21},{id:22}]},o={id:30,children:[{id:31}]},r2={spatialRoot:{children:[g,o]},scene:{children:[{id:3}]},__r204:{group:g}},a0=P.sceneSig(r2);
+  g.children.push({id:23,name:'r481-groves'});const a1=P.sceneSig(r2);o.children.push({id:32});const a2=P.sceneSig(r2);g.children[2]={id:24};const a3=P.sceneSig(r2);
+  ok('fingerprint also changes when R481 groves join the R204 terrain group (nested), not for other nested groups',a0!==a1&&a1===a2&&a2!==a3&&P.sceneSig({spatialRoot:{children:[]},scene:{children:[]}})===P.sceneSig({spatialRoot:{children:[]},scene:{children:[]},__r204:null}),{a0,a1,a2,a3});}
  const s=src('local-light-r451.js');ok('patch runs on fingerprint change every frame (update) and in the first world pass (R91 decor is built there), timer kept as fallback',
   /function patchIfChanged\(r,timed\)\{[^}]*ss===o451\.scanSig&&!\(timed&&t>=o451\.nextScan\)/.test(s)&&/patchIfChanged\(r,true\);/.test(s)&&/if\(pass===4\)patchIfChanged\(r,false\);/.test(s)&&/o451\.scanSig=0;/.test(s));}
 // ⑦-4 쉼터·마을(R78 안전 지역)은 바닥이 1번 층 옛 지도 그림이라 R451 셰이더가 닿지 않는다 → 맡지 않고 예전 빛(독립 심사 지적: 맡으면 바닥이 ×1 로 평평하게 밝아짐)

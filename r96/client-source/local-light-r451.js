@@ -17,7 +17,7 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_LOCAL_LIGHT_R451__)return;
 const A=window.StoryPhase1,C=A?.ThreeRenderer?.prototype;if(!A||!C)return;
-const REV='R451-local-light-7',KEY='storyworld.r451.localLight';
+const REV='R451-local-light-8',KEY='storyworld.r451.localLight';
 const DEFAULTS=Object.freeze({on:true,flicker:true});
 let prefs={...DEFAULTS};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');for(const k in DEFAULTS)if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={frames:0,owned:0,bakes:0,bakeMs:0,deltas:0,deltaMs:0,deltaMaxMs:0,deltaLights:0,deltaTiles:0,lights:0,lightsUsed:0,blockers:0,texels:0,patched:0,scans:0,sigScans:0,rowsLit:0,coversLit:0,corpsesLit:0,holes:0,stutters:0,errors:0};let lastError=null,disposed=false;
@@ -242,9 +242,12 @@ function patchScene(r){const T=r.T,rows=new WeakSet();for(const row of r.command
  r.scene.traverse(o=>{if(!(o.layers.mask&4))return;const ms=eligible(o,rows);if(ms)for(const m of ms)patch(m,T,ms.board);});}
 // 장면 맨 윗단 자식 목록의 지문(자식 id 차례). 청크 지형·R452 풀·R91 벽 장식·R81 바깥 판처럼 새 덩어리가 붙거나 빠지면 바뀐다.
 //  바뀐 그 프레임에 셰이더를 붙인다 — 0.5초 타이머만 기다리면 새 재질이 그동안 빛 곱 없이(×1) 밝게 보였다가 어두워진다(독립 심사 지적).
-//  타이머 훑기는 그대로 둔다(묶음 안에 나중에 붙는 것·재질만 바꾸는 것).
-function sceneSig(r){let s=0;const a=r?.spatialRoot?.children,b=r?.scene?.children;
- if(a)for(let i=0;i<a.length;i++)s=Math.imul(s,31)+a[i].id|0;if(b)for(let i=0;i<b.length;i++)s=Math.imul(s,31)+b[i].id|0;return s^(a?.length||0)<<16^(b?.length||0);}
+//  R204 대지 묶음(r.__r204.group) 자식도 본다 — main R481 숲 덩어리는 R204 가 다 지은 뒤(0.4초 타이머) 그 묶음 안에 붙어 윗단 지문이 그대로라,
+//  0.5초 타이머 훑기까지 빛 곱 없이(×1, 바깥 주변빛 .82 대비 약 1.2배) 밝았다가 어두워질 수 있었다. 둘째 단 전부는 보지 않는다(줄 메시가 자주 바뀌어 매 프레임 훑게 됨).
+//  타이머 훑기는 그대로 둔다(다른 묶음 안에 나중에 붙는 것·재질만 바꾸는 것).
+function sceneSig(r){let s=0;const a=r?.spatialRoot?.children,b=r?.scene?.children,c=r?.__r204?.group?.children;
+ if(a)for(let i=0;i<a.length;i++)s=Math.imul(s,31)+a[i].id|0;if(b)for(let i=0;i<b.length;i++)s=Math.imul(s,31)+b[i].id|0;if(c)for(let i=0;i<c.length;i++)s=Math.imul(s,31)+c[i].id|0;
+ return s^(a?.length||0)<<16^(b?.length||0)^(c?.length||0)<<8;}
 function patchIfChanged(r,timed){const t=performance.now(),ss=sceneSig(r);if(ss===o451.scanSig&&!(timed&&t>=o451.nextScan))return;
  if(ss!==o451.scanSig)stats.sigScans++;o451.scanSig=ss;o451.nextScan=t+500;stats.scans++;try{patchScene(r);}catch(e){fail(e);}}
 
