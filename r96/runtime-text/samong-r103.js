@@ -514,5 +514,5 @@ function ensureOverlay(){if(overlay?.isConnected)return overlay;const stage=docu
  const epOf=x=>EP[x.ep];
  window.__STORYWORLD_NAV_GOAL_R103__=navGoal;
  try{install();}catch(e){fail(e);}
- window.__STORYWORLD_SAMONG_R103__=Object.freeze({revision:REV,GOAL,episodes:EP,stages:STAGES,here,start,go,next,showRecords,ending,inspect,test,layoutFor,mazeLayout,state:()=>S,get flashlightActive(){return here()&&(room.samongR103.stage==='maze'||!!zoneOf(room.samongR103.zone)?.dark);},goZone:id=>{const i=epOfZone(id);return i<0?Promise.resolve(false):go(i,null,{zone:id});},zones:()=>({current:here()?room.samongR103.zone:null,state:{zone:S.zone,done:[...S.zoneDone],read:S.zoneRead.length}})});
+ window.__STORYWORLD_SAMONG_R103__=Object.freeze({revision:REV,GOAL,episodes:EP,stages:STAGES,here,start,go,next,showRecords,ending,inspect,test,layoutFor,mazeLayout,state:()=>S,get flashlightActive(){return here()&&(room.samongR103.stage==='maze'||!!zoneOf(room.samongR103.zone)?.dark);},spawnMob:(row,at,o)=>here()?spawn(row,at,o):null,/* R511: 빈 방 지킴이 */goZone:id=>{const i=epOfZone(id);return i<0?Promise.resolve(false):go(i,null,{zone:id});},zones:()=>({current:here()?room.samongR103.zone:null,state:{zone:S.zone,done:[...S.zoneDone],read:S.zoneRead.length}})});
 })();

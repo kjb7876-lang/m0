@@ -33894,8 +33894,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6572431,
-      "sha256": "0c435e85697cc7a3480fee61d1e0e8c32a815b47e35327906da630e84dd89e27"
+      "bytes": 6572477,
+      "sha256": "913a4f1cb22b0c9669b7da0a75db86a30b44f19d8379487c3094ac6094abd37b"
     },
     {
       "path": "intro-r140.js",
@@ -34364,13 +34364,18 @@
     },
     {
       "path": "samong-r103.js",
-      "bytes": 87234,
-      "sha256": "009ec6422055a764e1f1304632211ee10b8b91503ff53ad20c54d0e43cda0419"
+      "bytes": 87312,
+      "sha256": "0dea9fd35a950c9755201b1385e1358a9c7efdf7c921d3fcc72916d9bcc53e16"
     },
     {
       "path": "samong-r161.js",
       "bytes": 19464,
       "sha256": "2a8b76ec21820df299570de65dd75f167b53b4c339efa440c2ff5500955d05a6"
+    },
+    {
+      "path": "samong-rooms-r511.js",
+      "bytes": 13216,
+      "sha256": "16305721e9a59ba6efce354ac44e836ad24b30257156bed65c095e50271c4cc0"
     },
     {
       "path": "samong-shades-r200.js",
@@ -34768,9 +34773,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6953,
-  "totalBytes": 1092049408,
-  "webHTMLSha256": "0c435e85697cc7a3480fee61d1e0e8c32a815b47e35327906da630e84dd89e27",
+  "fileCount": 6954,
+  "totalBytes": 1092062748,
+  "webHTMLSha256": "913a4f1cb22b0c9669b7da0a75db86a30b44f19d8379487c3094ac6094abd37b",
   "largest": [
     {
       "path": "index.html",
