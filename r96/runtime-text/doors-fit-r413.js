@@ -7,7 +7,7 @@
 //  사몽(R83 꺼짐)은 그대로. 끄기: localStorage['storyworld.r413.doors']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_DOORS_FIT_R413__)return;
-const REV='R446-doors-5',KEY='storyworld.r413.doors',JAMB=.24,MIN_GAP=.04,MAX_TOP=4.2;
+const REV='R446-doors-6',KEY='storyworld.r413.doors',JAMB=.24,MIN_GAP=.04,MAX_TOP=4.2;
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const stats={lintels:0,skipped:0,culled:0,errors:0};let lastError=null,last=null;const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 const R83=()=>window.__STORYWORLD_WORLD_DOORS_R83__,R74=()=>window.__STORYWORLD_WORLD_R74__;
@@ -56,6 +56,6 @@ function lintel3d(r,L,d,top,DH){try{const t=window.__STORYWORLD_PHASE1__?.contro
  const m=new t.T.Mesh(g,m0.material);m.position.set(d.x,DH+hgt/2,d.y);m.rotation.copy(m0.rotation);m.layers.mask=m0.layers.mask;m.renderOrder=m0.renderOrder;m.name='r446-lintel:'+key;m.userData={r446Top:top,r446Src:m0,r446SrcId:src.w.id,presentationOnly:true};
  t.spatialRoot.add(m);L3.set(key,m);stats.lintels3d++;return true;}catch(e){fail(e);return false;}}
 if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){const out=base.apply(this,[p,...a]);try{if(L3.size&&typeof room!=='undefined'&&room?.exploration!==L3room){clear3d();L3room=room?.exploration||null;}if(on&&p?.r74Door&&typeof room!=='undefined'&&R83()?.enabled?.(room,p))lintel(p,room);}catch(e){fail(e);}return out;};}
-function set(v){on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}
+function set(v){on=v!==false;if(!on){try{clear3d();L3room=null;}catch(_){}}try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}
 window.__STORYWORLD_DOORS_FIT_R413__=Object.freeze({revision:REV,set,jambTop,wallSig,inspect:()=>({revision:REV,on,stats:{...stats},lintels3d:L3.size,last,lastError})});
 })();
