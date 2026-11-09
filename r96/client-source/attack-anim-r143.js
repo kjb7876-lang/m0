@@ -49,13 +49,15 @@ function apply(rec,st){const h=player.hero;if(!HEROES.includes(h))return;
  if(!best)return;const fr=place(rec,st,best,h,swing.dir,a,swing.start,0);if(fr==null)return;
  stats.frames++;stats.lastDir=swing.dir;stats.lastFrame=fr;}
 // 시트 칸 하나를 몸 그림 자리에 그린다(발 기준점·걷기와 같은 키). idle 이면 첫 칸 + 숨쉬기.
-function place(rec,st,best,h,dir8,a,start,idle,act='attack',fixed=null){const[sd0,mir]=SHEET[dir8]||SHEET.s,sd=act==='hit'&&HIT_FALLBACK[h]?.[sd0]||sd0,p=pathOf(h,sd,act),im=image(p);if(!im)return null;
- const n=Math.max(1,Math.round((im.naturalWidth||im.width)/192)),fr=fixed!=null?Math.min(n-1,fixed):idle?0:Math.min(n-1,Math.floor(Math.min(.999,Math.max(0,1-a/Math.max(.05,start)))*n));
- const bh=Math.abs(best.points[3][1]-best.points[0][1]),want=(typeof actorHeight==='function'?actorHeight():bh)*(r119Stats().standRatio||.98),k=want/bodyOf(im),ky=idle?k*(1+.01*Math.sin((typeof time==='number'?time:0)*2.2)):k;
- const q=project(player.x,player.y),lift=Math.min(Math.max(+player.visualLiftPx||0,0),want*.65),fx=q.x,fy=q.y-lift,f=mir?-1:1,ay=ACT_FOOT[h+':'+act]?.[sd]??(act==='walk'?226:(FOOT[h]?.[sd])||226);
- const sx=fr*192,X=v=>fx+f*(v-96)*k,Y=v=>fy+(v-ay)*ky,before=best.image;
- Object.assign(best,{image:im,sourcePath:p,immutableTint:null,sourceRect:[sx,0,192,256],imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],
-  points:[[X(0),Y(0)],[X(192),Y(0)],[X(192),Y(256)],[X(0),Y(256)]],r143Attack:!idle&&act==='attack',r143Hit:act==='hit',r143Idle:!!idle});
+function place(rec,st,best,h,dir8,a,start,idle,act='attack',fixed=null){const[sd0,mir]=SHEET[dir8]||SHEET.s,sd=act==='hit'&&HIT_FALLBACK[h]?.[sd0]||sd0;
+ // R437: 네온·라우렌 새 좌·우 공격(넓은 칸·자기 발 자리·몸 180 고정) — 시트 표는 neon-lauren-r437.js. 끄면 예전 192 칸 시트.
+ const alt=act==='attack'&&!idle?window.__STORYWORLD_NEON_LAUREN_R437__?.attackSheet?.(h,sd):null,CW=alt?alt.cell[0]:192,FX=alt?alt.foot[0]:96,p=alt?alt.path:pathOf(h,sd,act),im=image(p);if(!im)return null;
+ const n=Math.max(1,Math.round((im.naturalWidth||im.width)/CW)),fr=fixed!=null?Math.min(n-1,fixed):idle?0:Math.min(n-1,Math.floor(Math.min(.999,Math.max(0,1-a/Math.max(.05,start)))*n));
+ const bh=Math.abs(best.points[3][1]-best.points[0][1]),want=(typeof actorHeight==='function'?actorHeight():bh)*(r119Stats().standRatio||.98),k=want/(alt?alt.body:bodyOf(im)),ky=idle?k*(1+.01*Math.sin((typeof time==='number'?time:0)*2.2)):k;
+ const q=project(player.x,player.y),lift=Math.min(Math.max(+player.visualLiftPx||0,0),want*.65),fx=q.x,fy=q.y-lift,f=mir?-1:1,ay=alt?alt.foot[1]:ACT_FOOT[h+':'+act]?.[sd]??(act==='walk'?226:(FOOT[h]?.[sd])||226);
+ const sx=fr*CW,X=v=>fx+f*(v-FX)*k,Y=v=>fy+(v-ay)*ky,before=best.image;
+ Object.assign(best,{image:im,sourcePath:p,immutableTint:null,sourceRect:[sx,0,CW,256],imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],
+  points:[[X(0),Y(0)],[X(CW),Y(0)],[X(CW),Y(256)],[X(0),Y(256)]],r143Attack:!idle&&act==='attack',r437Attack:alt?{hero:h,frame:fr}:null,r143Hit:act==='hit',r143Idle:!!idle});
  // 몸을 두 번 그리는 영웅(환도: 몸 + 겹친 사본)은 같은 옛 그림의 다른 사본을 지운다.
  for(let i=rec.commands.length-1;i>=st;i--){const c=rec.commands[i];if(c!==best&&c.kind==='image'&&c.owner?.kind==='hero'&&c.image===before&&BODY_ART.test(String(c.sourcePath||c.image?.src||''))){rec.commands.splice(i,1);stats.dupRemoved++;}}
  return fr;}
