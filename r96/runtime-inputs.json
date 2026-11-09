@@ -6159,6 +6159,7 @@
     "seal-vision-r472.js",
     "trail-r482.js",
     "perf-r493.js",
+    "swamp-hands-r474.js",
     "weather-r450.js",
     "local-light-r451.js",
     "ground-fringe-r452.js",
@@ -7237,5 +7238,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "b8e86d7c153641a113a214846b4f78d50525b58c136ca02212dea2a55d7c8e08"
+  "runtimeManifestSHA256": "a7e86e948151a7ce23fd5b747df7e7f6519f27191278a01c9d037a212d363579"
 }
