@@ -1,0 +1,131 @@
+{
+  "method": "CPU behavioral regression: shipped video/R247/R291/native serialization, synthetic DOM/media/timers. Not browser, GPU or natural play.",
+  "passed": true,
+  "total": 31,
+  "checks": [
+    {
+      "name": "Michaela W/E cannot cast behind the video",
+      "passed": true
+    },
+    {
+      "name": "normal game W/E input still works after the overlay is gone",
+      "passed": true
+    },
+    {
+      "name": "normal cut holds the title then removes the overlay and restores BGM",
+      "passed": true
+    },
+    {
+      "name": "skip key \"Escape\" restores BGM and returns to game",
+      "passed": true
+    },
+    {
+      "name": "skip key \"Enter\" restores BGM and returns to game",
+      "passed": true
+    },
+    {
+      "name": "skip key \" \" restores BGM and returns to game",
+      "passed": true
+    },
+    {
+      "name": "skip pointer removes the overlay once",
+      "passed": true
+    },
+    {
+      "name": "skip button removes the overlay once",
+      "passed": true
+    },
+    {
+      "name": "never-started media recovers by the startup deadline",
+      "passed": true
+    },
+    {
+      "name": "post-start waiting cannot leave a permanent overlay or silent BGM",
+      "passed": true
+    },
+    {
+      "name": "post-start stalled cannot leave a permanent overlay or silent BGM",
+      "passed": true
+    },
+    {
+      "name": "post-start pause cannot leave a permanent overlay or silent BGM",
+      "passed": true
+    },
+    {
+      "name": "post-start abort cannot leave a permanent overlay or silent BGM",
+      "passed": true
+    },
+    {
+      "name": "continuous media progress keeps a long slow playback alive",
+      "passed": true
+    },
+    {
+      "name": "the title hold is not mistaken for a paused-stream failure",
+      "passed": true
+    },
+    {
+      "name": "explicit media error restores audio and starts exactly one fallback",
+      "passed": true
+    },
+    {
+      "name": "autoplay rejection retries muted without changing user music settings",
+      "passed": true
+    },
+    {
+      "name": "a rejected muted retry closes and starts the fallback",
+      "passed": true
+    },
+    {
+      "name": "original user mute and zero BGM remain unchanged after cleanup",
+      "passed": true
+    },
+    {
+      "name": "saving during the opening does not persist temporary BGM ducking",
+      "passed": true
+    },
+    {
+      "name": "an independent nonzero BGM change wins over the old duck value",
+      "passed": true
+    },
+    {
+      "name": "late old playing cannot affect a new session",
+      "passed": true
+    },
+    {
+      "name": "late old error cannot affect a new session",
+      "passed": true
+    },
+    {
+      "name": "late old ended cannot affect a new session",
+      "passed": true
+    },
+    {
+      "name": "late old timeupdate cannot affect a new session",
+      "passed": true
+    },
+    {
+      "name": "late play rejection cannot mute or close a newer video",
+      "passed": true
+    },
+    {
+      "name": "late muted retry rejection cannot close the next session",
+      "passed": true
+    },
+    {
+      "name": "closing fade still blocks input until the overlay disappears",
+      "passed": true
+    },
+    {
+      "name": "media listeners are detached when their session closes",
+      "passed": true
+    },
+    {
+      "name": "repeated play/close cycles leave no media roots or duplicate input guards",
+      "passed": true
+    },
+    {
+      "name": "duplicate script evaluation cannot register another permanent guard",
+      "passed": true
+    }
+  ]
+}
