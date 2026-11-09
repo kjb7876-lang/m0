@@ -12,11 +12,11 @@
 //  끄기: localStorage['storyworld.r448.depthOverlap']='0'.
 (()=>{'use strict';
 if(window.__STORYWORLD_DEPTH_OVERLAP_R448__)return;
-const REV='R448-depth-overlap-1',KEY='storyworld.r448.depthOverlap';
+const REV='R448-depth-overlap-2',KEY='storyworld.r448.depthOverlap';
 let on=true;try{on=localStorage.getItem(KEY)!=='0';}catch(_){}
 const stats={frames:0,heroFound:0,covered:0,ghosts:0,skippedFlat:0,errors:0};let lastError=null;const last=[];const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 // 앞 조형물 덮개 진하기: 원본 알파 a0 와 합쳐 TARGET 이 되게(원본이 이미 1 이면 OVER 로)
-const TARGET=.86,OVER=.86,GHOST=.58,ENGINE_FADE=.36,MIN_FRAC=.04,DEPTH_GAP=.05;
+const TARGET=.86,OVER=.86,GHOST=.58,ENGINE_FADE=.36,R80_FADE=.55,KEEP_FADE=.6,MIN_FRAC=.04,DEPTH_GAP=.05;
 // 바닥에 눕는 것(깔개·핏자국·웅덩이·금)은 서 있는 물체가 아니라 영웅을 가리면 안 된다
 const FLAT=/(?:^|[^a-z])(?:rugs?|carpets?|mats?|decals?|stains?|puddles?|blood|cracks?|floor|tiles?|shadow|ground|grass-patch|leaves|petals?)(?=[^a-z]|$)/i;
 // 벽에 붙는 것·벽 덩어리(문·문틀·창·액자·현판 등)는 엔진 벽 가림(R188)이 따로 다루고, 문 앞에 선 영웅을 문이 덮으면 안 된다
@@ -60,7 +60,11 @@ function process(commands){
  over.sort((a,b)=>a.order-b.order);let i=0;last.length=0;
  for(const c of over){let a0=Math.max(0,Math.min(1,c.style?.globalAlpha??1));
   /* 엔진 영웅 가림 옅게(.36)는 되돌린다: 덮개를 영웅 상자로 자르므로, 원본이 옅은 채면 상자 밖만 옅어 네모 경계가 보였다. 영웅은 실루엣으로 보인다. (R443/R447 몹 가림 옅게 .4·.5 는 그대로) */
-  if(Math.abs(a0-ENGINE_FADE)<.006){c.style={...c.style,globalAlpha:1};a0=1;stats.restored=(stats.restored||0)+1;}
+  const r80=/^r80-prop:/.test(String(c.owner?.id||''));
+  /* R80 그림 조형물(R94)은 영웅 앞이면 .55 로 옅게 그린다 — 엔진 .36 과 같은 영웅 가림이라 똑같이 1 로 되돌린다(안 그러면 상자 안 .86·밖 .55 경계, R449 스레드 측정) */
+  if(Math.abs(a0-ENGINE_FADE)<.006||(r80&&Math.abs(a0-R80_FADE)<.006)){c.style={...c.style,globalAlpha:1};a0=1;stats.restored=(stats.restored||0)+1;}
+  /* 다른 까닭으로 일부러 옅게 한 조형물(R443/R447/R449 몹·문·상자 위 .4·.5)은 덮개를 얹지 않는다: 상자 안만 진해져 경계가 생긴다. 영웅이 그 위로 비친다 */
+  if(a0<KEEP_FADE){stats.keptFade=(stats.keptFade||0)+1;continue;}
   const a=a0>=.98?OVER:Math.max(0,Math.min(1,(TARGET-a0)/(1-a0)));if(a<=.01)continue;
   last.push(String(c.owner.id).slice(0,48));commands.push({...c,key:'r448:over:'+c.key,owner:{...c.owner,kind:'effect',id:'r448:over:'+c.owner.id,r350:true,r448:true,groundAligned:false,bodyPath:null},spatialRole:null,clips:[...(Array.isArray(c.clips)?c.clips:[]),heroClip],order:hMax+.2+(i++)*.001,style:{...c.style,globalAlpha:a}});stats.covered++;}
  // 가려진 영웅 실루엣(반투명) — 덮개 바로 위
