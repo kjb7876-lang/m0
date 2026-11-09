@@ -144,7 +144,7 @@ const hideable=p=>!!p&&!p.solid&&!p.terrainWall&&!p.blocking&&p.visible!==false&
 function hideProp(p){if(!p||p.r114Hidden)return;p.r114Hidden={visible:Object.prototype.hasOwnProperty.call(p,'visible')?p.visible:undefined,room};p.visible=false;hidden.push(p);stats.propsHidden++;}
 function restoreProps(){for(const p of hidden.splice(0)){const h=p.r114Hidden;if(!h)continue;if(h.visible===undefined)delete p.visible;else p.visible=h.visible;delete p.r114Hidden;}}
 function adoptThrow(e,a){const g=echo.get(e)||{count:0,readyAt:0};g.props=(g.props||0)+1;echo.set(e,g);
- const w=WEAP[e.nativeId],src=propSource(a),canHide=hideable(src),useWeapon=!!w&&(!canHide||g.props%2===0),pl=palette(e);
+ const w=window.__STORYWORLD_SIN_BOSS_ART_R463__?.weaponOff?.(e)?null:WEAP[e.nativeId],src=propSource(a),canHide=hideable(src),useWeapon=!!w&&(!canHide||g.props%2===0),pl=palette(e);
  const H=typeof actorHeight==='function'?actorHeight():60,body=H*(e.boss?2.05:1)*(Number(e.defScale)||1);
  const info={kind:useWeapon?'weapon':'prop',weapon:useWeapon?w:null,prop:useWeapon?null:src,path:a.path,col:pl?.gp||null,col2:pl?.gs||null,
   height:useWeapon?Math.max(H*.45,w.size*body):Math.max(H*.5,finite(src?.height,H*.9)),body,owner:e};
