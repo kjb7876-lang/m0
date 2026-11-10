@@ -7979,6 +7979,22 @@
     "assets/r563/dots/michaela-pillar.webp",
     "assets/r563/dots/michaela-grand-pillar.webp",
     "assets/r563/dots/michaela-halo.webp",
+    "assets/r590/hwando-a-draw-cut.webp",
+    "assets/r590/hwando-q-wind-blade.webp",
+    "assets/r590/hwando-e-delayed-flash.webp",
+    "assets/r590/hwando-r-finale-draw.webp",
+    "assets/r590/hwando-sigil-back.webp",
+    "assets/r590/hwando-sigil-front.webp",
+    "boss-cinematic-r568.js",
+    "hwando-fall-video-r617.js",
+    "video-render-pause-r619.js",
+    "assets/r617/beach-poster.jpg",
+    "assets/r617/beach.mp4",
+    "assets/r617/fall-poster.jpg",
+    "assets/r617/fall.mp4",
+    "assets/r617/index.json",
+    "assets/r617/knight-poster.jpg",
+    "assets/r617/knight.mp4",
     "seoha-chrono-r564.js",
     "assets/r564/seoha-time-blink.webp",
     "assets/r564/dots/seoha-crystal-shell-front.webp",
@@ -9062,5 +9078,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "3ee1b64b16df8e2896647af7575a10d99e212565de4b35d251e4a20b798ff572"
+  "runtimeManifestSHA256": "69c769f45d8a010190f541a21eb7d5438d1004429721afbbbd46bf6b8554a0a9"
 }

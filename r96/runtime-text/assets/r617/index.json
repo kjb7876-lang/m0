@@ -1,0 +1,60 @@
+{
+ "revision": "R617",
+ "note": "사용자 원본 영상은 저장소에 넣지 않음(원본 보존은 사용자 쪽). 임시 그림 아님: 사용자가 준 영상을 다듬어 적용.",
+ "files": [
+  {
+   "path": "assets/r617/knight.mp4",
+   "bytes": 515831,
+   "sha256": "4fd8ff8d1fe95c68a7e72495f62a34997692ea5f71063302f96e5ded521ef979",
+   "source": "사용자 2026-11-10 첨부 영상 「타락천사 기사 강림」(세로 720×1280, 8초, 24fps)",
+   "use": "last301 타락천사 기사가 깨어날 때(보스전 시작)",
+   "process": "자르지 않음: 960×540 안에 원본 전체를 가운데 두고 양옆은 같은 영상 확대·흐림·어둡게(boxblur 30, 밝기 -0.36)로 채움. 오른쪽 아래 생성 도구 표시 delogo. 24fps, 0.35초 페이드인·0.45초 페이드아웃(끝의 가장 가까운 기사 모습을 살림), H.264 CRF27 faststart, AAC 모노 64k",
+   "applied": true
+  },
+  {
+   "path": "assets/r617/knight-poster.jpg",
+   "bytes": 16492,
+   "sha256": "6ed1f263d3439db9e36a32091556bd0a76d64aa98db4b08a34acd8a34af4086e",
+   "source": "사용자 2026-11-10 첨부 영상 「타락천사 기사 강림」(세로 720×1280, 8초, 24fps)",
+   "use": "영상 불러오기 전 첫 화면(포스터)",
+   "process": "처리한 영상의 한 프레임을 JPEG q7 로 뽑음(자르지 않음, delogo 반영)",
+   "applied": true
+  },
+  {
+   "path": "assets/r617/fall.mp4",
+   "bytes": 454714,
+   "sha256": "4d0fd640738f6324a5300b7e868333000e25f82c900b12d96677467361999026",
+   "source": "사용자 2026-11-10 첨부 영상 「추락」(1112×834, 4.06초, 60fps)",
+   "use": "last301 타락천사 기사가 쓰러진 뒤 — 성벽에서 검은 바다로 추락",
+   "process": "자르지 않음: 4:3 원본 전체를 가운데 두고 양옆 흐린 채움. 오른쪽 아래·왼쪽 위 생성 도구 표시 delogo. 0.8배 느리게(4초→5초, 오디오 atempo 0.8), 60→24fps, 물속 장면이 너무 어두워 eq gamma 1.22·contrast 1.04, 페이드 0.35/0.6초, H.264 CRF27 faststart, AAC 모노 64k",
+   "applied": true
+  },
+  {
+   "path": "assets/r617/fall-poster.jpg",
+   "bytes": 16593,
+   "sha256": "9ea5ea4f195c1dfc7d184b56b18b8ffc96358c1badd09a277fb67aa09a69c93d",
+   "source": "사용자 2026-11-10 첨부 영상 「추락」(1112×834, 4.06초, 60fps)",
+   "use": "영상 불러오기 전 첫 화면(포스터)",
+   "process": "처리한 영상의 한 프레임을 JPEG q7 로 뽑음(자르지 않음, delogo 반영)",
+   "applied": true
+  },
+  {
+   "path": "assets/r617/beach.mp4",
+   "bytes": 534982,
+   "sha256": "fdd02290063f1314d563a614cd6ad22ef2fe5a362cbbe925b9f44a57decfc820",
+   "source": "사용자 2026-11-10 첨부 영상 「해변」(세로 720×1280, 8초, 24fps)",
+   "use": "last302 잠들지 못하는 마을 입장 — 젖은 모래 해안에서 깨어남",
+   "process": "자르지 않음: 960×540 안에 원본 전체를 가운데 두고 양옆 흐린 채움. 오른쪽 아래 생성 도구 표시 delogo. 24fps, 페이드 0.35/0.6초, H.264 CRF27 faststart, AAC 모노 64k",
+   "applied": true
+  },
+  {
+   "path": "assets/r617/beach-poster.jpg",
+   "bytes": 25190,
+   "sha256": "30c109bc3c6ebdb2f1a9562181011495c4d948f3891a93a2a2cb1c1282e75ea6",
+   "source": "사용자 2026-11-10 첨부 영상 「해변」(세로 720×1280, 8초, 24fps)",
+   "use": "영상 불러오기 전 첫 화면(포스터)",
+   "process": "처리한 영상의 한 프레임을 JPEG q7 로 뽑음(자르지 않음, delogo 반영)",
+   "applied": true
+  }
+ ]
+}
