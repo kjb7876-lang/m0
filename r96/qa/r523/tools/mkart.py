@@ -68,6 +68,7 @@ def main(spec,out):
         else: e['d']=a.get('d',.5)
         if a.get('pair'): e['pair']=a['pair']
         if a.get('lift') is not None: e['lift']=a['lift']
+        if a.get('clear') is not None: e['clear']=a['clear']  # 큰 그림: 다른 조형물과 더 띄울 거리(칸)
         e['r']=m['r'];e['m']=m['m']
         res[a['key']]=e
         print(a['key'].ljust(12),'h',a['h'],'content',m['cw'],'x',m['ch'],'of',m['W'],'x',m['H'],'up',m['up'],'r',m['r'],'ft',m['ft'],'lenX %.2f lenY %.2f'%(lenX,lenY))

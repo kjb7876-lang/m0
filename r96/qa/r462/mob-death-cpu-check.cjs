@@ -13,7 +13,7 @@ for(const p of ['assets/r411/fx/boss-fire-wall.webp','assets/r411/fx/boss-corpse
 // 환경 흉내
 function env(o={}){const calls=[];const g={window:{},localStorage:{getItem:()=>o.prefs?JSON.stringify(o.prefs):null,setItem(){}},setTimeout(){},Date,console,calls,Math,JSON};g.window=g;vm.createContext(g);
  vm.runInContext(`var time=0,zoom=1,settings={lowFx:${!!o.low}},room={id:'dist01'},effects=[],VFX={burnFlame:'assets/vfx/burn.png'};
- var ctx={save(){},restore(){},translate(){},scale(){},rotate(){},drawImage(im){calls.push('ctx.drawImage:'+im.src);},globalAlpha:1,filter:'none'};
+ var ctx={save(){},restore(){},translate(){},scale(){},rotate(){},beginPath(){},moveTo(){},lineTo(){},closePath(){},clip(){},stroke(){},drawImage(im){calls.push('ctx.drawImage:'+im.src);},globalAlpha:1,filter:'none'};/* R532: 찢김 조각이 쓰는 경로·clip·선 */
  function project(x,y){return{x:x*10,y:y*10};}function actorHeight(){return 60;}function readyImage(p){return{image:{src:p,naturalWidth:1536,naturalHeight:1024}};}
  function sprite(p,x,y,h,opt){calls.push('sprite:'+p+':'+(opt&&opt.filter||''));return true;}
  function drawAssetFrame3(p,f,x,y,h,opt){calls.push('frame:'+p+':'+(opt&&opt.filter||''));return true;}
@@ -48,7 +48,7 @@ ok('boss death untouched',g.calls.join()==='base:assets/boss.png'&&fx3.life===1.
 const fx4={type:'enemyBurnDeath',sourceId:'zz',x:1,y:1,age:.1,life:.72,bodyPath:'p.png'};g.calls.length=0;vm.runInContext('drawBurnDeath3',g)(fx4);ok('unknown mob falls back to engine',g.calls.join()==='base:p.png');
 // 시체
 vm.runInContext('time=3',g);g.calls.length=0;vm.runInContext('drawObjective',g)();
-ok('corpses drawn at ground after objective (2)',M.inspect().corpses===2&&g.calls[0]==='objective'&&g.calls.some(c=>c.startsWith('sprite:assets/r380/mobs/spider-own.webp:brightness(.68)'))&&g.calls.some(c=>c.startsWith('sprite:assets/r380/mobs/glass.webp:brightness(.42)')));
+ok('corpses drawn at ground after objective (2)',M.inspect().corpses===2&&g.calls[0]==='objective'&&g.calls.some(c=>c.startsWith('sprite:assets/r380/mobs/spider-own.webp:brightness(.82)'))&&g.calls.some(c=>c.startsWith('sprite:assets/r380/mobs/glass.webp:brightness(.58)'))/* R532: 사체 색을 본체에 가깝게(.68→.82, .42→.58) */);
 ok('blood pool sheet under blood corpse',g.calls.includes('ctx.drawImage:assets/r190/blood/blood-death.webp'));
 for(let i=0;i<40;i++){const m={id:'k'+i,name:'숲 고블린',hp:3,drawn:'assets/x/gob.webp'};vm.runInContext('drawEnemy',g)(m);vm.runInContext('drawBurnDeath3',g)({type:'enemyBurnDeath',sourceId:'k'+i,x:i,y:1,age:.1,life:.72});}
 ok('corpse cap 24 per room',M.inspect().corpses===24);

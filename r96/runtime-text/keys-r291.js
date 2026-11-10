@@ -59,7 +59,7 @@ function logical(key,opts={}){const ev={key,code:opts.code||'',shiftKey:!!opts.s
 //  R209: 모든 영웅 E 칸(돌진 = 블링크 S), 미카엘라·기억사수 W 칸(= 공명방어 D) — storyworld.r209.skills {dedupe:false} 면 다시 켜짐.
 //  R247: 미카엘라 W·E 는 새 스킬이 맡으므로 살아 있다. hero 를 안 주면 지금 영웅(없으면 어느 영웅이든 쓸 수 있는 칸).
 const HEROES8=['hwando','seoha','neon','michaela','lauren','hunter','slayer','gunner'];
-function slotLive(hero,slot){try{const R=window.__STORYWORLD_SKILLS_R209__;if(!R?.removed?.(hero,slot))return true;return hero==='michaela'&&(slot==='w'||slot==='e')&&!!window.__STORYWORLD_MICHAELA_R247__?.on?.();}catch(_){return true;}}
+function slotLive(hero,slot){try{const R=window.__STORYWORLD_SKILLS_R209__;if(!R?.removed?.(hero,slot))return true;return (hero==='michaela'&&(slot==='w'||slot==='e')&&!!window.__STORYWORLD_MICHAELA_R247__?.on?.())||(hero==='gunner'&&(slot==='w'||slot==='e')&&!!window.__STORYWORLD_GUNNER_ARMS_R561__?.on?.()/* R561 */);}catch(_){return true;}}
 function liveSlots(hero){if(hero===undefined){try{hero=(typeof player==='object'&&player&&typeof started!=='undefined'&&started)?player.hero:null;}catch(_){hero=null;}}
  return ['w','e','r'].filter(sl=>hero?slotLive(hero,sl):HEROES8.some(h=>slotLive(h,sl)));}
 function letters(){return (typeof KR291!=='undefined'&&KR291)?KR291:{w:legacy?'Z':'W',e:legacy?'X':'E',r:legacy?'C':'R'};}
