@@ -12,7 +12,8 @@ const html=RT('index.html');
 // 태그 자리: cave-r204 묶음(grove-r481·trail-r482) 바로 뒤. draw 만 감싸고 가구는 그릴 때의 전역 drawProp 사슬(R303 거울·R329 그림자·R448 겹침 — 뒤에 실려도 부를 때 찾음)을 타므로
 //  그 오버레이들보다 뒤에 실릴 필요는 없다(처음엔 뒤에 두려 했으나 꼬리 순서 검사 12개를 건드려야 해서 r176 정규식 하나만 고치는 자리로 정함). a5(거름)·draw 보다는 뒤여야 한다.
 ok('script tag once, right after trail-r482 (cave-r204 묶음) and before boss-r205; after hospital-improvements-a5 and before combat-r118',html.split('"./'+F+'"').length===2&&/<script src="\.\/trail-r482\.js"><\/script><script src="\.\/hospital-rooms-r521\.js"><\/script>\s*<script src="\.\/boss-r205\.js">/.test(html)&&html.indexOf('hospital-improvements-a5.js')>0&&html.indexOf('hospital-improvements-a5.js')<html.indexOf('"./'+F+'"')&&html.indexOf('"./'+F+'"')<html.indexOf('"./combat-r118.js"'));
-ok('goes through the drawProp chain: its only drawProp wrapper passes every prop on (낮은 가구는 엔진 발밑 타원만 잠깐 끔), no captured sprite',/drawProp=function\(p,\.\.\.a\)\{if\(!p\|\|!p\.r521Ward\|\|!p\.r521Flat\)return base\.apply\(this,\[p,\.\.\.a\]\);\s*const sh=shadow;shadow=function\(\)\{\};try\{return base\.apply\(this,\[p,\.\.\.a\]\);\}finally\{shadow=sh;\}\};/.test(src)&&!/=\s*sprite\b/.test(src.replace(/\/\/.*$/mg,'')));
+// R521-2: 감싸기가 '발밑 타원 끄기'에 '그리는 동안만 들어 올리기'를 더했다 → 기대하는 코드 꼴을 그에 맞게 바꿨다(다른 조형물은 그대로 넘기고, 끝나면 shadow·visualLiftPx 를 되돌리는지 본다).
+ok('goes through the drawProp chain: its only drawProp wrapper passes every other prop on untouched and restores shadow·lift in finally, no captured sprite',(src.match(/drawProp=function/g)||[]).length===1&&/drawProp=function\(p,\.\.\.a\)\{if\(!p\|\|!p\.r521Ward\)return base\.apply\(this,\[p,\.\.\.a\]\);/.test(src)&&/try\{return base\.apply\(this,\[p,\.\.\.a\]\);\}finally\{if\(nudge\)ctx\.restore\(\);if\(flat\)shadow=sh;if\(lift>0\)delete p\.visualLiftPx;\}/.test(src)&&!/=\s*sprite\b/.test(src.replace(/\/\/.*$/mg,'')));
 ok('listed in verify-r96-public.py',/'hospital-rooms-r521\.js'/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')));
 ok('CI runs this check',/node r96\/qa\/r521\/r521-cpu-check\.cjs/.test(fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8')));
 const code=src.replace(/\/\/.*$/mg,'').replace(/\/\*[\s\S]*?\*\//g,'');
@@ -119,4 +120,40 @@ if(W){const before=W.room.props,len=before.length;const out=W.sb.draw();const f=
 {// 경계: 벽이 옮겨져 발 자리가 막히면 그 점만 빠진다
  const w=world();w.sb.blocked=(x,y,rad)=>blockedFx(x,y,rad||0)||(x>30&&x<34&&y>4&&y<20);const r2=w.api.plan(w.room);
  ok('pieces whose foot is blocked are dropped individually (north-ward-a west row gone, rest kept)',r2.length<rows.length&&r2.length>rows.length-14&&!r2.some(p=>p.x>30&&p.x<34&&p.y>4&&p.y<20)&&w.api.inspect().stats.dropped===rows.length-r2.length);}
+{// R521-2 (사용자 2026-11-09 "가구 등이 벽이나 바닥에 조금 묻히는 버그") — 3D 화면에서 그림은 발을 지나 30° 뒤로 누운 판이다.
+ //  ① 그림이 발보다 아래로 내려가면(R111 밑동 맞춤이 등각 가구를 키의 22%까지 내림) 그 부분이 바닥 밑으로 든다. ② 판의 위·옆이 벽 덩어리 안이면 벽에 잘린다. ③ 앞벽(카메라 쪽 +x·+y)에 반쯤 가리면 묻힌 것처럼 보인다.
+ const SH=A.SHAPE||{},SQ=Math.SQRT1_2,BACK=.5*Math.SQRT1_2,RISE=Math.sqrt(3)/2;
+ ok('every art has a measured shape: drawn rect (칸) + 20×28 alpha mask',Object.keys(A.ART).every(k=>SH[k]&&Array.isArray(SH[k].r)&&SH[k].r.length===4&&/^[0-9a-f]{140}$/.test(SH[k].m||'')));
+ ok('measured rect bottom is on the floor line for every art (none drawn below the foot)',Object.keys(A.ART).every(k=>SH[k]&&SH[k].r[2]>-.03&&SH[k].r[2]<.12));
+ const samples=p=>{const s=SH[p.r521.art],out=[];if(!s)return out;const fl=!!(p.r303Flip||p.visualFlipXB3),[x0,x1,y0,y1]=s.r;
+  for(let j=0;j<28;j++)for(let i=0;i<20;i++){const u=fl?19-i:i,k=j*20+u;if(!((parseInt(s.m[k>>2],16)>>(3-(k&3)))&1))continue;const sx=x0+(i+.5)/20*(x1-x0),h=y1-(j+.5)/28*(y1-y0);if(h<0)continue;out.push([sx*SQ-BACK*h,-sx*SQ-BACK*h,RISE*h]);}return out;};
+ const emb=p=>{const S=samples(p);return S.length?S.filter(([a,b])=>blockedFx(p.x+a,p.y+b,0)).length/S.length:1;};
+ const hid=p=>{const S=samples(p);return S.length?S.filter(([a,b,z])=>{for(let t=.25;t<=4.5;t+=.25)if(z+.816*t<3.5/* 화면에서 실제로 가리는 높이(윗면 덮개 포함, 로비 실측) */&&blockedFx(p.x+a+t,p.y+b+t,0))return true;return false;}).length/S.length:1;};
+ const E=rows.filter(p=>emb(p)>.03),Hd=rows.filter(p=>hid(p)>.2);
+ ok('no piece has more than 3% of its picture inside wall mass ('+E.length+': '+E.slice(0,6).map(p=>p.r521.art+'/'+p.r521.wall+' '+emb(p).toFixed(2)).join(', ')+')',rows.length>0&&E.length===0);
+ ok('no piece is more than 20% hidden behind a front wall ('+Hd.length+': '+Hd.slice(0,8).map(p=>p.id.slice(10)+' '+p.r521.art+' '+hid(p).toFixed(2)).join(', ')+')',rows.length>0&&Hd.length===0);
+ ok('wall furniture still stands at the wall after the fix (cabinet·locker·bench·desk·counter·stretcher back within 1.0칸)',rows.filter(p=>/^(cabinet|locker|bench|desk|counter|stretcher)$/.test(p.r521.art)).every(p=>{const s=SH[p.r521.art];if(!s)return false;const b=backWall(p.x,p.y),back=Math.min(b.n,b.w);return back<=2.6;}));
+ // 그리는 동안만 R111 밑동 내림만큼 들어 올린다(visualLiftPx) → 그림 밑변 = 발
+ const mk=(f,r111=true)=>{const sb={console,Math,JSON,Object,Array,Number,String,Set,Map,WeakMap,Promise,Date,localStorage:{getItem:()=>null,setItem(){}},W:4000,H:3000,zoom:.5,
+   room:{id:'ep1a08',props:[],enemies:[],exploration:{hospitalDoorsB3:FX.doors,starts:FX.starts,entry:FX.entry,gate:FX.gate,nodes:FX.nodes},objective:FX.objective},
+   blocked:(x,y,rad)=>blockedFx(x,y,rad||0),regionById:{ep1a08:{paths:[]}},readyImage:()=>({}),project:(x,y)=>({x:2000+(x-y)*10,y:200+(x+y)*5}),lifts:[],after:[]};
+  sb.window=sb;if(r111)sb.__STORYWORLD_PLAY_R111__={foot:()=>f,prefs:()=>({props:true})};vm.createContext(sb);
+  vm.runInContext('function shadow(){}function drawProp(p){if(p.visualHospitalFrame)return;/* 가림막은 a5 그리기 — 들어 올리기 대신 ctx 옮기기 */lifts.push([p.r521&&p.r521.art,p.height,p.visualLiftPx-(p.r521Up||0)*p.height*zoom]);}function draw(){const ps=room.props.slice();for(const p of ps)drawProp(p);for(const p of ps)after.push(p.visualLiftPx);}',sb);
+  vm.runInContext(src,sb,{filename:F});vm.runInContext('draw()',sb);return sb;};
+ const near=(a,b)=>Math.abs(a-b)<1e-6;
+ {const s=mk(.8);ok('foot .80 → every piece is lifted .20×height×zoom while drawn, and the lift is gone afterwards',s.lifts.length>100&&s.lifts.every(([,h,l])=>near(l,.2*h*.5))&&s.after.every(v=>v===undefined));}
+ {const s=mk(.5);ok('lift is capped at .22×height like the R111 sink',s.lifts.length>100&&s.lifts.every(([,h,l])=>near(l,.22*h*.5)));}
+ {const s=mk(.98);ok('foot ≥ .97 (R111 does not sink it) → no lift',s.lifts.length>100&&s.lifts.every(([,,l])=>!(Math.abs(l)>1e-9)));}
+ {// 처음 그리는 그림: R111 이 아직 밑동을 안 쟀으면 보이지 않게(alpha 0) 한 번 그려 재게 한 뒤, 잰 값으로 들어 올려 본 그리기를 한다
+  const sb={console,Math,JSON,Object,Array,Number,String,Set,Map,WeakMap,Promise,Date,localStorage:{getItem:()=>null,setItem(){}},W:4000,H:3000,zoom:1,
+   room:{id:'ep1a08',props:[],enemies:[],exploration:{hospitalDoorsB3:FX.doors,starts:FX.starts,entry:FX.entry,gate:FX.gate,nodes:FX.nodes},objective:FX.objective},
+   blocked:(x,y,rad)=>blockedFx(x,y,rad||0),regionById:{ep1a08:{paths:[]}},readyImage:()=>({}),project:(x,y)=>({x:2000+(x-y)*10,y:200+(x+y)*5}),calls:[],feet:{}};
+  sb.ctx={globalAlpha:1,stack:[],save(){this.stack.push(this.globalAlpha);},restore(){this.globalAlpha=this.stack.pop();},translate(){}};
+  sb.window=sb;sb.__STORYWORLD_PLAY_R111__={foot:p=>sb.feet[p],prefs:()=>({props:true})};vm.createContext(sb);
+  vm.runInContext('function shadow(){}function drawProp(p){if(p.visualHospitalFrame)return;calls.push([p.path,ctx.globalAlpha,p.visualLiftPx||0,p.height]);feet[p.path]=.8;}function draw(){for(const p of room.props.slice())drawProp(p);}',sb);
+  vm.runInContext(src,sb,{filename:F});vm.runInContext('draw()',sb);const seen=new Set();let good=sb.calls.length>100,warm=0;
+  for(const[pa,al,l,h]of sb.calls){if(!seen.has(pa)){seen.add(pa);if(al!==0)good=false;warm++;}else if(al!==1||l<.2*h-1e-6)good=false;}
+  ok('first draw of each art: one invisible warm-up draw (alpha 0), then every visible draw is lifted ('+warm+' warm-ups, '+sb.calls.length+' calls)',good&&warm===seen.size&&sb.ctx.globalAlpha===1&&sb.ctx.stack.length===0);}
+ {const s=mk(.8,false);ok('without R111 → no lift',s.lifts.length>100&&s.lifts.every(([,,l])=>!(Math.abs(l)>1e-9)));}
+}
 console.log('\nR521 '+(n-bad)+'/'+n+(bad?' FAILED':' passed'));process.exit(bad?1:0);

@@ -33859,8 +33859,8 @@
     },
     {
       "path": "hospital-rooms-r521.js",
-      "bytes": 15119,
-      "sha256": "b0263a70ef0cf6976040f251acf7768050030fc820e4923353885c0cd295d6c3"
+      "bytes": 23166,
+      "sha256": "69ab7fb49aa0938d4f25ae2cd78291fc8d870add27695b74d931f17580c248e1"
     },
     {
       "path": "hospital-settings-r84.js",
@@ -34799,7 +34799,7 @@
     }
   ],
   "fileCount": 6959,
-  "totalBytes": 1092141824,
+  "totalBytes": 1092149871,
   "webHTMLSha256": "6264b143140b9daf27050a0af05e0e4cceed06a3e9094dc4d3c465964e6ef127",
   "largest": [
     {
