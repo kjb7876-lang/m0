@@ -3,7 +3,10 @@
 // 구매 규칙·비용·효과는 그대로다(R169 일반강화 buyTalent · R103 Z·X·C buyProc · R62 오라 purchase 를 그대로 부른다). 고르는 순서만 정한다:
 //  1) 지금 살 수 있는 것 중 비용이 가장 싼 것.
 //  2) 비용이 같으면 일반강화(최대 단계가 있는 기존 재능) → Z·X·C 스킬강화(낮은 단계부터) → 오라·무한강화(낮은 단계부터).
-//  · 오라는 전투 능력치 오라만 산다(위력·체력·공격 간격·재사용·피해감소·공명, DREAM 에서는 사몽 안개도). 합일 오라(해금 조건 따로)와 실검무 꾸밈 모티프는 사지 않는다.
+//  · 오라는 전투 능력치 오라만 산다(위력·체력·공격 간격·재사용·피해감소·공명, DREAM 에서는 사몽 안개도). 합일 오라(해금 조건 따로)는 사지 않는다.
+//  · R663(사용자 2026-11-10 "기본실검무 및 문양실검무도 자동으로 스킬레벨업하게" + "qwer은 스킬찍어야 사용가능하게"): 기본 실검무(threadDanceR63, 자동은 10단계까지 — 타격 12회가 상한)와
+//    문양 실검무 여섯 개(threadCross…Ichidan R64)도 같은 규칙으로 산다. Q·W·E·R 은 '배우기'(0→1단계)를 자동으로 사지 않는다(찍는 재미 — P 창에서 직접).
+//    아직 안 배운 칸 수만큼 점수를 남겨 두고(그만큼은 자동 구매가 쓰지 않음) 남는 점수로만 산다. 배운 칸의 2~7단계는 자동으로 올린다.
 //  · 혼자 플레이일 때만(함께하기는 방장·손님 구매 경로가 따로라 건드리지 않는다), 창·로딩·대화가 없을 때만, 1.2초에 한 번, 한 번에 최대 6개.
 //  · 산 것은 화면 아래 짧은 알림으로 알려 주고 저장한다.
 // 끄기: P 창 위쪽 '자동 스킬레벨업' 단추, 또는 localStorage['storyworld.r237.autolevel']='{"on":false}'
@@ -11,6 +14,7 @@
 if(window.__STORYWORLD_AUTOLEVEL_R237__)return;
 const REV='R237-autolevel-1',KEY='storyworld.r237.autolevel',EVERY=1200,BATCH=6;
 const AURA=['endlessPower','endlessVital','endlessHaste','endlessCooldown','endlessWard','endlessResonance'],DREAM_AURA='dreamAura';
+const SKILL=['skillQR663','skillWR663','skillER663','skillRR663'],SLOTS663=['q','w','e','r'],THREAD=['threadDanceR63','threadCrossR64','threadFlowerR64','threadFractalR64','threadClawR64','threadTsubameR64','threadIchidanR64'],AUTO_CAP={threadDanceR63:10};
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const stats={ticks:0,buys:0,talent:0,proc:0,aura:0,errors:0,last:[]};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const P62=()=>window.__STORYWORLD_PROGRESSION_R62__,GR=()=>window.__STORYWORLD_GROWTH_R103__,U169=()=>window.__STORYWORLD_UPGRADES_R169__;
@@ -19,6 +23,8 @@ const G_={player:()=>typeof player==='object'?player:null,layer:()=>typeof layer
  started:()=>typeof started!=='undefined'?started:true,modal:()=>typeof modal!=='undefined'?modal:null,loading:()=>typeof loading!=='undefined'?loading:false,storyScene:()=>typeof storyScene!=='undefined'?storyScene:null};
 const g=n=>{try{return G_[n]();}catch(_){return undefined;}};
 const pts=p=>Number(p?.points)||0;
+// R663: 아직 안 배운 QWER 칸 수(그만큼 점수를 남겨 두어 직접 배울 수 있게)
+function reserved(p){try{const g=window.__STORYWORLD_SKILL_GROWTH_R663__;return g?SLOTS663.filter(s=>g.locked(s,p)).length:0;}catch(_){return 0;}}
 // 지금 살 수 있는 후보: {kind,id,cost,rank,name,order}
 function candidates(p){const out=[],have=pts(p);if(have<=0)return out;const L=g('layer');
  // 1) 일반강화(R169 와 같은 목록·같은 조건)
@@ -27,7 +33,10 @@ function candidates(p){const out=[],have=pts(p);if(have<=0)return out;const L=g(
  try{const G=GR();if(G){const i=G.inspect?.();if(i?.routeOpen){const st=i.state||G.state?.();for(const slot of ['w','e','r']){const lv=Number(st?.procs?.[p.hero+':'+slot])||0;if(lv>=(G.MAX_LEVEL||7))continue;out.push({kind:'proc',id:slot,cost:G.procCost(lv+1),rank:lv,name:(typeof KR291!=='undefined'&&KR291?KR291:{w:'W',e:'E',r:'R',werDot:'W·E·R',werSp:'W · E · R'})[slot]+' 스킬강화',order:1});}}}}catch(e){fail(e);}
  // 3) 오라·무한강화(R169 이후 비용 = 다음 단계²)
  try{const A=P62();if(A?.defs&&typeof A.ranks==='function'){const ids=L==='DREAM'?[...AURA,DREAM_AURA]:AURA;for(const id of ids){const d=A.defs.find(x=>x.id===id);if(!d)continue;const n=Number(A.ranks(id,p))||0;if(d.maxRank!=null&&n>=d.maxRank)continue;out.push({kind:'aura',id,cost:Number(d.cost)||1,rank:n,name:d.name,order:2});}}}catch(e){fail(e);}
- return out.filter(c=>Number.isFinite(c.cost)&&c.cost>0&&c.cost<=have).sort((a,b)=>a.cost-b.cost||a.order-b.order||a.rank-b.rank);}
+ // 4) QWER 2~7단계(R663)·기본 실검무·문양 실검무 — 안 배운 QWER 의 '배우기'는 사지 않는다
+ try{const A=P62();if(A?.defs&&typeof A.ranks==='function')for(const id of [...SKILL,...THREAD]){const d=A.defs.find(x=>x.id===id);if(!d)continue;const n=Number(A.ranks(id,p))||0;if((d.maxRank!=null&&n>=d.maxRank)||n>=(AUTO_CAP[id]??Infinity)||(n<1&&SKILL.includes(id)))continue;out.push({kind:'aura',id,cost:Number(d.cost)||1,rank:n,name:d.name,order:1});}}catch(e){fail(e);}
+ const hold=reserved(p);
+ return out.filter(c=>Number.isFinite(c.cost)&&c.cost>0&&c.cost<=have-hold).sort((a,b)=>a.cost-b.cost||a.order-b.order||a.rank-b.rank);}
 function buy(c){if(c.kind==='talent')return U169().buyTalent(c.id)===true;if(c.kind==='proc')return GR().buyProc(c.id)===true;if(c.kind==='aura')return P62().purchase(c.id)===true;return false;}
 function ready(){const p=g('player');if(!on||!p||!solo())return null;if(g('started')===false||g('modal')||g('loading')||g('storyScene'))return null;if(!(Number(p.hp)>0))return null;return p;}
 function step(force){stats.ticks++;const p=force?g('player'):ready();if(!p)return [];const bought=[];

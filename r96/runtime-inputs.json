@@ -8090,7 +8090,8 @@
     "assets/r600/dots/sv-gem-tail.webp",
     "boss-motion-r620.js",
     "assets/r620/bosses/b03-hit4.webp",
-    "assets/r620/bosses/b03-idle6.webp"
+    "assets/r620/bosses/b03-idle6.webp",
+    "skill-growth-r663.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9165,5 +9166,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "338bd43bd024f9629c7f074e8be5f84f9f2dbd9c5c991e4df090b5fcf5867026"
+  "runtimeManifestSHA256": "3c3a21e123cd9d2ad1e0e161294776963a32b98becf2fd420d15086852c74267"
 }
