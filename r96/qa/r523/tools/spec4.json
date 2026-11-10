@@ -1,0 +1,8 @@
+[
+ {"key": "machine", "src": "assets/world-r80/r80-001.webp", "L": 1.25, "face": "n"},
+ {"key": "vent", "src": "assets/world-r80/r80-058.webp", "L": 1.3, "face": "w"},
+ {"key": "cooler", "src": "assets/r406/props/server-cooler.webp", "L": 1.3, "face": "w"},
+ {"key": "kiosk", "src": "assets/world-r80/r80-054.webp", "L": 0.8, "face": "n"},
+ {"key": "alarm", "src": "assets/world-r80/r80-056.webp", "ch": 52, "face": "n"},
+ {"key": "steps", "src": "assets/world-r80/r80-055.webp", "L": 1.9, "face": "w", "clear": 1.4}
+]
