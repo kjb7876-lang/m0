@@ -6172,7 +6172,9 @@
     "assets/r521/index.json",
     "assets/r521/medicine-cabinet.webp",
     "assets/r521/surgical-cart.webp",
+    "hospital-walls-r522.js",
     "hwando-chain-r590.js",
+    "hunter-arrows-r535.js",
     "assets/r590/hwando-wind-tornado.webp",
     "assets/r590/hwando-iai-ring.webp"
   ],
@@ -7249,5 +7251,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "f68eeda1f2573bd6e650a89a68c733f688c231457543eaff774f89c71d5e9d3c"
+  "runtimeManifestSHA256": "960965b3742004e8ead95963a67b9eab1b425639b4cfe02ca9a9878336c8df63"
 }
