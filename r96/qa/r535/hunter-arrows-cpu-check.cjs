@@ -161,6 +161,26 @@ if(exists){
 
  ok('C beat: petals leave a beat after the blast, not in the same frame',(()=>{const h=env();h.room.enemies.push(foe('c1',16,10));vm.runInContext('cast("r")',h);let tb=null,tp=null;for(let i=0;i<60&&tp==null;i++){step(h,1,1/60);const s=h.__STORYWORLD_HUNTER_ARROWS_R535__.inspect().stats;if(tb==null&&s.blasts)tb=h.time;if(tp==null&&s.petals)tp=h.time;}return tb!=null&&tp!=null&&tp-tb>=.07&&tp-tb<=.12;})());
  ok('at most 4 blast flashes alive at once',(()=>{const h=env();for(let k=0;k<8;k++)vm.runInContext('cast("r")',h);for(let i=0;i<20;i++)step(h,1,1/30);return h.__STORYWORLD_HUNTER_ARROWS_R535__.inspect().fx<=4;})());
+ // ---------- R535-2 후속: 헌터 테마(불과 화살, 허공의 문에서 무기가 쏟아짐) · 드라이브 화살촉 불꽃 · 사몽 배수 ----------
+ ok('arrowhead flame sheet shipped (drive hunter-fire-arrowhead, ≤ 200KB)',(()=>{const f=path.join(R,'runtime-text','assets','r535','hunter-fire-arrowhead.webp');return fs.existsSync(f)&&fs.statSync(f).size<=200000;})());
+ ok('source names the sheet path',/assets\/r535\/hunter-fire-arrowhead\.webp/.test(src));
+ g=env();g.readyImage=p=>/hunter-fire-arrowhead/.test(p)?{image:{naturalWidth:1152,naturalHeight:768},ready:true}:null;g.document={createElement(){return{width:0,height:0,getContext(){return{drawImage(){}};}};}};
+ g.room.enemies.push(foe('c1',17,10));run(g,'cast("r")');for(let i=0;i<4;i++)step(g,1,1/30);
+ ok('lance head wears the arrowhead flame sheet when loaded',A(g).inspect().stats.headDraws>0);
+ ok('C opens weapon gates behind the hero (5 portals)',A(g).inspect().gates.some(x=>x.kind==='r'&&x.n===5));
+ ok('gates pour visual fire-arrows toward the lance while it flies',A(g).inspect().stats.volleys>0);
+ ok('visual volleys capped at 20 alive',A(g).inspect().volleys<=20);
+ for(let i=0;i<40;i++)step(g,1,1/30);ok('gates close after the blast',A(g).inspect().gates.filter(x=>x.kind==='r').length===0);
+ ok('gate volleys are visual only (no extra hits or projectiles)',g.hits.every(h=>h.src&&['lance','blast','petal','burn','shard'].includes(h.src.r535)||!h.src||h.src.storyWER));
+ g=env();g.room.enemies.push(foe('a',16,10));run(g,'special()');step(g,1,.0001);ok('Q opens 3 small gates during the storm',A(g).inspect().gates.some(x=>x.kind==='q'&&x.n===3));
+ g=env({off:true});run(g,'special();cast("r")');step(g,2,1/30);ok('switch off → no gates',A(g).inspect().gates.length===0);
+ // 사몽(R571 공용 API) 중이면 폭발 반경·가시 사거리 ×1.77, 상한은 그대로
+ const surge=on=>({active:()=>on,range:r=>on?r*1.77:r,cd:s=>s,chance:c=>c});
+ for(const on of [false,true]){g=env();g.__STORYWORLD_SAMONG_SURGE_R571__=surge(on);const s1=foe('s1',16,10),s2=foe('s2',16,13.2);g.room.enemies.push(s1,s2);run(g,'cast("r")');for(let i=0;i<30;i++)step(g,1,1/30);
+  const hitS2=g.hits.some(h=>h.id==='s2'&&h.src&&h.src.r535==='blast');ok('samong '+(on?'on':'off')+': blast reaches an enemy 3.2 tiles away = '+on,hitS2===on);}
+ g=env();g.__STORYWORLD_SAMONG_SURGE_R571__=surge(true);for(let i=0;i<30;i++)g.room.enemies.push(foe('p'+i,11+(i%6)*.5,9+Math.floor(i/6)*.5));for(let k=0;k<12;k++){run(g,'cast("w");cast("r")');step(g,8,1/30);}
+ ok('samong keeps the 24 live projectile cap',A(g).inspect().stats.maxLive<=24);
+
  // ---------- 그리기·성능 ----------
  g=env();g.room.enemies.push(foe('a',16,10),foe('b',17,10.8));run(g,'special();cast("w");cast("r")');for(let i=0;i<20;i++)step(g,1,1/30);
  ok('custom draws happen inside ctx.scope effect owners',g.scopes.length>0&&g.scopes.every(o=>o.kind==='effect'&&Number.isFinite(o.x)&&Number.isFinite(o.y)));

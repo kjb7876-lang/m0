@@ -24893,6 +24893,11 @@
       "sha256": "556679e3ff38b7ea818880a7f84f34458e45c2c7108ac3d18459ece004848595"
     },
     {
+      "path": "assets/r535/hunter-fire-arrowhead.webp",
+      "bytes": 175158,
+      "sha256": "2224771bb5eecbdfb12628b397283f45b5c7d2dc96ea50c22c96b15627b5c505"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -33904,8 +33909,8 @@
     },
     {
       "path": "hunter-arrows-r535.js",
-      "bytes": 21193,
-      "sha256": "c52763de9a3e5cffdd2232035c6d59f4fb8e58634bcfbbd18b42298ae5283a7e"
+      "bytes": 29162,
+      "sha256": "79bd8baff530f11b01f9eb93f6a590de7f6dcafe6a971585ab15ee00e8911c38"
     },
     {
       "path": "hwando-arc-r349.js",
@@ -34823,8 +34828,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6964,
-  "totalBytes": 1092253971,
+  "fileCount": 6965,
+  "totalBytes": 1092437098,
   "webHTMLSha256": "77e6fcafff31164cb899e872613778a94f5f82006dce863d4b589a74e337d872",
   "largest": [
     {
