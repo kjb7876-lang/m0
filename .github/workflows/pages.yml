@@ -416,6 +416,8 @@ jobs:
         run: node r96/qa/r542/r542-cpu-check.cjs
       - name: R543 pitch-shifted enemy growl and goblin voices plus distant thunder CPU check
         run: node r96/qa/r543/r543-cpu-check.cjs
+      - name: R544 generated enemy-theme hit and death, per-hero hurt, level-up, click and boss-death sounds CPU check
+        run: node r96/qa/r544/r544-cpu-check.cjs
       - name: R385 mob moves (review list v18 move/rename) CPU check
         run: node r96/qa/r385/r385-cpu-check.cjs
       - name: R390 cinema full narration + midboss hold + enemies keep chasing CPU check
