@@ -7963,7 +7963,18 @@
     "assets/r562/dots/neon-chain.webp",
     "assets/r562/dots/neon-bubble-ring-back.webp",
     "enemy-attack-tempo-r601.js",
-    "auto-attack-r597.js"
+    "auto-attack-r597.js",
+    "slayer-berserk-r586.js",
+    "assets/r587/index.json",
+    "assets/r587/slayer-w-cross2.webp",
+    "assets/r587/slayer-e-floor.webp",
+    "assets/r587/slayer-bleed2.webp",
+    "assets/r587/slayer-q-thorn-back.webp",
+    "assets/r587/slayer-q-thorn-front.webp",
+    "assets/r587/slayer-hit.webp",
+    "assets/r587/slayer-exec.webp",
+    "assets/r587/slayer-chain.webp",
+    "assets/r587/slayer-mark.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9038,5 +9049,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "39277c983076d83b2a6fce709b8cd3027dcdd99aa27e17269ab80a03da59a9f7"
+  "runtimeManifestSHA256": "976e32dd0f6869f1fc5e0a75f04d338610ed3d3cbe0a36d547caea5b43fbc9cb"
 }
