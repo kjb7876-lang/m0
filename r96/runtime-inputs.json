@@ -6193,6 +6193,18 @@
     "assets/r585/slayer-r-aura-front.webp",
     "assets/r585/slayer-r-cross.webp",
     "assets/r585/slayer-w-sacrifice.webp",
+    "sfx-r541.js",
+    "assets/r541/sfx/pickup-1.ogg",
+    "assets/r541/sfx/pickup-2.ogg",
+    "assets/r541/sfx/death-1.ogg",
+    "assets/r541/sfx/death-2.ogg",
+    "assets/r541/sfx/door-1.ogg",
+    "assets/r541/sfx/index.json",
+    "assets/r542/sfx/bow-1.ogg",
+    "assets/r542/sfx/heal-1.ogg",
+    "assets/r542/sfx/crush-1.ogg",
+    "assets/r542/sfx/roar-1.ogg",
+    "assets/r542/sfx/index.json",
     "samong-theme-r572.js"
   ],
   "mediaPaths": [
@@ -7268,5 +7280,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "bf73b840bd4ba7bffa3ddd156188d3fb39883a5499cd3d54b07b8e523450fa79"
+  "runtimeManifestSHA256": "901c5053698111997a8e216dabe93ef7aeaa7b8dd312a0ce0f6fcf1eb184401e"
 }

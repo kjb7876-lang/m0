@@ -1,0 +1,87 @@
+{
+ "revision": "R542",
+ "generator": "scripts/build-sfx-r542.py",
+ "origin": "사용자 제공 효과음(2026-11-10 프로젝트 업로드), 자르기·필터·음량만 손봄",
+ "files": {
+  "bow-1": {
+   "path": "assets/r542/sfx/bow-1.ogg",
+   "role": "r542Bow",
+   "gain": 0.6,
+   "use": "헌터 평타(활시위)",
+   "source": "bow_attack_2.mp3",
+   "sourceSha256": "94a16b91ad28eda725f7c9f62fe9e7347cb5072bc9f4f0d1ab6141ed85f2d538",
+   "sourceBytes": 61143,
+   "trim": [
+    2.04,
+    0.21
+   ],
+   "bytes": 5467,
+   "sha256": "0064d3d015d69606c07f44b55963d0ec0c6e488d1d437a2f6867bd5b10627935",
+   "duration": 0.207,
+   "peakDb": -9.42,
+   "rmsDb": -22.82,
+   "hfShare5k": 0.01903,
+   "tailDb": -27.3
+  },
+  "heal-1": {
+   "path": "assets/r542/sfx/heal-1.ogg",
+   "role": "swHeal",
+   "gain": 0.55,
+   "use": "회복",
+   "source": "magic_attack_healing_2.mp3",
+   "sourceSha256": "e5c9435172136265783ea51c8245426e421ad660c398ded46cc551b8f43d75d6",
+   "sourceBytes": 61143,
+   "trim": [
+    1.25,
+    1.0
+   ],
+   "bytes": 11590,
+   "sha256": "a0bdc12de7a7e3afbd67c2a1486e67a99be848f28f9b3cdd9aa22008220ada3b",
+   "duration": 0.997,
+   "peakDb": -10.1,
+   "rmsDb": -22.3,
+   "hfShare5k": 0.00892,
+   "tailDb": -36.9
+  },
+  "crush-1": {
+   "path": "assets/r542/sfx/crush-1.ogg",
+   "role": "r542Crush",
+   "gain": 0.5,
+   "use": "상자 부수기",
+   "source": "short_anything_crush_3.mp3",
+   "sourceSha256": "ef5277a49dc659e441013234869617068c8c42dafa2ac9af24ecae863cfcd77b",
+   "sourceBytes": 61143,
+   "trim": [
+    0.17,
+    0.42
+   ],
+   "bytes": 7997,
+   "sha256": "58b7f74acb735cb446a78e5f40a456395c0ccbf072572e00a8b1a16ec28aa7e7",
+   "duration": 0.417,
+   "peakDb": -9.48,
+   "rmsDb": -29.52,
+   "hfShare5k": 0.05258,
+   "tailDb": -46.1
+  },
+  "roar-1": {
+   "path": "assets/r542/sfx/roar-1.ogg",
+   "role": "boss",
+   "gain": 0.6,
+   "use": "보스 포효 변주",
+   "source": "devil_roar_1.mp3",
+   "sourceSha256": "3fc3ad0e9e9cefc450c542db481960fb42c8a4028bccf6b5931788e8b28d7aa7",
+   "sourceBytes": 61143,
+   "trim": [
+    0,
+    0.85
+   ],
+   "bytes": 8599,
+   "sha256": "3fde34da839094cdfabd18b8f9a510c38ff7141c93ceeaaa1eec3f818ec8d0e8",
+   "duration": 0.847,
+   "peakDb": -8.34,
+   "rmsDb": -20.96,
+   "hfShare5k": 1e-05,
+   "tailDb": -53.1
+  }
+ }
+}
