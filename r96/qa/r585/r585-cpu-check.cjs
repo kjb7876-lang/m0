@@ -42,6 +42,7 @@ function makeEnv(o={}){
  const hits=[],foe={id:'f1',name:'몹',x:4,y:0,hp:5000,maxHp:5000,spawnState:'active',radius:.3},foe2={id:'f2',name:'몹',x:1.2,y:.4,hp:5000,maxHp:5000,spawnState:'active',radius:.3};
  const env={console,Math,JSON,Number,String,Array,Object,Set,Map,WeakMap,Promise,Error,isFinite,localStorage:{_s:{},getItem(k){return this._s[k]??null;},setItem(k,v){this._s[k]=String(v);}},
   time:5,ctx:new Rec(),room:{id:'room-a',enemies:[foe,foe2]},player:{x:0,y:0,hero:o.hero||'slayer',hp:100,specialCD:0,direction:'e',ego:0},effects:[],settings:{lowFx:!!o.lowFx},shake:0,started:true,modal:null,loading:false,keys:new Set(),joystickVector:{x:0,y:0},route:[],command:null};
+ if(o.ls)Object.assign(env.localStorage._s,o.ls);
  env.window=env;env.actorHeight=()=>54;env.project=(x,y)=>({x:640+x*32,y:360+y*16});env.TILE=34;env.zoom=1;
  env.attackPower=()=>50;env.rank=()=>0;env.nearestEnemy=()=>foe;env.facing=()=>'e';env.sound=()=>{};env.blocked=()=>false;env.liveEnemies=()=>env.room.enemies.filter(e=>e.hp>0);env.clearLine=()=>true;env.damageable3=e=>e.hp>0;
  env.requested=[];env.ready=o.ready!==false;const SHEET={naturalWidth:1152,naturalHeight:768,src:'sheet'};
@@ -63,7 +64,8 @@ function makeEnv(o={}){
  env.idx=IDX;env.S=env.__STORYWORLD_SLAYER_SHEETS_R585__;
  if(env.S&&IDX)env.S.__setIndex?.(IDX);
  return env;}
-const sheetDraws=(env,pred=()=>true)=>env.ctx.commands.filter(c=>c.kind==='image'&&c.owner?.r585&&pred(c));
+const sheetDraws=(env,pred=()=>true)=>env.ctx.commands.filter(c=>c.kind==='image'&&c.owner?.r585&&c.op!=='lighter'&&pred(c));
+const glossDraws=(env,pred=()=>true)=>env.ctx.commands.filter(c=>c.kind==='image'&&c.owner?.r585&&c.op==='lighter'&&pred(c));
 const DT=1/60;
 function frameOf(env,c){const s=IDX.sheets[c.owner.sheet];const col=Math.round(c.src[0]/s.cell),row=Math.round(c.src[1]/s.cell);return row*s.cols+col;}
 function upright(c){const [p0,p1,p2,p3]=c.points;return Math.abs(p0[1]-p1[1])<1e-6&&p3[1]>p0[1]&&p1[0]>p0[0];}
@@ -101,17 +103,21 @@ function upright(c){const [p0,p1,p2,p3]=c.points;return Math.abs(p0[1]-p1[1])<1e
    const b=c.findIndex(x=>x.owner?.sheet==='slayer-q-spin-back'),f=c.findIndex(x=>x.owner?.sheet==='slayer-q-spin-front');if(b>=0&&f>=0){ring++;if(!(b<hi&&f>hi))order=false;}proc+=env.sprites.filter(s=>s.nm==='spark'||s.nm==='petal').length;}
   ok('Q windup: spin ring back sheet before body, front after; no procedural spark/petal streaks',ring>=15&&order&&proc===0,{ring,order,proc});
   for(let i=0;i<60;i++){env.tick(DT);env.ctx.commands.length=0;env.sprites.length=0;for(const f of env.effects)env.ctx.scope({id:'fx',kind:'effect'},()=>env.drawEffect(f));for(const x of sheetDraws(env))tor.add(x.owner.sheet);}
+  {const gl=new Set();for(let i=0;i<20;i++){env.tick(DT);env.ctx.commands.length=0;for(const f of env.effects)env.ctx.scope({id:'fx',kind:'effect'},()=>env.drawEffect(f));for(const x of glossDraws(env))gl.add(x.owner.sheet);}ok('readability: Q tornado sheets get the wet-sheen pass too; crosses stay single-pass',gl.has('slayer-q-tornado-back')&&!gl.has('slayer-r-cross'),[...gl]);}
   ok('Q whirlwind: tornado back+front sheets, no R366/procedural layers',tor.has('slayer-q-tornado-back')&&tor.has('slayer-q-tornado-front')&&!env.sprites.some(s=>['spark','petal','slashwide'].includes(s.nm)),[...tor]);
   for(let i=0;i<300;i++){env.tick(DT);}bleedSheets=env.effects.filter(f=>f.sheet==='slayer-bleed').length+(S.inspect().stats.spawn?.['slayer-bleed']||0);
   ok('Q bleed ticks show the bleed sheet (R190 splash not called)',bleedSheets>0&&!env.r190.some(r=>r[0]==='blood-splash'),{bleedSheets,r190:env.r190.length});
   ok('Q damage unchanged: pierce ×0.9 of attack×2.4 (=108) then 5 bleed ticks (=8.4)',JSON.stringify(env.hits.filter(h=>h[0]==='f1'))===JSON.stringify([['f1',108,'q-tornado'],...Array(5).fill(['f1',8.4,'q-bleed'])]),env.hits);
   ok('Q: no errors',S.inspect().stats.errors===0,S.inspect().lastError);}
  // ---- W 피의 희생·E 피의 대시: 원천 연출·코드 문양 대신 시트. 다른 영웅은 그대로 ----
- {const env=makeEnv();const S=env.S;env.fxBase.length=0;
+ {const env=makeEnv();env.fxBase.length=0;for(const st of ['warning','release','end'])env.fx('storySourceSkill',0,0,{storyWER:true,sourceHero:'slayer',sourceSlot:'w',stage:st,castId:20});
+  ok('W held (2026-11-10 headless: CX-0055 W sheet reads weaker than the old W and its cross looks like a small figure) → old W effect stays until Dots SL-07b; no W sheet, claims(w)=false',env.fxBase.length===3&&!env.effects.some(f=>f.sheet==='slayer-w-sacrifice')&&env.S.claims('w')===false&&env.S.claims('e')===true,{fx:env.fxBase.length});}
+ {const env=makeEnv({ls:{'storyworld.r585.w-sheet':'on'}});const S=env.S;env.fxBase.length=0;
   for(const st of ['warning','release','end'])env.fx('storySourceSkill',0,0,{storyWER:true,sourceHero:'slayer',sourceSlot:'w',stage:st,castId:21});
-  ok('W: slayer W cues do not reach the procedural layers (R209/d2s/r102) — swallowed',env.fxBase.length===0,env.fxBase);
+  ok('W (opt-in storyworld.r585.w-sheet=on): slayer W cues do not reach the procedural layers (R209/d2s/r102) — swallowed',env.fxBase.length===0,env.fxBase);
   const w=env.effects.find(f=>f.type==='r585-sheet'&&f.sheet==='slayer-w-sacrifice');ok('W: blood sacrifice sheet spawned at the hero feet',!!w&&w.x===0&&w.y===0);
   env.ctx.commands.length=0;env.tick(.3);env.drawEffect(w);const wd=sheetDraws(env,c=>c.owner.sheet==='slayer-w-sacrifice');ok('W: drawn upright from the sheet',wd.length===1&&upright(wd[0]),wd.length);
+  {const g=glossDraws(env,c=>c.owner.sheet==='slayer-w-sacrifice');ok('readability: dark W sheet gets one wet-sheen pass (lighter, alpha .3~.6, same place) so it reads on dark floors (headless 2026-11-10: W/Q sheets nearly invisible)',g.length===1&&g[0].alpha>=.3&&g[0].alpha<=.6&&JSON.stringify(g[0].points)===JSON.stringify(wd[0].points),g.map(c=>c.alpha));}
   env.fx('storySourceSkill',0,0,{storyWER:true,sourceHero:'slayer',sourceSlot:'w',stage:'hit',castId:21});ok('W/E hit sparks still pass to the engine (stage hit)',env.fxBase.some(r=>r[3]==='hit'));
   env.fxBase.length=0;env.fx('storySourceSkill',0,0,{storyWER:true,sourceHero:'slayer',sourceSlot:'e',stage:'warning',castId:22});env.fx('storySourceSkill',0,0,{storyWER:true,sourceHero:'slayer',sourceSlot:'e',stage:'flight',castId:22,tx:3.8,ty:0});
   const e=env.effects.find(f=>f.sheet==='slayer-e-dash');ok('E: dash trail sheet spawned along origin→end, cues swallowed',!!e&&e.tx===3.8&&env.fxBase.length===0,{e,fx:env.fxBase});

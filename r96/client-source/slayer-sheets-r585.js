@@ -22,14 +22,14 @@ const META=Object.freeze({
  'slayer-r-cross':{frames:24,fps:24.5,pivot:[128,224],hit:13},
  'slayer-burst-big':{frames:24,fps:18,pivot:[128,224],hit:5},
  'slayer-burst-small':{frames:24,fps:18,pivot:[128,224],hit:3},
- 'slayer-r-aura-back':{frames:20,fps:12.5,pivot:[128,224],loop:true},
+ 'slayer-r-aura-back':{frames:20,fps:12.5,pivot:[128,224],loop:true,gloss:.3},
  'slayer-r-aura-front':{frames:20,fps:12.5,pivot:[128,224],loop:true},
- 'slayer-q-spin-back':{frames:20,fps:40,pivot:[128,224],loop:true},
- 'slayer-q-spin-front':{frames:20,fps:40,pivot:[128,224],loop:true},
- 'slayer-q-tornado-back':{frames:20,fps:24,pivot:[128,232],loop:true},
- 'slayer-q-tornado-front':{frames:20,fps:24,pivot:[128,232],loop:true},
+ 'slayer-q-spin-back':{frames:20,fps:40,pivot:[128,224],loop:true,gloss:.5},
+ 'slayer-q-spin-front':{frames:20,fps:40,pivot:[128,224],loop:true,gloss:.5},
+ 'slayer-q-tornado-back':{frames:20,fps:24,pivot:[128,232],loop:true,gloss:.45},
+ 'slayer-q-tornado-front':{frames:20,fps:24,pivot:[128,232],loop:true,gloss:.45},
  'slayer-bleed':{frames:24,fps:16,pivot:[128,224]},
- 'slayer-w-sacrifice':{frames:24,fps:14,pivot:[128,192],hit:8},
+ 'slayer-w-sacrifice':{frames:24,fps:14,pivot:[128,192],hit:8,gloss:.5},
  'slayer-e-dash':{frames:24,fps:16,pivot:[128,208],hit:12},
  'slayer-d-guard':{frames:24,fps:12.5,pivot:[128,224],loop:true},
  'slayer-ego-enter':{frames:24,fps:14,pivot:[128,224],hit:8},
@@ -46,13 +46,16 @@ const isHero=()=>typeof player==='object'&&!!player&&player.hero===HERO&&player.
 const S425=()=>window.__STORYWORLD_SLAYER_BLOOD_R425__;
 const egoActive=()=>{try{return !!window.__STORYWORLD_EGO151__?.inspect?.()?.state?.active;}catch(_){return false;}};
 const img=n=>{try{const r=typeof readyImage==='function'?readyImage(PATH(n)):null;return r?.image||null;}catch(_){return null;}};
-const ready=slot=>on&&(NEED[slot]||[]).every(n=>!!img(n));
+// W 시트는 보류: 2026-11-10 헤드리스 비교에서 옛 W 보다 약하고 십자가가 작은 사람처럼 읽힘 → Dots SL-07b(바닥 문양) 올 때까지 옛 W 유지.
+// 비교용으로만 localStorage storyworld.r585.w-sheet = 'on' 이면 켠다.
+const HOLD=new Set((()=>{try{return localStorage.getItem('storyworld.r585.w-sheet')==='on'?[]:['w'];}catch(_){return ['w'];}})());
+const ready=slot=>on&&!HOLD.has(slot)&&(NEED[slot]||[]).every(n=>!!img(n));
 // 엔진 그림 저장소는 새 게임·지역 이동 때 비워질 수 있다 → 아직 안 읽힌 시트만 게임 시간 2초마다 다시 부탁한다(매 틱 아님).
 let lastAsk=-1e9;function request(){if(!isHero())return;const t=Number(typeof time!=='undefined'?time:0)||0;if(t-lastAsk<2&&t>=lastAsk)return;const miss=NAMES.filter(n=>!img(n));if(!miss.length)return;lastAsk=t;try{if(typeof ensureImages==='function'){const r=ensureImages(miss.map(PATH));if(r&&typeof r.catch==='function')r.catch(()=>{});stats.requested++;}}catch(e){fail(e);}}
 function frameAt(n,age){const m=META[n];let f=Math.floor(age*m.fps+1e-6);if(f<0)f=0;if(m.pingpong){const p=2*(m.frames-1);f%=p;if(f>=m.frames)f=p-f;}else if(m.loop)f%=m.frames;else if(f>=m.frames)return -1;return f;}
 // 시트 한 칸 그리기: 피벗을 (x,y) 에. w·h 는 화면에 그릴 셀 크기. angle/flipX 는 E 궤적만 쓴다(십자가에는 쓰지 않는다).
 function sheet(n,f,x,y,w,h,o={}){const im=img(n);if(!im||f<0||typeof ctx==='undefined'||!ctx)return false;const m=META[n],sx=(f%COLS)*CELL,sy=Math.floor(f/COLS)*CELL,px=m.pivot[0]/256,py=m.pivot[1]/256,ax=o.ax??px;
- const draw=()=>{ctx.save();try{ctx.globalAlpha*=Math.max(0,Math.min(1,o.alpha??1));if(o.blend)ctx.globalCompositeOperation=o.blend;ctx.translate(x,y);if(o.flipX)ctx.scale(-1,1);if(o.angle)ctx.rotate(o.angle);ctx.drawImage(im,sx,sy,CELL,CELL,-ax*w,-py*h,w,h);stats.draws++;}finally{ctx.restore();}};
+ const draw=()=>{ctx.save();try{ctx.globalAlpha*=Math.max(0,Math.min(1,o.alpha??1));if(o.blend)ctx.globalCompositeOperation=o.blend;ctx.translate(x,y);if(o.flipX)ctx.scale(-1,1);if(o.angle)ctx.rotate(o.angle);ctx.drawImage(im,sx,sy,CELL,CELL,-ax*w,-py*h,w,h);stats.draws++;if(m.gloss&&!lowFx()){ctx.globalAlpha*=m.gloss;ctx.globalCompositeOperation='lighter';ctx.drawImage(im,sx,sy,CELL,CELL,-ax*w,-py*h,w,h);}}finally{ctx.restore();}};
  const own={id:'r585:'+n,kind:'effect',r585:true,sheet:n,frame:f,x:o.wx,y:o.wy,groundAligned:false};
  if(scopeBase&&ctx===hooked)scopeBase.call(ctx,own,draw);else if(typeof ctx.scope==='function')ctx.scope(own,draw);else draw();return true;}
 // ---- 시트 이펙트 목록(엔진 effects 에 넣어 나이·수명은 엔진이 돌린다) ----
