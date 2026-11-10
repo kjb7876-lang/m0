@@ -57,7 +57,13 @@ const ART=Object.freeze(/*ART*/{
  sofa_w:{path:'assets/r524/sofa-w.webp',h:80,face:'w',ang:'iso',flat:true,ft:[-0.984,0.991,-0.565],pair:'sofa_n',r:[-0.998,0.998,0,1.664],m:'0003000070001f0003f0007f801ffc03ffe07fff1ffff3ffff7ffffffffffffffffffffffffffffffffffffff8ffff0fffc0fff80fff00ffc00ff8003f0001c0000800008000'},
  range_n:{path:'assets/r524/range-n.webp',h:62,face:'n',ang:'iso',flat:true,ft:[-0.489,0.484,0.037],pair:'range_w',r:[-0.501,0.501,0,1.289],m:'0070001fc003fe00fff81fffe7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffa0fff003fe000f800030000300'},
  range_w:{path:'assets/r524/range-w.webp',h:56,face:'w',ang:'iso',flat:true,ft:[-0.471,0.486,-0.172],pair:'range_n',r:[-0.497,0.497,0,1.165],m:'0038001fc00fff07fff8ffffcffffefffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1ffff0ffe007f000380003000'},
- mirror:{path:'assets/world-r80/r80-026.webp',h:77,face:'s',ang:'pole',up:0.006,d:0.45,r:[-0.444,0.441,0,1.583],m:'0060001f8007fc00ffe00ffe00ffe00ffe00fff00fff01fff81fff01fff01fff01fff01fff01fff01fff81fff81fff81fff81fffc1fffe3ff96ff807de000060000300003800'}
+ mirror:{path:'assets/world-r80/r80-026.webp',h:77,face:'s',ang:'pole',up:0.006,d:0.45,r:[-0.444,0.441,0,1.583],m:'0060001f8007fc00ffe00ffe00ffe00ffe00fff00fff01fff81fff01fff01fff01fff01fff01fff01fff81fff81fff81fff81fffc1fffe3ff96ff807de000060000300003800'},
+ machine:{path:'assets/world-r80/r80-001.webp',h:88,face:'n',ang:'iso',flat:true,up:0.01,ft:[-0.785,0.785,0.104],r:[-0.785,0.785,0,1.794],m:'01c0003e000ff801ffe01fff81fff81fff80fff80fffe0fffe1fffe1fffe3fffe3fffe7fffe3fffe3fffe3fffe3fffc7fffcffffcffffe7ffff1ffff03ffe01ff0007c000380'},
+ vent:{path:'assets/world-r80/r80-058.webp',h:82,face:'w',ang:'iso',flat:true,up:0.007,ft:[-0.777,0.819,-0.104],r:[-0.959,0.959,0,1.683],m:'0078001fe003ff80fffc1fffe3fffe7fffffffff9fffc1fffc1fffc1fffc1fffc1fffc1fff81fff81fff81fff81fff81fff81fff83fffc1fffc0fff807fe003f8001f0000c00'},
+ cooler:{path:'assets/r406/props/server-cooler.webp',h:95,face:'w',ang:'iso',flat:true,ft:[-0.777,0.756,-0.167],r:[-0.782,0.782,0,1.965],m:'00020000f0003f801ffe07fff3ffff7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0fffc03fe001fc000f800'},
+ kiosk:{path:'assets/world-r80/r80-054.webp',h:72,face:'n',ang:'iso',flat:true,up:0.006,ft:[-0.459,0.483,0.11],r:[-0.483,0.483,0,1.48],m:'03c0007f000ffe00fffc0ffff1ffff1ffff1ffff3ffff7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff7ffff0fffc03ff800fe0001c0'},
+ alarm:{path:'assets/world-r80/r80-056.webp',h:53,face:'n',ang:'iso',flat:true,up:0.006,ft:[-0.243,0.243,0.109],r:[-0.243,0.245,0,1.089],m:'00fc007ff81fff87ffff7ffffffffffffffffffffffff7ffff3ffff1ffff0ffff7ffffffffffffffffffffffffffffffffffffffffffffffffffffff7ffff03fff00ff8001f0'},
+ steps:{path:'assets/world-r80/r80-055.webp',h:100,face:'w',ang:'iso',flat:true,up:0.005,ft:[-1.238,1.238,-0.11],clear:1.4,r:[-1.243,1.243,0,2.055],m:'0080000c0000b000098000cc000a6000d7001ed807fcc1ffe43ffd2fffc9fffe5ffffeffffaffff8ffff8fffffffffffffff7ffff3ffff1fffc0fff807fe003f8001f0000c00'}
 }/*ART*/);
 const sampMemo=new Map();
 // 불투명 칸 → 발 기준 3D 점 [dx,dy,z] — 조형물 그림은 발을 지나 카메라를 향해 서고 위로 갈수록 뒤(-x·-y)로 30° 눕는 판(R412·R521 과 같은 식)
@@ -127,11 +133,19 @@ const G=Object.freeze({
  prepT:{w:1.9,lim:{table:1},it:[['table_n',.95]]},
  range1:{w:1.05,lim:{range:1},it:[['range_n',.5]]},
  range2:{w:2.1,lim:{range:2},it:[['range_n',.5],['range_n',1.56]]},
- fridge2:{w:2.1,lim:{fridge:2},it:[['fridge_sloth',.5],['fridge_sloth',1.55]]}
+ fridge2:{w:2.1,lim:{fridge:2},it:[['fridge_sloth',.5],['fridge_sloth',1.55]]},
+ // 건물 안(R525 — 불난 층·7층·공동 주택): 계단·경보함·배관 기계·환기구·냉각기·단말기. 기존 게임 그림을 한 방향 그림으로 쓴다(반대쪽 벽에서는 거울)
+ steps1:{w:2.2,lim:{steps:1},it:[['steps',1.1]]},
+ alarm1:{w:.8,lim:{alarm:1},it:[['alarm',.4]]},
+ machine1:{w:1.5,lim:{machine:1},it:[['machine',.75]]},
+ cooler1:{w:1.55,lim:{cooler:1},it:[['cooler',.78]]},
+ vent1:{w:1.55,lim:{vent:1},it:[['vent',.78]]},
+ kiosk1:{w:1.0,lim:{kiosk:1},it:[['kiosk',.5]]},
+ kioskDesk:{w:3.0,lim:{kiosk:1,table:1},it:[['kiosk',.5],['table_n',2.0],['chairb_n',2.0,.78]]}
 });
 // 한 방에 같은 물건이 되풀이되지 않게(사용자 2026-11-09 "같은 물건이 같은 간격으로 반복되는 현상은 줄이고"): 묶음의 lim 이 방마다 이 수를 넘으면 그 묶음은 건너뛴다
 //  쓰임새가 lim 을 따로 가지면 그 방에서는 그 수를 쓴다(거울 회랑의 거울, 화구 구획의 화구처럼 되풀이가 그 방의 뜻인 곳)
-const LIMIT=Object.freeze({tv:1,sofa:2,table:1,trash:1,wardrobe:3,fridge:2,bed:3,case:3,chair:3,mirror:1,range:2});
+const LIMIT=Object.freeze({tv:1,sofa:2,table:1,trash:1,wardrobe:3,fridge:2,bed:3,case:3,chair:3,mirror:1,range:2,steps:1,alarm:1,machine:2,cooler:2,vent:1,kiosk:2});
 const fits=(g,cnt,U)=>!g.lim||Object.keys(g.lim).every(k=>(cnt[k]||0)+g.lim[k]<=((U&&U.lim&&U.lim[k])||LIMIT[k]));
 const take=(g,cnt,s)=>{if(g.lim)for(const k in g.lim)cnt[k]=(cnt[k]||0)+s*g.lim[k];};
 // 쓰임새 = [큰 벽 줄(차례로 돌려 가며 채움), 옆 벽 줄, 안쪽 구석 가구, 큰 벽·옆 벽에 놓을 묶음 상한]
@@ -163,6 +177,15 @@ const USE=Object.freeze({
  ranges:{main:['range2','prepT','range2','range1'],side:['range2','fridge','range1'],corner:null,cap:[6,4],lim:{range:8,table:2}},
  mess:{main:['dine','chairs2','wardrobe'],side:['chairs2','wardrobe'],corner:null,cap:[3,2]},
  // 길목(방과 방 사이): 긴 벽 한 줄에 한 묶음만 — 지나는 길은 비운다
+ // 건물 안(R525): 계단실 = 계단 한 줄 + 경보함, 방화 전실 = 경보함·장비 장·버리고 간 짐, 그을린 복도·입구 = 흩어진 짐, 설비실 = 기계 줄, 보안실 = 단말기 + 책상, 빈 방 = 남은 짐 한두 점
+ stairs:{main:['steps1','alarm1'],side:['alarm1'],corner:null,cap:[2,1],more:false},
+ landing:{main:['alarm1','trash'],side:['trash'],corner:null,cap:[1,1],more:false},
+ firelobby:{main:['alarm1','wardrobe','chairs2','case1'],side:['case1','trash','chairs2'],corner:null,cap:[3,2]},
+ evac:{main:['case1','trash','cases'],side:['case1','chairs2'],corner:null,cap:[2,1],more:false},
+ plant:{main:['machine1','cooler1','machine1','vent1'],side:['cooler1','wardrobe','vent1'],corner:'wardrobe_n',cap:[4,3]},
+ security:{main:['kioskDesk','wardrobe2','kiosk1','chairs2'],side:['wardrobe','kiosk1','chairs2'],corner:'wardrobe_n',cap:[4,3]},
+ lobby7:{main:['chairs2','case1','wardrobe','alarm1','cases'],side:['chairs2','case1','trash'],corner:null,cap:[3,2]}/* 호텔 층 전실: 의자와 투숙객 짐 */,
+ vacant:{main:['case1','trash'],side:['case1'],corner:null,cap:[2,1],more:false},
  hall:{main:['parked','wheel','crutch'],side:[],corner:null,cap:[1,0],min:5,more:false},
  passage:{main:['trash','case1'],side:[],corner:null,cap:[1,0],min:5,more:false}
 });
@@ -171,7 +194,10 @@ const REGION=Object.freeze({
  ep1a09:[[/주사실/,'inject'],[/처치 대기실/,'wait'],[/관찰실/,'observe'],[/약품 보관실/,'drug'],[/^앞방$/,'ante'],[/^입구$/,'lobby'],[/^길목$/,'hall']],
  ep1b02:[[/거실/,'living'],[/작은 방/,'bedroom'],[/물품 보관실/,'store'],[/현관/,'foyer'],[/^앞방$/,['den','den2','den3']],[/^입구$/,'foyer'],[/^길목$/,'passage']],
  ep1b03:[[/정돈된 거실/,'parlor'],[/서재/,['study','study2']],[/거울 회랑/,'mirrors'],[/^앞방$/,'parlor'],[/^입구$/,'vestibule']],/* 복도 42곳은 손대지 않는다 */
- ep1b04:[[/준비대/,'prep'],[/식재료 보관실/,['pantry','pantry2']],[/화구 구획/,'ranges'],[/^앞방$/,'mess'],[/^입구$/,'mess']]
+ ep1b04:[[/준비대/,'prep'],[/식재료 보관실/,['pantry','pantry2']],[/화구 구획/,'ranges'],[/^앞방$/,'mess'],[/^입구$/,'mess']],
+ ep1b07:[[/피난 계단/,'stairs'],[/방화 전실/,'firelobby'],[/설비실/,'plant'],[/그을린 복도/,'evac'],[/^앞방$/,'firelobby'],[/^입구$/,'evac']],/* 길목 26곳은 손대지 않는다 */
+ murder02:[[/계단참/,'stairs'],[/보안실/,'security'],[/설비실/,'plant'],[/7층 전실/,'lobby7'],[/^앞방$/,'lobby7'],[/^입구$/,'lobby7']],
+ murder04:[[/공동 계단/,'stairs'],[/계단참/,'landing'],[/빈 방/,'vacant'],[/^앞방$/,['den','den2','den3']],[/^입구$/,'foyer']]/* 공동 복도·길목은 손대지 않는다 */
 });
 const SKIP=/보스|전투실|다음 구역|갈림길|순환로|마당|쉼길/;
 const enabled=r=>!!(prefs.on&&r&&REGION[r.id]&&(!r.layer||r.layer==='STORY')&&r.exploration&&Array.isArray(r.exploration.r224Rooms)&&Array.isArray(r.props)&&!r.exploration.samongR103&&!r.exploration.samongR115);
@@ -269,12 +295,14 @@ function plan(r){const L=r.exploration,hit=hitOf(r),W=L.worldWardR81||{},F=fight
   rooms.push({id:q.id,name,use,rect:b,count:cand.length-before,main:main.wall+'@'+main.at.toFixed(2)+':'+main.a0+'-'+main.a1,side:side?side.wall+'@'+side.at.toFixed(2)+':'+side.a0+'-'+side.a1:null});}
  stats.builds++;stats.rooms=rooms.length;stats.dropped=dropped;stats.pushed=pushed;dropLog=log;lastPlan={region:r.id,rooms};return{cand,rooms};}
 // 조형물·문·상자가 바뀌면(개수) 이 가림만 다시 한다 — 벽 줄 찾기·묻힘 계산은 지역에 들어올 때 한 번
-function resolve(r,cand){const clear=keepClear(r),keep=[],rows=[];for(let i=0;i<cand.length;i++){const{p,lead}=cand[i],ok=(lead<0||keep[lead])&&!clear.some(([cx,cy,cr])=>Math.hypot(cx-p.x,cy-p.y)<cr);keep.push(ok);if(ok)rows.push(p);}
+function resolve(r,cand){const clear=keepClear(r),keep=[],rows=[];for(let i=0;i<cand.length;i++){const{p,lead}=cand[i],big=(ART[p.r523.art]||{}).clear||0/* 큰 그림(계단)은 둘레를 더 비운다 */,ok=(lead<0||keep[lead])&&!clear.some(([cx,cy,cr])=>Math.hypot(cx-p.x,cy-p.y)<cr+big);keep.push(ok);if(ok)rows.push(p);}
  stats.placed=rows.length;return rows;}
 const memo=new WeakMap();
 function state(r){if(!enabled(r))return null;const L=r.exploration;let m=memo.get(r);
- if(!m||m.L!==L){m={L,sig:-1,cand:[],rows:[]};try{const res=plan(r);m.cand=res.cand;}catch(e){fail(e);}memo.set(r,m);}
- const sig=sigOf(r);if(m.sig!==sig){m.sig=sig;try{m.rows=resolve(r,m.cand);}catch(e){fail(e);m.rows=[];}}return m;}
+ if(!m||m.L!==L){m={L,sig:-1,cand:[],rows:[],diag:null};try{const res=plan(r);m.cand=res.cand;m.diag={plan:lastPlan,rooms:stats.rooms,dropped:stats.dropped,pushed:stats.pushed,log:dropLog};}catch(e){fail(e);}memo.set(r,m);}
+ const sig=sigOf(r);if(m.sig!==sig){m.sig=sig;try{m.rows=resolve(r,m.cand);}catch(e){fail(e);m.rows=[];}}
+ /* 진단 값은 지금 지역 것으로 맞춘다(계획은 캐시에서 나오므로 다른 지역을 다녀오면 마지막으로 짠 지역 값이 남았다) */
+ const d=m.diag;if(d&&lastPlan!==d.plan){lastPlan=d.plan;stats.rooms=d.rooms;stats.dropped=d.dropped;stats.pushed=d.pushed;dropLog=d.log;}stats.placed=m.rows.length;return m;}
 const list=r=>state(r)?.rows||[];
 
 // ---- 그림 읽기 --------------------------------------------------------------------------------------
