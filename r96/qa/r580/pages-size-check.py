@@ -3,7 +3,8 @@
 
 사용: python3 r96/qa/r580/pages-size-check.py   (먼저 scripts/build-r96.py 로 site 를 만든다)
 확인하는 것
- 1. 정상 경로: scripts/pages-pack.py 가 site 를 배포본으로 묶으면 1,000,000,000 바이트 아래이고,
+ 1. 정상 경로: scripts/pages-pack.py 가 site 를 배포본으로 묶으면 pages-exclude.json 의 budgetBytes 아래이고
+    (R580 1,000,000,000 → R454 사용자 결정으로 1,100,000,000, 그보다 큰 예산은 이 검사가 거부),
     빠진 파일은 pages-exclude.json 의 접두어에 든 것뿐이며, 나머지 파일은 모두 있다.
  2. 화질: 다시 압축한 PNG 는 RGBA 화소가 원본과 완전히 같고, 그 밖의 파일은 바이트가 원본과 같다.
  3. 근거 회귀: 옛 서사 음성 v1 을 뺄 수 있는 이유(내장 서사 목록이 비어 있음, 다른 런타임 js 가 경로를
@@ -64,7 +65,8 @@ def main():
         deploy = json.loads((out / 'pages-deploy.json').read_text())
         files = [p for p in out.rglob('*') if p.is_file()]
         total = sum(p.stat().st_size for p in files)
-        check('배포본 1,000,000,000 바이트 미만', total < 1_000_000_000, f'{total:,} bytes ({len(files)} files)')
+        budget = int(exc['budgetBytes'])  # R454: 예산은 pages-exclude.json 값(사용자 결정으로 1.1GB)
+        check(f'배포본 예산 {budget:,} 바이트 미만', 900_000_000 < budget <= 1_100_000_000 and total < budget, f'{total:,} bytes ({len(files)} files)')
         check('pages-deploy.json 총량이 실제와 같음', deploy.get('totalBytes') == total, deploy.get('totalBytes'))
         site_total = sum(r['bytes'] for r in rows.values())
         check('원본 사이트보다 90MB 넘게 줄었음', site_total - total > 90_000_000, f'{(site_total - total) / 1e6:.1f} MB')
