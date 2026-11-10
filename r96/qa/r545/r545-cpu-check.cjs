@@ -38,7 +38,7 @@ function mk(opt={}){const raw={},calls=[];
  return{ctx,raw,calls,err,api:ctx.window.__STORYWORLD_SFX_R541__};}
 (async()=>{
  const A=mk();ok(!A.err&&!!A.api,'오버레이가 오류 없이 올라옴'+(A.err?' ('+A.err.message+')':''));
- ok(A.api?.revision==='R545'&&A.api?.enabledR545?.()===true,'revision R545·켜짐');
+ ok(/^R54[56]$/.test(A.api?.revision||'')&&A.api?.enabledR545?.()===true,'revision R545·켜짐');
  const soft=await A.ctx.audioBuffer('sfx/hit.wav'),orig=await A.raw['sfx/hit.wav'];
  ok(!!soft&&soft!==orig&&soft.length===orig.length,'효과음 경로는 다듬은 버퍼를 돌려줌(길이 같음)');
  const o=orig.getChannelData(0),s=soft?.getChannelData?.(0)||o;

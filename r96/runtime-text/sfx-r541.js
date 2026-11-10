@@ -12,6 +12,8 @@
  *   적 이름으로 테마 6개(body 사람·갑주 / machine 기계 / beast 짐승 / slime 점액·오물 / glass 결정·물건 / spirit 망령·잔영)를 정해 피격음(hitEnemy 가 부르는 enemyHit 한 번 동안만 프로필을 바꿔 끼움 — 엔진의 7번에 1번·1.15초 간격은 그대로)과 죽음음(R541 소멸음 r541Death 한 번 동안만 바꿔 끼움 — 0.6초 간격·보스 제외는 그대로)을 가른다.
  *   영웅 8명은 hurt 프로필을 같은 방식으로 바꿔 끼운다. 버튼 누름은 새 소리(레벨은 지역을 끝낼 때 오르고 그때 clear 소리가 이미 나므로 레벨 업 소리는 넣지 않음). R544 만 끄기: storyworld.r544.sfx = '0'.
  * 끄기: localStorage storyworld.r541.sfx = '0'. Canonical source; copied by scripts/sync-r99.py. * R545 (사용자 2026-11-10 "스피커터지는 소리가 반복적으로 들려서 거슬려"): 효과음 버퍼를 150Hz 고역통과·부드러운 시작/끝으로 다듬고(엔진·R541~R544 모든 효과음), R544 21개를 낮은 쿵 없이 다시 만들고 배율을 낮춤. 끄기: storyworld.r545.sfx = '0'.
+ * R546 (사용자 2026-11-10 "효과음 필요할만한건 모두 다 만들어서 적용하고 품질좋게"): 영웅별 공격·고유기(전에는 엔진의 둔한 '악마 기운'·타격음 돌려쓰기), 블링크·회피·패링·EGO·각성·클리어·강화,
+ *   쓰러짐·창 열기·지역 이동·적 탄환 소리를 ElevenLabs 생성본(scripts/build-sfx-r546.py)으로. 엔진 프로필은 그대로 두고 sound() 한 번의 종류만 바꾼다. 끄기: storyworld.r546.sfx = '0'.
  */
 (()=>{'use strict';
  if(window.__STORYWORLD_SFX_R541__)return;
@@ -23,6 +25,14 @@
  const DIR4='assets/r544/sfx/',THEMES=['body','machine','beast','slime','glass','spirit'],HEROES=['hwando','seoha','neon','michaela','lauren','hunter','slayer','gunner'],
   GAIN4={beast:.4,glass:.4,spirit:.4}, // 죽음음 배율(그 밖 .45). R545: 피격 .55(짐승·결정·망령 .5)·아군 피격 .6 — '스피커 터지는 소리' 신고로 .7~.8 에서 낮춤.
   row4=(name,gain)=>({key:'r544-'+name,path:DIR4+name+'.ogg',gain,r541:true}),themeCache=new Map();let hitNow=null,deathNow=null;
+ let on6=on;try{on6=on&&localStorage.getItem('storyworld.r546.sfx')!=='0';}catch(_){}
+ const DIR6='assets/r546/sfx/',ATK6=['hwando','seoha','neon','michaela','lauren','slayer','gunner'],G6={lauren:.65,neon:.65,michaela:.6},ROWS6={};
+ for(const h of ATK6)ROWS6['r546Atk_'+h]=[['atk-'+h+'-1',G6[h]||.7],['atk-'+h+'-2',G6[h]||.7]];
+ for(const h of [...ATK6,'hunter'])ROWS6['r546Sp_'+h]=[['sp-'+h+'-1',h==='michaela'?.65:.7],['sp-'+h+'-2',h==='michaela'?.65:.7]];
+ Object.assign(ROWS6,{r546Blink:[['blink-1',.7],['blink-2',.7]],r546Dodge:[['dodge-1',.7]],r546Parry:[['parry-1',.7],['parry-2',.7]],r546Ego:[['ego-1',.7]],r546Awake:[['awake-1',.75]],r546Clear:[['clear-1',.75],['clear-2',.75]],
+  r546Upgrade:[['upgrade-1',.7]],r546Fall:[['fall-1',.7]],r546Open:[['open-1',.4]],r546EnemyShot:[['eshot-1',.6],['eshot-2',.6]],r546Portal:[['portal-1',.7]]});
+ const ROLE6={r546Blink:'blink',r546Dodge:'dodge',r546Parry:'parry',r546Ego:'ego',r546Awake:'awake',r546Clear:'clear',r546Upgrade:'upgrade'},PLAIN6={blink:'r546Blink',dodge:'r546Dodge',parry:'r546Parry',ego:'r546Ego',clear:'r546Clear',upgrade:'r546Upgrade'};
+ const SHOT_GAP6=800,OPEN_GAP6=600,PORTAL_GAP6=2000;let lastShot6=-1e9,lastOpen6=-1e9,lastPortal6=-1e9,lastClick6=-1e9,inDeath6=0;
  let on5=on;try{on5=on&&localStorage.getItem('storyworld.r545.sfx')!=='0';}catch(_){}
  const HP5=150,FADE_IN5=.010,FADE_OUT5=.030,soft5=new Set(),softBuf=new WeakMap(),sfxPaths=new Set();let sfxKeys=-1;
  // 적 테마: 이름의 낱말로 정한다(위에서부터 먼저 맞는 것). 어느 것도 아니면 body(사람·갑주형).
@@ -34,7 +44,7 @@
  const themeOf=name=>{if(typeof name!=='string')return'body';let t=themeCache.get(name);if(!t){t='body';for(const[k,re]of THEME_RE)if(re.test(name)){t=k;break;}themeCache.set(name,t);}return t;};
  const VOICE_GAP=2500,VOICE_RANGE=9,seenAttack=new WeakMap(),lastVoice={beast:-1e9,goblin:-1e9};let thunderRoom=null,thunderAt=0;
  const voiceOf=name=>typeof name!=='string'?null:/고블린/.test(name)?['goblin','r543Goblin']:/곰(?!팡)/.test(name)?['beast','r543GrowlLow']:/여우/.test(name)?['beast','r543GrowlHigh']:/짐승|추적견|사냥개|늑대/.test(name)?['beast','r543Growl']:null;
- const DEATH_GAP=600,DOOR_GAP=1500,stats={applied:0,death:0,door:0,bow:0,voice:0,thunder:0,themeHit:0,themeDeath:0,heroHurt:0,click:0,softened:0,skipped:0,errors:0};let lastDeath=-1e9,lastDoor=-1e9,seenRoom=null,seenOpen=new Map();
+ const DEATH_GAP=600,DOOR_GAP=1500,stats={applied:0,death:0,door:0,bow:0,voice:0,thunder:0,themeHit:0,themeDeath:0,heroHurt:0,click:0,softened:0,mapped:0,shotSkipped:0,fall:0,open:0,portal:0,skipped:0,errors:0};let lastDeath=-1e9,lastDoor=-1e9,seenRoom=null,seenOpen=new Map();
  const now=()=>{try{return performance.now();}catch(_){return Date.now();}};
  const quiet=()=>typeof started!=='undefined'&&!started||typeof modal!=='undefined'&&!!modal||typeof loading!=='undefined'&&!!loading;
  function apply(){if(!on||typeof soundProfiles==='undefined'||!soundProfiles)return;
@@ -46,6 +56,8 @@
   if(on4){for(const t of THEMES){soundProfiles['r544Hit_'+t]=[row4('hit-'+t,GAIN4[t]?.5:.55)];soundProfiles['r544Death_'+t]=[row4('death-'+t,GAIN4[t]||.45)];}
    for(const h of HEROES)soundProfiles['r544Hurt_'+h]=[row4('hurt-'+h,.6)];
    soundProfiles.r544Click=[row4('click-1',.35)];}
+  if(on6){const al=window.__STORYWORLD_SFX_COMFORT__?.aliases;for(const[kind,list]of Object.entries(ROWS6)){soundProfiles[kind]=list.map(([name,gain])=>({key:'r546-'+name,path:DIR6+name+'.ogg',gain,r541:true}));
+    const role=/^r546Atk_/.test(kind)?'attack':/^r546Sp_/.test(kind)?'special':ROLE6[kind];if(al&&role)al[kind]=role;}}
   stats.applied++;}
  // R544: 이번 한 번의 sound(kind) 가 어떤 프로필로 울릴지. 엔진은 호출 첫머리에 soundProfiles[kind] 를 읽으므로 그 동안만 바꿔 끼웠다가 되돌린다(간격·역할·음량 규칙은 엔진 것 그대로).
  function swapFor(kind){if(!on4||typeof soundProfiles==='undefined')return null;const p=typeof player!=='undefined'?player:null;let rows=null,stat=null;
@@ -61,6 +73,11 @@
    for(let i=0;i<n;i++){const x=s[i];y1=a*(y1+x-x1);x1=x;y2=a*(y2+y1-x2);x2=y1;d[i]=y2;}
    for(let i=0;i<ni;i++){const g=Math.sin(Math.PI/2*i/ni);d[i]*=g*g;}for(let i=0;i<no;i++){const g=Math.sin(Math.PI/2*i/no);d[n-1-i]*=g*g;}}
   return out;}
+ // R546: 이번 sound(kind) 를 새 소리 종류로 바꾼다. null = 그대로, '' = 이번에는 소리 없음(적 탄환 간격).
+ function map6(kind){if(!on6||typeof soundProfiles==='undefined')return null;const hero=typeof player!=='undefined'?player?.hero:null,has=k=>soundProfiles[k]?.length?k:null;
+  if(kind==='attack')return hero&&hero!=='hunter'?has('r546Atk_'+hero):null;if(kind==='special')return hero?has('r546Sp_'+hero):null;
+  if(kind==='awake')return hero==='seoha'?null:has('r546Awake');if(PLAIN6[kind])return has(PLAIN6[kind]);
+  if(typeof kind==='string'&&kind.startsWith('swEnemy')&&has('r546EnemyShot')){const t=now();if(t-lastShot6<SHOT_GAP6){stats.shotSkipped++;return'';}lastShot6=t;return'r546EnemyShot';}return null;}
  function play(kind){try{if(typeof sound==='function')sound(kind);return true;}catch(_){stats.errors++;return false;}}
  if(on){
   try{apply();}catch(_){stats.errors++;}
@@ -72,6 +89,7 @@
     // 디코딩된 버퍼 객체로 기억한다(경로·약속 객체는 다른 오버레이가 감싸면 매번 달라져 엔진 조절기 캐시가 깨진다).
     return Promise.resolve(raw).then(b=>{if(!b||typeof b!=='object')return b;let o=softBuf.get(b);if(!o){try{o=soften(b);}catch(_){stats.errors++;o=null;}if(o)stats.softened++;else o=b;softBuf.set(b,o);}return o;});}catch(_){stats.errors++;return raw;}};}
   if(typeof sound==='function'){const base=sound;sound=function(kind,...a){let k=kind;try{if(kind==='attack'&&typeof player!=='undefined'&&player?.hero==='hunter'&&typeof soundProfiles!=='undefined'&&soundProfiles.r542Bow?.length){k='r542Bow';stats.bow++;}}catch(_){k=kind;}
+    if(k===kind)try{const m=map6(kind);if(m===''){return undefined;}if(m){k=m;stats.mapped++;}}catch(_){k=kind;stats.errors++;}
     let rows=null;try{rows=k===kind?swapFor(kind):null;}catch(_){stats.errors++;}if(!rows)return base.call(this,k,...a);
     const keep=soundProfiles[kind];soundProfiles[kind]=rows;try{return base.call(this,k,...a);}finally{soundProfiles[kind]=keep;}};}
   if(on4&&typeof hitEnemy==='function'){const base=hitEnemy;hitEnemy=function(e){const prev=hitNow;hitNow=e||null;try{return base.apply(this,arguments);}finally{hitNow=prev;}};}
@@ -96,8 +114,13 @@
   }catch(_){stats.errors++;}}
  // 버튼 누름: 화면의 button 을 누른 순간(창이 떠 있어도 울리도록 allowModal).
  if(on4)try{if(typeof document!=='undefined'&&document.addEventListener)document.addEventListener('click',ev=>{try{if(!ev?.target?.closest?.('button')||typeof sound!=='function')return;stats.click++;sound('r544Click',true);}catch(_){stats.errors++;}},true);}catch(_){}
+ // R546: 쓰러짐·창 열기·지역 이동. 창 위에서도 울리게 allowModal. 버튼을 눌러 연 창은 버튼 소리만, 쓰러짐 창은 쓰러짐 소리만.
+ if(on6){try{if(typeof document!=='undefined'&&document.addEventListener)document.addEventListener('click',ev=>{try{if(ev?.target?.closest?.('button'))lastClick6=now();}catch(_){}},true);}catch(_){}
+  if(typeof showDeath==='function'){const base=showDeath;showDeath=function(){inDeath6++;let r;try{r=base.apply(this,arguments);}finally{inDeath6--;}try{if(typeof sound==='function'&&soundProfiles?.r546Fall?.length){stats.fall++;sound('r546Fall',true);}}catch(_){stats.errors++;}return r;};}
+  if(typeof openPanel==='function'){const base=openPanel;openPanel=function(){const r=base.apply(this,arguments);try{const t=now();if(!inDeath6&&typeof started!=='undefined'&&started&&t-lastOpen6>=OPEN_GAP6&&t-lastClick6>=150&&typeof sound==='function'&&soundProfiles?.r546Open?.length){lastOpen6=t;stats.open++;sound('r546Open',true);}}catch(_){stats.errors++;}return r;};}
+  if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=function(){const r=base.apply(this,arguments);try{Promise.resolve(r).then(v=>{try{const t=now();if(v===false||t-lastPortal6<PORTAL_GAP6||typeof sound!=='function'||!soundProfiles?.r546Portal?.length)return;lastPortal6=t;stats.portal++;sound('r546Portal');}catch(_){stats.errors++;}},()=>{});}catch(_){stats.errors++;}return r;};}}
  function tick(){if(!on)return;doorTick();voiceTick();thunderTick();}
  if(on)try{setInterval(tick,160);}catch(_){}
- window.__STORYWORLD_SFX_R541__=Object.freeze({revision:'R545',enabled:()=>on,enabledR544:()=>on4,enabledR545:()=>on5,soften,themeOf,themes:THEMES,heroes:HEROES,tick,apply,inspect:()=>({on,stats:{...stats},r545:{on:on5,highpassHz:HP5,fadeInMs:FADE_IN5*1000,fadeOutMs:FADE_OUT5*1000,softened:stats.softened,paths:[...soft5],directListeningVerified:false},profiles:typeof soundProfiles!=='undefined'?Object.fromEntries(Object.keys(ROWS).map(k=>[k,(soundProfiles[k]||[]).map(r=>r.path)])):null,
+ window.__STORYWORLD_SFX_R541__=Object.freeze({revision:'R546',enabled:()=>on,enabledR544:()=>on4,enabledR545:()=>on5,enabledR546:()=>on6,soften,themeOf,themes:THEMES,heroes:HEROES,tick,apply,inspect:()=>({on,stats:{...stats},r546:{on:on6,mapped:stats.mapped,kinds:Object.keys(ROWS6),generated:'ElevenLabs text-to-sound v2',directListeningVerified:false},r545:{on:on5,highpassHz:HP5,fadeInMs:FADE_IN5*1000,fadeOutMs:FADE_OUT5*1000,softened:stats.softened,paths:[...soft5],directListeningVerified:false},profiles:typeof soundProfiles!=='undefined'?Object.fromEntries(Object.keys(ROWS).map(k=>[k,(soundProfiles[k]||[]).map(r=>r.path)])):null,
   synthesized:true,recorded:false,generatedR544:'ElevenLabs text-to-sound v2',directListeningVerified:false,existingProfilesChanged:false})});
 })();

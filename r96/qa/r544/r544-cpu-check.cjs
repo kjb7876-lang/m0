@@ -2,6 +2,7 @@
 // R544 — 사용자 2026-11-10 "적 죽음과 피격시 효과음(적종-테마를 정해서) 아군 피격시 효과음(영웅별 다르게)" + "기본적으로 있으면 좋을 효과음 생성 적용".
 //  ElevenLabs 로 만든 소리를 다듬어(scripts/build-sfx-r544.py) 적 테마 6개의 피격·죽음, 영웅 8명의 피격, 버튼에 쓴다.
 //  엔진의 피격음 간격(7번에 1번·1.15초)·역할 음량, R541 소멸음의 0.6초 간격·보스 제외는 그대로 두고, 그 한 번의 sound() 동안만 프로필을 바꿔 끼운다.
+// R546 에서 요구가 바뀜(사용자 2026-11-10 14:10Z "효과음 필요할만한건 모두 다 만들어서 적용"): 영웅 평타·강화 소리를 새 소리로 바꾼다. 이 검사는 그 이전 층만 보도록 R546 을 끈 상태(storyworld.r546.sfx='0')로 돌리고, 바뀐 동작은 qa/r546 이 검사한다.
 const fs=require('fs'),path=require('path'),vm=require('vm'),crypto=require('crypto'),cp=require('child_process');
 const ROOT=path.resolve(__dirname,'../../..'),R=path.join(ROOT,'r96');let n=0,bad=0;const ok=(c,m)=>{n++;if(!c){bad++;console.log('FAIL',m);}else console.log('ok  ',m);};
 const rd=f=>{try{return fs.readFileSync(f,'utf8');}catch(_){return'';}};
@@ -31,7 +32,7 @@ ok(total>0&&total<=180000,'음원 합계 180KB 이하('+total+')');
 ok(new Set(names.map(k=>F[k].sha256)).size===names.length&&new Set(HEROES.map(h=>F['hurt-'+h]?.source)).size===8&&new Set(THEMES.map(t=>F['death-'+t]?.source)).size===6&&new Set(THEMES.map(t=>F['hit-'+t]?.source)).size===6,'영웅 8명·테마 6개가 저마다 다른 생성본');
 // ── 동작(vm): 엔진 sound 를 흉내 — 호출 첫머리에 soundProfiles[kind] 를 읽는다.
 function mk(opt={}){const played=[];let now=100000;const listeners={};
- const ctx={window:{},localStorage:{getItem:k=>k==='storyworld.r541.sfx'?(opt.pref??null):k==='storyworld.r544.sfx'?(opt.pref4??null):null,setItem(){}},performance:{now:()=>now},setInterval:()=>0,console,Math,
+ const ctx={window:{},localStorage:{getItem:k=>k==='storyworld.r541.sfx'?(opt.pref??null):k==='storyworld.r544.sfx'?(opt.pref4??null):k==='storyworld.r546.sfx'?'0':null,setItem(){}},performance:{now:()=>now},setInterval:()=>0,console,Math,
   document:{addEventListener:(t,f)=>{(listeners[t]=listeners[t]||[]).push(f);}},
   soundProfiles:{attack:[{path:'a.ogg'}],boss:[{path:'b.ogg'}],enemyHit:[{path:'engine-hit.ogg'}],hurt:[{path:'engine-hurt.ogg'}],upgrade:[{path:'engine-upgrade.ogg'}]},
   setupAudio:()=>'base',started:true,modal:null,loading:false,player:{hp:10,hero:opt.hero||'hwando',x:10,y:10,level:3},room:{id:'A',enemies:[]}};
@@ -44,7 +45,7 @@ function mk(opt={}){const played=[];let now=100000;const listeners={};
  return{ctx,played,err,api:ctx.window.__STORYWORLD_SFX_R541__,adv:ms=>{now+=ms;},run,click:target=>(listeners.click||[]).forEach(f=>f({target})),listeners,
   mob:(name,extra={})=>Object.assign({name,hp:10,x:12,y:10},extra)};}
 const A=mk(),P=A.ctx.soundProfiles,D='assets/r544/sfx/';ok(!A.err&&!!A.api,'오버레이가 오류 없이 올라옴'+(A.err?' ('+A.err.message+')':''));
-ok(/^R54[45]$/.test(A.api?.revision||'')&&A.api?.enabledR544?.()===true,'revision R544 이후·켜짐');
+ok(/^R54[456]$/.test(A.api?.revision||'')&&A.api?.enabledR544?.()===true,'revision R544 이후·켜짐');
 ok(THEMES.every(t=>P['r544Hit_'+t]?.[0]?.path===F['hit-'+t]?.path&&P['r544Death_'+t]?.[0]?.path===F['death-'+t]?.path),'테마 6개 피격·죽음 프로필 = index.json 경로');
 ok(HEROES.every(h=>P['r544Hurt_'+h]?.[0]?.path===F['hurt-'+h]?.path),'영웅 8명 피격 프로필 = index.json 경로');
 ok(!P.r544BossDeath&&!P.r544LevelUp&&P.r544Click?.[0]?.path===D+'click-1.ogg','버튼 프로필(보스 쓰러짐·레벨 업 소리는 넣지 않음)');
