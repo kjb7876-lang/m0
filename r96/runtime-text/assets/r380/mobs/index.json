@@ -3726,19 +3726,26 @@
   {
    "id": "swamp-root-stalker-darkgreen-v2",
    "kind": "strip",
-   "path": "assets/r380/mobs/swamp-root-stalker-darkgreen-v2.webp",
+   "path": "assets/r380/mobs/swamp-root-stalker-darkgreen-v2-walk-d1.webp",
    "cell": [
     448,
     384
    ],
-   "cols": 4,
+   "cols": 12,
    "pivot": [
     244.25,
     325.5
    ],
    "visibleHeight": 268.5,
    "move": [
-    0
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
    ],
    "attack": [
     1,
@@ -3754,8 +3761,8 @@
     "zone": "dist02",
     "name": "^(늪 )?뿌리 추적자"
    },
-   "bytes": 234984,
-   "sha256": "f57947df4adf530b8a2383bca01f8526fe1df55593dabf528eb8e5841fafc6cb",
+   "bytes": 223348,
+   "sha256": "712be2fbc0b0991aeb45df2c4642ff5d6dea5e154ce2f16dd1a6bcfec48f1eac",
    "source": [
     {
      "file": "01-idle.png",
@@ -3774,7 +3781,8 @@
      "sha256": "5c9898cf425fba57d3458582ed6ae3b3c9415b928dd6e2ec482b296c8cd59a2c"
     }
    ],
-   "finalArt": false
+   "finalArt": false,
+   "walkSource": "Dots CX-0067MV_swamp-root-stalker-darkgreen-v2_walk8.png (색은 원본 0칸에 맞춤, R614)"
   },
   {
    "id": "wrath-hound-v1",
@@ -7803,19 +7811,26 @@
   {
    "id": "legacy-m119-nameless-scar-v4",
    "kind": "strip",
-   "path": "assets/r380/mobs/legacy-m119-nameless-scar-v4.webp",
+   "path": "assets/r380/mobs/legacy-m119-nameless-scar-v4-walk-d1.webp",
    "cell": [
     192,
     256
    ],
-   "cols": 4,
+   "cols": 12,
    "pivot": [
     98.25,
     219.0
    ],
    "visibleHeight": 160.0,
    "move": [
-    0
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
    ],
    "attack": [
     0,
@@ -7832,8 +7847,8 @@
     "zone": "hando02",
     "name": "^무명 검흔"
    },
-   "bytes": 111378,
-   "sha256": "d48044981925f00dbbc0be135f8432de45ac315270d50f7974e5641748557bf6",
+   "bytes": 136722,
+   "sha256": "20dee804ba83be913a2e0a1f83306e3b863c6aa756388f9d7b379dfcfb95c071",
    "source": [
     {
      "file": "frame_01.png",
@@ -7852,7 +7867,8 @@
      "sha256": "af0407970cf3e84c778203f6cb96ceda32e7ce84c83fc222792278a5d634d021"
     }
    ],
-   "finalArt": false
+   "finalArt": false,
+   "walkSource": "Dots CX-0067MV_legacy-m119-nameless-scar-v4_walk8.png (색은 원본 0칸에 맞춤, R614)"
   },
   {
    "id": "legacy-m124-silverless-shadow-v4",
@@ -8109,6 +8125,153 @@
      "sha256": "a739ffb35331afb82b7b68330b26f50977323893306b78187997c0ccf079d535"
     }
    ],
+   "finalArt": false
+  },
+  {
+   "id": "hando-timeless-silver-scout-walk-d1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/hando-timeless-silver-scout-walk-d1.webp",
+   "cell": [
+    418,
+    418
+   ],
+   "cols": 9,
+   "pivot": [
+    208.5,
+    397
+   ],
+   "visibleHeight": 370,
+   "move": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "attack": [
+    0
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "hando01",
+    "name": "^악몽 정찰체"
+   },
+   "bytes": 370218,
+   "sha256": "ab4040e39899858810830b0078674d56c62fd7b7e7fed2678b16aeffdf020169",
+   "source": [
+    {
+     "file": "assets/r99/clean/assets/hando-v3123/timeless_silver_scout.webp"
+    },
+    {
+     "file": "CX-0067MV_timeless_silver_scout_walk8.png"
+    }
+   ],
+   "walkSource": "Dots CX-0067MV_timeless_silver_scout_walk8.png (색은 원본에 맞춤, R614)",
+   "finalArt": false
+  },
+  {
+   "id": "hando-silver-seal-sentinel-walk-d1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/hando-silver-seal-sentinel-walk-d1.webp",
+   "cell": [
+    418,
+    418
+   ],
+   "cols": 9,
+   "pivot": [
+    208.5,
+    401
+   ],
+   "visibleHeight": 375,
+   "move": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "attack": [
+    0
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "hando02",
+    "name": "^붕괴선 파수병"
+   },
+   "bytes": 251882,
+   "sha256": "eca571b9004d55928ada9e18653c59a02d455ca111367e850cf93faa891dcc6a",
+   "source": [
+    {
+     "file": "assets/r99/clean/assets/hando-v3123/silver_seal_sentinel.webp"
+    },
+    {
+     "file": "CX-0067MV_silver_seal_sentinel_walk8.png"
+    }
+   ],
+   "walkSource": "Dots CX-0067MV_silver_seal_sentinel_walk8.png (색은 원본에 맞춤, R614)",
+   "finalArt": false
+  },
+  {
+   "id": "hando-memory-excision-connector-walk-d1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/hando-memory-excision-connector-walk-d1.webp",
+   "cell": [
+    418,
+    418
+   ],
+   "cols": 9,
+   "pivot": [
+    208.5,
+    400
+   ],
+   "visibleHeight": 377,
+   "move": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "attack": [
+    0
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "hando02",
+    "name": "^기억절제 연결자"
+   },
+   "bytes": 359754,
+   "sha256": "93b72ab4a47472947f8c3a12370c85404ebc01d87b79bf28e7eab7e6fe35ffa0",
+   "source": [
+    {
+     "file": "assets/r99/clean/assets/hando-v3123/memory_excision_connector.webp"
+    },
+    {
+     "file": "CX-0067MV_memory_excision_connector_walk8.png"
+    }
+   ],
+   "walkSource": "Dots CX-0067MV_memory_excision_connector_walk8.png (색은 원본에 맞춤, R614)",
    "finalArt": false
   }
  ]

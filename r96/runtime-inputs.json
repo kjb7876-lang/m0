@@ -7954,7 +7954,12 @@
     "assets/r561/lauren/lauren-gravity-well-front.webp",
     "lauren-gravity-r561.js",
     "mob-gait-r613.js",
-    "assets/r380/mobs/root-stalker-r74-walk-g1.webp"
+    "assets/r380/mobs/root-stalker-r74-walk-g1.webp",
+    "assets/r380/mobs/swamp-root-stalker-darkgreen-v2-walk-d1.webp",
+    "assets/r380/mobs/legacy-m119-nameless-scar-v4-walk-d1.webp",
+    "assets/r380/mobs/hando-timeless-silver-scout-walk-d1.webp",
+    "assets/r380/mobs/hando-silver-seal-sentinel-walk-d1.webp",
+    "assets/r380/mobs/hando-memory-excision-connector-walk-d1.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9029,5 +9034,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "2066b198204f61cc1ff83a9c2200d8571577eb2d23e26e2655935bde7499cecc"
+  "runtimeManifestSHA256": "3cde1c47f5689beaf965bb6f2d19aada3e29c3f132d485db9b7d9cda31e6ecd2"
 }
