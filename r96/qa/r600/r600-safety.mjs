@@ -38,8 +38,13 @@ ok('narration holds while the game is paused (still narrating, minimum wave end 
 {const idx=await A(()=>window.__STORYWORLD_SURVIVAL_R600__.stageIds().indexOf('last301'));await p.evaluate(i=>window.__STORYWORLD_SURVIVAL_R600__.qaGo(i),idx);
  await p.waitForFunction(()=>room?.id==='last301'&&!loading&&window.__STORYWORLD_SURVIVAL_R600__.state().ready,null,{timeout:240000}).catch(()=>{});
  await A(()=>{if(modal)closePanel(true);});await p.waitForFunction(()=>room.enemies.some(e=>e.hp>0&&e.survivalR600&&e.spawnState==='active'),null,{timeout:180000}).catch(()=>{});
- const k=await A(()=>{if(modal)closePanel(true);const e=room.enemies.find(e=>e.hp>0&&e.survivalR600)||null;if(!e)return{none:true,room:room?.id};e.boss=true;e.hp=0;killEnemy(e);/* 엔진처럼 체력 0 뒤 처치 */return{room:room.id,hp:e.hp,dead:!!e.deadRecorded,hidden:e.spawnState==='hidden',falling:!!room.r75Falling,fin:!!room.finalizing};});
- ok('last301 boss kill in survival is a real kill (no campaign scripted fall)',idx>=0&&k.room==='last301'&&k.hp<=0&&!k.hidden&&!k.falling&&!k.fin,{idx,...k});}
+ // 틱 경로: 보스가 66% 아래로 내려가고 게임 시간이 흘러도 R75 쓰러짐·완료 정리(decorate 가 적 숨김)가 생존 적을 숨기지 않는다
+ const tk=await A(()=>{if(modal)closePanel(true);const e=room.enemies.find(e=>e.hp>0&&e.survivalR600&&e.spawnState==='active');if(!e)return{none:true};e.boss=true;room.engaged=true;e.maxHp=1e6;e.hp=4e5;/* 2초 동안 영웅·코어 공격에 쓰러지지 않게, 66% 아래 */window.__r600tk={e,t:time};return{t:time};});
+ await p.waitForFunction(()=>time>window.__r600tk.t+2,null,{timeout:180000}).catch(()=>{});
+ const tr=await A(()=>{const live=room.enemies.filter(e=>e.survivalR600&&e.hp>0);return{room:room.id,live:live.length,hidden:live.filter(e=>e.spawnState==='hidden').length,fin:!!room.finalizing,heroHp:Math.round(player.hp/maxHP()*100),done:!!progress.STORY?.last301};});
+ ok('last301 tick in survival keeps enemies visible (no scripted fall, no completed-region hiding)',!tk.none&&tr.room==='last301'&&tr.live>0&&tr.hidden===0&&!tr.fin&&!tr.done,{...tr});
+ const k=await A(()=>{if(modal)closePanel(true);const e=room.enemies.find(e=>e.hp>0&&e.survivalR600)||null;if(!e)return{none:true,room:room?.id};e.boss=true;e.hp=0;killEnemy(e);/* 엔진처럼 체력 0 뒤 처치 */const live=room.enemies.filter(o=>o.survivalR600&&o.hp>0);return{room:room.id,hp:e.hp,dead:!!e.deadRecorded,hidden:e.spawnState==='hidden'||live.some(o=>o.spawnState==='hidden'),fin:!!room.finalizing};});
+ ok('last301 boss kill in survival is a real kill (no campaign scripted fall)',idx>=0&&k.room==='last301'&&k.hp<=0&&k.dead&&!k.hidden&&!k.fin,{idx,...k});}
 // 2d) 메뉴 '처음 화면' 이 생존 중에도 나가진다(저장 없이)
 {const s1=await slots();await A(()=>{if(modal)closePanel(true);showMenu();});await p.waitForTimeout(300);await A(()=>document.getElementById('menuTitle')?.click());await p.waitForTimeout(1500);
  const m=await A(()=>({active:window.__STORYWORLD_SURVIVAL_R600__.active(),title:!!document.getElementById('survivalStartR600')}));
