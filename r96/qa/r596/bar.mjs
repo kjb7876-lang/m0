@@ -1,0 +1,11 @@
+import {boot} from './lib.mjs';
+const U=process.env.U,Z=process.env.Z||'dist00',OUT=process.env.OUT,TAG=process.env.TAG||'x';
+const {b,p,errs,skip,go,gameWait}=await boot(U,960,540);await go(Z);
+await p.evaluate(()=>{const b=tick;tick=function(...a){if(player)player.hp=player.maxHp;return b.apply(this,a);};auto=false;});
+const info=await p.evaluate(()=>{const m=(room.enemies||[]).filter(e=>e.hp>0&&!e.boss&&!e.midboss&&!e.r170Tower).sort((a,b)=>Math.hypot(a.x-player.x,a.y-player.y)-Math.hypot(b.x-player.x,b.y-player.y))[0];if(!m)return null;
+ player.x=m.x+2.5;player.y=m.y+1;m.hp=Math.round(m.maxHp*.25);m.speed=0;m.cd=99;window.__mob=m;return {id:m.id,name:m.name,path:m.path};});
+console.log('mob',JSON.stringify(info));await gameWait(.5);
+const r=await p.evaluate(async()=>{window.__cap=null;const base=drawEnemy;drawEnemy=function(e,...a){const c=ctx,st=Array.isArray(c.commands)?c.commands.length:-1;const res=base.apply(this,[e,...a]);if(e===window.__mob&&st>=0&&!window.__cap){window.__cap=c.commands.slice(st).filter(k=>k.kind!=='image'||true).map(k=>({kind:k.kind,owner:k.owner?.id,fill:k.style?.fillStyle,stroke:k.style?.strokeStyle,alpha:k.style?.globalAlpha,img:String(k.image?.src||'').slice(-30),pts:(k.points||k.paths?.[0]?.points||[]).slice(0,4).map(p=>p.map(v=>Math.round(v)))}));}return res;};
+ await new Promise(r=>setTimeout(r,3000));drawEnemy=base;const q=project(window.__mob.x,window.__mob.y);return {foot:[Math.round(q.x),Math.round(q.y)],cmds:window.__cap};});
+console.log(JSON.stringify(r));
+await p.screenshot({path:`${OUT}/${TAG}-bar.png`,clip:{x:Math.max(0,r.foot[0]-120),y:Math.max(0,r.foot[1]-160),width:240,height:220}});await b.close();
