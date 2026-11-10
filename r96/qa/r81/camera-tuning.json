@@ -1,0 +1,2702 @@
+[
+  {
+    "name": "current",
+    "u": 0.2,
+    "v": 0.18,
+    "floor": 0.6948302469135803,
+    "edgeExterior": 0.284375,
+    "results": [
+      {
+        "id": "left-entry",
+        "width": 1280,
+        "height": 720,
+        "before": {
+          "floor": 0.3567708333333333,
+          "inside": 0.4869791666666667,
+          "exterior": 0.5130208333333333,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.5260416666666666,
+          "inside": 0.6848958333333334,
+          "exterior": 0.31510416666666663,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.2,
+          "v": 0
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1280,
+          "height": 720,
+          "zoom": 1.12,
+          "camX": 8.361344537815128,
+          "camY": 105.63865546218487
+        },
+        "hero": {
+          "x": 5,
+          "y": 109
+        }
+      },
+      {
+        "id": "left-entry",
+        "width": 1920,
+        "height": 1080,
+        "before": {
+          "floor": 0.296875,
+          "inside": 0.3984375,
+          "exterior": 0.6015625,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.4791666666666667,
+          "inside": 0.59375,
+          "exterior": 0.40625,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.2,
+          "v": 0
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1920,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 10.042016806722685,
+          "camY": 103.95798319327731
+        },
+        "hero": {
+          "x": 5,
+          "y": 109
+        }
+      },
+      {
+        "id": "left-entry",
+        "width": 2560,
+        "height": 1080,
+        "before": {
+          "floor": 0.3385416666666667,
+          "inside": 0.4244791666666667,
+          "exterior": 0.5755208333333333,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.5260416666666666,
+          "inside": 0.6223958333333334,
+          "exterior": 0.37760416666666663,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.2,
+          "v": 0
+        },
+        "projection": {
+          "tile": 34,
+          "width": 2560,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 11.72268907563025,
+          "camY": 102.27731092436974
+        },
+        "hero": {
+          "x": 5,
+          "y": 109
+        }
+      },
+      {
+        "id": "centre-entry",
+        "width": 1280,
+        "height": 720,
+        "before": {
+          "floor": 0.578125,
+          "inside": 0.7135416666666666,
+          "exterior": 0.28645833333333337,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.7786458333333334,
+          "inside": 0.9296875,
+          "exterior": 0.0703125,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.2,
+          "v": -0.18
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1280,
+          "height": 720,
+          "zoom": 1.12,
+          "camX": 42.957983193277315,
+          "camY": 102.23529411764706
+        },
+        "hero": {
+          "x": 43,
+          "y": 109
+        }
+      },
+      {
+        "id": "centre-entry",
+        "width": 1920,
+        "height": 1080,
+        "before": {
+          "floor": 0.5286458333333334,
+          "inside": 0.65625,
+          "exterior": 0.34375,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.7473958333333334,
+          "inside": 0.8958333333333334,
+          "exterior": 0.10416666666666663,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.2,
+          "v": -0.18
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1920,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 42.936974789915965,
+          "camY": 98.8529411764706
+        },
+        "hero": {
+          "x": 43,
+          "y": 109
+        }
+      },
+      {
+        "id": "centre-entry",
+        "width": 2560,
+        "height": 1080,
+        "before": {
+          "floor": 0.5260416666666666,
+          "inside": 0.6328125,
+          "exterior": 0.3671875,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.7552083333333334,
+          "inside": 0.8880208333333334,
+          "exterior": 0.11197916666666663,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.2,
+          "v": -0.18
+        },
+        "projection": {
+          "tile": 34,
+          "width": 2560,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 44.61764705882353,
+          "camY": 97.17226890756302
+        },
+        "hero": {
+          "x": 43,
+          "y": 109
+        }
+      },
+      {
+        "id": "right-entry",
+        "width": 1280,
+        "height": 720,
+        "before": {
+          "floor": 0.40625,
+          "inside": 0.5052083333333334,
+          "exterior": 0.49479166666666663,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.546875,
+          "inside": 0.6927083333333334,
+          "exterior": 0.30729166666666663,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0,
+          "v": -0.18
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1280,
+          "height": 720,
+          "zoom": 1.12,
+          "camX": 79.59663865546219,
+          "camY": 105.59663865546219
+        },
+        "hero": {
+          "x": 83,
+          "y": 109
+        }
+      },
+      {
+        "id": "right-entry",
+        "width": 1920,
+        "height": 1080,
+        "before": {
+          "floor": 0.3567708333333333,
+          "inside": 0.4427083333333333,
+          "exterior": 0.5572916666666667,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.5208333333333334,
+          "inside": 0.6197916666666666,
+          "exterior": 0.38020833333333337,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0,
+          "v": -0.18
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1920,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 77.89495798319328,
+          "camY": 103.89495798319328
+        },
+        "hero": {
+          "x": 83,
+          "y": 109
+        }
+      },
+      {
+        "id": "right-entry",
+        "width": 2560,
+        "height": 1080,
+        "before": {
+          "floor": 0.3020833333333333,
+          "inside": 0.359375,
+          "exterior": 0.640625,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.4583333333333333,
+          "inside": 0.5416666666666666,
+          "exterior": 0.45833333333333337,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0,
+          "v": -0.18
+        },
+        "projection": {
+          "tile": 34,
+          "width": 2560,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 77.89495798319328,
+          "camY": 103.89495798319328
+        },
+        "hero": {
+          "x": 83,
+          "y": 109
+        }
+      },
+      {
+        "id": "boss-room",
+        "width": 1280,
+        "height": 720,
+        "before": {
+          "floor": 0.6380208333333334,
+          "inside": 0.9401041666666666,
+          "exterior": 0.05989583333333337,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.7734375,
+          "inside": 1,
+          "exterior": 0,
+          "samples": 384
+        },
+        "offset": {
+          "u": -0.2,
+          "v": 0.18
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1280,
+          "height": 720,
+          "zoom": 1.12,
+          "camX": 20.04201680672269,
+          "camY": 18.76470588235294
+        },
+        "hero": {
+          "x": 20,
+          "y": 12
+        }
+      },
+      {
+        "id": "boss-room",
+        "width": 1920,
+        "height": 1080,
+        "before": {
+          "floor": 0.5859375,
+          "inside": 0.7994791666666666,
+          "exterior": 0.20052083333333337,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.7395833333333334,
+          "inside": 0.9453125,
+          "exterior": 0.0546875,
+          "samples": 384
+        },
+        "offset": {
+          "u": -0.2,
+          "v": 0.18
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1920,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 20.06302521008403,
+          "camY": 22.14705882352941
+        },
+        "hero": {
+          "x": 20,
+          "y": 12
+        }
+      },
+      {
+        "id": "boss-room",
+        "width": 2560,
+        "height": 1080,
+        "before": {
+          "floor": 0.53125,
+          "inside": 0.7291666666666666,
+          "exterior": 0.27083333333333337,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.6822916666666666,
+          "inside": 0.8880208333333334,
+          "exterior": 0.11197916666666663,
+          "samples": 384
+        },
+        "offset": {
+          "u": -0.1,
+          "v": 0.18
+        },
+        "projection": {
+          "tile": 34,
+          "width": 2560,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 21.743697478991596,
+          "camY": 20.466386554621845
+        },
+        "hero": {
+          "x": 20,
+          "y": 12
+        }
+      },
+      {
+        "id": "upper-ward",
+        "width": 1280,
+        "height": 720,
+        "before": {
+          "floor": 0.5390625,
+          "inside": 0.7994791666666666,
+          "exterior": 0.20052083333333337,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.7057291666666666,
+          "inside": 0.9375,
+          "exterior": 0.0625,
+          "samples": 384
+        },
+        "offset": {
+          "u": -0.2,
+          "v": 0.09
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1280,
+          "height": 720,
+          "zoom": 1.12,
+          "camX": 74.34033613445378,
+          "camY": 14.063025210084032
+        },
+        "hero": {
+          "x": 76,
+          "y": 9
+        }
+      },
+      {
+        "id": "upper-ward",
+        "width": 1920,
+        "height": 1080,
+        "before": {
+          "floor": 0.421875,
+          "inside": 0.6067708333333334,
+          "exterior": 0.39322916666666663,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.59375,
+          "inside": 0.8046875,
+          "exterior": 0.1953125,
+          "samples": 384
+        },
+        "offset": {
+          "u": -0.2,
+          "v": 0.09
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1920,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 73.51050420168067,
+          "camY": 16.59453781512605
+        },
+        "hero": {
+          "x": 76,
+          "y": 9
+        }
+      },
+      {
+        "id": "upper-ward",
+        "width": 2560,
+        "height": 1080,
+        "before": {
+          "floor": 0.4140625,
+          "inside": 0.5859375,
+          "exterior": 0.4140625,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.5859375,
+          "inside": 0.7864583333333334,
+          "exterior": 0.21354166666666663,
+          "samples": 384
+        },
+        "offset": {
+          "u": -0.2,
+          "v": 0.09
+        },
+        "projection": {
+          "tile": 34,
+          "width": 2560,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 71.82983193277312,
+          "camY": 18.27521008403361
+        },
+        "hero": {
+          "x": 76,
+          "y": 9
+        }
+      },
+      {
+        "id": "north-exit",
+        "width": 1280,
+        "height": 720,
+        "before": {
+          "floor": 0.3203125,
+          "inside": 0.4791666666666667,
+          "exterior": 0.5208333333333333,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.4895833333333333,
+          "inside": 0.6432291666666666,
+          "exterior": 0.35677083333333337,
+          "samples": 384
+        },
+        "offset": {
+          "u": -0.2,
+          "v": 0.18
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1280,
+          "height": 720,
+          "zoom": 1.12,
+          "camX": 5.042016806722689,
+          "camY": 10.26470588235294
+        },
+        "hero": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      {
+        "id": "north-exit",
+        "width": 1920,
+        "height": 1080,
+        "before": {
+          "floor": 0.2682291666666667,
+          "inside": 0.40625,
+          "exterior": 0.59375,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.4088541666666667,
+          "inside": 0.5833333333333334,
+          "exterior": 0.41666666666666663,
+          "samples": 384
+        },
+        "offset": {
+          "u": -0.1,
+          "v": 0.18
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1920,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 7.584033613445378,
+          "camY": 11.126050420168067
+        },
+        "hero": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      {
+        "id": "north-exit",
+        "width": 2560,
+        "height": 1080,
+        "before": {
+          "floor": 0.20833333333333334,
+          "inside": 0.3333333333333333,
+          "exterior": 0.6666666666666667,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.3489583333333333,
+          "inside": 0.5104166666666666,
+          "exterior": 0.48958333333333337,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0,
+          "v": 0.18
+        },
+        "projection": {
+          "tile": 34,
+          "width": 2560,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 10.105042016806722,
+          "camY": 8.605042016806722
+        },
+        "hero": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      {
+        "id": "west-route",
+        "width": 1280,
+        "height": 720,
+        "before": {
+          "floor": 0.875,
+          "inside": 1,
+          "exterior": 0,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.9296875,
+          "inside": 1,
+          "exterior": 0,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.2,
+          "v": -0.18
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1280,
+          "height": 720,
+          "zoom": 1.12,
+          "camX": 18.457983193277315,
+          "camY": 88.73529411764706
+        },
+        "hero": {
+          "x": 18.5,
+          "y": 95.5
+        }
+      },
+      {
+        "id": "west-route",
+        "width": 1920,
+        "height": 1080,
+        "before": {
+          "floor": 0.7708333333333334,
+          "inside": 0.890625,
+          "exterior": 0.109375,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.875,
+          "inside": 0.9791666666666666,
+          "exterior": 0.02083333333333337,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.2,
+          "v": 0
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1920,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 23.542016806722685,
+          "camY": 90.45798319327731
+        },
+        "hero": {
+          "x": 18.5,
+          "y": 95.5
+        }
+      },
+      {
+        "id": "west-route",
+        "width": 2560,
+        "height": 1080,
+        "before": {
+          "floor": 0.7109375,
+          "inside": 0.8229166666666666,
+          "exterior": 0.17708333333333337,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.8489583333333334,
+          "inside": 0.9583333333333334,
+          "exterior": 0.04166666666666663,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.2,
+          "v": 0
+        },
+        "projection": {
+          "tile": 34,
+          "width": 2560,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 25.22268907563025,
+          "camY": 88.77731092436974
+        },
+        "hero": {
+          "x": 18.5,
+          "y": 95.5
+        }
+      },
+      {
+        "id": "east-route",
+        "width": 1280,
+        "height": 720,
+        "before": {
+          "floor": 0.8776041666666666,
+          "inside": 1,
+          "exterior": 0,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.9505208333333334,
+          "inside": 1,
+          "exterior": 0,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.2,
+          "v": -0.18
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1280,
+          "height": 720,
+          "zoom": 1.12,
+          "camX": 68.45798319327731,
+          "camY": 88.73529411764706
+        },
+        "hero": {
+          "x": 68.5,
+          "y": 95.5
+        }
+      },
+      {
+        "id": "east-route",
+        "width": 1920,
+        "height": 1080,
+        "before": {
+          "floor": 0.8177083333333334,
+          "inside": 0.90625,
+          "exterior": 0.09375,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.8984375,
+          "inside": 0.984375,
+          "exterior": 0.015625,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0,
+          "v": -0.18
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1920,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 63.39495798319328,
+          "camY": 90.39495798319328
+        },
+        "hero": {
+          "x": 68.5,
+          "y": 95.5
+        }
+      },
+      {
+        "id": "east-route",
+        "width": 2560,
+        "height": 1080,
+        "before": {
+          "floor": 0.7317708333333334,
+          "inside": 0.8359375,
+          "exterior": 0.1640625,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.8385416666666666,
+          "inside": 0.9453125,
+          "exterior": 0.0546875,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0,
+          "v": -0.18
+        },
+        "projection": {
+          "tile": 34,
+          "width": 2560,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 63.39495798319328,
+          "camY": 90.39495798319328
+        },
+        "hero": {
+          "x": 68.5,
+          "y": 95.5
+        }
+      },
+      {
+        "id": "middle-ward",
+        "width": 1280,
+        "height": 720,
+        "before": {
+          "floor": 0.890625,
+          "inside": 1,
+          "exterior": 0,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.953125,
+          "inside": 1,
+          "exterior": 0,
+          "samples": 384
+        },
+        "offset": {
+          "u": -0.2,
+          "v": 0.18
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1280,
+          "height": 720,
+          "zoom": 1.12,
+          "camX": 21.04201680672269,
+          "camY": 66.76470588235294
+        },
+        "hero": {
+          "x": 21,
+          "y": 60
+        }
+      },
+      {
+        "id": "middle-ward",
+        "width": 1920,
+        "height": 1080,
+        "before": {
+          "floor": 0.8697916666666666,
+          "inside": 0.9713541666666666,
+          "exterior": 0.02864583333333337,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.9010416666666666,
+          "inside": 1,
+          "exterior": 0,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.1,
+          "v": 0.09
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1920,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 26.073529411764703,
+          "camY": 60.03151260504202
+        },
+        "hero": {
+          "x": 21,
+          "y": 60
+        }
+      },
+      {
+        "id": "middle-ward",
+        "width": 2560,
+        "height": 1080,
+        "before": {
+          "floor": 0.8411458333333334,
+          "inside": 0.9401041666666666,
+          "exterior": 0.05989583333333337,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.8984375,
+          "inside": 0.9973958333333334,
+          "exterior": 0.0026041666666666297,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.1,
+          "v": 0.18
+        },
+        "projection": {
+          "tile": 34,
+          "width": 2560,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 29.466386554621845,
+          "camY": 61.74369747899159
+        },
+        "hero": {
+          "x": 21,
+          "y": 60
+        }
+      }
+    ]
+  },
+  {
+    "name": "wide",
+    "u": 0.28,
+    "v": 0.24,
+    "floor": 0.7337962962962963,
+    "edgeExterior": 0.2225694444444444,
+    "results": [
+      {
+        "id": "left-entry",
+        "width": 1280,
+        "height": 720,
+        "before": {
+          "floor": 0.3567708333333333,
+          "inside": 0.4869791666666667,
+          "exterior": 0.5130208333333333,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.5963541666666666,
+          "inside": 0.7630208333333334,
+          "exterior": 0.23697916666666663,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.28,
+          "v": 0
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1280,
+          "height": 720,
+          "zoom": 1.12,
+          "camX": 9.705882352941174,
+          "camY": 104.29411764705883
+        },
+        "hero": {
+          "x": 5,
+          "y": 109
+        }
+      },
+      {
+        "id": "left-entry",
+        "width": 1920,
+        "height": 1080,
+        "before": {
+          "floor": 0.296875,
+          "inside": 0.3984375,
+          "exterior": 0.6015625,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.5494791666666666,
+          "inside": 0.6744791666666666,
+          "exterior": 0.32552083333333337,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.28,
+          "v": 0
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1920,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 12.058823529411761,
+          "camY": 101.94117647058823
+        },
+        "hero": {
+          "x": 5,
+          "y": 109
+        }
+      },
+      {
+        "id": "left-entry",
+        "width": 2560,
+        "height": 1080,
+        "before": {
+          "floor": 0.3385416666666667,
+          "inside": 0.4244791666666667,
+          "exterior": 0.5755208333333333,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.5963541666666666,
+          "inside": 0.7005208333333334,
+          "exterior": 0.29947916666666663,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.28,
+          "v": 0
+        },
+        "projection": {
+          "tile": 34,
+          "width": 2560,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 14.411764705882355,
+          "camY": 99.58823529411765
+        },
+        "hero": {
+          "x": 5,
+          "y": 109
+        }
+      },
+      {
+        "id": "centre-entry",
+        "width": 1280,
+        "height": 720,
+        "before": {
+          "floor": 0.578125,
+          "inside": 0.7135416666666666,
+          "exterior": 0.28645833333333337,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.8229166666666666,
+          "inside": 0.9713541666666666,
+          "exterior": 0.02864583333333337,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.28,
+          "v": -0.24
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1280,
+          "height": 720,
+          "zoom": 1.12,
+          "camX": 43.168067226890756,
+          "camY": 99.75630252100841
+        },
+        "hero": {
+          "x": 43,
+          "y": 109
+        }
+      },
+      {
+        "id": "centre-entry",
+        "width": 1920,
+        "height": 1080,
+        "before": {
+          "floor": 0.5286458333333334,
+          "inside": 0.65625,
+          "exterior": 0.34375,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.8125,
+          "inside": 0.953125,
+          "exterior": 0.046875,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.28,
+          "v": -0.24
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1920,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 43.25210084033614,
+          "camY": 95.1344537815126
+        },
+        "hero": {
+          "x": 43,
+          "y": 109
+        }
+      },
+      {
+        "id": "centre-entry",
+        "width": 2560,
+        "height": 1080,
+        "before": {
+          "floor": 0.5260416666666666,
+          "inside": 0.6328125,
+          "exterior": 0.3671875,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.8203125,
+          "inside": 0.9453125,
+          "exterior": 0.0546875,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.28,
+          "v": -0.24
+        },
+        "projection": {
+          "tile": 34,
+          "width": 2560,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 45.60504201680673,
+          "camY": 92.78151260504202
+        },
+        "hero": {
+          "x": 43,
+          "y": 109
+        }
+      },
+      {
+        "id": "right-entry",
+        "width": 1280,
+        "height": 720,
+        "before": {
+          "floor": 0.40625,
+          "inside": 0.5052083333333334,
+          "exterior": 0.49479166666666663,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.59375,
+          "inside": 0.75,
+          "exterior": 0.25,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0,
+          "v": -0.24
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1280,
+          "height": 720,
+          "zoom": 1.12,
+          "camX": 78.46218487394958,
+          "camY": 104.46218487394958
+        },
+        "hero": {
+          "x": 83,
+          "y": 109
+        }
+      },
+      {
+        "id": "right-entry",
+        "width": 1920,
+        "height": 1080,
+        "before": {
+          "floor": 0.3567708333333333,
+          "inside": 0.4427083333333333,
+          "exterior": 0.5572916666666667,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.578125,
+          "inside": 0.6822916666666666,
+          "exterior": 0.31770833333333337,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0,
+          "v": -0.24
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1920,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 76.19327731092437,
+          "camY": 102.19327731092437
+        },
+        "hero": {
+          "x": 83,
+          "y": 109
+        }
+      },
+      {
+        "id": "right-entry",
+        "width": 2560,
+        "height": 1080,
+        "before": {
+          "floor": 0.3020833333333333,
+          "inside": 0.359375,
+          "exterior": 0.640625,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.5182291666666666,
+          "inside": 0.5989583333333334,
+          "exterior": 0.40104166666666663,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0,
+          "v": -0.24
+        },
+        "projection": {
+          "tile": 34,
+          "width": 2560,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 76.19327731092437,
+          "camY": 102.19327731092437
+        },
+        "hero": {
+          "x": 83,
+          "y": 109
+        }
+      },
+      {
+        "id": "boss-room",
+        "width": 1280,
+        "height": 720,
+        "before": {
+          "floor": 0.6380208333333334,
+          "inside": 0.9401041666666666,
+          "exterior": 0.05989583333333337,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.8020833333333334,
+          "inside": 1,
+          "exterior": 0,
+          "samples": 384
+        },
+        "offset": {
+          "u": -0.28,
+          "v": 0.24
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1280,
+          "height": 720,
+          "zoom": 1.12,
+          "camX": 19.83193277310924,
+          "camY": 21.243697478991596
+        },
+        "hero": {
+          "x": 20,
+          "y": 12
+        }
+      },
+      {
+        "id": "boss-room",
+        "width": 1920,
+        "height": 1080,
+        "before": {
+          "floor": 0.5859375,
+          "inside": 0.7994791666666666,
+          "exterior": 0.20052083333333337,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.7578125,
+          "inside": 0.9713541666666666,
+          "exterior": 0.02864583333333337,
+          "samples": 384
+        },
+        "offset": {
+          "u": -0.14,
+          "v": 0.24
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1920,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 23.277310924369747,
+          "camY": 22.336134453781508
+        },
+        "hero": {
+          "x": 20,
+          "y": 12
+        }
+      },
+      {
+        "id": "boss-room",
+        "width": 2560,
+        "height": 1080,
+        "before": {
+          "floor": 0.53125,
+          "inside": 0.7291666666666666,
+          "exterior": 0.27083333333333337,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.7213541666666666,
+          "inside": 0.9192708333333334,
+          "exterior": 0.08072916666666663,
+          "samples": 384
+        },
+        "offset": {
+          "u": -0.14,
+          "v": 0.24
+        },
+        "projection": {
+          "tile": 34,
+          "width": 2560,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 22.10084033613445,
+          "camY": 23.512605042016805
+        },
+        "hero": {
+          "x": 20,
+          "y": 12
+        }
+      },
+      {
+        "id": "upper-ward",
+        "width": 1280,
+        "height": 720,
+        "before": {
+          "floor": 0.5390625,
+          "inside": 0.7994791666666666,
+          "exterior": 0.20052083333333337,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.7447916666666666,
+          "inside": 0.9661458333333334,
+          "exterior": 0.03385416666666663,
+          "samples": 384
+        },
+        "offset": {
+          "u": -0.28,
+          "v": 0.12
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1280,
+          "height": 720,
+          "zoom": 1.12,
+          "camX": 73.56302521008404,
+          "camY": 15.974789915966387
+        },
+        "hero": {
+          "x": 76,
+          "y": 9
+        }
+      },
+      {
+        "id": "upper-ward",
+        "width": 1920,
+        "height": 1080,
+        "before": {
+          "floor": 0.421875,
+          "inside": 0.6067708333333334,
+          "exterior": 0.39322916666666663,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.65625,
+          "inside": 0.8645833333333334,
+          "exterior": 0.13541666666666663,
+          "samples": 384
+        },
+        "offset": {
+          "u": -0.28,
+          "v": 0.12
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1920,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 72.34453781512605,
+          "camY": 19.462184873949578
+        },
+        "hero": {
+          "x": 76,
+          "y": 9
+        }
+      },
+      {
+        "id": "upper-ward",
+        "width": 2560,
+        "height": 1080,
+        "before": {
+          "floor": 0.4140625,
+          "inside": 0.5859375,
+          "exterior": 0.4140625,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.6640625,
+          "inside": 0.8567708333333334,
+          "exterior": 0.14322916666666663,
+          "samples": 384
+        },
+        "offset": {
+          "u": -0.28,
+          "v": 0.12
+        },
+        "projection": {
+          "tile": 34,
+          "width": 2560,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 69.99159663865547,
+          "camY": 21.81512605042017
+        },
+        "hero": {
+          "x": 76,
+          "y": 9
+        }
+      },
+      {
+        "id": "north-exit",
+        "width": 1280,
+        "height": 720,
+        "before": {
+          "floor": 0.3203125,
+          "inside": 0.4791666666666667,
+          "exterior": 0.5208333333333333,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.5286458333333334,
+          "inside": 0.7161458333333334,
+          "exterior": 0.28385416666666663,
+          "samples": 384
+        },
+        "offset": {
+          "u": -0.14,
+          "v": 0.24
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1280,
+          "height": 720,
+          "zoom": 1.12,
+          "camX": 7.1848739495798295,
+          "camY": 10.390756302521007
+        },
+        "hero": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      {
+        "id": "north-exit",
+        "width": 1920,
+        "height": 1080,
+        "before": {
+          "floor": 0.2682291666666667,
+          "inside": 0.40625,
+          "exterior": 0.59375,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.4479166666666667,
+          "inside": 0.6458333333333334,
+          "exterior": 0.35416666666666663,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0,
+          "v": 0.24
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1920,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 11.80672268907563,
+          "camY": 10.30672268907563
+        },
+        "hero": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      {
+        "id": "north-exit",
+        "width": 2560,
+        "height": 1080,
+        "before": {
+          "floor": 0.20833333333333334,
+          "inside": 0.3333333333333333,
+          "exterior": 0.6666666666666667,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.3958333333333333,
+          "inside": 0.5729166666666666,
+          "exterior": 0.42708333333333337,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0,
+          "v": 0.24
+        },
+        "projection": {
+          "tile": 34,
+          "width": 2560,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 11.80672268907563,
+          "camY": 10.30672268907563
+        },
+        "hero": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      {
+        "id": "west-route",
+        "width": 1280,
+        "height": 720,
+        "before": {
+          "floor": 0.875,
+          "inside": 1,
+          "exterior": 0,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.9479166666666666,
+          "inside": 1,
+          "exterior": 0,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.28,
+          "v": -0.24
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1280,
+          "height": 720,
+          "zoom": 1.12,
+          "camX": 18.668067226890756,
+          "camY": 86.25630252100841
+        },
+        "hero": {
+          "x": 18.5,
+          "y": 95.5
+        }
+      },
+      {
+        "id": "west-route",
+        "width": 1920,
+        "height": 1080,
+        "before": {
+          "floor": 0.7708333333333334,
+          "inside": 0.890625,
+          "exterior": 0.109375,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.8958333333333334,
+          "inside": 0.9947916666666666,
+          "exterior": 0.00520833333333337,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.28,
+          "v": 0
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1920,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 25.558823529411764,
+          "camY": 88.44117647058823
+        },
+        "hero": {
+          "x": 18.5,
+          "y": 95.5
+        }
+      },
+      {
+        "id": "west-route",
+        "width": 2560,
+        "height": 1080,
+        "before": {
+          "floor": 0.7109375,
+          "inside": 0.8229166666666666,
+          "exterior": 0.17708333333333337,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.8776041666666666,
+          "inside": 0.984375,
+          "exterior": 0.015625,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.28,
+          "v": 0
+        },
+        "projection": {
+          "tile": 34,
+          "width": 2560,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 27.911764705882355,
+          "camY": 86.08823529411765
+        },
+        "hero": {
+          "x": 18.5,
+          "y": 95.5
+        }
+      },
+      {
+        "id": "east-route",
+        "width": 1280,
+        "height": 720,
+        "before": {
+          "floor": 0.8776041666666666,
+          "inside": 1,
+          "exterior": 0,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.9479166666666666,
+          "inside": 1,
+          "exterior": 0,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.14,
+          "v": -0.24
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1280,
+          "height": 720,
+          "zoom": 1.12,
+          "camX": 66.31512605042018,
+          "camY": 88.60924369747899
+        },
+        "hero": {
+          "x": 68.5,
+          "y": 95.5
+        }
+      },
+      {
+        "id": "east-route",
+        "width": 1920,
+        "height": 1080,
+        "before": {
+          "floor": 0.8177083333333334,
+          "inside": 0.90625,
+          "exterior": 0.09375,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.9192708333333334,
+          "inside": 0.9973958333333334,
+          "exterior": 0.0026041666666666297,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0,
+          "v": -0.24
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1920,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 61.69327731092437,
+          "camY": 88.69327731092437
+        },
+        "hero": {
+          "x": 68.5,
+          "y": 95.5
+        }
+      },
+      {
+        "id": "east-route",
+        "width": 2560,
+        "height": 1080,
+        "before": {
+          "floor": 0.7317708333333334,
+          "inside": 0.8359375,
+          "exterior": 0.1640625,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.8697916666666666,
+          "inside": 0.96875,
+          "exterior": 0.03125,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0,
+          "v": -0.24
+        },
+        "projection": {
+          "tile": 34,
+          "width": 2560,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 61.69327731092437,
+          "camY": 88.69327731092437
+        },
+        "hero": {
+          "x": 68.5,
+          "y": 95.5
+        }
+      },
+      {
+        "id": "middle-ward",
+        "width": 1280,
+        "height": 720,
+        "before": {
+          "floor": 0.890625,
+          "inside": 1,
+          "exterior": 0,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.9557291666666666,
+          "inside": 1,
+          "exterior": 0,
+          "samples": 384
+        },
+        "offset": {
+          "u": -0.14,
+          "v": 0.24
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1280,
+          "height": 720,
+          "zoom": 1.12,
+          "camX": 23.18487394957983,
+          "camY": 66.890756302521
+        },
+        "hero": {
+          "x": 21,
+          "y": 60
+        }
+      },
+      {
+        "id": "middle-ward",
+        "width": 1920,
+        "height": 1080,
+        "before": {
+          "floor": 0.8697916666666666,
+          "inside": 0.9713541666666666,
+          "exterior": 0.02864583333333337,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.9010416666666666,
+          "inside": 0.9947916666666666,
+          "exterior": 0.00520833333333337,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0,
+          "v": 0.12
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1920,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 24.403361344537814,
+          "camY": 63.403361344537814
+        },
+        "hero": {
+          "x": 21,
+          "y": 60
+        }
+      },
+      {
+        "id": "middle-ward",
+        "width": 2560,
+        "height": 1080,
+        "before": {
+          "floor": 0.8411458333333334,
+          "inside": 0.9401041666666666,
+          "exterior": 0.05989583333333337,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.890625,
+          "inside": 0.9973958333333334,
+          "exterior": 0.0026041666666666297,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.14,
+          "v": 0.12
+        },
+        "projection": {
+          "tile": 34,
+          "width": 2560,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 29.10924369747899,
+          "camY": 58.69747899159664
+        },
+        "hero": {
+          "x": 21,
+          "y": 60
+        }
+      }
+    ]
+  },
+  {
+    "name": "wide2",
+    "u": 0.3,
+    "v": 0.25,
+    "floor": 0.7333140432098766,
+    "edgeExterior": 0.228125,
+    "results": [
+      {
+        "id": "left-entry",
+        "width": 1280,
+        "height": 720,
+        "before": {
+          "floor": 0.3567708333333333,
+          "inside": 0.4869791666666667,
+          "exterior": 0.5130208333333333,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.6015625,
+          "inside": 0.7838541666666666,
+          "exterior": 0.21614583333333337,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.3,
+          "v": 0
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1280,
+          "height": 720,
+          "zoom": 1.12,
+          "camX": 10.042016806722685,
+          "camY": 103.95798319327731
+        },
+        "hero": {
+          "x": 5,
+          "y": 109
+        }
+      },
+      {
+        "id": "left-entry",
+        "width": 1920,
+        "height": 1080,
+        "before": {
+          "floor": 0.296875,
+          "inside": 0.3984375,
+          "exterior": 0.6015625,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.4296875,
+          "inside": 0.546875,
+          "exterior": 0.453125,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.15,
+          "v": 0
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1920,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 8.781512605042018,
+          "camY": 105.21848739495798
+        },
+        "hero": {
+          "x": 5,
+          "y": 109
+        }
+      },
+      {
+        "id": "left-entry",
+        "width": 2560,
+        "height": 1080,
+        "before": {
+          "floor": 0.3385416666666667,
+          "inside": 0.4244791666666667,
+          "exterior": 0.5755208333333333,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.6041666666666666,
+          "inside": 0.7239583333333334,
+          "exterior": 0.27604166666666663,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.3,
+          "v": 0
+        },
+        "projection": {
+          "tile": 34,
+          "width": 2560,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 15.084033613445378,
+          "camY": 98.91596638655463
+        },
+        "hero": {
+          "x": 5,
+          "y": 109
+        }
+      },
+      {
+        "id": "centre-entry",
+        "width": 1280,
+        "height": 720,
+        "before": {
+          "floor": 0.578125,
+          "inside": 0.7135416666666666,
+          "exterior": 0.28645833333333337,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.8359375,
+          "inside": 0.9791666666666666,
+          "exterior": 0.02083333333333337,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.3,
+          "v": -0.25
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1280,
+          "height": 720,
+          "zoom": 1.12,
+          "camX": 43.31512605042016,
+          "camY": 99.23109243697479
+        },
+        "hero": {
+          "x": 43,
+          "y": 109
+        }
+      },
+      {
+        "id": "centre-entry",
+        "width": 1920,
+        "height": 1080,
+        "before": {
+          "floor": 0.5286458333333334,
+          "inside": 0.65625,
+          "exterior": 0.34375,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.7786458333333334,
+          "inside": 0.9088541666666666,
+          "exterior": 0.09114583333333337,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.15,
+          "v": -0.25
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1920,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 39.69117647058824,
+          "camY": 98.12815126050421
+        },
+        "hero": {
+          "x": 43,
+          "y": 109
+        }
+      },
+      {
+        "id": "centre-entry",
+        "width": 2560,
+        "height": 1080,
+        "before": {
+          "floor": 0.5260416666666666,
+          "inside": 0.6328125,
+          "exterior": 0.3671875,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.7760416666666666,
+          "inside": 0.890625,
+          "exterior": 0.109375,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.15,
+          "v": -0.25
+        },
+        "projection": {
+          "tile": 34,
+          "width": 2560,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 40.95168067226891,
+          "camY": 96.86764705882354
+        },
+        "hero": {
+          "x": 43,
+          "y": 109
+        }
+      },
+      {
+        "id": "right-entry",
+        "width": 1280,
+        "height": 720,
+        "before": {
+          "floor": 0.40625,
+          "inside": 0.5052083333333334,
+          "exterior": 0.49479166666666663,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.6119791666666666,
+          "inside": 0.7552083333333334,
+          "exterior": 0.24479166666666663,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0,
+          "v": -0.25
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1280,
+          "height": 720,
+          "zoom": 1.12,
+          "camX": 78.27310924369748,
+          "camY": 104.27310924369748
+        },
+        "hero": {
+          "x": 83,
+          "y": 109
+        }
+      },
+      {
+        "id": "right-entry",
+        "width": 1920,
+        "height": 1080,
+        "before": {
+          "floor": 0.3567708333333333,
+          "inside": 0.4427083333333333,
+          "exterior": 0.5572916666666667,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.59375,
+          "inside": 0.6927083333333334,
+          "exterior": 0.30729166666666663,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0,
+          "v": -0.25
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1920,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 75.90966386554622,
+          "camY": 101.90966386554622
+        },
+        "hero": {
+          "x": 83,
+          "y": 109
+        }
+      },
+      {
+        "id": "right-entry",
+        "width": 2560,
+        "height": 1080,
+        "before": {
+          "floor": 0.3020833333333333,
+          "inside": 0.359375,
+          "exterior": 0.640625,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.5260416666666666,
+          "inside": 0.609375,
+          "exterior": 0.390625,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0,
+          "v": -0.25
+        },
+        "projection": {
+          "tile": 34,
+          "width": 2560,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 75.90966386554622,
+          "camY": 101.90966386554622
+        },
+        "hero": {
+          "x": 83,
+          "y": 109
+        }
+      },
+      {
+        "id": "boss-room",
+        "width": 1280,
+        "height": 720,
+        "before": {
+          "floor": 0.6380208333333334,
+          "inside": 0.9401041666666666,
+          "exterior": 0.05989583333333337,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.8098958333333334,
+          "inside": 1,
+          "exterior": 0,
+          "samples": 384
+        },
+        "offset": {
+          "u": -0.3,
+          "v": 0.25
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1280,
+          "height": 720,
+          "zoom": 1.12,
+          "camX": 19.68487394957983,
+          "camY": 21.76890756302521
+        },
+        "hero": {
+          "x": 20,
+          "y": 12
+        }
+      },
+      {
+        "id": "boss-room",
+        "width": 1920,
+        "height": 1080,
+        "before": {
+          "floor": 0.5859375,
+          "inside": 0.7994791666666666,
+          "exterior": 0.20052083333333337,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.7682291666666666,
+          "inside": 0.9765625,
+          "exterior": 0.0234375,
+          "samples": 384
+        },
+        "offset": {
+          "u": -0.15,
+          "v": 0.25
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1920,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 23.30882352941176,
+          "camY": 22.871848739495796
+        },
+        "hero": {
+          "x": 20,
+          "y": 12
+        }
+      },
+      {
+        "id": "boss-room",
+        "width": 2560,
+        "height": 1080,
+        "before": {
+          "floor": 0.53125,
+          "inside": 0.7291666666666666,
+          "exterior": 0.27083333333333337,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.7291666666666666,
+          "inside": 0.9244791666666666,
+          "exterior": 0.07552083333333337,
+          "samples": 384
+        },
+        "offset": {
+          "u": -0.15,
+          "v": 0.25
+        },
+        "projection": {
+          "tile": 34,
+          "width": 2560,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 22.04831932773109,
+          "camY": 24.132352941176467
+        },
+        "hero": {
+          "x": 20,
+          "y": 12
+        }
+      },
+      {
+        "id": "upper-ward",
+        "width": 1280,
+        "height": 720,
+        "before": {
+          "floor": 0.5390625,
+          "inside": 0.7994791666666666,
+          "exterior": 0.20052083333333337,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.7552083333333334,
+          "inside": 0.9713541666666666,
+          "exterior": 0.02864583333333337,
+          "samples": 384
+        },
+        "offset": {
+          "u": -0.3,
+          "v": 0
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1280,
+          "height": 720,
+          "zoom": 1.12,
+          "camX": 70.95798319327731,
+          "camY": 14.042016806722689
+        },
+        "hero": {
+          "x": 76,
+          "y": 9
+        }
+      },
+      {
+        "id": "upper-ward",
+        "width": 1920,
+        "height": 1080,
+        "before": {
+          "floor": 0.421875,
+          "inside": 0.6067708333333334,
+          "exterior": 0.39322916666666663,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.6640625,
+          "inside": 0.8776041666666666,
+          "exterior": 0.12239583333333337,
+          "samples": 384
+        },
+        "offset": {
+          "u": -0.3,
+          "v": 0.125
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1920,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 71.98214285714286,
+          "camY": 20.10819327731092
+        },
+        "hero": {
+          "x": 76,
+          "y": 9
+        }
+      },
+      {
+        "id": "upper-ward",
+        "width": 2560,
+        "height": 1080,
+        "before": {
+          "floor": 0.4140625,
+          "inside": 0.5859375,
+          "exterior": 0.4140625,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.671875,
+          "inside": 0.8723958333333334,
+          "exterior": 0.12760416666666663,
+          "samples": 384
+        },
+        "offset": {
+          "u": -0.3,
+          "v": 0
+        },
+        "projection": {
+          "tile": 34,
+          "width": 2560,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 65.91596638655463,
+          "camY": 19.084033613445378
+        },
+        "hero": {
+          "x": 76,
+          "y": 9
+        }
+      },
+      {
+        "id": "north-exit",
+        "width": 1280,
+        "height": 720,
+        "before": {
+          "floor": 0.3203125,
+          "inside": 0.4791666666666667,
+          "exterior": 0.5208333333333333,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.5338541666666666,
+          "inside": 0.7265625,
+          "exterior": 0.2734375,
+          "samples": 384
+        },
+        "offset": {
+          "u": -0.15,
+          "v": 0.25
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1280,
+          "height": 720,
+          "zoom": 1.12,
+          "camX": 7.205882352941176,
+          "camY": 10.747899159663865
+        },
+        "hero": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      {
+        "id": "north-exit",
+        "width": 1920,
+        "height": 1080,
+        "before": {
+          "floor": 0.2682291666666667,
+          "inside": 0.40625,
+          "exterior": 0.59375,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.4635416666666667,
+          "inside": 0.65625,
+          "exterior": 0.34375,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0,
+          "v": 0.25
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1920,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 12.09033613445378,
+          "camY": 10.59033613445378
+        },
+        "hero": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      {
+        "id": "north-exit",
+        "width": 2560,
+        "height": 1080,
+        "before": {
+          "floor": 0.20833333333333334,
+          "inside": 0.3333333333333333,
+          "exterior": 0.6666666666666667,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.40625,
+          "inside": 0.5833333333333334,
+          "exterior": 0.41666666666666663,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0,
+          "v": 0.25
+        },
+        "projection": {
+          "tile": 34,
+          "width": 2560,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 12.09033613445378,
+          "camY": 10.59033613445378
+        },
+        "hero": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      {
+        "id": "west-route",
+        "width": 1280,
+        "height": 720,
+        "before": {
+          "floor": 0.875,
+          "inside": 1,
+          "exterior": 0,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.9505208333333334,
+          "inside": 1,
+          "exterior": 0,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.3,
+          "v": -0.25
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1280,
+          "height": 720,
+          "zoom": 1.12,
+          "camX": 18.81512605042016,
+          "camY": 85.73109243697479
+        },
+        "hero": {
+          "x": 18.5,
+          "y": 95.5
+        }
+      },
+      {
+        "id": "west-route",
+        "width": 1920,
+        "height": 1080,
+        "before": {
+          "floor": 0.7708333333333334,
+          "inside": 0.890625,
+          "exterior": 0.109375,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.8958333333333334,
+          "inside": 0.984375,
+          "exterior": 0.015625,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.3,
+          "v": -0.125
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1920,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 22.517857142857142,
+          "camY": 84.39180672268908
+        },
+        "hero": {
+          "x": 18.5,
+          "y": 95.5
+        }
+      },
+      {
+        "id": "west-route",
+        "width": 2560,
+        "height": 1080,
+        "before": {
+          "floor": 0.7109375,
+          "inside": 0.8229166666666666,
+          "exterior": 0.17708333333333337,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.8802083333333334,
+          "inside": 0.9947916666666666,
+          "exterior": 0.00520833333333337,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.3,
+          "v": 0
+        },
+        "projection": {
+          "tile": 34,
+          "width": 2560,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 28.584033613445378,
+          "camY": 85.41596638655463
+        },
+        "hero": {
+          "x": 18.5,
+          "y": 95.5
+        }
+      },
+      {
+        "id": "east-route",
+        "width": 1280,
+        "height": 720,
+        "before": {
+          "floor": 0.8776041666666666,
+          "inside": 1,
+          "exterior": 0,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.953125,
+          "inside": 1,
+          "exterior": 0,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.15,
+          "v": -0.25
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1280,
+          "height": 720,
+          "zoom": 1.12,
+          "camX": 66.29411764705883,
+          "camY": 88.25210084033613
+        },
+        "hero": {
+          "x": 68.5,
+          "y": 95.5
+        }
+      },
+      {
+        "id": "east-route",
+        "width": 1920,
+        "height": 1080,
+        "before": {
+          "floor": 0.8177083333333334,
+          "inside": 0.90625,
+          "exterior": 0.09375,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.921875,
+          "inside": 0.9973958333333334,
+          "exterior": 0.0026041666666666297,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0,
+          "v": -0.25
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1920,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 61.40966386554622,
+          "camY": 88.40966386554622
+        },
+        "hero": {
+          "x": 68.5,
+          "y": 95.5
+        }
+      },
+      {
+        "id": "east-route",
+        "width": 2560,
+        "height": 1080,
+        "before": {
+          "floor": 0.7317708333333334,
+          "inside": 0.8359375,
+          "exterior": 0.1640625,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.875,
+          "inside": 0.96875,
+          "exterior": 0.03125,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0,
+          "v": -0.25
+        },
+        "projection": {
+          "tile": 34,
+          "width": 2560,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 61.40966386554622,
+          "camY": 88.40966386554622
+        },
+        "hero": {
+          "x": 68.5,
+          "y": 95.5
+        }
+      },
+      {
+        "id": "middle-ward",
+        "width": 1280,
+        "height": 720,
+        "before": {
+          "floor": 0.890625,
+          "inside": 1,
+          "exterior": 0,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.9557291666666666,
+          "inside": 1,
+          "exterior": 0,
+          "samples": 384
+        },
+        "offset": {
+          "u": -0.15,
+          "v": 0.25
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1280,
+          "height": 720,
+          "zoom": 1.12,
+          "camX": 23.20588235294118,
+          "camY": 67.24789915966386
+        },
+        "hero": {
+          "x": 21,
+          "y": 60
+        }
+      },
+      {
+        "id": "middle-ward",
+        "width": 1920,
+        "height": 1080,
+        "before": {
+          "floor": 0.8697916666666666,
+          "inside": 0.9713541666666666,
+          "exterior": 0.02864583333333337,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.9036458333333334,
+          "inside": 0.9947916666666666,
+          "exterior": 0.00520833333333337,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.15,
+          "v": 0
+        },
+        "projection": {
+          "tile": 34,
+          "width": 1920,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 24.781512605042018,
+          "camY": 56.21848739495798
+        },
+        "hero": {
+          "x": 21,
+          "y": 60
+        }
+      },
+      {
+        "id": "middle-ward",
+        "width": 2560,
+        "height": 1080,
+        "before": {
+          "floor": 0.8411458333333334,
+          "inside": 0.9401041666666666,
+          "exterior": 0.05989583333333337,
+          "samples": 384
+        },
+        "after": {
+          "floor": 0.9036458333333334,
+          "inside": 1,
+          "exterior": 0,
+          "samples": 384
+        },
+        "offset": {
+          "u": 0.15,
+          "v": 0.25
+        },
+        "projection": {
+          "tile": 34,
+          "width": 2560,
+          "height": 1080,
+          "zoom": 1.12,
+          "camX": 33.132352941176464,
+          "camY": 62.04831932773109
+        },
+        "hero": {
+          "x": 21,
+          "y": 60
+        }
+      }
+    ]
+  }
+]

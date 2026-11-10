@@ -1,0 +1,19 @@
+{
+  "revision": "R88/V12",
+  "paintedEffectCount": 42,
+  "storedPaintedFrames": 680,
+  "runtimeAtlasCount": 42,
+  "authoritativeIndexSHA256": "ac09686eefab668f92533d4d56f812ede4b2b2ee6177c229827dfaa5d27a24cc",
+  "legacyProcedural80Loaded": false,
+  "prior3MedicalRootEffectsSingleOwner": true,
+  "rootMechanicPreserved": "2.2s bind,4 native DOT pulses,S blink escape",
+  "saveNamespace": "storyworld.hospital-three-pc.maze.v11:",
+  "existingV11SavesRetained": true,
+  "oldB2SaveAutomaticallyImported": false,
+  "sourceImagesReencoded": false,
+  "sourceMetadataModified": false,
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "publicDeploymentChanged": false
+}

@@ -1,0 +1,54 @@
+{
+  "schema": "storyworld.r90.apply-check/v1",
+  "method": "Node filesystem fixtures, not the full game, headless browser or GPU",
+  "fixtureAssistance": true,
+  "passed": true,
+  "passedChecks": 11,
+  "totalChecks": 11,
+  "checks": [
+    {
+      "name": "Two tags are inserted directly after R89 without changing any native HTML bytes",
+      "passed": true
+    },
+    {
+      "name": "Canonical repeated application is byte-idempotent",
+      "passed": true
+    },
+    {
+      "name": "Complete manifest hashes actual file bytes, preserves R89 metadata and excludes itself",
+      "passed": true
+    },
+    {
+      "name": "Canonical overlay source is copied byte-for-byte",
+      "passed": true
+    },
+    {
+      "name": "Missing, duplicate and reversed R89 tags are rejected",
+      "passed": true
+    },
+    {
+      "name": "Partial, duplicated, relocated and noncanonical R90 tags are rejected",
+      "passed": true
+    },
+    {
+      "name": "Missing asset aborts before any site file changes",
+      "passed": true
+    },
+    {
+      "name": "Overlay syntax error aborts before writes",
+      "passed": true
+    },
+    {
+      "name": "Unsafe and duplicate manifest paths are rejected without writes",
+      "passed": true
+    },
+    {
+      "name": "Changed-files includes only added and modified source/runtime evidence with valid SHA256",
+      "passed": true
+    },
+    {
+      "name": "Changed-files refuses deletion of an original file",
+      "passed": true
+    }
+  ]
+}

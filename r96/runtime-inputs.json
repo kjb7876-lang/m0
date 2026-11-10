@@ -7962,6 +7962,7 @@
     "assets/r562/dots/neon-toxic-pool.webp",
     "assets/r562/dots/neon-chain.webp",
     "assets/r562/dots/neon-bubble-ring-back.webp",
+    "enemy-attack-tempo-r601.js",
     "auto-attack-r597.js"
   ],
   "mediaPaths": [
@@ -9037,5 +9038,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "74689e957ddae903d006d92b9642c45fa5ab927651dede9b49c8d1bebfd8b593"
+  "runtimeManifestSHA256": "39277c983076d83b2a6fce709b8cd3027dcdd99aa27e17269ab80a03da59a9f7"
 }

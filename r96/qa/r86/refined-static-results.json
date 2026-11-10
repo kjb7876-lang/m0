@@ -1,0 +1,49 @@
+{
+  "schema": "r86-refined-static-integration/v1",
+  "checks": [
+    {
+      "name": "Current supplied inventory contains318 PNGs with exactly4 replacements and314 retained",
+      "passed": true
+    },
+    {
+      "name": "Each retained source has the exact previous hash and each replacement is a real change",
+      "passed": true
+    },
+    {
+      "name": "Four supplied changed PNGs match current authoritative hashes",
+      "passed": true
+    },
+    {
+      "name": "All254 old story-source hashes and64 old effect PNGs remain preserved",
+      "passed": true
+    },
+    {
+      "name": "Deferred dynamic source is preserved byte-exact without being initialized",
+      "passed": true
+    },
+    {
+      "name": "No supplied dynamic runtime, adapter or preview loop is loaded",
+      "passed": true
+    },
+    {
+      "name": "Every active static raster hash matches the64 supplied current PNGs",
+      "passed": true
+    },
+    {
+      "name": "Refined pure sampler adds no network storage timers or dynamic execution",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Exception",
+      "passed": false,
+      "detail": "Error: Python \n    at C:\\Users\\kim\\Documents\\StoryWorld-R88\\hospital-refinement-v12\\qa\\r86\\refined-static-check.cjs:29:32"
+    }
+  ],
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "method": "Exact supplied source hashes, decoded source/derivative alpha geometry, supplied semantic tests, actual shipped native hospital draw commands and real pinned Three CPU geometry. Scripted positions and renderer readiness are used.",
+  "failure": "Error: Python \n    at C:\\Users\\kim\\Documents\\StoryWorld-R88\\hospital-refinement-v12\\qa\\r86\\refined-static-check.cjs:29:32",
+  "passed": false
+}

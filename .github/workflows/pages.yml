@@ -488,6 +488,8 @@ jobs:
         run: node r96/qa/r523/r523-cpu-check.cjs
       - name: R590 hwando sword chain (A draw-cut, Q wind blades, E delayed flash, R seven-strike finale; no new keys, walls/map edge, caps) CPU check
         run: node r96/qa/r590/hwando-chain-cpu-check.cjs
+      - name: R601 enemy attack tempo (enemy attack body motion drawn 2x faster, strike frame kept on the damage moment, telegraphs on real time, no timing/damage change) CPU check
+        run: node r96/qa/r601/attack-tempo-cpu-check.cjs
       - name: R492 lag (R409 outline bake by one distance transform instead of dozens of drawImage dilations; same rim rule, size, colours) CPU check
         run: node r96/qa/r492/r492-cpu-check.cjs
       - name: R493 lag (keep compiled shader programs pinned so material churn stops relinking the same programs) CPU check

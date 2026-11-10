@@ -1,0 +1,9 @@
+PASS Fixture is an actual old V4 swamp save without an R81 ledger
+PASS V5 native runtime boots cleanly
+PASS Old visited STORY swamp opens in the current hospital structure on safe floor
+PASS Every old native enemy keeps exact HP, maximum HP and identity
+PASS Previously visited V4 rooms do not gain new champion encounters
+PASS Old save progress is preserved
+PASS Every surviving migrated actor fits the new floor without wall overlap
+PASS Every living migrated field actor is reachable from the gathering room with the boss door closed
+PASS Native error ledger stays clear

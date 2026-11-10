@@ -1,0 +1,11 @@
+'use strict';
+const fs=require('fs'),path=require('path'),{createHarness}=require('../harness.cjs');
+const ROOT=path.resolve(__dirname,'../..'),V4=path.resolve(ROOT,'../hospital-refinement-v4/hospital-three-pc/site');
+function oldHarness(){const original=fs.readFileSync;fs.readFileSync=function(file,...args){const f=String(file),prefix=path.join(ROOT,'hospital-three-pc/site');return original.call(this,f.startsWith(prefix)?V4+f.slice(prefix.length):file,...args);};try{return createHarness({timeoutMs:60000});}finally{fs.readFileSync=original;}}
+const snapshot=`(()=>{const r=makeRoom('dist02','STORY'),L=r.exploration;return {geometry:{bounds:L.bounds,floor:L.floorCells,walls:L.walls,nodes:L.nodes,edges:L.edges,doors:L.worldR74?.doors,type:L.type},actors:r.enemies.map(e=>({id:e.id,x:e.x,y:e.y,hp:e.hp,maxHp:e.maxHp,spawnState:e.spawnState})),ward:!!L.worldWardR81};})()`;
+(async()=>{const out={method:'CPU VM comparison with preserved V4. Scoped EGO factory build plus DREAM layout equality; not browser/GPU.',checks:[]},old=oldHarness(),now=createHarness({timeoutMs:60000});await old.boot();await now.boot();
+const oldStory=old.run(snapshot);now.run('window.__STORYWORLD_R81_EGO_BUILD__=true');const ego=now.run(snapshot);now.run('window.__STORYWORLD_R81_EGO_BUILD__=false');
+out.checks.push({name:'scoped EGO retains V4 geometry',passed:!ego.ward&&JSON.stringify(ego.geometry)===JSON.stringify(oldStory.geometry)});
+out.checks.push({name:'scoped EGO retains V4 canonical actor positions and stats',passed:JSON.stringify(ego.actors)===JSON.stringify(oldStory.actors),mismatch:ego.actors.filter((e,i)=>JSON.stringify(e)!==JSON.stringify(oldStory.actors[i])).slice(0,5)});
+const dream=ctx=>ctx.run(`(()=>{const r=makeRoom('dist02','DREAM'),L=r.exploration;return{bounds:L.bounds,floor:L.floorCells,walls:L.walls,nodes:L.nodes,edges:L.edges,doors:L.worldR74?.doors,type:L.type,ward:!!L.worldWardR81};})()`);out.checks.push({name:'DREAM retains V4 geometry',passed:JSON.stringify(dream(old))===JSON.stringify(dream(now))});
+fs.writeFileSync(__dirname+'/legacy-scope-results.json',JSON.stringify(out,null,2));console.log(JSON.stringify(out,null,2));if(out.checks.some(x=>!x.passed))process.exitCode=1;})().catch(e=>{console.error(e.stack);process.exitCode=1;});

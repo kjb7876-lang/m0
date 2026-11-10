@@ -1,0 +1,21 @@
+{
+  "revision": "R87/V11",
+  "paintedAtlases": [
+    "poison16",
+    "scalpel16",
+    "thorn24"
+  ],
+  "legacyProcedural80Loaded": false,
+  "rootBoss": "dist00-boss",
+  "rootDurationSeconds": 2.2,
+  "rootDotPulses": 4,
+  "rootDotBudgetFactor": 0.6,
+  "rootEscape": "S native blink",
+  "rootSingleOverlay": true,
+  "seamlessLoopVerified": false,
+  "testStoragePrefix": "storyworld.hospital-three-pc.maze.v11:",
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "publicDeploymentChanged": false
+}
