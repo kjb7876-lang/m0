@@ -6222,6 +6222,8 @@
     "assets/r542/sfx/crush-1.ogg",
     "assets/r542/sfx/roar-1.ogg",
     "assets/r542/sfx/index.json",
+    "assets/r590/hwando-wind-tornado.webp",
+    "assets/r590/hwando-iai-ring.webp",
     "gunner-arms-r561.js",
     "assets/r561/gunner-bombard-meteor.webp"
   ],
@@ -7298,5 +7300,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "92c5d108a5628f070d089eef237e13977c7af9fa8030e7f2f19dd84e340ccf85"
+  "runtimeManifestSHA256": "b733b42852e29678f29a4bb13d3aef1f7187d863e6567ac7a02fdf0e200dfa4c"
 }
