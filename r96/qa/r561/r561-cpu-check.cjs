@@ -18,13 +18,13 @@ function mk(opt={}){const hits=[],L={},moves=[];
   clearLine:opt.clearLine||(()=>true),blocked:opt.blocked||(()=>false),effects:[],sound(){},moveActor:(e,dx,dy)=>moves.push([e.id,dx,dy]),
   HEROES:{gunner:{name:'기억사수',special:'기억 재현',range:8.2},hwando:{name:'환도',special:'x'}},
   room:{enemies},liveEnemies:()=>enemies.filter(e=>e.hp>0),damageable3:()=>true,
-  hitEnemy:(e,v,m)=>{hits.push([e.id,v,m&&m.ability,m&&m.friendly]);e.hp-=v;return true;},
+  hitEnemy:(e,v,m)=>{hits.push([e.id,v,m&&m.ability,m&&m.friendly,m&&m.attackKind9]);e.hp-=v;return true;},
   special(){sb.__baseSpecial=(sb.__baseSpecial||0)+1;},serializeSave:()=>({storyWER:{remaining:opt.saveClamp?{'gunner:r':17.7,'gunner:w':17.7,'gunner:e':17.7,'hwando:r':3}:{'gunner:r':1e6,'gunner:w':1e6,'gunner:e':1e6,'hwando:r':3}}}),
   tick(){},drawEffect(){},updateHUD(){},
   /* 엔진 restoreSave 흉내: 새 player 를 만들고 저장된 남은 대기를 옛 기억사수 스킬 한도(6/3.8/13×박자)로 잘라 넣는다 */
   async restoreSave(raw){const r=raw?.storyWER?.remaining||{},k=sb.COMBAT_RHYTHM_R26,lim={w:6*k,e:3.8*k,r:13*k},ready={};for(const sl of ['w','e','r'])if(r['gunner:'+sl]>0)ready['gunner:'+sl]=sb.time+Math.min(lim[sl],r['gunner:'+sl]);sb.player={hero:'gunner',x:10,y:10,hp:100,specialCD:0,direction:'right',storyWER:{ready,buffs:{}}};}};
  sb.window.__STORYWORLD_WER__=Object.freeze({cast:()=>'base',defs:{}});sb.window.__STORYWORLD_GROWTH_R103__={state:()=>({procs:{'gunner:w':opt.lv||0,'gunner:e':opt.lv||0,'gunner:r':opt.lv||0}})};
- if(opt.surge)sb.window.__STORYWORLD_SAMONG_SURGE_R571__={active:()=>true,cd:v=>v*.23,range:v=>v};if(opt.coop)sb.window.__STORYWORLD_COOP_SIM_R62__={mode:()=>opt.coop};if(opt.ego)sb.window.__STORYWORLD_EGO151__={inspect:()=>({state:{active:true}})};
+ if(opt.surge)sb.window.__STORYWORLD_SAMONG_SURGE_R571__={active:()=>true,cd:v=>v*.23,range:v=>v*(opt.surgeRange||1)};if(opt.aura)sb.window.__STORYWORLD_PROGRESSION_R62__={factors:()=>({cooldown:opt.aura})};if(opt.coop)sb.window.__STORYWORLD_COOP_SIM_R62__={mode:()=>opt.coop};if(opt.ego)sb.window.__STORYWORLD_EGO151__={inspect:()=>({state:{active:true}})};
  vm.createContext(sb);vm.runInContext(src||'throw new Error("gunner-arms-r561.js missing")',sb);
  const A=()=>sb.window.__STORYWORLD_GUNNER_ARMS_R561__;
  const run=(t1,step=.05)=>{while(sb.time<t1-1e-9){sb.time=+(sb.time+step).toFixed(4);sb.tick(step);}};
@@ -115,6 +115,10 @@ ok('drawn with R106 painted sprites in gunner colours (cobalt [70,124,255] + sil
 ok('hero id and save format untouched (no new player fields persisted, id stays gunner)',!/player\.hero\s*=(?!=)/.test(src)&&!/HEROES\.[a-z]+\s*=/.test(src));
 async function restoreCheck(){try{T=mk({rhythm:1.18});await T.sb.restoreSave({storyWER:{remaining:{'gunner:w':9.44,'gunner:e':7.08,'gunner:r':18.88}}});T.sb.tick(.05);const m={w:T.A().remain('w'),e:T.A().remain('e'),r:T.A().remain('r')};
  ok('load: replacement cooldowns come back at their own lengths (W 9.44 · E 7.08 · R 18.88 with rhythm 1.18), not clamped to the old skill limits',Math.abs(m.w-9.44)<.06&&Math.abs(m.e-7.08)<.06&&Math.abs(m.r-18.88)<.06,m);}catch(e){ok('restore',false,String(e));}}
+try{T=mk();T.sb.special();T.run(11.5);ok('every R561 hit is tagged attackKind9 "skill" (splash/proc rules treat delayed R/W as skill damage, not basic attacks)',T.hits.length>0&&T.hits.every(h=>h[4]==='skill'));}catch(e){ok('skill kind',false,String(e));}
+try{const far=[{id:'f',x:30,y:10,hp:999,maxHp:999,radius:.3,spawnState:'active'}];T=mk({enemies:far});const a0=T.A().fire('w',true);T=mk({enemies:far,surge:true,surgeRange:1.77});const a1=T.A().fire('w',true);T.run(11);
+ ok('samong surge range (R571 range()) reaches farther: an enemy 20 tiles away is out of W range normally, in range while awakened',a0===false&&a1===true&&T.hits.some(h=>h[0]==='f'),{a0,a1});}catch(e){ok('surge range',false,String(e));}
+try{T=mk({aura:.5});T.sb.special();T.L.keydown[0]({key:'z',target:{tagName:'CANVAS'}});ok('purchased cooldown aura (R62 factors().cooldown) shortens Q and W/E/R like engine skills (×0.5 → Q 5 s, W 4 s)',Math.abs(T.sb.player.specialCD-5)<1e-6&&Math.abs(T.A().remain('w')-4)<1e-6,[T.sb.player.specialCD,T.A().remain('w')]);}catch(e){ok('aura',false,String(e));}
 (async()=>{await restoreCheck();
 const pass=checks.filter(c=>c.pass).length;for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));
 console.log(`R561 gunner arms: ${pass}/${checks.length}`);if(pass!==checks.length)process.exitCode=1;
