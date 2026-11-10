@@ -25133,9 +25133,29 @@
       "sha256": "f301ba2679c17d6a3bf595f6471d6252362baa116dc0d9c6130e2d79c35de4c4"
     },
     {
+      "path": "assets/r590/hwando-a-draw-cut.webp",
+      "bytes": 40296,
+      "sha256": "1dff74fcde648100ae1cf6fc62d4f1e859378abc02af2b05ab4c04fec31d00fd"
+    },
+    {
+      "path": "assets/r590/hwando-e-delayed-flash.webp",
+      "bytes": 74644,
+      "sha256": "f35fe9db59b1b8a9e5fc87f3f9eafcf3357abd3c30024b56fa2e1edd9e2a38f3"
+    },
+    {
       "path": "assets/r590/hwando-iai-ring.webp",
       "bytes": 147792,
       "sha256": "0ce1cbae6780b064e5db60f17cb80006ada735ac607858ff909d2bb895b8c3e0"
+    },
+    {
+      "path": "assets/r590/hwando-q-wind-blade.webp",
+      "bytes": 238400,
+      "sha256": "58c16663db1fa36e7d14b878b8a0cb45c6b676a318d3ae6791a6745632517032"
+    },
+    {
+      "path": "assets/r590/hwando-r-finale-draw.webp",
+      "bytes": 154248,
+      "sha256": "34d73d05a893494deb41ecb6a03b18dcdeee5b253fb5ec05b224dd96ebb77380"
     },
     {
       "path": "assets/r590/hwando-wind-tornado.webp",
@@ -34164,8 +34184,8 @@
     },
     {
       "path": "hwando-chain-r590.js",
-      "bytes": 18852,
-      "sha256": "74c9cd2ec2198540af603ae738e648c640ed6482a3bd41b809c4e5ec3054393c"
+      "bytes": 23412,
+      "sha256": "defe68d1e6466eecaaebec8d4c8c3a532e7dc26b601bcb253c0a63da81a196a6"
     },
     {
       "path": "hwando-r242.js",
@@ -35098,8 +35118,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 7019,
-  "totalBytes": 1095988403,
+  "fileCount": 7023,
+  "totalBytes": 1096500551,
   "webHTMLSha256": "e9ad258581ee459e96d9ff70ed6ab727662432d3cef131ab72ba4cbb73fff60a",
   "largest": [
     {
