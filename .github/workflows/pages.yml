@@ -414,6 +414,8 @@ jobs:
         run: node r96/qa/r541/r541-cpu-check.cjs
       - name: R542 user-provided bow, heal, crate and boss roar sounds CPU check
         run: node r96/qa/r542/r542-cpu-check.cjs
+      - name: R543 pitch-shifted enemy growl and goblin voices plus distant thunder CPU check
+        run: node r96/qa/r543/r543-cpu-check.cjs
       - name: R385 mob moves (review list v18 move/rename) CPU check
         run: node r96/qa/r385/r385-cpu-check.cjs
       - name: R390 cinema full narration + midboss hold + enemies keep chasing CPU check
@@ -656,6 +658,11 @@ jobs:
         run: python scripts/verify-r96-release.py
       - name: R580 Pages bundle under 1GB (archival narration excluded, lossless PNG, pixel-identical, public verifier)
         run: python r96/qa/r580/pages-size-check.py
+      - name: R580 public verifier retries transient read timeouts/disconnects but still fails wrong, missing or never-arriving bytes
+        run: |
+          python scripts/pages-pack.py --site r96/hospital-three-pc/site --out "$RUNNER_TEMP/r580-pages"
+          python r96/qa/r580/public-retry-check.py "$RUNNER_TEMP/r580-pages"
+          rm -rf "$RUNNER_TEMP/r580-pages"
       - name: R580 pack the Pages bundle from the verified site
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         run: python scripts/pages-pack.py --site r96/hospital-three-pc/site --out r96/hospital-three-pc/pages

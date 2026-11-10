@@ -1,0 +1,7 @@
+[
+ {"key": "sofa_n", "src": "assets/sin-rooms/envy-lounge.webp", "cut": [2, 451, 342, 242], "trim": true, "out": "assets/r524/sofa-n.webp", "max": 288, "L": 2.2, "face": "n", "pair": "sofa_w"},
+ {"key": "sofa_w", "src": "assets/sin-rooms/envy-lounge.webp", "cut": [416, 2, 339, 283], "trim": true, "out": "assets/r524/sofa-w.webp", "max": 288, "L": 2.2, "face": "w", "pair": "sofa_n"},
+ {"key": "range_n", "src": "ext:range-n.png", "trim": true, "out": "assets/r524/range-n.webp", "max": 224, "face": "n", "pair": "range_w", "ch": 62},
+ {"key": "range_w", "src": "ext:range-w.png", "trim": true, "out": "assets/r524/range-w.webp", "max": 224, "face": "w", "pair": "range_n", "ch": 56},
+ {"key": "mirror", "src": "assets/world-r80/r80-026.webp", "ch": 76, "ang": "pole", "d": 0.45}
+]

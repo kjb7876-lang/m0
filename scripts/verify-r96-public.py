@@ -1,5 +1,5 @@
 from pathlib import Path
-import hashlib,json,os,time,urllib.request,urllib.error
+import hashlib,http.client,json,os,time,urllib.request,urllib.error
 root=Path(__file__).resolve().parents[1];r=root/'r96';manifest=(r/'runtime-manifest.json').read_bytes();sha=lambda b:hashlib.sha256(b).hexdigest();rows=json.loads(manifest)['files'];base=os.environ['STORYWORLD_URL'].rstrip('/')+'/'
 expected={'web-manifest-r62.json':sha(manifest)}
 for v in rows:
@@ -12,16 +12,20 @@ _skip=tuple(e['prefix'] for e in _exc['exclude'])
 skipped=sorted(k for k in expected if _skip and k.startswith(_skip))
 for k in skipped:del expected[k]
 _attempts=int(os.environ.get('STORYWORLD_PUBLIC_ATTEMPTS','18'))
+_timeout=float(os.environ.get('STORYWORLD_PUBLIC_TIMEOUT','30'));_pause=float(os.environ.get('STORYWORLD_PUBLIC_SLEEP','5'))
+# 일시적 네트워크 오류(읽기 시간 초과·연결 끊김)는 다시 시도한다. 판정(해시 일치)은 그대로다.
+TRANSIENT=(TimeoutError,ConnectionError,http.client.HTTPException,urllib.error.URLError,OSError)
+last_error={}
 deploy=None
 for attempt in range(_attempts):
  try:
-  with urllib.request.urlopen(urllib.request.Request(base+'pages-deploy.json?release='+os.environ.get('GITHUB_SHA','r96')+'&check='+str(attempt),headers={'Cache-Control':'no-cache'}),timeout=30) as response:deploy=json.loads(response.read())
+  with urllib.request.urlopen(urllib.request.Request(base+'pages-deploy.json?release='+os.environ.get('GITHUB_SHA','r96')+'&check='+str(attempt),headers={'Cache-Control':'no-cache'}),timeout=_timeout) as response:deploy=json.loads(response.read())
   break
  except urllib.error.HTTPError as e:
   if e.code in [401,403]:raise
   if e.code==404:break
- except (urllib.error.URLError,ValueError):pass
- time.sleep(5)
+ except (ValueError,)+TRANSIENT:pass
+ time.sleep(_pause)
 optimized=0
 if deploy is not None:
  if deploy.get('sourceManifestSHA256')!=sha(manifest):raise RuntimeError('pages-deploy.json is for another manifest')
@@ -32,10 +36,13 @@ for name,want in expected.items():
  for attempt in range(_attempts):
   try:
    req=urllib.request.Request(base+name+'?release='+os.environ.get('GITHUB_SHA','r96')+'&check='+str(attempt),headers={'Cache-Control':'no-cache'})
-   with urllib.request.urlopen(req,timeout=30) as response:b=response.read()
+   with urllib.request.urlopen(req,timeout=_timeout) as response:b=response.read()
    if sha(b)==want:matched.append({'path':name,'sha256':want});break
+   last_error[name]='sha256 mismatch'
   except urllib.error.HTTPError as e:
    if e.code in [401,403]:raise
-  if attempt+1<_attempts:time.sleep(5)
- else:raise RuntimeError('Public hash verification failed: '+name)
+   last_error[name]='HTTP '+str(e.code)
+  except TRANSIENT as e:last_error[name]=type(e).__name__+': '+str(e)[:120]
+  if attempt+1<_attempts:time.sleep(_pause)
+ else:raise RuntimeError('Public hash verification failed: '+name+' ('+last_error.get(name,'?')+')')
 result={'passed':True,'url':base,'sourceCommit':os.environ.get('GITHUB_SHA'),'files':matched,'skippedExcluded':len(skipped),'optimizedPng':optimized};(r/'public-result.json').write_text(json.dumps(result,indent=2));print(result)
