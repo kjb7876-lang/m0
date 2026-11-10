@@ -161,6 +161,42 @@ if(exists){
 
  ok('C beat: petals leave a beat after the blast, not in the same frame',(()=>{const h=env();h.room.enemies.push(foe('c1',16,10));vm.runInContext('cast("r")',h);let tb=null,tp=null;for(let i=0;i<60&&tp==null;i++){step(h,1,1/60);const s=h.__STORYWORLD_HUNTER_ARROWS_R535__.inspect().stats;if(tb==null&&s.blasts)tb=h.time;if(tp==null&&s.petals)tp=h.time;}return tb!=null&&tp!=null&&tp-tb>=.07&&tp-tb<=.12;})());
  ok('at most 4 blast flashes alive at once',(()=>{const h=env();for(let k=0;k<8;k++)vm.runInContext('cast("r")',h);for(let i=0;i<20;i++)step(h,1,1/30);return h.__STORYWORLD_HUNTER_ARROWS_R535__.inspect().fx<=4;})());
+ // ---------- R535-2 후속: 헌터 테마(불과 화살, 허공의 문에서 무기가 쏟아짐) · 드라이브 화살촉 불꽃 · 사몽 배수 ----------
+ ok('arrowhead flame sheet shipped (drive hunter-fire-arrowhead, ≤ 200KB)',(()=>{const f=path.join(R,'runtime-text','assets','r535','hunter-fire-arrowhead.webp');return fs.existsSync(f)&&fs.statSync(f).size<=200000;})());
+ ok('source names the sheet path',/assets\/r535\/hunter-fire-arrowhead\.webp/.test(src));
+ g=env();g.readyImage=p=>/hunter-fire-arrowhead/.test(p)?{image:{naturalWidth:1152,naturalHeight:768},ready:true}:null;g.document={createElement(){return{width:0,height:0,getContext(){return{drawImage(){}};}};}};
+ g.room.enemies.push(foe('c1',17,10));run(g,'cast("r")');for(let i=0;i<4;i++)step(g,1,1/30);
+ ok('lance head wears the arrowhead flame sheet when loaded',A(g).inspect().stats.headDraws>0);
+ ok('C opens weapon gates behind the hero (5 portals)',A(g).inspect().gates.some(x=>x.kind==='r'&&x.n===5));
+ ok('gates pour visual fire-arrows toward the lance while it flies',A(g).inspect().stats.volleys>0);
+ ok('visual volleys capped at 20 alive',A(g).inspect().volleys<=20);
+ for(let i=0;i<40;i++)step(g,1,1/30);ok('gates close after the blast',A(g).inspect().gates.filter(x=>x.kind==='r').length===0);
+ ok('gate volleys are visual only (no extra hits or projectiles)',g.hits.every(h=>h.src&&['lance','blast','petal','burn','shard'].includes(h.src.r535)||!h.src||h.src.storyWER));
+ g=env();g.room.enemies.push(foe('a',16,10));run(g,'special()');step(g,1,.0001);ok('Q opens 3 small gates during the storm',A(g).inspect().gates.some(x=>x.kind==='q'&&x.n===3));
+ g=env({off:true});run(g,'special();cast("r")');step(g,2,1/30);ok('switch off → no gates',A(g).inspect().gates.length===0);
+ // 사몽(R571 공용 API) 중이면 폭발 반경·가시 사거리 ×1.77, 상한은 그대로
+ const surge=on=>({active:()=>on,range:r=>on?r*1.77:r,cd:s=>s,chance:c=>c});
+ for(const on of [false,true]){g=env();g.__STORYWORLD_SAMONG_SURGE_R571__=surge(on);const s1=foe('s1',16,10),s2=foe('s2',16,13.2);g.room.enemies.push(s1,s2);run(g,'cast("r")');for(let i=0;i<30;i++)step(g,1,1/30);
+  const hitS2=g.hits.some(h=>h.id==='s2'&&h.src&&h.src.r535==='blast');ok('samong '+(on?'on':'off')+': blast reaches an enemy 3.2 tiles away = '+on,hitS2===on);}
+ g=env();g.__STORYWORLD_SAMONG_SURGE_R571__=surge(true);for(let i=0;i<30;i++)g.room.enemies.push(foe('p'+i,11+(i%6)*.5,9+Math.floor(i/6)*.5));for(let k=0;k<12;k++){run(g,'cast("w");cast("r")');step(g,8,1/30);}
+ ok('samong keeps the 24 live projectile cap',A(g).inspect().stats.maxLive<=24);
+ // Codex 리뷰(#376): Q 문 3개가 모두 줄기를 쏘는지 · 사몽 중 넓어진 가시 사거리로 고른 표적에 실제로 닿는지
+ g=env();g.room.enemies.push(foe('a',16,10));run(g,'special()');{const seen=new Set();for(let i=0;i<20;i++){step(g,1,1/30);for(const o of A(g).inspect().volleyOrigins)seen.add(o);}ok('Q volleys pour from all 3 gates ('+seen.size+')',seen.size>=3);}
+ g=env();g.__STORYWORLD_SAMONG_SURGE_R571__=surge(true);g.room.enemies.push(foe('w1',12,10),foe('far',12,18));run(g,'cast("w")');for(let i=0;i<40;i++)step(g,1,1/30);
+ ok('samong: shard reaches a target 8 tiles away',g.hits.some(h=>h.id==='far'&&h.src&&h.src.r535==='shard'));
+
+ // ---------- R535-3: Dots r1 헌터 시트 6장(HU-01~06) 연결 · 시트가 아직 안 읽혔으면 옛 코드 그림 그대로 ----------
+ const DOTS=['hunter-c-lance','hunter-c-blast','hunter-burn','hunter-z-ember-thorn','hunter-z-split-pop','hunter-q-storm-trail'];
+ ok('Dots r1 sheets shipped (6, each ≤ 400KB, total ≤ 1.2MB)',(()=>{let t=0;for(const n of DOTS){const f=path.join(R,'runtime-text','assets','r535','dots',n+'.webp');if(!fs.existsSync(f))return false;const z=fs.statSync(f).size;if(z>400000)return false;t+=z;}return t<=1200000;})());
+ ok('source names every Dots sheet path',DOTS.every(n=>src.includes('assets/r535/dots/'+n+'.webp')));
+ const sheetEnv=()=>{const h=env();h.readyImage=p=>/assets\/r535\//.test(p)?{image:{naturalWidth:1536,naturalHeight:1024},ready:true}:null;return h;};
+ g=sheetEnv();g.room.enemies.push(foe('a',13,10),foe('b',14,10.6),foe('c',17,10),foe('d',15.5,11));run(g,'special();cast("w")');for(let i=0;i<12;i++)step(g,1,1/30);run(g,'cast("r")');for(let i=0;i<30;i++)step(g,1,1/30);
+ {const sd=A(g).inspect().stats.sheetDraws||{};for(const k of ['lance','blast','burn','shard','pop','storm'])ok('sheet drawn when loaded: '+k+' ('+(sd[k]|0)+')',(sd[k]|0)>0);}
+ g=env();g.room.enemies.push(foe('a',13,10),foe('b',14,10.6),foe('c',17,10));run(g,'special();cast("w")');for(let i=0;i<12;i++)step(g,1,1/30);run(g,'cast("r")');for(let i=0;i<30;i++)step(g,1,1/30);
+ ok('sheets not loaded → old code art still draws (no sheet draws, lance drawn)',(()=>{const s=A(g).inspect().stats,sd=s.sheetDraws||{};return Object.values(sd).every(v=>!v)&&s.lanceDraws>0;})());
+ g=sheetEnv();for(let i=0;i<30;i++)g.room.enemies.push(foe('p'+i,11+(i%6)*.5,9+Math.floor(i/6)*.5));for(let k=0;k<8;k++){run(g,'cast("w")');step(g,6,1/30);}
+ ok('split pops capped (≤ 6 alive)',A(g).inspect().pops<=6);
+
  // ---------- 그리기·성능 ----------
  g=env();g.room.enemies.push(foe('a',16,10),foe('b',17,10.8));run(g,'special();cast("w");cast("r")');for(let i=0;i<20;i++)step(g,1,1/30);
  ok('custom draws happen inside ctx.scope effect owners',g.scopes.length>0&&g.scopes.every(o=>o.kind==='effect'&&Number.isFinite(o.x)&&Number.isFinite(o.y)));

@@ -10,11 +10,11 @@
  */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_LAUREN_GRAVITY_R561__)return;
-const REV='R561-gravity-1',KEY='storyworld.r561.gravity',HERO='lauren';
+const REV='R561-gravity-dots-1',KEY='storyworld.r561.gravity',HERO='lauren';
 const PULL_R=4.6,PULL_T=1.1,PULL_V=2.4,CORE=.55,COLLAPSE_AT=1.25,COLLAPSE_R=2.4,COLLAPSE_K=.35,END=1.75;
 const CRUSH_R=2.6,CRUSH_T=.55,CRUSH_V=2.0,CRUSH_MAX=3,AIM_REACH=3.4;
 const stats={wells:0,pulledSteps:0,collapses:0,collapseHits:0,crushes:0,draws:0,errors:0,lastError:null};
-let well=null,crushes=[],lastRoom=null,lastT=null,prefAt=-1e9,prefOn=true;
+let well=null,crushes=[],bursts=[],lastRoom=null,lastT=null,prefAt=-1e9,prefOn=true;
 const T=()=>{try{return typeof time==='number'?time:0;}catch(_){return 0;}};
 const fail=e=>{stats.errors++;stats.lastError=String(e&&e.message||e).slice(0,200);};
 function readOn(){try{const v=JSON.parse(localStorage.getItem(KEY)||'null');return !(v&&v.on===false);}catch(_){return true;}}
@@ -39,11 +39,11 @@ function collapse(w){stats.collapses++;const src={kind:'r561-collapse',friendly:
 function curRoom(){try{return typeof room!=='undefined'?room:null;}catch(_){return null;}}
 function startWell(point,power){lastRoom=curRoom();well={x:point.x,y:point.y,t0:T(),power,collapsed:false,seed:(stats.wells*7919)%360};stats.wells++;}
 function startCrush(x,y){lastRoom=curRoom();if(crushes.length>=CRUSH_MAX)crushes.shift();crushes.push({x,y,t0:T()});stats.crushes++;}
-function cancel(){well=null;crushes=[];}
+function cancel(){well=null;crushes=[];bursts=[];}
 function step(){const t=T();const rm=typeof room!=='undefined'?room:null;if(rm!==lastRoom){if(lastRoom!==null)cancel();lastRoom=rm;}
  const dt=lastT==null||t<lastT?0:Math.min(.1,t-lastT);lastT=t;
  if(!on()||heroNow()!==HERO||!player||player.hp<=0||blockedNow()){cancel();return;}
- if(well){const u=t-well.t0;if(u<PULL_T)pull(well,PULL_R,PULL_V,dt);if(!well.collapsed&&u>=COLLAPSE_AT){well.collapsed=true;collapse(well);}if(u>=END)well=null;}
+ if(well){const u=t-well.t0;if(!well.bursted&&u>=COLLAPSE_AT-BURST_LEAD){well.bursted=true;if(bursts.length>=2)bursts.shift();bursts.push({x:well.x,y:well.y,t0:well.t0+COLLAPSE_AT-BURST_LEAD});}if(u<PULL_T)pull(well,PULL_R,PULL_V,dt);if(!well.collapsed&&u>=COLLAPSE_AT){well.collapsed=true;collapse(well);}if(u>=END)well=null;}
  crushes=crushes.filter(c=>{const u=t-c.t0;if(u<CRUSH_T)pull(c,CRUSH_R,CRUSH_V,dt);return u<CRUSH_T+.25;});}
 // ---- 시전 감지 ------------------------------------------------------------------------------
 if(typeof special==='function'){const base=special;special=function(...a){let before=0,point=null;
@@ -54,17 +54,27 @@ if(typeof special==='function'){const base=special;special=function(...a){let be
 if(typeof fx==='function'){const base=fx;fx=function(type,x,y,opt){const r=base.apply(this,arguments);
  try{const o=opt||{};if(type==='storySourceSkill'&&o.storyWER&&o.stage==='release'&&o.sourceHero===HERO&&o.sourceSlot==='r'&&o.tx==null&&on()&&heroNow()===HERO)startCrush(x,y);}catch(err){fail(err);}return r;};}
 if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);
- try{if(typeof started!=='undefined'&&started)step();}catch(err){fail(err);cancel();}sentinel(!!(well||crushes.length));return r;};}
+ try{if(typeof started!=='undefined'&&started)step();}catch(err){fail(err);cancel();}bursts=bursts.filter(b=>T()-b.t0<BURST_T&&T()>=b.t0-.05);sentinel(!!(well||crushes.length||bursts.length));return r;};}
 // ---- 그리기(효과 단계 표지 하나, 3D 기록기에는 ctx.scope 로 자리 주인을 붙인다) -------------------------
 const VIOLET='200,160,223',DEEP='74,26,120',HOT='240,216,255';
 function sc(o,f){if(typeof ctx!=='undefined'&&ctx&&typeof ctx.scope==='function')ctx.scope(o,f);else f();}
 function scale(){const z=typeof zoom==='number'&&zoom>0?zoom:1,TL=typeof TILE==='number'?TILE:34;return {z,T1:TL*z*Math.SQRT2,AH:typeof actorHeight==='function'?actorHeight():66*z};}
-// 시트(드라이브 core24 보스 중력 우물을 라우렌 보라로 바꾼 것, 2026-11-10 이펙트 조사 스레드 준비물). 없으면 코드 그림만.
-const SHEET='assets/r561/lauren-gravity-well.webp',CELL=192,COLS=6,FPS=12.5;const asked={at:-1e9};
-function sheetImg(){try{const g=typeof readyImage==='function'?readyImage(SHEET):null;if(g&&g.image)return g.image;const n=Date.now();if(n-asked.at>1500){asked.at=n;if(typeof ensureImages==='function')Promise.resolve(ensureImages([SHEET])).catch(()=>{});}}catch(err){fail(err);}return null;}
-function wellFrame(u){if(u<.48)return Math.min(5,Math.floor(u*FPS));if(u<COLLAPSE_AT)return 6+Math.floor((u-.48)*FPS)%12;return Math.min(23,18+Math.floor((u-COLLAPSE_AT)*FPS*1.4));}
+// Dots CX-0059S LA-01·02·03 시트(11-10 08Z 초안 손질본 dots-r2, 6×4 칸 256, 직선 알파). 없으면 아래 코드 그림으로 그린다.
+const DOTS='assets/r561/lauren/',CELL=256,COLS=6,FPS=12.5,BURST_FPS=20,BURST_LEAD=6/BURST_FPS,BURST_T=24/BURST_FPS;
+// py·span = 칸 안 바닥 원반(가장 넓은 줄)의 중심·너비 비율을 실측(11-10 09Z): 판정 반경이 그림 원반과 맞도록.
+const SHEETS={back:{f:DOTS+'lauren-gravity-well-back.webp',n:20,px:128,py:175,span:.86},front:{f:DOTS+'lauren-gravity-well-front.webp',n:20,px:128,py:175,span:.86},
+ collapse:{f:DOTS+'lauren-collapse.webp',n:24,px:128,py:195,span:.86},crush:{f:DOTS+'lauren-crush-vortex.webp',n:20,px:128,py:200,span:.47}};const asked={at:-1e9};
+function img(k){try{const g=typeof readyImage==='function'?readyImage(SHEETS[k].f):null;if(g&&g.image)return g.image;const n=Date.now();if(n-asked.at>1500){asked.at=n;if(typeof ensureImages==='function')Promise.resolve(ensureImages(Object.values(SHEETS).map(v=>v.f))).catch(()=>{});}}catch(err){fail(err);}return null;}
+// 한 칸 그리기: 바닥 피벗(px,py)을 화면 점 q 에, 칸 너비를 W 로.
+function cell(im,k,fr,q,W,alpha){const S=SHEETS[k],sc=W/CELL;ctx.save();try{ctx.globalAlpha*=alpha;ctx.globalCompositeOperation=k==="collapse"&&fr>=5&&fr<=11?"lighter":"source-over";ctx.drawImage(im,(fr%COLS)*CELL,Math.floor(fr/COLS)*CELL,CELL,CELL,q.x-S.px*sc,q.y-S.py*sc,W,W);stats.sheetDraws=(stats.sheetDraws||0)+1;}finally{ctx.restore();}}
 function hole(id,c,u,life,radius,big){const q=project(c.x,c.y),{z,T1,AH}=scale(),t=T(),grow=Math.min(1,u/.25),fade=u>life?Math.max(0,1-(u-life)/.4):1;if(fade<=0)return;
  const rx=radius*T1*.5*grow,ry=rx*.5,spin=t*(big?5.5:7)+(c.seed||0);
+ // Dots 시트가 있으면 시트만: 큰 핵 = 뒤층(구+바닥 소용돌이)·앞층(앞고리), 붕괴 직전부터는 붕괴 시트(bursts)가 이어받음. 작은 핵 = 바닥 소용돌이.
+ if(big){const b=img('back'),f=img('front');if(b&&f){if(u<COLLAPSE_AT-BURST_LEAD){const fr=Math.floor(u*FPS)%SHEETS.back.n,W=rx*2/SHEETS.back.span;
+   sc({id:id+':back',kind:'effect',pxfSide:'hero',x:c.x,y:c.y},()=>cell(b,'back',fr,q,W,fade));
+   sc({id:id+':front',kind:'effect',pxfSide:'hero',x:c.x,y:c.y+.01},()=>cell(f,'front',fr,q,W,fade));}stats.draws++;return;}}
+ else{const im=img('crush');if(im){const fr=Math.floor(u*FPS*1.6)%SHEETS.crush.n,W=rx*2/SHEETS.crush.span;
+   sc({id:id+':vortex',kind:'effect',pxfSide:'hero',x:c.x,y:c.y,groundAligned:true},()=>cell(im,'crush',fr,q,W,fade*(u>life-.15?Math.max(0,(life+.25-u)/.4):1)));stats.draws++;return;}}
  // ① 바닥: 짙은 보라 소용돌이 원반(끌려오는 범위가 읽히게)
  sc({id:id+':disk',kind:'effect',pxfSide:'hero',x:c.x,y:c.y,groundAligned:true},()=>{ctx.save();try{ctx.globalAlpha*=.82*fade;
   const g=ctx.createRadialGradient?ctx.createRadialGradient(q.x,q.y,0,q.x,q.y,rx):null;if(g){g.addColorStop(0,'rgba(8,2,16,.95)');g.addColorStop(.45,`rgba(${DEEP},.55)`);g.addColorStop(1,`rgba(${DEEP},0)`);ctx.fillStyle=g;}else ctx.fillStyle=`rgba(${DEEP},.4)`;
@@ -72,9 +82,6 @@ function hole(id,c,u,life,radius,big){const q=project(c.x,c.y),{z,T1,AH}=scale()
   ctx.lineWidth=Math.max(1.5,2.4*z);ctx.strokeStyle=`rgba(${VIOLET},.75)`;ctx.beginPath();ctx.ellipse(q.x,q.y,rx,ry,0,0,Math.PI*2);ctx.stroke();
   ctx.lineWidth=Math.max(1,1.6*z);for(let i=0;i<(big?5:3);i++){const a0=spin+i*Math.PI*2/(big?5:3);ctx.strokeStyle=`rgba(${VIOLET},${.55-.06*i})`;ctx.beginPath();ctx.ellipse(q.x,q.y,rx*(.35+.12*i),ry*(.35+.12*i),0,a0,a0+Math.PI*1.1);ctx.stroke();}
  }finally{ctx.restore();}});
- // ①-2 소용돌이 시트(큰 핵만): 바닥에 눕힌 보라 소용돌이. 시트가 있으면 코드 원반은 옅게 깔린 받침이 된다.
- if(big){const im=sheetImg();if(im){const fr=wellFrame(u),sx=(fr%COLS)*CELL,sy=Math.floor(fr/COLS)*CELL,W=rx*2.3;stats.sheetDraws=(stats.sheetDraws||0)+1;
-  sc({id:id+':swirl',kind:'effect',pxfSide:'hero',x:c.x,y:c.y,groundAligned:true},()=>{ctx.save();try{ctx.globalAlpha*=fade;ctx.translate(q.x,q.y);ctx.scale(1,.55);ctx.drawImage(im,sx,sy,CELL,CELL,-W/2,-W/2,W,W);}finally{ctx.restore();}});}}
  // ② 핵과 강착 고리: 몸 높이 중간에 뜬 검은 구 + 기울어진 밝은 고리 + 안으로 빨려드는 빛줄기
  const cy=q.y-AH*(big?.95:.6),cr=AH*(big?.3:.16)*grow*(u>COLLAPSE_AT&&big?Math.max(.15,1-(u-COLLAPSE_AT)/.2):1);
  sc({id:id+':core',kind:'effect',pxfSide:'hero',x:c.x,y:c.y},()=>{ctx.save();try{ctx.globalAlpha*=fade;
@@ -96,6 +103,9 @@ function hole(id,c,u,life,radius,big){const q=project(c.x,c.y),{z,T1,AH}=scale()
    ctx.lineWidth=Math.max(1,2.5*z);ctx.strokeStyle=`rgba(${VIOLET},.8)`;ctx.beginPath();ctx.ellipse(q.x,q.y,R*.7,R*.35,0,0,Math.PI*2);ctx.stroke();ctx.globalCompositeOperation=prev;}finally{ctx.restore();}});}
  stats.draws++;}
 function draw(){if(typeof project!=='function'||typeof ctx==='undefined'||!ctx)return;const t=T();
+ const ci=bursts.length?img('collapse'):null;if(ci){const {T1}=scale();for(const b of bursts){const v=t-b.t0;if(v<0)continue;const fr=Math.min(23,Math.floor(v*BURST_FPS)),q=project(b.x,b.y);
+  const Wb=PULL_R*T1/SHEETS.back.span,Wc=COLLAPSE_R*T1/SHEETS.collapse.span,k=Math.min(1,fr/6),W=Wb+(Wc-Wb)*k;
+  sc({id:'r561:collapse:'+b.t0.toFixed(2),kind:'effect',pxfSide:'hero',x:b.x,y:b.y},()=>cell(ci,'collapse',fr,q,W,1));}}
  if(well)hole('r561:well:'+well.t0.toFixed(2),well,t-well.t0,COLLAPSE_AT,PULL_R,true);
  for(const c of crushes)hole('r561:crush:'+c.t0.toFixed(2)+':'+c.x.toFixed(1),c,t-c.t0,CRUSH_T,CRUSH_R*.8,false);}
 const SENT={type:'r561-gravity',x:0,y:0,age:0,life:Infinity,r561Sentinel:true};

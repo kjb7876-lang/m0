@@ -31,7 +31,7 @@ if(exists){
   function fx(type,x,y,opt={}){effects.push({type,x,y,age:0,life:.4,...opt});}
   function tick(){}function drawEffect(e){}
   function project(x,y){return{x:(x-y)*34+480,y:(x+y)*17};}function actorHeight(){return 66;}
-  var drawn=[];function readyImage(p){return String(p).endsWith('r561/lauren-gravity-well.webp')?{image:{src:p}}:null;}
+  var SHEETS_ON=false,drawn=[];function readyImage(p){return SHEETS_ON&&String(p).includes('r561/lauren/')?{image:{src:p}}:null;}
   var scopes=[];var grad={addColorStop(){}};var ctx={translate(){},scale(){},drawImage(im,sx,sy){drawn.push({src:im.src,sx,sy});},globalAlpha:1,globalCompositeOperation:'source-over',save(){},restore(){},beginPath(){},ellipse(){},fill(){},stroke(){},moveTo(){},lineTo(){},createRadialGradient(){return grad;},scope(o,f){scopes.push(o);f();}};`,g);
   vm.runInContext(src,g);return g;}
  const mob=(id,x,y,extra={})=>({id,x,y,hp:1000,maxHp:1000,radius:.3,spawnState:'active',...extra});
@@ -50,8 +50,18 @@ if(exists){
  ok('collapse source is friendly hero damage',cHits.every(h=>h.s.friendly===true&&h.s.owner==='hero'));
  step(g,20);ok('well clears after ~1.75 s and sentinel removed',!A(g).inspect().well&&vm.runInContext('effects.filter(e=>e.r561Sentinel).length',g)===0);
  ok('drawn with ctx.scope owners (disk groundAligned + core)',(()=>{const s=vm.runInContext('scopes',g);return s.some(o=>/:disk$/.test(o.id)&&o.groundAligned)&&s.some(o=>/:core$/.test(o.id))&&s.every(o=>o.kind==='effect');})());
- ok('recoloured gravity-well sheet drawn on the ground (swirl scope, 192 cells)',(()=>{const s=vm.runInContext('scopes',g),d=vm.runInContext('drawn',g);return s.some(o=>/:swirl$/.test(o.id)&&o.groundAligned)&&d.length>0&&d.every(x=>x.sx%192===0&&x.sy%192===0&&x.sx<1152&&x.sy<768);})());
- ok('sheet asset shipped (runtime-text/assets/r561/lauren-gravity-well.webp, < 400 KB)',(()=>{try{return fs.statSync(path.join(R,'runtime-text','assets','r561','lauren-gravity-well.webp')).size<400000;}catch(_){return false;}})());
+ ok('no sheets loaded → code drawing only (no drawImage)',vm.runInContext('drawn.length',g)===0);
+ // Dots 시트(CX-0059S LA-01·02·03): 뒤층·앞층 → 붕괴 시트 → 끝, R 소용돌이는 바닥 시트. 칸 256, 6×4 안.
+ {const h=env();vm.runInContext('SHEETS_ON=true',h);h.room.enemies.push(mob('a',12,10),mob('b',13,10));vm.runInContext('special()',h);step(h,8);
+  let d=vm.runInContext('drawn',h),s=vm.runInContext('scopes',h);
+  ok('Dots well: back + front layers drawn while pulling, no code disk',d.some(x=>/well-back/.test(x.src))&&d.some(x=>/well-front/.test(x.src))&&s.some(o=>/:back$/.test(o.id))&&s.some(o=>/:front$/.test(o.id))&&!s.some(o=>/:disk$/.test(o.id)));
+  step(h,30);d=vm.runInContext('drawn',h);const col=d.filter(x=>/collapse/.test(x.src));
+  ok('Dots collapse sheet takes over before the hit and plays past the well end (hit frame 6 at collapse)',col.length>=8&&col.some(x=>x.sx===0&&x.sy===256)&&vm.runInContext('effects.filter(e=>e.r561Sentinel).length',h)===1);
+  step(h,20);ok('collapse sheet ends and sentinel removed',vm.runInContext('effects.filter(e=>e.r561Sentinel).length',h)===0);
+  vm.runInContext("player.specialCD=0;fx('storySourceSkill',14,10,{storyWER:true,stage:'release',sourceHero:'lauren',sourceSlot:'r',castId:'k1'})",h);step(h,3);
+  d=vm.runInContext('drawn',h);s=vm.runInContext('scopes',h);ok('Dots crush vortex drawn flat on the ground',d.some(x=>/crush-vortex/.test(x.src))&&s.some(o=>/:vortex$/.test(o.id)&&o.groundAligned));
+  ok('all sheet cells are 256-aligned inside 1536×1024',d.length>0&&d.every(x=>x.sx%256===0&&x.sy%256===0&&x.sx<1536&&x.sy<1024));}
+ ok('Dots sheets shipped (runtime-text/assets/r561/lauren/*.webp, each < 400 KB)',['lauren-gravity-well-back','lauren-gravity-well-front','lauren-collapse','lauren-crush-vortex'].every(n=>{try{return fs.statSync(path.join(R,'runtime-text','assets','r561','lauren',n+'.webp')).size<400000;}catch(_){return false;}}));
  // 쿨다운 중 Q → 새 특이점 없음
  vm.runInContext('special()',g);ok('Q on cooldown → no new well',A(g).inspect().stats.wells===1);
  // 적 없음 → 앞 3.4칸

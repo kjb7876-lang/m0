@@ -1,0 +1,276 @@
+{
+ "schema": "storyworld.r532.slayer-sheets.v1",
+ "request": "CX-0055",
+ "author": "Dots 초안 + Claude 보정",
+ "sourceCell": 256,
+ "sheets": {
+  "slayer-r-cross": {
+   "loop": false,
+   "hit": 13,
+   "pivot": [
+    128,
+    224
+   ],
+   "fps": 23.6,
+   "note": "R 큰·작은 십자가 공용, 십자가 높이=셀 75%",
+   "source": "slayer-r-cross-v2 (HOLD) 재타이밍",
+   "file": "slayer-r-cross.webp",
+   "frames": 24,
+   "cell": 192,
+   "cols": 6,
+   "rows": 4,
+   "bytes": 287892,
+   "sha256": "9a8e9dff57459d9c4ced9df03e94fb0856f67800b8645f1870a79144bb3ede80",
+   "seam": null
+  },
+  "slayer-burst-big": {
+   "loop": false,
+   "hit": 5,
+   "pivot": [
+    128,
+    224
+   ],
+   "fps": 18,
+   "source": "slayer-blood-burst-big-v1",
+   "file": "slayer-burst-big.webp",
+   "frames": 24,
+   "cell": 192,
+   "cols": 6,
+   "rows": 4,
+   "bytes": 202810,
+   "sha256": "29ead8132333a4ebc58f12a4b5742ca1cf0bdcd19b0286fe4a0e90f2c2ba1474",
+   "seam": null
+  },
+  "slayer-burst-small": {
+   "loop": false,
+   "hit": 3,
+   "pivot": [
+    128,
+    224
+   ],
+   "fps": 18,
+   "source": "slayer-blood-burst-small-v1 재타이밍(최고점 6→3)",
+   "file": "slayer-burst-small.webp",
+   "frames": 24,
+   "cell": 192,
+   "cols": 6,
+   "rows": 4,
+   "bytes": 77908,
+   "sha256": "e0d2a4a65e48d146b6459e290a4ff7cee0ad652e035fb0e7101aadb849026c5d",
+   "seam": null
+  },
+  "slayer-r-aura-back": {
+   "loop": true,
+   "pivot": [
+    128,
+    224
+   ],
+   "fps": 12.5,
+   "source": "slayer-r-aura-back-v1 루프 이음매",
+   "file": "slayer-r-aura-back.webp",
+   "frames": 20,
+   "cell": 192,
+   "cols": 6,
+   "rows": 4,
+   "bytes": 320912,
+   "sha256": "a14b42a857e12f2c42888abdd731ec741f5ab9861ac44fd65c99701f9b90a39f",
+   "seam": 0.6
+  },
+  "slayer-r-aura-front": {
+   "loop": true,
+   "pivot": [
+    128,
+    224
+   ],
+   "fps": 12.5,
+   "source": "slayer-r-aura-front-v1 루프 이음매·몸 가림 줄임",
+   "file": "slayer-r-aura-front.webp",
+   "frames": 20,
+   "cell": 192,
+   "cols": 6,
+   "rows": 4,
+   "bytes": 114222,
+   "sha256": "e1aaad0f0fc71e610dfe8a4d70c3a84fe4ac4c48b5d4858f2c76261e95afe8a8",
+   "seam": 0.68
+  },
+  "slayer-q-spin-back": {
+   "loop": true,
+   "pivot": [
+    128,
+    224
+   ],
+   "fps": 40,
+   "source": "slayer-q-spin-back-v2 루프",
+   "file": "slayer-q-spin-back.webp",
+   "frames": 20,
+   "cell": 192,
+   "cols": 6,
+   "rows": 4,
+   "bytes": 235940,
+   "sha256": "3ea4fee9d30ed37eaf6fc5791a57659bb9ed9473e7895595345876900fe02e75",
+   "seam": 1.06
+  },
+  "slayer-q-spin-front": {
+   "loop": true,
+   "pivot": [
+    128,
+    224
+   ],
+   "fps": 40,
+   "source": "slayer-q-spin-front-v2 끝점 맞춤·루프",
+   "file": "slayer-q-spin-front.webp",
+   "frames": 20,
+   "cell": 192,
+   "cols": 6,
+   "rows": 4,
+   "bytes": 134858,
+   "sha256": "6e504de5b4c1607c78ff06400e51c188523c48172894363b86a86da16a96fae8",
+   "seam": 0.92
+  },
+  "slayer-q-tornado-back": {
+   "loop": true,
+   "pivot": [
+    128,
+    232
+   ],
+   "fps": 24,
+   "source": "slayer-q-tornado-back-v1 보완층·루프",
+   "file": "slayer-q-tornado-back.webp",
+   "frames": 20,
+   "cell": 192,
+   "cols": 6,
+   "rows": 4,
+   "bytes": 271624,
+   "sha256": "e6ed084108e3881e9e27c7d2deb4718c1e9b81063980bbc5dcb861958c2b1c2d",
+   "seam": 0.89
+  },
+  "slayer-q-tornado-front": {
+   "loop": true,
+   "pivot": [
+    128,
+    232
+   ],
+   "fps": 24,
+   "source": "slayer-q-tornado-front-v1 루프",
+   "file": "slayer-q-tornado-front.webp",
+   "frames": 20,
+   "cell": 192,
+   "cols": 6,
+   "rows": 4,
+   "bytes": 165716,
+   "sha256": "0c65e7ea7ad90f25ac01fff7bdf6c708457be44d1bd9f2a85ab1d81d1df24da8",
+   "seam": 0.83
+  },
+  "slayer-bleed": {
+   "loop": false,
+   "pivot": [
+    128,
+    224
+   ],
+   "fps": 16,
+   "source": "slayer-bleed-drip-v1 대비·아래 절반",
+   "file": "slayer-bleed.webp",
+   "frames": 24,
+   "cell": 192,
+   "cols": 6,
+   "rows": 4,
+   "bytes": 37196,
+   "sha256": "6c1ed94fc9e4d82aa9d6675d299573a503bff50dd0458eeb4c74ec2267b9f2e1",
+   "seam": null
+  },
+  "slayer-w-sacrifice": {
+   "loop": false,
+   "hit": 8,
+   "pivot": [
+    128,
+    192
+   ],
+   "fps": 14,
+   "source": "slayer-w-sacrifice-v1 바닥 투영·경계",
+   "file": "slayer-w-sacrifice.webp",
+   "frames": 24,
+   "cell": 192,
+   "cols": 6,
+   "rows": 4,
+   "bytes": 127910,
+   "sha256": "f301ba2679c17d6a3bf595f6471d6252362baa116dc0d9c6130e2d79c35de4c4",
+   "seam": null
+  },
+  "slayer-e-dash": {
+   "loop": false,
+   "hit": 12,
+   "pivot": [
+    128,
+    208
+   ],
+   "fps": 24,
+   "trail": [
+    0.05,
+    0.95
+   ],
+   "source": "slayer-e-blood-dash-v1 흰 바탕 제거·웅덩이 페이드",
+   "file": "slayer-e-dash.webp",
+   "frames": 24,
+   "cell": 192,
+   "cols": 6,
+   "rows": 4,
+   "bytes": 140512,
+   "sha256": "0409f4e1709fbfafc8094c533f9771e80c8267d2392d77eee518c456fa0e8c13",
+   "seam": null,
+   "start_frame": 2
+  },
+  "slayer-d-guard": {
+   "loop": true,
+   "pivot": [
+    128,
+    224
+   ],
+   "fps": 12.5,
+   "source": "slayer-d-guard-v1 가운데 투명",
+   "file": "slayer-d-guard.webp",
+   "frames": 24,
+   "cell": 192,
+   "cols": 6,
+   "rows": 4,
+   "bytes": 329462,
+   "sha256": "566db36a9e3e15eb04ee8f708270192780a306bab77c1f2fc1e1096e9b13d3f9",
+   "seam": 0.94
+  },
+  "slayer-ego-enter": {
+   "loop": false,
+   "hit": 8,
+   "pivot": [
+    128,
+    224
+   ],
+   "fps": 14,
+   "source": "slayer-f-ego-enter-v1 가림·위 잘림",
+   "file": "slayer-ego-enter.webp",
+   "frames": 24,
+   "cell": 192,
+   "cols": 6,
+   "rows": 4,
+   "bytes": 240068,
+   "sha256": "f69ba6cb6c2a3f358c86153639e3d10bb454fe7f2e9e7dc31ced8c28f34eb237",
+   "seam": null
+  },
+  "slayer-ego-loop": {
+   "loop": true,
+   "pingpong": true,
+   "pivot": [
+    128,
+    224
+   ],
+   "fps": 10,
+   "source": "slayer-f-ego-loop-v1 왕복 재생(이음매 없음)·가운데 가림 줄임",
+   "file": "slayer-ego-loop.webp",
+   "frames": 24,
+   "cell": 192,
+   "cols": 6,
+   "rows": 4,
+   "bytes": 256950,
+   "sha256": "8a8403688148539051b68ae6159c8bf7e1c7b1bae681d6f521275ffdf8176e8e",
+   "seam": null
+  }
+ }
+}
