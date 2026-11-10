@@ -15213,6 +15213,26 @@
       "sha256": "acb25b215d0e0e5e79c0151a54c45dbbe2be8c2931323150a9bd6bf3dff21c40"
     },
     {
+      "path": "assets/r380/mobs/cult-ego-binder-walk-d1.webp",
+      "bytes": 201626,
+      "sha256": "ca4e2ba1a48ad69a1bc33081bd219777a286318e609e0c1a31de97115a639aea"
+    },
+    {
+      "path": "assets/r380/mobs/cult-mech-legs-walk-d1.webp",
+      "bytes": 87644,
+      "sha256": "0f4bf7b3396f5c32f6bcfae117456ea9379481896fc9eba9eeb66a0cb30d369f"
+    },
+    {
+      "path": "assets/r380/mobs/cult-memory-orb-float-d1.webp",
+      "bytes": 133980,
+      "sha256": "628ea18e5d80377c871e62f32f4b353fad311d0431f80fa7a51e17de13bfc4e2"
+    },
+    {
+      "path": "assets/r380/mobs/cult-nerve-cable-devourer-walk-d1.webp",
+      "bytes": 183172,
+      "sha256": "42c2b5c79051ed67460b941924a0100971de808d9df8f84cf65c27dba734f5bd"
+    },
+    {
       "path": "assets/r380/mobs/discarded-delicacy-v1.webp",
       "bytes": 348842,
       "sha256": "cba11b7b3d7da49a87dc9aca6c576a5130d1abc4e7dbc2b18b8caf46d8588be1"
@@ -15253,9 +15273,19 @@
       "sha256": "0de402a7573778fd8981c3f51ec3b778cb3fb2074aa4f11986a8fc93a3dd8166"
     },
     {
+      "path": "assets/r380/mobs/dys-prism-stalker-v2-walk-d1.webp",
+      "bytes": 138032,
+      "sha256": "ab27a3da1b5ee561a91ca93845022feb7374e22344578fac4714b714efe57789"
+    },
+    {
       "path": "assets/r380/mobs/dys-prism-stalker-v2.webp",
       "bytes": 133396,
       "sha256": "89f45b0f8d2955f4f92124eeef5b6d73adb3cc5f1acf2cf9e662848918217898"
+    },
+    {
+      "path": "assets/r380/mobs/dys-pulse-raider-v2-walk-d1.webp",
+      "bytes": 144940,
+      "sha256": "09374293b800ab8a8acaab9c29e76e118f5ef9129d867930b19b7d1c5984d063"
     },
     {
       "path": "assets/r380/mobs/dys-pulse-raider-v2.webp",
@@ -15273,6 +15303,11 @@
       "sha256": "1fe24eaf24b068323e2db068e13efb50c99ad48d91464a15ec5ae412e9926ea2"
     },
     {
+      "path": "assets/r380/mobs/dys-siege-gunner-v2-walk-d1.webp",
+      "bytes": 159196,
+      "sha256": "d22158b227837635eb6c52ea4381effc40953ecd87fa9fe455352fce171cfd79"
+    },
+    {
       "path": "assets/r380/mobs/dys-siege-gunner-v2.webp",
       "bytes": 224894,
       "sha256": "9790780db70b6ac6a3e1edd50fb4d5a562c2cbda3a4c197263d39cf99cb392c0"
@@ -15283,6 +15318,26 @@
       "sha256": "cd1c1eb2d2e294339138238e0bdb1d6054ab1a43902d92d3a68f2e564e00268c"
     },
     {
+      "path": "assets/r380/mobs/ep1b-banknote-blade-walk-d1.webp",
+      "bytes": 112490,
+      "sha256": "9616db6b5aba675e01703e6e2ecbe6371832c9b7f57aa4e03ec2ae390641bcbf"
+    },
+    {
+      "path": "assets/r380/mobs/ep1b-red-heel-blade-walk-d1.webp",
+      "bytes": 152906,
+      "sha256": "54059336c9a19f9159261e3aa15d7f5620840abf1defa11b0de20e533019ed00"
+    },
+    {
+      "path": "assets/r380/mobs/ep1b-seal-residual-float-d1.webp",
+      "bytes": 92898,
+      "sha256": "429e26b1eb6e61390e1e70dc69a023acfb155a66a5d074f64b341b5285434b45"
+    },
+    {
+      "path": "assets/r380/mobs/ep1b-steel-jaw-hound-walk-d1.webp",
+      "bytes": 122754,
+      "sha256": "85b4fe6f2fd8133dabf2a4fc8abf431080d01898935865de3cb9088139f1ced6"
+    },
+    {
       "path": "assets/r380/mobs/false-heaven-guard-v1.webp",
       "bytes": 453210,
       "sha256": "3559064612af298e5cb3f4e9a8941aa05cb5ad36e82a8466b532a572ae8a6681"
@@ -15291,6 +15346,21 @@
       "path": "assets/r380/mobs/glass-wraith-v1.webp",
       "bytes": 209400,
       "sha256": "4c9c1c3258942a96eee633e6f75ccce6fcda41a552f186cddd5ce92d0ebd62db"
+    },
+    {
+      "path": "assets/r380/mobs/hando-memory-excision-connector-walk-d1.webp",
+      "bytes": 222970,
+      "sha256": "597566e46a6dd1a0d214d847cf1b2499a205d67bd1fb67771874a3790ff09368"
+    },
+    {
+      "path": "assets/r380/mobs/hando-silver-seal-sentinel-walk-d1.webp",
+      "bytes": 160288,
+      "sha256": "81bf702dc68e1d8607682fde0c62e7bd5e783e32210993c042b786222d63fd2e"
+    },
+    {
+      "path": "assets/r380/mobs/hando-timeless-silver-scout-walk-d1.webp",
+      "bytes": 236252,
+      "sha256": "e3b474cb28524c7f233da802a4c0c5c6e5ca1b6704250f71e5c2c14406612a35"
     },
     {
       "path": "assets/r380/mobs/hexagram-experiment-m031-v1.webp",
@@ -15304,8 +15374,8 @@
     },
     {
       "path": "assets/r380/mobs/index.json",
-      "bytes": 184330,
-      "sha256": "91ac8d5f5b953685601b0dc8d29fdb9b42076c30572881e783bc2a1394fc1db3"
+      "bytes": 197029,
+      "sha256": "e1aac1c6c63f85d1f1c28be8f8923eb1fd80c1ea804439825a8adcb198d290f8"
     },
     {
       "path": "assets/r380/mobs/jealousy-wraith-v1.webp",
@@ -15318,9 +15388,19 @@
       "sha256": "588a4d1818f0130deb006acbd6521dcdc118fde961c0ecc408afdf9be090be52"
     },
     {
+      "path": "assets/r380/mobs/legacy-m110-time-guardian-v3-walk-d1.webp",
+      "bytes": 101322,
+      "sha256": "a9e9b9c3459516b38c16cf612f709b6590e1b730f49867624cd9a7548b5eda8c"
+    },
+    {
       "path": "assets/r380/mobs/legacy-m110-time-guardian-v3.webp",
       "bytes": 120976,
       "sha256": "1b6fb3fc8cdf3e3b12390dbb65745990bd96835c0b931ac7901bccd718b93544"
+    },
+    {
+      "path": "assets/r380/mobs/legacy-m119-nameless-scar-v4-walk-d1.webp",
+      "bytes": 120236,
+      "sha256": "34be66f6cd66653844e6add927f867985c1a2027466f2c6c5fffa2189eeb1dfb"
     },
     {
       "path": "assets/r380/mobs/legacy-m119-nameless-scar-v4.webp",
@@ -15343,6 +15423,11 @@
       "sha256": "4ea349abb8c5b999596a0baf90132b98006b47b79a865c0d59a1f802f609467e"
     },
     {
+      "path": "assets/r380/mobs/legacy-m134-nightmare-v4-walk-d1.webp",
+      "bytes": 143118,
+      "sha256": "b50f409891633bc70035999eee79f6cb45fabad4da838d7ee103c625939c6faa"
+    },
+    {
       "path": "assets/r380/mobs/legacy-m134-nightmare-v4.webp",
       "bytes": 159632,
       "sha256": "939b7fd8b4d9bef516fa98c731eb9d9c00d7aa8e4818c6aa50b4315023eb4a8d"
@@ -15361,6 +15446,11 @@
       "path": "assets/r380/mobs/mirror-lament-v1.webp",
       "bytes": 279536,
       "sha256": "2b1487ddbb8d194f74d5f5cef2b9eb4f67c9f729284294403d8e487b0a7c0ef4"
+    },
+    {
+      "path": "assets/r380/mobs/murder-rooftop-echo-float-d1.webp",
+      "bytes": 189038,
+      "sha256": "3473cc5c827c20f848f7d7e5bb889a53731b80f02da6c5e388a337f642816a5d"
     },
     {
       "path": "assets/r380/mobs/persona-gunner-w.webp",
@@ -15528,6 +15618,11 @@
       "sha256": "e7e15eb3376a560579fda93d9c13f270d58b22031a6d22ecf550be22071280c8"
     },
     {
+      "path": "assets/r380/mobs/root-stalker-r74-plain-walk-d1.webp",
+      "bytes": 79336,
+      "sha256": "d742f8a19d157a2a98fbbbb14d2d27f3321e0f6cd58a7c73fb6e7964ab9155cd"
+    },
+    {
       "path": "assets/r380/mobs/root-stalker-r74-plain.webp",
       "bytes": 81584,
       "sha256": "72deaa9fd0f53545500a765a37e7c210d5b277c2d85d7a9bbdb46ab61a2fc00b"
@@ -15638,6 +15733,11 @@
       "sha256": "0ca9695e6f692637da0e0908929d96722d66b417ba15e5bacf96c8fcd31ade3c"
     },
     {
+      "path": "assets/r380/mobs/swamp-root-stalker-darkgreen-v2-walk-d1.webp",
+      "bytes": 160368,
+      "sha256": "06a0e42f3a27386ab6be4b1e40ef635fd1c6c29d12018b3cf6c97010f0dd4e63"
+    },
+    {
       "path": "assets/r380/mobs/swamp-root-stalker-darkgreen-v2.webp",
       "bytes": 234984,
       "sha256": "f57947df4adf530b8a2383bca01f8526fe1df55593dabf528eb8e5841fafc6cb"
@@ -15656,6 +15756,11 @@
       "path": "assets/r380/mobs/treatment-refusal-mask-v1.webp",
       "bytes": 245748,
       "sha256": "a2dc05124261a1e1d8b84f7654bbf027ab0ca9d4fc41f6307db40f1a058d2400"
+    },
+    {
+      "path": "assets/r380/mobs/u2-false-mercy-collector-walk-d1.webp",
+      "bytes": 178860,
+      "sha256": "26385482ff870b101003727e4a822c5c62503eba06b05ee3d81329a22e9870b3"
     },
     {
       "path": "assets/r380/mobs/u204-mech-01-v1.webp",
@@ -44003,8 +44108,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8800,
-  "totalBytes": 1222361404,
+  "fileCount": 8821,
+  "totalBytes": 1225495529,
   "webHTMLSha256": "c7355b5ddcd62a457b91e4751b23b34aeeaf74752f8f0317d10e813ab810803e",
   "largest": [
     {

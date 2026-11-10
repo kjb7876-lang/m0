@@ -58,7 +58,7 @@ const mob=o=>({id:'m'+Math.random(),name:'뿌리 추적자 3',x:0,y:0,hp:10,spaw
  const c2=world(),e3=mob();run(c2,`{const inner=drawEnemy;drawEnemy=function(e){inner(e);}}`);c2.__STORYWORLD_MOB_GAIT_R613__.reinstall();const L3=walk(c2,e3,2);ok(G(c2).verdict(e3)==='gait','single-frame mob still gait after re-wrap');ok(L3.slice(-20).every(l=>l.filter(x=>x[0]==='r').length<=1),'pose applied once per draw (no double wrap)');}
 // ③ 자산 대조
 {const idx=JSON.parse(fs.readFileSync(path.join(R,'runtime-text/assets/r380/mobs/index.json'),'utf8')).mobs;const req=fs.readFileSync(path.join(R,'qa/r613/CX-0067MV-request.txt'),'utf8');
- const one=idx.filter(r=>new Set(r.move||[]).size<=1);ok(one.length>=5,'R380 one-move sheets found ('+one.length+')');for(const r of one)ok(req.includes(r.id),'Dots request covers '+r.id);
+ const one=idx.filter(r=>new Set(r.move||[]).size<=1);/* R615: Dots 걷기 시트가 붙어 한 장 행은 0 일 수 있다 — 남은 한 장 행은 요청서에 있어야 하고, 시트가 붙은 행은 6칸 이상 */for(const id of ['swamp-root-stalker-darkgreen-v2','legacy-m119-nameless-scar-v4','legacy-m134-nightmare-v4','root-stalker-r74-plain','legacy-m110-time-guardian-v3','dys-siege-gunner-v2','dys-prism-stalker-v2','dys-pulse-raider-v2']){const r=idx.find(x=>x.id===id);ok(r&&new Set(r.move).size>=6,'R615 walk sheet on '+id);}for(const r of one)ok(req.includes(r.id),'Dots request covers '+r.id);
  ok(/왼쪽 위/.test(req)&&/CX-0067MV/.test(req),'request states light from upper-left and id');}
 // 연결
 {const html=fs.readFileSync(path.join(R,'runtime-text/index.html'),'utf8');ok(html.includes('<script src="./mob-gait-r613.js"></script>'),'script tag');ok(html.indexOf('mob-gait-r613.js')<html.indexOf('combat-r118.js'),'before combat-r118');

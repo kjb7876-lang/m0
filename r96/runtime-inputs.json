@@ -8010,7 +8010,28 @@
     "assets/r563/dots/michaela-sigil-front.webp",
     "assets/r564/dots/seoha-sigil-back.webp",
     "assets/r564/dots/seoha-sigil-front.webp",
-    "asset-cdn-r615.js"
+    "asset-cdn-r615.js",
+    "assets/r380/mobs/cult-ego-binder-walk-d1.webp",
+    "assets/r380/mobs/cult-mech-legs-walk-d1.webp",
+    "assets/r380/mobs/cult-memory-orb-float-d1.webp",
+    "assets/r380/mobs/cult-nerve-cable-devourer-walk-d1.webp",
+    "assets/r380/mobs/dys-prism-stalker-v2-walk-d1.webp",
+    "assets/r380/mobs/dys-pulse-raider-v2-walk-d1.webp",
+    "assets/r380/mobs/dys-siege-gunner-v2-walk-d1.webp",
+    "assets/r380/mobs/ep1b-banknote-blade-walk-d1.webp",
+    "assets/r380/mobs/ep1b-red-heel-blade-walk-d1.webp",
+    "assets/r380/mobs/ep1b-seal-residual-float-d1.webp",
+    "assets/r380/mobs/ep1b-steel-jaw-hound-walk-d1.webp",
+    "assets/r380/mobs/hando-memory-excision-connector-walk-d1.webp",
+    "assets/r380/mobs/hando-silver-seal-sentinel-walk-d1.webp",
+    "assets/r380/mobs/hando-timeless-silver-scout-walk-d1.webp",
+    "assets/r380/mobs/legacy-m110-time-guardian-v3-walk-d1.webp",
+    "assets/r380/mobs/legacy-m119-nameless-scar-v4-walk-d1.webp",
+    "assets/r380/mobs/legacy-m134-nightmare-v4-walk-d1.webp",
+    "assets/r380/mobs/murder-rooftop-echo-float-d1.webp",
+    "assets/r380/mobs/root-stalker-r74-plain-walk-d1.webp",
+    "assets/r380/mobs/swamp-root-stalker-darkgreen-v2-walk-d1.webp",
+    "assets/r380/mobs/u2-false-mercy-collector-walk-d1.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9085,5 +9106,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "3fb958c505444826ca1e78a12f5febb752a6b13d0e0a1903da7e174103d679fc"
+  "runtimeManifestSHA256": "924120df3994b8dfe560e214e4e7bfdbdadadc060841b27b730f1cff33153133"
 }
