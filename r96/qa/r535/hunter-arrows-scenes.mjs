@@ -12,6 +12,7 @@ await p.evaluate((D)=>{player.hp=99999;const L=room.enemies.filter(e=>e.hp>0&&!e
 const I=()=>p.evaluate(()=>window.__STORYWORLD_HUNTER_ARROWS_R535__.inspect().stats);
 async function snap(name,cond,timeout=60000){await p.waitForFunction(cond,null,{timeout,polling:30}).catch(()=>console.log('timeout',name));await p.evaluate(()=>{window.__SLOW=1e-4;});await p.waitForTimeout(700);await p.screenshot({path:out+'/'+name+'.png'});await p.evaluate(()=>{window.__SLOW=1;});}
 async function settle(){await p.evaluate(async()=>{const t=time;while(time<t+3)await new Promise(r=>setTimeout(r,100));});}
+if(process.env.BT)await p.evaluate(v=>{window.__BT=v;},+process.env.BT);
 if(process.env.ONLYC){await p.evaluate(()=>{player.storyWER&&(player.storyWER.ready={});__cast('r');});await snap('c-lance',()=>projectiles.some(x=>x.r535==='lance'&&x.age>.15));await snap('c-blast',()=>{const b=window.__STORYWORLD_HUNTER_ARROWS_R535__.inspect().lastBlast;return b&&time-b.at>(+window.__BT||.18);});await snap('c-petals',()=>projectiles.filter(x=>x.r535==='petal'&&x.age>.12).length>=6);console.log(JSON.stringify(await I()));await b.close();process.exit(0);}
 // Q: 화살 6발 이상 날 때
 await p.evaluate(()=>{player.specialCD=0;special();});await snap('q-storm',()=>projectiles.filter(x=>x.friendly&&x.owner==='hero').length>=6);await settle();
