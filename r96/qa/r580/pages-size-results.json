@@ -1,0 +1,113 @@
+{
+ "passed": true,
+ "checks": [
+  {
+   "name": "내장 서사 목록(v1)이 비어 있어 옛 음성을 고를 수 없음",
+   "passed": true,
+   "detail": {
+    "scenes": {},
+    "originals": {}
+   }
+  },
+  {
+   "name": "index.html 밖 런타임 js 가 story-narration 을 쓰지 않음",
+   "passed": true,
+   "detail": []
+  },
+  {
+   "name": "보호 경로는 빼는 목록에 없음",
+   "passed": true,
+   "detail": []
+  },
+  {
+   "name": "pages-pack.py 성공",
+   "passed": true,
+   "detail": "{\"totalBytes\": 966128040, \"budgetBytes\": 1000000000, \"files\": 6746, \"excludedFiles\": 238, \"excludedBytes\": 95611880, \"optimizedPng\": 1035, \"optimizedSavedBytes\": 35010145}\n"
+  },
+  {
+   "name": "배포본 1,000,000,000 바이트 미만",
+   "passed": true,
+   "detail": "966,128,040 bytes (6746 files)"
+  },
+  {
+   "name": "pages-deploy.json 총량이 실제와 같음",
+   "passed": true,
+   "detail": 966128040
+  },
+  {
+   "name": "원본 사이트보다 90MB 넘게 줄었음",
+   "passed": true,
+   "detail": "129.1 MB"
+  },
+  {
+   "name": "빼지 않은 manifest 파일은 모두 배포본에 있음",
+   "passed": true,
+   "detail": []
+  },
+  {
+   "name": "빼는 파일은 배포본에 없음",
+   "passed": true,
+   "detail": []
+  },
+  {
+   "name": "manifest 밖 파일이 새로 생기지 않음(pages-deploy.json 만 추가)",
+   "passed": true,
+   "detail": []
+  },
+  {
+   "name": "pages-deploy.json 의 빠진 목록 = 접두어에 든 manifest 파일",
+   "passed": true,
+   "detail": 238
+  },
+  {
+   "name": "원본 manifest 해시 기록",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "PNG 무손실 압축이 실제로 일어남(30MB 이상)",
+   "passed": true,
+   "detail": "1035 files, -35.0 MB"
+  },
+  {
+   "name": "압축 안 한 파일은 바이트 동일, 압축한 파일은 기록 해시와 같음",
+   "passed": true,
+   "detail": []
+  },
+  {
+   "name": "다시 압축한 PNG 화소가 원본과 같음(표본 78장, 큰 것 20장 포함)",
+   "passed": true,
+   "detail": []
+  },
+  {
+   "name": "보호 경로(R381 음성)를 빼려 하면 묶기 거부",
+   "passed": true,
+   "detail": " assets/r381/voice/00091c5c62b39736.mp3, assets/r381/voice/002bd5340e594b5e.mp3, assets/r381/voice/0058aff99b176e70.mp3, assets/r381/voice/005f7ad55c3c4376.mp3, assets/r381/voice/009c60980c0d689e.mp3\n"
+  },
+  {
+   "name": "index.html 을 빼려 하면 묶기 거부",
+   "passed": true,
+   "detail": "refused: exclude list touches protected paths: index.html\n"
+  },
+  {
+   "name": "예산을 넘으면 묶기 실패(한도 바로 아래 예산)",
+   "passed": true,
+   "detail": "{\"totalBytes\": 1000891937, \"budgetBytes\": 966128039, \"files\": 6746, \"excludedFiles\": 238, \"excludedBytes\": 95611880, \"optimizedPng\": 0, \"optimizedSavedBytes\": 0}\nover budget: 1000891937 >= 966128039\n"
+  },
+  {
+   "name": "PNG 압축을 끄면 남은 파일 바이트가 모두 원본과 같음",
+   "passed": true,
+   "detail": "{\"totalBytes\": 1000891937, \"budgetBytes\": 2000000000, \"files\": 6746, \"excludedFiles\": 238, \"excludedBytes\": 95611880, \"optimizedPng\": 0, \"optimizedSavedBytes\": 0}\n"
+  },
+  {
+   "name": "verify-r96-public.py 가 배포본에서 통과",
+   "passed": true,
+   "detail": "19ff653ad18469382e23f215b521459ca26850e86'}, {'path': 'world-tiles-r118.js', 'sha256': '298920587cbe9e4d1d7e07b9711b05877f9a7975cd3ba69fce7478f68d19a27c'}], 'skippedExcluded': 0, 'optimizedPng': 102}\n"
+  },
+  {
+   "name": "빼지 않은 파일이 없으면 공개 검증이 실패함",
+   "passed": true,
+   "detail": "assets/r104/bosses/a11-boss-p1.webp"
+  }
+ ]
+}
