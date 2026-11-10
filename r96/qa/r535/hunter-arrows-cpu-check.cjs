@@ -185,6 +185,18 @@ if(exists){
  g=env();g.__STORYWORLD_SAMONG_SURGE_R571__=surge(true);g.room.enemies.push(foe('w1',12,10),foe('far',12,18));run(g,'cast("w")');for(let i=0;i<40;i++)step(g,1,1/30);
  ok('samong: shard reaches a target 8 tiles away',g.hits.some(h=>h.id==='far'&&h.src&&h.src.r535==='shard'));
 
+ // ---------- R535-3: Dots r1 헌터 시트 6장(HU-01~06) 연결 · 시트가 아직 안 읽혔으면 옛 코드 그림 그대로 ----------
+ const DOTS=['hunter-c-lance','hunter-c-blast','hunter-burn','hunter-z-ember-thorn','hunter-z-split-pop','hunter-q-storm-trail'];
+ ok('Dots r1 sheets shipped (6, each ≤ 400KB, total ≤ 1.2MB)',(()=>{let t=0;for(const n of DOTS){const f=path.join(R,'runtime-text','assets','r535','dots',n+'.webp');if(!fs.existsSync(f))return false;const z=fs.statSync(f).size;if(z>400000)return false;t+=z;}return t<=1200000;})());
+ ok('source names every Dots sheet path',DOTS.every(n=>src.includes('assets/r535/dots/'+n+'.webp')));
+ const sheetEnv=()=>{const h=env();h.readyImage=p=>/assets\/r535\//.test(p)?{image:{naturalWidth:1536,naturalHeight:1024},ready:true}:null;return h;};
+ g=sheetEnv();g.room.enemies.push(foe('a',13,10),foe('b',14,10.6),foe('c',17,10),foe('d',15.5,11));run(g,'special();cast("w")');for(let i=0;i<12;i++)step(g,1,1/30);run(g,'cast("r")');for(let i=0;i<30;i++)step(g,1,1/30);
+ {const sd=A(g).inspect().stats.sheetDraws||{};for(const k of ['lance','blast','burn','shard','pop','storm'])ok('sheet drawn when loaded: '+k+' ('+(sd[k]|0)+')',(sd[k]|0)>0);}
+ g=env();g.room.enemies.push(foe('a',13,10),foe('b',14,10.6),foe('c',17,10));run(g,'special();cast("w")');for(let i=0;i<12;i++)step(g,1,1/30);run(g,'cast("r")');for(let i=0;i<30;i++)step(g,1,1/30);
+ ok('sheets not loaded → old code art still draws (no sheet draws, lance drawn)',(()=>{const s=A(g).inspect().stats,sd=s.sheetDraws||{};return Object.values(sd).every(v=>!v)&&s.lanceDraws>0;})());
+ g=sheetEnv();for(let i=0;i<30;i++)g.room.enemies.push(foe('p'+i,11+(i%6)*.5,9+Math.floor(i/6)*.5));for(let k=0;k<8;k++){run(g,'cast("w")');step(g,6,1/30);}
+ ok('split pops capped (≤ 6 alive)',A(g).inspect().pops<=6);
+
  // ---------- 그리기·성능 ----------
  g=env();g.room.enemies.push(foe('a',16,10),foe('b',17,10.8));run(g,'special();cast("w");cast("r")');for(let i=0;i<20;i++)step(g,1,1/30);
  ok('custom draws happen inside ctx.scope effect owners',g.scopes.length>0&&g.scopes.every(o=>o.kind==='effect'&&Number.isFinite(o.x)&&Number.isFinite(o.y)));

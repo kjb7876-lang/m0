@@ -6231,6 +6231,12 @@
     "assets/r524/range-w.webp",
     "assets/r524/sofa-n.webp",
     "assets/r524/sofa-w.webp",
+    "assets/r535/dots/hunter-c-lance.webp",
+    "assets/r535/dots/hunter-c-blast.webp",
+    "assets/r535/dots/hunter-burn.webp",
+    "assets/r535/dots/hunter-z-ember-thorn.webp",
+    "assets/r535/dots/hunter-z-split-pop.webp",
+    "assets/r535/dots/hunter-q-storm-trail.webp",
     "assets/r543/sfx/goblin-1.ogg",
     "assets/r543/sfx/goblin-2.ogg",
     "assets/r543/sfx/growl-1.ogg",
@@ -6239,6 +6245,8 @@
     "assets/r543/sfx/index.json",
     "assets/r543/sfx/thunder-1.ogg",
     "assets/r543/sfx/thunder-2.ogg",
+    "assets/r561/gunner-bombard-meteor.webp",
+    "gunner-arms-r561.js",
     "auto-attack-r597.js"
   ],
   "mediaPaths": [
@@ -7314,5 +7322,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "2ff9e9db7957bb9270de185326a8dc6d5a588241a5ec2fa289fe25f29c356463"
+  "runtimeManifestSHA256": "e787dcc2e56bcb35524dbf726622757db6ecf6ef71bbc2b21459856fc3061eb3"
 }
