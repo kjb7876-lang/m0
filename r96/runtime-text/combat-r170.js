@@ -11,7 +11,7 @@
 if(window.__STORYWORLD_COMBAT_R170__)return;
 const REV='R170-combat-1',KEY='storyworld.r170.combat';
 let prefs={quietTells:true,towers:true,treeShadow:false};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
-const stats={muted:0,towers:0,casts:0,summons:0,towerDraws:0,treeShadowsSkipped:0,errors:0};let lastError=null;
+const stats={muted:0,towers:0,casts:0,summons:0,towerDraws:0,treeShadowsSkipped:0,reskinned:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const T=()=>typeof time==='number'?time:0;
 const H=()=>typeof actorHeight==='function'?actorHeight():60;
@@ -43,9 +43,15 @@ const SCULPT='assets/r161/sculpture/memory-fragment.webp';
 const STATUE=/statue|effigy|shrine|obelisk|pillar|idol|monument|altar|grave|anchor|vat|pylon|reliquary|memorial|seal/i;
 const samongRoom=()=>!!room?.samongR103;
 function zoneMode(){try{const z=window.__STORYWORLD_SAMONG_ZONES_R115__?.zone?.(room.samongR103?.zone);return z?.mode||(z?.kind==='combat'?'C':z?.kind||'');}catch(_){return'';}}
+// R526(사용자 2026-11-10 "나오면 안되는 조형물"): 빈 기념비(기와지붕 게시판, blank_memorial)는 R272 에서 본편 어디에도 두지 않기로 한 그림인데, 조형물만 빼고 탑(적) 그림으로는 남아 있었다.
+//  → 그 그림이 뽑히던 지역(8곳)의 탑은 피의 제단으로 선다(실내 지역에 무너진 돌기둥을 세우지 않으려고 목록의 다음 석상으로 넘기지 않는다). 다른 지역은 그대로.
+//  탑 수·자리·체력·공격은 그대로이고, 이미 서 있던 탑은 다음 틱에 그림만 바뀐다.
+const RETIRED=/(^|\/)blank_memorial\.webp$/,ALTAR='assets/props/v290/blood_altar.webp';
+function artOf(objects){const list=(objects||[]).map(o=>typeof o==='string'?{path:o}:o).filter(o=>o&&STATUE.test(String(o.path||'')));if(!list.length)return null;
+ const o=list[0];if(RETIRED.test(String(o.path||'')))return{path:ALTAR,name:null,h:150};
+ return{path:o.path,name:String(o.name||o.label||o.title||'').trim()||null,h:Math.max(150,(Number(o.height)||100)*1.7)};}
 function artFor(){if(samongRoom())return{path:SCULPT,name:'세뇌당한 기억의 조각',h:170};
- try{const reg=regionById?.[room.id];const list=(reg?.regionObjects6||[]).map(o=>typeof o==='string'?{path:o}:o).filter(o=>o&&STATUE.test(String(o.path||'')));if(!list.length)return null;
-  const o=list[0];return{path:o.path,name:String(o.name||o.label||o.title||'').trim()||null,h:Math.max(150,(Number(o.height)||100)*1.7)};}catch(_){return null;}}
+ try{return artOf(regionById?.[room.id]?.regionObjects6);}catch(_){return null;}}
 const SPECIAL=new Set(['ep1a08']);// 특수 병동(본편 미로 진행·집결 규칙)은 손대지 않는다
 function wanted(){if(!live()||!solo()||SPECIAL.has(room.id))return 0;if(samongRoom()){const m=zoneMode();return m==='F'?6:m==='B'||m==='D'||m==='G'?2:m==='H'||m==='C'||m==='combat'?1:0;}// R173: F(조각 깨기)는 6개
  try{if(typeof safeRegion==='function'&&safeRegion())return 0;}catch(_){}return (room.enemies||[]).filter(e=>e.hp>0&&!major(e)).length>=20?1:0;}
@@ -75,7 +81,7 @@ function cast(e){const t=e.r170Tower;t.casts++;stats.casts++;const px=player.x,p
  if(t.casts%2===0&&t.summoned<12){const live=(room.enemies||[]).filter(x=>x.hp>0).length;if(live<70)for(let k=0;k<2;k++){let m;try{m=JSON.parse(t.snap);}catch(_){break;}const a=Math.random()*6.28;
    Object.assign(m,{id:'r170:sum:'+e.id+':'+(t.summoned++),x:px+Math.cos(a)*1.1,y:py+Math.sin(a)*1.1,homeX:px,homeY:py,nav:[],navAt:0,attack:null,rangedWindup:0,deadRecorded:false,spawnState:'active',cd:1.6+k*.4,r170Summoned:true});
    m.hp=m.maxHp;if(typeof blocked==='function'&&blocked(m.x,m.y,.25,room)){m.x=px;m.y=py;}room.enemies.push(m);stats.summons++;try{const X=window.__STORYWORLD_PIXELFX_R163__;if(X?.has?.('pvfx-rift-portal'))X.play('pvfx-rift-portal',m.x,m.y,{k:.75,tint:{a:[110,8,18],b:[255,96,96]}});}catch(_){}/* R178: 육망성에서 나오는 자리에 균열 문(CC0 PVFX, 핏빛) */}}}
-function towerTick(){for(const e of towers()){if(e.hp<=0)continue;e.cd=Math.max(e.cd||0,9);e.attack=null;e.rangedWindup=0;const t=e.r170Tower;
+function towerTick(){for(const e of towers()){if(RETIRED.test(String(e.r170Tower.art||''))){const a=artFor();if(a&&!RETIRED.test(String(a.path))){e.r170Tower.art=a.path;e.r170Tower.h=a.h;stats.reskinned++;try{if(typeof ensureImages==='function')ensureImages([a.path]);}catch(_){}}}/* R526 */if(e.hp<=0)continue;e.cd=Math.max(e.cd||0,9);e.attack=null;e.rangedWindup=0;const t=e.r170Tower;
   if(Math.hypot(player.x-e.x,player.y-e.y)>11){t.next=Math.max(t.next,T()+1.5);continue;}if(T()>=t.next){t.next=T()+6;cast(e);}}}
 // 피의 육망성 → 촉수
 function hexPath(c,r,rot){c.beginPath();for(let k=0;k<2;k++){for(let i=0;i<=3;i++){const a=rot+k*Math.PI/3+i*2*Math.PI/3,x=Math.cos(a)*r,y=Math.sin(a)*r;i?c.lineTo(x,y):c.moveTo(x,y);}}}
@@ -145,6 +151,6 @@ try{
    if(r!==false&&!restore)try{spreadStory();}catch(e){fail(e);}return r;};}
 }catch(e){fail(e);}
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
-window.__STORYWORLD_COMBAT_R170__=Object.freeze({revision:REV,set,nextSpot:()=>{try{nearSpot();}catch(_){}return spot0?{...spot0}:null;},towers:()=>towers().map(e=>({id:e.id,name:e.name,x:e.x,y:e.y,hp:e.hp,art:e.r170Tower.art})),cast:e=>cast(e),
+window.__STORYWORLD_COMBAT_R170__=Object.freeze({revision:REV,set,artOf,nextSpot:()=>{try{nearSpot();}catch(_){}return spot0?{...spot0}:null;},towers:()=>towers().map(e=>({id:e.id,name:e.name,x:e.x,y:e.y,hp:e.hp,art:e.r170Tower.art})),cast:e=>cast(e),
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},towers:live()?towers().length:0,lastError})});
 })();
