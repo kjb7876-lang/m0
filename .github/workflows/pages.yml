@@ -440,6 +440,8 @@ jobs:
         run: node r96/qa/r425/r425-cpu-check.cjs
       - name: R585 slayer skill FX frame sheets (CX-0055 SL01-SL10, upright crosses, lag cap) CPU check
         run: node r96/qa/r585/r585-cpu-check.cjs
+      - name: R586 slayer berserk chains (blood marks, W execution, E chain pull, no new keys) CPU check
+        run: node r96/qa/r586/r586-cpu-check.cjs
       - name: R448 depth overlap (props in front cover the hero, hero silhouette shows through) CPU check
         run: node r96/qa/r448/r448-cpu-check.cjs
       - name: R461 cinema run (separate title entry, saved run mode, narrator hero lock) CPU check
