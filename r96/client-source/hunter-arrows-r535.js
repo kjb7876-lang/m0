@@ -102,7 +102,7 @@ function flushSplits(){const S=TUNE.split;while(splitQ.length){const s=splitQ.sh
  let away=0;try{away=Math.atan2(s.y-player.y,s.x-player.x);}catch(_){}
  for(let i=0;i<S.count&&used<S.perCast;i++){if(mine()>=TUNE.maxLive){stats.capSkips++;break;}const o=others[i];
   const a=o?Math.atan2(o.y-s.y,o.x-s.x):away+(i?-.55:.55);
-  const p=makeShot(s.x,s.y,a,S.speed,s.value*S.mult,{friendly:true,owner:'hero',asset:(typeof VFX==='object'&&VFX.bolt)||'',scale:.7,life:S.life,pierce:S.pierce,r535:'shard',r535V:s.value});
+  const p=makeShot(s.x,s.y,a,S.speed,s.value*S.mult,{friendly:true,owner:'hero',asset:(typeof VFX==='object'&&VFX.bolt)||'',scale:.7,life:rg(S.life),pierce:S.pierce,r535:'shard',r535V:s.value});
   if(p){p.hit.add(s.from);used++;stats.shards++;}}
  castShards.set(s.cast,used);if(castShards.size>32)castShards.delete(castShards.keys().next().value);}}
 
@@ -131,7 +131,7 @@ function gateTarget(g){if(g.gid!=null){const G=groups.get(g.gid);if(G&&G.lance&&
 function pourGates(t){const G=TUNE.gate,lite=typeof settings==='object'&&settings&&settings.lowFx;
  for(let i=gates.length-1;i>=0;i--){const g=gates[i];if(t>g.until||t<g.t0){gates.splice(i,1);continue;}
   if(g.closing||t<g.next)continue;g.next=t+G.every*(lite?2:1);const to=gateTarget(g);if(!to)continue;const sl=gateSlots(g);
-  const k=lite?1:(g.kind==='r'?2:1);for(let j=0;j<k;j++){if(volleys.length>=G.maxVolleys)volleys.shift();const s=sl[(g.seq++*3)%sl.length];
+  const k=lite?1:(g.kind==='r'?2:1);for(let j=0;j<k;j++){if(volleys.length>=G.maxVolleys)volleys.shift();const s=sl[(g.seq++*(sl.length%3===0?2:3))%sl.length];
    volleys.push({x0:s.x,y0:s.y,x1:to.x+(((g.seq*7)%5)-2)*.12,y1:to.y+(((g.seq*11)%5)-2)*.12,t0:t,life:G.volleyLife,blade:g.seq%3===0});stats.volleys++;}}
  for(let i=volleys.length-1;i>=0;i--){const v=volleys[i];if(t-v.t0>v.life||t<v.t0)volleys.splice(i,1);}}
 
@@ -242,5 +242,5 @@ if(!wrapEffect()&&typeof setTimeout==='function'){let n=0;(function arm(){if(wra
 function set(v){on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}if(!on)reset();return on;}
 window.__STORYWORLD_HUNTER_ARROWS_R535__=Object.freeze({revision:REV,set,on:()=>on,ignite,tuning:TUNE,
  names:Object.freeze({q:'폭풍 추적',w:'불씨 가시',r:'뒤틀린 가시살'}),
- inspect:()=>({revision:REV,on,tuning:TUNE,burning:burns.size,groups:groups.size,pendingSplits:splitQ.length,live:mine(),fx:fxList.length,lastBlast:lastBlast&&{...lastBlast},gates:gates.map(g=>({kind:g.kind,n:g.n,closing:g.closing})),volleys:volleys.length,stats:{...stats}})});
+ inspect:()=>({revision:REV,on,tuning:TUNE,burning:burns.size,groups:groups.size,pendingSplits:splitQ.length,live:mine(),fx:fxList.length,lastBlast:lastBlast&&{...lastBlast},gates:gates.map(g=>({kind:g.kind,n:g.n,closing:g.closing})),volleys:volleys.length,volleyOrigins:[...new Set(volleys.map(v=>v.x0.toFixed(2)+','+v.y0.toFixed(2)))],stats:{...stats}})});
 })();

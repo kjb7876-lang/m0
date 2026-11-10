@@ -180,6 +180,10 @@ if(exists){
   const hitS2=g.hits.some(h=>h.id==='s2'&&h.src&&h.src.r535==='blast');ok('samong '+(on?'on':'off')+': blast reaches an enemy 3.2 tiles away = '+on,hitS2===on);}
  g=env();g.__STORYWORLD_SAMONG_SURGE_R571__=surge(true);for(let i=0;i<30;i++)g.room.enemies.push(foe('p'+i,11+(i%6)*.5,9+Math.floor(i/6)*.5));for(let k=0;k<12;k++){run(g,'cast("w");cast("r")');step(g,8,1/30);}
  ok('samong keeps the 24 live projectile cap',A(g).inspect().stats.maxLive<=24);
+ // Codex 리뷰(#376): Q 문 3개가 모두 줄기를 쏘는지 · 사몽 중 넓어진 가시 사거리로 고른 표적에 실제로 닿는지
+ g=env();g.room.enemies.push(foe('a',16,10));run(g,'special()');{const seen=new Set();for(let i=0;i<20;i++){step(g,1,1/30);for(const o of A(g).inspect().volleyOrigins)seen.add(o);}ok('Q volleys pour from all 3 gates ('+seen.size+')',seen.size>=3);}
+ g=env();g.__STORYWORLD_SAMONG_SURGE_R571__=surge(true);g.room.enemies.push(foe('w1',12,10),foe('far',12,18));run(g,'cast("w")');for(let i=0;i<40;i++)step(g,1,1/30);
+ ok('samong: shard reaches a target 8 tiles away',g.hits.some(h=>h.id==='far'&&h.src&&h.src.r535==='shard'));
 
  // ---------- 그리기·성능 ----------
  g=env();g.room.enemies.push(foe('a',16,10),foe('b',17,10.8));run(g,'special();cast("w");cast("r")');for(let i=0;i<20;i++)step(g,1,1/30);
