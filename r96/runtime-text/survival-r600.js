@@ -86,12 +86,14 @@ const N={q:[],cur:null,gen:0,timer:null};
 function narrPlaying(){return !!N.cur||N.q.length>0;}
 function narrStop(){N.gen++;N.q.length=0;N.cur=null;clearTimeout(N.timer);N.timer=null;try{window.__STORYWORLD_VOICE_R381__?.stop?.();}catch(_){}try{speechSynthesis.cancel();}catch(_){}subs(null);}
 function narrPlay(scenes){const list=[];for(const s of scenes||[]){const narr=String(s?.narrator||'').replace(/[〈〉<>]/g,'').trim();for(const t of sentences(s?.text))list.push({text:t,narr});}
+ if(S&&list.length){let sum=0;for(const x of list)sum+=Math.max(1.2,x.text.length/CPS)+GAP;S.narrMinEnd=Math.max(S.narrMinEnd||0,G(()=>time,0))+sum;}
  N.q.push(...list);if(!N.cur&&!N.timer)narrNext();return list.length;}
 function vol(){return clamp(G(()=>Number.isFinite(+settings.voice)?+settings.voice:.8,.8),0,1);}
-function narrNext(){N.timer=null;const it=N.q.shift()||null;N.cur=it;if(!it){subs(null);if(S&&S.narrating){S.narrating=false;S.narrEndAt=G(()=>time,0);}return;}
+function paused(){return !!(S?.active&&!S.over&&(G(()=>modal,false)||G(()=>loading,false)));}
+function narrNext(){N.timer=null;if(paused()&&(N.q.length||S?.narrating)){N.timer=setTimeout(narrNext,250);return;}/* 강화 창·메뉴가 열려 전투가 멈춘 동안은 다음 문장으로 넘어가지 않는다 */const it=N.q.shift()||null;N.cur=it;if(!it){subs(null);if(S&&S.narrating){S.narrating=false;S.narrEndAt=Math.max(G(()=>time,0),S.narrMinEnd||0);}return;}/* 웨이브 길이는 게임 시간 기준 최소(문장 길이 합)를 보장 — 멈춘 사이 벽시계로 서사가 끝나도 짧아지지 않게 */
  if(S){S.narrating=true;}const my=++N.gen,est=Math.max(1.2,it.text.length/CPS);subs(it);
  const done=()=>{if(my!==N.gen)return;N.gen++;N.cur=null;N.timer=setTimeout(narrNext,GAP*1000);};
- const silent=()=>setTimeout(()=>{if(my===N.gen)done();},est*1000);
+ const silent=()=>{const w=()=>{if(my!==N.gen)return;if(paused()){setTimeout(w,250);return;}done();};setTimeout(w,est*1000);};
  const R=window.__STORYWORLD_VOICE_R381__;let ok=false;
  if(prefs.voice&&vol()>0&&R&&typeof R.has==='function'){try{if(R.has(it.text)){const h=R.play(it.text,{rate:1,volume:vol(),onend:done,onerror:()=>{if(my===N.gen)silent();}});ok=!!h;if(h&&N.q[0])R.preload(N.q[0].text);if(h)setTimeout(()=>{if(my===N.gen){try{h.stop();}catch(_){}done();}},(est*2+4)*1000);}}catch(e){fail(e);}}
  if(!ok&&prefs.voice&&vol()>0&&typeof speechSynthesis!=='undefined'){try{const v=(speechSynthesis.getVoices()||[]).find(v=>/^ko/i.test(v.lang));if(v){const u=new SpeechSynthesisUtterance(it.text);u.lang=v.lang;u.voice=v;u.volume=vol();u.onend=done;u.onerror=done;speechSynthesis.speak(u);ok=true;setTimeout(()=>{if(my===N.gen){try{speechSynthesis.cancel();}catch(_){}done();}},(est*2+4)*1000);}}catch(e){fail(e);}}
@@ -139,7 +141,8 @@ function rosterPaths(R){const out=new Set();for(const e of [...R.normal,R.boss,R
 
 // ── 무대 들어가기 ──
 async function go(i){if(!S||entering)return false;const id=S.ids[i];const def=G(()=>regionById[id],null);if(!def)return false;
- narrStop();gems=[];beams=[];S.ready=false;/* 들어가는 동안(엔진 tick 이 새 방으로 돌 수 있음) 단계 판정을 멈춘다 — 앞 지역 시각으로 '빈 방'을 보고 보스로 넘기던 문제 */S.i=i;S.phase='pre';S.narrating=false;S.narrEndAt=NaN;S.bossUp=false;S.clearAt=NaN;S.stageKills=0;S.core.hp=Math.max(S.core.hp,CS().max*.5);
+ narrStop();gems=[];beams=[];S.ready=false;/* 들어가는 동안(엔진 tick 이 새 방으로 돌 수 있음) 단계 판정을 멈춘다 — 앞 지역 시각으로 '빈 방'을 보고 보스로 넘기던 문제 */S.i=i;S.phase='pre';S.narrating=false;S.narrEndAt=NaN;S.narrMinEnd=0;S.bossUp=false;S.clearAt=NaN;S.stageKills=0;S.core.hp=Math.max(S.core.hp,CS().max*.5);
+ if(id==='last301'){try{progress.STORY.last301=true;}catch(e){fail(e);}}/* R75 마지막 결투의 '정해진 쓰러짐'(보스를 살려 두고 장면으로 넘김)은 스토리 전용 — 생존은 저장하지 않는 메모리 진행에서만 완료로 표시해 끈다 */
  const prev=stageRoom;stageRoom=buildRoom(id);const c=stageRoom.survivalR600.centre,extra=[...rosterPaths(stageRoom.survivalR600.roster),ORB,GEM],old=def.paths;def.paths=[...new Set([...(old||[]),...extra])];
  // 스토리에서 아직 열리지 않은 지역도 생존 모드에서는 들어간다: 잠긴 지역 되돌림(R63 isUnlocked4 → 최근 쉼터)을 이 진입 동안만 통과시킨다
  //  (엔진의 협동 '권한 있는 지역 불러오기' 질문에 이 지역만 예라고 답함 — QA 가 잠긴 지역에 들어갈 때 쓰는 것과 같은 길). 진행·해금 기록은 바꾸지 않는다.
@@ -305,10 +308,10 @@ function install(){makeNative=makeRoom;
  const tickBase=tick;tick=function(dt){try{snapCoreWalkers();}catch(e){fail(e);}const r=tickBase.apply(this,arguments);try{if(here()&&!G(()=>modal,false)&&!G(()=>loading,false)&&player.hp>0){if(choosing&&!S.over){choosing=false;choiceQ++;stats.choiceRecovered=(stats.choiceRecovered||0)+1;}/* 카드를 고르지 않고 창이 닫혔으면(Esc 등) 다시 띄운다 */step(dt);showChoice();}}catch(e){fail(e);}return r;};
  rawGainXP=gainXP;gainXP=function(v,...a){if(here()&&inKill){if(Number.isFinite(+v)&&+v>0&&inKill.e){gems.push({x:inKill.e.x+(Math.random()-.5)*.4,y:inKill.e.y+(Math.random()-.5)*.4,v:+v});
    if(gems.length>GEM_CAP){const a0=gems.shift(),b0=gems[0];b0.v+=a0.v;}}return;}return rawGainXP.call(this,v,...a);};
- const killBase=killEnemy;killEnemy=function(e,...a){const first=!!e&&!e.deadRecorded;if(!here()||!first)return killBase.apply(this,[e,...a]);inKill={e};let r;try{r=killBase.apply(this,[e,...a]);}finally{inKill=false;}
+ const killBase=killEnemy;killEnemy=function(e,...a){const first=!!e&&!e.deadRecorded;if(!here()||!first)return killBase.apply(this,[e,...a]);inKill={e};let r;const hideBoss=!!(e.boss&&['last301','hando01'].includes(G(()=>zone,'')));/* R75 마지막 결투·두 주인의 성(hando01) 처치 가로채기(보스를 10%로 살려 두는 스토리 연출)는 e.boss 로 고른다 — 생존에서는 이 한 번 동안만 보스 표시를 내린다 */if(hideBoss)e.boss=false;try{r=killBase.apply(this,[e,...a]);}finally{inKill=false;if(hideBoss)e.boss=true;}
   try{if(e.deadRecorded){S.kills++;S.stageKills++;stats.kills++;const st=CS();S.core.hp=Math.min(st.max,S.core.hp+st.heal*(e.r600Boss?15:1));}}catch(err){fail(err);}return r;};
  if(typeof finishEncounter==='function'){const base=finishEncounter;finishEncounter=function(...a){if(here())return;return base.apply(this,a);};}
- if(typeof saveGame==='function'){const base=saveGame;saveGame=function(...a){if(S?.active||tainted){stats.saveBlocked++;return false;}return base.apply(this,a);};}
+ if(typeof saveGame==='function'){const base=saveGame;saveGame=function(...a){if(S?.active){stats.saveBlocked++;return true;/* 생존은 쓸 것이 없음 — 쓰지 않고 '저장됨'으로 답해 메뉴 '처음 화면'이 막히지 않게 */}if(tainted){stats.saveBlocked++;return false;}return base.apply(this,a);};}
  if(typeof guideStep==='function'){const base=guideStep;guideStep=function(...a){if(here()){try{guide=false;}catch(_){}return;}return base.apply(this,a);};}
  // 코어·빛줄기·조각은 엔진 그리기 순서 안(지형 위, 배우 그리기 전 — 출구 표식 자리)에서 그린다. draw 뒤에 그리면 프레임 명령이 이미 넘어가 화면에 닿지 않는다.
  if(typeof drawExits==='function'){const base=drawExits;drawExits=function(...a){if(here())return;return base.apply(this,a);};}
@@ -325,9 +328,9 @@ function install(){makeNative=makeRoom;
 try{install();}catch(e){fail(e);}
 // 창(강화 고르기·결과·메뉴)이 열려 있으면 자막을 감춘다(카드를 가리지 않게).
 try{const iv=setInterval(()=>{try{document.body.classList.toggle('r600Modal',!!(S?.active&&G(()=>modal,false)));}catch(_){}},200);iv?.unref?.();}catch(_){}
-window.__STORYWORLD_SURVIVAL_R600__=Object.freeze({revision:REV,start,active:()=>!!S?.active,here,
- state:()=>S?{tainted,ready:!!S.ready,startPos:S.startPos||null,i:S.i,loop:S.loop,id:S.ids[S.i],phase:S.phase,narrating:S.narrating,narrEndAt:S.narrEndAt,bossUp:S.bossUp,kills:S.kills,core:{...S.core,stats:CS()},choiceQ,gems:gems.length,over:S.over,ids:S.ids.length}:null,
- narr:()=>({playing:narrPlaying(),queued:N.q.length,cur:N.cur?.text||null}),skipNarration:()=>{N.q.length=0;if(N.cur){N.gen++;N.cur=null;narrNext();}},
+window.__STORYWORLD_SURVIVAL_R600__=Object.freeze({revision:REV,start,qaGo:i=>S?.active?go(i):false,stageIds:()=>S?[...S.ids]:[],active:()=>!!S?.active,here,
+ state:()=>S?{tainted,narrMinEnd:S.narrMinEnd||0,ready:!!S.ready,startPos:S.startPos||null,i:S.i,loop:S.loop,id:S.ids[S.i],phase:S.phase,narrating:S.narrating,narrEndAt:S.narrEndAt,bossUp:S.bossUp,kills:S.kills,core:{...S.core,stats:CS()},choiceQ,gems:gems.length,over:S.over,ids:S.ids.length}:null,
+ narr:()=>({playing:narrPlaying(),queued:N.q.length,cur:N.cur?.text||null}),skipNarration:()=>{N.q.length=0;if(S)S.narrMinEnd=0;/* 일부러 건너뛰면 최소 웨이브 길이도 함께 끝낸다 */if(N.cur){N.gen++;N.cur=null;narrNext();}},
  pure:Object.freeze({xpNeed,levelUps,stageIds,arena,spawning,nextPhase,advance,cap,hpMul,coreStats,pickThree,sentences,TAIL,CORE0,CORE_UPS}),
  inspect:()=>({revision:REV,stats:{...stats},lastError,active:!!S?.active,here:here(),pending})});
 })();

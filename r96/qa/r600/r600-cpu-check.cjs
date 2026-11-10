@@ -48,6 +48,6 @@ const A=win.__STORYWORLD_SURVIVAL_R600__;assert(A&&A.pure);const P=A.pure;ok('mo
  const L3=P.levelUps(5,1,P.xpNeed(1)+P.xpNeed(2)+3-5);assert.strictEqual(L3.ups,2);assert.strictEqual(L3.lv,3);assert.strictEqual(L3.xp,3);ok('own survival XP curve: exact level boundary, multi-level gains');}
 {const t='첫 문장이다. 둘째 문장? "대사!"\n\n새 문단…';assert.deepStrictEqual(P.sentences(t),['첫 문장이다.','둘째 문장?','"대사!"','새 문단…']);assert.deepStrictEqual(P.sentences(''),[]);ok('sentence split (matches R370 rule used for voice ids)');}
 // 엔진에 손대지 않음: 저장을 막고(이 모드는 저장하지 않음), 스토리 진행 마무리(finishEncounter)·길잡이를 생존 무대에서 막는다.
-assert(/saveGame=function[^]*?S\?\.active[^]*?return false/.test(src));assert(/finishEncounter=function[^]*?here\(\)\)return;/.test(src));assert(/guideStep=function[^]*?guide=false/.test(src));ok('no saves, no story finish, no guide inside survival');
+assert(/saveGame=function[^]*?S\?\.active\)\{stats\.saveBlocked\+\+;return true;[^]*?if\(tainted\)\{stats\.saveBlocked\+\+;return false;\}/.test(src));assert(/finishEncounter=function[^]*?here\(\)\)return;/.test(src));assert(/guideStep=function[^]*?guide=false/.test(src));ok('no saves, no story finish, no guide inside survival');
 assert(/if\(used\)return;used=true;/.test(src));ok('a choice applies once per panel (double click / stale button safe)');
 console.log('R600 CPU',n,'checks passed');

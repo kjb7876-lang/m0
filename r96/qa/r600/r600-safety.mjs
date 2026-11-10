@@ -30,10 +30,25 @@ await startSurvival();await A(()=>{if(modal)closePanel(true);showDeath();});awai
 const t2=await panel();ok('death during survival shows the survival result (not the story recovery panel)',/무한 생존 · 기록/.test(t2)&&!!(await A(()=>document.getElementById('r600Title'))),t2.slice(0,80));
 await p.locator('#r600Title').click();await p.waitForTimeout(800);
 ok('story save still unchanged after a lost survival run',JSON.stringify(await slots())===JSON.stringify(s0));
+// 2b) 강화 창·메뉴로 전투가 멈춘 동안 서사가 넘어가지 않는다(웨이브 길이 보존)
+await startSurvival();const n0=await A(()=>({st:window.__STORYWORLD_SURVIVAL_R600__.state(),t:time}));await A(()=>openPanel('<h2>멈춤 검사</h2>'));await p.waitForTimeout(45000);
+const n1=await A(()=>({st:window.__STORYWORLD_SURVIVAL_R600__.state(),t:time,modal}));await A(()=>closePanel(true));
+ok('narration holds while the game is paused (still narrating, minimum wave end in game time)',n1.modal&&n1.st.narrating===true&&n1.st.narrMinEnd>n0.t+5,{narr:n1.st.narrating,min:n1.st.narrMinEnd,t0:n0.t,t1:n1.t});
+// 2c) 마지막 결투(last301)의 스토리 전용 '정해진 쓰러짐'이 생존 보스를 붙잡지 않는다
+{const idx=await A(()=>window.__STORYWORLD_SURVIVAL_R600__.stageIds().indexOf('last301'));await p.evaluate(i=>window.__STORYWORLD_SURVIVAL_R600__.qaGo(i),idx);
+ await p.waitForFunction(()=>room?.id==='last301'&&!loading&&window.__STORYWORLD_SURVIVAL_R600__.state().ready,null,{timeout:240000}).catch(()=>{});
+ await A(()=>{if(modal)closePanel(true);});await p.waitForFunction(()=>room.enemies.some(e=>e.hp>0&&e.survivalR600&&e.spawnState==='active'),null,{timeout:180000}).catch(()=>{});
+ const k=await A(()=>{if(modal)closePanel(true);const e=room.enemies.find(e=>e.hp>0&&e.survivalR600)||null;if(!e)return{none:true,room:room?.id};e.boss=true;e.hp=0;killEnemy(e);/* 엔진처럼 체력 0 뒤 처치 */return{room:room.id,hp:e.hp,dead:!!e.deadRecorded,hidden:e.spawnState==='hidden',falling:!!room.r75Falling,fin:!!room.finalizing};});
+ ok('last301 boss kill in survival is a real kill (no campaign scripted fall)',idx>=0&&k.room==='last301'&&k.hp<=0&&!k.hidden&&!k.falling&&!k.fin,{idx,...k});}
+// 2d) 메뉴 '처음 화면' 이 생존 중에도 나가진다(저장 없이)
+{const s1=await slots();await A(()=>{if(modal)closePanel(true);showMenu();});await p.waitForTimeout(300);await A(()=>document.getElementById('menuTitle')?.click());await p.waitForTimeout(1500);
+ const m=await A(()=>({active:window.__STORYWORLD_SURVIVAL_R600__.active(),title:!!document.getElementById('survivalStartR600')}));
+ ok('menu title button leaves survival to the title without writing the story save',m.active===false&&m.title&&JSON.stringify(await slots())===JSON.stringify(s1)&&JSON.stringify(s1)===JSON.stringify(s0),m);}
 // 3) 스토리 이어하기 → 죽음 화면
 const loaded=await A(async()=>{const st=window.__STORYWORLD_TEST_STORAGE_B1__.store;let raw=null;try{raw=JSON.parse(st.getItem(normalSaveKeyR73()));}catch(_){}return raw?await restoreSave(raw):false;});
-await p.waitForFunction(()=>started&&!loading,null,{timeout:240000}).catch(()=>{});await skip();await p.waitForTimeout(600);await A(()=>{if(modal)closePanel(true);});
-const d=await A(()=>{showDeath();return{survival:window.__STORYWORLD_SURVIVAL_R600__.active(),tx:(document.getElementById('panel')?.textContent||'').slice(0,80)};});
-ok('story death after a survival run shows the normal recovery panel',/MEMORY REMAINS/.test(d.tx)&&!d.survival,{loaded:loaded!==false,...d});
+await p.waitForTimeout(1500);await p.waitForFunction(()=>started&&!loading,null,{timeout:240000}).catch(()=>{});/* 불러오기 창 글은 닫힌 뒤에도 패널 안에 남으므로 loading 으로 본다 */await skip();await p.waitForTimeout(600);await A(()=>{if(modal)closePanel(true);});
+await A(()=>{player.hp=0;showDeath();});/* R151 쓰러짐 연출은 체력 0 일 때만 끝에 창을 연다 */await p.waitForTimeout(3000);
+const d=await A(()=>({survival:window.__STORYWORLD_SURVIVAL_R600__.active(),modal:!!modal,tx:(document.getElementById('panel')?.textContent||'').slice(0,80)}));
+ok('story death after a survival run shows the normal recovery panel',d.modal&&/MEMORY REMAINS/.test(d.tx)&&!d.survival,{loaded:loaded!==false,...d});
 ok('no page errors',errs.length===0,errs);
 console.log('R600 safety',n-fail+'/'+n);await b.close();process.exit(fail?1:0);
