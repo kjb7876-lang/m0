@@ -3752,7 +3752,7 @@
    "actor": {
     "layer": "STORY",
     "zone": "dist02",
-    "name": "^뿌리 추적자"
+    "name": "^(늪 )?뿌리 추적자"
    },
    "bytes": 234984,
    "sha256": "f57947df4adf530b8a2383bca01f8526fe1df55593dabf528eb8e5841fafc6cb",
