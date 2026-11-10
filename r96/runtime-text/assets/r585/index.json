@@ -203,7 +203,7 @@
     128,
     208
    ],
-   "fps": 16,
+   "fps": 24,
    "trail": [
     0.05,
     0.95
@@ -216,7 +216,8 @@
    "rows": 4,
    "bytes": 140512,
    "sha256": "0409f4e1709fbfafc8094c533f9771e80c8267d2392d77eee518c456fa0e8c13",
-   "seam": null
+   "seam": null,
+   "start_frame": 2
   },
   "slayer-d-guard": {
    "loop": true,

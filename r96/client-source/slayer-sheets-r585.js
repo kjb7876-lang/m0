@@ -26,11 +26,11 @@ const META=Object.freeze({
  'slayer-r-aura-front':{frames:20,fps:12.5,pivot:[128,224],loop:true},
  'slayer-q-spin-back':{frames:20,fps:40,pivot:[128,224],loop:true,gloss:.5},
  'slayer-q-spin-front':{frames:20,fps:40,pivot:[128,224],loop:true,gloss:.5},
- 'slayer-q-tornado-back':{frames:20,fps:24,pivot:[128,232],loop:true,gloss:.45},
- 'slayer-q-tornado-front':{frames:20,fps:24,pivot:[128,232],loop:true,gloss:.45},
+ 'slayer-q-tornado-back':{frames:20,fps:24,pivot:[128,232],loop:true,gloss:.6},
+ 'slayer-q-tornado-front':{frames:20,fps:24,pivot:[128,232],loop:true,gloss:.6},
  'slayer-bleed':{frames:24,fps:16,pivot:[128,224]},
  'slayer-w-sacrifice':{frames:24,fps:14,pivot:[128,192],hit:8,gloss:.5},
- 'slayer-e-dash':{frames:24,fps:16,pivot:[128,208],hit:12},
+ 'slayer-e-dash':{frames:24,fps:24,pivot:[128,208],hit:12,gloss:.45},
  'slayer-d-guard':{frames:24,fps:12.5,pivot:[128,224],loop:true},
  'slayer-ego-enter':{frames:24,fps:14,pivot:[128,224],hit:8},
  'slayer-ego-loop':{frames:24,fps:10,pivot:[128,224],loop:true,pingpong:true}});
@@ -110,7 +110,7 @@ function claim(o){const id=String(o.castId??'');if(decided.has(id))return decide
 if(typeof fx==='function'){const base=fx;fx=function(type,x,y,opt){
  try{const o=opt||{};if(on&&type==='storySourceSkill'&&o.storyWER&&o.sourceHero===HERO&&(o.sourceSlot==='w'||o.sourceSlot==='e')&&o.stage!=='hit'&&isHero()&&claim(o)){
    if(o.sourceSlot==='w'&&o.stage==='release')spawn('slayer-w-sacrifice',x,y,{castId:o.castId});
-   if(o.sourceSlot==='e'&&o.stage==='flight'&&Number.isFinite(o.tx)&&Number.isFinite(o.ty))spawn('slayer-e-dash',x,y,{tx:o.tx,ty:o.ty,castId:o.castId});
+   if(o.sourceSlot==='e'&&o.stage==='flight'&&Number.isFinite(o.tx)&&Number.isFinite(o.ty))spawn('slayer-e-dash',x,y,{tx:o.tx,ty:o.ty,castId:o.castId,start:2/24});
    stats.swallowed++;return null;}}catch(e){fail(e);}
  stats.passed++;return base.apply(this,arguments);};}
 // ---- F EGO 진입 ----

@@ -24894,8 +24894,8 @@
     },
     {
       "path": "assets/r585/index.json",
-      "bytes": 5977,
-      "sha256": "25f41126941fa34c27271170bd01f50f76baf72cd3ff0fe499b55dc2cfbab1b8"
+      "bytes": 5998,
+      "sha256": "58b5be4a18822506f40faa3c259e3ecfaacc0c099197ea223f48711f29feb1d3"
     },
     {
       "path": "assets/r585/slayer-bleed.webp",
@@ -34629,8 +34629,8 @@
     },
     {
       "path": "slayer-sheets-r585.js",
-      "bytes": 16117,
-      "sha256": "a97848485faed5308dca7d04cf37a23ff528a6b8c6d27c64ae403f838a2b40f7"
+      "bytes": 16136,
+      "sha256": "0f84f21576bee95f1bc4fed0911e86d34b9da5021a84abbd002ac411078fc206"
     },
     {
       "path": "status-r96.js",
@@ -34914,7 +34914,7 @@
     }
   ],
   "fileCount": 6982,
-  "totalBytes": 1095233498,
+  "totalBytes": 1095233538,
   "webHTMLSha256": "3979c5bae862540276b1193c5e91f24f0fe81f0a02cd1b58c893801429ca64d2",
   "largest": [
     {
