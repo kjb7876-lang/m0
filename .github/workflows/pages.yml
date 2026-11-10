@@ -466,6 +466,8 @@ jobs:
         run: node r96/qa/r453/actor-tone-r453-cpu-check.cjs
       - name: R521 hospital rooms (ep1a08 wards/consult/prep/lobby furnished by room function along the back walls, presentation only, drive hospital props) CPU check
         run: node r96/qa/r521/r521-cpu-check.cjs
+      - name: R590 hwando sword chain (A draw-cut, Q wind blades, E delayed flash, R seven-strike finale; no new keys, walls/map edge, caps) CPU check
+        run: node r96/qa/r590/hwando-chain-cpu-check.cjs
       - name: R492 lag (R409 outline bake by one distance transform instead of dozens of drawImage dilations; same rim rule, size, colours) CPU check
         run: node r96/qa/r492/r492-cpu-check.cjs
       - name: R493 lag (keep compiled shader programs pinned so material churn stops relinking the same programs) CPU check
