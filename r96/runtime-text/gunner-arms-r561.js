@@ -42,6 +42,8 @@ const solo=()=>{let m=null;try{m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();}c
 const mine=()=>on&&typeof player==='object'&&!!player&&player.hero===HERO&&solo();
 function level(slot){try{const st=window.__STORYWORLD_GROWTH_R103__?.state?.();return Math.max(0,Math.min(7,Number(st?.procs?.[HERO+':'+slot])||0));}catch(_){return 0;}}
 const grow=slot=>1+.1*level(slot);
+// R571 사몽 발현: 다른 영웅처럼 재사용 대기 -77%(공용 API cd(), 없으면 그대로)
+function surgeCd(s){try{const v=window.__STORYWORLD_SAMONG_SURGE_R571__?.cd?.(s);return Number.isFinite(v)&&v>=0?v:s;}catch(_){return s;}}
 function rhythm(){return typeof COMBAT_RHYTHM_R26==='number'?COMBAT_RHYTHM_R26:1;}
 function power(){try{return typeof attackPower==='function'?attackPower():20;}catch(_){return 20;}}
 function live(){let rows=[];try{rows=typeof liveEnemies==='function'?liveEnemies():(room?.enemies||[]);}catch(_){rows=room?.enemies||[];}
@@ -155,9 +157,9 @@ let ownRoom=null,ownPlayer=null,ownSeen=false;function own(){let rm=null;try{rm=
  const t=T();for(const sl of SLOTS)readyAt[sl]=Math.min(readyAt[sl],t+CD[sl]*rhythm());nextAuto=Math.min(nextAuto,t+.35);
  if(rm!==ownRoom||p!==ownPlayer||!(p?.hp>0)){if(fx.length||chain.queue.length){fx.length=0;if(chain.queue.length){chain.queue.length=0;chain.cancelled++;}}ownRoom=rm;ownPlayer=p;}}
 function busy(){try{return (typeof started!=='undefined'&&!started)||(typeof modal!=='undefined'&&!!modal)||(typeof loading!=='undefined'&&loading)||(typeof storyScene!=='undefined'&&!!storyScene)||!(player?.hp>0)||!!window.__STORYWORLD_EGO151__?.inspect?.().state?.active;}catch(_){return true;}}
-function fire(sl,automatic){if(!mine()||!SLOTS.includes(sl))return false;if(readyAt[sl]>T())return false;if(fx.length>=CAP)return false;
+function fire(sl,automatic){if(!mine()||!SLOTS.includes(sl)||busy())return false;if(readyAt[sl]>T())return false;if(fx.length>=CAP)return false;
  let pt=null;if(automatic){if(sl==='r'){pt=strikePoint(2);if(!pt)return false;}else if(!(sl==='w'?snipeTarget():nearest(RANGE[sl])))return false;}
- const ok=sl==='w'?castW():sl==='e'?castE():castR(pt);if(ok){readyAt[sl]=T()+CD[sl]*rhythm();player.skillAnim=Math.max(player.skillAnim||0,.5);try{if(typeof updateHUD==='function')updateHUD();}catch(_){}}return ok;}
+ const ok=sl==='w'?castW():sl==='e'?castE():castR(pt);if(ok){readyAt[sl]=T()+surgeCd(CD[sl]*rhythm());player.skillAnim=Math.max(player.skillAnim||0,.5);try{if(typeof updateHUD==='function')updateHUD();}catch(_){}}return ok;}
 // 엔진 원래 R(시간 지연포) 막기 — W·E 는 R209 owned 가 막는다(여기서도 함께, R209 가 없을 때 대비)
 function gate(){try{if(typeof player!=='object'||!player||player.hero!==HERO)return;const s=player.storyWER||(player.storyWER={ready:{},buffs:{}});if(!s.ready)s.ready={};const t=T();
   if(mine()){for(const sl of SLOTS){const k=HERO+':'+sl;if(!(s.ready[k]>t+FAR/2)){const v=Number(s.ready[k]);if(v>t)readyAt[sl]=Math.max(readyAt[sl],Math.min(v,t+CD[sl]*rhythm()));s.ready[k]=t+FAR;}}}else{const k=HERO+':r';if(s.ready[k]>t+FAR/2)s.ready[k]=0;}}catch(e){fail(e);}}
@@ -173,6 +175,10 @@ function tickAuto(){if(!mine()||busy()||!autoOn())return;const t=T();if(t<nextAu
 if(typeof tick==='function'){const b=tick;tick=function(...a){try{own();}catch(e){fail(e);}gate();const r=b.apply(this,a);try{warm();if(fx.length)step();stepChain();tickAuto();}catch(e){fail(e);}return r;};}
 if(typeof drawEffect==='function'){const b=drawEffect;drawEffect=function(e,...a){if(e&&e.type==='r561-fx'){try{draw();}catch(err){fail(err);}return;}return b.apply(this,[e,...a]);};}
 if(typeof serializeSave==='function'){const b=serializeSave;serializeSave=function(...a){const d=b.apply(this,a);try{const r=d?.storyWER?.remaining;if(r&&mine())for(const sl of SLOTS){const m=remain(sl);if(m>0)r[HERO+':'+sl]=+m.toFixed(2);else delete r[HERO+':'+sl];}}catch(e){fail(e);}return d;};}
+// 불러오기: 엔진 restoreSave 는 남은 대기를 옛 기억사수 스킬 한도(6/3.8/13×박자)로 자른다 → 저장 원본에서 새 스킬 한도로 되살린다(저장 형식은 그대로)
+if(typeof restoreSave==='function'){const b=restoreSave;restoreSave=function(raw,...a){let keep=null;try{const r=(typeof raw==='string'?JSON.parse(raw):raw)?.storyWER?.remaining;if(r)keep=Object.fromEntries(SLOTS.map(sl=>[sl,Number(r[HERO+':'+sl])||0]));}catch(_){}
+ const out=b.apply(this,[raw,...a]);const after=()=>{try{if(!keep||!mine())return;ownSeen=true;ownPlayer=player;try{ownRoom=typeof room!=='undefined'?room:null;}catch(_){}const t=T();for(const sl of SLOTS)readyAt[sl]=keep[sl]>0?t+Math.min(keep[sl],CD[sl]*rhythm()):0;}catch(e){fail(e);}};
+ if(out&&typeof out.then==='function')return out.then(v=>{after();return v;});after();return out;};}
 if(typeof updateHUD==='function'){const b=updateHUD;updateHUD=function(...a){const r=b.apply(this,a);try{if(mine()&&typeof document!=='undefined')for(const sl of SLOTS){const el=document.getElementById('story-wer-'+sl);if(!el)continue;const cd=el.querySelector('.cd'),m=remain(sl);if(cd)cd.textContent=m>0?String(Math.ceil(m)):'';el.title=NAME[sl];el.setAttribute('aria-label',NAME[sl]+' · '+(typeof KR291!=='undefined'&&KR291?KR291[sl]:sl.toUpperCase()));const lb=el.querySelector('.label');if(lb&&lb.textContent!==SHORT[sl])lb.textContent=SHORT[sl];}}catch(e){fail(e);}return r;};}
 const KEYS={z:'w',x:'e',c:'r'};
 if(typeof addEventListener==='function'){addEventListener('keydown',ev=>{try{if(!mine()||ev.repeat||ev.ctrlKey||ev.metaKey||ev.altKey)return;try{window.__STORYWORLD_KEYS_R291__?.translate?.(ev);}catch(_){}const sl=KEYS[String(ev.key).toLowerCase()];if(!sl)return;const tg=ev.target;if(tg&&(/INPUT|TEXTAREA|SELECT/.test(tg.tagName||'')||tg.isContentEditable))return;if(busy())return;gate();if(fire(sl,false))startChain(sl);}catch(e){fail(e);}},true);

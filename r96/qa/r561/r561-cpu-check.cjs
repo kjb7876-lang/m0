@@ -20,9 +20,11 @@ function mk(opt={}){const hits=[],L={},moves=[];
   room:{enemies},liveEnemies:()=>enemies.filter(e=>e.hp>0),damageable3:()=>true,
   hitEnemy:(e,v,m)=>{hits.push([e.id,v,m&&m.ability,m&&m.friendly]);e.hp-=v;return true;},
   special(){sb.__baseSpecial=(sb.__baseSpecial||0)+1;},serializeSave:()=>({storyWER:{remaining:opt.saveClamp?{'gunner:r':17.7,'gunner:w':17.7,'gunner:e':17.7,'hwando:r':3}:{'gunner:r':1e6,'gunner:w':1e6,'gunner:e':1e6,'hwando:r':3}}}),
-  tick(){},drawEffect(){},updateHUD(){}};
+  tick(){},drawEffect(){},updateHUD(){},
+  /* 엔진 restoreSave 흉내: 새 player 를 만들고 저장된 남은 대기를 옛 기억사수 스킬 한도(6/3.8/13×박자)로 잘라 넣는다 */
+  async restoreSave(raw){const r=raw?.storyWER?.remaining||{},k=sb.COMBAT_RHYTHM_R26,lim={w:6*k,e:3.8*k,r:13*k},ready={};for(const sl of ['w','e','r'])if(r['gunner:'+sl]>0)ready['gunner:'+sl]=sb.time+Math.min(lim[sl],r['gunner:'+sl]);sb.player={hero:'gunner',x:10,y:10,hp:100,specialCD:0,direction:'right',storyWER:{ready,buffs:{}}};}};
  sb.window.__STORYWORLD_WER__=Object.freeze({cast:()=>'base',defs:{}});sb.window.__STORYWORLD_GROWTH_R103__={state:()=>({procs:{'gunner:w':opt.lv||0,'gunner:e':opt.lv||0,'gunner:r':opt.lv||0}})};
- if(opt.coop)sb.window.__STORYWORLD_COOP_SIM_R62__={mode:()=>opt.coop};if(opt.ego)sb.window.__STORYWORLD_EGO151__={inspect:()=>({state:{active:true}})};
+ if(opt.surge)sb.window.__STORYWORLD_SAMONG_SURGE_R571__={active:()=>true,cd:v=>v*.23,range:v=>v};if(opt.coop)sb.window.__STORYWORLD_COOP_SIM_R62__={mode:()=>opt.coop};if(opt.ego)sb.window.__STORYWORLD_EGO151__={inspect:()=>({state:{active:true}})};
  vm.createContext(sb);vm.runInContext(src||'throw new Error("gunner-arms-r561.js missing")',sb);
  const A=()=>sb.window.__STORYWORLD_GUNNER_ARMS_R561__;
  const run=(t1,step=.05)=>{while(sb.time<t1-1e-9){sb.time=+(sb.time+step).toFixed(4);sb.tick(step);}};
@@ -90,6 +92,8 @@ try{T=mk();T.sb.player.storyWER.ready['gunner:r']=T.sb.time+5;T.sb.tick(.05);ok(
 try{T=mk();T.sb.time=3600;T.sb.tick(.05);T.L.keydown[0]({key:'c',target:{tagName:'CANVAS'}});T.sb.player={hero:'gunner',x:10,y:10,hp:100,specialCD:0,direction:'right',storyWER:{ready:{},buffs:{}}};T.sb.time=0;T.sb.tick(.05);
  ok('new journey (time back to 0, new player) clears old cooldown timestamps — R can be used again',T.A().remain('r')===0&&T.A().fire('r',false)===true,T.A().remain('r'));}catch(e){ok('new game cd',false,String(e));}
 
+try{T=mk({ego:true});ok('EGO: proc / API casts of W·E·R are refused too (fire() checks the same busy/EGO rule as keys)',T.A().fire('w',true)===false&&T.W().cast('w',true)===false&&T.A().remain('w')===0);}catch(e){ok('EGO fire',false,String(e));}
+try{T=mk({surge:true});T.L.keydown[0]({key:'z',target:{tagName:'CANVAS'}});ok('samong surge (R571 cd()) shortens the replacement W cooldown like other heroes (8 s → 1.84 s)',Math.abs(T.A().remain('w')-1.84)<.01,T.A().remain('w'));}catch(e){ok('surge',false,String(e));}
 // ---------- 연계(사용자 2026-11-10 03:23Z "스킬키를 늘리지 말고 기존 키에서 여러 스킬이 자동으로 연속으로 더 나가게, 자연스럽고 렉 신경") ----------
 try{T=mk();const kd=T.L.keydown[0];kd({key:'z',target:{tagName:'CANVAS'}});T.run(10.5);const e0=T.A().remain('e');T.run(12.4);
  const order=[];for(const h of T.hits){if(!order.includes(h[2]))order.push(h[2]);}
@@ -109,5 +113,9 @@ ok('drawn with R106 painted sprites in gunner colours (cobalt [70,124,255] + sil
  ok('R meteor sheet: 1152×768 (6×4 × 192) webp in runtime assets + manifest, ≤ 250 KB, with an asset table (source, hash, size, use)',sz&&sz[0]===1152&&sz[1]===768&&fs.statSync(f).size<=250000&&/assets\/r561\/gunner-bombard-meteor\.webp/.test(man)&&/gunner-bombard-meteor/.test(tbl)&&/SHA-256/.test(tbl),{sz,tbl:tbl.length});
  ok('R meteor sheet is timed so its impact frame (10 @ 12.5 fps) lands on the 1.6 s blast, and the code smoke/pillar are skipped while the sheet is shown',/impact:10/.test(src)&&/fps:12\.5/.test(src)&&/STRIKE\.delay-METEOR\.impact\/METEOR\.fps/.test(src)&&/if\(sheetOn\)/.test(src));}
 ok('hero id and save format untouched (no new player fields persisted, id stays gunner)',!/player\.hero\s*=(?!=)/.test(src)&&!/HEROES\.[a-z]+\s*=/.test(src));
+async function restoreCheck(){try{T=mk({rhythm:1.18});await T.sb.restoreSave({storyWER:{remaining:{'gunner:w':9.44,'gunner:e':7.08,'gunner:r':18.88}}});T.sb.tick(.05);const m={w:T.A().remain('w'),e:T.A().remain('e'),r:T.A().remain('r')};
+ ok('load: replacement cooldowns come back at their own lengths (W 9.44 · E 7.08 · R 18.88 with rhythm 1.18), not clamped to the old skill limits',Math.abs(m.w-9.44)<.06&&Math.abs(m.e-7.08)<.06&&Math.abs(m.r-18.88)<.06,m);}catch(e){ok('restore',false,String(e));}}
+(async()=>{await restoreCheck();
 const pass=checks.filter(c=>c.pass).length;for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));
 console.log(`R561 gunner arms: ${pass}/${checks.length}`);if(pass!==checks.length)process.exitCode=1;
+})();
