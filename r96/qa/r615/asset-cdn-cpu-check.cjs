@@ -25,6 +25,11 @@ ok(/wrangler@\d+\.\d+\.\d+ pages deploy/.test(wf),'업로드는 버전을 고정
 ok(/secrets\.CLOUDFLARE_API_TOKEN/.test(wf)&&/secrets\.CLOUDFLARE_ACCOUNT_ID/.test(wf),'토큰은 저장소 시크릿에서만 읽음');
 ok(!/r2\b|R2 /.test(wf.split('R615')[1]||''),'R2(결제수단 필요)를 쓰지 않음');
 
+// 사용자 2026-11-10 22:03Z 결정 "빼기": Cloudflare 에 올라간 대상 폴더는 GitHub Pages 배포본에서 뺀다(약 184MB). 저장소·site 에는 그대로.
+{const EX=JSON.parse(fs.readFileSync(path.join(R,'pages-exclude.json'),'utf8'));
+ for(const p of CFG.prefixes){const e=EX.exclude.find(x=>x.prefix===p);ok(!!e&&!!e.reason&&/Cloudflare/.test(e.reason),'Pages 배포본에서 뺌(이유에 Cloudflare): '+p,e);
+  ok(!EX.protected.some(q=>p.startsWith(q)||q.startsWith(p)),'보호 목록에 걸리지 않음: '+p,EX.protected);}
+ ok(EX.exclude.filter(x=>/^assets\/r381\//.test(x.prefix)).every(x=>CFG.prefixes.includes(x.prefix)),'Cloudflare 대상이 아닌 r381 경로는 빼지 않음');}
 // ── 브라우저 흉내: 시계·fetch·Audio ──
 function world({query='',health=null,healthDelayMs=0,fetchThrows=false,cdnFails=()=>false,localFails=()=>false,stallCdn=false,realReject=false}={}){
  let clock=0;const timers=[];const setT=(f,ms)=>{const t={at:clock+Math.max(0,ms||0)/1000,f,dead:false};timers.push(t);return t;};

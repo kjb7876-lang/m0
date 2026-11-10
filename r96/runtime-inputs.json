@@ -8088,6 +8088,10 @@
     "assets/r600/dots/sv-core-04.webp",
     "assets/r600/dots/sv-gem-01.webp",
     "assets/r600/dots/sv-gem-tail.webp",
+    "boss-motion-r620.js",
+    "assets/r620/bosses/b03-hit4.webp",
+    "assets/r620/bosses/b03-idle6.webp",
+    "skill-growth-r663.js",
     "mob-student-walk-r615.js",
     "assets/r615/mob-student-walk8.webp"
   ],
@@ -9164,5 +9168,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "97fb16828f26c2554181abfc41fa549c0639bf5858cf72ae6fe0b5681dba82c6"
+  "runtimeManifestSHA256": "44869a3c671d394c034023e76cf2a52e7586deb44528cf2590524f3dacfc5cd4"
 }

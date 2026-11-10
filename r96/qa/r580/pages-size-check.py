@@ -140,10 +140,10 @@ def main():
 
         # 4. 경계
         bad = tmp / 'bad-exclude.json'
-        b2 = json.loads(EXC.read_text()); b2['exclude'].append({'prefix': 'assets/r381/voice/', 'reason': 'test', 'evidence': []})
+        b2 = json.loads(EXC.read_text()); b2['exclude'].append({'prefix': 'assets/r380/mobs/', 'reason': 'test', 'evidence': []})
         bad.write_text(json.dumps(b2, ensure_ascii=False))
         r = pack(tmp / 'bad', exclude=bad)
-        check('보호 경로(R381 음성)를 빼려 하면 묶기 거부', r.returncode != 0 and 'protected' in (r.stdout + r.stderr), (r.stdout + r.stderr)[-200:])
+        check('보호 경로(R380 검수 몹)를 빼려 하면 묶기 거부', r.returncode != 0 and 'protected' in (r.stdout + r.stderr), (r.stdout + r.stderr)[-200:])
         b3 = json.loads(EXC.read_text()); b3['exclude'].append({'prefix': 'index.html', 'reason': 'test', 'evidence': []})
         bad.write_text(json.dumps(b3, ensure_ascii=False))
         r = pack(tmp / 'bad2', exclude=bad)

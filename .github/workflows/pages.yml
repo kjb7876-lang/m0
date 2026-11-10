@@ -615,6 +615,8 @@ jobs:
         run: node r96/qa/r535/hunter-arrows-cpu-check.cjs
       - name: R597 hold A to auto-cast Q W E R F T with basic attack (S D stay manual, keeps manual 77 percent bonus) CPU check
         run: node r96/qa/r597/auto-a-cpu-check.cjs
+      - name: R663 QWER locked until learned with passive points, skill level widens range (+8 percent per level), auto-level buys QWER and silk dances CPU check
+        run: node r96/qa/r663/skill-growth-cpu-check.cjs
       - name: R561 Lauren gravity chain (Q → gravity well pull → collapse burst, R → crush vortices; no new keys, bosses not pulled, walls respected) CPU check
         run: node r96/qa/r561/lauren-gravity-cpu-check.cjs
       - name: R562 Neon toxic chain (Q → second-stage mint arcs + poison + toxic pool, R → big pool; no new keys, caps, Dots NE-01·02·03 sheets) CPU check
@@ -623,6 +625,8 @@ jobs:
         run: node r96/qa/r613/r613-cpu-check.cjs
       - name: R615b faceless student (samong S-02) walks with the Dots CX-0067MV 8-frame sheet CPU check
         run: node r96/qa/r615/student-cpu-check.cjs
+      - name: R620 boss motion CPU check
+        run: node r96/qa/r620/r620-cpu-check.cjs
       - name: R563 Michaela genesis chain (Q → sky light pillars, R → grand pillar + halo; no new keys, upright cross only, Dots MI sheets) CPU check
         run: node r96/qa/r563/michaela-genesis-cpu-check.cjs
       - name: R564 Seoha chrono chain (time stop shell + shatter, afterimage clones, haste; no new keys, caps, Dots SE sheets) CPU check
