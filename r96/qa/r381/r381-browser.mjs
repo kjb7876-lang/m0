@@ -10,7 +10,8 @@ const ctx=await b.newContext({viewport:{width:1280,height:720}});
 await ctx.addInitScript(()=>{try{localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false}));}catch(_){}});
 const p=await ctx.newPage();const errors=[],mp3=[];p.on('pageerror',e=>errors.push(String(e).slice(0,200)));
 p.on('response',r=>{if(/assets\/r381\/voice\/[0-9a-f]{16}\.mp3$/.test(r.url()))mp3.push(r.status());});
-await p.goto(URL);await p.locator('#campaignNew54').click({timeout:120000});await p.locator('#slotConfirmR73').click();
+// R461 뒤로 영화 모드는 처음 화면의 '영화 모드로 시작' 입구로만 켜진다(일반 기록에서는 set({on:true}) 를 거절) — R454 에서 이 검사도 그 입구로 시작하게 고침.
+await p.goto(URL);await p.locator('#cinemaStartR461').click({timeout:120000});await p.locator('#slotConfirmR73').click();
 await p.waitForFunction(()=>started&&!loading,null,{timeout:180000});await p.waitForTimeout(800);
 await p.evaluate(()=>{for(let i=0;i<120&&storyScene;i++)advanceScene();if(modal)closePanel(true);});
 const i0=await p.evaluate(()=>window.__STORYWORLD_VOICE_R381__.inspect());

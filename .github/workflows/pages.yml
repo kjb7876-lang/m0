@@ -416,6 +416,8 @@ jobs:
         run: node r96/qa/r542/r542-cpu-check.cjs
       - name: R543 pitch-shifted enemy growl and goblin voices plus distant thunder CPU check
         run: node r96/qa/r543/r543-cpu-check.cjs
+      - name: R544 generated enemy-theme hit and death, per-hero hurt, level-up, click and boss-death sounds CPU check
+        run: node r96/qa/r544/r544-cpu-check.cjs
       - name: R385 mob moves (review list v18 move/rename) CPU check
         run: node r96/qa/r385/r385-cpu-check.cjs
       - name: R390 cinema full narration + midboss hold + enemies keep chasing CPU check
@@ -508,6 +510,8 @@ jobs:
         run: node r96/qa/r415/r415-cpu-check.cjs
       - name: R381 recorded narration voice (Qwen3-TTS Sohee) for cinema mode CPU check
         run: node r96/qa/r381/r381-cpu-check.cjs
+      - name: R454 samong prelude~S-07 recorded narration voice in cinema mode CPU check
+        run: node r96/qa/r454/samong-voice-cpu-check.cjs
       - name: R376 real difficulty + cinema HUD CPU check
         run: node r96/qa/r376/r376-cpu-check.cjs
       - name: R384 cinema narration timing + combat pacing CPU check
@@ -658,7 +662,7 @@ jobs:
           node scripts/r96.browser.mjs
       - name: Revalidate every release byte after all tests
         run: python scripts/verify-r96-release.py
-      - name: R580 Pages bundle under 1GB (archival narration excluded, lossless PNG, pixel-identical, public verifier)
+      - name: R580 Pages bundle under the size budget in pages-exclude.json (1.1GB since R454 narration, archival narration excluded, lossless PNG, pixel-identical, public verifier)
         run: python r96/qa/r580/pages-size-check.py
       - name: R580 public verifier retries transient read timeouts/disconnects but still fails wrong, missing or never-arriving bytes
         run: |
