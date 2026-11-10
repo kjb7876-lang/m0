@@ -6,12 +6,12 @@
 //  고침(그리기 전용 — 충돌·길찾기·몹·저장·문·목표·서사·room.props 그대로):
 //   방 쓰임새(병동 미로의 방 이름: 병실·진료실·처치 준비실·관찰실·로비·복도)에 맞춰 손으로 짠 배치표 한 장.
 //   · 병실: 머리를 벽에 붙인 침대 줄 + 침대 곁 탁자·수액대·감시 모니터·식판 탁자·가림막. 방마다 줄 세운 벽과 대수를 달리한다.
-//   · 진료실: 책상+의자(벽 쪽), 진찰대(들것)+진찰등+둥근 의자, 약장.
-//   · 처치 준비실: 약장·사물함 줄, 기구 수레, 세워 둔 들것, 수액대.
-//   · 로비·복도: 접수대, 대기 의자, 벽에 기댄 목발·휠체어, 벽에 붙여 세운 들것(통로 가운데는 비움).
+//   · 진료실: 구석 약장, 진찰대(들것)+진찰등+둥근 의자, 기구 수레. (R521-3: 정면 3/4 시점 그림인 책상·의자·대기 의자·접수대·사물함·옛 약장은 각도가 안 맞아 뺐다)
+//   · 처치 준비실: 구석부터 약장 줄, 기구 수레, 세워 둔 들것, 수액대.
+//   · 로비·복도: 벽에 기댄 목발·휠체어, 벽에 붙여 세운 들것(통로 가운데는 비움).
 //   · 모든 가구는 화면에 보이는 뒤쪽 두 벽(북·서)에서 2.4칸 안. 방 가운데(전투 공간)·문·출입구·시작 자리·보스방·길잡이 마디는 비운다.
 //   · 그림은 이미 게임에 있던 병원 묶음(assets/hospital-maze — 드라이브 Isometric 84 파생, 지금까지 7점만 쓰임)·R415 병원 가구·병원 소품판(가림막)과
-//     드라이브 Hospital_SmallProps8 파생 3점(assets/r521: 진찰등·식판 탁자·목발). 모두 낡은 상아색+탁한 청록 한 계열. 불꽃 조명·외부 게임 자산 없음.
+//     드라이브 Hospital_SmallProps8 파생 3점(assets/r521: 진찰등·식판 탁자·목발)·Dots 두 방향 가구 파생 2점(약장·기구 수레, R521-3). 모두 낡은 상아색+탁한 청록 한 계열. 불꽃 조명·외부 게임 자산 없음.
 //   · 그림은 원래 그려진 방향(등각·광원)을 지킨다: 서쪽 벽용 그림을 북쪽 벽에 쓸 때만 좌우 거울(침대·탁자처럼 좌우가 같은 꼴만), 임의 회전·크기 흔들기 없음.
 //  그리는 길: draw() 동안만 room.props 뒤에 덧붙인다(병원 소품판 visual-test 와 같은 방식) → 엔진 drawProp 사슬(시야 가림 SIGHT24·R329 그림자·R448 겹침·R451 빛)을 그대로 탄다.
 //   a5 의 '의료 소품만' 거름은 r521Ward 표시로 지난다. 그림은 지역 유지 목록(regionById.ep1a08.paths)에 넣고, 그릴 때 없으면 1.5초 간격으로 다시 읽는다.
@@ -19,10 +19,10 @@
 //  끄기: localStorage['storyworld.r521.rooms']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_HOSPITAL_ROOMS_R521__)return;
-const REV='R521-hospital-rooms-2',KEY='storyworld.r521.rooms';
+const REV='R521-hospital-rooms-3',KEY='storyworld.r521.rooms';
 const prefs={on:true};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;}catch(_){}
-const stats={builds:0,placed:0,dropped:0,pushed:0,frames:0,shown:0,reloads:0,errors:0};let lastError=null,dropLog=[];
+const stats={builds:0,placed:0,dropped:0,pushed:0,frames:0,shown:0,reloads:0,contacts:0,lamps:0,errors:0};let lastError=null,dropLog=[];
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 const fin=Number.isFinite;
 
@@ -32,25 +32,23 @@ const fin=Number.isFinite;
 //  face = 그림이 원래 등을 댄 벽('w' 서쪽 벽 / 'n' 북쪽 벽 / 's' 어느 벽이든). d = 발(그림 아래 가운데)과 벽 사이 칸.
 //  크기 기준: 1칸 ≈ 1m. 침대 2.1×1.0m, 들것 2.0×.75m, 약장 1.5×.55m, 사물함 .5×.5×1.9m, 책상 1.5×.8m.
 const ATLAS='assets/visual-test/hospital-prop-atlas-oriented.png';
+// R521-3(사용자 2026-11-10 "각도가 안맞는 소품은 과감히 배치안하도록 각도맞을때만배치"): 그림마다 각도를 2:1 바닥 격자에 대어 쟀다(qa/r521/review.md).
+//  ang 'iso' = 그림의 바닥 모서리가 게임 바닥 방향(기울기 .5)과 맞음 · 'pole' = 기둥·바퀴 달린 대처럼 방향이 없는 것. 정면 3/4 시점으로 그려진 옛 약장·곁탁자·사물함·대기 의자·접수대·책상·의자·수레는 뺐다.
+//  ft = 바닥 자리 실측 [왼쪽 꼭짓점, 오른쪽 꼭짓점, 맨 아래 꼭짓점]의 가로 자리(SHAPE 와 같은 단위). 맨 아래 꼭짓점에서 -x 쪽 길이 = (아래-왼쪽)·√2, -y 쪽 길이 = (오른쪽-아래)·√2 칸.
+//   이 자리로 ① 벽에서 띄울 거리(d)를 계산해 등·머리를 벽에 붙이고 ② 방 구석에 딱 맞추고 ③ 바닥 닿는 그림자를 그린다.
 const ART=Object.freeze({
- bed:{path:'assets/hospital-maze/bed.png',h:88,face:'w',d:1.6,flat:true},
- stretcher:{path:'assets/hospital-maze/stretcher.png',h:64,face:'n',d:.95,flat:true},
- cabinet:{path:'assets/hospital-maze/cabinet.png',h:62,face:'n',d:.75,flat:true},
- monitor:{path:'assets/hospital-maze/monitor.png',h:60,face:'s',d:.55,up:.01},
- iv:{path:'assets/hospital-maze/iv.png',h:74,face:'s',d:.5,up:.008},
- stool:{path:'assets/hospital-maze/stool.png',h:32,face:'s',d:1.5,up:.017},
- wheelchair:{path:'assets/hospital-maze/chair.png',h:52,face:'w',d:.9,flat:true,up:.018},
- table:{path:'assets/r415/props/care-table.webp',h:38,face:'n',d:.6,flat:true},
- locker:{path:'assets/r415/props/locker.webp',h:82,face:'n',d:.55,up:.023},
- bench:{path:'assets/r415/props/waiting-bench.webp',h:58,face:'n',d:.8,flat:true},
- counter:{path:'assets/r415/props/lobby-counter.webp',h:80,face:'n',d:1.2,flat:true},
- desk:{path:'assets/r415/props/report-desk.webp',h:64,face:'n',d:.95,flat:true},
- chair:{path:'assets/r415/props/labcoat-chair.webp',h:52,face:'n',d:1.9},
- cart:{path:'assets/r299/cart.webp',h:48,face:'s',d:.8,flat:true},
- lamp:{path:'assets/r521/exam-lamp.webp',h:74,face:'s',d:.6},
- overbed:{path:'assets/r521/overbed-table.webp',h:48,face:'w',d:1.6,flat:true},
- crutches:{path:'assets/r521/crutches.webp',h:46,face:'s',d:.35,up:.01},
- curtain:{path:ATLAS,h:84,face:'w',d:1.2,frame:'curtain',up:.042}
+ bed:{path:'assets/hospital-maze/bed.png',h:88,face:'w',flat:true,ang:'iso',ft:[-1.016,1.011,.289]},
+ stretcher:{path:'assets/hospital-maze/stretcher.png',h:64,face:'n',flat:true,ang:'iso',ft:[-.906,.906,.275]},
+ overbed:{path:'assets/r521/overbed-table.webp',h:48,face:'w',flat:true,ang:'iso',ft:[-.511,.511,.157]},
+ medcab:{path:'assets/r521/medicine-cabinet.webp',h:86,face:'n',flat:true,ang:'iso',ft:[-0.472,0.472,0.224]},
+ trolley:{path:'assets/r521/surgical-cart.webp',h:50,face:'n',flat:true,ang:'iso',ft:[-.457,.457,.161]},
+ wheelchair:{path:'assets/hospital-maze/chair.png',h:52,face:'w',d:.9,flat:true,up:.018,ang:'pole',ft:[-.439,.439,-.025]},
+ monitor:{path:'assets/hospital-maze/monitor.png',h:60,face:'s',d:.55,up:.01,ang:'pole'},
+ iv:{path:'assets/hospital-maze/iv.png',h:74,face:'s',d:.5,up:.008,ang:'pole'},
+ stool:{path:'assets/hospital-maze/stool.png',h:32,face:'s',d:1.5,up:.017,ang:'pole'},
+ lamp:{path:'assets/r521/exam-lamp.webp',h:74,face:'s',d:.6,ang:'pole'},
+ crutches:{path:'assets/r521/crutches.webp',h:46,face:'s',d:.35,up:.01,ang:'pole'},
+ curtain:{path:ATLAS,h:84,face:'w',d:1.2,frame:'curtain',up:.042,ang:'iso'}
 });
 const PATHS=Object.freeze([...new Set(Object.values(ART).map(a=>a.path))]);
 
@@ -60,21 +58,15 @@ const PATHS=Object.freeze([...new Set(Object.values(ART).map(a=>a.path))]);
 const SHAPE=Object.freeze({
  bed:{r:[-1.084,1.084,0,1.83],m:'040001c0003d0007fc00ff200ffb00ffc80ffe40fff20fffd0fffe07fff03fffb3ffff7ffff6ffff67fff43fff02fff007fe003fc003fc001f4000c40008000080000c000080'},
  stretcher:{r:[-0.965,0.965,0,1.331],m:'02000010003c8007e200ff100ff880ffc607fe407ffc83ffc01ffe01fff037ff83fffe38fff2d7ff22bff237fe01bfe00ffc007f8003ec001cc0008c000c8000c0000c000080'},
- cabinet:{r:[-0.723,0.723,0,1.289],m:'0e0001ff007fff0fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff9ffff87fff007ff001fd00038000180000800008'},
  monitor:{r:[-0.286,0.286,0,1.247],m:'01c000ff800fff00fff81fff83fff83fff83fff039ff038ff038fc018f0038f801cf0018f0008f000ff0007f000770000f0000f0001fc07fffef0387e0187001c0003c000380'},
  iv:{r:[-0.314,0.314,0,1.539],m:'0040017e001867000430004f8004fc004fc004f8006fc0067c00430004300043000420006100041000510004800040000400184701f7f01df90ffffee0607e06070060000600'},
  stool:{r:[-0.265,0.265,0,0.665],m:'01fc00fff01fff81fff81fff81fff81fff81fff807fe001f8000680007c0006c000700007000270007f040fffe0fffe3ffc7ffff7e0cfef0c1ce0c0e60c0e01e0e00e0e00c00'},
  wheelchair:{r:[-0.468,0.468,0,1.082],m:'0180000c000040001c00c3c003fc001ff801ffc01fff01fff01ffe81fff87fff87fff8ffff8ffff8fffe8fffacffffc7fcfc6fe1c6761e37e1f3fe1f1ec3e00ff000fe000cc0'},
- table:{r:[-0.327,0.327,0,0.79],m:'0180003f0007ff00fffe1ffff3fffe7fffeffffeffffe7fffe7fffe7fffe7fffe7fffe7fffe7fffe7fffe7fffe7fffe7fffe7fffe7fff47ffe061fc0601c0000c0000c000080'},
- locker:{r:[-0.311,0.311,0,1.706],m:'006000fffe7fffe7fffe7fffe7fffe7fffe7fffe7fffe7fffe7fffe7fffe7fffe7fffe7fffe7fffe7fffe7fffe7fffe7fffe7fffe7fffe7fffe7fffe7fffe7fffc7fff000380'},
- bench:{r:[-0.809,0.809,0,1.206],m:'080001f0001f8001ff801ffc01fffc1fffe1ffff1ffff3ffff3ffff7ffffffffffffff7ffff3fffe3fffe37ffe30ffe303fc700fc0003c0000c0000c0000c0000c0001c00008'},
- counter:{r:[-1.386,1.386,0,1.664],m:'0000000030000f0001f8007f800ff803ffe07fff1ffff3ffff7ffffffffffffffffffffffffffffffffffffffffffffffffeffffe7fffe7fff87ffe03ff803fe000f80002000'},
- desk:{r:[-0.706,0.706,0,1.331],m:'00020000f0007f001ff807ffc1fffc7fffeffffffffff7fffe7fffe7fffe7fffe7fff67ffa65fe265f8264e0064c0064c0064c0064c0064c0000c0000c0000c0000c00000000'},
- chair:{r:[-0.341,0.341,0,1.081],m:'001c000fe001ff801ffc03ffc03ffe07ffe07ffe07ffe0fffe0fffe1fffe3ffff7ffff7fffe7fffe7fffe7fffe63fff676ff7b63f636fc437b040630c0630c06000060000600'},
- cart:{r:[-0.417,0.417,0,0.998],m:'0c0001a2003ff005ffc09ff8c9fffefffff7ffff7fffe7fffe5fffe43ffa423f247e424fff25fffe7fffe7fffe7fffa7fffa43ff361fe360e4360c4060060000700007000020'},
  lamp:{r:[-0.617,0.617,0,1.539],m:'002000078000dc0019fc030fe060ff0e0ff0e07f0401e04000040000400004000040000400004000040000400004000258007f8007f8003fe0076300c2300c20000300003000'},
  overbed:{r:[-0.54,0.54,0,0.999],m:'180007f000ffc00fff00fffc03fff00fffc03ffe00ffe003fc000f800038000180001c0001c01e1c03f1806dd81c078380383001f3001f1001f00071000e0000c0000c0000c0'},
  crutches:{r:[-0.224,0.224,0,0.957],m:'700007fe003ffc030dff309ff3091c21b0c21b0861b187fe106f610637f0634f0264203c4403c6c03c78038f0078f0078f0078e0031e0031e0070c0071800f38000380003800'},
+ medcab:{r:[-0.506,0.506,0,1.789],m:'060001fc007ff80ffff0ffffefffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff4ffff00ff8000f000020'},
+ trolley:{r:[-0.483,0.483,0,1.040],m:'060001e000320004f8005fe007ff007ffc07ffe65ffff47fff43fff47fff4ffff7fff37ffe37ffc3fffe3cfffbc7fff01fff00fff003ff001f3000e300060000e0000e000040'},
  curtain:{r:[-0.665,0.665,0,1.824],m:'0000010000100001c0001f0001fc001ff001fd901fff01fff01fff81fff01fff01fff01fff01fff01fff077ff061ff0607f0003f0000f60007e0003e00060000600006000000'}
 });
 const SQ=Math.SQRT1_2,BACK=.5*Math.SQRT1_2,RISE=Math.sqrt(3)/2,MW=20,MH=28;
@@ -88,48 +80,50 @@ function embedOf(S,x,y,hit){if(!S.length)return 0;let n=0;for(const[a,b]of S)if(
 // 앞벽(카메라 쪽 +x·+y)에 가린 비율: 점에서 카메라 쪽으로 가는 선(칸마다 높이 .816)이 벽 안을 지나면 가린 것.
 const WALL_LOW=3.5/* 벽 상자는 2.85~3.19칸이지만 화면에서는 윗면 덮개까지 더 가린다 — 로비 실측(남쪽 바깥벽 3.19칸이 4.2칸 뒤 바닥까지 가림)으로 맞춘 값 */,VIEW_RISE=.816,VIEW_FAR=4.5;
 function hiddenOf(S,x,y,hit){if(!S.length)return 0;let n=0;for(const[a,b,z]of S){for(let t=.25;t<=VIEW_FAR;t+=.25)if(z+VIEW_RISE*t<WALL_LOW&&hit(x+a+t,y+b+t,0)){n++;break;}}return n/S.length;}
-const EMBED_MAX=.01/* R412 기준 3% 보다 좁게 — 거친 20×28 칸으로 잰 값이라 여유를 둔다 */,HIDDEN_MAX=.2,PUSH_STEP=.1,PUSH_MAX=1.2;
+const WALL_GAP=.06,EMBED_MAX=.01/* R412 기준 3% 보다 좁게 — 거친 20×28 칸으로 잰 값이라 여유를 둔다 */,HIDDEN_MAX=.2,PUSH_STEP=.1,PUSH_MAX=1.2;
 
 // ---- 배치표 ----------------------------------------------------------------------------------------
-//  RUN(방, 쓰임새, 벽, 벽 안쪽 면 좌표, [[그림, 벽을 따라 좌표, (벽에서 칸)], …])
+//  RUN(방, 쓰임새, 벽, 벽 안쪽 면 좌표, [[그림, 벽을 따라 좌표, (벽에서 칸 | 'p')], …], 구석 벽 면 좌표)
 //   벽 'w' = 서쪽 벽(x 고정, 따라가는 좌표 y) · 'n' = 북쪽 벽(y 고정, 따라가는 좌표 x). 좌표는 병동 미로 지도(hospitalCoreLayoutB2) 칸.
-const RUN=(room,use,wall,at,items)=>({room,use,wall,at,items});
+//   따라가는 좌표 'c' = 방 구석: 옆면을 구석 벽(RUN 마지막 값)에 붙인다(바닥 자리로 계산). 벽에서 칸은 바닥 자리(ft)가 있으면 계산값(등·머리가 벽에 닿게)이 기본.
+//   'p' = 침대 발치에 벽과 나란히 세우는 가림막(입구 쪽에서 침대를 가린다) — 그림을 줄 가림막과 반대로 돌려 쓴다.
+const RUN=(room,use,wall,at,items,corner)=>({room,use,wall,at,items,corner});
+const SCREEN_D=3.5;
 const PLAN=Object.freeze([
- // 북쪽 병실 A — 정돈된 6인실: 서쪽 벽 침대 4대(머리 벽), 북쪽 벽 약장·사물함
- RUN('north-ward-a','ward','w',30.12,[['bed',6.2],['table',7.5],['bed',9.4],['iv',10.55],['curtain',11.2],['bed',12.6],['monitor',13.8],['table',14.6],['bed',15.8]]),
- RUN('north-ward-a','ward','n',4.12,[['cabinet',36.4],['locker',38.3],['locker',38.95],['overbed',42.2,1.4]]),
- // 북쪽 병실 B — 북쪽 벽 줄(서쪽은 A 와 통하는 틈)
- RUN('north-ward-b','ward','n',4.12,[['bed',51.2],['table',52.5],['bed',54.4],['monitor',55.6],['curtain',56.2],['bed',57.6],['iv',58.7],['table',59.5],['bed',60.8]]),
- RUN('north-ward-b','ward','w',48.12,[['crutches',16.3]]),
+ // 북쪽 병실 A — 6인실: 서쪽 벽 침대 4대(머리 벽), 북서 구석 약장, 남쪽 문 쪽 줄 끝·발치에 가림막
+ RUN('north-ward-a','ward','w',30.12,[['bed',6.4],['monitor',7.6],['bed',9.5],['iv',10.65],['curtain',11.3],['bed',12.7],['monitor',13.9],['bed',15.9],['curtain',13.2,'p'],['curtain',15.6,'p']]),
+ RUN('north-ward-a','ward','n',4.12,[['medcab','c'],['trolley',33.4]],30.12),
+ // 북쪽 병실 B — 북쪽 벽 줄. 서쪽(A 와 통하는 틈)·남쪽 문에서 침대가 바로 보이지 않게 줄 양 끝과 발치에 가림막
+ RUN('north-ward-b','ward','n',4.12,[['medcab','c'],['curtain',50.5],['bed',52.0],['monitor',53.25],['bed',55.2],['iv',56.4],['curtain',57.0],['bed',58.4],['overbed',59.7],['bed',61.6],['curtain',52.4,'p'],['curtain',58.8,'p']],48.12),
+ RUN('north-ward-b','ward','w',48.12,[['crutches',8.6]]),
  // 북쪽 병실 C — 격리 병실: 침대마다 가림막
- RUN('north-ward-c','ward','w',68.12,[['bed',6.4],['curtain',8.0],['monitor',8.7],['bed',10.4],['curtain',12.0],['iv',12.7],['bed',14.4],['table',15.7]]),
- RUN('north-ward-c','ward','n',4.12,[['cabinet',74.2],['cart',76.4],['wheelchair',79.6,1.0]]),
- // 처치 준비실 — 약장·사물함 줄 + 기구 수레, 서쪽 벽에 들것
- RUN('preparation','prep','n',30.12,[['locker',11.2],['locker',11.85],['cabinet',13.9],['cabinet',24.6],['cart',26.6],['iv',27.8],['iv',28.4]]),
- RUN('preparation','prep','w',10.12,[['stretcher',33.4,.9],['lamp',35.2],['stool',36.3,1.1],['cabinet',39.2,.9]]),
- RUN('preparation-east','prep','n',30.12,[['cabinet',40.2],['locker',42.1],['stretcher',47.0],['cart',50.2],['cabinet',57.4],['locker',59.4],['locker',60.05]]),
+ RUN('north-ward-c','ward','w',68.12,[['bed',6.4],['curtain',8.0],['monitor',8.7],['bed',10.4],['curtain',12.0],['iv',12.7],['bed',14.4],['curtain',16.0],['curtain',14.2,'p']]),
+ RUN('north-ward-c','ward','n',4.12,[['medcab','c'],['trolley',71.4],['wheelchair',79.6,1.0]],68.12),
+ // 처치 준비실 — 구석부터 약장 줄 + 기구 수레, 서쪽 벽에 들것
+ RUN('preparation','prep','n',30.12,[['medcab','c'],['medcab',12.6],['trolley',14.6],['medcab',24.6],['trolley',26.6],['iv',27.8],['iv',28.4]],10.12),
+ RUN('preparation','prep','w',10.12,[['stretcher',33.6],['lamp',35.2],['stool',36.3,1.1],['medcab',39.2]]),
+ RUN('preparation-east','prep','n',30.12,[['medcab',40.2],['medcab',41.6],['stretcher',47.0],['trolley',50.2],['medcab',57.4],['medcab',58.8]]),
  RUN('preparation-annex','prep','n',30.12,[['bed',70.4],['monitor',71.6],['lamp',72.3]]),
- // 진료실 a~d — 책상+의자, 진찰대+진찰등, 약장
- RUN('consult-a','consult','n',52.12,[['desk',12.6],['chair',13.0],['cabinet',15.8],['locker',26.0]]),
- RUN('consult-a','consult','w',10.12,[['stretcher',54.6,.9],['lamp',56.0]]),
- RUN('consult-b','consult','n',52.12,[['desk',35.6],['chair',36.0],['cabinet',44.0]]),
- RUN('consult-b','consult','w',34.12,[['stretcher',55.0,.9],['lamp',56.4]]),
- RUN('consult-c','consult','n',52.12,[['cabinet',58.8],['table',60.6],['locker',63.4],['locker',64.05]]),
- RUN('consult-c','consult','w',50.12,[['desk',54.8],['chair',55.2],['iv',56.8]]),
- RUN('consult-d','consult','n',52.12,[['desk',78.4],['chair',78.8]]),
- RUN('consult-d','consult','w',70.12,[['cabinet',54.2,.9],['crutches',55.6],['bench',57.0,1.0]]),
- // 남쪽 병실 a~d — 서쪽 벽 침대 줄(북쪽은 넓은 복도로 트임), b 는 북쪽 벽
- RUN('south-ward-a','ward','w',10.12,[['bed',90.4],['table',91.7],['bed',93.4],['monitor',98.5],['bed',99.8]]),
- RUN('south-ward-b','ward','n',92.12,[['bed',32.6],['table',33.9],['bed',35.6],['curtain',37.2],['bed',38.6]]),
+ // 진료실 a~d — 구석 약장, 서쪽 벽 진찰대(들것)+진찰등+둥근 의자, 기구 수레 (책상·의자는 각도 맞는 그림이 올 때까지 비움)
+ RUN('consult-a','consult','n',52.12,[['medcab','c'],['trolley',13.0]],10.12),
+ RUN('consult-a','consult','w',10.12,[['stretcher',54.8],['lamp',56.2],['stool',55.6,2.0]]),
+ RUN('consult-b','consult','n',52.12,[['medcab','c'],['trolley',37.0]],34.12),
+ RUN('consult-b','consult','w',34.12,[['stretcher',55.0],['lamp',56.4],['stool',55.8,2.0]]),
+ RUN('consult-c','consult','n',52.12,[['medcab','c'],['medcab',58.8]],50.12),
+ RUN('consult-c','consult','w',50.12,[['stretcher',55.0],['iv',56.4],['stool',55.8,2.0]]),
+ RUN('consult-d','consult','n',52.12,[['medcab','c']],70.12),
+ RUN('consult-d','consult','w',70.12,[['stretcher',54.8],['lamp',56.1],['crutches',56.7]]),
+ // 남쪽 병실 a~d — 서쪽 벽 침대 줄(북쪽은 넓은 복도로 트임 → 북쪽 줄 끝과 발치에 가림막), b 는 북쪽 벽
+ RUN('south-ward-a','ward','w',10.12,[['bed',90.7],['iv',91.9],['curtain',92.3],['bed',93.65],['monitor',98.5],['bed',99.8],['curtain',90.6,'p']]),
+ RUN('south-ward-b','ward','n',92.12,[['bed',32.6],['iv',33.85],['bed',35.6],['curtain',37.2],['bed',38.6],['curtain',33.0,'p'],['curtain',38.2,'p']]),
  RUN('south-ward-b','ward','w',26.12,[['overbed',99.4],['wheelchair',101.6]]),
- RUN('south-ward-c','ward','w',44.12,[['bed',92.2],['curtain',93.4],['bed',96.2],['table',97.5],['iv',98.7],['bed',100.2]]),
- RUN('south-ward-d','ward','w',64.12,[['bed',92.6],['bed',97.0],['monitor',98.1],['table',98.9],['bed',100.8]]),
- // 로비 — 접수대·대기 의자
- RUN('entry-hall','lobby','n',106.12,[['bench',21.4],['bench',23.6],['wheelchair',26.4,1.0],['bench',35.6],['bench',37.8],['crutches',39.6],['counter',48.6],['bench',59.4],['bench',61.6],['locker',64.6],['bench',73.4],['stretcher',77.0]]),
- // 복도 — 벽에 붙여 세운 들것·대기 의자(통로 가운데는 비움)
- RUN('upper-cross','corridor','n',22.12,[['bench',25.4],['stretcher',30.6],['bench',44.2],['wheelchair',47.4,1.0],['stretcher',64.6],['iv',67.0],['bench',70.4]]),
- // 아래 복도 — 벽 덩어리 남쪽 면(= 그 아래 넓은 복도의 북쪽 벽)에 대기 의자·들것
- RUN('lower-cross','corridor','n',80.12,[['bench',37.0],['bench',39.0],['stretcher',47.6],['iv',49.4]])
+ RUN('south-ward-c','ward','w',44.12,[['bed',92.2],['curtain',93.6],['bed',96.2],['iv',98.7],['bed',100.2],['curtain',92.4,'p']]),
+ RUN('south-ward-d','ward','w',64.12,[['bed',92.6],['bed',97.0],['monitor',98.2],['bed',100.8],['curtain',99.2],['curtain',92.8,'p']]),
+ // 로비 — 벽에 기댄 휠체어·목발·들것 (접수대·대기 의자는 각도 맞는 그림이 올 때까지 비움)
+ RUN('entry-hall','lobby','n',106.12,[['wheelchair',26.4,1.0],['wheelchair',27.8,1.0],['crutches',39.6],['stretcher',48.6],['iv',50.2],['crutches',64.6],['stretcher',77.0]]),
+ // 복도 — 벽에 붙여 세운 들것(통로 가운데는 비움)
+ RUN('upper-cross','corridor','n',22.12,[['stretcher',30.6],['wheelchair',47.4,1.0],['stretcher',64.6],['iv',67.0]]),
+ RUN('lower-cross','corridor','n',80.12,[['stretcher',47.6],['iv',49.4]])
 ]);
 
 // ---- 계획 ------------------------------------------------------------------------------------------
@@ -144,13 +138,20 @@ function keepClear(r){const L=r.exploration||{},out=[];
 const BOSS=Object.freeze([9.5,5.5,28.5,18.5]);/* 보스 전투실(원래 전투 좌표) — 손대지 않는다 */
 function plan(r){const out=[],clear=keepClear(r),hit=typeof blocked==='function'?(x,y,rad)=>{try{return !!blocked(x,y,rad,r);}catch(_){return true;}}:()=>false;const log=[];let n=0,dropped=0,pushed=0;
  for(const run of PLAN)for(const it of run.items){const a=ART[it[0]];n++;if(!a)continue;
-  const along=+it[1],d0=fin(+it[2])?+it[2]:a.d,flip=a.face!=='s'&&a.face!==run.wall,S=samplesOf(it[0],flip);let d=d0,x=0,y=0,ok=false;
-  // R521-2 벽에 묻힘: 그림 점의 3% 넘게 벽 덩어리 안이면 벽에서 .1칸씩 더 띄운다(1.2칸까지). 그래도 묻히거나 앞벽에 20% 넘게 가리면 그 점은 놓지 않는다.
-  for(;d<=d0+PUSH_MAX+1e-9;d+=PUSH_STEP){x=run.wall==='w'?run.at+d:along;y=run.wall==='w'?along:run.at+d;if(!fin(x+y))break;if(embedOf(S,x,y,hit)<=EMBED_MAX){ok=true;break;}}
+  const scr=it[2]==='p',flip=a.face!=='s'&&((a.face!==run.wall)!==scr),S=samplesOf(it[0],flip),ft=a.ft&&a.ang==='iso'?a.ft:null;
+  // 바닥 자리로 계산: 벽에서 띄울 거리(등·머리가 벽에서 WALL_GAP) · 구석이면 옆면이 구석 벽에서 WALL_GAP
+  const dep=ft?(a.face==='n'?(ft[1]-ft[2])*Math.SQRT2+ft[2]*SQ:(ft[2]-ft[0])*Math.SQRT2-ft[2]*SQ):0,side=ft?(a.face==='n'?(ft[2]-ft[0])*Math.SQRT2-ft[2]*SQ:(ft[1]-ft[2])*Math.SQRT2+ft[2]*SQ):0;
+  const along=it[1]==='c'?(fin(+run.corner)&&ft?+run.corner+WALL_GAP+side:NaN):+it[1],d0=scr?SCREEN_D:fin(+it[2])?+it[2]:ft?WALL_GAP+dep:a.d;let d=d0,x=0,y=0,ok=false;
+  // R521-2 벽에 묻힘: 그림 점의 1% 넘게 벽 덩어리 안이면 벽에서 .1칸씩 더 띄운다. 그래도 묻히거나 앞벽에 20% 넘게 가리면 그 점은 놓지 않는다.
+  //  R521-3: 바닥 자리로 붙인 낮은 가구는 .2칸까지만(벽에서 떨어지느니 놓지 않는다). 키 큰 약장은 뒤로 30° 누운 그림 판의 윗부분이 벽에 잘리므로 .8칸까지 — 바닥의 틈은 약장 몸에 가려 보이지 않는다.
+  //  구석('c')은 옆 벽에서도 같은 식으로 .1칸씩 뗀다(두 방향 합이 가장 작은 자리).
+  const lim=ft?(a.h>80?.8:.2):PUSH_MAX,steps=Math.round(lim/PUSH_STEP),cs=it[1]==='c'?steps:0;
+  search:for(let sum=0;sum<=steps+cs;sum++)for(let j=Math.min(sum,cs);j>=0;j--){const i=sum-j;if(i>steps)continue;d=d0+i*PUSH_STEP;const al=along+j*PUSH_STEP;x=run.wall==='w'?run.at+d:al;y=run.wall==='w'?al:run.at+d;if(!fin(x+y))break search;if(embedOf(S,x,y,hit)<=EMBED_MAX){ok=true;break search;}}
   const why=!ok?'wall':hit(x,y,.12)?'foot':(x>BOSS[0]&&x<BOSS[2]&&y>BOSS[1]&&y<BOSS[3])?'boss':clear.some(([cx,cy,cr])=>Math.hypot(cx-x,cy-y)<cr)?'clear':hiddenOf(S,x,y,hit)>HIDDEN_MAX?'hidden':'';
-  if(why){dropped++;log.push(run.room+':'+n+' '+it[0]+'/'+run.wall+' '+along+' '+why);continue;}if(d>d0+1e-9)pushed++;d=+d.toFixed(2);
+  if(why){dropped++;log.push(run.room+':'+n+' '+it[0]+'/'+run.wall+' '+it[1]+' '+why);continue;}if(d>d0+1e-9)pushed++;d=+d.toFixed(2);
+  let fr=null;if(a.ft){let[sL,sR,sB]=a.ft;if(flip)[sL,sR,sB]=[-sR,-sL,-sB];const bx=x+sB*SQ,by=y-sB*SQ;fr=Object.freeze([+(bx-(sB-sL)*Math.SQRT2).toFixed(3),+(by-(sR-sB)*Math.SQRT2).toFixed(3),+bx.toFixed(3),+by.toFixed(3)]);}
   const p={id:'r521:ward:'+run.room+':'+n,path:a.path,x:+x.toFixed(3),y:+y.toFixed(3),height:a.h,solid:false,visible:true,enabled:true,presentationOnly:true,autoTargetEligible6:false,
-   r521Ward:true,r521Flat:!!a.flat,r521Up:a.up||0,r521:Object.freeze({room:run.room,use:run.use,wall:run.wall,art:it[0],d})};
+   r521Ward:true,r521Flat:!!a.flat,r521Foot:a.flat?fr:null,r521Up:a.up||0,r521:Object.freeze({room:run.room,use:run.use,wall:run.wall,art:it[0],d,screen:scr})};
   if(a.frame){p.visualHospitalFrame=a.frame;p.hospitalDressingB3=true;p.hospitalZone13=true;p.visualFlipXB3=flip;}else if(flip)p.r303Flip=true;
   out.push(p);}
  stats.builds++;stats.placed=out.length;stats.dropped=dropped;stats.pushed=pushed;dropLog=log;return out;}
@@ -178,6 +179,14 @@ try{if(typeof draw==='function'){const base=draw;draw=function(...a){let r=null,
 //  좌우 모서리가 가장 낮아서, 내려간 만큼(침대 13px·약장·책상 등 9종) 3D 판이 바닥 밑으로 들어가 잘렸다 → 그리는 동안만 같은 만큼 들어 올려(visualLiftPx) 그림 밑변을 발에 맞춘다.
 function liftOf(p){try{const P=window.__STORYWORLD_PLAY_R111__;if(!P||typeof P.foot!=='function'||P.prefs?.().props===false)return 0;const f=P.foot(p.path);if(!(f<.97))return 0;
  return Math.min(.22,1-f)*p.height*(typeof zoom==='number'&&zoom>0?zoom:1);}catch(e){fail(e);return 0;}}
+// R521-3 바닥 닿는 그림자(사용자 2026-11-10 "침대 땅에서 떠보이지 않도록"): 낮은 가구는 발밑 타원을 껐기 때문에 다리 사이로 밝은 바닥이 그대로 보여 떠 보였다.
+//  → 그리기 직전에 그 가구의 바닥 자리(네모, 뒤 .08칸·앞 .3칸 넓힘)를 바닥에 누운 범위로 옅게 칠한다. 손전등 시야에서 안 보이는 가구는 그림자도 안 그린다(R329 와 같게).
+const CONTACT_A=.42,CONTACT_GROW=.08,CONTACT_FRONT=.3;/* 앞(카메라 쪽 +x·+y)으로는 .3칸 내민다 — 바닥 자리 그대로면 가구 몸에 다 가려 보이지 않았다(브라우저 확인) */
+function contact(p){const f=p.r521Foot;if(!f||typeof ctx==='undefined'||!ctx||typeof ctx.beginPath!=='function'||typeof project!=='function')return;
+ try{const SG=window.__STORYWORLD_SIGHT24__;if(SG?.enabled&&typeof SG.pointVisible==='function'&&!SG.pointVisible(p.x,p.y))return;}catch(e){fail(e);}
+ const g=CONTACT_GROW,k=CONTACT_FRONT,q=[project(f[0]-g,f[1]-g),project(f[2]+k,f[1]-g),project(f[2]+k,f[3]+k),project(f[0]-g,f[3]+k)];
+ const paint=()=>{ctx.save();try{ctx.globalAlpha*=CONTACT_A;ctx.fillStyle='rgba(0,0,0,1)';ctx.beginPath();ctx.moveTo(q[0].x,q[0].y);for(let i=1;i<4;i++)ctx.lineTo(q[i].x,q[i].y);ctx.closePath();ctx.fill();stats.contacts++;}finally{ctx.restore();}};
+ if(typeof ctx.scope==='function')ctx.scope({id:'r521:contact:'+p.id,kind:'effect',x:p.x,y:p.y,groundAligned:true,r521Contact:true,presentationOnly:true},paint);else paint();}
 try{if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){if(!p||!p.r521Ward)return base.apply(this,[p,...a]);
  const z=typeof zoom==='number'&&zoom>0?zoom:1,frame=!!p.visualHospitalFrame;
  /* R111 은 그 그림을 처음 그릴 때에야 밑동을 잰다 → 아직 안 쟀으면 보이지 않게 한 번 그려 재게 한 뒤 본 그리기를 한다(처음 한 장이 내려앉아 보이지 않게) */
@@ -185,8 +194,15 @@ try{if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...
   if(cold){ctx.save();try{ctx.globalAlpha=0;base.apply(this,[p,...a]);}catch(e){fail(e);}finally{ctx.restore();}}}
  const lift=frame?0:liftOf(p)+p.r521Up*p.height*z,flat=p.r521Flat&&typeof shadow==='function',sh=flat?shadow:null;
  /* 병원 소품판 그림(가림막)은 엔진 drawProp 이 아니라 a5 가 그려 visualLiftPx 를 타지 않는다 → 그 그리기만 위로 옮긴다 */
- const nudge=frame&&p.r521Up>0&&typeof ctx!=='undefined'&&ctx&&typeof ctx.translate==='function';if(lift>0)p.visualLiftPx=lift;if(flat)shadow=function(){};if(nudge){ctx.save();ctx.translate(0,-p.r521Up*p.height*z);}
+ const nudge=frame&&p.r521Up>0&&typeof ctx!=='undefined'&&ctx&&typeof ctx.translate==='function';try{contact(p);}catch(e){fail(e);}if(lift>0)p.visualLiftPx=lift;if(flat)shadow=function(){};if(nudge){ctx.save();ctx.translate(0,-p.r521Up*p.height*z);}
  try{return base.apply(this,[p,...a]);}finally{if(nudge)ctx.restore();if(flat)shadow=sh;if(lift>0)delete p.visualLiftPx;}};}}catch(e){fail(e);}
+
+// R521-3 실내 불꽃 조명(사용자 2026-11-10 "내부에 화로가 있는문제"): 원인 — R406 의 '실내엔 전구등' 바꿈은 사몽 지역 표(R115)로 실내를 알아봐 병원 본관(ep1a08)이 빠져 있었고,
+//  R92 가 병원 묶음 4종 가운데 촛대(01)·화로(02)를 골라 세웠다(실측 12곳). → R92 가 등불 종류를 묻는 R102.lamps 에 병원 본관에서는 전등형 등롱대(03) 하나만 돌려준다. 자리·개수·빛 웅덩이는 그대로.
+const LAMP='lights_hospital_03';
+try{const P=window.__STORYWORLD_PROPS_R102__;if(P&&typeof P.lamps==='function'){const base=P.lamps;
+ window.__STORYWORLD_PROPS_R102__=Object.freeze({...P,lamps:function(z,reg,items,list,fam){try{const r=typeof room!=='undefined'?room:null;if(enabled(r)&&Array.isArray(items)){const out=items.filter(i=>i&&i.kind==='light'&&i.id===LAMP);if(out.length){stats.lamps++;return out;}}}catch(e){fail(e);}
+  return base.apply(this,arguments);}});}}catch(e){fail(e);}
 
 function set(o){if(o&&typeof o.on==='boolean')prefs.on=o.on;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
 window.__STORYWORLD_HOSPITAL_ROOMS_R521__=Object.freeze({revision:REV,ART,SHAPE,PLAN,PATHS,samplesOf,embedOf,hiddenOf,enabled,plan,list,set,

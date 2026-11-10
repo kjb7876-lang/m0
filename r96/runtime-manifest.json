@@ -24874,13 +24874,23 @@
     },
     {
       "path": "assets/r521/index.json",
-      "bytes": 2005,
-      "sha256": "d9465ac05de7cfcd08d6972cbdb94ae5c5ef16cd2cb6a45c628ce5d7448cecca"
+      "bytes": 3823,
+      "sha256": "ce36230e0c1e0dfed4782c26ec8dc775bd5e16db998be0866bec992299532bb4"
+    },
+    {
+      "path": "assets/r521/medicine-cabinet.webp",
+      "bytes": 20376,
+      "sha256": "1090d5de3829c21df54e7a39e3e21dfa6b7752f433bfbe479417174d021dd211"
     },
     {
       "path": "assets/r521/overbed-table.webp",
       "bytes": 19974,
       "sha256": "3db430261733a3134dea95fb59b3f032ee3076f68dab9fe4d11ea7ce2ed35f11"
+    },
+    {
+      "path": "assets/r521/surgical-cart.webp",
+      "bytes": 32410,
+      "sha256": "556679e3ff38b7ea818880a7f84f34458e45c2c7108ac3d18459ece004848595"
     },
     {
       "path": "assets/r74/effects.png",
@@ -33859,8 +33869,8 @@
     },
     {
       "path": "hospital-rooms-r521.js",
-      "bytes": 23166,
-      "sha256": "69ab7fb49aa0938d4f25ae2cd78291fc8d870add27695b74d931f17580c248e1"
+      "bytes": 27516,
+      "sha256": "16154089967d776715f2f770d98dda848c8557f9458de42bab1c8b54e23d9813"
     },
     {
       "path": "hospital-settings-r84.js",
@@ -34798,8 +34808,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6959,
-  "totalBytes": 1092149871,
+  "fileCount": 6961,
+  "totalBytes": 1092208825,
   "webHTMLSha256": "6264b143140b9daf27050a0af05e0e4cceed06a3e9094dc4d3c465964e6ef127",
   "largest": [
     {
