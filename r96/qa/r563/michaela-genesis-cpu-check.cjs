@@ -71,5 +71,14 @@ if(exists){
  g=env();g.room.enemies.push(mob('a',11,10));R_(g);vm.runInContext('storyScene={}',g);step(g,40);ok('story scene cancels',A(g).inspect().stats.pillars===0);
  g=env();g.room.enemies.push(mob('a',11,10));R_(g);step(g,2);vm.runInContext("room={id:'z2',engaged:true,enemies:[]}",g);step(g,40);ok('room change cancels',A(g).inspect().stats.pillars===0);
  ok('errors stay 0',A(g).inspect().stats.errors===0);
+ // 사몽 발현(R571) 중: 대상 찾기 8칸×1.77, 기둥 1.4칸×1.77
+ g=env();vm.runInContext("window.__STORYWORLD_SAMONG_SURGE_R571__={active:()=>true,range:r=>r*1.77,cd:s=>s*.23,chance:c=>c}",g);{const f=mob('f',22,10);g.room.enemies.push(f);R_(g);step(g,30);ok('surge: enemy at 12 tiles (outside 8, inside 14.2) gets pillars',g.hits.some(h=>h.id==='f'&&h.s&&h.s.kind==='r563-pillar'));}
+ // 사몽 발현 문양: R572 michaela 문양 draw 를 Dots CX-0064T 시트로 감쌈(시트 없으면 원래 코드 그림)
+ g=env();vm.runInContext("var themeCalls=0;var TH={draw(){themeCalls++;}};window.__STORYWORLD_SAMONG_THEME_R572__={theme:h=>h==='michaela'?TH:null}",g);step(g,1);
+ vm.runInContext("TH.draw('back',100,200,70,0,1,1,false)",g);ok('sigil: no sheet yet → original R572 code draw',vm.runInContext('themeCalls',g)===1);
+ vm.runInContext("DOTS_ON=true;drawn.length=0;TH.draw('back',100,200,70,0,1,1,false);TH.draw('front',100,200,70,0,1,1,false)",g);
+ ok('sigil: back+front drawn from michaela-sigil sheets, R572 code skipped',vm.runInContext('themeCalls',g)===1&&vm.runInContext('drawn',g).filter(d=>/michaela-sigil-(back|front)/.test(d.src)).length>=2&&vm.runInContext('drawn',g).every(d=>d.sx<1152&&d.sy<768));
+ vm.runInContext("TH.draw('mark',100,200,70,0,1,1,false)",g);ok('sigil: other layers untouched',vm.runInContext('themeCalls',g)===2);
+ ok('sigil sheets shipped (< 200 KB each)',['back','front'].every(L=>{const f=path.join(R,'runtime-text','assets','r563','dots','michaela-sigil-'+L+'.webp');return fs.existsSync(f)&&fs.statSync(f).size<200000;}));
 }
 console.log(`R563 michaela-genesis cpu check: ${pass} pass, ${fail} fail`);process.exit(fail?1:0);

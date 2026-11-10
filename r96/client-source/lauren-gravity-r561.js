@@ -10,7 +10,7 @@
  */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_LAUREN_GRAVITY_R561__)return;
-const REV='R561-gravity-dots-1',KEY='storyworld.r561.gravity',HERO='lauren';
+const REV='R561-gravity-dots-2',KEY='storyworld.r561.gravity',HERO='lauren';
 const PULL_R=4.6,PULL_T=1.1,PULL_V=2.4,CORE=.55,COLLAPSE_AT=1.25,COLLAPSE_R=2.4,COLLAPSE_K=.35,END=1.75;
 const CRUSH_R=2.6,CRUSH_T=.55,CRUSH_V=2.0,CRUSH_MAX=3,AIM_REACH=3.4;
 const stats={wells:0,pulledSteps:0,collapses:0,collapseHits:0,crushes:0,draws:0,errors:0,lastError:null};
@@ -34,17 +34,19 @@ function pull(center,radius,speed,dt){let n=0;for(const e of enemiesNow()){if(hi
  const k=.6+.4*(1-d/radius),step=Math.min(speed*k*dt,d-CORE),ux=(center.x-e.x)/d,uy=(center.y-e.y)/d,r=e.combatProfile?.bodyBlock?.r||e.radius||.27;
  try{if(typeof moveActor==='function')moveActor(e,ux*step,uy*step,r);else{e.x+=ux*step;e.y+=uy*step;}n++;}catch(err){fail(err);}}stats.pulledSteps+=n;return n;}
 function collapse(w){stats.collapses++;const src={kind:'r561-collapse',friendly:true,owner:'hero',sourceHero:HERO,r561:true};
- for(const e of enemiesNow()){if(hiddenActor(e)||!canHit(e))continue;if(dist(e,w)>COLLAPSE_R+(e.radius||0)||!lineOk(w,e))continue;
+ for(const e of enemiesNow()){if(hiddenActor(e)||!canHit(e))continue;if(dist(e,w)>COLLAPSE_R*(w.k||1)+(e.radius||0)||!lineOk(w,e))continue;
   try{if(hitEnemy(e,w.power*COLLAPSE_K,src))stats.collapseHits++;}catch(err){fail(err);}}}
+// 사몽 발현(R571) 중 반경 배율: 생성 때 한 번 받아 둔다(최대 2배, 발현이 끝나도 그 결계는 끝까지 같은 크기).
+function rk(){try{const g=window.__STORYWORLD_SAMONG_SURGE_R571__;const r=g?.range?Number(g.range(1)):1;return Number.isFinite(r)&&r>0?Math.min(2,Math.max(1,r)):1;}catch(_){return 1;}}
 function curRoom(){try{return typeof room!=='undefined'?room:null;}catch(_){return null;}}
-function startWell(point,power){lastRoom=curRoom();well={x:point.x,y:point.y,t0:T(),power,collapsed:false,seed:(stats.wells*7919)%360};stats.wells++;}
-function startCrush(x,y){lastRoom=curRoom();if(crushes.length>=CRUSH_MAX)crushes.shift();crushes.push({x,y,t0:T()});stats.crushes++;}
+function startWell(point,power){lastRoom=curRoom();well={x:point.x,y:point.y,t0:T(),power,k:rk(),collapsed:false,seed:(stats.wells*7919)%360};stats.wells++;}
+function startCrush(x,y){lastRoom=curRoom();if(crushes.length>=CRUSH_MAX)crushes.shift();crushes.push({x,y,t0:T(),k:rk()});stats.crushes++;}
 function cancel(){well=null;crushes=[];bursts=[];}
 function step(){const t=T();const rm=typeof room!=='undefined'?room:null;if(rm!==lastRoom){if(lastRoom!==null)cancel();lastRoom=rm;}
  const dt=lastT==null||t<lastT?0:Math.min(.1,t-lastT);lastT=t;
  if(!on()||heroNow()!==HERO||!player||player.hp<=0||blockedNow()){cancel();return;}
- if(well){const u=t-well.t0;if(!well.bursted&&u>=COLLAPSE_AT-BURST_LEAD){well.bursted=true;if(bursts.length>=2)bursts.shift();bursts.push({x:well.x,y:well.y,t0:well.t0+COLLAPSE_AT-BURST_LEAD});}if(u<PULL_T)pull(well,PULL_R,PULL_V,dt);if(!well.collapsed&&u>=COLLAPSE_AT){well.collapsed=true;collapse(well);}if(u>=END)well=null;}
- crushes=crushes.filter(c=>{const u=t-c.t0;if(u<CRUSH_T)pull(c,CRUSH_R,CRUSH_V,dt);return u<CRUSH_T+.25;});}
+ if(well){const u=t-well.t0;if(!well.bursted&&u>=COLLAPSE_AT-BURST_LEAD){well.bursted=true;if(bursts.length>=2)bursts.shift();bursts.push({x:well.x,y:well.y,k:well.k,t0:well.t0+COLLAPSE_AT-BURST_LEAD});}if(u<PULL_T)pull(well,PULL_R*(well.k||1),PULL_V,dt);if(!well.collapsed&&u>=COLLAPSE_AT){well.collapsed=true;collapse(well);}if(u>=END)well=null;}
+ crushes=crushes.filter(c=>{const u=t-c.t0;if(u<CRUSH_T)pull(c,CRUSH_R*(c.k||1),CRUSH_V,dt);return u<CRUSH_T+.25;});}
 // ---- 시전 감지 ------------------------------------------------------------------------------
 if(typeof special==='function'){const base=special;special=function(...a){let before=0,point=null;
  try{if(on()&&heroNow()===HERO&&player){before=player.specialCD;const e=typeof nearestEnemy==='function'?nearestEnemy(12):null,ang=e?Math.atan2(e.y-player.y,e.x-player.x):aim();
@@ -96,7 +98,7 @@ function hole(id,c,u,life,radius,big){const q=project(c.x,c.y),{z,T1,AH}=scale()
   ctx.strokeStyle=`rgba(${VIOLET},.9)`;ctx.lineWidth=Math.max(1,1.4*z);ctx.beginPath();ctx.ellipse(q.x,cy,cr*1.08,cr*1.08,0,0,Math.PI*2);ctx.stroke();
  }finally{ctx.restore();}});
  // ③ 붕괴 섬광(큰 핵만): 바닥에 퍼지는 고리 두 겹
- if(big&&u>=COLLAPSE_AT){const v=Math.min(1,(u-COLLAPSE_AT)/(END-COLLAPSE_AT)),R=COLLAPSE_R*T1*.5*(.3+.9*v);
+ if(big&&u>=COLLAPSE_AT){const v=Math.min(1,(u-COLLAPSE_AT)/(END-COLLAPSE_AT)),R=COLLAPSE_R*(c.k||1)*T1*.5*(.3+.9*v);
   sc({id:id+':burst',kind:'effect',pxfSide:'hero',x:c.x,y:c.y,groundAligned:true},()=>{ctx.save();try{ctx.globalAlpha*=(1-v);const prev=ctx.globalCompositeOperation;ctx.globalCompositeOperation='lighter';
    ctx.fillStyle=`rgba(${VIOLET},.25)`;ctx.beginPath();ctx.ellipse(q.x,q.y,R,R*.5,0,0,Math.PI*2);ctx.fill();
    ctx.lineWidth=Math.max(2,7*z*(1-v));ctx.strokeStyle=`rgba(${HOT},.9)`;ctx.beginPath();ctx.ellipse(q.x,q.y,R,R*.5,0,0,Math.PI*2);ctx.stroke();
@@ -104,10 +106,10 @@ function hole(id,c,u,life,radius,big){const q=project(c.x,c.y),{z,T1,AH}=scale()
  stats.draws++;}
 function draw(){if(typeof project!=='function'||typeof ctx==='undefined'||!ctx)return;const t=T();
  const ci=bursts.length?img('collapse'):null;if(ci){const {T1}=scale();for(const b of bursts){const v=t-b.t0;if(v<0)continue;const fr=Math.min(23,Math.floor(v*BURST_FPS)),q=project(b.x,b.y);
-  const Wb=PULL_R*T1/SHEETS.back.span,Wc=COLLAPSE_R*T1/SHEETS.collapse.span,k=Math.min(1,fr/6),W=Wb+(Wc-Wb)*k;
+  const Wb=PULL_R*(b.k||1)*T1/SHEETS.back.span,Wc=COLLAPSE_R*(b.k||1)*T1/SHEETS.collapse.span,k=Math.min(1,fr/6),W=Wb+(Wc-Wb)*k;
   sc({id:'r561:collapse:'+b.t0.toFixed(2),kind:'effect',pxfSide:'hero',x:b.x,y:b.y},()=>cell(ci,'collapse',fr,q,W,1));}}
- if(well)hole('r561:well:'+well.t0.toFixed(2),well,t-well.t0,COLLAPSE_AT,PULL_R,true);
- for(const c of crushes)hole('r561:crush:'+c.t0.toFixed(2)+':'+c.x.toFixed(1),c,t-c.t0,CRUSH_T,CRUSH_R*.8,false);}
+ if(well)hole('r561:well:'+well.t0.toFixed(2),well,t-well.t0,COLLAPSE_AT,PULL_R*(well.k||1),true);
+ for(const c of crushes)hole('r561:crush:'+c.t0.toFixed(2)+':'+c.x.toFixed(1),c,t-c.t0,CRUSH_T,CRUSH_R*.8*(c.k||1),false);}
 const SENT={type:'r561-gravity',x:0,y:0,age:0,life:Infinity,r561Sentinel:true};
 function sentinel(want){try{if(typeof effects==='undefined'||!Array.isArray(effects))return;const i=effects.indexOf(SENT);if(want&&i<0)effects.push(SENT);else if(!want&&i>=0)effects.splice(i,1);SENT.age=0;
  if(want&&well){SENT.x=well.x;SENT.y=well.y;}}catch(_){}}

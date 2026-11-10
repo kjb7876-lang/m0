@@ -86,5 +86,8 @@ if(exists){
  g=env();for(let i=0;i<60;i++)g.room.enemies.push(mob('m'+i,10+Math.cos(i)*4,10+Math.sin(i)*4));vm.runInContext('special()',g);const t0=process.hrtime.bigint();step(g,24);const ms=Number(process.hrtime.bigint()-t0)/1e6;
  console.log('  60 mobs, 24 ticks incl. draw: '+ms.toFixed(1)+' ms');ok('60 mobs × 24 ticks stays cheap (< 120 ms in vm)',ms<120);
  ok('errors stay 0',A(g).inspect().stats.errors===0);
+ // 사몽 발현(R571) 중: 끌림 반경 4.6×1.77(최대 2배)
+ g=env();vm.runInContext("window.__STORYWORLD_SAMONG_SURGE_R571__={active:()=>true,range:r=>r*1.77,cd:s=>s*.23,chance:c=>c}",g);{const n=mob('n',12,10),m=mob('m',19.5,10);g.room.enemies.push(n,m);vm.runInContext('special()',g);ok('surge: well remembers range ×1.77',Math.abs(A(g).inspect().well.k-1.77)<1e-9);step(g,6);ok('surge: mob at 7.5 tiles (outside 4.6, inside 8.1) is pulled',m.x<19.5-.1);}
+ g=env();vm.runInContext("window.__STORYWORLD_SAMONG_SURGE_R571__={active:()=>true,range:r=>r*9}",g);vm.runInContext('special()',g);g.room.enemies.push(mob('n',12,10));ok('surge range capped at 2×',!A(g).inspect().well||A(g).inspect().well.k<=2);
 }
 console.log(`R561 lauren-gravity cpu check: ${pass} pass, ${fail} fail`);process.exit(fail?1:0);
