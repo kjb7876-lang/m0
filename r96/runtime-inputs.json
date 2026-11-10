@@ -6224,7 +6224,8 @@
     "assets/r590/hwando-wind-tornado.webp",
     "rooms-r523.js",
     "sfx-r541.js",
-    "slayer-sheets-r585.js"
+    "slayer-sheets-r585.js",
+    "samong-theme-r572.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -7299,5 +7300,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "6a9da1709f0e72500992bf1aaeead256577e2af9e8f2f14a5139eb69fb810b4a"
+  "runtimeManifestSHA256": "cb1fd4c76331db46a90ee21a38fdff8f71baf3929351aebd9b97837d6ad613a7"
 }
