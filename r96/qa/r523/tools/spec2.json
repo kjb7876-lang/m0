@@ -1,0 +1,6 @@
+[
+ {"key": "chair_n", "src": "ext:chairg-0.png", "trim": true, "out": "assets/r523/chair-n.webp", "max": 160, "ch": 45, "face": "n", "pair": "chair_w"},
+ {"key": "chair_w", "src": "ext:chairg-90.png", "trim": true, "out": "assets/r523/chair-w.webp", "max": 160, "ch": 45, "face": "w", "pair": "chair_n"},
+ {"key": "chairb_n", "src": "ext:chairg-180.png", "trim": true, "out": "assets/r523/chair-back-n.webp", "max": 160, "ch": 38, "face": "n", "pair": "chairb_w"},
+ {"key": "chairb_w", "src": "ext:chairg-270.png", "trim": true, "out": "assets/r523/chair-back-w.webp", "max": 160, "ch": 38, "face": "w", "pair": "chairb_n"}
+]
