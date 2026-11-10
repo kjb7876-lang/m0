@@ -88,5 +88,12 @@ if(exists){
  ok('sheets shipped (< 400 KB each)',[['r564','seoha-time-blink'],['r564/dots','seoha-clock'],['r564/dots','seoha-crystal-shell-back'],['r564/dots','seoha-crystal-shell-front'],['r564/dots','seoha-timestop-shatter'],['r564/dots','seoha-rift-back'],['r564/dots','seoha-rift-front'],['r564/dots','seoha-haste-dial']].every(([d,n])=>{try{return fs.statSync(path.join(R,'runtime-text','assets',d,n+'.webp')).size<400000;}catch(_){return false;}}));
  // 사몽 발현(R571) 중: 시간 정지 장 6칸×1.77
  g=env();V(g,"window.__STORYWORLD_SAMONG_SURGE_R571__={active:()=>true,range:r=>r*1.77,cd:s=>s*.23,chance:c=>c}");{const m=mob('m9',19,10);g.room.enemies.push(m);R_(g);step(g,3);ok('surge: mob at 9 tiles (outside 6, inside 10.6) is frozen',(A(g).inspect().frozen||[]).includes('m9'));step(g,40);ok('surge: stop still ends',!A(g).inspect().stop);}
+ // 사몽 발현 문양: R572 seoha 문양 draw 를 Dots CX-0064T 시트로 감쌈(시트 없으면 원래 코드 그림)
+ g=env();vm.runInContext("var themeCalls=0;var TH={draw(){themeCalls++;}};window.__STORYWORLD_SAMONG_THEME_R572__={theme:h=>h==='seoha'?TH:null}",g);step(g,1);
+ vm.runInContext("TH.draw('back',100,200,70,0,1,1,false)",g);ok('sigil: no sheet yet → original R572 code draw',vm.runInContext('themeCalls',g)===1);
+ vm.runInContext("SHEETS_ON=true;drawn.length=0;TH.draw('back',100,200,70,0,1,1,false);TH.draw('front',100,200,70,0,1,1,false)",g);
+ ok('sigil: back+front drawn from seoha-sigil sheets, R572 code skipped',vm.runInContext('themeCalls',g)===1&&vm.runInContext('drawn',g).filter(d=>/seoha-sigil-(back|front)/.test(d.src)).length>=2&&vm.runInContext('drawn',g).every(d=>d.sx<1152&&d.sy<768));
+ vm.runInContext("TH.draw('mark',100,200,70,0,1,1,false)",g);ok('sigil: other layers untouched',vm.runInContext('themeCalls',g)===2);
+ ok('sigil sheets shipped (< 200 KB each)',['back','front'].every(L=>{const f=path.join(R,'runtime-text','assets','r564','dots','seoha-sigil-'+L+'.webp');return fs.existsSync(f)&&fs.statSync(f).size<200000;}));
 }
 console.log(`R564 seoha-chrono cpu check: ${pass} pass, ${fail} fail`);process.exit(fail?1:0);

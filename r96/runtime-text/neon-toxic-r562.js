@@ -58,7 +58,19 @@ if(typeof special==='function'){const base=special;special=function(...a){let be
 if(typeof fx==='function'){const base=fx;fx=function(type,x,y,opt){const r=base.apply(this,arguments);
  try{const o=opt||{};if(type==='storySourceSkill'&&o.storyWER&&o.stage==='release'&&o.sourceHero===HERO&&o.sourceSlot==='r'&&on()&&heroNow()===HERO){const id=o.castId||('r:'+T());
   if(!seenR.has(id)){seenR.add(id);if(seenR.size>16)seenR.delete(seenR.values().next().value);lastRoom=curRoom();const power=qPower();jobs.push({at:T()+RPOOL_AT,run:()=>addPool(x,y,RPOOL_R,power,true)});}}}catch(err){fail(err);}return r;};}
+// ---- 사몽 발현 중 몸 둘레 문양(R572 코드 그림) → Dots CX-0064T 문양 시트(dots-r3, 칸 192·6×4, 피벗=발 [96,144]) ----
+// R572 가 이 파일보다 늦게 실리므로 tick 에서 처음 한 번 그 영웅 문양의 draw 만 감싼다(R572 파일 안 고침). 시트가 없거나 끄면 원래 코드 그림.
+// 뒤층은 몸보다 먼저 그려지므로 R350 가림 옅게에서 뺀다(r350). 앞층 CROP 밖(몸 자리)은 비운다.
+const SIG={back:'assets/r562/dots/neon-sigil-back.webp',front:'assets/r562/dots/neon-sigil-front.webp'},SIGC=192,SIGP=[96,144],SIGCROP=[[0,82],[110,192]];let sigPatched=false,sigAsk=-1e9;
+function sigImg(L){try{const g=typeof readyImage==='function'?readyImage(SIG[L]):null;if(g&&g.image)return g.image;const n=Date.now();if(n-sigAsk>1500){sigAsk=n;if(typeof ensureImages==='function')Promise.resolve(ensureImages([SIG.back,SIG.front])).catch(()=>{});}}catch(err){fail(err);}return null;}
+function patchSigil(){if(sigPatched)return;try{const TH=window.__STORYWORLD_SAMONG_THEME_R572__?.theme?.(HERO);if(!TH||typeof TH.draw!=='function'||Object.isFrozen(TH))return;const base=TH.draw;
+ TH.draw=function(L,x,fy,h,F,t,a,lo){const im=(L==='back'||L==='front')&&on()&&Number.isFinite(x)&&Number.isFinite(fy)?sigImg(L):null;if(!im)return base.apply(this,arguments);
+  const sc=Math.max(40,Number(h)||0)/105,fr=Math.floor((Number.isFinite(t)?t:T())*12.5)%24,u=(fr%6)*SIGC,v=Math.floor(fr/6)*SIGC,al=Math.max(0,Math.min(1,Number.isFinite(a)?a:1))*(L==='front'?.8:.95);
+  const go=()=>{ctx.save();try{ctx.globalCompositeOperation='source-over';ctx.globalAlpha*=al;for(const[c0,c1]of(L==='front'?SIGCROP:[[0,SIGC]]))ctx.drawImage(im,u+c0,v,c1-c0,SIGC,x+(c0-SIGP[0])*sc,fy-SIGP[1]*sc,(c1-c0)*sc,SIGC*sc);}finally{ctx.restore();}};
+  const own={id:'r562:sigil-'+L,kind:'effect',x:player?.x||0,y:player?.y||0,groundAligned:false,r572:true};if(L==='back')own.r350=true;
+  if(typeof ctx.scope==='function')ctx.scope(own,go);else go();stats.sigils=(stats.sigils||0)+1;};sigPatched=true;}catch(err){fail(err);}}
 if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);
+ try{if(!sigPatched)patchSigil();}catch(err){fail(err);}
  try{if(typeof started!=='undefined'&&started)step();}catch(err){fail(err);cancel();}sentinel(!!(pools.length||arcs.length||poison.size||strikes.length));return r;};}
 // ---- 그리기 -------------------------------------------------------------------------------
 const HOLY='255,226,150',MINT='94,234,212',TEAL='24,168,154',TOX='120,220,90',DARK='10,40,30',WHITE='228,255,248';
