@@ -585,6 +585,8 @@ jobs:
         run: node r96/qa/r474/swamp-hands-cpu-check.cjs
       - name: R535 hunter Q storm tracking, Z ember-thorn split and burn, C twisted thorn lance blast (no new keys, chained) CPU check
         run: node r96/qa/r535/hunter-arrows-cpu-check.cjs
+      - name: R597 hold A to auto-cast Q W E R F T with basic attack (S D stay manual, keeps manual 77 percent bonus) CPU check
+        run: node r96/qa/r597/auto-a-cpu-check.cjs
       - name: R440 Hwando hit pose (no old art) and hero rim blade cleanup CPU check
         run: node r96/qa/r440/r440-cpu-check.cjs
       - name: R446 seven pillars moved to their own map as stationary attacking towers CPU check
