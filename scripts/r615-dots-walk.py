@@ -113,5 +113,60 @@ def main(dots_dir):
     open(IDX, 'a').write('\n')
 
 
+
+
+def recompress(quality):
+    """Pages 예산(1.1GB) 때문에 R615 새 시트만 낮은 WebP 품질로 다시 저장하고 해시·크기를 고친다."""
+    idx = json.load(open(IDX))
+    total = 0
+    for m in idx['mobs']:
+        if not str(m.get('walkSource', '')).endswith('R615)'):
+            continue
+        p = os.path.join(RT, m['path'])
+        Image.open(p).save(p, 'WEBP', quality=quality, method=6)
+        b = open(p, 'rb').read()
+        m['bytes'], m['sha256'] = len(b), hashlib.sha256(b).hexdigest()
+        total += len(b)
+    json.dump(idx, open(IDX, 'w'), ensure_ascii=False, indent=1)
+    open(IDX, 'a').write('\n')
+    print('R615 sheets bytes', total)
+
+
+def shrink(max_h, quality):
+    """칸 높이가 max_h 보다 큰 R615 시트를 비율대로 줄인다(pivot·키도 같은 비율 → 화면 크기 그대로)."""
+    idx = json.load(open(IDX))
+    total = 0
+    for m in idx['mobs']:
+        if not str(m.get('walkSource', '')).endswith('R615)'):
+            continue
+        p = os.path.join(RT, m['path'])
+        im = Image.open(p).convert('RGBA')
+        cw, ch = m['cell']
+        if ch > max_h:
+            s = max_h / ch
+            ncw = round(cw * s)
+            s = ncw / cw
+            nch = round(ch * s)
+            cells = [im.crop((i * cw, 0, (i + 1) * cw, ch)).resize((ncw, nch), Image.LANCZOS) for i in range(m['cols'])]
+            im = Image.new('RGBA', (ncw * m['cols'], nch), (0, 0, 0, 0))
+            for i, c in enumerate(cells):
+                im.paste(c, (i * ncw, 0))
+            m['cell'] = [ncw, nch]
+            m['pivot'] = [round(m['pivot'][0] * s, 2), round(m['pivot'][1] * s, 2)]
+            m['visibleHeight'] = round(m['visibleHeight'] * s, 2)
+        im.save(p, 'WEBP', quality=quality, method=6)
+        b = open(p, 'rb').read()
+        m['bytes'], m['sha256'] = len(b), hashlib.sha256(b).hexdigest()
+        total += len(b)
+    json.dump(idx, open(IDX, 'w'), ensure_ascii=False, indent=1)
+    open(IDX, 'a').write('\n')
+    print('R615 sheets bytes', total)
+
+
 if __name__ == '__main__':
-    main(sys.argv[1])
+    if sys.argv[1] == '--recompress':
+        recompress(int(sys.argv[2]))
+    elif sys.argv[1] == '--shrink':
+        shrink(int(sys.argv[2]), int(sys.argv[3]))
+    else:
+        main(sys.argv[1])

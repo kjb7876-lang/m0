@@ -125,8 +125,8 @@
     ],
     "rename": "중장 광선포병"
    },
-   "bytes": 196434,
-   "sha256": "0de960f8f76d2983e2ee1c4a639441b082e61535da7d60dcae96fe5cec7893f6",
+   "bytes": 159196,
+   "sha256": "d22158b227837635eb6c52ea4381effc40953ecd87fa9fe455352fce171cfd79",
    "source": [
     {
      "file": "fire-00.png",
@@ -192,8 +192,8 @@
     ],
     "rename": "프리즘 저격병"
    },
-   "bytes": 161430,
-   "sha256": "cb39cc18dcd3c02d2076c9f482a5e8661409719f23d21e7d7cdec5c722caa1b9",
+   "bytes": 138032,
+   "sha256": "ab27a3da1b5ee561a91ca93845022feb7374e22344578fac4714b714efe57789",
    "source": [
     {
      "file": "fire-00.png",
@@ -259,8 +259,8 @@
     ],
     "rename": "펄스 척후병"
    },
-   "bytes": 174172,
-   "sha256": "465dfcb087f24446a2472196862103866a8bea08e3e4cc643568b86b8858cb18",
+   "bytes": 144940,
+   "sha256": "09374293b800ab8a8acaab9c29e76e118f5ef9129d867930b19b7d1c5984d063",
    "source": [
     {
      "file": "fire-00.png",
@@ -3752,15 +3752,15 @@
    "kind": "strip",
    "path": "assets/r380/mobs/swamp-root-stalker-darkgreen-v2-walk-d1.webp",
    "cell": [
-    448,
-    384
+    373,
+    320
    ],
    "cols": 12,
    "pivot": [
-    244.25,
-    325.5
+    203.36,
+    271.01
    ],
-   "visibleHeight": 268.5,
+   "visibleHeight": 223.55,
    "move": [
     4,
     5,
@@ -3785,8 +3785,8 @@
     "zone": "dist02",
     "name": "^(늪 )?뿌리 추적자"
    },
-   "bytes": 223348,
-   "sha256": "712be2fbc0b0991aeb45df2c4642ff5d6dea5e154ce2f16dd1a6bcfec48f1eac",
+   "bytes": 160368,
+   "sha256": "06a0e42f3a27386ab6be4b1e40ef635fd1c6c29d12018b3cf6c97010f0dd4e63",
    "source": [
     {
      "file": "01-idle.png",
@@ -3919,8 +3919,8 @@
     "zone": "dist00",
     "name": "^뿌리 추적자"
    },
-   "bytes": 93604,
-   "sha256": "ee382bf0a23f6317550e0bd78926fe3774c6ac114d74d26c9f3c9fdacca24193",
+   "bytes": 79336,
+   "sha256": "d742f8a19d157a2a98fbbbb14d2d27f3321e0f6cd58a7c73fb6e7964ab9155cd",
    "source": [
     {
      "file": "01-idle.png",
@@ -7816,8 +7816,8 @@
     "zone": "kair02",
     "name": "^시간수문장 46"
    },
-   "bytes": 120388,
-   "sha256": "ab88281d9f4bb6a07959bd8b3186dccb8c8b40219bf66ddb226ca0448e85304b",
+   "bytes": 101322,
+   "sha256": "a9e9b9c3459516b38c16cf612f709b6590e1b730f49867624cd9a7548b5eda8c",
    "source": [
     {
      "file": "frame_01.png",
@@ -7878,8 +7878,8 @@
     "zone": "hando02",
     "name": "^무명 검흔"
    },
-   "bytes": 136722,
-   "sha256": "20dee804ba83be913a2e0a1f83306e3b863c6aa756388f9d7b379dfcfb95c071",
+   "bytes": 120236,
+   "sha256": "34be66f6cd66653844e6add927f867985c1a2027466f2c6c5fffa2189eeb1dfb",
    "source": [
     {
      "file": "frame_01.png",
@@ -8143,8 +8143,8 @@
     "zone": "cult05",
     "name": "^생체기계 악몽"
    },
-   "bytes": 171766,
-   "sha256": "f3b02dc65f6335c23881f2eb59b3fef112d867425956031a0e40a4c1417d681a",
+   "bytes": 143118,
+   "sha256": "b50f409891633bc70035999eee79f6cb45fabad4da838d7ee103c625939c6faa",
    "source": [
     {
      "file": "frame_01.png",
@@ -8171,15 +8171,15 @@
    "kind": "strip",
    "path": "assets/r380/mobs/hando-timeless-silver-scout-walk-d1.webp",
    "cell": [
-    418,
-    418
+    320,
+    320
    ],
    "cols": 9,
    "pivot": [
-    208.5,
-    397
+    159.62,
+    303.92
    ],
-   "visibleHeight": 370,
+   "visibleHeight": 283.25,
    "move": [
     1,
     2,
@@ -8202,8 +8202,8 @@
     "zone": "hando01",
     "name": "^악몽 정찰체"
    },
-   "bytes": 370218,
-   "sha256": "ab4040e39899858810830b0078674d56c62fd7b7e7fed2678b16aeffdf020169",
+   "bytes": 236252,
+   "sha256": "e3b474cb28524c7f233da802a4c0c5c6e5ca1b6704250f71e5c2c14406612a35",
    "source": [
     {
      "file": "assets/r99/clean/assets/hando-v3123/timeless_silver_scout.webp"
@@ -8220,15 +8220,15 @@
    "kind": "strip",
    "path": "assets/r380/mobs/hando-silver-seal-sentinel-walk-d1.webp",
    "cell": [
-    418,
-    418
+    320,
+    320
    ],
    "cols": 9,
    "pivot": [
-    208.5,
-    401
+    159.62,
+    306.99
    ],
-   "visibleHeight": 375,
+   "visibleHeight": 287.08,
    "move": [
     1,
     2,
@@ -8251,8 +8251,8 @@
     "zone": "hando02",
     "name": "^붕괴선 파수병"
    },
-   "bytes": 251882,
-   "sha256": "eca571b9004d55928ada9e18653c59a02d455ca111367e850cf93faa891dcc6a",
+   "bytes": 160288,
+   "sha256": "81bf702dc68e1d8607682fde0c62e7bd5e783e32210993c042b786222d63fd2e",
    "source": [
     {
      "file": "assets/r99/clean/assets/hando-v3123/silver_seal_sentinel.webp"
@@ -8269,15 +8269,15 @@
    "kind": "strip",
    "path": "assets/r380/mobs/hando-memory-excision-connector-walk-d1.webp",
    "cell": [
-    418,
-    418
+    320,
+    320
    ],
    "cols": 9,
    "pivot": [
-    208.5,
-    400
+    159.62,
+    306.22
    ],
-   "visibleHeight": 377,
+   "visibleHeight": 288.61,
    "move": [
     1,
     2,
@@ -8300,8 +8300,8 @@
     "zone": "hando02",
     "name": "^기억절제 연결자"
    },
-   "bytes": 359754,
-   "sha256": "93b72ab4a47472947f8c3a12370c85404ebc01d87b79bf28e7eab7e6fe35ffa0",
+   "bytes": 222970,
+   "sha256": "597566e46a6dd1a0d214d847cf1b2499a205d67bd1fb67771874a3790ff09368",
    "source": [
     {
      "file": "assets/r99/clean/assets/hando-v3123/memory_excision_connector.webp"
@@ -8318,15 +8318,15 @@
    "kind": "strip",
    "path": "assets/r380/mobs/murder-rooftop-echo-float-d1.webp",
    "cell": [
-    661,
-    768
+    275,
+    320
    ],
    "cols": 7,
    "pivot": [
-    330,
-    749
+    137.29,
+    311.61
    ],
-   "visibleHeight": 730,
+   "visibleHeight": 303.71,
    "move": [
     1,
     2,
@@ -8347,8 +8347,8 @@
     "zone": "murder01",
     "name": "^끊어진 통화의 인과 잔향"
    },
-   "bytes": 735074,
-   "sha256": "98f418ec58b6ef5b9e2a09d32b2d49b51a8fb631f6372965e980dc7e09017997",
+   "bytes": 189038,
+   "sha256": "3473cc5c827c20f848f7d7e5bb889a53731b80f02da6c5e388a337f642816a5d",
    "source": [
     {
      "file": "assets/murder/rooftop_echo.png"
@@ -8365,15 +8365,15 @@
    "kind": "strip",
    "path": "assets/r380/mobs/cult-memory-orb-float-d1.webp",
    "cell": [
-    512,
-    512
+    320,
+    320
    ],
    "cols": 7,
    "pivot": [
-    256,
-    444
+    160.0,
+    277.5
    ],
-   "visibleHeight": 393,
+   "visibleHeight": 245.62,
    "move": [
     1,
     2,
@@ -8394,8 +8394,8 @@
     "zone": "cult01",
     "name": "^기계화 복종 봉인구"
    },
-   "bytes": 288854,
-   "sha256": "f642e80557f665f1a3d4d7b3942f976debddc3b56c17babba28602d7864dcf44",
+   "bytes": 133980,
+   "sha256": "628ea18e5d80377c871e62f32f4b353fad311d0431f80fa7a51e17de13bfc4e2",
    "source": [
     {
      "file": "assets/r99/clean/assets/u2/generated-v350/u2_memory_orb.webp"
@@ -8412,15 +8412,15 @@
    "kind": "strip",
    "path": "assets/r380/mobs/cult-nerve-cable-devourer-walk-d1.webp",
    "cell": [
-    418,
-    418
+    320,
+    320
    ],
    "cols": 9,
    "pivot": [
-    213,
-    402
+    163.06,
+    307.75
    ],
-   "visibleHeight": 380,
+   "visibleHeight": 290.91,
    "move": [
     1,
     2,
@@ -8443,8 +8443,8 @@
     "zone": "cult02",
     "name": "^신경 케이블 포식체"
    },
-   "bytes": 280238,
-   "sha256": "2ca003878c70b3b94c341d39a4df55c3fecf4593e4df72567d98652f60e18772",
+   "bytes": 183172,
+   "sha256": "42c2b5c79051ed67460b941924a0100971de808d9df8f84cf65c27dba734f5bd",
    "source": [
     {
      "file": "assets/cult-v3123/black_robed_nightmare_demon.webp"
@@ -8461,15 +8461,15 @@
    "kind": "strip",
    "path": "assets/r380/mobs/ep1b-seal-residual-float-d1.webp",
    "cell": [
-    418,
-    418
+    320,
+    320
    ],
    "cols": 7,
    "pivot": [
-    209.5,
-    417
+    160.38,
+    319.23
    ],
-   "visibleHeight": 194,
+   "visibleHeight": 148.52,
    "move": [
     1,
     2,
@@ -8490,8 +8490,8 @@
     "zone": "ep1b01",
     "name": "^일흔두 번째 인장 잔류체"
    },
-   "bytes": 139730,
-   "sha256": "6ec0483187d59029d9345e7c35ae2eae5c773052837ba8f16c4566b3340a7e9c",
+   "bytes": 92898,
+   "sha256": "429e26b1eb6e61390e1e70dc69a023acfb155a66a5d074f64b341b5285434b45",
    "source": [
     {
      "file": "assets/episode1b/generated-v394/seal_residual.webp"
@@ -8508,15 +8508,15 @@
    "kind": "strip",
    "path": "assets/r380/mobs/ep1b-red-heel-blade-walk-d1.webp",
    "cell": [
-    418,
-    418
+    320,
+    320
    ],
    "cols": 9,
    "pivot": [
-    209,
-    418
+    160.0,
+    320.0
    ],
-   "visibleHeight": 273,
+   "visibleHeight": 209.0,
    "move": [
     1,
     2,
@@ -8539,8 +8539,8 @@
     "zone": "ep1b05",
     "name": "^붉은 하이힐 칼날"
    },
-   "bytes": 237028,
-   "sha256": "70f64d7253bb3d90e162b4b0768f5c413797f411ac6618da75934a4b19ae1cb3",
+   "bytes": 152906,
+   "sha256": "54059336c9a19f9159261e3aa15d7f5620840abf1defa11b0de20e533019ed00",
    "source": [
     {
      "file": "assets/episode1b/generated-v394/lust_asmodai.webp"
@@ -8557,15 +8557,15 @@
    "kind": "strip",
    "path": "assets/r380/mobs/ep1b-banknote-blade-walk-d1.webp",
    "cell": [
-    418,
-    418
+    320,
+    320
    ],
    "cols": 9,
    "pivot": [
-    209.5,
-    418
+    160.38,
+    320.0
    ],
-   "visibleHeight": 186,
+   "visibleHeight": 142.39,
    "move": [
     1,
     2,
@@ -8588,8 +8588,8 @@
     "zone": "ep1b06",
     "name": "^칼날이 된 지폐"
    },
-   "bytes": 181436,
-   "sha256": "0c1d1348987587c9632e9c81c496a5b36a642788517795b0912e9434abf9a0e4",
+   "bytes": 112490,
+   "sha256": "9616db6b5aba675e01703e6e2ecbe6371832c9b7f57aa4e03ec2ae390641bcbf",
    "source": [
     {
      "file": "assets/episode1b/generated-v394/greed_fox_hound.webp"
@@ -8606,15 +8606,15 @@
    "kind": "strip",
    "path": "assets/r380/mobs/ep1b-steel-jaw-hound-walk-d1.webp",
    "cell": [
-    418,
-    418
+    320,
+    320
    ],
    "cols": 9,
    "pivot": [
-    208,
-    418
+    159.23,
+    320.0
    ],
-   "visibleHeight": 287,
+   "visibleHeight": 219.71,
    "move": [
     1,
     2,
@@ -8637,8 +8637,8 @@
     "zone": "ep1b09",
     "name": "^강철 턱의 사이보그 개"
    },
-   "bytes": 197718,
-   "sha256": "0790fd944724a3add4e7174bf38f84ed0fa8d8e311f09a627eb40cf372e332b3",
+   "bytes": 122754,
+   "sha256": "85b4fe6f2fd8133dabf2a4fc8abf431080d01898935865de3cb9088139f1ced6",
    "source": [
     {
      "file": "assets/episode1b/generated-v394/polar_cyborg_hound.webp"
@@ -8655,15 +8655,15 @@
    "kind": "strip",
    "path": "assets/r380/mobs/u2-false-mercy-collector-walk-d1.webp",
    "cell": [
-    512,
-    512
+    320,
+    320
    ],
    "cols": 9,
    "pivot": [
-    255.5,
-    445
+    159.69,
+    278.12
    ],
-   "visibleHeight": 394,
+   "visibleHeight": 246.25,
    "move": [
     1,
     2,
@@ -8686,8 +8686,8 @@
     "zone": "u202",
     "name": "^가짜 자비 수집가"
    },
-   "bytes": 387974,
-   "sha256": "c161c22ef98369d46bf50dbebb7c56b2a202b44277ab729e6b134cd98fc31db7",
+   "bytes": 178860,
+   "sha256": "26385482ff870b101003727e4a822c5c62503eba06b05ee3d81329a22e9870b3",
    "source": [
     {
      "file": "assets/r99/clean/assets/u2/generated-v350/u2_reactor_collector.webp"
@@ -8704,15 +8704,15 @@
    "kind": "strip",
    "path": "assets/r380/mobs/cult-mech-legs-walk-d1.webp",
    "cell": [
-    418,
-    418
+    320,
+    320
    ],
    "cols": 9,
    "pivot": [
-    208,
-    417
+    159.23,
+    319.23
    ],
-   "visibleHeight": 285,
+   "visibleHeight": 218.18,
    "move": [
     1,
     2,
@@ -8735,8 +8735,8 @@
     "zone": "cult05",
     "name": "^설원 아래의 기계 다리"
    },
-   "bytes": 142858,
-   "sha256": "b0b952e87341fe6d0dad9112a6e6bf5dc87bb82336e135402158aa5eb2592a33",
+   "bytes": 87644,
+   "sha256": "0f4bf7b3396f5c32f6bcfae117456ea9379481896fc9eba9eeb66a0cb30d369f",
    "source": [
     {
      "file": "assets/episode1b/generated-v394/polar_chairman.webp"
@@ -8753,15 +8753,15 @@
    "kind": "strip",
    "path": "assets/r380/mobs/cult-ego-binder-walk-d1.webp",
    "cell": [
-    418,
-    418
+    320,
+    320
    ],
    "cols": 9,
    "pivot": [
-    209,
-    396
+    160.0,
+    303.16
    ],
-   "visibleHeight": 365,
+   "visibleHeight": 279.43,
    "move": [
     1,
     2,
@@ -8784,8 +8784,8 @@
     "zone": "cult03",
     "name": "^EGO 구속 연결자"
    },
-   "bytes": 298152,
-   "sha256": "b8bc17937676b64d6a54b0c5bf1f1e3d1e3bb625a42d3f376844ce0e033aea8d",
+   "bytes": 201626,
+   "sha256": "ca4e2ba1a48ad69a1bc33081bd219777a286318e609e0c1a31de97115a639aea",
    "source": [
     {
      "file": "assets/cult-v3123/black_rose_chip_penitent.webp"
