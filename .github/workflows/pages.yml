@@ -464,7 +464,7 @@ jobs:
         run: node r96/qa/r452/ground-fringe-r452-cpu-check.cjs
       - name: R453 actor tone (hero/mob brightness + saturation from the floor light, screen top-left rim, no asset swap, restored after draw) CPU check
         run: node r96/qa/r453/actor-tone-r453-cpu-check.cjs
-      - name: R571 samong surge (during 사몽 only: skill cooldown x0.23, proc chance x1.77 capped 100%, skill range/area x1.77, restored after; hero main-colour flame aura, code only) CPU check
+      - name: R571 samong surge (during 사몽 only - skill cooldown x0.23, proc chance x1.77 capped 100%, skill range/area x1.77, restored after; hero main-colour flame aura, code only) CPU check
         run: node r96/qa/r571/r571-cpu-check.cjs
       - name: R521 hospital rooms (ep1a08 wards/consult/prep/lobby furnished by room function along the back walls, presentation only, drive hospital props) CPU check
         run: node r96/qa/r521/r521-cpu-check.cjs
