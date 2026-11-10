@@ -27,7 +27,7 @@ jobs:
           python-version: '3.11'
       - name: Restore hash-verified runtime and exact inherited QA inputs
         run: |
-          python -m pip install Pillow==11.3.0
+          python -m pip install Pillow==11.3.0 pyoxipng==9.1.1
           python scripts/build-r96.py
           python scripts/prepare-r96-ci.py
           python r96/scripts/prepare-handoff-baselines.py
@@ -430,6 +430,8 @@ jobs:
         run: node r96/qa/r412/r412-cpu-check.cjs
       - name: R425 combat flow (mob size bands, hit punch, spear tips, spider X moves, upright crosses, gunner 120deg, slayer poses + blood cross R / tornado Q) CPU check
         run: node r96/qa/r425/r425-cpu-check.cjs
+      - name: R585 slayer skill FX frame sheets (CX-0055 SL01-SL10, upright crosses, lag cap) CPU check
+        run: node r96/qa/r585/r585-cpu-check.cjs
       - name: R448 depth overlap (props in front cover the hero, hero silhouette shows through) CPU check
         run: node r96/qa/r448/r448-cpu-check.cjs
       - name: R461 cinema run (separate title entry, saved run mode, narrator hero lock) CPU check
@@ -642,6 +644,11 @@ jobs:
           node scripts/r96.browser.mjs
       - name: Revalidate every release byte after all tests
         run: python scripts/verify-r96-release.py
+      - name: R580 Pages bundle under 1GB (archival narration excluded, lossless PNG, pixel-identical, public verifier)
+        run: python r96/qa/r580/pages-size-check.py
+      - name: R580 pack the Pages bundle from the verified site
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: python scripts/pages-pack.py --site r96/hospital-three-pc/site --out r96/hospital-three-pc/pages
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -658,7 +665,7 @@ jobs:
       - uses: actions/upload-pages-artifact@v4
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         with:
-          path: r96/hospital-three-pc/site
+          path: r96/hospital-three-pc/pages
           retention-days: 1
   deploy:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'

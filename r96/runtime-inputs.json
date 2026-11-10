@@ -6176,6 +6176,23 @@
     "hwando-chain-r590.js",
     "hunter-arrows-r535.js",
     "samong-surge-r571.js",
+    "slayer-sheets-r585.js",
+    "assets/r585/index.json",
+    "assets/r585/slayer-bleed.webp",
+    "assets/r585/slayer-burst-big.webp",
+    "assets/r585/slayer-burst-small.webp",
+    "assets/r585/slayer-d-guard.webp",
+    "assets/r585/slayer-e-dash.webp",
+    "assets/r585/slayer-ego-enter.webp",
+    "assets/r585/slayer-ego-loop.webp",
+    "assets/r585/slayer-q-spin-back.webp",
+    "assets/r585/slayer-q-spin-front.webp",
+    "assets/r585/slayer-q-tornado-back.webp",
+    "assets/r585/slayer-q-tornado-front.webp",
+    "assets/r585/slayer-r-aura-back.webp",
+    "assets/r585/slayer-r-aura-front.webp",
+    "assets/r585/slayer-r-cross.webp",
+    "assets/r585/slayer-w-sacrifice.webp",
     "assets/r590/hwando-wind-tornado.webp",
     "assets/r590/hwando-iai-ring.webp"
   ],
@@ -7252,5 +7269,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "c02cd639d5eebda095b44b127fe76cdc6651fd2a74219f579ed5476cc1d9ddc9"
+  "runtimeManifestSHA256": "1f8243b8af17c94cccf4acff4db645d20d072a31c05e05282d24dcc5aba7f1c4"
 }

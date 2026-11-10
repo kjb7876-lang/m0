@@ -1,0 +1,15 @@
+{
+  "schema": "storyworld-pages-exclude/v1",
+  "round": "R580",
+  "note": "GitHub Pages 배포본에서만 빼는 경로. 저장소·runtime-packs·빌드 결과(site)·CI 검사 대상은 그대로 둔다. 되돌리려면 항목을 지우면 된다.",
+  "budgetBytes": 1000000000,
+  "protected": ["index.html", "assets/r381/", "assets/r380/", "assets/mammon", "mammon", "assets/sin-rooms/", "web-manifest-r62.json"],
+  "exclude": [
+    {
+      "prefix": "assets/story-narration/v1/audio/",
+      "reason": "옛 서사 음성 v1(Qwen3-TTS 0.6B, 2026-10). R75 부터 게임 안 서사 목록(assets/story-narration/v1/manifest.json 내장본)이 scenes:{}·originals:{} 라 어느 장면도 이 파일을 고를 수 없다(scripts/apply-r75.py 143행 'Old narration files remain archival media, but cannot be selected by R75'). 지금 서사 음성은 assets/r381/voice(R381)이다.",
+      "evidence": ["scripts/apply-r75.py:143", "64개 지역 순회 요청 기록에 0건", "실행 중 voiceManifest.scenes 0행", "index.html 밖 런타임 js 에 경로 문자열 없음", "휴대용 내보내기 assets 목록에 0건"]
+    }
+  ],
+  "losslessPng": {"tool": "pyoxipng==9.1.1", "level": 2, "strip": "safe", "pixelCheck": "Pillow RGBA 디코딩 바이트 비교, 다르면 원본 유지"}
+}
