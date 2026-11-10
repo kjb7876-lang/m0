@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""R614: Dots CX-0067MV 걷기 8칸 시트를 게임 시트로 붙인다(원본 그림은 그대로 두고 새 파일).
+"""R615: Dots CX-0067MV 걷기 8칸 시트를 게임 시트로 붙인다(원본 그림은 그대로 두고 새 파일).
 
-사용: python3 scripts/r614-dots-walk.py <Dots 결과 폴더>
+사용: python3 scripts/r615-dots-walk.py <Dots 결과 폴더>
 - 걷기 칸 색을 원본 첫 칸(불투명 픽셀) 평균·편차에 맞춘다(Dots 결과가 15~30 밝았음).
 - R380 시트가 있는 몹: 원본 칸 + 걷기 8칸을 한 줄로 이어 새 webp, move 를 걷기 칸으로.
 - R380 행이 없는 몹(환도 418×418 한 장): [원본 한 장 + 걷기 8칸] 새 webp + 새 R380 행(공격·서 있기 = 원본 한 장).
@@ -72,7 +72,7 @@ def main(dots_dir):
         m['path'] = rel
         m['cols'] = n + 8
         m['move'] = list(range(n, n + 8))
-        m['walkSource'] = f'Dots CX-0067MV_{mid}_walk8.png (색은 원본 0칸에 맞춤, R614)'
+        m['walkSource'] = f'Dots CX-0067MV_{mid}_walk8.png (색은 원본 0칸에 맞춤, R615)'
     for did, (rid, opath, zone, name, pivot, vh) in NEW.items():
         if rid in byid:
             continue
@@ -85,7 +85,7 @@ def main(dots_dir):
                             'move': list(range(1, 9)), 'attack': [0], 'idle': [0], 'facing': 'right',
                             'actor': {'layer': 'STORY', 'zone': zone, 'name': name}, 'bytes': size, 'sha256': sha,
                             'source': [{'file': opath}, {'file': f'CX-0067MV_{did}_walk8.png'}],
-                            'walkSource': f'Dots CX-0067MV_{did}_walk8.png (색은 원본에 맞춤, R614)', 'finalArt': False})
+                            'walkSource': f'Dots CX-0067MV_{did}_walk8.png (색은 원본에 맞춤, R615)', 'finalArt': False})
     json.dump(idx, open(IDX, 'w'), ensure_ascii=False, indent=1)
     open(IDX, 'a').write('\n')
 

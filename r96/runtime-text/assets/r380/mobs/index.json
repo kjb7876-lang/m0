@@ -3782,7 +3782,7 @@
     }
    ],
    "finalArt": false,
-   "walkSource": "Dots CX-0067MV_swamp-root-stalker-darkgreen-v2_walk8.png (색은 원본 0칸에 맞춤, R614)"
+   "walkSource": "Dots CX-0067MV_swamp-root-stalker-darkgreen-v2_walk8.png (색은 원본 0칸에 맞춤, R615)"
   },
   {
    "id": "wrath-hound-v1",
@@ -7868,7 +7868,7 @@
     }
    ],
    "finalArt": false,
-   "walkSource": "Dots CX-0067MV_legacy-m119-nameless-scar-v4_walk8.png (색은 원본 0칸에 맞춤, R614)"
+   "walkSource": "Dots CX-0067MV_legacy-m119-nameless-scar-v4_walk8.png (색은 원본 0칸에 맞춤, R615)"
   },
   {
    "id": "legacy-m124-silverless-shadow-v4",
@@ -8173,7 +8173,7 @@
      "file": "CX-0067MV_timeless_silver_scout_walk8.png"
     }
    ],
-   "walkSource": "Dots CX-0067MV_timeless_silver_scout_walk8.png (색은 원본에 맞춤, R614)",
+   "walkSource": "Dots CX-0067MV_timeless_silver_scout_walk8.png (색은 원본에 맞춤, R615)",
    "finalArt": false
   },
   {
@@ -8222,7 +8222,7 @@
      "file": "CX-0067MV_silver_seal_sentinel_walk8.png"
     }
    ],
-   "walkSource": "Dots CX-0067MV_silver_seal_sentinel_walk8.png (색은 원본에 맞춤, R614)",
+   "walkSource": "Dots CX-0067MV_silver_seal_sentinel_walk8.png (색은 원본에 맞춤, R615)",
    "finalArt": false
   },
   {
@@ -8271,7 +8271,7 @@
      "file": "CX-0067MV_memory_excision_connector_walk8.png"
     }
    ],
-   "walkSource": "Dots CX-0067MV_memory_excision_connector_walk8.png (색은 원본에 맞춤, R614)",
+   "walkSource": "Dots CX-0067MV_memory_excision_connector_walk8.png (색은 원본에 맞춤, R615)",
    "finalArt": false
   }
  ]
