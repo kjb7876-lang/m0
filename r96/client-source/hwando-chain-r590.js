@@ -16,7 +16,7 @@
 //  끄기: localStorage['storyworld.r590.hwandoChain']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_HWANDO_CHAIN_R590__)return;
-const REV='R590-hwando-chain-2',KEY='storyworld.r590.hwandoChain';
+const REV='R590-hwando-chain-3',KEY='storyworld.r590.hwandoChain';
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const CFG=Object.freeze({sheathIdle:2,drawMult:1.4,
  windDelay:.5,windCount:2,windGap:.12,windSpread:.08,windSpeed:11,windRange:6,windRadius:.55,windMult:.4,maxBlades:6,
@@ -34,6 +34,8 @@ function cell(im,fr,x,y,piv,s,a,flip=false){ctx.save();try{ctx.globalCompositeOp
 const PAL=Object.freeze({a:Object.freeze([214,222,234]),b:Object.freeze([244,248,255])}),GOLD=Object.freeze({a:Object.freeze([255,198,72]),b:Object.freeze([255,232,170])});
 const stats={draws:0,winds:0,blades:0,flashes:0,waves:0,finales:0,hits:0,damage:0,wallStops:0,coopSkipped:0,budgetSkips:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0;
+// 사몽 발현 배수(R571): 이 연계는 special()·story-wer 지연 밖 자체 틱에서 돌므로 사거리·반경만 직접 곱한다(쿨은 엔진 쪽이 이미 줄임 → 중복 금지). 상한(maxBlades·maxDraws)은 그대로.
+const rng=v=>{try{const g=window.__STORYWORLD_SAMONG_SURGE_R571__;const r=g?.range?Number(g.range(v)):v;return fin(r)&&r>0?Math.min(r,v*2):v;}catch(_){return v;}};
 const fin=v=>typeof v==='number'&&Number.isFinite(v);
 const clamp=(v,a,b)=>Math.min(b,Math.max(a,v)),smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
 const SP=()=>{const s=window.__STORYWORLD_FX_SPRITES_R106__;return s?.on?.()?s:null;};
@@ -82,18 +84,18 @@ function onSpecial(base,self,args){const cd0=player?.specialCD,r=base.apply(self
    later(CFG.windDelay+i*CFG.windGap,j,()=>launch(player.x,player.y,a+off,pw,id+':'+i,j));}}}catch(e){fail(e);}
  return r;}
 function launch(x,y,a,pw,id,j){const ux=Math.cos(a),uy=Math.sin(a),sx=x+ux*.8,sy=y+uy*.8;if(!open(sx,sy)){stats.wallStops++;return;}
- blades.push({id,x:sx,y:sy,ux,uy,a,pw,travel:0,hit:new Set(),j,t0:T()});stats.blades++;while(blades.length>CFG.maxBlades)blades.shift();arm();}
+ blades.push({id,x:sx,y:sy,ux,uy,a,pw,range:rng(CFG.windRange),radius:rng(CFG.windRadius),travel:0,hit:new Set(),j,t0:T()});stats.blades++;while(blades.length>CFG.maxBlades)blades.shift();arm();}
 function stepBlades(dt){for(let i=blades.length-1;i>=0;i--){const b=blades[i];if(!valid(b.j)){blades.splice(i,1);continue;}
  let move=CFG.windSpeed*dt,dead=false;while(move>1e-9&&!dead){const s=Math.min(.2,move);move-=s;const nx=b.x+b.ux*s,ny=b.y+b.uy*s;
   if(!open(nx,ny)){stats.wallStops++;dead=true;break;}b.x=nx;b.y=ny;b.travel+=s;
-  for(const e of foes()){if(!(e.hp>0)||b.hit.has(e.id))continue;if(Math.hypot(e.x-b.x,e.y-b.y)<CFG.windRadius+(e.radius||0)&&line(b,e)){b.hit.add(e.id);strike(e,CFG.windMult,b.pw,'wind','q',b.id);}}
-  if(b.travel>=CFG.windRange)dead=true;}
+  for(const e of foes()){if(!(e.hp>0)||b.hit.has(e.id))continue;if(Math.hypot(e.x-b.x,e.y-b.y)<b.radius+(e.radius||0)&&line(b,e)){b.hit.add(e.id);strike(e,CFG.windMult,b.pw,'wind','q',b.id);}}
+  if(b.travel>=b.range)dead=true;}
  if(dead)blades.splice(i,1);}}
 // ---- E → 유영 일섬 -------------------------------------------------------------------------------------------
 function onFlight(x,y,o){if(seenE.has(o.castId))return;seenE.add(o.castId);if(seenE.size>64)seenE.delete(seenE.values().next().value);
  if(!fin(x)||!fin(y)||!fin(o.tx)||!fin(o.ty))return;const a={x,y},b={x:o.tx,y:o.ty};if(Math.hypot(b.x-a.x,b.y-a.y)<.05)return;
  lastSwing=T();const j=snapshot(),pw=power(),id='e:'+o.castId;addVis({k:'trail',a,b,life:CFG.flashDelay});
- later(CFG.flashDelay,j,()=>{stats.flashes++;addVis({k:'flash',a,b,life:.34});segHits(a,b,CFG.flashRadius,CFG.flashMult,pw,'flash','e',id);});}
+ later(CFG.flashDelay,j,()=>{stats.flashes++;addVis({k:'flash',a,b,life:.34});segHits(a,b,rng(CFG.flashRadius),CFG.flashMult,pw,'flash','e',id);});}
 // ---- R 칠연 환수검 → 종섬 ------------------------------------------------------------------------------------
 function onWave(x,y,o){let w=waves.get(o.castId);if(!w){w={n:0,done:false,a:fin(o.visualWorldAngle35)?o.visualWorldAngle35:aim()};waves.set(o.castId,w);if(waves.size>16)waves.delete(waves.keys().next().value);}
  if(w.done)return;w.n++;stats.waves++;lastSwing=T();
@@ -101,8 +103,8 @@ function onWave(x,y,o){let w=waves.get(o.castId);if(!w){w={n:0,done:false,a:fin(
  addVis({k:'wave',x,y,a:w.a+w.n*2.39996,r:fin(o.size)?o.size:3.3,n:w.n,life:.24});
  if(w.n>=CFG.waves){w.done=true;const j=snapshot(),pw=power(),id='r:'+o.castId,fa=w.a;
   later(CFG.finaleDelay,j,()=>finale(pw,id,fa));}}
-function finale(pw,id,fallback){const o={x:player.x,y:player.y},e=nearest(7),a=e?Math.atan2(e.y-o.y,e.x-o.x):fin(fallback)?fallback:aim(),end=rayEnd(o,a,CFG.finaleRange);
- stats.finales++;lastFinale={x0:o.x,y0:o.y,x1:end.x,y1:end.y,at:T()};addVis({k:'finale',a:o,b:end,life:.46});addVis({k:'ring',x:end.x,y:end.y,life:FRAMES/FPS*.55,size:1.25});segHits(o,end,CFG.finaleRadius,CFG.finaleMult,pw,'finale','r',id);}
+function finale(pw,id,fallback){const o={x:player.x,y:player.y},e=nearest(7),a=e?Math.atan2(e.y-o.y,e.x-o.x):fin(fallback)?fallback:aim(),end=rayEnd(o,a,rng(CFG.finaleRange));
+ stats.finales++;lastFinale={x0:o.x,y0:o.y,x1:end.x,y1:end.y,at:T()};addVis({k:'finale',a:o,b:end,life:.46});addVis({k:'ring',x:end.x,y:end.y,life:FRAMES/FPS*.55,size:1.25});segHits(o,end,rng(CFG.finaleRadius),CFG.finaleMult,pw,'finale','r',id);}
 // ---- 그리기(R106 조각만, 실버+황금) --------------------------------------------------------------------------
 let budget=0;
 function put(S,fn){if(budget<=0){stats.budgetSkips++;return;}budget--;fn();}
@@ -127,7 +129,7 @@ function drawAll(){const S=SP();if(!S)return;const t=T(),lo=low(),u=unit(),h=H()
    if(!lo&&age<.2)put(S,()=>S.draw('flare',GOLD,q.x,q.y,h*.9,h*.9,{alpha:.65*(1-age/.2),blend:'screen'}));}}
  const tw=sheet('wind');
  for(const b of blades){const p=scr(b,.4),q=project(b.x+b.ux,b.y+b.uy),sa=Math.atan2(q.y-h*.4-p.y,q.x-p.x),w=u*(tw?.8:1.35),hh=w*.56;
-  if(tw){const g=project(b.x,b.y),W=SHEETS.wind,s=W.hTiles*h/126,k=b.travel/CFG.windRange,age=t-b.t0,fr=k>.8?Math.min(FRAMES-1,18+Math.floor((k-.8)/.2*5)):6+Math.floor(age*FPS*1.6)%12;
+  if(tw){const g=project(b.x,b.y),W=SHEETS.wind,s=W.hTiles*h/126,k=b.travel/(b.range||CFG.windRange),age=t-b.t0,fr=k>.8?Math.min(FRAMES-1,18+Math.floor((k-.8)/.2*5)):6+Math.floor(age*FPS*1.6)%12;
    put(S,()=>cell(tw,fr,g.x,g.y,W.pivot,s,1,b.ux<0));}
   put(S,()=>S.draw('slash',PAL,p.x,p.y,w,hh,{angle:sa+Math.PI/2,pivot:[.5,.82],alpha:tw?.7:.92,blend:'screen'}));
   if(!lo)put(S,()=>S.along('slashline',GOLD,p.x-Math.cos(sa)*w*.9,p.y-Math.sin(sa)*w*.9,p.x,p.y,h*.12,{alpha:.5,blend:'screen'}));}

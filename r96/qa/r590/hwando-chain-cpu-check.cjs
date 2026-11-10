@@ -153,4 +153,16 @@ ok(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').incl
 {const E=engine({ready:true,enemies:[{id:'q1',x:23,y:20},{id:'r1',x:24,y:20}]});for(let k=0;k<4;k++){E.ctx.player.specialCD=0;E.ctx.special();}E.run(.75);for(let k=0;k<3;k++){flight(E,'wer:t'+k,20,20,23.8,20);for(let i=0;i<7;i++)wave(E,'wer:tr'+k);}
  let mx=0;for(let i=0;i<20;i++){E.adv(.02);mx=Math.max(mx,E.frame());}ok(mx<=E.api.config.maxDraws,'시트를 써도 한 프레임 그리기 ≤ '+E.api.config.maxDraws+'(최대 '+mx+')');}
 
+// ---- R571 사몽 발현 배수: 연계 자체 틱의 사거리·반경만 ×1.77, 상한 그대로 ----
+{const mk=on=>{const E=engine({enemies:[{id:'n',x:22,y:20},{id:'far',x:28.6,y:20}]});E.g.window.__STORYWORLD_SAMONG_SURGE_R571__={active:()=>on,range:r=>on?r*1.77:r,cd:s=>on?s*.23:s};return E;};
+ const A=mk(false);A.ctx.special();A.run(1.6);const B=mk(true);B.ctx.special();B.run(1.6);
+ const hw=E=>E.hits.filter(h=>h.s.r590==='wind').map(h=>h.id);
+ ok(!hw(A).includes('far')&&hw(B).includes('far'),'사몽 발현 중 검풍 사거리 ×1.77(6칸 너머 적까지): 평소 '+hw(A)+' / 발현 '+hw(B));
+ ok(B.ctx.player.specialCD===A.ctx.player.specialCD,'쿨은 연계가 다시 줄이지 않음(엔진 몫)');
+ const C=mk(false),D=mk(true);for(const E of [C,D]){for(let i=0;i<7;i++)wave(E,'wer:sg');E.run(.6);}
+ const hf=E=>E.hits.filter(h=>h.s.r590==='finale').map(h=>h.id);
+ ok(!hf(C).includes('far')&&hf(D).includes('far'),'사몽 발현 중 종섬 길이 ×1.77: 평소 '+hf(C)+' / 발현 '+hf(D));
+ const S=mk(true);for(let k=0;k<6;k++){S.ctx.player.specialCD=0;S.ctx.special();}S.run(.9);ok(S.api.inspect().blades.length<=S.api.config.maxBlades,'발현 중에도 칼바람 상한 '+S.api.config.maxBlades+' 유지');
+ const X=mk(true);X.g.window.__STORYWORLD_SAMONG_SURGE_R571__={range:()=>{throw new Error('x');}};X.ctx.special();X.run(1);ok(hw(X).includes('n'),'배수 API 오류가 나도 평소 값으로 동작');}
+
 console.log('R590 hwando chain CPU check: '+n+' passed');
