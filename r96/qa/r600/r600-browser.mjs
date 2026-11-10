@@ -53,7 +53,7 @@ await shot('03-wave');
  const d=await A(()=>({props:room.props.filter(p=>p.r600CoreProp).length,draws:window.__STORYWORLD_SURVIVAL_R600__.inspect().stats.coreDraws||0}));ok('core is a room prop drawn in the engine prop pass (reaches the WebGL frame)',d.props===1&&d.draws>0,d);
  await A(()=>{window.__STORYWORLD_SURVIVAL_R600__.state();});const h0=await A(()=>{const S=window.__STORYWORLD_SURVIVAL_R600__;return S.state().core.hp;});ok('core has hp/regen/heal-on-kill spec',h0>0,h0);}
 // 서사 끝 → +6.5초 뒤 생성 멈춤 → 섬멸 → 보스
-{for(let i=0;i<400;i++){const pl=await A(()=>{const S=window.__STORYWORLD_SURVIVAL_R600__;if(S.narr().playing)S.skipNarration();return S.narr().playing;});if(!pl)break;await p.waitForTimeout(30);}
+{for(let i=0;i<400;i++){const pl=await A(()=>{const S=window.__STORYWORLD_SURVIVAL_R600__;S.skipNarration();return S.narr().playing;});if(!pl)break;await p.waitForTimeout(30);}
  await p.waitForFunction(()=>Number.isFinite(window.__STORYWORLD_SURVIVAL_R600__.state().narrEndAt),null,{timeout:30000});
  const e0=await A(()=>window.__STORYWORLD_SURVIVAL_R600__.state().narrEndAt);await waitT(t=>time>=t+3,e0);
  const sp1=await A(()=>window.__STORYWORLD_SURVIVAL_R600__.inspect().stats.spawned);ok('3 s after narration ends enemies still spawn (tail 6.5 s)',await A(()=>window.__STORYWORLD_SURVIVAL_R600__.pure.spawning(window.__STORYWORLD_SURVIVAL_R600__.state(),time)));
@@ -66,7 +66,7 @@ await shot('03-wave');
  {await gameWait(.6);const o=await A(()=>{const bb=document.getElementById('bossbar').getBoundingClientRect(),h=document.getElementById('r600Hud').getBoundingClientRect();return{bb:bb.bottom,bh:bb.height,hud:h.top};});ok('survival HUD sits below the boss bar (no overlap)',o.bh>0&&o.hud>=o.bb,o);}}
 await gameWait(1.5);await shot('05-boss');
 // 보스·남은 적 섬멸 → 다음 지역
-{for(let i=0;i<400;i++){const pl=await A(()=>{const S=window.__STORYWORLD_SURVIVAL_R600__;if(S.narr().playing)S.skipNarration();return S.narr().playing;});if(!pl)break;await p.waitForTimeout(30);}
+{for(let i=0;i<400;i++){const pl=await A(()=>{const S=window.__STORYWORLD_SURVIVAL_R600__;S.skipNarration();return S.narr().playing;});if(!pl)break;await p.waitForTimeout(30);}
  for(let k=0;k<12;k++){await A(()=>{if(room.id!=='dist00')return;for(const e of room.enemies)if(e.hp>0){e.hp=.5;hitEnemy(e,5);}});const ph=await A(()=>window.__STORYWORLD_SURVIVAL_R600__.state().phase);if(ph==='clear')break;await gameWait(1.5);}
  ok('all cleared → phase clear',await A(()=>window.__STORYWORLD_SURVIVAL_R600__.state().phase==='clear'||room.id!=='dist00'));
  await waitT(()=>room?.id==='dist01'&&!loading&&window.__STORYWORLD_SURVIVAL_R600__.here()&&window.__STORYWORLD_SURVIVAL_R600__.state().ready,null).catch(()=>{});

@@ -66,6 +66,11 @@ ok('narration holds while the game is paused (still narrating, minimum wave end 
   return{n,drops:(room.passivePointDropsR64||[]).length,props:(room.props||[]).filter(q=>q?.passivePointDropR64).length,points:(player.points||0)-p0};});
  await p.waitForTimeout(800);const pts=await A(()=>({drops:(room.passivePointDropsR64||[]).length,props:(room.props||[]).filter(q=>q?.passivePointDropR64).length}));
  ok('survival kills drop no campaign passive points',!pd.none&&pd.drops===0&&pd.props===0&&pd.points===0&&pts.drops===0&&pts.props===0,{...pd,after:pts});
+ // 2g) 엔진 시간을 멈추는 캠페인 연출(배신 영상 R368 — modal/loading 없이 tick 을 일찍 돌려보냄) 동안 생존 단계(코어 공격·재생·조각·카드)도 멈춘다
+ {const cv=await A(()=>{if(modal)closePanel(true);const V=window.__STORYWORLD_BETRAYAL_VIDEO_R368__;if(!V)return{none:true};const ok=V.play({muted:true});const S=window.__STORYWORLD_SURVIVAL_R600__.state();
+   const a={t:time,cd:S.core.cd,hp:S.core.hp,gems:S.gems};for(let i=0;i<120;i++)tick(1/60);const S2=window.__STORYWORLD_SURVIVAL_R600__.state();
+   const b={t:time,cd:S2.core.cd,hp:S2.core.hp,gems:S2.gems,modal:!!modal};V.skip();return{played:ok,open:!!document.getElementById('r368v')||ok,a,b};});
+  ok('survival does not advance while a campaign cinematic freezes engine time',!cv.none&&cv.played&&cv.a.t===cv.b.t&&cv.a.cd===cv.b.cd&&cv.a.hp===cv.b.hp&&cv.a.gems===cv.b.gems&&!cv.b.modal,cv);}
  await A(()=>{if(modal)closePanel(true);showMenu();});await p.waitForTimeout(300);await A(()=>document.getElementById('menuTitle')?.click());await p.waitForTimeout(1500);}
 // 3) 스토리 이어하기 → 죽음 화면
 const loaded=await A(async()=>{const st=window.__STORYWORLD_TEST_STORAGE_B1__.store;let raw=null;try{raw=JSON.parse(st.getItem(normalSaveKeyR73()));}catch(_){}return raw?await restoreSave(raw):false;});
