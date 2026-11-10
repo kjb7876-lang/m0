@@ -94,7 +94,7 @@
  };
  const propBase=drawProp;drawProp=function(p,...args){
   if(enabled(room)&&p&&!p.terrainWall&&!p.hospitalDoorFrameB3){
-   if(!medicalProps.has(p.path)||blocked(p.x,p.y,.05,room)){stats.propsSuppressed++;return;}
+   if(!(medicalProps.has(p.path)||p.r521Ward)||blocked(p.x,p.y,.05,room)){stats.propsSuppressed++;return;}/* R521 병실 가구(hospital-rooms-r521.js)는 의료 소품으로 통과 */
   }return propBase.call(this,p,...args);
  };
  const projectileBase=drawProjectile;drawProjectile=function(p,...args){

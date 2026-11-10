@@ -6164,7 +6164,14 @@
     "weather-r450.js",
     "local-light-r451.js",
     "ground-fringe-r452.js",
-    "actor-tone-r453.js"
+    "actor-tone-r453.js",
+    "hospital-rooms-r521.js",
+    "assets/r521/exam-lamp.webp",
+    "assets/r521/overbed-table.webp",
+    "assets/r521/crutches.webp",
+    "assets/r521/index.json",
+    "assets/r521/medicine-cabinet.webp",
+    "assets/r521/surgical-cart.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -7239,5 +7246,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "7e5630c2a2ba3721f1c70b17119bafa081db024d3339ef68e1a9de52230c6953"
+  "runtimeManifestSHA256": "205c9dfc3508122fbc9b9bdf3082c4461347fe29c59a5baf77c612d88c92d45a"
 }
