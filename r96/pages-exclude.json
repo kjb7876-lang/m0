@@ -4,7 +4,7 @@
   "note": "GitHub Pages 배포본에서만 빼는 경로. 저장소·runtime-packs·빌드 결과(site)·CI 검사 대상은 그대로 둔다. 되돌리려면 항목을 지우면 된다.",
   "budgetBytes": 1100000000,
   "budgetNote": "R454(2026-11-10 사용자 결정 '음질 그대로, 1GB 넘김'): 사몽 ② 녹음 서사 음성 1,668문장(약 116MB)을 지금 음질 그대로 넣기 위해 1,000,000,000 → 1,100,000,000. R580 전 1,092MB 로 배포되던 크기 안이다. 배포가 크기 때문에 실패하면 서사 음성을 가볍게 다시 압축하고 이 값을 되돌린다.",
-  "protected": ["index.html", "assets/r381/", "assets/r380/", "assets/mammon", "mammon", "assets/sin-rooms/", "web-manifest-r62.json"],
+  "protected": ["index.html", "assets/r380/", "assets/mammon", "mammon", "assets/sin-rooms/", "web-manifest-r62.json"],
   "exclude": [
     {
       "prefix": "assets/story-narration/v1/audio/",
@@ -52,7 +52,8 @@
     {"prefix": "assets/u2/generated-v350/u2_reactor_collector.webp", "round": "R614b", "reason": "assets-clean-r99.js 가 urlFor 로 assets/r99/clean/ 정리본을 부르는 원본(정리본은 배포본에 남음)", "evidence": ["assets-clean-r99.js CLEAN 목록", "64개 지역 순회에서 원본 요청 0건·정리본 요청 31건", "r96/qa/r580/pages-size-check.py 3d"]},
     {"prefix": "assets/u2/generated-v350/u2_resonance_knight.webp", "round": "R614b", "reason": "assets-clean-r99.js 가 urlFor 로 assets/r99/clean/ 정리본을 부르는 원본(정리본은 배포본에 남음)", "evidence": ["assets-clean-r99.js CLEAN 목록", "64개 지역 순회에서 원본 요청 0건·정리본 요청 31건", "r96/qa/r580/pages-size-check.py 3d"]},
     {"prefix": "assets/u2/generated-v350/u2_suppression_knight.webp", "round": "R614b", "reason": "assets-clean-r99.js 가 urlFor 로 assets/r99/clean/ 정리본을 부르는 원본(정리본은 배포본에 남음)", "evidence": ["assets-clean-r99.js CLEAN 목록", "64개 지역 순회에서 원본 요청 0건·정리본 요청 31건", "r96/qa/r580/pages-size-check.py 3d"]},
-    {"prefix": "assets/u2/generated-v350/u2_void_wraith.webp", "round": "R614b", "reason": "assets-clean-r99.js 가 urlFor 로 assets/r99/clean/ 정리본을 부르는 원본(정리본은 배포본에 남음)", "evidence": ["assets-clean-r99.js CLEAN 목록", "64개 지역 순회에서 원본 요청 0건·정리본 요청 31건", "r96/qa/r580/pages-size-check.py 3d"]}
+    {"prefix": "assets/u2/generated-v350/u2_void_wraith.webp", "round": "R614b", "reason": "assets-clean-r99.js 가 urlFor 로 assets/r99/clean/ 정리본을 부르는 원본(정리본은 배포본에 남음)", "evidence": ["assets-clean-r99.js CLEAN 목록", "64개 지역 순회에서 원본 요청 0건·정리본 요청 31건", "r96/qa/r580/pages-size-check.py 3d"]},
+    {"prefix": "assets/r381/voice/", "round": "R615b", "reason": "서사 녹음 음성(R381·R454, 3,297개 184MB). 사용자 2026-11-10 결정 '빼기': 게임은 Cloudflare Pages 에셋 프로젝트(https://storyworld-m0-assets.pages.dev/, r96/asset-cdn.json)에서 받는다. 저장소·site 에는 그대로 두고 main 배포마다 scripts/cdn-pack.py 로 Cloudflare 에 올린다. Cloudflare 가 멈추면 음성만 브라우저 음성으로 바뀐다. 되돌리려면 이 항목을 지우고 protected 에 assets/r381/ 을 다시 넣는다.", "evidence": ["#404 main 실행 42840665024: wrangler 3,298파일 업로드, cdn-verify R615_CDN_PUBLIC_OK", "공개 게임 헤드리스: asset-cdn state on, 음성 mp3 를 storyworld-m0-assets.pages.dev 에서 200 으로 받아 재생 끝까지", "r96/qa/r615/asset-cdn-cpu-check.cjs"]}
   ],
   "losslessPng": {"tool": "pyoxipng==9.1.1", "level": 2, "strip": "safe", "pixelCheck": "Pillow RGBA 디코딩 바이트 비교, 다르면 원본 유지"}
 }
