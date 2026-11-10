@@ -397,6 +397,10 @@ jobs:
         run: node r96/qa/r371/r371-cpu-check.cjs
       - name: R372 root gate boss entrance video CPU check
         run: node r96/qa/r372/r372-cpu-check.cjs
+      - name: R617 Hwando fall story videos CPU check
+        run: node r96/qa/r617/hwando-fall-video-cpu-check.cjs
+      - name: R619 pause game drawing while a full-screen story video is open
+        run: node r96/qa/r619/video-render-pause-cpu-check.cjs
       - name: R373 mob squads and leaders CPU check
         run: node r96/qa/r373/r373-cpu-check.cjs
 
@@ -595,6 +599,8 @@ jobs:
         run: node r96/qa/r473/balrog-tear-cpu-check.cjs
       - name: R474 swamp hands rise under the hero and bind the ankles in the swamp lord fight (dodge by stepping away) CPU check
         run: node r96/qa/r474/swamp-hands-cpu-check.cjs
+      - name: R568 boss cinematic CPU check
+        run: node r96/qa/r568/boss-cinematic-cpu-check.cjs
       - name: R535 hunter Q storm tracking, Z ember-thorn split and burn, C twisted thorn lance blast (no new keys, chained) CPU check
         run: node r96/qa/r535/hunter-arrows-cpu-check.cjs
       - name: R597 hold A to auto-cast Q W E R F T with basic attack (S D stay manual, keeps manual 77 percent bonus) CPU check
