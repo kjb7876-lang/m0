@@ -7936,7 +7936,16 @@
     "assets/r381/voice/ffaf95de02b74f0c.mp3",
     "assets/r381/voice/ffd58f07cd6296b4.mp3",
     "assets/r381/voice/ffe6b5462cf060d5.mp3",
-    "assets/r381/voice/ffe769a5825eddc6.mp3"
+    "assets/r381/voice/ffe769a5825eddc6.mp3",
+    "assets/r561/gunner-e-casings.webp",
+    "assets/r561/gunner-e-rifle.webp",
+    "assets/r561/gunner-q-beam.webp",
+    "assets/r561/gunner-q-impact.webp",
+    "assets/r561/gunner-q-muzzle.webp",
+    "assets/r561/gunner-r-blast.webp",
+    "assets/r561/gunner-w-impact.webp",
+    "assets/r561/gunner-w-muzzle.webp",
+    "assets/r561/gunner-w-tracer.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9011,5 +9020,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "73f7534bf7784a3ed9da88161b1f75766102afad41e48097ede706f6c8b654c5"
+  "runtimeManifestSHA256": "b5524801d4fb84b1891632a94888e926be13c213937b6173578b54c5b9c87c03"
 }

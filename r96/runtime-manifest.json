@@ -33583,6 +33583,51 @@
       "sha256": "7e12057401e2f6ad08e2853117302638a024bf1e94bbefdaeaf7b2cb0ed183bc"
     },
     {
+      "path": "assets/r561/gunner-e-casings.webp",
+      "bytes": 20002,
+      "sha256": "a05669728c6403de90e20973ae57dc69b253d69e1041bc4609a825913aa01ab7"
+    },
+    {
+      "path": "assets/r561/gunner-e-rifle.webp",
+      "bytes": 38322,
+      "sha256": "bf4da2825685ba466cc3b8a663636fd90d9d16846e90f5cf1be26df4899e16ca"
+    },
+    {
+      "path": "assets/r561/gunner-q-beam.webp",
+      "bytes": 329404,
+      "sha256": "ac8cb41ea722c9936cfec457e06eefb6c2684c745661b09d62df95a7974507c3"
+    },
+    {
+      "path": "assets/r561/gunner-q-impact.webp",
+      "bytes": 376070,
+      "sha256": "19c30b465889a404619cbd00f6806df1068569dedfed2fac04690cf835d1704e"
+    },
+    {
+      "path": "assets/r561/gunner-q-muzzle.webp",
+      "bytes": 249586,
+      "sha256": "4de86f3864bdc30f463aff70eb167b5018dfe34b4a9218d3b5b9a20d39631943"
+    },
+    {
+      "path": "assets/r561/gunner-r-blast.webp",
+      "bytes": 288400,
+      "sha256": "c8d8a4b0eac1b210b477f0725017ecdd6947cffdf4c944d892e84c572e7db1d6"
+    },
+    {
+      "path": "assets/r561/gunner-w-impact.webp",
+      "bytes": 163892,
+      "sha256": "c4c9533225cc45ca55a7d0dfe1b681f17228573ebc16557c83a0e2a8f39112fb"
+    },
+    {
+      "path": "assets/r561/gunner-w-muzzle.webp",
+      "bytes": 20856,
+      "sha256": "57193a52707cd50b56fdc46a67a43830422fab2f6793a69e27ec98c20cd63391"
+    },
+    {
+      "path": "assets/r561/gunner-w-tracer.webp",
+      "bytes": 66086,
+      "sha256": "35fe37b907204e13ad6472729448224cd31400155354bc4252b6beda41e9fcce"
+    },
+    {
       "path": "assets/r585/index.json",
       "bytes": 5998,
       "sha256": "58b5be4a18822506f40faa3c259e3ecfaacc0c099197ea223f48711f29feb1d3"
@@ -42569,8 +42614,8 @@
     },
     {
       "path": "gunner-arms-r561.js",
-      "bytes": 30815,
-      "sha256": "e45ad082a9b9cc0953a483ab0dab91f8fd7e4a80aec8b4aef00cf8efe44d5921"
+      "bytes": 36113,
+      "sha256": "49aafa5ba783087a9086154882a6668f2cd54c7eafdb06ef541fc0d97a3366e9"
     },
     {
       "path": "hero-facing-r336.js",
@@ -43633,8 +43678,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8726,
-  "totalBytes": 1213384528,
+  "fileCount": 8735,
+  "totalBytes": 1214942444,
   "webHTMLSha256": "17859c658db30c16b612298027ce605462a941cecf58a4e8a2d355cfe5c13335",
   "largest": [
     {
