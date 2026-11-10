@@ -152,13 +152,13 @@ function draw(){const S0=SPR();if(!S0||typeof project!=='function')return;const 
    const v=Math.min(1,(t-f.tf)/.45),u=1-v,o=project(f.o.x,f.o.y),e=project(f.o.x+Math.cos(f.a)*f.hitL,f.o.y+Math.sin(f.a)*f.hitL),ang=Math.atan2(e.y-o.y,e.x-o.x);
    if(gsOn('tracer')&&gsOn('wimpact')){const d=t-f.tf,fr=Math.floor(d*12.5),id=f.t0.toFixed(3);if(fr>=GS.tracer.frames)continue;
     gsDraw('tracer',fr,o.x,o.y-M,H*.2/GS.tracer.vis,ang,1,.6,id,Math.hypot(e.x-o.x,e.y-o.y),true);if(d<.12)S.along('line',CORE,o.x,o.y-M,e.x,e.y-M,H*.08,{alpha:1-d/.12,blend:'screen'});
-    gsDraw('wimpact',fr,e.x,e.y-M,H*1.6/GS.wimpact.vis,ang,1,.5,id);if(gsOn('wmuzzle'))gsDraw('wmuzzle',GS.wmuzzle.hit+fr,o.x,o.y-M,H*1.3/GS.wmuzzle.vis,ang,1,.6,id);continue;}
+    gsDraw('wimpact',fr,e.x,e.y-M,H*1.6/GS.wimpact.vis,ang,1,.5,id);if(gsOn('wmuzzle'))gsDraw('wmuzzle',GS.wmuzzle.hit+fr,o.x+Math.cos(ang)*H*.3,o.y-M+Math.sin(ang)*H*.3,H*2.2/GS.wmuzzle.vis,ang,1,.9,id);continue;}
    S.along('slashline',SIL,o.x,o.y-M,e.x,e.y-M,H*.36*u,{alpha:.8*u,blend:'screen'});S.along('line',CORE,o.x,o.y-M,e.x,e.y-M,H*.12*(.4+u),{alpha:.95*u});
    S.draw('flare',CORE,o.x+Math.cos(ang)*H*.25,o.y-M+Math.sin(ang)*H*.25,H*1.2*u+H*.2,H*.7*u+H*.1,{alpha:u,angle:ang});S.draw('ring',SIL,o.x,o.y-M,H*(.4+1.4*v),H*(.4+1.4*v),{alpha:.6*u,squash:.6});
    S.draw('flare',COB,e.x,e.y-M,H*1.3*u+H*.2,H*1.3*u+H*.2,{alpha:.9*u,angle:t*5});for(let i=0;i<6;i++){const ra=ang+Math.PI+(i-2.5)*.4;S.draw('spark',CORE,e.x+Math.cos(ra)*H*.6*v,e.y-M+Math.sin(ra)*H*.6*v,H*.55,H*.12,{alpha:u,angle:ra});}}
   else if(f.k==='e'){const cOn=gsOn('casing');for(const r of f.rounds){const d=t-r.t;if(d<0||d>(cOn?.8:.32))continue;const o=project(r.o.x,r.o.y),e=project(r.o.x+Math.cos(r.a)*r.L,r.o.y+Math.sin(r.a)*r.L),ang=Math.atan2(e.y-o.y,e.x-o.x);
     // 탄피(Dots GN-08 r3, 16칸): 총 반대쪽으로 튀어 떨어짐. 금속이라 덧셈 빛 없이. 왼쪽을 볼 땐 좌우만 뒤집음(π 회전 + gsDraw 위아래 뒤집기).
-    if(cOn){gsDraw('casing',Math.min(GS.casing.frames-1,Math.floor(d*20)),o.x,o.y-M,H*.16/GS.casing.vis,Math.cos(ang)>=0?Math.PI:0,d>.65?(.8-d)/.15:1,0,f.t0.toFixed(3)+':c'+r.t.toFixed(3));if(d>.32)continue;}
+    if(cOn){gsDraw('casing',Math.min(GS.casing.frames-1,Math.floor(d*20)),o.x,o.y-M,H*.3/GS.casing.vis,Math.cos(ang)>=0?Math.PI:0,d>.65?(.8-d)/.15:1,0,f.t0.toFixed(3)+':c'+r.t.toFixed(3));if(d>.32)continue;}
     const rOn=gsOn('rifle');if(rOn)gsDraw('rifle',Math.min(3,Math.floor(d*12.5)),o.x,o.y-M,H*1.5/GS.rifle.vis,ang,1,.5,f.t0.toFixed(3)+':'+r.t.toFixed(3));
     if(!rOn&&d<.09){const k=d/.09,hx=o.x+(e.x-o.x)*k,hy=o.y-M+(e.y-o.y)*k,tx=o.x+(e.x-o.x)*Math.max(0,k-.35),ty=o.y-M+(e.y-o.y)*Math.max(0,k-.35);S.along('spark',CORE,tx,ty,hx,hy,H*.16,{alpha:.95});}
     if(!rOn&&d<.06)S.draw('flare',COB,o.x+Math.cos(ang)*H*.28,o.y-M+Math.sin(ang)*H*.28,H*.55,H*.35,{alpha:1-d/.06,angle:ang});
