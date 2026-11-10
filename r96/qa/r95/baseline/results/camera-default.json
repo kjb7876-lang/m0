@@ -1,0 +1,144 @@
+{
+  "checks": [
+    {
+      "name": "Fresh PC settings request 1.5 in both dimensions",
+      "passed": true,
+      "detail": {
+        "revision": "R63R1",
+        "device": "desktop",
+        "requested": 1.5,
+        "actual": 1.5,
+        "currentExpansion": 1.2295081967213115,
+        "area": 2.25,
+        "baseZoom": 1,
+        "zoom": 0.8133333333333332,
+        "tracking": "solo",
+        "cam": {
+          "x": 43,
+          "y": 109
+        },
+        "viewport": {
+          "width": 1280,
+          "height": 800,
+          "dpr": 1
+        },
+        "worldRange": {
+          "u": 46.28736740597879,
+          "v": 57.85920925747349
+        },
+        "plan": {
+          "requested": 1.5,
+          "actual": 1.5,
+          "area": 2.25,
+          "baseZoom": 1,
+          "targetZoom": 0.6666666666666666,
+          "minimumZoom": 0.23529411764705882,
+          "envelope": {
+            "u0": -112,
+            "u1": 58,
+            "v0": 0,
+            "v1": 200
+          },
+          "screenWorldU": 56.470588235294116,
+          "screenWorldV": 70.58823529411764,
+          "reason": null
+        },
+        "storageOK": true,
+        "exceptions": [],
+        "metrics": {
+          "frames": 0,
+          "propsCulled": 0
+        },
+        "drawCPU": {
+          "oneSamples": 0,
+          "wideSamples": 0,
+          "oneP50": null,
+          "wideP50": null,
+          "oneP95": null,
+          "wideP95": null
+        }
+      }
+    },
+    {
+      "name": "Actual world projection expands exactly 1.5 horizontally/vertically at four PC sizes",
+      "passed": true,
+      "detail": [
+        {
+          "size": [
+            1280,
+            720
+          ],
+          "u": 1.5000000000000002,
+          "v": 1.5000000000000002,
+          "requested": 1.5,
+          "finite": true
+        },
+        {
+          "size": [
+            1920,
+            1080
+          ],
+          "u": 1.5,
+          "v": 1.5,
+          "requested": 1.5,
+          "finite": true
+        },
+        {
+          "size": [
+            2560,
+            1440
+          ],
+          "u": 1.5000000000000002,
+          "v": 1.5000000000000002,
+          "requested": 1.5,
+          "finite": true
+        },
+        {
+          "size": [
+            1366,
+            768
+          ],
+          "u": 1.5,
+          "v": 1.5,
+          "requested": 1.5,
+          "finite": true
+        }
+      ]
+    },
+    {
+      "name": "Explicit user setting still persists and Settings does not reset it",
+      "passed": true,
+      "detail": {
+        "value": "1.8",
+        "p": {
+          "desktop": {
+            "factor": 1.8,
+            "baseZoom": 1
+          }
+        }
+      }
+    },
+    {
+      "name": "Settings reset returns to1.5 and mouse aim round-trips without distortion",
+      "passed": true,
+      "detail": {
+        "factor": 1.5,
+        "error": 0
+      }
+    },
+    {
+      "name": "Broader view retains stable player camera without enemy tracking",
+      "passed": true,
+      "detail": {
+        "maximumDrift": 0
+      }
+    },
+    {
+      "name": "Game errors remain empty",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "passed": true,
+  "method": "Native settings/projection/camera in Node VM; no browser/GPU"
+}

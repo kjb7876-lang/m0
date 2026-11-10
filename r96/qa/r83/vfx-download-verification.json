@@ -1,0 +1,62 @@
+{
+  "parts": [
+    {
+      "file": "StoryWorld-VFX-64-quality-PART01-of-09.zip",
+      "bytes": 8950407,
+      "sha256": "4d6083b2aa69c2b7fed0e3f93f4b8399363023cc1e756e08e7cc1867827610d2",
+      "CRC": true
+    },
+    {
+      "file": "StoryWorld-VFX-64-quality-PART02-of-09.zip",
+      "bytes": 8836422,
+      "sha256": "ecae2375ab43086d4ff94f23737dd337c911fd868bdefa7e118b6be54d2fbdf5",
+      "CRC": true
+    },
+    {
+      "file": "StoryWorld-VFX-64-quality-PART03-of-09.zip",
+      "bytes": 7960821,
+      "sha256": "4e482d04334dcd017156affb958200c45c5f23f45bb65ecc7f45bef23f3574d8",
+      "CRC": true
+    },
+    {
+      "file": "StoryWorld-VFX-64-quality-PART04-of-09.zip",
+      "bytes": 8463859,
+      "sha256": "110dd93943b6b5dc6f0e806d78f3e8cd65d2efe7254b123cc2e5627b6c84be5c",
+      "CRC": true
+    },
+    {
+      "file": "StoryWorld-VFX-64-quality-PART05-of-09.zip",
+      "bytes": 8463856,
+      "sha256": "3fedf33e926d35fac0d574fe7b2f47c423ceceb0aaeb9822037860c0498120a7",
+      "CRC": true
+    },
+    {
+      "file": "StoryWorld-VFX-64-quality-PART06-of-09.zip",
+      "bytes": 9408728,
+      "sha256": "a2bd0ce5d8d5d63747b41cab2de6ece0b8dbbec1f11b4a28f5fa3b1c9bd7ab14",
+      "CRC": true
+    },
+    {
+      "file": "StoryWorld-VFX-64-quality-PART07-of-09.zip",
+      "bytes": 9184572,
+      "sha256": "330aa07ff8cb2264490ee7e003f313b68ab384114e531c53c5536d11707930e6",
+      "CRC": true
+    },
+    {
+      "file": "StoryWorld-VFX-64-quality-PART08-of-09.zip",
+      "bytes": 9157641,
+      "sha256": "2bf692eedba9f893d71fdc9919fd3c2f73a606fbfce35567e127923435759ec9",
+      "CRC": true
+    },
+    {
+      "file": "StoryWorld-VFX-64-quality-PART09-of-09.zip",
+      "bytes": 2589251,
+      "sha256": "52851d279ec70d890880fdb8af36becfe26a82cb5d303295dfd15178a5ed47fb",
+      "CRC": true
+    }
+  ],
+  "PNGs": 64,
+  "sourceManifestEntries": 67,
+  "allSourceHashesVerified": true,
+  "hashFailures": []
+}

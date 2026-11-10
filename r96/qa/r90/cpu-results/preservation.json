@@ -1,0 +1,47 @@
+{
+  "schema": "r81-preservation/v1",
+  "checks": [
+    {
+      "name": "Every original image, audio, source data, delivery payload and vendor byte matches V4",
+      "passed": true,
+      "detail": {
+        "files": 1978,
+        "changed": []
+      }
+    },
+    {
+      "name": "Original embedded JSON/story payloads are byte identical",
+      "passed": true,
+      "detail": {
+        "portable-data": "1114557dafb55657cfd62f16e6890c43bdf2883129effb3d018108282f49cd3a"
+      }
+    },
+    {
+      "name": "Windows launcher, loopback server and portable Node are unchanged",
+      "passed": true,
+      "detail": [
+        {
+          "path": "START.cmd",
+          "unchanged": true
+        },
+        {
+          "path": "LOCAL-SERVER.cjs",
+          "unchanged": true
+        },
+        {
+          "path": "portable-node/node.exe",
+          "unchanged": true
+        }
+      ]
+    },
+    {
+      "name": "V11 launcher and inline store use the same isolated test namespace",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "passed": true,
+  "baselineManifestSha256": "2c77e5914213461cd63899f12bb9b483d53f4205aaa82853a0beee6f9125ea4c",
+  "browserVerified": false,
+  "GPUVerified": false
+}

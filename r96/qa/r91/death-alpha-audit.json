@@ -1,0 +1,82 @@
+﻿[
+    {
+        "file":  "death-crystal-core.png",
+        "w":  768,
+        "h":  512,
+        "visible":  33973,
+        "lowAlpha":  92458,
+        "hotFringe":  0,
+        "fringePctOfVisible":  0,
+        "opaquePureRed":  0
+    },
+    {
+        "file":  "death-demon-beast.png",
+        "w":  768,
+        "h":  512,
+        "visible":  41171,
+        "lowAlpha":  52698,
+        "hotFringe":  1211,
+        "fringePctOfVisible":  2.94,
+        "opaquePureRed":  0
+    },
+    {
+        "file":  "death-human-cultist.png",
+        "w":  768,
+        "h":  512,
+        "visible":  21892,
+        "lowAlpha":  27784,
+        "hotFringe":  0,
+        "fringePctOfVisible":  0,
+        "opaquePureRed":  0
+    },
+    {
+        "file":  "death-insect-spider.png",
+        "w":  768,
+        "h":  512,
+        "visible":  32118,
+        "lowAlpha":  30149,
+        "hotFringe":  0,
+        "fringePctOfVisible":  0,
+        "opaquePureRed":  0
+    },
+    {
+        "file":  "death-machine-cyborg.png",
+        "w":  768,
+        "h":  512,
+        "visible":  35535,
+        "lowAlpha":  54899,
+        "hotFringe":  944,
+        "fringePctOfVisible":  2.66,
+        "opaquePureRed":  0
+    },
+    {
+        "file":  "death-slime-rot.png",
+        "w":  768,
+        "h":  512,
+        "visible":  32805,
+        "lowAlpha":  46249,
+        "hotFringe":  3952,
+        "fringePctOfVisible":  12.05,
+        "opaquePureRed":  0
+    },
+    {
+        "file":  "death-specter-echo.png",
+        "w":  768,
+        "h":  512,
+        "visible":  33287,
+        "lowAlpha":  49225,
+        "hotFringe":  521,
+        "fringePctOfVisible":  1.57,
+        "opaquePureRed":  0
+    },
+    {
+        "file":  "death-undead.png",
+        "w":  768,
+        "h":  512,
+        "visible":  36492,
+        "lowAlpha":  45525,
+        "hotFringe":  105,
+        "fringePctOfVisible":  0.29,
+        "opaquePureRed":  0
+    }
+]

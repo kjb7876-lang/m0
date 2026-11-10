@@ -1,0 +1,23 @@
+PASS Native full runtime boots without errors
+PASS Native hospital-direct start enters hospital
+PASS Preferences keep native prefix outside save slots
+PASS Preference write changes only dedicated presentation key
+PASS Seven switches sit after the native R89 section
+PASS Numbers hidden initially and shown after actual observed HP loss
+PASS Numbers expire after two native game seconds; healing does not reopen
+PASS R90 health painter emits 2px muted health fill
+PASS Expired HP number absent from actual HUD paint calls
+PASS Health setting off restores native numeric HP painter
+PASS Automatic highlight equals actual public native selector
+PASS Held manual attack takes precedence over automatic selector
+PASS Slayer manual target is read from actual admitted native contact
+PASS Actual multi-hit cone contacts do not invent a primary target
+PASS Private manual melee selector is not replaced with guessed target
+PASS Target observation leaves native combat/selection/clock data unchanged
+PASS Manual ranged highlight calls native range selector
+PASS Actual native enemy HP draw changes from 4px to 2px
+PASS HUD painter selects canvas despite native duplicate script ID
+PASS UI CSS has no layout geometry or image rules
+PASS No overlay errors were recorded
+PASS Native error ledger remains clear
+{"passed":true,"checks":22,"total":22}

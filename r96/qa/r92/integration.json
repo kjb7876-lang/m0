@@ -1,0 +1,24 @@
+{
+  "status": "R92_APPLIED",
+  "files": 2871,
+  "htmlSha256": "079b708febed91a6d1aa92db0033e5104d408a2b2ce24023d393d40da2b01541",
+  "manifestSha256": "e3a9035cf0ac09fa28f1f8a679c6f0d43863742ad578f509e6c7f351d6d4594b",
+  "overlaySha256": "2458da3adc188f7b0bcc2dd60574d530ba4b360798f9e9fb9c2bd84769a26592",
+  "revision": "R92-environment",
+  "basedOn": "R91 site",
+  "overlay": "visual-r92.js",
+  "assets": 228,
+  "items": 96,
+  "indexPatches": [
+    "Insert one script tag directly after visual-r91.js"
+  ],
+  "presentationOnly": true,
+  "collisionChanged": false,
+  "damageChanged": false,
+  "saveSchemaChanged": false,
+  "presentationPrefsKey": "storyworld.hospital-three-pc.maze.v11:r92.presentation (outside save slots)",
+  "newImages": "R92 generated environment (user-directed), processed copies only; originals kept outside the site",
+  "legacyProcedural80Loaded": false,
+  "publicDeploymentChanged": false,
+  "verification": "file bytes only here; see qa/r92"
+}

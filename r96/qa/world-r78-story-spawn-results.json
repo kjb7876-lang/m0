@@ -1,0 +1,2690 @@
+{
+  "schema": "world-r78-story-spawn-cpu/v1",
+  "method": "Native region definitions and makeRoom/R75 spawn hooks in Node VM. Not browser, GPU or natural play.",
+  "maps": [
+    {
+      "id": "dist00",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 33,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [
+        {
+          "id": "dist00:dist00-boss",
+          "nativeId": "dist00-boss",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 25686,
+          "maxHp": 25686
+        }
+      ],
+      "midbosses": [],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "dist00",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 0,
+        "bossCount": 1
+      },
+      "profile": {
+        "style": "demon-tree-palace-garden",
+        "sourceEnvironment": "demon-tree-palace-garden"
+      }
+    },
+    {
+      "id": "dist01",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 36,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "dist01:mb-dist01",
+          "nativeId": "mb-dist01",
+          "x": 35,
+          "y": 35,
+          "hp": 26871,
+          "maxHp": 26871
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "dist01",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 0
+      },
+      "profile": {
+        "style": "bone-web-cavern",
+        "sourceEnvironment": "bone-web-cavern"
+      }
+    },
+    {
+      "id": "dist02",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 37,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "dist02:mb-dist02",
+          "nativeId": "mb-dist02",
+          "x": 35,
+          "y": 35,
+          "hp": 28057,
+          "maxHp": 28057
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "dist02",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 0
+      },
+      "profile": {
+        "style": "face-reed-black-swamp",
+        "sourceEnvironment": "face-reed-black-swamp"
+      }
+    },
+    {
+      "id": "dist03",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 37,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "dist03:mb-dist03",
+          "nativeId": "mb-dist03",
+          "x": 35,
+          "y": 35,
+          "hp": 29242,
+          "maxHp": 29242
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "dist03",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 0
+      },
+      "profile": {
+        "style": "summoning-city-approach",
+        "sourceEnvironment": "summoning-city-approach"
+      }
+    },
+    {
+      "id": "dist04",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 37,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "dist04:mb-dist04",
+          "nativeId": "mb-dist04",
+          "x": 35,
+          "y": 35,
+          "hp": 30428,
+          "maxHp": 30428
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "dist04",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 0
+      },
+      "profile": {
+        "style": "fallen-guardian-crossing",
+        "sourceEnvironment": "fallen-guardian-crossing"
+      }
+    },
+    {
+      "id": "dist05",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 37,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "dist05:mb-dist05",
+          "nativeId": "mb-dist05",
+          "x": 35,
+          "y": 35,
+          "hp": 31613,
+          "maxHp": 31613
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "dist05",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 0
+      },
+      "profile": {
+        "style": "seven-pillar-pilgrimage",
+        "sourceEnvironment": "seven-pillar-pilgrimage"
+      }
+    },
+    {
+      "id": "dist06",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 37,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [
+        {
+          "id": "dist06:dist06-boss",
+          "nativeId": "dist06-boss",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 32799,
+          "maxHp": 32799
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "dist06:mb-dist06",
+          "nativeId": "mb-dist06",
+          "x": 35,
+          "y": 35,
+          "hp": 32799,
+          "maxHp": 32799
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "dist06",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 1
+      },
+      "profile": {
+        "style": "balrog-gate-circle",
+        "sourceEnvironment": "balrog-gate-circle"
+      }
+    },
+    {
+      "id": "ep1a09",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 34,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [],
+      "midbosses": [],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "ep1a09",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 0,
+        "bossCount": 0
+      },
+      "profile": {
+        "style": "clinic",
+        "sourceEnvironment": "injection-memory-theatre"
+      }
+    },
+    {
+      "id": "ep1a10",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 37,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "ep1a10:mb-ep1a10",
+          "nativeId": "mb-ep1a10",
+          "x": 35,
+          "y": 35,
+          "hp": 36355,
+          "maxHp": 36355
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "ep1a10",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 0
+      },
+      "profile": {
+        "style": "patient-addiction-city",
+        "sourceEnvironment": "patient-addiction-city"
+      }
+    },
+    {
+      "id": "ep1a11",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 37,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [
+        {
+          "id": "ep1a11:a11-boss",
+          "nativeId": "a11-boss",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 37541,
+          "maxHp": 37541
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "ep1a11:mb-ep1a11",
+          "nativeId": "mb-ep1a11",
+          "x": 35,
+          "y": 35,
+          "hp": 37541,
+          "maxHp": 37541
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "ep1a11",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 1
+      },
+      "profile": {
+        "style": "clinic-memory",
+        "sourceEnvironment": "false-heaven-clinic"
+      }
+    },
+    {
+      "id": "ep1b01",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 36,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "ep1b01:mb-ep1b01",
+          "nativeId": "mb-ep1b01",
+          "x": 35,
+          "y": 35,
+          "hp": 39912,
+          "maxHp": 39912
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "ep1b01",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 0
+      },
+      "profile": {
+        "style": "chapel",
+        "sourceEnvironment": "solomon-seal-chapel"
+      }
+    },
+    {
+      "id": "ep1b02",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 37,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [
+        {
+          "id": "ep1b02:b02-boss",
+          "nativeId": "b02-boss",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 41097,
+          "maxHp": 41097
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "ep1b02:mb-ep1b02",
+          "nativeId": "mb-ep1b02",
+          "x": 35,
+          "y": 35,
+          "hp": 41097,
+          "maxHp": 41097
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "ep1b02",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 1
+      },
+      "profile": {
+        "style": "house",
+        "sourceEnvironment": "sloth-house"
+      }
+    },
+    {
+      "id": "ep1b03",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 37,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [
+        {
+          "id": "ep1b03:b03-boss",
+          "nativeId": "b03-boss",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 42283,
+          "maxHp": 42283
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "ep1b03:mb-ep1b03",
+          "nativeId": "mb-ep1b03",
+          "x": 35,
+          "y": 35,
+          "hp": 42283,
+          "maxHp": 42283
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "ep1b03",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 1
+      },
+      "profile": {
+        "style": "mirror-house",
+        "sourceEnvironment": "cracked-glasses-suite"
+      }
+    },
+    {
+      "id": "ep1b04",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 37,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [
+        {
+          "id": "ep1b04:b04-boss",
+          "nativeId": "b04-boss",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 43468,
+          "maxHp": 43468
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "ep1b04:mb-ep1b04",
+          "nativeId": "mb-ep1b04",
+          "x": 35,
+          "y": 35,
+          "hp": 43468,
+          "maxHp": 43468
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "ep1b04",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 1
+      },
+      "profile": {
+        "style": "kitchen",
+        "sourceEnvironment": "glutton-kitchen"
+      }
+    },
+    {
+      "id": "ep1b05",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 37,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [
+        {
+          "id": "ep1b05:b05-boss",
+          "nativeId": "b05-boss",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 44654,
+          "maxHp": 44654
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "ep1b05:mb-ep1b05",
+          "nativeId": "mb-ep1b05",
+          "x": 35,
+          "y": 35,
+          "hp": 44654,
+          "maxHp": 44654
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "ep1b05",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 1
+      },
+      "profile": {
+        "style": "stage",
+        "sourceEnvironment": "red-heel-stage"
+      }
+    },
+    {
+      "id": "ep1b06",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 37,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [
+        {
+          "id": "ep1b06:b06-boss",
+          "nativeId": "b06-boss",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 45839,
+          "maxHp": 45839
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "ep1b06:mb-ep1b06",
+          "nativeId": "mb-ep1b06",
+          "x": 35,
+          "y": 35,
+          "hp": 45839,
+          "maxHp": 45839
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "ep1b06",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 1
+      },
+      "profile": {
+        "style": "vault",
+        "sourceEnvironment": "mammon-vault"
+      }
+    },
+    {
+      "id": "ep1b06b",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 37,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [
+        {
+          "id": "ep1b06b:b06b-boss",
+          "nativeId": "b06b-boss",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 47025,
+          "maxHp": 47025
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "ep1b06b:mb-ep1b06b",
+          "nativeId": "mb-ep1b06b",
+          "x": 35,
+          "y": 35,
+          "hp": 47025,
+          "maxHp": 47025
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "ep1b06b",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 1
+      },
+      "profile": {
+        "style": "mammon-winter-memory",
+        "sourceEnvironment": "mammon-winter-memory"
+      }
+    },
+    {
+      "id": "ep1b07",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 37,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [
+        {
+          "id": "ep1b07:b07-boss",
+          "nativeId": "b07-boss",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 48210,
+          "maxHp": 48210
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "ep1b07:mb-ep1b07",
+          "nativeId": "mb-ep1b07",
+          "x": 35,
+          "y": 35,
+          "hp": 48210,
+          "maxHp": 48210
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "ep1b07",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 1
+      },
+      "profile": {
+        "style": "burned-hotel",
+        "sourceEnvironment": "hotel-fire"
+      }
+    },
+    {
+      "id": "ep1b08",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 37,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [
+        {
+          "id": "ep1b08:b08-boss",
+          "nativeId": "b08-boss",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 49396,
+          "maxHp": 49396
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "ep1b08:mb-ep1b08",
+          "nativeId": "mb-ep1b08",
+          "x": 35,
+          "y": 35,
+          "hp": 49396,
+          "maxHp": 49396
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "ep1b08",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 1
+      },
+      "profile": {
+        "style": "cathedral",
+        "sourceEnvironment": "pride-cathedral"
+      }
+    },
+    {
+      "id": "ep1b09",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 37,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [
+        {
+          "id": "ep1b09:b09-boss",
+          "nativeId": "b09-boss",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 50581,
+          "maxHp": 50581
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "ep1b09:mb-ep1b09",
+          "nativeId": "mb-ep1b09",
+          "x": 35,
+          "y": 35,
+          "hp": 50581,
+          "maxHp": 50581
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "ep1b09",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 1
+      },
+      "profile": {
+        "style": "snow-neural",
+        "sourceEnvironment": "bio-bootloader-core"
+      }
+    },
+    {
+      "id": "u201",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 36,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "u201:u201-mid",
+          "nativeId": "u201-mid",
+          "x": 35,
+          "y": 35,
+          "hp": 52952,
+          "maxHp": 52952
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "u201",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 0
+      },
+      "profile": {
+        "style": "controller-war-loop",
+        "sourceEnvironment": "controller-war-loop"
+      }
+    },
+    {
+      "id": "u202",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 36,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "u202:u202-mid",
+          "nativeId": "u202-mid",
+          "x": 35,
+          "y": 35,
+          "hp": 54138,
+          "maxHp": 54138
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "u202",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 0
+      },
+      "profile": {
+        "style": "cruel-salvation-prison",
+        "sourceEnvironment": "cruel-salvation-prison"
+      }
+    },
+    {
+      "id": "u204",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 36,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "u204:u204-mid",
+          "nativeId": "u204-mid",
+          "x": 35,
+          "y": 35,
+          "hp": 55323,
+          "maxHp": 55323
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "u204",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 0
+      },
+      "profile": {
+        "style": "first-memory-threshold",
+        "sourceEnvironment": "first-memory-threshold"
+      }
+    },
+    {
+      "id": "u205",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 36,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "u205:u205-mid",
+          "nativeId": "u205-mid",
+          "x": 35,
+          "y": 35,
+          "hp": 56509,
+          "maxHp": 56509
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "u205",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 0
+      },
+      "profile": {
+        "style": "memory-room",
+        "sourceEnvironment": "admin-abuse-room"
+      }
+    },
+    {
+      "id": "u206",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 36,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "u206:u206-mid",
+          "nativeId": "u206-mid",
+          "x": 35,
+          "y": 35,
+          "hp": 57694,
+          "maxHp": 57694
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "u206",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 0
+      },
+      "profile": {
+        "style": "machine",
+        "sourceEnvironment": "central-migration-core"
+      }
+    },
+    {
+      "id": "u203",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 37,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [
+        {
+          "id": "u203:u203-boss",
+          "nativeId": "u203-boss",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 58880,
+          "maxHp": 58880
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "u203:u203-mid",
+          "nativeId": "u203-mid",
+          "x": 35,
+          "y": 35,
+          "hp": 58880,
+          "maxHp": 58880
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "u203",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 1
+      },
+      "profile": {
+        "style": "controller-memory-gate",
+        "sourceEnvironment": "controller-memory-gate"
+      }
+    },
+    {
+      "id": "last304",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 35,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [],
+      "midbosses": [],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "last304",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 0,
+        "bossCount": 0
+      },
+      "profile": {
+        "style": "fusion-neutral-meadow",
+        "sourceEnvironment": "fusion-neutral-meadow"
+      }
+    },
+    {
+      "id": "last305",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 34,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [
+        {
+          "id": "last305:l305-boss",
+          "nativeId": "l305-boss",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 62436,
+          "maxHp": 62436
+        }
+      ],
+      "midbosses": [],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "last305",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 0,
+        "bossCount": 1
+      },
+      "profile": {
+        "style": "goblin-flute-forest",
+        "sourceEnvironment": "goblin-flute-forest"
+      }
+    },
+    {
+      "id": "last301",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 1,
+      "ordinary": 0,
+      "ordinaryPacks": [],
+      "bosses": [
+        {
+          "id": "last301:l301-boss",
+          "nativeId": "l301-boss",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 63621,
+          "maxHp": 63621
+        }
+      ],
+      "midbosses": [],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "last301",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 0,
+        "midbossCount": 0,
+        "bossCount": 1
+      },
+      "profile": {
+        "style": "fallen-angel-black-sea",
+        "sourceEnvironment": "fallen-angel-black-sea"
+      }
+    },
+    {
+      "id": "last302",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 34,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "last302:mb-last302-v31231",
+          "nativeId": "mb-last302-v31231",
+          "x": 35,
+          "y": 35,
+          "hp": 64807,
+          "maxHp": 64807
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "last302",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 0
+      },
+      "profile": {
+        "style": "sleepless-port-village",
+        "sourceEnvironment": "sleepless-port-village"
+      }
+    },
+    {
+      "id": "last303",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 32,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [
+        {
+          "id": "last303:l303-boss",
+          "nativeId": "l303-boss",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 65992,
+          "maxHp": 65992
+        }
+      ],
+      "midbosses": [],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "last303",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 0,
+        "bossCount": 1
+      },
+      "profile": {
+        "style": "insomnia-black-fog-duel",
+        "sourceEnvironment": "insomnia-black-fog-duel"
+      }
+    },
+    {
+      "id": "kair01",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 36,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "kair01:mb-kair01-v31231",
+          "nativeId": "mb-kair01-v31231",
+          "x": 35,
+          "y": 35,
+          "hp": 68363,
+          "maxHp": 68363
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "kair01",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 0
+      },
+      "profile": {
+        "style": "academy",
+        "sourceEnvironment": "first-command-academy"
+      }
+    },
+    {
+      "id": "kair04",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 35,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "kair04:mb-kair04-v31231",
+          "nativeId": "mb-kair04-v31231",
+          "x": 35,
+          "y": 35,
+          "hp": 69549,
+          "maxHp": 69549
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "kair04",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 0
+      },
+      "profile": {
+        "style": "guardian-ruins",
+        "sourceEnvironment": "guardian-ruins"
+      }
+    },
+    {
+      "id": "kair05",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 34,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [
+        {
+          "id": "kair05:kair-great-01",
+          "nativeId": "kair-great-01",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 70734,
+          "maxHp": 70734
+        }
+      ],
+      "midbosses": [],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "kair05",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 0,
+        "bossCount": 1
+      },
+      "profile": {
+        "style": "guardian-time-forest",
+        "sourceEnvironment": "guardian-time-forest"
+      }
+    },
+    {
+      "id": "kair06",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 34,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [
+        {
+          "id": "kair06:kair-great-02",
+          "nativeId": "kair-great-02",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 71920,
+          "maxHp": 71920
+        }
+      ],
+      "midbosses": [],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "kair06",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 0,
+        "bossCount": 1
+      },
+      "profile": {
+        "style": "guardian-polluted-waterway",
+        "sourceEnvironment": "guardian-polluted-waterway"
+      }
+    },
+    {
+      "id": "kair07",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 35,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [
+        {
+          "id": "kair07:kair-great-04",
+          "nativeId": "kair-great-04",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 73105,
+          "maxHp": 73105
+        }
+      ],
+      "midbosses": [],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "kair07",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 0,
+        "bossCount": 1
+      },
+      "profile": {
+        "style": "forge",
+        "sourceEnvironment": "guardian-black-workshop"
+      }
+    },
+    {
+      "id": "kair08",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 34,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "kair08:kair-great-05",
+          "nativeId": "kair-great-05",
+          "x": 35,
+          "y": 35,
+          "hp": 74291,
+          "maxHp": 74291
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "kair08",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 0
+      },
+      "profile": {
+        "style": "guardian-neuron-gate",
+        "sourceEnvironment": "guardian-neuron-gate"
+      }
+    },
+    {
+      "id": "kair09",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 35,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [
+        {
+          "id": "kair09:mb-kair09-v31231",
+          "nativeId": "mb-kair09-v31231",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 75476,
+          "maxHp": 75476
+        }
+      ],
+      "midbosses": [],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "kair09",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 0,
+        "bossCount": 1
+      },
+      "profile": {
+        "style": "guardian-oblivion-cemetery",
+        "sourceEnvironment": "guardian-oblivion-cemetery"
+      }
+    },
+    {
+      "id": "kair10",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 34,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [
+        {
+          "id": "kair10:kair-great-06",
+          "nativeId": "kair-great-06",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 76662,
+          "maxHp": 76662
+        }
+      ],
+      "midbosses": [],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "kair10",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 0,
+        "bossCount": 1
+      },
+      "profile": {
+        "style": "guardian-collapsed-ritual",
+        "sourceEnvironment": "guardian-collapsed-ritual"
+      }
+    },
+    {
+      "id": "kair02",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 35,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [
+        {
+          "id": "kair02:kair-great-03",
+          "nativeId": "kair-great-03",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 77847,
+          "maxHp": 77847
+        }
+      ],
+      "midbosses": [],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "kair02",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 0,
+        "bossCount": 1
+      },
+      "profile": {
+        "style": "clock-hall",
+        "sourceEnvironment": "arvelia-sealed-corridor"
+      }
+    },
+    {
+      "id": "kair03",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 34,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [
+        {
+          "id": "kair03:k103-boss",
+          "nativeId": "k103-boss",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 79033,
+          "maxHp": 79033
+        }
+      ],
+      "midbosses": [],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "kair03",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 0,
+        "bossCount": 1
+      },
+      "profile": {
+        "style": "siren-command-time-core",
+        "sourceEnvironment": "siren-command-time-core"
+      }
+    },
+    {
+      "id": "hando01",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 36,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "hando01:mb-hando01",
+          "nativeId": "mb-hando01",
+          "x": 35,
+          "y": 35,
+          "hp": 81404,
+          "maxHp": 81404
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "hando01",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 0
+      },
+      "profile": {
+        "style": "castle",
+        "sourceEnvironment": "summoned-castle-defense-and-fall"
+      }
+    },
+    {
+      "id": "hando02",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 37,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "hando02:mb-hando02",
+          "nativeId": "mb-hando02",
+          "x": 35,
+          "y": 35,
+          "hp": 82589,
+          "maxHp": 82589
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "hando02",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 0
+      },
+      "profile": {
+        "style": "castle",
+        "sourceEnvironment": "owners-two-gate-awakening"
+      }
+    },
+    {
+      "id": "hando03",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 37,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [
+        {
+          "id": "hando03:h103-boss",
+          "nativeId": "h103-boss",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 83775,
+          "maxHp": 83775
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "hando03:mb-hando03",
+          "nativeId": "mb-hando03",
+          "x": 35,
+          "y": 35,
+          "hp": 83775,
+          "maxHp": 83775
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "hando03",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 1
+      },
+      "profile": {
+        "style": "mirror-court",
+        "sourceEnvironment": "shared-ego-core-reclaim"
+      }
+    },
+    {
+      "id": "murder01",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 33,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "murder01:mb-murder01",
+          "nativeId": "mb-murder01",
+          "x": 35,
+          "y": 35,
+          "hp": 86146,
+          "maxHp": 86146
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "murder01",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 0
+      },
+      "profile": {
+        "style": "rain-crosswalk",
+        "sourceEnvironment": "rain-crosswalk"
+      }
+    },
+    {
+      "id": "murder02",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 34,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "murder02:mb-murder02",
+          "nativeId": "mb-murder02",
+          "x": 35,
+          "y": 35,
+          "hp": 87331,
+          "maxHp": 87331
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "murder02",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 0
+      },
+      "profile": {
+        "style": "burned-hotel",
+        "sourceEnvironment": "saebit-hotel-stair"
+      }
+    },
+    {
+      "id": "murder04",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 36,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "murder04:murder04-mid",
+          "nativeId": "murder04-mid",
+          "x": 35,
+          "y": 35,
+          "hp": 88517,
+          "maxHp": 88517
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "murder04",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 0
+      },
+      "profile": {
+        "style": "villa",
+        "sourceEnvironment": "teal-villa-testimony"
+      }
+    },
+    {
+      "id": "murder03",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 35,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [
+        {
+          "id": "murder03:blue-executor",
+          "nativeId": "blue-executor",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 89702,
+          "maxHp": 89702
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "murder03:mb-murder03",
+          "nativeId": "mb-murder03",
+          "x": 35,
+          "y": 35,
+          "hp": 89702,
+          "maxHp": 89702
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "murder03",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 1
+      },
+      "profile": {
+        "style": "rooftop-mobius-cycle",
+        "sourceEnvironment": "rooftop-mobius-cycle"
+      }
+    },
+    {
+      "id": "cult01",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 36,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "cult01:c101-mid",
+          "nativeId": "c101-mid",
+          "x": 35,
+          "y": 35,
+          "hp": 90888,
+          "maxHp": 90888
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "cult01",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 0
+      },
+      "profile": {
+        "style": "neural",
+        "sourceEnvironment": "black-rose-chip-altar"
+      }
+    },
+    {
+      "id": "cult02",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 36,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [
+        {
+          "id": "cult02:c102-boss",
+          "nativeId": "c102-boss",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 92073,
+          "maxHp": 92073
+        }
+      ],
+      "midbosses": [],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "cult02",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 0,
+        "bossCount": 1
+      },
+      "profile": {
+        "style": "neural",
+        "sourceEnvironment": "fusion-neural-network"
+      }
+    },
+    {
+      "id": "cult05",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 36,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "cult05:c105-mid",
+          "nativeId": "c105-mid",
+          "x": 35,
+          "y": 35,
+          "hp": 93259,
+          "maxHp": 93259
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "cult05",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 0
+      },
+      "profile": {
+        "style": "organic",
+        "sourceEnvironment": "id-biotech-vat"
+      }
+    },
+    {
+      "id": "cult06",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 36,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "cult06:c106-mid",
+          "nativeId": "c106-mid",
+          "x": 35,
+          "y": 35,
+          "hp": 94444,
+          "maxHp": 94444
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "cult06",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 0
+      },
+      "profile": {
+        "style": "judgment",
+        "sourceEnvironment": "superego-machine-court"
+      }
+    },
+    {
+      "id": "cult03",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 37,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [
+        {
+          "id": "cult03:c103-mid",
+          "nativeId": "c103-mid",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 95630,
+          "maxHp": 95630
+        },
+        {
+          "id": "cult03:c103-boss",
+          "nativeId": "c103-boss",
+          "x": 19.2,
+          "y": 15.2,
+          "hp": 95630,
+          "maxHp": 95630
+        }
+      ],
+      "midbosses": [],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "cult03",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 0,
+        "bossCount": 2
+      },
+      "profile": {
+        "style": "harvest-vault",
+        "sourceEnvironment": "triune-ego-core-prison"
+      }
+    },
+    {
+      "id": "cult04",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 35,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [
+        {
+          "id": "cult04:c104-boss",
+          "nativeId": "c104-boss",
+          "x": 15.5,
+          "y": 12.5,
+          "hp": 96815,
+          "maxHp": 96815
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "cult04:c104-mid",
+          "nativeId": "c104-mid",
+          "x": 35,
+          "y": 35,
+          "hp": 96815,
+          "maxHp": 96815
+        }
+      ],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "cult04",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 1,
+        "bossCount": 1
+      },
+      "profile": {
+        "style": "throne",
+        "sourceEnvironment": "antichrist-summoning-throne"
+      }
+    },
+    {
+      "id": "ep1a09b",
+      "layout": "r78-story-combat-maze",
+      "r78": true,
+      "enemyCount": 36,
+      "ordinary": 30,
+      "ordinaryPacks": [
+        0,
+        1,
+        2
+      ],
+      "bosses": [],
+      "midbosses": [],
+      "allSafe": true,
+      "placement": {
+        "version": 1,
+        "zoneId": "ep1a09b",
+        "routeNodeIds": [
+          11,
+          7,
+          8,
+          9,
+          6,
+          5
+        ],
+        "bossRoomNodeId": 13,
+        "ordinaryMoved": 30,
+        "midbossCount": 0,
+        "bossCount": 0
+      },
+      "profile": {
+        "style": "past-palace-rescue",
+        "sourceEnvironment": "past-palace-rescue"
+      }
+    }
+  ],
+  "browser": false,
+  "GPU": false,
+  "naturalPlay": false,
+  "checks": [
+    {
+      "name": "Native story data boots without VM errors",
+      "passed": true,
+      "detail": {
+        "booted": true,
+        "errors": [],
+        "warnings": [
+          "저장소 내레이션은 부분 제공입니다. 누락 또는 원문 불일치 장면은 텍스트로 진행합니다."
+        ]
+      }
+    },
+    {
+      "name": "All 55 native combat maps receive R78; 54 keep all three R75 packs and the canonical last301 duel stays boss-only",
+      "passed": true,
+      "detail": {
+        "maps": 55,
+        "generated": 55,
+        "ordinary": 1620,
+        "last301": {
+          "id": "last301",
+          "layout": "r78-story-combat-maze",
+          "r78": true,
+          "enemyCount": 1,
+          "ordinary": 0,
+          "ordinaryPacks": [],
+          "bosses": [
+            {
+              "id": "last301:l301-boss",
+              "nativeId": "l301-boss",
+              "x": 15.5,
+              "y": 12.5,
+              "hp": 63621,
+              "maxHp": 63621
+            }
+          ],
+          "midbosses": [],
+          "allSafe": true,
+          "placement": {
+            "version": 1,
+            "zoneId": "last301",
+            "routeNodeIds": [
+              11,
+              7,
+              8,
+              9,
+              6,
+              5
+            ],
+            "bossRoomNodeId": 13,
+            "ordinaryMoved": 0,
+            "midbossCount": 0,
+            "bossCount": 1
+          },
+          "profile": {
+            "style": "fallen-angel-black-sea",
+            "sourceEnvironment": "fallen-angel-black-sea"
+          }
+        },
+        "ids": [
+          "dist00",
+          "dist01",
+          "dist02",
+          "dist03",
+          "dist04",
+          "dist05",
+          "dist06",
+          "ep1a09",
+          "ep1a10",
+          "ep1a11",
+          "ep1b01",
+          "ep1b02",
+          "ep1b03",
+          "ep1b04",
+          "ep1b05",
+          "ep1b06",
+          "ep1b06b",
+          "ep1b07",
+          "ep1b08",
+          "ep1b09",
+          "u201",
+          "u202",
+          "u204",
+          "u205",
+          "u206",
+          "u203",
+          "last304",
+          "last305",
+          "last301",
+          "last302",
+          "last303",
+          "kair01",
+          "kair04",
+          "kair05",
+          "kair06",
+          "kair07",
+          "kair08",
+          "kair09",
+          "kair10",
+          "kair02",
+          "kair03",
+          "hando01",
+          "hando02",
+          "hando03",
+          "murder01",
+          "murder02",
+          "murder04",
+          "murder03",
+          "cult01",
+          "cult02",
+          "cult05",
+          "cult06",
+          "cult03",
+          "cult04",
+          "ep1a09b"
+        ]
+      }
+    },
+    {
+      "name": "All story-spawned enemies, midbosses and bosses land on walkable floor",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Canonical boss and midboss identities remain in their assigned combat rooms",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "R78 processed at least all 55 regions without placement failures",
+      "passed": true,
+      "detail": {
+        "rooms": 172,
+        "ordinaryMoved": 5070,
+        "midbossMoved": 119,
+        "bossMoved": 93,
+        "unplaced": 0
+      }
+    }
+  ],
+  "metrics": {
+    "rooms": 172,
+    "ordinaryMoved": 5070,
+    "midbossMoved": 119,
+    "bossMoved": 93,
+    "unplaced": 0
+  },
+  "passed": 5,
+  "failed": 0
+}

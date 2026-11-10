@@ -1,0 +1,12 @@
+PASS All153 selected world assets have scene bindings rather than orphaned registrations
+PASS All153 selected derivative bytes match their active catalog hashes
+PASS All64 selected static raster effects resolve to exact original image bytes
+PASS Supplied dynamic package is not loaded or initialized
+PASS Every configured scene creates local original or dressed art placements
+PASS All placed selected props emit actual image commands when observed at their own anchor
+PASS New visual dressing never adds solid obstacles to the maze
+PASS Refined bed, wheelchair and monitor appear through actual hospital prop rendering
+PASS The refined sand track remains the active Kair recovery raster
+PASS Asset inventory distinguishes selected originals from retained unused originals
+PASS Native scene art drawing preserves runtime health/error invariants
+FINAL true 11

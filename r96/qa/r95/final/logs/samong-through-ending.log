@@ -1,0 +1,23 @@
+PASS 777 is enabled through native activation from a fresh ordinary game
+PASS Native 777 enters Samong threshold with its uncleared ward gates
+PASS 777 keeps the Samong boss door locked until ordinary enemies and champions are eliminated
+PASS Samong survivors assemble through the native rally transition
+PASS E opens the original Samong pre-boss narrative after field clearance
+PASS Original Samong bosses activate inside their own boss chamber
+PASS Samong exit requires E and post-story before completion
+PASS Reading the exit story completes the Samong threshold naturally
+PASS Standing on the final-map portal never auto-transfers
+PASS A fresh E key enters the native final-map controller without completing it
+PASS First final boss opens firstPost and awakenPre instead of ending the game
+PASS Reading the authored awakening enables the Cosmic sequence
+PASS A fresh VM restores the half-finished finale without replaying or skipping a guardian
+PASS All six canonical guardians advance once in order on safe floor after save/restore
+PASS Final boss defeat queues the preserved-core epilogue
+PASS Completing the final epilogue sets the native story ending
+PASS Native restore retains final completion and ending flags
+PASS The completed finale portal still requires a new E press
+PASS E reaches the preserved post-ending village on safe floor
+PASS Village return portal restores the completed finale without resurrecting its bosses
+PASS Leaving completed 777 returns to the uncompleted ordinary opening checkpoint
+PASS Finale regression records no runtime errors
+FINAL 22 0

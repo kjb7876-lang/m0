@@ -1,0 +1,11 @@
+{
+  "schema": "r83-independent-native-frame-replay/v1",
+  "checks": [],
+  "frames": [],
+  "method": "Actual native captureVisual -> pinned Three CommandScene.render, real source image dimensions and CPU geometry/material ownership. Image crop pixels, browser, WebGL/GPU, audio and natural play are unverified.",
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "failure": "Error: Python \n    at main (C:\\Users\\kim\\Documents\\StoryWorld-R88\\hospital-refinement-v12\\qa\\r83\\audit-frame-replay.cjs:20:25)",
+  "passed": false
+}
