@@ -263,12 +263,12 @@ function onHeroHurt(source){const owner=ownerOf(source);let colour=POL()?.colour
  if(Math.max(...rgb)-Math.min(...rgb)<70||Math.min(...rgb)>150){colour='red';rgb=SIGDATA()?.sigColours?.red||[235,52,52];}
  const from=owner||(Number.isFinite(source?.x)?source:null),ang=from?Math.atan2(player.y-from.y,player.x-from.x):Math.random()*TAU,sa=screenAngle(ang);
  add({kind:'heroHurt',x:player.x,y:player.y,lift:h*.5,colour,rgb,sa,life:.42,seed:Math.random()*6});
- const s=stateOf(player);s.hurtAt=time;s.hurtDx=Math.cos(sa);hurtFlash=1;stats.hurts++;}
+ const s=stateOf(player);s.hurtAt=time;s.hurtDx=Math.cos(sa);s.hurtDy=Math.sin(sa);hurtFlash=1;stats.hurts++;}
 const hurtBase=hurt;hurt=function(damage,source,...rest){const before=player?.hp;const r=hurtBase.call(this,damage,source,...rest);try{if(prefs.hitfx&&live()&&Number.isFinite(before)&&player.hp<before)onHeroHurt(source);}catch(err){fail(err);}return r;};
 // Hero flinch: the native R48 pose hook runs inside the body draw, after translate(feet).
 const R48=window.__STORYWORLD_COMBAT_SYNC_R48__;
 if(R48&&typeof R48.applyBodyPose==='function'){const poseBase=R48.applyBodyPose;window.__STORYWORLD_COMBAT_SYNC_R48__=Object.freeze({...R48,applyBodyPose(c,hero=false){const r=poseBase(c,hero);
- try{if(hero&&prefs.hitfx&&!reduced()&&live()&&c){const s=heroState.get(player);if(s){const u=(time-s.hurtAt)/.26;if(u>=0&&u<1){const g=Math.sin(Math.PI*u)*(1-u*.5);c.translate(s.hurtDx*5*Z()*g,0);c.rotate(s.hurtDx*.07*g);c.scale(1+.05*g,1-.06*g);}}}}catch(e){fail(e);}return r;}});}
+ try{if(hero&&prefs.hitfx&&!reduced()&&live()&&c){const s=heroState.get(player);if(s){const u=(time-s.hurtAt)/.26;if(u>=0&&u<1){const g=Math.sin(Math.PI*u)*(1-u*.5);c.translate(s.hurtDx*5*Z()*g,((s.hurtDy||0)*2.5+1.2)*Z()*g);}/* R532: 기울임·한 축 늘임을 빼고 맞은 방향(깊이 포함)으로 밀림+살짝 주저앉음만 */}}}catch(e){fail(e);}return r;}});}
 
 // ---- drawing of own effects ---------------------------------------------------------
 // R111: 적중 섬광도 7단계 — 성장 전(0단계)엔 작은 불티만, 단계가 오를수록 커지고 진해진다(흰 섬광이 화면을 덮지 않게).
@@ -323,9 +323,10 @@ function motion(e){const s=mobOf(e),dt=clamp(time-s.t,0,.1),major=!!(e.boss||e.m
  else if(e.rangedWindup>0){lean-=sdir*.02;sy*=1+.025*amp;}
  // hit flinch: pushed along the blow, squashed, then settles
  // (a plain hit only nudges: the native hit timer drives a small push away from the hero)
- const f=flinch.get(e);let fu=f?(time-f.at)/.22:2,fk=f?.k??1,fdx=f?.dx;
- if(!(fu>=0&&fu<1)&&e.hitTimer>0){fu=1-clamp(e.hitTimer/.14,0,1);fk=major?.15:.4;fdx=player?Math.cos(screenAngle(Math.atan2(e.y-player.y,e.x-player.x))):null;}
- if(fu>=0&&fu<1){const g=Math.sin(Math.PI*fu)*(1-fu*.4)*fk*amp,ddx=fdx??(sdir||1);dx+=ddx*7*Z()*g;sx*=1+.12*g;sy*=1-.1*g;lean+=ddx*.06*g;}
+ const f=flinch.get(e);let fu=f?(time-f.at)/.22:2,fk=f?.k??1,fdx=f?.dx,fdy=f?.dy;
+ if(!(fu>=0&&fu<1)&&e.hitTimer>0){fu=1-clamp(e.hitTimer/.14,0,1);fk=major?.15:.4;const sa=player?screenAngle(Math.atan2(e.y-player.y,e.x-player.x)):null;fdx=sa==null?null:Math.cos(sa);fdy=sa==null?null:Math.sin(sa);}
+ // R532(사용자 2026-11-10 "피격당할때 종이느낌"): 그림을 한 축으로 늘이고(sx·sy) 기울이던(lean) 것을 뺐다 — 맞은 방향(깊이 방향 포함)으로 밀렸다가 돌아오고 살짝 주저앉는다.
+ if(fu>=0&&fu<1){const g=Math.sin(Math.PI*fu)*(1-fu*.4)*fk*amp,ddx=fdx??(sdir||1),ddy=fdy??0;dx+=ddx*7*Z()*g;bob-=(ddy*3.5+1.5)*Z()*g;}
  return{dx,bob,lean,sx,sy,pivot};}
 const R52=window.__STORYWORLD_HOSPITAL_CHARGE_R52__;
 if(R52&&typeof R52.applyBodyPose==='function'){

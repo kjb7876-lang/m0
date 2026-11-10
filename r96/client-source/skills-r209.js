@@ -25,7 +25,9 @@ const WHY={e:'블링크(S)와 같은 순간 이동',w:'공명방어(D)와 같은
 const removed=(hero,slot)=>!!(prefs.dedupe&&REMOVED[hero]?.includes(slot));
 const FAR=1e6;
 /* R247: 미카엘라 Z·X 는 새 스킬(비숍 결)이 맡는다 — 원래 칸(방패·위상전이)은 계속 막고(재사용 대기), 단추·창구 입구만 R247 에 넘긴다 */
-const owned=(hero,slot)=>hero==='michaela'&&(slot==='w'||slot==='e')&&!!window.__STORYWORLD_MICHAELA_R247__?.on?.();
+const owned=(hero,slot)=>hero==='michaela'&&(slot==='w'||slot==='e')&&!!window.__STORYWORLD_MICHAELA_R247__?.on?.()
+ /* R561: 기억사수 W·E 는 총기 스킬(망각 저격·잔향 연사)이 맡는다 — 원래 칸(상태 정화·팬텀 블링크)은 막고 단추·창구 입구만 R561 에 넘긴다 */
+ ||(hero==='gunner'&&(slot==='w'||slot==='e')&&!!window.__STORYWORLD_GUNNER_ARMS_R561__?.on?.());
 function gate(){try{if(typeof player!=='object'||!player||typeof time!=='number')return;const s=player.storyWER||(player.storyWER={ready:{},buffs:{}});if(!s.ready)s.ready={};
   for(const slot of REMOVED[player.hero]||[]){const k=player.hero+':'+slot;if(removed(player.hero,slot)||owned(player.hero,slot)){if(!(s.ready[k]>time+FAR/2)){s.ready[k]=time+FAR;stats.blocked++;}}else if(s.ready[k]>time+FAR/2)s.ready[k]=0;}}catch(e){fail(e);}}
 function hideButtons(){try{const hero=typeof player==='object'&&player?player.hero:null;for(const slot of ['w','e','r']){const b=document.getElementById('story-wer-'+slot);if(!b)continue;const off=!!hero&&removed(hero,slot)&&!owned(hero,slot);if(b.hidden!==off)b.hidden=off;if(off)b.style.display='none';else if(b.style.display==='none')b.style.display='';}}catch(e){fail(e);}}

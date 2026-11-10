@@ -478,6 +478,8 @@ jobs:
         run: node r96/qa/r572/r572-cpu-check.cjs
       - name: R521 hospital rooms (ep1a08 wards/consult/prep/lobby furnished by room function along the back walls, presentation only, drive hospital props) CPU check
         run: node r96/qa/r521/r521-cpu-check.cjs
+      - name: R561 gunner arms (기억사수 Q laser beam, W sniper, E rifle burst, R marked strike; engine originals held, save untouched) CPU check
+        run: node r96/qa/r561/r561-cpu-check.cjs
       - name: R522 hospital thin walls (the two free-standing maze baffles of ep1a08 moved to touch a thick wall, hospital only, routes stay connected) CPU check
         run: node r96/qa/r522/r522-cpu-check.cjs
       - name: R523 story rooms (clinic ep1a09 + sloth home ep1b02 furnished by room name along the real back walls, presentation only, angle-matched art only) CPU check
@@ -569,6 +571,8 @@ jobs:
         run: node r96/qa/r450/battle-beats-cpu-check.cjs
       - name: R462 mobs without a death motion burn away or burst in blood and leave a corpse CPU check
         run: node r96/qa/r462/mob-death-cpu-check.cjs
+      - name: R532 mob death tears/bursts into own-art pieces, corpse keeps body art, hit flinch without paper squash CPU check
+        run: node r96/qa/r532/r532-cpu-check.cjs
       - name: R481 outdoor groves (understory around trees, small woods on bare back rims) CPU check
         run: node r96/qa/r481/grove-r481-cpu-check.cjs
       - name: R482 worn trails from entry to doors/altar on outdoor floors CPU check
