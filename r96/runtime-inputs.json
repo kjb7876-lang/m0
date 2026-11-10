@@ -8010,6 +8010,7 @@
     "assets/r563/dots/michaela-sigil-front.webp",
     "assets/r564/dots/seoha-sigil-back.webp",
     "assets/r564/dots/seoha-sigil-front.webp",
+    "asset-cdn-r615.js",
     "assets/r380/mobs/cult-ego-binder-walk-d1.webp",
     "assets/r380/mobs/cult-mech-legs-walk-d1.webp",
     "assets/r380/mobs/cult-memory-orb-float-d1.webp",
@@ -9152,5 +9153,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "568e27b0520a23698168188f1d82bc133b331da70bc6bd3e34f386f771955ce8"
+  "runtimeManifestSHA256": "95c32d9976c5281ec279cb44480e50f736bc70255c31b5a7cb46b61698a4c7d8"
 }
