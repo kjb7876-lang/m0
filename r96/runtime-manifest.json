@@ -33838,9 +33838,39 @@
       "sha256": "ed5b53311208f99271925b1c306daaa176bd7e23e3f0ce9c1c805157754f80f0"
     },
     {
+      "path": "assets/r590/hwando-a-draw-cut.webp",
+      "bytes": 40296,
+      "sha256": "1dff74fcde648100ae1cf6fc62d4f1e859378abc02af2b05ab4c04fec31d00fd"
+    },
+    {
+      "path": "assets/r590/hwando-e-delayed-flash.webp",
+      "bytes": 74644,
+      "sha256": "f35fe9db59b1b8a9e5fc87f3f9eafcf3357abd3c30024b56fa2e1edd9e2a38f3"
+    },
+    {
       "path": "assets/r590/hwando-iai-ring.webp",
       "bytes": 147792,
       "sha256": "0ce1cbae6780b064e5db60f17cb80006ada735ac607858ff909d2bb895b8c3e0"
+    },
+    {
+      "path": "assets/r590/hwando-q-wind-blade.webp",
+      "bytes": 238400,
+      "sha256": "58c16663db1fa36e7d14b878b8a0cb45c6b676a318d3ae6791a6745632517032"
+    },
+    {
+      "path": "assets/r590/hwando-r-finale-draw.webp",
+      "bytes": 154248,
+      "sha256": "34d73d05a893494deb41ecb6a03b18dcdeee5b253fb5ec05b224dd96ebb77380"
+    },
+    {
+      "path": "assets/r590/hwando-sigil-back.webp",
+      "bytes": 101346,
+      "sha256": "2dca9b03dfe9852b33c08ae379b790e3b138bd16bdfdad5a3192e29471ce1c98"
+    },
+    {
+      "path": "assets/r590/hwando-sigil-front.webp",
+      "bytes": 91426,
+      "sha256": "48c1112248c47516fe7bf3e4e66bc9bbc90edd44fa41cd0b298c37e4d7f64498"
     },
     {
       "path": "assets/r590/hwando-wind-tornado.webp",
@@ -42884,8 +42914,8 @@
     },
     {
       "path": "hwando-chain-r590.js",
-      "bytes": 18852,
-      "sha256": "74c9cd2ec2198540af603ae738e648c640ed6482a3bd41b809c4e5ec3054393c"
+      "bytes": 25253,
+      "sha256": "ad73d01aa72c29c3b0d7ca95fe98a75301efb1e78f728f63f2bed4b99bbf3e64"
     },
     {
       "path": "hwando-r242.js",
@@ -43843,8 +43873,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8768,
-  "totalBytes": 1218240554,
+  "fileCount": 8774,
+  "totalBytes": 1218947315,
   "webHTMLSha256": "b864e949ea80ff9ac9ee7a692ac6eb6b3d95caca806286ed8dabfe646b2c9d13",
   "largest": [
     {
