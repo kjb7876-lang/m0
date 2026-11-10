@@ -34288,6 +34288,51 @@
       "sha256": "78ad667c36677e21840fa9e12e89ebe20e243d70774d793cb58395b3d6880713"
     },
     {
+      "path": "assets/r600/dots/sv-beam-01.webp",
+      "bytes": 158904,
+      "sha256": "544259c331e6bec0f273255b4364f5663d8905f7b4d077ba160cfb85544eb8dd"
+    },
+    {
+      "path": "assets/r600/dots/sv-beam-hit.webp",
+      "bytes": 3348,
+      "sha256": "863426d4fcfa543bfc495215bf0d31adaa53d0875603d80c51340e04825db1db"
+    },
+    {
+      "path": "assets/r600/dots/sv-beam-start.webp",
+      "bytes": 3936,
+      "sha256": "c5eaa09e5e771286c7094e8824ec07acbe5bf6e3cb3373d3530237ff6be7fee7"
+    },
+    {
+      "path": "assets/r600/dots/sv-core-01.webp",
+      "bytes": 239936,
+      "sha256": "7392349d7d622e2c837e12bb9e2073733f94bebcfa94f704c69287409544d09c"
+    },
+    {
+      "path": "assets/r600/dots/sv-core-02.webp",
+      "bytes": 68774,
+      "sha256": "aed29368f79b5bf299d135fa241999cc7def715b895594107fcfc299f769cfba"
+    },
+    {
+      "path": "assets/r600/dots/sv-core-03.webp",
+      "bytes": 211958,
+      "sha256": "3a669a8bb9fc9323f91243032abd54e6546d64e19668174beed9e2294ffffee6"
+    },
+    {
+      "path": "assets/r600/dots/sv-core-04.webp",
+      "bytes": 120064,
+      "sha256": "5049c65b24596cfad6e93546004bc0de68d2fb86e14a9ce4a411c7f848efbfeb"
+    },
+    {
+      "path": "assets/r600/dots/sv-gem-01.webp",
+      "bytes": 9228,
+      "sha256": "19969e7d4b5e794edfbbfdfcd3c527a33b538ce79da67c47c158be8fb9b2b02e"
+    },
+    {
+      "path": "assets/r600/dots/sv-gem-tail.webp",
+      "bytes": 1156,
+      "sha256": "2f87e0a90195aa5c806b602ed64ed99067a7747155ea7685083fe7b7399d66a1"
+    },
+    {
       "path": "assets/r617/beach-poster.jpg",
       "bytes": 25190,
       "sha256": "30c109bc3c6ebdb2f1a9562181011495c4d948f3891a93a2a2cb1c1282e75ea6"
@@ -44114,8 +44159,8 @@
     },
     {
       "path": "survival-r600.js",
-      "bytes": 50237,
-      "sha256": "71419b9ddaf43d2f806379db6e67ba607c745068b4d28aa99a58b38bfa4336f6"
+      "bytes": 52741,
+      "sha256": "7ecc67e6b50ce0f06d1bc0c0c78fd886c2c9c22caf3915e3fc7668da95b4d85a"
     },
     {
       "path": "swamp-hands-r474.js",
@@ -44343,8 +44388,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8868,
-  "totalBytes": 1225856381,
+  "fileCount": 8877,
+  "totalBytes": 1226676189,
   "webHTMLSha256": "e8fcbfa9e10e36c896322898c63e65c52267407d073bf93509baf4f2187ab3e6",
   "largest": [
     {
