@@ -6175,7 +6175,8 @@
     "hospital-walls-r522.js",
     "hwando-chain-r590.js",
     "hunter-arrows-r535.js",
-    "assets/r535/hunter-fire-arrowhead.webp"
+    "assets/r535/hunter-fire-arrowhead.webp",
+    "samong-surge-r571.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -7250,5 +7251,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "49b79a1e5c19d118180501c376a7bed7e4044fee2cecb90d85e23e96be7c904f"
+  "runtimeManifestSHA256": "46a1e840005b35e076b547f9df3e7d41369db648d8367573e5f3626d143b07c3"
 }
