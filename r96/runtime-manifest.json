@@ -25028,6 +25028,11 @@
       "sha256": "3fde34da839094cdfabd18b8f9a510c38ff7141c93ceeaaa1eec3f818ec8d0e8"
     },
     {
+      "path": "assets/r561/gunner-bombard-meteor.webp",
+      "bytes": 184656,
+      "sha256": "7e12057401e2f6ad08e2853117302638a024bf1e94bbefdaeaf7b2cb0ed183bc"
+    },
+    {
       "path": "assets/r585/index.json",
       "bytes": 5998,
       "sha256": "58b5be4a18822506f40faa3c259e3ecfaacc0c099197ea223f48711f29feb1d3"
@@ -34003,6 +34008,11 @@
       "sha256": "f7a8e060e71e772876ff6886c80dfde20619535b899f03f1996036af50769b3d"
     },
     {
+      "path": "gunner-arms-r561.js",
+      "bytes": 27718,
+      "sha256": "8a35333a5ace41fd0be488f0b56d7a51e14a5bc7c1c26e9df76be51379e911d0"
+    },
+    {
       "path": "hero-facing-r336.js",
       "bytes": 2132,
       "sha256": "877f2b8f9988ab1c4b2eac31529a2e6c2b1d6dbb52f6bbd03f822d636f7cb8a9"
@@ -34159,8 +34169,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6572837,
-      "sha256": "90d1c2a9e18b63193af45a3b4747379ba871c9be40c830e782b0cb2c6f6a3b5c"
+      "bytes": 6572882,
+      "sha256": "127911b1c36795c950f527a42c4e959d2dda835069fe501dcfaf61e8c4c31bd1"
     },
     {
       "path": "intro-r140.js",
@@ -34184,8 +34194,8 @@
     },
     {
       "path": "keys-r291.js",
-      "bytes": 7477,
-      "sha256": "2d317a803c3c14fcb2b2dfa0586a5e7fd5b63f1aa2eb1536ecf7597557b62aa4"
+      "bytes": 7584,
+      "sha256": "c0eb0b24c93c38d8ac1eeeaccb6ef88ce65fa25a8967aecaf884fa08ac447aa5"
     },
     {
       "path": "lag-r217.js",
@@ -34754,8 +34764,8 @@
     },
     {
       "path": "skills-r209.js",
-      "bytes": 9220,
-      "sha256": "910df8a2f70897516989fca67f48350fe17ef0756d24c3747d1ae0484cf7f367"
+      "bytes": 9511,
+      "sha256": "1b550154ee08df47794049826f17b9ad36616adc7ccda6f0df6b43a1ed803f2e"
     },
     {
       "path": "slayer-blood-r425.js",
@@ -35058,9 +35068,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 7011,
-  "totalBytes": 1095580428,
-  "webHTMLSha256": "90d1c2a9e18b63193af45a3b4747379ba871c9be40c830e782b0cb2c6f6a3b5c",
+  "fileCount": 7013,
+  "totalBytes": 1095793245,
+  "webHTMLSha256": "127911b1c36795c950f527a42c4e959d2dda835069fe501dcfaf61e8c4c31bd1",
   "largest": [
     {
       "path": "index.html",
