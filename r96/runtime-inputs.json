@@ -6222,8 +6222,13 @@
     "assets/r542/sfx/crush-1.ogg",
     "assets/r542/sfx/roar-1.ogg",
     "assets/r542/sfx/index.json",
-    "assets/r590/hwando-wind-tornado.webp",
+    "assets/r524/sofa-n.webp",
+    "assets/r524/sofa-w.webp",
+    "assets/r524/range-n.webp",
+    "assets/r524/range-w.webp",
+    "assets/r524/index.json",
     "assets/r590/hwando-iai-ring.webp",
+    "assets/r590/hwando-wind-tornado.webp",
     "samong-theme-r572.js"
   ],
   "mediaPaths": [
@@ -7299,5 +7304,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "3f96590e08916e9d037748d1eeb4fc82289f7fd886e815a518c547e7a6911716"
+  "runtimeManifestSHA256": "ea5e8043c12cfe03446fb52090e4b290f3f0f27fc712c5c547cf75828f03b532"
 }
