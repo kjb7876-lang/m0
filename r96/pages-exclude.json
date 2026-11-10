@@ -10,7 +10,10 @@
       "prefix": "assets/story-narration/v1/audio/",
       "reason": "옛 서사 음성 v1(Qwen3-TTS 0.6B, 2026-10). R75 부터 게임 안 서사 목록(assets/story-narration/v1/manifest.json 내장본)이 scenes:{}·originals:{} 라 어느 장면도 이 파일을 고를 수 없다(scripts/apply-r75.py 143행 'Old narration files remain archival media, but cannot be selected by R75'). 지금 서사 음성은 assets/r381/voice(R381)이다.",
       "evidence": ["scripts/apply-r75.py:143", "64개 지역 순회 요청 기록에 0건", "실행 중 voiceManifest.scenes 0행", "index.html 밖 런타임 js 에 경로 문자열 없음", "휴대용 내보내기 assets 목록에 0건"]
-    }
+    },
+    {"prefix": "assets/r140/intro/", "round": "R614", "reason": "R140 첫 화면 영상(opening-8heroes.mp4·포스터·목록). 이를 트는 intro-r140.js 는 R143 이 index.html 에서 떼어 낸 뒤 어느 런타임 파일도 싣지 않는다. 저장소·site 에는 그대로 둔다(r96/qa/r143 검사가 파일을 본다).", "evidence": ["index.html 스크립트 태그에 intro-r140.js 없음", "r140/intro 문자열은 intro-r140.js·자기 index.json 에만", "64개 지역 순회 요청 기록 2회에 0건", "r96/qa/r580/pages-size-check.py 3b 가 다시 붙으면 실패"]},
+    {"prefix": "assets/dynamic-vfx-r84/", "round": "R614", "reason": "R84 동적 VFX 시트. 이를 쓰는 dynamic-vfx-r84.js 가 index.html 에 붙어 있지 않고 다른 런타임 파일이 경로를 쓰지 않는다(지금 이펙트는 painted-vfx·final42·vfx-r83 계열).", "evidence": ["index.html 스크립트 태그에 dynamic-vfx-r84.js 없음", "dynamic-vfx-r84 문자열은 그 js 에만", "64개 지역 순회 요청 기록 2회에 0건", "r96/qa/r580/pages-size-check.py 3b 가 다시 붙으면 실패"]},
+    {"prefix": "data/campaign-r54/canonical-campaign-source-r54.json", "round": "R614", "reason": "R54 정본 서사 데이터의 json 사본. 게임은 index.html 안 인라인 window.__STORYWORLD_CAMPAIGN_DATA_R54__ 를 쓰고 이 파일을 가져오지 않는다.", "evidence": ["index.html 에서 이 경로는 schema 문자열로만 나옴", "campaign-r54/ 를 가져오는 런타임 js 없음", "64개 지역 순회 요청 기록 2회에 0건", "r96/qa/r580/pages-size-check.py 3b"]}
   ],
   "losslessPng": {"tool": "pyoxipng==9.1.1", "level": 2, "strip": "safe", "pixelCheck": "Pillow RGBA 디코딩 바이트 비교, 다르면 원본 유지"}
 }

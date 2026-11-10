@@ -1,0 +1,245 @@
+분류	이름	지역	걷기그림수	변형수	보스	R286분류	원본
+undrawn	중독을 부르는 주사기 환영체	ep1a09	0	0	boss	major	
+undrawn	백은 없는 그림자	hando03	0	0		static	
+NOWALK	뿌리 추적자	dist00	1	8		/attack-only	assets/r74/monsters.png assets/r380/mobs/root-stalker-r74-plain.webp
+NOWALK	늪 뿌리 추적자	dist02	1	8		full/attack-only/move-only	assets/r380/mobs/swamp-root-stalker-darkgreen-v2.webp
+NOWALK	검은 소환 기둥	dist05	1	4		static	r106fx:glow:40.8.4:255.128.48
+NOWALK	일흔두 번째 인장 잔류체	ep1b01	1	12		attack-only/major	assets/episode1b/generated-v394/seal_residual.webp
+NOWALK	붉은 하이힐 칼날	ep1b05	1	7		attack-only/major	assets/episode1b/generated-v394/lust_asmodai.webp
+NOWALK	칼날이 된 지폐	ep1b06	1	4		attack-only/major	assets/episode1b/generated-v394/greed_fox_hound.webp
+NOWALK	강철 턱의 사이보그 개	ep1b09	1	9		static/major	assets/episode1b/generated-v394/polar_cyborg_hound.webp
+NOWALK	가짜 자비 수집가	u202	1	8		static/major	assets/r99/clean/assets/u2/generated-v350/u2_reactor_collector.webp
+NOWALK	고블린 추장	last305	1	37	boss	major	assets/boss-actions-20261011/l305-boss-poses.png
+NOWALK	타락천사 기사	last301	1	40	boss	major	assets/r425/clean/assets/generated-v31224/actors-normalized/353a813314bc_Monster_FallenAngelKnight_MoveSide.webp
+NOWALK	검은 안개 심장 · 불면의 기억	last302	1	36	boss	major	assets/r104/bosses/mb-last302-v31231-p4.webp
+NOWALK	최초명령 코어 오염체	kair01	1	35	boss	major	assets/rc140/story-cycle-motions/mb-kair01-v31231.png
+NOWALK	휴식 수확관 · 과로의 수문장	kair04	1	40	boss	major	assets/rc140/story-cycle-motions/mb-kair04-v31231.png
+NOWALK	망각 묘지기 · 삭제된 선택	kair09	1	40	boss	major	assets/boss-actions-20261011/mb-kair09-v31231-poses.png
+NOWALK	세이렌 모르	kair03	1	40	boss	major	assets/generated-v31224/actors-normalized/b19d67bb1973_siren_idle.webp
+NOWALK	의존 신호 포식자	hando01	1	34	boss	/major/static	assets/r99/clean/assets/hando-v3123/return_coordinate_devourer.webp assets/r104/bosses/mb-hando01-p4.webp
+NOWALK	악몽 정찰체	hando01	1	8		/attack-only	assets/r99/clean/assets/hando-v3123/timeless_silver_scout.webp
+NOWALK	코어 운반 집행자	hando02	1	35	boss	static/major	assets/r99/clean/assets/hando-v3123/order_seal_officer.webp assets/r104/bosses/mb-hando02-p4.webp
+NOWALK	무명 검흔	hando02	1	7		idle-only	assets/r380/mobs/legacy-m119-nameless-scar-v4.webp
+NOWALK	붕괴선 파수병	hando02	1	8		attack-only	assets/r99/clean/assets/hando-v3123/silver_seal_sentinel.webp
+NOWALK	기억절제 연결자	hando02	1	7		static	assets/r99/clean/assets/hando-v3123/memory_excision_connector.webp
+NOWALK	환수검 모조체	hando03	1	36	boss	static/major	assets/r99/clean/assets/hando-v3123/phantom_reclaim_blade.webp assets/r104/bosses/mb-hando03-p4.webp
+NOWALK	EGO 강탈 악몽왕	hando03	1	40	boss	major	assets/generated-v31224/actors-normalized/fae708429341_hando_idle.webp
+NOWALK	끊어진 통화의 인과 잔향	murder01	1	7		static	assets/murder/rooftop_echo.png
+NOWALK	기계화 복종 봉인구	cult01	1	8		full	assets/r99/clean/assets/u2/generated-v350/u2_memory_orb.webp
+NOWALK	신경 케이블 포식체	cult02	1	8		attack-only/major	assets/cult-v3123/black_robed_nightmare_demon.webp
+NOWALK	생체기계 악몽	cult05	1	6		static/major	assets/r380/mobs/legacy-m134-nightmare-v4.webp assets/cult-v3123/black_rose_demon_soldier.webp
+NOWALK	설원 아래의 기계 다리	cult05	1	8		full/static	assets/episode1b/generated-v394/polar_chairman.webp
+NOWALK	EGO 구속 연결자	cult03	1	8		static/major	assets/cult-v3123/black_rose_chip_penitent.webp
+NOWALK	이단의목사 한리안	cult03	1	37	boss	major	assets/boss-actions-20261011/c103-mid-poses.png
+NOWALK	적그리스도 배양좌	cult04	1	37	boss	major	assets/rc140/story-cycle-motions/c104-mid.png
+two	뿌리의 문지기	dist00	2	40	boss	major	assets/r104/bosses/dist00-boss-p4.webp assets/r104/bosses/dist00-boss-p1.webp
+two	보라검천사	dist01	2	40	boss	major	assets/r104/bosses/mb-dist01-p4.webp assets/r104/bosses/mb-dist01-p1.webp
+two	늪의 뿔악마 군주	dist02	2	39	boss	major	assets/r104/bosses/mb-dist02-p4.webp assets/r104/bosses/mb-dist02-p1.webp
+two	핏빛 수호로 추격자	dist03	2	39	boss	major	assets/r104/bosses/mb-dist03-p4.webp assets/r104/bosses/mb-dist03-p1.webp
+two	첫 동료의 악마잔영	dist04	2	39	boss	major	assets/r104/bosses/mb-dist04-p4.webp assets/r104/bosses/mb-dist04-p1.webp
+two	발록 · 지옥의 문지기	dist06,ep1a09b	2	40	boss	major	assets/r425/clean/assets/generated-v31224/actors-normalized/80f5ab6bab50_balrog-idle.webp assets/actors/v31511/balrog-raised-body.png
+two	복도 비명잔영	ep1a08	2	41		full/major	assets/r118/clean/assets/visual-test/hospital-ranged-motion-r52.png assets/r118/clean/assets/visual-test/hospital-ranged-back-r53.png assets/episode1a/generated
+two	오만의 폐허핵	ep1a10	2	40	boss	major	assets/generated-story10-cycle-20261005/ep1a10/mb-ep1a10-pride-ruin-core-atlas.png
+two	초자아 잠식체	ep1a11	2	8		attack-only/major	assets/episode1a/generated-v392/ego_corrosion_vessel.webp assets/rc137/mob-attacks-02.png
+two	교만의 잔향 · 제72문	ep1b01	2	34	boss	major	assets/r104/bosses/mb-ep1b01-p4.webp assets/r104/bosses/mb-ep1b01-p1.webp
+two	호텔 부매니저 · 레비아탄	ep1b03	2	40	boss	major	assets/generated-v31224/actors-normalized/1a8ca2c5759b_ep1b03_envy_sister_phase0.webp assets/r425/clean/assets/generated-v31224/actors-normalized/9f845f4d58bf_e
+two	폐기주방 감독	ep1b04	2	40	boss	major	assets/r104/bosses/mb-ep1b04-p4.webp assets/r104/bosses/mb-ep1b04-p1.webp
+two	최고급 호텔의 총주방장 · 탐식의 귀 베엘제붑	ep1b04	2	39	boss	major	assets/generated-v31224/actors-normalized/fbc0132dd447_ep1b04_glutton_head_chef_phase0.webp assets/r99/clean/assets/generated-v31224/actors-normalized/27ef01c10
+two	심장빛 무대감독	ep1b05	2	38	boss	major	assets/r104/bosses/mb-ep1b05-p4.webp assets/r104/bosses/mb-ep1b05-p1.webp
+two	붉은 하이힐의 서윤	ep1b05	2	40	boss	major	assets/generated-v31224/actors-normalized/6861c5126992_ep1b05_lust_seoyun_puppet_phase0.webp assets/r99/clean/assets/generated-v31224/actors-normalized/53c9ce21
+two	박제된 여우의 악마	ep1b06	2	8		static/major	assets/episode1b/generated-v394/greed_mammon.webp assets/rc137/mob-attacks-02.png
+two	회장에게 고용된 총지배인 · 맘몬	ep1b06	2	37	boss	major	assets/r104/bosses/b06-boss-p4.webp assets/r104/bosses/b06-boss-p1.webp
+two	겨울숲 가시파수	ep1b06b	2	40	boss	major	assets/r104/bosses/mb-ep1b06b-p4.webp assets/r104/bosses/mb-ep1b06b-p1.webp
+two	소년이 된 총지배인 · 맘몬	ep1b06b	2	38	boss	major	assets/r104/bosses/b06b-boss-p4.webp assets/r104/bosses/b06b-boss-p1.webp
+two	불길 속의 용	ep1b07	2	8		static/major	assets/episode1b/generated-v394/wrath_satan.webp assets/rc137/mob-attacks-02.png
+two	호텔 화염기사	ep1b07	2	39	boss	major	assets/r104/bosses/mb-ep1b07-p4.webp assets/r104/bosses/mb-ep1b07-p1.webp
+two	불을 지른 청소부 · 분노의 귀	ep1b07	2	40	boss	major	assets/r104/bosses/b07-boss-p4.webp assets/r104/bosses/b07-boss-p1.webp
+two	생체부트로더 연산핵	ep1b09	2	36	boss	major	assets/r104/bosses/mb-ep1b09-p4.webp assets/r104/bosses/mb-ep1b09-p1.webp
+two	사이보그 회장 · 생체 부트로더	ep1b09	2	40	boss	major	assets/generated-v31224/actors-normalized/99c6dd7d202b_ep1b09_biobootloader_chairman_phase0.webp assets/r99/clean/assets/generated-v31224/actors-normalized/556c
+two	제17단계 중앙이주 코어	u206	2	39	boss	major	assets/rc140/story-cycle-motions/u206-mid.png
+two	기억의 문 수호 프레임	u203	2	36	boss	major	assets/rc140/story-cycle-motions/u203-mid.png
+two	불면귀	last303	2	40	boss	major	assets/r425/clean/assets/generated-v31224/actors-normalized/692e4ae01c29_bulmyeongwi_idle.webp assets/generated-v31224/actors-normalized/115b7fcea51e_bulmyeongw
+two	대수문장	kair05,kair06,kair07,kair08,kair10	2	40	boss	major	assets/actors/v31345/guardians/great-01-atlas.webp assets/actors/v31345/guardians/great-02-atlas.webp assets/actors/v31345/guardians/great-04-atlas.webp assets/
+two	파란불 역주행 목격자	murder01	2	40	boss	major	assets/r104/bosses/mb-murder01-p4.webp assets/r104/bosses/mb-murder01-p1.webp
+two	공실장부 당직감사	murder02	2	38	boss	major	assets/r104/bosses/mb-murder02-p4.webp assets/r104/bosses/mb-murder02-p1.webp
+two	진술 봉쇄 인과핵	murder04	2	38	boss	major	assets/r104/bosses/murder04-mid-p4.webp assets/r104/bosses/murder04-mid-p1.webp
+two	옥상 인과보관인	murder03	2	39	boss	major	assets/r104/bosses/mb-murder03-p4.webp assets/r104/bosses/mb-murder03-p1.webp
+two	칩 제단 방화벽	cult01	2	38	boss	major	assets/rc140/story-cycle-motions/c101-mid.png
+two	합일 주파수 결정	cult02	2	8		static/major	assets/cult-v3123/black_rose_crystal_guardian.webp assets/rc137/mob-attacks-09.png
+two	네트워크 합창체	cult02	2	39	boss	major	assets/boss-actions-20261011/c102-boss-poses.png
+two	기계화 제8단계 자비 교정관	cult02	2	7		attack-only/static/move-only	assets/r104/bosses/u202-mid-p4.webp assets/r104/bosses/u202-mid-p1.webp
+two	ID 생체조 관리자	cult05	2	40	boss	major	assets/rc140/story-cycle-motions/c105-mid.png
+two	기계재판 집행핵	cult06	2	40	boss	major	assets/rc140/story-cycle-motions/c106-mid.png
+two	이단의목사 백이온	cult03	2	39	boss	major	assets/boss-actions-20261011/c103-boss-poses.png
+ok	되살아난 수호기사	dist04	3	10		attack-only/major	assets/episode1b/generated-v31342-rc39/zombie_guardian_knight_bloodied.webp assets/r198/mobs/M033-move.png
+ok	소환진 검은기둥	dist06	3	38	boss	major	assets/rc135/midboss-motions/sheets/mb-dist06.png assets/r104/bosses/mb-dist06-p4.webp assets/r104/bosses/mb-dist06-p1.webp
+ok	백의 구속자	ep1a08	3	41		full/major	assets/r118/clean/assets/visual-test/hospital-orderly-motion-r51-v2.png assets/episode1a/hallucinated_orderly.webp
+ok	초천사의 웃는 가면	ep1a11	3	40	boss	major	assets/rc140/story-cycle-motions/mb-ep1a11-atlas-v2.png assets/r104/bosses/mb-ep1a11-p4.webp assets/r104/bosses/mb-ep1a11-p1.webp
+ok	루시퍼 · 가면 벗은 초천사	ep1a11	3	37	boss	major	assets/generated-v31224/actors-normalized/7a53842dd5da_lucifer-idle.webp assets/r104/bosses/a11-boss-p4.webp assets/r104/bosses/a11-boss-p1.webp
+ok	곰팡이와 오물 봉투	ep1b02	3	12		/full/major	assets/episode1b/generated-v394/sloth_moldling.webp assets/r198/mobs/M022-move.png
+ok	나태의 껍데기 파수	ep1b02	3	39	boss	major	assets/rc140/story-cycle-motions/mb-ep1b02-atlas.png assets/r104/bosses/mb-ep1b02-p4.webp assets/r104/bosses/mb-ep1b02-p1.webp
+ok	금이 간 비교잔영	ep1b03	3	37	boss	major	assets/rc140/story-cycle-motions/mb-ep1b03-atlas-v2.png assets/r104/bosses/mb-ep1b03-p4.webp assets/r104/bosses/mb-ep1b03-p1.webp
+ok	금고 장부감시자	ep1b06	3	38	boss	major	assets/rc140/story-cycle-motions/mb-ep1b06-atlas-v2.png assets/r104/bosses/mb-ep1b06-p4.webp assets/r104/bosses/mb-ep1b06-p1.webp
+ok	불길 속의 늑대	ep1b07	3	11		full/major	assets/episode1b/generated-v394/wrath_fire_beast.webp assets/r198/mobs/M030-move.png
+ok	흑마법사의 시체경호체	ep1b08	3	38	boss	major	assets/rc140/story-cycle-motions/mb-ep1b08.png assets/r104/bosses/mb-ep1b08-p4.webp assets/r104/bosses/mb-ep1b08-p1.webp
+ok	백색 정장의 호텔 그룹 회장	ep1b08	3	39	boss	major	assets/generated-v31224/actors-normalized/2456ba9c46b6_ep1b08_pride_chairman_phase0.webp assets/r104/bosses/b08-boss-p4.webp assets/r104/bosses/b08-boss-p1.webp
+ok	제4단계 전쟁관리자	u201	3	40	boss	major	assets/rc140/story-cycle-motions/u201-mid.png assets/r104/bosses/u201-mid-p4.webp assets/r104/bosses/u201-mid-p1.webp
+ok	제8단계 자비 교정관	u202	3	39	boss	major	assets/rc140/story-cycle-motions/u202-mid.png assets/r104/bosses/u202-mid-p4.webp assets/r104/bosses/u202-mid-p1.webp
+ok	중립초원 늑대	last304	3	10		/full/major	assets/last3/Monster_Wolf.png assets/r198/mobs/M046-move.png
+ok	숲 고블린	last305	3	12		full/major	assets/last3/Monster_Goblin.png assets/r198/mobs/M047-move.png
+ok	파란불	murder03	3	38	boss	major	assets/generated-story10-cycle-20261005/cyclic-murder/blue_executor_charge.png assets/generated-story10-cycle-20261005/cyclic-murder/blue_executor_idle.png asse
+ok	보랏빛 알집지기	dist01	4	8		move-only/major	assets/r380/mobs/purple-eggkeeper-v1.webp
+ok	재 나방	dist01	4	19		full/major	assets/r380/mobs/ash-moth-v2.webp assets/r74/monsters.png
+ok	늪에서 되살아난 혼령체	dist02	4	16		move-only/attack-only/major	assets/r380/mobs/swamp-spirit-v1.webp
+ok	수렁 주문사	dist02	4	8		full/major	assets/r380/mobs/swamp-mage-darkgreen-v1.webp
+ok	늪의 염소머리 악마	dist02	4	7		attack-only/major	assets/r380/mobs/swamp-goat-darkgreen-v1.webp
+ok	되살아난 방패동료	dist04	4	8		full/major	assets/r380/mobs/reborn-shieldmate-v4.webp
+ok	숨이 끊긴 전령의 그림자	dist05	4	40	boss	major	assets/r104/bosses/mb-dist05-p4.webp assets/r104/bosses/mb-dist05-p1.webp
+ok	백의 안정화 감독	ep1a08	4	40	boss	major	assets/r118/clean/assets/visual-test/hospital-boss-motion-r53.png
+ok	병원 심부의 집도의	ep1a08	4	41	boss	major	assets/r380/mobs/hospital-surgeon-v1.webp
+ok	약을 갈망하는 자	ep1a10	4	8		full/major	assets/r380/mobs/drug-craver-v1.webp
+ok	암시장의 수상한 자	ep1a10	4	8		full/major	assets/r380/mobs/blackmarket-suspect-v1.webp
+ok	치료거부의 가면	ep1a11	4	14		full/major	assets/r380/mobs/treatment-refusal-mask-v1.webp
+ok	이름 없던 공포	ep1b01	4	12		full/major	assets/r92/mobs/M018-move.png
+ok	검은 실의 외부 신호	ep1b01	4	18		move-only/major	assets/r109/mobs/M019-move.png
+ok	살아 움직이는 쓰레기들	ep1b02	4	13		full/major	assets/r380/mobs/living-trash-v1.webp
+ok	질투로 얼룩진 망령	ep1b03	4	15		full/major	assets/r380/mobs/jealousy-wraith-v1.webp
+ok	추녀의 한탄	ep1b03	4	14		full/major	assets/r380/mobs/mirror-lament-v1.webp
+ok	버려진 최고급 식재료	ep1b04	4	14		full/major	assets/r380/mobs/discarded-delicacy-v1.webp
+ok	살아 있는 거대한 위장	ep1b04	4	9		attack-only/major	assets/episode1b/generated-v394/glutton_beelzebub.webp assets/r198/mobs/M024-idle.png assets/rc137/mob-attacks-02.png
+ok	분노의 사냥개	ep1b07	4	6		full	assets/r380/mobs/wrath-hound-v1.webp
+ok	전극기계수호기사	ep1b08	4	8		full/major	assets/r380/mobs/electrode-machine-knight-v1.webp assets/r198/mobs/M033-move.png
+ok	설원 잠복 보행기	ep1b09	4	15		attack-only/major	assets/r380/mobs/snow-lurker-walker-v1.webp
+ok	기계화 첫 기억 청람잔영	u204	4	10		full/major	assets/r380/mobs/u204-mech-01-v1.webp
+ok	기계화 문턱 관측거미	u204	4	13		move-only/major	assets/r380/mobs/u204-mech-03-v1.webp
+ok	기계화 기억 공백 망령	u204	4	9		static/major	assets/r380/mobs/u204-mech-02-v1.webp
+ok	기계화 기억이주 연결자	u206	4	8		full/major	assets/r380/mobs/u206-mech-01-v1.webp
+ok	기계화 공명술사	u206	4	9		full/major	assets/r380/mobs/u206-mech-02-v1.webp
+ok	최종문 공명기사	u203,hando03,cult03	4	9		full/major	assets/r374/mobs/u203-e3-mech.webp
+ok	이동문 공허잔영	u203,hando02,cult03	4	10		full/major	assets/r374/mobs/u203-e2-mech.webp
+ok	EGO 탈취 연결자	hando03	4	8		full	assets/r92/mobs/M122-move.png
+ok	세뇌 신호 점액체	cult01	4	22		full/major	assets/r380/mobs/legacy-m130-slime-cult01-v2.webp assets/r92/mobs/M130-move.png
+ok	검은기둥 가고일 수호자	dist05	5	19		full/major	assets/episode1a/generated-v31342-rc39/gargoyle_mob_bloodied.webp assets/r109/mobs/M007-move.png
+ok	소환진 순례악마	dist05	5	10		full/major	assets/episode1a/horned_swamp_demon.webp assets/r109/mobs/M008-move.png
+ok	중독의 폐허핵	ep1a10	5	13		full/major	assets/episode1a/generated-v392/addiction_ruin_core.webp assets/r92/mobs/M015-move.png
+ok	나태에 잠식된 남자	ep1b02	5	40	boss	major	assets/r380/mobs/sloth-burden-man-v1.webp
+ok	긴 뱀의 그림자	ep1b03	5	11		full/major	assets/episode1b/generated-v394/envy_leviathan.webp assets/r92/mobs/M023-move.png
+ok	전쟁기억 정찰드론	u201	5	17		full/major	assets/u2/mdrone_idle.png assets/r92/mobs/M038-move.png
+ok	참호 공명기사	u201	5	9		attack-only/major	assets/r99/clean/assets/u2/generated-v350/u2_resonance_knight.webp assets/r116/mobs/M037-idle.png
+ok	감옥 공명기사	u202	5	11		attack-only/major	assets/r99/clean/assets/u2/generated-v350/u2_suppression_knight.webp assets/r116/mobs/M041-idle.png
+ok	복종 봉인구	u202	5	16		full/major	assets/r99/clean/assets/u2/generated-v350/u2_memory_orb.webp assets/r92/mobs/M039-move.png
+ok	기계화 제12단계 기억 검열기	u204	5	39	boss	major	assets/r380/mobs/u204-mech-04-v1.webp
+ok	중립초원 슬라임	last304	5	19		/full/major	assets/last3/Monster_Slime.png assets/r92/mobs/M045-move.png
+ok	포구 검은 안개	last302	5	16		full/major	assets/r92/mobs/M051-move.png assets/episode1b/generated-v394/bulmyeongwi_b.webp
+ok	상위수문장	kair04,kair05,kair06,kair07,kair08,kair09,kair10,kair02	5	7		static/attack-only/move-only/full	assets/generated-v3125/kair-guardians/guardian_49.webp assets/generated-v3125/kair-guardians/guardian_50.webp assets/generated-v3125/kair-guardians/guardian_51.
+ok	기계화 감옥 공명기사	kair07	5	11		attack-only/static	assets/r99/clean/assets/u2/generated-v350/u2_suppression_knight.webp assets/r116/mobs/M041-idle.png
+ok	시간핵의 명령 파동	kair03	5	8		attack-only	assets/kair/enemies/resonance-slave.png assets/kair/enemies/connector.png assets/kair/enemies/time-collector.png assets/r116/mobs/M054-idle.png
+ok	은폐기록 연결체	murder04	5	10		idle-only/major	assets/episode1b/generated-v394/blue_executor.webp assets/r116/mobs/M125-idle.png
+ok	SUPER EGO 판결인장	cult06	5	15		move-only/major	assets/cult-v3123/superego_cyborg_cult_leader.webp assets/r92/mobs/M135-move.png
+ok	소환좌 칩 수호체	cult04	5	10		move-only	assets/cult-v3123/pride_cyborg_cult_leader.webp assets/r109/mobs/M137-move.png
+ok	거미줄에 묶인 수호병	dist01	6	10		full/major	assets/r380/mobs/web-bound-guardian-v4.webp
+ok	부정의 잔영	ep1a10	6	18		full/major	assets/episode1a/generated-v392/denial_specter.webp assets/r92/mobs/M016-move.png assets/rc137/mob-attacks-01.png
+ok	공중을 가르는 립스틱 탄환	ep1b05	6	20		move-only/major	assets/r92/mobs/M027-move.png
+ok	흑마법사의 저주창	ep1b08	6	11		attack-only/major	assets/episode1b/generated-v3102/ep1b08_pride_zombie.webp assets/r116/mobs/M032-idle.png assets/rc137/mob-attacks-02.png
+ok	기계화 망각거미	u202	6	5		static	assets/r380/mobs/mech-oblivion-spider.webp
+ok	최초명령 훈련파동	kair01	6	9		full/major	assets/r275/mobs/clockwork-sentinel.webp
+ok	시간핵의 명령 잔류	kair03	6	4		full	assets/r375/mobs/kair03-residue.webp
+ok	흑장미 귀막은 신도	cult01	6	11		full/major	assets/r275/mobs/censer-priest.webp
+ok	과열 시냅스 점액체	cult02	6	18		move-only/major	assets/r92/mobs/M131-move.png assets/cult-v3123/angry_green_slime.webp assets/rc137/mob-attacks-09.png
+ok	악마화 나무의 침식 근위	dist00	7	15		full/major	assets/r208/mobs/root-bound-ghoul.webp assets/r275/mobs/root-bound-ghoul.webp
+ok	피로 꿰맨 전령	dist04	7	7		full/major	assets/r208/mobs/twin-head-corpse.webp assets/r275/mobs/twin-head-corpse.webp
+ok	주사실 감시환각	ep1a09	7	13		full/major	assets/r223/mobs/thread-nurse.webp assets/r275/mobs/thread-nurse.webp
+ok	얼굴 없는 남자의 박수	ep1b05	7	8		full/major	assets/r223/mobs/curtain-mannequin.webp assets/r275/mobs/curtain-mannequin.webp
+ok	컨트롤러 · 기억의 문	u203	7	40	boss	major	cv256x256 assets/r374/mobs/u203-boss-mech.webp assets/generated-v31224/actors-normalized/c5859bd35492_controller_idle.webp
+ok	성벽 침식 봉인병	hando01	7	5		full	assets/r223/mobs/ash-mason.webp assets/r275/mobs/ash-mason.webp
+ok	빗속 횡단보도의 기억 잔향	murder01	7	8		full/major	assets/r223/mobs/signal-golem.webp assets/r275/mobs/signal-golem.webp
+ok	기계재판 연결자	cult06	7	8		full/major	assets/r223/mobs/superego-inquisitor.webp assets/r275/mobs/superego-inquisitor.webp
+ok	뿌리에 묶인 근위의 기억	dist00	8	4		full	assets/r290/mobs/m001.webp
+ok	진흙등 거미	dist01	8	6		full	assets/r290/mobs/m003.webp
+ok	기억 운반거미	dist01,ep1a09b	8	8		full/major	assets/r290/mobs/m005.webp
+ok	보라검 추격천사	dist03,ep1a09b	8	8		full/major	assets/r290/mobs/m004.webp
+ok	이름 잃은 전우	dist04	8	7		full/major	assets/r410/mobs/m007.webp
+ok	검은기둥 주문사	dist05,dist06	8	8		full/major	assets/r410/mobs/m009.webp
+ok	지옥문 파수악마	dist06	8	8		full/major	assets/r410/mobs/m011.webp
+ok	소환진 타락천사	dist06	8	7		full/major	assets/r410/mobs/m013.webp
+ok	안정화 집행체	ep1a08	8	8		full/major	assets/r410/mobs/m015.webp
+ok	격리실 감염 의료인	ep1a08	8	8		full/major	assets/r290/mobs/m014.webp
+ok	소독등 타락천사	ep1a08	8	8		full	assets/r410/mobs/m016.webp
+ok	유리 망령	ep1a09,ep1a10,ep1a11,ep1b01,ep1b02,ep1b03,ep1b04,ep1b05,ep1b06,ep1b08,last302,murder01,murder02,murder04,murder03	8	9		full	assets/r380/mobs/glass-wraith-v1.webp assets/r410/mobs/m018.webp
+ok	거짓천국 근위천사	ep1a11	8	11		full/major	assets/r380/mobs/false-heaven-guard-v1.webp
+ok	끓어오르는 검은 소화액	ep1b04	8	7		full/major	assets/r290/mobs/m025.webp
+ok	모든 면이 뒷면인 동전	ep1b06	8	4		full/major	assets/r290/mobs/m026.webp
+ok	고슴도치 가시 사탕	ep1b06b	8	8		full/major	assets/r410/mobs/m027.webp
+ok	낡은 장난감 요요	ep1b06b	8	8		full/major	assets/r410/mobs/m029.webp
+ok	눈보라 속 여우 악마	ep1b06b	8	8		full/major	assets/r410/mobs/m028.webp
+ok	개와 늑대의 시간	ep1b07	8	8		full/major	assets/r290/mobs/m030.webp
+ok	육망성의 흑마술 실험체	ep1b08	8	12		full/major	assets/r380/mobs/hexagram-experiment-m031-v1.webp
+ok	걸어다니는 소형 로봇	ep1b09	8	11		full/major	assets/r380/mobs/small-walking-robot-v1.webp
+ok	태엽 수집자	ep1b09,u201,u202,u204,u205,u206,u203,kair08,kair02,cult06,cult04	8	9		full	assets/r410/mobs/m033.webp
+ok	전쟁기계사냥개	u201	8	12		full/major	assets/r380/mobs/war-machine-hound-v1.webp
+ok	학대기록 공허체	u205	8	17		full/major	assets/r374/mobs/u205-e1-new.webp
+ok	역전기록 수집가	u205	8	6		full/major	assets/r374/mobs/u205-e3-new.webp
+ok	관리자 추적견	u205	8	8		full/major	assets/r374/mobs/u205-e2-new.webp
+ok	입양기억 청람잔영	u206	8	7		full/major	assets/r410/mobs/m039.webp
+ok	이동문 청람잔영	u203,hando01,cult03	8	9		full/major	assets/r410/mobs/m040.webp
+ok	장미이슬 슬라임	last304	8	8		full/major	assets/r410/mobs/m043.webp
+ok	피리 고블린	last305	8	8		full/major	assets/r410/mobs/m044.webp
+ok	귀비탕 공명 안개핵	last302	8	8		full/major	assets/r410/mobs/m045.webp
+ok	불면귀의 안개 잔영	last303	8	6		full	assets/r410/mobs/m047.webp
+ok	주민에게서 떨어진 검은 안개	last303	8	8		full/major	assets/r410/mobs/m046.webp
+ok	아르벨리아를 묶은 변조 명령	kair02	8	8	boss	major	assets/r410/mobs/m048.webp
+ok	새빛호텔 화재 기록의 잔향	murder02	8	7		full	assets/r290/mobs/m051.webp
+ok	지워진 CCTV 기록의 잔향	murder02	8	8		full/major	assets/r410/mobs/m050.webp
+ok	공실 표기 잔재	murder04	8	8		full/major	assets/r290/mobs/m052.webp
+ok	제출되지 못한 문장	murder04	8	7		full/major	assets/r290/mobs/m053.webp
+ok	옥상으로 돌아온 기억 잔향	murder03	8	8		full/major	assets/r410/mobs/m054.webp
+ok	반복된 추락의 인과 잔향	murder03	8	4		full	assets/r290/mobs/m055.webp
+ok	흑장미 눈가린 신도	cult01	8	9		full/major	assets/r363/mobs/L128.webp
+ok	ID 배양 점액체	cult05	8	8		full/major	assets/r380/mobs/legacy-m130-slime-cult05-v2.webp assets/r410/mobs/m056.webp
+ok	본능 추출 결정	cult05	8	8		full/major	assets/r290/mobs/m057.webp
+ok	죄책감 압축결정	cult06	8	8		full/major	assets/r290/mobs/m058.webp
+ok	ID 잔류 점액체	cult03	8	8		full/major	assets/r410/mobs/m060.webp
+ok	SUPER EGO 절개결정	cult03	8	7		full/major	assets/r290/mobs/m059.webp
+ok	아마겟돈 계산결정	cult04	8	8		full	assets/r290/mobs/m061.webp
+ok	교만의 사이보그 교주	cult04	8	6	boss	major	assets/r410/mobs/m062.webp
+ok	피냄새 추적자	dist03,ep1a09b	9	15		full/major	assets/r208/mobs/ember-hound.webp assets/r275/mobs/ember-hound.webp assets/dist/ghoul.png assets/r92/mobs/M006-move.png
+ok	갈망의 약병핵	ep1a09	9	10		full/major	assets/r223/mobs/vial-collector.webp assets/r275/mobs/vial-collector.webp
+ok	오만의 흰 가면	ep1a09	9	8		full	assets/r92/mobs/M012-move.png assets/generated-story10-cycle-20261005/ep1a10/a10-o1-white-mask-pursuer-atlas.png
+ok	쓰러진 수호병	ep1a09b	9	15		full/major	assets/dist/skeleton.png assets/r92/mobs/M001-move.png
+ok	제14단계 역전 관리자	u205	9	39	boss	major	assets/r374/mobs/u205-mid-new.webp
+ok	시간수문장	kair04,kair05,kair06,kair07,kair08,kair09,kair10,kair02	14	16		attack-only/static/major/full/move-only	assets/generated-v3125/kair-guardians/guardian_04.webp assets/generated-v3125/kair-guardians/guardian_03.webp assets/r116/mobs/M057-idle.png assets/generated-v3
+undrawn	검은 고리의 대련생	S:sz115-S03-2	0	0		full	
+NOWALK	얼굴 없는 학생	S:sz162-S-02-B	1	8		static	assets/r105/drive/mob-student.webp
+NOWALK	얼굴 없는 학생 · 짙은 형상	S:sz162-S-02-B	1	7		static	assets/r105/drive/mob-student.webp
+NOWALK	중장 광선포병	S:sz115-S06-18	1	7		full	assets/r380/mobs/dys-siege-gunner-v2.webp
+NOWALK	세뇌당한 기억의 조각	S:sz115-RF-2	1	3		static	assets/r161/sculpture/memory-fragment.webp
+ok	발소리 추적 잔영	S:sz115-P-2	4	8		full	assets/r380/mobs/samong-p-footstep-remnant-v1.webp
+ok	검은 뿌리 포획체	S:sz115-P-2	4	4		full	assets/r380/mobs/samong-p-root-grasper-v1.webp
+ok	기운 누더기 골렘	S:sz115-S01-2	4	7		full	assets/r380/mobs/r200-stitched-golem-v2.webp
+ok	화형식당 앞치마 식객	S:sz115-S04-3,S:sz115-S04-10	4	6		full	assets/r380/mobs/r200-diner-ghoul-v2.webp
+ok	불면병동 무안 환자	S:sz115-S04-10	4	7		full	assets/r380/mobs/r200-insomnia-patient-v2.webp
+ok	금박 박제 망자	S:sz115-S04-10	4	4		full	assets/r380/mobs/r200-gilded-hollow-v2.webp
+ok	변이된 사냥개 괴수	S:sz115-S06-8,S:sz115-S06-18	4	8		full	assets/r375/mobs/plague-hound.webp
+ok	적 지휘 기체	S:sz115-S06-18	4	34	boss	major	assets/r380/mobs/s06-commander-v1.webp
+ok	녹슨 개찰구 수집체	S:sz115-RA-4	4	8		full	assets/r380/mobs/reverse-ra-new-v1.webp
+ok	식탁의 마네킹 잔영	S:sz115-S01-2	5	7		full	assets/r200/shades/mannequin.webp
+ok	흑백 잔상의 투사	S:sz115-S03-2	5	4		full	assets/r200/shades/mono-fighter.webp
+ok	박수치는 객석의 잔영	S:sz115-S04-10	5	7		full	assets/r200/shades/applause-shade.webp
+ok	물감 철로의 유령 승객	S:sz115-S05-2	5	8		full	assets/r200/shades/tram-passenger.webp
+ok	폐선로 태엽 군단병	S:sz115-S06-1,S:sz115-S06-8,S:sz115-S06-18	5	8		full	assets/r200/shades/clockwork-legionary.webp
+ok	두족류 생체기계 침공병	S:sz115-S06-1,S:sz115-S06-8,S:sz115-S06-18	5	8		full	assets/r200/shades/cephalopod-invader.webp
+ok	카이로 회랑의 시계침 수문장 잔영	S:sz115-RB-2	6	4		full	assets/r200/shades/clockhand-warden.webp
+ok	승전식 제복 마네킹 잔영	S:sz115-RE-1	6	8		full	assets/r200/shades/parade-mannequin.webp
+ok	낚싯바늘 원고지 망령	S:sz115-RF-2	6	8		full	assets/r200/shades/fishhook-manuscript.webp
+ok	뿌리에서 쏟아진 잔영	S:sz115-P-2	8	6		full	assets/r161/puppet/puppet-ego-walk-right-8.webp
+ok	코어 아래의 검은 뿌리	S:sz115-P-2	8	4	boss	major	assets/r161/puppet/puppet-ego-walk-right-8.webp
+ok	다시 일으켜 세워진 도전자	S:sz115-S03-2	8	5		full	assets/r161/puppet/puppet-ego-walk-right-8.webp
+ok	호외 신문의 밀고자 잔영	S:sz115-S05-2	8	8		full	assets/r290/mobs/m074.webp
+ok	붉은 교정 표시	S:sz115-RA-4	8	8		full	assets/r410/mobs/m084.webp
+ok	금박 유리관 수확기	S:sz115-RC-1	8	8		full	assets/r380/mobs/reverse-rc-new-v1-right.webp assets/r380/mobs/reverse-rc-new-v1-left.webp
+ok	재주문 도장체	S:sz115-RC-1	8	7		full	assets/r380/mobs/reverse-rc-stamp-v1-right.webp assets/r380/mobs/reverse-rc-stamp-v1-left.webp
+ok	관람석의 시선	S:sz115-RC-1	8	5		full	assets/r161/puppet/puppet-ego-walk-right-8.webp
+ok	결말 접합체	S:sz115-RD-3	8	5		full	assets/r380/mobs/reverse-rd-new-v1-left.webp assets/r380/mobs/reverse-rd-new-v1-right.webp
+ok	서로의 결말을 먹는 도시	S:sz115-RD-3	8	5		full	assets/r410/mobs/m091.webp
+ok	서로의 결말을 먹는 도시 · 짙은 형상	S:sz115-RD-3	8	6		full	assets/r410/mobs/m091.webp
+ok	일곱 나팔의 빈 소매 잔영	S:sz115-RG-1	8	6		full	assets/r290/mobs/m095.webp
