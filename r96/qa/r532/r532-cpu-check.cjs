@@ -85,6 +85,20 @@ ok('low-fx: ≤6 pieces',paperFlags(gl.calls).clipped<=6&&paperFlags(gl.calls).c
 // 끄기: R462 전체 끄기 그대로
 const go=env({prefs:{on:false}});vm.runInContext('drawEnemy',go)({id:'m1',name:'망각의 거미',hp:3,drawn:'s.webp'});const fo={type:'enemyBurnDeath',sourceId:'m1',x:1,y:1,age:.1,life:.72,bodyPath:'p.png'};go.calls.length=0;vm.runInContext('drawBurnDeath3',go)(fo);
 ok('off switch keeps engine death',go.calls.length===1&&go.calls[0].k==='base');
+
+// ---- ⑤ 설정으로 남긴 '눕히기' 죽음(사용자 2026-11-10 07:26Z "그림눕히는 효과는 연령나중에 통과위해서 설정으로 남겨둬") ----
+{const gk=env({prefs:{style:'lay'}}),Mk=gk.__STORYWORLD_MOB_DEATH_R462__;
+ ok('style pref exposed (default gore, lay kept)',M.inspect().prefs.style==='gore'&&Mk.inspect().prefs.style==='lay');
+ vm.runInContext('drawEnemy',gk)({id:'m1',name:'망각의 거미 1',hp:10,drawn:'assets/r380/mobs/own-spider.webp',flipDraw:true});
+ const runK=(fx,ages)=>ages.map(a=>{fx.age=a;gk.calls.length=0;vm.runInContext('drawBurnDeath3',gk)(fx);return{a,calls:gk.calls.slice(),f:paperFlags(gk.calls)};});
+ const L=runK({type:'enemyBurnDeath',sourceId:'m1',x:3,y:4,age:0,life:.72},[.1,.2]);
+ ok('lay style: body tilts (opt.angle) and is squashed, never torn into clipped pieces',L.some(r=>r.f.angle>0)&&L.some(r=>r.f.squash>0)&&L.every(r=>r.f.clipped===0),L.map(r=>r.f));
+ ok('lay style: own art only',L.every(r=>!r.calls.some(c=>(c.k==='sprite'||c.k==='frame')&&!/own-|status/.test(c.p))));
+ vm.runInContext('time=5',gk);gk.calls.length=0;vm.runInContext('drawObjective',gk)();const cc=gk.calls.filter(own);
+ ok('lay style corpse: one whole lying body (not pieces), same art/flip/height',cc.length===1&&cc[0].opt.flip===true&&Math.abs(cc[0].h-60)<1e-6&&Math.abs(+cc[0].opt.angle||0)>.1);
+ Mk.set({style:'gore'});ok('switch back to gore at runtime',Mk.inspect().prefs.style==='gore');}
+// 설정 창 고르기 칸
+{const src2=C(F);ok('settings panel select for death style (gore / lay)',/r532DeathStyle/.test(src2)&&/showSettings/.test(src2)&&/눕/.test(src2));}
 // ---- ④ 피격 ----
 const strip=s=>s.replace(/\/\*[\s\S]*?\*\//g,'').replace(/(^|[^:'"])\/\/.*$/gm,'$1');
 const P=strip(C('polish-r101.js'));

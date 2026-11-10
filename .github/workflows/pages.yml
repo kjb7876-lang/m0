@@ -27,7 +27,7 @@ jobs:
           python-version: '3.11'
       - name: Restore hash-verified runtime and exact inherited QA inputs
         run: |
-          python -m pip install Pillow==11.3.0
+          python -m pip install Pillow==11.3.0 pyoxipng==9.1.1
           python scripts/build-r96.py
           python scripts/prepare-r96-ci.py
           python r96/scripts/prepare-handoff-baselines.py
@@ -410,6 +410,10 @@ jobs:
         run: node r96/qa/r380/r380-cpu-check.cjs
       - name: R531 purple-sword angel summons no oblivion spider CPU check
         run: node r96/qa/r531/r531-cpu-check.cjs
+      - name: R541 soft synthesized pickup, mob death and door sounds CPU check
+        run: node r96/qa/r541/r541-cpu-check.cjs
+      - name: R542 user-provided bow, heal, crate and boss roar sounds CPU check
+        run: node r96/qa/r542/r542-cpu-check.cjs
       - name: R385 mob moves (review list v18 move/rename) CPU check
         run: node r96/qa/r385/r385-cpu-check.cjs
       - name: R390 cinema full narration + midboss hold + enemies keep chasing CPU check
@@ -430,6 +434,8 @@ jobs:
         run: node r96/qa/r412/r412-cpu-check.cjs
       - name: R425 combat flow (mob size bands, hit punch, spear tips, spider X moves, upright crosses, gunner 120deg, slayer poses + blood cross R / tornado Q) CPU check
         run: node r96/qa/r425/r425-cpu-check.cjs
+      - name: R585 slayer skill FX frame sheets (CX-0055 SL01-SL10, upright crosses, lag cap) CPU check
+        run: node r96/qa/r585/r585-cpu-check.cjs
       - name: R448 depth overlap (props in front cover the hero, hero silhouette shows through) CPU check
         run: node r96/qa/r448/r448-cpu-check.cjs
       - name: R461 cinema run (separate title entry, saved run mode, narrator hero lock) CPU check
@@ -464,8 +470,16 @@ jobs:
         run: node r96/qa/r452/ground-fringe-r452-cpu-check.cjs
       - name: R453 actor tone (hero/mob brightness + saturation from the floor light, screen top-left rim, no asset swap, restored after draw) CPU check
         run: node r96/qa/r453/actor-tone-r453-cpu-check.cjs
+      - name: R571 samong surge (during 사몽 only - skill cooldown x0.23, proc chance x1.77 capped 100%, skill range/area x1.77, restored after; hero main-colour flame aura, code only) CPU check
+        run: node r96/qa/r571/r571-cpu-check.cjs
+      - name: R572 samong hero themes (during 사몽 only - per-hero motif around the body + skill-hit marks, upright cross only, capped marks, code only) CPU check
+        run: node r96/qa/r572/r572-cpu-check.cjs
       - name: R521 hospital rooms (ep1a08 wards/consult/prep/lobby furnished by room function along the back walls, presentation only, drive hospital props) CPU check
         run: node r96/qa/r521/r521-cpu-check.cjs
+      - name: R522 hospital thin walls (the two free-standing maze baffles of ep1a08 moved to touch a thick wall, hospital only, routes stay connected) CPU check
+        run: node r96/qa/r522/r522-cpu-check.cjs
+      - name: R523 story rooms (clinic ep1a09 + sloth home ep1b02 furnished by room name along the real back walls, presentation only, angle-matched art only) CPU check
+        run: node r96/qa/r523/r523-cpu-check.cjs
       - name: R590 hwando sword chain (A draw-cut, Q wind blades, E delayed flash, R seven-strike finale; no new keys, walls/map edge, caps) CPU check
         run: node r96/qa/r590/hwando-chain-cpu-check.cjs
       - name: R492 lag (R409 outline bake by one distance transform instead of dozens of drawImage dilations; same rim rule, size, colours) CPU check
@@ -640,6 +654,16 @@ jobs:
           node scripts/r96.browser.mjs
       - name: Revalidate every release byte after all tests
         run: python scripts/verify-r96-release.py
+      - name: R580 Pages bundle under 1GB (archival narration excluded, lossless PNG, pixel-identical, public verifier)
+        run: python r96/qa/r580/pages-size-check.py
+      - name: R580 public verifier retries transient read timeouts/disconnects but still fails wrong, missing or never-arriving bytes
+        run: |
+          python scripts/pages-pack.py --site r96/hospital-three-pc/site --out "$RUNNER_TEMP/r580-pages"
+          python r96/qa/r580/public-retry-check.py "$RUNNER_TEMP/r580-pages"
+          rm -rf "$RUNNER_TEMP/r580-pages"
+      - name: R580 pack the Pages bundle from the verified site
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: python scripts/pages-pack.py --site r96/hospital-three-pc/site --out r96/hospital-three-pc/pages
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -656,7 +680,7 @@ jobs:
       - uses: actions/upload-pages-artifact@v4
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         with:
-          path: r96/hospital-three-pc/site
+          path: r96/hospital-three-pc/pages
           retention-days: 1
   deploy:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
