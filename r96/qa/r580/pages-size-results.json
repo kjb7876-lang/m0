@@ -65,7 +65,8 @@
     "assets/u2/generated-v350/u2_reactor_collector.webp",
     "assets/u2/generated-v350/u2_resonance_knight.webp",
     "assets/u2/generated-v350/u2_suppression_knight.webp",
-    "assets/u2/generated-v350/u2_void_wraith.webp"
+    "assets/u2/generated-v350/u2_void_wraith.webp",
+    "assets/r381/voice/"
    ]
   },
   {
@@ -124,7 +125,8 @@
     "assets/u2/generated-v350/u2_reactor_collector.webp",
     "assets/u2/generated-v350/u2_resonance_knight.webp",
     "assets/u2/generated-v350/u2_suppression_knight.webp",
-    "assets/u2/generated-v350/u2_void_wraith.webp"
+    "assets/u2/generated-v350/u2_void_wraith.webp",
+    "assets/r381/voice/"
    ]
   },
   {
@@ -183,7 +185,8 @@
     "assets/u2/generated-v350/u2_reactor_collector.webp",
     "assets/u2/generated-v350/u2_resonance_knight.webp",
     "assets/u2/generated-v350/u2_suppression_knight.webp",
-    "assets/u2/generated-v350/u2_void_wraith.webp"
+    "assets/u2/generated-v350/u2_void_wraith.webp",
+    "assets/r381/voice/"
    ]
   },
   {
@@ -242,7 +245,8 @@
     "assets/u2/generated-v350/u2_reactor_collector.webp",
     "assets/u2/generated-v350/u2_resonance_knight.webp",
     "assets/u2/generated-v350/u2_suppression_knight.webp",
-    "assets/u2/generated-v350/u2_void_wraith.webp"
+    "assets/u2/generated-v350/u2_void_wraith.webp",
+    "assets/r381/voice/"
    ]
   },
   {
@@ -287,22 +291,22 @@
   {
    "name": "pages-pack.py 성공",
    "passed": true,
-   "detail": "{\"totalBytes\": 1075018984, \"budgetBytes\": 1100000000, \"files\": 8480, \"excludedFiles\": 315, \"excludedBytes\": 113772179, \"optimizedPng\": 1032, \"optimizedSavedBytes\": 34801967}\n"
+   "detail": "{\"totalBytes\": 895766714, \"budgetBytes\": 1100000000, \"files\": 5267, \"excludedFiles\": 3612, \"excludedBytes\": 298093331, \"optimizedPng\": 1032, \"optimizedSavedBytes\": 34801967}\n"
   },
   {
    "name": "배포본 예산 1,100,000,000 바이트 미만",
    "passed": true,
-   "detail": "1,075,018,984 bytes (8480 files)"
+   "detail": "895,766,714 bytes (5267 files)"
   },
   {
    "name": "pages-deploy.json 총량이 실제와 같음",
    "passed": true,
-   "detail": 1075018984
+   "detail": 895766714
   },
   {
    "name": "원본 사이트보다 90MB 넘게 줄었음",
    "passed": true,
-   "detail": "146.7 MB"
+   "detail": "330.9 MB"
   },
   {
    "name": "빼지 않은 manifest 파일은 모두 배포본에 있음",
@@ -322,7 +326,7 @@
   {
    "name": "pages-deploy.json 의 빠진 목록 = 접두어에 든 manifest 파일",
    "passed": true,
-   "detail": 315
+   "detail": 3612
   },
   {
    "name": "원본 manifest 해시 기록",
@@ -345,9 +349,9 @@
    "detail": []
   },
   {
-   "name": "보호 경로(R381 음성)를 빼려 하면 묶기 거부",
+   "name": "보호 경로(R380 검수 몹)를 빼려 하면 묶기 거부",
    "passed": true,
-   "detail": " assets/r381/voice/00091c5c62b39736.mp3, assets/r381/voice/000aed762d4e5e9a.mp3, assets/r381/voice/000b6b8671b15fbd.mp3, assets/r381/voice/001c9b6976ec3507.mp3, assets/r381/voice/002bd5340e594b5e.mp3\n"
+   "detail": "moth-v2.webp, assets/r380/mobs/blackmarket-suspect-v1.webp, assets/r380/mobs/cult-ego-binder-walk-d1.webp, assets/r380/mobs/cult-mech-legs-walk-d1.webp, assets/r380/mobs/cult-memory-orb-float-d1.webp\n"
   },
   {
    "name": "index.html 을 빼려 하면 묶기 거부",
@@ -357,12 +361,12 @@
   {
    "name": "예산을 넘으면 묶기 실패(한도 바로 아래 예산)",
    "passed": true,
-   "detail": "totalBytes\": 1109575441, \"budgetBytes\": 1075018983, \"files\": 8480, \"excludedFiles\": 315, \"excludedBytes\": 113772179, \"optimizedPng\": 0, \"optimizedSavedBytes\": 0}\nover budget: 1109575441 >= 1075018983\n"
+   "detail": "{\"totalBytes\": 930323171, \"budgetBytes\": 895766713, \"files\": 5267, \"excludedFiles\": 3612, \"excludedBytes\": 298093331, \"optimizedPng\": 0, \"optimizedSavedBytes\": 0}\nover budget: 930323171 >= 895766713\n"
   },
   {
    "name": "PNG 압축을 끄면 남은 파일 바이트가 모두 원본과 같음",
    "passed": true,
-   "detail": "{\"totalBytes\": 1109575441, \"budgetBytes\": 2000000000, \"files\": 8480, \"excludedFiles\": 315, \"excludedBytes\": 113772179, \"optimizedPng\": 0, \"optimizedSavedBytes\": 0}\n"
+   "detail": "{\"totalBytes\": 930323171, \"budgetBytes\": 2000000000, \"files\": 5267, \"excludedFiles\": 3612, \"excludedBytes\": 298093331, \"optimizedPng\": 0, \"optimizedSavedBytes\": 0}\n"
   },
   {
    "name": "verify-r96-public.py 가 배포본에서 통과",

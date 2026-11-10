@@ -8010,6 +8010,7 @@
     "assets/r563/dots/michaela-sigil-front.webp",
     "assets/r564/dots/seoha-sigil-back.webp",
     "assets/r564/dots/seoha-sigil-front.webp",
+    "asset-cdn-r615.js",
     "assets/r380/mobs/cult-ego-binder-walk-d1.webp",
     "assets/r380/mobs/cult-mech-legs-walk-d1.webp",
     "assets/r380/mobs/cult-memory-orb-float-d1.webp",
@@ -8032,8 +8033,6 @@
     "assets/r380/mobs/swamp-root-stalker-darkgreen-v2-walk-d1.webp",
     "assets/r380/mobs/u2-false-mercy-collector-walk-d1.webp",
     "survival-r600.js",
-    "skill-growth-r663.js",
-    "asset-cdn-r615.js",
     "assets/r546/sfx/atk-gunner-1.ogg",
     "assets/r546/sfx/atk-gunner-2.ogg",
     "assets/r546/sfx/atk-hwando-1.ogg",
@@ -8088,7 +8087,11 @@
     "assets/r600/dots/sv-core-03.webp",
     "assets/r600/dots/sv-core-04.webp",
     "assets/r600/dots/sv-gem-01.webp",
-    "assets/r600/dots/sv-gem-tail.webp"
+    "assets/r600/dots/sv-gem-tail.webp",
+    "boss-motion-r620.js",
+    "assets/r620/bosses/b03-hit4.webp",
+    "assets/r620/bosses/b03-idle6.webp",
+    "skill-growth-r663.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9163,5 +9166,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "88b1d6cc06432f23d823093c2d19a8c453413a24af9c5efb8c1f5c6066ada9ca"
+  "runtimeManifestSHA256": "3c3a21e123cd9d2ad1e0e161294776963a32b98becf2fd420d15086852c74267"
 }

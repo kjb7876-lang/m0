@@ -27,6 +27,7 @@ API 토큰·계정 ID 는 채팅에 붙여 넣지 말고 GitHub 시크릿에만 
    - `CLOUDFLARE_ACCOUNT_ID` = 2번 계정 ID
 5. 넣었다고 알려 주면 main 배포를 다시 돌려 첫 업로드와 공개 확인을 한다. 그 뒤로는 main 병합 때마다 바뀐 파일만 올라간다.
 
-## 아직 하지 않은 것
-- 업로드가 공개 확인을 통과하기 전에는 GitHub Pages 배포본에서 음성을 빼지 않는다(되돌림 경로가 살아 있어야 함). 확인 뒤 `r96/pages-exclude.json` 에 `assets/r381/voice/` 를 넣으면 Pages 에서 약 184MB 가 빠지고, 사몽역행 음성은 처음부터 Cloudflare 에만 둔다.
-- `storyworld-m0-assets.pages.dev` 이름이 이미 쓰이고 있으면 Cloudflare 가 다른 주소를 준다. 그때는 `cdn-verify.py` 가 실패로 알려 주고, 게임은 GitHub Pages 를 계속 쓴다. 받은 주소로 `asset-cdn.json`·`asset-cdn-r615.js` 의 기준 주소를 바꾼다.
+## 현재 상태 (2026-11-10)
+- #404 병합 뒤 main 배포에서 첫 업로드(3,298파일)와 공개 확인(`R615_CDN_PUBLIC_OK`)을 마쳤다. 공개 게임에서 음성을 `storyworld-m0-assets.pages.dev` 에서 받는 것도 헤드리스로 확인했다.
+- R615b(사용자 결정 '빼기'): `r96/pages-exclude.json` 에 `assets/r381/voice/` 를 넣어 GitHub Pages 배포본에서 뺐다(약 1,080MB → 896MB). 저장소·site 에는 그대로 있다. Cloudflare 가 멈추면 음성만 브라우저 음성으로 바뀐다. 되돌리려면 그 항목을 지우고 `protected` 에 `assets/r381/` 을 다시 넣는다.
+- 사몽역행 같은 새 음성은 `assets/r381/voice/` 에 넣으면 main 배포 때 Cloudflare 로 올라간다(바뀐 파일만).
