@@ -569,6 +569,8 @@ jobs:
         run: node r96/qa/r450/battle-beats-cpu-check.cjs
       - name: R462 mobs without a death motion burn away or burst in blood and leave a corpse CPU check
         run: node r96/qa/r462/mob-death-cpu-check.cjs
+      - name: R532 mob death tears/bursts into own-art pieces, corpse keeps body art, hit flinch without paper squash CPU check
+        run: node r96/qa/r532/r532-cpu-check.cjs
       - name: R481 outdoor groves (understory around trees, small woods on bare back rims) CPU check
         run: node r96/qa/r481/grove-r481-cpu-check.cjs
       - name: R482 worn trails from entry to doors/altar on outdoor floors CPU check
