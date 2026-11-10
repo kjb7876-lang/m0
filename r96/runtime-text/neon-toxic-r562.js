@@ -11,7 +11,7 @@
  */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_NEON_TOXIC_R562__)return;
-const REV='R562-toxic-3',KEY='storyworld.r562.toxic',HERO='neon';
+const REV='R562-toxic-4',KEY='storyworld.r562.toxic',HERO='neon';
 const ARC_AT=.3,ARC_R=3.5,ARC_K=.25,ARC_MAX=4,POISON_T=2,POISON_GAP=.5,POISON_K=.05,POOL_AT=.55,POOL_R=1.7,POOL_T=3,POOL_GAP=.5,POOL_K=.03,
  RPOOL_AT=.7,RPOOL_R=2.2,POOL_MAX=3,POISON_MAX=24,ARC_DRAW_MAX=6,ARC_LIFE=.32,ARC_VIS=.6;
 const stats={qCasts:0,arcs:0,arcHits:0,poisoned:0,poisonTicks:0,pools:0,poolTicks:0,rPools:0,draws:0,errors:0,lastError:null};
@@ -33,11 +33,13 @@ function src(kind){return {kind,friendly:true,owner:'hero',sourceHero:HERO,r562:
 function deal(e,v,kind){if(!alive(e)||!canHit(e)||!(v>0))return false;try{return !!hitEnemy(e,v,src(kind));}catch(err){fail(err);return false;}}
 function addArc(a,b){strikes.push({x:b.x,y:b.y,t0:T()});if(strikes.length>4)strikes.shift();arcs.push({x0:a.x,y0:a.y,x1:b.x,y1:b.y,t0:T(),seed:(stats.arcs*131)%997});if(arcs.length>ARC_DRAW_MAX)arcs.shift();stats.arcs++;}
 function addPoison(e,power){if(!alive(e))return;if(!poison.has(e)&&poison.size>=POISON_MAX)return;if(!poison.has(e))stats.poisoned++;const t=T();poison.set(e,{until:t+POISON_T+1e-6,next:t+POISON_GAP,power});}
-function addPool(x,y,r,power,big){if(pools.length>=POOL_MAX)pools.shift();const t=T();pools.push({x,y,r,power,t0:t,next:t+POOL_GAP,big:!!big});stats.pools++;if(big)stats.rPools++;}
+// 사몽 발현(R571) 중 반경 배율(최대 2배): 장판은 생길 때 한 번 정해 끝까지 같은 크기.
+function rk(){try{const g=window.__STORYWORLD_SAMONG_SURGE_R571__;const r=g?.range?Number(g.range(1)):1;return Number.isFinite(r)&&r>0?Math.min(2,Math.max(1,r)):1;}catch(_){return 1;}}
+function addPool(x,y,r,power,big){r*=rk();if(pools.length>=POOL_MAX)pools.shift();const t=T();pools.push({x,y,r,power,t0:t,next:t+POOL_GAP,big:!!big});stats.pools++;if(big)stats.rPools++;}
 // Q 이어지기: 원래 기술이 실제로 맞힌 적(동기 hitEnemy)만 모은다.
 function onQ(targets){const power=qPower(),t=T();stats.qCasts++;lastRoom=curRoom();
  for(const e of targets)addPoison(e,power);
- jobs.push({at:t+ARC_AT,run:()=>{const hit=new Set(targets);let n=0;for(const a of targets){if(n>=ARC_MAX)break;if(!alive(a))continue;let best=null,bd=ARC_R;
+ jobs.push({at:t+ARC_AT,run:()=>{const hit=new Set(targets);let n=0;for(const a of targets){if(n>=ARC_MAX)break;if(!alive(a))continue;let best=null,bd=ARC_R*rk();
    for(const e of enemiesNow()){if(hit.has(e)||!alive(e))continue;const d=dist(a,e);if(d<bd&&lineOk(a,e)){bd=d;best=e;}}
    if(best){hit.add(best);n++;addArc(a,best);if(deal(best,power*ARC_K,'r562-arc'))stats.arcHits++;addPoison(best,power);}}}});
  const live=targets.filter(alive);if(live.length){const cx=live.reduce((s,e)=>s+e.x,0)/live.length,cy=live.reduce((s,e)=>s+e.y,0)/live.length;

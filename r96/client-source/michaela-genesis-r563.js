@@ -11,7 +11,7 @@
  */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_MICHAELA_GENESIS_R563__)return;
-const REV='R563-genesis-3',KEY='storyworld.r563.genesis',HERO='michaela';
+const REV='R563-genesis-4',KEY='storyworld.r563.genesis',HERO='michaela';
 const SKY_AT=.2,PIL_AT=.55,PIL_GAP=.1,PIL_N=8,PIL_R=1.4,PIL_K=.3,PIL_MAXHIT=2,AREA=8,GRAND_AT=1.4,PIL_LIFE=.55,GRAND_LIFE=.8,SKY_LIFE=1.9,
  GRAND_HEAL=.04,Q_AT=.25,Q_GAP=.15,Q_N=3,Q_RANGE=7,Q_R=1.1,Q_K=.15,DRAW_MAX=12;
 const stats={rCasts:0,qCasts:0,pillars:0,pillarHits:0,grand:0,draws:0,errors:0,lastError:null};
@@ -31,12 +31,14 @@ function lineOk(a,b){try{return typeof clearLine==='function'?clearLine(a,b):tru
 function basePower(){try{return attackPower();}catch(_){return 0;}}
 function qPower(){try{const r=typeof rank==='function'?rank('special'):0;return attackPower()*(2.4+.36*r);}catch(_){return 0;}}
 function rnd(n){const x=Math.sin(n*12.9898)*43758.5453;return x-Math.floor(x);}
-function addPillar(x,y,r,dmg,kind,life,grand,counts){if(pillars.length>=DRAW_MAX)pillars.shift();pillars.push({x,y,r,t0:T(),life,grand:!!grand});stats.pillars++;
+// 사몽 발현(R571) 중 반경 배율(최대 2배): 생길 때 한 번 정해 끝까지 같은 크기.
+function rk(){try{const g=window.__STORYWORLD_SAMONG_SURGE_R571__;const r=g?.range?Number(g.range(1)):1;return Number.isFinite(r)&&r>0?Math.min(2,Math.max(1,r)):1;}catch(_){return 1;}}
+function addPillar(x,y,r,dmg,kind,life,grand,counts){r*=rk();if(pillars.length>=DRAW_MAX)pillars.shift();pillars.push({x,y,r,t0:T(),life,grand:!!grand});stats.pillars++;
  if(!(dmg>0))return;const src={kind,friendly:true,owner:'hero',sourceHero:HERO,r563:true};
  for(const e of enemiesNow()){if(!alive(e)||!canHit(e)||dist(e,{x,y})>r+(e.radius||0)||!lineOk({x,y},e))continue;if(counts){const n=counts.get(e)||0;if(n>=PIL_MAXHIT)continue;counts.set(e,n+1);}
   try{if(hitEnemy(e,dmg,src))stats.pillarHits++;}catch(err){fail(err);}}}
 // 기둥 자리: 8칸 안 적 위(가까운 순), 모자라면 둘레 빈자리(정해진 무늬 — 매번 같은 박자)
-function spots(origin,n){const list=enemiesNow().filter(e=>alive(e)&&dist(e,origin)<=AREA).sort((a,b)=>dist(a,origin)-dist(b,origin)).slice(0,n).map(e=>({x:e.x,y:e.y,e}));
+function spots(origin,n){const list=enemiesNow().filter(e=>alive(e)&&dist(e,origin)<=AREA*rk()).sort((a,b)=>dist(a,origin)-dist(b,origin)).slice(0,n).map(e=>({x:e.x,y:e.y,e}));
  for(let i=list.length;i<n;i++){const a=i*2.399+.4,r=2.6+(i%3)*1.4;list.push({x:origin.x+Math.cos(a)*r,y:origin.y+Math.sin(a)*r});}return list;}
 // 사용자 04:09Z 미카엘라 테마 '사랑·의료·정신·신성의학': 마지막 큰 기둥은 치유의 빛 — 미카엘라 최대 체력 4% 회복(최대치까지만).
 function heal(k){try{const m=typeof maxHP==='function'?maxHP():0;if(!(m>0)||!player||player.hp<=0)return;const before=player.hp;player.hp=Math.min(m,player.hp+m*k);stats.healed=(stats.healed||0)+(player.hp-before);
@@ -45,7 +47,7 @@ function onR(){const t=T(),o={x:player.x,y:player.y},power=basePower(),counts=ne
  jobs.push({at:t+SKY_AT,run:()=>{skies.push({x:o.x,y:o.y,t0:T()});if(skies.length>2)skies.shift();}});
  const pts=spots(o,PIL_N);pts.forEach((s,i)=>jobs.push({at:t+PIL_AT+i*PIL_GAP,run:()=>{const p=s.e&&alive(s.e)?{x:s.e.x,y:s.e.y}:s;addPillar(p.x,p.y,PIL_R,power*PIL_K,'r563-pillar',PIL_LIFE,false,counts);}}));
  jobs.push({at:t+GRAND_AT,run:()=>{stats.grand++;addPillar(player.x,player.y,1.8,0,'r563-grand',GRAND_LIFE,true,null);heal(GRAND_HEAL);}});}
-function onQ(){const t=T(),o={x:player.x,y:player.y},power=qPower();const list=enemiesNow().filter(e=>alive(e)&&dist(e,o)<=Q_RANGE).sort((a,b)=>dist(a,o)-dist(b,o)).slice(0,Q_N);if(!list.length)return;
+function onQ(){const t=T(),o={x:player.x,y:player.y},power=qPower();const list=enemiesNow().filter(e=>alive(e)&&dist(e,o)<=Q_RANGE*rk()).sort((a,b)=>dist(a,o)-dist(b,o)).slice(0,Q_N);if(!list.length)return;
  stats.qCasts++;lastRoom=curRoom();list.forEach((e,i)=>jobs.push({at:t+Q_AT+i*Q_GAP,run:()=>{if(alive(e))addPillar(e.x,e.y,Q_R,power*Q_K,'r563-q-pillar',.45,false,null);}}));}
 function cancel(){jobs=[];pillars=[];skies=[];seenR.clear();}
 function step(){const rm=curRoom();if(rm!==lastRoom){if(lastRoom!==null)cancel();lastRoom=rm;}

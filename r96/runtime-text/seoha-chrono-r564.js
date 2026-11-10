@@ -12,7 +12,7 @@
  */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_SEOHA_CHRONO_R564__)return;
-const REV='R564-chrono-4',KEY='storyworld.r564.chrono',HERO='seoha';
+const REV='R564-chrono-5',KEY='storyworld.r564.chrono',HERO='seoha';
 const TRAIL_GAP=.1,TRAIL_LIFE=.36,TRAIL_MAX=4,CLONE_AT=.15,CLONE_SHOT=.3,CLONE_END=.75,CLONE_OFF=1.5,CLONE_K=.25,CLONE_RANGE=13,
  STOP_AT=.14,STOP_R=6,STOP_T=1.6,STOP_MOB_MAX=20,STOP_SHOT_MAX=40,SHATTER_T=.45;
 const stats={hasteTrails:0,qCasts:0,cloneShots:0,stops:0,frozenMobs:0,frozenShots:0,blockedHurts:0,draws:0,errors:0,lastError:null};
@@ -50,13 +50,15 @@ function onQ(){const t=T(),o={x:player.x,y:player.y},power=qPower(),tg=typeof ne
    c.fireAt=T();c.fireA=ang;}}});
  jobs.push({at:t+CLONE_END,run:()=>{clones=[];}});}
 // ---- R: 시간 정지 ----------------------------------------------------------------------------
-function startStop(center){const t=T(),until=t+STOP_T;stop={x:center.x,y:center.y,t0:t,until};stats.stops++;lastRoom=curRoom();
- for(const e of enemiesNow()){if(frozen.size>=STOP_MOB_MAX)break;if(!alive(e)||major(e)||dist(e,center)>STOP_R+(e.radius||0))continue;
+// 사몽 발현(R571) 중 반경 배율(최대 2배): 생길 때 한 번 정해 끝까지 같은 크기.
+function rk(){try{const g=window.__STORYWORLD_SAMONG_SURGE_R571__;const r=g?.range?Number(g.range(1)):1;return Number.isFinite(r)&&r>0?Math.min(2,Math.max(1,r)):1;}catch(_){return 1;}}
+function startStop(center){const t=T(),until=t+STOP_T,k=rk(),SR=STOP_R*k;stop={x:center.x,y:center.y,t0:t,until,k};stats.stops++;lastRoom=curRoom();
+ for(const e of enemiesNow()){if(frozen.size>=STOP_MOB_MAX)break;if(!alive(e)||major(e)||dist(e,center)>SR+(e.radius||0))continue;
   if(!frozen.has(e))stats.frozenMobs++;frozen.set(e,{x:e.x,y:e.y,tell:Number.isFinite(e.tell)?e.tell:null,until});}
- for(const b of shotsNow()){if(heldShots.size>=STOP_SHOT_MAX)break;if(!b||b.friendly||b.dead||heldShots.has(b)||dist(b,center)>STOP_R)continue;
+ for(const b of shotsNow()){if(heldShots.size>=STOP_SHOT_MAX)break;if(!b||b.friendly||b.dead||heldShots.has(b)||dist(b,center)>SR)continue;
   heldShots.set(b,{vx:b.vx,vy:b.vy});b.vx=0;b.vy=0;if(Number.isFinite(b.life))b.life+=STOP_T;stats.frozenShots++;}}
 function endStop(){for(const [b,v] of heldShots){try{if(!b.dead){b.vx=v.vx;b.vy=v.vy;}}catch(_){}}heldShots.clear();frozen.clear();
- if(stop){shatter={x:stop.x,y:stop.y,t0:T()};}stop=null;}
+ if(stop){shatter={x:stop.x,y:stop.y,t0:T(),k:stop.k};}stop=null;}
 function pin(t){for(const [e,f] of frozen){if(!alive(e)){frozen.delete(e);continue;}e.x=f.x;e.y=f.y;if(Number.isFinite(e.cd))e.cd=Math.max(e.cd,f.until-t+.15);if(f.tell!=null&&Number.isFinite(e.tell))e.tell=f.tell;}
  for(const [b] of heldShots){if(b.dead){heldShots.delete(b);continue;}b.vx=0;b.vy=0;}}
 function frozenSource(s){if(!stop||!s)return false;if(frozen.has(s)||heldShots.has(s))return true;const id=s.owner;if(id==null)return false;for(const [e] of frozen)if(e.id===id)return true;return false;}
@@ -93,7 +95,7 @@ function dial(cx,cy,R,t,alpha,z,hands){ctx.globalAlpha*=alpha;ctx.lineWidth=Math
  ctx.strokeStyle=`rgba(${PALE},.75)`;ctx.lineWidth=Math.max(1,1.4*z);for(let i=0;i<12;i++){const a=i*Math.PI/6,k=i%3===0?.8:.88;ctx.beginPath();ctx.moveTo(cx+Math.cos(a)*R*k,cy+Math.sin(a)*R*.5*k);ctx.lineTo(cx+Math.cos(a)*R*.97,cy+Math.sin(a)*R*.5*.97);ctx.stroke();}
  if(hands){ctx.strokeStyle=`rgba(${GOLD},.9)`;ctx.lineWidth=Math.max(1.5,2.4*z);for(const [sp,L] of hands){const a=t*sp;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(a)*R*L,cy+Math.sin(a)*R*.5*L);ctx.stroke();}}}
 function draw(){if(typeof project!=='function'||typeof ctx==='undefined'||!ctx)return;const t=T(),{z,T1,AH}=scale();
- if(stop){const q=project(stop.x,stop.y),u=(t-stop.t0)/STOP_T,open=Math.min(1,(t-stop.t0)/.2),R=STOP_R*T1*.5*open;
+ if(stop){const q=project(stop.x,stop.y),u=(t-stop.t0)/STOP_T,open=Math.min(1,(t-stop.t0)/.2),R=STOP_R*(stop.k||1)*T1*.5*open;
   sc({id:'r564:stop:'+stop.t0.toFixed(2),kind:'effect',pxfSide:'hero',x:stop.x,y:stop.y,groundAligned:true},()=>{ctx.save();try{
    const ck=clockImg();if(ck){const W=R*2/CK.span,fr=Math.floor((t-stop.t0)*12.5)%20;ctx.globalCompositeOperation='source-over';ctx.globalAlpha*=.85*Math.min(1,(1-u)/.12);
     ctx.drawImage(ck,(fr%6)*256,Math.floor(fr/6)*256,256,256,q.x-W/2,q.y-CK.py*W/256,W,W);stats.sheetDraws=(stats.sheetDraws||0)+1;return;}
@@ -110,9 +112,9 @@ function draw(){if(typeof project!=='function'||typeof ctx==='undefined'||!ctx)r
    sc({id:'r564:ice:'+(e.id||n),kind:'effect',pxfSide:'hero',x:e.x,y:e.y},()=>{ctx.save();try{ctx.globalAlpha*=.75;const w=AH*.42,h=AH*.95;
     ctx.fillStyle=`rgba(${ICE},.14)`;ctx.strokeStyle=`rgba(${PALE},.75)`;ctx.lineWidth=Math.max(1,1.3*z);ctx.beginPath();ctx.moveTo(p.x,p.y-h);ctx.lineTo(p.x+w*.5,p.y-h*.62);ctx.lineTo(p.x+w*.5,p.y-h*.1);ctx.lineTo(p.x,p.y+2*z);ctx.lineTo(p.x-w*.5,p.y-h*.1);ctx.lineTo(p.x-w*.5,p.y-h*.62);ctx.closePath();ctx.fill();ctx.stroke();
     ctx.globalAlpha=.9;dial(p.x,p.y-h*1.08,AH*.13,0,1,z,null);}finally{ctx.restore();}});}}
- const shi=shatter?d3('shatter'):null;if(shatter&&shi){const q=project(shatter.x,shatter.y),fr=Math.min(23,Math.floor((t-shatter.t0)*24/SHATTER_KEEP)),W=STOP_R*T1/(222/256);
+ const shi=shatter?d3('shatter'):null;if(shatter&&shi){const q=project(shatter.x,shatter.y),fr=Math.min(23,Math.floor((t-shatter.t0)*24/SHATTER_KEEP)),W=STOP_R*(shatter.k||1)*T1/(222/256);
   sc({id:'r564:shatter:'+shatter.t0.toFixed(2),kind:'effect',pxfSide:'hero',x:shatter.x,y:shatter.y,groundAligned:true},()=>d3cell(shi,'shatter',fr,q.x,q.y,W,'source-over',.9));}
- else if(shatter&&t-shatter.t0<SHATTER_T){const q=project(shatter.x,shatter.y),v=(t-shatter.t0)/SHATTER_T,R=STOP_R*T1*.5*(1+.35*v);
+ else if(shatter&&t-shatter.t0<SHATTER_T){const q=project(shatter.x,shatter.y),v=(t-shatter.t0)/SHATTER_T,R=STOP_R*(shatter.k||1)*T1*.5*(1+.35*v);
   sc({id:'r564:shatter:'+shatter.t0.toFixed(2),kind:'effect',pxfSide:'hero',x:shatter.x,y:shatter.y,groundAligned:true},()=>{ctx.save();try{ctx.globalAlpha*=Math.max(0,1-v);ctx.strokeStyle=`rgba(${PALE},.9)`;ctx.lineWidth=Math.max(1.5,3*z);
    for(let i=0;i<12;i++){const a0=i*Math.PI/6+.1,a1=a0+.38;ctx.beginPath();ctx.ellipse(q.x,q.y,R*(1+.06*(i%3)),R*.5*(1+.06*(i%3)),0,a0,a1);ctx.stroke();}}finally{ctx.restore();}});}
  blinks=blinks.filter(b=>t-b.t0<BLINK_T&&t>=b.t0-.05);const rb=blinks.length?d3('riftB'):null,rf=rb?d3('riftF'):null,bim=blinks.length&&!(rb&&rf)?blinkImg():null;

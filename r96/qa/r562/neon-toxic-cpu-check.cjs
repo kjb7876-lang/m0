@@ -77,5 +77,7 @@ if(exists){
  g=env();g.room.enemies.push(mob('a',12,10));vm.runInContext('special()',g);step(g,2);vm.runInContext("room={id:'z2',engaged:true,enemies:[]}",g);step(g,40);ok('room change cancels',A(g).inspect().pools.length===0&&A(g).inspect().poisoned.length===0);
  g=env();vm.runInContext('special()',g);step(g,20);ok('Q with no target → no chain',A(g).inspect().stats.qCasts===0);
  ok('errors stay 0',A(g).inspect().stats.errors===0);
+ // 사몽 발현(R571) 중: 장판 1.7칸×1.77, 2차 감전 3.5칸×1.77
+ g=env();vm.runInContext("window.__STORYWORLD_SAMONG_SURGE_R571__={active:()=>true,range:r=>r*1.77,cd:s=>s*.23,chance:c=>c}",g);g.player.x=0;g.room.enemies.push(mob('a',9,10),mob('d6',15,10));vm.runInContext('special()',g);step(g,13);ok('surge: pool radius ×1.77',A(g).inspect().pools.length===1&&Math.abs(A(g).inspect().pools[0].r-1.7*1.77)<1e-9);ok('surge: arc reaches 6 tiles (outside 3.5, inside 6.2)',by(g,'r562-arc').some(h=>h.id==='d6'));
 }
 console.log(`R562 neon-toxic cpu check: ${pass} pass, ${fail} fail`);process.exit(fail?1:0);

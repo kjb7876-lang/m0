@@ -86,5 +86,7 @@ if(exists){
   ok('sheet errors stay 0',A(h).inspect().stats.errors===0);}
  {const h=env();h.room.enemies.push(mob('a',12,10));R_(h);step(h,10);ok('no sheets → code drawing only',V(h,'drawn.length')===0);}
  ok('sheets shipped (< 400 KB each)',[['r564','seoha-time-blink'],['r564/dots','seoha-clock'],['r564/dots','seoha-crystal-shell-back'],['r564/dots','seoha-crystal-shell-front'],['r564/dots','seoha-timestop-shatter'],['r564/dots','seoha-rift-back'],['r564/dots','seoha-rift-front'],['r564/dots','seoha-haste-dial']].every(([d,n])=>{try{return fs.statSync(path.join(R,'runtime-text','assets',d,n+'.webp')).size<400000;}catch(_){return false;}}));
+ // 사몽 발현(R571) 중: 시간 정지 장 6칸×1.77
+ g=env();V(g,"window.__STORYWORLD_SAMONG_SURGE_R571__={active:()=>true,range:r=>r*1.77,cd:s=>s*.23,chance:c=>c}");{const m=mob('m9',19,10);g.room.enemies.push(m);R_(g);step(g,3);ok('surge: mob at 9 tiles (outside 6, inside 10.6) is frozen',(A(g).inspect().frozen||[]).includes('m9'));step(g,40);ok('surge: stop still ends',!A(g).inspect().stop);}
 }
 console.log(`R564 seoha-chrono cpu check: ${pass} pass, ${fail} fail`);process.exit(fail?1:0);
