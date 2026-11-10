@@ -98,7 +98,7 @@ ok('corpse glow (non-normal blending) stays unlit; the background-layer pass (ma
 {const vm=require('vm'),d=src('mob-death-r462.js');
  const run=withScope=>{const calls=[];const g={window:{},localStorage:{getItem:()=>null,setItem(){}},setTimeout(){},Date,console,Math,JSON,calls};g.window=g;vm.createContext(g);
   vm.runInContext(`var time=0,zoom=1,settings={lowFx:false},room={id:'dist01'},effects=[],VFX={burnFlame:'assets/vfx/burn.png'};
-   var ctx={owner:{id:'scene',kind:'scene'},save(){},restore(){},translate(){},scale(){},rotate(){},drawImage(im){calls.push(['img',im.src,ctx.owner]);},globalAlpha:1,filter:'none'};
+   var ctx={owner:{id:'scene',kind:'scene'},save(){},restore(){},translate(){},scale(){},rotate(){},beginPath(){},moveTo(){},lineTo(){},closePath(){},clip(){},stroke(){},drawImage(im){calls.push(['img',im.src,ctx.owner]);},globalAlpha:1,filter:'none'};/* R532: 찢김 조각 경로·clip·선 */
    ${withScope?"ctx.scope=function(o,fn){const p=this.owner;this.owner=o;try{return fn();}finally{this.owner=p;}};":''}
    function project(x,y){return{x:x*10,y:y*10};}function actorHeight(){return 60;}function readyImage(p){return{image:{src:p,naturalWidth:1536,naturalHeight:1024}};}
    function sprite(p,x,y,h,opt){calls.push(['sprite',p,ctx.owner]);return true;}
