@@ -70,6 +70,26 @@ def main():
     users = [p for p, t in texts.items() if 'campaign-r54/' in t]
     check('campaign-r54 json 을 가져오는 런타임 코드 없음', not users, users)
 
+    # 3c. R614b: painted-vfx-r87 시트는 final42-hooks-r88 다리가 있으면 r87 이 불러오지 않는다(wanted()=bridge()?[]:…).
+    p87 = texts.get('painted-vfx-r87.js', '')
+    check('assets/painted-vfx-r87/ 를 배포본에서 뺌', 'assets/painted-vfx-r87/' in prefixes, prefixes)
+    check('painted-vfx-r87 은 final42 다리가 있으면 아무 시트도 안 부름', 'const wanted=()=>bridge()?[]:admitted();' in p87
+          and 'const bridge=()=>window.__STORYWORLD_FINAL42_HOOKS_R88__?.r87;' in p87)
+    check('final42 데이터·런타임·다리 스크립트가 index.html 에 붙어 있음',
+          {'./final42-data-r88.js', './final42-runtime-r88.js', './final42-hooks-r88.js'} <= tags, sorted(t for t in tags if 'final42' in t))
+    check('final42 다리가 r87 을 넘겨받음', 'window.__STORYWORLD_FINAL42_HOOKS_R88__=Object.freeze({r87,' in texts.get('final42-hooks-r88.js', ''))
+    users = [p for p, t in texts.items() if 'painted-vfx-r87/' in t and p not in ('painted-vfx-data-r87.js', 'painted-vfx-r87.js')]
+    check('painted-vfx-r87 경로는 r87 데이터·r87 본체(텍스처 필터 표시만) 밖에서 안 씀', not users, users)
+    # 3d. R614b: assets-clean-r99 가 urlFor 로 assets/r99/clean/ 사본을 부르는 원본 38장
+    c99 = texts.get('assets-clean-r99.js', '')
+    mm = re.search(r'const CLEAN=new Set\((\[.*?\])\)', c99, re.S)
+    clean = json.loads(mm.group(1)) if mm else []
+    check('assets-clean-r99.js 가 index.html 에 붙어 있고 urlFor 를 감쌈', './assets-clean-r99.js' in tags and 'urlFor' in c99 and len(clean) >= 30, len(clean))
+    check('r99 정리본 원본은 모두 배포본에서 뺌(정리본은 남김)', clean and all(excluded(p) for p in clean) and not any(excluded('assets/r99/clean/' + p) for p in clean),
+          [p for p in clean if not excluded(p)][:5])
+    check('r99 원본 빼는 항목은 정확한 파일 경로뿐(다른 파일을 같이 빼지 않음)',
+          not [p for p in rows if excluded(p) and any(p.startswith(c) and p != c for c in clean)])
+
     tmp = Path(tempfile.mkdtemp(prefix='r580-'))
     try:
         # 1·2. 정상 경로
