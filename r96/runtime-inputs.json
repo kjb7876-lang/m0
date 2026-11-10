@@ -7979,6 +7979,12 @@
     "assets/r563/dots/michaela-pillar.webp",
     "assets/r563/dots/michaela-grand-pillar.webp",
     "assets/r563/dots/michaela-halo.webp",
+    "assets/r590/hwando-a-draw-cut.webp",
+    "assets/r590/hwando-q-wind-blade.webp",
+    "assets/r590/hwando-e-delayed-flash.webp",
+    "assets/r590/hwando-r-finale-draw.webp",
+    "assets/r590/hwando-sigil-back.webp",
+    "assets/r590/hwando-sigil-front.webp",
     "boss-cinematic-r568.js",
     "hwando-fall-video-r617.js",
     "video-render-pause-r619.js",
@@ -9063,5 +9069,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "8cb2c155f55845f023a78560b11adf4889ebc7bfe4444b4c59185599ff08bbf3"
+  "runtimeManifestSHA256": "2df5b4ed9c8604093585101ce50bfe24c5b5e4cb30b7470c619c195882fdd556"
 }
