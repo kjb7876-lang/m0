@@ -39,7 +39,7 @@ ok(new Set(u.enemies.map(e=>e.id)).size===u.enemies.length,'고유 id');
 const u2=ctx.makeRoom('u202','STORY');ok(JSON.stringify(u2.enemies.filter(e=>e.r380Mech).map(e=>e.id))===JSON.stringify(mech.map(e=>e.id)),'다시 만들어도 같은 결과');
 // R383 밸런스
 const d02=ctx.makeRoom('dist02','STORY'),d03=ctx.makeRoom('dist03','STORY'),b07=ctx.makeRoom('ep1b07','STORY'),d00=ctx.makeRoom('dist00','STORY');
-ok(d02.enemies.filter(e=>/^뿌리 추적자/.test(e.name)).length===2&&d02.enemies.every(e=>e.r74Monster===undefined),'늪: 뿌리 추적자 그대로, R74 그림 대신 다크그린 시트(r74Monster 지움)');
+ok(d02.enemies.filter(e=>/^늪 뿌리 추적자/.test(e.name)).length===2&&d02.enemies.every(e=>e.r74Monster===undefined),'늪: 뿌리 추적자(R537 부터 이름 늪 뿌리 추적자), R74 그림 대신 다크그린 시트(r74Monster 지움)');
 ok(d03.enemies.length===3&&!d03.enemies.some(e=>/뿌리 추적자/.test(e.name))&&d03.enemies[1].name==='쓰러진 수호병'&&d03.enemies[2].name==='쓰러진 수호병 우두머리'&&d03.enemies[1].maxHp===50&&d03.enemies[1].id==='dist03:r74-patrol:0'&&d03.enemies[1].r248Key==='쓰러진 수호병','다른 맵: 뿌리 추적자 순찰 → 그 지역 몹 이름(수·id·수치 그대로)');
 ok(b07.enemies[1].name==='분노의 사냥개'&&b07.enemies[2].name==='분노의 사냥개 우두머리'&&b07.enemies[0].name==='불 속의 그림자 1'&&b07.enemies[1].r248Key==='유리 망령'&&b07.enemies[1].r74Monster===undefined,'ep1b07: 순찰 → 분노의 사냥개(공격 효과 키 보존)');
 const roots=d00.enemies.filter(e=>e.r383Added);ok(roots.length===6&&roots.every((e,i)=>e.id==='dist00:r383-root:'+i&&e.name==='뿌리 추적자'&&e.maxHp===50&&e.r75Pack===undefined&&e.r74Monster===undefined)&&d00.enemies[0].boss,'dist00: 늪 순찰 수치로 뿌리 추적자 6마리 추가, 정규 무리 밖');

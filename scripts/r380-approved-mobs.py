@@ -102,7 +102,7 @@ if len(sys.argv) > 3:
     for k, n in ((1, '기계화 기억이주 연결자'), (2, '기계화 공명술사')):
         add2(f'u206-mech-0{k}-v1', g(f'x-SW-u206-0{k}*') / f'u206-0{k}/frames', M4(f'u206-0{k}-move', f'u206-0{k}-attack'), 8, 1, [0, 1, 2, 3], [4, 5, 6, 7], [0], A('u206', n), 1.0)
     d = g('x-SWAMP-ROOT*') / 'frames'
-    add2('swamp-root-stalker-darkgreen-v2', d, ['01-idle.png', '02-windup.png', '03-contact.png', '04-recover.png'], 4, .5, [0], [1, 2, 3], [0], A('dist02', '^뿌리 추적자'), 1.0)
+    add2('swamp-root-stalker-darkgreen-v2', d, ['01-idle.png', '02-windup.png', '03-contact.png', '04-recover.png'], 4, .5, [0], [1, 2, 3], [0], A('dist02', '^(늪 )?뿌리 추적자'), 1.0)
 # R383: 검수 목록 v18 19 분노의 사냥개 — "분노 맵 적용"(사용자 2026-11-07 "7대죄 분노의귀청수부나오는곳" = ep1b07). 그 지역 R74 순찰 몹 6마리를 이 이름·그림으로 바꾼다.
 if len(sys.argv) > 2:
     add2('wrath-hound-v1', next(S2.glob('x-wrath-hound*')), [f'walk-0{i}.png' for i in range(1, 5)] + [f'attack-0{i}.png' for i in range(1, 5)], 8, .5,
