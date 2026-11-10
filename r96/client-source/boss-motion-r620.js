@@ -21,6 +21,9 @@ const major=e=>!!(e&&(e.boss||e.midboss||e.persona||e.wardChampionR81===true));
 function excluded(e){try{if(/mammon/i.test(String(room?.id||''))||e.mammon||e.mammonR||/mammon/i.test(String(e.nativeId||'')))return true;}catch(_){}return !!(e.samongDollR193||e.r193Doll||e.r193Tower||e.r170Tower||e.r75Tower||e.r251Circle||e.prop||e.object||e.stationary);}
 // R104 열쇠 자세 파일 → 자세 번호(p1 준비 · p2 타격 · p3 이어짐 · p4 회수)
 const poseNo=s=>{const m=/-p([1-4])\.(?:webp|png)/i.exec(s);return m?+m[1]:0;};
+// Dots CX-0068SM 시트: 보스가 지금 그리는 대기 원본 경로 → 같은 칸 크기·발 줄로 맞춘 가로 한 줄 시트(qa/r620/sheets.md 에 원본·해시·검수값).
+const SHEETS={'assets/generated-v31224/actors-normalized/1a8ca2c5759b_ep1b03_envy_sister_phase0.webp':{w:672,h:384,idle:{path:'assets/r620/bosses/b03-idle6.webp',n:6,fps:8},hit:{path:'assets/r620/bosses/b03-hit4.webp',n:4,fps:16}}};
+const asked=new Set();function sheetImg(p){try{const r=typeof readyImage==='function'?readyImage(p):null;if(r?.image)return r.image;if(!asked.has(p)&&typeof addImage==='function'){asked.add(p);addImage(p,'R620 Dots CX-0068SM boss sheet');}}catch(_){}return null;}
 const ST=new WeakMap();
 const stOf=e=>{let s=ST.get(e);if(!s)ST.set(e,s={sx:1,sy:1,sh:0,ox:0,oy:0,at:-1,fx:NaN,fy:NaN,vx:0,move:0,hitAt:-9,hitT:0,prev:null,xAt:-9,lastPath:'',stepPh:Math.random()*6.28,seed:Math.random()*6.28,lastT:-1});return s;};
 function bodyCmd(cmds,st0){let best=null,bh=0;for(let i=st0;i<cmds.length;i++){const c=cmds[i];if(c?.kind!=='image'||c.owner?.kind!=='enemy'||!Array.isArray(c.points)||c.points.length<4)continue;if(FX.test(srcOf(c)))continue;const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>bh){bh=h;best=c;}}return best;}
@@ -47,7 +50,11 @@ function process(e,cmds,st0){
  const path=srcOf(c),pn=poseNo(path);
  // 걷는 중(공격 아님)에 R104 공격 자세(p1~p3)가 끼어들면 회수 자세(p4)로 둔다 — 걸으며 칼을 휘두르는 것처럼 보이던 깜빡임.
  if(prefs.walkHold&&pn&&pn!==4&&!e.attack&&!(e.hitTimer>0)&&s.move>.5){const p4=path.replace(/-p[1-3]\./i,'-p4.');try{if(typeof readyImage==='function'){const im=readyImage(p4)?.image;if(im){c.image=im;c.sourcePath=p4;stats.walkHeld++;}}}catch(_){}}
+ let sheet=null;const SD=SHEETS[path];
+ if(SD&&!e.attack){const hitAge=t-s.hitAt,hitting=e.hitTimer>0||(hitAge>=0&&hitAge<SD.hit.n/SD.hit.fps);const use=hitting&&SD.hit?SD.hit:(s.move<=.5?SD.idle:null);
+  if(use){const im=sheetImg(use.path);if(im){const i=use===SD.hit?Math.min(use.n-1,Math.max(0,Math.floor((e.hitTimer>0&&!(hitAge>=0&&hitAge<1)?0:hitAge)*use.fps))):Math.floor((t+s.seed)*use.fps)%use.n;c.image=im;c.sourcePath=use.path;c.sourceRect=[i*SD.w,0,SD.w,SD.h];sheet=use===SD.hit?'hit':'idle';stats.sheet=(stats.sheet||0)+1;}}}
  const G=target(e,s,c,t,dt),k=dt>0?Math.min(1,dt*16):1;
+ if(sheet==='idle'){G.sy=1+(G.sy-1)*.3;G.sx=1+(G.sx-1)*.3;G.sh*=.3;}else if(sheet==='hit'){G.ox*=.5;G.sh*=.4;G.sy=1+(G.sy-1)*.4;}
  for(const n of ['sx','sy','sh','ox','oy'])s[n]+=(G[n]-s[n])*k;
  const curPath=srcOf(c),rect=String(c.sourceRect||'');
  let ghost=null;
