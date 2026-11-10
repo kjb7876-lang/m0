@@ -33589,113 +33589,113 @@
     },
     {
       "path": "assets/r544/sfx/click-1.ogg",
-      "bytes": 4367,
-      "sha256": "3394f2dd8fa17008a4f5ae0306e4621863c50dd56ccca446a61b82fcc539a920"
+      "bytes": 4169,
+      "sha256": "16b9b9b7bc2ecfb9dfd467ede8778114be6aa0eba12bbb85b81119eb87ce8645"
     },
     {
       "path": "assets/r544/sfx/death-beast.ogg",
-      "bytes": 9108,
-      "sha256": "994ab6e4bf7949a939c726b430a3f20f244aa116dd70412699c6ccad12535126"
+      "bytes": 6363,
+      "sha256": "5506cc353a34af34c01015f660fc414994064120d8393b55988e1af6fefddadf"
     },
     {
       "path": "assets/r544/sfx/death-body.ogg",
-      "bytes": 7882,
-      "sha256": "3dbaa0f1b9f4664281cf3d7a24ea8ab70adc8be7462328a317bfcaa1b903b403"
+      "bytes": 6763,
+      "sha256": "447a9112209d75765f9d15aaa983f9aa6d09c92a8784da16d83ae65a27e86e0f"
     },
     {
       "path": "assets/r544/sfx/death-glass.ogg",
-      "bytes": 8068,
-      "sha256": "cece8ed3ceac16348a329006870c82890640819fad2a63336d4a9ad2b83a09ce"
+      "bytes": 6764,
+      "sha256": "206b1e495816635b5ad255c59a7e0b8275da437abf8b55b5aaa3bf99b8333480"
     },
     {
       "path": "assets/r544/sfx/death-machine.ogg",
-      "bytes": 7626,
-      "sha256": "699100a2a2c8729d7d83f6b49b6533a5c1be4c00d00e52adf76f57e4744fc23e"
+      "bytes": 7252,
+      "sha256": "13f4b1404e65f415ea0592867c2d30d27c908320fd8dbde76828060370757198"
     },
     {
       "path": "assets/r544/sfx/death-slime.ogg",
-      "bytes": 10784,
-      "sha256": "ff81fa8142b3a56104a0c80daf7ac3f094df15d715ee703b3e831dcf99893f6c"
+      "bytes": 7893,
+      "sha256": "ba30b1da78d71f31a673e8ce8f9ace39b2f4d4ff718cc749a2d775c6335abf1a"
     },
     {
       "path": "assets/r544/sfx/death-spirit.ogg",
-      "bytes": 8741,
-      "sha256": "4c9828c3dbfd2135c6b6f4ad83334a4388d9daff316b95cb046253450920ae7f"
+      "bytes": 7194,
+      "sha256": "d2840a28e7cd952ea31042abb7e4ebce3f150364b98442c8b70be3de16233ad2"
     },
     {
       "path": "assets/r544/sfx/hit-beast.ogg",
-      "bytes": 6244,
-      "sha256": "b301ac7165e175965733891a682a0ea1509b7b9918448992bad65ac4a00f0890"
+      "bytes": 4849,
+      "sha256": "f78e78fdebf7ae55662cea58bf9e165087f91bd2afe47001a97aa1924c0622e9"
     },
     {
       "path": "assets/r544/sfx/hit-body.ogg",
-      "bytes": 5109,
-      "sha256": "6f66378f515ad338f001aef343f3b09ef03729234beb73f5d2754a99015e4c10"
+      "bytes": 4512,
+      "sha256": "f81bf91ebb0d0dea1bde3c0559a1a75709368342d687aa8670945921f4b6a0a3"
     },
     {
       "path": "assets/r544/sfx/hit-glass.ogg",
-      "bytes": 6311,
-      "sha256": "88e967fbe7dbf4f673f825ff3946ec0288f4487741019ecfd960f98de2e41774"
+      "bytes": 5118,
+      "sha256": "86b80014962633948224d95dc06ca7529d67a59fae14a45431383325c83a0f1d"
     },
     {
       "path": "assets/r544/sfx/hit-machine.ogg",
-      "bytes": 6110,
-      "sha256": "59741717af475b43e6e9d6650ae9769ed19de2ea4860c2b88a0594d6412ba8d6"
+      "bytes": 4665,
+      "sha256": "a631f31a032f7eeae8af50e4cede11c8843b156b636902303a1cd64a87976ef3"
     },
     {
       "path": "assets/r544/sfx/hit-slime.ogg",
-      "bytes": 5913,
-      "sha256": "779b1b38730b5a7473ac631005f6eb4b090a42a34a2fdbc934ff58dc9dd16cca"
+      "bytes": 4797,
+      "sha256": "0f267dd75989baf070818753e79d6d63376906110717e20463c3e71dfb9b059e"
     },
     {
       "path": "assets/r544/sfx/hit-spirit.ogg",
-      "bytes": 6471,
-      "sha256": "0a5177c35ccc6c0e8d8276449f2b49d6e80849d6eed5e0bed12e3270b210f6cd"
+      "bytes": 4921,
+      "sha256": "f5d2024210fe498ced721259383040fa9328dd90fc377c0ffeebefbccb1c6654"
     },
     {
       "path": "assets/r544/sfx/hurt-gunner.ogg",
-      "bytes": 5777,
-      "sha256": "f3b3c8943a88b1e15d2c9f6edb89d5564f6537b890839432747b434016d243ac"
+      "bytes": 5392,
+      "sha256": "b678e724abeea530ac8c1be0bde8a99ce9aa5971e4037b335620ea2d35b3b623"
     },
     {
       "path": "assets/r544/sfx/hurt-hunter.ogg",
-      "bytes": 5075,
-      "sha256": "7d8af8f479ea0d1df90e6ade5d548aaba55ef5b3be5e99850da112364a9fc126"
+      "bytes": 4656,
+      "sha256": "437dcad413cc50db5e694b910dd144765a05692ad7756739c8ca61f9f101e8c3"
     },
     {
       "path": "assets/r544/sfx/hurt-hwando.ogg",
-      "bytes": 5799,
-      "sha256": "33a438e4769d4b374ed6939aa32930090c2d075848c8e8466c0a4f387caa6d8b"
+      "bytes": 5256,
+      "sha256": "ccdcafe325bb339a75ebc05afdb0edafa03a1c2a8f5a44f2d6f8fb826abad14a"
     },
     {
       "path": "assets/r544/sfx/hurt-lauren.ogg",
-      "bytes": 5360,
-      "sha256": "53eeb401d26d97d1e5f0b2613a513665ad270a716fa89ca69e703e02e4287cfd"
+      "bytes": 4850,
+      "sha256": "9d87ab9a7b532cfe9f3e4af245e238d45080cf861a4b59963345df2ec6e01bcf"
     },
     {
       "path": "assets/r544/sfx/hurt-michaela.ogg",
-      "bytes": 4649,
-      "sha256": "7c05c08248163a601ca54494818998a39f21959009ae3e6b7f7ca41d61b5b1d5"
+      "bytes": 5004,
+      "sha256": "d4f1a18b540ed53541679cf0af059fd29e113a4152ee5bf414661dcc83607fa9"
     },
     {
       "path": "assets/r544/sfx/hurt-neon.ogg",
-      "bytes": 5748,
-      "sha256": "4e3acc1a9ee9cfe52fbe547baa57ea4ed7a366727765dff8065d2431bf682c55"
+      "bytes": 5115,
+      "sha256": "5569da7b9b1e6e05a596c1bcda574ef0b5b24018f225ff2905e67ad85515e8a0"
     },
     {
       "path": "assets/r544/sfx/hurt-seoha.ogg",
-      "bytes": 6346,
-      "sha256": "8d635b61a453d48d29a5b58c144c7bcd166842cb5cbb808c32178a2aa7bd723c"
+      "bytes": 5544,
+      "sha256": "c0913d34867172c964fc3b3d3675a2ab65ec311a295d3a55455e023cf7218867"
     },
     {
       "path": "assets/r544/sfx/hurt-slayer.ogg",
-      "bytes": 6201,
-      "sha256": "987bed5ae4a1b222dde9d5edb58e649f5d5a3d88735bff66991e58f97ed4419c"
+      "bytes": 5287,
+      "sha256": "01d5a9bf9e2cab4a90376c4dc6c01e50dbbe7aea53ef01f2bb76e5c95d46ca2e"
     },
     {
       "path": "assets/r544/sfx/index.json",
-      "bytes": 14878,
-      "sha256": "71f8d926672fbc1494c42800b0121652e118b98624de2a20ea194df3053eb1e0"
+      "bytes": 16468,
+      "sha256": "6d2354e2080cf5d71fedf4ecb6981eb38c6e0f8f7eeae29d30f9861d7d723cb1"
     },
     {
       "path": "assets/r561/gunner-bombard-meteor.webp",
@@ -43749,8 +43749,8 @@
     },
     {
       "path": "sfx-r541.js",
-      "bytes": 12243,
-      "sha256": "a2877726641934adedc0b64d8d6cf1093aa4e21ed003e3ed2618c51790e2cf8c"
+      "bytes": 15159,
+      "sha256": "0cd1d496686ebb34bcc0648e354f2fbdaf838f634866e23ee4e7710305ecd791"
     },
     {
       "path": "sin-boss-art-r463-data.js",
@@ -44104,7 +44104,7 @@
     }
   ],
   "fileCount": 8820,
-  "totalBytes": 1225491298,
+  "totalBytes": 1225474479,
   "webHTMLSha256": "5b95ed966e5d5afd4030f7553b54fde8505b229b14ac174c3d2cded211b09aa0",
   "largest": [
     {

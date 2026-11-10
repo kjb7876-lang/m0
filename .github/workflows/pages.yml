@@ -422,6 +422,8 @@ jobs:
         run: node r96/qa/r543/r543-cpu-check.cjs
       - name: R544 generated enemy-theme hit and death, per-hero hurt, level-up, click and boss-death sounds CPU check
         run: node r96/qa/r544/r544-cpu-check.cjs
+      - name: R545 SFX comfort (150Hz high-pass and soft edges for every SFX buffer, softened R544 set) CPU check
+        run: node r96/qa/r545/r545-cpu-check.cjs
       - name: R385 mob moves (review list v18 move/rename) CPU check
         run: node r96/qa/r385/r385-cpu-check.cjs
       - name: R390 cinema full narration + midboss hold + enemies keep chasing CPU check
