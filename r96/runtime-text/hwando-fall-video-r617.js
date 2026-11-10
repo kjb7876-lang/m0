@@ -15,7 +15,7 @@
 //  · 끄기: localStorage storyworld.r617.hwandofall {on:false}. 다시 보기: API play('knight'|'fall'|'beach').
 (()=>{'use strict';
 if(window.__STORYWORLD_HWANDO_FALL_VIDEO_R617__)return;
-const REV='R617-hwando-fall-video-2',KEY='storyworld.r617.hwandofall',STALL_MS=6000,HOLD_MS=700,ENTER_DELAY_MS=700,DOWN_DELAY_MS=350,MAX_TRIES=2,BOSS='l301-boss';
+const REV='R617-hwando-fall-video-3',KEY='storyworld.r617.hwandofall',STALL_MS=6000,HOLD_MS=700,ENTER_DELAY_MS=700,DOWN_DELAY_MS=350,MAX_TRIES=2,BOSS='l301-boss';
 // [시작초, 끝초, 문장] — 정본 개선본 last301·last302 문장 그대로.
 const CLIPS=Object.freeze([
  Object.freeze({id:'knight',zone:'last301',when:'engaged',src:'assets/r617/knight.mp4',poster:'assets/r617/knight-poster.jpg',seconds:8,core:.3164,nameAt:5.4,label:'타락천사 기사 강림',
@@ -26,7 +26,7 @@ const CLIPS=Object.freeze([
   cues:Object.freeze([[0.5,3.8,'몸 위로 밀려왔던 파도가 스르르 빠져나갔다.'],[4.0,8.6,'눈을 뜨니 젖은 모래 해안에 누워 있었다.']])})]);
 const byId=Object.fromEntries(CLIPS.map(c=>[c.id,c]));
 let prefs={on:true,seen:[]};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');prefs={...prefs,...s,seen:Array.isArray(s?.seen)?s.seen.filter(x=>byId[x]):[]};}catch(_){}
-const stats={plays:0,skips:0,ended:0,errors:0,muted:0,stalled:0,room:0,preloads:0,waited:0};let lastError=null,open=null,pending=null,gateFn=null;const pre={};
+const stats={plays:0,skips:0,ended:0,errors:0,muted:0,stalled:0,room:0,preloads:0,waited:0};let lastError=null,open=null,pending=null,gateFn=null,closing=null;const pre={};
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}};
 const seen=id=>prefs.seen.includes(id);
@@ -82,8 +82,8 @@ function close(o,reason){if(!current(o))return;o.closed=true;clearTimeout(o.stal
  if(reason==='skip'||reason==='ended')mark(o.clip.id,true);
  if((reason==='error'||reason==='stall')&&o.lastTime<1)mark(o.clip.id,false); // 거의 못 봤으면 다음에 다시(다음 방문 때)
  if(reason==='error'||reason==='stall')failed[o.clip.id]=o.room; // 같은 방문에서는 다시 열지 않는다(Codex P2: 재생 실패 반복으로 게임이 막히지 않게)
- open=null; // 게임은 바로 다시 흐른다(검은 막만 0.46초 남아 사라짐)
- o.fade.classList.add('on');setTimeout(()=>{try{o.video.removeAttribute('src');o.video.load?.();}catch(_){}o.root.remove();
+ open=null;closing=o; // 검은 막 0.46초가 사라질 때까지 게임은 멈춘 채(R619 가 그 동안 그리기를 쉬므로 보이지 않는 채 적이 움직이지 않게)
+ o.fade.classList.add('on');setTimeout(()=>{try{o.video.removeAttribute('src');o.video.load?.();}catch(_){}o.root.remove();if(closing===o)closing=null;
   try{if(typeof keys!=='undefined'&&keys?.clear)keys.clear();o.focus?.focus?.({preventScroll:true});}catch(_){}},reason==='error'?0:460);}
 function key(e){if(!open)return false;e.preventDefault?.();e.stopImmediatePropagation?.();if(e.type==='keydown'&&!e.repeat&&(e.key==='Escape'||e.key==='Enter'||e.key===' '||e.code==='Space'))close(open,'skip');return true;}
 try{(window.__STORYWORLD_CINEMA_GUARDS__=window.__STORYWORLD_CINEMA_GUARDS__||[]).push(key);}catch(_){}
@@ -94,7 +94,7 @@ function cue(o){const t=Number(o.video.currentTime)||0,c=o.clip.cues.find(([a,b]
 function watch(o){clearTimeout(o.stall);o.stall=setTimeout(()=>{if(!current(o)||o.ending)return;const t=Number(o.video.currentTime)||0;if(t>o.lastTime+.01){o.lastTime=t;watch(o);return;}close(o,'stall');},STALL_MS);}
 function atEnd(o){if(!current(o)||o.ending)return;o.ending=true;clearTimeout(o.stall);if(o.nm)o.nm.classList.add('on');o.hold=setTimeout(()=>close(o,'ended'),HOLD_MS);}
 // 이 파일보다 뒤에 실린 tick 감싸개(mobile-bonus-r286 의 재사용 대기 회복 등)도 영상 동안 멈추게, 재생할 때 가장 바깥 tick 에 문을 단다(R568 과 같은 방식)
-function gateOuter(){try{if(typeof tick!=='function'||tick===gateFn)return;const outer=tick;const gf=function(...a){if(open){if(here()!==open.room)close(open,'room');else return;}return outer.apply(this,a);};gateFn=gf;tick=gf;}catch(e){fail(e);}}
+function gateOuter(){try{if(typeof tick!=='function'||tick===gateFn)return;const outer=tick;const gf=function(...a){if(open){if(here()!==open.room)close(open,'room');else return;}if(closing)return;return outer.apply(this,a);};gateFn=gf;tick=gf;}catch(e){fail(e);}}
 function play(id,r,opt={}){const c=byId[id];if(!c||open||typeof document==='undefined')return false;
  if(!opt.force&&(!prefs.on||seen(id)||!eligible(r,c)))return false;if(pending&&pending.id===id)pending=null;
  css();const v=pre[id]||preload(id)||document.createElement('video');delete pre[id];if(!v.src)v.src=url(c.src);
@@ -134,7 +134,7 @@ if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async fun
  try{const r=here();if(prefs.on&&!seen('beach')&&eligible(r,byId.beach)){preload('beach');pending={id:'beach',room:r,at:now()};}
   else if(pending&&pending.room!==r)pending=null;
   if(prefs.on&&!seen('knight')&&eligible(r,byId.knight))preload('knight');}catch(e){fail(e);}return out;};}
-if(typeof tick==='function'){const base=tick;tick=function(...a){if(open){if(here()!==open.room)close(open,'room');else return;}
+if(typeof tick==='function'){const base=tick;tick=function(...a){if(open){if(here()!==open.room)close(open,'room');else return;}if(closing)return;
  const out=base.apply(this,a);try{poll();}catch(e){fail(e);}return out;};}
 window.__STORYWORLD_HWANDO_FALL_VIDEO_R617__=Object.freeze({revision:REV,KEY,BOSS,CLIPS,
  bgmGain:()=>open?0:1,play:(id='knight',o={})=>play(id,here(),{force:true,...o}),skip:()=>{if(open)close(open,'skip');},preload,poll,want:()=>want(),

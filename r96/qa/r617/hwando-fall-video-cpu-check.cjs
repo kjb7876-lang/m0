@@ -92,7 +92,7 @@ const enter=async(g,id,layer='STORY')=>{await run(g,`enterRegion("${id}",null,{l
  const v=vid(g);v.currentTime=1;v.fire('timeupdate');ok('knight: first canon caption at 1s',ins(g).caption==='거센 폭풍이 몸을 밀어내어 발 디딜 곳부터 찾아야 했다.');
  v.currentTime=5.0;v.fire('timeupdate');ok('knight: no name card yet at 5.0s',!g.__dom.get('r617v').querySelector('.name').classList.contains('on'));v.currentTime=6.5;v.fire('timeupdate');ok('knight: name card on at 6.5s',g.__dom.get('r617v').querySelector('.name').classList.contains('on'));ok('knight: boss name card from game data',ins(g).name==='타락천사 기사');
  v.fire('playing');v.fire('ended');step(g,8);ok('knight: closes after end hold, saved seen',ins(g).open===null&&ins(g).prefs.seen.includes('knight'));
- const t1=run(g,'ticks');step(g,3);ok('knight: game resumes',run(g,'ticks')>t1);
+ const t1=run(g,'ticks');step(g,8);ok('knight: game resumes (after the 0.46s closing fade)',run(g,'ticks')>t1);
  run(g,'room.engaged=false');run(g,'room.engaged=true');step(g,3);ok('knight: only once',ins(g).open===null);
  // fall
  // 필수 패배(index.html R75 fall()): 기사는 체력 남은 채 숨고, room.r75Falling, 뒤 서사창이 열림
@@ -126,6 +126,10 @@ const enter=async(g,id,layer='STORY')=>{await run(g,`enterRegion("${id}",null,{l
 {const g=env({outer:true});await enter(g,'last302');step(g,10);ok('beach opens (outer wrapper present)',ins(g).open==='beach');
  const o0=run(g,'outerTicks'),t0=run(g,'ticks');step(g,5);ok('outer wrapper paused too (gateOuter)',run(g,'outerTicks')===o0&&run(g,'ticks')===t0);
  await enter(g,'hando01');step(g,1);ok('room change closes video, not saved',ins(g).open===null&&!ins(g).prefs.seen.includes('beach')&&ins(g).stats.room===1);}
+// 닫힐 때의 검은 막(0.46초)이 남아 있는 동안에도 게임은 멈춰 있다(R619 가 그 동안 그리기를 쉬므로, 보이지 않는 채 적이 움직이면 안 됨 — Codex P2)
+{const g=env({outer:true});await enter(g,'last302');step(g,10);api(g).skip();const o0=run(g,'outerTicks'),t0=run(g,'ticks');
+ g.__now+=100;run(g,'tick(.1)');g.__now+=100;run(g,'tick(.1)');ok('closing fade: overlay still there, game and outer wrapper still paused',!!g.__dom.get('r617v')&&run(g,'ticks')===t0&&run(g,'outerTicks')===o0);
+ g.__now+=300;flush(g);ok('closing fade done: overlay removed',!g.__dom.get('r617v'));step(g,2);ok('after overlay removed: game and outer wrapper run',run(g,'ticks')>t0&&run(g,'outerTicks')>o0);}
 {const g=env();await enter(g,'last302');step(g,10);const v=vid(g);v.fire('error');step(g,1);ok('video error: closes, not seen (retry next time)',ins(g).open===null&&!ins(g).prefs.seen.includes('beach'));}
 {const g=env();await enter(g,'last302');step(g,10);step(g,61);ok('stall 6s: closes, not seen',ins(g).open===null&&ins(g).stats.stalled===1&&!ins(g).prefs.seen.includes('beach'));}
 // Codex P2: 영화 모드(R370) 낭독이 흐르는 동안은 기다렸다가 끝나면 튼다(서사창은 R370 이 바로 닫음)
