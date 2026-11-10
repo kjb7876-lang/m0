@@ -48,7 +48,8 @@ const egoActive=()=>{try{return !!window.__STORYWORLD_EGO151__?.inspect?.()?.sta
 const img=n=>{try{const r=typeof readyImage==='function'?readyImage(PATH(n)):null;return r?.image||null;}catch(_){return null;}};
 // W 시트는 보류: 2026-11-10 헤드리스 비교에서 옛 W 보다 약하고 십자가가 작은 사람처럼 읽힘 → Dots SL-07b(바닥 문양) 올 때까지 옛 W 유지.
 // 비교용으로만 localStorage storyworld.r585.w-sheet = 'on' 이면 켠다.
-const HOLD=new Set((()=>{try{return localStorage.getItem('storyworld.r585.w-sheet')==='on'?[]:['w'];}catch(_){return ['w'];}})());
+// E 시트도 보류: 대시(약 0.2초) 동안 가늘고 어두운 자국이 거의 안 보임 → Dots 다시 그리기 전까지 옛 E. 비교용 storyworld.r585.e-sheet = 'on'.
+const HOLD=new Set(['w','e'].filter(k=>{try{return localStorage.getItem('storyworld.r585.'+k+'-sheet')!=='on';}catch(_){return true;}}));
 const ready=slot=>on&&!HOLD.has(slot)&&(NEED[slot]||[]).every(n=>!!img(n));
 // 엔진 그림 저장소는 새 게임·지역 이동 때 비워질 수 있다 → 아직 안 읽힌 시트만 게임 시간 2초마다 다시 부탁한다(매 틱 아님).
 let lastAsk=-1e9;function request(){if(!isHero())return;const t=Number(typeof time!=='undefined'?time:0)||0;if(t-lastAsk<2&&t>=lastAsk)return;const miss=NAMES.filter(n=>!img(n));if(!miss.length)return;lastAsk=t;try{if(typeof ensureImages==='function'){const r=ensureImages(miss.map(PATH));if(r&&typeof r.catch==='function')r.catch(()=>{});stats.requested++;}}catch(e){fail(e);}}

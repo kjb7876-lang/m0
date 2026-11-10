@@ -111,8 +111,10 @@ function upright(c){const [p0,p1,p2,p3]=c.points;return Math.abs(p0[1]-p1[1])<1e
   ok('Q: no errors',S.inspect().stats.errors===0,S.inspect().lastError);}
  // ---- W 피의 희생·E 피의 대시: 원천 연출·코드 문양 대신 시트. 다른 영웅은 그대로 ----
  {const env=makeEnv();env.fxBase.length=0;for(const st of ['warning','release','end'])env.fx('storySourceSkill',0,0,{storyWER:true,sourceHero:'slayer',sourceSlot:'w',stage:st,castId:20});
-  ok('W held (2026-11-10 headless: CX-0055 W sheet reads weaker than the old W and its cross looks like a small figure) → old W effect stays until Dots SL-07b; no W sheet, claims(w)=false',env.fxBase.length===3&&!env.effects.some(f=>f.sheet==='slayer-w-sacrifice')&&env.S.claims('w')===false&&env.S.claims('e')===true,{fx:env.fxBase.length});}
- {const env=makeEnv({ls:{'storyworld.r585.w-sheet':'on'}});const S=env.S;env.fxBase.length=0;
+  ok('W held (2026-11-10 headless: CX-0055 W sheet reads weaker than the old W and its cross looks like a small figure) → old W effect stays until Dots SL-07b; no W sheet, claims(w)=false',env.fxBase.length===3&&!env.effects.some(f=>f.sheet==='slayer-w-sacrifice')&&env.S.claims('w')===false,{fx:env.fxBase.length});
+  env.fxBase.length=0;for(const st of ['warning','flight','end'])env.fx('storySourceSkill',0,0,{storyWER:true,sourceHero:'slayer',sourceSlot:'e',stage:st,castId:19,tx:3.8,ty:0});
+  ok('E held too (2026-11-10 headless: thin dark trail unreadable during the dash) → old E stays until a Dots redraw; no E sheet, claims(e)=false',env.fxBase.length===3&&!env.effects.some(f=>f.sheet==='slayer-e-dash')&&env.S.claims('e')===false&&env.S.claims('r')===true,{fx:env.fxBase.length});}
+ {const env=makeEnv({ls:{'storyworld.r585.w-sheet':'on','storyworld.r585.e-sheet':'on'}});const S=env.S;env.fxBase.length=0;
   for(const st of ['warning','release','end'])env.fx('storySourceSkill',0,0,{storyWER:true,sourceHero:'slayer',sourceSlot:'w',stage:st,castId:21});
   ok('W (opt-in storyworld.r585.w-sheet=on): slayer W cues do not reach the procedural layers (R209/d2s/r102) — swallowed',env.fxBase.length===0,env.fxBase);
   const w=env.effects.find(f=>f.type==='r585-sheet'&&f.sheet==='slayer-w-sacrifice');ok('W: blood sacrifice sheet spawned at the hero feet',!!w&&w.x===0&&w.y===0);
