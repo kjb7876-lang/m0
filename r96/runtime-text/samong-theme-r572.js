@@ -79,13 +79,13 @@ const THEMES={
     const push=(Math.sin(t*4+i*1.3)*.5+.5)*h*.12,tx=gx+Math.cos(out)*(h*.08+push),ty=gy+Math.sin(out)*(h*.08+push),bx=tx-Math.cos(out)*h*.22,by=ty-Math.sin(out)*h*.22;
     line([[bx,by],[tx,ty]],F.sub,.9*a,1.6*Z);const hx=Math.cos(out),hy=Math.sin(out),s=h*.06;
     ctx.fillStyle=rgba(F.main,.95*a);ctx.beginPath();ctx.moveTo(tx+hx*s,ty+hy*s);ctx.lineTo(tx-hy*s*.6,ty+hx*s*.6);ctx.lineTo(tx+hy*s*.6,ty-hx*s*.6);ctx.closePath();ctx.fill();}
-  }else{ctx.globalCompositeOperation='lighter';const n=low?3:7;for(let i=0;i<n;i++){const ph=(t*.9+i/n)%1;disc(x+Math.sin(i*3.3+t*2)*h*.35,fy-h*(.1+1.2*ph),(2.2-1.4*ph)*Z,i%2?F.main:GOLD,.85*(1-ph)*a);}}}},
+  }else{ctx.globalCompositeOperation='lighter';const n=low?3:7;for(let i=0;i<n;i++){const ph=(t*.9+i/n)%1;disc(x+Math.sin(i*3.3+t*2)*h*.35,fy-h*(.1+1.2*ph),(2.2-1.4*ph)*Z,i%2?F.main:F.sub,.85*(1-ph)*a);}}}},
  slayer:{name:'피의 갑주',draw(L,x,fy,h,F,t,a,low){const Z=Zf();
   if(L==='back'){// 등 뒤 핏빛 똑바른 십자가(위 짧고 아래 김) + 어깨 갑주 조각
    const g=crossGeometry(h),cx=x,cy=fy-h*1.12,pulse=.8+.2*Math.sin(t*5);ctx.globalCompositeOperation='lighter';
    ctx.fillStyle=rgba(F.main,.22*a*pulse);ctx.fillRect(cx-g.width*1.8,cy-g.top-g.width,g.width*3.6,g.top+g.bottom+g.width*2);
    ctx.fillStyle=rgba(F.main,.9*a*pulse);ctx.fillRect(cx-g.width/2,cy-g.top,g.width,g.top+g.bottom);ctx.fillRect(cx-g.arm,cy-g.width/2,g.arm*2,g.width);
-   ctx.globalCompositeOperation='source-over';for(const s of [-1,1]){const sx=x+s*h*.24,sy=fy-h*.82;ctx.fillStyle=rgba([40,6,12],.78*a);ctx.beginPath();ctx.moveTo(sx,sy-h*.1);ctx.lineTo(sx+s*h*.2,sy-h*.04);ctx.lineTo(sx+s*h*.16,sy+h*.1);ctx.lineTo(sx,sy+h*.06);ctx.closePath();ctx.fill();
+   ctx.globalCompositeOperation='source-over';for(const s of [-1,1]){const sx=x+s*h*.24,sy=fy-h*.82;ctx.fillStyle=rgba(F.main.map(v=>Math.round(v*.18)),.78*a);ctx.beginPath();ctx.moveTo(sx,sy-h*.1);ctx.lineTo(sx+s*h*.2,sy-h*.04);ctx.lineTo(sx+s*h*.16,sy+h*.1);ctx.lineTo(sx,sy+h*.06);ctx.closePath();ctx.fill();
     line([[sx,sy-h*.1],[sx+s*h*.2,sy-h*.04]],F.main,.8*a,1.2*Z);}
   }else{ctx.globalCompositeOperation='source-over';// 떨어지는 핏방울
    const n=low?3:7;for(let i=0;i<n;i++){const ph=(t*.8+i/n)%1,dx=x+(i/(n-1)-.5)*h*.8,dy=fy-h*(1.2-1.1*ph),s=2.4*Z;ctx.fillStyle=rgba(F.main,.85*(1-ph*.6)*a);ctx.beginPath();ctx.moveTo(dx,dy-s*2);ctx.quadraticCurveTo(dx+s,dy,dx,dy+s);ctx.quadraticCurveTo(dx-s,dy,dx,dy-s*2);ctx.closePath();ctx.fill();}}}},
@@ -107,7 +107,7 @@ function markDraw(m,t){const age=(t-m.t0)/MARK_LIFE;if(age<0||age>1)return;const
   case'neon':ctx.globalCompositeOperation='lighter';{const p=[];for(let k=0;k<=6;k++){const v=k*TAU/6;p.push([x+Math.cos(v)*h*.2*g,y+Math.sin(v)*h*.2*g]);}line(p,F.main,.85*a,1.4*Z);line([[x-h*.12,y-h*.3],[x+h*.04,y-h*.04],[x-h*.04,y+h*.04],[x+h*.12,y+h*.3]],F.sub,.95*a,1.6*Z);}break;
   case'michaela':ctx.globalCompositeOperation='lighter';{const s=h*.14;ctx.fillStyle=rgba(F.main,.85*a);ctx.beginPath();ctx.moveTo(x,y+s);ctx.quadraticCurveTo(x-s*1.6,y-s*.2,x-s*.8,y-s);ctx.quadraticCurveTo(x,y-s*1.3,x,y-s*.5);ctx.quadraticCurveTo(x,y-s*1.3,x+s*.8,y-s);ctx.quadraticCurveTo(x+s*1.6,y-s*.2,x,y+s);ctx.closePath();ctx.fill();ring(x,y,h*.32*g,h*.32*g,F.sub,.6*a,1.2*Z);}break;
   case'lauren':ctx.globalCompositeOperation='lighter';ring(x,y,h*.34*(1-age*.7),h*.12*(1-age*.7),F.main,.8*a,1.6*Z);disc(x,y,h*.07,F.main,.9*a);disc(x,y,h*.03,F.sub,.95*a);break;
-  case'hunter':ctx.globalCompositeOperation='lighter';{const u=m.t0*13%TAU,c=Math.cos(u),s=Math.sin(u);line([[x-c*h*.34,y-s*h*.34],[x,y]],F.sub,.9*a,1.6*Z);disc(x,y,h*.12*g,F.main,.6*a);disc(x,y,h*.05,GOLD,.95*a);}break;
+  case'hunter':ctx.globalCompositeOperation='lighter';{const u=m.t0*13%TAU,c=Math.cos(u),s=Math.sin(u);line([[x-c*h*.34,y-s*h*.34],[x,y]],F.sub,.9*a,1.6*Z);disc(x,y,h*.12*g,F.main,.6*a);disc(x,y,h*.05,F.sub,.95*a);}break;
   case'slayer':ctx.globalCompositeOperation='source-over';for(let k=-1;k<=1;k++)line([[x-h*.24+k*h*.1,y-h*.24],[x+h*.24+k*h*.1,y+h*.24]],F.main,.85*a,2.2*Z);disc(x,y+h*.2,h*.05,F.main,.8*a);break;
   case'gunner':ctx.globalCompositeOperation='lighter';{const r=h*.24*(1.3-age*.3);for(const [sx,sy] of [[-1,-1],[1,-1],[1,1],[-1,1]])line([[x+sx*r,y+sy*r*.5],[x+sx*r,y+sy*r],[x+sx*r*.5,y+sy*r]],F.main,.9*a,1.4*Z);disc(x,y,h*.04,F.sub,.95*a);}break;
  }}

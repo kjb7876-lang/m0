@@ -33,6 +33,12 @@ if(S){const {run,sb,ops}=S;const T=sb.__STORYWORLD_SAMONG_THEME_R572__;
  check('motif draw sequences differ between heroes',new Set(Object.values(sig)).size===8);
  ops.length=0;run('player.hero="hwando";player.samong=6;drawHero()');const hw=ops.filter(o=>o.startsWith('colour:')).join(' ');
  check('환도 수묵: ink-black strokes with silver and gold',/rgba\((1[0-9]|2[0-9]),(1[0-9]|2[0-9]),(1[0-9]|2[0-9]|3[0-9]),/.test(hw)&&/214,222,234/.test(hw)&&/255,198,72/.test(hw),hw.slice(0,200));
+ // 영웅 이펙트는 고유색+보조색 2색만(art-style §2). 환도는 사용자가 정한 수묵(먹)+은+금이라 예외 없이 자기 팔레트 안.
+ {const S5=sb.__STORYWORLD_SAMONG_SURGE_R571__,cols=o=>o.filter(x=>x.startsWith('colour:rgba(')).map(x=>x.slice(12).split(',').slice(0,3).join(','));
+  for(const h of ['hunter','seoha','neon','michaela','lauren','slayer','gunner']){const P=S5.palette(h),ok=new Set([P.main,P.sub].map(c=>c.join(',')));
+   run('time+=5;drawHero()');ops.length=0;run('player.hero="'+h+'";player.samong=6;time+=.3;drawHero();var __e={id:"pal'+h+'",x:11,y:10,hp:99};time+=.2;hitEnemy(__e,1,{storyWER:true});drawHero()');
+   const shade=c=>{const v=c.split(',').map(Number);return[P.main,P.sub].some(q=>{const k=v[0]/Math.max(1,q[0]);return k>0&&k<=1&&q.every((w,i)=>Math.abs(w*k-v[i])<=2);});};const bad=[...new Set(cols(ops))].filter(c=>!ok.has(c)&&!shade(c));check('2-colour palette only (R302 main+sub, darker shades allowed) · '+h,bad.length===0,bad.join(' | '));}
+  run('time+=5;drawHero()');}
  const g=T.crossGeometry(66);check('슬레이어 cross is upright: top arm shorter than bottom (no inverted cross)',g.top<g.bottom&&g.top>0&&g.arm>0,JSON.stringify(g));
  check('never sets ctx.filter',!ops.some(o=>o.startsWith('filter:')));
  // ---- 스킬 적중 문양 ----
