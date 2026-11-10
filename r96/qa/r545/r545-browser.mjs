@@ -4,8 +4,8 @@ let n=0,bad=0;const ok=(c,m)=>{n++;if(!c)bad++;console.log((c?'PASS ':'FAIL ')+m
 const b=await chromium.launch({args:['--autoplay-policy=no-user-gesture-required']});const {p}=await boot(b,{vp:{width:640,height:360}});p.on('pageerror',e=>errs.push(String(e)));
 await go(p,'dist00');
 const r=await p.evaluate(async()=>{const wait=ms=>new Promise(r=>setTimeout(r,ms)),C=window.__STORYWORLD_SFX_COMFORT__,A=window.__STORYWORLD_SFX_R541__;try{await unlockAudio();}catch(_){}settings.sound=true;settings.volume=.8;
- const kinds=['special','attack','enemyHit','hurt','parry','special','attack','enemyHit','hurt','parry'];for(const k of kinds){try{sound(k);}catch(_){}await wait(450);}
- const st=C.inspect().stats,i=A.inspect(),path=soundProfiles.special[0].path,raw=await (async()=>{const base=buffers.get(cleanPath(path));return base;})(),soft=await audioBuffer(path);
+ const kinds=['special','attack','enemyHit','hurt','parry','special','attack','enemyHit','hurt','parry'];/* R546 뒤로 소리마다 변주가 2개라 한 바퀴(10번)로는 같은 버퍼가 거의 안 돌아온다 → 두 바퀴 돌려 캐시를 본다 */for(const k of kinds.concat(kinds)){try{sound(k);}catch(_){}await wait(450);}
+ const st=C.inspect().stats,i=A.inspect(),path=soundProfiles.special[0].path,soft=await audioBuffer(path),raw=await (async()=>{const base=buffers.get(cleanPath(path));return base;})();/* R546 뒤로는 고유기가 새 소리로 바뀌어 엔진 원본이 아직 안 읽혔을 수 있으므로 먼저 읽게 한 뒤 원본을 꺼낸다 */
  const low=(buf)=>{const d=buf.getChannelData(0),fs=buf.sampleRate;let lp=0,e=0,t=0;const a=1-Math.exp(-2*Math.PI*150/fs);for(let k=0;k<d.length;k++){lp+=a*(d[k]-lp);e+=lp*lp;t+=d[k]*d[k];}return e/(t||1);};
  return{rev:A.revision,on:A.enabledR545(),r545:i.r545,errors:i.stats.errors,st,sameLen:soft.length===raw.length,differs:soft!==raw,lowRaw:low(raw),lowSoft:low(soft),head:Math.abs(soft.getChannelData(0)[0]),plays:C.inspect().audit.filter(x=>x.kind==='play').length};});
 console.log(JSON.stringify(r));
