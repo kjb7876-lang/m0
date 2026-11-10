@@ -28,7 +28,7 @@
    if(!claimed(id))room.props.push({id:'r108orb:'+id,x:p.x,y:p.y,path:ORB_ART,height:30,solid:false,visible:true,autoTargetEligible6:false,r108Orb:{id,amount,at:typeof time==='number'?time:0}});
    room.r108CratesPruned=room.props;stats.broken++;if(how==='attack')stats.attackBreaks++;else stats.interactBreaks++;
    try{if(typeof fx==='function'&&typeof VFX!=='undefined'&&VFX.burst)fx('burst',p.x,p.y,{asset:VFX.burst,size:1,life:.45});}catch(_){}
-   try{if(typeof sound==='function')sound('attack');}catch(_){}
+   try{if(typeof sound==='function')sound(typeof soundProfiles!=='undefined'&&soundProfiles.r542Crush?.length?'r542Crush':'attack');}catch(_){}
    return true;}catch(err){fail(err);return false;}}
  function collect(){if(typeof room==='undefined'||!room?.props||!player||!(player.hp>0))return;
   for(const o of room.props){if(!o?.r108Orb||(typeof time==="number"?time:0)-o.r108Orb.at<.55||Math.hypot(o.x-player.x,o.y-player.y)>PICKUP)continue;const{id,amount}=o.r108Orb;
