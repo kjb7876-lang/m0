@@ -7962,6 +7962,23 @@
     "assets/r562/dots/neon-toxic-pool.webp",
     "assets/r562/dots/neon-chain.webp",
     "assets/r562/dots/neon-bubble-ring-back.webp",
+    "enemy-attack-tempo-r601.js",
+    "auto-attack-r597.js",
+    "slayer-berserk-r586.js",
+    "assets/r587/index.json",
+    "assets/r587/slayer-w-cross2.webp",
+    "assets/r587/slayer-e-floor.webp",
+    "assets/r587/slayer-bleed2.webp",
+    "assets/r587/slayer-q-thorn-back.webp",
+    "assets/r587/slayer-q-thorn-front.webp",
+    "assets/r587/slayer-hit.webp",
+    "assets/r587/slayer-exec.webp",
+    "assets/r587/slayer-chain.webp",
+    "assets/r587/slayer-mark.webp",
+    "michaela-genesis-r563.js",
+    "assets/r563/dots/michaela-pillar.webp",
+    "assets/r563/dots/michaela-grand-pillar.webp",
+    "assets/r563/dots/michaela-halo.webp",
     "boss-cinematic-r568.js",
     "hwando-fall-video-r617.js",
     "video-render-pause-r619.js",
@@ -9046,5 +9063,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "285bb68bddef7fda493d64bd7bf355da2c5730d3c11275ca1ef19653897c142b"
+  "runtimeManifestSHA256": "8cb2c155f55845f023a78560b11adf4889ebc7bfe4444b4c59185599ff08bbf3"
 }

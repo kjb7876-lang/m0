@@ -1,0 +1,860 @@
+{
+  "schema": "storyworld.final42-runtime-cpu/v1",
+  "checks": [
+    {
+      "name": "Runtime installs exactly42 source-backed effects and no separate animation loop",
+      "passed": true
+    },
+    {
+      "name": "Unknown IDs and nonfinite or negative times cannot create frames",
+      "passed": true
+    },
+    {
+      "name": "Every authored clip step samples its exact original frame rect and fixed pivot",
+      "passed": true,
+      "detail": {
+        "steps": 980
+      }
+    },
+    {
+      "name": "Numeric canonical and original effect IDs resolve to the same frame",
+      "passed": true
+    },
+    {
+      "name": "F6 auras retain the30-step forward reverse sequence and exact wrap",
+      "passed": true,
+      "detail": [
+        {
+          "id": 243,
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            14,
+            13,
+            12,
+            11,
+            10,
+            9,
+            8,
+            7,
+            6,
+            5,
+            4,
+            3,
+            2,
+            1
+          ],
+          "wrapped": 0,
+          "atBoundary": 0
+        },
+        {
+          "id": 244,
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            14,
+            13,
+            12,
+            11,
+            10,
+            9,
+            8,
+            7,
+            6,
+            5,
+            4,
+            3,
+            2,
+            1
+          ],
+          "wrapped": 0,
+          "atBoundary": 0
+        },
+        {
+          "id": 247,
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            14,
+            13,
+            12,
+            11,
+            10,
+            9,
+            8,
+            7,
+            6,
+            5,
+            4,
+            3,
+            2,
+            1
+          ],
+          "wrapped": 0,
+          "atBoundary": 0
+        },
+        {
+          "id": 248,
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            14,
+            13,
+            12,
+            11,
+            10,
+            9,
+            8,
+            7,
+            6,
+            5,
+            4,
+            3,
+            2,
+            1
+          ],
+          "wrapped": 0,
+          "atBoundary": 0
+        },
+        {
+          "id": 249,
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            14,
+            13,
+            12,
+            11,
+            10,
+            9,
+            8,
+            7,
+            6,
+            5,
+            4,
+            3,
+            2,
+            1
+          ],
+          "wrapped": 0,
+          "atBoundary": 0
+        },
+        {
+          "id": 250,
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            14,
+            13,
+            12,
+            11,
+            10,
+            9,
+            8,
+            7,
+            6,
+            5,
+            4,
+            3,
+            2,
+            1
+          ],
+          "wrapped": 0,
+          "atBoundary": 0
+        }
+      ]
+    },
+    {
+      "name": "Thorn automatically chains emerge bind hold and bounded release",
+      "passed": true
+    },
+    {
+      "name": "Original endpoint opacity interpolates without altering PNG pixels",
+      "passed": true
+    },
+    {
+      "name": "Held warnings require explicit signal while projectiles hold only by request",
+      "passed": true
+    },
+    {
+      "name": "Each of42 atlases decodes individually while staying inside the64MiB bound",
+      "passed": true,
+      "detail": [
+        {
+          "id": "F081",
+          "ok": true,
+          "resident": 9437184
+        },
+        {
+          "id": "F090",
+          "ok": true,
+          "resident": 6553600
+        },
+        {
+          "id": "F091",
+          "ok": true,
+          "resident": 6553600
+        },
+        {
+          "id": "F092",
+          "ok": true,
+          "resident": 6553600
+        },
+        {
+          "id": "F093",
+          "ok": true,
+          "resident": 6553600
+        },
+        {
+          "id": "F094",
+          "ok": true,
+          "resident": 4194304
+        },
+        {
+          "id": "F095",
+          "ok": true,
+          "resident": 4194304
+        },
+        {
+          "id": "F096",
+          "ok": true,
+          "resident": 4194304
+        },
+        {
+          "id": "F097",
+          "ok": true,
+          "resident": 4194304
+        },
+        {
+          "id": "F098",
+          "ok": true,
+          "resident": 6553600
+        },
+        {
+          "id": "F099",
+          "ok": true,
+          "resident": 25165824
+        },
+        {
+          "id": "F100",
+          "ok": true,
+          "resident": 4194304
+        },
+        {
+          "id": "F101",
+          "ok": true,
+          "resident": 4194304
+        },
+        {
+          "id": "F110",
+          "ok": true,
+          "resident": 9437184
+        },
+        {
+          "id": "F111",
+          "ok": true,
+          "resident": 9437184
+        },
+        {
+          "id": "F112",
+          "ok": true,
+          "resident": 9437184
+        },
+        {
+          "id": "F113",
+          "ok": true,
+          "resident": 9437184
+        },
+        {
+          "id": "F114",
+          "ok": true,
+          "resident": 9437184
+        },
+        {
+          "id": "F115",
+          "ok": true,
+          "resident": 9437184
+        },
+        {
+          "id": "F116",
+          "ok": true,
+          "resident": 9437184
+        },
+        {
+          "id": "F117",
+          "ok": true,
+          "resident": 9437184
+        },
+        {
+          "id": "F130",
+          "ok": true,
+          "resident": 9437184
+        },
+        {
+          "id": "F131",
+          "ok": true,
+          "resident": 9437184
+        },
+        {
+          "id": "F132",
+          "ok": true,
+          "resident": 9437184
+        },
+        {
+          "id": "F213",
+          "ok": true,
+          "resident": 4194304
+        },
+        {
+          "id": "F214",
+          "ok": true,
+          "resident": 6553600
+        },
+        {
+          "id": "F215",
+          "ok": true,
+          "resident": 6553600
+        },
+        {
+          "id": "F217",
+          "ok": true,
+          "resident": 6553600
+        },
+        {
+          "id": "F243",
+          "ok": true,
+          "resident": 4194304
+        },
+        {
+          "id": "F244",
+          "ok": true,
+          "resident": 4194304
+        },
+        {
+          "id": "F245",
+          "ok": true,
+          "resident": 6553600
+        },
+        {
+          "id": "F246",
+          "ok": true,
+          "resident": 6553600
+        },
+        {
+          "id": "F247",
+          "ok": true,
+          "resident": 4194304
+        },
+        {
+          "id": "F248",
+          "ok": true,
+          "resident": 4194304
+        },
+        {
+          "id": "F249",
+          "ok": true,
+          "resident": 4194304
+        },
+        {
+          "id": "F250",
+          "ok": true,
+          "resident": 4194304
+        },
+        {
+          "id": "F251",
+          "ok": true,
+          "resident": 6553600
+        },
+        {
+          "id": "F254",
+          "ok": true,
+          "resident": 6553600
+        },
+        {
+          "id": "F259",
+          "ok": true,
+          "resident": 4194304
+        },
+        {
+          "id": "F260",
+          "ok": true,
+          "resident": 4194304
+        },
+        {
+          "id": "F261",
+          "ok": true,
+          "resident": 4194304
+        },
+        {
+          "id": "F262",
+          "ok": true,
+          "resident": 4194304
+        }
+      ]
+    },
+    {
+      "name": "Concurrent42-effect requests never decode all42 or exceed atlas and byte budgets",
+      "passed": true,
+      "detail": {
+        "loaded": 8,
+        "budget": {
+          "schema": "storyworld.final42-runtime/v1",
+          "effectCount": 42,
+          "clock": 1,
+          "generation": 43,
+          "budgetBytes": 67108864,
+          "residentBytes": 48234496,
+          "maxAtlases": 8,
+          "maxInstances": 16,
+          "maxDirectInstances": 24,
+          "resident": [
+            {
+              "path": "assets/final42-r88/effects/081/atlas.png",
+              "state": "ready",
+              "bytes": 9437184,
+              "used": 1,
+              "lastDraw": null
+            },
+            {
+              "path": "assets/final42-r88/effects/090/atlas.png",
+              "state": "ready",
+              "bytes": 6553600,
+              "used": 1,
+              "lastDraw": null
+            },
+            {
+              "path": "assets/final42-r88/effects/091/atlas.png",
+              "state": "ready",
+              "bytes": 6553600,
+              "used": 1,
+              "lastDraw": null
+            },
+            {
+              "path": "assets/final42-r88/effects/092/atlas.png",
+              "state": "ready",
+              "bytes": 6553600,
+              "used": 1,
+              "lastDraw": null
+            },
+            {
+              "path": "assets/final42-r88/effects/093/atlas.png",
+              "state": "ready",
+              "bytes": 6553600,
+              "used": 1,
+              "lastDraw": null
+            },
+            {
+              "path": "assets/final42-r88/effects/094/atlas.png",
+              "state": "ready",
+              "bytes": 4194304,
+              "used": 1,
+              "lastDraw": null
+            },
+            {
+              "path": "assets/final42-r88/effects/095/atlas.png",
+              "state": "ready",
+              "bytes": 4194304,
+              "used": 1,
+              "lastDraw": null
+            },
+            {
+              "path": "assets/final42-r88/effects/096/atlas.png",
+              "state": "ready",
+              "bytes": 4194304,
+              "used": 1,
+              "lastDraw": null
+            }
+          ],
+          "active": [],
+          "metrics": {
+            "loads": 50,
+            "decoded": 50,
+            "releases": 42,
+            "failed": 0,
+            "lateLoads": 0,
+            "draws": 0,
+            "played": 0,
+            "attached": 0,
+            "dropped": 0,
+            "budgetDrops": 34,
+            "offscreenDrops": 0,
+            "invalidCallbacks": 0,
+            "completed": 0,
+            "sceneClears": 0,
+            "highWaterBytes": 48234496,
+            "highWaterInstances": 0
+          },
+          "noIndependentAnimationLoop": true,
+          "procedural80Loaded": false,
+          "browserVerified": false,
+          "GPUVerified": false,
+          "naturalPlayVerified": false
+        }
+      }
+    },
+    {
+      "name": "Repeated aliases and ensures reuse one decoded Image",
+      "passed": true
+    },
+    {
+      "name": "All authored stored frames draw unchanged atlas rects with source alpha and finite quads",
+      "passed": true,
+      "detail": {
+        "frames": 680
+      }
+    },
+    {
+      "name": "Drawing restores caller alpha transform blend and owner state",
+      "passed": true
+    },
+    {
+      "name": "Native status keys deduplicate attachment without restarting its clock",
+      "passed": true
+    },
+    {
+      "name": "Attachment follows its live actor and draws only in its assigned actor layer",
+      "passed": true
+    },
+    {
+      "name": "Status extensions preserve age and expiry switches thorn to its release clip",
+      "passed": true
+    },
+    {
+      "name": "A new admitted status may bind again while the previous release tail finishes",
+      "passed": true
+    },
+    {
+      "name": "Release clip completes and removes both status and tail handles",
+      "passed": true
+    },
+    {
+      "name": "Actor death removes its attachment without retaining a release cage",
+      "passed": true
+    },
+    {
+      "name": "Offscreen status instances expire after the bounded grace interval",
+      "passed": true
+    },
+    {
+      "name": "Unused decoded atlas textures expire after idle TTL",
+      "passed": true
+    },
+    {
+      "name": "Managed multi-spawn is capped at16 live instances",
+      "passed": true
+    },
+    {
+      "name": "Room identity changes clear all instances Images and pending timers",
+      "passed": true
+    },
+    {
+      "name": "Player death releases textures and cannot immediately reload them",
+      "passed": true
+    },
+    {
+      "name": "Pointer coarse scope preserves mobile by declining and releasing FINAL42",
+      "passed": true
+    },
+    {
+      "name": "Scene cancellation resolves pending decodes and cannot resurrect a late Image",
+      "passed": true
+    },
+    {
+      "name": "An image failure is cached for the scene and not retried on every frame",
+      "passed": true
+    },
+    {
+      "name": "First-load admission keeps native fallback then a live ready retry preserves original age",
+      "passed": true
+    },
+    {
+      "name": "A ready texture cannot resurrect an async event captured in a previous scene",
+      "passed": true
+    },
+    {
+      "name": "Ground textures use the exact native footprint with donut hole and capsule union rules",
+      "passed": true
+    },
+    {
+      "name": "Malformed footprint angles never emit nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "Native replay uses byte-identical canonical runtime and catalog delivery",
+      "passed": true
+    },
+    {
+      "name": "Actual native footprint recording emits one clipped original-atlas command per shape",
+      "passed": true,
+      "detail": {
+        "counts": [
+          true,
+          true,
+          true
+        ],
+        "commands": [
+          {
+            "owner": {
+              "id": "final42-r88:native-geometry-0:F251",
+              "kind": "hazard",
+              "x": 43,
+              "y": 109,
+              "groundAligned": true,
+              "r88Final42": true,
+              "r88EffectID": "F251",
+              "r88EffectSource": "251-attack-warning-ring",
+              "r88SourceIndex": 251,
+              "r88Frame": 2,
+              "r88Clip": "main",
+              "r88Layer": "ground",
+              "r88Pivot": [
+                0.5,
+                0.5
+              ],
+              "nativeOwner": null,
+              "r88AtlasPath": "assets/final42-r88/effects/251/atlas.png"
+            },
+            "clips": 1
+          },
+          {
+            "owner": {
+              "id": "final42-r88:native-geometry-1:F251",
+              "kind": "hazard",
+              "x": 43,
+              "y": 109,
+              "groundAligned": true,
+              "r88Final42": true,
+              "r88EffectID": "F251",
+              "r88EffectSource": "251-attack-warning-ring",
+              "r88SourceIndex": 251,
+              "r88Frame": 2,
+              "r88Clip": "main",
+              "r88Layer": "ground",
+              "r88Pivot": [
+                0.5,
+                0.5
+              ],
+              "nativeOwner": null,
+              "r88AtlasPath": "assets/final42-r88/effects/251/atlas.png"
+            },
+            "clips": 1
+          },
+          {
+            "owner": {
+              "id": "final42-r88:native-geometry-2:F251",
+              "kind": "hazard",
+              "x": 43,
+              "y": 109,
+              "groundAligned": true,
+              "r88Final42": true,
+              "r88EffectID": "F251",
+              "r88EffectSource": "251-attack-warning-ring",
+              "r88SourceIndex": 251,
+              "r88Frame": 2,
+              "r88Clip": "main",
+              "r88Layer": "ground",
+              "r88Pivot": [
+                0.5,
+                0.5
+              ],
+              "nativeOwner": null,
+              "r88AtlasPath": "assets/final42-r88/effects/251/atlas.png"
+            },
+            "clips": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "Native FINAL42 clipped image commands produce finite real Three geometry",
+      "passed": true
+    },
+    {
+      "name": "Three clipping preserves the donut hole and capsule union without XOR holes",
+      "passed": true,
+      "detail": [
+        {
+          "shape": "donut",
+          "covered": false
+        },
+        {
+          "shape": "capsule",
+          "covered": true
+        },
+        {
+          "shape": "cone",
+          "covered": true
+        }
+      ]
+    },
+    {
+      "name": "FINAL42 textures retain straight alpha linear clamp filtering without mipmaps",
+      "passed": true
+    },
+    {
+      "name": "Supplied single rear and front overlays retain pass ordering and world-depth occlusion",
+      "passed": true,
+      "detail": {
+        "rear": {
+          "mask": 4,
+          "order": -1,
+          "depthTest": true,
+          "depthWrite": false
+        },
+        "front": {
+          "mask": 8,
+          "order": 0,
+          "depthTest": true,
+          "depthWrite": false
+        },
+        "hasBodyPath": false
+      }
+    },
+    {
+      "name": "Removing actual FINAL42 commands releases all Three geometry and textures",
+      "passed": true
+    },
+    {
+      "name": "Native game error ledger remains clear after FINAL42 CPU replay",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "method": "Original normalized42 metadata; independent Image/decode/clock/DrawCommands fixtures; native footprint clipping and pinned Three CPU geometry. No browser pixels or hardware performance claim.",
+  "canonicalRuntimeSHA256": "f15394e7d479ca7e5cfbdde904206e4bae114e5b8952c73aedb8642516bdd2b0",
+  "canonicalDataSHA256": "90758ad277d5691c8502516d541f7b234ff5ef084dc3cc6fbedda9819091cdfa",
+  "sampledSteps": 980,
+  "renderedFrames": 680,
+  "metrics": {
+    "schema": "storyworld.final42-runtime/v1",
+    "effectCount": 42,
+    "clock": 23.739999999999778,
+    "generation": 94,
+    "budgetBytes": 67108864,
+    "residentBytes": 6553600,
+    "maxAtlases": 8,
+    "maxInstances": 16,
+    "maxDirectInstances": 24,
+    "resident": [
+      {
+        "path": "assets/final42-r88/effects/251/atlas.png",
+        "state": "ready",
+        "bytes": 6553600,
+        "used": 23.739999999999778,
+        "lastDraw": 23.739999999999778
+      }
+    ],
+    "active": [],
+    "metrics": {
+      "loads": 99,
+      "decoded": 99,
+      "releases": 98,
+      "failed": 0,
+      "lateLoads": 0,
+      "draws": 684,
+      "played": 16,
+      "attached": 4,
+      "dropped": 24,
+      "budgetDrops": 34,
+      "offscreenDrops": 1,
+      "invalidCallbacks": 0,
+      "completed": 1,
+      "sceneClears": 2,
+      "highWaterBytes": 48234496,
+      "highWaterInstances": 16
+    },
+    "noIndependentAnimationLoop": true,
+    "procedural80Loaded": false,
+    "browserVerified": false,
+    "GPUVerified": false,
+    "naturalPlayVerified": false
+  },
+  "passed": true
+}

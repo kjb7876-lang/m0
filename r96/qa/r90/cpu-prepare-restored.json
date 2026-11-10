@@ -1,0 +1,6 @@
+{
+  "command": "node scripts/prepare-handoff-baselines.cjs",
+  "exitCode": 0,
+  "stdout": "{\"historicalFixtureFilesVerified\":2091,\"runtimeEdited\":false,\"differentExistingFilesOverwritten\":false}\n",
+  "stderr": ""
+}

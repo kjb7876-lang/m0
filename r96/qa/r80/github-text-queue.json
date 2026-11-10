@@ -1,0 +1,680 @@
+[
+  {
+    "local": "client-source/world-layout-r78.js",
+    "path": "client-source/world-layout-r78.js",
+    "bytes": 5268,
+    "sha": "497e7a1ac7a45a0f3bbb171d92d9da565d76b397"
+  },
+  {
+    "local": "client-source/world-assets-r80-data.js",
+    "path": "client-source/world-assets-r80-data.js",
+    "bytes": 144309,
+    "sha": "4990faa2232d1389cfc0eca80ad1c4ee7102f253"
+  },
+  {
+    "local": "client-source/world-assets-r80.js",
+    "path": "client-source/world-assets-r80.js",
+    "bytes": 7779,
+    "sha": "de05b10f421e25c0a83cd5a29d105f4dbb7e3257"
+  },
+  {
+    "local": "scripts/apply-r80.py",
+    "path": "scripts/apply-r80.py",
+    "bytes": 2694,
+    "sha": "a438ae6fdc5de2437687d2c2b3b1fbda5ae5be05"
+  },
+  {
+    "local": "scripts/build-assets-r80.py",
+    "path": "scripts/build-assets-r80.py",
+    "bytes": 5492,
+    "sha": "ca0ffb8e1698d9905991313c61540a925e5325df"
+  },
+  {
+    "local": "scripts/assemble-r80-review.py",
+    "path": "scripts/assemble-r80-review.py",
+    "bytes": 7271,
+    "sha": "081eac00f5f2bef3c42d174ff78b55f9da5b8a77"
+  },
+  {
+    "local": "scripts/R80-REVIEW.md",
+    "path": "scripts/R80-REVIEW.md",
+    "bytes": 1369,
+    "sha": "4a6fb4c4b9cfdef40f09ac14de5cc6787fcf58d0"
+  },
+  {
+    "local": "pc-test-r80/README.md",
+    "path": "pc-test-r80/README.md",
+    "bytes": 3118,
+    "sha": "71c70e28c1f4720d68def63d084dd2903f710007"
+  },
+  {
+    "local": "pc-test-r80/source-originals-verified.json",
+    "path": "pc-test-r80/source-originals-verified.json",
+    "bytes": 51104,
+    "sha": "a52e1b4a32c6ad182fd08cd29a4051f806f0b42f"
+  },
+  {
+    "local": "pc-test-r80/delta-manifest.json",
+    "path": "pc-test-r80/delta-manifest.json",
+    "bytes": 31512,
+    "sha": "4096f650de173642fbabc4d0f756b09dea89ba4e"
+  },
+  {
+    "local": "pc-test-r80/baseline-manifest-r62.json",
+    "path": "pc-test-r80/baseline-manifest-r62.json",
+    "bytes": 363845,
+    "sha": "4d23f56e598316791a199801a84179631c6df9db"
+  },
+  {
+    "local": "pc-test-r80/launchers/START.cmd",
+    "path": "pc-test-r80/launchers/START.cmd",
+    "bytes": 104,
+    "sha": "d56f2db947228d2595b3ce1393148ba307fbdaf2"
+  },
+  {
+    "local": "pc-test-r80/launchers/PART-2.txt",
+    "path": "pc-test-r80/launchers/PART-2.txt",
+    "bytes": 65,
+    "sha": "9befc0c8d55f66be4fd30f21d9a3c4c88c35b8d3"
+  },
+  {
+    "local": "pc-test-r80/launchers/PART-1.txt",
+    "path": "pc-test-r80/launchers/PART-1.txt",
+    "bytes": 65,
+    "sha": "7f15d4bd02002d53ecc25db83a2b4c943c6901bd"
+  },
+  {
+    "local": "pc-test-r80/launchers/LOCAL-SERVER.cjs",
+    "path": "pc-test-r80/launchers/LOCAL-SERVER.cjs",
+    "bytes": 5164,
+    "sha": "fb5d9e7c9e04df66d584e07f20863083b30f80c5"
+  },
+  {
+    "local": "pc-test-r80/source-docs/README.md",
+    "path": "pc-test-r80/source-docs/README.md",
+    "bytes": 2030,
+    "sha": "b2f92180e805718defac8dffdcbd4a1e729c7836"
+  },
+  {
+    "local": "pc-test-r80/source-docs/new-assets.json",
+    "path": "pc-test-r80/source-docs/new-assets.json",
+    "bytes": 934063,
+    "sha": "a451cfdfc10ecf7efa1fdc72bd9f2b0525d63176"
+  },
+  {
+    "local": "pc-test-r80/source-docs/ASSET_GUIDE.md",
+    "path": "pc-test-r80/source-docs/ASSET_GUIDE.md",
+    "bytes": 9216,
+    "sha": "2b8dc9a75e0ac72ef7da2239959d10842aadf5bf"
+  },
+  {
+    "local": "pc-test-r80/source-docs/SHA256SUMS.txt",
+    "path": "pc-test-r80/source-docs/SHA256SUMS.txt",
+    "bytes": 33608,
+    "sha": "683f1a56222507cec686c38e68e32114bcc97e88"
+  },
+  {
+    "local": "pc-test-r80/source-docs/prior-assets.json",
+    "path": "pc-test-r80/source-docs/prior-assets.json",
+    "bytes": 243872,
+    "sha": "2fa04873b5af9ffcde9b2c4e1fc3cfc763427794"
+  },
+  {
+    "local": "pc-test-r80/source-docs/scene-coverage.json",
+    "path": "pc-test-r80/source-docs/scene-coverage.json",
+    "bytes": 69512,
+    "sha": "b55317eba57fb0a86db775ca7567eeb767439e4c"
+  },
+  {
+    "local": "pc-test-r80/source-docs/package-summary.json",
+    "path": "pc-test-r80/source-docs/package-summary.json",
+    "bytes": 519,
+    "sha": "167f3b1de7d5b4f1b5648213d3a7c36923d32a42"
+  },
+  {
+    "local": "pc-test-r80/source-docs/QA_SUMMARY.md",
+    "path": "pc-test-r80/source-docs/QA_SUMMARY.md",
+    "bytes": 1310,
+    "sha": "387738dbd6b13e738b055857814b93ac21490121"
+  },
+  {
+    "local": "qa/world-r78-layout-results.json",
+    "path": "pc-test-r80/qa/world-r78-layout-results.json",
+    "bytes": 60260,
+    "sha": "c4bd42e1e48fd261a6a8af40fde97effadb94d49"
+  },
+  {
+    "local": "qa/inspect.txt",
+    "path": "pc-test-r80/qa/inspect.txt",
+    "bytes": 8636,
+    "sha": "1ee075328834d0fe748a51b1fc5fde9dc6d3ee22"
+  },
+  {
+    "local": "qa/maze-run.log",
+    "path": "pc-test-r80/qa/maze-run.log",
+    "bytes": 6077,
+    "sha": "c446e2db91c97013ef9ba1911868f1e99196b084"
+  },
+  {
+    "local": "qa/v1-geometry.json",
+    "path": "pc-test-r80/qa/v1-geometry.json",
+    "bytes": 8723,
+    "sha": "a14920f187fabf8eec5832dd8d4e03a79f327219"
+  },
+  {
+    "local": "qa/v1-boss-save.json",
+    "path": "pc-test-r80/qa/v1-boss-save.json",
+    "bytes": 20990,
+    "sha": "9ecbd883335fe6c7e9e5f615f0cea271c3534dbf"
+  },
+  {
+    "local": "qa/README.md",
+    "path": "pc-test-r80/qa/README.md",
+    "bytes": 1389,
+    "sha": "c8df707d979bff1cb84dc11f2fbf9b39ef37e089"
+  },
+  {
+    "local": "qa/inspect.cjs",
+    "path": "pc-test-r80/qa/inspect.cjs",
+    "bytes": 567,
+    "sha": "6aed45d7c96caad137318348a06d4c8c0e77390a"
+  },
+  {
+    "local": "qa/package-results.json",
+    "path": "pc-test-r80/qa/package-results.json",
+    "bytes": 28509,
+    "sha": "1267d20dbdfbfcccecc7420805250289682bec73"
+  },
+  {
+    "local": "qa/maze-integration.cjs",
+    "path": "pc-test-r80/qa/maze-integration.cjs",
+    "bytes": 8372,
+    "sha": "eda938fb4f4ee96139650d58d865d70c30e03150"
+  },
+  {
+    "local": "qa/maze-integration-final.log",
+    "path": "pc-test-r80/qa/maze-integration-final.log",
+    "bytes": 6077,
+    "sha": "c446e2db91c97013ef9ba1911868f1e99196b084"
+  },
+  {
+    "local": "qa/run-final.cjs",
+    "path": "pc-test-r80/qa/run-final.cjs",
+    "bytes": 1667,
+    "sha": "06ac8b8f4a37a34a0c314eed2fa8b18605f1f677"
+  },
+  {
+    "local": "qa/world-r78-layout.cjs",
+    "path": "pc-test-r80/qa/world-r78-layout.cjs",
+    "bytes": 5412,
+    "sha": "4cc4b741686187dcc87dd3e7939ab2e05c042382"
+  },
+  {
+    "local": "qa/route-save.json",
+    "path": "pc-test-r80/qa/route-save.json",
+    "bytes": 61862,
+    "sha": "64b3e591d1d07a564afec71e369e249c8296eb8b"
+  },
+  {
+    "local": "qa/V2-README.md",
+    "path": "pc-test-r80/qa/V2-README.md",
+    "bytes": 2106,
+    "sha": "e7a14265912075b5c8a925bac04341d0ff7cf060"
+  },
+  {
+    "local": "qa/migration-run.log",
+    "path": "pc-test-r80/qa/migration-run.log",
+    "bytes": 14,
+    "sha": "5c3d00ec1c22459d2ba69fd36aa20a5afc8a8d43"
+  },
+  {
+    "local": "qa/ego-regression.cjs",
+    "path": "pc-test-r80/qa/ego-regression.cjs",
+    "bytes": 3613,
+    "sha": "95b8d63a15ec751fe1fb79c48cc21fa9d75c431f"
+  },
+  {
+    "local": "qa/R80-README.md",
+    "path": "pc-test-r80/qa/R80-README.md",
+    "bytes": 1360,
+    "sha": "74f3209046bc59640f16a74d22440f0125aad226"
+  },
+  {
+    "local": "qa/v1-rally-save.json",
+    "path": "pc-test-r80/qa/v1-rally-save.json",
+    "bytes": 38630,
+    "sha": "e27937076927f428633668e612e0a908cc6e843f"
+  },
+  {
+    "local": "qa/migration-check-final.log",
+    "path": "pc-test-r80/qa/migration-check-final.log",
+    "bytes": 14,
+    "sha": "5c3d00ec1c22459d2ba69fd36aa20a5afc8a8d43"
+  },
+  {
+    "local": "qa/rally-save.json",
+    "path": "pc-test-r80/qa/rally-save.json",
+    "bytes": 41879,
+    "sha": "15b5eccca92075f1e3a21a31fccf48db08c2b09a"
+  },
+  {
+    "local": "qa/V2-final-results.json",
+    "path": "pc-test-r80/qa/V2-final-results.json",
+    "bytes": 6350,
+    "sha": "31f71b37eea28aaf6292515fc76b543e1fa12330"
+  },
+  {
+    "local": "qa/ego-regression-results.json",
+    "path": "pc-test-r80/qa/ego-regression-results.json",
+    "bytes": 14439,
+    "sha": "412561da5b5ceb4f3f73f07d9bd4d260d4aaeeda"
+  },
+  {
+    "local": "qa/ego-before-boss-fix-results.json",
+    "path": "pc-test-r80/qa/ego-before-boss-fix-results.json",
+    "bytes": 13456,
+    "sha": "6779431cabe6b836ed34a3a2be3ec718ee7a6d9c"
+  },
+  {
+    "local": "qa/V2-CPU-RESULTS.md",
+    "path": "pc-test-r80/qa/V2-CPU-RESULTS.md",
+    "bytes": 2106,
+    "sha": "e7a14265912075b5c8a925bac04341d0ff7cf060"
+  },
+  {
+    "local": "qa/cold-run.log",
+    "path": "pc-test-r80/qa/cold-run.log",
+    "bytes": 1015,
+    "sha": "e4da1cb022ac0cccac977f50383fb7945e7c54c6"
+  },
+  {
+    "local": "qa/layout-run.log",
+    "path": "pc-test-r80/qa/layout-run.log",
+    "bytes": 2825,
+    "sha": "5532cd37c9a465a542d94c76b54c552bd87334e4"
+  },
+  {
+    "local": "qa/final-results.json",
+    "path": "pc-test-r80/qa/final-results.json",
+    "bytes": 2510,
+    "sha": "f28fe3dc0265cafaefadabc6f88413a69374f548"
+  },
+  {
+    "local": "qa/world-r78-visual.cjs",
+    "path": "pc-test-r80/qa/world-r78-visual.cjs",
+    "bytes": 3553,
+    "sha": "47b20ab4614a09ad494d0f4c47e2d1d35a824e93"
+  },
+  {
+    "local": "qa/maze-results.json",
+    "path": "pc-test-r80/qa/maze-results.json",
+    "bytes": 93573,
+    "sha": "ee14a8ef01a9604eee04d05b227e454476ec75bf"
+  },
+  {
+    "local": "qa/champion-run.log",
+    "path": "pc-test-r80/qa/champion-run.log",
+    "bytes": 14,
+    "sha": "5c3d00ec1c22459d2ba69fd36aa20a5afc8a8d43"
+  },
+  {
+    "local": "qa/preservation-results.json",
+    "path": "pc-test-r80/qa/preservation-results.json",
+    "bytes": 2135,
+    "sha": "9c19880e362e7eb5aae464c98929d097c3274e7b"
+  },
+  {
+    "local": "qa/cold-check.cjs",
+    "path": "pc-test-r80/qa/cold-check.cjs",
+    "bytes": 3912,
+    "sha": "4a2df356e342910da47cd5a3aaa7cd52a2dd4d96"
+  },
+  {
+    "local": "qa/layout-results.json",
+    "path": "pc-test-r80/qa/layout-results.json",
+    "bytes": 8501,
+    "sha": "5e3442f489984f4fd4726a90c8b1d27d22c8d831"
+  },
+  {
+    "local": "qa/package-check.cjs",
+    "path": "pc-test-r80/qa/package-check.cjs",
+    "bytes": 4280,
+    "sha": "c6d9d5f90e71b7b4ad9469560035adab61c5da81"
+  },
+  {
+    "local": "qa/harness.cjs",
+    "path": "pc-test-r80/qa/harness.cjs",
+    "bytes": 8456,
+    "sha": "186a84a2e30fb3fe2664b4f0049d8802ae13985d"
+  },
+  {
+    "local": "qa/roof-check-final.log",
+    "path": "pc-test-r80/qa/roof-check-final.log",
+    "bytes": 840,
+    "sha": "2aa873352791fd77fa7f176b8c6122758ff7c51c"
+  },
+  {
+    "local": "qa/done-save.json",
+    "path": "pc-test-r80/qa/done-save.json",
+    "bytes": 73085,
+    "sha": "18b09bc33ad1c71df142c266756a3dac60b2ec5b"
+  },
+  {
+    "local": "qa/CPU-RESULTS.md",
+    "path": "pc-test-r80/qa/CPU-RESULTS.md",
+    "bytes": 1298,
+    "sha": "dc4adab0cd683cd724b7f1d99e0aba68b2b033c8"
+  },
+  {
+    "local": "qa/ego-regression-final.log",
+    "path": "pc-test-r80/qa/ego-regression-final.log",
+    "bytes": 2404,
+    "sha": "8f74678b66368b97d59e73614569d629dae825ea"
+  },
+  {
+    "local": "qa/world-r78-combat-input-results.json",
+    "path": "pc-test-r80/qa/world-r78-combat-input-results.json",
+    "bytes": 18237,
+    "sha": "b4aec2865656c9e85423a4276218fa5ba05d244d"
+  },
+  {
+    "local": "qa/world-r78-visual-results.json",
+    "path": "pc-test-r80/qa/world-r78-visual-results.json",
+    "bytes": 2945,
+    "sha": "366ec6cfb398006d28b2d8735188231609179e27"
+  },
+  {
+    "local": "qa/roof-results.json",
+    "path": "pc-test-r80/qa/roof-results.json",
+    "bytes": 1130,
+    "sha": "a288573aa95ad70cc94e14c08489cb583b3009be"
+  },
+  {
+    "local": "qa/layout-validation.cjs",
+    "path": "pc-test-r80/qa/layout-validation.cjs",
+    "bytes": 6377,
+    "sha": "ab0c66f9edd155eae466ab4be701c00511f36ba3"
+  },
+  {
+    "local": "qa/topology-plan.json",
+    "path": "pc-test-r80/qa/topology-plan.json",
+    "bytes": 8269,
+    "sha": "5137cc63065d79a920390fe5624b6bca765215b5"
+  },
+  {
+    "local": "qa/topology-plan.py",
+    "path": "pc-test-r80/qa/topology-plan.py",
+    "bytes": 5283,
+    "sha": "1d78e439556c140ded09fda83f05d76991f3ca86"
+  },
+  {
+    "local": "qa/world-r78-combat-input.cjs",
+    "path": "pc-test-r80/qa/world-r78-combat-input.cjs",
+    "bytes": 5289,
+    "sha": "b87f4ec2e93ad86f8828fcb0e8ce36f92c6d2a91"
+  },
+  {
+    "local": "qa/ego-run.log",
+    "path": "pc-test-r80/qa/ego-run.log",
+    "bytes": 2404,
+    "sha": "8f74678b66368b97d59e73614569d629dae825ea"
+  },
+  {
+    "local": "qa/r80-integration.cjs",
+    "path": "pc-test-r80/qa/r80-integration.cjs",
+    "bytes": 10119,
+    "sha": "f607ca0f7f374fd6f7a40c1aa6f9b65460fa86a8"
+  },
+  {
+    "local": "qa/layout-validation-final.log",
+    "path": "pc-test-r80/qa/layout-validation-final.log",
+    "bytes": 2825,
+    "sha": "5532cd37c9a465a542d94c76b54c552bd87334e4"
+  },
+  {
+    "local": "qa/world-r78-story-spawn.cjs",
+    "path": "pc-test-r80/qa/world-r78-story-spawn.cjs",
+    "bytes": 3981,
+    "sha": "7040e94ceca2f3b3fd083e14fe4f2ad55ed3409c"
+  },
+  {
+    "local": "qa/boss-save.json",
+    "path": "pc-test-r80/qa/boss-save.json",
+    "bytes": 22709,
+    "sha": "539043c38f3aa45ffc303c0231859c236e19543c"
+  },
+  {
+    "local": "qa/baseline-hospital-layout.json",
+    "path": "pc-test-r80/qa/baseline-hospital-layout.json",
+    "bytes": 5247,
+    "sha": "8c07b0bbd81a2afc70ae1c84d44dbd8387bd7ee9"
+  },
+  {
+    "local": "qa/champion-check-final.log",
+    "path": "pc-test-r80/qa/champion-check-final.log",
+    "bytes": 15,
+    "sha": "ac2746d52f132826aecf6049a96827b64fc7ec9f"
+  },
+  {
+    "local": "qa/cold-check-final.log",
+    "path": "pc-test-r80/qa/cold-check-final.log",
+    "bytes": 1015,
+    "sha": "e4da1cb022ac0cccac977f50383fb7945e7c54c6"
+  },
+  {
+    "local": "qa/roof-check.cjs",
+    "path": "pc-test-r80/qa/roof-check.cjs",
+    "bytes": 3012,
+    "sha": "5e17b9cb2db938d5cb2dc253d4c1a7f3f7d7f700"
+  },
+  {
+    "local": "qa/champion-results.json",
+    "path": "pc-test-r80/qa/champion-results.json",
+    "bytes": 10192,
+    "sha": "75d8f96b588cbee5f7586241355d63f662f9c9e4"
+  },
+  {
+    "local": "qa/migration-check.cjs",
+    "path": "pc-test-r80/qa/migration-check.cjs",
+    "bytes": 2062,
+    "sha": "11d8b2c9d5b8f3c85f850916382d08a67dfbcc5c"
+  },
+  {
+    "local": "qa/champion-check.cjs",
+    "path": "pc-test-r80/qa/champion-check.cjs",
+    "bytes": 4220,
+    "sha": "7d428fd7e7e06605ee4a6bf6d6bddf4280652c31"
+  },
+  {
+    "local": "qa/migration-results.json",
+    "path": "pc-test-r80/qa/migration-results.json",
+    "bytes": 2299,
+    "sha": "725972275d822ed97c39d80d7ee3a38cd4995e94"
+  },
+  {
+    "local": "qa/baseline-results.json",
+    "path": "pc-test-r80/qa/baseline-results.json",
+    "bytes": 9872,
+    "sha": "ddb42cdae26344aae6765ff0a0199a51ef1f8c0c"
+  },
+  {
+    "local": "qa/final-run-results.json",
+    "path": "pc-test-r80/qa/final-run-results.json",
+    "bytes": 1501,
+    "sha": "b4ee5ce7ee6b177c6936e3e2b813bdd9c721832b"
+  },
+  {
+    "local": "qa/restore-trace.cjs",
+    "path": "pc-test-r80/qa/restore-trace.cjs",
+    "bytes": 955,
+    "sha": "e49fac18055238a67b60b7e613cce3eed289d9f7"
+  },
+  {
+    "local": "qa/cold-results.json",
+    "path": "pc-test-r80/qa/cold-results.json",
+    "bytes": 2285,
+    "sha": "45a0ce2d1459d6c2ca005df48d95808e43ec1a31"
+  },
+  {
+    "local": "qa/world-r78-story-spawn-results.json",
+    "path": "pc-test-r80/qa/world-r78-story-spawn-results.json",
+    "bytes": 54487,
+    "sha": "2bc6fbf7870ff25e1a2c7b7fad689f8b38b2d609"
+  },
+  {
+    "local": "qa/start-trace.cjs",
+    "path": "pc-test-r80/qa/start-trace.cjs",
+    "bytes": 878,
+    "sha": "07fbcaafe82ffba1b7f5edfc2e3145546a62e8a2"
+  },
+  {
+    "local": "qa/baseline-check.cjs",
+    "path": "pc-test-r80/qa/baseline-check.cjs",
+    "bytes": 2588,
+    "sha": "70604587d9aa804096189b458b5848520be14614"
+  },
+  {
+    "local": "qa/r80/world-r78-visual.log",
+    "path": "pc-test-r80/qa/r80/world-r78-visual.log",
+    "bytes": 2754,
+    "sha": "af211b4fd8b95599575b248f75bcc515b2a0a9f6"
+  },
+  {
+    "local": "qa/r80/verify-assets.py",
+    "path": "pc-test-r80/qa/r80/verify-assets.py",
+    "bytes": 3728,
+    "sha": "ce0c59181a8f9dffb6330735b5258843093c6b15"
+  },
+  {
+    "local": "qa/r80/restore-diagnostic.cjs",
+    "path": "pc-test-r80/qa/r80/restore-diagnostic.cjs",
+    "bytes": 1395,
+    "sha": "c370a9ae997abc94e402a6f277532540f0441c0b"
+  },
+  {
+    "local": "qa/r80/integration.log",
+    "path": "pc-test-r80/qa/r80/integration.log",
+    "bytes": 1147,
+    "sha": "41a5f55609ed51498ed29a88197072fde2dd35a4"
+  },
+  {
+    "local": "qa/r80/package-check.log",
+    "path": "pc-test-r80/qa/r80/package-check.log",
+    "bytes": 23,
+    "sha": "4c8e507c2b11f51b73f9ec8e71c0600a266d06b0"
+  },
+  {
+    "local": "qa/r80/layout-baseline.json",
+    "path": "pc-test-r80/qa/r80/layout-baseline.json",
+    "bytes": 4662,
+    "sha": "912267adaeb37d3347b095c7e8da7f6d799b6487"
+  },
+  {
+    "local": "qa/r80/champion-atomic.log",
+    "path": "pc-test-r80/qa/r80/champion-atomic.log",
+    "bytes": 15,
+    "sha": "ac2746d52f132826aecf6049a96827b64fc7ec9f"
+  },
+  {
+    "local": "qa/r80/final-results.json",
+    "path": "pc-test-r80/qa/r80/final-results.json",
+    "bytes": 5269,
+    "sha": "323411e5922e4dbb983e66f62d85ca82a2a519e1"
+  },
+  {
+    "local": "qa/r80/other-runs.json",
+    "path": "pc-test-r80/qa/r80/other-runs.json",
+    "bytes": 305,
+    "sha": "d660ae1abdf95c3aab0085a9fb75881c32c81a5a"
+  },
+  {
+    "local": "qa/r80/SCENE-ASSET-MAP.md",
+    "path": "pc-test-r80/qa/r80/SCENE-ASSET-MAP.md",
+    "bytes": 8024,
+    "sha": "a3690dbfa48457efd120cfd517c0fb522ed0ea82"
+  },
+  {
+    "local": "qa/r80/world-r78-combat-input.log",
+    "path": "pc-test-r80/qa/r80/world-r78-combat-input.log",
+    "bytes": 17989,
+    "sha": "86549d4eb76eb0a2706bb6099ae63b1cfe3b76ab"
+  },
+  {
+    "local": "qa/r80/first-gate-results.json",
+    "path": "pc-test-r80/qa/r80/first-gate-results.json",
+    "bytes": 1502,
+    "sha": "9556ef50b38470c5c73e91a8116825f7ba81df2a"
+  },
+  {
+    "local": "qa/r80/assets-results.json",
+    "path": "pc-test-r80/qa/r80/assets-results.json",
+    "bytes": 1044,
+    "sha": "abee158fb3626d11b521e2d9a1a1907f393b033c"
+  },
+  {
+    "local": "qa/r80/world-r78-layout.log",
+    "path": "pc-test-r80/qa/r80/world-r78-layout.log",
+    "bytes": 9349,
+    "sha": "c6a8a1a1fe7a8ddf47cb9f4dffe594133c6a830b"
+  },
+  {
+    "local": "qa/r80/restore-diagnostic.log",
+    "path": "pc-test-r80/qa/r80/restore-diagnostic.log",
+    "bytes": 7558,
+    "sha": "dcd34d5dfbf6e360a2e3f9b31118a6aa351309eb"
+  },
+  {
+    "local": "qa/r80/final-gate.log",
+    "path": "pc-test-r80/qa/r80/final-gate.log",
+    "bytes": 138,
+    "sha": "109cc66a5e91442196882d58213feb2777070acf"
+  },
+  {
+    "local": "qa/r80/world-r78-story-spawn.log",
+    "path": "pc-test-r80/qa/r80/world-r78-story-spawn.log",
+    "bytes": 9164,
+    "sha": "7744d681398181f3da6058ad23e9d722d2ef823b"
+  },
+  {
+    "local": "qa/r80/selection.json",
+    "path": "pc-test-r80/qa/r80/selection.json",
+    "bytes": 6444,
+    "sha": "0004c9465ed2324d1cc9cebd97d197dae77daf54"
+  },
+  {
+    "local": "qa/r80/layout-test.log",
+    "path": "pc-test-r80/qa/r80/layout-test.log",
+    "bytes": 9349,
+    "sha": "c6a8a1a1fe7a8ddf47cb9f4dffe594133c6a830b"
+  },
+  {
+    "local": "qa/r80/integration-results.json",
+    "path": "pc-test-r80/qa/r80/integration-results.json",
+    "bytes": 5453,
+    "sha": "1fbd3f2f35834deb9e3c65cd7c4e4542ed136551"
+  },
+  {
+    "local": "qa/r80/build-report.py",
+    "path": "pc-test-r80/qa/r80/build-report.py",
+    "bytes": 3627,
+    "sha": "9b33d98c7b2ae3cfdfc7c55a3a5f04b40e53207c"
+  },
+  {
+    "local": "qa/r80/assets-verification.log",
+    "path": "pc-test-r80/qa/r80/assets-verification.log",
+    "bytes": 822,
+    "sha": "93b7da863082dd7c9eb3cba18dc4e7ca4479041d"
+  },
+  {
+    "local": "hospital-three-pc/V4-R80-RESULTS.json",
+    "path": "pc-test-r80/V4-R80-RESULTS.json",
+    "bytes": 5269,
+    "sha": "323411e5922e4dbb983e66f62d85ca82a2a519e1"
+  },
+  {
+    "local": "pc-test-r80/ARCHIVE-VERIFICATION-V4.json",
+    "path": "pc-test-r80/ARCHIVE-VERIFICATION-V4.json",
+    "bytes": 421,
+    "sha": "151c8f8a9ec257bf52e4f7a61fca7a203b0338c6"
+  }
+]

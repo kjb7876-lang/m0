@@ -1,0 +1,5660 @@
+{
+  "schema": "r86-art-and-static-vfx-usage/v1",
+  "checks": [
+    {
+      "name": "All153 selected world assets have scene bindings rather than orphaned registrations",
+      "passed": true,
+      "detail": {
+        "props": 91,
+        "narrativeEchoes": 62,
+        "regions": 62,
+        "unreferenced": []
+      }
+    },
+    {
+      "name": "All153 selected derivative bytes match their active catalog hashes",
+      "passed": true
+    },
+    {
+      "name": "All64 selected static raster effects resolve to exact original image bytes",
+      "passed": true
+    },
+    {
+      "name": "Supplied dynamic package is not loaded or initialized",
+      "passed": true
+    },
+    {
+      "name": "Every configured scene creates local original or dressed art placements",
+      "passed": true,
+      "detail": {
+        "regions": 62,
+        "empty": []
+      }
+    },
+    {
+      "name": "All placed selected props emit actual image commands when observed at their own anchor",
+      "passed": true,
+      "detail": {
+        "placements": 630,
+        "uniqueArt": 91,
+        "missed": []
+      }
+    },
+    {
+      "name": "New visual dressing never adds solid obstacles to the maze",
+      "passed": true
+    },
+    {
+      "name": "Refined bed, wheelchair and monitor appear through actual hospital prop rendering",
+      "passed": true
+    },
+    {
+      "name": "The refined sand track remains the active Kair recovery raster",
+      "passed": true
+    },
+    {
+      "name": "Asset inventory distinguishes selected originals from retained unused originals",
+      "passed": true
+    },
+    {
+      "name": "Native scene art drawing preserves runtime health/error invariants",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "regions": [
+    {
+      "id": "dist00",
+      "configuredProps": [
+        "assets/world-r80/r80-011.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:dist00:0",
+          "path": "assets/world-r80/r80-011.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:dist00:1",
+          "path": "assets/world-r80/r80-011.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:dist00:2",
+          "path": "assets/world-r80/r80-011.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist00:3",
+          "path": "assets/world-r80/r80-011.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist00:4",
+          "path": "assets/world-r80/r80-011.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist00:5",
+          "path": "assets/world-r80/r80-011.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist00:6",
+          "path": "assets/world-r80/r80-011.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist00:7",
+          "path": "assets/world-r80/r80-011.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist00:8",
+          "path": "assets/world-r80/r80-011.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist00:9",
+          "path": "assets/world-r80/r80-011.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist00:10",
+          "path": "assets/world-r80/r80-011.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist00:11",
+          "path": "assets/world-r80/r80-011.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "dist01",
+      "configuredProps": [
+        "assets/world-r80/r80-012.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:dist01:0",
+          "path": "assets/world-r80/r80-012.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:dist01:1",
+          "path": "assets/world-r80/r80-012.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:dist01:2",
+          "path": "assets/world-r80/r80-012.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist01:3",
+          "path": "assets/world-r80/r80-012.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist01:4",
+          "path": "assets/world-r80/r80-012.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist01:5",
+          "path": "assets/world-r80/r80-012.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist01:6",
+          "path": "assets/world-r80/r80-012.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist01:7",
+          "path": "assets/world-r80/r80-012.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "dist02",
+      "configuredProps": [
+        "assets/world-r80/r80-013.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:dist02:0",
+          "path": "assets/world-r80/r80-013.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:dist02:1",
+          "path": "assets/world-r80/r80-013.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:dist02:2",
+          "path": "assets/world-r80/r80-013.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist02:3",
+          "path": "assets/world-r80/r80-013.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist02:4",
+          "path": "assets/world-r80/r80-013.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist02:5",
+          "path": "assets/world-r80/r80-013.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist02:6",
+          "path": "assets/world-r80/r80-013.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist02:7",
+          "path": "assets/world-r80/r80-013.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist02:8",
+          "path": "assets/world-r80/r80-013.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist02:9",
+          "path": "assets/world-r80/r80-013.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist02:10",
+          "path": "assets/world-r80/r80-013.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist02:11",
+          "path": "assets/world-r80/r80-013.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "dist03",
+      "configuredProps": [
+        "assets/world-r80/r80-014.webp",
+        "assets/world-r80/r80-015.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:dist03:0",
+          "path": "assets/world-r80/r80-014.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:dist03:1",
+          "path": "assets/world-r80/r80-015.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:dist03:2",
+          "path": "assets/world-r80/r80-014.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:dist03:3",
+          "path": "assets/world-r80/r80-015.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist03:4",
+          "path": "assets/world-r80/r80-014.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist03:5",
+          "path": "assets/world-r80/r80-015.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist03:6",
+          "path": "assets/world-r80/r80-014.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist03:7",
+          "path": "assets/world-r80/r80-015.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist03:8",
+          "path": "assets/world-r80/r80-014.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist03:9",
+          "path": "assets/world-r80/r80-015.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist03:10",
+          "path": "assets/world-r80/r80-014.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist03:11",
+          "path": "assets/world-r80/r80-015.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "dist04",
+      "configuredProps": [
+        "assets/world-r80/r80-016.webp",
+        "assets/world-r80/r80-017.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:dist04:0",
+          "path": "assets/world-r80/r80-016.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:dist04:1",
+          "path": "assets/world-r80/r80-017.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:dist04:2",
+          "path": "assets/world-r80/r80-016.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:dist04:3",
+          "path": "assets/world-r80/r80-017.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist04:4",
+          "path": "assets/world-r80/r80-016.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist04:5",
+          "path": "assets/world-r80/r80-017.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist04:6",
+          "path": "assets/world-r80/r80-016.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist04:7",
+          "path": "assets/world-r80/r80-017.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist04:8",
+          "path": "assets/world-r80/r80-016.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist04:9",
+          "path": "assets/world-r80/r80-017.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist04:10",
+          "path": "assets/world-r80/r80-016.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist04:11",
+          "path": "assets/world-r80/r80-017.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "dist05",
+      "configuredProps": [
+        "assets/world-r80/r80-018.webp",
+        "assets/world-r80/r80-019.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:dist05:0",
+          "path": "assets/world-r80/r80-018.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:dist05:1",
+          "path": "assets/world-r80/r80-019.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:dist05:2",
+          "path": "assets/world-r80/r80-018.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:dist05:3",
+          "path": "assets/world-r80/r80-019.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist05:4",
+          "path": "assets/world-r80/r80-018.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist05:5",
+          "path": "assets/world-r80/r80-019.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist05:6",
+          "path": "assets/world-r80/r80-018.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist05:7",
+          "path": "assets/world-r80/r80-019.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist05:8",
+          "path": "assets/world-r80/r80-018.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist05:9",
+          "path": "assets/world-r80/r80-019.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist05:10",
+          "path": "assets/world-r80/r80-018.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist05:11",
+          "path": "assets/world-r80/r80-019.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "dist06",
+      "configuredProps": [
+        "assets/world-r80/r80-020.webp",
+        "assets/world-r80/r80-021.webp",
+        "assets/world-r80/r80-022.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:dist06:0",
+          "path": "assets/world-r80/r80-020.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:dist06:1",
+          "path": "assets/world-r80/r80-021.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:dist06:2",
+          "path": "assets/world-r80/r80-022.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:dist06:3",
+          "path": "assets/world-r80/r80-020.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:dist06:4",
+          "path": "assets/world-r80/r80-021.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:dist06:5",
+          "path": "assets/world-r80/r80-022.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist06:6",
+          "path": "assets/world-r80/r80-020.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist06:7",
+          "path": "assets/world-r80/r80-021.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist06:8",
+          "path": "assets/world-r80/r80-022.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist06:9",
+          "path": "assets/world-r80/r80-020.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist06:10",
+          "path": "assets/world-r80/r80-021.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:dist06:11",
+          "path": "assets/world-r80/r80-022.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "ep1a08",
+      "configuredProps": [
+        "assets/world-r80/refined-r85-r80-142.webp",
+        "assets/world-r80/refined-r85-r80-143.webp",
+        "assets/world-r80/r80-148.webp",
+        "assets/world-r80/refined-r85-r80-149.webp",
+        "assets/world-r80/r80-141.webp",
+        "assets/world-r80/r80-144.webp",
+        "assets/world-r80/r80-146.webp",
+        "assets/world-r80/r80-147.webp"
+      ],
+      "actual": [
+        {
+          "id": "ep1a08-prop-1",
+          "path": "assets/world-r80/refined-r85-r80-142.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": true,
+          "newProp": false
+        },
+        {
+          "id": "ep1a08-prop-2",
+          "path": "assets/world-r80/refined-r85-r80-143.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": true,
+          "newProp": false
+        },
+        {
+          "id": "ep1a08-prop-3",
+          "path": "assets/world-r80/r80-148.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": true,
+          "newProp": false
+        },
+        {
+          "id": "ep1a08-prop-4",
+          "path": "assets/world-r80/refined-r85-r80-149.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": true,
+          "newProp": false
+        },
+        {
+          "id": "ep1a08-prop-5",
+          "path": "assets/world-r80/r80-141.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": true,
+          "newProp": false
+        },
+        {
+          "id": "ep1a08-prop-6",
+          "path": "assets/world-r80/r80-144.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": true,
+          "newProp": false
+        },
+        {
+          "id": "ep1a08-prop-7",
+          "path": "assets/world-r80/r80-146.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": true,
+          "newProp": false
+        },
+        {
+          "id": "ep1a08-prop-8",
+          "path": "assets/world-r80/r80-147.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": true,
+          "newProp": false
+        }
+      ]
+    },
+    {
+      "id": "ep1a09",
+      "configuredProps": [
+        "assets/world-r80/r80-148.webp",
+        "assets/world-r80/r80-147.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:ep1a09:0",
+          "path": "assets/world-r80/r80-148.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1a09:1",
+          "path": "assets/world-r80/r80-147.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1a09:2",
+          "path": "assets/world-r80/r80-148.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1a09:3",
+          "path": "assets/world-r80/r80-147.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a09:4",
+          "path": "assets/world-r80/r80-148.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a09:5",
+          "path": "assets/world-r80/r80-147.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a09:6",
+          "path": "assets/world-r80/r80-148.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a09:7",
+          "path": "assets/world-r80/r80-147.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a09:8",
+          "path": "assets/world-r80/r80-148.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a09:9",
+          "path": "assets/world-r80/r80-147.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a09:10",
+          "path": "assets/world-r80/r80-148.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a09:11",
+          "path": "assets/world-r80/r80-147.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "ep1a09b",
+      "configuredProps": [
+        "assets/world-r80/r80-072.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:ep1a09b:0",
+          "path": "assets/world-r80/r80-072.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1a09b:1",
+          "path": "assets/world-r80/r80-072.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1a09b:2",
+          "path": "assets/world-r80/r80-072.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a09b:3",
+          "path": "assets/world-r80/r80-072.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a09b:4",
+          "path": "assets/world-r80/r80-072.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a09b:5",
+          "path": "assets/world-r80/r80-072.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a09b:6",
+          "path": "assets/world-r80/r80-072.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a09b:7",
+          "path": "assets/world-r80/r80-072.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a09b:8",
+          "path": "assets/world-r80/r80-072.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a09b:9",
+          "path": "assets/world-r80/r80-072.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a09b:10",
+          "path": "assets/world-r80/r80-072.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a09b:11",
+          "path": "assets/world-r80/r80-072.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "ep1a10",
+      "configuredProps": [
+        "assets/world-r80/r80-073.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:ep1a10:0",
+          "path": "assets/world-r80/r80-073.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1a10:1",
+          "path": "assets/world-r80/r80-073.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1a10:2",
+          "path": "assets/world-r80/r80-073.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a10:3",
+          "path": "assets/world-r80/r80-073.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a10:4",
+          "path": "assets/world-r80/r80-073.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a10:5",
+          "path": "assets/world-r80/r80-073.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a10:6",
+          "path": "assets/world-r80/r80-073.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a10:7",
+          "path": "assets/world-r80/r80-073.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "ep1a11",
+      "configuredProps": [
+        "assets/world-r80/r80-074.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:ep1a11:0",
+          "path": "assets/world-r80/r80-074.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1a11:1",
+          "path": "assets/world-r80/r80-074.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1a11:2",
+          "path": "assets/world-r80/r80-074.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a11:3",
+          "path": "assets/world-r80/r80-074.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a11:4",
+          "path": "assets/world-r80/r80-074.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a11:5",
+          "path": "assets/world-r80/r80-074.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a11:6",
+          "path": "assets/world-r80/r80-074.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a11:7",
+          "path": "assets/world-r80/r80-074.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a11:8",
+          "path": "assets/world-r80/r80-074.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a11:9",
+          "path": "assets/world-r80/r80-074.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a11:10",
+          "path": "assets/world-r80/r80-074.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1a11:11",
+          "path": "assets/world-r80/r80-074.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "dreamRest",
+      "configuredProps": [
+        "assets/world-r80/r80-146.webp",
+        "assets/world-r80/r80-145.webp",
+        "assets/world-r80/r80-150.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:dreamRest:0",
+          "path": "assets/world-r80/r80-146.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:dreamRest:1",
+          "path": "assets/world-r80/r80-145.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:dreamRest:2",
+          "path": "assets/world-r80/r80-150.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:dreamRest:3",
+          "path": "assets/world-r80/r80-146.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:dreamRest:4",
+          "path": "assets/world-r80/r80-145.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:dreamRest:5",
+          "path": "assets/world-r80/r80-150.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "ep1b01",
+      "configuredProps": [
+        "assets/world-r80/r80-023.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:ep1b01:0",
+          "path": "assets/world-r80/r80-023.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1b01:1",
+          "path": "assets/world-r80/r80-023.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1b01:2",
+          "path": "assets/world-r80/r80-023.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b01:3",
+          "path": "assets/world-r80/r80-023.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b01:4",
+          "path": "assets/world-r80/r80-023.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b01:5",
+          "path": "assets/world-r80/r80-023.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b01:6",
+          "path": "assets/world-r80/r80-023.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b01:7",
+          "path": "assets/world-r80/r80-023.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b01:8",
+          "path": "assets/world-r80/r80-023.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b01:9",
+          "path": "assets/world-r80/r80-023.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b01:10",
+          "path": "assets/world-r80/r80-023.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b01:11",
+          "path": "assets/world-r80/r80-023.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "ep1b02",
+      "configuredProps": [
+        "assets/world-r80/r80-025.webp",
+        "assets/world-r80/r80-024.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:ep1b02:0",
+          "path": "assets/world-r80/r80-025.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1b02:1",
+          "path": "assets/world-r80/r80-024.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1b02:2",
+          "path": "assets/world-r80/r80-025.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1b02:3",
+          "path": "assets/world-r80/r80-024.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b02:4",
+          "path": "assets/world-r80/r80-025.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b02:5",
+          "path": "assets/world-r80/r80-024.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b02:6",
+          "path": "assets/world-r80/r80-025.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b02:7",
+          "path": "assets/world-r80/r80-024.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b02:8",
+          "path": "assets/world-r80/r80-025.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b02:9",
+          "path": "assets/world-r80/r80-024.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b02:10",
+          "path": "assets/world-r80/r80-025.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b02:11",
+          "path": "assets/world-r80/r80-024.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "ep1b03",
+      "configuredProps": [
+        "assets/world-r80/r80-026.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:ep1b03:0",
+          "path": "assets/world-r80/r80-026.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1b03:1",
+          "path": "assets/world-r80/r80-026.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1b03:2",
+          "path": "assets/world-r80/r80-026.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b03:3",
+          "path": "assets/world-r80/r80-026.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b03:4",
+          "path": "assets/world-r80/r80-026.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b03:5",
+          "path": "assets/world-r80/r80-026.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b03:6",
+          "path": "assets/world-r80/r80-026.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b03:7",
+          "path": "assets/world-r80/r80-026.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b03:8",
+          "path": "assets/world-r80/r80-026.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b03:9",
+          "path": "assets/world-r80/r80-026.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b03:10",
+          "path": "assets/world-r80/r80-026.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b03:11",
+          "path": "assets/world-r80/r80-026.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "ep1b04",
+      "configuredProps": [
+        "assets/world-r80/r80-027.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:ep1b04:0",
+          "path": "assets/world-r80/r80-027.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1b04:1",
+          "path": "assets/world-r80/r80-027.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1b04:2",
+          "path": "assets/world-r80/r80-027.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b04:3",
+          "path": "assets/world-r80/r80-027.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b04:4",
+          "path": "assets/world-r80/r80-027.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b04:5",
+          "path": "assets/world-r80/r80-027.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b04:6",
+          "path": "assets/world-r80/r80-027.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b04:7",
+          "path": "assets/world-r80/r80-027.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b04:8",
+          "path": "assets/world-r80/r80-027.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b04:9",
+          "path": "assets/world-r80/r80-027.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b04:10",
+          "path": "assets/world-r80/r80-027.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b04:11",
+          "path": "assets/world-r80/r80-027.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "ep1b05",
+      "configuredProps": [
+        "assets/world-r80/r80-028.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:ep1b05:0",
+          "path": "assets/world-r80/r80-028.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1b05:1",
+          "path": "assets/world-r80/r80-028.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1b05:2",
+          "path": "assets/world-r80/r80-028.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b05:3",
+          "path": "assets/world-r80/r80-028.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b05:4",
+          "path": "assets/world-r80/r80-028.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b05:5",
+          "path": "assets/world-r80/r80-028.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b05:6",
+          "path": "assets/world-r80/r80-028.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b05:7",
+          "path": "assets/world-r80/r80-028.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "ep1b06",
+      "configuredProps": [
+        "assets/world-r80/r80-029.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:ep1b06:0",
+          "path": "assets/world-r80/r80-029.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1b06:1",
+          "path": "assets/world-r80/r80-029.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1b06:2",
+          "path": "assets/world-r80/r80-029.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b06:3",
+          "path": "assets/world-r80/r80-029.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b06:4",
+          "path": "assets/world-r80/r80-029.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b06:5",
+          "path": "assets/world-r80/r80-029.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b06:6",
+          "path": "assets/world-r80/r80-029.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b06:7",
+          "path": "assets/world-r80/r80-029.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "ep1b06b",
+      "configuredProps": [
+        "assets/world-r80/r80-030.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:ep1b06b:0",
+          "path": "assets/world-r80/r80-030.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1b06b:1",
+          "path": "assets/world-r80/r80-030.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1b06b:2",
+          "path": "assets/world-r80/r80-030.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b06b:3",
+          "path": "assets/world-r80/r80-030.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b06b:4",
+          "path": "assets/world-r80/r80-030.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b06b:5",
+          "path": "assets/world-r80/r80-030.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b06b:6",
+          "path": "assets/world-r80/r80-030.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b06b:7",
+          "path": "assets/world-r80/r80-030.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "ep1b07",
+      "configuredProps": [
+        "assets/world-r80/r80-032.webp",
+        "assets/world-r80/r80-031.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:ep1b07:0",
+          "path": "assets/world-r80/r80-032.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1b07:1",
+          "path": "assets/world-r80/r80-031.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1b07:2",
+          "path": "assets/world-r80/r80-032.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1b07:3",
+          "path": "assets/world-r80/r80-031.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b07:4",
+          "path": "assets/world-r80/r80-032.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b07:5",
+          "path": "assets/world-r80/r80-031.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b07:6",
+          "path": "assets/world-r80/r80-032.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b07:7",
+          "path": "assets/world-r80/r80-031.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b07:8",
+          "path": "assets/world-r80/r80-032.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b07:9",
+          "path": "assets/world-r80/r80-031.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b07:10",
+          "path": "assets/world-r80/r80-032.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b07:11",
+          "path": "assets/world-r80/r80-031.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "ep1b08",
+      "configuredProps": [
+        "assets/world-r80/r80-033.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:ep1b08:0",
+          "path": "assets/world-r80/r80-033.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1b08:1",
+          "path": "assets/world-r80/r80-033.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1b08:2",
+          "path": "assets/world-r80/r80-033.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b08:3",
+          "path": "assets/world-r80/r80-033.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b08:4",
+          "path": "assets/world-r80/r80-033.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b08:5",
+          "path": "assets/world-r80/r80-033.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b08:6",
+          "path": "assets/world-r80/r80-033.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b08:7",
+          "path": "assets/world-r80/r80-033.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b08:8",
+          "path": "assets/world-r80/r80-033.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b08:9",
+          "path": "assets/world-r80/r80-033.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b08:10",
+          "path": "assets/world-r80/r80-033.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b08:11",
+          "path": "assets/world-r80/r80-033.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "ep1b09",
+      "configuredProps": [
+        "assets/world-r80/r80-034.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:ep1b09:0",
+          "path": "assets/world-r80/r80-034.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1b09:1",
+          "path": "assets/world-r80/r80-034.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:ep1b09:2",
+          "path": "assets/world-r80/r80-034.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b09:3",
+          "path": "assets/world-r80/r80-034.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b09:4",
+          "path": "assets/world-r80/r80-034.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b09:5",
+          "path": "assets/world-r80/r80-034.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b09:6",
+          "path": "assets/world-r80/r80-034.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b09:7",
+          "path": "assets/world-r80/r80-034.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b09:8",
+          "path": "assets/world-r80/r80-034.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b09:9",
+          "path": "assets/world-r80/r80-034.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b09:10",
+          "path": "assets/world-r80/r80-034.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:ep1b09:11",
+          "path": "assets/world-r80/r80-034.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "restEp1b",
+      "configuredProps": [
+        "assets/world-r80/r80-152.webp",
+        "assets/world-r80/r80-151.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:restEp1b:0",
+          "path": "assets/world-r80/r80-152.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:restEp1b:1",
+          "path": "assets/world-r80/r80-151.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:restEp1b:2",
+          "path": "assets/world-r80/r80-152.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:restEp1b:3",
+          "path": "assets/world-r80/r80-151.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "u201",
+      "configuredProps": [
+        "assets/world-r80/r80-000.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:u201:0",
+          "path": "assets/world-r80/r80-000.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:u201:1",
+          "path": "assets/world-r80/r80-000.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:u201:2",
+          "path": "assets/world-r80/r80-000.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u201:3",
+          "path": "assets/world-r80/r80-000.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u201:4",
+          "path": "assets/world-r80/r80-000.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u201:5",
+          "path": "assets/world-r80/r80-000.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u201:6",
+          "path": "assets/world-r80/r80-000.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u201:7",
+          "path": "assets/world-r80/r80-000.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "u202",
+      "configuredProps": [
+        "assets/world-r80/r80-004.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:u202:0",
+          "path": "assets/world-r80/r80-004.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:u202:1",
+          "path": "assets/world-r80/r80-004.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:u202:2",
+          "path": "assets/world-r80/r80-004.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u202:3",
+          "path": "assets/world-r80/r80-004.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u202:4",
+          "path": "assets/world-r80/r80-004.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u202:5",
+          "path": "assets/world-r80/r80-004.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u202:6",
+          "path": "assets/world-r80/r80-004.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u202:7",
+          "path": "assets/world-r80/r80-004.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "u204",
+      "configuredProps": [
+        "assets/world-r80/r80-001.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:u204:0",
+          "path": "assets/world-r80/r80-001.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:u204:1",
+          "path": "assets/world-r80/r80-001.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:u204:2",
+          "path": "assets/world-r80/r80-001.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u204:3",
+          "path": "assets/world-r80/r80-001.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u204:4",
+          "path": "assets/world-r80/r80-001.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u204:5",
+          "path": "assets/world-r80/r80-001.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u204:6",
+          "path": "assets/world-r80/r80-001.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u204:7",
+          "path": "assets/world-r80/r80-001.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u204:8",
+          "path": "assets/world-r80/r80-001.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u204:9",
+          "path": "assets/world-r80/r80-001.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u204:10",
+          "path": "assets/world-r80/r80-001.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u204:11",
+          "path": "assets/world-r80/r80-001.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "u205",
+      "configuredProps": [
+        "assets/world-r80/r80-075.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:u205:0",
+          "path": "assets/world-r80/r80-075.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:u205:1",
+          "path": "assets/world-r80/r80-075.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:u205:2",
+          "path": "assets/world-r80/r80-075.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u205:3",
+          "path": "assets/world-r80/r80-075.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u205:4",
+          "path": "assets/world-r80/r80-075.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u205:5",
+          "path": "assets/world-r80/r80-075.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u205:6",
+          "path": "assets/world-r80/r80-075.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u205:7",
+          "path": "assets/world-r80/r80-075.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u205:8",
+          "path": "assets/world-r80/r80-075.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u205:9",
+          "path": "assets/world-r80/r80-075.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u205:10",
+          "path": "assets/world-r80/r80-075.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u205:11",
+          "path": "assets/world-r80/r80-075.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "u206",
+      "configuredProps": [
+        "assets/world-r80/r80-002.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:u206:0",
+          "path": "assets/world-r80/r80-002.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:u206:1",
+          "path": "assets/world-r80/r80-002.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:u206:2",
+          "path": "assets/world-r80/r80-002.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u206:3",
+          "path": "assets/world-r80/r80-002.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u206:4",
+          "path": "assets/world-r80/r80-002.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u206:5",
+          "path": "assets/world-r80/r80-002.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u206:6",
+          "path": "assets/world-r80/r80-002.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u206:7",
+          "path": "assets/world-r80/r80-002.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u206:8",
+          "path": "assets/world-r80/r80-002.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u206:9",
+          "path": "assets/world-r80/r80-002.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u206:10",
+          "path": "assets/world-r80/r80-002.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u206:11",
+          "path": "assets/world-r80/r80-002.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "u203",
+      "configuredProps": [
+        "assets/world-r80/r80-003.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:u203:0",
+          "path": "assets/world-r80/r80-003.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:u203:1",
+          "path": "assets/world-r80/r80-003.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:u203:2",
+          "path": "assets/world-r80/r80-003.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u203:3",
+          "path": "assets/world-r80/r80-003.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u203:4",
+          "path": "assets/world-r80/r80-003.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u203:5",
+          "path": "assets/world-r80/r80-003.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u203:6",
+          "path": "assets/world-r80/r80-003.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:u203:7",
+          "path": "assets/world-r80/r80-003.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "restU2",
+      "configuredProps": [
+        "assets/world-r80/r80-076.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:restU2:0",
+          "path": "assets/world-r80/r80-076.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:restU2:1",
+          "path": "assets/world-r80/r80-076.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:restU2:2",
+          "path": "assets/world-r80/r80-076.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "last304",
+      "configuredProps": [
+        "assets/world-r80/r80-005.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:last304:0",
+          "path": "assets/world-r80/r80-005.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:last304:1",
+          "path": "assets/world-r80/r80-005.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:last304:2",
+          "path": "assets/world-r80/r80-005.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last304:3",
+          "path": "assets/world-r80/r80-005.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last304:4",
+          "path": "assets/world-r80/r80-005.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last304:5",
+          "path": "assets/world-r80/r80-005.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last304:6",
+          "path": "assets/world-r80/r80-005.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last304:7",
+          "path": "assets/world-r80/r80-005.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "last305",
+      "configuredProps": [
+        "assets/world-r80/r80-077.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:last305:0",
+          "path": "assets/world-r80/r80-077.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:last305:1",
+          "path": "assets/world-r80/r80-077.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:last305:2",
+          "path": "assets/world-r80/r80-077.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last305:3",
+          "path": "assets/world-r80/r80-077.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last305:4",
+          "path": "assets/world-r80/r80-077.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last305:5",
+          "path": "assets/world-r80/r80-077.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last305:6",
+          "path": "assets/world-r80/r80-077.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last305:7",
+          "path": "assets/world-r80/r80-077.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last305:8",
+          "path": "assets/world-r80/r80-077.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last305:9",
+          "path": "assets/world-r80/r80-077.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last305:10",
+          "path": "assets/world-r80/r80-077.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last305:11",
+          "path": "assets/world-r80/r80-077.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "last301",
+      "configuredProps": [
+        "assets/world-r80/r80-006.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:last301:0",
+          "path": "assets/world-r80/r80-006.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:last301:1",
+          "path": "assets/world-r80/r80-006.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:last301:2",
+          "path": "assets/world-r80/r80-006.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last301:3",
+          "path": "assets/world-r80/r80-006.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last301:4",
+          "path": "assets/world-r80/r80-006.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last301:5",
+          "path": "assets/world-r80/r80-006.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last301:6",
+          "path": "assets/world-r80/r80-006.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last301:7",
+          "path": "assets/world-r80/r80-006.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last301:8",
+          "path": "assets/world-r80/r80-006.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last301:9",
+          "path": "assets/world-r80/r80-006.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last301:10",
+          "path": "assets/world-r80/r80-006.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last301:11",
+          "path": "assets/world-r80/r80-006.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "last302",
+      "configuredProps": [
+        "assets/world-r80/r80-007.webp",
+        "assets/world-r80/r80-009.webp",
+        "assets/world-r80/r80-010.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:last302:0",
+          "path": "assets/world-r80/r80-007.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:last302:1",
+          "path": "assets/world-r80/r80-009.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:last302:2",
+          "path": "assets/world-r80/r80-010.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:last302:3",
+          "path": "assets/world-r80/r80-007.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:last302:4",
+          "path": "assets/world-r80/r80-009.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:last302:5",
+          "path": "assets/world-r80/r80-010.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last302:6",
+          "path": "assets/world-r80/r80-007.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last302:7",
+          "path": "assets/world-r80/r80-009.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last302:8",
+          "path": "assets/world-r80/r80-010.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last302:9",
+          "path": "assets/world-r80/r80-007.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last302:10",
+          "path": "assets/world-r80/r80-009.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last302:11",
+          "path": "assets/world-r80/r80-010.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "last303",
+      "configuredProps": [
+        "assets/world-r80/r80-008.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:last303:0",
+          "path": "assets/world-r80/r80-008.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:last303:1",
+          "path": "assets/world-r80/r80-008.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:last303:2",
+          "path": "assets/world-r80/r80-008.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last303:3",
+          "path": "assets/world-r80/r80-008.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last303:4",
+          "path": "assets/world-r80/r80-008.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last303:5",
+          "path": "assets/world-r80/r80-008.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last303:6",
+          "path": "assets/world-r80/r80-008.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last303:7",
+          "path": "assets/world-r80/r80-008.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last303:8",
+          "path": "assets/world-r80/r80-008.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last303:9",
+          "path": "assets/world-r80/r80-008.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last303:10",
+          "path": "assets/world-r80/r80-008.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:last303:11",
+          "path": "assets/world-r80/r80-008.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "restLast3",
+      "configuredProps": [
+        "assets/world-r80/r80-078.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:restLast3:0",
+          "path": "assets/world-r80/r80-078.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:restLast3:1",
+          "path": "assets/world-r80/r80-078.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:restLast3:2",
+          "path": "assets/world-r80/r80-078.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "kair01",
+      "configuredProps": [
+        "assets/world-r80/r80-035.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:kair01:0",
+          "path": "assets/world-r80/r80-035.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:kair01:1",
+          "path": "assets/world-r80/r80-035.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:kair01:2",
+          "path": "assets/world-r80/r80-035.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair01:3",
+          "path": "assets/world-r80/r80-035.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair01:4",
+          "path": "assets/world-r80/r80-035.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair01:5",
+          "path": "assets/world-r80/r80-035.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair01:6",
+          "path": "assets/world-r80/r80-035.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair01:7",
+          "path": "assets/world-r80/r80-035.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair01:8",
+          "path": "assets/world-r80/r80-035.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair01:9",
+          "path": "assets/world-r80/r80-035.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair01:10",
+          "path": "assets/world-r80/r80-035.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair01:11",
+          "path": "assets/world-r80/r80-035.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "kair04",
+      "configuredProps": [
+        "assets/world-r80/r80-036.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:kair04:0",
+          "path": "assets/world-r80/r80-036.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:kair04:1",
+          "path": "assets/world-r80/r80-036.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:kair04:2",
+          "path": "assets/world-r80/r80-036.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair04:3",
+          "path": "assets/world-r80/r80-036.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair04:4",
+          "path": "assets/world-r80/r80-036.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair04:5",
+          "path": "assets/world-r80/r80-036.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair04:6",
+          "path": "assets/world-r80/r80-036.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair04:7",
+          "path": "assets/world-r80/r80-036.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "kair05",
+      "configuredProps": [
+        "assets/world-r80/r80-037.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:kair05:0",
+          "path": "assets/world-r80/r80-037.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:kair05:1",
+          "path": "assets/world-r80/r80-037.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:kair05:2",
+          "path": "assets/world-r80/r80-037.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair05:3",
+          "path": "assets/world-r80/r80-037.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair05:4",
+          "path": "assets/world-r80/r80-037.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair05:5",
+          "path": "assets/world-r80/r80-037.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair05:6",
+          "path": "assets/world-r80/r80-037.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair05:7",
+          "path": "assets/world-r80/r80-037.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "kair06",
+      "configuredProps": [
+        "assets/world-r80/r80-038.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:kair06:0",
+          "path": "assets/world-r80/r80-038.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:kair06:1",
+          "path": "assets/world-r80/r80-038.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:kair06:2",
+          "path": "assets/world-r80/r80-038.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair06:3",
+          "path": "assets/world-r80/r80-038.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair06:4",
+          "path": "assets/world-r80/r80-038.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair06:5",
+          "path": "assets/world-r80/r80-038.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair06:6",
+          "path": "assets/world-r80/r80-038.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair06:7",
+          "path": "assets/world-r80/r80-038.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair06:8",
+          "path": "assets/world-r80/r80-038.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair06:9",
+          "path": "assets/world-r80/r80-038.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair06:10",
+          "path": "assets/world-r80/r80-038.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair06:11",
+          "path": "assets/world-r80/r80-038.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "kair07",
+      "configuredProps": [
+        "assets/world-r80/r80-039.webp",
+        "assets/world-r80/r80-040.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:kair07:0",
+          "path": "assets/world-r80/r80-039.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:kair07:1",
+          "path": "assets/world-r80/r80-040.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:kair07:2",
+          "path": "assets/world-r80/r80-039.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:kair07:3",
+          "path": "assets/world-r80/r80-040.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair07:4",
+          "path": "assets/world-r80/r80-039.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair07:5",
+          "path": "assets/world-r80/r80-040.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair07:6",
+          "path": "assets/world-r80/r80-039.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair07:7",
+          "path": "assets/world-r80/r80-040.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair07:8",
+          "path": "assets/world-r80/r80-039.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair07:9",
+          "path": "assets/world-r80/r80-040.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair07:10",
+          "path": "assets/world-r80/r80-039.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair07:11",
+          "path": "assets/world-r80/r80-040.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "kair08",
+      "configuredProps": [
+        "assets/world-r80/r80-041.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:kair08:0",
+          "path": "assets/world-r80/r80-041.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:kair08:1",
+          "path": "assets/world-r80/r80-041.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:kair08:2",
+          "path": "assets/world-r80/r80-041.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair08:3",
+          "path": "assets/world-r80/r80-041.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair08:4",
+          "path": "assets/world-r80/r80-041.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair08:5",
+          "path": "assets/world-r80/r80-041.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair08:6",
+          "path": "assets/world-r80/r80-041.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair08:7",
+          "path": "assets/world-r80/r80-041.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "kair09",
+      "configuredProps": [
+        "assets/world-r80/r80-042.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:kair09:0",
+          "path": "assets/world-r80/r80-042.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:kair09:1",
+          "path": "assets/world-r80/r80-042.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:kair09:2",
+          "path": "assets/world-r80/r80-042.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair09:3",
+          "path": "assets/world-r80/r80-042.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair09:4",
+          "path": "assets/world-r80/r80-042.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair09:5",
+          "path": "assets/world-r80/r80-042.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair09:6",
+          "path": "assets/world-r80/r80-042.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair09:7",
+          "path": "assets/world-r80/r80-042.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "kair10",
+      "configuredProps": [
+        "assets/world-r80/r80-043.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:kair10:0",
+          "path": "assets/world-r80/r80-043.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:kair10:1",
+          "path": "assets/world-r80/r80-043.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:kair10:2",
+          "path": "assets/world-r80/r80-043.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair10:3",
+          "path": "assets/world-r80/r80-043.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair10:4",
+          "path": "assets/world-r80/r80-043.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair10:5",
+          "path": "assets/world-r80/r80-043.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair10:6",
+          "path": "assets/world-r80/r80-043.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair10:7",
+          "path": "assets/world-r80/r80-043.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair10:8",
+          "path": "assets/world-r80/r80-043.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair10:9",
+          "path": "assets/world-r80/r80-043.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair10:10",
+          "path": "assets/world-r80/r80-043.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair10:11",
+          "path": "assets/world-r80/r80-043.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "kair02",
+      "configuredProps": [
+        "assets/world-r80/r80-044.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:kair02:0",
+          "path": "assets/world-r80/r80-044.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:kair02:1",
+          "path": "assets/world-r80/r80-044.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:kair02:2",
+          "path": "assets/world-r80/r80-044.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair02:3",
+          "path": "assets/world-r80/r80-044.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair02:4",
+          "path": "assets/world-r80/r80-044.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair02:5",
+          "path": "assets/world-r80/r80-044.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair02:6",
+          "path": "assets/world-r80/r80-044.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair02:7",
+          "path": "assets/world-r80/r80-044.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "kair03",
+      "configuredProps": [
+        "assets/world-r80/r80-045.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:kair03:0",
+          "path": "assets/world-r80/r80-045.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:kair03:1",
+          "path": "assets/world-r80/r80-045.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:kair03:2",
+          "path": "assets/world-r80/r80-045.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair03:3",
+          "path": "assets/world-r80/r80-045.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair03:4",
+          "path": "assets/world-r80/r80-045.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair03:5",
+          "path": "assets/world-r80/r80-045.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair03:6",
+          "path": "assets/world-r80/r80-045.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair03:7",
+          "path": "assets/world-r80/r80-045.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair03:8",
+          "path": "assets/world-r80/r80-045.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair03:9",
+          "path": "assets/world-r80/r80-045.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair03:10",
+          "path": "assets/world-r80/r80-045.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:kair03:11",
+          "path": "assets/world-r80/r80-045.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "restKairo",
+      "configuredProps": [
+        "assets/world-r80/r80-046.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:restKairo:0",
+          "path": "assets/world-r80/r80-046.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:restKairo:1",
+          "path": "assets/world-r80/r80-046.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:restKairo:2",
+          "path": "assets/world-r80/r80-046.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "hando01",
+      "configuredProps": [
+        "assets/world-r80/r80-047.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:hando01:0",
+          "path": "assets/world-r80/r80-047.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:hando01:1",
+          "path": "assets/world-r80/r80-047.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:hando01:2",
+          "path": "assets/world-r80/r80-047.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:hando01:3",
+          "path": "assets/world-r80/r80-047.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:hando01:4",
+          "path": "assets/world-r80/r80-047.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:hando01:5",
+          "path": "assets/world-r80/r80-047.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:hando01:6",
+          "path": "assets/world-r80/r80-047.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:hando01:7",
+          "path": "assets/world-r80/r80-047.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "hando02",
+      "configuredProps": [
+        "assets/world-r80/r80-059.webp",
+        "assets/world-r80/r80-060.webp",
+        "assets/world-r80/r80-048.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:hando02:0",
+          "path": "assets/world-r80/r80-059.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:hando02:1",
+          "path": "assets/world-r80/r80-060.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:hando02:2",
+          "path": "assets/world-r80/r80-048.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:hando02:3",
+          "path": "assets/world-r80/r80-059.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:hando02:4",
+          "path": "assets/world-r80/r80-060.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:hando02:5",
+          "path": "assets/world-r80/r80-048.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:hando02:6",
+          "path": "assets/world-r80/r80-059.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:hando02:7",
+          "path": "assets/world-r80/r80-060.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:hando02:8",
+          "path": "assets/world-r80/r80-048.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:hando02:9",
+          "path": "assets/world-r80/r80-059.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:hando02:10",
+          "path": "assets/world-r80/r80-060.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:hando02:11",
+          "path": "assets/world-r80/r80-048.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "hando03",
+      "configuredProps": [
+        "assets/world-r80/r80-049.webp",
+        "assets/world-r80/r80-050.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:hando03:0",
+          "path": "assets/world-r80/r80-049.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:hando03:1",
+          "path": "assets/world-r80/r80-050.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:hando03:2",
+          "path": "assets/world-r80/r80-049.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:hando03:3",
+          "path": "assets/world-r80/r80-050.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:hando03:4",
+          "path": "assets/world-r80/r80-049.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:hando03:5",
+          "path": "assets/world-r80/r80-050.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:hando03:6",
+          "path": "assets/world-r80/r80-049.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:hando03:7",
+          "path": "assets/world-r80/r80-050.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:hando03:8",
+          "path": "assets/world-r80/r80-049.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:hando03:9",
+          "path": "assets/world-r80/r80-050.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:hando03:10",
+          "path": "assets/world-r80/r80-049.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:hando03:11",
+          "path": "assets/world-r80/r80-050.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "restHando",
+      "configuredProps": [
+        "assets/world-r80/r80-051.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:restHando:0",
+          "path": "assets/world-r80/r80-051.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:restHando:1",
+          "path": "assets/world-r80/r80-051.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:restHando:2",
+          "path": "assets/world-r80/r80-051.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "murder01",
+      "configuredProps": [
+        "assets/world-r80/r80-052.webp",
+        "assets/world-r80/r80-053.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:murder01:0",
+          "path": "assets/world-r80/r80-052.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:murder01:1",
+          "path": "assets/world-r80/r80-053.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:murder01:2",
+          "path": "assets/world-r80/r80-052.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:murder01:3",
+          "path": "assets/world-r80/r80-053.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder01:4",
+          "path": "assets/world-r80/r80-052.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder01:5",
+          "path": "assets/world-r80/r80-053.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder01:6",
+          "path": "assets/world-r80/r80-052.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder01:7",
+          "path": "assets/world-r80/r80-053.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder01:8",
+          "path": "assets/world-r80/r80-052.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder01:9",
+          "path": "assets/world-r80/r80-053.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder01:10",
+          "path": "assets/world-r80/r80-052.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder01:11",
+          "path": "assets/world-r80/r80-053.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "murder02",
+      "configuredProps": [
+        "assets/world-r80/r80-054.webp",
+        "assets/world-r80/r80-055.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:murder02:0",
+          "path": "assets/world-r80/r80-054.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:murder02:1",
+          "path": "assets/world-r80/r80-055.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:murder02:2",
+          "path": "assets/world-r80/r80-054.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:murder02:3",
+          "path": "assets/world-r80/r80-055.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder02:4",
+          "path": "assets/world-r80/r80-054.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder02:5",
+          "path": "assets/world-r80/r80-055.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder02:6",
+          "path": "assets/world-r80/r80-054.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder02:7",
+          "path": "assets/world-r80/r80-055.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder02:8",
+          "path": "assets/world-r80/r80-054.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder02:9",
+          "path": "assets/world-r80/r80-055.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder02:10",
+          "path": "assets/world-r80/r80-054.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder02:11",
+          "path": "assets/world-r80/r80-055.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "murder04",
+      "configuredProps": [
+        "assets/world-r80/r80-056.webp",
+        "assets/world-r80/r80-057.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:murder04:0",
+          "path": "assets/world-r80/r80-056.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:murder04:1",
+          "path": "assets/world-r80/r80-057.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:murder04:2",
+          "path": "assets/world-r80/r80-056.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:murder04:3",
+          "path": "assets/world-r80/r80-057.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder04:4",
+          "path": "assets/world-r80/r80-056.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder04:5",
+          "path": "assets/world-r80/r80-057.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder04:6",
+          "path": "assets/world-r80/r80-056.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder04:7",
+          "path": "assets/world-r80/r80-057.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder04:8",
+          "path": "assets/world-r80/r80-056.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder04:9",
+          "path": "assets/world-r80/r80-057.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder04:10",
+          "path": "assets/world-r80/r80-056.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder04:11",
+          "path": "assets/world-r80/r80-057.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "murder03",
+      "configuredProps": [
+        "assets/world-r80/r80-058.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:murder03:0",
+          "path": "assets/world-r80/r80-058.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:murder03:1",
+          "path": "assets/world-r80/r80-058.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:murder03:2",
+          "path": "assets/world-r80/r80-058.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder03:3",
+          "path": "assets/world-r80/r80-058.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder03:4",
+          "path": "assets/world-r80/r80-058.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder03:5",
+          "path": "assets/world-r80/r80-058.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder03:6",
+          "path": "assets/world-r80/r80-058.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder03:7",
+          "path": "assets/world-r80/r80-058.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder03:8",
+          "path": "assets/world-r80/r80-058.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder03:9",
+          "path": "assets/world-r80/r80-058.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder03:10",
+          "path": "assets/world-r80/r80-058.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:murder03:11",
+          "path": "assets/world-r80/r80-058.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "cult01",
+      "configuredProps": [
+        "assets/world-r80/r80-061.webp",
+        "assets/world-r80/r80-062.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:cult01:0",
+          "path": "assets/world-r80/r80-061.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:cult01:1",
+          "path": "assets/world-r80/r80-062.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:cult01:2",
+          "path": "assets/world-r80/r80-061.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:cult01:3",
+          "path": "assets/world-r80/r80-062.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult01:4",
+          "path": "assets/world-r80/r80-061.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult01:5",
+          "path": "assets/world-r80/r80-062.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult01:6",
+          "path": "assets/world-r80/r80-061.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult01:7",
+          "path": "assets/world-r80/r80-062.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult01:8",
+          "path": "assets/world-r80/r80-061.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult01:9",
+          "path": "assets/world-r80/r80-062.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult01:10",
+          "path": "assets/world-r80/r80-061.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult01:11",
+          "path": "assets/world-r80/r80-062.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "cult02",
+      "configuredProps": [
+        "assets/world-r80/r80-063.webp",
+        "assets/world-r80/r80-064.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:cult02:0",
+          "path": "assets/world-r80/r80-063.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:cult02:1",
+          "path": "assets/world-r80/r80-064.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:cult02:2",
+          "path": "assets/world-r80/r80-063.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:cult02:3",
+          "path": "assets/world-r80/r80-064.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult02:4",
+          "path": "assets/world-r80/r80-063.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult02:5",
+          "path": "assets/world-r80/r80-064.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult02:6",
+          "path": "assets/world-r80/r80-063.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult02:7",
+          "path": "assets/world-r80/r80-064.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult02:8",
+          "path": "assets/world-r80/r80-063.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult02:9",
+          "path": "assets/world-r80/r80-064.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult02:10",
+          "path": "assets/world-r80/r80-063.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult02:11",
+          "path": "assets/world-r80/r80-064.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "cult05",
+      "configuredProps": [
+        "assets/world-r80/r80-068.webp",
+        "assets/world-r80/r80-069.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:cult05:0",
+          "path": "assets/world-r80/r80-068.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:cult05:1",
+          "path": "assets/world-r80/r80-069.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:cult05:2",
+          "path": "assets/world-r80/r80-068.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:cult05:3",
+          "path": "assets/world-r80/r80-069.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult05:4",
+          "path": "assets/world-r80/r80-068.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult05:5",
+          "path": "assets/world-r80/r80-069.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult05:6",
+          "path": "assets/world-r80/r80-068.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult05:7",
+          "path": "assets/world-r80/r80-069.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult05:8",
+          "path": "assets/world-r80/r80-068.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult05:9",
+          "path": "assets/world-r80/r80-069.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult05:10",
+          "path": "assets/world-r80/r80-068.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult05:11",
+          "path": "assets/world-r80/r80-069.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "cult06",
+      "configuredProps": [
+        "assets/world-r80/r80-070.webp",
+        "assets/world-r80/r80-071.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:cult06:0",
+          "path": "assets/world-r80/r80-070.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:cult06:1",
+          "path": "assets/world-r80/r80-071.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:cult06:2",
+          "path": "assets/world-r80/r80-070.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:cult06:3",
+          "path": "assets/world-r80/r80-071.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult06:4",
+          "path": "assets/world-r80/r80-070.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult06:5",
+          "path": "assets/world-r80/r80-071.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult06:6",
+          "path": "assets/world-r80/r80-070.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult06:7",
+          "path": "assets/world-r80/r80-071.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult06:8",
+          "path": "assets/world-r80/r80-070.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult06:9",
+          "path": "assets/world-r80/r80-071.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult06:10",
+          "path": "assets/world-r80/r80-070.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult06:11",
+          "path": "assets/world-r80/r80-071.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "cult03",
+      "configuredProps": [
+        "assets/world-r80/r80-065.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:cult03:0",
+          "path": "assets/world-r80/r80-065.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:cult03:1",
+          "path": "assets/world-r80/r80-065.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:cult03:2",
+          "path": "assets/world-r80/r80-065.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult03:3",
+          "path": "assets/world-r80/r80-065.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult03:4",
+          "path": "assets/world-r80/r80-065.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult03:5",
+          "path": "assets/world-r80/r80-065.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult03:6",
+          "path": "assets/world-r80/r80-065.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult03:7",
+          "path": "assets/world-r80/r80-065.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult03:8",
+          "path": "assets/world-r80/r80-065.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult03:9",
+          "path": "assets/world-r80/r80-065.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult03:10",
+          "path": "assets/world-r80/r80-065.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult03:11",
+          "path": "assets/world-r80/r80-065.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    },
+    {
+      "id": "cult04",
+      "configuredProps": [
+        "assets/world-r80/r80-066.webp",
+        "assets/world-r80/r80-067.webp"
+      ],
+      "actual": [
+        {
+          "id": "r80:scene:cult04:0",
+          "path": "assets/world-r80/r80-066.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:cult04:1",
+          "path": "assets/world-r80/r80-067.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:cult04:2",
+          "path": "assets/world-r80/r80-066.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r80:scene:cult04:3",
+          "path": "assets/world-r80/r80-067.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult04:4",
+          "path": "assets/world-r80/r80-066.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult04:5",
+          "path": "assets/world-r80/r80-067.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult04:6",
+          "path": "assets/world-r80/r80-066.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult04:7",
+          "path": "assets/world-r80/r80-067.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult04:8",
+          "path": "assets/world-r80/r80-066.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult04:9",
+          "path": "assets/world-r80/r80-067.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult04:10",
+          "path": "assets/world-r80/r80-066.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        },
+        {
+          "id": "r81:scene:cult04:11",
+          "path": "assets/world-r80/r80-067.webp",
+          "drawn": true,
+          "solid": false,
+          "hospital": false,
+          "newProp": true
+        }
+      ]
+    }
+  ],
+  "usage": {
+    "sourcePNGInventory": 318,
+    "worldPNGsOriginal": 254,
+    "selectedWorldDerivativeImages": 153,
+    "configuredWorldProps": 91,
+    "configuredNarrativeEchoes": 62,
+    "actualDrawnWorldArt": 91,
+    "actualDrawnPlacements": 630,
+    "selectedWorldSourcesNew": 141,
+    "selectedWorldSourcesPrior": 12,
+    "unselectedWorldSourcesRetained": 101,
+    "regionalRasterEffects": 64,
+    "regionalVfxSceneBindings": 16,
+    "dynamicRecipes": 0,
+    "proceduralMotifs": 0,
+    "dynamicPackageDeferred": true,
+    "previewSVGs": 16,
+    "previewSVGsGameLoaded": false,
+    "generatedFrameSheets": false
+  },
+  "interpretation": "153 world derivatives are configured:91 prop concepts and62 narrative echoes. This test actually draws placed world props; narrative echoes are bound to story panels, not claimed as combat sprites.64 static raster effects are event-bound across16 regions. The supplied dynamic80 package and its16procedural motifs are not loaded per user instruction; native skills keep their original rendering.101 unselected world source PNGs remain preserved, and16 SVG previews are not game-loaded.",
+  "passed": true
+}

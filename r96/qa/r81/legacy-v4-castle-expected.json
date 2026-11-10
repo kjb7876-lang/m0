@@ -1,0 +1,274 @@
+{
+  "sourceHashes": {
+    "index.html": "7f642bd9057c03fb3b9a23050a75f4294927c7a632b1617bf3aab69d118c36f9",
+    "dist/phase1.js": "1e1cd26345345a583e10c5f5056d06750017c50bc150245503b03d7d646326a6",
+    "world-combat-r78.js": "2747c289e67a2eb232ea99b3c918974758cd7a3ed64d6af2c2a9668f74ad2657"
+  },
+  "zone": "hando02",
+  "progress": {
+    "STORY": {},
+    "DREAM": {}
+  },
+  "ward": false,
+  "actors": [
+    {
+      "id": "hando02:h102-s1",
+      "nativeId": "h102-s1",
+      "hp": 668.6521499999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:h102-c1",
+      "nativeId": "h102-c1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:h102-t1",
+      "nativeId": "h102-t1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:h102-s2",
+      "nativeId": "h102-s2",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:h102-s1-w1-r1",
+      "nativeId": "h102-s1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:h102-c1-w1-r2",
+      "nativeId": "h102-c1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:h102-s1-w2-1",
+      "nativeId": "h102-s1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "hidden"
+    },
+    {
+      "id": "hando02:h102-c1-w2-2",
+      "nativeId": "h102-c1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "hidden"
+    },
+    {
+      "id": "hando02:h102-t1-w2-3",
+      "nativeId": "h102-t1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "hidden"
+    },
+    {
+      "id": "hando02:h102-s2-w2-4",
+      "nativeId": "h102-s2",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "hidden"
+    },
+    {
+      "id": "hando02:h102-s1-w2-r1",
+      "nativeId": "h102-s1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "hidden"
+    },
+    {
+      "id": "hando02:h102-c1-w2-r2",
+      "nativeId": "h102-c1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "hidden"
+    },
+    {
+      "id": "hando02:mb-hando02",
+      "nativeId": "mb-hando02",
+      "hp": 34305.56,
+      "maxHp": 34305.56,
+      "spawnState": "hidden"
+    },
+    {
+      "id": "hando02:r74-patrol:0",
+      "nativeId": "h102-s1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:r74-patrol:1",
+      "nativeId": "h102-c1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:r74-patrol:2",
+      "nativeId": "h102-t1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:r74-patrol:3",
+      "nativeId": "h102-s2",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:r74-patrol:4",
+      "nativeId": "h102-s1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:r74-patrol:5",
+      "nativeId": "h102-c1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:r75-pack:12",
+      "nativeId": "h102-s1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:r75-pack:13",
+      "nativeId": "h102-c1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:r75-pack:14",
+      "nativeId": "h102-t1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:r75-pack:15",
+      "nativeId": "h102-s2",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:r75-pack:16",
+      "nativeId": "h102-s1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:r75-pack:17",
+      "nativeId": "h102-c1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:r75-pack:18",
+      "nativeId": "h102-s1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:r75-pack:19",
+      "nativeId": "h102-c1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:r75-pack:20",
+      "nativeId": "h102-t1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:r75-pack:21",
+      "nativeId": "h102-s2",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:r75-pack:22",
+      "nativeId": "h102-s1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:r75-pack:23",
+      "nativeId": "h102-c1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:r75-pack:24",
+      "nativeId": "h102-s1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:r75-pack:25",
+      "nativeId": "h102-c1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:r75-pack:26",
+      "nativeId": "h102-t1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:r75-pack:27",
+      "nativeId": "h102-s2",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:r75-pack:28",
+      "nativeId": "h102-s1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    },
+    {
+      "id": "hando02:r75-pack:29",
+      "nativeId": "h102-c1",
+      "hp": 1555.0049999999999,
+      "maxHp": 1555.0049999999999,
+      "spawnState": "active"
+    }
+  ]
+}

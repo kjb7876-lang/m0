@@ -1,0 +1,44 @@
+{
+  "schema": "r95-ui-dock-regression/v1",
+  "source": "client-source/visual-r93-ui.js",
+  "method": "Actual overlay in Node VM with native HUD parent structure, DOM move semantics and mobile-live class transitions. Does not measure browser layout or pixels.",
+  "checks": [
+    {
+      "name": "Desktop docks existing controls into the native header/footer",
+      "passed": true
+    },
+    {
+      "name": "Dock OFF restores all four native parents",
+      "passed": true
+    },
+    {
+      "name": "Dock OFF restores native sibling order and event identity",
+      "passed": true
+    },
+    {
+      "name": "Repeated docking does not duplicate nodes or lose event listeners",
+      "passed": true
+    },
+    {
+      "name": "Fullscreen mobile restores controls outside hidden header/footer",
+      "passed": true
+    },
+    {
+      "name": "Mobile effective docking does not overwrite user preference",
+      "passed": true
+    },
+    {
+      "name": "Returning to desktop reapplies user-selected docking",
+      "passed": true
+    },
+    {
+      "name": "User-disabled docking stays disabled across mobile transitions",
+      "passed": true
+    },
+    {
+      "name": "Dock lifecycle leaves the overlay error ledger clear",
+      "passed": true
+    }
+  ],
+  "passed": true
+}

@@ -1,0 +1,46 @@
+{
+  "method": "Pinned Three r186 BufferGeometry, Group and material objects under Node, without WebGL renderer. Actual GPU/pixel rendering is unverified.",
+  "checks": [
+    {
+      "name": "Actual pinned Three geometry uses wall-top height 2.705",
+      "passed": true,
+      "detail": {
+        "vertices": 216,
+        "roofCells": 1809
+      }
+    },
+    {
+      "name": "Uncut roof covers exactly the 1809 blocked cells",
+      "passed": true,
+      "detail": {
+        "area": 1809
+      }
+    },
+    {
+      "name": "Every roof footprint excludes walkable cells",
+      "passed": true
+    },
+    {
+      "name": "Static frame reuses geometry and single roof material",
+      "passed": true
+    },
+    {
+      "name": "Actor cutaway rebuild disposes previous geometry",
+      "passed": true
+    },
+    {
+      "name": "Focus cutaway exposes only local silhouette area",
+      "passed": true,
+      "detail": {
+        "area": 1808.3950016784656
+      }
+    },
+    {
+      "name": "Repeated cutaway frame reuses geometry",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "browserVerified": false,
+  "GPUVerified": false
+}

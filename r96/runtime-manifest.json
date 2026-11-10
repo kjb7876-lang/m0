@@ -33693,6 +33693,21 @@
       "sha256": "37c6eba767d48805d8c043fbb6fdcbbcf3245fe5d34a2ac7a535c917a14898a5"
     },
     {
+      "path": "assets/r563/dots/michaela-grand-pillar.webp",
+      "bytes": 173204,
+      "sha256": "5fd17c0e32957aedf0edb5d2082d59e883d30c3cb861600b7c44c66459a1030c"
+    },
+    {
+      "path": "assets/r563/dots/michaela-halo.webp",
+      "bytes": 207250,
+      "sha256": "c39dbc60383b232f8d3b68023b7ca0583c85cefd3e159f1cae5ac1510d93540d"
+    },
+    {
+      "path": "assets/r563/dots/michaela-pillar.webp",
+      "bytes": 127342,
+      "sha256": "6985f7a711074f743db96084b515a66c6e64b3d6486548cdb0329cac61c3f1b6"
+    },
+    {
       "path": "assets/r585/index.json",
       "bytes": 5998,
       "sha256": "58b5be4a18822506f40faa3c259e3ecfaacc0c099197ea223f48711f29feb1d3"
@@ -33771,6 +33786,56 @@
       "path": "assets/r585/slayer-w-sacrifice.webp",
       "bytes": 127910,
       "sha256": "f301ba2679c17d6a3bf595f6471d6252362baa116dc0d9c6130e2d79c35de4c4"
+    },
+    {
+      "path": "assets/r587/index.json",
+      "bytes": 4475,
+      "sha256": "4a6c7416fadd6cbb2369b2b3e0e4bcd37448d1f59cc799cc22f639212bd93c28"
+    },
+    {
+      "path": "assets/r587/slayer-bleed2.webp",
+      "bytes": 34562,
+      "sha256": "3ad6fac9c9d441371f43a7eced059b61ca8a808ae7f73ab1595200a7471d16f0"
+    },
+    {
+      "path": "assets/r587/slayer-chain.webp",
+      "bytes": 66890,
+      "sha256": "4859c4c2084c8fc80d317f78ddda749820b00ed99291a84879721fda164b078a"
+    },
+    {
+      "path": "assets/r587/slayer-e-floor.webp",
+      "bytes": 62426,
+      "sha256": "ca2bfb731f23d50c9b0f82d92564e9ebecb8d8f52087bdc955a6e21b8224ff5c"
+    },
+    {
+      "path": "assets/r587/slayer-exec.webp",
+      "bytes": 97866,
+      "sha256": "6c997732056e46191ac58175ea6a906783149e72b859390b17b5c670ecc47929"
+    },
+    {
+      "path": "assets/r587/slayer-hit.webp",
+      "bytes": 42614,
+      "sha256": "184b640e17e77eb6c14e3f62aefa663f364470f73af19b7898525f9391e2a0a4"
+    },
+    {
+      "path": "assets/r587/slayer-mark.webp",
+      "bytes": 57670,
+      "sha256": "2f0734a5c4cb94110d520b672be4a6891a3c0ac2630df5d47cf4727738ee1d6d"
+    },
+    {
+      "path": "assets/r587/slayer-q-thorn-back.webp",
+      "bytes": 144664,
+      "sha256": "443e509e56b8c1ed277e4f4f2c0b4d25e1ed265a230c464c4ccc568c87d108f7"
+    },
+    {
+      "path": "assets/r587/slayer-q-thorn-front.webp",
+      "bytes": 124016,
+      "sha256": "cc3121eeb26ea611c376e813fda0347c672209c9d9fdf02f8dd95c1bcd9ddae7"
+    },
+    {
+      "path": "assets/r587/slayer-w-cross2.webp",
+      "bytes": 113846,
+      "sha256": "ed5b53311208f99271925b1c306daaa176bd7e23e3f0ce9c1c805157754f80f0"
     },
     {
       "path": "assets/r590/hwando-iai-ring.webp",
@@ -41813,6 +41878,11 @@
       "sha256": "6b19214185896be7fdb0ab6e179b77423e901b0324e5b84e3b8d64cebc3cc913"
     },
     {
+      "path": "auto-attack-r597.js",
+      "bytes": 6607,
+      "sha256": "910349d1d376c29dd54c36269fc990da465b70e41abd63cdaf8db4937de11b8d"
+    },
+    {
       "path": "auto-levelup-r237.js",
       "bytes": 8157,
       "sha256": "b71f94741a48408ffd2f67eb33f1b2b96bfa87c473da2cd95c37b28976fdefbf"
@@ -42578,6 +42648,11 @@
       "sha256": "ff8cbdd5af4146ffe677acf229d85897144d5f61061d981f02ecf4478d208b63"
     },
     {
+      "path": "enemy-attack-tempo-r601.js",
+      "bytes": 4384,
+      "sha256": "12b0f56b0dd6354bd4ba07518be3754e2dc106dced7884145b569271fc12f884"
+    },
+    {
       "path": "enemy-face-r444.js",
       "bytes": 14197,
       "sha256": "2713fd510635b965f92b759d6988ead7646b1d595137bd64a6c0ce024b2cdc55"
@@ -42884,8 +42959,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6573217,
-      "sha256": "0e8ff38cec3ab2db6701700ca09b2ff405eded7bd3438f516d0fa8cdcfa4aed5"
+      "bytes": 6573413,
+      "sha256": "bc17343bf5796e6523b6dc21b5ff609d9b983b4f89d23a1e21b8138bf5bc1197"
     },
     {
       "path": "intro-r140.js",
@@ -42956,6 +43031,11 @@
       "path": "maps-palace-slum-r317.js",
       "bytes": 15913,
       "sha256": "01e01f4db15a9a925b7d2eb2843c9664432f04b29bacce72a8f7921a58cc9418"
+    },
+    {
+      "path": "michaela-genesis-r563.js",
+      "bytes": 15249,
+      "sha256": "c6ea4566873bb623c8690e325f8bfe59f019646c1eb4fe57a6eaf55a60eda67c"
     },
     {
       "path": "michaela-r247.js",
@@ -43503,6 +43583,11 @@
       "sha256": "1b550154ee08df47794049826f17b9ad36616adc7ccda6f0df6b43a1ed803f2e"
     },
     {
+      "path": "slayer-berserk-r586.js",
+      "bytes": 13041,
+      "sha256": "f7c80761658674e6a91c0dbb22ad7441245bb381ccace8e231dabc14bdb1ee6e"
+    },
+    {
       "path": "slayer-blood-r425.js",
       "bytes": 24701,
       "sha256": "340b88096ac4f5255a4e159dab7b3332aa027074123cbf693301c1cb1060bbdd"
@@ -43519,8 +43604,8 @@
     },
     {
       "path": "slayer-sheets-r585.js",
-      "bytes": 16325,
-      "sha256": "2d1bf2ed146bcf2baab1c6d4f6feb2dc2c1315353cb136335b52cb2832354c6a"
+      "bytes": 19399,
+      "sha256": "40bd8d39daf87afb94ebfcef27f060c7817d66f2669d17215559b8f4a82ab774"
     },
     {
       "path": "status-r96.js",
@@ -43808,9 +43893,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8761,
-  "totalBytes": 1218560182,
-  "webHTMLSha256": "0e8ff38cec3ab2db6701700ca09b2ff405eded7bd3438f516d0fa8cdcfa4aed5",
+  "fileCount": 8778,
+  "totalBytes": 1219859558,
+  "webHTMLSha256": "bc17343bf5796e6523b6dc21b5ff609d9b983b4f89d23a1e21b8138bf5bc1197",
   "largest": [
     {
       "path": "index.html",

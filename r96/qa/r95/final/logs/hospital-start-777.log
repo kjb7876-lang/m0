@@ -1,0 +1,141 @@
+PASS Native boot completes 
+PASS Actual hospital direct-start button enters current test hospital {
+  started: true,
+  state: { zone: 'ep1a08', canTravel: true, phase: 'route' }
+}
+PASS Hospital checkpoint already resolves cave/swamp to current hospital structure [
+  {
+    id: 'dist01',
+    cleared: false,
+    completed: true,
+    type: 'r171-story-narrative-map',
+    ward: true,
+    r74: true,
+    r75: true,
+    version74: 1,
+    version75: 1,
+    cells: 4081,
+    bounds: [ 0, 0, 100, 104 ],
+    phase: 'done',
+    alive: 42,
+    unsafe: []
+  },
+  {
+    id: 'dist02',
+    cleared: false,
+    completed: true,
+    type: 'r171-story-narrative-map',
+    ward: true,
+    r74: true,
+    r75: true,
+    version74: 1,
+    version75: 1,
+    cells: 4076,
+    bounds: [ 0, 0, 100, 104 ],
+    phase: 'done',
+    alive: 49,
+    unsafe: []
+  }
+]
+PASS 777 activates from the actual hospital test checkpoint { ok: true }
+PASS Hospital-start → native 777 → dist01 uses the improved ward layout {
+  zone: 'dist01',
+  room: 'dist01',
+  loading: false,
+  cleared: false,
+  type: 'r171-story-narrative-map',
+  ward: true,
+  cells: 4081,
+  bounds: [ 0, 0, 100, 104 ],
+  hero: 'hwando',
+  heroEntity: {
+    id: 'hero',
+    hero: true,
+    x: 85.50796180365968,
+    y: 60.300636944292776,
+    path: 'assets/hero-authored-v314rc5/hwando-action-atlas.png',
+    frame: {
+      path: 'assets/hero-authored-v314rc5/hwando-action-atlas.png',
+      assetFrame: [Object],
+      nativeHero5: [Object]
+    },
+    height: 66,
+    alpha: 1,
+    alive: true,
+    flash: false,
+    shadowRadius: 0.3951479071336589,
+    state: 'idle',
+    direction: 'back',
+    movementDirection: 'back',
+    sourcePoseSupport: 'preserved native source pose'
+  },
+  safe: true,
+  phase: 'done',
+  alive: 42,
+  unsafeActors: [],
+  environment: {
+    version: 1,
+    family: 'cave',
+    nativeProps: 8,
+    genericProps: 7,
+    sceneProps: 8,
+    occupiedRooms: [
+       2,  4,  5,  8,  9, 10, 13, 14,
+      18, 19, 20, 23, 24, 25, 28, 29,
+      33, 34, 35, 38, 39, 43, 44
+    ]
+  },
+  elapsedMs: 576.2115950000007
+}
+PASS dist01 from hospital 777 has no actors embedded in the new walls []
+PASS Hospital-start → native 777 → dist02 uses the improved ward layout {
+  zone: 'dist02',
+  room: 'dist02',
+  loading: false,
+  cleared: false,
+  type: 'r171-story-narrative-map',
+  ward: true,
+  cells: 4076,
+  bounds: [ 0, 0, 100, 104 ],
+  hero: 'hwando',
+  heroEntity: {
+    id: 'hero',
+    hero: true,
+    x: 85.50796180365968,
+    y: 60.300636944292776,
+    path: 'assets/hero-authored-v314rc5/hwando-action-atlas.png',
+    frame: {
+      path: 'assets/hero-authored-v314rc5/hwando-action-atlas.png',
+      assetFrame: [Object],
+      nativeHero5: [Object]
+    },
+    height: 66,
+    alpha: 1,
+    alive: true,
+    flash: false,
+    shadowRadius: 0.3951479071336589,
+    state: 'idle',
+    direction: 'back',
+    movementDirection: 'back',
+    sourcePoseSupport: 'preserved native source pose'
+  },
+  safe: true,
+  phase: 'done',
+  alive: 49,
+  unsafeActors: [],
+  environment: {
+    version: 1,
+    family: 'swamp',
+    nativeProps: 8,
+    genericProps: 7,
+    sceneProps: 8,
+    occupiedRooms: [
+       2,  4,  5,  8,  9, 10, 13, 14,
+      18, 19, 20, 23, 24, 25, 28, 29,
+      33, 34, 35, 38, 39, 43, 44
+    ]
+  },
+  elapsedMs: 481.0768919999973
+}
+PASS dist02 from hospital 777 has no actors embedded in the new walls []
+PASS Native error ledger stays clear []

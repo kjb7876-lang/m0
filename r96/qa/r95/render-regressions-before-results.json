@@ -1,0 +1,53 @@
+{
+  "schema": "storyworld.r95.render-regressions/v1",
+  "sourceRoot": "/workspace/scratch/555774981889/r94-inspect/hospital-refinement-v12",
+  "method": "Canonical overlay modules in isolated Node VM settings fixtures, plus actual Three CPU BoxGeometry; no browser/GPU/natural-play claim.",
+  "checks": [
+    {
+      "name": "Light-only setting loads and draws its planned lamps without enabling floor decals",
+      "passed": false,
+      "detail": {
+        "lights": 2,
+        "requested": [],
+        "drawn": []
+      }
+    },
+    {
+      "name": "Disabling lamps stops their rendering and their local-light source list",
+      "passed": true
+    },
+    {
+      "name": "Floor-only setting still draws floor art and preserves native render calls",
+      "passed": true,
+      "detail": {
+        "nativeGround": 3,
+        "nativeHero": 2,
+        "errors": 0
+      }
+    },
+    {
+      "name": "Distinct transposed wall faces both receive wall decorations",
+      "passed": false,
+      "detail": {
+        "placed": [
+          {
+            "x": 6.4,
+            "z": 3.535
+          },
+          {
+            "x": 3.6,
+            "z": 3.535
+          }
+        ],
+        "slots": 2
+      }
+    },
+    {
+      "name": "Wall decoration build preserves native source geometry and records no overlay errors",
+      "passed": true
+    }
+  ],
+  "passed": false,
+  "browserVerified": false,
+  "GPUVerified": false
+}
