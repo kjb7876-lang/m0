@@ -8031,7 +8031,8 @@
     "assets/r380/mobs/root-stalker-r74-plain-walk-d1.webp",
     "assets/r380/mobs/swamp-root-stalker-darkgreen-v2-walk-d1.webp",
     "assets/r380/mobs/u2-false-mercy-collector-walk-d1.webp",
-    "survival-r600.js"
+    "survival-r600.js",
+    "skill-growth-r663.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9106,5 +9107,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "8618a7d686567f68558711d48903241963d0ee8be1c5f5078426645cf4295be2"
+  "runtimeManifestSHA256": "50390e2e4bc460dda0315a90d7b574e4966948d8a1129b317e417e532047b217"
 }
