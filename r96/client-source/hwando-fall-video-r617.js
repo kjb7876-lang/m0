@@ -40,11 +40,13 @@ const now=()=>typeof performance!=='undefined'&&performance.now?performance.now(
 const storyLayer=r=>{try{return !!r&&r.layer==='STORY'&&(typeof layer==='undefined'||layer==='STORY')&&!r.samongR103&&!r.samongR115&&!r.exploration?.samongR103;}catch(_){return false;}};
 const eligible=(r,c)=>!!(c&&r&&r.id===c.zone&&storyLayer(r)&&solo()&&!automated());
 // 다른 장면(서사창·창·로딩·다른 영상·컷신)이 열려 있으면 기다린다
+// 영화 모드(R370) 낭독이 진행 중이면(문장 재생 중이거나 대기열이 남음) 끝날 때까지 기다린다(Codex P2: 영상 뒤에서 자막·낭독이 흘러가지 않게)
+const narrating=()=>{try{const c=window.__STORYWORLD_CINEMA_MODE_R370__;if(!c?.prefs?.()?.on)return false;const i=c.inspect?.();return !!i&&(!!i.current||(i.queue|0)>0);}catch(_){return false;}};
 // story=false: 서사창(그리고 서사창이 함께 켜는 modal)은 기다리지 않는다 — 필수 패배 뒤 서사창 위에 추락 영상을 먼저 튼다
 const busy=(story=true)=>{try{const sc=typeof storyScene!=='undefined'&&!!storyScene;return (story&&sc)||(typeof loading!=='undefined'&&!!loading)||((story||!sc)&&typeof modal!=='undefined'&&!!modal)
  ||(typeof started!=='undefined'&&!started)||typeof player==='undefined'||!player||!(player.hp>0)
  ||(typeof document!=='undefined'&&(!!document.hidden||!!document.getElementById('r317Cinema')||!!document.getElementById('r368v')||!!document.getElementById('r369v')||!!document.getElementById('r372v')))
- ||!!window.__STORYWORLD_BOSS_CINEMATIC_R568__?.inspect?.()?.active;}catch(_){return false;}};
+ ||!!window.__STORYWORLD_BOSS_CINEMATIC_R568__?.inspect?.()?.active||narrating();}catch(_){return false;}};
 const bossOf=r=>(r?.enemies||[]).find(e=>e&&e.nativeId===BOSS&&!e.r61Clone&&!e.r61Summoned)||null;
 const awake=e=>!!e&&e.hp>0&&!e.deadRecorded&&e.spawnState==='active';
 // 필수 패배(index.html R75 fall): 기사와 12초 겨루거나 기사 체력이 66% 아래가 되면 room.r75Falling 이 켜지고 기사는 숨고 뒤 서사가 열린다.

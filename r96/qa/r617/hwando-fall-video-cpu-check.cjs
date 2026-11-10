@@ -128,6 +128,14 @@ const enter=async(g,id,layer='STORY')=>{await run(g,`enterRegion("${id}",null,{l
  await enter(g,'hando01');step(g,1);ok('room change closes video, not saved',ins(g).open===null&&!ins(g).prefs.seen.includes('beach')&&ins(g).stats.room===1);}
 {const g=env();await enter(g,'last302');step(g,10);const v=vid(g);v.fire('error');step(g,1);ok('video error: closes, not seen (retry next time)',ins(g).open===null&&!ins(g).prefs.seen.includes('beach'));}
 {const g=env();await enter(g,'last302');step(g,10);step(g,61);ok('stall 6s: closes, not seen',ins(g).open===null&&ins(g).stats.stalled===1&&!ins(g).prefs.seen.includes('beach'));}
+// Codex P2: 영화 모드(R370) 낭독이 흐르는 동안은 기다렸다가 끝나면 튼다(서사창은 R370 이 바로 닫음)
+{const g=env();run(g,'var cine={on:true,current:"첫 문장",queue:2};window.__STORYWORLD_CINEMA_MODE_R370__={prefs:()=>({on:cine.on}),inspect:()=>({current:cine.current,queue:cine.queue})};');
+ await enter(g,'last301');run(g,'room.engaged=true;knight.spawnState="active"');step(g,10);ok('cinema narration running: knight waits',ins(g).open===null);
+ run(g,'cine.current=null;cine.queue=1');step(g,3);ok('cinema queue not empty: still waits',ins(g).open===null);
+ run(g,'cine.queue=0');step(g,2);ok('cinema narration done: knight plays',ins(g).open==='knight');
+ api(g).skip();step(g,6);run(g,'cine.current="추락 문장";room.r75Falling=true;room.engaged=false;knight.spawnState="hidden"');step(g,10);ok('cinema narration running: fall waits too',ins(g).open===null);
+ run(g,'cine.current=null');step(g,6);ok('then fall plays',ins(g).open==='fall');}
+{const g=env();run(g,'window.__STORYWORLD_CINEMA_MODE_R370__={prefs:()=>({on:false}),inspect:()=>({current:"x",queue:3})};');await enter(g,'last301');run(g,'room.engaged=true;knight.spawnState="active"');step(g,3);ok('cinema mode off: stale queue ignored',ins(g).open==='knight');}
 {const g=env({playFail:true});await enter(g,'last302');step(g,10);ok('autoplay blocked: retries muted',ins(g).stats.muted===1);}
 // Codex P2: 재생이 끝내 안 되면 같은 방문에서 다시 열지 않음(게임이 막히지 않게), 다음 방문에 한 번 더, 세션당 2번까지
 {const g=env({playFail:true});await enter(g,'last301');run(g,'room.engaged=true;knight.spawnState="active"');step(g,60);
