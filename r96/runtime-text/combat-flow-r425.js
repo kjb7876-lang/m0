@@ -95,7 +95,7 @@ if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a
  const ex=excluded(e),doSize=prefs.size&&!ex&&typeof rec.save==='function',teleOff=!prefs.tele,headBar=prefs.bossBar&&!ex&&enr(e);
  const t=T();if(t!==budgetT){budgetT=t;budget=4;}
  const s=stOf(e),q=project(e.x,e.y),fx=q.x,fy=q.y,st0=cmds.length;let r,sx=1,sy=1,k=1;
- if(doSize){const pk=punchK(s),kx=pk>0?s.kx*pk/.07:0;sx=s.s*(1+pk);sy=s.s*(1-pk*.6);rec.save();try{rec.translate(fx+kx,fy);rec.scale(sx,sy);rec.translate(-fx,-fy);r=base.apply(this,[e,...a]);}finally{rec.restore();}}
+ if(doSize){const pk=punchK(s),kx=pk>0?s.kx*pk/.07:0;sx=sy=s.s;/* R532: 맞는 순간 가로로 늘고 세로로 눌리던 것(종이 느낌)을 빼고 밀림(kx)만 */rec.save();try{rec.translate(fx+kx,fy);rec.scale(sx,sy);rec.translate(-fx,-fy);r=base.apply(this,[e,...a]);}finally{rec.restore();}}
  else{stats.skipped++;r=base.apply(this,[e,...a]);}
  if(cmds.length===st0)return r;
  try{if(e.hp>0){const bb=bodyCmd(cmds,st0);if(bb)s.art=artKey(bb);}}catch(err){fail(err);}
