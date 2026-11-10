@@ -126,6 +126,10 @@ for(const [w,h] of [[1280,720],[844,390],[390,844],[1920,1080]]){
  ok('reveal flash is not a full-screen light-colour fill',full===0);ok('reveal flash uses a radial burst',radial>=2);}
 {const g=env({webdriver:true});const A=api(g);A.play({force:true,at:2});step(g,1);const c=g.nodes.find(n=>n.id==='r568c').ctx.calls;const sq=c.filter(([k,a])=>k==='fillRect'&&a[2]<6&&a[3]<6).length,fl=c.filter(([k])=>k==='fill').length;
  ok('embers are not tiny squares',sq===0&&fl>=20);}
+// 리뷰 지적(Codex #366, 2차): 닫힘 페이드(0.48초) 동안 화면을 덮은 막이 터치를 가로채므로 그 동안 게임도 멈춘 채, 막이 빠지면 재개
+{const g=env();vm.runInContext('var cdTicks=0;(function(){const b=tick;tick=function(dt){cdTicks++;return b.apply(this,arguments);};})();',g);
+ fight(g);step(g,3);api(g).skip();const t0=g.ticks,c0=g.cdTicks;step(g,24);ok('closing fade: overlay attached, game and outer wrapper still paused',!!g.nodes.find(n=>n.id==='r568'&&!n.removed)&&g.ticks===t0&&g.cdTicks===c0);
+ for(const [f] of g.__to.splice(0))f();step(g,3);ok('overlay removed: game and outer wrapper run again',g.ticks>t0&&g.cdTicks>c0);}
 // 리뷰 지적(Codex #366): ① 뒤에 실린 tick 감싸개(mobile-bonus-r286 등)도 컷신 동안 돌지 않아야 한다(재사용 대기 회복 금지)
 {const g=env();vm.runInContext('var cdTicks=0;(function(){const b=tick;tick=function(dt){cdTicks++;player.blinkCD=Math.max(0,(player.blinkCD??10)-dt);return b.apply(this,arguments);};})();player.blinkCD=10;',g);
  fight(g);step(g,3);ok('outer wrapper started before cutscene',api(g).inspect().active);const c0=g.cdTicks,b0=g.player.blinkCD;step(g,300);

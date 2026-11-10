@@ -13,7 +13,7 @@
 //  · 끄기: localStorage['storyworld.r568.cine']='{"on":false}'. 다시 보기: __STORYWORLD_BOSS_CINEMATIC_R568__.play({force:true}).
 (()=>{'use strict';
 if(window.__STORYWORLD_BOSS_CINEMATIC_R568__)return;
-const REV='R568-boss-cinematic-1',KEY='storyworld.r568.cine';
+const REV='R568-boss-cinematic-2',KEY='storyworld.r568.cine';
 // [지역, 보스 nativeId, 정본 낱말 조각(자막), 분위기 색(어둠 쪽), 빛 색(테두리·번쩍)]
 const TABLE=Object.freeze([
  {zone:'ep1a11',enemy:'a11-boss',needle:'교만의 악마 루시퍼라는 직감이',shade:'#3a0d22',light:'#e9c27a'}]);
@@ -21,7 +21,7 @@ const CUTS=Object.freeze([0,.8,3.4,6.2,9.3,10]),SHOTS=['open','place','hero','bo
 function shotAt(t){if(!(t>=0))return'open';for(let i=1;i<CUTS.length;i++)if(t<CUTS[i])return SHOTS[i-1];return'done';}
 let prefs={on:true,seen:[]};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object'){if(s.on===false)prefs.on=false;if(Array.isArray(s.seen))prefs.seen=s.seen.filter(x=>typeof x==='string').slice(0,64);}}catch(_){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}};
-const stats={plays:0,ended:0,skips:0,closedByRoom:0,errors:0,frames:0,snapshot:0,missingArt:0};let lastError=null,active=null;
+const stats={plays:0,ended:0,skips:0,closedByRoom:0,errors:0,frames:0,snapshot:0,missingArt:0};let lastError=null,active=null,closing=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const clamp=(x,a=0,b=1)=>x<a?a:x>b?b:x,lerp=(a,b,t)=>a+(b-a)*t,sm=(a,b,x)=>{const t=clamp((x-a)/(b-a));return t*t*(3-2*t);};
 function rng(seed){let s=seed>>>0;return()=>{s=(s+0x6D2B79F5)>>>0;let t=s;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296;};}
@@ -170,9 +170,9 @@ function nameCard(o,a){if(a<=0)return;const g=o.g,{W,H}=o.scene,U=Math.min(W,H);
  g.textAlign='center';g.shadowColor='#000';g.shadowBlur=12;g.fillStyle='#f3e7da';const maxN=W*.86,nw=Math.min(maxN,g.measureText(o.name).width);g.fillText(o.name,W/2,cy,maxN);g.font=`600 ${sm2}px ${SERIF}`;g.fillStyle=o.row.light;g.shadowBlur=6;
  g.textAlign='right';const lx=W/2-nw/2-big*.45;if(lx-g.measureText('B O S S').width>=4)g.fillText('B O S S',lx,cy-big*.08);g.restore();}
 // ---- 재생 ----
-function finish(o,reason){if(!o||o.done)return;o.done=true;if(active===o)active=null;try{cancelAnimationFrame(o.raf);}catch(_){}
+function finish(o,reason){if(!o||o.done)return;o.done=true;if(active===o)active=null;closing=o; // 닫힘 페이드(0.48초) 동안 막이 터치를 가로채므로 게임도 멈춘 채try{cancelAnimationFrame(o.raf);}catch(_){}
  if(reason==='ended')stats.ended++;else if(reason==='skip')stats.skips++;else if(reason==='room')stats.closedByRoom++;
- try{o.root.classList.add('out');}catch(_){}setTimeout(()=>{try{o.root.remove();}catch(_){}try{if(typeof keys!=='undefined'&&keys?.clear)keys.clear();}catch(_){}},480);}
+ try{o.root.classList.add('out');}catch(_){}setTimeout(()=>{try{o.root.remove();}catch(_){}if(closing===o)closing=null;try{if(typeof keys!=='undefined'&&keys?.clear)keys.clear();}catch(_){}},480);}
 function play(opt={}){if(active||typeof document==='undefined')return false;const r=here();let pick=opt.force?(candidate(r)||forcePick(r,opt)):candidate(r);if(!pick)return false;
  if(!opt.force&&(!prefs.on||automated()||cinemaVoice()||!solo()||!calm()))return false;
  const {row,e}=pick,key=row.zone+'|'+row.enemy;if(!prefs.seen.includes(key)){prefs.seen.push(key);save();}
@@ -200,7 +200,7 @@ function play(opt={}){if(active||typeof document==='undefined')return false;cons
 function reducedMotion(){try{if(typeof settings!=='undefined'&&settings&&'reducedMotion' in settings)return !!settings.reducedMotion;}catch(_){}try{return !!matchMedia('(prefers-reduced-motion: reduce)').matches;}catch(_){return false;}}
 // 이 파일보다 뒤에 실린 tick 감싸개(mobile-bonus-r286 의 재사용 대기 회복 등)도 컷신 동안 멈추게, 재생할 때 가장 바깥 tick 에 문을 단다
 let gateFn=null;
-function gateOuter(){try{if(typeof tick!=='function'||tick===gateFn)return;const outer=tick;const gf=function(...a){if(active){if(here()!==active.room)finish(active,'room');else return;}return outer.apply(this,a);};gateFn=gf;tick=gf;}catch(e){fail(e);}}
+function gateOuter(){try{if(typeof tick!=='function'||tick===gateFn)return;const outer=tick;const gf=function(...a){if(active){if(here()!==active.room)finish(active,'room');else return;}if(closing)return;return outer.apply(this,a);};gateFn=gf;tick=gf;}catch(e){fail(e);}}
 // 강제 재생(검사·다시 보기): 지금 지역의 표 보스를 쓰고, 없으면 표 첫 줄을 흉내 낸다
 function forcePick(r,opt){const z=opt.zone||r?.id;const row=TABLE.find(t=>t.zone===z)||TABLE[0];const e=(r?.enemies||[]).find(x=>x&&x.nativeId===row.enemy)||{nativeId:row.enemy,name:'',path:null,x:0,y:0};return{row,e};}
 // 키: 재생 중 게임 키를 막고 Esc/Enter/Space 로 건너뛴다(R309 가드 목록에도 올림)
@@ -209,7 +209,7 @@ try{(window.__STORYWORLD_CINEMA_GUARDS__=window.__STORYWORLD_CINEMA_GUARDS__||[]
 if(typeof addEventListener==='function'){addEventListener('keydown',key,true);addEventListener('keyup',key,true);}
 // 틱: 재생 중엔 게임 시간을 멈추고, 아니면 시작 조건을 본다. 표 보스 지역에 들어오면 그림을 미리 받아 둔다.
 let lastRoom=null;
-if(typeof tick==='function'){const base=tick;tick=function(...a){if(active){if(here()!==active.room)finish(active,'room');else return;}
+if(typeof tick==='function'){const base=tick;tick=function(...a){if(active){if(here()!==active.room)finish(active,'room');else return;}if(closing)return;
  const out=base.apply(this,a);
  try{const r=here();if(r!==lastRoom){lastRoom=r;if(prefs.on&&r&&TABLE.some(t=>t.zone===r.id)){const e=(r.enemies||[]).find(x=>TABLE.some(t=>t.zone===r.id&&t.enemy===x?.nativeId));want([heroPath(),e?.path]);}}
   if(prefs.on&&!active&&candidate(r))play();}catch(e){fail(e);}return out;};}
