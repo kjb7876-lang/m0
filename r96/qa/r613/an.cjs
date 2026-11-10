@@ -1,0 +1,5 @@
+const o=JSON.parse(require('fs').readFileSync(process.argv[2]));const strip=n=>n.replace(/^중간보스 · /,'').replace(/ (증원|우두머리|추격대|후속 증원)$/,'').replace(/ (증원|우두머리|추격대|후속 증원)$/,'');
+const G=new Map();for(const z in o)for(const r of o[z].rows||[]){const k=Object.keys(r.keys).filter(k=>!k.startsWith('none'));const nm=strip(r.name);const g=G.get(nm)||{name:nm,zones:new Set(),srcs:new Set(),frames:0,n:0,boss:false,kinds:new Set(),drawn:0,shapes:0};
+ g.zones.add(z);g.n++;if(r.boss)g.boss=true;g.kinds.add(r.kind);if(k.length){g.drawn++;g.frames=Math.max(g.frames,k.length);k.forEach(x=>g.srcs.add(x.split('|')[0]));g.shapes=Math.max(g.shapes,Object.keys(r.shapes).length);}G.set(nm,g);}
+const L=[...G.values()].sort((a,b)=>a.frames-b.frames);let c={};for(const g of L){const b=g.drawn===0?'undrawn':g.frames<=1?'NOWALK':g.frames===2?'two':'ok';c[b]=(c[b]||0)+1;if(b!=='ok'||process.argv[3])console.log([b,g.name,[...g.zones].join(','),g.frames,g.shapes,g.boss?'boss':'',[...g.kinds].join('/'),[...g.srcs].join(' ').slice(0,160)].join('\t'));}
+console.log(JSON.stringify(c));
