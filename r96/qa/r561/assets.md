@@ -10,9 +10,11 @@
 | gunner-w-tracer.webp | Dots CX-0059G r2 GN05-tracer-DRAFT-v1.png(원본 SHA-256 9f2dffbc…) → 이펙트 스레드 손질(/mnt/project-files/hero-fx-recolor/gunner-r2-20261110) | runtime-text/assets/r561/gunner-w-tracer.webp · SHA-256 35fe37b907204e13ad6472729448224cd31400155354bc4252b6beda41e9fcce | 66,086 B, 칸 512×128 6×4, 24장 12.5fps | W 저격 탄도, 총구→착탄 길이로 늘림 | 적용 |
 | gunner-w-impact.webp | Dots CX-0059G r2 CX-0059G_r1_GN06-impact_DRAFT_v1.png(원본 SHA-256 6bc9af79…) → 이펙트 스레드 손질(/mnt/project-files/hero-fx-recolor/gunner-r2-20261110) | runtime-text/assets/r561/gunner-w-impact.webp · SHA-256 c4c9533225cc45ca55a7d0dfe1b681f17228573ebc16557c83a0e2a8f39112fb | 163,892 B, 칸 256×256 6×4, 24장 12.5fps | W 착탄 파편·고리 | 적용 |
 | gunner-e-rifle.webp | Dots CX-0059G r2 GN07-rifle-DRAFT-v1.png(원본 SHA-256 cf5dc2bc…) → 이펙트 스레드 손질(/mnt/project-files/hero-fx-recolor/gunner-r2-20261110) | runtime-text/assets/r561/gunner-e-rifle.webp · SHA-256 bf4da2825685ba466cc3b8a663636fd90d9d16846e90f5cf1be26df4899e16ca | 38,322 B, 칸 256×256 6×4, 24장 12.5fps | E 연사 한 발마다 총구·예광 0~3칸 | 적용 |
+| gunner-w-muzzle.webp | Dots CX-0059G_추가2 r3 gunner-w-sniper-muzzle.png(원본 SHA-256 7a3f29c1…) → 이펙트 스레드 손질(/mnt/project-files/hero-fx-recolor/dots-r2-20261110, 안개 알파 걷음) | runtime-text/assets/r561/gunner-w-muzzle.webp · SHA-256 57193a52707cd50b56fdc46a67a43830422fab2f6793a69e27ec98c20cd63391 | 20,856 B, 칸 256×256 6×4, 24장 12.5fps, 피벗 (65,136), 맞는 칸 1 | W 저격 발사 순간 총구 섬광(맞는 칸을 발사에) | 적용 |
+| gunner-e-casings.webp | Dots CX-0059G_추가2 r3 gunner-ejected-casing.png(원본 SHA-256 8a7dbcd5…) → 이펙트 스레드 손질(같은 폴더, 안개 걷음, 16장) | runtime-text/assets/r561/gunner-e-casings.webp · SHA-256 a05669728c6403de90e20973ae57dc69b253d69e1041bc4609a825913aa01ab7 | 20,002 B, 칸 256×256 6×4, 16장, 피벗 (128,200) | E 연사 한 발마다 탄피(20fps, 0.8초, 총 반대쪽) | 적용 |
 | gunner-r-mark.webp (r1 GN-03) | 손질본 | — | — | R 조준 고리 — 전후 비교에서 코드 고리보다 흐려 위험 표시가 약함 | 쓰지 않음 |
-| gunner-w-muzzle.webp (r1 GN-06) | 임시 배경 키 손질본 | — | — | Dots 투명 재출력(CX-0059G_추가2) 대기, 코드 섬광 유지 | 보류 |
-| gunner-e-casings.webp (r1 GN-08) | 손질본 | — | — | 탄피가 너무 커서 Dots 재작업(추가2) 대기, 코드 탄피 유지 | 보류 |
+| gunner-w-muzzle.webp (r1 GN-06) | 임시 배경 키 손질본 | — | — | Dots 투명 재출력(CX-0059G_추가2) 대기, 코드 섬광 유지 | r3 으로 대체(위 행) |
+| gunner-e-casings.webp (r1 GN-08) | 손질본 | — | — | 탄피가 너무 커서 Dots 재작업(추가2) 대기, 코드 탄피 유지 | r3 으로 대체(위 행) |
 
-임시: W 총구 섬광·E 탄피·R 조준 고리는 R106 칠한 스프라이트 코드 그림(최종 아님) — Dots CX-0059G_추가2 가 오면 다시 비교.
+임시: R 조준 고리만 R106 칠한 스프라이트 코드 그림(Dots r-mark 보다 위험 표시가 잘 읽혀 유지). W 총구·E 탄피는 r3 시트(11-10 08:54Z)로 바꿈.
 

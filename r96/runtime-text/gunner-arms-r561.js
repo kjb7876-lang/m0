@@ -46,7 +46,9 @@ const GS={beam:{path:'assets/r561/gunner-q-beam.webp',cw:512,ch:128,cols:6,frame
  blast:{path:'assets/r561/gunner-r-blast.webp',cw:256,ch:256,cols:6,frames:24,piv:[128,247],hit:4,vis:200},
  tracer:{path:'assets/r561/gunner-w-tracer.webp',cw:512,ch:128,cols:6,frames:24,piv:[0,64],vis:14},
  wimpact:{path:'assets/r561/gunner-w-impact.webp',cw:256,ch:256,cols:6,frames:24,piv:[146,136],vis:200},
- rifle:{path:'assets/r561/gunner-e-rifle.webp',cw:256,ch:256,cols:6,frames:24,piv:[35,139],vis:165}};
+ rifle:{path:'assets/r561/gunner-e-rifle.webp',cw:256,ch:256,cols:6,frames:24,piv:[35,139],vis:165},
+ wmuzzle:{path:'assets/r561/gunner-w-muzzle.webp',cw:256,ch:256,cols:6,frames:24,piv:[65,136],hit:1,vis:130},
+ casing:{path:'assets/r561/gunner-e-casings.webp',cw:256,ch:256,cols:6,frames:16,piv:[128,200],vis:24}};
 function gsOn(k){return !!sheet(GS[k].path);}
 // 한 칸 그리기(오른쪽을 보고 그린 그림 → 겨눈 각으로 돌리고, 왼쪽을 볼 땐 위아래를 뒤집어 거꾸로 서지 않게). glow>0 이면 같은 칸을 덧셈으로 한 번 더(어두운 화면 보정에 코발트가 묻히지 않게, R 낙하 시트와 같은 방식).
 function gsDraw(k,fr,x,y,sc,ang,alpha,glow,id,len,stretch){const g=GS[k],im=sheet(g.path);if(!im||typeof ctx==='undefined'||!ctx||!(alpha>0)||!(sc>0))return false;fr=((fr%g.frames)+g.frames)%g.frames;
@@ -97,7 +99,7 @@ function fireW(f){f.fired=true;const o={x:player.x,y:player.y};if(f.tg&&f.tg.hp>
  if(rows[1]){hit(rows[1],f.dmg*SNIPE.pierce,'gunnerSnipeR561');endL=dist(rows[1],o);}
  f.L=Math.max(L*.999,endL);f.hitL=endL;f.tf=T();quake(.45);snd('special');face(f.a);player.skillAnim=Math.max(player.skillAnim||0,.35);}
 // ---- E 잔향 연사 ----
-function castE(){const e=nearest(rg(RANGE.e)),a=aimAt(e);face(a);fx.push({k:'e',t0:T(),life:RIFLE.every*(RIFLE.n-1)+.5,a,done:0,rounds:[],dmg:power()*RIFLE.dmg*grow('e')});armSent();stats.e++;return true;}
+function castE(){const e=nearest(rg(RANGE.e)),a=aimAt(e);face(a);fx.push({k:'e',t0:T(),life:RIFLE.every*(RIFLE.n-1)+(gsOn('casing')?1.1:.5),a,done:0,rounds:[],dmg:power()*RIFLE.dmg*grow('e')});armSent();stats.e++;return true;}
 function shotE(f,i){const o={x:player.x,y:player.y},e=nearest(rg(RANGE.e),o);let a=e?Math.atan2(e.y-o.y,e.x-o.x):f.a;a+=(i%2?1:-1)*.035*((i%3)/2);f.a=a;const L=reach(o,a,rg(RANGE.e)),first=onLine(o,a,L,RIFLE.half)[0];let endL=L;
  if(first){hit(first,f.dmg,'gunnerRifleR561');endL=dist(first,o);}f.rounds.push({t:T(),o,a,L:endL,hit:!!first});face(a);player.skillAnim=Math.max(player.skillAnim||0,.2);if(i%3===0)snd('attack');}
 // ---- R 기억 소거 폭격 ----
@@ -150,16 +152,18 @@ function draw(){const S0=SPR();if(!S0||typeof project!=='function')return;const 
    const v=Math.min(1,(t-f.tf)/.45),u=1-v,o=project(f.o.x,f.o.y),e=project(f.o.x+Math.cos(f.a)*f.hitL,f.o.y+Math.sin(f.a)*f.hitL),ang=Math.atan2(e.y-o.y,e.x-o.x);
    if(gsOn('tracer')&&gsOn('wimpact')){const d=t-f.tf,fr=Math.floor(d*12.5),id=f.t0.toFixed(3);if(fr>=GS.tracer.frames)continue;
     gsDraw('tracer',fr,o.x,o.y-M,H*.2/GS.tracer.vis,ang,1,.6,id,Math.hypot(e.x-o.x,e.y-o.y),true);if(d<.12)S.along('line',CORE,o.x,o.y-M,e.x,e.y-M,H*.08,{alpha:1-d/.12,blend:'screen'});
-    gsDraw('wimpact',fr,e.x,e.y-M,H*1.6/GS.wimpact.vis,ang,1,.5,id);continue;}
+    gsDraw('wimpact',fr,e.x,e.y-M,H*1.6/GS.wimpact.vis,ang,1,.5,id);if(gsOn('wmuzzle'))gsDraw('wmuzzle',GS.wmuzzle.hit+fr,o.x,o.y-M,H*1.3/GS.wmuzzle.vis,ang,1,.6,id);continue;}
    S.along('slashline',SIL,o.x,o.y-M,e.x,e.y-M,H*.36*u,{alpha:.8*u,blend:'screen'});S.along('line',CORE,o.x,o.y-M,e.x,e.y-M,H*.12*(.4+u),{alpha:.95*u});
    S.draw('flare',CORE,o.x+Math.cos(ang)*H*.25,o.y-M+Math.sin(ang)*H*.25,H*1.2*u+H*.2,H*.7*u+H*.1,{alpha:u,angle:ang});S.draw('ring',SIL,o.x,o.y-M,H*(.4+1.4*v),H*(.4+1.4*v),{alpha:.6*u,squash:.6});
    S.draw('flare',COB,e.x,e.y-M,H*1.3*u+H*.2,H*1.3*u+H*.2,{alpha:.9*u,angle:t*5});for(let i=0;i<6;i++){const ra=ang+Math.PI+(i-2.5)*.4;S.draw('spark',CORE,e.x+Math.cos(ra)*H*.6*v,e.y-M+Math.sin(ra)*H*.6*v,H*.55,H*.12,{alpha:u,angle:ra});}}
-  else if(f.k==='e'){for(const r of f.rounds){const d=t-r.t;if(d<0||d>.32)continue;const o=project(r.o.x,r.o.y),e=project(r.o.x+Math.cos(r.a)*r.L,r.o.y+Math.sin(r.a)*r.L),ang=Math.atan2(e.y-o.y,e.x-o.x);
+  else if(f.k==='e'){const cOn=gsOn('casing');for(const r of f.rounds){const d=t-r.t;if(d<0||d>(cOn?.8:.32))continue;const o=project(r.o.x,r.o.y),e=project(r.o.x+Math.cos(r.a)*r.L,r.o.y+Math.sin(r.a)*r.L),ang=Math.atan2(e.y-o.y,e.x-o.x);
+    // 탄피(Dots GN-08 r3, 16칸): 총 반대쪽으로 튀어 떨어짐. 금속이라 덧셈 빛 없이. 왼쪽을 볼 땐 좌우만 뒤집음(π 회전 + gsDraw 위아래 뒤집기).
+    if(cOn){gsDraw('casing',Math.min(GS.casing.frames-1,Math.floor(d*20)),o.x,o.y-M,H*.16/GS.casing.vis,Math.cos(ang)>=0?Math.PI:0,d>.65?(.8-d)/.15:1,0,f.t0.toFixed(3)+':c'+r.t.toFixed(3));if(d>.32)continue;}
     const rOn=gsOn('rifle');if(rOn)gsDraw('rifle',Math.min(3,Math.floor(d*12.5)),o.x,o.y-M,H*1.5/GS.rifle.vis,ang,1,.5,f.t0.toFixed(3)+':'+r.t.toFixed(3));
     if(!rOn&&d<.09){const k=d/.09,hx=o.x+(e.x-o.x)*k,hy=o.y-M+(e.y-o.y)*k,tx=o.x+(e.x-o.x)*Math.max(0,k-.35),ty=o.y-M+(e.y-o.y)*Math.max(0,k-.35);S.along('spark',CORE,tx,ty,hx,hy,H*.16,{alpha:.95});}
     if(!rOn&&d<.06)S.draw('flare',COB,o.x+Math.cos(ang)*H*.28,o.y-M+Math.sin(ang)*H*.28,H*.55,H*.35,{alpha:1-d/.06,angle:ang});
     if(r.hit&&d>=.06&&d<.22){const k=(d-.06)/.16;S.draw('flare',CORE,e.x,e.y-M,H*.5*(1-k)+H*.1,H*.5*(1-k)+H*.1,{alpha:1-k,angle:ang});for(let i=0;i<3;i++)S.draw('pixel',SIL,e.x+Math.cos(ang+Math.PI+(i-1)*.7)*H*.4*k,e.y-M+Math.sin(ang+Math.PI+(i-1)*.7)*H*.4*k,H*.1,H*.1,{alpha:1-k});}
-    {const k=d/.32,side=Math.cos(ang)>=0?-1:1;S.draw('pixel',SIL,o.x+side*H*(.15+.35*k),o.y-M-H*.25*Math.sin(Math.PI*k)+H*.35*k*k,H*.07,H*.04,{alpha:.9*(1-k),angle:t*20,blend:'source-over'});}}}
+    if(!cOn){const k=d/.32,side=Math.cos(ang)>=0?-1:1;S.draw('pixel',SIL,o.x+side*H*(.15+.35*k),o.y-M-H*.25*Math.sin(Math.PI*k)+H*.35*k*k,H*.07,H*.04,{alpha:.9*(1-k),angle:t*20,blend:'source-over'});}}}
   else if(f.k==='r'){const c=project(f.c.x,f.c.y),Wd=ellW(f.c,rg(STRIKE.R)),sheetOn=gsOn('blast')||!!sheet(METEOR.path);
    if(!f.boom){const k=el/STRIKE.delay,blink=.55+.45*Math.max(0,Math.sin(t*(8+22*k)));
     S.draw('ring',COB,c.x,c.y,Wd,Wd,{alpha:.95*blink,squash:.5,angle:t*.8,blend:'screen'});S.draw('ring',CORE,c.x,c.y,Wd*1.02,Wd*1.02,{alpha:.5*blink,squash:.5,blend:'screen'});S.draw('ring',CORE,c.x,c.y,Wd*(1-k)*.9+H*.3,Wd*(1-k)*.9+H*.3,{alpha:.8*blink,squash:.5,blend:'screen'});

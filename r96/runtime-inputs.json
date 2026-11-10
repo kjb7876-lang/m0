@@ -6253,7 +6253,9 @@
     "assets/r561/gunner-q-muzzle.webp",
     "assets/r561/gunner-r-blast.webp",
     "assets/r561/gunner-w-impact.webp",
-    "assets/r561/gunner-w-tracer.webp"
+    "assets/r561/gunner-w-tracer.webp",
+    "assets/r561/gunner-e-casings.webp",
+    "assets/r561/gunner-w-muzzle.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -7328,5 +7330,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "f09b71e1898475e7b8fb42dce4bbdffad46c1d8cc2e58b6cfd0f696302623eb8"
+  "runtimeManifestSHA256": "ef03937a104678a330681d0958e6ffb7d2be861d4bfec03b35d27fbad4b1b2bb"
 }
