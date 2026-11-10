@@ -6193,6 +6193,23 @@
     "assets/r585/slayer-r-aura-front.webp",
     "assets/r585/slayer-r-cross.webp",
     "assets/r585/slayer-w-sacrifice.webp",
+    "rooms-r523.js",
+    "assets/r523/chair-back-n.webp",
+    "assets/r523/chair-back-w.webp",
+    "assets/r523/chair-n.webp",
+    "assets/r523/chair-w.webp",
+    "assets/r523/curtain.webp",
+    "assets/r523/index.json",
+    "assets/r523/sloth-bed.webp",
+    "assets/r523/sloth-fridge.webp",
+    "assets/r523/sloth-sofa.webp",
+    "assets/r523/sloth-tv.webp",
+    "assets/r523/suitcase-n.webp",
+    "assets/r523/suitcase-w.webp",
+    "assets/r523/table-n.webp",
+    "assets/r523/table-w.webp",
+    "assets/r523/wardrobe-n.webp",
+    "assets/r523/wardrobe-w.webp",
     "sfx-r541.js",
     "assets/r541/sfx/pickup-1.ogg",
     "assets/r541/sfx/pickup-2.ogg",
@@ -7279,5 +7296,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "cff3e9ff5a0d7c073c1f1ab00a269f31ee501c38149b72c57027461665ca1dcc"
+  "runtimeManifestSHA256": "7fad8ab545f7883db9fc2207cb4790a72a8af74225ae7cf91ec6df97eb3df759"
 }

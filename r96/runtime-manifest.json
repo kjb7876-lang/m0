@@ -24893,6 +24893,86 @@
       "sha256": "556679e3ff38b7ea818880a7f84f34458e45c2c7108ac3d18459ece004848595"
     },
     {
+      "path": "assets/r523/chair-back-n.webp",
+      "bytes": 7358,
+      "sha256": "6e143d82395e7fa0a8bdf864713fd5a585d916c0cbcb660f5a1aa9a276dec326"
+    },
+    {
+      "path": "assets/r523/chair-back-w.webp",
+      "bytes": 7278,
+      "sha256": "d7419d7f901319b3552f998672007913b6cbe66276ec0d4f78f63778f4dabfb7"
+    },
+    {
+      "path": "assets/r523/chair-n.webp",
+      "bytes": 7034,
+      "sha256": "a08291f1c81d0e2c4f40b703f8e210246ea29c0b6ab58aeb023a899b1e25c33c"
+    },
+    {
+      "path": "assets/r523/chair-w.webp",
+      "bytes": 7072,
+      "sha256": "de97d8a2b49c311abbc947c3c62bbd502812f6e2429698df0a00d79bee92546f"
+    },
+    {
+      "path": "assets/r523/curtain.webp",
+      "bytes": 18284,
+      "sha256": "26492409131df813a65072f565fc056e04c50ea2c6486498dbf013f9f7963ce4"
+    },
+    {
+      "path": "assets/r523/index.json",
+      "bytes": 7462,
+      "sha256": "3d9f37c8685019eaf8b1b4d0c437e08692a2ed7c3df8180afc03061415f9d0d7"
+    },
+    {
+      "path": "assets/r523/sloth-bed.webp",
+      "bytes": 25754,
+      "sha256": "57f9e7030af11b91567858abc9e12452959178a17d7940ce546ad51a65cf3583"
+    },
+    {
+      "path": "assets/r523/sloth-fridge.webp",
+      "bytes": 15938,
+      "sha256": "d5b564186e8ccd624c637ac90859dd5d0e147984faaf3514429ce01d95f48524"
+    },
+    {
+      "path": "assets/r523/sloth-sofa.webp",
+      "bytes": 24940,
+      "sha256": "96f254efb3f982d74f7a51503b38cbb44e3c74ceebc804b8b407539c5d637568"
+    },
+    {
+      "path": "assets/r523/sloth-tv.webp",
+      "bytes": 24388,
+      "sha256": "98151db5a632213e7c3ca4d07fd49428adbb2bd8026e4c5e9430b0d166bc7749"
+    },
+    {
+      "path": "assets/r523/suitcase-n.webp",
+      "bytes": 14114,
+      "sha256": "9f50d487c067e06920487fe713f28191c25a1891eec46bdea3f04c13b6513d1c"
+    },
+    {
+      "path": "assets/r523/suitcase-w.webp",
+      "bytes": 15062,
+      "sha256": "1d2dd036a92c68ee14ee07d005faf934ef72cd3405e338084a519f2696d8c463"
+    },
+    {
+      "path": "assets/r523/table-n.webp",
+      "bytes": 11492,
+      "sha256": "d2f80d78c7c790ff60c2c2f1eaed57505f57ed962474342b05e0edc4c37a2423"
+    },
+    {
+      "path": "assets/r523/table-w.webp",
+      "bytes": 14192,
+      "sha256": "7fd23e6a9b736b654f796053df7cd23c4faac1461530e40c1acb37b682a83375"
+    },
+    {
+      "path": "assets/r523/wardrobe-n.webp",
+      "bytes": 11114,
+      "sha256": "3863a1420f98e72822f3cda3d7690a7df5467710bd1b8e4e627ec09e0d01ac15"
+    },
+    {
+      "path": "assets/r523/wardrobe-w.webp",
+      "bytes": 11140,
+      "sha256": "c5fe9b7dc705e2d569d2bbeb8388b4fd0c1ffe03216b633493de67fe24455c1d"
+    },
+    {
       "path": "assets/r541/sfx/death-1.ogg",
       "bytes": 8533,
       "sha256": "37072c41ffac2be63e376a40961e4332add640950a7e593ccaf53b63a88c777a"
@@ -34079,8 +34159,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6572798,
-      "sha256": "5ad1a23caca0c20ee34b91142c6049076127164355edb2b7f0d1a73cd2faf19c"
+      "bytes": 6572837,
+      "sha256": "90d1c2a9e18b63193af45a3b4747379ba871c9be40c830e782b0cb2c6f6a3b5c"
     },
     {
       "path": "intro-r140.js",
@@ -34511,6 +34591,11 @@
       "path": "roof-height-r267.js",
       "bytes": 4060,
       "sha256": "be5c29df184884fe4c88f288619a4667401103fab8484b4ac1adeee956c5a4d5"
+    },
+    {
+      "path": "rooms-r523.js",
+      "bytes": 37753,
+      "sha256": "ebaee9b11ccded46dffc7b564f314cc576ff7288e61d26b1249f0a059785fcc7"
     },
     {
       "path": "root-gate-video-r372.js",
@@ -34973,9 +35058,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6994,
-  "totalBytes": 1095320014,
-  "webHTMLSha256": "5ad1a23caca0c20ee34b91142c6049076127164355edb2b7f0d1a73cd2faf19c",
+  "fileCount": 7011,
+  "totalBytes": 1095580428,
+  "webHTMLSha256": "90d1c2a9e18b63193af45a3b4747379ba871c9be40c830e782b0cb2c6f6a3b5c",
   "largest": [
     {
       "path": "index.html",

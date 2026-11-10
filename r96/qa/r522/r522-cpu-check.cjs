@@ -8,7 +8,7 @@ let rt='';try{rt=rd('runtime-text/'+F);}catch(_){}
 ok('runtime copy matches client source',!!src&&rt===src);
 try{new vm.Script(src);ok('syntax',true);}catch(e){ok('syntax '+e.message,false);}
 const html=rd('runtime-text/index.html');
-ok('script tag once, right after hospital-rooms-r521 (before boss-r205); after the engine page defines __STORYWORLD_MAZE_R73__',html.split('"./'+F+'"').length===2&&/<script src="\.\/hospital-rooms-r521\.js"><\/script><script src="\.\/hospital-walls-r522\.js"><\/script>\s*<script src="\.\/boss-r205\.js">/.test(html)&&html.indexOf('__STORYWORLD_MAZE_R73__=Object.freeze')>0&&html.indexOf('__STORYWORLD_MAZE_R73__=Object.freeze')<html.indexOf('"./'+F+'"'));
+ok('script tag once, right after hospital-rooms-r521 (before boss-r205); after the engine page defines __STORYWORLD_MAZE_R73__',html.split('"./'+F+'"').length===2&&/<script src="\.\/hospital-rooms-r521\.js"><\/script><script src="\.\/hospital-walls-r522\.js"><\/script>(?:<script src="\.\/rooms-r523\.js"><\/script>)?\s*<script src="\.\/boss-r205\.js">/.test(html)&&html.indexOf('__STORYWORLD_MAZE_R73__=Object.freeze')>0&&html.indexOf('__STORYWORLD_MAZE_R73__=Object.freeze')<html.indexOf('"./'+F+'"'));
 ok('listed in verify-r96-public.py',/'hospital-walls-r522\.js'/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')));
 ok('CI runs this check',/node r96\/qa\/r522\/r522-cpu-check\.cjs/.test(fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8')));
 const code=src.replace(/\/\/.*$/mg,'').replace(/\/\*[\s\S]*?\*\//g,'');
