@@ -1,0 +1,62 @@
+{
+  "schema": "storyworld.r89.perf-ab/v1",
+  "measuredAt": "2026-10-23T12:20:46.589Z",
+  "environment": {
+    "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Claude/3.6556.2 Chrome/152.0.7977.167 Safari/537.36 MSIX",
+    "gpu": "ANGLE (NVIDIA GeForce GTX 1050 Direct3D11) - built-in Claude desktop browser pane",
+    "viewportCSS": [
+      1280,
+      720
+    ],
+    "dpr": 1.25,
+    "paneVisible": true
+  },
+  "method": "Same page session: reload, hospital direct start (restored test slot), coordinate placement to spawn (45.4,108.4) [ASSIST], 3s settle, 10s rAF sampling idle, then 10s with synthetic ArrowUp/ArrowDown 1s alternation. R88 = shipped runtime; R89 = same page after injecting client-source/world-retro-r89.js and vfx-retro-r89.js. Wall-batch rebuilds counted by geometry uuid change of hospital-r5-static-wall-batch sampled every 16ms.",
+  "r88": {
+    "idle": {
+      "frames": 593,
+      "p50": 16.7,
+      "p95": 16.8,
+      "p99": 16.9,
+      "max": 83.3,
+      "long50": 2,
+      "heapMB": 180.1
+    },
+    "walk": {
+      "frames": 406,
+      "p50": 16.7,
+      "p95": 33.4,
+      "p99": 64.2,
+      "max": 149.8,
+      "long50": 7,
+      "heapMB": 216.8,
+      "batchRebuildsObserved": 214
+    }
+  },
+  "r89": {
+    "idle": {
+      "frames": 587,
+      "p50": 16.7,
+      "p95": 16.8,
+      "p99": 33.3,
+      "max": 66.8,
+      "long50": 2,
+      "heapMB": 121.8
+    },
+    "walk": {
+      "frames": 580,
+      "p50": 16.7,
+      "p95": 16.8,
+      "p99": 33.4,
+      "max": 83.6,
+      "long50": 2,
+      "heapMB": 175.1,
+      "batchRebuildsObserved": 0
+    }
+  },
+  "caveats": [
+    "Single run each; GC timing affects heap snapshots.",
+    "R89 measured right after shader compilation of patched materials in the same session.",
+    "Not a hardware FPS benchmark across machines."
+  ]
+}

@@ -397,6 +397,10 @@ jobs:
         run: node r96/qa/r371/r371-cpu-check.cjs
       - name: R372 root gate boss entrance video CPU check
         run: node r96/qa/r372/r372-cpu-check.cjs
+      - name: R617 Hwando fall story videos CPU check
+        run: node r96/qa/r617/hwando-fall-video-cpu-check.cjs
+      - name: R619 pause game drawing while a full-screen story video is open
+        run: node r96/qa/r619/video-render-pause-cpu-check.cjs
       - name: R373 mob squads and leaders CPU check
         run: node r96/qa/r373/r373-cpu-check.cjs
 
@@ -440,6 +444,8 @@ jobs:
         run: node r96/qa/r425/r425-cpu-check.cjs
       - name: R585 slayer skill FX frame sheets (CX-0055 SL01-SL10, upright crosses, lag cap) CPU check
         run: node r96/qa/r585/r585-cpu-check.cjs
+      - name: R586 slayer berserk chains (blood marks, W execution, E chain pull, no new keys) CPU check
+        run: node r96/qa/r586/r586-cpu-check.cjs
       - name: R448 depth overlap (props in front cover the hero, hero silhouette shows through) CPU check
         run: node r96/qa/r448/r448-cpu-check.cjs
       - name: R461 cinema run (separate title entry, saved run mode, narrator hero lock) CPU check
@@ -488,6 +494,8 @@ jobs:
         run: node r96/qa/r523/r523-cpu-check.cjs
       - name: R590 hwando sword chain (A draw-cut, Q wind blades, E delayed flash, R seven-strike finale; no new keys, walls/map edge, caps) CPU check
         run: node r96/qa/r590/hwando-chain-cpu-check.cjs
+      - name: R601 enemy attack tempo (enemy attack body motion drawn 2x faster, strike frame kept on the damage moment, telegraphs on real time, no timing/damage change) CPU check
+        run: node r96/qa/r601/attack-tempo-cpu-check.cjs
       - name: R492 lag (R409 outline bake by one distance transform instead of dozens of drawImage dilations; same rim rule, size, colours) CPU check
         run: node r96/qa/r492/r492-cpu-check.cjs
       - name: R493 lag (keep compiled shader programs pinned so material churn stops relinking the same programs) CPU check
@@ -591,12 +599,20 @@ jobs:
         run: node r96/qa/r473/balrog-tear-cpu-check.cjs
       - name: R474 swamp hands rise under the hero and bind the ankles in the swamp lord fight (dodge by stepping away) CPU check
         run: node r96/qa/r474/swamp-hands-cpu-check.cjs
+      - name: R568 boss cinematic CPU check
+        run: node r96/qa/r568/boss-cinematic-cpu-check.cjs
       - name: R535 hunter Q storm tracking, Z ember-thorn split and burn, C twisted thorn lance blast (no new keys, chained) CPU check
         run: node r96/qa/r535/hunter-arrows-cpu-check.cjs
+      - name: R597 hold A to auto-cast Q W E R F T with basic attack (S D stay manual, keeps manual 77 percent bonus) CPU check
+        run: node r96/qa/r597/auto-a-cpu-check.cjs
       - name: R561 Lauren gravity chain (Q → gravity well pull → collapse burst, R → crush vortices; no new keys, bosses not pulled, walls respected) CPU check
         run: node r96/qa/r561/lauren-gravity-cpu-check.cjs
+      - name: R562 Neon toxic chain (Q → second-stage mint arcs + poison + toxic pool, R → big pool; no new keys, caps, Dots NE-01·02·03 sheets) CPU check
+        run: node r96/qa/r562/neon-toxic-cpu-check.cjs
       - name: R613 mobs with a single walking image get a distance-synced step gait until Dots walk sheets arrive (CX-0067MV) CPU check
         run: node r96/qa/r613/r613-cpu-check.cjs
+      - name: R563 Michaela genesis chain (Q → sky light pillars, R → grand pillar + halo; no new keys, upright cross only, Dots MI sheets) CPU check
+        run: node r96/qa/r563/michaela-genesis-cpu-check.cjs
       - name: R440 Hwando hit pose (no old art) and hero rim blade cleanup CPU check
         run: node r96/qa/r440/r440-cpu-check.cjs
       - name: R596 leftover rift rings, tower silhouette shadow, mob health line over head CPU check

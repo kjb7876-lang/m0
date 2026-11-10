@@ -1,0 +1,40 @@
+{
+  "schema": "storyworld.r95-package-roundtrip/v1",
+  "generatedAt": "2026-10-25T01:18:12.456668+00:00",
+  "passed": true,
+  "method": "Fresh extraction of all seven SHA-verified R94 ZIPs, actual R95 patch extraction and payload SHA checks, runtime manifest and LOCAL-SERVER check, actual rollback extraction and original SHA verification, then reapply and repeat runtime check. No browser/GPU claim.",
+  "original": {
+    "fileCount": 2871,
+    "manifestSHA256": "b9ca5f11a9caab822185842762a17e7e464d68b7a94a335c577d97f47936eeec",
+    "launcherCheck": {
+      "complete": true,
+      "files": 2871
+    }
+  },
+  "patched": {
+    "fileCount": 2871,
+    "manifestSHA256": "e3a9035cf0ac09fa28f1f8a679c6f0d43863742ad578f509e6c7f351d6d4594b",
+    "launcherCheck": {
+      "complete": true,
+      "files": 2871
+    }
+  },
+  "rollback": {
+    "fileCount": 2871,
+    "manifestSHA256": "b9ca5f11a9caab822185842762a17e7e464d68b7a94a335c577d97f47936eeec",
+    "launcherCheck": {
+      "complete": true,
+      "files": 2871
+    }
+  },
+  "reapplied": {
+    "fileCount": 2871,
+    "manifestSHA256": "e3a9035cf0ac09fa28f1f8a679c6f0d43863742ad578f509e6c7f351d6d4594b",
+    "launcherCheck": {
+      "complete": true,
+      "files": 2871
+    }
+  },
+  "payloadFilesVerified": 298,
+  "rollbackFilesVerified": 13
+}

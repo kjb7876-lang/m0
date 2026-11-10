@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "version": "1.1.0",
+  "recipeCoverage": 80,
+  "checks": [
+    "Harvest halo and collection motes contract; no outward hit ring",
+    "Binding eight links tighten around a stationary lock",
+    "Flame tips face up and recycled embers fade in at birth",
+    "Harvest grain and woven-thread knot wraps are invisible at seam",
+    "Delayed generic particles do not preappear before their own birth",
+    "All 80 real recipes have finite bounded continuous activation and deterministic replay"
+  ],
+  "limitations": [
+    "CPU numeric/semantic assertions only; no browser playback, visual quality, GPU or game integration verified."
+  ],
+  "runtimeSha256": "eeb7429a376b23526484e6e81afd0a7389235a33f41f176c83a39093b4c4a0c6"
+}

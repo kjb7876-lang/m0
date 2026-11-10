@@ -1,0 +1,58 @@
+{
+  "schema": "r90-postrun-historical-qa-restoration/v1",
+  "observedAt": "2026-10-24T04:04:55.836Z",
+  "observedFailure": "Independent final audit found four original zero-byte QA logs still contained this run output, contradicting the earlier in-process historicalQaRestored=true. Original and pre-run backup copies are zero bytes. No task process remained in this project cwd when investigated.",
+  "cause": "Undetermined. The timestamps of the nonempty copies correspond to their CPU execution, and no evidence establishes late writes. A copy/truncation or filesystem synchronization edge is possible but not proven.",
+  "repair": "Explicit write-mode truncation and fsync from the new five-part original only; QA wrapper updated to use this restoration method in future. This is post-run QA maintenance, not a production/source change or a rerun of the original R89 suite.",
+  "rows": [
+    {
+      "path": "qa/r89/cpu-logs/existing-effects.log",
+      "originalBytes": 0,
+      "originalSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "beforeBytes": 1058,
+      "beforeSHA256": "3b21ff138ec0ca5667e8c34dd224ad3df970d0ae902d46c43388f1788513870b",
+      "afterBytes": 0,
+      "afterSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actualRunEvidence": "qa/r90/cpu-logs/existing-effects.log",
+      "actualRunEvidencePreserved": true
+    },
+    {
+      "path": "qa/r89/cpu-logs/final42-atlas-player.log",
+      "originalBytes": 0,
+      "originalSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "beforeBytes": 3018,
+      "beforeSHA256": "e906b42890da06377cb5fef18862ca0c3b964e158a776c1b860830937b0fd7b6",
+      "afterBytes": 0,
+      "afterSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actualRunEvidence": "qa/r90/cpu-logs/final42-atlas-player.log",
+      "actualRunEvidencePreserved": true
+    },
+    {
+      "path": "qa/r89/cpu-logs/legacy-scope.log",
+      "originalBytes": 0,
+      "originalSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "beforeBytes": 433,
+      "beforeSHA256": "d77df093994961b1ab27c0e2b8d04149ab9d2f13d665bdb78404057b91b9a69e",
+      "afterBytes": 0,
+      "afterSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actualRunEvidence": "qa/r90/cpu-logs/legacy-scope.log",
+      "actualRunEvidencePreserved": true
+    },
+    {
+      "path": "qa/r89/cpu-logs/new-vfx-runtime.log",
+      "originalBytes": 0,
+      "originalSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "beforeBytes": 1474,
+      "beforeSHA256": "dee68a0f3d8d758e362b4e02e401192a93c488a51dcbe21ed30eea0617e6a708",
+      "afterBytes": 0,
+      "afterSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actualRunEvidence": "qa/r90/cpu-logs/new-vfx-runtime.log",
+      "actualRunEvidencePreserved": true
+    }
+  ],
+  "originalHistoricalQaFiles": 921,
+  "differences": [],
+  "added": [],
+  "historicalQaMatchesFivePartOriginal": true,
+  "originalR89RunnerUnmodified": true
+}
