@@ -1,0 +1,388 @@
+{
+ "schema": "storyworld.r93.ui-audio/v1",
+ "source": "R92 UI derived candidates + R92 free procedural audio candidates, processed copy",
+ "panel": {
+  "slice": 112,
+  "canvas": [
+   512,
+   512
+  ]
+ },
+ "orb": {
+  "canvas": [
+   256,
+   256
+  ],
+  "fill": [
+   30.5,
+   31.5,
+   195,
+   190
+  ]
+ },
+ "audioSource": {
+  "schema": "R92.original-procedural-audio.v1",
+  "listeningVerified": false
+ },
+ "items": [
+  {
+   "id": "panel",
+   "kind": "ui",
+   "path": "assets/r93/ui/panel.png",
+   "w": 512,
+   "h": 512,
+   "bytes": 232066,
+   "sha256": "4326a345306d6880ff5b1f0286d0aa0182d6ed2b30fa40d6cfa7d1c699d7ae8a"
+  },
+  {
+   "id": "slot-neutral",
+   "kind": "ui",
+   "path": "assets/r93/ui/slot-neutral.png",
+   "w": 128,
+   "h": 128,
+   "bytes": 21708,
+   "sha256": "4b21c40cbf37a9f02827e208cf01f2ec3fff32e1f84e9a1e15c3ef0e6ba61749"
+  },
+  {
+   "id": "slot-active",
+   "kind": "ui",
+   "path": "assets/r93/ui/slot-active.png",
+   "w": 128,
+   "h": 128,
+   "bytes": 22028,
+   "sha256": "9842c20df6da3449065a3e5962ea30730483e4957273f41b89fa6e632fb4ae04"
+  },
+  {
+   "id": "slot-focus",
+   "kind": "ui",
+   "path": "assets/r93/ui/slot-focus.png",
+   "w": 128,
+   "h": 128,
+   "bytes": 22841,
+   "sha256": "9dfb96eff9856c8ed25c0bb2f7c446d15cd0b8d465918a4fa91a3ebb88257cb1"
+  },
+  {
+   "id": "slot-disabled",
+   "kind": "ui",
+   "path": "assets/r93/ui/slot-disabled.png",
+   "w": 128,
+   "h": 128,
+   "bytes": 20635,
+   "sha256": "1a55c2725ef40f2578bc38e536b65bfbed5b7e8d50deba9b03e00cd9017c58d8"
+  },
+  {
+   "id": "orb-shell",
+   "kind": "ui",
+   "path": "assets/r93/ui/orb-shell.png",
+   "w": 256,
+   "h": 256,
+   "bytes": 59398,
+   "sha256": "8802296854735430d984599acaaa87c7c7d86e62fa0b696ff3006566c965eef1"
+  },
+  {
+   "id": "orb-health-fill",
+   "kind": "ui",
+   "path": "assets/r93/ui/orb-health-fill.png",
+   "w": 256,
+   "h": 256,
+   "bytes": 69908,
+   "sha256": "e4fc9ee8b84f9fc67143364d8a4cec4b9c0813f597e9b40831e04920ab10dcb9"
+  },
+  {
+   "id": "orb-resonance-fill",
+   "kind": "ui",
+   "path": "assets/r93/ui/orb-resonance-fill.png",
+   "w": 256,
+   "h": 256,
+   "bytes": 81235,
+   "sha256": "45f92266ae2174dfcbf6f6200a40dad79d129ab9edbf72f8b970ece063d483d5"
+  },
+  {
+   "id": "ambient_torch_fire_loop12s",
+   "kind": "ambient",
+   "surface": null,
+   "variant": null,
+   "ambient": "torch_fire",
+   "path": "assets/r93/audio/ambient_torch_fire_loop12s.ogg",
+   "bytes": 256793,
+   "sha256": "f96ca0b3166846bbc89805dde06d0df03b059d3af3c29c0430a12b5490e482db"
+  },
+  {
+   "id": "ambient_water_drips_loop12s",
+   "kind": "ambient",
+   "surface": null,
+   "variant": null,
+   "ambient": "water_drips",
+   "path": "assets/r93/audio/ambient_water_drips_loop12s.ogg",
+   "bytes": 227452,
+   "sha256": "12b1fa0b134d30179df9c88d9546ca56adf2dc20c20109e96822246fef0c9b0b"
+  },
+  {
+   "id": "footstep_gravel_01",
+   "kind": "footstep",
+   "surface": "gravel",
+   "variant": 1,
+   "ambient": null,
+   "path": "assets/r93/audio/footstep_gravel_01.ogg",
+   "bytes": 9967,
+   "sha256": "49cd14e887b0c0fd7c2103f3b616e6153059e4a7f526048f1c9d48dd2ab1f733"
+  },
+  {
+   "id": "footstep_gravel_02",
+   "kind": "footstep",
+   "surface": "gravel",
+   "variant": 2,
+   "ambient": null,
+   "path": "assets/r93/audio/footstep_gravel_02.ogg",
+   "bytes": 10020,
+   "sha256": "17fa3cf9ad1b195f55b24c04cc0dac6545a8127513d6a1ec27002330fbe53aa9"
+  },
+  {
+   "id": "footstep_gravel_03",
+   "kind": "footstep",
+   "surface": "gravel",
+   "variant": 3,
+   "ambient": null,
+   "path": "assets/r93/audio/footstep_gravel_03.ogg",
+   "bytes": 10448,
+   "sha256": "e6e42d50cd3a1117d56bd09c473f2c4b8e071e372f3938b404591b36e71db608"
+  },
+  {
+   "id": "footstep_gravel_04",
+   "kind": "footstep",
+   "surface": "gravel",
+   "variant": 4,
+   "ambient": null,
+   "path": "assets/r93/audio/footstep_gravel_04.ogg",
+   "bytes": 10004,
+   "sha256": "5b0d94c850608731047ad57e91613b693c21a79abd6b20dcc0c893f3bf6eadc1"
+  },
+  {
+   "id": "footstep_stone_tile_01",
+   "kind": "footstep",
+   "surface": "stone_tile",
+   "variant": 1,
+   "ambient": null,
+   "path": "assets/r93/audio/footstep_stone_tile_01.ogg",
+   "bytes": 8213,
+   "sha256": "b709395d01136344018ebb059dfc4e4a63368cf59f860ea0b17c4ba14e267ca8"
+  },
+  {
+   "id": "footstep_stone_tile_02",
+   "kind": "footstep",
+   "surface": "stone_tile",
+   "variant": 2,
+   "ambient": null,
+   "path": "assets/r93/audio/footstep_stone_tile_02.ogg",
+   "bytes": 8044,
+   "sha256": "ecee73ba43bccee0694b4d1f954442642ae607a54a5b4ab12b574520faae50dd"
+  },
+  {
+   "id": "footstep_stone_tile_03",
+   "kind": "footstep",
+   "surface": "stone_tile",
+   "variant": 3,
+   "ambient": null,
+   "path": "assets/r93/audio/footstep_stone_tile_03.ogg",
+   "bytes": 8176,
+   "sha256": "9cc1bba72f972b38e73acf75236ababc4b1f3dc593f5cc611ab18ebf4c37876f"
+  },
+  {
+   "id": "footstep_stone_tile_04",
+   "kind": "footstep",
+   "surface": "stone_tile",
+   "variant": 4,
+   "ambient": null,
+   "path": "assets/r93/audio/footstep_stone_tile_04.ogg",
+   "bytes": 8132,
+   "sha256": "8de1e9de39b7ce5ec0381d3e654a8e74b83893649c3d44bc9ac9d7d47a52b609"
+  },
+  {
+   "id": "footstep_wet_mud_01",
+   "kind": "footstep",
+   "surface": "wet_mud",
+   "variant": 1,
+   "ambient": null,
+   "path": "assets/r93/audio/footstep_wet_mud_01.ogg",
+   "bytes": 8394,
+   "sha256": "6f067ec120b4a39b83bc1572c1a37fd7398ae4e36985215fc6774661298eabd0"
+  },
+  {
+   "id": "footstep_wet_mud_02",
+   "kind": "footstep",
+   "surface": "wet_mud",
+   "variant": 2,
+   "ambient": null,
+   "path": "assets/r93/audio/footstep_wet_mud_02.ogg",
+   "bytes": 8759,
+   "sha256": "101d17906fccdd102376c8460843a746c347ae98372af8696cb90b45b1a8ebca"
+  },
+  {
+   "id": "footstep_wet_mud_03",
+   "kind": "footstep",
+   "surface": "wet_mud",
+   "variant": 3,
+   "ambient": null,
+   "path": "assets/r93/audio/footstep_wet_mud_03.ogg",
+   "bytes": 8791,
+   "sha256": "0956285d03745a5644837f40824d6e51f05e0e747017a242d3bde03b65aca649"
+  },
+  {
+   "id": "footstep_wet_mud_04",
+   "kind": "footstep",
+   "surface": "wet_mud",
+   "variant": 4,
+   "ambient": null,
+   "path": "assets/r93/audio/footstep_wet_mud_04.ogg",
+   "bytes": 8753,
+   "sha256": "0e2b19269f1e1fc606c8470d4bca3b7d4acdc7438d97317e95df565ee23c20d8"
+  },
+  {
+   "id": "footstep_wood_01",
+   "kind": "footstep",
+   "surface": "wood",
+   "variant": 1,
+   "ambient": null,
+   "path": "assets/r93/audio/footstep_wood_01.ogg",
+   "bytes": 8701,
+   "sha256": "247dcf2162c360af3867f8fc95411c98019d4b85c4fa1240217fa2ec6265fb58"
+  },
+  {
+   "id": "footstep_wood_02",
+   "kind": "footstep",
+   "surface": "wood",
+   "variant": 2,
+   "ambient": null,
+   "path": "assets/r93/audio/footstep_wood_02.ogg",
+   "bytes": 8757,
+   "sha256": "4b64494dbddb0eb5c65b4796a48eeef538e458cd12f3a22021a640a0f9b877b9"
+  },
+  {
+   "id": "footstep_wood_03",
+   "kind": "footstep",
+   "surface": "wood",
+   "variant": 3,
+   "ambient": null,
+   "path": "assets/r93/audio/footstep_wood_03.ogg",
+   "bytes": 8731,
+   "sha256": "ee2a59a068fd822d8dcdc27de0203a2a3947d1a4ba99d01132bbbb8c2c7ae16c"
+  },
+  {
+   "id": "footstep_wood_04",
+   "kind": "footstep",
+   "surface": "wood",
+   "variant": 4,
+   "ambient": null,
+   "path": "assets/r93/audio/footstep_wood_04.ogg",
+   "bytes": 8728,
+   "sha256": "673b7d694187d26e514f0f72f974046387814c7ec7d0bd560f1a6becaf8694b9"
+  }
+ ],
+ "sources": [
+  {
+   "file": "ui/derived/panel_frame_1024.png",
+   "sha256": "7eedfdb3e20aeff6352d98884aebaf1d58076f13478892cad8e9f1ee442ec740"
+  },
+  {
+   "file": "ui/derived/skill_slot_neutral_256.png",
+   "sha256": "dc5eb99f58b42c21d6ef6dc6d38add6b4a31acc97646960558f654a87290ee62"
+  },
+  {
+   "file": "ui/derived/skill_slot_active_gold_256.png",
+   "sha256": "3c094f5997750aa274a3390e1d6724f0102c4785fdf4815f7489c6956dc81f65"
+  },
+  {
+   "file": "ui/derived/skill_slot_focus_cyan_256.png",
+   "sha256": "134dddc503eeeb2d4bfc7dd1c486060c6099ef858d00508ee2a352009c86cb88"
+  },
+  {
+   "file": "ui/derived/skill_slot_disabled_256.png",
+   "sha256": "d4206e5633b2cfa21dabd7aa1004f00cd42d3bb67378a6e8f03adade024fa5f1"
+  },
+  {
+   "file": "ui/derived/orb_shell_512.png",
+   "sha256": "c89511d93b52b371a7da8bea863533777da57bf8e5b0d533ac95da7f6e07fd0b"
+  },
+  {
+   "file": "ui/derived/orb_health_fill_512.png",
+   "sha256": "94a957890b48bed6758b410f123b659e73e9ebaeb38256576582cbd16f4d35bc"
+  },
+  {
+   "file": "ui/derived/orb_resonance_fill_512.png",
+   "sha256": "3b7d2040c543d9d93e7f6303b2177b1e1ab075a5c24596e820f6903bc91d4253"
+  },
+  {
+   "file": "audio/ogg/ambient_torch_fire_loop12s.ogg",
+   "sha256": "f96ca0b3166846bbc89805dde06d0df03b059d3af3c29c0430a12b5490e482db"
+  },
+  {
+   "file": "audio/ogg/ambient_water_drips_loop12s.ogg",
+   "sha256": "12b1fa0b134d30179df9c88d9546ca56adf2dc20c20109e96822246fef0c9b0b"
+  },
+  {
+   "file": "audio/ogg/footstep_gravel_01.ogg",
+   "sha256": "49cd14e887b0c0fd7c2103f3b616e6153059e4a7f526048f1c9d48dd2ab1f733"
+  },
+  {
+   "file": "audio/ogg/footstep_gravel_02.ogg",
+   "sha256": "17fa3cf9ad1b195f55b24c04cc0dac6545a8127513d6a1ec27002330fbe53aa9"
+  },
+  {
+   "file": "audio/ogg/footstep_gravel_03.ogg",
+   "sha256": "e6e42d50cd3a1117d56bd09c473f2c4b8e071e372f3938b404591b36e71db608"
+  },
+  {
+   "file": "audio/ogg/footstep_gravel_04.ogg",
+   "sha256": "5b0d94c850608731047ad57e91613b693c21a79abd6b20dcc0c893f3bf6eadc1"
+  },
+  {
+   "file": "audio/ogg/footstep_stone_tile_01.ogg",
+   "sha256": "b709395d01136344018ebb059dfc4e4a63368cf59f860ea0b17c4ba14e267ca8"
+  },
+  {
+   "file": "audio/ogg/footstep_stone_tile_02.ogg",
+   "sha256": "ecee73ba43bccee0694b4d1f954442642ae607a54a5b4ab12b574520faae50dd"
+  },
+  {
+   "file": "audio/ogg/footstep_stone_tile_03.ogg",
+   "sha256": "9cc1bba72f972b38e73acf75236ababc4b1f3dc593f5cc611ab18ebf4c37876f"
+  },
+  {
+   "file": "audio/ogg/footstep_stone_tile_04.ogg",
+   "sha256": "8de1e9de39b7ce5ec0381d3e654a8e74b83893649c3d44bc9ac9d7d47a52b609"
+  },
+  {
+   "file": "audio/ogg/footstep_wet_mud_01.ogg",
+   "sha256": "6f067ec120b4a39b83bc1572c1a37fd7398ae4e36985215fc6774661298eabd0"
+  },
+  {
+   "file": "audio/ogg/footstep_wet_mud_02.ogg",
+   "sha256": "101d17906fccdd102376c8460843a746c347ae98372af8696cb90b45b1a8ebca"
+  },
+  {
+   "file": "audio/ogg/footstep_wet_mud_03.ogg",
+   "sha256": "0956285d03745a5644837f40824d6e51f05e0e747017a242d3bde03b65aca649"
+  },
+  {
+   "file": "audio/ogg/footstep_wet_mud_04.ogg",
+   "sha256": "0e2b19269f1e1fc606c8470d4bca3b7d4acdc7438d97317e95df565ee23c20d8"
+  },
+  {
+   "file": "audio/ogg/footstep_wood_01.ogg",
+   "sha256": "247dcf2162c360af3867f8fc95411c98019d4b85c4fa1240217fa2ec6265fb58"
+  },
+  {
+   "file": "audio/ogg/footstep_wood_02.ogg",
+   "sha256": "4b64494dbddb0eb5c65b4796a48eeef538e458cd12f3a22021a640a0f9b877b9"
+  },
+  {
+   "file": "audio/ogg/footstep_wood_03.ogg",
+   "sha256": "ee2a59a068fd822d8dcdc27de0203a2a3947d1a4ba99d01132bbbb8c2c7ae16c"
+  },
+  {
+   "file": "audio/ogg/footstep_wood_04.ogg",
+   "sha256": "673b7d694187d26e514f0f72f974046387814c7ec7d0bd560f1a6becaf8694b9"
+  }
+ ],
+ "originalsModified": false
+}

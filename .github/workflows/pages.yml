@@ -410,6 +410,8 @@ jobs:
         run: node r96/qa/r380/r380-cpu-check.cjs
       - name: R531 purple-sword angel summons no oblivion spider CPU check
         run: node r96/qa/r531/r531-cpu-check.cjs
+      - name: R541 soft synthesized pickup, mob death and door sounds CPU check
+        run: node r96/qa/r541/r541-cpu-check.cjs
       - name: R385 mob moves (review list v18 move/rename) CPU check
         run: node r96/qa/r385/r385-cpu-check.cjs
       - name: R390 cinema full narration + midboss hold + enemies keep chasing CPU check

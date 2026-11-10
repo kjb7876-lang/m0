@@ -1,0 +1,87 @@
+{
+ "revision": "R425-hunter-1",
+ "hero": "hunter",
+ "source_id": "hunter_attack7_lr_v001",
+ "source_status": "QA_HOLD (사용자 2026-11-08 09:58 게임 적용 지시)",
+ "sources": {
+  "left_sheet_zip": {
+   "file": "hunter_left_sheet_v001.zip",
+   "bytes": 1707205,
+   "sha256": "0def398a429395b4db21199ab3205248629485bfe479043fc32e3752a790923a"
+  },
+  "right_sheet_zip": {
+   "file": "hunter_right_sheet_v001.zip",
+   "bytes": 1706832,
+   "sha256": "2ff338be22afd782cbc30a79c70578e9e74e0c0e7b7db2c7bc4ddcef4e777550"
+  }
+ },
+ "frames": 7,
+ "cols": 4,
+ "cell": [
+  192,
+  256
+ ],
+ "ms": [
+  180,
+  130,
+  130,
+  220,
+  110,
+  140,
+  220
+ ],
+ "phases": [
+  "ready",
+  "raise_nock",
+  "partial_draw",
+  "full_draw",
+  "release",
+  "followthrough",
+  "recover"
+ ],
+ "release": 4,
+ "anims": {
+  "l": {
+   "file": "attack-l.webp",
+   "bytes": 97052,
+   "sha256": "ba1d86acca4b87b39b263ec031a51278382ee39c066f5bf0a51538ba30a0bd9f",
+   "source_sheet_sha256": "310c7ee33601412e405e5a98c5237abd17d4b6681338d6d85a197dedf5ffbe1f",
+   "anchor": [
+    120.0,
+    235.0
+   ],
+   "body": 201,
+   "body_per_frame": [
+    201,
+    201,
+    213,
+    224,
+    225,
+    200,
+    200
+   ],
+   "faces": "left"
+  },
+  "r": {
+   "file": "attack-r.webp",
+   "bytes": 96940,
+   "sha256": "1d9b81bad63903f964899b1524e370de1a87fb5ef77255db5f197422b34e7730",
+   "source_sheet_sha256": "eed6d3b4ffedeb6f8f5b867a7f3c8110503b61c9e81ba857c897fdffcc62c69e",
+   "anchor": [
+    72.0,
+    235.0
+   ],
+   "body": 201,
+   "body_per_frame": [
+    201,
+    201,
+    213,
+    224,
+    225,
+    200,
+    200
+   ],
+   "faces": "right"
+  }
+ }
+}

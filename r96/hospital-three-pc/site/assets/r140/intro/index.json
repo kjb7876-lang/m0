@@ -1,0 +1,26 @@
+{
+ "revision": "R140",
+ "video": {
+  "path": "assets/r140/intro/opening-8heroes.mp4",
+  "bytes": 5054974,
+  "sha256": "760edaf1f948c3976b4fabe7b2acf689ed83f2c762a1f86c6606872f3c8cd398",
+  "duration": 20.6,
+  "size": [
+   1280,
+   720
+  ],
+  "codecs": "h264+aac",
+  "source": {
+   "drive": "StoryWorld-Opening-Intro-8Heroes.mp4",
+   "driveId": "1ogaW8Acx01d5IJneiq6xO12rJ6fJH9zT",
+   "note": "Drive 원본 그대로(재인코딩 없음)"
+  },
+  "use": "새 게임 시작 오프닝(건너뛰기 가능)"
+ },
+ "poster": {
+  "path": "assets/r140/intro/poster.jpg",
+  "bytes": 13554,
+  "sha256": "262984a19a4e9d07134cfc8fed88b5ef1b00473ea14ccca68e54b9585f8b1b1c",
+  "from": "video 19.5s frame (ffmpeg)"
+ }
+}

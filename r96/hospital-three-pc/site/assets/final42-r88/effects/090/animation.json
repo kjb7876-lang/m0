@@ -1,0 +1,278 @@
+{
+  "id": "90-dark-contact-bloom",
+  "sourceIndex": 90,
+  "frameCount": 16,
+  "uniquePaintedFrames": 16,
+  "reusedFrames": 0,
+  "blankFrames": 0,
+  "atlas": "atlas.png",
+  "atlasSize": [
+    1280,
+    1280
+  ],
+  "cellSize": [
+    320,
+    320
+  ],
+  "frames": [
+    {
+      "index": 0,
+      "file": "frames/frame-00.png",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 320
+      },
+      "durationMs": 50,
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "index": 1,
+      "file": "frames/frame-01.png",
+      "rect": {
+        "x": 320,
+        "y": 0,
+        "w": 320,
+        "h": 320
+      },
+      "durationMs": 50,
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "index": 2,
+      "file": "frames/frame-02.png",
+      "rect": {
+        "x": 640,
+        "y": 0,
+        "w": 320,
+        "h": 320
+      },
+      "durationMs": 50,
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "index": 3,
+      "file": "frames/frame-03.png",
+      "rect": {
+        "x": 960,
+        "y": 0,
+        "w": 320,
+        "h": 320
+      },
+      "durationMs": 50,
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "index": 4,
+      "file": "frames/frame-04.png",
+      "rect": {
+        "x": 0,
+        "y": 320,
+        "w": 320,
+        "h": 320
+      },
+      "durationMs": 50,
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "index": 5,
+      "file": "frames/frame-05.png",
+      "rect": {
+        "x": 320,
+        "y": 320,
+        "w": 320,
+        "h": 320
+      },
+      "durationMs": 50,
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "index": 6,
+      "file": "frames/frame-06.png",
+      "rect": {
+        "x": 640,
+        "y": 320,
+        "w": 320,
+        "h": 320
+      },
+      "durationMs": 50,
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "index": 7,
+      "file": "frames/frame-07.png",
+      "rect": {
+        "x": 960,
+        "y": 320,
+        "w": 320,
+        "h": 320
+      },
+      "durationMs": 50,
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "index": 8,
+      "file": "frames/frame-08.png",
+      "rect": {
+        "x": 0,
+        "y": 640,
+        "w": 320,
+        "h": 320
+      },
+      "durationMs": 50,
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "index": 9,
+      "file": "frames/frame-09.png",
+      "rect": {
+        "x": 320,
+        "y": 640,
+        "w": 320,
+        "h": 320
+      },
+      "durationMs": 50,
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "index": 10,
+      "file": "frames/frame-10.png",
+      "rect": {
+        "x": 640,
+        "y": 640,
+        "w": 320,
+        "h": 320
+      },
+      "durationMs": 50,
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "index": 11,
+      "file": "frames/frame-11.png",
+      "rect": {
+        "x": 960,
+        "y": 640,
+        "w": 320,
+        "h": 320
+      },
+      "durationMs": 50,
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "index": 12,
+      "file": "frames/frame-12.png",
+      "rect": {
+        "x": 0,
+        "y": 960,
+        "w": 320,
+        "h": 320
+      },
+      "durationMs": 50,
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "index": 13,
+      "file": "frames/frame-13.png",
+      "rect": {
+        "x": 320,
+        "y": 960,
+        "w": 320,
+        "h": 320
+      },
+      "durationMs": 50,
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "index": 14,
+      "file": "frames/frame-14.png",
+      "rect": {
+        "x": 640,
+        "y": 960,
+        "w": 320,
+        "h": 320
+      },
+      "durationMs": 50,
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "index": 15,
+      "file": "frames/frame-15.png",
+      "rect": {
+        "x": 960,
+        "y": 960,
+        "w": 320,
+        "h": 320
+      },
+      "durationMs": 50,
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    }
+  ],
+  "durationMs": 800,
+  "fps": 20.0,
+  "loop": false,
+  "onComplete": "hide/remove; last-frame residual fragments must not freeze indefinitely",
+  "pivot": [
+    0.5,
+    0.5
+  ],
+  "blend": "normal straight alpha",
+  "premultipliedAlpha": false,
+  "filter": "linear",
+  "mipmaps": false,
+  "rgba8Bytes": 6553600,
+  "orientation": "Three-quarter top-down; screen Y down. Position fixed pivot at intended contact point.",
+  "collision": "None supplied; visual only, no damage or new status semantics.",
+  "animationInterpretation": "Compact ink-black/violet nucleus unfolds into asymmetric petal-like smoke lobes, fractures and collapses. Preserve negative-space silhouette; not purple recolor of fire.",
+  "canonicalMapping": [],
+  "mappingCaveat": "Source catalog scene/status associations retained, not proof that these new frames or timing are canonical. No named hero ownership asserted.",
+  "runtimeStatus": "Not integrated or production GPU tested."
+}

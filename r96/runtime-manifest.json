@@ -24893,6 +24893,36 @@
       "sha256": "556679e3ff38b7ea818880a7f84f34458e45c2c7108ac3d18459ece004848595"
     },
     {
+      "path": "assets/r541/sfx/death-1.ogg",
+      "bytes": 8533,
+      "sha256": "37072c41ffac2be63e376a40961e4332add640950a7e593ccaf53b63a88c777a"
+    },
+    {
+      "path": "assets/r541/sfx/death-2.ogg",
+      "bytes": 8645,
+      "sha256": "39dca4bb7ca0a8c383dd5a10fcce531a5383ef30bbfc14b66f7ff4e5282ec9ef"
+    },
+    {
+      "path": "assets/r541/sfx/door-1.ogg",
+      "bytes": 8117,
+      "sha256": "dad981486345791e0acd93f2078626f1f954e0bcb52b53ce1afc02bc0c841cfd"
+    },
+    {
+      "path": "assets/r541/sfx/index.json",
+      "bytes": 1845,
+      "sha256": "a9ed1325648cf9933938dd1d349db1cfe44b58ade072ef6c156dc8e5aff1e4fd"
+    },
+    {
+      "path": "assets/r541/sfx/pickup-1.ogg",
+      "bytes": 9107,
+      "sha256": "05a822ca5b94265b0651db848e4bf7464e38e9989f766ddf7838e46bfbaee1e1"
+    },
+    {
+      "path": "assets/r541/sfx/pickup-2.ogg",
+      "bytes": 9193,
+      "sha256": "884c0064ba69445ca019c94a9e88c9b7493d2ec48b170b0f36892e6d23210f49"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -33929,8 +33959,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6572525,
-      "sha256": "6264b143140b9daf27050a0af05e0e4cceed06a3e9094dc4d3c465964e6ef127"
+      "bytes": 6572563,
+      "sha256": "a67c786046d0d08315eab169e9c88299a9baca9951046853891640e5205c3801"
     },
     {
       "path": "intro-r140.js",
@@ -34473,6 +34503,11 @@
       "sha256": "f6f539296fd11946a0688a5d82be7bf68b32f5c8d560aff5369e92f7dd439fc5"
     },
     {
+      "path": "sfx-r541.js",
+      "bytes": 3594,
+      "sha256": "2a686eb10769842132375dca5561f96b6018d5542aee512f25fa59e16261e763"
+    },
+    {
       "path": "sin-boss-art-r463-data.js",
       "bytes": 9711,
       "sha256": "2603cb1055dd0a111f03eabffa371e46a463e522af2639005a4189da13cf7306"
@@ -34808,9 +34843,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6961,
-  "totalBytes": 1092210020,
-  "webHTMLSha256": "6264b143140b9daf27050a0af05e0e4cceed06a3e9094dc4d3c465964e6ef127",
+  "fileCount": 6968,
+  "totalBytes": 1092259092,
+  "webHTMLSha256": "a67c786046d0d08315eab169e9c88299a9baca9951046853891640e5205c3801",
   "largest": [
     {
       "path": "index.html",

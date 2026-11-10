@@ -1,0 +1,113 @@
+{
+ "hero": "slayer",
+ "action": "hit",
+ "order": "피격 충격 → 뒤로 젖힘 (README)",
+ "mirroredInGame": {
+  "w": "e",
+  "sw": "se",
+  "nw": "ne"
+ },
+ "applied": "맞았을 때 프레임 애니메이션 — client-source/attack-anim-r143.js",
+ "directions": {
+  "s": {
+   "path": "assets/r143/hit/slayer/hit-s.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    220
+   ],
+   "source": {
+    "driveId": "1nB3PbKbZB_y3WgrNSWCN25L0YobBq01q",
+    "file": "HERO-slayer-hit-s.png",
+    "sha256": "603f22f13cc5d945676dc39a1b7c9f4de3dc59947e90d99b3daf1e276dcc195e",
+    "bytes": 61542
+   },
+   "sha256": "5c4dadd7b45ac095899121bb783034a00cfabcd709b8070053b09a6cb5410c3b",
+   "bytes": 21302
+  },
+  "se": {
+   "path": "assets/r143/hit/slayer/hit-se.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    220
+   ],
+   "source": {
+    "driveId": "1nB3PbKbZB_y3WgrNSWCN25L0YobBq01q",
+    "file": "HERO-slayer-hit-se.png",
+    "sha256": "cdc9b81aa29acf802b1df0f2688fa53125be0c1f96d60022f6385524117284e8",
+    "bytes": 51938
+   },
+   "sha256": "abfb74dbf1f595b18f51c4a218e71156f74b555af39e6af2ef0870e91188fcbf",
+   "bytes": 18738
+  },
+  "e": {
+   "path": "assets/r143/hit/slayer/hit-e.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    221
+   ],
+   "source": {
+    "driveId": "1nB3PbKbZB_y3WgrNSWCN25L0YobBq01q",
+    "file": "HERO-slayer-hit-e.png",
+    "sha256": "16ac11e20f80e02b8c54794bf2e885fce8276025e2088ad06d837181143fc676",
+    "bytes": 27571
+   },
+   "sha256": "220f5cd251a650daf94adf49e4b12ad1a6d108e111c37b1ab92012284a698ee2",
+   "bytes": 9756
+  },
+  "ne": {
+   "path": "assets/r143/hit/slayer/hit-ne.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    225
+   ],
+   "source": {
+    "driveId": "1nB3PbKbZB_y3WgrNSWCN25L0YobBq01q",
+    "file": "HERO-slayer-hit-ne.png",
+    "sha256": "c449e22f74ff80e5f50b2288047059be2eab8191eb9fabd7d4ac6cda27038dd1",
+    "bytes": 51059
+   },
+   "sha256": "ea3eb09f1a62d31ab7fa6c0886813ab9b5831141bcde8cfa6e80860343525f7e",
+   "bytes": 16808
+  },
+  "n": {
+   "path": "assets/r143/hit/slayer/hit-n.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1nB3PbKbZB_y3WgrNSWCN25L0YobBq01q",
+    "file": "HERO-slayer-hit-n.png",
+    "sha256": "2a8efb2a1fa974ff380e513b9964401b8fd7d4a0d866f3c75929b686cbade168",
+    "bytes": 58063
+   },
+   "sha256": "dc17430bffd083de8f5203e66783ab19efc865a6a453c544d7fc94791af5f830",
+   "bytes": 18750
+  }
+ }
+}

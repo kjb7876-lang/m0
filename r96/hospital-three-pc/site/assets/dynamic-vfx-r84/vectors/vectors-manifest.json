@@ -1,0 +1,387 @@
+{
+  "title": "StoryWorld original standalone animated vectors",
+  "created_date": "2026-10-23",
+  "version": 1,
+  "count": 16,
+  "license_note": "Original code-native SVG artwork prepared for the user. No third-party artwork or external runtime dependencies.",
+  "technical": {
+    "canvas": "512 × 512 viewBox",
+    "background": "transparent",
+    "runtime": "SVG SMIL",
+    "external_references": false,
+    "scripts": false,
+    "preview_repeat": "indefinite",
+    "accessibility": "Each asset has a title and description.",
+    "photosensitivity_note": "No high-frequency flashing; loops use gradual fades and restrained opacity changes."
+  },
+  "assets": [
+    {
+      "file": "gold-thread.svg",
+      "motif": "golden whipping thread arc",
+      "semantic": "A gold filament spawns, travels along a hooked sword-like sweep, then scatters into a fine impact fan.",
+      "animation_type": "spawn-travel-impact-fade",
+      "duration_seconds": 4.8,
+      "primary_cycle_seconds": 4.8,
+      "repeat": "indefinite",
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "background": "transparent",
+      "animation_count": 20,
+      "animation_elements": {
+        "animate": 19,
+        "animateMotion": 1,
+        "animateTransform": 0
+      },
+      "sha256": "83e494651d31ec4405d99842b65bb5a0139b436fc6624b0e19455a0a63df220c"
+    },
+    {
+      "file": "silver-thread.svg",
+      "motif": "cross-stitched silver crescent",
+      "semantic": "A cool silver double-cut travels diagonally with a needle-like front, cross-stitches the wake, then dissolves at impact.",
+      "animation_type": "spawn-travel-impact-fade",
+      "duration_seconds": 4.6,
+      "primary_cycle_seconds": 4.6,
+      "repeat": "indefinite",
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "background": "transparent",
+      "animation_count": 23,
+      "animation_elements": {
+        "animate": 22,
+        "animateMotion": 1,
+        "animateTransform": 0
+      },
+      "sha256": "580c179e7dbf2b6244b3401ad42ddd592ed4970be9b84615deec63bc16fb91c3"
+    },
+    {
+      "file": "scalpel.svg",
+      "motif": "precise metallic scalpel cut",
+      "semantic": "A clearly silhouetted metallic scalpel travels across the field and leaves a thin, cool surgical cut with restrained glints.",
+      "animation_type": "spawn-travel-impact-fade",
+      "duration_seconds": 5.2,
+      "primary_cycle_seconds": 5.2,
+      "repeat": "indefinite",
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "background": "transparent",
+      "animation_count": 10,
+      "animation_elements": {
+        "animate": 9,
+        "animateMotion": 0,
+        "animateTransform": 1
+      },
+      "sha256": "2868c658e77baa31e67b822b58206a9ae380d43e1bf36a133a0ce8bb3ec2f163"
+    },
+    {
+      "file": "poison-syringe.svg",
+      "motif": "pale-green syringe projectile",
+      "semantic": "A recognizable pale-green loaded syringe travels needle-first, then releases a compact toxin ring and arcing droplets at impact.",
+      "animation_type": "spawn-travel-impact-fade",
+      "duration_seconds": 5.6,
+      "primary_cycle_seconds": 5.6,
+      "repeat": "indefinite",
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "background": "transparent",
+      "animation_count": 18,
+      "animation_elements": {
+        "animate": 11,
+        "animateMotion": 0,
+        "animateTransform": 7
+      },
+      "sha256": "7619e0fdfcd3c4982ca14d8ab0ddd2e9de5c81545ed7f320a76e343c6379c28c"
+    },
+    {
+      "file": "poison.svg",
+      "motif": "bubbling toxin droplet",
+      "semantic": "A slowly breathing toxin drop floats above an elliptical pool while translucent bubbles and vapor rise continuously.",
+      "animation_type": "looping-status",
+      "duration_seconds": 5.8,
+      "primary_cycle_seconds": 5.8,
+      "repeat": "indefinite",
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "background": "transparent",
+      "animation_count": 12,
+      "animation_elements": {
+        "animate": 7,
+        "animateMotion": 0,
+        "animateTransform": 5
+      },
+      "sha256": "511f1fd1acb5cc5d6d355305b08b989bff3fb4d261f12118959d045ee8e01501"
+    },
+    {
+      "file": "bleed.svg",
+      "motif": "crimson incision and drops",
+      "semantic": "A sharp crimson incision opens, then releases staggered weighty drops with small pale highlights and a gentle red halo.",
+      "animation_type": "looping-status",
+      "duration_seconds": 5,
+      "primary_cycle_seconds": 5,
+      "repeat": "indefinite",
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "background": "transparent",
+      "animation_count": 10,
+      "animation_elements": {
+        "animate": 7,
+        "animateMotion": 0,
+        "animateTransform": 3
+      },
+      "sha256": "85a04569050604d35ff3e8d47c2afa7f9d62706eec8b113502cb970090392f98"
+    },
+    {
+      "file": "shock.svg",
+      "motif": "contained electric charge",
+      "semantic": "A legible warm-white lightning bolt holds steady while charge orbits and occasional branching discharges trace outward without rapid flashing.",
+      "animation_type": "looping-status",
+      "duration_seconds": 5.4,
+      "primary_cycle_seconds": 5.4,
+      "repeat": "indefinite",
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "background": "transparent",
+      "animation_count": 10,
+      "animation_elements": {
+        "animate": 10,
+        "animateMotion": 0,
+        "animateTransform": 0
+      },
+      "sha256": "9bdb8a5fa03ff5bb9bd35485a95970d4942e44f52850bc0e6b5abc90adaa2d27"
+    },
+    {
+      "file": "freeze.svg",
+      "motif": "sixfold faceted frost",
+      "semantic": "A precise sixfold ice crystal gently rocks as its faceted center shimmers and small ice motes drift around the perimeter.",
+      "animation_type": "looping-status",
+      "duration_seconds": 6.4,
+      "primary_cycle_seconds": 6.4,
+      "repeat": "indefinite",
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "background": "transparent",
+      "animation_count": 18,
+      "animation_elements": {
+        "animate": 9,
+        "animateMotion": 0,
+        "animateTransform": 9
+      },
+      "sha256": "cd5cb494b8c1fac1299c7894d72501ed3642d8fcbb95a0a103f46ed0c789302d"
+    },
+    {
+      "file": "burn.svg",
+      "motif": "layered ember flame",
+      "semantic": "Three nested organic flame silhouettes breathe above a heat ring while five embers rise and fade at staggered intervals.",
+      "animation_type": "looping-status",
+      "duration_seconds": 4.8,
+      "primary_cycle_seconds": 4.8,
+      "repeat": "indefinite",
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "background": "transparent",
+      "animation_count": 14,
+      "animation_elements": {
+        "animate": 6,
+        "animateMotion": 0,
+        "animateTransform": 8
+      },
+      "sha256": "56f73a2e302dcbb0fe1f7d9b25e29f3d885a97ae8bc8f44798669763feb61cf2"
+    },
+    {
+      "file": "charm.svg",
+      "motif": "rose heart and orbiting affection",
+      "semantic": "A sculpted rose heart softly expands with looping inner filigree, a fine traveling ribbon, and small hearts drifting upward.",
+      "animation_type": "looping-status",
+      "duration_seconds": 6,
+      "primary_cycle_seconds": 6,
+      "repeat": "indefinite",
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "background": "transparent",
+      "animation_count": 11,
+      "animation_elements": {
+        "animate": 7,
+        "animateMotion": 0,
+        "animateTransform": 4
+      },
+      "sha256": "c3431957cec863d5433ac5a036bb342eaec120f42a1dc441a7719ad8f50f474e"
+    },
+    {
+      "file": "weakness.svg",
+      "motif": "fractured draining shield",
+      "semantic": "A muted protective crest fractures along one warm crack as downward chevrons and falling flakes communicate drained strength.",
+      "animation_type": "looping-status",
+      "duration_seconds": 6.2,
+      "primary_cycle_seconds": 6.2,
+      "repeat": "indefinite",
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "background": "transparent",
+      "animation_count": 19,
+      "animation_elements": {
+        "animate": 9,
+        "animateMotion": 0,
+        "animateTransform": 10
+      },
+      "sha256": "ce4cc7b1f7ebd69aace62302200ba3b2ec68ff3b09e0d788ce8ed63826046545"
+    },
+    {
+      "file": "corruption.svg",
+      "motif": "fractured violet core",
+      "semantic": "A broken dark-violet core grows branching luminous veins while incomplete outer bands rotate slowly and detached shards hover.",
+      "animation_type": "looping-status",
+      "duration_seconds": 21.6,
+      "primary_cycle_seconds": 7.2,
+      "repeat": "indefinite",
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "background": "transparent",
+      "animation_count": 16,
+      "animation_elements": {
+        "animate": 7,
+        "animateMotion": 0,
+        "animateTransform": 9
+      },
+      "sha256": "80667549b4e7b0fcd17ae4bf438284ea5d8fd3477c3068575308b5d3f3f0512d"
+    },
+    {
+      "file": "binding.svg",
+      "motif": "interlocking anchored restraints",
+      "semantic": "Two elongated metal-link restraints interlock around a small central clasp while four fine anchors tighten and relax.",
+      "animation_type": "looping-status",
+      "duration_seconds": 6.4,
+      "primary_cycle_seconds": 6.4,
+      "repeat": "indefinite",
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "background": "transparent",
+      "animation_count": 9,
+      "animation_elements": {
+        "animate": 8,
+        "animateMotion": 0,
+        "animateTransform": 1
+      },
+      "sha256": "94d665a2ef272a2d80a7621fbddf998b8d4aa575cfb60285ba7cfd67a55483c7"
+    },
+    {
+      "file": "harvest.svg",
+      "motif": "sickle and inward harvest motes",
+      "semantic": "An original crescent sickle gently pivots as three sparse pale motes follow curved inward paths toward its blade.",
+      "animation_type": "looping-status",
+      "duration_seconds": 6.8,
+      "primary_cycle_seconds": 6.8,
+      "repeat": "indefinite",
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "background": "transparent",
+      "animation_count": 10,
+      "animation_elements": {
+        "animate": 6,
+        "animateMotion": 3,
+        "animateTransform": 1
+      },
+      "sha256": "6b891aaa8206be2a16d2a3d1d83d84e9d3e589347c5e24f6c1591bcbefaadec3"
+    },
+    {
+      "file": "disease.svg",
+      "motif": "organic cellular affliction",
+      "semantic": "An irregular cellular membrane slowly contracts around distinct internal vesicles while tethered satellite nodules drift and circulation traces move outside.",
+      "animation_type": "looping-status",
+      "duration_seconds": 7,
+      "primary_cycle_seconds": 7,
+      "repeat": "indefinite",
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "background": "transparent",
+      "animation_count": 17,
+      "animation_elements": {
+        "animate": 7,
+        "animateMotion": 0,
+        "animateTransform": 10
+      },
+      "sha256": "8c9ef8eb1b985b5356b089940b056ce724b421a6bc580cbc561a7a4add9baa4a"
+    },
+    {
+      "file": "portal.svg",
+      "motif": "layered azure gateway",
+      "semantic": "A vertical azure gate breathes through layered elliptical edges, slow traveling rim segments, an inner spiral, and particles pulled into its center.",
+      "animation_type": "looping-status",
+      "duration_seconds": 64.0,
+      "primary_cycle_seconds": 8,
+      "repeat": "indefinite",
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "background": "transparent",
+      "animation_count": 35,
+      "animation_elements": {
+        "animate": 27,
+        "animateMotion": 8,
+        "animateTransform": 0
+      },
+      "sha256": "e55a24b171bacc40276345acd7581d437a4bafcae2e7bb80b591e2401b77c450"
+    }
+  ]
+}

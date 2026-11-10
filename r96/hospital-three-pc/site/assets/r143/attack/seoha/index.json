@@ -1,0 +1,113 @@
+{
+ "hero": "seoha",
+ "action": "attack",
+ "order": "예비 2 · 타격 2 · 회수 2 (README)",
+ "mirroredInGame": {
+  "w": "e",
+  "sw": "se",
+  "nw": "ne"
+ },
+ "applied": "기본 공격(멈춰 서서) 프레임 애니메이션 — client-source/attack-anim-r143.js",
+ "directions": {
+  "s": {
+   "path": "assets/r143/attack/seoha/attack-s.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1blSlpYROBJC3mOQ8f-WzCRxDsqnVtHVZ",
+    "file": "HERO-seoha-attack-s.png",
+    "sha256": "0024a6ab43fce40ba0fcd1076bcfaa6c1ef8c3e046786e2d33663b771de57e1a",
+    "bytes": 171336
+   },
+   "sha256": "ee68f96d35abaf5a65e66b812a8681bd096588b8d54f165388e5dfd73b19c34c",
+   "bytes": 60234
+  },
+  "se": {
+   "path": "assets/r143/attack/seoha/attack-se.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    225
+   ],
+   "source": {
+    "driveId": "1blSlpYROBJC3mOQ8f-WzCRxDsqnVtHVZ",
+    "file": "HERO-seoha-attack-se.png",
+    "sha256": "90bce71ab68cf9e6dfea518f7cb987eddd68d8795baa2034eda73ea1d5d5bf59",
+    "bytes": 146942
+   },
+   "sha256": "b362309fe7e72589151b548446447edf5ae266bc164fa0b06fd951fcfbd84e31",
+   "bytes": 53784
+  },
+  "e": {
+   "path": "assets/r143/attack/seoha/attack-e.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1blSlpYROBJC3mOQ8f-WzCRxDsqnVtHVZ",
+    "file": "HERO-seoha-attack-e.png",
+    "sha256": "fbc511b9d78345c2286b6c58dc4fa68094acf2dc4a9df22bdc197b6d1ac6c87c",
+    "bytes": 123945
+   },
+   "sha256": "830f29af44f139bb90815f0510abeee9e7cc47b65f0c794bd1c529b6aedaee98",
+   "bytes": 43806
+  },
+  "ne": {
+   "path": "assets/r143/attack/seoha/attack-ne.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    224
+   ],
+   "source": {
+    "driveId": "1blSlpYROBJC3mOQ8f-WzCRxDsqnVtHVZ",
+    "file": "HERO-seoha-attack-ne.png",
+    "sha256": "2a332c1291b597b9c96075374fa4dc4064ecf72a2be69d8499bb37b571ef57d6",
+    "bytes": 132793
+   },
+   "sha256": "884dcc029741c642a4e85142d48b17ac64aa83dd0174cfd900f09e0060e01833",
+   "bytes": 47036
+  },
+  "n": {
+   "path": "assets/r143/attack/seoha/attack-n.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    225
+   ],
+   "source": {
+    "driveId": "1blSlpYROBJC3mOQ8f-WzCRxDsqnVtHVZ",
+    "file": "HERO-seoha-attack-n.png",
+    "sha256": "9f98c3b679b3a38958ce59ae2ab81fb0e0ea37f032da24bcf2b4c364b0479751",
+    "bytes": 156024
+   },
+   "sha256": "cbaf95118216d68c07234b96eabd7855449c94ba8e9372f337f0f19fd81f3578",
+   "bytes": 54552
+  }
+ }
+}

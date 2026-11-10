@@ -1,0 +1,113 @@
+{
+ "hero": "seoha",
+ "action": "hit",
+ "order": "피격 충격 → 뒤로 젖힘 (README)",
+ "mirroredInGame": {
+  "w": "e",
+  "sw": "se",
+  "nw": "ne"
+ },
+ "applied": "맞았을 때 프레임 애니메이션 — client-source/attack-anim-r143.js",
+ "directions": {
+  "s": {
+   "path": "assets/r143/hit/seoha/hit-s.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1blSlpYROBJC3mOQ8f-WzCRxDsqnVtHVZ",
+    "file": "HERO-seoha-hit-s.png",
+    "sha256": "c737435bf974579caf591e755d047dbae898e330d0a9d5e98f743138720777fb",
+    "bytes": 58102
+   },
+   "sha256": "e2a904ed1eb107edf05a40be0e635b891876f25120b122f0bdcf735f2d16ab92",
+   "bytes": 20396
+  },
+  "se": {
+   "path": "assets/r143/hit/seoha/hit-se.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    225
+   ],
+   "source": {
+    "driveId": "1blSlpYROBJC3mOQ8f-WzCRxDsqnVtHVZ",
+    "file": "HERO-seoha-hit-se.png",
+    "sha256": "6bdc3b8e537e30601bab7e41f42679d34b9b4efe8c9d398f8c166be6dfb457c3",
+    "bytes": 50578
+   },
+   "sha256": "4cb86a8e04a4261202f7b38d07b8299b5640487e02b5cb64bf8c8b2e77e25ac1",
+   "bytes": 18114
+  },
+  "e": {
+   "path": "assets/r143/hit/seoha/hit-e.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1blSlpYROBJC3mOQ8f-WzCRxDsqnVtHVZ",
+    "file": "HERO-seoha-hit-e.png",
+    "sha256": "b7ed025fe63468096a8cf155c693830f69b767a9cd0da2b1586996a34dafb6ad",
+    "bytes": 42482
+   },
+   "sha256": "262bec3187955ede05868e53f45b4e8beafbf2947afe390a3d2208450e834787",
+   "bytes": 14972
+  },
+  "ne": {
+   "path": "assets/r143/hit/seoha/hit-ne.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    224
+   ],
+   "source": {
+    "driveId": "1blSlpYROBJC3mOQ8f-WzCRxDsqnVtHVZ",
+    "file": "HERO-seoha-hit-ne.png",
+    "sha256": "d70059826c662230d12f4e6dab7ea532546e3152837c93a5a04a011c5e52fa5d",
+    "bytes": 45400
+   },
+   "sha256": "916c5b5e3f7db81708c98957deea2da32a89b0ace7b2ea71b0ec85d05f4758aa",
+   "bytes": 15794
+  },
+  "n": {
+   "path": "assets/r143/hit/seoha/hit-n.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    225
+   ],
+   "source": {
+    "driveId": "1blSlpYROBJC3mOQ8f-WzCRxDsqnVtHVZ",
+    "file": "HERO-seoha-hit-n.png",
+    "sha256": "85d45871ae521e032604c7081669ffaf31e0f591450405d68c882bb71a66a6bc",
+    "bytes": 52039
+   },
+   "sha256": "e7d58390cced6b6ceb6d07a78dcb6b8da45972557b3d46eb42c33b9c02212207",
+   "bytes": 17830
+  }
+ }
+}

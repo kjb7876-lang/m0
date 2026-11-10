@@ -1,0 +1,90 @@
+{
+  "revision": "R377-slayer-south-1",
+  "hero": "slayer",
+  "directions": [
+    "s"
+  ],
+  "source": {
+    "file": "Slayer_south_persona_walk4_attack6_20261106.zip",
+    "bytes": 3047930,
+    "sha256": "da300b1efc75223e99772df6b2e743e0158b0b2d750d22825da87d9161e4ac34",
+    "origin": "user-approved Persona Slayer south walk4/attack6",
+    "purpose": "Slayer hero south walk and ordinary basic attack",
+    "applied": true
+  },
+  "anims": {
+    "walk": {
+      "s": {
+        "file": "slayer-walk-s-persona.webp",
+        "n": 4,
+        "cols": 4,
+        "cell": [
+          192,
+          256
+        ],
+        "anchor": [
+          96,
+          226
+        ],
+        "body": 158,
+        "ms": [
+          150,
+          150,
+          150,
+          150
+        ],
+        "loop": true,
+        "bytes": 71498,
+        "sha256": "7669aa19012a316387d64a798627dcf4ab90b55cd7be1c862b0b6e4e67f0339f",
+        "direction": "s",
+        "stride": {
+          "px_per_frame": 39.93888888888889,
+          "basis": "same screen cycle distance as preserved W8 clip; requires visual review"
+        }
+      }
+    },
+    "attack": {
+      "s": {
+        "file": "slayer-attack-s-persona.webp",
+        "n": 6,
+        "cols": 6,
+        "cell": [
+          192,
+          256
+        ],
+        "anchor": [
+          96,
+          226
+        ],
+        "body": 158,
+        "ms": [
+          140,
+          180,
+          80,
+          110,
+          130,
+          160
+        ],
+        "loop": false,
+        "bytes": 112794,
+        "sha256": "8e3347ff22b5cefcb36b3ade4461282a78bc0b90b1ba51e4cb5c7f6d9dc56d27",
+        "direction": "s",
+        "contact": 2,
+        "timing": {
+          "policy": "south-only native call after preparation",
+          "preparation_ms": 320,
+          "native_cooldown_starts": "contact",
+          "other_directions": "unchanged"
+        }
+      }
+    }
+  },
+  "preserve": [
+    "existing W/E clips",
+    "north fallback",
+    "idle/hurt/death/guard",
+    "skills/dash/ultimate/R366/EGO/co-op",
+    "save schema"
+  ],
+  "registration": "pending common manifest owner integration"
+}

@@ -1,0 +1,785 @@
+{
+ "schema": "storyworld.r118.tiles/v1",
+ "source": "Drive 2026-10-29 map surface catalog (StoryWorld-map-surfaces-catalog-20261029)",
+ "looks": {
+  "garden": {
+   "family": "GARDEN-material3",
+   "regions": [
+    "dist00"
+   ],
+   "floor": {
+    "source": "floor-reconstructed.png",
+    "decodedRgbSha256": "5d172ee81d2d497c298cb49b22764517a441996133ac17dcfb976115b10634d0",
+    "size": [
+     1254,
+     1254
+    ]
+   },
+   "wall": null,
+   "file": "garden.webp",
+   "bytes": 351588,
+   "sha256": "ccf99e1a0c49fb943470f503d642bd4fc2f4557253d9f607c67513798a35ea9f"
+  },
+  "cave": {
+   "family": "SPIDERCAVE-surface2",
+   "regions": [
+    "dist01"
+   ],
+   "floor": {
+    "source": "floor-reconstructed.png",
+    "decodedRgbSha256": "85e3de39557fa421cbec571b7ab2a7ae6d5635a525a3acfa020522600d5a30a6",
+    "size": [
+     1254,
+     1254
+    ]
+   },
+   "wall": null,
+   "file": "cave.webp",
+   "bytes": 439272,
+   "sha256": "4f98a10cd3c1e9a8fd7524471af71c54f0fe1057196f996dfcd0547428d59fae"
+  },
+  "castle": {
+   "family": "RUINED-castle2",
+   "regions": [
+    "dist03"
+   ],
+   "floor": {
+    "source": "castle-floor-reconstructed.png",
+    "decodedRgbSha256": "9ddcecb787f3c52046eafd0c4134eb304fc22ea5a124cc23c4a8e9d7f735599d",
+    "size": [
+     1254,
+     1254
+    ]
+   },
+   "wall": null,
+   "file": "castle.webp",
+   "bytes": 406432,
+   "sha256": "914f8a34f8aa85f023cc489b4a2c2d33171aa7f15831c1c9348603835af49f24"
+  },
+  "kitchen": {
+   "family": "KITCHEN-material3",
+   "regions": [
+    "ep1b04"
+   ],
+   "floor": {
+    "source": "floor-reconstructed.png",
+    "decodedRgbSha256": "2e0c01c3333d454d8a668cbbf6e6f22ae2b7b753ca8753e9bc6216f33ce53832",
+    "size": [
+     1254,
+     1254
+    ]
+   },
+   "wall": {
+    "source": "wall-reconstructed.png",
+    "decodedRgbSha256": "d959b109422c25388e0b8af385fbe58a7502df15516e1e799208600339cd6565",
+    "size": [
+     1254,
+     1254
+    ]
+   },
+   "file": "kitchen.webp",
+   "bytes": 469008,
+   "sha256": "140537bf257000282c1ef59a608d1fbb145ed310f29a703256933870c9d117d3"
+  },
+  "vault": {
+   "family": "VAULT-v2-wall",
+   "regions": [
+    "ep1b06"
+   ],
+   "floor": null,
+   "wall": {
+    "source": "wall-reconstructed.png",
+    "decodedRgbSha256": "7a5c044c8b77065ab8b35654949cea854da6f1de0e86d907f8f93a2a0b83e39a",
+    "size": [
+     1254,
+     1254
+    ]
+   },
+   "file": "vault.webp",
+   "bytes": 337842,
+   "sha256": "6d45b06070faa3939f5759275ace1cc1632a79498fc06fe1edca3b3444bf1df4"
+  },
+  "cabin": {
+   "family": "CABIN-floorwall2",
+   "regions": [
+    "ep1b06b"
+   ],
+   "floor": {
+    "source": "floor-reconstructed.png",
+    "decodedRgbSha256": "22726aa5defeeb12c409b50c9b052dec48cf2b88b9650548597786a753a2a7ce",
+    "size": [
+     1254,
+     1254
+    ]
+   },
+   "wall": {
+    "source": "wall-reconstructed.png",
+    "decodedRgbSha256": "ae8969086bddf8413d7c7057a1454429b80469dc8e9a4987b609f78671e4d350",
+    "size": [
+     1254,
+     1254
+    ]
+   },
+   "file": "cabin.webp",
+   "bytes": 780646,
+   "sha256": "14805333e61990b9170da558a3cb71cc0a17ca29d810be40715dd49a517dad26"
+  },
+  "snow": {
+   "family": "SNOW-floor1",
+   "regions": [
+    "ep1b09"
+   ],
+   "floor": {
+    "source": "snow-floor.png",
+    "decodedRgbSha256": "f76a8b5460b336ed11c2bd86dffd57e5a59552c28ca175f978bd7db629730917",
+    "size": [
+     1254,
+     1254
+    ]
+   },
+   "wall": null,
+   "file": "snow.webp",
+   "bytes": 220732,
+   "sha256": "b5254ff9dc5a211fd052ad066e7f5c2ee8e6e3df14ecf0d014ba3d49d3ffe096"
+  },
+  "workshop": {
+   "family": "WORKSHOP-material3",
+   "regions": [
+    "kair07"
+   ],
+   "floor": {
+    "source": "floor-reconstructed.png",
+    "decodedRgbSha256": "fe82778e928dcd5ef876e191c3bd65245a1a8aefd0760278ab6f832aefabe50c",
+    "size": [
+     1254,
+     1254
+    ]
+   },
+   "wall": {
+    "source": "wall-reconstructed.png",
+    "decodedRgbSha256": "2c82adf358366c6b413a554bcb0cf49b737d6ec6ab790aa1f043ed3a7feb778d",
+    "size": [
+     1254,
+     1254
+    ]
+   },
+   "file": "workshop.webp",
+   "bytes": 809932,
+   "sha256": "23055900f7e6b9a26df18ff4141104dacc53bc62835ba05e72512eb418d7fe63"
+  },
+  "meadow": {
+   "family": "MEADOW-floor",
+   "regions": [
+    "last304"
+   ],
+   "floor": {
+    "source": "floor-reconstructed.png",
+    "decodedRgbSha256": "edb893073872826ad996e4471d76ae22ccdd9d38886cebaaa32c36beee739118",
+    "size": [
+     1254,
+     1254
+    ]
+   },
+   "wall": null,
+   "file": "meadow.webp",
+   "bytes": 483542,
+   "sha256": "1b0a6b38705e6a845e4c43db853a2f5ab2a6c7165052caa0ccc83cd004d1b474"
+  },
+  "rosehouse": {
+   "family": "ROSEHOUSE-material2",
+   "regions": [
+    "sz115-S01-1"
+   ],
+   "floor": {
+    "source": "floor-reconstructed.png",
+    "decodedRgbSha256": "52f4a4c93a35610c23b091dfaba93b47521e7d93842d38b1cb6ed181ce46f925",
+    "size": [
+     1254,
+     1254
+    ]
+   },
+   "wall": {
+    "source": "wall-reconstructed.png",
+    "decodedRgbSha256": "6dc997a68d226566d13b961d48a15bd003e3d7bcc1e331eb0260a8f053c4362e",
+    "size": [
+     1254,
+     1254
+    ]
+   },
+   "file": "rosehouse.webp",
+   "bytes": 479354,
+   "sha256": "f0d81c0e66830844620e0e66a0240f0381251a722549c5cc81d4429f0c10cea8"
+  },
+  "school": {
+   "family": "SCHOOL-material3",
+   "regions": [
+    "sz115-S02-1",
+    "sz115-S02-2",
+    "sz115-S02-3",
+    "sz115-S02-4",
+    "sz115-S02-5",
+    "sz115-S02-6",
+    "sz115-S02-7",
+    "sz115-S02-8"
+   ],
+   "floor": {
+    "source": "floor-reconstructed.png",
+    "decodedRgbSha256": "5d38bd21794bf0477c8f20b98638b1dd874e79c37433e35f7606bc0bf9c47f5a",
+    "size": [
+     1254,
+     1254
+    ]
+   },
+   "wall": null,
+   "file": "school.webp",
+   "bytes": 271798,
+   "sha256": "4e4548da43da1aebb11574040fdf5778993970c15249e93cb27373d9f7680777"
+  },
+  "sparring": {
+   "family": "SPARRING-material2",
+   "regions": [
+    "sz115-S03-1",
+    "sz115-S03-2",
+    "sz115-S03-3"
+   ],
+   "floor": {
+    "source": "floor-reconstructed.png",
+    "decodedRgbSha256": "4700ef2ea6d0095147033db7021e88224c3b08118a91a000d9bb9243a3676ac8",
+    "size": [
+     1254,
+     1254
+    ]
+   },
+   "wall": {
+    "source": "wall-reconstructed.png",
+    "decodedRgbSha256": "15014872cb6b4ab6bb446475fa00e5dc5654f814c3e06cf8c767d9bfc9be2a35",
+    "size": [
+     1254,
+     1254
+    ]
+   },
+   "file": "sparring.webp",
+   "bytes": 927906,
+   "sha256": "5f3a58569fc91193d54f9286414f98cb8ac99bcbfa7e03570e746ad670e037a6"
+  },
+  "gyeongseong": {
+   "family": "GYEONGSEONG-floorwall2",
+   "regions": [
+    "sz115-S05-1"
+   ],
+   "floor": {
+    "source": "floor-reconstructed.png",
+    "decodedRgbSha256": "cd7a4c985367ffd4ec7e66a545a3555b8655371d6ed7d33f72b75a8515a09b79",
+    "size": [
+     1254,
+     1254
+    ]
+   },
+   "wall": {
+    "source": "wall-reconstructed.png",
+    "decodedRgbSha256": "6c41fcc4d82057ccfd1052cee4032669ffeb462c965fa96e7eca5740765abe5e",
+    "size": [
+     1254,
+     1254
+    ]
+   },
+   "file": "gyeongseong.webp",
+   "bytes": 515888,
+   "sha256": "70f6c54646497c1e698fc4de7ccb0f2adc9eb6334b83c352c6bc91ac6ca91697"
+  },
+  "asphalt": {
+   "family": "WET-ASPHALT-floor",
+   "regions": [
+    "sz115-S03-5"
+   ],
+   "floor": {
+    "source": "exec-b076c682-c8b1-49a8-9e7e-742d65a61839.png",
+    "decodedRgbSha256": "9bc4d6fc2cf5f52904c6df04a343d9a32ef62370ee194751ceb45f5750ca842a",
+    "size": [
+     1254,
+     1254
+    ]
+   },
+   "wall": null,
+   "file": "asphalt.webp",
+   "bytes": 441466,
+   "sha256": "18e46c7b843ff3537d24a7e47945b626dd541c0c7891f6a6d5fb0e0e03bd0c33",
+   "added": "R120"
+  },
+  "sandblack": {
+   "family": "TIME-SAND-black",
+   "regions": [
+    "kair10",
+    "kair03"
+   ],
+   "floor": {
+    "source": "exec-51092cd6-e427-4197-adf0-4bf4451b46de.png",
+    "decodedRgbSha256": "6f5d170f1867d0b9e678bc78f36d2dcfaba91b1d20d2acdd14f50653d1c92b70",
+    "size": [
+     1254,
+     1254
+    ]
+   },
+   "wall": null,
+   "file": "sandblack.webp",
+   "bytes": 390486,
+   "sha256": "c773e5cbd2f5c4c8c09dee1b19ca1472afa98150a3fd6861b83861d62cab20df",
+   "added": "R120"
+  },
+  "sandgold": {
+   "family": "TIME-SAND-gold",
+   "regions": [
+    "restKairo"
+   ],
+   "floor": {
+    "source": "exec-20002d84-8aac-411e-b65f-7a2be6093b9a.png",
+    "decodedRgbSha256": "e61cd4b49bca4e2c3045a32008d0047cd3377337dc702ba7300f90b9af9d799f",
+    "size": [
+     1254,
+     1254
+    ]
+   },
+   "wall": null,
+   "file": "sandgold.webp",
+   "bytes": 494468,
+   "sha256": "7e079ffa0806d70efd391fe7f335fddf2ccd3582e91d9f867f0aa58eb0bd5d37",
+   "added": "R120"
+  },
+  "cement14": {
+   "family": "S04-14F-cement-wall",
+   "regions": [
+    "sz115-S04-12"
+   ],
+   "floor": null,
+   "wall": {
+    "source": "cement-wall-original.png (StoryWorld-S04-14F-cement-wall-ORIGINAL-PART01/02-20261030.zip, SHA 7d1c6167…)",
+    "decodedRgbSha256": "dd9f5c8dd8a07a680b7d7b7bd6df7407bf707777792babd827e81d95b070a986",
+    "size": [
+     1254,
+     1254
+    ]
+   },
+   "file": "cement14.webp",
+   "bytes": 867448,
+   "sha256": "35bc9f0f4d99300a12912ad146872d7597d75d1b9824350bfae9a9b3f77ac27c",
+   "added": "R129"
+  },
+  "swampmud": {
+   "family": "SW-TILE-B07",
+   "regions": [
+    "dist02"
+   ],
+   "floor": {
+    "batch": "SW-TILE-B07",
+    "source": "swamp_outdoor_floor.png",
+    "sha256": "87bb573ccbf5e7450c3663565fe6ee399cfc41c86c2f648a7cd4f33969b88199",
+    "decodedRgbSha256": "4362e2c1b4178ff0f0204341774f399abff08fa9fd8322d5a420092ba56b6ee6",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "바닥",
+    "environment": "실외 자연경계"
+   },
+   "wall": {
+    "batch": "SW-TILE-B07",
+    "source": "swamp_outdoor_wall.png",
+    "sha256": "e729ba1c42c9ae67fa887707680dcd519f7436e10974b1af1bee4df0e3cbf24d",
+    "decodedRgbSha256": "769b58d62085604fd232b47c99ee35365fbd7279bbf582558f52732755b90f04",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "벽",
+    "environment": "실외 자연경계"
+   },
+   "file": "swampmud.webp",
+   "bytes": 571034,
+   "sha256": "0e2f4460291157766cf3d42e1faa912b56cd79f52a9294b061213ea8226d691e",
+   "added": "R405"
+  },
+  "gravepath": {
+   "family": "SW-TILE-B03",
+   "regions": [
+    "kair09"
+   ],
+   "floor": {
+    "batch": "SW-TILE-B03",
+    "source": "grave_outdoor_floor.png",
+    "sha256": "f98a8924b1b8505089454aac206cb5cbb6153fcc4428814b00b24e188aecfbee",
+    "decodedRgbSha256": "79cccf823d3f51dee18516e6b0c6bee5fe020762727ea6f342a655630a769f08",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "흙길",
+    "environment": "실외"
+   },
+   "wall": {
+    "batch": "SW-TILE-B03",
+    "source": "grave_outdoor_wall.png",
+    "sha256": "e1f7222da698e8fa2247eab167030e75a51a5209221fbec29c84bc9693113b1e",
+    "decodedRgbSha256": "7fdbcb3acfc9dfa2797e428ba88263332c4372565f013d15b79779707ffd7509",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "경계벽",
+    "environment": "실외"
+   },
+   "file": "gravepath.webp",
+   "bytes": 652868,
+   "sha256": "8dcafe5bfafae9b8a50a0023c07d48b36787f7ace341d4aeec437318baa5eeda",
+   "added": "R405"
+  },
+  "theatre": {
+   "family": "SW-TILE-B03",
+   "regions": [
+    "ep1b05"
+   ],
+   "floor": {
+    "batch": "SW-TILE-B03",
+    "source": "theatre_indoor_floor.png",
+    "sha256": "95994c7a93aa5c41fc4d51369940839e89e547cc6a73e6df7869d362fbfa1ec4",
+    "decodedRgbSha256": "6747648c810ab9314fa524d9ea44d444c80103dc49742c02ff324cf3de87cac9",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "바닥",
+    "environment": "실내",
+    "brightness": 1.9
+   },
+   "wall": {
+    "batch": "SW-TILE-B03",
+    "source": "theatre_indoor_wall.png",
+    "sha256": "58ecb655945e74161af20b0d93126d42b86c315c801ed40336c018b3321637b2",
+    "decodedRgbSha256": "ce6cbc1d00b4a1949fdbe188fd842a97e713614ef2b6d5729208d6a4493aa88d",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "벽",
+    "environment": "실내"
+   },
+   "file": "theatre.webp",
+   "bytes": 495786,
+   "sha256": "d2dcbb0fe62af24086735cae6c1a8f36f3dfafa253e01ce81f28f7bedde59924",
+   "added": "R405"
+  },
+  "hotel": {
+   "family": "SW-TILE-B05",
+   "regions": [
+    "murder02"
+   ],
+   "floor": {
+    "batch": "SW-TILE-B05",
+    "source": "hotel_indoor_floor.png",
+    "sha256": "6510bef6e3e83ccb31f48cb5e8f8301785fb4cc07e330d16edf879cd220948ee",
+    "decodedRgbSha256": "256a0ef97f97a6f6575d3f2d3434ea042af89499a50549ac40bb436806039a91",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "바닥",
+    "environment": "실내"
+   },
+   "wall": {
+    "batch": "SW-TILE-B05",
+    "source": "hotel_indoor_wall.png",
+    "sha256": "0ce75973cd798c0befafee06e41150479c0d32ffd74f7f611b4e426ce3a6d9ca",
+    "decodedRgbSha256": "72ca39c45a1eb6e76f8d701e9d01bfce7c55d570884cdfe0babdac44fb3b7c8a",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "벽",
+    "environment": "실내"
+   },
+   "file": "hotel.webp",
+   "bytes": 493774,
+   "sha256": "29e90d9505898538e4871c590f93a915e8c6bb166196d401a9066193be20ae9a",
+   "added": "R405"
+  },
+  "rooftop": {
+   "family": "SW-TILE-B05",
+   "regions": [
+    "murder03"
+   ],
+   "floor": {
+    "batch": "SW-TILE-B05",
+    "source": "roof_outdoor_floor.png",
+    "sha256": "a76b9930032cf7610d4d73d78ab49a161e808231b9e89a6df9c4b9fdcb10bb29",
+    "decodedRgbSha256": "4809ba6114daf1ba251745daf03111f1719663bd744bc8d221af6f528fd2db79",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "바닥",
+    "environment": "실외"
+   },
+   "wall": {
+    "batch": "SW-TILE-B05",
+    "source": "roof_outdoor_wall.png",
+    "sha256": "bde9fd75f4b95e4e151ffa8f9fa12ad4362f2ad4ea5b7aa412fd48d269c1ca69",
+    "decodedRgbSha256": "4fb22cd58237ed6a2facd41e7b663bb6ba4dfb4c7054963dc1b89973d298f493",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "낮은 난간벽",
+    "environment": "실외"
+   },
+   "file": "rooftop.webp",
+   "bytes": 601506,
+   "sha256": "7b8494d591d4f064b49971e0e6150c1dcde39c917ed3c4511f3f025642996119",
+   "added": "R405"
+  },
+  "slothhouse": {
+   "family": "SW-TILE-B15",
+   "regions": [
+    "ep1b02"
+   ],
+   "floor": {
+    "batch": "SW-TILE-B15",
+    "source": "sloth_indoor_floor.png",
+    "sha256": "eef385b14cbcfa6ef21b0153c741fa1914f2d0877eb7854c08a5e3dc592da061",
+    "decodedRgbSha256": "bf4c1d4d2604aa672a6077d7680cfe737c29af146d319f452bbdb5d0a21c36af",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "바닥",
+    "environment": "실내"
+   },
+   "wall": {
+    "batch": "SW-TILE-B15",
+    "source": "sloth_indoor_wall.png",
+    "sha256": "2ba6192cf4564508bc864effeb2edb7ac1cfb4b083c15d169b05dc33ce4f8bfa",
+    "decodedRgbSha256": "9e1f68fdb25443aaecb423d013e96cc33a72743074eefceb3fe5a8add49fda99",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "벽",
+    "environment": "실내"
+   },
+   "file": "slothhouse.webp",
+   "bytes": 516484,
+   "sha256": "88b40f896e786acb1974eb32a9216885e846ea20721d0074707b15748db1009f",
+   "added": "R407"
+  },
+  "arbelia": {
+   "family": "SW-TILE-B16",
+   "regions": [
+    "kair02"
+   ],
+   "floor": {
+    "batch": "SW-TILE-B16",
+    "source": "arbellia_indoor_floor.png",
+    "sha256": "5bdedbfdf6db76e848a6df0ae301491721cecac2ba9ada8ecd148941475b2c02",
+    "decodedRgbSha256": "beafd31e1a676253ec2ae8cdd18e06596199bf1e119ff29255428b9bfd82d0b8",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "바닥",
+    "environment": "실내"
+   },
+   "wall": {
+    "batch": "SW-TILE-B16",
+    "source": "arbellia_indoor_wall.png",
+    "sha256": "8e9106caa11e2d23c5dba01e0f13ea1a6ce34b3a72751ea0ab30f570890b2adc",
+    "decodedRgbSha256": "25ae9112c45a44878e5961f8afe57bf65878ebf2c746d298229e2535954fb86b",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "벽",
+    "environment": "실내"
+   },
+   "file": "arbelia.webp",
+   "bytes": 596332,
+   "sha256": "a85d80c5cc13757d724b651ce6f3c03a76cd86b918ae6e015bdfd0f010ef9d92",
+   "added": "R407"
+  },
+  "corevault": {
+   "family": "SW-TILE-B17",
+   "regions": [
+    "u206"
+   ],
+   "floor": {
+    "batch": "SW-TILE-B17",
+    "source": "core_indoor_floor.png",
+    "sha256": "eced8ae395793d7dc589b5141a89e94ca9c6d122d4be189e49ff7e810e50bf6e",
+    "decodedRgbSha256": "d64c447c3dafe5ff16c1a4509e2488535e232b1287aa5109620c37eb2ee7fe21",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "바닥",
+    "environment": "실내",
+    "brightness": 1.25,
+    "saturation": 1.0
+   },
+   "wall": {
+    "batch": "SW-TILE-B17",
+    "source": "core_indoor_wall.png",
+    "sha256": "9c6080b0b4520fe8b9b1d9b4e9d9a8b59b666d51f0266f013f3bfd42a40632ce",
+    "decodedRgbSha256": "c06810bce37a4326b6f36236a1cb8f558426103e3307643a8f510d371a8742e5",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "벽",
+    "environment": "실내"
+   },
+   "file": "corevault.webp",
+   "bytes": 656594,
+   "sha256": "2c7f55811ee1a9bea3347a0489eac1f2d71bef29db3b3d3160307a25fe7a7ac2",
+   "added": "R407"
+  },
+  "sleepport": {
+   "family": "SW-TILE-B19-FINAL7",
+   "regions": [
+    "last302"
+   ],
+   "floor": {
+    "batch": "SW-TILE-B19-FINAL7",
+    "source": "sleepless_coast_floor.png",
+    "sha256": "be52ce47f375443b19c0bd241f603da956baf474e1fde5efe7f55b8e641cc1df",
+    "decodedRgbSha256": "d7517844d74c050164ca18936f9072b0e0c6db462192c2079ae4e2abea1e2ce1",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "floor",
+    "environment": "실외"
+   },
+   "wall": {
+    "batch": "SW-TILE-B19-FINAL7",
+    "source": "sleepless_coast_wall.png",
+    "sha256": "f0fcef6951e364ef222e600acda193d2f95c95497b013cef4dce2014981a3766",
+    "decodedRgbSha256": "c1b4db2815bf1e9f7e26fee54137adad8885187cf636356509e5f7b02af6b4d0",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "wall",
+    "environment": "실외"
+   },
+   "file": "sleepport.webp",
+   "bytes": 866420,
+   "sha256": "5fee1f9522c0f5dd03dbfa20065bc514811b648cbc2b8eff762753df09cc5131",
+   "added": "R407"
+  },
+  "blackkeep": {
+   "family": "SW-TILE-B19-FINAL7",
+   "regions": [
+    "last301"
+   ],
+   "floor": {
+    "batch": "SW-TILE-B19-FINAL7",
+    "source": "coastal_floor.png",
+    "sha256": "0ae1f68d1be6378fa0269bddaa08def4168fabedaba0c4554e21090bacca2938",
+    "decodedRgbSha256": "18a3885eec675bfd8130d8f7907a29a6b573cd62866578ee3e490404fe0bff85",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "floor",
+    "environment": "실외"
+   },
+   "wall": {
+    "batch": "SW-TILE-B19-FINAL7",
+    "source": "coastal_wall.png",
+    "sha256": "8a133ac781e0df0ad1d5a445412c5d412de2d070bd7c5d3e3429355273724b4c",
+    "decodedRgbSha256": "f1f48fe2d643b127096f75ab893ccd3f24678c2a2bc962a8c2ac67c8229886cf",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "wall",
+    "environment": "실외"
+   },
+   "file": "blackkeep.webp",
+   "bytes": 794094,
+   "sha256": "82ae64e96a847e3d652c416e6f085f23d917fb7f841dd21805c164328495cb5e",
+   "added": "R407"
+  },
+  "villastair": {
+   "family": "SW-TILE-B19-FINAL7",
+   "regions": [
+    "murder04"
+   ],
+   "floor": {
+    "batch": "SW-TILE-B19-FINAL7",
+    "source": "villa_floor.png",
+    "sha256": "fb1b45a447e1c2780fdbc590dde89f1429cf2680deab2fcde019621f564131ba",
+    "decodedRgbSha256": "e93f1ef24f21fba29a677b5688dc67c329127f9876940464c655eae2dc2a6e79",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "floor",
+    "environment": "실내",
+    "brightness": 1.15,
+    "saturation": 1.0
+   },
+   "wall": {
+    "batch": "SW-TILE-B19-FINAL7",
+    "source": "villa_wall.png",
+    "sha256": "e30174c8320ff7045e8b308e6f3cfaa364ec615cb6c475168e55f1a72383e677",
+    "decodedRgbSha256": "4aceaf656fd1cd3d053b3f6167bd32467603467a202469838c4fcfaf6dec73a9",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "wall",
+    "environment": "실내"
+   },
+   "file": "villastair.webp",
+   "bytes": 666144,
+   "sha256": "4b8a7b3b86e22b3f5bee459e62afc9fd91b1d99bc03a8ccc20acfdda480fb71f",
+   "added": "R407"
+  },
+  "cultaltar": {
+   "family": "SW-TILE-B19-FINAL7",
+   "regions": [
+    "cult04"
+   ],
+   "floor": {
+    "batch": "SW-TILE-B19-FINAL7",
+    "source": "altar_floor.png",
+    "sha256": "a52051368e5147a34df50177cc17e2518284488956096a2f341595c7a8f34e9e",
+    "decodedRgbSha256": "a0b1fd3a30a7513b74cfdeeaf7ddaebe4002f343bf73e23b884793dde3644d70",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "floor",
+    "environment": "실내",
+    "brightness": 1.5,
+    "saturation": 1.0
+   },
+   "wall": {
+    "batch": "SW-TILE-B19-FINAL7",
+    "source": "altar_wall.png",
+    "sha256": "5f725169d20d5d45f0bf78f3574583bad3bebf8499a4e9c16c06d1320df75dcc",
+    "decodedRgbSha256": "5ca1d75a4c00b73b7c607829c568fc0c04bac6ef5e352ae67c969532370adbec",
+    "size": [
+     1254,
+     1254
+    ],
+    "usage": "wall",
+    "environment": "실내",
+    "brightness": 1.4,
+    "saturation": 1.0
+   },
+   "file": "cultaltar.webp",
+   "bytes": 735582,
+   "sha256": "6ae195923475472de67383e0f50c896836165f9b222c72bbae99101ac9671148",
+   "added": "R407"
+  }
+ }
+}

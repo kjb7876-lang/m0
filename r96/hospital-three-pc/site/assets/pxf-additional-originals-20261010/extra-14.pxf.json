@@ -1,0 +1,543 @@
+{
+  "format": "pxf.graph@1",
+  "name": "보라 낙뢰 스킬",
+  "settings": {
+    "size": 64,
+    "frames": 20,
+    "fps": 24,
+    "loop": false
+  },
+  "nodes": [
+    {
+      "id": "bolt",
+      "type": "Lightning",
+      "x": 40,
+      "y": 40,
+      "params": {
+        "x0": 0.56,
+        "y0": 0,
+        "x1": 0.5,
+        "y1": 0.82,
+        "detail": 6,
+        "jag": 0.3,
+        "branch": 0.3,
+        "branchLen": 0.3,
+        "seed": 41,
+        "rate": 2,
+        "thick": 2,
+        "grow": {
+          "k": [
+            [
+              0,
+              0,
+              "linear"
+            ],
+            [
+              1,
+              0,
+              "in"
+            ],
+            [
+              4,
+              1,
+              "linear"
+            ],
+            [
+              19,
+              1,
+              "linear"
+            ]
+          ]
+        },
+        "intensity": {
+          "k": [
+            [
+              0,
+              1,
+              "linear"
+            ],
+            [
+              5,
+              1,
+              "linear"
+            ],
+            [
+              6,
+              0.55,
+              "linear"
+            ],
+            [
+              7,
+              1,
+              "linear"
+            ],
+            [
+              9,
+              0.5,
+              "linear"
+            ],
+            [
+              10,
+              0.8,
+              "linear"
+            ],
+            [
+              13,
+              0.35,
+              "linear"
+            ],
+            [
+              16,
+              0.1,
+              "linear"
+            ],
+            [
+              19,
+              0,
+              "linear"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "fork",
+      "type": "Lightning",
+      "x": 40,
+      "y": 210,
+      "params": {
+        "x0": 0.5,
+        "y0": 0.32,
+        "x1": 0.3,
+        "y1": 0.76,
+        "detail": 5,
+        "jag": 0.3,
+        "branch": 0.15,
+        "branchLen": 0.3,
+        "seed": 90,
+        "rate": 2,
+        "thick": 1,
+        "grow": {
+          "k": [
+            [
+              0,
+              0,
+              "linear"
+            ],
+            [
+              3,
+              0,
+              "linear"
+            ],
+            [
+              6,
+              1,
+              "linear"
+            ],
+            [
+              19,
+              1,
+              "linear"
+            ]
+          ]
+        },
+        "intensity": {
+          "k": [
+            [
+              0,
+              0.8,
+              "linear"
+            ],
+            [
+              7,
+              0.8,
+              "linear"
+            ],
+            [
+              10,
+              0.4,
+              "linear"
+            ],
+            [
+              13,
+              0.15,
+              "linear"
+            ],
+            [
+              19,
+              0,
+              "linear"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "star",
+      "type": "Shape",
+      "x": 40,
+      "y": 380,
+      "params": {
+        "shape": "star",
+        "x": 0.5,
+        "y": 0.82,
+        "size": {
+          "k": [
+            [
+              0,
+              0,
+              "linear"
+            ],
+            [
+              3,
+              0,
+              "linear"
+            ],
+            [
+              4,
+              9,
+              "out3"
+            ],
+            [
+              8,
+              4,
+              "in"
+            ],
+            [
+              11,
+              0,
+              "linear"
+            ]
+          ]
+        },
+        "size2": 0.22,
+        "points": 4,
+        "rot": 0,
+        "aspect": 1,
+        "stroke": 0,
+        "falloff": 0,
+        "intensity": 1
+      }
+    },
+    {
+      "id": "ring",
+      "type": "Shape",
+      "x": 40,
+      "y": 550,
+      "params": {
+        "shape": "ring",
+        "x": 0.5,
+        "y": 0.82,
+        "size": {
+          "k": [
+            [
+              0,
+              0,
+              "linear"
+            ],
+            [
+              3,
+              0,
+              "linear"
+            ],
+            [
+              4,
+              4,
+              "out3"
+            ],
+            [
+              12,
+              19,
+              "out"
+            ],
+            [
+              16,
+              21,
+              "linear"
+            ]
+          ]
+        },
+        "size2": {
+          "k": [
+            [
+              0,
+              0.5,
+              "linear"
+            ],
+            [
+              4,
+              0.5,
+              "linear"
+            ],
+            [
+              12,
+              0.12,
+              "linear"
+            ],
+            [
+              16,
+              0.08,
+              "linear"
+            ]
+          ]
+        },
+        "points": 5,
+        "rot": 0,
+        "aspect": 0.34,
+        "stroke": 0,
+        "falloff": 0,
+        "intensity": {
+          "k": [
+            [
+              0,
+              0,
+              "linear"
+            ],
+            [
+              3,
+              0,
+              "linear"
+            ],
+            [
+              4,
+              0.9,
+              "linear"
+            ],
+            [
+              12,
+              0.5,
+              "linear"
+            ],
+            [
+              16,
+              0,
+              "linear"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "sparks",
+      "type": "Particles",
+      "x": 40,
+      "y": 720,
+      "params": {
+        "count": 18,
+        "seed": 77,
+        "emit": "burst",
+        "start": 0.2,
+        "span": 1,
+        "life": 0.4,
+        "lifeVar": 0.2,
+        "area": "circle",
+        "x": 0.5,
+        "y": 0.82,
+        "aw": 4,
+        "ah": 2,
+        "dirMode": "fixed",
+        "angle": -90,
+        "spread": 160,
+        "speed": 1.4,
+        "speedVar": 0.4,
+        "gravity": 0.06,
+        "drag": 0.04,
+        "turb": 0,
+        "sizeA": 2,
+        "sizeB": 0.5,
+        "pshape": "diamond",
+        "stretch": 1,
+        "fade": "out",
+        "bright": 0.9,
+        "loop": false,
+        "ground": 0,
+        "bounce": 0.35,
+        "brightVar": 0
+      }
+    },
+    {
+      "id": "boltmix",
+      "type": "Blend",
+      "x": 270,
+      "y": 40,
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "glow",
+      "type": "Glow",
+      "x": 500,
+      "y": 40,
+      "params": {
+        "radius": 2,
+        "strength": 1.2
+      }
+    },
+    {
+      "id": "m1",
+      "type": "Blend",
+      "x": 730,
+      "y": 40,
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "m2",
+      "type": "Blend",
+      "x": 960,
+      "y": 40,
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "m3",
+      "type": "Blend",
+      "x": 1190,
+      "y": 40,
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "color",
+      "type": "Palette",
+      "x": 1420,
+      "y": 40,
+      "params": {
+        "colors": [
+          "#2b1259",
+          "#5b2bb0",
+          "#a35cf0",
+          "#dcb8ff",
+          "#f6ecff"
+        ],
+        "cutoff": 0.08,
+        "shift": 0,
+        "mode": "bands",
+        "key": "alpha",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "fade",
+      "type": "Tint",
+      "x": 1650,
+      "y": 40,
+      "params": {
+        "color": "#ffffff",
+        "amount": 0,
+        "bright": 1,
+        "opacity": {
+          "k": [
+            [
+              0,
+              1,
+              "linear"
+            ],
+            [
+              11,
+              1,
+              "linear"
+            ],
+            [
+              19,
+              0,
+              "linear"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "out",
+      "type": "Output",
+      "x": 1880,
+      "y": 40,
+      "params": {
+        "alpha": "soft",
+        "threshold": 0.1
+      }
+    }
+  ],
+  "links": [
+    {
+      "f": "bolt",
+      "t": "boltmix",
+      "p": 0
+    },
+    {
+      "f": "fork",
+      "t": "boltmix",
+      "p": 1
+    },
+    {
+      "f": "boltmix",
+      "t": "glow",
+      "p": 0
+    },
+    {
+      "f": "glow",
+      "t": "m1",
+      "p": 0
+    },
+    {
+      "f": "star",
+      "t": "m1",
+      "p": 1
+    },
+    {
+      "f": "m1",
+      "t": "m2",
+      "p": 0
+    },
+    {
+      "f": "ring",
+      "t": "m2",
+      "p": 1
+    },
+    {
+      "f": "m2",
+      "t": "m3",
+      "p": 0
+    },
+    {
+      "f": "sparks",
+      "t": "m3",
+      "p": 1
+    },
+    {
+      "f": "m3",
+      "t": "color",
+      "p": 0
+    },
+    {
+      "f": "color",
+      "t": "fade",
+      "p": 0
+    },
+    {
+      "f": "fade",
+      "t": "out",
+      "p": 0
+    }
+  ],
+  "game": {
+    "style": "hero-pixel-v1",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "logicalSize": 64,
+    "blend": "add",
+    "referenceCell": 62,
+    "durationMs": 833.3333333333334,
+    "impactFrame": 4
+  }
+}

@@ -1,0 +1,66 @@
+{
+ "revision": "R184",
+ "temporary": true,
+ "sheets": [
+  {
+   "file": "s06-invader-walk-right-8.webp",
+   "use": "외계 침공군(DYS-01 원문 외형)",
+   "sha256": "280bcae9e1e65c7d095a2eeb4eb98b23e3dbd2446fbda94df52d1fe22943f20a",
+   "bytes": 1032,
+   "cell": [
+    256,
+    320
+   ],
+   "frames": 8,
+   "grid": [
+    4,
+    2
+   ],
+   "foot": [
+    101.8,
+    299.5
+   ],
+   "source": "R184 scripts/r184-s06-pixel-art.py (자체 생성, CC0 상당) — Aseprite 방식 임시 픽셀 자산, 더 좋은 자산이 오면 교체"
+  },
+  {
+   "file": "s06-rival-walk-right-8.webp",
+   "use": "상대 초인(DYS-03)",
+   "sha256": "181f676679c96d17e5fcbf9e7b6a16523371f3577d2113108e12a243cc6ac77a",
+   "bytes": 1392,
+   "cell": [
+    256,
+    320
+   ],
+   "frames": 8,
+   "grid": [
+    4,
+    2
+   ],
+   "foot": [
+    101.8,
+    299.5
+   ],
+   "source": "R184 scripts/r184-s06-pixel-art.py (자체 생성, CC0 상당) — Aseprite 방식 임시 픽셀 자산, 더 좋은 자산이 오면 교체"
+  },
+  {
+   "file": "s06-commander-walk-right-8.webp",
+   "use": "적 지휘 개체·적 지휘 기체(DYS-02·DYS-10)",
+   "sha256": "7fcc724f663a44e2e6ce803db750956c5a79ac27b5588bf877e909f77d3ff7fa",
+   "bytes": 2096,
+   "cell": [
+    256,
+    320
+   ],
+   "frames": 8,
+   "grid": [
+    4,
+    2
+   ],
+   "foot": [
+    101.8,
+    299.5
+   ],
+   "source": "R184 scripts/r184-s06-pixel-art.py (자체 생성, CC0 상당) — Aseprite 방식 임시 픽셀 자산, 더 좋은 자산이 오면 교체"
+  }
+ ]
+}

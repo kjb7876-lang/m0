@@ -1,0 +1,104 @@
+{
+ "revision": "R284 미카엘라 북동 달리기 — 오른쪽 달리기 다리(좁힘·앞발 올림)로 두 다리가 갈라져 번갈기",
+ "path": "assets/r284/michaela/run-ne-v5.webp",
+ "cols": 8,
+ "rows": 1,
+ "cell": [
+  192,
+  256
+ ],
+ "pivot": [
+  96,
+  226
+ ],
+ "source": {
+  "upper": {
+   "path": "assets/r164/michaela/run-ne-v2.webp",
+   "sha256": "5e6505019899c791f9ef00a06e9af0d7ead13100f1bd93829f61f47d87e135e1"
+  },
+  "legs": {
+   "path": "assets/r164/michaela/run-e.webp",
+   "sha256": "addc6fae59a66f0fe111d57175d0e64c7225b35cd99cfbb0ca23df9ba1e72994"
+  }
+ },
+ "seam": 176,
+ "feather": 8,
+ "squeeze": 0.5,
+ "tilt": 0.35,
+ "phase": 0,
+ "replaces": "assets/r229/michaela/run-ne-v4.webp(R229, 북쪽 다리라 두 발이 한 줄에 겹쳐 꼬여 보임)",
+ "bytes": 151918,
+ "sha256": "964adfaa8d41c4b50efd4a903a8ec95bdc3d9e1e4687de193a3509490185a6f0",
+ "note": "임시 파생본(원본 시트 편집) — 최종 아트 확정 아님",
+ "legSeparation": {
+  "method": "다리 띠 y190~232, 행마다 불투명 덩어리 2개 이상인 행 수와 최대 가로 간격(px), 칸마다 [행 수, 간격]",
+  "v5": [
+   [
+    27,
+    52
+   ],
+   [
+    11,
+    47
+   ],
+   [
+    0,
+    0
+   ],
+   [
+    2,
+    32
+   ],
+   [
+    28,
+    52
+   ],
+   [
+    2,
+    3
+   ],
+   [
+    8,
+    10
+   ],
+   [
+    4,
+    31
+   ]
+  ],
+  "v4": [
+   [
+    5,
+    9
+   ],
+   [
+    6,
+    6
+   ],
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    0
+   ],
+   [
+    5,
+    9
+   ],
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    0
+   ]
+  ]
+ }
+}

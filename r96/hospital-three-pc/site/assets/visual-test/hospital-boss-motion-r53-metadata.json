@@ -1,0 +1,329 @@
+{
+  "asset": "assets/visual-test/hospital-boss-motion-r53.png",
+  "size": [
+    1254,
+    1254
+  ],
+  "columns": 4,
+  "rows": 4,
+  "cells": [
+    {
+      "sourceRect": [
+        0,
+        0,
+        314,
+        314
+      ],
+      "pivot": [
+        151.2,
+        305
+      ],
+      "visibleHeight": 220,
+      "alphaBounds": [
+        104,
+        91,
+        253,
+        305
+      ]
+    },
+    {
+      "sourceRect": [
+        314,
+        0,
+        313,
+        314
+      ],
+      "pivot": [
+        172.7,
+        305
+      ],
+      "visibleHeight": 220,
+      "alphaBounds": [
+        93,
+        69,
+        242,
+        305
+      ]
+    },
+    {
+      "sourceRect": [
+        627,
+        0,
+        313,
+        314
+      ],
+      "pivot": [
+        140.1,
+        303
+      ],
+      "visibleHeight": 220,
+      "alphaBounds": [
+        43,
+        109,
+        271,
+        303
+      ]
+    },
+    {
+      "sourceRect": [
+        940,
+        0,
+        314,
+        314
+      ],
+      "pivot": [
+        159.9,
+        306
+      ],
+      "visibleHeight": 220,
+      "alphaBounds": [
+        68,
+        112,
+        252,
+        306
+      ]
+    },
+    {
+      "sourceRect": [
+        0,
+        314,
+        314,
+        313
+      ],
+      "pivot": [
+        167.5,
+        285
+      ],
+      "visibleHeight": 220,
+      "alphaBounds": [
+        88,
+        72,
+        270,
+        285
+      ]
+    },
+    {
+      "sourceRect": [
+        314,
+        314,
+        313,
+        313
+      ],
+      "pivot": [
+        178.6,
+        284
+      ],
+      "visibleHeight": 220,
+      "alphaBounds": [
+        104,
+        44,
+        264,
+        284
+      ]
+    },
+    {
+      "sourceRect": [
+        627,
+        314,
+        313,
+        313
+      ],
+      "pivot": [
+        130.6,
+        287
+      ],
+      "visibleHeight": 220,
+      "alphaBounds": [
+        43,
+        86,
+        293,
+        287
+      ]
+    },
+    {
+      "sourceRect": [
+        940,
+        314,
+        314,
+        313
+      ],
+      "pivot": [
+        154.4,
+        286
+      ],
+      "visibleHeight": 220,
+      "alphaBounds": [
+        65,
+        87,
+        273,
+        286
+      ]
+    },
+    {
+      "sourceRect": [
+        0,
+        627,
+        314,
+        313
+      ],
+      "pivot": [
+        150.0,
+        271
+      ],
+      "visibleHeight": 220,
+      "alphaBounds": [
+        87,
+        53,
+        239,
+        271
+      ]
+    },
+    {
+      "sourceRect": [
+        314,
+        627,
+        313,
+        313
+      ],
+      "pivot": [
+        179.8,
+        271
+      ],
+      "visibleHeight": 220,
+      "alphaBounds": [
+        100,
+        43,
+        285,
+        271
+      ]
+    },
+    {
+      "sourceRect": [
+        627,
+        627,
+        313,
+        313
+      ],
+      "pivot": [
+        156.7,
+        271
+      ],
+      "visibleHeight": 220,
+      "alphaBounds": [
+        60,
+        56,
+        276,
+        271
+      ]
+    },
+    {
+      "sourceRect": [
+        940,
+        627,
+        314,
+        313
+      ],
+      "pivot": [
+        158.3,
+        271
+      ],
+      "visibleHeight": 220,
+      "alphaBounds": [
+        79,
+        52,
+        238,
+        271
+      ]
+    },
+    {
+      "sourceRect": [
+        0,
+        940,
+        314,
+        314
+      ],
+      "pivot": [
+        166.3,
+        239
+      ],
+      "visibleHeight": 220,
+      "alphaBounds": [
+        67,
+        30,
+        238,
+        239
+      ]
+    },
+    {
+      "sourceRect": [
+        314,
+        940,
+        313,
+        314
+      ],
+      "pivot": [
+        173.0,
+        238
+      ],
+      "visibleHeight": 220,
+      "alphaBounds": [
+        67,
+        17,
+        255,
+        238
+      ]
+    },
+    {
+      "sourceRect": [
+        627,
+        940,
+        313,
+        314
+      ],
+      "pivot": [
+        148.6,
+        238
+      ],
+      "visibleHeight": 220,
+      "alphaBounds": [
+        47,
+        33,
+        263,
+        238
+      ]
+    },
+    {
+      "sourceRect": [
+        940,
+        940,
+        314,
+        314
+      ],
+      "pivot": [
+        156.1,
+        243
+      ],
+      "visibleHeight": 220,
+      "alphaBounds": [
+        75,
+        31,
+        257,
+        243
+      ]
+    }
+  ],
+  "rowsMeaning": [
+    "melee-front-right",
+    "melee-back-right",
+    "poison-front-right",
+    "poison-back-right"
+  ],
+  "phases": [
+    "ready",
+    "windup",
+    "contact-release",
+    "recovery"
+  ],
+  "method": "original generated alpha pixels unchanged; equal-cell sourceRect, lower47px dark boot centroid, common220px body scale",
+  "generated": true
+}

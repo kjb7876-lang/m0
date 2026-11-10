@@ -1,0 +1,125 @@
+{
+ "source": "ChatGPT image generation 2026-10-27 (angel wings 3x2 sheet, black background keyed to alpha); iai slash sheet 4x2 (ChatGPT 2026-10-27, black keyed, grey for hero tint)",
+ "sprites": {
+  "wingback": {
+   "w": 384,
+   "h": 298,
+   "pivot": [
+    0.5,
+    0.4
+   ],
+   "bytes": 43760,
+   "sha256": "a93e32baf0a6ff477418c7f454064b2545b133e10f2bb443284e92789517447f"
+  },
+  "wingfront": {
+   "w": 384,
+   "h": 278,
+   "pivot": [
+    0.5,
+    0.4
+   ],
+   "bytes": 35858,
+   "sha256": "513454f281eaf710f6f7d847910ad552e8a72e761b66a7d18c959bee06a77570"
+  },
+  "wingside": {
+   "w": 384,
+   "h": 300,
+   "pivot": [
+    0.18,
+    0.3
+   ],
+   "bytes": 42472,
+   "sha256": "4ab4db095ac35f10132ca20c497a17827b632fa2e496b865003d113b8169a371"
+  },
+  "wingback-f": {
+   "w": 384,
+   "h": 295,
+   "pivot": [
+    0.5,
+    0.4
+   ],
+   "bytes": 43062,
+   "sha256": "cd4b713eb4f0ebe4e84570eb36c530156e019d88884b12e8619585cc8ae91586"
+  },
+  "wingfront-f": {
+   "w": 384,
+   "h": 299,
+   "pivot": [
+    0.5,
+    0.4
+   ],
+   "bytes": 44196,
+   "sha256": "520d8c7578b864e90c323571debc5bed2423c5af792c04c13b1071cf16d394ec"
+  },
+  "wingside-f": {
+   "w": 384,
+   "h": 305,
+   "pivot": [
+    0.18,
+    0.3
+   ],
+   "bytes": 34098,
+   "sha256": "1ba7a7b5261d733ba31553179f3ad3411e9dd9b55c73890090a338feea9cabc1"
+  },
+  "iai-cut": {
+   "w": 512,
+   "h": 67,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "bytes": 11916,
+   "sha256": "a08869c12d080d5bfa50130b35af88a6bd91fb1e6919f4347c36758a3cee602d"
+  },
+  "iai-x": {
+   "w": 304,
+   "h": 297,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "bytes": 19990,
+   "sha256": "9b771b72fba42316a166de8163f9b5eecd11a7474a743ba9be0d2faacc23e3cf"
+  },
+  "iai-star": {
+   "w": 290,
+   "h": 320,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "bytes": 24870,
+   "sha256": "a7e14c9857575c7f746407271a43f7db21c381f5dc9f716f46a3cd0e15629d69"
+  },
+  "iai-hash": {
+   "w": 320,
+   "h": 293,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "bytes": 23110,
+   "sha256": "6a3b3aaf2ef8200c2a5643be1062caec57c6df456ebbddc98da1675a3661739c"
+  },
+  "iai-burst": {
+   "w": 320,
+   "h": 249,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "bytes": 24408,
+   "sha256": "89e81f475a5ce5cd84dce21c6e3cf387e7b6e02175e7244ebe7fa60c08038fc0"
+  },
+  "iai-sheath": {
+   "w": 320,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "bytes": 9162,
+   "sha256": "f0b5255aa45e9bf88435d021ad332d5385bbd6ae77273b60064a61a9c099f845"
+  }
+ }
+}

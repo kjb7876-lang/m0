@@ -1,0 +1,25 @@
+{
+ "hero": "gunner",
+ "path": "assets/r144/walk/gunner/walk-e.webp",
+ "replaces": "assets/r128/gunner/walk-e.webp",
+ "cols": 8,
+ "rows": 1,
+ "cell": [
+  192,
+  256
+ ],
+ "foot": [
+  96,
+  226
+ ],
+ "source": {
+  "driveId": "13-unzqWeeD2_9N7q2KInxcXm29JTI3JR",
+  "version": "v1 (2026-10-30)",
+  "file": "HERO-gunner-walk-e.png",
+  "sha256": "d489263db30aaa6c43eb13dfc01071da10c38bdad8dc20a2479d7a0923e22369",
+  "bytes": 193652
+ },
+ "sha256": "cfa4c300440a65f82d79878294389688ab0b8d56f92c2f256a76e182ab1f1fa8",
+ "bytes": 54934,
+ "why": "옛(v1)·새(v2) 걷기 비교: v2 walk-e 는 뒷다리 아래가 잘려 장화가 떨어져 보임, v1 은 온전 — 더 자연스러운 v1 사용(나머지 방향은 v2 그대로)"
+}

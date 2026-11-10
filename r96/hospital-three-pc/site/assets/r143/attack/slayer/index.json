@@ -1,0 +1,113 @@
+{
+ "hero": "slayer",
+ "action": "attack",
+ "order": "예비 2 · 타격 2 · 회수 2 (README)",
+ "mirroredInGame": {
+  "w": "e",
+  "sw": "se",
+  "nw": "ne"
+ },
+ "applied": "기본 공격(멈춰 서서) 프레임 애니메이션 — client-source/attack-anim-r143.js",
+ "directions": {
+  "s": {
+   "path": "assets/r143/attack/slayer/attack-s.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    220
+   ],
+   "source": {
+    "driveId": "1nB3PbKbZB_y3WgrNSWCN25L0YobBq01q",
+    "file": "HERO-slayer-attack-s.png",
+    "sha256": "31c0feb06d47ce4707b8d4d3b87d155922cad21fada20fe3a96d7b7dde06e561",
+    "bytes": 177292
+   },
+   "sha256": "766be541ddd04d2bd64eec21983e2dd3666048b0198135cfd3fcbc558960a7e8",
+   "bytes": 61208
+  },
+  "se": {
+   "path": "assets/r143/attack/slayer/attack-se.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    220
+   ],
+   "source": {
+    "driveId": "1nB3PbKbZB_y3WgrNSWCN25L0YobBq01q",
+    "file": "HERO-slayer-attack-se.png",
+    "sha256": "c79a1e0caf124714e27a157e17b73da681c13f802ac8fe7a57e366a21e2e5a2e",
+    "bytes": 154962
+   },
+   "sha256": "8071366c668e6d6a812fc90cf3094b7c3dcb170e318a0b3392f95d54aa273741",
+   "bytes": 55882
+  },
+  "e": {
+   "path": "assets/r143/attack/slayer/attack-e.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    223
+   ],
+   "source": {
+    "driveId": "1nB3PbKbZB_y3WgrNSWCN25L0YobBq01q",
+    "file": "HERO-slayer-attack-e.png",
+    "sha256": "0632eb2838d0dc0259ad28219a27fad132685bc2e015e9b1aa755899d331e772",
+    "bytes": 95540
+   },
+   "sha256": "34e3ec3d6354a088e19aa84749517087d2b83fe9aabe9cc8f3f30fa4814a6c6c",
+   "bytes": 31774
+  },
+  "ne": {
+   "path": "assets/r143/attack/slayer/attack-ne.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    225
+   ],
+   "source": {
+    "driveId": "1nB3PbKbZB_y3WgrNSWCN25L0YobBq01q",
+    "file": "HERO-slayer-attack-ne.png",
+    "sha256": "ba4334999797aa53938e688ac91aa4ef35904612abf91a4a9a1819769e53ffd9",
+    "bytes": 146921
+   },
+   "sha256": "1d56cc2122db8e4200091b9a6b75db9f2bc53708f9f894611e9f4beef41fb7d9",
+   "bytes": 49522
+  },
+  "n": {
+   "path": "assets/r143/attack/slayer/attack-n.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1nB3PbKbZB_y3WgrNSWCN25L0YobBq01q",
+    "file": "HERO-slayer-attack-n.png",
+    "sha256": "171019944f64eccbe60f35ae54f6759d0aa0dac83dde04863ea3499e2d5c59b9",
+    "bytes": 163671
+   },
+   "sha256": "9676e0346363a06857c4d8ed37f25e967dc512d432ab2846e250e19c68f36126",
+   "bytes": 52690
+  }
+ }
+}

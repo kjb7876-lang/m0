@@ -1,0 +1,489 @@
+{
+  "name": "네크로맨서 · 빈 영혼",
+  "settings": {
+    "size": 64,
+    "frames": 24,
+    "fps": 15,
+    "loop": true
+  },
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "Shape",
+      "params": {
+        "shape": "ring",
+        "x": 0.5,
+        "y": {
+          "k": [
+            [
+              0,
+              0.48,
+              "linear"
+            ],
+            [
+              6,
+              0.455,
+              "linear"
+            ],
+            [
+              12,
+              0.48,
+              "linear"
+            ],
+            [
+              17,
+              0.505,
+              "linear"
+            ],
+            [
+              23,
+              0.48,
+              "linear"
+            ]
+          ]
+        },
+        "size": {
+          "k": [
+            [
+              0,
+              9,
+              "out3"
+            ],
+            [
+              12,
+              9.666666666666666,
+              "out3"
+            ],
+            [
+              23,
+              9,
+              "out3"
+            ]
+          ]
+        },
+        "size2": 0.19,
+        "points": 5,
+        "rot": 0,
+        "aspect": 1,
+        "stroke": 0,
+        "falloff": 0.3,
+        "intensity": 0.92
+      },
+      "x": 40,
+      "y": 40
+    },
+    {
+      "id": "n2",
+      "type": "Palette",
+      "params": {
+        "colors": [
+          "#3f225e",
+          "#7041af",
+          "#a675eb",
+          "#d5b1ff"
+        ],
+        "cutoff": 0.025,
+        "shift": 0,
+        "mode": "bands",
+        "key": "alpha",
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 40
+    },
+    {
+      "id": "n3",
+      "type": "Mask",
+      "params": {
+        "mode": "multiply",
+        "strength": 1
+      },
+      "x": 460,
+      "y": 40
+    },
+    {
+      "id": "n4",
+      "type": "Glow",
+      "params": {
+        "radius": 2,
+        "strength": 0.8
+      },
+      "x": 670,
+      "y": 40
+    },
+    {
+      "id": "n5",
+      "type": "Arc",
+      "params": {
+        "x": 0.5,
+        "y": {
+          "k": [
+            [
+              0,
+              0.48,
+              "linear"
+            ],
+            [
+              6,
+              0.455,
+              "linear"
+            ],
+            [
+              12,
+              0.48,
+              "linear"
+            ],
+            [
+              17,
+              0.505,
+              "linear"
+            ],
+            [
+              23,
+              0.48,
+              "linear"
+            ]
+          ]
+        },
+        "radius": 12.666666666666666,
+        "thick": 1.6666666666666667,
+        "start": {
+          "k": [
+            [
+              0,
+              -35,
+              "linear"
+            ],
+            [
+              23,
+              325,
+              "linear"
+            ]
+          ]
+        },
+        "sweep": 100,
+        "head": 1,
+        "tail": 1,
+        "taper": 0.6,
+        "aspect": 0.85,
+        "rot": 0,
+        "intensity": 0.85
+      },
+      "x": 40,
+      "y": 190
+    },
+    {
+      "id": "n6",
+      "type": "Palette",
+      "params": {
+        "colors": [
+          "#3f225e",
+          "#7041af",
+          "#a675eb",
+          "#d5b1ff"
+        ],
+        "cutoff": 0.025,
+        "shift": 0,
+        "mode": "bands",
+        "key": "alpha",
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 190
+    },
+    {
+      "id": "n7",
+      "type": "Mask",
+      "params": {
+        "mode": "multiply",
+        "strength": 1
+      },
+      "x": 460,
+      "y": 190
+    },
+    {
+      "id": "n8",
+      "type": "Glow",
+      "params": {
+        "radius": 2,
+        "strength": 0.65
+      },
+      "x": 670,
+      "y": 190
+    },
+    {
+      "id": "n9",
+      "type": "Arc",
+      "params": {
+        "x": 0.5,
+        "y": {
+          "k": [
+            [
+              0,
+              0.48,
+              "linear"
+            ],
+            [
+              6,
+              0.455,
+              "linear"
+            ],
+            [
+              12,
+              0.48,
+              "linear"
+            ],
+            [
+              17,
+              0.505,
+              "linear"
+            ],
+            [
+              23,
+              0.48,
+              "linear"
+            ]
+          ]
+        },
+        "radius": 12.666666666666666,
+        "thick": 1.6666666666666667,
+        "start": {
+          "k": [
+            [
+              0,
+              140,
+              "linear"
+            ],
+            [
+              23,
+              500,
+              "linear"
+            ]
+          ]
+        },
+        "sweep": 100,
+        "head": 1,
+        "tail": 1,
+        "taper": 0.6,
+        "aspect": 0.85,
+        "rot": 0,
+        "intensity": 0.85
+      },
+      "x": 40,
+      "y": 340
+    },
+    {
+      "id": "n10",
+      "type": "Palette",
+      "params": {
+        "colors": [
+          "#3f225e",
+          "#7041af",
+          "#a675eb",
+          "#d5b1ff"
+        ],
+        "cutoff": 0.025,
+        "shift": 0,
+        "mode": "bands",
+        "key": "alpha",
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 340
+    },
+    {
+      "id": "n11",
+      "type": "Mask",
+      "params": {
+        "mode": "multiply",
+        "strength": 1
+      },
+      "x": 460,
+      "y": 340
+    },
+    {
+      "id": "n12",
+      "type": "Glow",
+      "params": {
+        "radius": 2,
+        "strength": 0.65
+      },
+      "x": 670,
+      "y": 340
+    },
+    {
+      "id": "n13",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 880,
+      "y": 40
+    },
+    {
+      "id": "n14",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 1090,
+      "y": 40
+    },
+    {
+      "id": "n15",
+      "type": "Output",
+      "params": {
+        "alpha": "soft",
+        "threshold": 0.5
+      },
+      "x": 1300,
+      "y": 40
+    }
+  ],
+  "links": [
+    {
+      "f": "n1",
+      "t": "n2",
+      "p": 0
+    },
+    {
+      "f": "n2",
+      "t": "n3",
+      "p": 0
+    },
+    {
+      "f": "n1",
+      "t": "n3",
+      "p": 1
+    },
+    {
+      "f": "n3",
+      "t": "n4",
+      "p": 0
+    },
+    {
+      "f": "n5",
+      "t": "n6",
+      "p": 0
+    },
+    {
+      "f": "n6",
+      "t": "n7",
+      "p": 0
+    },
+    {
+      "f": "n5",
+      "t": "n7",
+      "p": 1
+    },
+    {
+      "f": "n7",
+      "t": "n8",
+      "p": 0
+    },
+    {
+      "f": "n9",
+      "t": "n10",
+      "p": 0
+    },
+    {
+      "f": "n10",
+      "t": "n11",
+      "p": 0
+    },
+    {
+      "f": "n9",
+      "t": "n11",
+      "p": 1
+    },
+    {
+      "f": "n11",
+      "t": "n12",
+      "p": 0
+    },
+    {
+      "f": "n4",
+      "t": "n13",
+      "p": 0
+    },
+    {
+      "f": "n8",
+      "t": "n13",
+      "p": 1
+    },
+    {
+      "f": "n13",
+      "t": "n14",
+      "p": 0
+    },
+    {
+      "f": "n12",
+      "t": "n14",
+      "p": 1
+    },
+    {
+      "f": "n14",
+      "t": "n15",
+      "p": 0
+    }
+  ],
+  "game": {
+    "style": "hero-pixel-v1",
+    "pivot": [
+      0.5,
+      0.86
+    ],
+    "logicalSize": 84,
+    "blend": "normal",
+    "durationMs": 1600,
+    "role": "impact",
+    "referenceCell": 62,
+    "authoredCut": false
+  },
+  "sourceKey": "[\"souls\",\"styx\",[\"#e6faff\",\"#bda5ff\",\"#8756df\",\"#442279\",\"#170e30\"],92843,14,50,1.2,360,-0.02,2,0,55,150,1,0,0.6,false]",
+  "sourceRecipe": {
+    "id": "necromancer-conjured-soul",
+    "label": "네크로맨서 · 빈 영혼",
+    "effect": "souls",
+    "palette": "styx",
+    "pxfId": "hero-necromancer-conjured-soul",
+    "colors": [
+      "#e6faff",
+      "#bda5ff",
+      "#8756df",
+      "#442279",
+      "#170e30"
+    ],
+    "params": {
+      "count": 14,
+      "life": 50,
+      "speed": 1.2,
+      "spread": 360,
+      "gravity": -0.02,
+      "size": 2,
+      "angle": 0,
+      "pitch": 55,
+      "arc": 150,
+      "dir": 1,
+      "alt": false,
+      "ghosts": 0,
+      "glow": 0.6,
+      "ring": false,
+      "flash": 0,
+      "hitstop": 0,
+      "shake": 0,
+      "slowmo": 1,
+      "loop": true,
+      "interval": 1.6
+    },
+    "seed": 92843
+  },
+  "provenance": {
+    "author": "Hero Inc",
+    "purpose": "네크로맨서 · 빈 영혼",
+    "revision": "soul-rupture-v3",
+    "direction": "Hollow violet vessel with an empty transparent center and two rotating shell fragments; distinct from a real soul flame."
+  }
+}

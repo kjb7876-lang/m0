@@ -1,0 +1,417 @@
+{
+  "name": "얼음",
+  "settings": {
+    "size": 64,
+    "frames": 24,
+    "fps": 24,
+    "loop": false
+  },
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "Shape",
+      "params": {
+        "shape": "shard",
+        "x": 0.5,
+        "y": 0.75,
+        "size": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              3,
+              30,
+              "out"
+            ],
+            [
+              20,
+              30
+            ],
+            [
+              23,
+              0
+            ]
+          ]
+        },
+        "size2": 0.25,
+        "points": 5,
+        "rot": 0,
+        "aspect": 1,
+        "stroke": 0,
+        "falloff": 0.6,
+        "intensity": 0.96
+      },
+      "x": 40,
+      "y": 40
+    },
+    {
+      "id": "n2",
+      "type": "Shape",
+      "params": {
+        "shape": "shard",
+        "x": 0.34,
+        "y": 0.76,
+        "size": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              3,
+              19,
+              "out"
+            ],
+            [
+              20,
+              19
+            ],
+            [
+              23,
+              0
+            ]
+          ]
+        },
+        "size2": 0.25,
+        "points": 5,
+        "rot": -24,
+        "aspect": 1,
+        "stroke": 0,
+        "falloff": 0.6,
+        "intensity": 0.96
+      },
+      "x": 40,
+      "y": 190
+    },
+    {
+      "id": "n3",
+      "type": "Blend",
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 40
+    },
+    {
+      "id": "n4",
+      "type": "Shape",
+      "params": {
+        "shape": "shard",
+        "x": 0.65,
+        "y": 0.76,
+        "size": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              3,
+              23,
+              "out"
+            ],
+            [
+              20,
+              23
+            ],
+            [
+              23,
+              0
+            ]
+          ]
+        },
+        "size2": 0.25,
+        "points": 5,
+        "rot": 24,
+        "aspect": 1,
+        "stroke": 0,
+        "falloff": 0.6,
+        "intensity": 0.96
+      },
+      "x": 40,
+      "y": 340
+    },
+    {
+      "id": "n5",
+      "type": "Blend",
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      },
+      "x": 460,
+      "y": 40
+    },
+    {
+      "id": "n6",
+      "type": "Particles",
+      "params": {
+        "count": 16,
+        "seed": 173,
+        "emit": "burst",
+        "start": 0.55,
+        "span": 1,
+        "life": 0.35,
+        "lifeVar": 0.35,
+        "area": "point",
+        "x": 0.5,
+        "y": 0.55,
+        "aw": 8,
+        "ah": 8,
+        "dirMode": "fixed",
+        "angle": -90,
+        "spread": 110,
+        "speed": 1.7,
+        "speedVar": 0.55,
+        "gravity": 0.18,
+        "drag": 0.12,
+        "turb": 0,
+        "sizeA": 3,
+        "sizeB": 0.5,
+        "pshape": "diamond",
+        "stretch": 0.8,
+        "fade": "out",
+        "bright": 1,
+        "loop": false,
+        "ground": 0,
+        "bounce": 0.35,
+        "brightVar": 0.3
+      },
+      "x": 40,
+      "y": 490
+    },
+    {
+      "id": "n7",
+      "type": "Blend",
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      },
+      "x": 670,
+      "y": 40
+    },
+    {
+      "id": "n8",
+      "type": "Shape",
+      "params": {
+        "shape": "ring",
+        "x": 0.5,
+        "y": 0.78,
+        "size": {
+          "a": 3,
+          "b": 26,
+          "e": "out",
+          "t0": 0,
+          "t1": 1
+        },
+        "size2": {
+          "a": 0.3,
+          "b": 0.045,
+          "e": "out",
+          "t0": 0,
+          "t1": 1
+        },
+        "points": 5,
+        "rot": 0,
+        "aspect": 0.4,
+        "stroke": 0,
+        "falloff": 0.35,
+        "intensity": {
+          "a": 0.85,
+          "b": 0,
+          "e": "in",
+          "t0": 0.15,
+          "t1": 0.8
+        }
+      },
+      "x": 40,
+      "y": 640
+    },
+    {
+      "id": "n9",
+      "type": "Blend",
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      },
+      "x": 880,
+      "y": 40
+    },
+    {
+      "id": "n10",
+      "type": "Palette",
+      "params": {
+        "colors": [
+          "#2e5fa0",
+          "#5eb0e8",
+          "#a3e0ff",
+          "#dff6ff",
+          "#ffffff"
+        ],
+        "cutoff": 0.13,
+        "shift": 0,
+        "mode": "bands",
+        "key": "alpha",
+        "opacity": 1
+      },
+      "x": 1090,
+      "y": 40
+    },
+    {
+      "id": "n11",
+      "type": "Outline",
+      "params": {
+        "color": "#2e5fa0",
+        "threshold": 0.5,
+        "width": 1,
+        "corners": false,
+        "mode": "outer"
+      },
+      "x": 1300,
+      "y": 40
+    },
+    {
+      "id": "n12",
+      "type": "Tint",
+      "params": {
+        "color": "#ffffff",
+        "amount": 0,
+        "bright": 1,
+        "opacity": {
+          "k": [
+            [
+              0,
+              1
+            ],
+            [
+              22,
+              1
+            ],
+            [
+              23,
+              0
+            ]
+          ]
+        }
+      },
+      "x": 1510,
+      "y": 40
+    },
+    {
+      "id": "n13",
+      "type": "Output",
+      "params": {
+        "alpha": "hard",
+        "threshold": 0.5
+      },
+      "x": 1720,
+      "y": 40
+    }
+  ],
+  "links": [
+    {
+      "f": "n1",
+      "t": "n3",
+      "p": 0
+    },
+    {
+      "f": "n2",
+      "t": "n3",
+      "p": 1
+    },
+    {
+      "f": "n3",
+      "t": "n5",
+      "p": 0
+    },
+    {
+      "f": "n4",
+      "t": "n5",
+      "p": 1
+    },
+    {
+      "f": "n5",
+      "t": "n7",
+      "p": 0
+    },
+    {
+      "f": "n6",
+      "t": "n7",
+      "p": 1
+    },
+    {
+      "f": "n7",
+      "t": "n9",
+      "p": 0
+    },
+    {
+      "f": "n8",
+      "t": "n9",
+      "p": 1
+    },
+    {
+      "f": "n9",
+      "t": "n10",
+      "p": 0
+    },
+    {
+      "f": "n10",
+      "t": "n11",
+      "p": 0
+    },
+    {
+      "f": "n11",
+      "t": "n12",
+      "p": 0
+    },
+    {
+      "f": "n12",
+      "t": "n13",
+      "p": 0
+    }
+  ],
+  "game": {
+    "style": "hero-pixel-v1",
+    "pivot": [
+      0.5,
+      0.78
+    ],
+    "logicalSize": 96,
+    "blend": "normal",
+    "impactFrame": 2,
+    "durationMs": 1000,
+    "role": "ice",
+    "referenceCell": 62
+  },
+  "sourceKey": "[\"ice\",\"ice\",null,null,45,60,2.6,200,0.09,2,0,55,150,1,0,0.6,true]",
+  "sourceRecipe": {
+    "id": "ice",
+    "label": "얼음",
+    "effect": "ice",
+    "palette": "ice",
+    "params": {
+      "count": 45,
+      "life": 60,
+      "speed": 2.6,
+      "spread": 200,
+      "gravity": 0.09,
+      "size": 2,
+      "angle": 0,
+      "pitch": 55,
+      "arc": 150,
+      "dir": 1,
+      "alt": false,
+      "ghosts": 0,
+      "glow": 0.6,
+      "ring": true,
+      "flash": 0.3,
+      "hitstop": 60,
+      "shake": 4,
+      "slowmo": 1,
+      "loop": false,
+      "interval": 1.1
+    }
+  }
+}

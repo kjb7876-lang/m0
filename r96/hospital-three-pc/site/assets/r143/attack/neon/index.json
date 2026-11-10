@@ -1,0 +1,113 @@
+{
+ "hero": "neon",
+ "action": "attack",
+ "order": "예비 2 · 타격 2 · 회수 2 (README)",
+ "mirroredInGame": {
+  "w": "e",
+  "sw": "se",
+  "nw": "ne"
+ },
+ "applied": "기본 공격(멈춰 서서) 프레임 애니메이션 — client-source/attack-anim-r143.js",
+ "directions": {
+  "s": {
+   "path": "assets/r143/attack/neon/attack-s.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    225
+   ],
+   "source": {
+    "driveId": "1jJ9yBuKSSvV7bsW_JtXPP8IBfWCP8MkF",
+    "file": "HERO-neon-attack-s.png",
+    "sha256": "b6948c326953d54ad42f680a0a51a76f211ff594acab488552e4de6399dece06",
+    "bytes": 151944
+   },
+   "sha256": "aec48e306a82baab120c0fca2c173c5cc70042ad767a87e571db79e186740d31",
+   "bytes": 44270
+  },
+  "se": {
+   "path": "assets/r143/attack/neon/attack-se.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    225
+   ],
+   "source": {
+    "driveId": "1jJ9yBuKSSvV7bsW_JtXPP8IBfWCP8MkF",
+    "file": "HERO-neon-attack-se.png",
+    "sha256": "84ee4d83fcbd22174dc307c96131f8455b35da79aba94c83ac1bc7717feb3798",
+    "bytes": 138852
+   },
+   "sha256": "c2e71957f46d7c9d435e9f5c8b91254d2169ffb6c7b808c6dbf324e930f4a0e0",
+   "bytes": 41340
+  },
+  "e": {
+   "path": "assets/r143/attack/neon/attack-e.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1jJ9yBuKSSvV7bsW_JtXPP8IBfWCP8MkF",
+    "file": "HERO-neon-attack-e.png",
+    "sha256": "4ccf8fd7be3f1893cff60048864df7ff65fa343a9202edf8dcab787de48a5164",
+    "bytes": 105949
+   },
+   "sha256": "137c8edd50112ccc3007206b5c1f4bf883b3c5395cc3f1ef7f4dab8c7c72ff85",
+   "bytes": 32838
+  },
+  "ne": {
+   "path": "assets/r143/attack/neon/attack-ne.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1jJ9yBuKSSvV7bsW_JtXPP8IBfWCP8MkF",
+    "file": "HERO-neon-attack-ne.png",
+    "sha256": "7b5c0330e452e26fdd294676c3785ed9d3a3c0e559d1c8729336a593d7e0edff",
+    "bytes": 130947
+   },
+   "sha256": "efcbae3c504091578a57cd862a0e9bdad7b3a7c5581f959e97971b81a6fafffc",
+   "bytes": 40002
+  },
+  "n": {
+   "path": "assets/r143/attack/neon/attack-n.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1jJ9yBuKSSvV7bsW_JtXPP8IBfWCP8MkF",
+    "file": "HERO-neon-attack-n.png",
+    "sha256": "23d56f1ad237b4c2d7bc3a741ddf3e52dd8f010ff97f66823c000c645b0de81f",
+    "bytes": 144761
+   },
+   "sha256": "efa294f3fc2f8be9f6a0a6682090fda36547d354b4451f27f5e63f3524117950",
+   "bytes": 44382
+  }
+ }
+}

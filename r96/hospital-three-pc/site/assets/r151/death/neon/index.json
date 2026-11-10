@@ -1,0 +1,113 @@
+{
+ "hero": "neon",
+ "action": "death",
+ "order": "휘청 2 → 무릎 1 → 눕기 3 (README)",
+ "mirroredInGame": {
+  "w": "e",
+  "sw": "se",
+  "nw": "ne"
+ },
+ "applied": "쓰러질 때(R151 death-r151.js) 프레임 애니메이션 — client-source/attack-anim-r143.js",
+ "directions": {
+  "s": {
+   "path": "assets/r143/death/neon/death-s.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1jJ9yBuKSSvV7bsW_JtXPP8IBfWCP8MkF",
+    "file": "HERO-neon-death-s.png",
+    "sha256": "48bcb49cc2f21d9f6ee4bee8700f82a789cea249ba7fcd2f84d84012e69b02f5",
+    "bytes": 105378
+   },
+   "sha256": "4a0648ed0d6412e4f8275f55ae1a8ff139438c6e4e7b9479393c752d8ee720c3",
+   "bytes": 30848
+  },
+  "se": {
+   "path": "assets/r143/death/neon/death-se.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1jJ9yBuKSSvV7bsW_JtXPP8IBfWCP8MkF",
+    "file": "HERO-neon-death-se.png",
+    "sha256": "c55bd167440ad267e1da2675c05eb3c1bbfec34870819c4e45bf694578722056",
+    "bytes": 96363
+   },
+   "sha256": "d0e1a21a1b5a5d4b7f8f06f0fd227cac136f5554ec7ee9a0dd533062a50edaea",
+   "bytes": 28870
+  },
+  "e": {
+   "path": "assets/r143/death/neon/death-e.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    223
+   ],
+   "source": {
+    "driveId": "1jJ9yBuKSSvV7bsW_JtXPP8IBfWCP8MkF",
+    "file": "HERO-neon-death-e.png",
+    "sha256": "01eeafd5c5640b82fa703df298cea9138c1f11103a56747802d373be6b6588f7",
+    "bytes": 75098
+   },
+   "sha256": "9cf89f4b6cf519c36829a1ea3479190b9f47c1a08d1e0a7bb25fd0aaa0a94024",
+   "bytes": 22768
+  },
+  "ne": {
+   "path": "assets/r143/death/neon/death-ne.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    227
+   ],
+   "source": {
+    "driveId": "1jJ9yBuKSSvV7bsW_JtXPP8IBfWCP8MkF",
+    "file": "HERO-neon-death-ne.png",
+    "sha256": "cfa882b319e5b2493d23a8816a4638c4e737438be077e9cfd00e531df3e8489c",
+    "bytes": 92455
+   },
+   "sha256": "aafa2b1dcbdbf32c62d115bfa355142b66acac026cafc72ab3b0f0e0a2a2d0f7",
+   "bytes": 27926
+  },
+  "n": {
+   "path": "assets/r143/death/neon/death-n.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    224
+   ],
+   "source": {
+    "driveId": "1jJ9yBuKSSvV7bsW_JtXPP8IBfWCP8MkF",
+    "file": "HERO-neon-death-n.png",
+    "sha256": "82c3fe0e6358afb6d67128a95927d2b07c1f9643448212acfcc1bc8e75a0acb4",
+    "bytes": 104998
+   },
+   "sha256": "82c402a5fd2848a9c18189ca3546f644a263885f5f30d8edcebb6ef532778abd",
+   "bytes": 30764
+  }
+ }
+}

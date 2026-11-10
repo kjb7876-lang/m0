@@ -1,0 +1,113 @@
+{
+ "hero": "lauren",
+ "action": "hit",
+ "order": "피격 충격 → 뒤로 젖힘 (README)",
+ "mirroredInGame": {
+  "w": "e",
+  "sw": "se",
+  "nw": "ne"
+ },
+ "applied": "맞았을 때 프레임 애니메이션 — client-source/attack-anim-r143.js",
+ "directions": {
+  "s": {
+   "path": "assets/r143/hit/lauren/hit-s.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    225
+   ],
+   "source": {
+    "driveId": "1nk0xW0f8tobHGGAL4e-yYGJ5t4SVi6kL",
+    "file": "HERO-lauren-hit-s.png",
+    "sha256": "47cb622202efd5b0230e1c785031f3ea57ae1c7326dd6c68cc7c9c06e564f755",
+    "bytes": 51359
+   },
+   "sha256": "330d8fdcf8d3ac1b428934b041ebaf126ff9b211ae6751e3bc623e91c094a3a8",
+   "bytes": 16606
+  },
+  "se": {
+   "path": "assets/r143/hit/lauren/hit-se.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    223
+   ],
+   "source": {
+    "driveId": "1nk0xW0f8tobHGGAL4e-yYGJ5t4SVi6kL",
+    "file": "HERO-lauren-hit-se.png",
+    "sha256": "fca1d40bd1bd4a1c9725e84f2f0dfa2087c3b7952b43e45893f6affe3059bad3",
+    "bytes": 46962
+   },
+   "sha256": "00fa774b31faabe02b47da6553d772928a95f4e8a95688390d10ac11c6147336",
+   "bytes": 15560
+  },
+  "e": {
+   "path": "assets/r143/hit/lauren/hit-e.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    227
+   ],
+   "source": {
+    "driveId": "1nk0xW0f8tobHGGAL4e-yYGJ5t4SVi6kL",
+    "file": "HERO-lauren-hit-e.png",
+    "sha256": "f0030ed46cf14a4fdec623d2e04414c31dbd5d444e6b591589665dc67d80e3a7",
+    "bytes": 27360
+   },
+   "sha256": "fe3defbbf941727567389ed487c109af8daea24d1039aaa3662f33c2825cffdd",
+   "bytes": 10680
+  },
+  "ne": {
+   "path": "assets/r143/hit/lauren/hit-ne.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1nk0xW0f8tobHGGAL4e-yYGJ5t4SVi6kL",
+    "file": "HERO-lauren-hit-ne.png",
+    "sha256": "03600436cb0fdd94435238ab308adce1ac7bbe49f7428d49c115362134228653",
+    "bytes": 41649
+   },
+   "sha256": "45f3e941f4e267ce2f13507166f0a97b078271d07a65a906ee302b39fa03ef92",
+   "bytes": 13644
+  },
+  "n": {
+   "path": "assets/r143/hit/lauren/hit-n.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1nk0xW0f8tobHGGAL4e-yYGJ5t4SVi6kL",
+    "file": "HERO-lauren-hit-n.png",
+    "sha256": "8d18e20ea8ddbe2a36cb3ec325d80f4d0c133c8e2c9a7f8ee5b9a1334e2ff67f",
+    "bytes": 45167
+   },
+   "sha256": "096e4a7c63cddc0fc134f5ecd2076058bd936e386bc1d37429f259de58dd5de4",
+   "bytes": 14464
+  }
+ }
+}

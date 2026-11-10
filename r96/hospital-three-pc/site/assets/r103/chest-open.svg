@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="176" viewBox="0 0 200 176">
+<defs>
+<linearGradient id="w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a4a2a"/><stop offset=".55" stop-color="#5a341d"/><stop offset="1" stop-color="#3a2112"/></linearGradient>
+<linearGradient id="s" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3c2414"/><stop offset="1" stop-color="#2a180c"/></linearGradient>
+<linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0b0"/><stop offset=".35" stop-color="#e2b54c"/><stop offset="1" stop-color="#8a6420"/></linearGradient>
+<radialGradient id="glow" cx=".5" cy=".75" r=".6"><stop offset="0" stop-color="#fff6c8" stop-opacity=".95"/><stop offset=".5" stop-color="#ffcf60" stop-opacity=".45"/><stop offset="1" stop-color="#ffcf60" stop-opacity="0"/></radialGradient>
+</defs>
+<!-- lid swung back -->
+<path d="M26 74 L40 12 Q90 0 146 12 L150 74 Z" fill="#4a2b17"/>
+<path d="M40 14 Q90 4 144 14 L146 22 Q90 12 42 22 Z" fill="url(#g)"/>
+<path d="M150 74 L146 12 L172 4 L176 60 Z" fill="#3a2112"/>
+<!-- inner cavity -->
+<path d="M22 78 L150 78 L176 64 L48 64 Z" fill="#1c0f06"/>
+<ellipse cx="96" cy="70" rx="62" ry="9" fill="#ffd257"/>
+<g fill="#ffe58a" stroke="#a87a22" stroke-width="1"><circle cx="66" cy="68" r="5"/><circle cx="80" cy="66" r="5"/><circle cx="104" cy="67" r="5"/><circle cx="122" cy="69" r="5"/><circle cx="92" cy="71" r="5"/></g>
+<path d="M98 48 L104 62 L92 62 Z" fill="#9fe3ff" stroke="#3a7aa0"/>
+<!-- side face -->
+<path d="M150 78 L176 64 L176 140 L150 160 Z" fill="url(#s)"/>
+<!-- front body -->
+<rect x="22" y="78" width="128" height="82" rx="4" fill="url(#w)"/>
+<g stroke="#2b170b" stroke-width="2" opacity=".55"><line x1="22" y1="104" x2="150" y2="104"/><line x1="22" y1="130" x2="150" y2="130"/></g>
+<g fill="url(#g)" stroke="#5a3c10" stroke-width="1.5">
+<path d="M18 76 L154 76 L154 86 L18 86 Z"/>
+<rect x="38" y="86" width="14" height="74"/>
+<rect x="120" y="86" width="14" height="74"/>
+<rect x="18" y="152" width="136" height="9" rx="2"/>
+<path d="M150 152 L178 132 L178 140 L150 161 Z"/>
+</g>
+<rect x="72" y="80" width="28" height="22" rx="5" fill="url(#g)" stroke="#5a3c10" stroke-width="2"/>
+<!-- light pouring out -->
+<ellipse cx="96" cy="58" rx="86" ry="56" fill="url(#glow)"/>
+</svg>

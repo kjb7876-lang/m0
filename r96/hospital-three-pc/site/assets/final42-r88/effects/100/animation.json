@@ -1,0 +1,296 @@
+{
+  "id": "storyworld-100-disease-spores",
+  "sourceIndex": 100,
+  "atlas": "atlas.png",
+  "atlasSize": {
+    "w": 1024,
+    "h": 1024
+  },
+  "frameSize": {
+    "w": 256,
+    "h": 256
+  },
+  "frameCount": 16,
+  "paintedNonemptyFrames": 15,
+  "transparentEndFrames": 1,
+  "totalDurationMs": 1440,
+  "loop": false,
+  "alpha": "straight",
+  "blendMode": "normal",
+  "filter": "linear",
+  "mipmaps": false,
+  "pivot": {
+    "x": 0.5,
+    "y": 0.5
+  },
+  "sourceAsset": "new_assets/vfx-batch01/11-disease-contact-spores.png",
+  "canonicalMapping": [
+    {
+      "zone": "ep1a08",
+      "scene": "08",
+      "title": "피로 물든 병원",
+      "objective": "병원 관찰·길 찾기",
+      "narrator": "〈EGO의 기억〉",
+      "lore_pointer": "/records/7"
+    }
+  ],
+  "loreLimit": "Mechanic/source asset exists; no specific hero or boss attribution unless separately evidenced.",
+  "frames": [
+    {
+      "index": 0,
+      "file": "frames/frame-00.png",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "durationMs": 90,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "phase": "birth"
+    },
+    {
+      "index": 1,
+      "file": "frames/frame-01.png",
+      "rect": {
+        "x": 256,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "durationMs": 90,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "phase": "birth"
+    },
+    {
+      "index": 2,
+      "file": "frames/frame-02.png",
+      "rect": {
+        "x": 512,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "durationMs": 90,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "phase": "birth"
+    },
+    {
+      "index": 3,
+      "file": "frames/frame-03.png",
+      "rect": {
+        "x": 768,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "durationMs": 90,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "phase": "impact"
+    },
+    {
+      "index": 4,
+      "file": "frames/frame-04.png",
+      "rect": {
+        "x": 0,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "durationMs": 90,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "phase": "impact"
+    },
+    {
+      "index": 5,
+      "file": "frames/frame-05.png",
+      "rect": {
+        "x": 256,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "durationMs": 90,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "phase": "impact"
+    },
+    {
+      "index": 6,
+      "file": "frames/frame-06.png",
+      "rect": {
+        "x": 512,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "durationMs": 90,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "phase": "impact"
+    },
+    {
+      "index": 7,
+      "file": "frames/frame-07.png",
+      "rect": {
+        "x": 768,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "durationMs": 90,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "phase": "release"
+    },
+    {
+      "index": 8,
+      "file": "frames/frame-08.png",
+      "rect": {
+        "x": 0,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "durationMs": 90,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "phase": "release"
+    },
+    {
+      "index": 9,
+      "file": "frames/frame-09.png",
+      "rect": {
+        "x": 256,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "durationMs": 90,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "phase": "release"
+    },
+    {
+      "index": 10,
+      "file": "frames/frame-10.png",
+      "rect": {
+        "x": 512,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "durationMs": 90,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "phase": "release"
+    },
+    {
+      "index": 11,
+      "file": "frames/frame-11.png",
+      "rect": {
+        "x": 768,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "durationMs": 90,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "phase": "release"
+    },
+    {
+      "index": 12,
+      "file": "frames/frame-12.png",
+      "rect": {
+        "x": 0,
+        "y": 768,
+        "w": 256,
+        "h": 256
+      },
+      "durationMs": 90,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "phase": "dissipation"
+    },
+    {
+      "index": 13,
+      "file": "frames/frame-13.png",
+      "rect": {
+        "x": 256,
+        "y": 768,
+        "w": 256,
+        "h": 256
+      },
+      "durationMs": 90,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "phase": "dissipation"
+    },
+    {
+      "index": 14,
+      "file": "frames/frame-14.png",
+      "rect": {
+        "x": 512,
+        "y": 768,
+        "w": 256,
+        "h": 256
+      },
+      "durationMs": 90,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "phase": "dissipation"
+    },
+    {
+      "index": 15,
+      "file": "frames/frame-15.png",
+      "rect": {
+        "x": 768,
+        "y": 768,
+        "w": 256,
+        "h": 256
+      },
+      "durationMs": 90,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "phase": "transparent-end"
+    }
+  ]
+}

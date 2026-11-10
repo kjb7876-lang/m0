@@ -1,0 +1,352 @@
+{
+  "id": "hospital-scalpel-slash-impact",
+  "version": "1.0.0",
+  "usage": [
+    "ep1a08 hospital scene08",
+    "ep1a09 injection room scene09-1"
+  ],
+  "canonStatus": "User-approved gameplay restoration; not a claim of exact canonical lore.",
+  "phase": "Slash and impact only, not complete weapon attack.",
+  "atlas": "atlas.png",
+  "atlasSize": {
+    "w": 1280,
+    "h": 1280
+  },
+  "frameSize": {
+    "w": 320,
+    "h": 320
+  },
+  "grid": {
+    "columns": 4,
+    "rows": 4
+  },
+  "frames": [
+    {
+      "file": "frames/scalpel-00.png",
+      "index": 0,
+      "durationMs": 40,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 320
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "file": "frames/scalpel-01.png",
+      "index": 1,
+      "durationMs": 40,
+      "rect": {
+        "x": 320,
+        "y": 0,
+        "w": 320,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 320
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "file": "frames/scalpel-02.png",
+      "index": 2,
+      "durationMs": 40,
+      "rect": {
+        "x": 640,
+        "y": 0,
+        "w": 320,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 320
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "file": "frames/scalpel-03.png",
+      "index": 3,
+      "durationMs": 40,
+      "rect": {
+        "x": 960,
+        "y": 0,
+        "w": 320,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 320
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "file": "frames/scalpel-04.png",
+      "index": 4,
+      "durationMs": 40,
+      "rect": {
+        "x": 0,
+        "y": 320,
+        "w": 320,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 320
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "file": "frames/scalpel-05.png",
+      "index": 5,
+      "durationMs": 40,
+      "rect": {
+        "x": 320,
+        "y": 320,
+        "w": 320,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 320
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "file": "frames/scalpel-06.png",
+      "index": 6,
+      "durationMs": 40,
+      "rect": {
+        "x": 640,
+        "y": 320,
+        "w": 320,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 320
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "file": "frames/scalpel-07.png",
+      "index": 7,
+      "durationMs": 40,
+      "rect": {
+        "x": 960,
+        "y": 320,
+        "w": 320,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 320
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "file": "frames/scalpel-08.png",
+      "index": 8,
+      "durationMs": 40,
+      "rect": {
+        "x": 0,
+        "y": 640,
+        "w": 320,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 320
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "file": "frames/scalpel-09.png",
+      "index": 9,
+      "durationMs": 40,
+      "rect": {
+        "x": 320,
+        "y": 640,
+        "w": 320,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 320
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "file": "frames/scalpel-10.png",
+      "index": 10,
+      "durationMs": 40,
+      "rect": {
+        "x": 640,
+        "y": 640,
+        "w": 320,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 320
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "file": "frames/scalpel-11.png",
+      "index": 11,
+      "durationMs": 40,
+      "rect": {
+        "x": 960,
+        "y": 640,
+        "w": 320,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 320
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "file": "frames/scalpel-12.png",
+      "index": 12,
+      "durationMs": 40,
+      "rect": {
+        "x": 0,
+        "y": 960,
+        "w": 320,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 320
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "file": "frames/scalpel-13.png",
+      "index": 13,
+      "durationMs": 40,
+      "rect": {
+        "x": 320,
+        "y": 960,
+        "w": 320,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 320
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "file": "frames/scalpel-14.png",
+      "index": 14,
+      "durationMs": 40,
+      "rect": {
+        "x": 640,
+        "y": 960,
+        "w": 320,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 320
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "file": "frames/scalpel-15.png",
+      "index": 15,
+      "durationMs": 40,
+      "rect": {
+        "x": 960,
+        "y": 960,
+        "w": 320,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 320
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  ],
+  "fps": 25,
+  "durationMs": 640,
+  "loop": false,
+  "onComplete": "hide or destroy effect; do not freeze final frame",
+  "impactFrame": 6,
+  "impactTimeMs": 240,
+  "origin": "top-left",
+  "pivotNormalized": [
+    0.5,
+    0.5
+  ],
+  "orientation": "Clockwise crescent from upper-left toward right and lower-right; forward axis +X; screen Y down.",
+  "blend": "normal straight-alpha; optional additive accent only",
+  "premultipliedAlpha": false,
+  "filter": "linear",
+  "mipmaps": false,
+  "uncompressedAtlasBytes": 6553600,
+  "runtimeNotes": [
+    "No trimming or per-frame recentering.",
+    "Use elapsed time rather than render frame count.",
+    "Hitbox and gameplay damage must be configured separately.",
+    "Place at attack origin; rotate whole animation once to aim, never substitute rotation for frame playback."
+  ]
+}

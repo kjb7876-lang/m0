@@ -1,0 +1,113 @@
+{
+ "hero": "hwando",
+ "action": "attack",
+ "order": "예비 2 · 타격 2 · 회수 2 (README)",
+ "mirroredInGame": {
+  "w": "e",
+  "sw": "se",
+  "nw": "ne"
+ },
+ "applied": "기본 공격(멈춰 서서) 프레임 애니메이션 — client-source/attack-anim-r143.js",
+ "directions": {
+  "s": {
+   "path": "assets/r143/attack/hwando/attack-s.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    219
+   ],
+   "source": {
+    "driveId": "11ZwaUoWagAuXowTsYLzXUTNTbT1umjKK",
+    "file": "HERO-hwando-attack-s.png",
+    "sha256": "91eb906be42a1aed34748931a67e4700ae6424b5e2cf4d0a6148a79285d4463c",
+    "bytes": 224857
+   },
+   "sha256": "88d80e5f160864ab57cfea9ea67cbcbfca2b2b27a67039606de12d243e0a016d",
+   "bytes": 60054
+  },
+  "se": {
+   "path": "assets/r143/attack/hwando/attack-se.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    220
+   ],
+   "source": {
+    "driveId": "11ZwaUoWagAuXowTsYLzXUTNTbT1umjKK",
+    "file": "HERO-hwando-attack-se.png",
+    "sha256": "44f6a0bb779b89582c31e0a396ff8496b172308f585cab6cb335a2faad83c380",
+    "bytes": 199655
+   },
+   "sha256": "207ac9133d583299edb959eb4136ebcdb681df4d1b7a464a49c81b75f7c0e20f",
+   "bytes": 54058
+  },
+  "e": {
+   "path": "assets/r143/attack/hwando/attack-e.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "11ZwaUoWagAuXowTsYLzXUTNTbT1umjKK",
+    "file": "HERO-hwando-attack-e.png",
+    "sha256": "f5e4e027f1d15df92a2e17d9fa8cce370c27caf4cd226f0734a7fff08c742936",
+    "bytes": 203925
+   },
+   "sha256": "c700a800f44bea3038456b11e745bcb16d723bd4287faaa2481e554fcee24a01",
+   "bytes": 55768
+  },
+  "ne": {
+   "path": "assets/r143/attack/hwando/attack-ne.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "11ZwaUoWagAuXowTsYLzXUTNTbT1umjKK",
+    "file": "HERO-hwando-attack-ne.png",
+    "sha256": "114525264d09cf2540c82a26803d42145290e43bb63dce7ba85b9e50fdbd1699",
+    "bytes": 179842
+   },
+   "sha256": "cfe1844c50fa6b7dde2b5dc090fadc9474ae49808c78e112413469940bd7a56f",
+   "bytes": 45480
+  },
+  "n": {
+   "path": "assets/r143/attack/hwando/attack-n.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "11ZwaUoWagAuXowTsYLzXUTNTbT1umjKK",
+    "file": "HERO-hwando-attack-n.png",
+    "sha256": "185f15195b03363b3c8dd9bd3284e5422a4b49562ffde0e1f1faa6e337180109",
+    "bytes": 202048
+   },
+   "sha256": "2962811d4f256a8ee233bc6fa189a7a52bec534cd5a8dddcb663eba49ec7fac0",
+   "bytes": 50666
+  }
+ }
+}

@@ -1,0 +1,732 @@
+{
+ "schema": "storyworld.r117.scene/v1",
+ "revision": "R117",
+ "note": "Drive 2026-10-28 적용본(게임 반영 전) 장면 소품. 원본 보존·가공 사본.",
+ "tracks": [
+  {
+   "id": "r02-petal",
+   "use": "R-02 해바라기 침상 꽃잎 닫힘",
+   "frames": 4,
+   "cell": [
+    117,
+    118
+   ],
+   "height": 118,
+   "files": [
+    {
+     "path": "assets/r117/scene/r02-petal-k1.png",
+     "bytes": 25346,
+     "sha256": "90faf5fae768426fe6c55d785da089cfb640e594811be8917005c9a8ff90a135",
+     "source": {
+      "zip": "StoryWorld-R02-sunflower-petal-closing4-ASSET-READY-part01-of04.zip",
+      "png": "candidate/frames/R02-petal-close-K1.png",
+      "sha256": "1d9013e1be2dfdc26d9ca9054958bf632af6a24fcc657c02f12e87e792d1e8c5"
+     }
+    },
+    {
+     "path": "assets/r117/scene/r02-petal-k2.png",
+     "bytes": 25247,
+     "sha256": "d81a2c14166cd964234be1707e10a408b0dd6a36579d914cd7a069d419bb1cc1",
+     "source": {
+      "zip": "StoryWorld-R02-sunflower-petal-closing4-ASSET-READY-part02-of04.zip",
+      "png": "candidate/frames/R02-petal-close-K2.png",
+      "sha256": "ca07cd03950c0217080306ffa6ecd692f26457fcfbc5ceb218c9ef77abef36e4"
+     }
+    },
+    {
+     "path": "assets/r117/scene/r02-petal-k3.png",
+     "bytes": 25285,
+     "sha256": "322aa6c6adc2741f9b13fff51825a67a78cad412caf25366968a424b73b138e2",
+     "source": {
+      "zip": "StoryWorld-R02-sunflower-petal-closing4-ASSET-READY-part01-of04.zip",
+      "png": "candidate/frames/R02-petal-close-K3.png",
+      "sha256": "23db95f6ead91465ef62cfff8e31f65d7e9b570af7bede524ff1143507c3227d"
+     }
+    },
+    {
+     "path": "assets/r117/scene/r02-petal-k4.png",
+     "bytes": 25203,
+     "sha256": "9a5e372d2648b7ed04ea71f910493d234e6bf922ec66466df4a34be6cba2385e",
+     "source": {
+      "zip": "StoryWorld-R02-sunflower-petal-closing4-ASSET-READY-part02-of04.zip",
+      "png": "candidate/frames/R02-petal-close-K4.png",
+      "sha256": "560aff09c234da7084e460196e3747608f635e8bfd6c4b4fbd2229b1a73afe61"
+     }
+    }
+   ],
+   "zips": [
+    {
+     "name": "StoryWorld-R02-sunflower-petal-closing4-ASSET-READY-part01-of04.zip",
+     "bytes": 2999875,
+     "sha256": "3b843051e59fdccf87796e9b03ff99832964c781a4fb15a37997df8e5f3767dc"
+    },
+    {
+     "name": "StoryWorld-R02-sunflower-petal-closing4-ASSET-READY-part02-of04.zip",
+     "bytes": 2993586,
+     "sha256": "97f58fe3be48fd5a0baef3c23a19b157a074e354a15dbd6e763dd68b8d1e60ed"
+    },
+    {
+     "name": "StoryWorld-R02-sunflower-petal-closing4-ASSET-READY-part03-of04.zip",
+     "bytes": 2894512,
+     "sha256": "d0b9530302860d8d24de943bf1b32877fc87c01bc3452d1b964b8c0b74245c4a"
+    },
+    {
+     "name": "StoryWorld-R02-sunflower-petal-closing4-ASSET-READY-part04-of04.zip",
+     "bytes": 937992,
+     "sha256": "68227ef57bc13af04af3767dbdfb7884171d7a59379a32d54a35b8f8b47e7cc3"
+    }
+   ],
+   "oneShot": true
+  },
+  {
+   "id": "r03-chair",
+   "use": "R-03 빈 의자 두 개 벌리기",
+   "frames": 4,
+   "cell": [
+    130,
+    92
+   ],
+   "height": 92,
+   "files": [
+    {
+     "path": "assets/r117/scene/r03-chair-k1.png",
+     "bytes": 13539,
+     "sha256": "3475aeec6a42c5677af50f6da5dbe95301714d15aa74486c8871959082d9cda0",
+     "source": {
+      "zip": "StoryWorld-R03-chair-separation4-asset-ready-20261028-PART03.zip",
+      "png": "frames/R03-chair-separation-K1-padded.png",
+      "sha256": "7360d7b1d4a6549b3982ac4fd457d1f892a16c7307d0e4769f3249645ca82f98"
+     }
+    },
+    {
+     "path": "assets/r117/scene/r03-chair-k2.png",
+     "bytes": 14088,
+     "sha256": "cb630914670a272c99749fba5dab8ffe05f875c1c6832df21cf4dd927de33bf4",
+     "source": {
+      "zip": "StoryWorld-R03-chair-separation4-asset-ready-20261028-PART03.zip",
+      "png": "frames/R03-chair-separation-K2-padded.png",
+      "sha256": "fdb2130c763127a0b336d66623c51051eb5179128d7691beec2a6c6267a7f204"
+     }
+    },
+    {
+     "path": "assets/r117/scene/r03-chair-k3.png",
+     "bytes": 14264,
+     "sha256": "e600b5b85a050bdf4ff12fa3c279243e1d6647889a9e1112f4a43aa083f436ba",
+     "source": {
+      "zip": "StoryWorld-R03-chair-separation4-asset-ready-20261028-PART03.zip",
+      "png": "frames/R03-chair-separation-K3-padded.png",
+      "sha256": "b9f1c00f56d86ccb54634e2ab33977787c9bb6c41d9cb54440e44a4dd19e8745"
+     }
+    },
+    {
+     "path": "assets/r117/scene/r03-chair-k4.png",
+     "bytes": 13939,
+     "sha256": "b8c331a5afdc50767027907f400721865efe96f8b18784992604cbd6549353c3",
+     "source": {
+      "zip": "StoryWorld-R03-chair-separation4-asset-ready-20261028-PART03.zip",
+      "png": "frames/R03-chair-separation-K4-padded.png",
+      "sha256": "f4b5fa7e6a225d0f963d0be415912cd7b2e1dec81f823883bd8312ca89754fc5"
+     }
+    }
+   ],
+   "zips": [
+    {
+     "name": "StoryWorld-R03-chair-separation4-asset-ready-20261028-PART01.zip",
+     "bytes": 1982851,
+     "sha256": "984149eefe4d4fb0a99b4a74ee6dcbd8f48c8c962b08eceb13ebfb51c351e3c2"
+    },
+    {
+     "name": "StoryWorld-R03-chair-separation4-asset-ready-20261028-PART02.zip",
+     "bytes": 2556912,
+     "sha256": "883fa24bba119691b237cb86cb162ffb218da9b30df79b4f6716569446def376"
+    },
+    {
+     "name": "StoryWorld-R03-chair-separation4-asset-ready-20261028-PART03.zip",
+     "bytes": 2659803,
+     "sha256": "6ad32c629360ac13a5499c385d5e5393d8fac3b755d389247d3d27c19b7ebaa9"
+    }
+   ],
+   "oneShot": true
+  },
+  {
+   "id": "r07-lotus",
+   "use": "R-07 감시 수련 개화",
+   "frames": 4,
+   "cell": [
+    106,
+    120
+   ],
+   "height": 120,
+   "files": [
+    {
+     "path": "assets/r117/scene/r07-lotus-k1.png",
+     "bytes": 14709,
+     "sha256": "42ccda6b1631e43dab38e9407279feca20a8e43f389dba313d2cd15d4f013491",
+     "source": {
+      "zip": "StoryWorld-R07-lotus-opening4-ASSET-READY-part03-of03.zip",
+      "png": "candidate/frames/R07-lotus-open-K1.png",
+      "sha256": "607e1f9388bf366e912f59603fb668eb77e24a3a3962365ff216a292f7249154"
+     }
+    },
+    {
+     "path": "assets/r117/scene/r07-lotus-k2.png",
+     "bytes": 17276,
+     "sha256": "d6bd39dea97bf13ec8cc434d497dfecd2fb44b9d3ab51095ff88715772eee499",
+     "source": {
+      "zip": "StoryWorld-R07-lotus-opening4-ASSET-READY-part02-of03.zip",
+      "png": "candidate/frames/R07-lotus-open-K2.png",
+      "sha256": "864063cb705a69c726ed9ef8b23209f5e7b8dc1017f713cf5aaa1749595952e0"
+     }
+    },
+    {
+     "path": "assets/r117/scene/r07-lotus-k3.png",
+     "bytes": 19252,
+     "sha256": "9f4b1f58790446f5ec9f55148372ad4a91056c4b34c587c0ed3df9f9655e0419",
+     "source": {
+      "zip": "StoryWorld-R07-lotus-opening4-ASSET-READY-part01-of03.zip",
+      "png": "candidate/frames/R07-lotus-open-K3.png",
+      "sha256": "f6db9efcd040e76d99a439ba6fd51161beb2a635de1ae879528e2ccb3131cf63"
+     }
+    },
+    {
+     "path": "assets/r117/scene/r07-lotus-k4.png",
+     "bytes": 20079,
+     "sha256": "87744fa87a9d9068a5df5e3ed6fd305f2621529b379373eb27aa62a635bae93c",
+     "source": {
+      "zip": "StoryWorld-R07-lotus-opening4-ASSET-READY-part02-of03.zip",
+      "png": "candidate/frames/R07-lotus-open-K4.png",
+      "sha256": "696496a585a6a7feb61ee004b625604fee895e9fed02f1048d2827f0942a9b4d"
+     }
+    }
+   ],
+   "zips": [
+    {
+     "name": "StoryWorld-R07-lotus-opening4-ASSET-READY-part01-of03.zip",
+     "bytes": 2999957,
+     "sha256": "1b4d293a89aba2c7b9e305f3d67796a0922ea784c99436913eadae4dd52803ce"
+    },
+    {
+     "name": "StoryWorld-R07-lotus-opening4-ASSET-READY-part02-of03.zip",
+     "bytes": 2999469,
+     "sha256": "1871ad2e83e2b8c6dda8d419c1cccd6e1fd2c75940ec029bfcf62a2e6970d450"
+    },
+    {
+     "name": "StoryWorld-R07-lotus-opening4-ASSET-READY-part03-of03.zip",
+     "bytes": 549779,
+     "sha256": "f78576e1c8dfb7fb6b0c1ea1f0da419a1a72506b2984b80cce51d4aad43f3478"
+    }
+   ],
+   "oneShot": true
+  },
+  {
+   "id": "r07-lamp",
+   "use": "R-07 감시 수련 내광 소등",
+   "frames": 4,
+   "cell": [
+    105,
+    120
+   ],
+   "height": 120,
+   "files": [
+    {
+     "path": "assets/r117/scene/r07-lamp-k1.png",
+     "bytes": 20120,
+     "sha256": "ac62e12c2df287c9ad90ea88e07ebac6d79a5605aefe16770396a322a915bd0a",
+     "source": {
+      "zip": "StoryWorld-R07-surveillance-lotus-lampoff4-asset-ready-20261028-PART02.zip",
+      "png": "frames/R07-lampoff-K1-padded.png",
+      "sha256": "f5a26153d12e793b9f31a2cd3c4fa24715395a6b0c1f16fdd9a700e30706428c"
+     }
+    },
+    {
+     "path": "assets/r117/scene/r07-lamp-k2.png",
+     "bytes": 20125,
+     "sha256": "282723bc364918c789c5cdfef7887f7f65adfdcf1c4d36de75b88cf1a1d3c5dc",
+     "source": {
+      "zip": "StoryWorld-R07-surveillance-lotus-lampoff4-asset-ready-20261028-PART02.zip",
+      "png": "frames/R07-lampoff-K2-padded.png",
+      "sha256": "e949792f65153cd4d67f468dc8bb678d8c2465a697e51faf86d6cb46623b397e"
+     }
+    },
+    {
+     "path": "assets/r117/scene/r07-lamp-k3.png",
+     "bytes": 20097,
+     "sha256": "8ff0aa9b10821f522e89a1751d5a73d3019ee2ed87f97427ec91ca204efdc9c1",
+     "source": {
+      "zip": "StoryWorld-R07-surveillance-lotus-lampoff4-asset-ready-20261028-PART02.zip",
+      "png": "frames/R07-lampoff-K3-padded.png",
+      "sha256": "05a438e474d0a6b08fa2fa18ce70e70645a811a2fc4a9be489655d3789cfff51"
+     }
+    },
+    {
+     "path": "assets/r117/scene/r07-lamp-k4.png",
+     "bytes": 20319,
+     "sha256": "311b7b6a2fc63cd47ca7df0a4b80009d261f19fcf229236bff114bb32baf1ab4",
+     "source": {
+      "zip": "StoryWorld-R07-surveillance-lotus-lampoff4-asset-ready-20261028-PART02.zip",
+      "png": "frames/R07-lampoff-K4-padded.png",
+      "sha256": "06b658d83a87cff234333051979d64053e130873fe5e9c78e83e587654bee20f"
+     }
+    }
+   ],
+   "zips": [
+    {
+     "name": "StoryWorld-R07-surveillance-lotus-lampoff4-asset-ready-20261028-PART01.zip",
+     "bytes": 2702610,
+     "sha256": "991a6bbea74b447c31ed5cf3df4a49e5d32acdb62c13c6a85f4745fcb321eac1"
+    },
+    {
+     "name": "StoryWorld-R07-surveillance-lotus-lampoff4-asset-ready-20261028-PART02.zip",
+     "bytes": 1921764,
+     "sha256": "fe3b6199c402247467107622db1860838d7c76f224a0f296f3dd1da3b06dd49c"
+    }
+   ],
+   "oneShot": true
+  },
+  {
+   "id": "r07-cloth",
+   "use": "R-07 돌봄 흰 천 접기",
+   "frames": 4,
+   "cell": [
+    58,
+    46
+   ],
+   "height": 46,
+   "files": [
+    {
+     "path": "assets/r117/scene/r07-cloth-k1.png",
+     "bytes": 5503,
+     "sha256": "7151b43ceac9ca4028b67762972e51d73ef282eb18bb9023c43e40a94c38bed3",
+     "source": {
+      "zip": "StoryWorld-R07-care-cloth-fold4-ASSET-READY-part01-of04.zip",
+      "png": "candidate/frames/R07-care-cloth-fold-K1.png",
+      "sha256": "6f795710e8aef7387afc6007370fe48a092b58d472734a3d5a0441cf099c33bc"
+     }
+    },
+    {
+     "path": "assets/r117/scene/r07-cloth-k2.png",
+     "bytes": 5062,
+     "sha256": "e7114516773187923dd3f7fd9681e0c7da0024d2513f2accdd99483edd87fb30",
+     "source": {
+      "zip": "StoryWorld-R07-care-cloth-fold4-ASSET-READY-part02-of04.zip",
+      "png": "candidate/frames/R07-care-cloth-fold-K2.png",
+      "sha256": "99866587a5e1b7706aa63015a26602b656390718e737c5f750c5f90f53c3e847"
+     }
+    },
+    {
+     "path": "assets/r117/scene/r07-cloth-k3.png",
+     "bytes": 4597,
+     "sha256": "6b2a304c700b6c4ef9ebcf675ec6b1364b5a13fb1fcfbfac133b720ab1ae4ca6",
+     "source": {
+      "zip": "StoryWorld-R07-care-cloth-fold4-ASSET-READY-part03-of04.zip",
+      "png": "candidate/frames/R07-care-cloth-fold-K3.png",
+      "sha256": "ed0bc195e4bf9bf4d12e3b0a42ced623b487a52a56340b16f2c8021216ee8984"
+     }
+    },
+    {
+     "path": "assets/r117/scene/r07-cloth-k4.png",
+     "bytes": 4486,
+     "sha256": "f49f5b255b95302dd14f2f586c91a0bac99974359cbd0dd3e204a0b51c75c49a",
+     "source": {
+      "zip": "StoryWorld-R07-care-cloth-fold4-ASSET-READY-part03-of04.zip",
+      "png": "candidate/frames/R07-care-cloth-fold-K4.png",
+      "sha256": "6dc15f4e5e0a7fa191781a3c03add3222600d2bc106e67ff8610e1bda6c8f19d"
+     }
+    }
+   ],
+   "zips": [
+    {
+     "name": "StoryWorld-R07-care-cloth-fold4-ASSET-READY-part01-of04.zip",
+     "bytes": 2999946,
+     "sha256": "adfb266281a73ac096ac4bad2dfbf663e1dade6897630e575651663d9bd7e465"
+    },
+    {
+     "name": "StoryWorld-R07-care-cloth-fold4-ASSET-READY-part02-of04.zip",
+     "bytes": 2617330,
+     "sha256": "2643a182565e8df324a7d6b4ec1a42d7c1c2cfe4f0604af8eb2715bceb053aa3"
+    },
+    {
+     "name": "StoryWorld-R07-care-cloth-fold4-ASSET-READY-part03-of04.zip",
+     "bytes": 2678433,
+     "sha256": "365776050530c40e63b8798bb2e122ed427e3276c30e09fa6cdd1b0d266cbc3f"
+    },
+    {
+     "name": "StoryWorld-R07-care-cloth-fold4-ASSET-READY-part04-of04.zip",
+     "bytes": 398923,
+     "sha256": "ebeb70520380bd147a117ccf493821a7ab2a329d69936d8cab97c961ae3fe5f2"
+    }
+   ],
+   "oneShot": true
+  },
+  {
+   "id": "r16-page",
+   "use": "R-16 돌봄 기록 한 장 넘김",
+   "frames": 4,
+   "cell": [
+    75,
+    54
+   ],
+   "height": 54,
+   "files": [
+    {
+     "path": "assets/r117/scene/r16-page-k1.png",
+     "bytes": 6340,
+     "sha256": "4a78b1120c76d525a747c1ac685c6d1bd027ba9aeebd6054ac98724d63fda915",
+     "source": {
+      "zip": "StoryWorld-R16-care-record-page-turn4-asset-ready-20261028-PART02.zip",
+      "png": "frames/R16-page-turn-K1-padded.png",
+      "sha256": "f462a674e7ff79b8c01f24848db3756ffc47cac07a8ed5becf5face2036be0ce"
+     }
+    },
+    {
+     "path": "assets/r117/scene/r16-page-k2.png",
+     "bytes": 6619,
+     "sha256": "4816b979842a9a314a8efe7ebcbd71737bb64144a8e1625c10b284cc07eaaaff",
+     "source": {
+      "zip": "StoryWorld-R16-care-record-page-turn4-asset-ready-20261028-PART02.zip",
+      "png": "frames/R16-page-turn-K2-padded.png",
+      "sha256": "d0b76fc9a8bf8dffef6937cb4c473f72b48600a6f5e39b6973482c060440564f"
+     }
+    },
+    {
+     "path": "assets/r117/scene/r16-page-k3.png",
+     "bytes": 6660,
+     "sha256": "80dddc21be0801918e56844c9ba4e01d9fec4c2b7c697eacaccb397adac38d30",
+     "source": {
+      "zip": "StoryWorld-R16-care-record-page-turn4-asset-ready-20261028-PART02.zip",
+      "png": "frames/R16-page-turn-K3-padded.png",
+      "sha256": "716071aabd096685c33582c6cfa2647a8d5103e82b557564a8f0a35a5fb27bb8"
+     }
+    },
+    {
+     "path": "assets/r117/scene/r16-page-k4.png",
+     "bytes": 5955,
+     "sha256": "a40e684281e0ca3d918bdeb3e0bcfcd796e4320b99a13b698962d184647b1726",
+     "source": {
+      "zip": "StoryWorld-R16-care-record-page-turn4-asset-ready-20261028-PART02.zip",
+      "png": "frames/R16-page-turn-K4-padded.png",
+      "sha256": "fb97d0bb0de964fa0d74af0dd167a1efe3576ad76acb4d713b73ddbdebd48519"
+     }
+    }
+   ],
+   "zips": [
+    {
+     "name": "StoryWorld-R16-care-record-page-turn4-asset-ready-20261028-PART01.zip",
+     "bytes": 2228430,
+     "sha256": "6c33419386e5702299a7096be9068cb596c96b63d2f9cd387bbdb59f47c11551"
+    },
+    {
+     "name": "StoryWorld-R16-care-record-page-turn4-asset-ready-20261028-PART02.zip",
+     "bytes": 2547735,
+     "sha256": "80189bc357d842eef3ef051879a85e3616a9441c027ad39ad8aa124bde2c1f9d"
+    },
+    {
+     "name": "StoryWorld-R16-care-record-page-turn4-asset-ready-20261028-PART03.zip",
+     "bytes": 1205216,
+     "sha256": "ca370688e5f9f3874c4359b777770c85b2b021a2e7016eda6f88d2ea5069f807"
+    }
+   ],
+   "oneShot": true
+  },
+  {
+   "id": "s03-ring",
+   "use": "S-03 검은 반복명령 고리 연결 절단",
+   "frames": 4,
+   "cell": [
+    96,
+    104
+   ],
+   "height": 104,
+   "files": [
+    {
+     "path": "assets/r117/scene/s03-ring-k1.png",
+     "bytes": 15519,
+     "sha256": "c85ab798e7eb3d3c689c54652798c8461f9d28879466f6169b24356b8d6b1330",
+     "source": {
+      "zip": "StoryWorld-S03-ring-disconnect4-ASSET-READY-part02-of03.zip",
+      "png": "candidate/frames/S03-ring-sever-K1.png",
+      "sha256": "dbf39d9a78fa27ce01fe15ed922ec33d55cdc6811b1245027b47703350f0fdc1"
+     }
+    },
+    {
+     "path": "assets/r117/scene/s03-ring-k2.png",
+     "bytes": 15445,
+     "sha256": "dcba5011481c7d609f6ecfdc52f6ac6a63d6630e4d1852239b22c917c5387aa1",
+     "source": {
+      "zip": "StoryWorld-S03-ring-disconnect4-ASSET-READY-part02-of03.zip",
+      "png": "candidate/frames/S03-ring-sever-K2.png",
+      "sha256": "1e2f63c705631ebadae2c466ad9177e1ea52a7ecd9dd0009572adbfdebcd45ba"
+     }
+    },
+    {
+     "path": "assets/r117/scene/s03-ring-k3.png",
+     "bytes": 15703,
+     "sha256": "80dac0521ede892f830459da084e7ac61549b26635817e1a86290de7c3de3f2f",
+     "source": {
+      "zip": "StoryWorld-S03-ring-disconnect4-ASSET-READY-part02-of03.zip",
+      "png": "candidate/frames/S03-ring-sever-K3.png",
+      "sha256": "01fe67905a3869aca06cc63c12eed3cfbe2e2d4d7a7e46b0a00c864fa2da2b69"
+     }
+    },
+    {
+     "path": "assets/r117/scene/s03-ring-k4.png",
+     "bytes": 15735,
+     "sha256": "8aa7194697512b1fd43d594840c24af3d24aefac2c36120969d743e28560cb11",
+     "source": {
+      "zip": "StoryWorld-S03-ring-disconnect4-ASSET-READY-part02-of03.zip",
+      "png": "candidate/frames/S03-ring-sever-K4.png",
+      "sha256": "79e0288e52c3774ffc98f758cb880feb8bf77d273a1c71d5b875e5b719535188"
+     }
+    }
+   ],
+   "zips": [
+    {
+     "name": "StoryWorld-S03-ring-disconnect4-ASSET-READY-part01-of03.zip",
+     "bytes": 2952399,
+     "sha256": "4bec85c4fc14edd89f150ab1ac9a445858541ff9e90633b74c1502a39f39891c"
+    },
+    {
+     "name": "StoryWorld-S03-ring-disconnect4-ASSET-READY-part02-of03.zip",
+     "bytes": 2984721,
+     "sha256": "13e7bbcdd67e10df9113b5b2c53a8c995f08555d5413a951a7f448c5d1184503"
+    },
+    {
+     "name": "StoryWorld-S03-ring-disconnect4-ASSET-READY-part03-of03.zip",
+     "bytes": 1166319,
+     "sha256": "e1214055ad85da90cab9db34961d74edb70c64ddf5b5ddc1ab297d2ccc71a5b0"
+    }
+   ],
+   "oneShot": true
+  },
+  {
+   "id": "ns09-casing",
+   "use": "NS09 빈 탄피 살펴 돌림",
+   "frames": 4,
+   "cell": [
+    40,
+    34
+   ],
+   "height": 34,
+   "files": [
+    {
+     "path": "assets/r117/scene/ns09-casing-k1.png",
+     "bytes": 2474,
+     "sha256": "e1f191e1f3f4db9f45dcead011f7da0f1cc4cc7aa697a685eb1c3ff223aa226b",
+     "source": {
+      "zip": "StoryWorld-NS09-casing-inspect-turn4-asset-ready-20261028-PART02.zip",
+      "png": "frames/NS09-inspect-K1-padded.png",
+      "sha256": "801f2b7ac9cea5383563b49bdce60a25b21bae1456993b1370f4826366143793"
+     }
+    },
+    {
+     "path": "assets/r117/scene/ns09-casing-k2.png",
+     "bytes": 2489,
+     "sha256": "bee7ed266b758671c888293e433710789676021c9cb7b8e50898cee0d01ce345",
+     "source": {
+      "zip": "StoryWorld-NS09-casing-inspect-turn4-asset-ready-20261028-PART02.zip",
+      "png": "frames/NS09-inspect-K2-padded.png",
+      "sha256": "6e173e97cd8a4819caf181e2a6e4fd1ee3f5b8e36d4a853f68cec3769d1a17db"
+     }
+    },
+    {
+     "path": "assets/r117/scene/ns09-casing-k3.png",
+     "bytes": 2613,
+     "sha256": "f00d77784bc43d22ebd6c72782780a11a4ed712f999f3160665e8e8a90021e75",
+     "source": {
+      "zip": "StoryWorld-NS09-casing-inspect-turn4-asset-ready-20261028-PART02.zip",
+      "png": "frames/NS09-inspect-K3-padded.png",
+      "sha256": "0a8acd71368cbefd651b747d401e565f04bd54529ab7c6d106b665ffee6ef66d"
+     }
+    },
+    {
+     "path": "assets/r117/scene/ns09-casing-k4.png",
+     "bytes": 2614,
+     "sha256": "3542a588f2b33f36e42c1c06bed69d05d34175440119f1224ab3c25a14e099a9",
+     "source": {
+      "zip": "StoryWorld-NS09-casing-inspect-turn4-asset-ready-20261028-PART02.zip",
+      "png": "frames/NS09-inspect-K4-padded.png",
+      "sha256": "cea9c5d172efbef5e2f1a24b77068a2a0286100b2931670b13f1a68ac24cf7c8"
+     }
+    }
+   ],
+   "zips": [
+    {
+     "name": "StoryWorld-NS09-casing-inspect-turn4-asset-ready-20261028-PART01.zip",
+     "bytes": 1951461,
+     "sha256": "02a6a904603de58ec4185e7ad9ae96941c6f17f423b6f63ef46c65a2f93914fe"
+    },
+    {
+     "name": "StoryWorld-NS09-casing-inspect-turn4-asset-ready-20261028-PART02.zip",
+     "bytes": 1383437,
+     "sha256": "fd9712d93675036fdd2414287be5880a7f54c4c6c96aa4c7414d921ebf79574b"
+    }
+   ],
+   "oneShot": true
+  },
+  {
+   "id": "ep-cup",
+   "use": "종장 종이컵 뚜껑 누름·복귀",
+   "frames": 4,
+   "cell": [
+    29,
+    40
+   ],
+   "height": 40,
+   "files": [
+    {
+     "path": "assets/r117/scene/ep-cup-k1.png",
+     "bytes": 2264,
+     "sha256": "a39b05d84a4613cb40d72e213a26b9bccbc254b82e4cd9888f0b47e085a209e2",
+     "source": {
+      "zip": "StoryWorld-Epilogue-paper-cup-lid4-ASSET-READY-part02-of02.zip",
+      "png": "candidate/frames/EPILOGUE-cup-lid-K1.png",
+      "sha256": "bfa8b4e7d8e20874b7b472e5c19935153d2b12852c9761afb17d6e9eeccaae6f"
+     }
+    },
+    {
+     "path": "assets/r117/scene/ep-cup-k2.png",
+     "bytes": 2325,
+     "sha256": "0aff4fcb1264c7b4565191460c93faeefe7eda38658533a7b0eab64b9abb9ca3",
+     "source": {
+      "zip": "StoryWorld-Epilogue-paper-cup-lid4-ASSET-READY-part02-of02.zip",
+      "png": "candidate/frames/EPILOGUE-cup-lid-K2.png",
+      "sha256": "0271b538dae9046ef34df8d62edac6b876f3f01679ff2dffe1df7035d1b6491c"
+     }
+    },
+    {
+     "path": "assets/r117/scene/ep-cup-k3.png",
+     "bytes": 2352,
+     "sha256": "5cac019766a1f332cdbc53b99d0534b460dbc0888b1621cc92aff04eb901a9ba",
+     "source": {
+      "zip": "StoryWorld-Epilogue-paper-cup-lid4-ASSET-READY-part02-of02.zip",
+      "png": "candidate/frames/EPILOGUE-cup-lid-K3.png",
+      "sha256": "47aa900220a33985ead909ea8933bc11d29c3a0bbc5a6ef9ec957be8faf03236"
+     }
+    },
+    {
+     "path": "assets/r117/scene/ep-cup-k4.png",
+     "bytes": 2289,
+     "sha256": "bd79fb6fbe47d48eff04ef16cc802e971aabb5a9baa24fa560d61d8ad477dd89",
+     "source": {
+      "zip": "StoryWorld-Epilogue-paper-cup-lid4-ASSET-READY-part02-of02.zip",
+      "png": "candidate/frames/EPILOGUE-cup-lid-K4.png",
+      "sha256": "5b4af4c04aebc29cb45e371f8096489a13c0c5d48c6a26022bd30e0cf653cbb0"
+     }
+    }
+   ],
+   "zips": [
+    {
+     "name": "StoryWorld-Epilogue-paper-cup-lid4-ASSET-READY-part01-of02.zip",
+     "bytes": 2974611,
+     "sha256": "0f078dddd6cc797bf54f8f4da97b1a07d25f5d2e60a54708ffce2997496795c8"
+    },
+    {
+     "name": "StoryWorld-Epilogue-paper-cup-lid4-ASSET-READY-part02-of02.zip",
+     "bytes": 2856162,
+     "sha256": "5500c05d34281acf644d9db8b86bad3c30fa2090c925501e77a5d6a11835d4b0"
+    }
+   ],
+   "oneShot": true
+  },
+  {
+   "id": "ep-tissue",
+   "use": "종장 휴지 젖은 면 안으로 접기",
+   "frames": 4,
+   "cell": [
+    59,
+    44
+   ],
+   "height": 44,
+   "files": [
+    {
+     "path": "assets/r117/scene/ep-tissue-k1.png",
+     "bytes": 4163,
+     "sha256": "06c59e0a936ddaa5c6d010fcce7cae390deaa727f2a3af66b42d2e6ec7d19ad7",
+     "source": {
+      "zip": "StoryWorld-Epilogue-tissue-fold4-ASSET-READY-part01-of03.zip",
+      "png": "candidate/frames/EPILOGUE-tissue-fold-K1.png",
+      "sha256": "0db944d5dabf936d7026df4e2129858d90162f2bbaf16f86e9082fc51897ad3c"
+     }
+    },
+    {
+     "path": "assets/r117/scene/ep-tissue-k2.png",
+     "bytes": 2820,
+     "sha256": "d9e23e599df6bc1bfcca4aea902c53d6c0765ea57865b0bf61f40470cd8ab7d8",
+     "source": {
+      "zip": "StoryWorld-Epilogue-tissue-fold4-ASSET-READY-part02-of03.zip",
+      "png": "candidate/frames/EPILOGUE-tissue-fold-K2.png",
+      "sha256": "618c4aab292062bb3fcac397c769179170bb3db568bcd4149ed952ea43905b8d"
+     }
+    },
+    {
+     "path": "assets/r117/scene/ep-tissue-k3.png",
+     "bytes": 2488,
+     "sha256": "08b66bf5d6ece296eb554af38aa12edf5ea54f46e708488dc9a0e6d73acda02b",
+     "source": {
+      "zip": "StoryWorld-Epilogue-tissue-fold4-ASSET-READY-part03-of03.zip",
+      "png": "candidate/frames/EPILOGUE-tissue-fold-K3.png",
+      "sha256": "640beebbd88bc9ea32f361f1866621f61250a6ec655ef0425632718b7b9a9a2c"
+     }
+    },
+    {
+     "path": "assets/r117/scene/ep-tissue-k4.png",
+     "bytes": 2015,
+     "sha256": "b9d8189322fe359686b437851b66e3565154985fcc276d525c2f8098b4656de4",
+     "source": {
+      "zip": "StoryWorld-Epilogue-tissue-fold4-ASSET-READY-part03-of03.zip",
+      "png": "candidate/frames/EPILOGUE-tissue-fold-K4.png",
+      "sha256": "00018159740a25115c0b15dcdfc838f195b87cdafdd95fcce2a37864e1e56426"
+     }
+    }
+   ],
+   "zips": [
+    {
+     "name": "StoryWorld-Epilogue-tissue-fold4-ASSET-READY-part01-of03.zip",
+     "bytes": 2974895,
+     "sha256": "3ce8c1cc9dc2e5f62d20359920fa59571d6901979982a11503e7a70fb4bdaa94"
+    },
+    {
+     "name": "StoryWorld-Epilogue-tissue-fold4-ASSET-READY-part02-of03.zip",
+     "bytes": 2788790,
+     "sha256": "c4d26948232b2038ca321da8a2ee4b711d41519498c187a804bf688be1612558"
+    },
+    {
+     "name": "StoryWorld-Epilogue-tissue-fold4-ASSET-READY-part03-of03.zip",
+     "bytes": 1537710,
+     "sha256": "3f6a6a55290f7a9088889a073323dc27e562545b6da8eac548b1cb47522df151"
+    }
+   ],
+   "oneShot": true
+  },
+  {
+   "id": "r08-brush",
+   "use": "R-08 평범한 붓 정적 기준",
+   "frames": 1,
+   "cell": [
+    154,
+    34
+   ],
+   "height": 34,
+   "files": [
+    {
+     "path": "assets/r117/scene/r08-brush-k1.png",
+     "bytes": 6473,
+     "sha256": "8209c20b36cda716cba8aced09e2623bdb27a142d85cfa676f6e062398e7c28d",
+     "source": {
+      "zip": "StoryWorld-R08-ordinary-paintbrush-STATIC1-asset-ready-20261028.zip",
+      "png": "static/R08-brush-static-baseline-padded.png",
+      "sha256": "13316ec9b0333b95dccc57aed71395dc1fd14552e741a80d9608cd3318a813cf"
+     }
+    }
+   ],
+   "zips": [
+    {
+     "name": "StoryWorld-R08-ordinary-paintbrush-STATIC1-asset-ready-20261028.zip",
+     "bytes": 1882616,
+     "sha256": "8f464786181ddd1c326b6fc90b9e81458295b391cbf81a595de1d30a9de9a7c2"
+    }
+   ],
+   "oneShot": false
+  }
+ ]
+}

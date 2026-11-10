@@ -1,0 +1,929 @@
+{
+  "name": "신속 · 질주하는 기류 · 뒤",
+  "settings": {
+    "size": 64,
+    "frames": 22,
+    "fps": 30,
+    "loop": false
+  },
+  "nodes": [
+    {
+      "id": "n16",
+      "type": "Stroke",
+      "params": {
+        "x0": 0.9,
+        "y0": 0.43,
+        "x1": 0.88,
+        "y1": 0.12,
+        "x2": 0.11,
+        "y2": 0.16,
+        "x3": 0.12,
+        "y3": 0.44,
+        "width": 4.8,
+        "taper": 1,
+        "from": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              12,
+              0
+            ],
+            [
+              14,
+              0.14
+            ],
+            [
+              17,
+              0.55
+            ],
+            [
+              20,
+              1
+            ],
+            [
+              21,
+              1
+            ]
+          ]
+        },
+        "to": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              11,
+              0.5
+            ],
+            [
+              13,
+              0.92
+            ],
+            [
+              15,
+              1
+            ],
+            [
+              20,
+              1
+            ],
+            [
+              21,
+              1
+            ]
+          ]
+        },
+        "span": true,
+        "vA": 0.12,
+        "vM": 0.72,
+        "vB": 1,
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 40
+    },
+    {
+      "id": "n17",
+      "type": "Stroke",
+      "params": {
+        "x0": 0.9,
+        "y0": 0.43,
+        "x1": 0.88,
+        "y1": 0.12,
+        "x2": 0.11,
+        "y2": 0.16,
+        "x3": 0.12,
+        "y3": 0.44,
+        "width": 1.45,
+        "taper": 1,
+        "from": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              12,
+              0
+            ],
+            [
+              14,
+              0.14
+            ],
+            [
+              17,
+              0.55
+            ],
+            [
+              20,
+              1
+            ],
+            [
+              21,
+              1
+            ]
+          ]
+        },
+        "to": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              11,
+              0.5
+            ],
+            [
+              13,
+              0.92
+            ],
+            [
+              15,
+              1
+            ],
+            [
+              20,
+              1
+            ],
+            [
+              21,
+              1
+            ]
+          ]
+        },
+        "span": true,
+        "vA": 0.3,
+        "vM": 0.94,
+        "vB": 1,
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 190
+    },
+    {
+      "id": "n18",
+      "type": "Palette",
+      "params": {
+        "colors": [
+          "#535b8f",
+          "#569bae",
+          "#a5edec"
+        ],
+        "cutoff": 0.1,
+        "shift": 0,
+        "mode": "bands",
+        "key": "alpha",
+        "opacity": 0.74
+      },
+      "x": 250,
+      "y": 40
+    },
+    {
+      "id": "n19",
+      "type": "Palette",
+      "params": {
+        "colors": [
+          "#a5edec",
+          "#f1ffff"
+        ],
+        "cutoff": 0.1,
+        "shift": 0,
+        "mode": "bands",
+        "key": "alpha",
+        "opacity": 0.96
+      },
+      "x": 250,
+      "y": 190
+    },
+    {
+      "id": "n20",
+      "type": "Stroke",
+      "params": {
+        "x0": 0.9,
+        "y0": 0.385,
+        "x1": 0.88,
+        "y1": 0.16499999999999998,
+        "x2": 0.11,
+        "y2": 0.20500000000000002,
+        "x3": 0.12,
+        "y3": 0.395,
+        "width": 1.25,
+        "taper": 1,
+        "from": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              13,
+              0
+            ],
+            [
+              17,
+              0.48000000000000004
+            ],
+            [
+              20,
+              1
+            ],
+            [
+              21,
+              1
+            ]
+          ]
+        },
+        "to": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              12,
+              0.42
+            ],
+            [
+              15,
+              0.92
+            ],
+            [
+              20,
+              1
+            ],
+            [
+              21,
+              1
+            ]
+          ]
+        },
+        "span": true,
+        "vA": 0.2,
+        "vM": 0.8,
+        "vB": 1,
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 340
+    },
+    {
+      "id": "n21",
+      "type": "Palette",
+      "params": {
+        "colors": [
+          "#6591ac",
+          "#c3efed"
+        ],
+        "cutoff": 0.1,
+        "shift": 0,
+        "mode": "bands",
+        "key": "alpha",
+        "opacity": 0.58
+      },
+      "x": 250,
+      "y": 340
+    },
+    {
+      "id": "n22",
+      "type": "Stroke",
+      "params": {
+        "x0": 0.9,
+        "y0": 0.477,
+        "x1": 0.88,
+        "y1": 0.073,
+        "x2": 0.11,
+        "y2": 0.113,
+        "x3": 0.12,
+        "y3": 0.487,
+        "width": 0.85,
+        "taper": 1,
+        "from": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              13,
+              0
+            ],
+            [
+              17,
+              0.39
+            ],
+            [
+              20,
+              1
+            ],
+            [
+              21,
+              1
+            ]
+          ]
+        },
+        "to": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              12,
+              0.32999999999999996
+            ],
+            [
+              15,
+              0.83
+            ],
+            [
+              20,
+              1
+            ],
+            [
+              21,
+              1
+            ]
+          ]
+        },
+        "span": true,
+        "vA": 0.2,
+        "vM": 0.8,
+        "vB": 1,
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 490
+    },
+    {
+      "id": "n23",
+      "type": "Palette",
+      "params": {
+        "colors": [
+          "#6591ac",
+          "#c3efed"
+        ],
+        "cutoff": 0.1,
+        "shift": 0,
+        "mode": "bands",
+        "key": "alpha",
+        "opacity": 0.35
+      },
+      "x": 250,
+      "y": 490
+    },
+    {
+      "id": "n24",
+      "type": "Glow",
+      "params": {
+        "radius": 2,
+        "strength": 0.55
+      },
+      "x": 460,
+      "y": 40
+    },
+    {
+      "id": "n25",
+      "type": "Palette",
+      "params": {
+        "colors": [
+          "#3a88b0"
+        ],
+        "cutoff": 0.1,
+        "shift": 0,
+        "mode": "bands",
+        "key": "alpha",
+        "opacity": 0.2
+      },
+      "x": 250,
+      "y": 640
+    },
+    {
+      "id": "n26",
+      "type": "Tint",
+      "params": {
+        "color": "#ffffff",
+        "amount": 0,
+        "bright": 1,
+        "opacity": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              10,
+              0.3
+            ],
+            [
+              12,
+              1
+            ],
+            [
+              15,
+              1
+            ],
+            [
+              17,
+              0.8
+            ],
+            [
+              20,
+              0
+            ],
+            [
+              21,
+              0
+            ]
+          ]
+        }
+      },
+      "x": 1510,
+      "y": 40
+    },
+    {
+      "id": "n27",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 670,
+      "y": 40
+    },
+    {
+      "id": "n28",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 880,
+      "y": 40
+    },
+    {
+      "id": "n29",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 1090,
+      "y": 40
+    },
+    {
+      "id": "n30",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 1300,
+      "y": 40
+    },
+    {
+      "id": "n35",
+      "type": "Stroke",
+      "params": {
+        "x0": 0.38,
+        "y0": 0.3,
+        "x1": 0.32,
+        "y1": 0.29,
+        "x2": 0.23,
+        "y2": 0.24,
+        "x3": 0.2,
+        "y3": 0.16999999999999998,
+        "width": 1.2,
+        "taper": 1,
+        "from": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              12,
+              0
+            ],
+            [
+              14,
+              0
+            ],
+            [
+              17,
+              1
+            ],
+            [
+              21,
+              1
+            ]
+          ]
+        },
+        "to": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              12,
+              0
+            ],
+            [
+              14,
+              1
+            ],
+            [
+              17,
+              1
+            ],
+            [
+              21,
+              1
+            ]
+          ]
+        },
+        "span": true,
+        "vA": 0.1,
+        "vM": 0.7,
+        "vB": 1,
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 640
+    },
+    {
+      "id": "n36",
+      "type": "Palette",
+      "params": {
+        "colors": [
+          "#79b3bf",
+          "#d6faf5"
+        ],
+        "cutoff": 0.1,
+        "shift": 0,
+        "mode": "bands",
+        "key": "alpha",
+        "opacity": 0.72
+      },
+      "x": 250,
+      "y": 790
+    },
+    {
+      "id": "n37",
+      "type": "Stroke",
+      "params": {
+        "x0": 0.63,
+        "y0": 0.27,
+        "x1": 0.5700000000000001,
+        "y1": 0.26,
+        "x2": 0.48,
+        "y2": 0.21000000000000002,
+        "x3": 0.45,
+        "y3": 0.14,
+        "width": 1.2,
+        "taper": 1,
+        "from": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              15,
+              0
+            ],
+            [
+              17,
+              0
+            ],
+            [
+              20,
+              1
+            ],
+            [
+              21,
+              1
+            ]
+          ]
+        },
+        "to": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              15,
+              0
+            ],
+            [
+              17,
+              1
+            ],
+            [
+              20,
+              1
+            ],
+            [
+              21,
+              1
+            ]
+          ]
+        },
+        "span": true,
+        "vA": 0.1,
+        "vM": 0.7,
+        "vB": 1,
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 790
+    },
+    {
+      "id": "n38",
+      "type": "Palette",
+      "params": {
+        "colors": [
+          "#79b3bf",
+          "#d6faf5"
+        ],
+        "cutoff": 0.1,
+        "shift": 0,
+        "mode": "bands",
+        "key": "alpha",
+        "opacity": 0.72
+      },
+      "x": 250,
+      "y": 940
+    },
+    {
+      "id": "n44",
+      "type": "Transform",
+      "params": {
+        "tx": 0,
+        "ty": 0,
+        "sx": 1,
+        "sy": 0.52,
+        "rot": 0,
+        "px": 0.5,
+        "py": 0.5
+      },
+      "x": 2140,
+      "y": 40
+    },
+    {
+      "id": "n45",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 1720,
+      "y": 40
+    },
+    {
+      "id": "n46",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 1930,
+      "y": 40
+    },
+    {
+      "id": "n47",
+      "type": "Tint",
+      "params": {
+        "color": "#ffffff",
+        "amount": 0,
+        "bright": 1,
+        "opacity": 0.6
+      },
+      "x": 2350,
+      "y": 40
+    },
+    {
+      "id": "n48",
+      "type": "Output",
+      "params": {
+        "alpha": "soft",
+        "threshold": 0.5
+      },
+      "x": 2560,
+      "y": 40
+    }
+  ],
+  "links": [
+    {
+      "f": "n16",
+      "t": "n18",
+      "p": 0
+    },
+    {
+      "f": "n17",
+      "t": "n19",
+      "p": 0
+    },
+    {
+      "f": "n20",
+      "t": "n21",
+      "p": 0
+    },
+    {
+      "f": "n22",
+      "t": "n23",
+      "p": 0
+    },
+    {
+      "f": "n16",
+      "t": "n25",
+      "p": 0
+    },
+    {
+      "f": "n25",
+      "t": "n24",
+      "p": 0
+    },
+    {
+      "f": "n24",
+      "t": "n27",
+      "p": 0
+    },
+    {
+      "f": "n18",
+      "t": "n27",
+      "p": 1
+    },
+    {
+      "f": "n27",
+      "t": "n28",
+      "p": 0
+    },
+    {
+      "f": "n19",
+      "t": "n28",
+      "p": 1
+    },
+    {
+      "f": "n28",
+      "t": "n29",
+      "p": 0
+    },
+    {
+      "f": "n21",
+      "t": "n29",
+      "p": 1
+    },
+    {
+      "f": "n29",
+      "t": "n30",
+      "p": 0
+    },
+    {
+      "f": "n23",
+      "t": "n30",
+      "p": 1
+    },
+    {
+      "f": "n30",
+      "t": "n26",
+      "p": 0
+    },
+    {
+      "f": "n35",
+      "t": "n36",
+      "p": 0
+    },
+    {
+      "f": "n37",
+      "t": "n38",
+      "p": 0
+    },
+    {
+      "f": "n26",
+      "t": "n45",
+      "p": 0
+    },
+    {
+      "f": "n36",
+      "t": "n45",
+      "p": 1
+    },
+    {
+      "f": "n45",
+      "t": "n46",
+      "p": 0
+    },
+    {
+      "f": "n38",
+      "t": "n46",
+      "p": 1
+    },
+    {
+      "f": "n46",
+      "t": "n44",
+      "p": 0
+    },
+    {
+      "f": "n44",
+      "t": "n47",
+      "p": 0
+    },
+    {
+      "f": "n47",
+      "t": "n48",
+      "p": 0
+    }
+  ],
+  "game": {
+    "style": "hero-pixel-v1",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "logicalSize": 124,
+    "blend": "normal",
+    "impactFrame": 13,
+    "durationMs": 733.3333333333333,
+    "role": "buff",
+    "referenceCell": 62
+  },
+  "sourceKey": "[\"buff\",\"gold\",null,92861,30,80,1,360,0,2,0,55,150,1,0,0,false]",
+  "sourceRecipe": {
+    "id": "ability-haste-rear",
+    "label": "신속 · 질주하는 기류 · 뒤",
+    "effect": "buff",
+    "palette": "gold",
+    "pxfId": "hero-ability-haste-rear",
+    "params": {
+      "count": 30,
+      "life": 80,
+      "speed": 1,
+      "spread": 360,
+      "gravity": 0,
+      "size": 2,
+      "angle": 0,
+      "pitch": 55,
+      "arc": 150,
+      "dir": 1,
+      "alt": false,
+      "ghosts": 0,
+      "glow": 0,
+      "ring": false,
+      "flash": 0,
+      "hitstop": 0,
+      "shake": 0,
+      "slowmo": 1,
+      "loop": true,
+      "interval": 0.78
+    },
+    "seed": 92861
+  },
+  "provenance": {
+    "author": "Hero Inc procedural VFX",
+    "purpose": "신속 · 질주하는 기류 · 뒤",
+    "direction": "Paired wind orbit: brighter foreground pressure ribbon and subdued rear slipstream on the same 22-frame clock. Rear half is rendered behind the character, with actual sprite occlusion. Mint-white cutting edge, blue-violet pressure band and split tails; 64px detail."
+  }
+}

@@ -1,0 +1,25 @@
+{
+ "hero": "hwando",
+ "path": "assets/r144/walk/hwando/walk-e.webp",
+ "replaces": "assets/r130/hwando/walk-e.webp",
+ "cols": 8,
+ "rows": 1,
+ "cell": [
+  192,
+  256
+ ],
+ "foot": [
+  96,
+  226
+ ],
+ "source": {
+  "driveId": "11ZwaUoWagAuXowTsYLzXUTNTbT1umjKK",
+  "version": "v1 (2026-10-30)",
+  "file": "HERO-hwando-walk-e.png",
+  "sha256": "b709454bf5c6abfb0c36b1ddcee07187df46e2adb9c357a7e86f2ca459e15459",
+  "bytes": 229556
+ },
+ "sha256": "427566c66fd826cf4a23c4f803ef5c634b838806d29deb05364b98344ad5784a",
+ "bytes": 70930,
+ "why": "옛(v1)·새(v2) 걷기 비교: v2 walk-e 는 뒷다리 아래가 잘려 장화가 떨어져 보임, v1 은 온전 — 더 자연스러운 v1 사용(나머지 방향은 v2 그대로)"
+}

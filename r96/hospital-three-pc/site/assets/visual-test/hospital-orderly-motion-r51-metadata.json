@@ -1,0 +1,166 @@
+{
+  "asset": "assets/visual-test/hospital-orderly-motion-r51-v2.png",
+  "size": [
+    1774,
+    887
+  ],
+  "columns": 4,
+  "rows": 2,
+  "cells": [
+    {
+      "sourceRect": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "pivot": [
+        237.5,
+        412
+      ],
+      "visibleHeight": 322,
+      "alphaBounds": [
+        116,
+        96,
+        357,
+        412
+      ]
+    },
+    {
+      "sourceRect": [
+        444,
+        0,
+        443,
+        444
+      ],
+      "pivot": [
+        198.2,
+        415
+      ],
+      "visibleHeight": 322,
+      "alphaBounds": [
+        115,
+        97,
+        441,
+        415
+      ]
+    },
+    {
+      "sourceRect": [
+        887,
+        0,
+        443,
+        444
+      ],
+      "pivot": [
+        199.1,
+        412
+      ],
+      "visibleHeight": 322,
+      "alphaBounds": [
+        86,
+        100,
+        424,
+        412
+      ]
+    },
+    {
+      "sourceRect": [
+        1330,
+        0,
+        444,
+        444
+      ],
+      "pivot": [
+        231.0,
+        411
+      ],
+      "visibleHeight": 322,
+      "alphaBounds": [
+        116,
+        94,
+        337,
+        411
+      ]
+    },
+    {
+      "sourceRect": [
+        0,
+        444,
+        444,
+        443
+      ],
+      "pivot": [
+        251.8,
+        361
+      ],
+      "visibleHeight": 322,
+      "alphaBounds": [
+        106,
+        52,
+        355,
+        361
+      ]
+    },
+    {
+      "sourceRect": [
+        444,
+        444,
+        443,
+        443
+      ],
+      "pivot": [
+        207.1,
+        369
+      ],
+      "visibleHeight": 322,
+      "alphaBounds": [
+        105,
+        52,
+        392,
+        369
+      ]
+    },
+    {
+      "sourceRect": [
+        887,
+        444,
+        443,
+        443
+      ],
+      "pivot": [
+        189.6,
+        372
+      ],
+      "visibleHeight": 322,
+      "alphaBounds": [
+        95,
+        49,
+        415,
+        372
+      ]
+    },
+    {
+      "sourceRect": [
+        1330,
+        444,
+        444,
+        443
+      ],
+      "pivot": [
+        248.5,
+        366
+      ],
+      "visibleHeight": 322,
+      "alphaBounds": [
+        125,
+        49,
+        358,
+        366
+      ]
+    }
+  ],
+  "uniformBodyScale": true,
+  "method": "alpha ground bounds and lower 95px dark boot centroid; common 322px body scale; source pixels preserved",
+  "generated": true
+}

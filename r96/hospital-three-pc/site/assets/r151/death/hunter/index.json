@@ -1,0 +1,113 @@
+{
+ "hero": "hunter",
+ "action": "death",
+ "order": "휘청 2 → 무릎 1 → 눕기 3 (README)",
+ "mirroredInGame": {
+  "w": "e",
+  "sw": "se",
+  "nw": "ne"
+ },
+ "applied": "쓰러질 때(R151 death-r151.js) 프레임 애니메이션 — client-source/attack-anim-r143.js",
+ "directions": {
+  "s": {
+   "path": "assets/r143/death/hunter/death-s.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    227
+   ],
+   "source": {
+    "driveId": "15wwTg5v3Tij6oJvxgfyoBwIMbRcYppYD",
+    "file": "HERO-hunter-death-s.png",
+    "sha256": "d214220655127e0314911d9e7b2c90aad46afbdca1bc96e507106d3b6bd09d75",
+    "bytes": 83994
+   },
+   "sha256": "ce1ceab8a4cd0ce72a24f216937a00beea79072903a412b3ac753fa0e9814aa5",
+   "bytes": 28838
+  },
+  "se": {
+   "path": "assets/r143/death/hunter/death-se.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    227
+   ],
+   "source": {
+    "driveId": "15wwTg5v3Tij6oJvxgfyoBwIMbRcYppYD",
+    "file": "HERO-hunter-death-se.png",
+    "sha256": "f709f8a4702b368f3812a721821e5377dcb0d1701688e5ebef8b7dae08d41d12",
+    "bytes": 75598
+   },
+   "sha256": "e9dd7c24fdbc09913788484b9dfd5860bbc1a33f591e2088968d17352c43a71d",
+   "bytes": 26292
+  },
+  "e": {
+   "path": "assets/r143/death/hunter/death-e.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    227
+   ],
+   "source": {
+    "driveId": "15wwTg5v3Tij6oJvxgfyoBwIMbRcYppYD",
+    "file": "HERO-hunter-death-e.png",
+    "sha256": "3c589028ca334a435de527fe18a284f8fa2ee812d767458c11356698f2681797",
+    "bytes": 69156
+   },
+   "sha256": "3aaa148d902fc0b2d07093d3ff9631f5c595503ad9b63818f0080cea7bd48af1",
+   "bytes": 23576
+  },
+  "ne": {
+   "path": "assets/r143/death/hunter/death-ne.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    227
+   ],
+   "source": {
+    "driveId": "15wwTg5v3Tij6oJvxgfyoBwIMbRcYppYD",
+    "file": "HERO-hunter-death-ne.png",
+    "sha256": "661d56afe893aae1c1c0206fa937b6bd1dcfeffbbc6de9f89249c0f83f4bd7b6",
+    "bytes": 79128
+   },
+   "sha256": "6f69799f0c79aa93b4d33c8101e3f92285bcba3448f71a2b49a772ca1d017a1e",
+   "bytes": 26666
+  },
+  "n": {
+   "path": "assets/r143/death/hunter/death-n.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "15wwTg5v3Tij6oJvxgfyoBwIMbRcYppYD",
+    "file": "HERO-hunter-death-n.png",
+    "sha256": "c69c4ec6160dbfba5bbfd09bdf75832404e9ebcf9ab4819cda8702d579c402c4",
+    "bytes": 87511
+   },
+   "sha256": "0ae244f6fcb20ca7ed4269ffdb4ec88a8ad92a8a4e8b496a74cacb22a1ac80d4",
+   "bytes": 28932
+  }
+ }
+}

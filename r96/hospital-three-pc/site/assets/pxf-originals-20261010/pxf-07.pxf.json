@@ -1,0 +1,791 @@
+{
+  "settings": {
+    "size": 96,
+    "frames": 12,
+    "fps": 40,
+    "loop": false
+  },
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "Arc",
+      "params": {
+        "x": 0.5,
+        "y": 0.54,
+        "radius": {
+          "k": [
+            [
+              0,
+              3,
+              "smooth"
+            ],
+            [
+              2,
+              17,
+              "smooth"
+            ],
+            [
+              7,
+              29,
+              "smooth"
+            ],
+            [
+              11,
+              36,
+              "smooth"
+            ]
+          ]
+        },
+        "thick": 6,
+        "start": -155,
+        "sweep": 150,
+        "head": 1,
+        "tail": 0.82,
+        "taper": 1.1,
+        "aspect": 0.6,
+        "rot": {
+          "k": [
+            [
+              0,
+              -20,
+              "smooth"
+            ],
+            [
+              5,
+              12,
+              "smooth"
+            ],
+            [
+              11,
+              25,
+              "smooth"
+            ]
+          ]
+        },
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 40
+    },
+    {
+      "id": "n2",
+      "type": "Tint",
+      "params": {
+        "color": "#28d4ee",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 40
+    },
+    {
+      "id": "n3",
+      "type": "Arc",
+      "params": {
+        "x": 0.5,
+        "y": 0.54,
+        "radius": {
+          "k": [
+            [
+              0,
+              3,
+              "smooth"
+            ],
+            [
+              2,
+              17,
+              "smooth"
+            ],
+            [
+              7,
+              29,
+              "smooth"
+            ],
+            [
+              11,
+              36,
+              "smooth"
+            ]
+          ]
+        },
+        "thick": 1.5,
+        "start": -155,
+        "sweep": 150,
+        "head": 1,
+        "tail": 0.82,
+        "taper": 1.1,
+        "aspect": 0.6,
+        "rot": {
+          "k": [
+            [
+              0,
+              -20,
+              "smooth"
+            ],
+            [
+              5,
+              12,
+              "smooth"
+            ],
+            [
+              11,
+              25,
+              "smooth"
+            ]
+          ]
+        },
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 190
+    },
+    {
+      "id": "n4",
+      "type": "Tint",
+      "params": {
+        "color": "#e0ffff",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 190
+    },
+    {
+      "id": "n5",
+      "type": "Arc",
+      "params": {
+        "x": 0.5,
+        "y": 0.54,
+        "radius": {
+          "k": [
+            [
+              0,
+              3,
+              "smooth"
+            ],
+            [
+              2,
+              22,
+              "smooth"
+            ],
+            [
+              7,
+              34,
+              "smooth"
+            ],
+            [
+              11,
+              40,
+              "smooth"
+            ]
+          ]
+        },
+        "thick": 5,
+        "start": -50,
+        "sweep": 130,
+        "head": 1,
+        "tail": 0.82,
+        "taper": 1.1,
+        "aspect": 0.69,
+        "rot": {
+          "k": [
+            [
+              0,
+              -20,
+              "smooth"
+            ],
+            [
+              5,
+              12,
+              "smooth"
+            ],
+            [
+              11,
+              25,
+              "smooth"
+            ]
+          ]
+        },
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 340
+    },
+    {
+      "id": "n6",
+      "type": "Tint",
+      "params": {
+        "color": "#28d4ee",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 340
+    },
+    {
+      "id": "n7",
+      "type": "Arc",
+      "params": {
+        "x": 0.5,
+        "y": 0.54,
+        "radius": {
+          "k": [
+            [
+              0,
+              3,
+              "smooth"
+            ],
+            [
+              2,
+              22,
+              "smooth"
+            ],
+            [
+              7,
+              34,
+              "smooth"
+            ],
+            [
+              11,
+              40,
+              "smooth"
+            ]
+          ]
+        },
+        "thick": 1.5,
+        "start": -50,
+        "sweep": 130,
+        "head": 1,
+        "tail": 0.82,
+        "taper": 1.1,
+        "aspect": 0.69,
+        "rot": {
+          "k": [
+            [
+              0,
+              -20,
+              "smooth"
+            ],
+            [
+              5,
+              12,
+              "smooth"
+            ],
+            [
+              11,
+              25,
+              "smooth"
+            ]
+          ]
+        },
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 490
+    },
+    {
+      "id": "n8",
+      "type": "Tint",
+      "params": {
+        "color": "#e0ffff",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 490
+    },
+    {
+      "id": "n9",
+      "type": "Arc",
+      "params": {
+        "x": 0.5,
+        "y": 0.54,
+        "radius": {
+          "k": [
+            [
+              0,
+              3,
+              "smooth"
+            ],
+            [
+              2,
+              27,
+              "smooth"
+            ],
+            [
+              7,
+              39,
+              "smooth"
+            ],
+            [
+              11,
+              44,
+              "smooth"
+            ]
+          ]
+        },
+        "thick": 4,
+        "start": 55,
+        "sweep": 110,
+        "head": 1,
+        "tail": 0.82,
+        "taper": 1.1,
+        "aspect": 0.78,
+        "rot": {
+          "k": [
+            [
+              0,
+              -20,
+              "smooth"
+            ],
+            [
+              5,
+              12,
+              "smooth"
+            ],
+            [
+              11,
+              25,
+              "smooth"
+            ]
+          ]
+        },
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 640
+    },
+    {
+      "id": "n10",
+      "type": "Tint",
+      "params": {
+        "color": "#28d4ee",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 640
+    },
+    {
+      "id": "n11",
+      "type": "Arc",
+      "params": {
+        "x": 0.5,
+        "y": 0.54,
+        "radius": {
+          "k": [
+            [
+              0,
+              3,
+              "smooth"
+            ],
+            [
+              2,
+              27,
+              "smooth"
+            ],
+            [
+              7,
+              39,
+              "smooth"
+            ],
+            [
+              11,
+              44,
+              "smooth"
+            ]
+          ]
+        },
+        "thick": 1.5,
+        "start": 55,
+        "sweep": 110,
+        "head": 1,
+        "tail": 0.82,
+        "taper": 1.1,
+        "aspect": 0.78,
+        "rot": {
+          "k": [
+            [
+              0,
+              -20,
+              "smooth"
+            ],
+            [
+              5,
+              12,
+              "smooth"
+            ],
+            [
+              11,
+              25,
+              "smooth"
+            ]
+          ]
+        },
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 790
+    },
+    {
+      "id": "n12",
+      "type": "Tint",
+      "params": {
+        "color": "#e0ffff",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 790
+    },
+    {
+      "id": "n13",
+      "type": "Particles",
+      "params": {
+        "count": 28,
+        "seed": 881,
+        "emit": "burst",
+        "start": 0,
+        "span": 1,
+        "life": 0.85,
+        "lifeVar": 0.25,
+        "area": "circle",
+        "x": 0.5,
+        "y": 0.5,
+        "aw": 7,
+        "ah": 5,
+        "dirMode": "outward",
+        "angle": -85,
+        "spread": 360,
+        "speed": 2.9,
+        "speedVar": 0.3,
+        "gravity": 0.11,
+        "drag": 0.025,
+        "turb": 0,
+        "sizeA": 3.4,
+        "sizeB": 0.3,
+        "pshape": "circle",
+        "stretch": 1.4,
+        "fade": "out",
+        "bright": 1,
+        "loop": false,
+        "ground": 0,
+        "bounce": 0.35,
+        "brightVar": 0
+      },
+      "x": 40,
+      "y": 940
+    },
+    {
+      "id": "n14",
+      "type": "Tint",
+      "params": {
+        "color": "#e0ffff",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 940
+    },
+    {
+      "id": "n15",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 460,
+      "y": 40
+    },
+    {
+      "id": "n16",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 670,
+      "y": 40
+    },
+    {
+      "id": "n17",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 880,
+      "y": 40
+    },
+    {
+      "id": "n18",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 1090,
+      "y": 40
+    },
+    {
+      "id": "n19",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 1300,
+      "y": 40
+    },
+    {
+      "id": "n20",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 1510,
+      "y": 40
+    },
+    {
+      "id": "n21",
+      "type": "Tint",
+      "params": {
+        "color": "#ffffff",
+        "amount": 0,
+        "bright": 1,
+        "opacity": {
+          "k": [
+            [
+              0,
+              0.9,
+              "smooth"
+            ],
+            [
+              1,
+              1,
+              "smooth"
+            ],
+            [
+              4,
+              0.95,
+              "smooth"
+            ],
+            [
+              8,
+              0.4,
+              "smooth"
+            ],
+            [
+              11,
+              0,
+              "smooth"
+            ]
+          ]
+        }
+      },
+      "x": 1720,
+      "y": 40
+    },
+    {
+      "id": "n22",
+      "type": "Transform",
+      "params": {
+        "tx": 0,
+        "ty": 0,
+        "sx": 0.86,
+        "sy": 0.86,
+        "rot": 0,
+        "px": 0.5,
+        "py": 0.5
+      },
+      "x": 1930,
+      "y": 40
+    },
+    {
+      "id": "n23",
+      "type": "Output",
+      "params": {
+        "alpha": "soft",
+        "threshold": 0.5
+      },
+      "x": 2140,
+      "y": 40
+    }
+  ],
+  "links": [
+    {
+      "f": "n1",
+      "t": "n2",
+      "p": 0
+    },
+    {
+      "f": "n3",
+      "t": "n4",
+      "p": 0
+    },
+    {
+      "f": "n5",
+      "t": "n6",
+      "p": 0
+    },
+    {
+      "f": "n7",
+      "t": "n8",
+      "p": 0
+    },
+    {
+      "f": "n9",
+      "t": "n10",
+      "p": 0
+    },
+    {
+      "f": "n11",
+      "t": "n12",
+      "p": 0
+    },
+    {
+      "f": "n13",
+      "t": "n14",
+      "p": 0
+    },
+    {
+      "f": "n2",
+      "t": "n15",
+      "p": 0
+    },
+    {
+      "f": "n4",
+      "t": "n15",
+      "p": 1
+    },
+    {
+      "f": "n15",
+      "t": "n16",
+      "p": 0
+    },
+    {
+      "f": "n6",
+      "t": "n16",
+      "p": 1
+    },
+    {
+      "f": "n16",
+      "t": "n17",
+      "p": 0
+    },
+    {
+      "f": "n8",
+      "t": "n17",
+      "p": 1
+    },
+    {
+      "f": "n17",
+      "t": "n18",
+      "p": 0
+    },
+    {
+      "f": "n10",
+      "t": "n18",
+      "p": 1
+    },
+    {
+      "f": "n18",
+      "t": "n19",
+      "p": 0
+    },
+    {
+      "f": "n12",
+      "t": "n19",
+      "p": 1
+    },
+    {
+      "f": "n19",
+      "t": "n20",
+      "p": 0
+    },
+    {
+      "f": "n14",
+      "t": "n20",
+      "p": 1
+    },
+    {
+      "f": "n20",
+      "t": "n21",
+      "p": 0
+    },
+    {
+      "f": "n21",
+      "t": "n22",
+      "p": 0
+    },
+    {
+      "f": "n22",
+      "t": "n23",
+      "p": 0
+    }
+  ],
+  "game": {
+    "style": "hero-pixel-v1",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "logicalSize": 98,
+    "blend": "normal",
+    "durationMs": 300,
+    "role": "impact",
+    "referenceCell": 62
+  },
+  "name": "유수 무장 · 명중",
+  "sourceKey": "[\"slash\",\"gold\",[\"#e0ffff\",\"#e0ffff\",\"#28d4ee\",\"#106f97\",\"#106f97\"],98112,26,26,3.4,70,0.05,2,0,55,150,1,5,0,false]",
+  "sourceRecipe": {
+    "id": "breath-water-contact",
+    "label": "유수 무장 · 명중",
+    "effect": "slash",
+    "palette": "gold",
+    "pxfId": "hero-breath-water-contact",
+    "colors": [
+      "#e0ffff",
+      "#e0ffff",
+      "#28d4ee",
+      "#106f97",
+      "#106f97"
+    ],
+    "params": {
+      "count": 26,
+      "life": 26,
+      "speed": 3.4,
+      "spread": 70,
+      "gravity": 0.05,
+      "size": 2,
+      "angle": 0,
+      "pitch": 55,
+      "arc": 150,
+      "dir": 1,
+      "alt": false,
+      "ghosts": 5,
+      "glow": 0,
+      "ring": false,
+      "flash": 0,
+      "hitstop": 0,
+      "shake": 0,
+      "slowmo": 1,
+      "loop": false,
+      "interval": 1.1
+    },
+    "seed": 98112
+  },
+  "provenance": {
+    "author": "Hero Inc",
+    "purpose": "Shared elemental weapon impact / editor preview. No character-specific elemental assets.",
+    "runtime": "Existing melee contact clock"
+  }
+}

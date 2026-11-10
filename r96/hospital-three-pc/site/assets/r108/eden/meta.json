@@ -1,0 +1,137 @@
+{
+ "source": "ChatGPT image generation 2026-10-28, 4x4 flat-black sheets keyed by max channel (straight RGBA, additive art). Cell 256px, frames read left-to-right then top-to-bottom.",
+ "sheets": {
+  "dome": {
+   "w": 1024,
+   "h": 1024,
+   "cell": 256,
+   "cols": 4,
+   "rows": 4,
+   "frames": 16,
+   "bytes": 329432,
+   "sha256": "964e1a8392945740a5958f85604a87607955cc34e6fc6e683f036b147e95c5b5",
+   "blend": "lighter"
+  },
+  "earth": {
+   "w": 1024,
+   "h": 1024,
+   "cell": 256,
+   "cols": 4,
+   "rows": 4,
+   "frames": 16,
+   "bytes": 340170,
+   "sha256": "0ad94489bc6c1d9f5d756b14a33eed05d28512404e0deb98e546995628c13d6e",
+   "blend": "lighter"
+  },
+  "fire": {
+   "w": 1024,
+   "h": 1024,
+   "cell": 256,
+   "cols": 4,
+   "rows": 4,
+   "frames": 16,
+   "bytes": 325768,
+   "sha256": "1acf38ae096a934267d9644ce98770b0d0daceddcdc587d8e66256b9a4d468c4",
+   "blend": "lighter"
+  },
+  "hit": {
+   "w": 1024,
+   "h": 1024,
+   "cell": 256,
+   "cols": 4,
+   "rows": 4,
+   "frames": 16,
+   "bytes": 327540,
+   "sha256": "cb03fc6bc430091d1c7842c54058630969e642ba205d4dbf20bdc82610f70ad2",
+   "blend": "lighter"
+  },
+  "holy": {
+   "w": 1024,
+   "h": 1024,
+   "cell": 256,
+   "cols": 4,
+   "rows": 4,
+   "frames": 16,
+   "bytes": 408700,
+   "sha256": "180787d7f360d7ef34e7f09e2d905520677bb6b0cafe7a15b3ee07f72b080aa9",
+   "blend": "lighter"
+  },
+  "ice": {
+   "w": 1024,
+   "h": 1024,
+   "cell": 256,
+   "cols": 4,
+   "rows": 4,
+   "frames": 16,
+   "bytes": 423710,
+   "sha256": "dd2e1ffdfa9b8eb40f7e26ca3336585c046587242321fb295af7cbe7d7f5d7c8",
+   "blend": "lighter"
+  },
+  "lightning": {
+   "w": 1024,
+   "h": 1024,
+   "cell": 256,
+   "cols": 4,
+   "rows": 4,
+   "frames": 16,
+   "bytes": 394164,
+   "sha256": "2fd0c855498c60815c0bbafa8b773c83cc9928dffd451a1a23578b2d6c31087e",
+   "blend": "lighter"
+  },
+  "nova": {
+   "w": 1024,
+   "h": 1024,
+   "cell": 256,
+   "cols": 4,
+   "rows": 4,
+   "frames": 16,
+   "bytes": 137414,
+   "sha256": "0a82fbb635916cf5387dbc876183bd46d390af7b26bae8a42b29af20ac7be264",
+   "blend": "lighter"
+  },
+  "poison": {
+   "w": 1024,
+   "h": 1024,
+   "cell": 256,
+   "cols": 4,
+   "rows": 4,
+   "frames": 16,
+   "bytes": 324802,
+   "sha256": "867d5afeea30bc8c77ac7526db855f7de0807aba999deb111244b591487f8555",
+   "blend": "lighter"
+  },
+  "ripple": {
+   "w": 1024,
+   "h": 1024,
+   "cell": 256,
+   "cols": 4,
+   "rows": 4,
+   "frames": 16,
+   "bytes": 97398,
+   "sha256": "24aeaf95dde09cfe9150a07b111fcf9b77b903566d2fa865d48aa720419425bf",
+   "blend": "lighter"
+  },
+  "slash": {
+   "w": 1024,
+   "h": 1024,
+   "cell": 256,
+   "cols": 4,
+   "rows": 4,
+   "frames": 16,
+   "bytes": 247834,
+   "sha256": "af7169640cb7b147579897a92c1ea3c4783d80cf26b61193b4a18144d72ab27d",
+   "blend": "lighter"
+  },
+  "smoke": {
+   "w": 1024,
+   "h": 1024,
+   "cell": 256,
+   "cols": 4,
+   "rows": 4,
+   "frames": 16,
+   "bytes": 189888,
+   "sha256": "56bc2d2787193e430370fff5cb30bfbf31ce52de273c93213ce4dcad15a13dc3",
+   "blend": "lighter"
+  }
+ }
+}

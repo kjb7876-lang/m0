@@ -1,0 +1,538 @@
+{
+  "format": "pxf.graph@1",
+  "name": "소행성 폭발 파동과 수축 구름",
+  "settings": {
+    "size": 64,
+    "frames": 24,
+    "fps": 24,
+    "loop": false
+  },
+  "nodes": [
+    {
+      "id": "flash",
+      "type": "Shape",
+      "x": 40,
+      "y": 40,
+      "params": {
+        "shape": "circle",
+        "x": 0.5,
+        "y": 0.5,
+        "size": {
+          "k": [
+            [
+              0,
+              6,
+              "out3"
+            ],
+            [
+              3,
+              18,
+              "in"
+            ],
+            [
+              7,
+              0,
+              "linear"
+            ]
+          ]
+        },
+        "size2": 0.4,
+        "points": 5,
+        "rot": 0,
+        "aspect": 1,
+        "stroke": 0,
+        "falloff": 0.3,
+        "intensity": 1
+      }
+    },
+    {
+      "id": "wave",
+      "type": "Shape",
+      "x": 40,
+      "y": 160,
+      "params": {
+        "shape": "ring",
+        "x": 0.5,
+        "y": 0.5,
+        "size": {
+          "k": [
+            [
+              0,
+              15,
+              "out3"
+            ],
+            [
+              12,
+              32,
+              "out"
+            ],
+            [
+              23,
+              27,
+              "linear"
+            ]
+          ]
+        },
+        "size2": 0.14,
+        "points": 5,
+        "rot": 0,
+        "aspect": 1,
+        "stroke": 0,
+        "falloff": 1,
+        "intensity": {
+          "k": [
+            [
+              0,
+              1,
+              "linear"
+            ],
+            [
+              8,
+              0.8,
+              "linear"
+            ],
+            [
+              13,
+              0,
+              "linear"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "bl1",
+      "type": "Blend",
+      "x": 270,
+      "y": 100,
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "pal1",
+      "type": "Palette",
+      "x": 500,
+      "y": 100,
+      "params": {
+        "colors": [
+          "#a3231b",
+          "#ffb030",
+          "#fff1b8",
+          "#ffffff"
+        ],
+        "cutoff": 0.08,
+        "shift": 0,
+        "mode": "bands",
+        "key": "alpha",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "tint1",
+      "type": "Tint",
+      "x": 730,
+      "y": 100,
+      "params": {
+        "color": "#ffffff",
+        "amount": 0,
+        "bright": 1,
+        "opacity": {
+          "k": [
+            [
+              0,
+              1,
+              "linear"
+            ],
+            [
+              11,
+              1,
+              "linear"
+            ],
+            [
+              14,
+              0,
+              "linear"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "noise",
+      "type": "Noise",
+      "x": 40,
+      "y": 300,
+      "params": {
+        "type": "fbm",
+        "scaleX": 5,
+        "scaleY": 5,
+        "octaves": 3,
+        "seed": 7,
+        "scrollX": 1,
+        "scrollY": 0.5,
+        "contrast": 1.6,
+        "bias": 0.1
+      }
+    },
+    {
+      "id": "cmask",
+      "type": "Shape",
+      "x": 40,
+      "y": 420,
+      "params": {
+        "shape": "circle",
+        "x": 0.5,
+        "y": 0.5,
+        "size": {
+          "k": [
+            [
+              0,
+              0,
+              "linear"
+            ],
+            [
+              3,
+              9,
+              "out3"
+            ],
+            [
+              10,
+              19,
+              "out"
+            ],
+            [
+              14,
+              20,
+              "linear"
+            ],
+            [
+              22,
+              0,
+              "in3"
+            ],
+            [
+              23,
+              0,
+              "linear"
+            ]
+          ]
+        },
+        "size2": 0.4,
+        "points": 5,
+        "rot": 0,
+        "aspect": 1,
+        "stroke": 0,
+        "falloff": 0.4,
+        "intensity": 1
+      }
+    },
+    {
+      "id": "mask",
+      "type": "Mask",
+      "x": 270,
+      "y": 340,
+      "params": {
+        "mode": "multiply",
+        "strength": 1
+      }
+    },
+    {
+      "id": "levels",
+      "type": "Levels",
+      "x": 500,
+      "y": 340,
+      "params": {
+        "lo": 0.3,
+        "hi": 0.85,
+        "gamma": 1,
+        "steps": 5
+      }
+    },
+    {
+      "id": "pal2",
+      "type": "Palette",
+      "x": 730,
+      "y": 340,
+      "params": {
+        "colors": [
+          "#2a1020",
+          "#6b1f22",
+          "#c2411a",
+          "#f08a24",
+          "#ffd36a"
+        ],
+        "cutoff": 0.15,
+        "shift": 0,
+        "mode": "bands",
+        "key": "alpha",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "tint2",
+      "type": "Tint",
+      "x": 960,
+      "y": 340,
+      "params": {
+        "color": "#ffffff",
+        "amount": 0,
+        "bright": 1,
+        "opacity": {
+          "k": [
+            [
+              0,
+              1,
+              "linear"
+            ],
+            [
+              18,
+              1,
+              "linear"
+            ],
+            [
+              23,
+              0,
+              "linear"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "dout",
+      "type": "Particles",
+      "x": 40,
+      "y": 560,
+      "params": {
+        "count": 40,
+        "seed": 11,
+        "emit": "burst",
+        "start": 0,
+        "span": 0,
+        "life": 0.79,
+        "lifeVar": 0.3,
+        "area": "circle",
+        "x": 0.5,
+        "y": 0.5,
+        "aw": 4,
+        "ah": 4,
+        "dirMode": "outward",
+        "angle": -90,
+        "spread": 360,
+        "speed": 1,
+        "speedVar": 0,
+        "gravity": 0,
+        "drag": 0,
+        "turb": 0.3,
+        "sizeA": 0.5,
+        "sizeB": 2,
+        "pshape": "square",
+        "stretch": 2.5,
+        "fade": "out",
+        "bright": 1,
+        "loop": false,
+        "ground": 0,
+        "bounce": 0.5,
+        "brightVar": 0
+      }
+    },
+    {
+      "id": "din",
+      "type": "Particles",
+      "x": 40,
+      "y": 680,
+      "params": {
+        "count": 103,
+        "seed": 23,
+        "emit": "burst",
+        "start": 0.65,
+        "span": 0,
+        "life": 0.3,
+        "lifeVar": 0.55,
+        "area": "ring",
+        "x": 0.5,
+        "y": 0.5,
+        "aw": 32,
+        "ah": 32,
+        "dirMode": "inward",
+        "angle": -90,
+        "spread": 0,
+        "speed": 1,
+        "speedVar": 0.3,
+        "gravity": 0,
+        "drag": 0,
+        "turb": 0,
+        "sizeA": 3,
+        "sizeB": 0.1,
+        "pshape": "diamond",
+        "stretch": 1,
+        "fade": "out",
+        "bright": 1,
+        "loop": false,
+        "ground": 0,
+        "bounce": 0.35,
+        "brightVar": 0
+      }
+    },
+    {
+      "id": "bl2",
+      "type": "Blend",
+      "x": 270,
+      "y": 620,
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "pal3",
+      "type": "Palette",
+      "x": 500,
+      "y": 620,
+      "params": {
+        "colors": [
+          "#733e39",
+          "#c28569",
+          "#e8b796",
+          "#fff1b8"
+        ],
+        "cutoff": 0.1,
+        "shift": 0,
+        "mode": "bands",
+        "key": "alpha",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "over1",
+      "type": "Blend",
+      "x": 1190,
+      "y": 340,
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "over2",
+      "type": "Blend",
+      "x": 1420,
+      "y": 340,
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "out",
+      "type": "Output",
+      "x": 1650,
+      "y": 340,
+      "params": {
+        "alpha": "soft",
+        "threshold": 0.1
+      }
+    }
+  ],
+  "links": [
+    {
+      "f": "flash",
+      "t": "bl1",
+      "p": 0
+    },
+    {
+      "f": "wave",
+      "t": "bl1",
+      "p": 1
+    },
+    {
+      "f": "bl1",
+      "t": "pal1",
+      "p": 0
+    },
+    {
+      "f": "pal1",
+      "t": "tint1",
+      "p": 0
+    },
+    {
+      "f": "noise",
+      "t": "mask",
+      "p": 0
+    },
+    {
+      "f": "cmask",
+      "t": "mask",
+      "p": 1
+    },
+    {
+      "f": "mask",
+      "t": "levels",
+      "p": 0
+    },
+    {
+      "f": "levels",
+      "t": "pal2",
+      "p": 0
+    },
+    {
+      "f": "pal2",
+      "t": "tint2",
+      "p": 0
+    },
+    {
+      "f": "dout",
+      "t": "bl2",
+      "p": 0
+    },
+    {
+      "f": "din",
+      "t": "bl2",
+      "p": 1
+    },
+    {
+      "f": "bl2",
+      "t": "pal3",
+      "p": 0
+    },
+    {
+      "f": "tint2",
+      "t": "over1",
+      "p": 0
+    },
+    {
+      "f": "tint1",
+      "t": "over1",
+      "p": 1
+    },
+    {
+      "f": "over1",
+      "t": "over2",
+      "p": 0
+    },
+    {
+      "f": "pal3",
+      "t": "over2",
+      "p": 1
+    },
+    {
+      "f": "over2",
+      "t": "out",
+      "p": 0
+    }
+  ],
+  "game": {
+    "style": "hero-pixel-v1",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "logicalSize": 64,
+    "blend": "add",
+    "referenceCell": 62,
+    "durationMs": 1000,
+    "impactFrame": 1
+  }
+}
