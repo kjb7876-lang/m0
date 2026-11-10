@@ -54,6 +54,22 @@ def main():
     hit = [p for p in rows if excluded(p) and p.startswith(tuple(exc['protected']))]
     check('보호 경로는 빼는 목록에 없음', not hit, hit[:5])
 
+    # 3b. R614 근거 회귀: 안 붙은 스크립트 전용 자산·인라인으로 들어간 데이터 사본은 배포본에서 뺀다.
+    #     그 스크립트가 index.html 에 다시 붙거나, 다른 런타임 파일이 경로를 쓰기 시작하면 실패해서 알려 준다.
+    tags = set(re.findall(r'<script[^>]*\ssrc="([^"]+)"', html))
+    texts = {p: (SITE / p).read_text(encoding='utf-8', errors='ignore') for p in rows if p.endswith('.js') or p == 'index.html'}
+    for prefix, owner, key in [('assets/r140/intro/', 'intro-r140.js', 'r140/intro'),
+                               ('assets/dynamic-vfx-r84/', 'dynamic-vfx-r84.js', 'dynamic-vfx-r84')]:
+        check(f'{prefix} 를 배포본에서 뺌', prefix in prefixes, prefixes)
+        check(f'{owner} 는 index.html 에 붙지 않음', owner not in tags and not any(owner in t for p, t in texts.items() if p != owner))
+        users = [p for p, t in texts.items() if key in t and p != owner]
+        check(f'{key} 경로를 {owner} 밖에서 쓰지 않음', not users, users)
+    camp = 'data/campaign-r54/canonical-campaign-source-r54.json'
+    check(f'{camp} 를 배포본에서 뺌', excluded(camp), prefixes)
+    check('R54 서사 데이터는 index.html 에 인라인으로 들어 있음', 'window.__STORYWORLD_CAMPAIGN_DATA_R54__={' in html)
+    users = [p for p, t in texts.items() if 'campaign-r54/' in t]
+    check('campaign-r54 json 을 가져오는 런타임 코드 없음', not users, users)
+
     tmp = Path(tempfile.mkdtemp(prefix='r580-'))
     try:
         # 1·2. 정상 경로

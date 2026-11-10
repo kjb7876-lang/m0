@@ -15299,8 +15299,8 @@
     },
     {
       "path": "assets/r380/mobs/index.json",
-      "bytes": 184055,
-      "sha256": "0fcc0bfda3667922413e8b0501ec79112e52f79e03a6920f17d5b76ec292000c"
+      "bytes": 184330,
+      "sha256": "91ac8d5f5b953685601b0dc8d29fdb9b42076c30572881e783bc2a1394fc1db3"
     },
     {
       "path": "assets/r380/mobs/jealousy-wraith-v1.webp",
@@ -15526,6 +15526,11 @@
       "path": "assets/r380/mobs/root-stalker-r74-plain.webp",
       "bytes": 81584,
       "sha256": "72deaa9fd0f53545500a765a37e7c210d5b277c2d85d7a9bbdb46ab61a2fc00b"
+    },
+    {
+      "path": "assets/r380/mobs/root-stalker-r74-walk-g1.webp",
+      "bytes": 84952,
+      "sha256": "67604777bc3fc755bb3a20e922c397fa2b38cddf74320b11305849927c299239"
     },
     {
       "path": "assets/r380/mobs/s06-commander-v1.webp",
@@ -33658,6 +33663,36 @@
       "sha256": "90c8922991b909dd13b75b34689f973619dc4d18fc1c57cf314abd6b46f4cb2b"
     },
     {
+      "path": "assets/r562/dots/neon-bubble-ring-back.webp",
+      "bytes": 127698,
+      "sha256": "92e2b0af03de1e38a97c63ff648adbd45ccd98b55cf62f3a051d2e4ae2b5a9f2"
+    },
+    {
+      "path": "assets/r562/dots/neon-bubble-ring-front.webp",
+      "bytes": 69570,
+      "sha256": "5e80d68f3b1cf658c48a233d65f942558d4b124e9e67ccfb9ed1fc0e253211b8"
+    },
+    {
+      "path": "assets/r562/dots/neon-chain.webp",
+      "bytes": 88656,
+      "sha256": "ed02db70a54b4d5736697ff33d16af7d3feb743f7efc3eae81e03ff06e3b0067"
+    },
+    {
+      "path": "assets/r562/dots/neon-toxic-pool.webp",
+      "bytes": 202512,
+      "sha256": "0b69a506134586fc9801b8a1206061e86c6ec6dbda806e4f311e1f611efa4035"
+    },
+    {
+      "path": "assets/r562/neon-lightning-strike.webp",
+      "bytes": 201726,
+      "sha256": "0d4aabbfef515b8e7477a4bf7100c4c2c8f4fb0029fa277f8d78ef8786f20220"
+    },
+    {
+      "path": "assets/r562/neon-toxic-mist.webp",
+      "bytes": 189670,
+      "sha256": "37c6eba767d48805d8c043fbb6fdcbbcf3245fe5d34a2ac7a535c917a14898a5"
+    },
+    {
       "path": "assets/r585/index.json",
       "bytes": 5998,
       "sha256": "58b5be4a18822506f40faa3c259e3ecfaacc0c099197ea223f48711f29feb1d3"
@@ -42809,8 +42844,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6573022,
-      "sha256": "0c0fa98221ee4aae4b42db2586e601488be1d744b45034c14828148e40bf596d"
+      "bytes": 6573109,
+      "sha256": "0f4372b058ea226471330ed043b76e2f1e7f24dbac43d849aa6cf73b4e1421b0"
     },
     {
       "path": "intro-r140.js",
@@ -42943,6 +42978,11 @@
       "sha256": "8bd5b64fba6b5cba9ca8153329f657cace10d4ccf1e7d0d38bc175a72bdad7a2"
     },
     {
+      "path": "mob-gait-r613.js",
+      "bytes": 10016,
+      "sha256": "ed05e114f8e497aaa9e43f24398c13a8c54df7112f2cd0d8cacc2ae79b04717b"
+    },
+    {
       "path": "mob-gaze-r268.js",
       "bytes": 7496,
       "sha256": "908a49ef437bb4761d68cdd56816383324401c89ef20592c3a53aa83ddcda9fe"
@@ -43036,6 +43076,11 @@
       "path": "nav-r176.js",
       "bytes": 5684,
       "sha256": "dc9f25885b4cbc747d36fe10f234459df1acfdb8af0b0d972d83ef9952d3d886"
+    },
+    {
+      "path": "neon-toxic-r562.js",
+      "bytes": 17694,
+      "sha256": "948010d72e6291fc4606aee7e714cd1066ca8966f86f01386c6c352035d28563"
     },
     {
       "path": "painted-vfx-data-r87.js",
@@ -43718,9 +43763,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8743,
-  "totalBytes": 1215954975,
-  "webHTMLSha256": "0c0fa98221ee4aae4b42db2586e601488be1d744b45034c14828148e40bf596d",
+  "fileCount": 8752,
+  "totalBytes": 1216947831,
+  "webHTMLSha256": "0f4372b058ea226471330ed043b76e2f1e7f24dbac43d849aa6cf73b4e1421b0",
   "largest": [
     {
       "path": "index.html",

@@ -3852,19 +3852,22 @@
   {
    "id": "root-stalker-r74-plain",
    "kind": "strip",
-   "path": "assets/r380/mobs/root-stalker-r74-plain.webp",
+   "path": "assets/r380/mobs/root-stalker-r74-walk-g1.webp",
    "cell": [
     288,
     176
    ],
-   "cols": 4,
+   "cols": 8,
    "pivot": [
     168.25,
     170.5
    ],
    "visibleHeight": 122.1,
    "move": [
-    0
+    4,
+    5,
+    6,
+    7
    ],
    "attack": [
     1,
@@ -3880,8 +3883,8 @@
     "zone": "dist00",
     "name": "^뿌리 추적자"
    },
-   "bytes": 81584,
-   "sha256": "72deaa9fd0f53545500a765a37e7c210d5b277c2d85d7a9bbdb46ab61a2fc00b",
+   "bytes": 84952,
+   "sha256": "67604777bc3fc755bb3a20e922c397fa2b38cddf74320b11305849927c299239",
    "source": [
     {
      "file": "01-idle.png",
@@ -3900,7 +3903,13 @@
      "sha256": "dacf9c60d7b1b527cd3cd039ea16ca31fde0f2d16018918e5983a6182d792ecc"
     }
    ],
-   "finalArt": false
+   "finalArt": false,
+   "walkSource": {
+    "tool": "gemini-3-pro-image (ElevenLabs creative)",
+    "round": "R613",
+    "note": "시안 — Dots CX-0067MV 정식본 오면 교체",
+    "genSha256": "7fbac8da9ce04a8d03f4c0dc5b125632d786af40b6f368039511b89fa974ff74"
+   }
   },
   {
    "id": "hexagram-experiment-m031-v1",
