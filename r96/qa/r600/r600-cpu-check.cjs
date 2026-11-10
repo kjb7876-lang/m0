@@ -56,4 +56,10 @@ assert(/if\(used\)return;used=true;/.test(src));ok('a choice applies once per pa
  const prof={path:'x'},G=(fn,d)=>{try{return fn();}catch(_){return d;}};
  const mk=()=>({enemies:[{nativeId:'u203-a',name:'졸개',profile:prof},{nativeId:'u203-mid',name:'계단의 감시자',midboss:true,boss:false,profile:prof},{nativeId:'u203-boss',name:'보스',boss:true,profile:prof}]});
  const r=f(G,mk,'u203');assert.strictEqual(r.mid?.nativeId,'u203-mid');assert.deepStrictEqual(r.normal.map(e=>e.nativeId),['u203-a']);assert.strictEqual(r.boss?.nativeId,'u203-boss');ok('native midboss flag puts u203-mid in the midboss slot, not the normal roster');}
+// Dots CX-0065V r1 시트: 경로가 사이트 자산·매니페스트에 있고, 그림 크기가 칸 수×칸 크기와 맞는다(틀리면 프레임이 밀려 다른 칸이 보임)
+{const m=src.match(/const DOT='([^']+)',SH=(\{.*?\}\}),FPS=/);assert(m,'SH table');const SHT=Function('DOT','return '+m[2])(m[1]);
+ const dims=b=>{const t=b.toString('ascii',12,16);if(t==='VP8X')return[1+b.readUIntLE(24,3),1+b.readUIntLE(27,3)];if(t==='VP8L'){const v=b.readUInt32LE(21);return[1+(v&0x3fff),1+((v>>14)&0x3fff)];}if(t==='VP8 ')return[b.readUInt16LE(26)&0x3fff,b.readUInt16LE(28)&0x3fff];throw new Error('webp '+t);};
+ const man=JSON.parse(fs.readFileSync(path.join(root,'runtime-manifest.json'),'utf8')),have=new Set((man.files||[]).map(r=>r.path));
+ for(const [k,d] of Object.entries(SHT)){const b=fs.readFileSync(path.join(root,'runtime-text',d.p));const [w,h]=dims(b);assert.deepStrictEqual([w,h],[d.n*d.w,d.h],k+' '+d.p);assert(have.has(d.p),'manifest '+d.p);}
+ assert(/coreState\(t\)/.test(src)&&/sheetImg\('beam'\)/.test(src)&&/sheetImg\('gem'\)/.test(src));ok('Dots core/beam/gem sheets exist, are in the manifest, and match frame count x cell size ('+Object.keys(SHT).length+' sheets)');}
 console.log('R600 CPU',n,'checks passed');
