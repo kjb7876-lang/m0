@@ -1,0 +1,8 @@
+{
+  "method": "Read original ZIP entries without extraction; compare SHA256 with preserved extraction after implementation",
+  "archiveFiles": 4699,
+  "projectFiles": 4698,
+  "extraRootPromptFiles": 1,
+  "mismatches": [],
+  "passed": true
+}

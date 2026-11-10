@@ -1,0 +1,44 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path');
+const {createHarness}=require('../harness.cjs');
+(async()=>{
+ const h=createHarness({timeoutMs:60000}),T=await import('../../hospital-three-pc/site/vendor/three/build/three.module.js');
+ const A=h.context.StoryPhase1,api=h.context.__STORYWORLD_WORLD_PRESENTATION_R81__;
+ if(!api)throw Error('R81 presentation module must be integrated into actual index.html first');
+ const L=A.hospitalCoreLayoutB2({walls:[],surface:{}},[]),checks=[];
+ const check=(name,passed,detail)=>{checks.push({name,passed:!!passed,detail});if(!passed)throw Object.assign(Error(name),{checks});};
+ const renderer={T,spatialRoot:new T.Group(),spatialResources:new Set(),visibleTerrainBounds:[-18,-18,109,133],visualWardMesh:new T.Mesh(new T.PlaneGeometry(1,1),new T.MeshBasicMaterial()),backdropRows:new Map(),fogRows:new Map()};
+ const frame={zone:'ep1a08',layer:'STORY',hero:'hwando',entities:[{id:'hero',hero:true,x:20,y:12,alive:true}],exploration:L,hospitalFocus13:[]};
+ A.ThreeRenderer.prototype.ensureHospitalRoofsR2.call(renderer,frame);
+ check('Actual Three geometry retains native wall-top height and floor-safe void backing',T.REVISION==='186'&&renderer.hospitalRoofMeshR2.geometry.attributes.position.getY(0)>2.7&&renderer.voidMeshR81?.isMesh,{revision:T.REVISION,roofY:renderer.hospitalRoofMeshR2.geometry.attributes.position.getY(0)});
+ const roofPlan=h.context.__STORYWORLD_HOSPITAL_A5__.plan(L),floor=new Set(L.floorCells.map(([x,y])=>x+':'+y)),nonwalk=renderer.voidMeshR81.userData.rects;
+ check('New backing never paints a walkable cell as an exterior tile',nonwalk.every(r=>{for(let y=Math.floor(r.y);y<r.y+r.depth;y++)for(let x=Math.floor(r.x);x<r.x+r.width;x++)if(floor.has(x+':'+y))return false;return true;}),{rects:nonwalk.length,internalVoidCells:roofPlan.roofCells});
+ check('Giant hospital backing is hidden; replacement has no grid texture',renderer.visualWardMesh.visible===false&&renderer.voidMeshR81.material.map===null&&renderer.voidMeshR81.userData.texture===false);
+ const old=renderer.voidMeshR81.geometry;api.ensureVoid(renderer,frame);
+ check('Static frame reuses void geometry and material',renderer.voidMeshR81.geometry===old&&renderer.spatialResources.size===2,{resources:renderer.spatialResources.size});
+ let disposed=false;old.addEventListener('dispose',()=>disposed=true);renderer.visibleTerrainBounds=[-24,-16,104,128];api.ensureVoid(renderer,frame);
+ check('Viewport reallocation disposes old backing geometry',disposed&&renderer.spatialRoot.children.filter(x=>x.name==='r81-solid-nonwalkable-backing').length===1);
+ const coverage=[];
+ for(const [name,x,y]of[['left-entry',5,109],['centre-entry',43,109],['right-entry',83,109],['boss-room',20,12],['upper-ward',76,9],['north-exit',5,3.5],['west-route',18.5,95.5],['east-route',68.5,95.5],['middle-ward',21,60]])for(const[width,height]of[[1280,720],[1920,1080],[2560,1080]]){
+  const base={width,height,zoom:1.12,tile:34,camX:x,camY:y},result=api.cameraPlan(L,base,{x,y},[]),p=new A.Projection().configure(result.projection),camera=new T.OrthographicCamera();p.configureCamera(camera);
+  const actual=new T.Vector3(x,0,y).project(camera),sx=(actual.x*.5+.5)*width,sy=(1-actual.y)*.5*height,expected=p.worldToScreen(x,y);
+  check('Pinned camera matrix agrees with shared input projection '+name+' '+width,Math.abs(sx-expected.x)<1e-6&&Math.abs(sy-expected.y)<1e-6,{sx,sy,expected});
+  const back=p.screenToWorld(expected.x,expected.y);
+  check('Hero remains clickable inside safe viewport '+name+' '+width,Math.hypot(back.x-x,back.y-y)<1e-8&&sx>=width*.20-1e-6&&sx<=width*.80+1e-6&&sy>=height*.26-1e-6&&sy<=height*.78+1e-6&&sy-66*1.12>=Math.min(96,height*.18)-1e-6,{sx,sy});
+  coverage.push({name,width,height,before:result.before,after:result.coverage,camX:result.projection.camX,camY:result.projection.camY});
+ }
+ const edge=coverage.filter(x=>/entry|upper-ward|north-exit/.test(x.name));
+ check('Edge framing reduces average visible exterior using actual isometric viewport sampling',edge.reduce((n,x)=>n+x.after.exterior,0)<edge.reduce((n,x)=>n+x.before.exterior,0)*.80,{before:edge.reduce((n,x)=>n+x.before.exterior,0)/edge.length,after:edge.reduce((n,x)=>n+x.after.exterior,0)/edge.length});
+ check('Combat floor occupies more average screen area after framing',coverage.reduce((n,x)=>n+x.after.floor,0)>coverage.reduce((n,x)=>n+x.before.floor,0),{before:coverage.reduce((n,x)=>n+x.before.floor,0)/coverage.length,after:coverage.reduce((n,x)=>n+x.after.floor,0)/coverage.length});
+ const worldView={...L,hospitalCoreB2:undefined,worldR78:{theme:'swamp'}};
+ const e={id:'hero',hero:true,x:20,y:12,alive:true},target={id:'boss',enemy:true,x:23,y:10,hp:100,height:180,alive:true},mapped=h.context.__STORYWORLD_WORLD_ASSETS_R80__.roofFrame({zone:'ep1b01',layer:'STORY',hero:'hwando',entities:[e,target],exploration:worldView});
+ check('World roof cutaway consumes the real string-hero frame contract',mapped.hospitalFocus13.length===2&&mapped.hospitalFocus13[0].x===20&&mapped.hospitalFocus13[1].x===23&&mapped.hospitalFocus13[1].focusHeight>5&&mapped.exploration!==worldView&&!worldView.hospitalCoreB2,{focus:mapped.hospitalFocus13});
+ const styles=['hospital','swamp','spider-cave'].map(theme=>api.palette({...worldView,worldR78:{theme}}));
+ check('Hospital, swamp and cave share geometry rules with separate roof palettes',new Set(styles.map(s=>s.roof)).size===3,styles);
+ const memory=api.palette({...worldView,worldR78:{theme:'machine'},surface:{art:{r81Environment:'memory'}},voidCover:{tint:'#302b3a'}});check('Exact canonical R81 environment overrides older broad theme defaults',memory.family==='memory'&&memory.roof==='#302b3a',memory);
+ await h.boot();await h.start();h.run('W=1280;H=720;cam={x:player.x,y:player.y};cameraTick(.016)');
+ const contract=h.run(`(()=>{const before=zoom,q=project(player.x,player.y),back=unproject(q.x,q.y),camBefore={...cam};window.__STORYWORLD_PHASE1__.controller.draw();const qAfter=project(player.x,player.y);return{before,after:zoom,camBefore,camAfter:{...cam},pixelDrift:Math.hypot(qAfter.x-q.x,qAfter.y-q.y),error:Math.hypot(back.x-player.x,back.y-player.y),current:window.__STORYWORLD_WORLD_PRESENTATION_R81__.inspect().camera,legacy:window.__STORYWORLD_HOSPITAL_A5__.inspect()};})()`);
+ check('Rendering keeps the same persistent zoom used by pointer inverse projection',contract.current&&Math.abs(contract.before-contract.after)<1e-10&&contract.error<1e-10&&contract.pixelDrift<1e-8&&!contract.legacy.pcFinePointerZoomHooked,{before:contract.before,after:contract.after,error:contract.error,pixelDrift:contract.pixelDrift,camBefore:contract.camBefore,camAfter:contract.camAfter});
+ const report={schema:'r81-presentation-cpu/v1',checks,coverage,passed:checks.filter(x=>x.passed).length,failed:checks.filter(x=>!x.passed).length,method:'Actual pinned Three r186 geometry and OrthographicCamera matrices plus runtime VM input projection; sampled coverage is geometric, not a rendered screenshot.',browserVerified:false,GPUVerified:false};
+ fs.writeFileSync(path.join(__dirname,'presentation-results.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({passed:report.passed,failed:report.failed,coverage:report.checks.filter(x=>/framing|average screen/.test(x.name))},null,2));
+})().catch(e=>{if(e.checks)fs.writeFileSync(path.join(__dirname,'presentation-results.json'),JSON.stringify({passed:false,checks:e.checks,error:e.stack,browserVerified:false,GPUVerified:false},null,2));console.error(e.stack);process.exitCode=1;});

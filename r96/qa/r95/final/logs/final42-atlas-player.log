@@ -1,0 +1,40 @@
+PASS Runtime installs exactly42 source-backed effects and no separate animation loop
+PASS Unknown IDs and nonfinite or negative times cannot create frames
+PASS Every authored clip step samples its exact original frame rect and fixed pivot
+PASS Numeric canonical and original effect IDs resolve to the same frame
+PASS F6 auras retain the30-step forward reverse sequence and exact wrap
+PASS Thorn automatically chains emerge bind hold and bounded release
+PASS Original endpoint opacity interpolates without altering PNG pixels
+PASS Held warnings require explicit signal while projectiles hold only by request
+PASS Each of42 atlases decodes individually while staying inside the64MiB bound
+PASS Concurrent42-effect requests never decode all42 or exceed atlas and byte budgets
+PASS Repeated aliases and ensures reuse one decoded Image
+PASS All authored stored frames draw unchanged atlas rects with source alpha and finite quads
+PASS Drawing restores caller alpha transform blend and owner state
+PASS Native status keys deduplicate attachment without restarting its clock
+PASS Attachment follows its live actor and draws only in its assigned actor layer
+PASS Status extensions preserve age and expiry switches thorn to its release clip
+PASS A new admitted status may bind again while the previous release tail finishes
+PASS Release clip completes and removes both status and tail handles
+PASS Actor death removes its attachment without retaining a release cage
+PASS Offscreen status instances expire after the bounded grace interval
+PASS Unused decoded atlas textures expire after idle TTL
+PASS Managed multi-spawn is capped at16 live instances
+PASS Room identity changes clear all instances Images and pending timers
+PASS Player death releases textures and cannot immediately reload them
+PASS Pointer coarse scope preserves mobile by declining and releasing FINAL42
+PASS Scene cancellation resolves pending decodes and cannot resurrect a late Image
+PASS An image failure is cached for the scene and not retried on every frame
+PASS First-load admission keeps native fallback then a live ready retry preserves original age
+PASS A ready texture cannot resurrect an async event captured in a previous scene
+PASS Ground textures use the exact native footprint with donut hole and capsule union rules
+PASS Malformed footprint angles never emit nonfinite geometry
+PASS Native replay uses byte-identical canonical runtime and catalog delivery
+PASS Actual native footprint recording emits one clipped original-atlas command per shape
+PASS Native FINAL42 clipped image commands produce finite real Three geometry
+PASS Three clipping preserves the donut hole and capsule union without XOR holes
+PASS FINAL42 textures retain straight alpha linear clamp filtering without mipmaps
+PASS Supplied single rear and front overlays retain pass ordering and world-depth occlusion
+PASS Removing actual FINAL42 commands releases all Three geometry and textures
+PASS Native game error ledger remains clear after FINAL42 CPU replay
+FINAL true 39

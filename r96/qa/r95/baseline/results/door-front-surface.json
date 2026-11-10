@@ -1,0 +1,299 @@
+{
+  "schema": "r86-door-front-surface/v1",
+  "checks": [
+    {
+      "name": "Hospital registers both three original physical doors and the packaged clinical art",
+      "passed": true
+    },
+    {
+      "name": "Native hospital entry preloads the new door before drawing",
+      "passed": true
+    },
+    {
+      "name": "Real clinical door source is264x512 and every sampled leaf texel is opaque",
+      "passed": true,
+      "detail": {
+        "size": [
+          264,
+          512
+        ],
+        "alpha": [
+          253,
+          253,
+          253,
+          253,
+          253,
+          253,
+          253,
+          253,
+          253,
+          253,
+          253,
+          253,
+          253,
+          253,
+          253,
+          253,
+          252,
+          253,
+          253,
+          252,
+          252,
+          253,
+          253,
+          253,
+          253
+        ]
+      }
+    },
+    {
+      "name": "Door rendering changes no physical doors walls props enemyHP or playerHP",
+      "passed": true
+    },
+    {
+      "name": "All three closed hospital doors have two image leaves and their original collision",
+      "passed": true,
+      "detail": [
+        {
+          "id": "door-0",
+          "blocked": true,
+          "commands": 7
+        },
+        {
+          "id": "door-1",
+          "blocked": true,
+          "commands": 7
+        },
+        {
+          "id": "door-2",
+          "blocked": true,
+          "commands": 7
+        }
+      ]
+    },
+    {
+      "name": "Reproducer: native opaque barrier hides the old centre-plane leaf on every hospital door",
+      "passed": true,
+      "detail": [
+        {
+          "door": "door-0",
+          "part": "closed-left",
+          "wallDistance": 100.02449527557035,
+          "oldDistance": 100.22045445061296,
+          "artDistance": 100,
+          "clearance": 0.024495275570345143,
+          "oldOccluded": true,
+          "depthTest": false,
+          "polygonOffset": true,
+          "renderOrder": 2
+        },
+        {
+          "door": "door-0",
+          "part": "closed-right",
+          "wallDistance": 100.02449527557035,
+          "oldDistance": 100.22045445061296,
+          "artDistance": 100,
+          "clearance": 0.024495275570345143,
+          "oldOccluded": true,
+          "depthTest": false,
+          "polygonOffset": true,
+          "renderOrder": 2
+        },
+        {
+          "door": "door-1",
+          "part": "closed-left",
+          "wallDistance": 100.0244983902576,
+          "oldDistance": 100.22045756530022,
+          "artDistance": 100,
+          "clearance": 0.02449839025760525,
+          "oldOccluded": true,
+          "depthTest": false,
+          "polygonOffset": true,
+          "renderOrder": 2
+        },
+        {
+          "door": "door-1",
+          "part": "closed-right",
+          "wallDistance": 100.0244983902576,
+          "oldDistance": 100.22045756530022,
+          "artDistance": 100,
+          "clearance": 0.02449839025760525,
+          "oldOccluded": true,
+          "depthTest": false,
+          "polygonOffset": true,
+          "renderOrder": 2
+        },
+        {
+          "door": "door-2",
+          "part": "closed-left",
+          "wallDistance": 100.02449527557035,
+          "oldDistance": 100.22045445061296,
+          "artDistance": 100,
+          "clearance": 0.024495275570345143,
+          "oldOccluded": true,
+          "depthTest": false,
+          "polygonOffset": true,
+          "renderOrder": 2
+        },
+        {
+          "door": "door-2",
+          "part": "closed-right",
+          "wallDistance": 100.02449527557033,
+          "oldDistance": 100.22045445061296,
+          "artDistance": 100,
+          "clearance": 0.024495275570330932,
+          "oldOccluded": true,
+          "depthTest": false,
+          "polygonOffset": true,
+          "renderOrder": 2
+        }
+      ]
+    },
+    {
+      "name": "Corrected art lies visibly in front of the native barrier with positive depth clearance",
+      "passed": true,
+      "detail": [
+        {
+          "door": "door-0",
+          "part": "closed-left",
+          "clearance": 0.024495275570345143
+        },
+        {
+          "door": "door-0",
+          "part": "closed-right",
+          "clearance": 0.024495275570345143
+        },
+        {
+          "door": "door-1",
+          "part": "closed-left",
+          "clearance": 0.02449839025760525
+        },
+        {
+          "door": "door-1",
+          "part": "closed-right",
+          "clearance": 0.02449839025760525
+        },
+        {
+          "door": "door-2",
+          "part": "closed-left",
+          "clearance": 0.024495275570345143
+        },
+        {
+          "door": "door-2",
+          "part": "closed-right",
+          "clearance": 0.024495275570330932
+        }
+      ]
+    },
+    {
+      "name": "Actual full-frame classifier keeps hospital door art in depth-tested body pass",
+      "passed": true
+    },
+    {
+      "name": "Depth-tested door textures retain deterministic overlay and anti-z-fighting",
+      "passed": true
+    },
+    {
+      "name": "Native hospital opening removes closed leaves and unblocks the existing aperture",
+      "passed": true,
+      "detail": {
+        "open": true,
+        "blocked": false,
+        "parts": [
+          "left-jamb",
+          "right-jamb",
+          "header",
+          "open-left",
+          "open-right"
+        ]
+      }
+    },
+    {
+      "name": "Open leaves have finite Three geometry and stay outside the centre passage",
+      "passed": true
+    },
+    {
+      "name": "Door CPU regression records no native runtime error",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "browserVerified": false,
+  "GPUVerified": false,
+  "method": "Native hospital door capture and original DrawCommands replay to pinned Three; actual image alpha sample and ray/depth regression. Scripted opening is a fixture, not natural play.",
+  "depthEvidence": [
+    {
+      "door": "door-0",
+      "part": "closed-left",
+      "wallDistance": 100.02449527557035,
+      "oldDistance": 100.22045445061296,
+      "artDistance": 100,
+      "clearance": 0.024495275570345143,
+      "oldOccluded": true,
+      "depthTest": false,
+      "polygonOffset": true,
+      "renderOrder": 2
+    },
+    {
+      "door": "door-0",
+      "part": "closed-right",
+      "wallDistance": 100.02449527557035,
+      "oldDistance": 100.22045445061296,
+      "artDistance": 100,
+      "clearance": 0.024495275570345143,
+      "oldOccluded": true,
+      "depthTest": false,
+      "polygonOffset": true,
+      "renderOrder": 2
+    },
+    {
+      "door": "door-1",
+      "part": "closed-left",
+      "wallDistance": 100.0244983902576,
+      "oldDistance": 100.22045756530022,
+      "artDistance": 100,
+      "clearance": 0.02449839025760525,
+      "oldOccluded": true,
+      "depthTest": false,
+      "polygonOffset": true,
+      "renderOrder": 2
+    },
+    {
+      "door": "door-1",
+      "part": "closed-right",
+      "wallDistance": 100.0244983902576,
+      "oldDistance": 100.22045756530022,
+      "artDistance": 100,
+      "clearance": 0.02449839025760525,
+      "oldOccluded": true,
+      "depthTest": false,
+      "polygonOffset": true,
+      "renderOrder": 2
+    },
+    {
+      "door": "door-2",
+      "part": "closed-left",
+      "wallDistance": 100.02449527557035,
+      "oldDistance": 100.22045445061296,
+      "artDistance": 100,
+      "clearance": 0.024495275570345143,
+      "oldOccluded": true,
+      "depthTest": false,
+      "polygonOffset": true,
+      "renderOrder": 2
+    },
+    {
+      "door": "door-2",
+      "part": "closed-right",
+      "wallDistance": 100.02449527557033,
+      "oldDistance": 100.22045445061296,
+      "artDistance": 100,
+      "clearance": 0.024495275570330932,
+      "oldOccluded": true,
+      "depthTest": false,
+      "polygonOffset": true,
+      "renderOrder": 2
+    }
+  ],
+  "passed": true
+}

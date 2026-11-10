@@ -1,0 +1,342 @@
+{
+  "schema": "r90-presentation-cpu/v1",
+  "method": "New five-part R89 native game in Node VM plus R90 canonical overlay. Native DOM/Image/audio/renderer are harness stubs. Synthetic coordinate/HP/clock/hero changes and native hospital-direct start are used. No headless browser, GPU or manual play.",
+  "checks": [
+    {
+      "name": "Native full runtime boots without errors",
+      "passed": true,
+      "detail": {
+        "booted": true,
+        "bootError": null,
+        "errors": [],
+        "warnings": [
+          "저장소 내레이션은 부분 제공입니다. 누락 또는 원문 불일치 장면은 텍스트로 진행합니다."
+        ],
+        "player": true
+      }
+    },
+    {
+      "name": "Native hospital-direct start enters hospital",
+      "passed": true
+    },
+    {
+      "name": "Preferences keep native prefix outside save slots",
+      "passed": true,
+      "detail": "storyworld.hospital-three-pc.maze.v11:r90.presentation"
+    },
+    {
+      "name": "Preference write changes only dedicated presentation key",
+      "passed": true,
+      "detail": [
+        "storyworld.hospital-three-pc.maze.v11:r90.presentation"
+      ]
+    },
+    {
+      "name": "Seven switches sit after the native R89 section",
+      "passed": true
+    },
+    {
+      "name": "Numbers hidden initially and shown after actual observed HP loss",
+      "passed": true,
+      "detail": {
+        "first": {
+          "hp": 777,
+          "max": 777,
+          "damageAt": null,
+          "numbers": false
+        },
+        "hit": {
+          "hp": 760,
+          "max": 777,
+          "damageAt": 11,
+          "numbers": true
+        },
+        "within": {
+          "hp": 760,
+          "max": 777,
+          "damageAt": 11,
+          "numbers": true
+        },
+        "expired": {
+          "hp": 760,
+          "max": 777,
+          "damageAt": 11,
+          "numbers": false
+        },
+        "healed": {
+          "hp": 765,
+          "max": 777,
+          "damageAt": 11,
+          "numbers": false
+        }
+      }
+    },
+    {
+      "name": "Numbers expire after two native game seconds; healing does not reopen",
+      "passed": true,
+      "detail": {
+        "first": {
+          "hp": 777,
+          "max": 777,
+          "damageAt": null,
+          "numbers": false
+        },
+        "hit": {
+          "hp": 760,
+          "max": 777,
+          "damageAt": 11,
+          "numbers": true
+        },
+        "within": {
+          "hp": 760,
+          "max": 777,
+          "damageAt": 11,
+          "numbers": true
+        },
+        "expired": {
+          "hp": 760,
+          "max": 777,
+          "damageAt": 11,
+          "numbers": false
+        },
+        "healed": {
+          "hp": 765,
+          "max": 777,
+          "damageAt": 11,
+          "numbers": false
+        }
+      }
+    },
+    {
+      "name": "R90 health painter emits 2px muted health fill",
+      "passed": true,
+      "detail": [
+        {
+          "op": "fillRect",
+          "args": [
+            615,
+            422.3199999999998,
+            50,
+            4
+          ],
+          "fill": "rgba(9,12,10,.9)"
+        },
+        {
+          "op": "fillRect",
+          "args": [
+            616,
+            423.3199999999998,
+            48,
+            2
+          ],
+          "fill": "#26322c"
+        },
+        {
+          "op": "fillRect",
+          "args": [
+            616,
+            423.3199999999998,
+            47.25868725868726,
+            2
+          ],
+          "fill": "#697e69"
+        }
+      ]
+    },
+    {
+      "name": "Expired HP number absent from actual HUD paint calls",
+      "passed": true
+    },
+    {
+      "name": "Health setting off restores native numeric HP painter",
+      "passed": true
+    },
+    {
+      "name": "Automatic highlight equals actual public native selector",
+      "passed": true,
+      "detail": {
+        "setup": {
+          "first": "ep1a08:a08-o1",
+          "selected": "ep1a08:a08-s1",
+          "clear": true
+        },
+        "targetRead": {
+          "native": "ep1a08:a08-s1",
+          "shown": "ep1a08:a08-s1"
+        }
+      }
+    },
+    {
+      "name": "Held manual attack takes precedence over automatic selector",
+      "passed": true,
+      "detail": {
+        "setup": {
+          "first": "ep1a08:a08-o1",
+          "selected": "ep1a08:a08-s1",
+          "clear": true
+        },
+        "manual": {
+          "emitted": [
+            {
+              "id": "ep1a08:a08-o1",
+              "hero": "slayer",
+              "action": "attack"
+            }
+          ],
+          "shown": "ep1a08:a08-o1",
+          "predicted": "ep1a08:a08-s1",
+          "hpBefore": 593.4499999999999,
+          "hpAfter": 423.5299999999999
+        }
+      }
+    },
+    {
+      "name": "Slayer manual target is read from actual admitted native contact",
+      "passed": true,
+      "detail": {
+        "emitted": [
+          {
+            "id": "ep1a08:a08-o1",
+            "hero": "slayer",
+            "action": "attack"
+          }
+        ],
+        "shown": "ep1a08:a08-o1",
+        "predicted": "ep1a08:a08-s1",
+        "hpBefore": 593.4499999999999,
+        "hpAfter": 423.5299999999999
+      }
+    },
+    {
+      "name": "Actual multi-hit cone contacts do not invent a primary target",
+      "passed": true,
+      "detail": {
+        "hits": [
+          "ep1a08:a08-o1",
+          "ep1a08:a08-s1"
+        ],
+        "shown": null
+      }
+    },
+    {
+      "name": "Private manual melee selector is not replaced with guessed target",
+      "passed": true
+    },
+    {
+      "name": "Target observation leaves native combat/selection/clock data unchanged",
+      "passed": true
+    },
+    {
+      "name": "Manual ranged highlight calls native range selector",
+      "passed": true,
+      "detail": {
+        "hero": "seoha",
+        "expected": "ep1a08:a08-o1",
+        "actual": "ep1a08:a08-o1"
+      }
+    },
+    {
+      "name": "Actual native enemy HP draw changes from 4px to 2px",
+      "passed": true,
+      "detail": {
+        "off": [
+          {
+            "args": [
+              2504.7022769003765,
+              -1455.4048914596124,
+              28.466666666666665,
+              4
+            ],
+            "fill": "#08101bdd"
+          },
+          {
+            "args": [
+              2504.7022769003765,
+              -1455.4048914596124,
+              14.233333333333333,
+              4
+            ],
+            "fill": "#b69aa3"
+          }
+        ],
+        "on": [
+          {
+            "args": [
+              2504.7022769003765,
+              -1455.4048914596124,
+              28.466666666666665,
+              2
+            ],
+            "fill": "#302926"
+          },
+          {
+            "args": [
+              2504.7022769003765,
+              -1455.4048914596124,
+              14.233333333333333,
+              2
+            ],
+            "fill": "#795a50"
+          }
+        ]
+      }
+    },
+    {
+      "name": "HUD painter selects canvas despite native duplicate script ID",
+      "passed": true,
+      "detail": {
+        "error": null,
+        "paintCalls": 9
+      }
+    },
+    {
+      "name": "UI CSS has no layout geometry or image rules",
+      "passed": true
+    },
+    {
+      "name": "No overlay errors were recorded",
+      "passed": true,
+      "detail": {
+        "revision": "R90-presentation",
+        "prefs": {
+          "localLights": true,
+          "decals": true,
+          "target": false,
+          "health": true,
+          "walls": true,
+          "atmosphere": true,
+          "ui": true
+        },
+        "stats": {
+          "hudPaints": 4,
+          "targetPaints": 0,
+          "healthSamples": 10,
+          "enemyBars": 2,
+          "errors": 0
+        },
+        "lastError": null,
+        "lastTarget": {
+          "id": "ep1a08:a08-o1",
+          "source": "native-ranged-nearestEnemy(range)"
+        },
+        "manualMelee": "unique admitted basic-attack contact only; inline private selector is not duplicated; simultaneous multi-hit contacts are not highlighted",
+        "egoAutomatic": "no preview when native admission is outside EGO 8.3 reach",
+        "saveSlotsChanged": false,
+        "gameplayChanged": false
+      }
+    },
+    {
+      "name": "Native error ledger remains clear",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "sourceSHA256": "691b36170f191cb768379a18c087ef5e6e2ecfd0280b8fbdcc254f1317ef82dc",
+  "nativeErrors": [],
+  "passedChecks": 22,
+  "totalChecks": 22,
+  "passed": true
+}

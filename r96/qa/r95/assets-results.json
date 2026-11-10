@@ -1,0 +1,54 @@
+{
+  "schema": "storyworld.r95.asset-audit/v1",
+  "generatedAt": "2026-10-25T01:05:05.393332+00:00",
+  "method": "JSON parsing, full raster pixel decoding, independent catalog hashes and atlas bounds. Source provenance paths and external-to-crop foot pivots are not runtime file or bounds errors.",
+  "counts": {
+    "json": 216,
+    "images": 2240,
+    "catalogRows": 504,
+    "catalogImages": 486,
+    "stripAtlases": 129,
+    "effectAtlases": 31,
+    "effectFrames": 496
+  },
+  "checks": [
+    {
+      "name": "Every delivered JSON file parses",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Every delivered raster image decodes",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "All R91-R93 catalog runtime paths exist",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "All R91-R93 catalog bytes and hashes match",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "All R91-R93 catalog image dimensions match",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "All R91-R93 strip cells remain within the image",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Every declared effect-atlas frame stays within its atlas",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "passed": true,
+  "browserVerified": false,
+  "GPUVerified": false
+}

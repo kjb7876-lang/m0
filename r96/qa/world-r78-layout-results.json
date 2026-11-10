@@ -1,0 +1,2951 @@
+{
+  "schema": "world-layout-r78-cpu/v1",
+  "method": "Original renderer layout functions in Node VM; no browser, WebGL or GPU.",
+  "checks": [
+    {
+      "name": "All 55 authored combat regions use R78; hospital and rest zones are excluded",
+      "passed": true,
+      "detail": {
+        "eligible": 55,
+        "generated": 55,
+        "ids": [
+          "dist00",
+          "dist01",
+          "dist02",
+          "dist03",
+          "dist04",
+          "dist05",
+          "dist06",
+          "ep1a09",
+          "ep1a10",
+          "ep1a11",
+          "ep1b01",
+          "ep1b02",
+          "ep1b03",
+          "ep1b04",
+          "ep1b05",
+          "ep1b06",
+          "ep1b06b",
+          "ep1b07",
+          "ep1b08",
+          "ep1b09",
+          "u201",
+          "u202",
+          "u204",
+          "u205",
+          "u206",
+          "u203",
+          "last304",
+          "last305",
+          "last301",
+          "last302",
+          "last303",
+          "kair01",
+          "kair04",
+          "kair05",
+          "kair06",
+          "kair07",
+          "kair08",
+          "kair09",
+          "kair10",
+          "kair02",
+          "kair03",
+          "hando01",
+          "hando02",
+          "hando03",
+          "murder01",
+          "murder02",
+          "murder04",
+          "murder03",
+          "cult01",
+          "cult02",
+          "cult05",
+          "cult06",
+          "cult03",
+          "cult04",
+          "ep1a09b"
+        ]
+      }
+    },
+    {
+      "name": "Every map room graph is connected and every node anchor lands on floor",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "All walkable tiles form one connected combat area",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Regional source exits remain on floor and all original exits are preserved",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Region-specific terrain atlas and story topology remain intact",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Boss chamber and one door metadata remain per combat map",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Hospital and six safe maps retain their existing layout paths",
+      "passed": true,
+      "detail": {
+        "ep1a08": {
+          "r78": false,
+          "type": "hospital-ward-b3"
+        },
+        "dreamRest": {
+          "r78": false,
+          "type": "interior-consultation"
+        },
+        "restEp1b": {
+          "r78": false,
+          "type": "interior-observation"
+        },
+        "restU2": {
+          "r78": false,
+          "type": "fusion-rift-outpost"
+        },
+        "restLast3": {
+          "r78": false,
+          "type": "post-portal-observation"
+        },
+        "restKairo": {
+          "r78": false,
+          "type": "rewritten-first-command-garden"
+        },
+        "restHando": {
+          "r78": false,
+          "type": "blocked-time-wormhole"
+        }
+      }
+    },
+    {
+      "name": "Co-op layouts bypass the solo R78 generator",
+      "passed": true,
+      "detail": {
+        "r78": false,
+        "type": "ruins"
+      }
+    }
+  ],
+  "maps": [
+    {
+      "id": "dist00",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "dist01",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "dist02",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "dist03",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "dist04",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "dist05",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "dist06",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "ep1a09",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "ep1a10",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "ep1a11",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "ep1b01",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "ep1b02",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "ep1b03",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "ep1b04",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "ep1b05",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "ep1b06",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "ep1b06b",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "ep1b07",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "ep1b08",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "ep1b09",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "u201",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "u202",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "u204",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "u205",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "u206",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "u203",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "last304",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "last305",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "last301",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "last302",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "last303",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "kair01",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "kair04",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "kair05",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "kair06",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "kair07",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "kair08",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "kair09",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "kair10",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "kair02",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "kair03",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "hando01",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "hando02",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "hando03",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "murder01",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "murder02",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "murder04",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "murder03",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "cult01",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "cult02",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "cult05",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "s",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "cult06",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "cult03",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "cult04",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [
+        {
+          "direction": "w",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "e",
+          "onFloor": true,
+          "reachable": true
+        },
+        {
+          "direction": "n",
+          "onFloor": true,
+          "reachable": true
+        }
+      ],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    },
+    {
+      "id": "ep1a09b",
+      "type": "r78-story-combat-maze",
+      "r78": true,
+      "floorCells": 3684,
+      "nodes": 14,
+      "edges": 13,
+      "graphConnected": true,
+      "nodeAnchorsOnFloor": true,
+      "floorConnected": true,
+      "exits": [],
+      "exitsPreserved": true,
+      "regionalArtPreserved": true,
+      "sourceTopologyPreserved": true,
+      "oneBossDoor": true,
+      "bounds": [
+        -28,
+        -28,
+        81,
+        81
+      ],
+      "door": {
+        "id": "door-0",
+        "x": 34.5,
+        "y": 34.5,
+        "width": 0.28,
+        "depth": 3.4,
+        "axis": "x",
+        "reach": 2.2,
+        "closed": true,
+        "edge": [
+          13,
+          5
+        ],
+        "r78BossDoor": true
+      }
+    }
+  ],
+  "browser": false,
+  "GPU": false
+}
