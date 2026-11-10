@@ -8091,7 +8091,9 @@
     "boss-motion-r620.js",
     "assets/r620/bosses/b03-hit4.webp",
     "assets/r620/bosses/b03-idle6.webp",
-    "skill-growth-r663.js"
+    "skill-growth-r663.js",
+    "mob-student-walk-r615.js",
+    "assets/r615/mob-student-walk8.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9166,5 +9168,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "3c3a21e123cd9d2ad1e0e161294776963a32b98becf2fd420d15086852c74267"
+  "runtimeManifestSHA256": "44869a3c671d394c034023e76cf2a52e7586deb44528cf2590524f3dacfc5cd4"
 }

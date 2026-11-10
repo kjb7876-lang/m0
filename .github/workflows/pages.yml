@@ -623,6 +623,8 @@ jobs:
         run: node r96/qa/r562/neon-toxic-cpu-check.cjs
       - name: R613 mobs with a single walking image get a distance-synced step gait until Dots walk sheets arrive (CX-0067MV) CPU check
         run: node r96/qa/r613/r613-cpu-check.cjs
+      - name: R615b faceless student (samong S-02) walks with the Dots CX-0067MV 8-frame sheet CPU check
+        run: node r96/qa/r615/student-cpu-check.cjs
       - name: R620 boss motion CPU check
         run: node r96/qa/r620/r620-cpu-check.cjs
       - name: R563 Michaela genesis chain (Q → sky light pillars, R → grand pillar + halo; no new keys, upright cross only, Dots MI sheets) CPU check
