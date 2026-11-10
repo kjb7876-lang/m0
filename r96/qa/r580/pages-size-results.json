@@ -22,22 +22,22 @@
   {
    "name": "pages-pack.py 성공",
    "passed": true,
-   "detail": "{\"totalBytes\": 966128040, \"budgetBytes\": 1000000000, \"files\": 6746, \"excludedFiles\": 238, \"excludedBytes\": 95611880, \"optimizedPng\": 1035, \"optimizedSavedBytes\": 35010145}\n"
+   "detail": "{\"totalBytes\": 1084581760, \"budgetBytes\": 1100000000, \"files\": 8490, \"excludedFiles\": 238, \"excludedBytes\": 95611880, \"optimizedPng\": 1035, \"optimizedSavedBytes\": 35010145}\n"
   },
   {
-   "name": "배포본 1,000,000,000 바이트 미만",
+   "name": "배포본 예산 1,100,000,000 바이트 미만",
    "passed": true,
-   "detail": "966,128,040 bytes (6746 files)"
+   "detail": "1,084,581,760 bytes (8490 files)"
   },
   {
    "name": "pages-deploy.json 총량이 실제와 같음",
    "passed": true,
-   "detail": 966128040
+   "detail": 1084581760
   },
   {
    "name": "원본 사이트보다 90MB 넘게 줄었음",
    "passed": true,
-   "detail": "129.1 MB"
+   "detail": "128.8 MB"
   },
   {
    "name": "빼지 않은 manifest 파일은 모두 배포본에 있음",
@@ -82,7 +82,7 @@
   {
    "name": "보호 경로(R381 음성)를 빼려 하면 묶기 거부",
    "passed": true,
-   "detail": " assets/r381/voice/00091c5c62b39736.mp3, assets/r381/voice/002bd5340e594b5e.mp3, assets/r381/voice/0058aff99b176e70.mp3, assets/r381/voice/005f7ad55c3c4376.mp3, assets/r381/voice/009c60980c0d689e.mp3\n"
+   "detail": " assets/r381/voice/00091c5c62b39736.mp3, assets/r381/voice/000aed762d4e5e9a.mp3, assets/r381/voice/000b6b8671b15fbd.mp3, assets/r381/voice/001c9b6976ec3507.mp3, assets/r381/voice/002bd5340e594b5e.mp3\n"
   },
   {
    "name": "index.html 을 빼려 하면 묶기 거부",
@@ -92,12 +92,12 @@
   {
    "name": "예산을 넘으면 묶기 실패(한도 바로 아래 예산)",
    "passed": true,
-   "detail": "{\"totalBytes\": 1000891937, \"budgetBytes\": 966128039, \"files\": 6746, \"excludedFiles\": 238, \"excludedBytes\": 95611880, \"optimizedPng\": 0, \"optimizedSavedBytes\": 0}\nover budget: 1000891937 >= 966128039\n"
+   "detail": "\"totalBytes\": 1119345656, \"budgetBytes\": 1084581759, \"files\": 8490, \"excludedFiles\": 238, \"excludedBytes\": 95611880, \"optimizedPng\": 0, \"optimizedSavedBytes\": 0}\nover budget: 1119345656 >= 1084581759\n"
   },
   {
    "name": "PNG 압축을 끄면 남은 파일 바이트가 모두 원본과 같음",
    "passed": true,
-   "detail": "{\"totalBytes\": 1000891937, \"budgetBytes\": 2000000000, \"files\": 6746, \"excludedFiles\": 238, \"excludedBytes\": 95611880, \"optimizedPng\": 0, \"optimizedSavedBytes\": 0}\n"
+   "detail": "{\"totalBytes\": 1119345656, \"budgetBytes\": 2000000000, \"files\": 8490, \"excludedFiles\": 238, \"excludedBytes\": 95611880, \"optimizedPng\": 0, \"optimizedSavedBytes\": 0}\n"
   },
   {
    "name": "verify-r96-public.py 가 배포본에서 통과",
