@@ -41,13 +41,13 @@ function world(fx,opt={}){const L=layoutOf(fx),props=fx.props.map(p=>({...p,soli
  return{id:opt.id||fx.id,layer:opt.layer||'STORY',exploration:L,props,enemies:[],objective:fx.objective||null};}
 function boot(opt={}){const drawn=[],asked=[],ready=new Set(opt.ready||[]),frames=[];
  const ctx={localStorage:{getItem:()=>opt.stored||null,setItem:()=>{}},console,Math,JSON,Number,String,Object,Array,Set,Map,WeakMap,Promise,Date,
-  StoryPhase1:{explorationBlocked:E},regionById:{ep1a09:{paths:[]},ep1b02:{paths:[]},ep1b03:{paths:[]},ep1b04:{paths:[]},ep1b06:{paths:[]},ep1a08:{paths:[]}},
+  StoryPhase1:{explorationBlocked:E},regionById:{ep1a09:{paths:[]},ep1b02:{paths:[]},ep1b03:{paths:[]},ep1b04:{paths:[]},ep1b07:{paths:[]},murder02:{paths:[]},murder04:{paths:[]},ep1b06:{paths:[]},ep1a08:{paths:[]}},
   readyImage:p=>ready.has(p)?{image:{naturalWidth:300,naturalHeight:400},path:p}:null,ensureImages:ps=>{asked.push(...ps);return Promise.resolve();},
   project:(x,y)=>({x:640+(x-y-(ctx.cam.x-ctx.cam.y))*27,y:340+(x+y-(ctx.cam.x+ctx.cam.y))*13.5}),cam:{x:40,y:70},W:1280,H:676,zoom:1,room:undefined,
   draw:function(){const r=ctx.room;frames.push(r.props.map(p=>p.id));for(const p of r.props)ctx.drawProp(p);},drawProp:function(p){drawn.push(p.id);}};
  Object.assign(ctx,opt.extra||{});ctx.window=ctx;vm.createContext(ctx);vm.runInContext(src,ctx);return{ctx,api:ctx.__STORYWORLD_ROOMS_R523__,drawn,asked,frames};}
-const FX={};for(const id of['ep1a09','ep1b02','ep1b03','ep1b04']){try{FX[id]=JSON.parse(rd('qa/r523/fixtures/'+id+'.json'));}catch(_){}}
-ok('fixtures present (real maps of ep1a09 · ep1b02 · ep1b03 · ep1b04)',!!FX.ep1a09&&!!FX.ep1b02&&!!FX.ep1b03&&!!FX.ep1b04&&Object.keys(FX.ep1a09.floorSpans).length>50&&Object.keys(FX.ep1b03.floorSpans).length>50);
+const FX={};for(const id of['ep1a09','ep1b02','ep1b03','ep1b04','ep1b07','murder02','murder04']){try{FX[id]=JSON.parse(rd('qa/r523/fixtures/'+id+'.json'));}catch(_){}}
+ok('fixtures present (real maps of ep1a09 · ep1b02 · ep1b03 · ep1b04 · ep1b07 · murder02 · murder04)',!!FX.ep1a09&&!!FX.ep1b02&&!!FX.ep1b03&&!!FX.ep1b04&&!!FX.ep1b07&&!!FX.murder02&&!!FX.murder04&&Object.keys(FX.ep1a09.floorSpans).length>50&&Object.keys(FX.ep1b03.floorSpans).length>50);
 let B=null;try{B=boot();}catch(e){console.log(String(e.stack).slice(0,300));}
 const api=B&&B.api;
 ok('api exported',!!api&&typeof api.plan==='function'&&typeof api.list==='function'&&typeof api.runsOf==='function'&&typeof api.seat==='function');
@@ -67,10 +67,10 @@ for(const rd_ of['r523','r524']){const dir=path.join(R,'runtime-text/assets/'+rd
  ok(rd_+' asset record: every file listed with its real size and sha256, a source and a use; no Drive link or id',!!idx&&files.length>0&&files.every(f=>{const e=(idx.files||[]).find(x=>x.file==='assets/'+rd_+'/'+f),b=fs.readFileSync(path.join(dir,f));return!!e&&e.bytes===b.length&&e.sha256===crypto.createHash('sha256').update(b).digest('hex')&&!!e.source&&!!e.use;})&&(idx.files||[]).length===files.length&&!/drive\.google|docs\.google|[?&]id=/.test(JSON.stringify(idx)));}
 const G=api.G,USE=api.USE,REG=api.REGION;
 ok('groups only use known art; uses only use known groups; regions only use known uses',Object.values(G).every(g=>g.w>0&&g.it.every(it=>ART[it[0]]))&&Object.values(USE).every(u=>[...u.main,...u.side].every(g=>G[g])&&(!u.corner||ART[u.corner]))&&Object.values(REG).every(l=>l.every(([re,u])=>[].concat(u).every(v=>USE[v])))&&Object.values(G).every(g=>!g.lim||Object.keys(g.lim).every(k=>api.LIMIT[k]>0)));
-ok('handled regions: clinic ep1a09 · sloth home ep1b02 (first batch), envy house ep1b03 · gluttony kitchen ep1b04 (second batch) — nothing else',Object.keys(REG).sort().join()==='ep1a09,ep1b02,ep1b03,ep1b04');
+ok('handled regions: clinic ep1a09 · sloth home ep1b02 (first batch), envy house ep1b03 · gluttony kitchen ep1b04 (second batch), fire floor ep1b07 · tower floor murder02 · shared housing murder04 (third batch) — nothing else',Object.keys(REG).sort().join()==='ep1a09,ep1b02,ep1b03,ep1b04,ep1b07,murder02,murder04');
 ok('room names → uses; fight rooms·exit gates·junctions stay untouched, the entrance gets a light set',api.useOf('ep1a09','주사실')==='inject'&&api.useOf('ep1a09','처치 대기실')==='wait'&&api.useOf('ep1a09','관찰실')==='observe'&&api.useOf('ep1a09','약품 보관실')==='drug'&&api.useOf('ep1a09','길목')==='hall'&&
  api.useOf('ep1b02','거실')==='living'&&api.useOf('ep1b02','작은 방')==='bedroom'&&api.useOf('ep1b02','물품 보관실')==='store'&&api.useOf('ep1b02','현관')==='foyer'&&api.useOf('ep1a09','입구')==='lobby'&&api.useOf('ep1b02','입구')==='foyer'&&
- ['보스 전투실','중앙 전투실','다음 구역 문','갈림길','작은 마당',''].every(nm=>api.useOf('ep1a09',nm)===null&&api.useOf('ep1b02',nm)===null)&&api.useOf('ep1b07','거실')===null&&api.useOf('ep1b07','입구')===null);
+ ['보스 전투실','중앙 전투실','다음 구역 문','갈림길','작은 마당',''].every(nm=>api.useOf('ep1a09',nm)===null&&api.useOf('ep1b02',nm)===null)&&api.useOf('u205','거실')===null&&api.useOf('u205','입구')===null);
 
 // ---- 실제 지도 두 곳 --------------------------------------------------------------------------------
 const CLINIC=new Set(['bed','stretcher','overbed','medcab','trolley','wheelchair','monitor','iv','stool','lamp','crutches','curtain','chair145','table146']);
@@ -140,6 +140,31 @@ const perRoom=(A,re)=>{const per={};for(const p of A.rows){const q=per[p.r523.ro
 ok('second batch: corridors (복도) get nothing',[Ev,Gl].every(A=>{const nm=new Map(A.L.worldR74.rooms.map(q=>[q.id,q.name]));return A.rows.every(p=>nm.get(p.r523.room)!=='복도');}));
 ok('second batch: two-direction art is used unmirrored on its own wall',[Ev,Gl].every(A=>A.rows.filter(p=>ART[p.r523.art].pair).length>20&&A.rows.filter(p=>ART[p.r523.art].pair).every(p=>!p.r303Flip&&ART[p.r523.art].face===p.r523.wall)));
 ok('new art for the second batch is in the table: lounge sofas and Dots ranges as two-direction pairs, the standing mirror as a direction-less piece',['sofa_n','sofa_w','range_n','range_w'].every(k=>ART[k]&&ART[k].ang==='iso'&&ART[k].pair&&/^assets\/r524\//.test(ART[k].path))&&!!ART.mirror&&ART.mirror.ang==='pole'&&/r80-026\.webp$/.test(ART.mirror.path));
+// ---- 셋째 묶음(R525): 불을 지른 남자 ep1b07 · 새빛호텔 murder02 · 청록빌라 murder04 -------------------------------
+//  불난 층 = 피난 계단·방화 전실·설비실(기계)·그을린 복도(버리고 간 짐) / 호텔 7층 = 보안실(단말기·책상)·설비실·계단참·전실(의자와 투숙객 짐) / 빌라 = 세 가지 앞방·빈 방(성기게)·공동 계단
+const FIRE=new Set(['steps','alarm','machine','cooler','vent','wardrobe_n','wardrobe_w','chair_n','chair_w','suitcase_n','suitcase_w','trash']);
+const TOWER=new Set(['steps','alarm','machine','cooler','vent','kiosk','wardrobe_n','wardrobe_w','table_n','table_w','chair_n','chair_w','chairb_n','chairb_w','trash','suitcase_n','suitcase_w']);
+const FLAT=new Set([...HOME,'steps','alarm']);
+ok('third batch room names → uses (stairs, fire lobbies, plant rooms, security rooms, vacant rooms; connectors and shared corridors are left alone)',api.useOf('ep1b07','피난 계단')==='stairs'&&api.useOf('ep1b07','방화 전실')==='firelobby'&&api.useOf('ep1b07','설비실')==='plant'&&api.useOf('ep1b07','그을린 복도')==='evac'&&api.useOf('ep1b07','앞방')==='firelobby'&&api.useOf('ep1b07','입구')==='evac'&&api.useOf('ep1b07','길목')===null&&
+ api.useOf('murder02','계단참')==='stairs'&&api.useOf('murder02','보안실')==='security'&&api.useOf('murder02','설비실')==='plant'&&api.useOf('murder02','7층 전실')==='lobby7'&&api.useOf('murder02','앞방')==='lobby7'&&api.useOf('murder02','입구')==='lobby7'&&api.useOf('murder02','길목')===null&&
+ api.useOf('murder04','공동 계단')==='stairs'&&api.useOf('murder04','계단참')==='landing'&&api.useOf('murder04','빈 방')==='vacant'&&api.useOf('murder04','앞방',1)==='den'&&api.useOf('murder04','앞방',2)==='den2'&&api.useOf('murder04','앞방',3)==='den3'&&api.useOf('murder04','입구')==='foyer'&&api.useOf('murder04','공동 복도')===null&&api.useOf('murder04','길목')===null);
+const Fi=audit('ep1b07',FIRE,35,['firelobby','plant']);
+const Tw=audit('murder02',TOWER,35,['security','plant']);
+const Fl=audit('murder04',FLAT,50,['den','den2','den3']);
+{const st=[Fi,Tw,Fl].flatMap(A=>perRoom(A,/^steps$/)),al=[Fi,Tw,Fl].flatMap(A=>perRoom(A,/^alarm$/));
+ ok('stair rooms: one flight of steps at most, steps only in stair rooms ('+st.filter(q=>q.n>0).length+' flights in three regions, at least 6); at most one alarm box per room',st.every(q=>q.n<=1)&&st.filter(q=>q.n>0).every(q=>q.use==='stairs')&&st.filter(q=>q.n>0).length>=6&&al.every(q=>q.n<=1));
+ const mach=A=>A.rows.filter(p=>p.r523.use==='plant');
+ ok('plant rooms read as machine rooms: machines and coolers in both regions, no household furniture there',[Fi,Tw].every(A=>mach(A).some(p=>p.r523.art==='machine')&&mach(A).some(p=>p.r523.art==='cooler')&&mach(A).every(p=>/^(machine|cooler|vent|alarm|wardrobe_[nw])$/.test(p.r523.art))));
+ ok('security rooms: terminals, and a desk with a chair drawn up to it somewhere; at most two terminals per room',has(Tw,'security','kiosk')&&Tw.rows.some(p=>p.r523.use==='security'&&/^table_/.test(p.r523.art))&&Tw.rows.some(p=>p.r523.use==='security'&&/^chairb_/.test(p.r523.art))&&perRoom(Tw,/^kiosk$/).every(q=>q.n<=2)&&Tw.rows.filter(p=>p.r523.art==='kiosk').every(p=>p.r523.use==='security'));
+ ok('hotel floor: guest luggage stands by the wall in the lobbies and entrance (at least three suitcases), never in security or plant rooms',Tw.rows.filter(p=>/^suitcase_/.test(p.r523.art)&&p.r523.use==='lobby7').length>=3&&Tw.rows.every(p=>!/^suitcase_/.test(p.r523.art)||p.r523.use==='lobby7')&&Tw.rows.some(p=>p.r523.use==='lobby7'&&/^chair_/.test(p.r523.art)));
+ ok('fire floor: luggage dropped on the way out (scorched corridors or fire lobbies); no beds, sofas, TVs, fridges or tables anywhere',Fi.rows.some(p=>/^suitcase_/.test(p.r523.art)&&/^(evac|firelobby)$/.test(p.r523.use))&&Fi.rows.every(p=>!/bed|sofa|tv|fridge|table|range|mirror/.test(p.r523.art)));
+ const vac={};for(const p of Fl.rows)if(p.r523.use==='vacant')vac[p.r523.room]=(vac[p.r523.room]||0)+1;
+ ok('shared housing: vacant rooms stay sparse (≤3 pieces each, no bed/sofa/TV), the nine front rooms rotate through the three home characters',Object.values(vac).every(c=>c<=3)&&Fl.rows.filter(p=>p.r523.use==='vacant').every(p=>!/bed|sofa|tv|fridge/.test(p.r523.art))&&['den','den2','den3'].every(u=>Fl.rows.some(p=>p.r523.use===u)));
+ ok('third batch: connectors (길목) and shared corridors (공동 복도) get nothing',[Fi,Tw,Fl].every(A=>{const nm=new Map(A.L.worldR74.rooms.map(q=>[q.id,q.name]));return A.rows.every(p=>!/^(길목|공동 복도)$/.test(nm.get(p.r523.room)||''));}));
+ ok('new art for the third batch is existing game art used as one-direction pieces (no new files): steps·alarm box·pipe machine·roof vent·terminal from world-r80, cooler from r406',['steps','alarm','machine','vent','kiosk'].every(k=>ART[k]&&ART[k].ang==='iso'&&!ART[k].pair&&/^assets\/world-r80\/r80-\d+\.webp$/.test(ART[k].path))&&!!ART.cooler&&ART.cooler.ang==='iso'&&!ART.cooler.pair&&/^assets\/r406\/props\/server-cooler\.webp$/.test(ART.cooler.path));
+ {let near=1e9;for(const A of[Fi,Tw,Fl])for(const p of A.rows)if(p.r523.art==='steps')for(const q of A.w.props)if(!q.r523Room&&!q.r449Furniture&&!q.r224Furniture)near=Math.min(near,Math.hypot(q.x-p.x,q.y-p.y));
+  ok('a flight of steps is a big piece: it keeps 2.4 clear of every other standing prop (nearest '+near.toFixed(2)+')',ART.steps.clear>=1.3&&near>=2.4);}
+ ok('third batch: one-direction art is mirrored only on the opposite wall',[...Fi.rows,...Tw.rows,...Fl.rows].filter(p=>!ART[p.r523.art].pair&&ART[p.r523.art].ang==='iso'&&p.r523.tag!=='screen').every(p=>!!p.r303Flip===(ART[p.r523.art].face!==p.r523.wall)));}
 ok('corridors stay passable: a connector gets at most 3 pieces',[C,Hm].every(A=>{const c={};for(const p of A.rows)if(/hall|passage/.test(p.r523.use))c[p.r523.room]=(c[p.r523.room]||0)+1;return Object.values(c).every(v=>v<=3);}));
 // 그림 방향: 두 방향 그림은 벽에 맞는 쪽을 쓰고(거울 아님), 한 방향 그림만 반대 벽에서 좌우 거울
 ok('two-direction art is used unmirrored on its own wall',Hm.rows.filter(p=>ART[p.r523.art].pair).length>20&&Hm.rows.filter(p=>ART[p.r523.art].pair).every(p=>!p.r303Flip&&ART[p.r523.art].face===p.r523.wall));
@@ -180,7 +205,7 @@ ok('observation beds get a screen at the foot (entrance side)',C.rows.some(p=>p.
  const mk=(id,q)=>({id,path:'assets/world-r80/r80-026.webp',x:(q.x0+q.x1)/2,y:(q.y0+q.y1)/2,height:70,solid:false,visible:true,r80Dressing:true,r449Furniture:true});
  w.props.push(mk('r449:old:corridor',cor),mk('r449:old:study',std));b.ctx.room=w;b.ctx.cam={x:50,y:50};b.ctx.draw();const fr=b.frames[0]||[];
  ok('old angle-matched furniture is rested only inside rooms this overlay furnishes; in rooms it leaves alone (corridors) it stays',fr.some(i=>/^r523:/.test(i))&&fr.includes('r449:old:corridor')&&!fr.includes('r449:old:study'));}
-{const b=boot();for(const[id,layer,extra]of[['ep1b06','STORY',{}],['ep1a08','STORY',{}],['ep1a09','SAMONG',{}],['ep1b07','STORY',{}]]){const w=world(FX.ep1a09,{id,layer});Object.assign(w.exploration,extra);ok('not handled: '+id+' / '+layer,b.api.enabled(w)===false&&b.api.list(w).length===0);}
+{const b=boot();for(const[id,layer,extra]of[['ep1b06','STORY',{}],['ep1a08','STORY',{}],['ep1a09','SAMONG',{}],['u205','STORY',{}]]){const w=world(FX.ep1a09,{id,layer});Object.assign(w.exploration,extra);ok('not handled: '+id+' / '+layer,b.api.enabled(w)===false&&b.api.list(w).length===0);}
  const w=world(FX.ep1a09);w.exploration.samongR103={};ok('not handled: samong maps',b.api.enabled(w)===false);}
 
 // ---- 작은 가짜 방: 벽 줄·문 틈·구석·거울 대칭 ------------------------------------------------------------
@@ -208,4 +233,7 @@ function tiny(opt={}){const cells=[],x0=10,y0=10,x1=opt.t?22:30,y1=opt.t?30:22;f
  ok('nothing straddles the partition',rows.length>4&&rows.filter(p=>p.r521Foot&&p.r523.wall==='n').every(p=>p.r521Foot[2]<=19.9||p.r521Foot[0]>=20.1));}
 {const w=tiny({name:'보스 전투실'});ok('fight room: no plan',api.list(w).length===0);
  const g=tiny();g.exploration.worldWardR81={bossBounds:[8,8,32,24],gatherBounds:[0,0,1,1]};ok('room overlapping the boss bounds: no plan',api.list(g).length===0);}
+// 진단 값(inspect)은 지금 지역 것이어야 한다 — 지역을 오가면 계획은 캐시에서 나오므로, 고치기 전에는 마지막으로 짠 지역의 방 수·탈락 수가 남아 있었다(R525 에서 찾음)
+{const b=boot(),a=world(FX.ep1b07),c=world(FX.murder04);b.ctx.room=a;const na=b.api.list(a).length,Ia=b.api.inspect();b.ctx.room=c;const nc=b.api.list(c).length;b.ctx.room=a;b.api.list(a);const I=b.api.inspect();
+ ok('diagnostics follow the region on screen: after visiting another region and coming back, inspect() describes this one again',na>0&&nc>0&&!!I.plan&&I.plan.region==='ep1b07'&&I.stats.placed===na&&I.stats.rooms===Ia.stats.rooms&&I.stats.dropped===Ia.stats.dropped&&I.stats.pushed===Ia.stats.pushed&&I.dropLog.length===Ia.dropLog.length&&I.stats.builds===Ia.stats.builds+1);}
 console.log('\nR523 '+(n-bad)+'/'+n+' passed');process.exit(bad?1:0);
