@@ -1,0 +1,435 @@
+{
+  "schema": "world-r78-combat-input-cpu/v1",
+  "method": "Native key listener and R78 placement hooks exercised in Node VM with a synthetic browser event. Not browser/GPU/natural combat.",
+  "checks": [
+    {
+      "name": "A reaches native basic attack; keydown capture no longer remaps it to left",
+      "passed": true,
+      "detail": {
+        "a": {
+          "prevented": true,
+          "captured": false
+        },
+        "aCount": 1,
+        "aHeld": true,
+        "aMovesLeft": false,
+        "releasedA": true,
+        "j": {
+          "prevented": true,
+          "captured": true
+        },
+        "jCount": 2,
+        "jHeld": true,
+        "releasedJ": true,
+        "one": {
+          "prevented": true,
+          "captured": false
+        },
+        "oneCount": 3,
+        "hotbar": "",
+        "help": "",
+        "native": "ev=>{if(['INPUT','TEXTAREA','SELECT'].includes(ev.target?.tagName)||ev.target?.isContentEditable||ev.target?.closest?.('[contenteditable]'))return;const key=ev.key.toLowerCase();if(storyScene){if(ev.key==='Enter'&&!ev.repeat){ev.preventDefault();advanceScene()}return}if(ev.key==='Escape'){ev.preventDefault();if(loading)return;if(!started)return;if(modal)closePanel();else showMenu();return}if(modal||loading||!started)return;unlockAudio();if(ev.key.startsWith('Arrow')){ev.preventDefault();keys.add(ev.key);return}if(key==='a'||key==='1'){ev.preventDefault();keys.add('attack');if(!ev.repeat)basicAttack(true);return}if(ev.repeat)return;if(key==='s'||key==='2'){ev.preventDefault();blink()}else if(key==='d'||key==='3'){ev.preventDefault();guardStart()}else if(key==='q'||key==='4'){ev.preventDefault();special()}else if(key==='f'||key==='5'){ev.preventDefault();ego()}else if(key==='e'){ev.preventDefault();interact()}else if(ev.code==='Space'){ev.preventDefault();auto=!auto;updateHUD()}else if(key==='m'){ev.preventDefault();showWorld()}else if(key==='p'){ev.preventDefault();showUpgrades()}}",
+        "pc": "e=>{\n  if(editing(e)||!started||modal||loading||storyScene)return;\n  const key=e.key.toLowerCase();\n  // The preserved game owns arrows for movement and A/1 for basic attack.\n  // J is an extra PC alias. Do not map A to left movement here: that capture\n  // used to swallow the native basic-attack binding.\n  if(key==='j'){e.preventDefault();e.stopImmediatePropagation();keys.add('attack');if(!e.repeat)basicAttack(true);}\n }"
+      }
+    },
+    {
+      "name": "A keyup releases the native attack key state",
+      "passed": true,
+      "detail": {
+        "a": {
+          "prevented": true,
+          "captured": false
+        },
+        "aCount": 1,
+        "aHeld": true,
+        "aMovesLeft": false,
+        "releasedA": true,
+        "j": {
+          "prevented": true,
+          "captured": true
+        },
+        "jCount": 2,
+        "jHeld": true,
+        "releasedJ": true,
+        "one": {
+          "prevented": true,
+          "captured": false
+        },
+        "oneCount": 3,
+        "hotbar": "",
+        "help": "",
+        "native": "ev=>{if(['INPUT','TEXTAREA','SELECT'].includes(ev.target?.tagName)||ev.target?.isContentEditable||ev.target?.closest?.('[contenteditable]'))return;const key=ev.key.toLowerCase();if(storyScene){if(ev.key==='Enter'&&!ev.repeat){ev.preventDefault();advanceScene()}return}if(ev.key==='Escape'){ev.preventDefault();if(loading)return;if(!started)return;if(modal)closePanel();else showMenu();return}if(modal||loading||!started)return;unlockAudio();if(ev.key.startsWith('Arrow')){ev.preventDefault();keys.add(ev.key);return}if(key==='a'||key==='1'){ev.preventDefault();keys.add('attack');if(!ev.repeat)basicAttack(true);return}if(ev.repeat)return;if(key==='s'||key==='2'){ev.preventDefault();blink()}else if(key==='d'||key==='3'){ev.preventDefault();guardStart()}else if(key==='q'||key==='4'){ev.preventDefault();special()}else if(key==='f'||key==='5'){ev.preventDefault();ego()}else if(key==='e'){ev.preventDefault();interact()}else if(ev.code==='Space'){ev.preventDefault();auto=!auto;updateHUD()}else if(key==='m'){ev.preventDefault();showWorld()}else if(key==='p'){ev.preventDefault();showUpgrades()}}",
+        "pc": "e=>{\n  if(editing(e)||!started||modal||loading||storyScene)return;\n  const key=e.key.toLowerCase();\n  // The preserved game owns arrows for movement and A/1 for basic attack.\n  // J is an extra PC alias. Do not map A to left movement here: that capture\n  // used to swallow the native basic-attack binding.\n  if(key==='j'){e.preventDefault();e.stopImmediatePropagation();keys.add('attack');if(!e.repeat)basicAttack(true);}\n }"
+      }
+    },
+    {
+      "name": "J remains a direct PC attack alias with matching keyup; 1 remains native",
+      "passed": true,
+      "detail": {
+        "a": {
+          "prevented": true,
+          "captured": false
+        },
+        "aCount": 1,
+        "aHeld": true,
+        "aMovesLeft": false,
+        "releasedA": true,
+        "j": {
+          "prevented": true,
+          "captured": true
+        },
+        "jCount": 2,
+        "jHeld": true,
+        "releasedJ": true,
+        "one": {
+          "prevented": true,
+          "captured": false
+        },
+        "oneCount": 3,
+        "hotbar": "",
+        "help": "",
+        "native": "ev=>{if(['INPUT','TEXTAREA','SELECT'].includes(ev.target?.tagName)||ev.target?.isContentEditable||ev.target?.closest?.('[contenteditable]'))return;const key=ev.key.toLowerCase();if(storyScene){if(ev.key==='Enter'&&!ev.repeat){ev.preventDefault();advanceScene()}return}if(ev.key==='Escape'){ev.preventDefault();if(loading)return;if(!started)return;if(modal)closePanel();else showMenu();return}if(modal||loading||!started)return;unlockAudio();if(ev.key.startsWith('Arrow')){ev.preventDefault();keys.add(ev.key);return}if(key==='a'||key==='1'){ev.preventDefault();keys.add('attack');if(!ev.repeat)basicAttack(true);return}if(ev.repeat)return;if(key==='s'||key==='2'){ev.preventDefault();blink()}else if(key==='d'||key==='3'){ev.preventDefault();guardStart()}else if(key==='q'||key==='4'){ev.preventDefault();special()}else if(key==='f'||key==='5'){ev.preventDefault();ego()}else if(key==='e'){ev.preventDefault();interact()}else if(ev.code==='Space'){ev.preventDefault();auto=!auto;updateHUD()}else if(key==='m'){ev.preventDefault();showWorld()}else if(key==='p'){ev.preventDefault();showUpgrades()}}",
+        "pc": "e=>{\n  if(editing(e)||!started||modal||loading||storyScene)return;\n  const key=e.key.toLowerCase();\n  // The preserved game owns arrows for movement and A/1 for basic attack.\n  // J is an extra PC alias. Do not map A to left movement here: that capture\n  // used to swallow the native basic-attack binding.\n  if(key==='j'){e.preventDefault();e.stopImmediatePropagation();keys.add('attack');if(!e.repeat)basicAttack(true);}\n }"
+      }
+    },
+    {
+      "name": "A never adds left movement to the held-key state",
+      "passed": true,
+      "detail": {
+        "a": {
+          "prevented": true,
+          "captured": false
+        },
+        "aCount": 1,
+        "aHeld": true,
+        "aMovesLeft": false,
+        "releasedA": true,
+        "j": {
+          "prevented": true,
+          "captured": true
+        },
+        "jCount": 2,
+        "jHeld": true,
+        "releasedJ": true,
+        "one": {
+          "prevented": true,
+          "captured": false
+        },
+        "oneCount": 3,
+        "hotbar": "",
+        "help": "",
+        "native": "ev=>{if(['INPUT','TEXTAREA','SELECT'].includes(ev.target?.tagName)||ev.target?.isContentEditable||ev.target?.closest?.('[contenteditable]'))return;const key=ev.key.toLowerCase();if(storyScene){if(ev.key==='Enter'&&!ev.repeat){ev.preventDefault();advanceScene()}return}if(ev.key==='Escape'){ev.preventDefault();if(loading)return;if(!started)return;if(modal)closePanel();else showMenu();return}if(modal||loading||!started)return;unlockAudio();if(ev.key.startsWith('Arrow')){ev.preventDefault();keys.add(ev.key);return}if(key==='a'||key==='1'){ev.preventDefault();keys.add('attack');if(!ev.repeat)basicAttack(true);return}if(ev.repeat)return;if(key==='s'||key==='2'){ev.preventDefault();blink()}else if(key==='d'||key==='3'){ev.preventDefault();guardStart()}else if(key==='q'||key==='4'){ev.preventDefault();special()}else if(key==='f'||key==='5'){ev.preventDefault();ego()}else if(key==='e'){ev.preventDefault();interact()}else if(ev.code==='Space'){ev.preventDefault();auto=!auto;updateHUD()}else if(key==='m'){ev.preventDefault();showWorld()}else if(key==='p'){ev.preventDefault();showUpgrades()}}",
+        "pc": "e=>{\n  if(editing(e)||!started||modal||loading||storyScene)return;\n  const key=e.key.toLowerCase();\n  // The preserved game owns arrows for movement and A/1 for basic attack.\n  // J is an extra PC alias. Do not map A to left movement here: that capture\n  // used to swallow the native basic-attack binding.\n  if(key==='j'){e.preventDefault();e.stopImmediatePropagation();keys.add('attack');if(!e.repeat)basicAttack(true);}\n }"
+      }
+    },
+    {
+      "name": "Player help identifies the A/J/1 basic-attack keys",
+      "passed": true,
+      "detail": {
+        "pc": "e=>{\n  if(editing(e)||!started||modal||loading||storyScene)return;\n  const key=e.key.toLowerCase();\n  // The preserved game owns arrows for movement and A/1 for basic attack.\n  // J is an extra PC alias. Do not map A to left movement here: that capture\n  // used to swallow the native basic-attack binding.\n  if(key==='j'){e.preventDefault();e.stopImmediatePropagation();keys.add('attack');if(!e.repeat)basicAttack(true);}\n }",
+        "native": "ev=>{if(['INPUT','TEXTAREA','SELECT'].includes(ev.target?.tagName)||ev.target?.isContentEditable||ev.target?.closest?.('[contenteditable]'))return;const key=ev.key.toLowerCase();if(storyScene){if(ev.key==='Enter'&&!ev.repeat){ev.preventDefault();advanceScene()}return}if(ev.key==='Escape'){ev.preventDefault();if(loading)return;if(!started)return;if(modal)closePanel();else showMenu();return}if(modal||loading||!started)return;unlockAudio();if(ev.key.startsWith('Arrow')){ev.preventDefault();keys.add(ev.key);return}if(key==='a'||key==='1'){ev.preventDefault();keys.add('attack');if(!ev.repeat)basicAttack(true);return}if(ev.repeat)return;if(key==='s'||key==='2'){ev.preventDefault();blink()}else if(key==='d'||key==='3'){ev.preventDefault();guardStart()}else if(key==='q'||key==='4'){ev.preventDefault();special()}else if(key==='f'||key==='5'){ev.preventDefault();ego()}else if(key==='e'){ev.preventDefault();interact()}else if(ev.code==='Space'){ev.preventDefault();auto=!auto;updateHUD()}else if(key==='m'){ev.preventDefault();showWorld()}else if(key==='p'){ev.preventDefault();showUpgrades()}}"
+      }
+    },
+    {
+      "name": "All native-story actors are safely placed in open maze rooms",
+      "passed": true,
+      "detail": {
+        "room": {
+          "version": 1,
+          "zoneId": "dist00",
+          "routeNodeIds": [
+            11,
+            7,
+            8,
+            9,
+            6,
+            5
+          ],
+          "bossRoomNodeId": 13,
+          "ordinaryMoved": 15,
+          "midbossCount": 3,
+          "bossCount": 2
+        },
+        "actors": [
+          {
+            "id": "ordinary:0",
+            "x": 30,
+            "y": 55,
+            "radius": 0.3,
+            "blocked": false,
+            "onFloor": true,
+            "isBoss": false,
+            "isMid": false
+          },
+          {
+            "id": "ordinary:1",
+            "x": 29.292127971432848,
+            "y": 55.64847296872902,
+            "radius": 0.3,
+            "blocked": false,
+            "onFloor": true,
+            "isBoss": false,
+            "isMid": false
+          },
+          {
+            "id": "ordinary:2",
+            "x": 30.083922518391194,
+            "y": 54.04367525865589,
+            "radius": 0.3,
+            "blocked": false,
+            "onFloor": true,
+            "isBoss": false,
+            "isMid": false
+          },
+          {
+            "id": "ordinary:3",
+            "x": 30.584108688283735,
+            "y": 55.76185106173809,
+            "radius": 0.3,
+            "blocked": false,
+            "onFloor": true,
+            "isBoss": false,
+            "isMid": false
+          },
+          {
+            "id": "ordinary:4",
+            "x": 29.054672893944,
+            "y": 54.832797540222074,
+            "radius": 0.3,
+            "blocked": false,
+            "onFloor": true,
+            "isBoss": false,
+            "isMid": false
+          },
+          {
+            "id": "ordinary:5",
+            "x": 42.5,
+            "y": 42.5,
+            "radius": 0.3,
+            "blocked": false,
+            "onFloor": true,
+            "isBoss": false,
+            "isMid": false
+          },
+          {
+            "id": "ordinary:6",
+            "x": 41.79212797143285,
+            "y": 43.14847296872902,
+            "radius": 0.3,
+            "blocked": false,
+            "onFloor": true,
+            "isBoss": false,
+            "isMid": false
+          },
+          {
+            "id": "ordinary:7",
+            "x": 42.5839225183912,
+            "y": 41.54367525865589,
+            "radius": 0.3,
+            "blocked": false,
+            "onFloor": true,
+            "isBoss": false,
+            "isMid": false
+          },
+          {
+            "id": "ordinary:8",
+            "x": 43.084108688283735,
+            "y": 43.26185106173809,
+            "radius": 0.3,
+            "blocked": false,
+            "onFloor": true,
+            "isBoss": false,
+            "isMid": false
+          },
+          {
+            "id": "ordinary:9",
+            "x": 41.554672893944,
+            "y": 42.332797540222074,
+            "radius": 0.3,
+            "blocked": false,
+            "onFloor": true,
+            "isBoss": false,
+            "isMid": false
+          },
+          {
+            "id": "ordinary:10",
+            "x": 46,
+            "y": 24,
+            "radius": 0.3,
+            "blocked": false,
+            "onFloor": true,
+            "isBoss": false,
+            "isMid": false
+          },
+          {
+            "id": "ordinary:11",
+            "x": 45.29212797143285,
+            "y": 24.648472968729017,
+            "radius": 0.3,
+            "blocked": false,
+            "onFloor": true,
+            "isBoss": false,
+            "isMid": false
+          },
+          {
+            "id": "ordinary:12",
+            "x": 46.0839225183912,
+            "y": 23.043675258655888,
+            "radius": 0.3,
+            "blocked": false,
+            "onFloor": true,
+            "isBoss": false,
+            "isMid": false
+          },
+          {
+            "id": "ordinary:13",
+            "x": 46.584108688283735,
+            "y": 24.76185106173809,
+            "radius": 0.3,
+            "blocked": false,
+            "onFloor": true,
+            "isBoss": false,
+            "isMid": false
+          },
+          {
+            "id": "ordinary:14",
+            "x": 45.054672893944,
+            "y": 23.83279754022207,
+            "radius": 0.3,
+            "blocked": false,
+            "onFloor": true,
+            "isBoss": false,
+            "isMid": false
+          },
+          {
+            "id": "midboss:0",
+            "x": 35,
+            "y": 35,
+            "radius": 0.6,
+            "blocked": false,
+            "onFloor": true,
+            "isBoss": false,
+            "isMid": true
+          },
+          {
+            "id": "midboss:1",
+            "x": 33.93819195714927,
+            "y": 35.97270945309353,
+            "radius": 0.6,
+            "blocked": false,
+            "onFloor": true,
+            "isBoss": false,
+            "isMid": true
+          },
+          {
+            "id": "midboss:2",
+            "x": 35.12588377758679,
+            "y": 33.565512887983836,
+            "radius": 0.6,
+            "blocked": false,
+            "onFloor": true,
+            "isBoss": false,
+            "isMid": true
+          },
+          {
+            "id": "boss:0",
+            "x": 15.5,
+            "y": 12.5,
+            "radius": 0.8,
+            "blocked": false,
+            "onFloor": true,
+            "isBoss": true,
+            "isMid": false
+          },
+          {
+            "id": "boss:1",
+            "x": 19.2,
+            "y": 15.2,
+            "radius": 0.8,
+            "blocked": false,
+            "onFloor": true,
+            "isBoss": true,
+            "isMid": false
+          }
+        ],
+        "statsPreserved": true,
+        "placement": {
+          "rooms": 1,
+          "ordinaryMoved": 15,
+          "midbossMoved": 3,
+          "bossMoved": 2,
+          "unplaced": 0
+        }
+      }
+    },
+    {
+      "name": "Bosses occupy the preserved core arena and midbosses the gathering room",
+      "passed": true,
+      "detail": [
+        {
+          "id": "midboss:0",
+          "x": 35,
+          "y": 35,
+          "radius": 0.6,
+          "blocked": false,
+          "onFloor": true,
+          "isBoss": false,
+          "isMid": true
+        },
+        {
+          "id": "midboss:1",
+          "x": 33.93819195714927,
+          "y": 35.97270945309353,
+          "radius": 0.6,
+          "blocked": false,
+          "onFloor": true,
+          "isBoss": false,
+          "isMid": true
+        },
+        {
+          "id": "midboss:2",
+          "x": 35.12588377758679,
+          "y": 33.565512887983836,
+          "radius": 0.6,
+          "blocked": false,
+          "onFloor": true,
+          "isBoss": false,
+          "isMid": true
+        },
+        {
+          "id": "boss:0",
+          "x": 15.5,
+          "y": 12.5,
+          "radius": 0.8,
+          "blocked": false,
+          "onFloor": true,
+          "isBoss": true,
+          "isMid": false
+        },
+        {
+          "id": "boss:1",
+          "x": 19.2,
+          "y": 15.2,
+          "radius": 0.8,
+          "blocked": false,
+          "onFloor": true,
+          "isBoss": true,
+          "isMid": false
+        }
+      ]
+    },
+    {
+      "name": "Actor identity, health, maximum health and damage remain unchanged",
+      "passed": true
+    },
+    {
+      "name": "Hotbar labels the manual basic attack key as A / J / 1",
+      "passed": true
+    }
+  ],
+  "passed": 9,
+  "failed": 0,
+  "browser": false,
+  "GPU": false,
+  "naturalPlay": false
+}

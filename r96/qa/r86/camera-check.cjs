@@ -1,0 +1,16 @@
+'use strict';
+const fs=require('fs'),{createHarness}=require('../harness.cjs');
+const checks=[],check=(name,passed,detail)=>{checks.push({name,passed:!!passed,detail});if(!passed)throw Error(name);};
+(async()=>{const h=createHarness({timeoutMs:60000});await h.boot();await h.start();h.run('for(let i=0;i<40&&storyScene;i++)advanceScene();if(modal)closePanel(true);auto=false;guide=false;');
+const initial=h.run('__STORYWORLD_CAMERA_R63__.inspect()');
+check('Fresh PC settings request 1.5 in both dimensions',initial.device==='desktop'&&initial.requested===1.5&&initial.actual===1.5&&initial.area===2.25,initial);
+const resize=h.run(`(()=>{const out=[];for(const size of [[1280,720],[1920,1080],[2560,1440],[1366,768]]){[W,H]=size;__STORYWORLD_CAMERA_R63__.setFactor(1);for(let i=0;i<180;i++)cameraTick(1/30);const before={u:W/(TILE*zoom),v:H/(TILE*.5*zoom)};__STORYWORLD_CAMERA_R63__.reset();for(let i=0;i<180;i++)cameraTick(1/30);out.push({size,u:W/(TILE*zoom)/before.u,v:H/(TILE*.5*zoom)/before.v,requested:__STORYWORLD_CAMERA_R63__.inspect().requested,finite:Number.isFinite(cam.x+cam.y+zoom)});}return out;})()`);
+check('Actual world projection expands exactly 1.5 horizontally/vertically at four PC sizes',resize.every(r=>Math.abs(r.u-1.5)<1e-6&&Math.abs(r.v-1.5)<1e-6&&r.finite),resize);
+const saved=h.run(`(()=>{__STORYWORLD_CAMERA_R63__.setFactor(1.8);showSettings();const value=document.getElementById('cameraFactorR63').value,p=JSON.parse(__STORYWORLD_TEST_STORAGE_B1__.store.getItem('storyworld.camera.r63.v1'));return{value,p};})()`);
+check('Explicit user setting still persists and Settings does not reset it',Number(saved.value)===1.8&&saved.p.desktop.factor===1.8,saved);
+const reset=h.run(`(()=>{document.getElementById('cameraResetR63').onclick();const before={x:cam.x,y:cam.y};if(modal)closePanel(true);for(let i=0;i<180;i++)cameraTick(1/30);let error=0;for(const dx of [-10,0,10])for(const dy of [-8,0,8]){const p={x:player.x+dx,y:player.y+dy},s=project(p.x,p.y),q=unproject(s.x,s.y);error=Math.max(error,Math.hypot(p.x-q.x,p.y-q.y));}return{factor:__STORYWORLD_CAMERA_R63__.inspect().requested,error};})()`);
+check('Settings reset returns to1.5 and mouse aim round-trips without distortion',reset.factor===1.5&&reset.error<1e-8,reset);
+const stationary=h.run(`(()=>{player.x=43;player.y=109;for(let i=0;i<180;i++)cameraTick(1/30);const p={...cam,z:zoom};let delta=0;for(let i=0;i<300;i++){for(const e of room.enemies)e.x+=i%2?-.01:.01;cameraTick(1/60);delta=Math.max(delta,Math.hypot(cam.x-p.x,cam.y-p.y)+Math.abs(zoom-p.z));}return delta;})()`);
+check('Broader view retains stable player camera without enemy tracking',stationary<1e-8,{maximumDrift:stationary});
+check('Game errors remain empty',h.run('errors.length')===0,h.run('errors'));
+})().catch(e=>{checks.push({name:'Exception',passed:false,detail:e.stack});process.exitCode=1;}).finally(()=>{fs.writeFileSync(__dirname+'/camera-results.json',JSON.stringify({checks,passed:checks.every(c=>c.passed),method:'Native settings/projection/camera in Node VM; no browser/GPU'},null,2));console.log(checks.filter(c=>c.passed).length+'/'+checks.length);});

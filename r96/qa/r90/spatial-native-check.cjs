@@ -1,0 +1,23 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),{createHarness}=require('../harness.cjs');
+const checks=[],rows=[],report={method:'Actual shipped native layout/mesh factories and native draw capture in Node VM, bundled Three CPU geometry; no WebGL or rendered pixels',assistance:['DOM/Image/renderer stubs from existing qa/harness.cjs','hospital direct start','777 travel for swamp','narrative skipping and native difficulty confirmation'],checks,rows,browserVerified:false,GPUVerified:false,naturalPlayVerified:false};
+const check=(name,passed,detail)=>{checks.push({name,passed:!!passed,detail});if(!passed)throw Error(name);};
+(async()=>{
+ const T=await import('../../hospital-three-pc/site/vendor/three/build/three.module.js'),h=createHarness({timeoutMs:60000}),A=h.context.StoryPhase1,C=A.ThreeRenderer.prototype;
+ const source=fs.readFileSync(path.resolve(__dirname,'../../client-source/visual-r90-world.js'),'utf8');h.run(source);report.sourceSHA256=crypto.createHash('sha256').update(source).digest('hex');const api=h.context.__STORYWORLD_SPATIAL_R90__;
+ for(const id of ['ep1a08','dist02']){
+  const L=id==='ep1a08'?A.hospitalCoreLayoutB2({walls:[],surface:{}},['door-0','door-1','door-2']):h.run(`StoryPhase1.explorationLayout('dist02',StoryWorldProfilesR74.profiles.dist02.style,false,{seedR73:75,worldR74:1,worldR75:1,layerR81:'STORY'})`),before=JSON.stringify(L),mat=new T.MeshBasicMaterial(),r={T,spatialRoot:new T.Group(),wallRows:new Map(),hospitalWallMaterial:mat,visualFloorMaterial:mat,visualWardLease:{},spatialResources:new Set(),batchHospitalWalls:C.batchHospitalWalls};
+  for(const w of L.walls){const data=A.terrainWallMeshData(w,L.surface?.art),g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(data.positions,3));g.setAttribute('uv',new T.Float32BufferAttribute(data.uv,2));g.setIndex(data.indices);for(const group of data.groups)g.addGroup(group.start,group.count,group.materialIndex);g.computeVertexNormals();const m=new T.Mesh(g,mat);m.name=w.id;m.position.set(w.x,w.height/2,w.y);m.rotation.y=w.angle||0;m.userData.originalWall=w;r.wallRows.set(w.id,{mesh:m});r.spatialRoot.add(m);}
+  const frame={zone:id,layer:'STORY',exploration:L,entities:[],hospitalFocus13:[]};if(id==='ep1a08')C.ensureHospitalRooms.call(r,frame);
+  const sources=api.wallSources(r),shape=api.outline(r,sources);rows.push({id,meshSources:sources.length,topTriangles:shape.topTriangles,rims:shape.edges.length,posts:shape.posts.length,layoutUnchanged:JSON.stringify(L)===before});
+  check(id+' actual native top geometry produces exposed rims and corners without layout mutation',sources.length>0&&shape.topTriangles>0&&shape.edges.length>0&&shape.posts.length>0&&JSON.stringify(L)===before,rows.at(-1));
+  if(id==='ep1a08'){const batch=r.hospitalWallBatch;for(let i=0;i<120;i++)C.ensureHospitalRooms.call(r,{...frame,entities:[{hero:true,x:20+i/20,y:20}],hospitalFocus13:[{x:20+i/20,y:20}]});check('Native hospital batch identity survives 120 moving-focus calls with R89 dither',r.hospitalWallBatch===batch,{calls:120,batchRebuilds:0});}
+  r.spatialRoot.traverse(o=>o.geometry?.dispose());mat.dispose();
+ }
+ await h.boot();await h.start();h.run('for(let i=0;i<40&&storyScene;i++)advanceScene();if(modal)closePanel(true);auto=false;guide=false;');
+ const capture=()=>h.run(`(()=>{const f=__STORYWORLD_PHASE1__.capture();f.commands=__STORYWORLD_PHASE1__.captureVisual();const lights=__STORYWORLD_SPATIAL_R90__.lightSources(f);return{zone,lights,commands:f.commands.length,errors:[...errors]};})()`);
+ const hospital=capture();check('Native hospital draw capture exposes actual portal source',hospital.zone==='ep1a08'&&hospital.lights.some(l=>l.portal),hospital);
+ await h.run(`__STORYWORLD_CHEAT777__.activate('777')`);h.run('for(let i=0;i<40&&storyScene;i++)advanceScene();if(modal)closePanel(true);');await h.run(`__STORYWORLD_CHEAT777__.go('dist02','STORY')`);await new Promise(r=>setImmediate(r));
+ await h.run(`(()=>{const b=document.getElementById('r71DifficultyConfirm');return b?.onclick?.({preventDefault(){}});})()`);await new Promise(r=>setImmediate(r));h.run('for(let i=0;i<40&&storyScene;i++)advanceScene();if(modal)closePanel(true);');
+ const swamp=capture();check('Native swamp draw capture exposes actual portal source',swamp.zone==='dist02'&&swamp.lights.some(l=>l.portal),swamp);
+})().catch(error=>{report.failure=error.stack;process.exitCode=1;}).finally(()=>{report.passed=checks.filter(c=>c.passed).length;report.total=checks.length;report.completedAt=new Date().toISOString();fs.writeFileSync(__dirname+'/spatial-native-results.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));});

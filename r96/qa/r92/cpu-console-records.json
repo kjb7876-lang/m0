@@ -1,0 +1,11 @@
+{
+ "schema": "storyworld.cpu-console-records/v1",
+ "note": "Console output of qa/r89/run-cpu-suite.cjs subsets whose JSON (qa/r89/cpu-suite-partial.json) was overwritten before it was kept. Times are tool-result timestamps (UTC). Windows, Node 24, no Python.",
+ "runs": [
+  {"label": "R91 stage 1 (wall decor)", "at": "2026-10-24T05:35:47Z", "groups": {"world-runtime": "22/22", "hospital-maze": "29/29", "existing-effects": "14/14", "renderer-compositing": "13/13", "hospital-settings": "20/20", "final42-native-hooks": "30/30"}, "checks": "128/128", "failedGroups": []},
+  {"label": "R91 stage 2 (remains / stains)", "at": "2026-10-24T05:56:21Z", "groups": {"world-runtime": "22/22", "hospital-maze": "29/29", "existing-effects": "14/14", "native-progression": "12/12", "world-combat": "9/9", "new-vfx-runtime": "18/18", "final42-native-hooks": "30/30"}, "checks": "134/134", "failedGroups": []},
+  {"label": "R91 stage 3 (death fx)", "at": "2026-10-24T06:10:11Z", "groups": {"world-runtime": "22/22", "native-progression": "12/12", "existing-effects": "14/14", "new-vfx-runtime": "18/18", "world-combat": "9/9", "final42-native-hooks": "30/30", "hospital-settings": "20/20"}, "checks": "125/125", "failedGroups": []},
+  {"label": "R91 stage 4 (walk 8-dir)", "at": "2026-10-24T06:26:55Z", "groups": {"manual-input": "6/6", "world-runtime": "22/22", "renderer-compositing": "13/13", "hero-presentation": "18/18", "existing-effects": "14/14", "world-combat": "9/9", "final42-atlas-player": "39/39", "hospital-settings": "20/20"}, "checks": "141/141", "failedGroups": []},
+  {"label": "A-1~4 (light link, decal/atmosphere strength, blood 3 levels, wall decor settle)", "at": "2026-10-24T07:05:18Z", "groups": {"world-runtime": "22/22", "hospital-maze": "29/29", "renderer-compositing": "13/13", "existing-effects": "14/14", "world-combat": "9/9", "new-vfx-runtime": "18/18", "hospital-settings": "20/20", "final42-native-hooks": "30/30"}, "checks": "155/155", "failedGroups": []}
+ ]
+}

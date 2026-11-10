@@ -1,0 +1,41 @@
+{
+  "schema": "storyworld.r90.browser-availability/v1",
+  "checkedAt": "2026-10-24T03:44:50.431Z",
+  "node": "v24.19.0",
+  "platform": "linux",
+  "architecture": "x64",
+  "playwrightModule": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright",
+  "executablePaths": {
+    "chromium": {
+      "path": "/root/.cache/ms-playwright/chromium-1234/chrome-linux64/chrome",
+      "exists": false
+    },
+    "firefox": {
+      "path": "/root/.cache/ms-playwright/firefox-1538/firefox/firefox",
+      "exists": false
+    },
+    "webkit": {
+      "path": "/root/.cache/ms-playwright/webkit-2336/pw_run.sh",
+      "exists": false
+    }
+  },
+  "headless": {
+    "attempted": true,
+    "launched": false,
+    "options": {
+      "headless": true,
+      "chromiumSandbox": true
+    },
+    "error": "browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell\n\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557\n\u2551 Looks like Playwright was just installed or updated.       \u2551\n\u2551 Please run the following command to download new browsers: \u2551\n\u2551                                                            \u2551\n\u2551     npx playwright install                                 \u2551\n\u2551                                                            \u2551\n\u2551 <3 Playwright Team                                         \u2551\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d"
+  },
+  "physicalGPUVerified": false,
+  "manualPlayVerified": false,
+  "securitySettingsChanged": false,
+  "downloadsOrInstalls": false,
+  "cloudBrowser": {
+    "attemptedBy": "root agent",
+    "url": "http://127.0.0.1:49329/",
+    "result": "net::ERR_CONNECTION_REFUSED",
+    "source": "Root observed server startup before the attempt, but browser connection was refused. Separate same-process Node HTTP test succeeded; browser accessibility was not established."
+  }
+}

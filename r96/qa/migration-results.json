@@ -1,0 +1,89 @@
+{
+  "method": "Native CPU VM importing actual v1 test checkpoint fixtures into v2, without browser/GPU.",
+  "checks": [
+    {
+      "name": "rally import leaves input unchanged",
+      "passed": true
+    },
+    {
+      "name": "rally milestone retained",
+      "passed": true,
+      "detail": {
+        "version": 2,
+        "phase": "rally",
+        "route": 1,
+        "rallied": [
+          "ep1a08:a08-s1",
+          "ep1a08:a08-o2",
+          "ep1a08:a08-s1-w1-r2",
+          "ep1a08:a08-s1-w2-2",
+          "ep1a08:a08-o2-w2-4",
+          "ep1a08:a08-s1-w2-r2",
+          "ep1a08:maze-patrol-r1:1",
+          "ep1a08:maze-patrol-r1:3",
+          "ep1a08:maze-patrol-r1:5",
+          "ep1a08:maze-patrol-r1:7",
+          "ep1a08:maze-patrol-r1:9",
+          "ep1a08:maze-patrol-r1:11",
+          "ep1a08:maze-elite-r2:a08-o1",
+          "ep1a08:maze-elite-r2:a08-s1",
+          "ep1a08:maze-elite-r2:a08-c1",
+          "ep1a08:maze-elite-r2:a08-o2"
+        ],
+        "doorStoryDone": false,
+        "exitStoryDone": false
+      }
+    },
+    {
+      "name": "rally old survivors retain HP",
+      "passed": true
+    },
+    {
+      "name": "v1 rally moves original major to boss room and includes new champions in rally",
+      "passed": true
+    },
+    {
+      "name": "boss import leaves input unchanged",
+      "passed": true
+    },
+    {
+      "name": "boss milestone retained",
+      "passed": true,
+      "detail": {
+        "version": 2,
+        "phase": "boss",
+        "route": 1,
+        "rallied": [
+          "ep1a08:a08-s1",
+          "ep1a08:a08-o2",
+          "ep1a08:a08-s1-w1-r2",
+          "ep1a08:a08-s1-w2-2",
+          "ep1a08:a08-o2-w2-4",
+          "ep1a08:a08-s1-w2-r2",
+          "ep1a08:maze-patrol-r1:1",
+          "ep1a08:maze-patrol-r1:3",
+          "ep1a08:maze-patrol-r1:5",
+          "ep1a08:maze-patrol-r1:7",
+          "ep1a08:maze-patrol-r1:9",
+          "ep1a08:maze-patrol-r1:11"
+        ],
+        "doorStoryDone": true,
+        "exitStoryDone": false
+      }
+    },
+    {
+      "name": "boss old survivors retain HP",
+      "passed": true
+    },
+    {
+      "name": "v1 cleared field introduces no new live champions",
+      "passed": true
+    },
+    {
+      "name": "native errors empty",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

@@ -1,0 +1,17 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path');
+const {createHarness}=require('../harness.cjs');
+const h=createHarness(),checks=[];
+const check=(name,passed,detail)=>checks.push({name,passed:!!passed,...(detail===undefined?{}:{detail})});
+const input=h.run(`(()=>{let calls=0;basicAttack=()=>{calls++;return true};started=true;modal=false;loading=false;storyScene=null;const hs=window._events.keydown,ups=window._events.keyup,pc=hs.find(f=>f.toString().includes("key==='j'")),native=hs.find(f=>f.toString().includes("key==='a'||key==='1'"));if(!pc||!native)throw Error('Expected PC and native attack listeners');function press(key){let prevented=false,stopped=false;const e={key,repeat:false,target:{tagName:'BODY',isContentEditable:false,closest:()=>null},preventDefault(){prevented=true},stopImmediatePropagation(){stopped=true}};pc(e);const captured=stopped;if(!stopped)native(e);return{prevented,captured};}function release(key){for(const fn of ups){if(fn.toString().includes("key==='j'")){fn({key,code:key,target:{tagName:'BODY',isContentEditable:false},preventDefault(){},stopImmediatePropagation(){}});}else if(fn.toString().includes('keys.delete'))fn({key,code:key,target:{tagName:'BODY',isContentEditable:false},preventDefault(){},stopImmediatePropagation(){}});}}const a=press('a'),aCount=calls,aHeld=keys.has('attack'),aMovesLeft=keys.has('ArrowLeft');release('a');const releasedA=!keys.has('attack');const j=press('j'),jCount=calls,jHeld=keys.has('attack');release('j');const releasedJ=!keys.has('attack');const one=press('1'),oneCount=calls;return{a,aCount,aHeld,aMovesLeft,releasedA,j,jCount,jHeld,releasedJ,one,oneCount,hotbar:document.querySelector('#hotbar')?.textContent||'',help:document.getElementById('hospitalPCTest')?.textContent||'',native:native.toString(),pc:pc.toString()};})()`);
+check('A reaches native basic attack; keydown capture no longer remaps it to left',input.aCount===1&&!input.a.captured&&input.aHeld,input);
+check('A keyup releases the native attack key state',input.releasedA,input);
+check('J remains a direct PC attack alias with matching keyup; 1 remains native',input.jCount===2&&input.j.captured&&input.jHeld&&input.releasedJ&&input.oneCount===3,input);
+check('A never adds left movement to the held-key state',!input.aMovesLeft,input);
+check('Player help identifies the A/J/1 basic-attack keys',input.pc.includes("key==='j'")&&input.native.includes("key==='a'||key==='1'"),{pc:input.pc,native:input.native});
+const html=fs.readFileSync(path.join(h.site,'index.html'),'utf8');
+check('Hotbar keeps A / J / 1 labels',html.includes('A / J / 1'));
+const report={schema:'r81-manual-input-cpu/v1',method:'Actual native keydown/keyup listeners in Node VM, synthetic events. No browser or natural play.',checks,passed:checks.every(c=>c.passed),browserVerified:false,GPUVerified:false,naturalPlayVerified:false};
+fs.writeFileSync(path.join(__dirname,'manual-input-results.json'),JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify({passed:checks.filter(c=>c.passed).length,total:checks.length}));
+if(!report.passed)process.exitCode=1;
