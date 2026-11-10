@@ -24973,6 +24973,31 @@
       "sha256": "c5fe9b7dc705e2d569d2bbeb8388b4fd0c1ffe03216b633493de67fe24455c1d"
     },
     {
+      "path": "assets/r524/index.json",
+      "bytes": 2900,
+      "sha256": "ed944fe6962529e73c913e4385d772ef0a0f908985fae2553bd8f256b4059a6c"
+    },
+    {
+      "path": "assets/r524/range-n.webp",
+      "bytes": 14628,
+      "sha256": "4b0b8315c029aabf142b1ece69649ac664a499d65a986d773e5f00cb9d877b9b"
+    },
+    {
+      "path": "assets/r524/range-w.webp",
+      "bytes": 15948,
+      "sha256": "d37671b9e267ee5b1f1ea75e58133b02eeb8fcc461814b4089253fee5df72942"
+    },
+    {
+      "path": "assets/r524/sofa-n.webp",
+      "bytes": 13648,
+      "sha256": "d409b4f26957f3cebe536002aaba47732bacf8572fa1875390ed95b51be8bff2"
+    },
+    {
+      "path": "assets/r524/sofa-w.webp",
+      "bytes": 13468,
+      "sha256": "8bf10ff5c67732f690edf60e016a5e97dbf938e7ac13cc175564b8d88992512e"
+    },
+    {
       "path": "assets/r535/hunter-fire-arrowhead.webp",
       "bytes": 175158,
       "sha256": "2224771bb5eecbdfb12628b397283f45b5c7d2dc96ea50c22c96b15627b5c505"
@@ -34609,8 +34634,8 @@
     },
     {
       "path": "rooms-r523.js",
-      "bytes": 37753,
-      "sha256": "ebaee9b11ccded46dffc7b564f314cc576ff7288e61d26b1249f0a059785fcc7"
+      "bytes": 42635,
+      "sha256": "4a23ec16dd31424586292d1d62382f75c4c2496e97e0562b9bac01f2156c6d5b"
     },
     {
       "path": "root-gate-video-r372.js",
@@ -35078,8 +35103,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 7015,
-  "totalBytes": 1096106160,
+  "fileCount": 7020,
+  "totalBytes": 1096171634,
   "webHTMLSha256": "e9ad258581ee459e96d9ff70ed6ab727662432d3cef131ab72ba4cbb73fff60a",
   "largest": [
     {

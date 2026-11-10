@@ -6225,7 +6225,12 @@
     "rooms-r523.js",
     "sfx-r541.js",
     "slayer-sheets-r585.js",
-    "samong-theme-r572.js"
+    "samong-theme-r572.js",
+    "assets/r524/index.json",
+    "assets/r524/range-n.webp",
+    "assets/r524/range-w.webp",
+    "assets/r524/sofa-n.webp",
+    "assets/r524/sofa-w.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -7300,5 +7305,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "79790da6317683112f38e2c1a2b0a1d4e5dfa3794143a597d8bcd0321b32b847"
+  "runtimeManifestSHA256": "c989fe090a6f96569b942bfd3a23c868ee74ea6cfe0f3c6fc7e1e4974cd29327"
 }
