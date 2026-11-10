@@ -42143,6 +42143,11 @@
       "sha256": "dd5ddc485c4199bcf1abf25e451a958da7210c142ee279ddebcd4a814a921af5"
     },
     {
+      "path": "boss-motion-r620.js",
+      "bytes": 8140,
+      "sha256": "9ed19029f8f21167a288a12c75ff6760c27fbe5640122f2c19b7a4c5f1b639cf"
+    },
+    {
       "path": "boss-r205.js",
       "bytes": 12709,
       "sha256": "f54cef5e937665d0b9151e228f90ac5231875ce0bbc1cacf40cb16519e8ac493"
@@ -43164,8 +43169,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6573459,
-      "sha256": "5b95ed966e5d5afd4030f7553b54fde8505b229b14ac174c3d2cded211b09aa0"
+      "bytes": 6573505,
+      "sha256": "fdf4a56a5c6bd144a3391e6abfcf6c23068153b7ab0ac85d63d164b3aaaf5331"
     },
     {
       "path": "intro-r140.js",
@@ -44103,9 +44108,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8820,
-  "totalBytes": 1225491298,
-  "webHTMLSha256": "5b95ed966e5d5afd4030f7553b54fde8505b229b14ac174c3d2cded211b09aa0",
+  "fileCount": 8821,
+  "totalBytes": 1225499484,
+  "webHTMLSha256": "fdf4a56a5c6bd144a3391e6abfcf6c23068153b7ab0ac85d63d164b3aaaf5331",
   "largest": [
     {
       "path": "index.html",
