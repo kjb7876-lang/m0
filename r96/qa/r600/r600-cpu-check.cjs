@@ -50,4 +50,10 @@ const A=win.__STORYWORLD_SURVIVAL_R600__;assert(A&&A.pure);const P=A.pure;ok('mo
 // 엔진에 손대지 않음: 저장을 막고(이 모드는 저장하지 않음), 스토리 진행 마무리(finishEncounter)·길잡이를 생존 무대에서 막는다.
 assert(/saveGame=function[^]*?S\?\.active\)\{stats\.saveBlocked\+\+;return true;[^]*?if\(tainted\)\{stats\.saveBlocked\+\+;return false;\}/.test(src));assert(/finishEncounter=function[^]*?here\(\)\)return;/.test(src));assert(/guideStep=function[^]*?guide=false/.test(src));ok('no saves, no story finish, no guide inside survival');
 assert(/if\(used\)return;used=true;/.test(src));ok('a choice applies once per panel (double click / stale button safe)');
+// 네이티브 중간보스(u203-mid 처럼 mb- 접두·'중간보스' 이름이 아닌)도 midboss 표시로 중간보스 칸에 들어간다
+{const a=src.indexOf('function roster(id){'),b=src.indexOf('\n return out;}',a);assert(a>0&&b>a);
+ const f=new Function('G','makeNative','id',src.slice(a,b+14)+'\nreturn roster(id);');
+ const prof={path:'x'},G=(fn,d)=>{try{return fn();}catch(_){return d;}};
+ const mk=()=>({enemies:[{nativeId:'u203-a',name:'졸개',profile:prof},{nativeId:'u203-mid',name:'계단의 감시자',midboss:true,boss:false,profile:prof},{nativeId:'u203-boss',name:'보스',boss:true,profile:prof}]});
+ const r=f(G,mk,'u203');assert.strictEqual(r.mid?.nativeId,'u203-mid');assert.deepStrictEqual(r.normal.map(e=>e.nativeId),['u203-a']);assert.strictEqual(r.boss?.nativeId,'u203-boss');ok('native midboss flag puts u203-mid in the midboss slot, not the normal roster');}
 console.log('R600 CPU',n,'checks passed');

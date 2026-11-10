@@ -128,7 +128,7 @@ function layoutFor(id){const EX=window.__STORYWORLD_EXPLORATION__,host=G(()=>EX.
   worldR75:null,worldR78:null,worldWardR81:null,refugeR82:null,survivalR600:{centre:{x:A.cx,y:A.cy},arena:A}};}
 let makeNative=null;
 function roster(id){const t=G(()=>makeNative(id,'STORY'),null),out={normal:[],boss:null,mid:null,template:t};if(!t)return out;const seen=new Set();
- for(const e of t.enemies||[]){if(!e||!e.profile)continue;const mid=/^중간보스/.test(String(e.name||''))||/^mb-/.test(String(e.nativeId||''));
+ for(const e of t.enemies||[]){if(!e||!e.profile)continue;const mid=!!e.midboss||/^중간보스/.test(String(e.name||''))||/^mb-/.test(String(e.nativeId||''));
   if(e.boss){if(!out.boss)out.boss=e;continue;}if(mid){if(!out.mid)out.mid=e;continue;}
   const k=String(e.nativeId||e.name);if(seen.has(k))continue;seen.add(k);out.normal.push(e);}
  return out;}
@@ -158,6 +158,8 @@ function scenesOf(def,part){try{return (def.records||[]).map(r=>({text:part==='b
 // R101 의 스토리 새 게임 확인 창 영웅 줄은 고른 영웅을 기억했다가 다음 newGame 의 영웅을 바꿔 끼운다(창을 열기만 해도 환도).
 //  생존에서 고른 영웅이 이기도록, 남은 선택이 다르면 그 영웅 줄을 화면 밖 한 번 열어 생존 영웅을 누르고 닫는다(R101 공개 동작만 씀).
 function alignR101Hero(h){const R=window.__STORYWORLD_POLISH_R101__,ph=R?.pickedHero?.();if(!ph||ph===h)return;try{openPanel('<!-- r600: slotConfirmR73 처음부터 시작 — R101 영웅 줄 맞춤 --><div class="actions"></div>');document.querySelector('#heroRowR101 [data-hero="'+h+'"]')?.click();}catch(e){fail(e);}finally{try{closePanel(true);}catch(e){fail(e);}}}
+// 스토리 처치 보상(R64·R71 패시브 포인트 떨굼)은 생존에서 주지 않는다 — 처치 직후 생존 방의 떨굼 기록과 그림 소품을 지운다(생존 성장은 경험 조각·카드만).
+function stripPointDrops(r=G(()=>room,null)){if(!r||!here())return;try{if(Array.isArray(r.passivePointDropsR64)&&r.passivePointDropsR64.length)r.passivePointDropsR64.length=0;if(Array.isArray(r.props)&&r.props.some(q=>q?.passivePointDropR64))r.props=r.props.filter(q=>!q?.passivePointDropR64);}catch(e){fail(e);}}
 function deactivate(){if(S)S.active=false;stageRoom=null;narrStop();gems=[];beams=[];choiceQ=0;choosing=false;hud(false);}
 
 // ── 몹 ──
@@ -316,7 +318,7 @@ function install(){makeNative=makeRoom;
  rawGainXP=gainXP;gainXP=function(v,...a){if(here()&&inKill){if(Number.isFinite(+v)&&+v>0&&inKill.e){gems.push({x:inKill.e.x+(Math.random()-.5)*.4,y:inKill.e.y+(Math.random()-.5)*.4,v:+v});
    if(gems.length>GEM_CAP){const a0=gems.shift(),b0=gems[0];b0.v+=a0.v;}}return;}return rawGainXP.call(this,v,...a);};
  const hitBaseR600=hitEnemy;hitEnemy=function(...a){if(!here())return hitBaseR600.apply(this,a);inHitR600++;try{return hitBaseR600.apply(this,a);}finally{inHitR600--;}};
- const killBase=killEnemy;killEnemy=function(e,...a){const first=!!e&&!e.deadRecorded;if(!here()||!first)return killBase.apply(this,[e,...a]);inKill={e};let r;const hideBoss=!!(e.boss&&['last301','hando01'].includes(G(()=>zone,'')));/* R75 마지막 결투·두 주인의 성(hando01) 처치 가로채기(보스를 10%로 살려 두는 스토리 연출)는 e.boss 로 고른다 — 생존에서는 이 한 번 동안만 보스 표시를 내린다 */if(hideBoss)e.boss=false;try{r=killBase.apply(this,[e,...a]);}finally{inKill=false;if(hideBoss)e.boss=true;}
+ const killBase=killEnemy;killEnemy=function(e,...a){const first=!!e&&!e.deadRecorded;if(!here()||!first)return killBase.apply(this,[e,...a]);inKill={e};let r;const hideBoss=!!(e.boss&&['last301','hando01'].includes(G(()=>zone,'')));/* R75 마지막 결투·두 주인의 성(hando01) 처치 가로채기(보스를 10%로 살려 두는 스토리 연출)는 e.boss 로 고른다 — 생존에서는 이 한 번 동안만 보스 표시를 내린다 */if(hideBoss)e.boss=false;try{r=killBase.apply(this,[e,...a]);}finally{inKill=false;if(hideBoss)e.boss=true;stripPointDrops();}
   try{if(e.deadRecorded){S.kills++;S.stageKills++;stats.kills++;const st=CS();S.core.hp=Math.min(st.max,S.core.hp+st.heal*(e.r600Boss?15:1));}}catch(err){fail(err);}return r;};
  if(typeof finishEncounter==='function'){const base=finishEncounter;finishEncounter=function(...a){if(here())return;return base.apply(this,a);};}
  if(typeof saveGame==='function'){const base=saveGame;saveGame=function(...a){if(S?.active){stats.saveBlocked++;return true;/* 생존은 쓸 것이 없음 — 쓰지 않고 '저장됨'으로 답해 메뉴 '처음 화면'이 막히지 않게 */}if(tainted){stats.saveBlocked++;return false;}return base.apply(this,a);};}

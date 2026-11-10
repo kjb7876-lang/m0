@@ -59,6 +59,13 @@ ok('narration holds while the game is paused (still narrating, minimum wave end 
  await p.waitForFunction(()=>window.__STORYWORLD_SURVIVAL_R600__.here()&&!loading&&window.__STORYWORLD_SURVIVAL_R600__.state().ready,null,{timeout:240000}).catch(()=>{});
  const h=await A(()=>({hero:player.hero,picked:window.__STORYWORLD_POLISH_R101__?.pickedHero?.()??null}));
  ok('survival starts with the survival-picked hero even after the campaign hero row was opened and cancelled',h.hero==='hunter',{...row,...h});
+ // 2f) 생존 처치는 스토리 패시브 포인트(R64·R71 떨굼)를 주지 않는다 — 생존은 자체 경험 조각·카드만
+ await p.waitForFunction(()=>room.enemies.some(e=>e.hp>0&&e.survivalR600),null,{timeout:180000}).catch(()=>{});
+ const pd=await A(()=>{if(modal)closePanel(true);const t=room.enemies.find(e=>e.hp>0&&e.survivalR600);if(!t)return{none:true};const p0=player.points||0;let n=0;
+  for(let i=0;i<120;i++){const e=Object.assign(Object.create(Object.getPrototypeOf(t)),t,{id:'qa-r600-pt-'+i,deadRecorded:false,hp:0,attack:null});room.enemies.push(e);killEnemy(e);n++;}
+  return{n,drops:(room.passivePointDropsR64||[]).length,props:(room.props||[]).filter(q=>q?.passivePointDropR64).length,points:(player.points||0)-p0};});
+ await p.waitForTimeout(800);const pts=await A(()=>({drops:(room.passivePointDropsR64||[]).length,props:(room.props||[]).filter(q=>q?.passivePointDropR64).length}));
+ ok('survival kills drop no campaign passive points',!pd.none&&pd.drops===0&&pd.props===0&&pd.points===0&&pts.drops===0&&pts.props===0,{...pd,after:pts});
  await A(()=>{if(modal)closePanel(true);showMenu();});await p.waitForTimeout(300);await A(()=>document.getElementById('menuTitle')?.click());await p.waitForTimeout(1500);}
 // 3) 스토리 이어하기 → 죽음 화면
 const loaded=await A(async()=>{const st=window.__STORYWORLD_TEST_STORAGE_B1__.store;let raw=null;try{raw=JSON.parse(st.getItem(normalSaveKeyR73()));}catch(_){}return raw?await restoreSave(raw):false;});
