@@ -33693,6 +33693,21 @@
       "sha256": "37c6eba767d48805d8c043fbb6fdcbbcf3245fe5d34a2ac7a535c917a14898a5"
     },
     {
+      "path": "assets/r563/dots/michaela-grand-pillar.webp",
+      "bytes": 173204,
+      "sha256": "5fd17c0e32957aedf0edb5d2082d59e883d30c3cb861600b7c44c66459a1030c"
+    },
+    {
+      "path": "assets/r563/dots/michaela-halo.webp",
+      "bytes": 207250,
+      "sha256": "c39dbc60383b232f8d3b68023b7ca0583c85cefd3e159f1cae5ac1510d93540d"
+    },
+    {
+      "path": "assets/r563/dots/michaela-pillar.webp",
+      "bytes": 127342,
+      "sha256": "6985f7a711074f743db96084b515a66c6e64b3d6486548cdb0329cac61c3f1b6"
+    },
+    {
       "path": "assets/r585/index.json",
       "bytes": 5998,
       "sha256": "58b5be4a18822506f40faa3c259e3ecfaacc0c099197ea223f48711f29feb1d3"
@@ -42899,8 +42914,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6573209,
-      "sha256": "5034ada8c47c8c7d23f77be5516fe63cabbfe4e23c9e37793623fc2e3fa8f013"
+      "bytes": 6573259,
+      "sha256": "b864e949ea80ff9ac9ee7a692ac6eb6b3d95caca806286ed8dabfe646b2c9d13"
     },
     {
       "path": "intro-r140.js",
@@ -42971,6 +42986,11 @@
       "path": "maps-palace-slum-r317.js",
       "bytes": 15913,
       "sha256": "01e01f4db15a9a925b7d2eb2843c9664432f04b29bacce72a8f7921a58cc9418"
+    },
+    {
+      "path": "michaela-genesis-r563.js",
+      "bytes": 15249,
+      "sha256": "c6ea4566873bb623c8690e325f8bfe59f019646c1eb4fe57a6eaf55a60eda67c"
     },
     {
       "path": "michaela-r247.js",
@@ -43823,9 +43843,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8764,
-  "totalBytes": 1217717459,
-  "webHTMLSha256": "5034ada8c47c8c7d23f77be5516fe63cabbfe4e23c9e37793623fc2e3fa8f013",
+  "fileCount": 8768,
+  "totalBytes": 1218240554,
+  "webHTMLSha256": "b864e949ea80ff9ac9ee7a692ac6eb6b3d95caca806286ed8dabfe646b2c9d13",
   "largest": [
     {
       "path": "index.html",
