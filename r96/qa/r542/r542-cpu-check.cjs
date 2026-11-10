@@ -1,6 +1,7 @@
 'use strict';
 // R542 — 사용자가 준 효과음(2026-11-10 "검토후 개선하여 쓸만한것들 적절히 사용") 가운데 4개를 다듬어 연결.
 //  활(헌터 평타) · 회복 · 상자 부수기 · 보스 포효 변주. 영웅 파일은 건드리지 않고 효과음 모듈(sfx-r541.js)에서 연결한다.
+// R546 에서 요구가 바뀜(사용자 2026-11-10 14:10Z "효과음 필요할만한건 모두 다 만들어서 적용"): 영웅 평타·강화 소리를 새 소리로 바꾼다. 이 검사는 그 이전 층만 보도록 R546 을 끈 상태(storyworld.r546.sfx='0')로 돌리고, 바뀐 동작은 qa/r546 이 검사한다.
 const fs=require('fs'),path=require('path'),vm=require('vm'),crypto=require('crypto'),cp=require('child_process');
 const ROOT=path.resolve(__dirname,'../../..'),R=path.join(ROOT,'r96');let n=0,bad=0;const ok=(c,m)=>{n++;if(!c){bad++;console.log('FAIL',m);}else console.log('ok  ',m);};
 const rd=f=>{try{return fs.readFileSync(f,'utf8');}catch(_){return'';}};
@@ -28,7 +29,7 @@ ok(total>0&&total<=40000,'음원 합계 40KB 이하('+total+')');
 // ── 동작(vm)
 function mk(opt={}){const played=[];let setups=0;
  const base=()=>({attack:[{path:'a.ogg'}],enemyHit:[{path:'h.ogg'}],boss:[{path:'b1.ogg'},{path:'b2.ogg'}],upgrade:[{path:'u.ogg'}],swHeal:[{path:'u.ogg'}],swRanged:[{path:'e.ogg'}]});
- const ctx={window:{},localStorage:{getItem:k=>k==='storyworld.r541.sfx'?(opt.pref??null):null,setItem(){}},performance:{now:()=>1000},setInterval:()=>0,console,
+ const ctx={window:{},localStorage:{getItem:k=>k==='storyworld.r541.sfx'?(opt.pref??null):k==='storyworld.r546.sfx'?'0':null,setItem(){}},performance:{now:()=>1000},setInterval:()=>0,console,
   soundProfiles:base(),sound:(k,...a)=>{played.push([k,...a]);return 'ret';},killEnemy:()=>{},setupAudio:function(){setups++;Object.assign(ctx.soundProfiles,base());delete ctx.soundProfiles.r542Bow;delete ctx.soundProfiles.r542Crush;return 'base';},
   started:true,modal:null,loading:false,player:{hp:10,hero:opt.hero||'hunter'},room:{id:'A'}};
  ctx.window.window=ctx.window;vm.createContext(ctx);let err=null;try{vm.runInContext('var window=this.window;'+src,ctx);}catch(e){err=e;}return{ctx,played,err};}
