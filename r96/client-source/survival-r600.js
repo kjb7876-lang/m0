@@ -155,6 +155,9 @@ const c=stageRoom.survivalR600.centre,extra=[...rosterPaths(stageRoom.survivalR6
  const pre=scenesOf(def,'pre');const n=narrPlay(pre.length?pre:scenesOf(def,'body'));if(!n){S.narrEndAt=G(()=>time,0)+NO_TEXT_SECS-TAIL;}
  try{toast('무한 생존 · '+(S.loop?(S.loop+1)+'회차 · ':'')+(i+1)+'/'+S.ids.length+' '+def.title,3.2);}catch(_){}hud(true);return true;}
 function scenesOf(def,part){try{return (def.records||[]).map(r=>({text:part==='body'?(r.paragraphs||[]).join('\n\n'):String(r[part]||''),narrator:r.narrator})).filter(s=>s.text.trim());}catch(e){fail(e);return[];}}
+// R101 의 스토리 새 게임 확인 창 영웅 줄은 고른 영웅을 기억했다가 다음 newGame 의 영웅을 바꿔 끼운다(창을 열기만 해도 환도).
+//  생존에서 고른 영웅이 이기도록, 남은 선택이 다르면 그 영웅 줄을 화면 밖 한 번 열어 생존 영웅을 누르고 닫는다(R101 공개 동작만 씀).
+function alignR101Hero(h){const R=window.__STORYWORLD_POLISH_R101__,ph=R?.pickedHero?.();if(!ph||ph===h)return;try{openPanel('<!-- r600: slotConfirmR73 처음부터 시작 — R101 영웅 줄 맞춤 --><div class="actions"></div>');document.querySelector('#heroRowR101 [data-hero="'+h+'"]')?.click();}catch(e){fail(e);}finally{try{closePanel(true);}catch(e){fail(e);}}}
 function deactivate(){if(S)S.active=false;stageRoom=null;narrStop();gems=[];beams=[];choiceQ=0;choosing=false;hud(false);}
 
 // ── 몹 ──
@@ -294,7 +297,7 @@ async function start(hero){try{pending=false;stats.starts++;deactivate();S=fresh
  /* 스토리 세이브가 있으면 엔진 newGame 이 '새 여정 확인'을 요구하며 막는다(덮어쓰기 보호). 생존은 저장을 아예 쓰지 않으므로 이 한 번만
     'R73 새 여정 확인됨'으로 답해 통과시킨다 — 덮어쓰기 대기(pendingOverwrite5)는 켜지 않으므로 기존 세이브를 지우는 길도 타지 않는다. */
  const SL=window.__STORYWORLD_SAVE_SLOTS_R73__,liftSlots=!!SL;if(liftSlots){try{window.__STORYWORLD_SAVE_SLOTS_R73__=Object.freeze({...SL,confirmedNew:()=>true});}catch(e){fail(e);}}
- entering++;let ok;try{ok=await newGame(S.hero);}finally{entering--;if(liftSlots)try{window.__STORYWORLD_SAVE_SLOTS_R73__=SL;}catch(e){fail(e);}}try{window.__STORYWORLD_INTRO_VIDEO_R309__?.skip?.();}catch(_){}/* 생존은 스토리 오프닝 영상 없이 바로 */if(ok===false||!S?.active){deactivate();return false;}
+ alignR101Hero(S.hero);entering++;let ok;try{ok=await newGame(S.hero);}finally{entering--;if(liftSlots)try{window.__STORYWORLD_SAVE_SLOTS_R73__=SL;}catch(e){fail(e);}}try{window.__STORYWORLD_INTRO_VIDEO_R309__?.skip?.();}catch(_){}/* 생존은 스토리 오프닝 영상 없이 바로 */if(ok===false||!S?.active){deactivate();return false;}
  for(let i=0;i<100&&G(()=>loading,false);i++)await new Promise(r=>setTimeout(r,100));
  try{storyQueue=[];storyScene=null;storyDone=null;if(G(()=>modal,false))closePanel(true);}catch(_){}
  if(!S.ids.length){deactivate();return false;}return await go(0);}catch(e){fail(e);deactivate();return false;}}

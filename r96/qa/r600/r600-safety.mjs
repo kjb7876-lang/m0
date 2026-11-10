@@ -49,6 +49,15 @@ ok('narration holds while the game is paused (still narrating, minimum wave end 
 {const s1=await slots();await A(()=>{if(modal)closePanel(true);showMenu();});await p.waitForTimeout(300);await A(()=>document.getElementById('menuTitle')?.click());await p.waitForTimeout(1500);
  const m=await A(()=>({active:window.__STORYWORLD_SURVIVAL_R600__.active(),title:!!document.getElementById('survivalStartR600')}));
  ok('menu title button leaves survival to the title without writing the story save',m.active===false&&m.title&&JSON.stringify(await slots())===JSON.stringify(s1)&&JSON.stringify(s1)===JSON.stringify(s0),m);}
+// 2e) 스토리 새 게임 확인 창(R101 영웅 줄)을 열었다 취소한 뒤에도 생존에서 고른 영웅으로 시작한다
+{await A(()=>{if(modal)closePanel(true);showTitle();});await p.waitForTimeout(500);
+ await p.locator('#campaignNew54').click({timeout:60000});await p.waitForTimeout(500);const row=await A(()=>({row:!!document.getElementById('heroRowR101'),picked:window.__STORYWORLD_POLISH_R101__?.pickedHero?.()}));
+ await A(()=>document.getElementById('slotCancelR73')?.click());await p.waitForTimeout(300);await A(()=>{if(modal)closePanel(true);showTitle();});await p.waitForTimeout(500);
+ await p.locator('#survivalStartR600').click({timeout:60000});await p.locator('[data-r600hero="hunter"]').click();
+ await p.waitForFunction(()=>window.__STORYWORLD_SURVIVAL_R600__.here()&&!loading&&window.__STORYWORLD_SURVIVAL_R600__.state().ready,null,{timeout:240000}).catch(()=>{});
+ const h=await A(()=>({hero:player.hero,picked:window.__STORYWORLD_POLISH_R101__?.pickedHero?.()??null}));
+ ok('survival starts with the survival-picked hero even after the campaign hero row was opened and cancelled',h.hero==='hunter',{...row,...h});
+ await A(()=>{if(modal)closePanel(true);showMenu();});await p.waitForTimeout(300);await A(()=>document.getElementById('menuTitle')?.click());await p.waitForTimeout(1500);}
 // 3) 스토리 이어하기 → 죽음 화면
 const loaded=await A(async()=>{const st=window.__STORYWORLD_TEST_STORAGE_B1__.store;let raw=null;try{raw=JSON.parse(st.getItem(normalSaveKeyR73()));}catch(_){}return raw?await restoreSave(raw):false;});
 await p.waitForTimeout(1500);await p.waitForFunction(()=>started&&!loading,null,{timeout:240000}).catch(()=>{});/* 불러오기 창 글은 닫힌 뒤에도 패널 안에 남으므로 loading 으로 본다 */await skip();await p.waitForTimeout(600);await A(()=>{if(modal)closePanel(true);});
