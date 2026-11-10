@@ -33648,6 +33648,36 @@
       "sha256": "90c8922991b909dd13b75b34689f973619dc4d18fc1c57cf314abd6b46f4cb2b"
     },
     {
+      "path": "assets/r562/dots/neon-bubble-ring-back.webp",
+      "bytes": 127698,
+      "sha256": "92e2b0af03de1e38a97c63ff648adbd45ccd98b55cf62f3a051d2e4ae2b5a9f2"
+    },
+    {
+      "path": "assets/r562/dots/neon-bubble-ring-front.webp",
+      "bytes": 69570,
+      "sha256": "5e80d68f3b1cf658c48a233d65f942558d4b124e9e67ccfb9ed1fc0e253211b8"
+    },
+    {
+      "path": "assets/r562/dots/neon-chain.webp",
+      "bytes": 88656,
+      "sha256": "ed02db70a54b4d5736697ff33d16af7d3feb743f7efc3eae81e03ff06e3b0067"
+    },
+    {
+      "path": "assets/r562/dots/neon-toxic-pool.webp",
+      "bytes": 202512,
+      "sha256": "0b69a506134586fc9801b8a1206061e86c6ec6dbda806e4f311e1f611efa4035"
+    },
+    {
+      "path": "assets/r562/neon-lightning-strike.webp",
+      "bytes": 201726,
+      "sha256": "0d4aabbfef515b8e7477a4bf7100c4c2c8f4fb0029fa277f8d78ef8786f20220"
+    },
+    {
+      "path": "assets/r562/neon-toxic-mist.webp",
+      "bytes": 189670,
+      "sha256": "37c6eba767d48805d8c043fbb6fdcbbcf3245fe5d34a2ac7a535c917a14898a5"
+    },
+    {
       "path": "assets/r585/index.json",
       "bytes": 5998,
       "sha256": "58b5be4a18822506f40faa3c259e3ecfaacc0c099197ea223f48711f29feb1d3"
@@ -42794,8 +42824,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6572976,
-      "sha256": "60f0c25a158042a1f385cee47028a29d960520243c19ff6bbc7ad242a491a795"
+      "bytes": 6573020,
+      "sha256": "a36586287b81a319f99c42c61b4b8de94c58f9c963171fb5163b415cb1bd0daa"
     },
     {
       "path": "intro-r140.js",
@@ -43021,6 +43051,11 @@
       "path": "nav-r176.js",
       "bytes": 5684,
       "sha256": "dc9f25885b4cbc747d36fe10f234459df1acfdb8af0b0d972d83ef9952d3d886"
+    },
+    {
+      "path": "neon-toxic-r562.js",
+      "bytes": 17694,
+      "sha256": "948010d72e6291fc4606aee7e714cd1066ca8966f86f01386c6c352035d28563"
     },
     {
       "path": "painted-vfx-data-r87.js",
@@ -43703,9 +43738,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8740,
-  "totalBytes": 1215720163,
-  "webHTMLSha256": "60f0c25a158042a1f385cee47028a29d960520243c19ff6bbc7ad242a491a795",
+  "fileCount": 8747,
+  "totalBytes": 1216617733,
+  "webHTMLSha256": "a36586287b81a319f99c42c61b4b8de94c58f9c963171fb5163b415cb1bd0daa",
   "largest": [
     {
       "path": "index.html",
