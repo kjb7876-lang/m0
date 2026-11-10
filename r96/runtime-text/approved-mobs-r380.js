@@ -7,9 +7,9 @@
 //  · 그림만 엔진 frameFor 사슬에 내준다. 판정·보상·저장은 그대로. storyworld.r380.mobs {on:false} 로 끈다(이동·개명은 새로 만드는 지역부터).
 (()=>{'use strict';
 if(window.__STORYWORLD_APPROVED_MOBS_R380__)return;
-const REV='R441',KEY='storyworld.r380.mobs',INDEX='assets/r380/mobs/index.json';
+const REV='R531',KEY='storyworld.r380.mobs',INDEX='assets/r380/mobs/index.json';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
-const stats={assigned:0,frames:0,waiting:0,removed:0,added:0,renamed:0,reinstalls:0,errors:0,deaths:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
+const stats={assigned:0,frames:0,waiting:0,removed:0,added:0,renamed:0,reinstalls:0,errors:0,deaths:0,summonRenamed:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 let idx=null;if(typeof fetch==='function')fetch(INDEX).then(r=>r.ok?r.json():null).then(j=>{if(j?.mobs)idx=j;}).catch(fail);
 const curLayer=()=>{try{return typeof layer==='string'?layer:'STORY';}catch(_){return 'STORY';}};
 const zoneOf=()=>{try{return String(typeof room==='object'&&room?(room.id||''):'');}catch(_){return '';}};
@@ -96,8 +96,16 @@ function balance(r,id,l){if(!Array.isArray(r.enemies))return;
     explorationGroup:'dist00:r383-pack:'+Math.floor(n/2),explorationLeash:32,r383Added:true,r75Pack:undefined});delete e.r75Pack;delete e.r74Monster;
    // R74 순찰 만들 때처럼 R61 정규화에 원래 수치 보존으로 등록(JSON 복제는 WeakMap 등록을 안 옮김, Codex P2).
    try{window.__STORYWORLD_SCALE_MELEE_R61__?.normalize?.(e,r,{preserveHealth:true,preserveDamage:true});}catch(err){fail(err);}r.enemies.push(e);n++;stats.added++;}}}
-function installRoom(){if(typeof makeRoom!=='function'||makeRoom.__r380)return typeof makeRoom==='function';const base=makeRoom;
+function installRoom(){try{installActor();}catch(err){fail(err);}if(typeof makeRoom!=='function'||makeRoom.__r380)return typeof makeRoom==='function';const base=makeRoom;
  const w=function(id,l,...a){const r=base.call(this,id,l,...a);try{bossNames(r);}catch(err){fail(err);}try{return relocate(r,id,l);}catch(err){fail(err);return r;}};w.__r380base=base;w.__r380=true;try{makeRoom=w;}catch(_){}try{window.makeRoom=w;}catch(_){}return true;}
+// R531(사용자 2026-11-10 "보라검천사보스 망각거미소환버그"): 거미동굴 중간보스 보라검천사의 R61 부하 소환은 지역 명단(regionById.dist01.roster)에서
+//  actor3 로 새 몹을 만든다 → 위 relocate(지역 만들 때 한 번)를 거치지 않아 옛 '망각의 거미'(옛 그림)가 그대로 나왔다.
+//  id 가 'dist01:r61-summon:' 인 actor3 결과만 같은 방식(이름·그림만, nativeId·수치·저장 그대로, R248 키는 옛 이름)으로 '재 나방'으로 바꾼다. 세이브 복원도 같은 길.
+function installActor(){if(typeof actor3!=='function')return false;if(actor3.__r531)return true;const base=actor3;
+ const w=function(d,id,x,y,boss,l,...a){const e=base.call(this,d,id,x,y,boss,l,...a);try{
+  if(prefs.on&&e&&l!=='DREAM'&&!e.boss&&!e.midboss&&/^dist01:r61-summon:/.test(String(id||''))&&SPIDER.test(e.name||'')){
+   e.r380From=e.name;if(!e.r248Key)e.r248Key='망각의 거미';e.name='재 나방';e.r380Renamed=true;stats.summonRenamed++;}}catch(err){fail(err);}return e;};
+ w.__r531=true;try{actor3=w;}catch(_){}try{window.actor3=w;}catch(_){}return true;}
 // ── 그림 ──
 function match(e){if(!idx||!e||e.hero||(e.boss&&!idx.mobs.some(m=>m.actor.boss&&new RegExp(m.actor.name).test(String(e.name||''))))||e.r170Tower||e.r251Circle)return null;try{if(typeof player!=='undefined'&&e===player)return null;}catch(_){}
  const L=curLayer(),n=String(e.name||''),mode=artMode();
