@@ -6171,7 +6171,9 @@
     "assets/r521/crutches.webp",
     "assets/r521/index.json",
     "assets/r521/medicine-cabinet.webp",
-    "assets/r521/surgical-cart.webp"
+    "assets/r521/surgical-cart.webp",
+    "hunter-arrows-r535.js",
+    "hwando-chain-r590.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -7246,5 +7248,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "d24545c9af6df278487064d4570976fecfb268d3c4edd3633dd4c7c3d4673fa5"
+  "runtimeManifestSHA256": "72b4e5be964678f34f36be4c9a5ec8186cb3bbc3bd4262f45268be1a1425f074"
 }
