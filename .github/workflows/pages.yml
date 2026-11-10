@@ -422,6 +422,10 @@ jobs:
         run: node r96/qa/r543/r543-cpu-check.cjs
       - name: R544 generated enemy-theme hit and death, per-hero hurt, level-up, click and boss-death sounds CPU check
         run: node r96/qa/r544/r544-cpu-check.cjs
+      - name: R545 SFX comfort (150Hz high-pass and soft edges for every SFX buffer, softened R544 set) CPU check
+        run: node r96/qa/r545/r545-cpu-check.cjs
+      - name: R546 per-hero attack and skill sounds, blink, parry, EGO, awakening, clear, upgrade, fall, panel, portal and enemy-shot sounds CPU check
+        run: node r96/qa/r546/r546-cpu-check.cjs
       - name: R385 mob moves (review list v18 move/rename) CPU check
         run: node r96/qa/r385/r385-cpu-check.cjs
       - name: R390 cinema full narration + midboss hold + enemies keep chasing CPU check
@@ -522,6 +526,8 @@ jobs:
         run: node r96/qa/r381/r381-cpu-check.cjs
       - name: R454 samong prelude~S-07 recorded narration voice in cinema mode CPU check
         run: node r96/qa/r454/samong-voice-cpu-check.cjs
+      - name: R615 heavy assets from the Cloudflare Pages asset project with GitHub Pages fallback (loader, pack, verify) CPU check
+        run: node r96/qa/r615/asset-cdn-cpu-check.cjs
       - name: R376 real difficulty + cinema HUD CPU check
         run: node r96/qa/r376/r376-cpu-check.cjs
       - name: R384 cinema narration timing + combat pacing CPU check
@@ -585,6 +591,8 @@ jobs:
         run: node r96/qa/r462/mob-death-cpu-check.cjs
       - name: R532 mob death tears/bursts into own-art pieces, corpse keeps body art, hit flinch without paper squash CPU check
         run: node r96/qa/r532/r532-cpu-check.cjs
+      - name: R660 mob death lag (no per-frame tint canvases; recorder filters via ctx.filter, 2D filters stepped) CPU check
+        run: node r96/qa/r660/death-lag-cpu-check.cjs
       - name: R481 outdoor groves (understory around trees, small woods on bare back rims) CPU check
         run: node r96/qa/r481/grove-r481-cpu-check.cjs
       - name: R482 worn trails from entry to doors/altar on outdoor floors CPU check
@@ -700,6 +708,20 @@ jobs:
       - name: R580 pack the Pages bundle from the verified site
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         run: python scripts/pages-pack.py --site r96/hospital-three-pc/site --out r96/hospital-three-pc/pages
+      - name: R615 pack heavy assets for the Cloudflare Pages asset project (free plan, no payment method; 20,000 files / 25MiB per file)
+        run: python scripts/cdn-pack.py --site r96/hospital-three-pc/site --out "$RUNNER_TEMP/r615-cdn"
+      - name: R615 upload heavy assets to Cloudflare Pages and verify them publicly (main only; skipped until repo secrets exist; the game falls back to GitHub Pages)
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        continue-on-error: true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then echo "R615: Cloudflare secrets not set, upload skipped (game keeps using GitHub Pages)"; exit 0; fi
+          PROJECT=$(python -c "import json;print(json.load(open('r96/asset-cdn.json'))['project'])")
+          npx --yes wrangler@4.154.0 pages project list | grep -q "$PROJECT" || npx --yes wrangler@4.154.0 pages project create "$PROJECT" --production-branch main
+          npx --yes wrangler@4.154.0 pages deploy "$RUNNER_TEMP/r615-cdn" --project-name "$PROJECT" --branch main --commit-dirty=true
+          python scripts/cdn-verify.py --pack "$RUNNER_TEMP/r615-cdn"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
