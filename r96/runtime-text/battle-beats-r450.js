@@ -59,7 +59,7 @@ let el=null;function box(){if(el&&el.isConnected)return el;el=document.createEle
  document.body.appendChild(el);return el;}
 const queue=[];let cur=null;const QMAX=6;// 줄 대기는 6초까지만(쓰러짐 뒤 서사 장면이 같은 문장을 이미 보여 주면 다시 띄우지 않게)
 function blockedNow(){try{if(typeof storyScene!=='undefined'&&storyScene)return true;if(typeof modal!=='undefined'&&modal)return true;
- if(window.__STORYWORLD_CINEMA_MODE_R370__?.prefs?.()?.on)return true;const co=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();if(co&&co!=='off')return true;
+ if(window.__STORYWORLD_CINEMA_MODE_R370__?.prefs?.()?.on)return true;if(window.__STORYWORLD_SURVIVAL_R600__?.here?.())return true;/* R600 무한 생존: 자기 서사 자막이 흐르므로 겹치지 않게 */const co=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();if(co&&co!=='off')return true;
  if(typeof layer!=='undefined'&&layer!=='STORY')return true;}catch(_){}return false;}
 function show(text){const b=box();b.textContent=text;b.style.opacity='1';cur={until:T()+HOLD+Math.min(2.4,text.length*.03)};stats.shown++;}
 function pump(){const t=T();if(cur&&t>=cur.until){if(el)el.style.opacity='0';cur=null;return;}
