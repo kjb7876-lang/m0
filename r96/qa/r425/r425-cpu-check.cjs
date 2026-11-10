@@ -65,7 +65,10 @@ const near=(a,b,t=.6)=>Math.abs(a-b)<=t;
  const e={id:'m1',name:'시험 몹',x:0,y:-1,hp:10,maxHp:10,k:2.5};let cs;for(let i=0;i<4;i++)cs=frame(env,e);
  const body=cs.find(c=>c.kind==='image'),opaque=(bbox(body)[3]-bbox(body)[1])*FR,bars=cs.filter(c=>c.kind==='fill'),q=env.project(e.x,e.y),txt=cs.find(c=>c.kind==='text');
  ok('size band: oversized normal mob drawn at 1.55× hero height',near(opaque,1.55*54,1),opaque);
- ok('HP bar keeps native width and place under the feet when the body is rescaled',bars.length===2&&bars.every(b=>{const bb=bbox(b);return near(bb[2]-bb[0],55)&&near(bb[1],q.y+6);}),bars.map(bbox));
+ /* R596(사용자 2026-11-10 "아래 이런 예고선이 아직도 나오는 문제"): 일반 몹 발밑 체력 선이 바닥 예고선으로 읽혀 머리 위로 옮김 → 이 항목의 기대(발밑)가 바뀜. 발밑 배치는 mobBar 끄기에서 아래 항목으로 계속 검사 */
+ ok('HP bar keeps native width and sits over the head (R596) when the body is rescaled',bars.length===2&&bars.every(b=>{const bb=bbox(b);return near(bb[2]-bb[0],55)&&bb[3]<bbox(body)[1]+(bbox(body)[3]-bbox(body)[1])*.25;}),bars.map(bbox));
+ {const env2=makeEnv({'storyworld.r425.flow':'{"mobBar":false}'});let c2;const e2={id:'m1b',name:'시험 몹',x:0,y:-1,hp:10,maxHp:10,k:2.5};for(let i=0;i<4;i++)c2=frame(env2,e2);const q2=env2.project(e2.x,e2.y),b2=c2.filter(c=>c.kind==='fill');
+  ok('mobBar off: HP bar keeps native width and place under the feet when the body is rescaled (old behaviour)',b2.length===2&&b2.every(b=>{const bb=bbox(b);return near(bb[2]-bb[0],55)&&near(bb[1],q2.y+6);}),b2.map(bbox));}
  ok('name label keeps its font size (matrix scale 1) while following the scaled head',txt&&near(txt.matrix[0],1,.01)&&near(txt.matrix[3],1,.01),txt?.matrix);
  // 예고 표시 기본 꺼짐
  const t={id:'m2',name:'원거리 몹',x:3,y:0,hp:10,maxHp:10,k:2.5,tele:true,tell:1};for(let i=0;i<3;i++)cs=frame(env,t);

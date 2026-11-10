@@ -7937,6 +7937,15 @@
     "assets/r381/voice/ffd58f07cd6296b4.mp3",
     "assets/r381/voice/ffe6b5462cf060d5.mp3",
     "assets/r381/voice/ffe769a5825eddc6.mp3",
+    "assets/r561/gunner-e-casings.webp",
+    "assets/r561/gunner-e-rifle.webp",
+    "assets/r561/gunner-q-beam.webp",
+    "assets/r561/gunner-q-impact.webp",
+    "assets/r561/gunner-q-muzzle.webp",
+    "assets/r561/gunner-r-blast.webp",
+    "assets/r561/gunner-w-impact.webp",
+    "assets/r561/gunner-w-muzzle.webp",
+    "assets/r561/gunner-w-tracer.webp",
     "lauren-gravity-r561.js",
     "assets/r561/lauren/lauren-gravity-well-back.webp",
     "assets/r561/lauren/lauren-gravity-well-front.webp",
@@ -9016,5 +9025,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "f6cac0aa08056a005fd31f8a8462542115299112fe9fe37d8bf327411f17d7c6"
+  "runtimeManifestSHA256": "10e9552614965b17eb42ec56bd0bccf3174a4475155634c09529d4339a8a173c"
 }

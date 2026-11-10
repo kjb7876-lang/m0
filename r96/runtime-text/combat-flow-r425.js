@@ -18,12 +18,12 @@
 //  ⑨ 이름(사용자 11:50 "실검무 츠바메가에시 네이밍을 바람베기로 수정"): 패시브 threadTsubameR64 '실검무 · 츠바메가에시' → '실검무 · 바람베기',
 //     패시브 창 안내 문장의 '츠바메가에시'도 '바람베기'로(엔진 원문은 그대로 두고 덧씌움). 저장·효과는 id 로 묶여 있어 그대로.
 //  ⑩ 적 공격 그림 방향(사용자 13:12·13:20): 전수조사로 영웅 반대쪽을 보고 그려진 공격 그림만 골라, 공격 중일 때 대상 쪽을 보게 좌우만 바로잡는다. 아래 설명.
-//  끄기: localStorage['storyworld.r425.flow']='{"size":false}' / '{"punch":false}' / '{"laurenTip":false}' / '{"spiderX":false}' / '{"gaze":false}' / '{"gazeSlot":false}' / '{"plant":false}' / '{"hunter":false}' / '{"bossBar":false}' / '{"samongCross":false}' / '{"atkFace":false}', 예고 표시 켜기 '{"tele":true}'
+//  끄기: localStorage['storyworld.r425.flow']='{"size":false}' / '{"punch":false}' / '{"laurenTip":false}' / '{"spiderX":false}' / '{"gaze":false}' / '{"gazeSlot":false}' / '{"plant":false}' / '{"hunter":false}' / '{"bossBar":false}' / '{"mobBar":false}' / '{"samongCross":false}' / '{"atkFace":false}', 예고 표시 켜기 '{"tele":true}'
 (()=>{'use strict';
 if(window.__STORYWORLD_COMBAT_FLOW_R425__)return;
 const REV='R425-flow-8',KEY='storyworld.r425.flow';
 const BANDS={normal:[1.22,1.55],leader:[1.45,1.75],mid:[1.60,1.80],boss:[1.90,2.30]},SMIN=.55,SMAX=2.2;
-let prefs={face:true,size:true,punch:true,laurenTip:true,spiderX:true,gaze:true,gazeSlot:true,plant:true,hunter:true,bossBar:true,tele:false,samongCross:true,atkFace:true,clean:true};
+let prefs={face:true,size:true,punch:true,laurenTip:true,spiderX:true,gaze:true,gazeSlot:true,plant:true,hunter:true,bossBar:true,mobBar:true,tele:false,samongCross:true,atkFace:true,clean:true};
 const solo=()=>{let m=null;try{m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();}catch(_){}return !m||m==='off';};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={scaled:0,kept:0,refixed:0,sheets:0,punches:0,tips:0,skipped:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0;
@@ -64,10 +64,10 @@ function punchK(s){const a=T()-s.hitAt;if(!prefs.punch||a<0||a>.12)return 0;retu
 //    원래 R40/R41 읽기 쉬운 공격 신호(머리 위 '근접 공격 준비'·'원거리 조준' 상자와 테두리, 검은 조준선·점선, 표적 고리·눈금, 몸의 검은 방향 화살표)와
 //    엔진 e.tell 표적 표식(target-mark), R116 돌진 표적 인장을 기본으로 지운다. 켜면 ①의 배율을 되돌려 조준선·표적 고리가 실제 표적을 가리키게 둔다.
 //    장판(위험 지대) 예고·적 스킬 원화 연출(R98·FINAL42)은 그대로(R98 범위 선은 원래 기본 꺼짐 — 아래 설정이 함께 켜고 끈다). 판정·피해·시점은 그대로.
-const TELE_WORLD=new Set(['rgba(12,10,12,.92)','rgba(16,12,14,.92)','#e2b17d']),TELE_BODY=new Set(['rgba(12,10,12,.95)','#e2c18b','#bd8065','#b89a71']),TELE_TEXT=new Set(['원거리 조준','근접 공격 준비']);
+const TELE_WORLD=new Set(['rgba(12,10,12,.92)','rgba(16,12,14,.92)','#e2b17d','rgba(211,193,151,.72)'/* R440: R52 돌진 길 */]),TELE_BODY=new Set(['rgba(12,10,12,.95)','#e2c18b','#bd8065','#b89a71']),TELE_TEXT=new Set(['원거리 조준','근접 공격 준비']);
 function teleKind(c){if(!c||c.owner?.kind==='enemy')return null;const y=c.style||{};
  if(c.kind==='stroke'){const k=y.strokeStyle;if(TELE_WORLD.has(k))return 'world';if(k==='#d79b70')return c.paths?.length===1&&c.paths[0]?.points?.length===2?'world':'body';return TELE_BODY.has(k)?'body':null;}
- if(c.kind==='fill'&&y.fillStyle==='rgba(14,13,15,.92)')return 'body';if(c.kind==='text'&&TELE_TEXT.has(c.text))return 'body';return null;}
+ if(c.kind==='fill'&&y.fillStyle==='rgba(14,13,15,.92)')return 'body';if(c.kind==='fill'&&y.fillStyle==='rgba(186,165,119,.075)')return 'world';/* R440: R52 돌진 길 속 */if(c.kind==='text'&&TELE_TEXT.has(c.text))return 'body';return null;}
 function bboxOf(c){let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9,n=0;const add=p=>{if(Array.isArray(p)){x0=Math.min(x0,p[0]);x1=Math.max(x1,p[0]);y0=Math.min(y0,p[1]);y1=Math.max(y1,p[1]);n++;}};
  if(Array.isArray(c.points))c.points.forEach(add);if(Array.isArray(c.paths))for(const pa of c.paths)if(Array.isArray(pa?.points))pa.points.forEach(add);return n?[x0,y0,x1,y1]:null;}
 function isBar(c,e,fx,fy,SX,SY){if(c.kind!=='fill'||c.owner?.kind!=='enemy'||!Array.isArray(c.paths)||c.paths.length!==1||typeof c.style?.fillStyle!=='string')return false;const P=c.paths[0]?.points;if(!Array.isArray(P)||P.length<4||P.length>5)return false;
@@ -89,10 +89,13 @@ function post(e,C,st,fx,fy,SXe,SYe,SXs,SYs,teleOff,headBar,s){
   const want=Math.max(56,head-8-(y1-y0)),now=T();if(s.barOff==null||now-(s.barAt??-9)>1)s.barOff=y0-fy;s.barOff+=(want-fy-s.barOff)*Math.min(1,Math.max(0,now-(s.barAt??now))*9||.25);s.barAt=now;
   const dy=fy+s.barOff-y0;for(const c of bars)mapCmd(c,p=>[p[0],p[1]+dy]);const ny=fy+s.barOff-5;
   for(let i=st;i<C.length;i++){const c=C[i];if(c?.kind==='text'&&c.text===e.name&&Array.isArray(c.point))c.point=[c.point[0],ny];}stats.headBars=(stats.headBars||0)+1;}}
+// R596(사용자 2026-11-10 "아래 이런 예고선이 아직도 나오는 문제"): 일반 몹 체력 줄(R90 '절제된 체력 표시' — 발밑에 2px 검붉은 가로 선)이 바닥 예고선처럼 읽혔다
+//  → 광폭화 보스에만 쓰던 머리 위 체력 줄을 일반 몹·중간 보스에도 쓴다(큰 보스의 평소 줄·탑·인형·맘몬은 그대로). 끄기 '{"mobBar":false}'.
+function wantHeadBar(e,ex){if(ex||!(e?.hp>0))return false;if(e.boss)return !!prefs.bossBar&&enr(e);return !!prefs.mobBar||!!prefs.bossBar&&enr(e);}
 if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){
  const rec=typeof ctx==='object'?ctx:null,cmds=Array.isArray(rec?.commands)?rec.commands:null;
  if(!e||!cmds||typeof project!=='function'){stats.skipped++;return base.apply(this,[e,...a]);}
- const ex=excluded(e),doSize=prefs.size&&!ex&&typeof rec.save==='function',teleOff=!prefs.tele,headBar=prefs.bossBar&&!ex&&enr(e);
+ const ex=excluded(e),doSize=prefs.size&&!ex&&typeof rec.save==='function',teleOff=!prefs.tele,headBar=wantHeadBar(e,ex);
  const t=T();if(t!==budgetT){budgetT=t;budget=4;}
  const s=stOf(e),q=project(e.x,e.y),fx=q.x,fy=q.y,st0=cmds.length;let r,sx=1,sy=1,k=1;
  if(doSize){const pk=punchK(s),kx=pk>0?s.kx*pk/.07:0;sx=sy=s.s;/* R532: 맞는 순간 가로로 늘고 세로로 눌리던 것(종이 느낌)을 빼고 밀림(kx)만 */rec.save();try{rec.translate(fx+kx,fy);rec.scale(sx,sy);rec.translate(-fx,-fy);r=base.apply(this,[e,...a]);}finally{rec.restore();}}
@@ -107,6 +110,11 @@ if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a
  try{post(e,cmds,st0,fx,fy,sx*k,sy*k,sx,sy,teleOff,headBar,s);}catch(err){fail(err);}
  try{if(XD.has(e)){const b=bodyCmd(cmds,st0);if(b)s.box=boxOf(b);}}catch(err){fail(err);}
  return r;};}
+// R440(사용자 2026-11-09 "이런 아래에 빨간 예비표시 안생기도록 이거랑 하얀실선직사각형 돌진예비표시도"):
+//  · 엔진 적 시전·장판·원거리의 바닥 예고 그림(drawNativeGroundArt154 를 'warning'·'flight' 단계로 부름 — 시전 그림을 발사 길·장판 모양으로 눕혀 옅게 깐 불꽃빛 띠·원)을
+//    예고 표시를 끄면 그리지 않는다. 터지는 순간('active')·잔흔('recovery')·맞은 자리('confirmed-contact')는 그대로. 판정·피해·시간은 그대로.
+//  · 엔진 R52 돌진 길(하얀 실선 직사각형 + 화살촉, 선 rgba(211,193,151,.72)·속 rgba(186,165,119,.075))은 위 teleKind 'world' 로 같이 지운다.
+if(typeof drawNativeGroundArt154==='function'){const base=drawNativeGroundArt154;drawNativeGroundArt154=function(path,rect,g,alpha,stage,...a){try{if(!prefs.tele&&solo()&&(stage==='warning'||stage==='flight')){stats.groundTeleHidden=(stats.groundTeleHidden||0)+1;return false;}}catch(_){}return base.apply(this,[path,rect,g,alpha,stage,...a]);};}
 // R116 돌진 표적 인장(fx 'sigil' + VFX.mark) — 예고 표시를 끄면 그리지 않는다
 if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(fe,...a){try{if(!prefs.tele&&fe?.type==='sigil'&&typeof VFX!=='undefined'&&VFX?.mark&&fe.asset===VFX.mark&&(+fe.size||1)>1.02){stats.teleHidden=(stats.teleHidden||0)+1;return;}}catch(_){}return base.apply(this,[fe,...a]);};}
 // ---- 타격감: 영웅 쪽 공격이 실제로 피해를 준 순간 ----
@@ -365,7 +373,7 @@ if(typeof urlFor==='function'){const ub=urlFor;urlFor=function(path,...a){try{co
 function teleSet(v){set('tele',!!v);try{window.__STORYWORLD_VFX_R98__?.set?.({telegraph:!!v});}catch(_){}try{window.__STORYWORLD_COMBAT_R170__?.set?.({quietTells:!v});}catch(_){}return prefs.tele;}
 function injectTele(n){try{const panel=document.getElementById('panel');if(!panel)return false;if(panel.querySelector('#r425Tele'))return true;
  const host=panel.querySelector('#accessR420')||(n>=3?panel.querySelector('#quickSettingsR114'):null);if(!host)return false;
- const lab=document.createElement('label');lab.className='r420-row';lab.id='r425TeleRow';lab.innerHTML='<input type="checkbox" id="r425Tele"'+(prefs.tele?' checked':'')+'> 적 공격·돌진 예고 표시(머리 위 상자·검은 조준선·표적 고리, 기본 꺼짐)';
+ const lab=document.createElement('label');lab.className='r420-row';lab.id='r425TeleRow';lab.innerHTML='<input type="checkbox" id="r425Tele"'+(prefs.tele?' checked':'')+'> 적 공격·돌진 예고 표시(머리 위 상자·검은 조준선·표적 고리·바닥 예고 띠·돌진 길, 기본 꺼짐)';
  host.appendChild(lab);lab.querySelector('input').onchange=ev=>teleSet(!!ev.target.checked);stats.teleUi=(stats.teleUi||0)+1;return true;}catch(e){fail(e);return true;}}
 if(typeof openPanel==='function'){const opBase=openPanel;openPanel=function(html,...a){try{if(typeof html==='string'&&html.indexOf('츠바메가에시')>=0){renameDefs();html=html.replace(/츠바메가에시/g,'바람베기');stats.renamedHtml=(stats.renamedHtml||0)+1;}}catch(e){fail(e);}const res=opBase.call(this,html,...a);try{if(typeof html==='string'&&/설정/.test(html)){let n=0;const go=()=>{if(!injectTele(n)&&++n<24)requestAnimationFrame(go);};requestAnimationFrame(go);}}catch(e){fail(e);}return res;};}
 function set(k,v){prefs[k]=v!==false;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return prefs[k];}
