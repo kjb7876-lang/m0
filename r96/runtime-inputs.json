@@ -6222,7 +6222,15 @@
     "assets/r542/sfx/crush-1.ogg",
     "assets/r542/sfx/roar-1.ogg",
     "assets/r542/sfx/index.json",
-    "boss-cinematic-r568.js"
+    "boss-cinematic-r568.js",
+    "hwando-fall-video-r617.js",
+    "assets/r617/index.json",
+    "assets/r617/knight.mp4",
+    "assets/r617/fall.mp4",
+    "assets/r617/beach.mp4",
+    "assets/r617/knight-poster.jpg",
+    "assets/r617/fall-poster.jpg",
+    "assets/r617/beach-poster.jpg"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -7297,5 +7305,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "871572d8ae6d72d219e2d3cec29bcea6fa1fdcf943c358b60f48180215ddf5b5"
+  "runtimeManifestSHA256": "08a4a350d0d3b51d7cc3f0ea358b5b5eb7b8af9ff50f6de456c0de9912fa0336"
 }

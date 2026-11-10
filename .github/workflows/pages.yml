@@ -397,6 +397,8 @@ jobs:
         run: node r96/qa/r371/r371-cpu-check.cjs
       - name: R372 root gate boss entrance video CPU check
         run: node r96/qa/r372/r372-cpu-check.cjs
+      - name: R617 Hwando fall story videos CPU check
+        run: node r96/qa/r617/hwando-fall-video-cpu-check.cjs
       - name: R373 mob squads and leaders CPU check
         run: node r96/qa/r373/r373-cpu-check.cjs
 
