@@ -5,7 +5,7 @@ for(const f of ['approved-mobs-r380.js','mob-unique-r248.js','mob-preload-r260.j
 const html=RT('index.html');ok(/<script src="\.\/music-box-r378\.js"><\/script><script src="\.\/approved-mobs-r380\.js"><\/script>/.test(html)&&html.split('approved-mobs-r380.js').length===2,'스크립트 태그 한 번, R378 뒤');
 ok(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').includes("'approved-mobs-r380.js',"),'공개 확인 목록');
 const inputs=JSON.parse(fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8'));ok(inputs.textPaths.includes('approved-mobs-r380.js'),'런타임 입력 목록');
-const idx=JSON.parse(RT('assets/r380/mobs/index.json'));ok(idx.mobs.length===110,'110장(R615 환도 Dots 걷기 3 + R437 하늘맵 전극기계수호기사 1 + R404 레거시 6종 7장 + R403 디스토피아 특수3·레이저3 + R402 학생·스토리텔러 2 + R401 역행 신규 5종 8장 + R400 문턱 2 + R398 태양 순찰·골렘 v2·도장체 좌우 + R397 R200 S-04 복원 3 + R396 정원사·망령2 + R395 역행 신규 2 + R394 RE-3 백색 사수 좌우 2 + R393 역행 보스 2종 좌우 4 + R392 S-06 보스 2·순찰자 1 + R391 사몽 5 + R380 5 + R381 7 + R382 16 + R383 2 + R386 3 + R387 1 + R389 페르소나 보스 8 + 분신 8 + R390 디스토피아 5)');
+const idx=JSON.parse(RT('assets/r380/mobs/index.json'));ok(idx.mobs.length===120,'120장(R615 Dots 걷기 새 행 13 + R437 하늘맵 전극기계수호기사 1 + R404 레거시 6종 7장 + R403 디스토피아 특수3·레이저3 + R402 학생·스토리텔러 2 + R401 역행 신규 5종 8장 + R400 문턱 2 + R398 태양 순찰·골렘 v2·도장체 좌우 + R397 R200 S-04 복원 3 + R396 정원사·망령2 + R395 역행 신규 2 + R394 RE-3 백색 사수 좌우 2 + R393 역행 보스 2종 좌우 4 + R392 S-06 보스 2·순찰자 1 + R391 사몽 5 + R380 5 + R381 7 + R382 16 + R383 2 + R386 3 + R387 1 + R389 페르소나 보스 8 + 분신 8 + R390 디스토피아 5)');
 for(const m of idx.mobs){const p=path.join(R,'runtime-text',m.path);ok(fs.existsSync(p),m.id+' 파일');if(!fs.existsSync(p))continue;const b=fs.readFileSync(p);
  ok(crypto.createHash('sha256').update(b).digest('hex')===m.sha256&&b.length===m.bytes,m.id+' 해시·크기');ok(JSON.stringify(inputs).includes(m.path),m.id+' 런타임 입력');ok(m.finalArt===false,m.id+' 임시 표기');}
 ok(CS('mob-unique-r248.js').includes('s=sheetOf(e);if(s&&(')&&CS('mob-unique-r248.js').includes('__STORYWORLD_APPROVED_MOBS_R380__?.assign?.(e)))s=null;'),'R248 이 R380 몹을 덮어 그리지 않음');
@@ -112,7 +112,7 @@ ctx.room={id:'ep1a09'};ok(f({name:'중독을 부르는 주사기 환영체',midb
     {const v=(i)=>{const c={id:'sm103:Z:a:'+i,name:'외계 침공군',samongR103:'sz115-S06-2',hp:5,x:2,y:1,r200Checked:true};const f=S.frameFor(c,null)||{};return [f.r380Mob||null,c.name];};
      const r=[0,1,2,3,4,5,6,7,8].map(v),o=v(9);
      ok(r[0][1]==='낫팔 잠복체'&&r[1][1]==='포낭 곡사체'&&r[2][1]==='막익 급습체'&&r[3][0]==='dys-bulwark-v2'&&r[3][1]==='방벽 돌진체'&&r[4][0]==='dys-disc-v2'&&r[5][0]==='dys-engineer-v2'&&r[6][0]==='dys-pulse-raider-v2'&&r[6][1]==='펄스 척후병'&&r[7][0]==='dys-prism-stalker-v2'&&r[8][0]==='dys-siege-gunner-v2'&&o[1]==='낫팔 잠복체','R403 S-06 외계 침공군 9칸: R390 3종 각 1/9 + 특수3·레이저3 각 1/9');
-     const lz=idx.mobs.find(m=>m.id==='dys-pulse-raider-v2');ok(lz.move.join()==='0'&&lz.attack.join()==='0,1,2,3','R403 레이저총: 보행 HOLD → 조준 자세 1칸 이동, 사격 4칸');}
+     const lz=idx.mobs.find(m=>m.id==='dys-pulse-raider-v2');ok(lz.move.join()==='4,5,6,7,8,9,10,11'&&lz.attack.join()==='0,1,2,3','R403 레이저총: 사격 4칸 그대로, 이동은 R615 Dots 걷기 8칸(총을 겨눈 채 걷기, 사용자 2026-11-10 이동 모션 요청)');}
 {const sv={layer:ctx.layer,room:ctx.room};ctx.layer='STORY';const g=(room,name)=>{ctx.room={id:room};return f({name})?.r380Mob||'base';};
  ok(g('kair10','상위수문장 58')==='legacy-m106-elite-guardian-v2'&&g('kair02','시간수문장 46')==='legacy-m110-time-guardian-v3'&&g('hando02','무명 검흔 추격대')==='legacy-m119-nameless-scar-v4'&&g('hando03','백은 없는 그림자')==='legacy-m124-silverless-shadow-v4'&&g('cult01','세뇌 신호 점액체 추격대')==='legacy-m130-slime-cult01-v2'&&g('cult05','ID 배양 점액체 증원')==='legacy-m130-slime-cult05-v2'&&g('cult05','생체기계 악몽')==='legacy-m134-nightmare-v4','R404 레거시 6종: 현 게임 group 표기 방·이름에 연결');
  ok(g('kair02','상위수문장 58')==='base'&&g('cult01','생체기계 악몽')==='base'&&g('hando02','백은 없는 그림자')==='base','R404 다른 방 같은 이름은 그대로');
@@ -132,7 +132,7 @@ ok(f({name:'나태에 잠식된 남자',boss:true})?.r380Mob==='sloth-burden-man
 ok(f({name:'재 나방 2'})?.r380Mob==='ash-moth-v2','재 나방 v2');ok(f({name:'보랏빛 알집지기 증원 1'})?.r380Mob==='purple-eggkeeper-v1','알집지기');
 ok(f({name:'거미줄에 묶인 수호병 우두머리'})?.r380Mob==='web-bound-guardian-v4','수호병 일반판');
 ctx.window.__STORYWORLD_MOB_ART_VARIANTS_R306__={inspect:()=>({mode:'pixel'})};ok(f({name:'거미줄에 묶인 수호병'})?.r380Mob==='web-bound-guardian-v4-pixel','픽셀 모드 → 수호병 픽셀판');delete ctx.window.__STORYWORLD_MOB_ART_VARIANTS_R306__;
-ctx.room={id:'u202'};ok(f({name:'기계화 망각거미 2'})?.r380Mob==='mech-oblivion-spider','u202 기계화 망각거미');ok(f({name:'가짜 자비 수집가 1'})?.path==='base','u202 다른 몹 그대로');
+ctx.room={id:'u202'};ok(f({name:'기계화 망각거미 2'})?.r380Mob==='mech-oblivion-spider','u202 기계화 망각거미');ok(f({name:'가짜 자비 수집가 1'})?.r380Mob==='u2-false-mercy-collector-walk-d1','u202 가짜 자비 수집가 = R615 Dots 걷기 시트');ok(f({name:'붕괴 촉수 1'})?.path==='base','u202 다른 몹 그대로');
 ctx.room={id:'dist02'};ok(f({name:'재 나방'})?.path==='base','dist01 밖 같은 이름은 그대로');ctx.room={id:'dist01'};
 ok(f({name:'재 나방',boss:true})?.path==='base','보스 제외');
 const m=idx.mobs.find(x=>x.id==='mech-oblivion-spider');const fr=A.frameOf({id:'a',hp:10,x:0,y:0,attack:{elapsed:.3,angle:0}},m);ok(m.attack.includes(Math.round(fr.assetFrame.sourceRect[0]/m.cell[0]+Math.round(fr.assetFrame.sourceRect[1]/m.cell[1])*m.cols)),'공격 칸(2줄 시트 좌표)');

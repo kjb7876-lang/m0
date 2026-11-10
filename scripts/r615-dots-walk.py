@@ -14,12 +14,25 @@ RT = os.path.join(os.path.dirname(__file__), '..', 'r96', 'runtime-text')
 IDX = os.path.join(RT, 'assets/r380/mobs/index.json')
 
 # 기존 R380 행에 걷기 칸을 덧붙일 몹
-EXTEND = ['swamp-root-stalker-darkgreen-v2', 'legacy-m119-nameless-scar-v4']
+EXTEND = ['swamp-root-stalker-darkgreen-v2', 'legacy-m119-nameless-scar-v4',
+          'legacy-m134-nightmare-v4', 'root-stalker-r74-plain', 'legacy-m110-time-guardian-v3',
+          'dys-siege-gunner-v2', 'dys-prism-stalker-v2', 'dys-pulse-raider-v2']
+SITE = os.path.join(os.path.dirname(__file__), '..', 'r96', 'hospital-three-pc', 'site')  # 압축 묶음에서 풀린 원본(ep1b·cult·murder)
 # 새 행을 만들 몹: dots id → (행 id, 원본 경로, 지역, 이름, pivot, visibleHeight) — pivot·키는 R306 표의 원본 값 그대로
 NEW = {
     'timeless_silver_scout': ('hando-timeless-silver-scout-walk-d1', 'assets/r99/clean/assets/hando-v3123/timeless_silver_scout.webp', 'hando01', '^악몽 정찰체', [208.5, 397], 370),
     'silver_seal_sentinel': ('hando-silver-seal-sentinel-walk-d1', 'assets/r99/clean/assets/hando-v3123/silver_seal_sentinel.webp', 'hando02', '^붕괴선 파수병', [208.5, 401], 375),
     'memory_excision_connector': ('hando-memory-excision-connector-walk-d1', 'assets/r99/clean/assets/hando-v3123/memory_excision_connector.webp', 'hando02', '^기억절제 연결자', [208.5, 400], 377),
+    'rooftop_echo': ('murder-rooftop-echo-float-d1', 'assets/murder/rooftop_echo.png', 'murder01', '^끊어진 통화의 인과 잔향', [330, 749], 730),
+    'u2_memory_orb': ('cult-memory-orb-float-d1', 'assets/r99/clean/assets/u2/generated-v350/u2_memory_orb.webp', 'cult01', '^기계화 복종 봉인구', [256, 444], 393),
+    'black_robed_nightmare_demon': ('cult-nerve-cable-devourer-walk-d1', 'assets/cult-v3123/black_robed_nightmare_demon.webp', 'cult02', '^신경 케이블 포식체', [213, 402], 380),
+    'seal_residual': ('ep1b-seal-residual-float-d1', 'assets/episode1b/generated-v394/seal_residual.webp', 'ep1b01', '^일흔두 번째 인장 잔류체', [209.5, 417], 194),
+    'lust_asmodai': ('ep1b-red-heel-blade-walk-d1', 'assets/episode1b/generated-v394/lust_asmodai.webp', 'ep1b05', '^붉은 하이힐 칼날', [209, 418], 273),
+    'greed_fox_hound': ('ep1b-banknote-blade-walk-d1', 'assets/episode1b/generated-v394/greed_fox_hound.webp', 'ep1b06', '^칼날이 된 지폐', [209.5, 418], 186),
+    'polar_cyborg_hound': ('ep1b-steel-jaw-hound-walk-d1', 'assets/episode1b/generated-v394/polar_cyborg_hound.webp', 'ep1b09', '^강철 턱의 사이보그 개', [208, 418], 287),
+    'u2_reactor_collector': ('u2-false-mercy-collector-walk-d1', 'assets/r99/clean/assets/u2/generated-v350/u2_reactor_collector.webp', 'u202', '^가짜 자비 수집가', [255.5, 445], 394),
+    'polar_chairman': ('cult-mech-legs-walk-d1', 'assets/episode1b/generated-v394/polar_chairman.webp', 'cult05', '^설원 아래의 기계 다리', [208, 417], 285),
+    'black_rose_chip_penitent': ('cult-ego-binder-walk-d1', 'assets/cult-v3123/black_rose_chip_penitent.webp', 'cult03', '^EGO 구속 연결자', [209, 396], 365),
 }
 
 
@@ -40,9 +53,19 @@ def match_color(frame, ref):
 
 
 def walk_frames(dots_dir, did, cw, ch, ref):
+    # 걷기 8칸, 떠 있는 몹은 떠다니기 6칸(파일 이름은 둘 다 walk8)
     sheet = Image.open(os.path.join(dots_dir, f'CX-0067MV_{did}_walk8.png')).convert('RGBA')
-    assert sheet.size == (cw * 8, ch), (did, sheet.size, cw, ch)
-    return [match_color(sheet.crop((i * cw, 0, (i + 1) * cw, ch)), ref) for i in range(8)]
+    n = sheet.width // cw
+    assert n in (6, 8) and sheet.size == (cw * n, ch), (did, sheet.size, cw, ch)
+    return [match_color(sheet.crop((i * cw, 0, (i + 1) * cw, ch)), ref) for i in range(n)]
+
+
+def original(rel):
+    for root in (RT, SITE):
+        p = os.path.join(root, rel)
+        if os.path.exists(p):
+            return Image.open(p).convert('RGBA')
+    raise FileNotFoundError(rel)
 
 
 def save(cells, cw, ch, rel):
@@ -60,29 +83,29 @@ def main(dots_dir):
     byid = {m['id']: m for m in idx['mobs']}
     for mid in EXTEND:
         m = byid[mid]
-        if m.get('walkSource'):
+        if m['path'].endswith('-walk-d1.webp'):
             continue
         cw, ch = m['cell']
         src = Image.open(os.path.join(RT, m['path'])).convert('RGBA')
-        n = m['cols']
+        n = min(m['move']) if m.get('walkSource') else m['cols']  # R613 제미나이 4칸은 빼고 원본 칸만
         orig = [src.crop((i * cw, 0, (i + 1) * cw, ch)) for i in range(n)]
         walk = walk_frames(dots_dir, mid, cw, ch, orig[0])
-        rel = m['path'].replace('.webp', '-walk-d1.webp')
+        rel = f'assets/r380/mobs/{mid}-walk-d1.webp'
         m['bytes'], m['sha256'] = save(orig + walk, cw, ch, rel)
         m['path'] = rel
-        m['cols'] = n + 8
-        m['move'] = list(range(n, n + 8))
+        m['cols'] = n + len(walk)
+        m['move'] = list(range(n, n + len(walk)))
         m['walkSource'] = f'Dots CX-0067MV_{mid}_walk8.png (색은 원본 0칸에 맞춤, R615)'
     for did, (rid, opath, zone, name, pivot, vh) in NEW.items():
         if rid in byid:
             continue
-        orig = Image.open(os.path.join(RT, opath)).convert('RGBA')
+        orig = original(opath)
         cw, ch = orig.size
         walk = walk_frames(dots_dir, did, cw, ch, orig)
         rel = f'assets/r380/mobs/{rid}.webp'
         size, sha = save([orig] + walk, cw, ch, rel)
-        idx['mobs'].append({'id': rid, 'kind': 'strip', 'path': rel, 'cell': [cw, ch], 'cols': 9, 'pivot': pivot, 'visibleHeight': vh,
-                            'move': list(range(1, 9)), 'attack': [0], 'idle': [0], 'facing': 'right',
+        idx['mobs'].append({'id': rid, 'kind': 'strip', 'path': rel, 'cell': [cw, ch], 'cols': 1 + len(walk), 'pivot': pivot, 'visibleHeight': vh,
+                            'move': list(range(1, 1 + len(walk))), 'attack': [0], 'idle': [0], 'facing': 'right',
                             'actor': {'layer': 'STORY', 'zone': zone, 'name': name}, 'bytes': size, 'sha256': sha,
                             'source': [{'file': opath}, {'file': f'CX-0067MV_{did}_walk8.png'}],
                             'walkSource': f'Dots CX-0067MV_{did}_walk8.png (색은 원본에 맞춤, R615)', 'finalArt': False})
