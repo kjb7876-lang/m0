@@ -25058,6 +25058,46 @@
       "sha256": "3fde34da839094cdfabd18b8f9a510c38ff7141c93ceeaaa1eec3f818ec8d0e8"
     },
     {
+      "path": "assets/r543/sfx/goblin-1.ogg",
+      "bytes": 7215,
+      "sha256": "9599916d0ca6090ba380a43a3d10b330895ce4d33b51f14a6d9a568c3760dcec"
+    },
+    {
+      "path": "assets/r543/sfx/goblin-2.ogg",
+      "bytes": 7294,
+      "sha256": "481a149e1cfdd2971bf6248bf179392d39d06cb0ff58f96f94d8270aae320b50"
+    },
+    {
+      "path": "assets/r543/sfx/growl-1.ogg",
+      "bytes": 7429,
+      "sha256": "309e5610954dc58a91ee56cdb0459cfe13aaf768af269c5f3ef1aa6c63f7ee50"
+    },
+    {
+      "path": "assets/r543/sfx/growl-2.ogg",
+      "bytes": 7747,
+      "sha256": "32f4f613f1783dbfdb76e0a00d0dce62ce103ceffdd161fe5851ec42b63c168e"
+    },
+    {
+      "path": "assets/r543/sfx/growl-3.ogg",
+      "bytes": 7042,
+      "sha256": "d8baf0f27fcde1cbc07fbae07a0ab478f1f0c059d306c39c64166e5e4eaa02f3"
+    },
+    {
+      "path": "assets/r543/sfx/index.json",
+      "bytes": 4251,
+      "sha256": "0a0b65f8dd383cb0cd7016b23a3d01914f6905f3bc551e19784292af184758f8"
+    },
+    {
+      "path": "assets/r543/sfx/thunder-1.ogg",
+      "bytes": 10080,
+      "sha256": "d0d4e1ec7cd9fd39c2762f4096ce5f1e314e6b7dd4c3c8d07ac810aabd190546"
+    },
+    {
+      "path": "assets/r543/sfx/thunder-2.ogg",
+      "bytes": 9426,
+      "sha256": "62b93dd76359e9c11a1108c5d4390f0aaa4856cb843af7711280f9fbd2f16acc"
+    },
+    {
       "path": "assets/r585/index.json",
       "bytes": 5998,
       "sha256": "58b5be4a18822506f40faa3c259e3ecfaacc0c099197ea223f48711f29feb1d3"
@@ -34759,8 +34799,8 @@
     },
     {
       "path": "sfx-r541.js",
-      "bytes": 4802,
-      "sha256": "fa3211778cd11764d5e43e4b631413973962f4d2347cfaf28babdfd1b82c5fb4"
+      "bytes": 7511,
+      "sha256": "0d00434b91523e11ffb1236b7497690a5766e1556523df970d949ec144c67974"
     },
     {
       "path": "sin-boss-art-r463-data.js",
@@ -35103,8 +35143,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 7020,
-  "totalBytes": 1096171634,
+  "fileCount": 7028,
+  "totalBytes": 1096234827,
   "webHTMLSha256": "e9ad258581ee459e96d9ff70ed6ab727662432d3cef131ab72ba4cbb73fff60a",
   "largest": [
     {
