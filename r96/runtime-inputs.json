@@ -6176,6 +6176,23 @@
     "hwando-chain-r590.js",
     "hunter-arrows-r535.js",
     "samong-surge-r571.js",
+    "slayer-sheets-r585.js",
+    "assets/r585/index.json",
+    "assets/r585/slayer-bleed.webp",
+    "assets/r585/slayer-burst-big.webp",
+    "assets/r585/slayer-burst-small.webp",
+    "assets/r585/slayer-d-guard.webp",
+    "assets/r585/slayer-e-dash.webp",
+    "assets/r585/slayer-ego-enter.webp",
+    "assets/r585/slayer-ego-loop.webp",
+    "assets/r585/slayer-q-spin-back.webp",
+    "assets/r585/slayer-q-spin-front.webp",
+    "assets/r585/slayer-q-tornado-back.webp",
+    "assets/r585/slayer-q-tornado-front.webp",
+    "assets/r585/slayer-r-aura-back.webp",
+    "assets/r585/slayer-r-aura-front.webp",
+    "assets/r585/slayer-r-cross.webp",
+    "assets/r585/slayer-w-sacrifice.webp",
     "samong-theme-r572.js"
   ],
   "mediaPaths": [
@@ -7251,5 +7268,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "ae5b1a8e75c43cb5650b67a2aa6aa276e4a924467c7ce43524cd3af8824cc212"
+  "runtimeManifestSHA256": "bf73b840bd4ba7bffa3ddd156188d3fb39883a5499cd3d54b07b8e523450fa79"
 }
