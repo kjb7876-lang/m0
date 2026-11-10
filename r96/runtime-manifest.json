@@ -33598,6 +33598,71 @@
       "sha256": "7e12057401e2f6ad08e2853117302638a024bf1e94bbefdaeaf7b2cb0ed183bc"
     },
     {
+      "path": "assets/r561/gunner-e-casings.webp",
+      "bytes": 20002,
+      "sha256": "a05669728c6403de90e20973ae57dc69b253d69e1041bc4609a825913aa01ab7"
+    },
+    {
+      "path": "assets/r561/gunner-e-rifle.webp",
+      "bytes": 38322,
+      "sha256": "bf4da2825685ba466cc3b8a663636fd90d9d16846e90f5cf1be26df4899e16ca"
+    },
+    {
+      "path": "assets/r561/gunner-q-beam.webp",
+      "bytes": 329404,
+      "sha256": "ac8cb41ea722c9936cfec457e06eefb6c2684c745661b09d62df95a7974507c3"
+    },
+    {
+      "path": "assets/r561/gunner-q-impact.webp",
+      "bytes": 376070,
+      "sha256": "19c30b465889a404619cbd00f6806df1068569dedfed2fac04690cf835d1704e"
+    },
+    {
+      "path": "assets/r561/gunner-q-muzzle.webp",
+      "bytes": 249586,
+      "sha256": "4de86f3864bdc30f463aff70eb167b5018dfe34b4a9218d3b5b9a20d39631943"
+    },
+    {
+      "path": "assets/r561/gunner-r-blast.webp",
+      "bytes": 288400,
+      "sha256": "c8d8a4b0eac1b210b477f0725017ecdd6947cffdf4c944d892e84c572e7db1d6"
+    },
+    {
+      "path": "assets/r561/gunner-w-impact.webp",
+      "bytes": 163892,
+      "sha256": "c4c9533225cc45ca55a7d0dfe1b681f17228573ebc16557c83a0e2a8f39112fb"
+    },
+    {
+      "path": "assets/r561/gunner-w-muzzle.webp",
+      "bytes": 20856,
+      "sha256": "57193a52707cd50b56fdc46a67a43830422fab2f6793a69e27ec98c20cd63391"
+    },
+    {
+      "path": "assets/r561/gunner-w-tracer.webp",
+      "bytes": 66086,
+      "sha256": "35fe37b907204e13ad6472729448224cd31400155354bc4252b6beda41e9fcce"
+    },
+    {
+      "path": "assets/r561/lauren/lauren-collapse.webp",
+      "bytes": 191312,
+      "sha256": "430c061740696f045771d84ce88722134f3ef5c1c4b42c48ce03614f819cc8a1"
+    },
+    {
+      "path": "assets/r561/lauren/lauren-crush-vortex.webp",
+      "bytes": 122440,
+      "sha256": "84fc7f0cbc00f1f47b5be33cf7a9446176f1d0ac04d5887c6acd1fb83496bbcd"
+    },
+    {
+      "path": "assets/r561/lauren/lauren-gravity-well-back.webp",
+      "bytes": 328394,
+      "sha256": "af742d23ef70154eddf4098229da4968aeaf633fdc947ff16cf4659477dba621"
+    },
+    {
+      "path": "assets/r561/lauren/lauren-gravity-well-front.webp",
+      "bytes": 116204,
+      "sha256": "90c8922991b909dd13b75b34689f973619dc4d18fc1c57cf314abd6b46f4cb2b"
+    },
+    {
       "path": "assets/r585/index.json",
       "bytes": 5998,
       "sha256": "58b5be4a18822506f40faa3c259e3ecfaacc0c099197ea223f48711f29feb1d3"
@@ -42264,8 +42329,8 @@
     },
     {
       "path": "combat-flow-r425.js",
-      "bytes": 60306,
-      "sha256": "b7dfd928cbf1de6c4db93e8398cdb725d8c7eb21b5c2f17b1ced4259fad510c8"
+      "bytes": 62139,
+      "sha256": "eabb04122b26259b8ab33acf8d50f71060d65728be9e05f7c8df85417fddaff7"
     },
     {
       "path": "combat-r114.js",
@@ -42289,8 +42354,8 @@
     },
     {
       "path": "combat-r170.js",
-      "bytes": 24069,
-      "sha256": "991a9819cef65b63b3fd8c0483536dce87bd8363da666a09b2d40917ec2520ce"
+      "bytes": 25858,
+      "sha256": "c982865f19a3018bb30d2012c227f564560fac878a2b04022faababcf00ab944"
     },
     {
       "path": "combat-r98.js",
@@ -42584,8 +42649,8 @@
     },
     {
       "path": "gunner-arms-r561.js",
-      "bytes": 30815,
-      "sha256": "e45ad082a9b9cc0953a483ab0dab91f8fd7e4a80aec8b4aef00cf8efe44d5921"
+      "bytes": 36113,
+      "sha256": "49aafa5ba783087a9086154882a6668f2cd54c7eafdb06ef541fc0d97a3366e9"
     },
     {
       "path": "hero-facing-r336.js",
@@ -42744,8 +42809,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6572928,
-      "sha256": "17859c658db30c16b612298027ce605462a941cecf58a4e8a2d355cfe5c13335"
+      "bytes": 6572976,
+      "sha256": "60f0c25a158042a1f385cee47028a29d960520243c19ff6bbc7ad242a491a795"
     },
     {
       "path": "intro-r140.js",
@@ -42776,6 +42841,11 @@
       "path": "lag-r217.js",
       "bytes": 2390,
       "sha256": "64754e0f1ba043700b7f79cbf31f9bbf916e33ea66d37be13df5066da7daf5ed"
+    },
+    {
+      "path": "lauren-gravity-r561.js",
+      "bytes": 15322,
+      "sha256": "fc4c25b10126c4b863dd092501594298e27cab87d8565b8aace0af69b8f02f95"
     },
     {
       "path": "light-atmos-r300.js",
@@ -43049,8 +43119,8 @@
     },
     {
       "path": "pixelfx-r163.js",
-      "bytes": 7988,
-      "sha256": "5cb660b64061d4eec958150958309a26dc526e6efcc1dd435375b7f1d9de1eec"
+      "bytes": 8365,
+      "sha256": "c6ea5237eee7459a2b88d7ed60948e9c5a4c2c156c26483087add79a653aa8b6"
     },
     {
       "path": "play-r106.js",
@@ -43648,9 +43718,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8729,
-  "totalBytes": 1213407821,
-  "webHTMLSha256": "17859c658db30c16b612298027ce605462a941cecf58a4e8a2d355cfe5c13335",
+  "fileCount": 8743,
+  "totalBytes": 1215743456,
+  "webHTMLSha256": "60f0c25a158042a1f385cee47028a29d960520243c19ff6bbc7ad242a491a795",
   "largest": [
     {
       "path": "index.html",

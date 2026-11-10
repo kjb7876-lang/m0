@@ -593,8 +593,12 @@ jobs:
         run: node r96/qa/r474/swamp-hands-cpu-check.cjs
       - name: R535 hunter Q storm tracking, Z ember-thorn split and burn, C twisted thorn lance blast (no new keys, chained) CPU check
         run: node r96/qa/r535/hunter-arrows-cpu-check.cjs
+      - name: R561 Lauren gravity chain (Q → gravity well pull → collapse burst, R → crush vortices; no new keys, bosses not pulled, walls respected) CPU check
+        run: node r96/qa/r561/lauren-gravity-cpu-check.cjs
       - name: R440 Hwando hit pose (no old art) and hero rim blade cleanup CPU check
         run: node r96/qa/r440/r440-cpu-check.cjs
+      - name: R596 leftover rift rings, tower silhouette shadow, mob health line over head CPU check
+        run: node r96/qa/r596/r596-cpu-check.cjs
       - name: R446 seven pillars moved to their own map as stationary attacking towers CPU check
         run: node r96/qa/r446/r446-cpu-check.cjs
       - name: R352 orphaned field-wave enemies wake near the hero CPU check

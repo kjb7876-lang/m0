@@ -7937,6 +7937,20 @@
     "assets/r381/voice/ffd58f07cd6296b4.mp3",
     "assets/r381/voice/ffe6b5462cf060d5.mp3",
     "assets/r381/voice/ffe769a5825eddc6.mp3",
+    "assets/r561/gunner-e-casings.webp",
+    "assets/r561/gunner-e-rifle.webp",
+    "assets/r561/gunner-q-beam.webp",
+    "assets/r561/gunner-q-impact.webp",
+    "assets/r561/gunner-q-muzzle.webp",
+    "assets/r561/gunner-r-blast.webp",
+    "assets/r561/gunner-w-impact.webp",
+    "assets/r561/gunner-w-muzzle.webp",
+    "assets/r561/gunner-w-tracer.webp",
+    "lauren-gravity-r561.js",
+    "assets/r561/lauren/lauren-gravity-well-back.webp",
+    "assets/r561/lauren/lauren-gravity-well-front.webp",
+    "assets/r561/lauren/lauren-collapse.webp",
+    "assets/r561/lauren/lauren-crush-vortex.webp",
     "assets/r528/bookshelf-n.webp",
     "assets/r528/bookshelf-w.webp",
     "assets/r528/index.json"
@@ -9014,5 +9028,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "214702d21bd05f758653c89496a6e73b2333fcbc136593c437903c62d60d365a"
+  "runtimeManifestSHA256": "f4628a82d9954a56878b3ebd21f4e5074438aa6bbc31fee5b166ca5cd7d42bf6"
 }
