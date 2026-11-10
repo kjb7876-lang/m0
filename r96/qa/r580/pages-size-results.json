@@ -26,7 +26,46 @@
     "assets/story-narration/v1/audio/",
     "assets/r140/intro/",
     "assets/dynamic-vfx-r84/",
-    "data/campaign-r54/canonical-campaign-source-r54.json"
+    "data/campaign-r54/canonical-campaign-source-r54.json",
+    "assets/painted-vfx-r87/",
+    "assets/cult-v3121/c101_black_rose_prior.webp",
+    "assets/cult-v3121/c102_synapse_hound.webp",
+    "assets/cult-v3121/c102_unity_seraph.webp",
+    "assets/cult-v3121/c104_white_deacon.webp",
+    "assets/cult-v3121/c104_white_shepherd.webp",
+    "assets/generated-v31224/actors-normalized/27ef01c10a8f_gluttony-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/53c9ce212489_lust-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/556c32928527_pride_cyborg-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/756dc911bd4f_sloth-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/838c3c4440d1_u2_suppression_knight.webp",
+    "assets/generated-v31224/actors-normalized/8e86a4cadfc7_u2_mirror_priest.webp",
+    "assets/generated-v31224/actors-normalized/907c3f3e5d5e_greed-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/a43f2c5d3855_Monster_GoblinFluteKing.webp",
+    "assets/generated-v31224/actors-normalized/b00c6229c058_wrath-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/f121229f2277_pride-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/fbaaf49e0721_greed_child-human-attack.webp",
+    "assets/generated-v3128/projectiles/chrono_orb.webp",
+    "assets/generated-v3128/projectiles/hospital_syringe.webp",
+    "assets/hando-v3123/ego_theft_connector.webp",
+    "assets/hando-v3123/false_signal_seal_guard.webp",
+    "assets/hando-v3123/memory_excision_connector.webp",
+    "assets/hando-v3123/nameless_sword_trace.webp",
+    "assets/hando-v3123/order_seal_officer.webp",
+    "assets/hando-v3123/phantom_reclaim_blade.webp",
+    "assets/hando-v3123/return_coordinate_devourer.webp",
+    "assets/hando-v3123/silver_seal_sentinel.webp",
+    "assets/hando-v3123/silverless_shadow.webp",
+    "assets/hando-v3123/timeless_silver_scout.webp",
+    "assets/heroes/normalized/gunner/player_roll.webp",
+    "assets/u2/generated-v350/u2_blue_wraith.webp",
+    "assets/u2/generated-v350/u2_cyborg_hound.webp",
+    "assets/u2/generated-v350/u2_memory_orb.webp",
+    "assets/u2/generated-v350/u2_observer_spider.webp",
+    "assets/u2/generated-v350/u2_reactor_collector.webp",
+    "assets/u2/generated-v350/u2_resonance_knight.webp",
+    "assets/u2/generated-v350/u2_suppression_knight.webp",
+    "assets/u2/generated-v350/u2_void_wraith.webp"
    ]
   },
   {
@@ -46,7 +85,46 @@
     "assets/story-narration/v1/audio/",
     "assets/r140/intro/",
     "assets/dynamic-vfx-r84/",
-    "data/campaign-r54/canonical-campaign-source-r54.json"
+    "data/campaign-r54/canonical-campaign-source-r54.json",
+    "assets/painted-vfx-r87/",
+    "assets/cult-v3121/c101_black_rose_prior.webp",
+    "assets/cult-v3121/c102_synapse_hound.webp",
+    "assets/cult-v3121/c102_unity_seraph.webp",
+    "assets/cult-v3121/c104_white_deacon.webp",
+    "assets/cult-v3121/c104_white_shepherd.webp",
+    "assets/generated-v31224/actors-normalized/27ef01c10a8f_gluttony-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/53c9ce212489_lust-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/556c32928527_pride_cyborg-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/756dc911bd4f_sloth-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/838c3c4440d1_u2_suppression_knight.webp",
+    "assets/generated-v31224/actors-normalized/8e86a4cadfc7_u2_mirror_priest.webp",
+    "assets/generated-v31224/actors-normalized/907c3f3e5d5e_greed-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/a43f2c5d3855_Monster_GoblinFluteKing.webp",
+    "assets/generated-v31224/actors-normalized/b00c6229c058_wrath-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/f121229f2277_pride-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/fbaaf49e0721_greed_child-human-attack.webp",
+    "assets/generated-v3128/projectiles/chrono_orb.webp",
+    "assets/generated-v3128/projectiles/hospital_syringe.webp",
+    "assets/hando-v3123/ego_theft_connector.webp",
+    "assets/hando-v3123/false_signal_seal_guard.webp",
+    "assets/hando-v3123/memory_excision_connector.webp",
+    "assets/hando-v3123/nameless_sword_trace.webp",
+    "assets/hando-v3123/order_seal_officer.webp",
+    "assets/hando-v3123/phantom_reclaim_blade.webp",
+    "assets/hando-v3123/return_coordinate_devourer.webp",
+    "assets/hando-v3123/silver_seal_sentinel.webp",
+    "assets/hando-v3123/silverless_shadow.webp",
+    "assets/hando-v3123/timeless_silver_scout.webp",
+    "assets/heroes/normalized/gunner/player_roll.webp",
+    "assets/u2/generated-v350/u2_blue_wraith.webp",
+    "assets/u2/generated-v350/u2_cyborg_hound.webp",
+    "assets/u2/generated-v350/u2_memory_orb.webp",
+    "assets/u2/generated-v350/u2_observer_spider.webp",
+    "assets/u2/generated-v350/u2_reactor_collector.webp",
+    "assets/u2/generated-v350/u2_resonance_knight.webp",
+    "assets/u2/generated-v350/u2_suppression_knight.webp",
+    "assets/u2/generated-v350/u2_void_wraith.webp"
    ]
   },
   {
@@ -66,7 +144,46 @@
     "assets/story-narration/v1/audio/",
     "assets/r140/intro/",
     "assets/dynamic-vfx-r84/",
-    "data/campaign-r54/canonical-campaign-source-r54.json"
+    "data/campaign-r54/canonical-campaign-source-r54.json",
+    "assets/painted-vfx-r87/",
+    "assets/cult-v3121/c101_black_rose_prior.webp",
+    "assets/cult-v3121/c102_synapse_hound.webp",
+    "assets/cult-v3121/c102_unity_seraph.webp",
+    "assets/cult-v3121/c104_white_deacon.webp",
+    "assets/cult-v3121/c104_white_shepherd.webp",
+    "assets/generated-v31224/actors-normalized/27ef01c10a8f_gluttony-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/53c9ce212489_lust-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/556c32928527_pride_cyborg-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/756dc911bd4f_sloth-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/838c3c4440d1_u2_suppression_knight.webp",
+    "assets/generated-v31224/actors-normalized/8e86a4cadfc7_u2_mirror_priest.webp",
+    "assets/generated-v31224/actors-normalized/907c3f3e5d5e_greed-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/a43f2c5d3855_Monster_GoblinFluteKing.webp",
+    "assets/generated-v31224/actors-normalized/b00c6229c058_wrath-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/f121229f2277_pride-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/fbaaf49e0721_greed_child-human-attack.webp",
+    "assets/generated-v3128/projectiles/chrono_orb.webp",
+    "assets/generated-v3128/projectiles/hospital_syringe.webp",
+    "assets/hando-v3123/ego_theft_connector.webp",
+    "assets/hando-v3123/false_signal_seal_guard.webp",
+    "assets/hando-v3123/memory_excision_connector.webp",
+    "assets/hando-v3123/nameless_sword_trace.webp",
+    "assets/hando-v3123/order_seal_officer.webp",
+    "assets/hando-v3123/phantom_reclaim_blade.webp",
+    "assets/hando-v3123/return_coordinate_devourer.webp",
+    "assets/hando-v3123/silver_seal_sentinel.webp",
+    "assets/hando-v3123/silverless_shadow.webp",
+    "assets/hando-v3123/timeless_silver_scout.webp",
+    "assets/heroes/normalized/gunner/player_roll.webp",
+    "assets/u2/generated-v350/u2_blue_wraith.webp",
+    "assets/u2/generated-v350/u2_cyborg_hound.webp",
+    "assets/u2/generated-v350/u2_memory_orb.webp",
+    "assets/u2/generated-v350/u2_observer_spider.webp",
+    "assets/u2/generated-v350/u2_reactor_collector.webp",
+    "assets/u2/generated-v350/u2_resonance_knight.webp",
+    "assets/u2/generated-v350/u2_suppression_knight.webp",
+    "assets/u2/generated-v350/u2_void_wraith.webp"
    ]
   },
   {
@@ -80,24 +197,112 @@
    "detail": []
   },
   {
+   "name": "assets/painted-vfx-r87/ 를 배포본에서 뺌",
+   "passed": true,
+   "detail": [
+    "assets/story-narration/v1/audio/",
+    "assets/r140/intro/",
+    "assets/dynamic-vfx-r84/",
+    "data/campaign-r54/canonical-campaign-source-r54.json",
+    "assets/painted-vfx-r87/",
+    "assets/cult-v3121/c101_black_rose_prior.webp",
+    "assets/cult-v3121/c102_synapse_hound.webp",
+    "assets/cult-v3121/c102_unity_seraph.webp",
+    "assets/cult-v3121/c104_white_deacon.webp",
+    "assets/cult-v3121/c104_white_shepherd.webp",
+    "assets/generated-v31224/actors-normalized/27ef01c10a8f_gluttony-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/53c9ce212489_lust-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/556c32928527_pride_cyborg-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/756dc911bd4f_sloth-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/838c3c4440d1_u2_suppression_knight.webp",
+    "assets/generated-v31224/actors-normalized/8e86a4cadfc7_u2_mirror_priest.webp",
+    "assets/generated-v31224/actors-normalized/907c3f3e5d5e_greed-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/a43f2c5d3855_Monster_GoblinFluteKing.webp",
+    "assets/generated-v31224/actors-normalized/b00c6229c058_wrath-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/f121229f2277_pride-human-attack.webp",
+    "assets/generated-v31224/actors-normalized/fbaaf49e0721_greed_child-human-attack.webp",
+    "assets/generated-v3128/projectiles/chrono_orb.webp",
+    "assets/generated-v3128/projectiles/hospital_syringe.webp",
+    "assets/hando-v3123/ego_theft_connector.webp",
+    "assets/hando-v3123/false_signal_seal_guard.webp",
+    "assets/hando-v3123/memory_excision_connector.webp",
+    "assets/hando-v3123/nameless_sword_trace.webp",
+    "assets/hando-v3123/order_seal_officer.webp",
+    "assets/hando-v3123/phantom_reclaim_blade.webp",
+    "assets/hando-v3123/return_coordinate_devourer.webp",
+    "assets/hando-v3123/silver_seal_sentinel.webp",
+    "assets/hando-v3123/silverless_shadow.webp",
+    "assets/hando-v3123/timeless_silver_scout.webp",
+    "assets/heroes/normalized/gunner/player_roll.webp",
+    "assets/u2/generated-v350/u2_blue_wraith.webp",
+    "assets/u2/generated-v350/u2_cyborg_hound.webp",
+    "assets/u2/generated-v350/u2_memory_orb.webp",
+    "assets/u2/generated-v350/u2_observer_spider.webp",
+    "assets/u2/generated-v350/u2_reactor_collector.webp",
+    "assets/u2/generated-v350/u2_resonance_knight.webp",
+    "assets/u2/generated-v350/u2_suppression_knight.webp",
+    "assets/u2/generated-v350/u2_void_wraith.webp"
+   ]
+  },
+  {
+   "name": "painted-vfx-r87 은 final42 다리가 있으면 아무 시트도 안 부름",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "final42 데이터·런타임·다리 스크립트가 index.html 에 붙어 있음",
+   "passed": true,
+   "detail": [
+    "./final42-data-r88.js",
+    "./final42-hooks-r88.js",
+    "./final42-runtime-r88.js"
+   ]
+  },
+  {
+   "name": "final42 다리가 r87 을 넘겨받음",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "painted-vfx-r87 경로는 r87 데이터·r87 본체(텍스처 필터 표시만) 밖에서 안 씀",
+   "passed": true,
+   "detail": []
+  },
+  {
+   "name": "assets-clean-r99.js 가 index.html 에 붙어 있고 urlFor 를 감쌈",
+   "passed": true,
+   "detail": 38
+  },
+  {
+   "name": "r99 정리본 원본은 모두 배포본에서 뺌(정리본은 남김)",
+   "passed": true,
+   "detail": []
+  },
+  {
+   "name": "r99 원본 빼는 항목은 정확한 파일 경로뿐(다른 파일을 같이 빼지 않음)",
+   "passed": true,
+   "detail": ""
+  },
+  {
    "name": "pages-pack.py 성공",
    "passed": true,
-   "detail": "{\"totalBytes\": 1076594937, \"budgetBytes\": 1100000000, \"files\": 8460, \"excludedFiles\": 268, \"excludedBytes\": 103600129, \"optimizedPng\": 1035, \"optimizedSavedBytes\": 35010145}\n"
+   "detail": "{\"totalBytes\": 1075018984, \"budgetBytes\": 1100000000, \"files\": 8480, \"excludedFiles\": 315, \"excludedBytes\": 113772179, \"optimizedPng\": 1032, \"optimizedSavedBytes\": 34801967}\n"
   },
   {
    "name": "배포본 예산 1,100,000,000 바이트 미만",
    "passed": true,
-   "detail": "1,076,594,937 bytes (8460 files)"
+   "detail": "1,075,018,984 bytes (8480 files)"
   },
   {
    "name": "pages-deploy.json 총량이 실제와 같음",
    "passed": true,
-   "detail": 1076594937
+   "detail": 1075018984
   },
   {
    "name": "원본 사이트보다 90MB 넘게 줄었음",
    "passed": true,
-   "detail": "136.8 MB"
+   "detail": "146.7 MB"
   },
   {
    "name": "빼지 않은 manifest 파일은 모두 배포본에 있음",
@@ -117,7 +322,7 @@
   {
    "name": "pages-deploy.json 의 빠진 목록 = 접두어에 든 manifest 파일",
    "passed": true,
-   "detail": 268
+   "detail": 315
   },
   {
    "name": "원본 manifest 해시 기록",
@@ -127,7 +332,7 @@
   {
    "name": "PNG 무손실 압축이 실제로 일어남(30MB 이상)",
    "passed": true,
-   "detail": "1035 files, -35.0 MB"
+   "detail": "1032 files, -34.8 MB"
   },
   {
    "name": "압축 안 한 파일은 바이트 동일, 압축한 파일은 기록 해시와 같음",
@@ -135,7 +340,7 @@
    "detail": []
   },
   {
-   "name": "다시 압축한 PNG 화소가 원본과 같음(표본 78장, 큰 것 20장 포함)",
+   "name": "다시 압축한 PNG 화소가 원본과 같음(표본 79장, 큰 것 20장 포함)",
    "passed": true,
    "detail": []
   },
@@ -152,12 +357,12 @@
   {
    "name": "예산을 넘으면 묶기 실패(한도 바로 아래 예산)",
    "passed": true,
-   "detail": "totalBytes\": 1111358833, \"budgetBytes\": 1076594936, \"files\": 8460, \"excludedFiles\": 268, \"excludedBytes\": 103600129, \"optimizedPng\": 0, \"optimizedSavedBytes\": 0}\nover budget: 1111358833 >= 1076594936\n"
+   "detail": "totalBytes\": 1109575441, \"budgetBytes\": 1075018983, \"files\": 8480, \"excludedFiles\": 315, \"excludedBytes\": 113772179, \"optimizedPng\": 0, \"optimizedSavedBytes\": 0}\nover budget: 1109575441 >= 1075018983\n"
   },
   {
    "name": "PNG 압축을 끄면 남은 파일 바이트가 모두 원본과 같음",
    "passed": true,
-   "detail": "{\"totalBytes\": 1111358833, \"budgetBytes\": 2000000000, \"files\": 8460, \"excludedFiles\": 268, \"excludedBytes\": 103600129, \"optimizedPng\": 0, \"optimizedSavedBytes\": 0}\n"
+   "detail": "{\"totalBytes\": 1109575441, \"budgetBytes\": 2000000000, \"files\": 8480, \"excludedFiles\": 315, \"excludedBytes\": 113772179, \"optimizedPng\": 0, \"optimizedSavedBytes\": 0}\n"
   },
   {
    "name": "verify-r96-public.py 가 배포본에서 통과",
