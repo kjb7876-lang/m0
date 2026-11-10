@@ -33628,6 +33628,26 @@
       "sha256": "35fe37b907204e13ad6472729448224cd31400155354bc4252b6beda41e9fcce"
     },
     {
+      "path": "assets/r561/lauren/lauren-collapse.webp",
+      "bytes": 191312,
+      "sha256": "430c061740696f045771d84ce88722134f3ef5c1c4b42c48ce03614f819cc8a1"
+    },
+    {
+      "path": "assets/r561/lauren/lauren-crush-vortex.webp",
+      "bytes": 122440,
+      "sha256": "84fc7f0cbc00f1f47b5be33cf7a9446176f1d0ac04d5887c6acd1fb83496bbcd"
+    },
+    {
+      "path": "assets/r561/lauren/lauren-gravity-well-back.webp",
+      "bytes": 328394,
+      "sha256": "af742d23ef70154eddf4098229da4968aeaf633fdc947ff16cf4659477dba621"
+    },
+    {
+      "path": "assets/r561/lauren/lauren-gravity-well-front.webp",
+      "bytes": 116204,
+      "sha256": "90c8922991b909dd13b75b34689f973619dc4d18fc1c57cf314abd6b46f4cb2b"
+    },
+    {
       "path": "assets/r585/index.json",
       "bytes": 5998,
       "sha256": "58b5be4a18822506f40faa3c259e3ecfaacc0c099197ea223f48711f29feb1d3"
@@ -42774,8 +42794,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6572928,
-      "sha256": "17859c658db30c16b612298027ce605462a941cecf58a4e8a2d355cfe5c13335"
+      "bytes": 6572976,
+      "sha256": "60f0c25a158042a1f385cee47028a29d960520243c19ff6bbc7ad242a491a795"
     },
     {
       "path": "intro-r140.js",
@@ -42806,6 +42826,11 @@
       "path": "lag-r217.js",
       "bytes": 2390,
       "sha256": "64754e0f1ba043700b7f79cbf31f9bbf916e33ea66d37be13df5066da7daf5ed"
+    },
+    {
+      "path": "lauren-gravity-r561.js",
+      "bytes": 15322,
+      "sha256": "fc4c25b10126c4b863dd092501594298e27cab87d8565b8aace0af69b8f02f95"
     },
     {
       "path": "light-atmos-r300.js",
@@ -43678,9 +43703,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8735,
-  "totalBytes": 1214946443,
-  "webHTMLSha256": "17859c658db30c16b612298027ce605462a941cecf58a4e8a2d355cfe5c13335",
+  "fileCount": 8740,
+  "totalBytes": 1215720163,
+  "webHTMLSha256": "60f0c25a158042a1f385cee47028a29d960520243c19ff6bbc7ad242a491a795",
   "largest": [
     {
       "path": "index.html",
