@@ -24893,6 +24893,61 @@
       "sha256": "556679e3ff38b7ea818880a7f84f34458e45c2c7108ac3d18459ece004848595"
     },
     {
+      "path": "assets/r541/sfx/death-1.ogg",
+      "bytes": 8533,
+      "sha256": "37072c41ffac2be63e376a40961e4332add640950a7e593ccaf53b63a88c777a"
+    },
+    {
+      "path": "assets/r541/sfx/death-2.ogg",
+      "bytes": 8645,
+      "sha256": "39dca4bb7ca0a8c383dd5a10fcce531a5383ef30bbfc14b66f7ff4e5282ec9ef"
+    },
+    {
+      "path": "assets/r541/sfx/door-1.ogg",
+      "bytes": 8117,
+      "sha256": "dad981486345791e0acd93f2078626f1f954e0bcb52b53ce1afc02bc0c841cfd"
+    },
+    {
+      "path": "assets/r541/sfx/index.json",
+      "bytes": 1845,
+      "sha256": "a9ed1325648cf9933938dd1d349db1cfe44b58ade072ef6c156dc8e5aff1e4fd"
+    },
+    {
+      "path": "assets/r541/sfx/pickup-1.ogg",
+      "bytes": 9107,
+      "sha256": "05a822ca5b94265b0651db848e4bf7464e38e9989f766ddf7838e46bfbaee1e1"
+    },
+    {
+      "path": "assets/r541/sfx/pickup-2.ogg",
+      "bytes": 9193,
+      "sha256": "884c0064ba69445ca019c94a9e88c9b7493d2ec48b170b0f36892e6d23210f49"
+    },
+    {
+      "path": "assets/r542/sfx/bow-1.ogg",
+      "bytes": 5467,
+      "sha256": "0064d3d015d69606c07f44b55963d0ec0c6e488d1d437a2f6867bd5b10627935"
+    },
+    {
+      "path": "assets/r542/sfx/crush-1.ogg",
+      "bytes": 7997,
+      "sha256": "58b7f74acb735cb446a78e5f40a456395c0ccbf072572e00a8b1a16ec28aa7e7"
+    },
+    {
+      "path": "assets/r542/sfx/heal-1.ogg",
+      "bytes": 11590,
+      "sha256": "a0bdc12de7a7e3afbd67c2a1486e67a99be848f28f9b3cdd9aa22008220ada3b"
+    },
+    {
+      "path": "assets/r542/sfx/index.json",
+      "bytes": 2274,
+      "sha256": "1712c0cee88c1447a017c1123bdd60fd5e13a3e8ebdefc29cf7dca3dbc165096"
+    },
+    {
+      "path": "assets/r542/sfx/roar-1.ogg",
+      "bytes": 8599,
+      "sha256": "3fde34da839094cdfabd18b8f9a510c38ff7141c93ceeaaa1eec3f818ec8d0e8"
+    },
+    {
       "path": "assets/r585/index.json",
       "bytes": 5998,
       "sha256": "58b5be4a18822506f40faa3c259e3ecfaacc0c099197ea223f48711f29feb1d3"
@@ -33589,8 +33644,8 @@
     },
     {
       "path": "crates-r108.js",
-      "bytes": 6666,
-      "sha256": "4eda8a17dbb82a2677206aff65ba2925d24fcdb4815ff2f3b4297613353edb28"
+      "bytes": 6746,
+      "sha256": "1d8820f1f4884a00ff32ededbdd6d2cbcdffe831e18d9062cafb688acdcd868f"
     },
     {
       "path": "dark-r123.js",
@@ -34024,8 +34079,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6572760,
-      "sha256": "3979c5bae862540276b1193c5e91f24f0fe81f0a02cd1b58c893801429ca64d2"
+      "bytes": 6572798,
+      "sha256": "5ad1a23caca0c20ee34b91142c6049076127164355edb2b7f0d1a73cd2faf19c"
     },
     {
       "path": "intro-r140.js",
@@ -34573,6 +34628,11 @@
       "sha256": "f6f539296fd11946a0688a5d82be7bf68b32f5c8d560aff5369e92f7dd439fc5"
     },
     {
+      "path": "sfx-r541.js",
+      "bytes": 4802,
+      "sha256": "fa3211778cd11764d5e43e4b631413973962f4d2347cfaf28babdfd1b82c5fb4"
+    },
+    {
       "path": "sin-boss-art-r463-data.js",
       "bytes": 9711,
       "sha256": "2603cb1055dd0a111f03eabffa371e46a463e522af2639005a4189da13cf7306"
@@ -34913,9 +34973,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6982,
-  "totalBytes": 1095233727,
-  "webHTMLSha256": "3979c5bae862540276b1193c5e91f24f0fe81f0a02cd1b58c893801429ca64d2",
+  "fileCount": 6994,
+  "totalBytes": 1095320014,
+  "webHTMLSha256": "5ad1a23caca0c20ee34b91142c6049076127164355edb2b7f0d1a73cd2faf19c",
   "largest": [
     {
       "path": "index.html",
