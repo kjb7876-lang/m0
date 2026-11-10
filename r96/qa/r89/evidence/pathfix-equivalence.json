@@ -1,0 +1,89 @@
+{
+  "schema": "storyworld.r89.pathfix-equivalence/v1",
+  "measuredAt": "2026-10-23T12:58:34.952Z",
+  "setup": "Built R89 runtime in browser (GTX1050/ANGLE). Hospital ep1a08 entered through the 777 test code (separate cheat777 save) in route phase with door-0/1/2 closed; reachable cases on the same room; hub cases on a fresh slot-3 new game.",
+  "nearest": {
+    "hub": {
+      "cases": 24,
+      "identical": 24,
+      "note": "all reachable; identical findPath call counts"
+    },
+    "hospitalRoute": [
+      {
+        "case": "unreachable exit (5.22,5.22) maxDistance .5",
+        "identical": true,
+        "result": null,
+        "oldCalls": 37,
+        "oldMs": 15994,
+        "newCalls": 1,
+        "newMs": 427
+      },
+      {
+        "case": "reachable south corridor",
+        "identical": true,
+        "oldMs": 6,
+        "newMs": 4
+      },
+      {
+        "case": "reachable merge area",
+        "identical": true,
+        "oldMs": 163,
+        "newMs": 167
+      },
+      {
+        "case": "reachable near entry",
+        "identical": true,
+        "oldMs": 0,
+        "newMs": 0
+      }
+    ]
+  },
+  "arrivalPoint": [
+    {
+      "portal": [
+        43,
+        109
+      ],
+      "goal": "merge",
+      "identical": true
+    },
+    {
+      "portal": [
+        5,
+        109
+      ],
+      "goal": "merge",
+      "identical": true
+    },
+    {
+      "portal": [
+        83,
+        109
+      ],
+      "goal": "merge",
+      "identical": true
+    },
+    {
+      "case": "unreachable boss-room objective",
+      "identical": true,
+      "result": null,
+      "oldCalls": 17,
+      "oldMs": 7521,
+      "newMs": 432
+    }
+  ],
+  "freezeRepro": {
+    "scenario": "slot 1 cleared hospital -> save panel -> slot 3 new game",
+    "r88LongestTaskMs": 128870,
+    "afterNearestPatchMs": 8730,
+    "afterBothPatchesMs": 1575,
+    "failedPathSearches": {
+      "r88": 306,
+      "afterBoth": 3
+    }
+  },
+  "assists": [
+    "777 test code region travel",
+    "cleared=true toggled for one call and restored (goal switch for unreachable case)"
+  ]
+}

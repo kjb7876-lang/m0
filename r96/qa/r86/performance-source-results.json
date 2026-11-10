@@ -1,0 +1,20 @@
+{
+  "schema": "r86-retained-vector-buffers/v1",
+  "method": "Pinned Three CPU geometry, original native triangulation parity, counted BufferGeometry/typed-array constructions and scripted native complete-frame replay. Browser/GPU/frame-rate/natural-play unverified.",
+  "checks": [
+    {
+      "name": "Bounded renderer patch is byte-idempotent",
+      "passed": true
+    },
+    {
+      "name": "Independent source prototype has retained path update",
+      "passed": true
+    }
+  ],
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "sourcePatchOnly": true,
+  "failure": "TypeError: Cannot read properties of null (reading 'attributes')\n    at main (/workspace/scratch/e1f4fcf3efa1/hospital-refinement-v10/qa/r86/performance-check.cjs:17:154)",
+  "passed": false
+}

@@ -1,0 +1,1041 @@
+{
+  "at": "2026-10-24T15:06:31.255Z",
+  "items": 64,
+  "heroes": [
+    "hwando",
+    "slayer",
+    "neon",
+    "gunner",
+    "hunter",
+    "lauren",
+    "michaela",
+    "seoha"
+  ],
+  "outputBytes": 1984967,
+  "sources": [
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/n/frame-00.png",
+      "sha256": "3c65f2416e1a138add1ea1abd8ac81183a9693a69c160a728e96fa9e26e92766"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/n/frame-01.png",
+      "sha256": "7835e5f1a6b8bd93ce6c88c20eac4eb93ccc25935237ec3d8b44838ed6db4ef5"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/n/frame-02.png",
+      "sha256": "5ada0c0275c3aee7cd9decea3f66c2546b2dd3d8986c460cc21b0c7a0078624a"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/n/frame-03.png",
+      "sha256": "b9bb66e4965aba368dbb7c016f5f170475f7e08ad8e4832305aee06d5c207c5c"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/ne/frame-00.png",
+      "sha256": "f89f89236bdcf0fc94b095b32f8a488237130092d587cece0d30396760c9527e"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/ne/frame-01.png",
+      "sha256": "12a0e5cdc70c3aa0e44ee48082ae2a32d1bce4e094c4c7b79defc1dcd20d76e2"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/ne/frame-02.png",
+      "sha256": "00295f29e1ac734bac3f399a39f92828d109f5e2f9826f285f8779e50f1d252b"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/ne/frame-03.png",
+      "sha256": "c7e5de391e942ba97ece2a24c52a3ed1de1fe10f8bdf6fd2c0daaa67fcd1a089"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/e/frame-00.png",
+      "sha256": "8d61d9e5973e01d3c4d8ec6731849f96dfdbd48549c54eaf06a9a4cc44687ffe"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/e/frame-01.png",
+      "sha256": "efed07619fcbaadf18e7449e374f54aab4e1454cf40645739e792808b49522be"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/e/frame-02.png",
+      "sha256": "4f991a9aafe6886199dce3a4822b8324fda8ae4309913619fad5c7f75df2b485"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/e/frame-03.png",
+      "sha256": "53142cf2e36142e93bb01e24532eba881aaeb26aaa604014d5d1adf17b59222b"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/se/frame-00.png",
+      "sha256": "bcc4b56e020fb7d904eb9672ec6f8bda15d13951d7c41e44e8f085e324cb989b"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/se/frame-01.png",
+      "sha256": "c6967775651d36b18eb89a686193021eb515459ee4fc29aeb11da6bb637c0070"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/se/frame-02.png",
+      "sha256": "cff91f9b0b3d1d72ccb9ee5248decc9bbd969365c7ad62bb790d24c2346e35bf"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/se/frame-03.png",
+      "sha256": "d06e28bcf3f6fffe4f296e7625ef0072cb5af17e9d82378c0a3cf90ee680776e"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/s/frame-00.png",
+      "sha256": "85c3a6379f4551632d1654e379edfc58ec6057801a25b19bd861ef8abf74b042"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/s/frame-01.png",
+      "sha256": "616dccbf5430cb666484c0e57a01e83a4816c40ce03ef5a5afde7bd7aaf77fda"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/s/frame-02.png",
+      "sha256": "e0da71f12715b08497f5bd6a1ff9da2694307f061dc1b14583cf325dacbe564e"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/s/frame-03.png",
+      "sha256": "08a77132b49efe4976e0155f830c9031d31d53c5d11f5fe1810fb0fe50b9379c"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/sw/frame-00.png",
+      "sha256": "7021140c7e53cf9f7326839c0988827edfac202b1fdd3f45c085ef35c16f5ec2"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/sw/frame-01.png",
+      "sha256": "bf4eb46b9e3260b1cc05fc84610e9e322b5febc9ef9568efc197e77011c40bd2"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/sw/frame-02.png",
+      "sha256": "831a112afe913125cde26952ef6b19100fc1077029766a504cffbc71f9c94e43"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/sw/frame-03.png",
+      "sha256": "b6aad6280444085d00e4a9b364f531f2c094dbc203f0bc280965a4baff5f1e99"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/w/frame-00.png",
+      "sha256": "51c0232a838e8df13d958a660763ce6e9d4fb234c3ba681fc067745b5583e112"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/w/frame-01.png",
+      "sha256": "c10a852843a4b2f991cd8b004e3e022d99d0eb13f8237e578d4110679a0173a6"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/w/frame-02.png",
+      "sha256": "acce7b4b9ce87f9d0c076e33884a72ce1605484ff629c3814b31989dfeb143cf"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/w/frame-03.png",
+      "sha256": "dcd55fb39336b5a3caf453be119b1ca23c754d694d17de41a2acd777edf5a777"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/nw/frame-00.png",
+      "sha256": "4e18672cf4e80c5d3d148c2c2daf89543b36420b6d85a28205a9175fbc8ad300"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/nw/frame-01.png",
+      "sha256": "e53858f2a0e0fbc51ce626903a06a7cfbc40d9927613789c927f47718d320d56"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/nw/frame-02.png",
+      "sha256": "fef1644e651b69e24d6172680d91c1e945dfc41c5e4ddc8b88067edfcdbbf11d"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hwando-idle-eight-comparison/nw/frame-03.png",
+      "sha256": "71c471e2ca15cb44f096e82578155c5b375d5efd5e21ec2b9502c14374341b76"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/n/frame-00.png",
+      "sha256": "b7d1b2ccc1b316348329809b72544cb47d88df8ae1d1a59bfd7c0ee4296cb65a"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/n/frame-01.png",
+      "sha256": "3032b69db808f1ccf5139e6d0269f33a45bedfc9c97fa0789827500b15c9e151"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/n/frame-02.png",
+      "sha256": "10014ef5a402c5f5ec865bd09bd40bd8c3365882ede965d0b7310456d6bdd50f"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/n/frame-03.png",
+      "sha256": "88ebbae8f5a3e64b1f000afe93a4909d5c44fbcbc63d397dc9a43ee112052800"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/ne/frame-00.png",
+      "sha256": "969bc7d3b1cac8ad0c2f5fb6ab642d54d3791acb44035d1001ffd30e44b04501"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/ne/frame-01.png",
+      "sha256": "82e1c56f73043d29aa12e37b0bc887f9af2816288336160c31c4aac99329309d"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/ne/frame-02.png",
+      "sha256": "afc57022bf36378ad6ea95af1a94a15b60055f9f658357cebe4a6dbc24789d82"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/ne/frame-03.png",
+      "sha256": "6e6a87635712a0c0ed5c184d5d284294980b933f4cfb08024f9ad3e604252866"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/e/frame-00.png",
+      "sha256": "c637d40f5704f09aae043f484140d2c8712f1d55b4c49c452e03a49710c9f287"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/e/frame-01.png",
+      "sha256": "252fa854e0a5bca0fd61feedfe1ddfa697e4af194bd369a263d3897b7f4bfe58"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/e/frame-02.png",
+      "sha256": "8fe72eced7358896924104db2c29d30d0e75d9270f8e15cfaf48f333b70e709b"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/e/frame-03.png",
+      "sha256": "e9a7745364da9f9ec9ba62733ffd85a9a2eaeeeb16c0b0cfbf8fce28de1245a7"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/se/frame-00.png",
+      "sha256": "15b4e32738c097da1ea72c1142a59f003000016273373abb69e72b49105c34f2"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/se/frame-01.png",
+      "sha256": "9c147ea825b20b50e87624fc1bc1cf834eaad0ab83f34e22fc3fcd84985767a8"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/se/frame-02.png",
+      "sha256": "06c5a2a294de903a83c1071d7184aa55602af6d533b6672a7467cae12fd77d39"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/se/frame-03.png",
+      "sha256": "9f69d005fc822645b02427dad8a795a4544ec81c9b326a3278ba0262ff400fa3"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/s/frame-00.png",
+      "sha256": "d0dbf6be3738506c098f2fbf5570e6dfa3d6740539a4054309bf481ca302604f"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/s/frame-01.png",
+      "sha256": "e0f6bbe7095455062fc2a959f2c034a7610d0f008751efb5da22683b421126f3"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/s/frame-02.png",
+      "sha256": "1b4bbe51a2c0381d01943cb6755a704d0b47376c8ecf8719efeb23f865c5d580"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/s/frame-03.png",
+      "sha256": "6497a4c882ee0ee5f09b489cbb1df01f3d47f5f28a6e4677612551ab42f160f8"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/sw/frame-00.png",
+      "sha256": "2edb14f2a551efaabe6a54666d1732fbf81acec77e4d62ca9429b853fabf2493"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/sw/frame-01.png",
+      "sha256": "5b7c10d6673ef2efa7a0628a8fca33f4179191db66a035724ec6b54f3b43f4d2"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/sw/frame-02.png",
+      "sha256": "f867541cb7721752d558dee32713c21bbca52865906f297bd0dd0c3f7104bbeb"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/sw/frame-03.png",
+      "sha256": "d09a5eeaf126f7e2ed3d15ca2b4ef674b9a98b4b2e0bd58747707586b5afa631"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/w/frame-00.png",
+      "sha256": "6fc453d3d355b405241ab8d941977276db0e4e4cefa09ce4ca29bf92aba03b39"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/w/frame-01.png",
+      "sha256": "31166dc0e63ff5700d1eaf1909535ee8519f47df82fcfc3c3b6f13025480d85f"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/w/frame-02.png",
+      "sha256": "e8850aa4fa4f9c7acc9a5185174961990990b5a94aea7f2ef791f44534da48f2"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/w/frame-03.png",
+      "sha256": "5b951fffe7a2361364913cf64343e74439d9d6914c6373b194b2a2ba40e8ea03"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/nw/frame-00.png",
+      "sha256": "9a433cfb8c4ee956480e08ffdc6884c47ca011608b0f2be6d026b4446b5797ab"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/nw/frame-01.png",
+      "sha256": "cfd1e5c90fe8958c7fe8ce6c7f8901694b5dd690369faf604ecd5e538427220e"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/nw/frame-02.png",
+      "sha256": "d31eff8c53af18b0f324475592e6a6c2e2b871b46c81a9e8cb7c7498af36a491"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-slayer-idle-diagonal4/normalized8-padded544/nw/frame-03.png",
+      "sha256": "f19977f737e75a4a25e8badcc22e7153278f6be69654cef2323630ea6318303a"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-n/frame-00.png",
+      "sha256": "20a42b7df972fe5d14a31bca7c445ddc2bb41f01f62e57ade524ed9d6d19c93b"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-n/frame-01.png",
+      "sha256": "06019a45d45e2735d35132ca030d0064cee4ba7dfc2d9f30f7618b443d22c199"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-n/frame-02.png",
+      "sha256": "98c55a2cfea6447c0c71714a8e3c129642230c9a6e522e503614b7043772c672"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-n/frame-03.png",
+      "sha256": "655cccccd785a13f66fabda0f19ff645606eb43c3d251104d5ab25371459b359"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-ne/frame-00.png",
+      "sha256": "3c43fee7fb70ff879e18dfc9e4b02a29e345b2dba7f810a61695926a5ce6a928"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-ne/frame-01.png",
+      "sha256": "5c52ecad9af39a0cd37c6cb19348185fa00a8359e429946cac0cacc9f682ae2b"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-ne/frame-02.png",
+      "sha256": "078e67a0cc11c9bd1c5d80264cb7fa095a484d5cbc5c10f39cb83545e987a342"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-ne/frame-03.png",
+      "sha256": "b865e8e79d18776c051a3d1a88ccce7901408898e6d22f6f5ccad14452877892"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-e/frame-00.png",
+      "sha256": "d4eac8837d3cc6f910c4c061d91132f2ce20142f29daa16ffc0f17d5880d9a48"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-e/frame-01.png",
+      "sha256": "30c8da9c0d2a0e8a4e346b0e1507f24149110c639354cd57a6fad0697f144e75"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-e/frame-02.png",
+      "sha256": "f34c765ce129bfa5d8bf439b6afaff7a64a3241c7bc8cab8e714d8fdc8d34dc1"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-e/frame-03.png",
+      "sha256": "5a5b88c7da4c7b57b10f09dacb69567b0ae49c6e5edf790ec830b137a7a28f29"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-se/frame-00.png",
+      "sha256": "93db8da1d7ab32ce0223d9bba417c0f93629d31cb58bfea2647fafe22c91a9db"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-se/frame-01.png",
+      "sha256": "91bb180fd8056b357142622d5507b80d78616ee88e7022a24be262f82db946c8"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-se/frame-02.png",
+      "sha256": "cc644b829b5a2be30da92844ef93f9f168a6ef94d8325e7d7efdb94f5e312e81"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-se/frame-03.png",
+      "sha256": "7e7a46402a2e3fb9249a8dc83a8e2d70ebd5c0b4f1aae1bd20b039cb0f2b3c1b"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-s/frame-00.png",
+      "sha256": "181d2d9ed3c675435b471d1277df71360416b8404aef77c0746e77df62f1ce89"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-s/frame-01.png",
+      "sha256": "a83bdc6d6a146c73f135caba17b68a29a2e539c2d1370682761e5b7c15de517d"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-s/frame-02.png",
+      "sha256": "904dff477446cbb649dcb74920dab4fcb11d3c56e2ba1d56d64e2f2fe36ed746"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-s/frame-03.png",
+      "sha256": "662ea06c995fd4ec90a1a74d5cd8b169b1c7db515811acada185c4ed5b6401fa"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-sw/frame-00.png",
+      "sha256": "2ea438f8e02442db5ca5afc81cee84b4213c7d9e56503e7867491c8a3726e019"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-sw/frame-01.png",
+      "sha256": "60e62b60cbf0ccddcde6695554d201e07f3dbc24ff8ba285c047bfacabe0237d"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-sw/frame-02.png",
+      "sha256": "72e0358b0940225d1d248e6a67c83f554fc10c4dead2ece3794a0bb8ca76bedb"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-sw/frame-03.png",
+      "sha256": "486a8998f1b460fe4810b5a82b569918ef9720fd1393ddc551f1594bb244136c"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-w/frame-00.png",
+      "sha256": "39256e2011b7db699b45f6291c4b2858ca1285a3eca49103e74160240007e87f"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-w/frame-01.png",
+      "sha256": "cf6ea3d8771bf76dfd8c99ced6c17920db12e984b91b891aae212ed097b31dab"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-w/frame-02.png",
+      "sha256": "13d2e42e4f9ce12db6e6702cecad065cc91a8ab7c1cbb56154641eb4fa19687f"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-w/frame-03.png",
+      "sha256": "a7b56140d34fa218ba225a312c7375d818ba2417f62a2d86214c4630c852c2f0"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-nw/frame-00.png",
+      "sha256": "6db852a15e223425b95889d919c5ae159251322878cd29fce707dd1d73d49583"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-nw/frame-01.png",
+      "sha256": "4b3459a3a7c4a9eb6805bcd0a4f741218ebb90bfac7d3ab764d25b825d44c22c"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-nw/frame-02.png",
+      "sha256": "5aea06d45f0d0f6b04ea9600b00a955a816f478ae258ec59f1e2f35c514befe9"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-neon-R90-eight/normalized8/neon-nw/frame-03.png",
+      "sha256": "fa7080fe44077de5b9446150c10c0bb7518f91b5c24ab9fb96f78104fd830336"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/n/frame-00.png",
+      "sha256": "5f462f13d2e00627a8cab29cb6f9137dec7d159dbbbb9beb02adc3aab8df04e8"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/n/frame-01.png",
+      "sha256": "e36a5cfdf71433e9a398713ad5e3fa636da5051500729115d55a96771a416d9a"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/n/frame-02.png",
+      "sha256": "ac91cd733493ed616ef05a7ebd2c5528f476feddcccfd257a9cce0bbb40235b9"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/n/frame-03.png",
+      "sha256": "fce620f9b712dacca80b9c37d95f1bceac55de1377cfbc00c31ad89027dc020d"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/ne/frame-00.png",
+      "sha256": "d0ac6aece5615fab67eaabd57482dd23ec5a318642751080930f25406302c31a"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/ne/frame-01.png",
+      "sha256": "fd851176c307a7d9844185a8fbacde3c46f082039125b095942dc67c8d15d610"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/ne/frame-02.png",
+      "sha256": "b070ac0cf4205f591f3eac740d6a284fa2232c7ff66e5cd3efe92930deb0e73c"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/ne/frame-03.png",
+      "sha256": "1e1993a3a1705620fe99b28569c6f8707182de39887c9f9901d954304da854ba"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/e/frame-00.png",
+      "sha256": "d527d2dc8b3491642c5a06d221a5bb208bd69fb38a6b22a4679a5b28096c4fa3"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/e/frame-01.png",
+      "sha256": "5ae0b874b0f5775b249e0b79b718fd61e4dddd2ef035ea50660d7b4a73125a2e"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/e/frame-02.png",
+      "sha256": "c05a145ca023f7bf26c281d9c57c02fb699716eb653b9998173453523f0d9ed5"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/e/frame-03.png",
+      "sha256": "f765520df46f3fb207909ecd0665ca6b8fd5f4f86efefa4b90ab4e209ab9a576"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/se/frame-00.png",
+      "sha256": "f42c03f1762d7bbe2e9be0b534e7756913aaceae606f2986505dbf199cacde60"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/se/frame-01.png",
+      "sha256": "4a1198face86bab6087629b1ee034158244c357d59c639a39e7629c3b77f3f63"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/se/frame-02.png",
+      "sha256": "e9221fe12d4338f1b0784130785f9dfa73432dc4f4d280f120e4cb7021667990"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/se/frame-03.png",
+      "sha256": "04f127493768ea2b282baeb595ec804297e199b152e9c165968cb1688fa5a4b0"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/visual-correction-s/frame-00.png",
+      "sha256": "0dbeff5e408b7df8dd497de9d0455df3293ff4c0420fb0c9fd3ad67b19f74d80"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/visual-correction-s/frame-01.png",
+      "sha256": "514511bdbbec50b51dd91f76f741421da00ba4229ea392b2044ba2a53ce99f4a"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/visual-correction-s/frame-02.png",
+      "sha256": "5c7c42e221fd1b270efdec0086cabe921d435342f1983195eaecdb2b36c81d59"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/visual-correction-s/frame-03.png",
+      "sha256": "7ad24a97b9bf90d90d3ca7b7e432577c8a98269218262d452e6434238c5699a9"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/sw/frame-00.png",
+      "sha256": "12235f30d6b65ea6e13d205998fcc93f97929fb3a0a5198799f14bb7a8b664c4"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/sw/frame-01.png",
+      "sha256": "10c4031d00af6478a8e2a0a3bbe1f5583453ec91e36679d91e35d698dfdb98c1"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/sw/frame-02.png",
+      "sha256": "c4bd0c9a03960613fea0c53cd74318d3cc4df5c08a132de8ac1e38f9da92790f"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/sw/frame-03.png",
+      "sha256": "c129d8a2fef6bb222ba1cd943fe2bb1c492a4999bcb8c6eb4887d5c20dd48b96"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/w/frame-00.png",
+      "sha256": "183291af8ce26bf4930458959c8267ab7e3f8c4566908bf9e872b883e20dc2ab"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/w/frame-01.png",
+      "sha256": "2d17bbf0a25b9b6f163b27ede805b59637839ad1124b0ecc016c421bfa3a97ad"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/w/frame-02.png",
+      "sha256": "60def10772f83c7f18c145a223d58c9531214fbd027f566efe499d5a20ddea23"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/w/frame-03.png",
+      "sha256": "8581bacc49f30931655ed7a676e889c60a5f05575427d5e169d09115b90597d4"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/nw/frame-00.png",
+      "sha256": "53465c2cc02ce7caba88d96211c9e664183b7cc33180431327e92a67ffecbbee"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/nw/frame-01.png",
+      "sha256": "7547f0e76aa022d8a78e51afd74c8b5771b7fc6bbb4861c2fcbbb1848d38dfb0"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/nw/frame-02.png",
+      "sha256": "08caba188e71cabb3199e7b39e9ff3df8e94b1750a52c77b7d09b0523e6085da"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-gunner-r90-se/metadata-normalized8/nw/frame-03.png",
+      "sha256": "2e88ba5e56bb179d12570615740ae9198d6351bc92c4378999c5bdc581942794"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-n/frame-00.png",
+      "sha256": "35c27c947f188c069eba3f3e30f7b92d91dad8b150266f8a39ea1188a843d113"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-n/frame-01.png",
+      "sha256": "597e89136b420d3ca325475383a2143df06387a839c8337f42ff1fe2a2173fba"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-n/frame-02.png",
+      "sha256": "c49bf2abc44b9025629c0d697ee8d3d16aa62762264f8fc55c6f3fd4d9a9c2b0"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-n/frame-03.png",
+      "sha256": "197847964951d83a85ae155f46d46734efef5af52ae8b559853f1bd7f42ec745"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-ne/frame-00.png",
+      "sha256": "3bd7853dc2b0bb912cd3243ce46e29dee39abc805ceb10612ab4c9783bac025a"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-ne/frame-01.png",
+      "sha256": "46b32e67262b7d37c53c12bc7bc0fba60c53b7e6c67de5b6515b97c408bea0ef"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-ne/frame-02.png",
+      "sha256": "efce174a02ab40f0a468edb25f736913ed88f8ea62eb835df94b3cfd7bfe3c84"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-ne/frame-03.png",
+      "sha256": "495a1b555cc60ce07707644ec288901618661e67561e0b8ddc0500c01b765ed9"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-e/frame-00.png",
+      "sha256": "3c8f6ddd2711696f3891e91e98a70691c34b9a2e359a73161a61c4bfd0c25701"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-e/frame-01.png",
+      "sha256": "d80b6ea0d4a3dcc14e78afd825e6608a0fe9f377870a765b5179b28439562a02"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-e/frame-02.png",
+      "sha256": "8569dd8de571d35c1ff8c713dab349c201eedb087015d79ed27e3ff08a343092"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-e/frame-03.png",
+      "sha256": "8da2ad1480b3d7f404c21699c7c4c820b5e19ce684a2ab9594599940c2a43eb4"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-se/frame-00.png",
+      "sha256": "e30a13068b3e5af236d1a0ad88bccc96070eb650beac61debf95b75b25ca0f76"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-se/frame-01.png",
+      "sha256": "3f1695d7251031341b3e0d4c160fe905f1e345eff33f9f48fe0984719349a6d8"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-se/frame-02.png",
+      "sha256": "4ede6318a3762f8abbb57b429bac0bdf3eace3ad99c6465175dc392eb54c5a4b"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-se/frame-03.png",
+      "sha256": "bef8deef2cf95a5949446c1c830b9334af4d51e424a246e6ff04896ec9803c57"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-s/frame-00.png",
+      "sha256": "38ad55709da7da6d353eea6820a456a17b6709cc096c604dd9445f1f81cbde4e"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-s/frame-01.png",
+      "sha256": "40ddfad4d6180df35c21a2d6ddf5a270ef2dec188d14d0dfc4c16ad367f69bba"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-s/frame-02.png",
+      "sha256": "6e76e455ff9742b7a39e4c4266e8eb2fa713dd6bc69d4edb390747d3f7eaa191"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-s/frame-03.png",
+      "sha256": "84753c3a46a1f8d4a657211a31b3b2d92e74372019e596c9555d0a988ba579cc"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-sw/frame-00.png",
+      "sha256": "ba223db5634f330e255f7935896669b03b3daef391022fb37ed4af9f6c90cc54"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-sw/frame-01.png",
+      "sha256": "5ba950c729970119863103a7c2d2e910f1d2892687e69a3a8aaf2c7dca92adc4"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-sw/frame-02.png",
+      "sha256": "3dfaef157a4c26824bb8130d587e08638dcbf7b877e290d24bd5ccfdb004afd1"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-sw/frame-03.png",
+      "sha256": "0512f9f47607b4ba25d2bb859557830e3e82708ba17e0c891446cdb835b49358"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-w/frame-00.png",
+      "sha256": "1c1be88a157a0d9137ed89b761eb7f46498c91b34c506ed84326372f62d20204"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-w/frame-01.png",
+      "sha256": "141f4ea76688020183d694e35399d4a2fdf0421555ad97f5b529abfdd5ffb91c"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-w/frame-02.png",
+      "sha256": "c7f0e32ec91d5bd9a07c68a75b537157e91021c634762c821e7335ff609ba47f"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-w/frame-03.png",
+      "sha256": "685500f114f581189ff0147ba5709f0c0cdafd83ebfee39763766adb281728e2"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-nw/frame-00.png",
+      "sha256": "dbc506d409597cd6d99addc8801737f0c2c24c4f6da7e2a66fca4695fc1b160d"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-nw/frame-01.png",
+      "sha256": "eb92eed9b3fb27a97275a8fa85225e5df8e1574515c03af31bb5cbfa34d2a959"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-nw/frame-02.png",
+      "sha256": "36104a0f52d39a0187a5aadac71fc2d03e39431160bc40f15ece6fa5f0999fd9"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-hunter8/hunter-nw/frame-03.png",
+      "sha256": "bdfa57123359d174812630deb388ff228521d5cd2d5496f0881fb42f76e8407c"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-n/frame-00.png",
+      "sha256": "bd6dd87a79de95f60f10daeb7339cc8496f9bc39c3402fb1c11c4e4804764bdc"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-n/frame-01.png",
+      "sha256": "3eb17f21c19a67e3ff16540a91e948258a188359bf35eec7c27601bc58f9558d"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-n/frame-02.png",
+      "sha256": "fccf68a08bf3c4585b122c767ec523da951e59e5a776231e36dfb74c5d3c7923"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-n/frame-03.png",
+      "sha256": "65bb30b4d06631aa6b9dfedffd99936af39ff2c032d229383bf328442adc4c7d"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-ne/frame-00.png",
+      "sha256": "5d481a1e9fff48bc88b69ec0aeb79c8268b6803281b9df2134efad126b48dcc0"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-ne/frame-01.png",
+      "sha256": "7f6f10c3525e9c1a4bd5bc31457a984d07ff8c51f103f6ca45a3e6491ea90854"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-ne/frame-02.png",
+      "sha256": "b6305a290d818cba6f51ddd9e2ba0bea39bcd7eec2de3679c268386f8c74cfa7"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-ne/frame-03.png",
+      "sha256": "dd35c36f11fb10fccde3891f8046a3781ce259174e5f981eaa9d208bea5f6ca6"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-e/frame-00.png",
+      "sha256": "f0dad018d3a2e15b836ba48dfc349e09f11a40afca3076bdde30e4f94f6658f6"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-e/frame-01.png",
+      "sha256": "bed6d2662d446c29f63c5c1e0d24cfbae5705da485ee90d70f37ed816f9c2169"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-e/frame-02.png",
+      "sha256": "03a9799bc681b6538ad33aa63c92f1b151dc9142692c92905c037cf1d85b63fa"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-e/frame-03.png",
+      "sha256": "c9c141be630f800956761215f512c4413092e4f74277b150b8737d47ed791746"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-se/frame-00.png",
+      "sha256": "03c22cfccca53ba94ce2a2ff455d9a2b8f6bfd47802a4a739584f96e47c3bf7c"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-se/frame-01.png",
+      "sha256": "9ffe9495a4fb20ead95a8a762c4fe0057665d1bbe7c174732498f69ff43b3b0d"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-se/frame-02.png",
+      "sha256": "c03dbfeec7efe23d8c9167c7c91e7971f46a6ce5678525a1a09f1b5d8f50d3a7"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-se/frame-03.png",
+      "sha256": "85291847bc9a51373113425f18f73b4a3ed5d377bbee85d7442a6a458466bbfd"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-s/frame-00.png",
+      "sha256": "e5b440544196efb83abad749d3619a32766a1aacc66da704427445229bf5b9eb"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-s/frame-01.png",
+      "sha256": "4d01761ba95d8a943f5290f663ad31ba49f2a26efb2ad8f066cb18fc869999bc"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-s/frame-02.png",
+      "sha256": "dd9967ab568c994606b0463e9999a9783a9c77c3b2cec0d06345c48b4cd4fba4"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-s/frame-03.png",
+      "sha256": "4082b0a94ef6a345707bbf326aa0c773fe1ab2d7aa667353a62b9e99336cf41a"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-sw/frame-00.png",
+      "sha256": "c31248d72f241d83e99386412695bfff327f2f1e69c779e3300640d92c66d24c"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-sw/frame-01.png",
+      "sha256": "810e98a1204fe67c655252d3c15743cb025c8c92da141d3d29daa859f8c2ffda"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-sw/frame-02.png",
+      "sha256": "5a9c07690add88cd6c3789873be740a6075c96e93645d79f409993e77b7b47f9"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-sw/frame-03.png",
+      "sha256": "2f124f0416542a00cb2e4c54b6773683008dea6e65b5b282f16bfb67f5ffb0a5"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-w/frame-00.png",
+      "sha256": "c9b1cced5779adfe764585b7a8ee8c42c23e33892f1d13fae88db8daa374a2a9"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-w/frame-01.png",
+      "sha256": "25ca45cc7ce01ee940bed9f0fe9282df8f4d11e18fc477a181ad9a6523344306"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-w/frame-02.png",
+      "sha256": "c9085bd006503a1161be8e3290d6e3518a7f7ce0b8e53ca22b28255849175db4"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-w/frame-03.png",
+      "sha256": "d7ad7282e8cb965d8b6a3da4fa7e9abc5e3aac311a28ff4e6aa3ede4a8a00c4f"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-nw/frame-00.png",
+      "sha256": "5166c7d492e0c093e787046d1baa9796d0f845524bd67707baf742994ddbb51f"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-nw/frame-01.png",
+      "sha256": "22a8d0a1031e6ea0a97ac2f05703e59f80d2897dddb7a2b4dd9be26a875a7b8a"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-nw/frame-02.png",
+      "sha256": "0568809f07284c65f29cd2ac14caaadf5275840fc5b6e177015e3978d2937c92"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-lauren8/lauren-nw/frame-03.png",
+      "sha256": "deeff46ff3981b665f8eff00ff3dcbdc2262cb280967134a4cee6da5718c1886"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-n/frame-00.png",
+      "sha256": "06acb1f600a5111920628b8a8cb5d28d606037a57eea177a3e83a70866a1431f"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-n/frame-01.png",
+      "sha256": "ce9b19b3db8bbecc59ad68e719ef3eba8855bcc83b58a69f613a3d9c7eb93ca2"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-n/frame-02.png",
+      "sha256": "d4e8bd8d97b575cb3ba753e749c7a4689de8aed2a06b9eff7a71167efafafcb2"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-n/frame-03.png",
+      "sha256": "ddf8594e2bb697a39d5d10e14f06f32bfc9b9a7efb66a47e632092ffbc611b40"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-ne/frame-00.png",
+      "sha256": "758035c6239a16166328ddadaaf04b89bed3f625e1204c900f84c1618ba43ad2"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-ne/frame-01.png",
+      "sha256": "f863735f582c2dfe64d7e6a51e8a7bc4a841cb8d39c4b50383d2af6077c7da98"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-ne/frame-02.png",
+      "sha256": "381020ebd6cb47087358ef377274bc4e626b1ec165e86e9300bdd4d7fa3ae7a0"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-ne/frame-03.png",
+      "sha256": "31f709779be41e66e45f954585b1e0fe8f5895136f18b2e06648a4b59e1956ab"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-e/frame-00.png",
+      "sha256": "1f17995273cbe5550f603fcb5e8ef9a9d44d117da9ef5703a127391d404c3485"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-e/frame-01.png",
+      "sha256": "a9ad15de1af5b34bb9ea417d422ec0861ec54d27d0f9361a3f7d342125581c9a"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-e/frame-02.png",
+      "sha256": "d9d8a0a4c77413ce5642923529e745f6caf70a5f606e56bbe7e8a1bebd28ce31"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-e/frame-03.png",
+      "sha256": "574e4f6cdbbc25fadda799f343a5942a57aa7ba4bd6c27d37f94669daebee405"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-se/frame-00.png",
+      "sha256": "191bb21ab364a874ed61591df6fe7c24481ce8ba85292c27b497e69088fda91f"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-se/frame-01.png",
+      "sha256": "4a0412c5e9eb22a274303b79e54fe4349a13f5620eb68973d50985cada19544c"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-se/frame-02.png",
+      "sha256": "1e1e101f6c0c0f179e6903a920a69874b7c9dd0df76c98f2965d4396aa6e7ddd"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-se/frame-03.png",
+      "sha256": "9e12b08bf993ee33765ad040a265f3642f7845713f097ff3bebde9b1dc616073"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-s/frame-00.png",
+      "sha256": "f4a0526a727e999a194fb9e714604d38e0b027d2fc8d8cb12cb30aa76c437293"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-s/frame-01.png",
+      "sha256": "b7767a44ed0b17c6472ffe60d2096e99c05371456fdd43d145137c093bdaff29"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-s/frame-02.png",
+      "sha256": "42e1e6a78f9f6c4841235a38baa51a2349799b9c51c82301b0c2689fbd57313c"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-s/frame-03.png",
+      "sha256": "6ffd7d136f5f886b89d938049239e252a6384d050be8892c02eb0176630f9287"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-sw/frame-00.png",
+      "sha256": "1e268e573860975d36bc583a26138ebfe70bfc7847309dd22d86eedc622ea53c"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-sw/frame-01.png",
+      "sha256": "a47a7d320430f8cea97fa043e3d4389519a50a174a2b0f7f631168b345dcdc58"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-sw/frame-02.png",
+      "sha256": "b18d64d47dea371e16aab6c975c44c2c0344ea111d136ba2002f50ea3d0e5471"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-sw/frame-03.png",
+      "sha256": "0ea74dc8ee9aa0f2f7accd1bbd22a805a79d8fbe92eaf93380d9bb7a3e4c3fca"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-w/frame-00.png",
+      "sha256": "000dbb636741c53417f93ad13944c9a37d304f6f443fbd726daf2bcf0a207e96"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-w/frame-01.png",
+      "sha256": "0235677e3d66813d96adb882197a0c5e17e80d0f8ee0fcb7c2e8518a5017f294"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-w/frame-02.png",
+      "sha256": "4e9043567463145962ed7e5a5ce71128111fb8f7133cad61ea26604e0b0f3287"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-w/frame-03.png",
+      "sha256": "24d372d36c9fe73e6fe9793d56a914c902d44437671a75b75f5d410ff0fe90f3"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-nw/frame-00.png",
+      "sha256": "aa30653ea530ffa4dd590f2e7bef07a3b2cc7230e42ee2fd2eb6625ad11401d3"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-nw/frame-01.png",
+      "sha256": "8c688c2a62c36055e8091fd8b58186025aa21697e4b8b38a478102dad77ef702"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-nw/frame-02.png",
+      "sha256": "34657a84478b2ba5b3c046cf9d70dd4b40ca0b1496b449904cf50215434db5f3"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-michaela8/normalized8/michaela-nw/frame-03.png",
+      "sha256": "156047377e906836defee44bd3e34d2e457274dc92ca1328c975ff31002ae4df"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/n/frame-00.png",
+      "sha256": "fb584418d591f71560668decbd0ded6b1296c91f43fc78083158d5cc960cbd6b"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/n/frame-01.png",
+      "sha256": "6543eb422cb780851859c807986a6f004074281a121e798cb6f25f0a41faeaf0"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/n/frame-02.png",
+      "sha256": "c1d2ac28e6bd22b890eb31a3928b5ba2002fc8da01177521c8d666711c799c07"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/n/frame-03.png",
+      "sha256": "2e92339e7af81ccb86bf656c98eb89090bcf3693fd5faed853a105e8bb617af1"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/ne/frame-00.png",
+      "sha256": "a49cf665539b87ea7a0a944e1e0e1f2e79d422d4c62852af1e0d85b4ea0df196"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/ne/frame-01.png",
+      "sha256": "d357bfbd24e89b963fc065bfcbd5324959b7591aee1dd1e5d42d73f856650ac1"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/ne/frame-02.png",
+      "sha256": "6500abebc547b76c299a74d34ef59397de7468b21c9dcb7623748f550fc475e1"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/ne/frame-03.png",
+      "sha256": "d62f6fc92c46f67c8d3d59929550716831959890b4832d6e6792e3957af50099"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/e/frame-00.png",
+      "sha256": "d6bc9c5b2dcb4a71119333a1d715132cc592ca1005c8f968bd024c4c0137dbc4"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/e/frame-01.png",
+      "sha256": "a5daf50be214c7950c1f8247e15f3e03e29e06c5818e27b3eb2a3ffdde894515"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/e/frame-02.png",
+      "sha256": "304530322ce2255582e8cb2caf373d977e474ff91945a299675f17ab68ab90c6"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/e/frame-03.png",
+      "sha256": "2887aab2b03a39c30c9e00439bbe04e4ea2d34ebf2add056a6f0476c0153c504"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/se/frame-00.png",
+      "sha256": "16814dbefab3135065896c400ee7370b9077afcb17f4a98faca0e5462dcd434e"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/se/frame-01.png",
+      "sha256": "78c4b9203081931edec44c21264ad0d6a51fbbdde10e64b489b09e0b4d5817cc"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/se/frame-02.png",
+      "sha256": "99bbb1e566f375336d828004226137593c2224fe133f30c0825ff57b9b1bb8fe"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/se/frame-03.png",
+      "sha256": "7e0cebff48d3c944971234ab279b4c5bdeebb61ee0c11974da8dd1dd32c21e1b"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/s/frame-00.png",
+      "sha256": "d5bc759d49bb20bf3b137782b3292f5a6506ff069fa70bfd624bdf675070fa3b"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/s/frame-01.png",
+      "sha256": "27eef7bb0a2218d8ec922f547b5b279db0d80b23ce99a0cd32d5d4008749c983"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/s/frame-02.png",
+      "sha256": "38a1a50a911260105f48368e92a24a27c78bf5beafcc0fc36628ae282e5a2f0c"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/s/frame-03.png",
+      "sha256": "2ec5a204dfbdaf585d24bc703b6cd4acb50c3815856491c2c9915223cfbcb4a1"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/sw/frame-00.png",
+      "sha256": "212153223254b6cc06178909993c206903affe3e93e079f4778e967ca4afaf05"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/sw/frame-01.png",
+      "sha256": "5e552f1b98a77fa90a652af54e1d91dd1781b36e1a6af3388a386bbaf063f93d"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/sw/frame-02.png",
+      "sha256": "8a4cb56c0ac816a41fa4ee90d1f097eab9a293292af81cd4f64f9705bb99adba"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/sw/frame-03.png",
+      "sha256": "32565c2b65bee03ecb6fd5a5507769bd7bf7616f05d5d4e1d148c2a19c73c9df"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/w/frame-00.png",
+      "sha256": "dde5ce89e94f587aba8579f871e37ed73d79a91dc86e33ec472e290626192de9"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/w/frame-01.png",
+      "sha256": "0b2a5c8563668358abbf8e8659cc96de2986c2f7606832ab5b8decc7e88101b2"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/w/frame-02.png",
+      "sha256": "69a2bb8a82c1599ad748bc8f97a0c309cda37081aaaa2ee4906008a06b8aeafb"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/w/frame-03.png",
+      "sha256": "6bf2b292fec11de071f22630ebe4892bcdf2bb8d8cdb4f69cff309caee0c18bf"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/nw/frame-00.png",
+      "sha256": "1782be3e06e045d3fafdc45261e02152d3e222a6329cf65ce1f4db7505674c6d"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/nw/frame-01.png",
+      "sha256": "b8cb53f079472c7de5fc48ea48765cc266adf172570a531c9661a60c61d65344"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/nw/frame-02.png",
+      "sha256": "f1f440ce23cdb2810d2570a83f3156ae0d71e88ce46c90f1bfeb1fe8a979d893"
+    },
+    {
+      "file": "StoryWorld-rigging/hybrid-hero-idle-seoha8/nw/frame-03.png",
+      "sha256": "55b5d4dd373ed89a7495eaeb5bb45cb948457ee7b339433c8a19345ee1736324"
+    }
+  ]
+}

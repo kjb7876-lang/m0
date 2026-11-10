@@ -1,0 +1,48 @@
+{
+  "originalFiles": 1946,
+  "missingOriginalFiles": [],
+  "unchangedOriginalFiles": 1939,
+  "changedOriginalFiles": [
+    {
+      "path": "hospital-three-pc/README-먼저읽기.txt",
+      "originalSHA256": "908e3c273d84d781b6f15b8e2bdb89ffdf5f1605b4931b99f3c8dfb46e495514",
+      "currentSHA256": "136edc823a34a6cab6c07ffe17b291635a2ee0187c99b9c7ba743a93afa55d25"
+    },
+    {
+      "path": "hospital-three-pc/site/dist/phase1.js",
+      "originalSHA256": "ae357ad7fb450dff99cff0c94bd610150693757e6f2c5cb31589209d2913c68c",
+      "currentSHA256": "17457e74e455f2192e6b909786a7ea3648839a2408132a187085e79921502a46"
+    },
+    {
+      "path": "hospital-three-pc/site/hospital-direct-test.js",
+      "originalSHA256": "aefbe1c06dc0950c02c99b61f67b879b3d810e1352c40bffe7edb1a87dc1158c",
+      "currentSHA256": "ad701f8d51954fd76700fa91247319fe9a9bdb5ca76e573dee68bc2d03b9eaec"
+    },
+    {
+      "path": "hospital-three-pc/site/hospital-improvements-a5.js",
+      "originalSHA256": "e01ed3b42c59f81c5b3de0c7eda3ab1e1a06ef851074e82e962834b632c017fe",
+      "currentSHA256": "566368cc35fa62ec4f79b4c152cc7aff7f21f994c5b56225e3a38dd76678225c"
+    },
+    {
+      "path": "hospital-three-pc/site/hospital-pc-test.js",
+      "originalSHA256": "855b5697cf34b670ac2e333e0493d467f57fc3b5c2aed3341577db83a118274a",
+      "currentSHA256": "0998254e684a456a4a7de6f6afce6d5b3f16faf440e537abd70203bdf3fda2ba"
+    },
+    {
+      "path": "hospital-three-pc/site/index.html",
+      "originalSHA256": "d3a42600e95415afd0302f6b5c4fc7ff4d4414cafddaea5c5c2c331c9ec8df85",
+      "currentSHA256": "67cade9364bd11daefc3d3dd2031f5927103cc8ef35a51e4c9438ea6024e3416"
+    },
+    {
+      "path": "hospital-three-pc/site/web-manifest-r62.json",
+      "originalSHA256": "732d92f77d8f6058084ad5dd0d9b6e7ecb5e73722df466b22f05df16594dd1b2",
+      "currentSHA256": "4597fbbd6b1a8370f994fbe95c73d3b7aa0b4ecd4c36c074ec94a353e91860c8"
+    }
+  ],
+  "originalAssetsByteIdentical": 1772,
+  "originalAudioByteIdentical": 276,
+  "embeddedStoryJSONUnchangedFromV1": true,
+  "selectedPNGDecodeAndHashChecks": 7,
+  "selectedAssetsUnchangedFromV1": true,
+  "mapGuideDecoded": true
+}

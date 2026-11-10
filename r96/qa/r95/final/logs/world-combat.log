@@ -1,0 +1,24 @@
+{ ok: true }
+GO false
+{
+  open: true,
+  mapId: 'dist02',
+  layer: 'STORY',
+  selected: 'normal',
+  confirmed: null,
+  cancelled: false,
+  transitions: 0
+}
+STATE {
+  zone: 'dist02',
+  state: {
+    version: 1,
+    phase: 'route',
+    route: null,
+    rallied: [],
+    doorStoryDone: false,
+    exitStoryDone: false
+  },
+  player: { x: 85.50796180365968, y: 60.300636944292776 },
+  enemies: 53
+}

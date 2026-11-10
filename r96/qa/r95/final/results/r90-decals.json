@@ -1,0 +1,330 @@
+{
+  "schema": "r90-decals-cpu/v1",
+  "method": "Node VM native game and DrawCommands; Image/DOM/WebGL readiness stubs. No browser or GPU.",
+  "sourceMode": "applied-runtime",
+  "sourceSHA256": "691b36170f191cb768379a18c087ef5e6e2ecfd0280b8fbdcc254f1317ef82dc",
+  "assistance": [
+    "hospitalDirectStart API in isolated VM",
+    "synthetic hazards/tells restored after checks",
+    "camera positioned at one generated mark",
+    "native Image/DOM/renderer readiness stubs"
+  ],
+  "checks": [
+    {
+      "name": "Native hospital fixture contains three doors and eleven original dressing records",
+      "passed": true,
+      "detail": {
+        "doors": 3,
+        "dressing": 11,
+        "zone": "ep1a08"
+      }
+    },
+    {
+      "name": "Hospital fixed seed plan is nonempty and bounded to 24",
+      "passed": true,
+      "detail": {
+        "count": 24
+      }
+    },
+    {
+      "name": "Plan rebuild after reset and fresh room identity reproduces identical geometry plan",
+      "passed": true
+    },
+    {
+      "name": "Changed arrival entry, moving prop and objective do not rearrange fixed zone plan; unsafe mark hides",
+      "passed": true,
+      "detail": {
+        "same": true,
+        "hidden": true
+      }
+    },
+    {
+      "name": "Plans leave protected doors, all seven guidance marks, props and portals clear",
+      "passed": true,
+      "detail": {
+        "protectedPoints": 43,
+        "guidance": 7,
+        "visibleEligible": 24,
+        "pointsClear": true,
+        "doorsClear": true,
+        "collisionClear": true
+      }
+    },
+    {
+      "name": "Placement leaves native serialized gameplay, props identity and door records unchanged",
+      "passed": true,
+      "detail": {
+        "equal": true,
+        "propsIdentity": true,
+        "doors": true
+      }
+    },
+    {
+      "name": "All decals yield to native hazards, tell timers and warning stage",
+      "passed": true,
+      "detail": {
+        "hazard": true,
+        "tell": true,
+        "phase": true
+      }
+    },
+    {
+      "name": "Native DrawCommands records only reused ground images; setting off records none",
+      "passed": true,
+      "detail": {
+        "on": 1,
+        "off": 0,
+        "ground": true,
+        "paths": [
+          "./assets/rc46/impacts/player-blood.webp"
+        ],
+        "one": {
+          "owner": {
+            "id": "r90:floor:ep1a08:0",
+            "kind": "ground",
+            "x": 33.5,
+            "y": 35.5,
+            "groundAligned": true,
+            "r90Decal": true,
+            "presentationOnly": true,
+            "alive": false,
+            "sourcePath": "assets/rc46/impacts/player-blood.webp"
+          },
+          "kind": "image"
+        }
+      }
+    },
+    {
+      "name": "Floor images are below R89 lights and warning/actor passes with depth reading only",
+      "passed": true,
+      "detail": {
+        "mask": 4,
+        "order": -1200,
+        "depthTest": true,
+        "depthWrite": false,
+        "offset": true
+      }
+    },
+    {
+      "name": "Existing image bytes match SHA256 measured from preserved five-part baseline",
+      "passed": true,
+      "detail": {
+        "bytes": 36084,
+        "sha256": "3c7b77495d0bcd47485d7abef78ac322cf589718ca77e667346e6d25a82b2acb"
+      }
+    }
+  ],
+  "passed": true,
+  "plan": [
+    {
+      "x": 33.5,
+      "y": 35.5,
+      "radius": 0.46799999999999997,
+      "angle": 2.6878070480712677,
+      "alpha": 0.26
+    },
+    {
+      "x": 11.5,
+      "y": 91.5,
+      "radius": 0.488,
+      "angle": 5.585053606381854,
+      "alpha": 0.2
+    },
+    {
+      "x": 72.5,
+      "y": 95.5,
+      "radius": 0.434,
+      "angle": 5.899212871740834,
+      "alpha": 0.24000000000000002
+    },
+    {
+      "x": 11.5,
+      "y": 42.5,
+      "radius": 0.44,
+      "angle": 5.270894341022875,
+      "alpha": 0.26
+    },
+    {
+      "x": 62.5,
+      "y": 40.5,
+      "radius": 0.488,
+      "angle": 3.5953782591083185,
+      "alpha": 0.2
+    },
+    {
+      "x": 68.5,
+      "y": 48.5,
+      "radius": 0.476,
+      "angle": 0.767944870877505,
+      "alpha": 0.2
+    },
+    {
+      "x": 61.5,
+      "y": 31.5,
+      "radius": 0.446,
+      "angle": 6.213372137099814,
+      "alpha": 0.24000000000000002
+    },
+    {
+      "x": 59.5,
+      "y": 107.5,
+      "radius": 0.424,
+      "angle": 3.4033920413889422,
+      "alpha": 0.26
+    },
+    {
+      "x": 40.5,
+      "y": 99.5,
+      "radius": 0.492,
+      "angle": 0.8028514559173915,
+      "alpha": 0.2
+    },
+    {
+      "x": 68.5,
+      "y": 95.5,
+      "radius": 0.456,
+      "angle": 1.0122909661567112,
+      "alpha": 0.26
+    },
+    {
+      "x": 84.5,
+      "y": 44.5,
+      "radius": 0.456,
+      "angle": 3.193952531149623,
+      "alpha": 0.26
+    },
+    {
+      "x": 61.5,
+      "y": 48.5,
+      "radius": 0.35,
+      "angle": 2.076941809873252,
+      "alpha": 0.22
+    },
+    {
+      "x": 59.5,
+      "y": 110.5,
+      "radius": 0.472,
+      "angle": 6.2482787221397,
+      "alpha": 0.24000000000000002
+    },
+    {
+      "x": 79.5,
+      "y": 48.5,
+      "radius": 0.504,
+      "angle": 0.017453292519943295,
+      "alpha": 0.2
+    },
+    {
+      "x": 48.5,
+      "y": 102.5,
+      "radius": 0.41000000000000003,
+      "angle": 5.323254218582705,
+      "alpha": 0.28
+    },
+    {
+      "x": 68.5,
+      "y": 26.5,
+      "radius": 0.332,
+      "angle": 2.600540585471551,
+      "alpha": 0.24000000000000002
+    },
+    {
+      "x": 73.5,
+      "y": 107.5,
+      "radius": 0.4,
+      "angle": 3.9269908169872414,
+      "alpha": 0.28
+    },
+    {
+      "x": 25.5,
+      "y": 107.5,
+      "radius": 0.382,
+      "angle": 4.694935687864747,
+      "alpha": 0.24000000000000002
+    },
+    {
+      "x": 84.5,
+      "y": 59.5,
+      "radius": 0.484,
+      "angle": 0.9599310885968813,
+      "alpha": 0.24000000000000002
+    },
+    {
+      "x": 61.5,
+      "y": 23.5,
+      "radius": 0.512,
+      "angle": 4.293509959906051,
+      "alpha": 0.24000000000000002
+    },
+    {
+      "x": 28.5,
+      "y": 98.5,
+      "radius": 0.46199999999999997,
+      "angle": 0.7853981633974483,
+      "alpha": 0.2
+    },
+    {
+      "x": 11.5,
+      "y": 55.5,
+      "radius": 0.34400000000000003,
+      "angle": 3.6477381366681487,
+      "alpha": 0.26
+    },
+    {
+      "x": 11.5,
+      "y": 95.5,
+      "radius": 0.44,
+      "angle": 0.5235987755982988,
+      "alpha": 0.28
+    },
+    {
+      "x": 62.5,
+      "y": 53.5,
+      "radius": 0.392,
+      "angle": 1.9896753472735356,
+      "alpha": 0.2
+    }
+  ],
+  "details": {
+    "excluded": {
+      "protectedPoints": 43,
+      "guidance": 7,
+      "visibleEligible": 24,
+      "pointsClear": true,
+      "doorsClear": true,
+      "collisionClear": true
+    },
+    "draw": {
+      "on": 1,
+      "off": 0,
+      "ground": true,
+      "paths": [
+        "./assets/rc46/impacts/player-blood.webp"
+      ],
+      "one": {
+        "owner": {
+          "id": "r90:floor:ep1a08:0",
+          "kind": "ground",
+          "x": 33.5,
+          "y": 35.5,
+          "groundAligned": true,
+          "r90Decal": true,
+          "presentationOnly": true,
+          "alive": false,
+          "sourcePath": "assets/rc46/impacts/player-blood.webp"
+        },
+        "kind": "image"
+      }
+    },
+    "policy": {
+      "mask": 4,
+      "order": -1200,
+      "depthTest": true,
+      "depthWrite": false,
+      "offset": true
+    }
+  },
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false
+}

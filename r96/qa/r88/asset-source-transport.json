@@ -1,0 +1,70 @@
+{
+  "parts": [
+    {
+      "name": "StoryWorld_FINAL42runtimePART09_20261023.zip",
+      "bytes": 5802536,
+      "sha256": "1e81b92c1d32cc0ff004b63bc7653a2e4cc07ed171aacc3a342d9cb66749e018",
+      "crcVerified": true
+    },
+    {
+      "name": "StoryWorld_FINAL42runtimePART04_20261023.zip",
+      "bytes": 8668021,
+      "sha256": "a4523e2394b609a3ec03ddeff6ee46ed367a8adb7cdbb9bdde1866d2deb90e69",
+      "crcVerified": true
+    },
+    {
+      "name": "StoryWorld_FINAL42runtimePART01_20261023.zip",
+      "bytes": 9022830,
+      "sha256": "d269301edebff3a578683f5854e10333b607ae6eeac3499bfcf0129ed35b7ee6",
+      "crcVerified": true
+    },
+    {
+      "name": "StoryWorld_FINAL42runtimePART03_20261023.zip",
+      "bytes": 9179527,
+      "sha256": "a5dcd7c8296bde6ec094d75acf3bce730d33b52b2006b35cbd70465616f65f00",
+      "crcVerified": true
+    },
+    {
+      "name": "StoryWorld_FINAL42runtimePART02_20261023.zip",
+      "bytes": 9221603,
+      "sha256": "13d831b4d018f11d8dcfe99e71139fa96430f694ce84c9e3a654d159a0595446",
+      "crcVerified": true
+    },
+    {
+      "name": "StoryWorld_FINAL42runtimePART07_20261023.zip",
+      "bytes": 9221998,
+      "sha256": "8faffd2e8e58f31dc13d0472be8b4ab9fed99a66a13fb182122b195f49151650",
+      "crcVerified": true
+    },
+    {
+      "name": "StoryWorld_FINAL42runtimePART06_20261023.zip",
+      "bytes": 9245872,
+      "sha256": "77b8ee9ea78ad7e2cecc2b1f8dcfaa3afc344aca293688ed884dfc42e7d7c79a",
+      "crcVerified": true
+    },
+    {
+      "name": "StoryWorld_FINAL42runtimePART05_20261023.zip",
+      "bytes": 9277318,
+      "sha256": "64ab6a9c89398785fb5d2f5770352db2140e875017b84e23587e7e4df96627aa",
+      "crcVerified": true
+    },
+    {
+      "name": "StoryWorld_FINAL42runtimePART08_20261023.zip",
+      "bytes": 9323999,
+      "sha256": "32e2ee5d61ba6a6062d29ae8b3687c689d904fd2490a42917eb7bd16b8502541",
+      "crcVerified": true
+    }
+  ],
+  "uniqueFiles": 852,
+  "noAlternativeRoutes": true,
+  "schema": "storyworld.final42-source-transfer/v1",
+  "compressedBytes": 78963704,
+  "authoritativeInventory": {
+    "checkedRuntimeRows": 806,
+    "mismatches": [],
+    "authoritativeExternalIndexVerified": true
+  },
+  "meaning": "Actual authenticated transfer and archive/file verification only; not gameplay/browser/GPU validation",
+  "browserVerified": false,
+  "GPUVerified": false
+}

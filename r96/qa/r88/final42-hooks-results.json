@@ -1,0 +1,659 @@
+{
+  "schema": "storyworld.r88-final42-native-hooks-check/v1",
+  "checks": [
+    {
+      "name": "Actual delivered loader installs the42 native-event hooks and pure player",
+      "passed": true
+    },
+    {
+      "name": "Every supplied effect has a truthful unique native-event mapping",
+      "passed": true
+    },
+    {
+      "name": "No seven-pillar or72-seal gameplay objective was fabricated",
+      "passed": true
+    },
+    {
+      "name": "The deferred procedural80 package remains absent",
+      "passed": true
+    },
+    {
+      "name": "R87 medical/root physics adapter delegates its images instead of loading a second3atlases",
+      "passed": true
+    },
+    {
+      "name": "A confirmed native scalpel hit admits exactly the215 replacement",
+      "passed": true,
+      "detail": {
+        "result": "hit",
+        "hpLoss": 6.216000000000008
+      }
+    },
+    {
+      "name": "Scalpel replacement is a real supplied bitmap draw with no old R87 quad",
+      "passed": true
+    },
+    {
+      "name": "214 is attached to an actual native medical syringe projectile",
+      "passed": true
+    },
+    {
+      "name": "Drawing214 does not alter projectile damage radius velocity position or lifetime",
+      "passed": true
+    },
+    {
+      "name": "A dead native syringe cannot draw214",
+      "passed": true
+    },
+    {
+      "name": "The actual native poison lifecycle emits213 once at its committed impact",
+      "passed": true,
+      "detail": {
+        "emissions": [
+          {
+            "kind": "r87-native-bridge",
+            "id": 213,
+            "zone": "ep1a08",
+            "at": 0.25,
+            "medicalKind": "poison"
+          }
+        ],
+        "poisonReady": {
+          "revision": "hospital-poison-art-r45",
+          "asset": "assets/vfx/hospital-r45/poison-atlas-r45.png",
+          "ready": true,
+          "generatedTransparentVFX": true,
+          "stages": [
+            "native warning",
+            "native vial flight",
+            "liquid splash",
+            "wet foam pool",
+            "rising vapor",
+            "smooth decay"
+          ],
+          "damageChanged": false,
+          "collisionChanged": false,
+          "metrics": {
+            "poisonDraws": 0,
+            "splashDraws": 0,
+            "poolDraws": 0,
+            "vaporDraws": 0,
+            "missingArtDraws": 0
+          },
+          "browser": false,
+          "GPU": false
+        },
+        "nativeAudit": [
+          {
+            "kind": "clear",
+            "reason": "enterRegion",
+            "epoch": 1,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "restoreSave",
+            "epoch": 2,
+            "at": 0
+          },
+          {
+            "kind": "confirmed-medical-contact",
+            "castId": null,
+            "outcome": "hit",
+            "actualHP": 6.216000000000008,
+            "point": null,
+            "pointBasis": "native admitted field contact",
+            "genericPXFRemoved": 1,
+            "at": 0
+          }
+        ],
+        "cancelled": false,
+        "ownerAlive": true
+      }
+    },
+    {
+      "name": "251 uses the native warning footprint instead of its image as a collision mask",
+      "passed": true
+    },
+    {
+      "name": "The warning image is removed at the native active stage",
+      "passed": true
+    },
+    {
+      "name": "Actual mb-dist02 committed impact renders259 as a ground decal at its unchanged target without altering health or progress",
+      "passed": true,
+      "detail": {
+        "fixture": "Actual native CAST5.prepare(mb-dist02,ranged), committed hazard impact via tickHazards, safe player position and controlled native time; actual groundImage wrapper/DrawCommands capture, not GPU or natural battle.",
+        "owner": "mb-dist02",
+        "castId": 100000001,
+        "hazardId": 200000001,
+        "nativeType": "story-pattern",
+        "impactEvent": {
+          "castId": 100000001,
+          "rowId": 200000001,
+          "owner": "dist02:mb-dist02",
+          "kind": "impact",
+          "at": 2.21,
+          "artPath": "assets/vfx/bosses/v312/mb-dist02.webp"
+        },
+        "hitCount": 1,
+        "target": {
+          "x": 15.46185622324928,
+          "y": 32.997334592771544
+        },
+        "unchangedTarget": true,
+        "hp": 777,
+        "hpAfter": 777,
+        "progressBefore": "{\"STORY\":{\"hub\":true,\"dist00\":true,\"dist01\":true,\"dist02\":true,\"dist03\":true,\"dist04\":true,\"dist05\":true,\"dist06\":true},\"DREAM\":{}}",
+        "progressAfter": "{\"STORY\":{\"hub\":true,\"dist00\":true,\"dist01\":true,\"dist02\":true,\"dist03\":true,\"dist04\":true,\"dist05\":true,\"dist06\":true},\"DREAM\":{}}",
+        "emissions": 1,
+        "slots": [
+          {
+            "handle": "final42-r88-slot-5",
+            "id": "F259",
+            "sourceIndex": 259,
+            "key": null,
+            "entityId": null,
+            "x": 15.46185622324928,
+            "y": 32.997334592771544,
+            "age": 0.08000000000000007,
+            "clip": null,
+            "layer": "ground"
+          }
+        ],
+        "groundOwners": [
+          {
+            "id": "final42-r88:final42-r88-slot-5:F259",
+            "kind": "effect",
+            "x": 15.46185622324928,
+            "y": 32.997334592771544,
+            "groundAligned": true,
+            "r88Final42": true,
+            "r88EffectID": "F259",
+            "r88EffectSource": "storyworld-259-drag-remnant",
+            "r88SourceIndex": 259,
+            "r88Frame": 0,
+            "r88Clip": "main",
+            "r88Layer": "ground",
+            "r88Pivot": [
+              0.5,
+              0.5
+            ],
+            "nativeOwner": null,
+            "r88AtlasPath": "assets/final42-r88/effects/259/atlas.png"
+          }
+        ],
+        "overlayRemnants": 0
+      }
+    },
+    {
+      "name": "Native dodges and parries still admit no root binding",
+      "passed": true
+    },
+    {
+      "name": "The preserved root hit still blocks walking for2.2seconds",
+      "passed": true,
+      "detail": {
+        "result": "hit",
+        "blocked": true,
+        "b": {
+          "owner": "dist00:dist00-boss",
+          "start": 2.29,
+          "until": 4.49,
+          "pulses": 0,
+          "remaining": 5.902548387096775
+        }
+      }
+    },
+    {
+      "name": "The preserved root mechanic uses one99 slot without an old atlas duplicate",
+      "passed": true
+    },
+    {
+      "name": "Native S blink still escapes the root and releases its painted cage",
+      "passed": true,
+      "detail": {
+        "moved": true,
+        "b": null
+      }
+    },
+    {
+      "name": "Root DOT remains exactly four native pulses with the original0.6x total budget",
+      "passed": true,
+      "detail": {
+        "dots": [
+          {
+            "value": 1.4756370967741939,
+            "result": "hit"
+          },
+          {
+            "value": 1.4756370967741939,
+            "result": "hit"
+          },
+          {
+            "value": 1.4756370967741939,
+            "result": "hit"
+          },
+          {
+            "value": 1.4756370967741939,
+            "result": "hit"
+          }
+        ],
+        "paused": true,
+        "b": null
+      }
+    },
+    {
+      "name": "Modal pause does not advance the native root or painted clock",
+      "passed": true
+    },
+    {
+      "name": "An actual native shock status attaches243 without changing health",
+      "passed": true
+    },
+    {
+      "name": "243 is removed when its actual native status expires",
+      "passed": true
+    },
+    {
+      "name": "Native-shaped gold and silver strike admissions select245 and246",
+      "passed": true
+    },
+    {
+      "name": "Painted dance presentation never changes HP or campaign progress",
+      "passed": true
+    },
+    {
+      "name": "Repeated drawing does not restart or double-admit a native dance effect",
+      "passed": true
+    },
+    {
+      "name": "131 is tied to real dist05 post-narrative admission, without seven fake pillar events",
+      "passed": true
+    },
+    {
+      "name": "Narrative presentation does not add a completion condition or mutate campaign progress",
+      "passed": true
+    },
+    {
+      "name": "Native save restoration clears temporary root and visual attachments",
+      "passed": true
+    },
+    {
+      "name": "The V11 save namespace remains in use for the purely visual V12 update",
+      "passed": true
+    },
+    {
+      "name": "No native runtime error was recorded",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "method": "Actual Node VM native functions and drawn command capture. Medical/status/projectile/dance and native authored swamp-impact fixtures are explicitly scripted; no natural battle or GPU claim.",
+  "hooks": {
+    "revision": "R88-FINAL42-native-events",
+    "metrics": {
+      "story": 3,
+      "contacts": 0,
+      "auras": 4,
+      "medical": 4,
+      "projectiles": 1,
+      "warnings": 1,
+      "swampImpacts": 1,
+      "deaths": 0,
+      "portals": 0,
+      "dances": 2,
+      "nativeImagesSuppressed": 1
+    },
+    "events": [
+      {
+        "kind": "clear",
+        "id": 0,
+        "zone": "hub",
+        "at": 0,
+        "reason": "restoreSave"
+      },
+      {
+        "kind": "clear",
+        "id": 0,
+        "zone": "ep1a08",
+        "at": 0,
+        "reason": "enterRegion"
+      },
+      {
+        "kind": "clear",
+        "id": 0,
+        "zone": "ep1a08",
+        "at": 0,
+        "reason": "identity"
+      },
+      {
+        "kind": "actual canonical narrative scene admission",
+        "id": 81,
+        "zone": "ep1a08",
+        "at": 0,
+        "owner": null,
+        "sceneKey": "STORY:ep1a08:pre:r75"
+      },
+      {
+        "kind": "R87 confirmed medical scalpel",
+        "id": 215,
+        "zone": "ep1a08",
+        "at": 0,
+        "owner": "ep1a08:a08-o1",
+        "sceneKey": null
+      },
+      {
+        "kind": "r87-native-bridge",
+        "id": 215,
+        "zone": "ep1a08",
+        "at": 0,
+        "medicalKind": "scalpel"
+      },
+      {
+        "kind": "native-status-active",
+        "id": 249,
+        "zone": "ep1a08",
+        "at": 0,
+        "key": "disease"
+      },
+      {
+        "kind": "native-status-active",
+        "id": 247,
+        "zone": "ep1a08",
+        "at": 0,
+        "key": "bleed"
+      },
+      {
+        "kind": "R87 confirmed medical poison",
+        "id": 213,
+        "zone": "ep1a08",
+        "at": 0.25,
+        "owner": "ep1a08:a08-o1",
+        "sceneKey": null
+      },
+      {
+        "kind": "r87-native-bridge",
+        "id": 213,
+        "zone": "ep1a08",
+        "at": 0.25,
+        "medicalKind": "poison"
+      },
+      {
+        "kind": "clear",
+        "id": 0,
+        "zone": "dist02",
+        "at": 0.25,
+        "reason": "identity"
+      },
+      {
+        "kind": "actual native swamp hazard impact",
+        "id": 261,
+        "zone": "dist02",
+        "at": 2.21,
+        "owner": null,
+        "sceneKey": null
+      },
+      {
+        "kind": "actual native swamp grasp arrival",
+        "id": 111,
+        "zone": "dist02",
+        "at": 2.21,
+        "owner": null,
+        "sceneKey": null
+      },
+      {
+        "kind": "actual native swamp impact ground remnant",
+        "id": 259,
+        "zone": "dist02",
+        "at": 2.21,
+        "owner": null,
+        "sceneKey": null
+      },
+      {
+        "kind": "clear",
+        "id": 0,
+        "zone": "dist00",
+        "at": 2.29,
+        "reason": "identity"
+      },
+      {
+        "kind": "r87-native-bridge",
+        "id": 99,
+        "zone": "dist00",
+        "at": 2.29,
+        "medicalKind": "bind"
+      },
+      {
+        "kind": "r87-native-bridge",
+        "id": 99,
+        "zone": "dist00",
+        "at": 2.99,
+        "medicalKind": "bind"
+      },
+      {
+        "kind": "native-status-active",
+        "id": 247,
+        "zone": "dist00",
+        "at": 2.99,
+        "key": "bleed"
+      },
+      {
+        "kind": "native-status-active",
+        "id": 243,
+        "zone": "dist00",
+        "at": 5.239999999999992,
+        "key": "shock"
+      },
+      {
+        "kind": "native goldenThreadR72",
+        "id": 245,
+        "zone": "dist00",
+        "at": 9.239999999999991,
+        "owner": null,
+        "sceneKey": null
+      },
+      {
+        "kind": "native threadSlashR63",
+        "id": 246,
+        "zone": "dist00",
+        "at": 9.239999999999991,
+        "owner": null,
+        "sceneKey": null
+      },
+      {
+        "kind": "clear",
+        "id": 0,
+        "zone": "dist05",
+        "at": 9.239999999999991,
+        "reason": "identity"
+      },
+      {
+        "kind": "actual canonical narrative scene admission",
+        "id": 131,
+        "zone": "dist05",
+        "at": 9.239999999999991,
+        "owner": null,
+        "sceneKey": "STORY:dist05:post:r75"
+      },
+      {
+        "kind": "clear",
+        "id": 0,
+        "zone": "dist05",
+        "at": 9.239999999999991,
+        "reason": "restoreSave"
+      },
+      {
+        "kind": "clear",
+        "id": 0,
+        "zone": "dist05",
+        "at": 9.239999999999991,
+        "reason": "enterRegion"
+      },
+      {
+        "kind": "clear",
+        "id": 0,
+        "zone": "dist05",
+        "at": 9.239999999999991,
+        "reason": "identity"
+      },
+      {
+        "kind": "actual canonical narrative scene admission",
+        "id": 131,
+        "zone": "dist05",
+        "at": 9.239999999999991,
+        "owner": null,
+        "sceneKey": "STORY:dist05:post:r75"
+      }
+    ],
+    "scope": "PC single-player STORY; native combat and progression unchanged",
+    "nativeDamageChanged": false,
+    "nativeWarningGeometryChanged": false,
+    "newChargeMovement": false,
+    "newPillarObjectiveController": false,
+    "oldR87AtlasesReplaced": [
+      99,
+      213,
+      215
+    ],
+    "statusKeys": {
+      "dark": 90,
+      "corruption": 91,
+      "harvest": 92,
+      "pollution": 93,
+      "fire": 94,
+      "burn": 94,
+      "frost": 95,
+      "chill": 95,
+      "shock": 96,
+      "charm": 97,
+      "weakness": 98,
+      "bind": 99,
+      "disease": 100,
+      "bleed": 101,
+      "curse": 90,
+      "poison": 93
+    },
+    "auraKeys": {
+      "shock": 243,
+      "frost": 244,
+      "chill": 244,
+      "bleed": 247,
+      "charm": 248,
+      "disease": 249,
+      "weakness": 250
+    },
+    "storyPolicies": {
+      "81": {
+        "part": "pre"
+      },
+      "110": {
+        "part": "post"
+      },
+      "112": {
+        "part": "pre"
+      },
+      "113": {
+        "part": "pre"
+      },
+      "114": {
+        "part": "post"
+      },
+      "115": {
+        "part": "pre"
+      },
+      "116": {
+        "part": "pre"
+      },
+      "117": {
+        "part": "post"
+      },
+      "130": {
+        "part": "post"
+      },
+      "131": {
+        "part": "post"
+      },
+      "132": {
+        "part": "any"
+      }
+    },
+    "browserVerified": false,
+    "GPUVerified": false
+  },
+  "runtime": {
+    "schema": "storyworld.final42-runtime/v1",
+    "effectCount": 42,
+    "clock": 9.239999999999991,
+    "generation": 9,
+    "budgetBytes": 67108864,
+    "residentBytes": 20185088,
+    "maxAtlases": 8,
+    "maxInstances": 16,
+    "maxDirectInstances": 24,
+    "resident": [
+      {
+        "path": "assets/final42-r88/effects/251/atlas.png",
+        "state": "ready",
+        "bytes": 6553600,
+        "used": 9.239999999999991,
+        "lastDraw": null
+      },
+      {
+        "path": "assets/final42-r88/effects/101/atlas.png",
+        "state": "ready",
+        "bytes": 4194304,
+        "used": 9.239999999999991,
+        "lastDraw": null
+      },
+      {
+        "path": "assets/final42-r88/effects/131/atlas.png",
+        "state": "ready",
+        "bytes": 9437184,
+        "used": 9.239999999999991,
+        "lastDraw": null
+      }
+    ],
+    "active": [
+      {
+        "handle": "final42-r88-slot-13",
+        "id": "F131",
+        "sourceIndex": 131,
+        "key": null,
+        "entityId": null,
+        "x": 15,
+        "y": 13,
+        "age": 0,
+        "clip": null,
+        "layer": "overlay"
+      }
+    ],
+    "metrics": {
+      "loads": 29,
+      "decoded": 29,
+      "releases": 26,
+      "failed": 0,
+      "lateLoads": 0,
+      "draws": 11,
+      "played": 9,
+      "attached": 4,
+      "dropped": 1,
+      "budgetDrops": 0,
+      "offscreenDrops": 0,
+      "invalidCallbacks": 0,
+      "completed": 1,
+      "sceneClears": 0,
+      "highWaterBytes": 66846720,
+      "highWaterInstances": 3
+    },
+    "noIndependentAnimationLoop": true,
+    "procedural80Loaded": false,
+    "browserVerified": false,
+    "GPUVerified": false,
+    "naturalPlayVerified": false
+  },
+  "passed": true
+}

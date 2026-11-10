@@ -1,0 +1,1180 @@
+{
+  "schema": "r81-presentation-cpu/v1",
+  "checks": [
+    {
+      "name": "Actual Three geometry retains native wall-top height and floor-safe void backing",
+      "passed": true,
+      "detail": {
+        "revision": "186",
+        "roofY": 2.7049999237060547
+      }
+    },
+    {
+      "name": "New backing never paints a walkable cell as an exterior tile",
+      "passed": true,
+      "detail": {
+        "rects": 58,
+        "internalVoidCells": 1809
+      }
+    },
+    {
+      "name": "Giant hospital backing is hidden; replacement has no grid texture",
+      "passed": true
+    },
+    {
+      "name": "Static frame reuses void geometry and material",
+      "passed": true,
+      "detail": {
+        "resources": 2
+      }
+    },
+    {
+      "name": "Viewport reallocation disposes old backing geometry",
+      "passed": true
+    },
+    {
+      "name": "Pinned camera matrix agrees with shared input projection left-entry 1280",
+      "passed": true,
+      "detail": {
+        "sx": 281.59999999999934,
+        "sy": 374.39999999999964,
+        "expected": {
+          "x": 281.60000000000014,
+          "y": 374.40000000000003
+        }
+      }
+    },
+    {
+      "name": "Hero remains clickable inside safe viewport left-entry 1280",
+      "passed": true,
+      "detail": {
+        "sx": 281.59999999999934,
+        "sy": 374.39999999999964
+      }
+    },
+    {
+      "name": "Pinned camera matrix agrees with shared input projection left-entry 1920",
+      "passed": true,
+      "detail": {
+        "sx": 422.39999999999975,
+        "sy": 561.6000000000007,
+        "expected": {
+          "x": 422.39999999999975,
+          "y": 561.6
+        }
+      }
+    },
+    {
+      "name": "Hero remains clickable inside safe viewport left-entry 1920",
+      "passed": true,
+      "detail": {
+        "sx": 422.39999999999975,
+        "sy": 561.6000000000007
+      }
+    },
+    {
+      "name": "Pinned camera matrix agrees with shared input projection left-entry 2560",
+      "passed": true,
+      "detail": {
+        "sx": 563.2000000000005,
+        "sy": 561.5999999999997,
+        "expected": {
+          "x": 563.2000000000003,
+          "y": 561.6
+        }
+      }
+    },
+    {
+      "name": "Hero remains clickable inside safe viewport left-entry 2560",
+      "passed": true,
+      "detail": {
+        "sx": 563.2000000000005,
+        "sy": 561.5999999999997
+      }
+    },
+    {
+      "name": "Pinned camera matrix agrees with shared input projection centre-entry 1280",
+      "passed": true,
+      "detail": {
+        "sx": 281.59999999999934,
+        "sy": 547.1999999999994,
+        "expected": {
+          "x": 281.60000000000014,
+          "y": 547.2
+        }
+      }
+    },
+    {
+      "name": "Hero remains clickable inside safe viewport centre-entry 1280",
+      "passed": true,
+      "detail": {
+        "sx": 281.59999999999934,
+        "sy": 547.1999999999994
+      }
+    },
+    {
+      "name": "Pinned camera matrix agrees with shared input projection centre-entry 1920",
+      "passed": true,
+      "detail": {
+        "sx": 422.39999999999975,
+        "sy": 820.800000000001,
+        "expected": {
+          "x": 422.39999999999975,
+          "y": 820.8
+        }
+      }
+    },
+    {
+      "name": "Hero remains clickable inside safe viewport centre-entry 1920",
+      "passed": true,
+      "detail": {
+        "sx": 422.39999999999975,
+        "sy": 820.800000000001
+      }
+    },
+    {
+      "name": "Pinned camera matrix agrees with shared input projection centre-entry 2560",
+      "passed": true,
+      "detail": {
+        "sx": 563.200000000001,
+        "sy": 820.7999999999994,
+        "expected": {
+          "x": 563.2000000000003,
+          "y": 820.8
+        }
+      }
+    },
+    {
+      "name": "Hero remains clickable inside safe viewport centre-entry 2560",
+      "passed": true,
+      "detail": {
+        "sx": 563.200000000001,
+        "sy": 820.7999999999994
+      }
+    },
+    {
+      "name": "Pinned camera matrix agrees with shared input projection right-entry 1280",
+      "passed": true,
+      "detail": {
+        "sx": 640,
+        "sy": 547.2000000000008,
+        "expected": {
+          "x": 640,
+          "y": 547.2
+        }
+      }
+    },
+    {
+      "name": "Hero remains clickable inside safe viewport right-entry 1280",
+      "passed": true,
+      "detail": {
+        "sx": 640,
+        "sy": 547.2000000000008
+      }
+    },
+    {
+      "name": "Pinned camera matrix agrees with shared input projection right-entry 1920",
+      "passed": true,
+      "detail": {
+        "sx": 960.0000000000009,
+        "sy": 820.8000000000005,
+        "expected": {
+          "x": 960,
+          "y": 820.8
+        }
+      }
+    },
+    {
+      "name": "Hero remains clickable inside safe viewport right-entry 1920",
+      "passed": true,
+      "detail": {
+        "sx": 960.0000000000009,
+        "sy": 820.8000000000005
+      }
+    },
+    {
+      "name": "Pinned camera matrix agrees with shared input projection right-entry 2560",
+      "passed": true,
+      "detail": {
+        "sx": 1280.000000000001,
+        "sy": 820.8000000000005,
+        "expected": {
+          "x": 1280,
+          "y": 820.8
+        }
+      }
+    },
+    {
+      "name": "Hero remains clickable inside safe viewport right-entry 2560",
+      "passed": true,
+      "detail": {
+        "sx": 1280.000000000001,
+        "sy": 820.8000000000005
+      }
+    },
+    {
+      "name": "Pinned camera matrix agrees with shared input projection boss-room 1280",
+      "passed": true,
+      "detail": {
+        "sx": 998.4000000000002,
+        "sy": 201.60000000000065,
+        "expected": {
+          "x": 998.4000000000001,
+          "y": 201.60000000000008
+        }
+      }
+    },
+    {
+      "name": "Hero remains clickable inside safe viewport boss-room 1280",
+      "passed": true,
+      "detail": {
+        "sx": 998.4000000000002,
+        "sy": 201.60000000000065
+      }
+    },
+    {
+      "name": "Pinned camera matrix agrees with shared input projection boss-room 1920",
+      "passed": true,
+      "detail": {
+        "sx": 1228.8000000000006,
+        "sy": 302.4000000000006,
+        "expected": {
+          "x": 1228.8,
+          "y": 302.4000000000001
+        }
+      }
+    },
+    {
+      "name": "Hero remains clickable inside safe viewport boss-room 1920",
+      "passed": true,
+      "detail": {
+        "sx": 1228.8000000000006,
+        "sy": 302.4000000000006
+      }
+    },
+    {
+      "name": "Pinned camera matrix agrees with shared input projection boss-room 2560",
+      "passed": true,
+      "detail": {
+        "sx": 1638.4000000000005,
+        "sy": 302.40000000000083,
+        "expected": {
+          "x": 1638.4,
+          "y": 302.4000000000001
+        }
+      }
+    },
+    {
+      "name": "Hero remains clickable inside safe viewport boss-room 2560",
+      "passed": true,
+      "detail": {
+        "sx": 1638.4000000000005,
+        "sy": 302.40000000000083
+      }
+    },
+    {
+      "name": "Pinned camera matrix agrees with shared input projection upper-ward 1280",
+      "passed": true,
+      "detail": {
+        "sx": 998.3999999999991,
+        "sy": 288.00000000000017,
+        "expected": {
+          "x": 998.4,
+          "y": 288
+        }
+      }
+    },
+    {
+      "name": "Hero remains clickable inside safe viewport upper-ward 1280",
+      "passed": true,
+      "detail": {
+        "sx": 998.3999999999991,
+        "sy": 288.00000000000017
+      }
+    },
+    {
+      "name": "Pinned camera matrix agrees with shared input projection upper-ward 1920",
+      "passed": true,
+      "detail": {
+        "sx": 1497.6000000000008,
+        "sy": 432.00000000000034,
+        "expected": {
+          "x": 1497.6000000000001,
+          "y": 432.0000000000001
+        }
+      }
+    },
+    {
+      "name": "Hero remains clickable inside safe viewport upper-ward 1920",
+      "passed": true,
+      "detail": {
+        "sx": 1497.6000000000008,
+        "sy": 432.00000000000034
+      }
+    },
+    {
+      "name": "Pinned camera matrix agrees with shared input projection upper-ward 2560",
+      "passed": true,
+      "detail": {
+        "sx": 1996.8000000000006,
+        "sy": 431.99999999999955,
+        "expected": {
+          "x": 1996.8,
+          "y": 431.99999999999994
+        }
+      }
+    },
+    {
+      "name": "Hero remains clickable inside safe viewport upper-ward 2560",
+      "passed": true,
+      "detail": {
+        "sx": 1996.8000000000006,
+        "sy": 431.99999999999955
+      }
+    },
+    {
+      "name": "Pinned camera matrix agrees with shared input projection north-exit 1280",
+      "passed": true,
+      "detail": {
+        "sx": 819.2000000000016,
+        "sy": 201.59999999999937,
+        "expected": {
+          "x": 819.2,
+          "y": 201.60000000000008
+        }
+      }
+    },
+    {
+      "name": "Hero remains clickable inside safe viewport north-exit 1280",
+      "passed": true,
+      "detail": {
+        "sx": 819.2000000000016,
+        "sy": 201.59999999999937
+      }
+    },
+    {
+      "name": "Pinned camera matrix agrees with shared input projection north-exit 1920",
+      "passed": true,
+      "detail": {
+        "sx": 960.0000000000005,
+        "sy": 302.4000000000008,
+        "expected": {
+          "x": 960,
+          "y": 302.40000000000003
+        }
+      }
+    },
+    {
+      "name": "Hero remains clickable inside safe viewport north-exit 1920",
+      "passed": true,
+      "detail": {
+        "sx": 960.0000000000005,
+        "sy": 302.4000000000008
+      }
+    },
+    {
+      "name": "Pinned camera matrix agrees with shared input projection north-exit 2560",
+      "passed": true,
+      "detail": {
+        "sx": 1280.0000000000005,
+        "sy": 302.4000000000008,
+        "expected": {
+          "x": 1280,
+          "y": 302.40000000000003
+        }
+      }
+    },
+    {
+      "name": "Hero remains clickable inside safe viewport north-exit 2560",
+      "passed": true,
+      "detail": {
+        "sx": 1280.0000000000005,
+        "sy": 302.4000000000008
+      }
+    },
+    {
+      "name": "Pinned camera matrix agrees with shared input projection west-route 1280",
+      "passed": true,
+      "detail": {
+        "sx": 281.6000000000008,
+        "sy": 547.2000000000002,
+        "expected": {
+          "x": 281.60000000000014,
+          "y": 547.2
+        }
+      }
+    },
+    {
+      "name": "Hero remains clickable inside safe viewport west-route 1280",
+      "passed": true,
+      "detail": {
+        "sx": 281.6000000000008,
+        "sy": 547.2000000000002
+      }
+    },
+    {
+      "name": "Pinned camera matrix agrees with shared input projection west-route 1920",
+      "passed": true,
+      "detail": {
+        "sx": 422.40000000000015,
+        "sy": 561.6,
+        "expected": {
+          "x": 422.39999999999975,
+          "y": 561.6
+        }
+      }
+    },
+    {
+      "name": "Hero remains clickable inside safe viewport west-route 1920",
+      "passed": true,
+      "detail": {
+        "sx": 422.40000000000015,
+        "sy": 561.6
+      }
+    },
+    {
+      "name": "Pinned camera matrix agrees with shared input projection west-route 2560",
+      "passed": true,
+      "detail": {
+        "sx": 563.2000000000003,
+        "sy": 561.5999999999997,
+        "expected": {
+          "x": 563.2000000000003,
+          "y": 561.6
+        }
+      }
+    },
+    {
+      "name": "Hero remains clickable inside safe viewport west-route 2560",
+      "passed": true,
+      "detail": {
+        "sx": 563.2000000000003,
+        "sy": 561.5999999999997
+      }
+    },
+    {
+      "name": "Pinned camera matrix agrees with shared input projection east-route 1280",
+      "passed": true,
+      "detail": {
+        "sx": 460.79999999999956,
+        "sy": 547.1999999999998,
+        "expected": {
+          "x": 460.7999999999995,
+          "y": 547.2
+        }
+      }
+    },
+    {
+      "name": "Hero remains clickable inside safe viewport east-route 1280",
+      "passed": true,
+      "detail": {
+        "sx": 460.79999999999956,
+        "sy": 547.1999999999998
+      }
+    },
+    {
+      "name": "Pinned camera matrix agrees with shared input projection east-route 1920",
+      "passed": true,
+      "detail": {
+        "sx": 960.0000000000005,
+        "sy": 820.8000000000003,
+        "expected": {
+          "x": 960,
+          "y": 820.8
+        }
+      }
+    },
+    {
+      "name": "Hero remains clickable inside safe viewport east-route 1920",
+      "passed": true,
+      "detail": {
+        "sx": 960.0000000000005,
+        "sy": 820.8000000000003
+      }
+    },
+    {
+      "name": "Pinned camera matrix agrees with shared input projection east-route 2560",
+      "passed": true,
+      "detail": {
+        "sx": 1280.0000000000002,
+        "sy": 820.8000000000003,
+        "expected": {
+          "x": 1280,
+          "y": 820.8
+        }
+      }
+    },
+    {
+      "name": "Hero remains clickable inside safe viewport east-route 2560",
+      "passed": true,
+      "detail": {
+        "sx": 1280.0000000000002,
+        "sy": 820.8000000000003
+      }
+    },
+    {
+      "name": "Pinned camera matrix agrees with shared input projection middle-ward 1280",
+      "passed": true,
+      "detail": {
+        "sx": 819.2000000000002,
+        "sy": 201.60000000000082,
+        "expected": {
+          "x": 819.1999999999996,
+          "y": 201.60000000000022
+        }
+      }
+    },
+    {
+      "name": "Hero remains clickable inside safe viewport middle-ward 1280",
+      "passed": true,
+      "detail": {
+        "sx": 819.2000000000002,
+        "sy": 201.60000000000082
+      }
+    },
+    {
+      "name": "Pinned camera matrix agrees with shared input projection middle-ward 1920",
+      "passed": true,
+      "detail": {
+        "sx": 960.0000000000007,
+        "sy": 432.0000000000005,
+        "expected": {
+          "x": 960,
+          "y": 432.00000000000006
+        }
+      }
+    },
+    {
+      "name": "Hero remains clickable inside safe viewport middle-ward 1920",
+      "passed": true,
+      "detail": {
+        "sx": 960.0000000000007,
+        "sy": 432.0000000000005
+      }
+    },
+    {
+      "name": "Pinned camera matrix agrees with shared input projection middle-ward 2560",
+      "passed": true,
+      "detail": {
+        "sx": 921.6000000000007,
+        "sy": 432.00000000000034,
+        "expected": {
+          "x": 921.6000000000001,
+          "y": 432.00000000000006
+        }
+      }
+    },
+    {
+      "name": "Hero remains clickable inside safe viewport middle-ward 2560",
+      "passed": true,
+      "detail": {
+        "sx": 921.6000000000007,
+        "sy": 432.00000000000034
+      }
+    },
+    {
+      "name": "Edge framing reduces average visible exterior using actual isometric viewport sampling",
+      "passed": true,
+      "detail": {
+        "before": 0.4779513888888889,
+        "after": 0.2225694444444444
+      }
+    },
+    {
+      "name": "Combat floor occupies more average screen area after framing",
+      "passed": true,
+      "detail": {
+        "before": 0.5556520061728395,
+        "after": 0.7337962962962963
+      }
+    },
+    {
+      "name": "World roof cutaway consumes the real string-hero frame contract",
+      "passed": true,
+      "detail": {
+        "focus": [
+          {
+            "x": 20,
+            "y": 12,
+            "focusWidth": 1.12,
+            "focusHeight": 2.7
+          },
+          {
+            "x": 23,
+            "y": 10,
+            "focusWidth": 1.8,
+            "focusHeight": 5.594117647058823
+          }
+        ]
+      }
+    },
+    {
+      "name": "Hospital, swamp and cave share geometry rules with separate roof palettes",
+      "passed": true,
+      "detail": [
+        {
+          "roof": "#27383c",
+          "void": "#101b20",
+          "family": "hospital"
+        },
+        {
+          "roof": "#26392c",
+          "void": "#111b16",
+          "family": "vegetation"
+        },
+        {
+          "roof": "#252c31",
+          "void": "#10161b",
+          "family": "cavern"
+        }
+      ]
+    },
+    {
+      "name": "Exact canonical R81 environment overrides older broad theme defaults",
+      "passed": true,
+      "detail": {
+        "roof": "#302b3a",
+        "void": "#19161e",
+        "family": "memory"
+      }
+    },
+    {
+      "name": "Rendering keeps the same persistent zoom used by pointer inverse projection",
+      "passed": true,
+      "detail": {
+        "before": 1.12,
+        "after": 1.12,
+        "error": 0,
+        "pixelDrift": 0,
+        "camBefore": {
+          "x": 43.168067226890756,
+          "y": 99.75630252100841
+        },
+        "camAfter": {
+          "x": 43.168067226890756,
+          "y": 99.75630252100841
+        }
+      }
+    }
+  ],
+  "coverage": [
+    {
+      "name": "left-entry",
+      "width": 1280,
+      "height": 720,
+      "before": {
+        "floor": 0.3567708333333333,
+        "inside": 0.4869791666666667,
+        "exterior": 0.5130208333333333,
+        "samples": 384
+      },
+      "after": {
+        "floor": 0.5963541666666666,
+        "inside": 0.7630208333333334,
+        "exterior": 0.23697916666666663,
+        "samples": 384
+      },
+      "camX": 9.705882352941174,
+      "camY": 104.29411764705883
+    },
+    {
+      "name": "left-entry",
+      "width": 1920,
+      "height": 1080,
+      "before": {
+        "floor": 0.296875,
+        "inside": 0.3984375,
+        "exterior": 0.6015625,
+        "samples": 384
+      },
+      "after": {
+        "floor": 0.5494791666666666,
+        "inside": 0.6744791666666666,
+        "exterior": 0.32552083333333337,
+        "samples": 384
+      },
+      "camX": 12.058823529411761,
+      "camY": 101.94117647058823
+    },
+    {
+      "name": "left-entry",
+      "width": 2560,
+      "height": 1080,
+      "before": {
+        "floor": 0.3385416666666667,
+        "inside": 0.4244791666666667,
+        "exterior": 0.5755208333333333,
+        "samples": 384
+      },
+      "after": {
+        "floor": 0.5963541666666666,
+        "inside": 0.7005208333333334,
+        "exterior": 0.29947916666666663,
+        "samples": 384
+      },
+      "camX": 14.411764705882355,
+      "camY": 99.58823529411765
+    },
+    {
+      "name": "centre-entry",
+      "width": 1280,
+      "height": 720,
+      "before": {
+        "floor": 0.578125,
+        "inside": 0.7135416666666666,
+        "exterior": 0.28645833333333337,
+        "samples": 384
+      },
+      "after": {
+        "floor": 0.8229166666666666,
+        "inside": 0.9713541666666666,
+        "exterior": 0.02864583333333337,
+        "samples": 384
+      },
+      "camX": 43.168067226890756,
+      "camY": 99.75630252100841
+    },
+    {
+      "name": "centre-entry",
+      "width": 1920,
+      "height": 1080,
+      "before": {
+        "floor": 0.5286458333333334,
+        "inside": 0.65625,
+        "exterior": 0.34375,
+        "samples": 384
+      },
+      "after": {
+        "floor": 0.8125,
+        "inside": 0.953125,
+        "exterior": 0.046875,
+        "samples": 384
+      },
+      "camX": 43.25210084033614,
+      "camY": 95.1344537815126
+    },
+    {
+      "name": "centre-entry",
+      "width": 2560,
+      "height": 1080,
+      "before": {
+        "floor": 0.5260416666666666,
+        "inside": 0.6328125,
+        "exterior": 0.3671875,
+        "samples": 384
+      },
+      "after": {
+        "floor": 0.8203125,
+        "inside": 0.9453125,
+        "exterior": 0.0546875,
+        "samples": 384
+      },
+      "camX": 45.60504201680673,
+      "camY": 92.78151260504202
+    },
+    {
+      "name": "right-entry",
+      "width": 1280,
+      "height": 720,
+      "before": {
+        "floor": 0.40625,
+        "inside": 0.5052083333333334,
+        "exterior": 0.49479166666666663,
+        "samples": 384
+      },
+      "after": {
+        "floor": 0.59375,
+        "inside": 0.75,
+        "exterior": 0.25,
+        "samples": 384
+      },
+      "camX": 78.46218487394958,
+      "camY": 104.46218487394958
+    },
+    {
+      "name": "right-entry",
+      "width": 1920,
+      "height": 1080,
+      "before": {
+        "floor": 0.3567708333333333,
+        "inside": 0.4427083333333333,
+        "exterior": 0.5572916666666667,
+        "samples": 384
+      },
+      "after": {
+        "floor": 0.578125,
+        "inside": 0.6822916666666666,
+        "exterior": 0.31770833333333337,
+        "samples": 384
+      },
+      "camX": 76.19327731092437,
+      "camY": 102.19327731092437
+    },
+    {
+      "name": "right-entry",
+      "width": 2560,
+      "height": 1080,
+      "before": {
+        "floor": 0.3020833333333333,
+        "inside": 0.359375,
+        "exterior": 0.640625,
+        "samples": 384
+      },
+      "after": {
+        "floor": 0.5182291666666666,
+        "inside": 0.5989583333333334,
+        "exterior": 0.40104166666666663,
+        "samples": 384
+      },
+      "camX": 76.19327731092437,
+      "camY": 102.19327731092437
+    },
+    {
+      "name": "boss-room",
+      "width": 1280,
+      "height": 720,
+      "before": {
+        "floor": 0.6380208333333334,
+        "inside": 0.9401041666666666,
+        "exterior": 0.05989583333333337,
+        "samples": 384
+      },
+      "after": {
+        "floor": 0.8020833333333334,
+        "inside": 1,
+        "exterior": 0,
+        "samples": 384
+      },
+      "camX": 19.83193277310924,
+      "camY": 21.243697478991596
+    },
+    {
+      "name": "boss-room",
+      "width": 1920,
+      "height": 1080,
+      "before": {
+        "floor": 0.5859375,
+        "inside": 0.7994791666666666,
+        "exterior": 0.20052083333333337,
+        "samples": 384
+      },
+      "after": {
+        "floor": 0.7578125,
+        "inside": 0.9713541666666666,
+        "exterior": 0.02864583333333337,
+        "samples": 384
+      },
+      "camX": 23.277310924369747,
+      "camY": 22.336134453781508
+    },
+    {
+      "name": "boss-room",
+      "width": 2560,
+      "height": 1080,
+      "before": {
+        "floor": 0.53125,
+        "inside": 0.7291666666666666,
+        "exterior": 0.27083333333333337,
+        "samples": 384
+      },
+      "after": {
+        "floor": 0.7213541666666666,
+        "inside": 0.9192708333333334,
+        "exterior": 0.08072916666666663,
+        "samples": 384
+      },
+      "camX": 22.10084033613445,
+      "camY": 23.512605042016805
+    },
+    {
+      "name": "upper-ward",
+      "width": 1280,
+      "height": 720,
+      "before": {
+        "floor": 0.5390625,
+        "inside": 0.7994791666666666,
+        "exterior": 0.20052083333333337,
+        "samples": 384
+      },
+      "after": {
+        "floor": 0.7447916666666666,
+        "inside": 0.9661458333333334,
+        "exterior": 0.03385416666666663,
+        "samples": 384
+      },
+      "camX": 73.56302521008404,
+      "camY": 15.974789915966387
+    },
+    {
+      "name": "upper-ward",
+      "width": 1920,
+      "height": 1080,
+      "before": {
+        "floor": 0.421875,
+        "inside": 0.6067708333333334,
+        "exterior": 0.39322916666666663,
+        "samples": 384
+      },
+      "after": {
+        "floor": 0.65625,
+        "inside": 0.8645833333333334,
+        "exterior": 0.13541666666666663,
+        "samples": 384
+      },
+      "camX": 72.34453781512605,
+      "camY": 19.462184873949578
+    },
+    {
+      "name": "upper-ward",
+      "width": 2560,
+      "height": 1080,
+      "before": {
+        "floor": 0.4140625,
+        "inside": 0.5859375,
+        "exterior": 0.4140625,
+        "samples": 384
+      },
+      "after": {
+        "floor": 0.6640625,
+        "inside": 0.8567708333333334,
+        "exterior": 0.14322916666666663,
+        "samples": 384
+      },
+      "camX": 69.99159663865547,
+      "camY": 21.81512605042017
+    },
+    {
+      "name": "north-exit",
+      "width": 1280,
+      "height": 720,
+      "before": {
+        "floor": 0.3203125,
+        "inside": 0.4791666666666667,
+        "exterior": 0.5208333333333333,
+        "samples": 384
+      },
+      "after": {
+        "floor": 0.5286458333333334,
+        "inside": 0.7161458333333334,
+        "exterior": 0.28385416666666663,
+        "samples": 384
+      },
+      "camX": 7.1848739495798295,
+      "camY": 10.390756302521007
+    },
+    {
+      "name": "north-exit",
+      "width": 1920,
+      "height": 1080,
+      "before": {
+        "floor": 0.2682291666666667,
+        "inside": 0.40625,
+        "exterior": 0.59375,
+        "samples": 384
+      },
+      "after": {
+        "floor": 0.4479166666666667,
+        "inside": 0.6458333333333334,
+        "exterior": 0.35416666666666663,
+        "samples": 384
+      },
+      "camX": 11.80672268907563,
+      "camY": 10.30672268907563
+    },
+    {
+      "name": "north-exit",
+      "width": 2560,
+      "height": 1080,
+      "before": {
+        "floor": 0.20833333333333334,
+        "inside": 0.3333333333333333,
+        "exterior": 0.6666666666666667,
+        "samples": 384
+      },
+      "after": {
+        "floor": 0.3958333333333333,
+        "inside": 0.5729166666666666,
+        "exterior": 0.42708333333333337,
+        "samples": 384
+      },
+      "camX": 11.80672268907563,
+      "camY": 10.30672268907563
+    },
+    {
+      "name": "west-route",
+      "width": 1280,
+      "height": 720,
+      "before": {
+        "floor": 0.875,
+        "inside": 1,
+        "exterior": 0,
+        "samples": 384
+      },
+      "after": {
+        "floor": 0.9479166666666666,
+        "inside": 1,
+        "exterior": 0,
+        "samples": 384
+      },
+      "camX": 18.668067226890756,
+      "camY": 86.25630252100841
+    },
+    {
+      "name": "west-route",
+      "width": 1920,
+      "height": 1080,
+      "before": {
+        "floor": 0.7708333333333334,
+        "inside": 0.890625,
+        "exterior": 0.109375,
+        "samples": 384
+      },
+      "after": {
+        "floor": 0.8958333333333334,
+        "inside": 0.9947916666666666,
+        "exterior": 0.00520833333333337,
+        "samples": 384
+      },
+      "camX": 25.558823529411764,
+      "camY": 88.44117647058823
+    },
+    {
+      "name": "west-route",
+      "width": 2560,
+      "height": 1080,
+      "before": {
+        "floor": 0.7109375,
+        "inside": 0.8229166666666666,
+        "exterior": 0.17708333333333337,
+        "samples": 384
+      },
+      "after": {
+        "floor": 0.8776041666666666,
+        "inside": 0.984375,
+        "exterior": 0.015625,
+        "samples": 384
+      },
+      "camX": 27.911764705882355,
+      "camY": 86.08823529411765
+    },
+    {
+      "name": "east-route",
+      "width": 1280,
+      "height": 720,
+      "before": {
+        "floor": 0.8776041666666666,
+        "inside": 1,
+        "exterior": 0,
+        "samples": 384
+      },
+      "after": {
+        "floor": 0.9479166666666666,
+        "inside": 1,
+        "exterior": 0,
+        "samples": 384
+      },
+      "camX": 66.31512605042018,
+      "camY": 88.60924369747899
+    },
+    {
+      "name": "east-route",
+      "width": 1920,
+      "height": 1080,
+      "before": {
+        "floor": 0.8177083333333334,
+        "inside": 0.90625,
+        "exterior": 0.09375,
+        "samples": 384
+      },
+      "after": {
+        "floor": 0.9192708333333334,
+        "inside": 0.9973958333333334,
+        "exterior": 0.0026041666666666297,
+        "samples": 384
+      },
+      "camX": 61.69327731092437,
+      "camY": 88.69327731092437
+    },
+    {
+      "name": "east-route",
+      "width": 2560,
+      "height": 1080,
+      "before": {
+        "floor": 0.7317708333333334,
+        "inside": 0.8359375,
+        "exterior": 0.1640625,
+        "samples": 384
+      },
+      "after": {
+        "floor": 0.8697916666666666,
+        "inside": 0.96875,
+        "exterior": 0.03125,
+        "samples": 384
+      },
+      "camX": 61.69327731092437,
+      "camY": 88.69327731092437
+    },
+    {
+      "name": "middle-ward",
+      "width": 1280,
+      "height": 720,
+      "before": {
+        "floor": 0.890625,
+        "inside": 1,
+        "exterior": 0,
+        "samples": 384
+      },
+      "after": {
+        "floor": 0.9557291666666666,
+        "inside": 1,
+        "exterior": 0,
+        "samples": 384
+      },
+      "camX": 23.18487394957983,
+      "camY": 66.890756302521
+    },
+    {
+      "name": "middle-ward",
+      "width": 1920,
+      "height": 1080,
+      "before": {
+        "floor": 0.8697916666666666,
+        "inside": 0.9713541666666666,
+        "exterior": 0.02864583333333337,
+        "samples": 384
+      },
+      "after": {
+        "floor": 0.9010416666666666,
+        "inside": 0.9947916666666666,
+        "exterior": 0.00520833333333337,
+        "samples": 384
+      },
+      "camX": 24.403361344537814,
+      "camY": 63.403361344537814
+    },
+    {
+      "name": "middle-ward",
+      "width": 2560,
+      "height": 1080,
+      "before": {
+        "floor": 0.8411458333333334,
+        "inside": 0.9401041666666666,
+        "exterior": 0.05989583333333337,
+        "samples": 384
+      },
+      "after": {
+        "floor": 0.890625,
+        "inside": 0.9973958333333334,
+        "exterior": 0.0026041666666666297,
+        "samples": 384
+      },
+      "camX": 29.10924369747899,
+      "camY": 58.69747899159664
+    }
+  ],
+  "passed": 65,
+  "failed": 0,
+  "method": "Actual pinned Three r186 geometry and OrthographicCamera matrices plus runtime VM input projection; sampled coverage is geometric, not a rendered screenshot.",
+  "browserVerified": false,
+  "GPUVerified": false
+}

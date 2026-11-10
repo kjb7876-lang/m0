@@ -1,0 +1,188 @@
+{
+  "method": "Native newGame/story/save/portal functions with scripted positioning in Node VM; floor geometry and path checks. No GPU/natural play.",
+  "checks": [
+    {
+      "name": "Native new game enters compact safe 마수궁 피난 거점",
+      "passed": true,
+      "detail": {
+        "bounds": [
+          0,
+          0,
+          36,
+          34
+        ],
+        "cells": 864,
+        "rooms": [
+          "중앙 피난 정원",
+          "서쪽 회랑",
+          "기억 보관실",
+          "남서 피난실",
+          "남동 휴식실",
+          "정원 출구 회랑",
+          "북서 회랑"
+        ]
+      }
+    },
+    {
+      "name": "Canonical story and region destinations are identical",
+      "passed": true
+    },
+    {
+      "name": "Original spawn, altar and all four prop identities and coordinates survive",
+      "passed": true
+    },
+    {
+      "name": "Every refuge room, native prop, altar and portal is reachable with player clearance",
+      "passed": true,
+      "detail": [
+        {
+          "id": "native-anchor",
+          "x": 15,
+          "y": 19,
+          "blocked": false,
+          "path": true
+        },
+        {
+          "id": "native-anchor",
+          "x": 15,
+          "y": 13,
+          "blocked": false,
+          "path": true
+        },
+        {
+          "id": "hub-prop-1",
+          "x": 4.1,
+          "y": 4.1,
+          "blocked": false,
+          "path": true
+        },
+        {
+          "id": "hub-prop-2",
+          "x": 21,
+          "y": 3.8,
+          "blocked": false,
+          "path": true
+        },
+        {
+          "id": "hub-prop-3",
+          "x": 4.1,
+          "y": 25.9,
+          "blocked": false,
+          "path": true
+        },
+        {
+          "id": "hub-prop-4",
+          "x": 21,
+          "y": 26.2,
+          "blocked": false,
+          "path": true
+        },
+        {
+          "id": "중앙 피난 정원",
+          "x": 15,
+          "y": 16,
+          "blocked": false,
+          "path": true
+        },
+        {
+          "id": 1,
+          "x": 6,
+          "y": 16,
+          "blocked": false,
+          "path": true
+        },
+        {
+          "id": 2,
+          "x": 26,
+          "y": 6,
+          "blocked": false,
+          "path": true
+        },
+        {
+          "id": 3,
+          "x": 7,
+          "y": 28,
+          "blocked": false,
+          "path": true
+        },
+        {
+          "id": 4,
+          "x": 28,
+          "y": 28,
+          "blocked": false,
+          "path": true
+        },
+        {
+          "id": 5,
+          "x": 30,
+          "y": 22,
+          "blocked": false,
+          "path": true
+        },
+        {
+          "id": 6,
+          "x": 6,
+          "y": 6,
+          "blocked": false,
+          "path": true
+        },
+        {
+          "id": "native-anchor",
+          "x": 30,
+          "y": 22,
+          "blocked": false,
+          "path": true
+        }
+      ]
+    },
+    {
+      "name": "Rendered tiles equal collision floor and all walls use the same top height",
+      "passed": true,
+      "detail": {
+        "floor": 864,
+        "rects": 15,
+        "walls": 44
+      }
+    },
+    {
+      "name": "Central garden is separated by walls with open corridor doorways",
+      "passed": true
+    },
+    {
+      "name": "Boundary walls and non-floor voids stay physically closed",
+      "passed": true,
+      "detail": {
+        "wallFailures": 0
+      }
+    },
+    {
+      "name": "V11 uses an independent test-save namespace",
+      "passed": true,
+      "detail": "storyworld.hospital-three-pc.maze.v11:"
+    },
+    {
+      "name": "Native refuge save/restore keeps safe spawn and new geometry",
+      "passed": true
+    },
+    {
+      "name": "Refuge east portal reaches first story map and its entry returns safely",
+      "passed": true,
+      "detail": {
+        "forward": true,
+        "destination": "dist00",
+        "back": true,
+        "zone": "hub",
+        "safe": true,
+        "layout": "r82-refuge-cloister"
+      }
+    },
+    {
+      "name": "No native error was recorded",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "passed": true,
+  "browserVerified": false,
+  "GPUVerified": false
+}

@@ -1,0 +1,8 @@
+PASS Every delivered JSON file parses
+PASS Every delivered raster image decodes
+PASS All R91-R93 catalog runtime paths exist
+PASS All R91-R93 catalog bytes and hashes match
+PASS All R91-R93 catalog image dimensions match
+PASS All R91-R93 strip cells remain within the image
+PASS Every declared effect-atlas frame stays within its atlas
+{"passed": true, "checks": 7, "counts": {"json": 349, "images": 4331, "catalogRows": 504, "catalogImages": 486, "stripAtlases": 129, "effectAtlases": 31, "effectFrames": 496}}

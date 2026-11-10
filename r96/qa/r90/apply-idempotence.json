@@ -1,0 +1,18 @@
+{
+  "method": "Second apply on actual full five-part runtime",
+  "before": {
+    "hospital-three-pc/site/index.html": "91501950ba122bb4932826a15f840429bd8e4df4403f5b9e26046e0c157ee573",
+    "hospital-three-pc/site/web-manifest-r62.json": "518848fb928c536b5984f5fedd7a596b5c692605ac266ea3a6ea0b07ab86ffb4",
+    "hospital-three-pc/site/visual-r90.js": "a07bc0b65e7e51f2bd7a4819b6ebffd54d533ca0d0ef09d71bbec7e97148f781",
+    "hospital-three-pc/site/visual-r90-world.js": "29416022f2848f820619dcb9de8eda647ee9603af8f0935a12baa88b5ee122da",
+    "qa/r90/integration.json": "ee137d657a6a451f84e20bc51e4babe837f1046a350e72c33f16591797e0b225"
+  },
+  "after": {
+    "hospital-three-pc/site/index.html": "91501950ba122bb4932826a15f840429bd8e4df4403f5b9e26046e0c157ee573",
+    "hospital-three-pc/site/web-manifest-r62.json": "518848fb928c536b5984f5fedd7a596b5c692605ac266ea3a6ea0b07ab86ffb4",
+    "hospital-three-pc/site/visual-r90.js": "a07bc0b65e7e51f2bd7a4819b6ebffd54d533ca0d0ef09d71bbec7e97148f781",
+    "hospital-three-pc/site/visual-r90-world.js": "29416022f2848f820619dcb9de8eda647ee9603af8f0935a12baa88b5ee122da",
+    "qa/r90/integration.json": "ee137d657a6a451f84e20bc51e4babe837f1046a350e72c33f16591797e0b225"
+  },
+  "byteIdentical": true
+}
