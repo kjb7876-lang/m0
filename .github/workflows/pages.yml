@@ -452,6 +452,8 @@ jobs:
         run: node r96/qa/r448/r448-cpu-check.cjs
       - name: R461 cinema run (separate title entry, saved run mode, narrator hero lock) CPU check
         run: node r96/qa/r461/r461-cpu-check.cjs
+      - name: R600 survival mode (pixel entry replaced, arena, narration-timed spawns, core, 3-choice upgrades, endless maps) CPU check
+        run: node r96/qa/r600/r600-cpu-check.cjs
       - name: R463 seven-sins boss art (one form per fight, one body height, no cut-out broom) CPU check
         run: node r96/qa/r463/r463-cpu-check.cjs
       - name: R511 empty samong rooms get a guarded memory shard CPU check
