@@ -474,6 +474,8 @@ jobs:
         run: node r96/qa/r453/actor-tone-r453-cpu-check.cjs
       - name: R571 samong surge (during 사몽 only - skill cooldown x0.23, proc chance x1.77 capped 100%, skill range/area x1.77, restored after; hero main-colour flame aura, code only) CPU check
         run: node r96/qa/r571/r571-cpu-check.cjs
+      - name: R572 samong hero themes (during 사몽 only - per-hero motif around the body + skill-hit marks, upright cross only, capped marks, code only) CPU check
+        run: node r96/qa/r572/r572-cpu-check.cjs
       - name: R521 hospital rooms (ep1a08 wards/consult/prep/lobby furnished by room function along the back walls, presentation only, drive hospital props) CPU check
         run: node r96/qa/r521/r521-cpu-check.cjs
       - name: R522 hospital thin walls (the two free-standing maze baffles of ep1a08 moved to touch a thick wall, hospital only, routes stay connected) CPU check

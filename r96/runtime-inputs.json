@@ -6224,6 +6224,7 @@
     "assets/r542/sfx/index.json",
     "assets/r590/hwando-wind-tornado.webp",
     "assets/r590/hwando-iai-ring.webp",
+    "samong-theme-r572.js",
     "assets/r543/sfx/goblin-1.ogg",
     "assets/r543/sfx/goblin-2.ogg",
     "assets/r543/sfx/growl-1.ogg",
@@ -7306,5 +7307,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "7429059e0fa5f52d7fd6f004e9290acb00d4d2b204764a5bec73767b2642bca4"
+  "runtimeManifestSHA256": "e524db7882ab24681108b9a09d90386668826f1651b333349b21c3242510ff5b"
 }
