@@ -34333,6 +34333,11 @@
       "sha256": "2f87e0a90195aa5c806b602ed64ed99067a7747155ea7685083fe7b7399d66a1"
     },
     {
+      "path": "assets/r615/mob-student-walk8.webp",
+      "bytes": 69076,
+      "sha256": "f6100e6cc92f3ef2744c76f3889d84807024f44624eb8693698ffd6ac8a7e28d"
+    },
+    {
       "path": "assets/r617/beach-poster.jpg",
       "bytes": 25190,
       "sha256": "30c109bc3c6ebdb2f1a9562181011495c4d948f3891a93a2a2cb1c1282e75ea6"
@@ -43444,8 +43449,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6573544,
-      "sha256": "e8fcbfa9e10e36c896322898c63e65c52267407d073bf93509baf4f2187ab3e6"
+      "bytes": 6573594,
+      "sha256": "73b5ad65011dcedec742816b0ad13edb0001090d884352835b2758e4db0e4c9b"
     },
     {
       "path": "intro-r140.js",
@@ -43626,6 +43631,11 @@
       "path": "mob-squads-r373.js",
       "bytes": 15311,
       "sha256": "7ce4cda67c34a4832d939e39dedf29eb523f62ed4e529bc02d07d95b3033825e"
+    },
+    {
+      "path": "mob-student-walk-r615.js",
+      "bytes": 5521,
+      "sha256": "edeb473a88cb73e675d6f4fce0be128ed9084614ee9ec4e1f2ee77ce22066f03"
     },
     {
       "path": "mob-style-r199.js",
@@ -44388,9 +44398,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8877,
-  "totalBytes": 1226677416,
-  "webHTMLSha256": "e8fcbfa9e10e36c896322898c63e65c52267407d073bf93509baf4f2187ab3e6",
+  "fileCount": 8879,
+  "totalBytes": 1226752063,
+  "webHTMLSha256": "73b5ad65011dcedec742816b0ad13edb0001090d884352835b2758e4db0e4c9b",
   "largest": [
     {
       "path": "index.html",
