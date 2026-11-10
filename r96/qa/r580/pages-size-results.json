@@ -20,24 +20,84 @@
    "detail": []
   },
   {
+   "name": "assets/r140/intro/ 를 배포본에서 뺌",
+   "passed": true,
+   "detail": [
+    "assets/story-narration/v1/audio/",
+    "assets/r140/intro/",
+    "assets/dynamic-vfx-r84/",
+    "data/campaign-r54/canonical-campaign-source-r54.json"
+   ]
+  },
+  {
+   "name": "intro-r140.js 는 index.html 에 붙지 않음",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "r140/intro 경로를 intro-r140.js 밖에서 쓰지 않음",
+   "passed": true,
+   "detail": []
+  },
+  {
+   "name": "assets/dynamic-vfx-r84/ 를 배포본에서 뺌",
+   "passed": true,
+   "detail": [
+    "assets/story-narration/v1/audio/",
+    "assets/r140/intro/",
+    "assets/dynamic-vfx-r84/",
+    "data/campaign-r54/canonical-campaign-source-r54.json"
+   ]
+  },
+  {
+   "name": "dynamic-vfx-r84.js 는 index.html 에 붙지 않음",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "dynamic-vfx-r84 경로를 dynamic-vfx-r84.js 밖에서 쓰지 않음",
+   "passed": true,
+   "detail": []
+  },
+  {
+   "name": "data/campaign-r54/canonical-campaign-source-r54.json 를 배포본에서 뺌",
+   "passed": true,
+   "detail": [
+    "assets/story-narration/v1/audio/",
+    "assets/r140/intro/",
+    "assets/dynamic-vfx-r84/",
+    "data/campaign-r54/canonical-campaign-source-r54.json"
+   ]
+  },
+  {
+   "name": "R54 서사 데이터는 index.html 에 인라인으로 들어 있음",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "campaign-r54 json 을 가져오는 런타임 코드 없음",
+   "passed": true,
+   "detail": []
+  },
+  {
    "name": "pages-pack.py 성공",
    "passed": true,
-   "detail": "{\"totalBytes\": 1084581760, \"budgetBytes\": 1100000000, \"files\": 8490, \"excludedFiles\": 238, \"excludedBytes\": 95611880, \"optimizedPng\": 1035, \"optimizedSavedBytes\": 35010145}\n"
+   "detail": "{\"totalBytes\": 1076594937, \"budgetBytes\": 1100000000, \"files\": 8460, \"excludedFiles\": 268, \"excludedBytes\": 103600129, \"optimizedPng\": 1035, \"optimizedSavedBytes\": 35010145}\n"
   },
   {
    "name": "배포본 예산 1,100,000,000 바이트 미만",
    "passed": true,
-   "detail": "1,084,581,760 bytes (8490 files)"
+   "detail": "1,076,594,937 bytes (8460 files)"
   },
   {
    "name": "pages-deploy.json 총량이 실제와 같음",
    "passed": true,
-   "detail": 1084581760
+   "detail": 1076594937
   },
   {
    "name": "원본 사이트보다 90MB 넘게 줄었음",
    "passed": true,
-   "detail": "128.8 MB"
+   "detail": "136.8 MB"
   },
   {
    "name": "빼지 않은 manifest 파일은 모두 배포본에 있음",
@@ -57,7 +117,7 @@
   {
    "name": "pages-deploy.json 의 빠진 목록 = 접두어에 든 manifest 파일",
    "passed": true,
-   "detail": 238
+   "detail": 268
   },
   {
    "name": "원본 manifest 해시 기록",
@@ -92,12 +152,12 @@
   {
    "name": "예산을 넘으면 묶기 실패(한도 바로 아래 예산)",
    "passed": true,
-   "detail": "\"totalBytes\": 1119345656, \"budgetBytes\": 1084581759, \"files\": 8490, \"excludedFiles\": 238, \"excludedBytes\": 95611880, \"optimizedPng\": 0, \"optimizedSavedBytes\": 0}\nover budget: 1119345656 >= 1084581759\n"
+   "detail": "totalBytes\": 1111358833, \"budgetBytes\": 1076594936, \"files\": 8460, \"excludedFiles\": 268, \"excludedBytes\": 103600129, \"optimizedPng\": 0, \"optimizedSavedBytes\": 0}\nover budget: 1111358833 >= 1076594936\n"
   },
   {
    "name": "PNG 압축을 끄면 남은 파일 바이트가 모두 원본과 같음",
    "passed": true,
-   "detail": "{\"totalBytes\": 1119345656, \"budgetBytes\": 2000000000, \"files\": 8490, \"excludedFiles\": 238, \"excludedBytes\": 95611880, \"optimizedPng\": 0, \"optimizedSavedBytes\": 0}\n"
+   "detail": "{\"totalBytes\": 1111358833, \"budgetBytes\": 2000000000, \"files\": 8460, \"excludedFiles\": 268, \"excludedBytes\": 103600129, \"optimizedPng\": 0, \"optimizedSavedBytes\": 0}\n"
   },
   {
    "name": "verify-r96-public.py 가 배포본에서 통과",
