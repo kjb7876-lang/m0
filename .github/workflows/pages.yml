@@ -569,6 +569,8 @@ jobs:
         run: node r96/qa/r473/balrog-tear-cpu-check.cjs
       - name: R474 swamp hands rise under the hero and bind the ankles in the swamp lord fight (dodge by stepping away) CPU check
         run: node r96/qa/r474/swamp-hands-cpu-check.cjs
+      - name: R535 hunter Q storm tracking, Z ember-thorn split and burn, C twisted thorn lance blast (no new keys, chained) CPU check
+        run: node r96/qa/r535/hunter-arrows-cpu-check.cjs
       - name: R440 Hwando hit pose (no old art) and hero rim blade cleanup CPU check
         run: node r96/qa/r440/r440-cpu-check.cjs
       - name: R446 seven pillars moved to their own map as stationary attacking towers CPU check
