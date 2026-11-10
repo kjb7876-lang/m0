@@ -1,7 +1,7 @@
-// R523 CPU check — 방 이름이 있는 본편 지역의 방 꾸미기(첫 묶음: 의원 ep1a09 · 나태의 집 ep1b02)
+// R523 CPU check — 방 이름이 있는 본편 지역의 방 꾸미기(첫 묶음: 의원 ep1a09 · 나태의 집 ep1b02, 둘째 묶음 R524: 질투의 집 ep1b03 · 폭식의 주방 ep1b04)
 //  방 모양에서 뒤쪽 벽 줄을 찾아 쓰임새별 가구 묶음을 벽에 붙여 놓는다. 그리기 전용(충돌·저장·room.props 불변), 결정적, 각도 맞는 그림만.
 //  지도는 헤드리스 게임에서 뽑은 실제 자료(fixtures/*.json), 벽 판정은 실제 엔진 함수(runtime-text/dist/phase1.js explorationBlocked)를 그대로 쓴다.
-'use strict';const fs=require('fs'),path=require('path'),vm=require('vm');
+'use strict';const fs=require('fs'),path=require('path'),vm=require('vm'),crypto=require('crypto');
 const R=path.join(__dirname,'..','..'),rd=f=>{try{return fs.readFileSync(path.join(R,f),'utf8');}catch(_){return'';}};
 let bad=0,n=0;const ok=(m,c)=>{n++;if(!c){bad++;console.log('FAIL',m);}else console.log('ok  ',m);};
 const F='rooms-r523.js',src=rd('client-source/'+F);
@@ -41,17 +41,17 @@ function world(fx,opt={}){const L=layoutOf(fx),props=fx.props.map(p=>({...p,soli
  return{id:opt.id||fx.id,layer:opt.layer||'STORY',exploration:L,props,enemies:[],objective:fx.objective||null};}
 function boot(opt={}){const drawn=[],asked=[],ready=new Set(opt.ready||[]),frames=[];
  const ctx={localStorage:{getItem:()=>opt.stored||null,setItem:()=>{}},console,Math,JSON,Number,String,Object,Array,Set,Map,WeakMap,Promise,Date,
-  StoryPhase1:{explorationBlocked:E},regionById:{ep1a09:{paths:[]},ep1b02:{paths:[]},ep1b06:{paths:[]},ep1a08:{paths:[]}},
+  StoryPhase1:{explorationBlocked:E},regionById:{ep1a09:{paths:[]},ep1b02:{paths:[]},ep1b03:{paths:[]},ep1b04:{paths:[]},ep1b06:{paths:[]},ep1a08:{paths:[]}},
   readyImage:p=>ready.has(p)?{image:{naturalWidth:300,naturalHeight:400},path:p}:null,ensureImages:ps=>{asked.push(...ps);return Promise.resolve();},
   project:(x,y)=>({x:640+(x-y-(ctx.cam.x-ctx.cam.y))*27,y:340+(x+y-(ctx.cam.x+ctx.cam.y))*13.5}),cam:{x:40,y:70},W:1280,H:676,zoom:1,room:undefined,
   draw:function(){const r=ctx.room;frames.push(r.props.map(p=>p.id));for(const p of r.props)ctx.drawProp(p);},drawProp:function(p){drawn.push(p.id);}};
  Object.assign(ctx,opt.extra||{});ctx.window=ctx;vm.createContext(ctx);vm.runInContext(src,ctx);return{ctx,api:ctx.__STORYWORLD_ROOMS_R523__,drawn,asked,frames};}
-const FX={};for(const id of['ep1a09','ep1b02']){try{FX[id]=JSON.parse(rd('qa/r523/fixtures/'+id+'.json'));}catch(_){}}
-ok('fixtures present (real maps of ep1a09 · ep1b02)',!!FX.ep1a09&&!!FX.ep1b02&&Object.keys(FX.ep1a09.floorSpans).length>50);
+const FX={};for(const id of['ep1a09','ep1b02','ep1b03','ep1b04']){try{FX[id]=JSON.parse(rd('qa/r523/fixtures/'+id+'.json'));}catch(_){}}
+ok('fixtures present (real maps of ep1a09 · ep1b02 · ep1b03 · ep1b04)',!!FX.ep1a09&&!!FX.ep1b02&&!!FX.ep1b03&&!!FX.ep1b04&&Object.keys(FX.ep1a09.floorSpans).length>50&&Object.keys(FX.ep1b03.floorSpans).length>50);
 let B=null;try{B=boot();}catch(e){console.log(String(e.stack).slice(0,300));}
 const api=B&&B.api;
 ok('api exported',!!api&&typeof api.plan==='function'&&typeof api.list==='function'&&typeof api.runsOf==='function'&&typeof api.seat==='function');
-if(!api||!E||!FX.ep1a09||!FX.ep1b02){console.log('\nR523 '+(n-bad)+'/'+n+' passed (stopped early: overlay·engine·fixtures needed)');process.exit(1);}
+if(!api||!E||!FX.ep1a09||!FX.ep1b02||!FX.ep1b03||!FX.ep1b04){console.log('\nR523 '+(n-bad)+'/'+n+' passed (stopped early: overlay·engine·fixtures needed)');process.exit(1);}
 
 // ---- 그림 표 ---------------------------------------------------------------------------------------
 const ART=api.ART,keys=Object.keys(ART),R2=Math.SQRT2;
@@ -62,12 +62,15 @@ ok('two-direction pieces point at each other and face different walls',keys.filt
 const OFF=/r80-(?:024|027|051|144|148)\.webp|hospital-maze\/cabinet|r415\/props\/(?:care-table|grand-desk|record-cabinet|report-desk|low-table|waiting-bench|student-desk|lobby-counter)|mammon/;
 ok('no off-angle (front 3/4 view) art and nothing from the Mammon sheet in the table',keys.every(k=>!OFF.test(ART[k].path)));
 ok('every art file is a shipped runtime file',keys.every(k=>manifest.includes('"'+ART[k].path+'"')||manifest.includes(ART[k].path)));
+for(const rd_ of['r523','r524']){const dir=path.join(R,'runtime-text/assets/'+rd_);let idx=null;try{idx=JSON.parse(fs.readFileSync(path.join(dir,'index.json'),'utf8'));}catch(_){}
+ const files=fs.existsSync(dir)?fs.readdirSync(dir).filter(f=>f!=='index.json'):[];
+ ok(rd_+' asset record: every file listed with its real size and sha256, a source and a use; no Drive link or id',!!idx&&files.length>0&&files.every(f=>{const e=(idx.files||[]).find(x=>x.file==='assets/'+rd_+'/'+f),b=fs.readFileSync(path.join(dir,f));return!!e&&e.bytes===b.length&&e.sha256===crypto.createHash('sha256').update(b).digest('hex')&&!!e.source&&!!e.use;})&&(idx.files||[]).length===files.length&&!/drive\.google|docs\.google|[?&]id=/.test(JSON.stringify(idx)));}
 const G=api.G,USE=api.USE,REG=api.REGION;
 ok('groups only use known art; uses only use known groups; regions only use known uses',Object.values(G).every(g=>g.w>0&&g.it.every(it=>ART[it[0]]))&&Object.values(USE).every(u=>[...u.main,...u.side].every(g=>G[g])&&(!u.corner||ART[u.corner]))&&Object.values(REG).every(l=>l.every(([re,u])=>[].concat(u).every(v=>USE[v])))&&Object.values(G).every(g=>!g.lim||Object.keys(g.lim).every(k=>api.LIMIT[k]>0)));
-ok('first batch regions: clinic ep1a09 and sloth home ep1b02 only',Object.keys(REG).sort().join()==='ep1a09,ep1b02');
+ok('handled regions: clinic ep1a09 · sloth home ep1b02 (first batch), envy house ep1b03 · gluttony kitchen ep1b04 (second batch) — nothing else',Object.keys(REG).sort().join()==='ep1a09,ep1b02,ep1b03,ep1b04');
 ok('room names → uses; fight rooms·exit gates·junctions stay untouched, the entrance gets a light set',api.useOf('ep1a09','주사실')==='inject'&&api.useOf('ep1a09','처치 대기실')==='wait'&&api.useOf('ep1a09','관찰실')==='observe'&&api.useOf('ep1a09','약품 보관실')==='drug'&&api.useOf('ep1a09','길목')==='hall'&&
  api.useOf('ep1b02','거실')==='living'&&api.useOf('ep1b02','작은 방')==='bedroom'&&api.useOf('ep1b02','물품 보관실')==='store'&&api.useOf('ep1b02','현관')==='foyer'&&api.useOf('ep1a09','입구')==='lobby'&&api.useOf('ep1b02','입구')==='foyer'&&
- ['보스 전투실','중앙 전투실','다음 구역 문','갈림길','작은 마당',''].every(nm=>api.useOf('ep1a09',nm)===null&&api.useOf('ep1b02',nm)===null)&&api.useOf('ep1b03','거실')===null&&api.useOf('ep1b03','입구')===null);
+ ['보스 전투실','중앙 전투실','다음 구역 문','갈림길','작은 마당',''].every(nm=>api.useOf('ep1a09',nm)===null&&api.useOf('ep1b02',nm)===null)&&api.useOf('ep1b07','거실')===null&&api.useOf('ep1b07','입구')===null);
 
 // ---- 실제 지도 두 곳 --------------------------------------------------------------------------------
 const CLINIC=new Set(['bed','stretcher','overbed','medcab','trolley','wheelchair','monitor','iv','stool','lamp','crutches','curtain','chair145','table146']);
@@ -118,10 +121,29 @@ ok('same-named rooms rotate through three characters (sitting room / luggage roo
  const V=Object.values(per),tv=V.reduce((s,q)=>s+q.tv,0),sofa=V.reduce((s,q)=>s+q.sofa,0);
  ok('home: at most one TV and two sofas per room; TVs only in living rooms and sitting rooms ('+tv+' TVs, '+sofa+' sofas in the house)',V.every(q=>q.tv<=1&&q.sofa<=2)&&V.every(q=>!q.tv||/^(living|den)$/.test(q.use))&&tv<=9&&tv>=3&&sofa<=14);
  ok('home: luggage rooms and spare bedrooms have no sofa or TV; spare bedrooms have a bed',V.filter(q=>/^den[23]$/.test(q.use)).length>=4&&V.filter(q=>/^den[23]$/.test(q.use)).every(q=>!q.tv&&!q.sofa)&&V.filter(q=>q.use==='den3').some(q=>q.bed>0));}
+// ---- 둘째 묶음(R524): 질투의 집 ep1b03 · 폭식의 주방 ep1b04 ---------------------------------------------------
+//  질투 = 정돈되고 서로를 비춰 보는 집(거울·가죽 소파·옷장, 쓰레기 없음) / 폭식 = 주방(화구 줄·준비대·식재료 냉장고와 찬장)
+const ENVY=new Set(['sofa_n','sofa_w','mirror','wardrobe_n','wardrobe_w','table_n','table_w','chair_n','chair_w','chairb_n','chairb_w']);
+const GLUT=new Set(['range_n','range_w','fridge_sloth','table_n','table_w','wardrobe_n','wardrobe_w','chair_n','chair_w','chairb_n','chairb_w','trash']);
+ok('second batch room names → uses (same-named studies and pantries rotate through two characters; corridors are left alone)',api.useOf('ep1b03','정돈된 거실')==='parlor'&&api.useOf('ep1b03','서재',1)==='study'&&api.useOf('ep1b03','서재',2)==='study2'&&api.useOf('ep1b03','서재',3)==='study'&&api.useOf('ep1b03','거울 회랑')==='mirrors'&&api.useOf('ep1b03','앞방')==='parlor'&&api.useOf('ep1b03','입구')==='vestibule'&&api.useOf('ep1b03','복도')===null&&
+ api.useOf('ep1b04','준비대')==='prep'&&api.useOf('ep1b04','식재료 보관실',1)==='pantry'&&api.useOf('ep1b04','식재료 보관실',2)==='pantry2'&&api.useOf('ep1b04','화구 구획')==='ranges'&&api.useOf('ep1b04','앞방')==='mess'&&api.useOf('ep1b04','입구')==='mess'&&api.useOf('ep1b04','복도')===null);
+const Ev=audit('ep1b03',ENVY,55,['parlor','study','study2','mirrors']);
+const Gl=audit('ep1b04',GLUT,55,['prep','pantry','pantry2','ranges']);
+const perRoom=(A,re)=>{const per={};for(const p of A.rows){const q=per[p.r523.room]=per[p.r523.room]||{use:p.r523.use,n:0};if(re.test(p.r523.art))q.n++;}return Object.values(per);};
+{const mir=perRoom(Ev,/^mirror$/),sofa=perRoom(Ev,/^sofa_[nw]$/);
+ ok('envy: the mirror gallery is a row of mirrors (≥4); every other room has at most one mirror',mir.filter(q=>q.use==='mirrors').length===1&&mir.filter(q=>q.use==='mirrors').every(q=>q.n>=4)&&mir.filter(q=>q.use!=='mirrors').every(q=>q.n<=1));
+ ok('envy: a tidy house — no trash, beds, TVs or fridges anywhere; at most two sofas per room',Ev.rows.every(p=>!/trash|bed|tv|fridge|range/.test(p.r523.art))&&sofa.every(q=>q.n<=2));
+ ok('envy rooms read by function: sofa + table in the parlours, writing desk (table at the wall with one chair drawn up to it) + cabinet in the studies',(has(Ev,'parlor','sofa_n')||has(Ev,'parlor','sofa_w'))&&(has(Ev,'parlor','table_n')||has(Ev,'parlor','table_w'))&&['study','study2'].every(u=>Ev.rows.some(p=>p.r523.use===u&&/^table_/.test(p.r523.art))&&Ev.rows.some(p=>p.r523.use===u&&/^chairb_/.test(p.r523.art))&&Ev.rows.some(p=>p.r523.use===u&&/^wardrobe_/.test(p.r523.art))));}
+{const rng=perRoom(Gl,/^range_[nw]$/);
+ ok('gluttony: the range section is a line of ranges (≥3); other rooms have at most two',rng.filter(q=>q.use==='ranges').length===1&&rng.filter(q=>q.use==='ranges').every(q=>q.n>=3)&&rng.filter(q=>q.use!=='ranges').every(q=>q.n<=2));
+ ok('gluttony rooms read by function: tables in the prep rooms, fridges and cupboards in the pantries; no sofas, beds, TVs, mirrors or suitcases in a kitchen',Gl.rows.some(p=>p.r523.use==='prep'&&/^table_/.test(p.r523.art))&&has(Gl,'pantry','fridge_sloth')&&Gl.rows.some(p=>/^pantry/.test(p.r523.use)&&/^wardrobe_/.test(p.r523.art))&&Gl.rows.every(p=>!/sofa|bed|tv|mirror|suitcase/.test(p.r523.art)));}
+ok('second batch: corridors (복도) get nothing',[Ev,Gl].every(A=>{const nm=new Map(A.L.worldR74.rooms.map(q=>[q.id,q.name]));return A.rows.every(p=>nm.get(p.r523.room)!=='복도');}));
+ok('second batch: two-direction art is used unmirrored on its own wall',[Ev,Gl].every(A=>A.rows.filter(p=>ART[p.r523.art].pair).length>20&&A.rows.filter(p=>ART[p.r523.art].pair).every(p=>!p.r303Flip&&ART[p.r523.art].face===p.r523.wall)));
+ok('new art for the second batch is in the table: lounge sofas and Dots ranges as two-direction pairs, the standing mirror as a direction-less piece',['sofa_n','sofa_w','range_n','range_w'].every(k=>ART[k]&&ART[k].ang==='iso'&&ART[k].pair&&/^assets\/r524\//.test(ART[k].path))&&!!ART.mirror&&ART.mirror.ang==='pole'&&/r80-026\.webp$/.test(ART.mirror.path));
 ok('corridors stay passable: a connector gets at most 3 pieces',[C,Hm].every(A=>{const c={};for(const p of A.rows)if(/hall|passage/.test(p.r523.use))c[p.r523.room]=(c[p.r523.room]||0)+1;return Object.values(c).every(v=>v<=3);}));
 // 그림 방향: 두 방향 그림은 벽에 맞는 쪽을 쓰고(거울 아님), 한 방향 그림만 반대 벽에서 좌우 거울
 ok('two-direction art is used unmirrored on its own wall',Hm.rows.filter(p=>ART[p.r523.art].pair).length>20&&Hm.rows.filter(p=>ART[p.r523.art].pair).every(p=>!p.r303Flip&&ART[p.r523.art].face===p.r523.wall));
-ok('one-direction art is mirrored only on the opposite wall',[...C.rows,...Hm.rows].filter(p=>!ART[p.r523.art].pair&&ART[p.r523.art].ang==='iso'&&p.r523.tag!=='screen').every(p=>!!p.r303Flip===(ART[p.r523.art].face!==p.r523.wall)));
+ok('one-direction art is mirrored only on the opposite wall',[...C.rows,...Hm.rows,...Ev.rows,...Gl.rows].filter(p=>!ART[p.r523.art].pair&&ART[p.r523.art].ang==='iso'&&p.r523.tag!=='screen').every(p=>!!p.r303Flip===(ART[p.r523.art].face!==p.r523.wall)));
 // 침대 가림막(R521 과 같은 규칙): 관찰실 침대 줄 발치에도 가림막
 ok('observation beds get a screen at the foot (entrance side)',C.rows.some(p=>p.r523.use==='observe'&&p.r523.art==='curtain'&&p.r523.d>3));
 
@@ -153,7 +175,12 @@ ok('observation beds get a screen at the foot (entrance side)',C.rows.some(p=>p.
  ok('off switch: nothing appended, old furniture drawn again',off.every(i=>!/^r523:/.test(i))&&off.includes('r449:furn:ep1a09:6:0')&&off.includes('r80:scene:ep1a09:x')&&b.api.list(w).length===0);
  b.api.set({on:true});
  const stored=boot({stored:'{"on":false}'});stored.ctx.room=world(FX.ep1a09);ok('off switch is read from storage',stored.api.list(stored.ctx.room).length===0);}
-{const b=boot();for(const[id,layer,extra]of[['ep1b06','STORY',{}],['ep1a08','STORY',{}],['ep1a09','SAMONG',{}],['ep1b03','STORY',{}]]){const w=world(FX.ep1a09,{id,layer});Object.assign(w.exploration,extra);ok('not handled: '+id+' / '+layer,b.api.enabled(w)===false&&b.api.list(w).length===0);}
+// 손대지 않는 방(복도 등)의 각도 맞는 예전 가구는 그대로 둔다 — 꾸미는 방 안의 것만 쉬게 한다
+{const b=boot({ready:[]}),w=world(FX.ep1b03),L=w.exploration,nm=new Map(L.worldR74.rooms.map(q=>[q.id,q.name])),cor=L.r224Rooms.find(q=>nm.get(q.id)==='복도'&&q.x1-q.x0>=9&&q.y1-q.y0>=9),std=L.r224Rooms.find(q=>nm.get(q.id)==='서재');
+ const mk=(id,q)=>({id,path:'assets/world-r80/r80-026.webp',x:(q.x0+q.x1)/2,y:(q.y0+q.y1)/2,height:70,solid:false,visible:true,r80Dressing:true,r449Furniture:true});
+ w.props.push(mk('r449:old:corridor',cor),mk('r449:old:study',std));b.ctx.room=w;b.ctx.cam={x:50,y:50};b.ctx.draw();const fr=b.frames[0]||[];
+ ok('old angle-matched furniture is rested only inside rooms this overlay furnishes; in rooms it leaves alone (corridors) it stays',fr.some(i=>/^r523:/.test(i))&&fr.includes('r449:old:corridor')&&!fr.includes('r449:old:study'));}
+{const b=boot();for(const[id,layer,extra]of[['ep1b06','STORY',{}],['ep1a08','STORY',{}],['ep1a09','SAMONG',{}],['ep1b07','STORY',{}]]){const w=world(FX.ep1a09,{id,layer});Object.assign(w.exploration,extra);ok('not handled: '+id+' / '+layer,b.api.enabled(w)===false&&b.api.list(w).length===0);}
  const w=world(FX.ep1a09);w.exploration.samongR103={};ok('not handled: samong maps',b.api.enabled(w)===false);}
 
 // ---- 작은 가짜 방: 벽 줄·문 틈·구석·거울 대칭 ------------------------------------------------------------
