@@ -61,7 +61,8 @@
  const procKey=(slot,h=player?.hero)=>String(h)+':'+slot;
  const procLevel=(slot,h)=>G.procs[procKey(slot,h)]||0;
  const procCost=level=>level*level;
- const procChance=level=>level>0?Math.min(.6,.03+.04*level+bonus('proc')/100):0;
+ // R571: 사몽 발현 중에는 발동 확률 ×1.77(상한 100%) — samong-surge-r571.js 의 chance(). 사몽 밖에서는 원래 값.
+ const procChance=level=>{const c=level>0?Math.min(.6,.03+.04*level+bonus('proc')/100):0,S=window.__STORYWORLD_SAMONG_SURGE_R571__;return S&&c>0?S.chance(c):c;};
  let procReadyAt=0;
  function rollProc(){if(!dreamOn()||!window.__STORYWORLD_WER__?.cast||time<procReadyAt)return false;
   const order=SLOTS.filter(s=>procLevel(s)>0).sort(()=>Math.random()-.5);
