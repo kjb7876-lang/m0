@@ -2,7 +2,8 @@
 // 사용자 2026-11-10: "이것들은 환도 스토리에서 성위에서 타락천사기사강림, 당한후 성에서 떨어져 낯선 해변가 깨어나 불면귀마을로 진입전 시네마틱 각각 적절히배치 개선해서"
 //  · 자리(정본 개선본 last301 '타락천사 기사' · last302 '잠들지 못하는 마을' 순서 그대로, 새 문장·설정 없음):
 //    ① knight — last301 에서 보스전이 열리고(room.engaged) 타락천사 기사(l301-boss)가 깨어나는 순간. 끝에 보스 이름 카드.
-//    ② fall   — last301 에서 타락천사 기사가 쓰러진 뒤(서사창·창이 닫히고 1.2초). 정본 셋째 문단(여섯 검격 → 추락 → 검은 바다).
+//    ② fall   — last301 필수 패배(R75 fall: 12초 겨룸 또는 기사 체력 66% 아래 → room.r75Falling)가 일어나면 0.35초 뒤, 뒤 서사창 위에 먼저.
+//               영상이 끝나면 같은 장면의 정본 문단(여섯 검격 → 추락 → 검은 바다)이 이어진다.
 //    ③ beach  — last302 에 처음 들어와 입장 서사창이 닫힌 뒤 0.7초. 불면귀 마을로 들어가기 전, 젖은 모래 해안에서 깨어남.
 //  · 영상(assets/r617/*.mp4, 960×540 24fps): 사용자 원본(세로 720×1280 두 편, 4:3 한 편)을 자르지 않고 가운데 통째로 두고
 //    양옆은 같은 영상을 흐리고 어둡게 채움(세로 화면에서는 원본 그림 폭이 화면 너비에 맞게 커지고 흐린 채움만 밖으로 나감). 오른쪽 아래·왼쪽 위 생성 도구 표시는 delogo 로 지움. 들어갈 때·나갈 때 검게 이어짐.
@@ -14,7 +15,7 @@
 //  · 끄기: localStorage storyworld.r617.hwandofall {on:false}. 다시 보기: API play('knight'|'fall'|'beach').
 (()=>{'use strict';
 if(window.__STORYWORLD_HWANDO_FALL_VIDEO_R617__)return;
-const REV='R617-hwando-fall-video-1',KEY='storyworld.r617.hwandofall',STALL_MS=6000,HOLD_MS=700,ENTER_DELAY_MS=700,DOWN_DELAY_MS=1200,BOSS='l301-boss';
+const REV='R617-hwando-fall-video-2',KEY='storyworld.r617.hwandofall',STALL_MS=6000,HOLD_MS=700,ENTER_DELAY_MS=700,DOWN_DELAY_MS=350,MAX_TRIES=2,BOSS='l301-boss';
 // [시작초, 끝초, 문장] — 정본 개선본 last301·last302 문장 그대로.
 const CLIPS=Object.freeze([
  Object.freeze({id:'knight',zone:'last301',when:'engaged',src:'assets/r617/knight.mp4',poster:'assets/r617/knight-poster.jpg',seconds:8,core:.3164,nameAt:5.4,label:'타락천사 기사 강림',
@@ -39,13 +40,17 @@ const now=()=>typeof performance!=='undefined'&&performance.now?performance.now(
 const storyLayer=r=>{try{return !!r&&r.layer==='STORY'&&(typeof layer==='undefined'||layer==='STORY')&&!r.samongR103&&!r.samongR115&&!r.exploration?.samongR103;}catch(_){return false;}};
 const eligible=(r,c)=>!!(c&&r&&r.id===c.zone&&storyLayer(r)&&solo()&&!automated());
 // 다른 장면(서사창·창·로딩·다른 영상·컷신)이 열려 있으면 기다린다
-const busy=()=>{try{return (typeof storyScene!=='undefined'&&!!storyScene)||(typeof loading!=='undefined'&&!!loading)||(typeof modal!=='undefined'&&!!modal)
+// story=false: 서사창(그리고 서사창이 함께 켜는 modal)은 기다리지 않는다 — 필수 패배 뒤 서사창 위에 추락 영상을 먼저 튼다
+const busy=(story=true)=>{try{const sc=typeof storyScene!=='undefined'&&!!storyScene;return (story&&sc)||(typeof loading!=='undefined'&&!!loading)||((story||!sc)&&typeof modal!=='undefined'&&!!modal)
  ||(typeof started!=='undefined'&&!started)||typeof player==='undefined'||!player||!(player.hp>0)
  ||(typeof document!=='undefined'&&(!!document.hidden||!!document.getElementById('r317Cinema')||!!document.getElementById('r368v')||!!document.getElementById('r369v')||!!document.getElementById('r372v')))
  ||!!window.__STORYWORLD_BOSS_CINEMATIC_R568__?.inspect?.()?.active;}catch(_){return false;}};
 const bossOf=r=>(r?.enemies||[]).find(e=>e&&e.nativeId===BOSS&&!e.r61Clone&&!e.r61Summoned)||null;
 const awake=e=>!!e&&e.hp>0&&!e.deadRecorded&&e.spawnState==='active';
-const down=e=>!!e&&(e.hp<=0||!!e.deadRecorded);
+// 필수 패배(index.html R75 fall): 기사와 12초 겨루거나 기사 체력이 66% 아래가 되면 room.r75Falling 이 켜지고 기사는 숨고 뒤 서사가 열린다.
+// 보스가 실제로 죽는 경로(다른 층·옛 저장)도 함께 본다.
+const fell=(r,e)=>!!r?.r75Falling||(!!e&&(e.hp<=0||!!e.deadRecorded));
+const failed={},tries={};
 const bossName=r=>{try{const e=bossOf(r);if(e?.name)return String(e.name).replace(/\s*\(.*\)\s*$/,'');}catch(_){}return '타락천사 기사';};
 
 const audioLevel=()=>{try{const s=typeof settings!=='undefined'?settings:null;if(!s)return 1;const c=x=>Math.max(0,Math.min(1,Number(x)||0));
@@ -73,7 +78,8 @@ function close(o,reason){if(!current(o))return;o.closed=true;clearTimeout(o.stal
  for(const [type,fn]of o.events)o.video.removeEventListener(type,fn);o.events.length=0;try{o.video.pause();}catch(_){}
  if(reason==='skip')stats.skips++;else if(reason==='ended')stats.ended++;else if(reason==='stall')stats.stalled++;else if(reason==='room')stats.room++;
  if(reason==='skip'||reason==='ended')mark(o.clip.id,true);
- if((reason==='error'||reason==='stall')&&o.lastTime<1)mark(o.clip.id,false); // 거의 못 봤으면 다음에 다시
+ if((reason==='error'||reason==='stall')&&o.lastTime<1)mark(o.clip.id,false); // 거의 못 봤으면 다음에 다시(다음 방문 때)
+ if(reason==='error'||reason==='stall')failed[o.clip.id]=o.room; // 같은 방문에서는 다시 열지 않는다(Codex P2: 재생 실패 반복으로 게임이 막히지 않게)
  open=null; // 게임은 바로 다시 흐른다(검은 막만 0.46초 남아 사라짐)
  o.fade.classList.add('on');setTimeout(()=>{try{o.video.removeAttribute('src');o.video.load?.();}catch(_){}o.root.remove();
   try{if(typeof keys!=='undefined'&&keys?.clear)keys.clear();o.focus?.focus?.({preventScroll:true});}catch(_){}},reason==='error'?0:460);}
@@ -97,7 +103,7 @@ function play(id,r,opt={}){const c=byId[id];if(!c||open||typeof document==='unde
  root.querySelector('.chap').textContent=(title?title+' · ':'')+'환도의 기억';const nm=c.nameAt!=null?root.querySelector('.name'):null;if(nm)nm.querySelector('b').textContent=bossName(r);
  root.insertBefore(v,root.firstChild);document.body.appendChild(root);requestAnimationFrame(()=>{root.style.opacity='1';});
  const o=open={clip:c,root,video:v,cap:root.querySelector('.cap'),nm,fade:root.querySelector('.fade'),stall:0,hold:0,events:[],closed:false,ending:false,lastTime:0,text:'',focus:document.activeElement,room:r};
- const skip=root.querySelector('.skip');stats.plays++;gateOuter();
+ const skip=root.querySelector('.skip');stats.plays++;tries[id]=(tries[id]||0)+1;gateOuter();
  const on=(type,fn)=>{const own=e=>{if(current(o))fn(e);};o.events.push([type,own]);v.addEventListener(type,own);};
  try{if(typeof keys!=='undefined'&&keys?.clear)keys.clear();}catch(_){}
  root.addEventListener('pointerdown',e=>{if(e.target===skip)return;e.preventDefault?.();close(o,'skip');});skip.addEventListener('click',e=>{e.stopPropagation?.();close(o,'skip');});
@@ -107,18 +113,20 @@ function play(id,r,opt={}){const c=byId[id];if(!c||open||typeof document==='unde
  const p=v.play?.();if(p&&typeof p.catch==='function')p.catch(()=>{if(!current(o))return;v.muted=true;stats.muted++;const q=v.play?.();if(q&&typeof q.catch==='function')q.catch(e=>{if(!current(o))return;fail(e);close(o,'error');});});
  return true;}
 // 무엇을 틀 차례인가: knight(보스가 깨어남) → fall(보스가 쓰러짐) → beach(last302 입장)
+const blocked=(id,r)=>failed[id]===r||(tries[id]||0)>=MAX_TRIES;
 function want(r=here()){if(!prefs.on||open||!r)return null;
  if(r.id==='last301'&&eligible(r,byId.knight)){const e=bossOf(r);
-  if(!seen('knight')&&r.engaged&&awake(e))return 'knight';
-  if(!seen('fall')&&down(e))return 'fall';}
- if(pending&&pending.room===r&&!seen(pending.id)&&eligible(r,byId[pending.id]))return pending.id;
+  if(!seen('fall')&&!blocked('fall',r)&&fell(r,e))return 'fall';
+  if(!seen('knight')&&!blocked('knight',r)&&r.engaged&&awake(e))return 'knight';}
+ if(pending&&pending.room===r&&!seen(pending.id)&&!blocked(pending.id,r)&&eligible(r,byId[pending.id]))return pending.id;
  return null;}
 let downAt=null;
 function poll(){const r=here();if(open)return;if(pending&&(pending.room!==r||seen(pending.id)||!prefs.on))pending=null;
  const id=want(r);if(!id){downAt=null;return;}
  if(id==='knight'){preload('fall');if(!busy())play('knight',r);else stats.waited++;return;}
- if(busy()){stats.waited++;if(id==='fall')downAt=null;else pending.at=now();return;}
- if(id==='fall'){if(downAt===null){downAt=now();preload('fall');}if(now()-downAt>=DOWN_DELAY_MS){downAt=null;play('fall',r);}return;}
+ // 추락은 필수 패배 뒤 서사창이 열려도 그 위에 바로 튼다(영상 → 같은 문단의 글). 다른 창·로딩·장면이면 기다린다.
+ if(id==='fall'){if(busy(false)){stats.waited++;downAt=null;return;}if(downAt===null){downAt=now();preload('fall');}if(now()-downAt>=DOWN_DELAY_MS){downAt=null;play('fall',r);}return;}
+ if(busy()){stats.waited++;pending.at=now();return;}
  if(now()-pending.at>=ENTER_DELAY_MS)play(id,r);}
 if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(id,...a){const out=await base.call(this,id,...a);
  try{const r=here();if(prefs.on&&!seen('beach')&&eligible(r,byId.beach)){preload('beach');pending={id:'beach',room:r,at:now()};}

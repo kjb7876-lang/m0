@@ -95,11 +95,12 @@ const enter=async(g,id,layer='STORY')=>{await run(g,`enterRegion("${id}",null,{l
  const t1=run(g,'ticks');step(g,3);ok('knight: game resumes',run(g,'ticks')>t1);
  run(g,'room.engaged=false');run(g,'room.engaged=true');step(g,3);ok('knight: only once',ins(g).open===null);
  // fall
- run(g,'knight.hp=0;knight.deadRecorded=true;storyScene={}');step(g,20);ok('fall: waits while exit story/modal open',ins(g).open===null);
- run(g,'storyScene=null');step(g,11);ok('fall: not before 1.2s calm delay',ins(g).open===null);
- step(g,3);ok('fall: plays after boss down + 1.2s',ins(g).open==='fall');
+ // 필수 패배(index.html R75 fall()): 기사는 체력 남은 채 숨고, room.r75Falling, 뒤 서사창이 열림
+ run(g,'modal={}');run(g,'room.r75Falling=true;room.engaged=false;knight.hp=Math.max(1,knight.hp);knight.spawnState="hidden";storyScene=null');step(g,20);ok('fall: waits while a panel/modal (not the story scene) is open',ins(g).open===null);
+ run(g,'storyScene={}');step(g,2);ok('fall: not before 0.35s (story scene sets modal too, as in the real game)',ins(g).open===null);
+ step(g,3);ok('fall: plays on the R75 required fall (boss alive, hidden), over the post story scene and its modal',ins(g).open==='fall'&&run(g,'knight.hp')>0&&run(g,'!!storyScene'));
  const v2=vid(g);v2.currentTime=3;v2.fire('timeupdate');ok('fall: caption "차가운 바닷물…"',ins(g).caption.startsWith('차가운 바닷물이'));
- v2.fire('ended');step(g,8);ok('fall: closes, saved',ins(g).open===null&&ins(g).prefs.seen.includes('fall'));
+ v2.fire('ended');step(g,8);run(g,'storyScene=null;modal=null');ok('fall: closes, saved',ins(g).open===null&&ins(g).prefs.seen.includes('fall'));
  step(g,30);ok('fall: only once',ins(g).open===null);
  // beach
  await run(g,'storyScene={}');await enter(g,'last302');step(g,10);ok('beach: waits for entry story scene',ins(g).open===null&&ins(g).pending==='beach');
@@ -109,7 +110,8 @@ const enter=async(g,id,layer='STORY')=>{await run(g,`enterRegion("${id}",null,{l
  g.__dom.get('r617v').fire('pointerdown');ok('beach: tap skips, saved',ins(g).open===null&&ins(g).prefs.seen.includes('beach')&&api(g).bgmGain()===1);
  ok('saved to storyworld.r617.hwandofall',JSON.parse(s.getItem('storyworld.r617.hwandofall')).seen.length===3);}
 // 처음부터 보스가 쓰러진 채 들어옴(knight 못 봄) → fall 은 그대로
-{const g=env();await enter(g,'last301');run(g,'room.engaged=true;knight.spawnState="active";knight.hp=0');step(g,15);ok('boss already down: fall plays (knight skipped)',ins(g).open==='fall');}
+{const g=env();await enter(g,'last301');run(g,'room.engaged=true;knight.spawnState="active";knight.hp=0');step(g,15);ok('boss actually killed (other path): fall plays (knight skipped)',ins(g).open==='fall');}
+{const g=env();await enter(g,'last301');run(g,'room.engaged=true;knight.spawnState="active";room.r75Falling=true;storyScene={}');step(g,6);ok('fall preferred over knight when the fall already started',ins(g).open==='fall');}
 // 경계
 {const g=env({coop:true});await enter(g,'last301');run(g,'room.engaged=true;knight.spawnState="active"');step(g,3);ok('coop: no video',ins(g).open===null);}
 {const g=env({webdriver:true});await enter(g,'last301');run(g,'room.engaged=true;knight.spawnState="active"');step(g,3);ok('webdriver: no video',ins(g).open===null);}
@@ -127,5 +129,11 @@ const enter=async(g,id,layer='STORY')=>{await run(g,`enterRegion("${id}",null,{l
 {const g=env();await enter(g,'last302');step(g,10);const v=vid(g);v.fire('error');step(g,1);ok('video error: closes, not seen (retry next time)',ins(g).open===null&&!ins(g).prefs.seen.includes('beach'));}
 {const g=env();await enter(g,'last302');step(g,10);step(g,61);ok('stall 6s: closes, not seen',ins(g).open===null&&ins(g).stats.stalled===1&&!ins(g).prefs.seen.includes('beach'));}
 {const g=env({playFail:true});await enter(g,'last302');step(g,10);ok('autoplay blocked: retries muted',ins(g).stats.muted===1);}
+// Codex P2: 재생이 끝내 안 되면 같은 방문에서 다시 열지 않음(게임이 막히지 않게), 다음 방문에 한 번 더, 세션당 2번까지
+{const g=env({playFail:true});await enter(g,'last301');run(g,'room.engaged=true;knight.spawnState="active"');step(g,60);
+ ok('knight playback failure: no reopen loop in the same visit (1 play, game ticks)',ins(g).stats.plays===1&&ins(g).open===null&&run(g,'ticks')>=55);
+ await enter(g,'hando01');run(g,'rooms.last301={...rooms.last301}');await enter(g,'last301');step(g,10);ok('next visit (new room object, as makeRoom does): one more try',ins(g).stats.plays===2);
+ await enter(g,'hando01');run(g,'rooms.last301={...rooms.last301}');await enter(g,'last301');step(g,10);ok('session cap: at most 2 tries',ins(g).stats.plays===2);}
+{const g=env();await enter(g,'last302');step(g,10);vid(g).fire('error');step(g,40);ok('async media error: not reopened in the same visit',ins(g).stats.plays===1&&ins(g).open===null);}
 {const g=env();await enter(g,'last301');ok('replay API: play("fall") forced',api(g).play('fall')===true&&ins(g).open==='fall');api(g).skip();ok('skip API closes',ins(g).open===null);}
 console.log(`\n${pass} pass, ${fail} fail`);process.exit(fail?1:0);})();
