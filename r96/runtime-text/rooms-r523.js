@@ -63,7 +63,9 @@ const ART=Object.freeze(/*ART*/{
  cooler:{path:'assets/r406/props/server-cooler.webp',h:95,face:'w',ang:'iso',flat:true,ft:[-0.777,0.756,-0.167],r:[-0.782,0.782,0,1.965],m:'00020000f0003f801ffe07fff3ffff7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0fffc03fe001fc000f800'},
  kiosk:{path:'assets/world-r80/r80-054.webp',h:72,face:'n',ang:'iso',flat:true,up:0.006,ft:[-0.459,0.483,0.11],r:[-0.483,0.483,0,1.48],m:'03c0007f000ffe00fffc0ffff1ffff1ffff1ffff3ffff7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff7ffff0fffc03ff800fe0001c0'},
  alarm:{path:'assets/world-r80/r80-056.webp',h:53,face:'n',ang:'iso',flat:true,up:0.006,ft:[-0.243,0.243,0.109],r:[-0.243,0.245,0,1.089],m:'00fc007ff81fff87ffff7ffffffffffffffffffffffff7ffff3ffff1ffff0ffff7ffffffffffffffffffffffffffffffffffffffffffffffffffffff7ffff03fff00ff8001f0'},
- steps:{path:'assets/world-r80/r80-055.webp',h:100,face:'w',ang:'iso',flat:true,up:0.005,ft:[-1.238,1.238,-0.11],clear:1.4,r:[-1.243,1.243,0,2.055],m:'0080000c0000b000098000cc000a6000d7001ed807fcc1ffe43ffd2fffc9fffe5ffffeffffaffff8ffff8fffffffffffffff7ffff3ffff1fffc0fff807fe003f8001f0000c00'}
+ steps:{path:'assets/world-r80/r80-055.webp',h:100,face:'w',ang:'iso',flat:true,up:0.005,ft:[-1.238,1.238,-0.11],clear:1.4,r:[-1.243,1.243,0,2.055],m:'0080000c0000b000098000cc000a6000d7001ed807fcc1ffe43ffd2fffc9fffe5ffffeffffaffff8ffff8fffffffffffffff7ffff3ffff1fffc0fff807fe003f8001f0000c00'},
+ shelf_n:{path:'assets/r528/bookshelf-n.webp',h:110,face:'n',ang:'iso',flat:true,ft:[-0.438,0.429,0.21],pair:'shelf_w',r:[-0.438,0.438,0,2.288],m:'3e000ffc00fff80ffff0ffffefffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5ffff01fff001ff00030'},
+ shelf_w:{path:'assets/r528/bookshelf-w.webp',h:110,face:'w',ang:'iso',flat:true,ft:[-0.469,0.46,-0.268],pair:'shelf_n',r:[-0.469,0.469,0,2.288],m:'0007c003ff01fff0ffff7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0fff00ff8001c000'}
 }/*ART*/);
 const sampMemo=new Map();
 // 불투명 칸 → 발 기준 3D 점 [dx,dy,z] — 조형물 그림은 발을 지나 카메라를 향해 서고 위로 갈수록 뒤(-x·-y)로 30° 눕는 판(R412·R521 과 같은 식)
@@ -119,6 +121,9 @@ const G=Object.freeze({
  bedChair:{w:2.2,lim:{bed:1,chair:1},it:[['bed_sloth',.6],['chair_n',1.65]]},
  wardrobe:{w:1.15,lim:{wardrobe:1},it:[['wardrobe_n',.55]]},
  wardrobe2:{w:2.2,lim:{wardrobe:2},it:[['wardrobe_n',.55],['wardrobe_n',1.6]]},
+ // R528: 서재 책장(Dots CX-0066RM r1, 바닥 각도를 2:1 로 바로잡음) — 하나 또는 둘 나란히
+ shelf1:{w:1.05,lim:{shelf:1},it:[['shelf_n',.5]]},
+ shelf2:{w:2.05,lim:{shelf:2},it:[['shelf_n',.5],['shelf_n',1.52]]},
  fridge:{w:1.05,lim:{fridge:1},it:[['fridge_sloth',.5]]},
  fridgeTrash:{w:2.3,lim:{fridge:1,trash:1},it:[['fridge_sloth',.5],['trash',1.6,.7]]},
  cases:{w:1.9,lim:{case:2},it:[['suitcase_n',.45],['suitcase_n',1.3,.25]]},
@@ -145,7 +150,7 @@ const G=Object.freeze({
 });
 // 한 방에 같은 물건이 되풀이되지 않게(사용자 2026-11-09 "같은 물건이 같은 간격으로 반복되는 현상은 줄이고"): 묶음의 lim 이 방마다 이 수를 넘으면 그 묶음은 건너뛴다
 //  쓰임새가 lim 을 따로 가지면 그 방에서는 그 수를 쓴다(거울 회랑의 거울, 화구 구획의 화구처럼 되풀이가 그 방의 뜻인 곳)
-const LIMIT=Object.freeze({tv:1,sofa:2,table:1,trash:1,wardrobe:3,fridge:2,bed:3,case:3,chair:3,mirror:1,range:2,steps:1,alarm:1,machine:2,cooler:2,vent:1,kiosk:2});
+const LIMIT=Object.freeze({tv:1,sofa:2,table:1,trash:1,wardrobe:3,fridge:2,bed:3,case:3,chair:3,mirror:1,range:2,shelf:3,steps:1,alarm:1,machine:2,cooler:2,vent:1,kiosk:2});
 const fits=(g,cnt,U)=>!g.lim||Object.keys(g.lim).every(k=>(cnt[k]||0)+g.lim[k]<=((U&&U.lim&&U.lim[k])||LIMIT[k]));
 const take=(g,cnt,s)=>{if(g.lim)for(const k in g.lim)cnt[k]=(cnt[k]||0)+s*g.lim[k];};
 // 쓰임새 = [큰 벽 줄(차례로 돌려 가며 채움), 옆 벽 줄, 안쪽 구석 가구, 큰 벽·옆 벽에 놓을 묶음 상한]
@@ -166,8 +171,8 @@ const USE=Object.freeze({
  den3:{main:['bedChair','wardrobe','case1','bedCase','trash'],side:['chairs2','case1','wardrobe'],corner:null,cap:[5,3]},
  // 질투의 집 ep1b03: 정돈된 집 — 쓰레기·침대·TV 없음. 서재 여덟 곳은 책상 방 / 읽는 방 두 가지로 돌려 쓴다. 거울 회랑만 거울을 줄지어 세운다
  parlor:{main:['sofaL','dine','wardrobe','sofaL'],side:['mirror1','chairs2','wardrobe'],corner:null,cap:[4,3]},
- study:{main:['desk','wardrobe2','chairs2','wardrobe'],side:['mirror1','wardrobe','chairs2'],corner:'wardrobe_n',cap:[5,3]},
- study2:{main:['wardrobe2','sofaL','desk'],side:['chairs2','mirror1','wardrobe'],corner:null,cap:[5,3]},
+ study:{main:['desk','shelf2','chairs2','shelf1'],side:['shelf1','mirror1','chairs2'],corner:'wardrobe_n',cap:[5,3]},
+ study2:{main:['shelf2','sofaL','desk'],side:['shelf1','chairs2','mirror1'],corner:null,cap:[5,3]},
  mirrors:{main:['mirror2','sofaL','mirror2','mirror1'],side:['mirror2','chairs2','mirror1'],corner:null,cap:[6,4],lim:{mirror:8}},
  vestibule:{main:['wardrobe','chairs2','mirror1'],side:['chairs2','wardrobe'],corner:null,cap:[3,2]},
  // 폭식의 주방 ep1b04: 화구 구획엔 화구 줄, 준비대엔 작업 탁자, 식재료 보관실 여덟 곳은 냉장고 방 / 찬장 방으로 돌려 쓴다, 앞방·입구는 일꾼 식탁
