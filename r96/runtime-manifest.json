@@ -33353,9 +33353,19 @@
       "sha256": "5f8051f1e668f06c65558739b60bfbb3912b8f66379496c901ab0b1bef12eb1b"
     },
     {
+      "path": "assets/r535/dots/hunter-gate.webp",
+      "bytes": 83756,
+      "sha256": "1858b4e0931c2f7b7b42bbc2e830dd8a077145a7e5badb169dd37bdf0d82300d"
+    },
+    {
       "path": "assets/r535/dots/hunter-q-storm-trail.webp",
       "bytes": 163514,
       "sha256": "3c674230bc62ab44e0952fcf59c94dabe594d486e397afbbe5187df46d2187d3"
+    },
+    {
+      "path": "assets/r535/dots/hunter-volley.webp",
+      "bytes": 143422,
+      "sha256": "6e8242b7a765956ebb78b54ece642af82331a6ffb56e8ef2b850319ce7565804"
     },
     {
       "path": "assets/r535/dots/hunter-z-ember-thorn.webp",
@@ -42754,8 +42764,8 @@
     },
     {
       "path": "hunter-arrows-r535.js",
-      "bytes": 33833,
-      "sha256": "861e2502c090d12bbc56c55d83fbeea05f63f2cab30b10a800b51d49f621de63"
+      "bytes": 34814,
+      "sha256": "9d125dadd57764bb364636cbfd555b08174a012b48fb8cb3ff3d519b2bf1113f"
     },
     {
       "path": "hwando-arc-r349.js",
@@ -43703,8 +43713,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8740,
-  "totalBytes": 1215720163,
+  "fileCount": 8742,
+  "totalBytes": 1215948322,
   "webHTMLSha256": "60f0c25a158042a1f385cee47028a29d960520243c19ff6bbc7ad242a491a795",
   "largest": [
     {
