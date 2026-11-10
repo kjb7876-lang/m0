@@ -522,6 +522,8 @@ jobs:
         run: node r96/qa/r381/r381-cpu-check.cjs
       - name: R454 samong prelude~S-07 recorded narration voice in cinema mode CPU check
         run: node r96/qa/r454/samong-voice-cpu-check.cjs
+      - name: R615 heavy assets from the Cloudflare Pages asset project with GitHub Pages fallback (loader, pack, verify) CPU check
+        run: node r96/qa/r615/asset-cdn-cpu-check.cjs
       - name: R376 real difficulty + cinema HUD CPU check
         run: node r96/qa/r376/r376-cpu-check.cjs
       - name: R384 cinema narration timing + combat pacing CPU check
@@ -698,6 +700,20 @@ jobs:
       - name: R580 pack the Pages bundle from the verified site
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         run: python scripts/pages-pack.py --site r96/hospital-three-pc/site --out r96/hospital-three-pc/pages
+      - name: R615 pack heavy assets for the Cloudflare Pages asset project (free plan, no payment method; 20,000 files / 25MiB per file)
+        run: python scripts/cdn-pack.py --site r96/hospital-three-pc/site --out "$RUNNER_TEMP/r615-cdn"
+      - name: R615 upload heavy assets to Cloudflare Pages and verify them publicly (main only; skipped until repo secrets exist; the game falls back to GitHub Pages)
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        continue-on-error: true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then echo "R615: Cloudflare secrets not set, upload skipped (game keeps using GitHub Pages)"; exit 0; fi
+          PROJECT=$(python -c "import json;print(json.load(open('r96/asset-cdn.json'))['project'])")
+          npx --yes wrangler@4.154.0 pages project list | grep -q "$PROJECT" || npx --yes wrangler@4.154.0 pages project create "$PROJECT" --production-branch main
+          npx --yes wrangler@4.154.0 pages deploy "$RUNNER_TEMP/r615-cdn" --project-name "$PROJECT" --branch main --commit-dirty=true
+          python scripts/cdn-verify.py --pack "$RUNNER_TEMP/r615-cdn"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
