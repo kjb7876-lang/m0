@@ -16,7 +16,7 @@ const code=strip(src);
 ok(!/drop-shadow|blur\(/.test(code),'Three.js 기록기: drop-shadow·blur 없음');
 ok(!/벽력|霹靂|雷の呼吸|천본앵|히텐|飛天/.test(src),'다른 작품 기술 이름을 쓰지 않음');
 ok(!/'rune'|'runecross'|'cross'/.test(code),'상징 규칙: 룬·십자 문양을 새로 그리지 않음(검 이펙트만)');
-{const L=['hwando-wind-tornado','hwando-iai-ring','hwando-a-draw-cut','hwando-q-wind-blade','hwando-e-delayed-flash','hwando-r-finale-draw'];ok(!/new Image\(|\.png'/.test(code)&&(code.match(/\.webp'/g)||[]).length===6&&L.every(n=>code.includes("'assets/r590/"+n+".webp'")),'그림 자산은 assets/r590 시트 6장(R590b 2장 + Dots CX-0062HW 4장)만');}
+{const L=['hwando-wind-tornado','hwando-iai-ring','hwando-a-draw-cut','hwando-q-wind-blade','hwando-e-delayed-flash','hwando-r-finale-draw','hwando-sigil-back','hwando-sigil-front'];ok(!/new Image\(|\.png'/.test(code)&&(code.match(/\.webp'/g)||[]).length===8&&L.every(n=>code.includes("'assets/r590/"+n+".webp'")),'그림 자산은 assets/r590 시트 8장(R590b 2장 + Dots CX-0062HW 4장 + CX-0064T 문양 2장)만');}
 
 // ---- 가짜 엔진 ----
 // 벽: 14<x<15.5 (세로 벽), 맵: 1..N-1, N=40
@@ -39,7 +39,7 @@ function engine({coop=null,enemies=[],hero='hwando',lowFx=false,px=20,py=20,read
   special(){const p=g.player;if(p.hp<=0||p.specialCD>0)return;p.specialCD=10;const pw=g.attackPower()*2.4;const e=g.nearestEnemy(3.15);if(e)g.hitEnemy(e,pw,{kind:'special',friendly:true});},
   readyImage:(pth)=>g.__ready&&g.__ready.has(pth)?{ready:true,image:{src:pth,width:1152,height:768}}:null,ensureImages:(l)=>{(g.__asked||(g.__asked=[])).push(...l);return Promise.resolve();},
   ctx:{commands:[],save(){},restore(){},translate(){},scale(){},rotate(){},drawImage(im,sx,sy){if(im&&im.src){const nm=im.src.split('/').pop();draws.push('sheet:'+nm);if(this.filter&&this.filter!=='none')(g.__flt||(g.__flt=[])).push(this.filter);(g.__fr||(g.__fr=[])).push([nm,Math.floor(sx/(nm.includes('ring')||nm.includes('tornado')?192:256))+6*Math.floor(sy/(nm.includes('ring')||nm.includes('tornado')?192:256))]);}},globalAlpha:1,globalCompositeOperation:'source-over',filter:'none'}};
- const OLD=['assets/r590/hwando-wind-tornado.webp','assets/r590/hwando-iai-ring.webp'],NEW=['hwando-a-draw-cut','hwando-q-wind-blade','hwando-e-delayed-flash','hwando-r-finale-draw'].map(n=>'assets/r590/'+n+'.webp');
+ const OLD=['assets/r590/hwando-wind-tornado.webp','assets/r590/hwando-iai-ring.webp'],NEW=['hwando-a-draw-cut','hwando-q-wind-blade','hwando-e-delayed-flash','hwando-r-finale-draw','hwando-sigil-back','hwando-sigil-front'].map(n=>'assets/r590/'+n+'.webp');
  if(ready)g.__ready=new Set(ready==='b'?OLD:[...OLD,...NEW]);
  g.clearLine=(a,b,r)=>{const d=Math.hypot(b.x-a.x,b.y-a.y),k=Math.max(1,Math.ceil(d/.24));for(let i=1;i<=k;i++)if(g.blocked(a.x+(b.x-a.x)*i/k,a.y+(b.y-a.y)*i/k,.29))return false;return true;};
  W.__STORYWORLD_FX_SPRITES_R106__={on:()=>true,warm(){},draw:(nm)=>{draws.push(nm);return true;},along:(nm)=>{draws.push(nm);return true;}};
@@ -142,7 +142,7 @@ const wave=(E,id,x=20,y=20,ang=0)=>E.ctx.fx('storySourceSkill',x,y,{storyWER:tru
 {const E=engine({enemies:[]});E.run(1);ok(!E.g.effects.some(e=>e&&e.r590Sentinel),'할 일이 없으면 그리기 표지를 effects 에서 뺌');}
 
 // ---- R590b: 드라이브 색 바꾼 시트(칼바람 회오리·발도 착지 고리) ----
-for(const a of ['hwando-wind-tornado.webp','hwando-iai-ring.webp','hwando-a-draw-cut.webp','hwando-q-wind-blade.webp','hwando-e-delayed-flash.webp','hwando-r-finale-draw.webp']){const f=path.join(R,'runtime-text','assets','r590',a);ok(fs.existsSync(f)&&fs.statSync(f).size<250000,'시트 '+a+' 있음, 250KB 미만');
+for(const a of ['hwando-wind-tornado.webp','hwando-iai-ring.webp','hwando-a-draw-cut.webp','hwando-q-wind-blade.webp','hwando-e-delayed-flash.webp','hwando-r-finale-draw.webp','hwando-sigil-back.webp','hwando-sigil-front.webp']){const f=path.join(R,'runtime-text','assets','r590',a);ok(fs.existsSync(f)&&fs.statSync(f).size<250000,'시트 '+a+' 있음, 250KB 미만');
  ok(JSON.stringify(JSON.parse(fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8'))).includes('assets/r590/'+a),'manifest 에 '+a);}
 ok(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').includes("assets/r590/"),'verify-r96-public.py 가 assets/r590/ 확인');
 {const E=engine({ready:'b',enemies:[{id:'q1',x:23,y:20}]});E.ctx.special();E.run(.62);E.frame();
@@ -172,6 +172,14 @@ ok(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').incl
 
 {const mk=lo=>{const E=engine({ready:true,lowFx:lo,enemies:[{id:'r1',x:24,y:20}]});for(let i=0;i<7;i++)wave(E,'wer:ink');for(let i=0;i<20&&!E.hits.some(h=>h.s.r590==='finale');i++)E.adv(.02);E.adv(.04);E.g.__flt=[];E.frame();return E;};
  const A=mk(false),B=mk(true);ok(A.g.__flt.length>0&&A.g.__flt.every(f=>/^brightness\([0-9.]+\)$/.test(f))&&A.g.__flt.includes('brightness(0.18)'),'먹 받침은 brightness 필터만 씀('+[...new Set(A.g.__flt)]+')');ok(!B.g.__flt.includes('brightness(0.18)'),'저사양에서는 먹 받침 생략');}
+
+// ---- CX-0064T 수묵 문양: R572 환도 몸 둘레 문양을 시트로 ----
+{const mk=(ready)=>{const E=engine({ready,enemies:[]});const calls=[];const T={name:'묵화 검무',draw(L){calls.push('code:'+L);}};E.g.window.__STORYWORLD_SAMONG_THEME_R572__={theme:h=>h==='hwando'?T:null};E.adv(.02);return {E,T,calls};};
+ const A=mk(true);A.E.g.__fr=[];A.T.draw('back',300,200,70,{},A.E.ctx.time,1,false);A.T.draw('front',300,200,70,{},A.E.ctx.time,1,false);
+ ok(A.calls.length===0&&A.E.draws.includes('sheet:hwando-sigil-back.webp')&&A.E.draws.includes('sheet:hwando-sigil-front.webp'),'사몽 문양: 시트가 있으면 뒤·앞층 모두 Dots 수묵 문양 시트로 그림');
+ const B=mk('b');B.T.draw('back',300,200,70,{},B.E.ctx.time,1,false);ok(B.calls.includes('code:back'),'문양 시트가 아직 없으면 R572 코드 문양 그대로');
+ const C=mk(true);C.E.api.set(false);C.T.draw('front',300,200,70,{},C.E.ctx.time,1,false);ok(C.calls.includes('code:front'),'연계를 끄면 문양도 R572 원래 그림');
+ const D=mk(true);const d0=D.T.draw;D.E.adv(.02);D.E.adv(.02);ok(D.T.draw===d0,'문양 감싸기는 한 번만');}
 
 // ---- R571 사몽 발현 배수: 연계 자체 틱의 사거리·반경만 ×1.77, 상한 그대로 ----
 {const mk=on=>{const E=engine({enemies:[{id:'n',x:22,y:20},{id:'far',x:28.6,y:20}]});E.g.window.__STORYWORLD_SAMONG_SURGE_R571__={active:()=>on,range:r=>on?r*1.77:r,cd:s=>on?s*.23:s};return E;};

@@ -16,7 +16,7 @@
 //  끄기: localStorage['storyworld.r590.hwandoChain']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_HWANDO_CHAIN_R590__)return;
-const REV='R590-hwando-chain-4',KEY='storyworld.r590.hwandoChain';
+const REV='R590-hwando-chain-5',KEY='storyworld.r590.hwandoChain';
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const CFG=Object.freeze({sheathIdle:2,drawMult:1.4,
  windDelay:.5,windCount:2,windGap:.12,windSpread:.08,windSpeed:11,windRange:6,windRadius:.55,windMult:.4,maxBlades:6,
@@ -29,17 +29,20 @@ const SHEETS=Object.freeze({wind:Object.freeze({path:'assets/r590/hwando-wind-to
  cut:Object.freeze({path:'assets/r590/hwando-a-draw-cut.webp',cell:256,pivot:[20,188],len:205,hit:5,lift:2.4,crop:[0,140,256,222]}),
  blade:Object.freeze({path:'assets/r590/hwando-q-wind-blade.webp',cell:256,pivot:[205,122],th:150,loop:20}),
  flash:Object.freeze({path:'assets/r590/hwando-e-delayed-flash.webp',cell:256,pivot:[17,132],len:223,th:90,hit:7,lift:1.7,crop:[0,80,256,184]}),
+ // CX-0064T 수묵 문양(dots-r3, 칸 192, 피벗=발): 사몽 발현 중 R572 몸 둘레 문양(코드 붓 획)을 이 시트로 바꿔 그림
+ sigilB:Object.freeze({path:'assets/r590/hwando-sigil-back.webp',cell:192,pivot:[96,144]}),
+ sigilF:Object.freeze({path:'assets/r590/hwando-sigil-front.webp',cell:192,pivot:[96,144]}),
  finale:Object.freeze({path:'assets/r590/hwando-r-finale-draw.webp',cell:256,pivot:[13,128],len:228,th:148,hit:5,lift:1.7,crop:[0,48,256,214]})}),CELL=192,COLS=6,FRAMES=24,FPS=12.5;
 const asked=new Map();
 function sheet(k){const p=SHEETS[k].path;try{const got=typeof readyImage==='function'?readyImage(p):null;if(got?.image)return got.image;
  const t=Date.now();if(t-(asked.get(p)||0)>1500){asked.set(p,t);if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});}}catch(e){fail(e);}return null;}
-function preload(){try{if(typeof ensureImages==='function')Promise.resolve(ensureImages(Object.values(SHEETS).map(v=>v.path))).catch(()=>{});}catch(_){}}
+function preload(){patchTheme();try{if(typeof ensureImages==='function')Promise.resolve(ensureImages(Object.values(SHEETS).map(v=>v.path))).catch(()=>{});}catch(_){}}
 // 시트 한 칸: (x,y)=기준점 화면 좌표, s=배율, a=투명도
 function cell(im,fr,x,y,piv,s,a,flip=false){ctx.save();try{ctx.globalCompositeOperation='source-over';ctx.globalAlpha*=clamp(a,0,1);ctx.translate(x,y);ctx.scale(flip?-s:s,s);
  ctx.drawImage(im,(fr%COLS)*CELL,Math.floor(fr/COLS)*CELL,CELL,CELL,-piv[0],-piv[1],CELL,CELL);}catch(e){fail(e);}finally{ctx.restore();}}
 // 오른쪽을 향한 칼길 시트 한 칸을 화면 각도 ang 로 돌려 그림. 왼쪽을 향할 땐 위아래를 뒤집어 광원(왼쪽 위) 쪽 밝은 면이 위에 남게 한다.
 // 먹 받침(ink): 같은 칸을 어둡게(brightness 만 — 기록기 허용 필터) 오른쪽 아래로 2~3px 비켜 먼저 깔아 밝은 바닥에서도 칼자국 윤곽이 읽히게 한다(수묵 테마·광원 왼쪽 위).
-function strip(k,fr,x,y,ang,sx,sy,a,ink=0){const im=sheet(k);if(!im)return false;const D=SHEETS[k],C=D.cell||CELL;fr=clamp(Math.floor(fr),0,FRAMES-1);const u0=(fr%COLS)*C,v0=Math.floor(fr/COLS)*C,K=D.crop||[0,0,C,C],cw=K[2]-K[0],ch=K[3]-K[1];
+function strip(k,fr,x,y,ang,sx,sy,a,ink=0,crop=null){const im=sheet(k);if(!im)return false;const D=SHEETS[k],C=D.cell||CELL;fr=clamp(Math.floor(fr),0,FRAMES-1);const u0=(fr%COLS)*C,v0=Math.floor(fr/COLS)*C,K=crop||D.crop||[0,0,C,C],cw=K[2]-K[0],ch=K[3]-K[1];
  const one=(ox,oy,al,dark)=>{ctx.save();try{ctx.globalCompositeOperation='source-over';ctx.globalAlpha*=clamp(al,0,1);if(dark)ctx.filter='brightness(0.18)';else if(D.lift&&D.lift!==1)ctx.filter='brightness('+D.lift+')';ctx.translate(x+ox,y+oy);ctx.rotate(ang);ctx.scale(sx,Math.cos(ang)<0?-sy:sy);
   ctx.drawImage(im,u0+K[0],v0+K[1],cw,ch,K[0]-D.pivot[0],K[1]-D.pivot[1],cw,ch);stats.sheetDraws=(stats.sheetDraws||0)+1;}catch(e){fail(e);}finally{ctx.restore();}};
  if(ink>0&&!low()&&budget>0){budget--;one(2,3,a*ink,true);}one(0,0,a,false);return true;}// 먹 받침도 그리기 예산 1칸을 쓴다(상한 유지)
@@ -160,6 +163,16 @@ function drawAll(){const S=SP();if(!S)return;const t=T(),lo=low(),u=unit(),h=H()
   put(S,()=>S.draw('slash',PAL,p.x,p.y,w,hh,{angle:sa+Math.PI/2,pivot:[.5,.82],alpha:tw?.7:.92,blend:'screen'}));
   if(!lo)put(S,()=>S.along('slashline',GOLD,p.x-Math.cos(sa)*w*.9,p.y-Math.sin(sa)*w*.9,p.x,p.y,h*.12,{alpha:.5,blend:'screen'}));}
  stats.drawCalls=(stats.drawCalls||0)+(lo?Math.round(CFG.maxDraws*.5):CFG.maxDraws)-budget;}
+// ---- R572 사몽 테마 문양(환도) → Dots 수묵 문양 시트 -------------------------------------------------------------
+// R572 는 이 파일보다 늦게 실린다 → 처음 쓸 때 그 환도 문양의 draw 만 감싼다(시트가 아직 없거나 연계를 끄면 원래 코드 그림).
+let themePatched=false;
+function patchTheme(){if(themePatched)return;try{const T=window.__STORYWORLD_SAMONG_THEME_R572__?.theme?.('hwando');if(!T||typeof T.draw!=='function'||Object.isFrozen(T))return;
+ const base=T.draw;T.draw=function(L,x,fy,h,F,t,a,lo){const k=L==='front'?'sigilF':'sigilB';if(on&&(L==='back'||L==='front')&&fin(x)&&fin(fy)&&sheet(k)){const sc=Math.max(40,h)/105,fr=Math.floor((fin(t)?t:T())*FPS)%20,al=clamp(fin(a)?a:1,0,1);
+  // 뒤층: 영웅보다 먼저(뒤에) 그려 몸을 가리지 않으므로 R350 가림 옅게에서 뺀다(owner.r350). 앞층: 몸 자리(가운데)는 비우고 좌우 획만, R350 그대로.
+  const sc0=(id,ex,fn)=>typeof ctx.scope==='function'?ctx.scope({id,kind:'effect',x:player?.x||0,y:player?.y||0,groundAligned:false,r572:true,...ex},fn):fn();
+  if(L==='back')sc0('r590:sigil-back',{r350:true},()=>strip(k,fr,x,fy,0,sc,sc,.95*al));
+  else sc0('r590:sigil-front',{},()=>{strip(k,fr,x,fy,0,sc,sc,.8*al,0,[0,0,82,192]);strip(k,fr,x,fy,0,sc,sc,.8*al,0,[110,0,192,192]);});
+  stats.sigils=(stats.sigils||0)+1;return;}return base.apply(this,arguments);};themePatched=true;}catch(e){fail(e);}}
 // ---- 설치 ----------------------------------------------------------------------------------------------------
 try{
  if(typeof attackPower==='function'){const base=attackPower;attackPower=function(){const v=base.apply(this,arguments);return boost!==1&&fin(v)?v*boost:v;};}
@@ -169,7 +182,7 @@ try{
   try{const o=opt||{};if(on&&type==='storySourceSkill'&&o.storyWER&&o.sourceHero==='hwando'&&isHw()&&!egoOn()&&o.castId!=null){
    if(o.sourceSlot==='e'&&o.stage==='flight')onFlight(x,y,o);else if(o.sourceSlot==='r'&&o.stage==='release'&&fin(x)&&fin(y))onWave(x,y,o);}}catch(e){fail(e);}return r;};}
  if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e===SENT){try{if(on)drawAll();}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};}
- if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{const t=T(),dt=lastT==null?0:clamp(t-lastT,0,.1);lastT=t;
+ if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{if(!themePatched)patchTheme();const t=T(),dt=lastT==null?0:clamp(t-lastT,0,.1);lastT=t;
    for(let i=0;i<jobs.length;){const q=jobs[i];if(t>=q.at){jobs.splice(i,1);if(valid(q.j))q.fn();}else if(!valid(q.j))jobs.splice(i,1);else i++;}
    if(dt>0)stepBlades(dt);
    for(let i=vis.length-1;i>=0;i--)if(t-vis[i].t0>=vis[i].life||t<vis[i].t0-1)vis.splice(i,1);
