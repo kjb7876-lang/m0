@@ -38,6 +38,11 @@
       "sha256": "ecde58177e6ebe1f9165247d628cf5ef53a201866242a95d07d1a207edb1802a"
     },
     {
+      "path": "asset-cdn-r615.js",
+      "bytes": 3190,
+      "sha256": "b8baa037421a1474f2f2ca0837a08f8086c1f21934ec1bb6815d75d3018a8053"
+    },
+    {
       "path": "assets-clean-r99.js",
       "bytes": 3408,
       "sha256": "340156de4034dc06971d7ad4951347debfb199d90938cabc1351444faa5132ff"
@@ -43164,8 +43169,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6573501,
-      "sha256": "cedc47dbd6c73bda4d02dba4111318ebac1a94038691581b52b5c3e546ddc525"
+      "bytes": 6573544,
+      "sha256": "e8fcbfa9e10e36c896322898c63e65c52267407d073bf93509baf4f2187ab3e6"
     },
     {
       "path": "intro-r140.js",
@@ -44019,8 +44024,8 @@
     },
     {
       "path": "voice-r381.js",
-      "bytes": 4531,
-      "sha256": "11b34aa7c464886e4c4881fd70b10785e3bc62a51f4638080a2bc4061c8dc1f3"
+      "bytes": 5529,
+      "sha256": "d1fa85846f97e4e311e68a0994ca0f75ef56b95498e5950a1671d1bb312eb6f8"
     },
     {
       "path": "wave-orphans-r352.js",
@@ -44108,9 +44113,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8821,
-  "totalBytes": 1225542922,
-  "webHTMLSha256": "cedc47dbd6c73bda4d02dba4111318ebac1a94038691581b52b5c3e546ddc525",
+  "fileCount": 8822,
+  "totalBytes": 1225547153,
+  "webHTMLSha256": "e8fcbfa9e10e36c896322898c63e65c52267407d073bf93509baf4f2187ab3e6",
   "largest": [
     {
       "path": "index.html",
