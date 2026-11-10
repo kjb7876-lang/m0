@@ -71,6 +71,7 @@ function sentences(text){const P=G(()=>window.__STORYWORLD_CINEMA_MODE_R370__.pu
  const out=[];String(text||'').split(/\n\s*\n/).forEach(para=>{const p=para.replace(/\s+/g,' ').trim();if(!p)return;for(const raw of(p.match(/[^.?!…。]+(?:[.?!…。]+["”’」』)]*|$)/g)||[p])){const t=raw.trim();if(t)out.push(t);}});return out;}
 
 // ── 상태 ──
+let tainted=false;/* 생존 판이 엔진 진행을 새 게임으로 바꿔 놓았으니, 스토리를 다시 불러오거나 새로 시작하기 전까지는 저장하지 않는다 */
 let S=null,pending=false,stageRoom=null,entering=0,hudAt=0,inKill=false,beams=[],gems=[],choosing=false,choiceQ=0;
 const fresh=hero=>({active:true,hero,i:0,loop:0,ids:stageIds(G(()=>regions,[])),phase:'pre',narrating:false,narrEndAt:NaN,stageAt:0,bossUp:false,clearAt:NaN,
  kills:0,stageKills:0,serial:0,xp:0,lv:1,core:{lv:{},hp:CORE0.max,cd:1,hitAt:-9},taken:{},over:false,best:0,startWall:Date.now()});
@@ -156,7 +157,7 @@ function baseAtk(){let v=40;try{v=Number(attackPower())||40;if(player.samong>0)v
 function spawnAt(src,at,{major=false,mid=false}={}){const def=G(()=>regionById[room.id],null);if(!src?.profile||!def)return null;let e;
  try{e=actor3(src.profile,'r600:'+room.id+':'+(++S.serial),at.x,at.y,!!(major&&!mid),'STORY',def,!!mid);}catch(err){fail(err);return null;}if(!e)return null;
  if(!e.nativeId)e.nativeId=src.nativeId;e.name=String(src.name||e.name||'').replace(/\s*(후속 증원|증원|추격대)$/,'').replace(/\s+\d+$/,'');
- e.spawnState='active';e.homeX=at.x;e.homeY=at.y;e.explorationLeash=null;e.graceUntil=G(()=>time,0)+.6;e.cd=Math.max(.6,e.cd||1);e.survivalR600=true;
+ e.r61PreserveHealth=true;e.r61PreserveDamage=true;/* R61 첫 tick 체력·피해 정규화가 생존 값을 덮지 않게 */e.spawnState='active';e.homeX=at.x;e.homeY=at.y;e.explorationLeash=null;e.graceUntil=G(()=>time,0)+.6;e.cd=Math.max(.6,e.cd||1);e.survivalR600=true;
  if(e.combatProfile)e.combatProfile={...e.combatProfile,aggro:80};room.enemies.push(e);stats.spawned++;return e;}
 function ringPoint(c,min,max,A){for(let t=0;t<20;t++){const a=Math.random()*Math.PI*2,d=min+Math.random()*(max-min),q={x:clamp(c.x+Math.cos(a)*d,A.x0+.8,A.x1-.8),y:clamp(c.y+Math.sin(a)*d,A.y0+.8,A.y1-.8)};
   if(Math.hypot(q.x-player.x,q.y-player.y)>=min*.75&&!G(()=>blocked(q.x,q.y,.45,room),false))return q;}return null;}
@@ -284,8 +285,11 @@ function heroPicker(){const H=G(()=>HEROES,{}),ids=Object.keys(H);const esc=s=>S
   '<div class="r600Heroes">'+ids.map(id=>'<button type="button" data-r600hero="'+esc(id)+'">'+esc(H[id]?.name||id)+'</button>').join('')+'</div><div class="actions"><button id="r600Back">뒤로</button></div>');
  for(const b of document.querySelectorAll('[data-r600hero]'))b.onclick=()=>start(b.getAttribute('data-r600hero'));
  const back=document.getElementById('r600Back');if(back)back.onclick=()=>{pending=false;try{showTitle();}catch(e){fail(e);}};}
-async function start(hero){try{pending=false;stats.starts++;deactivate();S=fresh(hero||'hwando');choiceQ=0;
- entering++;let ok;try{ok=await newGame(S.hero);}finally{entering--;}if(ok===false||!S?.active){deactivate();return false;}
+async function start(hero){try{pending=false;stats.starts++;deactivate();S=fresh(hero||'hwando');choiceQ=0;spawnAt0=0;tainted=true;
+ /* 스토리 세이브가 있으면 엔진 newGame 이 '새 여정 확인'을 요구하며 막는다(덮어쓰기 보호). 생존은 저장을 아예 쓰지 않으므로 이 한 번만
+    'R73 새 여정 확인됨'으로 답해 통과시킨다 — 덮어쓰기 대기(pendingOverwrite5)는 켜지 않으므로 기존 세이브를 지우는 길도 타지 않는다. */
+ const SL=window.__STORYWORLD_SAVE_SLOTS_R73__,liftSlots=!!SL;if(liftSlots){try{window.__STORYWORLD_SAVE_SLOTS_R73__=Object.freeze({...SL,confirmedNew:()=>true});}catch(e){fail(e);}}
+ entering++;let ok;try{ok=await newGame(S.hero);}finally{entering--;if(liftSlots)try{window.__STORYWORLD_SAVE_SLOTS_R73__=SL;}catch(e){fail(e);}}try{window.__STORYWORLD_INTRO_VIDEO_R309__?.skip?.();}catch(_){}/* 생존은 스토리 오프닝 영상 없이 바로 */if(ok===false||!S?.active){deactivate();return false;}
  for(let i=0;i<100&&G(()=>loading,false);i++)await new Promise(r=>setTimeout(r,100));
  try{storyQueue=[];storyScene=null;storyDone=null;if(G(()=>modal,false))closePanel(true);}catch(_){}
  if(!S.ids.length){deactivate();return false;}return await go(0);}catch(e){fail(e);deactivate();return false;}}
@@ -297,14 +301,14 @@ function titleButton(){const panel=document.getElementById('panel'),normal=docum
 function install(){makeNative=makeRoom;
  const EX=window.__STORYWORLD_EXPLORATION__;if(EX&&typeof EX.layout==='function'){const own={};for(const k of Object.keys(EX))own[k]=EX[k];own.layout=function(id,...a){if(stageRoom&&S?.active&&id===stageRoom.id&&G(()=>layer,'')==='STORY')return stageRoom.exploration;return EX.layout.call(EX,id,...a);};own.survivalR600=true;try{window.__STORYWORLD_EXPLORATION__=Object.freeze(own);}catch(e){fail(e);}}
  const getBase=getRoom;getRoom=function(id=zone,l=layer){if(stageRoom&&S?.active&&id===stageRoom.id&&l==='STORY')return stageRoom;return getBase.apply(this,arguments);};
- const enterBase=enterRegion;enterRegion=async function(...a){if(!entering&&S?.active)deactivate();return enterBase.apply(this,a);};
- const tickBase=tick;tick=function(dt){try{snapCoreWalkers();}catch(e){fail(e);}const r=tickBase.apply(this,arguments);try{if(here()&&!G(()=>modal,false)&&!G(()=>loading,false)&&player.hp>0){step(dt);showChoice();}}catch(e){fail(e);}return r;};
+ const enterBase=enterRegion;enterRegion=async function(...a){if(!entering&&S?.active){/* 메뉴 '쉼터로' 등 생존 밖으로 나가는 길은 타이틀로(엔진 진행이 생존용 새 게임이라 그대로 들어가면 자동 저장이 스토리 슬롯을 덮는다) */deactivate();try{showTitle();}catch(e){fail(e);}setTimeout(()=>{try{if(!S?.active&&!document.getElementById('survivalStartR600'))showTitle();}catch(e){fail(e);}},120);/* 바깥 감싸기가 창을 닫아도 타이틀이 남게 */return false;}return enterBase.apply(this,a);};
+ const tickBase=tick;tick=function(dt){try{snapCoreWalkers();}catch(e){fail(e);}const r=tickBase.apply(this,arguments);try{if(here()&&!G(()=>modal,false)&&!G(()=>loading,false)&&player.hp>0){if(choosing&&!S.over){choosing=false;choiceQ++;stats.choiceRecovered=(stats.choiceRecovered||0)+1;}/* 카드를 고르지 않고 창이 닫혔으면(Esc 등) 다시 띄운다 */step(dt);showChoice();}}catch(e){fail(e);}return r;};
  rawGainXP=gainXP;gainXP=function(v,...a){if(here()&&inKill){if(Number.isFinite(+v)&&+v>0&&inKill.e){gems.push({x:inKill.e.x+(Math.random()-.5)*.4,y:inKill.e.y+(Math.random()-.5)*.4,v:+v});
    if(gems.length>GEM_CAP){const a0=gems.shift(),b0=gems[0];b0.v+=a0.v;}}return;}return rawGainXP.call(this,v,...a);};
  const killBase=killEnemy;killEnemy=function(e,...a){const first=!!e&&!e.deadRecorded;if(!here()||!first)return killBase.apply(this,[e,...a]);inKill={e};let r;try{r=killBase.apply(this,[e,...a]);}finally{inKill=false;}
   try{if(e.deadRecorded){S.kills++;S.stageKills++;stats.kills++;const st=CS();S.core.hp=Math.min(st.max,S.core.hp+st.heal*(e.r600Boss?15:1));}}catch(err){fail(err);}return r;};
  if(typeof finishEncounter==='function'){const base=finishEncounter;finishEncounter=function(...a){if(here())return;return base.apply(this,a);};}
- if(typeof saveGame==='function'){const base=saveGame;saveGame=function(...a){if(S?.active){stats.saveBlocked++;return false;}return base.apply(this,a);};}
+ if(typeof saveGame==='function'){const base=saveGame;saveGame=function(...a){if(S?.active||tainted){stats.saveBlocked++;return false;}return base.apply(this,a);};}
  if(typeof guideStep==='function'){const base=guideStep;guideStep=function(...a){if(here()){try{guide=false;}catch(_){}return;}return base.apply(this,a);};}
  // 코어·빛줄기·조각은 엔진 그리기 순서 안(지형 위, 배우 그리기 전 — 출구 표식 자리)에서 그린다. draw 뒤에 그리면 프레임 명령이 이미 넘어가 화면에 닿지 않는다.
  if(typeof drawExits==='function'){const base=drawExits;drawExits=function(...a){if(here())return;return base.apply(this,a);};}
@@ -313,16 +317,16 @@ function install(){makeNative=makeRoom;
  if(typeof travel==='function'){const base=travel;travel=function(...a){if(here())return false;return base.apply(this,a);};}
  if(typeof interact==='function'){const base=interact;interact=function(...a){if(here())return false;return base.apply(this,a);};}
  if(typeof enterNarrative==='function'){const base=enterNarrative;enterNarrative=function(...a){if(S?.active)return;return base.apply(this,a);};}
- if(typeof showDeath==='function'){const base=showDeath;showDeath=function(...a){if(S?.active&&!S.over){stats.deaths++;over('hero');return;}if(S?.over)return;return base.apply(this,a);};}
- if(typeof showTitle==='function'){const base=showTitle;showTitle=function(...a){if(S?.active)deactivate();pending=false;const r=base.apply(this,a);try{titleButton();}catch(e){fail(e);}return r;};}
- if(typeof restoreSave==='function'){const base=restoreSave;restoreSave=async function(...a){if(S?.active)deactivate();return base.apply(this,a);};}
- if(typeof newGame==='function'){const base=newGame;newGame=async function(...a){if(S?.active&&!S.over&&a[0]!==S.hero)deactivate();return base.apply(this,a);};}
+ if(typeof showDeath==='function'){const base=showDeath;showDeath=function(...a){if(S?.active&&!S.over){stats.deaths++;over('hero');return;}if(S?.active&&S.over)return;return base.apply(this,a);};}
+ if(typeof showTitle==='function'){const base=showTitle;showTitle=function(...a){if(S?.active&&!entering)deactivate();pending=false;const r=base.apply(this,a);try{titleButton();}catch(e){fail(e);}return r;};}
+ if(typeof restoreSave==='function'){const base=restoreSave;restoreSave=async function(...a){if(S?.active)deactivate();const r=await base.apply(this,a);if(r!==false&&!entering)tainted=false;return r;};}
+ if(typeof newGame==='function'){const base=newGame;newGame=async function(...a){if(!entering&&S?.active)deactivate();const r=await base.apply(this,a);if(r!==false&&!entering)tainted=false;return r;};}
  try{titleButton();}catch(e){fail(e);}}
 try{install();}catch(e){fail(e);}
 // 창(강화 고르기·결과·메뉴)이 열려 있으면 자막을 감춘다(카드를 가리지 않게).
 try{const iv=setInterval(()=>{try{document.body.classList.toggle('r600Modal',!!(S?.active&&G(()=>modal,false)));}catch(_){}},200);iv?.unref?.();}catch(_){}
 window.__STORYWORLD_SURVIVAL_R600__=Object.freeze({revision:REV,start,active:()=>!!S?.active,here,
- state:()=>S?{ready:!!S.ready,startPos:S.startPos||null,i:S.i,loop:S.loop,id:S.ids[S.i],phase:S.phase,narrating:S.narrating,narrEndAt:S.narrEndAt,bossUp:S.bossUp,kills:S.kills,core:{...S.core,stats:CS()},choiceQ,gems:gems.length,over:S.over,ids:S.ids.length}:null,
+ state:()=>S?{tainted,ready:!!S.ready,startPos:S.startPos||null,i:S.i,loop:S.loop,id:S.ids[S.i],phase:S.phase,narrating:S.narrating,narrEndAt:S.narrEndAt,bossUp:S.bossUp,kills:S.kills,core:{...S.core,stats:CS()},choiceQ,gems:gems.length,over:S.over,ids:S.ids.length}:null,
  narr:()=>({playing:narrPlaying(),queued:N.q.length,cur:N.cur?.text||null}),skipNarration:()=>{N.q.length=0;if(N.cur){N.gen++;N.cur=null;narrNext();}},
  pure:Object.freeze({xpNeed,levelUps,stageIds,arena,spawning,nextPhase,advance,cap,hpMul,coreStats,pickThree,sentences,TAIL,CORE0,CORE_UPS}),
  inspect:()=>({revision:REV,stats:{...stats},lastError,active:!!S?.active,here:here(),pending})});

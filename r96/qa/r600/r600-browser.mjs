@@ -32,7 +32,8 @@ await p.waitForFunction(()=>window.__STORYWORLD_SURVIVAL_R600__.here()&&!loading
 await gameWait(3);
 {const r=await A(()=>({narr:window.__STORYWORLD_SURVIVAL_R600__.narr(),st:window.__STORYWORLD_SURVIVAL_R600__.state(),alive:room.enemies.filter(e=>e.hp>0).length,subs:document.getElementById('r600Subs')?.classList.contains('on'),hud:document.getElementById('r600Hud')?.textContent}));
  ok('narration plays with subtitles',r.narr.playing&&r.subs===true&&r.st.narrating===true,r.narr);
- ok('enemies keep spawning while narration plays (capped)',r.alive>0&&r.alive<=48,r.alive);ok('HUD shows mode, map and kills',/무한 생존/.test(r.hud)&&/악마화 나무의 정원/.test(r.hud),r.hud);}
+ ok('enemies keep spawning while narration plays (capped)',r.alive>0&&r.alive<=48,r.alive);
+ {const h0=await A(()=>room.enemies.filter(e=>e.hp>0&&e.survivalR600).map(e=>[e.id,e.maxHp,!!e.r61PreserveHealth]));await gameWait(1);const h1=await A(()=>Object.fromEntries(room.enemies.filter(e=>e.survivalR600).map(e=>[e.id,e.maxHp])));const bad=h0.filter(([id,m,f])=>!f||(id in h1&&h1[id]!==m));ok('survival HP survives the native R61 normalizer (marked + unchanged after ticks)',h0.length>0&&bad.length===0,{n:h0.length,bad:bad.slice(0,3)});}ok('HUD shows mode, map and kills',/무한 생존/.test(r.hud)&&/악마화 나무의 정원/.test(r.hud),r.hud);}
 await shot('03-wave');
 // 경험치 조각·3택
 {await A(()=>{const e=room.enemies.find(e=>e.hp>0);e.hp=.5;hitEnemy(e,5);});const g=await A(()=>window.__STORYWORLD_SURVIVAL_R600__.state().gems);ok('kill drops an XP shard (not instant XP)',g>=1,g);
@@ -42,6 +43,8 @@ await shot('03-wave');
  const cards=await A(()=>[...document.querySelectorAll('.r600Card')].map(b=>b.textContent));ok('level up pauses and offers 3 choices',cards.length===3&&new Set(cards).size===3&&await A(()=>modal),cards);
  {const v=await A(()=>{const e=document.getElementById('r600Subs');return e?getComputedStyle(e).opacity:'none';});ok('narration subtitle hidden while the choice panel is open',v==='0'||v==='none',v);}
  await shot('04-choice');
+ await p.keyboard.press('Escape');await p.waitForTimeout(300);await A(()=>{if(modal)closePanel(true);});/* Esc·다른 길로 닫힘 */
+ await p.waitForFunction(()=>!!document.getElementById('r600Pick0')&&modal,null,{timeout:120000,polling:200}).catch(()=>{});ok('upgrade panel closed without a pick comes back (choice not lost)',await A(()=>!!document.getElementById('r600Pick0')&&modal&&document.querySelectorAll('.r600Card').length===3));
  const before=await A(()=>({pts:player.points,lv:player.level}));await p.locator('#r600Pick0').click();
  const after=await A(()=>({modal,taken:window.__STORYWORLD_SURVIVAL_R600__.inspect().stats.choices,pts:player.points}));ok('picking applies and resumes; no passive points granted',after.modal===false&&after.taken>=1&&after.pts===before.pts,{before,after});}
 // 코어
@@ -83,5 +86,15 @@ ok('no saves written by the run (slot data unchanged)',JSON.stringify(await slot
  ok('retry starts a fresh run at the first map',await A(()=>room.id==='dist00'&&window.__STORYWORLD_SURVIVAL_R600__.state().kills===0&&!window.__STORYWORLD_SURVIVAL_R600__.state().over));}
 ok('upgrade levels never exceed their max',await A(()=>{const S=window.__STORYWORLD_SURVIVAL_R600__,lv=S.state().core.lv;return S.pure.CORE_UPS.every(u=>(lv[u.id]||0)<=u.max)&&UPGRADES.every(u=>(+player.upgrades?.[upgradeKey(u)]||0)<=u.max);}));
 ok('story unlocks untouched by the run (coop gate restored)',await A(()=>!Object.prototype.hasOwnProperty.call(window.__STORYWORLD_COOP_SIM_R62__,'__r600')&&typeof window.__STORYWORLD_COOP_SIM_R62__.authoritativeRegionLoad==='function'&&window.__STORYWORLD_COOP_SIM_R62__.authoritativeRegionLoad('dist05','STORY')===false));
+// 생존 패배 → 타이틀 → 스토리 죽음 화면은 그대로 떠야 한다
+{await A(()=>{if(modal)closePanel(true);showDeath();});await p.waitForFunction(()=>!!document.getElementById('r600Title'),null,{timeout:60000}).catch(()=>{});await p.locator('#r600Title').click().catch(()=>{});await p.waitForTimeout(500);
+ const st0=await A(()=>window.__STORYWORLD_SURVIVAL_R600__.state()?.over);await A(()=>newGame('hwando'));await p.waitForFunction(()=>started&&!loading,null,{timeout:240000}).catch(()=>{});await A(()=>{for(let i=0;i<160&&storyScene;i++)advanceScene();if(modal)closePanel(true);});await p.waitForTimeout(800);await A(()=>{if(modal)closePanel(true);});
+ const d=await A(()=>{showDeath();const tx=document.getElementById('panel')?.textContent||'';return{over:true,st0:window.__STORYWORLD_SURVIVAL_R600__.state()?.over,active:window.__STORYWORLD_SURVIVAL_R600__.active(),here:window.__STORYWORLD_SURVIVAL_R600__.here(),modal,panel:/MEMORY REMAINS/.test(tx)&&!/정화 코어|무한 생존/.test(tx),tx:tx.slice(0,80)};});d.over=st0;
+ ok('after a lost survival run, the normal death panel is not suppressed',d.over===true&&d.active===false&&d.panel,d);await A(()=>{if(modal)closePanel(true);});}
+// 메뉴 '쉼터로'(returnHome) → 타이틀로, 스토리 슬롯에 저장 안 함
+{await A(()=>window.__STORYWORLD_SURVIVAL_R600__.start('hwando'));await p.waitForFunction(()=>window.__STORYWORLD_SURVIVAL_R600__.here()&&!loading&&window.__STORYWORLD_SURVIVAL_R600__.state().ready,null,{timeout:240000}).catch(()=>{});
+ const ls1=await slotKeys();await A(()=>{if(modal)closePanel(true);returnHome();});await p.waitForTimeout(1500);
+ const r=await A(()=>({active:window.__STORYWORLD_SURVIVAL_R600__.active(),tainted:window.__STORYWORLD_SURVIVAL_R600__.state()?.tainted,saved:saveGame(false),title:!!document.getElementById('survivalStartR600')}));
+ ok('menu retreat from survival goes to the title and never writes the story save',r.active===false&&r.tainted===true&&r.saved===false&&r.title&&JSON.stringify(await slotKeys())===JSON.stringify(ls1),r);}
 const ins=await A(()=>window.__STORYWORLD_SURVIVAL_R600__.inspect());ok('no page errors, no module errors',errs.length===0&&ins.stats.errors===0,{errs,last:ins.lastError});
 console.log(JSON.stringify(ins.stats));console.log('R600 browser',n-fail+'/'+n);await b.close();process.exit(fail?1:0);
