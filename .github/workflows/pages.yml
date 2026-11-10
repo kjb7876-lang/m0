@@ -654,6 +654,11 @@ jobs:
         run: python scripts/verify-r96-release.py
       - name: R580 Pages bundle under 1GB (archival narration excluded, lossless PNG, pixel-identical, public verifier)
         run: python r96/qa/r580/pages-size-check.py
+      - name: R580 public verifier retries transient read timeouts/disconnects but still fails wrong, missing or never-arriving bytes
+        run: |
+          python scripts/pages-pack.py --site r96/hospital-three-pc/site --out "$RUNNER_TEMP/r580-pages"
+          python r96/qa/r580/public-retry-check.py "$RUNNER_TEMP/r580-pages"
+          rm -rf "$RUNNER_TEMP/r580-pages"
       - name: R580 pack the Pages bundle from the verified site
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         run: python scripts/pages-pack.py --site r96/hospital-three-pc/site --out r96/hospital-three-pc/pages
