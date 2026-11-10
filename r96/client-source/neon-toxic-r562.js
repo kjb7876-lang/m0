@@ -11,7 +11,7 @@
  */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_NEON_TOXIC_R562__)return;
-const REV='R562-toxic-3',KEY='storyworld.r562.toxic',HERO='neon';
+const REV='R562-toxic-4',KEY='storyworld.r562.toxic',HERO='neon';
 const ARC_AT=.3,ARC_R=3.5,ARC_K=.25,ARC_MAX=4,POISON_T=2,POISON_GAP=.5,POISON_K=.05,POOL_AT=.55,POOL_R=1.7,POOL_T=3,POOL_GAP=.5,POOL_K=.03,
  RPOOL_AT=.7,RPOOL_R=2.2,POOL_MAX=3,POISON_MAX=24,ARC_DRAW_MAX=6,ARC_LIFE=.32,ARC_VIS=.6;
 const stats={qCasts:0,arcs:0,arcHits:0,poisoned:0,poisonTicks:0,pools:0,poolTicks:0,rPools:0,draws:0,errors:0,lastError:null};
@@ -33,11 +33,13 @@ function src(kind){return {kind,friendly:true,owner:'hero',sourceHero:HERO,r562:
 function deal(e,v,kind){if(!alive(e)||!canHit(e)||!(v>0))return false;try{return !!hitEnemy(e,v,src(kind));}catch(err){fail(err);return false;}}
 function addArc(a,b){strikes.push({x:b.x,y:b.y,t0:T()});if(strikes.length>4)strikes.shift();arcs.push({x0:a.x,y0:a.y,x1:b.x,y1:b.y,t0:T(),seed:(stats.arcs*131)%997});if(arcs.length>ARC_DRAW_MAX)arcs.shift();stats.arcs++;}
 function addPoison(e,power){if(!alive(e))return;if(!poison.has(e)&&poison.size>=POISON_MAX)return;if(!poison.has(e))stats.poisoned++;const t=T();poison.set(e,{until:t+POISON_T+1e-6,next:t+POISON_GAP,power});}
-function addPool(x,y,r,power,big){if(pools.length>=POOL_MAX)pools.shift();const t=T();pools.push({x,y,r,power,t0:t,next:t+POOL_GAP,big:!!big});stats.pools++;if(big)stats.rPools++;}
+// 사몽 발현(R571) 중 반경 배율(최대 2배): 장판은 생길 때 한 번 정해 끝까지 같은 크기.
+function rk(){try{const g=window.__STORYWORLD_SAMONG_SURGE_R571__;const r=g?.range?Number(g.range(1)):1;return Number.isFinite(r)&&r>0?Math.min(2,Math.max(1,r)):1;}catch(_){return 1;}}
+function addPool(x,y,r,power,big){r*=rk();if(pools.length>=POOL_MAX)pools.shift();const t=T();pools.push({x,y,r,power,t0:t,next:t+POOL_GAP,big:!!big});stats.pools++;if(big)stats.rPools++;}
 // Q 이어지기: 원래 기술이 실제로 맞힌 적(동기 hitEnemy)만 모은다.
 function onQ(targets){const power=qPower(),t=T();stats.qCasts++;lastRoom=curRoom();
  for(const e of targets)addPoison(e,power);
- jobs.push({at:t+ARC_AT,run:()=>{const hit=new Set(targets);let n=0;for(const a of targets){if(n>=ARC_MAX)break;if(!alive(a))continue;let best=null,bd=ARC_R;
+ jobs.push({at:t+ARC_AT,run:()=>{const hit=new Set(targets);let n=0;for(const a of targets){if(n>=ARC_MAX)break;if(!alive(a))continue;let best=null,bd=ARC_R*rk();
    for(const e of enemiesNow()){if(hit.has(e)||!alive(e))continue;const d=dist(a,e);if(d<bd&&lineOk(a,e)){bd=d;best=e;}}
    if(best){hit.add(best);n++;addArc(a,best);if(deal(best,power*ARC_K,'r562-arc'))stats.arcHits++;addPoison(best,power);}}}});
  const live=targets.filter(alive);if(live.length){const cx=live.reduce((s,e)=>s+e.x,0)/live.length,cy=live.reduce((s,e)=>s+e.y,0)/live.length;
@@ -56,7 +58,19 @@ if(typeof special==='function'){const base=special;special=function(...a){let be
 if(typeof fx==='function'){const base=fx;fx=function(type,x,y,opt){const r=base.apply(this,arguments);
  try{const o=opt||{};if(type==='storySourceSkill'&&o.storyWER&&o.stage==='release'&&o.sourceHero===HERO&&o.sourceSlot==='r'&&on()&&heroNow()===HERO){const id=o.castId||('r:'+T());
   if(!seenR.has(id)){seenR.add(id);if(seenR.size>16)seenR.delete(seenR.values().next().value);lastRoom=curRoom();const power=qPower();jobs.push({at:T()+RPOOL_AT,run:()=>addPool(x,y,RPOOL_R,power,true)});}}}catch(err){fail(err);}return r;};}
+// ---- 사몽 발현 중 몸 둘레 문양(R572 코드 그림) → Dots CX-0064T 문양 시트(dots-r3, 칸 192·6×4, 피벗=발 [96,144]) ----
+// R572 가 이 파일보다 늦게 실리므로 tick 에서 처음 한 번 그 영웅 문양의 draw 만 감싼다(R572 파일 안 고침). 시트가 없거나 끄면 원래 코드 그림.
+// 뒤층은 몸보다 먼저 그려지므로 R350 가림 옅게에서 뺀다(r350). 앞층 CROP 밖(몸 자리)은 비운다.
+const SIG={back:'assets/r562/dots/neon-sigil-back.webp',front:'assets/r562/dots/neon-sigil-front.webp'},SIGC=192,SIGP=[96,144],SIGCROP=[[0,82],[110,192]];let sigPatched=false,sigAsk=-1e9;
+function sigImg(L){try{const g=typeof readyImage==='function'?readyImage(SIG[L]):null;if(g&&g.image)return g.image;const n=Date.now();if(n-sigAsk>1500){sigAsk=n;if(typeof ensureImages==='function')Promise.resolve(ensureImages([SIG.back,SIG.front])).catch(()=>{});}}catch(err){fail(err);}return null;}
+function patchSigil(){if(sigPatched)return;try{const TH=window.__STORYWORLD_SAMONG_THEME_R572__?.theme?.(HERO);if(!TH||typeof TH.draw!=='function'||Object.isFrozen(TH))return;const base=TH.draw;
+ TH.draw=function(L,x,fy,h,F,t,a,lo){const im=(L==='back'||L==='front')&&on()&&Number.isFinite(x)&&Number.isFinite(fy)?sigImg(L):null;if(!im)return base.apply(this,arguments);
+  const sc=Math.max(40,Number(h)||0)/105,fr=Math.floor((Number.isFinite(t)?t:T())*12.5)%24,u=(fr%6)*SIGC,v=Math.floor(fr/6)*SIGC,al=Math.max(0,Math.min(1,Number.isFinite(a)?a:1))*(L==='front'?.8:.95);
+  const go=()=>{ctx.save();try{ctx.globalCompositeOperation='source-over';ctx.globalAlpha*=al;for(const[c0,c1]of(L==='front'?SIGCROP:[[0,SIGC]]))ctx.drawImage(im,u+c0,v,c1-c0,SIGC,x+(c0-SIGP[0])*sc,fy-SIGP[1]*sc,(c1-c0)*sc,SIGC*sc);}finally{ctx.restore();}};
+  const own={id:'r562:sigil-'+L,kind:'effect',x:player?.x||0,y:player?.y||0,groundAligned:false,r572:true};if(L==='back')own.r350=true;
+  if(typeof ctx.scope==='function')ctx.scope(own,go);else go();stats.sigils=(stats.sigils||0)+1;};sigPatched=true;}catch(err){fail(err);}}
 if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);
+ try{if(!sigPatched)patchSigil();}catch(err){fail(err);}
  try{if(typeof started!=='undefined'&&started)step();}catch(err){fail(err);cancel();}sentinel(!!(pools.length||arcs.length||poison.size||strikes.length));return r;};}
 // ---- 그리기 -------------------------------------------------------------------------------
 const HOLY='255,226,150',MINT='94,234,212',TEAL='24,168,154',TOX='120,220,90',DARK='10,40,30',WHITE='228,255,248';

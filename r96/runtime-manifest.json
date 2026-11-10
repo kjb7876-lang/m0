@@ -33678,6 +33678,16 @@
       "sha256": "ed02db70a54b4d5736697ff33d16af7d3feb743f7efc3eae81e03ff06e3b0067"
     },
     {
+      "path": "assets/r562/dots/neon-sigil-back.webp",
+      "bytes": 96774,
+      "sha256": "d2a0659884355150e083137ff19d3771e951f0490f49907a8b20904c1ffc556e"
+    },
+    {
+      "path": "assets/r562/dots/neon-sigil-front.webp",
+      "bytes": 105994,
+      "sha256": "019cb02064469473d9e54923115bab410c0edf03deb8b448f40c13dcb47cd05b"
+    },
+    {
       "path": "assets/r562/dots/neon-toxic-pool.webp",
       "bytes": 202512,
       "sha256": "0b69a506134586fc9801b8a1206061e86c6ec6dbda806e4f311e1f611efa4035"
@@ -33708,6 +33718,16 @@
       "sha256": "6985f7a711074f743db96084b515a66c6e64b3d6486548cdb0329cac61c3f1b6"
     },
     {
+      "path": "assets/r563/dots/michaela-sigil-back.webp",
+      "bytes": 61118,
+      "sha256": "8060b9016e69685497a08c62e25f24ced92c521923513bb77b1c91563382a748"
+    },
+    {
+      "path": "assets/r563/dots/michaela-sigil-front.webp",
+      "bytes": 67372,
+      "sha256": "3347a71922140d9db44a9ff441f7e2c936250a3852e9e40f9766d99d0312ef86"
+    },
+    {
       "path": "assets/r564/dots/seoha-clock.webp",
       "bytes": 203508,
       "sha256": "a7e8fc25b0a868bf87671ab32b7ed25e67ac198669152701cb5b0ece0465b730"
@@ -33736,6 +33756,16 @@
       "path": "assets/r564/dots/seoha-rift-front.webp",
       "bytes": 45174,
       "sha256": "e7de7a5c5d36726402c3e03339294bf3f60bc5dea0ca5c3186fe3dcee344ab77"
+    },
+    {
+      "path": "assets/r564/dots/seoha-sigil-back.webp",
+      "bytes": 169744,
+      "sha256": "4b3b3eafa0f03308b030d5e7be69c03f7c6dd4e615b333b2592a2c7b4b8a25ed"
+    },
+    {
+      "path": "assets/r564/dots/seoha-sigil-front.webp",
+      "bytes": 91494,
+      "sha256": "bcf33ace7505ec9783e6838165d00f9784db1561a59ab4c1cecfc1272fca147d"
     },
     {
       "path": "assets/r564/dots/seoha-timestop-shatter.webp",
@@ -43064,8 +43094,8 @@
     },
     {
       "path": "lauren-gravity-r561.js",
-      "bytes": 15322,
-      "sha256": "fc4c25b10126c4b863dd092501594298e27cab87d8565b8aace0af69b8f02f95"
+      "bytes": 15756,
+      "sha256": "a267dfd57f02e6c1f4ff7c780009086de50ce3f012a1f7ff8d1a7a58f89130b8"
     },
     {
       "path": "light-atmos-r300.js",
@@ -43104,8 +43134,8 @@
     },
     {
       "path": "michaela-genesis-r563.js",
-      "bytes": 15249,
-      "sha256": "c6ea4566873bb623c8690e325f8bfe59f019646c1eb4fe57a6eaf55a60eda67c"
+      "bytes": 17672,
+      "sha256": "0ec8e14598dde48fedcda9f7d79e043baeefef2b7631b46a0dedd5fd0958e1ac"
     },
     {
       "path": "michaela-r247.js",
@@ -43269,8 +43299,8 @@
     },
     {
       "path": "neon-toxic-r562.js",
-      "bytes": 17694,
-      "sha256": "948010d72e6291fc4606aee7e714cd1066ca8966f86f01386c6c352035d28563"
+      "bytes": 20123,
+      "sha256": "ae9f2a00016014fa0e7de573ed0ef2b2906b8e306c169346f654289ca5584cdd"
     },
     {
       "path": "painted-vfx-data-r87.js",
@@ -43604,8 +43634,8 @@
     },
     {
       "path": "seoha-chrono-r564.js",
-      "bytes": 20003,
-      "sha256": "459cb9a9c437a92ca42271f4b4de4f4b1f958fe9cff99ea05c6d280b938d0658"
+      "bytes": 22466,
+      "sha256": "109866470bb474cc8787009819a44b9929016d83d379a44b54bb8ee07efcca55"
     },
     {
       "path": "seven-sins-bossrooms.js",
@@ -43968,8 +43998,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8793,
-  "totalBytes": 1221756928,
+  "fileCount": 8799,
+  "totalBytes": 1222357173,
   "webHTMLSha256": "5b95ed966e5d5afd4030f7553b54fde8505b229b14ac174c3d2cded211b09aa0",
   "largest": [
     {

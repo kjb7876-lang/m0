@@ -8003,7 +8003,13 @@
     "assets/r564/dots/seoha-rift-back.webp",
     "assets/r564/dots/seoha-rift-front.webp",
     "assets/r564/dots/seoha-clock.webp",
-    "assets/r564/dots/seoha-timestop-shatter.webp"
+    "assets/r564/dots/seoha-timestop-shatter.webp",
+    "assets/r562/dots/neon-sigil-back.webp",
+    "assets/r562/dots/neon-sigil-front.webp",
+    "assets/r563/dots/michaela-sigil-back.webp",
+    "assets/r563/dots/michaela-sigil-front.webp",
+    "assets/r564/dots/seoha-sigil-back.webp",
+    "assets/r564/dots/seoha-sigil-front.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9078,5 +9084,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "69c769f45d8a010190f541a21eb7d5438d1004429721afbbbd46bf6b8554a0a9"
+  "runtimeManifestSHA256": "6ff741db94985958048ae26f3eb7fe0a83736b5774b98c567a13fa4addae08b1"
 }

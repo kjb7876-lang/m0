@@ -11,7 +11,7 @@
  */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_MICHAELA_GENESIS_R563__)return;
-const REV='R563-genesis-3',KEY='storyworld.r563.genesis',HERO='michaela';
+const REV='R563-genesis-4',KEY='storyworld.r563.genesis',HERO='michaela';
 const SKY_AT=.2,PIL_AT=.55,PIL_GAP=.1,PIL_N=8,PIL_R=1.4,PIL_K=.3,PIL_MAXHIT=2,AREA=8,GRAND_AT=1.4,PIL_LIFE=.55,GRAND_LIFE=.8,SKY_LIFE=1.9,
  GRAND_HEAL=.04,Q_AT=.25,Q_GAP=.15,Q_N=3,Q_RANGE=7,Q_R=1.1,Q_K=.15,DRAW_MAX=12;
 const stats={rCasts:0,qCasts:0,pillars:0,pillarHits:0,grand:0,draws:0,errors:0,lastError:null};
@@ -31,12 +31,14 @@ function lineOk(a,b){try{return typeof clearLine==='function'?clearLine(a,b):tru
 function basePower(){try{return attackPower();}catch(_){return 0;}}
 function qPower(){try{const r=typeof rank==='function'?rank('special'):0;return attackPower()*(2.4+.36*r);}catch(_){return 0;}}
 function rnd(n){const x=Math.sin(n*12.9898)*43758.5453;return x-Math.floor(x);}
-function addPillar(x,y,r,dmg,kind,life,grand,counts){if(pillars.length>=DRAW_MAX)pillars.shift();pillars.push({x,y,r,t0:T(),life,grand:!!grand});stats.pillars++;
+// 사몽 발현(R571) 중 반경 배율(최대 2배): 생길 때 한 번 정해 끝까지 같은 크기.
+function rk(){try{const g=window.__STORYWORLD_SAMONG_SURGE_R571__;const r=g?.range?Number(g.range(1)):1;return Number.isFinite(r)&&r>0?Math.min(2,Math.max(1,r)):1;}catch(_){return 1;}}
+function addPillar(x,y,r,dmg,kind,life,grand,counts){r*=rk();if(pillars.length>=DRAW_MAX)pillars.shift();pillars.push({x,y,r,t0:T(),life,grand:!!grand});stats.pillars++;
  if(!(dmg>0))return;const src={kind,friendly:true,owner:'hero',sourceHero:HERO,r563:true};
  for(const e of enemiesNow()){if(!alive(e)||!canHit(e)||dist(e,{x,y})>r+(e.radius||0)||!lineOk({x,y},e))continue;if(counts){const n=counts.get(e)||0;if(n>=PIL_MAXHIT)continue;counts.set(e,n+1);}
   try{if(hitEnemy(e,dmg,src))stats.pillarHits++;}catch(err){fail(err);}}}
 // 기둥 자리: 8칸 안 적 위(가까운 순), 모자라면 둘레 빈자리(정해진 무늬 — 매번 같은 박자)
-function spots(origin,n){const list=enemiesNow().filter(e=>alive(e)&&dist(e,origin)<=AREA).sort((a,b)=>dist(a,origin)-dist(b,origin)).slice(0,n).map(e=>({x:e.x,y:e.y,e}));
+function spots(origin,n){const list=enemiesNow().filter(e=>alive(e)&&dist(e,origin)<=AREA*rk()).sort((a,b)=>dist(a,origin)-dist(b,origin)).slice(0,n).map(e=>({x:e.x,y:e.y,e}));
  for(let i=list.length;i<n;i++){const a=i*2.399+.4,r=2.6+(i%3)*1.4;list.push({x:origin.x+Math.cos(a)*r,y:origin.y+Math.sin(a)*r});}return list;}
 // 사용자 04:09Z 미카엘라 테마 '사랑·의료·정신·신성의학': 마지막 큰 기둥은 치유의 빛 — 미카엘라 최대 체력 4% 회복(최대치까지만).
 function heal(k){try{const m=typeof maxHP==='function'?maxHP():0;if(!(m>0)||!player||player.hp<=0)return;const before=player.hp;player.hp=Math.min(m,player.hp+m*k);stats.healed=(stats.healed||0)+(player.hp-before);
@@ -45,7 +47,7 @@ function onR(){const t=T(),o={x:player.x,y:player.y},power=basePower(),counts=ne
  jobs.push({at:t+SKY_AT,run:()=>{skies.push({x:o.x,y:o.y,t0:T()});if(skies.length>2)skies.shift();}});
  const pts=spots(o,PIL_N);pts.forEach((s,i)=>jobs.push({at:t+PIL_AT+i*PIL_GAP,run:()=>{const p=s.e&&alive(s.e)?{x:s.e.x,y:s.e.y}:s;addPillar(p.x,p.y,PIL_R,power*PIL_K,'r563-pillar',PIL_LIFE,false,counts);}}));
  jobs.push({at:t+GRAND_AT,run:()=>{stats.grand++;addPillar(player.x,player.y,1.8,0,'r563-grand',GRAND_LIFE,true,null);heal(GRAND_HEAL);}});}
-function onQ(){const t=T(),o={x:player.x,y:player.y},power=qPower();const list=enemiesNow().filter(e=>alive(e)&&dist(e,o)<=Q_RANGE).sort((a,b)=>dist(a,o)-dist(b,o)).slice(0,Q_N);if(!list.length)return;
+function onQ(){const t=T(),o={x:player.x,y:player.y},power=qPower();const list=enemiesNow().filter(e=>alive(e)&&dist(e,o)<=Q_RANGE*rk()).sort((a,b)=>dist(a,o)-dist(b,o)).slice(0,Q_N);if(!list.length)return;
  stats.qCasts++;lastRoom=curRoom();list.forEach((e,i)=>jobs.push({at:t+Q_AT+i*Q_GAP,run:()=>{if(alive(e))addPillar(e.x,e.y,Q_R,power*Q_K,'r563-q-pillar',.45,false,null);}}));}
 function cancel(){jobs=[];pillars=[];skies=[];seenR.clear();}
 function step(){const rm=curRoom();if(rm!==lastRoom){if(lastRoom!==null)cancel();lastRoom=rm;}
@@ -58,7 +60,19 @@ if(typeof special==='function'){const base=special;special=function(...a){let be
 if(typeof fx==='function'){const base=fx;fx=function(type,x,y,opt){const r=base.apply(this,arguments);
  try{const o=opt||{};if(type==='storySourceSkill'&&o.storyWER&&o.stage==='warning'&&o.sourceHero===HERO&&o.sourceSlot==='r'&&on()&&heroNow()===HERO){const id=o.castId||('r:'+T());
   if(!seenR.has(id)){seenR.add(id);if(seenR.size>16)seenR.delete(seenR.values().next().value);onR();}}}catch(err){fail(err);}return r;};}
+// ---- 사몽 발현 중 몸 둘레 문양(R572 코드 그림) → Dots CX-0064T 문양 시트(dots-r3, 칸 192·6×4, 피벗=발 [96,144]) ----
+// R572 가 이 파일보다 늦게 실리므로 tick 에서 처음 한 번 그 영웅 문양의 draw 만 감싼다(R572 파일 안 고침). 시트가 없거나 끄면 원래 코드 그림.
+// 뒤층은 몸보다 먼저 그려지므로 R350 가림 옅게에서 뺀다(r350). 앞층 CROP 밖(몸 자리)은 비운다.
+const SIG={back:'assets/r563/dots/michaela-sigil-back.webp',front:'assets/r563/dots/michaela-sigil-front.webp'},SIGC=192,SIGP=[96,144],SIGCROP=[[0,192]];let sigPatched=false,sigAsk=-1e9;
+function sigImg(L){try{const g=typeof readyImage==='function'?readyImage(SIG[L]):null;if(g&&g.image)return g.image;const n=Date.now();if(n-sigAsk>1500){sigAsk=n;if(typeof ensureImages==='function')Promise.resolve(ensureImages([SIG.back,SIG.front])).catch(()=>{});}}catch(err){fail(err);}return null;}
+function patchSigil(){if(sigPatched)return;try{const TH=window.__STORYWORLD_SAMONG_THEME_R572__?.theme?.(HERO);if(!TH||typeof TH.draw!=='function'||Object.isFrozen(TH))return;const base=TH.draw;
+ TH.draw=function(L,x,fy,h,F,t,a,lo){const im=(L==='back'||L==='front')&&on()&&Number.isFinite(x)&&Number.isFinite(fy)?sigImg(L):null;if(!im)return base.apply(this,arguments);
+  const sc=Math.max(40,Number(h)||0)/105,fr=Math.floor((Number.isFinite(t)?t:T())*12.5)%24,u=(fr%6)*SIGC,v=Math.floor(fr/6)*SIGC,al=Math.max(0,Math.min(1,Number.isFinite(a)?a:1))*(L==='front'?.8:.95);
+  const go=()=>{ctx.save();try{ctx.globalCompositeOperation='source-over';ctx.globalAlpha*=al;for(const[c0,c1]of(L==='front'?SIGCROP:[[0,SIGC]]))ctx.drawImage(im,u+c0,v,c1-c0,SIGC,x+(c0-SIGP[0])*sc,fy-SIGP[1]*sc,(c1-c0)*sc,SIGC*sc);}finally{ctx.restore();}};
+  const own={id:'r563:sigil-'+L,kind:'effect',x:player?.x||0,y:player?.y||0,groundAligned:false,r572:true};if(L==='back')own.r350=true;
+  if(typeof ctx.scope==='function')ctx.scope(own,go);else go();stats.sigils=(stats.sigils||0)+1;};sigPatched=true;}catch(err){fail(err);}}
 if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);
+ try{if(!sigPatched)patchSigil();}catch(err){fail(err);}
  try{if(typeof started!=='undefined'&&started)step();}catch(err){fail(err);cancel();}sentinel(!!(pillars.length||skies.length));return r;};}
 // ---- 그리기 -------------------------------------------------------------------------------
 const GOLD='255,214,140',WHITE='255,250,236',ROSE='236,150,140',DEEP='180,110,40';
