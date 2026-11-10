@@ -25128,6 +25128,116 @@
       "sha256": "62b93dd76359e9c11a1108c5d4390f0aaa4856cb843af7711280f9fbd2f16acc"
     },
     {
+      "path": "assets/r544/sfx/click-1.ogg",
+      "bytes": 4367,
+      "sha256": "3394f2dd8fa17008a4f5ae0306e4621863c50dd56ccca446a61b82fcc539a920"
+    },
+    {
+      "path": "assets/r544/sfx/death-beast.ogg",
+      "bytes": 9108,
+      "sha256": "994ab6e4bf7949a939c726b430a3f20f244aa116dd70412699c6ccad12535126"
+    },
+    {
+      "path": "assets/r544/sfx/death-body.ogg",
+      "bytes": 7882,
+      "sha256": "3dbaa0f1b9f4664281cf3d7a24ea8ab70adc8be7462328a317bfcaa1b903b403"
+    },
+    {
+      "path": "assets/r544/sfx/death-glass.ogg",
+      "bytes": 8068,
+      "sha256": "cece8ed3ceac16348a329006870c82890640819fad2a63336d4a9ad2b83a09ce"
+    },
+    {
+      "path": "assets/r544/sfx/death-machine.ogg",
+      "bytes": 7626,
+      "sha256": "699100a2a2c8729d7d83f6b49b6533a5c1be4c00d00e52adf76f57e4744fc23e"
+    },
+    {
+      "path": "assets/r544/sfx/death-slime.ogg",
+      "bytes": 10784,
+      "sha256": "ff81fa8142b3a56104a0c80daf7ac3f094df15d715ee703b3e831dcf99893f6c"
+    },
+    {
+      "path": "assets/r544/sfx/death-spirit.ogg",
+      "bytes": 8741,
+      "sha256": "4c9828c3dbfd2135c6b6f4ad83334a4388d9daff316b95cb046253450920ae7f"
+    },
+    {
+      "path": "assets/r544/sfx/hit-beast.ogg",
+      "bytes": 6244,
+      "sha256": "b301ac7165e175965733891a682a0ea1509b7b9918448992bad65ac4a00f0890"
+    },
+    {
+      "path": "assets/r544/sfx/hit-body.ogg",
+      "bytes": 5109,
+      "sha256": "6f66378f515ad338f001aef343f3b09ef03729234beb73f5d2754a99015e4c10"
+    },
+    {
+      "path": "assets/r544/sfx/hit-glass.ogg",
+      "bytes": 6311,
+      "sha256": "88e967fbe7dbf4f673f825ff3946ec0288f4487741019ecfd960f98de2e41774"
+    },
+    {
+      "path": "assets/r544/sfx/hit-machine.ogg",
+      "bytes": 6110,
+      "sha256": "59741717af475b43e6e9d6650ae9769ed19de2ea4860c2b88a0594d6412ba8d6"
+    },
+    {
+      "path": "assets/r544/sfx/hit-slime.ogg",
+      "bytes": 5913,
+      "sha256": "779b1b38730b5a7473ac631005f6eb4b090a42a34a2fdbc934ff58dc9dd16cca"
+    },
+    {
+      "path": "assets/r544/sfx/hit-spirit.ogg",
+      "bytes": 6471,
+      "sha256": "0a5177c35ccc6c0e8d8276449f2b49d6e80849d6eed5e0bed12e3270b210f6cd"
+    },
+    {
+      "path": "assets/r544/sfx/hurt-gunner.ogg",
+      "bytes": 5777,
+      "sha256": "f3b3c8943a88b1e15d2c9f6edb89d5564f6537b890839432747b434016d243ac"
+    },
+    {
+      "path": "assets/r544/sfx/hurt-hunter.ogg",
+      "bytes": 5075,
+      "sha256": "7d8af8f479ea0d1df90e6ade5d548aaba55ef5b3be5e99850da112364a9fc126"
+    },
+    {
+      "path": "assets/r544/sfx/hurt-hwando.ogg",
+      "bytes": 5799,
+      "sha256": "33a438e4769d4b374ed6939aa32930090c2d075848c8e8466c0a4f387caa6d8b"
+    },
+    {
+      "path": "assets/r544/sfx/hurt-lauren.ogg",
+      "bytes": 5360,
+      "sha256": "53eeb401d26d97d1e5f0b2613a513665ad270a716fa89ca69e703e02e4287cfd"
+    },
+    {
+      "path": "assets/r544/sfx/hurt-michaela.ogg",
+      "bytes": 4649,
+      "sha256": "7c05c08248163a601ca54494818998a39f21959009ae3e6b7f7ca41d61b5b1d5"
+    },
+    {
+      "path": "assets/r544/sfx/hurt-neon.ogg",
+      "bytes": 5748,
+      "sha256": "4e3acc1a9ee9cfe52fbe547baa57ea4ed7a366727765dff8065d2431bf682c55"
+    },
+    {
+      "path": "assets/r544/sfx/hurt-seoha.ogg",
+      "bytes": 6346,
+      "sha256": "8d635b61a453d48d29a5b58c144c7bcd166842cb5cbb808c32178a2aa7bd723c"
+    },
+    {
+      "path": "assets/r544/sfx/hurt-slayer.ogg",
+      "bytes": 6201,
+      "sha256": "987bed5ae4a1b222dde9d5edb58e649f5d5a3d88735bff66991e58f97ed4419c"
+    },
+    {
+      "path": "assets/r544/sfx/index.json",
+      "bytes": 14878,
+      "sha256": "71f8d926672fbc1494c42800b0121652e118b98624de2a20ea194df3053eb1e0"
+    },
+    {
       "path": "assets/r561/gunner-bombard-meteor.webp",
       "bytes": 184656,
       "sha256": "7e12057401e2f6ad08e2853117302638a024bf1e94bbefdaeaf7b2cb0ed183bc"
@@ -34839,8 +34949,8 @@
     },
     {
       "path": "sfx-r541.js",
-      "bytes": 7511,
-      "sha256": "0d00434b91523e11ffb1236b7497690a5766e1556523df970d949ec144c67974"
+      "bytes": 12243,
+      "sha256": "a2877726641934adedc0b64d8d6cf1093aa4e21ed003e3ed2618c51790e2cf8c"
     },
     {
       "path": "sin-boss-art-r463-data.js",
@@ -35183,8 +35293,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 7036,
-  "totalBytes": 1097593009,
+  "fileCount": 7058,
+  "totalBytes": 1097750308,
   "webHTMLSha256": "17859c658db30c16b612298027ce605462a941cecf58a4e8a2d355cfe5c13335",
   "largest": [
     {
