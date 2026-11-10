@@ -33,10 +33,27 @@ const FAR=1e6,SLOTS=['w','e','r'],CAP=8;
 const METEOR={path:'assets/r561/gunner-bombard-meteor.webp',cell:192,cols:6,frames:24,fps:12.5,impact:10,piv:[.52,.78],span:120};
 const asked={};
 function sheet(p){try{const got=typeof readyImage==='function'?readyImage(p):null;if(got?.image)return got.image;const t=Date.now();if(t-(asked[p]||0)>1500){asked[p]=t;if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});}}catch(e){fail(e);}return null;}
+// R: Dots r2 폭발 시트가 있으면 그것(타격 4번째 칸을 1.6초 폭발에), 없으면 R411 재색 낙하 시트
+function drawR(f,c,Wd,el){if(gsOn('blast')){const fr=Math.floor((el-(STRIKE.delay-GS.blast.hit/12.5))*12.5);if(fr>=0&&fr<GS.blast.frames)gsDraw('blast',fr,c.x,c.y,Wd*.95/GS.blast.vis,0,1,.4,f.t0.toFixed(3));return true;}return drawMeteor(f,c,Wd,el);}
 function drawMeteor(f,c,Wd,el){const im=sheet(METEOR.path);if(!im||typeof ctx==='undefined'||!ctx)return false;const fr=Math.floor((el-(STRIKE.delay-METEOR.impact/METEOR.fps))*METEOR.fps);if(fr<0)return true;if(fr>=METEOR.frames)return true;
  const C=METEOR.cell,sc=Wd*.95/METEOR.span,w=C*sc,sx=(fr%METEOR.cols)*C,sy=Math.floor(fr/METEOR.cols)*C;ctx.save();try{const run=()=>{ctx.globalCompositeOperation='source-over';ctx.drawImage(im,sx,sy,C,C,c.x-METEOR.piv[0]*w,c.y-METEOR.piv[1]*w,w,w);
    /* 어두운 화면 보정에 코발트 빛이 묻혀 회색 안개처럼 보여(헤드리스 실측) 같은 장을 한 번 더 덧셈으로 — 연기(회색)는 그대로, 빛만 산다 */ctx.globalCompositeOperation='lighter';ctx.globalAlpha*=.9;ctx.drawImage(im,sx,sy,C,C,c.x-METEOR.piv[0]*w,c.y-METEOR.piv[1]*w,w,w);};
   /* R411 과 같이 기록기 묶음(scope)으로 넘긴다 — 효과층 깊이·투명도를 기록기가 바로 알게 */const meta={id:'r561:meteor:'+f.t0.toFixed(3),kind:'effect',x:f.c.x,y:f.c.y,r561:true};if(typeof ctx.scope==='function')ctx.scope(meta,run);else run();}catch(e){fail(e);}finally{ctx.restore();}stats.sheet=(stats.sheet||0)+1;return true;}
+// R561b: Dots CX-0059G r1 시트(이펙트 스레드 손질본) — Q 몸통(가로 반복)·총구·끝점, R 조준 고리는 헤드리스 전후에서 코드 고리보다 흐려(위험 표시가 약함) 쓰지 않음. 시트가 없거나 덜 읽혔으면 코드 그림 그대로.
+const GS={beam:{path:'assets/r561/gunner-q-beam.webp',cw:512,ch:128,cols:6,frames:24,piv:[0,64],vis:106},
+ muzzle:{path:'assets/r561/gunner-q-muzzle.webp',cw:256,ch:256,cols:6,frames:24,piv:[41,131],fire:6,vis:170},
+ impact:{path:'assets/r561/gunner-q-impact.webp',cw:224,ch:224,cols:6,frames:20,piv:[158,139],vis:180},
+ blast:{path:'assets/r561/gunner-r-blast.webp',cw:256,ch:256,cols:6,frames:24,piv:[128,247],hit:4,vis:200},
+ tracer:{path:'assets/r561/gunner-w-tracer.webp',cw:512,ch:128,cols:6,frames:24,piv:[0,64],vis:14},
+ wimpact:{path:'assets/r561/gunner-w-impact.webp',cw:256,ch:256,cols:6,frames:24,piv:[146,136],vis:200},
+ rifle:{path:'assets/r561/gunner-e-rifle.webp',cw:256,ch:256,cols:6,frames:24,piv:[35,139],vis:165}};
+function gsOn(k){return !!sheet(GS[k].path);}
+// 한 칸 그리기(오른쪽을 보고 그린 그림 → 겨눈 각으로 돌리고, 왼쪽을 볼 땐 위아래를 뒤집어 거꾸로 서지 않게). glow>0 이면 같은 칸을 덧셈으로 한 번 더(어두운 화면 보정에 코발트가 묻히지 않게, R 낙하 시트와 같은 방식).
+function gsDraw(k,fr,x,y,sc,ang,alpha,glow,id,len,stretch){const g=GS[k],im=sheet(g.path);if(!im||typeof ctx==='undefined'||!ctx||!(alpha>0)||!(sc>0))return false;fr=((fr%g.frames)+g.frames)%g.frames;
+ const sx=(fr%g.cols)*g.cw,sy=Math.floor(fr/g.cols)*g.ch;ctx.save();try{const run=()=>{ctx.translate(x,y);if(ang)ctx.rotate(ang);ctx.scale(sc,Math.cos(ang||0)<0?-sc:sc);
+   const one=()=>{if(stretch&&len!=null){ctx.drawImage(im,sx,sy,g.cw,g.ch,-g.piv[0],-g.piv[1],len/sc,g.ch);return;}if(len==null){ctx.drawImage(im,sx,sy,g.cw,g.ch,-g.piv[0],-g.piv[1],g.cw,g.ch);return;}const L=len/sc;for(let o=0;o<L;o+=g.cw){const w=Math.min(g.cw,L-o);ctx.drawImage(im,sx,sy,w,g.ch,o-g.piv[0],-g.piv[1],w,g.ch);}};
+   ctx.globalAlpha*=alpha;ctx.globalCompositeOperation='source-over';one();if(glow>0){ctx.globalCompositeOperation='lighter';ctx.globalAlpha*=glow;one();}};
+  const meta={id:'r561:'+k+':'+id,kind:'effect',r561:true};if(typeof ctx.scope==='function')ctx.scope(meta,run);else run();}catch(e){fail(e);}finally{ctx.restore();}stats.sheet=(stats.sheet||0)+1;return true;}
 const CHAIN={q:['w','e'],w:['e','q'],e:['w','q'],r:['e','w']};
 const solo=()=>{let m=null;try{m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();}catch(_){}return !m||m==='off';};
 const mine=()=>on&&typeof player==='object'&&!!player&&player.hero===HERO&&solo();
@@ -74,7 +91,7 @@ function castQ(){let rk=0;try{rk=typeof rank==='function'?Number(rank('special')
  fx.push({k:'q',t0:T(),life:BEAM.charge+BEAM.every*(BEAM.ticks-1)+.32,o,a,L,dmg:SP*BEAM.per,done:0,seed:Math.random()*6});armSent();stats.q++;return true;}
 // ---- W 망각 저격 ----
 function snipeTarget(){const rows=live().filter(e=>dist(e,player)<=rg(RANGE.w)&&los(player,e));const big=rows.filter(e=>e.boss||e.elite).sort((a,b)=>dist(a,player)-dist(b,player))[0];return big||rows.sort((a,b)=>dist(a,player)-dist(b,player))[0]||null;}
-function castW(){const tg=snipeTarget(),a=aimAt(tg);face(a);fx.push({k:'w',t0:T(),life:SNIPE.aim+.5,tg,a,o:{x:player.x,y:player.y},fired:false,end:null,dmg:power()*SNIPE.dmg*grow('w'),seed:Math.random()*6});armSent();stats.w++;return true;}
+function castW(){const tg=snipeTarget(),a=aimAt(tg);face(a);fx.push({k:'w',t0:T(),life:SNIPE.aim+1.3,tg,a,o:{x:player.x,y:player.y},fired:false,end:null,dmg:power()*SNIPE.dmg*grow('w'),seed:Math.random()*6});armSent();stats.w++;return true;}
 function fireW(f){f.fired=true;const o={x:player.x,y:player.y};if(f.tg&&f.tg.hp>0)f.a=Math.atan2(f.tg.y-o.y,f.tg.x-o.x);f.o=o;const L=reach(o,f.a,rg(RANGE.w)),rows=onLine(o,f.a,L,SNIPE.half);
  let endL=L;if(rows[0]){hit(rows[0],f.dmg,'gunnerSnipeR561');try{if(typeof moveActor==='function')moveActor(rows[0],Math.cos(f.a)*SNIPE.push,Math.sin(f.a)*SNIPE.push,rows[0].radius||.3);}catch(_){}endL=dist(rows[0],o);}
  if(rows[1]){hit(rows[1],f.dmg*SNIPE.pierce,'gunnerSnipeR561');endL=dist(rows[1],o);}
@@ -109,6 +126,14 @@ function draw(){const S0=SPR();if(!S0||typeof project!=='function')return;const 
  const H=typeof actorHeight==='function'?actorHeight():60,t=T(),M=H*.45;
  for(const f of fx){const el=t-f.t0;if(el<0||el>f.life)continue;stats.drawn++;
   if(f.k==='q'){const q=project(f.o.x,f.o.y),e=project(f.o.x+Math.cos(f.a)*f.L,f.o.y+Math.sin(f.a)*f.L),x0=q.x,y0=q.y-M,x1=e.x,y1=e.y-M,ang=Math.atan2(y1-y0,x1-x0);
+   if(gsOn('beam')&&gsOn('muzzle')&&gsOn('impact')){const id=f.t0.toFixed(3),mS=H*1.5/GS.muzzle.vis;
+    // 총구: 0~7칸(충전)을 0.18초 충전에 맞춰 빨리 돌리고, 8번째 칸(발사)이 첫 타격 순간에 오게 — 그 뒤는 12.5fps
+    if(el<BEAM.charge){gsDraw('muzzle',Math.min(GS.muzzle.fire-1,Math.floor(el/BEAM.charge*GS.muzzle.fire)),x0,y0,mS,ang,1,.6,id);continue;}
+    const b=el-BEAM.charge,dur=f.life-BEAM.charge,fade=b>dur-.18?Math.max(0,(dur-b)/.18):1,open=Math.min(1,b/.06),xe=x0+(x1-x0)*open,ye=y0+(y1-y0)*open,len=Math.hypot(xe-x0,ye-y0);
+    gsDraw('beam',Math.floor(t*12.5),x0,y0,H*1.05/GS.beam.vis,ang,fade,.8,id,len);
+    /* 시트 몸통만으론 어두운 화면 보정에 회색 안개처럼 묽어 보여(헤드리스 전후) 가는 흰 심 한 줄을 겹친다 */S.along('line',CORE,x0,y0,xe,ye,H*.2*fade,{alpha:.9,blend:'screen'});
+    gsDraw('impact',Math.floor(b*12.5),xe,ye,H*1.7/GS.impact.vis,ang,fade,.5,id);
+    gsDraw('muzzle',Math.min(GS.muzzle.frames-1,GS.muzzle.fire+Math.floor(b*12.5)),x0,y0,mS,ang,fade,.6,id);continue;}
    if(el<BEAM.charge){const k=el/BEAM.charge;S.draw('flare',COB,x0,y0,H*(.5+k*.9),H*(.5+k*.9),{alpha:.6+.4*k,angle:t*9});S.draw('ring',CORE,x0,y0,H*(1.4-k),H*(1.4-k),{alpha:.7*k});continue;}
    const b=el-BEAM.charge,dur=f.life-BEAM.charge,fade=b>dur-.18?Math.max(0,(dur-b)/.18):1,open=Math.min(1,b/.06),fl=.86+.14*Math.sin(t*61+f.seed),xe=x0+(x1-x0)*open,ye=y0+(y1-y0)*open;
    // 굵은 광선 = R106 'line'(둥근 끝 빛 막대)을 굵기 셋으로 겹친 관 + 흐르는 빛 덩이 몇 개(기록기는 그라데이션을 못 써서 그림을 겹친다).
@@ -123,22 +148,26 @@ function draw(){const S0=SPR();if(!S0||typeof project!=='function')return;const 
     S.along('line',COB,q.x,q.y-M,tp.x,tp.y-M,H*.035,{alpha:.55+.4*k});S.draw('ring',COB,tp.x,tp.y,H*(1.7-1.0*k),H*(1.7-1.0*k),{alpha:.5+.5*k,squash:.5,angle:t*2,blend:'screen'});S.draw('ring',CORE,tp.x,tp.y-M,H*(.9-.5*k),H*(.9-.5*k),{alpha:.35+.5*k});
     S.draw('glow',COB,q.x+Math.cos(f.a)*H*.3,q.y-M,H*.5*k,H*.5*k,{alpha:.7});continue;}
    const v=Math.min(1,(t-f.tf)/.45),u=1-v,o=project(f.o.x,f.o.y),e=project(f.o.x+Math.cos(f.a)*f.hitL,f.o.y+Math.sin(f.a)*f.hitL),ang=Math.atan2(e.y-o.y,e.x-o.x);
+   if(gsOn('tracer')&&gsOn('wimpact')){const d=t-f.tf,fr=Math.floor(d*12.5),id=f.t0.toFixed(3);if(fr>=GS.tracer.frames)continue;
+    gsDraw('tracer',fr,o.x,o.y-M,H*.2/GS.tracer.vis,ang,1,.6,id,Math.hypot(e.x-o.x,e.y-o.y),true);if(d<.12)S.along('line',CORE,o.x,o.y-M,e.x,e.y-M,H*.08,{alpha:1-d/.12,blend:'screen'});
+    gsDraw('wimpact',fr,e.x,e.y-M,H*1.6/GS.wimpact.vis,ang,1,.5,id);continue;}
    S.along('slashline',SIL,o.x,o.y-M,e.x,e.y-M,H*.36*u,{alpha:.8*u,blend:'screen'});S.along('line',CORE,o.x,o.y-M,e.x,e.y-M,H*.12*(.4+u),{alpha:.95*u});
    S.draw('flare',CORE,o.x+Math.cos(ang)*H*.25,o.y-M+Math.sin(ang)*H*.25,H*1.2*u+H*.2,H*.7*u+H*.1,{alpha:u,angle:ang});S.draw('ring',SIL,o.x,o.y-M,H*(.4+1.4*v),H*(.4+1.4*v),{alpha:.6*u,squash:.6});
    S.draw('flare',COB,e.x,e.y-M,H*1.3*u+H*.2,H*1.3*u+H*.2,{alpha:.9*u,angle:t*5});for(let i=0;i<6;i++){const ra=ang+Math.PI+(i-2.5)*.4;S.draw('spark',CORE,e.x+Math.cos(ra)*H*.6*v,e.y-M+Math.sin(ra)*H*.6*v,H*.55,H*.12,{alpha:u,angle:ra});}}
   else if(f.k==='e'){for(const r of f.rounds){const d=t-r.t;if(d<0||d>.32)continue;const o=project(r.o.x,r.o.y),e=project(r.o.x+Math.cos(r.a)*r.L,r.o.y+Math.sin(r.a)*r.L),ang=Math.atan2(e.y-o.y,e.x-o.x);
-    if(d<.09){const k=d/.09,hx=o.x+(e.x-o.x)*k,hy=o.y-M+(e.y-o.y)*k,tx=o.x+(e.x-o.x)*Math.max(0,k-.35),ty=o.y-M+(e.y-o.y)*Math.max(0,k-.35);S.along('spark',CORE,tx,ty,hx,hy,H*.16,{alpha:.95});}
-    if(d<.06)S.draw('flare',COB,o.x+Math.cos(ang)*H*.28,o.y-M+Math.sin(ang)*H*.28,H*.55,H*.35,{alpha:1-d/.06,angle:ang});
+    const rOn=gsOn('rifle');if(rOn)gsDraw('rifle',Math.min(3,Math.floor(d*12.5)),o.x,o.y-M,H*1.5/GS.rifle.vis,ang,1,.5,f.t0.toFixed(3)+':'+r.t.toFixed(3));
+    if(!rOn&&d<.09){const k=d/.09,hx=o.x+(e.x-o.x)*k,hy=o.y-M+(e.y-o.y)*k,tx=o.x+(e.x-o.x)*Math.max(0,k-.35),ty=o.y-M+(e.y-o.y)*Math.max(0,k-.35);S.along('spark',CORE,tx,ty,hx,hy,H*.16,{alpha:.95});}
+    if(!rOn&&d<.06)S.draw('flare',COB,o.x+Math.cos(ang)*H*.28,o.y-M+Math.sin(ang)*H*.28,H*.55,H*.35,{alpha:1-d/.06,angle:ang});
     if(r.hit&&d>=.06&&d<.22){const k=(d-.06)/.16;S.draw('flare',CORE,e.x,e.y-M,H*.5*(1-k)+H*.1,H*.5*(1-k)+H*.1,{alpha:1-k,angle:ang});for(let i=0;i<3;i++)S.draw('pixel',SIL,e.x+Math.cos(ang+Math.PI+(i-1)*.7)*H*.4*k,e.y-M+Math.sin(ang+Math.PI+(i-1)*.7)*H*.4*k,H*.1,H*.1,{alpha:1-k});}
     {const k=d/.32,side=Math.cos(ang)>=0?-1:1;S.draw('pixel',SIL,o.x+side*H*(.15+.35*k),o.y-M-H*.25*Math.sin(Math.PI*k)+H*.35*k*k,H*.07,H*.04,{alpha:.9*(1-k),angle:t*20,blend:'source-over'});}}}
-  else if(f.k==='r'){const c=project(f.c.x,f.c.y),Wd=ellW(f.c,rg(STRIKE.R)),sheetOn=!!sheet(METEOR.path);
+  else if(f.k==='r'){const c=project(f.c.x,f.c.y),Wd=ellW(f.c,rg(STRIKE.R)),sheetOn=gsOn('blast')||!!sheet(METEOR.path);
    if(!f.boom){const k=el/STRIKE.delay,blink=.55+.45*Math.max(0,Math.sin(t*(8+22*k)));
     S.draw('ring',COB,c.x,c.y,Wd,Wd,{alpha:.95*blink,squash:.5,angle:t*.8,blend:'screen'});S.draw('ring',CORE,c.x,c.y,Wd*1.02,Wd*1.02,{alpha:.5*blink,squash:.5,blend:'screen'});S.draw('ring',CORE,c.x,c.y,Wd*(1-k)*.9+H*.3,Wd*(1-k)*.9+H*.3,{alpha:.8*blink,squash:.5,blend:'screen'});
     for(let i=0;i<4;i++){const ra=i*Math.PI/2+t*.8,rx=Math.cos(ra)*Wd*.5,ry=Math.sin(ra)*Wd*.25;S.along('line',CORE,c.x+rx*.82,c.y+ry*.82,c.x+rx*1.08,c.y+ry*1.08,H*.06,{alpha:.9*blink});}
     S.draw('glow',COB,c.x,c.y,H*(.6+.6*k),H*(.3+.3*k),{alpha:.8*blink});
-    if(sheetOn)drawMeteor(f,c,Wd,el);else if(k>.55){const s=(k-.55)/.45;S.draw('pillar',CORE,c.x,c.y,H*(.9-.7*s),H*9,{alpha:.7*s,blend:'screen'});}continue;}
+    if(sheetOn)drawR(f,c,Wd,el);else if(k>.55){const s=(k-.55)/.45;S.draw('pillar',CORE,c.x,c.y,H*(.9-.7*s),H*9,{alpha:.7*s,blend:'screen'});}continue;}
    const b=el-STRIKE.delay,v=Math.min(1,b/2.2),u=1-v;
-   if(sheetOn){S.draw('crack',SIL,c.x,c.y,Wd*.9,Wd*.9,{alpha:.7*u,squash:.5,blend:'source-over'});drawMeteor(f,c,Wd,el);
+   if(sheetOn){S.draw('crack',SIL,c.x,c.y,Wd*.9,Wd*.9,{alpha:.7*u,squash:.5,blend:'source-over'});drawR(f,c,Wd,el);
     S.draw('ring',CORE,c.x,c.y,Wd*(.3+1.1*Math.min(1,b/.5)),Wd*(.3+1.1*Math.min(1,b/.5)),{alpha:Math.max(0,1-b/.5),squash:.5,blend:'screen'});if(b<.3)S.draw('glow',CORE,c.x,c.y-H*.4,Wd*1.1,Wd*.8,{alpha:.7*(1-b/.3),blend:'screen'});continue;}
    if(b<.4){const k=b/.4;S.draw('glow',CORE,c.x,c.y-H*.6,Wd*(1.2+k),Wd*(1.2+k),{alpha:1-k*.5,blend:'screen'});S.draw('pillar',CORE,c.x,c.y,H*2.2,H*10,{alpha:1-k,blend:'screen'});}
    S.draw('crack',SIL,c.x,c.y,Wd*.9,Wd*.9,{alpha:.7*u,squash:.5,blend:'source-over'});
@@ -151,7 +180,7 @@ function draw(){const S0=SPR();if(!S0||typeof project!=='function')return;const 
    S.draw('glow',EMBER,c.x,c.y-H*.3,Wd*.8,Wd*.4,{alpha:.8*u});}}}
 // 물들인 그림 미리 만들기(R106 은 준비 안 된 그림을 그리지 않는다 — 첫 시전이 비어 보이던 것)
 let warmed=false;const WARM=[[COB,['slashline','flare','ring','glow','line','spark','pixel']],[CORE,['slashline','flare','ring','line','spark','pillar','glow']],[SIL,['bolt','spark','pixel','slashline','ring','crack']],[EMBER,['flame','glow']],[SMOKE,['smoke']]];
-function warm(){if(warmed||!mine())return;const S=SPR();if(!S?.warm)return;warmed=true;sheet(METEOR.path);for(const [F,n] of WARM)S.warm(F,n);}
+function warm(){if(warmed||!mine())return;const S=SPR();if(!S?.warm)return;warmed=true;sheet(METEOR.path);for(const k in GS)sheet(GS[k].path);for(const [F,n] of WARM)S.warm(F,n);}
 // ---- 입구 ----
 const readyAt={w:0,e:0,r:0};
 function remain(sl){return Math.max(0,(readyAt[sl]||0)-T());}
