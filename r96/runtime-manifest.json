@@ -33313,6 +33313,36 @@
       "sha256": "c5fe9b7dc705e2d569d2bbeb8388b4fd0c1ffe03216b633493de67fe24455c1d"
     },
     {
+      "path": "assets/r524/index.json",
+      "bytes": 2900,
+      "sha256": "ed944fe6962529e73c913e4385d772ef0a0f908985fae2553bd8f256b4059a6c"
+    },
+    {
+      "path": "assets/r524/range-n.webp",
+      "bytes": 14628,
+      "sha256": "4b0b8315c029aabf142b1ece69649ac664a499d65a986d773e5f00cb9d877b9b"
+    },
+    {
+      "path": "assets/r524/range-w.webp",
+      "bytes": 15948,
+      "sha256": "d37671b9e267ee5b1f1ea75e58133b02eeb8fcc461814b4089253fee5df72942"
+    },
+    {
+      "path": "assets/r524/sofa-n.webp",
+      "bytes": 13648,
+      "sha256": "d409b4f26957f3cebe536002aaba47732bacf8572fa1875390ed95b51be8bff2"
+    },
+    {
+      "path": "assets/r524/sofa-w.webp",
+      "bytes": 13468,
+      "sha256": "8bf10ff5c67732f690edf60e016a5e97dbf938e7ac13cc175564b8d88992512e"
+    },
+    {
+      "path": "assets/r535/hunter-fire-arrowhead.webp",
+      "bytes": 175158,
+      "sha256": "2224771bb5eecbdfb12628b397283f45b5c7d2dc96ea50c22c96b15627b5c505"
+    },
+    {
       "path": "assets/r541/sfx/death-1.ogg",
       "bytes": 8533,
       "sha256": "37072c41ffac2be63e376a40961e4332add640950a7e593ccaf53b63a88c777a"
@@ -33366,6 +33396,46 @@
       "path": "assets/r542/sfx/roar-1.ogg",
       "bytes": 8599,
       "sha256": "3fde34da839094cdfabd18b8f9a510c38ff7141c93ceeaaa1eec3f818ec8d0e8"
+    },
+    {
+      "path": "assets/r543/sfx/goblin-1.ogg",
+      "bytes": 7215,
+      "sha256": "9599916d0ca6090ba380a43a3d10b330895ce4d33b51f14a6d9a568c3760dcec"
+    },
+    {
+      "path": "assets/r543/sfx/goblin-2.ogg",
+      "bytes": 7294,
+      "sha256": "481a149e1cfdd2971bf6248bf179392d39d06cb0ff58f96f94d8270aae320b50"
+    },
+    {
+      "path": "assets/r543/sfx/growl-1.ogg",
+      "bytes": 7429,
+      "sha256": "309e5610954dc58a91ee56cdb0459cfe13aaf768af269c5f3ef1aa6c63f7ee50"
+    },
+    {
+      "path": "assets/r543/sfx/growl-2.ogg",
+      "bytes": 7747,
+      "sha256": "32f4f613f1783dbfdb76e0a00d0dce62ce103ceffdd161fe5851ec42b63c168e"
+    },
+    {
+      "path": "assets/r543/sfx/growl-3.ogg",
+      "bytes": 7042,
+      "sha256": "d8baf0f27fcde1cbc07fbae07a0ab478f1f0c059d306c39c64166e5e4eaa02f3"
+    },
+    {
+      "path": "assets/r543/sfx/index.json",
+      "bytes": 4251,
+      "sha256": "0a0b65f8dd383cb0cd7016b23a3d01914f6905f3bc551e19784292af184758f8"
+    },
+    {
+      "path": "assets/r543/sfx/thunder-1.ogg",
+      "bytes": 10080,
+      "sha256": "d0d4e1ec7cd9fd39c2762f4096ce5f1e314e6b7dd4c3c8d07ac810aabd190546"
+    },
+    {
+      "path": "assets/r543/sfx/thunder-2.ogg",
+      "bytes": 9426,
+      "sha256": "62b93dd76359e9c11a1108c5d4390f0aaa4856cb843af7711280f9fbd2f16acc"
     },
     {
       "path": "assets/r585/index.json",
@@ -42469,8 +42539,8 @@
     },
     {
       "path": "hunter-arrows-r535.js",
-      "bytes": 21193,
-      "sha256": "c52763de9a3e5cffdd2232035c6d59f4fb8e58634bcfbbd18b42298ae5283a7e"
+      "bytes": 29266,
+      "sha256": "784420a79be96870573bd387abc25ae08cc22298e258c0bb8a0f94561870cd00"
     },
     {
       "path": "hwando-arc-r349.js",
@@ -42944,8 +43014,8 @@
     },
     {
       "path": "rooms-r523.js",
-      "bytes": 37753,
-      "sha256": "ebaee9b11ccded46dffc7b564f314cc576ff7288e61d26b1249f0a059785fcc7"
+      "bytes": 42635,
+      "sha256": "4a23ec16dd31424586292d1d62382f75c4c2496e97e0562b9bac01f2156c6d5b"
     },
     {
       "path": "root-gate-video-r372.js",
@@ -43069,8 +43139,8 @@
     },
     {
       "path": "sfx-r541.js",
-      "bytes": 4802,
-      "sha256": "fa3211778cd11764d5e43e4b631413973962f4d2347cfaf28babdfd1b82c5fb4"
+      "bytes": 7511,
+      "sha256": "0d00434b91523e11ffb1236b7497690a5766e1556523df970d949ec144c67974"
     },
     {
       "path": "sin-boss-art-r463-data.js",
@@ -43413,8 +43483,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8682,
-  "totalBytes": 1211557149,
+  "fileCount": 8696,
+  "totalBytes": 1211869047,
   "webHTMLSha256": "e9ad258581ee459e96d9ff70ed6ab727662432d3cef131ab72ba4cbb73fff60a",
   "largest": [
     {
