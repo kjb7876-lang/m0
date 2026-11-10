@@ -13,7 +13,7 @@ ok('runtime copy matches; loads right after michaela-r247 (after R209/R247, befo
 function mk(opt={}){const hits=[],L={},moves=[];
  const enemies=opt.enemies||[{id:'a',x:13,y:10,hp:999,maxHp:999,radius:.3,spawnState:'active'},{id:'b',x:16,y:10,hp:999,maxHp:999,radius:.3,spawnState:'active'},{id:'c',x:10,y:15,hp:999,maxHp:999,radius:.3,spawnState:'active'}];
  const sb={console,Math,JSON,Object,Array,Set,Map,WeakMap,Number,String,Infinity,localStorage:{getItem:()=>null,setItem(){}},window:{},setTimeout:()=>0,addEventListener(t,f,c){(L[t]=L[t]||[]).push(f);},
-  auto:false,guide:false,started:true,modal:null,loading:false,storyScene:null,settings:{},time:10,COMBAT_RHYTHM_R26:1,shake:0,
+  auto:false,guide:false,started:true,modal:null,loading:false,storyScene:null,settings:{},time:10,COMBAT_RHYTHM_R26:opt.rhythm||1,shake:0,
   player:{hero:opt.hero||'gunner',x:10,y:10,hp:100,specialCD:0,direction:'right',storyWER:{ready:{},buffs:{}}},maxHP:()=>200,attackPower:()=>40,rank:()=>opt.rank||0,
   clearLine:opt.clearLine||(()=>true),blocked:opt.blocked||(()=>false),effects:[],sound(){},moveActor:(e,dx,dy)=>moves.push([e.id,dx,dy]),
   HEROES:{gunner:{name:'기억사수',special:'기억 재현',range:8.2},hwando:{name:'환도',special:'x'}},
@@ -22,6 +22,7 @@ function mk(opt={}){const hits=[],L={},moves=[];
   special(){sb.__baseSpecial=(sb.__baseSpecial||0)+1;},serializeSave:()=>({storyWER:{remaining:{'gunner:r':1e6,'gunner:w':1e6,'gunner:e':1e6,'hwando:r':3}}}),
   tick(){},drawEffect(){},updateHUD(){}};
  sb.window.__STORYWORLD_WER__=Object.freeze({cast:()=>'base',defs:{}});sb.window.__STORYWORLD_GROWTH_R103__={state:()=>({procs:{'gunner:w':opt.lv||0,'gunner:e':opt.lv||0,'gunner:r':opt.lv||0}})};
+ if(opt.coop)sb.window.__STORYWORLD_COOP_SIM_R62__={mode:()=>opt.coop};if(opt.ego)sb.window.__STORYWORLD_EGO151__={inspect:()=>({state:{active:true}})};
  vm.createContext(sb);vm.runInContext(src||'throw new Error("gunner-arms-r561.js missing")',sb);
  const A=()=>sb.window.__STORYWORLD_GUNNER_ARMS_R561__;
  const run=(t1,step=.05)=>{while(sb.time<t1-1e-9){sb.time=+(sb.time+step).toFixed(4);sb.tick(step);}};
@@ -73,6 +74,14 @@ try{T=mk();T.sb.tick(.05);const off=T.hits.length;T.sb.auto=true;T.run(13);ok('s
 try{T=mk({hero:'hwando'});ok('other heroes still use the original W·E·R cast',T.W().cast('w',false)==='base'&&T.W().cast('r',false)==='base');}catch(e){ok('other hero cast',false,String(e));}
 try{T=mk();T.sb.tick(.05);const d=T.sb.serializeSave();ok('save: far cooldowns of the replaced gunner slots are not written; other heroes untouched',!('gunner:r' in d.storyWER.remaining)&&d.storyWER.remaining['hwando:r']===3);}catch(e){ok('save',false,String(e));}
 try{T=mk();T.A().set(false);T.sb.special();T.sb.tick(.05);ok('off switch (storyworld.r561.gunner {"on":false}) gives back the engine skills and the old Q name',T.sb.__baseSpecial===1&&T.W().cast('r',false)==='base'&&T.sb.HEROES.gunner.special==='기억 재현'&&!(T.sb.player.storyWER.ready['gunner:r']>1e5));}catch(e){ok('off',false,String(e));}
+
+// ---------- Codex #369 리뷰(2026-11-10) ----------
+try{T=mk({rhythm:1.18});T.sb.special();ok('Q cooldown keeps the engine rhythm multiplier (COMBAT_RHYTHM_R26 1.18 → 11.8 s at rank 0), like W/E/R',Math.abs(T.sb.player.specialCD-11.8)<1e-6,T.sb.player.specialCD);}catch(e){ok('Q rhythm',false,String(e));}
+try{T=mk({ego:true});T.sb.special();ok('Q during EGO goes to the engine special (EGO 융합 정화), not swallowed',T.sb.__baseSpecial===1,T.sb.__baseSpecial);}catch(e){ok('Q EGO',false,String(e));}
+try{T=mk();const kd=T.L.keydown[0];kd({key:'c',target:{tagName:'CANVAS'}});T.run(10.5);const fresh=[{id:'n',x:13,y:10,hp:999,maxHp:999,radius:.3,spawnState:'active'},{id:'m',x:16,y:10,hp:999,maxHp:999,radius:.3,spawnState:'active'}];
+ T.sb.room={enemies:fresh};T.sb.liveEnemies=()=>fresh.filter(e=>e.hp>0);T.run(14);const I=T.A().inspect();
+ ok('pending shots and chains are dropped when the room changes (an R cast before a region change does not blast the new room)',!T.hits.some(h=>h[0]==='n'||h[0]==='m')&&I.chain.queue.length===0,{hits:T.hits.map(h=>h[0]+':'+h[2]),q:I.chain.queue});}catch(e){ok('room change',false,String(e));}
+try{T=mk({coop:'host'});T.sb.tick(.05);ok('co-op: R561 reports itself off so R209/R291 give the original gunner W·E back (no slot left gated)',T.A().on()===false&&!(T.sb.player.storyWER.ready['gunner:r']>1e5),{on:T.A().on(),r:T.sb.player.storyWER.ready['gunner:r']});}catch(e){ok('coop',false,String(e));}
 
 // ---------- 연계(사용자 2026-11-10 03:23Z "스킬키를 늘리지 말고 기존 키에서 여러 스킬이 자동으로 연속으로 더 나가게, 자연스럽고 렉 신경") ----------
 try{T=mk();const kd=T.L.keydown[0];kd({key:'z',target:{tagName:'CANVAS'}});T.run(10.5);const e0=T.A().remain('e');T.run(12.4);

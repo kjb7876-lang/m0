@@ -64,7 +64,7 @@ const fx=[];let peakFx=0;const SENT={type:'r561-fx',x:0,y:0,age:0,life:Infinity}
 function armSent(){peakFx=Math.max(peakFx,fx.length);try{if(typeof effects!=='undefined'&&Array.isArray(effects)&&!effects.includes(SENT)){SENT.age=0;effects.push(SENT);}}catch(_){}}
 // ---- Q 회상 광선포 ----
 function castQ(){let rk=0;try{rk=typeof rank==='function'?Number(rank('special'))||0:0;}catch(_){}
- player.specialCD=10*(1-.05*rk);player.skillAnim=.6;const SP=power()*(2.4+.36*rk),e=nearest(12),a=aimAt(e),o={x:player.x,y:player.y},L=reach(o,a,BEAM.len);face(a);snd('special');
+ player.specialCD=10*(1-.05*rk)*rhythm();player.skillAnim=.6;const SP=power()*(2.4+.36*rk),e=nearest(12),a=aimAt(e),o={x:player.x,y:player.y},L=reach(o,a,BEAM.len);face(a);snd('special');
  fx.push({k:'q',t0:T(),life:BEAM.charge+BEAM.every*(BEAM.ticks-1)+.32,o,a,L,dmg:SP*BEAM.per,done:0,seed:Math.random()*6});armSent();stats.q++;return true;}
 // ---- W 망각 저격 ----
 function snipeTarget(){const rows=live().filter(e=>dist(e,player)<=RANGE.w&&los(player,e));const big=rows.filter(e=>e.boss||e.elite).sort((a,b)=>dist(a,player)-dist(b,player))[0];return big||rows.sort((a,b)=>dist(a,player)-dist(b,player))[0]||null;}
@@ -149,6 +149,9 @@ function warm(){if(warmed||!mine())return;const S=SPR();if(!S?.warm)return;warme
 // ---- 입구 ----
 const readyAt={w:0,e:0,r:0};
 function remain(sl){return Math.max(0,(readyAt[sl]||0)-T());}
+function egoOn(){try{return !!window.__STORYWORLD_EGO151__?.inspect?.().state?.active;}catch(_){return false;}}
+// 방·영웅이 바뀌거나 쓰러지면 기다리던 사격·연계를 버린다(엔진 WER valid/cancel 과 같은 뜻) — 옛 좌표로 새 방 적을 때리지 않게
+let ownRoom=null,ownPlayer=null,ownSeen=false;function own(){let rm=null;try{rm=typeof room!=='undefined'?room:null;}catch(_){}const p=typeof player==='object'?player:null;if(!ownSeen){ownSeen=true;ownRoom=rm;ownPlayer=p;}if(rm!==ownRoom||p!==ownPlayer||!(p?.hp>0)){if(fx.length||chain.queue.length){fx.length=0;if(chain.queue.length){chain.queue.length=0;chain.cancelled++;}}ownRoom=rm;ownPlayer=p;}}
 function busy(){try{return (typeof started!=='undefined'&&!started)||(typeof modal!=='undefined'&&!!modal)||(typeof loading!=='undefined'&&loading)||(typeof storyScene!=='undefined'&&!!storyScene)||!(player?.hp>0)||!!window.__STORYWORLD_EGO151__?.inspect?.().state?.active;}catch(_){return true;}}
 function fire(sl,automatic){if(!mine()||!SLOTS.includes(sl))return false;if(readyAt[sl]>T())return false;if(fx.length>=CAP)return false;
  let pt=null;if(automatic){if(sl==='r'){pt=strikePoint(2);if(!pt)return false;}else if(!(sl==='w'?snipeTarget():nearest(RANGE[sl])))return false;}
@@ -158,14 +161,14 @@ function gate(){try{if(typeof player!=='object'||!player||player.hero!==HERO)ret
   if(mine()){for(const sl of SLOTS){const k=HERO+':'+sl;if(!(s.ready[k]>t+FAR/2))s.ready[k]=t+FAR;}}else{const k=HERO+':r';if(s.ready[k]>t+FAR/2)s.ready[k]=0;}}catch(e){fail(e);}}
 let ORIG_Q=null;function names(){try{if(typeof HEROES==='object'&&HEROES?.[HERO]){if(ORIG_Q==null)ORIG_Q=HEROES[HERO].special;HEROES[HERO].special=on?NAME.q:ORIG_Q;}}catch(e){fail(e);}}
 names();
-if(typeof special==='function'){const base=special;special=function(...a){if(mine()){try{if(busy()||player.specialCD>0||fx.length>=CAP)return;castQ();if(!autoOn())startChain('q');try{if(typeof updateHUD==='function')updateHUD();}catch(_){}}catch(e){fail(e);}return;}return base.apply(this,a);};}
+if(typeof special==='function'){const base=special;special=function(...a){if(mine()&&!egoOn()){try{if(busy()||player.specialCD>0||fx.length>=CAP)return;castQ();if(!autoOn())startChain('q');try{if(typeof updateHUD==='function')updateHUD();}catch(_){}}catch(e){fail(e);}return;}return base.apply(this,a);};}
 let wrapped=false;
 function install(){const W=window.__STORYWORLD_WER__;if(!W||wrapped||W.__r561)return !!W;wrapped=true;const base=W.cast;
  window.__STORYWORLD_WER__=Object.freeze({...W,__r561:true,cast(slot,automatic,...a){const sl=String(slot).toLowerCase();if(mine()&&SLOTS.includes(sl)){try{return fire(sl,!!automatic);}catch(e){fail(e);return false;}}return base.call(this,slot,automatic,...a);}});return true;}
 let nextAuto=0;
 function autoOn(){try{const mob=window.__STORYWORLD_MOBILE_R63__?.isMobile?.();return (mob?settings.autoSkill===true:(typeof auto!=='undefined'&&auto))||(typeof guide!=='undefined'&&guide);}catch(_){return false;}}
 function tickAuto(){if(!mine()||busy()||!autoOn())return;const t=T();if(t<nextAuto)return;nextAuto=t+.35;fire('r',true)||fire('w',true)||fire('e',true);}
-if(typeof tick==='function'){const b=tick;tick=function(...a){gate();const r=b.apply(this,a);try{warm();if(fx.length)step();stepChain();tickAuto();}catch(e){fail(e);}return r;};}
+if(typeof tick==='function'){const b=tick;tick=function(...a){gate();const r=b.apply(this,a);try{own();warm();if(fx.length)step();stepChain();tickAuto();}catch(e){fail(e);}return r;};}
 if(typeof drawEffect==='function'){const b=drawEffect;drawEffect=function(e,...a){if(e&&e.type==='r561-fx'){try{draw();}catch(err){fail(err);}return;}return b.apply(this,[e,...a]);};}
 if(typeof serializeSave==='function'){const b=serializeSave;serializeSave=function(...a){const d=b.apply(this,a);try{const r=d?.storyWER?.remaining;if(r&&mine())for(const sl of SLOTS)if(r[HERO+':'+sl]>FAR/2)delete r[HERO+':'+sl];}catch(e){fail(e);}return d;};}
 if(typeof updateHUD==='function'){const b=updateHUD;updateHUD=function(...a){const r=b.apply(this,a);try{if(mine()&&typeof document!=='undefined')for(const sl of SLOTS){const el=document.getElementById('story-wer-'+sl);if(!el)continue;const cd=el.querySelector('.cd'),m=remain(sl);if(cd)cd.textContent=m>0?String(Math.ceil(m)):'';el.title=NAME[sl];el.setAttribute('aria-label',NAME[sl]+' · '+(typeof KR291!=='undefined'&&KR291?KR291[sl]:sl.toUpperCase()));const lb=el.querySelector('.label');if(lb&&lb.textContent!==SHORT[sl])lb.textContent=SHORT[sl];}}catch(e){fail(e);}return r;};}
@@ -174,7 +177,7 @@ if(typeof addEventListener==='function'){addEventListener('keydown',ev=>{try{if(
  const btn=ev=>{try{if(!mine())return;const b=ev.target?.closest?.('#story-wer-w,#story-wer-e,#story-wer-r');if(!b)return;if(ev.type==='click'&&ev.detail!==0)return;ev.preventDefault();ev.stopPropagation();if(!busy()){gate();const sl=b.id.slice(-1);if(fire(sl,false))startChain(sl);}}catch(e){fail(e);}};
  addEventListener('pointerdown',btn,true);addEventListener('click',btn,true);}
 let tries=0;(function arm(){try{install();}catch(e){fail(e);}if(++tries<60&&typeof setTimeout==='function')setTimeout(arm,250);})();
-window.__STORYWORLD_GUNNER_ARMS_R561__=Object.freeze({revision:REV,on:()=>on,names:NAME,cooldowns:CD,fire,remain,level,
+window.__STORYWORLD_GUNNER_ARMS_R561__=Object.freeze({revision:REV,on:()=>on&&solo(),names:NAME,cooldowns:CD,fire,remain,level,
  inspect:()=>({revision:REV,on,chainOn,stats:{...stats},fx:fx.length,peakFx,cap:CAP,chain:{queue:chain.queue.slice(),links:chain.links,minGap:chain.minGap,overlap:chain.overlap,cancelled:chain.cancelled},remain:{w:remain('w'),e:remain('e'),r:remain('r')},lastError}),
  set:v=>{if(v&&typeof v==='object'){if('on' in v)on=v.on!==false;if('chain' in v)chainOn=v.chain!==false;}else on=v!==false;if(!chainOn)chain.queue.length=0;try{localStorage.setItem(KEY,JSON.stringify({on,chain:chainOn}));}catch(_){}names();gate();return on;}});
 })();
