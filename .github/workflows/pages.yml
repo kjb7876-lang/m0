@@ -399,6 +399,8 @@ jobs:
         run: node r96/qa/r372/r372-cpu-check.cjs
       - name: R617 Hwando fall story videos CPU check
         run: node r96/qa/r617/hwando-fall-video-cpu-check.cjs
+      - name: R619 pause game drawing while a full-screen story video is open
+        run: node r96/qa/r619/video-render-pause-cpu-check.cjs
       - name: R373 mob squads and leaders CPU check
         run: node r96/qa/r373/r373-cpu-check.cjs
 
@@ -474,6 +476,8 @@ jobs:
         run: node r96/qa/r453/actor-tone-r453-cpu-check.cjs
       - name: R571 samong surge (during 사몽 only - skill cooldown x0.23, proc chance x1.77 capped 100%, skill range/area x1.77, restored after; hero main-colour flame aura, code only) CPU check
         run: node r96/qa/r571/r571-cpu-check.cjs
+      - name: R572 samong hero themes (during 사몽 only - per-hero motif around the body + skill-hit marks, upright cross only, capped marks, code only) CPU check
+        run: node r96/qa/r572/r572-cpu-check.cjs
       - name: R521 hospital rooms (ep1a08 wards/consult/prep/lobby furnished by room function along the back walls, presentation only, drive hospital props) CPU check
         run: node r96/qa/r521/r521-cpu-check.cjs
       - name: R522 hospital thin walls (the two free-standing maze baffles of ep1a08 moved to touch a thick wall, hospital only, routes stay connected) CPU check
@@ -656,6 +660,11 @@ jobs:
         run: python scripts/verify-r96-release.py
       - name: R580 Pages bundle under 1GB (archival narration excluded, lossless PNG, pixel-identical, public verifier)
         run: python r96/qa/r580/pages-size-check.py
+      - name: R580 public verifier retries transient read timeouts/disconnects but still fails wrong, missing or never-arriving bytes
+        run: |
+          python scripts/pages-pack.py --site r96/hospital-three-pc/site --out "$RUNNER_TEMP/r580-pages"
+          python r96/qa/r580/public-retry-check.py "$RUNNER_TEMP/r580-pages"
+          rm -rf "$RUNNER_TEMP/r580-pages"
       - name: R580 pack the Pages bundle from the verified site
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         run: python scripts/pages-pack.py --site r96/hospital-three-pc/site --out r96/hospital-three-pc/pages

@@ -24973,6 +24973,31 @@
       "sha256": "c5fe9b7dc705e2d569d2bbeb8388b4fd0c1ffe03216b633493de67fe24455c1d"
     },
     {
+      "path": "assets/r524/index.json",
+      "bytes": 2900,
+      "sha256": "ed944fe6962529e73c913e4385d772ef0a0f908985fae2553bd8f256b4059a6c"
+    },
+    {
+      "path": "assets/r524/range-n.webp",
+      "bytes": 14628,
+      "sha256": "4b0b8315c029aabf142b1ece69649ac664a499d65a986d773e5f00cb9d877b9b"
+    },
+    {
+      "path": "assets/r524/range-w.webp",
+      "bytes": 15948,
+      "sha256": "d37671b9e267ee5b1f1ea75e58133b02eeb8fcc461814b4089253fee5df72942"
+    },
+    {
+      "path": "assets/r524/sofa-n.webp",
+      "bytes": 13648,
+      "sha256": "d409b4f26957f3cebe536002aaba47732bacf8572fa1875390ed95b51be8bff2"
+    },
+    {
+      "path": "assets/r524/sofa-w.webp",
+      "bytes": 13468,
+      "sha256": "8bf10ff5c67732f690edf60e016a5e97dbf938e7ac13cc175564b8d88992512e"
+    },
+    {
       "path": "assets/r541/sfx/death-1.ogg",
       "bytes": 8533,
       "sha256": "37072c41ffac2be63e376a40961e4332add640950a7e593ccaf53b63a88c777a"
@@ -25106,6 +25131,16 @@
       "path": "assets/r585/slayer-w-sacrifice.webp",
       "bytes": 127910,
       "sha256": "f301ba2679c17d6a3bf595f6471d6252362baa116dc0d9c6130e2d79c35de4c4"
+    },
+    {
+      "path": "assets/r590/hwando-iai-ring.webp",
+      "bytes": 147792,
+      "sha256": "0ce1cbae6780b064e5db60f17cb80006ada735ac607858ff909d2bb895b8c3e0"
+    },
+    {
+      "path": "assets/r590/hwando-wind-tornado.webp",
+      "bytes": 175080,
+      "sha256": "78ad667c36677e21840fa9e12e89ebe20e243d70774d793cb58395b3d6880713"
     },
     {
       "path": "assets/r617/beach-poster.jpg",
@@ -34169,8 +34204,8 @@
     },
     {
       "path": "hwando-chain-r590.js",
-      "bytes": 16154,
-      "sha256": "ebe66b351c1d99f3bc40ee37d68c579e70f84cc6465f0e153ffdae0d0c5df456"
+      "bytes": 18852,
+      "sha256": "74c9cd2ec2198540af603ae738e648c640ed6482a3bd41b809c4e5ec3054393c"
     },
     {
       "path": "hwando-fall-video-r617.js",
@@ -34204,8 +34239,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6572938,
-      "sha256": "3b9ac51d038154407ab4b8f62f05711dde57299686a52b64049a5e9530dfdabb"
+      "bytes": 6573037,
+      "sha256": "fbbd9755d564f3131d93f8ee855229d70956391069e1d5a56e15f2348571f587"
     },
     {
       "path": "intro-r140.js",
@@ -34639,8 +34674,8 @@
     },
     {
       "path": "rooms-r523.js",
-      "bytes": 37753,
-      "sha256": "ebaee9b11ccded46dffc7b564f314cc576ff7288e61d26b1249f0a059785fcc7"
+      "bytes": 42635,
+      "sha256": "4a23ec16dd31424586292d1d62382f75c4c2496e97e0562b9bac01f2156c6d5b"
     },
     {
       "path": "root-gate-video-r372.js",
@@ -34706,6 +34741,11 @@
       "path": "samong-text-r103.js",
       "bytes": 568864,
       "sha256": "9ec78dbf96bd9a534e4a92b801113a919e7e03a226f7dde93f0d68fffe53e469"
+    },
+    {
+      "path": "samong-theme-r572.js",
+      "bytes": 16885,
+      "sha256": "7fce142293e320d7c6cb9d5121f64c443ef9d5875e91638e5e613637dd923132"
     },
     {
       "path": "samong-ult-r139.js",
@@ -34958,6 +34998,11 @@
       "sha256": "63610ff8ae0303d60ea76a00f4aee6597288f3b5c0fabe27ae3e3195815c0d3a"
     },
     {
+      "path": "video-render-pause-r619.js",
+      "bytes": 3162,
+      "sha256": "7e9fe9ed41373d44f8e10dbe59a0bebec56bdf2e2e6df6509b00ee0a364e4b38"
+    },
+    {
       "path": "view-r217.js",
       "bytes": 2722,
       "sha256": "510186778818553660993cac7df12f0796ce7c0b399852e196e5266ee9f39566"
@@ -35103,9 +35148,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 7020,
-  "totalBytes": 1097195872,
-  "webHTMLSha256": "3b9ac51d038154407ab4b8f62f05711dde57299686a52b64049a5e9530dfdabb",
+  "fileCount": 7029,
+  "totalBytes": 1097607062,
+  "webHTMLSha256": "fbbd9755d564f3131d93f8ee855229d70956391069e1d5a56e15f2348571f587",
   "largest": [
     {
       "path": "index.html",
