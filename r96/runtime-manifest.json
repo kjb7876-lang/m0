@@ -33929,8 +33929,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6572525,
-      "sha256": "6264b143140b9daf27050a0af05e0e4cceed06a3e9094dc4d3c465964e6ef127"
+      "bytes": 6572573,
+      "sha256": "d4d9bad131145d2d13f1b7780492486a88e5a7e966c5b4d71b129d9a67e09833"
     },
     {
       "path": "intro-r140.js",
@@ -33961,6 +33961,11 @@
       "path": "lag-r217.js",
       "bytes": 2390,
       "sha256": "64754e0f1ba043700b7f79cbf31f9bbf916e33ea66d37be13df5066da7daf5ed"
+    },
+    {
+      "path": "lauren-gravity-r561.js",
+      "bytes": 12282,
+      "sha256": "593635aa6fc189fa8bc3f118ee52541e4a394e2a90f9bd54740f721496628c91"
     },
     {
       "path": "light-atmos-r300.js",
@@ -34808,9 +34813,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6961,
-  "totalBytes": 1092210020,
-  "webHTMLSha256": "6264b143140b9daf27050a0af05e0e4cceed06a3e9094dc4d3c465964e6ef127",
+  "fileCount": 6962,
+  "totalBytes": 1092222350,
+  "webHTMLSha256": "d4d9bad131145d2d13f1b7780492486a88e5a7e966c5b4d71b129d9a67e09833",
   "largest": [
     {
       "path": "index.html",
