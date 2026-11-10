@@ -16,11 +16,11 @@ const code=strip(src);
 ok(!/drop-shadow|blur\(/.test(code),'Three.js 기록기: drop-shadow·blur 없음');
 ok(!/벽력|霹靂|雷の呼吸|천본앵|히텐|飛天/.test(src),'다른 작품 기술 이름을 쓰지 않음');
 ok(!/'rune'|'runecross'|'cross'/.test(code),'상징 규칙: 룬·십자 문양을 새로 그리지 않음(검 이펙트만)');
-ok(!/new Image\(|\.webp'|\.png'/.test(code),'새 그림 자산 없음(코드 이펙트·기존 R106 조각만)');
+ok(!/new Image\(|\.png'/.test(code)&&(code.match(/\.webp'/g)||[]).length===2&&/assets\/r590\/hwando-wind-tornado\.webp'/.test(code)&&/assets\/r590\/hwando-iai-ring\.webp'/.test(code),'그림 자산은 R590b 색 바꾼 시트 2장만(나머지는 코드·R106 조각)');
 
 // ---- 가짜 엔진 ----
 // 벽: 14<x<15.5 (세로 벽), 맵: 1..N-1, N=40
-function engine({coop=null,enemies=[],hero='hwando',lowFx=false,px=20,py=20}={}){
+function engine({coop=null,enemies=[],hero='hwando',lowFx=false,px=20,py=20,ready=false}={}){
  const hits=[],draws=[],floats=[];let clock=10;const N=40;
  const room={id:'room1',props:[],enemies:enemies.map(e=>({radius:.3,hp:1000,maxHp:1000,...e}))};
  const W={};const g={window:W,localStorage:{getItem:()=>null,setItem:()=>{}},console,Math,JSON,Set,Map,WeakMap,WeakSet,Array,Object,String,Number,Error,
@@ -37,7 +37,9 @@ function engine({coop=null,enemies=[],hero='hwando',lowFx=false,px=20,py=20}={})
   // 기본 공격: CD 가 0 이면 공격력을 그 자리에서 읽어 한 번 때린다(엔진처럼 동기)
   basicAttack(force=false){const p=g.player;if(p.hp<=0||p.attackCD>0)return;const e=g.nearestEnemy(3.15);if(!e&&!force)return;p.combo++;p.attackCD=.48;const pw=g.attackPower();if(e)g.hitEnemy(e,pw,{kind:'basic',friendly:true});},
   special(){const p=g.player;if(p.hp<=0||p.specialCD>0)return;p.specialCD=10;const pw=g.attackPower()*2.4;const e=g.nearestEnemy(3.15);if(e)g.hitEnemy(e,pw,{kind:'special',friendly:true});},
-  ctx:{commands:[],save(){},restore(){},translate(){},scale(){},rotate(){},drawImage(){},globalAlpha:1,globalCompositeOperation:'source-over',filter:'none'}};
+  readyImage:(pth)=>g.__ready&&g.__ready.has(pth)?{ready:true,image:{src:pth,width:1152,height:768}}:null,ensureImages:(l)=>{(g.__asked||(g.__asked=[])).push(...l);return Promise.resolve();},
+  ctx:{commands:[],save(){},restore(){},translate(){},scale(){},rotate(){},drawImage(im){if(im&&im.src)draws.push('sheet:'+im.src.split('/').pop());},globalAlpha:1,globalCompositeOperation:'source-over',filter:'none'}};
+ if(ready)g.__ready=new Set(['assets/r590/hwando-wind-tornado.webp','assets/r590/hwando-iai-ring.webp']);
  g.clearLine=(a,b,r)=>{const d=Math.hypot(b.x-a.x,b.y-a.y),k=Math.max(1,Math.ceil(d/.24));for(let i=1;i<=k;i++)if(g.blocked(a.x+(b.x-a.x)*i/k,a.y+(b.y-a.y)*i/k,.29))return false;return true;};
  W.__STORYWORLD_FX_SPRITES_R106__={on:()=>true,warm(){},draw:(nm)=>{draws.push(nm);return true;},along:(nm)=>{draws.push(nm);return true;}};
  if(coop)W.__STORYWORLD_COOP_SIM_R62__={mode:()=>coop};
@@ -137,5 +139,30 @@ const wave=(E,id,x=20,y=20,ang=0)=>E.ctx.fx('storySourceSkill',x,y,{storyWER:tru
  const E2=engine({enemies:[{id:'q1',x:23,y:20}]});E2.ctx.special();E2.run(.6);let hi=0;for(let i=0;i<10;i++){E2.adv(.033);hi=Math.max(hi,E2.frame());}
  ok(lo>0&&lo<hi,'저사양(lowFx) 모드는 그리기를 줄임('+lo+' < '+hi+')');}
 {const E=engine({enemies:[]});E.run(1);ok(!E.g.effects.some(e=>e&&e.r590Sentinel),'할 일이 없으면 그리기 표지를 effects 에서 뺌');}
+
+// ---- R590b: 드라이브 색 바꾼 시트(칼바람 회오리·발도 착지 고리) ----
+for(const a of ['hwando-wind-tornado.webp','hwando-iai-ring.webp']){const f=path.join(R,'runtime-text','assets','r590',a);ok(fs.existsSync(f)&&fs.statSync(f).size<200000,'시트 '+a+' 있음, 200KB 미만');
+ ok(JSON.stringify(JSON.parse(fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8'))).includes('assets/r590/'+a),'manifest 에 '+a);}
+ok(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').includes("assets/r590/"),'verify-r96-public.py 가 assets/r590/ 확인');
+{const E=engine({ready:true,enemies:[{id:'q1',x:23,y:20}]});E.ctx.special();E.run(.62);E.frame();
+ ok(E.draws.includes('sheet:hwando-wind-tornado.webp'),'시트가 준비되면 검풍은 은빛 회오리 시트로 그림');
+ const E2=engine({ready:true,enemies:[{id:'a',x:21,y:20}]});E2.ctx.basicAttack();E2.adv(.05);E2.frame();ok(E2.draws.includes('sheet:hwando-iai-ring.webp'),'발도 순간 발밑 착지 고리 시트');
+ const E3=engine({ready:true,enemies:[{id:'r1',x:24,y:20}]});for(let i=0;i<7;i++)wave(E3,'wer:rs');E3.run(.36);E3.frame();ok(E3.draws.includes('sheet:hwando-iai-ring.webp'),'종섬 끝자리에도 고리');}
+{const E=engine({ready:false,enemies:[{id:'q1',x:23,y:20}]});E.ctx.special();E.run(.62);E.frame();
+ ok(!E.draws.some(d=>String(d).startsWith('sheet:'))&&E.draws.includes('slash')&&(E.g.__asked||[]).some(p=>/r590\/hwando-wind-tornado/.test(p)),'시트가 아직 없으면 코드 그림으로 대신하고 불러오기를 요청');}
+{const E=engine({ready:true,enemies:[{id:'q1',x:23,y:20},{id:'r1',x:24,y:20}]});for(let k=0;k<4;k++){E.ctx.player.specialCD=0;E.ctx.special();}E.run(.75);for(let k=0;k<3;k++){flight(E,'wer:t'+k,20,20,23.8,20);for(let i=0;i<7;i++)wave(E,'wer:tr'+k);}
+ let mx=0;for(let i=0;i<20;i++){E.adv(.02);mx=Math.max(mx,E.frame());}ok(mx<=E.api.config.maxDraws,'시트를 써도 한 프레임 그리기 ≤ '+E.api.config.maxDraws+'(최대 '+mx+')');}
+
+// ---- R571 사몽 발현 배수: 연계 자체 틱의 사거리·반경만 ×1.77, 상한 그대로 ----
+{const mk=on=>{const E=engine({enemies:[{id:'n',x:22,y:20},{id:'far',x:28.6,y:20}]});E.g.window.__STORYWORLD_SAMONG_SURGE_R571__={active:()=>on,range:r=>on?r*1.77:r,cd:s=>on?s*.23:s};return E;};
+ const A=mk(false);A.ctx.special();A.run(1.6);const B=mk(true);B.ctx.special();B.run(1.6);
+ const hw=E=>E.hits.filter(h=>h.s.r590==='wind').map(h=>h.id);
+ ok(!hw(A).includes('far')&&hw(B).includes('far'),'사몽 발현 중 검풍 사거리 ×1.77(6칸 너머 적까지): 평소 '+hw(A)+' / 발현 '+hw(B));
+ ok(B.ctx.player.specialCD===A.ctx.player.specialCD,'쿨은 연계가 다시 줄이지 않음(엔진 몫)');
+ const C=mk(false),D=mk(true);for(const E of [C,D]){for(let i=0;i<7;i++)wave(E,'wer:sg');E.run(.6);}
+ const hf=E=>E.hits.filter(h=>h.s.r590==='finale').map(h=>h.id);
+ ok(!hf(C).includes('far')&&hf(D).includes('far'),'사몽 발현 중 종섬 길이 ×1.77: 평소 '+hf(C)+' / 발현 '+hf(D));
+ const S=mk(true);for(let k=0;k<6;k++){S.ctx.player.specialCD=0;S.ctx.special();}S.run(.9);ok(S.api.inspect().blades.length<=S.api.config.maxBlades,'발현 중에도 칼바람 상한 '+S.api.config.maxBlades+' 유지');
+ const X=mk(true);X.g.window.__STORYWORLD_SAMONG_SURGE_R571__={range:()=>{throw new Error('x');}};X.ctx.special();X.run(1);ok(hw(X).includes('n'),'배수 API 오류가 나도 평소 값으로 동작');}
 
 console.log('R590 hwando chain CPU check: '+n+' passed');
