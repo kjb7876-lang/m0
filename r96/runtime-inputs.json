@@ -7963,6 +7963,7 @@
     "assets/r562/dots/neon-chain.webp",
     "assets/r562/dots/neon-bubble-ring-back.webp",
     "enemy-attack-tempo-r601.js",
+    "auto-attack-r597.js",
     "assets/r590/hwando-a-draw-cut.webp",
     "assets/r590/hwando-q-wind-blade.webp",
     "assets/r590/hwando-e-delayed-flash.webp",
@@ -9043,5 +9044,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "512a710552ffdb4a98e1d9989c39422fd10d6bebbf3bafe21859171974201560"
+  "runtimeManifestSHA256": "6c3efcb0885272067886ba224e249a6b0e126502bd0275df8d0addf337f4b5ee"
 }
