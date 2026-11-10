@@ -28,7 +28,7 @@ const TUNE=Object.freeze({
  chain:Object.freeze({qFinal:2,petalBurn:.5,petalBeat:.08}),
  gate:Object.freeze({r:5,q:3,every:.1,maxVolleys:20,volleyLife:.2,close:.3,back:1.1,spread:.75}),
  maxLive:24,maxFx:4,fullFlames:8});
-const stats={stormShots:0,shards:0,ignites:0,burnTicks:0,lances:0,blasts:0,petals:0,capSkips:0,maxLive:0,maxShake:0,lanceDraws:0,headDraws:0,sheetDraws:{lance:0,blast:0,burn:0,shard:0,pop:0,storm:0},gates:0,volleys:0,postMs:0,posts:0,drawMs:0,errors:0,lastError:null};
+const stats={stormShots:0,shards:0,ignites:0,burnTicks:0,lances:0,blasts:0,petals:0,capSkips:0,maxLive:0,maxShake:0,lanceDraws:0,headDraws:0,sheetDraws:{lance:0,blast:0,burn:0,shard:0,pop:0,storm:0,gate:0,volley:0},gates:0,volleys:0,postMs:0,posts:0,drawMs:0,errors:0,lastError:null};
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const fail=e=>{stats.errors++;stats.lastError=String(e&&e.message||e).slice(0,200);};
 const T=()=>{try{return typeof time==='number'?time:0;}catch(_){return 0;}};
@@ -163,7 +163,10 @@ const SHEETS=Object.freeze({
  burn:{path:'assets/r535/dots/hunter-burn.webp',cell:256,n:20,loop:true,piv:[128,208]},
  shard:{path:'assets/r535/dots/hunter-z-ember-thorn.webp',cell:256,n:20,loop:true,piv:[195,128]},
  pop:{path:'assets/r535/dots/hunter-z-split-pop.webp',cell:256,n:15,loop:false,piv:[118,139]},
- storm:{path:'assets/r535/dots/hunter-q-storm-trail.webp',cell:256,n:20,loop:true,piv:[244,140]}});
+ storm:{path:'assets/r535/dots/hunter-q-storm-trail.webp',cell:256,n:20,loop:true,piv:[244,140]},
+ // Dots r2(dots-r2-20261110): 문 24칸(0-4 열림 · 5-19 반복 · 20-23 닫힘, 타원 지름 약 90px), 불줄기 20칸 반복(왼→오, 기준점은 머리 쪽으로 옮김)
+ gate:{path:'assets/r535/dots/hunter-gate.webp',cell:256,n:24,loop:false,piv:[128,145]},
+ volley:{path:'assets/r535/dots/hunter-volley.webp',cell:256,n:20,loop:true,piv:[236,126]}});
 // 진홍 시트는 어두운 지역에서 묻히므로 보통 합성 한 번 + 더하기 합성 한 번(빛). 두 번째는 수에 안 셈.
 function glow(k,f,x,y,sc,al=1,g=.5){const op=ctx.globalCompositeOperation;ctx.globalCompositeOperation='source-over';const ok=sheet(k,f,x,y,sc,al);if(ok){ctx.globalCompositeOperation='lighter';sheet(k,f,x,y,sc,al*g);stats.sheetDraws[k]--;}ctx.globalCompositeOperation=op;return ok;}
 function sheetImg(k){return img(SHEETS[k].path);}
@@ -239,6 +242,8 @@ function drawPops(){if(!pops.length||!sheetImg('pop'))return;const t=T(),z=Z();f
 function drawGates(){const t=T(),z=Z(),h=(typeof actorHeight==='function'?actorHeight():60);
  for(const g of gates){const open=Math.min(1,(t-g.t0)/.12),shut=g.closing?Math.max(0,(g.until-t)/TUNE.gate.close):1,a=open*shut;if(a<=0)continue;
   for(const s of gateSlots(g)){const q=project(s.x,s.y),cx=q.x,cy=q.y-h*(g.kind==='r'?1.5:1.25)+Math.abs(s.k)*h*.18,r=(g.kind==='r'?18:12)*z*(0.6+.4*open),rot=t*2.2*(s.i%2?-1:1);
+   if(sheetImg('gate')){const el=t-g.t0,f=g.closing?20+Math.min(3.99,(1-shut)*4):el<.2?el*25:5+((el-.2)*12.5)%15;
+    sc({id:'r535:gate:'+g.t0.toFixed(3)+':'+s.i,kind:'effect',x:s.x,y:s.y},()=>{ctx.save();try{glow('gate',f,cx,cy,r*2/90,1,.45);}finally{ctx.restore();}});continue;}
    sc({id:'r535:gate:'+g.t0.toFixed(3)+':'+s.i,kind:'effect',x:s.x,y:s.y},()=>{ctx.save();try{
     ctx.globalCompositeOperation='source-over';ctx.globalAlpha=.7*a;ctx.beginPath();ctx.ellipse(cx,cy,r*.82,r*.82*.62,0,0,Math.PI*2);ctx.fillStyle='rgba(30,2,8,1)';ctx.fill();
     ctx.globalCompositeOperation='lighter';ctx.globalAlpha=.85*a;ctx.lineWidth=Math.max(1.5,2.4*z);ctx.strokeStyle=CRIM;ctx.beginPath();ctx.ellipse(cx,cy,r,r*.62,0,0,Math.PI*2);ctx.stroke();
@@ -249,6 +254,7 @@ function drawGates(){const t=T(),z=Z(),h=(typeof actorHeight==='function'?actorH
 // 불화살 줄기: 문에서 표적으로 0.2초 동안 내리꽂히는 불줄기(칼날 모양은 끝이 넓은 금빛 쐐기)
 function drawVolleys(){const t=T(),z=Z(),h=(typeof actorHeight==='function'?actorHeight():60);
  for(const v of volleys){const u=Math.min(1,(t-v.t0)/v.life),a=project(v.x0,v.y0),b=project(v.x1,v.y1),ay=a.y-h*1.4,by=b.y-lift(),hx=a.x+(b.x-a.x)*u,hy=ay+(by-ay)*u,tx=a.x+(b.x-a.x)*Math.max(0,u-.35),ty=ay+(by-ay)*Math.max(0,u-.35);
+  if(sheetImg('volley')){sc({id:'r535:volley:'+v.t0.toFixed(3)+':'+v.x0.toFixed(2),kind:'effect',x:v.x1,y:v.y1},()=>{ctx.save();try{ctx.translate(hx,hy);ctx.rotate(Math.atan2(by-ay,b.x-a.x));ctx.globalCompositeOperation='lighter';sheet('volley',(t-v.t0)*12.5+v.x0*7,0,0,.3*z,1-u*.45);}finally{ctx.restore();}});continue;}
   sc({id:'r535:volley:'+v.t0.toFixed(3)+':'+v.x0.toFixed(2),kind:'effect',x:v.x1,y:v.y1},()=>{ctx.save();try{ctx.globalCompositeOperation='lighter';ctx.lineCap='round';
    ctx.globalAlpha=.6*(1-u*.5);ctx.strokeStyle=EMBER;ctx.lineWidth=Math.max(1.5,3*z);ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(hx,hy);ctx.stroke();
    ctx.globalAlpha=.9*(1-u*.4);ctx.strokeStyle=GOLD;ctx.lineWidth=Math.max(1,1.2*z);ctx.beginPath();ctx.moveTo((tx+hx)/2,(ty+hy)/2);ctx.lineTo(hx,hy);ctx.stroke();
