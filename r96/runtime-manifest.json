@@ -15299,8 +15299,8 @@
     },
     {
       "path": "assets/r380/mobs/index.json",
-      "bytes": 184055,
-      "sha256": "0fcc0bfda3667922413e8b0501ec79112e52f79e03a6920f17d5b76ec292000c"
+      "bytes": 184330,
+      "sha256": "91ac8d5f5b953685601b0dc8d29fdb9b42076c30572881e783bc2a1394fc1db3"
     },
     {
       "path": "assets/r380/mobs/jealousy-wraith-v1.webp",
@@ -15526,6 +15526,11 @@
       "path": "assets/r380/mobs/root-stalker-r74-plain.webp",
       "bytes": 81584,
       "sha256": "72deaa9fd0f53545500a765a37e7c210d5b277c2d85d7a9bbdb46ab61a2fc00b"
+    },
+    {
+      "path": "assets/r380/mobs/root-stalker-r74-walk-g1.webp",
+      "bytes": 84952,
+      "sha256": "67604777bc3fc755bb3a20e922c397fa2b38cddf74320b11305849927c299239"
     },
     {
       "path": "assets/r380/mobs/s06-commander-v1.webp",
@@ -42804,8 +42809,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6572976,
-      "sha256": "60f0c25a158042a1f385cee47028a29d960520243c19ff6bbc7ad242a491a795"
+      "bytes": 6573019,
+      "sha256": "9df9c90bc9d8d8da040882334948235bd8d78725149647d0e89f3a7848608a75"
     },
     {
       "path": "intro-r140.js",
@@ -42936,6 +42941,11 @@
       "path": "mob-foot-r332.js",
       "bytes": 5791,
       "sha256": "8bd5b64fba6b5cba9ca8153329f657cace10d4ccf1e7d0d38bc175a72bdad7a2"
+    },
+    {
+      "path": "mob-gait-r613.js",
+      "bytes": 10016,
+      "sha256": "ed05e114f8e497aaa9e43f24398c13a8c54df7112f2cd0d8cacc2ae79b04717b"
     },
     {
       "path": "mob-gaze-r268.js",
@@ -43713,9 +43723,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8742,
-  "totalBytes": 1215948322,
-  "webHTMLSha256": "60f0c25a158042a1f385cee47028a29d960520243c19ff6bbc7ad242a491a795",
+  "fileCount": 8744,
+  "totalBytes": 1216043608,
+  "webHTMLSha256": "9df9c90bc9d8d8da040882334948235bd8d78725149647d0e89f3a7848608a75",
   "largest": [
     {
       "path": "index.html",

@@ -1,0 +1,53 @@
+CX-0067MV — 걷기(이동) 그림이 한 장뿐인 몹 걷기 시트 요청 (2026-11-10)
+요청: 죠죠 / 작성: Claude / 게임 코드 기준: kjb7876-lang/m0 R613(mob-gait-r613.js)
+근거: 브라우저 전수 측정 — 스토리 64구역 + 사몽 전투 구역 17곳·몹 전원을 2초씩 걸려 보고, 걷는 동안 그려진 몸 그림(이미지+칸)이 한 가지뿐인 몹을 골랐다.
+지금 게임 상태: 아래 몹은 걷는 동안 코드 임시 걸음(발 디딤·기울기, R613)으로만 움직인다. 이 시트가 오면 R613 은 그 몹에서 저절로 꺼진다.
+
+[공통 규칙 — CX-0056 과 같음]
+- 그림은 100% 새로 그린다. 다른 게임·작품의 그림을 복사하거나 따라 그리지 않는다.
+- 광원은 왼쪽 위. 그림자·하이라이트 방향을 모든 칸에서 같게.
+- 배경 완전 투명 PNG(알파). 검정·흰 배경 금지, 바닥선·글자·테두리 금지.
+- 옆모습, 오른쪽을 본다(게임이 좌우를 뒤집어 쓴다).
+- 기존 시트와 같은 칸 크기·같은 발 기준점(pivot)·같은 키(visibleHeight). 발끝이 모든 칸에서 같은 바닥 줄에 닿게.
+- 걷기 8칸(접지→누름→지나감→들림 ×2), 12.5fps 로 돈다. 떠 있는 몹은 '떠다니기' 6칸(오르내림·옷자락/촉수 흔들림).
+- 몸 모양·색·무기는 기존 그림과 같은 캐릭터. 무기를 빠뜨리지 않는다.
+- 결과 폴더: 스토리월드-dots작업/결과, 파일명 CX-0067MV_<id>_walk8.png (+ 칸 좌표 json 있으면 같이).
+
+[1순위 — 일반 몹(측정으로 확인, 실제 빈칸일 확률 95% 이상)]
+| # | 몹 이름 | 지역 | 지금 그림(원본 경로) | 칸·기준점 | 요청 |
+| 1 | 늪 뿌리 추적자 | dist02 늪 | swamp-root-stalker-darkgreen-v2 (assets/r380/mobs/) | 448×384, pivot 244,326, 키 268 | 걷기 8칸, 뿌리 다리 |
+| 2 | 악몽 정찰체 | hando01 | assets/r99/clean/assets/hando-v3123/timeless_silver_scout.webp | 418×418 한 장 | 걷기 8칸 + 같은 크기 칸 |
+| 3 | 붕괴선 파수병 | hando02 | assets/r99/clean/assets/hando-v3123/silver_seal_sentinel.webp | 418×418 한 장 | 걷기 8칸 |
+| 4 | 무명 검흔 | hando02 | legacy-m119-nameless-scar-v4 (assets/r380/mobs/) | 192×256, pivot 98,219, 키 160 | 걷기 8칸 |
+| 5 | 기억절제 연결자 | hando02 | assets/r99/clean/assets/hando-v3123/memory_excision_connector.webp | 418×418 한 장 | 걷기 8칸 |
+| 6 | 끊어진 통화의 인과 잔향 | murder01 | assets/murder/rooftop_echo.png | 한 장 | 떠다니기 6칸 |
+| 7 | 기계화 복종 봉인구 | cult01 | assets/r99/clean/assets/u2/generated-v350/u2_memory_orb.webp | 512×512 한 장 | 떠다니기 6칸(구체 회전·빛 맥동) |
+| 8 | 신경 케이블 포식체 | cult02 | assets/cult-v3123/black_robed_nightmare_demon.webp | 한 장 | 걷기 8칸(케이블 끌림) |
+| 9 | 일흔두 번째 인장 잔류체 | ep1b01 | assets/episode1b/generated-v394/seal_residual.webp | 한 장 | 떠다니기 6칸 |
+| 10 | 붉은 하이힐 칼날 | ep1b05 | assets/episode1b/generated-v394/lust_asmodai.webp | 한 장 | 걷기 8칸(하이힐 걸음) |
+| 11 | 칼날이 된 지폐 | ep1b06 | assets/episode1b/generated-v394/greed_fox_hound.webp | 한 장 | 네발 걷기 8칸 |
+| 12 | 강철 턱의 사이보그 개 | ep1b09 | assets/episode1b/generated-v394/polar_cyborg_hound.webp | 한 장 | 네발 걷기 8칸 |
+| 13 | 가짜 자비 수집가 | u202 | assets/r99/clean/assets/u2/generated-v350/u2_reactor_collector.webp | 한 장 | 걷기 8칸 |
+| 14 | 생체기계 악몽 | cult05 | legacy-m134-nightmare-v4 (assets/r380/mobs/) | 192×256, pivot 92,215, 키 180 | 걷기 8칸 |
+| 15 | 설원 아래의 기계 다리 | cult05 | assets/episode1b/generated-v394/polar_chairman.webp | 한 장 | 기계 다리 걷기 8칸 |
+| 16 | EGO 구속 연결자 | cult03 | assets/cult-v3123/black_rose_chip_penitent.webp | 한 장 | 걷기 8칸 |
+| 17 | 뿌리 추적자 | dist00 | root-stalker-r74-plain (assets/r380/mobs/) | 288×176, pivot 168,171, 키 122 | 정식 걷기 8칸(지금은 제미나이 시안 4칸 root-stalker-r74-walk-g1 을 임시로 씀) |
+
+[1순위 추가 — R380 시트 표에서 이동 칸이 1장(측정 구역에 안 나왔거나 사몽), 실제 빈칸일 확률 80%]
+| 18 | 시간수문장 46 | kair02 | legacy-m110-time-guardian-v3 | 192×256, pivot 102,199, 키 151 | 걷기 8칸 |
+| 19 | 중장 광선포병 | 사몽 S-06 | dys-siege-gunner-v2 | 256×320, pivot 130,301, 키 251 | 걷기 8칸 |
+| 20 | 프리즘 저격병 | 사몽 S-06 | dys-prism-stalker-v2 | 256×320, pivot 128,300, 키 300 | 걷기 8칸 |
+| 21 | 펄스 척후병 | 사몽 S-06 | dys-pulse-raider-v2 | 256×320, pivot 149,300, 키 265 | 걷기 8칸 |
+| 22 | 얼굴 없는 학생(·짙은 형상) | 사몽 S-02 광장 | assets/r105/drive/mob-student.webp (드라이브 원본 한 장) | 한 장 | 걷기 8칸(측정으로 확인, 95%) |
+
+[2순위 — 중간보스 전용 그림(걷기 1장 + 공격 묶음 1장, 확률 70%)]
+초자아 잠식체(ep1a11, ego_corrosion_vessel) · 박제된 여우의 악마(ep1b06, greed_mammon) · 불길 속의 용(ep1b07, wrath_satan) · 합일 주파수 결정(cult02, black_rose_crystal_guardian, 떠다니기) · 기계화 제8단계 자비 교정관(cult02, u202-mid).
+1순위의 같은 이름 중간보스는 같은 시트를 크게 써서 따로 그리지 않아도 된다.
+
+[3순위 — 보스(참고, 지금 요청하지 않음)]
+보스 약 35종은 국면별 시트(p1/p4)와 코드 자세(숨쉬기·기울기)로 움직이고 정식 걷기 칸은 없다. 사용자가 따로 요청하면 보스별로 낸다.
+
+[빈칸 아님으로 본 것]
+세뇌당한 기억의 조각(사몽 RF) — 조형물 그림(r161 sculpture)을 쓰는 고정 기억체로 추정, 빈칸일 확률 25%.
+검은 소환 기둥(dist05) — 서 있는 소환 기둥(고정형), 걷지 않는 몹. 빈칸일 확률 5%.
+백은 없는 그림자(hando03) — 측정 때 화면에 그려지지 않음(연출용 고정체로 추정, 확률 30%로 미확인).
