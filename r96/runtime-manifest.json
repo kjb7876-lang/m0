@@ -24893,6 +24893,11 @@
       "sha256": "556679e3ff38b7ea818880a7f84f34458e45c2c7108ac3d18459ece004848595"
     },
     {
+      "path": "assets/r561/lauren-gravity-well.webp",
+      "bytes": 170930,
+      "sha256": "e9b75787422162ebd28e93ed007ebcb082e82baf39f66bfa9dcde576a4ed7fdb"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -33964,8 +33969,8 @@
     },
     {
       "path": "lauren-gravity-r561.js",
-      "bytes": 12282,
-      "sha256": "593635aa6fc189fa8bc3f118ee52541e4a394e2a90f9bd54740f721496628c91"
+      "bytes": 13566,
+      "sha256": "264985a2041ea27bac07dac2a6435b30c0cc8f278101e01cc3c6540a36a5dcb9"
     },
     {
       "path": "light-atmos-r300.js",
@@ -34813,8 +34818,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6962,
-  "totalBytes": 1092224751,
+  "fileCount": 6963,
+  "totalBytes": 1092396965,
   "webHTMLSha256": "d4d9bad131145d2d13f1b7780492486a88e5a7e966c5b4d71b129d9a67e09833",
   "largest": [
     {

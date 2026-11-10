@@ -59,6 +59,10 @@ if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.ap
 const VIOLET='200,160,223',DEEP='74,26,120',HOT='240,216,255';
 function sc(o,f){if(typeof ctx!=='undefined'&&ctx&&typeof ctx.scope==='function')ctx.scope(o,f);else f();}
 function scale(){const z=typeof zoom==='number'&&zoom>0?zoom:1,TL=typeof TILE==='number'?TILE:34;return {z,T1:TL*z*Math.SQRT2,AH:typeof actorHeight==='function'?actorHeight():66*z};}
+// 시트(드라이브 core24 보스 중력 우물을 라우렌 보라로 바꾼 것, 2026-11-10 이펙트 조사 스레드 준비물). 없으면 코드 그림만.
+const SHEET='assets/r561/lauren-gravity-well.webp',CELL=192,COLS=6,FPS=12.5;const asked={at:-1e9};
+function sheetImg(){try{const g=typeof readyImage==='function'?readyImage(SHEET):null;if(g&&g.image)return g.image;const n=Date.now();if(n-asked.at>1500){asked.at=n;if(typeof ensureImages==='function')Promise.resolve(ensureImages([SHEET])).catch(()=>{});}}catch(err){fail(err);}return null;}
+function wellFrame(u){if(u<.48)return Math.min(5,Math.floor(u*FPS));if(u<COLLAPSE_AT)return 6+Math.floor((u-.48)*FPS)%12;return Math.min(23,18+Math.floor((u-COLLAPSE_AT)*FPS*1.4));}
 function hole(id,c,u,life,radius,big){const q=project(c.x,c.y),{z,T1,AH}=scale(),t=T(),grow=Math.min(1,u/.25),fade=u>life?Math.max(0,1-(u-life)/.4):1;if(fade<=0)return;
  const rx=radius*T1*.5*grow,ry=rx*.5,spin=t*(big?5.5:7)+(c.seed||0);
  // ① 바닥: 짙은 보라 소용돌이 원반(끌려오는 범위가 읽히게)
@@ -68,6 +72,9 @@ function hole(id,c,u,life,radius,big){const q=project(c.x,c.y),{z,T1,AH}=scale()
   ctx.lineWidth=Math.max(1.5,2.4*z);ctx.strokeStyle=`rgba(${VIOLET},.75)`;ctx.beginPath();ctx.ellipse(q.x,q.y,rx,ry,0,0,Math.PI*2);ctx.stroke();
   ctx.lineWidth=Math.max(1,1.6*z);for(let i=0;i<(big?5:3);i++){const a0=spin+i*Math.PI*2/(big?5:3);ctx.strokeStyle=`rgba(${VIOLET},${.55-.06*i})`;ctx.beginPath();ctx.ellipse(q.x,q.y,rx*(.35+.12*i),ry*(.35+.12*i),0,a0,a0+Math.PI*1.1);ctx.stroke();}
  }finally{ctx.restore();}});
+ // ①-2 소용돌이 시트(큰 핵만): 바닥에 눕힌 보라 소용돌이. 시트가 있으면 코드 원반은 옅게 깔린 받침이 된다.
+ if(big){const im=sheetImg();if(im){const fr=wellFrame(u),sx=(fr%COLS)*CELL,sy=Math.floor(fr/COLS)*CELL,W=rx*2.3;stats.sheetDraws=(stats.sheetDraws||0)+1;
+  sc({id:id+':swirl',kind:'effect',pxfSide:'hero',x:c.x,y:c.y,groundAligned:true},()=>{ctx.save();try{ctx.globalAlpha*=fade;ctx.translate(q.x,q.y);ctx.scale(1,.55);ctx.drawImage(im,sx,sy,CELL,CELL,-W/2,-W/2,W,W);}finally{ctx.restore();}});}}
  // ② 핵과 강착 고리: 몸 높이 중간에 뜬 검은 구 + 기울어진 밝은 고리 + 안으로 빨려드는 빛줄기
  const cy=q.y-AH*(big?.95:.6),cr=AH*(big?.3:.16)*grow*(u>COLLAPSE_AT&&big?Math.max(.15,1-(u-COLLAPSE_AT)/.2):1);
  sc({id:id+':core',kind:'effect',pxfSide:'hero',x:c.x,y:c.y},()=>{ctx.save();try{ctx.globalAlpha*=fade;

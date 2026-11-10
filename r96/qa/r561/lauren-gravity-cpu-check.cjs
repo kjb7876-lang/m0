@@ -31,7 +31,8 @@ if(exists){
   function fx(type,x,y,opt={}){effects.push({type,x,y,age:0,life:.4,...opt});}
   function tick(){}function drawEffect(e){}
   function project(x,y){return{x:(x-y)*34+480,y:(x+y)*17};}function actorHeight(){return 66;}
-  var scopes=[];var grad={addColorStop(){}};var ctx={globalAlpha:1,globalCompositeOperation:'source-over',save(){},restore(){},beginPath(){},ellipse(){},fill(){},stroke(){},moveTo(){},lineTo(){},createRadialGradient(){return grad;},scope(o,f){scopes.push(o);f();}};`,g);
+  var drawn=[];function readyImage(p){return String(p).endsWith('r561/lauren-gravity-well.webp')?{image:{src:p}}:null;}
+  var scopes=[];var grad={addColorStop(){}};var ctx={translate(){},scale(){},drawImage(im,sx,sy){drawn.push({src:im.src,sx,sy});},globalAlpha:1,globalCompositeOperation:'source-over',save(){},restore(){},beginPath(){},ellipse(){},fill(){},stroke(){},moveTo(){},lineTo(){},createRadialGradient(){return grad;},scope(o,f){scopes.push(o);f();}};`,g);
   vm.runInContext(src,g);return g;}
  const mob=(id,x,y,extra={})=>({id,x,y,hp:1000,maxHp:1000,radius:.3,spawnState:'active',...extra});
  const step=(g,n=1,dt=.05)=>{for(let i=0;i<n;i++){g.time=+(g.time+dt).toFixed(4);vm.runInContext('time='+g.time+';tick();for(const e of effects.slice())drawEffect(e)',g);}};
@@ -49,6 +50,8 @@ if(exists){
  ok('collapse source is friendly hero damage',cHits.every(h=>h.s.friendly===true&&h.s.owner==='hero'));
  step(g,20);ok('well clears after ~1.75 s and sentinel removed',!A(g).inspect().well&&vm.runInContext('effects.filter(e=>e.r561Sentinel).length',g)===0);
  ok('drawn with ctx.scope owners (disk groundAligned + core)',(()=>{const s=vm.runInContext('scopes',g);return s.some(o=>/:disk$/.test(o.id)&&o.groundAligned)&&s.some(o=>/:core$/.test(o.id))&&s.every(o=>o.kind==='effect');})());
+ ok('recoloured gravity-well sheet drawn on the ground (swirl scope, 192 cells)',(()=>{const s=vm.runInContext('scopes',g),d=vm.runInContext('drawn',g);return s.some(o=>/:swirl$/.test(o.id)&&o.groundAligned)&&d.length>0&&d.every(x=>x.sx%192===0&&x.sy%192===0&&x.sx<1152&&x.sy<768);})());
+ ok('sheet asset shipped (runtime-text/assets/r561/lauren-gravity-well.webp, < 400 KB)',(()=>{try{return fs.statSync(path.join(R,'runtime-text','assets','r561','lauren-gravity-well.webp')).size<400000;}catch(_){return false;}})());
  // 쿨다운 중 Q → 새 특이점 없음
  vm.runInContext('special()',g);ok('Q on cooldown → no new well',A(g).inspect().stats.wells===1);
  // 적 없음 → 앞 3.4칸
