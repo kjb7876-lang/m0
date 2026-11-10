@@ -19,13 +19,23 @@
 //  · 사체 = 같은 그림·같은 좌우·같은 키의 조각들이 멈춘 자리 그대로(죽는 장면 끝 모습과 이어짐). 색은 검은 실루엣이 아니라 본체 색에 가깝게(피 밝기 .82, 불 .58).
 //  · 조각 모양·움직임은 몹 id 로 정해진다(같은 몹은 늘 같은 모양). 판정·보상·AI 는 그대로(그림만).
 //  · 원래 '눕히기'는 설정 '몹 죽음 연출 → 쓰러져 눕기'(prefs.style='lay')로 남겨 둠(연령 등급 대비, 사용자 2026-11-10 07:26Z).
+//  R660(사용자 2026-11-10 14:16Z "광장에서 … 렉이심함", 14:18Z "몹죽을때 생기는버그쪽이 렉의심됨") — 렉 고침, 모양은 그대로:
+//  · sprite(…,{filter}) 는 엔진 색 보정 캐시(spriteTintCache3, 32칸)에서 '그림|필터' 마다 시트 전체 캔버스를 새로 만들고 Three.js 가 새 텍스처로 올린다.
+//    죽는 동안 밝기 값이 매 프레임 바뀌어 광장에서 게임 1초에 55장(3,900만 화소)을 새로 만들었다(헤드리스 프레임 426ms ↔ 연출 끔 154ms).
+//  · 3D 기록기(ctx.scope)에서는 필터를 ctx.filter 로 건다(기록기가 셰이더 행렬로 처리, 캔버스·업로드 없음). 2D 캔버스용으로 죽는 동안의
+//    색 변화는 0.12초 단위로 끊어(몹 하나당 필터 열쇠 10개 안) 같은 열쇠를 다시 쓴다. 검사 qa/r660/death-lag-cpu-check.cjs.
 (()=>{'use strict';
 if(window.__STORYWORLD_MOB_DEATH_R462__)return;
-const REV='R532-mobdeath-3',KEY='storyworld.r462.mobDeath';
+const REV='R660-mobdeath-4',KEY='storyworld.r462.mobDeath';
 let prefs={on:true,corpses:true,style:'gore'};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={looks:0,fire:0,blood:0,noLook:0,corpses:0,corpseDraws:0,sheetDraws:0,cleared:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const T=()=>typeof time==='number'?time:0,low=()=>!!(typeof settings!=='undefined'&&settings?.lowFx),fin=v=>typeof v==='number'&&Number.isFinite(v);
+const recorder=()=>typeof ctx!=='undefined'&&!!ctx&&typeof ctx.scope==='function',FQ=.12,qAge=a=>Math.round(a/FQ)*FQ;
+// 자기 그림 한 장: 3D 기록기에서는 필터를 ctx.filter 로(저장 구간 안에서), sprite 에는 넘기지 않는다(R660).
+function own(look,x,y,hPx,opt){if(look.frame&&drawAssetFrame3(look.path,look.frame,x,y,hPx,opt))return;
+ if(opt.filter&&opt.filter!=='none'&&recorder()){const keep=ctx.filter;ctx.filter=opt.filter;try{sprite(look.path,x,y,hPx,{...opt,filter:undefined});}finally{ctx.filter=keep;}return;}
+ sprite(look.path,x,y,hPx,opt);}
 const clamp01=v=>v<0?0:v>1?1:v,ease=v=>{v=clamp01(v);return v*v*(3-2*v);};
 const hash=s=>{let h=2166136261;for(const c of String(s||''))h=Math.imul(h^c.charCodeAt(0),16777619);return h>>>0;};
 const major=e=>!!(e&&(e.boss||e.midboss||e.miniBoss||e.r104Boss||e.persona||e.elite==='boss'));
@@ -77,7 +87,7 @@ function sheet(name,fr,x,y,heightPx,alpha,o={}){const S=SHEETS[name],im=image(S.
   ctx.drawImage(im,(fr%S.cols)*S.cell,Math.floor(fr/S.cols)*S.cell,S.cell,S.cell,-S.pivot[0],-S.pivot[1],S.cell,S.cell);stats.sheetDraws++;}finally{ctx.restore();}return true;}
 // 그 몹 자기 그림을 발밑(x,y) 기준으로 그린다(돌리거나 누르지 않음).
 function body(look,x,y,hPx,o){ctx.save();try{ctx.translate(x,y);const opt={alpha:o.alpha,flip:look.flip,filter:o.filter};
-  if(!(look.frame&&drawAssetFrame3(look.path,look.frame,0,0,hPx,opt)))sprite(look.path,0,0,hPx,opt);}finally{ctx.restore();}}
+  own(look,0,0,hPx,opt);}finally{ctx.restore();}}
 // ---- R532 찢김 조각 ----------------------------------------------------------------------------------------
 // 단위: 몸 키 = 1. 몸 상자 x∈[-w/2,w/2](w = 그림 가로/세로), y∈[-1,0](0 = 발밑). 꼭짓점 격자를 흔들고 변마다 가운데 점을 수직으로 흔들어(이웃 조각과 같은 점 공유)
 //  빈틈·겹침 없이 상자를 덮는 들쭉날쭉한 조각을 만든다. 상자 바깥 테두리 점은 그릴 때만 바깥으로 넓혀(clip) 상자 밖으로 삐져나온 그림(날개·꼬리)도 조각에 실린다.
@@ -119,7 +129,7 @@ function drawPieces(look,x,y,hPx,kind,age,o){const S=shards(o.seed,look.asp||.8,
  for(const p of S){const q=pieceAt(kind,p,age),W=wide(p),opt={alpha:o.alpha,flip:look.flip,filter:o.filter};let gx=0,gy=0;
   if(gap>0){const dx=p.c[0],dy=p.c[1]+.45,L=Math.hypot(dx,dy)||1;gx=dx/L*gap*hPx;gy=dy/L*gap*hPx;}
   const one=(dy,filter)=>{ctx.save();try{ctx.translate(x+q.x*hPx+gx,y+q.y*hPx+gy+dy);if(q.ang)ctx.rotate(q.ang);ctx.translate(-p.c[0]*hPx,-p.c[1]*hPx);
-    tracePoly(W,hPx);ctx.clip();const op=filter?{...opt,filter}:opt;if(!(look.frame&&drawAssetFrame3(look.path,look.frame,0,0,hPx,op)))sprite(look.path,0,0,hPx,op);}finally{ctx.restore();}};
+    tracePoly(W,hPx);ctx.clip();own(look,0,0,hPx,filter?{...opt,filter}:opt);}finally{ctx.restore();}};
   one(0,null);}}
 // ---- 죽는 순간(엔진 enemyBurnDeath 효과를 그대로 쓰되, 그리기만 바꿈) -----------------------------------------
 const LIFE={fire:1.7,blood:1.15};
@@ -128,11 +138,10 @@ const LIFE={fire:1.7,blood:1.15};
 const FALL={fire:[.3,.78],blood:[0,.24]},lay=()=>prefs.style==='lay';
 function bodyLay(look,x,y,hPx,o){const side=o.side||1,fall=ease(o.fall||0),ang=side*fall*.52,squash=1-fall*.5;
  ctx.save();try{ctx.translate(x-side*fall*hPx*.1,y);if(squash<1)ctx.scale(1,squash);
-  const opt={alpha:o.alpha,flip:look.flip,angle:ang,filter:o.filter};
-  if(!(look.frame&&drawAssetFrame3(look.path,look.frame,0,0,hPx,opt)))sprite(look.path,0,0,hPx,opt);}finally{ctx.restore();}}
+  own(look,0,0,hPx,{alpha:o.alpha,flip:look.flip,angle:ang,filter:o.filter});}finally{ctx.restore();}}
 function drawDyingLay(fx,base){const R=fx.r462,look=R.look,q=project(fx.x,fx.y),z=typeof zoom==='number'&&zoom>0?zoom:1,hPx=Math.max(14,look.h*z),age=fx.age,[f0,f1]=FALL[R.kind],fall=clamp01((age-f0)/(f1-f0));
  if(R.kind==='fire'){const keep=fx.bodyPath;fx.bodyPath=null;try{base(fx);}finally{fx.bodyPath=keep;}
-  if(age<f1){const heat=clamp01(age/.3),char=clamp01((age-.12)/.6),b=(1.45-heat*.25)*(1-char)+.3*char;
+  if(age<f1){const fa=qAge(age),heat=clamp01(fa/.3),char=clamp01((fa-.12)/.6),b=(1.45-heat*.25)*(1-char)+.3*char;
    bodyLay(look,q.x,q.y,hPx,{side:R.side,fall,alpha:1,filter:`brightness(${b.toFixed(3)}) saturate(${(1.5-char*1.1).toFixed(3)}) contrast(${(1+char*.2).toFixed(3)})`});}
   const t=clamp01((age-.08)/(fx.life-.08));sheet('fire',Math.floor(t*24),q.x-R.side*hPx*.05,q.y+hPx*.04,hPx*(.34+.14*fall),(age<.2?age/.2:1)*(t>.8?(1-t)/.2:1),{flip:R.side<0});
  }else{if(age<f1){const flash=age<.1?1.55:1.2,shake=Math.sin(age*95)*hPx*.03*(1-fall);
@@ -142,19 +151,19 @@ function adopt(fx){if(fx.r462!==undefined)return fx.r462;fx.r462=null;if(!prefs.
  const look=looks.get(fx.sourceId);if(!look){stats.noLook++;return null;}
  const kind=kindOf(look),h=hash(fx.sourceId);fx.r462={kind,look,side:(look.flip?-1:1)*((h>>>3)&1?1:-1),seed:h,lay:lay()};fx.life=Math.max(fx.life||0,LIFE[kind]);stats[kind]++;
  if(prefs.corpses)addCorpse(fx);return fx.r462;}
-function drawDying(fx,base){if(fx.r462.lay){drawDyingLay(fx,base);return;}const R=fx.r462,look=R.look,q=project(fx.x,fx.y),z=typeof zoom==='number'&&zoom>0?zoom:1,hPx=Math.max(14,look.h*z),age=fx.age;
+function drawDying(fx,base){if(fx.r462.lay){drawDyingLay(fx,base);return;}const R=fx.r462,look=R.look,q=project(fx.x,fx.y),z=typeof zoom==='number'&&zoom>0?zoom:1,hPx=Math.max(14,look.h*z),age=fx.age,fa=qAge(age);
  if(R.kind==='fire'){
   // 엔진 불꽃·불티는 살리되 엔진 몸 그림(다른 몹일 수 있음)은 빼고 그린다
   const keep=fx.bodyPath;fx.bodyPath=null;try{base(fx);}finally{fx.bodyPath=keep;}
   // 0~.34초: 붉게 달아오르며 몸에 빛나는 금이 번진다 → 금을 따라 부서져 내려앉으며 숯이 된다(사체 색 .58 로 이어짐)
-  const heat=clamp01(age/.3),char=clamp01((age-.18)/.6),b=(1.45-heat*.2)*(1-char)+.58*char,crack=clamp01((age-.06)/.26),glow=crack*(1-clamp01((age-BURST.fire)/.3));
+  const heat=clamp01(fa/.3),char=clamp01((fa-.18)/.6),b=(1.45-heat*.2)*(1-char)+.58*char,crack=clamp01((age-.06)/.26),glow=crack*(1-clamp01((age-BURST.fire)/.3));
   if(glow>.01)body(look,q.x,q.y,hPx,{alpha:glow,filter:'brightness(2.6) saturate(1.8) contrast(1.2)'});
   drawPieces(look,q.x,q.y,hPx,'fire',age,{seed:R.seed,alpha:1,thick:true,gap:.018*glow,filter:`brightness(${b.toFixed(3)}) saturate(${(1.5-char*.9).toFixed(3)}) contrast(${(1+char*.12).toFixed(3)})`});
   const t=clamp01((age-.08)/(fx.life-.08));sheet('fire',Math.floor(t*24),q.x-R.side*hPx*.05,q.y+hPx*.04,hPx*.42,(age<.2?age/.2:1)*(t>.8?(1-t)/.2:1),{flip:R.side<0});
  }else{
   // 맞는 순간 .06초 번쩍·떨림(통째) → 조각으로 터져 흩어지고 피 시트가 터진다
   if(age<=BURST.blood){const shake=Math.sin(age*95)*hPx*.03;body(look,q.x+shake,q.y,hPx,{alpha:1,filter:'brightness(1.55) saturate(.7)'});}
-  else{const cool=clamp01((age-BURST.blood)/.35),b=1.3*(1-cool)+.82*cool;
+  else{const cool=clamp01((fa-BURST.blood)/.35),b=1.3*(1-cool)+.82*cool;
    drawPieces(look,q.x,q.y,hPx,'blood',age,{seed:R.seed,alpha:1,thick:true,filter:`brightness(${b.toFixed(3)}) saturate(${(.8+.15*cool).toFixed(3)}) contrast(1.05)`});}
   const t=clamp01((age-.03)/(fx.life-.03));sheet('blood',Math.floor(t*24),q.x-R.side*hPx*.08,q.y+hPx*.02,hPx*.9,1,{flip:R.side<0});
  }}
