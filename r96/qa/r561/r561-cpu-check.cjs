@@ -19,7 +19,7 @@ function mk(opt={}){const hits=[],L={},moves=[];
   HEROES:{gunner:{name:'기억사수',special:'기억 재현',range:8.2},hwando:{name:'환도',special:'x'}},
   room:{enemies},liveEnemies:()=>enemies.filter(e=>e.hp>0),damageable3:()=>true,
   hitEnemy:(e,v,m)=>{hits.push([e.id,v,m&&m.ability,m&&m.friendly]);e.hp-=v;return true;},
-  special(){sb.__baseSpecial=(sb.__baseSpecial||0)+1;},serializeSave:()=>({storyWER:{remaining:{'gunner:r':1e6,'gunner:w':1e6,'gunner:e':1e6,'hwando:r':3}}}),
+  special(){sb.__baseSpecial=(sb.__baseSpecial||0)+1;},serializeSave:()=>({storyWER:{remaining:opt.saveClamp?{'gunner:r':17.7,'gunner:w':17.7,'gunner:e':17.7,'hwando:r':3}:{'gunner:r':1e6,'gunner:w':1e6,'gunner:e':1e6,'hwando:r':3}}}),
   tick(){},drawEffect(){},updateHUD(){}};
  sb.window.__STORYWORLD_WER__=Object.freeze({cast:()=>'base',defs:{}});sb.window.__STORYWORLD_GROWTH_R103__={state:()=>({procs:{'gunner:w':opt.lv||0,'gunner:e':opt.lv||0,'gunner:r':opt.lv||0}})};
  if(opt.coop)sb.window.__STORYWORLD_COOP_SIM_R62__={mode:()=>opt.coop};if(opt.ego)sb.window.__STORYWORLD_EGO151__={inspect:()=>({state:{active:true}})};
@@ -82,6 +82,13 @@ try{T=mk();const kd=T.L.keydown[0];kd({key:'c',target:{tagName:'CANVAS'}});T.run
  T.sb.room={enemies:fresh};T.sb.liveEnemies=()=>fresh.filter(e=>e.hp>0);T.run(14);const I=T.A().inspect();
  ok('pending shots and chains are dropped when the room changes (an R cast before a region change does not blast the new room)',!T.hits.some(h=>h[0]==='n'||h[0]==='m')&&I.chain.queue.length===0,{hits:T.hits.map(h=>h[0]+':'+h[2]),q:I.chain.queue});}catch(e){ok('room change',false,String(e));}
 try{T=mk({coop:'host'});T.sb.tick(.05);ok('co-op: R561 reports itself off so R209/R291 give the original gunner W·E back (no slot left gated)',T.A().on()===false&&!(T.sb.player.storyWER.ready['gunner:r']>1e5),{on:T.A().on(),r:T.sb.player.storyWER.ready['gunner:r']});}catch(e){ok('coop',false,String(e));}
+
+// 엔진 serializeSave 는 남은 대기를 15×박자로 자른다(먼 값이 17.7 로 저장됨) — saveClamp 로 그 결과를 흉내 낸다
+try{T=mk({saveClamp:true});T.L.keydown[0]({key:'c',target:{tagName:'CANVAS'}});const d=T.sb.serializeSave().storyWER.remaining;
+ ok('save writes the real gunner cooldowns (R used → ≈16 s; unused W·E not written) even though the engine clamps the gated values to 15×rhythm',Math.abs(d['gunner:r']-16)<.01&&!('gunner:w' in d)&&!('gunner:e' in d),d);}catch(e){ok('save real cd',false,String(e));}
+try{T=mk();T.sb.player.storyWER.ready['gunner:r']=T.sb.time+5;T.sb.tick(.05);ok('load: a saved gunner cooldown is restored into R561 (R still 5 s away after reload)',Math.abs(T.A().remain('r')-5)<.06,T.A().remain('r'));}catch(e){ok('load cd',false,String(e));}
+try{T=mk();T.sb.time=3600;T.sb.tick(.05);T.L.keydown[0]({key:'c',target:{tagName:'CANVAS'}});T.sb.player={hero:'gunner',x:10,y:10,hp:100,specialCD:0,direction:'right',storyWER:{ready:{},buffs:{}}};T.sb.time=0;T.sb.tick(.05);
+ ok('new journey (time back to 0, new player) clears old cooldown timestamps — R can be used again',T.A().remain('r')===0&&T.A().fire('r',false)===true,T.A().remain('r'));}catch(e){ok('new game cd',false,String(e));}
 
 // ---------- 연계(사용자 2026-11-10 03:23Z "스킬키를 늘리지 말고 기존 키에서 여러 스킬이 자동으로 연속으로 더 나가게, 자연스럽고 렉 신경") ----------
 try{T=mk();const kd=T.L.keydown[0];kd({key:'z',target:{tagName:'CANVAS'}});T.run(10.5);const e0=T.A().remain('e');T.run(12.4);

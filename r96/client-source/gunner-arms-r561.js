@@ -151,14 +151,16 @@ const readyAt={w:0,e:0,r:0};
 function remain(sl){return Math.max(0,(readyAt[sl]||0)-T());}
 function egoOn(){try{return !!window.__STORYWORLD_EGO151__?.inspect?.().state?.active;}catch(_){return false;}}
 // 방·영웅이 바뀌거나 쓰러지면 기다리던 사격·연계를 버린다(엔진 WER valid/cancel 과 같은 뜻) — 옛 좌표로 새 방 적을 때리지 않게
-let ownRoom=null,ownPlayer=null,ownSeen=false;function own(){let rm=null;try{rm=typeof room!=='undefined'?room:null;}catch(_){}const p=typeof player==='object'?player:null;if(!ownSeen){ownSeen=true;ownRoom=rm;ownPlayer=p;}if(rm!==ownRoom||p!==ownPlayer||!(p?.hp>0)){if(fx.length||chain.queue.length){fx.length=0;if(chain.queue.length){chain.queue.length=0;chain.cancelled++;}}ownRoom=rm;ownPlayer=p;}}
+let ownRoom=null,ownPlayer=null,ownSeen=false;function own(){let rm=null;try{rm=typeof room!=='undefined'?room:null;}catch(_){}const p=typeof player==='object'?player:null;if(!ownSeen){ownSeen=true;ownRoom=rm;ownPlayer=p;}if(p!==ownPlayer){for(const sl of SLOTS)readyAt[sl]=0;nextAuto=0;}
+ const t=T();for(const sl of SLOTS)readyAt[sl]=Math.min(readyAt[sl],t+CD[sl]*rhythm());nextAuto=Math.min(nextAuto,t+.35);
+ if(rm!==ownRoom||p!==ownPlayer||!(p?.hp>0)){if(fx.length||chain.queue.length){fx.length=0;if(chain.queue.length){chain.queue.length=0;chain.cancelled++;}}ownRoom=rm;ownPlayer=p;}}
 function busy(){try{return (typeof started!=='undefined'&&!started)||(typeof modal!=='undefined'&&!!modal)||(typeof loading!=='undefined'&&loading)||(typeof storyScene!=='undefined'&&!!storyScene)||!(player?.hp>0)||!!window.__STORYWORLD_EGO151__?.inspect?.().state?.active;}catch(_){return true;}}
 function fire(sl,automatic){if(!mine()||!SLOTS.includes(sl))return false;if(readyAt[sl]>T())return false;if(fx.length>=CAP)return false;
  let pt=null;if(automatic){if(sl==='r'){pt=strikePoint(2);if(!pt)return false;}else if(!(sl==='w'?snipeTarget():nearest(RANGE[sl])))return false;}
  const ok=sl==='w'?castW():sl==='e'?castE():castR(pt);if(ok){readyAt[sl]=T()+CD[sl]*rhythm();player.skillAnim=Math.max(player.skillAnim||0,.5);try{if(typeof updateHUD==='function')updateHUD();}catch(_){}}return ok;}
 // 엔진 원래 R(시간 지연포) 막기 — W·E 는 R209 owned 가 막는다(여기서도 함께, R209 가 없을 때 대비)
 function gate(){try{if(typeof player!=='object'||!player||player.hero!==HERO)return;const s=player.storyWER||(player.storyWER={ready:{},buffs:{}});if(!s.ready)s.ready={};const t=T();
-  if(mine()){for(const sl of SLOTS){const k=HERO+':'+sl;if(!(s.ready[k]>t+FAR/2))s.ready[k]=t+FAR;}}else{const k=HERO+':r';if(s.ready[k]>t+FAR/2)s.ready[k]=0;}}catch(e){fail(e);}}
+  if(mine()){for(const sl of SLOTS){const k=HERO+':'+sl;if(!(s.ready[k]>t+FAR/2)){const v=Number(s.ready[k]);if(v>t)readyAt[sl]=Math.max(readyAt[sl],Math.min(v,t+CD[sl]*rhythm()));s.ready[k]=t+FAR;}}}else{const k=HERO+':r';if(s.ready[k]>t+FAR/2)s.ready[k]=0;}}catch(e){fail(e);}}
 let ORIG_Q=null;function names(){try{if(typeof HEROES==='object'&&HEROES?.[HERO]){if(ORIG_Q==null)ORIG_Q=HEROES[HERO].special;HEROES[HERO].special=on?NAME.q:ORIG_Q;}}catch(e){fail(e);}}
 names();
 if(typeof special==='function'){const base=special;special=function(...a){if(mine()&&!egoOn()){try{if(busy()||player.specialCD>0||fx.length>=CAP)return;castQ();if(!autoOn())startChain('q');try{if(typeof updateHUD==='function')updateHUD();}catch(_){}}catch(e){fail(e);}return;}return base.apply(this,a);};}
@@ -168,9 +170,9 @@ function install(){const W=window.__STORYWORLD_WER__;if(!W||wrapped||W.__r561)re
 let nextAuto=0;
 function autoOn(){try{const mob=window.__STORYWORLD_MOBILE_R63__?.isMobile?.();return (mob?settings.autoSkill===true:(typeof auto!=='undefined'&&auto))||(typeof guide!=='undefined'&&guide);}catch(_){return false;}}
 function tickAuto(){if(!mine()||busy()||!autoOn())return;const t=T();if(t<nextAuto)return;nextAuto=t+.35;fire('r',true)||fire('w',true)||fire('e',true);}
-if(typeof tick==='function'){const b=tick;tick=function(...a){gate();const r=b.apply(this,a);try{own();warm();if(fx.length)step();stepChain();tickAuto();}catch(e){fail(e);}return r;};}
+if(typeof tick==='function'){const b=tick;tick=function(...a){try{own();}catch(e){fail(e);}gate();const r=b.apply(this,a);try{warm();if(fx.length)step();stepChain();tickAuto();}catch(e){fail(e);}return r;};}
 if(typeof drawEffect==='function'){const b=drawEffect;drawEffect=function(e,...a){if(e&&e.type==='r561-fx'){try{draw();}catch(err){fail(err);}return;}return b.apply(this,[e,...a]);};}
-if(typeof serializeSave==='function'){const b=serializeSave;serializeSave=function(...a){const d=b.apply(this,a);try{const r=d?.storyWER?.remaining;if(r&&mine())for(const sl of SLOTS)if(r[HERO+':'+sl]>FAR/2)delete r[HERO+':'+sl];}catch(e){fail(e);}return d;};}
+if(typeof serializeSave==='function'){const b=serializeSave;serializeSave=function(...a){const d=b.apply(this,a);try{const r=d?.storyWER?.remaining;if(r&&mine())for(const sl of SLOTS){const m=remain(sl);if(m>0)r[HERO+':'+sl]=+m.toFixed(2);else delete r[HERO+':'+sl];}}catch(e){fail(e);}return d;};}
 if(typeof updateHUD==='function'){const b=updateHUD;updateHUD=function(...a){const r=b.apply(this,a);try{if(mine()&&typeof document!=='undefined')for(const sl of SLOTS){const el=document.getElementById('story-wer-'+sl);if(!el)continue;const cd=el.querySelector('.cd'),m=remain(sl);if(cd)cd.textContent=m>0?String(Math.ceil(m)):'';el.title=NAME[sl];el.setAttribute('aria-label',NAME[sl]+' · '+(typeof KR291!=='undefined'&&KR291?KR291[sl]:sl.toUpperCase()));const lb=el.querySelector('.label');if(lb&&lb.textContent!==SHORT[sl])lb.textContent=SHORT[sl];}}catch(e){fail(e);}return r;};}
 const KEYS={z:'w',x:'e',c:'r'};
 if(typeof addEventListener==='function'){addEventListener('keydown',ev=>{try{if(!mine()||ev.repeat||ev.ctrlKey||ev.metaKey||ev.altKey)return;try{window.__STORYWORLD_KEYS_R291__?.translate?.(ev);}catch(_){}const sl=KEYS[String(ev.key).toLowerCase()];if(!sl)return;const tg=ev.target;if(tg&&(/INPUT|TEXTAREA|SELECT/.test(tg.tagName||'')||tg.isContentEditable))return;if(busy())return;gate();if(fire(sl,false))startChain(sl);}catch(e){fail(e);}},true);
