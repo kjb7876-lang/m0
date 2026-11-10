@@ -452,6 +452,8 @@ jobs:
         run: node r96/qa/r455/r455-cpu-check.cjs
       - name: R441 lag (blocked memo per tick, R302 caller lookup without repeated full stacks, R409 outline cache by image address + bake budget per frame) CPU check
         run: node r96/qa/r441/r441-cpu-check.cjs
+      - name: R537 spider cave mud-back spider and memory-carrier spider, swamp root stalker renamed CPU check
+        run: node r96/qa/r537/r537-cpu-check.cjs
       - name: R450 zone weather (63 story zones indoor/outdoor/cave/void, dust instead of rain indoors, canon weather, double-sided streaks) CPU check
         run: node r96/qa/r450/weather-r450-cpu-check.cjs
       - name: R451 local light (wall-blocked light map, round pools, doorway leaks only, indoor flame -> bulb, light shoulder, old light layers yield) CPU check

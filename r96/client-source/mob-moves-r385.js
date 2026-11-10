@@ -35,7 +35,12 @@ const KINDS=[
  //  "마지막길의호위병은 완전 삭제"): 추락 dist06-m1(증원·추격대 포함)은 일곱 기둥 dist05-m1 검은기둥 주문사 그림·이름으로,
  //  일곱 기둥 dist05-s1 호위병 자리는 같은 지역 검은기둥 가고일 수호자(dist05-c1)로 → 호위병은 출현하지 않고 30마리·웨이브·문 판정은 그대로.
  ['dist06',e=>/^dist06-m1(\b|-)/.test(String(e.nativeId||'')),['dist05','dist05-m1'],'검은기둥 주문사'],
- ['dist05',e=>/^dist05-s1(\b|-)/.test(String(e.nativeId||'')),['dist05','dist05-c1'],'검은기둥 가고일 수호자']];
+ ['dist05',e=>/^dist05-s1(\b|-)/.test(String(e.nativeId||'')),['dist05','dist05-c1'],'검은기둥 가고일 수호자'],
+ // R537(사용자 2026-11-10 "진흙등거미 거미동굴나오게", "기억운반거미도 거미동굴나오게"): 거미동굴(dist01)의 옛 망각의 거미 자리(R380 이 재 나방·알집지기·수호병으로 돌려 개명한 일반 몹)
+ //  다섯 중 넷째는 진흙등 거미(늪 dist02-sp1 그림), 다섯째는 기억 운반거미(무너진 성 dist03-sp1 그림)로. 지역 수호자·순찰·중간보스·수·수치는 그대로.
+ ['dist01',(e,i,j)=>j%5===3,['dist02','dist02-sp1'],'진흙등 거미'],['dist01',(e,i,j)=>j%5===4,['dist03','dist03-sp1'],'기억 운반거미']];
+// R537: 옛 망각의 거미 자리 차례(R380 개명 일반 몹만).
+const oldSpider=e=>e.r380Renamed&&!isPatrol(e)&&!e.midboss&&!e.wardChampionR81&&/^dist01-sp1(\b|-|$)/.test(String(e.nativeId||''));
 // R386: 주사실 순찰에 남은 유리 망령은 사용자 채택 유리 망령 v1 시트(R380 index)로 그린다 → R74 지도 그림 표시(r74Monster)를 지워야 frameFor 사슬을 탄다.
 const ATLAS_OFF=[['ep1a09','glass']];
 const RENAME=[['ep1b08','창처럼 날아오는 역십자가','흑마법사의 저주창'],['ep1b08','역십자가 시체경호체','흑마법사의 시체경호체']];
@@ -48,8 +53,8 @@ function preload(id){if(preloaded.has(id))return;preloaded.add(id);try{const def
 function apply(r,id,l){if(building||!prefs.on||!r||!Array.isArray(r.enemies)||l==='DREAM')return r;let touched=false;
  for(const [z,from,to] of RENAME)if(id===z)for(const e of r.enemies){if(!e||e.r385Renamed)continue;const n=String(e.name||'');if(!n.includes(from))continue;
   e.r385From=n;if(!e.r248Key)e.r248Key=plainName(n);e.name=n.replace(from,to);if(typeof e.r373Name==='string')e.r373Name=e.r373Name.replace(from,to);e.r385Renamed=true;stats.renamed++;touched=true;}
- const rows=KINDS.filter(k=>k[0]===id);if(rows.length){let pi=0;
-  for(const e of r.enemies){if(!e||e.boss||e.r385Look)continue;const i=isPatrol(e)?pi++:-1;const k=rows.find(([,pick])=>pick(e,i));if(!k)continue;
+ const rows=KINDS.filter(k=>k[0]===id);if(rows.length){let pi=0,sj=0;
+  for(const e of r.enemies){if(!e||e.boss||e.r385Look)continue;const i=isPatrol(e)?pi++:-1,j=oldSpider(e)?sj++:-1;const k=rows.find(([,pick])=>pick(e,i,j));if(!k)continue;
    const [,,[sz,nid],name]=k;e.r385Look=[sz,nid];e.r385From=e.name;e.r385Key0=e.r248Key;
    // R248 은 r248Key 로 몹 그림 시트·공격 효과를 고른다 → 옮겨 온 몹의 키로 바꿔야 그 몹 그림·효과가 나온다(시트가 없으면 엔진 원래 그림을 빌림).
    const dk=donor(sz,nid)?.key;e.r248Key=dk||plainName(e.name);

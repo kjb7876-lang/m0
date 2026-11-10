@@ -53,7 +53,7 @@ function relocate(r,id,l){if(!prefs.on||!r||!Array.isArray(r.enemies)||l==='DREA
 //    늪(dist02, 다크그린 그림)과 dist00 밖에서는 원래 그 지역 몹으로 되돌린다(수·수치·id 그대로). dist00(보스만 있던 첫 뿌리 맵)에는 늪 순찰과 같은 수치의 뿌리 추적자 6마리를 새로 둔다.
 //  · "분노의 사냥개 … 분노 맵 적용"(검수 목록 19) = "7대죄 분노의귀청수부나오는곳"(ep1b07): 그 지역 R74 순찰 6마리를 분노의 사냥개로(수치 그대로).
 //  · 3×10 정규 무리(r75Pack)는 손대지 않는다. dist00 에 더한 몹은 id ':r383-root:N'·r383Added 로 남긴다(계약 검사가 이것만 빼고 본다).
-const ROOT_HOME='dist02',ROOT_ADD='dist00',WRATH_ZONE='ep1b07',WRATH='분노의 사냥개';let rootTpl=null;
+const ROOT_NAME='뿌리 추적자',SWAMP_ROOT='늪 뿌리 추적자',ROOT_HOME='dist02',ROOT_ADD='dist00',WRATH_ZONE='ep1b07',WRATH='분노의 사냥개';let rootTpl=null;
 // R387: 주사실(ep1a09)에는 지역 우두머리(mb-<지역> 중간보스)가 없다 → 사용자 지시(2026-11-07 "병원맵 주사실쪽에 보스가 나오지 않을걸 거기에 넣어줘")로
 //  '중독을 부르는 주사기 환영체'를 한 마리 더한다. 수치·전투 성격은 바로 다음 지역 우두머리(ep1a10 mb-ep1a10, 중간보스)를 복제해 쓰고,
 //  제단 가까이 빈 바닥 칸에 처음부터 보이게(spawnState active — 원래 우두머리는 hidden 으로 단계 뒤에 나옴) 둔다. 그림은 R380 index 의 syringe-phantom-boss-v1(이름으로 고름). 이 개체는 r383Added 로 표시해 R81 계약(3×10)에서 뺀다.
@@ -84,7 +84,9 @@ function balance(r,id,l){if(!Array.isArray(r.enemies))return;
   e.r383From=e.name;if(!e.r248Key)e.r248Key=String(d.r248Key||d.name).replace(/ \d+$/,'');const dn=String(d.r373Name||d.name).replace(/ \d+$/,'').replace(/ 우두머리$/,'');e.name=dn+(/우두머리$/.test(e.name)?' 우두머리':'');if(typeof e.r373Name==='string')e.r373Name=dn;e.r383RootFrom='root';delete e.r74Monster;stats.removed++;}
  if(id===WRATH_ZONE)for(const e of r.enemies)if(isPatrol(e)&&!e.r383Wrath){e.r383From=e.name;if(!e.r248Key)e.r248Key=String(e.name).replace(/ 우두머리$/,'');e.name=WRATH+(/우두머리$/.test(e.r383From)?' 우두머리':'');if(typeof e.r373Name==='string')e.r373Name=WRATH;e.r383Wrath=true;e.r383Atlas=e.r74Monster;delete e.r74Monster;stats.renamed++;}
  // 늪 다크그린 뿌리 추적자(R382)도 R74 지도 그림이 이 시트를 가렸다 → 같은 방식으로 frameFor 사슬에 넘긴다.
- if(id===ROOT_HOME)for(const e of r.enemies)if(isPatrol(e)&&e.r74Monster==='root'){e.r383Atlas='root';delete e.r74Monster;}
+ // R537(사용자 2026-11-10 "늪나오는 뿌리추적자 늪뿌리추적자로명명"): 늪 순찰은 이름을 '늪 뿌리 추적자'로(첫 뿌리 맵 dist00 은 그냥 뿌리 추적자). 공격 효과 키(r248Key)는 옛 이름.
+ if(id===ROOT_HOME)for(const e of r.enemies)if(isPatrol(e)&&e.r74Monster==='root'){e.r383Atlas='root';delete e.r74Monster;const nm=String(e.name||'');
+  if(/^뿌리 추적자/.test(nm)){e.r537From=nm;if(!e.r248Key)e.r248Key=ROOT_NAME;e.name=SWAMP_ROOT+nm.slice(ROOT_NAME.length);if(typeof e.r373Name==='string')e.r373Name=e.r373Name.replace(/^뿌리 추적자/,SWAMP_ROOT);stats.renamed++;}}
  if(id===SYR_ZONE&&l!=='DREAM')addSyringe(r,l);
  if(id===ROOT_ADD&&!r.enemies.some(e=>e?.r383Added)){const tpl=rootTemplate(l),L=r.exploration;if(!tpl||!L)return;
   const ent=L.entry||{x:0,y:0},boss=r.enemies.find(e=>e.boss),rad=tpl.combatProfile?.bodyBlock?.r||.4;
