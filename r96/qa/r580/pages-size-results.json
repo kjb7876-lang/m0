@@ -22,17 +22,17 @@
   {
    "name": "pages-pack.py 성공",
    "passed": true,
-   "detail": "{\"totalBytes\": 1084415192, \"budgetBytes\": 1100000000, \"files\": 8468, \"excludedFiles\": 238, \"excludedBytes\": 95611880, \"optimizedPng\": 1035, \"optimizedSavedBytes\": 35010145}\n"
+   "detail": "{\"totalBytes\": 1084416240, \"budgetBytes\": 1100000000, \"files\": 8468, \"excludedFiles\": 238, \"excludedBytes\": 95611880, \"optimizedPng\": 1035, \"optimizedSavedBytes\": 35010145}\n"
   },
   {
    "name": "배포본 예산 1,100,000,000 바이트 미만",
    "passed": true,
-   "detail": "1,084,415,192 bytes (8468 files)"
+   "detail": "1,084,416,240 bytes (8468 files)"
   },
   {
    "name": "pages-deploy.json 총량이 실제와 같음",
    "passed": true,
-   "detail": 1084415192
+   "detail": 1084416240
   },
   {
    "name": "원본 사이트보다 90MB 넘게 줄었음",
@@ -92,12 +92,12 @@
   {
    "name": "예산을 넘으면 묶기 실패(한도 바로 아래 예산)",
    "passed": true,
-   "detail": "\"totalBytes\": 1119179088, \"budgetBytes\": 1084415191, \"files\": 8468, \"excludedFiles\": 238, \"excludedBytes\": 95611880, \"optimizedPng\": 0, \"optimizedSavedBytes\": 0}\nover budget: 1119179088 >= 1084415191\n"
+   "detail": "\"totalBytes\": 1119180136, \"budgetBytes\": 1084416239, \"files\": 8468, \"excludedFiles\": 238, \"excludedBytes\": 95611880, \"optimizedPng\": 0, \"optimizedSavedBytes\": 0}\nover budget: 1119180136 >= 1084416239\n"
   },
   {
    "name": "PNG 압축을 끄면 남은 파일 바이트가 모두 원본과 같음",
    "passed": true,
-   "detail": "{\"totalBytes\": 1119179088, \"budgetBytes\": 2000000000, \"files\": 8468, \"excludedFiles\": 238, \"excludedBytes\": 95611880, \"optimizedPng\": 0, \"optimizedSavedBytes\": 0}\n"
+   "detail": "{\"totalBytes\": 1119180136, \"budgetBytes\": 2000000000, \"files\": 8468, \"excludedFiles\": 238, \"excludedBytes\": 95611880, \"optimizedPng\": 0, \"optimizedSavedBytes\": 0}\n"
   },
   {
    "name": "verify-r96-public.py 가 배포본에서 통과",
