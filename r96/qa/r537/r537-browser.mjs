@@ -18,7 +18,8 @@ const s1=await shot('^진흙등 거미','dist01-mud.png');ok(/r290\/mobs\/m003|n
 const s2=await shot('^기억 운반거미','dist01-memory.png');ok(!!s2,'기억 운반거미 그림 '+s2?.path);
 await go(p,'dist02');const d2=await names();
 ok(d2.filter(e=>/^늪 뿌리 추적자/.test(e.name)).length===6&&!d2.some(e=>/^뿌리 추적자/.test(e.name)),'늪: 늪 뿌리 추적자 '+d2.filter(e=>/^늪 뿌리 추적자/.test(e.name)).length+', 그냥 뿌리 추적자 0');
-ok(d2.some(e=>/^진흙등 거미/.test(e.name)),'늪 진흙등 거미는 남김(결정 대기)');
+ok(!d2.some(e=>/진흙등 거미/.test(e.name))&&d2.length===53,'늪: 진흙등 거미 0(완전 이동), 몹 수 53 그대로 (실제 '+d2.length+')');
 const s3=await shot('^늪 뿌리 추적자','dist02-swamp-root.png');ok(/swamp-root-stalker-darkgreen/.test(String(s3?.path)),'늪 뿌리 추적자 다크그린 시트 '+s3?.path);
+await go(p,'dist03');const d3=await names();ok(!d3.some(e=>/기억 운반거미/.test(e.name))&&d3.length===53,'무너진 성: 기억 운반거미 0, 몹 수 53 그대로 (실제 '+d3.length+')');
 await go(p,'dist00');const d0=await names();ok(d0.filter(e=>/^뿌리 추적자/.test(e.name)).length===12&&!d0.some(e=>/^늪 /.test(e.name)),'첫 뿌리 맵: 뿌리 추적자 12(순찰 6 + R383 추가 6) 그대로, 늪 이름 없음');
 await b.close();console.log(bad?`R537 browser FAIL ${bad}`:'R537 browser all passed');process.exit(bad?1:0);

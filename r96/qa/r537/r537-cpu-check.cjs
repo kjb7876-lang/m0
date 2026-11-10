@@ -41,8 +41,10 @@ const idx=JSON.parse(RT('assets/r380/mobs/index.json'));
  let cnt=10;const DATA={
   dist01:()=>[mk('dist01','보랏빛 알집지기 1','dist01-sp2'),...Array.from({length:cnt},(_,k)=>sp1(k)),mk('dist01','중간보스 · 재 나방','dist01-sp1',{midboss:true,wardChampionR81:true,r380Renamed:true,r248Key:'망각의 거미'}),
    mk('dist01','재 나방','dist01-sp1',{id:'dist01:r74-patrol:0',r74Monster:'ash'}),mk('dist01','거미줄에 묶인 수호병 1','dist01-s1'),mk('dist01','보라검천사','mb-dist01',{midboss:true})],
-  dist02:()=>[mk('dist02','진흙등 거미 1','dist02-sp1'),mk('dist02','수렁 주문사 1','dist02-m1')],
-  dist03:()=>[mk('dist03','기억 운반거미 1','dist03-sp1'),mk('dist03','피냄새 추적자 1','dist03-g1')]};
+  dist02:()=>[mk('dist02','진흙등 거미 1','dist02-sp1'),mk('dist02','수렁 주문사 1','dist02-m1'),mk('dist02','늪에서 되살아난 혼령체 1','dist02-g1',{r381From:'늪에서 되살아난 전우 1',r248Key:'늪에서 되살아난 전우'}),
+   mk('dist02','진흙등 거미 추격대','dist02-sp1-w2-4'),mk('dist02','중간보스 · 진흙등 거미','dist02-sp1',{midboss:true}),mk('dist02','진흙등 거미 우두머리','dist02-sp1'),
+   mk('dist02','늪 뿌리 추적자','dist02-sp1',{id:'dist02:r74-patrol:3',r248Key:'뿌리 추적자'}),mk('dist02','늪의 뿔악마','dist02-boss',{boss:true})],
+  dist03:()=>[mk('dist03','기억 운반거미 1','dist03-sp1'),mk('dist03','피냄새 추적자 1','dist03-g1'),mk('dist03','기억 운반거미 추격대','dist03-sp1-w2-9'),mk('dist03','중간보스 · 기억 운반거미','dist03-sp1',{midboss:true}),mk('dist03','보라검 추격천사 1','dist03-c1'),mk('dist03','기억 운반거미','dist03-sp1',{id:'dist03:r74-patrol:2',r383RootFrom:'root',r248Key:'뿌리 추적자'})]};
  const drawn=[];const ctx={spawnBurnDeath3(){},window:{},localStorage:{getItem:()=>null,setItem(){}},setTimeout:()=>0,regionById:{},register(){},
   makeRoom:(id)=>({id,enemies:(DATA[id]||(()=>[]))()}),drawEnemy:e=>drawn.push({nativeId:e.nativeId,path:e.path})};
  for(const z of Object.keys(DATA))ctx.regionById[z]={paths:[]};ctx.window.window=ctx.window;vm.createContext(ctx);vm.runInContext('var window=this.window;'+CS('mob-moves-r385.js'),ctx);
@@ -54,7 +56,15 @@ const idx=JSON.parse(RT('assets/r380/mobs/index.json'));
  ok(sp.every(e=>e.nativeId==='dist01-sp1'&&e.maxHp===10&&e.damage===3)&&d1.length===cnt+5,'id·nativeId·수치·몹 수 그대로');
  drawn.length=0;if(mud[0]&&mem[0]){ctx.drawEnemy(mud[0]);ctx.drawEnemy(mem[0]);}ok(drawn[0]?.nativeId==='dist02-sp1'&&drawn[0].path==='p/dist02-sp1'&&drawn[1]?.nativeId==='dist03-sp1'&&mud[0].nativeId==='dist01-sp1','그릴 때만 진흙등 거미·기억 운반거미 그림을 빌리고 되돌림');
  ok(d1.find(e=>e.wardChampionR81).name==='중간보스 · 재 나방'&&d1.find(e=>/:r74-patrol:/.test(e.id)).name==='재 나방'&&d1[0].name==='보랏빛 알집지기 1'&&d1.at(-1).name==='보라검천사','지역 수호자·순찰·다른 종·중간보스 그대로');
- ok(ctx.makeRoom('dist02','STORY').enemies[0].name==='진흙등 거미 1'&&ctx.makeRoom('dist03','STORY').enemies[0].name==='기억 운반거미 1','늪·무너진 성의 원래 몹은 그대로');
+ // 사용자 2026-11-10 02:30Z 결정 카드 "원래 맵에서 빼기(완전 이동)": 늪 진흙등 거미 → 늪에서 되살아난 혼령체(같은 구울형), 무너진 성 기억 운반거미 → 피냄새 추적자(카드 문구).
+ {const d2=ctx.makeRoom('dist02','STORY').enemies,d3=ctx.makeRoom('dist03','STORY').enemies;
+  ok(!d2.some(e=>/진흙등 거미/.test(e.name))&&!d3.some(e=>/기억 운반거미/.test(e.name)),'늪에 진흙등 거미, 무너진 성에 기억 운반거미가 없음');
+  ok(d2.map(e=>e.name).join('|')==='늪에서 되살아난 혼령체 1|수렁 주문사 1|늪에서 되살아난 혼령체 1|늪에서 되살아난 혼령체 추격대|중간보스 · 늪에서 되살아난 혼령체|늪에서 되살아난 혼령체 우두머리|늪 뿌리 추적자|늪의 뿔악마','늪: 번호·추격대·우두머리·중간보스 꼬리 유지, 순찰 늪 뿌리 추적자·보스 그대로 ('+d2.map(e=>e.name).join('|')+')');
+  ok(d2[0].r385Look?.join()==='dist02,dist02-g1'&&d2[0].r248Key==='늪에서 되살아난 전우'&&d2[0].nativeId==='dist02-sp1'&&d2[0].maxHp===10,'늪: 그림·효과 키는 혼령체, id·수치 그대로');
+  ok(d3.map(e=>e.name).join('|')==='피냄새 추적자 1|피냄새 추적자 1|피냄새 추적자 추격대|중간보스 · 피냄새 추적자|보라검 추격천사 1|피냄새 추적자'&&d3[0].r385Look?.join()==='dist03,dist03-g1','무너진 성: 기억 운반거미 → 피냄새 추적자(R383 이 되돌린 순찰 포함, 실측에서 1마리 남았던 회귀)');
+  drawn.length=0;ctx.drawEnemy(d2[0]);ok(drawn[0]?.nativeId==='dist02-g1','늪 옛 거미 자리는 혼령체 그림으로 그림');}
+ {const d1b=ctx.makeRoom('dist01','STORY').enemies;ok(d1b.filter(e=>/^진흙등 거미/.test(e.name)).every(e=>e.r385Look.join()==='dist02,dist02-sp1'),'거미동굴 진흙등 거미는 여전히 진흙등 거미 그림(빌려 올 원본이 늪에서 개명돼도)');
+  drawn.length=0;ctx.drawEnemy(d1b.find(e=>/^진흙등 거미/.test(e.name)));ok(drawn[0]?.nativeId==='dist02-sp1','거미동굴 진흙등 거미 그림 = dist02-sp1');}
  ok(JSON.stringify(ctx.makeRoom('dist01','STORY').enemies.map(e=>e.name))===JSON.stringify(d1.map(e=>e.name)),'다시 만들어도 같은 결과');
  ok(!ctx.makeRoom('dist01','DREAM').enemies.some(e=>/진흙등|기억 운반/.test(e.name)),'DREAM 층은 그대로');
  cnt=3;{const s=ctx.makeRoom('dist01','STORY').enemies;ok(!s.some(e=>/진흙등|기억 운반/.test(e.name))&&s.length===8,'경계: 옛 자리 3마리면 바꾸지 않음(승인 3종 하나씩 유지)');}
