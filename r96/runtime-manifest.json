@@ -42109,8 +42109,8 @@
     },
     {
       "path": "battle-beats-r450.js",
-      "bytes": 8630,
-      "sha256": "a549a2705a72236ccd5a30298bb873a439e00166ec10d6a2b332a67f60b4e658"
+      "bytes": 8770,
+      "sha256": "30c297e9cc65cd42e37849e1218823547be7f156ecd5bcfd8efe3b4db6fa8171"
     },
     {
       "path": "betrayal-video-r368.js",
@@ -43169,8 +43169,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6573502,
-      "sha256": "c7355b5ddcd62a457b91e4751b23b34aeeaf74752f8f0317d10e813ab810803e"
+      "bytes": 6573544,
+      "sha256": "e8fcbfa9e10e36c896322898c63e65c52267407d073bf93509baf4f2187ab3e6"
     },
     {
       "path": "intro-r140.js",
@@ -43269,8 +43269,8 @@
     },
     {
       "path": "mob-art-variants-r306.js",
-      "bytes": 9804,
-      "sha256": "1940cce906fe96f0228a3bb4f1ceb67d4431f211e23368076b532406e34a227b"
+      "bytes": 9782,
+      "sha256": "f4074eaa84e359d11be5c6da1abafc076bd3f2795fb3215d7892516907ee7300"
     },
     {
       "path": "mob-death-r188.js",
@@ -43883,6 +43883,11 @@
       "sha256": "d8f8aae6834324a74f511e8296540889e8143696f339761963250a67ec2849af"
     },
     {
+      "path": "survival-r600.js",
+      "bytes": 50237,
+      "sha256": "71419b9ddaf43d2f806379db6e67ba607c745068b4d28aa99a58b38bfa4336f6"
+    },
+    {
       "path": "swamp-hands-r474.js",
       "bytes": 8219,
       "sha256": "13c441e1847a4d0fcaa96a568ec686f33075b6f1efbde3f06ad1112fcf42d73d"
@@ -44108,9 +44113,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8821,
-  "totalBytes": 1225495529,
-  "webHTMLSha256": "c7355b5ddcd62a457b91e4751b23b34aeeaf74752f8f0317d10e813ab810803e",
+  "fileCount": 8822,
+  "totalBytes": 1225545926,
+  "webHTMLSha256": "e8fcbfa9e10e36c896322898c63e65c52267407d073bf93509baf4f2187ab3e6",
   "largest": [
     {
       "path": "index.html",
