@@ -24893,6 +24893,16 @@
       "sha256": "556679e3ff38b7ea818880a7f84f34458e45c2c7108ac3d18459ece004848595"
     },
     {
+      "path": "assets/r590/hwando-iai-ring.webp",
+      "bytes": 147792,
+      "sha256": "0ce1cbae6780b064e5db60f17cb80006ada735ac607858ff909d2bb895b8c3e0"
+    },
+    {
+      "path": "assets/r590/hwando-wind-tornado.webp",
+      "bytes": 175080,
+      "sha256": "78ad667c36677e21840fa9e12e89ebe20e243d70774d793cb58395b3d6880713"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -33904,8 +33914,8 @@
     },
     {
       "path": "hwando-chain-r590.js",
-      "bytes": 16154,
-      "sha256": "ebe66b351c1d99f3bc40ee37d68c579e70f84cc6465f0e153ffdae0d0c5df456"
+      "bytes": 18383,
+      "sha256": "cbcf779df08e947d7e1c904764b73b1673c3809c7f7ec72131e472887a315a7e"
     },
     {
       "path": "hwando-r242.js",
@@ -34813,8 +34823,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6962,
-  "totalBytes": 1092228621,
+  "fileCount": 6964,
+  "totalBytes": 1092553722,
   "webHTMLSha256": "bcb60730f654723d14bc644b9679042aaf8215080605fb11d2ab45d63a7d9758",
   "largest": [
     {
