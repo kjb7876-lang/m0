@@ -28,6 +28,8 @@ ok('menu retreat never writes the story save (slot unchanged, saves still blocke
 // 2) 생존 중 죽음
 await startSurvival();await A(()=>{if(modal)closePanel(true);showDeath();});await p.waitForTimeout(500);
 const t2=await panel();ok('death during survival shows the survival result (not the story recovery panel)',/무한 생존 · 기록/.test(t2)&&!!(await A(()=>document.getElementById('r600Title'))),t2.slice(0,80));
+await p.keyboard.press('Escape');await p.waitForTimeout(1500);/* 결과 창을 Esc 로 닫아도 다시 떠야 한다(다시 도전·처음 화면 버튼 유지) */
+{const e2=await A(()=>({modal:!!modal,again:!!document.getElementById('r600Again'),title:!!document.getElementById('r600Title')}));ok('survival result panel comes back after Esc (retry/title stay reachable)',e2.modal&&e2.again&&e2.title,e2);}
 await p.locator('#r600Title').click();await p.waitForTimeout(800);
 ok('story save still unchanged after a lost survival run',JSON.stringify(await slots())===JSON.stringify(s0));
 // 2b) 강화 창·메뉴로 전투가 멈춘 동안 서사가 넘어가지 않는다(웨이브 길이 보존)

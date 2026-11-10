@@ -223,13 +223,15 @@ function showChoice(){if(choosing||!choiceQ||!here()||G(()=>modal,false)||G(()=>
  setTimeout(()=>{try{document.getElementById('r600Pick0')?.focus?.();}catch(_){}},30);}
 
 // ── 끝 ──
-function over(why){if(!S||S.over)return;S.over=true;narrStop();try{clearControls?.();}catch(_){}
- const def=G(()=>regionById[S.ids[S.i]],null),secs=Math.round((Date.now()-S.startWall)/1000),hero=S.hero;
+function over(why){if(!S||S.over)return;S.over=true;S.overWhy=why;S.overSecs=Math.round((Date.now()-S.startWall)/1000);narrStop();try{clearControls?.();}catch(_){}
+ resultPanel();}
+function resultPanel(){if(!S)return;const why=S.overWhy;
+ const def=G(()=>regionById[S.ids[S.i]],null),secs=S.overSecs||0,hero=S.hero;
  openPanel('<div class="eyebrow">무한 생존 · 기록</div><h2>'+(why==='core'?'정화 코어가 부서졌습니다':'정화가 끊겼습니다')+'</h2>'+
   '<p>'+(S.loop?(S.loop+1)+'회차 · ':'')+(S.i+1)+' / '+S.ids.length+' 지역 「'+(def?.title||'')+'」까지 · 처치 '+S.kills+' · 생존 레벨 '+S.lv+' · '+Math.floor(secs/60)+'분 '+(secs%60)+'초</p>'+
   '<div class="actions"><button id="r600Again" class="primary">다시 도전</button><button id="r600Title">처음 화면</button></div>');
  const again=document.getElementById('r600Again'),ttl=document.getElementById('r600Title');
- if(again)again.onclick=()=>{try{closePanel(true);}catch(_){}start(hero);};if(ttl)ttl.onclick=()=>{deactivate();try{showTitle();}catch(e){fail(e);}};}
+ if(again)again.onclick=()=>{S.leaving=true;try{closePanel(true);}catch(_){}start(hero);};if(ttl)ttl.onclick=()=>{deactivate();try{showTitle();}catch(e){fail(e);}};}
 
 // ── 한 프레임 ──
 function step(dt){const t=G(()=>time,0);if(S.over||!S.ready)return;
@@ -310,7 +312,7 @@ function install(){makeNative=makeRoom;
  const EX=window.__STORYWORLD_EXPLORATION__;if(EX&&typeof EX.layout==='function'){const own={};for(const k of Object.keys(EX))own[k]=EX[k];own.layout=function(id,...a){if(stageRoom&&S?.active&&id===stageRoom.id&&G(()=>layer,'')==='STORY')return stageRoom.exploration;return EX.layout.call(EX,id,...a);};own.survivalR600=true;try{window.__STORYWORLD_EXPLORATION__=Object.freeze(own);}catch(e){fail(e);}}
  const getBase=getRoom;getRoom=function(id=zone,l=layer){if(stageRoom&&S?.active&&id===stageRoom.id&&l==='STORY')return stageRoom;return getBase.apply(this,arguments);};
  const enterBase=enterRegion;enterRegion=async function(...a){if(!entering&&S?.active){/* 메뉴 '쉼터로' 등 생존 밖으로 나가는 길은 타이틀로(엔진 진행이 생존용 새 게임이라 그대로 들어가면 자동 저장이 스토리 슬롯을 덮는다) */deactivate();try{showTitle();}catch(e){fail(e);}setTimeout(()=>{try{if(!S?.active&&!document.getElementById('survivalStartR600'))showTitle();}catch(e){fail(e);}},120);/* 바깥 감싸기가 창을 닫아도 타이틀이 남게 */return false;}return enterBase.apply(this,a);};
- const tickBase=tick;tick=function(dt){try{snapCoreWalkers();}catch(e){fail(e);}const r=tickBase.apply(this,arguments);try{if(here()&&!G(()=>modal,false)&&!G(()=>loading,false)&&player.hp>0){if(choosing&&!S.over){choosing=false;choiceQ++;stats.choiceRecovered=(stats.choiceRecovered||0)+1;}/* 카드를 고르지 않고 창이 닫혔으면(Esc 등) 다시 띄운다 */step(dt);showChoice();}}catch(e){fail(e);}return r;};
+ const tickBase=tick;tick=function(dt){try{snapCoreWalkers();}catch(e){fail(e);}const r=tickBase.apply(this,arguments);try{if(here()&&S.over&&!S.leaving&&!G(()=>modal,false)&&!G(()=>loading,false)){stats.resultRecovered=(stats.resultRecovered||0)+1;resultPanel();}/* 결과 창을 Esc 로 닫았으면 다시 띄운다(다시 도전·처음 화면 전까지 멈춤) */}catch(e){fail(e);}try{if(here()&&!G(()=>modal,false)&&!G(()=>loading,false)&&player.hp>0){if(choosing&&!S.over){choosing=false;choiceQ++;stats.choiceRecovered=(stats.choiceRecovered||0)+1;}/* 카드를 고르지 않고 창이 닫혔으면(Esc 등) 다시 띄운다 */step(dt);showChoice();}}catch(e){fail(e);}return r;};
  rawGainXP=gainXP;gainXP=function(v,...a){if(here()&&inKill){if(Number.isFinite(+v)&&+v>0&&inKill.e){gems.push({x:inKill.e.x+(Math.random()-.5)*.4,y:inKill.e.y+(Math.random()-.5)*.4,v:+v});
    if(gems.length>GEM_CAP){const a0=gems.shift(),b0=gems[0];b0.v+=a0.v;}}return;}return rawGainXP.call(this,v,...a);};
  const hitBaseR600=hitEnemy;hitEnemy=function(...a){if(!here())return hitBaseR600.apply(this,a);inHitR600++;try{return hitBaseR600.apply(this,a);}finally{inHitR600--;}};
