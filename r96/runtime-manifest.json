@@ -43459,8 +43459,8 @@
     },
     {
       "path": "dark-r123.js",
-      "bytes": 15899,
-      "sha256": "6fad441ffb09b8e48b37121b1cf4c6fb695170ae32fc71c23fff33c05e2ba4ac"
+      "bytes": 15900,
+      "sha256": "91f363c1bdad56c5433658de099caedb6bf4445112754c7fc25c32ae25f6add4"
     },
     {
       "path": "data/actor-canvas-map-v31224.js",
@@ -43944,8 +43944,8 @@
     },
     {
       "path": "light-atmos-r300.js",
-      "bytes": 19850,
-      "sha256": "fb3019e4ce54e652a9136ff6daf720c4e8a21737ecf1653b13ce4a6da5ebb26d"
+      "bytes": 20809,
+      "sha256": "734523b9383bf14938eb1e45ffbc63b1ca6f7ec5b6d790f3339ef0d6d53a9cc1"
     },
     {
       "path": "light-r182.js",
@@ -43954,8 +43954,8 @@
     },
     {
       "path": "local-light-r451.js",
-      "bytes": 50367,
-      "sha256": "5c65a8bdb2b26e8011af9443ae84d8122bd8f92bb4d6d2c5a3b144a7ae4bd6be"
+      "bytes": 51044,
+      "sha256": "29a6221d4d5f0c4520a8e4ed4deeb104ff8ab34e290e4fc28dc0e45aef95ca42"
     },
     {
       "path": "mammon-bossroom.js",
@@ -44369,8 +44369,8 @@
     },
     {
       "path": "rooms-r523.js",
-      "bytes": 69705,
-      "sha256": "44431d9eb71a52d26442f05d584b7da6e4cedbdc75f3a9110bc055b8e0140882"
+      "bytes": 70753,
+      "sha256": "5607363cfbbad942afe2df059cc8c81b79bc085821ae2e37b78c976c795f1cda"
     },
     {
       "path": "root-gate-video-r372.js",
@@ -44869,7 +44869,7 @@
     }
   ],
   "fileCount": 8973,
-  "totalBytes": 1235674805,
+  "totalBytes": 1235677490,
   "webHTMLSha256": "d8bef146aec9863ec63a5a3150cab3c47344631e13664b5969cd73d490e68348",
   "largest": [
     {

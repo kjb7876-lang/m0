@@ -80,4 +80,35 @@ if(api&&FX){const base=api.plan(FX);
  ok('R730 HOUSE: Dots houses drawn about as wide as the old tiled house (±12%)',!!H&&!!base&&H.filter(h=>/tiled-house-b/.test(h.path)).every(h=>Math.abs(w(h)/w(base)-1)<=.12),H&&H.map(w));
  if(api){for(const id of ['last302','last303']){let fx=null;try{fx=JSON.parse(rd('qa/r730/fixtures/'+id+'.json'));}catch(_){}if(!fx)continue;const P=api.plan(fx).filter(p=>p.kind==='house');
   ok(id+': at least one Dots house in the village',P.some(p=>/tiled-house-b/.test(p.path)),P.map(p=>p.path.split('/').pop()));}}}
+// ⑧ 등불 웅덩이 색 지키기: 채널마다 따로 누르는 어깨 곡선이 등불 밑 빨강만 눌러(2.0→1.41, 파랑 .97 그대로) 호박색이 회색으로 바래던 것 → 밤 두 지역만 밝기(최댓값)로 한 번에 눌러 색 비율 유지
+{const KNEE=.92,SH=.58,sh=v=>v<=KNEE?v:KNEE+SH*(1-Math.exp(-(v-KNEE)/SH)),hueSh=L=>{const m=Math.max(...L);return m<=KNEE?L.slice():L.map(v=>v*sh(m)/m);};
+ ok('R451: hue-keeping shoulder uniform r451Hue in the shader (0 = old per-channel curve)',/uniform float r451Hue;/.test(LL)&&/L=mix\(Ls,Lh,r451Hue\);/.test(LL)&&/r451Hue:\{value:0\}/.test(LL));
+ ok('R451: r451Hue set per frame from the night table only',/u\.r451Hue\.value=a\.hue\?1:0;/.test(LL));
+ ok('R451: CPU lightAt uses the same curve (props / mobs match the floor)',/const shoulderHue=/.test(LL)&&/a\.hue\?shoulderHue\(/.test(LL));
+ if(N)for(const z of ['last302','last303']){const a=N[z];ok(z+': night table turns hue-keeping on',a.hue===1,a.hue);
+  const L=[0,1,2].map(i=>a.c[i]*a.k+a.lampC[i]*1.0*1.12*a.lampK),old=L.map(sh),neu=hueSh(L),g=a.grade;
+  const rb=v=>v[0]*g[0]/(v[2]*g[2]);
+  ok(z+': lamp-centre amber survives the curve and the grade (red/blue ≥ 1.6, was '+rb(old).toFixed(2)+')',rb(neu)>=1.6,rb(neu).toFixed(2));
+  const amb=[0,1,2].map(i=>a.c[i]*a.k);ok(z+': moonlit ground below the knee is unchanged by the new curve',JSON.stringify(hueSh(amb))===JSON.stringify(amb.map(sh)));}}
+// ⑨ 등불 발밑 호박빛 웅덩이: R451 조명맵은 어깨 곡선 상한(×1.5)이라 어두운 바닥에선 등불 밑도 r≈.17 에 머문다(헤드리스 실측 따뜻한 색 화소 1.7% 중 중앙값 r .17)
+//    → 밤 두 지역만 R300 의 더하기 빛 웅덩이를 R451 이 맡아도 켠다(등불 소품만, 등불 색, 작은 반지름). 다른 지역은 그대로 꺼짐.
+{const AT=rd('client-source/light-atmos-r300.js');
+ ok('R300: night pools read the R451 night table for the current story room',/const night=\(\(\)=>\{try\{return !samong&&window\.__STORYWORLD_LOCAL_LIGHT_R451__\?\.night\?\.\(room\.id\)\|\|null;\}catch\(_\)\{return null;\}\}\)\(\),np=!!night&&night\.pools>0;/.test(AT));
+ ok('R300: old gate untouched (pools yield to R451 elsewhere); night pools are a separate branch after it',/if\(want\('pools'\)&&!sight&&!r451\)/.test(AT)&&/if\(!n&&np&&want\('pools'\)\)/.test(AT));
+ ok('R300: night pools only under lamp props (no wall-torch spots), lamp colour, night gain/radius',/nearest\(lightsOf\(room\)\.filter\(l=>l\.prop\)/.test(AT)&&/const warm=night\.lampC;/.test(AT)&&/rad=\(l\.r\|\|3\)\*2\*night\.poolR,k=night\.pools\*fl;/.test(AT));
+ ok('R300: dim pass stays off under R451 (night pools only)',/const dimOn=want\('pools'\)&&!samong&&!sight&&!r451;/.test(AT));
+ if(N)for(const z of ['last302','last303']){const a=N[z];ok(z+': night pool gain .2–.45 and radius scale ≤ .7 (pool, not a wash)',a.pools>=.2&&a.pools<=.45&&a.poolR>0&&a.poolR<=.7,[a.pools,a.poolR]);}}
+// ⑩ 길 등롱: 길잡이 길 곁에 등불이 있어야 길 위 화면에 호박빛이 든다(헤드리스: 길 가운데서 가장 가까운 등 12칸)
+if(api)for(const id of ['last302','last303']){let fx=null,pf=null;try{fx=JSON.parse(rd('qa/r730/fixtures/'+id+'.json'));pf=JSON.parse(rd('qa/r810/fixtures-'+id+'-path.json'));}catch(_){}
+ ok(id+': R169 path fixture exists',!!fx&&!!pf&&pf.path.length>20,pf&&pf.path.length);if(!fx||!pf)continue;
+ const PS=new Set(pf.path),P=api.plan({...fx,path:PS}),pp=P.filter(p=>p.kind==='pathpost'),cells=pf.path.map(k=>k.split(',').map(Number));
+ const dPath=q=>Math.min(...cells.map(c=>Math.hypot(c[0]+.5-q.x,c[1]+.5-q.y)));
+ ok(id+': at least 4 path lanterns along the guide path',pp.length>=4,pp.length);
+ ok(id+': each path lantern 1.15–2.6 cells off the path (not hidden by R169, still beside it)',pp.every(q=>{const d=dPath(q);return d>=1.15&&d<=2.6;}),pp.map(q=>+dPath(q).toFixed(2)));
+ ok(id+': path lanterns ≥ 7 cells apart',pp.every((a,i)=>pp.every((b,j)=>i===j||Math.hypot(a.x-b.x,a.y-b.y)>=7)));
+ ok(id+': path lanterns use the lantern-post art on open floor',pp.every(q=>q.path==='assets/r810/lantern-post.webp'&&fx.floorCells.some(c=>c[0]===Math.floor(q.x)&&c[1]===Math.floor(q.y))));
+ const med=a=>{const s=a.slice().sort((x,y)=>x-y);return s[s.length>>1];},sample=cells.filter((_,i)=>i%5===0),nearL=c=>Math.min(...P.filter(p=>/^(lamp|post|pathpost)$/.test(p.kind)).map(q=>Math.hypot(q.x-c[0]-.5,q.y-c[1]-.5)));
+ ok(id+': median distance from a path cell to the nearest lantern ≤ 6 cells',med(sample.map(nearL))<=6,med(sample.map(nearL)).toFixed(1));
+ ok(id+': total props with the path stays ≤ 88',P.length<=88,P.length);}
+ok('R730 apply: path lanterns light up like posts (R115 lantern)',/s\.kind==='pathpost'\)q\.r115Prop='lantern'/.test(RS));
 console.log('\nR810 '+(n-bad)+'/'+n+' passed');process.exit(bad?1:0);

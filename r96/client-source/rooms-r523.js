@@ -389,7 +389,7 @@ window.__STORYWORLD_ROOMS_R523__=Object.freeze({revision:REV,ART,G,USE,REGION,LI
 //  · 몹·보스는 R760(bulmyeongwi-r760.js) 스레드가 맡는다. 등롱·부적 줄·댓돌 신발·장독대·약방은 Dots 그림이 오면 2차로 더한다(지금은 기존 그림만).
 (()=>{'use strict';
 if(window.__STORYWORLD_VILLAGE_R730__)return;
-const REV='R730-village-5',KEY='storyworld.r730.village',PX=34,SUM=17,BACK=3.6,MARGIN=1;
+const REV='R730-village-6',KEY='storyworld.r730.village',PX=34,SUM=17,BACK=3.6,MARGIN=1;
 const prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;}catch(_){}
 const stats={rooms:0,placed:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,400);};
 const HOUSE=Object.freeze([
@@ -409,7 +409,7 @@ const LAMP=Object.freeze({path:'assets/r92/lights/lights_regional_03.png',height
    정본 34장 "부서진 기와와 붉은 부적", "포구 마을", "방문 앞의 신발들은 모두 바깥을 향해" · 귀비탕 영상의 등롱 호박빛. 크기는 사람 키 ≈ 1.3칸 기준(그림 스레드 권장). */
 const POST=Object.freeze({path:'assets/r810/lantern-post.webp',height:100}),ROPE=Object.freeze({'-y':'assets/r810/talisman-rope-r.webp','-x':'assets/r810/talisman-rope-l.webp',height:74}),
  SHOES=Object.freeze({path:'assets/r810/shoes-stone.webp',height:22}),JANG=Object.freeze({path:'assets/r810/jangdok.webp',height:32}),RACK=Object.freeze({path:'assets/r810/fish-rack.webp',height:64}),BOAT=Object.freeze({path:'assets/r810/boat.webp',height:52});
-const ZONE=Object.freeze({last302:Object.freeze({houses:26,lamps:20,yards:/작은 마당|외곽 쉼길/,giwa:3,ropes:4,shoes:6,jang:5,boats:3,racks:3}),last303:Object.freeze({houses:12,lamps:14,yards:/작은 마당|외곽 쉼길/,giwa:5,ropes:3,shoes:5,jang:4,boats:0,racks:0})});
+const ZONE=Object.freeze({last302:Object.freeze({houses:26,lamps:20,yards:/작은 마당|외곽 쉼길/,giwa:3,ropes:4,shoes:6,jang:5,boats:3,racks:3,pathposts:8}),last303:Object.freeze({houses:12,lamps:14,yards:/작은 마당|외곽 쉼길/,giwa:5,ropes:3,shoes:5,jang:4,boats:0,racks:0,pathposts:10})});
 function h32(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
 // fx: {id, floorCells, rooms[{name,x,y}], doors[{x,y}], ward{boss,gather}, entry{x,y}, props[{x,y}], route?[{x,y}]} → [{id,kind,path,height,aspect?,lift?,x,y,side?}]
 function plan(fx){const Z=ZONE[fx.id];if(!Z)return[];const F=new Set(),diag=new Map();
@@ -451,6 +451,12 @@ function plan(fx){const Z=ZONE[fx.id];if(!Z)return[];const F=new Set(),diag=new 
  // R810 포구(last302): 뭍에 올린 배·생선 건조대 — 길에서 먼 뒤쪽 끝(사람이 지나지 않는 바닷가 쪽), 같은 종류끼리 9칸 넘게
  far(edges,'boat',Z.boats||0,e=>{const q=at(e,'boat');return near(e.x+.5,e.y+.5)>5&&apart('boat',q.x,q.y,9)&&put(e,'boat',BOAT,3.2,e.x+'_'+e.y+e.side);});
  far(edges,'rack',Z.racks||0,e=>{const q=at(e,'rack');return near(e.x+.5,e.y+.5)>5&&apart('rack',q.x,q.y,9)&&put(e,'rack',RACK,3.2,e.x+'_'+e.y+e.side);});
+ // R810 길 등롱: 길잡이 길(R169) 곁 2칸 옆 열린 바닥에 7칸마다 등롱대 — 뒤쪽 끝 석등은 길에서 가장 가까운 것도 12칸 밖이라(헤드리스 실측 last303) 길 위 화면에 등불이 없었다
+ if(PATH&&Z.pathposts){const open4=(x,y)=>has(x,y)&&has(x+1,y)&&has(x-1,y)&&has(x,y+1)&&has(x,y-1);let n=0,last=null;
+  for(const k of PATH){if(n>=Z.pathposts)break;const[cx,cy]=String(k).split(',').map(Number);if(!Number.isFinite(cx+cy)||last&&Math.hypot(cx-last[0],cy-last[1])<7)continue;
+   const dirs=(h32('pp'+cx+','+cy)&1)?[[2,0],[0,2],[-2,0],[0,-2]]:[[0,2],[2,0],[0,-2],[-2,0]];
+   for(const[dx,dy]of dirs){const x=cx+dx,y=cy+dy,sx=x+.5,sy=y+.5;if(!open4(x,y)||onPath(sx,sy)||!clear(sx,sy,2.4)||!apart('pathpost',sx,sy,7)||!apart('post',sx,sy,4)||!apart('lamp',sx,sy,4))continue;
+    taken.push({x:sx,y:sy,r:2.4});out.push({id:'r730:'+fx.id+':pathpost:'+x+'_'+y,kind:'pathpost',path:POST.path,height:POST.height,x:sx,y:sy,side:'-y'});n++;last=[cx,cy];break;}}}
  // R810 집 앞: 댓돌 신발(정본 '모두 바깥을 향해') 두 집에 하나, 장독대 세 집에 하나 — 집과 같은 언덕 높이, 집 발에서 길 쪽으로 조금 앞
  let ns=0,nj=0;out.filter(o=>o.kind==='house').forEach((h,i)=>{const fwd=h.side==='-y'?{x:0,y:.9}:{x:.9,y:0},along=h.side==='-y'?{x:1,y:0}:{x:0,y:1},D=h.height*h.aspect/2/PX;
   if(i%2===0&&ns<(Z.shoes||0)){ns++;out.push({id:'r730:'+fx.id+':shoes:'+i,kind:'shoes',path:SHOES.path,height:SHOES.height,lift:h.lift,x:+(h.x+fwd.x).toFixed(2),y:+(h.y+fwd.y).toFixed(2),side:h.side});}
@@ -464,7 +470,7 @@ function apply(r){if(!prefs.on||!r||!ZONE[r.id]||!(!r.layer||r.layer==='STORY')|
   props:r.props.filter(p=>p&&!p.r730&&p.visible!==false&&Number.isFinite(p.x+p.y)).map(p=>({x:p.x,y:p.y})),route:routeOf(r),path:pathOf(r)});
  const have=new Set(r.props.map(p=>p&&p.id));stats.rooms++;
  for(const s of rows){if(have.has(s.id))continue;const q={id:s.id,x:s.x,y:s.y,path:s.path,height:s.height,visible:true,enabled:true,interactive:false,presentationOnly:true,autoTargetEligible6:false,r730:s.kind,r412Face:1};const hill=s.kind==='house'||s.kind==='shoes'||s.kind==='jang';if(hill)q.r412Wall=1;/* 집은 언덕 위라 벽 검사 제외, 길 가 조형물은 R412 가 벽에 든 정도를 재서 3% 넘으면 옮김 */
-  if(hill){q.visualLiftPx=s.lift;if(s.kind==='house'&&s.side==='-x')q.r303Flip=true;}else if(s.kind==='lamp'||s.kind==='post')q.r115Prop='lantern';else if(s.kind==='censer')q.r115Prop='brazier';
+  if(hill){q.visualLiftPx=s.lift;if(s.kind==='house'&&s.side==='-x')q.r303Flip=true;}else if(s.kind==='lamp'||s.kind==='post'||s.kind==='pathpost')q.r115Prop='lantern';else if(s.kind==='censer')q.r115Prop='brazier';
   r.props.push(q);try{if(typeof addImage==='function')addImage(s.path,'R730 village');}catch(_){}stats.placed++;}}
 const live=()=>typeof started!=='undefined'&&started&&typeof room!=='undefined'&&!!room&&!(typeof loading!=='undefined'&&loading);
 function install(){if(typeof draw!=='function')return false;const db=draw;draw=function(...a){try{if(live())apply(room);}catch(e){fail(e);}return db.apply(this,a);};

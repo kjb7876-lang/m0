@@ -27,7 +27,7 @@
  const tone=()=>TONE[prefs.tone]||null;
  // R810 불면귀 밤: 두 구역은 녹·피 쪽 세피아·붉은 색조 돌림을 빼고 대비만 — 세피아가 남색 달빛을 누런 모래빛으로 덮었다(헤드리스 실측 파랑-빨강 -0.03~-0.04).
  //  세기 끔(off)이면 그대로 끔. 다른 지역은 그대로.
- const NIGHT_R810={last302:' saturate(.96) contrast(1.1)',last303:' saturate(.96) contrast(1.1)'};
+ const NIGHT_R810={last302:' saturate(.96) contrast(1.1)',last303:' saturate(.96) contrast(1.05)'};
  const nightR810=()=>{try{return typeof room!=='undefined'&&room&&(!room.layer||room.layer==='STORY')&&Object.prototype.hasOwnProperty.call(NIGHT_R810,room.id)?NIGHT_R810[room.id]:null;}catch(_){return null;}};
  function filter(){const T=tone();if(!T)return'';return nightR810()||T.filter;}
 
