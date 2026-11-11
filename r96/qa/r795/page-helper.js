@@ -47,6 +47,12 @@ function placeNear(e,d){for(let k=0;k<24;k++){const a=k*Math.PI/12+.3,x=e.x+Math
 // 적 옆 자리 잡기: 가까운 순서로, 자리를 옮긴 뒤에도 그 적이 방에 남아 있는 것만(R383 뿌리 추적자처럼 멀어지면 사라지는 몹 제외).
 function engage(melee,skip){const h=HEROES[player.hero],d0=melee?Math.min(1.7,h.range*.55):Math.min(5,h.range*.6);const pool=room.enemies.filter(e=>e.hp>0&&!e.boss&&!e.r170Tower&&e.visible!==false&&!['hidden','inactive','disabled','despawned'].includes(e.spawnState)&&!/r383|summon/i.test(String(e.id))&&!(skip||[]).includes(e.id));pool.sort((a,b)=>Math.hypot(a.x-player.x,a.y-player.y)-Math.hypot(b.x-player.x,b.y-player.y));
  for(const e of pool.slice(0,12)){const q=placeNear(e,d0)||placeNear(e,d0+.8)||placeNear(e,d0+1.6);if(!q)continue;tp(q);target=e.id;return {id:e.id,d:+Math.hypot(e.x-q.x,e.y-q.y).toFixed(2),name:e.name};}return null;}
+/* 붙을 몹을 못 찾았을 때 왜인지 본 그대로 적는다(읽기만 함): 살아 있는 잡몹 수, 거름 조건별로 빠진 수, 남은 후보 수, 가까운 후보 6마리에 설 자리가 있었는지 */
+function engageWhy(melee){const h=HEROES[player.hero],d0=melee?Math.min(1.7,h.range*.55):Math.min(5,h.range*.6);const live=room.enemies.filter(e=>e.hp>0&&!e.boss);
+ const hid=e=>e.visible===false||['hidden','inactive','disabled','despawned'].includes(e.spawnState),sum=e=>/r383|summon/i.test(String(e.id));
+ const pool=live.filter(e=>!e.r170Tower&&!hid(e)&&!sum(e));pool.sort((a,b)=>Math.hypot(a.x-player.x,a.y-player.y)-Math.hypot(b.x-player.x,b.y-player.y));
+ return {live:live.length,tower:live.filter(e=>e.r170Tower).length,hidden:live.filter(hid).length,summon:live.filter(sum).length,pool:pool.length,
+  nearest:pool.slice(0,6).map(e=>({id:String(e.id).slice(-26),d:+Math.hypot(e.x-player.x,e.y-player.y).toFixed(1),spot:!!(placeNear(e,d0)||placeNear(e,d0+.8)||placeNear(e,d0+1.6)),state:e.spawnState||null})),zone:typeof zone==='string'?zone:null};}
 const still=id=>{const e=room.enemies.find(v=>v.id===id);return !!e&&e.hp>0&&Math.hypot(e.x-player.x,e.y-player.y)<HEROES[player.hero].range+3;};
 function pickEnemy(){const pool=room.enemies.filter(e=>e.hp>0&&!e.boss&&e.visible!==false&&!['hidden','inactive','disabled','despawned'].includes(e.spawnState));pool.sort((a,b)=>Math.hypot(a.x-player.x,a.y-player.y)-Math.hypot(b.x-player.x,b.y-player.y));return pool[0]||null;}
 const tp=(q)=>{player.x=q.x;player.y=q.y;route=[];command=null;};
@@ -65,5 +71,5 @@ async function heroDrawn(){await new Promise(r=>setTimeout(r,80));const map=new 
  try{draw();}finally{drawHero=base;}
  const h=player.hero,low=seen.map(k=>k.toLowerCase());
  return {calls,n,hero:[...new Set(low.filter(k=>k.includes(h)))].slice(0,4),others:[...new Set(low.filter(k=>/hero/.test(k)&&!k.includes(h)).map(k=>(k.match(/(hwando|seoha|neon|michaela|lauren|hunter|slayer|gunner)/)||[])[1]).filter(Boolean))],pose:heroPose()};}
-window.__HQ795={engage,still,heroDrawn,hudCd,seenF,resetSeen(){seenF.aa=false;seenF.sa=false;},viol,lock,step,sweep,snap,findOpen,placeNear,pickEnemy,tp,enemyHpSum,dummyMove,DIRS8,openAt,nearestLive,statusLabels,setTag:t=>{tag=t;lock.since=null;},drain(){const v=viol.splice(0),l=lock.rows.splice(0);return {viol:v,locks:l};}};
+window.__HQ795={engage,engageWhy,still,heroDrawn,hudCd,seenF,resetSeen(){seenF.aa=false;seenF.sa=false;},viol,lock,step,sweep,snap,findOpen,placeNear,pickEnemy,tp,enemyHpSum,dummyMove,DIRS8,openAt,nearestLive,statusLabels,setTag:t=>{tag=t;lock.since=null;},drain(){const v=viol.splice(0),l=lock.rows.splice(0);return {viol:v,locks:l};}};
 })();
