@@ -236,6 +236,7 @@ const USE=Object.freeze({
  depot:{main:['wardrobe2','cases','wardrobe','case1','trash'],side:['wardrobe','cases','case1'],corner:'wardrobe_n',cap:[5,3],lim:{wardrobe:5,case:5}},
  archive:{main:['shelf2','shelf1','shelf2','desk'],side:['shelf1','case1','shelf2'],corner:'wardrobe_n',cap:[5,3],lim:{shelf:8}},
  counsel:{main:['sofaL','desk','chairs2','shelf1'],side:['shelf1','chairs2','wardrobe'],corner:null,cap:[4,2]},
+ locker:{main:['wardrobe2','chairs2','wardrobe2','wardrobe'],side:['wardrobe','chairs2','case1'],corner:'wardrobe_n',cap:[4,3],lim:{wardrobe:7}},/* 탈의실: 옷장 줄과 걸터앉는 의자 */
  hall:{main:['parked','wheel','crutch'],side:[],corner:null,cap:[1,0],min:5,more:false},
  passage:{main:['trash','case1'],side:[],corner:null,cap:[1,0],min:5,more:false}
 });
@@ -258,9 +259,11 @@ const SKIP=/보스|전투실|다음 구역|갈림길|순환로|마당|쉼길/;
 //  첫 묶음: 방 이름이 정본에서 온 '방' 구역 7곳만(미술관 회랑 RA-3 은 맞는 그림이 없어 뺌). 방 이름 → 본편과 같은 가구 묶음. 맞는 그림이 없는 방(도겸의 방·전시실·학교 창가·정원 문 …)과 복도는 비운다(지어내지 않는다).
 //  S-02 학교(이미 책상·캐비닛 줄이 있음)와 처치·호위용 추가 구역은 손대지 않는다. 방 가운데 3.2칸(기억 조각·전투 자리)은 비운다. 이미 있는 조형물은 쉬게 하지 않는다.
 //  끄기: localStorage['storyworld.r523.rooms']='{"on":true,"samong":false}'
-const SAMONG_ZONES=Object.freeze(['sz115-S04-3','sz115-S04-4','sz115-S05-3','sz115-S06-2','sz115-S06-22','sz115-RA-5','sz115-M-4']);
+const SAMONG_ZONES=Object.freeze(['sz115-S04-3','sz115-S04-4','sz115-S05-3','sz115-S06-2','sz115-S06-22','sz115-RA-5','sz115-M-4',
+ 'sz115-S01-3','sz115-S04-2','sz115-S05-1','sz115-S07-1','sz115-RG-11','sz115-S03-1']);/* 둘째 줄 = 둘째 묶음(R732): 홀 구역의 이름 있는 방. 대합실·화형식당(RB-1·RB-4)은 맘몬 지역(ep1b06)을 빌려 쓰므로 넣지 않는다 */
 const SAMONG=Object.freeze([[/^식당( 안쪽)?$/,'canteen'],[/^주방$/,'ranges'],[/^배식구$/,'prep'],[/^경비실$/,'security'],[/^숙직실$/,'bedroom'],[/^창고$/,'depot'],[/^사무실$/,'study'],[/^서류 창고$/,'archive'],
- [/^대기실$/,'lobby7'],[/^의료 지원반$/,'inject'],[/^서버 냉각실$/,'plant'],[/^원룸 철문 앞$/,'foyer'],[/^좁은 원룸$/,'bedroom'],[/^병동$/,'observe'],[/^병실$/,'observe'],[/^상담실$/,'counsel'],[/^간호사실$/,'drug']]);
+ [/^대기실$/,'lobby7'],[/^의료 지원반$/,'inject'],[/^서버 냉각실$/,'plant'],[/^원룸 철문 앞$/,'foyer'],[/^좁은 원룸$/,'bedroom'],[/^병동$/,'observe'],[/^병실$/,'observe'],[/^상담실$/,'counsel'],[/^간호사실$/,'drug'],
+ [/^(긴 )?식탁의 방$/,'canteen'],[/^술집$/,'canteen'],[/^로비$/,'lobby7'],[/^문간$/,'foyer'],[/^탈의실$/,'locker']]);
 const SM_CENTER=3.2;
 const smOn=L=>!!(prefs.samong&&L&&L.samongR115&&SAMONG_ZONES.includes(L.samongR115.zone)&&Array.isArray(L.worldR74?.rooms));
 const pickUse=(table,name,k)=>{name=String(name||'');if(!name||SKIP.test(name))return null;for(const[re,u]of table||[])if(re.test(name))return Array.isArray(u)?u[(Math.max(1,k|0)-1)%u.length]:u;return null;};
@@ -271,9 +274,9 @@ function roomsOf(L){let a=roomMemo.get(L);if(a)return a;
  if(smOn(L))a=L.worldR74.rooms.map((q,i)=>q&&(q.kind==='room'||q.kind==='hall')&&fin(q.x+q.y+q.w+q.h)?{id:i,x0:q.x,y0:q.y,x1:q.x+q.w,y1:q.y+q.h,name:String(q.name||'')}:null).filter(Boolean);
  else{const names=new Map((L.worldR74?.rooms||[]).map(q=>[q.id,q.name||q.purpose||'']));a=(L.r224Rooms||[]).map(q=>({id:q.id,x0:q.x0,y0:q.y0,x1:q.x1,y1:q.y1,name:names.get(q.id)||''}));}
  roomMemo.set(L,a);return a;}
-const enabled=r=>!!(prefs.on&&r&&r.exploration&&Array.isArray(r.props)&&(smOn(r.exploration)||(REGION[r.id]&&(!r.layer||r.layer==='STORY')&&Array.isArray(r.exploration.r224Rooms)&&!r.exploration.samongR103&&!r.exploration.samongR115)));
+const enabled=r=>!!(prefs.on&&r&&r.exploration&&Array.isArray(r.props)&&((r.id!=='ep1b06'&&smOn(r.exploration))||(REGION[r.id]&&(!r.layer||r.layer==='STORY')&&Array.isArray(r.exploration.r224Rooms)&&!r.exploration.samongR103&&!r.exploration.samongR115)));
 const useOf=(id,name,k=1)=>pickUse(REGION[id],name,k);
-const useIn=(r,name,k)=>smOn(r.exploration)?samongUse(name,k):useOf(r.id,name,k);
+const useIn=(r,name,k)=>r.id!=='ep1b06'&&smOn(r.exploration)?samongUse(name,k):useOf(r.id,name,k);
 
 // ---- 벽 줄 찾기 -------------------------------------------------------------------------------------
 //  방 사각형 안 바닥 칸마다 북쪽(-y)·서쪽(-x)으로 반 칸 안에 벽(바닥 밖·벽 상자)이 있는지 본다. 벽 면 좌표가 같은 칸이 이어진 것이 한 줄.
