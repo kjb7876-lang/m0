@@ -1,0 +1,51 @@
+{
+ "schema": "r700-boss-clean-v1",
+ "why": "사용자 2026-11-11 00:57Z 보스들 특히 7대죄 이미지 일관성 및 품질 전수조사검사 개선. 공격 그림만 회백 테두리.",
+ "originalsModified": false,
+ "images": [
+  {
+   "path": "assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp",
+   "use": "질투(b03) 0단계 공격",
+   "input": "assets/r425/clean/assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp",
+   "sourceSha256": "083f149314d7f8ed68dded439d3b87557bd5432ba37b51b17076deb180102cdc",
+   "ops": [
+    "defringe-recolor",
+    "white-fx-recolor"
+   ],
+   "fixedPx": 7040,
+   "whiteFxPx": 2855,
+   "output": "assets/r700/clean/assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp",
+   "outputSha256": "c6048ea4aa403b998e0bf8c3f547e3cc5dadf589e4ca1201b78c6ae86de445ee",
+   "outputBytes": 71510
+  },
+  {
+   "path": "assets/generated-v31224/actors-normalized/27ef01c10a8f_gluttony-human-attack.webp",
+   "use": "탐식(b04) 0단계 공격",
+   "input": "assets/r99/clean/assets/generated-v31224/actors-normalized/27ef01c10a8f_gluttony-human-attack.webp",
+   "sourceSha256": "a2ece51424165bb73a2fc06a956d1f6d7341ae9d164004a63efb4c36a83603d0",
+   "ops": [
+    "defringe-recolor"
+   ],
+   "fixedPx": 9188,
+   "whiteFxPx": 0,
+   "output": "assets/r700/clean/assets/generated-v31224/actors-normalized/27ef01c10a8f_gluttony-human-attack.webp",
+   "outputSha256": "e479fbef4925512ed13d539b6b98c08e520030f211f3c1286552fd8b80875b24",
+   "outputBytes": 92344
+  },
+  {
+   "path": "assets/generated-v31224/actors-normalized/53c9ce212489_lust-human-attack.webp",
+   "use": "색욕(b05) 0단계 공격",
+   "input": "assets/r99/clean/assets/generated-v31224/actors-normalized/53c9ce212489_lust-human-attack.webp",
+   "sourceSha256": "cb2267aabbcac2e93b282200a9057c680a31bc1c22b88b6c2ced032e19dabf3b",
+   "ops": [
+    "defringe-recolor",
+    "white-fx-recolor"
+   ],
+   "fixedPx": 7095,
+   "whiteFxPx": 569,
+   "output": "assets/r700/clean/assets/generated-v31224/actors-normalized/53c9ce212489_lust-human-attack.webp",
+   "outputSha256": "6b1c785e71936f7510fd7fb551eb0143796360fc951752ff76c84c305cde8088",
+   "outputBytes": 76166
+  }
+ ]
+}

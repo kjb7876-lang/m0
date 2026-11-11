@@ -460,6 +460,8 @@ jobs:
         run: node r96/qa/r461/r461-cpu-check.cjs
       - name: R600 survival mode (pixel entry replaced, arena, narration-timed spawns, core, 3-choice upgrades, endless maps) CPU check
         run: node r96/qa/r600/r600-cpu-check.cjs
+      - name: R701 survival 77s choice window, difficulty, hero picker CPU check
+        run: node r96/qa/r701/r701-cpu-check.cjs
       - name: R463 seven-sins boss art (one form per fight, one body height, no cut-out broom) CPU check
         run: node r96/qa/r463/r463-cpu-check.cjs
       - name: R511 empty samong rooms get a guarded memory shard CPU check
@@ -545,6 +547,8 @@ jobs:
         run: node r96/qa/r255/r255-cpu-check.cjs
       - name: R682 boss entry name card redesign (no zigzag red line) CPU check
         run: node r96/qa/r682/boss-title-cpu-check.cjs
+      - name: R712 CC0 pixel-3D treasure chest art CPU check
+        run: node r96/qa/r712/chest-cpu-check.cjs
       - name: R256 widen passages on all organic maps CPU check
         run: node r96/qa/r256/r256-cpu-check.cjs
       - name: R258 wider pre-boss gathering room CPU check
@@ -603,6 +607,8 @@ jobs:
         run: node r96/qa/r660/death-lag-cpu-check.cjs
       - name: R690 mob death overlap/lag (R462-owned deaths skip R91 generic remains/sheet and R165 smoke; pieces cut once in 2D, corpses baked to one image) CPU check
         run: node r96/qa/r690/r690-cpu-check.cjs
+      - name: R691 mob death atlas retention (each death/corpse keeps its own piece atlas; no LRU thrash with 48+ concurrent deaths, cache stays bounded) CPU check
+        run: node r96/qa/r691/r691-cpu-check.cjs
       - name: R481 outdoor groves (understory around trees, small woods on bare back rims) CPU check
         run: node r96/qa/r481/grove-r481-cpu-check.cjs
       - name: R482 worn trails from entry to doors/altar on outdoor floors CPU check
@@ -637,6 +643,8 @@ jobs:
         run: node r96/qa/r615/student-cpu-check.cjs
       - name: R620 boss motion CPU check
         run: node r96/qa/r620/r620-cpu-check.cjs
+      - name: R700 seven-sins boss art audit (size-lock heights match real art, no light matte fringe on drawn art, clean copies keep the body, originals kept) check
+        run: python r96/qa/r700/boss-art-check.py
       - name: R563 Michaela genesis chain (Q → sky light pillars, R → grand pillar + halo; no new keys, upright cross only, Dots MI sheets) CPU check
         run: node r96/qa/r563/michaela-genesis-cpu-check.cjs
       - name: R564 Seoha chrono chain (time stop shell + shatter, afterimage clones, haste; no new keys, caps, Dots SE sheets) CPU check

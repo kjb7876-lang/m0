@@ -1,0 +1,21 @@
+<!doctype html><html><body style="margin:0;background:transparent">
+<script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+window.render=async(name,opt={})=>{
+ const S=opt.size||256,r=new THREE.WebGLRenderer({antialias:false,alpha:true,preserveDrawingBuffer:true});r.setSize(S,S);r.setClearColor(0,0);r.outputColorSpace=THREE.SRGBColorSpace;
+ document.body.innerHTML='';document.body.appendChild(r.domElement);
+ const sc=new THREE.Scene();const g=await new GLTFLoader().loadAsync('glb/'+name+'.glb');const o=g.scene;
+ o.rotation.y=(opt.yaw||0)*Math.PI/180;sc.add(o);
+ o.traverse(m=>{if(m.isMesh){m.material.metalness=0;m.material.roughness=1;if(m.material.map){m.material.map.magFilter=THREE.NearestFilter;m.material.map.minFilter=THREE.NearestFilter;}}});
+ const box=new THREE.Box3().setFromObject(o),c=box.getCenter(new THREE.Vector3()),sz=box.getSize(new THREE.Vector3());
+ const el=(opt.elev??30)*Math.PI/180,az=(opt.az??45)*Math.PI/180,D=5;
+ const half=opt.half||Math.max(sz.x,sz.y,sz.z)*0.85;const cam=new THREE.OrthographicCamera(-half,half,half,-half,.01,50);
+ cam.position.set(c.x+D*Math.cos(el)*Math.sin(az),c.y+D*Math.sin(el),c.z+D*Math.cos(el)*Math.cos(az));cam.lookAt(c);
+ sc.add(new THREE.HemisphereLight(opt.sky??0xb8a890,opt.ground??0x1a1410,opt.amb??1.1));
+ const k=new THREE.DirectionalLight(opt.key??0xffd9a8,opt.ki??2.2);k.position.set(-2,4,3);sc.add(k);
+ if(opt.open!=null){r.localClippingEnabled=true;const h=opt.open,ang=(opt.lidAng??-105)*Math.PI/180;const lid=o.clone(true);lid.traverse(m=>{if(m.isMesh){m.material=m.material.clone();m.material.clippingPlanes=[new THREE.Plane(new THREE.Vector3(0,1,0),-h)];m.material.side=THREE.DoubleSide;}});o.traverse(m=>{if(m.isMesh){m.material.clippingPlanes=[new THREE.Plane(new THREE.Vector3(0,-1,0),h)];m.material.side=THREE.DoubleSide;}});const zb=box.min.z,piv=new THREE.Group();piv.position.set(0,h,zb);sc.add(piv);lid.position.set(0,-h,-zb);lid.rotation.y=0;piv.add(lid);piv.rotation.x=ang;
+  const inner=new THREE.Mesh(new THREE.PlaneGeometry(sz.x*.86,sz.z*.86),new THREE.MeshBasicMaterial({color:opt.innerColor??0x120c08}));inner.rotation.x=-Math.PI/2;inner.position.set(c.x,h-.02,c.z);sc.add(inner);}
+ r.render(sc,cam);return {url:r.domElement.toDataURL('image/png'),size:[sz.x,sz.y,sz.z]};};
+window.ready=true;
+</script></body></html>

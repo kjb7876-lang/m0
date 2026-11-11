@@ -33498,6 +33498,16 @@
       "sha256": "fee129e4bc5ef2dbec313910f2c8d8ee5209f83f785c78b802a9464251d86d45"
     },
     {
+      "path": "assets/r529/floor-lamp.webp",
+      "bytes": 5824,
+      "sha256": "2f1d9efcd8df6ba9f3f1fc79f1c32d0cfec6af64a19e57ffb5580bc334292508"
+    },
+    {
+      "path": "assets/r529/index.json",
+      "bytes": 940,
+      "sha256": "8ce518d63409bf0562bae36f137c8ea09a1e92431c6e7a7ef00daed43c5f25d6"
+    },
+    {
       "path": "assets/r535/dots/hunter-burn.webp",
       "bytes": 172484,
       "sha256": "c1a86ae57963283d6cda1de56b4269f87b0b1af45a1d76a8f92232bc0684ebec"
@@ -34476,6 +34486,36 @@
       "path": "assets/r667/title-video/loop.mp4",
       "bytes": 464055,
       "sha256": "46729ea44b9fd951ff240acdf79ce787a200a3d11f44344e270a470b9eec9598"
+    },
+    {
+      "path": "assets/r700/clean/assets/generated-v31224/actors-normalized/27ef01c10a8f_gluttony-human-attack.webp",
+      "bytes": 92344,
+      "sha256": "e479fbef4925512ed13d539b6b98c08e520030f211f3c1286552fd8b80875b24"
+    },
+    {
+      "path": "assets/r700/clean/assets/generated-v31224/actors-normalized/53c9ce212489_lust-human-attack.webp",
+      "bytes": 76166,
+      "sha256": "6b1c785e71936f7510fd7fb551eb0143796360fc951752ff76c84c305cde8088"
+    },
+    {
+      "path": "assets/r700/clean/assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp",
+      "bytes": 71510,
+      "sha256": "c6048ea4aa403b998e0bf8c3f547e3cc5dadf589e4ca1201b78c6ae86de445ee"
+    },
+    {
+      "path": "assets/r712/SOURCE.md",
+      "bytes": 1643,
+      "sha256": "caaa5272cd1aeb702272c80ec2369da8038dee8730578ece00e5f8cb708ecdce"
+    },
+    {
+      "path": "assets/r712/chest-closed.png",
+      "bytes": 20289,
+      "sha256": "c89abef3c935f6e6765328f41c292285997d49c60dce50928f9afcf37df3a73f"
+    },
+    {
+      "path": "assets/r712/chest-open.png",
+      "bytes": 30458,
+      "sha256": "7de5653e543aa67c3cde0ddd05baea8142b188876c6847114dbe76faf8e76d09"
     },
     {
       "path": "assets/r74/effects.png",
@@ -42523,6 +42563,11 @@
       "sha256": "b69a8451603bf3c840e301651d4a737ceb2a7441854318ba2926aaa7600982ef"
     },
     {
+      "path": "boss-art-r700.js",
+      "bytes": 2714,
+      "sha256": "f4d81a25c9d3fcc4e43cc97302d3f5c80227a666a4a2b21fa2fcd1c2799ea941"
+    },
+    {
       "path": "boss-cinematic-r568.js",
       "bytes": 29064,
       "sha256": "1065863b3594c6a21eb1f8727bc34a76364903c02cef7df2476514646fa83cb6"
@@ -43359,8 +43404,8 @@
     },
     {
       "path": "growth-r103.js",
-      "bytes": 19855,
-      "sha256": "25856c536913af24e3e2be46ad7891e275bb24f68354b6ef98095b413fd78f21"
+      "bytes": 20253,
+      "sha256": "a01446a27d43060d61490a697c6befe018a56a996ba6a88dac05d2c49f238ea6"
     },
     {
       "path": "guide-clear-r426.js",
@@ -43559,8 +43604,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6573823,
-      "sha256": "532fdb684d8df92ada48def16ffc983c626d4d047699ae4ba27218e345c0d7f6"
+      "bytes": 6573866,
+      "sha256": "50bb81bfe1c0759805da71ee259f6ce8826210ba5e192c1bed9f84b1480a9814"
     },
     {
       "path": "intro-r140.js",
@@ -43669,8 +43714,8 @@
     },
     {
       "path": "mob-death-r462.js",
-      "bytes": 34492,
-      "sha256": "1b8458aebfafc2c007a6b1b032230321e1e55e69f54afd4f96924b1bd9795789"
+      "bytes": 35250,
+      "sha256": "c1a810c589150cf51c496f56c3258798da684efecc1015e09660c00d7611db75"
     },
     {
       "path": "mob-dots-r374.js",
@@ -44024,8 +44069,8 @@
     },
     {
       "path": "rooms-r523.js",
-      "bytes": 48033,
-      "sha256": "cc80823230347f5bc23b8555ed5469809a1d076b45a8e478cc5af920677826a7"
+      "bytes": 48464,
+      "sha256": "c931fd3df2cf13cd8eaaafd2ae93bb3981c56a93aa7702a7249287e1a347c457"
     },
     {
       "path": "root-gate-video-r372.js",
@@ -44159,8 +44204,8 @@
     },
     {
       "path": "sin-boss-art-r463-data.js",
-      "bytes": 9711,
-      "sha256": "2603cb1055dd0a111f03eabffa371e46a463e522af2639005a4189da13cf7306"
+      "bytes": 9709,
+      "sha256": "8495551d9479380dcad125e7cb766bda1c4a6d748bc536a66365dfe1a47a90d2"
     },
     {
       "path": "sin-boss-art-r463.js",
@@ -44289,8 +44334,8 @@
     },
     {
       "path": "survival-r600.js",
-      "bytes": 52741,
-      "sha256": "7ecc67e6b50ce0f06d1bc0c0c78fd886c2c9c22caf3915e3fc7668da95b4d85a"
+      "bytes": 60139,
+      "sha256": "2614e042c55ed642d79446dd51f006e5fbb08010e9ff59f9f60846def30132c3"
     },
     {
       "path": "swamp-hands-r474.js",
@@ -44314,8 +44359,8 @@
     },
     {
       "path": "title-bg-video-r667.js",
-      "bytes": 8303,
-      "sha256": "5e8ec25a234f63e8c7e2d3cd39c3525db494bbb3543785fda28e6addbc40e183"
+      "bytes": 8726,
+      "sha256": "8eea5171d3cbb23e58b60d78b4ac03ba9eeff318fc547c840bf69075705fa018"
     },
     {
       "path": "trail-r482.js",
@@ -44523,9 +44568,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8904,
-  "totalBytes": 1228381464,
-  "webHTMLSha256": "532fdb684d8df92ada48def16ffc983c626d4d047699ae4ba27218e345c0d7f6",
+  "fileCount": 8913,
+  "totalBytes": 1228692801,
+  "webHTMLSha256": "50bb81bfe1c0759805da71ee259f6ce8826210ba5e192c1bed9f84b1480a9814",
   "largest": [
     {
       "path": "index.html",
