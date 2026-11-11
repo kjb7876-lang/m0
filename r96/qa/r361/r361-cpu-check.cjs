@@ -19,9 +19,6 @@ OLD=swap(OLD,"(file==='play-r111'&&T111.test(String(stack)))","(file==='play-r11
 OLD=swap(OLD," const k=k0+'|'+h+'|'+kind;"," let k;try{const P=SP0.pal(F);k=P.a.join()+'|'+P.b.join()+'|'+h+'|'+kind;}catch(_){return F;}");
 ok(!/SHORT|spFull|T111|needFull|k0/.test(OLD),'old code reconstructed');
 // 스택 칸 세기: prepareStackTrace 로 V8 기본 모양과 같은 글을 만들면서 칸 수를 센다(②에서만 씀)
-// R800: 새 코드는 스택을 잡는 동안만 자기 형식기(stackFmt, 파일·함수 이름만)를 끼워 전역 형식기를 부르지 않는다.
-//  ②③의 칸 세기만 하는 계측 사본 NEWC: 그 형식기가 바깥 형식기(COUNT)에도 같은 칸(stackNow 자신 한 칸 뺌)을 보여 준다. 판정 코드는 NEW 그대로.
-const NEWC=NEW.includes('Error.prepareStackTrace=stackFmt')?NEW.replace('Error.prepareStackTrace=stackFmt','Error.prepareStackTrace=(e,cs)=>{if(typeof P===\'function\')P(e,cs.slice(1));return stackFmt(e,cs);}'):NEW;
 let frames=0,caps=0;const COUNT=(e,cs)=>{frames+=cs.length;caps++;return String(e.name||'Error')+(e.message?': '+e.message:'')+cs.map(c=>'\n    at '+c).join('');};
 function engine(SRC){const g={console,Math,JSON,Object,Array,Map,Set,WeakMap,WeakSet,String,Number,Error,RegExp,Promise,performance:{now:()=>0}};g.window=g;g.globalThis=g;
  g.localStorage={s:{},getItem(k){return this.s[k]??null;},setItem(k,v){this.s[k]=v;}};g.document={createElement:()=>({getContext:()=>null})};
@@ -79,16 +76,16 @@ for(const seed of [7,99,2024]){const a=drive(OLD,false,{shuffle:seed}).out,b=dri
  ok(pick(B,'threadSlashDeep').got===pick(A,'threadSlashDeep').got,'deep threadSlash same as before');}
 // ② 성능 성질: 칸 수
 {const typ={files:FILES.filter(f=>f!=='play-r111.js'&&f!=='index.html'),shapes:['direct','method','ctor','bossFn','threadSlash','arrow']};
- const C0=drive(OLD,true,typ).out,C1=drive(NEWC,true,typ).out;
+ const C0=drive(OLD,true,typ).out,C1=drive(NEW,true,typ).out;
  const per=o=>o.reduce((a,r)=>a+r.frames,0)/Math.max(1,o.reduce((a,r)=>a+r.draws,0));
- const A0=drive(OLD,true).out,A1=drive(NEWC,true).out;
+ const A0=drive(OLD,true).out,A1=drive(NEW,true).out;
  console.log('stack frames per draw: typical old '+per(C0).toFixed(2)+' new '+per(C1).toFixed(2)+'; all test shapes old '+per(A0).toFixed(2)+' new '+per(A1).toFixed(2));
  ok(per(C0)>=10,'old code captures the full 10 frames per typical draw');
  ok(per(C1)<=4,'new code captures at most 4 frames per typical draw');
  ok(C1.every(r=>r.caps===r.draws),'one capture per typical draw');
  ok(per(A1)<per(A0),'fewer frames overall');
  // R111: threadSlash 는 4칸 안에서 찾음, 보스 함수는 처음 한 번만 두 번 잡고 그 뒤 바로 전체, 같은 팔레트를 다른 파일이 쓰면 기억을 지움
- const E=engine(NEWC),X=PALS[3],Y=PALS[2];const mk=(file,sh)=>E.run(file,'(function(){'+SHAPES[sh]+';return go;})()');
+ const E=engine(NEW),X=PALS[3],Y=PALS[2];const mk=(file,sh)=>E.run(file,'(function(){'+SHAPES[sh]+';return go;})()');
  const one=(go,F)=>{frames=0;caps=0;Error.prepareStackTrace=COUNT;try{E.g.ENG(()=>go(F));}finally{Error.prepareStackTrace=undefined;}return[caps,frames];};
  const boss=mk('play-r111.js','bossFn'),thr=mk('play-r111.js','threadSlash'),heroF=mk('skills-r209.js','bossFn');
  // R441: 보스 함수도 4칸으로 판정 끝 — 예전 [[2,14],[1,10],[1,10]](두 번 잡고 그 뒤 늘 전체) → 늘 4칸 한 번
@@ -97,7 +94,7 @@ for(const seed of [7,99,2024]){const a=drive(OLD,false,{shuffle:seed}).out,b=dri
  // R441: 보스 호출이 더는 '전체 스택' 기억을 남기지 않으므로 다른 파일의 같은 팔레트도 처음부터 4칸
  ok(JSON.stringify([one(heroF,X),one(heroF,X)])==='[[1,4],[1,4]]','same palette from another file: short stack (R441)');}
 // ③ 끄기·영웅 없음: 스택 안 잡음
-{const E=engine(NEWC);const go=E.run('skills-r209.js',"(function(){return F=>__STORYWORLD_FX_SPRITES_R106__.draw('glow',F,0,0);})()");
+{const E=engine(NEW);const go=E.run('skills-r209.js',"(function(){return F=>__STORYWORLD_FX_SPRITES_R106__.draw('glow',F,0,0);})()");
  E.g.player.hero='nobody';caps=0;Error.prepareStackTrace=COUNT;try{go(PALS[0]);}finally{Error.prepareStackTrace=undefined;}ok(caps===0,'no hero: no capture');
  E.g.player.hero='neon';E.g.__STORYWORLD_HERO_PALETTE_R302__.set(false);caps=0;Error.prepareStackTrace=COUNT;try{go(PALS[0]);}finally{Error.prepareStackTrace=undefined;}ok(caps===0&&E.calls.at(-1).a.join()==='40,170,176','off: no capture, original');
  ok(Error.stackTraceLimit===10,'stackTraceLimit restored');}
