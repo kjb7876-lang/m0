@@ -8188,7 +8188,31 @@
     "assets/r790/npc/seoyun-bust.webp",
     "assets/r790/npc/seoyun-idle6.webp",
     "assets/r790/npc/yigyeong-bust.webp",
-    "assets/r790/npc/yigyeong-idle6.webp"
+    "assets/r790/npc/yigyeong-idle6.webp",
+    "assets/r810/boat.webp",
+    "assets/r810/decoction-brazier.webp",
+    "assets/r810/fish-rack.webp",
+    "assets/r810/herb-rack.webp",
+    "assets/r810/herb-trays.webp",
+    "assets/r810/index.json",
+    "assets/r810/jangdok.webp",
+    "assets/r810/lantern-post-off.webp",
+    "assets/r810/lantern-post.webp",
+    "assets/r810/ruined-house.webp",
+    "assets/r810/seaweed-1.webp",
+    "assets/r810/seaweed-2.webp",
+    "assets/r810/seaweed-3.webp",
+    "assets/r810/shoes-stone.webp",
+    "assets/r810/talisman-post.webp",
+    "assets/r810/talisman-rope-l.webp",
+    "assets/r810/talisman-rope-r.webp",
+    "assets/r810/thatched-hut-a.webp",
+    "assets/r810/thatched-hut-b.webp",
+    "assets/r810/tiled-house-b-i.webp",
+    "assets/r810/tiled-house-b-l.webp",
+    "assets/r810/tiled-house-b-r.webp",
+    "assets/r810/yakbang-house-a.webp",
+    "assets/r810/yakbang-house-b.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9263,5 +9287,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "55cb29ce5c23e36cdae259011596e412b592bce43915a7c1cffe07e93ee74963"
+  "runtimeManifestSHA256": "40307938fb1be946121aadb94914f50fa675c0dd8f46c58b59426ef4b1415c39"
 }

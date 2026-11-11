@@ -18,7 +18,9 @@ if(!api||!FX.last302){console.log('\nR730 '+(n-bad)+'/'+n+' passed (stopped earl
 const PX=34,SUM=17;
 for(const id of['last302','last303']){const fx=FX[id],P=api.plan(fx),P2=api.plan(JSON.parse(JSON.stringify(fx)));
  const Fset=new Set(fx.floorCells.map(([x,y])=>x+','+y)),onFloor=p=>Fset.has(Math.floor(p.x)+','+Math.floor(p.y));
- const houses=P.filter(p=>p.kind==='house'),floor=P.filter(p=>p.kind!=='house'),lamps=P.filter(p=>p.kind==='lamp');
+ // R810: 집 앞 언덕 소품(댓돌 신발·장독대)은 집처럼 언덕 위(바닥 밖)에 서고, 등롱대(post)는 석등과 같은 길 등불로 센다
+ const HILL=new Set(['shoes','jang','yakfire','trays'])/* R811: 약방 집 앞 화로·소반도 집 언덕 위 */,houses=P.filter(p=>p.kind==='house'),hill=P.filter(p=>HILL.has(p.kind)),floor=P.filter(p=>p.kind!=='house'&&!HILL.has(p.kind)),lamps=P.filter(p=>p.kind==='lamp'||p.kind==='post');
+ ok(id+': R810 hill props (shoes on the doorstone, jangdok) sit off the floor at a house lift',hill.length>=2&&hill.every(p=>!onFloor(p)&&p.lift>0&&houses.some(h=>h.lift===p.lift&&Math.hypot(h.x-p.x,h.y-p.y)<4)),hill.filter(p=>onFloor(p)).slice(0,3));
  ok(id+': deterministic',JSON.stringify(P)===JSON.stringify(P2));
  ok(id+': ids unique, r730 prefix, all art paths under assets/',new Set(P.map(p=>p.id)).size===P.length&&P.every(p=>/^r730:/.test(p.id)&&/^assets\//.test(p.path)&&p.height>20));
  ok(id+': enough houses to read as a village ('+houses.length+')',houses.length>=(id==='last302'?16:6)&&houses.length<=32);
@@ -43,14 +45,15 @@ for(const id of['last302','last303']){const fx=FX[id],P=api.plan(fx),P2=api.plan
  //  R412 의 3D 벽 검사(그림 불투명 점의 3%까지)로 실측한 결과(헤드리스, last302·303 전수): 칸 시작에서 안쪽으로 나무 1.75칸·석등 1.0칸·향로 0.75칸·기와 더미 0.75칸 이상이어야 0~3%.
  //  그래서 뒤쪽 끝에서 안쪽으로 띄운 거리가 종류별 최소 이상이고, 그래도 길 한가운데로 나오지 않게 3칸 안에 있어야 한다.
  const insetOf=p=>{let a=Math.floor(p.y);while(Fset.has(Math.floor(p.x)+','+(a-1)))a--;let b=Math.floor(p.x);while(Fset.has((b-1)+','+Math.floor(p.y)))b--;return Math.min(p.y-a,p.x-b);};
- const MINI={tree:1.75,lamp:1.0,censer:.75,giwa:.75};
+ const MINI={tree:1.75,lamp:1.0,censer:.75,giwa:.75,post:1.0,rope:1.0,boat:1.75,rack:1.75,herbrack:1.0,tpost:1.0,seaweed:.5,deadpost:1.0};/* R814 꺼진 등롱대는 등롱대(post)와 같은 그림 크기 *//* R812 미역 무더기는 높이 22px 로 바닥에 깔려 절벽에 감길 일이 없다 *//* R810 새 길 가 소품: 등롱대는 석등과 같게, 금줄은 석등만큼, 배·건조대는 나무만큼 띄운다 */
  ok(id+': lane props stand back far enough from the cliff behind them (tree 1.75, lamp 1.0, censer/giwa .75 cells from the back edge)',floor.every(p=>insetOf(p)>=MINI[p.kind]-1e-9),floor.filter(p=>insetOf(p)<MINI[p.kind]-1e-9).map(p=>p.kind+'@'+p.x+','+p.y+':'+insetOf(p)).slice(0,4));
  ok(id+': lane props still hug the back lane edge (never mid-lane, within 3 cells)',floor.every(p=>insetOf(p)<=3));
  ok(id+': total stays modest ('+P.length+')',P.length<=80);}
 // 방에 붙이기
 {const fx=FX.last302,room={id:'last302',layer:'STORY',props:fx.props.map(p=>({...p})),exploration:{floorCells:fx.floorCells,worldR74:{rooms:fx.rooms,doors:fx.doors},worldWardR81:{bossBounds:fx.ward.boss,gatherBounds:fx.ward.gather},entry:fx.entry}};
  const before=room.props.length;api.apply(room);const added=room.props.filter(p=>p.r730);api.apply(room);
- ok('lane props are left for R412 to measure against the walls (houses on the hill are exempt)',added.filter(p=>p.r730!=='house').every(p=>!p.r412Wall)&&added.filter(p=>p.r730==='house').every(p=>p.r412Wall===1));
+ const onHill=p=>p.r730==='house'||p.r730==='shoes'||p.r730==='jang';/* R810: 집 앞 언덕 소품도 집처럼 제외 */
+ ok('lane props are left for R412 to measure against the walls (houses on the hill are exempt)',added.filter(p=>!onHill(p)).every(p=>!p.r412Wall)&&added.filter(onHill).every(p=>p.r412Wall===1));
  ok('apply adds once (idempotent), keeps existing props',added.length>20&&room.props.length===before+added.length&&room.props.slice(0,before).every((p,i)=>p.id===fx.props[i].id));
  ok('added props are decoration only',added.every(p=>p.solid!==true&&p.interactive===false&&p.autoTargetEligible6===false));
  ok('houses carry the lift and face the lane (flip on -x side)',added.filter(p=>p.r730==='house').every(p=>p.visualLiftPx>0)&&added.some(p=>p.r303Flip));
