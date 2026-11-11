@@ -13,7 +13,7 @@ concurrency:
 jobs:
   verify:
     runs-on: ubuntu-22.04
-    timeout-minutes: 55
+    timeout-minutes: 65
     steps:
       - uses: actions/checkout@v6
         with:
@@ -719,8 +719,9 @@ jobs:
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0
           # 러너 apt 미러 DNS 장애(2026-11-11 'Temporary failure resolving azure.archive.ubuntu.com')로 글꼴 패키지 설치가 실패해도
-          # 브라우저 검사가 돌게: OS 의존성은 두 번까지 시도하고, 안 되면 경고를 남기고 Chromium 만 받는다(러너 이미지에 Chrome 라이브러리 있음).
-          ok=0; for i in 1 2; do if timeout 420 npx playwright install --with-deps chromium; then ok=1; break; fi; echo "playwright --with-deps attempt $i failed"; sleep 15; done
+          # 브라우저 검사가 돌게: OS 의존성은 한 번(240초) 시도하고, 안 되면 경고를 남기고 Chromium 만 받는다(러너 이미지에 Chrome 라이브러리 있음).
+          # 미러 이름이 안 풀리면 apt 를 아예 건너뛴다(2026-11-11 두 번의 420초 시도가 15분을 먹어 55분 작업 제한에 걸렸음).
+          ok=0; if getent hosts azure.archive.ubuntu.com >/dev/null && getent hosts security.ubuntu.com >/dev/null; then if timeout 240 npx playwright install --with-deps chromium; then ok=1; fi; else echo "apt mirror DNS unavailable — skip OS deps"; fi
           if [ "$ok" != 1 ]; then echo "::warning::apt 의존성 설치 실패 — OS 의존성 없이 Chromium 만 설치"; npx playwright install chromium; fi
       - name: Browser start, save, portal, exact atlas decode and native status lifecycle
         env:
@@ -808,8 +809,9 @@ jobs:
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0
           # 러너 apt 미러 DNS 장애(2026-11-11 'Temporary failure resolving azure.archive.ubuntu.com')로 글꼴 패키지 설치가 실패해도
-          # 브라우저 검사가 돌게: OS 의존성은 두 번까지 시도하고, 안 되면 경고를 남기고 Chromium 만 받는다(러너 이미지에 Chrome 라이브러리 있음).
-          ok=0; for i in 1 2; do if timeout 420 npx playwright install --with-deps chromium; then ok=1; break; fi; echo "playwright --with-deps attempt $i failed"; sleep 15; done
+          # 브라우저 검사가 돌게: OS 의존성은 한 번(240초) 시도하고, 안 되면 경고를 남기고 Chromium 만 받는다(러너 이미지에 Chrome 라이브러리 있음).
+          # 미러 이름이 안 풀리면 apt 를 아예 건너뛴다(2026-11-11 두 번의 420초 시도가 15분을 먹어 55분 작업 제한에 걸렸음).
+          ok=0; if getent hosts azure.archive.ubuntu.com >/dev/null && getent hosts security.ubuntu.com >/dev/null; then if timeout 240 npx playwright install --with-deps chromium; then ok=1; fi; else echo "apt mirror DNS unavailable — skip OS deps"; fi
           if [ "$ok" != 1 ]; then echo "::warning::apt 의존성 설치 실패 — OS 의존성 없이 Chromium 만 설치"; npx playwright install chromium; fi
       - name: Verify actual public start, save reload, E portal and status effects
         env:
