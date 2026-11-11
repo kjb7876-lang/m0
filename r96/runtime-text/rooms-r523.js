@@ -389,13 +389,14 @@ window.__STORYWORLD_ROOMS_R523__=Object.freeze({revision:REV,ART,G,USE,REGION,LI
 //  · 몹·보스는 R760(bulmyeongwi-r760.js) 스레드가 맡는다. 등롱·부적 줄·댓돌 신발·장독대·약방은 Dots 그림이 오면 2차로 더한다(지금은 기존 그림만).
 (()=>{'use strict';
 if(window.__STORYWORLD_VILLAGE_R730__)return;
-const REV='R730-village-1',KEY='storyworld.r730.village',PX=34,SUM=17,BACK=3.6,MARGIN=1;
+const REV='R730-village-2',KEY='storyworld.r730.village',PX=34,SUM=17,BACK=3.6,MARGIN=1;
 const prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;}catch(_){}
 const stats={rooms:0,placed:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,400);};
 const HOUSE=Object.freeze([
  Object.freeze({path:'assets/world-r80/r80-010.webp',height:200,aspect:512/367}),
  Object.freeze({path:'assets/world-r80/r80-010.webp',height:184,aspect:512/367}),
  Object.freeze({path:'assets/r414/buildings/waterside-house.webp',height:172,aspect:600/356})]);
+const HANOK='assets/world-r80/r80-010.webp',HANOK_LIT='assets/r730/tiled-house-lit.webp';/* r80-010 의 창호에 호박색 불빛을 넣은 파생본(qa/r730/make-lit-house.py) */
 const LAMP=Object.freeze({path:'assets/r92/lights/lights_regional_03.png',height:84}),CENSER=Object.freeze({path:'assets/r92/lights/lights_regional_02.png',height:52}),
  TREE=Object.freeze({path:'assets/r299/tree.webp',height:150}),GIWA=Object.freeze({path:'assets/world-r80/r80-007.webp',height:44});
 const ZONE=Object.freeze({last302:Object.freeze({houses:26,lamps:20,yards:/작은 마당|외곽 쉼길/,giwa:3}),last303:Object.freeze({houses:12,lamps:14,yards:/작은 마당|외곽 쉼길/,giwa:5})});
@@ -414,8 +415,10 @@ function plan(fx){const Z=ZONE[fx.id];if(!Z)return[];const F=new Set(),diag=new 
   if(covers(fx_,fy,D,(v.height+lift)/SUM))continue;if((fx.doors||[]).some(d=>Math.hypot(d.x-fx_,d.y-fy)<4+D))continue;
   cand.push({k:near(e.x+.5,e.y+.5)+(h32('k'+e.x+','+e.y+e.side)%100)/50,e,v,D,lift,x:+fx_.toFixed(2),y:+fy.toFixed(2)});}
  cand.sort((a,b)=>a.k-b.k||a.e.y-b.e.y||a.e.x-b.e.x);
- const out=[],houses=[];for(const c of cand){if(houses.length>=Z.houses)break;const s0=c.x-c.y,sm=c.x+c.y;if(houses.some(h=>Math.abs(h.s0-s0)<h.D+c.D+.5&&Math.abs(h.sm-sm)<9))continue;
-  houses.push({s0,sm,D:c.D,e:c.e});out.push({id:'r730:'+fx.id+':house:'+c.e.x+'_'+c.e.y+c.e.side,kind:'house',path:c.v.path,height:c.v.height,aspect:c.v.aspect,lift:c.lift,x:c.x,y:c.y,side:c.e.side});}
+ const out=[],houses=[],litAt=[];let hk=0;for(const c of cand){if(houses.length>=Z.houses)break;const s0=c.x-c.y,sm=c.x+c.y;if(houses.some(h=>Math.abs(h.s0-s0)<h.D+c.D+.5&&Math.abs(h.sm-sm)<9))continue;
+  // 2차: 잠들지 못하는 집 — 기와집 셋에 하나는(길에서 가까운 순서로 세어, 난수 없이) 창에 불이 켜진 그림(같은 크기라 자리·가림 계산은 그대로). 불 켜진 집끼리는 6칸 넘게 띄운다
+  let hp=c.v.path;if(hp===HANOK&&hk++%3===1){if(!litAt.some(q=>Math.hypot(q.x-c.x,q.y-c.y)<6)){hp=HANOK_LIT;litAt.push({x:c.x,y:c.y});}else hk--;/* 너무 가까우면 다음 기와집으로 미룬다 */}
+  houses.push({s0,sm,D:c.D,e:c.e});out.push({id:'r730:'+fx.id+':house:'+c.e.x+'_'+c.e.y+c.e.side,kind:'house',path:hp,height:c.v.height,aspect:c.v.aspect,lift:c.lift,x:c.x,y:c.y,side:c.e.side});}
  // 길 가: 뒤쪽 끝 칸 안쪽 .75칸
  const taken=[],clear=(x,y,r)=>!inB(W.boss,x,y,1.5)&&!inB(W.gather,x,y,1.5)&&!(fx.doors||[]).some(d=>Math.hypot(d.x-x,d.y-y)<3.5)&&Math.hypot(fx.entry.x-x,fx.entry.y-y)>=3.5&&!(fx.props||[]).some(q=>Math.hypot(q.x-x,q.y-y)<2.4)&&!taken.some(t=>Math.hypot(t.x-x,t.y-y)<(t.r>r?t.r:r));
  const spotOf=e=>e.side==='-y'?{x:e.x+.5,y:e.y+.75}:{x:e.x+.75,y:e.y+.5},inner=e=>e.side==='-y'?has(e.x,e.y+1)&&has(e.x-1,e.y)&&has(e.x+1,e.y):has(e.x+1,e.y)&&has(e.x,e.y-1)&&has(e.x,e.y+1);/* 모서리·한 칸 턱이 아닌 반듯한 끝 */

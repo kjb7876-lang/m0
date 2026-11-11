@@ -28,6 +28,12 @@ for(const id of['last302','last303']){const fx=FX[id],P=api.plan(fx),P2=api.plan
  ok(id+': no house covers playable floor on screen',houses.every(h=>!hides(h)));
  ok(id+': houses do not overlap each other on screen',houses.every((a,i)=>houses.every((b,j)=>i>=j||Math.abs((a.x-a.y)-(b.x-b.y))>=(a.height*a.aspect+b.height*b.aspect)/2/PX+.4||Math.abs(a.x+a.y-b.x-b.y)>=9)));
  ok(id+': house variety (at least two kinds of house art)',new Set(houses.map(p=>p.path)).size>=2);
+ // 2차: 잠들지 못하는 집 — 기와집 몇 채는 창에 불이 켜진 그림(같은 크기·같은 자리, 배치는 1차와 같음)
+ const LIT='assets/r730/tiled-house-lit.webp',lit=houses.filter(p=>p.path===LIT),hanok=houses.filter(p=>p.path===LIT||/r80-010/.test(p.path));
+ ok(id+': some hanok windows are lit, most stay dark ('+lit.length+'/'+hanok.length+')',lit.length>=2&&lit.length<=hanok.length*.5&&lit.every(p=>p.aspect===512/367));
+ // 실제 게임은 길잡이 길(route)을 넘겨 집 고르는 순서가 달라진다 — 그래도 불 켜진 집이 빠지지 않아야 한다(헤드리스에서 last303 이 0채였던 일)
+ {const alt=api.plan({...fx,route:fx.floorCells.filter((_,i)=>i%97===0).map(([x,y])=>({x:x+.5,y:y+.5}))}).filter(p=>p.kind==='house');ok(id+': lit houses survive a different route order ('+alt.filter(p=>p.path===LIT).length+')',alt.filter(p=>p.path===LIT).length>=2);}
+ ok(id+': lit houses are spread out (no two lit neighbours within 6 cells)',lit.every((a,i)=>lit.every((b,j)=>i>=j||Math.hypot(a.x-b.x,a.y-b.y)>=6)));
  ok(id+': lane props stand on the floor',floor.length>=10&&floor.every(onFloor));
  const W=fx.ward||{},inB=(B,p,m)=>Array.isArray(B)&&p.x>B[0]-m&&p.x<B[2]+m&&p.y>B[1]-m&&p.y<B[3]+m;
  ok(id+': boss room and gathering room are left alone',floor.every(p=>!inB(W.boss,p,1)&&!inB(W.gather,p,1)));
@@ -43,4 +49,7 @@ for(const id of['last302','last303']){const fx=FX[id],P=api.plan(fx),P2=api.plan
  ok('houses carry the lift and face the lane (flip on -x side)',added.filter(p=>p.r730==='house').every(p=>p.visualLiftPx>0)&&added.some(p=>p.r303Flip));
  const other={id:'last301',layer:'STORY',props:[],exploration:room.exploration};api.apply(other);ok('other regions untouched',other.props.length===0);
  const dream={id:'last302',layer:'DREAM',props:[],exploration:room.exploration};api.apply(dream);ok('non-STORY layer untouched',dream.props.length===0);}
+{let ix=null;try{ix=JSON.parse(rd('runtime-text/assets/r730/index.json'));}catch(_){}
+ const f=path.join(R,'runtime-text/assets/r730/tiled-house-lit.webp'),sz=fs.existsSync(f)?fs.statSync(f).size:0,row=ix&&ix.assets&&ix.assets.find(q=>q.path==='assets/r730/tiled-house-lit.webp');
+ ok('lit house art exists, small, and its source is recorded (derived from existing game art, not final art)',sz>10000&&sz<120000&&!!row&&row.bytes===sz&&/r80-010/.test(row.source)&&/^[0-9a-f]{64}$/.test(row.sha256)&&row.final===false);}
 console.log('\nR730 '+(n-bad)+'/'+n+' passed');process.exit(bad?1:0);

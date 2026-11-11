@@ -34548,6 +34548,16 @@
       "sha256": "7de5653e543aa67c3cde0ddd05baea8142b188876c6847114dbe76faf8e76d09"
     },
     {
+      "path": "assets/r730/index.json",
+      "bytes": 836,
+      "sha256": "f85f4299b76a4ca1c2595d18f6aeb88f4ed5fb004d8ae949622692083b92a3c7"
+    },
+    {
+      "path": "assets/r730/tiled-house-lit.webp",
+      "bytes": 59490,
+      "sha256": "c093db27053e4402d646633b44317315d403b9afcc06bbe33a7931da5a554f15"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -44099,8 +44109,8 @@
     },
     {
       "path": "rooms-r523.js",
-      "bytes": 63963,
-      "sha256": "c94ddb53386c66572b8a3d62d459ee33edd720ce2ab5843bc5cbb97c26a4730b"
+      "bytes": 64608,
+      "sha256": "9fe5b1f81c949fcff95b9360838e6758648e82a18c6f8b39dbcb0eeaebaaa955"
     },
     {
       "path": "root-gate-video-r372.js",
@@ -44598,8 +44608,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8919,
-  "totalBytes": 1228841396,
+  "fileCount": 8921,
+  "totalBytes": 1228902367,
   "webHTMLSha256": "50bb81bfe1c0759805da71ee259f6ce8826210ba5e192c1bed9f84b1480a9814",
   "largest": [
     {
