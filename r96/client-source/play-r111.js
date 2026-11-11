@@ -150,14 +150,20 @@ function footOf(path,row){if(feet.has(path))return feet.get(path);if(footBudget<
 // ---- ⑥ 원거리 영웅 ------------------------------------------------------------------------------
 // 영웅 특성: 서하(정밀·시간) 사거리 +1.2·자동 회피 7초, 미카엘라(빛·치유) 사거리 +0.8·자동 회피 8초,
 // 헌터(속사) 사거리 +1.0·자동 회피 6초, 기억사수(팬텀 블링크) 사거리 +0.8·자동 회피 5초(가장 자주).
-const RANGED=Object.freeze({seoha:{range:1.2,cd:7},michaela:{range:.8,cd:8},hunter:{range:1,cd:6},gunner:{range:.8,cd:5}});
+// R766(사용자 2026-11-11 "자동회피는 이동해서 회피가 아니라 확률적으로 적공격이 빗나가게"): 밀려나는 이동 회피(옛 cd 5~8초)를 없애고,
+//  적 공격이 확률로 빗나간다(miss). 몸·무적·돌진 그림은 건드리지 않는다. 옛 재사용 대기 순서대로 기억사수 20%·헌터 17%·서하 15%·미카엘라 13%.
+//  지속 피해(R330 상태 이상)·0 피해·협동은 제외.
+const RANGED=Object.freeze({seoha:{range:1.2,cd:7,miss:.15},michaela:{range:.8,cd:8,miss:.13},hunter:{range:1,cd:6,miss:.17},gunner:{range:.8,cd:5,miss:.20}});
 const rangedState={applied:false,dodgeAt:-99,dodges:0,base:{}};
 function applyRanged(){if(rangedState.applied||!prefs.ranged)return;const H=typeof HEROES!=='undefined'?HEROES:null,D=window.__STORYWORLD_WER__?.defs;if(!H)return;
  for(const[id,v]of Object.entries(RANGED)){const h=H[id];if(h&&Number.isFinite(h.range)&&!h.r111Range){rangedState.base[id]=h.range;try{h.range=+(h.range+v.range).toFixed(2);h.r111Range=true;}catch(e){fail(e);}}
   const e=D?.[id]?.e;if(Array.isArray(e)&&e[2]==='dash')try{e[2]='escape';}catch(err){fail(err);}}
  rangedState.applied=true;}
 const isRanged=p=>!!RANGED[p?.hero];
-function autoDodge(){if(!prefs.ranged||!solo()||!isRanged(player)||player.hp<=0||(typeof modal!=='undefined'&&modal)||(typeof loading!=='undefined'&&loading))return;
+function missRoll(damage,src){if(!prefs.ranged||!solo()||!isRanged(player)||!(player.hp>0)||!(Number.isFinite(damage)&&damage>0))return false;
+ if(src&&(src.r330||src.status||src.type==='r330-status'))return false;if(!(Math.random()<RANGED[player.hero].miss))return false;
+ rangedState.dodges++;try{if(typeof fx==='function')fx('text',player.x,player.y,{text:'회피',color:'#cfe8ff',life:.7});}catch(_){}return true;}
+/* 옛 이동 회피 — R766 부터 부르지 않는다(기록용) */function autoDodge(){if(!prefs.ranged||!solo()||!isRanged(player)||player.hp<=0||(typeof modal!=='undefined'&&modal)||(typeof loading!=='undefined'&&loading))return;
  const cd=RANGED[player.hero].cd;if(time-rangedState.dodgeAt<cd||player.dashAnim>0||finite(player.invincible)>.2)return;
  const fc=window.__STORYWORLD_FOOTPRINT154__;let threat=null;
  for(const e of room?.enemies||[]){const a=e.attack;if(!liveFoe(e)||!a||a.committed)continue;const windup=finite(a.castWindup150,finite(a.shape154?.windup,.4));if(a.elapsed<windup*.45||a.elapsed>=windup)continue;
@@ -287,9 +293,9 @@ function install(){
  const tickBase=tick;tick=function(dt,...a){const r0=typeof player!=='undefined'&&player?finite(player.resonance,NaN):NaN;const out=tickBase.call(this,dt,...a);
   try{if(live()){footBudget=lowFx()?2:4;
    if(prefs.resonance777&&Number.isFinite(r0)&&Number.isFinite(player.resonance)&&player.resonance>r0&&player.resonance-r0<20){const want=Math.min(100,r0+(player.resonance-r0)*RES_GAIN);stats.resGain+=want-player.resonance;player.resonance=want;}
-   applyRanged();autoDodge();guardTick(dt);samongTick();rootTick();faceTick();egoTick();fixDomText();if(prefs.props)spaceProps(room);}}catch(e){fail(e);}return out;};
+   applyRanged();guardTick(dt);samongTick();rootTick();faceTick();egoTick();fixDomText();if(prefs.props)spaceProps(room);}}catch(e){fail(e);}return out;};
  if(typeof updateHUD==='function'){const hudBase=updateHUD;updateHUD=function(...a){const r=hudBase.apply(this,a);try{resText();}catch(e){fail(e);}return r;};}
- if(typeof hurt==='function'){const hurtBase=hurt;hurt=function(damage,...a){if(prefs.guard&&live()&&player.guard&&Number.isFinite(damage)&&damage>0){const d=damage*GUARD_TAKEN/NATIVE_GUARD;guardState.blocked+=damage-d;damage=d;}return hurtBase.call(this,damage,...a);};}
+ if(typeof hurt==='function'){const hurtBase=hurt;hurt=function(damage,...a){try{if(live()&&missRoll(damage,a[0]))return 'missed';}catch(e){fail(e);}if(prefs.guard&&live()&&player.guard&&Number.isFinite(damage)&&damage>0){const d=damage*GUARD_TAKEN/NATIVE_GUARD;guardState.blocked+=damage-d;damage=d;}return hurtBase.call(this,damage,...a);};}
  if(typeof toast==='function'){const toastBase=toast;toast=function(msg,...a){return toastBase.call(this,fixMsg(msg),...a);};}
  const heroBase=drawHero;drawHero=function(...a){const p=live()?player:null,ok=!!(p&&p.hp>0&&p.visible!==false&&Number.isFinite(p.x+p.y));const S=ok?SPR():null,ego=!!(S&&prefs.egoAura&&egoOn(p)),F=ego?palOf(p):null,I=ego?S.pal(F.b):null;
   const guardOn=!!(S&&prefs.guard&&p.guard);if(guardOn)try{scope({id:'r111:guard-back',kind:'effect',x:p.x,y:p.y,groundAligned:false},()=>{ctx.save();try{guardBack(p,S);}finally{ctx.restore();}});}catch(e){fail(e);}

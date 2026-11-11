@@ -67,6 +67,28 @@ check('enemy attack-cell facing table covers the surveyed rc137 cells',keys.leng
 check('skeleton M001 attack cell is marked as art facing left',keys.includes("'assets/rc137/mob-attacks-01.png#0,0':'R'"));
 check('tree guard M004 cell keeps the R110 setting',keys.includes("'assets/rc137/mob-attacks-01.png#940,0':'L'"));
 const html=fs.readFileSync(path.join(RT,'index.html'),'utf8');
+
+// ---- R766(사용자 2026-11-11 "자동회피는 이동해서 회피가 아니라 확률적으로 적공격이 빗나가게"): 원거리 영웅 자동 회피 = 확률 빗나감, 몸은 안 옮긴다
+{const R0=Math.random,setR=v=>{Math.random=()=>v;},hp0=()=>{sb.player.hp=100;hurts.length=0;effects.length=0;};
+ sb.player.guard=false;sb.player.hero='gunner';sb.player.x=0;sb.player.y=0;sb.player.invincible=0;sb.player.dashAnim=0;
+ const src={type:'enemy-attack',owner:'m1'};
+ try{
+  hp0();setR(0);const r=sb.hurt(30,src);
+  check('R766 ranged hero: a lucky roll makes the enemy hit miss (no damage, "회피" text)',hurts.length===0&&sb.player.hp===100&&effects.some(e=>e.type==='text'&&/회피/.test(e.text||'')),{hurts,r});
+  check('R766 a miss does not move the hero or grant i-frames',sb.player.x===0&&sb.player.y===0&&!(sb.player.invincible>0)&&!(sb.player.dashAnim>0));
+  hp0();setR(.99);sb.hurt(30,src);check('R766 an unlucky roll still hurts (full damage)',hurts.length===1&&hurts[0]===30,hurts);
+  hp0();sb.player.hero='hwando';setR(0);sb.hurt(30,src);check('R766 melee heroes never get the miss chance',hurts.length===1,hurts);sb.player.hero='gunner';
+  hp0();setR(0);sb.hurt(30,{type:'r330-status',status:'burn',r330:true});check('R766 status/hazard ticks (r330 status) are not dodged',hurts.length===1,hurts);
+  hp0();setR(0);sb.hurt(0,src);check('R766 zero damage passes through untouched',hurts.length===1&&hurts[0]===0,hurts);
+  Math.random=R0;const rate=h=>{sb.player.hero=h;let miss=0;for(let i=0;i<4000;i++){sb.player.hp=100;const n=hurts.length;sb.hurt(1,src);if(hurts.length===n)miss++;}return miss/4000;};
+  const rg=rate('gunner'),rh=rate('hunter'),rs=rate('seoha'),rm=rate('michaela');
+  check('R766 miss rates ≈ 20/17/15/13% (gunner>hunter>seoha>michaela, each within ±3%) '+JSON.stringify({rg,rh,rs,rm}),Math.abs(rg-.20)<.03&&Math.abs(rh-.17)<.03&&Math.abs(rs-.15)<.03&&Math.abs(rm-.13)<.03);
+  // 옛 이동 회피가 남아 있지 않다: 공격 예고 안에 서 있어도 몸이 밀리지 않는다
+  sb.player.hero='gunner';sb.player.x=0;sb.player.y=0;sb.time+=30;const atk={id:'a1',x:1,y:0,hp:10,spawnState:'active',attack:{elapsed:.3,castWindup150:.4,committed:false}};sb.room.enemies=[atk];sb.tick(.016);
+  check('R766 no more move-dodge: hero standing in a telegraph is not pushed',sb.player.x===0&&sb.player.y===0,{x:sb.player.x,y:sb.player.y});
+  sb.room.enemies=[];
+  const coop=sb.__STORYWORLD_COOP_SIM_R62__;sb.__STORYWORLD_COOP_SIM_R62__={mode:()=>'host'};hp0();setR(0);sb.hurt(30,src);check('R766 co-op: no miss chance (host rules)',hurts.length===1,hurts);sb.__STORYWORLD_COOP_SIM_R62__=coop;
+ }finally{Math.random=R0;sb.player.hero='hwando';}}
 check('play-r111 loads after mobs-r109',html.indexOf('play-r111.js')>html.indexOf('mobs-r109.js')&&html.indexOf('mobs-r109.js')>0);
 check('runtime copy matches client source',fs.readFileSync(path.join(RT,'play-r111.js'),'utf8')===read('play-r111.js'));
 console.log(`\n${n-failed}/${n} passed`);process.exit(failed?1:0);

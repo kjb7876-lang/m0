@@ -192,6 +192,8 @@ function slayerQChecks(){
  vm.createContext(env);vm.runInContext(C('slayer-blood-r425.js'),env);const SB=env.__STORYWORLD_SLAYER_BLOOD_R425__,DT=1/60,step=()=>env.tick(DT);
  env.special();const s0=SB.state();
  ok('slayer Q: cast through special() (native special not called), cooldown 10 s at rank 0, windup first, sprites warmed',!env.nativeSpecial&&env.player.specialCD===10&&s0.Q&&!s0.Q.launched&&env.warmCalls>=2,{s0,warm:env.warmCalls});
+ // R765(사용자 2026-11-11 "8방향 칸으로 고정, 적중보다 자연스럽게"): 회오리는 적 정확한 방향이 아니라 그 적이 든 8방향 칸 중심으로 나간다(적 (4,0) → 화면 남동 칸 중심)
+ {const S=Math.PI/4,want=Math.atan2(2*Math.sin(S)-Math.cos(S),Math.cos(S)+2*Math.sin(S));ok('R765 slayer Q: whirlwind angle = 8-sector centre (not the exact enemy angle 0)',s0.Q&&Number.isFinite(s0.Q.angle)&&Math.abs(s0.Q.angle-want)<1e-9,{angle:s0.Q&&s0.Q.angle,want});}
  // 시전 0.32초: 몸은 0.05초마다 좌·우 반전(가로 폭·세로 그대로), 베기 고리 뒤쪽 반은 몸 앞에, 앞쪽 반은 몸 뒤에 그려진다
  const mir=[],order=[],shape=[],backY=[],frontY=[],spinNames=new Set();
  for(let i=0;i<18;i++){step();env.ctx.commands.length=0;env.drawHero();const cmds=env.ctx.commands,hi=cmds.findIndex(c=>c.owner?.kind==='hero'),hc=cmds[hi],xs=hc.points.map(p=>p[0]),ys=hc.points.map(p=>p[1]);
