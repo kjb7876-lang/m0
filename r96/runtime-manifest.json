@@ -44,8 +44,8 @@
     },
     {
       "path": "asset-cdn-r615.js",
-      "bytes": 3190,
-      "sha256": "b8baa037421a1474f2f2ca0837a08f8086c1f21934ec1bb6815d75d3018a8053"
+      "bytes": 3217,
+      "sha256": "d981a2116955c78e8edbb6932f65c20af7130c7a47071d3735fb80a1963a3e92"
     },
     {
       "path": "assets-clean-r99.js",
@@ -34463,6 +34463,21 @@
       "sha256": "3be5a61f2ae9cb5fda13fe009a2ed5c398a3c810854d99cdddbe917ca1d898eb"
     },
     {
+      "path": "assets/r667/index.json",
+      "bytes": 1523,
+      "sha256": "27273d67548d73348f14d33fd98d524851f9e4bd8967dcf0bf3878fa5e153449"
+    },
+    {
+      "path": "assets/r667/title-poster.jpg",
+      "bytes": 58824,
+      "sha256": "43eaee8fd80283ac4239189b2aa73b1235de120b9a76c9511da7a7371a80415f"
+    },
+    {
+      "path": "assets/r667/title-video/loop.mp4",
+      "bytes": 464055,
+      "sha256": "46729ea44b9fd951ff240acdf79ce787a200a3d11f44344e270a470b9eec9598"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -43544,8 +43559,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6573774,
-      "sha256": "7ed43cfb889be9136727956c3158499e09c9a41739e1212360f279da0f7986d3"
+      "bytes": 6573823,
+      "sha256": "532fdb684d8df92ada48def16ffc983c626d4d047699ae4ba27218e345c0d7f6"
     },
     {
       "path": "intro-r140.js",
@@ -44298,6 +44313,11 @@
       "sha256": "9f472ece711b316ff74f8ddd19c1be1c9b75259d7419fb39fb78581f6604310c"
     },
     {
+      "path": "title-bg-video-r667.js",
+      "bytes": 8303,
+      "sha256": "5e8ec25a234f63e8c7e2d3cd39c3525db494bbb3543785fda28e6addbc40e183"
+    },
+    {
       "path": "trail-r482.js",
       "bytes": 10204,
       "sha256": "e0c04d74ad92f2e3f1bd1cdaef68b1a3455ad338ccb7ee6f1bf8e4408cd64b4b"
@@ -44503,9 +44523,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8900,
-  "totalBytes": 1227828328,
-  "webHTMLSha256": "7ed43cfb889be9136727956c3158499e09c9a41739e1212360f279da0f7986d3",
+  "fileCount": 8904,
+  "totalBytes": 1228361109,
+  "webHTMLSha256": "532fdb684d8df92ada48def16ffc983c626d4d047699ae4ba27218e345c0d7f6",
   "largest": [
     {
       "path": "index.html",

@@ -401,6 +401,8 @@ jobs:
         run: node r96/qa/r617/hwando-fall-video-cpu-check.cjs
       - name: R619 pause game drawing while a full-screen story video is open
         run: node r96/qa/r619/video-render-pause-cpu-check.cjs
+      - name: R667 title screen background loop video CPU check
+        run: node r96/qa/r667/title-bg-video-cpu-check.cjs
       - name: R373 mob squads and leaders CPU check
         run: node r96/qa/r373/r373-cpu-check.cjs
 
