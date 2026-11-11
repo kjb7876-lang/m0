@@ -716,7 +716,10 @@ jobs:
       - name: Install pinned sandboxed Chromium
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0
-          npx playwright install --with-deps chromium
+          # 러너 apt 미러 DNS 장애(2026-11-11 'Temporary failure resolving azure.archive.ubuntu.com')로 글꼴 패키지 설치가 실패해도
+          # 브라우저 검사가 돌게: OS 의존성은 두 번까지 시도하고, 안 되면 경고를 남기고 Chromium 만 받는다(러너 이미지에 Chrome 라이브러리 있음).
+          ok=0; for i in 1 2; do if timeout 420 npx playwright install --with-deps chromium; then ok=1; break; fi; echo "playwright --with-deps attempt $i failed"; sleep 15; done
+          if [ "$ok" != 1 ]; then echo "::warning::apt 의존성 설치 실패 — OS 의존성 없이 Chromium 만 설치"; npx playwright install chromium; fi
       - name: Browser start, save, portal, exact atlas decode and native status lifecycle
         env:
           STORYWORLD_URL: http://127.0.0.1:4396/m0/
@@ -802,7 +805,10 @@ jobs:
       - name: Install pinned sandboxed public smoke browser
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0
-          npx playwright install --with-deps chromium
+          # 러너 apt 미러 DNS 장애(2026-11-11 'Temporary failure resolving azure.archive.ubuntu.com')로 글꼴 패키지 설치가 실패해도
+          # 브라우저 검사가 돌게: OS 의존성은 두 번까지 시도하고, 안 되면 경고를 남기고 Chromium 만 받는다(러너 이미지에 Chrome 라이브러리 있음).
+          ok=0; for i in 1 2; do if timeout 420 npx playwright install --with-deps chromium; then ok=1; break; fi; echo "playwright --with-deps attempt $i failed"; sleep 15; done
+          if [ "$ok" != 1 ]; then echo "::warning::apt 의존성 설치 실패 — OS 의존성 없이 Chromium 만 설치"; npx playwright install chromium; fi
       - name: Verify actual public start, save reload, E portal and status effects
         env:
           STORYWORLD_URL: ${{ steps.deployment.outputs.page_url }}
