@@ -641,6 +641,10 @@ jobs:
         run: node r96/qa/r620/r620-cpu-check.cjs
       - name: R700 seven-sins boss art audit (size-lock heights match real art, no light matte fringe on drawn art, clean copies keep the body, originals kept) check
         run: python r96/qa/r700/boss-art-check.py
+      - name: R710 hero south idle 6 / hit 4 sheets (feet on the 226 line, stand height ±3%, no alpha residue, flicker ≤2× current, holds not applied) check
+        run: python r96/qa/r710/idle-hit-check.py
+      - name: R710 idle/hit wiring (R119 idle table wrap south only, R143 hit sheet 4 frames by hurt time, old sheets until ready) CPU check
+        run: node r96/qa/r710/r710-cpu-check.cjs
       - name: R563 Michaela genesis chain (Q → sky light pillars, R → grand pillar + halo; no new keys, upright cross only, Dots MI sheets) CPU check
         run: node r96/qa/r563/michaela-genesis-cpu-check.cjs
       - name: R564 Seoha chrono chain (time stop shell + shatter, afterimage clones, haste; no new keys, caps, Dots SE sheets) CPU check

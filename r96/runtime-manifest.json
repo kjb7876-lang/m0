@@ -34493,6 +34493,71 @@
       "sha256": "c6048ea4aa403b998e0bf8c3f547e3cc5dadf589e4ca1201b78c6ae86de445ee"
     },
     {
+      "path": "assets/r710/gunner/hit-s.webp",
+      "bytes": 29756,
+      "sha256": "57342f72328d6d0110961b153e43d1ed160a5b2e9152a1df95c5bd4824d9cb52"
+    },
+    {
+      "path": "assets/r710/gunner/idle-s.webp",
+      "bytes": 44326,
+      "sha256": "daa46374cff78a89e265edc51e8e33423f96ae10b4d0156a876e58af0518dc41"
+    },
+    {
+      "path": "assets/r710/hunter/hit-s.webp",
+      "bytes": 28968,
+      "sha256": "bf55fb8e8440a78696999663e35c0db1c665a5ed125eb0738ce09041bcdc2c9e"
+    },
+    {
+      "path": "assets/r710/hunter/idle-s.webp",
+      "bytes": 41786,
+      "sha256": "c48c7a7ef9458edad9b22bdde857ea6d088f7ba1dfb4607e5c2dc93fa9f943d1"
+    },
+    {
+      "path": "assets/r710/index.json",
+      "bytes": 6487,
+      "sha256": "9c6299a561fef649780d9bb4fdaa0125752e49b49dda21fdf96acf471e968e90"
+    },
+    {
+      "path": "assets/r710/lauren/hit-s.webp",
+      "bytes": 38618,
+      "sha256": "ec315d8f1d0c13740286b16e0954696c5467e11b1fecfdddb422ed1783987f28"
+    },
+    {
+      "path": "assets/r710/lauren/idle-s.webp",
+      "bytes": 54444,
+      "sha256": "75a68fd05aef26e44c1d3d3ead31cfb9546d530dd79eb5d6471f43c62b5eca71"
+    },
+    {
+      "path": "assets/r710/michaela/hit-s.webp",
+      "bytes": 32316,
+      "sha256": "3078d2032c58fff5f608f22be3a6aa278f5ae9b054b97e659fe1ac92dc6b5bbb"
+    },
+    {
+      "path": "assets/r710/michaela/idle-s.webp",
+      "bytes": 46632,
+      "sha256": "e5f873b54affb5bf0ca69715b34492007bdb4ff68bc2cda933abc88ae2e08d01"
+    },
+    {
+      "path": "assets/r710/neon/hit-s.webp",
+      "bytes": 29682,
+      "sha256": "8041c972a8fc56e2e300f3b609bf18b522484318fa2300657abcab3ce8668486"
+    },
+    {
+      "path": "assets/r710/neon/idle-s.webp",
+      "bytes": 46148,
+      "sha256": "9fa0a0b3e0854971b91736c5c843a1f4daf837d38bb535e5f67c5be3922984d2"
+    },
+    {
+      "path": "assets/r710/seoha/hit-s.webp",
+      "bytes": 37400,
+      "sha256": "f8ec98965c1f4b29215805a2132b0fefffe35c143155082d56ff9f2acb59f356"
+    },
+    {
+      "path": "assets/r710/seoha/idle-s.webp",
+      "bytes": 57414,
+      "sha256": "2c46cd0a53e80d44ba794f61e1e61982dfa8a84f9c48f09c250284b2cebb5e87"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -42329,8 +42394,8 @@
     },
     {
       "path": "attack-anim-r143.js",
-      "bytes": 19517,
-      "sha256": "bb1250b4d1d2b0b0bca5f2a3e87fe95c97b6ade3b831244206b8a6c40025f880"
+      "bytes": 19780,
+      "sha256": "ff9617f2e0ded355b4cd2da246091ce825e62d795d61829d3baf2bee08efcace"
     },
     {
       "path": "audio-r108.js",
@@ -43159,8 +43224,8 @@
     },
     {
       "path": "death-r151.js",
-      "bytes": 7748,
-      "sha256": "d265aa0e5a7ee55fc53af6a44f0569d0e5c7a8f338bac25ec45ff6ddf59125cf"
+      "bytes": 7755,
+      "sha256": "1259a3a104d5e40feb02eeeb13423b23149e1c379503d05799d8a15535b27698"
     },
     {
       "path": "delivery/additional-audio13-20261005/processed/sfx-candidate/Resonance_energy_gai__2-1791000424116-211cce07.ogg",
@@ -43428,6 +43493,11 @@
       "sha256": "4bd61e7c1c504d5c75548481ef3661eef5fd1ffda170aa0f5fac8b4979f49e87"
     },
     {
+      "path": "hero-idle-hit-r710.js",
+      "bytes": 3966,
+      "sha256": "fc624139df7d38a447501471c4ed21eff3663619e8567457525570c3e1bdd04b"
+    },
+    {
       "path": "hero-palette-r302.js",
       "bytes": 18002,
       "sha256": "2ea8e8a7ce318509928ed5776a7b38b0361d8a221acb2178c4c57882863379d9"
@@ -43579,8 +43649,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6573866,
-      "sha256": "50bb81bfe1c0759805da71ee259f6ce8826210ba5e192c1bed9f84b1480a9814"
+      "bytes": 6573914,
+      "sha256": "03459c2d77d240d54a128e5af19405cd1386e090e993f291980bb5810e26e0f5"
     },
     {
       "path": "intro-r140.js",
@@ -44543,9 +44613,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8908,
-  "totalBytes": 1228623990,
-  "webHTMLSha256": "50bb81bfe1c0759805da71ee259f6ce8826210ba5e192c1bed9f84b1480a9814",
+  "fileCount": 8922,
+  "totalBytes": 1229122251,
+  "webHTMLSha256": "03459c2d77d240d54a128e5af19405cd1386e090e993f291980bb5810e26e0f5",
   "largest": [
     {
       "path": "index.html",
