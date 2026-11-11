@@ -8093,7 +8093,11 @@
     "assets/r620/bosses/b03-idle6.webp",
     "skill-growth-r663.js",
     "mob-student-walk-r615.js",
-    "assets/r615/mob-student-walk8.webp"
+    "assets/r615/mob-student-walk8.webp",
+    "title-bg-video-r667.js",
+    "assets/r667/title-video/loop.mp4",
+    "assets/r667/title-poster.jpg",
+    "assets/r667/index.json"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9168,5 +9172,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "44869a3c671d394c034023e76cf2a52e7586deb44528cf2590524f3dacfc5cd4"
+  "runtimeManifestSHA256": "02fd4142af930e20e02ffde9d5956076ab5d5850770cac23ad9c5b7f69eeea9f"
 }

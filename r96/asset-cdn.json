@@ -4,6 +4,6 @@
   "note": "무거운 에셋을 Cloudflare Pages 별도 프로젝트(무료, 결제수단 없음)에서 받는다. 코드·사이트는 GitHub Pages 그대로. 게임은 cdn-health.json 이 맞을 때만 외부 주소를 쓰고, 실패하면 같은 파일을 GitHub Pages 에서 받는다. 기준 주소를 바꾸면 r96/client-source/asset-cdn-r615.js 의 BASE 도 같이 바꾼다(검사 r96/qa/r615).",
   "project": "storyworld-m0-assets",
   "base": "https://storyworld-m0-assets.pages.dev/",
-  "prefixes": ["assets/r381/voice/"],
+  "prefixes": ["assets/r381/voice/", "assets/r667/title-video/"],
   "limits": {"maxFiles": 20000, "maxFileBytes": 26214400, "source": "Cloudflare Pages 무료 한도: 사이트당 파일 20,000개, 한 파일 25MiB"}
 }

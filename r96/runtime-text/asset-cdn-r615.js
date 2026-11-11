@@ -5,7 +5,7 @@
 //  · 시험: ?cdn=off 끄기, ?cdn=https://다른주소 바꾸기. 기준 주소·대상 폴더는 r96/asset-cdn.json 과 같아야 한다(검사 r96/qa/r615).
 (()=>{'use strict';
 if(window.__STORYWORLD_ASSET_CDN__)return;
-const BASE='https://storyworld-m0-assets.pages.dev/',PREFIXES=['assets/r381/voice/'],SCHEMA='storyworld-asset-cdn/v1',TIMEOUT=4000,MAX_FAILS=3;
+const BASE='https://storyworld-m0-assets.pages.dev/',PREFIXES=['assets/r381/voice/','assets/r667/title-video/'],SCHEMA='storyworld-asset-cdn/v1',TIMEOUT=4000,MAX_FAILS=3;
 const norm=b=>{try{b=String(b||'').trim();if(!/^https:\/\/[A-Za-z0-9.-]+(:\d+)?\//.test(b+'/'))return '';return b.endsWith('/')?b:b+'/';}catch(_){return '';}};
 let base=BASE,state='pending',active=[],fails=0,lastError=null;const stats={cdn:0,local:0,fallbacks:0,ok:0};
 try{const q=new URLSearchParams(window.location?.search||'').get('cdn');if(q==='off'||q==='0')state='off';else if(q)base=norm(q);}catch(_){}
