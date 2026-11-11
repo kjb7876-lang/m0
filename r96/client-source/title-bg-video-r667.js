@@ -12,9 +12,9 @@
 //  · 끄기: localStorage storyworld.r667.titlebg {on:false} 또는 API set({on:false}).
 (()=>{'use strict';
 if(window.__STORYWORLD_TITLE_BG_R667__)return;
-const REV='R667-title-bg-video-1',KEY='storyworld.r667.titlebg',ID='r667t',SRC='assets/r667/title-video/loop.mp4',POSTER='assets/r667/title-poster.jpg';
+const REV='R667-title-bg-video-2',KEY='storyworld.r667.titlebg',ID='r667t',SRC='assets/r667/title-video/loop.mp4',POSTER='assets/r667/title-poster.jpg';
 let prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');if(s&&typeof s.on==='boolean')prefs.on=s.on;}catch(_){}
-const stats={shown:0,hidden:0,plays:0,errors:0,rejects:0};let root=null,video=null,mode='idle',triedCdn=false,triedLocal=false,dead=false,lastError=null,want=false;
+const stats={shown:0,hidden:0,plays:0,errors:0,rejects:0};let root=null,video=null,mode='idle',cdnFailed=false,localFailed=false,dead=false,lastError=null,want=false;
 const q=(()=>{try{return new URLSearchParams(window.location?.search||'').get('title667');}catch(_){return null;}})();
 function allowed(){if(!prefs.on)return false;try{if(navigator.webdriver&&q!=='1')return false;}catch(_){}return true;}
 function stillOnly(){if(q==='still')return true;try{if(navigator.connection?.saveData)return true;}catch(_){}
@@ -39,18 +39,22 @@ function startVideo(url){if(!root||dead)return;releaseVideo();const v=document.c
  v.addEventListener('playing',()=>{if(video===v&&root){root.classList.add('playing');mode='video';try{cdnApi()?.isCdn?.(v.src)&&cdnApi()?.ok?.();}catch(_){}}});
  v.addEventListener('error',()=>{if(video!==v)return;stats.errors++;lastError='media error '+String(v.src).slice(0,120);onFail(v.src);});
  v.src=url;root.appendChild(v);play();}
+// 실패만 기록한다(R667b, Codex P2): 성공한 출처는 다음에 타이틀로 돌아왔을 때 다시 고른다. Cloudflare 실패 → GitHub 한 번 → 둘 다 실패면 정지 이미지.
 function onFail(url){const A=cdnApi();let isCdn=false;try{isCdn=!!A?.isCdn?.(url);}catch(_){}
- if(isCdn){try{A.fail(url,'title video');}catch(_){}if(!triedLocal){triedLocal=true;startVideo(SRC);return;}}
- else if(!triedLocal){triedLocal=true;}
+ if(isCdn){cdnFailed=true;try{A.fail(url,'title video');}catch(_){}if(!localFailed){startVideo(SRC);return;}}
+ else localFailed=true;
  dead=true;mode='poster';releaseVideo();if(root)root.classList.remove('playing');}
 function play(){const v=video;if(!v||document.hidden)return;stats.plays++;let p;try{p=v.play();}catch(e){p=Promise.reject(e);}
- if(p&&typeof p.then==='function')p.catch(e=>{if(video!==v)return;stats.rejects++;lastError=String(e?.message||e).slice(0,160);dead=true;mode='poster';releaseVideo();root?.classList.remove('playing');});}
+ if(p&&typeof p.then==='function')p.catch(e=>{if(video!==v)return;
+  // 탭 숨김 등으로 우리가 pause() 해서 끊긴 재생(AbortError)은 실패가 아니다 — 보이면 visibilitychange 가 다시 튼다(R667b, Codex P2).
+  if(e?.name==='AbortError'||document.hidden){lastError='play aborted';return;}
+  stats.rejects++;lastError=String(e?.message||e).slice(0,160);dead=true;mode='poster';releaseVideo();root?.classList.remove('playing');});}
 let deferred=false;
 // R615 태그가 이 스크립트보다 뒤에 붙어 있어도 쓰도록 API 가 아직 없으면 한 번만 다음 차례로 미룬다.
 function chooseAndStart(){if(!root||dead||video)return;const A=cdnApi();if(!A&&!deferred){deferred=true;setTimeout(chooseAndStart,0);return;}
- const go=()=>{if(!root||dead||video||!want)return;let u=SRC;try{if(A&&!triedCdn){u=A.url(SRC)||SRC;}}catch(_){u=SRC;}
-  if(u!==SRC)triedCdn=true;else triedLocal=true;startVideo(u);};
- if(A&&A.ready&&typeof A.ready.then==='function'&&!triedCdn&&!triedLocal)A.ready.then(go,go);else go();}
+ const go=()=>{if(!root||dead||video||!want)return;let u=SRC;try{if(A&&!cdnFailed){u=A.url(SRC)||SRC;}}catch(_){u=SRC;}
+  if(u===SRC&&localFailed){dead=true;mode='poster';return;}startVideo(u);};
+ if(A&&A.ready&&typeof A.ready.then==='function')A.ready.then(go,go);else go();}
 function show(){style();const m=$('modal'),p=$('panel');if(!m||!p)return;
  if(!root||!root.isConnected||root.parentNode!==m){if(root)try{root.remove();}catch(_){}root=document.createElement('div');root.id=ID;root.setAttribute('aria-hidden','true');
   root.style.backgroundImage='url("'+POSTER+'")';m.insertBefore(root,p);stats.shown++;}

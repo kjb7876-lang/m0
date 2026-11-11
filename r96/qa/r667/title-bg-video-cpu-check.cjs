@@ -75,9 +75,10 @@ class El{constructor(tag,doc){this.tagName=String(tag).toUpperCase();this.doc=do
  querySelector(s){if(s[0]==='#')return this.walk(e=>e.id===s.slice(1));const t=s.toUpperCase();return this.walk(e=>e.tagName===t);}
  addEventListener(t,f){(this.ls[t]=this.ls[t]||[]).push(f);}removeEventListener(t,f){this.ls[t]=(this.ls[t]||[]).filter(x=>x!==f);}
  fire(t){for(const f of (this.ls[t]||[]).slice())f({type:t,target:this});const on=this['on'+t];if(typeof on==='function')on({type:t,target:this});}
- play(){this.plays++;if(this.doc.__g.__playReject)return Promise.reject(new Error('NotAllowedError'));this.paused=false;return Promise.resolve();}
- pause(){this.pauses++;this.paused=true;}load(){this.loads++;}}
-function env(o={}){const store=new Map(Object.entries(o.store||{}));const g={console,__timers:[],__mos:[],__fails:[],__playReject:!!o.playReject};
+ play(){this.plays++;if(this.doc.__g.__playReject)return Promise.reject(new Error('NotAllowedError'));this.paused=false;
+  if(this.doc.__g.__playPending)return new Promise((res,rej)=>{this._pend={res,rej};});return Promise.resolve();}
+ pause(){this.pauses++;this.paused=true;if(this._pend){const p=this._pend;this._pend=null;const e=new Error('The play() request was interrupted by a call to pause()');e.name='AbortError';p.rej(e);}}load(){this.loads++;}}
+function env(o={}){const store=new Map(Object.entries(o.store||{}));const g={console,__timers:[],__mos:[],__fails:[],__playReject:!!o.playReject,__playPending:!!o.playPending};
  const doc={__g:g,hidden:false,ls:{},__mut(){g.__dirty=true;},addEventListener(t,f){(this.ls[t]=this.ls[t]||[]).push(f);},
   createElement:t=>new El(t,doc),getElementById:id=>doc.body.walk(e=>e.id===id)||doc.head.walk(e=>e.id===id),querySelector:s=>doc.body.querySelector(s)};
  doc.body=new El('body',doc);doc.head=new El('head',doc);doc.documentElement=doc.body;
@@ -136,6 +137,18 @@ const api=g=>g.__STORYWORLD_TITLE_BG_R667__;
  ok('inspect reports fallback',api(g).inspect().mode==='poster'&&api(g).inspect().errors>=2);}
 {const g=env({cdn:{on:true}});const A=g.__STORYWORLD_ASSET_CDN__;delete g.__STORYWORLD_ASSET_CDN__;run(g,'showTitle()');g.__STORYWORLD_ASSET_CDN__=A;await flush(g,6);
  ok('R615 API loaded after this script (tag order): still used',vid(g)?.src==='https://cdn.example/'+VID);}
+// Codex P2(#414): 첫 재생이 Cloudflare 로 잘 됐으면, 다른 창 갔다 타이틀로 돌아와도 다시 Cloudflare 주소(Pages 에는 영상이 없다)
+{const g=env({cdn:{on:true}});run(g,'showTitle()');await flush(g,6);vid(g).fire('playing');await flush(g);
+ run(g,"openPanel('<b id=\"slots\"></b>')");await flush(g);run(g,'showTitle()');await flush(g,6);
+ ok('back to title after CDN success: CDN URL again (not the Pages-excluded local path)',vid(g)?.src==='https://cdn.example/'+VID&&api(g).inspect().mode!=='poster');
+ run(g,"openPanel('<b id=\"slots\"></b>')");await flush(g);run(g,'showTitle()');await flush(g,6);
+ ok('third visit: still CDN',vid(g)?.src==='https://cdn.example/'+VID);}
+// Codex P2(#414): 첫 play() 가 끝나기 전에 탭을 숨기면 pause() 가 AbortError 로 끊는다 — 영구 실패로 치지 않고 돌아오면 다시 재생
+{const g=env({playPending:true});run(g,'showTitle()');await flush(g,6);const v=vid(g);
+ g.document.hidden=true;for(const f of g.document.ls.visibilitychange||[])f();await flush(g);
+ ok('tab hidden during pending play(): video kept (AbortError is not a failure)',!!vid(g)&&vid(g)===v&&api(g).inspect().mode!=='poster');
+ g.__playPending=false;g.document.hidden=false;for(const f of g.document.ls.visibilitychange||[])f();await flush(g);
+ ok('tab visible again: plays',!!vid(g)&&vid(g).paused===false&&vid(g).plays>=2);}
 {const g=env({cdn:{on:false}});run(g,'showTitle()');await flush(g,6);ok('CDN down: local copy',vid(g)?.src===VID);}
 // 자동 재생 거부
 {const g=env({playReject:true});run(g,'showTitle()');await flush(g,6);

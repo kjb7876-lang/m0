@@ -8121,6 +8121,9 @@
     "assets/r700/clean/assets/generated-v31224/actors-normalized/53c9ce212489_lust-human-attack.webp",
     "assets/r529/floor-lamp.webp",
     "assets/r529/index.json",
+    "assets/r712/chest-closed.png",
+    "assets/r712/chest-open.png",
+    "assets/r712/SOURCE.md",
     "assets/r527/body-rig.webp",
     "assets/r527/pod.webp",
     "assets/r527/gothic-tank.webp",
@@ -9201,5 +9204,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "8b25c5b0e62d965cd5b35461afdc7ce936c495595714238f4dcb15ac9b2b70a8"
+  "runtimeManifestSHA256": "8ca6854691db096ba29e13acc04698bc229d475f50a99ee1f6b0599ae0d72b49"
 }

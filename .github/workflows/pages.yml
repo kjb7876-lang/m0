@@ -460,6 +460,8 @@ jobs:
         run: node r96/qa/r461/r461-cpu-check.cjs
       - name: R600 survival mode (pixel entry replaced, arena, narration-timed spawns, core, 3-choice upgrades, endless maps) CPU check
         run: node r96/qa/r600/r600-cpu-check.cjs
+      - name: R701 survival 77s choice window, difficulty, hero picker CPU check
+        run: node r96/qa/r701/r701-cpu-check.cjs
       - name: R463 seven-sins boss art (one form per fight, one body height, no cut-out broom) CPU check
         run: node r96/qa/r463/r463-cpu-check.cjs
       - name: R511 empty samong rooms get a guarded memory shard CPU check
@@ -498,6 +500,8 @@ jobs:
         run: node r96/qa/r521/r521-cpu-check.cjs
       - name: R561 gunner arms (기억사수 Q laser beam, W sniper, E rifle burst, R marked strike; engine originals held, save untouched) CPU check
         run: node r96/qa/r561/r561-cpu-check.cjs
+      - name: R561 gunner arms (기억사수 Q laser beam, W sniper, E rifle burst, R marked strike; engine originals held, save untouched) CPU check (R561c 연쇄 레이저)
+        run: node r96/qa/r561/r561c-chain-check.cjs
       - name: R522 hospital thin walls (the two free-standing maze baffles of ep1a08 moved to touch a thick wall, hospital only, routes stay connected) CPU check
         run: node r96/qa/r522/r522-cpu-check.cjs
       - name: R523 story rooms (clinic ep1a09 + sloth home ep1b02 furnished by room name along the real back walls, presentation only, angle-matched art only) CPU check
@@ -545,6 +549,8 @@ jobs:
         run: node r96/qa/r255/r255-cpu-check.cjs
       - name: R682 boss entry name card redesign (no zigzag red line) CPU check
         run: node r96/qa/r682/boss-title-cpu-check.cjs
+      - name: R712 CC0 pixel-3D treasure chest art CPU check
+        run: node r96/qa/r712/chest-cpu-check.cjs
       - name: R256 widen passages on all organic maps CPU check
         run: node r96/qa/r256/r256-cpu-check.cjs
       - name: R258 wider pre-boss gathering room CPU check
