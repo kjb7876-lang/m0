@@ -8094,11 +8094,19 @@
     "skill-growth-r663.js",
     "mob-student-walk-r615.js",
     "assets/r615/mob-student-walk8.webp",
+    "ambience-r664.js",
+    "assets/r664/ambience/hall.ogg",
+    "assets/r664/ambience/wind.ogg",
+    "assets/r664/ambience/water.ogg",
+    "assets/r664/ambience/crowd.ogg",
+    "assets/r664/ambience/stone.ogg",
+    "assets/r664/ambience/night.ogg",
+    "assets/r664/ambience/index.json",
     "neon-lauren-r437.js",
-    "assets/r437/attack/neon/attack-e.webp",
-    "assets/r437/attack/neon/index.json",
     "assets/r437/attack/lauren/attack-e.webp",
     "assets/r437/attack/lauren/index.json",
+    "assets/r437/attack/neon/attack-e.webp",
+    "assets/r437/attack/neon/index.json",
     "assets/r437/portrait/neon.webp",
     "assets/r528/bookshelf-n.webp",
     "assets/r528/bookshelf-w.webp",
@@ -9177,5 +9185,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "f521afadcef8409ba8229525723139e6e71b62ef987ff3a9ac0a6db4ea3c5ff0"
+  "runtimeManifestSHA256": "d242a2b3b8df30c09432fa4094a9b5abc81c611eab15869358243ab5babe39d7"
 }
