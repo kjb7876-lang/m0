@@ -7,9 +7,9 @@
 //  · 그림만 엔진 frameFor 사슬에 내준다. 판정·보상·저장은 그대로. storyworld.r380.mobs {on:false} 로 끈다(이동·개명은 새로 만드는 지역부터).
 (()=>{'use strict';
 if(window.__STORYWORLD_APPROVED_MOBS_R380__)return;
-const REV='R437',KEY='storyworld.r380.mobs',INDEX='assets/r380/mobs/index.json';
+const REV='R531',KEY='storyworld.r380.mobs',INDEX='assets/r380/mobs/index.json';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
-const stats={assigned:0,frames:0,waiting:0,removed:0,added:0,renamed:0,reinstalls:0,errors:0,deaths:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
+const stats={assigned:0,frames:0,waiting:0,removed:0,added:0,renamed:0,reinstalls:0,errors:0,deaths:0,summonRenamed:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 let idx=null;if(typeof fetch==='function')fetch(INDEX).then(r=>r.ok?r.json():null).then(j=>{if(j?.mobs)idx=j;}).catch(fail);
 const curLayer=()=>{try{return typeof layer==='string'?layer:'STORY';}catch(_){return 'STORY';}};
 const zoneOf=()=>{try{return String(typeof room==='object'&&room?(room.id||''):'');}catch(_){return '';}};
@@ -33,6 +33,11 @@ function bossNames(r){if(!r||!Array.isArray(r.enemies))return;for(const e of r.e
 // ── 이동·개명: 지역을 만들 때 한 번(결정적) ──
 function relocate(r,id,l){if(!prefs.on||!r||!Array.isArray(r.enemies)||l==='DREAM')return r;
  // 정본 계약(R81: 지역마다 3×10 무리, 적 id·능력치 불변)을 지키려고 몹을 빼거나 더하지 않고 이름·그림만 바꾼다.
+ // R441(사용자 2026-11-09 "망각거미가 아직도 거미동굴에 나오는문제"): R81 지역 수호자(중간보스 · 망각의 거미, id …:ward-champion-r81:dist01-sp1)는
+ //  예전에 빼는 방식일 때 세이브 복원 때문에 남겨 두었다. 지금은 이름·그림만 바꾸므로(id·수치·저장 그대로) 같은 방식으로 '중간보스 · 재 나방'으로 바꾼다
+ //  (알집지기·수호병 수호자는 이미 있어 셋이 겹치지 않게). R248 공격 효과 키는 옛 이름 그대로.
+ if(id==='dist01')for(const e of r.enemies)if(e&&!e.r380Renamed&&!e.boss&&e.wardChampionR81&&String(e.nativeId||'').startsWith('dist01-sp1')&&SPIDER.test(e.name||'')){
+  e.r380From=e.name;if(!e.r248Key)e.r248Key='망각의 거미';e.name='중간보스 · 재 나방';if(typeof e.r373Name==='string')e.r373Name='재 나방';e.r380Renamed=true;stats.removed++;}
  if(id==='dist01'){const sub=['재 나방','보랏빛 알집지기','거미줄에 묶인 수호병'];let k=0;
   for(const e of r.enemies)if(e&&!e.r380Renamed&&!e.boss&&!e.midboss&&!e.wardChampionR81&&!/중간보스|준보스/.test(e.name||'')&&String(e.nativeId||'').startsWith('dist01-sp1')&&SPIDER.test(e.name||'')){
    const n=sub[k%3]+' '+(Math.floor(k/3)+1);e.r380From=e.name;if(!e.r248Key)e.r248Key=String(e.name).replace(/ \d+$/,'').replace(/ (증원|추격대|우두머리|후속 증원)$/,'');e.name=n;e.r380Renamed=true;k++;stats.removed++;}}
@@ -48,7 +53,7 @@ function relocate(r,id,l){if(!prefs.on||!r||!Array.isArray(r.enemies)||l==='DREA
 //    늪(dist02, 다크그린 그림)과 dist00 밖에서는 원래 그 지역 몹으로 되돌린다(수·수치·id 그대로). dist00(보스만 있던 첫 뿌리 맵)에는 늪 순찰과 같은 수치의 뿌리 추적자 6마리를 새로 둔다.
 //  · "분노의 사냥개 … 분노 맵 적용"(검수 목록 19) = "7대죄 분노의귀청수부나오는곳"(ep1b07): 그 지역 R74 순찰 6마리를 분노의 사냥개로(수치 그대로).
 //  · 3×10 정규 무리(r75Pack)는 손대지 않는다. dist00 에 더한 몹은 id ':r383-root:N'·r383Added 로 남긴다(계약 검사가 이것만 빼고 본다).
-const ROOT_HOME='dist02',ROOT_ADD='dist00',WRATH_ZONE='ep1b07',WRATH='분노의 사냥개';let rootTpl=null;
+const ROOT_NAME='뿌리 추적자',SWAMP_ROOT='늪 뿌리 추적자',ROOT_HOME='dist02',ROOT_ADD='dist00',WRATH_ZONE='ep1b07',WRATH='분노의 사냥개';let rootTpl=null;
 // R387: 주사실(ep1a09)에는 지역 우두머리(mb-<지역> 중간보스)가 없다 → 사용자 지시(2026-11-07 "병원맵 주사실쪽에 보스가 나오지 않을걸 거기에 넣어줘")로
 //  '중독을 부르는 주사기 환영체'를 한 마리 더한다. 수치·전투 성격은 바로 다음 지역 우두머리(ep1a10 mb-ep1a10, 중간보스)를 복제해 쓰고,
 //  제단 가까이 빈 바닥 칸에 처음부터 보이게(spawnState active — 원래 우두머리는 hidden 으로 단계 뒤에 나옴) 둔다. 그림은 R380 index 의 syringe-phantom-boss-v1(이름으로 고름). 이 개체는 r383Added 로 표시해 R81 계약(3×10)에서 뺀다.
@@ -79,7 +84,9 @@ function balance(r,id,l){if(!Array.isArray(r.enemies))return;
   e.r383From=e.name;if(!e.r248Key)e.r248Key=String(d.r248Key||d.name).replace(/ \d+$/,'');const dn=String(d.r373Name||d.name).replace(/ \d+$/,'').replace(/ 우두머리$/,'');e.name=dn+(/우두머리$/.test(e.name)?' 우두머리':'');if(typeof e.r373Name==='string')e.r373Name=dn;e.r383RootFrom='root';delete e.r74Monster;stats.removed++;}
  if(id===WRATH_ZONE)for(const e of r.enemies)if(isPatrol(e)&&!e.r383Wrath){e.r383From=e.name;if(!e.r248Key)e.r248Key=String(e.name).replace(/ 우두머리$/,'');e.name=WRATH+(/우두머리$/.test(e.r383From)?' 우두머리':'');if(typeof e.r373Name==='string')e.r373Name=WRATH;e.r383Wrath=true;e.r383Atlas=e.r74Monster;delete e.r74Monster;stats.renamed++;}
  // 늪 다크그린 뿌리 추적자(R382)도 R74 지도 그림이 이 시트를 가렸다 → 같은 방식으로 frameFor 사슬에 넘긴다.
- if(id===ROOT_HOME)for(const e of r.enemies)if(isPatrol(e)&&e.r74Monster==='root'){e.r383Atlas='root';delete e.r74Monster;}
+ // R537(사용자 2026-11-10 "늪나오는 뿌리추적자 늪뿌리추적자로명명"): 늪 순찰은 이름을 '늪 뿌리 추적자'로(첫 뿌리 맵 dist00 은 그냥 뿌리 추적자). 공격 효과 키(r248Key)는 옛 이름.
+ if(id===ROOT_HOME)for(const e of r.enemies)if(isPatrol(e)&&e.r74Monster==='root'){e.r383Atlas='root';delete e.r74Monster;const nm=String(e.name||'');
+  if(/^뿌리 추적자/.test(nm)){e.r537From=nm;if(!e.r248Key)e.r248Key=ROOT_NAME;e.name=SWAMP_ROOT+nm.slice(ROOT_NAME.length);if(typeof e.r373Name==='string')e.r373Name=e.r373Name.replace(/^뿌리 추적자/,SWAMP_ROOT);stats.renamed++;}}
  if(id===SYR_ZONE&&l!=='DREAM')addSyringe(r,l);
  if(id===ROOT_ADD&&!r.enemies.some(e=>e?.r383Added)){const tpl=rootTemplate(l),L=r.exploration;if(!tpl||!L)return;
   const ent=L.entry||{x:0,y:0},boss=r.enemies.find(e=>e.boss),rad=tpl.combatProfile?.bodyBlock?.r||.4;
@@ -91,8 +98,16 @@ function balance(r,id,l){if(!Array.isArray(r.enemies))return;
     explorationGroup:'dist00:r383-pack:'+Math.floor(n/2),explorationLeash:32,r383Added:true,r75Pack:undefined});delete e.r75Pack;delete e.r74Monster;
    // R74 순찰 만들 때처럼 R61 정규화에 원래 수치 보존으로 등록(JSON 복제는 WeakMap 등록을 안 옮김, Codex P2).
    try{window.__STORYWORLD_SCALE_MELEE_R61__?.normalize?.(e,r,{preserveHealth:true,preserveDamage:true});}catch(err){fail(err);}r.enemies.push(e);n++;stats.added++;}}}
-function installRoom(){if(typeof makeRoom!=='function'||makeRoom.__r380)return typeof makeRoom==='function';const base=makeRoom;
+function installRoom(){try{installActor();}catch(err){fail(err);}if(typeof makeRoom!=='function'||makeRoom.__r380)return typeof makeRoom==='function';const base=makeRoom;
  const w=function(id,l,...a){const r=base.call(this,id,l,...a);try{bossNames(r);}catch(err){fail(err);}try{return relocate(r,id,l);}catch(err){fail(err);return r;}};w.__r380base=base;w.__r380=true;try{makeRoom=w;}catch(_){}try{window.makeRoom=w;}catch(_){}return true;}
+// R531(사용자 2026-11-10 "보라검천사보스 망각거미소환버그"): 거미동굴 중간보스 보라검천사의 R61 부하 소환은 지역 명단(regionById.dist01.roster)에서
+//  actor3 로 새 몹을 만든다 → 위 relocate(지역 만들 때 한 번)를 거치지 않아 옛 '망각의 거미'(옛 그림)가 그대로 나왔다.
+//  id 가 'dist01:r61-summon:' 인 actor3 결과만 같은 방식(이름·그림만, nativeId·수치·저장 그대로, R248 키는 옛 이름)으로 '재 나방'으로 바꾼다. 세이브 복원도 같은 길.
+function installActor(){if(typeof actor3!=='function')return false;if(actor3.__r531)return true;const base=actor3;
+ const w=function(d,id,x,y,boss,l,...a){const e=base.call(this,d,id,x,y,boss,l,...a);try{
+  if(prefs.on&&e&&l!=='DREAM'&&!e.boss&&!e.midboss&&/^dist01:r61-summon:/.test(String(id||''))&&SPIDER.test(e.name||'')){
+   e.r380From=e.name;if(!e.r248Key)e.r248Key='망각의 거미';e.name='재 나방';e.r380Renamed=true;stats.summonRenamed++;}}catch(err){fail(err);}return e;};
+ w.__r531=true;try{actor3=w;}catch(_){}try{window.actor3=w;}catch(_){}return true;}
 // ── 그림 ──
 function match(e){if(!idx||!e||e.hero||(e.boss&&!idx.mobs.some(m=>m.actor.boss&&new RegExp(m.actor.name).test(String(e.name||''))))||e.r170Tower||e.r251Circle)return null;try{if(typeof player!=='undefined'&&e===player)return null;}catch(_){}
  const L=curLayer(),n=String(e.name||''),mode=artMode();
@@ -114,7 +129,13 @@ function cellFor(e,m){if(attacking(e))return m.attack[Math.floor(progress(e)*m.a
  if(!(e.hp>0)||e.hitTimer>0)return m.move[0];
  if(e.moving)return m.move[Math.floor(T()*8+hash(e.id)*8)%m.move.length];
  return m.idle?.length&&m.idle[0]!==m.move[0]?m.idle[0]:m.move[Math.floor(T()*1.6+hash(e.id)*2)%Math.min(2,m.move.length)];}
-function faceLeft(e){if(attacking(e)&&Number.isFinite(e.attack.angle)){const sd=Math.cos(e.attack.angle)-Math.sin(e.attack.angle);if(Math.abs(sd)>.05)return sd<0;}
+// R441(사용자 2026-11-09 "왼쪽아래로 움직여야하는데 왜 오른쪽 아래로"): 걷는 동안은 영웅 쪽이 아니라 실제로 움직이는 화면 좌우로 본다
+//  (R425 X자 지그재그 다리마다 좌우가 바뀌는데 영웅 쪽만 보면 반은 뒷걸음처럼 보였다). 멈추면·공격하면 예전처럼 영웅·공격 방향.
+const MOVE=new WeakMap();
+function moveLeft(e){const sx=e.x-e.y,t=T();let m=MOVE.get(e);if(!m){MOVE.set(e,m={sx,t,left:null,at:-9});return null;}
+ const d=sx-m.sx;if(Math.abs(d)>.004){m.left=d<0;m.at=t;m.sx=sx;}else if(t-m.at>.35)m.sx=sx;m.t=t;return e.moving&&m.left!=null&&t-m.at<.35?m.left:null;}
+function faceLeft(e){const r444=window.__STORYWORLD_ENEMY_FACE_R444__?.left?.(e);if(typeof r444==='boolean')return r444;/* R444: 좌우는 enemy-face-r444 한 곳에서(공격 판정 각·충돌 뒤 실제 걸음·영웅 쪽) — 꺼지면 아래 R441 규칙 */const mv=e&&prefs.face!==false?moveLeft(e):null;if(attacking(e)&&Number.isFinite(e.attack.angle)){const sd=Math.cos(e.attack.angle)-Math.sin(e.attack.angle);if(Math.abs(sd)>.05)return sd<0;}
+ if(mv!=null&&!(e.rangedWindup>0))return mv;
  try{return !!(player&&(player.x-player.y)<(e.x-e.y));}catch(_){return false;}}
 function frameOf(e,m,id){const [cw,ch]=m.cell,[px,py]=m.pivot,vh=m.visibleHeight||150,k=cellFor(e,m),cols=m.cols||k+1,sx=(k%cols)*cw,sy=Math.floor(k/cols)*ch;
  const flip=faceLeft(e)!==(m.facing==='left');

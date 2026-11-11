@@ -1,0 +1,3325 @@
+{
+  "schema": "r86-hero-image-consistency/v1",
+  "checks": [
+    {
+      "name": "All 520 authored hero routes are sampled at four clocks with eight heroes",
+      "passed": true,
+      "detail": {
+        "frames": 2080,
+        "paths": 122
+      }
+    },
+    {
+      "name": "Every presented crop lies inside its decoded source and contains visible alpha",
+      "passed": true,
+      "detail": {
+        "invalid": [],
+        "blank": []
+      }
+    },
+    {
+      "name": "Every source-relative feet anchor is within three body pixels of its measured sole",
+      "passed": true,
+      "detail": {
+        "maxGap": 2.778947368421053
+      }
+    },
+    {
+      "name": "Every rendered body has finite positive dimensions without mirroring its logical direction",
+      "passed": true
+    },
+    {
+      "name": "Calibrated moving and injured bodies retain measured 66px height; crouched gunner roll retains44px",
+      "passed": true,
+      "detail": {
+        "count": 272
+      }
+    },
+    {
+      "name": "Authored weapon extents are preserved instead of normalizing raised weapons into short bodies",
+      "passed": true,
+      "detail": {
+        "cases": 360,
+        "alphaHeights": {
+          "hwando": [
+            66,
+            77.29203539823008
+          ],
+          "seoha": [
+            66,
+            82.17362826151282
+          ],
+          "neon": [
+            66,
+            99.45545826021181
+          ],
+          "michaela": [
+            66,
+            94.55542598384635
+          ],
+          "lauren": [
+            66,
+            100.15563578797598
+          ],
+          "hunter": [
+            66,
+            87.63400317766676
+          ],
+          "slayer": [
+            65.6544502617801,
+            71.18324607329843
+          ],
+          "gunner": [
+            44,
+            95.7451993937298
+          ]
+        },
+        "note": "Alpha includes authored raised guns/spears/hands, so total bitmap height is not anatomical body height."
+      }
+    },
+    {
+      "name": "Actual drawHero emits its matching image for eight heroes, eight states, four directions and three zooms",
+      "passed": true,
+      "detail": {
+        "draws": 768,
+        "missing": []
+      }
+    },
+    {
+      "name": "Actual recorded body quads remain finite in every direction and zoom",
+      "passed": true
+    },
+    {
+      "name": "Native body image scales exactly once at all three zooms, retaining authored pose shear",
+      "passed": true,
+      "detail": {
+        "count": 768,
+        "note": "Hospital idle breath/stride and combat contact shear are native local body motion, not extra zoom."
+      }
+    },
+    {
+      "name": "Hero art drawing never changes HP or authored combat frames",
+      "passed": true
+    },
+    {
+      "name": "All recorded source images are local preserved assets",
+      "passed": true
+    },
+    {
+      "name": "No runtime errors in exhaustive hero image replay",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "browserVerified": false,
+  "GPUVerified": false,
+  "metrics": {
+    "images": 122,
+    "uniqueCrops": 146,
+    "invalidCrops": [],
+    "blank": [],
+    "worstFootGap66": 2.778947368421053,
+    "calibrated": [
+      {
+        "key": "seoha:move:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:move:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:move:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:move:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:hit:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:hit:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:hit:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:hit:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:dash:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:dash:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:dash:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:dash:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:move:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:move:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:move:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:move:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:hit:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:hit:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:hit:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:hit:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:dash:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:dash:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:dash:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:dash:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:move:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:move:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:move:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:move:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:hit:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:hit:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:hit:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:hit:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:dash:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:dash:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:dash:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:dash:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:move:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:move:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:move:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:move:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:hit:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:hit:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:hit:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:hit:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:dash:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:dash:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:dash:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "seoha:dash:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:move:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:move:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:move:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:move:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:hit:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:hit:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:hit:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:hit:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:dash:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:dash:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:dash:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:dash:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:move:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:move:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:move:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:move:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:hit:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:hit:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:hit:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:hit:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:dash:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:dash:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:dash:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:dash:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:move:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:move:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:move:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:move:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:hit:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:hit:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:hit:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:hit:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:dash:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:dash:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:dash:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:dash:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:move:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:move:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:move:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:move:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:hit:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:hit:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:hit:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:hit:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:dash:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:dash:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:dash:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "neon:dash:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:move:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:move:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:move:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:move:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:hit:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:hit:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:hit:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:hit:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:dash:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:dash:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:dash:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:dash:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:move:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:move:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:move:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:move:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:hit:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:hit:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:hit:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:hit:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:dash:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:dash:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:dash:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:dash:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:move:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:move:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:move:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:move:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:hit:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:hit:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:hit:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:hit:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:dash:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:dash:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:dash:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:dash:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:move:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:move:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:move:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:move:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:hit:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:hit:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:hit:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:hit:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:dash:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:dash:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:dash:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "michaela:dash:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:move:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:move:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:move:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:move:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:dash:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:dash:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:dash:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:dash:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:move:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:move:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:move:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:move:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:dash:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:dash:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:dash:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:dash:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:move:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:move:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:move:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:move:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:dash:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:dash:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:dash:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:dash:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:move:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:move:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:move:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:move:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:dash:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:dash:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:dash:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "lauren:dash:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:move:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:move:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:move:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:move:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:hit:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:hit:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:hit:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:hit:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:dash:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:dash:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:dash:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:dash:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:move:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:move:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:move:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:move:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:hit:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:hit:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:hit:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:hit:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:dash:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:dash:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:dash:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:dash:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:move:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:move:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:move:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:move:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:hit:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:hit:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:hit:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:hit:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:dash:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:dash:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:dash:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:dash:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:move:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:move:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:move:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:move:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:hit:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:hit:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:hit:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:hit:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:dash:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:dash:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:dash:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "hunter:dash:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:move:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:move:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:move:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:move:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:hit:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:hit:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:hit:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:hit:front",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:dash:front",
+        "height": 44,
+        "target": 44
+      },
+      {
+        "key": "gunner:dash:front",
+        "height": 44,
+        "target": 44
+      },
+      {
+        "key": "gunner:dash:front",
+        "height": 44,
+        "target": 44
+      },
+      {
+        "key": "gunner:dash:front",
+        "height": 44,
+        "target": 44
+      },
+      {
+        "key": "gunner:move:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:move:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:move:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:move:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:hit:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:hit:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:hit:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:hit:back",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:dash:back",
+        "height": 44,
+        "target": 44
+      },
+      {
+        "key": "gunner:dash:back",
+        "height": 44,
+        "target": 44
+      },
+      {
+        "key": "gunner:dash:back",
+        "height": 44,
+        "target": 44
+      },
+      {
+        "key": "gunner:dash:back",
+        "height": 44,
+        "target": 44
+      },
+      {
+        "key": "gunner:move:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:move:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:move:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:move:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:hit:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:hit:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:hit:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:hit:left",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:dash:left",
+        "height": 44,
+        "target": 44
+      },
+      {
+        "key": "gunner:dash:left",
+        "height": 44,
+        "target": 44
+      },
+      {
+        "key": "gunner:dash:left",
+        "height": 44,
+        "target": 44
+      },
+      {
+        "key": "gunner:dash:left",
+        "height": 44,
+        "target": 44
+      },
+      {
+        "key": "gunner:move:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:move:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:move:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:move:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:hit:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:hit:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:hit:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:hit:right",
+        "height": 66,
+        "target": 66
+      },
+      {
+        "key": "gunner:dash:right",
+        "height": 44,
+        "target": 44
+      },
+      {
+        "key": "gunner:dash:right",
+        "height": 44,
+        "target": 44
+      },
+      {
+        "key": "gunner:dash:right",
+        "height": 44,
+        "target": 44
+      },
+      {
+        "key": "gunner:dash:right",
+        "height": 44,
+        "target": 44
+      }
+    ],
+    "raisedWeapons": [
+      {
+        "key": "seoha:attack:back",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:attack:back",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:attack:back",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:attack:back",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:skill:back",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:skill:back",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:skill:back",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:skill:back",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:ultimate:back",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:ultimate:back",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:ultimate:back",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:ultimate:back",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:attack:back",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:attack:back",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:attack:back",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:attack:back",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:skill:back",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:skill:back",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:skill:back",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:skill:back",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:ultimate:back",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:ultimate:back",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:ultimate:back",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:ultimate:back",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:attack:back",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:attack:back",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:attack:back",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:attack:back",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:skill:back",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:skill:back",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:skill:back",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:skill:back",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:ultimate:back",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:ultimate:back",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:ultimate:back",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:ultimate:back",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:attack:back",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:attack:back",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:attack:back",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:attack:back",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:hit:back",
+        "height": 100.15563578797598,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:hit:back",
+        "height": 100.15563578797598,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:hit:back",
+        "height": 100.15563578797598,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:hit:back",
+        "height": 100.15563578797598,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:skill:back",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:skill:back",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:skill:back",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:skill:back",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:ultimate:back",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:ultimate:back",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:ultimate:back",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:ultimate:back",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:attack:back",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:attack:back",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:attack:back",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:attack:back",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:skill:back",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:skill:back",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:skill:back",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:skill:back",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:ultimate:back",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:ultimate:back",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:ultimate:back",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:ultimate:back",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:idle:back",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:idle:back",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:idle:back",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:idle:back",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:attack:back",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:attack:back",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:attack:back",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:attack:back",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:skill:back",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:skill:back",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:skill:back",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:skill:back",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:guard:back",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:guard:back",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:guard:back",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:guard:back",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:ultimate:back",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:ultimate:back",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:ultimate:back",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:ultimate:back",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:idle:n",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:idle:n",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:idle:n",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:idle:n",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:move:n",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:move:n",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:move:n",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:move:n",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:attack:n",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:attack:n",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:attack:n",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:attack:n",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:skill:n",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:skill:n",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:skill:n",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:skill:n",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:ultimate:n",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:ultimate:n",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:ultimate:n",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "seoha:ultimate:n",
+        "height": 82.17362826151282,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:idle:nw",
+        "height": 84.97279167351542,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:idle:nw",
+        "height": 84.97279167351542,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:idle:nw",
+        "height": 84.97279167351542,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:idle:nw",
+        "height": 84.97279167351542,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:move:nw",
+        "height": 84.97279167351542,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:move:nw",
+        "height": 84.97279167351542,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:move:nw",
+        "height": 84.97279167351542,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:move:nw",
+        "height": 84.97279167351542,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:attack:nw",
+        "height": 84.97279167351542,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:attack:nw",
+        "height": 84.97279167351542,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:attack:nw",
+        "height": 84.97279167351542,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:attack:nw",
+        "height": 84.97279167351542,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:skill:nw",
+        "height": 84.97279167351542,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:skill:nw",
+        "height": 84.97279167351542,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:skill:nw",
+        "height": 84.97279167351542,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:skill:nw",
+        "height": 84.97279167351542,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:ultimate:nw",
+        "height": 84.97279167351542,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:ultimate:nw",
+        "height": 84.97279167351542,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:ultimate:nw",
+        "height": 84.97279167351542,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:ultimate:nw",
+        "height": 84.97279167351542,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:idle:ne",
+        "height": 83.18422171633789,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:idle:ne",
+        "height": 83.18422171633789,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:idle:ne",
+        "height": 83.18422171633789,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:idle:ne",
+        "height": 83.18422171633789,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:move:ne",
+        "height": 83.18422171633789,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:move:ne",
+        "height": 83.18422171633789,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:move:ne",
+        "height": 83.18422171633789,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:move:ne",
+        "height": 83.18422171633789,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:attack:ne",
+        "height": 83.18422171633789,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:attack:ne",
+        "height": 83.18422171633789,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:attack:ne",
+        "height": 83.18422171633789,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:attack:ne",
+        "height": 83.18422171633789,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:skill:ne",
+        "height": 83.18422171633789,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:skill:ne",
+        "height": 83.18422171633789,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:skill:ne",
+        "height": 83.18422171633789,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:skill:ne",
+        "height": 83.18422171633789,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:ultimate:ne",
+        "height": 83.18422171633789,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:ultimate:ne",
+        "height": 83.18422171633789,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:ultimate:ne",
+        "height": 83.18422171633789,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:ultimate:ne",
+        "height": 83.18422171633789,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:idle:n",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:idle:n",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:idle:n",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:idle:n",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:move:n",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:move:n",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:move:n",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:move:n",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:attack:n",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:attack:n",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:attack:n",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:attack:n",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:skill:n",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:skill:n",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:skill:n",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:skill:n",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:ultimate:n",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:ultimate:n",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:ultimate:n",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "neon:ultimate:n",
+        "height": 99.45545826021181,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:idle:n",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:idle:n",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:idle:n",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:idle:n",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:move:n",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:move:n",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:move:n",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:move:n",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:attack:n",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:attack:n",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:attack:n",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:attack:n",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:skill:n",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:skill:n",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:skill:n",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:skill:n",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:ultimate:n",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:ultimate:n",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:ultimate:n",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "michaela:ultimate:n",
+        "height": 94.55542598384635,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:idle:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:idle:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:idle:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:idle:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:move:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:move:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:move:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:move:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:attack:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:attack:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:attack:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:attack:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:skill:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:skill:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:skill:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:skill:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:guard:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:guard:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:guard:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:guard:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:dash:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:dash:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:dash:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:dash:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:hit:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:hit:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:hit:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:hit:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:ultimate:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:ultimate:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:ultimate:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:ultimate:nw",
+        "height": 82.58921776059425,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:idle:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:idle:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:idle:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:idle:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:move:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:move:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:move:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:move:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:attack:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:attack:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:attack:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:attack:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:skill:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:skill:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:skill:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:skill:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:guard:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:guard:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:guard:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:guard:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:dash:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:dash:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:dash:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:dash:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:hit:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:hit:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:hit:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:hit:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:ultimate:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:ultimate:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:ultimate:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:ultimate:ne",
+        "height": 84.80446927374301,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:idle:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:idle:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:idle:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:idle:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:move:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:move:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:move:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:move:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:attack:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:attack:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:attack:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:attack:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:skill:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:skill:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:skill:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:skill:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:guard:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:guard:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:guard:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:guard:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:dash:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:dash:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:dash:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:dash:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:hit:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:hit:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:hit:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:hit:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:ultimate:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:ultimate:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:ultimate:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "lauren:ultimate:n",
+        "height": 88.22900327962356,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:idle:nw",
+        "height": 87.63400317766676,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:idle:nw",
+        "height": 87.63400317766676,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:idle:nw",
+        "height": 87.63400317766676,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:idle:nw",
+        "height": 87.63400317766676,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:move:nw",
+        "height": 87.63400317766676,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:move:nw",
+        "height": 87.63400317766676,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:move:nw",
+        "height": 87.63400317766676,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:move:nw",
+        "height": 87.63400317766676,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:attack:nw",
+        "height": 87.63400317766676,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:attack:nw",
+        "height": 87.63400317766676,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:attack:nw",
+        "height": 87.63400317766676,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:attack:nw",
+        "height": 87.63400317766676,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:skill:nw",
+        "height": 87.63400317766676,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:skill:nw",
+        "height": 87.63400317766676,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:skill:nw",
+        "height": 87.63400317766676,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:skill:nw",
+        "height": 87.63400317766676,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:ultimate:nw",
+        "height": 87.63400317766676,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:ultimate:nw",
+        "height": 87.63400317766676,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:ultimate:nw",
+        "height": 87.63400317766676,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:ultimate:nw",
+        "height": 87.63400317766676,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:idle:ne",
+        "height": 84.26834578615083,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:idle:ne",
+        "height": 84.26834578615083,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:idle:ne",
+        "height": 84.26834578615083,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:idle:ne",
+        "height": 84.26834578615083,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:move:ne",
+        "height": 84.26834578615083,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:move:ne",
+        "height": 84.26834578615083,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:move:ne",
+        "height": 84.26834578615083,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:move:ne",
+        "height": 84.26834578615083,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:attack:ne",
+        "height": 84.26834578615083,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:attack:ne",
+        "height": 84.26834578615083,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:attack:ne",
+        "height": 84.26834578615083,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:attack:ne",
+        "height": 84.26834578615083,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:skill:ne",
+        "height": 84.26834578615083,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:skill:ne",
+        "height": 84.26834578615083,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:skill:ne",
+        "height": 84.26834578615083,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:skill:ne",
+        "height": 84.26834578615083,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:ultimate:ne",
+        "height": 84.26834578615083,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:ultimate:ne",
+        "height": 84.26834578615083,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:ultimate:ne",
+        "height": 84.26834578615083,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:ultimate:ne",
+        "height": 84.26834578615083,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:idle:n",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:idle:n",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:idle:n",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:idle:n",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:move:n",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:move:n",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:move:n",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:move:n",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:attack:n",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:attack:n",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:attack:n",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:attack:n",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:skill:n",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:skill:n",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:skill:n",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:skill:n",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:ultimate:n",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:ultimate:n",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:ultimate:n",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "hunter:ultimate:n",
+        "height": 87.12922203567378,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:idle:n",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:idle:n",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:idle:n",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:idle:n",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:move:n",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:move:n",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:move:n",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:move:n",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:attack:n",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:attack:n",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:attack:n",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:attack:n",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:skill:n",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:skill:n",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:skill:n",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:skill:n",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:ultimate:n",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:ultimate:n",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:ultimate:n",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      },
+      {
+        "key": "gunner:ultimate:n",
+        "height": 95.7451993937298,
+        "bodyTarget": 66
+      }
+    ],
+    "heroRanges": {
+      "hwando": [
+        66,
+        77.29203539823008
+      ],
+      "seoha": [
+        66,
+        82.17362826151282
+      ],
+      "neon": [
+        66,
+        99.45545826021181
+      ],
+      "michaela": [
+        66,
+        94.55542598384635
+      ],
+      "lauren": [
+        66,
+        100.15563578797598
+      ],
+      "hunter": [
+        66,
+        87.63400317766676
+      ],
+      "slayer": [
+        65.6544502617801,
+        71.18324607329843
+      ],
+      "gunner": [
+        44,
+        95.7451993937298
+      ]
+    }
+  },
+  "drawCount": 768,
+  "runtimeChanged": false,
+  "visualInspection": "CPU-native crop contact sheets inspected; raised weapon bounds intentionally differ from anatomical body height. Browser/GPU and artistic identity across original styles remain unverified.",
+  "passed": true
+}

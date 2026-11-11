@@ -1,0 +1,3182 @@
+﻿[
+    {
+        "file":  "walk_gunner_e.png",
+        "bottomMin":  433,
+        "bottomMax":  473,
+        "bottomSpread":  40,
+        "footXSpread":  60,
+        "heightMin":  280,
+        "heightMax":  291,
+        "heightSpread":  11,
+        "cells":  [
+                      {
+                          "bottom":  433,
+                          "top":  142,
+                          "height":  291,
+                          "footX":  239
+                      },
+                      {
+                          "bottom":  449,
+                          "top":  160,
+                          "height":  289,
+                          "footX":  208
+                      },
+                      {
+                          "bottom":  446,
+                          "top":  159,
+                          "height":  287,
+                          "footX":  233
+                      },
+                      {
+                          "bottom":  438,
+                          "top":  153,
+                          "height":  285,
+                          "footX":  263
+                      },
+                      {
+                          "bottom":  455,
+                          "top":  175,
+                          "height":  280,
+                          "footX":  229
+                      },
+                      {
+                          "bottom":  473,
+                          "top":  188,
+                          "height":  285,
+                          "footX":  203
+                      },
+                      {
+                          "bottom":  472,
+                          "top":  191,
+                          "height":  281,
+                          "footX":  248
+                      },
+                      {
+                          "bottom":  458,
+                          "top":  173,
+                          "height":  285,
+                          "footX":  257
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_gunner_ne.png",
+        "bottomMin":  443,
+        "bottomMax":  485,
+        "bottomSpread":  42,
+        "footXSpread":  49,
+        "heightMin":  290,
+        "heightMax":  301,
+        "heightSpread":  11,
+        "cells":  [
+                      {
+                          "bottom":  444,
+                          "top":  146,
+                          "height":  298,
+                          "footX":  130
+                      },
+                      {
+                          "bottom":  443,
+                          "top":  150,
+                          "height":  293,
+                          "footX":  136
+                      },
+                      {
+                          "bottom":  454,
+                          "top":  156,
+                          "height":  298,
+                          "footX":  137
+                      },
+                      {
+                          "bottom":  443,
+                          "top":  149,
+                          "height":  294,
+                          "footX":  163
+                      },
+                      {
+                          "bottom":  482,
+                          "top":  188,
+                          "height":  294,
+                          "footX":  123
+                      },
+                      {
+                          "bottom":  465,
+                          "top":  175,
+                          "height":  290,
+                          "footX":  169
+                      },
+                      {
+                          "bottom":  484,
+                          "top":  187,
+                          "height":  297,
+                          "footX":  161
+                      },
+                      {
+                          "bottom":  485,
+                          "top":  184,
+                          "height":  301,
+                          "footX":  172
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_gunner_nw.png",
+        "bottomMin":  431,
+        "bottomMax":  459,
+        "bottomSpread":  28,
+        "footXSpread":  93,
+        "heightMin":  302,
+        "heightMax":  316,
+        "heightSpread":  14,
+        "cells":  [
+                      {
+                          "bottom":  431,
+                          "top":  115,
+                          "height":  316,
+                          "footX":  258
+                      },
+                      {
+                          "bottom":  459,
+                          "top":  150,
+                          "height":  309,
+                          "footX":  174
+                      },
+                      {
+                          "bottom":  435,
+                          "top":  121,
+                          "height":  314,
+                          "footX":  228
+                      },
+                      {
+                          "bottom":  456,
+                          "top":  145,
+                          "height":  311,
+                          "footX":  216
+                      },
+                      {
+                          "bottom":  456,
+                          "top":  144,
+                          "height":  312,
+                          "footX":  257
+                      },
+                      {
+                          "bottom":  447,
+                          "top":  145,
+                          "height":  302,
+                          "footX":  175
+                      },
+                      {
+                          "bottom":  456,
+                          "top":  148,
+                          "height":  308,
+                          "footX":  227
+                      },
+                      {
+                          "bottom":  458,
+                          "top":  143,
+                          "height":  315,
+                          "footX":  267
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_gunner_s.png",
+        "bottomMin":  463,
+        "bottomMax":  483,
+        "bottomSpread":  20,
+        "footXSpread":  39,
+        "heightMin":  312,
+        "heightMax":  324,
+        "heightSpread":  12,
+        "cells":  [
+                      {
+                          "bottom":  481,
+                          "top":  157,
+                          "height":  324,
+                          "footX":  177
+                      },
+                      {
+                          "bottom":  470,
+                          "top":  152,
+                          "height":  318,
+                          "footX":  176
+                      },
+                      {
+                          "bottom":  471,
+                          "top":  154,
+                          "height":  317,
+                          "footX":  173
+                      },
+                      {
+                          "bottom":  468,
+                          "top":  151,
+                          "height":  317,
+                          "footX":  182
+                      },
+                      {
+                          "bottom":  481,
+                          "top":  163,
+                          "height":  318,
+                          "footX":  212
+                      },
+                      {
+                          "bottom":  463,
+                          "top":  151,
+                          "height":  312,
+                          "footX":  212
+                      },
+                      {
+                          "bottom":  483,
+                          "top":  171,
+                          "height":  312,
+                          "footX":  204
+                      },
+                      {
+                          "bottom":  483,
+                          "top":  167,
+                          "height":  316,
+                          "footX":  211
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_gunner_se.png",
+        "bottomMin":  437,
+        "bottomMax":  481,
+        "bottomSpread":  44,
+        "footXSpread":  71,
+        "heightMin":  279,
+        "heightMax":  288,
+        "heightSpread":  9,
+        "cells":  [
+                      {
+                          "bottom":  437,
+                          "top":  151,
+                          "height":  286,
+                          "footX":  231
+                      },
+                      {
+                          "bottom":  447,
+                          "top":  161,
+                          "height":  286,
+                          "footX":  204
+                      },
+                      {
+                          "bottom":  450,
+                          "top":  162,
+                          "height":  288,
+                          "footX":  238
+                      },
+                      {
+                          "bottom":  456,
+                          "top":  170,
+                          "height":  286,
+                          "footX":  207
+                      },
+                      {
+                          "bottom":  473,
+                          "top":  194,
+                          "height":  279,
+                          "footX":  228
+                      },
+                      {
+                          "bottom":  481,
+                          "top":  200,
+                          "height":  281,
+                          "footX":  167
+                      },
+                      {
+                          "bottom":  471,
+                          "top":  188,
+                          "height":  283,
+                          "footX":  236
+                      },
+                      {
+                          "bottom":  481,
+                          "top":  201,
+                          "height":  280,
+                          "footX":  204
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_gunner_sw.png",
+        "bottomMin":  450,
+        "bottomMax":  483,
+        "bottomSpread":  33,
+        "footXSpread":  55,
+        "heightMin":  298,
+        "heightMax":  310,
+        "heightSpread":  12,
+        "cells":  [
+                      {
+                          "bottom":  464,
+                          "top":  154,
+                          "height":  310,
+                          "footX":  106
+                      },
+                      {
+                          "bottom":  458,
+                          "top":  157,
+                          "height":  301,
+                          "footX":  146
+                      },
+                      {
+                          "bottom":  470,
+                          "top":  170,
+                          "height":  300,
+                          "footX":  156
+                      },
+                      {
+                          "bottom":  450,
+                          "top":  147,
+                          "height":  303,
+                          "footX":  156
+                      },
+                      {
+                          "bottom":  462,
+                          "top":  159,
+                          "height":  303,
+                          "footX":  116
+                      },
+                      {
+                          "bottom":  483,
+                          "top":  185,
+                          "height":  298,
+                          "footX":  143
+                      },
+                      {
+                          "bottom":  482,
+                          "top":  181,
+                          "height":  301,
+                          "footX":  144
+                      },
+                      {
+                          "bottom":  461,
+                          "top":  159,
+                          "height":  302,
+                          "footX":  161
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_gunner_w.png",
+        "bottomMin":  435,
+        "bottomMax":  485,
+        "bottomSpread":  50,
+        "footXSpread":  97,
+        "heightMin":  298,
+        "heightMax":  306,
+        "heightSpread":  8,
+        "cells":  [
+                      {
+                          "bottom":  435,
+                          "top":  129,
+                          "height":  306,
+                          "footX":  106
+                      },
+                      {
+                          "bottom":  440,
+                          "top":  136,
+                          "height":  304,
+                          "footX":  146
+                      },
+                      {
+                          "bottom":  459,
+                          "top":  161,
+                          "height":  298,
+                          "footX":  203
+                      },
+                      {
+                          "bottom":  460,
+                          "top":  158,
+                          "height":  302,
+                          "footX":  181
+                      },
+                      {
+                          "bottom":  478,
+                          "top":  178,
+                          "height":  300,
+                          "footX":  142
+                      },
+                      {
+                          "bottom":  485,
+                          "top":  184,
+                          "height":  301,
+                          "footX":  152
+                      },
+                      {
+                          "bottom":  483,
+                          "top":  185,
+                          "height":  298,
+                          "footX":  161
+                      },
+                      {
+                          "bottom":  477,
+                          "top":  175,
+                          "height":  302,
+                          "footX":  186
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_hunter_n.png",
+        "bottomMin":  458,
+        "bottomMax":  476,
+        "bottomSpread":  18,
+        "footXSpread":  67,
+        "heightMin":  311,
+        "heightMax":  322,
+        "heightSpread":  11,
+        "cells":  [
+                      {
+                          "bottom":  468,
+                          "top":  146,
+                          "height":  322,
+                          "footX":  195
+                      },
+                      {
+                          "bottom":  458,
+                          "top":  147,
+                          "height":  311,
+                          "footX":  204
+                      },
+                      {
+                          "bottom":  463,
+                          "top":  143,
+                          "height":  320,
+                          "footX":  202
+                      },
+                      {
+                          "bottom":  459,
+                          "top":  140,
+                          "height":  319,
+                          "footX":  211
+                      },
+                      {
+                          "bottom":  475,
+                          "top":  156,
+                          "height":  319,
+                          "footX":  151
+                      },
+                      {
+                          "bottom":  472,
+                          "top":  161,
+                          "height":  311,
+                          "footX":  196
+                      },
+                      {
+                          "bottom":  469,
+                          "top":  158,
+                          "height":  311,
+                          "footX":  195
+                      },
+                      {
+                          "bottom":  476,
+                          "top":  160,
+                          "height":  316,
+                          "footX":  218
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_hunter_ne.png",
+        "bottomMin":  461,
+        "bottomMax":  478,
+        "bottomSpread":  17,
+        "footXSpread":  47,
+        "heightMin":  312,
+        "heightMax":  317,
+        "heightSpread":  5,
+        "cells":  [
+                      {
+                          "bottom":  462,
+                          "top":  146,
+                          "height":  316,
+                          "footX":  125
+                      },
+                      {
+                          "bottom":  461,
+                          "top":  148,
+                          "height":  313,
+                          "footX":  160
+                      },
+                      {
+                          "bottom":  461,
+                          "top":  144,
+                          "height":  317,
+                          "footX":  151
+                      },
+                      {
+                          "bottom":  469,
+                          "top":  157,
+                          "height":  312,
+                          "footX":  170
+                      },
+                      {
+                          "bottom":  462,
+                          "top":  146,
+                          "height":  316,
+                          "footX":  133
+                      },
+                      {
+                          "bottom":  477,
+                          "top":  162,
+                          "height":  315,
+                          "footX":  164
+                      },
+                      {
+                          "bottom":  463,
+                          "top":  149,
+                          "height":  314,
+                          "footX":  157
+                      },
+                      {
+                          "bottom":  478,
+                          "top":  162,
+                          "height":  316,
+                          "footX":  172
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_hunter_nw.png",
+        "bottomMin":  453,
+        "bottomMax":  483,
+        "bottomSpread":  30,
+        "footXSpread":  47,
+        "heightMin":  323,
+        "heightMax":  327,
+        "heightSpread":  4,
+        "cells":  [
+                      {
+                          "bottom":  456,
+                          "top":  129,
+                          "height":  327,
+                          "footX":  224
+                      },
+                      {
+                          "bottom":  483,
+                          "top":  156,
+                          "height":  327,
+                          "footX":  193
+                      },
+                      {
+                          "bottom":  453,
+                          "top":  129,
+                          "height":  324,
+                          "footX":  224
+                      },
+                      {
+                          "bottom":  483,
+                          "top":  157,
+                          "height":  326,
+                          "footX":  238
+                      },
+                      {
+                          "bottom":  480,
+                          "top":  157,
+                          "height":  323,
+                          "footX":  212
+                      },
+                      {
+                          "bottom":  480,
+                          "top":  156,
+                          "height":  324,
+                          "footX":  210
+                      },
+                      {
+                          "bottom":  467,
+                          "top":  142,
+                          "height":  325,
+                          "footX":  236
+                      },
+                      {
+                          "bottom":  483,
+                          "top":  158,
+                          "height":  325,
+                          "footX":  240
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_hunter_s.png",
+        "bottomMin":  462,
+        "bottomMax":  479,
+        "bottomSpread":  17,
+        "footXSpread":  30,
+        "heightMin":  321,
+        "heightMax":  329,
+        "heightSpread":  8,
+        "cells":  [
+                      {
+                          "bottom":  464,
+                          "top":  136,
+                          "height":  328,
+                          "footX":  169
+                      },
+                      {
+                          "bottom":  467,
+                          "top":  138,
+                          "height":  329,
+                          "footX":  164
+                      },
+                      {
+                          "bottom":  465,
+                          "top":  136,
+                          "height":  329,
+                          "footX":  176
+                      },
+                      {
+                          "bottom":  470,
+                          "top":  145,
+                          "height":  325,
+                          "footX":  188
+                      },
+                      {
+                          "bottom":  462,
+                          "top":  139,
+                          "height":  323,
+                          "footX":  178
+                      },
+                      {
+                          "bottom":  467,
+                          "top":  138,
+                          "height":  329,
+                          "footX":  158
+                      },
+                      {
+                          "bottom":  479,
+                          "top":  156,
+                          "height":  323,
+                          "footX":  164
+                      },
+                      {
+                          "bottom":  477,
+                          "top":  156,
+                          "height":  321,
+                          "footX":  182
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_hunter_se.png",
+        "bottomMin":  449,
+        "bottomMax":  483,
+        "bottomSpread":  34,
+        "footXSpread":  65,
+        "heightMin":  308,
+        "heightMax":  327,
+        "heightSpread":  19,
+        "cells":  [
+                      {
+                          "bottom":  467,
+                          "top":  140,
+                          "height":  327,
+                          "footX":  239
+                      },
+                      {
+                          "bottom":  474,
+                          "top":  165,
+                          "height":  309,
+                          "footX":  206
+                      },
+                      {
+                          "bottom":  453,
+                          "top":  138,
+                          "height":  315,
+                          "footX":  239
+                      },
+                      {
+                          "bottom":  449,
+                          "top":  139,
+                          "height":  310,
+                          "footX":  257
+                      },
+                      {
+                          "bottom":  477,
+                          "top":  156,
+                          "height":  321,
+                          "footX":  262
+                      },
+                      {
+                          "bottom":  474,
+                          "top":  162,
+                          "height":  312,
+                          "footX":  240
+                      },
+                      {
+                          "bottom":  483,
+                          "top":  172,
+                          "height":  311,
+                          "footX":  233
+                      },
+                      {
+                          "bottom":  476,
+                          "top":  168,
+                          "height":  308,
+                          "footX":  271
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_hunter_sw.png",
+        "bottomMin":  452,
+        "bottomMax":  480,
+        "bottomSpread":  28,
+        "footXSpread":  83,
+        "heightMin":  297,
+        "heightMax":  319,
+        "heightSpread":  22,
+        "cells":  [
+                      {
+                          "bottom":  452,
+                          "top":  133,
+                          "height":  319,
+                          "footX":  100
+                      },
+                      {
+                          "bottom":  469,
+                          "top":  165,
+                          "height":  304,
+                          "footX":  183
+                      },
+                      {
+                          "bottom":  473,
+                          "top":  159,
+                          "height":  314,
+                          "footX":  158
+                      },
+                      {
+                          "bottom":  468,
+                          "top":  155,
+                          "height":  313,
+                          "footX":  167
+                      },
+                      {
+                          "bottom":  476,
+                          "top":  159,
+                          "height":  317,
+                          "footX":  103
+                      },
+                      {
+                          "bottom":  472,
+                          "top":  175,
+                          "height":  297,
+                          "footX":  181
+                      },
+                      {
+                          "bottom":  459,
+                          "top":  150,
+                          "height":  309,
+                          "footX":  138
+                      },
+                      {
+                          "bottom":  480,
+                          "top":  170,
+                          "height":  310,
+                          "footX":  163
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_hwando_ne.png",
+        "bottomMin":  455,
+        "bottomMax":  483,
+        "bottomSpread":  28,
+        "footXSpread":  15,
+        "heightMin":  303,
+        "heightMax":  311,
+        "heightSpread":  8,
+        "cells":  [
+                      {
+                          "bottom":  457,
+                          "top":  148,
+                          "height":  309,
+                          "footX":  183
+                      },
+                      {
+                          "bottom":  455,
+                          "top":  145,
+                          "height":  310,
+                          "footX":  185
+                      },
+                      {
+                          "bottom":  466,
+                          "top":  157,
+                          "height":  309,
+                          "footX":  192
+                      },
+                      {
+                          "bottom":  469,
+                          "top":  162,
+                          "height":  307,
+                          "footX":  177
+                      },
+                      {
+                          "bottom":  479,
+                          "top":  171,
+                          "height":  308,
+                          "footX":  187
+                      },
+                      {
+                          "bottom":  472,
+                          "top":  169,
+                          "height":  303,
+                          "footX":  191
+                      },
+                      {
+                          "bottom":  483,
+                          "top":  172,
+                          "height":  311,
+                          "footX":  183
+                      },
+                      {
+                          "bottom":  457,
+                          "top":  152,
+                          "height":  305,
+                          "footX":  189
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_hwando_nw.png",
+        "bottomMin":  425,
+        "bottomMax":  457,
+        "bottomSpread":  32,
+        "footXSpread":  76,
+        "heightMin":  267,
+        "heightMax":  284,
+        "heightSpread":  17,
+        "cells":  [
+                      {
+                          "bottom":  451,
+                          "top":  170,
+                          "height":  281,
+                          "footX":  182
+                      },
+                      {
+                          "bottom":  429,
+                          "top":  162,
+                          "height":  267,
+                          "footX":  167
+                      },
+                      {
+                          "bottom":  438,
+                          "top":  156,
+                          "height":  282,
+                          "footX":  219
+                      },
+                      {
+                          "bottom":  440,
+                          "top":  167,
+                          "height":  273,
+                          "footX":  177
+                      },
+                      {
+                          "bottom":  457,
+                          "top":  175,
+                          "height":  282,
+                          "footX":  243
+                      },
+                      {
+                          "bottom":  443,
+                          "top":  175,
+                          "height":  268,
+                          "footX":  180
+                      },
+                      {
+                          "bottom":  455,
+                          "top":  171,
+                          "height":  284,
+                          "footX":  212
+                      },
+                      {
+                          "bottom":  425,
+                          "top":  157,
+                          "height":  268,
+                          "footX":  200
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_hwando_se.png",
+        "bottomMin":  442,
+        "bottomMax":  474,
+        "bottomSpread":  32,
+        "footXSpread":  47,
+        "heightMin":  275,
+        "heightMax":  286,
+        "heightSpread":  11,
+        "cells":  [
+                      {
+                          "bottom":  442,
+                          "top":  160,
+                          "height":  282,
+                          "footX":  219
+                      },
+                      {
+                          "bottom":  448,
+                          "top":  165,
+                          "height":  283,
+                          "footX":  208
+                      },
+                      {
+                          "bottom":  442,
+                          "top":  156,
+                          "height":  286,
+                          "footX":  217
+                      },
+                      {
+                          "bottom":  452,
+                          "top":  167,
+                          "height":  285,
+                          "footX":  223
+                      },
+                      {
+                          "bottom":  464,
+                          "top":  187,
+                          "height":  277,
+                          "footX":  226
+                      },
+                      {
+                          "bottom":  463,
+                          "top":  188,
+                          "height":  275,
+                          "footX":  227
+                      },
+                      {
+                          "bottom":  467,
+                          "top":  181,
+                          "height":  286,
+                          "footX":  227
+                      },
+                      {
+                          "bottom":  474,
+                          "top":  198,
+                          "height":  276,
+                          "footX":  255
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_hwando_sw.png",
+        "bottomMin":  435,
+        "bottomMax":  461,
+        "bottomSpread":  26,
+        "footXSpread":  93,
+        "heightMin":  269,
+        "heightMax":  284,
+        "heightSpread":  15,
+        "cells":  [
+                      {
+                          "bottom":  443,
+                          "top":  171,
+                          "height":  272,
+                          "footX":  151
+                      },
+                      {
+                          "bottom":  441,
+                          "top":  171,
+                          "height":  270,
+                          "footX":  185
+                      },
+                      {
+                          "bottom":  441,
+                          "top":  169,
+                          "height":  272,
+                          "footX":  156
+                      },
+                      {
+                          "bottom":  435,
+                          "top":  166,
+                          "height":  269,
+                          "footX":  213
+                      },
+                      {
+                          "bottom":  461,
+                          "top":  186,
+                          "height":  275,
+                          "footX":  139
+                      },
+                      {
+                          "bottom":  445,
+                          "top":  173,
+                          "height":  272,
+                          "footX":  208
+                      },
+                      {
+                          "bottom":  461,
+                          "top":  192,
+                          "height":  269,
+                          "footX":  153
+                      },
+                      {
+                          "bottom":  458,
+                          "top":  174,
+                          "height":  284,
+                          "footX":  232
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_hwando_w.png",
+        "bottomMin":  414,
+        "bottomMax":  448,
+        "bottomSpread":  34,
+        "footXSpread":  40,
+        "heightMin":  255,
+        "heightMax":  262,
+        "heightSpread":  7,
+        "cells":  [
+                      {
+                          "bottom":  417,
+                          "top":  155,
+                          "height":  262,
+                          "footX":  162
+                      },
+                      {
+                          "bottom":  433,
+                          "top":  175,
+                          "height":  258,
+                          "footX":  189
+                      },
+                      {
+                          "bottom":  427,
+                          "top":  170,
+                          "height":  257,
+                          "footX":  174
+                      },
+                      {
+                          "bottom":  414,
+                          "top":  156,
+                          "height":  258,
+                          "footX":  195
+                      },
+                      {
+                          "bottom":  431,
+                          "top":  171,
+                          "height":  260,
+                          "footX":  160
+                      },
+                      {
+                          "bottom":  440,
+                          "top":  185,
+                          "height":  255,
+                          "footX":  184
+                      },
+                      {
+                          "bottom":  448,
+                          "top":  189,
+                          "height":  259,
+                          "footX":  172
+                      },
+                      {
+                          "bottom":  443,
+                          "top":  185,
+                          "height":  258,
+                          "footX":  200
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_lauren_e.png",
+        "bottomMin":  432,
+        "bottomMax":  473,
+        "bottomSpread":  41,
+        "footXSpread":  58,
+        "heightMin":  290,
+        "heightMax":  298,
+        "heightSpread":  8,
+        "cells":  [
+                      {
+                          "bottom":  466,
+                          "top":  174,
+                          "height":  292,
+                          "footX":  223
+                      },
+                      {
+                          "bottom":  438,
+                          "top":  143,
+                          "height":  295,
+                          "footX":  195
+                      },
+                      {
+                          "bottom":  432,
+                          "top":  141,
+                          "height":  291,
+                          "footX":  214
+                      },
+                      {
+                          "bottom":  445,
+                          "top":  147,
+                          "height":  298,
+                          "footX":  248
+                      },
+                      {
+                          "bottom":  463,
+                          "top":  169,
+                          "height":  294,
+                          "footX":  240
+                      },
+                      {
+                          "bottom":  463,
+                          "top":  169,
+                          "height":  294,
+                          "footX":  241
+                      },
+                      {
+                          "bottom":  473,
+                          "top":  183,
+                          "height":  290,
+                          "footX":  233
+                      },
+                      {
+                          "bottom":  468,
+                          "top":  178,
+                          "height":  290,
+                          "footX":  253
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_lauren_n.png",
+        "bottomMin":  467,
+        "bottomMax":  485,
+        "bottomSpread":  18,
+        "footXSpread":  21,
+        "heightMin":  332,
+        "heightMax":  338,
+        "heightSpread":  6,
+        "cells":  [
+                      {
+                          "bottom":  467,
+                          "top":  134,
+                          "height":  333,
+                          "footX":  185
+                      },
+                      {
+                          "bottom":  484,
+                          "top":  150,
+                          "height":  334,
+                          "footX":  183
+                      },
+                      {
+                          "bottom":  485,
+                          "top":  148,
+                          "height":  337,
+                          "footX":  191
+                      },
+                      {
+                          "bottom":  484,
+                          "top":  150,
+                          "height":  334,
+                          "footX":  202
+                      },
+                      {
+                          "bottom":  484,
+                          "top":  150,
+                          "height":  334,
+                          "footX":  189
+                      },
+                      {
+                          "bottom":  485,
+                          "top":  147,
+                          "height":  338,
+                          "footX":  181
+                      },
+                      {
+                          "bottom":  483,
+                          "top":  151,
+                          "height":  332,
+                          "footX":  194
+                      },
+                      {
+                          "bottom":  485,
+                          "top":  151,
+                          "height":  334,
+                          "footX":  187
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_lauren_ne.png",
+        "bottomMin":  439,
+        "bottomMax":  485,
+        "bottomSpread":  46,
+        "footXSpread":  64,
+        "heightMin":  305,
+        "heightMax":  319,
+        "heightSpread":  14,
+        "cells":  [
+                      {
+                          "bottom":  439,
+                          "top":  129,
+                          "height":  310,
+                          "footX":  159
+                      },
+                      {
+                          "bottom":  458,
+                          "top":  153,
+                          "height":  305,
+                          "footX":  212
+                      },
+                      {
+                          "bottom":  463,
+                          "top":  149,
+                          "height":  314,
+                          "footX":  185
+                      },
+                      {
+                          "bottom":  463,
+                          "top":  147,
+                          "height":  316,
+                          "footX":  194
+                      },
+                      {
+                          "bottom":  484,
+                          "top":  165,
+                          "height":  319,
+                          "footX":  162
+                      },
+                      {
+                          "bottom":  460,
+                          "top":  149,
+                          "height":  311,
+                          "footX":  196
+                      },
+                      {
+                          "bottom":  485,
+                          "top":  173,
+                          "height":  312,
+                          "footX":  190
+                      },
+                      {
+                          "bottom":  480,
+                          "top":  166,
+                          "height":  314,
+                          "footX":  148
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_lauren_nw.png",
+        "bottomMin":  443,
+        "bottomMax":  483,
+        "bottomSpread":  40,
+        "footXSpread":  61,
+        "heightMin":  309,
+        "heightMax":  318,
+        "heightSpread":  9,
+        "cells":  [
+                      {
+                          "bottom":  443,
+                          "top":  129,
+                          "height":  314,
+                          "footX":  191
+                      },
+                      {
+                          "bottom":  482,
+                          "top":  164,
+                          "height":  318,
+                          "footX":  177
+                      },
+                      {
+                          "bottom":  466,
+                          "top":  149,
+                          "height":  317,
+                          "footX":  191
+                      },
+                      {
+                          "bottom":  483,
+                          "top":  167,
+                          "height":  316,
+                          "footX":  172
+                      },
+                      {
+                          "bottom":  481,
+                          "top":  170,
+                          "height":  311,
+                          "footX":  205
+                      },
+                      {
+                          "bottom":  480,
+                          "top":  170,
+                          "height":  310,
+                          "footX":  192
+                      },
+                      {
+                          "bottom":  479,
+                          "top":  170,
+                          "height":  309,
+                          "footX":  198
+                      },
+                      {
+                          "bottom":  480,
+                          "top":  168,
+                          "height":  312,
+                          "footX":  233
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_lauren_s.png",
+        "bottomMin":  460,
+        "bottomMax":  481,
+        "bottomSpread":  21,
+        "footXSpread":  50,
+        "heightMin":  306,
+        "heightMax":  315,
+        "heightSpread":  9,
+        "cells":  [
+                      {
+                          "bottom":  475,
+                          "top":  160,
+                          "height":  315,
+                          "footX":  159
+                      },
+                      {
+                          "bottom":  474,
+                          "top":  166,
+                          "height":  308,
+                          "footX":  178
+                      },
+                      {
+                          "bottom":  478,
+                          "top":  166,
+                          "height":  312,
+                          "footX":  180
+                      },
+                      {
+                          "bottom":  477,
+                          "top":  166,
+                          "height":  311,
+                          "footX":  192
+                      },
+                      {
+                          "bottom":  476,
+                          "top":  164,
+                          "height":  312,
+                          "footX":  168
+                      },
+                      {
+                          "bottom":  481,
+                          "top":  170,
+                          "height":  311,
+                          "footX":  197
+                      },
+                      {
+                          "bottom":  460,
+                          "top":  152,
+                          "height":  308,
+                          "footX":  184
+                      },
+                      {
+                          "bottom":  476,
+                          "top":  170,
+                          "height":  306,
+                          "footX":  209
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_lauren_se.png",
+        "bottomMin":  459,
+        "bottomMax":  485,
+        "bottomSpread":  26,
+        "footXSpread":  51,
+        "heightMin":  314,
+        "heightMax":  344,
+        "heightSpread":  30,
+        "cells":  [
+                      {
+                          "bottom":  459,
+                          "top":  118,
+                          "height":  341,
+                          "footX":  245
+                      },
+                      {
+                          "bottom":  459,
+                          "top":  117,
+                          "height":  342,
+                          "footX":  255
+                      },
+                      {
+                          "bottom":  470,
+                          "top":  128,
+                          "height":  342,
+                          "footX":  250
+                      },
+                      {
+                          "bottom":  485,
+                          "top":  141,
+                          "height":  344,
+                          "footX":  251
+                      },
+                      {
+                          "bottom":  482,
+                          "top":  151,
+                          "height":  331,
+                          "footX":  254
+                      },
+                      {
+                          "bottom":  484,
+                          "top":  154,
+                          "height":  330,
+                          "footX":  251
+                      },
+                      {
+                          "bottom":  483,
+                          "top":  150,
+                          "height":  333,
+                          "footX":  265
+                      },
+                      {
+                          "bottom":  477,
+                          "top":  163,
+                          "height":  314,
+                          "footX":  214
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_lauren_sw.png",
+        "bottomMin":  467,
+        "bottomMax":  485,
+        "bottomSpread":  18,
+        "footXSpread":  47,
+        "heightMin":  316,
+        "heightMax":  331,
+        "heightSpread":  15,
+        "cells":  [
+                      {
+                          "bottom":  484,
+                          "top":  156,
+                          "height":  328,
+                          "footX":  126
+                      },
+                      {
+                          "bottom":  467,
+                          "top":  148,
+                          "height":  319,
+                          "footX":  173
+                      },
+                      {
+                          "bottom":  475,
+                          "top":  151,
+                          "height":  324,
+                          "footX":  138
+                      },
+                      {
+                          "bottom":  481,
+                          "top":  150,
+                          "height":  331,
+                          "footX":  141
+                      },
+                      {
+                          "bottom":  480,
+                          "top":  161,
+                          "height":  319,
+                          "footX":  134
+                      },
+                      {
+                          "bottom":  477,
+                          "top":  158,
+                          "height":  319,
+                          "footX":  145
+                      },
+                      {
+                          "bottom":  485,
+                          "top":  166,
+                          "height":  319,
+                          "footX":  140
+                      },
+                      {
+                          "bottom":  476,
+                          "top":  160,
+                          "height":  316,
+                          "footX":  150
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_lauren_w.png",
+        "bottomMin":  438,
+        "bottomMax":  484,
+        "bottomSpread":  46,
+        "footXSpread":  80,
+        "heightMin":  304,
+        "heightMax":  318,
+        "heightSpread":  14,
+        "cells":  [
+                      {
+                          "bottom":  438,
+                          "top":  126,
+                          "height":  312,
+                          "footX":  159
+                      },
+                      {
+                          "bottom":  484,
+                          "top":  175,
+                          "height":  309,
+                          "footX":  185
+                      },
+                      {
+                          "bottom":  475,
+                          "top":  157,
+                          "height":  318,
+                          "footX":  161
+                      },
+                      {
+                          "bottom":  450,
+                          "top":  141,
+                          "height":  309,
+                          "footX":  198
+                      },
+                      {
+                          "bottom":  483,
+                          "top":  175,
+                          "height":  308,
+                          "footX":  169
+                      },
+                      {
+                          "bottom":  471,
+                          "top":  167,
+                          "height":  304,
+                          "footX":  170
+                      },
+                      {
+                          "bottom":  482,
+                          "top":  172,
+                          "height":  310,
+                          "footX":  239
+                      },
+                      {
+                          "bottom":  483,
+                          "top":  175,
+                          "height":  308,
+                          "footX":  182
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_michaela_e.png",
+        "bottomMin":  423,
+        "bottomMax":  478,
+        "bottomSpread":  55,
+        "footXSpread":  84,
+        "heightMin":  273,
+        "heightMax":  292,
+        "heightSpread":  19,
+        "cells":  [
+                      {
+                          "bottom":  423,
+                          "top":  134,
+                          "height":  289,
+                          "footX":  173
+                      },
+                      {
+                          "bottom":  460,
+                          "top":  186,
+                          "height":  274,
+                          "footX":  192
+                      },
+                      {
+                          "bottom":  452,
+                          "top":  164,
+                          "height":  288,
+                          "footX":  192
+                      },
+                      {
+                          "bottom":  464,
+                          "top":  172,
+                          "height":  292,
+                          "footX":  232
+                      },
+                      {
+                          "bottom":  461,
+                          "top":  173,
+                          "height":  288,
+                          "footX":  151
+                      },
+                      {
+                          "bottom":  478,
+                          "top":  205,
+                          "height":  273,
+                          "footX":  202
+                      },
+                      {
+                          "bottom":  477,
+                          "top":  194,
+                          "height":  283,
+                          "footX":  214
+                      },
+                      {
+                          "bottom":  459,
+                          "top":  167,
+                          "height":  292,
+                          "footX":  148
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_michaela_n.png",
+        "bottomMin":  461,
+        "bottomMax":  482,
+        "bottomSpread":  21,
+        "footXSpread":  39,
+        "heightMin":  314,
+        "heightMax":  327,
+        "heightSpread":  13,
+        "cells":  [
+                      {
+                          "bottom":  461,
+                          "top":  135,
+                          "height":  326,
+                          "footX":  171
+                      },
+                      {
+                          "bottom":  466,
+                          "top":  152,
+                          "height":  314,
+                          "footX":  183
+                      },
+                      {
+                          "bottom":  474,
+                          "top":  148,
+                          "height":  326,
+                          "footX":  197
+                      },
+                      {
+                          "bottom":  467,
+                          "top":  140,
+                          "height":  327,
+                          "footX":  210
+                      },
+                      {
+                          "bottom":  473,
+                          "top":  147,
+                          "height":  326,
+                          "footX":  200
+                      },
+                      {
+                          "bottom":  468,
+                          "top":  148,
+                          "height":  320,
+                          "footX":  190
+                      },
+                      {
+                          "bottom":  482,
+                          "top":  158,
+                          "height":  324,
+                          "footX":  182
+                      },
+                      {
+                          "bottom":  470,
+                          "top":  147,
+                          "height":  323,
+                          "footX":  187
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_michaela_ne.png",
+        "bottomMin":  462,
+        "bottomMax":  480,
+        "bottomSpread":  18,
+        "footXSpread":  56,
+        "heightMin":  288,
+        "heightMax":  310,
+        "heightSpread":  22,
+        "cells":  [
+                      {
+                          "bottom":  479,
+                          "top":  169,
+                          "height":  310,
+                          "footX":  152
+                      },
+                      {
+                          "bottom":  470,
+                          "top":  179,
+                          "height":  291,
+                          "footX":  174
+                      },
+                      {
+                          "bottom":  474,
+                          "top":  174,
+                          "height":  300,
+                          "footX":  168
+                      },
+                      {
+                          "bottom":  462,
+                          "top":  166,
+                          "height":  296,
+                          "footX":  203
+                      },
+                      {
+                          "bottom":  480,
+                          "top":  179,
+                          "height":  301,
+                          "footX":  147
+                      },
+                      {
+                          "bottom":  477,
+                          "top":  179,
+                          "height":  298,
+                          "footX":  160
+                      },
+                      {
+                          "bottom":  476,
+                          "top":  182,
+                          "height":  294,
+                          "footX":  157
+                      },
+                      {
+                          "bottom":  480,
+                          "top":  192,
+                          "height":  288,
+                          "footX":  203
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_michaela_nw.png",
+        "bottomMin":  451,
+        "bottomMax":  482,
+        "bottomSpread":  31,
+        "footXSpread":  57,
+        "heightMin":  286,
+        "heightMax":  306,
+        "heightSpread":  20,
+        "cells":  [
+                      {
+                          "bottom":  472,
+                          "top":  179,
+                          "height":  293,
+                          "footX":  241
+                      },
+                      {
+                          "bottom":  461,
+                          "top":  169,
+                          "height":  292,
+                          "footX":  201
+                      },
+                      {
+                          "bottom":  472,
+                          "top":  171,
+                          "height":  301,
+                          "footX":  243
+                      },
+                      {
+                          "bottom":  470,
+                          "top":  179,
+                          "height":  291,
+                          "footX":  208
+                      },
+                      {
+                          "bottom":  477,
+                          "top":  173,
+                          "height":  304,
+                          "footX":  258
+                      },
+                      {
+                          "bottom":  482,
+                          "top":  179,
+                          "height":  303,
+                          "footX":  248
+                      },
+                      {
+                          "bottom":  474,
+                          "top":  168,
+                          "height":  306,
+                          "footX":  252
+                      },
+                      {
+                          "bottom":  451,
+                          "top":  165,
+                          "height":  286,
+                          "footX":  211
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_michaela_s.png",
+        "bottomMin":  450,
+        "bottomMax":  483,
+        "bottomSpread":  33,
+        "footXSpread":  59,
+        "heightMin":  272,
+        "heightMax":  287,
+        "heightSpread":  15,
+        "cells":  [
+                      {
+                          "bottom":  457,
+                          "top":  174,
+                          "height":  283,
+                          "footX":  159
+                      },
+                      {
+                          "bottom":  462,
+                          "top":  184,
+                          "height":  278,
+                          "footX":  169
+                      },
+                      {
+                          "bottom":  462,
+                          "top":  184,
+                          "height":  278,
+                          "footX":  172
+                      },
+                      {
+                          "bottom":  450,
+                          "top":  178,
+                          "height":  272,
+                          "footX":  206
+                      },
+                      {
+                          "bottom":  479,
+                          "top":  195,
+                          "height":  284,
+                          "footX":  152
+                      },
+                      {
+                          "bottom":  474,
+                          "top":  192,
+                          "height":  282,
+                          "footX":  171
+                      },
+                      {
+                          "bottom":  473,
+                          "top":  191,
+                          "height":  282,
+                          "footX":  211
+                      },
+                      {
+                          "bottom":  483,
+                          "top":  196,
+                          "height":  287,
+                          "footX":  184
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_michaela_sw.png",
+        "bottomMin":  476,
+        "bottomMax":  485,
+        "bottomSpread":  9,
+        "footXSpread":  70,
+        "heightMin":  290,
+        "heightMax":  311,
+        "heightSpread":  21,
+        "cells":  [
+                      {
+                          "bottom":  483,
+                          "top":  177,
+                          "height":  306,
+                          "footX":  167
+                      },
+                      {
+                          "bottom":  481,
+                          "top":  188,
+                          "height":  293,
+                          "footX":  179
+                      },
+                      {
+                          "bottom":  480,
+                          "top":  172,
+                          "height":  308,
+                          "footX":  192
+                      },
+                      {
+                          "bottom":  476,
+                          "top":  165,
+                          "height":  311,
+                          "footX":  218
+                      },
+                      {
+                          "bottom":  485,
+                          "top":  178,
+                          "height":  307,
+                          "footX":  162
+                      },
+                      {
+                          "bottom":  482,
+                          "top":  192,
+                          "height":  290,
+                          "footX":  194
+                      },
+                      {
+                          "bottom":  484,
+                          "top":  179,
+                          "height":  305,
+                          "footX":  167
+                      },
+                      {
+                          "bottom":  482,
+                          "top":  173,
+                          "height":  309,
+                          "footX":  232
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_neon_e.png",
+        "bottomMin":  440,
+        "bottomMax":  484,
+        "bottomSpread":  44,
+        "footXSpread":  37,
+        "heightMin":  260,
+        "heightMax":  282,
+        "heightSpread":  22,
+        "cells":  [
+                      {
+                          "bottom":  440,
+                          "top":  164,
+                          "height":  276,
+                          "footX":  217
+                      },
+                      {
+                          "bottom":  442,
+                          "top":  179,
+                          "height":  263,
+                          "footX":  201
+                      },
+                      {
+                          "bottom":  468,
+                          "top":  192,
+                          "height":  276,
+                          "footX":  198
+                      },
+                      {
+                          "bottom":  479,
+                          "top":  203,
+                          "height":  276,
+                          "footX":  223
+                      },
+                      {
+                          "bottom":  453,
+                          "top":  178,
+                          "height":  275,
+                          "footX":  231
+                      },
+                      {
+                          "bottom":  482,
+                          "top":  222,
+                          "height":  260,
+                          "footX":  194
+                      },
+                      {
+                          "bottom":  484,
+                          "top":  209,
+                          "height":  275,
+                          "footX":  210
+                      },
+                      {
+                          "bottom":  480,
+                          "top":  198,
+                          "height":  282,
+                          "footX":  201
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_neon_n.png",
+        "bottomMin":  442,
+        "bottomMax":  483,
+        "bottomSpread":  41,
+        "footXSpread":  45,
+        "heightMin":  273,
+        "heightMax":  283,
+        "heightSpread":  10,
+        "cells":  [
+                      {
+                          "bottom":  446,
+                          "top":  170,
+                          "height":  276,
+                          "footX":  179
+                      },
+                      {
+                          "bottom":  442,
+                          "top":  163,
+                          "height":  279,
+                          "footX":  207
+                      },
+                      {
+                          "bottom":  456,
+                          "top":  175,
+                          "height":  281,
+                          "footX":  183
+                      },
+                      {
+                          "bottom":  446,
+                          "top":  173,
+                          "height":  273,
+                          "footX":  219
+                      },
+                      {
+                          "bottom":  477,
+                          "top":  197,
+                          "height":  280,
+                          "footX":  203
+                      },
+                      {
+                          "bottom":  482,
+                          "top":  201,
+                          "height":  281,
+                          "footX":  174
+                      },
+                      {
+                          "bottom":  483,
+                          "top":  203,
+                          "height":  280,
+                          "footX":  183
+                      },
+                      {
+                          "bottom":  462,
+                          "top":  179,
+                          "height":  283,
+                          "footX":  211
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_neon_ne.png",
+        "bottomMin":  435,
+        "bottomMax":  475,
+        "bottomSpread":  40,
+        "footXSpread":  44,
+        "heightMin":  262,
+        "heightMax":  272,
+        "heightSpread":  10,
+        "cells":  [
+                      {
+                          "bottom":  435,
+                          "top":  163,
+                          "height":  272,
+                          "footX":  165
+                      },
+                      {
+                          "bottom":  448,
+                          "top":  183,
+                          "height":  265,
+                          "footX":  198
+                      },
+                      {
+                          "bottom":  441,
+                          "top":  172,
+                          "height":  269,
+                          "footX":  185
+                      },
+                      {
+                          "bottom":  443,
+                          "top":  178,
+                          "height":  265,
+                          "footX":  207
+                      },
+                      {
+                          "bottom":  453,
+                          "top":  183,
+                          "height":  270,
+                          "footX":  182
+                      },
+                      {
+                          "bottom":  475,
+                          "top":  213,
+                          "height":  262,
+                          "footX":  206
+                      },
+                      {
+                          "bottom":  452,
+                          "top":  187,
+                          "height":  265,
+                          "footX":  166
+                      },
+                      {
+                          "bottom":  447,
+                          "top":  184,
+                          "height":  263,
+                          "footX":  209
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_neon_nw.png",
+        "bottomMin":  433,
+        "bottomMax":  483,
+        "bottomSpread":  50,
+        "footXSpread":  28,
+        "heightMin":  262,
+        "heightMax":  269,
+        "heightSpread":  7,
+        "cells":  [
+                      {
+                          "bottom":  437,
+                          "top":  172,
+                          "height":  265,
+                          "footX":  189
+                      },
+                      {
+                          "bottom":  456,
+                          "top":  187,
+                          "height":  269,
+                          "footX":  184
+                      },
+                      {
+                          "bottom":  472,
+                          "top":  204,
+                          "height":  268,
+                          "footX":  174
+                      },
+                      {
+                          "bottom":  433,
+                          "top":  171,
+                          "height":  262,
+                          "footX":  185
+                      },
+                      {
+                          "bottom":  483,
+                          "top":  216,
+                          "height":  267,
+                          "footX":  202
+                      },
+                      {
+                          "bottom":  460,
+                          "top":  191,
+                          "height":  269,
+                          "footX":  187
+                      },
+                      {
+                          "bottom":  464,
+                          "top":  195,
+                          "height":  269,
+                          "footX":  177
+                      },
+                      {
+                          "bottom":  475,
+                          "top":  210,
+                          "height":  265,
+                          "footX":  185
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_neon_se.png",
+        "bottomMin":  461,
+        "bottomMax":  484,
+        "bottomSpread":  23,
+        "footXSpread":  51,
+        "heightMin":  277,
+        "heightMax":  293,
+        "heightSpread":  16,
+        "cells":  [
+                      {
+                          "bottom":  462,
+                          "top":  177,
+                          "height":  285,
+                          "footX":  209
+                      },
+                      {
+                          "bottom":  461,
+                          "top":  184,
+                          "height":  277,
+                          "footX":  204
+                      },
+                      {
+                          "bottom":  465,
+                          "top":  175,
+                          "height":  290,
+                          "footX":  197
+                      },
+                      {
+                          "bottom":  475,
+                          "top":  182,
+                          "height":  293,
+                          "footX":  245
+                      },
+                      {
+                          "bottom":  484,
+                          "top":  197,
+                          "height":  287,
+                          "footX":  224
+                      },
+                      {
+                          "bottom":  484,
+                          "top":  205,
+                          "height":  279,
+                          "footX":  203
+                      },
+                      {
+                          "bottom":  481,
+                          "top":  194,
+                          "height":  287,
+                          "footX":  205
+                      },
+                      {
+                          "bottom":  481,
+                          "top":  193,
+                          "height":  288,
+                          "footX":  248
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_neon_sw.png",
+        "bottomMin":  419,
+        "bottomMax":  485,
+        "bottomSpread":  66,
+        "footXSpread":  41,
+        "heightMin":  261,
+        "heightMax":  284,
+        "heightSpread":  23,
+        "cells":  [
+                      {
+                          "bottom":  419,
+                          "top":  146,
+                          "height":  273,
+                          "footX":  153
+                      },
+                      {
+                          "bottom":  439,
+                          "top":  178,
+                          "height":  261,
+                          "footX":  161
+                      },
+                      {
+                          "bottom":  447,
+                          "top":  170,
+                          "height":  277,
+                          "footX":  176
+                      },
+                      {
+                          "bottom":  485,
+                          "top":  209,
+                          "height":  276,
+                          "footX":  166
+                      },
+                      {
+                          "bottom":  483,
+                          "top":  199,
+                          "height":  284,
+                          "footX":  135
+                      },
+                      {
+                          "bottom":  485,
+                          "top":  214,
+                          "height":  271,
+                          "footX":  155
+                      },
+                      {
+                          "bottom":  485,
+                          "top":  204,
+                          "height":  281,
+                          "footX":  171
+                      },
+                      {
+                          "bottom":  474,
+                          "top":  190,
+                          "height":  284,
+                          "footX":  174
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_neon_w.png",
+        "bottomMin":  442,
+        "bottomMax":  482,
+        "bottomSpread":  40,
+        "footXSpread":  22,
+        "heightMin":  274,
+        "heightMax":  280,
+        "heightSpread":  6,
+        "cells":  [
+                      {
+                          "bottom":  455,
+                          "top":  176,
+                          "height":  279,
+                          "footX":  158
+                      },
+                      {
+                          "bottom":  470,
+                          "top":  192,
+                          "height":  278,
+                          "footX":  172
+                      },
+                      {
+                          "bottom":  442,
+                          "top":  162,
+                          "height":  280,
+                          "footX":  163
+                      },
+                      {
+                          "bottom":  475,
+                          "top":  201,
+                          "height":  274,
+                          "footX":  159
+                      },
+                      {
+                          "bottom":  482,
+                          "top":  208,
+                          "height":  274,
+                          "footX":  150
+                      },
+                      {
+                          "bottom":  482,
+                          "top":  206,
+                          "height":  276,
+                          "footX":  150
+                      },
+                      {
+                          "bottom":  481,
+                          "top":  204,
+                          "height":  277,
+                          "footX":  156
+                      },
+                      {
+                          "bottom":  460,
+                          "top":  185,
+                          "height":  275,
+                          "footX":  158
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_seoha_e.png",
+        "bottomMin":  435,
+        "bottomMax":  485,
+        "bottomSpread":  50,
+        "footXSpread":  83,
+        "heightMin":  286,
+        "heightMax":  293,
+        "heightSpread":  7,
+        "cells":  [
+                      {
+                          "bottom":  435,
+                          "top":  142,
+                          "height":  293,
+                          "footX":  206
+                      },
+                      {
+                          "bottom":  467,
+                          "top":  174,
+                          "height":  293,
+                          "footX":  250
+                      },
+                      {
+                          "bottom":  458,
+                          "top":  169,
+                          "height":  289,
+                          "footX":  234
+                      },
+                      {
+                          "bottom":  435,
+                          "top":  146,
+                          "height":  289,
+                          "footX":  267
+                      },
+                      {
+                          "bottom":  463,
+                          "top":  172,
+                          "height":  291,
+                          "footX":  188
+                      },
+                      {
+                          "bottom":  466,
+                          "top":  180,
+                          "height":  286,
+                          "footX":  240
+                      },
+                      {
+                          "bottom":  450,
+                          "top":  162,
+                          "height":  288,
+                          "footX":  236
+                      },
+                      {
+                          "bottom":  485,
+                          "top":  197,
+                          "height":  288,
+                          "footX":  271
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_seoha_n.png",
+        "bottomMin":  446,
+        "bottomMax":  482,
+        "bottomSpread":  36,
+        "footXSpread":  29,
+        "heightMin":  304,
+        "heightMax":  315,
+        "heightSpread":  11,
+        "cells":  [
+                      {
+                          "bottom":  482,
+                          "top":  174,
+                          "height":  308,
+                          "footX":  206
+                      },
+                      {
+                          "bottom":  468,
+                          "top":  158,
+                          "height":  310,
+                          "footX":  177
+                      },
+                      {
+                          "bottom":  471,
+                          "top":  161,
+                          "height":  310,
+                          "footX":  185
+                      },
+                      {
+                          "bottom":  464,
+                          "top":  158,
+                          "height":  306,
+                          "footX":  198
+                      },
+                      {
+                          "bottom":  446,
+                          "top":  142,
+                          "height":  304,
+                          "footX":  188
+                      },
+                      {
+                          "bottom":  456,
+                          "top":  141,
+                          "height":  315,
+                          "footX":  197
+                      },
+                      {
+                          "bottom":  457,
+                          "top":  142,
+                          "height":  315,
+                          "footX":  183
+                      },
+                      {
+                          "bottom":  456,
+                          "top":  141,
+                          "height":  315,
+                          "footX":  204
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_seoha_ne.png",
+        "bottomMin":  431,
+        "bottomMax":  482,
+        "bottomSpread":  51,
+        "footXSpread":  21,
+        "heightMin":  286,
+        "heightMax":  297,
+        "heightSpread":  11,
+        "cells":  [
+                      {
+                          "bottom":  431,
+                          "top":  136,
+                          "height":  295,
+                          "footX":  154
+                      },
+                      {
+                          "bottom":  438,
+                          "top":  148,
+                          "height":  290,
+                          "footX":  150
+                      },
+                      {
+                          "bottom":  446,
+                          "top":  160,
+                          "height":  286,
+                          "footX":  165
+                      },
+                      {
+                          "bottom":  454,
+                          "top":  168,
+                          "height":  286,
+                          "footX":  168
+                      },
+                      {
+                          "bottom":  482,
+                          "top":  190,
+                          "height":  292,
+                          "footX":  147
+                      },
+                      {
+                          "bottom":  480,
+                          "top":  192,
+                          "height":  288,
+                          "footX":  154
+                      },
+                      {
+                          "bottom":  480,
+                          "top":  187,
+                          "height":  293,
+                          "footX":  160
+                      },
+                      {
+                          "bottom":  472,
+                          "top":  175,
+                          "height":  297,
+                          "footX":  166
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_seoha_nw.png",
+        "bottomMin":  459,
+        "bottomMax":  484,
+        "bottomSpread":  25,
+        "footXSpread":  66,
+        "heightMin":  311,
+        "heightMax":  324,
+        "heightSpread":  13,
+        "cells":  [
+                      {
+                          "bottom":  459,
+                          "top":  137,
+                          "height":  322,
+                          "footX":  209
+                      },
+                      {
+                          "bottom":  472,
+                          "top":  153,
+                          "height":  319,
+                          "footX":  183
+                      },
+                      {
+                          "bottom":  477,
+                          "top":  153,
+                          "height":  324,
+                          "footX":  180
+                      },
+                      {
+                          "bottom":  482,
+                          "top":  167,
+                          "height":  315,
+                          "footX":  217
+                      },
+                      {
+                          "bottom":  481,
+                          "top":  157,
+                          "height":  324,
+                          "footX":  193
+                      },
+                      {
+                          "bottom":  478,
+                          "top":  167,
+                          "height":  311,
+                          "footX":  168
+                      },
+                      {
+                          "bottom":  484,
+                          "top":  167,
+                          "height":  317,
+                          "footX":  182
+                      },
+                      {
+                          "bottom":  469,
+                          "top":  147,
+                          "height":  322,
+                          "footX":  234
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_seoha_s.png",
+        "bottomMin":  466,
+        "bottomMax":  481,
+        "bottomSpread":  15,
+        "footXSpread":  28,
+        "heightMin":  307,
+        "heightMax":  316,
+        "heightSpread":  9,
+        "cells":  [
+                      {
+                          "bottom":  480,
+                          "top":  166,
+                          "height":  314,
+                          "footX":  180
+                      },
+                      {
+                          "bottom":  474,
+                          "top":  163,
+                          "height":  311,
+                          "footX":  179
+                      },
+                      {
+                          "bottom":  466,
+                          "top":  150,
+                          "height":  316,
+                          "footX":  198
+                      },
+                      {
+                          "bottom":  481,
+                          "top":  167,
+                          "height":  314,
+                          "footX":  207
+                      },
+                      {
+                          "bottom":  475,
+                          "top":  162,
+                          "height":  313,
+                          "footX":  197
+                      },
+                      {
+                          "bottom":  468,
+                          "top":  161,
+                          "height":  307,
+                          "footX":  184
+                      },
+                      {
+                          "bottom":  475,
+                          "top":  163,
+                          "height":  312,
+                          "footX":  190
+                      },
+                      {
+                          "bottom":  466,
+                          "top":  158,
+                          "height":  308,
+                          "footX":  180
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_seoha_se.png",
+        "bottomMin":  449,
+        "bottomMax":  484,
+        "bottomSpread":  35,
+        "footXSpread":  24,
+        "heightMin":  309,
+        "heightMax":  320,
+        "heightSpread":  11,
+        "cells":  [
+                      {
+                          "bottom":  484,
+                          "top":  170,
+                          "height":  314,
+                          "footX":  232
+                      },
+                      {
+                          "bottom":  477,
+                          "top":  161,
+                          "height":  316,
+                          "footX":  217
+                      },
+                      {
+                          "bottom":  475,
+                          "top":  159,
+                          "height":  316,
+                          "footX":  236
+                      },
+                      {
+                          "bottom":  449,
+                          "top":  134,
+                          "height":  315,
+                          "footX":  237
+                      },
+                      {
+                          "bottom":  463,
+                          "top":  154,
+                          "height":  309,
+                          "footX":  228
+                      },
+                      {
+                          "bottom":  481,
+                          "top":  170,
+                          "height":  311,
+                          "footX":  239
+                      },
+                      {
+                          "bottom":  484,
+                          "top":  168,
+                          "height":  316,
+                          "footX":  241
+                      },
+                      {
+                          "bottom":  482,
+                          "top":  162,
+                          "height":  320,
+                          "footX":  237
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_seoha_sw.png",
+        "bottomMin":  465,
+        "bottomMax":  485,
+        "bottomSpread":  20,
+        "footXSpread":  69,
+        "heightMin":  323,
+        "heightMax":  331,
+        "heightSpread":  8,
+        "cells":  [
+                      {
+                          "bottom":  465,
+                          "top":  136,
+                          "height":  329,
+                          "footX":  126
+                      },
+                      {
+                          "bottom":  479,
+                          "top":  156,
+                          "height":  323,
+                          "footX":  170
+                      },
+                      {
+                          "bottom":  479,
+                          "top":  150,
+                          "height":  329,
+                          "footX":  144
+                      },
+                      {
+                          "bottom":  481,
+                          "top":  152,
+                          "height":  329,
+                          "footX":  130
+                      },
+                      {
+                          "bottom":  485,
+                          "top":  158,
+                          "height":  327,
+                          "footX":  101
+                      },
+                      {
+                          "bottom":  485,
+                          "top":  158,
+                          "height":  327,
+                          "footX":  125
+                      },
+                      {
+                          "bottom":  479,
+                          "top":  148,
+                          "height":  331,
+                          "footX":  127
+                      },
+                      {
+                          "bottom":  481,
+                          "top":  154,
+                          "height":  327,
+                          "footX":  133
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_seoha_w.png",
+        "bottomMin":  452,
+        "bottomMax":  474,
+        "bottomSpread":  22,
+        "footXSpread":  38,
+        "heightMin":  296,
+        "heightMax":  307,
+        "heightSpread":  11,
+        "cells":  [
+                      {
+                          "bottom":  452,
+                          "top":  152,
+                          "height":  300,
+                          "footX":  152
+                      },
+                      {
+                          "bottom":  456,
+                          "top":  154,
+                          "height":  302,
+                          "footX":  153
+                      },
+                      {
+                          "bottom":  457,
+                          "top":  150,
+                          "height":  307,
+                          "footX":  146
+                      },
+                      {
+                          "bottom":  461,
+                          "top":  154,
+                          "height":  307,
+                          "footX":  156
+                      },
+                      {
+                          "bottom":  464,
+                          "top":  164,
+                          "height":  300,
+                          "footX":  125
+                      },
+                      {
+                          "bottom":  474,
+                          "top":  178,
+                          "height":  296,
+                          "footX":  150
+                      },
+                      {
+                          "bottom":  472,
+                          "top":  172,
+                          "height":  300,
+                          "footX":  145
+                      },
+                      {
+                          "bottom":  454,
+                          "top":  153,
+                          "height":  301,
+                          "footX":  163
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_slayer_e.png",
+        "bottomMin":  419,
+        "bottomMax":  476,
+        "bottomSpread":  57,
+        "footXSpread":  72,
+        "heightMin":  248,
+        "heightMax":  257,
+        "heightSpread":  9,
+        "cells":  [
+                      {
+                          "bottom":  419,
+                          "top":  164,
+                          "height":  255,
+                          "footX":  247
+                      },
+                      {
+                          "bottom":  443,
+                          "top":  186,
+                          "height":  257,
+                          "footX":  194
+                      },
+                      {
+                          "bottom":  430,
+                          "top":  174,
+                          "height":  256,
+                          "footX":  175
+                      },
+                      {
+                          "bottom":  426,
+                          "top":  172,
+                          "height":  254,
+                          "footX":  247
+                      },
+                      {
+                          "bottom":  462,
+                          "top":  211,
+                          "height":  251,
+                          "footX":  232
+                      },
+                      {
+                          "bottom":  454,
+                          "top":  201,
+                          "height":  253,
+                          "footX":  239
+                      },
+                      {
+                          "bottom":  476,
+                          "top":  225,
+                          "height":  251,
+                          "footX":  199
+                      },
+                      {
+                          "bottom":  464,
+                          "top":  216,
+                          "height":  248,
+                          "footX":  241
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_slayer_ne.png",
+        "bottomMin":  425,
+        "bottomMax":  455,
+        "bottomSpread":  30,
+        "footXSpread":  27,
+        "heightMin":  259,
+        "heightMax":  268,
+        "heightSpread":  9,
+        "cells":  [
+                      {
+                          "bottom":  429,
+                          "top":  161,
+                          "height":  268,
+                          "footX":  164
+                      },
+                      {
+                          "bottom":  425,
+                          "top":  166,
+                          "height":  259,
+                          "footX":  167
+                      },
+                      {
+                          "bottom":  426,
+                          "top":  163,
+                          "height":  263,
+                          "footX":  144
+                      },
+                      {
+                          "bottom":  449,
+                          "top":  182,
+                          "height":  267,
+                          "footX":  168
+                      },
+                      {
+                          "bottom":  454,
+                          "top":  187,
+                          "height":  267,
+                          "footX":  163
+                      },
+                      {
+                          "bottom":  448,
+                          "top":  182,
+                          "height":  266,
+                          "footX":  171
+                      },
+                      {
+                          "bottom":  454,
+                          "top":  186,
+                          "height":  268,
+                          "footX":  163
+                      },
+                      {
+                          "bottom":  455,
+                          "top":  188,
+                          "height":  267,
+                          "footX":  168
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_slayer_nw.png",
+        "bottomMin":  409,
+        "bottomMax":  472,
+        "bottomSpread":  63,
+        "footXSpread":  63,
+        "heightMin":  260,
+        "heightMax":  280,
+        "heightSpread":  20,
+        "cells":  [
+                      {
+                          "bottom":  418,
+                          "top":  150,
+                          "height":  268,
+                          "footX":  224
+                      },
+                      {
+                          "bottom":  429,
+                          "top":  169,
+                          "height":  260,
+                          "footX":  167
+                      },
+                      {
+                          "bottom":  430,
+                          "top":  157,
+                          "height":  273,
+                          "footX":  161
+                      },
+                      {
+                          "bottom":  409,
+                          "top":  136,
+                          "height":  273,
+                          "footX":  214
+                      },
+                      {
+                          "bottom":  453,
+                          "top":  177,
+                          "height":  276,
+                          "footX":  196
+                      },
+                      {
+                          "bottom":  455,
+                          "top":  177,
+                          "height":  278,
+                          "footX":  172
+                      },
+                      {
+                          "bottom":  454,
+                          "top":  179,
+                          "height":  275,
+                          "footX":  171
+                      },
+                      {
+                          "bottom":  472,
+                          "top":  192,
+                          "height":  280,
+                          "footX":  214
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_slayer_se.png",
+        "bottomMin":  425,
+        "bottomMax":  482,
+        "bottomSpread":  57,
+        "footXSpread":  60,
+        "heightMin":  255,
+        "heightMax":  260,
+        "heightSpread":  5,
+        "cells":  [
+                      {
+                          "bottom":  425,
+                          "top":  166,
+                          "height":  259,
+                          "footX":  214
+                      },
+                      {
+                          "bottom":  440,
+                          "top":  181,
+                          "height":  259,
+                          "footX":  233
+                      },
+                      {
+                          "bottom":  432,
+                          "top":  177,
+                          "height":  255,
+                          "footX":  238
+                      },
+                      {
+                          "bottom":  482,
+                          "top":  222,
+                          "height":  260,
+                          "footX":  274
+                      },
+                      {
+                          "bottom":  470,
+                          "top":  215,
+                          "height":  255,
+                          "footX":  237
+                      },
+                      {
+                          "bottom":  457,
+                          "top":  198,
+                          "height":  259,
+                          "footX":  228
+                      },
+                      {
+                          "bottom":  462,
+                          "top":  204,
+                          "height":  258,
+                          "footX":  240
+                      },
+                      {
+                          "bottom":  468,
+                          "top":  208,
+                          "height":  260,
+                          "footX":  264
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_slayer_sw.png",
+        "bottomMin":  428,
+        "bottomMax":  482,
+        "bottomSpread":  54,
+        "footXSpread":  18,
+        "heightMin":  254,
+        "heightMax":  270,
+        "heightSpread":  16,
+        "cells":  [
+                      {
+                          "bottom":  451,
+                          "top":  181,
+                          "height":  270,
+                          "footX":  172
+                      },
+                      {
+                          "bottom":  441,
+                          "top":  181,
+                          "height":  260,
+                          "footX":  156
+                      },
+                      {
+                          "bottom":  440,
+                          "top":  179,
+                          "height":  261,
+                          "footX":  162
+                      },
+                      {
+                          "bottom":  428,
+                          "top":  165,
+                          "height":  263,
+                          "footX":  169
+                      },
+                      {
+                          "bottom":  482,
+                          "top":  223,
+                          "height":  259,
+                          "footX":  154
+                      },
+                      {
+                          "bottom":  437,
+                          "top":  183,
+                          "height":  254,
+                          "footX":  167
+                      },
+                      {
+                          "bottom":  441,
+                          "top":  182,
+                          "height":  259,
+                          "footX":  170
+                      },
+                      {
+                          "bottom":  452,
+                          "top":  193,
+                          "height":  259,
+                          "footX":  168
+                      }
+                  ]
+    },
+    {
+        "file":  "walk_slayer_w.png",
+        "bottomMin":  408,
+        "bottomMax":  470,
+        "bottomSpread":  62,
+        "footXSpread":  68,
+        "heightMin":  260,
+        "heightMax":  275,
+        "heightSpread":  15,
+        "cells":  [
+                      {
+                          "bottom":  424,
+                          "top":  149,
+                          "height":  275,
+                          "footX":  143
+                      },
+                      {
+                          "bottom":  445,
+                          "top":  171,
+                          "height":  274,
+                          "footX":  145
+                      },
+                      {
+                          "bottom":  446,
+                          "top":  171,
+                          "height":  275,
+                          "footX":  142
+                      },
+                      {
+                          "bottom":  408,
+                          "top":  138,
+                          "height":  270,
+                          "footX":  205
+                      },
+                      {
+                          "bottom":  470,
+                          "top":  210,
+                          "height":  260,
+                          "footX":  137
+                      },
+                      {
+                          "bottom":  462,
+                          "top":  196,
+                          "height":  266,
+                          "footX":  161
+                      },
+                      {
+                          "bottom":  448,
+                          "top":  179,
+                          "height":  269,
+                          "footX":  166
+                      },
+                      {
+                          "bottom":  465,
+                          "top":  196,
+                          "height":  269,
+                          "footX":  155
+                      }
+                  ]
+    }
+]

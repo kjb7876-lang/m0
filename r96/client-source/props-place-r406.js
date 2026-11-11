@@ -16,9 +16,9 @@
 //  끄기: localStorage['storyworld.r406.props']='{"on":false}' (부분: place/bulbs/boss 각각 false)
 (()=>{'use strict';
 if(window.__STORYWORLD_PROPS_PLACE_R406__)return;
-const REV='R406-props-place-1',KEY='storyworld.r406.props',IDX='./assets/r406/props/index.json',IDXS=[IDX,'./assets/r408/props/index.json','./assets/r414/props/index.json'];// R414: 드라이브 재개 소품 7종(관사 가로등·정문·가방, 승강장 스피커, 승강기 문, 서까래, 꽃무늬 벽)도 같은 규칙으로// R408: 붉은 하이힐(ep1b05) 라운지 소품 — STORY 지역도 zone=지역 id 로 받는다
+const REV='R406-props-place-1',KEY='storyworld.r406.props',IDX='./assets/r406/props/index.json',IDXS=[IDX,'./assets/r408/props/index.json','./assets/r414/props/index.json','./assets/r415/props/index.json'];// R415: 드라이브 여백 수리·QA 후보 32종(교실 책상·우편함·병상·대합실 의자 등)을 이름이 맞는 사몽 구역에 같은 규칙으로 // R414: 드라이브 재개 소품 7종(관사 가로등·정문·가방, 승강장 스피커, 승강기 문, 서까래, 꽃무늬 벽)도 같은 규칙으로// R408: 붉은 하이힐(ep1b05) 라운지 소품 — STORY 지역도 zone=지역 id 로 받는다
 
-const prefs={on:true,place:true,bulbs:true,boss:true};
+const prefs={on:true,place:true,bulbs:true,boss:true,foot:true};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(prefs))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={rooms:0,seatsMoved:0,seatsKept:0,wallSnapped:0,wallFlipped:0,wallKept:0,bulbs:0,furnaces:0,r92Swaps:0,bossProps:0,bossSkipped:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
@@ -123,6 +123,16 @@ let inCache={r:null,L:null,v:false};const indoorNow=()=>{const r=typeof room!=='
 try{if(typeof readyImage==='function'){const base=readyImage;readyImage=function(path,...a){
  if(prefs.on&&prefs.bulbs&&typeof path==='string'&&path.includes('r92/lights/')){const m=R92_FIRE.exec(path);if(m)try{if(indoorNow()){const b=bulbFor(m[2]),row=base.call(this,b,...a);if(row){stats.r92Swaps++;return row;}if(typeof addImage==='function')addImage(b,'R406 indoor bulb');return null;}}catch(e){fail(e);}}
  return base.call(this,path,...a);};}}catch(e){fail(e);}
+
+// R415 밑동 바로잡기: R111 propDraw 는 그림 가운데 35% 열에서 밑동(footOf)을 찾아, 밑동이 그림 맨 아래가 아니면 키의 최대 22%만큼 그림을 내려 그린다.
+//  다리 달린 가구(책상·의자·침대)는 가운데 아래가 비어 있어 밑동을 22% 위로 잘못 잰다. Three 기록기는 소품을 발 자리(owner x,y)에 세운 카메라 면으로
+//  만들므로 내려 그린 만큼 면이 바닥 밑으로 잠기고, 바닥이 그 위를 덮어 소품이 반투명하게 보였다(R406 보스 소품도 같음).
+//  R406 소품은 알파 상자로 잘라 밑동이 그림 맨 아래이므로 R111 이 더한 만큼만 도로 뺀다. 끄기: storyworld.r406.props {"foot":false}
+const footFix=()=>window.__STORYWORLD_PLAY_R111__;stats.footFixed=0;
+try{if(typeof drawProp==='function'&&typeof sprite==='function'){const base=drawProp;drawProp=function(p,...a){
+ if(!prefs.on||!prefs.foot||!p||!p.r406Boss)return base.call(this,p,...a);const R=footFix(),s0=sprite;if(!R||typeof R.foot!=='function'||R.prefs?.().props===false)return base.call(this,p,...a);
+ sprite=function(path,x,y,...b){if(path===p.path){const f=R.foot(path);if(f<.97&&Number.isFinite(f)){y-=Math.min(.22,1-f)*(Number.isFinite(p.height)?p.height:60)*(typeof zoom==='number'?zoom:1);stats.footFixed++;}}return s0.call(this,path,x,y,...b);};
+ try{return base.call(this,p,...a);}finally{sprite=s0;}};}}catch(e){fail(e);}
 
 (function poll(){try{if(typeof room!=='undefined'&&room)apply(room);}catch(e){fail(e);}setTimeout(poll,700);})();
 loadIndex();

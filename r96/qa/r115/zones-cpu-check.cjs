@@ -12,7 +12,7 @@ sb.window=sb;vm.createContext(sb);
 for(const f of ['samong-text-r103.js','samong-zones-r115-data.js','samong-zones-r115.js','samong-r103.js'])vm.runInContext(fs.readFileSync(path.join(SRC,f),'utf8'),sb,{filename:f});
 const SM=sb.__STORYWORLD_SAMONG_R103__,Z=sb.__STORYWORLD_SAMONG_ZONES_R115__,TX=sb.__STORYWORLD_SAMONG_TEXT_R103__;
 check('modules load',SM&&Z&&TX);
-check('text is the R180 정본(네오 도쿄 삭제·경성의 밤 이후 각색본 20261101)',TX.sha256==='98f9508dec6d4decf8489336b5799a9ccf9c8a071d8d633ff221937c9a4a1bda');
+check('text is the R448 정본(R180 각색본 + 사몽 ② 회상 진행형 어미 손질, 문단 위치 그대로)',TX.sha256==='dc0100ea6da3c4f3b879fea721f91537e0b96d1d51ba907fe605e30796604c8c');
 const chapters=Object.entries(Z.chapters);
 check('S-02 pilot has 8 zones',Z.chapter('S-02')?.length===8);
 check('116 zones over 사몽·역행·엔딩 (R180: S-06 디스토피아 23 · R-10 4)',chapters.reduce((n,[,l])=>n+l.length,0)===116&&SM.episodes.every(e=>Z.chapter(e.key)?.length),chapters.map(([k,l])=>k+':'+l.length).join(' '));

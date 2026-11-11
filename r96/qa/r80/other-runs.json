@@ -1,0 +1,22 @@
+[
+  {
+    "name": "world-r78-layout",
+    "exitCode": 0
+  },
+  {
+    "name": "world-r78-story-spawn",
+    "exitCode": 0
+  },
+  {
+    "name": "world-r78-combat-input",
+    "exitCode": 0
+  },
+  {
+    "name": "world-r78-visual",
+    "exitCode": 0
+  },
+  {
+    "name": "package-check",
+    "exitCode": 0
+  }
+]

@@ -87,6 +87,11 @@
     const v1=Math.atan2(first.y-a.y,first.x-a.x),second=ring.find(s=>s!==first&&free(s)&&Math.abs(((Math.atan2(s.y-a.y,s.x-a.x)-v1+3*Math.PI)%(2*Math.PI))-Math.PI)<Math.PI*.45);
     if(second&&lights.length<LIGHTS&&(!R412_SINGLE||FOCAL.test(String(a.kind||a.id||''))))put(second,'anchor');}/* 문·입구는 한쪽만, 목표·제단·보스는 장면 초점이라 양옆 짝을 남긴다(R412-10 심사) */
    for(const s of [...spots].sort((s,t)=>s.y-t.y||s.x-t.x)){if(lights.length>=LIGHTS)break;if(lights.some(q=>Math.hypot(s.x-q.x,s.y-q.y)<LIGHT_GAP+1))continue;put(s,'rhythm');}}
+  // R438(사용자 2026-11-09 질투 보스방 "조형물 중구난방"): 칠죄 전용 가구가 있는 보스방에서는 보스방 틀(bossBounds) 안쪽 1.5칸보다 깊은 바닥의 등불 기둥을 세우지 않는다 —
+  //  가로등형 기둥이 방 한가운데 서서 보스 중앙 전투 원(R431 반지름 5칸)을 가렸다. 자리와 빛 웅덩이(lightPoints)는 그대로 두어 밝기는 같고, 기둥 그림만 빼서 천장 전구 빛으로 읽히게 한다.
+  {const bb=L0?.sinRoomArt&&r?.id!=='ep1b06'&&L0?.worldWardR81?.bossBounds;if(Array.isArray(bb))for(const l of lights)if(l.x>bb[0]&&l.x<bb[2]&&l.y>bb[1]&&l.y<bb[3]&&Math.min(l.x-bb[0],bb[2]-l.x,l.y-bb[1],bb[3]-l.y)>1.5)l.ceiling438=true;}
+  /* R443: 보스방 앞 모이는 방(gatherBounds)도 같은 규칙 — 방 가운데 선 등불 기둥은 천장 등으로(빛 웅덩이는 남김). 벽 따라 놓인 가구 앞 동선을 비운다. */
+  {const gb=L0?.sinRoomArt&&r?.id!=='ep1b06'&&L0?.worldWardR81?.gatherBounds;if(Array.isArray(gb))for(const l of lights)if(l.x>gb[0]&&l.x<gb[2]&&l.y>gb[1]&&l.y<gb[3]&&Math.min(l.x-gb[0],gb[2]-l.x,l.y-gb[1],gb[3]-l.y)>1.5)l.ceiling438=true;}
   stats.plans++;return{decals,lights};}
  // Closest point of a wall (segment with depth, or box) to p.
  function closest(p,w){if(Array.isArray(w.endpoints)&&w.endpoints.length===2){const[a,b]=w.endpoints,x=b[0]-a[0],y=b[1]-a[1],n=x*x+y*y,t=n?Math.max(0,Math.min(1,((p.x-a[0])*x+(p.y-a[1])*y)/n)):0,cx=a[0]+x*t,cy=a[1]+y*t;
@@ -110,7 +115,7 @@
     ctx.drawImage(img,0,0,img.naturalWidth||img.width,img.naturalHeight||img.height,q.x-w/2,q.y-h/2,w,h);stats.decalDraws++;}finally{ctx.restore();}};
    if(typeof ctx.scope==='function')ctx.scope({id:'r92:floor:'+zone+':'+i,kind:'ground',x:d.x,y:d.y,groundAligned:true,r92Floor:true,presentationOnly:true,alive:false,sourcePath:it.path},paint);else paint();});}
  function drawLights(){if(!prefs.lightProps||!story()||typeof ctx==='undefined'||typeof project!=='function')return;const p=current();if(!p)return;preload(p);const body=typeof actorHeight==='function'?actorHeight():66;
-  p.lights.forEach((l,i)=>{if(!sightOk(l))return;const q=project(l.x,l.y);if(!inView(q))return;const it=byId(l.item),img=it&&image(it);if(!img)return;
+  p.lights.forEach((l,i)=>{if(l.ceiling438||!sightOk(l))return;const q=project(l.x,l.y);if(!inView(q))return;const it=byId(l.item),img=it&&image(it);if(!img)return;
    const k=body*1.3/200,w=it.w*k,h=it.h*k;
    const paint=()=>{if(typeof shadow==='function')shadow(q.x,q.y,Math.max(10,w*.45));ctx.save();try{if(l.flip){ctx.translate(q.x,q.y);ctx.scale(-1,1);ctx.translate(-q.x,-q.y);}ctx.drawImage(img,0,0,img.naturalWidth||img.width,img.naturalHeight||img.height,q.x-w/2,q.y-h+2,w,h);stats.propDraws++;}finally{ctx.restore();}};
    if(typeof ctx.scope==='function')ctx.scope({id:'r92:light:'+zone+':'+i,kind:'prop',x:l.x,y:l.y,alive:true,presentationOnly:true,r92Light:true,sourcePath:it.path},paint);else paint();});}

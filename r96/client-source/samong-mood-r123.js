@@ -387,8 +387,8 @@
   if(rainLevel>0){const R=st?.rain||(st.rain={cols:[]}),fs=15,cols=Math.ceil(b.width/(fs*1.6)),want=Math.round(cols*(lowFx()?.35:.6)*rainLevel);while(R.cols.length<want)R.cols.push({x:Math.floor(Math.random()*cols)*fs*1.6,y:-Math.random()*b.height,v:90+Math.random()*160,s:Math.floor(Math.random()*1e6)});
    if(R.cols.length>want)R.cols.length=want;g.font=fs+'px monospace';g.textAlign='center';for(const c of R.cols){c.y+=c.v*dt*slow;if(c.y-fs*12>b.height){c.y=-Math.random()*200;c.x=Math.floor(Math.random()*cols)*fs*1.6;}
     for(let i=0;i<12;i++){const y=c.y-i*fs;if(y<-fs||y>b.height+fs)continue;const k=(c.s+i*31+Math.floor((c.y/fs)))%GL.length;g.fillStyle=i===0?'rgba(210,255,225,'+(.85*rainLevel).toFixed(3)+')':'rgba(40,255,140,'+((1-i/12)*.55*rainLevel).toFixed(3)+')';g.fillText(GL[k],c.x,y);n++;}}}
-  // 학교 손전등 원뿔(R103 손전등 미로가 아닐 때만)
-  if(st&&THEMES[st.theme.key].cone&&!SM()?.flashlightActive&&typeof project==='function'){const o=project(player.x,player.y),mv={x:player.moveVX150||0,y:player.moveVY150||0};
+  // 학교 손전등 원뿔(R103 손전등 미로가 아닐 때만). R455: 시야를 '손전등'으로 고른 때만 — 기본(은은한 원형)·전체·횃불에서는 그리지 않는다.
+  if(st&&THEMES[st.theme.key].cone&&window.__STORYWORLD_LIGHT_R182__?.mode?.()==='flashlight'&&document.getElementById('r182Cone')?.style.display!=='block'/* R182 손전등 부채꼴이 이미 그려지면 겹쳐 그리지 않는다 */&&!SM()?.flashlightActive&&typeof project==='function'){const o=project(player.x,player.y),mv={x:player.moveVX150||0,y:player.moveVY150||0};
    if(Math.hypot(mv.x,mv.y)>.05){const l=Math.hypot(mv.x,mv.y);st.dir={x:mv.x/l,y:mv.y/l};}const dir=st.dir||{x:-.707,y:-.707},a0=Math.atan2(dir.y,dir.x),reach=10;
    g.fillStyle='rgba(2,4,8,.48)';g.fillRect(0,0,b.width,b.height);g.globalCompositeOperation='destination-out';const rr=reach*U();
    const gr=g.createRadialGradient(o.x,o.y-U()*.6,6,o.x,o.y-U()*.6,rr);gr.addColorStop(0,'rgba(0,0,0,1)');gr.addColorStop(.7,'rgba(0,0,0,.85)');gr.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=gr;g.beginPath();g.moveTo(o.x,o.y-U()*.6);

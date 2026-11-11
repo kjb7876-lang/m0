@@ -1,0 +1,6 @@
+PASS Fresh native VM boots cleanly
+PASS Cold restore enters the same 777 swamp phase on safe floor
+PASS Cold restore preserves every surviving actor coordinate and exact wounded HP
+PASS The fourth swamp champion beyond native index40 restores its partial health
+PASS First native tick does not heal or rescale restored champions
+PASS Native error ledger stays clear

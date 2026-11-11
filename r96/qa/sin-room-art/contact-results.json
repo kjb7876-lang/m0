@@ -136,6 +136,159 @@
     "minimumOpaqueWorldHeight": 0.0040824829046349174
   },
   {
+    "id": "ep1b03",
+    "key": "gWardrobe1",
+    "theme": "envyLounge",
+    "edge": 19.5,
+    "pixel": [
+      128,
+      439
+    ],
+    "plane": {
+      "ax": 1.4500000000000002,
+      "ay": 25.361675479180438,
+      "bx": 3.45,
+      "by": 25.361675479180438
+    },
+    "minimumOpaqueWorldHeight": 0.004082482904637648
+  },
+  {
+    "id": "ep1b03",
+    "key": "gWardrobe2",
+    "theme": "envyLounge",
+    "edge": 19.5,
+    "pixel": [
+      128,
+      439
+    ],
+    "plane": {
+      "ax": 3.1500000000000004,
+      "ay": 25.361675479180438,
+      "bx": 5.15,
+      "by": 25.361675479180438
+    },
+    "minimumOpaqueWorldHeight": 0.0040824829046403775
+  },
+  {
+    "id": "ep1b03",
+    "key": "gMirror",
+    "theme": "envy",
+    "edge": -34.25,
+    "pixel": [
+      8,
+      437
+    ],
+    "plane": {
+      "ax": 4.95,
+      "ay": 25.78362953692115,
+      "bx": 6.95,
+      "by": 25.78362953692115
+    },
+    "minimumOpaqueWorldHeight": 0.004082482904637648
+  },
+  {
+    "id": "ep1b03",
+    "key": "gCabinet",
+    "theme": "envy",
+    "edge": -50.5,
+    "pixel": [
+      11,
+      481
+    ],
+    "plane": {
+      "ax": 8.4,
+      "ay": 26.042024909367328,
+      "bx": 10.4,
+      "by": 26.042024909367328
+    },
+    "minimumOpaqueWorldHeight": 0.0040824829046349174
+  },
+  {
+    "id": "ep1b03",
+    "key": "gConsole",
+    "theme": "envy",
+    "edge": -60.75,
+    "pixel": [
+      25,
+      427
+    ],
+    "plane": {
+      "ax": 12.9,
+      "ay": 26.258975083483175,
+      "bx": 14.9,
+      "by": 26.258975083483175
+    },
+    "minimumOpaqueWorldHeight": 0.0040824829046349174
+  },
+  {
+    "id": "ep1b03",
+    "key": "gSofaN",
+    "theme": "envyLounge",
+    "edge": 2.5,
+    "pixel": [
+      6,
+      157
+    ],
+    "plane": {
+      "ax": 24.3,
+      "ay": 25.724312105007293,
+      "bx": 26.3,
+      "by": 25.724312105007293
+    },
+    "minimumOpaqueWorldHeight": 0.0040824829046403775
+  },
+  {
+    "id": "ep1b03",
+    "key": "gTableN",
+    "theme": "envyLounge",
+    "edge": 17,
+    "pixel": [
+      5,
+      126
+    ],
+    "plane": {
+      "ax": 24.3,
+      "ay": 27.3475,
+      "bx": 26.3,
+      "by": 27.3475
+    },
+    "minimumOpaqueWorldHeight": 0.0040824829046349174
+  },
+  {
+    "id": "ep1b03",
+    "key": "gSofaW",
+    "theme": "envyLounge",
+    "edge": 32.25,
+    "pixel": [
+      325,
+      173
+    ],
+    "plane": {
+      "ax": 1.359500103928497,
+      "ay": 30.5,
+      "bx": 1.359500103928497,
+      "by": 32.5
+    },
+    "minimumOpaqueWorldHeight": 0.004082482904637648
+  },
+  {
+    "id": "ep1b03",
+    "key": "gTableW",
+    "theme": "envyLounge",
+    "edge": -1.5,
+    "pixel": [
+      250,
+      140
+    ],
+    "plane": {
+      "ax": 3.5734008276677502,
+      "ay": 30.5,
+      "bx": 3.5734008276677502,
+      "by": 32.5
+    },
+    "minimumOpaqueWorldHeight": 0.0040824829046403775
+  },
+  {
     "id": "ep1b04",
     "key": "prep",
     "theme": "glutton",
@@ -222,23 +375,6 @@
   },
   {
     "id": "ep1b05",
-    "key": "backbar",
-    "theme": "lust",
-    "edge": -11.25,
-    "pixel": [
-      32,
-      527
-    ],
-    "plane": {
-      "ax": 21,
-      "ay": 7.099379194630872,
-      "bx": 23,
-      "by": 7.099379194630872
-    },
-    "minimumOpaqueWorldHeight": 0.0040824829046349174
-  },
-  {
-    "id": "ep1b05",
     "key": "booth",
     "theme": "lust",
     "edge": -77.25,
@@ -247,12 +383,12 @@
       517
     ],
     "plane": {
-      "ax": 7.846678424137183,
-      "ay": 12.8,
-      "bx": 7.846678424137183,
-      "by": 14.8
+      "ax": 23.996678424137183,
+      "ay": 7.5,
+      "bx": 23.996678424137183,
+      "by": 9.5
     },
-    "minimumOpaqueWorldHeight": 0.0040824829046403775
+    "minimumOpaqueWorldHeight": 0.004082482904643108
   },
   {
     "id": "ep1b05",
@@ -264,10 +400,10 @@
       542
     ],
     "plane": {
-      "ax": 7.559988625284367,
-      "ay": 17,
-      "bx": 7.559988625284367,
-      "by": 19
+      "ax": 22.159988625284367,
+      "ay": 9.9,
+      "bx": 22.159988625284367,
+      "by": 11.9
     },
     "minimumOpaqueWorldHeight": 0.0040824829046349174
   },
@@ -383,12 +519,46 @@
       524
     ],
     "plane": {
-      "ax": 7.540070332480819,
-      "ay": 12,
-      "bx": 7.540070332480819,
-      "by": 14
+      "ax": 8.6,
+      "ay": 26.49007033248082,
+      "bx": 10.6,
+      "by": 26.49007033248082
+    },
+    "minimumOpaqueWorldHeight": 0.0040824829046349174
+  },
+  {
+    "id": "ep1b07",
+    "key": "table2",
+    "theme": "wrath",
+    "edge": 48,
+    "pixel": [
+      207,
+      456
+    ],
+    "plane": {
+      "ax": 8.1,
+      "ay": 29.870217391304347,
+      "bx": 10.1,
+      "by": 29.870217391304347
     },
     "minimumOpaqueWorldHeight": 0.004082482904637648
+  },
+  {
+    "id": "ep1b07",
+    "key": "table3",
+    "theme": "wrath",
+    "edge": 48,
+    "pixel": [
+      207,
+      456
+    ],
+    "plane": {
+      "ax": 18.3,
+      "ay": 31.670217391304348,
+      "bx": 20.3,
+      "by": 31.670217391304348
+    },
+    "minimumOpaqueWorldHeight": 0.0040824829046349174
   },
   {
     "id": "ep1b07",

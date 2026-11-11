@@ -1,9 +1,9 @@
 {
   "build": {
-    "files": 6701,
-    "bytes": 1058039904,
-    "runtimeManifestSHA256": "3bc723bdbadc3113a3d58f3a512878532baf560cf4bc6693d15f2b838a3f9849",
-    "sourceCommit": "5b1b04cd3bffc39a47cfca3aed051bbc2a05f73f"
+    "files": 6890,
+    "bytes": 1090419402,
+    "runtimeManifestSHA256": "817abbc3ee8d627dca72a6972f12a2771c0e613615a4b3fda9bbdb669a0e9f52",
+    "sourceCommit": "7b293f60de5595c697737f2cc4b0007fd0258b64"
   },
   "boot": {
     "booted": true,
@@ -160,6 +160,42 @@
           {
             "id": "cabinet",
             "blocked": true
+          },
+          {
+            "id": "gWardrobe1",
+            "blocked": true
+          },
+          {
+            "id": "gWardrobe2",
+            "blocked": true
+          },
+          {
+            "id": "gMirror",
+            "blocked": true
+          },
+          {
+            "id": "gCabinet",
+            "blocked": true
+          },
+          {
+            "id": "gConsole",
+            "blocked": true
+          },
+          {
+            "id": "gSofaN",
+            "blocked": true
+          },
+          {
+            "id": "gTableN",
+            "blocked": true
+          },
+          {
+            "id": "gSofaW",
+            "blocked": true
+          },
+          {
+            "id": "gTableW",
+            "blocked": true
           }
         ],
         "centre": false,
@@ -186,6 +222,42 @@
         },
         {
           "id": "sin-art:ep1b03:cabinet",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b03:gWardrobe1",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b03:gWardrobe2",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b03:gMirror",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b03:gCabinet",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b03:gConsole",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b03:gSofaN",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b03:gTableN",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b03:gSofaW",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b03:gTableW",
           "height": 0.01
         }
       ],
@@ -658,6 +730,14 @@
             "blocked": true
           },
           {
+            "id": "table2",
+            "blocked": true
+          },
+          {
+            "id": "table3",
+            "blocked": true
+          },
+          {
             "id": "booth",
             "blocked": true
           }
@@ -682,6 +762,14 @@
         },
         {
           "id": "sin-art:ep1b07:chairs",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b07:table2",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b07:table3",
           "height": 0.01
         },
         {

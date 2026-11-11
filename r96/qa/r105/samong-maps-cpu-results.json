@@ -1,0 +1,136 @@
+{
+ "revision": "r105-samong-maps-cpu",
+ "results": [
+  {
+   "name": "modules load",
+   "ok": true,
+   "detail": "null"
+  },
+  {
+   "name": "blueprint for every episode and stage",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "episode 0 has only the boss stage",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "777 section table covers every text section (45)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "section targets are valid episode/stage pairs",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "only paragraph-less sections fall back to the episode start",
+   "ok": true,
+   "detail": "S-06"
+  },
+  {
+   "name": "every record key exists and yields paragraphs",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "every record substring is found in its section",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "all layouts come from R105 blueprints and keep the R103 contracts (151 layouts)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "outdoor stages carry a scene, lowered walls and a known family (39 stages)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "markers and props stand on reachable floor with known art (130 markers, 1202 props)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "marker read plays its paragraphs verbatim",
+   "ok": true,
+   "detail": "\"S-02. 밤의 출석부 · 교무실 · 출석부\""
+  },
+  {
+   "name": "marker read adds no explanation",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "777 panel lists 16 episodes, 3 stages and every section",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "777 object gained samong jumps",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "static prop art files exist",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "static plan: dist03 keeps only the broken seal chains (pillars moved to dist05 by R446), weeds and hands for dist02",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "R103 still exposes go/test/inspect",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "drive art + boss fx modules load",
+   "ok": true,
+   "detail": "null"
+  },
+  {
+   "name": "drive art files exist (50)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "drive art plan keys valid",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "boss palette covers all 16 samong bosses",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "palette entries well formed",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "place() dresses S-01 ascent (teapot + gardener)",
+   "ok": true,
+   "detail": "[[\"teapot\",14,20],[\"gardener\",10,20]]"
+  },
+  {
+   "name": "S-07 table set + keyed mask, S-05 keyed window placed",
+   "ok": true,
+   "detail": "[[\"table\"],[[\"window\",34,40],[\"news3\",30,40],[\"news1\",32,40]]]"
+  },
+  {
+   "name": "place() fills every planned stage",
+   "ok": true,
+   "detail": "[[\"1:survival\",3,3],[\"1:maze\",2,2],[\"1:ascent\",2,2],[\"2:survival\",4,4],[\"2:maze\",2,2],[\"8:survival\",5,5],[\"8:maze\",5,5],[\"8:ascent\",4,4],[\"9:survival\",2,2],[\"9:maze\",1,1],[\"9:ascent\",1,1],[\"10:survival\",3,3],[\"10:maze\",3,3],[\"10:ascent\",3,3],[\"13:survival\",3,3],[\"13:maze\",6,6],[\"13:ascent\",6,6],[\"5:"
+  }
+ ],
+ "passed": true
+}

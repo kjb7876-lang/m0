@@ -97,6 +97,8 @@ function swapWalk(rec,st){for(let i=st;i<rec.commands.length;i++){const c=rec.co
 function preload(){try{const h=player?.hero;if(!HEROES.includes(h))return 0;let miss=0;const want=[];for(const [act,ds] of Object.entries(SKILLSET[h]||{}))for(const d of ds)want.push(pathOf(h,d,act));/* R201 *//* R437 새 공격 시트 */{const a=window.__STORYWORLD_NEON_LAUREN_R437__?.attackSheet?.(h,'e');if(a?.path)want.push(a.path);}for(const d of['s','se','e','ne','n']){want.push(pathOf(h,d));if(HIT.has(h)&&!HIT_FALLBACK[h]?.[d])want.push(pathOf(h,d,'hit'));if(h==='hwando'||h==='gunner')want.push(pathOf(h,d,'walk'));}if(h==='hwando'||h==='gunner')want.push('assets/r144/walk/'+h+'/walk-e.webp');
  for(const p of want){if(typeof readyImage==='function'&&readyImage(p))continue;miss++;const t=Date.now();if(t-(asked.get(p)||0)>1000){asked.set(p,t);try{if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});}catch(_){}}}stats.preloadMiss=miss;return miss;}catch(_){return 0;}}
 let lastHero=null,lastRoom=null,nextPre=0;
+// R440: 몸 그림 덧씌우기들(이 파일·환도·슬레이어·헌터)이 상태를 읽기 직전에 스킬 중이면 '공격 중'으로 잠깐 바꿔 보인다(되돌림은 skill-attack-r440 바깥 감싸기).
+if(typeof drawHero==='function'){const inner=drawHero;drawHero=function(...a){const r=inner.apply(this,a);try{window.__STORYWORLD_SKILL_ATTACK_R440__?.swap?.();}catch(_){}return r;};}
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
  if(player?.hero==='hwando'&&window.__STORYWORLD_HWANDO_R242__?.active?.())return r;/* R242: 환도는 새 선택 자산이 그린다 — 옛 시트를 그리거나 받지 않는다(텍스처 중복 방지) */
  try{if(st>=0&&rec&&prefs.on)swapWalk(rec,st);}catch(e){fail(e);}
@@ -111,5 +113,7 @@ if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){con
   if(!prefs.on||st<0||!solo()||!player||!(player.attackAnim>0)||busy)return r;
   apply(rec,st);}catch(e){fail(e);}return r;};}
 function set(k,v){prefs[k]=!!v;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
-window.__STORYWORLD_ATTACK_ANIM_R143__=Object.freeze({revision:REV,set,FOOT,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError,browser:false,GPU:false})});
+// R440: 지금 R201 전용 스킬·궁극기 시트(미카엘라·라우렌 s/e)를 그릴 차례인가 — 그때는 공격 모션으로 바꾸지 않는다.
+function actSheet(){try{const h=player?.hero,act=currentAct();if(!prefs.on||!solo()||!act||act==='dash'||act==='guard'||!SKILLSET[h]?.[act])return false;const d=cast.act===act&&cast.start>0?cast.dir:dirNow();return SKILLSET[h][act].includes((SHEET[d]||SHEET.s)[0]);}catch(_){return false;}}
+window.__STORYWORLD_ATTACK_ANIM_R143__=Object.freeze({revision:REV,set,FOOT,actSheet,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError,browser:false,GPU:false})});
 })();

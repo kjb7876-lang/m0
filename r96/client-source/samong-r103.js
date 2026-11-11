@@ -343,14 +343,16 @@
   try{ok=await enterRegion(def.id,null,{layer:'DREAM',position:{x:start.x,y:start.y},noStory:true,restore:true});}finally{entering--;def.paths=oldPaths;}
   if(!ok||room!==stageRoom){stageRoom=prev&&room===prev?prev:null;S.active=!!stageRoom;return false;}
   forceFlash(stage==='maze'||!!z?.dark);if(z)zoneIntro(z);else intro(EP[ep],stage);saveGame(false);return true;}
- function zoneIntro(z){const list=zonesOf(S.ep),n=list.indexOf(z)+1,sub=({explore:'탐색',maze:'손전등 미로',combat:'전투',confront:'대면'})[z.kind]+' · 구역 '+n+'/'+list.length,sc=zoneScenes(z,z.cue||[],'cue');if(sc.length&&!modal)playScenes(sc,()=>banner103(z.title,sub));else banner103(z.title,sub);}
+ function zoneIntro(z){const list=zonesOf(S.ep),n=list.indexOf(z)+1,sub=({explore:'탐색',maze:mazeWord(),combat:'전투',confront:'대면'})[z.kind]+' · 구역 '+n+'/'+list.length,sc=zoneScenes(z,z.cue||[],'cue');if(sc.length&&!modal)playScenes(sc,()=>banner103(z.title,sub));else banner103(z.title,sub);}
  // After a load the native restore may still be entering the host map; wait for it, then
  // re-enter the stage at its start (the maze at the last lamp).
  let resumeNote=null;
  async function resumeStage(){const want={ep:S.ep,stage:S.stage,zone:S.zone};resumeNote={at:'wait',want};for(let i=0;i<150&&(loading||entering);i++)await new Promise(r=>setTimeout(r,100));if(S.active||S.ep!==want.ep||S.stage!==want.stage||layer!=='DREAM'){resumeNote={at:'skip',active:S.active,ep:S.ep,stage:S.stage,layer};return false;}resumeNote={at:'go',want};
   for(let t=0;t<3;t++){if(await go(want.ep,want.stage,{restore:true,zone:want.zone})){resumeNote={at:'done',want,try:t};return true;}resumeNote={at:'retry',t,entering,loading};await new Promise(r=>setTimeout(r,400));}return false;}
  function intro(ep,stage){const sc=scenes(ep,stage);if(sc.length&&!modal)playScenes(sc,()=>banner103(ep.title,stageLabel(stage)));else banner103(ep.title,stageLabel(stage));}
- const stageLabel=s=>s==='survival'?'생존 · 누적 '+GOAL+' 처치':s==='maze'?'손전등 미로 · 출구 찾기':'상승 · 위쪽의 보스';
+ /* R455: 손전등·횃불은 고를 때만 켜는 시야 모드 — 안내 문구도 지금 시야를 따른다 */
+ const beamOn=()=>!!window.__STORYWORLD_LIGHT_R182__?.beam?.(),mazeWord=()=>beamOn()?(window.__STORYWORLD_LIGHT_R182__.mode()==='torch'?'횃불 미로':'손전등 미로'):'미로';
+ const stageLabel=s=>s==='survival'?'생존 · 누적 '+GOAL+' 처치':s==='maze'?mazeWord()+' · 출구 찾기':'상승 · 위쪽의 보스';
  function banner103(title,sub){try{const el=document.getElementById('cutin')||null;toast(title+(sub?'\n'+sub:''),3.4);}catch(e){fail(e);}}
 
  // ---- narrative ----------------------------------------------------------------------------
@@ -489,11 +491,11 @@ function ensureOverlay(){if(overlay?.isConnected)return overlay;const stage=docu
  function hud(){const x=room.samongR103,ep=EP[x.ep],q=id=>document.getElementById(id);const set=(id,t)=>{const el=q(id);if(el)el.textContent=t;};
   const z=zoneOf(x.zone);if(z){const h=ZN().hudText(room,z);set('questTitle','사몽 · '+ep.title);set('regionName',z.title);set('regionSub',ep.chapter+' · '+h.sub);set('questText',h.text);set('questDestination',h.dest);set('questUnlock',h.unlock);set('hint',h.text);
    const badge=q('mobileMapR74'),bt='사몽 · '+h.badge;if(badge&&badge.textContent!==bt){badge.textContent=bt;badge.title=bt;}set('questInlineSummary',h.text+' · '+h.dest);return;}
-  set('questTitle','사몽 · '+ep.title);set('regionName',ep.title);set('regionSub',ep.chapter+' · '+(x.stage==='survival'?'생존':x.stage==='maze'?'손전등 미로':'상승'));
+  set('questTitle','사몽 · '+ep.title);set('regionName',ep.title);set('regionSub',ep.chapter+' · '+(x.stage==='survival'?'생존':x.stage==='maze'?mazeWord():'상승'));
   if(x.stage==='survival'){set('questText',x.portal?'문이 열렸습니다. 가운데의 문에서 '+(typeof KR291!=='undefined'&&KR291?KR291.i:'C'):'누적 처치 '+S.kills+' / '+GOAL+' · 동시 출현은 제한됩니다.');set('questDestination','생존전 · '+(ep.mobName||''));set('questUnlock',S.kills>=GOAL?'목표 달성 · 새 적이 나오지 않습니다':'666 누적 처치 후 미로의 문');}
-  else if(x.stage==='maze'){set('questText','손전등이 비추는 쪽으로 출구를 찾으세요. 적은 계속 나타납니다.');set('questDestination','미로 · '+(ep.maze||''));set('questUnlock','출구에 닿으면 상승 구간으로 · 등불에서 저장');}
+  else if(x.stage==='maze'){set('questText',(beamOn()?'빛이 비추는 쪽으로 ':'')+'출구를 찾으세요. 적은 계속 나타납니다.');set('questDestination','미로 · '+(ep.maze||''));set('questUnlock','출구에 닿으면 상승 구간으로 · 등불에서 저장');}
   else{set('questText',x.portal?'문에서 '+(typeof KR291!=='undefined'&&KR291?KR291.i:'C')+'로 다음 기억으로':x.bossUp?josa(ep.boss.name,'을','를')+' 쓰러뜨리세요':'층계를 따라 위쪽으로 오르세요.');set('questDestination','상승 · '+ep.boss.name);set('questUnlock','보스 처치 후 다음 에피소드 생존전');}
-  set('hint',x.stage==='survival'?(x.portal?'가운데의 문 · '+(typeof KR291!=='undefined'&&KR291?KR291.i:'C'):'누적 '+S.kills+' / '+GOAL):x.stage==='maze'?'손전등은 움직이는 쪽을 비춥니다 · 등불에서 저장':(x.portal?'문 · '+(typeof KR291!=='undefined'&&KR291?KR291.i:'C'):'위쪽으로'));
+  set('hint',x.stage==='survival'?(x.portal?'가운데의 문 · '+(typeof KR291!=='undefined'&&KR291?KR291.i:'C'):'누적 '+S.kills+' / '+GOAL):x.stage==='maze'?(beamOn()?(window.__STORYWORLD_LIGHT_R182__.mode()==='torch'?'횃불이 둘레를 비춥니다':'손전등은 움직이는 쪽을 비춥니다')+' · 등불에서 저장':'출구를 찾으세요 · 등불에서 저장'):(x.portal?'문 · '+(typeof KR291!=='undefined'&&KR291?KR291.i:'C'):'위쪽으로'));
   const badge=q('mobileMapR74'),bt='사몽 · '+ep.title+' · '+(x.stage==='survival'?'생존':x.stage==='maze'?'미로':'상승');if(badge&&badge.textContent!==bt){badge.textContent=bt;badge.title=bt;}
   set('questInlineSummary',(q('questText')?.textContent||'')+' · '+(q('questDestination')?.textContent||''));}
  function inspect(){const r=here()?room:null,x=r?.samongR103;return{revision:REV,resumeNote,state:JSON.parse(JSON.stringify(S)),zone,layer,here:!!r,stage:x?.stage,ep:x?.ep,samongZone:x?.zone||null,alive:r?r.enemies.filter(living).length:0,portal:x?.portal||null,bossUp:!!x?.bossUp,boss:x?.boss||null,failures,lastError,donorFail:[...donorFail],layout:r?{bounds:r.exploration.bounds,walls:r.exploration.walls.length,floor:r.exploration.floorCells.length,extra:r.exploration.samongR103}:null};}
@@ -512,5 +514,5 @@ function ensureOverlay(){if(overlay?.isConnected)return overlay;const stage=docu
  const epOf=x=>EP[x.ep];
  window.__STORYWORLD_NAV_GOAL_R103__=navGoal;
  try{install();}catch(e){fail(e);}
- window.__STORYWORLD_SAMONG_R103__=Object.freeze({revision:REV,GOAL,episodes:EP,stages:STAGES,here,start,go,next,showRecords,ending,inspect,test,layoutFor,mazeLayout,state:()=>S,get flashlightActive(){return here()&&(room.samongR103.stage==='maze'||!!zoneOf(room.samongR103.zone)?.dark);},goZone:id=>{const i=epOfZone(id);return i<0?Promise.resolve(false):go(i,null,{zone:id});},zones:()=>({current:here()?room.samongR103.zone:null,state:{zone:S.zone,done:[...S.zoneDone],read:S.zoneRead.length}})});
+ window.__STORYWORLD_SAMONG_R103__=Object.freeze({revision:REV,GOAL,episodes:EP,stages:STAGES,here,start,go,next,showRecords,ending,inspect,test,layoutFor,mazeLayout,state:()=>S,get flashlightActive(){return here()&&(room.samongR103.stage==='maze'||!!zoneOf(room.samongR103.zone)?.dark);},spawnMob:(row,at,o)=>here()?spawn(row,at,o):null,/* R511: 빈 방 지킴이 */goZone:id=>{const i=epOfZone(id);return i<0?Promise.resolve(false):go(i,null,{zone:id});},zones:()=>({current:here()?room.samongR103.zone:null,state:{zone:S.zone,done:[...S.zoneDone],read:S.zoneRead.length}})});
 })();

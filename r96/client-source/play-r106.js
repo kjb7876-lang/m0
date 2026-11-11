@@ -32,7 +32,7 @@ const pathOf=e=>String(e?.profile?.frames?.idle?.path||e?.path||'').replace(/^\.
 const known=new WeakMap();const faceOf=e=>{if(known.has(e))return known.get(e);const f=FACE[pathOf(e)]||null;known.set(e,f);return f;};
 // 화면 가로축(u=x-y)으로 영웅이 어느 쪽인지. 붙어 있을 때 떨지 않게 작은 무감대, 보스는 0.35초 머뭇거림.
 const side=new WeakMap();
-function heroLeft(e,hold){let s=side.get(e);if(!s){s={left:null,pend:null,since:0};side.set(e,s);}
+function heroLeft(e,hold){const r444=window.__STORYWORLD_ENEMY_FACE_R444__?.left?.(e);if(typeof r444==='boolean')return r444;/* R444: 공격 각·실제 걸음·영웅 쪽을 한 곳에서 */let s=side.get(e);if(!s){s={left:null,pend:null,since:0};side.set(e,s);}
  const du=(player.x-player.y)-(e.x-e.y);if(Math.abs(du)<.3&&s.left!==null)return s.left;const want=du<0;const t=typeof time==='number'?time:0;
  if(s.left===null||!hold){s.left=want;return want;}
  if(want!==s.left){if(s.pend!==want){s.pend=want;s.since=t;}if(t-s.since>=.35||e.attack||e.rangedWindup>0){s.left=want;s.pend=null;}}else s.pend=null;return s.left;}

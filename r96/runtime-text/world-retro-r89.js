@@ -119,6 +119,8 @@ float r89Bayer(vec2 p){vec2 q=mod(p,4.);int i=int(q.x)+int(q.y)*4;float m[16]=fl
   r.r89Light=mesh;return mesh;
  }
  function lightState(r,frame){const base=LIGHT[prefs.light];if(!base||sightOn()||!active(frame))return null;
+  // R451: 광원 둘레 국지 조명이 켜져 있으면 바탕빛·영웅 빛·소품 빛을 그쪽이 맡는다(끄면 이 빛 그대로).
+  try{if(window.__STORYWORLD_LOCAL_LIGHT_R451__?.owns?.())return null;}catch(_){}
   // R98: open-air and cavern places reshape the carried light (see world-r98.js).
   const spec=window.__STORYWORLD_WORLD_R98__?.light?.(frame,base)||base;
   const hero=frame.entities?.find(e=>e.hero&&Number.isFinite(e.x+e.y));if(!hero)return null;

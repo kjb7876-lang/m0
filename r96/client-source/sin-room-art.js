@@ -16,7 +16,9 @@ const ATLAS={
  glutton:{path:ROOT+'glutton-kitchen.png',cells:{prep:cell([76,105,512,436],[256,433],430),range:cell([720,81,438,485],[219,482],479),fridge:cell([155,663,327,488],[163.5,485],482),trolley:cell([725,683,420,453],[210,450],447)}},
  lust:{path:ROOT+'lust-bar.png',cells:{bar:cell([48,3,636,580],[318,577],574),backbar:cell([805,1,397,602],[198.5,599],596),booth:cell([47,623,579,548],[289.5,545],542),trolley:cell([787,603,434,549],[217,546],543)}},
  mammon:{path:ROOT+'mammon-office.png',cells:{desk:cell([52,56,737,582],[368.5,579],576),chair:cell([876,15,355,582],[177.5,579],576),drawers:cell([57,666,667,511],[333.5,508],505),trolley:cell([819,633,438,538],[219,535],532)}},
- wrath:{path:ROOT+'wrath-restaurant.png',cells:{table:cell([17,12,618,558],[309,555],552),buffet:cell([695,33,602,519],[301,516],513),chairs:cell([36,600,587,558],[293.5,555],552),booth:cell([677,606,613,555],[306.5,552],549)}}
+ wrath:{path:ROOT+'wrath-restaurant.png',cells:{table:cell([17,12,618,558],[309,555],552),buffet:cell([695,33,602,519],[301,516],513),chairs:cell([36,600,587,558],[293.5,555],552),booth:cell([677,606,613,555],[306.5,552],549)}},
+ // R443: Dots 두 방향 가구(북벽 N=남서쪽을 봄 · 서벽 W=남동쪽을 봄, 뒤집지 않음). 원본 PNG 6장을 알파 16 이하만 지우고 줄여 한 장에 모음.
+ envyLounge:{path:ROOT+'envy-lounge.webp',cells:{wardrobeN:cell([2,2,202,445],[101,445],445),wardrobeW:cell([208,2,204,417],[102,417],417),sofaW:cell([416,2,339,283],[169.5,283],283),sofaN:cell([2,451,342,242],[171,242],242),tableN:cell([348,451,238,200],[119,200],200),tableW:cell([590,451,258,199],[129,199],199)}}
 };
 for(const a of Object.values(ATLAS)){Object.freeze(a.cells);Object.freeze(a);}Object.freeze(ATLAS);
 // Minimum visible-alpha (>16) contact coordinate in each untouched atlas cell:
@@ -29,26 +31,55 @@ const GROUND_EDGE=Object.freeze({
  glutton:Object.freeze({prep:11.5,range:-8,fridge:-20.75,trolley:-30.5}),
  lust:Object.freeze({bar:27,backbar:-11.25,booth:-77.25,trolley:-75}),
  mammon:Object.freeze({desk:-15.25,chair:-43.25,drawers:-45.75,trolley:-39}),
- wrath:Object.freeze({table:48,buffet:56,chairs:-54.75,booth:-35.75})
+ wrath:Object.freeze({table:48,buffet:56,chairs:-54.75,booth:-35.75}),
+ envyLounge:Object.freeze({wardrobeN:19.5,wardrobeW:-.5,sofaW:32.25,sofaN:2.5,tableN:17,tableW:-1.5})
 });
 // x/y are native floor positions; width/depth are the solid furniture footprint.
 // Pixel heights use the same zoom-1 scale as native props (the hero is 66 px).
 const prop=(key,x,y,width,depth,height,wallHeight,flip=false,existingCollision=false)=>Object.freeze({key,x,y,width,depth,height,wallHeight,flip,existingCollision});
+// R438(사용자 2026-11-09 "의자같은경우는 중앙에 각도맞게" · "식탁이랑 의자를 같이 가야지"): 분노 식당의 쓰러진 의자 무리(식탁 없는 의자)를 보스방 왼쪽 벽에서 빼, 보스방 앞 몹 모이는 구역(gatherBounds [4,27,28,39]) 북쪽 벽에 붙인다 — 식탁 앞에 두면 식탁 그림 속 의자와 겹쳐 더 어수선했다(사용자 03:19Z "보스방이 작아서 배치가 다 어렵다면 보스방이전에 몹들이 몰리는 구역에 적절하게"). 보스방에는 의자가 그려진 식탁·찬장·부스(작은 식탁 포함) 세트만 남는다.
+//  같은 날 03:40Z "빨간색 원그린 조형물식탁을 아래 원두곳에 각도 맞게 배치": 같은 식탁 세트(의자 포함 그림)를 모이는 구역 두 곳(9.1,30.3)·(19.3,32.1)에 보스방 식탁과 같은 방향(긴 쪽이 x 축)으로 더 놓는다. 같은 그림 칸(table)을 cell 로 가리켜 다시 쓴다(그림·매니페스트 칸은 그대로).
+// R443(사용자 2026-11-09 06:36Z 색욕 레퍼런스 "이런식으로 적절하게 배치 뺄껀 과감히 빼고" → 06:49Z "이미지처럼 각도랑 위치 정확하게, 임의로 바꾸지 말고"):
+//  레퍼런스 화면을 바(13.1,7.15)·보스 문(20,20) 자리로 맞춰 읽은 좌표·좌우 방향 그대로 — 뒷선반 16.8,6.95 · 부스 23.3,8.5(뒤집음) · 술 수레 11.6,14.7(뒤집음). 라운지 소품 자리는 bossroom-tidy-r438.js.
 const themes={
  ep1b02:{name:'나태의 거주집',atlas:'sloth',props:[prop('sofa',13.0,7.15,4.4,1.65,165,1.25),prop('fridge',23.4,7.15,1.5,1.2,155,2.25),prop('tv',18.65,7.0,2.2,1.2,110,1.5),prop('bed',7.2,15.2,1.8,3.7,160,.85,true)]},
- ep1b03:{name:'질투의 거주집',atlas:'envy',props:[prop('settee',12.9,7.15,4.1,1.6,165,1.2),prop('mirror',23.6,6.9,1.5,.9,130,2.25),prop('console',18.5,7.0,2.6,1.25,142,1.3),prop('cabinet',7.05,14.2,1.3,1.5,148,2.15,true)]},
+ ep1b03:{name:'질투의 거주집',atlas:'envy',props:[prop('settee',12.9,7.15,4.1,1.6,165,1.2),prop('mirror',23.6,6.9,1.5,.9,130,2.25),prop('console',18.5,7.0,2.6,1.25,142,1.3),prop('cabinet',7.05,14.2,1.3,1.5,148,2.15,true),
+  // R443 모이는 방(보스 통로 x17–22 를 가운데 둔 호텔 로비): 서북 모서리 옷장 두 짝+체경(드레스 구역) · 통로 왼쪽 장식장+사진 콘솔(보스방 콘솔과 짝) · 통로 오른쪽 소파+탁자 · 서벽 소파+탁자. 가운데 x8–23·모이는 점(16,33) 둘레는 비워 동선·전투 자리를 둔다.
+  {...prop('gWardrobe1',2.45,25.55,1.6,.9,150,1.9),atlas:'envyLounge',cell:'wardrobeN',wall:'north',fit:'lobby',back:true},{...prop('gWardrobe2',4.15,25.55,1.6,.9,150,1.9),atlas:'envyLounge',cell:'wardrobeN',wall:'north',fit:'lobby',back:true},{...prop('gMirror',5.95,25.5,1.4,.8,130,2.25),cell:'mirror',wall:'north',fit:'lobby',back:true},
+  {...prop('gCabinet',9.4,25.6,1.3,1.1,148,2.15),cell:'cabinet',fit:'lobby',back:true},{...prop('gConsole',13.9,25.7,2.6,1.25,142,1.3),cell:'console',fit:'lobby',back:true},
+  {...prop('gSofaN',25.3,25.75,3.0,1.2,101,1.1),atlas:'envyLounge',cell:'sofaN',fit:'lobby',back:true},{...prop('gTableN',25.3,27.55,2.0,.9,83,.9),atlas:'envyLounge',cell:'tableN',fit:'lobby'},
+  {...prop('gSofaW',1.75,31.5,1.2,3.0,118,1.1),atlas:'envyLounge',cell:'sofaW',wall:'west',fit:'lobby',back:true},{...prop('gTableW',3.55,31.5,.9,2.0,83,.9),atlas:'envyLounge',cell:'tableW',wall:'west',fit:'lobby'}]},
  ep1b04:{name:'탐식의 호텔 주방',atlas:'glutton',props:[prop('prep',12.9,7.15,4.0,1.7,165,1.15),prop('range',18.7,7.1,3.0,1.4,165,1.55),prop('fridge',23.7,7.0,1.7,1.3,150,2.35),prop('trolley',7.1,15.4,1.5,1.55,112,1.1,true)]},
- ep1b05:{name:'색욕의 호텔 고급 바',atlas:'lust',props:[prop('bar',13.1,7.15,4.0,1.5,170,1.3),prop('backbar',22.0,7.0,2.4,.95,170,2.4),prop('booth',7.15,13.8,1.65,3.5,165,1.4,true),prop('trolley',7.1,18.0,1.25,1.4,112,.95,true)]},
+ ep1b05:{name:'색욕의 호텔 고급 바',atlas:'lust',props:[prop('bar',13.1,7.15,4.0,1.5,170,1.3),{...prop('booth',23.3,8.5,1.65,3.5,165,1.4,true),wall:'west'},{...prop('trolley',21.7,10.9,1.25,1.4,112,.95,true),wall:'west'}]},// R450 사용자 2026-11-09 10:08Z: 술병 진열대(backbar) 삭제, 잔 수레(trolley)는 소파(부스) 앞으로
  ep1b06:{name:'맘몬의 호텔 사장실과 금고',atlas:'mammon',props:[prop('desk',14,7.35,5,1.4,160,1.02,true,true),prop('chair',18,7.4,1.2,1.2,130,1.7),prop('drawers',6.85,15,1.4,4,140,1.35,true,true),prop('trolley',24.5,7,1,1.2,100,1.1)]},
- ep1b07:{name:'불타는 호텔 식당',atlas:'wrath',props:[prop('table',13.1,7.3,3.9,1.7,170,1.05),prop('buffet',21.6,7.1,4.0,1.65,165,1.45),prop('chairs',7.15,13.0,1.9,2.15,132,1.1,true),prop('booth',7.2,17.2,1.8,3.75,170,1.35,true)]}
+ ep1b07:{name:'불타는 호텔 식당',atlas:'wrath',props:[prop('table',13.1,7.3,3.9,1.7,170,1.05),prop('buffet',21.6,7.1,4.0,1.65,165,1.45),prop('chairs',9.6,26.1,2.2,1.5,132,1.1),{...prop('table2',9.1,30.3,3.9,1.7,170,1.05),cell:'table'},{...prop('table3',19.3,32.1,3.9,1.7,170,1.05),cell:'table'},prop('booth',7.2,17.2,1.8,3.75,170,1.35,true)]}
 };
 for(const t of Object.values(themes)){Object.freeze(t.props);Object.freeze(t);}Object.freeze(themes);
+// R443: a prop may borrow another atlas (atlas) and name its wall (wall) when x<8 is not the west wall (gather-room north-west corner).
+const atlasOf=p=>p.sinArtAtlas||themes[p.sinArtZone]?.atlas,westWall=p=>p.sinArtWall?p.sinArtWall==='west':p.x<8;
+// R443: a fit group (gather-room lobby) needs the widened R204/R224 room floor. It is placed all-or-nothing:
+// every footprint corner on a floor cell and every back:true piece touching its wall; otherwise the whole group is skipped
+// (e.g. storyworld.r204.cave off keeps the narrower native room) instead of drawing furniture inside a wall.
+const floorSets=new WeakMap(),fitCache=new WeakMap();
+function fitGroup(L,t,group){
+ let F=floorSets.get(L);if(!F){F=new Set((L?.floorCells||[]).map(c=>Array.isArray(c)?c[0]+':'+c[1]:c.x+':'+c.y));floorSets.set(L,F);}
+ const on=(x,y)=>F.has(Math.floor(x)+':'+Math.floor(y));
+ return t.props.filter(p=>p.fit===group).every(p=>{const x0=p.x-p.width/2+.01,x1=p.x+p.width/2-.01,y0=p.y-p.depth/2+.01,y1=p.y+p.depth/2-.01;
+  if(![[x0,y0],[x1,y0],[x1,y1],[x0,y1]].every(([x,y])=>on(x,y)))return false;
+  return !p.back||((p.wall?p.wall==='west':p.x<8)?!on(x0-.9,p.y):!on(p.x,y0-.9));});
+}
+function propsFor(id,L){
+ const t=themes[id];if(!t)return[];if(!t.props.some(p=>p.fit))return t.props;
+ let byZone=fitCache.get(L);if(byZone?.has(id))return byZone.get(id);
+ const ok=new Map(),out=t.props.filter(p=>{if(!p.fit)return true;if(!ok.has(p.fit))ok.set(p.fit,fitGroup(L,t,p.fit));return ok.get(p.fit);});
+ if(L&&typeof L==='object'){if(!byZone){byZone=new Map();fitCache.set(L,byZone);}byZone.set(id,out);}return out;
+}
 function propPlane(p){
- const t=themes[p.sinArtZone],c=t&&ATLAS[t.atlas]?.cells[p.sinArtKey];if(!c)return null;
- const tile=typeof TILE==='number'?TILE:34,offset=-GROUND_EDGE[t.atlas][p.sinArtKey]*p.height/c.visibleHeight/tile+.005;
+ const t=themes[p.sinArtZone],k=atlasOf(p),c=t&&ATLAS[k]?.cells[p.sinArtCell||p.sinArtKey];if(!c)return null;
+ const tile=typeof TILE==='number'?TILE:34,offset=-GROUND_EDGE[k][p.sinArtCell||p.sinArtKey]*p.height/c.visibleHeight/tile+.005;
  // Reuse the native vertical world-plane projection. This changes depth only:
  // unlike a camera-facing quad, tall furniture cannot lean through its wall.
- return p.x<8?{ax:p.x+offset,ay:p.y-1,bx:p.x+offset,by:p.y+1}:{ax:p.x-1,ay:p.y+offset,bx:p.x+1,by:p.y+offset};
+ return westWall(p)?{ax:p.x+offset,ay:p.y-1,bx:p.x+offset,by:p.y+1}:{ax:p.x-1,ay:p.y+offset,bx:p.x+1,by:p.y+offset};
 }
 function layout(id,L){
  const t=themes[id];if(!t||!solo()||!L?.storyMapR171||L.samongR103||L.samongR115)return L;
@@ -58,7 +89,7 @@ function layout(id,L){
  // A restored authored layout may contain this overlay's previous envelopes.
  // Remove only our owned collision records, never native walls or other rooms.
  const walls=L.walls.filter(w=>!(w.sinArtFurniture&&String(w.id||'').startsWith('sin-art:'+id+':'))&&!(w.sinFurniture&&String(w.id||'').startsWith('sin:'+id+':')));
- for(const p of t.props)if(!p.existingCollision)walls.push({id:'sin-art:'+id+':'+p.key,x:p.x,y:p.y,width:p.width,depth:p.depth,height:.01,r98BaseHeight:.01,r115Wall:p.wallHeight,angle:0,
+ for(const p of propsFor(id,L))if(!p.existingCollision)walls.push({id:'sin-art:'+id+':'+p.key,x:p.x,y:p.y,width:p.width,depth:p.depth,height:.01,r98BaseHeight:.01,r115Wall:p.wallHeight,angle:0,
   analyticBounds12:[p.x-p.width/2,p.y-p.depth/2,p.x+p.width/2,p.y+p.depth/2],sinFurniture:true,sinArtFurniture:true});
  const out={...L,walls,sinBossroom:REV,sinBossroomZone:id,sinRoomArt:REV,sinRoomArtZone:id};
  for(const key of['r219Source','r204Source'])if(L[key])Object.defineProperty(out,key,{value:L[key]});
@@ -125,11 +156,11 @@ function apply(r){
  if(!r||!Array.isArray(r.props))return;
  if(!eligible(r)){if(applied.has(r)){r.props=r.props.filter(p=>!p.sinArt);applied.delete(r);}return;}
  const old=applied.get(r);if(old?.layout===r.exploration&&old.props===r.props&&old.items.every(p=>r.props.includes(p)))return;
- const t=themes[r.id],a=ATLAS[t.atlas],items=[];
+ const t=themes[r.id],list=propsFor(r.id,r.exploration),items=[];
  r.props=r.props.filter(p=>!p.sinArt);
- if(typeof addImage==='function')addImage(a.path,'sin room '+t.atlas);
- for(const p of t.props){const item={id:'sin-art:'+r.id+':'+p.key,x:p.x,y:p.y,path:a.path,height:p.height,solid:false,visible:true,enabled:true,interactive:false,
-   autoTargetEligible6:false,r80PresentationOnly:true,sinArt:true,sinArtZone:r.id,sinArtKey:p.key,sinArtFlip:p.flip};r.props.push(item);items.push(item);}
+ if(typeof addImage==='function')for(const k of new Set(list.map(p=>p.atlas||t.atlas)))addImage(ATLAS[k].path,'sin room '+k);
+ for(const p of list){const a=ATLAS[p.atlas||t.atlas],item={id:'sin-art:'+r.id+':'+p.key,x:p.x,y:p.y,path:a.path,height:p.height,solid:false,visible:true,enabled:true,interactive:false,
+   autoTargetEligible6:false,r80PresentationOnly:true,sinArt:true,sinArtZone:r.id,sinArtKey:p.key,sinArtCell:p.cell||p.key,sinArtFlip:p.flip,sinArtAtlas:p.atlas||t.atlas,sinArtWall:p.wall||null};r.props.push(item);items.push(item);}
  applied.set(r,{layout:r.exploration,props:r.props,items});stats.rooms++;stats.props+=items.length;last={zone:r.id,theme:t.name,props:items.map(p=>p.id)};
 }
 // Only overlapping, noninteractive decorative clutter is suppressed. Native
@@ -137,10 +168,10 @@ function apply(r){
 function covered(p,id){
  if(!p||p.sinArt||p.chest||p.altar||p.name||p.r74Door||p.r81WardDoor||p.r75NPC||p.r75NarrativeNPC||p.interactive||p.solid||p.terrainWall)return false;
  if(/chest|altar|portal|door|note|memory/i.test(String(p.kind||'')+String(p.id||'')))return false;
- return !!(p.r80PresentationOnly||p.visualOnly6||p.decorative)&&!!themes[id]?.props.some(q=>Math.abs(p.x-q.x)<q.width/2+.25&&Math.abs(p.y-q.y)<q.depth/2+.25);
+ const L=typeof room!=='undefined'&&room?.id===id?room.exploration:null;return !!(p.r80PresentationOnly||p.visualOnly6||p.decorative)&&!!(L?propsFor(id,L):themes[id]?.props.filter(q=>!q.fit)||[]).some(q=>Math.abs(p.x-q.x)<q.width/2+.25&&Math.abs(p.y-q.y)<q.depth/2+.25);
 }
 function drawOwn(p){
- const t=themes[p.sinArtZone],c=t&&ATLAS[t.atlas]?.cells[p.sinArtKey];if(!c)return;
+ const t=themes[p.sinArtZone],c=t&&ATLAS[atlasOf(p)]?.cells[p.sinArtCell||p.sinArtKey];if(!c)return;
  const sight=window.__STORYWORLD_SIGHT24__;if(sight?.enabled&&!sight.pointVisible(p.x,p.y))return;
  const row=typeof readyImage==='function'?readyImage(p.path):null;if(!row){if(typeof addImage==='function')addImage(p.path);return;}
  const z=typeof zoom==='number'?zoom:1,q=project(p.x,p.y),scale=p.height*z/c.visibleHeight,w=c.sourceRect[2]*scale,h=c.sourceRect[3]*scale;
@@ -170,7 +201,7 @@ else if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,..
 function current(){try{if(typeof room!=='undefined'&&room&&!(typeof loading!=='undefined'&&loading))apply(room);}catch(e){fail(e);}}
 if(typeof drawObjective==='function'){const base=drawObjective;drawObjective=function(...args){current();return base.apply(this,args);};}
 if(typeof setInterval==='function')setInterval(current,400);current();
-window.__STORYWORLD_SIN_ROOM_ART__=Object.freeze({revision:REV,ATLAS,GROUND_EDGE,themes,layout,eligible,apply,covered,drawOwn,paintProp,propPlane,hideOwnedWalls,restoreOwnedWalls,restoreAuthoredCommands,
+window.__STORYWORLD_SIN_ROOM_ART__=Object.freeze({revision:REV,ATLAS,GROUND_EDGE,themes,layout,eligible,apply,covered,drawOwn,paintProp,propPlane,hideOwnedWalls,restoreOwnedWalls,restoreAuthoredCommands,atlasOf,propsFor,
  inspect:()=>({revision:REV,stats:{...stats},last,lastError,assets:Object.values(ATLAS).map(a=>({path:a.path,cells:Object.keys(a.cells),loaded:typeof readyImage==='function'&&!!readyImage(a.path)})),
   current:typeof room!=='undefined'&&room?{zone:room.id,props:(room.props||[]).filter(p=>p.sinArt).map(p=>({id:p.id,x:p.x,y:p.y,path:p.path,key:p.sinArtKey}))}:null})});
 })();

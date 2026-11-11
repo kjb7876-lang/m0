@@ -48,12 +48,15 @@
 - **Three.js 기록기 CSS filter**: brightness·contrast·saturate·grayscale·hue-rotate 만 된다. `drop-shadow`·`blur` 를 게임 ctx.filter 에 쓰면 Three.js 가 Legacy 로 떨어져 화면이 검게 된다(오프스크린 캔버스에는 써도 됨).
 - **렌더러 render 감싸기**: perf-r97 이 렌더러 인스턴스에 render 를 복사해 두므로 prototype 만 감싸면 스크립트 순서에 따라 안 탄다 → 인스턴스 render 도 같이 감싼다(R186·R188 wrapInst).
 - **몹 그림 사슬**: 엔진 drawEnemy 는 `__STORYWORLD_STORY_COMBAT_R54__.frameFor(e,fallback)` 로 그림을 고른다. R92·R109·R116 덧씌우기는 hp>0 일 때만 바꾼다(R188 이 죽음까지 이어 줌).
+- **조형물 그리기 길**: R80 그림 조형물(R224·R449 가구 등)은 world-assets-r80 이 `drawAssetFrame3(path,frame,x,y,h,opt)` 로, 엔진 조형물은 `sprite` 로, sin-room-art 는 `ctx.drawImage` 로 그린다. 조형물 한 점의 알파·필터를 바꾸려면 그 한 번 동안 `sprite`·`drawAssetFrame3` 를 둘 다 바꾸고, 계산값이 아니라 실제 그리기 호출이 받은 값을 브라우저에서 재 본다(R449 때 `sprite` 만 바꿔 화면에 안 닿았음).
 - **R163 pixelfx `hit-flash` 시트는 섬광이 아니라 작은 인형(치비) 그림** — 쓰지 않는다. 시트는 쓰기 전에 반드시 이미지로 열어 본다.
 - **문자열 검사 함정**: 'outdoor' 안에 'door' 가 있다 — 낱말 경계 정규식을 쓴다.
 - **길잡이 난이도**: R77 `takeNextNormal` 은 원래 늘 'normal'(R189 가 지금 지역 난이도·설정값으로 바꿈). 지금 지역 난이도는 `room.difficultyR63`. `mapMode`·`setMapMode` 는 클로저 안이라 전역이 아니다.
 - **진행 구조**: 이 캠페인은 `room.exits` 포탈이 아니라 제단(`room.altar`)·R81 문(door-0 보스 구역·door-1 앞방·door-2 다음 구역, `worldR74.doors`, 닫히면 `blocked()` 가 막음)으로 넘어간다.
 - **탐색용 헤드리스 도구**: 스크래치패드 `lag/lib2.mjs`(boot → 777 → go(zone)), 포트 4410 정적 서버(`srv/m0` → 스크래치패드 `site-copy` 사본, 빌드 뒤 `sync-site.sh` 로 교체). site 를 바로 가리키면 빌드의 `rm -rf site` 동안 돌던 실플레이가 그림을 못 읽어 엉뚱한 지역으로 떨어진다(R230 때 사몽 P-2 40분 멈춤). 서버가 컨테이너 재시작으로 죽으면 다시 띄운다. `window.tick=undefined` 같은 전역 덮어쓰기는 게임을 망가뜨린다.
 - **몹 그림 방향 한계**: 몹은 옆모습 한 장(좌우 뒤집기)이라 화면 위·아래 공격이 어색하다 → R230 이 R53 `canPrepare(e,'melee')` 에서 옆자리로 블링크. 스크립트 순서 검사(r176·r222·r225)는 정확한 태그 줄을 보므로 새 오버레이 위치를 먼저 확인한다.
+- **몹 그림 좌우의 최종 결정(R444)**: drawEnemy 의 `e.direction` 은 중간값이다. 마지막은 R51 flip 사슬(R93·R100·R106·R109·R208)·자세 프레임 flip(R54·R53·R74)·공급자 `frame.flip`(R375·R380·R374 등)이 정한다 → 모두 `__STORYWORLD_ENEMY_FACE_R444__.left(e)` 를 먼저 묻는다(새 공급자도 같게). CI 전수 검사 enemy-facing(R86)은 게임 시간을 멈춘 채 몹마다 8방향 공격을 찔러 보므로, 시간으로 캐시하는 방향 값은 같은 순간의 공격 각 변화를 따라야 한다. 자세 프레임(R54·R53·R52)은 R444 가 그 프레임 그림 방향으로 좌우를 넣으므로 R93·R100 의 몹 기본 그림 표로 다시 뒤집지 않는다. 방향 실측은 drawEnemy 뒤 ctx.commands 에 쌓인 몸 그림 명령의 points(좌상→우상 x 가 줄면 뒤집힘)로 읽는다 — R425 atkFace 가 그린 뒤 points 를 거울처럼 바로잡으므로 drawImage matrix 로는 틀린다(`qa/r444/fcensus.mjs`). 다수결로 배운 그림 방향은 한결같은 극성 반전을 못 잡으니 `qa/r444/fpol.cjs` 로 사람이 맞춘 표와 대조한다. 전역 `drawAssetFrame3`·`sprite` 를 바꿔 끼우면 엔진 안쪽 호출은 타지 않는다.
+- **헤드리스 전후 장면 찍기(R444)**: 헤드리스 소프트웨어 렌더링은 게임 시간이 실제 시간보다 훨씬 느리다(1280×720·몹 45마리에서 실제 1초에 게임 0.14초, 640×360 은 약 5배 빠름, 4코어라 브라우저 둘을 같이 돌리면 서로 느려짐) → `waitForTimeout` 대신 `time` 기준으로 기다리고, 전수 측정은 영웅 움직임도 게임 시간으로 몬다(`qa/r444/fcensus.mjs` game 방식). 몹을 정해진 길로 걷게 하려면 AI 걸음을 멈추고(speed 0) tick 뒤에 위치를 정한다(엔진 걸음과 덧쓴 위치가 섞이면 '실제 걸음'이 반대로 읽힌다). 찍기 직전 tick 배율을 1e-4 로 낮추면 카메라·자세가 한 순간에 고정된다(`qa/r444/scene4.mjs`).
 - **병합 API**: 드래프트 PR 은 ready 로 바꾼 뒤 병합, expectedHeadSha 는 40자 전체.
 - **Drive 정기 확인**: HAPIL-* 는 다른 게임이라 건너뛰고, review·WIP·COMPARISON·PRIVATE·INCOMPLETE 묶음은 보류한다.
 - **지형 메시 숨기기**: 엔진(벽 가림·R188)이 spatialRoot 메시의 `visible` 을 매 프레임 다시 켠다 → 숨길 땐 `layers.mask=0`(원래 값 기억). 프레임 명령은 render 감싸기에서 `frame.commands` 를 걸러 뺀다(R204).

@@ -129,7 +129,7 @@ function samongTick(){if(!prefs.samongCluster||typeof effects==='undefined'||!(p
 // ---- ⑧ 스킬 강화 모음 ----------------------------------------------------------------------------
 const VIEWKEY=KEY+'.book';let view='book';try{view=localStorage.getItem(VIEWKEY)||'book';}catch(_){}
 // R169: 오라 창 한 곳에서 Z·X·C 스킬강화(확률 발동)·일반강화(기존 재능)까지 모두 본다(upgrades-r169 가 카드를 덧붙인다).
-const GROUPS=[['성장',/^endless(Power|Vital|Haste|Cooldown|Ward)/],['오라·공명',/Aura|Resonance/],[(typeof KR291!=='undefined'&&KR291?KR291.werDot:'W·E·R')+' 스킬강화',/^r169proc/],['일반강화',/^r169up/],['실검무',/^thread/],['사몽',/dream|samong/i]];
+const GROUPS=[['QWER 스킬',/^skill[QWER]R663/],['성장',/^endless(Power|Vital|Haste|Cooldown|Ward)/],['오라·공명',/Aura|Resonance/],[(typeof KR291!=='undefined'&&KR291?KR291.werDot:'W·E·R')+' 스킬강화',/^r169proc/],['일반강화',/^r169up/],['실검무',/^thread/],['사몽',/dream|samong/i]];
 function bookRows(panel){return[...panel.querySelectorAll('.cards button.card.upgrade')].map(b=>{const id=b.dataset.r62Passive||b.dataset.up||b.dataset.r169||'',name=(b.querySelector('strong')?.textContent||'').trim(),small=b.querySelector('small')?.innerText||'',m=name.match(/^(.*?)\s+(\d+)단계\s*\/\s*(∞|\d+)/)||name.match(/^(.*?)\s+(\d+)\s*\/\s*(∞|\d+)$/),title=m?m[1]:name,lv=m?+m[2]:0,max=m?m[3]:'',line=small.split(/\n/)[0].split(/(?<=[.。])\s/)[0].slice(0,90);
  return{b,id,title,lv,max,line,cost:(small.match(/강화 비용[^\n]*/)||[''])[0],disabled:b.disabled,img:b.querySelector('img')?.getAttribute('src')||''};});}
 function skillLevels(){try{const g=window.__STORYWORLD_GROWTH_R103__?.state?.(),h=player?.hero;if(!g||!h)return null;return['w','e','r'].map(k=>({k:(typeof KR291!=='undefined'&&KR291?KR291:{w:'W',e:'E',r:'R',werDot:'W·E·R',werSp:'W · E · R'})[k],n:clamp(finite(g.procs?.[h+':'+k]),0,7)}));}catch(_){return null;}}
@@ -159,11 +159,13 @@ function installBook(){if(typeof showUpgrades!=='function')return;const base=sho
 //  전에는 첫 게임 tick 에서야 올려서, 들어올 때 지은 벽은 옛 높이(1.2–1.5·2.7)로 남고, 멀어졌다 돌아와 다시 지은 벽은
 //  옛 모양을 새 높이의 가운데에 걸어 바닥에서 0.1–0.8 떠 있었다(main 에서 ep1b06·kair02·murder01 재현). 문틀 위 벽·지붕 덮개도 어긋났다.
 //  ① draw 앞에서 먼저 올린다. ② 높이가 바뀐 벽의 묵은 모양(엔진 idleGeometry 'wall:id')은 다시 쓰지 않고 새로 짓게 한다.
-const DOOR=2.7,dressed=new WeakSet();stats.staleWallShapes=0;
+const DOOR=2.7,dressed=new WeakSet();let r452Flat=true;try{const s=JSON.parse(localStorage.getItem('storyworld.r452.walls')||'null');if(s&&s.on===false)r452Flat=false;}catch(_){}
+// R452(사용자 2026-11-09 "벽들지붕높이 잘맞추고 자연스러워보이게"): 벽마다 높이를 ±18% 흔들고 문 곁 벽만 3.15~3.31 로 솟게 하던 것을 없애 한 지역 벽 윗선을 같은 높이(2.85, 원래 더 높은 벽은 그대로)로 맞춘다.
+stats.staleWallShapes=0;
 function wallsTick(){if(!prefs.walls)return;const L=room?.exploration;if(!L||dressed.has(L)||!Array.isArray(L.walls)||L.samongR103||L.samongR115)return;dressed.add(L);
  const exits=[...(Array.isArray(L.doors)?L.doors:[]),...(L.worldR74?.doors||[]),...Object.values(L.exits||{}),L.entry,L.entrance].filter(p=>p&&Number.isFinite(p.x+p.y));const base=finite(L.walls.find(w=>Number.isFinite(w.height))?.height,DOOR);
  for(const w of L.walls){if(!Number.isFinite(w.height)||w.r115Wall)continue;const h0=w.height,near=exits.some(p=>Math.hypot(p.x-w.x,p.y-w.y)<2.6),v=((hash(w.id||w.x+':'+w.y)%9)-4)*.045;
-  let h=h0*(1+v);if(near)h=Math.max(h,DOOR+.45+(hash(w.id)%3)*.08);else if(h0<=DOOR+.01)h=Math.max(h,DOOR+.15);w.height=+h.toFixed(2);w.r115Wall=h0;}
+  let h=h0*(1+v);if(r452Flat&&room?.id!=='ep1a08')h=Math.max(h0,DOOR+.15);/* R452: 벽 윗선을 한 높이로(무작위 ±18%·문 곁 3.15~3.31 돌출 없이) */else if(near)h=Math.max(h,DOOR+.45+(hash(w.id)%3)*.08);else if(h0<=DOOR+.01)h=Math.max(h,DOOR+.15);w.height=+h.toFixed(2);w.r115Wall=h0;}
  stats.wallRooms++;}
 const guarded=new WeakSet();
 function guardWallShapes(){const t=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(!t||guarded.has(t)||typeof t.activateTerrain!=='function'||!(t.idleGeometry instanceof Map))return;guarded.add(t);

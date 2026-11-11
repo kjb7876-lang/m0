@@ -1,0 +1,2577 @@
+{
+  "schema": "r83-selected-static-vfx-runtime/v1",
+  "method": "Actual delivered event hooks in a Node VM with real PNG dimensions, isolated Image loading fixtures, pinned Three CommandScene geometry/material replay and source SHA256. Scripted boss/hazard/HP positioning assists; no browser, GPU, measured memory or natural play.",
+  "checks": [
+    {
+      "name": "Delivered runtime loads the 64-component module and 16 scene mappings",
+      "passed": true
+    },
+    {
+      "name": "All 64 runtime PNGs match supplied SHA256 and original dimensions",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Current selection retains48 prior upgrades,15 originals and1 supplied refinement",
+      "passed": true
+    },
+    {
+      "name": "Every mapped scene loads exactly its four components and produces real new image commands",
+      "passed": true,
+      "detail": [
+        {
+          "id": "dist01",
+          "ownCommands": 4,
+          "roles": [
+            "warning",
+            "projectile",
+            "recovery"
+          ],
+          "resident": 4,
+          "decodedBytes": 25164432
+        },
+        {
+          "id": "dist02",
+          "ownCommands": 3,
+          "roles": [
+            "warning",
+            "projectile",
+            "recovery"
+          ],
+          "resident": 4,
+          "decodedBytes": 25166544
+        },
+        {
+          "id": "dist05",
+          "ownCommands": 3,
+          "roles": [
+            "warning",
+            "projectile",
+            "recovery"
+          ],
+          "resident": 4,
+          "decodedBytes": 25165824
+        },
+        {
+          "id": "dist06",
+          "ownCommands": 3,
+          "roles": [
+            "warning",
+            "projectile",
+            "recovery"
+          ],
+          "resident": 4,
+          "decodedBytes": 25168520
+        },
+        {
+          "id": "ep1b03",
+          "ownCommands": 4,
+          "roles": [
+            "warning",
+            "projectile",
+            "recovery"
+          ],
+          "resident": 4,
+          "decodedBytes": 25168520
+        },
+        {
+          "id": "ep1b04",
+          "ownCommands": 4,
+          "roles": [
+            "warning",
+            "projectile",
+            "recovery"
+          ],
+          "resident": 4,
+          "decodedBytes": 25173912
+        },
+        {
+          "id": "ep1b05",
+          "ownCommands": 4,
+          "roles": [
+            "warning",
+            "projectile",
+            "recovery"
+          ],
+          "resident": 4,
+          "decodedBytes": 25165824
+        },
+        {
+          "id": "ep1b08",
+          "ownCommands": 4,
+          "roles": [
+            "warning",
+            "projectile",
+            "recovery"
+          ],
+          "resident": 4,
+          "decodedBytes": 25168720
+        },
+        {
+          "id": "ep1b09",
+          "ownCommands": 4,
+          "roles": [
+            "warning",
+            "projectile",
+            "recovery"
+          ],
+          "resident": 4,
+          "decodedBytes": 25171216
+        },
+        {
+          "id": "u203",
+          "ownCommands": 4,
+          "roles": [
+            "warning",
+            "projectile",
+            "recovery"
+          ],
+          "resident": 4,
+          "decodedBytes": 25171216
+        },
+        {
+          "id": "last301",
+          "ownCommands": 3,
+          "roles": [
+            "warning",
+            "projectile",
+            "recovery"
+          ],
+          "resident": 4,
+          "decodedBytes": 25170340
+        },
+        {
+          "id": "last303",
+          "ownCommands": 4,
+          "roles": [
+            "warning",
+            "projectile",
+            "recovery"
+          ],
+          "resident": 4,
+          "decodedBytes": 25173912
+        },
+        {
+          "id": "kair03",
+          "ownCommands": 4,
+          "roles": [
+            "warning",
+            "projectile",
+            "recovery"
+          ],
+          "resident": 4,
+          "decodedBytes": 25164344
+        },
+        {
+          "id": "murder03",
+          "ownCommands": 3,
+          "roles": [
+            "warning",
+            "projectile",
+            "recovery"
+          ],
+          "resident": 4,
+          "decodedBytes": 25160256
+        },
+        {
+          "id": "cult03",
+          "ownCommands": 3,
+          "roles": [
+            "warning",
+            "projectile",
+            "recovery"
+          ],
+          "resident": 4,
+          "decodedBytes": 25161648
+        },
+        {
+          "id": "cult04",
+          "ownCommands": 3,
+          "roles": [
+            "warning",
+            "projectile"
+          ],
+          "resident": 4,
+          "decodedBytes": 25160256
+        }
+      ]
+    },
+    {
+      "name": "Native hazard/shot wrappers replay warning, flight and recovery decorations through Three",
+      "passed": true,
+      "detail": {
+        "roles": [
+          "warning",
+          "projectile",
+          "recovery"
+        ],
+        "totalNewCommands": 57
+      }
+    },
+    {
+      "name": "Worst-case owned decoded-image estimate stays bounded to one scene",
+      "passed": true,
+      "detail": {
+        "loads": 64,
+        "loaded": 64,
+        "cancelled": 0,
+        "failed": 0,
+        "lateLoads": 0,
+        "evicted": 60,
+        "draws": 57,
+        "decorationsDropped": 0,
+        "confirmedHits": 0,
+        "recoveries": 0,
+        "revivals": 0,
+        "peakResident": 4,
+        "peakLoading": 2,
+        "peakDecodedBytes": 25173912
+      }
+    },
+    {
+      "name": "Impact art is admitted only after real native player HP loss",
+      "passed": true,
+      "detail": {
+        "before": 777,
+        "after": 776.223,
+        "result": "hit",
+        "commands": 1
+      }
+    },
+    {
+      "name": "Explicit native skill invulnerability creates no new hit claim",
+      "passed": true
+    },
+    {
+      "name": "Hospital entry releases new decorations and leaves native medical effects authoritative",
+      "passed": true,
+      "detail": {
+        "keys": [],
+        "resident": 0,
+        "own": 0,
+        "medical": {
+          "epoch": 2,
+          "audit": [
+            {
+              "kind": "clear",
+              "reason": "enterRegion",
+              "epoch": 1,
+              "at": 0
+            },
+            {
+              "kind": "clear",
+              "reason": "restoreSave",
+              "epoch": 2,
+              "at": 0
+            }
+          ],
+          "active": 0,
+          "capacity": 64,
+          "newStatus": false,
+          "newPoseFrames": false,
+          "sourceHPGrowthUnchanged": true,
+          "GPU": false
+        }
+      }
+    },
+    {
+      "name": "The supplied PNG cache never populates or clears the global native image cache",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "The first cult leader KO starts native story without a premature stitch",
+      "passed": true
+    },
+    {
+      "name": "Six actual native guardians precede the selected revival component",
+      "passed": true,
+      "detail": [
+        {
+          "before": 0,
+          "after": 1,
+          "id": "kair-great-01"
+        },
+        {
+          "before": 1,
+          "after": 2,
+          "id": "kair-great-02"
+        },
+        {
+          "before": 2,
+          "after": 3,
+          "id": "kair-great-03"
+        },
+        {
+          "before": 3,
+          "after": 4,
+          "id": "kair-great-04"
+        },
+        {
+          "before": 4,
+          "after": 5,
+          "id": "kair-great-05"
+        },
+        {
+          "before": 5,
+          "after": 6,
+          "id": "kair-great-06"
+        }
+      ]
+    },
+    {
+      "name": "Stitch art appears only at the real returned leader after acknowledged story",
+      "passed": true,
+      "detail": {
+        "phase": 2,
+        "state": "active",
+        "commands": 1,
+        "revivals": 1
+      }
+    },
+    {
+      "name": "Rapid scene changes cancel old requests and reject late image completions",
+      "passed": true,
+      "detail": {
+        "revision": "r83-supplied-static-64",
+        "selectedCount": 64,
+        "upgraded": 48,
+        "retainedOriginal": 16,
+        "current": "dist02",
+        "generation": 26,
+        "resident": 4,
+        "loading": 0,
+        "decodedBytes": 25166544,
+        "maxResidentImages": 4,
+        "maxConcurrentLoads": 2,
+        "maxTransientEffects": 8,
+        "residents": [
+          {
+            "path": "assets/vfx-r83/selected/batch01/dist02_horn_charge_warning.png",
+            "role": "warning",
+            "state": "ready",
+            "decodedBytes": 6291456
+          },
+          {
+            "path": "assets/vfx-r83/selected/batch01/dist02_reed_hand_projectile.png",
+            "role": "projectile",
+            "state": "ready",
+            "decodedBytes": 6291456
+          },
+          {
+            "path": "assets/vfx-r83/selected/batch01/dist02_horn_splash_impact.png",
+            "role": "impact",
+            "state": "ready",
+            "decodedBytes": 6292176
+          },
+          {
+            "path": "assets/vfx-r83/selected/batch01/dist02_drag_groove_remnant.png",
+            "role": "recovery",
+            "state": "ready",
+            "decodedBytes": 6291456
+          }
+        ],
+        "metrics": {
+          "loads": 74,
+          "loaded": 72,
+          "cancelled": 4,
+          "failed": 0,
+          "lateLoads": 2,
+          "evicted": 68,
+          "draws": 59,
+          "decorationsDropped": 0,
+          "confirmedHits": 1,
+          "recoveries": 0,
+          "revivals": 1,
+          "peakResident": 4,
+          "peakLoading": 2,
+          "peakDecodedBytes": 25173912
+        },
+        "events": [
+          {
+            "kind": "clear",
+            "reason": "restore",
+            "generation": 1,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "travel",
+            "generation": 2,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 3,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 4,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 5,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "dist01",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch01/dist01_web_lane_warning_v2.png",
+            "ownerId": "dist01:mb-dist01",
+            "key": "vfx-hazard:dist01",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "dist01",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch01/dist01_bone_filament_bolt.png",
+            "ownerId": "dist01:mb-dist01",
+            "key": "vfx-hazard:dist01",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": -2.1113413562215477,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "dist01",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch01/dist01_snapped_silk_remnant.png",
+            "ownerId": "dist01:mb-dist01",
+            "key": "vfx-hazard:dist01",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "dist01",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch01/dist01_bone_filament_bolt.png",
+            "ownerId": "dist01:mb-dist01",
+            "key": "vfx-shot:dist01",
+            "size": 47.519999999999996,
+            "alpha": 0.62,
+            "screenAngle": -1.9314878564290696,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 6,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "dist02",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch01/dist02_horn_charge_warning.png",
+            "ownerId": "dist02:mb-dist02",
+            "key": "vfx-hazard:dist02",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "dist02",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch01/dist02_reed_hand_projectile.png",
+            "ownerId": "dist02:mb-dist02",
+            "key": "vfx-hazard:dist02",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "dist02",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch01/dist02_drag_groove_remnant.png",
+            "ownerId": "dist02:mb-dist02",
+            "key": "vfx-hazard:dist02",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 7,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "dist05",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch01/dist05_seven_heat_warning.png",
+            "ownerId": "dist05:mb-dist05",
+            "key": "vfx-hazard:dist05",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "dist05",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch01/dist05_ember_whip.png",
+            "ownerId": "dist05:mb-dist05",
+            "key": "vfx-hazard:dist05",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "dist05",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch01/dist05_cooling_whip_scorch.png",
+            "ownerId": "dist05:mb-dist05",
+            "key": "vfx-hazard:dist05",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 8,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "dist06",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch01/dist06_spatial_cleave_warning.png",
+            "ownerId": "dist06:mb-dist06",
+            "key": "vfx-hazard:dist06",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "dist06",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch01/dist06_sword_space_fissure.png",
+            "ownerId": "dist06:mb-dist06",
+            "key": "vfx-hazard:dist06",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "dist06",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch01/dist06_molten_cleave_scar.png",
+            "ownerId": "dist06:mb-dist06",
+            "key": "vfx-hazard:dist06",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 9,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b03",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch02/ep1b03_leviathan_warning_v2.png",
+            "ownerId": "ep1b03:mb-ep1b03",
+            "key": "vfx-hazard:ep1b03",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b03",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch02/ep1b03_leviathan_projectile.png",
+            "ownerId": "ep1b03:mb-ep1b03",
+            "key": "vfx-hazard:ep1b03",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": -2.251613468204332,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b03",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch02/ep1b03_leviathan_remnant.png",
+            "ownerId": "ep1b03:mb-ep1b03",
+            "key": "vfx-hazard:ep1b03",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b03",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch02/ep1b03_leviathan_projectile.png",
+            "ownerId": "ep1b03:mb-ep1b03",
+            "key": "vfx-shot:ep1b03",
+            "size": 47.519999999999996,
+            "alpha": 0.62,
+            "screenAngle": -2.071759968411854,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 10,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b04",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch02/ep1b04_beelzebub_warning.png",
+            "ownerId": "ep1b04:mb-ep1b04",
+            "key": "vfx-hazard:ep1b04",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b04",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch02/ep1b04_beelzebub_projectile.png",
+            "ownerId": "ep1b04:mb-ep1b04",
+            "key": "vfx-hazard:ep1b04",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": -2.1719566411433107,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b04",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch02/ep1b04_beelzebub_remnant.png",
+            "ownerId": "ep1b04:mb-ep1b04",
+            "key": "vfx-hazard:ep1b04",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b04",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch02/ep1b04_beelzebub_projectile.png",
+            "ownerId": "ep1b04:mb-ep1b04",
+            "key": "vfx-shot:ep1b04",
+            "size": 47.519999999999996,
+            "alpha": 0.62,
+            "screenAngle": -1.9921031413508326,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 11,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b05",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch02/ep1b05_asmodeus_warning.png",
+            "ownerId": "ep1b05:mb-ep1b05",
+            "key": "vfx-hazard:ep1b05",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b05",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch02/ep1b05_asmodeus_projectile.png",
+            "ownerId": "ep1b05:mb-ep1b05",
+            "key": "vfx-hazard:ep1b05",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": -0.0284654268915151,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b05",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch02/ep1b05_asmodeus_remnant.png",
+            "ownerId": "ep1b05:mb-ep1b05",
+            "key": "vfx-hazard:ep1b05",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b05",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch02/ep1b05_asmodeus_projectile.png",
+            "ownerId": "ep1b05:mb-ep1b05",
+            "key": "vfx-shot:ep1b05",
+            "size": 47.519999999999996,
+            "alpha": 0.62,
+            "screenAngle": 0.15138807290096318,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 12,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b08",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch02/ep1b08_chairman_warning.png",
+            "ownerId": "ep1b08:mb-ep1b08",
+            "key": "vfx-hazard:ep1b08",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b08",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch02/ep1b08_chairman_projectile.png",
+            "ownerId": "ep1b08:mb-ep1b08",
+            "key": "vfx-hazard:ep1b08",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": 0.05551981671445205,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b08",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch02/ep1b08_chairman_remnant.png",
+            "ownerId": "ep1b08:mb-ep1b08",
+            "key": "vfx-hazard:ep1b08",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b08",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch02/ep1b08_chairman_projectile.png",
+            "ownerId": "ep1b08:mb-ep1b08",
+            "key": "vfx-shot:ep1b08",
+            "size": 47.519999999999996,
+            "alpha": 0.62,
+            "screenAngle": 0.23537331650693033,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 13,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b09",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch03/01_bootloader_strike_lanes_v2.png",
+            "ownerId": "ep1b09:mb-ep1b09",
+            "key": "vfx-hazard:ep1b09",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b09",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch03/02_bootloader_neural_spike.png",
+            "ownerId": "ep1b09:mb-ep1b09",
+            "key": "vfx-hazard:ep1b09",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": -2.248000636652704,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b09",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch03/04_bootloader_drained_circuit.png",
+            "ownerId": "ep1b09:mb-ep1b09",
+            "key": "vfx-hazard:ep1b09",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b09",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch03/02_bootloader_neural_spike.png",
+            "ownerId": "ep1b09:mb-ep1b09",
+            "key": "vfx-shot:ep1b09",
+            "size": 47.519999999999996,
+            "alpha": 0.62,
+            "screenAngle": -2.068147136860226,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 14,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "u203",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch03/05_controller_bombardment_grid_v3.png",
+            "ownerId": "u203:u203-mid",
+            "key": "vfx-hazard:u203",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "u203",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch03/06_controller_shell_contrail.png",
+            "ownerId": "u203:u203-mid",
+            "key": "vfx-hazard:u203",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": -2.1607167207604676,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "u203",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch03/08_controller_shell_furrow.png",
+            "ownerId": "u203:u203-mid",
+            "key": "vfx-hazard:u203",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "u203",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch03/06_controller_shell_contrail.png",
+            "ownerId": "u203:u203-mid",
+            "key": "vfx-shot:u203",
+            "size": 47.519999999999996,
+            "alpha": 0.62,
+            "screenAngle": -1.9808632209679895,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 15,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "last301",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch03/09_knight_six_lane_warning.png",
+            "ownerId": "last301:l301-boss",
+            "key": "vfx-hazard:last301",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "last301",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch03/10_knight_parry_counter.png",
+            "ownerId": "last301:l301-boss",
+            "key": "vfx-hazard:last301",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "last301",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch03/12_knight_six_ground_scars.png",
+            "ownerId": "last301:l301-boss",
+            "key": "vfx-hazard:last301",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 16,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "last303",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch03/13_insomnia_gaze_warning.png",
+            "ownerId": "last303:l303-boss",
+            "key": "vfx-hazard:last303",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "last303",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch03/14_insomnia_split_gaze_ray.png",
+            "ownerId": "last303:l303-boss",
+            "key": "vfx-hazard:last303",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": 0.1450901139268011,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "last303",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch03/16_insomnia_withdrawn_claw_lines.png",
+            "ownerId": "last303:l303-boss",
+            "key": "vfx-hazard:last303",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "last303",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch03/14_insomnia_split_gaze_ray.png",
+            "ownerId": "last303:l303-boss",
+            "key": "vfx-shot:last303",
+            "size": 47.519999999999996,
+            "alpha": 0.62,
+            "screenAngle": 0.3249436137192794,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 17,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "kair03",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch04/01-kair03-clock-hand-lane-warning-v2.png",
+            "ownerId": "kair03:k103-boss",
+            "key": "vfx-hazard:kair03",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "kair03",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch04/02-kair03-black-sand-needle.png",
+            "ownerId": "kair03:k103-boss",
+            "key": "vfx-hazard:kair03",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": -1.9323403881370096,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "kair03",
+            "role": "recovery",
+            "path": "assets/vfx-r83/refined-r85/04-kair03-exhausted-sand-tracks.png",
+            "ownerId": "kair03:k103-boss",
+            "key": "vfx-hazard:kair03",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "kair03",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch04/02-kair03-black-sand-needle.png",
+            "ownerId": "kair03:k103-boss",
+            "key": "vfx-shot:kair03",
+            "size": 47.519999999999996,
+            "alpha": 0.62,
+            "screenAngle": -1.7524868883445315,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 18,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "murder03",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch04/05-murder03-three-stop-bars.png",
+            "ownerId": "murder03:mb-murder03",
+            "key": "vfx-hazard:murder03",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "murder03",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch04/06-murder03-bent-rain-shard.png",
+            "ownerId": "murder03:mb-murder03",
+            "key": "vfx-hazard:murder03",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "murder03",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch04/08-murder03-roadlight-residue.png",
+            "ownerId": "murder03:mb-murder03",
+            "key": "vfx-hazard:murder03",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 19,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "cult03",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch04/09-cult03-interlocking-wall-warning-v2.png",
+            "ownerId": "cult03:c103-mid",
+            "key": "vfx-hazard:cult03",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "cult03",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch04/10-cult03-golden-order-wall.png",
+            "ownerId": "cult03:c103-mid",
+            "key": "vfx-hazard:cult03",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "cult03",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch04/12-cult03-authority-fragments.png",
+            "ownerId": "cult03:c103-mid",
+            "key": "vfx-hazard:cult03",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 20,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "cult04",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch04/13-cult04-spatial-fold-warning.png",
+            "ownerId": "cult04:c104-mid",
+            "key": "vfx-hazard:cult04",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "cult04",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch04/14-cult04-neural-command-spear.png",
+            "ownerId": "cult04:c104-mid",
+            "key": "vfx-hazard:cult04",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": -1.9209084815364466,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "cult04",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch04/14-cult04-neural-command-spear.png",
+            "ownerId": "cult04:c104-mid",
+            "key": "vfx-shot:cult04",
+            "size": 47.519999999999996,
+            "alpha": 0.62,
+            "screenAngle": -1.7410549817439684,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "emit",
+            "role": "impact",
+            "ownerId": "cult04:c104-mid",
+            "anchor": "actual admitted player HP loss",
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "cult04",
+            "role": "impact",
+            "path": "assets/vfx-r83/selected/batch04/15-cult04-time-stopped-collision.png",
+            "ownerId": "cult04:c104-mid",
+            "key": 1,
+            "size": 56.1,
+            "alpha": 0.68,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 21,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "restore",
+            "generation": 22,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "travel",
+            "generation": 23,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 24,
+            "at": 0
+          },
+          {
+            "kind": "emit",
+            "role": "recovery",
+            "ownerId": "cult04:final-boss",
+            "anchor": "native cult leader return after acknowledged story and cosmic sequence",
+            "at": 8.09999999999998
+          },
+          {
+            "kind": "draw",
+            "region": "cult04",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch04/16-cult04-resurrection-stitch-arc.png",
+            "ownerId": "cult04:final-boss",
+            "key": 2,
+            "size": 42.943999999999996,
+            "alpha": 0.68,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 8.09999999999998
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 25,
+            "at": 8.09999999999998
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 26,
+            "at": 8.09999999999998
+          }
+        ],
+        "sourceBytesUnchanged": true,
+        "staticSingleComponents": true,
+        "staticSingleComponentsMeaning": "each supplied PNG is one unchanged static source component",
+        "staticSourcePNGsPreserved": true,
+        "dynamic64Driven": false,
+        "nativeFootprintsPreserved": true,
+        "nativeDamageChanged": false,
+        "hospitalExcluded": true,
+        "globalImageCacheUsed": false,
+        "GPUVerified": false
+      }
+    },
+    {
+      "name": "Optional PNG failures preserve the original native projectile and never block combat",
+      "passed": true,
+      "detail": {
+        "states": [
+          "failed",
+          "failed",
+          "failed",
+          "failed"
+        ],
+        "commands": 5
+      }
+    },
+    {
+      "name": "Unmapped safe hub retains zero new image resources, transients and Three textures",
+      "passed": true,
+      "detail": {
+        "revision": "r83-supplied-static-64",
+        "selectedCount": 64,
+        "upgraded": 48,
+        "retainedOriginal": 16,
+        "current": null,
+        "generation": 28,
+        "resident": 0,
+        "loading": 0,
+        "decodedBytes": 0,
+        "maxResidentImages": 4,
+        "maxConcurrentLoads": 2,
+        "maxTransientEffects": 8,
+        "residents": [],
+        "metrics": {
+          "loads": 78,
+          "loaded": 72,
+          "cancelled": 4,
+          "failed": 4,
+          "lateLoads": 2,
+          "evicted": 76,
+          "draws": 59,
+          "decorationsDropped": 0,
+          "confirmedHits": 1,
+          "recoveries": 0,
+          "revivals": 1,
+          "peakResident": 4,
+          "peakLoading": 2,
+          "peakDecodedBytes": 25173912
+        },
+        "events": [
+          {
+            "kind": "clear",
+            "reason": "restore",
+            "generation": 1,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "travel",
+            "generation": 2,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 3,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 4,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 5,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "dist01",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch01/dist01_web_lane_warning_v2.png",
+            "ownerId": "dist01:mb-dist01",
+            "key": "vfx-hazard:dist01",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "dist01",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch01/dist01_bone_filament_bolt.png",
+            "ownerId": "dist01:mb-dist01",
+            "key": "vfx-hazard:dist01",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": -2.1113413562215477,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "dist01",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch01/dist01_snapped_silk_remnant.png",
+            "ownerId": "dist01:mb-dist01",
+            "key": "vfx-hazard:dist01",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "dist01",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch01/dist01_bone_filament_bolt.png",
+            "ownerId": "dist01:mb-dist01",
+            "key": "vfx-shot:dist01",
+            "size": 47.519999999999996,
+            "alpha": 0.62,
+            "screenAngle": -1.9314878564290696,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 6,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "dist02",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch01/dist02_horn_charge_warning.png",
+            "ownerId": "dist02:mb-dist02",
+            "key": "vfx-hazard:dist02",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "dist02",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch01/dist02_reed_hand_projectile.png",
+            "ownerId": "dist02:mb-dist02",
+            "key": "vfx-hazard:dist02",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "dist02",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch01/dist02_drag_groove_remnant.png",
+            "ownerId": "dist02:mb-dist02",
+            "key": "vfx-hazard:dist02",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 7,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "dist05",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch01/dist05_seven_heat_warning.png",
+            "ownerId": "dist05:mb-dist05",
+            "key": "vfx-hazard:dist05",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "dist05",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch01/dist05_ember_whip.png",
+            "ownerId": "dist05:mb-dist05",
+            "key": "vfx-hazard:dist05",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "dist05",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch01/dist05_cooling_whip_scorch.png",
+            "ownerId": "dist05:mb-dist05",
+            "key": "vfx-hazard:dist05",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 8,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "dist06",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch01/dist06_spatial_cleave_warning.png",
+            "ownerId": "dist06:mb-dist06",
+            "key": "vfx-hazard:dist06",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "dist06",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch01/dist06_sword_space_fissure.png",
+            "ownerId": "dist06:mb-dist06",
+            "key": "vfx-hazard:dist06",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "dist06",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch01/dist06_molten_cleave_scar.png",
+            "ownerId": "dist06:mb-dist06",
+            "key": "vfx-hazard:dist06",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 9,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b03",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch02/ep1b03_leviathan_warning_v2.png",
+            "ownerId": "ep1b03:mb-ep1b03",
+            "key": "vfx-hazard:ep1b03",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b03",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch02/ep1b03_leviathan_projectile.png",
+            "ownerId": "ep1b03:mb-ep1b03",
+            "key": "vfx-hazard:ep1b03",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": -2.251613468204332,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b03",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch02/ep1b03_leviathan_remnant.png",
+            "ownerId": "ep1b03:mb-ep1b03",
+            "key": "vfx-hazard:ep1b03",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b03",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch02/ep1b03_leviathan_projectile.png",
+            "ownerId": "ep1b03:mb-ep1b03",
+            "key": "vfx-shot:ep1b03",
+            "size": 47.519999999999996,
+            "alpha": 0.62,
+            "screenAngle": -2.071759968411854,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 10,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b04",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch02/ep1b04_beelzebub_warning.png",
+            "ownerId": "ep1b04:mb-ep1b04",
+            "key": "vfx-hazard:ep1b04",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b04",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch02/ep1b04_beelzebub_projectile.png",
+            "ownerId": "ep1b04:mb-ep1b04",
+            "key": "vfx-hazard:ep1b04",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": -2.1719566411433107,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b04",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch02/ep1b04_beelzebub_remnant.png",
+            "ownerId": "ep1b04:mb-ep1b04",
+            "key": "vfx-hazard:ep1b04",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b04",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch02/ep1b04_beelzebub_projectile.png",
+            "ownerId": "ep1b04:mb-ep1b04",
+            "key": "vfx-shot:ep1b04",
+            "size": 47.519999999999996,
+            "alpha": 0.62,
+            "screenAngle": -1.9921031413508326,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 11,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b05",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch02/ep1b05_asmodeus_warning.png",
+            "ownerId": "ep1b05:mb-ep1b05",
+            "key": "vfx-hazard:ep1b05",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b05",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch02/ep1b05_asmodeus_projectile.png",
+            "ownerId": "ep1b05:mb-ep1b05",
+            "key": "vfx-hazard:ep1b05",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": -0.0284654268915151,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b05",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch02/ep1b05_asmodeus_remnant.png",
+            "ownerId": "ep1b05:mb-ep1b05",
+            "key": "vfx-hazard:ep1b05",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b05",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch02/ep1b05_asmodeus_projectile.png",
+            "ownerId": "ep1b05:mb-ep1b05",
+            "key": "vfx-shot:ep1b05",
+            "size": 47.519999999999996,
+            "alpha": 0.62,
+            "screenAngle": 0.15138807290096318,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 12,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b08",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch02/ep1b08_chairman_warning.png",
+            "ownerId": "ep1b08:mb-ep1b08",
+            "key": "vfx-hazard:ep1b08",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b08",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch02/ep1b08_chairman_projectile.png",
+            "ownerId": "ep1b08:mb-ep1b08",
+            "key": "vfx-hazard:ep1b08",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": 0.05551981671445205,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b08",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch02/ep1b08_chairman_remnant.png",
+            "ownerId": "ep1b08:mb-ep1b08",
+            "key": "vfx-hazard:ep1b08",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b08",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch02/ep1b08_chairman_projectile.png",
+            "ownerId": "ep1b08:mb-ep1b08",
+            "key": "vfx-shot:ep1b08",
+            "size": 47.519999999999996,
+            "alpha": 0.62,
+            "screenAngle": 0.23537331650693033,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 13,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b09",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch03/01_bootloader_strike_lanes_v2.png",
+            "ownerId": "ep1b09:mb-ep1b09",
+            "key": "vfx-hazard:ep1b09",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b09",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch03/02_bootloader_neural_spike.png",
+            "ownerId": "ep1b09:mb-ep1b09",
+            "key": "vfx-hazard:ep1b09",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": -2.248000636652704,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b09",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch03/04_bootloader_drained_circuit.png",
+            "ownerId": "ep1b09:mb-ep1b09",
+            "key": "vfx-hazard:ep1b09",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "ep1b09",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch03/02_bootloader_neural_spike.png",
+            "ownerId": "ep1b09:mb-ep1b09",
+            "key": "vfx-shot:ep1b09",
+            "size": 47.519999999999996,
+            "alpha": 0.62,
+            "screenAngle": -2.068147136860226,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 14,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "u203",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch03/05_controller_bombardment_grid_v3.png",
+            "ownerId": "u203:u203-mid",
+            "key": "vfx-hazard:u203",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "u203",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch03/06_controller_shell_contrail.png",
+            "ownerId": "u203:u203-mid",
+            "key": "vfx-hazard:u203",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": -2.1607167207604676,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "u203",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch03/08_controller_shell_furrow.png",
+            "ownerId": "u203:u203-mid",
+            "key": "vfx-hazard:u203",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "u203",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch03/06_controller_shell_contrail.png",
+            "ownerId": "u203:u203-mid",
+            "key": "vfx-shot:u203",
+            "size": 47.519999999999996,
+            "alpha": 0.62,
+            "screenAngle": -1.9808632209679895,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 15,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "last301",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch03/09_knight_six_lane_warning.png",
+            "ownerId": "last301:l301-boss",
+            "key": "vfx-hazard:last301",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "last301",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch03/10_knight_parry_counter.png",
+            "ownerId": "last301:l301-boss",
+            "key": "vfx-hazard:last301",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "last301",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch03/12_knight_six_ground_scars.png",
+            "ownerId": "last301:l301-boss",
+            "key": "vfx-hazard:last301",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 16,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "last303",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch03/13_insomnia_gaze_warning.png",
+            "ownerId": "last303:l303-boss",
+            "key": "vfx-hazard:last303",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "last303",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch03/14_insomnia_split_gaze_ray.png",
+            "ownerId": "last303:l303-boss",
+            "key": "vfx-hazard:last303",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": 0.1450901139268011,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "last303",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch03/16_insomnia_withdrawn_claw_lines.png",
+            "ownerId": "last303:l303-boss",
+            "key": "vfx-hazard:last303",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "last303",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch03/14_insomnia_split_gaze_ray.png",
+            "ownerId": "last303:l303-boss",
+            "key": "vfx-shot:last303",
+            "size": 47.519999999999996,
+            "alpha": 0.62,
+            "screenAngle": 0.3249436137192794,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 17,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "kair03",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch04/01-kair03-clock-hand-lane-warning-v2.png",
+            "ownerId": "kair03:k103-boss",
+            "key": "vfx-hazard:kair03",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "kair03",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch04/02-kair03-black-sand-needle.png",
+            "ownerId": "kair03:k103-boss",
+            "key": "vfx-hazard:kair03",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": -1.9323403881370096,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "kair03",
+            "role": "recovery",
+            "path": "assets/vfx-r83/refined-r85/04-kair03-exhausted-sand-tracks.png",
+            "ownerId": "kair03:k103-boss",
+            "key": "vfx-hazard:kair03",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "kair03",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch04/02-kair03-black-sand-needle.png",
+            "ownerId": "kair03:k103-boss",
+            "key": "vfx-shot:kair03",
+            "size": 47.519999999999996,
+            "alpha": 0.62,
+            "screenAngle": -1.7524868883445315,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 18,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "murder03",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch04/05-murder03-three-stop-bars.png",
+            "ownerId": "murder03:mb-murder03",
+            "key": "vfx-hazard:murder03",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "murder03",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch04/06-murder03-bent-rain-shard.png",
+            "ownerId": "murder03:mb-murder03",
+            "key": "vfx-hazard:murder03",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "murder03",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch04/08-murder03-roadlight-residue.png",
+            "ownerId": "murder03:mb-murder03",
+            "key": "vfx-hazard:murder03",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 19,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "cult03",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch04/09-cult03-interlocking-wall-warning-v2.png",
+            "ownerId": "cult03:c103-mid",
+            "key": "vfx-hazard:cult03",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "cult03",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch04/10-cult03-golden-order-wall.png",
+            "ownerId": "cult03:c103-mid",
+            "key": "vfx-hazard:cult03",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "cult03",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch04/12-cult03-authority-fragments.png",
+            "ownerId": "cult03:c103-mid",
+            "key": "vfx-hazard:cult03",
+            "size": 52.800000000000004,
+            "alpha": 0.3025,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 20,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "cult04",
+            "role": "warning",
+            "path": "assets/vfx-r83/selected/batch04/13-cult04-spatial-fold-warning.png",
+            "ownerId": "cult04:c104-mid",
+            "key": "vfx-hazard:cult04",
+            "size": 44.88,
+            "alpha": 0.45,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "cult04",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch04/14-cult04-neural-command-spear.png",
+            "ownerId": "cult04:c104-mid",
+            "key": "vfx-hazard:cult04",
+            "size": 50.160000000000004,
+            "alpha": 0.55,
+            "screenAngle": -1.9209084815364466,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "cult04",
+            "role": "projectile",
+            "path": "assets/vfx-r83/selected/batch04/14-cult04-neural-command-spear.png",
+            "ownerId": "cult04:c104-mid",
+            "key": "vfx-shot:cult04",
+            "size": 47.519999999999996,
+            "alpha": 0.62,
+            "screenAngle": -1.7410549817439684,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "emit",
+            "role": "impact",
+            "ownerId": "cult04:c104-mid",
+            "anchor": "actual admitted player HP loss",
+            "at": 0
+          },
+          {
+            "kind": "draw",
+            "region": "cult04",
+            "role": "impact",
+            "path": "assets/vfx-r83/selected/batch04/15-cult04-time-stopped-collision.png",
+            "ownerId": "cult04:c104-mid",
+            "key": 1,
+            "size": 56.1,
+            "alpha": 0.68,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 21,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "restore",
+            "generation": 22,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "travel",
+            "generation": 23,
+            "at": 0
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 24,
+            "at": 0
+          },
+          {
+            "kind": "emit",
+            "role": "recovery",
+            "ownerId": "cult04:final-boss",
+            "anchor": "native cult leader return after acknowledged story and cosmic sequence",
+            "at": 8.09999999999998
+          },
+          {
+            "kind": "draw",
+            "region": "cult04",
+            "role": "recovery",
+            "path": "assets/vfx-r83/selected/batch04/16-cult04-resurrection-stitch-arc.png",
+            "ownerId": "cult04:final-boss",
+            "key": 2,
+            "size": 42.943999999999996,
+            "alpha": 0.68,
+            "screenAngle": 0,
+            "ground": false,
+            "at": 8.09999999999998
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 25,
+            "at": 8.09999999999998
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 26,
+            "at": 8.09999999999998
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 27,
+            "at": 8.09999999999998
+          },
+          {
+            "kind": "asset-unavailable",
+            "path": "assets/vfx-r83/selected/batch01/dist05_seven_heat_warning.png",
+            "at": 8.09999999999998
+          },
+          {
+            "kind": "asset-unavailable",
+            "path": "assets/vfx-r83/selected/batch01/dist05_ember_whip.png",
+            "at": 8.09999999999998
+          },
+          {
+            "kind": "asset-unavailable",
+            "path": "assets/vfx-r83/selected/batch01/dist05_split_stone_impact.png",
+            "at": 8.09999999999998
+          },
+          {
+            "kind": "asset-unavailable",
+            "path": "assets/vfx-r83/selected/batch01/dist05_cooling_whip_scorch.png",
+            "at": 8.09999999999998
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "generation": 28,
+            "at": 8.09999999999998
+          }
+        ],
+        "sourceBytesUnchanged": true,
+        "staticSingleComponents": true,
+        "staticSingleComponentsMeaning": "each supplied PNG is one unchanged static source component",
+        "staticSourcePNGsPreserved": true,
+        "dynamic64Driven": false,
+        "nativeFootprintsPreserved": true,
+        "nativeDamageChanged": false,
+        "hospitalExcluded": true,
+        "globalImageCacheUsed": false,
+        "GPUVerified": false
+      }
+    },
+    {
+      "name": "Original footprints, damage, source bytes and static component semantics remain explicit",
+      "passed": true
+    },
+    {
+      "name": "New component loading and command conversion record no native runtime errors",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "regions": [
+    {
+      "id": "dist01",
+      "ownCommands": 4,
+      "roles": [
+        "warning",
+        "projectile",
+        "recovery"
+      ],
+      "resident": 4,
+      "decodedBytes": 25164432
+    },
+    {
+      "id": "dist02",
+      "ownCommands": 3,
+      "roles": [
+        "warning",
+        "projectile",
+        "recovery"
+      ],
+      "resident": 4,
+      "decodedBytes": 25166544
+    },
+    {
+      "id": "dist05",
+      "ownCommands": 3,
+      "roles": [
+        "warning",
+        "projectile",
+        "recovery"
+      ],
+      "resident": 4,
+      "decodedBytes": 25165824
+    },
+    {
+      "id": "dist06",
+      "ownCommands": 3,
+      "roles": [
+        "warning",
+        "projectile",
+        "recovery"
+      ],
+      "resident": 4,
+      "decodedBytes": 25168520
+    },
+    {
+      "id": "ep1b03",
+      "ownCommands": 4,
+      "roles": [
+        "warning",
+        "projectile",
+        "recovery"
+      ],
+      "resident": 4,
+      "decodedBytes": 25168520
+    },
+    {
+      "id": "ep1b04",
+      "ownCommands": 4,
+      "roles": [
+        "warning",
+        "projectile",
+        "recovery"
+      ],
+      "resident": 4,
+      "decodedBytes": 25173912
+    },
+    {
+      "id": "ep1b05",
+      "ownCommands": 4,
+      "roles": [
+        "warning",
+        "projectile",
+        "recovery"
+      ],
+      "resident": 4,
+      "decodedBytes": 25165824
+    },
+    {
+      "id": "ep1b08",
+      "ownCommands": 4,
+      "roles": [
+        "warning",
+        "projectile",
+        "recovery"
+      ],
+      "resident": 4,
+      "decodedBytes": 25168720
+    },
+    {
+      "id": "ep1b09",
+      "ownCommands": 4,
+      "roles": [
+        "warning",
+        "projectile",
+        "recovery"
+      ],
+      "resident": 4,
+      "decodedBytes": 25171216
+    },
+    {
+      "id": "u203",
+      "ownCommands": 4,
+      "roles": [
+        "warning",
+        "projectile",
+        "recovery"
+      ],
+      "resident": 4,
+      "decodedBytes": 25171216
+    },
+    {
+      "id": "last301",
+      "ownCommands": 3,
+      "roles": [
+        "warning",
+        "projectile",
+        "recovery"
+      ],
+      "resident": 4,
+      "decodedBytes": 25170340
+    },
+    {
+      "id": "last303",
+      "ownCommands": 4,
+      "roles": [
+        "warning",
+        "projectile",
+        "recovery"
+      ],
+      "resident": 4,
+      "decodedBytes": 25173912
+    },
+    {
+      "id": "kair03",
+      "ownCommands": 4,
+      "roles": [
+        "warning",
+        "projectile",
+        "recovery"
+      ],
+      "resident": 4,
+      "decodedBytes": 25164344
+    },
+    {
+      "id": "murder03",
+      "ownCommands": 3,
+      "roles": [
+        "warning",
+        "projectile",
+        "recovery"
+      ],
+      "resident": 4,
+      "decodedBytes": 25160256
+    },
+    {
+      "id": "cult03",
+      "ownCommands": 3,
+      "roles": [
+        "warning",
+        "projectile",
+        "recovery"
+      ],
+      "resident": 4,
+      "decodedBytes": 25161648
+    },
+    {
+      "id": "cult04",
+      "ownCommands": 3,
+      "roles": [
+        "warning",
+        "projectile"
+      ],
+      "resident": 4,
+      "decodedBytes": 25160256
+    }
+  ],
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "finalMetrics": {
+    "loads": 78,
+    "loaded": 72,
+    "cancelled": 4,
+    "failed": 4,
+    "lateLoads": 2,
+    "evicted": 76,
+    "draws": 59,
+    "decorationsDropped": 0,
+    "confirmedHits": 1,
+    "recoveries": 0,
+    "revivals": 1,
+    "peakResident": 4,
+    "peakLoading": 2,
+    "peakDecodedBytes": 25173912
+  },
+  "passed": true
+}

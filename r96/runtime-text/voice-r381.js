@@ -20,7 +20,9 @@ function sha1(str){const b=new TextEncoder().encode(str),n=b.length,words=((n+8>
   h0=h0+a|0;h1=h1+bb|0;h2=h2+c|0;h3=h3+d|0;h4=h4+e|0;}
  return [h0,h1,h2,h3,h4].map(v=>(v>>>0).toString(16).padStart(8,'0')).join('');}
 const idOf=t=>sha1(String(t||'').trim()).slice(0,16);
-const url=id=>BASE+id+'.mp3';
+// R615: 무거운 음성은 외부 기준 주소(asset-cdn-r615, Cloudflare Pages)에서 받고, 실패하면 같은 파일을 GitHub Pages 에서 한 번 더 받는다.
+const CDN=()=>window.__STORYWORLD_ASSET_CDN__||null;
+const url=id=>{const p=BASE+id+'.mp3',c=CDN();return c?c.url(p):p;};
 function has(text){const ok=IDS.has(idOf(text));ok?stats.has++:stats.miss++;return ok;}
 // 다음 문장 미리 받기(한두 개만 기억).
 const pre=new Map();
@@ -31,13 +33,19 @@ function stop(){const c=cur;cur=null;if(!c)return;c.dead=true;clearTimeout(c.sta
 // 재생: 끝·오류는 한 번만 알린다. 받기가 8초 넘게 멈추면 오류로 본다(영화 모드가 브라우저 음성으로 돌아감).
 function play(text,o={}){stop();const id=idOf(text);if(!IDS.has(id))return null;
  const a=pre.get(id)||new Audio();pre.delete(id);if(!a.src)a.src=url(id);
- const h={id,a,dead:false,stallT:0};cur=h;let fired=false;
- const fin=(ok,why)=>{if(fired||h.dead)return;fired=true;clearTimeout(h.stallT);if(cur===h)cur=null;if(ok){stats.ended++;o.onend?.();}else{try{a.pause();}catch(_){}fail(why||'audio error');o.onerror?.();}};
+ const h={id,a,dead:false,stallT:0,retried:false};cur=h;let fired=false;const C=CDN();
+ // 시도마다 번호를 붙여, 되돌림 뒤 늦게 오는 이전 시도의 play() 거부(AbortError·NotSupportedError)는 무시한다.
+ let tries=0;const start=()=>{const k=++tries;try{const p=a.play();stats.played++;if(p&&p.catch)p.catch(e=>{if(k===tries)fin(false,e?.name||'play rejected');});}catch(e){fin(false,e);}};
+ const arm=()=>{h.stallT=setTimeout(()=>{if(!fired&&!h.dead&&a.currentTime<.05){stats.stalls++;try{a.pause();}catch(_){}fin(false,'stall '+id);}},8000);};
+ // 외부 주소에서 실패·멈춤 → 같은 파일을 GitHub Pages 에서 한 번만 다시(자동재생 거부는 주소 탓이 아니므로 제외).
+ const retry=why=>{if(h.retried||!C||!C.isCdn(a.src)||/NotAllowed/.test(String(why)))return false;h.retried=true;C.fail(a.src,why);clearTimeout(h.stallT);
+  try{a.pause();}catch(_){}a.src=C.local(a.src);try{a.load();}catch(_){}arm();start();return true;};
+ const fin=(ok,why)=>{if(fired||h.dead)return;if(!ok&&retry(why))return;fired=true;clearTimeout(h.stallT);if(cur===h)cur=null;if(ok){stats.ended++;o.onend?.();}else{try{a.pause();}catch(_){}fail(why||'audio error');o.onerror?.();}};
  try{a.preservesPitch=true;a.playbackRate=clamp(+o.rate||1,.85,1.2);a.volume=clamp(Number.isFinite(+o.volume)?+o.volume:.8,0,1);}catch(_){}
  a.onended=()=>fin(true);a.onerror=()=>fin(false,'load '+id);
- h.stallT=setTimeout(()=>{if(!fired&&!h.dead&&a.currentTime<.05){stats.stalls++;try{a.pause();}catch(_){}fin(false,'stall '+id);}},8000);
- a.onplaying=()=>{clearTimeout(h.stallT);o.onstart?.();};
- try{const p=a.play();stats.played++;if(p&&p.catch)p.catch(e=>fin(false,e?.name||'play rejected'));}catch(e){fin(false,e);}
+ arm();
+ a.onplaying=()=>{clearTimeout(h.stallT);if(C&&C.isCdn(a.src))C.ok();o.onstart?.();};
+ start();
  return Object.freeze({id,stop:()=>{if(cur===h)stop();else{h.dead=true;try{a.pause();}catch(_){}}},duration:()=>a.duration||NaN});}
 // 탭을 숨기면 멈추고 돌아오면 이어서.
 addEventListener('visibilitychange',()=>{try{if(!cur)return;if(document.hidden)cur.a.pause();else cur.a.play()?.catch?.(()=>{});}catch(_){}});

@@ -6,7 +6,7 @@ const checks=[];const ok=(n,p,d)=>checks.push({name:n,pass:!!p,detail:d});
 const F='drive-buildings-r414.js',src=C(F);
 for(const f of[F,'props-place-r406.js','env-props-r299.js'])ok(f+' runtime copy matches',RT(f)===C(f));
 const html=RT('index.html');
-ok('loaded once, right after doors-fit-r413.js and before access-r420.js / combat-r118.js',html.split('"./'+F+'"').length===2&&/<script src="\.\/doors-fit-r413\.js"><\/script><script src="\.\/drive-buildings-r414\.js"><\/script><script src="\.\/access-r420\.js"><\/script>(?:<script src="\.\/readability-r434\.js"><\/script>)?(?:<script src="\.\/surface-r435\.js"><\/script>)?/.test(html)&&html.indexOf(F)<html.indexOf('combat-r118.js'));
+ok('loaded once, right after doors-fit-r413.js and before access-r420.js / combat-r118.js',html.split('"./'+F+'"').length===2&&/<script src="\.\/doors-fit-r413\.js"><\/script><script src="\.\/drive-buildings-r414\.js"><\/script><script src="\.\/access-r420\.js"><\/script>(?:<script src="\.\/readability-r434\.js"><\/script>)?(?:<script src="\.\/surface-r435\.js"><\/script>)?(?:<script src="\.\/bossroom-tidy-r438\.js"><\/script>)?(?:<script src="\.\/props-space-r449\.js"><\/script>)?(?:<script src="\.\/enemy-face-r444\.js"><\/script>)?/.test(html)&&html.indexOf(F)<html.indexOf('combat-r118.js'));
 ok('listed in verify-r96-public.py',fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8').includes("'"+F+"'"));
 ok('pages.yml runs this check',fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('r96/qa/r414/r414-cpu-check.cjs'));
 const code=src.replace(/\/\/.*$/gm,'');
@@ -34,7 +34,7 @@ ok('no Drive file ids or URLs in the public index (Dots slugs like R02-gray-scho
 const P=Object.entries(PIDX.props);
 ok('3 props in the R406 row format (zone/mode/axis/height/path)',P.length===3&&P.every(([,v])=>zones.has(v.zone)&&['wall','inner'].includes(v.mode)&&v.height>0&&/^assets\/r414\/props\/[a-z0-9-]+\.webp$/.test(v.path)));
 ok('prop file names avoid the door/gate/wall words other overlays snap to walls',[...P,...B].every(([,v])=>!/(^|[\W_])(gate|door|wall)s?([\W_]|$)/i.test(v.path.split('/').pop().replace('.webp',''))));
-ok('R406 also reads the R414 prop index',/IDXS=\[IDX,'\.\/assets\/r408\/props\/index\.json','\.\/assets\/r414\/props\/index\.json'\]/.test(C('props-place-r406.js')));
+ok('R406 also reads the R414 prop index',/IDXS=\[IDX,'\.\/assets\/r408\/props\/index\.json','\.\/assets\/r414\/props\/index\.json'(,'\.\/assets\/r4\d\d\/props\/index\.json')*\]/.test(C('props-place-r406.js')));
 const r299=C('env-props-r299.js');const big=k=>+(r299.match(new RegExp('\\b'+k+':\\{h:(\\d+)'))||[])[1];
 ok('R299 architecture (cathedral arch, obelisk) is at least 2x the hero',big('arch')>=132&&big('obelisk')>=132,{arch:big('arch'),obelisk:big('obelisk')});
 

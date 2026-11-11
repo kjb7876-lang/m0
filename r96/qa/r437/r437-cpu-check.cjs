@@ -3,7 +3,7 @@ const fs=require('fs'),path=require('path'),crypto=require('crypto');const R=pat
 const RT=f=>fs.readFileSync(path.join(R,'runtime-text',f),'utf8'),C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8');
 const checks=[];const ok=(n,p,d)=>checks.push({name:n,pass:!!p,detail:d});
 const F='neon-lauren-r437.js',src=C(F),html=RT('index.html');
-ok('script tag once, right after combat-flow-r425 and before combat-r118',html.split('"./'+F+'"').length===2&&/<script src="\.\/combat-flow-r425\.js"><\/script><script src="\.\/neon-lauren-r437\.js"><\/script>\s*<script src="\.\/combat-r118\.js">/.test(html));
+ok('script tag once, right after combat-flow-r425 (before combat-r118)',html.split('"./'+F+'"').length===2&&/<script src="\.\/combat-flow-r425\.js"><\/script><script src="\.\/neon-lauren-r437\.js"><\/script>/.test(html)&&html.indexOf('"./'+F+'"')<html.indexOf('"./combat-r118.js"'));
 ok('runtime copy identical to client-source',RT(F)===src);
 ok('listed in verify-r96-public.py',/'neon-lauren-r437\.js'/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')));
 ok('parses',(()=>{try{new (require('vm').Script)(src);return true;}catch(e){return false;}})());

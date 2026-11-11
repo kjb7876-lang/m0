@@ -78,7 +78,8 @@
    if(r.exploration)wallCache.set(r.exploration,{cells,wall});
    for(const w of wall){if(list.length>=60)break;if(list.some(q=>Math.hypot(q.x-w.x,q.y-w.y)<9))continue;list.push(w);}}
   cache.set(r,{n:r.props?.length||0,list});return list;}
- function drawLights(){const T=tone();if(!T||!prefs.torches||typeof ctx==='undefined'||typeof project!=='function')return 0;const list=lightsOf(room),u=U(),t=typeof time==='number'?time:performance.now()/1000,w=typeof W==='number'?W:1280,h=typeof H==='number'?H:800;let n=0;
+ function drawLights(){const T=tone();if(!T||!prefs.torches||typeof ctx==='undefined'||typeof project!=='function')return 0;
+  try{if(window.__STORYWORLD_LOCAL_LIGHT_R451__?.owns?.())return 0;}catch(_){}/* R451: 진짜 광원 둘레 빛이 대신한다 */const list=lightsOf(room),u=U(),t=typeof time==='number'?time:performance.now()/1000,w=typeof W==='number'?W:1280,h=typeof H==='number'?H:800;let n=0;
   for(const p of list){if(n>=8)break;const q=project(p.x,p.y);if(q.x<-200||q.x>w+200||q.y<-150||q.y>h+150)continue;const s=(p.id?String(p.id).length*7.3:0)%TAU,fl=reduced()?1:.8+.12*Math.sin(t*8.3+s)+.08*Math.sin(t*19.1+s*2),rx=(p.r||3)*u*1.414*fl;
    ctx.save();try{const gr=ctx.createRadialGradient(q.x,q.y,0,q.x,q.y,rx);gr.addColorStop(0,'rgba(255,130,50,'+(T.light*fl).toFixed(3)+')');gr.addColorStop(.5,'rgba(200,60,20,'+(T.light*.45*fl).toFixed(3)+')');gr.addColorStop(1,'rgba(120,20,10,0)');
     ctx.fillStyle=gr;ctx.beginPath();ctx.ellipse(q.x,q.y,rx,rx*.5,0,0,TAU);ctx.fill();}finally{ctx.restore();}n++;}

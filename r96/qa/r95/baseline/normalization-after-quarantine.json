@@ -1,0 +1,1796 @@
+{
+  "schema": "storyworld.final42-normalization-qa/v1",
+  "passed": true,
+  "checks": [
+    {
+      "name": "Refuse negative rectangle",
+      "passed": true
+    },
+    {
+      "name": "Refuse missing pivot",
+      "passed": true
+    },
+    {
+      "name": "Refuse zero duration",
+      "passed": true
+    },
+    {
+      "name": "Refuse nonfinite duration",
+      "passed": true
+    },
+    {
+      "name": "Refuse premultiplied blend",
+      "passed": true
+    },
+    {
+      "name": "Refuse unknown blend",
+      "passed": true
+    },
+    {
+      "name": "Array/object rectangle and normalized/pixel pivot schema normalization",
+      "passed": true
+    },
+    {
+      "name": "Authoritative index has exactly42 explicit source IDs",
+      "passed": true
+    },
+    {
+      "name": "All original bundle files match authoritative FILE_SHA256 list",
+      "passed": true,
+      "files": 851
+    },
+    {
+      "name": "All42 metadata and README files read and original caveats preserved",
+      "passed": true
+    },
+    {
+      "name": "All680 atlas cells match supplied alpha and visible RGB; zero-alpha RGB differences recorded separately",
+      "passed": true
+    },
+    {
+      "name": "All42 original atlases have transparent outer frame borders",
+      "passed": true
+    },
+    {
+      "name": "All6 F6 loops preserve16 painted states and30 forward/reverse steps",
+      "passed": true
+    },
+    {
+      "name": "Thorn uses original feet pivot and4 authored clips without front/back invention",
+      "passed": true
+    },
+    {
+      "name": "Existing3 overlap is tracked explicitly and all originals preserved",
+      "passed": true
+    },
+    {
+      "name": "Runtime atlas/metadata/README and full source bundle copied byte-identically",
+      "passed": true
+    }
+  ],
+  "effects": [
+    {
+      "id": "F081",
+      "sourceIndex": 81,
+      "originalId": "animated-81-08-reality-overlap-shimmer",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": true,
+      "transparentRGBDifferencePixels": 0,
+      "originalAtlasSHA256": "ed025216a01f487748cfe44ca5bac2fb9e5a9d467f651b38244f64aff3dcfa52",
+      "duration": 1.28,
+      "playbackSteps": 16,
+      "clips": {
+        "oneshot": {
+          "duration": 1.28,
+          "loop": false,
+          "steps": 16
+        },
+        "main": {
+          "duration": 1.28,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.8125
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "No actual game engine test"
+      ]
+    },
+    {
+      "id": "F090",
+      "sourceIndex": 90,
+      "originalId": "90-dark-contact-bloom",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 8503,
+      "originalAtlasSHA256": "ff8c4d753eab30af940855037c9ae09c3befe1da587f777e62efe3446b2f83fb",
+      "duration": 0.8,
+      "playbackSteps": 16,
+      "clips": {
+        "main": {
+          "duration": 0.8,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "No actual game engine test"
+      ]
+    },
+    {
+      "id": "F091",
+      "sourceIndex": 91,
+      "originalId": "91-corruption-contact-thorns",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 10404,
+      "originalAtlasSHA256": "bd69fd85fa386e6c4257614fe06e0feeb4bf8a659e758922cf6d83f463df6f70",
+      "duration": 0.64,
+      "playbackSteps": 16,
+      "clips": {
+        "main": {
+          "duration": 0.64,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "No actual game engine test"
+      ]
+    },
+    {
+      "id": "F092",
+      "sourceIndex": 92,
+      "originalId": "92-harvest-drain-wisp",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 6971,
+      "originalAtlasSHA256": "0bfbb7adb05e51a9121fe44825f908b5961b739ca868854ccf023a804f3bcfc0",
+      "duration": 0.96,
+      "playbackSteps": 16,
+      "clips": {
+        "main": {
+          "duration": 0.96,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "No actual game engine test"
+      ]
+    },
+    {
+      "id": "F093",
+      "sourceIndex": 93,
+      "originalId": "93-pollution-contact-spray",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 9550,
+      "originalAtlasSHA256": "eed87d6df5aa7508c53887b00403cece05384112d43ecc98d453d01dbf67bfac",
+      "duration": 0.8,
+      "playbackSteps": 16,
+      "clips": {
+        "main": {
+          "duration": 0.8,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "No actual game engine test"
+      ]
+    },
+    {
+      "id": "F094",
+      "sourceIndex": 94,
+      "originalId": "storyworld-94-embers",
+      "frameCount": 16,
+      "nonemptyFrames": 15,
+      "blankFrameIndices": [
+        15
+      ],
+      "originalFrameModes": {
+        "RGBA": 15,
+        "LA": 1
+      },
+      "uniqueNonemptyRGBAFrames": 15,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 39312,
+      "originalAtlasSHA256": "129fd0b5324f6b23cedd0c05e056fa3a5e2c317c7906d01fa584c39bbf8c10d2",
+      "duration": 0.96,
+      "playbackSteps": 16,
+      "clips": {
+        "main": {
+          "duration": 0.96,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "Independent QA pass as importable candidate",
+        "No actual game engine/GPU test",
+        "15painted frames plus blank terminal; do not claim16painted",
+        "Source-boundary repair independently rechecked"
+      ]
+    },
+    {
+      "id": "F095",
+      "sourceIndex": 95,
+      "originalId": "storyworld-95-frost-shards",
+      "frameCount": 16,
+      "nonemptyFrames": 15,
+      "blankFrameIndices": [
+        15
+      ],
+      "originalFrameModes": {
+        "RGBA": 15,
+        "LA": 1
+      },
+      "uniqueNonemptyRGBAFrames": 15,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 71085,
+      "originalAtlasSHA256": "551ece3b64b1630369a8e1a2b561f852b05c1402323434edffa949ac8fb83f19",
+      "duration": 0.96,
+      "playbackSteps": 16,
+      "clips": {
+        "main": {
+          "duration": 0.96,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "Independent QA pass as importable candidate",
+        "No actual game engine/GPU test",
+        "15painted frames plus blank terminal; do not claim16painted",
+        "Source-boundary repair independently rechecked"
+      ]
+    },
+    {
+      "id": "F096",
+      "sourceIndex": 96,
+      "originalId": "storyworld-96-lightning",
+      "frameCount": 16,
+      "nonemptyFrames": 15,
+      "blankFrameIndices": [
+        15
+      ],
+      "originalFrameModes": {
+        "RGBA": 15,
+        "LA": 1
+      },
+      "uniqueNonemptyRGBAFrames": 15,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 31930,
+      "originalAtlasSHA256": "ea2db98e2aaf17d1056f5bfd9fe66ea5605d0b7737dc36faf686934858b96db3",
+      "duration": 0.64,
+      "playbackSteps": 16,
+      "clips": {
+        "main": {
+          "duration": 0.64,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "Independent QA pass as importable candidate",
+        "No actual game engine/GPU test",
+        "15painted frames plus blank terminal; do not claim16painted"
+      ]
+    },
+    {
+      "id": "F097",
+      "sourceIndex": 97,
+      "originalId": "storyworld-97-charm-ribbons",
+      "frameCount": 16,
+      "nonemptyFrames": 15,
+      "blankFrameIndices": [
+        15
+      ],
+      "originalFrameModes": {
+        "RGBA": 15,
+        "LA": 1
+      },
+      "uniqueNonemptyRGBAFrames": 15,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 84930,
+      "originalAtlasSHA256": "6c8c86944ea25edc9f6ca7b9c5ab753597c7a336879f9cd1638f92a5974b35f0",
+      "duration": 1.28,
+      "playbackSteps": 16,
+      "clips": {
+        "main": {
+          "duration": 1.28,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "Independent QA pass as importable candidate",
+        "No actual game engine/GPU test",
+        "15painted frames plus blank terminal; do not claim16painted"
+      ]
+    },
+    {
+      "id": "F098",
+      "sourceIndex": 98,
+      "originalId": "98-weakness-contact-fracture",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 9777,
+      "originalAtlasSHA256": "59716e431536a9358701e3b4c352593cb906ad3cf448e01749fb73eac4167527",
+      "duration": 0.96,
+      "playbackSteps": 16,
+      "clips": {
+        "main": {
+          "duration": 0.96,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "No actual game engine test"
+      ]
+    },
+    {
+      "id": "F099",
+      "sourceIndex": 99,
+      "originalId": "StoryWorld Thorn Binding",
+      "frameCount": 24,
+      "nonemptyFrames": 24,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 24
+      },
+      "uniqueNonemptyRGBAFrames": 24,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": true,
+      "transparentRGBDifferencePixels": 0,
+      "originalAtlasSHA256": "19cfdb767b3c45b226a8b787a1dbb209d4c29d4aa4ea46a018a6003eae87e6c6",
+      "duration": 2.08,
+      "playbackSteps": 24,
+      "clips": {
+        "emerge": {
+          "duration": 0.64,
+          "loop": false,
+          "steps": 8
+        },
+        "bind": {
+          "duration": 0.32,
+          "loop": false,
+          "steps": 4
+        },
+        "hold": {
+          "duration": 0.48,
+          "loop": true,
+          "steps": 4
+        },
+        "release": {
+          "duration": 0.64,
+          "loop": false,
+          "steps": 8
+        },
+        "main": {
+          "duration": 2.08,
+          "loop": false,
+          "steps": 24
+        }
+      },
+      "pivot": [
+        0.5,
+        0.859375
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "No actual game integration test",
+        "24painted frames; hold loop seam unverified; feet pivot y0.859375; single overlay, no front/back split"
+      ]
+    },
+    {
+      "id": "F100",
+      "sourceIndex": 100,
+      "originalId": "storyworld-100-disease-spores",
+      "frameCount": 16,
+      "nonemptyFrames": 15,
+      "blankFrameIndices": [
+        15
+      ],
+      "originalFrameModes": {
+        "RGBA": 15,
+        "LA": 1
+      },
+      "uniqueNonemptyRGBAFrames": 15,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 29777,
+      "originalAtlasSHA256": "df93a927945b7940aacae685bf5219d661cdb50d19ca31ba3e67ef4adf28ca26",
+      "duration": 1.44,
+      "playbackSteps": 16,
+      "clips": {
+        "main": {
+          "duration": 1.44,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "Independent QA pass as importable candidate",
+        "No actual game engine/GPU test",
+        "15painted frames plus blank terminal; do not claim16painted"
+      ]
+    },
+    {
+      "id": "F101",
+      "sourceIndex": 101,
+      "originalId": "storyworld-101-bleed-streaks",
+      "frameCount": 16,
+      "nonemptyFrames": 15,
+      "blankFrameIndices": [
+        15
+      ],
+      "originalFrameModes": {
+        "RGBA": 15,
+        "LA": 1
+      },
+      "uniqueNonemptyRGBAFrames": 15,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 28599,
+      "originalAtlasSHA256": "029e2aab69def89cbaf05a765d476c565983db2b835e0e01e340db4b22c05ada",
+      "duration": 0.96,
+      "playbackSteps": 16,
+      "clips": {
+        "main": {
+          "duration": 0.96,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "Independent QA pass as importable candidate",
+        "No actual game engine/GPU test",
+        "15painted frames plus blank terminal; do not claim16painted"
+      ]
+    },
+    {
+      "id": "F110",
+      "sourceIndex": 110,
+      "originalId": "animated-110-01-root-seal-severance",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": true,
+      "transparentRGBDifferencePixels": 0,
+      "originalAtlasSHA256": "96edb671ee0e9ee9e8771035bbb98303a3c5cbded86926c559ce0478fea46832",
+      "duration": 1.28,
+      "playbackSteps": 16,
+      "clips": {
+        "oneshot": {
+          "duration": 1.28,
+          "loop": false,
+          "steps": 16
+        },
+        "main": {
+          "duration": 1.28,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "endpoint fade requires tuning",
+        "scene scale/pivot tuning",
+        "no game engine test"
+      ]
+    },
+    {
+      "id": "F111",
+      "sourceIndex": 111,
+      "originalId": "animated-111-02-black-swamp-grasp-ripple",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": true,
+      "transparentRGBDifferencePixels": 0,
+      "originalAtlasSHA256": "d9b98df621a1db35c23f8ce873f7b941629be13eb670a7b5bdccc651dfeca457",
+      "duration": 1.28,
+      "playbackSteps": 16,
+      "clips": {
+        "oneshot": {
+          "duration": 1.28,
+          "loop": false,
+          "steps": 16
+        },
+        "main": {
+          "duration": 1.28,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.7135416666666666
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "single-layer character occlusion needs scene tuning",
+        "endpoint fade tuning",
+        "no game engine test"
+      ]
+    },
+    {
+      "id": "F112",
+      "sourceIndex": 112,
+      "originalId": "animated-112-03-black-ash-gust",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": true,
+      "transparentRGBDifferencePixels": 0,
+      "originalAtlasSHA256": "f540a81190e80b2d8cf88fc9a721456fe7616b0ae01ddbf514346b399dc7f1db",
+      "duration": 1.28,
+      "playbackSteps": 16,
+      "clips": {
+        "oneshot": {
+          "duration": 1.28,
+          "loop": false,
+          "steps": 16
+        },
+        "main": {
+          "duration": 1.28,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "Frame7 source-crop repair reviewed",
+        "Endpoint fade tuning",
+        "Generated turbulence shape drift",
+        "No engine test"
+      ]
+    },
+    {
+      "id": "F113",
+      "sourceIndex": 113,
+      "originalId": "animated-113-04-fallen-companion-memory-echo",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": true,
+      "transparentRGBDifferencePixels": 0,
+      "originalAtlasSHA256": "adcf3ed73ec7bf2278e2706a28f8d8bf555700368720874f422093de49aad595",
+      "duration": 1.28,
+      "playbackSteps": 16,
+      "clips": {
+        "oneshot": {
+          "duration": 1.28,
+          "loop": false,
+          "steps": 16
+        },
+        "main": {
+          "duration": 1.28,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "Independent QA pass as importable candidate",
+        "No actual game engine/GPU test",
+        "Source-boundary repair independently rechecked"
+      ]
+    },
+    {
+      "id": "F114",
+      "sourceIndex": 114,
+      "originalId": "animated-114-05-black-collapse-vortex",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": true,
+      "transparentRGBDifferencePixels": 0,
+      "originalAtlasSHA256": "901cce6d81792d5d7dc17259b0311735d866ae409ca54a6ced67bbb1e159bb17",
+      "duration": 1.28,
+      "playbackSteps": 16,
+      "clips": {
+        "oneshot": {
+          "duration": 1.28,
+          "loop": false,
+          "steps": 16
+        },
+        "main": {
+          "duration": 1.28,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "No actual game engine test",
+        "Source-crop repair reviewed"
+      ]
+    },
+    {
+      "id": "F115",
+      "sourceIndex": 115,
+      "originalId": "animated-115-06-guardian-memory-erasure-veil",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": true,
+      "transparentRGBDifferencePixels": 0,
+      "originalAtlasSHA256": "809e4568c6ceb749ea6940a0ea3d12842a15fc9f145957d66d775c3e17f2c199",
+      "duration": 1.28,
+      "playbackSteps": 16,
+      "clips": {
+        "oneshot": {
+          "duration": 1.28,
+          "loop": false,
+          "steps": 16
+        },
+        "main": {
+          "duration": 1.28,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "No actual game engine test"
+      ]
+    },
+    {
+      "id": "F116",
+      "sourceIndex": 116,
+      "originalId": "animated-116-07-craving-afterimage-fragment",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": true,
+      "transparentRGBDifferencePixels": 0,
+      "originalAtlasSHA256": "dccaa0cc2a5a87ed9b082da91cae3b2070f2b6faf05553361ea60b3a58597059",
+      "duration": 1.28,
+      "playbackSteps": 16,
+      "clips": {
+        "oneshot": {
+          "duration": 1.28,
+          "loop": false,
+          "steps": 16
+        },
+        "main": {
+          "duration": 1.28,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "Intentional stuttering shards/echoes",
+        "No actual game engine test"
+      ]
+    },
+    {
+      "id": "F117",
+      "sourceIndex": 117,
+      "originalId": "animated-117-08-seal-closure-component",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": true,
+      "transparentRGBDifferencePixels": 0,
+      "originalAtlasSHA256": "4bc39656227686918cf85bfd3d0b8a4d9bd78a5cc0a27bfc5e5f9ab11767f9d3",
+      "duration": 1.28,
+      "playbackSteps": 16,
+      "clips": {
+        "oneshot": {
+          "duration": 1.28,
+          "loop": false,
+          "steps": 16
+        },
+        "main": {
+          "duration": 1.28,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "Two tiny source specks at alpha22–24, no visible silhouette cut",
+        "Closure motif, not open portal",
+        "No actual game engine test"
+      ]
+    },
+    {
+      "id": "F130",
+      "sourceIndex": 130,
+      "originalId": "animated-130-01-violet-web-seal",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": true,
+      "transparentRGBDifferencePixels": 0,
+      "originalAtlasSHA256": "8e2d08b24b6f4ea96b8c6c7a7b4329ed6b343af14896bb604709598e39730ecb",
+      "duration": 1.28,
+      "playbackSteps": 16,
+      "clips": {
+        "oneshot": {
+          "duration": 1.28,
+          "loop": false,
+          "steps": 16
+        },
+        "main": {
+          "duration": 1.28,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "Thin silk actual-scale contrast tuning",
+        "Endpoint fade tuning",
+        "No game engine test"
+      ]
+    },
+    {
+      "id": "F131",
+      "sourceIndex": 131,
+      "originalId": "animated-131-02-pillar-tether-release",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": true,
+      "transparentRGBDifferencePixels": 0,
+      "originalAtlasSHA256": "7f6a19acb32b36e6b56fdc09add28c26a09275730f7b1b5c0919ef7480533a04",
+      "duration": 1.28,
+      "playbackSteps": 16,
+      "clips": {
+        "oneshot": {
+          "duration": 1.28,
+          "loop": false,
+          "steps": 16
+        },
+        "main": {
+          "duration": 1.28,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "5dominant visual chain groups; per-pillar release, seven events counted by game",
+        "No game engine test"
+      ]
+    },
+    {
+      "id": "F132",
+      "sourceIndex": 132,
+      "originalId": "animated-132-03-memory-unlock-light",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": true,
+      "transparentRGBDifferencePixels": 0,
+      "originalAtlasSHA256": "33c17637122e1440a605c6dddbf41e6400a59fbd0929c996e9b765324c79cc49",
+      "duration": 1.28,
+      "playbackSteps": 16,
+      "clips": {
+        "oneshot": {
+          "duration": 1.28,
+          "loop": false,
+          "steps": 16
+        },
+        "main": {
+          "duration": 1.28,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "Source margins not independently remeasured at final handoff",
+        "No actual game engine test"
+      ]
+    },
+    {
+      "id": "F213",
+      "sourceIndex": 213,
+      "originalId": "storyworld-hospital-poison-impact-v1",
+      "frameCount": 16,
+      "nonemptyFrames": 15,
+      "blankFrameIndices": [
+        15
+      ],
+      "originalFrameModes": {
+        "RGBA": 15,
+        "LA": 1
+      },
+      "uniqueNonemptyRGBAFrames": 15,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 1935,
+      "originalAtlasSHA256": "a9a7a8a30ce72200e25f59d5b62a28a74f897c916f3c6f3e517db60ed830d376",
+      "duration": 1.12,
+      "playbackSteps": 16,
+      "clips": {
+        "main": {
+          "duration": 1.12,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "No actual game integration test",
+        "Poison impact/vapor only, not syringe flight;15painted+blank terminal"
+      ]
+    },
+    {
+      "id": "F214",
+      "sourceIndex": 214,
+      "originalId": "214-poison-syringe-flight",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 4801,
+      "originalAtlasSHA256": "ce2cb748f32e0e2974e2b6df279a9367a6984067442ae2df14582ffd20d2e1d8",
+      "duration": 0.8,
+      "playbackSteps": 16,
+      "clips": {
+        "main": {
+          "duration": 0.8,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "Independent QA pass as importable candidate",
+        "No actual game engine/GPU test",
+        "Warning radius and timing need game calibration",
+        "No seamless loop claimed"
+      ]
+    },
+    {
+      "id": "F215",
+      "sourceIndex": 215,
+      "originalId": "hospital-scalpel-slash-impact",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 44551,
+      "originalAtlasSHA256": "346c7b644dc9da3d1ece6acca06c06b24e019da73b190c130ba43efd87a9b7f8",
+      "duration": 0.64,
+      "playbackSteps": 16,
+      "clips": {
+        "main": {
+          "duration": 0.64,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "No actual game integration test",
+        "Scalpel slash/impact only, not full weapon projectile attack"
+      ]
+    },
+    {
+      "id": "F217",
+      "sourceIndex": 217,
+      "originalId": "217-black-neural-dissipation",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 5206,
+      "originalAtlasSHA256": "b0dc819aee60a482257d7e56489fb96e865dee0b6b22cc4d418de92e21610022",
+      "duration": 1.12,
+      "playbackSteps": 16,
+      "clips": {
+        "main": {
+          "duration": 1.12,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "No actual game engine test"
+      ]
+    },
+    {
+      "id": "F243",
+      "sourceIndex": 243,
+      "originalId": "storyworld-243-electric-aura",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 123144,
+      "originalAtlasSHA256": "f418e1403049a347938175f6c3f2f9b83e1f7ae032c541d1d2d7030b07273d4c",
+      "duration": 1.8,
+      "playbackSteps": 30,
+      "clips": {
+        "main": {
+          "duration": 1.8,
+          "loop": true,
+          "steps": 30
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "beforeActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "No actual game engine test",
+        "16painted states,30 forward/reverse playback steps; intentional visible reversal, not proven smooth one-way loop",
+        "Static seam strips and index continuity checked"
+      ]
+    },
+    {
+      "id": "F244",
+      "sourceIndex": 244,
+      "originalId": "storyworld-244-freeze-aura",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 126051,
+      "originalAtlasSHA256": "a9adc1b391bebb676dbc62468c11060efb92d64316412a5fb5f297ade5acef68",
+      "duration": 3.0,
+      "playbackSteps": 30,
+      "clips": {
+        "main": {
+          "duration": 3.0,
+          "loop": true,
+          "steps": 30
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "beforeActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "No actual game engine test",
+        "16painted states,30 forward/reverse playback steps; intentional visible reversal, not proven smooth one-way loop",
+        "Static seam strips and index continuity checked"
+      ]
+    },
+    {
+      "id": "F245",
+      "sourceIndex": 245,
+      "originalId": "245-golden-sword-dance",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 5515,
+      "originalAtlasSHA256": "137dcc2e85f5da6caa7bc95b08775bf4415a091a9ac91c88c4f73fd95fa7d0bd",
+      "duration": 0.64,
+      "playbackSteps": 16,
+      "clips": {
+        "main": {
+          "duration": 0.64,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "Independent QA pass as importable candidate",
+        "No actual game engine/GPU test",
+        "Warning radius and timing need game calibration",
+        "No seamless loop claimed"
+      ]
+    },
+    {
+      "id": "F246",
+      "sourceIndex": 246,
+      "originalId": "246-silver-thread-slash",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 6123,
+      "originalAtlasSHA256": "1ef9838c862112d169815970d47593ddd39e40e392aa6d41207dea06f3aaaf96",
+      "duration": 0.64,
+      "playbackSteps": 16,
+      "clips": {
+        "main": {
+          "duration": 0.64,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "Independent QA pass as importable candidate",
+        "No actual game engine/GPU test",
+        "Warning radius and timing need game calibration",
+        "No seamless loop claimed"
+      ]
+    },
+    {
+      "id": "F247",
+      "sourceIndex": 247,
+      "originalId": "storyworld-247-bleed-aura",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 49887,
+      "originalAtlasSHA256": "271d3ebf9cd9e35d937cd34900ef4693722967b150a5f03d2c8a254d8660cbb0",
+      "duration": 3.0,
+      "playbackSteps": 30,
+      "clips": {
+        "main": {
+          "duration": 3.0,
+          "loop": true,
+          "steps": 30
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "beforeActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "No actual game engine test",
+        "16painted states,30 forward/reverse playback steps; intentional visible reversal, not proven smooth one-way loop",
+        "Static seam strips and index continuity checked"
+      ]
+    },
+    {
+      "id": "F248",
+      "sourceIndex": 248,
+      "originalId": "storyworld-248-charm-aura",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 134785,
+      "originalAtlasSHA256": "faf8eb894c39b6b9f44a2551315c5461f90cdc663cf303b6b80963d7368a356c",
+      "duration": 3.0,
+      "playbackSteps": 30,
+      "clips": {
+        "main": {
+          "duration": 3.0,
+          "loop": true,
+          "steps": 30
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "beforeActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "No actual game engine test",
+        "16painted states,30 forward/reverse playback steps; intentional visible reversal, not proven smooth one-way loop",
+        "Static seam strips and index continuity checked"
+      ]
+    },
+    {
+      "id": "F249",
+      "sourceIndex": 249,
+      "originalId": "storyworld-249-disease-cloud",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 85298,
+      "originalAtlasSHA256": "9798bc08f062d5bcbda04c49cd067c94290d37bd6c05a92a81fd8a5f5ce5950f",
+      "duration": 3.0,
+      "playbackSteps": 30,
+      "clips": {
+        "main": {
+          "duration": 3.0,
+          "loop": true,
+          "steps": 30
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "beforeActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "No actual game engine test",
+        "16painted states,30 forward/reverse playback steps; intentional visible reversal, not proven smooth one-way loop",
+        "Static seam strips and index continuity checked"
+      ]
+    },
+    {
+      "id": "F250",
+      "sourceIndex": 250,
+      "originalId": "storyworld-250-weakness-aura",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 57520,
+      "originalAtlasSHA256": "66ca90e9415f877ecf204b9b57062c5687445d45c343943b59c8aba1cd8c2410",
+      "duration": 3.0,
+      "playbackSteps": 30,
+      "clips": {
+        "main": {
+          "duration": 3.0,
+          "loop": true,
+          "steps": 30
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "beforeActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "No actual game engine test",
+        "16painted states,30 forward/reverse playback steps; intentional visible reversal, not proven smooth one-way loop",
+        "Static seam strips and index continuity checked"
+      ]
+    },
+    {
+      "id": "F251",
+      "sourceIndex": 251,
+      "originalId": "251-attack-warning-ring",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 10369,
+      "originalAtlasSHA256": "f59667f333e93463a6b26c4d091005302d2923db08d0879b290c7f622ead72de",
+      "duration": 1.6,
+      "playbackSteps": 16,
+      "clips": {
+        "main": {
+          "duration": 1.6,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "ground",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "Independent QA pass as importable candidate",
+        "No actual game engine/GPU test",
+        "Warning radius and timing need game calibration",
+        "No seamless loop claimed"
+      ]
+    },
+    {
+      "id": "F254",
+      "sourceIndex": 254,
+      "originalId": "254-silver-exit-teleport",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 52265,
+      "originalAtlasSHA256": "30a6b51d13cdcecf64df2cd5d3ad99bd2c1ff7bee40489b170809f877600971f",
+      "duration": 0.96,
+      "playbackSteps": 16,
+      "clips": {
+        "main": {
+          "duration": 0.96,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.7
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "Independent QA pass as importable candidate",
+        "No actual game engine/GPU test",
+        "Warning radius and timing need game calibration",
+        "No seamless loop claimed"
+      ]
+    },
+    {
+      "id": "F259",
+      "sourceIndex": 259,
+      "originalId": "storyworld-259-drag-remnant",
+      "frameCount": 16,
+      "nonemptyFrames": 15,
+      "blankFrameIndices": [
+        15
+      ],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 15,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 42738,
+      "originalAtlasSHA256": "e6ff32abedd6eabf3c94fee3fbe4f0dc2fc2c40910cff9931a33b936b0af1d98",
+      "duration": 1.92,
+      "playbackSteps": 16,
+      "clips": {
+        "main": {
+          "duration": 1.92,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "ground",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "No actual game engine test",
+        "15painted nonblank frames plus blank terminal"
+      ]
+    },
+    {
+      "id": "F260",
+      "sourceIndex": 260,
+      "originalId": "storyworld-260-charge-warning",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 30486,
+      "originalAtlasSHA256": "6b5a416feed31ff38d5e31c0c3b54f90e2803b925265ab13faef709ed065bfe5",
+      "duration": 1.28,
+      "playbackSteps": 16,
+      "clips": {
+        "main": {
+          "duration": 1.28,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "ground",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "Stale source/cuts-x.json and cuts-y.json excluded from final bundle; actual extraction uses provenance",
+        "Final metadata audit not awaited under latest speed request",
+        "No actual game engine test"
+      ]
+    },
+    {
+      "id": "F261",
+      "sourceIndex": 261,
+      "originalId": "storyworld-261-splash-impact",
+      "frameCount": 16,
+      "nonemptyFrames": 15,
+      "blankFrameIndices": [
+        15
+      ],
+      "originalFrameModes": {
+        "RGBA": 15,
+        "LA": 1
+      },
+      "uniqueNonemptyRGBAFrames": 15,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 5321,
+      "originalAtlasSHA256": "018e4e692d201a69730424b4d820e5d58f772b513cd09504b30519761900374a",
+      "duration": 0.8,
+      "playbackSteps": 16,
+      "clips": {
+        "main": {
+          "duration": 0.8,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "No actual game engine test",
+        "15painted nonblank frames plus blank terminal"
+      ]
+    },
+    {
+      "id": "F262",
+      "sourceIndex": 262,
+      "originalId": "storyworld-262-reed-projectile",
+      "frameCount": 16,
+      "nonemptyFrames": 16,
+      "blankFrameIndices": [],
+      "originalFrameModes": {
+        "RGBA": 16
+      },
+      "uniqueNonemptyRGBAFrames": 16,
+      "maximumBorderAlpha": 0,
+      "atlasMatchesAllOriginalFrameAlphaAndVisibleRGB": true,
+      "atlasCellsExactlyMatchOriginalRGBA": false,
+      "transparentRGBDifferencePixels": 54565,
+      "originalAtlasSHA256": "507c8c3dd2a0f3615b733e441dcf976c0d8cf88a3a96c572a4408db18a353e2d",
+      "duration": 0.8,
+      "playbackSteps": 16,
+      "clips": {
+        "main": {
+          "duration": 0.8,
+          "loop": false,
+          "steps": 16
+        }
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "afterActor",
+      "rawREADMERead": true,
+      "rawMetadataRead": true,
+      "caveats": [
+        "No actual game engine test"
+      ]
+    }
+  ],
+  "overlapWithR87": [
+    {
+      "sourceIndex": 99,
+      "newId": "F099",
+      "oldSHA256": "19cfdb767b3c45b226a8b787a1dbb209d4c29d4aa4ea46a018a6003eae87e6c6",
+      "newSHA256": "19cfdb767b3c45b226a8b787a1dbb209d4c29d4aa4ea46a018a6003eae87e6c6",
+      "identicalToPriorR87": true,
+      "oldFilePreserved": true,
+      "requiresSingleExplicitRuntimeOwner": true
+    },
+    {
+      "sourceIndex": 213,
+      "newId": "F213",
+      "oldSHA256": "a9a7a8a30ce72200e25f59d5b62a28a74f897c916f3c6f3e517db60ed830d376",
+      "newSHA256": "a9a7a8a30ce72200e25f59d5b62a28a74f897c916f3c6f3e517db60ed830d376",
+      "identicalToPriorR87": true,
+      "oldFilePreserved": true,
+      "requiresSingleExplicitRuntimeOwner": true
+    },
+    {
+      "sourceIndex": 215,
+      "newId": "F215",
+      "oldSHA256": "346c7b644dc9da3d1ece6acca06c06b24e019da73b190c130ba43efd87a9b7f8",
+      "newSHA256": "346c7b644dc9da3d1ece6acca06c06b24e019da73b190c130ba43efd87a9b7f8",
+      "identicalToPriorR87": true,
+      "oldFilePreserved": true,
+      "requiresSingleExplicitRuntimeOwner": true
+    }
+  ],
+  "runtimeFiles": 126,
+  "runtimeAtlasCount": 42,
+  "runtimeAtlasBytes": 38881029,
+  "originalBundleFiles": 852,
+  "authoritativeExternalIndexSHA256": "ac09686eefab668f92533d4d56f812ede4b2b2ee6177c229827dfaa5d27a24cc",
+  "originalFileHashListSHA256": "0245949ab56855e0e65779eab1725635a2969c8b243528c240e7fab68ee4011d",
+  "sourceMetadataModified": false,
+  "sourceImagesModified": false,
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false
+}

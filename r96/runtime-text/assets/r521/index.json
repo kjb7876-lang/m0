@@ -1,0 +1,138 @@
+{
+ "source_zip": "StoryWorld_Isometric_Hospital_SmallProps8_20261022.zip",
+ "source_zip_sha256": "bdf752ffbfcb7a4661de8b0c8fa7a6cc63bcd301d9d709537389963a95507f2b",
+ "source_zip_bytes": 5960480,
+ "transform": "alpha>=8 bounding box +6px margin, proportional Lanczos resize to max 320, WebP q90; no repaint",
+ "note": "드라이브 원본은 읽기 전용, 파생본만 저장. 원본 README: original variants, pivots provisional.",
+ "assets": [
+  {
+   "key": "exam-lamp",
+   "file": "assets/r521/exam-lamp.webp",
+   "source": "hospital_exam_lamp.png",
+   "source_sha256": "0d2aee4efc43393cd1afe6be1563f2abf51c40efe4b40f680f91f059cd813c8f",
+   "source_size": [
+    1774,
+    887
+   ],
+   "crop_xyxy": [
+    601,
+    19,
+    1281,
+    865
+   ],
+   "output_size": [
+    257,
+    320
+   ],
+   "bytes": 18592,
+   "sha256": "6f1e58551a4cadd8aa241f9973db057bae96698f1d0a96b3e85da83542b62b92",
+   "use": "진료실·처치실 진찰등",
+   "applied": true
+  },
+  {
+   "key": "overbed-table",
+   "file": "assets/r521/overbed-table.webp",
+   "source": "hospital_overbed_meal_table.png",
+   "source_sha256": "143d32cec057482d7cefff7a497647acd4e97d819e3bdec282fae6f854620945",
+   "source_size": [
+    1760,
+    894
+   ],
+   "crop_xyxy": [
+    444,
+    43,
+    1330,
+    863
+   ],
+   "output_size": [
+    320,
+    296
+   ],
+   "bytes": 19974,
+   "sha256": "3db430261733a3134dea95fb59b3f032ee3076f68dab9fe4d11ea7ce2ed35f11",
+   "use": "병실 침대 곁 식판 탁자",
+   "applied": true
+  },
+  {
+   "key": "crutches",
+   "file": "assets/r521/crutches.webp",
+   "source": "hospital_crutch_pair.png",
+   "source_sha256": "b0965c96becc544e1c9be1286df9d00cf57ce1b23a473cb06b2533893e0732df",
+   "source_size": [
+    1774,
+    887
+   ],
+   "crop_xyxy": [
+    698,
+    4,
+    1111,
+    882
+   ],
+   "output_size": [
+    151,
+    320
+   ],
+   "bytes": 23246,
+   "sha256": "473d98539e3889f02443be8d6c32732ce9f5e4dc5b1a2c712c4fa5f0ce0e5cdd",
+   "use": "병실·대기 공간 벽에 기댄 목발",
+   "applied": true
+  }
+ ],
+ "dots": {
+  "source": "구글 드라이브 Dots 두 방향 가구(STORYPROP, 2026-11-09 받은 것)",
+  "status": "Dots QA 메모는 REVIEW_ONLY·기준점 미보정 — 사용자 2026-11-08 규칙(검토 후보도 검토해 배치)에 따라 2:1 격자에 대어 각도를 확인한 두 점만 씀. 수술 수레 northwall-se v2 는 각도가 얕아 쓰지 않음.",
+  "transform": "alpha>=8 bounding box +6px margin, proportional Lanczos resize to max 320, WebP q90; no repaint",
+  "assets": [
+   {
+    "key": "medicine-cabinet",
+    "file": "assets/r521/medicine-cabinet.webp",
+    "source": "STORYPROP-medicine-cabinet-westwall-sw-v1-20261109.png",
+    "source_sha256": "3d0d955f2629ff413ff88a48baddbcda7cc6c51b538c74949f5067cb68b2005a",
+    "source_bytes": 1412909,
+    "source_size": [
+     1254,
+     1254
+    ],
+    "crop_xyxy": [
+     284,
+     25,
+     963,
+     1228
+    ],
+    "output_size": [
+     181,
+     320
+    ],
+    "bytes": 20376,
+    "sha256": "1090d5de3829c21df54e7a39e3e21dfa6b7752f433bfbe479417174d021dd211",
+    "use": "병실·진료실·준비실 구석 약장(북쪽 벽용, 서쪽 벽은 좌우 거울)",
+    "applied": true
+   },
+   {
+    "key": "surgical-cart",
+    "file": "assets/r521/surgical-cart.webp",
+    "source": "STORYPROP-surgical-cart-westwall-sw-v1-20261109.png",
+    "source_sha256": "310b1a9c6e9c826bd668896123297cc0935890a6222d9e77a48f34e50a6fbb2f",
+    "source_bytes": 955712,
+    "source_size": [
+     1254,
+     1254
+    ],
+    "crop_xyxy": [
+     201,
+     198,
+     1033,
+     1093
+    ],
+    "output_size": [
+     297,
+     320
+    ],
+    "bytes": 32410,
+    "sha256": "556679e3ff38b7ea818880a7f84f34458e45c2c7108ac3d18459ece004848595",
+    "use": "진료실·준비실 기구 수레(북쪽 벽용, 서쪽 벽은 좌우 거울)",
+    "applied": true
+   }
+  ]
+ }
+}

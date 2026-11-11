@@ -25,6 +25,7 @@ function cachedShadow(s,im,fr){const key=s.path+':'+fr;let row=shadows.get(key);
  const bitmap=new Image();row={image:bitmap,ready:false};bitmap.onload=()=>{row.ready=true;};bitmap.onerror=()=>{shadows.delete(key);};shadows.set(key,row);bitmap.src=canvas.toDataURL('image/png');stats.shadowBuilt++;
  while(shadows.size>48)shadows.delete(shadows.keys().next().value);return null;}
 function paintShadow(e,s,im,fr,c,outer){
+ if(window.__STORYWORLD_ENEMY_FACE_R444__?.noShadows?.())return;/* R444 사용자 2026-11-09 몬스터 그림자 없애기 */
  if(!outer||typeof project!=='function'||typeof c.setTransform!=='function'||typeof c.save!=='function')return;
  const q=project(e.x,e.y),w=typeof W==='number'?W:0,h=typeof H==='number'?H:0,plan=shadowPlan(q.x,q.y,w,h);if(!plan){stats.shadowOutside++;return;}
  const small=w<960||(typeof matchMedia==='function'&&matchMedia('(pointer:coarse)').matches),height=(typeof actorHeight==='function'?actorHeight():60)*(e.combatProfile?.spriteRect?.height||1)*(e.defScale||1),size=Math.min(height,180),scale=size/Math.max(10,s.body/4),bitmap=small?null:cachedShadow(s,im,fr);
@@ -62,10 +63,9 @@ if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a
 if(typeof serializeSave==='function'){const base=serializeSave;serializeSave=function(...a){const raw=base.apply(this,a);if(mode==='pixel')raw.mobArt='pixel';return raw;};}
 if(typeof newGame==='function'){const base=newGame;newGame=async function(...a){const old=mode;mode=pending==='pixel'?'pixel':'painted';pending=null;try{const result=await base.apply(this,a);if(result===false)mode=old;return result;}catch(e){mode=old;throw e;}};}
 if(typeof restoreSave==='function'){const base=restoreSave;restoreSave=async function(raw,...a){const old=mode;if(!window.__STORYWORLD_SAVE_SLOTS_R73__?.confirmedNew?.())pending=null;mode=raw?.mobArt==='pixel'?'pixel':'painted';try{const result=await base.call(this,raw,...a);if(result===false)mode=old;return result;}catch(e){mode=old;throw e;}};}
-function titleChoice(){const panel=document.getElementById('panel'),normal=document.getElementById('campaignNew54')||document.getElementById('newBtn');if(!panel||!normal||document.getElementById('pixelStartR306'))return;
- const action=normal.onclick;if(typeof action!=='function')return;normal.onclick=function(...a){pending=null;return action.apply(this,a);};
- const b=document.createElement('button');b.id='pixelStartR306';b.type='button';b.textContent='픽셀 모드로 시작';b.onclick=function(...a){pending='pixel';return action.apply(normal,a);};(normal.parentNode||panel).appendChild(b);
-}
+// R600(사용자 2026-11-10 "픽셀모드 삭제하고 그자리에 무한뱀서류모드"): 처음 화면의 '픽셀 모드로 시작' 입구를 뺐다(그 자리는 survival-r600.js 의 '무한 생존으로 시작').
+//  새로 픽셀 기록을 시작할 길은 없다. 옛 픽셀 기록을 불러오는 길과 그리기 코드는 다음 정리 PR 에서 다른 모드 사용 여부를 확인하고 함께 뺀다.
+function titleChoice(){const old=document.getElementById('pixelStartR306');if(old&&old.parentNode&&old.parentNode.removeChild)old.parentNode.removeChild(old);}
 if(typeof showTitle==='function'){const base=showTitle;showTitle=function(...a){pending=null;const result=base.apply(this,a);titleChoice();return result;};}
 if(typeof showMenu==='function'){const base=showMenu;showMenu=function(...a){pending=null;return base.apply(this,a);};}
 document.addEventListener?.('click',event=>{if(['slotCancelR73','heroBack','campaignContinue54','continueBtn','campaignImport54','importBtn','slotsBackR73'].includes(event.target?.id))pending=null;},true);

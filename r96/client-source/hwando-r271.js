@@ -23,12 +23,19 @@ function loadIndex(){if(IDX||idxReq||typeof fetch!=='function')return;idxReq=tru
 const solo=()=>{let m=null;try{m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();}catch(_){}return !m||m==='off';};
 const T=()=>typeof time==='number'?time:0;
 const asked=new Map();
-function image(p){try{const row=typeof readyImage==='function'?readyImage(p):null;if(row?.image)return row.image;const t=Date.now();if(t-(asked.get(p)||0)>1000){asked.set(p,t);stats.loads++;if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});else if(typeof addImage==='function')addImage(p);}}catch(e){fail(e);}stats.waiting++;return null;}
+/* R440(사용자 2026-11-09 "환도영웅에 옛 이미지 갑자기 등장 버그"): 지역에 들어서면 엔진 그림 캐시가 다시 채워지는 몇 프레임 동안 readyImage 가 비어
+   R271 이 그리지 못하고 엔진 옛 그림(hero-authored v314 아틀라스)이 2~3프레임 튀었다 → 한 번 받은 환도 그림은 여기서 쥐고 있다가 그때 쓴다. */
+const KEEP=new Map();
+function image(p){try{const row=typeof readyImage==='function'?readyImage(p):null;if(row?.image){if(!KEEP.has(p))KEEP.set(p,row.image);return row.image;}{const k=KEEP.get(p);if(k&&(k.naturalWidth||k.width)){stats.kept=(stats.kept||0)+1;return k;}}const t=Date.now();if(t-(asked.get(p)||0)>1000){asked.set(p,t);stats.loads++;if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});else if(typeof addImage==='function')addImage(p);}}catch(e){fail(e);}stats.waiting++;return null;}
 // 동작·방향 → 그림 (새 팩 → W 는 E 미러 → R242 대체)
 function res(anim,dir){const N=IDX?.anims?.[anim];if(N?.[dir]?.file)return {A:N[dir],base:BASE,mir:false};if(dir==='w'&&N?.e?.file)return {A:N.e,base:BASE,mir:true};
  const O=window.__STORYWORLD_HWANDO_R242__?.index?.(),dk=dir==='w'?'e':dir,A=O?.anims?.[anim]?.[dk]||O?.anims?.[anim]?.s;if(!A)return null;return {A,base:OLD,mir:dir==='w',body:O.anims.walk?.[dk]?.body||A.body||180,old:true};}
 const S={x:null,y:null,movedAt:-9,sx:0,sy:0,dist:0,dir:'s',walkDir:'s',swing:null,hit:null,prevAtk:0,prevHurt:0};
 function dirFromVec(vx,vy){if(Math.abs(vx)>=Math.abs(vy))return vx>=0?'e':'w';return vy>=0?'s':'n';}
+// R441(사용자 2026-11-09 "대각 이동 모션 없는 영웅은 대각선 이동 시 좌·우 이동 모션, 위아래가 확실할 때만 위아래"): 환도는 대각 걷기 그림이 없어
+//  45° 경계에서 위·아래 걷기로 바뀌었다 → 화면 세로에서 ±30° 안(슬레이어 R351 screenSouth 와 같은 폭)일 때만 위·아래, 나머지는 좌·우. 끄기 storyworld.r441.diagWalk {"on":false}
+const DIAG441=(()=>{try{return JSON.parse(localStorage.getItem('storyworld.r441.diagWalk')||'{}').on!==false;}catch(_){return true;}})(),VERT441=Math.tan(Math.PI/3);
+function walkFromVec(vx,vy){if(!DIAG441)return dirFromVec(vx,vy);if(Math.abs(vy)>Math.abs(vx)*VERT441)return vy>=0?'s':'n';return vx>=0?'e':'w';}
 function enemyDir(){const v=enemyVec();return v?dirFromVec(v[0],v[1]):null;}
 function enemyVec(){try{const q=project(player.x,player.y);let best=null,bd=4;for(const e of room?.enemies||[]){if(!(e?.hp>0)||e.visible===false||e.spawnState==='hidden')continue;const d=Math.hypot(e.x-player.x,e.y-player.y);if(d<bd){bd=d;best=e;}}
  if(best){const b=project(best.x,best.y);return [b.x-q.x,b.y-q.y];}}catch(_){}return null;}
@@ -38,7 +45,7 @@ function aimDir(){const v=enemyVec(),d=v?dirFromVec(v[0],v[1]):S.dir,P=P277();re
 function track(){const t=T();if(S.x!=null){const dx=player.x-S.x,dy=player.y-S.y,d=Math.hypot(dx,dy);
   if(d>1e-4&&d<1.2){const q0=project(S.x,S.y),q1=project(player.x,player.y),px=q1.x-q0.x,py=q1.y-q0.y;S.sx=S.sx*.6+px*.4;S.sy=S.sy*.6+py*.4;if(d>.004)S.movedAt=t;
    S.dist+=Math.hypot(px,py);const mvx=+player.moveVX150||0,mvy=+player.moveVY150||0;let v=[S.sx,S.sy];if(Math.hypot(mvx,mvy)>.05){const a=project(player.x,player.y),b=project(player.x+mvx,player.y+mvy);v=[b.x-a.x,b.y-a.y];}
-   const nd=dirFromVec(v[0],v[1]);if(nd!==S.walkDir){S.pend=(S.pendDir===nd?(S.pend||0)+1:1);S.pendDir=nd;if(S.pend>=2){S.walkDir=nd;S.pend=0;}}else S.pend=0;}}
+   const nd=walkFromVec(v[0],v[1]);if(nd!==S.walkDir){S.pend=(S.pendDir===nd?(S.pend||0)+1:1);S.pendDir=nd;if(S.pend>=2){S.walkDir=nd;S.pend=0;}}else S.pend=0;}}
  S.x=player.x;S.y=player.y;}
 const want=()=>(typeof actorHeight==='function'?actorHeight():66)*((window.__STORYWORLD_VISUAL_R119__?.inspect?.()?.stats?.standRatio)||.98);
 function draw(rec,st,best,anim,dir,frame,opt={}){const ws=anim==='walk'&&dir==='s'&&opt.s?wsRes():null;/* R436: 아래 걷기만 새 v2 */if(dir==='s'&&!ws){const P=P277();if(P?.down)dir=P.down();}/* R349: 그 밖의 아래 그림은 쓰지 않는다(위·좌·우만) */const R=ws||res(anim,dir);if(!R)return false;const A=R.A,p=(window.__STORYWORLD_HWANDO_R283__?.path?.(R.base,A.file))||R.base+A.file,im=image(p);/* R283 색 맞춘 파생본 */if(!im){/* R345: 공격·피격 그림이 아직 안 받아졌으면 엔진 옛 그림 대신 이미 받은 같은 방향 걷기 선 자세로(옛 그림이 한 순간 튀지 않게) */if(!opt.fb&&anim!=='walk'){stats.standIn=(stats.standIn||0)+1;const w=res('walk',dir)?.A;if(w&&draw(rec,st,best,'walk',dir,Math.min(3,w.n-1),{fb:true}))return true;}return false;}

@@ -1,0 +1,560 @@
+{
+  "method": "CPU VM with synthetic EGO active visit validated by native restore. DOM, image, audio, renderer readiness stubbed. Not browser/GPU.",
+  "rounds": [
+    [
+      {
+        "id": "ep1a08:a08-o1",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-s1",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-c1",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-o2",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-o1-w1-r1",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-s1-w1-r2",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-o1-w2-1",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-s1-w2-2",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-c1-w2-3",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-o2-w2-4",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-o1-w2-r1",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-s1-w2-r2",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:mb-ep1a08",
+        "hp": 17285.347599999997,
+        "maxHp": 24345.559999999998,
+        "ratio": 0.71,
+        "factor": 0.25,
+        "difficultyBase": 57542.24,
+        "egoScale": 1,
+        "boss": true
+      }
+    ],
+    [
+      {
+        "id": "ep1a08:a08-o1",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-s1",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-c1",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-o2",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-o1-w1-r1",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-s1-w1-r2",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-o1-w2-1",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-s1-w2-2",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-c1-w2-3",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-o2-w2-4",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-o1-w2-r1",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-s1-w2-r2",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:mb-ep1a08",
+        "hp": 29071.347599999997,
+        "maxHp": 40945.56,
+        "ratio": 0.71,
+        "factor": 0.25,
+        "difficultyBase": 97382.23999999999,
+        "egoScale": 1,
+        "boss": true
+      }
+    ],
+    [
+      {
+        "id": "ep1a08:a08-o1",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-s1",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-c1",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-o2",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-o1-w1-r1",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-s1-w1-r2",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-o1-w2-1",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-s1-w2-2",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-c1-w2-3",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-o2-w2-4",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-o1-w2-r1",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-s1-w2-r2",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:mb-ep1a08",
+        "hp": 47928.9476,
+        "maxHp": 67505.56,
+        "ratio": 0.71,
+        "factor": 0.25,
+        "difficultyBase": 163782.24,
+        "egoScale": 1,
+        "boss": true
+      }
+    ],
+    [
+      {
+        "id": "ep1a08:a08-o1",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-s1",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-c1",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-o2",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-o1-w1-r1",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-s1-w1-r2",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-o1-w2-1",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-s1-w2-2",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-c1-w2-3",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-o2-w2-4",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-o1-w2-r1",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:a08-s1-w2-r2",
+        "hp": 373.8735,
+        "maxHp": 593.4499999999999,
+        "ratio": 0.63,
+        "factor": 0.415,
+        "difficultyBase": 1430,
+        "egoScale": 1,
+        "boss": false
+      },
+      {
+        "id": "ep1a08:mb-ep1a08",
+        "hp": 79751.1476,
+        "maxHp": 112325.56,
+        "ratio": 0.71,
+        "factor": 0.25,
+        "difficultyBase": 270022.24,
+        "egoScale": 1,
+        "boss": true
+      }
+    ]
+  ],
+  "checks": [
+    {
+      "name": "EGO HP exact after 1 restore cycles",
+      "passed": false
+    },
+    {
+      "name": "EGO HP exact after 2 restore cycles",
+      "passed": false
+    },
+    {
+      "name": "EGO HP exact after 3 restore cycles",
+      "passed": false
+    },
+    {
+      "name": "normal maze ledger survives active EGO serialization",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "passed": false,
+  "sources": {
+    "index.html": "039e44c3ca2e25bfc04c58fc900cf09d6c17cd672c19c98ce4806890730e6fbd",
+    "dist/phase1.js": "116773be325f4193aabb4add4f1ea386f7045bb9b8ee4cb3aa0f694681788514",
+    "hospital-maze-layout.js": "5b4c3664c2e9b71cb4f74ddf7ecbaadbdc7594f27328df3d41244ad5de9d0d7a",
+    "hospital-maze-progression.js": "00c9b05cb3d02fbd8d6aec6acfb16cb1c401b510a2969564cc340518e749dd6c",
+    "hospital-maze-visuals.js": "1999652855366463e301d7112036b15288ef2425aa1808bb97557196e28790b9"
+  }
+}

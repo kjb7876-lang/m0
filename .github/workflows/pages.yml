@@ -27,7 +27,7 @@ jobs:
           python-version: '3.11'
       - name: Restore hash-verified runtime and exact inherited QA inputs
         run: |
-          python -m pip install Pillow==11.3.0
+          python -m pip install Pillow==11.3.0 pyoxipng==9.1.1
           python scripts/build-r96.py
           python scripts/prepare-r96-ci.py
           python r96/scripts/prepare-handoff-baselines.py
@@ -107,6 +107,8 @@ jobs:
         run: node r96/qa/r377/slayer-south-cpu-check.cjs
       - name: R389 slayer east (mirrored persona W) and toned south CPU check
         run: node r96/qa/r389/slayer-e-cpu-check.cjs
+      - name: R445 slayer north (rear) walk4 CPU check
+        run: node r96/qa/r445/slayer-walk-n-cpu-check.cjs
       - name: R356 Kairo homage (Seoha time-control passive, Kairo SFX) CPU check
         run: node r96/qa/r356/kairo-homage-cpu-check.cjs
       - name: R360 hospital ep1a08 unreachable-altar path miss memo CPU check
@@ -395,6 +397,10 @@ jobs:
         run: node r96/qa/r371/r371-cpu-check.cjs
       - name: R372 root gate boss entrance video CPU check
         run: node r96/qa/r372/r372-cpu-check.cjs
+      - name: R617 Hwando fall story videos CPU check
+        run: node r96/qa/r617/hwando-fall-video-cpu-check.cjs
+      - name: R619 pause game drawing while a full-screen story video is open
+        run: node r96/qa/r619/video-render-pause-cpu-check.cjs
       - name: R373 mob squads and leaders CPU check
         run: node r96/qa/r373/r373-cpu-check.cjs
 
@@ -406,6 +412,20 @@ jobs:
         run: node r96/qa/r378/r378-cpu-check.cjs
       - name: R380 user-approved mobs (moth, eggkeeper, guardian, mech spider) CPU check
         run: node r96/qa/r380/r380-cpu-check.cjs
+      - name: R531 purple-sword angel summons no oblivion spider CPU check
+        run: node r96/qa/r531/r531-cpu-check.cjs
+      - name: R541 soft synthesized pickup, mob death and door sounds CPU check
+        run: node r96/qa/r541/r541-cpu-check.cjs
+      - name: R542 user-provided bow, heal, crate and boss roar sounds CPU check
+        run: node r96/qa/r542/r542-cpu-check.cjs
+      - name: R543 pitch-shifted enemy growl and goblin voices plus distant thunder CPU check
+        run: node r96/qa/r543/r543-cpu-check.cjs
+      - name: R544 generated enemy-theme hit and death, per-hero hurt, level-up, click and boss-death sounds CPU check
+        run: node r96/qa/r544/r544-cpu-check.cjs
+      - name: R545 SFX comfort (150Hz high-pass and soft edges for every SFX buffer, softened R544 set) CPU check
+        run: node r96/qa/r545/r545-cpu-check.cjs
+      - name: R546 per-hero attack and skill sounds, blink, parry, EGO, awakening, clear, upgrade, fall, panel, portal and enemy-shot sounds CPU check
+        run: node r96/qa/r546/r546-cpu-check.cjs
       - name: R385 mob moves (review list v18 move/rename) CPU check
         run: node r96/qa/r385/r385-cpu-check.cjs
       - name: R390 cinema full narration + midboss hold + enemies keep chasing CPU check
@@ -426,20 +446,88 @@ jobs:
         run: node r96/qa/r412/r412-cpu-check.cjs
       - name: R425 combat flow (mob size bands, hit punch, spear tips, spider X moves, upright crosses, gunner 120deg, slayer poses + blood cross R / tornado Q) CPU check
         run: node r96/qa/r425/r425-cpu-check.cjs
+      - name: R585 slayer skill FX frame sheets (CX-0055 SL01-SL10, upright crosses, lag cap) CPU check
+        run: node r96/qa/r585/r585-cpu-check.cjs
+      - name: R586 slayer berserk chains (blood marks, W execution, E chain pull, no new keys) CPU check
+        run: node r96/qa/r586/r586-cpu-check.cjs
+      - name: R448 depth overlap (props in front cover the hero, hero silhouette shows through) CPU check
+        run: node r96/qa/r448/r448-cpu-check.cjs
+      - name: R461 cinema run (separate title entry, saved run mode, narrator hero lock) CPU check
+        run: node r96/qa/r461/r461-cpu-check.cjs
+      - name: R600 survival mode (pixel entry replaced, arena, narration-timed spawns, core, 3-choice upgrades, endless maps) CPU check
+        run: node r96/qa/r600/r600-cpu-check.cjs
+      - name: R463 seven-sins boss art (one form per fight, one body height, no cut-out broom) CPU check
+        run: node r96/qa/r463/r463-cpu-check.cjs
+      - name: R511 empty samong rooms get a guarded memory shard CPU check
+        run: node r96/qa/r511/samong-rooms-cpu-check.cjs
       - name: R434 readability (boss/midboss ground aura, calm HUD, one track title, hero palette rim) CPU check
         run: node r96/qa/r434/r434-cpu-check.cjs
       - name: R435 surfaces (floor anti-repeat noise, wall base AO + grime band, bright floor knee, wall height gradient + top edge light) CPU check
         run: node r96/qa/r435/r435-cpu-check.cjs
+      - name: R438 sin boss rooms tidy (no shared R224 furniture in boss rooms, zone-only furniture, no lamps mid-floor) CPU check
+        run: node r96/qa/r438/r438-cpu-check.cjs
+      - name: R449 props by room function (own wall clusters from map data per room name, R224 room furniture rested, empty junctions/yards/short corridors, same layout after load, cover fade) CPU check
+        run: node r96/qa/r449/r449-cpu-check.cjs
+      - name: R451 low stone wall borders laid as continuous straight runs (no lone single) CPU check
+        run: node r96/qa/r451/r451-cpu-check.cjs
+      - name: R452 one wall top, door frame 2.4 wrapped by a lintel with top face, void beyond walls near black CPU check
+        run: node r96/qa/r452/r452-cpu-check.cjs
+      - name: R455 flashlight is an opt-in sight mode, glow default on every map (samong school cone, maze text) CPU check
+        run: node r96/qa/r455/r455-cpu-check.cjs
+      - name: R441 lag (blocked memo per tick, R302 caller lookup without repeated full stacks, R409 outline cache by image address + bake budget per frame) CPU check
+        run: node r96/qa/r441/r441-cpu-check.cjs
+      - name: R537 spider cave mud-back spider and memory-carrier spider, swamp root stalker renamed CPU check
+        run: node r96/qa/r537/r537-cpu-check.cjs
+      - name: R450 zone weather (63 story zones indoor/outdoor/cave/void, dust instead of rain indoors, canon weather, double-sided streaks) CPU check
+        run: node r96/qa/r450/weather-r450-cpu-check.cjs
+      - name: R451 local light (wall-blocked light map, round pools, doorway leaks only, indoor flame -> bulb, light shoulder, old light layers yield) CPU check
+        run: node r96/qa/r451/local-light-r451-cpu-check.cjs
+      - name: R452 ground fringe (outdoor only, path/door/altar kept clear, room edge, approved weed art only, one draw) CPU check
+        run: node r96/qa/r452/ground-fringe-r452-cpu-check.cjs
+      - name: R453 actor tone (hero/mob brightness + saturation from the floor light, screen top-left rim, no asset swap, restored after draw) CPU check
+        run: node r96/qa/r453/actor-tone-r453-cpu-check.cjs
+      - name: R571 samong surge (during 사몽 only - skill cooldown x0.23, proc chance x1.77 capped 100%, skill range/area x1.77, restored after; hero main-colour flame aura, code only) CPU check
+        run: node r96/qa/r571/r571-cpu-check.cjs
+      - name: R572 samong hero themes (during 사몽 only - per-hero motif around the body + skill-hit marks, upright cross only, capped marks, code only) CPU check
+        run: node r96/qa/r572/r572-cpu-check.cjs
+      - name: R521 hospital rooms (ep1a08 wards/consult/prep/lobby furnished by room function along the back walls, presentation only, drive hospital props) CPU check
+        run: node r96/qa/r521/r521-cpu-check.cjs
+      - name: R561 gunner arms (기억사수 Q laser beam, W sniper, E rifle burst, R marked strike; engine originals held, save untouched) CPU check
+        run: node r96/qa/r561/r561-cpu-check.cjs
+      - name: R522 hospital thin walls (the two free-standing maze baffles of ep1a08 moved to touch a thick wall, hospital only, routes stay connected) CPU check
+        run: node r96/qa/r522/r522-cpu-check.cjs
+      - name: R523 story rooms (clinic ep1a09 + sloth home ep1b02 furnished by room name along the real back walls, presentation only, angle-matched art only) CPU check
+        run: node r96/qa/r523/r523-cpu-check.cjs
+      - name: R590 hwando sword chain (A draw-cut, Q wind blades, E delayed flash, R seven-strike finale; no new keys, walls/map edge, caps) CPU check
+        run: node r96/qa/r590/hwando-chain-cpu-check.cjs
+      - name: R601 enemy attack tempo (enemy attack body motion drawn 2x faster, strike frame kept on the damage moment, telegraphs on real time, no timing/damage change) CPU check
+        run: node r96/qa/r601/attack-tempo-cpu-check.cjs
+      - name: R492 lag (R409 outline bake by one distance transform instead of dozens of drawImage dilations; same rim rule, size, colours) CPU check
+        run: node r96/qa/r492/r492-cpu-check.cjs
+      - name: R493 lag (keep compiled shader programs pinned so material churn stops relinking the same programs) CPU check
+        run: node r96/qa/r493/r493-cpu-check.cjs
+      - name: R444 enemy facing authority (attack side = hitbox angle, walk = real displacement, strafe faces hero, no mob shadows) CPU check
+        run: node r96/qa/r444/r444-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
         run: node r96/qa/r430/r430-cpu-check.cjs
       - name: R431 boss-room center fights + theme boss skill 6s + touch status/DoT + black-flame prop throws CPU check
         run: node r96/qa/r431/r431-cpu-check.cjs
+      - name: R443 early-map height readability (camera-side ledge, R100 lid hidden in organic zones), rounded rock tips, clear door band, boss on the blue C marker CPU check
+        run: node r96/qa/r443/r443-cpu-check.cjs
+      - name: R438 Drive core24 remaining sheets (boss melee shockwave/cold wave, enrage, status onset, R230 blink wraith dash, heal, barrier, room cleanse) CPU check
+        run: node r96/qa/r438/fx-more-cpu-check.cjs
       - name: R413 door lintels up to the jamb wall top + R267 roof refit CPU check
         run: node r96/qa/r413/r413-cpu-check.cjs
       - name: R414 Drive buildings behind outdoor dream zones (>= 2x hero) CPU check
         run: node r96/qa/r414/r414-cpu-check.cjs
+      - name: R415 repaired Drive props CPU check
+        run: node r96/qa/r415/r415-cpu-check.cjs
       - name: R381 recorded narration voice (Qwen3-TTS Sohee) for cinema mode CPU check
         run: node r96/qa/r381/r381-cpu-check.cjs
+      - name: R454 samong prelude~S-07 recorded narration voice in cinema mode CPU check
+        run: node r96/qa/r454/samong-voice-cpu-check.cjs
+      - name: R615 heavy assets from the Cloudflare Pages asset project with GitHub Pages fallback (loader, pack, verify) CPU check
+        run: node r96/qa/r615/asset-cdn-cpu-check.cjs
       - name: R376 real difficulty + cinema HUD CPU check
         run: node r96/qa/r376/r376-cpu-check.cjs
       - name: R384 cinema narration timing + combat pacing CPU check
@@ -491,6 +579,66 @@ jobs:
         run: node r96/qa/r436/hwando-walk-s-cpu-check.cjs
       - name: R437 Neon Q mint chain lightning / Neon-Lauren side attacks / Neon portrait CPU check
         run: node r96/qa/r437/r437-cpu-check.cjs
+      - name: R439 Hwando attack blade-tip speck cleanup CPU check
+        run: node r96/qa/r439/hwando-tip-cpu-check.cjs
+      - name: R447 R74 ash moth flaps its wings while moving CPU check
+        run: node r96/qa/r447/mob-flap-cpu-check.cjs
+      - name: R440 heroes play their attack motion while casting skills CPU check
+        run: node r96/qa/r440/skill-attack-cpu-check.cjs
+      - name: R441/R442 Hwando diagonal walk uses side motion + enemy theme skills play attack pose CPU check
+        run: node r96/qa/r442/enemy-skill-diag-cpu-check.cjs
+      - name: R450 boss fight story beats (canon lines at engage/half/enrage/defeat) + wrath bear→wolves→dragon CPU check
+        run: node r96/qa/r450/battle-beats-cpu-check.cjs
+      - name: R462 mobs without a death motion burn away or burst in blood and leave a corpse CPU check
+        run: node r96/qa/r462/mob-death-cpu-check.cjs
+      - name: R532 mob death tears/bursts into own-art pieces, corpse keeps body art, hit flinch without paper squash CPU check
+        run: node r96/qa/r532/r532-cpu-check.cjs
+      - name: R660 mob death lag (no per-frame tint canvases; recorder filters via ctx.filter, 2D filters stepped) CPU check
+        run: node r96/qa/r660/death-lag-cpu-check.cjs
+      - name: R481 outdoor groves (understory around trees, small woods on bare back rims) CPU check
+        run: node r96/qa/r481/grove-r481-cpu-check.cjs
+      - name: R482 worn trails from entry to doors/altar on outdoor floors CPU check
+        run: node r96/qa/r482/trail-r482-cpu-check.cjs
+      - name: R501 settings conflicts (title settings kept after continue, flashlight box drives the sight mode) CPU check
+        run: node r96/qa/r501/r501-cpu-check.cjs
+      - name: R502 L key sight cycle skips the invisible auto step (glow, full, torch, flashlight) CPU check
+        run: node r96/qa/r502/r502-cpu-check.cjs
+      - name: R471 sin bosses throw the objects the canon names (sloth heap/fridge/sofa/bed pending, envy glass) instead of room furniture CPU check
+        run: node r96/qa/r471/canon-throw-cpu-check.cjs
+      - name: R472 chairman enrage seals the hero's sight (canon eyes and body sealed), lifts on scene/death/room change CPU check
+        run: node r96/qa/r472/seal-vision-cpu-check.cjs
+      - name: R473 Balrog meteors fall along the sword's slash line (canon sword splits space, fireballs pour) CPU check
+        run: node r96/qa/r473/balrog-tear-cpu-check.cjs
+      - name: R474 swamp hands rise under the hero and bind the ankles in the swamp lord fight (dodge by stepping away) CPU check
+        run: node r96/qa/r474/swamp-hands-cpu-check.cjs
+      - name: R568 boss cinematic CPU check
+        run: node r96/qa/r568/boss-cinematic-cpu-check.cjs
+      - name: R535 hunter Q storm tracking, Z ember-thorn split and burn, C twisted thorn lance blast (no new keys, chained) CPU check
+        run: node r96/qa/r535/hunter-arrows-cpu-check.cjs
+      - name: R597 hold A to auto-cast Q W E R F T with basic attack (S D stay manual, keeps manual 77 percent bonus) CPU check
+        run: node r96/qa/r597/auto-a-cpu-check.cjs
+      - name: R663 QWER locked until learned with passive points, skill level widens range (+8 percent per level), auto-level buys QWER and silk dances CPU check
+        run: node r96/qa/r663/skill-growth-cpu-check.cjs
+      - name: R561 Lauren gravity chain (Q → gravity well pull → collapse burst, R → crush vortices; no new keys, bosses not pulled, walls respected) CPU check
+        run: node r96/qa/r561/lauren-gravity-cpu-check.cjs
+      - name: R562 Neon toxic chain (Q → second-stage mint arcs + poison + toxic pool, R → big pool; no new keys, caps, Dots NE-01·02·03 sheets) CPU check
+        run: node r96/qa/r562/neon-toxic-cpu-check.cjs
+      - name: R613 mobs with a single walking image get a distance-synced step gait until Dots walk sheets arrive (CX-0067MV) CPU check
+        run: node r96/qa/r613/r613-cpu-check.cjs
+      - name: R615b faceless student (samong S-02) walks with the Dots CX-0067MV 8-frame sheet CPU check
+        run: node r96/qa/r615/student-cpu-check.cjs
+      - name: R620 boss motion CPU check
+        run: node r96/qa/r620/r620-cpu-check.cjs
+      - name: R563 Michaela genesis chain (Q → sky light pillars, R → grand pillar + halo; no new keys, upright cross only, Dots MI sheets) CPU check
+        run: node r96/qa/r563/michaela-genesis-cpu-check.cjs
+      - name: R564 Seoha chrono chain (time stop shell + shatter, afterimage clones, haste; no new keys, caps, Dots SE sheets) CPU check
+        run: node r96/qa/r564/seoha-chrono-cpu-check.cjs
+      - name: R440 Hwando hit pose (no old art) and hero rim blade cleanup CPU check
+        run: node r96/qa/r440/r440-cpu-check.cjs
+      - name: R596 leftover rift rings, tower silhouette shadow, mob health line over head CPU check
+        run: node r96/qa/r596/r596-cpu-check.cjs
+      - name: R446 seven pillars moved to their own map as stationary attacking towers CPU check
+        run: node r96/qa/r446/r446-cpu-check.cjs
       - name: R352 orphaned field-wave enemies wake near the hero CPU check
         run: node r96/qa/r352/wave-orphans-cpu-check.cjs
       - name: R280 stranded required enemy rescue and 777 forward range CPU check
@@ -556,6 +704,30 @@ jobs:
           node scripts/r96.browser.mjs
       - name: Revalidate every release byte after all tests
         run: python scripts/verify-r96-release.py
+      - name: R580 Pages bundle under the size budget in pages-exclude.json (1.1GB since R454 narration, archival narration excluded, lossless PNG, pixel-identical, public verifier)
+        run: python r96/qa/r580/pages-size-check.py
+      - name: R580 public verifier retries transient read timeouts/disconnects but still fails wrong, missing or never-arriving bytes
+        run: |
+          python scripts/pages-pack.py --site r96/hospital-three-pc/site --out "$RUNNER_TEMP/r580-pages"
+          python r96/qa/r580/public-retry-check.py "$RUNNER_TEMP/r580-pages"
+          rm -rf "$RUNNER_TEMP/r580-pages"
+      - name: R580 pack the Pages bundle from the verified site
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: python scripts/pages-pack.py --site r96/hospital-three-pc/site --out r96/hospital-three-pc/pages
+      - name: R615 pack heavy assets for the Cloudflare Pages asset project (free plan, no payment method; 20,000 files / 25MiB per file)
+        run: python scripts/cdn-pack.py --site r96/hospital-three-pc/site --out "$RUNNER_TEMP/r615-cdn"
+      - name: R615 upload heavy assets to Cloudflare Pages and verify them publicly (main only; skipped until repo secrets exist; the game falls back to GitHub Pages)
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        continue-on-error: true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then echo "R615: Cloudflare secrets not set, upload skipped (game keeps using GitHub Pages)"; exit 0; fi
+          PROJECT=$(python -c "import json;print(json.load(open('r96/asset-cdn.json'))['project'])")
+          npx --yes wrangler@4.154.0 pages project list | grep -q "$PROJECT" || npx --yes wrangler@4.154.0 pages project create "$PROJECT" --production-branch main
+          npx --yes wrangler@4.154.0 pages deploy "$RUNNER_TEMP/r615-cdn" --project-name "$PROJECT" --branch main --commit-dirty=true
+          python scripts/cdn-verify.py --pack "$RUNNER_TEMP/r615-cdn"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -572,7 +744,7 @@ jobs:
       - uses: actions/upload-pages-artifact@v4
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         with:
-          path: r96/hospital-three-pc/site
+          path: r96/hospital-three-pc/pages
           retention-days: 1
   deploy:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'

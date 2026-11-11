@@ -50,7 +50,8 @@ check('multi-narrator zones split into segments ('+multi.length+')',multi.length
 const sctx={window:{}};vm.createContext(sctx);vm.runInContext(fs.readFileSync(R('r96/client-source/samong-text-r103.js'),'utf8'),sctx);
 const ST=sctx.window.__STORYWORLD_SAMONG_TEXT_R103__;
 // R115: 사몽~진료기록은 전편총집본(sha256 4db94112…)으로 만든다. 스토리 모드는 위 canon 그대로다.
-const SAMONG_SHA=SHA,samongCanon=fs.readFileSync(R('story-source/hapil-canon-20261101.txt'));
+// R448: 사몽 ②(서문~S-07)만 회상 진행형 어미 손질(115문장, 문단·구간·문단 첫머리 그대로)한 정본으로 만든다. 스토리 모드는 위 SHA(R180) 그대로다.
+const SAMONG_SHA='dc0100ea6da3c4f3b879fea721f91537e0b96d1d51ba907fe605e30796604c8c',samongCanon=fs.readFileSync(R('story-source/hapil-canon-r448-samong-aspect.txt'));
 check('사몽 canon file hash is the 총집본',sha(samongCanon)===SAMONG_SHA,sha(samongCanon));
 const samongNorm=norm(samongCanon.toString('utf8').replace(/\r\n/g,'\n'));
 check('사몽 text module built from the 총집본',ST?.sha256===SAMONG_SHA&&Object.keys(ST.sections).length===45,ST?.sha256+' '+Object.keys(ST?.sections||{}).length);

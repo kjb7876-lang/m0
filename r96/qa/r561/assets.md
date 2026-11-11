@@ -1,0 +1,20 @@
+# R561 자산 적용표
+
+| 자산 | 원본 | 경로·해시(SHA-256) | 크기 | 용도 | 적용 |
+|---|---|---|---|---|---|
+| gunner-bombard-meteor.webp | R411 보스 boss-meteor 시트(드라이브 core24, 원본 SHA-256 abb71df0…c541)를 hero-fx-recolor 스레드가 코발트 사다리로 재색 (/mnt/project-files/hero-fx-recolor/sheets) | runtime-text/assets/r561/gunner-bombard-meteor.webp · SHA-256 7e12057401e2f6ad08e2853117302638a024bf1e94bbefdaeaf7b2cb0ed183bc | 184,656 B, 1152×768 (192칸 6×4, 24장 12.5fps) | 기억사수 R 기억 소거 폭격 낙하·착탄·연기 (착탄 10번째 장을 1.6초 폭발에 맞춤) | 적용 |
+| gunner-q-beam.webp | Dots CX-0059G r2 GN01-beam-r2-DRAFT-v1.png(원본 SHA-256 c0063373…) → 이펙트 스레드 손질(/mnt/project-files/hero-fx-recolor/gunner-r2-20261110) | runtime-text/assets/r561/gunner-q-beam.webp · SHA-256 ac8cb41ea722c9936cfec457e06eefb6c2684c745661b09d62df95a7974507c3 | 329,404 B, 칸 512×128 6×4, 24장 12.5fps | Q 몸통, 겨눈 각으로 돌려 가로 반복 + 가는 흰 심 코드 한 줄 | 적용 |
+| gunner-q-muzzle.webp | Dots CX-0059G r2 GN02-muzzle-r2-DRAFT-v1.png(원본 SHA-256 827d02b4…) → 이펙트 스레드 손질(/mnt/project-files/hero-fx-recolor/gunner-r2-20261110) | runtime-text/assets/r561/gunner-q-muzzle.webp · SHA-256 4de86f3864bdc30f463aff70eb167b5018dfe34b4a9218d3b5b9a20d39631943 | 249,586 B, 칸 256×256 6×4, 24장 12.5fps | Q 총구 — 0~5칸을 0.18초 충전에, 6번째 칸(발사)을 첫 타격에 | 적용 |
+| gunner-q-impact.webp | Dots CX-0059G r1 CX-0059G_r1_GN02-impact_DRAFT_v1.png(원본 SHA-256 412e4724…) → 이펙트 스레드 손질(/mnt/project-files/hero-fx-recolor/dots-r1-20261110) | runtime-text/assets/r561/gunner-q-impact.webp · SHA-256 19c30b465889a404619cbd00f6806df1068569dedfed2fac04690cf835d1704e | 376,070 B, 칸 224×224 6×4, 20장 12.5fps | Q 끝점 충돌, 20장 반복 | 적용 |
+| gunner-r-blast.webp | Dots CX-0059G r2 GN04-blast-r2-DRAFT-v1.png(원본 SHA-256 16bfa36c…) → 이펙트 스레드 손질(/mnt/project-files/hero-fx-recolor/gunner-r2-20261110) | runtime-text/assets/r561/gunner-r-blast.webp · SHA-256 c8d8a4b0eac1b210b477f0725017ecdd6947cffdf4c944d892e84c572e7db1d6 | 288,400 B, 칸 256×256 6×4, 24장 12.5fps | R 빛기둥·폭발·버섯 연기 — 타격 4번째 칸을 1.6초 폭발에(낙하 시트는 대체 시 예비) | 적용 |
+| gunner-w-tracer.webp | Dots CX-0059G r2 GN05-tracer-DRAFT-v1.png(원본 SHA-256 9f2dffbc…) → 이펙트 스레드 손질(/mnt/project-files/hero-fx-recolor/gunner-r2-20261110) | runtime-text/assets/r561/gunner-w-tracer.webp · SHA-256 35fe37b907204e13ad6472729448224cd31400155354bc4252b6beda41e9fcce | 66,086 B, 칸 512×128 6×4, 24장 12.5fps | W 저격 탄도, 총구→착탄 길이로 늘림 | 적용 |
+| gunner-w-impact.webp | Dots CX-0059G r2 CX-0059G_r1_GN06-impact_DRAFT_v1.png(원본 SHA-256 6bc9af79…) → 이펙트 스레드 손질(/mnt/project-files/hero-fx-recolor/gunner-r2-20261110) | runtime-text/assets/r561/gunner-w-impact.webp · SHA-256 c4c9533225cc45ca55a7d0dfe1b681f17228573ebc16557c83a0e2a8f39112fb | 163,892 B, 칸 256×256 6×4, 24장 12.5fps | W 착탄 파편·고리 | 적용 |
+| gunner-e-rifle.webp | Dots CX-0059G r2 GN07-rifle-DRAFT-v1.png(원본 SHA-256 cf5dc2bc…) → 이펙트 스레드 손질(/mnt/project-files/hero-fx-recolor/gunner-r2-20261110) | runtime-text/assets/r561/gunner-e-rifle.webp · SHA-256 bf4da2825685ba466cc3b8a663636fd90d9d16846e90f5cf1be26df4899e16ca | 38,322 B, 칸 256×256 6×4, 24장 12.5fps | E 연사 한 발마다 총구·예광 0~3칸 | 적용 |
+| gunner-w-muzzle.webp | Dots CX-0059G_추가2 r3 gunner-w-sniper-muzzle.png(원본 SHA-256 7a3f29c1…) → 이펙트 스레드 손질(/mnt/project-files/hero-fx-recolor/dots-r2-20261110, 안개 알파 걷음) | runtime-text/assets/r561/gunner-w-muzzle.webp · SHA-256 57193a52707cd50b56fdc46a67a43830422fab2f6793a69e27ec98c20cd63391 | 20,856 B, 칸 256×256 6×4, 24장 12.5fps, 피벗 (65,136), 맞는 칸 1 | W 저격 발사 순간 총구 섬광(맞는 칸을 발사에) | 적용 |
+| gunner-e-casings.webp | Dots CX-0059G_추가2 r3 gunner-ejected-casing.png(원본 SHA-256 8a7dbcd5…) → 이펙트 스레드 손질(같은 폴더, 안개 걷음, 16장) | runtime-text/assets/r561/gunner-e-casings.webp · SHA-256 a05669728c6403de90e20973ae57dc69b253d69e1041bc4609a825913aa01ab7 | 20,002 B, 칸 256×256 6×4, 16장, 피벗 (128,200) | E 연사 한 발마다 탄피(20fps, 0.8초, 총 반대쪽) | 적용 |
+| gunner-r-mark.webp (r1 GN-03) | 손질본 | — | — | R 조준 고리 — 전후 비교에서 코드 고리보다 흐려 위험 표시가 약함 | 쓰지 않음 |
+| gunner-w-muzzle.webp (r1 GN-06) | 임시 배경 키 손질본 | — | — | Dots 투명 재출력(CX-0059G_추가2) 대기, 코드 섬광 유지 | r3 으로 대체(위 행) |
+| gunner-e-casings.webp (r1 GN-08) | 손질본 | — | — | 탄피가 너무 커서 Dots 재작업(추가2) 대기, 코드 탄피 유지 | r3 으로 대체(위 행) |
+
+임시: R 조준 고리만 R106 칠한 스프라이트 코드 그림(Dots r-mark 보다 위험 표시가 잘 읽혀 유지). W 총구·E 탄피는 r3 시트(11-10 08:54Z)로 바꿈.
+
