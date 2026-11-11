@@ -34718,6 +34718,46 @@
       "sha256": "813ca4997f09bcdff3b53194557334a7499975dd06851031f84d12485f45a1da"
     },
     {
+      "path": "assets/r763/villagers/fisher-atk.webp",
+      "bytes": 116646,
+      "sha256": "e182d59b608781f0b6414954b67dda3995eddceadf3061db40937e2b59311f9d"
+    },
+    {
+      "path": "assets/r763/villagers/fisher-death.webp",
+      "bytes": 92820,
+      "sha256": "4fbd138e94adbebd00514a54ccc42ab2852c412af23ec8afaf07367719781b99"
+    },
+    {
+      "path": "assets/r763/villagers/fisher-hit.webp",
+      "bytes": 56624,
+      "sha256": "54213790a3af7cd657c55da9fe594bd3bee672fff16ca3c22a330eb3b5ed31ee"
+    },
+    {
+      "path": "assets/r763/villagers/fisher-idle.webp",
+      "bytes": 84138,
+      "sha256": "0f97125a95663f1e47cc86ca8b2336d1b38bf825a88672c608da7432743c957d"
+    },
+    {
+      "path": "assets/r763/villagers/fisher-walk.webp",
+      "bytes": 102212,
+      "sha256": "123c07cc2f6a3abd4bf16df0661b320bf26271f9c766c2b2a8a38fde3bd70912"
+    },
+    {
+      "path": "assets/r763/villagers/herbwife-atk.webp",
+      "bytes": 74358,
+      "sha256": "20a02f34c5e5386d947d5d2735cd57e6050a26a0fa264174a90a4a86e989b525"
+    },
+    {
+      "path": "assets/r763/villagers/herbwife-idle.webp",
+      "bytes": 56064,
+      "sha256": "3055017b5a16279659b666b203b4dd1f28b63abdac03c5af5ad8ac25ee3e46de"
+    },
+    {
+      "path": "assets/r763/villagers/herbwife-walk.webp",
+      "bytes": 69580,
+      "sha256": "81bfd983b0bc35f7d225491f4678ae70cc07d8f6d6fbea9749dc6526cbafc059"
+    },
+    {
       "path": "assets/r91/death/death-crystal-core.png",
       "bytes": 252893,
       "sha256": "3a7fdf719f776526d6c7f2d88607cfe88851d8d4e4989b019fd2331c746de467"
@@ -42764,8 +42804,8 @@
     },
     {
       "path": "bulmyeongwi-r760.js",
-      "bytes": 16683,
-      "sha256": "3566902a87531197df0fc9289b2e1871b20acede3e57b8b192c4ccf16617e049"
+      "bytes": 29835,
+      "sha256": "5db25f5b3ad23dbb8c99a7cfe45e5b7f7f7ff3d3e00075be5c34d372d4962fdd"
     },
     {
       "path": "canon-throw-r471.js",
@@ -43969,8 +44009,8 @@
     },
     {
       "path": "mob-unique-r248.js",
-      "bytes": 17430,
-      "sha256": "1f902a98e29107d1484cd12bff7d73adf73ab78091b14383d13b093bc1958679"
+      "bytes": 17585,
+      "sha256": "cc445493f7a25c4451cd253d25b9fc14d57db9f7676104f727d36923a79ea5b3"
     },
     {
       "path": "mobile-bonus-r286.js",
@@ -44733,8 +44773,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8946,
-  "totalBytes": 1231830281,
+  "fileCount": 8954,
+  "totalBytes": 1232496030,
   "webHTMLSha256": "d8bef146aec9863ec63a5a3150cab3c47344631e13664b5969cd73d490e68348",
   "largest": [
     {
