@@ -30,7 +30,7 @@ function world(){
  sb.draw=function(){sb.drawnHero.push({x:sb.player.x,y:sb.player.y});};
  sb.fxs=[];sb.fx=function(type,x,y,o){sb.fxs.push({type,x,y,o});return null;};sb.heroArt={hwando:{attack:{right:'atk/r.webp',left:'atk/l.webp',front:'atk/f.webp'}},seoha:{attack:{right:'atk/sr.webp'}},michaela:{attack:{right:'atk/mr.webp'}}};
  sb.drawEnemy=e=>sb.drawnEnemy.push({id:e.id,dir:e.direction});
- sb.drawHero=()=>sb.drawnHero.push({dir:sb.player.direction});
+ sb.drawHero=()=>sb.drawnHero.push({dir:sb.player.direction,cx:sb.player.x,cy:sb.player.y,a:sb.ctx?sb.ctx.globalAlpha:1});
  sb.hitEnemy=(e,v)=>{e.hp-=v;return true;};sb.drawEffect=()=>{};sb.drawExits=()=>{};
  class DrawCommands{constructor(){this.commands=[];this.dpr=1;}point(x,y){return[x,y];}scope(owner,fn){return fn();}}
  sb.StoryPhase1={DrawCommands};
@@ -57,8 +57,11 @@ const foe=(id,x,y,o={})=>Object.assign({id,x,y,hp:50,maxHp:50,damage:5,spawnStat
  // R767(사용자 2026-11-11 "영웅을 적에게 옮기는 스킬은 순간적으로 분신이 적에게 간 다음 스킬 적중시키고 분신은 사라지게"): 근접 영웅도 제자리에 그리고 끝나면 제자리,
  //  실제 베는 자리에는 짧은 분신(ghost)만 — 옛 '근접 실검무 그대로'(13.4 로 옮겨 그림) 기대를 바꿈
  check('R767 melee hero (hwando) drawn at its own spot during 실검무',sb2.drawnHero.at(-1).x===10&&sb2.drawnHero.at(-1).y===10,JSON.stringify(sb2.drawnHero.at(-1)));
- const g=sb2.fxs.filter(f=>f.type==='ghost');check('R767 a short clone (ghost, attack pose, life ≤ .3 s) appears where the strike really is',g.length>=1&&g.every(f=>Math.abs(f.x-13.4)<1e-9&&f.y===12&&f.o.life<=.3&&/atk/.test(f.o.asset||'')),JSON.stringify(g));
- for(let i=0;i<4;i++)sb2.tick(.05);check('R767 clones are throttled (≤ 1 per 0.08 s while dancing)',sb2.fxs.filter(f=>f.type==='ghost').length<=4,sb2.fxs.filter(f=>f.type==='ghost').length);
+ const CL=sb2.__STORYWORLD_CLONE_R767__,g=CL?CL.list():[];check('R767 a short clone (life ≤ .3 s, translucent) is queued where the strike really is',g.length>=1&&g.every(c=>Math.abs(c.x-13.4)<1e-9&&c.y===12&&c.life<=.3&&c.alpha>0&&c.alpha<1),JSON.stringify(g));
+ // 분신 그리기: 진짜 drawHero 를 분신 자리에서 반투명으로 한 번 더(영웅 자리·상태는 그대로 돌려놓음)
+ {sb2.ctx={globalAlpha:1,_s:[],save(){this._s.push(this.globalAlpha);},restore(){this.globalAlpha=this._s.pop();}};const P=sb2.player,kx=P.x,ky=P.y,n0=sb2.drawnHero.length;sb2.drawHero();const d=sb2.drawnHero.slice(n0),cl=d.slice(1).filter(c=>Math.abs(c.cx-13.4)<1e-9);/* d[0] = 진짜 영웅 */
+  check('R767 clone is drawn through drawHero at the clone spot with alpha < 1, hero restored after',cl.length>=1&&cl.every(c=>c.a<1&&c.a>0)&&P.x===kx&&P.y===ky&&sb2.ctx.globalAlpha===1,JSON.stringify(d));}
+ for(let i=0;i<4;i++)sb2.tick(.05);check('R767 clones are capped (≤ 6 live)',CL.live()<=6,CL.live());
  sb2.danceOn=false;sb2.tick(.05);check('R767 melee hero back on its own spot when 실검무 ends (no teleport onto the enemy)',sb2.player.x===10&&sb2.player.y===10,[sb2.player.x,sb2.player.y]);}
 
 // ② facing

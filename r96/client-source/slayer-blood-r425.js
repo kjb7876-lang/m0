@@ -63,7 +63,8 @@ function manualInput(){try{const k=typeof keys==='object'&&keys?keys:null,j=type
 let lastChase=0;
 function cloneStrike(p,e,d){const v={x:(e.x-p.x)/d,y:(e.y-p.y)/d},gx=e.x-v.x*.7,gy=e.y-v.y*.7;let dir='front';try{if(typeof facing==='function')dir=facing(v.x,v.y);}catch(_){}
  let asset=null;try{const A=typeof heroArt!=='undefined'?heroArt[HERO]:null;asset=A&&A.attack&&(A.attack[dir]||A.attack.front)||null;}catch(_){}
- try{if(asset&&typeof fx==='function')fx('ghost',gx,gy,{asset,life:.3,size:1,r767:true});}catch(err){fail(err);}
+ /* 분신: R767 공용 그리기(진짜 영웅 그림을 반투명으로 한 번 더) — 영웅에서 적 쪽 잔상 둘(.15초) + 적 앞 본체(.3초). 없으면 엔진 ghost */
+ try{const CL=window.__STORYWORLD_CLONE_R767__;if(CL?.spawn){for(const k of [.4,.7])CL.spawn(p.x+(gx-p.x)*k,p.y+(gy-p.y)*k,{life:.15,alpha:.3,dir});CL.spawn(gx,gy,{life:.3,alpha:.65,dir});}else if(asset&&typeof fx==='function')fx('ghost',gx,gy,{asset,life:.3,size:1,r767:true});}catch(err){fail(err);}
  try{if(typeof hitEnemy==='function')hitEnemy(e,(typeof attackPower==='function'?attackPower():48),{kind:'r425-clone',friendly:true,owner:'hero',r425:'clone',sourceHero:HERO,attackKind9:'basic'});}catch(err){fail(err);}
  blood('blood-burst',e.x,e.y,{k:.8,z:0});p.attackCD=Math.max(p.attackCD||0,.48);try{p.direction=dir;}catch(_){}stats.cloneStrikes=(stats.cloneStrikes||0)+1;}
 function chase(){const p=player,t=T();const dt=Math.min(.05,Math.max(0,t-lastChase));lastChase=t;if(manualInput()||(typeof modal!=='undefined'&&modal))return;

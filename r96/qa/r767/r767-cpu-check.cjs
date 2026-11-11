@@ -16,6 +16,7 @@ function slayerEnv(foes,opt={}){const hits=[],fxs=[],swings=[];
  env.moveActor=(a,dx,dy)=>{a.x+=dx;a.y+=dy;};
  env.basicAttack=()=>{swings.push(env.time);env.player.attackCD=.48;};
  env.hitEnemy=(e,a,s)=>{hits.push({id:e.id,a,s});e.hp-=a;return true;};
+ if(opt.clone){env.__cl=[];env.__STORYWORLD_CLONE_R767__={spawn:(x,y,o)=>{env.__cl.push({x,y,o});return true;}};}
  vm.createContext(env);vm.runInContext(C('slayer-blood-r425.js'),env);
  const S=env.__STORYWORLD_SLAYER_BLOOD_R425__;
  env.fx('storySourceSkill',0,0,{storyWER:true,sourceHero:'slayer',sourceSlot:'r',stage:'warning',castId:1});
@@ -29,8 +30,10 @@ const foe=(id,x,y)=>({id,name:'몹',x,y,hp:1e6,maxHp:1e6,spawnState:'active',rad
  ok('aura, far enemy (5 tiles): the hero does NOT walk to it (position unchanged)',T.env.player.x===0&&T.env.player.y===0,{x:T.env.player.x,y:T.env.player.y});
  ok('aura, far enemy: a clone strike hits it (r425 "clone", friendly hero damage)',clone.length>=1&&clone.every(h=>h.s.friendly===true&&h.s.owner==='hero'&&h.a>0),clone.slice(0,2));
  const g=T.fxs.filter(f=>f.type==='ghost');
- ok('aura, far enemy: the clone is a short ghost of the slayer attack pose drawn next to the enemy, then gone (life ≤ .4 s)',g.length>=1&&g.every(f=>Math.hypot(f.x-5,f.y)<1.2&&f.o&&/a\//.test(f.o.asset||'')&&f.o.life>0&&f.o.life<=.4),g.slice(0,2));
+ ok('aura, far enemy: the clone is a short ghost of the slayer attack pose (fallback without the shared drawer: engine ghost) drawn next to the enemy, then gone (life ≤ .4 s)',g.filter(f=>Math.hypot(f.x-5,f.y)<1.2).length>=1&&g.every(f=>f.o&&/a\//.test(f.o.asset||'')&&f.o.life>0&&f.o.life<=.4),g.slice(0,2));
  ok('aura, far enemy: clone strikes keep the basic-attack rhythm (≤ 1 per 0.45 s)',clone.length<=Math.ceil(1.2/.45)+1,{n:clone.length});}
+// 공용 분신 그리기(R767 play-r113)가 있으면 그쪽으로: 적 앞 본체 + 영웅→적 잔상
+{const T=slayerEnv([foe('far',5,0)],{clone:true});T.run(.6);const L=T.env.__cl;ok('with the shared clone drawer: a clone body is queued in front of the enemy plus a short trail from the hero, no engine ghosts',L.length>=3&&L.some(c=>Math.hypot(c.x-4.3,c.y)<.05&&c.o.life<=.4&&c.o.alpha>=.5)&&L.some(c=>c.x>.5&&c.x<4)&&!T.fxs.some(f=>f.type==='ghost'),L.slice(0,4));}
 // 가까운 적: 제자리 기본 공격(이동 없음)
 {const T=slayerEnv([foe('near',1,0)]);T.run(1);ok('aura, enemy in reach: basic attack in place, no clone, no move',T.swings.length>=1&&!T.hits.some(h=>h.s&&h.s.r425==='clone')&&T.env.player.x===0,{sw:T.swings.length});}
 // 손 입력 중엔 아무것도 하지 않는다

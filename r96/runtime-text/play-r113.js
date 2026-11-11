@@ -54,10 +54,11 @@ function blinkAway(base,args){const j=typeof joystickVector!=='undefined'?joysti
 const dance={anchor:null,cam:null,cloneAt:-9};
 // R767(사용자 2026-11-11 "영웅을 적에게 옮기는 스킬은 순간적으로 분신이 적에게 간 다음 스킬 적중시키고 분신은 사라지게"): 실검무 고정점을 근접 영웅에도 —
 //  영웅은 제자리에 그려지고 끝나면 제자리, 실제로 베는 자리에는 0.25초짜리 분신(엔진 ghost 잔상, 공격 자세)만 0.08초마다 남긴다. 피해·표적·시간은 그대로.
+const clones=[];let cloneBusy=false;
+function spawnClone(x,y,opt={}){if(!Number.isFinite(x)||!Number.isFinite(y))return false;if(clones.length>=6)clones.shift();clones.push({x,y,t0:now(),life:opt.life||.3,alpha:opt.alpha??.62,dir:opt.dir||null});return true;}
 const anchorHero=p=>!!p&&(isRanged(p)||prefs.cloneDance!==false);
 function danceClone(){const t=now();if(t-dance.cloneAt<.08||lowFx()&&t-dance.cloneAt<.16)return;let dir='front';try{if(typeof facing==='function'&&dance.anchor)dir=facing(player.x-dance.anchor.x,player.y-dance.anchor.y);}catch(_){}
- let asset=null;try{const A=typeof heroArt!=='undefined'?heroArt[player.hero]:null;asset=A&&A.attack&&(A.attack[dir]||A.attack.front||A.attack.right)||null;}catch(_){}
- if(!asset||typeof fx!=='function')return;dance.cloneAt=t;try{fx('ghost',player.x,player.y,{asset,life:.25,size:1,r767:true});stats.danceClones=(stats.danceClones||0)+1;}catch(e){fail(e);}}
+ dance.cloneAt=t;try{spawnClone(player.x,player.y,{life:.25,alpha:.6,dir});stats.danceClones=(stats.danceClones||0)+1;}catch(e){fail(e);}}
 const DANCES=()=>window.__STORYWORLD_DANCES_R74__;
 const dancing=()=>{try{return !!DANCES()?.nativeActive?.(player);}catch(_){return false;}};
 
@@ -209,6 +210,11 @@ function install(){
   const ox=player.x,oy=player.y;player.x=anc.x;player.y=anc.y;try{return drawBase.apply(this,a);}finally{player.x=ox;player.y=oy;}};
  if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){if(!prefs.facing||!live()||!inFight(e)||window.__STORYWORLD_ENEMY_FACE_R444__?.owns?.(e))return base.call(this,e,...a);/* R444 이 맡은 몹은 그쪽이 정한다 */
   const keep=e.direction;try{e.direction=enemyFace(e);stats.enemyFaced++;}catch(err){fail(err);return base.call(this,e,...a);}try{return base.call(this,e,...a);}finally{e.direction=keep;}};}
+ // R767 분신: 진짜 영웅 그리기(가장 바깥 drawHero)를 분신 자리에서 한 번 더 — 반투명·짧게. 엔진 ghost(알파 .32·옛 그림)는 거의 안 보여 이걸 쓴다.
+ if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const r=base.apply(this,a);if(cloneBusy||!clones.length||!live())return r;cloneBusy=true;const t=now(),P=player,keep={x:P.x,y:P.y,direction:P.direction,attackAnim:P.attackAnim,invincible:P.invincible,moving:P.moving};
+  try{for(const c of clones){const k=(t-c.t0)/c.life;if(k<0||k>=1)continue;P.x=c.x;P.y=c.y;if(c.dir)P.direction=c.dir;P.attackAnim=Math.max(.05,.24*(1-k));P.invincible=0;P.moving=false;
+   let sv=false;try{if(typeof ctx!=='undefined'&&ctx){ctx.save();sv=true;ctx.globalAlpha=(ctx.globalAlpha??1)*c.alpha*(1-k*k);}drawHero();stats.cloneDraws=(stats.cloneDraws||0)+1;}catch(e){fail(e);}finally{if(sv)ctx.restore();}}}
+  finally{Object.assign(P,keep);cloneBusy=false;for(let i=clones.length-1;i>=0;i--)if(t-clones[i].t0>=clones[i].life)clones.splice(i,1);}return r;};}
  if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){if(!prefs.facing||!live()||player.hp<=0)return base.apply(this,a);let want=null;try{want=heroFace();}catch(err){fail(err);}
   if(!want)return base.apply(this,a);const keep=player.direction;player.direction=want;stats.heroFaced++;try{return base.apply(this,a);}finally{player.direction=keep;}};}
  if(typeof fx==='function'){const base=fx;fx=function(type,x,y,o,...a){if(type==='threadSlashR63'&&dance.anchor&&o?.threadR63&&prefs.ranged)try{o={...o,threadR63:{...o.threadR63,from:{x:dance.anchor.x,y:dance.anchor.y}}};}catch(e){fail(e);}return base.call(this,type,x,y,o,...a);};}
@@ -218,5 +224,6 @@ function install(){
  if(!installGround())setTimeout(()=>{try{installGround();}catch(e){fail(e);}},0);
 }
 try{install();}catch(e){fail(e);}
+window.__STORYWORLD_CLONE_R767__=Object.freeze({spawn:spawnClone,live:()=>clones.length,list:()=>clones.map(c=>({...c}))});
 window.__STORYWORLD_PLAY_R113__=Object.freeze({revision:REV,set,prefs:()=>({...prefs}),stats:()=>({...stats,parts:parts.length,failures,lastError}),dance:()=>({...dance}),particles:()=>parts.length,popAt,knock});
 })();
