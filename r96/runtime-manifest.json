@@ -42479,8 +42479,8 @@
     },
     {
       "path": "auto-levelup-r237.js",
-      "bytes": 9795,
-      "sha256": "b22b944730a6b92acb99e5b14dd7976961fec97118bcaab9b5570718bc36bdc9"
+      "bytes": 9985,
+      "sha256": "de44a2093a7fa97913a06c157b37823c640cf1ed286364506d5eb4a9a8a384ee"
     },
     {
       "path": "balance-r179.js",
@@ -44184,8 +44184,8 @@
     },
     {
       "path": "skill-growth-r663.js",
-      "bytes": 13872,
-      "sha256": "acc57dcb0b85b5e31466f4b8a3b5946f1c4bad6fc1372bd66ea2e0afe9644f64"
+      "bytes": 16764,
+      "sha256": "f872b1a20d4ee59f0879b4a22c44fb78e06a577e9bef559e41fa28d14df0b5c9"
     },
     {
       "path": "skill-sheets-r411.js",
@@ -44524,7 +44524,7 @@
     }
   ],
   "fileCount": 8904,
-  "totalBytes": 1228377375,
+  "totalBytes": 1228380457,
   "webHTMLSha256": "532fdb684d8df92ada48def16ffc983c626d4d047699ae4ba27218e345c0d7f6",
   "largest": [
     {
