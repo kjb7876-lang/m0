@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""R780 — ElevenLabs(text-to-sound v2)로 만든 영웅 무기 재질별 적중음·처치 마무리음을 다듬는다.
-사용: python3 scripts/build-sfx-r780.py [원본 폴더]   (기본 /mnt/project-files/elevenlabs-r780/raw, ffmpeg·numpy 필요)
+"""R785 — ElevenLabs(text-to-sound v2)로 만든 영웅 무기 재질별 적중음·처치 마무리음을 다듬는다.
+사용: python3 scripts/build-sfx-r785.py [원본 폴더]   (기본 /mnt/project-files/elevenlabs-r785/raw, ffmpeg·numpy 필요)
 사용자 2026-11-11 14:22Z "워크래프트3 효과음 많이 참고해서 … 기본공격과 스킬 그리고 피격시 효과음 적 피격과 죽음 효과음 타격감 있도록 퀄 좋게".
 원본 음원을 복제하지 않고 같은 설계(짧고 마른 어택, 무기 재질마다 다른 몸통, 큰 타격은 낮은 음높이)만 참고해 새로 생성했다.
 가공: 첫 소리 3ms 앞에서 자르기 → 150Hz 고역통과·4.5kHz 저역통과(스피커 터짐 방지, R545 기준) → 2ms 올림·끝 cos² 내림 → 전체 RMS 를 같은 값으로 맞추고 피크는 부드럽게 제한.
 피치 변주는 재생 속도(asetrate)로 파일에 구워 넣는다(엔진은 변주를 순서대로 돌림). 같은 영웅: 원본 2개 × {1.0, 변주} = 적중 4개, 낮은 음높이(0.80) 2개 = 스킬 적중."""
 import numpy as np,subprocess,os,sys,json,hashlib,pathlib
-SR=44100;ROOT=pathlib.Path(__file__).resolve().parents[1];OUT=ROOT/'r96/runtime-text/assets/r780/sfx';OUT.mkdir(parents=True,exist_ok=True)
-SRC=pathlib.Path(sys.argv[1] if len(sys.argv)>1 else '/mnt/project-files/elevenlabs-r780/raw')
+SR=44100;ROOT=pathlib.Path(__file__).resolve().parents[1];OUT=ROOT/'r96/runtime-text/assets/r785/sfx';OUT.mkdir(parents=True,exist_ok=True)
+SRC=pathlib.Path(sys.argv[1] if len(sys.argv)>1 else '/mnt/project-files/elevenlabs-r785/raw')
 P={'hwando':'Katana blade slicing into flesh, single crisp meaty slash impact with a short metallic edge, punchy and tight, no reverb, no bass rumble, very short',
  'slayer':'Heavy greatsword crashing into armored enemy, weighty crunchy metal-on-plate impact with a short thud, punchy, tight, no reverb, short',
  'hunter':'Arrow hitting a target, sharp wooden thunk with a short flesh thud, punchy and tight, no reverb, very short',
@@ -64,15 +64,15 @@ def emit(name,srcname,length,rate,kind,gain,use,prompt):
     f=SRC/(srcname+'.mp3');x=shape(dec(f),length,rate,LP_HERO.get(srcname.rsplit('_',1)[0]));tmp=OUT/(name+'.wav');o=OUT/(name+'.ogg')
     subprocess.run(['ffmpeg','-v','quiet','-y','-f','f32le','-ar',str(SR),'-ac','1','-i','-','-c:a','pcm_f32le',str(tmp)],input=x.astype(np.float32).tobytes(),check=True)
     subprocess.run(['ffmpeg','-v','quiet','-y','-i',str(tmp),'-c:a','libvorbis','-q:a','4','-map_metadata','-1','-fflags','+bitexact','-flags:a','+bitexact',str(o)],check=True);os.remove(tmp)
-    b=o.read_bytes();rows[name]={'path':'assets/r780/sfx/'+name+'.ogg','kind':kind,'gain':gain,'use':use,'source':srcname+'.mp3','prompt':prompt,'sourceSha256':hashlib.sha256(f.read_bytes()).hexdigest(),'sourceBytes':f.stat().st_size,
+    b=o.read_bytes();rows[name]={'path':'assets/r785/sfx/'+name+'.ogg','kind':kind,'gain':gain,'use':use,'source':srcname+'.mp3','prompt':prompt,'sourceSha256':hashlib.sha256(f.read_bytes()).hexdigest(),'sourceBytes':f.stat().st_size,
         'trim':'첫 소리 3ms 앞부터 %.2fs'%length,'rate':rate,'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest(),**measure(dec(o))}
 for h in HEROES:
     hits=choose(cands(h,4,HIT_LEN,[1.0,1.07,.93,.88,1.03,.96]),4,2);big=choose(cands(h,4,HIT_LEN,[.80,.78,.85,.82,.75,.88]),2,1)
     R.append((h,len(hits),len(big)))
-    for i,(sc,s,r) in enumerate(hits,1):emit(f'hit-{h}-{i}',s,HIT_LEN,r,f'r780Hit_{h}',.85,f'{h} 무기 적중음'+('' if r==1.0 else f', 재생 속도 {r}'),P[h])
-    for i,(sc,s,r) in enumerate(big,1):emit(f'hitbig-{h}-{i}',s,HIT_LEN,r,f'r780HitBig_{h}',1.0,f'{h} 스킬 적중음 — 낮은 음높이, 재생 속도 {r}',P[h])
-for i,(sc,s,r) in enumerate(choose(cands('kill',4,KILL_LEN,[1.0,1.1,.9]),5,2),1):emit(f'kill-{i}',s,KILL_LEN,r,'r780Kill',1.0,'적 처치 마무리 타격'+('' if r==1.0 else f', 재생 속도 {r}'),P['kill'])
-(OUT/'index.json').write_text(json.dumps({'revision':'R780','generator':'scripts/build-sfx-r780.py','origin':'ElevenLabs text-to-sound v2(eleven_text_to_sound_v2)로 2026-11-11 생성(플로우 TKFsW6Tju3He6IXIdLtj, 9건·변주 36개), 자르기·재생 속도·필터·RMS 를 손봄. 워크래프트3 음원은 쓰지 않고 설계 느낌만 참고',
+    for i,(sc,s,r) in enumerate(hits,1):emit(f'hit-{h}-{i}',s,HIT_LEN,r,f'r785Hit_{h}',.85,f'{h} 무기 적중음'+('' if r==1.0 else f', 재생 속도 {r}'),P[h])
+    for i,(sc,s,r) in enumerate(big,1):emit(f'hitbig-{h}-{i}',s,HIT_LEN,r,f'r785HitBig_{h}',1.0,f'{h} 스킬 적중음 — 낮은 음높이, 재생 속도 {r}',P[h])
+for i,(sc,s,r) in enumerate(choose(cands('kill',4,KILL_LEN,[1.0,1.1,.9]),5,2),1):emit(f'kill-{i}',s,KILL_LEN,r,'r785Kill',1.0,'적 처치 마무리 타격'+('' if r==1.0 else f', 재생 속도 {r}'),P['kill'])
+(OUT/'index.json').write_text(json.dumps({'revision':'R785','generator':'scripts/build-sfx-r785.py','origin':'ElevenLabs text-to-sound v2(eleven_text_to_sound_v2)로 2026-11-11 생성(플로우 TKFsW6Tju3He6IXIdLtj, 9건·변주 36개), 자르기·재생 속도·필터·RMS 를 손봄. 워크래프트3 음원은 쓰지 않고 설계 느낌만 참고',
  'params':{'highpassHz':HP,'lowpassHz':LP,'targetRmsDb':TARGET_RMS,'softCeil':CEIL},'files':rows},ensure_ascii=False,indent=1))
 for t in R:print('선택 개수',t)
 for k,v in rows.items():print(f"{k:14s}",v['bytes'],*[f"{a}={v[a]}" for a in('duration','peakDb','rmsDb','riseMs','lowShare150','hfShare5k','centroidHz','tailDb')])

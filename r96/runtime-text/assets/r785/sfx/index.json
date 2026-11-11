@@ -1,6 +1,6 @@
 {
- "revision": "R780",
- "generator": "scripts/build-sfx-r780.py",
+ "revision": "R785",
+ "generator": "scripts/build-sfx-r785.py",
  "origin": "ElevenLabs text-to-sound v2(eleven_text_to_sound_v2)로 2026-11-11 생성(플로우 TKFsW6Tju3He6IXIdLtj, 9건·변주 36개), 자르기·재생 속도·필터·RMS 를 손봄. 워크래프트3 음원은 쓰지 않고 설계 느낌만 참고",
  "params": {
   "highpassHz": 160,
@@ -10,8 +10,8 @@
  },
  "files": {
   "hit-hwando-1": {
-   "path": "assets/r780/sfx/hit-hwando-1.ogg",
-   "kind": "r780Hit_hwando",
+   "path": "assets/r785/sfx/hit-hwando-1.ogg",
+   "kind": "r785Hit_hwando",
    "gain": 0.85,
    "use": "hwando 무기 적중음, 재생 속도 0.88",
    "source": "hwando_4.mp3",
@@ -33,8 +33,8 @@
    "tailDb": -104.7
   },
   "hit-hwando-2": {
-   "path": "assets/r780/sfx/hit-hwando-2.ogg",
-   "kind": "r780Hit_hwando",
+   "path": "assets/r785/sfx/hit-hwando-2.ogg",
+   "kind": "r785Hit_hwando",
    "gain": 0.85,
    "use": "hwando 무기 적중음, 재생 속도 0.93",
    "source": "hwando_4.mp3",
@@ -56,8 +56,8 @@
    "tailDb": -67.5
   },
   "hit-hwando-3": {
-   "path": "assets/r780/sfx/hit-hwando-3.ogg",
-   "kind": "r780Hit_hwando",
+   "path": "assets/r785/sfx/hit-hwando-3.ogg",
+   "kind": "r785Hit_hwando",
    "gain": 0.85,
    "use": "hwando 무기 적중음, 재생 속도 0.96",
    "source": "hwando_4.mp3",
@@ -79,8 +79,8 @@
    "tailDb": -66.3
   },
   "hit-hwando-4": {
-   "path": "assets/r780/sfx/hit-hwando-4.ogg",
-   "kind": "r780Hit_hwando",
+   "path": "assets/r785/sfx/hit-hwando-4.ogg",
+   "kind": "r785Hit_hwando",
    "gain": 0.85,
    "use": "hwando 무기 적중음, 재생 속도 1.07",
    "source": "hwando_2.mp3",
@@ -102,8 +102,8 @@
    "tailDb": -72.3
   },
   "hitbig-hwando-1": {
-   "path": "assets/r780/sfx/hitbig-hwando-1.ogg",
-   "kind": "r780HitBig_hwando",
+   "path": "assets/r785/sfx/hitbig-hwando-1.ogg",
+   "kind": "r785HitBig_hwando",
    "gain": 1.0,
    "use": "hwando 스킬 적중음 — 낮은 음높이, 재생 속도 0.75",
    "source": "hwando_4.mp3",
@@ -125,8 +125,8 @@
    "tailDb": -68.7
   },
   "hitbig-hwando-2": {
-   "path": "assets/r780/sfx/hitbig-hwando-2.ogg",
-   "kind": "r780HitBig_hwando",
+   "path": "assets/r785/sfx/hitbig-hwando-2.ogg",
+   "kind": "r785HitBig_hwando",
    "gain": 1.0,
    "use": "hwando 스킬 적중음 — 낮은 음높이, 재생 속도 0.78",
    "source": "hwando_4.mp3",
@@ -148,8 +148,8 @@
    "tailDb": -75.1
   },
   "hit-seoha-1": {
-   "path": "assets/r780/sfx/hit-seoha-1.ogg",
-   "kind": "r780Hit_seoha",
+   "path": "assets/r785/sfx/hit-seoha-1.ogg",
+   "kind": "r785Hit_seoha",
    "gain": 0.85,
    "use": "seoha 무기 적중음, 재생 속도 1.07",
    "source": "seoha_3.mp3",
@@ -171,8 +171,8 @@
    "tailDb": -59.3
   },
   "hit-seoha-2": {
-   "path": "assets/r780/sfx/hit-seoha-2.ogg",
-   "kind": "r780Hit_seoha",
+   "path": "assets/r785/sfx/hit-seoha-2.ogg",
+   "kind": "r785Hit_seoha",
    "gain": 0.85,
    "use": "seoha 무기 적중음, 재생 속도 0.93",
    "source": "seoha_3.mp3",
@@ -194,8 +194,8 @@
    "tailDb": -46.9
   },
   "hit-seoha-3": {
-   "path": "assets/r780/sfx/hit-seoha-3.ogg",
-   "kind": "r780Hit_seoha",
+   "path": "assets/r785/sfx/hit-seoha-3.ogg",
+   "kind": "r785Hit_seoha",
    "gain": 0.85,
    "use": "seoha 무기 적중음, 재생 속도 0.88",
    "source": "seoha_3.mp3",
@@ -217,8 +217,8 @@
    "tailDb": -52.8
   },
   "hit-seoha-4": {
-   "path": "assets/r780/sfx/hit-seoha-4.ogg",
-   "kind": "r780Hit_seoha",
+   "path": "assets/r785/sfx/hit-seoha-4.ogg",
+   "kind": "r785Hit_seoha",
    "gain": 0.85,
    "use": "seoha 무기 적중음, 재생 속도 1.07",
    "source": "seoha_1.mp3",
@@ -240,8 +240,8 @@
    "tailDb": -74.0
   },
   "hitbig-seoha-1": {
-   "path": "assets/r780/sfx/hitbig-seoha-1.ogg",
-   "kind": "r780HitBig_seoha",
+   "path": "assets/r785/sfx/hitbig-seoha-1.ogg",
+   "kind": "r785HitBig_seoha",
    "gain": 1.0,
    "use": "seoha 스킬 적중음 — 낮은 음높이, 재생 속도 0.75",
    "source": "seoha_3.mp3",
@@ -263,8 +263,8 @@
    "tailDb": -53.6
   },
   "hitbig-seoha-2": {
-   "path": "assets/r780/sfx/hitbig-seoha-2.ogg",
-   "kind": "r780HitBig_seoha",
+   "path": "assets/r785/sfx/hitbig-seoha-2.ogg",
+   "kind": "r785HitBig_seoha",
    "gain": 1.0,
    "use": "seoha 스킬 적중음 — 낮은 음높이, 재생 속도 0.78",
    "source": "seoha_3.mp3",
@@ -286,8 +286,8 @@
    "tailDb": -54.7
   },
   "hit-neon-1": {
-   "path": "assets/r780/sfx/hit-neon-1.ogg",
-   "kind": "r780Hit_neon",
+   "path": "assets/r785/sfx/hit-neon-1.ogg",
+   "kind": "r785Hit_neon",
    "gain": 0.85,
    "use": "neon 무기 적중음, 재생 속도 0.93",
    "source": "neon_3.mp3",
@@ -309,8 +309,8 @@
    "tailDb": -45.4
   },
   "hit-neon-2": {
-   "path": "assets/r780/sfx/hit-neon-2.ogg",
-   "kind": "r780Hit_neon",
+   "path": "assets/r785/sfx/hit-neon-2.ogg",
+   "kind": "r785Hit_neon",
    "gain": 0.85,
    "use": "neon 무기 적중음, 재생 속도 0.96",
    "source": "neon_3.mp3",
@@ -332,8 +332,8 @@
    "tailDb": -47.0
   },
   "hit-neon-3": {
-   "path": "assets/r780/sfx/hit-neon-3.ogg",
-   "kind": "r780Hit_neon",
+   "path": "assets/r785/sfx/hit-neon-3.ogg",
+   "kind": "r785Hit_neon",
    "gain": 0.85,
    "use": "neon 무기 적중음, 재생 속도 0.88",
    "source": "neon_3.mp3",
@@ -355,8 +355,8 @@
    "tailDb": -51.9
   },
   "hit-neon-4": {
-   "path": "assets/r780/sfx/hit-neon-4.ogg",
-   "kind": "r780Hit_neon",
+   "path": "assets/r785/sfx/hit-neon-4.ogg",
+   "kind": "r785Hit_neon",
    "gain": 0.85,
    "use": "neon 무기 적중음, 재생 속도 1.03",
    "source": "neon_4.mp3",
@@ -378,8 +378,8 @@
    "tailDb": -44.2
   },
   "hitbig-neon-1": {
-   "path": "assets/r780/sfx/hitbig-neon-1.ogg",
-   "kind": "r780HitBig_neon",
+   "path": "assets/r785/sfx/hitbig-neon-1.ogg",
+   "kind": "r785HitBig_neon",
    "gain": 1.0,
    "use": "neon 스킬 적중음 — 낮은 음높이, 재생 속도 0.78",
    "source": "neon_3.mp3",
@@ -401,8 +401,8 @@
    "tailDb": -55.1
   },
   "hitbig-neon-2": {
-   "path": "assets/r780/sfx/hitbig-neon-2.ogg",
-   "kind": "r780HitBig_neon",
+   "path": "assets/r785/sfx/hitbig-neon-2.ogg",
+   "kind": "r785HitBig_neon",
    "gain": 1.0,
    "use": "neon 스킬 적중음 — 낮은 음높이, 재생 속도 0.75",
    "source": "neon_3.mp3",
@@ -424,8 +424,8 @@
    "tailDb": -48.3
   },
   "hit-michaela-1": {
-   "path": "assets/r780/sfx/hit-michaela-1.ogg",
-   "kind": "r780Hit_michaela",
+   "path": "assets/r785/sfx/hit-michaela-1.ogg",
+   "kind": "r785Hit_michaela",
    "gain": 0.85,
    "use": "michaela 무기 적중음, 재생 속도 0.93",
    "source": "michaela_2.mp3",
@@ -447,8 +447,8 @@
    "tailDb": -51.0
   },
   "hit-michaela-2": {
-   "path": "assets/r780/sfx/hit-michaela-2.ogg",
-   "kind": "r780Hit_michaela",
+   "path": "assets/r785/sfx/hit-michaela-2.ogg",
+   "kind": "r785Hit_michaela",
    "gain": 0.85,
    "use": "michaela 무기 적중음, 재생 속도 0.96",
    "source": "michaela_2.mp3",
@@ -470,8 +470,8 @@
    "tailDb": -49.5
   },
   "hit-michaela-3": {
-   "path": "assets/r780/sfx/hit-michaela-3.ogg",
-   "kind": "r780Hit_michaela",
+   "path": "assets/r785/sfx/hit-michaela-3.ogg",
+   "kind": "r785Hit_michaela",
    "gain": 0.85,
    "use": "michaela 무기 적중음, 재생 속도 1.03",
    "source": "michaela_2.mp3",
@@ -493,8 +493,8 @@
    "tailDb": -47.4
   },
   "hit-michaela-4": {
-   "path": "assets/r780/sfx/hit-michaela-4.ogg",
-   "kind": "r780Hit_michaela",
+   "path": "assets/r785/sfx/hit-michaela-4.ogg",
+   "kind": "r785Hit_michaela",
    "gain": 0.85,
    "use": "michaela 무기 적중음, 재생 속도 0.88",
    "source": "michaela_1.mp3",
@@ -516,8 +516,8 @@
    "tailDb": -92.7
   },
   "hitbig-michaela-1": {
-   "path": "assets/r780/sfx/hitbig-michaela-1.ogg",
-   "kind": "r780HitBig_michaela",
+   "path": "assets/r785/sfx/hitbig-michaela-1.ogg",
+   "kind": "r785HitBig_michaela",
    "gain": 1.0,
    "use": "michaela 스킬 적중음 — 낮은 음높이, 재생 속도 0.88",
    "source": "michaela_2.mp3",
@@ -539,8 +539,8 @@
    "tailDb": -91.6
   },
   "hitbig-michaela-2": {
-   "path": "assets/r780/sfx/hitbig-michaela-2.ogg",
-   "kind": "r780HitBig_michaela",
+   "path": "assets/r785/sfx/hitbig-michaela-2.ogg",
+   "kind": "r785HitBig_michaela",
    "gain": 1.0,
    "use": "michaela 스킬 적중음 — 낮은 음높이, 재생 속도 0.85",
    "source": "michaela_2.mp3",
@@ -562,8 +562,8 @@
    "tailDb": -56.6
   },
   "hit-lauren-1": {
-   "path": "assets/r780/sfx/hit-lauren-1.ogg",
-   "kind": "r780Hit_lauren",
+   "path": "assets/r785/sfx/hit-lauren-1.ogg",
+   "kind": "r785Hit_lauren",
    "gain": 0.85,
    "use": "lauren 무기 적중음, 재생 속도 0.88",
    "source": "lauren_1.mp3",
@@ -585,8 +585,8 @@
    "tailDb": -92.9
   },
   "hit-lauren-2": {
-   "path": "assets/r780/sfx/hit-lauren-2.ogg",
-   "kind": "r780Hit_lauren",
+   "path": "assets/r785/sfx/hit-lauren-2.ogg",
+   "kind": "r785Hit_lauren",
    "gain": 0.85,
    "use": "lauren 무기 적중음, 재생 속도 0.93",
    "source": "lauren_1.mp3",
@@ -608,8 +608,8 @@
    "tailDb": -61.1
   },
   "hit-lauren-3": {
-   "path": "assets/r780/sfx/hit-lauren-3.ogg",
-   "kind": "r780Hit_lauren",
+   "path": "assets/r785/sfx/hit-lauren-3.ogg",
+   "kind": "r785Hit_lauren",
    "gain": 0.85,
    "use": "lauren 무기 적중음, 재생 속도 1.07",
    "source": "lauren_1.mp3",
@@ -631,8 +631,8 @@
    "tailDb": -74.6
   },
   "hit-lauren-4": {
-   "path": "assets/r780/sfx/hit-lauren-4.ogg",
-   "kind": "r780Hit_lauren",
+   "path": "assets/r785/sfx/hit-lauren-4.ogg",
+   "kind": "r785Hit_lauren",
    "gain": 0.85,
    "use": "lauren 무기 적중음, 재생 속도 0.88",
    "source": "lauren_4.mp3",
@@ -654,8 +654,8 @@
    "tailDb": -53.9
   },
   "hitbig-lauren-1": {
-   "path": "assets/r780/sfx/hitbig-lauren-1.ogg",
-   "kind": "r780HitBig_lauren",
+   "path": "assets/r785/sfx/hitbig-lauren-1.ogg",
+   "kind": "r785HitBig_lauren",
    "gain": 1.0,
    "use": "lauren 스킬 적중음 — 낮은 음높이, 재생 속도 0.78",
    "source": "lauren_1.mp3",
@@ -677,8 +677,8 @@
    "tailDb": -69.5
   },
   "hitbig-lauren-2": {
-   "path": "assets/r780/sfx/hitbig-lauren-2.ogg",
-   "kind": "r780HitBig_lauren",
+   "path": "assets/r785/sfx/hitbig-lauren-2.ogg",
+   "kind": "r785HitBig_lauren",
    "gain": 1.0,
    "use": "lauren 스킬 적중음 — 낮은 음높이, 재생 속도 0.75",
    "source": "lauren_1.mp3",
@@ -700,8 +700,8 @@
    "tailDb": -63.4
   },
   "hit-hunter-1": {
-   "path": "assets/r780/sfx/hit-hunter-1.ogg",
-   "kind": "r780Hit_hunter",
+   "path": "assets/r785/sfx/hit-hunter-1.ogg",
+   "kind": "r785Hit_hunter",
    "gain": 0.85,
    "use": "hunter 무기 적중음, 재생 속도 1.03",
    "source": "hunter_2.mp3",
@@ -723,8 +723,8 @@
    "tailDb": -88.9
   },
   "hit-hunter-2": {
-   "path": "assets/r780/sfx/hit-hunter-2.ogg",
-   "kind": "r780Hit_hunter",
+   "path": "assets/r785/sfx/hit-hunter-2.ogg",
+   "kind": "r785Hit_hunter",
    "gain": 0.85,
    "use": "hunter 무기 적중음",
    "source": "hunter_2.mp3",
@@ -746,8 +746,8 @@
    "tailDb": -90.3
   },
   "hit-hunter-3": {
-   "path": "assets/r780/sfx/hit-hunter-3.ogg",
-   "kind": "r780Hit_hunter",
+   "path": "assets/r785/sfx/hit-hunter-3.ogg",
+   "kind": "r785Hit_hunter",
    "gain": 0.85,
    "use": "hunter 무기 적중음, 재생 속도 1.07",
    "source": "hunter_2.mp3",
@@ -769,8 +769,8 @@
    "tailDb": -100.5
   },
   "hit-hunter-4": {
-   "path": "assets/r780/sfx/hit-hunter-4.ogg",
-   "kind": "r780Hit_hunter",
+   "path": "assets/r785/sfx/hit-hunter-4.ogg",
+   "kind": "r785Hit_hunter",
    "gain": 0.85,
    "use": "hunter 무기 적중음, 재생 속도 1.07",
    "source": "hunter_1.mp3",
@@ -792,8 +792,8 @@
    "tailDb": -144.3
   },
   "hitbig-hunter-1": {
-   "path": "assets/r780/sfx/hitbig-hunter-1.ogg",
-   "kind": "r780HitBig_hunter",
+   "path": "assets/r785/sfx/hitbig-hunter-1.ogg",
+   "kind": "r785HitBig_hunter",
    "gain": 1.0,
    "use": "hunter 스킬 적중음 — 낮은 음높이, 재생 속도 0.88",
    "source": "hunter_1.mp3",
@@ -815,8 +815,8 @@
    "tailDb": -100.1
   },
   "hitbig-hunter-2": {
-   "path": "assets/r780/sfx/hitbig-hunter-2.ogg",
-   "kind": "r780HitBig_hunter",
+   "path": "assets/r785/sfx/hitbig-hunter-2.ogg",
+   "kind": "r785HitBig_hunter",
    "gain": 1.0,
    "use": "hunter 스킬 적중음 — 낮은 음높이, 재생 속도 0.85",
    "source": "hunter_1.mp3",
@@ -838,8 +838,8 @@
    "tailDb": -135.8
   },
   "hit-slayer-1": {
-   "path": "assets/r780/sfx/hit-slayer-1.ogg",
-   "kind": "r780Hit_slayer",
+   "path": "assets/r785/sfx/hit-slayer-1.ogg",
+   "kind": "r785Hit_slayer",
    "gain": 0.85,
    "use": "slayer 무기 적중음, 재생 속도 0.88",
    "source": "slayer_2.mp3",
@@ -861,8 +861,8 @@
    "tailDb": -97.7
   },
   "hit-slayer-2": {
-   "path": "assets/r780/sfx/hit-slayer-2.ogg",
-   "kind": "r780Hit_slayer",
+   "path": "assets/r785/sfx/hit-slayer-2.ogg",
+   "kind": "r785Hit_slayer",
    "gain": 0.85,
    "use": "slayer 무기 적중음, 재생 속도 0.93",
    "source": "slayer_2.mp3",
@@ -884,8 +884,8 @@
    "tailDb": -62.4
   },
   "hit-slayer-3": {
-   "path": "assets/r780/sfx/hit-slayer-3.ogg",
-   "kind": "r780Hit_slayer",
+   "path": "assets/r785/sfx/hit-slayer-3.ogg",
+   "kind": "r785Hit_slayer",
    "gain": 0.85,
    "use": "slayer 무기 적중음, 재생 속도 0.96",
    "source": "slayer_2.mp3",
@@ -907,8 +907,8 @@
    "tailDb": -58.6
   },
   "hit-slayer-4": {
-   "path": "assets/r780/sfx/hit-slayer-4.ogg",
-   "kind": "r780Hit_slayer",
+   "path": "assets/r785/sfx/hit-slayer-4.ogg",
+   "kind": "r785Hit_slayer",
    "gain": 0.85,
    "use": "slayer 무기 적중음, 재생 속도 1.07",
    "source": "slayer_3.mp3",
@@ -930,8 +930,8 @@
    "tailDb": -89.5
   },
   "hitbig-slayer-1": {
-   "path": "assets/r780/sfx/hitbig-slayer-1.ogg",
-   "kind": "r780HitBig_slayer",
+   "path": "assets/r785/sfx/hitbig-slayer-1.ogg",
+   "kind": "r785HitBig_slayer",
    "gain": 1.0,
    "use": "slayer 스킬 적중음 — 낮은 음높이, 재생 속도 0.82",
    "source": "slayer_2.mp3",
@@ -953,8 +953,8 @@
    "tailDb": -67.2
   },
   "hitbig-slayer-2": {
-   "path": "assets/r780/sfx/hitbig-slayer-2.ogg",
-   "kind": "r780HitBig_slayer",
+   "path": "assets/r785/sfx/hitbig-slayer-2.ogg",
+   "kind": "r785HitBig_slayer",
    "gain": 1.0,
    "use": "slayer 스킬 적중음 — 낮은 음높이, 재생 속도 0.85",
    "source": "slayer_2.mp3",
@@ -976,8 +976,8 @@
    "tailDb": -68.0
   },
   "hit-gunner-1": {
-   "path": "assets/r780/sfx/hit-gunner-1.ogg",
-   "kind": "r780Hit_gunner",
+   "path": "assets/r785/sfx/hit-gunner-1.ogg",
+   "kind": "r785Hit_gunner",
    "gain": 0.85,
    "use": "gunner 무기 적중음, 재생 속도 1.07",
    "source": "gunner_2.mp3",
@@ -999,8 +999,8 @@
    "tailDb": -91.4
   },
   "hit-gunner-2": {
-   "path": "assets/r780/sfx/hit-gunner-2.ogg",
-   "kind": "r780Hit_gunner",
+   "path": "assets/r785/sfx/hit-gunner-2.ogg",
+   "kind": "r785Hit_gunner",
    "gain": 0.85,
    "use": "gunner 무기 적중음, 재생 속도 1.03",
    "source": "gunner_2.mp3",
@@ -1022,8 +1022,8 @@
    "tailDb": -79.3
   },
   "hit-gunner-3": {
-   "path": "assets/r780/sfx/hit-gunner-3.ogg",
-   "kind": "r780Hit_gunner",
+   "path": "assets/r785/sfx/hit-gunner-3.ogg",
+   "kind": "r785Hit_gunner",
    "gain": 0.85,
    "use": "gunner 무기 적중음, 재생 속도 0.93",
    "source": "gunner_3.mp3",
@@ -1045,8 +1045,8 @@
    "tailDb": -74.6
   },
   "hit-gunner-4": {
-   "path": "assets/r780/sfx/hit-gunner-4.ogg",
-   "kind": "r780Hit_gunner",
+   "path": "assets/r785/sfx/hit-gunner-4.ogg",
+   "kind": "r785Hit_gunner",
    "gain": 0.85,
    "use": "gunner 무기 적중음, 재생 속도 0.96",
    "source": "gunner_3.mp3",
@@ -1068,8 +1068,8 @@
    "tailDb": -74.9
   },
   "hitbig-gunner-1": {
-   "path": "assets/r780/sfx/hitbig-gunner-1.ogg",
-   "kind": "r780HitBig_gunner",
+   "path": "assets/r785/sfx/hitbig-gunner-1.ogg",
+   "kind": "r785HitBig_gunner",
    "gain": 1.0,
    "use": "gunner 스킬 적중음 — 낮은 음높이, 재생 속도 0.75",
    "source": "gunner_3.mp3",
@@ -1091,8 +1091,8 @@
    "tailDb": -107.6
   },
   "hitbig-gunner-2": {
-   "path": "assets/r780/sfx/hitbig-gunner-2.ogg",
-   "kind": "r780HitBig_gunner",
+   "path": "assets/r785/sfx/hitbig-gunner-2.ogg",
+   "kind": "r785HitBig_gunner",
    "gain": 1.0,
    "use": "gunner 스킬 적중음 — 낮은 음높이, 재생 속도 0.78",
    "source": "gunner_3.mp3",
@@ -1114,8 +1114,8 @@
    "tailDb": -83.7
   },
   "kill-1": {
-   "path": "assets/r780/sfx/kill-1.ogg",
-   "kind": "r780Kill",
+   "path": "assets/r785/sfx/kill-1.ogg",
+   "kind": "r785Kill",
    "gain": 1.0,
    "use": "적 처치 마무리 타격, 재생 속도 1.1",
    "source": "kill_3.mp3",
@@ -1137,8 +1137,8 @@
    "tailDb": -67.4
   },
   "kill-2": {
-   "path": "assets/r780/sfx/kill-2.ogg",
-   "kind": "r780Kill",
+   "path": "assets/r785/sfx/kill-2.ogg",
+   "kind": "r785Kill",
    "gain": 1.0,
    "use": "적 처치 마무리 타격",
    "source": "kill_3.mp3",
@@ -1160,8 +1160,8 @@
    "tailDb": -100.9
   },
   "kill-3": {
-   "path": "assets/r780/sfx/kill-3.ogg",
-   "kind": "r780Kill",
+   "path": "assets/r785/sfx/kill-3.ogg",
+   "kind": "r785Kill",
    "gain": 1.0,
    "use": "적 처치 마무리 타격, 재생 속도 0.9",
    "source": "kill_3.mp3",
@@ -1183,8 +1183,8 @@
    "tailDb": -67.1
   },
   "kill-4": {
-   "path": "assets/r780/sfx/kill-4.ogg",
-   "kind": "r780Kill",
+   "path": "assets/r785/sfx/kill-4.ogg",
+   "kind": "r785Kill",
    "gain": 1.0,
    "use": "적 처치 마무리 타격",
    "source": "kill_4.mp3",
@@ -1206,8 +1206,8 @@
    "tailDb": -79.6
   },
   "kill-5": {
-   "path": "assets/r780/sfx/kill-5.ogg",
-   "kind": "r780Kill",
+   "path": "assets/r785/sfx/kill-5.ogg",
+   "kind": "r785Kill",
    "gain": 1.0,
    "use": "적 처치 마무리 타격, 재생 속도 0.9",
    "source": "kill_4.mp3",
