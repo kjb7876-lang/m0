@@ -1,4 +1,4 @@
-// R780 CPU 검사: 바닥 가장자리 가림판(edges-r188.js)을 같은 입력이면 다시 만들지 않는다.
+// R800 CPU 검사: 바닥 가장자리 가림판(edges-r188.js)을 같은 입력이면 다시 만들지 않는다.
 //  헤드리스 실측: 지역에 들어갈 때 엔진이 장면을 두 번 비워(clearScene) 같은 가림판(입력 해시 같음)을 두 번 만들고(한 번 0.2~0.3초),
 //  다시 온 지역도 처음부터 다시 만들었다.
 //  ① 같은 지역: 장면 비움 → 다시 그리기에서 그림 만들기 1번(두 번째는 다시 씀), 메시는 다시 붙음
@@ -27,7 +27,7 @@ const built=E=>E.inspect().stats.built;
  proto.render.call(r,{exploration:A});ok(built(E)===1&&gets===g1,'same frame again: no work');
  // ① 장면 비움(엔진이 지역 들어갈 때 두 번 함)
  proto.clearScene.call(r);ok(kids.size===0,'clearScene drops the mesh');proto.render.call(r,{exploration:layout('a')});
- ok(gets===g1,'after clearScene the same layout reuses the mask (no getImageData, was rebuilt before R780)');ok(kids.size===1,'mesh re-added after clearScene');
+ ok(gets===g1,'after clearScene the same layout reuses the mask (no getImageData, was rebuilt before R800)');ok(kids.size===1,'mesh re-added after clearScene');
  ok(E.inspect().stats.reused>=1,'reuse counted');
  // ② 다른 지역 → 돌아오기
  proto.clearScene.call(r);proto.render.call(r,{exploration:B});const g2=gets;ok(g2>g1,'other region builds its own mask');
@@ -49,4 +49,4 @@ const built=E=>E.inspect().stats.built;
 // ⑦ 끄기
 {const {r,kids,E,proto,sb}=env();sb.window.__STORYWORLD_COOP_SIM_R62__={mode:()=>'host'};const g=gets;proto.render.call(r,{exploration:layout('q')});ok(gets===g&&kids.size===0,'co-op: nothing built');}
 ok(/if\(r\.r188EdgeKey!==key\)/.test(SRC),'still built once per zone key');
-console.log('R780 edges cache CPU check: '+n+' passed'+(process.exitCode?' — FAILED':''));
+console.log('R800 edges cache CPU check: '+n+' passed'+(process.exitCode?' — FAILED':''));

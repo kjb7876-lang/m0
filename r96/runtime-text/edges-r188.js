@@ -29,7 +29,7 @@ function buildMask(L){const t0=performance.now(),b=L.bounds,x0=b[0]-PAD,y0=b[1]-
    if(!inside&&s<.01)a=0;/* 멀리 빈 곳은 원래 그림(R186 판·빈 색)이 그대로 */
    const g=Math.round(a*255);O[k]=O[k+1]=O[k+2]=g;O[k+3]=255;if(g>8)any++;}}
  const c=mk();c.getContext('2d').putImageData(out,0,0);stats.ms=Math.round(performance.now()-t0);return any?{canvas:c,x0,y0,W:W/PX,H:H/PX}:null;}
-// R780 렉: 같은 입력이면 가림판 그림을 다시 쓴다. 헤드리스 실측에서 지역에 들어갈 때 엔진이 장면을 두 번 비워(clearScene)
+// R800 렉: 같은 입력이면 가림판 그림을 다시 쓴다. 헤드리스 실측에서 지역에 들어갈 때 엔진이 장면을 두 번 비워(clearScene)
 //  입력이 똑같은 판을 두 번 만들었고(한 번 0.2~0.3초), 다시 온 지역도 처음부터 다시 만들었다. 열쇠 = 판을 만드는 데 쓰는 값 전부
 //  (bounds·바닥·배경·연결 바닥·벽 사각형) — 같으면 그림이 같다. 사몽 여부는 재질만 바꾸므로 열쇠에 넣지 않는다. 최근 6장·600만 화소까지.
 const maskCache=new Map();let cachedPx=0;

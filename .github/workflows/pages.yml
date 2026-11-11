@@ -651,10 +651,10 @@ jobs:
         run: python r96/qa/r700/boss-art-check.py
       - name: R760 Bulmyeongwi boss staging (one toned 4-pose set for idle/attack, one size, ink-violet tone + amber eyes, layered afterimages; mobs/other bosses untouched) CPU check
         run: node r96/qa/r760/r760-cpu-check.cjs
-      - name: R780 hero palette caller check builds no string stacks (same decisions) CPU check
-        run: node r96/qa/r780/palette-stack-cpu-check.cjs
-      - name: R780 floor edge mask reused for identical input (no double build on region entry) CPU check
-        run: node r96/qa/r780/edges-cache-cpu-check.cjs
+      - name: R800 hero palette caller check builds no string stacks (same decisions) CPU check
+        run: node r96/qa/r800/palette-stack-cpu-check.cjs
+      - name: R800 floor edge mask reused for identical input (no double build on region entry) CPU check
+        run: node r96/qa/r800/edges-cache-cpu-check.cjs
       - name: R563 Michaela genesis chain (Q → sky light pillars, R → grand pillar + halo; no new keys, upright cross only, Dots MI sheets) CPU check
         run: node r96/qa/r563/michaela-genesis-cpu-check.cjs
       - name: R564 Seoha chrono chain (time stop shell + shatter, afterimage clones, haste; no new keys, caps, Dots SE sheets) CPU check

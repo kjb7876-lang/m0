@@ -1,4 +1,4 @@
-// R780 CPU 검사: 영웅 2색 팔레트(hero-palette-r302.js)가 호출자 판정에 스택 '글자'를 만들지 않는다(렉) + 판정은 예전과 같다.
+// R800 CPU 검사: 영웅 2색 팔레트(hero-palette-r302.js)가 호출자 판정에 스택 '글자'를 만들지 않는다(렉) + 판정은 예전과 같다.
 //  헤드리스 실플레이 프로파일(640×360, kair02·ep1a08·u204): remapF 가 게임 1초당 약 2,600번 불리며 JS 자체 시간 1위(58~141ms/게임초).
 //  ① 영웅·적·실 파일이 그리는 스프라이트 수백 번 동안 전역 스택 글자 만들기(Error.prepareStackTrace 기본 경로)가 0번
 //  ② 판정 그대로: 영웅 파일 → 2색, 적 파일 → 그대로, 금·은 실, play-r111 threadSlash 만 실, effects-r178 은 go/play/special 만, 파일 모를 땐 함수 이름(basicAttack)
@@ -47,4 +47,4 @@ try{
  // ④ 다른 코드 오류
  fmtCalls=0;const s=new Error('x').stack;ok(fmtCalls===1&&/:\d+:\d+\)/.test(s),'other errors still use the global formatter with line numbers');
 }finally{Error.prepareStackTrace=undefined;Error.stackTraceLimit=L0;}
-console.log('R780 palette stack CPU check: '+n+' passed'+(process.exitCode?' — FAILED':''));
+console.log('R800 palette stack CPU check: '+n+' passed'+(process.exitCode?' — FAILED':''));

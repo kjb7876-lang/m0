@@ -19,7 +19,7 @@ OLD=swap(OLD,"(file==='play-r111'&&T111.test(String(stack)))","(file==='play-r11
 OLD=swap(OLD," const k=k0+'|'+h+'|'+kind;"," let k;try{const P=SP0.pal(F);k=P.a.join()+'|'+P.b.join()+'|'+h+'|'+kind;}catch(_){return F;}");
 ok(!/SHORT|spFull|T111|needFull|k0/.test(OLD),'old code reconstructed');
 // 스택 칸 세기: prepareStackTrace 로 V8 기본 모양과 같은 글을 만들면서 칸 수를 센다(②에서만 씀)
-// R780: 새 코드는 스택을 잡는 동안만 자기 형식기(stackFmt, 파일·함수 이름만)를 끼워 전역 형식기를 부르지 않는다.
+// R800: 새 코드는 스택을 잡는 동안만 자기 형식기(stackFmt, 파일·함수 이름만)를 끼워 전역 형식기를 부르지 않는다.
 //  ②③의 칸 세기만 하는 계측 사본 NEWC: 그 형식기가 바깥 형식기(COUNT)에도 같은 칸(stackNow 자신 한 칸 뺌)을 보여 준다. 판정 코드는 NEW 그대로.
 const NEWC=NEW.includes('Error.prepareStackTrace=stackFmt')?NEW.replace('Error.prepareStackTrace=stackFmt','Error.prepareStackTrace=(e,cs)=>{if(typeof P===\'function\')P(e,cs.slice(1));return stackFmt(e,cs);}'):NEW;
 let frames=0,caps=0;const COUNT=(e,cs)=>{frames+=cs.length;caps++;return String(e.name||'Error')+(e.message?': '+e.message:'')+cs.map(c=>'\n    at '+c).join('');};

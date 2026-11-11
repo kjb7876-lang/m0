@@ -47,7 +47,7 @@ function hsv(c){const r=c[0]/255,g=c[1]/255,b=c[2]/255,M=Math.max(r,g,b),m=Math.
 // 고유색·보조색 중 채도 높은 쪽의 색상(hue) — 그림을 돌릴 목표
 function targetHue(h){const P=PALETTE[h],a=hsv(P.main),b=hsv(P.sub);return a.s>=b.s?a:b;}
 function callerFile(stack){const lines=String(stack||'').split('\n');for(const l of lines){const m=l.match(/\/([a-z0-9-]+-r\d+)\.js/);if(m&&m[1]!=='hero-palette-r302'&&m[1]!=='fx-sprites-r106'&&m[1]!=='pixelfx-r163')return m[1];}return null;}
-// R780 렉: 스택은 '어느 파일·어느 함수가 불렀나'만 본다. 예전엔 new Error().stack 글자(칸마다 줄·칸 번호 계산·글자 만들기)를
+// R800 렉: 스택은 '어느 파일·어느 함수가 불렀나'만 본다. 예전엔 new Error().stack 글자(칸마다 줄·칸 번호 계산·글자 만들기)를
 //  영웅 스프라이트 호출마다(헤드리스 게임 1초 약 2,600번) 만들었다. 이제 V8 호출 자리 객체에서 파일·함수 이름만 읽어
 //  같은 모양 글자('    at 함수 (파일:0:0)')를 만든다 — 아래 정규식(callerFile·threadSlash 줄·HERO_FN·effects-r178)이 보는 부분은 예전과 같다.
 //  prepareStackTrace 는 이 한 번 동안만 바꾸고 바로 되돌린다(다른 코드의 오류 스택은 그대로). limit 은 stackNow 한 칸을 더한 값.
