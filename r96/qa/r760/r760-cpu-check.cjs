@@ -10,9 +10,9 @@ const F=path.join(R,'client-source','bulmyeongwi-r760.js');ok(fs.existsSync(F),'
 const F620=path.join(R,'client-source','boss-motion-r620.js');const src620=fs.readFileSync(F620,'utf8');
 const IDLE='assets/r425/clean/assets/generated-v31224/actors-normalized/692e4ae01c29_bulmyeongwi_idle.webp',ATK='assets/generated-v31224/actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp',
  RAIN='assets/generated-v31224/actors-normalized/35526bcfa1c2_bulmyeongwi_rain.webp',MID='assets/r104/bosses/mb-last302-v31231-p4.webp',MOB='assets/episode1b/generated-v394/bulmyeongwi_b.webp';
-function world({store={},roomId='last303',with620=false,ready=true,sheets=false}={}){const timers=[];const ctx={Math,String,Number,Array,Object,JSON,Map,WeakMap,Set,Symbol,isFinite,RegExp,performance:{now:()=>0},
+function world({store={},roomId='last303',with620=false,ready=true,sheets=false,audio=true}={}){const timers=[];const ctx={Math,String,Number,Array,Object,JSON,Map,WeakMap,Set,Symbol,isFinite,RegExp,performance:{now:()=>0},
   setTimeout:(f)=>{timers.push(f);return timers.length;},localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}}};ctx.window=ctx;vm.createContext(ctx);
- vm.runInContext(`var time=0,room={id:${JSON.stringify(roomId)},enemies:[]},player={x:6,y:3},ctx={commands:[]};var __ready=${ready},__sheets=${sheets},__added=[];
+ vm.runInContext(`var time=0,room={id:${JSON.stringify(roomId)},enemies:[]},player={x:6,y:3},ctx={commands:[]};var __ready=${ready},__sheets=${sheets},__added=[],__snd=[];${audio?"var soundProfiles={boss:[{key:'b',path:'x.ogg',gain:1}]};function sound(k){__snd.push(k);}function setupAudio(){soundProfiles={boss:[]};}var modal=null;":''}
   function addImage(p){__added.push(p);}function readyImage(p){if(String(p).includes('assets/r760/')&&!__ready)return null;if(/sheet-/.test(p)){if(!__sheets)return null;const n=/sheet-(idle|move)/.test(p)?6:8;return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:n*512,naturalHeight:512}};}const w=/-p[0-9][.]/.test(p)?393:672,h=/-p[0-9][.]/.test(p)?432:384;return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:w,naturalHeight:h}};}
   var zoom=1;function project(x,y){return {x:100+(x-3)*10*zoom,y:200+(y-3)*5*zoom};}
   // 엔진 몸: 발밑 = project(e), 그림 672x384 전체 사각형. 대기 그림은 키 158.7(발 줄 322/384), 공격 그림은 132.6 으로 그려졌다(실측).
@@ -146,4 +146,93 @@ const svis=k=>H(k)*SVIS/512;
  const c=world({sheets:true,with620:true}),e=boss();frames(c,e,.5);for(let i=0;i<60&&FR(frames(c,e,1/30)[0].b)!==0;i++);e.attack={elapsed:0,angle:0,shape154:{windup:.35}};let bad=0,xf=0;
  frames(c,e,.9,{step:(e)=>{e.attack.elapsed+=1/30;}}).forEach(f=>f.cm.filter(k=>k.r620Ghost).forEach(g=>{xf++;const n=/sheet-(idle|move)/.test(g.sourcePath)?6:8;if(/sheet-/.test(g.sourcePath)&&g.imageSize[0]!==n*512)bad++;}));
  ok(xf>0,'R620 cross-fades idle frame 0 → atkA frame 0 ('+xf+')');ok(bad===0,'R620 cross-fade ghost keeps its own imageSize ('+xf+' ghosts, '+bad+' bad)');ok(API(c).inspect().stats.errors===0,'no errors with R620 + sheets');}
+// ── R762: 불면귀 효과음(ElevenLabs 생성, 그림 스레드가 다듬음 — assets/r761/sfx). 동작이 시작될 때 한 번씩 ──
+const SND=c=>run(c,'__snd.slice()');
+{// 프로필 등록(엔진이 setupAudio 로 프로필을 다시 만들어도 다시 얹음)
+ const c=world();const P=run(c,'soundProfiles');ok(['Wrap','Gaze','Rain','Reveal'].every(k=>P['r761Boss'+k]?.length===2),'boss sfx profiles registered (2 variants each)');
+ ok(P.r761BossWrap[0].path==='assets/r761/sfx/bmg-wrap-1.ogg'&&P.r761BossWrap[0].gain===.7&&P.r761BossRain[1].path==='assets/r761/sfx/bmg-rain-2.ogg','sfx paths and gains from index.json');
+ ok(P.boss.length===1,'engine boss profile untouched');run(c,'setupAudio()');ok(run(c,'soundProfiles').r761BossReveal?.length===2,'re-registered after setupAudio');}
+{// 공격이 시작될 때 한 번: 첫 공격 실 휘감기(atkA) → wrap, 다음 공격 눈빛(atkB) → gaze. 같은 공격 동안 다시 울리지 않음, 대기·걷기는 소리 없음
+ const c=world({sheets:true}),e=boss();frames(c,e,.6,{step:(e)=>{e.x+=.03;}});ok(SND(c).length===0,'idle/walk: no boss cue');
+ e.attack={elapsed:0,angle:0,shape154:{windup:.35}};frames(c,e,.9,{step:(e)=>{e.attack.elapsed+=1/30;}});ok(JSON.stringify(SND(c))==='["r761BossWrap"]','1st attack → one wrap cue ('+SND(c)+')');
+ e.attack=null;frames(c,e,1.2);e.attack={elapsed:0,angle:0,shape154:{windup:.35}};frames(c,e,.5,{step:(e)=>{e.attack.elapsed+=1/30;}});ok(JSON.stringify(SND(c))==='["r761BossWrap","r761BossGaze"]','2nd attack → gaze ('+SND(c)+')');}
+{// 시트를 끄거나 못 실려도 소리는 같은 순서(그림과 소리가 어긋나지 않게 같은 번갈이 상태를 씀)
+ const c=world({sheets:false}),e=boss();e.attack={elapsed:0,angle:0,shape154:{windup:.35}};frames(c,e,.5,{step:(e)=>{e.attack.elapsed+=1/30;}});ok(JSON.stringify(SND(c))==='["r761BossWrap"]','no sheets: still one wrap cue');}
+{// 너무 잦으면 건너뜀(1.2초 안 두 번째 공격은 조용히) — 듣기 거슬리지 않게
+ const c=world({sheets:true}),e=boss();e.attack={elapsed:0,angle:0,shape154:{windup:.35}};frames(c,e,.3,{step:(e)=>{e.attack.elapsed+=1/30;}});e.attack={elapsed:0,angle:0,shape154:{windup:.35}};frames(c,e,.3,{step:(e)=>{e.attack.elapsed+=1/30;}});
+ ok(SND(c).length===1,'two attacks within 0.6s → one cue ('+SND(c)+')');const sh=frames(c,e,.05)[0].b;ok(/sheet-atkB/.test(sh.sourcePath),'picture still alternates (atkB) even when the cue is skipped');}
+{// 실비 → rain, 흩어짐 → reveal, 패턴 동안 한 번
+ const c=world({sheets:true}),e=boss({__path:RAIN});frames(c,e,1.5);ok(JSON.stringify(SND(c))==='["r761BossRain"]','rain pattern → one rain cue ('+SND(c)+')');
+ const TR=RAIN.replace('35526bcfa1c2_bulmyeongwi_rain','de4c1414da0d_bulmyeongwi_transition');const c2=world({sheets:true}),e2=boss({__path:TR});frames(c2,e2,1.5);ok(JSON.stringify(SND(c2))==='["r761BossReveal"]','transition → one reveal cue');}
+{// 다른 적·중간보스·창이 떠 있을 때·끄기 → 소리 없음
+ const cm=world({roomId:'last302'}),m=boss({nativeId:'mb-last302-v31231',name:'검은 안개 심장',boss:true,midboss:true,__path:MID});m.attack={elapsed:0,angle:0};frames(cm,m,.3);ok(SND(cm).length===0,'midboss: no cue');
+ const cq=world(),eq=boss();run(cq,'modal={}');eq.attack={elapsed:0,angle:0,shape154:{windup:.35}};frames(cq,eq,.3,{step:(e)=>{e.attack.elapsed+=1/30;}});ok(SND(cq).length===0,'modal open: no cue');
+ const cf=world({store:{'storyworld.r760.bulmyeongwi':'{"sfx":false}'}}),ef=boss();ef.attack={elapsed:0,angle:0,shape154:{windup:.35}};frames(cf,ef,.3,{step:(e)=>{e.attack.elapsed+=1/30;}});ok(SND(cf).length===0,'sfx off switch');
+ const cn=world({audio:false}),en=boss();en.attack={elapsed:0,angle:0,shape154:{windup:.35}};frames(cn,en,.3,{step:(e)=>{e.attack.elapsed+=1/30;}});ok(API(cn).inspect().stats.errors===0,'no audio engine: no errors');}
+// ── R763: 불면귀에 잠식된 주민(Dots CX-0070BM vil1 어부·vil2 약방 아낙, 256칸·발 (128,234.67)·오른쪽 봄) — last302·last303 일반몹 그림·이름 교체 ──
+function vworld({roomId='last302',store={},ready=true}={}){const timers=[];const c={Math,String,Number,Array,Object,JSON,Map,WeakMap,Set,Symbol,isFinite,RegExp,Promise,performance:{now:()=>0},
+  setTimeout:(f)=>{timers.push(f);return timers.length;},localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}}};c.window=c;vm.createContext(c);
+ vm.runInContext(`var time=0,room={id:${JSON.stringify(roomId)},enemies:[]},player={x:6,y:3,hero:'hwando'},ctx={commands:[]},modal=null,effects=[],__ready=${ready},__ens=[],__snd=[],__drawn=[],__base=[];
+  var soundProfiles={};function sound(k){__snd.push(k);}function setupAudio(){}
+  function readyImage(p){if(String(p).includes('assets/r763/')&&!__ready)return null;const n=/-(walk|atk|death)\\./.test(p)?8:/-hit\\./.test(p)?4:6;return {ready:true,image:{naturalWidth:n*256,naturalHeight:256}};}
+  function ensureImages(ps){__ens.push(...ps);return Promise.resolve();}
+  function project(x,y){return {x:100+(x-3)*10,y:200+(y-3)*5};}
+  function drawAssetFrame3(path,frame,x,y,h,opt){__drawn.push({path,rect:frame.assetFrame.sourceRect,x,y,h,alpha:opt?.alpha??1,flip:!!opt?.flip});return true;}
+  function spawnBurnDeath3(e){effects.push({type:'enemyBurnDeath',x:e.x,y:e.y,age:0,life:.72,sourceId:e.id,bodyHeight:60});return true;}
+  function drawBurnDeath3(f){__base.push(f.sourceId);}
+  function makeRoom(id,l){return {id,enemies:[{id:id+':l302-e3:1',nativeId:'l302-e3',name:'귀비탕 공명 안개핵 1',hp:5},{id:id+':l302-e1:2',nativeId:'l302-e1',name:'포구 검은 안개 증원 2',hp:5},{id:id+':b',nativeId:'l303-boss',name:'불면귀',boss:true,hp:5}]};}
+  function hitEnemy(e){sound('enemyHit');}function killEnemy(e){e.hp=0;spawnBurnDeath3(e);sound('r541Death');}
+  window.__STORYWORLD_STORY_COMBAT_R54__=Object.freeze({frameFor(e,f){return {path:'old/'+e.nativeId+'.webp',assetFrame:{sourceRect:[0,0,10,10],pivot:[5,10],visibleHeight:10}};}});`,c);
+ vm.runInContext(src,c);for(let i=0;i<40&&timers.length;i++)timers.shift()();return c;}
+const mob=(o)=>({id:'last302:l302-e3:3',nativeId:'l302-e3',name:'귀비탕 공명 안개핵 3',x:3,y:3,hp:100,maxHp:100,hitTimer:0,moving:false,attack:null,...o});
+const FF=(c,e)=>c.__STORYWORLD_STORY_COMBAT_R54__.frameFor(e,null);const VAPI=c=>c.__STORYWORLD_VILLAGERS_R763__;
+{// 배정·이름: l302-e3(근거리) → 어부, l302-e1(거리 둠) → 약방 아낙. 꼬리(번호·우두머리·중간보스 접두)는 그대로, 효과 키는 옛 이름
+ const c=vworld(),a=mob(),b=mob({id:'last302:l302-e1:7',nativeId:'l302-e1',name:'포구 검은 안개 우두머리 7'}),w=mob({id:'w',nativeId:'l302-e1',name:'중간보스 · 포구 검은 안개',wardChampionR81:true}),g=mob({id:'g',nativeId:'l302-e1',name:'유리 망령 2',r74Monster:'glass'});
+ const fa=FF(c,a),fb=FF(c,b);FF(c,w);FF(c,g);ok(/assets\/r763\/villagers\/fisher-idle\.webp$/.test(fa.path),'l302-e3 → fisher ('+fa.path+')');ok(/herbwife-idle\.webp$/.test(fb.path),'l302-e1 → herbwife');
+ ok(a.name==='잠식된 어부 3'&&b.name==='잠식된 약방 아낙 우두머리 7'&&w.name==='중간보스 · 잠식된 약방 아낙'&&g.name==='잠식된 약방 아낙 2','renamed with suffix/prefix kept ('+[a.name,b.name,w.name,g.name].join(' / ')+')');
+ ok(a.r248Key==='귀비탕 공명 안개핵'&&b.r248Key==='포구 검은 안개 우두머리','effect key keeps the old name ('+a.r248Key+' / '+b.r248Key+')');
+ ok(fa.assetFrame.sourceRect[0]%256===0&&JSON.stringify(fa.assetFrame.sourceRect.slice(1))==='[0,256,256]'&&JSON.stringify(fa.assetFrame.pivot)==='[128,234.67]'&&fa.assetFrame.visibleHeight>200&&fa.assetFrame.visibleHeight<215,'frame: 256 cell, foot pivot, visible ~208');
+ FF(c,a);ok(a.name==='잠식된 어부 3','renamed once');}
+{// 지역·대상 밖은 그대로: 보스·중간보스(mb-)·안개 잔영·다른 지역
+ const c=vworld({roomId:'last303'}),bo=mob({nativeId:'l303-boss',name:'불면귀',boss:true}),sh=mob({nativeId:'l302-e1',name:'불면귀의 안개 잔영'}),md=mob({nativeId:'mb-last302-v31231',name:'검은 안개 심장 · 불면의 기억',midboss:true});
+ ok([bo,sh,md].every(e=>/^old\//.test(FF(c,e).path)),'boss / boss shade / midboss untouched');ok(sh.name==='불면귀의 안개 잔영','boss shade name untouched');
+ const co=vworld({roomId:'last301'}),o=mob();ok(/^old\//.test(FF(co,o).path)&&o.name==='귀비탕 공명 안개핵 3','other region untouched');
+ const cf=vworld({store:{'storyworld.r763.villagers':'{"on":false}'}}),of=mob();ok(/^old\//.test(FF(cf,of).path)&&of.name==='귀비탕 공명 안개핵 3','off switch: untouched');}
+{// last303 은 모두 l302-e1 → 번호로 어부·아낙을 나눔(남녀·근원거리 섞임)
+ const c=vworld({roomId:'last303'});const ks=[...Array(10)].map((_,i)=>{const e=mob({id:'last303:l302-e1:'+i,nativeId:'l302-e1',name:'주민에게서 떨어진 검은 안개 '+i});FF(c,e);return e.name.startsWith('잠식된 어부')?'F':'H';}).join('');
+ ok(/F/.test(ks)&&/H/.test(ks)&&ks.split('F').length-1===5,'last303 split fisher/herbwife evenly ('+ks+')');}
+{// 동작: 대기 6칸 돌고, 걷기 8칸, 공격은 준비 0→2(갈고리 치켜듦)·타격 3·뒤 4→7, 피격(어부) hit 시트, 왼쪽이면 뒤집기
+ const c=vworld(),e=mob();const fr=[];for(let i=0;i<30;i++){vm.runInContext('time+=1/15',c);fr.push(FF(c,e).assetFrame.sourceRect[0]/256);}ok(new Set(fr).size>=5,'idle cycles ('+[...new Set(fr)].join('')+')');
+ e.moving=true;const fw=FF(c,e);ok(/fisher-walk/.test(fw.path),'moving → walk');e.moving=false;
+ e.attack={elapsed:0,shape154:{windup:.6,active:.15,recovery:.6}};const at=[];for(let t=0;t<1.35;t+=.05){e.attack.elapsed=t;const f=FF(c,e);ok(/fisher-atk/.test(f.path),'attack sheet');at.push(f.assetFrame.sourceRect[0]/256);}
+ ok(at[0]===0&&at.every((v,i)=>!i||v>=at[i-1])&&at[11]<=2&&at[13]===3&&at[at.length-1]===7,'attack frames: windup 0..2, strike 3, recover to 7 ('+at.join('')+')');e.attack=null;
+ e.hitTimer=.14;const h=FF(c,e);ok(/fisher-hit/.test(h.path),'hit → fisher hit sheet');e.hitTimer=0;
+ const b=mob({id:'b1',nativeId:'l302-e1',name:'포구 검은 안개 1',hitTimer:.14});ok(/herbwife-idle/.test(FF(c,b).path),'herbwife hit → idle (no hit sheet yet)');
+ vm.runInContext('player.x=0',c);ok(FF(c,e).flip===true,'hero on the left → flipped');vm.runInContext('player.x=9',c);ok(FF(c,e).flip===false,'hero on the right → not flipped');}
+{// 그림이 아직 안 실렸으면 옛 그림 + 불러오기 요청(빈 화면 없음). 지역에 들어오면 8장 모두 한 번 청함
+ const c=vworld({ready:false}),e=mob();ok(/^old\//.test(FF(c,e).path),'not loaded: old art kept');const ens=vm.runInContext('__ens',c);ok(['fisher-idle','fisher-walk','fisher-atk','fisher-hit','fisher-death','herbwife-idle','herbwife-walk','herbwife-atk'].every(k=>ens.some(p=>p.endsWith(k+'.webp'))),'all villager sheets requested');}
+{// 죽음: 어부는 death8 로 쓰러져 잠듦(R462 불·피 연출 대신), 아낙은 대기 그림이 가라앉으며 사라짐. 잠드는 소리, 피격 신음
+ const c=vworld(),e=mob(),b=mob({id:'b2',nativeId:'l302-e1',name:'포구 검은 안개 2',x:5});FF(c,e);FF(c,b);
+ c.hitEnemy(e);ok(JSON.stringify(vm.runInContext('__snd',c))==='["r761VillagerGroan"]','hit villager → groan ('+vm.runInContext('__snd',c)+')');
+ c.killEnemy(e);ok(vm.runInContext('__snd',c).slice(-1)[0]==='r761VillagerSleep','death → sleep sound');
+ const fx=vm.runInContext('effects',c)[0];ok(fx.r763?.k==='fisher'&&fx.life>=2,'death fx tagged and lengthened ('+fx.life+')');
+ const seq=[];for(let a=0;a<fx.life;a+=.1){fx.age=a;vm.runInContext('__drawn.length=0',c);c.drawBurnDeath3(fx);const d=vm.runInContext('__drawn',c)[0];seq.push(d);}
+ ok(vm.runInContext('__base',c).length===0,'R462/engine burn not drawn for villagers');ok(seq.every(d=>/fisher-death/.test(d.path)),'fisher death sheet');
+ const fs=seq.map(d=>d.rect[0]/256);ok(fs[0]===0&&fs.every((v,i)=>!i||v>=fs[i-1])&&fs[fs.length-1]===7,'death frames 0→7 then hold ('+fs.join('')+')');ok(seq[seq.length-1].alpha<.35&&seq[3].alpha===1,'fades only at the end');
+ ok(Math.abs(seq[0].h-60)<1e-9&&seq[0].x===100&&seq[0].y===200,'drawn at the death spot with the engine body height');
+ c.killEnemy(b);const fb=vm.runInContext('effects',c)[1];fb.age=.5;vm.runInContext('__drawn.length=0',c);c.drawBurnDeath3(fb);const db=vm.runInContext('__drawn',c)[0];ok(/herbwife-idle/.test(db.path)&&db.alpha<1,'herbwife: idle frame sinking/fading');
+ const c2=vworld({roomId:'last301'}),o=mob();c2.killEnemy(o);c2.drawBurnDeath3(vm.runInContext('effects',c2)[0]);ok(vm.runInContext('__base',c2).length===1&&vm.runInContext('__snd',c2)[0]==='r541Death','other mobs: engine death + sound unchanged');
+ ok(VAPI(c).inspect().stats.errors===0,'no errors');ok(vm.runInContext('soundProfiles',c).r761VillagerSleep?.length===2&&vm.runInContext('soundProfiles',c).r761VillagerGroan[0].path==='assets/r761/sfx/bmg-groan-1.ogg','villager sfx profiles');}
+{// 지역을 만들 때 모든 일반몹 이름을 바로 바꿈(아직 화면에 안 그려진 몹·숨은 증원 포함 — 이름표·목록이 섞이지 않게). 꿈 층·다른 지역은 그대로
+ const c=vworld({roomId:'dist01'});const r=c.makeRoom('last302','STORY');ok(r.enemies[0].name==='잠식된 어부 1'&&r.enemies[1].name==='잠식된 약방 아낙 증원 2'&&r.enemies[2].name==='불면귀','renamed at room creation ('+r.enemies.map(e=>e.name).join(' / ')+')');
+ ok(c.makeRoom('last302','DREAM').enemies[0].name==='귀비탕 공명 안개핵 1'&&c.makeRoom('last301','STORY').enemies[0].name==='귀비탕 공명 안개핵 1','dream layer / other zone untouched');
+ vm.runInContext('room=null',c);ok(c.window.__STORYWORLD_VILLAGERS_R763__.kindFor(r.enemies[0],'last302')==='fisher','kindFor with explicit zone');}
+{// 회귀(헤드리스 실측): R74 순찰은 지역을 만든 뒤에 '유리 망령'으로 이름이 바뀐다 → 아니라고 기억한 몹도 이름이 바뀌면 다시 본다
+ const c=vworld(),e=mob({id:'last302:r74-patrol:1',nativeId:'l302-e3',name:'순찰 1'});ok(c.window.__STORYWORLD_VILLAGERS_R763__.kindFor(e)===null,'unknown name: not a villager');e.name='유리 망령 우두머리';
+ ok(/fisher/.test(FF(c,e).path)&&e.name==='잠식된 어부 우두머리','renamed patrol picked up later ('+e.name+')');}
+{// 회귀(헤드리스 실측): R74 순찰(r74Monster 'glass')은 지도 괴물 그림으로 그려지고 이름이 되돌아갔다 → 표시를 떼고(r763Atlas 에 기억) 이름이 되돌아가도 다시 바꿈
+ const c=vworld(),e=mob({id:'last302:r74-patrol:2',nativeId:'l302-e1',name:'유리 망령',r74Monster:'glass'});FF(c,e);ok(e.r74Monster===undefined&&e.r763Atlas==='glass'&&e.name==='잠식된 약방 아낙','r74 patrol: atlas mark removed, renamed');
+ e.name='유리 망령';e.r74Monster='glass';FF(c,e);ok(e.name==='잠식된 약방 아낙'&&e.r763From==='유리 망령'&&e.r74Monster===undefined,'R191 re-applied glass patrol → renamed and detached again');}
+{// 회귀(헤드리스 실측): R248 픽셀몹 시트 표가 옛 이름 키(r248Key)로 주민 위에 옛 안개·유리 망령 그림을 덮어 그렸다 → R248 이 주민이면 비켜 줌
+ const r248=fs.readFileSync(path.join(R,'client-source','mob-unique-r248.js'),'utf8');ok(r248.includes('if(s&&window.__STORYWORLD_VILLAGERS_R763__?.kindFor?.(e))s=null;'),'R248 yields to R763 villagers');}
 console.log('R760 CPU check OK ('+n+' assertions)');
