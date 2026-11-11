@@ -111,4 +111,21 @@ if(api)for(const id of ['last302','last303']){let fx=null,pf=null;try{fx=JSON.pa
  ok(id+': median distance from a path cell to the nearest lantern ≤ 6 cells',med(sample.map(nearL))<=6,med(sample.map(nearL)).toFixed(1));
  ok(id+': total props with the path stays ≤ 88',P.length<=88,P.length);}
 ok('R730 apply: path lanterns light up like posts (R115 lantern)',/s\.kind==='pathpost'\)q\.r115Prop='lantern'/.test(RS));
+// ⑪ Dots CX-0071BV 2차: 기와집 16B·폐가 17A, last303(한약과 불면귀) 약방 집 11A·B + 약탕기 화로 13·약재 소반 14
+{let ix=null;try{ix=JSON.parse(rd('runtime-text/assets/r810/index.json'));}catch(_){}
+ const need={'tiled-house-b-r':'16_tiled-house-b_B','ruined-house':'17_ruined-house_A','yakbang-house-a':'11_yakbang-house_A','yakbang-house-b':'11_yakbang-house_B','decoction-brazier':'13_decoction-brazier','herb-trays':'14_herb-trays'};
+ ok('R811 Dots assets: index lists 6 new files from the Dots folder with sha256, applied',!!ix&&Object.entries(need).every(([k,src])=>ix.assets.some(a=>a.path==='assets/r810/'+k+'.webp'&&a.source.includes('cx0071bv-dots-cleaned/CX-0071BV_'+src)&&/^[0-9a-f]{64}$/.test(a.sha256)&&a.applied===true)));
+ ok('R811 Dots assets: in the runtime manifest, each ≤ 64 KB',!!ix&&Object.keys(need).every(k=>{const a=ix.assets.find(a=>a.path==='assets/r810/'+k+'.webp');return a&&a.bytes<=65536&&rd('runtime-manifest.json').includes(a.path);}));
+ const H=(()=>{const m=RS.match(/const HOUSE=Object\.freeze\((\[[\s\S]*?\])\);/);try{return m&&vm.runInNewContext('('+m[1].replace(/Object\.freeze/g,'')+')');}catch(_){return null;}})(),base=H&&H.find(h=>/r80-010/.test(h.path)),w=h=>h.height*h.aspect;
+ ok('R811 HOUSE: 16B and ruined 17A added to the shared list, same drawn width (±12%)',!!H&&['tiled-house-b-r','ruined-house'].every(k=>H.some(h=>h.path==='assets/r810/'+k+'.webp'&&Math.abs(w(h)/w(base)-1)<=.12)));
+ ok('R811 HOUSE: yakbang houses are NOT in the shared list (last303 only)',!!H&&!H.some(h=>/yakbang/.test(h.path)));
+ if(api)for(const id of ['last302','last303']){let fx=null,pf=null;try{fx=JSON.parse(rd('qa/r730/fixtures/'+id+'.json'));pf=JSON.parse(rd('qa/r810/fixtures-'+id+'-path.json'));}catch(_){}if(!fx)continue;
+  const P=api.plan(fx),yak=P.filter(p=>p.kind==='house'&&/yakbang/.test(p.path)),fire=P.filter(p=>p.kind==='yakfire'),tray=P.filter(p=>p.kind==='trays');
+  const ruin=P.filter(p=>p.kind==='house'&&/ruined/.test(p.path)).length;ok(id+': ruined houses only in last302, 1–3 of them',id==='last302'?ruin>=1&&ruin<=3:ruin===0,ruin);
+  if(id==='last302'){ok('last302: no yakbang house, fire or trays',!yak.length&&!fire.length&&!tray.length);ok('last302: total still ≤ 80 without path',P.length<=80,P.length);}
+  else{ok('last303: at least 2 yakbang houses',yak.length>=2,yak.length);
+   ok('last303: every yakbang house has a decoction brazier and herb trays within 4 cells',yak.every(h=>fire.some(f=>Math.hypot(f.x-h.x,f.y-h.y)<=4)&&tray.some(t=>Math.hypot(t.x-h.x,t.y-h.y)<=4)),[yak.length,fire.length,tray.length]);
+   ok('last303: brazier/trays sit on the house hill (lift = house lift)',fire.concat(tray).every(q=>yak.some(h=>q.lift===h.lift&&Math.hypot(q.x-h.x,q.y-h.y)<=4)));}
+  if(pf)ok(id+': total with path ≤ 92',api.plan({...fx,path:new Set(pf.path)}).length<=92);}
+ ok('R811 apply: brazier glows (R115 brazier light) and both sit on the hill like houses',/s\.kind==='yakfire'\)q\.r115Prop='brazier'/.test(RS)&&/const hill=s\.kind==='house'\|\|s\.kind==='shoes'\|\|s\.kind==='jang'\|\|s\.kind==='yakfire'\|\|s\.kind==='trays';/.test(RS));}
 console.log('\nR810 '+(n-bad)+'/'+n+' passed');process.exit(bad?1:0);

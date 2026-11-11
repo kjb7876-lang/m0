@@ -34808,14 +34808,24 @@
       "sha256": "44cd122f94e22348871753de73d982dba57736f764f006e807eab6f182ff19ee"
     },
     {
+      "path": "assets/r810/decoction-brazier.webp",
+      "bytes": 22392,
+      "sha256": "85a5ae2f497b05777f38fbba84de8696adfeeb3b2805a4be5b6e01390b4294bc"
+    },
+    {
       "path": "assets/r810/fish-rack.webp",
       "bytes": 45422,
       "sha256": "1c348af69d7e65769ed3b79c9e647d4dca027ef67fc519ff9ebe8eb4296dd5c6"
     },
     {
+      "path": "assets/r810/herb-trays.webp",
+      "bytes": 16674,
+      "sha256": "d2f6910c4556523f5a324c0fe60c08bea40076ee044bd46dae1e7e3ae12800a0"
+    },
+    {
       "path": "assets/r810/index.json",
-      "bytes": 5461,
-      "sha256": "1f0c00611adb2e6649e4511078f2acc181bc777f7fc23a95288f10e25b394b7e"
+      "bytes": 9116,
+      "sha256": "06c78d2f056e107e266a7ee090cb9b04118a63dc5a3ea32a34c0c406da761941"
     },
     {
       "path": "assets/r810/jangdok.webp",
@@ -34826,6 +34836,11 @@
       "path": "assets/r810/lantern-post.webp",
       "bytes": 12462,
       "sha256": "784ad9a6ce2f8d4e1f98a9fb8f6d07cffbe1ffb3b7226a1b51db023329afc358"
+    },
+    {
+      "path": "assets/r810/ruined-house.webp",
+      "bytes": 62356,
+      "sha256": "37c60f39d196dac6eb732b59769f445f6149554e4164ea642d5e848b1007f536"
     },
     {
       "path": "assets/r810/shoes-stone.webp",
@@ -34851,6 +34866,21 @@
       "path": "assets/r810/tiled-house-b-l.webp",
       "bytes": 59474,
       "sha256": "025329db7e0ab4aa1209ab0489398b6fe8ce9eab8faef033216f8edb08600411"
+    },
+    {
+      "path": "assets/r810/tiled-house-b-r.webp",
+      "bytes": 62224,
+      "sha256": "fda506ccc53289dd52d237a6de20c534969c01a15d7226333097fa90602cd0e9"
+    },
+    {
+      "path": "assets/r810/yakbang-house-a.webp",
+      "bytes": 62154,
+      "sha256": "d28748627d2932329bf0216604c3382f63ad1511ce779af4c74025d0ab0919d1"
+    },
+    {
+      "path": "assets/r810/yakbang-house-b.webp",
+      "bytes": 64858,
+      "sha256": "afbff5e4100415e25847e93a0a73def59f98f46e807655eae8b7cdd517139acd"
     },
     {
       "path": "assets/r91/death/death-crystal-core.png",
@@ -44369,8 +44399,8 @@
     },
     {
       "path": "rooms-r523.js",
-      "bytes": 70753,
-      "sha256": "5607363cfbbad942afe2df059cc8c81b79bc085821ae2e37b78c976c795f1cda"
+      "bytes": 73009,
+      "sha256": "7c160dfbe5ce24964ad7a11de29e8d0341136e1e5d6faec1378279f52d5cc8f6"
     },
     {
       "path": "root-gate-video-r372.js",
@@ -44868,8 +44898,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8973,
-  "totalBytes": 1235677490,
+  "fileCount": 8979,
+  "totalBytes": 1235974059,
   "webHTMLSha256": "d8bef146aec9863ec63a5a3150cab3c47344631e13664b5969cd73d490e68348",
   "largest": [
     {

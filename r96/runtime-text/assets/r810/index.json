@@ -163,6 +163,114 @@
    "made_by": "Dots CX-0071BV 16 (그림 스레드 손질본 c1) → Pillow 테두리 자르기, WebP q80",
    "applied": true,
    "final": false
+  },
+  {
+   "path": "assets/r810/tiled-house-b-r.webp",
+   "source": "cx0071bv-dots-cleaned/CX-0071BV_16_tiled-house-b_B_r1_c1.png",
+   "source_sha256": "0ea080bae6c2944cc98af6f8a92c43362aa57a782a0d23fc8479fcfd739cd646",
+   "crop_bbox": [
+    76,
+    175,
+    689,
+    611
+   ],
+   "sha256": "fda506ccc53289dd52d237a6de20c534969c01a15d7226333097fa90602cd0e9",
+   "bytes": 62224,
+   "size": "613x436",
+   "use": "기와집 L자 반대 방향 짝 — 집 종류(공용)",
+   "made_by": "Dots CX-0071BV (그림 스레드 손질본 c1) → Pillow 테두리 자르기, WebP q82",
+   "applied": true,
+   "final": false
+  },
+  {
+   "path": "assets/r810/ruined-house.webp",
+   "source": "cx0071bv-dots-cleaned/CX-0071BV_17_ruined-house_A_r1_c1.png",
+   "source_sha256": "90d04b9adf5c6b9183026d1be150dbd5cc63e2d2ced30b282a68d9e5386d33fa",
+   "crop_bbox": [
+    69,
+    146,
+    693,
+    619
+   ],
+   "sha256": "37c60f39d196dac6eb732b59769f445f6149554e4164ea642d5e848b1007f536",
+   "bytes": 62356,
+   "size": "560x424",
+   "use": "무너진 지붕 폐가 — 집 종류(공용)",
+   "made_by": "Dots CX-0071BV (그림 스레드 손질본 c1) → Pillow 테두리 자르기, 폭 560, WebP q78",
+   "applied": true,
+   "final": false
+  },
+  {
+   "path": "assets/r810/yakbang-house-a.webp",
+   "source": "cx0071bv-dots-cleaned/CX-0071BV_11_yakbang-house_A_r1_c1.png",
+   "source_sha256": "c1514a6d04edef11eab3f8a3a9b3c5c00575ead155fd777872fd98c4d708607b",
+   "crop_bbox": [
+    68,
+    128,
+    701,
+    633
+   ],
+   "sha256": "d28748627d2932329bf0216604c3382f63ad1511ce779af4c74025d0ab0919d1",
+   "bytes": 62154,
+   "size": "560x447",
+   "use": "약방 집(처마 약초 다발) — last303 만",
+   "made_by": "Dots CX-0071BV (그림 스레드 손질본 c1) → Pillow 테두리 자르기, 폭 560, WebP q78",
+   "applied": true,
+   "final": false
+  },
+  {
+   "path": "assets/r810/yakbang-house-b.webp",
+   "source": "cx0071bv-dots-cleaned/CX-0071BV_11_yakbang-house_B_r1_c1.png",
+   "source_sha256": "24643e2c4b2081c37f3aa72ce2b8faa05fcac8bda4167f072144e3e98fe35cb3",
+   "crop_bbox": [
+    69,
+    112,
+    701,
+    647
+   ],
+   "sha256": "afbff5e4100415e25847e93a0a73def59f98f46e807655eae8b7cdd517139acd",
+   "bytes": 64858,
+   "size": "560x474",
+   "use": "약방 집 B — last303 만",
+   "made_by": "Dots CX-0071BV (그림 스레드 손질본 c1) → Pillow 테두리 자르기, 폭 560, WebP q74",
+   "applied": true,
+   "final": false
+  },
+  {
+   "path": "assets/r810/decoction-brazier.webp",
+   "source": "cx0071bv-dots-cleaned/CX-0071BV_13_decoction-brazier_r1_c1.png",
+   "source_sha256": "32e4109bf04a25a62fb2e7a271903fe3cc1a23cde7b927b96499b403cdac7bd2",
+   "crop_bbox": [
+    145,
+    84,
+    367,
+    416
+   ],
+   "sha256": "85a5ae2f497b05777f38fbba84de8696adfeeb3b2805a4be5b6e01390b4294bc",
+   "bytes": 22392,
+   "size": "214x320",
+   "use": "약탕기 숯불 화로 — 약방 집 앞(화로 빛)",
+   "made_by": "Dots CX-0071BV (그림 스레드 손질본 c1) → Pillow 테두리 자르기, 긴 변 320, WebP q86",
+   "applied": true,
+   "final": false
+  },
+  {
+   "path": "assets/r810/herb-trays.webp",
+   "source": "cx0071bv-dots-cleaned/CX-0071BV_14_herb-trays_r1_c1.png",
+   "source_sha256": "b1ca64168d68ac4e6693a9dccbfc0214783c0a30e178f023b61c51af4d12a1ad",
+   "crop_bbox": [
+    113,
+    160,
+    392,
+    358
+   ],
+   "sha256": "d2f6910c4556523f5a324c0fe60c08bea40076ee044bd46dae1e7e3ae12800a0",
+   "bytes": 16674,
+   "size": "279x198",
+   "use": "약재 소반 — 약방 집 앞",
+   "made_by": "Dots CX-0071BV (그림 스레드 손질본 c1) → Pillow 테두리 자르기, 긴 변 320, WebP q86",
+   "applied": true,
+   "final": false
   }
  ]
 }

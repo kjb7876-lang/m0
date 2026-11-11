@@ -8183,7 +8183,13 @@
     "assets/r810/boat.webp",
     "assets/r810/index.json",
     "assets/r810/tiled-house-b-l.webp",
-    "assets/r810/tiled-house-b-i.webp"
+    "assets/r810/tiled-house-b-i.webp",
+    "assets/r810/decoction-brazier.webp",
+    "assets/r810/herb-trays.webp",
+    "assets/r810/ruined-house.webp",
+    "assets/r810/tiled-house-b-r.webp",
+    "assets/r810/yakbang-house-a.webp",
+    "assets/r810/yakbang-house-b.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9258,5 +9264,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "f4a94beaeb7dcbd386825ef5655154d7b6767bb1cc99fe107a04d1b2dfab7f4f"
+  "runtimeManifestSHA256": "89e4ea9e2d0b2d9cc7aceed49f97d8ae0ed0fddf7a5f6a4482e7bdeeed6f2048"
 }

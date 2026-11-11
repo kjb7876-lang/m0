@@ -19,7 +19,7 @@ const PX=34,SUM=17;
 for(const id of['last302','last303']){const fx=FX[id],P=api.plan(fx),P2=api.plan(JSON.parse(JSON.stringify(fx)));
  const Fset=new Set(fx.floorCells.map(([x,y])=>x+','+y)),onFloor=p=>Fset.has(Math.floor(p.x)+','+Math.floor(p.y));
  // R810: 집 앞 언덕 소품(댓돌 신발·장독대)은 집처럼 언덕 위(바닥 밖)에 서고, 등롱대(post)는 석등과 같은 길 등불로 센다
- const HILL=new Set(['shoes','jang']),houses=P.filter(p=>p.kind==='house'),hill=P.filter(p=>HILL.has(p.kind)),floor=P.filter(p=>p.kind!=='house'&&!HILL.has(p.kind)),lamps=P.filter(p=>p.kind==='lamp'||p.kind==='post');
+ const HILL=new Set(['shoes','jang','yakfire','trays'])/* R811: 약방 집 앞 화로·소반도 집 언덕 위 */,houses=P.filter(p=>p.kind==='house'),hill=P.filter(p=>HILL.has(p.kind)),floor=P.filter(p=>p.kind!=='house'&&!HILL.has(p.kind)),lamps=P.filter(p=>p.kind==='lamp'||p.kind==='post');
  ok(id+': R810 hill props (shoes on the doorstone, jangdok) sit off the floor at a house lift',hill.length>=2&&hill.every(p=>!onFloor(p)&&p.lift>0&&houses.some(h=>h.lift===p.lift&&Math.hypot(h.x-p.x,h.y-p.y)<4)),hill.filter(p=>onFloor(p)).slice(0,3));
  ok(id+': deterministic',JSON.stringify(P)===JSON.stringify(P2));
  ok(id+': ids unique, r730 prefix, all art paths under assets/',new Set(P.map(p=>p.id)).size===P.length&&P.every(p=>/^r730:/.test(p.id)&&/^assets\//.test(p.path)&&p.height>20));
