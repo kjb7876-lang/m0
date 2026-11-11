@@ -8124,7 +8124,13 @@
     "assets/r712/chest-closed.png",
     "assets/r712/chest-open.png",
     "assets/r712/SOURCE.md",
-    "hit-feel-r750.js"
+    "hit-feel-r750.js",
+    "assets/r527/body-rig.webp",
+    "assets/r527/gothic-tank.webp",
+    "assets/r527/index.json",
+    "assets/r527/lantern-steps.webp",
+    "assets/r527/pod.webp",
+    "assets/r527/stone-barrier.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9199,5 +9205,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "3bbd73bb1ca8d5eb6626417db3a6782a41b0f4e35a3adf681529f1b848a2029a"
+  "runtimeManifestSHA256": "278228d4d6e579945c94f5c0396d78bd4a624a578eb53d15dd0a06cde1351fe0"
 }

@@ -1,0 +1,10 @@
+[
+ {"key": "rig", "src": "ext:r80-002.png", "trim": true, "out": "assets/r527/body-rig.webp", "max": 256, "L": 1.5, "face": "n"},
+ {"key": "pod", "src": "ext:r80-152.png", "trim": true, "out": "assets/r527/pod.webp", "max": 256, "L": 1.8, "face": "n"},
+ {"key": "tank", "src": "ext:r80-075.png", "trim": true, "out": "assets/r527/gothic-tank.webp", "max": 256, "L": 1.5, "face": "n"},
+ {"key": "lanterns", "src": "ext:r80-064.png", "trim": true, "out": "assets/r527/lantern-steps.webp", "max": 256, "L": 1.5, "face": "w"},
+ {"key": "barrier", "src": "ext:r80-069.png", "trim": true, "out": "assets/r527/stone-barrier.webp", "max": 256, "L": 1.7, "face": "n"},
+ {"key": "vitals", "src": "assets/world-r80/r80-151.webp", "ch": 62, "ang": "pole", "d": 0.55},
+ {"key": "lotus", "src": "assets/world-r80/r80-061.webp", "ch": 58, "ang": "pole", "d": 0.9},
+ {"key": "reliq", "src": "assets/world-r80/r80-065.webp", "ch": 70, "ang": "pole", "d": 0.8}
+]
