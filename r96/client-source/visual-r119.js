@@ -190,12 +190,12 @@
    walkState.x=player.x;walkState.y=player.y;
    const busy=player.attackAnim>0||player.skillAnim>0||player.hurtAnim>0||player.dashAnim>0||player.ultimateAnim>0||player.guard;
    // 이동 중 기본 사격·방어(반자동은 걸으면서 계속 쏜다)에는 걷기를 이어 간다 — 걷기 그림도 총을 앞으로 든 자세라 정지 그림이 미끄러지던 것보다 자연스럽다.
-   const busyMove=player.skillAnim>0||player.hurtAnim>0||player.dashAnim>0||player.ultimateAnim>0;
+   const M720=window.__STORYWORLD_HERO_MOTION_R720__,busyMove=((player.skillAnim>0||player.ultimateAnim>0)&&!M720?.moveCancel?.('skill'))||player.hurtAnim>0||player.dashAnim>0;/* R720 규칙 2: 스킬 커밋 창 뒤 이동 입력이면 걷기 */
    preloadWalk();
    // 반자동 비켜서기·물러나기·길잡이처럼 '이동 중' 표시 없이 위치만 옮기는 경우도 걷기로 본다(사용자: 반자동 켜고 움직이면 동작 없이 이동).
    // R134: '이동 중' 표시만 켜지고 실제로는 막혀 제자리인 경우(적·벽에 막힘)에도 걷기 그림이 한 장면씩 끼어 공격 자세와 번갈아 깜빡였다(제자리 걸음).
    //  실제로 움직였을 때만 걷기로 본다(반자동 비켜서기처럼 표시 없이 움직인 경우는 그대로 걷기).
-   const movingNow=((typeof time==='number'?time:0)-(walkState.movedAt??-9)<.15);
+   const movingNow=((typeof time==='number'?time:0)-(walkState.movedAt??-9)<.15)&&!M720?.attackOverTail?.();/* R720 규칙 5: 멈춘 직후 시작한 공격이 걷기 꼬리를 이긴다 */
    if(!movingNow){if(!busy&&typeof actorHeight==='function'){let sb=null,sbh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!BODY_ART.test(String(c.sourcePath||'')))continue;const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>sbh){sbh=h;sb=c;}}
      // 멈춘 직후에도 R91 걷기 칸(여백 포함 칸 전체)이 한두 장면 그려져 몸이 갑자기 커졌다(사용자: 네온 이동 후 멈춤이 이상) — 몸 테두리로 잘라 서 있기 키로 그린다.
      if(sb&&/r91\/walk\//.test(String(sb.sourcePath||''))&&!sb.r121Walk&&sb.sourceRect){const im=sb.image,b=tightBox(im,sb.sourceRect),P=sb.points,fx=(P[2][0]+P[3][0])/2,fy=Math.max(P[2][1],P[3][1]),f=P[1][0]<P[0][0]?-1:1,want=actorHeight()*(standRatio.v||.98),w=want*b[2]/b[3];

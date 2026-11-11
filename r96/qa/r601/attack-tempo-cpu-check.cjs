@@ -11,7 +11,7 @@ const strip=s=>s.replace(/\/\*[\s\S]*?\*\//g,'').replace(/\/\/.*$/gm,'');
 // ---- 정적(빌드 연결 다섯 곳) ----
 ok(fs.existsSync(path.join(R,'runtime-text',F))&&src===fs.readFileSync(path.join(R,'runtime-text',F),'utf8'),'runtime-text 사본 일치');
 const html=fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8');
-ok(html.split('"./'+F+'"').length===2&&/<script src="\.\/enemy-attack-tempo-r601\.js"><\/script>\s*<script src="\.\/combat-r118\.js">/.test(html),'index.html 스크립트 태그 한 번(combat-r118 바로 앞 = drawEnemy 덧씌우기 중 가장 바깥)');
+ok(html.split('"./'+F+'"').length===2&&/<script src="\.\/enemy-attack-tempo-r601\.js"><\/script>\s*(?:<script src="\.\/hero-motion-r720\.js"><\/script>)?\s*<script src="\.\/combat-r118\.js">/.test(html),'index.html 스크립트 태그 한 번(combat-r118 바로 앞 = drawEnemy 덧씌우기 중 가장 바깥)');
 ok(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').includes("'"+F+"'"),'verify-r96-public.py 기대 목록');
 ok(/node r96\/qa\/r601\/attack-tempo-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8')),'pages.yml 검사 단계');
 ok(JSON.stringify(JSON.parse(fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8'))).includes(F),'runtime-manifest 에 들어 있음');

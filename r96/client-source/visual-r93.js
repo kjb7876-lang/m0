@@ -23,7 +23,7 @@
   return{'0':'e','1':'se','2':'s','3':'sw','4':'w','-4':'w','-3':'nw','-2':'n','-1':'ne'}[s];}
  const plainStand=()=>player&&player.hp>0&&!player.moving&&!(player.attackAnim>0||player.skillAnim>0||player.dashAnim>0||player.hurtAnim>.05||player.ultimateAnim>0||player.guard)&&
   !window.__STORYWORLD_EGO151__?.inspect?.()?.state?.active&&(window.__STORYWORLD_COOP_SIM_R62__?.mode?.()||'off')==='off'&&(typeof layer==='undefined'||layer==='STORY');
- function idleFrame(){loadIdle();if(!idle||!player)return null;const d=moveDir();if(d){facing8=d;return null;}if(!plainStand())return null;
+ function idleFrame(){loadIdle();if(!idle||!player)return null;const d=moveDir();if(d){facing8=d;return null;}if(!plainStand()){/* R720 규칙 7: 공격·스킬로 몸을 돌렸으면 서 있기는 마지막 이동 방향이 아니라 그 방향(player.direction)을 본다 */if(player&&(player.attackAnim>0||player.skillAnim>0||player.ultimateAnim>0)&&window.__STORYWORLD_HERO_MOTION_R720__?.inspect?.().prefs.on!==false)facing8=null;return null;}
   const now=performance.now();if(now-idleAt>2000&&typeof addImage==='function'&&typeof readyImage==='function'){idleAt=now;for(const it of idle.items)if(it.hero===player.hero&&!readyImage(it.path))addImage(it.path,'R93 generated idle');}
   const dir=facing8||DIR4[player.direction]||'s';
   // R131: Gemini 영웅 시트가 있는 영웅(visual-r119 __STORYWORLD_HERO_SHEETS__)은 새 8방향 서 있기 4프레임을 쓴다. 뒤집힌 그리기 안에서는 반대쪽 그림을 골라 화면에서 같은 쪽을 보게 한다.

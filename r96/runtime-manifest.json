@@ -42329,8 +42329,8 @@
     },
     {
       "path": "attack-anim-r143.js",
-      "bytes": 19517,
-      "sha256": "bb1250b4d1d2b0b0bca5f2a3e87fe95c97b6ade3b831244206b8a6c40025f880"
+      "bytes": 19760,
+      "sha256": "8e7652de6e8c2d452241b88532501549a2cfcc6dd1616a3384b6cfc26d3aa442"
     },
     {
       "path": "audio-r108.js",
@@ -43428,6 +43428,11 @@
       "sha256": "4bd61e7c1c504d5c75548481ef3661eef5fd1ffda170aa0f5fac8b4979f49e87"
     },
     {
+      "path": "hero-motion-r720.js",
+      "bytes": 9725,
+      "sha256": "827fae1b0deeb145026949a36ffa34c75dbb8e102d875769cc64243eb07a1c79"
+    },
+    {
       "path": "hero-palette-r302.js",
       "bytes": 18002,
       "sha256": "2ea8e8a7ce318509928ed5776a7b38b0361d8a221acb2178c4c57882863379d9"
@@ -43559,8 +43564,8 @@
     },
     {
       "path": "hwando-r271.js",
-      "bytes": 13463,
-      "sha256": "dd88edafdb58ccaf99f88ffa49c830cba456607336c69c0a292647c9b91a74e7"
+      "bytes": 14499,
+      "sha256": "8c2c0afaf1b9be10f126e20a965af28a28f7b26d68fb803bf80aa04260224ce9"
     },
     {
       "path": "hwando-r277.js",
@@ -43579,8 +43584,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6573866,
-      "sha256": "50bb81bfe1c0759805da71ee259f6ce8826210ba5e192c1bed9f84b1480a9814"
+      "bytes": 6573911,
+      "sha256": "c19142e25463aaa02378953c214ccc96e8a62a83131392161bd3b3c8f444a753"
     },
     {
       "path": "intro-r140.js",
@@ -43824,8 +43829,8 @@
     },
     {
       "path": "neon-lauren-r437.js",
-      "bytes": 16325,
-      "sha256": "5fd0bda5b06dff76495a75329b910a73d088ca15d3b8fbb1bacf4147afb7bd26"
+      "bytes": 16715,
+      "sha256": "1fe8e0d280fe110c2e6c5138be8176b3ce0107d33a1a4253b6b0a11a9fcd3383"
     },
     {
       "path": "neon-toxic-r562.js",
@@ -44194,8 +44199,8 @@
     },
     {
       "path": "skill-attack-r440.js",
-      "bytes": 4115,
-      "sha256": "1cacf913a2e66913a79c1aad34925c5dd2563cb4d09c0aaac7bed8868bd7a7c0"
+      "bytes": 4503,
+      "sha256": "6c9560c963e150aa84ba2ade7a4d089f3c30a720288824ce3af09ac44f7029c8"
     },
     {
       "path": "skill-fx-r292.js",
@@ -44239,8 +44244,8 @@
     },
     {
       "path": "slayer-r351.js",
-      "bytes": 20256,
-      "sha256": "0cc7b23fbb29744a71257bdf648d5d8adec0941e71b1dd9e03f5ea806c40f0cf"
+      "bytes": 20779,
+      "sha256": "8cd374948c6689a2f85e757bf8901cc74b88f4ed363f7ed5d15fbc95d15ceec9"
     },
     {
       "path": "slayer-sheets-r585.js",
@@ -44404,8 +44409,8 @@
     },
     {
       "path": "visual-r119.js",
-      "bytes": 45409,
-      "sha256": "dbf3a19d98a8564dc204a02935b195d3635fcfa3d93edf55b5df923ca59709b3"
+      "bytes": 45664,
+      "sha256": "a073dc48054c7af8cce377de556a3b8c4e59284f6abccc3bbb40a15b68c33c0a"
     },
     {
       "path": "visual-r90-world.js",
@@ -44444,8 +44449,8 @@
     },
     {
       "path": "visual-r93.js",
-      "bytes": 15178,
-      "sha256": "db86b3462c6b15fa121975ac85cd4d798b4b956e9b572c0dbfdb30096e970790"
+      "bytes": 15487,
+      "sha256": "b35fd9778c4228487dcb30036ddfa000121bca4861687b1a767acfe3fc239df5"
     },
     {
       "path": "voice-r381-data.js",
@@ -44543,9 +44548,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8908,
-  "totalBytes": 1228623990,
-  "webHTMLSha256": "50bb81bfe1c0759805da71ee259f6ce8826210ba5e192c1bed9f84b1480a9814",
+  "fileCount": 8909,
+  "totalBytes": 1228636904,
+  "webHTMLSha256": "c19142e25463aaa02378953c214ccc96e8a62a83131392161bd3b3c8f444a753",
   "largest": [
     {
       "path": "index.html",
