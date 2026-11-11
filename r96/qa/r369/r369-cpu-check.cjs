@@ -14,7 +14,7 @@ const IDX=JSON.parse(fs.readFileSync(path.join(R,'runtime-text/assets/r369/index
 ok([F,'assets/r369/index.json','assets/r369/poison-city.mp4','assets/r369/poison-city-poster.jpg','betrayal-video-r368.js','assets/r368/betrayal.mp4'].every(p=>man.includes(p)),'runtime-manifest 에 R369 오버레이·영상·포스터·index(R368 도 그대로)');
 for(const f of IDX.files){const b=fs.readFileSync(path.join(R,'runtime-text',f.path));ok(b.length===f.bytes&&crypto.createHash('sha256').update(b).digest('hex')===f.sha256,f.path+' 크기·sha256 일치');ok(f.applied===true&&f.use&&f.process,'자산표 처리·용도·적용 표기');}
 const mp4=fs.readFileSync(path.join(R,'runtime-text/assets/r369/poison-city.mp4'));
-ok(mp4.slice(4,8).toString()==='ftyp'&&mp4.length<=3000000&&mp4.indexOf('moov')<mp4.indexOf('mdat'),'mp4·3MB 이하·faststart('+mp4.length+')');
+ok(mp4.slice(4,8).toString()==='ftyp'&&mp4.length<=4500000&&mp4.indexOf('moov')<mp4.indexOf('mdat'),'mp4·4.5MB 이하(R745 고화질 재인코딩, 이전 3MB)·faststart('+mp4.length+')');
 ok(/delogo/.test(IDX.files[0].process)&&/환각성 약물 검출/.test(IDX.files[0].process),'가짜 HUD 글자 제거 처리 기록');
 ok(!fs.existsSync(path.join(R,'runtime-text/assets/r369',IDX.source.name)),'사용자 원본 영상은 저장소에 넣지 않음');
 const code=strip(src);

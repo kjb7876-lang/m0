@@ -4,56 +4,56 @@
  "files": [
   {
    "path": "assets/r617/knight.mp4",
-   "bytes": 515831,
-   "sha256": "4fd8ff8d1fe95c68a7e72495f62a34997692ea5f71063302f96e5ded521ef979",
+   "bytes": 1846537,
+   "sha256": "6541fa6aceaeeb4f6721f6d48b6db02267da0b1fe54117fa2ce653ed8b3d99f8",
    "source": "사용자 2026-11-10 첨부 영상 「타락천사 기사 강림」(세로 720×1280, 8초, 24fps)",
    "use": "last301 타락천사 기사가 깨어날 때(보스전 시작)",
-   "process": "자르지 않음: 960×540 안에 원본 전체를 가운데 두고 양옆은 같은 영상 확대·흐림·어둡게(boxblur 30, 밝기 -0.36)로 채움. 오른쪽 아래 생성 도구 표시 delogo. 24fps, 0.35초 페이드인·0.45초 페이드아웃(끝의 가장 가까운 기사 모습을 살림), H.264 CRF27 faststart, AAC 모노 64k",
+   "process": "R745: 원본에서 1280×720 으로 다시 만듦(예전 960×540). 자르지 않음: 원본 전체를 405×720 으로 가운데, 양옆은 같은 영상 확대·흐림·어둡게. 오른쪽 아래 Veo 표시 생성 도구 표시를 흐림(delogo)이 아니라 역합성(표시 투명도 지도로 배경 = (관측−a·흰색)/(1−a), 윤곽 띠 라플라스 채움)으로 지움. 0.35초 페이드인·0.45초 페이드아웃, CAS 0.25, x264 veryslow. 소리: 30Hz 아래 자르기·약한 FFT 잡음 줄이기·EBU R128 2단계 −16 LUFS/트루 피크 −1.5 dBTP, 48 kHz 스테레오 AAC 128k",
    "applied": true
   },
   {
    "path": "assets/r617/knight-poster.jpg",
-   "bytes": 16492,
-   "sha256": "6ed1f263d3439db9e36a32091556bd0a76d64aa98db4b08a34acd8a34af4086e",
-   "source": "사용자 2026-11-10 첨부 영상 「타락천사 기사 강림」(세로 720×1280, 8초, 24fps)",
+   "bytes": 36757,
+   "sha256": "94650941aa9ba57cdfce32b87d58968e0f872f429f5ee77fdb9b9834a33e1717",
+   "source": "R745 knight.mp4",
    "use": "영상 불러오기 전 첫 화면(포스터)",
-   "process": "처리한 영상의 한 프레임을 JPEG q7 로 뽑음(자르지 않음, delogo 반영)",
+   "process": "R745: 처리한 영상 6.5초 프레임(자르지 않음, 표시 지움 반영)",
    "applied": true
   },
   {
    "path": "assets/r617/fall.mp4",
-   "bytes": 454714,
-   "sha256": "4d0fd640738f6324a5300b7e868333000e25f82c900b12d96677467361999026",
+   "bytes": 1748302,
+   "sha256": "9aa91de0c18c20f2c1d73c7361c12d9c853193cbfac93728b463d134c78d01bb",
    "source": "사용자 2026-11-10 첨부 영상 「추락」(1112×834, 4.06초, 60fps)",
    "use": "last301 타락천사 기사가 쓰러진 뒤 — 성벽에서 검은 바다로 추락",
-   "process": "자르지 않음: 4:3 원본 전체를 가운데 두고 양옆 흐린 채움. 오른쪽 아래·왼쪽 위 생성 도구 표시 delogo. 0.8배 느리게(4초→5초, 오디오 atempo 0.8), 60→24fps, 물속 장면이 너무 어두워 eq gamma 1.22·contrast 1.04, 페이드 0.35/0.6초, H.264 CRF27 faststart, AAC 모노 64k",
+   "process": "R745: 원본에서 1280×720 으로 다시 만듦. 자르지 않음: 4:3 원본 전체를 960×720 가운데, 양옆 흐린 채움. 왼쪽 위 AI 배지·오른쪽 아래 Dreamina AI 표시 생성 도구 표시를 흐림(delogo)이 아니라 역합성(표시 투명도 지도로 배경 = (관측−a·흰색)/(1−a), 윤곽 띠 라플라스 채움)으로 지움. 0.8배 느리게(atempo 0.8), 60→24fps, eq gamma 1.22·contrast 1.04, 페이드 0.35/0.6초, x264 veryslow. 소리: 30Hz 아래 자르기·약한 FFT 잡음 줄이기·EBU R128 2단계 −16 LUFS/트루 피크 −1.5 dBTP, 48 kHz 스테레오 AAC 128k",
    "applied": true
   },
   {
    "path": "assets/r617/fall-poster.jpg",
-   "bytes": 16593,
-   "sha256": "9ea5ea4f195c1dfc7d184b56b18b8ffc96358c1badd09a277fb67aa09a69c93d",
-   "source": "사용자 2026-11-10 첨부 영상 「추락」(1112×834, 4.06초, 60fps)",
+   "bytes": 34725,
+   "sha256": "1b7cd5e0bb8382d523e595cc81cf7e2d15b71d08bf2ea35ad77b533cc1fcb622",
+   "source": "R745 fall.mp4",
    "use": "영상 불러오기 전 첫 화면(포스터)",
-   "process": "처리한 영상의 한 프레임을 JPEG q7 로 뽑음(자르지 않음, delogo 반영)",
+   "process": "R745: 처리한 영상 1.0초 프레임(자르지 않음, 표시 지움 반영)",
    "applied": true
   },
   {
    "path": "assets/r617/beach.mp4",
-   "bytes": 534982,
-   "sha256": "fdd02290063f1314d563a614cd6ad22ef2fe5a362cbbe925b9f44a57decfc820",
+   "bytes": 1840562,
+   "sha256": "29c31151b43b4f958cb6c55e0bc331b0c4c10d1b556bb7ca201d7a961773ed4f",
    "source": "사용자 2026-11-10 첨부 영상 「해변」(세로 720×1280, 8초, 24fps)",
    "use": "last302 잠들지 못하는 마을 입장 — 젖은 모래 해안에서 깨어남",
-   "process": "자르지 않음: 960×540 안에 원본 전체를 가운데 두고 양옆 흐린 채움. 오른쪽 아래 생성 도구 표시 delogo. 24fps, 페이드 0.35/0.6초, H.264 CRF27 faststart, AAC 모노 64k",
+   "process": "R745: 원본에서 1280×720 으로 다시 만듦. 자르지 않음: 원본 전체를 가운데, 양옆 흐린 채움. 오른쪽 아래 Veo 표시 생성 도구 표시를 흐림(delogo)이 아니라 역합성(표시 투명도 지도로 배경 = (관측−a·흰색)/(1−a), 윤곽 띠 라플라스 채움)으로 지움. 페이드 0.35/0.6초, x264 veryslow. 소리: 30Hz 아래 자르기·약한 FFT 잡음 줄이기·EBU R128 2단계 −16 LUFS/트루 피크 −1.5 dBTP, 48 kHz 스테레오 AAC 128k",
    "applied": true
   },
   {
    "path": "assets/r617/beach-poster.jpg",
-   "bytes": 25190,
-   "sha256": "30c109bc3c6ebdb2f1a9562181011495c4d948f3891a93a2a2cb1c1282e75ea6",
-   "source": "사용자 2026-11-10 첨부 영상 「해변」(세로 720×1280, 8초, 24fps)",
+   "bytes": 54550,
+   "sha256": "8f0454ed2db43ab819e34fec11f8b27a6ea05b501eaded392d4b1817eaf10bc0",
+   "source": "R745 beach.mp4",
    "use": "영상 불러오기 전 첫 화면(포스터)",
-   "process": "처리한 영상의 한 프레임을 JPEG q7 로 뽑음(자르지 않음, delogo 반영)",
+   "process": "R745: 처리한 영상 1.0초 프레임(자르지 않음, 표시 지움 반영)",
    "applied": true
   }
  ]

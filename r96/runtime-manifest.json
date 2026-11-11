@@ -14774,18 +14774,18 @@
     },
     {
       "path": "assets/r309/intro/index.json",
-      "bytes": 1664,
-      "sha256": "0ae312cfabbc94c9d5c9fdb378e2a48d10f8ff82ba22e0314beac9f8f502144b"
+      "bytes": 1939,
+      "sha256": "dc1e1cbb498866f32ca19ee052065c1248306c6ff33f980eff52ed17ffca943a"
     },
     {
       "path": "assets/r309/intro/opening-hapil.mp4",
-      "bytes": 5325543,
-      "sha256": "6854857dc1efa6ed0c9ab6de83a20dadf6a2f84b7d34a584bef6d17decbfd522"
+      "bytes": 5897232,
+      "sha256": "54973aa462568a347c884cff64ad16c896d957f3709e31e93dd6597e3179f742"
     },
     {
       "path": "assets/r309/intro/poster-hapil.jpg",
-      "bytes": 55280,
-      "sha256": "2d19610d1d722ce14a8d51f1fc3ca8618c8d2d6e1bdabb1b50cbd1d725083f5e"
+      "bytes": 54504,
+      "sha256": "795a66093775f1ea837c26289eed7f5553c6d118793a0c32bd83ca558759e646"
     },
     {
       "path": "assets/r317/index.json",
@@ -14994,53 +14994,53 @@
     },
     {
       "path": "assets/r368/betrayal-poster.jpg",
-      "bytes": 64552,
-      "sha256": "8023a1c69c6abe20c3f2f1ecd7623c2f40ed362fd756b5b02216994f4bccd343"
+      "bytes": 73006,
+      "sha256": "12f770fddf0d4f52d603dd55ca73f6d64cd9835681b87df85f322056ff62b197"
     },
     {
       "path": "assets/r368/betrayal.mp4",
-      "bytes": 2779195,
-      "sha256": "8eee42e9a4eacdb5968fab16badeadcc6706e1a059af5417bc6dd2c5330c5c6c"
+      "bytes": 4278892,
+      "sha256": "f52148695b10843ea8e784a7a7a1ece52a0df221378dcb14dc5cfa99e3fbc857"
     },
     {
       "path": "assets/r368/index.json",
-      "bytes": 1163,
-      "sha256": "750298e47da0414c3e6f87706399c0b8f12b0682a70108f949266095462cfa9f"
+      "bytes": 1356,
+      "sha256": "963c8925a073b4f5711832d7958349d5fac494c727da9db82c046330c6317176"
     },
     {
       "path": "assets/r369/index.json",
-      "bytes": 1229,
-      "sha256": "8c54bbdae365938ebcd38b4f1b449a36c4eed800032c89d13ee4b4c4c6f76c10"
+      "bytes": 1581,
+      "sha256": "66569e0b9964a43c944f5b2422ce393c9e38b844a749c8f6c510a08d50f62909"
     },
     {
       "path": "assets/r369/poison-city-poster.jpg",
-      "bytes": 97161,
-      "sha256": "fdad4fb6c17d04ae235a822ce1df2cb7fbed72f0c12a76502a7a060f572a84a3"
+      "bytes": 111051,
+      "sha256": "06584ae2f9fb0ea5aa2122413660d8b9eab5366b2d39d88d9e385606768ab8fb"
     },
     {
       "path": "assets/r369/poison-city.mp4",
-      "bytes": 2776916,
-      "sha256": "57e8035a0d67f77c443f354a0343bc5d70d12a91f30929eaf6188bf86bc7420b"
+      "bytes": 4396161,
+      "sha256": "488ac2906ece3f7fb3e255a4471f1219db5d40ff8626195f58efd4d39b6d3abb"
     },
     {
       "path": "assets/r372/index.json",
-      "bytes": 1745,
-      "sha256": "0b70b96e61e051dd598a0618330ad5660c97c3f35d161138c744fa7ea564049a"
+      "bytes": 2423,
+      "sha256": "01928863d0f4d1817e06cd8eecc21276feb53130dfd7a54aacd54cfe8d132b45"
     },
     {
       "path": "assets/r372/opening-book.mp4",
-      "bytes": 1957517,
-      "sha256": "db0aa84a3ae6b537151d5d8107a46b96da9e76a6113498b50edc8cc0e977a552"
+      "bytes": 2652810,
+      "sha256": "3a8a88fa04e22b8aa314ce342734710b823a0ef46d6be23a59ab5aba8d8907f9"
     },
     {
       "path": "assets/r372/root-gate-poster.jpg",
-      "bytes": 93767,
-      "sha256": "6f4052820b34faa8af915f8ce6a520679dd62d526f3d428da53c26f064564075"
+      "bytes": 93669,
+      "sha256": "b5afde09c790b14d1cc187dba3a8ea75872545ba09e904343d5af7ec98232410"
     },
     {
       "path": "assets/r372/root-gate.mp4",
-      "bytes": 2855170,
-      "sha256": "60241585b1c8e09d91b15d01f559e372eba40c1b08bc948675032051d137ffd4"
+      "bytes": 3804020,
+      "sha256": "86837c041789c603fbc042d8b0a4362c08b84ac832cec37b7fed429c9146732a"
     },
     {
       "path": "assets/r374/mobs/index.json",
@@ -34394,38 +34394,38 @@
     },
     {
       "path": "assets/r617/beach-poster.jpg",
-      "bytes": 25190,
-      "sha256": "30c109bc3c6ebdb2f1a9562181011495c4d948f3891a93a2a2cb1c1282e75ea6"
+      "bytes": 54550,
+      "sha256": "8f0454ed2db43ab819e34fec11f8b27a6ea05b501eaded392d4b1817eaf10bc0"
     },
     {
       "path": "assets/r617/beach.mp4",
-      "bytes": 534982,
-      "sha256": "fdd02290063f1314d563a614cd6ad22ef2fe5a362cbbe925b9f44a57decfc820"
+      "bytes": 1840562,
+      "sha256": "29c31151b43b4f958cb6c55e0bc331b0c4c10d1b556bb7ca201d7a961773ed4f"
     },
     {
       "path": "assets/r617/fall-poster.jpg",
-      "bytes": 16593,
-      "sha256": "9ea5ea4f195c1dfc7d184b56b18b8ffc96358c1badd09a277fb67aa09a69c93d"
+      "bytes": 34725,
+      "sha256": "1b7cd5e0bb8382d523e595cc81cf7e2d15b71d08bf2ea35ad77b533cc1fcb622"
     },
     {
       "path": "assets/r617/fall.mp4",
-      "bytes": 454714,
-      "sha256": "4d0fd640738f6324a5300b7e868333000e25f82c900b12d96677467361999026"
+      "bytes": 1748302,
+      "sha256": "9aa91de0c18c20f2c1d73c7361c12d9c853193cbfac93728b463d134c78d01bb"
     },
     {
       "path": "assets/r617/index.json",
-      "bytes": 3503,
-      "sha256": "14dfbb521a6c5eef3329e8d52e2019146673568526289a660cd6687c1cc8bfaf"
+      "bytes": 4120,
+      "sha256": "8d93a803066adcf881f79adc4d5c0c84b4d15138f5625ec320c5fa8ec76cfb31"
     },
     {
       "path": "assets/r617/knight-poster.jpg",
-      "bytes": 16492,
-      "sha256": "6ed1f263d3439db9e36a32091556bd0a76d64aa98db4b08a34acd8a34af4086e"
+      "bytes": 36757,
+      "sha256": "94650941aa9ba57cdfce32b87d58968e0f872f429f5ee77fdb9b9834a33e1717"
     },
     {
       "path": "assets/r617/knight.mp4",
-      "bytes": 515831,
-      "sha256": "4fd8ff8d1fe95c68a7e72495f62a34997692ea5f71063302f96e5ded521ef979"
+      "bytes": 1846537,
+      "sha256": "6541fa6aceaeeb4f6721f6d48b6db02267da0b1fe54117fa2ce653ed8b3d99f8"
     },
     {
       "path": "assets/r620/bosses/b03-hit4.webp",
@@ -34474,18 +34474,18 @@
     },
     {
       "path": "assets/r667/index.json",
-      "bytes": 1523,
-      "sha256": "27273d67548d73348f14d33fd98d524851f9e4bd8967dcf0bf3878fa5e153449"
+      "bytes": 1434,
+      "sha256": "83b146d8fc9083c45e68574dc2b6b876e4e33534400409156c3f0de58739dfd4"
     },
     {
       "path": "assets/r667/title-poster.jpg",
-      "bytes": 58824,
-      "sha256": "43eaee8fd80283ac4239189b2aa73b1235de120b9a76c9511da7a7371a80415f"
+      "bytes": 56839,
+      "sha256": "359603343a0120e3f10ed2a5e3857ecac1dcd16050a2d1beaeb82c886681893e"
     },
     {
       "path": "assets/r667/title-video/loop.mp4",
-      "bytes": 464055,
-      "sha256": "46729ea44b9fd951ff240acdf79ce787a200a3d11f44344e270a470b9eec9598"
+      "bytes": 618160,
+      "sha256": "5289ac5f5fb968333239c6911626ca927f7d8db002e100840b912b3877b9d0bc"
     },
     {
       "path": "assets/r700/clean/assets/generated-v31224/actors-normalized/27ef01c10a8f_gluttony-human-attack.webp",
@@ -44569,7 +44569,7 @@
     }
   ],
   "fileCount": 8913,
-  "totalBytes": 1228701250,
+  "totalBytes": 1238209271,
   "webHTMLSha256": "50bb81bfe1c0759805da71ee259f6ce8826210ba5e192c1bed9f84b1480a9814",
   "largest": [
     {

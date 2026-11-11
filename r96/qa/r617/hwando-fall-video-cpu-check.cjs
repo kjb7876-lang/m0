@@ -1,6 +1,6 @@
 // R617 CPU 검사: 환도의 기억 서사 영상 3편(타락천사 기사 강림 · 추락 · 해변).  node r96/qa/r617/hwando-fall-video-cpu-check.cjs
 //  · 연결: 소스=런타임 사본, 스크립트 태그(R372 뒤·combat-r118 앞), verify-r96-public 목록·자산, pages.yml, bgm-map-r308 배수, 매니페스트
-//  · 자산: index.json 크기·sha256, mp4 faststart·편당 1MB 이하·합계 2MB 이하, 포스터, 원본 영상 미포함, 처리 기록(자르지 않음·delogo)
+//  · 자산: index.json 크기·sha256, mp4 faststart·편당 2MB 이하·합계 6MB 이하(R745 1280×720·원본 화질·스테레오로 올리며 1→2MB, 2→6MB), 포스터, 원본 영상 미포함, 처리 기록(자르지 않음·delogo)
 //  · 자막: 정본 개선본 last301·last302 문장 그대로, 시간 순서·끝까지
 //  · 동작(가짜 브라우저): knight=보스 깨어날 때 / fall=보스 쓰러진 뒤 1.2초 / beach=last302 입장 서사창 닫힌 뒤 0.7초,
 //    경계(서사창·창·협동·webdriver·사몽 층·다른 지역·이미 봄·꺼짐), 재생 중 tick 멈춤(바깥 감싸개 포함)·끝나면 흐름, 다른 지역으로 가면 닫힘, 실패 시 다시
@@ -26,10 +26,10 @@ ok('index.json present with 6 files',!!IDX&&Array.isArray(IDX.files)&&IDX.files.
 let total=0;for(const f of IDX?.files||[]){let b=null;try{b=fs.readFileSync(path.join(R,'runtime-text',f.path));}catch(_){}
  ok(f.path+' size·sha256 match',!!b&&b.length===f.bytes&&crypto.createHash('sha256').update(b).digest('hex')===f.sha256);
  ok(f.path+' table: source·use·process·applied',f.applied===true&&!!f.use&&!!f.process&&!!f.source);
- if(b&&/\.mp4$/.test(f.path)){total+=b.length;ok(f.path+' mp4 faststart ≤1MB ('+b.length+')',b.slice(4,8).toString()==='ftyp'&&b.length<=1000000&&b.indexOf('moov')>0&&b.indexOf('moov')<b.indexOf('mdat'));
-  ok(f.path+' processed without crop (pad/overlay) and logo removed',/자르지 않/.test(f.process)&&/delogo/.test(f.process));}
+ if(b&&/\.mp4$/.test(f.path)){total+=b.length;ok(f.path+' mp4 faststart ≤2MB ('+b.length+')',b.slice(4,8).toString()==='ftyp'&&b.length<=2000000&&b.indexOf('moov')>0&&b.indexOf('moov')<b.indexOf('mdat'));
+  ok(f.path+' processed without crop (pad/overlay) and logo removed',/자르지 않/.test(f.process)&&/delogo|역합성/.test(f.process));}
  if(b&&/\.jpg$/.test(f.path))ok(f.path+' jpeg ≤60KB',b[0]===0xff&&b[1]===0xd8&&b.length<=60000);}
-ok('three videos total ≤2MB ('+total+')',total>0&&total<=2000000);
+ok('three videos total ≤6MB ('+total+')',total>0&&total<=6000000); // R745: 960×540 CRF27 모노 → 1280×720 원본 화질 스테레오
 ok('user original videos not committed',fs.readdirSync(path.join(R,'client-source')).every(n=>!/dreamina|타락천사|배경만/.test(n))&&(()=>{try{return fs.readdirSync(path.join(R,'runtime-text/assets/r617')).every(n=>/^(knight|fall|beach)(-poster)?\.(mp4|jpg)$|^index\.json$/.test(n));}catch(_){return false;}})());
 if(!src){console.log(`\n${pass} pass, ${fail} fail`);process.exit(1);}
 // ---- 정적 ----
