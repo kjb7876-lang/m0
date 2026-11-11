@@ -10,11 +10,14 @@
 //  · 그림만 바꾼다. 판정·피해·체력·시간·세이브·생성 지점은 그대로. 최종 그림은 Dots CX-0070BM(보스 768칸 재작화)이 오면 그것으로 바꾼다.
 //  · 순서: 그림 바꾸기는 불러올 때 바로 drawEnemy 를 감싸(R620 보다 안쪽 → R620 이 -p1~-p4 자세 번호로 교차 보간·숨쉬기를 얹음),
 //    잔상은 setTimeout 0 으로 R620 보다 바깥에서(R620 이 다듬은 몸을 따라감).
-//  끄기: localStorage['storyworld.r760.bulmyeongwi']='{"on":false}'. 점검: window.__STORYWORLD_BULMYEONGWI_R760__.inspect()
+//  · R761: Dots CX-0070BM r1 보스 시트(실타래 형상·호박색 눈 한 점·보라 핵, 7분야 심사 통과 6장)가 오면 4자세 대신 시트로 그린다.
+//    대기 idle6 · 걷기 move6 · 공격은 실 팔 휘감기 atkA8 과 눈빛 atkB8 을 번갈아 · 실비 패턴은 두 팔을 드는 cast8 · 흩어짐은 핵이 드러나는 reveal8(정본 35장 "마침내 핵이 드러났고").
+//    768칸을 512칸으로 줄인 사본(scripts/r761-bulmyeongwi-sheets.py → assets/r760/boss/sheet-*.webp). 시트가 아직 안 실렸으면 톤 4자세로 그린다.
+//  끄기: localStorage['storyworld.r760.bulmyeongwi']='{"on":false}'(시트만 끄기 '{"sheets":false}'). 점검: window.__STORYWORLD_BULMYEONGWI_R760__.inspect()
 (()=>{'use strict';
 if(window.__STORYWORLD_BULMYEONGWI_R760__)return;
-const REV='R760-bulmyeongwi-1',KEY='storyworld.r760.bulmyeongwi';
-let prefs={on:true,ghosts:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object')for(const k of Object.keys(prefs))if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
+const REV='R760-bulmyeongwi-2',KEY='storyworld.r760.bulmyeongwi';
+let prefs={on:true,ghosts:true,sheets:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object')for(const k of Object.keys(prefs))if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={draws:0,swapped:0,waiting:0,patterns:0,ghosted:0,errors:0};let lastError=null,last=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const T=()=>typeof time==='number'&&Number.isFinite(time)?time:performance.now()/1000;
@@ -23,6 +26,10 @@ const POSE={w:393,h:432,px:193,py:406,vis:400};      // R104 mb-last302 열쇠 �
 const IDLE_VIS=257/384;                               // 엔진 대기 그림(672x384)의 보이는 몸 비율(보이는 영역 65..322)
 const SCALE=1.3;                                      // 대기 기준 대비 보스 몸 크기
 const PATTERN={rain:{foot:353},transition:{foot:353}}; // 672x384 패턴 그림의 발 줄
+// R761 Dots 시트: 512칸, 발 (256,469.33)(768칸 (384,704)), 보이는 키 약 383px(768칸 약 575px). fps 는 칸이 바뀌는 빠르기.
+const SC={cell:512,px:256,py:469.33,vis:383};
+const SHEET={idle:{n:6,fps:7},move:{n:6,fps:9},atkA:{n:8},atkB:{n:8},cast:{n:8,step:.11,loop:[4,6]},reveal:{n:8,step:.14}};
+const SPATH=k=>DIR.replace(/bulmyeongwi-$/,'')+'sheet-'+k+'.webp';
 const FX=/r251\/atlas|pixelfx|\/fx|effect|vfx|ring|circle|sigil|shadow|aura|hexagram|blood|flame|r572|r571|r92\/boss|death|dissol|burn/i;
 const srcOf=c=>String(c?.sourcePath||c?.image?.currentSrc||c?.image?.src||'');
 const roomId=()=>{try{return String(room?.id||'');}catch(_){return '';}};
@@ -39,7 +46,11 @@ function bodyCmd(cmds,st0){let best=null,bh=0;for(let i=st0;i<cmds.length;i++){c
   if(FX.test(srcOf(c))&&!/assets\/r760\//.test(srcOf(c)))continue;const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>bh){bh=h;best=c;}}return best;}
 // 잔상 흔들림 위상은 적마다 고정(같은 장면을 다시 찍어도 같게 — 홍보 영상 재녹화·검사 재현)
 const seedOf=e=>{const t=String(e?.id??e?.nativeId??'');let h=7;for(let i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))%9973;return h/9973*6.283;};
-const ST=new WeakMap();const stOf=e=>{let s=ST.get(e);if(!s)ST.set(e,s={unit:0,wx:NaN,wy:NaN,vx:0,move:0,lastT:-1,seed:seedOf(e)});return s;};
+const ST=new WeakMap();const stOf=e=>{let s=ST.get(e);if(!s)ST.set(e,s={unit:0,wx:NaN,wy:NaN,vx:0,move:0,lastT:-1,seed:seedOf(e),atkN:0,wasAtk:false,lastA:null,patK:'',patT0:0,patLast:-9});return s;};
+// 걷는지(시트 고르기·잔상 꼬리). 그리기 한 번에 한 번, 게임 시간으로.
+function track(e,s){const t=T(),dt=s.lastT<0?0:Math.max(0,Math.min(.1,t-s.lastT));s.lastT=t;let sp=0;
+ if(Number.isFinite(s.wx)&&dt>0){sp=Math.hypot(e.x-s.wx,e.y-s.wy)/dt;const d=(e.x-s.wx)-(e.y-s.wy);if(Math.abs(d)>1e-4)s.vx=d>0?1:-1;}
+ s.wx=e.x;s.wy=e.y;if(dt>0)s.move+=((sp>.18?1:0)-s.move)*Math.min(1,dt*8);}
 const Hq=c=>Math.abs(c.points[3][1]-c.points[0][1]);
 // 렌더러는 sourceRect 를 imageSize 로 나눠 칸 좌표를 만든다 → 그림을 바꾸면 imageSize 도 새 그림 크기로(안 그러면 옛 크기 기준으로 잘려 늘어남).
 function setImg(c,im,path,w,h){c.image=im;c.sourcePath=path;const iw=im.naturalWidth||im.width||w,ih=im.naturalHeight||im.height||h;c.imageSize=[iw,ih];}
@@ -50,11 +61,23 @@ function facing(e){try{const A=e.attack;if(A&&Number.isFinite(A.angle))return Ma
 function windupOf(A,e){const w=A?.castWindup150??A?.shape154?.windup??e?.combatProfile?.attackShape?.windup;return Number.isFinite(w)&&w>0?w:.35;}
 // 엔진은 휘두르는 동안 e.attack 없이 state 'attack' + 공격 그림만 줄 때가 있다(헤드리스 실측) → 그때는 상태 나이로 자세를 고른다.
 function poseFor(e,k){const A=e.attack;if(!A){if(k==='attack'||e.state==='attack'){const a=Number(e.stateAge)||0;return a<.25?1:a<.45?2:3;}return 4;}const w=windupOf(A,e),el=Number(A.elapsed)||0;return el<w?1:el<w+.18?2:3;}
+// R761 시트 칸 고르기: [시트, 칸]. 공격은 시작될 때마다 atkA·atkB 를 번갈아, 준비 동안 0→3칸(3칸 = 타격), 뒤로 .12초마다 한 칸씩 7칸까지.
+function sheetPick(e,k,s){const t=T();
+ if(k==='rain'||k==='transition'){const key=k==='rain'?'cast':'reveal',D=SHEET[key];if(s.patK!==k||t-s.patLast>.3){s.patK=k;s.patT0=t;}s.patLast=t;
+  let f=Math.floor((t-s.patT0)/D.step);if(D.loop){const[a,b]=D.loop;if(f>b)f=a+(f-a)%(b-a+1);}return [key,Math.min(D.n-1,f)];}
+ const A=e.attack,atk=!!A||k==='attack'||e.state==='attack';if(atk&&(!s.wasAtk||(A&&s.lastA&&A!==s.lastA)))s.atkN++;s.wasAtk=atk;if(A)s.lastA=A;
+ if(atk){let w=.35,el=Number(e.stateAge)||0;if(A){w=windupOf(A,e);el=Number(A.elapsed)||0;}const pr=el<w?el/w*3:3+(el-w)/.12;return [s.atkN%2?'atkA':'atkB',Math.max(0,Math.min(7,Math.floor(pr)))];}
+ if(s.move>.5)return ['move',Math.floor(t*SHEET.move.fps+s.seed)%6];return ['idle',Math.floor(t*SHEET.idle.fps+s.seed*3)%6];}
 // ── 안쪽: 그림·크기 ──
 function swap(e,cmds,st0){const c=bodyCmd(cmds,st0);if(!c)return;const p=srcOf(c),k=kindOf(p);if(!k||k==='done')return;const s=stOf(e);
  // 기준 키 = 엔진이 대기 그림을 그리는 보이는 몸 키를 '바닥 한 칸 화면 길이'로 나눈 값(카메라가 공격 때 당겨져도 자세마다 크기가 튀지 않게).
  const tl=tileLen(e);if(k==='idle'){const u=Hq(c)*IDLE_VIS/tl;s.unit=s.unit?s.unit+(u-s.unit)*.2:u;}
  const unit=(s.unit||Hq(c)*IDLE_VIS/tl)*tl;last={k,tl:+tl.toFixed(2),H:+Hq(c).toFixed(1),unitPerTile:+(s.unit||0).toFixed(2)};
+ track(e,s);
+ if(prefs.sheets){const[sk,f]=sheetPick(e,k,s),D=SHEET[sk],path=SPATH(sk),im=img(path);
+  if(im){const kk=unit*SCALE/SC.vis,sg=facing(e),[fx,fy]=footOf(e,c),x0=fx-sg*SC.px*kk,y0=fy-SC.py*kk,w=SC.cell*kk;
+   c.points=[[x0,y0],[x0+sg*w,y0],[x0+sg*w,y0+w],[x0,y0+w]];setImg(c,im,path,SC.cell*D.n,SC.cell);c.sourceRect=[f*SC.cell,0,SC.cell,SC.cell];
+   last={...last,sheet:sk,frame:f};stats.sheets=(stats.sheets||0)+1;return;}}
  if(k==='rain'||k==='transition'){const path=DIR+k+'.webp',im=img(path);if(!im){stats.waiting++;return;}
   const P=c.points,sg=P[1][0]>=P[0][0]?1:-1,iw=Math.abs(P[1][0]-P[0][0])/Math.max(1e-6,Hq(c)),nh=unit/IDLE_VIS*SCALE,nw=nh*iw,[fx,fy]=footOf(e,c);
   const cx=(P[0][0]+P[1][0])/2-((P[2][0]+P[3][0])/2-fx),top=fy-nh*PATTERN[k].foot/384,L=cx-sg*nw/2;
@@ -64,8 +87,7 @@ function swap(e,cmds,st0){const c=bodyCmd(cmds,st0);if(!c)return;const p=srcOf(c
  c.points=[[x0,y0],[x0+sg*w,y0],[x0+sg*w,y0+h],[x0,y0+h]];setImg(c,im,path,POSE.w,POSE.h);c.sourceRect=[0,0,POSE.w,POSE.h];stats.swapped++;}
 // ── 바깥: 겹겹의 잔상 ──
 const ALPHA={boss:[.26,.16,.1],mid:[.16]};
-function ghosts(e,who,cmds,st0){if(!prefs.ghosts)return;const c=bodyCmd(cmds,st0);if(!c)return;const s=stOf(e),t=T(),dt=s.lastT<0?0:Math.max(0,Math.min(.1,t-s.lastT));s.lastT=t;
- let sp=0;if(Number.isFinite(s.wx)&&dt>0){sp=Math.hypot(e.x-s.wx,e.y-s.wy)/dt;const d=(e.x-s.wx)-(e.y-s.wy);if(Math.abs(d)>1e-4)s.vx=d>0?1:-1;}s.wx=e.x;s.wy=e.y;if(dt>0)s.move+=((sp>.18?1:0)-s.move)*Math.min(1,dt*8);
+function ghosts(e,who,cmds,st0){if(!prefs.ghosts)return;const c=bodyCmd(cmds,st0);if(!c)return;const s=stOf(e),t=T();if(who!=='boss')track(e,s); // 보스는 안쪽에서 이미 잼
  const n=who==='mid'?1:(e.maxHp>0&&e.hp/e.maxHp<=.5?3:2),H=Hq(c);let K=1;const A=e.attack;if(A){const w=windupOf(A,e),el=Number(A.elapsed)||0;if(el<w)K=1+2.2*Math.min(1,el/w);}
  const out=[];for(let i=1;i<=n;i++){const side=i%2?1:-1,amp=H*(.035+.025*i)*K;
   const dx=side*amp*(.8+.2*Math.sin(t*2.4+i*2.3+s.seed))-(s.vx||0)*s.move*H*.05*i,dy=-H*.012*i*(1+Math.cos(t*1.2+i+s.seed))*.5;
@@ -74,9 +96,9 @@ function ghosts(e,who,cmds,st0){if(!prefs.ghosts)return;const c=bodyCmd(cmds,st0
  const i=cmds.indexOf(c);if(i>=0){cmds.splice(i,0,...out);stats.ghosted++;}
  // 몸이 커져 엔진이 옛 키에 맞춰 둔 이름표가 얼굴을 덮던 것 → 이름표를 몸 맨 위(보이는 윗줄 3%) 위로 올린다.
  if(who==='boss'){const top=Math.min(...c.points.map(q=>q[1]))+H*.03-6;for(let j=st0;j<cmds.length;j++){const k=cmds[j];if(k?.kind==='text'&&k.owner?.kind==='enemy'&&Array.isArray(k.point)&&k.point[1]>top){k.point=[k.point[0],top,...k.point.slice(2)];stats.label=(stats.label||0)+1;}}}}
-const ALL=['p1','p2','p3','p4','rain','transition'];let visit='';
+const ALL=['p1','p2','p3','p4','rain','transition'];const SALL=Object.keys(SHEET);let visit='';
 // 엔진은 지역을 옮길 때 그림 캐시를 비울 수 있다 → 불면귀 지역에 들어와 처음 적이 그려질 때 한 번 미리 청한다(보스 첫 등장에 원본이 비치지 않게).
-function preload(){const r=roomId();if(r===visit)return;visit=r;if(r==='last303'||r==='last302')for(const k of ALL)img(DIR+k+'.webp');}
+function preload(){const r=roomId();if(r===visit)return;visit=r;if(r==='last303'||r==='last302'){for(const k of ALL)img(DIR+k+'.webp');if(prefs.sheets)for(const k of SALL)img(SPATH(k));}}
 function wrap(fn,pre){if(typeof drawEnemy!=='function')return false;const base=drawEnemy;drawEnemy=function(e,...a){
   if(pre&&prefs.on)try{preload();}catch(_){}
   const who=prefs.on?role(e):null;if(!who)return base.call(this,e,...a);
@@ -86,7 +108,7 @@ const inner=wrap((e,who,cm,st0)=>{stats.draws++;if(who==='boss')swap(e,cm,st0);}
 let outer=false;const installOuter=()=>{if(!outer)outer=wrap(ghosts);};
 if(typeof setTimeout==='function')setTimeout(installOuter,0);else installOuter();
 // 보스 구역에 들어가기 전에 미리 불러 둔다(첫 등장에 원본이 한 번 비치지 않게).
-for(const k of ALL)img(DIR+k+'.webp');
+for(const k of ALL)img(DIR+k+'.webp');if(prefs.sheets)for(const k of SALL)img(SPATH(k));
 window.__STORYWORLD_BULMYEONGWI_R760__=Object.freeze({rev:REV,inspect:()=>({rev:REV,inner,outer,last,prefs:{...prefs},stats:{...stats},lastError,scale:SCALE}),
  set(p={}){for(const k of Object.keys(prefs))if(typeof p[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return {...prefs};}});
 })();

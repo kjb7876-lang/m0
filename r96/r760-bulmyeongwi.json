@@ -121,5 +121,115 @@
    "eyePx": 0,
    "sha256": "daac4a39bac5bc1030e97b0916647dc6fb87f7aeb42d6553b3498cff0ab0f76a"
   }
+ ],
+ "sheets": [
+  {
+   "key": "idle",
+   "source": "Dots CX-0070BM r1 CX-0070BM_boss_idle6_r2_c1.png",
+   "sourceSha256": "0c79a552ac8ce2551451e6f1c472a8d4ec7fddbf2b3ecb41d603869540f115a4",
+   "frames": 6,
+   "cell": 512,
+   "pivot": [
+    256.0,
+    469.33
+   ],
+   "path": "assets/r760/boss/sheet-idle.webp",
+   "size": [
+    3072,
+    512
+   ],
+   "bytes": 370818,
+   "sha256": "6344a85657d52b2c37fa00e6c9d9bf996ee1c81ed9e64dc55854e95758537085"
+  },
+  {
+   "key": "move",
+   "source": "Dots CX-0070BM r1 CX-0070BM_boss_move6_r1_c1.png",
+   "sourceSha256": "3928f071473a4306b85dfbfa51fbdb2617d50afc9c1be3b7a00c7e709cddceb7",
+   "frames": 6,
+   "cell": 512,
+   "pivot": [
+    256.0,
+    469.33
+   ],
+   "path": "assets/r760/boss/sheet-move.webp",
+   "size": [
+    3072,
+    512
+   ],
+   "bytes": 403024,
+   "sha256": "66879d1eb1fa1bc881f1365794c4aec0c324fccc4a68fc336b6e8047956d061d"
+  },
+  {
+   "key": "atkA",
+   "source": "Dots CX-0070BM r1 CX-0070BM_boss_atkA8_c1.png",
+   "sourceSha256": "ad028a980035f22ef469316979c9952555d219b2099dbeab3950b20a3453ec3e",
+   "frames": 8,
+   "cell": 512,
+   "pivot": [
+    256.0,
+    469.33
+   ],
+   "path": "assets/r760/boss/sheet-atkA.webp",
+   "size": [
+    4096,
+    512
+   ],
+   "bytes": 443448,
+   "sha256": "ad30a06b8af9070b6ee41438019f09ee529e931a02835a80f57bc220cfa23fa1"
+  },
+  {
+   "key": "atkB",
+   "source": "Dots CX-0070BM r1 CX-0070BM_boss_atkB8_c1.png",
+   "sourceSha256": "b1250503c9b4d901025a90510449fab0493031ae7a8cbceb2cca1e2fc31a66b4",
+   "frames": 8,
+   "cell": 512,
+   "pivot": [
+    256.0,
+    469.33
+   ],
+   "path": "assets/r760/boss/sheet-atkB.webp",
+   "size": [
+    4096,
+    512
+   ],
+   "bytes": 418532,
+   "sha256": "592d14a37206adef8b4adb01c33d09285bb900a342c49bafa71967d5900b919f"
+  },
+  {
+   "key": "cast",
+   "source": "Dots CX-0070BM r1 CX-0070BM_boss_cast8_c1.png",
+   "sourceSha256": "eade3f2753c73e8eca72644d4f943b8d100a15aceee7b5e1952dd9dda31795f1",
+   "frames": 8,
+   "cell": 512,
+   "pivot": [
+    256.0,
+    469.33
+   ],
+   "path": "assets/r760/boss/sheet-cast.webp",
+   "size": [
+    4096,
+    512
+   ],
+   "bytes": 404936,
+   "sha256": "904bee17dd53e75f6307429af44cbb6b4d3cb56bfd0c78877beee49a3b959e1c"
+  },
+  {
+   "key": "reveal",
+   "source": "Dots CX-0070BM r1 CX-0070BM_boss_reveal8_c1.png",
+   "sourceSha256": "009cc4cc956cc1d25f71ea6353e1670d831ae42cc6b7cf08a5f9baf842eec125",
+   "frames": 8,
+   "cell": 512,
+   "pivot": [
+    256.0,
+    469.33
+   ],
+   "path": "assets/r760/boss/sheet-reveal.webp",
+   "size": [
+    4096,
+    512
+   ],
+   "bytes": 489304,
+   "sha256": "ff3eb8c4a0571a2858d6aec2bf0204248d1ffd9cc2453c6ff52f82b729c5be4e"
+  }
  ]
 }

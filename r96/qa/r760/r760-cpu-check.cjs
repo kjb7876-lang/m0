@@ -10,10 +10,10 @@ const F=path.join(R,'client-source','bulmyeongwi-r760.js');ok(fs.existsSync(F),'
 const F620=path.join(R,'client-source','boss-motion-r620.js');const src620=fs.readFileSync(F620,'utf8');
 const IDLE='assets/r425/clean/assets/generated-v31224/actors-normalized/692e4ae01c29_bulmyeongwi_idle.webp',ATK='assets/generated-v31224/actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp',
  RAIN='assets/generated-v31224/actors-normalized/35526bcfa1c2_bulmyeongwi_rain.webp',MID='assets/r104/bosses/mb-last302-v31231-p4.webp',MOB='assets/episode1b/generated-v394/bulmyeongwi_b.webp';
-function world({store={},roomId='last303',with620=false,ready=true}={}){const timers=[];const ctx={Math,String,Number,Array,Object,JSON,Map,WeakMap,Set,Symbol,isFinite,RegExp,performance:{now:()=>0},
+function world({store={},roomId='last303',with620=false,ready=true,sheets=false}={}){const timers=[];const ctx={Math,String,Number,Array,Object,JSON,Map,WeakMap,Set,Symbol,isFinite,RegExp,performance:{now:()=>0},
   setTimeout:(f)=>{timers.push(f);return timers.length;},localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}}};ctx.window=ctx;vm.createContext(ctx);
- vm.runInContext(`var time=0,room={id:${JSON.stringify(roomId)},enemies:[]},player={x:6,y:3},ctx={commands:[]};var __ready=${ready},__added=[];
-  function addImage(p){__added.push(p);}function readyImage(p){if(String(p).includes('assets/r760/')&&!__ready)return null;const w=/-p[0-9][.]/.test(p)?393:672,h=/-p[0-9][.]/.test(p)?432:384;return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:w,naturalHeight:h}};}
+ vm.runInContext(`var time=0,room={id:${JSON.stringify(roomId)},enemies:[]},player={x:6,y:3},ctx={commands:[]};var __ready=${ready},__sheets=${sheets},__added=[];
+  function addImage(p){__added.push(p);}function readyImage(p){if(String(p).includes('assets/r760/')&&!__ready)return null;if(/sheet-/.test(p)){if(!__sheets)return null;const n=/sheet-(idle|move)/.test(p)?6:8;return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:n*512,naturalHeight:512}};}const w=/-p[0-9][.]/.test(p)?393:672,h=/-p[0-9][.]/.test(p)?432:384;return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:w,naturalHeight:h}};}
   var zoom=1;function project(x,y){return {x:100+(x-3)*10*zoom,y:200+(y-3)*5*zoom};}
   // 엔진 몸: 발밑 = project(e), 그림 672x384 전체 사각형. 대기 그림은 키 158.7(발 줄 322/384), 공격 그림은 132.6 으로 그려졌다(실측).
   function drawEnemy(e){const P=project(e.x,e.y);const path=e.__path||(e.attack?'${ATK}':'${IDLE}');const qh=zoom*(path.includes('attack')?132.6:path.includes('mb-last302')?94.5:path.includes('episode1b')?80:158.7);
@@ -107,4 +107,43 @@ ok(typeof API(world())?.inspect==='function','API inspect');
 {// 경계값: dt 0·큰 dt 에서 유한, 오류 0
  const c=world(),e=boss();frames(c,e,.3);run(c,'ctx.commands.length=0');c.drawEnemy(e);c.drawEnemy(e);run(c,'time+=5;ctx.commands.length=0');c.drawEnemy(e);
  ok(run(c,'ctx.commands').filter(k=>k.kind==='image').every(k=>k.points.flat().every(Number.isFinite)),'finite points after dt=0 and dt=5');ok(API(c).inspect().stats.errors===0,'no errors');}
+// ── R761: Dots CX-0070BM 불면귀 보스 시트(실타래 형상·호박 눈·보라 핵, 512칸·발 (256,469.33)) ──
+const SH=k=>(/sheet-(\w+)\.webp$/.exec(k.sourcePath)||[])[1],FR=k=>Math.round(k.sourceRect[0]/512),SVIS=383; // 시트 보이는 키(768칸 약 575px → 512칸)
+const svis=k=>H(k)*SVIS/512;
+{// 대기: idle 시트 6칸이 돌고, 발이 땅점에, 크기는 엔진 대기 ×1.3(4자세 때와 같은 기준)
+ const c=world({sheets:true}),e=boss();const L=frames(c,e,1.2);const f=L[L.length-1];
+ ok(SH(f.b)==='idle','idle → sheet-idle ('+f.b.sourcePath+')');ok(JSON.stringify(f.b.imageSize)==='[3072,512]','idle sheet imageSize 3072x512');
+ ok(f.b.sourceRect[1]===0&&f.b.sourceRect[2]===512&&f.b.sourceRect[3]===512&&f.b.sourceRect[0]%512===0,'idle: one 512 cell ('+f.b.sourceRect+')');
+ ok(new Set(L.map(x=>FR(x.b))).size>=5,'idle: frames cycle ('+[...new Set(L.map(x=>FR(x.b)))].join('')+')');
+ const fy=f.b.points[0][1]+H(f.b)*469.33/512,fx=f.b.points[0][0]+(f.b.points[1][0]-f.b.points[0][0])*.5;ok(Math.abs(fy-200)<.6&&Math.abs(fx-100)<.6,'idle sheet: pivot on the ground point ('+fx.toFixed(2)+','+fy.toFixed(2)+')');
+ ok(Math.abs(svis(f.b)/UNIT-1.3)<.02,'idle sheet: visible height = 1.3 × engine idle ('+(svis(f.b)/UNIT).toFixed(3)+')');
+ ok(f.ghosts.length===2&&f.ghosts.every(g=>g.sourcePath===f.b.sourcePath&&String(g.sourceRect)===String(f.b.sourceRect)&&String(g.imageSize)===String(f.b.imageSize)),'afterimages share the sheet frame');}
+{// 공격: 첫 공격은 실 팔 휘감기(atkA), 다음 공격은 눈빛(atkB). 준비 동안 0→3칸, 타격 뒤 7칸까지, 크기는 대기와 같다
+ const c=world({sheets:true}),e=boss();frames(c,e,.3);const idleH=svis(frames(c,e,.05)[0].b);
+ e.attack={elapsed:0,angle:0,shape154:{windup:.35}};const L=frames(c,e,1.0,{step:(e)=>{e.attack.elapsed+=1/30;}});
+ ok(L.every(f=>SH(f.b)==='atkA'),'1st attack → sheet-atkA ('+[...new Set(L.map(f=>SH(f.b)))]+')');const fr=L.map(f=>FR(f.b));
+ ok(fr.every((v,i)=>!i||v>=fr[i-1]),'attack frames move forward ('+fr.join('')+')');ok(fr[0]===0&&fr[9]<=3&&fr[11]>=3&&fr[fr.length-1]===7,'windup 0..2, strike 3 at windup end, ends on 7 ('+fr.join('')+')');
+ ok(L.every(f=>Math.abs(svis(f.b)-idleH)<.5),'attack sheet keeps the idle size');ok(JSON.stringify(L[0].b.imageSize)==='[4096,512]','attack sheet imageSize 4096x512');
+ ok(L.every(f=>f.b.points[1][0]>f.b.points[0][0]),'hero on the right: sheet not mirrored');
+ e.attack=null;frames(c,e,.3);e.attack={elapsed:0,angle:Math.PI,shape154:{windup:.35}};run(c,'player.x=0');const L2=frames(c,e,.3,{step:(e)=>{e.attack.elapsed+=1/30;}});
+ ok(L2.every(f=>SH(f.b)==='atkB'),'2nd attack → sheet-atkB');ok(L2.every(f=>f.b.points[1][0]<f.b.points[0][0]),'hero on the left: sheet mirrored');}
+{// 엔진이 e.attack 없이 state 'attack' 만 줄 때도 공격 시트가 앞으로 감
+ const c=world({sheets:true}),e=boss({state:'attack',stateAge:0,__path:ATK});const L=frames(c,e,.9,{step:(e)=>{e.stateAge+=1/30;}});
+ const fr=L.map(f=>FR(f.b));ok(L.every(f=>/^atk/.test(SH(f.b)))&&fr[0]===0&&fr[fr.length-1]===7&&fr.every((v,i)=>!i||v>=fr[i-1]),'state attack: atk sheet 0→7 ('+fr.join('')+')');}
+{// 걷기 → move 시트, 멈추면 idle
+ const c=world({sheets:true}),e=boss();const L=frames(c,e,.8,{step:(e)=>{e.x+=.06;}});ok(SH(L[L.length-1].b)==='move','walking → sheet-move ('+SH(L[L.length-1].b)+')');
+ const L2=frames(c,e,.8);ok(SH(L2[L2.length-1].b)==='idle','stopped → sheet-idle');}
+{// 실비 패턴 → 두 팔을 들어 올리는 cast(4~6칸 되풀이), 흩어짐 → 핵이 드러나는 reveal(마지막 칸 유지)
+ const c=world({sheets:true}),e=boss({__path:RAIN});const L=frames(c,e,1.6);const fr=L.map(f=>FR(f.b));
+ ok(L.every(f=>SH(f.b)==='cast'),'rain → sheet-cast');ok(fr[0]===0&&fr.slice(-15).every(v=>v>=4&&v<=6),'cast: rises then loops 4..6 ('+fr.join('')+')');
+ ok(L.every(f=>{const fy=f.b.points[0][1]+H(f.b)*469.33/512;return Math.abs(fy-200)<.6;}),'cast: foot on the ground');
+ const TR=RAIN.replace('35526bcfa1c2_bulmyeongwi_rain','de4c1414da0d_bulmyeongwi_transition');const c2=world({sheets:true}),e2=boss({__path:TR});const L2=frames(c2,e2,1.6);const fr2=L2.map(f=>FR(f.b));
+ ok(L2.every(f=>SH(f.b)==='reveal')&&fr2[0]===0&&fr2.slice(-5).every(v=>v===7),'transition → sheet-reveal, holds the core-revealed frame ('+fr2.join('')+')');}
+{// 시트가 안 실렸으면 톤 4자세로(빈 화면·원본 비침 없음), 지역에 들어오면 시트도 미리 청함
+ const c=world({sheets:false}),e=boss();const f=frames(c,e,.2).pop();ok(/bulmyeongwi-p4\.webp$/.test(f.b.sourcePath),'sheet not ready: toned p4 fallback');
+ ok(['idle','move','atkA','atkB','cast','reveal'].every(k=>run(c,'__added').some(p=>p.endsWith('sheet-'+k+'.webp'))),'sheets requested');}
+{// R620 과 함께: 시트를 바꿀 때 R620 교차 보간 잔상은 옛 그림의 imageSize 를 가져야(안 그러면 3칸 동안 엉뚱하게 잘림)
+ const c=world({sheets:true,with620:true}),e=boss();frames(c,e,.5);for(let i=0;i<60&&FR(frames(c,e,1/30)[0].b)!==0;i++);e.attack={elapsed:0,angle:0,shape154:{windup:.35}};let bad=0,xf=0;
+ frames(c,e,.9,{step:(e)=>{e.attack.elapsed+=1/30;}}).forEach(f=>f.cm.filter(k=>k.r620Ghost).forEach(g=>{xf++;const n=/sheet-(idle|move)/.test(g.sourcePath)?6:8;if(/sheet-/.test(g.sourcePath)&&g.imageSize[0]!==n*512)bad++;}));
+ ok(xf>0,'R620 cross-fades idle frame 0 → atkA frame 0 ('+xf+')');ok(bad===0,'R620 cross-fade ghost keeps its own imageSize ('+xf+' ghosts, '+bad+' bad)');ok(API(c).inspect().stats.errors===0,'no errors with R620 + sheets');}
 console.log('R760 CPU check OK ('+n+' assertions)');

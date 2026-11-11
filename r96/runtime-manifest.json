@@ -34618,6 +34618,36 @@
       "sha256": "daac4a39bac5bc1030e97b0916647dc6fb87f7aeb42d6553b3498cff0ab0f76a"
     },
     {
+      "path": "assets/r760/boss/sheet-atkA.webp",
+      "bytes": 443448,
+      "sha256": "ad30a06b8af9070b6ee41438019f09ee529e931a02835a80f57bc220cfa23fa1"
+    },
+    {
+      "path": "assets/r760/boss/sheet-atkB.webp",
+      "bytes": 418532,
+      "sha256": "592d14a37206adef8b4adb01c33d09285bb900a342c49bafa71967d5900b919f"
+    },
+    {
+      "path": "assets/r760/boss/sheet-cast.webp",
+      "bytes": 404936,
+      "sha256": "904bee17dd53e75f6307429af44cbb6b4d3cb56bfd0c78877beee49a3b959e1c"
+    },
+    {
+      "path": "assets/r760/boss/sheet-idle.webp",
+      "bytes": 370818,
+      "sha256": "6344a85657d52b2c37fa00e6c9d9bf996ee1c81ed9e64dc55854e95758537085"
+    },
+    {
+      "path": "assets/r760/boss/sheet-move.webp",
+      "bytes": 403024,
+      "sha256": "66879d1eb1fa1bc881f1365794c4aec0c324fccc4a68fc336b6e8047956d061d"
+    },
+    {
+      "path": "assets/r760/boss/sheet-reveal.webp",
+      "bytes": 489304,
+      "sha256": "ff3eb8c4a0571a2858d6aec2bf0204248d1ffd9cc2453c6ff52f82b729c5be4e"
+    },
+    {
       "path": "assets/r91/death/death-crystal-core.png",
       "bytes": 252893,
       "sha256": "3a7fdf719f776526d6c7f2d88607cfe88851d8d4e4989b019fd2331c746de467"
@@ -42639,8 +42669,8 @@
     },
     {
       "path": "boss-motion-r620.js",
-      "bytes": 9499,
-      "sha256": "53eae81b80068e3d485cbec145df054e664bcb61d1e7454fb4aa92c694efb72d"
+      "bytes": 9552,
+      "sha256": "12c7848ba1890ccb1cc5e4f522fc683115909aee099f2b28ea688eb49367f5fe"
     },
     {
       "path": "boss-r205.js",
@@ -42664,8 +42694,8 @@
     },
     {
       "path": "bulmyeongwi-r760.js",
-      "bytes": 11619,
-      "sha256": "4c0d894889e6bfde81fd101d8929306b5601a25e5fd50537ffe3db87f90a413e"
+      "bytes": 14424,
+      "sha256": "ecdeb0ee3b5827498ac7e6b54df0a85d3c94180cd4ea4ee232b127f0bf48eeac"
     },
     {
       "path": "canon-throw-r471.js",
@@ -44633,8 +44663,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8926,
-  "totalBytes": 1229117801,
+  "fileCount": 8932,
+  "totalBytes": 1231650721,
   "webHTMLSha256": "d8bef146aec9863ec63a5a3150cab3c47344631e13664b5969cd73d490e68348",
   "largest": [
     {
