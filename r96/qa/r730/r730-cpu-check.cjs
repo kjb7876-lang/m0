@@ -39,13 +39,20 @@ for(const id of['last302','last303']){const fx=FX[id],P=api.plan(fx),P2=api.plan
  ok(id+': boss room and gathering room are left alone',floor.every(p=>!inB(W.boss,p,1)&&!inB(W.gather,p,1)));
  ok(id+': doors, entry and existing props are kept clear',floor.every(p=>fx.doors.every(d=>Math.hypot(d.x-p.x,d.y-p.y)>=3)&&Math.hypot(fx.entry.x-p.x,fx.entry.y-p.y)>=3&&fx.props.every(q=>Math.hypot(q.x-p.x,q.y-p.y)>=2)));
  ok(id+': stone lanterns light the lanes without clutter ('+lamps.length+', at least 8 cells apart)',lamps.length>=8&&lamps.length<=26&&lamps.every((a,i)=>lamps.every((b,j)=>i>=j||Math.hypot(a.x-b.x,a.y-b.y)>=8)));
- ok(id+': lane props hug the back edge (never mid-lane)',floor.every(p=>!Fset.has(Math.floor(p.x)+','+(Math.floor(p.y)-1))||!Fset.has((Math.floor(p.x)-1)+','+Math.floor(p.y))));
+ // 배치 수정(2026-11-11 사용자 "조형물이 벽에 감기는 문제"): 길 뒤쪽 끝 칸에서 0.75칸 안쪽에 세우면 서낭나무·석등이 뒤 절벽(벽 덩어리)에 파묻혔다.
+ //  R412 의 3D 벽 검사(그림 불투명 점의 3%까지)로 실측한 결과(헤드리스, last302·303 전수): 칸 시작에서 안쪽으로 나무 1.75칸·석등 1.0칸·향로 0.75칸·기와 더미 0.75칸 이상이어야 0~3%.
+ //  그래서 뒤쪽 끝에서 안쪽으로 띄운 거리가 종류별 최소 이상이고, 그래도 길 한가운데로 나오지 않게 3칸 안에 있어야 한다.
+ const insetOf=p=>{let a=Math.floor(p.y);while(Fset.has(Math.floor(p.x)+','+(a-1)))a--;let b=Math.floor(p.x);while(Fset.has((b-1)+','+Math.floor(p.y)))b--;return Math.min(p.y-a,p.x-b);};
+ const MINI={tree:1.75,lamp:1.0,censer:.75,giwa:.75};
+ ok(id+': lane props stand back far enough from the cliff behind them (tree 1.75, lamp 1.0, censer/giwa .75 cells from the back edge)',floor.every(p=>insetOf(p)>=MINI[p.kind]-1e-9),floor.filter(p=>insetOf(p)<MINI[p.kind]-1e-9).map(p=>p.kind+'@'+p.x+','+p.y+':'+insetOf(p)).slice(0,4));
+ ok(id+': lane props still hug the back lane edge (never mid-lane, within 3 cells)',floor.every(p=>insetOf(p)<=3));
  ok(id+': total stays modest ('+P.length+')',P.length<=80);}
 // 방에 붙이기
 {const fx=FX.last302,room={id:'last302',layer:'STORY',props:fx.props.map(p=>({...p})),exploration:{floorCells:fx.floorCells,worldR74:{rooms:fx.rooms,doors:fx.doors},worldWardR81:{bossBounds:fx.ward.boss,gatherBounds:fx.ward.gather},entry:fx.entry}};
  const before=room.props.length;api.apply(room);const added=room.props.filter(p=>p.r730);api.apply(room);
+ ok('lane props are left for R412 to measure against the walls (houses on the hill are exempt)',added.filter(p=>p.r730!=='house').every(p=>!p.r412Wall)&&added.filter(p=>p.r730==='house').every(p=>p.r412Wall===1));
  ok('apply adds once (idempotent), keeps existing props',added.length>20&&room.props.length===before+added.length&&room.props.slice(0,before).every((p,i)=>p.id===fx.props[i].id));
- ok('added props are decoration only',added.every(p=>p.solid!==true&&p.interactive===false&&p.autoTargetEligible6===false&&p.r412Wall===1));
+ ok('added props are decoration only',added.every(p=>p.solid!==true&&p.interactive===false&&p.autoTargetEligible6===false));
  ok('houses carry the lift and face the lane (flip on -x side)',added.filter(p=>p.r730==='house').every(p=>p.visualLiftPx>0)&&added.some(p=>p.r303Flip));
  const other={id:'last301',layer:'STORY',props:[],exploration:room.exploration};api.apply(other);ok('other regions untouched',other.props.length===0);
  const dream={id:'last302',layer:'DREAM',props:[],exploration:room.exploration};api.apply(dream);ok('non-STORY layer untouched',dream.props.length===0);}
