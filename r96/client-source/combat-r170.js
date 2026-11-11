@@ -101,7 +101,7 @@ function drawHex(h){const q=project(h.x,h.y),w=h.radius*Math.SQRT2*Math.abs(proj
 function drawLight(c){const q=project(c.x,c.y),hh=H(),S=SPR(),T0=T(),hit=c.hp<c.max&&(c.lastHp??c.hp)>c.hp;c.lastHp=c.hp;const HOLY={a:[20,90,90],b:[200,255,240]},pulse=1+.06*Math.sin(T0*4);
  try{window.__STORYWORLD_PIXELFX_R163__?.play('core-orb-teal',c.x,c.y,{loop:true,key:'r173-light',k:.9,z:hh*.35,until:T0+.4});}catch(_){}
  ctx.save();try{if(S){S.draw('ring',HOLY,q.x,q.y,hh*1.8*pulse,hh*.9*pulse,{alpha:.7,overHero:true});S.draw('glow',hit?{a:[120,10,20],b:[255,90,90]}:HOLY,q.x,q.y-hh*.6,hh*1.8,hh*1.8,{alpha:.7,overHero:true});}
-  const W=hh*1.5,y=q.y-hh*1.45,r=Math.max(0,Math.min(1,c.hp/c.max));ctx.fillStyle='rgba(4,6,8,.85)';ctx.fillRect(q.x-W/2-1,y-1,W+2,7);ctx.fillStyle=r<.3?'#d0605a':'#7fd8cc';ctx.fillRect(q.x-W/2,y,W*r,5);}finally{ctx.restore();}}
+  const W=hh*1.5,y=q.y+Math.max(8,hh*.14),r=Math.max(0,Math.min(1,c.hp/c.max));ctx.fillStyle='rgba(4,6,8,.85)';ctx.fillRect(q.x-W/2-1,y-1,W+2,7);ctx.fillStyle=r<.3?'#d0605a':'#7fd8cc';ctx.fillRect(q.x-W/2,y,W*r,5);}finally{ctx.restore();}}
 // R173(사용자 "정화의 코어에 J의 인장이 박혀 있고(작은 십자가 문양)"): 코어 빛구슬 한가운데에 작은 금빛 십자가(R106 칠한 cross). 빛구슬(pixelfx) 앞에 그려지도록 조금 앞자리 scope 로.
 const SEAL_J={a:[60,36,8],b:[236,196,96]};// 흰 빛구슬 위에서도 보이게 짙은 금
 function sealAt(x,y,lift){const S=SPR();if(!S)return;const q=project(x,y),hh=H(),f=()=>{const p=1+.05*Math.sin(T()*2.4);S.draw('cross',SEAL_J,q.x,q.y-hh*lift,hh*.5*p,hh*.64*p,{alpha:1,overHero:true,blend:'source-over'});S.draw('cross',{a:[200,160,70],b:[255,246,210]},q.x,q.y-hh*lift,hh*.3*p,hh*.4*p,{alpha:.8,overHero:true});};
@@ -119,7 +119,7 @@ function drawTower(e){const t=e.r170Tower,row=typeof readyImage==='function'?rea
  ctx.save();try{ctx.globalAlpha*=dead?Math.max(0,1-age):1;if(S&&charge>0)S.draw('glow',P.main,q.x,q.y-hh*.1,hh*1.1,hh*.45,{alpha:.7*charge});/* R596: 늘 깔던 발밑 타원 빛무리(.25)는 어두운 탑 색이라 화면에서 '둥근 그림자 얼룩'으로 읽혔다 → 시전 직전(1.3초)에만 차오르는 예고 빛으로 */
   if(row){if(typeof sprite==='function'){towerShadow(e,t.art,q.x,q.y,hh);sprite(t.art,q.x,q.y,hh,{filter:e.flash>0?'brightness(1.7)':'saturate(.9) contrast(1.05)'});}}
   if(S&&charge>0)S.draw('flare',P.main,q.x,q.y-hh*.75,hh*.5*charge,hh*.5*charge,{angle:T(),alpha:charge*.8,overHero:true});
-  const W=hh*.55,y=q.y-hh-8,r=Math.max(0,Math.min(1,e.hp/Math.max(1,e.maxHp)));ctx.fillStyle='rgba(4,4,6,.85)';ctx.fillRect(q.x-W/2-1,y-1,W+2,6);ctx.fillStyle='#b8323a';ctx.fillRect(q.x-W/2,y,W*r,4);}finally{ctx.restore();}stats.towerDraws++;}
+  const W=hh*.55,y=q.y+Math.max(6,hh*.05),r=Math.max(0,Math.min(1,e.hp/Math.max(1,e.maxHp)));ctx.fillStyle='rgba(4,4,6,.85)';ctx.fillRect(q.x-W/2-1,y-1,W+2,6);ctx.fillStyle='#b8323a';ctx.fillRect(q.x-W/2,y,W*r,4);}finally{ctx.restore();}stats.towerDraws++;}
 
 // ---- ④ 본편 몹을 맵 곳곳에(사용자 "스토리모드 몹 분포 맵 곳곳에, 한쪽 길목에 몰지 말고") ----------------------------------
 //  맵에 들어설 때 아직 싸우지 않은 일반 몹을 셋까지의 무리(첫 몹에서 2.5칸 안)로 묶고, 바닥 칸에서 '가장 먼 점 고르기'로 고른 자리들(입구에서 8칸 넘게,

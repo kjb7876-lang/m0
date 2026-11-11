@@ -18,12 +18,12 @@
 //  ⑨ 이름(사용자 11:50 "실검무 츠바메가에시 네이밍을 바람베기로 수정"): 패시브 threadTsubameR64 '실검무 · 츠바메가에시' → '실검무 · 바람베기',
 //     패시브 창 안내 문장의 '츠바메가에시'도 '바람베기'로(엔진 원문은 그대로 두고 덧씌움). 저장·효과는 id 로 묶여 있어 그대로.
 //  ⑩ 적 공격 그림 방향(사용자 13:12·13:20): 전수조사로 영웅 반대쪽을 보고 그려진 공격 그림만 골라, 공격 중일 때 대상 쪽을 보게 좌우만 바로잡는다. 아래 설명.
-//  끄기: localStorage['storyworld.r425.flow']='{"size":false}' / '{"punch":false}' / '{"laurenTip":false}' / '{"spiderX":false}' / '{"gaze":false}' / '{"gazeSlot":false}' / '{"plant":false}' / '{"hunter":false}' / '{"bossBar":false}' / '{"mobBar":false}' / '{"samongCross":false}' / '{"atkFace":false}', 예고 표시 켜기 '{"tele":true}'
+//  끄기: localStorage['storyworld.r425.flow']='{"size":false}' / '{"punch":false}' / '{"laurenTip":false}' / '{"spiderX":false}' / '{"gaze":false}' / '{"gazeSlot":false}' / '{"plant":false}' / '{"hunter":false}' / '{"bossBar":false}' / '{"mobBar":false}' / '{"feetBars":false}' / '{"samongCross":false}' / '{"atkFace":false}', 예고 표시 켜기 '{"tele":true}'
 (()=>{'use strict';
 if(window.__STORYWORLD_COMBAT_FLOW_R425__)return;
 const REV='R425-flow-8',KEY='storyworld.r425.flow';
 const BANDS={normal:[1.22,1.55],leader:[1.45,1.75],mid:[1.60,1.80],boss:[1.90,2.30]},SMIN=.55,SMAX=2.2;
-let prefs={face:true,size:true,punch:true,laurenTip:true,spiderX:true,gaze:true,gazeSlot:true,plant:true,hunter:true,bossBar:true,mobBar:true,tele:false,samongCross:true,atkFace:true,clean:true};
+let prefs={face:true,size:true,punch:true,laurenTip:true,spiderX:true,gaze:true,gazeSlot:true,plant:true,hunter:true,bossBar:true,mobBar:true,feetBars:true,tele:false,samongCross:true,atkFace:true,clean:true};
 const solo=()=>{let m=null;try{m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();}catch(_){}return !m||m==='off';};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={scaled:0,kept:0,refixed:0,sheets:0,punches:0,tips:0,skipped:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0;
@@ -90,8 +90,9 @@ function post(e,C,st,fx,fy,SXe,SYe,SXs,SYs,teleOff,headBar,s){
   const dy=fy+s.barOff-y0;for(const c of bars)mapCmd(c,p=>[p[0],p[1]+dy]);const ny=fy+s.barOff-5;
   for(let i=st;i<C.length;i++){const c=C[i];if(c?.kind==='text'&&c.text===e.name&&Array.isArray(c.point))c.point=[c.point[0],ny];}stats.headBars=(stats.headBars||0)+1;}}
 // R596(사용자 2026-11-10 "아래 이런 예고선이 아직도 나오는 문제"): 일반 몹 체력 줄(R90 '절제된 체력 표시' — 발밑에 2px 검붉은 가로 선)이 바닥 예고선처럼 읽혔다
+// R786(사용자 2026-11-11 "모든 것들 기본 체력바 발아래쪽에 둬 … 영웅처럼"): 기본은 모두 발 아래(feetBars:true) — 아래 머리 위 줄은 '{"feetBars":false}' 로만 다시 켠다.
 //  → 광폭화 보스에만 쓰던 머리 위 체력 줄을 일반 몹·중간 보스에도 쓴다(큰 보스의 평소 줄·탑·인형·맘몬은 그대로). 끄기 '{"mobBar":false}'.
-function wantHeadBar(e,ex){if(ex||!(e?.hp>0))return false;if(e.boss)return !!prefs.bossBar&&enr(e);return !!prefs.mobBar||!!prefs.bossBar&&enr(e);}
+function wantHeadBar(e,ex){if(prefs.feetBars||ex||!(e?.hp>0))return false;if(e.boss)return !!prefs.bossBar&&enr(e);return !!prefs.mobBar||!!prefs.bossBar&&enr(e);}
 if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){
  const rec=typeof ctx==='object'?ctx:null,cmds=Array.isArray(rec?.commands)?rec.commands:null;
  if(!e||!cmds||typeof project!=='function'){stats.skipped++;return base.apply(this,[e,...a]);}

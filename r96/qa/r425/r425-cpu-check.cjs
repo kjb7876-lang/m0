@@ -66,7 +66,10 @@ const near=(a,b,t=.6)=>Math.abs(a-b)<=t;
  const body=cs.find(c=>c.kind==='image'),opaque=(bbox(body)[3]-bbox(body)[1])*FR,bars=cs.filter(c=>c.kind==='fill'),q=env.project(e.x,e.y),txt=cs.find(c=>c.kind==='text');
  ok('size band: oversized normal mob drawn at 1.55× hero height',near(opaque,1.55*54,1),opaque);
  /* R596(사용자 2026-11-10 "아래 이런 예고선이 아직도 나오는 문제"): 일반 몹 발밑 체력 선이 바닥 예고선으로 읽혀 머리 위로 옮김 → 이 항목의 기대(발밑)가 바뀜. 발밑 배치는 mobBar 끄기에서 아래 항목으로 계속 검사 */
- ok('HP bar keeps native width and sits over the head (R596) when the body is rescaled',bars.length===2&&bars.every(b=>{const bb=bbox(b);return near(bb[2]-bb[0],55)&&bb[3]<bbox(body)[1]+(bbox(body)[3]-bbox(body)[1])*.25;}),bars.map(bbox));
+ /* R786(사용자 2026-11-11 "모든 것들 기본 체력바 발아래쪽에 둬"): 기본은 다시 발 아래(feetBars). 머리 위 배치(R596)는 {"feetBars":false} 로만 — 아래 두 항목이 각각 검사 */
+ ok('R786 default: HP bar keeps native width and stays under the feet when the body is rescaled',bars.length===2&&bars.every(b=>{const bb=bbox(b);return near(bb[2]-bb[0],55)&&bb[1]>=q.y;}),bars.map(bbox));
+ {const envH=makeEnv({'storyworld.r425.flow':'{"feetBars":false}'});let cH;const eH={id:'m1h',name:'시험 몹',x:0,y:-1,hp:10,maxHp:10,k:2.5};for(let i=0;i<4;i++)cH=frame(envH,eH);const bodyH=cH.find(c=>c.kind==='image'),barsH=cH.filter(c=>c.kind==='fill');
+  ok('feetBars:false: HP bar keeps native width and sits over the head (R596) when the body is rescaled',barsH.length===2&&barsH.every(b=>{const bb=bbox(b);return near(bb[2]-bb[0],55)&&bb[3]<bbox(bodyH)[1]+(bbox(bodyH)[3]-bbox(bodyH)[1])*.25;}),barsH.map(bbox));}
  {const env2=makeEnv({'storyworld.r425.flow':'{"mobBar":false}'});let c2;const e2={id:'m1b',name:'시험 몹',x:0,y:-1,hp:10,maxHp:10,k:2.5};for(let i=0;i<4;i++)c2=frame(env2,e2);const q2=env2.project(e2.x,e2.y),b2=c2.filter(c=>c.kind==='fill');
   ok('mobBar off: HP bar keeps native width and place under the feet when the body is rescaled (old behaviour)',b2.length===2&&b2.every(b=>{const bb=bbox(b);return near(bb[2]-bb[0],55)&&near(bb[1],q2.y+6);}),b2.map(bbox));}
  ok('name label keeps its font size (matrix scale 1) while following the scaled head',txt&&near(txt.matrix[0],1,.01)&&near(txt.matrix[3],1,.01),txt?.matrix);
@@ -77,14 +80,18 @@ const near=(a,b,t=.6)=>Math.abs(a-b)<=t;
  ok('telegraphs ON: shown, and the aim lane still ends on the real target (rescale undone)',lane&&near(lane.paths[0].points[1][0],to.x)&&near(lane.paths[0].points[1][1],to.y)&&cs.some(c=>c.text==='원거리 조준'),lane?.paths?.[0]?.points);
  F.teleSet(false);let eff=env.baseCalls.effects;env.drawEffect({type:'sigil',asset:env.VFX.mark,size:1.15});const skipped=env.baseCalls.effects===eff;env.drawEffect({type:'sigil',asset:'assets/other.webp'});env.drawEffect({type:'sigil',asset:env.VFX.mark,size:.62});env.drawEffect({type:'sigil',asset:env.VFX.mark,size:1});
  ok('R116 charge target sigil (VFX.mark, size 1.15) hidden when OFF; other sigils and the click-move/select markers (size .62/1) still drawn',skipped&&env.baseCalls.effects===eff+3);}
-{const env=makeEnv();env.__STORYWORLD_BOSS_R205__={inspect:()=>({prefs:{enrage:true}}),constants:{ENRAGE_SIZE:2}};
+{const env=makeEnv({'storyworld.r425.flow':'{"feetBars":false}'});env.__STORYWORLD_BOSS_R205__={inspect:()=>({prefs:{enrage:true}}),constants:{ENRAGE_SIZE:2}};
  const b={id:'b1',name:'시험 보스',boss:true,x:0,y:0,hp:100,maxHp:100,k:2.1};let cs;for(let i=0;i<4;i++)cs=frame(env,b);const q=env.project(0,0);
  const bar0=cs.filter(c=>c.kind==='fill').map(bbox);ok('boss before enrage: bar under the feet',bar0.length===2&&bar0.every(bb=>near(bb[1],q.y+6)),bar0);
  b.r205Enraged={at:1};b.hp=25;b.k=4.2;for(let i=0;i<12;i++)cs=frame(env,b);
  const body=cs.find(c=>c.kind==='image'),bb=bbox(body),opaque=(bb[3]-bb[1])*FR,head=bb[1]+(bb[3]-bb[1])*TOP,bars=cs.filter(c=>c.kind==='fill').map(bbox),txt=cs.find(c=>c.text==='시험 보스');
- ok('enraged boss keeps the R205 2× size (boss band × 2, not shrunk back)',opaque>=1.9*2*54-2&&opaque<=2.3*2*54+2,opaque/54);
- ok('enraged boss: HP bar moves above the head (8 px over the sheet head line), not in the middle of the body',bars.length===2&&bars.every(x=>x[3]<=head-7&&x[3]>=head-12),{head,bars});
- ok('enraged boss: name label sits right above the bar',txt&&near(txt.point[1],bars[0][1]-5,1),{name:txt?.point,bar:bars[0]});}
+ ok('feetBars:false: enraged boss keeps the R205 2× size (boss band × 2, not shrunk back)',opaque>=1.9*2*54-2&&opaque<=2.3*2*54+2,opaque/54);
+ ok('feetBars:false: enraged boss: HP bar moves above the head (8 px over the sheet head line), not in the middle of the body',bars.length===2&&bars.every(x=>x[3]<=head-7&&x[3]>=head-12),{head,bars});
+ ok('feetBars:false: enraged boss: name label sits right above the bar',txt&&near(txt.point[1],bars[0][1]-5,1),{name:txt?.point,bar:bars[0]});}
+{const env=makeEnv();env.__STORYWORLD_BOSS_R205__={inspect:()=>({prefs:{enrage:true}}),constants:{ENRAGE_SIZE:2}};/* R786 기본: 광폭화해도 막대는 발 아래 */
+ const b={id:'b1f',name:'시험 보스',boss:true,x:0,y:0,hp:100,maxHp:100,k:2.1};let cs;for(let i=0;i<4;i++)cs=frame(env,b);const q=env.project(0,0);
+ b.r205Enraged={at:1};b.hp=25;b.k=4.2;for(let i=0;i<12;i++)cs=frame(env,b);const bars=cs.filter(c=>c.kind==='fill').map(bbox);
+ ok('R786 default: enraged boss HP bar stays under the feet (not over the head, not mid-body)',bars.length===2&&bars.every(x=>x[1]>=q.y),{q:q.y,bars});}
 // ---- ④ 시선 3부류: 엔진 걸음 흉내(벽 없음)로 걸음 방향을 본다 ----
 async function gazeChecks(){
  // 가짜 R53(R230 이 이미 감싼 꼴): 근접 준비 때 R230 처럼 2.4초 간격 안이면 건너뛰고, 아니면 가로 옆자리 블링크를 셈
