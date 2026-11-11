@@ -10,7 +10,7 @@ const F=path.join(R,'client-source','bulmyeongwi-r760.js');ok(fs.existsSync(F),'
 const F620=path.join(R,'client-source','boss-motion-r620.js');const src620=fs.readFileSync(F620,'utf8');
 const IDLE='assets/r425/clean/assets/generated-v31224/actors-normalized/692e4ae01c29_bulmyeongwi_idle.webp',ATK='assets/generated-v31224/actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp',
  RAIN='assets/generated-v31224/actors-normalized/35526bcfa1c2_bulmyeongwi_rain.webp',MID='assets/r104/bosses/mb-last302-v31231-p4.webp',MOB='assets/episode1b/generated-v394/bulmyeongwi_b.webp';
-function world({store={},roomId='last303',with620=false,ready=true,sheets=false,audio=true,between=''}={}){const timers=[];const ctx={Math,String,Number,Array,Object,JSON,Map,WeakMap,Set,Symbol,isFinite,RegExp,performance:{now:()=>0},
+function world({store={},roomId='last303',with620=false,ready=true,sheets=false,audio=true,between='',pre=''}={}){const timers=[];const ctx={Math,String,Number,Array,Object,JSON,Map,WeakMap,Set,Symbol,isFinite,RegExp,performance:{now:()=>0},
   setTimeout:(f)=>{timers.push(f);return timers.length;},localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}}};ctx.window=ctx;vm.createContext(ctx);
  vm.runInContext(`var time=0,room={id:${JSON.stringify(roomId)},enemies:[]},player={x:6,y:3},ctx={commands:[]};var __ready=${ready},__sheets=${sheets},__added=[],__snd=[];${audio?"var soundProfiles={boss:[{key:'b',path:'x.ogg',gain:1}]};function sound(k){__snd.push(k);}function setupAudio(){soundProfiles={boss:[]};}var modal=null;":''}
   function addImage(p){__added.push(p);}function readyImage(p){if(String(p).includes('assets/r760/')&&!__ready)return null;if(/sheet-/.test(p)){if(!__sheets)return null;const n=/[/]mid[/]sheet-hit/.test(p)?4:/[/]mid[/]sheet-idle/.test(p)?6:/[/]mid[/]/.test(p)?8:/sheet-(idle|move|idle2)[.]/.test(p)?6:/sheet-hit2?[.]/.test(p)?4:/sheet-death/.test(p)?10:8;return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:n*512,naturalHeight:512}};}const w=/-p[0-9][.]/.test(p)?393:672,h=/-p[0-9][.]/.test(p)?432:384;return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:w,naturalHeight:h}};}
@@ -24,7 +24,7 @@ function world({store={},roomId='last303',with620=false,ready=true,sheets=false,
    ctx.commands.push({kind:'image',key:'enemy:'+room.id+':'+e.nativeId+':0',order:7,owner:{kind:'enemy'},image:{src:'http://x/m0/'+path,naturalWidth:iw,naturalHeight:ih},imageSize:[iw,ih],sourcePath:path,sourceRect:[0,0,iw,ih],style:{globalAlpha:1},points:[[L,top],[L+qw,top],[L+qw,top+qh],[L,top+qh]]});
    ctx.commands.push({kind:'fill',owner:{kind:'enemy'},style:{fillStyle:'#f00'},paths:[{points:[[80,205],[120,205],[120,208],[80,208]]}]});
    ctx.commands.push({kind:'text',owner:{kind:'enemy'},text:e.name,point:[P.x,P.y-qh*.8],style:{}});}`,ctx);
- if(with620)vm.runInContext(src620,ctx);vm.runInContext(src,ctx);if(between)vm.runInContext(between,ctx); // between: 불러온 뒤·바깥 감싸기(setTimeout 0) 전에 끼는 덧씌우기
+ if(pre)vm.runInContext(pre,ctx);if(with620)vm.runInContext(src620,ctx);vm.runInContext(src,ctx);if(between)vm.runInContext(between,ctx); // between: 불러온 뒤·바깥 감싸기(setTimeout 0) 전에 끼는 덧씌우기
  while(timers.length)timers.shift()();return ctx;}
 const run=(c,s)=>vm.runInContext(s,c);const API=c=>c.__STORYWORLD_BULMYEONGWI_R760__;
 const H=k=>Math.abs(k.points[3][1]-k.points[0][1]);
@@ -312,4 +312,26 @@ const FF=(c,e)=>c.__STORYWORLD_STORY_COMBAT_R54__.frameFor(e,null);const VAPI=c=
  e.name='유리 망령';e.r74Monster='glass';FF(c,e);ok(e.name==='잠식된 약방 아낙'&&e.r763From==='유리 망령'&&e.r74Monster===undefined,'R191 re-applied glass patrol → renamed and detached again');}
 {// 회귀(헤드리스 실측): R248 픽셀몹 시트 표가 옛 이름 키(r248Key)로 주민 위에 옛 안개·유리 망령 그림을 덮어 그렸다 → R248 이 주민이면 비켜 줌
  const r248=fs.readFileSync(path.join(R,'client-source','mob-unique-r248.js'),'utf8');ok(r248.includes('if(s&&window.__STORYWORLD_VILLAGERS_R763__?.kindFor?.(e))s=null;'),'R248 yields to R763 villagers');}
+{// R768(사용자 2026-11-11 "불면귀 일반몹들이 예고공격 자동으로 나오는거 이거 끌 수 있도록"):
+ // 헤드리스 실측 — 불면귀(last302) 일반몹 원거리 준비 때 R58 이 drawEnemy 안에서 strokeFootprint154(capsule 7.4칸, 'warning', '#c6b59b') 조준 띠를 그렸고,
+ // R425 '적 공격·돌진 예고 표시'(기본 꺼짐)가 이 선은 못 거른다 → 불면귀 지역 일반몹의 'warning' 띠만 그 설정을 따르게.
+ const PRE=(tele,coop='off')=>`var __sf=[],__tele=${tele};window.__STORYWORLD_COMBAT_FLOW_R425__=${tele===null?'undefined':'{inspect:()=>({prefs:{tele:__tele}})}'};window.__STORYWORLD_COOP_SIM_R62__={mode:()=>${JSON.stringify(coop)}};
+  function strokeFootprint154(g,stage,color){__sf.push(stage+'|'+(color||''));return true;}
+  const r58=drawEnemy;drawEnemy=function(e,...a){const r=r58.call(this,e,...a);if(e.__boom)throw new Error('boom');if(e.rangedWindup>0)strokeFootprint154({shape:'capsule'},'warning','#c6b59b');if(e.__active)strokeFootprint154({shape:'capsule'},'active','#c6b59b');return r;};`;
+ const W=(o,e)=>{const c=world({sheets:true,...o});run(c,'__sf.length=0');c.drawEnemy(e);return run(c,'__sf.slice()');};
+ const mob=(o={})=>({id:'last302:m1',nativeId:'l302-e1',name:'잠식된 약방 아낙',x:5,y:3,hp:30,maxHp:30,rangedWindup:.4,__path:MOB,...o});
+ ok(W({roomId:'last302',pre:PRE(false)},mob()).length===0,'R768 불면귀 normal mob ranged windup, tele off → no warning lane');
+ ok(W({roomId:'last303',pre:PRE(false)},mob({nativeId:'l303-e2'})).length===0,'R768 last303 normal mob → hidden too');
+ ok(W({roomId:'last302',pre:PRE(true)},mob()).join()==='warning|#c6b59b','R768 tele on (setting checked) → lane drawn');
+ ok(W({roomId:'last302',pre:PRE(false)},mob({__active:true})).join()==='active|#c6b59b','R768 only the warning stage is hidden (active kept)');
+ ok(W({roomId:'last303',pre:PRE(false)},boss({rangedWindup:.4})).join()==='warning|#c6b59b','R768 boss warning kept');
+ ok(W({roomId:'last302',pre:PRE(false)},mob({midboss:true,nativeId:'mb-last302',__path:MID})).join()==='warning|#c6b59b','R768 midboss warning kept');
+ ok(W({roomId:'ep1a01',pre:PRE(false)},mob()).join()==='warning|#c6b59b','R768 other zones untouched');
+ ok(W({roomId:'last302',pre:PRE(null)},mob()).join()==='warning|#c6b59b','R768 R425 missing → nothing hidden');
+ ok(W({roomId:'last302',pre:PRE(false,'local')},mob()).join()==='warning|#c6b59b','R768 co-op (not solo) → kept like R425');
+ {const c=world({sheets:true,roomId:'last302',pre:PRE(false)});run(c,'__sf.length=0;strokeFootprint154({shape:"circle"},"warning","#e4c6ea")');ok(run(c,'__sf.join()')==='warning|#e4c6ea','R768 hazard warning outside drawEnemy kept');
+  try{c.drawEnemy(mob({__boom:true}));}catch(_){}run(c,'__sf.length=0;strokeFootprint154({shape:"circle"},"warning","#e4c6ea")');ok(run(c,'__sf.length')===1,'R768 scope resets after a throwing drawEnemy');
+  const I=c.__STORYWORLD_TELE_R768__;ok(I&&I.inspect().stats.hidden>=0&&I.inspect().wrapped===true,'R768 inspect exposed');}
+ {const c=world({sheets:true,roomId:'last302',pre:PRE(false)});run(c,'__sf.length=0');const e=mob();c.drawEnemy(e);c.drawEnemy(e);ok(run(c,'__sf.length')===0&&c.__STORYWORLD_TELE_R768__.inspect().stats.hidden===2,'R768 counts hidden lanes');}
+}
 console.log('R760 CPU check OK ('+n+' assertions)');
