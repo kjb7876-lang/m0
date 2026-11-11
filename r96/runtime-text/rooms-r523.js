@@ -12,9 +12,9 @@
 //  끄기: localStorage['storyworld.r523.rooms']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_ROOMS_R523__)return;
-const REV='R523-rooms-1',KEY='storyworld.r523.rooms';
-const prefs={on:true};
-try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;}catch(_){}
+const REV='R523-rooms-2',KEY='storyworld.r523.rooms';
+const prefs={on:true,samong:true};
+try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;if(typeof s?.samong==='boolean')prefs.samong=s.samong;}catch(_){}
 const stats={builds:0,rooms:0,placed:0,dropped:0,pushed:0,frames:0,shown:0,rested:0,reloads:0,errors:0};let lastError=null,dropLog=[],lastPlan=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 const fin=Number.isFinite,SQ=Math.SQRT1_2,R2=Math.SQRT2,BACK=.5*SQ,RISE=Math.sqrt(3)/2,MW=20,MH=28;
@@ -231,6 +231,11 @@ const USE=Object.freeze({
  bulwark:{main:['barrier2','lantern1','barrier1'],side:['barrier1','lantern1'],corner:null,cap:[3,2],lim:{barrier:4}},
  corehall:{main:['lotus1','reliq1','lantern1'],side:['reliq1','lantern1'],corner:null,cap:[3,2]},
  narthex:{main:['lantern1','reliq1'],side:['lantern1','reliq1'],corner:null,cap:[2,1],more:false},
+ // 사몽 구역(R731): 식당 = 식탁 줄, 창고 = 장·짐, 서류 창고 = 책장 줄, 상담실 = 소파와 책상
+ canteen:{main:['dine','chairs2','dine','wardrobe','dine'],side:['dine','trash','chairs2'],corner:null,cap:[5,3],lim:{table:5,chair:6}},
+ depot:{main:['wardrobe2','cases','wardrobe','case1','trash'],side:['wardrobe','cases','case1'],corner:'wardrobe_n',cap:[5,3],lim:{wardrobe:5,case:5}},
+ archive:{main:['shelf2','shelf1','shelf2','desk'],side:['shelf1','case1','shelf2'],corner:'wardrobe_n',cap:[5,3],lim:{shelf:8}},
+ counsel:{main:['sofaL','desk','chairs2','shelf1'],side:['shelf1','chairs2','wardrobe'],corner:null,cap:[4,2]},
  hall:{main:['parked','wheel','crutch'],side:[],corner:null,cap:[1,0],min:5,more:false},
  passage:{main:['trash','case1'],side:[],corner:null,cap:[1,0],min:5,more:false}
 });
@@ -248,8 +253,27 @@ const REGION=Object.freeze({
  cult03:[[/수확실/,'harvest'],[/방벽 구획/,'bulwark'],[/코어 전실/,'corehall'],[/^앞방$/,'narthex'],[/^입구$/,'narthex']]/* 연결 회랑·길목은 손대지 않는다 */
 });
 const SKIP=/보스|전투실|다음 구역|갈림길|순환로|마당|쉼길/;
-const enabled=r=>!!(prefs.on&&r&&REGION[r.id]&&(!r.layer||r.layer==='STORY')&&r.exploration&&Array.isArray(r.exploration.r224Rooms)&&Array.isArray(r.props)&&!r.exploration.samongR103&&!r.exploration.samongR115);
-const useOf=(id,name,k=1)=>{name=String(name||'');if(!name||SKIP.test(name))return null;for(const[re,u]of REGION[id]||[])if(re.test(name))return Array.isArray(u)?u[(Math.max(1,k|0)-1)%u.length]:u;return null;};
+// ---- 사몽 구역(R731) — 사용자 2026-11-10 "모든맵 배치 … 스토리모드 → 사몽 → 사몽역행" ---------------------------
+//  사몽 구역은 기증 지역의 room.id 를 빌려 쓰고(예: ep1b08·last302), 방 사각형은 worldR74.rooms[{x,y,w,h,name,kind}] 에 있다(r224Rooms 는 비어 있음). 구역 이름은 exploration.samongR115.zone.
+//  첫 묶음: 방 이름이 정본에서 온 '방' 구역 7곳만(미술관 회랑 RA-3 은 맞는 그림이 없어 뺌). 방 이름 → 본편과 같은 가구 묶음. 맞는 그림이 없는 방(도겸의 방·전시실·학교 창가·정원 문 …)과 복도는 비운다(지어내지 않는다).
+//  S-02 학교(이미 책상·캐비닛 줄이 있음)와 처치·호위용 추가 구역은 손대지 않는다. 방 가운데 3.2칸(기억 조각·전투 자리)은 비운다. 이미 있는 조형물은 쉬게 하지 않는다.
+//  끄기: localStorage['storyworld.r523.rooms']='{"on":true,"samong":false}'
+const SAMONG_ZONES=Object.freeze(['sz115-S04-3','sz115-S04-4','sz115-S05-3','sz115-S06-2','sz115-S06-22','sz115-RA-5','sz115-M-4']);
+const SAMONG=Object.freeze([[/^식당( 안쪽)?$/,'canteen'],[/^주방$/,'ranges'],[/^배식구$/,'prep'],[/^경비실$/,'security'],[/^숙직실$/,'bedroom'],[/^창고$/,'depot'],[/^사무실$/,'study'],[/^서류 창고$/,'archive'],
+ [/^대기실$/,'lobby7'],[/^의료 지원반$/,'inject'],[/^서버 냉각실$/,'plant'],[/^원룸 철문 앞$/,'foyer'],[/^좁은 원룸$/,'bedroom'],[/^병동$/,'observe'],[/^병실$/,'observe'],[/^상담실$/,'counsel'],[/^간호사실$/,'drug']]);
+const SM_CENTER=3.2;
+const smOn=L=>!!(prefs.samong&&L&&L.samongR115&&SAMONG_ZONES.includes(L.samongR115.zone)&&Array.isArray(L.worldR74?.rooms));
+const pickUse=(table,name,k)=>{name=String(name||'');if(!name||SKIP.test(name))return null;for(const[re,u]of table||[])if(re.test(name))return Array.isArray(u)?u[(Math.max(1,k|0)-1)%u.length]:u;return null;};
+const samongUse=(name,k=1)=>pickUse(SAMONG,name,k);
+// 방 목록 [{id,x0,y0,x1,y1,name}] — 본편은 r224Rooms + worldR74 이름, 사몽은 worldR74.rooms 의 방·홀(복도·계단·마당 제외)
+const roomMemo=new WeakMap();
+function roomsOf(L){let a=roomMemo.get(L);if(a)return a;
+ if(smOn(L))a=L.worldR74.rooms.map((q,i)=>q&&(q.kind==='room'||q.kind==='hall')&&fin(q.x+q.y+q.w+q.h)?{id:i,x0:q.x,y0:q.y,x1:q.x+q.w,y1:q.y+q.h,name:String(q.name||'')}:null).filter(Boolean);
+ else{const names=new Map((L.worldR74?.rooms||[]).map(q=>[q.id,q.name||q.purpose||'']));a=(L.r224Rooms||[]).map(q=>({id:q.id,x0:q.x0,y0:q.y0,x1:q.x1,y1:q.y1,name:names.get(q.id)||''}));}
+ roomMemo.set(L,a);return a;}
+const enabled=r=>!!(prefs.on&&r&&r.exploration&&Array.isArray(r.props)&&(smOn(r.exploration)||(REGION[r.id]&&(!r.layer||r.layer==='STORY')&&Array.isArray(r.exploration.r224Rooms)&&!r.exploration.samongR103&&!r.exploration.samongR115)));
+const useOf=(id,name,k=1)=>pickUse(REGION[id],name,k);
+const useIn=(r,name,k)=>smOn(r.exploration)?samongUse(name,k):useOf(r.id,name,k);
 
 // ---- 벽 줄 찾기 -------------------------------------------------------------------------------------
 //  방 사각형 안 바닥 칸마다 북쪽(-y)·서쪽(-x)으로 반 칸 안에 벽(바닥 밖·벽 상자)이 있는지 본다. 벽 면 좌표가 같은 칸이 이어진 것이 한 줄.
@@ -294,7 +318,8 @@ function keepClear(r){const L=r.exploration||{},out=[];
  for(const d of L.worldR74?.doors||[])if(fin(d.x+d.y))out.push([d.x,d.y,Math.max(2.6,(+d.width||6)/2+.6)]);
  for(const s of L.starts||[])if(s&&fin(s.x+s.y))out.push([s.x,s.y,3]);
  for(const q of[L.entry,L.entrance,L.gate,r.objective,r.altar])if(q&&fin(q.x+q.y))out.push([q.x,q.y,2.6]);
- const FB=fightOf(L),UB=usedOf(r);for(const p of r.props)if(p&&!rests(p,FB,UB)&&p.visible!==false&&!p.r303Hide&&fin(p.x+p.y))out.push([+p.x,+p.y,DOORISH(p)?1.6:KEYISH(p)?1.5:1.1]);
+ const FB=fightOf(L),UB=usedOf(r),sm=smOn(L);if(sm)for(const q of roomsOf(L))out.push([(q.x0+q.x1)/2,(q.y0+q.y1)/2,SM_CENTER]);
+ for(const p of r.props)if(p&&(sm||!rests(p,FB,UB))&&p.visible!==false&&!p.r303Hide&&fin(p.x+p.y))out.push([+p.x,+p.y,DOORISH(p)?1.6:KEYISH(p)?1.5:1.1]);
  return out;}
 const sigOf=r=>{let n=0;for(const p of r.props)if(p&&!FURN(p)&&p.visible!==false&&!p.r303Hide)n++;return n;};
 function hitOf(r){const L=r.exploration,E=window.StoryPhase1&&typeof window.StoryPhase1.explorationBlocked==='function'?window.StoryPhase1.explorationBlocked:null;
@@ -304,20 +329,20 @@ const capOf=(run,max)=>Math.min(max,Math.max(1,Math.round(run.len/2.4)));/* 벽 
 // 전투 구역: 보스 구역·모이는 방 테두리(±.5)와 이름이 보스/전투실인 방 사각형(±.5). 여기는 손대지 않는다(R438·R449 세트 그대로).
 const FIGHT=/보스|전투실/,fightMemo=new WeakMap();
 function fightOf(L){let f=fightMemo.get(L);if(f)return f;f=[];const W=L.worldWardR81||{};for(const b of[W.bossBounds,W.gatherBounds])if(Array.isArray(b)&&b.length===4&&fin(b[0]+b[1]+b[2]+b[3]))f.push([b[0]-.5,b[1]-.5,b[2]+.5,b[3]+.5]);
- const names=new Map((L.worldR74?.rooms||[]).map(q=>[q.id,q.name||q.purpose||'']));for(const q of L.r224Rooms||[])if(FIGHT.test(names.get(q.id)||''))f.push([q.x0-.5,q.y0-.5,q.x1+.5,q.y1+.5]);fightMemo.set(L,f);return f;}
+ for(const q of roomsOf(L))if(FIGHT.test(q.name))f.push([q.x0-.5,q.y0-.5,q.x1+.5,q.y1+.5]);fightMemo.set(L,f);return f;}
 // 이 덧씌우기가 꾸미는 방(쓰임새가 정해진 방)의 사각형 — 손대지 않는 방(복도 등)의 각도 맞는 예전 가구는 그대로 둔다
 const usedMemo=new WeakMap();
-function usedOf(r){const L=r.exploration;let u=usedMemo.get(L);if(u)return u;u=[];const names=new Map((L.worldR74?.rooms||[]).map(q=>[q.id,q.name||q.purpose||'']));const ord={};
- for(const q of L.r224Rooms||[]){const name=names.get(q.id)||'';if(useOf(r.id,name,ord[name]=(ord[name]||0)+1))u.push([q.x0-.5,q.y0-.5,q.x1+.5,q.y1+.5]);}usedMemo.set(L,u);return u;}
+function usedOf(r){const L=r.exploration;let u=usedMemo.get(L);if(u)return u;u=[];const ord={};
+ for(const q of roomsOf(L)){const name=q.name;if(useIn(r,name,ord[name]=(ord[name]||0)+1))u.push([q.x0-.5,q.y0-.5,q.x1+.5,q.y1+.5]);}usedMemo.set(L,u);return u;}
 const inFight=(F,x,y)=>{for(let i=0;i<F.length;i++){const b=F[i];if(x>b[0]&&x<b[2]&&y>b[1]&&y<b[3])return true;}return false;};
 // 바닥 자리 네모의 테두리와 가운데 십자를 .12칸 간격으로 짚어 본다 — 얇은 벽이 가구 밑을 지나가면 놓지 않는다
 function footHit(fr,hit){const[x0,y0,x1,y1]=fr,nx=Math.max(2,Math.ceil((x1-x0)/.12)),ny=Math.max(2,Math.ceil((y1-y0)/.12)),mx=(x0+x1)/2,my=(y0+y1)/2;
  for(let i=0;i<=nx;i++){const x=x0+(x1-x0)*i/nx;if(hit(x,y0)||hit(x,y1)||hit(x,my))return true;}for(let j=0;j<=ny;j++){const y=y0+(y1-y0)*j/ny;if(hit(x0,y)||hit(x1,y)||hit(mx,y))return true;}return false;}
-function plan(r){const L=r.exploration,hit=hitOf(r),W=L.worldWardR81||{},F=fightOf(L),names=new Map((L.worldR74?.rooms||[]).map(q=>[q.id,q.name||q.purpose||'']));
+function plan(r){const L=r.exploration,hit=hitOf(r),W=L.worldWardR81||{},F=fightOf(L);
  let path=null;try{path=window.__STORYWORLD_PLAY_R169__?.pathCells?.(r)||null;}catch(e){fail(e);}
  const onPath=(x,y)=>{if(!path)return false;const cx=Math.floor(x),cy=Math.floor(y);for(let dx=-1;dx<=1;dx++)for(let dy=-1;dy<=1;dy++)if(path.has((cx+dx)+','+(cy+dy))&&Math.hypot(cx+dx+.5-x,cy+dy+.5-y)<1.3)return true;return false;};
  const cand=[],rooms=[],log=[],nth={},ord={};let dropped=0,pushed=0,n=0;
- for(const q of L.r224Rooms){const name=names.get(q.id)||'',use=useOf(r.id,name,ord[name]=(ord[name]||0)+1);if(!use)continue;
+ for(const q of roomsOf(L)){const name=q.name,use=useIn(r,name,ord[name]=(ord[name]||0)+1);if(!use)continue;
   const b=[q.x0,q.y0,q.x1,q.y1];if([W.bossBounds,W.gatherBounds].some(B=>Array.isArray(B)&&B.length===4&&!(b[2]<=B[0]||b[0]>=B[2]||b[3]<=B[1]||b[1]>=B[3])))continue;
   const U=USE[use],k=nth[use]=(nth[use]||0)+1,runs=U?runsOf(q,hit).filter(x=>x.len>=(U.min||0)):[];if(!U||!runs.length){rooms.push({id:q.id,name,use,rect:b,count:0});continue;}
   const main=runs[0],side=runs.find(x=>x.wall!==main.wall)||null,rest=U.more===false?[]:runs.filter(x=>x!==main&&x!==side&&x.len>=3).slice(0,5),before=cand.length,taken=[],cnt={};
@@ -370,11 +395,11 @@ const skinOf=p=>String(p.path||(p.r81NativeSkin&&p.r81NativeSkin.path)||'');/* R
 const rests=(p,F,U)=>!!p&&fin(p.x+p.y)&&((FURN(p)&&inFight(U,p.x,p.y))||((p.r80Dressing===true||!!p.r74Prop)&&OFF_ANGLE.test(skinOf(p))))&&!inFight(F,p.x,p.y);
 try{if(typeof draw==='function'){const base=draw;draw=function(...a){let r=null,m=null,rows=null;try{r=typeof room!=='undefined'?room:null;m=r?state(r):null;if(m&&m.rows.length){prime(r,m.rows);rows=m.rows;stats.shown=sight(rows);}}catch(e){fail(e);m=null;}
  if(!m||!m.rows.length)return base.apply(this,a);
- const original=r.props,FB=fightOf(r.exploration),UB=usedOf(r);let kept=original,rested=0;try{kept=original.filter(p=>!rests(p,FB,UB)||(rested++,false));}catch(e){fail(e);kept=original;}stats.rested=rested;
+ const original=r.props,FB=fightOf(r.exploration),UB=usedOf(r);let kept=original,rested=0;try{if(!smOn(r.exploration))kept=original.filter(p=>!rests(p,FB,UB)||(rested++,false));}catch(e){fail(e);kept=original;}stats.rested=rested;
  r.props=kept.concat(rows);stats.frames++;try{return base.apply(this,a);}finally{r.props=original;}};}}catch(e){fail(e);}
 
-function set(o){if(o&&typeof o.on==='boolean')prefs.on=o.on;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
-window.__STORYWORLD_ROOMS_R523__=Object.freeze({revision:REV,ART,G,USE,REGION,LIMIT,samplesOf,embedOf,hiddenOf,runsOf,seat,useOf,enabled,plan,resolve,list,set,
+function set(o){if(o&&typeof o.on==='boolean')prefs.on=o.on;if(o&&typeof o.samong==='boolean')prefs.samong=o.samong;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
+window.__STORYWORLD_ROOMS_R523__=Object.freeze({revision:REV,ART,G,USE,REGION,LIMIT,SAMONG,SAMONG_ZONES,samongUse,samplesOf,embedOf,hiddenOf,runsOf,seat,useOf,enabled,plan,resolve,list,set,
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError,dropLog:dropLog.slice(),plan:lastPlan,collisionChanged:false,savesTouched:false,
   room:typeof room!=='undefined'&&room&&enabled(room)?list(room).map(p=>({id:p.id,art:p.r523.art,use:p.r523.use,x:p.x,y:p.y,flip:!!p.r303Flip})):null})});
 })();
