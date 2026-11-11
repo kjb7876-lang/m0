@@ -28,6 +28,11 @@
       "sha256": "e2496f2599d2e606bc6b5be71a9781709daee6b7aa12e008fb2c996f879a1aa9"
     },
     {
+      "path": "ambience-r664.js",
+      "bytes": 5588,
+      "sha256": "9a7b49d32b336589e51919ab3f497ce90b5df7ea6a7bfa681d5cde17c54f382a"
+    },
+    {
       "path": "approved-mobs-r380.js",
       "bytes": 24866,
       "sha256": "15f4ab25f54cefbdb22dda0c3afbb196dd70e1c25dead74719f716a4237da234"
@@ -34383,6 +34388,41 @@
       "sha256": "510a714c492e4498068cb9faece1f5ea7ddb714733f719f40c5cdf38a93501f2"
     },
     {
+      "path": "assets/r664/ambience/crowd.ogg",
+      "bytes": 70054,
+      "sha256": "a5decbbb26669efb8d35be6d275befaf4a9356f5b4412a547083a3c553d5d1f6"
+    },
+    {
+      "path": "assets/r664/ambience/hall.ogg",
+      "bytes": 76681,
+      "sha256": "62f83a17f9c7561ab88814f9fd9579f6df058ce9d99bc157e015d01c5bf66f95"
+    },
+    {
+      "path": "assets/r664/ambience/index.json",
+      "bytes": 4478,
+      "sha256": "5a020fe16ce83a516e204b44cb53c6b22c11e790e85652e738c0e2456ec26f8e"
+    },
+    {
+      "path": "assets/r664/ambience/night.ogg",
+      "bytes": 90137,
+      "sha256": "6ac93b476f2d4a1138a415727a8427ddd090165421b6e82c06afa4b652cb8478"
+    },
+    {
+      "path": "assets/r664/ambience/stone.ogg",
+      "bytes": 66893,
+      "sha256": "2373835859ae14b642b14b157d2cee1a8b5868910460842377a3958c666dd11e"
+    },
+    {
+      "path": "assets/r664/ambience/water.ogg",
+      "bytes": 112500,
+      "sha256": "f14bf57e6edfde9b94a6ecd4b7258657743a388849b1f78a65eb751bd67ae31d"
+    },
+    {
+      "path": "assets/r664/ambience/wind.ogg",
+      "bytes": 67853,
+      "sha256": "3be5a61f2ae9cb5fda13fe009a2ed5c398a3c810854d99cdddbe917ca1d898eb"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -43464,8 +43504,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6573686,
-      "sha256": "5ab963541dcb613831dbe88f65f9c8bcaf675a1582aab721b421f42bfa14bfae"
+      "bytes": 6573729,
+      "sha256": "7cb8b73ccd9b90224927e5f49d342e519f1bd416cd0ec0d7843f8cf02473f475"
     },
     {
       "path": "intro-r140.js",
@@ -44418,9 +44458,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8883,
-  "totalBytes": 1226943139,
-  "webHTMLSha256": "5ab963541dcb613831dbe88f65f9c8bcaf675a1582aab721b421f42bfa14bfae",
+  "fileCount": 8891,
+  "totalBytes": 1227437366,
+  "webHTMLSha256": "7cb8b73ccd9b90224927e5f49d342e519f1bd416cd0ec0d7843f8cf02473f475",
   "largest": [
     {
       "path": "index.html",
