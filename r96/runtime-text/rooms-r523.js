@@ -66,7 +66,15 @@ const ART=Object.freeze(/*ART*/{
  steps:{path:'assets/world-r80/r80-055.webp',h:100,face:'w',ang:'iso',flat:true,up:0.005,ft:[-1.238,1.238,-0.11],clear:1.4,r:[-1.243,1.243,0,2.055],m:'0080000c0000b000098000cc000a6000d7001ed807fcc1ffe43ffd2fffc9fffe5ffffeffffaffff8ffff8fffffffffffffff7ffff3ffff1fffc0fff807fe003f8001f0000c00'},
  shelf_n:{path:'assets/r528/bookshelf-n.webp',h:110,face:'n',ang:'iso',flat:true,ft:[-0.438,0.429,0.21],pair:'shelf_w',r:[-0.438,0.438,0,2.288],m:'3e000ffc00fff80ffff0ffffefffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5ffff01fff001ff00030'},
  shelf_w:{path:'assets/r528/bookshelf-w.webp',h:110,face:'w',ang:'iso',flat:true,ft:[-0.469,0.46,-0.268],pair:'shelf_n',r:[-0.469,0.469,0,2.288],m:'0007c003ff01fff0ffff7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0fff00ff8001c000'},
- flamp:{path:'assets/r529/floor-lamp.webp',h:88,face:'s',ang:'pole',d:0.5,r:[-0.265,0.265,0,1.83],m:'07fe00fff01fff83fffc7fffeffffffffff00f0000700007000070000700007000070000700007000070000700007000070000700007000070000700007000fff03fffc1fff8'}
+ flamp:{path:'assets/r529/floor-lamp.webp',h:88,face:'s',ang:'pole',d:0.5,r:[-0.265,0.265,0,1.83],m:'07fe00fff01fff83fffc7fffeffffffffff00f0000700007000070000700007000070000700007000070000700007000070000700007000070000700007000fff03fffc1fff8'},
+ rig:{path:'assets/r527/body-rig.webp',h:74,face:'n',ang:'iso',flat:true,ft:[-0.929,0.929,0.134],r:[-0.929,0.929,0,1.539],m:'040000e0001f0001f0001f8001f8001f0001f0781f0fc1f0fc1f07c1fc7c1fc3c3fc3c3ff7c3fffc7fffcffffcffffc5fffc07ffe01ffe00fff00fff007fe003f0003e0001a0'},
+ pod:{path:'assets/r527/pod.webp',h:57,face:'n',ang:'iso',flat:true,ft:[-0.937,0.937,0.34],r:[-0.937,0.937,0,1.185],m:'0300007c0007f0007f8007fc011fe03eff0bfff8ffffcffdfc7fcfeffe3efff9efffce7ffe63fff63fffe1fffe1ffff1ffff0ffff03fff01fff00fff007fe001fe000fc00078'},
+ tank:{path:'assets/r527/gothic-tank.webp',h:63,face:'n',ang:'iso',flat:true,ft:[-0.726,0.726,0.332],r:[-0.726,0.726,0,1.31],m:'00000380003c0003e0003e0007f8003fc003ff0e3ffde7fffe3fffe3fffe3fffe3ffff7fffe7ffffffffeffffe7fffe3fffe1fffe03fff01fff00fff007ff003fc001f800030'},
+ lanterns:{path:'assets/r527/lantern-steps.webp',h:78,face:'w',ang:'iso',flat:true,ft:[-0.707,0.707,-0.349],r:[-0.707,0.707,0,1.622],m:'000100001c0003c0003c0003c001fc001fc001fc003fe01ffe01ffe01ffe01ffe0bffe1fffe1fffe1ffff3ffff3ffff3fffb3ffe07ff80ffe00ffc00df0000c0000c0000c000'},
+ barrier:{path:'assets/r527/stone-barrier.webp',h:79,face:'n',ang:'iso',flat:true,ft:[-0.77,0.751,0.427],r:[-0.77,0.77,0,1.643],m:'700007c0007f0007fc007ff007ffc07fff07fff87fffc7fffe7ffff7ffff7ffff7ffff7ffff7ffffffffffffff7ffff31fff00fff003ff000ff0007e0007f000ff0007e00038'},
+ vitals:{path:'assets/world-r80/r80-151.webp',h:63,face:'s',ang:'pole',up:0.006,d:0.55,r:[-0.376,0.379,0,1.295],m:'03e001ffe07fffc7ffffffffffffffffffffffffffffffffffffffefffff7ffff0fffb01ff30ffc33ffe63fffc3fffe03ffe3fff87fffce1ffee070e4070e0070600f0000600'},
+ lotus:{path:'assets/world-r80/r80-061.webp',h:59,face:'s',ang:'pole',up:0.006,d:0.9,r:[-0.663,0.666,0,1.211],m:'0200003060078e0078e007df027df03fffc3fffc3fffc1fff81fff83fffc7fffe7fffe7fffe7fffe7fffe7fffefffffffffffffff0fff00fff007fe00fff00f0f00e07004020'},
+ reliq:{path:'assets/world-r80/r80-065.webp',h:71,face:'s',ang:'pole',up:0.006,d:0.8,r:[-0.622,0.622,0,1.459],m:'00100003000078001f8003bc003fc003fe007ff007ff00fff00fff80fffc1fffc1fffc1fffc3fffc3fffe3fffe7fffffffffffff25ffc00ff8007f0003c0003c0003c0001800'}
 }/*ART*/);
 const sampMemo=new Map();
 // 불투명 칸 → 발 기준 3D 점 [dx,dy,z] — 조형물 그림은 발을 지나 카메라를 향해 서고 위로 갈수록 뒤(-x·-y)로 30° 눕는 판(R412·R521 과 같은 식)
@@ -149,11 +157,25 @@ const G=Object.freeze({
  cooler1:{w:1.55,lim:{cooler:1},it:[['cooler',.78]]},
  vent1:{w:1.55,lim:{vent:1},it:[['vent',.78]]},
  kiosk1:{w:1.0,lim:{kiosk:1},it:[['kiosk',.5]]},
- kioskDesk:{w:3.0,lim:{kiosk:1,table:1},it:[['kiosk',.5],['table_n',2.0],['chairb_n',2.0,.78]]}
+ kioskDesk:{w:3.0,lim:{kiosk:1,table:1},it:[['kiosk',.5],['table_n',2.0],['chairb_n',2.0,.78]]},
+ // 넷째 묶음(R527 — 관리자 권한·중앙 코어 이주실·사몽의 문턱): 캡슐 + 심박 모니터, 기계 육체 거치대, 고딕 수조, 연꽃 코어 받침, 돌 방벽, 등불 계단, 성물함
+ //  거치대·캡슐·수조·방벽·등불은 기존 게임 그림의 바닥 모서리를 2:1 로 바로잡은 한 방향 그림(반대쪽 벽에서는 거울). 모니터·연꽃 받침·성물함은 방향 없는 그림
+ podMon:{w:2.9,lim:{pod:1,vitals:1},it:[['pod',1.0],['vitals',2.45]]},
+ mon1:{w:.9,lim:{vitals:1},it:[['vitals',.45]]},
+ tank1:{w:1.6,lim:{tank:1},it:[['tank',.8]]},
+ rig1:{w:2.0,lim:{rig:1},it:[['rig',1.0]]},
+ rig2:{w:4.1,lim:{rig:2},it:[['rig',1.0],['rig',3.05]]},
+ rigMon:{w:2.9,lim:{rig:1,vitals:1},it:[['rig',1.0],['vitals',2.45]]},
+ lotus1:{w:1.5,lim:{lotus:1},it:[['lotus',.75]]},
+ lotusTank:{w:3.2,lim:{lotus:1,tank:1},it:[['lotus',.75],['tank',2.35]]},
+ barrier1:{w:1.7,lim:{barrier:1},it:[['barrier',.85]]},
+ barrier2:{w:3.5,lim:{barrier:2},it:[['barrier',.85],['barrier',2.6]]},
+ lantern1:{w:1.6,lim:{lanterns:1},it:[['lanterns',.8]]},
+ reliq1:{w:1.4,lim:{reliq:1},it:[['reliq',.7]]}
 });
 // 한 방에 같은 물건이 되풀이되지 않게(사용자 2026-11-09 "같은 물건이 같은 간격으로 반복되는 현상은 줄이고"): 묶음의 lim 이 방마다 이 수를 넘으면 그 묶음은 건너뛴다
 //  쓰임새가 lim 을 따로 가지면 그 방에서는 그 수를 쓴다(거울 회랑의 거울, 화구 구획의 화구처럼 되풀이가 그 방의 뜻인 곳)
-const LIMIT=Object.freeze({tv:1,sofa:2,table:1,trash:1,wardrobe:3,fridge:2,bed:3,case:3,chair:3,mirror:1,range:2,shelf:3,flamp:1,steps:1,alarm:1,machine:2,cooler:2,vent:1,kiosk:2});
+const LIMIT=Object.freeze({tv:1,sofa:2,table:1,trash:1,wardrobe:3,fridge:2,bed:3,case:3,chair:3,mirror:1,range:2,shelf:3,flamp:1,steps:1,alarm:1,machine:2,cooler:2,vent:1,kiosk:2,pod:3,vitals:3,tank:1,rig:2,lotus:1,barrier:2,lanterns:1,reliq:1});
 const fits=(g,cnt,U)=>!g.lim||Object.keys(g.lim).every(k=>(cnt[k]||0)+g.lim[k]<=((U&&U.lim&&U.lim[k])||LIMIT[k]));
 const take=(g,cnt,s)=>{if(g.lim)for(const k in g.lim)cnt[k]=(cnt[k]||0)+s*g.lim[k];};
 // 쓰임새 = [큰 벽 줄(차례로 돌려 가며 채움), 옆 벽 줄, 안쪽 구석 가구, 큰 벽·옆 벽에 놓을 묶음 상한]
@@ -194,6 +216,21 @@ const USE=Object.freeze({
  security:{main:['kioskDesk','wardrobe2','kiosk1','chairs2'],side:['wardrobe','kiosk1','chairs2'],corner:'wardrobe_n',cap:[4,3]},
  lobby7:{main:['chairs2','case1','wardrobe','alarm1','cases'],side:['chairs2','case1','trash'],corner:null,cap:[3,2]}/* 호텔 층 전실: 의자와 투숙객 짐 */,
  vacant:{main:['case1','trash'],side:['case1'],corner:null,cap:[2,1],more:false},
+ // 넷째 묶음(R527): 기억의 방·중앙 이주실 = 캡슐 + 모니터 짝과 수조, 보호 구획 = 캡슐 + 냉각기, 기계 육체실 = 거치대 줄, 닫힌 구획·연결실 = 기계·냉각기, 기억 전실 = 단말기
+ //  사몽의 문턱: 수확실 = 연꽃 코어 받침 + 수조, 방벽 구획 = 돌 방벽 줄, 코어 전실 = 받침 + 성물함 + 등불. 빈 복도·연결 회랑·길목은 손대지 않는다
+ memory:{main:['podMon','tank1','podMon','kiosk1'],side:['kiosk1','mon1','cooler1'],corner:null,cap:[4,2]},
+ memhall:{main:['kiosk1','cooler1','kiosk1'],side:['kiosk1','cooler1'],corner:null,cap:[2,1]},
+ sealed:{main:['machine1','rig1','cooler1','machine1'],side:['cooler1','vent1'],corner:null,cap:[4,2]},
+ gate:{main:['kiosk1','cooler1'],side:['cooler1','kiosk1'],corner:null,cap:[2,2]},/* 입구: 단말기와 냉각기 두세 점 */
+ annex:{main:['kiosk1','cooler1','machine1'],side:['kiosk1','cooler1'],corner:null,cap:[2,1],more:false},
+ link:{main:['machine1','cooler1','vent1'],side:['cooler1','machine1'],corner:null,cap:[3,2]},
+ ward:{main:['podMon','cooler1','podMon'],side:['mon1','kiosk1'],corner:null,cap:[3,2]},
+ bodies:{main:['rig2','mon1','rig2','rig1'],side:['rig1','mon1'],corner:null,cap:[4,2],lim:{rig:4}},
+ transfer:{main:['podMon','tank1','podMon','kiosk1'],side:['podMon','mon1'],corner:null,cap:[4,2]},
+ harvest:{main:['lotusTank','lantern1','tank1'],side:['lantern1','lotus1'],corner:null,cap:[3,2]},
+ bulwark:{main:['barrier2','lantern1','barrier1'],side:['barrier1','lantern1'],corner:null,cap:[3,2],lim:{barrier:4}},
+ corehall:{main:['lotus1','reliq1','lantern1'],side:['reliq1','lantern1'],corner:null,cap:[3,2]},
+ narthex:{main:['lantern1','reliq1'],side:['lantern1','reliq1'],corner:null,cap:[2,1],more:false},
  hall:{main:['parked','wheel','crutch'],side:[],corner:null,cap:[1,0],min:5,more:false},
  passage:{main:['trash','case1'],side:[],corner:null,cap:[1,0],min:5,more:false}
 });
@@ -205,7 +242,10 @@ const REGION=Object.freeze({
  ep1b04:[[/준비대/,'prep'],[/식재료 보관실/,['pantry','pantry2']],[/화구 구획/,'ranges'],[/^앞방$/,'mess'],[/^입구$/,'mess']],
  ep1b07:[[/피난 계단/,'stairs'],[/방화 전실/,'firelobby'],[/설비실/,'plant'],[/그을린 복도/,'evac'],[/^앞방$/,'firelobby'],[/^입구$/,'evac']],/* 길목 26곳은 손대지 않는다 */
  murder02:[[/계단참/,'stairs'],[/보안실/,'security'],[/설비실/,'plant'],[/7층 전실/,'lobby7'],[/^앞방$/,'lobby7'],[/^입구$/,'lobby7']],
- murder04:[[/공동 계단/,'stairs'],[/계단참/,'landing'],[/빈 방/,'vacant'],[/^앞방$/,['den','den2','den3']],[/^입구$/,'foyer']]/* 공동 복도·길목은 손대지 않는다 */
+ murder04:[[/공동 계단/,'stairs'],[/계단참/,'landing'],[/빈 방/,'vacant'],[/^앞방$/,['den','den2','den3']],[/^입구$/,'foyer']],/* 공동 복도·길목은 손대지 않는다 */
+ u205:[[/기억의 방/,'memory'],[/기억 전실/,'memhall'],[/닫힌 구획/,'sealed'],[/^앞방$/,'annex'],[/^입구$/,'gate']],/* 빈 복도·길목은 손대지 않는다 */
+ u206:[[/연결실/,'link'],[/보호 구획/,'ward'],[/기계 육체실/,'bodies'],[/중앙 이주실/,'transfer'],[/^앞방$/,'annex'],[/^입구$/,'gate']],
+ cult03:[[/수확실/,'harvest'],[/방벽 구획/,'bulwark'],[/코어 전실/,'corehall'],[/^앞방$/,'narthex'],[/^입구$/,'narthex']]/* 연결 회랑·길목은 손대지 않는다 */
 });
 const SKIP=/보스|전투실|다음 구역|갈림길|순환로|마당|쉼길/;
 const enabled=r=>!!(prefs.on&&r&&REGION[r.id]&&(!r.layer||r.layer==='STORY')&&r.exploration&&Array.isArray(r.exploration.r224Rooms)&&Array.isArray(r.props)&&!r.exploration.samongR103&&!r.exploration.samongR115);
