@@ -244,7 +244,11 @@ function r300(r,samong){try{if(disposed||!prefs.on||!r)return null;const w=pick(
   if(spec.precip==='snow'||w.kind==='none'&&w.source==='canon'&&!EMBER_IN.has(r.id))out.motes=false;   // 눈 지역은 눈송이가, "먼지 한 톨 없었다"는 아무것도
   else if(spec.dust)out.motes=false;                                                       // 실내·동굴: R300 불티 대신 빛 둘레 먼지
   else if(!samong&&MOTE[w.family])out.motes=MOTE[w.family];
-  if(spec.fog)out.fog=spec.fog;return out;}catch(e){fail(e);return null;}}
+  if(spec.fog)out.fog=spec.fog;
+  // R780 불면귀 밤: 깔린 안개 색만 바꾼다(양은 그대로). 마을은 남색 밤안개, 한약 구역(정본 '안개')은 불면귀의 검은 안개 쪽 먹빛 남보라.
+  if(!samong&&(!r.layer||r.layer==='STORY')&&Object.prototype.hasOwnProperty.call(NIGHT_FOG_R780,r.id))out.fog={k:out.fog?.k??1,color:NIGHT_FOG_R780[r.id]};
+  return out;}catch(e){fail(e);return null;}}
+const NIGHT_FOG_R780=Object.freeze({last302:[.3,.37,.52],last303:[.32,.35,.5]});
 
 // ---- 렌더러 감싸기(프로토타입 + 인스턴스, R300 과 같은 방식) ------------------------------------------------------
 const wrappedTargets=new WeakSet();

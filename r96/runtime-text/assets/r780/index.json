@@ -1,0 +1,132 @@
+{
+ "round": "R780",
+ "note": "불면귀 그림 스레드가 Dots CX-0071BV(마을 소품) 대기 중 ElevenLabs(seedream-5.5)로 만든 대체본, 7분야 심사 7.86~8.07 통과. 원본(512 캔버스 PNG)은 프로젝트 파일 bulmyeongwi-art/cx0071bv-el-cleaned/ 에 그대로 두고, 여기는 테두리 상자로 자르고 긴 변 320px 로 줄인 WebP. Dots 정식본이 오면 바꿀 수 있다(최종 아트 여부는 사용자 판단).",
+ "assets": [
+  {
+   "path": "assets/r780/lantern-post.webp",
+   "source": "cx0071bv-el-cleaned/CX-0071BV_01_lantern_post_elb_c1.png",
+   "source_sha256": "864a76de12eacb58d5ce9fbc214acc8380ca5f0e4ad11064d75f5cbe6ab1adb2",
+   "crop_bbox": [
+    152,
+    24,
+    360,
+    488
+   ],
+   "sha256": "784ad9a6ce2f8d4e1f98a9fb8f6d07cffbe1ffb3b7226a1b51db023329afc358",
+   "bytes": 12462,
+   "size": "143x320",
+   "use": "길 가 등롱대 — 석등과 번갈아(호박색 등불, R451 등불 빛)",
+   "made_by": "Pillow crop+LANCZOS, WebP q88",
+   "applied": true,
+   "final": false
+  },
+  {
+   "path": "assets/r780/talisman-rope-r.webp",
+   "source": "cx0071bv-el-cleaned/CX-0071BV_03_talisman_rope_elb_iso_r.png",
+   "source_sha256": "c4a42dcb40c69c06dfef6321052bf7e0605bdda7ef2252cbdc55faac5067e57a",
+   "crop_bbox": [
+    27,
+    24,
+    484,
+    488
+   ],
+   "sha256": "abcc888138c6808f2644f6093d8be90f07da839db8ef8392b93bd39cc4e2bbbd",
+   "bytes": 21860,
+   "size": "315x320",
+   "use": "붉은 부적 금줄(-y 뒤쪽 끝, 오른쪽 아래 축)",
+   "made_by": "Pillow crop+LANCZOS, WebP q88",
+   "applied": true,
+   "final": false
+  },
+  {
+   "path": "assets/r780/talisman-rope-l.webp",
+   "source": "cx0071bv-el-cleaned/CX-0071BV_03_talisman_rope_elb_iso_l.png",
+   "source_sha256": "75cc869d456ea47ca8c8b96e5843d8924d5cd4b9de5b59668c09696b088b2e11",
+   "crop_bbox": [
+    29,
+    24,
+    482,
+    488
+   ],
+   "sha256": "7c77262b7b168bfde269161134252720e4906df698284655c778f4732c18e555",
+   "bytes": 21538,
+   "size": "312x320",
+   "use": "붉은 부적 금줄(-x 뒤쪽 끝, 왼쪽 아래 축)",
+   "made_by": "Pillow crop+LANCZOS, WebP q88",
+   "applied": true,
+   "final": false
+  },
+  {
+   "path": "assets/r780/shoes-stone.webp",
+   "source": "cx0071bv-el-cleaned/CX-0071BV_05_shoes_stone_ela_c1.png",
+   "source_sha256": "43e9865f4df750fa334c7cee34addbc1675e630ce9be75858a090655d358874b",
+   "crop_bbox": [
+    24,
+    214,
+    488,
+    488
+   ],
+   "sha256": "44a74c1b0be595aec79b693603b85cf41b12cbb268ed0bcd038c7b12ccb45716",
+   "bytes": 16830,
+   "size": "320x189",
+   "use": "집 앞 댓돌 — 신발이 모두 한 방향(정본 34장)",
+   "made_by": "Pillow crop+LANCZOS, WebP q88",
+   "applied": true,
+   "final": false
+  },
+  {
+   "path": "assets/r780/jangdok.webp",
+   "source": "cx0071bv-el-cleaned/CX-0071BV_06_jangdokdae_elb_c1.png",
+   "source_sha256": "3c864feebe4d5671370b02854e95a5a4163936e9b349d1556b0b4f0794a5bb94",
+   "crop_bbox": [
+    24,
+    195,
+    488,
+    488
+   ],
+   "sha256": "9c1387037ef057c66ecd5f059ab166c7f7caca227c73708158d53ef0721af7ad",
+   "bytes": 14040,
+   "size": "320x202",
+   "use": "집 곁 장독대",
+   "made_by": "Pillow crop+LANCZOS, WebP q88",
+   "applied": true,
+   "final": false
+  },
+  {
+   "path": "assets/r780/fish-rack.webp",
+   "source": "cx0071bv-el-cleaned/CX-0071BV_07_fish_rack_elb_c1.png",
+   "source_sha256": "9dee43c156dac37049bf78f6ebb229d4df4dd160135b135e971689a7998e933e",
+   "crop_bbox": [
+    24,
+    50,
+    488,
+    488
+   ],
+   "sha256": "1c348af69d7e65769ed3b79c9e647d4dca027ef67fc519ff9ebe8eb4296dd5c6",
+   "bytes": 45422,
+   "size": "320x302",
+   "use": "포구 생선 건조대(last302)",
+   "made_by": "Pillow crop+LANCZOS, WebP q88",
+   "applied": true,
+   "final": false
+  },
+  {
+   "path": "assets/r780/boat.webp",
+   "source": "cx0071bv-el-cleaned/CX-0071BV_08_beached_boat_elb_c1.png",
+   "source_sha256": "a34a5c882396eff94c43e1fbc1f5b31f575b35aac0c265418f2b4629c5bd7d9e",
+   "crop_bbox": [
+    24,
+    242,
+    488,
+    488
+   ],
+   "sha256": "44cd122f94e22348871753de73d982dba57736f764f006e807eab6f182ff19ee",
+   "bytes": 13142,
+   "size": "320x170",
+   "use": "뭍에 올린 배(last302)",
+   "made_by": "Pillow crop+LANCZOS, WebP q88",
+   "applied": true,
+   "final": false
+  }
+ ]
+}
