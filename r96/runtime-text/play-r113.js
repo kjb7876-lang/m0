@@ -51,7 +51,13 @@ function steering(){const k=typeof keys!=='undefined'?keys:null,j=typeof joystic
 function blinkAway(base,args){const j=typeof joystickVector!=='undefined'?joystickVector:null;const foe=nearestFoe(15);
  if(!j||!foe)return base.apply(this,args);let dx=player.x-foe.x,dy=player.y-foe.y;const d=Math.hypot(dx,dy)||1;dx/=d;dy/=d;
  const ox=j.x,oy=j.y;j.x=(dx-dy)/2;j.y=(dx+dy)/4;stats.blinkAway++;try{return base.apply(this,args);}finally{j.x=ox;j.y=oy;}}
-const dance={anchor:null,cam:null};
+const dance={anchor:null,cam:null,cloneAt:-9};
+// R767(사용자 2026-11-11 "영웅을 적에게 옮기는 스킬은 순간적으로 분신이 적에게 간 다음 스킬 적중시키고 분신은 사라지게"): 실검무 고정점을 근접 영웅에도 —
+//  영웅은 제자리에 그려지고 끝나면 제자리, 실제로 베는 자리에는 0.25초짜리 분신(엔진 ghost 잔상, 공격 자세)만 0.08초마다 남긴다. 피해·표적·시간은 그대로.
+const anchorHero=p=>!!p&&(isRanged(p)||prefs.cloneDance!==false);
+function danceClone(){const t=now();if(t-dance.cloneAt<.08||lowFx()&&t-dance.cloneAt<.16)return;let dir='front';try{if(typeof facing==='function'&&dance.anchor)dir=facing(player.x-dance.anchor.x,player.y-dance.anchor.y);}catch(_){}
+ let asset=null;try{const A=typeof heroArt!=='undefined'?heroArt[player.hero]:null;asset=A&&A.attack&&(A.attack[dir]||A.attack.front||A.attack.right)||null;}catch(_){}
+ if(!asset||typeof fx!=='function')return;dance.cloneAt=t;try{fx('ghost',player.x,player.y,{asset,life:.25,size:1,r767:true});stats.danceClones=(stats.danceClones||0)+1;}catch(e){fail(e);}}
 const DANCES=()=>window.__STORYWORLD_DANCES_R74__;
 const dancing=()=>{try{return !!DANCES()?.nativeActive?.(player);}catch(_){return false;}};
 
@@ -190,8 +196,8 @@ function install(){
   const before=new Map();if(ok&&prefs.dust)for(const e of room.enemies)if(liveFoe(e))before.set(e,e.x+e.y*1e-3);
   const r=tickBase.call(this,dt,...a);if(!ok||!Number.isFinite(dt)||dt<=0)return r;
   try{ // ① 실검무 고정점
-   if(prefs.ranged&&isRanged(player)&&dancing()){if(!dance.anchor){dance.anchor={x:pre.x,y:pre.y};dance.cam={x:pre.cx,y:pre.cy};stats.danceAnchors++;}if(typeof cam!=='undefined'){cam.x=dance.cam.x;cam.y=dance.cam.y;}stats.danceFrames++;}
-   else if(dance.anchor){const A=dance.anchor;dance.anchor=null;if(isRanged(player)&&!blockedAt(A.x,A.y,.23)&&Math.hypot(player.x-A.x,player.y-A.y)<14){player.x=A.x;player.y=A.y;player.moving=false;stats.danceReturns=(stats.danceReturns||0)+1;}}
+   if(prefs.ranged&&anchorHero(player)&&dancing()){if(!dance.anchor){dance.anchor={x:pre.x,y:pre.y};dance.cam={x:pre.cx,y:pre.cy};stats.danceAnchors++;}if(typeof cam!=='undefined'){cam.x=dance.cam.x;cam.y=dance.cam.y;}stats.danceFrames++;danceClone();}
+   else if(dance.anchor){const A=dance.anchor;dance.anchor=null;dance.cloneAt=-9;if(anchorHero(player)&&!blockedAt(A.x,A.y,.23)&&Math.hypot(player.x-A.x,player.y-A.y)<14){player.x=A.x;player.y=A.y;player.moving=false;stats.danceReturns=(stats.danceReturns||0)+1;}}
    if(prefs.physics&&!busyMenu()){separate(dt);stepKnock(dt);}
    watchShots();
    if(prefs.dust&&!busyMenu()){const t=now(),moved=Math.hypot(player.x-pre.x,player.y-pre.y);if(moved>.02&&!dance.anchor&&moved<.6&&t-(hero.dustAt||0)>.16){hero.dustAt=t;dustAt(player.x,player.y);}

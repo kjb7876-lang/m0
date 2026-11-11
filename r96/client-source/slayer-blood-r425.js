@@ -61,11 +61,18 @@ function rTick(){if(!R)return;const t=T(),age=t-R.t0;let rm=null;try{rm=room;}ca
 const auraOn=()=>!!(R&&T()>=R.auraStart&&T()<R.auraEnd&&isHero());
 function manualInput(){try{const k=typeof keys==='object'&&keys?keys:null,j=typeof joystickVector==='object'?joystickVector:{x:0,y:0};return !!((k&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].some(x=>k.has(x)))||Math.hypot(j.x||0,j.y||0)>.15||(typeof route!=='undefined'&&Array.isArray(route)&&route.length>0)||(typeof command!=='undefined'&&!!command));}catch(_){return false;}}
 let lastChase=0;
+function cloneStrike(p,e,d){const v={x:(e.x-p.x)/d,y:(e.y-p.y)/d},gx=e.x-v.x*.7,gy=e.y-v.y*.7;let dir='front';try{if(typeof facing==='function')dir=facing(v.x,v.y);}catch(_){}
+ let asset=null;try{const A=typeof heroArt!=='undefined'?heroArt[HERO]:null;asset=A&&A.attack&&(A.attack[dir]||A.attack.front)||null;}catch(_){}
+ try{if(asset&&typeof fx==='function')fx('ghost',gx,gy,{asset,life:.3,size:1,r767:true});}catch(err){fail(err);}
+ try{if(typeof hitEnemy==='function')hitEnemy(e,(typeof attackPower==='function'?attackPower():48),{kind:'r425-clone',friendly:true,owner:'hero',r425:'clone',sourceHero:HERO,attackKind9:'basic'});}catch(err){fail(err);}
+ blood('blood-burst',e.x,e.y,{k:.8,z:0});p.attackCD=Math.max(p.attackCD||0,.48);try{p.direction=dir;}catch(_){}stats.cloneStrikes=(stats.cloneStrikes||0)+1;}
 function chase(){const p=player,t=T();const dt=Math.min(.05,Math.max(0,t-lastChase));lastChase=t;if(manualInput()||(typeof modal!=='undefined'&&modal))return;
  let best=null,bd=9;for(const e of live()){const d=dist(e,p);if(d<bd&&dmgOK(e)&&seeLine(p,e)){bd=d;best=e;}}if(!best)return;
  const h=typeof HEROES==='object'?HEROES[p.hero]:null,range=(h?.range||3.3)*.8;
  try{if(typeof target!=='undefined')target=best.id;}catch(_){}
- if(bd>range&&dt>0&&typeof moveActor==='function'){const v={x:(best.x-p.x)/bd,y:(best.y-p.y)/bd},sp=4.4*dt;moveActor(p,v.x*sp,v.y*sp);p.moveVX150=v.x;p.moveVY150=v.y;try{if(typeof facing==='function')p.direction=facing(v.x,v.y);}catch(_){}stats.chaseSteps++;}
+ /* R767(사용자 2026-11-11 "영웅을 적에게 옮기는 스킬은 순간적으로 분신이 적에게 간 다음 스킬 적중시키고 분신은 사라지게"): 영웅은 걸어가지 않고,
+    기본 공격 박자마다 분신(엔진 ghost 잔상, 슬레이어 공격 자세)이 적 바로 앞에 나타나 한 번 베고 0.3초 뒤 사라진다. 피해 = 공격력 ×1(기본 공격과 같은 규모). */
+ if(bd>range){if(!(p.attackCD>0))cloneStrike(p,best,bd);}
  else if(!(p.attackCD>0)&&typeof basicAttack==='function'){try{basicAttack(true);stats.autoSwings++;}catch(e){fail(e);}}}
 function chainBurst(e,depth){const k=e.boss||e.midboss?1.6:1.3;blood('blood-burst',e.x,e.y,{k,z:0});const hit=[];for(const v of live())if(dist(v,e)<=1.5+(v.radius||.3)&&seeLine(e,v)){hit.push(v);deal(v,R.power*(depth?.3:.45),'r-chain');}stats.chains++;
  if(depth<1){const next=live().filter(v=>v!==e&&dmgOK(v)&&dist(v,e)<=2.6&&seeLine(e,v)).sort((a,b)=>dist(a,e)-dist(b,e))[0];if(next&&typeof delay==='function')delay(.12,()=>{if(auraOn()&&dmgOK(next))chainBurst(next,depth+1);},'hero');}}
@@ -162,7 +169,7 @@ if(typeof fx==='function'){const base=fx;fx=function(type,x,y,opt){
 if(typeof hitEnemy==='function'){const base=hitEnemy;hitEnemy=function(e,amount,source,...a){
  if(on&&solo()&&!ego()&&source&&source.storyWER&&source.sourceHero===HERO&&source.sourceSlot==='r'&&!source.r425&&typeof player==='object'&&player?.hero===HERO){stats.rBlocked++;return false;}/* 옛 R 7회 둘레 베기 피해 → 십자가 폭발로 대신 */
  const old=e?.hp;const r=base.apply(this,[e,amount,source,...a]);
- try{if(auraOn()&&e&&old>e.hp&&!(source&&(source.r425||source.r118Splash||source.kind==='narrative-companion-r75'||source.kind==='awakening-shock'||/samong|사몽/i.test(String(source.kind||''))))&&!(source&&source.friendly===false)){const t=T(),last=chainSeen.get(e)||-9;if(t-last>.25){chainSeen.set(e,t);if(chainSeen.size>64)chainSeen.delete(chainSeen.keys().next().value);chainBurst(e,0);}}}catch(err){fail(err);}
+ try{if(auraOn()&&e&&old>e.hp&&!(source&&((source.r425&&source.r425!=='clone')||source.r118Splash||source.kind==='narrative-companion-r75'||source.kind==='awakening-shock'||/samong|사몽/i.test(String(source.kind||''))))&&!(source&&source.friendly===false)){const t=T(),last=chainSeen.get(e)||-9;if(t-last>.25){chainSeen.set(e,t);if(chainSeen.size>64)chainSeen.delete(chainSeen.keys().next().value);chainBurst(e,0);}}}catch(err){fail(err);}
  return r;};}
 if(typeof special==='function'){const base=special;special=function(...a){if(on&&!ego()&&typeof player==='object'&&player?.hero===HERO&&solo()){if(qReady())castQ();return;}return base.apply(this,a);};}
 if(typeof tick==='function'){const base=tick;tick=function(dt,...a){const r=base.apply(this,[dt,...a]);try{if(on){if(!warmed&&isHero())warm();rTick();qTick(dt);bleedTick();}}catch(e){fail(e);}return r;};}

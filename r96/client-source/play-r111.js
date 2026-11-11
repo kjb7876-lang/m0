@@ -160,6 +160,8 @@ function applyRanged(){if(rangedState.applied||!prefs.ranged)return;const H=type
   const e=D?.[id]?.e;if(Array.isArray(e)&&e[2]==='dash')try{e[2]='escape';}catch(err){fail(err);}}
  rangedState.applied=true;}
 const isRanged=p=>!!RANGED[p?.hero];
+// R767(사용자 2026-11-11): 모든 영웅 EGO 동안·슬레이어 R 적혈 오라(7초) 동안 S 블링크 재사용 대기 없음
+function blinkFree(){if(!(finite(player.blinkCD)>0))return;let free=egoOn(player);if(!free&&player.hero==='slayer'){try{free=window.__STORYWORLD_SLAYER_BLOOD_R425__?.auraOn?.()===true;}catch(_){}}if(free){player.blinkCD=0;stats.blinkFree=(stats.blinkFree||0)+1;}}
 function missRoll(damage,src){if(!prefs.ranged||!solo()||!isRanged(player)||!(player.hp>0)||!(Number.isFinite(damage)&&damage>0))return false;
  if(src&&(src.r330||src.status||src.type==='r330-status'))return false;if(!(Math.random()<RANGED[player.hero].miss))return false;
  rangedState.dodges++;try{if(typeof fx==='function')fx('text',player.x,player.y,{text:'회피',color:'#cfe8ff',life:.7});}catch(_){}return true;}
@@ -293,7 +295,7 @@ function install(){
  const tickBase=tick;tick=function(dt,...a){const r0=typeof player!=='undefined'&&player?finite(player.resonance,NaN):NaN;const out=tickBase.call(this,dt,...a);
   try{if(live()){footBudget=lowFx()?2:4;
    if(prefs.resonance777&&Number.isFinite(r0)&&Number.isFinite(player.resonance)&&player.resonance>r0&&player.resonance-r0<20){const want=Math.min(100,r0+(player.resonance-r0)*RES_GAIN);stats.resGain+=want-player.resonance;player.resonance=want;}
-   applyRanged();guardTick(dt);samongTick();rootTick();faceTick();egoTick();fixDomText();if(prefs.props)spaceProps(room);}}catch(e){fail(e);}return out;};
+   applyRanged();blinkFree();guardTick(dt);samongTick();rootTick();faceTick();egoTick();fixDomText();if(prefs.props)spaceProps(room);}}catch(e){fail(e);}return out;};
  if(typeof updateHUD==='function'){const hudBase=updateHUD;updateHUD=function(...a){const r=hudBase.apply(this,a);try{resText();}catch(e){fail(e);}return r;};}
  if(typeof hurt==='function'){const hurtBase=hurt;hurt=function(damage,...a){try{if(live()&&missRoll(damage,a[0]))return 'missed';}catch(e){fail(e);}if(prefs.guard&&live()&&player.guard&&Number.isFinite(damage)&&damage>0){const d=damage*GUARD_TAKEN/NATIVE_GUARD;guardState.blocked+=damage-d;damage=d;}return hurtBase.call(this,damage,...a);};}
  if(typeof toast==='function'){const toastBase=toast;toast=function(msg,...a){return toastBase.call(this,fixMsg(msg),...a);};}
