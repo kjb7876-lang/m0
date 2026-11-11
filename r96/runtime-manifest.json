@@ -33228,6 +33228,31 @@
       "sha256": "8d8837750e4201c1da00690c749f90ce7b672b53401225dd87c6035114a1382a"
     },
     {
+      "path": "assets/r437/attack/lauren/attack-e.webp",
+      "bytes": 144728,
+      "sha256": "4d0db601ee982827e113eea6fbe1723854043923ffe206a9e6ecbcd94c39fc01"
+    },
+    {
+      "path": "assets/r437/attack/lauren/index.json",
+      "bytes": 2413,
+      "sha256": "8216db02f9e0e83f6a15b93db712c7476e0fbb3e0b8ad27cd599d9b9d7e231ef"
+    },
+    {
+      "path": "assets/r437/attack/neon/attack-e.webp",
+      "bytes": 149448,
+      "sha256": "c52fe7b51d4a487de80bc3efc67426606d93169c06a37f477538d59038de6877"
+    },
+    {
+      "path": "assets/r437/attack/neon/index.json",
+      "bytes": 2429,
+      "sha256": "fee9fda8a129a755488c554744cff5e96480f17f21ca14ae59e64e82e7bbdcb0"
+    },
+    {
+      "path": "assets/r437/portrait/neon.webp",
+      "bytes": 51044,
+      "sha256": "93a0c9ac330106f628b43fcea04605cad968ce94e8927facc7794a4dd974e7e9"
+    },
+    {
       "path": "assets/r438/fx/enemy-cold-wave.webp",
       "bytes": 313642,
       "sha256": "65e635585bc81d6322daa118b8ab48e7736b7865d8f1d7eb30fec257db021280"
@@ -33456,6 +33481,21 @@
       "path": "assets/r524/sofa-w.webp",
       "bytes": 13468,
       "sha256": "8bf10ff5c67732f690edf60e016a5e97dbf938e7ac13cc175564b8d88992512e"
+    },
+    {
+      "path": "assets/r528/bookshelf-n.webp",
+      "bytes": 9878,
+      "sha256": "35a8c4b0f5b4d18dfc1a8c8897095e8c77399583d21acd6f53f2352cf226f661"
+    },
+    {
+      "path": "assets/r528/bookshelf-w.webp",
+      "bytes": 10920,
+      "sha256": "c8bda988ca8a64dfa386e3bb62579ffa5fc4f155492de84b64202a29062d461b"
+    },
+    {
+      "path": "assets/r528/index.json",
+      "bytes": 1681,
+      "sha256": "fee129e4bc5ef2dbec313910f2c8d8ee5209f83f785c78b802a9464251d86d45"
     },
     {
       "path": "assets/r535/dots/hunter-burn.webp",
@@ -42259,8 +42299,8 @@
     },
     {
       "path": "attack-anim-r143.js",
-      "bytes": 18882,
-      "sha256": "3bdb605c04a9aa1cb40d113450539b98191cc67ceec4afd662b7c800c83818ca"
+      "bytes": 19517,
+      "sha256": "bb1250b4d1d2b0b0bca5f2a3e87fe95c97b6ade3b831244206b8a6c40025f880"
     },
     {
       "path": "audio-r108.js",
@@ -43014,8 +43054,8 @@
     },
     {
       "path": "combat-flow-r425.js",
-      "bytes": 62139,
-      "sha256": "eabb04122b26259b8ab33acf8d50f71060d65728be9e05f7c8df85417fddaff7"
+      "bytes": 62468,
+      "sha256": "32d8eb8a657431eb23234cf8c043230da4ab18a26e36fa9cb5640635067cc5b5"
     },
     {
       "path": "combat-r114.js",
@@ -43269,8 +43309,8 @@
     },
     {
       "path": "fx-d2s-r106.js",
-      "bytes": 25603,
-      "sha256": "60793c564d54b8767981ac83cc21e24eda01948cb4cbc3f87745a016184573ac"
+      "bytes": 25743,
+      "sha256": "74ab98339121b0d7f2978e33bfc219e6eca13c7e17bd815eb474f11b39253111"
     },
     {
       "path": "fx-eden-data-r108.js",
@@ -43504,8 +43544,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6573729,
-      "sha256": "7cb8b73ccd9b90224927e5f49d342e519f1bd416cd0ec0d7843f8cf02473f475"
+      "bytes": 6573774,
+      "sha256": "7ed43cfb889be9136727956c3158499e09c9a41739e1212360f279da0f7986d3"
     },
     {
       "path": "intro-r140.js",
@@ -43748,6 +43788,11 @@
       "sha256": "dc9f25885b4cbc747d36fe10f234459df1acfdb8af0b0d972d83ef9952d3d886"
     },
     {
+      "path": "neon-lauren-r437.js",
+      "bytes": 16325,
+      "sha256": "5fd0bda5b06dff76495a75329b910a73d088ca15d3b8fbb1bacf4147afb7bd26"
+    },
+    {
       "path": "neon-toxic-r562.js",
       "bytes": 20123,
       "sha256": "ae9f2a00016014fa0e7de573ed0ef2b2906b8e306c169346f654289ca5584cdd"
@@ -43964,8 +44009,8 @@
     },
     {
       "path": "rooms-r523.js",
-      "bytes": 47219,
-      "sha256": "d16d0859a04a96e5ff441cda36abdae2e19d12eda85fbc96c08c771a05930474"
+      "bytes": 48033,
+      "sha256": "cc80823230347f5bc23b8555ed5469809a1d076b45a8e478cc5af920677826a7"
     },
     {
       "path": "root-gate-video-r372.js",
@@ -44129,8 +44174,8 @@
     },
     {
       "path": "skill-sheets-r411.js",
-      "bytes": 9938,
-      "sha256": "c2123e77a9a78ee83e37d2828a9b30582d97eefd4859427c94c2202d8e48e88a"
+      "bytes": 10071,
+      "sha256": "1d953ce2320f43dcb7a41c8013af5196fa47e80ea1405e95aff141e75a8084aa"
     },
     {
       "path": "skills-r181.js",
@@ -44458,9 +44503,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8891,
-  "totalBytes": 1227437366,
-  "webHTMLSha256": "7cb8b73ccd9b90224927e5f49d342e519f1bd416cd0ec0d7843f8cf02473f475",
+  "fileCount": 8900,
+  "totalBytes": 1227828328,
+  "webHTMLSha256": "7ed43cfb889be9136727956c3158499e09c9a41739e1212360f279da0f7986d3",
   "largest": [
     {
       "path": "index.html",

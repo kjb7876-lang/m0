@@ -8101,7 +8101,16 @@
     "assets/r664/ambience/crowd.ogg",
     "assets/r664/ambience/stone.ogg",
     "assets/r664/ambience/night.ogg",
-    "assets/r664/ambience/index.json"
+    "assets/r664/ambience/index.json",
+    "neon-lauren-r437.js",
+    "assets/r437/attack/lauren/attack-e.webp",
+    "assets/r437/attack/lauren/index.json",
+    "assets/r437/attack/neon/attack-e.webp",
+    "assets/r437/attack/neon/index.json",
+    "assets/r437/portrait/neon.webp",
+    "assets/r528/bookshelf-n.webp",
+    "assets/r528/bookshelf-w.webp",
+    "assets/r528/index.json"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9176,5 +9185,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "b39f4932d5c21016d49e05cd889bce61acef992ec1ecc7399ce0a174390124fa"
+  "runtimeManifestSHA256": "d242a2b3b8df30c09432fa4094a9b5abc81c611eab15869358243ab5babe39d7"
 }
