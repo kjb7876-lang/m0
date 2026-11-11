@@ -1,0 +1,200 @@
+{
+ "e": {
+  "sourceRect": [
+   0,
+   0,
+   512,
+   512
+  ],
+  "pivot": [
+   226.999808,
+   489.999872
+  ],
+  "visibleHeight": 365.999872,
+  "flip": false,
+  "bakedFacing": "e",
+  "muzzle": [
+   0.892578,
+   0.466797
+  ],
+  "weaponBase": null,
+  "muzzlePx": [
+   456.999936,
+   239.000064
+  ]
+ },
+ "se": {
+  "sourceRect": [
+   0,
+   0,
+   512,
+   512
+  ],
+  "pivot": [
+   231.000064,
+   490.999808
+  ],
+  "visibleHeight": 352.999808,
+  "flip": false,
+  "bakedFacing": "se",
+  "muzzle": [
+   0.822266,
+   0.796875
+  ],
+  "weaponBase": null,
+  "muzzlePx": [
+   421.000192,
+   408.0
+  ]
+ },
+ "s": {
+  "sourceRect": [
+   0,
+   0,
+   512,
+   512
+  ],
+  "pivot": [
+   256.0,
+   496.0
+  ],
+  "visibleHeight": 476.782848,
+  "flip": false,
+  "bakedFacing": "s",
+  "muzzle": [
+   0.496235,
+   0.9147118
+  ],
+  "weaponBase": [
+   0.49749,
+   0.5502681
+  ],
+  "muzzlePx": [
+   254.07232,
+   468.3324416
+  ]
+ },
+ "sw": {
+  "sourceRect": [
+   0,
+   0,
+   512,
+   512
+  ],
+  "pivot": [
+   278.000128,
+   489.999872
+  ],
+  "visibleHeight": 355.999872,
+  "flip": false,
+  "bakedFacing": "sw",
+  "muzzle": [
+   0.183594,
+   0.796875
+  ],
+  "weaponBase": null,
+  "muzzlePx": [
+   94.000128,
+   408.0
+  ]
+ },
+ "w": {
+  "sourceRect": [
+   0,
+   0,
+   512,
+   512
+  ],
+  "pivot": [
+   304.0,
+   489.999872
+  ],
+  "visibleHeight": 366.999872,
+  "flip": false,
+  "bakedFacing": "w",
+  "muzzle": [
+   0.113281,
+   0.458984
+  ],
+  "weaponBase": null,
+  "muzzlePx": [
+   57.999872,
+   234.999808
+  ]
+ },
+ "nw": {
+  "sourceRect": [
+   0,
+   0,
+   512,
+   512
+  ],
+  "pivot": [
+   288.999936,
+   489.999872
+  ],
+  "visibleHeight": 375.999872,
+  "flip": false,
+  "bakedFacing": "nw",
+  "muzzle": [
+   0.175781,
+   0.134766
+  ],
+  "weaponBase": null,
+  "muzzlePx": [
+   89.999872,
+   69.000192
+  ]
+ },
+ "n": {
+  "sourceRect": [
+   0,
+   0,
+   512,
+   512
+  ],
+  "pivot": [
+   259.8947328,
+   496.0
+  ],
+  "visibleHeight": 330.878208,
+  "flip": false,
+  "bakedFacing": "n",
+  "muzzle": [
+   0.5031867,
+   0.0339058
+  ],
+  "weaponBase": [
+   0.5040707,
+   0.2472557
+  ],
+  "muzzlePx": [
+   257.6315904,
+   17.3597696
+  ]
+ },
+ "ne": {
+  "sourceRect": [
+   0,
+   0,
+   512,
+   512
+  ],
+  "pivot": [
+   233.999872,
+   489.999872
+  ],
+  "visibleHeight": 369.999872,
+  "flip": false,
+  "bakedFacing": "ne",
+  "muzzle": [
+   0.835938,
+   0.154297
+  ],
+  "weaponBase": null,
+  "muzzlePx": [
+   428.000256,
+   79.000064
+  ]
+ }
+}
