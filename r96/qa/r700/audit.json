@@ -1,0 +1,5017 @@
+{
+ "dist00-boss": {
+  "name": "뿌리의 문지기",
+  "zone": null,
+  "sin": "",
+  "phaseNames": [
+   "뿌리의 문지기",
+   "검은 뿌리 형상"
+  ],
+  "arts": [
+   {
+    "role": "phase0.idle",
+    "path": "assets/episode1a/demon_tree_root_seraph.png",
+    "frames": 1,
+    "m": {
+     "size": [
+      1254,
+      1254
+     ],
+     "bbox": [
+      31,
+      0,
+      1227,
+      1250
+     ],
+     "visH": 1250,
+     "visW": 1196,
+     "fill": 0.951,
+     "footY": 0.997,
+     "centerX": 0.502,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.521,
+     "edgeV": 0.124,
+     "sat": 0.547,
+     "val": 0.232,
+     "domHue": 0,
+     "chromaShare": 0.376,
+     "semi": 0.045,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.attackA",
+    "path": "assets/episode1a/demon_tree_root_seraph.png",
+    "frames": 1,
+    "m": {
+     "size": [
+      1254,
+      1254
+     ],
+     "bbox": [
+      31,
+      0,
+      1227,
+      1250
+     ],
+     "visH": 1250,
+     "visW": 1196,
+     "fill": 0.951,
+     "footY": 0.997,
+     "centerX": 0.502,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.521,
+     "edgeV": 0.124,
+     "sat": 0.547,
+     "val": 0.232,
+     "domHue": 0,
+     "chromaShare": 0.376,
+     "semi": 0.045,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.hit",
+    "path": "assets/episode1a/demon_tree_root_seraph.png",
+    "frames": 1,
+    "m": {
+     "size": [
+      1254,
+      1254
+     ],
+     "bbox": [
+      31,
+      0,
+      1227,
+      1250
+     ],
+     "visH": 1250,
+     "visW": 1196,
+     "fill": 0.951,
+     "footY": 0.997,
+     "centerX": 0.502,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.521,
+     "edgeV": 0.124,
+     "sat": 0.547,
+     "val": 0.232,
+     "domHue": 0,
+     "chromaShare": 0.376,
+     "semi": 0.045,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.death",
+    "path": "assets/episode1a/demon_tree_root_seraph.png",
+    "frames": 1,
+    "m": {
+     "size": [
+      1254,
+      1254
+     ],
+     "bbox": [
+      31,
+      0,
+      1227,
+      1250
+     ],
+     "visH": 1250,
+     "visW": 1196,
+     "fill": 0.951,
+     "footY": 0.997,
+     "centerX": 0.502,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.521,
+     "edgeV": 0.124,
+     "sat": 0.547,
+     "val": 0.232,
+     "domHue": 0,
+     "chromaShare": 0.376,
+     "semi": 0.045,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase1.idle",
+    "path": "assets/episode1a/demon_tree_root_seraph.png",
+    "frames": 1,
+    "m": {
+     "size": [
+      1254,
+      1254
+     ],
+     "bbox": [
+      31,
+      0,
+      1227,
+      1250
+     ],
+     "visH": 1250,
+     "visW": 1196,
+     "fill": 0.951,
+     "footY": 0.997,
+     "centerX": 0.502,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.521,
+     "edgeV": 0.124,
+     "sat": 0.547,
+     "val": 0.232,
+     "domHue": 0,
+     "chromaShare": 0.376,
+     "semi": 0.045,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p1",
+    "path": "assets/r104/bosses/dist00-boss-p1.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      421,
+      463
+     ],
+     "bbox": [
+      11,
+      6,
+      415,
+      445
+     ],
+     "visH": 439,
+     "visW": 404,
+     "fill": 0.91,
+     "footY": 0.961,
+     "centerX": 0.506,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.787,
+     "edgeV": 0.25,
+     "sat": 0.542,
+     "val": 0.309,
+     "domHue": 0,
+     "chromaShare": 0.528,
+     "semi": 0.105,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p2",
+    "path": "assets/r104/bosses/dist00-boss-p2.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      421,
+      463
+     ],
+     "bbox": [
+      40,
+      56,
+      384,
+      457
+     ],
+     "visH": 401,
+     "visW": 344,
+     "fill": 0.708,
+     "footY": 0.987,
+     "centerX": 0.504,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.795,
+     "edgeV": 0.259,
+     "sat": 0.544,
+     "val": 0.318,
+     "domHue": 0,
+     "chromaShare": 0.55,
+     "semi": 0.102,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p3",
+    "path": "assets/r104/bosses/dist00-boss-p3.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      421,
+      463
+     ],
+     "bbox": [
+      28,
+      64,
+      404,
+      419
+     ],
+     "visH": 355,
+     "visW": 376,
+     "fill": 0.685,
+     "footY": 0.905,
+     "centerX": 0.513,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.772,
+     "edgeV": 0.254,
+     "sat": 0.521,
+     "val": 0.321,
+     "domHue": 0,
+     "chromaShare": 0.513,
+     "semi": 0.095,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p4",
+    "path": "assets/r104/bosses/dist00-boss-p4.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      421,
+      463
+     ],
+     "bbox": [
+      6,
+      7,
+      360,
+      407
+     ],
+     "visH": 400,
+     "visW": 354,
+     "fill": 0.726,
+     "footY": 0.879,
+     "centerX": 0.435,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.824,
+     "edgeV": 0.269,
+     "sat": 0.533,
+     "val": 0.32,
+     "domHue": 0,
+     "chromaShare": 0.541,
+     "semi": 0.101,
+     "q64": 64
+    },
+    "all": null
+   }
+  ]
+ },
+ "b02-boss": {
+  "name": "나태에 잠식된 남자",
+  "zone": "ep1b02",
+  "sin": "나태",
+  "phaseNames": [
+   "낡은 민소매를 걸친 남자",
+   "쓰레기 산의 반인반요",
+   "나태의 악마 벨페고르"
+  ],
+  "arts": [
+   {
+    "role": "phase0.idle",
+    "path": "assets/generated-v31224/actors-normalized/4d4341de35e5_ep1b02_sloth_man_phase0.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      224,
+      65,
+      449,
+      352
+     ],
+     "visH": 287,
+     "visW": 225,
+     "fill": 0.25,
+     "footY": 0.917,
+     "centerX": 0.501,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.932,
+     "edgeV": 0.164,
+     "sat": 0.304,
+     "val": 0.175,
+     "domHue": 30,
+     "chromaShare": 0.135,
+     "semi": 0.142,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.attackA",
+    "path": "assets/generated-v31224/actors-normalized/756dc911bd4f_sloth-human-attack.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      209,
+      64,
+      463,
+      352
+     ],
+     "visH": 288,
+     "visW": 254,
+     "fill": 0.283,
+     "footY": 0.917,
+     "centerX": 0.5,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 2.467,
+     "edgeV": 0.629,
+     "sat": 0.398,
+     "val": 0.281,
+     "domHue": 30,
+     "chromaShare": 0.289,
+     "semi": 0.046,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.hit",
+    "path": "assets/generated-v31224/actors-normalized/4d4341de35e5_ep1b02_sloth_man_phase0.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      224,
+      65,
+      449,
+      352
+     ],
+     "visH": 287,
+     "visW": 225,
+     "fill": 0.25,
+     "footY": 0.917,
+     "centerX": 0.501,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.932,
+     "edgeV": 0.164,
+     "sat": 0.304,
+     "val": 0.175,
+     "domHue": 30,
+     "chromaShare": 0.135,
+     "semi": 0.142,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.death",
+    "path": "assets/generated-v31224/actors-normalized/4d4341de35e5_ep1b02_sloth_man_phase0.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      224,
+      65,
+      449,
+      352
+     ],
+     "visH": 287,
+     "visW": 225,
+     "fill": 0.25,
+     "footY": 0.917,
+     "centerX": 0.501,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.932,
+     "edgeV": 0.164,
+     "sat": 0.304,
+     "val": 0.175,
+     "domHue": 30,
+     "chromaShare": 0.135,
+     "semi": 0.142,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase1.idle",
+    "path": "assets/generated-v31224/actors-normalized/3aeb0a8a10c3_boss_sloth_human.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      218,
+      64,
+      453,
+      352
+     ],
+     "visH": 288,
+     "visW": 235,
+     "fill": 0.262,
+     "footY": 0.917,
+     "centerX": 0.499,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.203,
+     "edgeV": 0.265,
+     "sat": 0.395,
+     "val": 0.222,
+     "domHue": 30,
+     "chromaShare": 0.269,
+     "semi": 0.055,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase2.idle",
+    "path": "assets/generated-v31224/actors-normalized/62f51ebe2d08_boss_sloth_demon.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      179,
+      64,
+      496,
+      352
+     ],
+     "visH": 288,
+     "visW": 317,
+     "fill": 0.354,
+     "footY": 0.917,
+     "centerX": 0.502,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.224,
+     "edgeV": 0.228,
+     "sat": 0.497,
+     "val": 0.188,
+     "domHue": 30,
+     "chromaShare": 0.294,
+     "semi": 0.062,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p1",
+    "path": "assets/r104/bosses/b02-boss-p1.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      388,
+      443
+     ],
+     "bbox": [
+      58,
+      25,
+      381,
+      431
+     ],
+     "visH": 406,
+     "visW": 323,
+     "fill": 0.763,
+     "footY": 0.973,
+     "centerX": 0.566,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.945,
+     "edgeV": 0.256,
+     "sat": 0.511,
+     "val": 0.27,
+     "domHue": 30,
+     "chromaShare": 0.441,
+     "semi": 0.051,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p2",
+    "path": "assets/r104/bosses/b02-boss-p2.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      388,
+      443
+     ],
+     "bbox": [
+      16,
+      29,
+      337,
+      437
+     ],
+     "visH": 408,
+     "visW": 321,
+     "fill": 0.762,
+     "footY": 0.986,
+     "centerX": 0.455,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.044,
+     "edgeV": 0.276,
+     "sat": 0.506,
+     "val": 0.265,
+     "domHue": 30,
+     "chromaShare": 0.43,
+     "semi": 0.043,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p3",
+    "path": "assets/r104/bosses/b02-boss-p3.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      388,
+      443
+     ],
+     "bbox": [
+      57,
+      16,
+      379,
+      404
+     ],
+     "visH": 388,
+     "visW": 322,
+     "fill": 0.727,
+     "footY": 0.912,
+     "centerX": 0.562,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.019,
+     "edgeV": 0.279,
+     "sat": 0.502,
+     "val": 0.274,
+     "domHue": 30,
+     "chromaShare": 0.441,
+     "semi": 0.041,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p4",
+    "path": "assets/r104/bosses/b02-boss-p4.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      388,
+      443
+     ],
+     "bbox": [
+      6,
+      6,
+      344,
+      405
+     ],
+     "visH": 399,
+     "visW": 338,
+     "fill": 0.785,
+     "footY": 0.914,
+     "centerX": 0.451,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.92,
+     "edgeV": 0.269,
+     "sat": 0.509,
+     "val": 0.292,
+     "domHue": 30,
+     "chromaShare": 0.486,
+     "semi": 0.042,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r380.strip",
+    "path": "assets/r380/mobs/sloth-burden-man-v1.webp",
+    "frames": 8,
+    "m": {
+     "size": [
+      256,
+      256
+     ],
+     "bbox": [
+      44,
+      36,
+      215,
+      240
+     ],
+     "visH": 204,
+     "visW": 171,
+     "fill": 0.532,
+     "footY": 0.938,
+     "centerX": 0.506,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.053,
+     "edgeV": 0.325,
+     "sat": 0.452,
+     "val": 0.309,
+     "domHue": 30,
+     "chromaShare": 0.616,
+     "semi": 0.052,
+     "q64": 64
+    },
+    "all": [
+     {
+      "size": [
+       256,
+       256
+      ],
+      "bbox": [
+       44,
+       36,
+       215,
+       240
+      ],
+      "visH": 204,
+      "visW": 171,
+      "fill": 0.532,
+      "footY": 0.938,
+      "centerX": 0.506,
+      "cut": {
+       "top": 0.0,
+       "bottom": 0.0,
+       "left": 0.0,
+       "right": 0.0
+      },
+      "bgCorners": 0,
+      "outline": 1.053,
+      "edgeV": 0.325,
+      "sat": 0.452,
+      "val": 0.309,
+      "domHue": 30,
+      "chromaShare": 0.616,
+      "semi": 0.052,
+      "q64": 64
+     },
+     {
+      "size": [
+       256,
+       256
+      ],
+      "bbox": [
+       48,
+       36,
+       214,
+       240
+      ],
+      "visH": 204,
+      "visW": 166,
+      "fill": 0.517,
+      "footY": 0.938,
+      "centerX": 0.512,
+      "cut": {
+       "top": 0.0,
+       "bottom": 0.0,
+       "left": 0.0,
+       "right": 0.0
+      },
+      "bgCorners": 0,
+      "outline": 1.073,
+      "edgeV": 0.33,
+      "sat": 0.451,
+      "val": 0.309,
+      "domHue": 30,
+      "chromaShare": 0.624,
+      "semi": 0.049,
+      "q64": 64
+     },
+     {
+      "size": [
+       256,
+       256
+      ],
+      "bbox": [
+       49,
+       36,
+       215,
+       240
+      ],
+      "visH": 204,
+      "visW": 166,
+      "fill": 0.517,
+      "footY": 0.938,
+      "centerX": 0.516,
+      "cut": {
+       "top": 0.0,
+       "bottom": 0.0,
+       "left": 0.0,
+       "right": 0.0
+      },
+      "bgCorners": 0,
+      "outline": 1.059,
+      "edgeV": 0.322,
+      "sat": 0.45,
+      "val": 0.305,
+      "domHue": 30,
+      "chromaShare": 0.609,
+      "semi": 0.053,
+      "q64": 64
+     },
+     {
+      "size": [
+       256,
+       256
+      ],
+      "bbox": [
+       45,
+       35,
+       215,
+       240
+      ],
+      "visH": 205,
+      "visW": 170,
+      "fill": 0.532,
+      "footY": 0.938,
+      "centerX": 0.508,
+      "cut": {
+       "top": 0.0,
+       "bottom": 0.0,
+       "left": 0.0,
+       "right": 0.0
+      },
+      "bgCorners": 0,
+      "outline": 1.078,
+      "edgeV": 0.33,
+      "sat": 0.451,
+      "val": 0.307,
+      "domHue": 30,
+      "chromaShare": 0.625,
+      "semi": 0.05,
+      "q64": 64
+     },
+     {
+      "size": [
+       256,
+       256
+      ],
+      "bbox": [
+       38,
+       40,
+       219,
+       240
+      ],
+      "visH": 200,
+      "visW": 181,
+      "fill": 0.552,
+      "footY": 0.938,
+      "centerX": 0.502,
+      "cut": {
+       "top": 0.0,
+       "bottom": 0.0,
+       "left": 0.0,
+       "right": 0.0
+      },
+      "bgCorners": 0,
+      "outline": 1.134,
+      "edgeV": 0.333,
+      "sat": 0.455,
+      "val": 0.296,
+      "domHue": 30,
+      "chromaShare": 0.604,
+      "semi": 0.051,
+      "q64": 64
+     },
+     {
+      "size": [
+       256,
+       256
+      ],
+      "bbox": [
+       29,
+       42,
+       218,
+       240
+      ],
+      "visH": 198,
+      "visW": 189,
+      "fill": 0.571,
+      "footY": 0.938,
+      "centerX": 0.482,
+      "cut": {
+       "top": 0.0,
+       "bottom": 0.0,
+       "left": 0.0,
+       "right": 0.0
+      },
+      "bgCorners": 0,
+      "outline": 1.131,
+      "edgeV": 0.326,
+      "sat": 0.449,
+      "val": 0.29,
+      "domHue": 30,
+      "chromaShare": 0.582,
+      "semi": 0.055,
+      "q64": 64
+     },
+     {
+      "size": [
+       256,
+       256
+      ],
+      "bbox": [
+       33,
+       41,
+       222,
+       240
+      ],
+      "visH": 199,
+      "visW": 189,
+      "fill": 0.574,
+      "footY": 0.938,
+      "centerX": 0.498,
+      "cut": {
+       "top": 0.0,
+       "bottom": 0.0,
+       "left": 0.0,
+       "right": 0.0
+      },
+      "bgCorners": 0,
+      "outline": 1.112,
+      "edgeV": 0.339,
+      "sat": 0.445,
+      "val": 0.307,
+      "domHue": 30,
+      "chromaShare": 0.601,
+      "semi": 0.049,
+      "q64": 64
+     },
+     {
+      "size": [
+       256,
+       256
+      ],
+      "bbox": [
+       40,
+       37,
+       220,
+       240
+      ],
+      "visH": 203,
+      "visW": 180,
+      "fill": 0.558,
+      "footY": 0.938,
+      "centerX": 0.508,
+      "cut": {
+       "top": 0.0,
+       "bottom": 0.0,
+       "left": 0.0,
+       "right": 0.0
+      },
+      "bgCorners": 0,
+      "outline": 1.088,
+      "edgeV": 0.334,
+      "sat": 0.449,
+      "val": 0.309,
+      "domHue": 30,
+      "chromaShare": 0.619,
+      "semi": 0.047,
+      "q64": 64
+     }
+    ]
+   }
+  ]
+ },
+ "b03-boss": {
+  "name": "호텔 부매니저 · 레비아탄",
+  "zone": "ep1b03",
+  "sin": "질투",
+  "phaseNames": [
+   "금이 간 안경을 쓴 부매니저",
+   "칼과 불붙은 볼펜의 환영",
+   "질투의 귀 레비아탄"
+  ],
+  "arts": [
+   {
+    "role": "phase0.idle",
+    "path": "assets/generated-v31224/actors-normalized/1a8ca2c5759b_ep1b03_envy_sister_phase0.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      255,
+      73,
+      418,
+      352
+     ],
+     "visH": 279,
+     "visW": 163,
+     "fill": 0.176,
+     "footY": 0.917,
+     "centerX": 0.501,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.586,
+     "edgeV": 0.188,
+     "sat": 0.465,
+     "val": 0.13,
+     "domHue": 180,
+     "chromaShare": 0.254,
+     "semi": 0.275,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.attackA",
+    "path": "assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      186,
+      64,
+      487,
+      352
+     ],
+     "visH": 288,
+     "visW": 301,
+     "fill": 0.336,
+     "footY": 0.917,
+     "centerX": 0.501,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 2.199,
+     "edgeV": 0.656,
+     "sat": 0.375,
+     "val": 0.35,
+     "domHue": 150,
+     "chromaShare": 0.361,
+     "semi": 0.095,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.hit",
+    "path": "assets/generated-v31224/actors-normalized/1a8ca2c5759b_ep1b03_envy_sister_phase0.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      255,
+      73,
+      418,
+      352
+     ],
+     "visH": 279,
+     "visW": 163,
+     "fill": 0.176,
+     "footY": 0.917,
+     "centerX": 0.501,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.586,
+     "edgeV": 0.188,
+     "sat": 0.465,
+     "val": 0.13,
+     "domHue": 180,
+     "chromaShare": 0.254,
+     "semi": 0.275,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.death",
+    "path": "assets/generated-v31224/actors-normalized/1a8ca2c5759b_ep1b03_envy_sister_phase0.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      255,
+      73,
+      418,
+      352
+     ],
+     "visH": 279,
+     "visW": 163,
+     "fill": 0.176,
+     "footY": 0.917,
+     "centerX": 0.501,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.586,
+     "edgeV": 0.188,
+     "sat": 0.465,
+     "val": 0.13,
+     "domHue": 180,
+     "chromaShare": 0.254,
+     "semi": 0.275,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase1.idle",
+    "path": "assets/generated-v31224/actors-normalized/e40217032c7a_boss_envy_human.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      272,
+      65,
+      400,
+      352
+     ],
+     "visH": 287,
+     "visW": 128,
+     "fill": 0.142,
+     "footY": 0.917,
+     "centerX": 0.5,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.388,
+     "edgeV": 0.39,
+     "sat": 0.569,
+     "val": 0.301,
+     "domHue": 150,
+     "chromaShare": 0.66,
+     "semi": 0.556,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase2.idle",
+    "path": "assets/generated-v31224/actors-normalized/9101cdeb2394_boss_envy_demon.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      215,
+      69,
+      466,
+      352
+     ],
+     "visH": 283,
+     "visW": 251,
+     "fill": 0.275,
+     "footY": 0.917,
+     "centerX": 0.507,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.412,
+     "edgeV": 0.362,
+     "sat": 0.655,
+     "val": 0.275,
+     "domHue": 150,
+     "chromaShare": 0.607,
+     "semi": 0.558,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r620.idle",
+    "path": "assets/r620/bosses/b03-idle6.webp",
+    "frames": 6,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      253,
+      66,
+      413,
+      352
+     ],
+     "visH": 286,
+     "visW": 160,
+     "fill": 0.177,
+     "footY": 0.917,
+     "centerX": 0.496,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.315,
+     "edgeV": 0.156,
+     "sat": 0.451,
+     "val": 0.124,
+     "domHue": 150,
+     "chromaShare": 0.184,
+     "semi": 0.124,
+     "q64": 64
+    },
+    "all": [
+     {
+      "size": [
+       672,
+       384
+      ],
+      "bbox": [
+       253,
+       66,
+       413,
+       352
+      ],
+      "visH": 286,
+      "visW": 160,
+      "fill": 0.177,
+      "footY": 0.917,
+      "centerX": 0.496,
+      "cut": {
+       "top": 0.0,
+       "bottom": 0.0,
+       "left": 0.0,
+       "right": 0.0
+      },
+      "bgCorners": 0,
+      "outline": 1.315,
+      "edgeV": 0.156,
+      "sat": 0.451,
+      "val": 0.124,
+      "domHue": 150,
+      "chromaShare": 0.184,
+      "semi": 0.124,
+      "q64": 64
+     },
+     {
+      "size": [
+       672,
+       384
+      ],
+      "bbox": [
+       251,
+       65,
+       413,
+       352
+      ],
+      "visH": 287,
+      "visW": 162,
+      "fill": 0.18,
+      "footY": 0.917,
+      "centerX": 0.494,
+      "cut": {
+       "top": 0.0,
+       "bottom": 0.0,
+       "left": 0.0,
+       "right": 0.0
+      },
+      "bgCorners": 0,
+      "outline": 1.297,
+      "edgeV": 0.157,
+      "sat": 0.459,
+      "val": 0.126,
+      "domHue": 150,
+      "chromaShare": 0.197,
+      "semi": 0.126,
+      "q64": 64
+     },
+     {
+      "size": [
+       672,
+       384
+      ],
+      "bbox": [
+       250,
+       63,
+       412,
+       352
+      ],
+      "visH": 289,
+      "visW": 162,
+      "fill": 0.181,
+      "footY": 0.917,
+      "centerX": 0.493,
+      "cut": {
+       "top": 0.0,
+       "bottom": 0.0,
+       "left": 0.0,
+       "right": 0.0
+      },
+      "bgCorners": 0,
+      "outline": 1.273,
+      "edgeV": 0.157,
+      "sat": 0.461,
+      "val": 0.128,
+      "domHue": 150,
+      "chromaShare": 0.205,
+      "semi": 0.133,
+      "q64": 64
+     },
+     {
+      "size": [
+       672,
+       384
+      ],
+      "bbox": [
+       252,
+       64,
+       411,
+       352
+      ],
+      "visH": 288,
+      "visW": 159,
+      "fill": 0.177,
+      "footY": 0.917,
+      "centerX": 0.493,
+      "cut": {
+       "top": 0.0,
+       "bottom": 0.0,
+       "left": 0.0,
+       "right": 0.0
+      },
+      "bgCorners": 0,
+      "outline": 1.293,
+      "edgeV": 0.159,
+      "sat": 0.465,
+      "val": 0.128,
+      "domHue": 150,
+      "chromaShare": 0.197,
+      "semi": 0.125,
+      "q64": 64
+     },
+     {
+      "size": [
+       672,
+       384
+      ],
+      "bbox": [
+       251,
+       72,
+       412,
+       352
+      ],
+      "visH": 280,
+      "visW": 161,
+      "fill": 0.175,
+      "footY": 0.917,
+      "centerX": 0.493,
+      "cut": {
+       "top": 0.0,
+       "bottom": 0.0,
+       "left": 0.0,
+       "right": 0.0
+      },
+      "bgCorners": 0,
+      "outline": 1.288,
+      "edgeV": 0.157,
+      "sat": 0.466,
+      "val": 0.127,
+      "domHue": 150,
+      "chromaShare": 0.2,
+      "semi": 0.127,
+      "q64": 64
+     },
+     {
+      "size": [
+       672,
+       384
+      ],
+      "bbox": [
+       251,
+       67,
+       411,
+       352
+      ],
+      "visH": 285,
+      "visW": 160,
+      "fill": 0.177,
+      "footY": 0.917,
+      "centerX": 0.493,
+      "cut": {
+       "top": 0.0,
+       "bottom": 0.0,
+       "left": 0.0,
+       "right": 0.0
+      },
+      "bgCorners": 0,
+      "outline": 1.315,
+      "edgeV": 0.159,
+      "sat": 0.468,
+      "val": 0.126,
+      "domHue": 150,
+      "chromaShare": 0.197,
+      "semi": 0.124,
+      "q64": 64
+     }
+    ]
+   },
+   {
+    "role": "r620.hit",
+    "path": "assets/r620/bosses/b03-hit4.webp",
+    "frames": 4,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      251,
+      65,
+      424,
+      352
+     ],
+     "visH": 287,
+     "visW": 173,
+     "fill": 0.192,
+     "footY": 0.917,
+     "centerX": 0.502,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.322,
+     "edgeV": 0.16,
+     "sat": 0.476,
+     "val": 0.127,
+     "domHue": 150,
+     "chromaShare": 0.164,
+     "semi": 0.11,
+     "q64": 64
+    },
+    "all": [
+     {
+      "size": [
+       672,
+       384
+      ],
+      "bbox": [
+       251,
+       65,
+       424,
+       352
+      ],
+      "visH": 287,
+      "visW": 173,
+      "fill": 0.192,
+      "footY": 0.917,
+      "centerX": 0.502,
+      "cut": {
+       "top": 0.0,
+       "bottom": 0.0,
+       "left": 0.0,
+       "right": 0.0
+      },
+      "bgCorners": 0,
+      "outline": 1.322,
+      "edgeV": 0.16,
+      "sat": 0.476,
+      "val": 0.127,
+      "domHue": 150,
+      "chromaShare": 0.164,
+      "semi": 0.11,
+      "q64": 64
+     },
+     {
+      "size": [
+       672,
+       384
+      ],
+      "bbox": [
+       249,
+       63,
+       432,
+       352
+      ],
+      "visH": 289,
+      "visW": 183,
+      "fill": 0.205,
+      "footY": 0.917,
+      "centerX": 0.507,
+      "cut": {
+       "top": 0.0,
+       "bottom": 0.0,
+       "left": 0.0,
+       "right": 0.0
+      },
+      "bgCorners": 0,
+      "outline": 1.314,
+      "edgeV": 0.161,
+      "sat": 0.469,
+      "val": 0.128,
+      "domHue": 150,
+      "chromaShare": 0.161,
+      "semi": 0.113,
+      "q64": 64
+     },
+     {
+      "size": [
+       672,
+       384
+      ],
+      "bbox": [
+       251,
+       65,
+       418,
+       352
+      ],
+      "visH": 287,
+      "visW": 167,
+      "fill": 0.186,
+      "footY": 0.917,
+      "centerX": 0.498,
+      "cut": {
+       "top": 0.0,
+       "bottom": 0.0,
+       "left": 0.0,
+       "right": 0.0
+      },
+      "bgCorners": 0,
+      "outline": 1.365,
+      "edgeV": 0.161,
+      "sat": 0.483,
+      "val": 0.124,
+      "domHue": 180,
+      "chromaShare": 0.157,
+      "semi": 0.109,
+      "q64": 64
+     },
+     {
+      "size": [
+       672,
+       384
+      ],
+      "bbox": [
+       246,
+       67,
+       414,
+       352
+      ],
+      "visH": 285,
+      "visW": 168,
+      "fill": 0.186,
+      "footY": 0.917,
+      "centerX": 0.491,
+      "cut": {
+       "top": 0.0,
+       "bottom": 0.0,
+       "left": 0.0,
+       "right": 0.0
+      },
+      "bgCorners": 0,
+      "outline": 1.344,
+      "edgeV": 0.162,
+      "sat": 0.487,
+      "val": 0.126,
+      "domHue": 150,
+      "chromaShare": 0.157,
+      "semi": 0.108,
+      "q64": 64
+     }
+    ]
+   }
+  ]
+ },
+ "b04-boss": {
+  "name": "최고급 호텔의 총주방장 · 탐식의 귀 베엘제붑",
+  "zone": "ep1b04",
+  "sin": "탐식",
+  "phaseNames": [
+   "칼을 든 최고급 호텔의 총주방장",
+   "더러운 요리사 모자의 탐식체",
+   "탐식의 귀 베엘제붑"
+  ],
+  "arts": [
+   {
+    "role": "phase0.idle",
+    "path": "assets/generated-v31224/actors-normalized/fbc0132dd447_ep1b04_glutton_head_chef_phase0.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      235,
+      64,
+      437,
+      352
+     ],
+     "visH": 288,
+     "visW": 202,
+     "fill": 0.225,
+     "footY": 0.917,
+     "centerX": 0.5,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.804,
+     "edgeV": 0.281,
+     "sat": 0.395,
+     "val": 0.337,
+     "domHue": 0,
+     "chromaShare": 0.384,
+     "semi": 0.175,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.attackA",
+    "path": "assets/generated-v31224/actors-normalized/27ef01c10a8f_gluttony-human-attack.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      195,
+      64,
+      476,
+      352
+     ],
+     "visH": 288,
+     "visW": 281,
+     "fill": 0.314,
+     "footY": 0.917,
+     "centerX": 0.499,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.623,
+     "edgeV": 0.654,
+     "sat": 0.354,
+     "val": 0.445,
+     "domHue": 30,
+     "chromaShare": 0.432,
+     "semi": 0.105,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.hit",
+    "path": "assets/generated-v31224/actors-normalized/fbc0132dd447_ep1b04_glutton_head_chef_phase0.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      235,
+      64,
+      437,
+      352
+     ],
+     "visH": 288,
+     "visW": 202,
+     "fill": 0.225,
+     "footY": 0.917,
+     "centerX": 0.5,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.804,
+     "edgeV": 0.281,
+     "sat": 0.395,
+     "val": 0.337,
+     "domHue": 0,
+     "chromaShare": 0.384,
+     "semi": 0.175,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.death",
+    "path": "assets/generated-v31224/actors-normalized/fbc0132dd447_ep1b04_glutton_head_chef_phase0.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      235,
+      64,
+      437,
+      352
+     ],
+     "visH": 288,
+     "visW": 202,
+     "fill": 0.225,
+     "footY": 0.917,
+     "centerX": 0.5,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.804,
+     "edgeV": 0.281,
+     "sat": 0.395,
+     "val": 0.337,
+     "domHue": 0,
+     "chromaShare": 0.384,
+     "semi": 0.175,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase1.idle",
+    "path": "assets/generated-v31224/actors-normalized/7a7409df6bc9_boss_gluttony_human.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      243,
+      65,
+      426,
+      352
+     ],
+     "visH": 287,
+     "visW": 183,
+     "fill": 0.204,
+     "footY": 0.917,
+     "centerX": 0.498,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.956,
+     "edgeV": 0.189,
+     "sat": 0.441,
+     "val": 0.197,
+     "domHue": 30,
+     "chromaShare": 0.291,
+     "semi": 0.078,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase2.idle",
+    "path": "assets/generated-v31224/actors-normalized/9d29dc496c5a_boss_gluttony_demon.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      209,
+      64,
+      462,
+      351
+     ],
+     "visH": 287,
+     "visW": 253,
+     "fill": 0.281,
+     "footY": 0.914,
+     "centerX": 0.499,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.02,
+     "edgeV": 0.191,
+     "sat": 0.494,
+     "val": 0.187,
+     "domHue": 30,
+     "chromaShare": 0.302,
+     "semi": 0.087,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p1",
+    "path": "assets/r104/bosses/b04-boss-p1.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      505,
+      488
+     ],
+     "bbox": [
+      48,
+      30,
+      491,
+      466
+     ],
+     "visH": 436,
+     "visW": 443,
+     "fill": 0.784,
+     "footY": 0.955,
+     "centerX": 0.534,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.745,
+     "edgeV": 0.32,
+     "sat": 0.499,
+     "val": 0.424,
+     "domHue": 0,
+     "chromaShare": 0.736,
+     "semi": 0.035,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p2",
+    "path": "assets/r104/bosses/b04-boss-p2.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      505,
+      488
+     ],
+     "bbox": [
+      6,
+      80,
+      475,
+      482
+     ],
+     "visH": 402,
+     "visW": 469,
+     "fill": 0.765,
+     "footY": 0.988,
+     "centerX": 0.476,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.861,
+     "edgeV": 0.347,
+     "sat": 0.505,
+     "val": 0.4,
+     "domHue": 0,
+     "chromaShare": 0.739,
+     "semi": 0.029,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p3",
+    "path": "assets/r104/bosses/b04-boss-p3.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      505,
+      488
+     ],
+     "bbox": [
+      17,
+      66,
+      499,
+      416
+     ],
+     "visH": 350,
+     "visW": 482,
+     "fill": 0.685,
+     "footY": 0.852,
+     "centerX": 0.511,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.817,
+     "edgeV": 0.345,
+     "sat": 0.502,
+     "val": 0.419,
+     "domHue": 0,
+     "chromaShare": 0.74,
+     "semi": 0.026,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p4",
+    "path": "assets/r104/bosses/b04-boss-p4.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      505,
+      488
+     ],
+     "bbox": [
+      23,
+      6,
+      479,
+      406
+     ],
+     "visH": 400,
+     "visW": 456,
+     "fill": 0.74,
+     "footY": 0.832,
+     "centerX": 0.497,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.813,
+     "edgeV": 0.334,
+     "sat": 0.508,
+     "val": 0.407,
+     "domHue": 0,
+     "chromaShare": 0.785,
+     "semi": 0.031,
+     "q64": 64
+    },
+    "all": null
+   }
+  ]
+ },
+ "b05-boss": {
+  "name": "붉은 하이힐의 서윤",
+  "zone": "ep1b05",
+  "sin": "색욕",
+  "phaseNames": [
+   "흰 셔츠와 검은 스커트의 서윤",
+   "총지배인이 조종하는 인간 꼭두각시",
+   "색욕의 귀 아스모데우스"
+  ],
+  "arts": [
+   {
+    "role": "phase0.idle",
+    "path": "assets/generated-v31224/actors-normalized/6861c5126992_ep1b05_lust_seoyun_puppet_phase0.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      275,
+      92,
+      395,
+      352
+     ],
+     "visH": 260,
+     "visW": 120,
+     "fill": 0.121,
+     "footY": 0.917,
+     "centerX": 0.499,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.856,
+     "edgeV": 0.182,
+     "sat": 0.743,
+     "val": 0.208,
+     "domHue": 0,
+     "chromaShare": 0.342,
+     "semi": 0.09,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.attackA",
+    "path": "assets/generated-v31224/actors-normalized/53c9ce212489_lust-human-attack.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      228,
+      64,
+      445,
+      352
+     ],
+     "visH": 288,
+     "visW": 217,
+     "fill": 0.242,
+     "footY": 0.917,
+     "centerX": 0.501,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.872,
+     "edgeV": 0.668,
+     "sat": 0.571,
+     "val": 0.419,
+     "domHue": 0,
+     "chromaShare": 0.63,
+     "semi": 0.123,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.hit",
+    "path": "assets/generated-v31224/actors-normalized/6861c5126992_ep1b05_lust_seoyun_puppet_phase0.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      275,
+      92,
+      395,
+      352
+     ],
+     "visH": 260,
+     "visW": 120,
+     "fill": 0.121,
+     "footY": 0.917,
+     "centerX": 0.499,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.856,
+     "edgeV": 0.182,
+     "sat": 0.743,
+     "val": 0.208,
+     "domHue": 0,
+     "chromaShare": 0.342,
+     "semi": 0.09,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.death",
+    "path": "assets/generated-v31224/actors-normalized/6861c5126992_ep1b05_lust_seoyun_puppet_phase0.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      275,
+      92,
+      395,
+      352
+     ],
+     "visH": 260,
+     "visW": 120,
+     "fill": 0.121,
+     "footY": 0.917,
+     "centerX": 0.499,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.856,
+     "edgeV": 0.182,
+     "sat": 0.743,
+     "val": 0.208,
+     "domHue": 0,
+     "chromaShare": 0.342,
+     "semi": 0.09,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase1.idle",
+    "path": "assets/generated-v31224/actors-normalized/6f3b006e5b1d_boss_lust_human.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      225,
+      64,
+      450,
+      352
+     ],
+     "visH": 288,
+     "visW": 225,
+     "fill": 0.251,
+     "footY": 0.917,
+     "centerX": 0.502,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.252,
+     "edgeV": 0.269,
+     "sat": 0.393,
+     "val": 0.221,
+     "domHue": 0,
+     "chromaShare": 0.304,
+     "semi": 0.176,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase2.idle",
+    "path": "assets/generated-v31224/actors-normalized/9052a5877996_boss_lust_demon.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      224,
+      65,
+      449,
+      352
+     ],
+     "visH": 287,
+     "visW": 225,
+     "fill": 0.25,
+     "footY": 0.917,
+     "centerX": 0.501,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.334,
+     "edgeV": 0.229,
+     "sat": 0.442,
+     "val": 0.178,
+     "domHue": 0,
+     "chromaShare": 0.219,
+     "semi": 0.197,
+     "q64": 64
+    },
+    "all": null
+   }
+  ]
+ },
+ "b06-boss": {
+  "name": "회장에게 고용된 총지배인 · 맘몬",
+  "zone": "ep1b06",
+  "sin": "탐욕(맘몬, 보고만)",
+  "phaseNames": [
+   "여우 눈의 회장 직속 총지배인",
+   "총지배인과 똑같은 얼굴의 탐욕",
+   "탐욕의 귀 맘몬"
+  ],
+  "arts": [
+   {
+    "role": "phase0.idle",
+    "path": "assets/generated-v31224/actors-normalized/d8c1c8e59daf_ep1b06_greed_general_manager_phase0.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      253,
+      64,
+      419,
+      352
+     ],
+     "visH": 288,
+     "visW": 166,
+     "fill": 0.185,
+     "footY": 0.917,
+     "centerX": 0.5,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.527,
+     "edgeV": 0.231,
+     "sat": 0.259,
+     "val": 0.164,
+     "domHue": 0,
+     "chromaShare": 0.152,
+     "semi": 0.109,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.attackA",
+    "path": "assets/generated-v31224/actors-normalized/907c3f3e5d5e_greed-human-attack.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      221,
+      64,
+      451,
+      352
+     ],
+     "visH": 288,
+     "visW": 230,
+     "fill": 0.257,
+     "footY": 0.917,
+     "centerX": 0.5,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 2.964,
+     "edgeV": 0.515,
+     "sat": 0.183,
+     "val": 0.233,
+     "domHue": 30,
+     "chromaShare": 0.165,
+     "semi": 0.092,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.hit",
+    "path": "assets/generated-v31224/actors-normalized/d8c1c8e59daf_ep1b06_greed_general_manager_phase0.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      253,
+      64,
+      419,
+      352
+     ],
+     "visH": 288,
+     "visW": 166,
+     "fill": 0.185,
+     "footY": 0.917,
+     "centerX": 0.5,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.527,
+     "edgeV": 0.231,
+     "sat": 0.259,
+     "val": 0.164,
+     "domHue": 0,
+     "chromaShare": 0.152,
+     "semi": 0.109,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.death",
+    "path": "assets/generated-v31224/actors-normalized/d8c1c8e59daf_ep1b06_greed_general_manager_phase0.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      253,
+      64,
+      419,
+      352
+     ],
+     "visH": 288,
+     "visW": 166,
+     "fill": 0.185,
+     "footY": 0.917,
+     "centerX": 0.5,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.527,
+     "edgeV": 0.231,
+     "sat": 0.259,
+     "val": 0.164,
+     "domHue": 0,
+     "chromaShare": 0.152,
+     "semi": 0.109,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase1.idle",
+    "path": "assets/generated-v31224/actors-normalized/b26396fcc1ea_boss_greed_human.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      249,
+      65,
+      420,
+      351
+     ],
+     "visH": 286,
+     "visW": 171,
+     "fill": 0.19,
+     "footY": 0.914,
+     "centerX": 0.498,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.506,
+     "edgeV": 0.227,
+     "sat": 0.539,
+     "val": 0.159,
+     "domHue": 30,
+     "chromaShare": 0.261,
+     "semi": 0.096,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase2.idle",
+    "path": "assets/generated-v31224/actors-normalized/d8a186c29567_boss_greed_demon.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      230,
+      69,
+      445,
+      351
+     ],
+     "visH": 282,
+     "visW": 215,
+     "fill": 0.235,
+     "footY": 0.914,
+     "centerX": 0.502,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.202,
+     "edgeV": 0.179,
+     "sat": 0.424,
+     "val": 0.151,
+     "domHue": 30,
+     "chromaShare": 0.189,
+     "semi": 0.092,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p1",
+    "path": "assets/r104/bosses/b06-boss-p1.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      265,
+      439
+     ],
+     "bbox": [
+      42,
+      29,
+      244,
+      432
+     ],
+     "visH": 403,
+     "visW": 202,
+     "fill": 0.7,
+     "footY": 0.984,
+     "centerX": 0.54,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.885,
+     "edgeV": 0.155,
+     "sat": 0.209,
+     "val": 0.173,
+     "domHue": 0,
+     "chromaShare": 0.113,
+     "semi": 0.047,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p2",
+    "path": "assets/r104/bosses/b06-boss-p2.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      265,
+      439
+     ],
+     "bbox": [
+      32,
+      58,
+      217,
+      433
+     ],
+     "visH": 375,
+     "visW": 185,
+     "fill": 0.596,
+     "footY": 0.986,
+     "centerX": 0.47,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.908,
+     "edgeV": 0.165,
+     "sat": 0.215,
+     "val": 0.181,
+     "domHue": 0,
+     "chromaShare": 0.137,
+     "semi": 0.048,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p3",
+    "path": "assets/r104/bosses/b06-boss-p3.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      265,
+      439
+     ],
+     "bbox": [
+      43,
+      61,
+      259,
+      395
+     ],
+     "visH": 334,
+     "visW": 216,
+     "fill": 0.62,
+     "footY": 0.9,
+     "centerX": 0.57,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.801,
+     "edgeV": 0.149,
+     "sat": 0.218,
+     "val": 0.184,
+     "domHue": 0,
+     "chromaShare": 0.129,
+     "semi": 0.041,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p4",
+    "path": "assets/r104/bosses/b06-boss-p4.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      265,
+      439
+     ],
+     "bbox": [
+      6,
+      6,
+      211,
+      406
+     ],
+     "visH": 400,
+     "visW": 205,
+     "fill": 0.705,
+     "footY": 0.925,
+     "centerX": 0.409,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.869,
+     "edgeV": 0.156,
+     "sat": 0.207,
+     "val": 0.178,
+     "domHue": 0,
+     "chromaShare": 0.113,
+     "semi": 0.047,
+     "q64": 64
+    },
+    "all": null
+   }
+  ]
+ },
+ "b06b-boss": {
+  "name": "소년이 된 총지배인 · 맘몬",
+  "zone": "ep1b06b",
+  "sin": "탐욕2(맘몬, 보고만)",
+  "phaseNames": [
+   "겨울 숲에 홀로 남은 소년",
+   "사탕과 요요의 가시 환영",
+   "거대한 여우 꼬리의 맘몬"
+  ],
+  "arts": [
+   {
+    "role": "phase0.idle",
+    "path": "assets/generated-v31224/actors-normalized/7efeeaa5bb8b_ep1b06b_greed_child_phase0.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      251,
+      65,
+      422,
+      352
+     ],
+     "visH": 287,
+     "visW": 171,
+     "fill": 0.19,
+     "footY": 0.917,
+     "centerX": 0.501,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.504,
+     "edgeV": 0.208,
+     "sat": 0.239,
+     "val": 0.146,
+     "domHue": 0,
+     "chromaShare": 0.108,
+     "semi": 0.115,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.attackA",
+    "path": "assets/generated-v31224/actors-normalized/fbaaf49e0721_greed_child-human-attack.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      227,
+      64,
+      446,
+      352
+     ],
+     "visH": 288,
+     "visW": 219,
+     "fill": 0.244,
+     "footY": 0.917,
+     "centerX": 0.501,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 2.586,
+     "edgeV": 0.601,
+     "sat": 0.315,
+     "val": 0.287,
+     "domHue": 30,
+     "chromaShare": 0.158,
+     "semi": 0.091,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.hit",
+    "path": "assets/generated-v31224/actors-normalized/7efeeaa5bb8b_ep1b06b_greed_child_phase0.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      251,
+      65,
+      422,
+      352
+     ],
+     "visH": 287,
+     "visW": 171,
+     "fill": 0.19,
+     "footY": 0.917,
+     "centerX": 0.501,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.504,
+     "edgeV": 0.208,
+     "sat": 0.239,
+     "val": 0.146,
+     "domHue": 0,
+     "chromaShare": 0.108,
+     "semi": 0.115,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.death",
+    "path": "assets/generated-v31224/actors-normalized/7efeeaa5bb8b_ep1b06b_greed_child_phase0.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      251,
+      65,
+      422,
+      352
+     ],
+     "visH": 287,
+     "visW": 171,
+     "fill": 0.19,
+     "footY": 0.917,
+     "centerX": 0.501,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.504,
+     "edgeV": 0.208,
+     "sat": 0.239,
+     "val": 0.146,
+     "domHue": 0,
+     "chromaShare": 0.108,
+     "semi": 0.115,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase1.idle",
+    "path": "assets/generated-v31224/actors-normalized/b26396fcc1ea_boss_greed_human.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      249,
+      65,
+      420,
+      351
+     ],
+     "visH": 286,
+     "visW": 171,
+     "fill": 0.19,
+     "footY": 0.914,
+     "centerX": 0.498,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.506,
+     "edgeV": 0.227,
+     "sat": 0.539,
+     "val": 0.159,
+     "domHue": 30,
+     "chromaShare": 0.261,
+     "semi": 0.096,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase2.idle",
+    "path": "assets/generated-v31224/actors-normalized/d8a186c29567_boss_greed_demon.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      230,
+      69,
+      445,
+      351
+     ],
+     "visH": 282,
+     "visW": 215,
+     "fill": 0.235,
+     "footY": 0.914,
+     "centerX": 0.502,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.202,
+     "edgeV": 0.179,
+     "sat": 0.424,
+     "val": 0.151,
+     "domHue": 30,
+     "chromaShare": 0.189,
+     "semi": 0.092,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p1",
+    "path": "assets/r104/bosses/b06b-boss-p1.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      296,
+      433
+     ],
+     "bbox": [
+      14,
+      26,
+      286,
+      427
+     ],
+     "visH": 401,
+     "visW": 272,
+     "fill": 0.851,
+     "footY": 0.986,
+     "centerX": 0.507,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.015,
+     "edgeV": 0.172,
+     "sat": 0.232,
+     "val": 0.17,
+     "domHue": 0,
+     "chromaShare": 0.096,
+     "semi": 0.073,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p2",
+    "path": "assets/r104/bosses/b06b-boss-p2.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      296,
+      433
+     ],
+     "bbox": [
+      6,
+      35,
+      239,
+      427
+     ],
+     "visH": 392,
+     "visW": 233,
+     "fill": 0.713,
+     "footY": 0.986,
+     "centerX": 0.414,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.96,
+     "edgeV": 0.168,
+     "sat": 0.228,
+     "val": 0.174,
+     "domHue": 0,
+     "chromaShare": 0.1,
+     "semi": 0.089,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p3",
+    "path": "assets/r104/bosses/b06b-boss-p3.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      296,
+      433
+     ],
+     "bbox": [
+      24,
+      30,
+      290,
+      398
+     ],
+     "visH": 368,
+     "visW": 266,
+     "fill": 0.764,
+     "footY": 0.919,
+     "centerX": 0.53,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.955,
+     "edgeV": 0.175,
+     "sat": 0.22,
+     "val": 0.183,
+     "domHue": 0,
+     "chromaShare": 0.11,
+     "semi": 0.09,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p4",
+    "path": "assets/r104/bosses/b06b-boss-p4.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      296,
+      433
+     ],
+     "bbox": [
+      18,
+      6,
+      245,
+      407
+     ],
+     "visH": 401,
+     "visW": 227,
+     "fill": 0.71,
+     "footY": 0.94,
+     "centerX": 0.444,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.923,
+     "edgeV": 0.162,
+     "sat": 0.241,
+     "val": 0.174,
+     "domHue": 0,
+     "chromaShare": 0.104,
+     "semi": 0.072,
+     "q64": 64
+    },
+    "all": null
+   }
+  ]
+ },
+ "b07-boss": {
+  "name": "불을 지른 청소부 · 사탄",
+  "zone": "ep1b07",
+  "sin": "분노",
+  "phaseNames": [
+   "눈이 붉어진 호텔 청소부",
+   "분노의 귀가 등에 올라탄 청소부",
+   "분노의 귀 사탄"
+  ],
+  "arts": [
+   {
+    "role": "phase0.idle",
+    "path": "assets/generated-v31224/actors-normalized/28e46dbcc1fb_ep1b07_wrath_janitor_phase0.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      226,
+      64,
+      451,
+      352
+     ],
+     "visH": 288,
+     "visW": 225,
+     "fill": 0.251,
+     "footY": 0.917,
+     "centerX": 0.504,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.317,
+     "edgeV": 0.259,
+     "sat": 0.568,
+     "val": 0.203,
+     "domHue": 0,
+     "chromaShare": 0.422,
+     "semi": 0.103,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.attackA",
+    "path": "assets/generated-v31224/actors-normalized/b00c6229c058_wrath-human-attack.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      206,
+      64,
+      466,
+      352
+     ],
+     "visH": 288,
+     "visW": 260,
+     "fill": 0.29,
+     "footY": 0.917,
+     "centerX": 0.5,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 2.314,
+     "edgeV": 0.696,
+     "sat": 0.501,
+     "val": 0.339,
+     "domHue": 0,
+     "chromaShare": 0.556,
+     "semi": 0.065,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.hit",
+    "path": "assets/generated-v31224/actors-normalized/28e46dbcc1fb_ep1b07_wrath_janitor_phase0.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      226,
+      64,
+      451,
+      352
+     ],
+     "visH": 288,
+     "visW": 225,
+     "fill": 0.251,
+     "footY": 0.917,
+     "centerX": 0.504,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.317,
+     "edgeV": 0.259,
+     "sat": 0.568,
+     "val": 0.203,
+     "domHue": 0,
+     "chromaShare": 0.422,
+     "semi": 0.103,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.death",
+    "path": "assets/generated-v31224/actors-normalized/28e46dbcc1fb_ep1b07_wrath_janitor_phase0.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      226,
+      64,
+      451,
+      352
+     ],
+     "visH": 288,
+     "visW": 225,
+     "fill": 0.251,
+     "footY": 0.917,
+     "centerX": 0.504,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.317,
+     "edgeV": 0.259,
+     "sat": 0.568,
+     "val": 0.203,
+     "domHue": 0,
+     "chromaShare": 0.422,
+     "semi": 0.103,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase1.idle",
+    "path": "assets/generated-v31224/actors-normalized/aea8d7a3eb38_boss_wrath_human.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      261,
+      67,
+      407,
+      352
+     ],
+     "visH": 285,
+     "visW": 146,
+     "fill": 0.161,
+     "footY": 0.917,
+     "centerX": 0.497,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.35,
+     "edgeV": 0.245,
+     "sat": 0.344,
+     "val": 0.186,
+     "domHue": 0,
+     "chromaShare": 0.162,
+     "semi": 0.101,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase2.idle",
+    "path": "assets/generated-v31224/actors-normalized/148c5ac2bb7c_boss_wrath_demon.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      220,
+      64,
+      456,
+      350
+     ],
+     "visH": 286,
+     "visW": 236,
+     "fill": 0.262,
+     "footY": 0.911,
+     "centerX": 0.503,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.162,
+     "edgeV": 0.163,
+     "sat": 0.38,
+     "val": 0.143,
+     "domHue": 0,
+     "chromaShare": 0.124,
+     "semi": 0.15,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p1",
+    "path": "assets/r104/bosses/b07-boss-p1.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      411,
+      473
+     ],
+     "bbox": [
+      6,
+      6,
+      338,
+      427
+     ],
+     "visH": 421,
+     "visW": 332,
+     "fill": 0.719,
+     "footY": 0.903,
+     "centerX": 0.418,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.982,
+     "edgeV": 0.224,
+     "sat": 0.432,
+     "val": 0.227,
+     "domHue": 0,
+     "chromaShare": 0.33,
+     "semi": 0.067,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p2",
+    "path": "assets/r104/bosses/b07-boss-p2.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      411,
+      473
+     ],
+     "bbox": [
+      101,
+      114,
+      240,
+      467
+     ],
+     "visH": 353,
+     "visW": 139,
+     "fill": 0.252,
+     "footY": 0.987,
+     "centerX": 0.415,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.821,
+     "edgeV": 0.207,
+     "sat": 0.481,
+     "val": 0.248,
+     "domHue": 0,
+     "chromaShare": 0.389,
+     "semi": 0.062,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p3",
+    "path": "assets/r104/bosses/b07-boss-p3.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      411,
+      473
+     ],
+     "bbox": [
+      55,
+      97,
+      405,
+      427
+     ],
+     "visH": 330,
+     "visW": 350,
+     "fill": 0.594,
+     "footY": 0.903,
+     "centerX": 0.56,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.797,
+     "edgeV": 0.202,
+     "sat": 0.464,
+     "val": 0.25,
+     "domHue": 0,
+     "chromaShare": 0.385,
+     "semi": 0.058,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p4",
+    "path": "assets/r104/bosses/b07-boss-p4.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      411,
+      473
+     ],
+     "bbox": [
+      94,
+      11,
+      299,
+      409
+     ],
+     "visH": 398,
+     "visW": 205,
+     "fill": 0.42,
+     "footY": 0.865,
+     "centerX": 0.478,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.775,
+     "edgeV": 0.184,
+     "sat": 0.467,
+     "val": 0.232,
+     "domHue": 0,
+     "chromaShare": 0.364,
+     "semi": 0.061,
+     "q64": 64
+    },
+    "all": null
+   }
+  ]
+ },
+ "b08-boss": {
+  "name": "백색 정장의 호텔 그룹 회장",
+  "zone": "ep1b08",
+  "sin": "교만",
+  "phaseNames": [
+   "백색 정장을 입은 백발의 회장",
+   "몽세 속의 몽세를 연 회장",
+   "거꾸로 세워진 십자가의 제단",
+   "일곱 번째 귀 루시퍼"
+  ],
+  "arts": [
+   {
+    "role": "phase0.idle",
+    "path": "assets/generated-v31224/actors-normalized/2456ba9c46b6_ep1b08_pride_chairman_phase0.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      219,
+      65,
+      453,
+      352
+     ],
+     "visH": 287,
+     "visW": 234,
+     "fill": 0.26,
+     "footY": 0.917,
+     "centerX": 0.5,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.75,
+     "edgeV": 0.265,
+     "sat": 0.438,
+     "val": 0.331,
+     "domHue": 0,
+     "chromaShare": 0.357,
+     "semi": 0.167,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.attackA",
+    "path": "assets/generated-v31224/actors-normalized/f121229f2277_pride-human-attack.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      167,
+      64,
+      505,
+      352
+     ],
+     "visH": 288,
+     "visW": 338,
+     "fill": 0.377,
+     "footY": 0.917,
+     "centerX": 0.5,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.67,
+     "edgeV": 0.6,
+     "sat": 0.314,
+     "val": 0.41,
+     "domHue": 0,
+     "chromaShare": 0.182,
+     "semi": 0.131,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.hit",
+    "path": "assets/generated-v31224/actors-normalized/2456ba9c46b6_ep1b08_pride_chairman_phase0.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      219,
+      65,
+      453,
+      352
+     ],
+     "visH": 287,
+     "visW": 234,
+     "fill": 0.26,
+     "footY": 0.917,
+     "centerX": 0.5,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.75,
+     "edgeV": 0.265,
+     "sat": 0.438,
+     "val": 0.331,
+     "domHue": 0,
+     "chromaShare": 0.357,
+     "semi": 0.167,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.death",
+    "path": "assets/generated-v31224/actors-normalized/2456ba9c46b6_ep1b08_pride_chairman_phase0.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      219,
+      65,
+      453,
+      352
+     ],
+     "visH": 287,
+     "visW": 234,
+     "fill": 0.26,
+     "footY": 0.917,
+     "centerX": 0.5,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.75,
+     "edgeV": 0.265,
+     "sat": 0.438,
+     "val": 0.331,
+     "domHue": 0,
+     "chromaShare": 0.357,
+     "semi": 0.167,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase1.idle",
+    "path": "assets/generated-v31224/actors-normalized/486a61b02d36_boss_pride_human.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      251,
+      66,
+      421,
+      352
+     ],
+     "visH": 286,
+     "visW": 170,
+     "fill": 0.188,
+     "footY": 0.917,
+     "centerX": 0.5,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.396,
+     "edgeV": 0.211,
+     "sat": 0.334,
+     "val": 0.156,
+     "domHue": 30,
+     "chromaShare": 0.171,
+     "semi": 0.082,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase2.idle",
+    "path": "assets/generated-v31224/actors-normalized/90412a2f1bcc_seal_residual.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      129,
+      65,
+      530,
+      352
+     ],
+     "visH": 287,
+     "visW": 401,
+     "fill": 0.446,
+     "footY": 0.917,
+     "centerX": 0.49,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.018,
+     "edgeV": 0.156,
+     "sat": 0.271,
+     "val": 0.154,
+     "domHue": 0,
+     "chromaShare": 0.076,
+     "semi": 0.31,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase3.idle",
+    "path": "assets/generated-v31224/actors-normalized/c5b71f1b12a8_boss_pride_demon.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      193,
+      68,
+      478,
+      351
+     ],
+     "visH": 283,
+     "visW": 285,
+     "fill": 0.313,
+     "footY": 0.914,
+     "centerX": 0.499,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.34,
+     "edgeV": 0.155,
+     "sat": 0.307,
+     "val": 0.118,
+     "domHue": 30,
+     "chromaShare": 0.041,
+     "semi": 0.058,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p1",
+    "path": "assets/r104/bosses/b08-boss-p1.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      232,
+      423
+     ],
+     "bbox": [
+      11,
+      14,
+      217,
+      417
+     ],
+     "visH": 403,
+     "visW": 206,
+     "fill": 0.846,
+     "footY": 0.986,
+     "centerX": 0.491,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.788,
+     "edgeV": 0.48,
+     "sat": 0.234,
+     "val": 0.598,
+     "domHue": 0,
+     "chromaShare": 0.298,
+     "semi": 0.049,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p2",
+    "path": "assets/r104/bosses/b08-boss-p2.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      232,
+      423
+     ],
+     "bbox": [
+      6,
+      37,
+      174,
+      412
+     ],
+     "visH": 375,
+     "visW": 168,
+     "fill": 0.642,
+     "footY": 0.974,
+     "centerX": 0.388,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.884,
+     "edgeV": 0.499,
+     "sat": 0.265,
+     "val": 0.559,
+     "domHue": 0,
+     "chromaShare": 0.408,
+     "semi": 0.045,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p3",
+    "path": "assets/r104/bosses/b08-boss-p3.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      232,
+      423
+     ],
+     "bbox": [
+      19,
+      59,
+      226,
+      398
+     ],
+     "visH": 339,
+     "visW": 207,
+     "fill": 0.715,
+     "footY": 0.941,
+     "centerX": 0.528,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.809,
+     "edgeV": 0.485,
+     "sat": 0.254,
+     "val": 0.59,
+     "domHue": 0,
+     "chromaShare": 0.369,
+     "semi": 0.048,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p4",
+    "path": "assets/r104/bosses/b08-boss-p4.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      232,
+      423
+     ],
+     "bbox": [
+      16,
+      6,
+      190,
+      405
+     ],
+     "visH": 399,
+     "visW": 174,
+     "fill": 0.707,
+     "footY": 0.957,
+     "centerX": 0.444,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.743,
+     "edgeV": 0.46,
+     "sat": 0.229,
+     "val": 0.605,
+     "domHue": 0,
+     "chromaShare": 0.282,
+     "semi": 0.048,
+     "q64": 64
+    },
+    "all": null
+   }
+  ]
+ },
+ "b09-boss": {
+  "name": "사이보그 회장 · 생체 부트로더",
+  "zone": null,
+  "sin": "",
+  "phaseNames": [
+   "인간의 상반신을 남긴 사이보그 회장",
+   "수백 화면의 회장 얼굴",
+   "가짜 동료를 복제하는 연산핵",
+   "현몽합일의 생체 부트로더"
+  ],
+  "arts": [
+   {
+    "role": "phase0.idle",
+    "path": "assets/generated-v31224/actors-normalized/99c6dd7d202b_ep1b09_biobootloader_chairman_phase0.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      237,
+      64,
+      436,
+      352
+     ],
+     "visH": 288,
+     "visW": 199,
+     "fill": 0.222,
+     "footY": 0.917,
+     "centerX": 0.501,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.613,
+     "edgeV": 0.201,
+     "sat": 0.256,
+     "val": 0.305,
+     "domHue": 0,
+     "chromaShare": 0.115,
+     "semi": 0.121,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.attackA",
+    "path": "assets/generated-v31224/actors-normalized/556c32928527_pride_cyborg-human-attack.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      209,
+      64,
+      462,
+      352
+     ],
+     "visH": 288,
+     "visW": 253,
+     "fill": 0.282,
+     "footY": 0.917,
+     "centerX": 0.499,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.17,
+     "edgeV": 0.546,
+     "sat": 0.219,
+     "val": 0.477,
+     "domHue": 30,
+     "chromaShare": 0.15,
+     "semi": 0.066,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.hit",
+    "path": "assets/generated-v31224/actors-normalized/99c6dd7d202b_ep1b09_biobootloader_chairman_phase0.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      237,
+      64,
+      436,
+      352
+     ],
+     "visH": 288,
+     "visW": 199,
+     "fill": 0.222,
+     "footY": 0.917,
+     "centerX": 0.501,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.613,
+     "edgeV": 0.201,
+     "sat": 0.256,
+     "val": 0.305,
+     "domHue": 0,
+     "chromaShare": 0.115,
+     "semi": 0.121,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.death",
+    "path": "assets/generated-v31224/actors-normalized/99c6dd7d202b_ep1b09_biobootloader_chairman_phase0.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      237,
+      64,
+      436,
+      352
+     ],
+     "visH": 288,
+     "visW": 199,
+     "fill": 0.222,
+     "footY": 0.917,
+     "centerX": 0.501,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.613,
+     "edgeV": 0.201,
+     "sat": 0.256,
+     "val": 0.305,
+     "domHue": 0,
+     "chromaShare": 0.115,
+     "semi": 0.121,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase1.idle",
+    "path": "assets/generated-v31224/actors-normalized/486a61b02d36_boss_pride_human.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      251,
+      66,
+      421,
+      352
+     ],
+     "visH": 286,
+     "visW": 170,
+     "fill": 0.188,
+     "footY": 0.917,
+     "centerX": 0.5,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.396,
+     "edgeV": 0.211,
+     "sat": 0.334,
+     "val": 0.156,
+     "domHue": 30,
+     "chromaShare": 0.171,
+     "semi": 0.082,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase2.idle",
+    "path": "assets/generated-v31224/actors-normalized/c5b71f1b12a8_boss_pride_demon.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      193,
+      68,
+      478,
+      351
+     ],
+     "visH": 283,
+     "visW": 285,
+     "fill": 0.313,
+     "footY": 0.914,
+     "centerX": 0.499,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.34,
+     "edgeV": 0.155,
+     "sat": 0.307,
+     "val": 0.118,
+     "domHue": 30,
+     "chromaShare": 0.041,
+     "semi": 0.058,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase3.idle",
+    "path": "assets/generated-v31224/actors-normalized/eee59f90ff49_boss_pride_cyborg.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      223,
+      64,
+      448,
+      351
+     ],
+     "visH": 287,
+     "visW": 225,
+     "fill": 0.25,
+     "footY": 0.914,
+     "centerX": 0.499,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.022,
+     "edgeV": 0.135,
+     "sat": 0.286,
+     "val": 0.132,
+     "domHue": 30,
+     "chromaShare": 0.041,
+     "semi": 0.125,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p1",
+    "path": "assets/r104/bosses/b09-boss-p1.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      464,
+      461
+     ],
+     "bbox": [
+      28,
+      14,
+      444,
+      400
+     ],
+     "visH": 386,
+     "visW": 416,
+     "fill": 0.751,
+     "footY": 0.868,
+     "centerX": 0.509,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.498,
+     "edgeV": 0.155,
+     "sat": 0.388,
+     "val": 0.294,
+     "domHue": 0,
+     "chromaShare": 0.161,
+     "semi": 0.103,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p2",
+    "path": "assets/r104/bosses/b09-boss-p2.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      464,
+      461
+     ],
+     "bbox": [
+      6,
+      61,
+      433,
+      455
+     ],
+     "visH": 394,
+     "visW": 427,
+     "fill": 0.787,
+     "footY": 0.987,
+     "centerX": 0.473,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.52,
+     "edgeV": 0.147,
+     "sat": 0.409,
+     "val": 0.268,
+     "domHue": 0,
+     "chromaShare": 0.19,
+     "semi": 0.09,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p3",
+    "path": "assets/r104/bosses/b09-boss-p3.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      464,
+      461
+     ],
+     "bbox": [
+      28,
+      106,
+      458,
+      402
+     ],
+     "visH": 296,
+     "visW": 430,
+     "fill": 0.595,
+     "footY": 0.872,
+     "centerX": 0.524,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.497,
+     "edgeV": 0.137,
+     "sat": 0.43,
+     "val": 0.262,
+     "domHue": 0,
+     "chromaShare": 0.179,
+     "semi": 0.083,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p4",
+    "path": "assets/r104/bosses/b09-boss-p4.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      464,
+      461
+     ],
+     "bbox": [
+      18,
+      7,
+      407,
+      406
+     ],
+     "visH": 399,
+     "visW": 389,
+     "fill": 0.726,
+     "footY": 0.881,
+     "centerX": 0.458,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.495,
+     "edgeV": 0.153,
+     "sat": 0.395,
+     "val": 0.293,
+     "domHue": 0,
+     "chromaShare": 0.185,
+     "semi": 0.093,
+     "q64": 64
+    },
+    "all": null
+   }
+  ]
+ },
+ "kair-great-03": {
+  "name": "아르벨리아, 유예의 수문장",
+  "zone": null,
+  "sin": "",
+  "phaseNames": null,
+  "arts": [
+   {
+    "role": "phase0.idle",
+    "path": "assets/generated-v31224/actors-normalized/b9b65cd61430_arvelia_delay_archon.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      242,
+      65,
+      429,
+      351
+     ],
+     "visH": 286,
+     "visW": 187,
+     "fill": 0.207,
+     "footY": 0.914,
+     "centerX": 0.499,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.107,
+     "edgeV": 0.671,
+     "sat": 0.234,
+     "val": 0.619,
+     "domHue": 210,
+     "chromaShare": 0.368,
+     "semi": 0.163,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.attackA",
+    "path": "assets/generated-v31224/actors-normalized/822930c614eb_arvelia_delay_archon_attack.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      210,
+      65,
+      461,
+      352
+     ],
+     "visH": 287,
+     "visW": 251,
+     "fill": 0.279,
+     "footY": 0.917,
+     "centerX": 0.499,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.937,
+     "edgeV": 0.567,
+     "sat": 0.24,
+     "val": 0.6,
+     "domHue": 210,
+     "chromaShare": 0.368,
+     "semi": 0.09,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.hit",
+    "path": "assets/generated-v31224/actors-normalized/44fa887e7bcc_arvelia_delay_archon_transition.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      211,
+      64,
+      460,
+      352
+     ],
+     "visH": 288,
+     "visW": 249,
+     "fill": 0.278,
+     "footY": 0.917,
+     "centerX": 0.499,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.012,
+     "edgeV": 0.6,
+     "sat": 0.252,
+     "val": 0.595,
+     "domHue": 30,
+     "chromaShare": 0.398,
+     "semi": 0.143,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.death",
+    "path": "assets/generated-v31224/actors-normalized/44fa887e7bcc_arvelia_delay_archon_transition.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      211,
+      64,
+      460,
+      352
+     ],
+     "visH": 288,
+     "visW": 249,
+     "fill": 0.278,
+     "footY": 0.917,
+     "centerX": 0.499,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.012,
+     "edgeV": 0.6,
+     "sat": 0.252,
+     "val": 0.595,
+     "domHue": 30,
+     "chromaShare": 0.398,
+     "semi": 0.143,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase1.idle",
+    "path": "assets/generated-v31224/actors-normalized/b9b65cd61430_arvelia_delay_archon.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      242,
+      65,
+      429,
+      351
+     ],
+     "visH": 286,
+     "visW": 187,
+     "fill": 0.207,
+     "footY": 0.914,
+     "centerX": 0.499,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.107,
+     "edgeV": 0.671,
+     "sat": 0.234,
+     "val": 0.619,
+     "domHue": 210,
+     "chromaShare": 0.368,
+     "semi": 0.163,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase2.idle",
+    "path": "assets/generated-v31224/actors-normalized/b9b65cd61430_arvelia_delay_archon.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      242,
+      65,
+      429,
+      351
+     ],
+     "visH": 286,
+     "visW": 187,
+     "fill": 0.207,
+     "footY": 0.914,
+     "centerX": 0.499,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 1.107,
+     "edgeV": 0.671,
+     "sat": 0.234,
+     "val": 0.619,
+     "domHue": 210,
+     "chromaShare": 0.368,
+     "semi": 0.163,
+     "q64": 64
+    },
+    "all": null
+   }
+  ]
+ },
+ "c104-boss": {
+  "name": "교만의 사이보그 교주",
+  "zone": null,
+  "sin": "",
+  "phaseNames": [
+   "사이보그 교주",
+   "EGO 탈취체",
+   "삼중자아 합일체",
+   "적그리스도 소환좌"
+  ],
+  "arts": [
+   {
+    "role": "phase0.idle",
+    "path": "assets/generated-v31224/actors-normalized/b96a428432e9_pride_hierophant_idle.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      245,
+      64,
+      472,
+      352
+     ],
+     "visH": 288,
+     "visW": 227,
+     "fill": 0.253,
+     "footY": 0.917,
+     "centerX": 0.533,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.845,
+     "edgeV": 0.326,
+     "sat": 0.354,
+     "val": 0.376,
+     "domHue": 330,
+     "chromaShare": 0.224,
+     "semi": 0.098,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.attackA",
+    "path": "assets/generated-v31224/actors-normalized/5e9f5379c38d_pride_hierophant_attack.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      207,
+      64,
+      465,
+      352
+     ],
+     "visH": 288,
+     "visW": 258,
+     "fill": 0.288,
+     "footY": 0.917,
+     "centerX": 0.5,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.65,
+     "edgeV": 0.256,
+     "sat": 0.386,
+     "val": 0.373,
+     "domHue": 0,
+     "chromaShare": 0.302,
+     "semi": 0.092,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.hit",
+    "path": "assets/generated-v31224/actors-normalized/bf725c96d68d_pride_hierophant_transition.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      231,
+      64,
+      441,
+      352
+     ],
+     "visH": 288,
+     "visW": 210,
+     "fill": 0.234,
+     "footY": 0.917,
+     "centerX": 0.5,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.797,
+     "edgeV": 0.286,
+     "sat": 0.407,
+     "val": 0.347,
+     "domHue": 0,
+     "chromaShare": 0.209,
+     "semi": 0.092,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase0.death",
+    "path": "assets/generated-v31224/actors-normalized/bf725c96d68d_pride_hierophant_transition.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      231,
+      64,
+      441,
+      352
+     ],
+     "visH": 288,
+     "visW": 210,
+     "fill": 0.234,
+     "footY": 0.917,
+     "centerX": 0.5,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.797,
+     "edgeV": 0.286,
+     "sat": 0.407,
+     "val": 0.347,
+     "domHue": 0,
+     "chromaShare": 0.209,
+     "semi": 0.092,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase1.idle",
+    "path": "assets/generated-v31224/actors-normalized/b96a428432e9_pride_hierophant_idle.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      245,
+      64,
+      472,
+      352
+     ],
+     "visH": 288,
+     "visW": 227,
+     "fill": 0.253,
+     "footY": 0.917,
+     "centerX": 0.533,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.845,
+     "edgeV": 0.326,
+     "sat": 0.354,
+     "val": 0.376,
+     "domHue": 330,
+     "chromaShare": 0.224,
+     "semi": 0.098,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase2.idle",
+    "path": "assets/generated-v31224/actors-normalized/b96a428432e9_pride_hierophant_idle.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      245,
+      64,
+      472,
+      352
+     ],
+     "visH": 288,
+     "visW": 227,
+     "fill": 0.253,
+     "footY": 0.917,
+     "centerX": 0.533,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.845,
+     "edgeV": 0.326,
+     "sat": 0.354,
+     "val": 0.376,
+     "domHue": 330,
+     "chromaShare": 0.224,
+     "semi": 0.098,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "phase3.idle",
+    "path": "assets/generated-v31224/actors-normalized/b96a428432e9_pride_hierophant_idle.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      672,
+      384
+     ],
+     "bbox": [
+      245,
+      64,
+      472,
+      352
+     ],
+     "visH": 288,
+     "visW": 227,
+     "fill": 0.253,
+     "footY": 0.917,
+     "centerX": 0.533,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.845,
+     "edgeV": 0.326,
+     "sat": 0.354,
+     "val": 0.376,
+     "domHue": 330,
+     "chromaShare": 0.224,
+     "semi": 0.098,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p1",
+    "path": "assets/r104/bosses/c104-boss-p1.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      548,
+      504
+     ],
+     "bbox": [
+      44,
+      5,
+      544,
+      500
+     ],
+     "visH": 495,
+     "visW": 500,
+     "fill": 0.896,
+     "footY": 0.992,
+     "centerX": 0.536,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.705,
+     "edgeV": 0.279,
+     "sat": 0.493,
+     "val": 0.383,
+     "domHue": 330,
+     "chromaShare": 0.407,
+     "semi": 0.121,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p2",
+    "path": "assets/r104/bosses/c104-boss-p2.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      548,
+      504
+     ],
+     "bbox": [
+      49,
+      67,
+      530,
+      499
+     ],
+     "visH": 432,
+     "visW": 481,
+     "fill": 0.752,
+     "footY": 0.99,
+     "centerX": 0.528,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.71,
+     "edgeV": 0.302,
+     "sat": 0.449,
+     "val": 0.413,
+     "domHue": 0,
+     "chromaShare": 0.445,
+     "semi": 0.119,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p3",
+    "path": "assets/r104/bosses/c104-boss-p3.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      548,
+      504
+     ],
+     "bbox": [
+      4,
+      48,
+      528,
+      500
+     ],
+     "visH": 452,
+     "visW": 524,
+     "fill": 0.858,
+     "footY": 0.992,
+     "centerX": 0.485,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.708,
+     "edgeV": 0.292,
+     "sat": 0.513,
+     "val": 0.402,
+     "domHue": 330,
+     "chromaShare": 0.439,
+     "semi": 0.091,
+     "q64": 64
+    },
+    "all": null
+   },
+   {
+    "role": "r104.p4",
+    "path": "assets/r104/bosses/c104-boss-p4.webp",
+    "frames": 1,
+    "m": {
+     "size": [
+      548,
+      504
+     ],
+     "bbox": [
+      42,
+      32,
+      499,
+      500
+     ],
+     "visH": 468,
+     "visW": 457,
+     "fill": 0.774,
+     "footY": 0.992,
+     "centerX": 0.494,
+     "cut": {
+      "top": 0.0,
+      "bottom": 0.0,
+      "left": 0.0,
+      "right": 0.0
+     },
+     "bgCorners": 0,
+     "outline": 0.664,
+     "edgeV": 0.268,
+     "sat": 0.454,
+     "val": 0.392,
+     "domHue": 0,
+     "chromaShare": 0.358,
+     "semi": 0.112,
+     "q64": 64
+    },
+    "all": null
+   }
+  ]
+ }
+}

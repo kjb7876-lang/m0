@@ -34478,6 +34478,21 @@
       "sha256": "46729ea44b9fd951ff240acdf79ce787a200a3d11f44344e270a470b9eec9598"
     },
     {
+      "path": "assets/r700/clean/assets/generated-v31224/actors-normalized/27ef01c10a8f_gluttony-human-attack.webp",
+      "bytes": 92344,
+      "sha256": "e479fbef4925512ed13d539b6b98c08e520030f211f3c1286552fd8b80875b24"
+    },
+    {
+      "path": "assets/r700/clean/assets/generated-v31224/actors-normalized/53c9ce212489_lust-human-attack.webp",
+      "bytes": 76166,
+      "sha256": "6b1c785e71936f7510fd7fb551eb0143796360fc951752ff76c84c305cde8088"
+    },
+    {
+      "path": "assets/r700/clean/assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp",
+      "bytes": 71510,
+      "sha256": "c6048ea4aa403b998e0bf8c3f547e3cc5dadf589e4ca1201b78c6ae86de445ee"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -42523,6 +42538,11 @@
       "sha256": "b69a8451603bf3c840e301651d4a737ceb2a7441854318ba2926aaa7600982ef"
     },
     {
+      "path": "boss-art-r700.js",
+      "bytes": 2714,
+      "sha256": "f4d81a25c9d3fcc4e43cc97302d3f5c80227a666a4a2b21fa2fcd1c2799ea941"
+    },
+    {
       "path": "boss-cinematic-r568.js",
       "bytes": 29064,
       "sha256": "1065863b3594c6a21eb1f8727bc34a76364903c02cef7df2476514646fa83cb6"
@@ -43559,8 +43579,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6573823,
-      "sha256": "532fdb684d8df92ada48def16ffc983c626d4d047699ae4ba27218e345c0d7f6"
+      "bytes": 6573866,
+      "sha256": "50bb81bfe1c0759805da71ee259f6ce8826210ba5e192c1bed9f84b1480a9814"
     },
     {
       "path": "intro-r140.js",
@@ -44159,8 +44179,8 @@
     },
     {
       "path": "sin-boss-art-r463-data.js",
-      "bytes": 9711,
-      "sha256": "2603cb1055dd0a111f03eabffa371e46a463e522af2639005a4189da13cf7306"
+      "bytes": 9709,
+      "sha256": "8495551d9479380dcad125e7cb766bda1c4a6d748bc536a66365dfe1a47a90d2"
     },
     {
       "path": "sin-boss-art-r463.js",
@@ -44523,9 +44543,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8904,
-  "totalBytes": 1228381215,
-  "webHTMLSha256": "532fdb684d8df92ada48def16ffc983c626d4d047699ae4ba27218e345c0d7f6",
+  "fileCount": 8908,
+  "totalBytes": 1228623990,
+  "webHTMLSha256": "50bb81bfe1c0759805da71ee259f6ce8826210ba5e192c1bed9f84b1480a9814",
   "largest": [
     {
       "path": "index.html",

@@ -639,6 +639,8 @@ jobs:
         run: node r96/qa/r615/student-cpu-check.cjs
       - name: R620 boss motion CPU check
         run: node r96/qa/r620/r620-cpu-check.cjs
+      - name: R700 seven-sins boss art audit (size-lock heights match real art, no light matte fringe on drawn art, clean copies keep the body, originals kept) check
+        run: python r96/qa/r700/boss-art-check.py
       - name: R563 Michaela genesis chain (Q → sky light pillars, R → grand pillar + halo; no new keys, upright cross only, Dots MI sheets) CPU check
         run: node r96/qa/r563/michaela-genesis-cpu-check.cjs
       - name: R564 Seoha chrono chain (time stop shell + shatter, afterimage clones, haste; no new keys, caps, Dots SE sheets) CPU check
