@@ -33483,6 +33483,36 @@
       "sha256": "8bf10ff5c67732f690edf60e016a5e97dbf938e7ac13cc175564b8d88992512e"
     },
     {
+      "path": "assets/r527/body-rig.webp",
+      "bytes": 20056,
+      "sha256": "ebbb50100bff8c60b9a505bbfaae3ced9357291491dd00871ebf702e2b4e2602"
+    },
+    {
+      "path": "assets/r527/gothic-tank.webp",
+      "bytes": 24394,
+      "sha256": "797ccec65df48d913a6135379a771d491cc2674ff091716dab74e6cb6c70b80a"
+    },
+    {
+      "path": "assets/r527/index.json",
+      "bytes": 3510,
+      "sha256": "519a557c88f7c9260d4b60a045bab61f351a75070e4cf8c4b0f249ccaf2b249f"
+    },
+    {
+      "path": "assets/r527/lantern-steps.webp",
+      "bytes": 22920,
+      "sha256": "8f7907e54966ff1909913736f8fa264dd05cff0884db7f22b739e37617985e41"
+    },
+    {
+      "path": "assets/r527/pod.webp",
+      "bytes": 22226,
+      "sha256": "fb1edcf8b85a07ec9b2034f961de55eeb68a935e863e99f6696df20684f54414"
+    },
+    {
+      "path": "assets/r527/stone-barrier.webp",
+      "bytes": 26038,
+      "sha256": "882a0c56068ce15b4f70436caad2370e63aaf5e8e0f2769414aeeb047edf8d0e"
+    },
+    {
       "path": "assets/r528/bookshelf-n.webp",
       "bytes": 9878,
       "sha256": "35a8c4b0f5b4d18dfc1a8c8897095e8c77399583d21acd6f53f2352cf226f661"
@@ -44069,8 +44099,8 @@
     },
     {
       "path": "rooms-r523.js",
-      "bytes": 48464,
-      "sha256": "c931fd3df2cf13cd8eaaafd2ae93bb3981c56a93aa7702a7249287e1a347c457"
+      "bytes": 54100,
+      "sha256": "13560f4539aa6dead56db1b890888bd406d7276f31973ddb2356ab15c7bb867c"
     },
     {
       "path": "root-gate-video-r372.js",
@@ -44568,8 +44598,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8913,
-  "totalBytes": 1228701250,
+  "fileCount": 8919,
+  "totalBytes": 1228826030,
   "webHTMLSha256": "50bb81bfe1c0759805da71ee259f6ce8826210ba5e192c1bed9f84b1480a9814",
   "largest": [
     {
