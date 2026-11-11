@@ -34838,6 +34838,16 @@
       "sha256": "ff140798841045a7c276565f7dfe1f45fbd77ef4838b4afd78100296a1ce7fd1"
     },
     {
+      "path": "assets/r790/npc/yigyeong-bust.webp",
+      "bytes": 34936,
+      "sha256": "a7365f3697e084dd38ad95be2145e8ac0f9d0bf7cbe00e790ed508c10fe7b009"
+    },
+    {
+      "path": "assets/r790/npc/yigyeong-idle6.webp",
+      "bytes": 53938,
+      "sha256": "b31868bd76f908bf44181a4665c73832fd599c03f09a2805e802c9ae04cfe47b"
+    },
+    {
       "path": "assets/r790/npc/youth-bust-d.webp",
       "bytes": 40078,
       "sha256": "54f122857713febf3dbe34bc8abee79e04bfb6a606f92d336fd2ae568dc37706"
@@ -44169,8 +44179,8 @@
     },
     {
       "path": "npc-r790.js",
-      "bytes": 23631,
-      "sha256": "ff086fab3934e54fb671de51c62cbb9fa75780c459f925e2d92da64c30e05a16"
+      "bytes": 25054,
+      "sha256": "b3c6c1a8092f89189b77c7a438722abef7004ab2c865749fd4f446ec5e46b996"
     },
     {
       "path": "painted-vfx-data-r87.js",
@@ -44883,8 +44893,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8976,
-  "totalBytes": 1236109249,
+  "fileCount": 8978,
+  "totalBytes": 1236199546,
   "webHTMLSha256": "3262266bbc669f447044ecbf9cb0c51bed4ad8950c5042f49bb03279bf9986da",
   "largest": [
     {

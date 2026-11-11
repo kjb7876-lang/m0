@@ -17,10 +17,11 @@
 //  · R792 셋째 묶음 = Dots 정식 시트. 앳된 남자는 CX-0072NP idle6(숨쉬기)·offer6(영웅이 다가오면 사발을 내밀고 멈춤)·흉상으로 바꾼다(ElevenLabs 대체 한 장은 더 쓰지 않음).
 //    병원 1막 두 사람(CX-0073SN): ep1a10 의료진 '도움을 청한다' · ep1a11 의목사(침대 곁 의자) '이야기를 듣는다'. 둘 다 보스를 쓰러뜨린 뒤 제단 곁, 뒷이야기 앞. 처치 막기 없음.
 //  · R793 = 서윤(ep1b05). 보스 문 옆에 서 있고 '허락을 구한다' 를 골라야 보스 문의 기억이 시작된다(처치 막기 없음). 한이경(murder04)은 온 그림이 정본과 달라(남자로 그려짐) 넣지 않았다.
+//  · R794 = 한이경(murder04). 여자판 그림(CX-0073SN 04 r2)이 와서 보스 문 옆에 세운다. '사실을 밝히자고 전한다' 를 골라야 보스 문의 기억이 시작된다.
 //  끄기: localStorage['storyworld.r790.npc']='{"on":false}'. 점검: window.__STORYWORLD_NPC_R790__.inspect()
 (()=>{'use strict';
 if(window.__STORYWORLD_NPC_R790__)return;
-const REV='R793-story-npc-1',KEY='storyworld.r790.npc';
+const REV='R794-story-npc-1',KEY='storyworld.r790.npc';
 let prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object'&&typeof s.on==='boolean')prefs.on=s.on;}catch(_){}
 const stats={placed:0,offers:0,taken:0,auto:0,sealed:0,draws:0,errors:0};let lastError=null;const events=[];
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
@@ -55,7 +56,13 @@ const DEFS=Object.freeze({last303:Object.freeze({kind:'youth',flag:'gwibitang',p
  sprite:Object.freeze({path:'assets/r790/npc/seoyun-idle6.webp',w:384,h:384,px:192,py:352,vis:284,scale:1.04,frames:6,fps:5}),bust:'assets/r790/npc/seoyun-bust.webp',bustPos:'50% 30%',bustFit:'cover',
  name:'서윤',label:'서윤 · 허락 구하기',sub:'붉은 조명 아래 · 서윤',
  body:'서윤의 미소는 완벽하다. 그러나 아무도 보지 않을 때면 표정이 텅 빈다.',lore:'나는 그녀의 허락을 받고 몽세에 들어갔다.',
- take:'허락을 구한다',wait:'아직',done:'서윤의 허락을 받았습니다.',toDoor:'보스 구역 문 앞에서 기억을 확인하세요.',first:'서윤에게 먼저 허락을 구하세요.',hud:'문 앞의 서윤 · 허락 구하기',seal:null,boss:null})});
+ take:'허락을 구한다',wait:'아직',done:'서윤의 허락을 받았습니다.',toDoor:'보스 구역 문 앞에서 기억을 확인하세요.',first:'서윤에게 먼저 허락을 구하세요.',hud:'문 앞의 서윤 · 허락 구하기',seal:null,boss:null}),
+ // R794 고서진과 청록빌라. 정본 54장 "나는 민재의 수첩에서 한이경의 주소를 찾아 청록빌라로 향했다 … 나는 이제라도 사실을 밝혀야 한다는 뜻을 전했다."
+ murder04:Object.freeze({kind:'yigyeong',flag:'toldTruth',phase:'door',sideFirst:-1/* 문 오른쪽은 앞 건물 벽에 가린다 */,
+ sprite:Object.freeze({path:'assets/r790/npc/yigyeong-idle6.webp',w:384,h:384,px:192,py:352,vis:286,scale:1.04,frames:6,fps:4}),bust:'assets/r790/npc/yigyeong-bust.webp',bustPos:'50% 30%',bustFit:'cover',
+ name:'한이경',label:'한이경 · 사실을 밝히자고 전하기',sub:'청록빌라 · 한이경',
+ body:'한이경은 하람이 사고를 당한 횡단보도 옆 청록빌라에 살고 있다. 구겨진 종이를 쥐고 있다.',lore:'민재의 죽음도, 새빛호텔에서 있었던 일도 더는 감출 수 없다고 생각했다.',
+ take:'사실을 밝히자고 전한다',wait:'아직',done:'이제라도 사실을 밝혀야 한다는 뜻을 전했습니다.',toDoor:'보스 구역 문 앞에서 기억을 확인하세요.',first:'한이경에게 먼저 뜻을 전하세요.',hud:'청록빌라의 한이경 · 사실을 밝히자고 전하기',seal:null,boss:null})});
 const ORDER=['route','rally','door','doorStory','boss','exit','exitStory','done'],OFFER_REACH=3.4,REACH=2.4,DOOR_REACH=3.2,OBJ_REACH=2.7,FADE=1.6;
 const after=(d,ph)=>ORDER.indexOf(ph)>ORDER.indexOf(d.phase),shown=(d,ph)=>ORDER.indexOf(ph)>=ORDER.indexOf(d.phase)&&ORDER.includes(ph);
 let ledger={};

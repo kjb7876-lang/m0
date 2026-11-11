@@ -8186,7 +8186,9 @@
     "assets/r790/npc/youth-idle6.webp",
     "assets/r790/npc/youth-offer6.webp",
     "assets/r790/npc/seoyun-bust.webp",
-    "assets/r790/npc/seoyun-idle6.webp"
+    "assets/r790/npc/seoyun-idle6.webp",
+    "assets/r790/npc/yigyeong-bust.webp",
+    "assets/r790/npc/yigyeong-idle6.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9261,5 +9263,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "7bfb8b7e672f57a68d328d65b06d6ff6d51f6f1642f2ba01675850d3ff3a0505"
+  "runtimeManifestSHA256": "55cb29ce5c23e36cdae259011596e412b592bce43915a7c1cffe07e93ee74963"
 }
