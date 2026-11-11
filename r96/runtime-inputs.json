@@ -8114,7 +8114,11 @@
     "title-bg-video-r667.js",
     "assets/r667/title-video/loop.mp4",
     "assets/r667/title-poster.jpg",
-    "assets/r667/index.json"
+    "assets/r667/index.json",
+    "boss-art-r700.js",
+    "assets/r700/clean/assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp",
+    "assets/r700/clean/assets/generated-v31224/actors-normalized/27ef01c10a8f_gluttony-human-attack.webp",
+    "assets/r700/clean/assets/generated-v31224/actors-normalized/53c9ce212489_lust-human-attack.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9189,5 +9193,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "c9f50a5f4872a5dcefa110cfdb41e132cf5fdb0ccd91bb8a2390a0ea58ab2251"
+  "runtimeManifestSHA256": "d1654da48cd8378f309ae4ca5d72bf403a678d29b868bb93d9d58994067c04d1"
 }
