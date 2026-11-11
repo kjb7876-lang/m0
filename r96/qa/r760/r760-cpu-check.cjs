@@ -10,10 +10,12 @@ const F=path.join(R,'client-source','bulmyeongwi-r760.js');ok(fs.existsSync(F),'
 const F620=path.join(R,'client-source','boss-motion-r620.js');const src620=fs.readFileSync(F620,'utf8');
 const IDLE='assets/r425/clean/assets/generated-v31224/actors-normalized/692e4ae01c29_bulmyeongwi_idle.webp',ATK='assets/generated-v31224/actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp',
  RAIN='assets/generated-v31224/actors-normalized/35526bcfa1c2_bulmyeongwi_rain.webp',MID='assets/r104/bosses/mb-last302-v31231-p4.webp',MOB='assets/episode1b/generated-v394/bulmyeongwi_b.webp';
-function world({store={},roomId='last303',with620=false,ready=true,sheets=false,audio=true}={}){const timers=[];const ctx={Math,String,Number,Array,Object,JSON,Map,WeakMap,Set,Symbol,isFinite,RegExp,performance:{now:()=>0},
+function world({store={},roomId='last303',with620=false,ready=true,sheets=false,audio=true,between=''}={}){const timers=[];const ctx={Math,String,Number,Array,Object,JSON,Map,WeakMap,Set,Symbol,isFinite,RegExp,performance:{now:()=>0},
   setTimeout:(f)=>{timers.push(f);return timers.length;},localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}}};ctx.window=ctx;vm.createContext(ctx);
  vm.runInContext(`var time=0,room={id:${JSON.stringify(roomId)},enemies:[]},player={x:6,y:3},ctx={commands:[]};var __ready=${ready},__sheets=${sheets},__added=[],__snd=[];${audio?"var soundProfiles={boss:[{key:'b',path:'x.ogg',gain:1}]};function sound(k){__snd.push(k);}function setupAudio(){soundProfiles={boss:[]};}var modal=null;":''}
-  function addImage(p){__added.push(p);}function readyImage(p){if(String(p).includes('assets/r760/')&&!__ready)return null;if(/sheet-/.test(p)){if(!__sheets)return null;const n=/sheet-(idle|move)/.test(p)?6:8;return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:n*512,naturalHeight:512}};}const w=/-p[0-9][.]/.test(p)?393:672,h=/-p[0-9][.]/.test(p)?432:384;return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:w,naturalHeight:h}};}
+  function addImage(p){__added.push(p);}function readyImage(p){if(String(p).includes('assets/r760/')&&!__ready)return null;if(/sheet-/.test(p)){if(!__sheets)return null;const n=/[/]mid[/]sheet-hit/.test(p)?4:/[/]mid[/]sheet-idle/.test(p)?6:/[/]mid[/]/.test(p)?8:/sheet-(idle|move|idle2)[.]/.test(p)?6:/sheet-hit2?[.]/.test(p)?4:/sheet-death/.test(p)?10:8;return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:n*512,naturalHeight:512}};}const w=/-p[0-9][.]/.test(p)?393:672,h=/-p[0-9][.]/.test(p)?432:384;return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:w,naturalHeight:h}};}
+  var effects=[],__drawn=[],__base=[];function spawnBurnDeath3(e){effects.push({type:'enemyBurnDeath',x:e.x,y:e.y,age:0,life:e.boss?1.25:e.midboss?.95:.72,sourceId:e.id,bodyHeight:70});return true;}function drawBurnDeath3(f){__base.push(f.sourceId);}
+  function drawAssetFrame3(path,frame,x,y,h,opt){if(!readyImage(path))return false;__drawn.push({path,rect:frame.assetFrame.sourceRect,vis:frame.assetFrame.visibleHeight,pivot:frame.assetFrame.pivot,x,y,h,alpha:opt?.alpha??1,flip:!!opt?.flip});return true;}
   var zoom=1;function project(x,y){return {x:100+(x-3)*10*zoom,y:200+(y-3)*5*zoom};}
   // 엔진 몸: 발밑 = project(e), 그림 672x384 전체 사각형. 대기 그림은 키 158.7(발 줄 322/384), 공격 그림은 132.6 으로 그려졌다(실측).
   function drawEnemy(e){const P=project(e.x,e.y);const path=e.__path||(e.attack?'${ATK}':'${IDLE}');const qh=zoom*(path.includes('attack')?132.6:path.includes('mb-last302')?94.5:path.includes('episode1b')?80:158.7);
@@ -22,7 +24,7 @@ function world({store={},roomId='last303',with620=false,ready=true,sheets=false,
    ctx.commands.push({kind:'image',key:'enemy:'+room.id+':'+e.nativeId+':0',order:7,owner:{kind:'enemy'},image:{src:'http://x/m0/'+path,naturalWidth:iw,naturalHeight:ih},imageSize:[iw,ih],sourcePath:path,sourceRect:[0,0,iw,ih],style:{globalAlpha:1},points:[[L,top],[L+qw,top],[L+qw,top+qh],[L,top+qh]]});
    ctx.commands.push({kind:'fill',owner:{kind:'enemy'},style:{fillStyle:'#f00'},paths:[{points:[[80,205],[120,205],[120,208],[80,208]]}]});
    ctx.commands.push({kind:'text',owner:{kind:'enemy'},text:e.name,point:[P.x,P.y-qh*.8],style:{}});}`,ctx);
- if(with620)vm.runInContext(src620,ctx);vm.runInContext(src,ctx);
+ if(with620)vm.runInContext(src620,ctx);vm.runInContext(src,ctx);if(between)vm.runInContext(between,ctx); // between: 불러온 뒤·바깥 감싸기(setTimeout 0) 전에 끼는 덧씌우기
  while(timers.length)timers.shift()();return ctx;}
 const run=(c,s)=>vm.runInContext(s,c);const API=c=>c.__STORYWORLD_BULMYEONGWI_R760__;
 const H=k=>Math.abs(k.points[3][1]-k.points[0][1]);
@@ -126,7 +128,7 @@ const svis=k=>H(k)*SVIS/512;
  ok(L.every(f=>Math.abs(svis(f.b)-idleH)<.5),'attack sheet keeps the idle size');ok(JSON.stringify(L[0].b.imageSize)==='[4096,512]','attack sheet imageSize 4096x512');
  ok(L.every(f=>f.b.points[1][0]>f.b.points[0][0]),'hero on the right: sheet not mirrored');
  e.attack=null;frames(c,e,.3);e.attack={elapsed:0,angle:Math.PI,shape154:{windup:.35}};run(c,'player.x=0');const L2=frames(c,e,.3,{step:(e)=>{e.attack.elapsed+=1/30;}});
- ok(L2.every(f=>SH(f.b)==='atkB'),'2nd attack → sheet-atkB');ok(L2.every(f=>f.b.points[1][0]<f.b.points[0][0]),'hero on the left: sheet mirrored');}
+ ok(L2.every(f=>SH(f.b)==='atkB2'),'2nd attack → sheet-atkB2 (R764 r2 replaces r1)');ok(L2.every(f=>f.b.points[1][0]<f.b.points[0][0]),'hero on the left: sheet mirrored');}
 {// 엔진이 e.attack 없이 state 'attack' 만 줄 때도 공격 시트가 앞으로 감
  const c=world({sheets:true}),e=boss({state:'attack',stateAge:0,__path:ATK});const L=frames(c,e,.9,{step:(e)=>{e.stateAge+=1/30;}});
  const fr=L.map(f=>FR(f.b));ok(L.every(f=>/^atk/.test(SH(f.b)))&&fr[0]===0&&fr[fr.length-1]===7&&fr.every((v,i)=>!i||v>=fr[i-1]),'state attack: atk sheet 0→7 ('+fr.join('')+')');}
@@ -169,6 +171,78 @@ const SND=c=>run(c,'__snd.slice()');
  const cq=world(),eq=boss();run(cq,'modal={}');eq.attack={elapsed:0,angle:0,shape154:{windup:.35}};frames(cq,eq,.3,{step:(e)=>{e.attack.elapsed+=1/30;}});ok(SND(cq).length===0,'modal open: no cue');
  const cf=world({store:{'storyworld.r760.bulmyeongwi':'{"sfx":false}'}}),ef=boss();ef.attack={elapsed:0,angle:0,shape154:{windup:.35}};frames(cf,ef,.3,{step:(e)=>{e.attack.elapsed+=1/30;}});ok(SND(cf).length===0,'sfx off switch');
  const cn=world({audio:false}),en=boss();en.attack={elapsed:0,angle:0,shape154:{windup:.35}};frames(cn,en,.3,{step:(e)=>{e.attack.elapsed+=1/30;}});ok(API(cn).inspect().stats.errors===0,'no audio engine: no errors');}
+// ── R764: 불면귀 보스 2페이즈 대기(idle2)·피격(hit4)·죽음(death10), 중간보스 '검은 안개 심장' 시트(대기6·공격8·피격4·죽음8) ──
+const MIDP='assets/r104/bosses/mb-last302-v31231-p4.webp',MVIS=400,MENG=94.5*400/432; // 중간보스: 엔진 p4 보이는 키(400/432)
+const mid=o=>boss({id:'M',nativeId:'mb-last302-v31231',name:'검은 안개 심장 · 불면의 기억',midboss:true,__path:MIDP,...o});
+{// 보스 체력 절반 이하로 서 있으면 2페이즈 대기(실타래가 풀려 흐트러짐), 크기·발은 대기와 같다. 걷기는 move 그대로
+ const c=world({sheets:true}),e=boss();frames(c,e,.4);const idleH=svis(frames(c,e,.05)[0].b);e.hp=500;const L=frames(c,e,1.2);const f=L[L.length-1];
+ ok(L.every(x=>SH(x.b)==='idle2'),'hp 50% standing → sheet-idle2 ('+[...new Set(L.map(x=>SH(x.b)))]+')');ok(JSON.stringify(f.b.imageSize)==='[3072,512]','idle2 imageSize 3072x512');
+ ok(new Set(L.map(x=>FR(x.b))).size>=5,'idle2 frames cycle');ok(Math.abs(svis(f.b)-idleH)<.5,'idle2 keeps the idle size');
+ const fy=f.b.points[0][1]+H(f.b)*469.33/512;ok(Math.abs(fy-200)<.6,'idle2: foot on the ground');
+ e.hp=501;ok(SH(frames(c,e,.1).pop().b)==='idle','hp just above 50% → idle');e.hp=400;ok(SH(frames(c,e,.8,{step:(e)=>{e.x+=.06;}}).pop().b)==='move','phase 2 walking → move');
+ ok(/sheet-idle2\.webp$/.test(f.b.sourcePath)&&f.ghosts.length===3&&f.ghosts.every(g=>g.sourcePath===f.b.sourcePath),'phase 2: 3 afterimages share the idle2 frame');}
+{// 보스 피격: 서 있을 때 맞으면 hit 4칸(움찔) 한 번, 1.5초 안 연타는 다시 움찔하지 않음(떨림 방지), 공격·패턴 중에는 공격 그림 유지
+ const c=world({sheets:true}),e=boss();frames(c,e,.4);e.hitTimer=.2;const L=frames(c,e,.4,{step:(e)=>{e.hitTimer=Math.max(0,e.hitTimer-1/30);}});
+ const hs=L.filter(x=>SH(x.b)==='hit').map(x=>FR(x.b));ok(hs.length>=4&&hs[0]===0&&hs.every((v,i)=>!i||v>=hs[i-1])&&hs[hs.length-1]===3,'hit → sheet-hit 0→3 ('+hs.join('')+')');
+ ok(SH(L[L.length-1].b)==='idle','after the flinch → idle');ok(JSON.stringify(L.find(x=>SH(x.b)==='hit').b.imageSize)==='[2048,512]','hit imageSize 2048x512');
+ e.hitTimer=.2;const L2=frames(c,e,.3,{step:(e)=>{e.hitTimer=Math.max(0,e.hitTimer-1/30);}});ok(L2.every(x=>SH(x.b)!=='hit'),'second hit within 1.5s → no new flinch');
+ frames(c,e,1.5);e.hitTimer=.2;ok(SH(frames(c,e,.05)[0].b)==='hit','hit after 1.5s → flinch again');
+ const cw=world({sheets:true}),ew=boss();frames(cw,ew,.8,{step:(e)=>{e.x+=.06;}});ew.hitTimer=.2;ok(SH(frames(cw,ew,.05,{step:(e)=>{e.x+=.06;}})[0].b)==='hit','hit while walking → flinch');
+ const c2=world({sheets:true}),e2=boss({hitTimer:.3});e2.attack={elapsed:.1,angle:0,shape154:{windup:.35}};ok(frames(c2,e2,.2).every(x=>/^atk/.test(SH(x.b))),'hit during attack → attack frames kept');}
+{// 중간보스: 엔진 4자세 대신 Dots 시트(512칸·발 (256,470)), 보이는 키는 지금 엔진 대기와 같게, 잔상 1겹이 같은 칸을 따라감
+ const c=world({sheets:true,roomId:'last302'}),m=mid();const L=frames(c,m,1.2);const f=L[L.length-1];
+ ok(L.every(x=>/assets\/r760\/mid\/sheet-idle\.webp$/.test(x.b.sourcePath)),'midboss idle → mid/sheet-idle ('+f.b.sourcePath+')');ok(JSON.stringify(f.b.imageSize)==='[3072,512]','mid idle imageSize');
+ ok(new Set(L.map(x=>FR(x.b))).size>=5,'mid idle frames cycle');const fy=f.b.points[0][1]+H(f.b)*470/512,fx=f.b.points[0][0]+(f.b.points[1][0]-f.b.points[0][0])*.5;
+ ok(Math.abs(fy-200)<.6&&Math.abs(fx-100)<.6,'mid: pivot on the ground point ('+fx.toFixed(2)+','+fy.toFixed(2)+')');
+ ok(Math.abs(H(f.b)*MVIS/512/MENG-1)<.02,'mid: visible height = engine idle ('+(H(f.b)*MVIS/512/MENG).toFixed(3)+')');
+ ok(f.ghosts.length===1&&f.ghosts[0].sourcePath===f.b.sourcePath&&String(f.ghosts[0].sourceRect)===String(f.b.sourceRect),'mid: one afterimage on the same frame');
+ m.attack={elapsed:0,angle:0,shape154:{windup:.35}};const A=frames(c,m,1.0,{step:(e)=>{e.attack.elapsed+=1/30;}});const fr=A.map(x=>FR(x.b));
+ ok(A.every(x=>/mid\/sheet-atk/.test(x.b.sourcePath))&&fr[0]===0&&fr[fr.length-1]===7&&fr.every((v,i)=>!i||v>=fr[i-1]),'mid attack → mid/sheet-atk 0→7 ('+fr.join('')+')');
+ ok(A.every(x=>Math.abs(H(x.b)-H(f.b))<.5),'mid attack keeps the idle size');m.attack=null;
+ frames(c,m,.3);m.hitTimer=.2;ok(/mid\/sheet-hit/.test(frames(c,m,.05)[0].b.sourcePath),'mid hit → mid/sheet-hit');m.hitTimer=0;
+ run(c,'player.x=0');ok(frames(c,m,.05)[0].b.points[1][0]<frames(c,m,.05)[0].b.points[0][0],'mid: hero on the left → mirrored');
+ // 회귀(헤드리스 실측): 엔진·덧씌우기가 중간보스 몸을 안쪽에서 그린 뒤 바깥에서 다시 키운다(안쪽 키 44~57px, 최종 94.5px) → 시트는 최종 몸 크기 기준으로, 바깥에서.
+ //  안쪽에서 바꾸면 죽음 크기(안쪽 기준)와 살아 있을 때 크기(바깥에서 키운 것)가 두 배 넘게 어긋났다.
+ const cz=world({sheets:true,roomId:'last302',between:`const de0=drawEnemy;drawEnemy=function(e,...a){const s0=ctx.commands.length;const r=de0.call(this,e,...a);for(let i=s0;i<ctx.commands.length;i++){const k=ctx.commands[i];if(k.kind==='image'&&!k.r760Ghost){const P=k.points,fy=P[2][1];k.points=P.map(q=>[q[0],fy+(q[1]-fy)*2]);}}return r;};`});
+ const mz=mid();frames(cz,mz,.5);const fz=frames(cz,mz,.05)[0];ok(Math.abs(H(fz.b)*MVIS/512/(MENG*2)-1)<.03,'mid: sized from the engine body as finally drawn ('+(H(fz.b)*MVIS/512/(MENG*2)).toFixed(3)+')');
+ mz.hp=0;cz.spawnBurnDeath3(mz);const fxz=run(cz,'effects')[0];fxz.age=.2;cz.drawBurnDeath3(fxz);const dz=run(cz,'__drawn').pop();ok(Math.abs(dz.h-H(fz.b)*MVIS/512)<1,'mid death: same visible height as the last alive frame ('+dz.h.toFixed(1)+' vs '+(H(fz.b)*MVIS/512).toFixed(1)+')');
+ // 회귀(헤드리스 실측): R205 최소 크기 맞춤은 바깥 감싸기보다도 늦게 감싸 몸을 키운다 → 죽음 크기도 그 최종 크기로
+ const cl=world({sheets:true,roomId:'last302'});run(cl,`const de1=drawEnemy;drawEnemy=function(e,...a){const s0=ctx.commands.length;const r=de1.call(this,e,...a);for(let i=s0;i<ctx.commands.length;i++){const k=ctx.commands[i];if(k.kind==='image'){const P=k.points,fy=P[2][1],fx=(P[2][0]+P[3][0])/2;k.points=P.map(q=>[fx+(q[0]-fx)*2.1,fy+(q[1]-fy)*2.1]);}}return r;};`);
+ const ml=mid();frames(cl,ml,.5);const fl=frames(cl,ml,.05)[0];ml.hp=0;cl.spawnBurnDeath3(ml);const fxl=run(cl,'effects')[0];fxl.age=.2;cl.drawBurnDeath3(fxl);const dl=run(cl,'__drawn').pop();
+ ok(Math.abs(dl.h-H(fl.b)*MVIS/512)<1,'mid death after a later outer resize: same visible height as alive ('+dl.h.toFixed(1)+' vs '+(H(fl.b)*MVIS/512).toFixed(1)+')');
+ const cg=world({sheets:true,roomId:'last302',with620:true}),mg=mid();frames(cg,mg,.5);const G=frames(cg,mg,.5,{step:(e,t)=>{e.__path=t<.25?MIDP:MIDP.replace('-p4','-p2');}});
+ ok(G.every(f=>f.cm.every(k=>!/mb-last302-v31231-p/.test(k.sourcePath||''))),'mid with R620: no engine pose (or its cross-fade ghost) left on screen');
+ const c3=world({sheets:false,roomId:'last302'}),m3=mid();ok(frames(c3,m3,.2).pop().b.sourcePath===MIDP,'mid sheet not ready → engine pose kept');}
+{// 죽음: 보스는 death10(실타래가 풀려 흩어짐) 0→8칸, 중간보스는 death8 0→6칸(빈 마지막 칸은 안 씀), 엔진 불꽃 대신, 끝에서만 옅어짐. 크기는 살아 있을 때와 같다
+ const c=world({sheets:true}),e=boss();frames(c,e,.5);const vis=svis(frames(c,e,.05)[0].b);e.hp=0;c.spawnBurnDeath3(e);const fx=run(c,'effects')[0];
+ ok(fx.r764?.who==='boss'&&fx.life>=1.8,'boss death fx tagged and lengthened ('+fx.life+')');const seq=[];
+ for(let a=0;a<fx.life;a+=.05){fx.age=a;run(c,'__drawn.length=0');c.drawBurnDeath3(fx);seq.push(run(c,'__drawn')[0]);}
+ ok(run(c,'__base').length===0,'engine burn not drawn for the boss');ok(seq.every(d=>/boss\/sheet-death\.webp$/.test(d.path)),'boss death sheet');
+ const fs2=seq.map(d=>d.rect[0]/512);ok(fs2[0]===0&&fs2.every((v,i)=>!i||v>=fs2[i-1])&&Math.max(...fs2)===8,'boss death frames 0→8, never the empty 9 ('+fs2.join('')+')');
+ ok(seq[5].alpha===1&&seq[seq.length-1].alpha<.3,'fades only at the end');ok(Math.abs(seq[0].h-vis)<.6&&seq[0].vis===383&&seq[0].x===100&&seq[0].y===200,'same visible size and spot as alive ('+seq[0].h.toFixed(1)+' vs '+vis.toFixed(1)+')');
+ const cm=world({sheets:true,roomId:'last302'}),m=mid();frames(cm,m,.5);const mv=H(frames(cm,m,.05)[0].b)*MVIS/512;m.hp=0;cm.spawnBurnDeath3(m);const mf=run(cm,'effects')[0];const ms=[];
+ for(let a=0;a<mf.life;a+=.05){mf.age=a;run(cm,'__drawn.length=0');cm.drawBurnDeath3(mf);ms.push(run(cm,'__drawn')[0]);}
+ const mfs=ms.map(d=>d.rect[0]/512);ok(ms.every(d=>/mid\/sheet-death/.test(d.path))&&mfs[0]===0&&Math.max(...mfs)===6&&mfs.every((v,i)=>!i||v>=mfs[i-1]),'mid death frames 0→6 ('+mfs.join('')+')');
+ ok(Math.abs(ms[0].h-mv)<.6&&ms[0].vis===MVIS,'mid death: same visible size');
+ const co=world({sheets:true}),o=boss({id:'X',nativeId:'l303-e2',name:'다른 적',boss:false});o.hp=0;co.spawnBurnDeath3(o);co.drawBurnDeath3(run(co,'effects')[0]);ok(run(co,'__base').length===1,'other enemies: engine death unchanged');
+ const cn=world({sheets:false}),en=boss();frames(cn,en,.3);en.hp=0;cn.spawnBurnDeath3(en);cn.drawBurnDeath3(run(cn,'effects')[0]);ok(run(cn,'__base').length===1,'death sheet not ready → engine death');
+ ok(API(c).inspect().stats.errors===0&&API(cm).inspect().stats.errors===0,'no errors');}
+{// 미리 불러오기: 보스 구역은 새 보스 시트, 중간보스 구역은 중간보스 시트
+ const c=world({sheets:false}),e=boss();frames(c,e,.05);ok(['idle2','hit','death'].every(k=>run(c,'__added').some(p=>p.endsWith('boss/sheet-'+k+'.webp'))),'boss phase2/hit/death sheets requested');
+ ok(['idle','atk','hit','death'].every(k=>run(c,'__added').some(p=>p.endsWith('mid/sheet-'+k+'.webp'))),'mid sheets requested');}
+{// R764 넷째 묶음: 눈빛 공격은 예비 동작이 생긴 atkB8_r2(sheet-atkB2) — 준비 동안 0→4칸(1~3 움츠림·4 쏠림), 준비 끝에 5번째 칸(4)이 시선 발사, 뒤로 7칸까지
+ const c=world({sheets:true}),e=boss();e.attack={elapsed:0,angle:0,shape154:{windup:.35}};frames(c,e,.3,{step:(e)=>{e.attack.elapsed+=1/30;}});e.attack=null;frames(c,e,1.3);
+ e.attack={elapsed:0,angle:0,shape154:{windup:.5}};const L=frames(c,e,1.2,{step:(e)=>{e.attack.elapsed+=1/30;}});const fr=L.map(f=>FR(f.b));
+ ok(L.every(f=>/sheet-atkB2\.webp$/.test(f.b.sourcePath)),'2nd attack → sheet-atkB2 (r2 with anticipation)');
+ const iw=Math.round(.5*30);ok(fr[0]===0&&fr.every((v,i)=>!i||v>=fr[i-1])&&fr[iw-2]<=3&&fr[iw+1]===4&&fr[fr.length-1]===7,'atkB2: windup 0..3, gaze 4 at windup end, back to 7 ('+fr.join('')+')');
+ const ca=world({sheets:true}),ea=boss();ea.attack={elapsed:0,angle:0,shape154:{windup:.5}};const A=frames(ca,ea,.6,{step:(e)=>{e.attack.elapsed+=1/30;}}).map(f=>FR(f.b));ok(A[16]===3,'atkA keeps strike frame 3 at windup end ('+A.join('')+')');}
+{// 회귀(헤드리스 실측): 엔진은 보스가 맞으면 공격 그림을 준다(피격 그림이 없음) → 공격이 아닌데 공격 칸·공격 소리(wrap/gaze)가 나왔다. 맞은 동안 공격 그림은 피격으로
+ const c=world({sheets:true}),e=boss();frames(c,e,.4);e.__path=ATK;e.state='idle';e.hitTimer=.2;const L=frames(c,e,.3,{step:(e)=>{e.hitTimer=Math.max(0,e.hitTimer-1/30);if(!(e.hitTimer>0))e.__path=null;}});
+ ok(L.slice(0,4).every(f=>SH(f.b)==='hit'),'engine attack art while hit (no attack) → hit sheet ('+L.slice(0,4).map(f=>SH(f.b))+')');ok(SND(c).length===0,'no attack cue on a hit ('+SND(c)+')');
+ e.__path=null;e.attack={elapsed:0,angle:0,shape154:{windup:.35}};const A=frames(c,e,.2,{step:(e)=>{e.attack.elapsed+=1/30;}});ok(SH(A[0].b)==='atkA'&&JSON.stringify(SND(c))==='["r761BossWrap"]','next real attack is still the first (atkA + wrap)');}
+{// 2단계 피격: 체력 절반 이하에서 맞으면 hit2nd4(핵 빛이 번쩍), 위면 hit
+ const c=world({sheets:true}),e=boss({hp:400});frames(c,e,.4);e.hitTimer=.2;const L=frames(c,e,.3,{step:(e)=>{e.hitTimer=Math.max(0,e.hitTimer-1/30);}});
+ ok(L.slice(0,3).every(f=>/sheet-hit2\.webp$/.test(f.b.sourcePath)),'phase 2 hit → sheet-hit2 ('+L[0].b.sourcePath+')');}
 // ── R763: 불면귀에 잠식된 주민(Dots CX-0070BM vil1 어부·vil2 약방 아낙, 256칸·발 (128,234.67)·오른쪽 봄) — last302·last303 일반몹 그림·이름 교체 ──
 function vworld({roomId='last302',store={},ready=true}={}){const timers=[];const c={Math,String,Number,Array,Object,JSON,Map,WeakMap,Set,Symbol,isFinite,RegExp,Promise,performance:{now:()=>0},
   setTimeout:(f)=>{timers.push(f);return timers.length;},localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}}};c.window=c;vm.createContext(c);
@@ -203,7 +277,10 @@ const FF=(c,e)=>c.__STORYWORLD_STORY_COMBAT_R54__.frameFor(e,null);const VAPI=c=
  ok(/F/.test(ks)&&/H/.test(ks)&&ks.split('F').length-1===5,'last303 split fisher/herbwife evenly ('+ks+')');}
 {// 동작: 대기 6칸 돌고, 걷기 8칸, 공격은 준비 0→2(갈고리 치켜듦)·타격 3·뒤 4→7, 피격(어부) hit 시트, 왼쪽이면 뒤집기
  const c=vworld(),e=mob();const fr=[];for(let i=0;i<30;i++){vm.runInContext('time+=1/15',c);fr.push(FF(c,e).assetFrame.sourceRect[0]/256);}ok(new Set(fr).size>=5,'idle cycles ('+[...new Set(fr)].join('')+')');
- e.moving=true;const fw=FF(c,e);ok(/fisher-walk/.test(fw.path),'moving → walk');e.moving=false;
+ e.moving=true;const fw=FF(c,e);ok(/fisher-walk/.test(fw.path),'moving → walk');
+ // 분석 스레드 실측: 어부 걷기 8번 칸이 1번 칸과 같은 넓은 걸음이라 돌 때마다 멈칫 → 0..6,3 순서(8번 칸 자리에 4번 칸)
+ const wk=[];for(let i=0;i<40;i++){vm.runInContext('time+=1/10',c);wk.push(FF(c,e).assetFrame.sourceRect[0]/256);}ok(!wk.includes(7)&&new Set(wk).size===7,'fisher walk skips the duplicate wide step 7 ('+wk.join('')+')');
+ const hw=mob({id:'hw',nativeId:'l302-e1',name:'포구 검은 안개 9',moving:true});const hk=[];for(let i=0;i<40;i++){vm.runInContext('time+=1/10',c);hk.push(FF(c,hw).assetFrame.sourceRect[0]/256);}ok(hk.includes(7),'herbwife walk uses all 8 frames');e.moving=false;
  e.attack={elapsed:0,shape154:{windup:.6,active:.15,recovery:.6}};const at=[];for(let t=0;t<1.35;t+=.05){e.attack.elapsed=t;const f=FF(c,e);ok(/fisher-atk/.test(f.path),'attack sheet');at.push(f.assetFrame.sourceRect[0]/256);}
  ok(at[0]===0&&at.every((v,i)=>!i||v>=at[i-1])&&at[11]<=2&&at[13]===3&&at[at.length-1]===7,'attack frames: windup 0..2, strike 3, recover to 7 ('+at.join('')+')');e.attack=null;
  e.hitTimer=.14;const h=FF(c,e);ok(/fisher-hit/.test(h.path),'hit → fisher hit sheet');e.hitTimer=0;
