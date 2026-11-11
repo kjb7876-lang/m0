@@ -378,3 +378,71 @@ window.__STORYWORLD_ROOMS_R523__=Object.freeze({revision:REV,ART,G,USE,REGION,LI
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError,dropLog:dropLog.slice(),plan:lastPlan,collisionChanged:false,savesTouched:false,
   room:typeof room!=='undefined'&&room&&enabled(room)?list(room).map(p=>({id:p.id,art:p.r523.art,use:p.r523.use,x:p.x,y:p.y,flip:!!p.r303Flip})):null})});
 })();
+
+// ==== R730 불면귀 구역을 마을답게 — 사용자 2026-11-11 "불면귀쪽 부터 우선 개선 … 특히 분위기랑 조형물", "귀비탕영상 + 동양몽세 진입 시네마틱과 서사에 맞게".
+//  실측(헤드리스, main da9d322): last302 '잠들지 못하는 마을'은 4503칸에 조형물 25개뿐이고 집이 한 채도 없었다(기와집 그림 r80-010 은 배정만 되고 안 놓임).
+//  정본: 부서진 기와·붉은 부적·장승, 포구 마을, 방문 앞 신발, 안개 속 한약 한 잔. 영상: 어두운 한옥, 등롱의 호박색 빛, 창살 너머 남색 달빛.
+//  · 집: 길 뒤쪽(-x·-y) 끝 너머 언덕 위에 기와집을 줄지어 세운다. 화면에서 집 그림이 덮는 범위에 바닥 칸이 하나도 없는 자리만 쓴다(영웅·몹·보스를 가리지 않음).
+//    언덕 높이만큼 그림을 올린다(visualLiftPx). -x 끝 뒤에서는 정면이 길을 보게 좌우를 뒤집는다(R414 와 같은 규칙).
+//  · 길 가: 뒤쪽 끝에 붙여 석등(8칸 넘게 띄움)·향로·서낭나무·기와 더미. 보스 구역·모이는 방·문·입구·이미 있는 조형물 곁은 비운다.
+//  · 그리기 전용: 충돌·바닥·몹·보스 자리·저장을 건드리지 않는다. 난수·시계를 쓰지 않는다(지도만으로 정해짐). 끄기: localStorage['storyworld.r730.village']={"on":false}.
+//  · 몹·보스는 R760(bulmyeongwi-r760.js) 스레드가 맡는다. 등롱·부적 줄·댓돌 신발·장독대·약방은 Dots 그림이 오면 2차로 더한다(지금은 기존 그림만).
+(()=>{'use strict';
+if(window.__STORYWORLD_VILLAGE_R730__)return;
+const REV='R730-village-1',KEY='storyworld.r730.village',PX=34,SUM=17,BACK=3.6,MARGIN=1;
+const prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;}catch(_){}
+const stats={rooms:0,placed:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,400);};
+const HOUSE=Object.freeze([
+ Object.freeze({path:'assets/world-r80/r80-010.webp',height:200,aspect:512/367}),
+ Object.freeze({path:'assets/world-r80/r80-010.webp',height:184,aspect:512/367}),
+ Object.freeze({path:'assets/r414/buildings/waterside-house.webp',height:172,aspect:600/356})]);
+const LAMP=Object.freeze({path:'assets/r92/lights/lights_regional_03.png',height:84}),CENSER=Object.freeze({path:'assets/r92/lights/lights_regional_02.png',height:52}),
+ TREE=Object.freeze({path:'assets/r299/tree.webp',height:150}),GIWA=Object.freeze({path:'assets/world-r80/r80-007.webp',height:44});
+const ZONE=Object.freeze({last302:Object.freeze({houses:26,lamps:20,yards:/작은 마당|외곽 쉼길/,giwa:3}),last303:Object.freeze({houses:12,lamps:14,yards:/작은 마당|외곽 쉼길/,giwa:5})});
+function h32(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
+// fx: {id, floorCells, rooms[{name,x,y}], doors[{x,y}], ward{boss,gather}, entry{x,y}, props[{x,y}], route?[{x,y}]} → [{id,kind,path,height,aspect?,lift?,x,y,side?}]
+function plan(fx){const Z=ZONE[fx.id];if(!Z)return[];const F=new Set(),diag=new Map();
+ for(const[x,y]of fx.floorCells){F.add(x+','+y);const k=x-y;let a=diag.get(k);if(!a)diag.set(k,a=[]);a.push(x+y);}
+ const has=(x,y)=>F.has(x+','+y),W=fx.ward||{},inB=(B,x,y,m)=>Array.isArray(B)&&x>B[0]-m&&x<B[2]+m&&y>B[1]-m&&y<B[3]+m;
+ const edges=[];for(const[x,y]of fx.floorCells){if(!has(x,y-1))edges.push({x,y,side:'-y'});if(!has(x-1,y))edges.push({x,y,side:'-x'});}
+ edges.sort((a,b)=>a.y-b.y||a.x-b.x||(a.side<b.side?-1:1));
+ const route=(fx.route&&fx.route.length?fx.route:[fx.entry,...(fx.doors||[]),...(fx.rooms||[])]).filter(q=>q&&Number.isFinite(q.x+q.y)),near=(x,y)=>{let b=1e9;for(const q of route){const d=Math.hypot(q.x-x,q.y-y);if(d<b)b=d;}return b;};
+ // 집: 그림이 덮는 화면 범위(대각선 s0±D, 깊이 발 뒤 top ~ 발 앞 MARGIN)에 바닥 칸이 없어야 한다
+ const covers=(fx_,fy,D,top)=>{const c=fx_+fy,s0=fx_-fy;for(let k=Math.floor(s0-D-1);k<=Math.ceil(s0+D+1);k++){const a=diag.get(k);if(a)for(let i=0;i<a.length;i++)if(a[i]+1>c-top&&a[i]<c+MARGIN+1)return true;}return false;};
+ const cand=[];for(const e of edges){const fx_=e.side==='-y'?e.x+.5:e.x-BACK,fy=e.side==='-y'?e.y-BACK:e.y+.5;if(fx_<-6||fy<-6)continue;
+  const v=HOUSE[h32(fx.id+':'+e.x+','+e.y+e.side)%HOUSE.length],D=v.height*v.aspect/2/PX,lift=Math.round(v.height*.35);
+  if(covers(fx_,fy,D,(v.height+lift)/SUM))continue;if((fx.doors||[]).some(d=>Math.hypot(d.x-fx_,d.y-fy)<4+D))continue;
+  cand.push({k:near(e.x+.5,e.y+.5)+(h32('k'+e.x+','+e.y+e.side)%100)/50,e,v,D,lift,x:+fx_.toFixed(2),y:+fy.toFixed(2)});}
+ cand.sort((a,b)=>a.k-b.k||a.e.y-b.e.y||a.e.x-b.e.x);
+ const out=[],houses=[];for(const c of cand){if(houses.length>=Z.houses)break;const s0=c.x-c.y,sm=c.x+c.y;if(houses.some(h=>Math.abs(h.s0-s0)<h.D+c.D+.5&&Math.abs(h.sm-sm)<9))continue;
+  houses.push({s0,sm,D:c.D,e:c.e});out.push({id:'r730:'+fx.id+':house:'+c.e.x+'_'+c.e.y+c.e.side,kind:'house',path:c.v.path,height:c.v.height,aspect:c.v.aspect,lift:c.lift,x:c.x,y:c.y,side:c.e.side});}
+ // 길 가: 뒤쪽 끝 칸 안쪽 .75칸
+ const taken=[],clear=(x,y,r)=>!inB(W.boss,x,y,1.5)&&!inB(W.gather,x,y,1.5)&&!(fx.doors||[]).some(d=>Math.hypot(d.x-x,d.y-y)<3.5)&&Math.hypot(fx.entry.x-x,fx.entry.y-y)>=3.5&&!(fx.props||[]).some(q=>Math.hypot(q.x-x,q.y-y)<2.4)&&!taken.some(t=>Math.hypot(t.x-x,t.y-y)<(t.r>r?t.r:r));
+ const spotOf=e=>e.side==='-y'?{x:e.x+.5,y:e.y+.75}:{x:e.x+.75,y:e.y+.5},inner=e=>e.side==='-y'?has(e.x,e.y+1)&&has(e.x-1,e.y)&&has(e.x+1,e.y):has(e.x+1,e.y)&&has(e.x,e.y-1)&&has(e.x,e.y+1);/* 모서리·한 칸 턱이 아닌 반듯한 끝 */
+ const put=(e,kind,a,r,tag)=>{const s=spotOf(e);if(!inner(e)||!clear(s.x,s.y,r))return false;taken.push({x:s.x,y:s.y,r});out.push({id:'r730:'+fx.id+':'+kind+':'+tag,kind,path:a.path,height:a.height,x:s.x,y:s.y,side:e.side});return true;};
+ // 마당·쉼길: 방 자리에서 가장 가까운 뒤쪽 끝에 서낭나무, 그 곁에 향로
+ let yn=0;for(const q of fx.rooms||[]){if(!Z.yards.test(String(q.name||''))||yn>=6)continue;const es=edges.filter(e=>Math.hypot(e.x-q.x,e.y-q.y)<9).sort((a,b)=>Math.hypot(a.x-q.x,a.y-q.y)-Math.hypot(b.x-q.x,b.y-q.y)||a.y-b.y||a.x-b.x);
+  for(const e of es)if(put(e,'tree',TREE,5,'r'+q.id)){yn++;for(const e2 of es)if(Math.hypot(e2.x-e.x,e2.y-e.y)>=2.5&&put(e2,'censer',CENSER,2.4,'r'+q.id))break;break;}}
+ // 집 앞 기와 더미(집 Z.giwa 채마다 하나)
+ houses.forEach((h,i)=>{if(i%Z.giwa)return;const es=edges.filter(e=>e.side===h.e.side&&Math.abs(e.x-h.e.x)+Math.abs(e.y-h.e.y)<=3);for(const e of es)if(put(e,'giwa',GIWA,2.4,'h'+i))break;});
+ // 석등: 길에서 가까운 뒤쪽 끝부터, 서로 8칸 넘게
+ let ln=0;const le=edges.map(e=>({e,k:near(e.x+.5,e.y+.5)+(h32('l'+e.x+','+e.y+e.side)%100)/25})).sort((a,b)=>a.k-b.k||a.e.y-b.e.y||a.e.x-b.e.x);
+ for(const{e}of le){if(ln>=Z.lamps)break;if(put(e,'lamp',LAMP,8.2,e.x+'_'+e.y+e.side))ln++;}
+ return out;}
+const done=new WeakMap();
+function routeOf(r){const out=[];try{const s=window.__STORYWORLD_PLAY_R169__?.pathCells?.(r);if(s&&typeof s.forEach==='function'){let i=0;s.forEach(k=>{if(i++%3)return;const[x,y]=String(k).split(',').map(Number);if(Number.isFinite(x+y))out.push({x:x+.5,y:y+.5});});}}catch(e){fail(e);}return out;}
+function apply(r){if(!prefs.on||!r||!ZONE[r.id]||!(!r.layer||r.layer==='STORY')||!r.exploration||!Array.isArray(r.props)||!Array.isArray(r.exploration.floorCells))return;const L=r.exploration;if(L.samongR103||L.samongR115||done.get(r)===L)return;done.set(r,L);
+ const W=L.worldWardR81||{},rows=plan({id:r.id,floorCells:L.floorCells,rooms:(L.worldR74?.rooms||[]).map(q=>({id:q.id,name:q.name||q.purpose||'',x:q.x,y:q.y})),doors:L.worldR74?.doors||[],ward:{boss:W.bossBounds,gather:W.gatherBounds},entry:L.entry||{x:-99,y:-99},
+  props:r.props.filter(p=>p&&!p.r730&&p.visible!==false&&Number.isFinite(p.x+p.y)).map(p=>({x:p.x,y:p.y})),route:routeOf(r)});
+ const have=new Set(r.props.map(p=>p&&p.id));stats.rooms++;
+ for(const s of rows){if(have.has(s.id))continue;const q={id:s.id,x:s.x,y:s.y,path:s.path,height:s.height,visible:true,enabled:true,interactive:false,presentationOnly:true,autoTargetEligible6:false,r730:s.kind,r412Wall:1,r412Face:1};
+  if(s.kind==='house'){q.visualLiftPx=s.lift;if(s.side==='-x')q.r303Flip=true;}else if(s.kind==='lamp')q.r115Prop='lantern';else if(s.kind==='censer')q.r115Prop='brazier';
+  r.props.push(q);try{if(typeof addImage==='function')addImage(s.path,'R730 village');}catch(_){}stats.placed++;}}
+const live=()=>typeof started!=='undefined'&&started&&typeof room!=='undefined'&&!!room&&!(typeof loading!=='undefined'&&loading);
+function install(){if(typeof draw!=='function')return false;const db=draw;draw=function(...a){try{if(live())apply(room);}catch(e){fail(e);}return db.apply(this,a);};
+ if(typeof drawProp==='function'){const dp=drawProp;drawProp=function(p,...a){try{if(p&&p.r730&&typeof readyImage==='function'&&!readyImage(p.path)&&typeof addImage==='function'&&!(typeof imageCache!=='undefined'&&imageCache.get(p.path)?.error))addImage(p.path,'R730 village');}catch(e){fail(e);}return dp.apply(this,[p,...a]);};}
+ return true;}
+let installed=install(),tries=0;if(!installed&&typeof setInterval==='function'){const t=setInterval(()=>{if(installed||(installed=install())||++tries>200)clearInterval(t);},100);}
+function set(o={}){if(typeof o.on==='boolean')prefs.on=o.on;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
+window.__STORYWORLD_VILLAGE_R730__=Object.freeze({revision:REV,plan,apply,set,ZONE,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError,room:typeof room!=='undefined'&&room&&Array.isArray(room.props)?room.props.filter(p=>p&&p.r730).map(p=>({id:p.id,kind:p.r730,x:p.x,y:p.y})):null})});
+})();
