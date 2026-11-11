@@ -500,6 +500,8 @@ jobs:
         run: node r96/qa/r521/r521-cpu-check.cjs
       - name: R561 gunner arms (기억사수 Q laser beam, W sniper, E rifle burst, R marked strike; engine originals held, save untouched) CPU check
         run: node r96/qa/r561/r561-cpu-check.cjs
+      - name: R561 gunner arms (기억사수 Q laser beam, W sniper, E rifle burst, R marked strike; engine originals held, save untouched) CPU check (R561c 연쇄 레이저)
+        run: node r96/qa/r561/r561c-chain-check.cjs
       - name: R522 hospital thin walls (the two free-standing maze baffles of ep1a08 moved to touch a thick wall, hospital only, routes stay connected) CPU check
         run: node r96/qa/r522/r522-cpu-check.cjs
       - name: R523 story rooms (clinic ep1a09 + sloth home ep1b02 furnished by room name along the real back walls, presentation only, angle-matched art only) CPU check
