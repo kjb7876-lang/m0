@@ -60,7 +60,7 @@ function build(T,r,A,ctx){const P=plan(ctx);if(!P.length)return null;const R=rib
  r.spatialResources?.add(geo);r.spatialResources?.add(mat);r.spatialResources?.add(mat.map);if(r.sightState24&&A?.attachSight24)A.attachSight24(mat,r.sightState24);
  const m=new T.Mesh(geo,mat);m.name='r482-trail';m.position.y=.006;m.layers.set(2);m.renderOrder=-19.5;m.userData.presentationOnly=true;m.userData.r482=true;m.userData.paths=P.length;m.userData.points=P.reduce((a,p)=>a+p.length,0);return m;}
 let seen=null;
-// R780 불면귀 밤: 길 띠는 R451 빛을 받지 않는 재질이라, 바탕빛을 남색 달빛(.64~.66)으로 낮춘 두 구역에서는 바닥보다 밝은 누런 띠로 떠 보였다(헤드리스 실측) → 그 구역만 R451 밤 바탕빛을 곱한다.
+// R810 불면귀 밤: 길 띠는 R451 빛을 받지 않는 재질이라, 바탕빛을 남색 달빛(.64~.66)으로 낮춘 두 구역에서는 바닥보다 밝은 누런 띠로 떠 보였다(헤드리스 실측) → 그 구역만 R451 밤 바탕빛을 곱한다.
 const nightTint=z=>{try{const N=window.__STORYWORLD_LOCAL_LIGHT_R451__?.night?.(z);return N&&Array.isArray(N.c)&&Number.isFinite(N.k)?N.c.map(v=>v*N.k):undefined;}catch(_){return undefined;}};
 function tick(){if(!prefs.on)return;try{
  const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three,st=r?.__r204,CAVE=window.__STORYWORLD_CAVE_R204__,T=r?.T,A=window.StoryPhase1;

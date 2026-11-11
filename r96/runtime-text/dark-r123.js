@@ -25,11 +25,11 @@
   mid:{filter:' sepia(.1) hue-rotate(-8deg) saturate(.9) contrast(1.08)',rust:.12,shade:.14,vig:.36,torch:.14,fog:.09,light:.20,embers:10},
   high:{filter:' sepia(.16) hue-rotate(-10deg) saturate(.82) contrast(1.12)',rust:.18,shade:.2,vig:.46,torch:.18,fog:.12,light:.26,embers:14}};
  const tone=()=>TONE[prefs.tone]||null;
- // R780 불면귀 밤: 두 구역은 녹·피 쪽 세피아·붉은 색조 돌림을 빼고 대비만 — 세피아가 남색 달빛을 누런 모래빛으로 덮었다(헤드리스 실측 파랑-빨강 -0.03~-0.04).
+ // R810 불면귀 밤: 두 구역은 녹·피 쪽 세피아·붉은 색조 돌림을 빼고 대비만 — 세피아가 남색 달빛을 누런 모래빛으로 덮었다(헤드리스 실측 파랑-빨강 -0.03~-0.04).
  //  세기 끔(off)이면 그대로 끔. 다른 지역은 그대로.
- const NIGHT_R780={last302:' saturate(.96) contrast(1.1)',last303:' saturate(.96) contrast(1.1)'};
- const nightR780=()=>{try{return typeof room!=='undefined'&&room&&(!room.layer||room.layer==='STORY')&&Object.prototype.hasOwnProperty.call(NIGHT_R780,room.id)?NIGHT_R780[room.id]:null;}catch(_){return null;}};
- function filter(){const T=tone();if(!T)return'';return nightR780()||T.filter;}
+ const NIGHT_R810={last302:' saturate(.96) contrast(1.1)',last303:' saturate(.96) contrast(1.1)'};
+ const nightR810=()=>{try{return typeof room!=='undefined'&&room&&(!room.layer||room.layer==='STORY')&&Object.prototype.hasOwnProperty.call(NIGHT_R810,room.id)?NIGHT_R810[room.id]:null;}catch(_){return null;}};
+ function filter(){const T=tone();if(!T)return'';return nightR810()||T.filter;}
 
  // ---- ② 화면 층 --------------------------------------------------------------------------------------
  let host=null,cv=null,key='',embers=[],lastT=0;

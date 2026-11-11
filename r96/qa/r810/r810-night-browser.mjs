@@ -1,5 +1,5 @@
-// R780 headless — 불면귀 구역(last302 잠들지 못하는 마을·last303 한약과 불면귀)을 홍보 영상에 쓸 밤 장면으로.
-//   STORYWORLD_URL=http://127.0.0.1:4396/ node r96/qa/r780/r780-night-browser.mjs   (SHOTS=폴더 를 주면 찍은 화면을 남긴다)
+// R810 headless — 불면귀 구역(last302 잠들지 못하는 마을·last303 한약과 불면귀)을 홍보 영상에 쓸 밤 장면으로.
+//   STORYWORLD_URL=http://127.0.0.1:4396/ node r96/qa/r810/r810-night-browser.mjs   (SHOTS=폴더 를 주면 찍은 화면을 남긴다)
 // 화면 실측(길잡이 길 위 세 자리, 플레이 영역만): 남색 달빛(파랑-빨강 평균 > 0), 등불 호박빛 점(따뜻하고 진한 화소 비율),
 // 데칼에 거미 모양 균열이 없는지, 다른 지역(악마화 나무의 정원)의 색 보정은 그대로인지(회귀).
 // 헤드리스 소프트웨어 렌더링 — GPU·실기기 모바일·자연 플레이는 미검증.
@@ -25,12 +25,12 @@ for(const Z of ['last302','last303']){await go(Z);
  check(Z+': 달빛 바탕빛이 남색(파랑 > 빨강×1.3, 세기 ≤ .7)',!!st.amb&&st.amb.c[2]>st.amb.c[0]*1.3&&st.amb.k<=.7,st.amb);
  check(Z+': 화면 색 보정에 세피아·붉은 색조 돌림 없음',!/sepia|hue-rotate\(-/.test(st.filter),st.filter);
  check(Z+': 바닥 데칼에 거미 모양 균열(0번) 없음',Array.isArray(st.decals)&&st.decals.length>0&&!st.decals.includes(0),st.decals);
- const M=[];for(let i=0;i<st.pts.length;i++){const q=st.pts[i];await p.evaluate(q=>{window.__r780pin&&clearInterval(window.__r780pin);window.__r780pin=setInterval(()=>{player.x=q.x;player.y=q.y;cam={x:q.x,y:q.y};},30);},q);
+ const M=[];for(let i=0;i<st.pts.length;i++){const q=st.pts[i];await p.evaluate(q=>{window.__r810pin&&clearInterval(window.__r810pin);window.__r810pin=setInterval(()=>{player.x=q.x;player.y=q.y;cam={x:q.x,y:q.y};},30);},q);
   await p.waitForTimeout(9000);await skip();
   // 맵(바닥·지형·조형물) 색만 잰다: 몹 무리(갈색 옷의 잠식된 주민 수십 명)가 화면을 덮는 자리가 있어 잴 때만 잠깐 몹을 비우고 되돌린다
-  await p.evaluate(()=>{if(typeof enemies!=='undefined'&&Array.isArray(enemies))window.__r780en=enemies.splice(0);});await p.waitForTimeout(1500);M.push(await measure());
-  await p.evaluate(()=>{if(window.__r780en&&typeof enemies!=='undefined'){enemies.push(...window.__r780en);window.__r780en=null;}});if(SHOTS){fs.mkdirSync(SHOTS,{recursive:true});await p.screenshot({path:`${SHOTS}/${Z}-${i}.jpg`,type:'jpeg',quality:84});}}
- await p.evaluate(()=>clearInterval(window.__r780pin));res[Z]=M;
+  await p.evaluate(()=>{if(typeof enemies!=='undefined'&&Array.isArray(enemies))window.__r810en=enemies.splice(0);});await p.waitForTimeout(1500);M.push(await measure());
+  await p.evaluate(()=>{if(window.__r810en&&typeof enemies!=='undefined'){enemies.push(...window.__r810en);window.__r810en=null;}});if(SHOTS){fs.mkdirSync(SHOTS,{recursive:true});await p.screenshot({path:`${SHOTS}/${Z}-${i}.jpg`,type:'jpeg',quality:84});}}
+ await p.evaluate(()=>clearInterval(window.__r810pin));res[Z]=M;
  const avg=k=>M.reduce((a,m)=>a+m[k],0)/M.length;
  check(Z+': 화면이 남색 달빛 쪽(파랑-빨강 평균 > 0)',avg('bMinusR')>0,M.map(m=>m.bMinusR));
  check(Z+': 등불 호박빛이 화면에 보임(따뜻한 진한 화소 평균 ≥ 1%)',avg('warm')>=.01,M.map(m=>m.warm));

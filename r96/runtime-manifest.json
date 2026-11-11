@@ -34803,44 +34803,54 @@
       "sha256": "81bfd983b0bc35f7d225491f4678ae70cc07d8f6d6fbea9749dc6526cbafc059"
     },
     {
-      "path": "assets/r780/boat.webp",
+      "path": "assets/r810/boat.webp",
       "bytes": 13142,
       "sha256": "44cd122f94e22348871753de73d982dba57736f764f006e807eab6f182ff19ee"
     },
     {
-      "path": "assets/r780/fish-rack.webp",
+      "path": "assets/r810/fish-rack.webp",
       "bytes": 45422,
       "sha256": "1c348af69d7e65769ed3b79c9e647d4dca027ef67fc519ff9ebe8eb4296dd5c6"
     },
     {
-      "path": "assets/r780/index.json",
-      "bytes": 4224,
-      "sha256": "b629a4e5537e96e70e8e633dff993c0f9a58bd8b3ef2591cbf00069685f4f5be"
+      "path": "assets/r810/index.json",
+      "bytes": 5461,
+      "sha256": "1f0c00611adb2e6649e4511078f2acc181bc777f7fc23a95288f10e25b394b7e"
     },
     {
-      "path": "assets/r780/jangdok.webp",
+      "path": "assets/r810/jangdok.webp",
       "bytes": 14040,
       "sha256": "9c1387037ef057c66ecd5f059ab166c7f7caca227c73708158d53ef0721af7ad"
     },
     {
-      "path": "assets/r780/lantern-post.webp",
+      "path": "assets/r810/lantern-post.webp",
       "bytes": 12462,
       "sha256": "784ad9a6ce2f8d4e1f98a9fb8f6d07cffbe1ffb3b7226a1b51db023329afc358"
     },
     {
-      "path": "assets/r780/shoes-stone.webp",
+      "path": "assets/r810/shoes-stone.webp",
       "bytes": 16830,
       "sha256": "44a74c1b0be595aec79b693603b85cf41b12cbb268ed0bcd038c7b12ccb45716"
     },
     {
-      "path": "assets/r780/talisman-rope-l.webp",
+      "path": "assets/r810/talisman-rope-l.webp",
       "bytes": 21538,
       "sha256": "7c77262b7b168bfde269161134252720e4906df698284655c778f4732c18e555"
     },
     {
-      "path": "assets/r780/talisman-rope-r.webp",
+      "path": "assets/r810/talisman-rope-r.webp",
       "bytes": 21860,
       "sha256": "abcc888138c6808f2644f6093d8be90f07da839db8ef8392b93bd39cc4e2bbbd"
+    },
+    {
+      "path": "assets/r810/tiled-house-b-i.webp",
+      "bytes": 57134,
+      "sha256": "3cb6e7ed6b7f120fa3dc85b26eb2e07f2a2dbaa4c7771a52c279d9a3b129f7fc"
+    },
+    {
+      "path": "assets/r810/tiled-house-b-l.webp",
+      "bytes": 59474,
+      "sha256": "025329db7e0ab4aa1209ab0489398b6fe8ce9eab8faef033216f8edb08600411"
     },
     {
       "path": "assets/r91/death/death-crystal-core.png",
@@ -42900,7 +42910,7 @@
     {
       "path": "cave-r204.js",
       "bytes": 130386,
-      "sha256": "b7a4a86dad467102174445b8fd08eecc2986d72efc309a66108c8218d2a73282"
+      "sha256": "13e76723b770cdca40691d5ad1e823bc20bcd2bed45dac063cae68aa9bd2fce8"
     },
     {
       "path": "chunks/ep1a08-0-0.json",
@@ -43450,7 +43460,7 @@
     {
       "path": "dark-r123.js",
       "bytes": 15899,
-      "sha256": "4fa61325b814f0eac342e9a0aefad21d86d8e3214a292748b9395c3665f9fc11"
+      "sha256": "6fad441ffb09b8e48b37121b1cf4c6fb695170ae32fc71c23fff33c05e2ba4ac"
     },
     {
       "path": "data/actor-canvas-map-v31224.js",
@@ -43945,7 +43955,7 @@
     {
       "path": "local-light-r451.js",
       "bytes": 50367,
-      "sha256": "5fb3f43a4aacf9ad2b4b506f641ecfc0fc58d450c6f1d6129ae0c75245732e8d"
+      "sha256": "5c65a8bdb2b26e8011af9443ae84d8122bd8f92bb4d6d2c5a3b144a7ae4bd6be"
     },
     {
       "path": "mammon-bossroom.js",
@@ -44359,8 +44369,8 @@
     },
     {
       "path": "rooms-r523.js",
-      "bytes": 69293,
-      "sha256": "f1fb8aa4e5a05c848f0377498b3d734bec68ba18fc599f452b81456d008e8852"
+      "bytes": 69705,
+      "sha256": "44431d9eb71a52d26442f05d584b7da6e4cedbdc75f3a9110bc055b8e0140882"
     },
     {
       "path": "root-gate-video-r372.js",
@@ -44655,7 +44665,7 @@
     {
       "path": "trail-r482.js",
       "bytes": 10684,
-      "sha256": "3567e6d648e030114c0000bfe668fe3fb60cf4c18f8ba14a73f49f36b5af24c0"
+      "sha256": "cfc62d270a81863a937b48c8e697b0ab6f63269ada2d469f64ae7f5320ee3a26"
     },
     {
       "path": "ui-upgrades-r222.js",
@@ -44785,7 +44795,7 @@
     {
       "path": "weather-r450.js",
       "bytes": 33570,
-      "sha256": "a7f698b27f917c14345120e630fe3066017ca789f53f4f881af18cc4c157d47a"
+      "sha256": "897e8b6308f58e7562013fc6d37dfa74004ccdd9aca2864af85e3f71f41dfb6e"
     },
     {
       "path": "webgl-fallback-r221.js",
@@ -44858,8 +44868,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8971,
-  "totalBytes": 1235554161,
+  "fileCount": 8973,
+  "totalBytes": 1235672418,
   "webHTMLSha256": "d8bef146aec9863ec63a5a3150cab3c47344631e13664b5969cd73d490e68348",
   "largest": [
     {

@@ -1,9 +1,9 @@
 {
- "round": "R780",
+ "round": "R810",
  "note": "불면귀 그림 스레드가 Dots CX-0071BV(마을 소품) 대기 중 ElevenLabs(seedream-5.5)로 만든 대체본, 7분야 심사 7.86~8.07 통과. 원본(512 캔버스 PNG)은 프로젝트 파일 bulmyeongwi-art/cx0071bv-el-cleaned/ 에 그대로 두고, 여기는 테두리 상자로 자르고 긴 변 320px 로 줄인 WebP. Dots 정식본이 오면 바꿀 수 있다(최종 아트 여부는 사용자 판단).",
  "assets": [
   {
-   "path": "assets/r780/lantern-post.webp",
+   "path": "assets/r810/lantern-post.webp",
    "source": "cx0071bv-el-cleaned/CX-0071BV_01_lantern_post_elb_c1.png",
    "source_sha256": "864a76de12eacb58d5ce9fbc214acc8380ca5f0e4ad11064d75f5cbe6ab1adb2",
    "crop_bbox": [
@@ -21,7 +21,7 @@
    "final": false
   },
   {
-   "path": "assets/r780/talisman-rope-r.webp",
+   "path": "assets/r810/talisman-rope-r.webp",
    "source": "cx0071bv-el-cleaned/CX-0071BV_03_talisman_rope_elb_iso_r.png",
    "source_sha256": "c4a42dcb40c69c06dfef6321052bf7e0605bdda7ef2252cbdc55faac5067e57a",
    "crop_bbox": [
@@ -39,7 +39,7 @@
    "final": false
   },
   {
-   "path": "assets/r780/talisman-rope-l.webp",
+   "path": "assets/r810/talisman-rope-l.webp",
    "source": "cx0071bv-el-cleaned/CX-0071BV_03_talisman_rope_elb_iso_l.png",
    "source_sha256": "75cc869d456ea47ca8c8b96e5843d8924d5cd4b9de5b59668c09696b088b2e11",
    "crop_bbox": [
@@ -57,7 +57,7 @@
    "final": false
   },
   {
-   "path": "assets/r780/shoes-stone.webp",
+   "path": "assets/r810/shoes-stone.webp",
    "source": "cx0071bv-el-cleaned/CX-0071BV_05_shoes_stone_ela_c1.png",
    "source_sha256": "43e9865f4df750fa334c7cee34addbc1675e630ce9be75858a090655d358874b",
    "crop_bbox": [
@@ -75,7 +75,7 @@
    "final": false
   },
   {
-   "path": "assets/r780/jangdok.webp",
+   "path": "assets/r810/jangdok.webp",
    "source": "cx0071bv-el-cleaned/CX-0071BV_06_jangdokdae_elb_c1.png",
    "source_sha256": "3c864feebe4d5671370b02854e95a5a4163936e9b349d1556b0b4f0794a5bb94",
    "crop_bbox": [
@@ -93,7 +93,7 @@
    "final": false
   },
   {
-   "path": "assets/r780/fish-rack.webp",
+   "path": "assets/r810/fish-rack.webp",
    "source": "cx0071bv-el-cleaned/CX-0071BV_07_fish_rack_elb_c1.png",
    "source_sha256": "9dee43c156dac37049bf78f6ebb229d4df4dd160135b135e971689a7998e933e",
    "crop_bbox": [
@@ -111,7 +111,7 @@
    "final": false
   },
   {
-   "path": "assets/r780/boat.webp",
+   "path": "assets/r810/boat.webp",
    "source": "cx0071bv-el-cleaned/CX-0071BV_08_beached_boat_elb_c1.png",
    "source_sha256": "a34a5c882396eff94c43e1fbc1f5b31f575b35aac0c265418f2b4629c5bd7d9e",
    "crop_bbox": [
@@ -125,6 +125,42 @@
    "size": "320x170",
    "use": "뭍에 올린 배(last302)",
    "made_by": "Pillow crop+LANCZOS, WebP q88",
+   "applied": true,
+   "final": false
+  },
+  {
+   "path": "assets/r810/tiled-house-b-l.webp",
+   "source": "cx0071bv-dots-cleaned/CX-0071BV_16_tiled-house-b_A_r2_c1.png",
+   "source_sha256": "bdb232431f5dd752f173c4a4b52988afea0706a8912ed6f1ac22b6221cfc1b2c",
+   "crop_bbox": [
+    80,
+    208,
+    691,
+    617
+   ],
+   "sha256": "025329db7e0ab4aa1209ab0489398b6fe8ce9eab8faef033216f8edb08600411",
+   "bytes": 59474,
+   "size": "611x409",
+   "use": "마을 기와집 L자(안마당 모서리) — 집 종류에 더함",
+   "made_by": "Dots CX-0071BV 16 (그림 스레드 손질본 c1) → Pillow 테두리 자르기, WebP q84",
+   "applied": true,
+   "final": false
+  },
+  {
+   "path": "assets/r810/tiled-house-b-i.webp",
+   "source": "cx0071bv-dots-cleaned/CX-0071BV_16_tiled-house-b_A_r1_c1.png",
+   "source_sha256": "c116ebf3a5a17d019641a70c92b0007017c8fc65d9ec3660939f156bcc069f1d",
+   "crop_bbox": [
+    77,
+    190,
+    695,
+    615
+   ],
+   "sha256": "3cb6e7ed6b7f120fa3dc85b26eb2e07f2a2dbaa4c7771a52c279d9a3b129f7fc",
+   "bytes": 57134,
+   "size": "618x425",
+   "use": "마을 일자 기와집 — 집 종류에 더함",
+   "made_by": "Dots CX-0071BV 16 (그림 스레드 손질본 c1) → Pillow 테두리 자르기, WebP q80",
    "applied": true,
    "final": false
   }
