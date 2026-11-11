@@ -8197,7 +8197,20 @@
     "assets/r810/talisman-post.webp",
     "assets/r810/thatched-hut-a.webp",
     "assets/r810/thatched-hut-b.webp",
-    "assets/r810/lantern-post-off.webp"
+    "assets/r810/lantern-post-off.webp",
+    "npc-r790.js",
+    "assets/r790/npc/chief-bust.webp",
+    "assets/r790/npc/medic-bust.webp",
+    "assets/r790/npc/medic-idle6.webp",
+    "assets/r790/npc/physician-bust.webp",
+    "assets/r790/npc/physician-idle6.webp",
+    "assets/r790/npc/seoyun-bust.webp",
+    "assets/r790/npc/seoyun-idle6.webp",
+    "assets/r790/npc/youth-bust-d.webp",
+    "assets/r790/npc/youth-bust.webp",
+    "assets/r790/npc/youth-idle6.webp",
+    "assets/r790/npc/youth-offer6.webp",
+    "assets/r790/npc/youth.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9272,5 +9285,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "da65a8c7352ceb7e92af73f2fe4d0713d333bab5895d9e2cbb966754ada370ee"
+  "runtimeManifestSHA256": "45d83be983e988da4b94330e97e0f80cace9e27b008a1c4bbbe9b0ec6a05679d"
 }
