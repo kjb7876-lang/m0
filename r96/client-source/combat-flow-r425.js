@@ -73,6 +73,7 @@ function bboxOf(c){let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9,n=0;const add=p=>{if(Array.
 function isBar(c,e,fx,fy,SX,SY){if(c.kind!=='fill'||c.owner?.kind!=='enemy'||!Array.isArray(c.paths)||c.paths.length!==1||typeof c.style?.fillStyle!=='string')return false;const P=c.paths[0]?.points;if(!Array.isArray(P)||P.length<4||P.length>5)return false;
  const b=bboxOf(c);if(!b)return false;const S=Math.max(1,SY),X=Math.max(1,SX),lift=Math.max(0,+e.visualLiftPx||0);return b[3]-b[1]<=6.5*S&&b[0]>=fx-75*X&&b[2]<=fx+75*X&&b[1]>=fy-(lift+12)*S&&b[1]<=fy+26*S;}
 function unFont(c,X,Y){if(Array.isArray(c.matrix)&&(Math.abs(X-1)>.001||Math.abs(Y-1)>.001)){const m=c.matrix.slice();m[0]/=X;m[1]/=X;m[2]/=Y;m[3]/=Y;c.matrix=m;}}
+function feetStyle(c){const fs=c.style?.fillStyle,m=fs==='#302926'?'#241f1c':fs==='#795a50'?'#b4503f':fs==='rgba(10,10,9,.88)'?'rgba(8,7,7,.94)':null;if(!m)return;const bb=bboxOf(c);if(!bb)return;const mid=(bb[1]+bb[3])/2;mapCmd(c,p=>[p[0],p[1]>mid?p[1]+2:p[1]]);c.style={...c.style,fillStyle:m};stats.feetBars=(stats.feetBars||0)+1;}
 function post(e,C,st,fx,fy,SXe,SYe,SXs,SYs,teleOff,headBar,s){
  const scaledE=Math.abs(SXe-1)>.001||Math.abs(SYe-1)>.001,scaledS=Math.abs(SXs-1)>.001||Math.abs(SYs-1)>.001;if(!scaledE&&!scaledS&&!teleOff&&!headBar)return;
  const bars=[];let w=st;
@@ -84,6 +85,8 @@ function post(e,C,st,fx,fy,SXe,SYe,SXs,SYs,teleOff,headBar,s){
   if(keep)C[w++]=c;}
  C.length=w;
  if(scaledE)for(const c of bars)mapCmd(c,p=>[fx+(p[0]-fx)/SXe,fy+(p[1]-fy)/SYe]);
+ /* R786(사용자 2026-11-11 "그림 안 가리면서 잘 보이는 체력바"): R90 발치 막대(테두리 4px·바탕·채움 2px — 어두운 한 줄)를 어두운 테두리 6px + 바탕·채움 4px 로, 위쪽은 그대로 두고 아래로만 늘리며 채움을 밝은 붉은빛으로. 머리 위 줄({"feetBars":false})에는 쓰지 않는다. */
+ if(prefs.feetBars&&!headBar)for(const c of bars)feetStyle(c);
  if(headBar&&bars.length){const b=bodyCmd(C,st);if(!b)return;const inf=sheetInfo(b.image,b.sourceRect),P=b.points,top=Math.min(P[0][1],P[1][1]),bot=Math.max(P[2][1],P[3][1]),head=top+(bot-top)*(inf?.top??.06);
   let y0=1e9,y1=-1e9;for(const c of bars){const bb=bboxOf(c);if(bb){y0=Math.min(y0,bb[1]);y1=Math.max(y1,bb[3]);}}if(!(y1>=y0))return;
   const want=Math.max(56,head-8-(y1-y0)),now=T();if(s.barOff==null||now-(s.barAt??-9)>1)s.barOff=y0-fy;s.barOff+=(want-fy-s.barOff)*Math.min(1,Math.max(0,now-(s.barAt??now))*9||.25);s.barAt=now;

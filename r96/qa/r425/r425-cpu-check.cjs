@@ -92,6 +92,22 @@ const near=(a,b,t=.6)=>Math.abs(a-b)<=t;
  const b={id:'b1f',name:'시험 보스',boss:true,x:0,y:0,hp:100,maxHp:100,k:2.1};let cs;for(let i=0;i<4;i++)cs=frame(env,b);const q=env.project(0,0);
  b.r205Enraged={at:1};b.hp=25;b.k=4.2;for(let i=0;i<12;i++)cs=frame(env,b);const bars=cs.filter(c=>c.kind==='fill').map(bbox);
  ok('R786 default: enraged boss HP bar stays under the feet (not over the head, not mid-body)',bars.length===2&&bars.every(x=>x[1]>=q.y),{q:q.y,bars});}
+/* R786: R90 발치 막대(테두리 4px·바탕 2px·채움 2px, 어두운 한 줄)를 대비 있게 — 테두리 6px·바탕 4px·채움 4px, 위쪽 y 는 그대로(아래로만 늘림) */
+{const lum=c=>{const t=String(c).match(/#(..)(..)(..)/);return t?(parseInt(t[1],16)*.3+parseInt(t[2],16)*.59+parseInt(t[3],16)*.11):255;};
+ const pre=env=>{const base=env.drawEnemy;env.drawEnemy=function(e){base.call(this,e);const R=env.ctx,q=env.project(e.x,e.y),W=55,y=q.y+6,r=e.hp/e.maxHp;
+  /* base 가 이미 낸 얇은 바탕·채움 2개를 지우고 R90 실제 모양 3개(테두리·바탕·채움 비율)로 다시 낸다 */
+  for(let i=R.commands.length-1;i>=0;i--){const c=R.commands[i];if(c.kind==='fill'&&['#302926','#795a50'].includes(c.style.fillStyle))R.commands.splice(i,1);}
+  const rect=(col,x0,y0,w,h)=>R.commands.push({kind:'fill',owner:{...R.owner},style:{fillStyle:col},paths:[{points:[R.pt(x0,y0),R.pt(x0+w,y0),R.pt(x0+w,y0+h),R.pt(x0,y0+h)]}]});
+  R.scope({id:'enemy:'+e.id,kind:'enemy'},()=>{rect('rgba(10,10,9,.88)',q.x-W/2-1.5,y-1,W+3,4);rect('#302926',q.x-W/2,y,W,2);rect('#795a50',q.x-W/2,y,W*r,2);});};};
+ const env=makeEnv({},null,pre),m={id:'rs1',name:'시험 몹',x:0,y:-1,hp:5,maxHp:10,k:1.4};let cs;for(let i=0;i<4;i++)cs=frame(env,m);const q=env.project(m.x,m.y),B=cs.filter(c=>c.kind==='fill'),bb=B.map(bbox),fs=B.map(c=>c.style.fillStyle);
+ ok('R786 restyle: three bar rects kept (frame, track, fill)',B.length===3,fs);
+ ok('R786 restyle: heights 6 / 4 / 4 (was 4 / 2 / 2)',bb.length===3&&near(bb[0][3]-bb[0][1],6,.01)&&near(bb[1][3]-bb[1][1],4,.01)&&near(bb[2][3]-bb[2][1],4,.01),bb);
+ ok('R786 restyle: tops unchanged (still under the feet, grows downward only)',bb.every((x,i)=>near(x[1],q.y+(i?6:5),.01)),bb);
+ ok('R786 restyle: frame encloses track and fill by >=1px top and bottom',bb[0][1]<=bb[1][1]-1&&bb[0][3]>=bb[1][3]+1,bb);
+ ok('R786 restyle: dark track, fill >=60 luma brighter',lum(fs[1])<60&&lum(fs[2])-lum(fs[1])>=60,fs);
+ ok('R786 restyle: half HP fills half the track, widths untouched',near((bb[2][2]-bb[2][0])*2,bb[1][2]-bb[1][0],.01)&&near(bb[1][2]-bb[1][0],55,.01),bb);
+ const off=makeEnv({'storyworld.r425.flow':'{"feetBars":false}'},null,pre);let co;const m2={id:'rs2',name:'시험 몹',x:0,y:-1,hp:5,maxHp:10,k:1.4};for(let i=0;i<4;i++)co=frame(off,m2);
+ ok('feetBars:false: no restyle on the overhead bars (old look)',co.filter(c=>c.kind==='fill').every(c=>['rgba(10,10,9,.88)','#302926','#795a50'].includes(c.style.fillStyle)));}
 // ---- ④ 시선 3부류: 엔진 걸음 흉내(벽 없음)로 걸음 방향을 본다 ----
 async function gazeChecks(){
  // 가짜 R53(R230 이 이미 감싼 꼴): 근접 준비 때 R230 처럼 2.4초 간격 안이면 건너뛰고, 아니면 가로 옆자리 블링크를 셈
