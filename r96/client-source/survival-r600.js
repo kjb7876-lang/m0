@@ -86,6 +86,8 @@ function sentences(text){const P=G(()=>window.__STORYWORLD_CINEMA_MODE_R370__.pu
 
 // ── 상태 ──
 let tainted=false;/* 생존 판이 엔진 진행을 새 게임으로 바꿔 놓았으니, 스토리를 다시 불러오거나 새로 시작하기 전까지는 저장하지 않는다 */
+/* R770: 생존 전용 사건(조각·레벨 업·코어 피격·쓰러짐)의 효과음. 엔진 sound() 는 종류별 간격·동시 소리 상한을 이미 지키므로 호출만 하고, 코어 피격만 자체 간격을 둔다. */
+const snd=(k,al)=>{try{if(typeof sound==='function')sound(k,!!al);}catch(_){}};let coreSndAt=-9,gemSndAt=-9;
 let inHitR600=0,S=null,pending=false,stageRoom=null,entering=0,hudAt=0,inKill=false,beams=[],gems=[],tails=[],choosing=false,choiceQ=0,pickRem=0,pickedDiff='normal';
 const fresh=(hero,diff)=>({active:true,hero,diff:diffOf(diff)===DIFFS[diff]?diff:'normal',playT:0,choiceIdx:0,i:0,loop:0,ids:stageIds(G(()=>regions,[])),phase:'pre',narrating:false,narrEndAt:NaN,stageAt:0,bossUp:false,clearAt:NaN,
  kills:0,stageKills:0,serial:0,xp:0,lv:1,core:{lv:{},hp:CORE0.max,cd:1,hitAt:-9},taken:{},over:false,best:0,startWall:Date.now()});
@@ -207,7 +209,7 @@ function attackTokens(){let busy=0;const ready=[];for(const e of room.enemies){i
 function coreTick(dt){const st=CS(),c=room.survivalR600.centre,core=S.core,t=G(()=>time,0);core.hp=Math.min(st.max,core.hp+st.regen*dt);
  // 코어를 노리는 적: 영웅이 가까이(4칸) 없으면 엔진 걸음 대신 코어로 걷는다. 붙으면 1초마다 코어를 깎는다.
  for(const e of room.enemies){if(!living(e)||!e.r600Core||e.r600Boss)continue;const dp=Math.hypot(e.x-player.x,e.y-player.y),dc=Math.hypot(e.x-c.x,e.y-c.y);
-  if(dc<1.35){if(t-(e.r600CoreAt||-9)>=1){e.r600CoreAt=t;const d=Math.max(1,(e.damage||8)*1.1);core.hp-=d;core.hitAt=t;stats.coreHits++;}}
+  if(dc<1.35){if(t-(e.r600CoreAt||-9)>=1){e.r600CoreAt=t;const d=Math.max(1,(e.damage||8)*1.1);core.hp-=d;core.hitAt=t;stats.coreHits++;if(t-coreSndAt>=1.5){coreSndAt=t;snd('parry');}}}
   else if(dp>4&&e.r600Snap){const sp=1.25*(e.speed||1)*dt,k=sp/Math.max(.001,dc);e.x=e.r600Snap.x+(c.x-e.r600Snap.x)*k;e.y=e.r600Snap.y+(c.y-e.r600Snap.y)*k;e.moving=true;e.direction=typeof facing==='function'?G(()=>facing(c.x-e.x,c.y-e.y),e.direction):e.direction;}
   e.r600Snap=null;}
  // 정화 공격
@@ -221,11 +223,11 @@ function snapCoreWalkers(){if(!here())return;const c=room.survivalR600.centre;fo
 // ── 경험치 조각 ──
 function gemTick(dt,vacuum){const p=player;let got=0;for(const g of gems){const d=Math.hypot(g.x-p.x,g.y-p.y);if(vacuum||d<GEM_PULL||g.pull){g.pull=true;const sp=(vacuum?14:9)*dt,k=Math.min(1,sp/Math.max(.001,d));g.x+=(p.x-g.x)*k;g.y+=(p.y-g.y)*k;}
   if(Math.hypot(g.x-p.x,g.y-p.y)<GEM_TAKE){g.taken=true;got+=g.v;tails.push({x:g.x,y:g.y,at:G(()=>time,0)});if(tails.length>40)tails.shift();}}
- if(got){gems=gems.filter(g=>!g.taken);credit(got);}}
+ if(got){gems=gems.filter(g=>!g.taken);{const t=G(()=>time,0);if(t-gemSndAt>=.3||t<gemSndAt){gemSndAt=t;snd('pickup');}}credit(got);}}
 let rawGainXP=null;
 // 조각을 먹으면 생존 경험치. 레벨이 오르면 3택을 하나씩 열고, 영웅 레벨(엔진 공격력·최대 체력 비례)도 같이 올린다. 패시브 포인트는 주지 않는다.
 function credit(v){stats.gems++;const r=levelUps(S.xp,S.lv,v*diffOf(S.diff).xp);S.xp=r.xp;S.lv=r.lv;if(r.ups>0){choiceQ+=r.ups;stats.levels+=r.ups;
-  try{player.level=Math.min(99,Math.max(player.level,S.lv));player.hp=Math.min(maxHP(),player.hp+maxHP()*.08*r.ups);fx?.('sigil',player.x,player.y,{asset:VFX.heal,size:2,life:.8});}catch(e){fail(e);}}}
+  try{player.level=Math.min(99,Math.max(player.level,S.lv));player.hp=Math.min(maxHP(),player.hp+maxHP()*.08*r.ups);fx?.('sigil',player.x,player.y,{asset:VFX.heal,size:2,life:.8});}catch(e){fail(e);}snd('upgrade');}}
 
 // ── 3택 강화 ──
 function pool(){const out=[];try{for(const u of UPGRADES){if(u.dream)continue;const k=typeof upgradeKey==='function'?upgradeKey(u):u.id;out.push({id:'u:'+u.id,key:k,name:u.name,text:u.text,max:u.max,level:+(player.upgrades?.[k]||0),kind:'hero'});}}catch(e){fail(e);}
@@ -248,7 +250,7 @@ function renderChoice(total){
  setTimeout(()=>{try{document.getElementById('r600Pick0')?.focus?.();}catch(_){}},30);}
 
 // ── 끝 ──
-function over(why){if(!S||S.over)return;S.over=true;S.overWhy=why;S.overAt=G(()=>time,0);S.overWall=performance.now();S.overSecs=Math.round((Date.now()-S.startWall)/1000);narrStop();try{clearControls?.();}catch(_){}
+function over(why){if(!S||S.over)return;snd('r546Fall',true);/* R546 쓰러짐 소리는 엔진 showDeath 안에서만 나는데 생존이 showDeath 를 가로채므로 여기서 부른다 */S.over=true;S.overWhy=why;S.overAt=G(()=>time,0);S.overWall=performance.now();S.overSecs=Math.round((Date.now()-S.startWall)/1000);narrStop();try{clearControls?.();}catch(_){}
  /* 코어 파괴는 Dots 파괴 시트(12칸 ≈ 1초)를 다 보여 준 뒤 결과 창 — 창이 열리면 화면이 멈추고 어두워져 파괴 장면이 안 보인다 */
  if(why==='core')S.panelAfter=S.overWall+DIE_MS;/* 창은 tick 감싸기가 이 시각 뒤에 연다 */else resultPanel();}
 function resultPanel(){if(!S)return;const why=S.overWhy;
