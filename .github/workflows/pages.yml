@@ -543,6 +543,8 @@ jobs:
         run: node r96/qa/r362/r362-cpu-check.cjs
       - name: R255 all narrative as notes/fragments; boss entry cinematic CPU check
         run: node r96/qa/r255/r255-cpu-check.cjs
+      - name: R682 boss entry name card redesign (no zigzag red line) CPU check
+        run: node r96/qa/r682/boss-title-cpu-check.cjs
       - name: R256 widen passages on all organic maps CPU check
         run: node r96/qa/r256/r256-cpu-check.cjs
       - name: R258 wider pre-boss gathering room CPU check
