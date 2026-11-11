@@ -11,7 +11,7 @@
 //  · 시체는 바닥 층(제단 그리기 바로 뒤, 몸·영웅보다 아래)에 그린다. 한 방 최대 24구(저사양 10), 45초(저사양 15초) 뒤 4초에 걸쳐 사라진다. 지역을 옮기면 비운다.
 //  · 3D 그리기에서는 사체마다 바닥 자리를 주인으로 달아(줄 열쇠 'r462:corpse:…') R451 국지 조명이 바닥과 같은 빛을 곱한다(R462-2).
 //  · 판정·보상·처치 수·저장·AI 는 그대로(그림만). 보스·중간보스는 원래 연출 그대로.
-//  · 끄기: localStorage['storyworld.r462.mobDeath']='{"on":false}' 뒤 새로고침. 시체만 끄기 {"corpses":false}.
+//  · 끄기: localStorage['storyworld.r462.mobDeath']='{"on":false}' 뒤 새로고침. 시체만 끄기 {"corpses":false}. 사체 굽기만 끄기(R690) {"bake":false}.
 //  R532(사용자 2026-11-10 02:52Z "몹들이 죽을때 종이처럼 눕혀서 죽는게 별로야 … 죽을때 찢기거나 터져서 죽는 느낌으로 그리고 죽을때 나오는 실루엣이미지도 본체이미지랑 일관성있도록"):
 //  · 몸 그림 한 장을 통째로 기울이고 납작하게 눌러 '눕히던' 것(종이처럼 보임)을 없앴다. 대신 그 몹 자기 그림을 들쭉날쭉한 조각(가로 3~4 × 세로 3, 저사양 2×3)으로
 //    찢어(clip 다각형) 피는 터져 흩어지고(포물선 → 바닥에 떨어져 미끄러지다 멈춤), 불은 붉게 달아오르며 금(빛나는 균열)이 간 뒤 그 자리에 부서져 내려앉는다.
@@ -24,16 +24,29 @@
 //    죽는 동안 밝기 값이 매 프레임 바뀌어 광장에서 게임 1초에 55장(3,900만 화소)을 새로 만들었다(헤드리스 프레임 426ms ↔ 연출 끔 154ms).
 //  · 3D 기록기(ctx.scope)에서는 필터를 ctx.filter 로 건다(기록기가 셰이더 행렬로 처리, 캔버스·업로드 없음). 2D 캔버스용으로 죽는 동안의
 //    색 변화는 0.12초 단위로 끊어(몹 하나당 필터 열쇠 10개 안) 같은 열쇠를 다시 쓴다. 검사 qa/r660/death-lag-cpu-check.cjs.
+//  R690(사용자 2026-11-11 00:59Z "몹들죽을때 이미지여러개 겹치고왔다갔다혼란스럽게하면서 렉", 01:00Z "무한생존모드에서도 체크") — 모양은 그대로:
+//  · 겹침: 같은 죽음을 R91(다른 몹 '가족' 공용 잔해 그림·공용 파편 시트)·R165(연기)가 따로 또 그렸다 → owns(e) 를 내보내
+//    R462 가 맡는 몹이면 그 둘은 건너뛴다(보스·R462 가 못 맡은 몹은 그대로).
+//  · 렉: 사체 조각을 몸 그림 한 장에서 clip 으로 잘라(사체 하나 9~12번) 매 프레임 그려 3D 기록기가 삼각형을 다시 자르고 지오메트리를 새로 만들었다
+//    (무한 생존 8마리씩 동시 처치: 헤드리스 프레임 중앙값 259ms ↔ 사체 끔 181ms). → 조각이 멈춘 사체 모습을 사체마다 캔버스 한 장에 한 번 굽고
+//    (정적 그림 표시 __storyworldStaticSource — 매 프레임 복사·업로드 없음) 이후엔 clip 없는 그림 한 장으로 그린다. 검사 qa/r690/r690-cpu-check.cjs.
+//  R691(Codex #420 P2, 사용자 03:46Z "동시에 많은 사망 효과가 남을 때 렉"): 조각 모음이 공유 캐시(48칸)에만 있어 죽는 중인 몹이 48마리를 넘으면
+//   매 프레임 서로 밀어내 다시 만들었다 → 그 죽음(fx.r462)이 직접 들고, 사체는 같은 것을 써서 구운 뒤 놓는다. 검사 qa/r691/r691-cpu-check.cjs.
 (()=>{'use strict';
 if(window.__STORYWORLD_MOB_DEATH_R462__)return;
-const REV='R660-mobdeath-4',KEY='storyworld.r462.mobDeath';
+const REV='R690-R691-mobdeath-6',KEY='storyworld.r462.mobDeath';
 let prefs={on:true,corpses:true,style:'gore'};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={looks:0,fire:0,blood:0,noLook:0,corpses:0,corpseDraws:0,sheetDraws:0,cleared:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const T=()=>typeof time==='number'?time:0,low=()=>!!(typeof settings!=='undefined'&&settings?.lowFx),fin=v=>typeof v==='number'&&Number.isFinite(v);
 const recorder=()=>typeof ctx!=='undefined'&&!!ctx&&typeof ctx.scope==='function',FQ=.12,qAge=a=>Math.round(a/FQ)*FQ;
 // 자기 그림 한 장: 3D 기록기에서는 필터를 ctx.filter 로(저장 구간 안에서), sprite 에는 넘기지 않는다(R660).
-function own(look,x,y,hPx,opt){if(look.frame&&drawAssetFrame3(look.path,look.frame,x,y,hPx,opt))return;
+let baking=false;
+function own(look,x,y,hPx,opt){
+ // R690 굽는 캔버스(2D)에서는 필터를 ctx.filter 로 건다(색 보정 캐시 안 탐). 이 브라우저 캔버스가 filter 를 모르면 아래 원래 길.
+ if(baking&&opt.filter&&opt.filter!=='none'&&'filter' in ctx){const keep=ctx.filter,o={...opt,filter:undefined};ctx.filter=opt.filter;
+  try{if(!(look.frame&&drawAssetFrame3(look.path,look.frame,x,y,hPx,o)))sprite(look.path,x,y,hPx,o);}finally{ctx.filter=keep;}return;}
+ if(look.frame&&drawAssetFrame3(look.path,look.frame,x,y,hPx,opt))return;
  if(opt.filter&&opt.filter!=='none'&&recorder()){const keep=ctx.filter;ctx.filter=opt.filter;try{sprite(look.path,x,y,hPx,{...opt,filter:undefined});}finally{ctx.filter=keep;}return;}
  sprite(look.path,x,y,hPx,opt);}
 const clamp01=v=>v<0?0:v>1?1:v,ease=v=>{v=clamp01(v);return v*v*(3-2*v);};
@@ -125,7 +138,30 @@ function pieceAt(kind,p,age){const [cx,cy]=p.c,r=p.rnd,t0=BURST[kind]??.06;if(!(
 // 조각들 그리기. (두께 한 겹은 뺐다: 3D 기록기 그리기 순서가 실행마다 달라 어두운 겹이 조각 위로 올라와 검은 실루엣처럼 보였음, 거미 촬영) 가장자리 선은 긋지 않는다(조각 다각형은 그림 밖 투명한 곳까지 덮어 선이 네모 테두리로 보였음, 첫 촬영).
 //  o.gap(몸 키 단위): 조각을 몸 가운데에서 바깥으로 그만큼 벌린다 — 밑에 깐 달아오른 몸이 그림 모양 그대로 금 사이로 비친다(불).
 function tracePoly(P,k){ctx.beginPath();P.forEach((v,i)=>i?ctx.lineTo(v[0]*k,v[1]*k):ctx.moveTo(v[0]*k,v[1]*k));ctx.closePath();}
+// R690 조각 모음: 죽음 하나마다 2D 캔버스 한 장에 조각들을 칸으로 나눠 '정확히' 잘라 둔다(필터 없이). 3D 기록기의 clip 은 조각을 덜 잘라
+//  조각마다 몸이 거의 통째로 겹쳐 보였고(같은 프레임 비교), 매 프레임 삼각형을 다시 잘랐다 → 날아가는 조각·사체 굽기는 이 칸을 clip 없이 그린다.
+const atlasCache=new Map();
+function atlasFor(look,seed,lowFx){if(!bakeable(look))return null;const key=seed+'|'+look.path+'|'+(look.frame?.assetFrame?.sourceRect||'')+'|'+(look.flip?1:0)+'|'+(lowFx?1:0)+'|'+(+look.asp||.8).toFixed(3);
+ if(atlasCache.has(key)){const A=atlasCache.get(key);atlasCache.delete(key);atlasCache.set(key,A);return A;}
+ const z=typeof zoom==='number'&&zoom>0?zoom:1,hb=Math.max(24,Math.min(128,Math.round((+look.h||60)*z))),S=shards(seed,look.asp||.8,lowFx),cells=[];let X=0,Hm=0;
+ for(const p of S){let x0=Infinity,y0=Infinity,x1=-Infinity,y1=-Infinity;const W=wide(p);for(const [vx,vy] of W){x0=Math.min(x0,vx);x1=Math.max(x1,vx);y0=Math.min(y0,vy);y1=Math.max(y1,vy);}
+  const sw=Math.ceil((x1-x0)*hb)+2,sh=Math.ceil((y1-y0)*hb)+2;cells.push({p,W,sx:X,sy:0,sw,sh,ox:(p.c[0]-x0)*hb+1,oy:(p.c[1]-y0)*hb+1,x0,y0});X+=sw+2;Hm=Math.max(Hm,sh);}
+ let A=null;try{const cv=document.createElement('canvas');cv.width=Math.max(1,X);cv.height=Math.max(1,Hm);const g=cv.getContext&&cv.getContext('2d');
+  if(g){const keep=ctx,kb=baking;baking=true;ctx=g;
+   try{for(const c of cells){g.save();try{g.translate(c.sx+1-c.x0*hb,1-c.y0*hb);tracePoly(c.W,hb);g.clip();own(look,0,0,hb,{alpha:1,flip:look.flip});}finally{g.restore();}}}
+   finally{ctx=keep;baking=kb;}
+   try{cv.__storyworldStaticSource=Object.freeze({path:'r462:pieces:'+key,immutable:true});}catch(_){}
+   A={cv,hb,cells};stats.atlases=(stats.atlases||0)+1;}}catch(e){fail(e);A=null;}
+ atlasCache.set(key,A);while(atlasCache.size>48)atlasCache.delete(atlasCache.keys().next().value);return A;}
 function drawPieces(look,x,y,hPx,kind,age,o){const S=shards(o.seed,look.asp||.8,low()),gap=+o.gap||0;
+ // R691: 그 죽음이 들고 있는 조각 모음을 먼저 쓴다(캐시에서 밀려나도 다시 만들지 않음)
+ const H=o.holder;let A=null;if(prefs.bake!==false){if(H&&H.atlas&&H.atlasLow===low())A=H.atlas;else{A=atlasFor(look,o.seed,low());if(H&&A){H.atlas=A;H.atlasLow=low();}}}
+ if(A&&A.cells.length===S.length){const k=hPx/A.hb;
+  for(const c of A.cells){const p=c.p,q=pieceAt(kind,p,age);let gx=0,gy=0;
+   if(gap>0){const dx=p.c[0],dy=p.c[1]+.45,L=Math.hypot(dx,dy)||1;gx=dx/L*gap*hPx;gy=dy/L*gap*hPx;}
+   ctx.save();try{ctx.translate(x+q.x*hPx+gx,y+q.y*hPx+gy);if(q.ang)ctx.rotate(q.ang);ctx.globalAlpha*=clamp01(o.alpha??1);if(o.filter&&o.filter!=='none')ctx.filter=o.filter;
+    ctx.drawImage(A.cv,c.sx,c.sy,c.sw,c.sh,-c.ox*k,-c.oy*k,c.sw*k,c.sh*k);}finally{ctx.restore();}}
+  return;}
  for(const p of S){const q=pieceAt(kind,p,age),W=wide(p),opt={alpha:o.alpha,flip:look.flip,filter:o.filter};let gx=0,gy=0;
   if(gap>0){const dx=p.c[0],dy=p.c[1]+.45,L=Math.hypot(dx,dy)||1;gx=dx/L*gap*hPx;gy=dy/L*gap*hPx;}
   const one=(dy,filter)=>{ctx.save();try{ctx.translate(x+q.x*hPx+gx,y+q.y*hPx+gy+dy);if(q.ang)ctx.rotate(q.ang);ctx.translate(-p.c[0]*hPx,-p.c[1]*hPx);
@@ -158,13 +194,13 @@ function drawDying(fx,base){if(fx.r462.lay){drawDyingLay(fx,base);return;}const 
   // 0~.34초: 붉게 달아오르며 몸에 빛나는 금이 번진다 → 금을 따라 부서져 내려앉으며 숯이 된다(사체 색 .58 로 이어짐)
   const heat=clamp01(fa/.3),char=clamp01((fa-.18)/.6),b=(1.45-heat*.2)*(1-char)+.58*char,crack=clamp01((age-.06)/.26),glow=crack*(1-clamp01((age-BURST.fire)/.3));
   if(glow>.01)body(look,q.x,q.y,hPx,{alpha:glow,filter:'brightness(2.6) saturate(1.8) contrast(1.2)'});
-  drawPieces(look,q.x,q.y,hPx,'fire',age,{seed:R.seed,alpha:1,thick:true,gap:.018*glow,filter:`brightness(${b.toFixed(3)}) saturate(${(1.5-char*.9).toFixed(3)}) contrast(${(1+char*.12).toFixed(3)})`});
+  drawPieces(look,q.x,q.y,hPx,'fire',age,{holder:R,seed:R.seed,alpha:1,thick:true,gap:.018*glow,filter:`brightness(${b.toFixed(3)}) saturate(${(1.5-char*.9).toFixed(3)}) contrast(${(1+char*.12).toFixed(3)})`});
   const t=clamp01((age-.08)/(fx.life-.08));sheet('fire',Math.floor(t*24),q.x-R.side*hPx*.05,q.y+hPx*.04,hPx*.42,(age<.2?age/.2:1)*(t>.8?(1-t)/.2:1),{flip:R.side<0});
  }else{
   // 맞는 순간 .06초 번쩍·떨림(통째) → 조각으로 터져 흩어지고 피 시트가 터진다
   if(age<=BURST.blood){const shake=Math.sin(age*95)*hPx*.03;body(look,q.x+shake,q.y,hPx,{alpha:1,filter:'brightness(1.55) saturate(.7)'});}
   else{const cool=clamp01((fa-BURST.blood)/.35),b=1.3*(1-cool)+.82*cool;
-   drawPieces(look,q.x,q.y,hPx,'blood',age,{seed:R.seed,alpha:1,thick:true,filter:`brightness(${b.toFixed(3)}) saturate(${(.8+.15*cool).toFixed(3)}) contrast(1.05)`});}
+   drawPieces(look,q.x,q.y,hPx,'blood',age,{holder:R,seed:R.seed,alpha:1,thick:true,filter:`brightness(${b.toFixed(3)}) saturate(${(.8+.15*cool).toFixed(3)}) contrast(1.05)`});}
   const t=clamp01((age-.03)/(fx.life-.03));sheet('blood',Math.floor(t*24),q.x-R.side*hPx*.08,q.y+hPx*.02,hPx*.9,1,{flip:R.side<0});
  }}
 function wrapBurn(){if(typeof drawBurnDeath3!=='function'||drawBurnDeath3.__r462)return typeof drawBurnDeath3==='function';const base=drawBurnDeath3;
@@ -176,8 +212,27 @@ let corpses=[],corpseRoom=null,corpseSerial=0;
 //  어두운 곳에선 바닥보다 밝게 뜬다. 주인 종류는 그대로 'scene' 이라 그리는 층·순서·화면 자리는 같다. 2D 캔버스는 그대로.
 const CORPSE_OWNER='r462:corpse:';
 function addCorpse(fx){if(typeof room==='undefined'||!room)return;if(corpseRoom!==room){corpses=[];corpseRoom=room;}const R=fx.r462,max=low()?10:24;
- const born=T()-(+fx.age||0);corpses.push({x:fx.x,y:fx.y,kind:R.kind,look:R.look,side:R.side,seed:R.seed,lay:!!R.lay,uid:++corpseSerial,born,t0:born+(R.lay?FALL[R.kind][1]:(+fx.life||LIFE[R.kind]))});stats.corpses++;
+ const born=T()-(+fx.age||0);corpses.push({holder:R,x:fx.x,y:fx.y,kind:R.kind,look:R.look,side:R.side,seed:R.seed,lay:!!R.lay,uid:++corpseSerial,born,t0:born+(R.lay?FALL[R.kind][1]:(+fx.life||LIFE[R.kind]))});stats.corpses++;
  while(corpses.length>max)corpses.shift();}
+// R690 사체 굽기: 조각이 다 멈춘 모습(SETTLED 초)을 캔버스 한 장에 한 번 그린다. 발밑 = (ox,oy), 굽는 키 hb 픽셀.
+const SETTLED=30,CORPSE_FILTER={blood:'brightness(.82) saturate(.95) contrast(1.05)',fire:'brightness(.58) saturate(.6) contrast(1.12)'};
+function bakeable(look){try{if(typeof document==='undefined'||typeof document?.createElement!=='function')return false;const row=typeof readyImage==='function'?readyImage(look.path):null;return !!row?.image;}catch(_){return false;}}
+// 경계: 조각마다 그 clip 다각형(그림은 이 안에서만 찍힘)을 멈춘 자리로 옮긴 꼭짓점들 → 잘림 없이 넉넉하다.
+function bakeCorpse(c,hPx){const look=c.look,S=shards(c.seed,look.asp||.8,low());
+ let x0=Infinity,y0=Infinity,x1=-Infinity,y1=-Infinity;
+ for(const p of S){const q=pieceAt(c.kind,p,SETTLED),co=Math.cos(q.ang||0),si=Math.sin(q.ang||0);
+  for(const [vx,vy] of wide(p)){const dx=vx-p.c[0],dy=vy-p.c[1],X=q.x+dx*co-dy*si,Y=q.y+dx*si+dy*co;x0=Math.min(x0,X);x1=Math.max(x1,X);y0=Math.min(y0,Y);y1=Math.max(y1,Y);}}
+ if(!(x1>x0&&y1>y0))return null;let hb=Math.max(14,Math.min(160,Math.round(hPx)));const area=(x1-x0)*(y1-y0);if(area*hb*hb>1.2e6)hb=Math.max(14,Math.floor(Math.sqrt(1.2e6/area)));
+ const cv=document.createElement('canvas'),W=Math.ceil((x1-x0)*hb)+4,H=Math.ceil((y1-y0)*hb)+4;cv.width=W;cv.height=H;const g=cv.getContext&&cv.getContext('2d');if(!g)return null;
+ const ox=-x0*hb+2,oy=-y0*hb+2,keep=ctx;baking=true;ctx=g;
+ try{g.save();try{g.translate(ox,oy);drawPieces(look,0,0,hb,c.kind,SETTLED,{seed:c.seed,alpha:1,filter:CORPSE_FILTER[c.kind],holder:c.holder});}finally{g.restore();}}
+ finally{ctx=keep;baking=false;}
+ // 3D 기록기: 정적 그림으로 표시 → 매 프레임 복사(스냅숏)·텍스처 재업로드 없이 한 번만 올린다
+ try{cv.__storyworldStaticSource=Object.freeze({path:'r462:corpse-bake:'+c.uid,immutable:true});}catch(_){}
+ stats.bakes=(stats.bakes||0)+1;if(c.holder){c.holder.atlas=null;}c.holder=null;return{cv,ox,oy,hb,W,H};}
+// 구운 사체 한 장 그리기(없으면 굽는다). 그림이 아직 안 읽혔거나 캔버스를 못 만들면 false → 예전처럼 조각으로 그린다.
+function baked(c,q,hPx,alpha){if(prefs.bake===false)return false;if(!c.bake&&!c.noBake&&bakeable(c.look)){c.bake=bakeCorpse(c,hPx);if(!c.bake)c.noBake=true;}const B=c.bake;if(!B)return false;
+ const k=hPx/B.hb;ctx.save();try{ctx.globalAlpha*=alpha;ctx.drawImage(B.cv,q.x-B.ox*k,q.y-B.oy*k,B.W*k,B.H*k);stats.bakeDraws=(stats.bakeDraws||0)+1;}finally{ctx.restore();}return true;}
 function drawCorpses(){if(!prefs.on||!prefs.corpses||!corpses.length)return;if(typeof room==='undefined'||room!==corpseRoom){corpses=[];stats.cleared++;return;}
  const now=T(),stay=low()?15:45,z=typeof zoom==='number'&&zoom>0?zoom:1;
  corpses=corpses.filter(c=>now-c.t0<stay+4);const scope=typeof ctx.scope==='function'?ctx.scope.bind(ctx):null;
@@ -185,11 +240,11 @@ function drawCorpses(){if(!prefs.on||!prefs.corpses||!corpses.length)return;if(t
   const one=()=>{ctx.save();try{
    if(c.kind==='blood'){const grow=clamp01(age/.9);sheet('pool',Math.round(3+grow*4),q.x-c.side*hPx*.1,q.y,hPx*(.55+.35*grow),.78*fade,{squash:.42,flip:(c.seed&1)===1});
     if(c.lay)bodyLay(c.look,q.x,q.y,hPx,{side:c.side,fall:1,alpha:.95*fade,filter:'brightness(.68) saturate(1.2) contrast(1.06)'});
-    else drawPieces(c.look,q.x,q.y,hPx,'blood',now-c.born,{seed:c.seed,alpha:.97*fade,filter:'brightness(.82) saturate(.95) contrast(1.05)'});}
+    else if(!baked(c,q,hPx,.97*fade))drawPieces(c.look,q.x,q.y,hPx,'blood',now-c.born,{holder:c.holder,seed:c.seed,alpha:.97*fade,filter:CORPSE_FILTER.blood});}
    else{/* 그을린 바닥 자국: 피 웅덩이 칸을 검게(몬스터 그림자는 R444 가 없앴으므로 shadow() 는 쓰지 않음) */
     sheet('pool',7,q.x-c.side*hPx*.1,q.y,hPx*.75,.6*fade,{squash:.4,flip:(c.seed&1)===1,filter:'brightness(.12) saturate(0)'});
     if(c.lay)bodyLay(c.look,q.x,q.y,hPx,{side:c.side,fall:1,alpha:.96*fade,filter:'brightness(.42) saturate(.35) contrast(1.12)'});
-    else drawPieces(c.look,q.x,q.y,hPx,'fire',now-c.born,{seed:c.seed,alpha:.97*fade,filter:'brightness(.58) saturate(.6) contrast(1.12)'});
+    else if(!baked(c,q,hPx,.97*fade))drawPieces(c.look,q.x,q.y,hPx,'fire',now-c.born,{holder:c.holder,seed:c.seed,alpha:.97*fade,filter:CORPSE_FILTER.fire});
     const glow=clamp01(1-age/4.5);if(glow>0&&typeof texture==='function'&&typeof VFX!=='undefined'&&VFX.burnFlame){const fl=.75+.25*Math.sin(now*9+c.seed%7);
      texture(VFX.burnFlame,q.x-c.side*hPx*.12,q.y-hPx*.12,hPx*.5,hPx*.22,{alpha:.22*glow*fl*fade});}}
    stats.corpseDraws++;}catch(err){fail(err);}finally{ctx.restore();}};
@@ -207,6 +262,8 @@ try{if(typeof showSettings==='function'){const base=showSettings;showSettings=fu
  if(grid&&!document.getElementById('r532DeathStyle')){const l=document.createElement('label'),s=document.createElement('select');s.id='r532DeathStyle';
   for(const [v,t] of [['gore','찢기고 터짐'],['lay','쓰러져 눕기']]){const o=document.createElement('option');o.value=v;o.textContent=t;s.appendChild(o);}
   s.value=prefs.style==='lay'?'lay':'gore';s.onchange=()=>set({style:s.value==='lay'?'lay':'gore'});l.appendChild(document.createTextNode('몹 죽음 연출 '));l.appendChild(s);grid.appendChild(l);}}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
-window.__STORYWORLD_MOB_DEATH_R462__=Object.freeze({revision:REV,set,kindOf,corpseOwner:CORPSE_OWNER,shards,shardBox,pieceAt,
- inspect:()=>({revision:REV,installed:ok,prefs:{...prefs},corpses:corpses.length,stats:{...stats},lastError})});
+// R690: 이 몹의 죽음을 R462 가 맡는가(그렇다면 R91 공용 잔해·파편, R165 연기는 겹치지 않게 건너뜀)
+function owns(e){try{return !!(prefs.on&&e&&typeof e==='object'&&!major(e)&&looks.has(e.id));}catch(_){return false;}}
+window.__STORYWORLD_MOB_DEATH_R462__=Object.freeze({revision:REV,set,kindOf,owns,corpseOwner:CORPSE_OWNER,shards,shardBox,pieceAt,
+ inspect:()=>({revision:REV,installed:ok,prefs:{...prefs},corpses:corpses.length,atlasCache:atlasCache.size,stats:{...stats},lastError})});
 })();

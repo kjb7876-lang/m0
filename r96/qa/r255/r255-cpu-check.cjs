@@ -18,7 +18,8 @@ function mk(){const panel={classList:cls(),querySelector:q=>q==='.storyText'?{}:
 {const {sb,canv}=mk();sb.storyScene={id:'dist06',key:'STORY:dist06:pre:0',part:'pre',text:'x'};sb.advanceScene();const n1=canv.length;sb.storyScene={id:'dist06',key:'STORY:dist06:pre:1',part:'pre',text:'y'};sb.advanceScene();
  ok('boss area "before battle": a short code-drawn cinematic plays once per visit (not again on the next page)',n1===1&&canv.length===1);
  sb.storyScene={id:'hub',key:'STORY:hub:pre',part:'pre',text:'z'};sb.advanceScene();ok('no cinematic where the region has no boss',canv.length===1);}
-ok('cinematic: letterbox, blood ink, crack, region + boss name from the game data; click skips',/function cinema\(info\)/.test(src)&&/c\.onclick=end/.test(src)&&/fillText\(info\.region/.test(src)&&/fillText\(info\.boss/.test(src)&&/live\?\.name\|\|r\.bosses\[0\]\?\.name/.test(src));
+// R682(사용자 2026-11-11 "지그재그빨간선 … 디자인구려서 새디자인"): 붉은 먹·금(crack)은 뺐다. 이름 카드의 모양은 qa/r682 가 그리기 명령으로 검사한다.
+ok('cinematic: letterbox name card, region + boss name from the game data; click skips',/function cinema\(info\)/.test(src)&&/c\.onclick=end/.test(src)&&/fillText\(info\.region/.test(src)&&/rows=\[info\.boss\]/.test(src)&&/live\?\.name\|\|r\.bosses\[0\]\?\.name/.test(src));
 ok('runtime copy matches; loads after the other new overlays',RT('story-fragments-r255.js')===src&&/summoning-r251\.js"><\/script><script src="\.\/story-fragments-r255\.js">/.test(RT('index.html')));
 const pass=checks.filter(c=>c.pass).length;for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));
 console.log(`R255 ${pass}/${checks.length}`);if(pass!==checks.length)process.exit(1);

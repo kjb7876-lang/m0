@@ -401,6 +401,8 @@ jobs:
         run: node r96/qa/r617/hwando-fall-video-cpu-check.cjs
       - name: R619 pause game drawing while a full-screen story video is open
         run: node r96/qa/r619/video-render-pause-cpu-check.cjs
+      - name: R667 title screen background loop video CPU check
+        run: node r96/qa/r667/title-bg-video-cpu-check.cjs
       - name: R373 mob squads and leaders CPU check
         run: node r96/qa/r373/r373-cpu-check.cjs
 
@@ -426,6 +428,8 @@ jobs:
         run: node r96/qa/r545/r545-cpu-check.cjs
       - name: R546 per-hero attack and skill sounds, blink, parry, EGO, awakening, clear, upgrade, fall, panel, portal and enemy-shot sounds CPU check
         run: node r96/qa/r546/r546-cpu-check.cjs
+      - name: R664 regional ambience loops (ElevenLabs beds per episode, seamless, quiet) CPU check
+        run: node r96/qa/r664/r664-cpu-check.cjs
       - name: R385 mob moves (review list v18 move/rename) CPU check
         run: node r96/qa/r385/r385-cpu-check.cjs
       - name: R390 cinema full narration + midboss hold + enemies keep chasing CPU check
@@ -539,6 +543,8 @@ jobs:
         run: node r96/qa/r362/r362-cpu-check.cjs
       - name: R255 all narrative as notes/fragments; boss entry cinematic CPU check
         run: node r96/qa/r255/r255-cpu-check.cjs
+      - name: R682 boss entry name card redesign (no zigzag red line) CPU check
+        run: node r96/qa/r682/boss-title-cpu-check.cjs
       - name: R256 widen passages on all organic maps CPU check
         run: node r96/qa/r256/r256-cpu-check.cjs
       - name: R258 wider pre-boss gathering room CPU check
@@ -595,6 +601,10 @@ jobs:
         run: node r96/qa/r532/r532-cpu-check.cjs
       - name: R660 mob death lag (no per-frame tint canvases; recorder filters via ctx.filter, 2D filters stepped) CPU check
         run: node r96/qa/r660/death-lag-cpu-check.cjs
+      - name: R690 mob death overlap/lag (R462-owned deaths skip R91 generic remains/sheet and R165 smoke; pieces cut once in 2D, corpses baked to one image) CPU check
+        run: node r96/qa/r690/r690-cpu-check.cjs
+      - name: R691 mob death atlas retention (each death/corpse keeps its own piece atlas; no LRU thrash with 48+ concurrent deaths, cache stays bounded) CPU check
+        run: node r96/qa/r691/r691-cpu-check.cjs
       - name: R481 outdoor groves (understory around trees, small woods on bare back rims) CPU check
         run: node r96/qa/r481/grove-r481-cpu-check.cjs
       - name: R482 worn trails from entry to doors/altar on outdoor floors CPU check
@@ -629,6 +639,8 @@ jobs:
         run: node r96/qa/r615/student-cpu-check.cjs
       - name: R620 boss motion CPU check
         run: node r96/qa/r620/r620-cpu-check.cjs
+      - name: R700 seven-sins boss art audit (size-lock heights match real art, no light matte fringe on drawn art, clean copies keep the body, originals kept) check
+        run: python r96/qa/r700/boss-art-check.py
       - name: R563 Michaela genesis chain (Q → sky light pillars, R → grand pillar + halo; no new keys, upright cross only, Dots MI sheets) CPU check
         run: node r96/qa/r563/michaela-genesis-cpu-check.cjs
       - name: R564 Seoha chrono chain (time stop shell + shatter, afterimage clones, haste; no new keys, caps, Dots SE sheets) CPU check
