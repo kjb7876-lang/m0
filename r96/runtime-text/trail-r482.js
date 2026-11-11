@@ -60,6 +60,8 @@ function build(T,r,A,ctx){const P=plan(ctx);if(!P.length)return null;const R=rib
  r.spatialResources?.add(geo);r.spatialResources?.add(mat);r.spatialResources?.add(mat.map);if(r.sightState24&&A?.attachSight24)A.attachSight24(mat,r.sightState24);
  const m=new T.Mesh(geo,mat);m.name='r482-trail';m.position.y=.006;m.layers.set(2);m.renderOrder=-19.5;m.userData.presentationOnly=true;m.userData.r482=true;m.userData.paths=P.length;m.userData.points=P.reduce((a,p)=>a+p.length,0);return m;}
 let seen=null;
+// R810 불면귀 밤: 길 띠는 R451 빛을 받지 않는 재질이라, 바탕빛을 남색 달빛(.64~.66)으로 낮춘 두 구역에서는 바닥보다 밝은 누런 띠로 떠 보였다(헤드리스 실측) → 그 구역만 R451 밤 바탕빛을 곱한다.
+const nightTint=z=>{try{const N=window.__STORYWORLD_LOCAL_LIGHT_R451__?.night?.(z);return N&&Array.isArray(N.c)&&Number.isFinite(N.k)?N.c.map(v=>v*N.k):undefined;}catch(_){return undefined;}};
 function tick(){if(!prefs.on)return;try{
  const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three,st=r?.__r204,CAVE=window.__STORYWORLD_CAVE_R204__,T=r?.T,A=window.StoryPhase1;
  if(!r||!st||st.pending||!st.group||!st.F||st.decorOnly||!CAVE||!T||r.disposed)return;if(st.group.getObjectByName?.('r482-trail'))return;
@@ -67,7 +69,7 @@ function tick(){if(!prefs.on)return;try{
  if(!rm||rm.id!==st.zone)return;seen=key;if(!zoneOk(st.zone))return;const L=rm.exploration;if(!L?.floorCells?.length)return;
  const t0=performance.now(),F=st.F,cells=new Set(L.floorCells.map(c=>(c.x??c[0])+','+(c.y??c[1])));
  const goals=[...(L.worldR74?.doors||[]).map(d=>({x:+d.x,y:+d.y})),rm.altar&&{x:+rm.altar.x,y:+rm.altar.y},L.gate&&{x:+L.gate.x,y:+L.gate.y},rm.objective&&{x:+rm.objective.x,y:+rm.objective.y},...(rm.exits||[]).map(e=>({x:+e.x,y:+e.y}))].filter(Boolean);
- const m=build(T,r,A,{cells,clear:(x,y)=>CAVE.at(F,F.f,x,y),start:L.entry&&{x:+L.entry.x,y:+L.entry.y},goals,seed:[...st.zone].reduce((h,c)=>Math.imul(h^c.charCodeAt(0),16777619)>>>0,2166136261)});
+ const m=build(T,r,A,{cells,clear:(x,y)=>CAVE.at(F,F.f,x,y),start:L.entry&&{x:+L.entry.x,y:+L.entry.y},goals,tint:nightTint(st.zone),seed:[...st.zone].reduce((h,c)=>Math.imul(h^c.charCodeAt(0),16777619)>>>0,2166136261)});
  if(!m)return;st.group.add(m);stats.builds++;stats.paths=m.userData.paths;stats.points=m.userData.points;stats.zone=st.zone;stats.ms=Math.round(performance.now()-t0);
 }catch(e){stats.errors++;lastError=String(e?.stack||e).slice(0,300);}}
 setInterval(tick,450);
