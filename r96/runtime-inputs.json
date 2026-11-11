@@ -8164,7 +8164,16 @@
     "assets/r763/villagers/fisher-walk.webp",
     "assets/r763/villagers/herbwife-atk.webp",
     "assets/r763/villagers/herbwife-idle.webp",
-    "assets/r763/villagers/herbwife-walk.webp"
+    "assets/r763/villagers/herbwife-walk.webp",
+    "assets/r760/boss/sheet-idle2.webp",
+    "assets/r760/boss/sheet-hit.webp",
+    "assets/r760/boss/sheet-death.webp",
+    "assets/r760/mid/sheet-idle.webp",
+    "assets/r760/mid/sheet-atk.webp",
+    "assets/r760/mid/sheet-hit.webp",
+    "assets/r760/mid/sheet-death.webp",
+    "assets/r760/boss/sheet-atkB2.webp",
+    "assets/r760/boss/sheet-hit2.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9239,5 +9248,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "364c770dee4d7e5dd99827431d3f3b6a00863b2dddd7e137e0a33a040fbc6450"
+  "runtimeManifestSHA256": "c1ac523296459abca6c0822211d77286a81c99e043343e13a9161049fb24c5f5"
 }

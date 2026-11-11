@@ -34638,14 +34638,39 @@
       "sha256": "592d14a37206adef8b4adb01c33d09285bb900a342c49bafa71967d5900b919f"
     },
     {
+      "path": "assets/r760/boss/sheet-atkB2.webp",
+      "bytes": 362084,
+      "sha256": "1b18ea538a34414a878d4448d39d3d6541268a981bc3811ebaed35357f6a8884"
+    },
+    {
       "path": "assets/r760/boss/sheet-cast.webp",
       "bytes": 404936,
       "sha256": "904bee17dd53e75f6307429af44cbb6b4d3cb56bfd0c78877beee49a3b959e1c"
     },
     {
+      "path": "assets/r760/boss/sheet-death.webp",
+      "bytes": 446024,
+      "sha256": "180d53a7a840d09e67767735f0463aa48f4b1ffae915acad5f1e4c2a73b3f4cb"
+    },
+    {
+      "path": "assets/r760/boss/sheet-hit.webp",
+      "bytes": 236308,
+      "sha256": "fa7eb57622e09d9d817b8cbd1d8d54fcad9e75b8edd77dd3733aea6a464823ba"
+    },
+    {
+      "path": "assets/r760/boss/sheet-hit2.webp",
+      "bytes": 243452,
+      "sha256": "94f88e69a2d118c77a16a4b86b2765610e1b42f233f808eaf377c05f786b4eda"
+    },
+    {
       "path": "assets/r760/boss/sheet-idle.webp",
       "bytes": 370818,
       "sha256": "6344a85657d52b2c37fa00e6c9d9bf996ee1c81ed9e64dc55854e95758537085"
+    },
+    {
+      "path": "assets/r760/boss/sheet-idle2.webp",
+      "bytes": 376566,
+      "sha256": "cc113f72488b246e20d0780a77fbe9d99fec53a8831c5dd3031533ab79ca7899"
     },
     {
       "path": "assets/r760/boss/sheet-move.webp",
@@ -34656,6 +34681,26 @@
       "path": "assets/r760/boss/sheet-reveal.webp",
       "bytes": 489304,
       "sha256": "ff3eb8c4a0571a2858d6aec2bf0204248d1ffd9cc2453c6ff52f82b729c5be4e"
+    },
+    {
+      "path": "assets/r760/mid/sheet-atk.webp",
+      "bytes": 367768,
+      "sha256": "897c80ab4d41095277de3b48e151296d417cde3988313a6240dc918902bf6acd"
+    },
+    {
+      "path": "assets/r760/mid/sheet-death.webp",
+      "bytes": 370360,
+      "sha256": "0f3af3c908da8e14a290e658001fa464740267d5c72662bf8f82f9b854f10b6c"
+    },
+    {
+      "path": "assets/r760/mid/sheet-hit.webp",
+      "bytes": 174662,
+      "sha256": "c0db4e25082ea038dbd8e5f9e0877862fea5e6fae68829d0cdd758f9cfb7b14d"
+    },
+    {
+      "path": "assets/r760/mid/sheet-idle.webp",
+      "bytes": 313296,
+      "sha256": "0275d42fe4c495e0451dd1053d5bc506b46e6bab518939f2c85238f75e935dd1"
     },
     {
       "path": "assets/r761/sfx/bmg-gaze-1.ogg",
@@ -42804,8 +42849,8 @@
     },
     {
       "path": "bulmyeongwi-r760.js",
-      "bytes": 29835,
-      "sha256": "5db25f5b3ad23dbb8c99a7cfe45e5b7f7f7ff3d3e00075be5c34d372d4962fdd"
+      "bytes": 38309,
+      "sha256": "2d5fc4d5d2996f94370100b52af448e3b9ddf90d8637230ce086d840d5154c7b"
     },
     {
       "path": "canon-throw-r471.js",
@@ -44773,8 +44818,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8954,
-  "totalBytes": 1232499896,
+  "fileCount": 8963,
+  "totalBytes": 1235398890,
   "webHTMLSha256": "d8bef146aec9863ec63a5a3150cab3c47344631e13664b5969cd73d490e68348",
   "largest": [
     {
