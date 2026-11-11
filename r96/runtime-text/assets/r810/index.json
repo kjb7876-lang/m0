@@ -361,6 +361,42 @@
    "made_by": "Dots CX-0071BV 3차 (그림 스레드 손질본 c1) → Pillow 테두리 자르기, 긴 변 320, WebP q88",
    "applied": true,
    "final": false
+  },
+  {
+   "path": "assets/r810/thatched-hut-a.webp",
+   "source": "cx0071bv-dots-cleaned/CX-0071BV_18A_thatched-hut_r1_c1.png",
+   "source_sha256": "939693830626fb60b0dc3ecfc2824ac9f61f73b708583495231e724bcf2475bd",
+   "crop_bbox": [
+    86,
+    180,
+    681,
+    650
+   ],
+   "sha256": "66a6e15ddc5abd0eab584c25a1ccf72c0f642f5984220cf5790acdc67faf5d35",
+   "bytes": 60818,
+   "size": "500x395",
+   "use": "그물 걸린 초가 — last302 포구 마을만",
+   "made_by": "Dots CX-0071BV 18 (그림 스레드 손질본 c1) → Pillow 테두리 자르기, 폭 500, WebP q78",
+   "applied": true,
+   "final": false
+  },
+  {
+   "path": "assets/r810/thatched-hut-b.webp",
+   "source": "cx0071bv-dots-cleaned/CX-0071BV_18B_thatched-hut_r1_c1.png",
+   "source_sha256": "e693185c0e8def682dfef122f9c8eebeab7eef1d8ebc2808dd814d7d227cd703",
+   "crop_bbox": [
+    92,
+    111,
+    664,
+    675
+   ],
+   "sha256": "9b364f4432a8ccefab44e3690c7b519cf08a8225d1602e151664f88c97f41db7",
+   "bytes": 65332,
+   "size": "500x493",
+   "use": "그물 걸린 초가 — last302 포구 마을만",
+   "made_by": "Dots CX-0071BV 18 (그림 스레드 손질본 c1) → Pillow 테두리 자르기, 폭 500, WebP q74",
+   "applied": true,
+   "final": false
   }
  ]
 }

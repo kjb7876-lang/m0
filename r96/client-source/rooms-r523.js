@@ -389,7 +389,7 @@ window.__STORYWORLD_ROOMS_R523__=Object.freeze({revision:REV,ART,G,USE,REGION,LI
 //  · 몹·보스는 R760(bulmyeongwi-r760.js) 스레드가 맡는다. 등롱·부적 줄·댓돌 신발·장독대·약방은 Dots 그림이 오면 2차로 더한다(지금은 기존 그림만).
 (()=>{'use strict';
 if(window.__STORYWORLD_VILLAGE_R730__)return;
-const REV='R730-village-8',KEY='storyworld.r730.village',PX=34,SUM=17,BACK=3.6,MARGIN=1;
+const REV='R730-village-9',KEY='storyworld.r730.village',PX=34,SUM=17,BACK=3.6,MARGIN=1;
 const prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;}catch(_){}
 const stats={rooms:0,placed:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,400);};
 const HOUSE=Object.freeze([
@@ -409,6 +409,8 @@ const YAK=Object.freeze([Object.freeze({path:'assets/r810/yakbang-house-a.webp',
 /* R812 Dots 3차: 약초 걸이 15 r2(양 끝 기둥)·붉은 부적 말뚝 04(last303), 미역·조개 무더기 09 세 가지(last302 배 곁) */
 const HERB=Object.freeze({path:'assets/r810/herb-rack.webp',height:60}),TPOST=Object.freeze({path:'assets/r810/talisman-post.webp',height:80}),
  SEA=Object.freeze(['seaweed-1','seaweed-2','seaweed-3'].map(k=>Object.freeze({path:'assets/r810/'+k+'.webp',height:22})));
+/* R813 Dots 초가 18A·B(툇마루에 그물) — 포구 마을 last302 만. 기와집보다 작은 집이라 그린 폭 250·232px */
+const THATCH=Object.freeze([Object.freeze({path:'assets/r810/thatched-hut-a.webp',height:197,aspect:500/395}),Object.freeze({path:'assets/r810/thatched-hut-b.webp',height:229,aspect:500/493})]);
 const YFIRE=Object.freeze({path:'assets/r810/decoction-brazier.webp',height:44}),TRAYS=Object.freeze({path:'assets/r810/herb-trays.webp',height:24});
 const HANOK='assets/world-r80/r80-010.webp',HANOK_LIT='assets/r730/tiled-house-lit.webp';/* r80-010 의 창호에 호박색 불빛을 넣은 파생본(qa/r730/make-lit-house.py) */
 /* 칸 시작에서 안쪽으로 띄우는 거리. R412 의 3D 벽 검사(그림 불투명 점의 3% 이하)로 헤드리스 실측: 나무 1.75·석등 1.0·향로 .75·기와 .75 부터 절벽에 안 파묻힘(전엔 모두 .75 → 나무 8~16%·석등 5~7%가 벽에 감김). 석등은 여유 .25 */
@@ -419,7 +421,7 @@ const LAMP=Object.freeze({path:'assets/r92/lights/lights_regional_03.png',height
    정본 34장 "부서진 기와와 붉은 부적", "포구 마을", "방문 앞의 신발들은 모두 바깥을 향해" · 귀비탕 영상의 등롱 호박빛. 크기는 사람 키 ≈ 1.3칸 기준(그림 스레드 권장). */
 const POST=Object.freeze({path:'assets/r810/lantern-post.webp',height:100}),ROPE=Object.freeze({'-y':'assets/r810/talisman-rope-r.webp','-x':'assets/r810/talisman-rope-l.webp',height:74}),
  SHOES=Object.freeze({path:'assets/r810/shoes-stone.webp',height:22}),JANG=Object.freeze({path:'assets/r810/jangdok.webp',height:32}),RACK=Object.freeze({path:'assets/r810/fish-rack.webp',height:64}),BOAT=Object.freeze({path:'assets/r810/boat.webp',height:52});
-const ZONE=Object.freeze({last302:Object.freeze({houses:26,lamps:18,yards:/작은 마당|외곽 쉼길/,giwa:3,ropes:4,shoes:6,jang:5,boats:3,racks:3,pathposts:8,seaweed:3}),last303:Object.freeze({houses:12,lamps:14,yards:/작은 마당|외곽 쉼길/,giwa:5,ropes:3,shoes:5,jang:4,boats:0,racks:0,pathposts:10,yak:3,litEvery:2,ruin:false,herbracks:3,tposts:3})});
+const ZONE=Object.freeze({last302:Object.freeze({houses:26,lamps:18,yards:/작은 마당|외곽 쉼길/,giwa:3,ropes:4,shoes:6,jang:5,boats:3,racks:3,pathposts:8,seaweed:3,thatch:3}),last303:Object.freeze({houses:12,lamps:14,yards:/작은 마당|외곽 쉼길/,giwa:5,ropes:3,shoes:5,jang:4,boats:0,racks:0,pathposts:10,yak:3,litEvery:2,ruin:false,herbracks:3,tposts:3})});
 function h32(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
 // fx: {id, floorCells, rooms[{name,x,y}], doors[{x,y}], ward{boss,gather}, entry{x,y}, props[{x,y}], route?[{x,y}]} → [{id,kind,path,height,aspect?,lift?,x,y,side?}]
 function plan(fx){const Z=ZONE[fx.id];if(!Z)return[];const F=new Set(),diag=new Map();
@@ -435,11 +437,12 @@ function plan(fx){const Z=ZONE[fx.id];if(!Z)return[];const F=new Set(),diag=new 
   if(covers(fx_,fy,D,(v.height+lift)/SUM))continue;if((fx.doors||[]).some(d=>Math.hypot(d.x-fx_,d.y-fy)<4+D))continue;
   cand.push({k:near(e.x+.5,e.y+.5)+(h32('k'+e.x+','+e.y+e.side)%100)/50,e,v,D,lift,x:+fx_.toFixed(2),y:+fy.toFixed(2)});}
  cand.sort((a,b)=>a.k-b.k||a.e.y-b.e.y||a.e.x-b.e.x);
- const out=[],houses=[],litAt=[];let hk=0,yk=0,rk=0;for(const c of cand){if(houses.length>=Z.houses)break;const s0=c.x-c.y,sm=c.x+c.y;if(houses.some(h=>Math.abs(h.s0-s0)<h.D+c.D+.5&&Math.abs(h.sm-sm)<9))continue;
+ const out=[],houses=[],litAt=[];let hk=0,yk=0,rk=0,tk=0;for(const c of cand){if(houses.length>=Z.houses)break;const s0=c.x-c.y,sm=c.x+c.y;if(houses.some(h=>Math.abs(h.s0-s0)<h.D+c.D+.5&&Math.abs(h.sm-sm)<9))continue;
   // 2차: 잠들지 못하는 집 — 기와집 셋에 하나는(길에서 가까운 순서로 세어, 난수 없이) 창에 불이 켜진 그림(같은 크기라 자리·가림 계산은 그대로). 불 켜진 집끼리는 6칸 넘게 띄운다
   let hp=c.v.path,hv=c.v,hl=c.lift;/* R811: 폐가는 마을에 셋까지(남는 자리는 기와집 — 높이가 낮아 덮개 계산 안전) */if(/ruined/.test(hp)&&rk++>=(Z.ruinMax??3)){hv=HOUSE[0];hp=hv.path;hl=Math.round(hv.height*.35);}
   if(hp===HANOK&&hk++%(Z.litEvery||3)===1){if(!litAt.some(q=>Math.hypot(q.x-c.x,q.y-c.y)<6)){hp=HANOK_LIT;litAt.push({x:c.x,y:c.y});}else hk--;/* 너무 가까우면 다음 기와집으로 미룬다 */}
   /* R811: last303 은 기와집 아닌 집(16·폐가 등) 몇 채를 약방 집으로 — 폭이 같아(279px) 자리 계산은 그대로, 더 높은 지붕이 바닥을 덮지 않을 때만 */
+  if(Z.thatch&&tk<Z.thatch&&hp!==HANOK&&hp!==HANOK_LIT&&!/ruined/.test(hp)){const y=THATCH[tk%THATCH.length],yl=Math.round(y.height*.35);if(!covers(c.x,c.y,c.D,(y.height+yl)/SUM)){hp=y.path;hv=y;hl=yl;tk++;}}
   if(Z.yak&&yk<Z.yak&&hp!==HANOK&&hp!==HANOK_LIT){const y=YAK[yk%YAK.length],yl=Math.round(y.height*.35);if(!covers(c.x,c.y,c.D,(y.height+yl)/SUM)){hp=y.path;hv=y;hl=yl;yk++;}}
   houses.push({s0,sm,D:c.D,e:c.e});out.push({id:'r730:'+fx.id+':house:'+c.e.x+'_'+c.e.y+c.e.side,kind:'house',path:hp,height:hv.height,aspect:hv.aspect,lift:hl,x:c.x,y:c.y,side:c.e.side});}
  // 길 가: 뒤쪽 끝 칸 안쪽 .75칸

@@ -138,4 +138,10 @@ ok('R730 apply: path lanterns light up like posts (R115 lantern)',/s\.kind==='pa
   else{ok('last302: seaweed piles beside the beached boats (each within 4 cells of a boat), 2+',k('seaweed').length>=2&&k('seaweed').every(q=>k('boat').some(b=>Math.hypot(b.x-q.x,b.y-q.y)<=4)),k('seaweed').length);
    ok('last302: seaweed uses all three Dots variants when 3+ piles',k('seaweed').length<3||new Set(k('seaweed').map(q=>q.path)).size===3);
    ok('last302: no herb racks / talisman posts here',!k('herbrack').length&&!k('tpost').length);}}}
+// ⑬ Dots 초가 18A·B(R813): 포구 마을(last302)만 — 그물 걸린 초가, 기와집 아닌 집 몇 채를 바꿈
+{let ix=null;try{ix=JSON.parse(rd('runtime-text/assets/r810/index.json'));}catch(_){}
+ ok('R813 Dots thatched huts: index + manifest, ≤ 64 KB',!!ix&&['thatched-hut-a','thatched-hut-b'].every((k,i)=>{const a=ix.assets.find(a=>a.path==='assets/r810/'+k+'.webp');return a&&a.source.includes('cx0071bv-dots-cleaned/CX-0071BV_18'+'AB'[i]+'_thatched-hut')&&a.bytes<=65536&&rd('runtime-manifest.json').includes(a.path);}));
+ if(api)for(const id of ['last302','last303']){let fx=null;try{fx=JSON.parse(rd('qa/r730/fixtures/'+id+'.json'));}catch(_){}if(!fx)continue;const H=api.plan(fx).filter(p=>p.kind==='house'),t=H.filter(p=>/thatched/.test(p.path));
+  ok(id+(id==='last302'?': 2–4 thatched huts, never replacing a tiled hanok':': no thatched huts'),id==='last302'?t.length>=2&&t.length<=4:t.length===0,t.length);
+  if(id==='last302')ok('last302: lit hanok windows unchanged by the huts (≥ 2)',H.filter(p=>/tiled-house-lit/.test(p.path)).length>=2);}}
 console.log('\nR810 '+(n-bad)+'/'+n+' passed');process.exit(bad?1:0);

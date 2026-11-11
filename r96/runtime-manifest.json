@@ -34829,8 +34829,8 @@
     },
     {
       "path": "assets/r810/index.json",
-      "bytes": 12198,
-      "sha256": "41160ac656951475c1a99f2203704cac09871a2044de3cfc15ca5c7afd2694fd"
+      "bytes": 13430,
+      "sha256": "f4c5646a99be432e7f998f3a39c7160a6a774e1f4652380e7a49ed20bee11e1f"
     },
     {
       "path": "assets/r810/jangdok.webp",
@@ -34881,6 +34881,16 @@
       "path": "assets/r810/talisman-rope-r.webp",
       "bytes": 21860,
       "sha256": "abcc888138c6808f2644f6093d8be90f07da839db8ef8392b93bd39cc4e2bbbd"
+    },
+    {
+      "path": "assets/r810/thatched-hut-a.webp",
+      "bytes": 60818,
+      "sha256": "66a6e15ddc5abd0eab584c25a1ccf72c0f642f5984220cf5790acdc67faf5d35"
+    },
+    {
+      "path": "assets/r810/thatched-hut-b.webp",
+      "bytes": 65332,
+      "sha256": "9b364f4432a8ccefab44e3690c7b519cf08a8225d1602e151664f88c97f41db7"
     },
     {
       "path": "assets/r810/tiled-house-b-i.webp",
@@ -44424,8 +44434,8 @@
     },
     {
       "path": "rooms-r523.js",
-      "bytes": 75219,
-      "sha256": "1da7e61914cc0396b2b510caee3eae7ec9b4263a82b283678dc32cf4e0fbd6f5"
+      "bytes": 75774,
+      "sha256": "457e65f2e547e0cd3d98e599089a7d6464b40364451902dc3ee941027f020efe"
     },
     {
       "path": "root-gate-video-r372.js",
@@ -44923,8 +44933,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8984,
-  "totalBytes": 1236123315,
+  "fileCount": 8986,
+  "totalBytes": 1236251252,
   "webHTMLSha256": "d8bef146aec9863ec63a5a3150cab3c47344631e13664b5969cd73d490e68348",
   "largest": [
     {
