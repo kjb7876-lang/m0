@@ -43519,8 +43519,8 @@
     },
     {
       "path": "edges-r188.js",
-      "bytes": 7520,
-      "sha256": "7b0721283fe7359de00ab68799d51faf7b209063ae6ce0b6a446e990e62a69aa"
+      "bytes": 9014,
+      "sha256": "9752a317917175d535f7abc29de9c6e0ddb0f8912bb383908b3aaa8830452a89"
     },
     {
       "path": "effect-presentation-r83.js",
@@ -43704,8 +43704,8 @@
     },
     {
       "path": "hero-palette-r302.js",
-      "bytes": 18002,
-      "sha256": "2ea8e8a7ce318509928ed5776a7b38b0361d8a221acb2178c4c57882863379d9"
+      "bytes": 19000,
+      "sha256": "7dcea4fedd2a2b313fcf72464ce297629510e99f7f55bc4aeff7a6be2c339c25"
     },
     {
       "path": "hero-presentation-r83.js",
@@ -44819,7 +44819,7 @@
     }
   ],
   "fileCount": 8963,
-  "totalBytes": 1235395024,
+  "totalBytes": 1235397516,
   "webHTMLSha256": "d8bef146aec9863ec63a5a3150cab3c47344631e13664b5969cd73d490e68348",
   "largest": [
     {

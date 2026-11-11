@@ -20,7 +20,7 @@
 //  끄기: localStorage['storyworld.r302.palette']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_HERO_PALETTE_R302__)return;
-const REV='R302-hero-palette-2',KEY='storyworld.r302.palette';
+const REV='R302-hero-palette-3',KEY='storyworld.r302.palette';
 const SILVER=[226,232,242],GOLD=[255,198,72];
 const PALETTE=Object.freeze({
  hwando:{main:[214,222,234],sub:GOLD,name:'실버',name2:'골드'},
@@ -47,6 +47,13 @@ function hsv(c){const r=c[0]/255,g=c[1]/255,b=c[2]/255,M=Math.max(r,g,b),m=Math.
 // 고유색·보조색 중 채도 높은 쪽의 색상(hue) — 그림을 돌릴 목표
 function targetHue(h){const P=PALETTE[h],a=hsv(P.main),b=hsv(P.sub);return a.s>=b.s?a:b;}
 function callerFile(stack){const lines=String(stack||'').split('\n');for(const l of lines){const m=l.match(/\/([a-z0-9-]+-r\d+)\.js/);if(m&&m[1]!=='hero-palette-r302'&&m[1]!=='fx-sprites-r106'&&m[1]!=='pixelfx-r163')return m[1];}return null;}
+// R780 렉: 스택은 '어느 파일·어느 함수가 불렀나'만 본다. 예전엔 new Error().stack 글자(칸마다 줄·칸 번호 계산·글자 만들기)를
+//  영웅 스프라이트 호출마다(헤드리스 게임 1초 약 2,600번) 만들었다. 이제 V8 호출 자리 객체에서 파일·함수 이름만 읽어
+//  같은 모양 글자('    at 함수 (파일:0:0)')를 만든다 — 아래 정규식(callerFile·threadSlash 줄·HERO_FN·effects-r178)이 보는 부분은 예전과 같다.
+//  prepareStackTrace 는 이 한 번 동안만 바꾸고 바로 되돌린다(다른 코드의 오류 스택은 그대로). limit 은 stackNow 한 칸을 더한 값.
+const stackFmt=(e,cs)=>{let o='Error';for(const c of cs){let f='',fn='';try{f=c.getFileName()||'';fn=c.getFunctionName()||'';}catch(_){}o+='\n    at '+(fn?fn+' ('+f+':0:0)':f+':0:0');}return o;};
+function stackNow(limit){const L=Error.stackTraceLimit,P=Error.prepareStackTrace;let s;
+ try{Error.stackTraceLimit=limit;Error.prepareStackTrace=stackFmt;s=new Error().stack;}finally{Error.stackTraceLimit=L;Error.prepareStackTrace=P;}return s;}
 const isGold=c=>{const v=hsv(c);return v.s>.35&&v.h>25&&v.h<62;};
 // ---- ① R292 띠 → R302 파생본 ----------------------------------------------------------------
 const STRIP_RE=/^(.*)assets\/r292\/fx\/([a-z]+)\/([a-z]+)\.webp$/;
@@ -72,8 +79,8 @@ function remapF(F){const h=hero();if(!on||!h||!F)return F;stats.sp++;
  //  그런 팔레트는 기억해 두고 다음엔 처음부터 전체를 잡는다(두 번 잡기 방지). 어느 쪽을 잡아도 판정은 예전과 같다(비용만 다름).
  let k0;try{const P=SP0.pal(F);k0=P.a.join()+'|'+P.b.join();}catch(_){return F;}
  let stack,file=null;const L=Error.stackTraceLimit;
- if(L>SHORT&&!needFull.has(k0)){Error.stackTraceLimit=SHORT;try{stack=new Error().stack;}finally{Error.stackTraceLimit=L;}file=callerFile(stack);}
- if(!shortOk(file,stack)){const tried=stack!==undefined;stack=new Error().stack;file=callerFile(stack);stats.spFull=(stats.spFull||0)+1;
+ if(L>SHORT&&!needFull.has(k0)){stack=stackNow(SHORT+1);file=callerFile(stack);}
+ if(!shortOk(file,stack)){const tried=stack!==undefined;stack=stackNow(Number.isFinite(L)?L+1:L);file=callerFile(stack);stats.spFull=(stats.spFull||0)+1;
   if(tried){needFull.add(k0);if(needFull.size>400)needFull.delete(needFull.values().next().value);}
   else if(L>SHORT){const head=String(stack).split('\n').slice(0,SHORT+1).join('\n');if(shortOk(callerFile(head),head))needFull.delete(k0);}}
  // R111 also renders bosses: only its silver-thread slash is a thread caller.
@@ -100,7 +107,7 @@ function ownership(o,h){if(o?.enemy)return false;
  if(!values.length)return null;
  return values.every(v=>v===h||v==='hero'||v==='player'||v===player);}
 // R441 렉: 소유 정보가 있으면 스택을 잡지 않는다(예전엔 인자로 늘 먼저 잡았다). 잡을 땐 이 두 칸(lazyStack·isHero)만큼 한도를 늘려 같은 호출자 범위를 본다.
-function lazyStack(){const L=Error.stackTraceLimit;if(Number.isFinite(L))Error.stackTraceLimit=L+2;try{return new Error().stack;}finally{Error.stackTraceLimit=L;}}
+function lazyStack(){const L=Error.stackTraceLimit;return stackNow(Number.isFinite(L)?L+3:L);}
 function isHero(o,h,stack){const own=ownership(o,h);return own===null?heroCall(typeof stack==='function'?stack():stack):own;}
 function wrapPX(){const X=window.__STORYWORLD_PIXELFX_R163__;if(!X||X.r302||X===PX0)return;PX0=X;
  const tint=(o,n)=>{const h=hero();if(!on||!h||!isHero(o,h,lazyStack))return o;stats.pixelfx++;const C=PALETTE[h],r={...(o||{}),tint:{a:C.main,b:C.sub}};
