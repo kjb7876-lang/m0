@@ -1,0 +1,158 @@
+{
+ "round": "R763",
+ "facing": "right",
+ "files": [
+  {
+   "villager": "fisher",
+   "anim": "idle",
+   "frames": 6,
+   "source": "Dots CX-0070BM CX-0070BM_vil1_idle6_r3_c1.png",
+   "sourceSha256": "eea9efcf7431853942d23c2e5c55c0090ff70146ec2729019a3546e5d1a6cda2",
+   "path": "assets/r763/villagers/fisher-idle.webp",
+   "cell": 256,
+   "pivot": [
+    128.0,
+    234.67
+   ],
+   "size": [
+    1536,
+    256
+   ],
+   "bytes": 84138,
+   "sha256": "0f97125a95663f1e47cc86ca8b2336d1b38bf825a88672c608da7432743c957d"
+  },
+  {
+   "villager": "fisher",
+   "anim": "walk",
+   "frames": 8,
+   "source": "Dots CX-0070BM CX-0070BM_vil1_walk8_r3_c1.png",
+   "sourceSha256": "594c81de71303a213dce4a3fda54a1dd0450cf715a75304722aa5fe0d060c7eb",
+   "path": "assets/r763/villagers/fisher-walk.webp",
+   "cell": 256,
+   "pivot": [
+    128.0,
+    234.67
+   ],
+   "size": [
+    2048,
+    256
+   ],
+   "bytes": 102212,
+   "sha256": "123c07cc2f6a3abd4bf16df0661b320bf26271f9c766c2b2a8a38fde3bd70912"
+  },
+  {
+   "villager": "fisher",
+   "anim": "atk",
+   "frames": 8,
+   "source": "Dots CX-0070BM CX-0070BM_vil1_atk8_r3_c1.png",
+   "sourceSha256": "19a133decd6b7fe8f33e503021aefcd92ae6ffbd214fd6af374b9976e78d7a38",
+   "path": "assets/r763/villagers/fisher-atk.webp",
+   "cell": 256,
+   "pivot": [
+    128.0,
+    234.67
+   ],
+   "size": [
+    2048,
+    256
+   ],
+   "bytes": 116646,
+   "sha256": "e182d59b608781f0b6414954b67dda3995eddceadf3061db40937e2b59311f9d"
+  },
+  {
+   "villager": "fisher",
+   "anim": "hit",
+   "frames": 4,
+   "source": "Dots CX-0070BM CX-0070BM_vil1_hit4_r1_c1.png",
+   "sourceSha256": "55af83354103976348c1f577d41fe3ec777c08ac14aad2ae61fb2fe9698af1dd",
+   "path": "assets/r763/villagers/fisher-hit.webp",
+   "cell": 256,
+   "pivot": [
+    128.0,
+    234.67
+   ],
+   "size": [
+    1024,
+    256
+   ],
+   "bytes": 56624,
+   "sha256": "54213790a3af7cd657c55da9fe594bd3bee672fff16ca3c22a330eb3b5ed31ee"
+  },
+  {
+   "villager": "fisher",
+   "anim": "death",
+   "frames": 8,
+   "source": "Dots CX-0070BM CX-0070BM_vil1_death8_r2_c1.png",
+   "sourceSha256": "965d2193f9daa2844e9cc3400a70253568cbccfaf76566096a1fa17d7b35a223",
+   "path": "assets/r763/villagers/fisher-death.webp",
+   "cell": 256,
+   "pivot": [
+    128.0,
+    234.67
+   ],
+   "size": [
+    2048,
+    256
+   ],
+   "bytes": 92820,
+   "sha256": "4fbd138e94adbebd00514a54ccc42ab2852c412af23ec8afaf07367719781b99"
+  },
+  {
+   "villager": "herbwife",
+   "anim": "idle",
+   "frames": 6,
+   "source": "Dots CX-0070BM CX-0070BM_vil2_idle6_r1_c1.png",
+   "sourceSha256": "8bdd25e9fe2713f667a28f42aa91596c3bbda4003dcea0799fd19ce7f6ed6750",
+   "path": "assets/r763/villagers/herbwife-idle.webp",
+   "cell": 256,
+   "pivot": [
+    128.0,
+    234.67
+   ],
+   "size": [
+    1536,
+    256
+   ],
+   "bytes": 56064,
+   "sha256": "3055017b5a16279659b666b203b4dd1f28b63abdac03c5af5ad8ac25ee3e46de"
+  },
+  {
+   "villager": "herbwife",
+   "anim": "walk",
+   "frames": 8,
+   "source": "Dots CX-0070BM CX-0070BM_vil2_walk8_r2_c1.png",
+   "sourceSha256": "f4a47d063605e0158155f3d2a5cd477cff2e77deb181d0aeb9c6c218d5c76c34",
+   "path": "assets/r763/villagers/herbwife-walk.webp",
+   "cell": 256,
+   "pivot": [
+    128.0,
+    234.67
+   ],
+   "size": [
+    2048,
+    256
+   ],
+   "bytes": 69580,
+   "sha256": "81bfd983b0bc35f7d225491f4678ae70cc07d8f6d6fbea9749dc6526cbafc059"
+  },
+  {
+   "villager": "herbwife",
+   "anim": "atk",
+   "frames": 8,
+   "source": "Dots CX-0070BM CX-0070BM_vil2_atk8_r3_c1.png",
+   "sourceSha256": "5e442f3a16c71d3a9ea900d59e4b4747443413dc7b6afb80327f50708fa2f9bc",
+   "path": "assets/r763/villagers/herbwife-atk.webp",
+   "cell": 256,
+   "pivot": [
+    128.0,
+    234.67
+   ],
+   "size": [
+    2048,
+    256
+   ],
+   "bytes": 74358,
+   "sha256": "20a02f34c5e5386d947d5d2735cd57e6050a26a0fa264174a90a4a86e989b525"
+  }
+ ]
+}
