@@ -70,9 +70,9 @@ async function runHero(b,hero,rows,part){const {ctx,p,errs}=await boot(b,hero);
 
  // ---- SC04 기본공격 적중 ----
  if(want('sc04')){await begin('sc04');await safeHp();const e=await toEnemy();rec('sc04','적 옆 자리 잡음',!!e,e);
-  if(e){const hp0=await E(()=>__HQ795.enemyHpSum());let anim=false,shots=0,dealt=0,combo0=(await snap()).combo,t=0;await E(()=>__HQ795.resetSeen());await down('a');
+  if(e){const f0=await E(id=>__HQ795.hitFacts(id),e.id);const hp0=await E(()=>__HQ795.enemyHpSum());let anim=false,shots=0,dealt=0,combo0=(await snap()).combo,t=0;await E(()=>__HQ795.resetSeen());await down('a');
    for(;t<5;t+=.25){await step(.25);const s=await snap();anim=await E(()=>__HQ795.seenF.aa);shots=Math.max(shots,s.shots);dealt=hp0-await E(()=>__HQ795.enemyHpSum());if(dealt>0&&anim&&t>1)break;}
-   const s=await snap();await up('a');rec('sc04','A 로 적에게 피해',dealt>0,{dealt:+dealt.toFixed(1),sec:t});rec('sc04','공격 동작(attackAnim) 켜짐',anim,'');rec('sc04','콤보 증가',s.combo>combo0,{from:combo0,to:s.combo});
+   const s=await snap();await up('a');rec('sc04','A 로 적에게 피해',dealt>0,dealt>0?{dealt:+dealt.toFixed(1),sec:t}:{dealt:+dealt.toFixed(1),sec:t,target:e.id,combo:[combo0,s.combo],before:f0,after:await E(id=>__HQ795.hitFacts(id),e.id)});rec('sc04','공격 동작(attackAnim) 켜짐',anim,'');rec('sc04','콤보 증가',s.combo>combo0,{from:combo0,to:s.combo});
    if(!MELEE.has(hero))rec('sc04','원거리: 아군 탄 생성',shots>0||dealt>0,{shots});
    await toOpen();await step(1.2);const s2=await snap();rec('sc04','공격 끝난 뒤 동작값 복귀',s2.attackAnim===0,{aa:s2.attackAnim});}
   await end('sc04');}
@@ -185,9 +185,9 @@ async function runHero(b,hero,rows,part){const {ctx,p,errs}=await boot(b,hero);
    for(const k of ['q','w','e','r']){/* 아직 안 배운 칸(단계 0)은 잠겨 있는 것이 맞다 — 배운 칸만 시전해 본다 */if(k!=='q'&&!((await snap()).ranks[k]>=1)){rec('sc14',`바꾼 영웅 ${k.toUpperCase()} 잠김(안 배움)`,null,'');continue;}await toOpen();let rdy=false;for(let t=0;t<60&&!rdy;t++){rdy=(await E(k=>__HQ795.hudCd(k),k))===0;if(!rdy)await step(1);}await safeHp();await toEnemy();await press(k);await step(.1);const cd=await E(k=>__HQ795.hudCd(k),k);rec('sc14',`바꾼 영웅 ${k.toUpperCase()} 시전`,rdy&&cd>0&&cd<=120,{rdy,cd});await step(1.5);}
    await toOpen();const w0=await snap();await down('ArrowLeft');await step(.5);const w1=await snap();await up('ArrowLeft');rec('sc14','바꾼 영웅 걷기',Math.hypot(w1.x-w0.x,w1.y-w0.y)>1.5,{d:+Math.hypot(w1.x-w0.x,w1.y-w0.y).toFixed(2)});
    try{await sw(hero);const b2=await snap();rec('sc14','원래 영웅으로 되돌림',b2.hero===hero,b2.hero);const d2=await E(()=>__HQ795.heroDrawn());rec('sc14','되돌린 영웅 몸 그림',d2.hero.length>0&&d2.others.length===0,d2);
-    await safeHp();const eB=await toEnemy();const whyB=eB?null:await E(m=>__HQ795.engageWhy(m),MELEE.has(hero));const near0=await E(()=>{const d=__HQ795.nearestLive(player.x,player.y);return Number.isFinite(d)?+d.toFixed(2):null;});const h1=await E(()=>__HQ795.enemyHpSum());await E(()=>__HQ795.resetSeen());await down('a');const stB=await step(3);await up('a');const dB=h1-await E(()=>__HQ795.enemyHpSum());const sB=await snap();
+    await safeHp();const eB=await toEnemy();const whyB=eB?null:await E(m=>__HQ795.engageWhy(m),MELEE.has(hero));const near0=await E(()=>{const d=__HQ795.nearestLive(player.x,player.y);return Number.isFinite(d)?+d.toFixed(2):null;});const fB0=eB?await E(id=>__HQ795.hitFacts(id),eB.id):null;const comboB0=(await snap()).combo;const h1=await E(()=>__HQ795.enemyHpSum());await E(()=>__HQ795.resetSeen());await down('a');const stB=await step(3);await up('a');const dB=h1-await E(()=>__HQ795.enemyHpSum());const sB=await snap();
     /* 실패했을 때 '붙을 몹이 없었다'와 '붙었는데 안 맞았다'를 가를 수 있게 본 것을 그대로 적는다 */
-    rec('sc14','되돌린 뒤 기본공격 피해',dB>0,{dealt:+dB.toFixed(1),engaged:eB?.id||null,why:whyB,nearBefore:near0,attackAnimSeen:await E(()=>__HQ795.seenF.aa),stoppedBy:stB?.stoppedBy||null,hp:sB.hp,live:await E(()=>room.enemies.filter(e=>e.hp>0&&!e.boss).length),modal:await E(()=>!!modal)});}catch(e){rec('sc14','원래 영웅으로 되돌림',false,String(e).slice(0,300));await E(()=>{if(modal)closePanel(true);});}}
+    rec('sc14','되돌린 뒤 기본공격 피해',dB>0,{dealt:+dB.toFixed(1),engaged:eB?.id||null,why:whyB,combo:[comboB0,sB.combo],before:fB0,after:eB?await E(id=>__HQ795.hitFacts(id),eB.id):null,nearBefore:near0,attackAnimSeen:await E(()=>__HQ795.seenF.aa),stoppedBy:stB?.stoppedBy||null,hp:sB.hp,live:await E(()=>room.enemies.filter(e=>e.hp>0&&!e.boss).length),modal:await E(()=>!!modal)});}catch(e){rec('sc14','원래 영웅으로 되돌림',false,String(e).slice(0,300));await E(()=>{if(modal)closePanel(true);});}}
   await toOpen();await step(1);await end('sc14');}
 
  // ---- SC15 속박(이동 잠금) 수명 ----

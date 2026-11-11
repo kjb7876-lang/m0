@@ -58,8 +58,17 @@ function pickEnemy(){const pool=room.enemies.filter(e=>e.hp>0&&!e.boss&&e.visibl
 const tp=(q)=>{player.x=q.x;player.y=q.y;route=[];command=null;};
 /* 피해 재기: 몹 HP 합계는 싸움 중 새로 나오는 몹(R383 뿌리 등) 때문에 늘 수 있다 → 틱마다 몹별 HP 감소만 모은다.
    enemyHpSum() 은 '−누적 피해'를 돌려준다(앞뒤 값의 차 = 그 사이에 준 피해). */
-const hpSeen=new WeakMap();let dmgTotal=0;
-function watchDmg(){for(const e of room.enemies||[]){const now=Math.max(0,+e.hp||0),was=hpSeen.get(e);if(was!==undefined&&now<was)dmgTotal+=was-now;hpSeen.set(e,now);}}
+const hpSeen=new WeakMap();let dmgTotal=0,lastSet=new Set(),lastRoom=null,vanished=0;
+/* 맞은 틱 안에 목록(room.enemies)에서 빠진 몹은 뒤 훑기에서 다시 안 보인다 → 지난 훑기에 있었는데 지금 없는 몹은
+   마지막으로 본 HP 만큼을 피해로 센다(같은 방일 때만 — 지역을 옮기면 목록이 통째로 바뀐다). vanished 는 그렇게 센 마리 수. */
+function watchDmg(){const list=room.enemies||[],cur=new Set(list);
+ if(lastRoom===room)for(const e of lastSet)if(!cur.has(e)){const was=hpSeen.get(e);if(was>0){dmgTotal+=was;vanished++;hpSeen.set(e,0);}}
+ for(const e of list){const now=Math.max(0,+e.hp||0),was=hpSeen.get(e);if(was!==undefined&&now<was)dmgTotal+=was-now;hpSeen.set(e,now);}
+ lastSet=cur;lastRoom=room;}
+/* 피해가 0 으로 나왔을 때 '맞았는데 HP 가 안 줄었다'와 '세는 쪽이 놓쳤다'를 가르는 값들 */
+function hitFacts(id){const e=(room.enemies||[]).find(v=>v.id===id)||null;return {kills:Number(room.kills)||0,vanished,inList:!!e,hp:e?+(+e.hp).toFixed(1):null,maxHp:e?(e.maxHp??e.maxhp??null):null,dist:e?+Math.hypot(e.x-player.x,e.y-player.y).toFixed(2):null,
+  flags:e?Object.keys(e).filter(k=>/invinc|invuln|shield|sealed|immune|untarget|dormant|asleep|spawnState|guard|phase|r103|r511/i.test(k)).reduce((o,k)=>{const v=e[k];o[k]=(v&&typeof v==='object')?'[obj]':v;return o;},{}):null,
+  clear:e?!!clearLine(player,e):null,face:player.direction,range:HEROES[player.hero].range};}
 const enemyHpSum=()=>{watchDmg();return -dmgTotal;};
 /* 영웅 몸 그림 확인: draw() 동안 전역 ctx 는 기록기(명령 목록)로 바뀌므로 CanvasRenderingContext2D 원형을 엿봐도 안 잡힌다.
    drawHero 를 잠깐 감싸 그 순간의 ctx.drawImage(인스턴스에 얹힌 것 포함)를 엿본다(qa/r444/fcensus 와 같은 방식).
@@ -71,5 +80,5 @@ async function heroDrawn(){await new Promise(r=>setTimeout(r,80));const map=new 
  try{draw();}finally{drawHero=base;}
  const h=player.hero,low=seen.map(k=>k.toLowerCase());
  return {calls,n,hero:[...new Set(low.filter(k=>k.includes(h)))].slice(0,4),others:[...new Set(low.filter(k=>/hero/.test(k)&&!k.includes(h)).map(k=>(k.match(/(hwando|seoha|neon|michaela|lauren|hunter|slayer|gunner)/)||[])[1]).filter(Boolean))],pose:heroPose()};}
-window.__HQ795={engage,engageWhy,still,heroDrawn,hudCd,seenF,resetSeen(){seenF.aa=false;seenF.sa=false;},viol,lock,step,sweep,snap,findOpen,placeNear,pickEnemy,tp,enemyHpSum,dummyMove,DIRS8,openAt,nearestLive,statusLabels,setTag:t=>{tag=t;lock.since=null;},drain(){const v=viol.splice(0),l=lock.rows.splice(0);return {viol:v,locks:l};}};
+window.__HQ795={engage,engageWhy,hitFacts,still,heroDrawn,hudCd,seenF,resetSeen(){seenF.aa=false;seenF.sa=false;},viol,lock,step,sweep,snap,findOpen,placeNear,pickEnemy,tp,enemyHpSum,dummyMove,DIRS8,openAt,nearestLive,statusLabels,setTag:t=>{tag=t;lock.since=null;},drain(){const v=viol.splice(0),l=lock.rows.splice(0);return {viol:v,locks:l};}};
 })();
