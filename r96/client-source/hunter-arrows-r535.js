@@ -22,7 +22,7 @@
 if(window.__STORYWORLD_HUNTER_ARROWS_R535__)return;
 const REV='R535',KEY='storyworld.r535.hunter',HERO='hunter';
 const TUNE=Object.freeze({
- storm:Object.freeze({cadence:.7,turn:9,life:1.3,seek:9}),
+ storm:Object.freeze({cadence:.7,turn:0,life:1.3,seek:9}),/* R765: turn 0 = 표적을 따라 휘지 않음(자동적중 없음, 활이 향한 줄로만) */
  split:Object.freeze({count:2,perCast:6,mult:.15,pierce:1,speed:15,life:.42,reach:5,burnTotal:.3,burnTime:2.5,burnEvery:.5,maxBurning:12}),
  lance:Object.freeze({direct:.2,blast:.8,radius:2.2,petal:.45,petalOld:.9,speed:15,range:8,width:.34}),
  chain:Object.freeze({qFinal:2,petalBurn:.5,petalBeat:.08}),
@@ -106,7 +106,7 @@ function flushSplits(){const S=TUNE.split;while(splitQ.length){const s=splitQ.sh
   if(p){p.hit.add(s.from);used++;stats.shards++;if(i===0){if(pops.length>=6)pops.shift();pops.push({x:s.x,y:s.y,t0:T(),ang:a});}}}
  castShards.set(s.cast,used);if(castShards.size>32)castShards.delete(castShards.keys().next().value);}}
 
-function steer(dt){const S=TUNE.storm,L=live();if(!L.length||!(dt>0))return;for(const p of projectiles){if(!p||p.dead||p.r535!=='storm')continue;
+function steer(dt){const S=TUNE.storm;if(!(S.turn>0))return;const L=live();if(!L.length||!(dt>0))return;for(const p of projectiles){if(!p||p.dead||p.r535!=='storm')continue;
  let tg=p.r535T!=null?L.find(e=>e.id===p.r535T):null;
  if(!tg){let best=null,d=rg(S.seek);for(const e of L){const q=Math.hypot(e.x-p.x,e.y-p.y);if(q<d&&!(p.hit&&p.hit.has(e.id))){d=q;best=e;}}tg=best;p.r535T=tg?tg.id:null;}
  if(!tg)continue;const sp=Math.hypot(p.vx,p.vy),cur=Math.atan2(p.vy,p.vx),want=Math.atan2(tg.y-p.y,tg.x-p.x),d=Math.atan2(Math.sin(want-cur),Math.cos(want-cur)),m=S.turn*dt,na=cur+Math.max(-m,Math.min(m,d));

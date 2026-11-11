@@ -13,7 +13,11 @@ function sectorOf(dx,dy){const a=Math.atan2((dx+dy)*.5,dx-dy);let sel='s',best=1
 // 8방향 한가운데로 겨눌 월드 각(화면각 → 월드 방향: screen a=atan2((dx+dy)/2,dx-dy))
 function worldAngleFor(sec){const a=ANG[sec];let best=0,bd=1e9;for(let k=0;k<720;k++){const w=k/720*Math.PI*2,aa=Math.atan2((Math.cos(w)+Math.sin(w))*.5,Math.cos(w)-Math.sin(w)),d=Math.abs(Math.atan2(Math.sin(aa-a),Math.cos(aa-a)));if(d<bd){bd=d;best=w;}}return best;}
 
-function mk(opt={}){const hits=[],drawn={along:[],draw:[],img:[]},L={};
+// R561d: 총구 방향(8방향 칸 한가운데)으로만 나가므로, 옛 시험의 '월드 x축 위 적'을 겨눈 칸 중심 줄로 옮긴다 — 플레이어(10,10) 기준 회전, 거리·간격은 그대로(벽 판정은 역회전)
+const RO=Math.atan2(2*Math.sin(Math.PI/4)-Math.cos(Math.PI/4),Math.cos(Math.PI/4)+2*Math.sin(Math.PI/4)),rot=(x,y,s=1)=>{const c=Math.cos(RO*s),n=Math.sin(RO*s);return [10+(x-10)*c-(y-10)*n,10+(x-10)*n+(y-10)*c];};
+const rotE=l=>l.map(e=>{const [x,y]=rot(e.x,e.y);return {...e,x,y};});
+const rotB=f=>f?((x,y,...r)=>{const [a,b]=rot(x,y,-1);return f(a,b,...r);}):null;
+function mk(opt={}){opt={...opt,enemies:opt.enemies?rotE(opt.enemies):opt.enemies,blocked:rotB(opt.blocked)};const hits=[],drawn={along:[],draw:[],img:[]},L={};
  const zoom=opt.zoom||1;
  const enemies=opt.enemies||[];
  const stack=[],st={tx:0,ty:0,rot:0,sx:1,sy:1};
@@ -122,7 +126,7 @@ const chainHits=(T,id)=>T.hits.filter(h=>h.ab===CH&&(!id||h.id===id));
  const total=chainHits(T).length;T.run(10.6);let peak=0;for(let k=0;k<20;k++){T.sb.time=+(10.2+k*.03).toFixed(3);T.paint();peak=Math.max(peak,T.drawn.along.length+T.drawn.draw.length);}
  ok(`chain load: ${crowd.length} enemies → ≤ 24 chain hits per cast, ≤ 80 sprite draws in any frame, whole 2 s simulation under 400 ms`,total>0&&total<=24&&peak<=80&&ms<400,{total,peak,ms:Math.round(ms),crowd:crowd.length});}
 {// 연쇄 그림: a→c 사이에 가는 선이 그려진다(양끝이 두 적의 화면 위치 근처, 굵기는 총구 이하)
- const T=mk({enemies:[mkE('a',13,10),mkE('c',13,12.5),mkE('d',13,15)]});T.sb.special();T.run(10.45);T.paint();const H=H0(1),pa=T.sb.project(13,10),pc=T.sb.project(13,12.5),near=(x,y,p)=>Math.abs(x-p.x)<=45&&y<=p.y+10&&y>=p.y-H*1.3;
+ const T=mk({enemies:[mkE('a',13,10),mkE('c',13,12.5),mkE('d',13,15)]});T.sb.special();T.run(10.45);T.paint();const H=H0(1),pa=T.sb.project(...rot(13,10)),pc=T.sb.project(...rot(13,12.5)),near=(x,y,p)=>Math.abs(x-p.x)<=45&&y<=p.y+10&&y>=p.y-H*1.3;
  const thin=T.drawn.along.filter(c=>c.w<=0.2*H);
  ok('chain visual: a thin laser segment leaves the first target and one reaches the next enemy (code-drawn, temporary until a Dots sheet)',thin.some(c=>near(c.x0,c.y0,pa))&&thin.some(c=>near(c.x1,c.y1,pc)),thin.slice(0,4));}
 {// 끄기 호환: 연계(chain) 끄기와 무관, on:false 이면 엔진 원래 스킬

@@ -43689,8 +43689,8 @@
     },
     {
       "path": "gunner-arms-r561.js",
-      "bytes": 45009,
-      "sha256": "f2d552ece57e6c3c309c3e2fe8130187340b8086bfdd5fcfb4a9df18dde18cf6"
+      "bytes": 45445,
+      "sha256": "57bc356f91d1ef1167dd6953c2385a2fa693eba398e58d44abd172fac21fb0d1"
     },
     {
       "path": "hero-facing-r336.js",
@@ -43809,8 +43809,8 @@
     },
     {
       "path": "hunter-arrows-r535.js",
-      "bytes": 34814,
-      "sha256": "9d125dadd57764bb364636cbfd555b08174a012b48fb8cb3ff3d519b2bf1113f"
+      "bytes": 34939,
+      "sha256": "b67dec5b1910267a6ecc95a22846733e5753a31bd44860a3b7a1d8a8e4a3e21f"
     },
     {
       "path": "hwando-arc-r349.js",
@@ -44819,7 +44819,7 @@
     }
   ],
   "fileCount": 8963,
-  "totalBytes": 1235395024,
+  "totalBytes": 1235395585,
   "webHTMLSha256": "d8bef146aec9863ec63a5a3150cab3c47344631e13664b5969cd73d490e68348",
   "largest": [
     {
