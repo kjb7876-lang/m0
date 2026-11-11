@@ -16,10 +16,11 @@
 //    헤드리스 실측: 출구 단계에서는 길잡이(R101 wardStep)가 출구 문보다 먼저 제단(room.objective)에서 뒷이야기를 읽는다 → 출구 문만 막으면 인장 없이 서사가 먼저 나온다. 그래서 제단과 출구 문을 함께 건다.
 //  · R792 셋째 묶음 = Dots 정식 시트. 앳된 남자는 CX-0072NP idle6(숨쉬기)·offer6(영웅이 다가오면 사발을 내밀고 멈춤)·흉상으로 바꾼다(ElevenLabs 대체 한 장은 더 쓰지 않음).
 //    병원 1막 두 사람(CX-0073SN): ep1a10 의료진 '도움을 청한다' · ep1a11 의목사(침대 곁 의자) '이야기를 듣는다'. 둘 다 보스를 쓰러뜨린 뒤 제단 곁, 뒷이야기 앞. 처치 막기 없음.
+//  · R793 = 서윤(ep1b05). 보스 문 옆에 서 있고 '허락을 구한다' 를 골라야 보스 문의 기억이 시작된다(처치 막기 없음). 한이경(murder04)은 온 그림이 정본과 달라(남자로 그려짐) 넣지 않았다.
 //  끄기: localStorage['storyworld.r790.npc']='{"on":false}'. 점검: window.__STORYWORLD_NPC_R790__.inspect()
 (()=>{'use strict';
 if(window.__STORYWORLD_NPC_R790__)return;
-const REV='R792-story-npc-1',KEY='storyworld.r790.npc';
+const REV='R793-story-npc-1',KEY='storyworld.r790.npc';
 let prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object'&&typeof s.on==='boolean')prefs.on=s.on;}catch(_){}
 const stats={placed:0,offers:0,taken:0,auto:0,sealed:0,draws:0,errors:0};let lastError=null;const events=[];
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
@@ -48,7 +49,13 @@ const DEFS=Object.freeze({last303:Object.freeze({kind:'youth',flag:'gwibitang',p
  sprite:Object.freeze({path:'assets/r790/npc/physician-idle6.webp',w:384,h:384,px:192,py:352,vis:227,scale:.85,frames:6,fps:4}),bust:'assets/r790/npc/physician-bust.webp',bustPos:'50% 30%',bustFit:'cover',labelBelow:true,
  name:'의목사',label:'의목사 · 세 세계 이야기',sub:'침대 곁 · 의사이면서 목사',
  body:'검은 성직복 위에 흰 가운을 걸친 남자가 침대 곁 의자에 앉아 있다. 청진기와 오래된 은제 J인장이 함께 걸려 있다.',lore:'현세와 몽세, 내세 — 사람이 살아가는 현실, 정신과 무의식이 펼쳐지는 곳, 선과 악의 본질이 존재하는 세계.',
- take:'이야기를 듣는다',wait:'아직',done:'의목사에게서 현세와 몽세, 내세에 관해 배웠습니다.',toDoor:'기억의 제단에서 뒷이야기를 확인하세요.',first:'의목사의 이야기를 먼저 들으세요.',hud:'침대 곁 의목사 · 이야기 듣기',seal:null,boss:null})});
+ take:'이야기를 듣는다',wait:'아직',done:'의목사에게서 현세와 몽세, 내세에 관해 배웠습니다.',toDoor:'기억의 제단에서 뒷이야기를 확인하세요.',first:'의목사의 이야기를 먼저 들으세요.',hud:'침대 곁 의목사 · 이야기 듣기',seal:null,boss:null}),
+ // R793 붉은 하이힐. 정본 17장 "서윤의 미소는 완벽했다. 그러나 아무도 보지 않을 때면 표정이 텅 비었다. 나는 그녀의 허락을 받고 몽세에 들어갔다."
+ ep1b05:Object.freeze({kind:'seoyun',flag:'permission',phase:'door',sideFirst:-1/* 문 오른쪽은 앞 벽에 가린다(헤드리스 장면) → 왼쪽부터 */,
+ sprite:Object.freeze({path:'assets/r790/npc/seoyun-idle6.webp',w:384,h:384,px:192,py:352,vis:284,scale:1.04,frames:6,fps:5}),bust:'assets/r790/npc/seoyun-bust.webp',bustPos:'50% 30%',bustFit:'cover',
+ name:'서윤',label:'서윤 · 허락 구하기',sub:'붉은 조명 아래 · 서윤',
+ body:'서윤의 미소는 완벽하다. 그러나 아무도 보지 않을 때면 표정이 텅 빈다.',lore:'나는 그녀의 허락을 받고 몽세에 들어갔다.',
+ take:'허락을 구한다',wait:'아직',done:'서윤의 허락을 받았습니다.',toDoor:'보스 구역 문 앞에서 기억을 확인하세요.',first:'서윤에게 먼저 허락을 구하세요.',hud:'문 앞의 서윤 · 허락 구하기',seal:null,boss:null})});
 const ORDER=['route','rally','door','doorStory','boss','exit','exitStory','done'],OFFER_REACH=3.4,REACH=2.4,DOOR_REACH=3.2,OBJ_REACH=2.7,FADE=1.6;
 const after=(d,ph)=>ORDER.indexOf(ph)>ORDER.indexOf(d.phase),shown=(d,ph)=>ORDER.indexOf(ph)>=ORDER.indexOf(d.phase)&&ORDER.includes(ph);
 let ledger={};
@@ -70,15 +77,15 @@ function around(c,isBlocked,avoid=[]){if(!c||!Number.isFinite(c.x+c.y))return nu
   if(isBlocked(q.x,q.y,.34))continue;if(avoid.some(v=>Math.hypot(v.x-q.x,v.y-q.y)<1.5))continue;return q;}return null;}
 // 순수: 문에서 영웅이 다가오는 쪽으로 2.3칸, 옆으로 1.9칸(통로 가운데 줄은 비움). 막혔으면 가까운 빈 자리, 끝내 없으면 null.
 //  inward=false 보스 문(영웅은 보스 구역 바깥에서 옴) · true 출구 문(영웅은 보스 구역 안에서 옴).
-function spot(door,bounds,isBlocked,avoid=[],inward=false){if(!door||!Number.isFinite(door.x+door.y))return null;const b=Array.isArray(bounds)&&bounds.length===4?bounds:[door.x-1,door.y-1,door.x+1,door.y-1],cx=(b[0]+b[2])/2,cy=(b[1]+b[3])/2;
+function spot(door,bounds,isBlocked,avoid=[],inward=false,sideSign=1){if(!door||!Number.isFinite(door.x+door.y))return null;const b=Array.isArray(bounds)&&bounds.length===4?bounds:[door.x-1,door.y-1,door.x+1,door.y-1],cx=(b[0]+b[2])/2,cy=(b[1]+b[3])/2;
  const ny=door.axis==='y',sg=inward?-1:1,n=ny?{x:0,y:(door.y>=cy?1:-1)*sg}:{x:(door.x>=cx?1:-1)*sg,y:0},t={x:n.y?1:0,y:n.x?1:0};
- for(const out of [2.3,2.7,1.9,2.9])for(const side of [1.9,-1.9,1.6,-1.6,1.3,-1.3]){const q={x:door.x+n.x*out+t.x*side,y:door.y+n.y*out+t.y*side};
+ for(const out of [2.3,2.7,1.9,2.9])for(const side0 of [1.9,-1.9,1.6,-1.6,1.3,-1.3]){const side=side0*(sideSign<0?-1:1),q={x:door.x+n.x*out+t.x*side,y:door.y+n.y*out+t.y*side};
   if(Math.hypot(q.x-door.x,q.y-door.y)>=DOOR_REACH-.05)continue;if(isBlocked(q.x,q.y,.34))continue;if(avoid.some(a=>Math.hypot(a.x-q.x,a.y-q.y)<1.5))continue;return q;}return null;}
 function ensure(r=here()){if(!r||!Array.isArray(r.props))return null;const d=defOf(r),want=!!d&&applies(r)&&shown(d,phaseOf(r)),cur=npc(r);
  if(!want){if(cur)r.props=r.props.filter(p=>!p.r790NPC);return null;}if(cur)return cur;const door=gateDoor(r);if(!door)return null;
  const isB=(x,y,rad)=>blocked(x,y,rad,r),solids=r.props.filter(p=>p&&p.solid!==false&&Number.isFinite(p.x+p.y));
  // 문 단계 인물은 보스 문 옆, 출구 단계 인물(쓰러뜨린 보스)은 쓰러진 자리 = 기억 제단 곁.
- const q=d.phase==='exit'?around(r.objective,isB,solids):spot(door,r.exploration?.worldWardR81?.bossBounds,isB,solids);if(!q)return null;
+ const q=d.phase==='exit'?around(r.objective,isB,solids):spot(door,r.exploration?.worldWardR81?.bossBounds,isB,solids,false,d.sideFirst||1);if(!q)return null;
  // 문 단계에 막 들어와 나타날 때만 안개 속에서 서서히(이미 지난 단계의 세이브는 바로 또렷하게)
  const p={id:'r790:npc:'+r.id+':'+d.kind,x:q.x,y:q.y,home:{...q},r790NPC:d.kind,solid:false,visible:true,autoTargetEligible6:false,appearAt:phaseOf(r)===d.phase&&!taken(r)?T():-99,side:Math.sign(q.x-(d.phase==='exit'?r.objective.x:door.x))||1};
  try{img(d.sprite.path);if(d.sprite.offer)img(d.sprite.offer.path);}catch(e){fail(e);}/* 설 때 그림을 미리 청한다 */

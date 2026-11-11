@@ -8184,7 +8184,9 @@
     "assets/r790/npc/physician-idle6.webp",
     "assets/r790/npc/youth-bust-d.webp",
     "assets/r790/npc/youth-idle6.webp",
-    "assets/r790/npc/youth-offer6.webp"
+    "assets/r790/npc/youth-offer6.webp",
+    "assets/r790/npc/seoyun-bust.webp",
+    "assets/r790/npc/seoyun-idle6.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9259,5 +9261,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "3a7295c6aee92734a3122483ebf89f2f6dc35c93d6ed7d3019ac3c0526640880"
+  "runtimeManifestSHA256": "1aea090df510ac5550076b6ea484c89257c122bcc44874c28bf6d70072ad6d99"
 }
