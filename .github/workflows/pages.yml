@@ -401,6 +401,8 @@ jobs:
         run: node r96/qa/r617/hwando-fall-video-cpu-check.cjs
       - name: R619 pause game drawing while a full-screen story video is open
         run: node r96/qa/r619/video-render-pause-cpu-check.cjs
+      - name: R667 title screen background loop video CPU check
+        run: node r96/qa/r667/title-bg-video-cpu-check.cjs
       - name: R373 mob squads and leaders CPU check
         run: node r96/qa/r373/r373-cpu-check.cjs
 
@@ -426,6 +428,8 @@ jobs:
         run: node r96/qa/r545/r545-cpu-check.cjs
       - name: R546 per-hero attack and skill sounds, blink, parry, EGO, awakening, clear, upgrade, fall, panel, portal and enemy-shot sounds CPU check
         run: node r96/qa/r546/r546-cpu-check.cjs
+      - name: R664 regional ambience loops (ElevenLabs beds per episode, seamless, quiet) CPU check
+        run: node r96/qa/r664/r664-cpu-check.cjs
       - name: R385 mob moves (review list v18 move/rename) CPU check
         run: node r96/qa/r385/r385-cpu-check.cjs
       - name: R390 cinema full narration + midboss hold + enemies keep chasing CPU check
@@ -539,6 +543,8 @@ jobs:
         run: node r96/qa/r362/r362-cpu-check.cjs
       - name: R255 all narrative as notes/fragments; boss entry cinematic CPU check
         run: node r96/qa/r255/r255-cpu-check.cjs
+      - name: R682 boss entry name card redesign (no zigzag red line) CPU check
+        run: node r96/qa/r682/boss-title-cpu-check.cjs
       - name: R256 widen passages on all organic maps CPU check
         run: node r96/qa/r256/r256-cpu-check.cjs
       - name: R258 wider pre-boss gathering room CPU check

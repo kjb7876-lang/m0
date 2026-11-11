@@ -8094,12 +8094,27 @@
     "skill-growth-r663.js",
     "mob-student-walk-r615.js",
     "assets/r615/mob-student-walk8.webp",
+    "ambience-r664.js",
+    "assets/r664/ambience/hall.ogg",
+    "assets/r664/ambience/wind.ogg",
+    "assets/r664/ambience/water.ogg",
+    "assets/r664/ambience/crowd.ogg",
+    "assets/r664/ambience/stone.ogg",
+    "assets/r664/ambience/night.ogg",
+    "assets/r664/ambience/index.json",
     "neon-lauren-r437.js",
-    "assets/r437/attack/neon/attack-e.webp",
-    "assets/r437/attack/neon/index.json",
     "assets/r437/attack/lauren/attack-e.webp",
     "assets/r437/attack/lauren/index.json",
-    "assets/r437/portrait/neon.webp"
+    "assets/r437/attack/neon/attack-e.webp",
+    "assets/r437/attack/neon/index.json",
+    "assets/r437/portrait/neon.webp",
+    "assets/r528/bookshelf-n.webp",
+    "assets/r528/bookshelf-w.webp",
+    "assets/r528/index.json",
+    "title-bg-video-r667.js",
+    "assets/r667/title-video/loop.mp4",
+    "assets/r667/title-poster.jpg",
+    "assets/r667/index.json"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9174,5 +9189,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "451c91422f74afcf409fb707bfd49be0e2186a6ac61c222333d8afd26e21f5b8"
+  "runtimeManifestSHA256": "773a18fb3376906dcd9d0e432ab44731e0c74fd8de2cdcb04eca6e1990deb0f2"
 }

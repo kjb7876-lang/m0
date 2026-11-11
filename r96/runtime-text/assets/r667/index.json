@@ -1,0 +1,24 @@
+{
+ "schema": "storyworld-title-bg/v1",
+ "round": "R667",
+ "files": [
+  {
+   "path": "assets/r667/title-video/loop.mp4",
+   "bytes": 464055,
+   "sha256": "46729ea44b9fd951ff240acdf79ce787a200a3d11f44344e270a470b9eec9598",
+   "source": "r96/runtime-text/assets/r309/intro/opening-hapil.mp4 (사용자 오프닝 영상, 444번째 프레임 = 18.50초)",
+   "use": "타이틀(메인 메뉴) 배경 10초 이음매 없는 루프 영상 960×540 24fps — Cloudflare(R615)에서 받음, Pages 배포본에서는 뺌",
+   "process": "scripts/build-title-loop-r667.py: 정지 화면 delogo(생성 도구 별 표시) → 주기 10초 움직임(숨쉬기 카메라·붉은 맥동·불꽃·불티 70개·안개·하늘 번쩍임 1회·비네트) → H.264 CRF26 yuv420p faststart, 소리 없음",
+   "applied": true
+  },
+  {
+   "path": "assets/r667/title-poster.jpg",
+   "bytes": 58824,
+   "sha256": "43eaee8fd80283ac4239189b2aa73b1235de120b9a76c9511da7a7371a80415f",
+   "source": "r96/runtime-text/assets/r309/intro/opening-hapil.mp4 (사용자 오프닝 영상, 444번째 프레임 = 18.50초)",
+   "use": "루프 첫 프레임 정지 이미지 — 영상 받기 전·실패·움직임 줄이기·데이터 절약일 때 (Pages)",
+   "process": "scripts/build-title-loop-r667.py: 정지 화면 delogo(생성 도구 별 표시) → 주기 10초 움직임(숨쉬기 카메라·붉은 맥동·불꽃·불티 70개·안개·하늘 번쩍임 1회·비네트) → H.264 CRF26 yuv420p faststart, 소리 없음",
+   "applied": true
+  }
+ ]
+}
