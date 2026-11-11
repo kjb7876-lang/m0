@@ -34803,6 +34803,66 @@
       "sha256": "81bfd983b0bc35f7d225491f4678ae70cc07d8f6d6fbea9749dc6526cbafc059"
     },
     {
+      "path": "assets/r790/npc/chief-bust.webp",
+      "bytes": 59774,
+      "sha256": "4411a9500ffc62cd0eecb1e3c7dddadc7dd07ac3bbe0e45c0aaa90c34f2d99d8"
+    },
+    {
+      "path": "assets/r790/npc/medic-bust.webp",
+      "bytes": 31646,
+      "sha256": "6fe5798d880c2b133d4506246a05ae76def800510695f940d61588ddcd7d51fb"
+    },
+    {
+      "path": "assets/r790/npc/medic-idle6.webp",
+      "bytes": 53466,
+      "sha256": "2e4ac7b032452909f84cae07b6cd0e6d26396469537234ffbad1bce7ef170595"
+    },
+    {
+      "path": "assets/r790/npc/physician-bust.webp",
+      "bytes": 31436,
+      "sha256": "901c4fcea05e05efe858d922a79250577e1a158630c6bbaf24f69cfdd2eb9a9b"
+    },
+    {
+      "path": "assets/r790/npc/physician-idle6.webp",
+      "bytes": 69006,
+      "sha256": "ee9ea1e1e9943416244ffc49bf9012b907cc623612c72be583ba67ec6da3b778"
+    },
+    {
+      "path": "assets/r790/npc/seoyun-bust.webp",
+      "bytes": 38092,
+      "sha256": "8e3cc5122954f076f8e111905cb09fe3273969633ddcb76d951312bac56cbab5"
+    },
+    {
+      "path": "assets/r790/npc/seoyun-idle6.webp",
+      "bytes": 115154,
+      "sha256": "ff140798841045a7c276565f7dfe1f45fbd77ef4838b4afd78100296a1ce7fd1"
+    },
+    {
+      "path": "assets/r790/npc/youth-bust-d.webp",
+      "bytes": 40078,
+      "sha256": "54f122857713febf3dbe34bc8abee79e04bfb6a606f92d336fd2ae568dc37706"
+    },
+    {
+      "path": "assets/r790/npc/youth-bust.webp",
+      "bytes": 38750,
+      "sha256": "13e2e73ae841f74dd11f4d94e86a5c1018b28e2387d979ad8d4e01f79b2b62c8"
+    },
+    {
+      "path": "assets/r790/npc/youth-idle6.webp",
+      "bytes": 72456,
+      "sha256": "e6901153541f9a3cef564c0231ef5a5d1f94aa1b4e5b9ff74216c78f316f65f3"
+    },
+    {
+      "path": "assets/r790/npc/youth-offer6.webp",
+      "bytes": 101712,
+      "sha256": "b870525f9903b79759cb2d8ef87527ab8cb3944bbe48812ef6a6593607fceb12"
+    },
+    {
+      "path": "assets/r790/npc/youth.webp",
+      "bytes": 35942,
+      "sha256": "1b081e50230c75d08012b559f2b302c85530512c3d5a2f88e637ce76819d5ecd"
+    },
+    {
       "path": "assets/r91/death/death-crystal-core.png",
       "bytes": 252893,
       "sha256": "3a7fdf719f776526d6c7f2d88607cfe88851d8d4e4989b019fd2331c746de467"
@@ -43854,8 +43914,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6573912,
-      "sha256": "d8bef146aec9863ec63a5a3150cab3c47344631e13664b5969cd73d490e68348"
+      "bytes": 6573950,
+      "sha256": "3262266bbc669f447044ecbf9cb0c51bed4ad8950c5042f49bb03279bf9986da"
     },
     {
       "path": "intro-r140.js",
@@ -44108,6 +44168,11 @@
       "sha256": "ae9f2a00016014fa0e7de573ed0ef2b2906b8e306c169346f654289ca5584cdd"
     },
     {
+      "path": "npc-r790.js",
+      "bytes": 23631,
+      "sha256": "ff086fab3934e54fb671de51c62cbb9fa75780c459f925e2d92da64c30e05a16"
+    },
+    {
       "path": "painted-vfx-data-r87.js",
       "bytes": 3052,
       "sha256": "d463255e4a8dab4a43f72c9ea3343897103faca3356bb7c908b639b190866333"
@@ -44319,8 +44384,8 @@
     },
     {
       "path": "rooms-r523.js",
-      "bytes": 64608,
-      "sha256": "9fe5b1f81c949fcff95b9360838e6758648e82a18c6f8b39dbcb0eeaebaaa955"
+      "bytes": 65265,
+      "sha256": "4f8ecb0a876c81ad2392f548e6d93c5f32dbf675c99cec2a225a8d1fad640ca6"
     },
     {
       "path": "root-gate-video-r372.js",
@@ -44818,9 +44883,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8963,
-  "totalBytes": 1235398905,
-  "webHTMLSha256": "d8bef146aec9863ec63a5a3150cab3c47344631e13664b5969cd73d490e68348",
+  "fileCount": 8976,
+  "totalBytes": 1236110743,
+  "webHTMLSha256": "3262266bbc669f447044ecbf9cb0c51bed4ad8950c5042f49bb03279bf9986da",
   "largest": [
     {
       "path": "index.html",
