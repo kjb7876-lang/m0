@@ -14,10 +14,12 @@
 //  · R791 둘째 묶음 = 고블린 두목과 장미 인장(last305, 정본 32장 "싸움이 끝난 뒤, 패배한 두목을 통해 … 그가 남긴 장미 인장을 칼 가까이 가져가자 공명이 일었다").
 //    보스(고블린 추장)를 쓰러뜨리면 쓰러진 자리(기억 제단 곁)에 패배한 두목이 서고, 장미 인장을 받아야 뒷이야기(제단의 서사·출구 문의 기억 = 정본 32장 뒷부분)가 시작된다. 그림은 이미 있는 보스 그림 그대로.
 //    헤드리스 실측: 출구 단계에서는 길잡이(R101 wardStep)가 출구 문보다 먼저 제단(room.objective)에서 뒷이야기를 읽는다 → 출구 문만 막으면 인장 없이 서사가 먼저 나온다. 그래서 제단과 출구 문을 함께 건다.
+//  · R792 셋째 묶음 = Dots 정식 시트. 앳된 남자는 CX-0072NP idle6(숨쉬기)·offer6(영웅이 다가오면 사발을 내밀고 멈춤)·흉상으로 바꾼다(ElevenLabs 대체 한 장은 더 쓰지 않음).
+//    병원 1막 두 사람(CX-0073SN): ep1a10 의료진 '도움을 청한다' · ep1a11 의목사(침대 곁 의자) '이야기를 듣는다'. 둘 다 보스를 쓰러뜨린 뒤 제단 곁, 뒷이야기 앞. 처치 막기 없음.
 //  끄기: localStorage['storyworld.r790.npc']='{"on":false}'. 점검: window.__STORYWORLD_NPC_R790__.inspect()
 (()=>{'use strict';
 if(window.__STORYWORLD_NPC_R790__)return;
-const REV='R791-story-npc-3',KEY='storyworld.r790.npc';
+const REV='R792-story-npc-1',KEY='storyworld.r790.npc';
 let prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object'&&typeof s.on==='boolean')prefs.on=s.on;}catch(_){}
 const stats={placed:0,offers:0,taken:0,auto:0,sealed:0,draws:0,errors:0};let lastError=null;const events=[];
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
@@ -26,7 +28,7 @@ const note=(kind,d={})=>{events.push({kind,at:+T().toFixed(2),...d});if(events.l
 // 지역마다 핵심 인물 하나. flag = 세이브에 남는 낱말, phase = 나타나고 관문이 걸리는 R78 단계('door' 보스 문 앞 · 'exit' 보스를 쓰러뜨린 뒤 출구 문 앞).
 //  sprite = 한 칸 그림(칸 크기·발 기준점·보이는 키·영웅 키 대비 배율), bust = 창에 넣을 그림(없으면 sprite), seal = 받기 전에는 보스가 쓰러지지 않게.
 const DEFS=Object.freeze({last303:Object.freeze({kind:'youth',flag:'gwibitang',phase:'door',
- sprite:Object.freeze({path:'assets/r790/npc/youth.webp',w:384,h:384,px:192,py:352,vis:286,scale:1.06}),bust:'assets/r790/npc/youth-bust.webp',bustPos:'50% 18%',bustFit:'cover',name:'앳된 남자',label:'앳된 남자 · 한약 한 잔',sub:'안개 속 · 한약 한 잔',
+ sprite:Object.freeze({path:'assets/r790/npc/youth-idle6.webp',w:384,h:384,px:192,py:352,vis:284,scale:1.06,frames:6,fps:5,offer:Object.freeze({path:'assets/r790/npc/youth-offer6.webp',frames:6,fps:7})}),bust:'assets/r790/npc/youth-bust-d.webp',bustPos:'50% 30%',bustFit:'cover',name:'앳된 남자',label:'앳된 남자 · 한약 한 잔',sub:'안개 속 · 한약 한 잔',
  body:'김이 오르는 약사발을 두 손으로 내밀고 있다. 귀비탕 계열 안신 처방의 냄새가 난다.',lore:'교단 약방의 기록 — 귀비탕을 달여 마신 이에게는 악몽저항이 깃들고, 불면귀 안쪽의 어두운 핵이 드러난다.',
  take:'받아 마신다',wait:'아직',done:'귀비탕 · 악몽저항 — 흐트러지던 정신이 가라앉고, 불면귀의 핵이 드러날 수 있습니다.',toDoor:'보스 구역 문 앞에서 기억을 확인하세요.',
  hud:'안개 속 앳된 남자 · 한약 한 잔(귀비탕) 받기',seal:'핵이 드러나지 않습니다 · 귀비탕 없이는 불면귀를 쓰러뜨릴 수 없습니다.',
@@ -35,8 +37,19 @@ const DEFS=Object.freeze({last303:Object.freeze({kind:'youth',flag:'gwibitang',p
  sprite:Object.freeze({path:'assets/r99/clean/assets/generated-v31224/actors-normalized/a43f2c5d3855_Monster_GoblinFluteKing.webp',w:672,h:384,px:300,py:361,vis:338,scale:1.45}),bust:'assets/r790/npc/chief-bust.webp',bustPos:'50% 50%',bustFit:'cover',labelBelow:true,
  name:'고블린 두목',label:'고블린 두목 · 장미 인장',sub:'패배한 두목 · 장미 인장',
  body:'싸움에서 진 두목이 장미 인장을 남긴다. 그는 환도가 무너진 성과 이어져 있음을 알고 있다.',lore:'장미 인장 — 칼 가까이 가져가면 공명이 일고, 무너진 성으로 가는 균열이 열린다.',
- take:'인장을 받는다',wait:'아직',done:'장미 인장 — 환도와 공명합니다.',toDoor:'출구 문 앞에서 기억을 확인하세요.',first:'패배한 두목에게서 장미 인장을 먼저 받으세요.',hud:'패배한 고블린 두목 · 장미 인장 받기',seal:null,boss:null})});
-const ORDER=['route','rally','door','doorStory','boss','exit','exitStory','done'],REACH=2.4,DOOR_REACH=3.2,OBJ_REACH=2.7,FADE=1.6;
+ take:'인장을 받는다',wait:'아직',done:'장미 인장 — 환도와 공명합니다.',toDoor:'출구 문 앞에서 기억을 확인하세요.',first:'패배한 두목에게서 장미 인장을 먼저 받으세요.',hud:'패배한 고블린 두목 · 장미 인장 받기',seal:null,boss:null}),
+ // R792 병원 1막. 정본 10장 끝 "그래도 나는 의료진에게 도움을 청했다" · 11장 끝 "침대 옆에는 검은 성직복 위에 흰 가운을 걸친 남자가 앉아 있었다 … 그에게서 현세와 몽세, 내세에 관해 배웠다".
+ ep1a10:Object.freeze({kind:'medic',flag:'askedHelp',phase:'exit',
+ sprite:Object.freeze({path:'assets/r790/npc/medic-idle6.webp',w:384,h:384,px:192,py:352,vis:284,scale:1.04,frames:6,fps:5}),bust:'assets/r790/npc/medic-bust.webp',bustPos:'50% 30%',bustFit:'cover',labelBelow:true,
+ name:'의료진',label:'의료진 · 도움 청하기',sub:'병원 복도 · 의료진',
+ body:'차트를 든 의료진이 복도에 서 있다.',lore:'선택받은 수호자라는 이름을 내려놓자 치료가 필요한 내가 남았다.',
+ take:'도움을 청한다',wait:'아직',done:'의료진에게 도움을 청했습니다.',toDoor:'기억의 제단에서 뒷이야기를 확인하세요.',first:'의료진에게 먼저 도움을 청하세요.',hud:'복도의 의료진 · 도움 청하기',seal:null,boss:null}),
+ ep1a11:Object.freeze({kind:'physician',flag:'heardWorlds',phase:'exit',
+ sprite:Object.freeze({path:'assets/r790/npc/physician-idle6.webp',w:384,h:384,px:192,py:352,vis:227,scale:.85,frames:6,fps:4}),bust:'assets/r790/npc/physician-bust.webp',bustPos:'50% 30%',bustFit:'cover',labelBelow:true,
+ name:'의목사',label:'의목사 · 세 세계 이야기',sub:'침대 곁 · 의사이면서 목사',
+ body:'검은 성직복 위에 흰 가운을 걸친 남자가 침대 곁 의자에 앉아 있다. 청진기와 오래된 은제 J인장이 함께 걸려 있다.',lore:'현세와 몽세, 내세 — 사람이 살아가는 현실, 정신과 무의식이 펼쳐지는 곳, 선과 악의 본질이 존재하는 세계.',
+ take:'이야기를 듣는다',wait:'아직',done:'의목사에게서 현세와 몽세, 내세에 관해 배웠습니다.',toDoor:'기억의 제단에서 뒷이야기를 확인하세요.',first:'의목사의 이야기를 먼저 들으세요.',hud:'침대 곁 의목사 · 이야기 듣기',seal:null,boss:null})});
+const ORDER=['route','rally','door','doorStory','boss','exit','exitStory','done'],OFFER_REACH=3.4,REACH=2.4,DOOR_REACH=3.2,OBJ_REACH=2.7,FADE=1.6;
 const after=(d,ph)=>ORDER.indexOf(ph)>ORDER.indexOf(d.phase),shown=(d,ph)=>ORDER.indexOf(ph)>=ORDER.indexOf(d.phase)&&ORDER.includes(ph);
 let ledger={};
 const keyOf=r=>r.layer+':'+r.id,defOf=r=>r&&typeof r.id==='string'&&Object.prototype.hasOwnProperty.call(DEFS,r.id)?DEFS[r.id]:null;
@@ -68,6 +81,7 @@ function ensure(r=here()){if(!r||!Array.isArray(r.props))return null;const d=def
  const q=d.phase==='exit'?around(r.objective,isB,solids):spot(door,r.exploration?.worldWardR81?.bossBounds,isB,solids);if(!q)return null;
  // 문 단계에 막 들어와 나타날 때만 안개 속에서 서서히(이미 지난 단계의 세이브는 바로 또렷하게)
  const p={id:'r790:npc:'+r.id+':'+d.kind,x:q.x,y:q.y,home:{...q},r790NPC:d.kind,solid:false,visible:true,autoTargetEligible6:false,appearAt:phaseOf(r)===d.phase&&!taken(r)?T():-99,side:Math.sign(q.x-(d.phase==='exit'?r.objective.x:door.x))||1};
+ try{img(d.sprite.path);if(d.sprite.offer)img(d.sprite.offer.path);}catch(e){fail(e);}/* 설 때 그림을 미리 청한다 */
  r.props.push(p);stats.placed++;note('placed',{zone:r.id,x:+q.x.toFixed(2),y:+q.y.toFixed(2)});return p;}
 const target=(p,d)=>({id:p.id,kind:'npc',label:d.label,point:{x:p.x,y:p.y},reach:REACH});
 function canUse(t,pl){const r=here(),p=npc(r);pl=pl||player;return !!p&&t?.id===p.id&&gate(r)&&!loading&&pl?.hp>0&&dist(pl,p)<=REACH;}
@@ -93,10 +107,16 @@ if(typeof killEnemy==='function'){const base=killEnemy;let toldAt=-99;killEnemy=
    if(T()-toldAt>=4){toldAt=T();note('sealed',{zone:r.id});try{toast(d.seal,3.5);}catch(_){}}return false;}}catch(err){fail(err);}return base.apply(this,[e,...a]);};}
 if(typeof updateHUD==='function'){const base=updateHUD;updateHUD=function(...a){const r0=base.apply(this,a);try{const r=here();if(started&&gate(r)){const el=$('questText');if(el)el.textContent=defOf(r).hud;}}catch(e){fail(e);}return r0;};}
 function img(p){try{const r=typeof readyImage==='function'?readyImage(p):null;if(r&&r.ready!==false&&r.image)return r.image;}catch(_){}try{if(typeof addImage==='function')addImage(p,'R790 서사 NPC');}catch(_){}return null;}
-function draw(p){const SPRITE=DEFS[String(p.id).split(':')[2]]?.sprite;if(!SPRITE||!img(SPRITE.path))return false;const t=T(),q=project(p.x,p.y),a=Math.max(.12,Math.min(1,(t-(Number(p.appearAt)||-99))/FADE));
- const fr={path:SPRITE.path,assetFrame:{sourceRect:[0,0,SPRITE.w,SPRITE.h],pivot:[SPRITE.px,SPRITE.py],visibleHeight:SPRITE.vis},sourceAlphaCore:[0,0,SPRITE.w,SPRITE.h],metricThreshold:16,sourcePixelsEdited:false};
- const h=actorHeight()*SPRITE.scale*(1+.008*Math.sin(t*1.7)),paint=()=>drawAssetFrame3(SPRITE.path,fr,q.x,q.y,h,{angle:0,alpha:a,flip:p.side>0});stats.draws++;
- const res=ctx?.scope?ctx.scope({id:'prop:'+p.id,kind:'prop',x:p.x,y:p.y,bodyPath:SPRITE.path,alive:true},paint):paint();
+// 순수: 시트 칸 고르기. 돌기(loop)는 시간으로, 한 번 재생(once)은 시작 시각부터 끝 칸까지 가서 멈춘다.
+const frameAt=(t,frames,fps,since)=>{const n=Math.max(1,frames|0);if(n<2)return 0;if(Number.isFinite(since))return Math.max(0,Math.min(n-1,Math.floor((t-since)*fps+1e-6)));return ((Math.floor(t*fps)%n)+n)%n;};
+function draw(p){const r=here(),SPRITE=DEFS[String(p.id).split(':')[2]]?.sprite;if(!SPRITE||!img(SPRITE.path))return false;const t=T(),q=project(p.x,p.y),a=Math.max(.12,Math.min(1,(t-(Number(p.appearAt)||-99))/FADE));
+ // 내미는 시트: 관문이 걸려 있고 영웅이 3.4칸 안에 오면 첫 칸부터 끝 칸까지 가서 내민 채 멈춘다. 멀어지면 숨쉬기로 돌아간다.
+ let path=SPRITE.path,f=0;const off=SPRITE.offer,near=!!off&&gate(r)&&!!player&&dist(player,p)<=OFFER_REACH&&!!img(off.path);
+ if(near){if(!Number.isFinite(p.offerAt))p.offerAt=t;path=off.path;f=frameAt(t,off.frames,off.fps,p.offerAt);}else{p.offerAt=null;f=frameAt(t,SPRITE.frames||1,SPRITE.fps||5);}
+ const rect=[f*SPRITE.w,0,SPRITE.w,SPRITE.h],fr={path,assetFrame:{sourceRect:rect,pivot:[SPRITE.px,SPRITE.py],visibleHeight:SPRITE.vis},sourceAlphaCore:rect,metricThreshold:16,sourcePixelsEdited:false};
+ // 한 장 그림만 코드로 숨쉬기(키 ±0.8%)를 얹는다. 시트는 그림이 숨쉰다.
+ const h=actorHeight()*SPRITE.scale*((SPRITE.frames||1)>1?1:1+.008*Math.sin(t*1.7)),paint=()=>drawAssetFrame3(path,fr,q.x,q.y,h,{angle:0,alpha:a,flip:p.side>0});stats.draws++;
+ const res=ctx?.scope?ctx.scope({id:'prop:'+p.id,kind:'prop',x:p.x,y:p.y,bodyPath:path,alive:true},paint):paint();
  // 관문이 걸려 있는 동안만 머리 위 이름(보스 이름표와 같은 글씨) — 어두운 통로에서 누구에게 가야 하는지 보이게.
  try{if(a>.6&&typeof ctx?.fillText==='function'&&gate(here())){ctx.save?.();ctx.font='11px "Malgun Gothic",sans-serif';ctx.textAlign='center';ctx.fillStyle='#f1cf9a';ctx.shadowColor='#000';ctx.shadowBlur=4;ctx.fillText(DEFS[here().id].name,q.x,DEFS[here().id].labelBelow?q.y+16:q.y-h-8);ctx.shadowBlur=0;ctx.restore?.();stats.labels=(stats.labels||0)+1;}}catch(e){fail(e);}
  return res;}
@@ -109,7 +129,7 @@ if(typeof restoreSave==='function'){const base=restoreSave;restoreSave=async fun
   try{const r=await base.call(this,raw,...a);if(r===false)ledger=prior;else try{ensure();}catch(e){fail(e);}return r;}catch(e){ledger=prior;throw e;}};}
 if(typeof newGame==='function'){const base=newGame;newGame=async function(...a){const prior=ledger,before=typeof player!=='undefined'?player:null;ledger={};
   try{const r=await base.apply(this,a);if(r===false||(before&&player===before&&r!==true))ledger=prior;return r;}catch(e){ledger=prior;throw e;}};}
-try{img(DEFS.last303.sprite.path);}catch(_){}
+try{for(const d of Object.values(DEFS)){/* 시트는 작다(칸 6개 70KB 안팎) — 미리 읽어 둔다 */if(d.sprite.frames>1)img(d.sprite.path);if(d.sprite.offer)img(d.sprite.offer.path);}}catch(_){}
 window.__STORYWORLD_NPC_R790__=Object.freeze({rev:REV,taken,ensure,pure:Object.freeze({spot,around,clean}),zones:()=>Object.keys(DEFS),
  inspect:()=>{const r=here(),p=npc(r);return {rev:REV,prefs:{...prefs},zone:r?.id||null,applies:applies(r),phase:phaseOf(r),taken:taken(r),gate:gate(r),npc:p?{id:p.id,x:p.x,y:p.y}:null,ledger:JSON.parse(JSON.stringify(ledger)),stats:{...stats},events:[...events],lastError,browserVerified:false};}});
 })();

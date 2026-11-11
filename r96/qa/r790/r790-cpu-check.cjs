@@ -56,7 +56,7 @@ const NPCID='r790:npc:last303:youth';
  ok(w.api.inspect().gate===true,'관문이 걸려 있다');ok(w.api.taken()===false,'아직 안 마심');
  // 문 앞에서 E → 창, 기억(doorStory)은 시작되지 않는다
  const r=w.run('interact()');eq(w.log().base,0,'귀비탕 전에는 문 처리기로 넘어가지 않는다');eq(w.log().panel.length,1,'창이 열린다');ok(r===true,'처리함');
- const h=w.log().panel[0];ok(h.includes('앳된 남자'),'이름');ok(h.includes('귀비탕'),'귀비탕 언급');ok(h.includes('id="npcTakeR790"')&&h.includes('id="npcWaitR790"'),'버튼 둘');ok(h.includes('assets/r790/npc/youth-bust.webp'),'상반신 그림');
+ const h=w.log().panel[0];ok(h.includes('앳된 남자'),'이름');ok(h.includes('귀비탕'),'귀비탕 언급');ok(h.includes('id="npcTakeR790"')&&h.includes('id="npcWaitR790"'),'버튼 둘');ok(h.includes('assets/r790/npc/youth-bust-d.webp'),'상반신 그림(R792: Dots 정식 흉상으로 바뀜)');
  ok(!/<script|onerror=/i.test(h),'창 안에 스크립트 없음');
  // '아직' → 닫히고 그대로
  w.run('__btn.npcWaitR790()');eq(w.run('modal'),false,'닫힘');ok(w.api.taken()===false,'아직은 그대로');eq(w.log().base,0,'문 처리기 안 부름');
@@ -86,10 +86,10 @@ for(const ph of ['doorStory','boss','exit','exitStory','done']){const w=world({p
 // 단계가 route → door 로 넘어가는 틱에 나타난다 + 안개 속에서 서서히
 {const w=world({phase:'rally'});w.run('tick(.1)');ok(!w.run(`room.props.some(p=>p.r790NPC)`),'집결 중엔 없음');w.run(`__st.phase='door';tick(.1)`);const p=w.run(`room.props.find(p=>p.r790NPC)`);ok(p,'들판을 정리하면 나타난다');
  w.run(`drawProp(room.props.find(p=>p.r790NPC))`);const a0=w.log().drawn.at(-1).alpha;ok(a0<.35,'처음엔 흐리다: '+a0);w.run('tick(3)');w.run(`drawProp(room.props.find(p=>p.r790NPC))`);const a1=w.log().drawn.at(-1).alpha;ok(a1>.95&&a1<=1,'곧 또렷해진다: '+a1);
- eq(w.log().propBase.length,0,'엔진 조형물 그리기는 안 탄다');eq(w.log().drawn.at(-1).path,'assets/r790/npc/youth.webp','그림 경로');ok(Math.abs(w.log().drawn.at(-1).h-66*286/286)<8||w.log().drawn.at(-1).h>40,'키');
+ eq(w.log().propBase.length,0,'엔진 조형물 그리기는 안 탄다');ok(['assets/r790/npc/youth-idle6.webp','assets/r790/npc/youth-offer6.webp'].includes(w.log().drawn.at(-1).path),'그림 경로(R792: Dots 정식 시트로 바뀜)');ok(Math.abs(w.log().drawn.at(-1).h-66*286/286)<8||w.log().drawn.at(-1).h>40,'키');
  w.run(`drawProp(room.props[0])`);eq(w.log().propBase,['lamp'],'다른 조형물은 엔진 그대로');}
 // 그림이 아직 안 실렸으면 그리지 않고 청한다(검은 네모·엉뚱한 그림 금지)
-{const w=world({ready:false});w.run('tick(.1)');const d0=w.log().drawn.length;w.run(`drawProp(room.props.find(p=>p.r790NPC))`);eq(w.log().drawn.length,d0,'안 실렸으면 안 그림');ok(w.log().added.includes('assets/r790/npc/youth.webp'),'그림을 청한다');}
+{const w=world({ready:false});w.run('tick(.1)');const d0=w.log().drawn.length;w.run(`drawProp(room.props.find(p=>p.r790NPC))`);eq(w.log().drawn.length,d0,'안 실렸으면 안 그림');ok(w.log().added.includes('assets/r790/npc/youth-idle6.webp'),'그림을 청한다(R792: Dots 시트)');}
 // ── ② 길잡이: 창 없이 바로 ──
 {const w=world({guideOn:true});w.run('tick(.1)');const r=w.run('interact()');eq(w.log().panel.length,0,'길잡이 중엔 창을 열지 않는다(멈춤 방지)');eq(w.run('modal'),false,'창 없음');ok(w.api.taken()===true,'바로 마심');eq(w.log().base,1,'문의 기억으로 이어짐');ok(w.log().toast.some(t=>/귀비탕/.test(t)),'알림');}
 // ── ③ 핵 봉인 ──

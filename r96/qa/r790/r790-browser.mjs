@@ -20,7 +20,7 @@ async function toDoorPhase(p){await go(p,'last303');await p.evaluate(()=>{player
  // 문 앞으로 가서 장면 찍기(카메라가 따라올 때까지 게임 시간으로 기다림)
  await p.evaluate(()=>{const d=room.exploration.worldR74.doors.find(d=>d.id==='door-0');player.x=d.x-.6;player.y=d.y+2.9;});await waitT(p,2.5);
  const drew=await p.evaluate(()=>window.__STORYWORLD_NPC_R790__.inspect().stats.draws);ok(drew>0,'NPC 가 실제로 그려진다(draws '+drew+')');
- const im=await p.evaluate(()=>{const r=readyImage('assets/r790/npc/youth.webp');return r&&r.image?[r.image.naturalWidth,r.image.naturalHeight]:null;});ok(im&&im[0]===384,'그림이 실렸다 '+im);
+ const im=await p.evaluate(()=>{const r=readyImage('assets/r790/npc/youth-idle6.webp');return r&&r.image?[r.image.naturalWidth,r.image.naturalHeight]:null;});ok(im&&im[0]===2304&&im[1]===384,'그림(R792: Dots 6칸 시트)이 실렸다 '+im);
  await p.screenshot({path:`${OUT}/1-npc-at-door.png`});
  const q=await p.evaluate(()=>{const n=room.props.find(q=>q.r790NPC),s=project(n.x,n.y);return [s.x,s.y];});await p.screenshot({path:`${OUT}/1-npc-close.png`,clip:{x:Math.max(0,Math.min(1280-520,q[0]-260)),y:Math.max(0,Math.min(720-420,q[1]-300)),width:520,height:420}});
  ok(/앳된 남자/.test(await p.locator('#questText').textContent()),'목표 글에 앳된 남자·귀비탕');
