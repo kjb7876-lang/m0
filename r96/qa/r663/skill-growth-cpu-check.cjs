@@ -3,7 +3,8 @@
 //  qwer은 스킬찍어야 사용가능하게 성장재미를 더 느끼도록 스킬성장하면 스킬범위도 늘어나야함").
 //  ① 새 게임: A·S·D·F 만 기본. Q·W·E·R 은 패시브 포인트로 배워야 쓴다(1점). 이후 단계(최대 7)마다 비용 = 단계²점, 범위 +8%씩.
 //  ② 이미 진행한 저장(레벨 2 이상·지역 완료 기록)은 QWER 1단계로 이어받는다(잠그지 않음).
-//  ③ 자동 스킬레벨업(R237)은 QWER 배우기는 안 사고(점수를 잠긴 칸 수만큼 남김) 배운 칸 2~7단계, 기본 실검무(10단계까지)·문양 실검무 여섯 개를 산다.
+//  ③ 자동 스킬레벨업(R237)이 Q→W→E→R 순서로 다음 칸 비용(1·2·3·4점)이 모이면 저절로 배우고(그 전엔 다른 구매 없이 모음), 배운 칸 2~7단계·기본 실검무(10단계까지)·문양 실검무 여섯 개도 산다.
+//  ④ 뒤 칸일수록 비싸고 강하고 넓고 재사용이 길다. 안 배운 칸은 아이콘(단추)을 숨기고 배우는 순간 등장 연출.
 const fs=require('fs'),path=require('path'),vm=require('vm');
 const ROOT=path.resolve(__dirname,'../../..'),R=path.join(ROOT,'r96');let n=0,bad=0;const ok=(c,m)=>{n++;if(!c){bad++;console.log('FAIL',m);}else console.log('ok  ',m);};
 const rd=f=>{try{return fs.readFileSync(f,'utf8');}catch(_){return'';}};
@@ -20,6 +21,7 @@ ok(!/new_?key|keys\.add\(['"][tyuiogh]/.test(src),'새 스킬 키를 만들지 �
 
 // ── 엔진 흉내(vm)
 function mk(opt={}){
+ const els={};for(const id of ['specialBtn','story-wer-w','story-wer-e','story-wer-r']){const cl=new Set();els[id]={classList:{toggle(c,on){on?cl.add(c):cl.delete(c);},add:c=>cl.add(c),remove:c=>cl.delete(c),contains:c=>cl.has(c)},offsetWidth:1,querySelector:()=>null};}
  const log={q:0,hits:[],shots:[],fx:[],toasts:[],hyp:[],wer:[]},store={},listeners={};
  const P62defs=[
   {id:'endlessPower',name:'끝없는 의지',icon:'haste',cost:1},
@@ -32,7 +34,7 @@ function mk(opt={}){
   player:Object.assign({hero:'hwando',x:0,y:0,hp:100,level:1,points:0,specialCD:0,storyWER:{ready:{},buffs:{}},upgrades:{}},opt.player||{}),
   HEROES:{hwando:{name:'환도',special:'정화 연참'},hunter:{name:'헌터',special:'화살'}},KR291:{legacy:!!opt.legacy,w:opt.legacy?'Z':'W',e:opt.legacy?'X':'E',r:opt.legacy?'C':'R'},
   updateHUD(){},serializeSave(){return{storyWER:{remaining:{'hwando:w':5,'hwando:e':1e6}}};},toast(m){log.toasts.push(m);},sound(){},saveGame(){},
-  document:{readyState:'loading',getElementById:()=>null,querySelector:()=>null,createElement:()=>({style:{}}),head:{appendChild(){}}},
+  document:{readyState:'loading',getElementById:id=>els[id],querySelector:()=>null,createElement:()=>({style:{}}),head:{appendChild(){}}},setTimeout:()=>0,
   addEventListener(t,f,c){(listeners[t]=listeners[t]||[]).push({f,c});},
   window:{__STORYWORLD_COOP_SIM_R62__:opt.coop?{mode:()=>'host'}:undefined}};
  const W=ctx.window;W.addEventListener=ctx.addEventListener;
@@ -42,7 +44,7 @@ function mk(opt={}){
  ctx.window.window=ctx.window;ctx.__log=log;vm.createContext(ctx);let err=null;
  // 엔진 함수는 vm 안에서 만든다(그래야 Math.hypot 가 이 컨텍스트의 것을 읽는다)
  vm.runInContext(`var special=function(){__log.q++;player.specialCD=10;__log.qDist=Math.hypot(3,4);hitEnemy({},5);makeShot(0,0,0,10,5,{friendly:true,life:1,radius:.2});fx('burst',0,0,{size:2});return true;};
-  var hitEnemy=function(e,v){__log.hits.push(Math.hypot(3,4));return true;};var moveActor=function(){},clearLine=function(){},blocked=function(){},findPath=function(){},killEnemy=function(){};
+  var hitEnemy=function(e,v){__log.hits.push(Math.hypot(3,4));(__log.vals=__log.vals||[]).push(v);return true;};var moveActor=function(){},clearLine=function(){},blocked=function(){},findPath=function(){},killEnemy=function(){};
   var makeShot=function(x,y,a,s,d,o){__log.shots.push(o);return o;};var fx=function(t,x,y,o){__log.fx.push(o);};
   var __delayed=[];var delay=function(sec,fn,owner){__delayed.push({at:time+sec,fn,owner});};
   var tick=function(dt){time+=dt;for(const d of __delayed.filter(d=>d.at<=time)){__delayed.splice(__delayed.indexOf(d),1);d.fn();}};`,ctx);
@@ -58,7 +60,7 @@ if(A.api){
  const ids=['skillQR663','skillWR663','skillER663','skillRR663'],defs=ids.map(id=>A.P62.defs.find(d=>d.id===id));
  ok(defs.every(Boolean),'R62 칸에 skillQ/W/E/R 네 개 추가(새 키·새 저장 필드 없음)');
  ok(defs.every(d=>d.maxRank===7),'최대 7단계');
- ok(defs.map(d=>d.cost).join()==='1,1,1,1','처음 배우는 비용 1점(단계 0 → 1)');
+ ok(defs.map(d=>d.cost).join()==='1,2,3,4','처음 배우는 비용 Q1·W2·E3·R4점(뒤 칸일수록 비쌈)');
  // 새 게임 → 잠김
  A.tick();
  ok(A.api.locked('q')&&A.api.locked('w')&&A.api.locked('e')&&A.api.locked('r'),'새 게임(레벨 1·기록 없음): QWER 잠김');
@@ -81,9 +83,12 @@ if(A.api){
  ok(A.P62.purchase('skillWR663')&&(A.tick(),A.ctx.player.storyWER.ready['hwando:w']===0),'W 를 배우면 먼 대기가 풀림');
  ok(A.api.locked('e')&&A.api.locked('r'),'E·R 은 여전히 잠김');
  // 단계·비용·범위
- ok(A.api.cost(0)===1&&A.api.cost(1)===4&&A.api.cost(6)===49,'비용 = 다음 단계²(1·4·…·49)');
- ok(A.api.mult(0)===1&&A.api.mult(1)===1&&Math.abs(A.api.mult(2)-1.08)<1e-9&&Math.abs(A.api.mult(7)-1.48)<1e-9,'범위 배수: 1단계 ×1, 단계마다 +8%, 7단계 ×1.48');
- ok([1,2,3,4,5,6,7].every((l,i,a)=>!i||A.api.mult(l)>A.api.mult(a[i-1])),'단계가 오를수록 범위 단조 증가');
+ ok(A.api.cost('q',0)===1&&A.api.cost('w',0)===2&&A.api.cost('e',0)===3&&A.api.cost('r',0)===4,'배우기 비용 1·2·3·4점');
+ ok(A.api.cost('q',1)===4&&A.api.cost('r',1)===4&&A.api.cost('w',6)===49,'2~7단계 비용 = 다음 단계²(4·9·…·49)');
+ ok(A.api.mult('q',0)===1&&A.api.mult('q',1)===1&&Math.abs(A.api.mult('q',2)-1.08)<1e-9&&Math.abs(A.api.mult('q',7)-1.48)<1e-9,'Q 범위 배수: 1단계 ×1, 단계마다 +8%, 7단계 ×1.48');
+ ok(A.api.mult('w',1)===1.1&&A.api.mult('e',1)===1.2&&A.api.mult('r',1)===1.3&&Math.abs(A.api.mult('r',7)-1.3*1.48)<1e-9,'뒤 칸일수록 기본 범위가 넓음(W×1.1·E×1.2·R×1.3)');
+ ok(A.api.power.q===1&&A.api.power.w<A.api.power.e&&A.api.power.e<A.api.power.r&&A.api.cool.q===1&&A.api.cool.w<A.api.cool.e&&A.api.cool.e<A.api.cool.r,'뒤 칸일수록 피해·재사용 배수가 큼(더 강하고 쿨타임이 김)');
+ ok([1,2,3,4,5,6,7].every((l,i,a)=>!i||A.api.mult('q',l)>A.api.mult('q',a[i-1])),'단계가 오를수록 범위 단조 증가');
  // 범위: 스킬 코드가 도는 동안만 거리를 줄여 읽는다
  const B=mk({player:{level:5,points:0}});B.tick();
  ok(!B.api.locked('q')&&B.api.rank('q')===1&&B.api.rank('r')===1,'이어받은 저장(레벨 5): QWER 1단계로 잠그지 않음');
@@ -98,21 +103,34 @@ if(A.api){
  const D=mk({player:{level:5}});D.tick();D.state.ranks.skillWR663=4;let d4=0;
  D.ctx.fx('storySourceSkill',0,0,{storyWER:true,stage:'warning',sourceHero:'hwando',sourceSlot:'w',castId:'wer:9'});
  D.ctx.delay(.1,vm.runInContext('(function(){__d4=Math.hypot(3,4);})',D.ctx),'story-wer:wer:9');D.tick(.2);d4=D.ctx.__d4;
- ok(Math.abs(d4-5/1.24)<1e-9,'W 4단계 지연 효과: 거리 5 → '+(5/1.24).toFixed(3)+' 실제 '+d4);
+ ok(Math.abs(d4-5/(1.1*1.24))<1e-9,'W 4단계 지연 효과: 거리 5 → '+(5/(1.1*1.24)).toFixed(3)+'(W 기본 ×1.1 · 4단계 ×1.24) 실제 '+d4);
+ // 피해·재사용 슬롯 배수
+ D.ctx.hitEnemy({}, 10, {storyWER:true,sourceSlot:'e',sourceHero:'hwando'});D.ctx.hitEnemy({},10,{storyWER:true,sourceSlot:'q',sourceHero:'hwando'});D.ctx.hitEnemy({},10,null);
+ ok(D.log.vals.slice(-3).join()==='13,10,10','본편 E 피해 ×1.3, Q·기타는 그대로');
+ {const k='hwando:e';D.ctx.player.storyWER.ready[k]=D.ctx.time+10;D.tick(1/60);const left=D.ctx.player.storyWER.ready[k]-D.ctx.time;ok(Math.abs(left-10*1.3)<.2,'E 재사용 10초 → 약 13초(새로 걸린 몫만 ×1.3): '+left.toFixed(2));D.tick(1/60);ok(D.ctx.player.storyWER.ready[k]-D.ctx.time<10*1.3,'다음 틱에 다시 늘리지 않음');}
  // 함께하기·끄기
  const E=mk({coop:true});E.tick();ok(!E.api.locked('q')&&!E.key('q').stopped,'함께하기(협동)에서는 잠그지 않음');
  // 레거시 키 배치(Z·X·C)
  const L=mk({legacy:true});L.tick();ok(L.key('z').stopped&&L.key('x').stopped&&L.key('c').stopped&&!L.key('w').stopped,'예전 키 배치: Z·X·C 가 W·E·R 칸');
  // 영웅이 바뀌어도 칸 이름은 현재 영웅 것
+ // 아이콘: 안 배운 칸은 숨기고, 배우는 순간 등장 연출 + 알림
+ {const H=mk();H.tick();H.ctx.updateHUD();const has=(id,c)=>H.ctx.document.getElementById(id).classList.contains(c);
+  ok(['specialBtn','story-wer-w','story-wer-e','story-wer-r'].every(id=>has(id,'r663hide')),'새 게임: 안 배운 칸 아이콘(단추) 숨김');
+  H.ctx.player.points=5;H.P62.purchase('skillQR663');H.tick();H.ctx.updateHUD();
+  ok(!has('specialBtn','r663hide')&&has('specialBtn','r663pop')&&has('story-wer-w','r663hide'),'Q 를 배우면 Q 아이콘이 나타나며 등장 연출(pop), W 는 계속 숨김');
+  ok(H.log.toasts.some(t=>/Q 스킬 습득/.test(t)),'배울 때 습득 알림');
+  H.ctx.updateHUD();ok(H.api.inspect().stats.learned===1,'알림·연출은 배운 순간 한 번만');
+  const O=mk({player:{level:6}});O.tick();O.ctx.updateHUD();ok(!O.ctx.document.getElementById('story-wer-r').classList.contains('r663pop')&&!O.ctx.document.getElementById('story-wer-r').classList.contains('r663hide'),'이어받은 저장은 처음부터 보이고 연출 없음');}
  ok(/정화 연참/.test(String(defs[0].name))&&/월섬 회천/.test(String(defs[1].name)),'카드 이름은 영웅의 Q 이름·W 이름');
 }
 
-// ── R237: 자동 스킬레벨업 — 배우기는 직접, 배운 칸 단계와 기본·문양 실검무는 자동
+// ── R237: 자동 스킬레벨업 — Q→W→E→R 순서로 다음 칸 비용이 모이면 저절로 배움, 그 뒤 단계·기본·문양 실검무
 function mk237(opt={}){
  const calls=[];const store={};
+ const LC={Q:1,W:2,E:3,R:4};
  const defs=[{id:'endlessPower',name:'끝없는 의지',cost:1,maxRank:5},{id:'threadDanceR63',name:'실검무 · 은실의 분기',cost:1},
   ...['Cross','Flower','Fractal','Claw','Tsubame','Ichidan'].map(x=>({id:'thread'+x+'R64',name:'실검무 · '+x,cost:1,maxRank:1})),
-  ...['Q','W','E','R'].map(s=>({id:'skill'+s+'R663',name:s+' 스킬',maxRank:7,get cost(){return ((ranks['skill'+s+'R663']||0)+1)**2;}}))];
+  ...['Q','W','E','R'].map(s=>({id:'skill'+s+'R663',name:s+' 스킬',maxRank:7,get cost(){const r=ranks['skill'+s+'R663']||0;return r<1?LC[s]:(r+1)**2;}}))];
  const ranks=Object.assign({},opt.ranks||{});const ctx={console,JSON,
   localStorage:{getItem:k=>k in store?store[k]:null,setItem:(k,v)=>{store[k]=String(v);}},
   started:true,modal:null,loading:false,storyScene:null,layer:'STORY',time:0,UPGRADES:[],rank:()=>0,
@@ -127,22 +145,21 @@ function mk237(opt={}){
 const U=mk237({points:3});
 ok(!!U.api,'R237 이 올라옴');
 if(U.api){
- const ids=U.api.candidates().map(c=>c.id);
- ok(!ids.some(i=>/^skill[QWER]R663$/.test(i)),'안 배운 QWER 의 배우기는 자동 후보에 없음(직접 찍기)');
- ok(U.api.candidates().length===0,'잠긴 칸 4개 + 점수 3: 점수를 전부 남겨 둠(후보 없음)');
- U.api.step(true);ok(U.calls.length===0&&U.ctx.player.points===3,'자동 구매가 점수를 한 점도 안 씀(직접 배울 몫 보존)');
- const V=mk237({points:40});V.api.step(true);V.api.step(true);V.api.step(true);V.api.step(true);V.api.step(true);V.api.step(true);V.api.step(true);
- ok(['threadCrossR64','threadFlowerR64','threadFractalR64','threadClawR64','threadTsubameR64','threadIchidanR64'].every(id=>V.ranks[id]===1),'문양 실검무 여섯 개를 모두 산다');
+ ok(U.api.candidates().map(c=>c.id).join()==='skillQR663','안 배운 칸이 있으면 후보는 맨 앞 칸(Q) 배우기 하나뿐');
+ U.api.step(true);ok(U.calls.join()==='skillQR663,skillWR663'&&U.ctx.player.points===0,'점수 3: Q(1점) → W(2점) 순서로 저절로 배움: '+U.calls.join());
+ const S5=mk237({points:5});S5.api.step(true);
+ ok(S5.calls.join()==='skillQR663,skillWR663'&&S5.ctx.player.points===2&&!S5.ranks.endlessPower&&!S5.ranks.threadDanceR63,'점수 5: Q·W 배우고 E(3점)가 모자라면 남은 2점은 다른 데 쓰지 않고 모음');
+ S5.ctx.player.points=3;S5.api.step(true);ok(S5.ranks.skillER663===1&&S5.ctx.player.points===0,'3점이 모이면 E 를 배움');
+ const V=mk237({points:40});for(let i=0;i<8;i++)V.api.step(true);
+ ok(['Q','W','E','R'].every(s=>V.ranks['skill'+s+'R663']>=1)&&V.calls.slice(0,4).join()==='skillQR663,skillWR663,skillER663,skillRR663','점수가 넉넉하면 Q→W→E→R 먼저(1+2+3+4=10점) 다 배운 뒤 나머지를 씀');
+ ok(['threadCrossR64','threadFlowerR64','threadFractalR64','threadClawR64','threadTsubameR64','threadIchidanR64'].every(id=>V.ranks[id]===1),'그 뒤 문양 실검무 여섯 개를 모두 산다');
  ok((V.ranks.threadDanceR63||0)>=1&&(V.ranks.threadDanceR63||0)<=10,'기본 실검무도 산다(자동은 10단계까지: 타격 12회 상한)');
- ok(['Q','W','E','R'].every(s=>!V.ranks['skill'+s+'R663'])&&V.ctx.player.points>=4,'남는 점수로만 산다: 잠긴 4칸 몫(4점) 이상이 남고 QWER 는 그대로 0단계');
- const X=mk237({points:400});for(let i=0;i<80;i++)X.api.step(true);
+ const X=mk237({points:1500});for(let i=0;i<300;i++)X.api.step(true);
  ok(X.ranks.threadDanceR63===10,'기본 실검무 자동 단계 상한 10(무한 단계가 점수를 다 먹지 않음): '+X.ranks.threadDanceR63);
- ok(['Q','W','E','R'].every(s=>!X.ranks['skill'+s+'R663'])&&X.ctx.player.points>=4,'점수가 넉넉해도 배우기는 직접(QWER 0단계, 4점 남음)');
- const Y=mk237({points:1000,ranks:{skillQR663:1,skillWR663:1,skillER663:1,skillRR663:1}});for(let i=0;i<120;i++)Y.api.step(true);
- ok(['Q','W','E','R'].every(s=>Y.ranks['skill'+s+'R663']===7),'모두 배운 뒤에는 2~7단계를 자동으로 올림');
- const Z=mk237({points:200,ranks:{skillQR663:1,skillWR663:1}});for(let i=0;i<60;i++)Z.api.step(true);
- ok(!Z.ranks.skillER663&&!Z.ranks.skillRR663&&Z.ctx.player.points>=2&&Z.ranks.skillQR663>1,'일부만 배웠으면 안 배운 칸 수(2)만큼 남기고 배운 칸은 올림');
- const N=mk237({points:3,noApi:true});N.api.step(true);ok(N.calls.length===3,'R663 이 없으면(끔) 예전처럼 점수를 다 씀(예약 없음)');
+ ok(['Q','W','E','R'].every(s=>X.ranks['skill'+s+'R663']===7),'점수가 넉넉하면 QWER 를 7단계까지 올림');
+ const Z=mk237({points:5,ranks:{skillQR663:1}});Z.api.step(true);
+ ok(Z.calls.join()==='skillWR663,skillER663'&&Z.ctx.player.points===0,'일부만 배웠으면 남은 칸을 순서대로(W 2점 → E 3점)');
+ const N=mk237({points:3,noApi:true});N.api.step(true);ok(N.calls.length===3,'R663 이 없으면(끔) 예전처럼 점수를 씀(QWER 순서 규칙 없음)');
 }
 
 console.log(n-bad+'/'+n+' 통과');process.exit(bad?1:0);
