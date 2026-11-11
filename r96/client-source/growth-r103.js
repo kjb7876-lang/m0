@@ -15,7 +15,9 @@
  const inSamong=()=>!!SM()?.here?.();
  const routeOpen=()=>SM()?.state?.()?.started===true;
  const dreamOn=()=>routeOpen()&&typeof layer!=='undefined'&&layer==='DREAM';
- const ASSET={closed:'assets/r103/chest-closed.svg',open:'assets/r103/chest-open.svg',michaela:'assets/hero_direction337/michaela/s.webp'};
+ // R712: 보물상자는 CC0 픽셀 3D 소품(codepawl/pixel-atlas-glb treasure_chest)을 등각 시점으로 미리 렌더한 그림. 옛 SVG(assets/r103)는 남겨 둔다. 출처 assets/r712/SOURCE.md
+ const ASSET={closed:'assets/r712/chest-closed.png',open:'assets/r712/chest-open.png',michaela:'assets/hero_direction337/michaela/s.webp'};
+ const CHEST_H={closed:54,open:74};// R712: 열린 그림(뚜껑이 선 202px)과 닫힌 그림(147px)을 같은 축척으로 — 몸통 크기가 같게
 
  // ---- state ---------------------------------------------------------------------------------
  const fresh=()=>({version:VERSION,opened:[],procs:{},earned:0,lastPoints:null,visits:0,picks:[],offer:null,killAcc:0,procs7:0});
@@ -74,10 +76,10 @@
   player.points-=cost;G.lastPoints=player.points;G.procs[procKey(slot)]=lv+1;try{sound('upgrade');}catch(e){}try{updateHUD();}catch(e){}saveGame(false);return true;}
 
  // ---- 보물상자 ---------------------------------------------------------------------------------
- function chestProp(id,at,extra={}){const open=G.opened.includes(id);return{id:'r103chest:'+id,chestR103:id,x:at.x,y:at.y,solid:false,autoTargetEligible6:false,visible:true,path:open?ASSET.open:ASSET.closed,height:50,label:'보물상자',growthR103:'chest',...extra};}
+ function chestProp(id,at,extra={}){const open=G.opened.includes(id);return{id:'r103chest:'+id,chestR103:id,x:at.x,y:at.y,solid:false,autoTargetEligible6:false,visible:true,path:open?ASSET.open:ASSET.closed,height:open?CHEST_H.open:CHEST_H.closed,label:'보물상자',growthR103:'chest',...extra};}
  function openChest(p){const id=p?.chestR103||p?.chest;if(!id)return false;if(G.opened.includes(id)){toast('이미 연 보물상자입니다.',2);return false;}
   const pts=chestPoints();G.opened.push(id);if(G.opened.length>4000)G.opened.shift();player.points+=pts;
-  p.chestR103=id;p.path=ASSET.open;p.r74Prop=undefined;p.height=50;p.growthR103='chest';
+  p.chestR103=id;p.path=ASSET.open;p.r74Prop=undefined;p.height=CHEST_H.open;p.growthR103='chest';
   try{fx('sigil',p.x,p.y,{asset:VFX.cross,size:2.2,life:.9});sound('clear');}catch(e){}
   toast('보물상자 · 패시브 포인트 +'+pts+' ('+({easy:'이지',normal:'노말',hard:'하드'}[tier()])+(inSamong()?' · 사몽':layer==='DREAM'?' · DREAM':'')+')',3.2);
   try{updateHUD();}catch(e){}saveGame(false);return true;}

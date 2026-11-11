@@ -11,7 +11,7 @@ const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(String(e
 const shot=async n=>{if(SHOTS)await p.screenshot({path:SHOTS+'/'+n+'.jpg',quality:82});};
 const A=f=>p.evaluate(f);const S=()=>A(()=>window.__STORYWORLD_SURVIVAL_R600__.state());
 // 레벨업 3택이 열리면(게임이 멈춤) 첫 카드를 골라 넘긴다 — 몰려오는 적을 잡는 사이 여러 번 뜰 수 있다.
-const pickAny=()=>A(()=>{const b=document.getElementById('r600Pick0');if(b&&modal){b.click();return 1;}return 0;});
+const pickAny=()=>A(()=>{const Z=window.__STORYWORLD_SURVIVAL_R600__,st=Z.state();if(st&&st.choiceQ>0&&!modal)Z.qaPlayT((Math.floor(st.playT/77)+1)*77);/* R701: 강화 창은 77초 칸마다 한 번 — 검사는 칸을 건너뛰어 연다 */const b=document.getElementById('r600Pick0');if(b&&modal){b.click();return 1;}return 0;});
 const waitT=async(fn,arg,limit=240000)=>{const end=Date.now()+limit;for(;;){await pickAny();if(await p.evaluate(fn,arg))return;if(Date.now()>end)throw new Error('timeout '+fn);await p.waitForTimeout(250);}};
 const gameWait=async(sec,limit=240000)=>{const t0=await A(()=>time);await waitT(t=>time>=t,t0+sec,limit);};
 await p.goto(URL);await p.locator('#campaignNew54').waitFor({timeout:180000});
@@ -20,9 +20,10 @@ const ls0=await slotKeys();
 ok('title: survival entry present, pixel entry gone',await A(()=>!!document.getElementById('survivalStartR600')&&!document.getElementById('pixelStartR306')&&document.getElementById('survivalStartR600').textContent==='무한 생존으로 시작'));
 await shot('01-title');
 await p.locator('#survivalStartR600').click();
+await p.locator('[data-r600diff="normal"]').click();
 const heroes=await A(()=>[...document.querySelectorAll('[data-r600hero]')].map(b=>b.getAttribute('data-r600hero')));
 ok('hero picker lists every hero',heroes.length>=8&&heroes.includes('hwando'),heroes);await shot('02-heroes');
-await p.locator('[data-r600hero="hwando"]').click();
+await p.locator('[data-r600hero="hwando"]').click();await p.locator('#r600Go').click();
 await p.waitForFunction(()=>window.__STORYWORLD_SURVIVAL_R600__.here()&&!loading,null,{timeout:240000});
 {const r=await A(()=>{const L=room.exploration,c=room.survivalR600.centre,host=window.__STORYWORLD_EXPLORATION__.layout('dist00');return{id:room.id,type:L.type,cells:L.floorCells.length,rects:L.floorRects.length,b:L.bounds,px:[player.x,player.y],c,auto,guide,hero:player.hero,first:window.__STORYWORLD_SURVIVAL_R600__.state().ids};});
  ok('first map = first story combat region (dist00), hwando',r.id==='dist00'&&r.hero==='hwando',r);
@@ -39,13 +40,15 @@ await shot('03-wave');
 {await A(()=>{const e=room.enemies.find(e=>e.hp>0);e.hp=.5;hitEnemy(e,5);});const g=await A(()=>window.__STORYWORLD_SURVIVAL_R600__.state().gems);ok('kill drops an XP shard (not instant XP)',g>=1,g);
  await A(()=>{player.xp=levelCost(player.level)-1;});await gameWait(1.2);
  await A(()=>{const e=room.enemies.find(e=>e.hp>0&&e.survivalR600);if(e){e.x=player.x+.2;e.y=player.y;e.hp=.5;hitEnemy(e,5);}});
- await p.waitForFunction(()=>!!document.getElementById('r600Pick0'),null,{timeout:120000,polling:200}).catch(()=>{});
+ for(let k=0;k<600&&!(await A(()=>modal&&!!document.getElementById('r600Pick0')));k++){await A(()=>{const Z=window.__STORYWORLD_SURVIVAL_R600__,st=Z.state();if(st.choiceQ>0&&!modal)Z.qaPlayT((Math.floor(st.playT/77)+1)*77);});await p.waitForTimeout(200);}/* R701: 조각을 먹어 강화가 쌓이면 77초 칸을 넘겨 창을 연다 */
+ await p.waitForFunction(()=>!!document.getElementById('r600Pick0')&&modal,null,{timeout:120000,polling:200}).catch(()=>{});
  const cards=await A(()=>[...document.querySelectorAll('.r600Card')].map(b=>b.textContent));ok('level up pauses and offers 3 choices',cards.length===3&&new Set(cards).size===3&&await A(()=>modal),cards);
  {const v=await A(()=>{const e=document.getElementById('r600Subs');return e?getComputedStyle(e).opacity:'none';});ok('narration subtitle hidden while the choice panel is open',v==='0'||v==='none',v);}
  await shot('04-choice');
  await p.keyboard.press('Escape');await p.waitForTimeout(300);await A(()=>{if(modal)closePanel(true);});/* Esc·다른 길로 닫힘 */
+ for(let k=0;k<600&&!(await A(()=>modal&&!!document.getElementById('r600Pick0')));k++){await A(()=>{const Z=window.__STORYWORLD_SURVIVAL_R600__,st=Z.state();if(st.choiceQ>0&&!modal)Z.qaPlayT((Math.floor(st.playT/77)+1)*77);});await p.waitForTimeout(200);}/* R701: 조각을 먹어 강화가 쌓이면 77초 칸을 넘겨 창을 연다 */
  await p.waitForFunction(()=>!!document.getElementById('r600Pick0')&&modal,null,{timeout:120000,polling:200}).catch(()=>{});ok('upgrade panel closed without a pick comes back (choice not lost)',await A(()=>!!document.getElementById('r600Pick0')&&modal&&document.querySelectorAll('.r600Card').length===3));
- const before=await A(()=>({pts:player.points,lv:player.level}));await p.locator('#r600Pick0').click();
+ const before=await A(()=>({pts:player.points,lv:player.level}));await p.locator('#r600Pick0').click();/* R701: 쌓인 강화가 여러 개면 한 창에서 이어서 고른다 */for(let k=0;k<12&&await A(()=>modal&&!!document.getElementById('r600Pick0'));k++){await A(()=>document.getElementById('r600Pick0').click());await p.waitForTimeout(100);}
  const after=await A(()=>({modal,taken:window.__STORYWORLD_SURVIVAL_R600__.inspect().stats.choices,pts:player.points}));ok('picking applies and resumes; no passive points granted',after.modal===false&&after.taken>=1&&after.pts===before.pts,{before,after});}
 // 코어
 {const c0=await A(()=>window.__STORYWORLD_SURVIVAL_R600__.inspect().stats.coreShots);await A(()=>{const c=room.survivalR600.centre,e=room.enemies.find(e=>e.hp>0&&!e.boss);if(e){e.x=c.x+2;e.y=c.y;e.hp=e.maxHp=99999;}});await gameWait(2.5);

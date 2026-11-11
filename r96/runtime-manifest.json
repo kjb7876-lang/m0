@@ -33498,6 +33498,16 @@
       "sha256": "fee129e4bc5ef2dbec313910f2c8d8ee5209f83f785c78b802a9464251d86d45"
     },
     {
+      "path": "assets/r529/floor-lamp.webp",
+      "bytes": 5824,
+      "sha256": "2f1d9efcd8df6ba9f3f1fc79f1c32d0cfec6af64a19e57ffb5580bc334292508"
+    },
+    {
+      "path": "assets/r529/index.json",
+      "bytes": 940,
+      "sha256": "8ce518d63409bf0562bae36f137c8ea09a1e92431c6e7a7ef00daed43c5f25d6"
+    },
+    {
       "path": "assets/r535/dots/hunter-burn.webp",
       "bytes": 172484,
       "sha256": "c1a86ae57963283d6cda1de56b4269f87b0b1af45a1d76a8f92232bc0684ebec"
@@ -34556,6 +34566,21 @@
       "path": "assets/r710/seoha/idle-s.webp",
       "bytes": 57414,
       "sha256": "2c46cd0a53e80d44ba794f61e1e61982dfa8a84f9c48f09c250284b2cebb5e87"
+    },
+    {
+      "path": "assets/r712/SOURCE.md",
+      "bytes": 1643,
+      "sha256": "caaa5272cd1aeb702272c80ec2369da8038dee8730578ece00e5f8cb708ecdce"
+    },
+    {
+      "path": "assets/r712/chest-closed.png",
+      "bytes": 20289,
+      "sha256": "c89abef3c935f6e6765328f41c292285997d49c60dce50928f9afcf37df3a73f"
+    },
+    {
+      "path": "assets/r712/chest-open.png",
+      "bytes": 30458,
+      "sha256": "7de5653e543aa67c3cde0ddd05baea8142b188876c6847114dbe76faf8e76d09"
     },
     {
       "path": "assets/r74/effects.png",
@@ -43444,8 +43469,8 @@
     },
     {
       "path": "growth-r103.js",
-      "bytes": 19855,
-      "sha256": "25856c536913af24e3e2be46ad7891e275bb24f68354b6ef98095b413fd78f21"
+      "bytes": 20253,
+      "sha256": "a01446a27d43060d61490a697c6befe018a56a996ba6a88dac05d2c49f238ea6"
     },
     {
       "path": "guide-clear-r426.js",
@@ -43479,8 +43504,8 @@
     },
     {
       "path": "gunner-arms-r561.js",
-      "bytes": 36113,
-      "sha256": "49aafa5ba783087a9086154882a6668f2cd54c7eafdb06ef541fc0d97a3366e9"
+      "bytes": 36560,
+      "sha256": "d1a519dcc3b7b73e3748ab4e30188d0d0795de5ba98592e777ea12d7f147feda"
     },
     {
       "path": "hero-facing-r336.js",
@@ -43729,8 +43754,8 @@
     },
     {
       "path": "michaela-r247.js",
-      "bytes": 12179,
-      "sha256": "fa83d50f48594a14f804df32dce32dc2a3bff51b381ca7c2f4097d1713f79aeb"
+      "bytes": 12471,
+      "sha256": "23dae134987dd4396d501c4fe6301f875fd01805c06b9edef2b618d584269014"
     },
     {
       "path": "mob-art-r290.js",
@@ -44114,8 +44139,8 @@
     },
     {
       "path": "rooms-r523.js",
-      "bytes": 48033,
-      "sha256": "cc80823230347f5bc23b8555ed5469809a1d076b45a8e478cc5af920677826a7"
+      "bytes": 48464,
+      "sha256": "c931fd3df2cf13cd8eaaafd2ae93bb3981c56a93aa7702a7249287e1a347c457"
     },
     {
       "path": "root-gate-video-r372.js",
@@ -44274,8 +44299,8 @@
     },
     {
       "path": "skill-growth-r663.js",
-      "bytes": 16764,
-      "sha256": "f872b1a20d4ee59f0879b4a22c44fb78e06a577e9bef559e41fa28d14df0b5c9"
+      "bytes": 17032,
+      "sha256": "a6ebeeb44d063e7f86bb6d07e84ca985692343f029e65a58cc050feb1d1b68a5"
     },
     {
       "path": "skill-sheets-r411.js",
@@ -44379,8 +44404,8 @@
     },
     {
       "path": "survival-r600.js",
-      "bytes": 52741,
-      "sha256": "7ecc67e6b50ce0f06d1bc0c0c78fd886c2c9c22caf3915e3fc7668da95b4d85a"
+      "bytes": 60139,
+      "sha256": "2614e042c55ed642d79446dd51f006e5fbb08010e9ff59f9f60846def30132c3"
     },
     {
       "path": "swamp-hands-r474.js",
@@ -44404,8 +44429,8 @@
     },
     {
       "path": "title-bg-video-r667.js",
-      "bytes": 8303,
-      "sha256": "5e8ec25a234f63e8c7e2d3cd39c3525db494bbb3543785fda28e6addbc40e183"
+      "bytes": 8726,
+      "sha256": "8eea5171d3cbb23e58b60d78b4ac03ba9eeff318fc547c840bf69075705fa018"
     },
     {
       "path": "trail-r482.js",
@@ -44613,8 +44638,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8922,
-  "totalBytes": 1229122251,
+  "fileCount": 8927,
+  "totalBytes": 1229191062,
   "webHTMLSha256": "03459c2d77d240d54a128e5af19405cd1386e090e993f291980bb5810e26e0f5",
   "largest": [
     {
