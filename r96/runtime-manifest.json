@@ -34829,13 +34829,18 @@
     },
     {
       "path": "assets/r810/index.json",
-      "bytes": 13430,
-      "sha256": "f4c5646a99be432e7f998f3a39c7160a6a774e1f4652380e7a49ed20bee11e1f"
+      "bytes": 14081,
+      "sha256": "49444b84703a4b54e15171cf64d72a2c51fe9651e35fff8fc4c65044d3e78d9d"
     },
     {
       "path": "assets/r810/jangdok.webp",
       "bytes": 14040,
       "sha256": "9c1387037ef057c66ecd5f059ab166c7f7caca227c73708158d53ef0721af7ad"
+    },
+    {
+      "path": "assets/r810/lantern-post-off.webp",
+      "bytes": 14274,
+      "sha256": "acd7b9c1e5a8f780485696c0a4581a49720869cc359e81b5ee8b9cebc6b810a3"
     },
     {
       "path": "assets/r810/lantern-post.webp",
@@ -44434,8 +44439,8 @@
     },
     {
       "path": "rooms-r523.js",
-      "bytes": 75774,
-      "sha256": "457e65f2e547e0cd3d98e599089a7d6464b40364451902dc3ee941027f020efe"
+      "bytes": 76792,
+      "sha256": "4a794e1552630b20972d02de22af2104d17fec13bcef820f9232e370a7aeb4e9"
     },
     {
       "path": "root-gate-video-r372.js",
@@ -44933,8 +44938,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8986,
-  "totalBytes": 1236251252,
+  "fileCount": 8987,
+  "totalBytes": 1236267195,
   "webHTMLSha256": "d8bef146aec9863ec63a5a3150cab3c47344631e13664b5969cd73d490e68348",
   "largest": [
     {

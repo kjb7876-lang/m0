@@ -397,6 +397,24 @@
    "made_by": "Dots CX-0071BV 18 (그림 스레드 손질본 c1) → Pillow 테두리 자르기, 폭 500, WebP q74",
    "applied": true,
    "final": false
+  },
+  {
+   "path": "assets/r810/lantern-post-off.webp",
+   "source": "cx0071bv-dots-cleaned/CX-0071BV_02_lantern-post-off_r1_c1.png",
+   "source_sha256": "1e3f6068eb096543004d8041c66f3ef4148dc9123823ef9ea4ff30de0f87b827",
+   "crop_bbox": [
+    157,
+    43,
+    359,
+    472
+   ],
+   "sha256": "acd7b9c1e5a8f780485696c0a4581a49720869cc359e81b5ee8b9cebc6b810a3",
+   "bytes": 14274,
+   "size": "139x296",
+   "use": "잠들지 못하는 마을(last302) 폐가 곁 꺼지고 찢긴 등롱대 — 빛 없음, 01 등롱대와 같은 축척",
+   "made_by": "Pillow crop+LANCZOS(01 과 같은 배율 320/464), WebP q88",
+   "applied": true,
+   "final": false
   }
  ]
 }

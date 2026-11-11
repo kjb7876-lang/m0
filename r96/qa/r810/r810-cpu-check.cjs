@@ -144,4 +144,21 @@ ok('R730 apply: path lanterns light up like posts (R115 lantern)',/s\.kind==='pa
  if(api)for(const id of ['last302','last303']){let fx=null;try{fx=JSON.parse(rd('qa/r730/fixtures/'+id+'.json'));}catch(_){}if(!fx)continue;const H=api.plan(fx).filter(p=>p.kind==='house'),t=H.filter(p=>/thatched/.test(p.path));
   ok(id+(id==='last302'?': 2–4 thatched huts, never replacing a tiled hanok':': no thatched huts'),id==='last302'?t.length>=2&&t.length<=4:t.length===0,t.length);
   if(id==='last302')ok('last302: lit hanok windows unchanged by the huts (≥ 2)',H.filter(p=>/tiled-house-lit/.test(p.path)).length>=2);}}
+// ⑭ Dots 꺼진 등롱대 02(R814): 잠들지 못하는 마을(last302) 폐가 곁에만 — 불 없는(빛 없는) 찢긴 등롱, 01 등롱대와 같은 축척
+{let ix=null;try{ix=JSON.parse(rd('runtime-text/assets/r810/index.json'));}catch(_){}const RS=rd('client-source/rooms-r523.js'),a=ix&&ix.assets.find(a=>a.path==='assets/r810/lantern-post-off.webp'),on=ix&&ix.assets.find(a=>a.path==='assets/r810/lantern-post.webp');
+ ok('R814 Dots dead lantern post: index + manifest, from the Dots folder, ≤ 64 KB',!!a&&a.source.includes('cx0071bv-dots-cleaned/CX-0071BV_02_lantern-post-off')&&a.bytes<=65536&&/^[0-9a-f]{64}$/.test(a.sha256)&&rd('runtime-manifest.json').includes(a.path),a);
+ const D=grab(RS,'DEADPOST'),P0=(m=>m&&{height:+m[1]})(RS.match(/const POST=Object\.freeze\(\{path:'assets\/r810\/lantern-post\.webp',height:(\d+)/));
+ ok('R814: same scale as the lit post 01 (drawn px per source px within 5%)',!!a&&!!on&&!!D&&!!P0&&Math.abs((D.height/(a.crop_bbox[3]-a.crop_bbox[1]))/(P0.height/(on.crop_bbox[3]-on.crop_bbox[1]))-1)<=.05,[D,P0]);
+ ok('R814 apply: dead posts give no light (not an R115 lantern)',/s\.kind==='lamp'\|\|s\.kind==='post'\|\|s\.kind==='pathpost'\)q\.r115Prop='lantern'/.test(RS)&&!/deadpost'?\)?q\.r115Prop/.test(RS));
+ if(api)for(const id of ['last302','last303']){let fx=null,pf=null;try{fx=JSON.parse(rd('qa/r730/fixtures/'+id+'.json'));pf=JSON.parse(rd('qa/r810/fixtures-'+id+'-path.json'));}catch(_){}if(!fx)continue;
+  for(const[tag,f]of[['',fx],[' (with path)',pf?{...fx,path:new Set(pf.path)}:null]]){if(!f)continue;const P=api.plan(f),d=P.filter(p=>p.kind==='deadpost'),ru=P.filter(p=>p.kind==='house'&&/ruined/.test(p.path));
+   if(id==='last303')ok('last303'+tag+': no dead posts',d.length===0,d.length);
+   else{ok('last302'+tag+': 1–3 dead posts, each within 6 cells of a ruined house (house anchor sits 3.6 behind its edge)',d.length>=1&&d.length<=3&&d.every(q=>ru.some(h=>Math.hypot(h.x-q.x,h.y-q.y)<=6)),[d.length,ru.length]);
+    ok('last302'+tag+': dead posts ≥ 6 cells apart (one per ruined house, not a cluster)',d.every((a,i)=>d.every((b,j)=>i===j||Math.hypot(a.x-b.x,a.y-b.y)>=6)));}}}}
+// ⑭-2 실제 게임에서 뽑은 last302 입력(보스 구역 경계·문·기존 조형물·길 포함, 19:37Z 헤드리스) — r730 fixture 로는 통과해도 게임에선 꺼진 등롱대가 0개였다(폐가 둘이 보스 구역에 면하고 하나는 기와 더미에 막힘)
+{let lf=null;try{lf=JSON.parse(rd('qa/r810/fixtures-last302-live.json'));}catch(_){}
+ if(api&&lf){const P=lf.path;lf.route=P.filter((_,i)=>i%3===0).map(k=>{const[x,y]=k.split(',').map(Number);return{x:x+.5,y:y+.5};});lf.path=new Set(P);const R=api.plan(lf),d=R.filter(p=>p.kind==='deadpost'),ru=R.filter(p=>p.kind==='house'&&/ruined/.test(p.path));
+  ok('last302 live input: at least 1 dead post beside a ruined house (≤ 6 cells)',d.length>=1&&d.every(q=>ru.some(h=>Math.hypot(h.x-q.x,h.y-q.y)<=6)),[d.length,ru.length]);
+  ok('last302 live input: total ≤ 92',R.length<=92,R.length);}
+ else ok('last302 live fixture present',false);}
 console.log('\nR810 '+(n-bad)+'/'+n+' passed');process.exit(bad?1:0);
