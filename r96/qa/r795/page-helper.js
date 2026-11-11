@@ -27,7 +27,7 @@ function inv(){ticks++;if(player.attackAnim>0)seenF.aa=true;if(player.skillAnim>
  if(ticks%20===0){try{if(blocked(player.x,player.y,.2))push('inside-solid',[player.x,player.y].map(v=>+v.toFixed(2)).join());}catch(_){}}
  watchLock();}
 function step(sec,drawEvery=6){const n=Math.round(sec*60),t0=time;let stoppedBy=null;for(let i=0;i<n;i++){if(modal){stoppedBy='modal';break;}if(loading){stoppedBy='loading';break;}if(player.hp<=0){stoppedBy='dead';break;}
-  try{tick(1/60);}catch(e){push('tick-throw',String(e&&e.stack||e).slice(0,400));stoppedBy='throw';break;}inv();
+  watchDmg();try{tick(1/60);}catch(e){push('tick-throw',String(e&&e.stack||e).slice(0,400));stoppedBy='throw';break;}inv();watchDmg();
   if(i%drawEvery===0){try{draw();}catch(e){push('draw-throw',String(e&&e.stack||e).slice(0,400));}}}
  return {dt:+(time-t0).toFixed(3),stoppedBy};}
 function sweep(){const r={};for(const k of Object.keys(window)){if(!/^__STORYWORLD|^__HAPIL/.test(k))continue;const o=window[k];if(!o||typeof o!=='object')continue;let ins=null;try{ins=typeof o.inspect==='function'?o.inspect():null;}catch(e){r[k]={e:'inspect-throw',le:String(e).slice(0,160)};continue;}
@@ -50,7 +50,11 @@ function engage(melee,skip){const h=HEROES[player.hero],d0=melee?Math.min(1.7,h.
 const still=id=>{const e=room.enemies.find(v=>v.id===id);return !!e&&e.hp>0&&Math.hypot(e.x-player.x,e.y-player.y)<HEROES[player.hero].range+3;};
 function pickEnemy(){const pool=room.enemies.filter(e=>e.hp>0&&!e.boss&&e.visible!==false&&!['hidden','inactive','disabled','despawned'].includes(e.spawnState));pool.sort((a,b)=>Math.hypot(a.x-player.x,a.y-player.y)-Math.hypot(b.x-player.x,b.y-player.y));return pool[0]||null;}
 const tp=(q)=>{player.x=q.x;player.y=q.y;route=[];command=null;};
-const enemyHpSum=()=>room.enemies.reduce((s,e)=>s+Math.max(0,e.hp),0);
+/* 피해 재기: 몹 HP 합계는 싸움 중 새로 나오는 몹(R383 뿌리 등) 때문에 늘 수 있다 → 틱마다 몹별 HP 감소만 모은다.
+   enemyHpSum() 은 '−누적 피해'를 돌려준다(앞뒤 값의 차 = 그 사이에 준 피해). */
+const hpSeen=new WeakMap();let dmgTotal=0;
+function watchDmg(){for(const e of room.enemies||[]){const now=Math.max(0,+e.hp||0),was=hpSeen.get(e);if(was!==undefined&&now<was)dmgTotal+=was-now;hpSeen.set(e,now);}}
+const enemyHpSum=()=>{watchDmg();return -dmgTotal;};
 /* 영웅 몸 그림 확인: draw() 동안 전역 ctx 는 기록기(명령 목록)로 바뀌므로 CanvasRenderingContext2D 원형을 엿봐도 안 잡힌다.
    drawHero 를 잠깐 감싸 그 순간의 ctx.drawImage(인스턴스에 얹힌 것 포함)를 엿본다(qa/r444/fcensus 와 같은 방식).
    그리기는 실제 시간 간격을 두는 덧씌우기가 있어 80ms 쉬고 부른다. */
