@@ -7,7 +7,7 @@ let chromium;try{({chromium}=createRequire(import.meta.url)('playwright'));}catc
 const URL=process.env.SW_URL||'http://127.0.0.1:4410/m0/';
 const ALL=['hwando','seoha','neon','michaela','lauren','hunter','slayer','gunner'];
 const args=process.argv.slice(2),heroes=args.filter(a=>!a.startsWith('--'));const only=(args.find(a=>a.startsWith('--only='))||'').slice(7).split(',').filter(Boolean);
-const OUT=(args.find(a=>a.startsWith('--out='))||'').slice(6)||HERE;const ZONE=process.env.SW_ZONE||'dist00';/* 앞쪽 상황(sc01~09)이 몹을 거의 다 잡으므로 뒤쪽 상황(sc10~)은 다른 전투 지역에서 한다 */const ZONE2=process.env.SW_ZONE2||(process.env.SW_ZONE?ZONE:'dist04');
+const OUT=(args.find(a=>a.startsWith('--out='))||'').slice(6)||HERE;const ZONE=process.env.SW_ZONE||'dist00';/* 앞쪽 상황(sc01~09)이 몹을 거의 다 잡으므로 뒤쪽 상황(sc10~)은 다른 전투 지역에서 한다 */const ZONE2=process.env.SW_ZONE2||ZONE;
 const HELPER=fs.readFileSync(path.join(HERE,'page-helper.js'),'utf8');
 const MELEE=new Set(['hwando','neon','lauren','slayer']);
 const DIRKEYS=[['ArrowRight'],['ArrowRight','ArrowDown'],['ArrowDown'],['ArrowDown','ArrowLeft'],['ArrowLeft'],['ArrowLeft','ArrowUp'],['ArrowUp'],['ArrowUp','ArrowRight']];
@@ -24,7 +24,7 @@ async function go(p,z){
  if(z.startsWith('samong:')){const [i,st]=z.slice(7).split(',').map(Number);const there=await p.evaluate(()=>layer==='DREAM'&&!loading);if(!there){await p.evaluate(async()=>{await window.__STORYWORLD_CHEAT777__.activate('777');});await p.waitForFunction(()=>!loading,null,{timeout:90000});await skip(p);const ok=await p.evaluate(([i,st])=>window.__STORYWORLD_CHEAT777__.goSamong(i,st,{force:true}),[i,st]);if(ok===false)throw new Error('goSamong refused');await p.waitForFunction(()=>!loading&&layer==='DREAM',null,{timeout:150000});await skip(p);}return;}
 await p.evaluate(async z=>{if(zone!==z)await enterRegion(z,null,{layer:'STORY',restore:true});},z);await p.waitForFunction(z=>!loading&&zone===z,z,{timeout:150000});await skip(p);}
 
-async function runHero(b,hero,rows){const {ctx,p,errs}=await boot(b,hero);
+async function runHero(b,hero,rows,part){const {ctx,p,errs}=await boot(b,hero);
  const rec=(sc,check,pass,detail='')=>{rows.push({hero,sc,check,pass:pass===null?null:!!pass,detail:typeof detail==='string'?detail:JSON.stringify(detail)});if(pass===false)console.log(`  ✗ ${hero} ${sc} ${check} ${typeof detail==='string'?detail:JSON.stringify(detail)}`.slice(0,400));};
  const E=(fn,arg)=>p.evaluate(fn,arg);const step=async s=>{let r=await E(s=>__HQ795.step(s),s);if(r.dt<s*.5&&await E(()=>!!storyScene||(modal&&!document.getElementById('reviveHome')&&player.hp>0&&!document.getElementById('menuClose')))){await skip(p);const r2=await E(s=>__HQ795.step(s),s-r.dt);r={dt:+(r.dt+r2.dt).toFixed(3),stoppedBy:r2.stoppedBy,scene:true};}return r;};const snap=()=>E(()=>__HQ795.snap());
  const down=async(...ks)=>{for(const k of ks)await p.keyboard.down(k);},up=async(...ks)=>{for(const k of ks)await p.keyboard.up(k);};
@@ -39,7 +39,7 @@ async function runHero(b,hero,rows){const {ctx,p,errs}=await boot(b,hero);
   rec(sc,'페이지 오류 없음',pe.length===0,pe.slice(0,3));
   const sw=await E(()=>__HQ795.sweep());const diff={};for(const [k,v] of Object.entries(sw)){const o=sweep0[k];if(!o||o.e!==v.e||o.le!==v.le)diff[k]=v;}sweep0=sw;
   rec(sc,'오버레이 내부 오류 집계 증가 없음',Object.keys(diff).length===0,diff);};
- const want=sc=>!only.length||only.includes(sc);
+ /* 앞쪽 상황(sc01~09)이 첫 전투 지역 몹을 거의 다 잡고, 새 여정에서는 그 지역만 열려 있다 → 뒤쪽 상황(sc10~)은 새 여정을 다시 시작해서 한다 */const want=sc=>(!only.length||only.includes(sc))&&((+sc.slice(2,4)<10)===(part==='A'));
  const toOpen=async(minEnemy=13)=>E(m=>{const q=__HQ795.findOpen(m)||__HQ795.findOpen(8)||__HQ795.findOpen(4);if(q)__HQ795.tp(q);return q;},minEnemy);
  const toEnemy=async()=>{const skipIds=[];for(let i=0;i<5;i++){const e=await E(([m,sk])=>__HQ795.engage(m,sk),[MELEE.has(hero),skipIds]);if(!e)return null;await E(()=>__HQ795.step(.1));if(await E(id=>__HQ795.still(id),e.id))return e;skipIds.push(e.id);}return null;};
  const waitCD=async(pred,max=40)=>{await toOpen();for(let t=0;t<max;t+=1){if(await E(pred))return true;await step(1);}return E(pred);};
@@ -216,7 +216,7 @@ async function runHero(b,hero,rows){const {ctx,p,errs}=await boot(b,hero);
  await ctx.close().catch(()=>{});}
 
 const b=await chromium.launch();const rows=[];const list=heroes.length?heroes:ALL;
-for(const h of list){const t0=Date.now();console.log('▶',h);await runHero(b,h,rows);console.log('  done',h,((Date.now()-t0)/1000).toFixed(0)+'s','fail',rows.filter(r=>r.hero===h&&r.pass===false).length);}
+for(const h of list){const t0=Date.now();console.log('▶',h);for(const part of ['A','B']){if(only.length&&!only.some(sc=>(+sc.slice(2,4)<10)===(part==='A')))continue;await runHero(b,h,rows,part);}console.log('  done',h,((Date.now()-t0)/1000).toFixed(0)+'s','fail',rows.filter(r=>r.hero===h&&r.pass===false).length);}
 await b.close();
 const fails=rows.filter(r=>r.pass===false);const tagN=list.length===ALL.length&&!only.length?'':'-'+list.join('_')+(only.length?'-'+only.join('_'):'');
 fs.mkdirSync(OUT,{recursive:true});fs.writeFileSync(path.join(OUT,`results${tagN}.json`),JSON.stringify({url:URL,zone:ZONE,heroes:list,total:rows.length,passed:rows.filter(r=>r.pass===true).length,failed:fails.length,info:rows.filter(r=>r.pass===null).length,rows},null,1));
