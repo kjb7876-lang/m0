@@ -49,6 +49,23 @@ def fringe(im):
         if q[3]>200:ins.append(sum(q[:3])/3)
       if ins and l-sum(ins)/len(ins)>38:bad+=1
   return bad/max(1,edge)
+def is_white(p):
+  r,g,b,a=p;return a>40 and (r+g+b)/3>165 and max(r,g,b)-min(r,g,b)<110 and not (r>g>b and g-b>12)
+def body_px(im):
+  return sum(1 for p in im.get_flattened_data() if p[3]>40 and not is_white(p)) if hasattr(im,'get_flattened_data') else sum(1 for p in im.getdata() if p[3]>40 and not is_white(p))
+def white_fx(im,kind):
+  """효과(질투 청록 물살·색욕 붉은 꽃잎) 색 픽셀에서 14px 안에 있는 흰·연분홍 무채 픽셀 수(알파>40, 명도>165, 채도<110, 피부색 아님) — 효과 안에 남은 흰 배경 판."""
+  from PIL import ImageFilter
+  W,H=im.size;px=im.load();fx=Image.new('L',(W,H),0);fp=fx.load()
+  for y in range(H):
+    for x in range(W):
+      r,g,b,a=px[x,y]
+      if a>120 and (r+g+b)/3<165 and ((b>r+20 and g>r+20) if kind=='envy' else (r>g+50 and r>b+40)):fp[x,y]=255
+  near=fx.filter(ImageFilter.MaxFilter(29)).load();n=0
+  for y in range(H):
+    for x in range(W):
+      if near[x,y] and is_white(px[x,y]):n+=1
+  return n
 D=json.loads(re.search(r'freeze\((\{.*\})\)',(R/'client-source/sin-boss-art-r463-data.js').read_text(encoding='utf8')).group(1))
 r380=json.loads(find('assets/r380/mobs/index.json').read_text(encoding='utf8'))
 R380={m['path']:m for m in r380['mobs']}
@@ -77,6 +94,11 @@ for b,L in DRAWN.items():
     if not f:ok(False,f'{b} 내려받는 그림 있음 {s}');continue
     fr=fringe(Image.open(f).convert('RGBA'))
     ok(fr<=.02,f'{b} 밝은 테두리 {fr*100:.1f}% ≤ 2% ({s.split("/")[-1]}{" · R700 사본" if s.startswith("assets/r700") else ""})')
+# 2b) 효과 안 흰 판(사용자 2026-11-11 02:03Z "이런 흰색 배경나오는거 거슬림" — 질투 물살 가운데·색욕 꽃잎)
+for b in ('b03-boss','b05-boss'):
+  p=D[b]['attack'];s2=served(p);f=find(s2)
+  if f:
+    wb=white_fx(Image.open(f).convert('RGBA'),'envy' if b=='b03-boss' else 'lust');ok(wb<=60,f'{b} 공격 그림 효과 안 흰 픽셀 {wb}px ≤ 60px')
 # 3) 사본 품질·원본 보존·맘몬
 ok(len(spec['images'])>=3,f'R700 깨끗한 사본 {len(spec["images"])}장 (3장 이상)')
 for r in spec['images']:
@@ -87,7 +109,7 @@ for r in spec['images']:
   ok(hashlib.sha256(src.read_bytes()).hexdigest()==r['sourceSha256'],'입력 그림 그대로(해시) '+served_prev)
   ok(hashlib.sha256(out.read_bytes()).hexdigest()==r['outputSha256'],'사본 해시 기록과 같음 '+r['path'].split('/')[-1])
   a=Image.open(src).convert('RGBA');c=Image.open(out).convert('RGBA')
-  na=sum(a.getchannel('A').histogram()[41:]);nc=sum(c.getchannel('A').histogram()[41:])
+  na=body_px(a);nc=body_px(c)  # 흰 효과 덩어리(사용자 02:03Z 요청으로 지우는 것)는 빼고 센 몸 픽셀
   ba,bc=alpha_box(a),alpha_box(c)
   ok(nc>=na*.97 and abs((ba[3]-ba[1])-(bc[3]-bc[1]))<=2 and a.size==c.size,f'몸을 깎지 않음 {nc}/{na} 키 {bc[3]-bc[1]}/{ba[3]-ba[1]}')
   ok(not re.search(r'greed|mammon|ep1b06',r['path']),'맘몬 그림 아님 '+r['path'].split('/')[-1])

@@ -21,6 +21,25 @@ def defringe(im,depth=4,delta=38):
   f=(al>0)&(dist<=depth)&dim&(lum-corel>delta)
   rgb[f]=corec[f];al[f&solid]=np.maximum(41,al[f&solid]*.85)
   return Image.fromarray(np.dstack([rgb,al]).clip(0,255).astype(np.uint8),'RGBA'),int(f.sum())
+# 사용자 2026-11-11 02:03Z "이런 흰색 배경나오는거 거슬림"(질투 물살 가운데·색욕 꽃잎 물줄기의 흰 덩어리).
+# 효과(물살·꽃잎) 안에 남은 흰·연분홍 무채 덩어리를 그 효과의 색(가장 가까운 효과 색 픽셀)으로 바꾼다. 피부(R>G>B, G-B>12)는 건드리지 않는다.
+FX={'envy':lambda r,g,b:(b>r+20)&(g>r+20),'lust':lambda r,g,b:(r>g+50)&(r>b+40)}
+def whitefx(im,kind,lum_min=165,sat_max=110):
+  a=np.asarray(im).astype(np.float32);rgb=a[...,:3].copy();al=a[...,3].copy();r,g,b=rgb[...,0],rgb[...,1],rgb[...,2]
+  lum=rgb.mean(-1);sat=rgb.max(-1)-rgb.min(-1);skin=(r>g)&(g>b)&((g-b)>12)
+  w=(al>16)&(lum>lum_min)&(sat<sat_max)&~skin
+  fx=(al>120)&FX[kind](r,g,b)&(lum<lum_min)
+  d,(iy,ix)=ndimage.distance_transform_edt(~fx,return_indices=True);c=rgb[iy,ix]
+  if kind=='envy':
+    # 물살 소용돌이 가운데의 넓은 흰 판은 빈 '눈'이다 → 30px 넘는 흰 덩어리는 물살 색으로 물들이고 물살에서 멀수록 투명하게(2px 까지 그대로, 10px 에서 0).
+    lab,n=ndimage.label(w);sz=ndimage.sum(w,lab,np.arange(1,n+1));big=np.zeros(n+1,bool);big[1:]=sz>=30;wb=w&big[lab];ws=w&~big[lab]&(d<=14)
+    rgb[wb]=c[wb]*.85;fade=np.clip(1-(d-2)/8,0,1);al[wb]=al[wb]*fade[wb]*.85
+    rgb[ws]=c[ws]*.55+rgb[ws]*.3  # 작은 물거품 조각은 물살 색 밝은 빛으로(흰색 대신)
+    w=wb|ws
+  else:
+    w&=d<=14  # 효과 색 가까이에 있는 흰 덩어리만(얼굴 반사광 등 몸 쪽 흰빛은 멀어서 남음)
+    rgb[w]=c[w]*.9;al[w]*=.8
+  return Image.fromarray(np.dstack([rgb,al]).clip(0,255).astype(np.uint8),'RGBA'),int(w.sum())
 sha=lambda b:hashlib.sha256(b).hexdigest()
 IMAGES=[('assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp','질투(b03) 0단계 공격'),
  ('assets/generated-v31224/actors-normalized/27ef01c10a8f_gluttony-human-attack.webp','탐식(b04) 0단계 공격'),
@@ -38,9 +57,11 @@ def main():
     src='assets/r425/clean/'+p if p in C425 else ('assets/r99/clean/'+p if p in C99 else p)
     b=find(src).read_bytes();im=Image.open(io.BytesIO(b)).convert('RGBA')
     out,nfix=defringe(im)
+    kind='envy' if 'envy' in p else ('lust' if 'lust' in p else None);nwhite=0
+    if kind:out,nwhite=whitefx(out,kind)
     buf=io.BytesIO();out.save(buf,'WEBP',lossless=True,quality=100,method=6,exact=True)
     o=RT/'assets/r700/clean'/p;o.parent.mkdir(parents=True,exist_ok=True);o.write_bytes(buf.getvalue())
-    rows.append({'path':p,'use':use,'input':src,'sourceSha256':sha(b),'ops':['defringe-recolor'],'fixedPx':nfix,'output':'assets/r700/clean/'+p,'outputSha256':sha(buf.getvalue()),'outputBytes':len(buf.getvalue())})
+    rows.append({'path':p,'use':use,'input':src,'sourceSha256':sha(b),'ops':['defringe-recolor']+(['white-fx-recolor'] if kind else []),'fixedPx':nfix,'whiteFxPx':nwhite,'output':'assets/r700/clean/'+p,'outputSha256':sha(buf.getvalue()),'outputBytes':len(buf.getvalue())})
     done.append('assets/r700/clean/'+p)
   SPEC.write_text(json.dumps({'schema':'r700-boss-clean-v1','why':'사용자 2026-11-11 00:57Z 보스들 특히 7대죄 이미지 일관성 및 품질 전수조사검사 개선. 공격 그림만 회백 테두리.','originalsModified':False,'images':rows},ensure_ascii=False,indent=1)+'\n',encoding='utf8')
   for r in rows:print(r['path'].split('/')[-1],r['input'][:20],r['outputBytes'])

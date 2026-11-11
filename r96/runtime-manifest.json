@@ -34484,13 +34484,13 @@
     },
     {
       "path": "assets/r700/clean/assets/generated-v31224/actors-normalized/53c9ce212489_lust-human-attack.webp",
-      "bytes": 76020,
-      "sha256": "8208b6cf04f8f4e8d6a9bdcf73583fe915b24d2e8067869bd7c17183474ab1f9"
+      "bytes": 76166,
+      "sha256": "6b1c785e71936f7510fd7fb551eb0143796360fc951752ff76c84c305cde8088"
     },
     {
       "path": "assets/r700/clean/assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp",
-      "bytes": 70584,
-      "sha256": "26ebdc2d02e9d74b8371f44a784064b43229d0fac851f27135c72982a7ea91c4"
+      "bytes": 71510,
+      "sha256": "c6048ea4aa403b998e0bf8c3f547e3cc5dadf589e4ca1201b78c6ae86de445ee"
     },
     {
       "path": "assets/r74/effects.png",
@@ -44544,7 +44544,7 @@
     }
   ],
   "fileCount": 8908,
-  "totalBytes": 1228622918,
+  "totalBytes": 1228623990,
   "webHTMLSha256": "50bb81bfe1c0759805da71ee259f6ce8826210ba5e192c1bed9f84b1480a9814",
   "largest": [
     {

@@ -9,12 +9,14 @@
    "input": "assets/r425/clean/assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp",
    "sourceSha256": "083f149314d7f8ed68dded439d3b87557bd5432ba37b51b17076deb180102cdc",
    "ops": [
-    "defringe-recolor"
+    "defringe-recolor",
+    "white-fx-recolor"
    ],
    "fixedPx": 7040,
+   "whiteFxPx": 2855,
    "output": "assets/r700/clean/assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp",
-   "outputSha256": "26ebdc2d02e9d74b8371f44a784064b43229d0fac851f27135c72982a7ea91c4",
-   "outputBytes": 70584
+   "outputSha256": "c6048ea4aa403b998e0bf8c3f547e3cc5dadf589e4ca1201b78c6ae86de445ee",
+   "outputBytes": 71510
   },
   {
    "path": "assets/generated-v31224/actors-normalized/27ef01c10a8f_gluttony-human-attack.webp",
@@ -25,6 +27,7 @@
     "defringe-recolor"
    ],
    "fixedPx": 9188,
+   "whiteFxPx": 0,
    "output": "assets/r700/clean/assets/generated-v31224/actors-normalized/27ef01c10a8f_gluttony-human-attack.webp",
    "outputSha256": "e479fbef4925512ed13d539b6b98c08e520030f211f3c1286552fd8b80875b24",
    "outputBytes": 92344
@@ -35,12 +38,14 @@
    "input": "assets/r99/clean/assets/generated-v31224/actors-normalized/53c9ce212489_lust-human-attack.webp",
    "sourceSha256": "cb2267aabbcac2e93b282200a9057c680a31bc1c22b88b6c2ced032e19dabf3b",
    "ops": [
-    "defringe-recolor"
+    "defringe-recolor",
+    "white-fx-recolor"
    ],
    "fixedPx": 7095,
+   "whiteFxPx": 569,
    "output": "assets/r700/clean/assets/generated-v31224/actors-normalized/53c9ce212489_lust-human-attack.webp",
-   "outputSha256": "8208b6cf04f8f4e8d6a9bdcf73583fe915b24d2e8067869bd7c17183474ab1f9",
-   "outputBytes": 76020
+   "outputSha256": "6b1c785e71936f7510fd7fb551eb0143796360fc951752ff76c84c305cde8088",
+   "outputBytes": 76166
   }
  ]
 }
