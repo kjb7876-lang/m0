@@ -428,6 +428,8 @@ jobs:
         run: node r96/qa/r545/r545-cpu-check.cjs
       - name: R546 per-hero attack and skill sounds, blink, parry, EGO, awakening, clear, upgrade, fall, panel, portal and enemy-shot sounds CPU check
         run: node r96/qa/r546/r546-cpu-check.cjs
+      - name: R664 regional ambience loops (ElevenLabs beds per episode, seamless, quiet) CPU check
+        run: node r96/qa/r664/r664-cpu-check.cjs
       - name: R385 mob moves (review list v18 move/rename) CPU check
         run: node r96/qa/r385/r385-cpu-check.cjs
       - name: R390 cinema full narration + midboss hold + enemies keep chasing CPU check
@@ -579,6 +581,8 @@ jobs:
         run: node r96/qa/r349/hwando-arc-cpu-check.cjs
       - name: R436 Hwando down-walk v2 CPU check
         run: node r96/qa/r436/hwando-walk-s-cpu-check.cjs
+      - name: R437 Neon Q mint chain lightning / Neon-Lauren side attacks / Neon portrait CPU check
+        run: node r96/qa/r437/r437-cpu-check.cjs
       - name: R439 Hwando attack blade-tip speck cleanup CPU check
         run: node r96/qa/r439/hwando-tip-cpu-check.cjs
       - name: R447 R74 ash moth flaps its wings while moving CPU check

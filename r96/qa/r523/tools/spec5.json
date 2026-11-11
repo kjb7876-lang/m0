@@ -1,0 +1,4 @@
+[
+ {"key": "shelf_n", "src": "ext:bookshelf-n.png", "trim": true, "out": "assets/r528/bookshelf-n.webp", "max": 256, "ch": 110, "face": "n", "pair": "shelf_w"},
+ {"key": "shelf_w", "src": "ext:bookshelf-w.png", "trim": true, "out": "assets/r528/bookshelf-w.webp", "max": 256, "ch": 110, "face": "w", "pair": "shelf_n"}
+]

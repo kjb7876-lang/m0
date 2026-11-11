@@ -8094,6 +8094,23 @@
     "skill-growth-r663.js",
     "mob-student-walk-r615.js",
     "assets/r615/mob-student-walk8.webp",
+    "ambience-r664.js",
+    "assets/r664/ambience/hall.ogg",
+    "assets/r664/ambience/wind.ogg",
+    "assets/r664/ambience/water.ogg",
+    "assets/r664/ambience/crowd.ogg",
+    "assets/r664/ambience/stone.ogg",
+    "assets/r664/ambience/night.ogg",
+    "assets/r664/ambience/index.json",
+    "neon-lauren-r437.js",
+    "assets/r437/attack/lauren/attack-e.webp",
+    "assets/r437/attack/lauren/index.json",
+    "assets/r437/attack/neon/attack-e.webp",
+    "assets/r437/attack/neon/index.json",
+    "assets/r437/portrait/neon.webp",
+    "assets/r528/bookshelf-n.webp",
+    "assets/r528/bookshelf-w.webp",
+    "assets/r528/index.json",
     "title-bg-video-r667.js",
     "assets/r667/title-video/loop.mp4",
     "assets/r667/title-poster.jpg",
@@ -9172,5 +9189,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "02fd4142af930e20e02ffde9d5956076ab5d5850770cac23ad9c5b7f69eeea9f"
+  "runtimeManifestSHA256": "2571afe7cff7d7e126905eb607e55ea1d29b054b3fbe1e86e331532bc6ca53c2"
 }
