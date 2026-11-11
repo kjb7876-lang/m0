@@ -108,6 +108,15 @@ if(A.api){
  D.ctx.hitEnemy({}, 10, {storyWER:true,sourceSlot:'e',sourceHero:'hwando'});D.ctx.hitEnemy({},10,{storyWER:true,sourceSlot:'q',sourceHero:'hwando'});D.ctx.hitEnemy({},10,null);
  ok(D.log.vals.slice(-3).join()==='13,10,10','본편 E 피해 ×1.3, Q·기타는 그대로');
  {const k='hwando:e';D.ctx.player.storyWER.ready[k]=D.ctx.time+10;D.tick(1/60);const left=D.ctx.player.storyWER.ready[k]-D.ctx.time;ok(Math.abs(left-10*1.3)<.2,'E 재사용 10초 → 약 13초(새로 걸린 몫만 ×1.3): '+left.toFixed(2));D.tick(1/60);ok(D.ctx.player.storyWER.ready[k]-D.ctx.time<10*1.3,'다음 틱에 다시 늘리지 않음');}
+ // R663c: scale() — 미카엘라·기억사수 W·E 가 잠금·범위·피해·재사용을 묻는 창구
+ {const S=mk({player:{level:1}});S.tick();const w=S.api.scale('w');ok(w.locked&&w.range===1&&w.power===1&&w.cool===1,'scale: 잠긴 칸은 locked=true, 배수 1');
+  S.state.ranks.skillWR663=1;S.state.ranks.skillER663=3;const w1=S.api.scale('w'),e3=S.api.scale('e');
+  ok(!w1.locked&&Math.abs(w1.range-1.1)<1e-9&&w1.power===1.15&&w1.cool===1.15,'scale: W 1단계 범위 ×1.1·피해 ×1.15·재사용 ×1.15');
+  ok(!e3.locked&&Math.abs(e3.range-1.2*1.16)<1e-9&&e3.power===1.3&&e3.cool===1.3,'scale: E 3단계 범위 ×1.2×1.16·피해 ×1.3·재사용 ×1.3');
+  const C2=mk({coop:true});C2.tick();const c=C2.api.scale('w');ok(!c.locked&&c.range===1&&c.power===1&&c.cool===1,'scale: 함께하기에서는 모두 1·잠금 없음');}
+ for(const [f,hero] of [['michaela-r247.js','미카엘라'],['gunner-arms-r561.js','기억사수']]){const t=rd(path.join(R,'client-source/'+f));
+  ok(/__STORYWORLD_SKILL_GROWTH_R663__\?\.scale/.test(t)&&/G(?:S|R663)\(sl\)\.locked\)return false/.test(t)&&/G(?:S|R663)\(sl\)\.cool/.test(t)&&/\.power/.test(t)&&/\.range/.test(t),hero+' W·E: 잠금·재사용·피해·범위를 R663 scale() 에 물음');
+  ok(rd(path.join(R,'runtime-text/'+f))===t,hero+' runtime-text 사본 = client-source');}
  // 함께하기·끄기
  const E=mk({coop:true});E.tick();ok(!E.api.locked('q')&&!E.key('q').stopped,'함께하기(협동)에서는 잠그지 않음');
  // 레거시 키 배치(Z·X·C)

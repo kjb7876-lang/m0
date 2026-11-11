@@ -34503,6 +34503,21 @@
       "sha256": "c6048ea4aa403b998e0bf8c3f547e3cc5dadf589e4ca1201b78c6ae86de445ee"
     },
     {
+      "path": "assets/r712/SOURCE.md",
+      "bytes": 1643,
+      "sha256": "caaa5272cd1aeb702272c80ec2369da8038dee8730578ece00e5f8cb708ecdce"
+    },
+    {
+      "path": "assets/r712/chest-closed.png",
+      "bytes": 20289,
+      "sha256": "c89abef3c935f6e6765328f41c292285997d49c60dce50928f9afcf37df3a73f"
+    },
+    {
+      "path": "assets/r712/chest-open.png",
+      "bytes": 30458,
+      "sha256": "7de5653e543aa67c3cde0ddd05baea8142b188876c6847114dbe76faf8e76d09"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -43389,8 +43404,8 @@
     },
     {
       "path": "growth-r103.js",
-      "bytes": 19855,
-      "sha256": "25856c536913af24e3e2be46ad7891e275bb24f68354b6ef98095b413fd78f21"
+      "bytes": 20253,
+      "sha256": "a01446a27d43060d61490a697c6befe018a56a996ba6a88dac05d2c49f238ea6"
     },
     {
       "path": "guide-clear-r426.js",
@@ -43424,8 +43439,8 @@
     },
     {
       "path": "gunner-arms-r561.js",
-      "bytes": 44562,
-      "sha256": "20b5c6f469f8ef4ea31265804d310d4d0a9b638c634a28356c07c2d5452fc2ce"
+      "bytes": 45009,
+      "sha256": "f2d552ece57e6c3c309c3e2fe8130187340b8086bfdd5fcfb4a9df18dde18cf6"
     },
     {
       "path": "hero-facing-r336.js",
@@ -43669,8 +43684,8 @@
     },
     {
       "path": "michaela-r247.js",
-      "bytes": 12179,
-      "sha256": "fa83d50f48594a14f804df32dce32dc2a3bff51b381ca7c2f4097d1713f79aeb"
+      "bytes": 12471,
+      "sha256": "23dae134987dd4396d501c4fe6301f875fd01805c06b9edef2b618d584269014"
     },
     {
       "path": "mob-art-r290.js",
@@ -44214,8 +44229,8 @@
     },
     {
       "path": "skill-growth-r663.js",
-      "bytes": 16764,
-      "sha256": "f872b1a20d4ee59f0879b4a22c44fb78e06a577e9bef559e41fa28d14df0b5c9"
+      "bytes": 17032,
+      "sha256": "a6ebeeb44d063e7f86bb6d07e84ca985692343f029e65a58cc050feb1d1b68a5"
     },
     {
       "path": "skill-sheets-r411.js",
@@ -44319,8 +44334,8 @@
     },
     {
       "path": "survival-r600.js",
-      "bytes": 52741,
-      "sha256": "7ecc67e6b50ce0f06d1bc0c0c78fd886c2c9c22caf3915e3fc7668da95b4d85a"
+      "bytes": 60139,
+      "sha256": "2614e042c55ed642d79446dd51f006e5fbb08010e9ff59f9f60846def30132c3"
     },
     {
       "path": "swamp-hands-r474.js",
@@ -44344,8 +44359,8 @@
     },
     {
       "path": "title-bg-video-r667.js",
-      "bytes": 8303,
-      "sha256": "5e8ec25a234f63e8c7e2d3cd39c3525db494bbb3543785fda28e6addbc40e183"
+      "bytes": 8726,
+      "sha256": "8eea5171d3cbb23e58b60d78b4ac03ba9eeff318fc547c840bf69075705fa018"
     },
     {
       "path": "trail-r482.js",
@@ -44553,8 +44568,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8910,
-  "totalBytes": 1228639634,
+  "fileCount": 8913,
+  "totalBytes": 1228701250,
   "webHTMLSha256": "50bb81bfe1c0759805da71ee259f6ce8826210ba5e192c1bed9f84b1480a9814",
   "largest": [
     {
