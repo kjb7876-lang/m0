@@ -102,9 +102,9 @@ html.r90-ui .muted{color:#b8ad9c}html.r90-ui .bar{border-color:#75634e;border-ra
    const border=near(x0,q.x-w/2-1.5*z)&&near(y0,y-z)&&near(w0,w+3*z)&&near(h0,h+2*z);
    const bar=near(x0,q.x-w/2)&&near(y0,y)&&w0<=w+.01&&(near(h0,h)||near(h0,Math.max(.7,.8*z)));
    const nativeBar=near(x0,q.x-nativeW/2)&&near(y0,nativeY)&&w0<=nativeW+.01&&near(h0,4)&&['#08101bdd','#ec6d8b','#d6b098','#b69aa3'].includes(style);
-   if(border){yy=y-1;hh=4;this.fillStyle='rgba(10,10,9,.88)';stats.enemyBars++;}
-   else if(bar){if(!near(h0,h))return;hh=2;this.fillStyle=style==='#292629'?'#302926':'#795a50';}
-   else if(nativeBar){hh=2;this.fillStyle=style==='#08101bdd'?'#302926':'#795a50';stats.enemyBars++;}
+   if(border){yy=y-1;hh=6;this.fillStyle='rgba(8,7,7,.94)';stats.enemyBars++;}
+   else if(bar){if(!near(h0,h))return;hh=4;this.fillStyle=style==='#292629'?'#241f1c':'#b4503f';}/* R786: 어두운 테두리·바탕 + 4px 채움 — 가는 어두운 선이 바닥 예고선처럼 안 읽히고 발치에서도 보이게 */
+   else if(nativeBar){hh=4;this.fillStyle=style==='#08101bdd'?'#241f1c':'#b4503f';stats.enemyBars++;}
    try{return old.call(this,x0,yy,w0,hh);}finally{this.fillStyle=style;}
   };
   try{return base.apply(this,[e,...args]);}finally{if(own)ctx.fillRect=old;else delete ctx.fillRect;}

@@ -24,4 +24,17 @@ for(const [f,re,label] of bars){const m=C(f).match(re);ok(label+' bar y expressi
  for(const [h,z] of [[30,.6],[66,1],[120,2]]){const y=new Function('q','h','hh','zoom','return '+m[1])({y:100},h,h,z);ok(label+' bar at/below the feet (h='+h+', y='+y.toFixed(1)+')',y>=100);}}
 // 이름표(소환물): 막대와 같이 발 아래, 몸 위로 안 올라온다
 {const m=C('summoning-r251.js').match(/ctx\.fillText\(e\.name,q\.x,([^)]*)\)/);ok('circle name label found',!!m);if(m){const y=new Function('q','h','y','return '+m[1])({y:100},66,100+66*.12);ok('circle name label below feet (y='+y.toFixed(1)+')',y>=100);}}
+// ③ R90 발치 막대 모양: 어두운 테두리·바탕 + 더 두꺼운 채움(보이는 체력 줄) — 예고선처럼 가늘고 어두운 한 줄이 아니라
+{const src=C('visual-r90.js'),m=src.match(/if\(typeof drawEnemy==='function'\)\{const base=drawEnemy;drawEnemy=function\(e,\.\.\.args\)\{[\s\S]*?\n \};\}/);ok('R90 drawEnemy wrapper found',!!m);
+ if(m){const ops=[];const z=1,q={x:100,y:200},ctx={fillStyle:'',fillRect(x,y,w,h){ops.push({x,y,w,h,fill:this.fillStyle});}};
+  const g={ctx,zoom:z,stats:{enemyBars:0},prefs:{health:true,target:true},solo:()=>true,project:()=>q,actorHeight:()=>66,clamp:(v,a,b)=>Math.min(b,Math.max(a,v)),Object,Number,Math};
+  g.drawEnemy=function(e){/* 엔진 R51 막대: 테두리·바탕·채움(4px) */const w=44*z,y=q.y+8*z,h=4*z,r=e.hp/e.maxHp;ctx.fillStyle='rgba(3,5,8,.84)';ctx.fillRect(q.x-w/2-1.5*z,y-z,w+3*z,h+2*z);ctx.fillStyle='#292629';ctx.fillRect(q.x-w/2,y,w,h);ctx.fillStyle='#948079';ctx.fillRect(q.x-w/2,y,w*r,h);};
+  vm.createContext(g);vm.runInContext(m[0],g);g.drawEnemy({x:0,y:0,hp:5,maxHp:10});
+  const fr=ops[0],tr=ops[1],fl=ops[2];const lum=c=>{const t=String(c).match(/#(..)(..)(..)/);return t?(parseInt(t[1],16)*.3+parseInt(t[2],16)*.59+parseInt(t[3],16)*.11):255;};
+  ok('3 rects drawn (frame, track, fill)',ops.length===3);
+  ok('fill is at least 4px tall (was 2px)',fl&&fl.h>=4);
+  ok('dark frame is taller than the fill on both sides (>=1px each)',fr&&fl&&fr.y<=fl.y-1&&fr.y+fr.h>=fl.y+fl.h+1);
+  ok('frame/track stay dark; fill clearly brighter than track (contrast >=60 lum)',fr&&tr&&fl&&lum(tr.fill)<60&&lum(fl.fill)-lum(tr.fill)>=60);
+  ok('boundary: half HP fills half the track width',fl&&tr&&Math.abs(fl.w-tr.w/2)<.01);
+  ok('whole bar stays under the feet (frame top >= foot y)',fr&&fr.y>=q.y);}}
 console.log(JSON.stringify({ok:bad===0,checks:n,failed:bad}));process.exit(bad?1:0);
