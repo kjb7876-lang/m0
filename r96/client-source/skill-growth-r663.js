@@ -18,7 +18,7 @@
 //     안 배운 칸은 아이콘(단추)을 숨기고, 배우는 순간 아이콘이 튀어나오는 짧은 연출 + 알림.
 //     점수가 있는데 잠긴 칸이 있고 자동 레벨업을 꺼 둔 경우에만 30초에 한 번 P 창 안내 글.
 //  새 영웅·키·저장 필드·자산 없음. 끄기: localStorage 'storyworld.r663.skillgrowth' {"on":false}.
-//  알려진 한계: 미카엘라 W·E(R247)·기억사수 W·E(R561)의 반자동·길잡이 자동 시전은 각자 안쪽 함수를 바로 불러 이 잠금을 안 탄다(키·단추·A키 오토는 막힘).
+//  미카엘라 W·E(R247)·기억사수 W·E(R561)는 자기 안쪽 fire 에서 scale() 을 물어 잠금·범위·피해·재사용 배수를 직접 적용한다(R663c).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_SKILL_GROWTH_R663__)return;
 const REV='R663-skill-growth-1',KEY='storyworld.r663.skillgrowth',MARK='r64:skillgrowth-r663';
@@ -124,5 +124,6 @@ function boot(){try{addDefs();install();}catch(e){fail(e);}}
 if(typeof document!=='undefined'&&document.readyState==='complete')boot();else window.addEventListener('load',boot);
 let tries=0;(function arm(){if(!addDefs()&&++tries<60&&typeof setTimeout==='function')setTimeout(arm,250);})();
 window.__STORYWORLD_SKILL_GROWTH_R663__=Object.freeze({revision:REV,slots:SLOTS,max:MAXR,mult,cost,learn:{...LEARN},power:{...POWER},cool:{...COOL},range:{...RANGE},lockedCount:p=>SLOTS.filter(s=>locked(s,p)).length,rank:(s,p)=>rk(s,p),locked:(s,p)=>locked(s,p),
+ scale:(s,p=G())=>{s=String(s||'').toLowerCase();const o={locked:false,range:1,power:1,cool:1};try{if(!SLOTS.includes(s)||!prefs.on||!p||!solo()||!P62())return o;o.locked=locked(s,p);if(o.locked)return o;const r=rk(s,p);o.range=mult(s,r);o.power=POWER[s]||1;o.cool=COOL[s]||1;}catch(e){fail(e);}return o;},
  inspect:()=>({revision:REV,on:prefs.on,stats:{...stats},ranks:Object.fromEntries(SLOTS.map(s=>[s,rk(s)])),lastError})});
 })();

@@ -67,6 +67,8 @@ function rg(v){try{const r=Number(window.__STORYWORLD_SAMONG_SURGE_R571__?.range
 function auraCd(){let f=1;try{const c=Number(window.__STORYWORLD_PROGRESSION_R62__?.factors?.()?.cooldown);if(Number.isFinite(c)&&c>0)f=c;const U=window.__STORYWORLD_UPGRADES_R169__,pf=U?.inspect?.()?.prefs;if(pf?.square&&pf.boost!==false&&solo()){const k=Number(U.ratios?.()?.cool);if(Number.isFinite(k)&&k>0)f*=k;}}catch(_){}return Math.min(1.5,Math.max(.1,f));}
 // R571 사몽 발현: 다른 영웅처럼 재사용 대기 -77%(공용 API cd(), 없으면 그대로)
 function surgeCd(s){try{const v=window.__STORYWORLD_SAMONG_SURGE_R571__?.cd?.(s);return Number.isFinite(v)&&v>=0?v:s;}catch(_){return s;}}
+const GR663=sl=>{try{return window.__STORYWORLD_SKILL_GROWTH_R663__?.scale?.(sl)||{locked:false,range:1,power:1,cool:1};}catch(_){return {locked:false,range:1,power:1,cool:1};}};
+function rgs(sl,v){return rg(v)*GR663(sl).range;}
 function rhythm(){return typeof COMBAT_RHYTHM_R26==='number'?COMBAT_RHYTHM_R26:1;}
 function power(){try{return typeof attackPower==='function'?attackPower():20;}catch(_){return 20;}}
 function live(){let rows=[];try{rows=typeof liveEnemies==='function'?liveEnemies():(room?.enemies||[]);}catch(_){rows=room?.enemies||[];}
@@ -92,22 +94,22 @@ function castQ(){let rk=0;try{rk=typeof rank==='function'?Number(rank('special')
  player.specialCD=10*(1-.05*rk)*rhythm()*auraCd();player.skillAnim=.6;const SP=power()*(2.4+.36*rk),e=nearest(rg(12)),a=aimAt(e),o={x:player.x,y:player.y},L=reach(o,a,rg(BEAM.len));face(a);snd('special');
  fx.push({k:'q',t0:T(),life:BEAM.charge+BEAM.every*(BEAM.ticks-1)+.32,o,a,L,dmg:SP*BEAM.per,done:0,seed:Math.random()*6});armSent();stats.q++;return true;}
 // ---- W 망각 저격 ----
-function snipeTarget(){const rows=live().filter(e=>dist(e,player)<=rg(RANGE.w)&&los(player,e));const big=rows.filter(e=>e.boss||e.elite).sort((a,b)=>dist(a,player)-dist(b,player))[0];return big||rows.sort((a,b)=>dist(a,player)-dist(b,player))[0]||null;}
-function castW(){const tg=snipeTarget(),a=aimAt(tg);face(a);fx.push({k:'w',t0:T(),life:SNIPE.aim+1.3,tg,a,o:{x:player.x,y:player.y},fired:false,end:null,dmg:power()*SNIPE.dmg*grow('w'),seed:Math.random()*6});armSent();stats.w++;return true;}
-function fireW(f){f.fired=true;const o={x:player.x,y:player.y};if(f.tg&&f.tg.hp>0)f.a=Math.atan2(f.tg.y-o.y,f.tg.x-o.x);f.o=o;const L=reach(o,f.a,rg(RANGE.w)),rows=onLine(o,f.a,L,SNIPE.half);
+function snipeTarget(){const rows=live().filter(e=>dist(e,player)<=rgs('w',RANGE.w)&&los(player,e));const big=rows.filter(e=>e.boss||e.elite).sort((a,b)=>dist(a,player)-dist(b,player))[0];return big||rows.sort((a,b)=>dist(a,player)-dist(b,player))[0]||null;}
+function castW(){const tg=snipeTarget(),a=aimAt(tg);face(a);fx.push({k:'w',t0:T(),life:SNIPE.aim+1.3,tg,a,o:{x:player.x,y:player.y},fired:false,end:null,dmg:power()*SNIPE.dmg*grow('w')*GR663('w').power,seed:Math.random()*6});armSent();stats.w++;return true;}
+function fireW(f){f.fired=true;const o={x:player.x,y:player.y};if(f.tg&&f.tg.hp>0)f.a=Math.atan2(f.tg.y-o.y,f.tg.x-o.x);f.o=o;const L=reach(o,f.a,rgs('w',RANGE.w)),rows=onLine(o,f.a,L,SNIPE.half);
  let endL=L;if(rows[0]){hit(rows[0],f.dmg,'gunnerSnipeR561');try{if(typeof moveActor==='function')moveActor(rows[0],Math.cos(f.a)*SNIPE.push,Math.sin(f.a)*SNIPE.push,rows[0].radius||.3);}catch(_){}endL=dist(rows[0],o);}
  if(rows[1]){hit(rows[1],f.dmg*SNIPE.pierce,'gunnerSnipeR561');endL=dist(rows[1],o);}
  f.L=Math.max(L*.999,endL);f.hitL=endL;f.tf=T();quake(.45);snd('special');face(f.a);player.skillAnim=Math.max(player.skillAnim||0,.35);}
 // ---- E 잔향 연사 ----
-function castE(){const e=nearest(rg(RANGE.e)),a=aimAt(e);face(a);fx.push({k:'e',t0:T(),life:RIFLE.every*(RIFLE.n-1)+(gsOn('casing')?1.1:.5),a,done:0,rounds:[],dmg:power()*RIFLE.dmg*grow('e')});armSent();stats.e++;return true;}
-function shotE(f,i){const o={x:player.x,y:player.y},e=nearest(rg(RANGE.e),o);let a=e?Math.atan2(e.y-o.y,e.x-o.x):f.a;a+=(i%2?1:-1)*.035*((i%3)/2);f.a=a;const L=reach(o,a,rg(RANGE.e)),first=onLine(o,a,L,RIFLE.half)[0];let endL=L;
+function castE(){const e=nearest(rgs('e',RANGE.e)),a=aimAt(e);face(a);fx.push({k:'e',t0:T(),life:RIFLE.every*(RIFLE.n-1)+(gsOn('casing')?1.1:.5),a,done:0,rounds:[],dmg:power()*RIFLE.dmg*grow('e')*GR663('e').power});armSent();stats.e++;return true;}
+function shotE(f,i){const o={x:player.x,y:player.y},e=nearest(rgs('e',RANGE.e),o);let a=e?Math.atan2(e.y-o.y,e.x-o.x):f.a;a+=(i%2?1:-1)*.035*((i%3)/2);f.a=a;const L=reach(o,a,rgs('e',RANGE.e)),first=onLine(o,a,L,RIFLE.half)[0];let endL=L;
  if(first){hit(first,f.dmg,'gunnerRifleR561');endL=dist(first,o);}f.rounds.push({t:T(),o,a,L:endL,hit:!!first});face(a);player.skillAnim=Math.max(player.skillAnim||0,.2);if(i%3===0)snd('attack');}
 // ---- R 기억 소거 폭격 ----
-function strikePoint(minCount=1){const rows=live().filter(e=>dist(e,player)<=rg(RANGE.r));let best=null,bn=0;for(const e of rows){const n=rows.filter(v=>dist(v,e)<=rg(STRIKE.R)*.75).length+(e.boss?2:0);if(n>bn||(n===bn&&best&&dist(e,player)<dist(best,player))){bn=n;best=e;}}
- if(!best||bn<minCount)return null;const grp=rows.filter(v=>dist(v,best)<=rg(STRIKE.R)*.75);return {x:grp.reduce((s,v)=>s+v.x,0)/grp.length,y:grp.reduce((s,v)=>s+v.y,0)/grp.length,n:bn};}
+function strikePoint(minCount=1){const rows=live().filter(e=>dist(e,player)<=rgs('r',RANGE.r));let best=null,bn=0;for(const e of rows){const n=rows.filter(v=>dist(v,e)<=rgs('r',STRIKE.R)*.75).length+(e.boss?2:0);if(n>bn||(n===bn&&best&&dist(e,player)<dist(best,player))){bn=n;best=e;}}
+ if(!best||bn<minCount)return null;const grp=rows.filter(v=>dist(v,best)<=rgs('r',STRIKE.R)*.75);return {x:grp.reduce((s,v)=>s+v.x,0)/grp.length,y:grp.reduce((s,v)=>s+v.y,0)/grp.length,n:bn};}
 function castR(pt){const c=pt||strikePoint()||(()=>{const a=aimAt(null);return {x:player.x+Math.cos(a)*4,y:player.y+Math.sin(a)*4};})();face(Math.atan2(c.y-player.y,c.x-player.x));snd('special');
- fx.push({k:'r',t0:T(),life:STRIKE.delay+2.3,c:{x:c.x,y:c.y},boom:false,dmg:power()*STRIKE.dmg*grow('r'),seed:Math.random()*6});armSent();stats.r++;return true;}
-function boomR(f){f.boom=true;for(const e of live()){const d=dist(e,f.c);if(d>rg(STRIKE.R)+(e.radius||.3))continue;if(!los(f.c,e))continue;const k=d<=rg(STRIKE.inner)?1:1-(1-STRIKE.edge)*Math.min(1,(d-rg(STRIKE.inner))/(rg(STRIKE.R)-rg(STRIKE.inner)));hit(e,f.dmg*k,'gunnerStrikeR561');}quake(1.4);snd('special');}
+ fx.push({k:'r',t0:T(),life:STRIKE.delay+2.3,c:{x:c.x,y:c.y},boom:false,dmg:power()*STRIKE.dmg*grow('r')*GR663('r').power,seed:Math.random()*6});armSent();stats.r++;return true;}
+function boomR(f){f.boom=true;for(const e of live()){const d=dist(e,f.c);if(d>rgs('r',STRIKE.R)+(e.radius||.3))continue;if(!los(f.c,e))continue;const k=d<=rgs('r',STRIKE.inner)?1:1-(1-STRIKE.edge)*Math.min(1,(d-rgs('r',STRIKE.inner))/(rgs('r',STRIKE.R)-rgs('r',STRIKE.inner)));hit(e,f.dmg*k,'gunnerStrikeR561');}quake(1.4);snd('special');}
 // ---- 연계 ----
 const LINK=sl=>sl==='q'?BEAM.charge+BEAM.every*(BEAM.ticks-1)+.25:sl==='w'?SNIPE.aim+.25:sl==='e'?RIFLE.every*(RIFLE.n-1)+.3:.35;
 const chain={queue:[],at:0,lastAt:0,prev:null,links:0,minGap:Infinity,overlap:0,cancelled:0};
@@ -164,7 +166,7 @@ function draw(){const S0=SPR();if(!S0||typeof project!=='function')return;const 
     if(!rOn&&d<.06)S.draw('flare',COB,o.x+Math.cos(ang)*H*.28,o.y-M+Math.sin(ang)*H*.28,H*.55,H*.35,{alpha:1-d/.06,angle:ang});
     if(r.hit&&d>=.06&&d<.22){const k=(d-.06)/.16;S.draw('flare',CORE,e.x,e.y-M,H*.5*(1-k)+H*.1,H*.5*(1-k)+H*.1,{alpha:1-k,angle:ang});for(let i=0;i<3;i++)S.draw('pixel',SIL,e.x+Math.cos(ang+Math.PI+(i-1)*.7)*H*.4*k,e.y-M+Math.sin(ang+Math.PI+(i-1)*.7)*H*.4*k,H*.1,H*.1,{alpha:1-k});}
     if(!cOn){const k=d/.32,side=Math.cos(ang)>=0?-1:1;S.draw('pixel',SIL,o.x+side*H*(.15+.35*k),o.y-M-H*.25*Math.sin(Math.PI*k)+H*.35*k*k,H*.07,H*.04,{alpha:.9*(1-k),angle:t*20,blend:'source-over'});}}}
-  else if(f.k==='r'){const c=project(f.c.x,f.c.y),Wd=ellW(f.c,rg(STRIKE.R)),sheetOn=gsOn('blast')||!!sheet(METEOR.path);
+  else if(f.k==='r'){const c=project(f.c.x,f.c.y),Wd=ellW(f.c,rgs('r',STRIKE.R)),sheetOn=gsOn('blast')||!!sheet(METEOR.path);
    if(!f.boom){const k=el/STRIKE.delay,blink=.55+.45*Math.max(0,Math.sin(t*(8+22*k)));
     S.draw('ring',COB,c.x,c.y,Wd,Wd,{alpha:.95*blink,squash:.5,angle:t*.8,blend:'screen'});S.draw('ring',CORE,c.x,c.y,Wd*1.02,Wd*1.02,{alpha:.5*blink,squash:.5,blend:'screen'});S.draw('ring',CORE,c.x,c.y,Wd*(1-k)*.9+H*.3,Wd*(1-k)*.9+H*.3,{alpha:.8*blink,squash:.5,blend:'screen'});
     for(let i=0;i<4;i++){const ra=i*Math.PI/2+t*.8,rx=Math.cos(ra)*Wd*.5,ry=Math.sin(ra)*Wd*.25;S.along('line',CORE,c.x+rx*.82,c.y+ry*.82,c.x+rx*1.08,c.y+ry*1.08,H*.06,{alpha:.9*blink});}
@@ -191,15 +193,15 @@ function remain(sl){return Math.max(0,(readyAt[sl]||0)-T());}
 function egoOn(){try{return !!window.__STORYWORLD_EGO151__?.inspect?.().state?.active;}catch(_){return false;}}
 // 방·영웅이 바뀌거나 쓰러지면 기다리던 사격·연계를 버린다(엔진 WER valid/cancel 과 같은 뜻) — 옛 좌표로 새 방 적을 때리지 않게
 let ownRoom=null,ownPlayer=null,ownSeen=false;function own(){let rm=null;try{rm=typeof room!=='undefined'?room:null;}catch(_){}const p=typeof player==='object'?player:null;if(!ownSeen){ownSeen=true;ownRoom=rm;ownPlayer=p;}if(p!==ownPlayer){for(const sl of SLOTS)readyAt[sl]=0;nextAuto=0;}
- const t=T();for(const sl of SLOTS)readyAt[sl]=Math.min(readyAt[sl],t+CD[sl]*rhythm());nextAuto=Math.min(nextAuto,t+.35);
+ const t=T();for(const sl of SLOTS)readyAt[sl]=Math.min(readyAt[sl],t+CD[sl]*rhythm()*GR663(sl).cool);nextAuto=Math.min(nextAuto,t+.35);
  if(rm!==ownRoom||p!==ownPlayer||!(p?.hp>0)){if(fx.length||chain.queue.length){fx.length=0;if(chain.queue.length){chain.queue.length=0;chain.cancelled++;}}ownRoom=rm;ownPlayer=p;}}
 function busy(){try{return (typeof started!=='undefined'&&!started)||(typeof modal!=='undefined'&&!!modal)||(typeof loading!=='undefined'&&loading)||(typeof storyScene!=='undefined'&&!!storyScene)||!(player?.hp>0)||!!window.__STORYWORLD_EGO151__?.inspect?.().state?.active;}catch(_){return true;}}
-function fire(sl,automatic){if(!mine()||!SLOTS.includes(sl)||busy())return false;if(readyAt[sl]>T())return false;if(fx.length>=CAP)return false;
- let pt=null;if(automatic){if(sl==='r'){pt=strikePoint(2);if(!pt)return false;}else if(!(sl==='w'?snipeTarget():nearest(rg(RANGE[sl]))))return false;}
- const ok=sl==='w'?castW():sl==='e'?castE():castR(pt);if(ok){readyAt[sl]=T()+surgeCd(CD[sl]*rhythm()*auraCd());player.skillAnim=Math.max(player.skillAnim||0,.5);try{if(typeof updateHUD==='function')updateHUD();}catch(_){}}return ok;}
+function fire(sl,automatic){if(!mine()||!SLOTS.includes(sl)||busy())return false;if(readyAt[sl]>T())return false;if(GR663(sl).locked)return false;if(fx.length>=CAP)return false;
+ let pt=null;if(automatic){if(sl==='r'){pt=strikePoint(2);if(!pt)return false;}else if(!(sl==='w'?snipeTarget():nearest(rgs(sl,RANGE[sl]))))return false;}
+ const ok=sl==='w'?castW():sl==='e'?castE():castR(pt);if(ok){readyAt[sl]=T()+surgeCd(CD[sl]*rhythm()*auraCd()*GR663(sl).cool);player.skillAnim=Math.max(player.skillAnim||0,.5);try{if(typeof updateHUD==='function')updateHUD();}catch(_){}}return ok;}
 // 엔진 원래 R(시간 지연포) 막기 — W·E 는 R209 owned 가 막는다(여기서도 함께, R209 가 없을 때 대비)
 function gate(){try{if(typeof player!=='object'||!player||player.hero!==HERO)return;const s=player.storyWER||(player.storyWER={ready:{},buffs:{}});if(!s.ready)s.ready={};const t=T();
-  if(mine()){for(const sl of SLOTS){const k=HERO+':'+sl;if(!(s.ready[k]>t+FAR/2)){const v=Number(s.ready[k]);if(v>t)readyAt[sl]=Math.max(readyAt[sl],Math.min(v,t+CD[sl]*rhythm()));s.ready[k]=t+FAR;}}}else{const k=HERO+':r';if(s.ready[k]>t+FAR/2)s.ready[k]=0;}}catch(e){fail(e);}}
+  if(mine()){for(const sl of SLOTS){const k=HERO+':'+sl;if(!(s.ready[k]>t+FAR/2)){const v=Number(s.ready[k]);if(v>t)readyAt[sl]=Math.max(readyAt[sl],Math.min(v,t+CD[sl]*rhythm()*GR663(sl).cool));s.ready[k]=t+FAR;}}}else{const k=HERO+':r';if(s.ready[k]>t+FAR/2)s.ready[k]=0;}}catch(e){fail(e);}}
 let ORIG_Q=null;function names(){try{if(typeof HEROES==='object'&&HEROES?.[HERO]){if(ORIG_Q==null)ORIG_Q=HEROES[HERO].special;HEROES[HERO].special=on?NAME.q:ORIG_Q;}}catch(e){fail(e);}}
 names();
 if(typeof special==='function'){const base=special;special=function(...a){if(mine()&&!egoOn()){try{if(busy()||player.specialCD>0||fx.length>=CAP)return;castQ();if(!autoOn())startChain('q');try{if(typeof updateHUD==='function')updateHUD();}catch(_){}}catch(e){fail(e);}return;}return base.apply(this,a);};}
@@ -214,7 +216,7 @@ if(typeof drawEffect==='function'){const b=drawEffect;drawEffect=function(e,...a
 if(typeof serializeSave==='function'){const b=serializeSave;serializeSave=function(...a){const d=b.apply(this,a);try{const r=d?.storyWER?.remaining;if(r&&mine())for(const sl of SLOTS){const m=remain(sl);if(m>0)r[HERO+':'+sl]=+m.toFixed(2);else delete r[HERO+':'+sl];}}catch(e){fail(e);}return d;};}
 // 불러오기: 엔진 restoreSave 는 남은 대기를 옛 기억사수 스킬 한도(6/3.8/13×박자)로 자른다 → 저장 원본에서 새 스킬 한도로 되살린다(저장 형식은 그대로)
 if(typeof restoreSave==='function'){const b=restoreSave;restoreSave=function(raw,...a){let keep=null;try{const r=(typeof raw==='string'?JSON.parse(raw):raw)?.storyWER?.remaining;if(r)keep=Object.fromEntries(SLOTS.map(sl=>[sl,Number(r[HERO+':'+sl])||0]));}catch(_){}
- const out=b.apply(this,[raw,...a]);const after=()=>{try{if(!keep||!mine())return;ownSeen=true;ownPlayer=player;try{ownRoom=typeof room!=='undefined'?room:null;}catch(_){}const t=T();for(const sl of SLOTS)readyAt[sl]=keep[sl]>0?t+Math.min(keep[sl],CD[sl]*rhythm()):0;}catch(e){fail(e);}};
+ const out=b.apply(this,[raw,...a]);const after=()=>{try{if(!keep||!mine())return;ownSeen=true;ownPlayer=player;try{ownRoom=typeof room!=='undefined'?room:null;}catch(_){}const t=T();for(const sl of SLOTS)readyAt[sl]=keep[sl]>0?t+Math.min(keep[sl],CD[sl]*rhythm()*GR663(sl).cool):0;}catch(e){fail(e);}};
  if(out&&typeof out.then==='function')return out.then(v=>{after();return v;});after();return out;};}
 if(typeof updateHUD==='function'){const b=updateHUD;updateHUD=function(...a){const r=b.apply(this,a);try{if(mine()&&typeof document!=='undefined')for(const sl of SLOTS){const el=document.getElementById('story-wer-'+sl);if(!el)continue;const cd=el.querySelector('.cd'),m=remain(sl);if(cd)cd.textContent=m>0?String(Math.ceil(m)):'';el.title=NAME[sl];el.setAttribute('aria-label',NAME[sl]+' · '+(typeof KR291!=='undefined'&&KR291?KR291[sl]:sl.toUpperCase()));const lb=el.querySelector('.label');if(lb&&lb.textContent!==SHORT[sl])lb.textContent=SHORT[sl];}}catch(e){fail(e);}return r;};}
 const KEYS={z:'w',x:'e',c:'r'};
