@@ -603,6 +603,8 @@ jobs:
         run: node r96/qa/r660/death-lag-cpu-check.cjs
       - name: R690 mob death overlap/lag (R462-owned deaths skip R91 generic remains/sheet and R165 smoke; pieces cut once in 2D, corpses baked to one image) CPU check
         run: node r96/qa/r690/r690-cpu-check.cjs
+      - name: R691 mob death atlas retention (each death/corpse keeps its own piece atlas; no LRU thrash with 48+ concurrent deaths, cache stays bounded) CPU check
+        run: node r96/qa/r691/r691-cpu-check.cjs
       - name: R481 outdoor groves (understory around trees, small woods on bare back rims) CPU check
         run: node r96/qa/r481/grove-r481-cpu-check.cjs
       - name: R482 worn trails from entry to doors/altar on outdoor floors CPU check
