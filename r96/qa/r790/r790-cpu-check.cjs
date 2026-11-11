@@ -8,6 +8,8 @@
 'use strict';const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('assert');
 const R=path.join(__dirname,'../..');let n=0;const ok=(c,m)=>{assert.ok(c,m);n++;},J=v=>v&&typeof v==='object'?JSON.parse(JSON.stringify(v)):v/* vm 안에서 만든 배열·객체는 원형이 달라 값으로 비교 */,eq=(a,b,m)=>{assert.deepStrictEqual(J(a),J(b),m);n++;};
 const F=path.join(R,'client-source','npc-r790.js');ok(fs.existsSync(F),'npc-r790.js 가 있어야 한다');const src=fs.readFileSync(F,'utf8');
+// 회귀(R790 첫 푸시 CI): 단계 이름에 ': ' 가 있으면 pages.yml 전체가 YAML 오류로 한 번도 안 돈다.
+{const y=fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').split('\n'),i=y.findIndex(l=>l.includes('node r96/qa/r790/r790-cpu-check.cjs'));ok(i>0&&/^\s+- name: /.test(y[i-1])&&!y[i-1].replace(/^\s+- name: /,'').includes(': '),'pages.yml 단계 이름에 콜론+빈칸 없음');}
 // ── 연결 ──
 const html=fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8');
 ok(html.includes('<script src="./npc-r790.js"></script>'),'index.html 스크립트 태그');
