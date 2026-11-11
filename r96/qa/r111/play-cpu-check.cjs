@@ -73,16 +73,21 @@ const html=fs.readFileSync(path.join(RT,'index.html'),'utf8');
  sb.player.guard=false;sb.player.hero='gunner';sb.player.x=0;sb.player.y=0;sb.player.invincible=0;sb.player.dashAnim=0;
  const src={type:'enemy-attack',owner:'m1'};
  try{
+  // R767c(CI full-frame-render-replay 13% 깜빡 실패): 빗나감은 워크3식 의사난수(PRD) — 직전 빗나감(또는 영웅 바뀜) 뒤 첫 공격은 반드시 맞고, 맞을 때마다 확률이 C씩 오른다
+  hp0();setR(0);sb.hurt(30,src);check('R767c PRD: the first hit after start/hero change lands even on the luckiest roll',hurts.length===1&&hurts[0]===30,hurts);
   hp0();setR(0);const r=sb.hurt(30,src);
   check('R766 ranged hero: a lucky roll makes the enemy hit miss (no damage, "회피" text)',hurts.length===0&&sb.player.hp===100&&effects.some(e=>e.type==='text'&&/회피/.test(e.text||'')),{hurts,r});
   check('R766 a miss does not move the hero or grant i-frames',sb.player.x===0&&sb.player.y===0&&!(sb.player.invincible>0)&&!(sb.player.dashAnim>0));
+  hp0();setR(0);sb.hurt(30,src);check('R767c PRD: never two misses in a row (the hit right after a miss lands)',hurts.length===1&&hurts[0]===30,hurts);
   hp0();setR(.99);sb.hurt(30,src);check('R766 an unlucky roll still hurts (full damage)',hurts.length===1&&hurts[0]===30,hurts);
   hp0();sb.player.hero='hwando';setR(0);sb.hurt(30,src);check('R766 melee heroes never get the miss chance',hurts.length===1,hurts);sb.player.hero='gunner';
   hp0();setR(0);sb.hurt(30,{type:'r330-status',status:'burn',r330:true});check('R766 status/hazard ticks (r330 status) are not dodged',hurts.length===1,hurts);
   hp0();setR(0);sb.hurt(0,src);check('R766 zero damage passes through untouched',hurts.length===1&&hurts[0]===0,hurts);
-  Math.random=R0;const rate=h=>{sb.player.hero=h;let miss=0;for(let i=0;i<4000;i++){sb.player.hp=100;const n=hurts.length;sb.hurt(1,src);if(hurts.length===n)miss++;}return miss/4000;};
+  sb.player.hero='gunner';hp0();setR(.99);sb.hurt(1,src);hp0();setR(0);sb.hurt(30,{type:'r330-status',status:'burn',r330:true});check('R767c status ticks are not dodged even with a primed counter',hurts.length===1,hurts);
+  Math.random=R0;const rate=h=>{sb.player.hero=h;let miss=0,two=0,last=false;for(let i=0;i<20000;i++){sb.player.hp=100;const n=hurts.length;sb.hurt(1,src);const m=hurts.length===n;if(m){miss++;if(last)two++;}last=m;}twos+=two;return miss/20000;};let twos=0;
   const rg=rate('gunner'),rh=rate('hunter'),rs=rate('seoha'),rm=rate('michaela');
   check('R766 miss rates ≈ 20/17/15/13% (gunner>hunter>seoha>michaela, each within ±3%) '+JSON.stringify({rg,rh,rs,rm}),Math.abs(rg-.20)<.03&&Math.abs(rh-.17)<.03&&Math.abs(rs-.15)<.03&&Math.abs(rm-.13)<.03);
+  check('R767c PRD: no back-to-back misses over 80k hits',twos===0,{twos});
   // 옛 이동 회피가 남아 있지 않다: 공격 예고 안에 서 있어도 몸이 밀리지 않는다
   sb.player.hero='gunner';sb.player.x=0;sb.player.y=0;sb.time+=30;const atk={id:'a1',x:1,y:0,hp:10,spawnState:'active',attack:{elapsed:.3,castWindup150:.4,committed:false}};sb.room.enemies=[atk];sb.tick(.016);
   check('R766 no more move-dodge: hero standing in a telegraph is not pushed',sb.player.x===0&&sb.player.y===0,{x:sb.player.x,y:sb.player.y});

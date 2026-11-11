@@ -153,8 +153,8 @@ function footOf(path,row){if(feet.has(path))return feet.get(path);if(footBudget<
 // R766(사용자 2026-11-11 "자동회피는 이동해서 회피가 아니라 확률적으로 적공격이 빗나가게"): 밀려나는 이동 회피(옛 cd 5~8초)를 없애고,
 //  적 공격이 확률로 빗나간다(miss). 몸·무적·돌진 그림은 건드리지 않는다. 옛 재사용 대기 순서대로 기억사수 20%·헌터 17%·서하 15%·미카엘라 13%.
 //  지속 피해(R330 상태 이상)·0 피해·협동은 제외.
-const RANGED=Object.freeze({seoha:{range:1.2,cd:7,miss:.15},michaela:{range:.8,cd:8,miss:.13},hunter:{range:1,cd:6,miss:.17},gunner:{range:.8,cd:5,miss:.20}});
-const rangedState={applied:false,dodgeAt:-99,dodges:0,base:{}};
+const RANGED=Object.freeze({seoha:{range:1.2,cd:7,miss:.15,prd:.04393},michaela:{range:.8,cd:8,miss:.13,prd:.03198},hunter:{range:1,cd:6,miss:.17,prd:.05827},gunner:{range:.8,cd:5,miss:.20,prd:.08474}});
+const rangedState={applied:false,dodgeAt:-99,dodges:0,base:{},missRun:0,missHero:null};
 function applyRanged(){if(rangedState.applied||!prefs.ranged)return;const H=typeof HEROES!=='undefined'?HEROES:null,D=window.__STORYWORLD_WER__?.defs;if(!H)return;
  for(const[id,v]of Object.entries(RANGED)){const h=H[id];if(h&&Number.isFinite(h.range)&&!h.r111Range){rangedState.base[id]=h.range;try{h.range=+(h.range+v.range).toFixed(2);h.r111Range=true;}catch(e){fail(e);}}
   const e=D?.[id]?.e;if(Array.isArray(e)&&e[2]==='dash')try{e[2]='escape';}catch(err){fail(err);}}
@@ -163,7 +163,9 @@ const isRanged=p=>!!RANGED[p?.hero];
 // R767(사용자 2026-11-11): 모든 영웅 EGO 동안·슬레이어 R 적혈 오라(7초) 동안 S 블링크 재사용 대기 없음
 function blinkFree(){if(!(finite(player.blinkCD)>0))return;let free=egoOn(player);if(!free&&player.hero==='slayer'){try{free=window.__STORYWORLD_SLAYER_BLOOD_R425__?.auraOn?.()===true;}catch(_){}}if(free){player.blinkCD=0;stats.blinkFree=(stats.blinkFree||0)+1;}}
 function missRoll(damage,src){if(!prefs.ranged||!solo()||!isRanged(player)||!(player.hp>0)||!(Number.isFinite(damage)&&damage>0))return false;
- if(src&&(src.r330||src.status||src.type==='r330-status'))return false;if(!(Math.random()<RANGED[player.hero].miss))return false;
+ if(src&&(src.r330||src.status||src.type==='r330-status'))return false;/* R767c 워크3식 의사난수(PRD): 직전 빗나감·영웅 바뀜 뒤 맞은 횟수 n 으로 확률 C·n — 첫 공격은 늘 맞고 연속 빗나감이 없다. C 는 장기 평균이 miss(20/17/15/13%)가 되게 맞춘 값 */
+ if(rangedState.missHero!==player.hero){rangedState.missHero=player.hero;rangedState.missRun=0;}
+ const C=RANGED[player.hero].prd,n=rangedState.missRun|0;if(!(Math.random()<C*n)){rangedState.missRun=n+1;return false;}rangedState.missRun=0;
  rangedState.dodges++;try{if(typeof fx==='function')fx('text',player.x,player.y,{text:'회피',color:'#cfe8ff',life:.7});}catch(_){}return true;}
 /* 옛 이동 회피 — R766 부터 부르지 않는다(기록용) */function autoDodge(){if(!prefs.ranged||!solo()||!isRanged(player)||player.hp<=0||(typeof modal!=='undefined'&&modal)||(typeof loading!=='undefined'&&loading))return;
  const cd=RANGED[player.hero].cd;if(time-rangedState.dodgeAt<cd||player.dashAnim>0||finite(player.invincible)>.2)return;
