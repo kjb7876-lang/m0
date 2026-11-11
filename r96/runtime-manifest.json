@@ -34803,6 +34803,16 @@
       "sha256": "81bfd983b0bc35f7d225491f4678ae70cc07d8f6d6fbea9749dc6526cbafc059"
     },
     {
+      "path": "assets/r763/villagers/sobok-walk.webp",
+      "bytes": 67288,
+      "sha256": "1613e44069006b33dd46e18efad218b6066e974eb9748ca5b04b076b524fa8b4"
+    },
+    {
+      "path": "assets/r769/herbwife-proj6.webp",
+      "bytes": 30104,
+      "sha256": "f54fc90509491040bb314c058fe25166dbfaa6bb3d14f175f420d838c7ff82a7"
+    },
+    {
       "path": "assets/r790/npc/chief-bust.webp",
       "bytes": 59774,
       "sha256": "4411a9500ffc62cd0eecb1e3c7dddadc7dd07ac3bbe0e45c0aaa90c34f2d99d8"
@@ -43029,8 +43039,8 @@
     },
     {
       "path": "bulmyeongwi-r760.js",
-      "bytes": 40696,
-      "sha256": "019d161014c2f12d72e3e803594b9b133df91cf0785ed6f81735703b51410e32"
+      "bytes": 43521,
+      "sha256": "086e563746a8b7a280d70f39a971fa8a5b3c5ad7488f6baccbf68a36525d4882"
     },
     {
       "path": "canon-throw-r471.js",
@@ -45008,8 +45018,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9001,
-  "totalBytes": 1236985038,
+  "fileCount": 9003,
+  "totalBytes": 1237085255,
   "webHTMLSha256": "ca0c74ac14a4352bbac8c51b2761c7daf1f7695b7cf35fd8dd4a6ac0c1667220",
   "largest": [
     {

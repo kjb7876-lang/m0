@@ -246,9 +246,10 @@ const mid=o=>boss({id:'M',nativeId:'mb-last302-v31231',name:'검은 안개 심�
 // ── R763: 불면귀에 잠식된 주민(Dots CX-0070BM vil1 어부·vil2 약방 아낙, 256칸·발 (128,234.67)·오른쪽 봄) — last302·last303 일반몹 그림·이름 교체 ──
 function vworld({roomId='last302',store={},ready=true}={}){const timers=[];const c={Math,String,Number,Array,Object,JSON,Map,WeakMap,Set,Symbol,isFinite,RegExp,Promise,performance:{now:()=>0},
   setTimeout:(f)=>{timers.push(f);return timers.length;},localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}}};c.window=c;vm.createContext(c);
- vm.runInContext(`var time=0,room={id:${JSON.stringify(roomId)},enemies:[]},player={x:6,y:3,hero:'hwando'},ctx={commands:[]},modal=null,effects=[],__ready=${ready},__ens=[],__snd=[],__drawn=[],__base=[];
+ vm.runInContext(`var time=0,room={id:${JSON.stringify(roomId)},enemies:[]},player={x:6,y:3,hero:'hwando'},ctx={commands:[],__ops:[],save(){this.__ops.push(['s'])},restore(){this.__ops.push(['x'])},translate(x,y){this.__ops.push(['t',x,y])},rotate(r){this.__ops.push(['r',r])},drawImage(im,...a){this.__ops.push(['d',...a])}},modal=null,zoom=1,W=1280,H=720,__proj=[],projectiles=[],effects=[],__ready=${ready},__ens=[],__snd=[],__drawn=[],__base=[];
   var soundProfiles={};function sound(k){__snd.push(k);}function setupAudio(){}
-  function readyImage(p){if(String(p).includes('assets/r763/')&&!__ready)return null;const n=/-(walk|atk|death)\\./.test(p)?8:/-hit\\./.test(p)?4:6;return {ready:true,image:{naturalWidth:n*256,naturalHeight:256}};}
+  function drawProjectile(b){__proj.push(b.id);}
+  function readyImage(p){if((String(p).includes('assets/r763/')||String(p).includes('assets/r769/'))&&!__ready)return null;if(/herbwife-proj6/.test(p))return {ready:true,image:{naturalWidth:768,naturalHeight:128}};const n=/-(walk|atk|death)\\./.test(p)?8:/-hit\\./.test(p)?4:6;return {ready:true,image:{naturalWidth:n*256,naturalHeight:256}};}
   function ensureImages(ps){__ens.push(...ps);return Promise.resolve();}
   function project(x,y){return {x:100+(x-3)*10,y:200+(y-3)*5};}
   function drawAssetFrame3(path,frame,x,y,h,opt){__drawn.push({path,rect:frame.assetFrame.sourceRect,x,y,h,alpha:opt?.alpha??1,flip:!!opt?.flip});return true;}
@@ -273,8 +274,8 @@ const FF=(c,e)=>c.__STORYWORLD_STORY_COMBAT_R54__.frameFor(e,null);const VAPI=c=
  const co=vworld({roomId:'last301'}),o=mob();ok(/^old\//.test(FF(co,o).path)&&o.name==='귀비탕 공명 안개핵 3','other region untouched');
  const cf=vworld({store:{'storyworld.r763.villagers':'{"on":false}'}}),of=mob();ok(/^old\//.test(FF(cf,of).path)&&of.name==='귀비탕 공명 안개핵 3','off switch: untouched');}
 {// last303 은 모두 l302-e1 → 번호로 어부·아낙을 나눔(남녀·근원거리 섞임)
- const c=vworld({roomId:'last303'});const ks=[...Array(10)].map((_,i)=>{const e=mob({id:'last303:l302-e1:'+i,nativeId:'l302-e1',name:'주민에게서 떨어진 검은 안개 '+i});FF(c,e);return e.name.startsWith('잠식된 어부')?'F':'H';}).join('');
- ok(/F/.test(ks)&&/H/.test(ks)&&ks.split('F').length-1===5,'last303 split fisher/herbwife evenly ('+ks+')');}
+ const c=vworld({roomId:'last303'});const ks=[...Array(10)].map((_,i)=>{const e=mob({id:'last303:l302-e1:'+i,nativeId:'l302-e1',name:'주민에게서 떨어진 검은 안개 '+i});FF(c,e);return e.name.startsWith('잠식된 어부')?'F':e.name.startsWith('잠식된 소복')?'S':'H';}).join('');
+ ok(ks==='HFSHFSHFSH','last303 split herbwife/fisher/sobok by number ('+ks+')');}
 {// 동작: 대기 6칸 돌고, 걷기 8칸, 공격은 준비 0→2(갈고리 치켜듦)·타격 3·뒤 4→7, 피격(어부) hit 시트, 왼쪽이면 뒤집기
  const c=vworld(),e=mob();const fr=[];for(let i=0;i<30;i++){vm.runInContext('time+=1/15',c);fr.push(FF(c,e).assetFrame.sourceRect[0]/256);}ok(new Set(fr).size>=5,'idle cycles ('+[...new Set(fr)].join('')+')');
  e.moving=true;const fw=FF(c,e);ok(/fisher-walk/.test(fw.path),'moving → walk');
@@ -334,4 +335,31 @@ const FF=(c,e)=>c.__STORYWORLD_STORY_COMBAT_R54__.frameFor(e,null);const VAPI=c=
   const I=c.__STORYWORLD_TELE_R768__;ok(I&&I.inspect().stats.hidden>=0&&I.inspect().wrapped===true,'R768 inspect exposed');}
  {const c=world({sheets:true,roomId:'last302',pre:PRE(false)});run(c,'__sf.length=0');const e=mob();c.drawEnemy(e);c.drawEnemy(e);ok(run(c,'__sf.length')===0&&c.__STORYWORLD_TELE_R768__.inspect().stats.hidden===2,'R768 counts hidden lanes');}
 }
+{// R769: 소복 처녀(vil3) 걷기 임시본 + 약방 아낙 투사체 proj6 r4. 소복은 걷기 시트 하나뿐 → 모든 동작을 걷기 칸으로, 걷기는 약 6fps('실에 끌려 미끄러지듯').
+ const c=vworld(),s=mob({id:'last302:r75-pack:10',name:'귀비탕 공명 안개핵 5'}),f=mob({id:'last302:r75-pack:13',name:'귀비탕 공명 안개핵 4'});const fs=FF(c,s),ff=FF(c,f);
+ ok(/assets\/r763\/villagers\/sobok-walk\.webp$/.test(fs.path)&&s.name==='잠식된 소복 처녀 5','R769 l302-e3 even slot → sobok ('+fs.path+' / '+s.name+')');ok(/fisher-/.test(ff.path),'R769 other l302-e3 stay fisher');
+ {const real=[1,4,10,13,16,19,22,25,28].map(n=>{const m=mob({id:'last302:r75-pack:'+n,name:'귀비탕 공명 안개핵'});return /sobok/.test(FF(c,m).path)?'S':'F';}).join('');ok(/S/.test(real)&&/F/.test(real)&&!/SSS|FFF/.test(real),'R769 real last302 l302-e3 slots (step 3) mix fisher/sobok ('+real+')');}
+ ok(fs.assetFrame.visibleHeight===186&&JSON.stringify(fs.assetFrame.pivot)==='[128,234.67]','R769 sobok frame: visible 186 (body without strings), foot pivot');
+ const idle=[];for(let i=0;i<20;i++){vm.runInContext('time+=.1',c);idle.push(FF(c,s).assetFrame.sourceRect[0]/256);}ok(new Set(idle).size>=3&&idle.filter((v,i)=>i&&v!==idle[i-1]).length<=7,'R769 sobok idle: slow sway on walk frames ('+idle.join('')+')');
+ s.moving=true;const wk=[];for(let i=0;i<30;i++){vm.runInContext('time+=1/30',c);const q=FF(c,s);ok(/sobok-walk/.test(q.path),'R769 sobok walk sheet');wk.push(q.assetFrame.sourceRect[0]/256);}
+ const ch=wk.filter((v,i)=>i&&v!==wk[i-1]).length;ok(ch>=5&&ch<=7,'R769 sobok walk ~6fps ('+ch+' changes/s, '+wk.join('')+')');s.moving=false;
+ s.attack={elapsed:0,shape154:{windup:.6,active:.15,recovery:.6}};const at=[];for(let t=0;t<1.35;t+=.05){s.attack.elapsed=t;const q=FF(c,s);ok(/sobok-walk/.test(q.path),'R769 sobok attack on walk sheet');at.push(q.assetFrame.sourceRect[0]/256);}
+ ok(at.every((v,i)=>!i||v>=at[i-1])&&at[0]===0&&at[at.length-1]===7,'R769 sobok attack lurches through the walk frames ('+at.join('')+')');s.attack=null;
+ s.hitTimer=.14;const h1=FF(c,s);vm.runInContext('time+=.05',c);const h2=FF(c,s);ok(/sobok-walk/.test(h1.path)&&h1.assetFrame.sourceRect[0]===h2.assetFrame.sourceRect[0],'R769 sobok hit holds one walk frame');s.hitTimer=0;
+ c.killEnemy(s);const fx=vm.runInContext('effects',c).slice(-1)[0];ok(fx.r763?.k==='sobok','R769 sobok death tagged');fx.age=.5;vm.runInContext('__drawn.length=0',c);c.drawBurnDeath3(fx);const d=vm.runInContext('__drawn',c)[0];
+ ok(d&&/sobok-walk/.test(d.path)&&d.rect[0]===0&&d.alpha<1,'R769 sobok death: walk frame 0 sinking/fading');
+ const co=vworld({store:{'storyworld.r763.villagers':'{"sobok":false}'}}),s2=mob({id:'last302:r75-pack:10',name:'귀비탕 공명 안개핵 5'});ok(/fisher-/.test(FF(co,s2).path)&&s2.name==='잠식된 어부 5','R769 sobok:false → fisher');
+ const cr=vworld({ready:false});FF(cr,mob());const ens=vm.runInContext('__ens',cr);ok(['sobok-walk','herbwife-proj6'].every(k=>ens.some(p=>p.endsWith(k+'.webp'))),'R769 sobok + projectile sheets requested');}
+{// R769 투사체: 약방 아낙이 쏜 적 투사체는 proj6 시트(128칸 6, 오른쪽으로 날아가는 그림)를 날아가는 쪽으로 돌려 그림. 다른 몹·영웅·지역·꺼짐·안 실림은 엔진 그대로
+ const c=vworld(),hw=mob({id:'last302:l302-e1:2',nativeId:'l302-e1',name:'포구 검은 안개 2'}),fi=mob();FF(c,hw);FF(c,fi);c.room.enemies.push(hw,fi);
+ const shot=(o)=>({id:'s'+Math.random(),owner:hw.id,friendly:false,x:4,y:3,vx:-3,vy:0,age:0,life:2,scale:1,...o});
+ const P=(cc,b)=>{vm.runInContext('ctx.__ops.length=0;__proj.length=0',cc);cc.drawProjectile(b);return {ops:vm.runInContext('ctx.__ops.slice()',cc),base:vm.runInContext('__proj.slice()',cc)};};
+ const r=P(c,shot());const dr=r.ops.find(o=>o[0]==='d'),ro=r.ops.find(o=>o[0]==='r');
+ ok(dr&&r.base.length===0,'R769 herbwife shot drawn from proj6 sheet, engine art skipped');ok(dr[1]%128===0&&dr[3]===128&&dr[4]===128&&dr[7]===dr[8]&&dr[7]>30,'R769 one 128 cell, square, sized ('+dr.slice(1).map(v=>Math.round(v)).join(',')+')');
+ ok(Math.abs(Math.abs(ro[1])-Math.PI)<.05,'R769 flying left → rotated ~π ('+ro[1].toFixed(2)+')');
+ const fr=new Set();for(let a=0;a<.6;a+=.05)fr.add(P(c,shot({id:'x',age:a})).ops.find(o=>o[0]==='d')[1]/128);ok(fr.size>=5,'R769 projectile animates ('+[...fr].join('')+')');
+ ok(P(c,shot({owner:fi.id})).base.length===1,'R769 fisher shot → engine');ok(P(c,shot({friendly:true})).base.length===1,'R769 friendly shot → engine');ok(P(c,shot({owner:'nobody'})).base.length===1,'R769 unknown owner → engine');
+ const cn=vworld({ready:false});cn.room.enemies.push(hw);ok(P(cn,shot()).base.length===1,'R769 sheet not loaded → engine');
+ const cz=vworld({roomId:'last301'});cz.room.enemies.push(hw);ok(P(cz,shot()).base.length===1,'R769 other region → engine');
+ const cf=vworld({store:{'storyworld.r763.villagers':'{"proj":false}'}});cf.room.enemies.push(hw);ok(P(cf,shot()).base.length===1,'R769 proj:false → engine');}
 console.log('R760 CPU check OK ('+n+' assertions)');
