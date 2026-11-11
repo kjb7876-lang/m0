@@ -13,11 +13,14 @@
 //  · R761: Dots CX-0070BM r1 보스 시트(실타래 형상·호박색 눈 한 점·보라 핵, 7분야 심사 통과 6장)가 오면 4자세 대신 시트로 그린다.
 //    대기 idle6 · 걷기 move6 · 공격은 실 팔 휘감기 atkA8 과 눈빛 atkB8 을 번갈아 · 실비 패턴은 두 팔을 드는 cast8 · 흩어짐은 핵이 드러나는 reveal8(정본 35장 "마침내 핵이 드러났고").
 //    768칸을 512칸으로 줄인 사본(scripts/r761-bulmyeongwi-sheets.py → assets/r760/boss/sheet-*.webp). 시트가 아직 안 실렸으면 톤 4자세로 그린다.
-//  끄기: localStorage['storyworld.r760.bulmyeongwi']='{"on":false}'(시트만 끄기 '{"sheets":false}'). 점검: window.__STORYWORLD_BULMYEONGWI_R760__.inspect()
+//  · R762 효과음: 그림 스레드가 ElevenLabs 로 만들고 사용자 소리 기준(150Hz 아래 ≤8%·2~5kHz ≤35%·피크 −10~−13dB)에 맞춘 12개 중 보스 8개(assets/r761/sfx).
+//    동작이 시작될 때 한 번씩: 실 팔 휘감기(atkA) → wrap, 눈빛(atkB) → gaze, 실비(cast) → rain, 핵 드러남(reveal) → reveal. 보스 소리끼리 1.2초 간격(잦으면 건너뜀), 창이 떠 있으면 조용.
+//    엔진 sound()·soundProfiles 에 프로필로만 얹는다(R541 방식, R545 다듬기가 그대로 걸림). 주민 신음·잠드는 소리는 주민 몹 그림이 들어올 때.
+//  끄기: localStorage['storyworld.r760.bulmyeongwi']='{"on":false}'(시트만 끄기 '{"sheets":false}', 소리만 끄기 '{"sfx":false}'). 점검: window.__STORYWORLD_BULMYEONGWI_R760__.inspect()
 (()=>{'use strict';
 if(window.__STORYWORLD_BULMYEONGWI_R760__)return;
-const REV='R760-bulmyeongwi-2',KEY='storyworld.r760.bulmyeongwi';
-let prefs={on:true,ghosts:true,sheets:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object')for(const k of Object.keys(prefs))if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
+const REV='R760-bulmyeongwi-3',KEY='storyworld.r760.bulmyeongwi';
+let prefs={on:true,ghosts:true,sheets:true,sfx:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object')for(const k of Object.keys(prefs))if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={draws:0,swapped:0,waiting:0,patterns:0,ghosted:0,errors:0};let lastError=null,last=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const T=()=>typeof time==='number'&&Number.isFinite(time)?time:performance.now()/1000;
@@ -61,11 +64,21 @@ function facing(e){try{const A=e.attack;if(A&&Number.isFinite(A.angle))return Ma
 function windupOf(A,e){const w=A?.castWindup150??A?.shape154?.windup??e?.combatProfile?.attackShape?.windup;return Number.isFinite(w)&&w>0?w:.35;}
 // 엔진은 휘두르는 동안 e.attack 없이 state 'attack' + 공격 그림만 줄 때가 있다(헤드리스 실측) → 그때는 상태 나이로 자세를 고른다.
 function poseFor(e,k){const A=e.attack;if(!A){if(k==='attack'||e.state==='attack'){const a=Number(e.stateAge)||0;return a<.25?1:a<.45?2:3;}return 4;}const w=windupOf(A,e),el=Number(A.elapsed)||0;return el<w?1:el<w+.18?2:3;}
-// R761 시트 칸 고르기: [시트, 칸]. 공격은 시작될 때마다 atkA·atkB 를 번갈아, 준비 동안 0→3칸(3칸 = 타격), 뒤로 .12초마다 한 칸씩 7칸까지.
+// 동작 단계: 그리기마다 한 번. 공격이 새로 시작되면 번호를 올리고(atkA·atkB 번갈이), 패턴이 새로 시작되면 시각을 잰다. 새로 시작된 동작 이름을 돌려준다(효과음).
+function phase(e,k,s){const t=T();
+ if(k==='rain'||k==='transition'){s.wasAtk=false;const key=k==='rain'?'cast':'reveal';let ev=null;if(s.patK!==k||t-s.patLast>.3){s.patK=k;s.patT0=t;ev=key;}s.patLast=t;return ev;}
+ const A=e.attack,atk=!!A||k==='attack'||e.state==='attack';let ev=null;if(atk&&(!s.wasAtk||(A&&s.lastA&&A!==s.lastA))){s.atkN++;ev=s.atkN%2?'atkA':'atkB';}s.wasAtk=atk;if(A)s.lastA=A;return ev;}
+// R762 효과음
+const SFX_DIR='assets/r761/sfx/bmg-',CUE={atkA:'r761BossWrap',atkB:'r761BossGaze',cast:'r761BossRain',reveal:'r761BossReveal'},
+ SFX={r761BossWrap:['wrap',.7],r761BossGaze:['gaze',.65],r761BossRain:['rain',.6],r761BossReveal:['reveal',.75]},CUE_GAP=1.2;let lastCue=-1e9;
+function sfxProfiles(){try{if(typeof soundProfiles==='undefined'||!soundProfiles)return;for(const[kind,[n,g]]of Object.entries(SFX))if(!soundProfiles[kind]?.length)soundProfiles[kind]=[1,2].map(i=>({key:'r761-'+n+'-'+i,path:SFX_DIR+n+'-'+i+'.ogg',gain:g,r541:true}));}catch(err){fail(err);}}
+function cue(ev){if(!ev||!prefs.sfx||typeof sound!=='function')return;try{if(typeof modal!=='undefined'&&modal)return;}catch(_){}const t=T();
+ if(t-lastCue<CUE_GAP&&t>=lastCue){stats.cueSkipped=(stats.cueSkipped||0)+1;return;}lastCue=t;sfxProfiles();try{sound(CUE[ev]);stats.cues=(stats.cues||0)+1;}catch(err){fail(err);}}
+// R761 시트 칸 고르기: [시트, 칸]. 공격은 시작될 때마다 atkA·atkB 를 번갈아(phase 가 정한 번호), 준비 동안 0→3칸(3칸 = 타격), 뒤로 .12초마다 한 칸씩 7칸까지.
 function sheetPick(e,k,s){const t=T();
- if(k==='rain'||k==='transition'){const key=k==='rain'?'cast':'reveal',D=SHEET[key];if(s.patK!==k||t-s.patLast>.3){s.patK=k;s.patT0=t;}s.patLast=t;
+ if(k==='rain'||k==='transition'){const key=k==='rain'?'cast':'reveal',D=SHEET[key];
   let f=Math.floor((t-s.patT0)/D.step);if(D.loop){const[a,b]=D.loop;if(f>b)f=a+(f-a)%(b-a+1);}return [key,Math.min(D.n-1,f)];}
- const A=e.attack,atk=!!A||k==='attack'||e.state==='attack';if(atk&&(!s.wasAtk||(A&&s.lastA&&A!==s.lastA)))s.atkN++;s.wasAtk=atk;if(A)s.lastA=A;
+ const A=e.attack,atk=!!A||k==='attack'||e.state==='attack';
  if(atk){let w=.35,el=Number(e.stateAge)||0;if(A){w=windupOf(A,e);el=Number(A.elapsed)||0;}const pr=el<w?el/w*3:3+(el-w)/.12;return [s.atkN%2?'atkA':'atkB',Math.max(0,Math.min(7,Math.floor(pr)))];}
  if(s.move>.5)return ['move',Math.floor(t*SHEET.move.fps+s.seed)%6];return ['idle',Math.floor(t*SHEET.idle.fps+s.seed*3)%6];}
 // ── 안쪽: 그림·크기 ──
@@ -73,7 +86,7 @@ function swap(e,cmds,st0){const c=bodyCmd(cmds,st0);if(!c)return;const p=srcOf(c
  // 기준 키 = 엔진이 대기 그림을 그리는 보이는 몸 키를 '바닥 한 칸 화면 길이'로 나눈 값(카메라가 공격 때 당겨져도 자세마다 크기가 튀지 않게).
  const tl=tileLen(e);if(k==='idle'){const u=Hq(c)*IDLE_VIS/tl;s.unit=s.unit?s.unit+(u-s.unit)*.2:u;}
  const unit=(s.unit||Hq(c)*IDLE_VIS/tl)*tl;last={k,tl:+tl.toFixed(2),H:+Hq(c).toFixed(1),unitPerTile:+(s.unit||0).toFixed(2)};
- track(e,s);
+ track(e,s);cue(phase(e,k,s));
  if(prefs.sheets){const[sk,f]=sheetPick(e,k,s),D=SHEET[sk],path=SPATH(sk),im=img(path);
   if(im){const kk=unit*SCALE/SC.vis,sg=facing(e),[fx,fy]=footOf(e,c),x0=fx-sg*SC.px*kk,y0=fy-SC.py*kk,w=SC.cell*kk;
    c.points=[[x0,y0],[x0+sg*w,y0],[x0+sg*w,y0+w],[x0,y0+w]];setImg(c,im,path,SC.cell*D.n,SC.cell);c.sourceRect=[f*SC.cell,0,SC.cell,SC.cell];
@@ -96,6 +109,7 @@ function ghosts(e,who,cmds,st0){if(!prefs.ghosts)return;const c=bodyCmd(cmds,st0
  const i=cmds.indexOf(c);if(i>=0){cmds.splice(i,0,...out);stats.ghosted++;}
  // 몸이 커져 엔진이 옛 키에 맞춰 둔 이름표가 얼굴을 덮던 것 → 이름표를 몸 맨 위(보이는 윗줄 3%) 위로 올린다.
  if(who==='boss'){const top=Math.min(...c.points.map(q=>q[1]))+H*.03-6;for(let j=st0;j<cmds.length;j++){const k=cmds[j];if(k?.kind==='text'&&k.owner?.kind==='enemy'&&Array.isArray(k.point)&&k.point[1]>top){k.point=[k.point[0],top,...k.point.slice(2)];stats.label=(stats.label||0)+1;}}}}
+sfxProfiles();if(typeof setupAudio==='function'){const base=setupAudio;setupAudio=function(){const r=base.apply(this,arguments);sfxProfiles();return r;};}
 const ALL=['p1','p2','p3','p4','rain','transition'];const SALL=Object.keys(SHEET);let visit='';
 // 엔진은 지역을 옮길 때 그림 캐시를 비울 수 있다 → 불면귀 지역에 들어와 처음 적이 그려질 때 한 번 미리 청한다(보스 첫 등장에 원본이 비치지 않게).
 function preload(){const r=roomId();if(r===visit)return;visit=r;if(r==='last303'||r==='last302'){for(const k of ALL)img(DIR+k+'.webp');if(prefs.sheets)for(const k of SALL)img(SPATH(k));}}

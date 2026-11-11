@@ -10,9 +10,9 @@ const F=path.join(R,'client-source','bulmyeongwi-r760.js');ok(fs.existsSync(F),'
 const F620=path.join(R,'client-source','boss-motion-r620.js');const src620=fs.readFileSync(F620,'utf8');
 const IDLE='assets/r425/clean/assets/generated-v31224/actors-normalized/692e4ae01c29_bulmyeongwi_idle.webp',ATK='assets/generated-v31224/actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp',
  RAIN='assets/generated-v31224/actors-normalized/35526bcfa1c2_bulmyeongwi_rain.webp',MID='assets/r104/bosses/mb-last302-v31231-p4.webp',MOB='assets/episode1b/generated-v394/bulmyeongwi_b.webp';
-function world({store={},roomId='last303',with620=false,ready=true,sheets=false}={}){const timers=[];const ctx={Math,String,Number,Array,Object,JSON,Map,WeakMap,Set,Symbol,isFinite,RegExp,performance:{now:()=>0},
+function world({store={},roomId='last303',with620=false,ready=true,sheets=false,audio=true}={}){const timers=[];const ctx={Math,String,Number,Array,Object,JSON,Map,WeakMap,Set,Symbol,isFinite,RegExp,performance:{now:()=>0},
   setTimeout:(f)=>{timers.push(f);return timers.length;},localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}}};ctx.window=ctx;vm.createContext(ctx);
- vm.runInContext(`var time=0,room={id:${JSON.stringify(roomId)},enemies:[]},player={x:6,y:3},ctx={commands:[]};var __ready=${ready},__sheets=${sheets},__added=[];
+ vm.runInContext(`var time=0,room={id:${JSON.stringify(roomId)},enemies:[]},player={x:6,y:3},ctx={commands:[]};var __ready=${ready},__sheets=${sheets},__added=[],__snd=[];${audio?"var soundProfiles={boss:[{key:'b',path:'x.ogg',gain:1}]};function sound(k){__snd.push(k);}function setupAudio(){soundProfiles={boss:[]};}var modal=null;":''}
   function addImage(p){__added.push(p);}function readyImage(p){if(String(p).includes('assets/r760/')&&!__ready)return null;if(/sheet-/.test(p)){if(!__sheets)return null;const n=/sheet-(idle|move)/.test(p)?6:8;return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:n*512,naturalHeight:512}};}const w=/-p[0-9][.]/.test(p)?393:672,h=/-p[0-9][.]/.test(p)?432:384;return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:w,naturalHeight:h}};}
   var zoom=1;function project(x,y){return {x:100+(x-3)*10*zoom,y:200+(y-3)*5*zoom};}
   // 엔진 몸: 발밑 = project(e), 그림 672x384 전체 사각형. 대기 그림은 키 158.7(발 줄 322/384), 공격 그림은 132.6 으로 그려졌다(실측).
@@ -146,4 +146,27 @@ const svis=k=>H(k)*SVIS/512;
  const c=world({sheets:true,with620:true}),e=boss();frames(c,e,.5);for(let i=0;i<60&&FR(frames(c,e,1/30)[0].b)!==0;i++);e.attack={elapsed:0,angle:0,shape154:{windup:.35}};let bad=0,xf=0;
  frames(c,e,.9,{step:(e)=>{e.attack.elapsed+=1/30;}}).forEach(f=>f.cm.filter(k=>k.r620Ghost).forEach(g=>{xf++;const n=/sheet-(idle|move)/.test(g.sourcePath)?6:8;if(/sheet-/.test(g.sourcePath)&&g.imageSize[0]!==n*512)bad++;}));
  ok(xf>0,'R620 cross-fades idle frame 0 → atkA frame 0 ('+xf+')');ok(bad===0,'R620 cross-fade ghost keeps its own imageSize ('+xf+' ghosts, '+bad+' bad)');ok(API(c).inspect().stats.errors===0,'no errors with R620 + sheets');}
+// ── R762: 불면귀 효과음(ElevenLabs 생성, 그림 스레드가 다듬음 — assets/r761/sfx). 동작이 시작될 때 한 번씩 ──
+const SND=c=>run(c,'__snd.slice()');
+{// 프로필 등록(엔진이 setupAudio 로 프로필을 다시 만들어도 다시 얹음)
+ const c=world();const P=run(c,'soundProfiles');ok(['Wrap','Gaze','Rain','Reveal'].every(k=>P['r761Boss'+k]?.length===2),'boss sfx profiles registered (2 variants each)');
+ ok(P.r761BossWrap[0].path==='assets/r761/sfx/bmg-wrap-1.ogg'&&P.r761BossWrap[0].gain===.7&&P.r761BossRain[1].path==='assets/r761/sfx/bmg-rain-2.ogg','sfx paths and gains from index.json');
+ ok(P.boss.length===1,'engine boss profile untouched');run(c,'setupAudio()');ok(run(c,'soundProfiles').r761BossReveal?.length===2,'re-registered after setupAudio');}
+{// 공격이 시작될 때 한 번: 첫 공격 실 휘감기(atkA) → wrap, 다음 공격 눈빛(atkB) → gaze. 같은 공격 동안 다시 울리지 않음, 대기·걷기는 소리 없음
+ const c=world({sheets:true}),e=boss();frames(c,e,.6,{step:(e)=>{e.x+=.03;}});ok(SND(c).length===0,'idle/walk: no boss cue');
+ e.attack={elapsed:0,angle:0,shape154:{windup:.35}};frames(c,e,.9,{step:(e)=>{e.attack.elapsed+=1/30;}});ok(JSON.stringify(SND(c))==='["r761BossWrap"]','1st attack → one wrap cue ('+SND(c)+')');
+ e.attack=null;frames(c,e,1.2);e.attack={elapsed:0,angle:0,shape154:{windup:.35}};frames(c,e,.5,{step:(e)=>{e.attack.elapsed+=1/30;}});ok(JSON.stringify(SND(c))==='["r761BossWrap","r761BossGaze"]','2nd attack → gaze ('+SND(c)+')');}
+{// 시트를 끄거나 못 실려도 소리는 같은 순서(그림과 소리가 어긋나지 않게 같은 번갈이 상태를 씀)
+ const c=world({sheets:false}),e=boss();e.attack={elapsed:0,angle:0,shape154:{windup:.35}};frames(c,e,.5,{step:(e)=>{e.attack.elapsed+=1/30;}});ok(JSON.stringify(SND(c))==='["r761BossWrap"]','no sheets: still one wrap cue');}
+{// 너무 잦으면 건너뜀(1.2초 안 두 번째 공격은 조용히) — 듣기 거슬리지 않게
+ const c=world({sheets:true}),e=boss();e.attack={elapsed:0,angle:0,shape154:{windup:.35}};frames(c,e,.3,{step:(e)=>{e.attack.elapsed+=1/30;}});e.attack={elapsed:0,angle:0,shape154:{windup:.35}};frames(c,e,.3,{step:(e)=>{e.attack.elapsed+=1/30;}});
+ ok(SND(c).length===1,'two attacks within 0.6s → one cue ('+SND(c)+')');const sh=frames(c,e,.05)[0].b;ok(/sheet-atkB/.test(sh.sourcePath),'picture still alternates (atkB) even when the cue is skipped');}
+{// 실비 → rain, 흩어짐 → reveal, 패턴 동안 한 번
+ const c=world({sheets:true}),e=boss({__path:RAIN});frames(c,e,1.5);ok(JSON.stringify(SND(c))==='["r761BossRain"]','rain pattern → one rain cue ('+SND(c)+')');
+ const TR=RAIN.replace('35526bcfa1c2_bulmyeongwi_rain','de4c1414da0d_bulmyeongwi_transition');const c2=world({sheets:true}),e2=boss({__path:TR});frames(c2,e2,1.5);ok(JSON.stringify(SND(c2))==='["r761BossReveal"]','transition → one reveal cue');}
+{// 다른 적·중간보스·창이 떠 있을 때·끄기 → 소리 없음
+ const cm=world({roomId:'last302'}),m=boss({nativeId:'mb-last302-v31231',name:'검은 안개 심장',boss:true,midboss:true,__path:MID});m.attack={elapsed:0,angle:0};frames(cm,m,.3);ok(SND(cm).length===0,'midboss: no cue');
+ const cq=world(),eq=boss();run(cq,'modal={}');eq.attack={elapsed:0,angle:0,shape154:{windup:.35}};frames(cq,eq,.3,{step:(e)=>{e.attack.elapsed+=1/30;}});ok(SND(cq).length===0,'modal open: no cue');
+ const cf=world({store:{'storyworld.r760.bulmyeongwi':'{"sfx":false}'}}),ef=boss();ef.attack={elapsed:0,angle:0,shape154:{windup:.35}};frames(cf,ef,.3,{step:(e)=>{e.attack.elapsed+=1/30;}});ok(SND(cf).length===0,'sfx off switch');
+ const cn=world({audio:false}),en=boss();en.attack={elapsed:0,angle:0,shape154:{windup:.35}};frames(cn,en,.3,{step:(e)=>{e.attack.elapsed+=1/30;}});ok(API(cn).inspect().stats.errors===0,'no audio engine: no errors');}
 console.log('R760 CPU check OK ('+n+' assertions)');
