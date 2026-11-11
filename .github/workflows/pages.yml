@@ -516,6 +516,8 @@ jobs:
         run: node r96/qa/r493/r493-cpu-check.cjs
       - name: R444 enemy facing authority (attack side = hitbox angle, walk = real displacement, strafe faces hero, no mob shadows) CPU check
         run: node r96/qa/r444/r444-cpu-check.cjs
+      - name: R702 boss/mob facing does not flip on grid staircase walks (cinema-mode head shake) CPU check
+        run: node r96/qa/r702/r702-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
         run: node r96/qa/r430/r430-cpu-check.cjs
       - name: R431 boss-room center fights + theme boss skill 6s + touch status/DoT + black-flame prop throws CPU check

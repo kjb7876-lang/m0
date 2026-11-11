@@ -43329,8 +43329,8 @@
     },
     {
       "path": "enemy-face-r444.js",
-      "bytes": 14197,
-      "sha256": "2713fd510635b965f92b759d6988ead7646b1d595137bd64a6c0ce024b2cdc55"
+      "bytes": 15856,
+      "sha256": "9e7729539f8ad9f58d3842ed5a9f5e7995400977acc7888c94a57015d77339ad"
     },
     {
       "path": "enemy-hexagram-r341.js",
@@ -43459,8 +43459,8 @@
     },
     {
       "path": "guide-r272.js",
-      "bytes": 10676,
-      "sha256": "ec7f5b7a130fa330dc973036844c3590783024ade5fdf02c72362b1528e96903"
+      "bytes": 12680,
+      "sha256": "67162a1ecb7dbbf330eff9e0a30019937848bffafd944b807eb3a4229dcda07e"
     },
     {
       "path": "guide-unstick-r222.js",
@@ -44599,7 +44599,7 @@
     }
   ],
   "fileCount": 8919,
-  "totalBytes": 1228836086,
+  "totalBytes": 1228839749,
   "webHTMLSha256": "50bb81bfe1c0759805da71ee259f6ce8826210ba5e192c1bed9f84b1480a9814",
   "largest": [
     {
