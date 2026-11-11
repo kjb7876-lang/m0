@@ -33478,6 +33478,21 @@
       "sha256": "8bf10ff5c67732f690edf60e016a5e97dbf938e7ac13cc175564b8d88992512e"
     },
     {
+      "path": "assets/r528/bookshelf-n.webp",
+      "bytes": 9878,
+      "sha256": "35a8c4b0f5b4d18dfc1a8c8897095e8c77399583d21acd6f53f2352cf226f661"
+    },
+    {
+      "path": "assets/r528/bookshelf-w.webp",
+      "bytes": 10920,
+      "sha256": "c8bda988ca8a64dfa386e3bb62579ffa5fc4f155492de84b64202a29062d461b"
+    },
+    {
+      "path": "assets/r528/index.json",
+      "bytes": 1681,
+      "sha256": "fee129e4bc5ef2dbec313910f2c8d8ee5209f83f785c78b802a9464251d86d45"
+    },
+    {
       "path": "assets/r535/dots/hunter-burn.webp",
       "bytes": 172484,
       "sha256": "c1a86ae57963283d6cda1de56b4269f87b0b1af45a1d76a8f92232bc0684ebec"
@@ -43954,8 +43969,8 @@
     },
     {
       "path": "rooms-r523.js",
-      "bytes": 47219,
-      "sha256": "d16d0859a04a96e5ff441cda36abdae2e19d12eda85fbc96c08c771a05930474"
+      "bytes": 48033,
+      "sha256": "cc80823230347f5bc23b8555ed5469809a1d076b45a8e478cc5af920677826a7"
     },
     {
       "path": "root-gate-video-r372.js",
@@ -44448,8 +44463,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8889,
-  "totalBytes": 1227310808,
+  "fileCount": 8892,
+  "totalBytes": 1227334101,
   "webHTMLSha256": "cb5892cc346d8a646d4e9eeee8eda9705ddc7f560cb7f6872c8647e6f971f61e",
   "largest": [
     {
