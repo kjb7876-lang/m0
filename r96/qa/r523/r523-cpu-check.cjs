@@ -62,7 +62,7 @@ ok('two-direction pieces point at each other and face different walls',keys.filt
 const OFF=/r80-(?:024|027|051|144|148)\.webp|hospital-maze\/cabinet|r415\/props\/(?:care-table|grand-desk|record-cabinet|report-desk|low-table|waiting-bench|student-desk|lobby-counter)|mammon/;
 ok('no off-angle (front 3/4 view) art and nothing from the Mammon sheet in the table',keys.every(k=>!OFF.test(ART[k].path)));
 ok('every art file is a shipped runtime file',keys.every(k=>manifest.includes('"'+ART[k].path+'"')||manifest.includes(ART[k].path)));
-for(const rd_ of['r523','r524','r528']){const dir=path.join(R,'runtime-text/assets/'+rd_);let idx=null;try{idx=JSON.parse(fs.readFileSync(path.join(dir,'index.json'),'utf8'));}catch(_){}
+for(const rd_ of['r523','r524','r528','r529']){const dir=path.join(R,'runtime-text/assets/'+rd_);let idx=null;try{idx=JSON.parse(fs.readFileSync(path.join(dir,'index.json'),'utf8'));}catch(_){}
  const files=fs.existsSync(dir)?fs.readdirSync(dir).filter(f=>f!=='index.json'):[];
  ok(rd_+' asset record: every file listed with its real size and sha256, a source and a use; no Drive link or id',!!idx&&files.length>0&&files.every(f=>{const e=(idx.files||[]).find(x=>x.file==='assets/'+rd_+'/'+f),b=fs.readFileSync(path.join(dir,f));return!!e&&e.bytes===b.length&&e.sha256===crypto.createHash('sha256').update(b).digest('hex')&&!!e.source&&!!e.use;})&&(idx.files||[]).length===files.length&&!/drive\.google|docs\.google|[?&]id=/.test(JSON.stringify(idx)));}
 const G=api.G,USE=api.USE,REG=api.REGION;
@@ -123,7 +123,7 @@ ok('same-named rooms rotate through three characters (sitting room / luggage roo
  ok('home: luggage rooms and spare bedrooms have no sofa or TV; spare bedrooms have a bed',V.filter(q=>/^den[23]$/.test(q.use)).length>=4&&V.filter(q=>/^den[23]$/.test(q.use)).every(q=>!q.tv&&!q.sofa)&&V.filter(q=>q.use==='den3').some(q=>q.bed>0));}
 // ---- 둘째 묶음(R524): 질투의 집 ep1b03 · 폭식의 주방 ep1b04 ---------------------------------------------------
 //  질투 = 정돈되고 서로를 비춰 보는 집(거울·가죽 소파·옷장, 쓰레기 없음) / 폭식 = 주방(화구 줄·준비대·식재료 냉장고와 찬장)
-const ENVY=new Set(['sofa_n','sofa_w','shelf_n','shelf_w','mirror','wardrobe_n','wardrobe_w','table_n','table_w','chair_n','chair_w','chairb_n','chairb_w']);
+const ENVY=new Set(['sofa_n','sofa_w','shelf_n','shelf_w','flamp','mirror','wardrobe_n','wardrobe_w','table_n','table_w','chair_n','chair_w','chairb_n','chairb_w']);
 const GLUT=new Set(['range_n','range_w','fridge_sloth','table_n','table_w','wardrobe_n','wardrobe_w','chair_n','chair_w','chairb_n','chairb_w','trash']);
 ok('second batch room names → uses (same-named studies and pantries rotate through two characters; corridors are left alone)',api.useOf('ep1b03','정돈된 거실')==='parlor'&&api.useOf('ep1b03','서재',1)==='study'&&api.useOf('ep1b03','서재',2)==='study2'&&api.useOf('ep1b03','서재',3)==='study'&&api.useOf('ep1b03','거울 회랑')==='mirrors'&&api.useOf('ep1b03','앞방')==='parlor'&&api.useOf('ep1b03','입구')==='vestibule'&&api.useOf('ep1b03','복도')===null&&
  api.useOf('ep1b04','준비대')==='prep'&&api.useOf('ep1b04','식재료 보관실',1)==='pantry'&&api.useOf('ep1b04','식재료 보관실',2)==='pantry2'&&api.useOf('ep1b04','화구 구획')==='ranges'&&api.useOf('ep1b04','앞방')==='mess'&&api.useOf('ep1b04','입구')==='mess'&&api.useOf('ep1b04','복도')===null);
@@ -144,6 +144,10 @@ ok('new art for the second batch is in the table: lounge sofas and Dots ranges a
 {const sh=perRoom(Ev,/^shelf_[nw]$/),studies=sh.filter(q=>/^study/.test(q.use));
  ok('R528 envy studies have bookshelves: every study room that gets furniture has at least one, at least six in all, and none outside the studies',studies.length>=6&&studies.every(q=>q.n>=1)&&sh.filter(q=>!/^study/.test(q.use)).every(q=>q.n===0)&&[Ev,Gl].every(A=>A.rows.every(p=>!/^shelf_/.test(p.r523.art)||(A===Ev&&/^study/.test(p.r523.use)))));
  ok('R528 bookshelf art: a two-direction pair from assets/r528 on the 2:1 floor, both views drawn the same height',['shelf_n','shelf_w'].every(k=>ART[k]&&ART[k].ang==='iso'&&ART[k].pair&&/^assets\/r528\/bookshelf-[nw]\.webp$/.test(ART[k].path))&&ART.shelf_n.pair==='shelf_w'&&Math.abs(ART.shelf_n.r[3]-ART.shelf_w.r[3])<.05&&ART.shelf_n.r[3]>2&&ART.shelf_n.r[3]<2.6);}
+// ---- R529: 서 있는 전등(Dots CX-0066RM r1)을 질투의 집 응접실·읽는 서재의 소파 곁에 하나씩 ------------------------------------
+{const fl=perRoom(Ev,/^flamp$/),sf=perRoom(Ev,/^sofa_[nw]$/),lit=fl.filter(q=>q.n>0);
+ ok('R529 floor lamps: one at most per room, only in parlours and reading studies, only in a room that has a sofa ('+lit.length+' rooms, at least 4); none in other regions',lit.length>=4&&fl.every(q=>q.n<=1)&&lit.every(q=>q.use==='parlor'||q.use==='study2')&&fl.every((q,i)=>q.n===0||sf[i].n>=1)&&[C,Hm,Gl].every(A=>A.rows.every(p=>p.r523.art!=='flamp')));
+ ok('R529 floor lamp art: a direction-less standing piece from assets/r529, a little shorter than the bookshelf',!!ART.flamp&&ART.flamp.ang==='pole'&&!ART.flamp.pair&&ART.flamp.path==='assets/r529/floor-lamp.webp'&&ART.flamp.h>=80&&ART.flamp.h<ART.shelf_n.h);}
 // ---- 셋째 묶음(R525): 불을 지른 남자 ep1b07 · 새빛호텔 murder02 · 청록빌라 murder04 -------------------------------
 //  불난 층 = 피난 계단·방화 전실·설비실(기계)·그을린 복도(버리고 간 짐) / 호텔 7층 = 보안실(단말기·책상)·설비실·계단참·전실(의자와 투숙객 짐) / 빌라 = 세 가지 앞방·빈 방(성기게)·공동 계단
 const FIRE=new Set(['steps','alarm','machine','cooler','vent','wardrobe_n','wardrobe_w','chair_n','chair_w','suitcase_n','suitcase_w','trash']);

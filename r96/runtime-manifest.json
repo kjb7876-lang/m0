@@ -33498,6 +33498,16 @@
       "sha256": "fee129e4bc5ef2dbec313910f2c8d8ee5209f83f785c78b802a9464251d86d45"
     },
     {
+      "path": "assets/r529/floor-lamp.webp",
+      "bytes": 5824,
+      "sha256": "2f1d9efcd8df6ba9f3f1fc79f1c32d0cfec6af64a19e57ffb5580bc334292508"
+    },
+    {
+      "path": "assets/r529/index.json",
+      "bytes": 940,
+      "sha256": "8ce518d63409bf0562bae36f137c8ea09a1e92431c6e7a7ef00daed43c5f25d6"
+    },
+    {
       "path": "assets/r535/dots/hunter-burn.webp",
       "bytes": 172484,
       "sha256": "c1a86ae57963283d6cda1de56b4269f87b0b1af45a1d76a8f92232bc0684ebec"
@@ -44044,8 +44054,8 @@
     },
     {
       "path": "rooms-r523.js",
-      "bytes": 48033,
-      "sha256": "cc80823230347f5bc23b8555ed5469809a1d076b45a8e478cc5af920677826a7"
+      "bytes": 48464,
+      "sha256": "c931fd3df2cf13cd8eaaafd2ae93bb3981c56a93aa7702a7249287e1a347c457"
     },
     {
       "path": "root-gate-video-r372.js",
@@ -44543,8 +44553,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8908,
-  "totalBytes": 1228623990,
+  "fileCount": 8910,
+  "totalBytes": 1228631185,
   "webHTMLSha256": "50bb81bfe1c0759805da71ee259f6ce8826210ba5e192c1bed9f84b1480a9814",
   "largest": [
     {
