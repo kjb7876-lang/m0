@@ -273,3 +273,23 @@ if(typeof setTimeout==='function')setTimeout(()=>{try{install();installRoom();wr
 window.__STORYWORLD_VILLAGERS_R763__=Object.freeze({rev:REV,kindFor,cell,frameOf,villagers:V,inspect:()=>({rev:REV,prefs:{...prefs},stats:{...stats},lastError}),
  set(p={}){for(const k of Object.keys(prefs))if(typeof p[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return {...prefs};}});
 })();
+
+// ─────────────────────────────────────────────────────────────────────────────
+// R768 불면귀 일반몹 예고 띠 끄기 — 사용자 2026-11-11 "불면귀 일반몹들이 예고공격 자동으로 나오는거 이거 끌 수 있도록".
+//  · 헤드리스 실측(last302): 잠식된 약방 아낙 원거리 준비 동안 R58 이 drawEnemy 안에서 strokeFootprint154(길이 7.4칸 capsule,
+//    'warning', '#c6b59b') 조준 띠를 그린다(3게임초 102번). R425 '적 공격·돌진 예고 표시'(기본 꺼짐)는 색 표로 거르므로 이 선을 못 지웠다.
+//  · 불면귀 지역(last302·last303)의 보스·중간보스가 아닌 몹을 그리는 동안만, 'warning' 단계 띠를 R425 설정(혼자 할 때)에 따라 건너뛴다.
+//    설정에서 켜면 다시 보인다. 타격 순간(active)·회수·바닥 위험(drawEnemy 밖)·보스 예고·다른 지역은 그대로. 공격 자체(판정·시간)는 안 바꾼다.
+(()=>{'use strict';
+const REV='R768-tele-1',ZONES=new Set(['last302','last303']);let cur=null,wrapped=false,lastError=null;const stats={hidden:0};
+const roomId=()=>{try{return String(room?.id||'');}catch(_){return '';}};
+const solo=()=>{let m=null;try{m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();}catch(_){}return !m||m==='off';};
+const teleOff=()=>{try{const f=window.__STORYWORLD_COMBAT_FLOW_R425__;return !!f&&f.inspect().prefs.tele===false;}catch(_){return false;}};
+const normal=e=>!!e&&!e.boss&&!e.midboss&&ZONES.has(roomId());
+function wrap(){if(wrapped)return true;try{if(typeof strokeFootprint154!=='function'||typeof drawEnemy!=='function')return false;
+ const sf=strokeFootprint154;strokeFootprint154=function(g,stage,...a){try{if(stage==='warning'&&cur&&teleOff()&&solo()){stats.hidden++;return false;}}catch(err){lastError=String(err);}return sf.call(this,g,stage,...a);};
+ const de=drawEnemy;drawEnemy=function(e,...a){const prior=cur;cur=normal(e)?e:null;try{return de.call(this,e,...a);}finally{cur=prior;}};
+ wrapped=true;return true;}catch(err){lastError=String(err);return false;}}
+if(!wrap())setTimeout(wrap,0);
+window.__STORYWORLD_TELE_R768__=Object.freeze({rev:REV,inspect:()=>({rev:REV,wrapped,stats:{...stats},teleOff:teleOff(),lastError})});
+})();
