@@ -8130,6 +8130,19 @@
     "assets/r527/lantern-steps.webp",
     "assets/r527/stone-barrier.webp",
     "assets/r527/index.json",
+    "bulmyeongwi-r760.js",
+    "assets/r760/boss/bulmyeongwi-p1.webp",
+    "assets/r760/boss/bulmyeongwi-p2.webp",
+    "assets/r760/boss/bulmyeongwi-p3.webp",
+    "assets/r760/boss/bulmyeongwi-p4.webp",
+    "assets/r760/boss/bulmyeongwi-rain.webp",
+    "assets/r760/boss/bulmyeongwi-transition.webp",
+    "assets/r760/boss/sheet-idle.webp",
+    "assets/r760/boss/sheet-move.webp",
+    "assets/r760/boss/sheet-atkA.webp",
+    "assets/r760/boss/sheet-atkB.webp",
+    "assets/r760/boss/sheet-cast.webp",
+    "assets/r760/boss/sheet-reveal.webp",
     "assets/r730/tiled-house-lit.webp",
     "assets/r730/index.json"
   ],
@@ -9206,5 +9219,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "719b34566c85b19a093ca57b64b30382fdd72d61fcc7c6356e6e84240dab6125"
+  "runtimeManifestSHA256": "6f09c8c9c81b49b30d2354cbb9730ff66c1155e26db848155d5d27f059af2aa2"
 }
