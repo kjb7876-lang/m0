@@ -115,6 +115,12 @@ function update(r,frame){const o=r.__r300;if(!o)return;
   const warm=samong?[1,.32,.2]:[1,.52,.22];
   for(const l of o.pick){if(n>=B.pools)break;const ph=(l.x*3.1+l.y*1.7)%6.283,fl=reduced()?1:.92+.05*Math.sin(t*7.9+ph)+.03*Math.sin(t*17.3+ph*2),rad=(l.r||3)*2*(l.prop?1.15:.95),k=B.poolGain*fl*(l.prop?1:.8);
    o.mat.makeScale(rad,1,rad);o.mat.setPosition(l.x,.03,l.y);o.pools.setMatrixAt(n,o.mat);o.color.setRGB(warm[0]*k,warm[1]*k,warm[2]*k);o.pools.setColorAt(n,o.color);n++;}}
+ // R810: 불면귀 밤 두 지역은 R451 이 빛을 맡아도(위 웅덩이는 꺼짐) 등불 소품 발밑에만 작은 호박빛 웅덩이를 더한다 — R451 조명맵은 상한 ×1.5 라 어두운 바닥에서 등불 밑이 r .17 에 머묾.
+ const night=(()=>{try{return !samong&&window.__STORYWORLD_LOCAL_LIGHT_R451__?.night?.(room.id)||null;}catch(_){return null;}})(),np=!!night&&night.pools>0;
+ if(!n&&np&&want('pools')){if(t-o.pickAt>.5||!o.npick){o.pickAt=t;o.npick=nearest(lightsOf(room).filter(l=>l.prop),player.x,player.y,B.pools);}const warm=night.lampC;
+  for(const l of o.npick){if(n>=B.pools)break;const ph=(l.x*3.1+l.y*1.7)%6.283,fl=reduced()?1:.92+.05*Math.sin(t*7.9+ph)+.03*Math.sin(t*17.3+ph*2),rad=(l.r||3)*2*night.poolR,k=night.pools*fl;
+   o.mat.makeScale(rad,1,rad);o.mat.setPosition(l.x,.03,l.y);o.pools.setMatrixAt(n,o.mat);o.color.setRGB(warm[0]*k,warm[1]*k,warm[2]*k);o.pools.setColorAt(n,o.color);n++;}}
+ else o.npick=null;
  o.pools.count=n;o.pools.visible=n>0;if(n){o.pools.instanceMatrix.needsUpdate=true;o.pools.instanceColor.needsUpdate=true;}stats.pools=n;stats.poolsMax=Math.max(stats.poolsMax,n);
  // R450 날씨: 지역 성격에 맞춰 떠도는 입자 색·양과 안개 세기를 받는다(병원 불티 → 끔(빛 둘레 먼지가 대신), 늪 → 황록 포자, 눈 지역 → 끔, 정본 안개 지역 → 짙게).
  let wx=null;try{wx=window.__STORYWORLD_WEATHER_R450__?.r300?.(room,samong)||null;}catch(_){wx=null;}
