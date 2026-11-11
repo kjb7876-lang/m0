@@ -44359,8 +44359,8 @@
     },
     {
       "path": "title-bg-video-r667.js",
-      "bytes": 8303,
-      "sha256": "5e8ec25a234f63e8c7e2d3cd39c3525db494bbb3543785fda28e6addbc40e183"
+      "bytes": 8726,
+      "sha256": "8eea5171d3cbb23e58b60d78b4ac03ba9eeff318fc547c840bf69075705fa018"
     },
     {
       "path": "trail-r482.js",
@@ -44569,7 +44569,7 @@
     }
   ],
   "fileCount": 8913,
-  "totalBytes": 1228691371,
+  "totalBytes": 1228691794,
   "webHTMLSha256": "50bb81bfe1c0759805da71ee259f6ce8826210ba5e192c1bed9f84b1480a9814",
   "largest": [
     {
