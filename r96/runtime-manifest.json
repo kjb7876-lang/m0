@@ -34863,6 +34863,126 @@
       "sha256": "1b081e50230c75d08012b559f2b302c85530512c3d5a2f88e637ce76819d5ecd"
     },
     {
+      "path": "assets/r810/boat.webp",
+      "bytes": 13142,
+      "sha256": "44cd122f94e22348871753de73d982dba57736f764f006e807eab6f182ff19ee"
+    },
+    {
+      "path": "assets/r810/decoction-brazier.webp",
+      "bytes": 22392,
+      "sha256": "85a5ae2f497b05777f38fbba84de8696adfeeb3b2805a4be5b6e01390b4294bc"
+    },
+    {
+      "path": "assets/r810/fish-rack.webp",
+      "bytes": 45422,
+      "sha256": "1c348af69d7e65769ed3b79c9e647d4dca027ef67fc519ff9ebe8eb4296dd5c6"
+    },
+    {
+      "path": "assets/r810/herb-rack.webp",
+      "bytes": 44290,
+      "sha256": "df996ed1f8fdfe38a4e4e982c975d7ab159c4c01a38e63d23cdef2c34fdae502"
+    },
+    {
+      "path": "assets/r810/herb-trays.webp",
+      "bytes": 16674,
+      "sha256": "d2f6910c4556523f5a324c0fe60c08bea40076ee044bd46dae1e7e3ae12800a0"
+    },
+    {
+      "path": "assets/r810/index.json",
+      "bytes": 14081,
+      "sha256": "49444b84703a4b54e15171cf64d72a2c51fe9651e35fff8fc4c65044d3e78d9d"
+    },
+    {
+      "path": "assets/r810/jangdok.webp",
+      "bytes": 14040,
+      "sha256": "9c1387037ef057c66ecd5f059ab166c7f7caca227c73708158d53ef0721af7ad"
+    },
+    {
+      "path": "assets/r810/lantern-post-off.webp",
+      "bytes": 14274,
+      "sha256": "acd7b9c1e5a8f780485696c0a4581a49720869cc359e81b5ee8b9cebc6b810a3"
+    },
+    {
+      "path": "assets/r810/lantern-post.webp",
+      "bytes": 12462,
+      "sha256": "784ad9a6ce2f8d4e1f98a9fb8f6d07cffbe1ffb3b7226a1b51db023329afc358"
+    },
+    {
+      "path": "assets/r810/ruined-house.webp",
+      "bytes": 62356,
+      "sha256": "37c60f39d196dac6eb732b59769f445f6149554e4164ea642d5e848b1007f536"
+    },
+    {
+      "path": "assets/r810/seaweed-1.webp",
+      "bytes": 27154,
+      "sha256": "4ea35c4e70e1e9c1fc3b1355428f83d58beeab620202bfd7d155fbae594d4db2"
+    },
+    {
+      "path": "assets/r810/seaweed-2.webp",
+      "bytes": 27800,
+      "sha256": "db0934a2383021556a785129830c9e7a6bb92637d4f03768f1847b1263a8ce05"
+    },
+    {
+      "path": "assets/r810/seaweed-3.webp",
+      "bytes": 27474,
+      "sha256": "0b45044bf40ac0c356c9a3374c1346fc8547f24b837ddfaaa7dc236ea9537f2e"
+    },
+    {
+      "path": "assets/r810/shoes-stone.webp",
+      "bytes": 16830,
+      "sha256": "44a74c1b0be595aec79b693603b85cf41b12cbb268ed0bcd038c7b12ccb45716"
+    },
+    {
+      "path": "assets/r810/talisman-post.webp",
+      "bytes": 17246,
+      "sha256": "842ee0b66197c5e08bba9ca0df2763a9082a61643576b2ebea7e2b560cd7e947"
+    },
+    {
+      "path": "assets/r810/talisman-rope-l.webp",
+      "bytes": 21538,
+      "sha256": "7c77262b7b168bfde269161134252720e4906df698284655c778f4732c18e555"
+    },
+    {
+      "path": "assets/r810/talisman-rope-r.webp",
+      "bytes": 21860,
+      "sha256": "abcc888138c6808f2644f6093d8be90f07da839db8ef8392b93bd39cc4e2bbbd"
+    },
+    {
+      "path": "assets/r810/thatched-hut-a.webp",
+      "bytes": 60818,
+      "sha256": "66a6e15ddc5abd0eab584c25a1ccf72c0f642f5984220cf5790acdc67faf5d35"
+    },
+    {
+      "path": "assets/r810/thatched-hut-b.webp",
+      "bytes": 65332,
+      "sha256": "9b364f4432a8ccefab44e3690c7b519cf08a8225d1602e151664f88c97f41db7"
+    },
+    {
+      "path": "assets/r810/tiled-house-b-i.webp",
+      "bytes": 57134,
+      "sha256": "3cb6e7ed6b7f120fa3dc85b26eb2e07f2a2dbaa4c7771a52c279d9a3b129f7fc"
+    },
+    {
+      "path": "assets/r810/tiled-house-b-l.webp",
+      "bytes": 59474,
+      "sha256": "025329db7e0ab4aa1209ab0489398b6fe8ce9eab8faef033216f8edb08600411"
+    },
+    {
+      "path": "assets/r810/tiled-house-b-r.webp",
+      "bytes": 62224,
+      "sha256": "fda506ccc53289dd52d237a6de20c534969c01a15d7226333097fa90602cd0e9"
+    },
+    {
+      "path": "assets/r810/yakbang-house-a.webp",
+      "bytes": 62154,
+      "sha256": "d28748627d2932329bf0216604c3382f63ad1511ce779af4c74025d0ab0919d1"
+    },
+    {
+      "path": "assets/r810/yakbang-house-b.webp",
+      "bytes": 64858,
+      "sha256": "afbff5e4100415e25847e93a0a73def59f98f46e807655eae8b7cdd517139acd"
+    },
+    {
       "path": "assets/r91/death/death-crystal-core.png",
       "bytes": 252893,
       "sha256": "3a7fdf719f776526d6c7f2d88607cfe88851d8d4e4989b019fd2331c746de467"
@@ -42919,8 +43039,8 @@
     },
     {
       "path": "cave-r204.js",
-      "bytes": 129893,
-      "sha256": "2c8768320dbcdced48896ba44323cf42a81be1a5636044c2a94273ca6ade7c64"
+      "bytes": 130386,
+      "sha256": "13e76723b770cdca40691d5ad1e823bc20bcd2bed45dac063cae68aa9bd2fce8"
     },
     {
       "path": "chunks/ep1a08-0-0.json",
@@ -43469,8 +43589,8 @@
     },
     {
       "path": "dark-r123.js",
-      "bytes": 15278,
-      "sha256": "ee3bc668c9752f47f6fe5fba131a55bcc9ede2d96ff6b8a98ae7ea3eda2f1c0c"
+      "bytes": 15900,
+      "sha256": "91f363c1bdad56c5433658de099caedb6bf4445112754c7fc25c32ae25f6add4"
     },
     {
       "path": "data/actor-canvas-map-v31224.js",
@@ -43954,8 +44074,8 @@
     },
     {
       "path": "light-atmos-r300.js",
-      "bytes": 19850,
-      "sha256": "fb3019e4ce54e652a9136ff6daf720c4e8a21737ecf1653b13ce4a6da5ebb26d"
+      "bytes": 20809,
+      "sha256": "734523b9383bf14938eb1e45ffbc63b1ca6f7ec5b6d790f3339ef0d6d53a9cc1"
     },
     {
       "path": "light-r182.js",
@@ -43964,8 +44084,8 @@
     },
     {
       "path": "local-light-r451.js",
-      "bytes": 47454,
-      "sha256": "ec8962c30ebf636f4342d07a7f33ba062cb61d1235bb707ed76c0e3619431cb9"
+      "bytes": 51044,
+      "sha256": "29a6221d4d5f0c4520a8e4ed4deeb104ff8ab34e290e4fc28dc0e45aef95ca42"
     },
     {
       "path": "mammon-bossroom.js",
@@ -44384,8 +44504,8 @@
     },
     {
       "path": "rooms-r523.js",
-      "bytes": 65265,
-      "sha256": "4f8ecb0a876c81ad2392f548e6d93c5f32dbf675c99cec2a225a8d1fad640ca6"
+      "bytes": 76792,
+      "sha256": "4a794e1552630b20972d02de22af2104d17fec13bcef820f9232e370a7aeb4e9"
     },
     {
       "path": "root-gate-video-r372.js",
@@ -44679,8 +44799,8 @@
     },
     {
       "path": "trail-r482.js",
-      "bytes": 10204,
-      "sha256": "e0c04d74ad92f2e3f1bd1cdaef68b1a3455ad338ccb7ee6f1bf8e4408cd64b4b"
+      "bytes": 10684,
+      "sha256": "cfc62d270a81863a937b48c8e697b0ab6f63269ada2d469f64ae7f5320ee3a26"
     },
     {
       "path": "ui-upgrades-r222.js",
@@ -44809,8 +44929,8 @@
     },
     {
       "path": "weather-r450.js",
-      "bytes": 33143,
-      "sha256": "3cf949e405d6860f1fb81c05cad70e65bd2a90f2b577af588f39e14f20185159"
+      "bytes": 33570,
+      "sha256": "897e8b6308f58e7562013fc6d37dfa74004ccdd9aca2864af85e3f71f41dfb6e"
     },
     {
       "path": "webgl-fallback-r221.js",
@@ -44883,8 +45003,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8976,
-  "totalBytes": 1236109249,
+  "fileCount": 9000,
+  "totalBytes": 1236978376,
   "webHTMLSha256": "3262266bbc669f447044ecbf9cb0c51bed4ad8950c5042f49bb03279bf9986da",
   "largest": [
     {
