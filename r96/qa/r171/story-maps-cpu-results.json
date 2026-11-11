@@ -29,7 +29,7 @@
   {
    "name": "module installed",
    "ok": true,
-   "detail": "{\"revision\":\"R171-story-maps-1\",\"prefs\":{\"on\":true},\"failures\":0,\"lastError\":null,\"stats\":{\"built\":97,\"used\":55,\"fallback\":0,\"rooms\":112},\"cached\":[\"murder01\",\"murder02\",\"murder04\",\"murder03\",\"cult01\",\"cult02\",\"cult05\",\"cult06\",\"cult03\",\"dist00\",\"dist01\",\"kair01\"],\"current\":null,\"browser\":false,\"GPU\":false}"
+   "detail": "{\"revision\":\"R171-story-maps-1\",\"prefs\":{\"on\":true},\"failures\":0,\"lastError\":null,\"stats\":{\"built\":101,\"used\":55,\"fallback\":0,\"rooms\":129},\"cached\":[\"murder02\",\"murder04\",\"murder03\",\"cult01\",\"cult02\",\"ep1b09\",\"cult05\",\"cult06\",\"cult03\",\"dist00\",\"dist01\",\"kair01\"],\"current\":null,\"browser\":false,\"GPU\":false}"
   },
   {
    "name": "every eligible story region uses an R171 map (48)",
@@ -54,7 +54,7 @@
   {
    "name": "floor cells within 3000–9500 and bounds [0,0,100,104]",
    "ok": true,
-   "detail": "[\"dist00:5413\",\"dist01:4080\",\"dist02:4075\",\"dist03:4474\",\"dist04:4494\",\"dist05:3977\",\"dist06:4433\",\"ep1a09:7025\",\"ep1a09b:7887\",\"ep1a10:8679\",\"ep1a11:7218\",\"ep1b01:4647\",\"ep1b02:7257\",\"ep1b03:8497\",\"ep1b04:8509\",\"ep1b05:6659\",\"ep1b06:7185\",\"ep1b06b:4501\",\"ep1b07:6287\",\"ep1b08:4540\",\"ep1b09:7192\",\"u201:8709\",\"u202:8509\",\"u204:7564\",\"u205:7166\",\"u206:7647\",\"u203:7324\",\"last304:5322\",\"last305:5162\",\"last302:4503\",\"last303:5086\",\"kair01:4041\",\"kair04:4525\",\"kair05:5409\",\"kair06:3927\",\"kair07:4424\",\"kair08:3918\",\"kair09:3981\",\"kair10:3926\",\"murder01:7038\",\"murder02:6206\",\"murder04:6871\",\"murder03:7"
+   "detail": "[\"dist00:5414\",\"dist01:4081\",\"dist02:4076\",\"dist03:4474\",\"dist04:4494\",\"dist05:3977\",\"dist06:4434\",\"ep1a09:7025\",\"ep1a09b:7887\",\"ep1a10:8679\",\"ep1a11:7218\",\"ep1b01:4647\",\"ep1b02:7257\",\"ep1b03:8497\",\"ep1b04:8509\",\"ep1b05:6659\",\"ep1b06:7185\",\"ep1b06b:4502\",\"ep1b07:6287\",\"ep1b08:4540\",\"ep1b09:7192\",\"u201:8709\",\"u202:8509\",\"u204:7564\",\"u205:7166\",\"u206:7647\",\"u203:7324\",\"last304:5323\",\"last305:5163\",\"last302:4503\",\"last303:5087\",\"kair01:4042\",\"kair04:4525\",\"kair05:5410\",\"kair06:3927\",\"kair07:4424\",\"kair08:3918\",\"kair09:3981\",\"kair10:3926\",\"murder01:7038\",\"murder02:6206\",\"murder04:6871\",\"murder03:7"
   },
   {
    "name": "layout is deterministic per region",

@@ -20,9 +20,9 @@ function mk(o={}){const store={};const sb={console,Math,JSON,Number,String,Objec
  vm.createContext(sb);vm.runInContext(src,sb);return {sb,T,procs,ranks,A:sb.window.__STORYWORLD_AUTOLEVEL_R237__};}
 {const {sb,T,procs,ranks,A}=mk({points:10});const b=A.step();
  ok('talents (cost 1) are bought first, dream-only talent skipped outside DREAM',T.vital===2&&T.edge===1&&!T.dreamOnly,{T,b});
- ok('then the cheapest Z·X·C proc and aura at cost 1, never egoAura / dreamAura (STORY) / thread motif',procs['hwando:w']===1&&procs['hwando:e']===1&&procs['hwando:r']===1&&!ranks.egoAura&&!ranks.dreamAura&&!ranks.threadCrossR64,{procs,ranks,b});
+ ok('then the cheapest Z·X·C proc and aura at cost 1, never egoAura / dreamAura (STORY); R663: thread motifs are bought too',procs['hwando:w']===1&&procs['hwando:e']===1&&procs['hwando:r']===1&&!ranks.egoAura&&!ranks.dreamAura,{procs,ranks,b});
  ok('one step buys at most 6, saves once and shows one toast',b.length===6&&sb.saves===1&&sb.toasts.length===1&&/자동 스킬레벨업/.test(sb.toasts[0]),{b,toasts:sb.toasts});
- const b2=A.step();ok('the next step spends the rest on the cheapest remaining (cost-1 auras) and stops when nothing is affordable',sb.player.points>=0&&ranks.endlessPower===1&&ranks.endlessVital===1&&b2.length===2&&A.candidates().length===0,{b2,points:sb.player.points,ranks});}
+ const b2=A.step();ok('the next step spends the rest on the cheapest remaining (cost-1 auras) and stops when nothing is affordable',sb.player.points>=0&&ranks.endlessPower===1&&ranks.endlessVital===1&&ranks.threadCrossR64===1&&b2.length===3&&A.candidates().length===0,{b2,points:sb.player.points,ranks});}
 {const {A,T}=mk({points:3,modal:'panel'});ok('does nothing while a panel/modal is open',A.step().length===0&&!T.vital);}
 {const {A,T}=mk({points:3,coop:true});ok('does nothing in co-op (host/guest purchase paths stay manual)',A.step().length===0&&!T.vital);}
 {const {A,T}=mk({points:3});A.set(false);ok('can be turned off',A.step().length===0&&!T.vital&&A.inspect().on===false);}

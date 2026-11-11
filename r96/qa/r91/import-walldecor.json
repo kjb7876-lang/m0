@@ -1,0 +1,72 @@
+{
+  "at": "2026-10-24T05:10:37.141Z",
+  "items": 64,
+  "sources": [
+    {
+      "file": "walldecor/walldecor_hospital_A.png",
+      "sha256": "d36531117d92a32f2aab1c6e781826f8a8c87fdc96f0ef3373f89d5909e51742"
+    },
+    {
+      "file": "walldecor/walldecor_hospital_B.png",
+      "sha256": "93630d91b5a2e9f39431b69ea887199af63a7b60fbe7fbb08dd9f0a9644fc4a9"
+    },
+    {
+      "file": "walldecor/walldecor_swamp_A.png",
+      "sha256": "15e2803daaf78063dc79ff4172a53c2b25501a926efd511d38a495419b3d797a"
+    },
+    {
+      "file": "walldecor/walldecor_swamp_B.png",
+      "sha256": "8d4bf6ed08c8a8ee7c7a6fbc0ec567a389826f6f63f49f4cca698c7be30f7a01"
+    },
+    {
+      "file": "walldecor/walldecor_stone_A.png",
+      "sha256": "fcdf77e279675c6b2fa3005e47f8e5b5bff390c650b45c3c37444ada4aa3a117"
+    },
+    {
+      "file": "walldecor/walldecor_stone_B.png",
+      "sha256": "a7c1fa080f1030f8ea861cdaff6332044fda2a1f71601c472a0212e2f39c9cc3"
+    },
+    {
+      "file": "walldecor/walldecor_cave_A.png",
+      "sha256": "70a850c7b8ab1e1b2b11b051414af9ea0fc07bdaf216fb8659775993c8b1355c"
+    },
+    {
+      "file": "walldecor/walldecor_cave_B.png",
+      "sha256": "466ad333b57c886892cb7454bc79f505d4e76b96f95e2cb21614d947ec9f81ca"
+    },
+    {
+      "file": "walldecor/walldecor_ash_A.png",
+      "sha256": "039a900c39936e1b801b68fca9c4284081abae5df4f6ec79c99817f3ba65f062"
+    },
+    {
+      "file": "walldecor/walldecor_ash_B.png",
+      "sha256": "dd0ad63fb94520dc964cddfa39cbea2316f47401e0d65ce6f5b0ff8304a810ee"
+    },
+    {
+      "file": "walldecor/walldecor_domestic_A.png",
+      "sha256": "900cd65c0d25419ced4a9da2cfe65c18576a9de8da0d12e34aa6e77132bdd49d"
+    },
+    {
+      "file": "walldecor/walldecor_domestic_B.png",
+      "sha256": "6ae4feeca18b7de509ddf0b664a8321c329a9fd611b9ced9c8c524d9647f543f"
+    },
+    {
+      "file": "walldecor/walldecor_dream_A.png",
+      "sha256": "a4446bf9a60cfd95f2c39a60a32db701dee425d044194eab6587a933790e3a7d"
+    },
+    {
+      "file": "walldecor/walldecor_dream_B.png",
+      "sha256": "91e727f7986cce6862afc69ca9e98d4954695c05924f8f5851e317f143cdb422"
+    },
+    {
+      "file": "walldecor/walldecor_regional_A.png",
+      "sha256": "5c1a2f1d5d8b2f4f5ab9649806d860ad70f4390737590e68a588d56c5ee5bde7"
+    },
+    {
+      "file": "walldecor/walldecor_regional_B.png",
+      "sha256": "e58e7da15793deea8f053e83b03595933b86c2cc87f223b03853ab2d5a7ad64b"
+    }
+  ],
+  "fringeTexelsRecoloured": 1336016,
+  "outputBytes": 3247049
+}

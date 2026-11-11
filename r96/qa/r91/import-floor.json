@@ -1,0 +1,72 @@
+{
+  "at": "2026-10-24T05:38:52.874Z",
+  "items": 64,
+  "sources": [
+    {
+      "file": "remains/remains_human-cultist.png",
+      "sha256": "3ffa1f1b3bb5d07ef0e391ef0c173b9febc6055afd460d5f2a53fd86b2065bea"
+    },
+    {
+      "file": "remains/remains_undead.png",
+      "sha256": "3d899de2e74aac387beafb6972efaec7cd9a4fcbc3d7678c0d91eebc93afb64e"
+    },
+    {
+      "file": "remains/remains_demon-beast.png",
+      "sha256": "b8f393a013c5f08ed08159f4410aba07d52e514bc9855b140d59584305ee90fb"
+    },
+    {
+      "file": "remains/remains_machine-cyborg.png",
+      "sha256": "cad08219b706da48ca765858df39c1aa156414e76ee0adb84a7040a7069a4b3a"
+    },
+    {
+      "file": "remains/remains_specter-echo.png",
+      "sha256": "9b1881cc61450901881a360013595be4004573d8a996d60c8f633dd5ba5a6e2c"
+    },
+    {
+      "file": "remains/remains_slime-rot.png",
+      "sha256": "010e9eb9f0e0ca7fd6c12af20083215a5997c6c7a87cc9e86ed80d58781f4d15"
+    },
+    {
+      "file": "remains/remains_insect-spider.png",
+      "sha256": "298c6c8f4055cf24f69f6f0b7dbe9c9f59f458eeb4c5873553bf6e509029c162"
+    },
+    {
+      "file": "remains/remains_crystal-core.png",
+      "sha256": "ea64a7a4f5328fe090b225bc7845bee8bb2532bba4e0e3c79a2d51ce929e777b"
+    },
+    {
+      "file": "stain/stain_human-cultist.png",
+      "sha256": "daa39acecb9ec0549b35892608ba8e78a7e0da2a3d948b37ef0b0b4bf4f0d1fe"
+    },
+    {
+      "file": "stain/stain_undead.png",
+      "sha256": "595fecb38234743192c634761b21b8c91b7ef4407deb57fc2a0612272fb5e3fe"
+    },
+    {
+      "file": "stain/stain_demon-beast.png",
+      "sha256": "b9c7bc457f56c46ff6d5b717157972eef6d05f92906b0f2ed167611f9bec51a6"
+    },
+    {
+      "file": "stain/stain_machine-cyborg.png",
+      "sha256": "748ebce1736a5f2bffc93ae5e31d11cefd1eeeefb36d278b4c4c999260c414da"
+    },
+    {
+      "file": "stain/stain_specter-echo.png",
+      "sha256": "9e0bdc740e740dc64b6c9ba55bcc555a6120834db2ee123ea685d34557a7d427"
+    },
+    {
+      "file": "stain/stain_slime-rot.png",
+      "sha256": "665c5a0942be7e30c0014830350de55dc916e586d4ff115b989c1487613e8f4d"
+    },
+    {
+      "file": "stain/stain_insect-spider.png",
+      "sha256": "b5ab69c0e1f5ab40a5707a715005f2d2ec8dd2156b2f32959424f832440cfc54"
+    },
+    {
+      "file": "stain/stain_crystal-core.png",
+      "sha256": "1229508af7bf0f9746f893111d92ab7f7606dcf4609feb4641e5e412c6415e44"
+    }
+  ],
+  "fringeTexelsRecoloured": 1211860,
+  "outputBytes": 2712466
+}

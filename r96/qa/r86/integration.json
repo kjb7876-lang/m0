@@ -1,0 +1,18 @@
+{
+  "revision": "R86/V10",
+  "pcDefaultViewExpansion": 1.5,
+  "pcDefaultViewArea": 2.25,
+  "championBodyScale": 2,
+  "championHPScale": 6,
+  "championAttackScale": 6,
+  "baseline": "Preserved V9/R85",
+  "testStoragePrefix": "storyworld.hospital-three-pc.maze.v10:",
+  "suppliedDynamicPackageEnabled": false,
+  "dynamic80RecipesGameLoaded": false,
+  "selectedStaticPNGsEnabled": true,
+  "originalNativeSkillsPreserved": true,
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "publicDeploymentChanged": false
+}

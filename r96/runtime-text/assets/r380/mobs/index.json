@@ -84,19 +84,26 @@
   {
    "id": "dys-siege-gunner-v2",
    "kind": "strip",
-   "path": "assets/r380/mobs/dys-siege-gunner-v2.webp",
+   "path": "assets/r380/mobs/dys-siege-gunner-v2-walk-d1.webp",
    "cell": [
     256,
     320
    ],
-   "cols": 4,
+   "cols": 12,
    "pivot": [
     129.75,
     300.5
    ],
    "visibleHeight": 251.2,
    "move": [
-    0
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
    ],
    "attack": [
     0,
@@ -118,8 +125,8 @@
     ],
     "rename": "중장 광선포병"
    },
-   "bytes": 224894,
-   "sha256": "9790780db70b6ac6a3e1edd50fb4d5a562c2cbda3a4c197263d39cf99cb392c0",
+   "bytes": 159196,
+   "sha256": "d22158b227837635eb6c52ea4381effc40953ecd87fa9fe455352fce171cfd79",
    "source": [
     {
      "file": "fire-00.png",
@@ -138,24 +145,32 @@
      "sha256": "af466108b870fc09d078279d7395486d1aad53b888428ea4c82763060f8b0c63"
     }
    ],
-   "finalArt": false
+   "finalArt": false,
+   "walkSource": "Dots CX-0067MV_dys-siege-gunner-v2_walk8.png (색은 원본 0칸에 맞춤, R615)"
   },
   {
    "id": "dys-prism-stalker-v2",
    "kind": "strip",
-   "path": "assets/r380/mobs/dys-prism-stalker-v2.webp",
+   "path": "assets/r380/mobs/dys-prism-stalker-v2-walk-d1.webp",
    "cell": [
     256,
     320
    ],
-   "cols": 4,
+   "cols": 12,
    "pivot": [
     128.0,
     300.0
    ],
    "visibleHeight": 300.0,
    "move": [
-    0
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
    ],
    "attack": [
     0,
@@ -177,8 +192,8 @@
     ],
     "rename": "프리즘 저격병"
    },
-   "bytes": 133396,
-   "sha256": "89f45b0f8d2955f4f92124eeef5b6d73adb3cc5f1acf2cf9e662848918217898",
+   "bytes": 138032,
+   "sha256": "ab27a3da1b5ee561a91ca93845022feb7374e22344578fac4714b714efe57789",
    "source": [
     {
      "file": "fire-00.png",
@@ -197,24 +212,32 @@
      "sha256": "16022c846c109fdab9f14d09d33dcd931704652249c07c3105251e64ebfb1985"
     }
    ],
-   "finalArt": false
+   "finalArt": false,
+   "walkSource": "Dots CX-0067MV_dys-prism-stalker-v2_walk8.png (색은 원본 0칸에 맞춤, R615)"
   },
   {
    "id": "dys-pulse-raider-v2",
    "kind": "strip",
-   "path": "assets/r380/mobs/dys-pulse-raider-v2.webp",
+   "path": "assets/r380/mobs/dys-pulse-raider-v2-walk-d1.webp",
    "cell": [
     256,
     320
    ],
-   "cols": 4,
+   "cols": 12,
    "pivot": [
     148.75,
     300.0
    ],
    "visibleHeight": 265.0,
    "move": [
-    0
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
    ],
    "attack": [
     0,
@@ -236,8 +259,8 @@
     ],
     "rename": "펄스 척후병"
    },
-   "bytes": 168986,
-   "sha256": "1db0236874736742c8d01119771623f749950b6bc925213ada449bb0233350b7",
+   "bytes": 144940,
+   "sha256": "09374293b800ab8a8acaab9c29e76e118f5ef9129d867930b19b7d1c5984d063",
    "source": [
     {
      "file": "fire-00.png",
@@ -256,7 +279,8 @@
      "sha256": "5b2984d8e85f8b0e3ef9b5a958a797436a790617ca1ee5f567cfa37b7f2f5096"
     }
    ],
-   "finalArt": false
+   "finalArt": false,
+   "walkSource": "Dots CX-0067MV_dys-pulse-raider-v2_walk8.png (색은 원본 0칸에 맞춤, R615)"
   },
   {
    "id": "dys-engineer-v2",
@@ -3726,19 +3750,26 @@
   {
    "id": "swamp-root-stalker-darkgreen-v2",
    "kind": "strip",
-   "path": "assets/r380/mobs/swamp-root-stalker-darkgreen-v2.webp",
+   "path": "assets/r380/mobs/swamp-root-stalker-darkgreen-v2-walk-d1.webp",
    "cell": [
-    448,
-    384
+    373,
+    320
    ],
-   "cols": 4,
+   "cols": 12,
    "pivot": [
-    244.25,
-    325.5
+    203.36,
+    271.01
    ],
-   "visibleHeight": 268.5,
+   "visibleHeight": 223.55,
    "move": [
-    0
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
    ],
    "attack": [
     1,
@@ -3754,8 +3785,8 @@
     "zone": "dist02",
     "name": "^(늪 )?뿌리 추적자"
    },
-   "bytes": 234984,
-   "sha256": "f57947df4adf530b8a2383bca01f8526fe1df55593dabf528eb8e5841fafc6cb",
+   "bytes": 160368,
+   "sha256": "06a0e42f3a27386ab6be4b1e40ef635fd1c6c29d12018b3cf6c97010f0dd4e63",
    "source": [
     {
      "file": "01-idle.png",
@@ -3774,7 +3805,8 @@
      "sha256": "5c9898cf425fba57d3458582ed6ae3b3c9415b928dd6e2ec482b296c8cd59a2c"
     }
    ],
-   "finalArt": false
+   "finalArt": false,
+   "walkSource": "Dots CX-0067MV_swamp-root-stalker-darkgreen-v2_walk8.png (색은 원본 0칸에 맞춤, R615)"
   },
   {
    "id": "wrath-hound-v1",
@@ -3852,19 +3884,26 @@
   {
    "id": "root-stalker-r74-plain",
    "kind": "strip",
-   "path": "assets/r380/mobs/root-stalker-r74-plain.webp",
+   "path": "assets/r380/mobs/root-stalker-r74-plain-walk-d1.webp",
    "cell": [
     288,
     176
    ],
-   "cols": 4,
+   "cols": 12,
    "pivot": [
     168.25,
     170.5
    ],
    "visibleHeight": 122.1,
    "move": [
-    0
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
    ],
    "attack": [
     1,
@@ -3880,8 +3919,8 @@
     "zone": "dist00",
     "name": "^뿌리 추적자"
    },
-   "bytes": 81584,
-   "sha256": "72deaa9fd0f53545500a765a37e7c210d5b277c2d85d7a9bbdb46ab61a2fc00b",
+   "bytes": 79336,
+   "sha256": "d742f8a19d157a2a98fbbbb14d2d27f3321e0f6cd58a7c73fb6e7964ab9155cd",
    "source": [
     {
      "file": "01-idle.png",
@@ -3900,7 +3939,8 @@
      "sha256": "dacf9c60d7b1b527cd3cd039ea16ca31fde0f2d16018918e5983a6182d792ecc"
     }
    ],
-   "finalArt": false
+   "finalArt": false,
+   "walkSource": "Dots CX-0067MV_root-stalker-r74-plain_walk8.png (색은 원본 0칸에 맞춤, R615)"
   },
   {
    "id": "hexagram-experiment-m031-v1",
@@ -7740,19 +7780,26 @@
   {
    "id": "legacy-m110-time-guardian-v3",
    "kind": "strip",
-   "path": "assets/r380/mobs/legacy-m110-time-guardian-v3.webp",
+   "path": "assets/r380/mobs/legacy-m110-time-guardian-v3-walk-d1.webp",
    "cell": [
     192,
     256
    ],
-   "cols": 4,
+   "cols": 12,
    "pivot": [
     102.25,
     199.0
    ],
    "visibleHeight": 151.0,
    "move": [
-    0
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
    ],
    "attack": [
     0,
@@ -7769,8 +7816,8 @@
     "zone": "kair02",
     "name": "^시간수문장 46"
    },
-   "bytes": 120976,
-   "sha256": "1b6fb3fc8cdf3e3b12390dbb65745990bd96835c0b931ac7901bccd718b93544",
+   "bytes": 101322,
+   "sha256": "a9e9b9c3459516b38c16cf612f709b6590e1b730f49867624cd9a7548b5eda8c",
    "source": [
     {
      "file": "frame_01.png",
@@ -7789,24 +7836,32 @@
      "sha256": "3c209549de3dffd39853d588a719f904dffd0ac9bc5544dba468957f3d223ab8"
     }
    ],
-   "finalArt": false
+   "finalArt": false,
+   "walkSource": "Dots CX-0067MV_legacy-m110-time-guardian-v3_walk8.png (색은 원본 0칸에 맞춤, R615)"
   },
   {
    "id": "legacy-m119-nameless-scar-v4",
    "kind": "strip",
-   "path": "assets/r380/mobs/legacy-m119-nameless-scar-v4.webp",
+   "path": "assets/r380/mobs/legacy-m119-nameless-scar-v4-walk-d1.webp",
    "cell": [
     192,
     256
    ],
-   "cols": 4,
+   "cols": 12,
    "pivot": [
     98.25,
     219.0
    ],
    "visibleHeight": 160.0,
    "move": [
-    0
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
    ],
    "attack": [
     0,
@@ -7823,8 +7878,8 @@
     "zone": "hando02",
     "name": "^무명 검흔"
    },
-   "bytes": 111378,
-   "sha256": "d48044981925f00dbbc0be135f8432de45ac315270d50f7974e5641748557bf6",
+   "bytes": 120236,
+   "sha256": "34be66f6cd66653844e6add927f867985c1a2027466f2c6c5fffa2189eeb1dfb",
    "source": [
     {
      "file": "frame_01.png",
@@ -7843,7 +7898,8 @@
      "sha256": "af0407970cf3e84c778203f6cb96ceda32e7ce84c83fc222792278a5d634d021"
     }
    ],
-   "finalArt": false
+   "finalArt": false,
+   "walkSource": "Dots CX-0067MV_legacy-m119-nameless-scar-v4_walk8.png (색은 원본 0칸에 맞춤, R615)"
   },
   {
    "id": "legacy-m124-silverless-shadow-v4",
@@ -8051,19 +8107,26 @@
   {
    "id": "legacy-m134-nightmare-v4",
    "kind": "strip",
-   "path": "assets/r380/mobs/legacy-m134-nightmare-v4.webp",
+   "path": "assets/r380/mobs/legacy-m134-nightmare-v4-walk-d1.webp",
    "cell": [
     192,
     256
    ],
-   "cols": 4,
+   "cols": 12,
    "pivot": [
     92.0,
     214.5
    ],
    "visibleHeight": 180.5,
    "move": [
-    0
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
    ],
    "attack": [
     0,
@@ -8080,8 +8143,8 @@
     "zone": "cult05",
     "name": "^생체기계 악몽"
    },
-   "bytes": 159632,
-   "sha256": "939b7fd8b4d9bef516fa98c731eb9d9c00d7aa8e4818c6aa50b4315023eb4a8d",
+   "bytes": 143118,
+   "sha256": "b50f409891633bc70035999eee79f6cb45fabad4da838d7ee103c625939c6faa",
    "source": [
     {
      "file": "frame_01.png",
@@ -8100,6 +8163,638 @@
      "sha256": "a739ffb35331afb82b7b68330b26f50977323893306b78187997c0ccf079d535"
     }
    ],
+   "finalArt": false,
+   "walkSource": "Dots CX-0067MV_legacy-m134-nightmare-v4_walk8.png (색은 원본 0칸에 맞춤, R615)"
+  },
+  {
+   "id": "hando-timeless-silver-scout-walk-d1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/hando-timeless-silver-scout-walk-d1.webp",
+   "cell": [
+    320,
+    320
+   ],
+   "cols": 9,
+   "pivot": [
+    159.62,
+    303.92
+   ],
+   "visibleHeight": 283.25,
+   "move": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "attack": [
+    0
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "hando01",
+    "name": "^악몽 정찰체"
+   },
+   "bytes": 236252,
+   "sha256": "e3b474cb28524c7f233da802a4c0c5c6e5ca1b6704250f71e5c2c14406612a35",
+   "source": [
+    {
+     "file": "assets/r99/clean/assets/hando-v3123/timeless_silver_scout.webp"
+    },
+    {
+     "file": "CX-0067MV_timeless_silver_scout_walk8.png"
+    }
+   ],
+   "walkSource": "Dots CX-0067MV_timeless_silver_scout_walk8.png (색은 원본에 맞춤, R615)",
+   "finalArt": false
+  },
+  {
+   "id": "hando-silver-seal-sentinel-walk-d1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/hando-silver-seal-sentinel-walk-d1.webp",
+   "cell": [
+    320,
+    320
+   ],
+   "cols": 9,
+   "pivot": [
+    159.62,
+    306.99
+   ],
+   "visibleHeight": 287.08,
+   "move": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "attack": [
+    0
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "hando02",
+    "name": "^붕괴선 파수병"
+   },
+   "bytes": 160288,
+   "sha256": "81bf702dc68e1d8607682fde0c62e7bd5e783e32210993c042b786222d63fd2e",
+   "source": [
+    {
+     "file": "assets/r99/clean/assets/hando-v3123/silver_seal_sentinel.webp"
+    },
+    {
+     "file": "CX-0067MV_silver_seal_sentinel_walk8.png"
+    }
+   ],
+   "walkSource": "Dots CX-0067MV_silver_seal_sentinel_walk8.png (색은 원본에 맞춤, R615)",
+   "finalArt": false
+  },
+  {
+   "id": "hando-memory-excision-connector-walk-d1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/hando-memory-excision-connector-walk-d1.webp",
+   "cell": [
+    320,
+    320
+   ],
+   "cols": 9,
+   "pivot": [
+    159.62,
+    306.22
+   ],
+   "visibleHeight": 288.61,
+   "move": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "attack": [
+    0
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "hando02",
+    "name": "^기억절제 연결자"
+   },
+   "bytes": 222970,
+   "sha256": "597566e46a6dd1a0d214d847cf1b2499a205d67bd1fb67771874a3790ff09368",
+   "source": [
+    {
+     "file": "assets/r99/clean/assets/hando-v3123/memory_excision_connector.webp"
+    },
+    {
+     "file": "CX-0067MV_memory_excision_connector_walk8.png"
+    }
+   ],
+   "walkSource": "Dots CX-0067MV_memory_excision_connector_walk8.png (색은 원본에 맞춤, R615)",
+   "finalArt": false
+  },
+  {
+   "id": "murder-rooftop-echo-float-d1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/murder-rooftop-echo-float-d1.webp",
+   "cell": [
+    275,
+    320
+   ],
+   "cols": 7,
+   "pivot": [
+    137.29,
+    311.61
+   ],
+   "visibleHeight": 303.71,
+   "move": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "attack": [
+    0
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "murder01",
+    "name": "^끊어진 통화의 인과 잔향"
+   },
+   "bytes": 189038,
+   "sha256": "3473cc5c827c20f848f7d7e5bb889a53731b80f02da6c5e388a337f642816a5d",
+   "source": [
+    {
+     "file": "assets/murder/rooftop_echo.png"
+    },
+    {
+     "file": "CX-0067MV_rooftop_echo_walk8.png"
+    }
+   ],
+   "walkSource": "Dots CX-0067MV_rooftop_echo_walk8.png (색은 원본에 맞춤, R615)",
+   "finalArt": false
+  },
+  {
+   "id": "cult-memory-orb-float-d1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/cult-memory-orb-float-d1.webp",
+   "cell": [
+    320,
+    320
+   ],
+   "cols": 7,
+   "pivot": [
+    160.0,
+    277.5
+   ],
+   "visibleHeight": 245.62,
+   "move": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "attack": [
+    0
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "cult01",
+    "name": "^기계화 복종 봉인구"
+   },
+   "bytes": 133980,
+   "sha256": "628ea18e5d80377c871e62f32f4b353fad311d0431f80fa7a51e17de13bfc4e2",
+   "source": [
+    {
+     "file": "assets/r99/clean/assets/u2/generated-v350/u2_memory_orb.webp"
+    },
+    {
+     "file": "CX-0067MV_u2_memory_orb_walk8.png"
+    }
+   ],
+   "walkSource": "Dots CX-0067MV_u2_memory_orb_walk8.png (색은 원본에 맞춤, R615)",
+   "finalArt": false
+  },
+  {
+   "id": "cult-nerve-cable-devourer-walk-d1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/cult-nerve-cable-devourer-walk-d1.webp",
+   "cell": [
+    320,
+    320
+   ],
+   "cols": 9,
+   "pivot": [
+    163.06,
+    307.75
+   ],
+   "visibleHeight": 290.91,
+   "move": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "attack": [
+    0
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "cult02",
+    "name": "^신경 케이블 포식체"
+   },
+   "bytes": 183172,
+   "sha256": "42c2b5c79051ed67460b941924a0100971de808d9df8f84cf65c27dba734f5bd",
+   "source": [
+    {
+     "file": "assets/cult-v3123/black_robed_nightmare_demon.webp"
+    },
+    {
+     "file": "CX-0067MV_black_robed_nightmare_demon_walk8.png"
+    }
+   ],
+   "walkSource": "Dots CX-0067MV_black_robed_nightmare_demon_walk8.png (색은 원본에 맞춤, R615)",
+   "finalArt": false
+  },
+  {
+   "id": "ep1b-seal-residual-float-d1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/ep1b-seal-residual-float-d1.webp",
+   "cell": [
+    320,
+    320
+   ],
+   "cols": 7,
+   "pivot": [
+    160.38,
+    319.23
+   ],
+   "visibleHeight": 148.52,
+   "move": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "attack": [
+    0
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "ep1b01",
+    "name": "^일흔두 번째 인장 잔류체"
+   },
+   "bytes": 92898,
+   "sha256": "429e26b1eb6e61390e1e70dc69a023acfb155a66a5d074f64b341b5285434b45",
+   "source": [
+    {
+     "file": "assets/episode1b/generated-v394/seal_residual.webp"
+    },
+    {
+     "file": "CX-0067MV_seal_residual_walk8.png"
+    }
+   ],
+   "walkSource": "Dots CX-0067MV_seal_residual_walk8.png (색은 원본에 맞춤, R615)",
+   "finalArt": false
+  },
+  {
+   "id": "ep1b-red-heel-blade-walk-d1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/ep1b-red-heel-blade-walk-d1.webp",
+   "cell": [
+    320,
+    320
+   ],
+   "cols": 9,
+   "pivot": [
+    160.0,
+    320.0
+   ],
+   "visibleHeight": 209.0,
+   "move": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "attack": [
+    0
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "ep1b05",
+    "name": "^붉은 하이힐 칼날"
+   },
+   "bytes": 152906,
+   "sha256": "54059336c9a19f9159261e3aa15d7f5620840abf1defa11b0de20e533019ed00",
+   "source": [
+    {
+     "file": "assets/episode1b/generated-v394/lust_asmodai.webp"
+    },
+    {
+     "file": "CX-0067MV_lust_asmodai_walk8.png"
+    }
+   ],
+   "walkSource": "Dots CX-0067MV_lust_asmodai_walk8.png (색은 원본에 맞춤, R615)",
+   "finalArt": false
+  },
+  {
+   "id": "ep1b-banknote-blade-walk-d1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/ep1b-banknote-blade-walk-d1.webp",
+   "cell": [
+    320,
+    320
+   ],
+   "cols": 9,
+   "pivot": [
+    160.38,
+    320.0
+   ],
+   "visibleHeight": 142.39,
+   "move": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "attack": [
+    0
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "ep1b06",
+    "name": "^칼날이 된 지폐"
+   },
+   "bytes": 112490,
+   "sha256": "9616db6b5aba675e01703e6e2ecbe6371832c9b7f57aa4e03ec2ae390641bcbf",
+   "source": [
+    {
+     "file": "assets/episode1b/generated-v394/greed_fox_hound.webp"
+    },
+    {
+     "file": "CX-0067MV_greed_fox_hound_walk8.png"
+    }
+   ],
+   "walkSource": "Dots CX-0067MV_greed_fox_hound_walk8.png (색은 원본에 맞춤, R615)",
+   "finalArt": false
+  },
+  {
+   "id": "ep1b-steel-jaw-hound-walk-d1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/ep1b-steel-jaw-hound-walk-d1.webp",
+   "cell": [
+    320,
+    320
+   ],
+   "cols": 9,
+   "pivot": [
+    159.23,
+    320.0
+   ],
+   "visibleHeight": 219.71,
+   "move": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "attack": [
+    0
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "ep1b09",
+    "name": "^강철 턱의 사이보그 개"
+   },
+   "bytes": 122754,
+   "sha256": "85b4fe6f2fd8133dabf2a4fc8abf431080d01898935865de3cb9088139f1ced6",
+   "source": [
+    {
+     "file": "assets/episode1b/generated-v394/polar_cyborg_hound.webp"
+    },
+    {
+     "file": "CX-0067MV_polar_cyborg_hound_walk8.png"
+    }
+   ],
+   "walkSource": "Dots CX-0067MV_polar_cyborg_hound_walk8.png (색은 원본에 맞춤, R615)",
+   "finalArt": false
+  },
+  {
+   "id": "u2-false-mercy-collector-walk-d1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/u2-false-mercy-collector-walk-d1.webp",
+   "cell": [
+    320,
+    320
+   ],
+   "cols": 9,
+   "pivot": [
+    159.69,
+    278.12
+   ],
+   "visibleHeight": 246.25,
+   "move": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "attack": [
+    0
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "u202",
+    "name": "^가짜 자비 수집가"
+   },
+   "bytes": 178860,
+   "sha256": "26385482ff870b101003727e4a822c5c62503eba06b05ee3d81329a22e9870b3",
+   "source": [
+    {
+     "file": "assets/r99/clean/assets/u2/generated-v350/u2_reactor_collector.webp"
+    },
+    {
+     "file": "CX-0067MV_u2_reactor_collector_walk8.png"
+    }
+   ],
+   "walkSource": "Dots CX-0067MV_u2_reactor_collector_walk8.png (색은 원본에 맞춤, R615)",
+   "finalArt": false
+  },
+  {
+   "id": "cult-mech-legs-walk-d1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/cult-mech-legs-walk-d1.webp",
+   "cell": [
+    320,
+    320
+   ],
+   "cols": 9,
+   "pivot": [
+    159.23,
+    319.23
+   ],
+   "visibleHeight": 218.18,
+   "move": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "attack": [
+    0
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "cult05",
+    "name": "^설원 아래의 기계 다리"
+   },
+   "bytes": 87644,
+   "sha256": "0f4bf7b3396f5c32f6bcfae117456ea9379481896fc9eba9eeb66a0cb30d369f",
+   "source": [
+    {
+     "file": "assets/episode1b/generated-v394/polar_chairman.webp"
+    },
+    {
+     "file": "CX-0067MV_polar_chairman_walk8.png"
+    }
+   ],
+   "walkSource": "Dots CX-0067MV_polar_chairman_walk8.png (색은 원본에 맞춤, R615)",
+   "finalArt": false
+  },
+  {
+   "id": "cult-ego-binder-walk-d1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/cult-ego-binder-walk-d1.webp",
+   "cell": [
+    320,
+    320
+   ],
+   "cols": 9,
+   "pivot": [
+    160.0,
+    303.16
+   ],
+   "visibleHeight": 279.43,
+   "move": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "attack": [
+    0
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "cult03",
+    "name": "^EGO 구속 연결자"
+   },
+   "bytes": 201626,
+   "sha256": "ca4e2ba1a48ad69a1bc33081bd219777a286318e609e0c1a31de97115a639aea",
+   "source": [
+    {
+     "file": "assets/cult-v3123/black_rose_chip_penitent.webp"
+    },
+    {
+     "file": "CX-0067MV_black_rose_chip_penitent_walk8.png"
+    }
+   ],
+   "walkSource": "Dots CX-0067MV_black_rose_chip_penitent_walk8.png (색은 원본에 맞춤, R615)",
    "finalArt": false
   }
  ]

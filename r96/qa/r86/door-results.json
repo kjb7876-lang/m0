@@ -1,0 +1,23 @@
+{
+  "schema": "r86-door-front-surface/v1",
+  "checks": [
+    {
+      "name": "Hospital registers both three original physical doors and the packaged clinical art",
+      "passed": true
+    },
+    {
+      "name": "Native hospital entry preloads the new door before drawing",
+      "passed": true
+    },
+    {
+      "name": "Exception",
+      "passed": false,
+      "detail": "Error: Python \n    at C:\\Users\\kim\\Documents\\StoryWorld-R88\\hospital-refinement-v12\\qa\\r86\\door-check.cjs:17:154"
+    }
+  ],
+  "browserVerified": false,
+  "GPUVerified": false,
+  "method": "Native hospital door capture and original DrawCommands replay to pinned Three; actual image alpha sample and ray/depth regression. Scripted opening is a fixture, not natural play.",
+  "failure": "Error: Python \n    at C:\\Users\\kim\\Documents\\StoryWorld-R88\\hospital-refinement-v12\\qa\\r86\\door-check.cjs:17:154",
+  "passed": false
+}

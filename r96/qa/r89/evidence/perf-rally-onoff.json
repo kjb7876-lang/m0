@@ -1,0 +1,43 @@
+{
+  "on": {
+    "label": "R89 on - hospital rally fight (semi-auto, HP keep)",
+    "frames": 205,
+    "p50": 33.3,
+    "p95": 83.3,
+    "p99": 133.3,
+    "max": 1599.2,
+    "long50": 21,
+    "heapMB": 146,
+    "sceneObjects": 258,
+    "commandRows": 111,
+    "geometries": 164,
+    "textures": 29,
+    "zone": "ep1a08",
+    "vw": 1280,
+    "vh": 720,
+    "dpr": 1.25,
+    "hidden": false
+  },
+  "off": {
+    "label": "R89 off (native cutaways, no grade) - same rally fight",
+    "frames": 268,
+    "p50": 33.3,
+    "p95": 83.3,
+    "p99": 233.3,
+    "max": 366.4,
+    "long50": 30,
+    "heapMB": 136.8,
+    "sceneObjects": 214,
+    "commandRows": 67,
+    "geometries": 121,
+    "textures": 27,
+    "zone": "ep1a08",
+    "vw": 1280,
+    "vh": 720,
+    "dpr": 1.25,
+    "hidden": false
+  },
+  "left1": 24,
+  "left2": 16,
+  "note": "Same live fight; enemy count/positions differ between the two 10 s windows. R89 off = modules loaded but every option disabled (native cutaways active)."
+}

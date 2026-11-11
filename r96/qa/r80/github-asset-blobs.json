@@ -1,0 +1,926 @@
+[
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/catalog.json",
+    "sha": "73cfe46f4365989fd4423268e2e8e9571a0b51b8",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-000.webp",
+    "sha": "1ed4006c0f248ba6f96986292ff4538a92eeea2f",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-001.webp",
+    "sha": "22076ea1c629ce508c96dcdd6ca33b26355f0493",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-002.webp",
+    "sha": "c47504f0e85f9d0bae2769b18d48a07a697e1591",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-003.webp",
+    "sha": "da6db32887db776be4283abf56de68cc16ee583c",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-004.webp",
+    "sha": "757d3ad2637069fe375c7e632727bd190913cae7",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-005.webp",
+    "sha": "dc5b6aa7d3c4e2d393ba1c739a569f5aedfc1f45",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-006.webp",
+    "sha": "07b2e79d269c009ba4b49d5f65241010610414ee",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-007.webp",
+    "sha": "0793301c3c687aaba9dd5a61ddcf1e67d683414f",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-008.webp",
+    "sha": "6232bbab76d558e57e08f86373792504b366a3ed",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-009.webp",
+    "sha": "1745d8290c71fe0db801a6ced54622a6ba92a6d8",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-010.webp",
+    "sha": "a91ab8c118cfb725dfc575deff18008e067650ef",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-011.webp",
+    "sha": "7c476c9d4f91c908b074304c99d3ed20344614ce",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-012.webp",
+    "sha": "3df7ad12ee8f07015e28972522859547b46dfd94",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-013.webp",
+    "sha": "f19c2e624698f687595f8cf7a806ceb0924c81c1",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-014.webp",
+    "sha": "03ed6b042693b1d351997456195e74c3c0c3c2d6",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-015.webp",
+    "sha": "9913dd5eb95a481409f52f490b9acecc7221755c",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-016.webp",
+    "sha": "b0b41be87d9fd34734ff5878323f71ad9aa514ad",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-017.webp",
+    "sha": "2f7504d37236197f2036068909525ff2186c449e",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-018.webp",
+    "sha": "123c56271fa6359bea89b8cf4f2f876914199129",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-019.webp",
+    "sha": "37943392e00123da87d14a77a89e67603d737940",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-020.webp",
+    "sha": "8f8db0c34b63cf82ae7a738850ce24087c792ea4",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-021.webp",
+    "sha": "d8ddb4cb57dd172fcaf9774607944085c1565eb8",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-022.webp",
+    "sha": "031094603ef080394d521cc7c84ba55ee197642e",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-023.webp",
+    "sha": "6c28901bb2cf8f8d7312a7c975691df3b80d6a4a",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-024.webp",
+    "sha": "0bc07a671d2d7e4f1c2fccc2fb272598e26347f5",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-025.webp",
+    "sha": "c54b1d50e136a4eaf39911ec12ae50ac4bdcd9b7",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-026.webp",
+    "sha": "06c6cabc9ff6ad42a2f169ff4b9f27c044d83fa1",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-027.webp",
+    "sha": "34b504156562687505ef641dc968c7354d3c8fc7",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-028.webp",
+    "sha": "e726f4d610e7066f7ba9e08024e28be0c38bcefa",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-029.webp",
+    "sha": "6a70132a6c685e8040265f3ea62e4ab484cc53d3",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-030.webp",
+    "sha": "738e89f075ea079c54591084df08bad23d87892a",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-031.webp",
+    "sha": "ddf9fee8c5bfab0150dea9f4f741deeb5f503aa6",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-032.webp",
+    "sha": "c8eaa2d0107ef0f21dced6b8b72157c10549ae7d",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-033.webp",
+    "sha": "0edb115c3e3a39eb0a0f4d627bb8f21c337f9be6",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-034.webp",
+    "sha": "87260ab2d0490869748c7ff55076305df5b86216",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-035.webp",
+    "sha": "27e194de1646e9e85e5d9e61458a664db7280bd3",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-036.webp",
+    "sha": "8c84541befcf9df3a0f93d4479b67515e68995fc",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-037.webp",
+    "sha": "08d2db5bc53b73efb60f78394325e50886e51647",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-038.webp",
+    "sha": "575eed7394347dcdbc577401f943058a5fa67cb1",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-039.webp",
+    "sha": "fa7abbfdf653be52a4b5c460475267cc95169ec9",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-040.webp",
+    "sha": "a113e9bd737ef9e7dc8074772a4e2f243f75df73",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-041.webp",
+    "sha": "d40ebf28366b5dd706219cfc8da6c2cd46a23eee",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-042.webp",
+    "sha": "29274a378cba6e518006df9b2b73694ec123d063",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-043.webp",
+    "sha": "e4b7502f70969747685146228fa77f933c5acda7",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-044.webp",
+    "sha": "2adb401d254760e8421d2280bdbdefe6d2faa4aa",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-045.webp",
+    "sha": "1efbcc204bd84d26efdb3a6e22e5355846d8e79d",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-046.webp",
+    "sha": "77213a5964cd47d0ec73ff41c6065e517c835dd2",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-047.webp",
+    "sha": "9df972ccef086b1a32e7cbe4f5e145bd0773853a",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-048.webp",
+    "sha": "98a18c119825c65a6c688d9ab376626ba8155555",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-049.webp",
+    "sha": "fc8d674bc552ff556ac4431becbaf1c5b057b1a5",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-050.webp",
+    "sha": "3494d570882b29e028e3a8b18e73529be1a7646c",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-051.webp",
+    "sha": "5e69f0edf05cd1b2a56d412af33cbbf0c6aaf20f",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-052.webp",
+    "sha": "540704a2e75f3a76db61509221a31f4ab9b959c7",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-053.webp",
+    "sha": "04f2f7c910316f4e36d35eef8c3e45ff9b840d1c",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-054.webp",
+    "sha": "b60bd32beb6b239d3c46b07fc69fb7be90dbe3d5",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-055.webp",
+    "sha": "c90778bf233ef3736a0c18a01030800031c1ee70",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-056.webp",
+    "sha": "d62255d1d0aba85940d24b01ac954ae0f080c769",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-057.webp",
+    "sha": "5c39a1a6510af9270d897d0fcdfde96d1187f111",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-058.webp",
+    "sha": "bc335ca81ec482b44273e44887953a0f9546f93d",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-059.webp",
+    "sha": "e5df404e933f074cda99a8593b5ce95c4f44c50c",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-060.webp",
+    "sha": "9cafbe0ab9d0cf08e4caee39decc47538dbbc0ba",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-061.webp",
+    "sha": "b91a68ed7ab02abb4df4818f6e6b4ae4355dfd59",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-062.webp",
+    "sha": "bcdfba8af859180fb885c5caca3fe56b30ec688b",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-063.webp",
+    "sha": "894b5c0547c028f208ec1d617994984542743ffb",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-064.webp",
+    "sha": "45475db51b36e6cf1b346a24c42b00a196e6990a",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-065.webp",
+    "sha": "2f4a34496dc0418013bd5c0f6f1de8645effd601",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-066.webp",
+    "sha": "7dc6dc0b3255a9c1e494bb68d1c35c5c90a0f7cb",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-067.webp",
+    "sha": "3d1f1d3c0aef4c471ec52003b02b2bdb70db690c",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-068.webp",
+    "sha": "60f51f9a7023596573ed452972fac47691bcd093",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-069.webp",
+    "sha": "8d6f615adf6f6c050160e531124da45cc1bd1296",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-070.webp",
+    "sha": "1e96b310227ad4381bc75f77185e83e9cea49214",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-071.webp",
+    "sha": "3dd82db71487181a2cb540fe8955529c7dc38157",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-072.webp",
+    "sha": "5a30a133d168c78d6e2e24648e25f451d7d0b5a3",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-073.webp",
+    "sha": "a4c3a365834dd196d5f3bb3d5ba73be7aeb92b0d",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-074.webp",
+    "sha": "85c52814886a7f256c0e2cc875552ee9a4ff5763",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-075.webp",
+    "sha": "61358ade8d87b82cbf65fb570ba2c4132ef577fe",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-076.webp",
+    "sha": "38e2d46bbdd716518fb26b77604d0a4c60554505",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-077.webp",
+    "sha": "e815aa3cc811f6d8385c5c5cdb6b9cef05991ec0",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-078.webp",
+    "sha": "59330acff51b7b6be1e31d58b7f71d2d736f727c",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-079.webp",
+    "sha": "aca278148e92a5e364724991044d23a9bc2d4bd7",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-080.webp",
+    "sha": "7f439f18dcffb5aaa9bdf2a70d04350af693e927",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-081.webp",
+    "sha": "63a581a3c9f3df0b7fb5a4f21bc1ccdffe7263ac",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-082.webp",
+    "sha": "c0470f4a6363c5911d8bfcffbf98f58c241733a1",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-083.webp",
+    "sha": "bb540c1df53d3ae887ecb45c9a106a8c14bf0b4f",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-084.webp",
+    "sha": "5d2de94db8b3b844bb2b3fde4bed1e6669aef72b",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-085.webp",
+    "sha": "2a1f2b6db2a8150084610f0d3290b89c5aba60b6",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-086.webp",
+    "sha": "624d4adfee6cb61c7356c5287640d3de4e7b83c4",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-087.webp",
+    "sha": "bd9cb490912b327cf92a2cf96fc66075ab505bd0",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-088.webp",
+    "sha": "02b1d3960cd813008ac83baac4703e7b5629290d",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-089.webp",
+    "sha": "0654c1b076ffbe4c9595a28505076f96ea2dafd5",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-090.webp",
+    "sha": "73dbb88d27faef76dcf7afe907d7315669c7e761",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-091.webp",
+    "sha": "6bd30e9becce8cdc6394222e84421f6ae3027878",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-092.webp",
+    "sha": "4eeb3df4e859cc09bca495cef558497e3c7e06d8",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-093.webp",
+    "sha": "0f6d73ab3e7b8e8e9df74592e5ea4d9386b467a3",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-094.webp",
+    "sha": "b436db9f048eaf45627b829456a66cff19a7bcd7",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-095.webp",
+    "sha": "58d30fbf409d4a7d8c03fda5a68eeb4dadbc777b",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-096.webp",
+    "sha": "0dbe30b84d5e2546acf31dc61211dc53a3b1935f",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-097.webp",
+    "sha": "1f167b3ca458ac77e1e0753de6dffe2e87a0f732",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-098.webp",
+    "sha": "97711962eef28829a362f23012003bc1a865d4cc",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-099.webp",
+    "sha": "0f939d8145e8b839b3cfb794af24fc0bf26cbb2b",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-100.webp",
+    "sha": "6aa662d532c315911af7e839b032fa6266ab988d",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-101.webp",
+    "sha": "c30b84890bd8403c902ff1af871fb3c4320b6363",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-102.webp",
+    "sha": "d895d67250a6d2b4f022127f277acb27623a816d",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-103.webp",
+    "sha": "eaa3184a2e232528363afb23533513887c6fb96a",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-104.webp",
+    "sha": "293c7b135b5d5a5f3877771bf43d624af4cb58b4",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-105.webp",
+    "sha": "dafeb2f364f60fb0b57960a6736575148f03d294",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-106.webp",
+    "sha": "b31731502738194ca07a3d1acd306fd4af7316e1",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-107.webp",
+    "sha": "cf165510a47b32fefc958b1c8ece86e0a3c65be3",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-108.webp",
+    "sha": "bda1a5c882d4d04bfcd9d569592019c733484b07",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-109.webp",
+    "sha": "74cb114d01407cb9be7c1603ba627afc462e5824",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-110.webp",
+    "sha": "2d50f2a1ce841f900b03c0091cd8bd42eec95296",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-111.webp",
+    "sha": "e5c1c365d497679b7f1c358b5a7cbefe091e7de7",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-112.webp",
+    "sha": "5362864035f5883f13f85c6009aa7185a5742c47",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-113.webp",
+    "sha": "f5bb0cb086b977648a4280ee76eb76ecb6c16bfc",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-114.webp",
+    "sha": "32a876b7a1343c14814598b6bb5ad73e7eb2806c",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-115.webp",
+    "sha": "2ed24cab229804274f3c9f93d506a2c3a5b2ddd1",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-116.webp",
+    "sha": "db07faefbcbf4e073f556689c8234c3dd2a9e206",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-117.webp",
+    "sha": "10fcc2e78bcc6dace193b3443dd272cc7605b622",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-118.webp",
+    "sha": "c847e55f4755615551d2953283894bac1909f8ce",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-119.webp",
+    "sha": "31a4266a34308ec42ab3e9449a8240561c1b6806",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-120.webp",
+    "sha": "a7401ceea410c69744ec85778ced784d6ce57390",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-121.webp",
+    "sha": "1bcea8e9553fcb37467e717255dfead1195d1f19",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-122.webp",
+    "sha": "3bc4d497c7380d88c441bbe6e7a0bcae69a14a10",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-123.webp",
+    "sha": "58424ba9e316ab20ce52ea4c2705de3f551d8e36",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-124.webp",
+    "sha": "38b9b514ac28e4241c8532bc7282179b6bf38d8d",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-125.webp",
+    "sha": "f1a655e20252ad15182cac488a5b0d2e47f593d6",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-126.webp",
+    "sha": "786e864d01c803f12368d61e248f43b7aace6807",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-127.webp",
+    "sha": "13314bd05f078be22b34aa90152f832ba39355da",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-128.webp",
+    "sha": "89d7c6d8693c6d0eadbde2c9e26b96da5ef5df6f",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-129.webp",
+    "sha": "253c8108389a4ca2acbd6fe0ffc7358fd13101d3",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-130.webp",
+    "sha": "87d442986cf4073da73752f7365591735b350b87",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-131.webp",
+    "sha": "efc98fc8cb377e55cfe4f28f43fb5fe9a907f9da",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-132.webp",
+    "sha": "131f7d468efe339d456dfb73bf2eadfb00c46ae7",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-133.webp",
+    "sha": "20ee5b4d7e0402a98c18b2fa0b8da7ea72fb7cd3",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-134.webp",
+    "sha": "9b39fa760ebd4e1e6c93637e70b4da051b74f93f",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-135.webp",
+    "sha": "3b8e3192d18b1f48ae68ced9693d5280d0777c0c",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-136.webp",
+    "sha": "5cc27d8943bf848d6cf093849fce5f2f4abe82a2",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-137.webp",
+    "sha": "57cc4db40b04cce52c79dc1fcb23846b423f48c3",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-138.webp",
+    "sha": "e79b4096f915a9b746a8cddd3cd5dc845d9c7af0",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-139.webp",
+    "sha": "8786e0783adf4a574e058463215f7b9ff0dd2dbb",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-140.webp",
+    "sha": "795db6cc1353666664022b23d28678b69b11a09a",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-141.webp",
+    "sha": "955506046af81d1bb373bd97b735bddc99ed425c",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-142.webp",
+    "sha": "c192c93cc3d2bc3a362458b18e138b0ef393a703",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-143.webp",
+    "sha": "164b6b49fb8ab52b005e788b4a05ae6a668fde45",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-144.webp",
+    "sha": "72bec200d71507500c9b4649eb941e5f4ae76ff0",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-145.webp",
+    "sha": "326f312e05d776821c5212b4f57896f477cbb074",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-146.webp",
+    "sha": "d299f4ea758b27477e076d17e3bf8a26262d5fc9",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-147.webp",
+    "sha": "938c5a4fa82737e7ef88a2319bbc7fd73636ebe4",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-148.webp",
+    "sha": "da0adf8441a201ed5238c2157c8ee697b340b5b0",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-149.webp",
+    "sha": "ac7a4ae8ba96025e6763d706d1aed2a39374591a",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-150.webp",
+    "sha": "d5d65bd01c998ab6dfdbfe579f0ef1d8cf27bee2",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-151.webp",
+    "sha": "2ed78d56299f91f33be8f324eecfdda9269ea5a6",
+    "mode": "100644",
+    "type": "blob"
+  },
+  {
+    "path": "pc-test-r80/overlay/assets/world-r80/r80-152.webp",
+    "sha": "6b34f898b9971d7af44ac2bf7c510434e4dda2bd",
+    "mode": "100644",
+    "type": "blob"
+  }
+]

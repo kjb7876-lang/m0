@@ -1,0 +1,274 @@
+{
+  "sourceHashes": {
+    "index.html": "7f642bd9057c03fb3b9a23050a75f4294927c7a632b1617bf3aab69d118c36f9",
+    "dist/phase1.js": "1e1cd26345345a583e10c5f5056d06750017c50bc150245503b03d7d646326a6",
+    "world-combat-r78.js": "2747c289e67a2eb232ea99b3c918974758cd7a3ed64d6af2c2a9668f74ad2657"
+  },
+  "zone": "dist02",
+  "progress": {
+    "STORY": {},
+    "DREAM": {}
+  },
+  "ward": false,
+  "actors": [
+    {
+      "id": "dist02:dist02-h1",
+      "nativeId": "dist02-h1",
+      "hp": 217.53055,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:dist02-g1",
+      "nativeId": "dist02-g1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:dist02-m1",
+      "nativeId": "dist02-m1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:dist02-sp1",
+      "nativeId": "dist02-sp1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:dist02-h1-w1-r1",
+      "nativeId": "dist02-h1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:dist02-g1-w1-r2",
+      "nativeId": "dist02-g1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:dist02-h1-w2-1",
+      "nativeId": "dist02-h1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "hidden"
+    },
+    {
+      "id": "dist02:dist02-g1-w2-2",
+      "nativeId": "dist02-g1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "hidden"
+    },
+    {
+      "id": "dist02:dist02-m1-w2-3",
+      "nativeId": "dist02-m1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "hidden"
+    },
+    {
+      "id": "dist02:dist02-sp1-w2-4",
+      "nativeId": "dist02-sp1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "hidden"
+    },
+    {
+      "id": "dist02:dist02-h1-w2-r1",
+      "nativeId": "dist02-h1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "hidden"
+    },
+    {
+      "id": "dist02:dist02-g1-w2-r2",
+      "nativeId": "dist02-g1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "hidden"
+    },
+    {
+      "id": "dist02:mb-dist02",
+      "nativeId": "mb-dist02",
+      "hp": 11065.56,
+      "maxHp": 11065.56,
+      "spawnState": "hidden"
+    },
+    {
+      "id": "dist02:r74-patrol:0",
+      "nativeId": "dist02-h1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:r74-patrol:1",
+      "nativeId": "dist02-g1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:r74-patrol:2",
+      "nativeId": "dist02-m1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:r74-patrol:3",
+      "nativeId": "dist02-sp1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:r74-patrol:4",
+      "nativeId": "dist02-h1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:r74-patrol:5",
+      "nativeId": "dist02-g1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:r75-pack:12",
+      "nativeId": "dist02-h1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:r75-pack:13",
+      "nativeId": "dist02-g1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:r75-pack:14",
+      "nativeId": "dist02-m1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:r75-pack:15",
+      "nativeId": "dist02-sp1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:r75-pack:16",
+      "nativeId": "dist02-h1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:r75-pack:17",
+      "nativeId": "dist02-g1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:r75-pack:18",
+      "nativeId": "dist02-h1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:r75-pack:19",
+      "nativeId": "dist02-g1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:r75-pack:20",
+      "nativeId": "dist02-m1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:r75-pack:21",
+      "nativeId": "dist02-sp1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:r75-pack:22",
+      "nativeId": "dist02-h1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:r75-pack:23",
+      "nativeId": "dist02-g1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:r75-pack:24",
+      "nativeId": "dist02-h1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:r75-pack:25",
+      "nativeId": "dist02-g1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:r75-pack:26",
+      "nativeId": "dist02-m1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:r75-pack:27",
+      "nativeId": "dist02-sp1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:r75-pack:28",
+      "nativeId": "dist02-h1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    },
+    {
+      "id": "dist02:r75-pack:29",
+      "nativeId": "dist02-g1",
+      "hp": 505.885,
+      "maxHp": 505.885,
+      "spawnState": "active"
+    }
+  ]
+}

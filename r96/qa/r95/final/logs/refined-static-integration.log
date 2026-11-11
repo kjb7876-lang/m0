@@ -1,0 +1,16 @@
+PASS Current supplied inventory contains318 PNGs with exactly4 replacements and314 retained
+PASS Each retained source has the exact previous hash and each replacement is a real change
+PASS Four supplied changed PNGs match current authoritative hashes
+PASS All254 old story-source hashes and64 old effect PNGs remain preserved
+PASS Deferred dynamic source is preserved byte-exact without being initialized
+PASS No supplied dynamic runtime, adapter or preview loop is loaded
+PASS Every active static raster hash matches the64 supplied current PNGs
+PASS Refined pure sampler adds no network storage timers or dynamic execution
+PASS All3 new hospital runtime images decode and preserve native height settings
+PASS Refined sand preserves prior visible footprint without cropping or growing accents
+PASS All11 hospital native prop IDs positions source paths and collision data remain exact
+PASS Actual native drawProp emits all3 refined art bodies and changes no simulation data
+PASS Refined native hospital bodies convert to finite real Three geometry
+PASS Hospital start remains Settings-only and the V11 save namespace is isolated
+PASS No native runtime errors were recorded in refined hospital replay
+15/15

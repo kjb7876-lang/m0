@@ -16,21 +16,40 @@
 //  끄기: localStorage['storyworld.r590.hwandoChain']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_HWANDO_CHAIN_R590__)return;
-const REV='R590-hwando-chain-3',KEY='storyworld.r590.hwandoChain';
+const REV='R590-hwando-chain-5',KEY='storyworld.r590.hwandoChain';
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const CFG=Object.freeze({sheathIdle:2,drawMult:1.4,
  windDelay:.5,windCount:2,windGap:.12,windSpread:.08,windSpeed:11,windRange:6,windRadius:.55,windMult:.4,maxBlades:6,
  flashDelay:.32,flashRadius:.6,flashMult:.6,
  waves:7,finaleDelay:.3,finaleRange:5.5,finaleRadius:.7,finaleMult:1.6,
  maxDraws:24,maxVis:24});
-const SHEETS=Object.freeze({wind:Object.freeze({path:'assets/r590/hwando-wind-tornado.webp',pivot:[92,160],hTiles:1.5}),ring:Object.freeze({path:'assets/r590/hwando-iai-ring.webp',pivot:[96,94],wTiles:1.9})}),CELL=192,COLS=6,FRAMES=24,FPS=12.5;
+const SHEETS=Object.freeze({wind:Object.freeze({path:'assets/r590/hwando-wind-tornado.webp',pivot:[92,160],hTiles:1.5}),ring:Object.freeze({path:'assets/r590/hwando-iai-ring.webp',pivot:[96,94],wTiles:1.9}),
+ // R590d: Dots CX-0062HW 손질본(dots-r2, 칸 256, 오른쪽 향함). len=칼길 그림 길이(px), th=가장 두꺼운 칸 두께(px),
+ // lift=밝기 올림 — 시트 몸통이 회색(평균 68~143)이라 밝은 안개 바닥에서 묻힘(헤드리스 실측) → brightness 로 은빛까지 올림
+ cut:Object.freeze({path:'assets/r590/hwando-a-draw-cut.webp',cell:256,pivot:[20,188],len:205,hit:5,lift:2.4,crop:[0,140,256,222]}),
+ blade:Object.freeze({path:'assets/r590/hwando-q-wind-blade.webp',cell:256,pivot:[205,122],th:150,loop:20}),
+ flash:Object.freeze({path:'assets/r590/hwando-e-delayed-flash.webp',cell:256,pivot:[17,132],len:223,th:90,hit:7,lift:1.7,crop:[0,80,256,184]}),
+ // CX-0064T 수묵 문양(dots-r3, 칸 192, 피벗=발): 사몽 발현 중 R572 몸 둘레 문양(코드 붓 획)을 이 시트로 바꿔 그림
+ sigilB:Object.freeze({path:'assets/r590/hwando-sigil-back.webp',cell:192,pivot:[96,144]}),
+ sigilF:Object.freeze({path:'assets/r590/hwando-sigil-front.webp',cell:192,pivot:[96,144]}),
+ finale:Object.freeze({path:'assets/r590/hwando-r-finale-draw.webp',cell:256,pivot:[13,128],len:228,th:148,hit:5,lift:1.7,crop:[0,48,256,214]})}),CELL=192,COLS=6,FRAMES=24,FPS=12.5;
 const asked=new Map();
 function sheet(k){const p=SHEETS[k].path;try{const got=typeof readyImage==='function'?readyImage(p):null;if(got?.image)return got.image;
  const t=Date.now();if(t-(asked.get(p)||0)>1500){asked.set(p,t);if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});}}catch(e){fail(e);}return null;}
-function preload(){try{if(typeof ensureImages==='function')Promise.resolve(ensureImages(Object.values(SHEETS).map(v=>v.path))).catch(()=>{});}catch(_){}}
+function preload(){patchTheme();try{if(typeof ensureImages==='function')Promise.resolve(ensureImages(Object.values(SHEETS).map(v=>v.path))).catch(()=>{});}catch(_){}}
 // 시트 한 칸: (x,y)=기준점 화면 좌표, s=배율, a=투명도
 function cell(im,fr,x,y,piv,s,a,flip=false){ctx.save();try{ctx.globalCompositeOperation='source-over';ctx.globalAlpha*=clamp(a,0,1);ctx.translate(x,y);ctx.scale(flip?-s:s,s);
  ctx.drawImage(im,(fr%COLS)*CELL,Math.floor(fr/COLS)*CELL,CELL,CELL,-piv[0],-piv[1],CELL,CELL);}catch(e){fail(e);}finally{ctx.restore();}}
+// 오른쪽을 향한 칼길 시트 한 칸을 화면 각도 ang 로 돌려 그림. 왼쪽을 향할 땐 위아래를 뒤집어 광원(왼쪽 위) 쪽 밝은 면이 위에 남게 한다.
+// 먹 받침(ink): 같은 칸을 어둡게(brightness 만 — 기록기 허용 필터) 오른쪽 아래로 2~3px 비켜 먼저 깔아 밝은 바닥에서도 칼자국 윤곽이 읽히게 한다(수묵 테마·광원 왼쪽 위).
+function strip(k,fr,x,y,ang,sx,sy,a,ink=0,crop=null){const im=sheet(k);if(!im)return false;const D=SHEETS[k],C=D.cell||CELL;fr=clamp(Math.floor(fr),0,FRAMES-1);const u0=(fr%COLS)*C,v0=Math.floor(fr/COLS)*C,K=crop||D.crop||[0,0,C,C],cw=K[2]-K[0],ch=K[3]-K[1];
+ const one=(ox,oy,al,dark)=>{ctx.save();try{ctx.globalCompositeOperation='source-over';ctx.globalAlpha*=clamp(al,0,1);if(dark)ctx.filter='brightness(0.18)';else if(D.lift&&D.lift!==1)ctx.filter='brightness('+D.lift+')';ctx.translate(x+ox,y+oy);ctx.rotate(ang);ctx.scale(sx,Math.cos(ang)<0?-sy:sy);
+  ctx.drawImage(im,u0+K[0],v0+K[1],cw,ch,K[0]-D.pivot[0],K[1]-D.pivot[1],cw,ch);stats.sheetDraws=(stats.sheetDraws||0)+1;}catch(e){fail(e);}finally{ctx.restore();}};
+ if(ink>0&&!low()&&budget>0){budget--;one(2,3,a*ink,true);}one(0,0,a,false);return true;}// 먹 받침도 그리기 예산 1칸을 쓴다(상한 유지)
+// 영웅 몸에서 0.55칸 앞에서 시작(R350 가림 옅게가 영웅 상자와 겹친 만큼 이펙트를 최대 85% 지우므로 — 헤드리스 실측)
+const AHEAD=.55,fwd=(o,a,d)=>({x:o.x+Math.cos(a)*d,y:o.y+Math.sin(a)*d});
+const tail=v=>{const L=Math.hypot(v.b.x-v.a.x,v.b.y-v.a.y);return L>AHEAD*2?fwd(v.b,Math.atan2(v.a.y-v.b.y,v.a.x-v.b.x),AHEAD):v.b;};
+const SAN=(p,q)=>Math.atan2(q.y-p.y,q.x-p.x),SD=(p,q)=>Math.hypot(q.x-p.x,q.y-p.y),ready=k=>!!sheet(k);
 const PAL=Object.freeze({a:Object.freeze([214,222,234]),b:Object.freeze([244,248,255])}),GOLD=Object.freeze({a:Object.freeze([255,198,72]),b:Object.freeze([255,232,170])});
 const stats={draws:0,winds:0,blades:0,flashes:0,waves:0,finales:0,hits:0,damage:0,wallStops:0,coopSkipped:0,budgetSkips:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0;
@@ -75,7 +94,7 @@ function onBasic(base,self,args){
  const can=on&&isHw()&&!egoOn()&&solo(),cd0=player?.attackCD,sheathed=can&&T()-lastSwing>=CFG.sheathIdle&&!(cd0>0);
  const prior=boost;if(sheathed)boost=CFG.drawMult;let r;
  try{r=base.apply(self,args);}finally{boost=prior;}
- try{if(isHw()&&!(cd0>0)&&player.attackCD>0){if(sheathed){stats.draws++;const e=nearest(4),a=e?Math.atan2(e.y-player.y,e.x-player.x):aim();addVis({k:'draw',x:player.x,y:player.y,a,life:.32});addVis({k:'ring',x:player.x,y:player.y,life:FRAMES/FPS*.55,size:1});}lastSwing=T();}}catch(e){fail(e);}
+ try{if(isHw()&&!(cd0>0)&&player.attackCD>0){if(sheathed){stats.draws++;const e=nearest(4),a=e?Math.atan2(e.y-player.y,e.x-player.x):aim();addVis({k:'draw',x:player.x,y:player.y,a,life:ready('cut')?19/18.75:.32});addVis({k:'ring',x:player.x,y:player.y,life:FRAMES/FPS*.55,size:1});}lastSwing=T();}}catch(e){fail(e);}
  return r;}
 // ---- Q → 은빛 검풍 -------------------------------------------------------------------------------------------
 function onSpecial(base,self,args){const cd0=player?.specialCD,r=base.apply(self,args);
@@ -94,24 +113,33 @@ function stepBlades(dt){for(let i=blades.length-1;i>=0;i--){const b=blades[i];if
 // ---- E → 유영 일섬 -------------------------------------------------------------------------------------------
 function onFlight(x,y,o){if(seenE.has(o.castId))return;seenE.add(o.castId);if(seenE.size>64)seenE.delete(seenE.values().next().value);
  if(!fin(x)||!fin(y)||!fin(o.tx)||!fin(o.ty))return;const a={x,y},b={x:o.tx,y:o.ty};if(Math.hypot(b.x-a.x,b.y-a.y)<.05)return;
- lastSwing=T();const j=snapshot(),pw=power(),id='e:'+o.castId;addVis({k:'trail',a,b,life:CFG.flashDelay});
- later(CFG.flashDelay,j,()=>{stats.flashes++;addVis({k:'flash',a,b,life:.34});segHits(a,b,rng(CFG.flashRadius),CFG.flashMult,pw,'flash','e',id);});}
+ lastSwing=T();const j=snapshot(),pw=power(),id='e:'+o.castId;addVis({k:'trail',a,b,life:CFG.flashDelay});if(ready('flash'))stats.sheetE=(stats.sheetE||0)+1;
+ later(CFG.flashDelay,j,()=>{stats.flashes++;addVis({k:'flash',a,b,life:ready('flash')?17/16:.34});segHits(a,b,rng(CFG.flashRadius),CFG.flashMult,pw,'flash','e',id);});}
 // ---- R 칠연 환수검 → 종섬 ------------------------------------------------------------------------------------
 function onWave(x,y,o){let w=waves.get(o.castId);if(!w){w={n:0,done:false,a:fin(o.visualWorldAngle35)?o.visualWorldAngle35:aim()};waves.set(o.castId,w);if(waves.size>16)waves.delete(waves.keys().next().value);}
  if(w.done)return;w.n++;stats.waves++;lastSwing=T();
  // 파마다 방향이 바뀌는 베기 한 줄(황금비 각도로 돌아 겹치지 않게) — 7연격이 눈으로 셀 수 있게
  addVis({k:'wave',x,y,a:w.a+w.n*2.39996,r:fin(o.size)?o.size:3.3,n:w.n,life:.24});
  if(w.n>=CFG.waves){w.done=true;const j=snapshot(),pw=power(),id='r:'+o.castId,fa=w.a;
-  later(CFG.finaleDelay,j,()=>finale(pw,id,fa));}}
+  addVis({k:'charge',x:player.x,y:player.y,a:fa,life:CFG.finaleDelay});later(CFG.finaleDelay,j,()=>finale(pw,id,fa));}}
 function finale(pw,id,fallback){const o={x:player.x,y:player.y},e=nearest(7),a=e?Math.atan2(e.y-o.y,e.x-o.x):fin(fallback)?fallback:aim(),end=rayEnd(o,a,rng(CFG.finaleRange));
- stats.finales++;lastFinale={x0:o.x,y0:o.y,x1:end.x,y1:end.y,at:T()};addVis({k:'finale',a:o,b:end,life:.46});addVis({k:'ring',x:end.x,y:end.y,life:FRAMES/FPS*.55,size:1.25});segHits(o,end,rng(CFG.finaleRadius),CFG.finaleMult,pw,'finale','r',id);}
+ stats.finales++;lastFinale={x0:o.x,y0:o.y,x1:end.x,y1:end.y,at:T()};addVis({k:'finale',a:o,b:end,life:ready('finale')?19/14:.46});addVis({k:'ring',x:end.x,y:end.y,life:FRAMES/FPS*.55,size:1.25});segHits(o,end,rng(CFG.finaleRadius),CFG.finaleMult,pw,'finale','r',id);}
 // ---- 그리기(R106 조각만, 실버+황금) --------------------------------------------------------------------------
 let budget=0;
 function put(S,fn){if(budget<=0){stats.budgetSkips++;return;}budget--;fn();}
 function scr(p,lift=.45){const q=project(p.x,p.y);return {x:q.x,y:q.y-H()*lift};}
 function drawAll(){const S=SP();if(!S)return;const t=T(),lo=low(),u=unit(),h=H();budget=lo?Math.round(CFG.maxDraws*.5):CFG.maxDraws;
  for(const v of vis){const age=t-v.t0,k=age/v.life;if(k<0||k>=1)continue;const fade=k<.35?1:1-smooth((k-.35)/.65);
-  if(v.k==='draw'){const p=scr(v),q=project(v.x+Math.cos(v.a)*2.2,v.y+Math.sin(v.a)*2.2),ex=q.x,ey=q.y-h*.45,g=smooth(age/.08),mx=p.x+(ex-p.x)*g,my=p.y+(ey-p.y)*g;
+  // 시트가 있으면 시트 한 칸(한 번 put), 없으면 아래 R106 코드 그림
+  if(v.k==='draw'&&ready('cut')){const p=scr(fwd(v,v.a,AHEAD),.45),q0=project(v.x+Math.cos(v.a)*3,v.y+Math.sin(v.a)*3),q={x:q0.x,y:q0.y-h*.45},sc=Math.max(SD(p,q)/SHEETS.cut.len,h*1.6/SHEETS.cut.len);
+   put(S,()=>strip('cut',SHEETS.cut.hit+age*18.75,p.x,p.y,SAN(p,q),sc,Math.max(sc,h*1.2/49),1,.6));}
+  else if(v.k==='trail'&&ready('flash')){const p=scr(v.a,.4),q=scr(tail(v),.4),F=SHEETS.flash;put(S,()=>strip('flash',k*F.hit,p.x,p.y,SAN(p,q),SD(p,q)/F.len,h*1.1/F.th,1,.5));}
+  else if(v.k==='flash'&&ready('flash')){const p=scr(v.a,.4),q=scr(tail(v),.4),F=SHEETS.flash;put(S,()=>strip('flash',F.hit+age*16,p.x,p.y,SAN(p,q),SD(p,q)/F.len,h*1.1/F.th,1,.6));}
+  else if(v.k==='wave'&&ready('cut')){const c=project(v.x,v.y),R=Math.min(v.r,3.3)*u*.55,dx=Math.cos(v.a)*R,dy=Math.sin(v.a)*R*.5,cy=c.y-h*.3,p={x:c.x-dx,y:cy-dy},q={x:c.x+dx,y:cy+dy},sc=SD(p,q)/SHEETS.cut.len;
+   put(S,()=>strip('cut',4+k*8,p.x,p.y,SAN(p,q),sc,Math.max(sc,h*1.1/49),1,.5));}
+  else if(v.k==='charge'){if(!ready('finale'))continue;const p=scr(v,.42),q0=project(v.x+Math.cos(v.a),v.y+Math.sin(v.a)),sc=h*1.7/SHEETS.finale.th;put(S,()=>strip('finale',k*4,p.x,p.y,SAN(p,{x:q0.x,y:q0.y-h*.42}),sc,sc,1,.5));}
+  else if(v.k==='finale'&&ready('finale')){const fa=Math.atan2(v.b.y-v.a.y,v.b.x-v.a.x),p=scr(Math.hypot(v.b.x-v.a.x,v.b.y-v.a.y)>AHEAD*2?fwd(v.a,fa,AHEAD):v.a,.42),q=scr(v.b,.42),F=SHEETS.finale;put(S,()=>strip('finale',F.hit+age*14,p.x,p.y,SAN(p,q),SD(p,q)/F.len,h*1.7/F.th,1,.6));}
+  else if(v.k==='draw'){const p=scr(v),q=project(v.x+Math.cos(v.a)*2.2,v.y+Math.sin(v.a)*2.2),ex=q.x,ey=q.y-h*.45,g=smooth(age/.08),mx=p.x+(ex-p.x)*g,my=p.y+(ey-p.y)*g;
    put(S,()=>S.along('slashline',GOLD,p.x,p.y,mx,my,h*.3,{alpha:.95*fade,blend:'screen',overHero:true}));
    if(!lo&&age<.12)put(S,()=>S.draw('flare',GOLD,p.x,p.y,h*.7,h*.7,{alpha:.6*(1-age/.12),blend:'screen'}));}
   else if(v.k==='ring'){const im=sheet('ring');if(!im)continue;const q=project(v.x,v.y),R=SHEETS.ring,s=R.wTiles*v.size*u/150,fr=Math.min(FRAMES-1,Math.floor(age/v.life*FRAMES));
@@ -127,13 +155,24 @@ function drawAll(){const S=SP();if(!S)return;const t=T(),lo=low(),u=unit(),h=H()
    put(S,()=>S.along('iai-cut',GOLD,p.x,p.y,qx,qy,th,{alpha:.9*fade,blend:'screen'}));
    put(S,()=>S.along('slashline',PAL,p.x,p.y,qx,qy,th*.32,{alpha:fade,blend:'screen',overHero:true}));
    if(!lo&&age<.2)put(S,()=>S.draw('flare',GOLD,q.x,q.y,h*.9,h*.9,{alpha:.65*(1-age/.2),blend:'screen'}));}}
- const tw=sheet('wind');
+ const tb=sheet('blade'),tw=tb?null:sheet('wind');
  for(const b of blades){const p=scr(b,.4),q=project(b.x+b.ux,b.y+b.uy),sa=Math.atan2(q.y-h*.4-p.y,q.x-p.x),w=u*(tw?.8:1.35),hh=w*.56;
+  if(tb){const kk=b.travel/(b.range||CFG.windRange),sc=h*1.1/SHEETS.blade.th;put(S,()=>strip('blade',Math.floor((t-b.t0)*FPS)%SHEETS.blade.loop,p.x,p.y,sa,sc,sc,kk>.8?1-(kk-.8)/.2:1,.35));continue;}
   if(tw){const g=project(b.x,b.y),W=SHEETS.wind,s=W.hTiles*h/126,k=b.travel/(b.range||CFG.windRange),age=t-b.t0,fr=k>.8?Math.min(FRAMES-1,18+Math.floor((k-.8)/.2*5)):6+Math.floor(age*FPS*1.6)%12;
    put(S,()=>cell(tw,fr,g.x,g.y,W.pivot,s,1,b.ux<0));}
   put(S,()=>S.draw('slash',PAL,p.x,p.y,w,hh,{angle:sa+Math.PI/2,pivot:[.5,.82],alpha:tw?.7:.92,blend:'screen'}));
   if(!lo)put(S,()=>S.along('slashline',GOLD,p.x-Math.cos(sa)*w*.9,p.y-Math.sin(sa)*w*.9,p.x,p.y,h*.12,{alpha:.5,blend:'screen'}));}
  stats.drawCalls=(stats.drawCalls||0)+(lo?Math.round(CFG.maxDraws*.5):CFG.maxDraws)-budget;}
+// ---- R572 사몽 테마 문양(환도) → Dots 수묵 문양 시트 -------------------------------------------------------------
+// R572 는 이 파일보다 늦게 실린다 → 처음 쓸 때 그 환도 문양의 draw 만 감싼다(시트가 아직 없거나 연계를 끄면 원래 코드 그림).
+let themePatched=false;
+function patchTheme(){if(themePatched)return;try{const T=window.__STORYWORLD_SAMONG_THEME_R572__?.theme?.('hwando');if(!T||typeof T.draw!=='function'||Object.isFrozen(T))return;
+ const base=T.draw;T.draw=function(L,x,fy,h,F,t,a,lo){const k=L==='front'?'sigilF':'sigilB';if(on&&(L==='back'||L==='front')&&fin(x)&&fin(fy)&&sheet(k)){const sc=Math.max(40,h)/105,fr=Math.floor((fin(t)?t:T())*FPS)%20,al=clamp(fin(a)?a:1,0,1);
+  // 뒤층: 영웅보다 먼저(뒤에) 그려 몸을 가리지 않으므로 R350 가림 옅게에서 뺀다(owner.r350). 앞층: 몸 자리(가운데)는 비우고 좌우 획만, R350 그대로.
+  const sc0=(id,ex,fn)=>typeof ctx.scope==='function'?ctx.scope({id,kind:'effect',x:player?.x||0,y:player?.y||0,groundAligned:false,r572:true,...ex},fn):fn();
+  if(L==='back')sc0('r590:sigil-back',{r350:true},()=>strip(k,fr,x,fy,0,sc,sc,.95*al));
+  else sc0('r590:sigil-front',{},()=>{strip(k,fr,x,fy,0,sc,sc,.8*al,0,[0,0,82,192]);strip(k,fr,x,fy,0,sc,sc,.8*al,0,[110,0,192,192]);});
+  stats.sigils=(stats.sigils||0)+1;return;}return base.apply(this,arguments);};themePatched=true;}catch(e){fail(e);}}
 // ---- 설치 ----------------------------------------------------------------------------------------------------
 try{
  if(typeof attackPower==='function'){const base=attackPower;attackPower=function(){const v=base.apply(this,arguments);return boost!==1&&fin(v)?v*boost:v;};}
@@ -143,7 +182,7 @@ try{
   try{const o=opt||{};if(on&&type==='storySourceSkill'&&o.storyWER&&o.sourceHero==='hwando'&&isHw()&&!egoOn()&&o.castId!=null){
    if(o.sourceSlot==='e'&&o.stage==='flight')onFlight(x,y,o);else if(o.sourceSlot==='r'&&o.stage==='release'&&fin(x)&&fin(y))onWave(x,y,o);}}catch(e){fail(e);}return r;};}
  if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e===SENT){try{if(on)drawAll();}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};}
- if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{const t=T(),dt=lastT==null?0:clamp(t-lastT,0,.1);lastT=t;
+ if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{if(!themePatched)patchTheme();const t=T(),dt=lastT==null?0:clamp(t-lastT,0,.1);lastT=t;
    for(let i=0;i<jobs.length;){const q=jobs[i];if(t>=q.at){jobs.splice(i,1);if(valid(q.j))q.fn();}else if(!valid(q.j))jobs.splice(i,1);else i++;}
    if(dt>0)stepBlades(dt);
    for(let i=vis.length-1;i>=0;i--)if(t-vis[i].t0>=vis[i].life||t<vis[i].t0-1)vis.splice(i,1);

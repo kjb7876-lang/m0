@@ -1,0 +1,13 @@
+PASS All 520 authored hero routes are sampled at four clocks with eight heroes
+PASS Every presented crop lies inside its decoded source and contains visible alpha
+PASS Every source-relative feet anchor is within three body pixels of its measured sole
+PASS Every rendered body has finite positive dimensions without mirroring its logical direction
+PASS Calibrated moving and injured bodies retain measured 66px height; crouched gunner roll retains44px
+PASS Authored weapon extents are preserved instead of normalizing raised weapons into short bodies
+PASS Actual drawHero emits its matching image for eight heroes, eight states, four directions and three zooms
+PASS Actual recorded body quads remain finite in every direction and zoom
+PASS Native body image scales exactly once at all three zooms, retaining authored pose shear
+PASS Hero art drawing never changes HP or authored combat frames
+PASS All recorded source images are local preserved assets
+PASS No runtime errors in exhaustive hero image replay
+FINAL true 12

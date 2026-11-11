@@ -192,6 +192,9 @@ if(exists){
  const sheetEnv=()=>{const h=env();h.readyImage=p=>/assets\/r535\//.test(p)?{image:{naturalWidth:1536,naturalHeight:1024},ready:true}:null;return h;};
  g=sheetEnv();g.room.enemies.push(foe('a',13,10),foe('b',14,10.6),foe('c',17,10),foe('d',15.5,11));run(g,'special();cast("w")');for(let i=0;i<12;i++)step(g,1,1/30);run(g,'cast("r")');for(let i=0;i<30;i++)step(g,1,1/30);
  {const sd=A(g).inspect().stats.sheetDraws||{};for(const k of ['lance','blast','burn','shard','pop','storm'])ok('sheet drawn when loaded: '+k+' ('+(sd[k]|0)+')',(sd[k]|0)>0);}
+ // R535-4: Dots r2 무기 문(HU-07)·불줄기(HU-08)
+ ok('Dots r2 gate/volley sheets shipped (each ≤ 200KB) and named in source',['hunter-gate','hunter-volley'].every(n=>{const f=path.join(R,'runtime-text','assets','r535','dots',n+'.webp');return fs.existsSync(f)&&fs.statSync(f).size<=200000&&src.includes('assets/r535/dots/'+n+'.webp');}));
+ {const sd=A(g).inspect().stats.sheetDraws||{};for(const k of ['gate','volley'])ok('sheet drawn when loaded: '+k+' ('+(sd[k]|0)+')',(sd[k]|0)>0);}
  g=env();g.room.enemies.push(foe('a',13,10),foe('b',14,10.6),foe('c',17,10));run(g,'special();cast("w")');for(let i=0;i<12;i++)step(g,1,1/30);run(g,'cast("r")');for(let i=0;i<30;i++)step(g,1,1/30);
  ok('sheets not loaded → old code art still draws (no sheet draws, lance drawn)',(()=>{const s=A(g).inspect().stats,sd=s.sheetDraws||{};return Object.values(sd).every(v=>!v)&&s.lanceDraws>0;})());
  g=sheetEnv();for(let i=0;i<30;i++)g.room.enemies.push(foe('p'+i,11+(i%6)*.5,9+Math.floor(i/6)*.5));for(let k=0;k<8;k++){run(g,'cast("w")');step(g,6,1/30);}

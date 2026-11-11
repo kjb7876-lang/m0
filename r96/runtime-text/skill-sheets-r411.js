@@ -59,7 +59,7 @@ function scanHazards(){if(!prefs.boss||typeof hazards==='undefined'||!Array.isAr
   const rad=fin(h.radius)?h.radius:1.6;play(name,h.x,h.y,{size:Math.max(.7,Math.min(2.2,rad/1.6)),lead:Math.max(0,h.age-(warn-lead)),flip:(hash(h.id)&1)===1,owner:k});}}
 // ---- 영웅 적중 ----------------------------------------------------------------------------------------
 let lastHit=-9;const enemyHit=new WeakMap();
-function heroHit(e){if(!prefs.hero||typeof player!=='object'||!player)return;const name=HERO[player.hero];if(!name)return;const t=T();
+function heroHit(e){if(!prefs.hero||typeof player!=='object'||!player)return;if(window.__STORYWORLD_NEON_LAUREN_R437__?.ownsHit?.(player.hero))return;/* R437: 네온 삼각 연쇄 시트 대신 민트 체인 */const name=HERO[player.hero];if(!name)return;const t=T();
  if(t-lastHit<.22||t-(enemyHit.get(e)||-9)<.6){stats.throttled++;return;}lastHit=t;enemyHit.set(e,t);
  play(name,e.x+(Math.random()-.5)*.25,e.y+(Math.random()-.5)*.2,{size:e.boss||e.midboss?1.25:.85,flip:player.x>e.x});}
 try{

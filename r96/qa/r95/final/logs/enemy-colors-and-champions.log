@@ -1,0 +1,18 @@
+PASS Delivered enemy presentation module is loaded
+PASS All campaign enemy kinds resolve an original image sampled palette
+PASS Every newly added field champion has6x attack and retains6x HP/2x size
+PASS Repeated normalization leaves original ordinary mobs and original bosses intact
+PASS Three real save/restore cycles preserve damaged HP and do not multiply6x again
+PASS Easy/normal/hard changes keep champion attack exactly6x current donor
+PASS V9-style1x saved champion upgrades correctly even after all ordinary donors died
+PASS Same-count trial/persona enemy-array replacement refreshes projectile ownership
+PASS Native hostile projectiles keep original source, velocity, damage and collision radius
+PASS Actual native hostile bitmap commands carry their original-owner palette
+PASS Actual native boss warning and active shapes share owner color
+PASS Native field warning/active commands replay with identical unchanged gameplay shape
+PASS Real native enemyShot inherits champion6x exactly once
+PASS Native admitted wound budget keeps6x for initial and all deferred damage
+PASS Dark-body palettes retain readable warning luminance
+PASS Shared immutable tint cache remains bounded
+PASS Real Three replay releases all texture leases after effects leave
+PASS No native game error is recorded

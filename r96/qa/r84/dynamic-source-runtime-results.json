@@ -1,0 +1,91 @@
+{
+  "checks": [
+    {
+      "name": "Supplied global catalog and JSON are byte-semantic equivalents",
+      "passed": true
+    },
+    {
+      "name": "All80 supplied recipes produce finite deterministic budgeted timeline samples",
+      "passed": true,
+      "detail": {
+        "samples": 4880,
+        "maxObserved": 67,
+        "limit": 96
+      }
+    },
+    {
+      "name": "Every supplied recipe terminates with zero primitives at its duration",
+      "passed": true
+    },
+    {
+      "name": "Supplied sampling preserves catalog inputs and responds to seeds",
+      "passed": true
+    },
+    {
+      "name": "Negative and nonfinite elapsed times never produce a live effect",
+      "passed": true
+    },
+    {
+      "name": "Supplied primitives use only local bounded supported drawing roles",
+      "passed": true,
+      "detail": {
+        "types": [
+          "ring",
+          "particle",
+          "sprite",
+          "line",
+          "arc"
+        ],
+        "roles": [
+          "projectile",
+          "residue",
+          "impact",
+          "warning"
+        ],
+        "layers": [
+          "spawn",
+          "travel",
+          "fade",
+          "contact"
+        ]
+      }
+    },
+    {
+      "name": "Supplied role exceptions retain impact counter and stationary deployed panel",
+      "passed": true,
+      "detail": {
+        "counter": "10_knight_parry_counter",
+        "counterRole": "impact",
+        "panel": "10-cult03-golden-order-wall"
+      }
+    },
+    {
+      "name": "Supplied resurrection recipe closes inward rather than inventing outgoing damage",
+      "passed": true,
+      "detail": {
+        "stitch": "16-cult04-resurrection-stitch-arc",
+        "earlyMean": 0.4695715266190259,
+        "laterMean": 0.22599685875387943
+      }
+    },
+    {
+      "name": "All80 original render recipes replay through actual Three CPU geometry",
+      "passed": true,
+      "detail": {
+        "replays": 240,
+        "commands": 5755
+      }
+    },
+    {
+      "name": "Supplied rendering leaves no retained Three meshes or image textures after clear",
+      "passed": true
+    }
+  ],
+  "samples": 4880,
+  "replays": 240,
+  "maxPrimitives": 67,
+  "method": "Supplied unchanged runtime.js in restricted Node VM; pinned real Three CPU CommandScene replay. No browser/GPU or pixel rasterization.",
+  "browserVerified": false,
+  "GPUVerified": false,
+  "passed": true
+}
