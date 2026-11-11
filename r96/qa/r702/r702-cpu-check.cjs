@@ -74,4 +74,25 @@ for(const [leg,label] of [[.35,'0.35s legs (measured)'],[.25,'0.25s legs'],[.5,'
  {const sb=oenv();for(let i=0;i<60;i++)sb.guideStep(1/60);const c0=sb.goalCalls;sb.__STORYWORLD_GUIDE_R75__={currentGoal:()=>({kind:'objective',point:{x:40,y:40.5}})};sb.findPath=(a,b)=>{sb.goalCalls++;return [];};for(let i=0;i<42;i++)sb.guideStep(1/60);
   ok(`goal moves → re-checked within 0.7s (calls ${c0}→${sb.goalCalls})`,sb.goalCalls>c0);}
 }
+
+// ── 집결 단계 낙오 적(코디네이터 08:58Z "잠들지 못하는 마을에서 길 전투가 끝나면 길잡이가 100초 넘게 서 있음") ──
+//  헤드리스 재현(last302, 영화 모드): 집결 단계(rally)에 필드 적(중간보스 · 포구 검은 안개 같은 R81 챔피언 포함)이
+//  1마리 남았는데 그 적이 숨은(hidden) 상태거나 영웅에게서 40칸 넘게 떨어져 있으면 R75 목표가 'wait'/닿지 않는 'enemy' 라
+//  길잡이가 집결실 안을 40초 넘게 맴돌고 단계가 끝나지 않았다(남은 수 1). 고친 뒤 기대: 집결 단계에서 숨었거나
+//  집결실에서 멀리(26칸) 떨어지고 영웅과도 먼(16칸) 필드 적은 4초 뒤 집결 자리로 다시 모인다(숨은 적은 바로).
+{const W='world-combat-r78.js',w=C(W);
+ ok('world-combat runtime copy matches client source',RT(W)===w);
+ const i=w.indexOf('function stray(');ok('R78 has a rally straggler test (stray)',i>0);
+ ok('rally tick regathers stragglers before settle',/s\.phase==='rally'\)\{room\.engaged=true;regather\(\);settle\(\);\}/.test(w));
+ if(i>0){const body=w.slice(w.indexOf('const STRAY_'),w.indexOf('\n',i));const S=new Function(body+';return stray;')();
+  const g={gatherAnchor:{x:16,y:33}},near={x:20,y:34},farP={x:16,y:33};
+  ok('hidden field enemy is a straggler at once',S({spawnState:'hidden',x:18,y:33},g,farP,0)===true);
+  const e={spawnState:'active',x:70,y:73};
+  ok('far active enemy is not pulled at once',S(e,g,farP,0)===false);
+  ok('far active enemy is pulled after 4s',S(e,g,farP,4.1)===true);
+  const f={spawnState:'active',x:70,y:73};S(f,g,{x:66,y:70},0);
+  ok('far enemy fighting the hero (within 16) is left alone',S(f,g,{x:66,y:70},9)===false);
+  const h={spawnState:'active',x:22,y:36};S(h,g,farP,0);ok('enemy inside the gather room is left alone',S(h,g,farP,9)===false);
+  const k={spawnState:'active',x:70,y:73};S(k,g,farP,0);k.x=20;k.y=34;S(k,g,farP,2);k.x=70;k.y=73;ok('coming back resets the 4s timer',S(k,g,farP,5)===false&&S(k,g,farP,9.1)===true);}
+}
 console.log(`R702 ${n-bad}/${n} pass`);process.exit(bad?1:0);

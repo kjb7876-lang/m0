@@ -44544,8 +44544,8 @@
     },
     {
       "path": "world-combat-r78.js",
-      "bytes": 22294,
-      "sha256": "f36265f1168e47131b83b6b59598bec45d6b0e2117f49cf384743aa0ceb97d0a"
+      "bytes": 23941,
+      "sha256": "de09e5fc5ff0307df3be31f4439a888febeaa4f1597c0b43fb5da6d298d5a0a6"
     },
     {
       "path": "world-combat-v4-compat.js",
@@ -44599,7 +44599,7 @@
     }
   ],
   "fileCount": 8919,
-  "totalBytes": 1228839749,
+  "totalBytes": 1228841396,
   "webHTMLSha256": "50bb81bfe1c0759805da71ee259f6ce8826210ba5e192c1bed9f84b1480a9814",
   "largest": [
     {
