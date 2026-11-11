@@ -34818,14 +34818,19 @@
       "sha256": "1c348af69d7e65769ed3b79c9e647d4dca027ef67fc519ff9ebe8eb4296dd5c6"
     },
     {
+      "path": "assets/r810/herb-rack.webp",
+      "bytes": 44290,
+      "sha256": "df996ed1f8fdfe38a4e4e982c975d7ab159c4c01a38e63d23cdef2c34fdae502"
+    },
+    {
       "path": "assets/r810/herb-trays.webp",
       "bytes": 16674,
       "sha256": "d2f6910c4556523f5a324c0fe60c08bea40076ee044bd46dae1e7e3ae12800a0"
     },
     {
       "path": "assets/r810/index.json",
-      "bytes": 9116,
-      "sha256": "06c78d2f056e107e266a7ee090cb9b04118a63dc5a3ea32a34c0c406da761941"
+      "bytes": 12198,
+      "sha256": "41160ac656951475c1a99f2203704cac09871a2044de3cfc15ca5c7afd2694fd"
     },
     {
       "path": "assets/r810/jangdok.webp",
@@ -34843,9 +34848,29 @@
       "sha256": "37c60f39d196dac6eb732b59769f445f6149554e4164ea642d5e848b1007f536"
     },
     {
+      "path": "assets/r810/seaweed-1.webp",
+      "bytes": 27154,
+      "sha256": "4ea35c4e70e1e9c1fc3b1355428f83d58beeab620202bfd7d155fbae594d4db2"
+    },
+    {
+      "path": "assets/r810/seaweed-2.webp",
+      "bytes": 27800,
+      "sha256": "db0934a2383021556a785129830c9e7a6bb92637d4f03768f1847b1263a8ce05"
+    },
+    {
+      "path": "assets/r810/seaweed-3.webp",
+      "bytes": 27474,
+      "sha256": "0b45044bf40ac0c356c9a3374c1346fc8547f24b837ddfaaa7dc236ea9537f2e"
+    },
+    {
       "path": "assets/r810/shoes-stone.webp",
       "bytes": 16830,
       "sha256": "44a74c1b0be595aec79b693603b85cf41b12cbb268ed0bcd038c7b12ccb45716"
+    },
+    {
+      "path": "assets/r810/talisman-post.webp",
+      "bytes": 17246,
+      "sha256": "842ee0b66197c5e08bba9ca0df2763a9082a61643576b2ebea7e2b560cd7e947"
     },
     {
       "path": "assets/r810/talisman-rope-l.webp",
@@ -44399,8 +44424,8 @@
     },
     {
       "path": "rooms-r523.js",
-      "bytes": 73009,
-      "sha256": "7c160dfbe5ce24964ad7a11de29e8d0341136e1e5d6faec1378279f52d5cc8f6"
+      "bytes": 75219,
+      "sha256": "1da7e61914cc0396b2b510caee3eae7ec9b4263a82b283678dc32cf4e0fbd6f5"
     },
     {
       "path": "root-gate-video-r372.js",
@@ -44898,8 +44923,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8979,
-  "totalBytes": 1235974059,
+  "fileCount": 8984,
+  "totalBytes": 1236123315,
   "webHTMLSha256": "d8bef146aec9863ec63a5a3150cab3c47344631e13664b5969cd73d490e68348",
   "largest": [
     {

@@ -271,6 +271,96 @@
    "made_by": "Dots CX-0071BV (그림 스레드 손질본 c1) → Pillow 테두리 자르기, 긴 변 320, WebP q86",
    "applied": true,
    "final": false
+  },
+  {
+   "path": "assets/r810/herb-rack.webp",
+   "source": "cx0071bv-dots-cleaned/CX-0071BV_15_herb-bundles_r2_c1.png",
+   "source_sha256": "652bfbd720ba73abe4f177e1601628c24940a4811dc9db6b50edb90c14ef1d7c",
+   "crop_bbox": [
+    59,
+    84,
+    443,
+    458
+   ],
+   "sha256": "df996ed1f8fdfe38a4e4e982c975d7ab159c4c01a38e63d23cdef2c34fdae502",
+   "bytes": 44290,
+   "size": "320x312",
+   "use": "약초 다발 걸이(양 끝 기둥) — last303 길가",
+   "made_by": "Dots CX-0071BV 3차 (그림 스레드 손질본 c1) → Pillow 테두리 자르기, 긴 변 320, WebP q88",
+   "applied": true,
+   "final": false
+  },
+  {
+   "path": "assets/r810/talisman-post.webp",
+   "source": "cx0071bv-dots-cleaned/CX-0071BV_04_talisman-post_r1_c1.png",
+   "source_sha256": "6972cf18afce6611957786af1077783cfb835b11510bf1f68f332c88724bdb02",
+   "crop_bbox": [
+    197,
+    50,
+    315,
+    463
+   ],
+   "sha256": "842ee0b66197c5e08bba9ca0df2763a9082a61643576b2ebea7e2b560cd7e947",
+   "bytes": 17246,
+   "size": "91x320",
+   "use": "붉은 부적 말뚝 — last303 길가",
+   "made_by": "Dots CX-0071BV 3차 (그림 스레드 손질본 c1) → Pillow 테두리 자르기, 긴 변 320, WebP q88",
+   "applied": true,
+   "final": false
+  },
+  {
+   "path": "assets/r810/seaweed-1.webp",
+   "source": "cx0071bv-dots-cleaned/CX-0071BV_09_seaweed-shells_1_r1_c1.png",
+   "source_sha256": "4969b855ff14f88a93c3271e077be580c0827455ab338672c10f56ab3a7315b2",
+   "crop_bbox": [
+    63,
+    149,
+    455,
+    366
+   ],
+   "sha256": "4ea35c4e70e1e9c1fc3b1355428f83d58beeab620202bfd7d155fbae594d4db2",
+   "bytes": 27154,
+   "size": "320x177",
+   "use": "미역·조개 무더기 1 — last302 배 곁",
+   "made_by": "Dots CX-0071BV 3차 (그림 스레드 손질본 c1) → Pillow 테두리 자르기, 긴 변 320, WebP q88",
+   "applied": true,
+   "final": false
+  },
+  {
+   "path": "assets/r810/seaweed-2.webp",
+   "source": "cx0071bv-dots-cleaned/CX-0071BV_09_seaweed-shells_2_r1_c1.png",
+   "source_sha256": "f79f8cc16561dfe4b1ab6c0201e9beaa86668a3ebebf6b7d62858766d583d6c2",
+   "crop_bbox": [
+    65,
+    155,
+    448,
+    361
+   ],
+   "sha256": "db0934a2383021556a785129830c9e7a6bb92637d4f03768f1847b1263a8ce05",
+   "bytes": 27800,
+   "size": "320x172",
+   "use": "미역·조개 무더기 2 — last302 배 곁",
+   "made_by": "Dots CX-0071BV 3차 (그림 스레드 손질본 c1) → Pillow 테두리 자르기, 긴 변 320, WebP q88",
+   "applied": true,
+   "final": false
+  },
+  {
+   "path": "assets/r810/seaweed-3.webp",
+   "source": "cx0071bv-dots-cleaned/CX-0071BV_09_seaweed-shells_3_r1_c1.png",
+   "source_sha256": "4837e8d70f0f923e8cad25c6628f62c9d522cdfddacb6f45d2a97f73fbcea51b",
+   "crop_bbox": [
+    55,
+    154,
+    454,
+    357
+   ],
+   "sha256": "0b45044bf40ac0c356c9a3374c1346fc8547f24b837ddfaaa7dc236ea9537f2e",
+   "bytes": 27474,
+   "size": "320x163",
+   "use": "미역·조개 무더기 3 — last302 배 곁",
+   "made_by": "Dots CX-0071BV 3차 (그림 스레드 손질본 c1) → Pillow 테두리 자르기, 긴 변 320, WebP q88",
+   "applied": true,
+   "final": false
   }
  ]
 }

@@ -45,7 +45,7 @@ for(const id of['last302','last303']){const fx=FX[id],P=api.plan(fx),P2=api.plan
  //  R412 의 3D 벽 검사(그림 불투명 점의 3%까지)로 실측한 결과(헤드리스, last302·303 전수): 칸 시작에서 안쪽으로 나무 1.75칸·석등 1.0칸·향로 0.75칸·기와 더미 0.75칸 이상이어야 0~3%.
  //  그래서 뒤쪽 끝에서 안쪽으로 띄운 거리가 종류별 최소 이상이고, 그래도 길 한가운데로 나오지 않게 3칸 안에 있어야 한다.
  const insetOf=p=>{let a=Math.floor(p.y);while(Fset.has(Math.floor(p.x)+','+(a-1)))a--;let b=Math.floor(p.x);while(Fset.has((b-1)+','+Math.floor(p.y)))b--;return Math.min(p.y-a,p.x-b);};
- const MINI={tree:1.75,lamp:1.0,censer:.75,giwa:.75,post:1.0,rope:1.0,boat:1.75,rack:1.75};/* R810 새 길 가 소품: 등롱대는 석등과 같게, 금줄은 석등만큼, 배·건조대는 나무만큼 띄운다 */
+ const MINI={tree:1.75,lamp:1.0,censer:.75,giwa:.75,post:1.0,rope:1.0,boat:1.75,rack:1.75,herbrack:1.0,tpost:1.0,seaweed:.5};/* R812 미역 무더기는 높이 22px 로 바닥에 깔려 절벽에 감길 일이 없다 *//* R810 새 길 가 소품: 등롱대는 석등과 같게, 금줄은 석등만큼, 배·건조대는 나무만큼 띄운다 */
  ok(id+': lane props stand back far enough from the cliff behind them (tree 1.75, lamp 1.0, censer/giwa .75 cells from the back edge)',floor.every(p=>insetOf(p)>=MINI[p.kind]-1e-9),floor.filter(p=>insetOf(p)<MINI[p.kind]-1e-9).map(p=>p.kind+'@'+p.x+','+p.y+':'+insetOf(p)).slice(0,4));
  ok(id+': lane props still hug the back lane edge (never mid-lane, within 3 cells)',floor.every(p=>insetOf(p)<=3));
  ok(id+': total stays modest ('+P.length+')',P.length<=80);}

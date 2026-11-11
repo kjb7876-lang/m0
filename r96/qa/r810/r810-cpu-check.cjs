@@ -128,4 +128,14 @@ ok('R730 apply: path lanterns light up like posts (R115 lantern)',/s\.kind==='pa
    ok('last303: brazier/trays sit on the house hill (lift = house lift)',fire.concat(tray).every(q=>yak.some(h=>q.lift===h.lift&&Math.hypot(q.x-h.x,q.y-h.y)<=4)));}
   if(pf)ok(id+': total with path ≤ 92',api.plan({...fx,path:new Set(pf.path)}).length<=92);}
  ok('R811 apply: brazier glows (R115 brazier light) and both sit on the hill like houses',/s\.kind==='yakfire'\)q\.r115Prop='brazier'/.test(RS)&&/const hill=s\.kind==='house'\|\|s\.kind==='shoes'\|\|s\.kind==='jang'\|\|s\.kind==='yakfire'\|\|s\.kind==='trays';/.test(RS));}
+// ⑫ Dots CX-0071BV 3차(R812): 약초 걸이 15 r2(양 끝 기둥) — last303 길가, 붉은 부적 말뚝 04 — last303, 미역·조개 무더기 09 — last302 배 곁
+{let ix=null;try{ix=JSON.parse(rd('runtime-text/assets/r810/index.json'));}catch(_){}
+ const need={'herb-rack':'15_herb-bundles_r2','talisman-post':'04_talisman-post','seaweed-1':'09_seaweed-shells_1','seaweed-2':'09_seaweed-shells_2','seaweed-3':'09_seaweed-shells_3'};
+ ok('R812 Dots assets: index lists 5 files from the Dots folder, ≤ 64 KB, in the manifest',!!ix&&Object.entries(need).every(([k,src])=>{const a=ix.assets.find(a=>a.path==='assets/r810/'+k+'.webp');return a&&a.source.includes('cx0071bv-dots-cleaned/CX-0071BV_'+src)&&a.bytes<=65536&&/^[0-9a-f]{64}$/.test(a.sha256)&&rd('runtime-manifest.json').includes(a.path);}));
+ if(api)for(const id of ['last302','last303']){let fx=null;try{fx=JSON.parse(rd('qa/r730/fixtures/'+id+'.json'));}catch(_){}if(!fx)continue;const P=api.plan(fx),k=t=>P.filter(p=>p.kind===t);
+  if(id==='last303'){ok('last303: 2+ herb racks and 2+ talisman posts, same kind ≥ 9 cells apart',k('herbrack').length>=2&&k('tpost').length>=2&&['herbrack','tpost'].every(t=>k(t).every((a,i)=>k(t).every((b,j)=>i===j||Math.hypot(a.x-b.x,a.y-b.y)>=9))),[k('herbrack').length,k('tpost').length]);
+   ok('last303: no seaweed (inland herbal village)',k('seaweed').length===0);}
+  else{ok('last302: seaweed piles beside the beached boats (each within 4 cells of a boat), 2+',k('seaweed').length>=2&&k('seaweed').every(q=>k('boat').some(b=>Math.hypot(b.x-q.x,b.y-q.y)<=4)),k('seaweed').length);
+   ok('last302: seaweed uses all three Dots variants when 3+ piles',k('seaweed').length<3||new Set(k('seaweed').map(q=>q.path)).size===3);
+   ok('last302: no herb racks / talisman posts here',!k('herbrack').length&&!k('tpost').length);}}}
 console.log('\nR810 '+(n-bad)+'/'+n+' passed');process.exit(bad?1:0);

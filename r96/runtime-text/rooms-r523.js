@@ -389,7 +389,7 @@ window.__STORYWORLD_ROOMS_R523__=Object.freeze({revision:REV,ART,G,USE,REGION,LI
 //  · 몹·보스는 R760(bulmyeongwi-r760.js) 스레드가 맡는다. 등롱·부적 줄·댓돌 신발·장독대·약방은 Dots 그림이 오면 2차로 더한다(지금은 기존 그림만).
 (()=>{'use strict';
 if(window.__STORYWORLD_VILLAGE_R730__)return;
-const REV='R730-village-7',KEY='storyworld.r730.village',PX=34,SUM=17,BACK=3.6,MARGIN=1;
+const REV='R730-village-8',KEY='storyworld.r730.village',PX=34,SUM=17,BACK=3.6,MARGIN=1;
 const prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;}catch(_){}
 const stats={rooms:0,placed:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,400);};
 const HOUSE=Object.freeze([
@@ -406,17 +406,20 @@ const HOUSE=Object.freeze([
 const HOUSE_NR=Object.freeze(HOUSE.filter(h=>!/ruined/.test(h.path)));/* 약방 마을(last303)엔 폐가를 두지 않는다 — 폐가는 잠들지 못하는 마을(last302)의 빈집 */
 /* R811: last303 '한약과 불면귀' 만 — 약방 집 11A·B(처마 약초 다발·한지창 호박빛), 앞에 약탕기 화로·약재 소반 */
 const YAK=Object.freeze([Object.freeze({path:'assets/r810/yakbang-house-a.webp',height:223,aspect:560/447}),Object.freeze({path:'assets/r810/yakbang-house-b.webp',height:236,aspect:560/474})]);
+/* R812 Dots 3차: 약초 걸이 15 r2(양 끝 기둥)·붉은 부적 말뚝 04(last303), 미역·조개 무더기 09 세 가지(last302 배 곁) */
+const HERB=Object.freeze({path:'assets/r810/herb-rack.webp',height:60}),TPOST=Object.freeze({path:'assets/r810/talisman-post.webp',height:80}),
+ SEA=Object.freeze(['seaweed-1','seaweed-2','seaweed-3'].map(k=>Object.freeze({path:'assets/r810/'+k+'.webp',height:22})));
 const YFIRE=Object.freeze({path:'assets/r810/decoction-brazier.webp',height:44}),TRAYS=Object.freeze({path:'assets/r810/herb-trays.webp',height:24});
 const HANOK='assets/world-r80/r80-010.webp',HANOK_LIT='assets/r730/tiled-house-lit.webp';/* r80-010 의 창호에 호박색 불빛을 넣은 파생본(qa/r730/make-lit-house.py) */
 /* 칸 시작에서 안쪽으로 띄우는 거리. R412 의 3D 벽 검사(그림 불투명 점의 3% 이하)로 헤드리스 실측: 나무 1.75·석등 1.0·향로 .75·기와 .75 부터 절벽에 안 파묻힘(전엔 모두 .75 → 나무 8~16%·석등 5~7%가 벽에 감김). 석등은 여유 .25 */
-const INSET=Object.freeze({tree:1.75,lamp:1.25,censer:.75,giwa:.75,post:1.25,rope:1.25,boat:1.75,rack:1.75});
+const INSET=Object.freeze({tree:1.75,lamp:1.25,censer:.75,giwa:.75,post:1.25,rope:1.25,boat:1.75,rack:1.75,herbrack:1.25,tpost:1.0,seaweed:1.25});
 const LAMP=Object.freeze({path:'assets/r92/lights/lights_regional_03.png',height:84}),CENSER=Object.freeze({path:'assets/r92/lights/lights_regional_02.png',height:52}),
  TREE=Object.freeze({path:'assets/r299/tree.webp',height:150}),GIWA=Object.freeze({path:'assets/world-r80/r80-007.webp',height:44});
 /* R810: 그림 스레드 CX-0071BV 대체본(ElevenLabs seedream, 7분야 7.86~8.07 통과, 원본 /mnt/project-files/bulmyeongwi-art/cx0071bv-el-cleaned/ → assets/r810, 표 assets/r810/index.json).
    정본 34장 "부서진 기와와 붉은 부적", "포구 마을", "방문 앞의 신발들은 모두 바깥을 향해" · 귀비탕 영상의 등롱 호박빛. 크기는 사람 키 ≈ 1.3칸 기준(그림 스레드 권장). */
 const POST=Object.freeze({path:'assets/r810/lantern-post.webp',height:100}),ROPE=Object.freeze({'-y':'assets/r810/talisman-rope-r.webp','-x':'assets/r810/talisman-rope-l.webp',height:74}),
  SHOES=Object.freeze({path:'assets/r810/shoes-stone.webp',height:22}),JANG=Object.freeze({path:'assets/r810/jangdok.webp',height:32}),RACK=Object.freeze({path:'assets/r810/fish-rack.webp',height:64}),BOAT=Object.freeze({path:'assets/r810/boat.webp',height:52});
-const ZONE=Object.freeze({last302:Object.freeze({houses:26,lamps:20,yards:/작은 마당|외곽 쉼길/,giwa:3,ropes:4,shoes:6,jang:5,boats:3,racks:3,pathposts:8}),last303:Object.freeze({houses:12,lamps:14,yards:/작은 마당|외곽 쉼길/,giwa:5,ropes:3,shoes:5,jang:4,boats:0,racks:0,pathposts:10,yak:3,litEvery:2,ruin:false})});
+const ZONE=Object.freeze({last302:Object.freeze({houses:26,lamps:18,yards:/작은 마당|외곽 쉼길/,giwa:3,ropes:4,shoes:6,jang:5,boats:3,racks:3,pathposts:8,seaweed:3}),last303:Object.freeze({houses:12,lamps:14,yards:/작은 마당|외곽 쉼길/,giwa:5,ropes:3,shoes:5,jang:4,boats:0,racks:0,pathposts:10,yak:3,litEvery:2,ruin:false,herbracks:3,tposts:3})});
 function h32(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
 // fx: {id, floorCells, rooms[{name,x,y}], doors[{x,y}], ward{boss,gather}, entry{x,y}, props[{x,y}], route?[{x,y}]} → [{id,kind,path,height,aspect?,lift?,x,y,side?}]
 function plan(fx){const Z=ZONE[fx.id];if(!Z)return[];const F=new Set(),diag=new Map();
@@ -456,11 +459,22 @@ function plan(fx){const Z=ZONE[fx.id];if(!Z)return[];const F=new Set(),diag=new 
  // R810 금줄(붉은 부적): 길에서 조금 떨어진 뒤쪽 끝에, 끝 방향에 맞는 그림(-y 끝 = 오른쪽 아래 축, -x 끝 = 왼쪽 아래 축), 서로 10칸 넘게
  const far=(arr,tag,want,fn)=>{let n=0;const ord=edges.map(e=>({e,k:(h32(tag+e.x+','+e.y+e.side)%1000)/1000*6+Math.abs(near(e.x+.5,e.y+.5)-3)})).sort((a,b)=>a.k-b.k||a.e.y-b.e.y||a.e.x-b.e.x);
   for(const{e}of ord){if(n>=want)break;if(fn(e))n++;}return n;};
+ /* 두 뒤쪽 축(-y·-x) 모두에서 절벽까지 거리 — 모서리 근처 끝 칸은 옆 축이 짧아 큰 그림(배·건조대)이 옆 절벽에 감긴다 */
+ const back2=q=>{let a=Math.floor(q.y);while(has(Math.floor(q.x),a-1))a--;let b=Math.floor(q.x);while(has(b-1,Math.floor(q.y)))b--;return Math.min(q.y-a,q.x-b);};
  const apart=(kind,x,y,d)=>!out.some(o=>o.kind===kind&&Math.hypot(o.x-x,o.y-y)<d),at=(e,kind)=>spotOf(e,INSET[kind]||.75);/* 같은 종류끼리만 멀리(남과는 put 의 r=3) */
  far(edges,'rope',Z.ropes||0,e=>{const q=at(e,'rope');return apart('rope',q.x,q.y,10)&&put(e,'rope',{path:ROPE[e.side],height:ROPE.height},3,e.x+'_'+e.y+e.side);});
  // R810 포구(last302): 뭍에 올린 배·생선 건조대 — 길에서 먼 뒤쪽 끝(사람이 지나지 않는 바닷가 쪽), 같은 종류끼리 9칸 넘게
- far(edges,'boat',Z.boats||0,e=>{const q=at(e,'boat');return near(e.x+.5,e.y+.5)>5&&apart('boat',q.x,q.y,9)&&put(e,'boat',BOAT,3.2,e.x+'_'+e.y+e.side);});
- far(edges,'rack',Z.racks||0,e=>{const q=at(e,'rack');return near(e.x+.5,e.y+.5)>5&&apart('rack',q.x,q.y,9)&&put(e,'rack',RACK,3.2,e.x+'_'+e.y+e.side);});
+ far(edges,'boat',Z.boats||0,e=>{const q=at(e,'boat');return back2(q)>=INSET.boat&&near(e.x+.5,e.y+.5)>5&&apart('boat',q.x,q.y,9)&&put(e,'boat',BOAT,3.2,e.x+'_'+e.y+e.side);});
+ far(edges,'rack',Z.racks||0,e=>{const q=at(e,'rack');return back2(q)>=INSET.rack&&near(e.x+.5,e.y+.5)>5&&apart('rack',q.x,q.y,9)&&put(e,'rack',RACK,3.2,e.x+'_'+e.y+e.side);});
+ // R812 약초 걸이·부적 말뚝(last303): 길에서 조금 떨어진 뒤쪽 끝, 같은 종류끼리 9칸 넘게 / 미역·조개 무더기(last302): 뭍에 올린 배 곁 3.25~4칸
+ far(edges,'herbrack',Z.herbracks||0,e=>{const q=at(e,'herbrack');return apart('herbrack',q.x,q.y,9)&&put(e,'herbrack',HERB,3,e.x+'_'+e.y+e.side);});
+ far(edges,'tpost',Z.tposts||0,e=>{const q=at(e,'tpost');return apart('tpost',q.x,q.y,9)&&put(e,'tpost',TPOST,3,e.x+'_'+e.y+e.side);});
+ {let sw=0;for(const b of out.filter(o=>o.kind==='boat')){if(sw>=(Z.seaweed||0))break;
+  const es=edges.map(e=>({e,d:Math.hypot(at(e,'seaweed').x-b.x,at(e,'seaweed').y-b.y)})).filter(o=>o.d>=2.5&&o.d<=4).sort((a,b2)=>a.d-b2.d||a.e.y-b2.e.y||a.e.x-b2.e.x);
+  /* 바닥에 깔린 작은 무더기라 남의 넓은 비움 반지름(금줄 3·석등 8.2)은 보지 않고 1.5칸만 띄운다(문·입구·보스 구역 규칙은 그대로) */
+  const soft=(x,y)=>{const T=taken.splice(0);const ok=clear(x,y,1.2);taken.push(...T);return ok&&!T.some(t=>Math.hypot(t.x-x,t.y-y)<1.5);};
+  for(const{e}of es){const d=INSET.seaweed,q=spotOf(e,d),a=SEA[sw%SEA.length];if(!inner(e,d)||onPath(q.x,q.y)||!soft(q.x,q.y))continue;
+   taken.push({x:q.x,y:q.y,r:1.2});out.push({id:'r730:'+fx.id+':seaweed:b'+sw,kind:'seaweed',path:a.path,height:a.height,x:q.x,y:q.y,side:e.side});sw++;break;}}}
  // R810 길 등롱: 길잡이 길(R169) 곁 2칸 옆 열린 바닥에 7칸마다 등롱대 — 뒤쪽 끝 석등은 길에서 가장 가까운 것도 12칸 밖이라(헤드리스 실측 last303) 길 위 화면에 등불이 없었다
  if(PATH&&Z.pathposts){const open4=(x,y)=>has(x,y)&&has(x+1,y)&&has(x-1,y)&&has(x,y+1)&&has(x,y-1);let n=0,last=null;
   for(const k of PATH){if(n>=Z.pathposts)break;const[cx,cy]=String(k).split(',').map(Number);if(!Number.isFinite(cx+cy)||last&&Math.hypot(cx-last[0],cy-last[1])<7)continue;
