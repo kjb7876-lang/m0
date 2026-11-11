@@ -30,6 +30,7 @@ try{
  if(typeof fx==='function'){const base=fx;fx=function(type,x,y,o,...a){const r=base.call(this,type,x,y,o,...a);try{const P=X();if(P&&type==='sigil'&&o&&typeof VFX!=='undefined'&&o.asset===VFX.heal&&Number.isFinite(x+y)){P.play('heal-aoe',x,y,{k:(o.size||1)>=1.6?1.15:.8});stats.heals++;}}catch(e){fail(e);}return r;};}
  if(typeof killEnemy==='function'){const base=killEnemy;killEnemy=function(e,...a){const first=!!e&&!e.deadRecorded;const r=base.apply(this,[e,...a]);try{const P=X();if(prefs.on&&first&&e&&Number.isFinite(e.x+e.y)&&!e.samongR103Silent){
    if(e.boss){if(P){P.play('dark-explosion-blood',e.x,e.y,{k:1.6,rate:1.2});stats.bossDeaths++;}}
+   else if(window.__STORYWORLD_MOB_DEATH_R462__?.owns?.(e))stats.deathR462=(stats.deathR462||0)+1;/* R690: R462 자기 그림 죽음과 겹치지 않게 연기 생략 */
    else{const t=T();deaths=deaths.filter(d=>t-d<1.4);if(deaths.length<DEATH_MAX){deaths.push(t);puffs.push({x:e.x,y:e.y,t0:t,seed:Math.random()*6});if(puffs.length>12)puffs.shift();arm();stats.deaths++;}else stats.deathSkipped++;}}}catch(err){fail(err);}return r;};}
  if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e&&e.type==='r165-fx'){try{drawPuffs();}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};}
  if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{const tt=T();for(let i=puffs.length-1;i>=0;i--)if(tt-puffs[i].t0>.8)puffs.splice(i,1);if(puffs.length)arm();else if(typeof effects!=='undefined'){const i=effects.indexOf(SENT);if(i>=0)effects.splice(i,1);}

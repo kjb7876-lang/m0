@@ -135,6 +135,9 @@
   const img=typeof readyImage==='function'?readyImage(it.path)?.image:null;if(!img&&typeof addImage==='function')addImage(it.path,'R91 generated '+kind);return img?{img,it}:null;}
  function onDeath(e,x,y){if(!floor||!Number.isFinite(x+y)||!(prefs.remains||prefs.deathFx))return;
   if(e.boss||e.midboss||e.type==='boss'||e.persona){fstats.skippedBoss++;return;}
+  // R690: R462 가 그 몹 자기 그림으로 찢김·사체를 그리는 죽음이면 공용 잔해(다른 몹 시체 그림)·파편 시트를 겹쳐 그리지 않는다
+  //  (사용자 2026-11-11 "몹들죽을때 이미지여러개 겹치고 … 혼란스럽게").
+  try{if(window.__STORYWORLD_MOB_DEATH_R462__?.owns?.(e)){fstats.skippedR462=(fstats.skippedR462||0)+1;return;}}catch(_){}
   if(typeof layer!=='undefined'&&layer!=='STORY')return;if((window.__STORYWORLD_COOP_SIM_R62__?.mode?.()||'off')!=='off')return;
   if(prefs.deathFx)startDeath(e,x,y,familyOf(e));if(!prefs.remains)return;
   if(markZone!==zone){marks=[];markZone=zone;}
