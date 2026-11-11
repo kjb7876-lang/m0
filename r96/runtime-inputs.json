@@ -8173,7 +8173,8 @@
     "assets/r760/mid/sheet-hit.webp",
     "assets/r760/mid/sheet-death.webp",
     "assets/r760/boss/sheet-atkB2.webp",
-    "assets/r760/boss/sheet-hit2.webp"
+    "assets/r760/boss/sheet-hit2.webp",
+    "cursor-r780.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9248,5 +9249,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "a4dcdeb031847247c2daeff7df4ad795b6c7de3dba22a71427280d53be4fea08"
+  "runtimeManifestSHA256": "c2bea2539c59a147b2b0037946951cda136882b05aa3a910c3e5c71fa7e29f50"
 }
