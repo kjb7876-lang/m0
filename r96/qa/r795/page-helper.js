@@ -9,12 +9,23 @@ const arrows=()=>{const sx=(keys.has('ArrowRight')?1:0)-(keys.has('ArrowLeft')?1
 const statusLabels=()=>{const out=[];try{for(const k of ['__STORYWORLD_FOUR_ELEMENTS_R61__','__STORYWORLD_REGION_AFFLICTIONS_R58__','__STORYWORLD_HOSPITAL_WOUNDS_R53__'])for(const r of (window[k]?.statusRows?.()||[]))out.push(String(r.key||r.kind||r.label||'?'));}catch(_){}if(player.storyStatus150)out.push('story150:'+(player.storyStatus150.kind||player.storyStatus150.key||'?'));if(Number(player.heroSlowUntil150)>time)out.push('slow150');return out;};
 // 이동 잠금 감시: 방향키를 누르고 있는데 0.6초 동안 0.25칸도 못 가고, 같은 자리의 허수 몸은 갈 수 있을 때.
 const lock={since:null,x:0,y:0,rows:[]};
+// 이동 잠금이 잡혔을 때 까닭을 남기는 틱 기록(읽기만): 틱마다 엔진이 영웅을 옮기려 한 횟수·거리(moveActor 를 바깥에서 한 겹 감싸 센다)와 틱 뒤 실제 위치,
+//  위치를 되돌리는 덧씌우기들의 누적 수(R425 발 딛기·R137 속박·R113 자리 복귀)를 0.9초치 둥근 기록에 둔다.
+const trace=[];const mv={calls:0,dist:0,ret:0};
+try{if(typeof moveActor==='function'&&!moveActor.__hq795){const base=moveActor;const w=function(a,dx,dy,...r){if(a!==player)return base.call(this,a,dx,dy,...r);const x=a.x,y=a.y;const out=base.call(this,a,dx,dy,...r);mv.calls++;mv.dist+=Math.hypot(a.x-x,a.y-y);if(out===false)mv.ret++;return out;};w.__hq795=true;moveActor=w;}}catch(_){}
+const cnt=()=>{const o={};try{const s=window.__STORYWORLD_COMBAT_FLOW_R425__?.inspect?.()?.stats;o.planted=s?.planted||0;}catch(_){}try{o.bindHeld=window.__STORYWORLD_COMBAT_R137__?.inspect?.()?.stats?.bindHeld||0;}catch(_){}try{o.dance=window.__STORYWORLD_PLAY_R113__?.inspect?.()?.stats?.danceReturns||0;}catch(_){}try{o.r87=!!window.__STORYWORLD_PAINTED_VFX_R87__?.inspect?.().binding;}catch(_){}return o;};
+function traceTick(x0,y0){const v=arrows();trace.push({t:+time.toFixed(3),v:v?[+v.x.toFixed(2),+v.y.toFixed(2)]:null,from:[+x0.toFixed(3),+y0.toFixed(3)],to:[+player.x.toFixed(3),+player.y.toFixed(3)],mvCalls:mv.calls,mvDist:+mv.dist.toFixed(3),mvFalse:mv.ret,moving:!!player.moving,aa:+(+player.attackAnim||0).toFixed(2),sa:+(+player.skillAnim||0).toFixed(2),dash:+(+player.dashAnim||0).toFixed(2),hurt:+(+player.hurtAnim||0).toFixed(2),route:(typeof route!=='undefined'&&route?route.length:0),...cnt()});mv.calls=0;mv.dist=0;mv.ret=0;if(trace.length>54)trace.shift();}
+function traceSummary(){const n=trace.length;if(!n)return null;const f=trace[0],l=trace[n-1];const sum=k=>trace.reduce((s,r)=>s+r[k],0);
+ return {ticks:n,span:+(l.t-f.t).toFixed(2),ticksWithArrows:trace.filter(r=>r.v).length,ticksMoving:trace.filter(r=>r.moving).length,mvCalls:sum('mvCalls'),mvDist:+sum('mvDist').toFixed(2),mvFalse:sum('mvFalse'),
+  netPerTick:+trace.reduce((s,r)=>s+Math.hypot(r.to[0]-r.from[0],r.to[1]-r.from[1]),0).toFixed(2),jumpsBetweenTicks:+trace.slice(1).reduce((s,r,i)=>s+Math.hypot(r.from[0]-trace[i].to[0],r.from[1]-trace[i].to[1]),0).toFixed(2),
+  planted:l.planted-f.planted,bindHeld:l.bindHeld-f.bindHeld,dance:l.dance-f.dance,r87:trace.some(r=>r.r87),aaTicks:trace.filter(r=>r.aa>0).length,saTicks:trace.filter(r=>r.sa>0).length,dashTicks:trace.filter(r=>r.dash>0).length,hurtTicks:trace.filter(r=>r.hurt>0).length,routeTicks:trace.filter(r=>r.route>0).length,dirs:[...new Set(trace.filter(r=>r.v).map(r=>r.v.join()))].slice(0,6)};}
+
 function watchLock(){const v=arrows();if(!v||modal||loading||player.hp<=0){lock.since=null;return;}
  if(lock.since===null){lock.since=time;lock.x=player.x;lock.y=player.y;return;}
  const moved=Math.hypot(player.x-lock.x,player.y-lock.y);
  if(moved>.25){lock.since=time;lock.x=player.x;lock.y=player.y;return;}
  if(time-lock.since>.6){const free=dummyMove(v.x*.4,v.y*.4);if(free>.2){let bound=false;try{bound=!!window.__STORYWORLD_COMBAT_R137__?.bound?.()||!!window.__STORYWORLD_PAINTED_VFX_R87__?.inspect?.().binding;}catch(_){}
-   const row={at:tag,t:+time.toFixed(2),dur:+(time-lock.since).toFixed(2),bound,status:statusLabels(),skillAnim:+player.skillAnim.toFixed(2),attackAnim:+player.attackAnim.toFixed(2),guard:player.guard,pos:[+player.x.toFixed(2),+player.y.toFixed(2)],hero:player.hero};
+   const row={at:tag,t:+time.toFixed(2),dur:+(time-lock.since).toFixed(2),bound,status:statusLabels(),skillAnim:+player.skillAnim.toFixed(2),attackAnim:+player.attackAnim.toFixed(2),guard:player.guard,pos:[+player.x.toFixed(2),+player.y.toFixed(2)],hero:player.hero,why:(()=>{try{return traceSummary();}catch(_){return null;}})(),last:trace.slice(-12).map(r=>[r.t,r.v&&r.v.join('/'),r.from.join('/'),r.to.join('/'),r.mvCalls,r.mvDist,r.aa,r.sa,r.planted])};
    const last=lock.rows[lock.rows.length-1];if(last&&last.at===tag&&row.t-last.t<1.2){last.dur=+(last.dur+(row.t-last.t)).toFixed(2);last.t=row.t;}else lock.rows.push(row);}
   lock.since=time;lock.x=player.x;lock.y=player.y;}}
 const seenF={aa:false,sa:false,shots:0};
@@ -27,7 +38,7 @@ function inv(){ticks++;if(player.attackAnim>0)seenF.aa=true;if(player.skillAnim>
  if(ticks%20===0){try{if(blocked(player.x,player.y,.2))push('inside-solid',[player.x,player.y].map(v=>+v.toFixed(2)).join());}catch(_){}}
  watchLock();}
 function step(sec,drawEvery=6){const n=Math.round(sec*60),t0=time;let stoppedBy=null;for(let i=0;i<n;i++){if(modal){stoppedBy='modal';break;}if(loading){stoppedBy='loading';break;}if(player.hp<=0){stoppedBy='dead';break;}
-  watchDmg();try{tick(1/60);}catch(e){push('tick-throw',String(e&&e.stack||e).slice(0,400));stoppedBy='throw';break;}inv();watchDmg();
+  watchDmg();const _x0=player.x,_y0=player.y;try{tick(1/60);}catch(e){push('tick-throw',String(e&&e.stack||e).slice(0,400));stoppedBy='throw';break;}try{traceTick(_x0,_y0);}catch(_){}inv();watchDmg();
   if(i%drawEvery===0){try{draw();}catch(e){push('draw-throw',String(e&&e.stack||e).slice(0,400));}}}
  return {dt:+(time-t0).toFixed(3),stoppedBy};}
 function sweep(){const r={};for(const k of Object.keys(window)){if(!/^__STORYWORLD|^__HAPIL/.test(k))continue;const o=window[k];if(!o||typeof o!=='object')continue;let ins=null;try{ins=typeof o.inspect==='function'?o.inspect():null;}catch(e){r[k]={e:'inspect-throw',le:String(e).slice(0,160)};continue;}
@@ -80,5 +91,5 @@ async function heroDrawn(){await new Promise(r=>setTimeout(r,80));const map=new 
  try{draw();}finally{drawHero=base;}
  const h=player.hero,low=seen.map(k=>k.toLowerCase());
  return {calls,n,hero:[...new Set(low.filter(k=>k.includes(h)))].slice(0,4),others:[...new Set(low.filter(k=>/hero/.test(k)&&!k.includes(h)).map(k=>(k.match(/(hwando|seoha|neon|michaela|lauren|hunter|slayer|gunner)/)||[])[1]).filter(Boolean))],pose:heroPose()};}
-window.__HQ795={engage,engageWhy,hitFacts,still,heroDrawn,hudCd,seenF,resetSeen(){seenF.aa=false;seenF.sa=false;},viol,lock,step,sweep,snap,findOpen,placeNear,pickEnemy,tp,enemyHpSum,dummyMove,DIRS8,openAt,nearestLive,statusLabels,setTag:t=>{tag=t;lock.since=null;},drain(){const v=viol.splice(0),l=lock.rows.splice(0);return {viol:v,locks:l};}};
+window.__HQ795={traceSummary,engage,engageWhy,hitFacts,still,heroDrawn,hudCd,seenF,resetSeen(){seenF.aa=false;seenF.sa=false;},viol,lock,step,sweep,snap,findOpen,placeNear,pickEnemy,tp,enemyHpSum,dummyMove,DIRS8,openAt,nearestLive,statusLabels,setTag:t=>{tag=t;lock.since=null;},drain(){const v=viol.splice(0),l=lock.rows.splice(0);return {viol:v,locks:l};}};
 })();

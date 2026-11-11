@@ -123,8 +123,8 @@ async function runHero(b,hero,rows,part){const {ctx,p,errs}=await boot(b,hero);
   await E(()=>{player.resonance=10;player.egoCD=0;});await press('f');const f3=await snap();rec('sc08','공명 모자라면 EGO 안 나감',f3.ego===0,{ego:f3.ego});await end('sc08');}
 
  // ---- SC09 전환 난타(무작위 입력) ----
- if(want('sc09')){await begin('sc09');await safeHp();await toEnemy();let seed=ALL.indexOf(hero)*7919+13;const rnd=()=>{seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff;};const held=new Set();let deaths=0;
-  for(let i=0;i<150;i++){const r=rnd();
+ if(want('sc09')){await begin('sc09');await safeHp();await toEnemy();let seed=ALL.indexOf(hero)*7919+13+(Number(process.env.SW_SEED)||0);/* SW_SEED·SW_FUZZ_N: 드문 일을 잡으려 난타를 다른 씨앗으로 길게 돌릴 때 */const rnd=()=>{seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff;};const held=new Set();let deaths=0;
+  for(let i=0;i<(Number(process.env.SW_FUZZ_N)||150);i++){const r=rnd();
    if(r<.3){const k=['ArrowRight','ArrowLeft','ArrowUp','ArrowDown'][Math.floor(rnd()*4)];if(held.has(k)){await p.keyboard.up(k);held.delete(k);}else{await p.keyboard.down(k);held.add(k);}}
    else if(r<.45){if(held.has('a')){await p.keyboard.up('a');held.delete('a');}else{await p.keyboard.down('a');held.add('a');}}
    else if(r<.75){await press(['q','w','e','r','s','f'][Math.floor(rnd()*6)]);}
