@@ -34503,6 +34503,21 @@
       "sha256": "c6048ea4aa403b998e0bf8c3f547e3cc5dadf589e4ca1201b78c6ae86de445ee"
     },
     {
+      "path": "assets/r712/SOURCE.md",
+      "bytes": 1643,
+      "sha256": "caaa5272cd1aeb702272c80ec2369da8038dee8730578ece00e5f8cb708ecdce"
+    },
+    {
+      "path": "assets/r712/chest-closed.png",
+      "bytes": 20289,
+      "sha256": "c89abef3c935f6e6765328f41c292285997d49c60dce50928f9afcf37df3a73f"
+    },
+    {
+      "path": "assets/r712/chest-open.png",
+      "bytes": 30458,
+      "sha256": "7de5653e543aa67c3cde0ddd05baea8142b188876c6847114dbe76faf8e76d09"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -43389,8 +43404,8 @@
     },
     {
       "path": "growth-r103.js",
-      "bytes": 19855,
-      "sha256": "25856c536913af24e3e2be46ad7891e275bb24f68354b6ef98095b413fd78f21"
+      "bytes": 20253,
+      "sha256": "a01446a27d43060d61490a697c6befe018a56a996ba6a88dac05d2c49f238ea6"
     },
     {
       "path": "guide-clear-r426.js",
@@ -44553,8 +44568,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 8910,
-  "totalBytes": 1228631185,
+  "fileCount": 8913,
+  "totalBytes": 1228683973,
   "webHTMLSha256": "50bb81bfe1c0759805da71ee259f6ce8826210ba5e192c1bed9f84b1480a9814",
   "largest": [
     {
