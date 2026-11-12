@@ -476,6 +476,8 @@ jobs:
         run: node r96/qa/r947/r947-cpu-check.cjs
       - name: R953 gunner veil passives (cloak cuts ultimate cooldown and cast delay by 77%, lock-on barrage, machine-boss allies for 7s kept out of the enemy list) CPU check
         run: node r96/qa/r953/r953-cpu-check.cjs
+      - name: R962 survival passives (core beam is not a hero hit, placed-hero shots credit their own body, R950 finale off on the survival stage) CPU check
+        run: node r96/qa/r962/r962-cpu-check.cjs
       - name: R463 seven-sins boss art (one form per fight, one body height, no cut-out broom) CPU check
         run: node r96/qa/r463/r463-cpu-check.cjs
       - name: R511 empty samong rooms get a guarded memory shard CPU check

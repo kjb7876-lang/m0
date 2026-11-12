@@ -44069,8 +44069,8 @@
     },
     {
       "path": "finale-r950.js",
-      "bytes": 20673,
-      "sha256": "edbc04a7b8a139df5e1c38044922b53649dec5d177d22cfa953f0b3ba0b1c79f"
+      "bytes": 20792,
+      "sha256": "67abf4b98773e445e46d3bc963a9397687f5624e4470a7c5588bf4b6c7ad962b"
     },
     {
       "path": "fx-blood-r190.js",
@@ -44359,8 +44359,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6575677,
-      "sha256": "96c7dccabf01f5c1f449bb41de2221fbe319625aea58b0682663105b637712f6"
+      "bytes": 6575729,
+      "sha256": "e086bf913e4c8c7b68c088f54df456cca7cefa9db005338529ed94c63bd8627b"
     },
     {
       "path": "intro-r140.js",
@@ -45208,9 +45208,14 @@
       "sha256": "d8f8aae6834324a74f511e8296540889e8143696f339761963250a67ec2849af"
     },
     {
+      "path": "survival-passives-r962.js",
+      "bytes": 5153,
+      "sha256": "e1581e7df6d0682a905460015c0f628c704eef4ccd5d25322da5564082a5a3f1"
+    },
+    {
       "path": "survival-r600.js",
-      "bytes": 69566,
-      "sha256": "0c7be17b80110b11fe03e65c469b91487f067a75120942d3187dc7bf8f00b2e9"
+      "bytes": 70023,
+      "sha256": "17afa586ab21071e5a16ea8e865a73bb630d1989746dc5f092c777465fe4b11e"
     },
     {
       "path": "swamp-hands-r474.js",
@@ -45453,9 +45458,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9090,
-  "totalBytes": 1241148272,
-  "webHTMLSha256": "96c7dccabf01f5c1f449bb41de2221fbe319625aea58b0682663105b637712f6",
+  "fileCount": 9091,
+  "totalBytes": 1241154053,
+  "webHTMLSha256": "e086bf913e4c8c7b68c088f54df456cca7cefa9db005338529ed94c63bd8627b",
   "largest": [
     {
       "path": "index.html",

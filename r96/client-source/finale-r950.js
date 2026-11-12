@@ -25,7 +25,7 @@ let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.stack||e).s
 const T=()=>typeof time==='number'?time:performance.now()/1e3;
 const clamp=(x,a=0,b=1)=>x<a?a:x>b?b:x;
 const solo=()=>{try{const m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();return !m||m==='off';}catch(_){return true;}};
-const storyRoom=()=>{try{return typeof room!=='undefined'&&room&&room.id===ZONE&&(room.layer==='STORY'||room.layer==null)&&(typeof layer==='undefined'||layer==='STORY');}catch(_){return false;}};
+const storyRoom=()=>{try{return typeof room!=='undefined'&&room&&room.id===ZONE&&!room.survivalR600/* R962: 무한 생존 cult04 무대는 같은 id·STORY 층이지만 스토리 방이 아니다 */&&(room.layer==='STORY'||room.layer==null)&&(typeof layer==='undefined'||layer==='STORY');}catch(_){return false;}};
 const active=()=>prefs.on&&solo()&&storyRoom();
 const live=e=>e&&e.hp>0&&!e.deadRecorded;
 const leaderAlive=()=>(room.enemies||[]).find(e=>e&&e.nativeId===LEADER&&live(e))||null;
