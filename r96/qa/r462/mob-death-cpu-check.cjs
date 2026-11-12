@@ -17,9 +17,9 @@ function env(o={}){const calls=[];const g={window:{},localStorage:{getItem:()=>o
  function project(x,y){return{x:x*10,y:y*10};}function actorHeight(){return 60;}function readyImage(p){return{image:{src:p,naturalWidth:1536,naturalHeight:1024}};}
  function sprite(p,x,y,h,opt){calls.push('sprite:'+p+':'+(opt&&opt.filter||''));return true;}
  function drawAssetFrame3(p,f,x,y,h,opt){calls.push('frame:'+p+':'+(opt&&opt.filter||''));return true;}
- function texture(){calls.push('texture');}
+ function texture(p){calls.push('texture:'+p);}
  function drawEnemy(e){sprite(e.drawn,0,0,60*(e.big||1),{flip:false});sprite('assets/vfx/status.png',0,0,12,{});}
- function drawBurnDeath3(fx){calls.push('base:'+(fx.bodyPath||'none'));}
+ function drawBurnDeath3(fx){calls.push('base:'+(fx.bodyPath||'none'));if(fx.age<.52)texture(VFX.burnFlame);if((fx.embers||[]).length)calls.push('embers');}
  function drawObjective(){calls.push('objective');}
  function enterRegion(){return 1;}`,g);
  vm.runInContext(src,g);return g;}
@@ -39,13 +39,16 @@ ok('blood burst sheet drawn',g.calls.includes('ctx.drawImage:assets/r411/fx/boss
 // 불: 엔진 불꽃은 몸 빼고
 const e2={id:'m2',name:'유리 망령',hp:5,drawn:'assets/r380/mobs/glass.webp'};vm.runInContext('drawEnemy',g)(e2);
 const fx2={type:'enemyBurnDeath',sourceId:'m2',x:5,y:5,age:.5,life:.72,bodyPath:'assets/other/foreign.png'};g.calls.length=0;vm.runInContext('drawBurnDeath3',g)(fx2);
-ok('fire: engine flame/embers kept without its body',g.calls.includes('base:none')&&g.calls.includes('ctx.drawImage:assets/r411/fx/boss-fire-wall.webp')&&g.calls.some(c=>c.startsWith('sprite:assets/r380/mobs/glass.webp')));
+// R775(사용자 11-12 07:11Z '죽을때 불붙는 연출 없애'): 엔진 불꽃·불티·화염벽 시트·달아오름 없이 부서져 내려앉기만
+ok('R775 fire kind: no engine flame, no fire-wall sheet, own body pieces',!g.calls.some(c=>/^base:|^texture:|boss-fire-wall/.test(c))&&g.calls.some(c=>c.startsWith('sprite:assets/r380/mobs/glass.webp')));
 ok('fire body chars (brightness drops)',g.calls.some(c=>/sprite:assets\/r380\/mobs\/glass\.webp:brightness\(0\.[0-9]/.test(c)));
 // 보스 그대로
 const fx3={type:'enemyBurnDeath',sourceId:'m1',boss:true,x:1,y:1,age:.1,life:1.25,bodyPath:'assets/boss.png'};g.calls.length=0;vm.runInContext('drawBurnDeath3',g)(fx3);
-ok('boss death untouched',g.calls.join()==='base:assets/boss.png'&&fx3.life===1.25);
+ok('R775 boss death: engine body only, flame texture and embers removed',g.calls.join()==='base:assets/boss.png'&&fx3.life===1.25);
+{const fb={type:'enemyBurnDeath',sourceId:'m1',boss:true,x:1,y:1,age:.1,life:1.25,bodyPath:'assets/boss.png',embers:[{delay:0}]};g.calls.length=0;vm.runInContext('drawBurnDeath3',g)(fb);ok('R775 embers removed too',!g.calls.includes('embers')&&!g.calls.some(c=>c.startsWith('texture:')),g.calls);
+ vm.runInContext('texture',g)('assets/other.png');ok('R775 texture restored after the death draw',g.calls.includes('texture:assets/other.png'));}
 // 기억 못 한 몹 → 엔진 그대로
-const fx4={type:'enemyBurnDeath',sourceId:'zz',x:1,y:1,age:.1,life:.72,bodyPath:'p.png'};g.calls.length=0;vm.runInContext('drawBurnDeath3',g)(fx4);ok('unknown mob falls back to engine',g.calls.join()==='base:p.png');
+const fx4={type:'enemyBurnDeath',sourceId:'zz',x:1,y:1,age:.1,life:.72,bodyPath:'p.png'};g.calls.length=0;vm.runInContext('drawBurnDeath3',g)(fx4);ok('unknown mob falls back to engine (R775 without flame)',g.calls.join()==='base:p.png',g.calls);
 // 시체
 vm.runInContext('time=3',g);g.calls.length=0;vm.runInContext('drawObjective',g)();
 ok('corpses drawn at ground after objective (2)',M.inspect().corpses===2&&g.calls[0]==='objective'&&g.calls.some(c=>c.startsWith('sprite:assets/r380/mobs/spider-own.webp:brightness(.82)'))&&g.calls.some(c=>c.startsWith('sprite:assets/r380/mobs/glass.webp:brightness(.58)'))/* R532: 사체 색을 본체에 가깝게(.68→.82, .42→.58) */);
@@ -60,6 +63,7 @@ const gl=env({low:true}),Ml=gl.__STORYWORLD_MOB_DEATH_R462__;for(let i=0;i<20;i+
 ok('low-fx corpse cap 10',Ml.inspect().corpses===10);
 // 끄기
 const go=env({prefs:{on:false}});vm.runInContext('drawEnemy',go)({id:'m1',name:'망각의 거미',hp:3,drawn:'s.webp'});const fo={type:'enemyBurnDeath',sourceId:'m1',x:1,y:1,age:.1,life:.72,bodyPath:'p.png'};go.calls.length=0;vm.runInContext('drawBurnDeath3',go)(fo);
-ok('off switch keeps engine death',go.calls.join()==='base:p.png'&&fo.life===.72);
+ok('off switch keeps engine death (R775 flame removal is its own setting)',go.calls.join()==='base:p.png'&&fo.life===.72,go.calls);
+{const gf=env({prefs:{flame:true}});const ff={type:'enemyBurnDeath',sourceId:'q',x:1,y:1,age:.1,life:.72,bodyPath:'p.png'};gf.calls.length=0;vm.runInContext('drawBurnDeath3',gf)(ff);ok('R775 flame:true brings the old engine flame back',gf.calls.includes('texture:assets/vfx/burn.png'),gf.calls);}
 const gc=env({prefs:{corpses:false}});vm.runInContext('drawEnemy',gc)({id:'m1',name:'망각의 거미',hp:3,drawn:'s.webp'});vm.runInContext('drawBurnDeath3',gc)({type:'enemyBurnDeath',sourceId:'m1',x:1,y:1,age:.1,life:.72});ok('corpses:false → no corpse',gc.__STORYWORLD_MOB_DEATH_R462__.inspect().corpses===0);
 console.log(`R462 mob death: ${pass} pass, ${fail} fail`);process.exit(fail?1:0);
