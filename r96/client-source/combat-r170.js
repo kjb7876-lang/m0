@@ -66,10 +66,13 @@ function spotFor(n,taken){const L=room.exploration;if(!L?.floorCells?.length)ret
 function towers(){return (room?.enemies||[]).filter(e=>e.r170Tower);}
 let placedKey='',storyAt=0,spotKey='',spot0=null;
 function nearSpot(){const key=String(room.id);if(spotKey!==key){spotKey=key;spot0=wanted()?spotFor(0,[]):null;}return !!spot0&&Math.hypot(spot0.x-player.x,spot0.y-player.y)<10;}
+// R795: 본뜰 잡몹을 글자로 떠 둘 때 방 객체·자기 자신을 가리키는 필드는 뺀다 — R390 이 싸움에 든 몹에 e.r390Engaged = 방 객체를 적어 두는데,
+//  그대로 JSON.stringify 하면 순환 참조로 터져 조형물이 서지 않았고(방은 '이미 세움'으로 적혀 다시 시도도 안 함) 방 전체를 떠 넣을 뻔했다.
+function snapOf(e){const stack=[],R=typeof room==='object'?room:null;return JSON.stringify(e,function(k,v){if(k==='r390Engaged')return undefined;if(v&&typeof v==='object'){while(stack.length&&stack[stack.length-1]!==this)stack.pop();if(v===R||stack.includes(v))return undefined;stack.push(v);}return v;});}
 function place(){const want=prefs.towers?wanted():0,key=String(room.id)+':'+String(room.samongR103?.zone||''),x=room.samongR103;if(!want){placedKey=key;if(x&&x.r173PlacedKey!==key){x.r173PlacedKey=key;x.r173Need=0;}return;}if(placedKey===key)return;// 한 구역에 한 번만(깨진 탑이 다시 서지 않게)
  if(x&&x.r173PlacedKey===key){placedKey=key;return;}// 같은 방 객체로 다시 들어와도 깨진 탑은 다시 서지 않는다
  const art=artFor();if(!art)return;const donor=(room.enemies||[]).find(e=>e.hp>0&&!major(e)&&!e.r170Tower);if(!donor)return;placedKey=key;
- let atk=40;try{atk=Math.max(1,Number(attackPower())||40);if(player.samong>0)atk/=7;else if(player.ego>0)atk/=1.55*(1+.07*Math.max(0,(player.egoStackR169||1)-1));}catch(_){}/* 잠깐 버프(사몽·EGO) 뺀 값 */const snap=JSON.stringify(donor),taken=[];
+ let atk=40;try{atk=Math.max(1,Number(attackPower())||40);if(player.samong>0)atk/=7;else if(player.ego>0)atk/=1.55*(1+.07*Math.max(0,(player.egoStackR169||1)-1));}catch(_){}/* 잠깐 버프(사몽·EGO) 뺀 값 */const snap=snapOf(donor),taken=[];
  for(let n=towers().length;n<want;n++){const at=spotFor(n,taken);if(!at)break;taken.push(at);let e;try{e=JSON.parse(snap);}catch(_){break;}
   Object.assign(e,{id:'r170:tower:'+room.id+':'+n,x:at.x,y:at.y,homeX:at.x,homeY:at.y,nav:[],navAt:0,attack:null,rangedWindup:0,deadRecorded:false,spawnState:'active',
    r170Tower:{art:art.path,h:art.h,next:T()+3,casts:0,summoned:0,snap},r75Tower:true,r61PreserveHealth:true,speed:0,ai:'melee',samongElite:false,samongSurvival:false,r162Lane:false,samongSubR170:false,
