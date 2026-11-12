@@ -59,8 +59,8 @@ function process(e,cmds,st0){
  const curPath=srcOf(c),rect=String(c.sourceRect||'');
  let ghost=null;
  if(prefs.xfade&&s.prev&&curPath!==s.lastPath&&s.prev.path!==curPath&&s.prev.rect===rect&&t-s.prev.at<.2){s.xFrom=s.prev;s.xAt=t;stats.xfades++;}
- if(s.xFrom&&t-s.xAt<.09&&s.xFrom.path!==curPath){const u=(t-s.xAt)/.09;ghost={...c,image:s.xFrom.image,sourcePath:s.xFrom.path,style:{...(c.style||{}),globalAlpha:(c.style?.globalAlpha??1)*(1-u)*.85},r620Ghost:true};}
- s.prev={path:curPath,image:c.image,rect,at:t};s.lastPath=curPath;
+ if(s.xFrom&&t-s.xAt<.09&&s.xFrom.path!==curPath){const u=(t-s.xAt)/.09;ghost={...c,image:s.xFrom.image,sourcePath:s.xFrom.path,imageSize:s.xFrom.size||c.imageSize,style:{...(c.style||{}),globalAlpha:(c.style?.globalAlpha??1)*(1-u)*.85},r620Ghost:true};}
+ s.prev={path:curPath,image:c.image,rect,size:c.imageSize,at:t};s.lastPath=curPath;
  apply(c,G,s);if(ghost){ghost.points=c.points.map(p=>Array.isArray(p)?[...p]:p);const i=cmds.indexOf(c);if(i>=0)cmds.splice(i+1,0,ghost);}
  stats.shaped++;}
 // 다른 덧씌우기(R425 크기·좌우, R463 7대죄 그림 등)가 몸을 다 고친 뒤에 움직임을 얹어야 하므로, 모든 스크립트가 실린 다음(setTimeout 0) 한 번 맨 바깥에서 감싼다.

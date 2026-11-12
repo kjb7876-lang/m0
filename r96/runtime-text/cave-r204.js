@@ -74,13 +74,13 @@ const ZONES={
   decalMix:{near:[[2,3],[5,2],[6,2],[0,1]],open:[[0,3],[5,2],[6,2],[7,1],[11,1]]},decalDensity:12,tufts:['assets/r138/props/weed.webp',.1,1/50],
   tex:{floorA:['assets/r118/tiles/garden.webp',0],floorB:['assets/r118/tiles/meadow.webp',0],rock:['assets/r99/outdoor/ground-ruin.webp',1],face:['assets/r99/outdoor/ground-moss.webp',1]}},
  // 잠들지 못하는 마을(4부): 바닷가 마을 — 포장 돌길·모래, 낮은 언덕, 둔덕 위 풀
- last302:{seed:0x5d3020,tint:[.9,.88,.84],floorBGain:1.03,topK:1.9,floorK:1.05,hiTop:1.4,loTop:.5,bulge:.8,widen:false,web:false,pillars:false,boulders:1/130,
-  decalMix:{near:[[5,3],[6,3],[2,1],[11,1]],open:[[0,2],[5,3],[6,2],[7,2]]},decalDensity:13,tufts:['assets/r138/props/weed.webp',.1,1/60],
-  tex:{floorA:['assets/r118/tiles/sleepport.webp',0],floorB:['assets/r118/tiles/sandgold.webp',0],rock:['assets/r99/outdoor/surround-cliff.webp',-1],face:['assets/r99/outdoor/ground-cliff.webp',1]}},/* R407: 드라이브 SW-TILE B19 포구 젖은 모래(전엔 포장 돌길) */
+ last302:{seed:0x5d3020,tint:[.74,.8,.96]/* R730: 남색 달빛(귀비탕 영상의 창살 너머 달빛) — 석등·화로의 호박색과 맞서게. 전엔 [.9,.88,.84] */,floorBGain:1.03,topK:1.9,floorK:1.05,hiTop:1.4,loTop:.5,bulge:.8,widen:false,web:false,pillars:false,boulders:1/130,
+  decalMix:{near:[[5,3],[6,3],[2,1],[11,1]],open:[[5,3],[6,2],[7,2],[11,1],[2,.5]]}/* R810: 거미 모양 균열(0번) 뺌 — 마을 길에 벌레처럼 읽혔다 */,decalDensity:13,tufts:['assets/r138/props/weed.webp',.1,1/60],
+  tex:{floorA:['assets/r118/tiles/sleepport.webp',0],floorB:['assets/r118/tiles/gravepath.webp',1]/* R810: 금빛 사막 모래(r118 금모래) → 잿빛 막돌 길(마을 골목) — 밤 장면이 누런 사막으로 읽혔다 */,rock:['assets/r99/outdoor/surround-cliff.webp',-1],face:['assets/r99/outdoor/ground-cliff.webp',1]}},/* R407: 드라이브 SW-TILE B19 포구 젖은 모래(전엔 포장 돌길) */
  // 한약과 불면귀(4부): 약초 마을 — 돌길·풀밭, 살아 있는 나무 몇 그루
- last303:{seed:0x5d3030,tint:[.88,.9,.8],floorBGain:1.02,topK:1.9,floorK:1.03,hiTop:1.4,loTop:.48,bulge:.85,widen:false,web:false,pillars:false,trees:'living',boulders:1/150,
-  decalMix:{near:[[2,2],[11,2],[5,2],[6,2]],open:[[0,1],[11,2],[5,2],[6,2],[7,1]]},decalDensity:12,tufts:['assets/r138/props/weed.webp',.11,1/40],
-  tex:{floorA:['assets/r99/outdoor/ground-paving.webp',0],floorB:['assets/r118/tiles/meadow.webp',0],rock:['assets/r99/outdoor/surround-moss.webp',-1],face:['assets/r99/outdoor/ground-moss.webp',1]}},
+ last303:{seed:0x5d3030,tint:[.72,.82,.9]/* R730: 달빛 아래 약초 마을. 전엔 [.88,.9,.8] */,floorBGain:1.02,topK:1.9,floorK:1.03,hiTop:1.4,loTop:.48,bulge:.85,widen:false,web:false,pillars:false,trees:'living',boulders:1/150,
+  decalMix:{near:[[2,2],[11,2],[5,2],[6,2]],open:[[11,2],[5,2],[6,2],[7,1]]}/* R810: 균열(0번) 뺌 */,decalDensity:12,tufts:['assets/r138/props/weed.webp',.11,1/40],
+  tex:{floorA:['assets/r118/tiles/gravepath.webp',1]/* R810: 서양식 네모 판석 → 잿빛 막돌 길(약초 마을 골목) */,floorB:['assets/r118/tiles/meadow.webp',0],rock:['assets/r99/outdoor/surround-moss.webp',-1],face:['assets/r99/outdoor/ground-moss.webp',1]}},
  // 눈보라 속의 소년(2부): 눈 덮인 바위 언덕·검은 돌
  ep1b06b:{seed:0x5d1066,tint:[.92,.96,1.06],topK:2.1,floorK:1.04,hiTop:1.5,loTop:.45,bulge:1.15,widen:false,web:false,pillars:false,trees:'dead',boulders:1/80,
   decalMix:{near:[[5,4],[6,3],[7,2]],open:[[5,3],[6,3],[7,2],[0,1]]},decalDensity:13,
@@ -876,6 +876,6 @@ const wrappedRenderers=new WeakSet();
 function wrapInst(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(r&&Object.prototype.hasOwnProperty.call(r,'render')&&!wrappedRenderers.has(r)){wrappedRenderers.add(r);r.render=wrapFn(r.render);}}catch(e){fail(e);}}
 setInterval(wrapInst,500);wrapInst();
 function set(p){if(typeof p?.on==='boolean')prefs.on=p.on;if(typeof p?.widen==='boolean')prefs.widen=p.widen;if(typeof p?.skeleton==='boolean')prefs.skeleton=p.skeleton;if(typeof p?.inflate==='boolean')prefs.inflate=p.inflate;if(typeof p?.unify==='boolean')prefs.unify=p.unify;if(typeof p?.rooms==='boolean')prefs.rooms=p.rooms;if(typeof p?.borderRuns==='boolean')prefs.borderRuns=p.borderRuns;if(typeof p?.edge==='boolean')prefs.edge=p.edge;if(typeof p?.round==='boolean')prefs.round=p.round;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
-window.__STORYWORLD_CAVE_R204__=Object.freeze({revision:REV,set,skeletonPoints,inflate,interiorProps,furnish,zones:Object.keys(ZONES),field,topHeight:(F,z,x,y)=>topHeight(F,ZONES[z],x,y),at,
+window.__STORYWORLD_CAVE_R204__=Object.freeze({revision:REV,set,decalKinds:id=>{const m=ZONES[id]?.decalMix;return m?[...new Set([...m.near,...m.open].map(q=>q[0]))].sort((a,b)=>a-b):null;}/* R810 검사용: 지역 데칼 칸 목록 */,skeletonPoints,inflate,interiorProps,furnish,zones:Object.keys(ZONES),field,topHeight:(F,z,x,y)=>topHeight(F,ZONES[z],x,y),at,
  inspect:()=>{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three,st=r?.__r204,F=st?.F;return{revision:REV,prefs:{...prefs},active:!!st?.group?.visible,zone:st?.zone||null,field:F?{ms:F.ms,bulgedCells:F.bulgedCells,protect:F.protect,size:[F.W,F.H]}:null,stats:{...stats},lastError};}});
 })();

@@ -12,9 +12,9 @@
 //  끄기: localStorage['storyworld.r523.rooms']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_ROOMS_R523__)return;
-const REV='R523-rooms-1',KEY='storyworld.r523.rooms';
-const prefs={on:true};
-try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;}catch(_){}
+const REV='R523-rooms-2',KEY='storyworld.r523.rooms';
+const prefs={on:true,samong:true};
+try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;if(typeof s?.samong==='boolean')prefs.samong=s.samong;}catch(_){}
 const stats={builds:0,rooms:0,placed:0,dropped:0,pushed:0,frames:0,shown:0,rested:0,reloads:0,errors:0};let lastError=null,dropLog=[],lastPlan=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 const fin=Number.isFinite,SQ=Math.SQRT1_2,R2=Math.SQRT2,BACK=.5*SQ,RISE=Math.sqrt(3)/2,MW=20,MH=28;
@@ -66,7 +66,15 @@ const ART=Object.freeze(/*ART*/{
  steps:{path:'assets/world-r80/r80-055.webp',h:100,face:'w',ang:'iso',flat:true,up:0.005,ft:[-1.238,1.238,-0.11],clear:1.4,r:[-1.243,1.243,0,2.055],m:'0080000c0000b000098000cc000a6000d7001ed807fcc1ffe43ffd2fffc9fffe5ffffeffffaffff8ffff8fffffffffffffff7ffff3ffff1fffc0fff807fe003f8001f0000c00'},
  shelf_n:{path:'assets/r528/bookshelf-n.webp',h:110,face:'n',ang:'iso',flat:true,ft:[-0.438,0.429,0.21],pair:'shelf_w',r:[-0.438,0.438,0,2.288],m:'3e000ffc00fff80ffff0ffffefffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5ffff01fff001ff00030'},
  shelf_w:{path:'assets/r528/bookshelf-w.webp',h:110,face:'w',ang:'iso',flat:true,ft:[-0.469,0.46,-0.268],pair:'shelf_n',r:[-0.469,0.469,0,2.288],m:'0007c003ff01fff0ffff7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0fff00ff8001c000'},
- flamp:{path:'assets/r529/floor-lamp.webp',h:88,face:'s',ang:'pole',d:0.5,r:[-0.265,0.265,0,1.83],m:'07fe00fff01fff83fffc7fffeffffffffff00f0000700007000070000700007000070000700007000070000700007000070000700007000070000700007000fff03fffc1fff8'}
+ flamp:{path:'assets/r529/floor-lamp.webp',h:88,face:'s',ang:'pole',d:0.5,r:[-0.265,0.265,0,1.83],m:'07fe00fff01fff83fffc7fffeffffffffff00f0000700007000070000700007000070000700007000070000700007000070000700007000070000700007000fff03fffc1fff8'},
+ rig:{path:'assets/r527/body-rig.webp',h:74,face:'n',ang:'iso',flat:true,ft:[-0.929,0.929,0.134],r:[-0.929,0.929,0,1.539],m:'040000e0001f0001f0001f8001f8001f0001f0781f0fc1f0fc1f07c1fc7c1fc3c3fc3c3ff7c3fffc7fffcffffcffffc5fffc07ffe01ffe00fff00fff007fe003f0003e0001a0'},
+ pod:{path:'assets/r527/pod.webp',h:57,face:'n',ang:'iso',flat:true,ft:[-0.937,0.937,0.34],r:[-0.937,0.937,0,1.185],m:'0300007c0007f0007f8007fc011fe03eff0bfff8ffffcffdfc7fcfeffe3efff9efffce7ffe63fff63fffe1fffe1ffff1ffff0ffff03fff01fff00fff007fe001fe000fc00078'},
+ tank:{path:'assets/r527/gothic-tank.webp',h:63,face:'n',ang:'iso',flat:true,ft:[-0.726,0.726,0.332],r:[-0.726,0.726,0,1.31],m:'00000380003c0003e0003e0007f8003fc003ff0e3ffde7fffe3fffe3fffe3fffe3ffff7fffe7ffffffffeffffe7fffe3fffe1fffe03fff01fff00fff007ff003fc001f800030'},
+ lanterns:{path:'assets/r527/lantern-steps.webp',h:78,face:'w',ang:'iso',flat:true,ft:[-0.707,0.707,-0.349],r:[-0.707,0.707,0,1.622],m:'000100001c0003c0003c0003c001fc001fc001fc003fe01ffe01ffe01ffe01ffe0bffe1fffe1fffe1ffff3ffff3ffff3fffb3ffe07ff80ffe00ffc00df0000c0000c0000c000'},
+ barrier:{path:'assets/r527/stone-barrier.webp',h:79,face:'n',ang:'iso',flat:true,ft:[-0.77,0.751,0.427],r:[-0.77,0.77,0,1.643],m:'700007c0007f0007fc007ff007ffc07fff07fff87fffc7fffe7ffff7ffff7ffff7ffff7ffff7ffffffffffffff7ffff31fff00fff003ff000ff0007e0007f000ff0007e00038'},
+ vitals:{path:'assets/world-r80/r80-151.webp',h:63,face:'s',ang:'pole',up:0.006,d:0.55,r:[-0.376,0.379,0,1.295],m:'03e001ffe07fffc7ffffffffffffffffffffffffffffffffffffffefffff7ffff0fffb01ff30ffc33ffe63fffc3fffe03ffe3fff87fffce1ffee070e4070e0070600f0000600'},
+ lotus:{path:'assets/world-r80/r80-061.webp',h:59,face:'s',ang:'pole',up:0.006,d:0.9,r:[-0.663,0.666,0,1.211],m:'0200003060078e0078e007df027df03fffc3fffc3fffc1fff81fff83fffc7fffe7fffe7fffe7fffe7fffe7fffefffffffffffffff0fff00fff007fe00fff00f0f00e07004020'},
+ reliq:{path:'assets/world-r80/r80-065.webp',h:71,face:'s',ang:'pole',up:0.006,d:0.8,r:[-0.622,0.622,0,1.459],m:'00100003000078001f8003bc003fc003fe007ff007ff00fff00fff80fffc1fffc1fffc1fffc3fffc3fffe3fffe7fffffffffffff25ffc00ff8007f0003c0003c0003c0001800'}
 }/*ART*/);
 const sampMemo=new Map();
 // 불투명 칸 → 발 기준 3D 점 [dx,dy,z] — 조형물 그림은 발을 지나 카메라를 향해 서고 위로 갈수록 뒤(-x·-y)로 30° 눕는 판(R412·R521 과 같은 식)
@@ -149,11 +157,25 @@ const G=Object.freeze({
  cooler1:{w:1.55,lim:{cooler:1},it:[['cooler',.78]]},
  vent1:{w:1.55,lim:{vent:1},it:[['vent',.78]]},
  kiosk1:{w:1.0,lim:{kiosk:1},it:[['kiosk',.5]]},
- kioskDesk:{w:3.0,lim:{kiosk:1,table:1},it:[['kiosk',.5],['table_n',2.0],['chairb_n',2.0,.78]]}
+ kioskDesk:{w:3.0,lim:{kiosk:1,table:1},it:[['kiosk',.5],['table_n',2.0],['chairb_n',2.0,.78]]},
+ // 넷째 묶음(R527 — 관리자 권한·중앙 코어 이주실·사몽의 문턱): 캡슐 + 심박 모니터, 기계 육체 거치대, 고딕 수조, 연꽃 코어 받침, 돌 방벽, 등불 계단, 성물함
+ //  거치대·캡슐·수조·방벽·등불은 기존 게임 그림의 바닥 모서리를 2:1 로 바로잡은 한 방향 그림(반대쪽 벽에서는 거울). 모니터·연꽃 받침·성물함은 방향 없는 그림
+ podMon:{w:2.9,lim:{pod:1,vitals:1},it:[['pod',1.0],['vitals',2.45]]},
+ mon1:{w:.9,lim:{vitals:1},it:[['vitals',.45]]},
+ tank1:{w:1.6,lim:{tank:1},it:[['tank',.8]]},
+ rig1:{w:2.0,lim:{rig:1},it:[['rig',1.0]]},
+ rig2:{w:4.1,lim:{rig:2},it:[['rig',1.0],['rig',3.05]]},
+ rigMon:{w:2.9,lim:{rig:1,vitals:1},it:[['rig',1.0],['vitals',2.45]]},
+ lotus1:{w:1.5,lim:{lotus:1},it:[['lotus',.75]]},
+ lotusTank:{w:3.2,lim:{lotus:1,tank:1},it:[['lotus',.75],['tank',2.35]]},
+ barrier1:{w:1.7,lim:{barrier:1},it:[['barrier',.85]]},
+ barrier2:{w:3.5,lim:{barrier:2},it:[['barrier',.85],['barrier',2.6]]},
+ lantern1:{w:1.6,lim:{lanterns:1},it:[['lanterns',.8]]},
+ reliq1:{w:1.4,lim:{reliq:1},it:[['reliq',.7]]}
 });
 // 한 방에 같은 물건이 되풀이되지 않게(사용자 2026-11-09 "같은 물건이 같은 간격으로 반복되는 현상은 줄이고"): 묶음의 lim 이 방마다 이 수를 넘으면 그 묶음은 건너뛴다
 //  쓰임새가 lim 을 따로 가지면 그 방에서는 그 수를 쓴다(거울 회랑의 거울, 화구 구획의 화구처럼 되풀이가 그 방의 뜻인 곳)
-const LIMIT=Object.freeze({tv:1,sofa:2,table:1,trash:1,wardrobe:3,fridge:2,bed:3,case:3,chair:3,mirror:1,range:2,shelf:3,flamp:1,steps:1,alarm:1,machine:2,cooler:2,vent:1,kiosk:2});
+const LIMIT=Object.freeze({tv:1,sofa:2,table:1,trash:1,wardrobe:3,fridge:2,bed:3,case:3,chair:3,mirror:1,range:2,shelf:3,flamp:1,steps:1,alarm:1,machine:2,cooler:2,vent:1,kiosk:2,pod:3,vitals:3,tank:1,rig:2,lotus:1,barrier:2,lanterns:1,reliq:1});
 const fits=(g,cnt,U)=>!g.lim||Object.keys(g.lim).every(k=>(cnt[k]||0)+g.lim[k]<=((U&&U.lim&&U.lim[k])||LIMIT[k]));
 const take=(g,cnt,s)=>{if(g.lim)for(const k in g.lim)cnt[k]=(cnt[k]||0)+s*g.lim[k];};
 // 쓰임새 = [큰 벽 줄(차례로 돌려 가며 채움), 옆 벽 줄, 안쪽 구석 가구, 큰 벽·옆 벽에 놓을 묶음 상한]
@@ -194,6 +216,27 @@ const USE=Object.freeze({
  security:{main:['kioskDesk','wardrobe2','kiosk1','chairs2'],side:['wardrobe','kiosk1','chairs2'],corner:'wardrobe_n',cap:[4,3]},
  lobby7:{main:['chairs2','case1','wardrobe','alarm1','cases'],side:['chairs2','case1','trash'],corner:null,cap:[3,2]}/* 호텔 층 전실: 의자와 투숙객 짐 */,
  vacant:{main:['case1','trash'],side:['case1'],corner:null,cap:[2,1],more:false},
+ // 넷째 묶음(R527): 기억의 방·중앙 이주실 = 캡슐 + 모니터 짝과 수조, 보호 구획 = 캡슐 + 냉각기, 기계 육체실 = 거치대 줄, 닫힌 구획·연결실 = 기계·냉각기, 기억 전실 = 단말기
+ //  사몽의 문턱: 수확실 = 연꽃 코어 받침 + 수조, 방벽 구획 = 돌 방벽 줄, 코어 전실 = 받침 + 성물함 + 등불. 빈 복도·연결 회랑·길목은 손대지 않는다
+ memory:{main:['podMon','tank1','podMon','kiosk1'],side:['kiosk1','mon1','cooler1'],corner:null,cap:[4,2]},
+ memhall:{main:['kiosk1','cooler1','kiosk1'],side:['kiosk1','cooler1'],corner:null,cap:[2,1]},
+ sealed:{main:['machine1','rig1','cooler1','machine1'],side:['cooler1','vent1'],corner:null,cap:[4,2]},
+ gate:{main:['kiosk1','cooler1'],side:['cooler1','kiosk1'],corner:null,cap:[2,2]},/* 입구: 단말기와 냉각기 두세 점 */
+ annex:{main:['kiosk1','cooler1','machine1'],side:['kiosk1','cooler1'],corner:null,cap:[2,1],more:false},
+ link:{main:['machine1','cooler1','vent1'],side:['cooler1','machine1'],corner:null,cap:[3,2]},
+ ward:{main:['podMon','cooler1','podMon'],side:['mon1','kiosk1'],corner:null,cap:[3,2]},
+ bodies:{main:['rig2','mon1','rig2','rig1'],side:['rig1','mon1'],corner:null,cap:[4,2],lim:{rig:4}},
+ transfer:{main:['podMon','tank1','podMon','kiosk1'],side:['podMon','mon1'],corner:null,cap:[4,2]},
+ harvest:{main:['lotusTank','lantern1','tank1'],side:['lantern1','lotus1'],corner:null,cap:[3,2]},
+ bulwark:{main:['barrier2','lantern1','barrier1'],side:['barrier1','lantern1'],corner:null,cap:[3,2],lim:{barrier:4}},
+ corehall:{main:['lotus1','reliq1','lantern1'],side:['reliq1','lantern1'],corner:null,cap:[3,2]},
+ narthex:{main:['lantern1','reliq1'],side:['lantern1','reliq1'],corner:null,cap:[2,1],more:false},
+ // 사몽 구역(R731): 식당 = 식탁 줄, 창고 = 장·짐, 서류 창고 = 책장 줄, 상담실 = 소파와 책상
+ canteen:{main:['dine','chairs2','dine','wardrobe','dine'],side:['dine','trash','chairs2'],corner:null,cap:[5,3],lim:{table:5,chair:6}},
+ depot:{main:['wardrobe2','cases','wardrobe','case1','trash'],side:['wardrobe','cases','case1'],corner:'wardrobe_n',cap:[5,3],lim:{wardrobe:5,case:5}},
+ archive:{main:['shelf2','shelf1','shelf2','desk'],side:['shelf1','case1','shelf2'],corner:'wardrobe_n',cap:[5,3],lim:{shelf:8}},
+ counsel:{main:['sofaL','desk','chairs2','shelf1'],side:['shelf1','chairs2','wardrobe'],corner:null,cap:[4,2]},
+ locker:{main:['wardrobe2','chairs2','wardrobe2','wardrobe'],side:['wardrobe','chairs2','case1'],corner:'wardrobe_n',cap:[4,3],lim:{wardrobe:7}},/* 탈의실: 옷장 줄과 걸터앉는 의자 */
  hall:{main:['parked','wheel','crutch'],side:[],corner:null,cap:[1,0],min:5,more:false},
  passage:{main:['trash','case1'],side:[],corner:null,cap:[1,0],min:5,more:false}
 });
@@ -205,11 +248,35 @@ const REGION=Object.freeze({
  ep1b04:[[/준비대/,'prep'],[/식재료 보관실/,['pantry','pantry2']],[/화구 구획/,'ranges'],[/^앞방$/,'mess'],[/^입구$/,'mess']],
  ep1b07:[[/피난 계단/,'stairs'],[/방화 전실/,'firelobby'],[/설비실/,'plant'],[/그을린 복도/,'evac'],[/^앞방$/,'firelobby'],[/^입구$/,'evac']],/* 길목 26곳은 손대지 않는다 */
  murder02:[[/계단참/,'stairs'],[/보안실/,'security'],[/설비실/,'plant'],[/7층 전실/,'lobby7'],[/^앞방$/,'lobby7'],[/^입구$/,'lobby7']],
- murder04:[[/공동 계단/,'stairs'],[/계단참/,'landing'],[/빈 방/,'vacant'],[/^앞방$/,['den','den2','den3']],[/^입구$/,'foyer']]/* 공동 복도·길목은 손대지 않는다 */
+ murder04:[[/공동 계단/,'stairs'],[/계단참/,'landing'],[/빈 방/,'vacant'],[/^앞방$/,['den','den2','den3']],[/^입구$/,'foyer']],/* 공동 복도·길목은 손대지 않는다 */
+ u205:[[/기억의 방/,'memory'],[/기억 전실/,'memhall'],[/닫힌 구획/,'sealed'],[/^앞방$/,'annex'],[/^입구$/,'gate']],/* 빈 복도·길목은 손대지 않는다 */
+ u206:[[/연결실/,'link'],[/보호 구획/,'ward'],[/기계 육체실/,'bodies'],[/중앙 이주실/,'transfer'],[/^앞방$/,'annex'],[/^입구$/,'gate']],
+ cult03:[[/수확실/,'harvest'],[/방벽 구획/,'bulwark'],[/코어 전실/,'corehall'],[/^앞방$/,'narthex'],[/^입구$/,'narthex']]/* 연결 회랑·길목은 손대지 않는다 */
 });
 const SKIP=/보스|전투실|다음 구역|갈림길|순환로|마당|쉼길/;
-const enabled=r=>!!(prefs.on&&r&&REGION[r.id]&&(!r.layer||r.layer==='STORY')&&r.exploration&&Array.isArray(r.exploration.r224Rooms)&&Array.isArray(r.props)&&!r.exploration.samongR103&&!r.exploration.samongR115);
-const useOf=(id,name,k=1)=>{name=String(name||'');if(!name||SKIP.test(name))return null;for(const[re,u]of REGION[id]||[])if(re.test(name))return Array.isArray(u)?u[(Math.max(1,k|0)-1)%u.length]:u;return null;};
+// ---- 사몽 구역(R731) — 사용자 2026-11-10 "모든맵 배치 … 스토리모드 → 사몽 → 사몽역행" ---------------------------
+//  사몽 구역은 기증 지역의 room.id 를 빌려 쓰고(예: ep1b08·last302), 방 사각형은 worldR74.rooms[{x,y,w,h,name,kind}] 에 있다(r224Rooms 는 비어 있음). 구역 이름은 exploration.samongR115.zone.
+//  첫 묶음: 방 이름이 정본에서 온 '방' 구역 7곳만(미술관 회랑 RA-3 은 맞는 그림이 없어 뺌). 방 이름 → 본편과 같은 가구 묶음. 맞는 그림이 없는 방(도겸의 방·전시실·학교 창가·정원 문 …)과 복도는 비운다(지어내지 않는다).
+//  S-02 학교(이미 책상·캐비닛 줄이 있음)와 처치·호위용 추가 구역은 손대지 않는다. 방 가운데 3.2칸(기억 조각·전투 자리)은 비운다. 이미 있는 조형물은 쉬게 하지 않는다.
+//  끄기: localStorage['storyworld.r523.rooms']='{"on":true,"samong":false}'
+const SAMONG_ZONES=Object.freeze(['sz115-S04-3','sz115-S04-4','sz115-S05-3','sz115-S06-2','sz115-S06-22','sz115-RA-5','sz115-M-4',
+ 'sz115-S01-3','sz115-S04-2','sz115-S05-1','sz115-S07-1','sz115-RG-11','sz115-S03-1']);/* 둘째 줄 = 둘째 묶음(R732): 홀 구역의 이름 있는 방. 대합실·화형식당(RB-1·RB-4)은 맘몬 지역(ep1b06)을 빌려 쓰므로 넣지 않는다 */
+const SAMONG=Object.freeze([[/^식당( 안쪽)?$/,'canteen'],[/^주방$/,'ranges'],[/^배식구$/,'prep'],[/^경비실$/,'security'],[/^숙직실$/,'bedroom'],[/^창고$/,'depot'],[/^사무실$/,'study'],[/^서류 창고$/,'archive'],
+ [/^대기실$/,'lobby7'],[/^의료 지원반$/,'inject'],[/^서버 냉각실$/,'plant'],[/^원룸 철문 앞$/,'foyer'],[/^좁은 원룸$/,'bedroom'],[/^병동$/,'observe'],[/^병실$/,'observe'],[/^상담실$/,'counsel'],[/^간호사실$/,'drug'],
+ [/^(긴 )?식탁의 방$/,'canteen'],[/^술집$/,'canteen'],[/^로비$/,'lobby7'],[/^문간$/,'foyer'],[/^탈의실$/,'locker']]);
+const SM_CENTER=3.2;
+const smOn=L=>!!(prefs.samong&&L&&L.samongR115&&SAMONG_ZONES.includes(L.samongR115.zone)&&Array.isArray(L.worldR74?.rooms));
+const pickUse=(table,name,k)=>{name=String(name||'');if(!name||SKIP.test(name))return null;for(const[re,u]of table||[])if(re.test(name))return Array.isArray(u)?u[(Math.max(1,k|0)-1)%u.length]:u;return null;};
+const samongUse=(name,k=1)=>pickUse(SAMONG,name,k);
+// 방 목록 [{id,x0,y0,x1,y1,name}] — 본편은 r224Rooms + worldR74 이름, 사몽은 worldR74.rooms 의 방·홀(복도·계단·마당 제외)
+const roomMemo=new WeakMap();
+function roomsOf(L){let a=roomMemo.get(L);if(a)return a;
+ if(smOn(L))a=L.worldR74.rooms.map((q,i)=>q&&(q.kind==='room'||q.kind==='hall')&&fin(q.x+q.y+q.w+q.h)?{id:i,x0:q.x,y0:q.y,x1:q.x+q.w,y1:q.y+q.h,name:String(q.name||'')}:null).filter(Boolean);
+ else{const names=new Map((L.worldR74?.rooms||[]).map(q=>[q.id,q.name||q.purpose||'']));a=(L.r224Rooms||[]).map(q=>({id:q.id,x0:q.x0,y0:q.y0,x1:q.x1,y1:q.y1,name:names.get(q.id)||''}));}
+ roomMemo.set(L,a);return a;}
+const enabled=r=>!!(prefs.on&&r&&r.exploration&&Array.isArray(r.props)&&((r.id!=='ep1b06'&&smOn(r.exploration))||(REGION[r.id]&&(!r.layer||r.layer==='STORY')&&Array.isArray(r.exploration.r224Rooms)&&!r.exploration.samongR103&&!r.exploration.samongR115)));
+const useOf=(id,name,k=1)=>pickUse(REGION[id],name,k);
+const useIn=(r,name,k)=>r.id!=='ep1b06'&&smOn(r.exploration)?samongUse(name,k):useOf(r.id,name,k);
 
 // ---- 벽 줄 찾기 -------------------------------------------------------------------------------------
 //  방 사각형 안 바닥 칸마다 북쪽(-y)·서쪽(-x)으로 반 칸 안에 벽(바닥 밖·벽 상자)이 있는지 본다. 벽 면 좌표가 같은 칸이 이어진 것이 한 줄.
@@ -254,7 +321,8 @@ function keepClear(r){const L=r.exploration||{},out=[];
  for(const d of L.worldR74?.doors||[])if(fin(d.x+d.y))out.push([d.x,d.y,Math.max(2.6,(+d.width||6)/2+.6)]);
  for(const s of L.starts||[])if(s&&fin(s.x+s.y))out.push([s.x,s.y,3]);
  for(const q of[L.entry,L.entrance,L.gate,r.objective,r.altar])if(q&&fin(q.x+q.y))out.push([q.x,q.y,2.6]);
- const FB=fightOf(L),UB=usedOf(r);for(const p of r.props)if(p&&!rests(p,FB,UB)&&p.visible!==false&&!p.r303Hide&&fin(p.x+p.y))out.push([+p.x,+p.y,DOORISH(p)?1.6:KEYISH(p)?1.5:1.1]);
+ const FB=fightOf(L),UB=usedOf(r),sm=smOn(L);if(sm)for(const q of roomsOf(L))out.push([(q.x0+q.x1)/2,(q.y0+q.y1)/2,SM_CENTER]);
+ for(const p of r.props)if(p&&(sm||!rests(p,FB,UB))&&p.visible!==false&&!p.r303Hide&&fin(p.x+p.y))out.push([+p.x,+p.y,DOORISH(p)?1.6:KEYISH(p)?1.5:1.1]);
  return out;}
 const sigOf=r=>{let n=0;for(const p of r.props)if(p&&!FURN(p)&&p.visible!==false&&!p.r303Hide)n++;return n;};
 function hitOf(r){const L=r.exploration,E=window.StoryPhase1&&typeof window.StoryPhase1.explorationBlocked==='function'?window.StoryPhase1.explorationBlocked:null;
@@ -264,20 +332,20 @@ const capOf=(run,max)=>Math.min(max,Math.max(1,Math.round(run.len/2.4)));/* 벽 
 // 전투 구역: 보스 구역·모이는 방 테두리(±.5)와 이름이 보스/전투실인 방 사각형(±.5). 여기는 손대지 않는다(R438·R449 세트 그대로).
 const FIGHT=/보스|전투실/,fightMemo=new WeakMap();
 function fightOf(L){let f=fightMemo.get(L);if(f)return f;f=[];const W=L.worldWardR81||{};for(const b of[W.bossBounds,W.gatherBounds])if(Array.isArray(b)&&b.length===4&&fin(b[0]+b[1]+b[2]+b[3]))f.push([b[0]-.5,b[1]-.5,b[2]+.5,b[3]+.5]);
- const names=new Map((L.worldR74?.rooms||[]).map(q=>[q.id,q.name||q.purpose||'']));for(const q of L.r224Rooms||[])if(FIGHT.test(names.get(q.id)||''))f.push([q.x0-.5,q.y0-.5,q.x1+.5,q.y1+.5]);fightMemo.set(L,f);return f;}
+ for(const q of roomsOf(L))if(FIGHT.test(q.name))f.push([q.x0-.5,q.y0-.5,q.x1+.5,q.y1+.5]);fightMemo.set(L,f);return f;}
 // 이 덧씌우기가 꾸미는 방(쓰임새가 정해진 방)의 사각형 — 손대지 않는 방(복도 등)의 각도 맞는 예전 가구는 그대로 둔다
 const usedMemo=new WeakMap();
-function usedOf(r){const L=r.exploration;let u=usedMemo.get(L);if(u)return u;u=[];const names=new Map((L.worldR74?.rooms||[]).map(q=>[q.id,q.name||q.purpose||'']));const ord={};
- for(const q of L.r224Rooms||[]){const name=names.get(q.id)||'';if(useOf(r.id,name,ord[name]=(ord[name]||0)+1))u.push([q.x0-.5,q.y0-.5,q.x1+.5,q.y1+.5]);}usedMemo.set(L,u);return u;}
+function usedOf(r){const L=r.exploration;let u=usedMemo.get(L);if(u)return u;u=[];const ord={};
+ for(const q of roomsOf(L)){const name=q.name;if(useIn(r,name,ord[name]=(ord[name]||0)+1))u.push([q.x0-.5,q.y0-.5,q.x1+.5,q.y1+.5]);}usedMemo.set(L,u);return u;}
 const inFight=(F,x,y)=>{for(let i=0;i<F.length;i++){const b=F[i];if(x>b[0]&&x<b[2]&&y>b[1]&&y<b[3])return true;}return false;};
 // 바닥 자리 네모의 테두리와 가운데 십자를 .12칸 간격으로 짚어 본다 — 얇은 벽이 가구 밑을 지나가면 놓지 않는다
 function footHit(fr,hit){const[x0,y0,x1,y1]=fr,nx=Math.max(2,Math.ceil((x1-x0)/.12)),ny=Math.max(2,Math.ceil((y1-y0)/.12)),mx=(x0+x1)/2,my=(y0+y1)/2;
  for(let i=0;i<=nx;i++){const x=x0+(x1-x0)*i/nx;if(hit(x,y0)||hit(x,y1)||hit(x,my))return true;}for(let j=0;j<=ny;j++){const y=y0+(y1-y0)*j/ny;if(hit(x0,y)||hit(x1,y)||hit(mx,y))return true;}return false;}
-function plan(r){const L=r.exploration,hit=hitOf(r),W=L.worldWardR81||{},F=fightOf(L),names=new Map((L.worldR74?.rooms||[]).map(q=>[q.id,q.name||q.purpose||'']));
+function plan(r){const L=r.exploration,hit=hitOf(r),W=L.worldWardR81||{},F=fightOf(L);
  let path=null;try{path=window.__STORYWORLD_PLAY_R169__?.pathCells?.(r)||null;}catch(e){fail(e);}
  const onPath=(x,y)=>{if(!path)return false;const cx=Math.floor(x),cy=Math.floor(y);for(let dx=-1;dx<=1;dx++)for(let dy=-1;dy<=1;dy++)if(path.has((cx+dx)+','+(cy+dy))&&Math.hypot(cx+dx+.5-x,cy+dy+.5-y)<1.3)return true;return false;};
  const cand=[],rooms=[],log=[],nth={},ord={};let dropped=0,pushed=0,n=0;
- for(const q of L.r224Rooms){const name=names.get(q.id)||'',use=useOf(r.id,name,ord[name]=(ord[name]||0)+1);if(!use)continue;
+ for(const q of roomsOf(L)){const name=q.name,use=useIn(r,name,ord[name]=(ord[name]||0)+1);if(!use)continue;
   const b=[q.x0,q.y0,q.x1,q.y1];if([W.bossBounds,W.gatherBounds].some(B=>Array.isArray(B)&&B.length===4&&!(b[2]<=B[0]||b[0]>=B[2]||b[3]<=B[1]||b[1]>=B[3])))continue;
   const U=USE[use],k=nth[use]=(nth[use]||0)+1,runs=U?runsOf(q,hit).filter(x=>x.len>=(U.min||0)):[];if(!U||!runs.length){rooms.push({id:q.id,name,use,rect:b,count:0});continue;}
   const main=runs[0],side=runs.find(x=>x.wall!==main.wall)||null,rest=U.more===false?[]:runs.filter(x=>x!==main&&x!==side&&x.len>=3).slice(0,5),before=cand.length,taken=[],cnt={};
@@ -330,11 +398,148 @@ const skinOf=p=>String(p.path||(p.r81NativeSkin&&p.r81NativeSkin.path)||'');/* R
 const rests=(p,F,U)=>!!p&&fin(p.x+p.y)&&((FURN(p)&&inFight(U,p.x,p.y))||((p.r80Dressing===true||!!p.r74Prop)&&OFF_ANGLE.test(skinOf(p))))&&!inFight(F,p.x,p.y);
 try{if(typeof draw==='function'){const base=draw;draw=function(...a){let r=null,m=null,rows=null;try{r=typeof room!=='undefined'?room:null;m=r?state(r):null;if(m&&m.rows.length){prime(r,m.rows);rows=m.rows;stats.shown=sight(rows);}}catch(e){fail(e);m=null;}
  if(!m||!m.rows.length)return base.apply(this,a);
- const original=r.props,FB=fightOf(r.exploration),UB=usedOf(r);let kept=original,rested=0;try{kept=original.filter(p=>!rests(p,FB,UB)||(rested++,false));}catch(e){fail(e);kept=original;}stats.rested=rested;
+ const original=r.props,FB=fightOf(r.exploration),UB=usedOf(r);let kept=original,rested=0;try{if(!smOn(r.exploration))kept=original.filter(p=>!rests(p,FB,UB)||(rested++,false));}catch(e){fail(e);kept=original;}stats.rested=rested;
  r.props=kept.concat(rows);stats.frames++;try{return base.apply(this,a);}finally{r.props=original;}};}}catch(e){fail(e);}
 
-function set(o){if(o&&typeof o.on==='boolean')prefs.on=o.on;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
-window.__STORYWORLD_ROOMS_R523__=Object.freeze({revision:REV,ART,G,USE,REGION,LIMIT,samplesOf,embedOf,hiddenOf,runsOf,seat,useOf,enabled,plan,resolve,list,set,
+function set(o){if(o&&typeof o.on==='boolean')prefs.on=o.on;if(o&&typeof o.samong==='boolean')prefs.samong=o.samong;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
+window.__STORYWORLD_ROOMS_R523__=Object.freeze({revision:REV,ART,G,USE,REGION,LIMIT,SAMONG,SAMONG_ZONES,samongUse,samplesOf,embedOf,hiddenOf,runsOf,seat,useOf,enabled,plan,resolve,list,set,
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError,dropLog:dropLog.slice(),plan:lastPlan,collisionChanged:false,savesTouched:false,
   room:typeof room!=='undefined'&&room&&enabled(room)?list(room).map(p=>({id:p.id,art:p.r523.art,use:p.r523.use,x:p.x,y:p.y,flip:!!p.r303Flip})):null})});
+})();
+
+// ==== R730 불면귀 구역을 마을답게 — 사용자 2026-11-11 "불면귀쪽 부터 우선 개선 … 특히 분위기랑 조형물", "귀비탕영상 + 동양몽세 진입 시네마틱과 서사에 맞게".
+//  실측(헤드리스, main da9d322): last302 '잠들지 못하는 마을'은 4503칸에 조형물 25개뿐이고 집이 한 채도 없었다(기와집 그림 r80-010 은 배정만 되고 안 놓임).
+//  정본: 부서진 기와·붉은 부적·장승, 포구 마을, 방문 앞 신발, 안개 속 한약 한 잔. 영상: 어두운 한옥, 등롱의 호박색 빛, 창살 너머 남색 달빛.
+//  · 집: 길 뒤쪽(-x·-y) 끝 너머 언덕 위에 기와집을 줄지어 세운다. 화면에서 집 그림이 덮는 범위에 바닥 칸이 하나도 없는 자리만 쓴다(영웅·몹·보스를 가리지 않음).
+//    언덕 높이만큼 그림을 올린다(visualLiftPx). -x 끝 뒤에서는 정면이 길을 보게 좌우를 뒤집는다(R414 와 같은 규칙).
+//  · 길 가: 뒤쪽 끝에 붙여 석등(8칸 넘게 띄움)·향로·서낭나무·기와 더미. 보스 구역·모이는 방·문·입구·이미 있는 조형물 곁은 비운다.
+//  · 그리기 전용: 충돌·바닥·몹·보스 자리·저장을 건드리지 않는다. 난수·시계를 쓰지 않는다(지도만으로 정해짐). 끄기: localStorage['storyworld.r730.village']={"on":false}.
+//  · 몹·보스는 R760(bulmyeongwi-r760.js) 스레드가 맡는다. 등롱·부적 줄·댓돌 신발·장독대·약방은 Dots 그림이 오면 2차로 더한다(지금은 기존 그림만).
+(()=>{'use strict';
+if(window.__STORYWORLD_VILLAGE_R730__)return;
+const REV='R730-village-10',KEY='storyworld.r730.village',PX=34,SUM=17,BACK=3.6,MARGIN=1;
+const prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;}catch(_){}
+const stats={rooms:0,placed:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,400);};
+const HOUSE=Object.freeze([
+ Object.freeze({path:'assets/world-r80/r80-010.webp',height:200,aspect:512/367}),
+ Object.freeze({path:'assets/world-r80/r80-010.webp',height:184,aspect:512/367}),
+ Object.freeze({path:'assets/r414/buildings/waterside-house.webp',height:172,aspect:600/356}),
+ /* R810: Dots CX-0071BV 16 기와집(L자 r2 를 두 번 = 추천본 가중·일자 r1). 그린 폭을 r80-010(높이 200)과 맞춤: 279px ÷ 종횡비 */
+ Object.freeze({path:'assets/r810/tiled-house-b-l.webp',height:187,aspect:611/409}),
+ Object.freeze({path:'assets/r810/tiled-house-b-l.webp',height:187,aspect:611/409}),
+ Object.freeze({path:'assets/r810/tiled-house-b-i.webp',height:192,aspect:618/425}),
+ /* R811: Dots 2차 — 16B(L자 반대 짝)·17A 폐가(잠들지 못하는 마을의 빈집). 폭 279px 기준 */
+ Object.freeze({path:'assets/r810/tiled-house-b-r.webp',height:198,aspect:613/436}),
+ Object.freeze({path:'assets/r810/ruined-house.webp',height:211,aspect:560/424})]);
+const HOUSE_NR=Object.freeze(HOUSE.filter(h=>!/ruined/.test(h.path)));/* 약방 마을(last303)엔 폐가를 두지 않는다 — 폐가는 잠들지 못하는 마을(last302)의 빈집 */
+/* R811: last303 '한약과 불면귀' 만 — 약방 집 11A·B(처마 약초 다발·한지창 호박빛), 앞에 약탕기 화로·약재 소반 */
+const YAK=Object.freeze([Object.freeze({path:'assets/r810/yakbang-house-a.webp',height:223,aspect:560/447}),Object.freeze({path:'assets/r810/yakbang-house-b.webp',height:236,aspect:560/474})]);
+/* R812 Dots 3차: 약초 걸이 15 r2(양 끝 기둥)·붉은 부적 말뚝 04(last303), 미역·조개 무더기 09 세 가지(last302 배 곁) */
+const HERB=Object.freeze({path:'assets/r810/herb-rack.webp',height:60}),TPOST=Object.freeze({path:'assets/r810/talisman-post.webp',height:80}),
+ SEA=Object.freeze(['seaweed-1','seaweed-2','seaweed-3'].map(k=>Object.freeze({path:'assets/r810/'+k+'.webp',height:22})));
+/* R813 Dots 초가 18A·B(툇마루에 그물) — 포구 마을 last302 만. 기와집보다 작은 집이라 그린 폭 250·232px */
+const THATCH=Object.freeze([Object.freeze({path:'assets/r810/thatched-hut-a.webp',height:197,aspect:500/395}),Object.freeze({path:'assets/r810/thatched-hut-b.webp',height:229,aspect:500/493})]);
+const YFIRE=Object.freeze({path:'assets/r810/decoction-brazier.webp',height:44}),TRAYS=Object.freeze({path:'assets/r810/herb-trays.webp',height:24});
+const HANOK='assets/world-r80/r80-010.webp',HANOK_LIT='assets/r730/tiled-house-lit.webp';/* r80-010 의 창호에 호박색 불빛을 넣은 파생본(qa/r730/make-lit-house.py) */
+/* 칸 시작에서 안쪽으로 띄우는 거리. R412 의 3D 벽 검사(그림 불투명 점의 3% 이하)로 헤드리스 실측: 나무 1.75·석등 1.0·향로 .75·기와 .75 부터 절벽에 안 파묻힘(전엔 모두 .75 → 나무 8~16%·석등 5~7%가 벽에 감김). 석등은 여유 .25 */
+const INSET=Object.freeze({tree:1.75,lamp:1.25,censer:.75,giwa:.75,post:1.25,rope:1.25,boat:1.75,rack:1.75,herbrack:1.25,tpost:1.0,seaweed:1.25,deadpost:1.25});
+const LAMP=Object.freeze({path:'assets/r92/lights/lights_regional_03.png',height:84}),CENSER=Object.freeze({path:'assets/r92/lights/lights_regional_02.png',height:52}),
+ TREE=Object.freeze({path:'assets/r299/tree.webp',height:150}),GIWA=Object.freeze({path:'assets/world-r80/r80-007.webp',height:44});
+/* R810: 그림 스레드 CX-0071BV 대체본(ElevenLabs seedream, 7분야 7.86~8.07 통과, 원본 /mnt/project-files/bulmyeongwi-art/cx0071bv-el-cleaned/ → assets/r810, 표 assets/r810/index.json).
+   정본 34장 "부서진 기와와 붉은 부적", "포구 마을", "방문 앞의 신발들은 모두 바깥을 향해" · 귀비탕 영상의 등롱 호박빛. 크기는 사람 키 ≈ 1.3칸 기준(그림 스레드 권장). */
+const DEADPOST=Object.freeze({path:'assets/r810/lantern-post-off.webp',height:92});/* R814 Dots 02 꺼진 등롱대 — 01 과 같은 배율(원본 429px→92, 464px→100) */
+const POST=Object.freeze({path:'assets/r810/lantern-post.webp',height:100}),ROPE=Object.freeze({'-y':'assets/r810/talisman-rope-r.webp','-x':'assets/r810/talisman-rope-l.webp',height:74}),
+ SHOES=Object.freeze({path:'assets/r810/shoes-stone.webp',height:22}),JANG=Object.freeze({path:'assets/r810/jangdok.webp',height:32}),RACK=Object.freeze({path:'assets/r810/fish-rack.webp',height:64}),BOAT=Object.freeze({path:'assets/r810/boat.webp',height:52});
+const ZONE=Object.freeze({last302:Object.freeze({houses:26,lamps:18,yards:/작은 마당|외곽 쉼길/,giwa:3,ropes:4,shoes:4,jang:4,boats:3,racks:3,pathposts:8,seaweed:3,thatch:3,deadposts:3}),last303:Object.freeze({houses:12,lamps:14,yards:/작은 마당|외곽 쉼길/,giwa:5,ropes:3,shoes:5,jang:4,boats:0,racks:0,pathposts:10,yak:3,litEvery:2,ruin:false,herbracks:3,tposts:3})});
+function h32(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
+// fx: {id, floorCells, rooms[{name,x,y}], doors[{x,y}], ward{boss,gather}, entry{x,y}, props[{x,y}], route?[{x,y}]} → [{id,kind,path,height,aspect?,lift?,x,y,side?}]
+function plan(fx){const Z=ZONE[fx.id];if(!Z)return[];const F=new Set(),diag=new Map();
+ for(const[x,y]of fx.floorCells){F.add(x+','+y);const k=x-y;let a=diag.get(k);if(!a)diag.set(k,a=[]);a.push(x+y);}
+ const has=(x,y)=>F.has(x+','+y),W=fx.ward||{},inB=(B,x,y,m)=>Array.isArray(B)&&x>B[0]-m&&x<B[2]+m&&y>B[1]-m&&y<B[3]+m;
+ const edges=[];for(const[x,y]of fx.floorCells){if(!has(x,y-1))edges.push({x,y,side:'-y'});if(!has(x-1,y))edges.push({x,y,side:'-x'});}
+ edges.sort((a,b)=>a.y-b.y||a.x-b.x||(a.side<b.side?-1:1));
+ const route=(fx.route&&fx.route.length?fx.route:[fx.entry,...(fx.doors||[]),...(fx.rooms||[])]).filter(q=>q&&Number.isFinite(q.x+q.y)),near=(x,y)=>{let b=1e9;for(const q of route){const d=Math.hypot(q.x-x,q.y-y);if(d<b)b=d;}return b;};
+ // 집: 그림이 덮는 화면 범위(대각선 s0±D, 깊이 발 뒤 top ~ 발 앞 MARGIN)에 바닥 칸이 없어야 한다
+ const covers=(fx_,fy,D,top)=>{const c=fx_+fy,s0=fx_-fy;for(let k=Math.floor(s0-D-1);k<=Math.ceil(s0+D+1);k++){const a=diag.get(k);if(a)for(let i=0;i<a.length;i++)if(a[i]+1>c-top&&a[i]<c+MARGIN+1)return true;}return false;};
+ const cand=[];for(const e of edges){const fx_=e.side==='-y'?e.x+.5:e.x-BACK,fy=e.side==='-y'?e.y-BACK:e.y+.5;if(fx_<-6||fy<-6)continue;
+  const HS=Z.ruin===false?HOUSE_NR:HOUSE,v=HS[h32(fx.id+':'+e.x+','+e.y+e.side)%HS.length],D=v.height*v.aspect/2/PX,lift=Math.round(v.height*.35);
+  if(covers(fx_,fy,D,(v.height+lift)/SUM))continue;if((fx.doors||[]).some(d=>Math.hypot(d.x-fx_,d.y-fy)<4+D))continue;
+  cand.push({k:near(e.x+.5,e.y+.5)+(h32('k'+e.x+','+e.y+e.side)%100)/50,e,v,D,lift,x:+fx_.toFixed(2),y:+fy.toFixed(2)});}
+ cand.sort((a,b)=>a.k-b.k||a.e.y-b.e.y||a.e.x-b.e.x);
+ const out=[],houses=[],litAt=[];let hk=0,yk=0,rk=0,tk=0;for(const c of cand){if(houses.length>=Z.houses)break;const s0=c.x-c.y,sm=c.x+c.y;if(houses.some(h=>Math.abs(h.s0-s0)<h.D+c.D+.5&&Math.abs(h.sm-sm)<9))continue;
+  // 2차: 잠들지 못하는 집 — 기와집 셋에 하나는(길에서 가까운 순서로 세어, 난수 없이) 창에 불이 켜진 그림(같은 크기라 자리·가림 계산은 그대로). 불 켜진 집끼리는 6칸 넘게 띄운다
+  let hp=c.v.path,hv=c.v,hl=c.lift;/* R811: 폐가는 마을에 셋까지(남는 자리는 기와집 — 높이가 낮아 덮개 계산 안전) */if(/ruined/.test(hp)&&rk++>=(Z.ruinMax??3)){hv=HOUSE[0];hp=hv.path;hl=Math.round(hv.height*.35);}
+  if(hp===HANOK&&hk++%(Z.litEvery||3)===1){if(!litAt.some(q=>Math.hypot(q.x-c.x,q.y-c.y)<6)){hp=HANOK_LIT;litAt.push({x:c.x,y:c.y});}else hk--;/* 너무 가까우면 다음 기와집으로 미룬다 */}
+  /* R811: last303 은 기와집 아닌 집(16·폐가 등) 몇 채를 약방 집으로 — 폭이 같아(279px) 자리 계산은 그대로, 더 높은 지붕이 바닥을 덮지 않을 때만 */
+  if(Z.thatch&&tk<Z.thatch&&hp!==HANOK&&hp!==HANOK_LIT&&!/ruined/.test(hp)){const y=THATCH[tk%THATCH.length],yl=Math.round(y.height*.35);if(!covers(c.x,c.y,c.D,(y.height+yl)/SUM)){hp=y.path;hv=y;hl=yl;tk++;}}
+  if(Z.yak&&yk<Z.yak&&hp!==HANOK&&hp!==HANOK_LIT){const y=YAK[yk%YAK.length],yl=Math.round(y.height*.35);if(!covers(c.x,c.y,c.D,(y.height+yl)/SUM)){hp=y.path;hv=y;hl=yl;yk++;}}
+  houses.push({s0,sm,D:c.D,e:c.e,ruin:/ruined/.test(hp),x:c.x,y:c.y});out.push({id:'r730:'+fx.id+':house:'+c.e.x+'_'+c.e.y+c.e.side,kind:'house',path:hp,height:hv.height,aspect:hv.aspect,lift:hl,x:c.x,y:c.y,side:c.e.side});}
+ // 길 가: 뒤쪽 끝 칸 안쪽 .75칸
+ const taken=[],clear=(x,y,r)=>!inB(W.boss,x,y,1.5)&&!inB(W.gather,x,y,1.5)&&!(fx.doors||[]).some(d=>Math.hypot(d.x-x,d.y-y)<3.5)&&Math.hypot(fx.entry.x-x,fx.entry.y-y)>=3.5&&!(fx.props||[]).some(q=>Math.hypot(q.x-x,q.y-y)<2.4)&&!taken.some(t=>Math.hypot(t.x-x,t.y-y)<(t.r>r?t.r:r));
+ const spotOf=(e,d)=>e.side==='-y'?{x:e.x+.5,y:e.y+d}:{x:e.x+d,y:e.y+.5},inner=(e,d)=>{const n=Math.ceil(d);for(let k=0;k<=n;k++){if(!(e.side==='-y'?has(e.x,e.y+k)&&has(e.x-1,e.y+k)&&has(e.x+1,e.y+k):has(e.x+k,e.y)&&has(e.x+k,e.y-1)&&has(e.x+k,e.y+1)))return false;}return true;};/* 모서리·한 칸 턱이 아닌 반듯한 끝, 안쪽 d칸까지 바닥 */
+ /* R810: 길잡이 길(R169 pathCells 전부) 1.15칸 안이면 R169 가 '길 비우기'로 숨긴다 — 석등 4개(last303)가 놓이고도 안 보이고 빛도 안 났다. 그 자리는 처음부터 건너뛴다 */
+ const PATH=fx.path instanceof Set?fx.path:Array.isArray(fx.path)?new Set(fx.path):null,onPath=(x,y)=>{if(!PATH)return false;const cx=Math.floor(x),cy=Math.floor(y);for(let dx=-2;dx<=2;dx++)for(let dy=-2;dy<=2;dy++)if(PATH.has((cx+dx)+','+(cy+dy))&&Math.hypot(cx+dx+.5-x,cy+dy+.5-y)<1.15)return true;return false;};
+ const put=(e,kind,a,r,tag)=>{const d=INSET[kind]||.75,s=spotOf(e,d);if(!inner(e,d)||onPath(s.x,s.y)||!clear(s.x,s.y,r))return false;taken.push({x:s.x,y:s.y,r});out.push({id:'r730:'+fx.id+':'+kind+':'+tag,kind,path:a.path,height:a.height,x:s.x,y:s.y,side:e.side});return true;};
+ // 마당·쉼길: 방 자리에서 가장 가까운 뒤쪽 끝에 서낭나무, 그 곁에 향로
+ let yn=0;for(const q of fx.rooms||[]){if(!Z.yards.test(String(q.name||''))||yn>=6)continue;const es=edges.filter(e=>Math.hypot(e.x-q.x,e.y-q.y)<9).sort((a,b)=>Math.hypot(a.x-q.x,a.y-q.y)-Math.hypot(b.x-q.x,b.y-q.y)||a.y-b.y||a.x-b.x);
+  for(const e of es)if(put(e,'tree',TREE,5,'r'+q.id)){yn++;for(const e2 of es)if(Math.hypot(e2.x-e.x,e2.y-e.y)>=2.5&&put(e2,'censer',CENSER,2.4,'r'+q.id))break;break;}}
+ // R814 폐가 곁 꺼진 등롱대(불 없음): 폐가 앞 같은 쪽 끝 칸 1~4칸 옆(기와 더미보다 먼저 — 폐가 둘은 보스 구역에 면해 자리가 하나뿐일 수 있다), 폐가마다 하나
+ if(Z.deadposts){let dn=0;for(const h of houses){if(!h.ruin||dn>=Z.deadposts)continue;const es=edges.filter(e=>e.side===h.e.side&&Math.abs(e.x-h.e.x)+Math.abs(e.y-h.e.y)>=1&&Math.abs(e.x-h.e.x)+Math.abs(e.y-h.e.y)<=4).sort((a,b)=>Math.abs(a.x-h.e.x)+Math.abs(a.y-h.e.y)-Math.abs(b.x-h.e.x)-Math.abs(b.y-h.e.y)||a.y-b.y||a.x-b.x);
+  for(const e of es){const q=spotOf(e,INSET.deadpost);if(Math.hypot(q.x-h.x,q.y-h.y)>6||!out.every(o=>o.kind!=='deadpost'||Math.hypot(o.x-q.x,o.y-q.y)>=6))continue;if(put(e,'deadpost',DEADPOST,2.4,e.x+'_'+e.y+e.side)){dn++;break;}}}}
+ // 집 앞 기와 더미(집 Z.giwa 채마다 하나)
+ houses.forEach((h,i)=>{if(i%Z.giwa)return;const es=edges.filter(e=>e.side===h.e.side&&Math.abs(e.x-h.e.x)+Math.abs(e.y-h.e.y)<=3);for(const e of es)if(put(e,'giwa',GIWA,2.4,'h'+i))break;});
+ // 석등: 길에서 가까운 뒤쪽 끝부터, 서로 8칸 넘게
+ let ln=0;const le=edges.map(e=>({e,k:near(e.x+.5,e.y+.5)+(h32('l'+e.x+','+e.y+e.side)%100)/25})).sort((a,b)=>a.k-b.k||a.e.y-b.e.y||a.e.x-b.e.x);
+ for(const{e}of le){if(ln>=Z.lamps)break;/* R810: 석등과 등롱대를 번갈아(같은 자리 규칙·같은 빛 종류) */if(ln%2===1?put(e,'post',POST,8.2,e.x+'_'+e.y+e.side):put(e,'lamp',LAMP,8.2,e.x+'_'+e.y+e.side))ln++;}
+ // R810 금줄(붉은 부적): 길에서 조금 떨어진 뒤쪽 끝에, 끝 방향에 맞는 그림(-y 끝 = 오른쪽 아래 축, -x 끝 = 왼쪽 아래 축), 서로 10칸 넘게
+ const far=(arr,tag,want,fn)=>{let n=0;const ord=edges.map(e=>({e,k:(h32(tag+e.x+','+e.y+e.side)%1000)/1000*6+Math.abs(near(e.x+.5,e.y+.5)-3)})).sort((a,b)=>a.k-b.k||a.e.y-b.e.y||a.e.x-b.e.x);
+  for(const{e}of ord){if(n>=want)break;if(fn(e))n++;}return n;};
+ /* 두 뒤쪽 축(-y·-x) 모두에서 절벽까지 거리 — 모서리 근처 끝 칸은 옆 축이 짧아 큰 그림(배·건조대)이 옆 절벽에 감긴다 */
+ const back2=q=>{let a=Math.floor(q.y);while(has(Math.floor(q.x),a-1))a--;let b=Math.floor(q.x);while(has(b-1,Math.floor(q.y)))b--;return Math.min(q.y-a,q.x-b);};
+ const apart=(kind,x,y,d)=>!out.some(o=>o.kind===kind&&Math.hypot(o.x-x,o.y-y)<d),at=(e,kind)=>spotOf(e,INSET[kind]||.75);/* 같은 종류끼리만 멀리(남과는 put 의 r=3) */
+ far(edges,'rope',Z.ropes||0,e=>{const q=at(e,'rope');return apart('rope',q.x,q.y,10)&&put(e,'rope',{path:ROPE[e.side],height:ROPE.height},3,e.x+'_'+e.y+e.side);});
+ // R810 포구(last302): 뭍에 올린 배·생선 건조대 — 길에서 먼 뒤쪽 끝(사람이 지나지 않는 바닷가 쪽), 같은 종류끼리 9칸 넘게
+ far(edges,'boat',Z.boats||0,e=>{const q=at(e,'boat');return back2(q)>=INSET.boat&&near(e.x+.5,e.y+.5)>5&&apart('boat',q.x,q.y,9)&&put(e,'boat',BOAT,3.2,e.x+'_'+e.y+e.side);});
+ far(edges,'rack',Z.racks||0,e=>{const q=at(e,'rack');return back2(q)>=INSET.rack&&near(e.x+.5,e.y+.5)>5&&apart('rack',q.x,q.y,9)&&put(e,'rack',RACK,3.2,e.x+'_'+e.y+e.side);});
+ // R812 약초 걸이·부적 말뚝(last303): 길에서 조금 떨어진 뒤쪽 끝, 같은 종류끼리 9칸 넘게 / 미역·조개 무더기(last302): 뭍에 올린 배 곁 3.25~4칸
+ far(edges,'herbrack',Z.herbracks||0,e=>{const q=at(e,'herbrack');return apart('herbrack',q.x,q.y,9)&&put(e,'herbrack',HERB,3,e.x+'_'+e.y+e.side);});
+ far(edges,'tpost',Z.tposts||0,e=>{const q=at(e,'tpost');return apart('tpost',q.x,q.y,9)&&put(e,'tpost',TPOST,3,e.x+'_'+e.y+e.side);});
+ {let sw=0;for(const b of out.filter(o=>o.kind==='boat')){if(sw>=(Z.seaweed||0))break;
+  const es=edges.map(e=>({e,d:Math.hypot(at(e,'seaweed').x-b.x,at(e,'seaweed').y-b.y)})).filter(o=>o.d>=2.5&&o.d<=4).sort((a,b2)=>a.d-b2.d||a.e.y-b2.e.y||a.e.x-b2.e.x);
+  /* 바닥에 깔린 작은 무더기라 남의 넓은 비움 반지름(금줄 3·석등 8.2)은 보지 않고 1.5칸만 띄운다(문·입구·보스 구역 규칙은 그대로) */
+  const soft=(x,y)=>{const T=taken.splice(0);const ok=clear(x,y,1.2);taken.push(...T);return ok&&!T.some(t=>Math.hypot(t.x-x,t.y-y)<1.5);};
+  for(const{e}of es){const d=INSET.seaweed,q=spotOf(e,d),a=SEA[sw%SEA.length];if(!inner(e,d)||onPath(q.x,q.y)||!soft(q.x,q.y))continue;
+   taken.push({x:q.x,y:q.y,r:1.2});out.push({id:'r730:'+fx.id+':seaweed:b'+sw,kind:'seaweed',path:a.path,height:a.height,x:q.x,y:q.y,side:e.side});sw++;break;}}}
+ // R810 길 등롱: 길잡이 길(R169) 곁 2칸 옆 열린 바닥에 7칸마다 등롱대 — 뒤쪽 끝 석등은 길에서 가장 가까운 것도 12칸 밖이라(헤드리스 실측 last303) 길 위 화면에 등불이 없었다
+ if(PATH&&Z.pathposts){const open4=(x,y)=>has(x,y)&&has(x+1,y)&&has(x-1,y)&&has(x,y+1)&&has(x,y-1);let n=0,last=null;
+  for(const k of PATH){if(n>=Z.pathposts)break;const[cx,cy]=String(k).split(',').map(Number);if(!Number.isFinite(cx+cy)||last&&Math.hypot(cx-last[0],cy-last[1])<7)continue;
+   const dirs=(h32('pp'+cx+','+cy)&1)?[[2,0],[0,2],[-2,0],[0,-2]]:[[0,2],[2,0],[0,-2],[-2,0]];
+   for(const[dx,dy]of dirs){const x=cx+dx,y=cy+dy,sx=x+.5,sy=y+.5;if(!open4(x,y)||onPath(sx,sy)||!clear(sx,sy,2.4)||!apart('pathpost',sx,sy,7)||!apart('post',sx,sy,4)||!apart('lamp',sx,sy,4))continue;
+    taken.push({x:sx,y:sy,r:2.4});out.push({id:'r730:'+fx.id+':pathpost:'+x+'_'+y,kind:'pathpost',path:POST.path,height:POST.height,x:sx,y:sy,side:'-y'});n++;last=[cx,cy];break;}}}
+ // R810 집 앞: 댓돌 신발(정본 '모두 바깥을 향해') 두 집에 하나, 장독대 세 집에 하나 — 집과 같은 언덕 높이, 집 발에서 길 쪽으로 조금 앞
+ let ns=0,nj=0;out.filter(o=>o.kind==='house').forEach((h,i)=>{const fwd=h.side==='-y'?{x:0,y:.9}:{x:.9,y:0},along=h.side==='-y'?{x:1,y:0}:{x:0,y:1},D=h.height*h.aspect/2/PX;
+  if(i%2===0&&ns<(Z.shoes||0)){ns++;out.push({id:'r730:'+fx.id+':shoes:'+i,kind:'shoes',path:SHOES.path,height:SHOES.height,lift:h.lift,x:+(h.x+fwd.x).toFixed(2),y:+(h.y+fwd.y).toFixed(2),side:h.side});}
+  if(i%3===1&&nj<(Z.jang||0)){nj++;out.push({id:'r730:'+fx.id+':jang:'+i,kind:'jang',path:JANG.path,height:JANG.height,lift:h.lift,x:+(h.x+along.x*D*.75+fwd.x*.4).toFixed(2),y:+(h.y+along.y*D*.75+fwd.y*.4).toFixed(2),side:h.side});}
+  /* R811 약방 집 앞: 왼쪽에 약탕기 화로(화로 빛), 오른쪽 가까이 약재 소반 — 집과 같은 언덕 높이 */
+  if(/yakbang/.test(h.path)){const at=(a,f)=>({x:+(h.x+along.x*D*a+fwd.x*f).toFixed(2),y:+(h.y+along.y*D*a+fwd.y*f).toFixed(2)});
+   out.push({id:'r730:'+fx.id+':yakfire:'+i,kind:'yakfire',path:YFIRE.path,height:YFIRE.height,lift:h.lift,...at(-.7,.7),side:h.side});
+   out.push({id:'r730:'+fx.id+':trays:'+i,kind:'trays',path:TRAYS.path,height:TRAYS.height,lift:h.lift,...at(.35,.7),side:h.side});}});
+ return out;}
+const done=new WeakMap();
+function pathOf(r){try{const s=window.__STORYWORLD_PLAY_R169__?.pathCells?.(r);return s&&typeof s.forEach==='function'?new Set([...s].map(String)):null;}catch(e){fail(e);return null;}}
+function routeOf(r){const out=[];try{const s=window.__STORYWORLD_PLAY_R169__?.pathCells?.(r);if(s&&typeof s.forEach==='function'){let i=0;s.forEach(k=>{if(i++%3)return;const[x,y]=String(k).split(',').map(Number);if(Number.isFinite(x+y))out.push({x:x+.5,y:y+.5});});}}catch(e){fail(e);}return out;}
+function apply(r){if(!prefs.on||!r||!ZONE[r.id]||!(!r.layer||r.layer==='STORY')||!r.exploration||!Array.isArray(r.props)||!Array.isArray(r.exploration.floorCells))return;const L=r.exploration;if(L.samongR103||L.samongR115||done.get(r)===L)return;done.set(r,L);
+ const W=L.worldWardR81||{},rows=plan({id:r.id,floorCells:L.floorCells,rooms:(L.worldR74?.rooms||[]).map(q=>({id:q.id,name:q.name||q.purpose||'',x:q.x,y:q.y})),doors:L.worldR74?.doors||[],ward:{boss:W.bossBounds,gather:W.gatherBounds},entry:L.entry||{x:-99,y:-99},
+  props:r.props.filter(p=>p&&!p.r730&&p.visible!==false&&Number.isFinite(p.x+p.y)).map(p=>({x:p.x,y:p.y})),route:routeOf(r),path:pathOf(r)});
+ const have=new Set(r.props.map(p=>p&&p.id));stats.rooms++;
+ for(const s of rows){if(have.has(s.id))continue;const q={id:s.id,x:s.x,y:s.y,path:s.path,height:s.height,visible:true,enabled:true,interactive:false,presentationOnly:true,autoTargetEligible6:false,r730:s.kind,r412Face:1};const hill=s.kind==='house'||s.kind==='shoes'||s.kind==='jang'||s.kind==='yakfire'||s.kind==='trays';if(hill)q.r412Wall=1;/* 집은 언덕 위라 벽 검사 제외, 길 가 조형물은 R412 가 벽에 든 정도를 재서 3% 넘으면 옮김 */
+  if(hill){q.visualLiftPx=s.lift;if(s.kind==='house'&&s.side==='-x')q.r303Flip=true;}else if(s.kind==='lamp'||s.kind==='post'||s.kind==='pathpost')q.r115Prop='lantern';else if(s.kind==='censer')q.r115Prop='brazier';if(s.kind==='yakfire')q.r115Prop='brazier';
+  r.props.push(q);try{if(typeof addImage==='function')addImage(s.path,'R730 village');}catch(_){}stats.placed++;}}
+const live=()=>typeof started!=='undefined'&&started&&typeof room!=='undefined'&&!!room&&!(typeof loading!=='undefined'&&loading);
+function install(){if(typeof draw!=='function')return false;const db=draw;draw=function(...a){try{if(live())apply(room);}catch(e){fail(e);}return db.apply(this,a);};
+ if(typeof drawProp==='function'){const dp=drawProp;drawProp=function(p,...a){try{if(p&&p.r730&&typeof readyImage==='function'&&!readyImage(p.path)&&typeof addImage==='function'&&!(typeof imageCache!=='undefined'&&imageCache.get(p.path)?.error))addImage(p.path,'R730 village');}catch(e){fail(e);}return dp.apply(this,[p,...a]);};}
+ return true;}
+let installed=install(),tries=0;if(!installed&&typeof setInterval==='function'){const t=setInterval(()=>{if(installed||(installed=install())||++tries>200)clearInterval(t);},100);}
+function set(o={}){if(typeof o.on==='boolean')prefs.on=o.on;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
+window.__STORYWORLD_VILLAGE_R730__=Object.freeze({revision:REV,plan,apply,set,ZONE,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError,room:typeof room!=='undefined'&&room&&Array.isArray(room.props)?room.props.filter(p=>p&&p.r730).map(p=>({id:p.id,kind:p.r730,x:p.x,y:p.y})):null})});
 })();

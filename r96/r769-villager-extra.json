@@ -1,0 +1,43 @@
+{
+ "round": "R769",
+ "files": [
+  {
+   "villager": "sobok",
+   "anim": "walk",
+   "frames": 8,
+   "temporary": true,
+   "source": "ElevenLabs seedream-5.5 CX-0070BM_vil3_walk8_eld_c1.png (그림 스레드 손질)",
+   "sourceSha256": "13f6de49a088c82a3f617252ca6ff38e99260f63ebfbcc79dfbf28cf2c18ba6c",
+   "path": "assets/r763/villagers/sobok-walk.webp",
+   "cell": 256,
+   "pivot": [
+    128,
+    234.67
+   ],
+   "visibleHeight": 199.7,
+   "size": [
+    2048,
+    256
+   ],
+   "bytes": 67288,
+   "sha256": "1613e44069006b33dd46e18efad218b6066e974eb9748ca5b04b076b524fa8b4"
+  },
+  {
+   "villager": "herbwife",
+   "anim": "proj6",
+   "frames": 6,
+   "temporary": "불씨 꼬리는 코드 입자",
+   "source": "Dots CX-0070BM vil2_proj6_r3 → Claude 보정 CX-0070BM_vil2_proj6_r4cl_c1.png",
+   "sourceSha256": "231c8478d2e687a40c4effd87655079789bbc4c284d620e49cdf0282d546c8a7",
+   "path": "assets/r769/herbwife-proj6.webp",
+   "cell": 128,
+   "facing": "right",
+   "size": [
+    768,
+    128
+   ],
+   "bytes": 30104,
+   "sha256": "f54fc90509491040bb314c058fe25166dbfaa6bb3d14f175f420d838c7ff82a7"
+  }
+ ]
+}

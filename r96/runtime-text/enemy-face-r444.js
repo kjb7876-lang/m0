@@ -19,7 +19,7 @@
 //  끄기: localStorage storyworld.r444.face {"on":false}.
 (()=>{'use strict';
 if(window.__STORYWORLD_ENEMY_FACE_R444__)return;
-const REV='R444-face-6',KEY='storyworld.r444.face';
+const REV='R444-face-7+R702',KEY='storyworld.r444.face';
 let prefs={on:true,debug:false,shadows:false};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={updates:0,spawns:0,jumps:0,turns:0,attackLocks:0,draws:0,owner:{},errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0;
@@ -53,8 +53,8 @@ function update(e){let s=S.get(e);const t=T();
  if(!(e.hp>0)||e.spawnState==='dead'){s.owner='dead';s.pend=null;return s;}
  const sp=Math.max(.8,num(e.speed,2));
  if(dist>Math.max(.6,sp*dt*3+.15)){// 순간이동·넉백·스폰 자리 잡기: 걸음으로 보지 않는다. 블링크한 쪽(R230·R268·R286)이 정한 좌우는 받아들인다.
-  s.vx=s.vy=0;s.tele=t;s.pend=null;s.owner='warp';stats.jumps++;const A0=atkAngle(e);if(A0)return lockAttack(s,A0);const d=e.direction;if(d==='left'||d==='right')s.side=d;return s;}
- const k=1-Math.exp(-dt/.07);s.vx+=(dx/dt-s.vx)*k;s.vy+=(dy/dt-s.vy)*k;s.mvx=dx/dt;s.mvy=dy/dt;
+  s.vx=s.vy=0;s.tele=t;s.pend=null;s.owner='warp';s.trail=null;stats.jumps++;const A0=atkAngle(e);if(A0)return lockAttack(s,A0);const d=e.direction;if(d==='left'||d==='right')s.side=d;return s;}
+ const k=1-Math.exp(-dt/.07);s.vx+=(dx/dt-s.vx)*k;s.vy+=(dy/dt-s.vy)*k;s.mvx=dx/dt;s.mvy=dy/dt;trailAdd(s,e.x,e.y,dist);
  const A=atkAngle(e);
  if(A)return lockAttack(s,A);
  s.aim=null;
@@ -69,9 +69,18 @@ function update(e){let s=S.get(e);const t=T();
  s.owner=owner;
  if(vec){const X=sideX(vec[0],vec[1]),Y=(vec[0]+vec[1])/2,m=Math.hypot(X,Y)||1;
   const ok=owner==='face'?Math.abs((p.x-p.y)-(e.x-e.y))>.4:Math.abs(X)/m>.3;// 세로가 뚜렷하면 마지막 좌우 유지(옆모습 한 장 그림)
-  if(ok){const want=X>0?'right':'left';if(want!==s.side){if(s.pend!==want){s.pend=want;s.since=t;}if(t-s.since>=hold){s.side=want;s.pend=null;stats.turns++;}}else s.pend=null;}
+  if(ok){const want=X>0?'right':'left';if(want!==s.side){if(s.pend!==want){s.pend=want;s.since=t;}if(t-s.since>=hold&&(owner!=='move'||t-s.since>=STAIR_MAX||trailAgrees(s,want))){s.side=want;s.pend=null;stats.turns++;}else if(owner==='move'&&t-s.since>=hold)stats.stairHolds=(stats.stairHolds||0)+1;}else s.pend=null;}
   dir4(s,vec[0],vec[1],false);}
  return s;}
+// R702(사용자 2026-11-11 "영화모드에서 보스가 도리도리하면서 방향을 못잡는 버그"): 격자 길을 대각선 계단(+x 한 칸 → +y 한 칸 …)으로 걸으면
+//  화면 가로(x−y)로는 칸마다 오른쪽·왼쪽이 번갈아 나와 0.35초마다 좌우가 뒤집혔다(영화 모드 길잡이가 멀리 가면 보스가 오래 쫓아 걸어 눈에 띔).
+//  → 걷기로 좌우를 바꿀 때 지난 걸음 묶음(길이 TRAIL칸)의 실제 진행 방향도 같은 쪽이어야 바꾼다. 계단은 묶음으로 보면 화면 세로라 마지막 좌우를 둔다.
+//  진짜로 돌아서면 묶음도 곧 그쪽을 가리키고(약 0.3초), 그래도 STAIR_MAX(0.65)초 넘게 같은 쪽을 원하면 바꾼다. 막 걷기 시작해 묶음이 짧을 땐 묻지 않는다.
+const TRAIL=1.2,TRAIL_MIN=.5,STAIR_MAX=.65;
+function trailAdd(s,x,y,d){if(!(d>1e-5))return;const T=s.trail||(s.trail={p:[[x-0,y-0]],len:0});const L=T.p[T.p.length-1];T.p.push([x,y]);T.len+=Math.hypot(x-L[0],y-L[1]);
+ while(T.p.length>2){const a=T.p[0],b=T.p[1],seg=Math.hypot(b[0]-a[0],b[1]-a[1]);if(T.len-seg<TRAIL)break;T.p.shift();T.len-=seg;}if(T.p.length>240){T.p.splice(0,T.p.length-240);}}
+function trailAgrees(s,want){const T=s.trail;if(!T||T.len<TRAIL_MIN)return true;const a=T.p[0],b=T.p[T.p.length-1],dx=b[0]-a[0],dy=b[1]-a[1],X=sideX(dx,dy),Y=(dx+dy)/2,m=Math.hypot(X,Y);
+ if(!(m>1e-4))return false;return Math.abs(X)/m>.5&&(X>0?'right':'left')===want;}
 // 4방향 시트(R375 dirs4 등): 가로가 뚜렷하면 지금 좌우, 세로가 뚜렷하면 앞/뒤, 그 사이면 이전 값(경계 떨림 방지).
 function dir4(s,dx,dy,now){const X=Math.abs(sideX(dx,dy)),Y=Math.abs((dx+dy)/2);if(X>=Y*.9||!(Y>1e-6))s.d4=s.side==='left'?'west':'east';else if(X<Y*.6||now)s.d4=(dx+dy)>0?'south':'north';
  if((s.d4==='west'&&s.side==='right')||(s.d4==='east'&&s.side==='left'))s.d4=s.side==='left'?'west':'east';}
