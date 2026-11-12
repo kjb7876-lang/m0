@@ -2,9 +2,9 @@
  * 사용자가 든 작품의 기술은 '동작 원리'만 참고했다. 이름·모양·색 조합은 라우렌(중력·행성 제어)의 천체 주제로 새로 지었다.
  * 키는 늘리지 않는다. 라우렌 본인의 타격이 적에게 들어갈 때 0.35초에 한 번 굴려 10%(주변 2칸 안 적 4마리 이상이면 14%, 사몽 발현 중 배율, 최대 35%)로 발동, 발동 뒤 5초는 다시 안 굴린다.
  *  ① 항성 반발(척력 폭발): 라우렌 둘레 2.8칸의 적을 한꺼번에 2칸 밀쳐 냄 + 공격력 1.2배 + 0.45초 경직.
- *  ② 적색 거성(밀어내는 붉은 구): 맞힌 적 쪽으로 붉은 구가 8칸 날아가며 닿는 적마다 0.9배 + 진행 방향으로 1.8칸 밀어냄. 벽에서 멈춤.
- *  ③ 청색 왜성(끌어당기는 푸른 구): 맞힌 적 자리에 푸른 구가 1.4초 머물며 3.4칸 안 적을 끌어당기고 핵 1.6칸 안에 0.35초마다 0.25배(4번).
- *  ④ 쌍성 소멸(보라 관통탄): 붉은 구와 푸른 구가 12초 안에 모두 나갔다면 다음 발동은 반드시 이것. 두 구가 라우렌 앞에서 합쳐진 뒤(0.5초)
+ *  ② 은빛 거성(밀어내는 연보라·실버 구, 처음 이름 적색 거성): 맞힌 적 쪽으로 은빛 구가 8칸 날아가며 닿는 적마다 0.9배 + 진행 방향으로 1.8칸 밀어냄. 벽에서 멈춤.
+ *  ③ 심연 왜성(끌어당기는 짙은 보라 구, 처음 이름 청색 왜성): 맞힌 적 자리에 심연 구가 1.4초 머물며 3.4칸 안 적을 끌어당기고 핵 1.6칸 안에 0.35초마다 0.25배(4번).
+ *  ④ 쌍성 소멸(보라 관통탄): 은빛 구와 심연 구가 12초 안에 모두 나갔다면 다음 발동은 반드시 이것. 두 구가 라우렌 앞에서 합쳐진 뒤(0.5초)
  *     보라 소멸탄이 11칸을 꿰뚫어 줄 위 모든 적에게 3.0배(보스·중간 보스 1.8배). 벽에서 멈춤.
  *  ⑤ 유성 궤도(조형물 투척): 6칸 안 장식 조형물(단단하지 않고 그림이 있는 작은 것, NPC·문·제단·상자 제외)을 최대 3개 끌어와 라우렌 둘레를 돌게 하고(1초),
  *     가까운 적에게 빠르게 내리꽂아 중력 폭발(2.2칸, 1.4배, 잠깐 끌어당김). 모자라면 돌 파편으로 채운다.
@@ -137,7 +137,9 @@ function step(){const t=T(),rm=curRoom();if(rm!==lastRoom){if(lastRoom!==null)ca
 if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);
  try{if(typeof started==='undefined'||started)step();}catch(err){fail(err);cancel();}sentinel(acts.length>0||booms.length>0);return r;};}
 // ---- 그리기(효과 표지 하나, 3D 기록기에는 ctx.scope 로 자리 주인을 붙인다) -----------------------------------------
-const RED='255,92,64',RED_HOT='255,226,200',BLUE='70,150,255',BLUE_HOT='214,236,255',VIO='176,96,255',VIO_HOT='244,226,255',VOID='12,2,22';
+// 색(사용자 2026-11-12 13:40Z "보라 채도 연한 것·짙은 것 + 실버로 차별화"): 밀어내는 구 = 연보라+실버, 끌어당기는 구 = 짙은 보라, 융합탄 = 보라+실버 테.
+const PALE='176,160,206',SILVER='224,224,230',DEEP='86,30,150',DEEP_HOT='190,150,240',VIO='150,84,220',VIO_HOT='232,226,244',VOID='12,2,22';
+const RED=PALE,RED_HOT=SILVER,BLUE=DEEP,BLUE_HOT=DEEP_HOT;
 function sc(o,f){if(typeof ctx!=='undefined'&&ctx&&typeof ctx.scope==='function')ctx.scope(o,f);else f();}
 function scale(){const z=typeof zoom==='number'&&zoom>0?zoom:1,TL=typeof TILE==='number'?TILE:34;return {z,T1:TL*z*Math.SQRT2,AH:typeof actorHeight==='function'?actorHeight():66*z};}
 function glowOrb(x,y,r,core,mid,alpha){ctx.save();try{ctx.globalAlpha*=alpha;const prev=ctx.globalCompositeOperation;ctx.globalCompositeOperation='lighter';
@@ -216,7 +218,7 @@ if(!wrapEffect()&&typeof setTimeout==='function'){let n=0;(function arm(){if(wra
 function set(v){try{localStorage.setItem(KEY,JSON.stringify({on:v!==false}));}catch(_){}prefAt=-1e9;return on();}
 const KINDS=['repulse','red','blue','violet','meteor'];
 window.__STORYWORLD_LAUREN_CELESTIAL_R946__=Object.freeze({revision:REV,set,on:()=>on(),
- names:Object.freeze({passive:'천체 공명',repulse:'항성 반발',red:'적색 거성',blue:'청색 왜성',violet:'쌍성 소멸',meteor:'유성 궤도'}),
+ names:Object.freeze({passive:'천체 공명',repulse:'항성 반발',red:'은빛 거성',blue:'심연 왜성',violet:'쌍성 소멸',meteor:'유성 궤도'}),
  qaForce:k=>{forced=KINDS.includes(k)?k:null;return forced;},qaRandom:f=>{rng=typeof f==='function'?f:null;return !!rng;},
  qaProps:()=>{const rm=curRoom();return (rm&&Array.isArray(rm.props)?rm.props:[]).filter(eligible).map(a=>({id:a.id,x:a.x,y:a.y,height:a.height,path:a.path}));},
  qaReset:()=>{const o=P();if(o){const s=stateOf(o);s.readyAt=-1e9;s.lastRoll=-1e9;}return true;},
