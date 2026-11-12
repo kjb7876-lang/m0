@@ -8293,7 +8293,12 @@
     "lauren-celestial-r946.js",
     "slayer-blood-passive-r947.js",
     "qa-snapshot-r940.js",
-    "cursor-r780.js"
+    "cursor-r780.js",
+    "finale-r950.js",
+    "neon-storm-r951.js",
+    "michaela-heart-r948.js",
+    "assets/r948/heart-fly8.webp",
+    "assets/r948/heart-hit6.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9368,5 +9373,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "db16b327a510d1cd829d730bb6a484d7cdc0fdc115aa58355809539662850f76"
+  "runtimeManifestSHA256": "74e76d18157f345b44cbdf0f44c442a4e4040e5d86284aa45736dc8273c65930"
 }
