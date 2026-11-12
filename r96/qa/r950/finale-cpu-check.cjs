@@ -1,7 +1,7 @@
 // R950 최종보스(교주의 사몽) 마무리 CPU 검사 — vm 안에서 엔진 전역을 흉내 내 모듈을 실제로 돌린다.
 //  ① 최종 형태 체력: 1형태가 받은 체력 값을 이어받아 68% 에서 시작(정확히 한 번), 기록이 없으면 손대지 않음, 다른 지역·DREAM·꺼짐에서는 그대로
 //  ② 정본 박자: 여섯 박자 모두 정본(cult04) 문장 그대로 찾아짐, 단계별로 한 번씩
-//  ③ 연출: 지배 연결 끊김 6회, 최종 소환 꿰매기 1회, 최종 처치 뒤 꿰매기 실패 1회, 마지막 서사 창 2.6초 미룸(글·목록 그대로, 한 번만)
+//  ③ 연출: 지배 연결 끊김 6회, 최종 소환 꿰매기 1회, 최종 처치 뒤 꿰매기 실패 1회, 마지막 서사 창은 엔진 그대로 곧바로(R81 계약)
 //  ④ 연결: index.html 태그(combat-r118 앞), runtime-inputs, verify 목록, pages.yml
 const fs=require('fs'),path=require('path'),vm=require('vm');
 const R=path.join(__dirname,'..','..'),SRC=fs.readFileSync(path.join(R,'client-source','finale-r950.js'),'utf8');
@@ -69,16 +69,8 @@ for(const [n,o] of [['no record',{}],['off',{off:true,store:{'storyworld.r950.fi
  run(g,`drawEffect({type:'other'});`);ok('other effects pass to base',run(g,`log`).includes('base-draw:other'));
  run(g,`room.enemies[0].hp=0;room.enemies[0].deadRecorded=true;tick(.05);var DONE=0;playScenes([{part:'post'},{part:'finale.core-preserved'}],()=>{DONE++;});`);
  ok('unstitch on final death',A(g).inspect().stats.unstitched===1);
- ok('post scene deferred (not yet shown)',!run(g,`log`).some(r=>r.scenes)&&A(g).inspect().pending===true);
- run(g,`playScenes([{part:'post'},{part:'finale.core-preserved'}],()=>{DONE+=10;});`);ok('altar interact during the wait does not open a second post scene',!run(g,`log`).some(r=>r.scenes)&&A(g).inspect().stats.swallowed===1);
- ok('hero kept safe during the short wait',run(g,`player.invincible`)>=2.6);
- run(g,`for(let k=0;k<20;k++)tick(.1);`);ok('still waiting at 2.0s',!run(g,`log`).some(r=>r.scenes));
- run(g,`for(let k=0;k<8;k++)tick(.1);`);const sc=run(g,`log`).filter(r=>r.scenes);
- ok('post scene shown once after ~2.6s with the same list and callback',sc.length===1&&JSON.stringify(sc[0].scenes)==='["post","finale.core-preserved"]'&&run(g,`DONE`)===1,sc);
- run(g,`playScenes([{part:'post'}],()=>{});`);ok('a second post call is not deferred again',run(g,`log`).filter(r=>r.scenes).length===2);}
-{const g=world();fullRun(g);run(g,`room.enemies[0].hp=0;tick(.05);playScenes([{part:'post'}],()=>{});enterRegion('village');`);
- ok('leaving the region flushes the deferred scene first',JSON.stringify(run(g,`log`).filter(r=>r.scenes||r==='enter').map(r=>r.scenes?'scene':r))==='["scene","enter"]',run(g,`log`));}
-{const g=world();run(g,`room.activeEncounter='boss';playScenes([{part:'post'}],()=>{});`);ok('only the finalBoss post is deferred',run(g,`log`).some(r=>r.scenes));}
+ ok('post scene opens at once with the same list and callback (R81 native contract, not deferred)',(()=>{const sc=run(g,`log`).filter(r=>r.scenes);return sc.length===1&&JSON.stringify(sc[0].scenes)==='["post","finale.core-preserved"]'&&run(g,`DONE`)===1;})(),run(g,`log`));
+ ok('no deferral API left',!('pending' in A(g).inspect())&&!('deferred' in A(g).inspect().stats));}
 // ④ 단계 지키기: 지배 연결 중 필드 잡몹이 죽어도 단계 유지, 보스 단계가 아닐 때(필드 진행)는 엔진 그대로
 for(const st of ['cosmicReady','summoning','active','bossReady']){const g=world();run(g,`room.activeEncounter='cosmic';room.encounterStage=${JSON.stringify(st)};killEnemy({fieldWaveIndex6:2,hp:5});`);
  ok('stage kept during '+st,run(g,`room.encounterStage`)===st&&A(g).inspect().stats.stageKept===1,run(g,`room.encounterStage`));}

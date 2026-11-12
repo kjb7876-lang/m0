@@ -11,16 +11,16 @@
 //     · 지배 연결 단계: 제단(합일 코어)에서 남은 연결 수만큼 검붉은 신경선이 뻗어 맥동하고, 대수문장을 쓰러뜨릴 때마다 한 가닥이 끊긴다.
 //     · 최종 형태 소환: 코어에서 교주에게 신경선이 뻗어 몸을 꿰매는 2.8초.
 //     · 사몽 각성 뒤(player.finalAwakening) 영웅 발밑에 푸른 사몽 권한의 고리(정본 "푸른빛을 머금은 환도").
-//     · 최종 처치: 신경선이 다시 뻗지만 닿지 못하고 부서져 떨어진다(2.6초). 마지막 서사 창은 이 무너짐을 본 뒤(2.6초 뒤) 연다 — 글·순서는 그대로.
+//     · 최종 처치: 신경선이 다시 뻗지만 닿지 못하고 부서져 떨어진다(2.6초). 마지막 서사 창은 엔진 그대로 곧바로 열린다(R81 계약).
 //     신경선·고리는 코드로 그린 임시 연출이다(사용자 상시 규칙: 최종본은 Dots 프레임 시트 → CX-0085FN 요청).
 //  ④ 지배 연결 도중 남은 필드 잡몹이 죽으면 엔진이 단계를 'field' 로 덮어 다음 상호작용이 최종 결전을 건너뛰던 버그(공개 빌드 재현)를 막는다.
 //  판정·AI·공격·서사 글·순서·보상은 바꾸지 않는다. DREAM 층·협동·맘몬은 손대지 않는다.
 //  끄기: localStorage['storyworld.r950.finale']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_FINALE_R950__)return;
-const REV='R950-finale-1',KEY='storyworld.r950.finale',REC_KEY='storyworld.r950.finale.rec',ZONE='cult04',LEADER='c104-boss',FINAL_FRAC=.68,POST_DELAY=2.6,LINKS=6;
+const REV='R950-finale-2',KEY='storyworld.r950.finale',REC_KEY='storyworld.r950.finale.rec',ZONE='cult04',LEADER='c104-boss',FINAL_FRAC=.68,LINKS=6;
 let prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)prefs.on=false;}catch(_){}
-const stats={hpFixed:0,hpNoRecord:0,recorded:0,beatsShown:0,beatsSkipped:0,beatsMissing:0,linkSnaps:0,stitch:0,unstitched:0,deferred:0,flushed:0,swallowed:0,stageKept:0,draws:0,errors:0};
+const stats={hpFixed:0,hpNoRecord:0,recorded:0,beatsShown:0,beatsSkipped:0,beatsMissing:0,linkSnaps:0,stitch:0,unstitched:0,stageKept:0,draws:0,errors:0};
 let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,240);};
 const T=()=>typeof time==='number'?time:performance.now()/1e3;
 const clamp=(x,a=0,b=1)=>x<a?a:x>b?b:x;
@@ -75,7 +75,7 @@ function scanBeats(){const act=room.activeEncounter,e=leaderAlive();
  if(act==='finalBoss'&&e&&e.spawnState==='active'){beat('final-engage');const f=e.hp/e.maxHp;if(f<=.5)beat('final-half');if(f<=.25)beat('final-enrage');}}
 // ---- ③ 연출 상태 -----------------------------------------------------------------------------------------
 let fxs=[];// {kind:'snap'|'stitch'|'unstitch',t0,dur,x,y,i}
-let seenCosmic=null,finalActor=null,finalDeadAt=null,pending=null;
+let seenCosmic=null,finalActor=null,finalDeadAt=null;
 function core(){const o=room.objective;return o&&Number.isFinite(o.x)?{x:o.x,y:o.y}:{x:16,y:12};}
 function linkEnd(i){const c=core(),a=-Math.PI/2+i*Math.PI*2/LINKS+.35;return{x:c.x+Math.cos(a)*3.4,y:c.y+Math.sin(a)*3.4};}
 function linksShown(){if(!(room.finalStage>=2))return 0;const act=room.activeEncounter,st=room.encounterStage;
@@ -134,16 +134,8 @@ function drawAll(){const t=T(),u=unit(),c=core(),cq=project(c.x,c.y),cs={x:cq.x,
   ctx.globalAlpha=.75+.2*pul;ctx.strokeStyle='#d7ebff';ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(q.x,q.y,u*(1.45+.08*pul),u*(.72+.04*pul),0,0,Math.PI*2);ctx.stroke();
   ctx.fillStyle='#eaf4ff';for(let s=0;s<6;s++){const a2=t*.9+s*Math.PI/3;ctx.globalAlpha=.85;ctx.beginPath();ctx.arc(q.x+Math.cos(a2)*u*1.45,q.y+Math.sin(a2)*u*.72,Math.max(2,u*.07),0,Math.PI*2);ctx.fill();}});
  ctx.restore();ctx.globalAlpha=1;}
-// ---- 마지막 서사 미루기(무너짐을 본 뒤) ----------------------------------------------------------------
-function flush(){if(!pending)return;const p=pending;pending=null;stats.flushed++;try{psBase.apply(p.self,[p.list,...p.args]);}catch(e){fail(e);}}
-let psBase=null;
-if(typeof playScenes==='function'){psBase=playScenes;playScenes=function(list,...args){
- try{if(active()&&room.activeEncounter==='finalBoss'&&Array.isArray(list)&&list[0]?.part==='post'){
-  if(pending&&pending.room===room){stats.swallowed++;return;}/* 기다리는 동안 제단 상호작용(사람·길잡이)이 같은 마지막 서사를 다시 부르면 한 번만 열리게 삼킨다 — 콜백(completeRegion)은 미룬 쪽이 부른다 */
-  if(!room.r950PostDeferred){room.r950PostDeferred=true;pending={list,args,self:this,at:T()+POST_DELAY,room};stats.deferred++;
-   try{player.invincible=Math.max(Number(player.invincible)||0,POST_DELAY+.4);}catch(_){}/* 싸움은 끝났다: 기다리는 2.6초 동안 남은 잡몹에게 쓰러지지 않게 */
-   return;}}}catch(e){fail(e);}
- return psBase.call(this,list,...args);};}
+// ---- 마지막 서사: 엔진 계약(R81 finale-contracts — 최종 처치 직후 post·finale.core-preserved 가 곧바로 줄에 선다)을 지키려고 미루지 않는다.
+//      무너짐(꿰매기 실패) 연출은 처치 순간부터 서사 창 뒤에서 이어진다.
 // ---- 설치 --------------------------------------------------------------------------------------------------
 if(typeof window.spawnCosmic3==='function'){const base=window.spawnCosmic3;window.spawnCosmic3=function(...a){const r=base.apply(this,a);try{if(active()&&room.activeEncounter==='finalBoss')fixFinal();}catch(e){fail(e);}return r;};}
 // ④ 단계 지키기(공개 빌드 헤드리스 재현): 엔진 advanceFieldWave6 은 필드 잡몹 웨이브의 마지막 한 마리가 죽을 때마다 단계를 'field'/'fieldReady' 로 덮는다.
@@ -157,14 +149,12 @@ if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,.
 let lastRoom=null;
 if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);
  try{if(typeof room!=='undefined'&&room!==lastRoom){lastRoom=room;clearBeats();fxs=[];seenCosmic=null;finalActor=null;finalDeadAt=null;}
-  if(pending&&(T()>=pending.at||pending.room!==room))flush();
   if(active()){const e=leaderAlive();if(room.activeEncounter==='boss'&&e&&e.spawnState==='active')remember(e);
    if(room.activeEncounter==='finalBoss')fixFinal();/* 저장에서 되살린 최종 형태도 */
    scanBeats();tickFx();arm(linksShown()>0||fxs.length>0||!!player?.finalAwakening);}else arm(false);
   pump();}catch(e){fail(e);}return r;};}
-if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=function(...a){try{flush();}catch(e){fail(e);}return base.apply(this,a);};}
-function set(o){if(o&&typeof o.on==='boolean'){prefs.on=o.on;try{localStorage.setItem(KEY,JSON.stringify({on:o.on}));}catch(_){}if(!o.on){clearBeats();arm(false);flush();}}return{...prefs};}
+function set(o){if(o&&typeof o.on==='boolean'){prefs.on=o.on;try{localStorage.setItem(KEY,JSON.stringify({on:o.on}));}catch(_){}if(!o.on){clearBeats();arm(false);}}return{...prefs};}
 window.__STORYWORLD_FINALE_R950__=Object.freeze({revision:REV,BEATS,set,sentence,
  beatTexts:()=>Object.fromEntries(Object.entries(BEATS).map(([k,v])=>[k,sentence(v)])),
- inspect:()=>({revision:REV,on:prefs.on,active:active(),stats:{...stats},fx:fxs.map(f=>f.kind),links:typeof room!=='undefined'&&room?linksShown():0,pending:!!pending,rec:typeof room!=='undefined'&&room?recFor():null,lastError,browserVerified:false,GPUVerified:false})});
+ inspect:()=>({revision:REV,on:prefs.on,active:active(),stats:{...stats},fx:fxs.map(f=>f.kind),links:typeof room!=='undefined'&&room?linksShown():0,rec:typeof room!=='undefined'&&room?recFor():null,lastError,browserVerified:false,GPUVerified:false})});
 })();
