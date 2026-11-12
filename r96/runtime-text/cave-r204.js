@@ -737,7 +737,7 @@ const roomOf=frame=>typeof room!=='undefined'&&room?.exploration===frame?.explor
 function eligible(r,frame){const rm=roomOf(frame);return !!(rm&&roomOn(rm)&&frame?.layer==='STORY'&&r.spatialBuilt);}
 function build(r,frame){const t0=performance.now(),T=r.T,cfg=ZONES[frame.zone],ex=frame.exploration;SEED=cfg.seed;
  const gen=r.sceneGeneration;r.__r204={gen,pending:true,zone:frame.zone};
- const TX={...TEX,...(cfg.tex||{})},want=cfg.decorOnly?{crack:loadImg(TEX.crack[0]),bones:loadImg(TEX.bones[0]),root:loadImg(TEX.root[0])}/* R216: 디테일 전용은 장식판에 쓰는 그림만 */:Object.fromEntries(Object.entries(TX).map(([k,[p]])=>[k,loadImg(p)]));
+ const TX={...TEX,...(cfg.tex||{}),...((()=>{try{return window.__STORYWORLD_R204_TEX__?.(frame.zone)||{};}catch(_){return{};}})())},want=cfg.decorOnly?{crack:loadImg(TEX.crack[0]),bones:loadImg(TEX.bones[0]),root:loadImg(TEX.root[0])}/* R216: 디테일 전용은 장식판에 쓰는 그림만 */:Object.fromEntries(Object.entries(TX).map(([k,[p]])=>[k,loadImg(p)]));
  for(const [n] of [...(cfg.patches||[]),...(cfg.uprights||[])])want['org:'+n]=loadImg(orgPath(n));
  want.chain=loadImg('assets/r138/props/chain.webp').catch(()=>null);want.ripple=loadImg('assets/r138/props/ripple.webp').catch(()=>null);/* R212 */
  if(cfg.tufts)want.tuft=loadImg(cfg.tufts[0]).catch(()=>null);
