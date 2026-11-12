@@ -110,7 +110,7 @@ A.add(Object.assign({zone:'restKairo',D:17,
    tx.forEach((n,i)=>{op(n,es(t,1.2+i*.4,1.8+i*.4));n.setAttribute('stroke',gd>.5?GOLD:TEAL);});rg.forEach((n,i)=>{n.setAttribute('transform',`rotate(${f(t*(13+i*8)*(i%2?-1:1)+i*58)} ${CX} ${CY0})`);n.setAttribute('stroke',gd>.5?GOLD:TEAL);});op(gl,.5*(1-gd));op(gg,.5*gd+.05*Math.sin(t*3));
    sand.forEach(q=>{const u=es(t,4.8+q.d*1.6,5.6+q.d*1.6);q.n.setAttribute('fill',u>.5?GOLD:'#000');q.n.setAttribute('stroke-opacity',f(1-u));});
    cl.forEach(c=>c.h(Math.max(0,t-5.4)*c.sp));
-   bl.forEach((n,i)=>{const u=seg(t,10+i*.35,11.6+i*.35);setA(n,{r:4+u*380});op(n,u>0&&u<1?1-u:0);});op(fl,ex?Math.max(0,.9-Math.abs(t-10.15)*5):0);
+   bl.forEach((n,i)=>{const u=seg(t,10+i*.35,11.6+i*.35);setA(n,{r:4+u*380});op(n,u>0&&u<1?1-u:0);});op(fl,ex?Math.max(0,.9-Math.abs(t-10.15)*5)*(k.lite?.25:1):0);/* 흔들림·강한 점멸 줄이기에서는 섬광을 약하게 */
    const sh2=ex?Math.exp(-(t-10)*1.2)*5:0;k.root.setAttribute('transform',`translate(${f(Math.sin(t*47)*sh2)} ${f(Math.cos(t*39)*sh2)})`);
    hero.up(t,dt,0,{nearHand:[lerp(60,70,wr*(1-es(t,4,4.6))),lerp(80,54,wr*(1-es(t,4,4.6)))],headDrop:ex?0:-.8*es(t,5.4,6.4),lean:ex?-10*es(t,10,10.4)*(1-es(t,12,13)):0,farHand:ex?[lerp(30,22,es(t,10,10.4)),lerp(80,50,es(t,10,10.4))]:null,capeKick:ex?-10*es(t,10,10.4):0});
    if(b){const sp=es(t,14,15.6),xm=mx+mw*.45;w0.setAttribute('d',wave(mx+20,xm,my+mh/2,26,14,t*2.6));const tail=(dy,ph)=>{let d='';for(let i=0;i<=40;i++){const u=i/40,x=lerp(xm,mx+mw-20,u);d+=(i?'L':'M')+f(x)+' '+f(my+mh/2+dy*sp*u+Math.sin(14*.45+u*12+ph)*20*(1-u*.4));}return d;};w1.setAttribute('d',tail(-56,t*2.6+6.3));w2.setAttribute('d',tail(56,t*2.6+6.3));op(w2,sp);}}}},REST));

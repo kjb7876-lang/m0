@@ -158,6 +158,7 @@ const flat=s=>String(s).replace(/\s*\n\s*/g,' ');
  {const g=world({voice:true}),A=g.api,sc=A.scene('dist01'),r=run(g,'dist01',{late:2.5}),c=g.voiceCalls;
   ok('voice late by 2.5s (slow network): next line still waits for the previous one',c.length===sc.subs.length&&c.every((x,i)=>i===0||x.at>=c[i-1].ended),c.map(x=>[x.at,x.ended]));}
  {const g=world({voice:true}),A=g.api,sc=A.scene('dist01'),r=run(g,'dist01',{late:1e6}),c=g.voiceCalls;
+  ok('voice that never reports its end: every such recording is stopped (none plays on into the game)',c.length>0&&c.every(x=>x.stopped===true),c.map(x=>x.stopped));
   ok('voice that never reports its end: the scene still finishes (hold is bounded)',A.inspect().active===false&&A.inspect().stats.ended===1&&r.ms/1000<sc.D+sc.subs.reduce((n,x)=>n+VDUR[sha16(x[2])]+5,0),[r.ms/1000]);}
  {const g=world({voice:'error'}),A=g.api,sc=A.scene('dist01');A.play({zone:'dist01'});const t0=g.now();let n=0;while(A.inspect().active&&n++<6000){g.raf(33);g.runTimers();}
   ok('voice file fails: scene keeps its own pace (within 1.5s of D), no engine error',Math.abs((g.now()-t0)/1000-sc.D)<1.5&&A.inspect().stats.errors===0,[(g.now()-t0)/1000,sc.D]);}
@@ -181,6 +182,9 @@ const flat=s=>String(s).replace(/\s*\n\s*/g,' ');
  ok('finish: cinema mode hides the title card',/#r880\.cinema \.ttl\{display:none\}/.test(SRC));
  for(let i=0;i<60;i++)g.raf(33);ok('finish: no errors with dust, breathing camera and shadows',A.inspect().stats.errors===0,A.inspect().lastError);A.skip();
  const g2=world(),A2=g2.api;A2.play({zone:'dist01',at:5});ok('finish: still frame (at=…) has no title card',!g2.dom.document.getElementById('r880').children.some(c=>c.className==='ttl'));A2.skip();}
+// 8d) 흔들림·강한 점멸 줄이기: 화면 전체 흰 섬광(restKairo 폭발)은 약하게(0.25 이하)
+{const peak=opt=>{const g=world(opt),A=g.api;A.play({zone:'restKairo',at:10.15});for(let i=0;i<3;i++)g.raf(33);let m=0;const walk=n=>{if(n.attrs&&n.attrs.fill==='#fff'&&+n.attrs.width>=700)m=Math.max(m,+n.attrs.opacity||0);(n.children||[]).forEach(walk);};walk(g.dom.document.getElementById('r880'));A.skip();return m;};
+ const full=peak({}),low=peak({reduced:true});ok('reduced motion: full-screen white flash is attenuated (≤ .25), normal mode keeps it',full>0.6&&low>0&&low<=0.25,[full,low]);}
 // 9) 빌드 연결 다섯 곳
 {const html=rd(path.join(R,'runtime-text','index.html'))||'',lines=html.split('\n');
  const iT=lines.findIndex(l=>l.includes('./title-bg-video-r667.js')),iE=lines.findIndex(l=>l.includes('./'+ENGINE)),iS=lines.findIndex(l=>l.includes('./'+SCENES[0])),iS2=SCENES.map(f=>lines.findIndex(l=>l.includes('./'+f)));
