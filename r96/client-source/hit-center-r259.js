@@ -46,8 +46,14 @@ function enemyAt(x,y){try{for(const e of (typeof room==='object'&&room?.enemies)
 (function patch115(n=0){try{const P=window.__STORYWORLD_PLAY_R115__;if(P&&!P.__r259){const old=P.centreOf;window.__STORYWORLD_PLAY_R115__=Object.freeze({...P,__r259:true,centreOf(e){return centreOf(e)||(typeof old==='function'?old.call(P,e):null);}});return;}}catch(e){fail(e);}
  if(n<40&&typeof setTimeout==='function')setTimeout(()=>patch115(n+1),250);})();
 // 엔진 fx(): 적 발밑에 생긴 적중 그림에 그 적을 붙여 둔다
+// R860: 영웅이 맞는 그림(적 → 영웅)은 그 좌표에 몹이 겹쳐 서 있어도 그 몹에 붙이지 않는다.
+//  무한 생존처럼 몹이 영웅에게 겹쳐 몰리면 영웅 피격 숫자·그림이 '영웅 자리 .15칸 안의 몹'에게 붙어 적 자신 그림 가운데로 옮겨 그려졌다.
+//  ① 엔진 hurt() 안(안쪽 덧씌움 포함)에서 생긴 그림 ② 영웅 자리(.2칸 안)에 생긴 그림은 붙이지 않는다. 영웅 → 몹 적중(몹 자리에 생김)은 그대로 붙는다.
+let hurtDepth=0;
+if(typeof hurt==='function'){const hb=hurt;hurt=function(...a){hurtDepth++;try{return hb.apply(this,a);}finally{hurtDepth--;}};}
+const heroSpot=(x,y)=>{try{return typeof player==='object'&&player&&Math.abs(player.x-x)<.2&&Math.abs(player.y-y)<.2;}catch(_){return false;}};
 if(typeof fx==='function'){const base=fx;fx=function(type,x,y,...a){const r=base.apply(this,[type,x,y,...a]);
- try{if(on&&(type==='burst'||type==='slash'||type==='text')&&typeof effects!=='undefined'&&Array.isArray(effects)){const f=effects[effects.length-1];if(f&&f.x===x&&f.y===y){const e=enemyAt(x,y);if(e)f.r259E=e;}}}catch(err){fail(err);}return r;};}
+ try{if(on&&(type==='burst'||type==='slash'||type==='text')&&typeof effects!=='undefined'&&Array.isArray(effects)){const f=effects[effects.length-1];if(f&&f.x===x&&f.y===y){if(hurtDepth>0||heroSpot(x,y)){stats.heroKept=(stats.heroKept||0)+1;}else{const e=enemyAt(x,y);if(e)f.r259E=e;}}}}catch(err){fail(err);}return r;};}
 if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(f,...a){
  try{const e=on&&f?.r259E,v=e&&anyCentre(e);if(v&&typeof ctx?.translate==='function'&&typeof project==='function'){const q=project(f.x,f.y),AH=typeof actorHeight==='function'?actorHeight():60;
    const was=f.type==='text'?q.y-AH*.65:q.y-AH*.3,want=f.type==='text'?v.top-6:v.cy;ctx.save();try{ctx.translate(v.cx-q.x,want-was);stats.moved++;return base.apply(this,[f,...a]);}finally{ctx.restore();}}}catch(err){fail(err);}

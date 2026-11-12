@@ -10,8 +10,12 @@ ok('runtime copy matches; loads right after michaela-r247 (after R209/R247, befo
 {const r9=C('skills-r209.js');ok('R209 keeps the original gunner W(정화)·E(블링크) blocked but shows their buttons while R561 owns them',/hero==='gunner'&&\(slot==='w'\|\|slot==='e'\)&&!!window\.__STORYWORLD_GUNNER_ARMS_R561__\?\.on\?\.\(\)/.test(r9)&&RT('skills-r209.js')===r9);}
 {const k=C('keys-r291.js');ok('R291 key labels keep gunner W·E live while R561 is on',/__STORYWORLD_GUNNER_ARMS_R561__/.test(k)&&RT('keys-r291.js')===k);}
 
-function mk(opt={}){const hits=[],L={},moves=[];
- const enemies=opt.enemies||[{id:'a',x:13,y:10,hp:999,maxHp:999,radius:.3,spawnState:'active'},{id:'b',x:16,y:10,hp:999,maxHp:999,radius:.3,spawnState:'active'},{id:'c',x:10,y:15,hp:999,maxHp:999,radius:.3,spawnState:'active'}];
+// R561d: 총구 방향(8방향 칸 한가운데)으로만 나가므로, 옛 시험의 '월드 x축 위 적'을 겨눈 칸 중심 줄로 옮긴다 — 플레이어(10,10) 기준 회전, 거리·간격은 그대로(벽 판정은 역회전)
+const RO=Math.atan2(2*Math.sin(Math.PI/4)-Math.cos(Math.PI/4),Math.cos(Math.PI/4)+2*Math.sin(Math.PI/4)),rot=(x,y,s=1)=>{const c=Math.cos(RO*s),n=Math.sin(RO*s);return [10+(x-10)*c-(y-10)*n,10+(x-10)*n+(y-10)*c];};
+const rotE=l=>l.map(e=>{const [x,y]=rot(e.x,e.y);return {...e,x,y};});
+const rotB=f=>f?((x,y,...r)=>{const [a,b]=rot(x,y,-1);return f(a,b,...r);}):null;
+function mk(opt={}){opt={...opt,blocked:rotB(opt.blocked)};const hits=[],L={},moves=[];
+ const enemies=opt.enemies?rotE(opt.enemies):rotE([{id:'a',x:13,y:10,hp:999,maxHp:999,radius:.3,spawnState:'active'},{id:'b',x:16,y:10,hp:999,maxHp:999,radius:.3,spawnState:'active'},{id:'c',x:10,y:15,hp:999,maxHp:999,radius:.3,spawnState:'active'}]);
  const sb={console,Math,JSON,Object,Array,Set,Map,WeakMap,Number,String,Infinity,localStorage:{getItem:()=>null,setItem(){}},window:{},setTimeout:()=>0,addEventListener(t,f,c){(L[t]=L[t]||[]).push(f);},
   auto:false,guide:false,started:true,modal:null,loading:false,storyScene:null,settings:{},time:10,COMBAT_RHYTHM_R26:opt.rhythm||1,shake:0,
   player:{hero:opt.hero||'gunner',x:10,y:10,hp:100,specialCD:0,direction:'right',storyWER:{ready:{},buffs:{}}},maxHP:()=>200,attackPower:()=>40,rank:()=>opt.rank||0,

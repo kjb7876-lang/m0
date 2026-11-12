@@ -68,14 +68,14 @@
  function rally(){const s=state();if(!controlled(room)||s?.phase!=='route')return false;const rows=room.enemies.filter(field),spots=room.exploration.worldWardR81?.rallySpots||window.__STORYWORLD_HOSPITAL_MAZE_LAYOUT__?.rally||[],used=[{x:player.x,y:player.y,radius:.5}];
   const moves=rows.map((e,i)=>{const preferred=spots[i%spots.length]||{x:12+(i%7)*3,y:31.5+Math.floor(i/7)*3},p=choose(room,e,preferred,i,used);if(!p)throw Error('R81 rally placement blocked: '+e.id);used.push({...p,radius:coreRadius(e)});return{e,p};});
   for(const{e,p}of moves){setPosition(e,p);e.spawnState='active';e.explorationLeash=28;e.explorationGroup=room.id+':ward-rally';e.graceUntil=time+1.1;}
-  s.phase='rally';s.rallied=rows.map(e=>e.id);room.engaged=true;room.encounterStage='active';room.activeEncounter='midboss';room.fieldWaveCleared6=false;metrics.rallies++;
+  s.phase='rally';s.rallied=rows.map(e=>e.id);/* R905: 집결한 적을 지역별 2~6묶음으로 나눠 깨운다(첫 묶음만 바로) */window.__STORYWORLD_RALLY_WAVES_R905__?.onRally?.(room,rows,s);room.engaged=true;room.encounterStage='active';room.activeEncounter='midboss';room.fieldWaveCleared6=false;metrics.rallies++;
   note('rally',{zone:room.id,survivors:rows.length,oppositeSurvivors:rows.filter(e=>e.wardRouteR81!==s.route).length});toast('다른 길의 생존 적들이 중앙 전투실에 집결했습니다.',4);saveGame(false);settle();return true;
  }
  // R702: 집결 단계 낙오 적 다시 모으기 — 집결(rally) 단계는 필드 적을 모두 잡아야 끝나는데, 숨은(hidden) 적이나 집결실에서 멀리 떨어진 적이
  //  남으면 영웅·길잡이가 찾지 못해 단계가 멈췄다(영화 모드 last302 '중간보스 · 포구 검은 안개' 1마리 남고 길잡이가 집결실에 서 있음).
  //  숨은 적은 바로, 집결실 26칸 밖이면서 영웅과도 16칸 넘게 떨어진 적은 4초 뒤 집결 자리로 다시 모은다(영웅과 싸우는 적은 건드리지 않음).
  const STRAY_D=26,STRAY_P=16,STRAY_T=4,strayAt=new WeakMap();function stray(e,g,p,t){if(e.spawnState==='hidden')return true;const far=Math.hypot(e.x-g.gatherAnchor.x,e.y-g.gatherAnchor.y)>STRAY_D&&Math.hypot(e.x-p.x,e.y-p.y)>STRAY_P;if(!far){strayAt.delete(e);return false;}if(!strayAt.has(e))strayAt.set(e,t);return t-strayAt.get(e)>=STRAY_T;}
- let regAt=-9;function regather(){if(Math.abs(time-regAt)<1)return 0;regAt=time;const g=room.exploration?.worldWardR81;if(!g?.gatherAnchor)return 0;const rows=room.enemies.filter(e=>field(e)&&stray(e,g,player,time));if(!rows.length)return 0;
+ let regAt=-9;function regather(){if(Math.abs(time-regAt)<1)return 0;regAt=time;const g=room.exploration?.worldWardR81;if(!g?.gatherAnchor)return 0;const rows=room.enemies.filter(e=>field(e)&&!window.__STORYWORLD_RALLY_WAVES_R905__?.held?.(e)&&stray(e,g,player,time));if(!rows.length)return 0;
   const spots=g.rallySpots||[],used=[{x:player.x,y:player.y,radius:.5}];let n=0;
   rows.forEach((e,i)=>{const p=choose(room,e,spots[i%Math.max(1,spots.length)]||g.gatherAnchor,i,used);if(!p)return;used.push({...p,radius:coreRadius(e)});setPosition(e,p);e.spawnState='active';e.explorationLeash=28;e.explorationGroup=room.id+':ward-rally';e.graceUntil=time+1.1;strayAt.delete(e);n++;});
   if(n){metrics.regathers=(metrics.regathers||0)+n;note('regather',{zone:room.id,n});}return n;}
