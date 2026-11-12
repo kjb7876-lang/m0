@@ -1,4 +1,4 @@
-/* R940 라우렌 확률 발동 특수 패시브 '천체 공명' (사용자 2026-11-12 11:54Z "라우렌 확률 발동 특수 패시브스킬", 11:55Z "주변 조형물을 끌어와 적에게 빠르게 날아가게 해서 중력폭발, 보스스킬처럼").
+/* R946 라우렌 확률 발동 특수 패시브 '천체 공명' (사용자 2026-11-12 11:54Z "라우렌 확률 발동 특수 패시브스킬", 11:55Z "주변 조형물을 끌어와 적에게 빠르게 날아가게 해서 중력폭발, 보스스킬처럼").
  * 사용자가 든 작품의 기술은 '동작 원리'만 참고했다. 이름·모양·색 조합은 라우렌(중력·행성 제어)의 천체 주제로 새로 지었다.
  * 키는 늘리지 않는다. 라우렌 본인의 타격이 적에게 들어갈 때 0.35초에 한 번 굴려 10%(주변 2칸 안 적 4마리 이상이면 14%, 사몽 발현 중 배율, 최대 35%)로 발동, 발동 뒤 5초는 다시 안 굴린다.
  *  ① 항성 반발(척력 폭발): 라우렌 둘레 2.8칸의 적을 한꺼번에 2칸 밀쳐 냄 + 공격력 1.2배 + 0.45초 경직.
@@ -12,11 +12,11 @@
  * 보스·중간 보스는 밀리거나 끌리지 않는다(맞기만 함). 밀기·끌기는 엔진 moveActor 로 해서 벽을 넘지 않는다.
  * 상태는 영웅 몸(player 객체)마다 따로 둔다: 생존 모드 배치 영웅(R720)이 player 를 몸으로 바꿔 끼워 공격할 때도 그 몸의 공격력·자리·대기를 쓴다.
  * 그림은 코드로 그린 임시 연출(최종은 Dots 프레임 시트 CX-0087LC 요청 대상, 오면 교체). 소리는 기존 R546 라우렌 공격·고유기 소리를 다시 씀.
- * 끄기: localStorage['storyworld.r940.celestial']='{"on":false}'
+ * 끄기: localStorage['storyworld.r946.celestial']='{"on":false}'
  */
 (()=>{'use strict';
-if(typeof window==='undefined'||window.__STORYWORLD_LAUREN_CELESTIAL_R940__)return;
-const REV='R940-celestial-1',KEY='storyworld.r940.celestial',HERO='lauren';
+if(typeof window==='undefined'||window.__STORYWORLD_LAUREN_CELESTIAL_R946__)return;
+const REV='R946-celestial-1',KEY='storyworld.r946.celestial',HERO='lauren';
 const CHANCE=.10,CROWD_BONUS=.04,CROWD_N=4,CROWD_R=2,CHANCE_MAX=.35,ROLL_GAP=.35,ICD=5,COMBO_WINDOW=12;
 const REP_R=2.8,REP_K=1.2,REP_PUSH=2.0,REP_PUSH_T=.25,REP_STUN=.45,REP_LIFE=.7;
 const RED_V=7,RED_RANGE=8,RED_R=.85,RED_K=.9,RED_PUSH=1.8,RED_PUSH_T=.3;
@@ -50,7 +50,7 @@ function bodyR(e){return e.combatProfile?.bodyBlock?.r||e.radius||.27;}
 function surge(kind,v){try{const g=window.__STORYWORLD_SAMONG_SURGE_R571__;if(g&&typeof g[kind]==='function'&&(!g.active||g.active())){const r=Number(g[kind](v));if(Number.isFinite(r)&&r>0)return r;}}catch(_){}return v;}
 function play(k){try{if(typeof sound==='function')sound(k);}catch(_){}}
 function shakeBy(v){try{if(typeof shake==='number')shake=Math.max(shake,v);}catch(_){}}
-function deal(e,v,kind){if(!e||hiddenActor(e)||!canHit(e)||!(v>0))return false;inner++;try{const r=hitEnemy(e,v,{kind:'r940-'+kind,friendly:true,owner:'hero',sourceHero:HERO,r940:true});if(r!==false)stats.hits++;return r;}catch(err){fail(err);return false;}finally{inner--;}}
+function deal(e,v,kind){if(!e||hiddenActor(e)||!canHit(e)||!(v>0))return false;inner++;try{const r=hitEnemy(e,v,{kind:'r946-'+kind,friendly:true,owner:'hero',sourceHero:HERO,r946:true});if(r!==false)stats.hits++;return r;}catch(err){fail(err);return false;}finally{inner--;}}
 function stateOf(o){let s=owners.get(o);if(!s){s={lastRoll:-1e9,readyAt:-1e9,redAt:-1e9,blueAt:-1e9};owners.set(o,s);ownerCount++;}return s;}
 const comboOf=(s,t)=>s.redAt>-1e8&&s.blueAt>-1e8&&t-Math.min(s.redAt,s.blueAt)<=COMBO_WINDOW;
 // ---- 밀기·끌기(엔진 moveActor, 벽 존중) ------------------------------------------------------------
@@ -63,11 +63,11 @@ function runPushers(dt){pushers=pushers.filter(p=>{const e=p.e;if(hiddenActor(e)
 // 엔진 drawProp 이 최근(0.5초) 실제로 그린 조형물만 던진다: 자리에 그림이 안 나오는 조형물(병원·카이로 일부)이 허공에서 나타나지 않게.
 const seenAt=new WeakMap();let propHook=false;
 if(typeof drawProp==='function'){const base=drawProp;propHook=true;drawProp=function(a,...r){try{if(a&&typeof a==='object'&&a.visible!==false)seenAt.set(a,T());}catch(_){}return base.apply(this,[a,...r]);};}
-function eligible(a){if(propHook&&!(T()-(seenAt.get(a)??-1e9)<=.5))return false;if(!a||typeof a.path!=='string'||!a.path||a.visible===false||a.solid||a.r940Hidden||a.enabled===false||a.disabled===true||a.destroyed===true)return false;
+function eligible(a){if(propHook&&!(T()-(seenAt.get(a)??-1e9)<=.5))return false;if(!a||typeof a.path!=='string'||!a.path||a.visible===false||a.solid||a.r946Hidden||a.enabled===false||a.disabled===true||a.destroyed===true)return false;
  if(a.r75NPC||a.r75NarrativeNPC||a.r74Door||a.doorId||a.hospitalDoorFrameB3||a.terrainWall||a.altar||a.interact||a.pickup||a.npc||a.objective)return false;
  if(NO_PROP.test(String(a.id||''))||NO_PROP.test(a.path)||FLAT_PROP.test(String(a.id||''))||FLAT_PROP.test(a.path)||a.groundAligned||a.flat)return false;const h=Number(a.height);return Number.isFinite(h)&&h>=MET_MIN_H&&h<=MET_MAX_H&&Number.isFinite(a.x)&&Number.isFinite(a.y);}
-function hide(a){a.r940Hidden={prev:a.visible};a.visible=false;stats.hiddenProps++;}
-function restore(a){if(!a||!a.r940Hidden)return;const prev=a.r940Hidden.prev;delete a.r940Hidden;a.visible=prev;stats.restoredProps++;}
+function hide(a){a.r946Hidden={prev:a.visible};a.visible=false;stats.hiddenProps++;}
+function restore(a){if(!a||!a.r946Hidden)return;const prev=a.r946Hidden.prev;delete a.r946Hidden;a.visible=prev;stats.restoredProps++;}
 function restoreAct(x){if(x.kind!=='meteor'||x.restored)return;x.restored=true;for(const r of x.rocks)if(r.prop)restore(r.prop);}
 function cancel(){for(const x of acts)restoreAct(x);acts=[];pushers=[];pullers=[];booms=[];}
 // ---- 다섯 가지 발동 ---------------------------------------------------------------------------------
@@ -94,7 +94,7 @@ function roll(e){const o=P();if(!o||o.hero!==HERO||o.hp<=0||blockedNow())return;
  if(kind==='red')s.redAt=t;else if(kind==='blue')s.blueAt=t;else if(kind==='violet'){s.redAt=-1e9;s.blueAt=-1e9;}
  lastRoom=curRoom();fire(kind,o,e&&Number.isFinite(e.x)?{x:e.x,y:e.y}:null);}
 // 라우렌 본인 타격만(다른 영웅·협동 동료·적·이 패시브 자신의 피해 제외).
-function mine(src){const o=P();if(!o||o.hero!==HERO)return false;if(src&&typeof src==='object'){if(src.r940||src.sourceHero&&src.sourceHero!==HERO)return false;if(src.coopIdR62||src.ally||src.owner==='ally'||src.owner==='enemy'||src.hostile)return false;}return true;}
+function mine(src){const o=P();if(!o||o.hero!==HERO)return false;if(src&&typeof src==='object'){if(src.r946||src.sourceHero&&src.sourceHero!==HERO)return false;if(src.coopIdR62||src.ally||src.owner==='ally'||src.owner==='enemy'||src.hostile)return false;}return true;}
 if(typeof hitEnemy==='function'){const base=hitEnemy;hitEnemy=function(e,value,source,...a){const r=base.call(this,e,value,source,...a);
  try{if(!inner&&r!==false&&e&&on()&&mine(source))roll(e);}catch(err){fail(err);}return r;};}
 // ---- 매 틱 ------------------------------------------------------------------------------------------
@@ -126,7 +126,7 @@ function stepAct(x,t,dt){const u=t-x.t0;
      r.state='fly';r.fx=r.x;r.fy=r.y;r.tx=p.x;r.ty=p.y;r.flyD=Math.max(.01,Math.hypot(p.x-r.x,p.y-r.y));}}}
    if(r.state==='fly'){const s=MET_V*dt,L=Math.hypot(r.tx-r.x,r.ty-r.y);if(L<=s){r.x=r.tx;r.y=r.ty;}else{const nx=r.x+(r.tx-r.x)/L*s,ny=r.y+(r.ty-r.y)/L*s;if(wallAt(nx,ny)){r.tx=r.x;r.ty=r.y;}else{r.x=nx;r.y=ny;}}
     r.lift=Math.max(0,Math.hypot(r.tx-r.x,r.ty-r.y)/r.flyD);if(Math.hypot(r.tx-r.x,r.ty-r.y)<1e-6){r.state='done';done++;boom(r.x,r.y,x.power,x.k);}}});
-  for(const r of x.rocks)if(r.prop&&r.prop.r940Hidden&&r.prop.visible!==false)r.prop.visible=false;
+  for(const r of x.rocks)if(r.prop&&r.prop.r946Hidden&&r.prop.visible!==false)r.prop.visible=false;
   if(done===x.rocks.length){if(x.doneAt==null)x.doneAt=t;if(t-x.doneAt>=MET_RESTORE){restoreAct(x);return false;}}return true;}
  return false;}
 function step(){const t=T(),rm=curRoom();if(rm!==lastRoom){if(lastRoom!==null)cancel();lastRoom=rm;}
@@ -141,7 +141,7 @@ const RED='255,92,64',RED_HOT='255,226,200',BLUE='70,150,255',BLUE_HOT='214,236,
 function sc(o,f){if(typeof ctx!=='undefined'&&ctx&&typeof ctx.scope==='function')ctx.scope(o,f);else f();}
 function scale(){const z=typeof zoom==='number'&&zoom>0?zoom:1,TL=typeof TILE==='number'?TILE:34;return {z,T1:TL*z*Math.SQRT2,AH:typeof actorHeight==='function'?actorHeight():66*z};}
 function glowOrb(x,y,r,core,mid,alpha){ctx.save();try{ctx.globalAlpha*=alpha;const prev=ctx.globalCompositeOperation;ctx.globalCompositeOperation='lighter';
- // 중심이 같은 원형 그라데이션만 쓴다(3D 기록기가 두 원 중심이 다른 그라데이션을 만나면 게임이 멈춤 — R940 실측).
+ // 중심이 같은 원형 그라데이션만 쓴다(3D 기록기가 두 원 중심이 다른 그라데이션을 만나면 게임이 멈춤 — R946 실측).
  const g=ctx.createRadialGradient?ctx.createRadialGradient(x,y,r*.6,x,y,r*2.1):null;if(g){g.addColorStop(0,`rgba(${mid},.6)`);g.addColorStop(1,`rgba(${mid},0)`);ctx.fillStyle=g;}else ctx.fillStyle=`rgba(${mid},.3)`;
  ctx.beginPath();ctx.arc(x,y,r*2.1,0,Math.PI*2);ctx.fill();ctx.globalCompositeOperation=prev;
  // 몸통: 짙은 테두리 → 주색 → 밝은 속(광원 왼쪽 위, 밝은 점은 왼쪽 위)
@@ -153,23 +153,23 @@ function glowOrb(x,y,r,core,mid,alpha){ctx.save();try{ctx.globalAlpha*=alpha;con
 function swirl(x,y,r,col,spin,n,alpha){ctx.save();try{ctx.globalAlpha*=alpha;ctx.lineWidth=Math.max(1.2,r*.09);for(let i=0;i<n;i++){const a0=spin+i*Math.PI*2/n;ctx.strokeStyle=`rgba(${col},${.75-.1*i})`;ctx.beginPath();ctx.ellipse(x,y,r*(1.15+.12*i),r*(.55+.06*i),-.3,a0,a0+Math.PI*.9);ctx.stroke();}}finally{ctx.restore();}}
 function ring(q,R,col,w,alpha,fillA){ctx.save();try{ctx.globalAlpha*=alpha;const prev=ctx.globalCompositeOperation;ctx.globalCompositeOperation='lighter';if(fillA){ctx.fillStyle=`rgba(${col},${fillA})`;ctx.beginPath();ctx.ellipse(q.x,q.y,R,R*.5,0,0,Math.PI*2);ctx.fill();}
  ctx.lineWidth=w;ctx.strokeStyle=`rgba(${col},.9)`;ctx.beginPath();ctx.ellipse(q.x,q.y,R,R*.5,0,0,Math.PI*2);ctx.stroke();ctx.globalCompositeOperation=prev;}finally{ctx.restore();}}
-function drawRepulse(x,t){const u=t-x.t0,v=Math.min(1,u/REP_LIFE),q=project(x.x,x.y),{z,T1,AH}=scale(),R=REP_R*x.k*T1*.5*(.25+.85*Math.sqrt(v)),a=1-v,id='r940:repulse:'+x.t0.toFixed(2);
+function drawRepulse(x,t){const u=t-x.t0,v=Math.min(1,u/REP_LIFE),q=project(x.x,x.y),{z,T1,AH}=scale(),R=REP_R*x.k*T1*.5*(.25+.85*Math.sqrt(v)),a=1-v,id='r946:repulse:'+x.t0.toFixed(2);
  sc({id:id+':ring',kind:'effect',pxfSide:'hero',x:x.x,y:x.y,groundAligned:true},()=>{ring(q,R,VIO_HOT,Math.max(2,9*z*a),a,.12*a);ring(q,R*.72,VIO,Math.max(1,3*z),a*.8,0);});
  sc({id:id+':dome',kind:'effect',pxfSide:'hero',x:x.x,y:x.y+.01},()=>{ctx.save();try{ctx.globalAlpha*=a*.85;const prev=ctx.globalCompositeOperation;ctx.globalCompositeOperation='lighter';const cy=q.y-AH*.5;
   ctx.strokeStyle=`rgba(${VIO_HOT},.8)`;ctx.lineWidth=Math.max(1.5,4*z*a);ctx.beginPath();ctx.ellipse(q.x,cy,R*.9,AH*(.55+.5*v),0,Math.PI,Math.PI*2);ctx.stroke();
   ctx.lineWidth=Math.max(1,2*z);for(let i=0;i<14;i++){const an=i*Math.PI*2/14+(x.seed||0),r0=R*.35,r1=R*(.6+.4*v);ctx.strokeStyle=`rgba(${VIO_HOT},${.55*a})`;ctx.beginPath();ctx.moveTo(q.x+Math.cos(an)*r0,q.y+Math.sin(an)*r0*.5-AH*.15);ctx.lineTo(q.x+Math.cos(an)*r1,q.y+Math.sin(an)*r1*.5-AH*.15);ctx.stroke();}
   ctx.globalCompositeOperation=prev;}finally{ctx.restore();}});}
-function drawRed(x,t){const {z,AH}=scale(),q=project(x.x,x.y),lift=AH*.55,r=AH*.28,fade=x.end==null?1:Math.max(0,1-(t-x.end)/.3),id='r940:red:'+x.t0.toFixed(2);
+function drawRed(x,t){const {z,AH}=scale(),q=project(x.x,x.y),lift=AH*.55,r=AH*.28,fade=x.end==null?1:Math.max(0,1-(t-x.end)/.3),id='r946:red:'+x.t0.toFixed(2);
  sc({id:id+':orb',kind:'effect',pxfSide:'hero',x:x.x,y:x.y},()=>{for(let i=0;i<x.trail.length;i++){const p=project(x.trail[i].x,x.trail[i].y),k=(i+1)/(x.trail.length+1);glowOrb(p.x,p.y-lift,r*(.35+.45*k),RED_HOT,RED,.22*k*fade);}
   glowOrb(q.x,q.y-lift,r,RED_HOT,RED,fade);swirl(q.x,q.y-lift,r,RED_HOT,t*9+(x.seed||0),3,fade*.9);});}
-function drawBlue(x,t){const {z,T1,AH}=scale(),q=project(x.x,x.y),u=t-x.t0,v=Math.max(0,u-BLUE_FLY),lift=AH*.6,r=AH*.26,fade=v>BLUE_T?Math.max(0,1-(v-BLUE_T)/.3):1,id='r940:blue:'+x.t0.toFixed(2);
+function drawBlue(x,t){const {z,T1,AH}=scale(),q=project(x.x,x.y),u=t-x.t0,v=Math.max(0,u-BLUE_FLY),lift=AH*.6,r=AH*.26,fade=v>BLUE_T?Math.max(0,1-(v-BLUE_T)/.3):1,id='r946:blue:'+x.t0.toFixed(2);
  if(u>=BLUE_FLY)sc({id:id+':disk',kind:'effect',pxfSide:'hero',x:x.x,y:x.y,groundAligned:true},()=>{const R=BLUE_R*x.k*T1*.5*Math.min(1,v/.2);ring(q,R,BLUE,Math.max(1.5,2.5*z),fade*.75,.1);
   ctx.save();try{ctx.globalAlpha*=fade*.7;ctx.lineWidth=Math.max(1,1.6*z);for(let i=0;i<4;i++){const a0=-t*5+i*Math.PI/2;ctx.strokeStyle=`rgba(${BLUE_HOT},.55)`;ctx.beginPath();ctx.ellipse(q.x,q.y,R*(.3+.15*i),R*(.15+.075*i),0,a0,a0+1.4);ctx.stroke();}}finally{ctx.restore();}});
  sc({id:id+':orb',kind:'effect',pxfSide:'hero',x:x.x,y:x.y},()=>{const cy=q.y-lift;if(u>=BLUE_FLY){ctx.save();try{ctx.globalAlpha*=fade;const prev=ctx.globalCompositeOperation;ctx.globalCompositeOperation='lighter';
    for(let i=0;i<12;i++){const ph=((t*1.8+i*.173)%1),a=i*2.399,d=(1-ph)*r*4;const sx=q.x+Math.cos(a)*d,sy=cy+Math.sin(a)*d*.6;ctx.strokeStyle=`rgba(${BLUE_HOT},${.1+.5*ph})`;ctx.lineWidth=Math.max(1,(1+ph*2)*z);ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(sx+(q.x-sx)*.25,sy+(cy-sy)*.25);ctx.stroke();}
    ctx.globalCompositeOperation=prev;}finally{ctx.restore();}}
   glowOrb(q.x,cy,r,BLUE_HOT,BLUE,fade);swirl(q.x,cy,r,BLUE_HOT,-t*8+(x.seed||0),3,fade*.9);});}
-function drawViolet(x,t){const {z,AH}=scale(),u=t-x.t0,lift=AH*.55,id='r940:violet:'+x.t0.toFixed(2);
+function drawViolet(x,t){const {z,AH}=scale(),u=t-x.t0,lift=AH*.55,id='r946:violet:'+x.t0.toFixed(2);
  if(u<VIO_CHARGE){const f=u/VIO_CHARGE,e=f*f,px=-x.uy,py=x.ux,o=x.owner&&ownerOk(x.owner)?x.owner:x,cx=o.x+x.ux*.9,cy=o.y+x.uy*.9,sep=1.3*(1-e),r=AH*.2;
   const a=project(cx+px*sep,cy+py*sep),b=project(cx-px*sep,cy-py*sep),m=project(cx,cy);
   sc({id:id+':charge',kind:'effect',pxfSide:'hero',x:cx,y:cy},()=>{glowOrb(a.x,a.y-lift,r,RED_HOT,RED,1);glowOrb(b.x,b.y-lift,r,BLUE_HOT,BLUE,1);if(f>.6)glowOrb(m.x,m.y-lift,AH*.32*(f-.6)/.4,VIO_HOT,VIO,(f-.6)/.4);
@@ -188,9 +188,9 @@ function rockFaces(cx,cy,s,shape,z){rockShape(cx,cy,s,shape);ctx.fillStyle='rgba
  ctx.fillStyle='rgba(30,26,40,.9)';ctx.beginPath();ctx.moveTo(cx+s*.38,cy-s*.24);ctx.lineTo(cx+s*.5,cy+s*.1);ctx.lineTo(cx+s*.2,cy+s*.34);ctx.lineTo(cx-s*.02,cy-s*.08);ctx.closePath();ctx.fill();
  rockShape(cx,cy,s,shape);ctx.strokeStyle='rgba(20,14,30,.9)';ctx.lineWidth=Math.max(1,1.4*z);ctx.stroke();
  const prev=ctx.globalCompositeOperation;ctx.globalCompositeOperation='lighter';ctx.strokeStyle=`rgba(${VIO_HOT},.9)`;ctx.lineWidth=Math.max(1,1.5*z);ctx.beginPath();ctx.moveTo(cx-s*.2,cy-s*.22);ctx.lineTo(cx+s*.02,cy-s*.04);ctx.lineTo(cx-s*.08,cy+s*.2);ctx.moveTo(cx+s*.02,cy-s*.04);ctx.lineTo(cx+s*.25,cy+s*.05);ctx.stroke();ctx.globalCompositeOperation=prev;}
-function drawMeteor(x,t){const {z,AH}=scale(),o=x.owner&&ownerOk(x.owner)?x.owner:x,oq=project(o.x,o.y),u=t-x.t0,id='r940:meteor:'+x.t0.toFixed(2);
+function drawMeteor(x,t){const {z,AH}=scale(),o=x.owner&&ownerOk(x.owner)?x.owner:x,oq=project(o.x,o.y),u=t-x.t0,id='r946:meteor:'+x.t0.toFixed(2);
  x.rocks.forEach((r,i)=>{if(r.state==='done')return;const q=project(r.x,r.y),lift=AH*1.0*r.lift,h=r.h*z,cy=q.y-lift;
-  sc({id:'r940:meteor:rock'+i+':'+x.t0.toFixed(2),kind:'effect',pxfSide:'hero',x:r.x,y:r.y},()=>{ctx.save();try{
+  sc({id:'r946:meteor:rock'+i+':'+x.t0.toFixed(2),kind:'effect',pxfSide:'hero',x:r.x,y:r.y},()=>{ctx.save();try{
    if(r.state!=='fly'){const prev=ctx.globalCompositeOperation;ctx.globalCompositeOperation='lighter';ctx.strokeStyle=`rgba(${VIO},.45)`;ctx.lineWidth=Math.max(1,1.5*z);ctx.beginPath();ctx.moveTo(oq.x,oq.y-AH*.6);ctx.quadraticCurveTo((oq.x+q.x)/2,cy-AH*.4,q.x,cy-h*.5);ctx.stroke();
     if(r.state==='orbit'&&u>MET_RISE+MET_ORBIT-.18&&r.target){const tq=project(r.target.x,r.target.y);ctx.setLineDash&&ctx.setLineDash([6*z,5*z]);ctx.strokeStyle=`rgba(${VIO_HOT},.6)`;ctx.beginPath();ctx.moveTo(q.x,cy-h*.5);ctx.lineTo(tq.x,tq.y-AH*.3);ctx.stroke();ctx.setLineDash&&ctx.setLineDash([]);}
     ctx.globalCompositeOperation=prev;}
@@ -200,22 +200,22 @@ function drawMeteor(x,t){const {z,AH}=scale(),o=x.owner&&ownerOk(x.owner)?x.owne
      if(typeof sprite==='function')sprite(r.path,q.x+wob,cy,h,{alpha:1});else{const w=h*b.w/b.h;if(b.x!=null)ctx.drawImage(row.image,b.x,b.y,b.w,b.h,q.x-w/2+wob,cy-h,w,h);else ctx.drawImage(row.image,q.x-w/2+wob,cy-h,w,h);}stats.draws++;return;}}
    const s=Math.max(AH*.62,h);rockFaces(q.x+wob,cy-s*.4,s,r.shape||i,z);stats.draws++;
   }finally{ctx.restore();}});});}
-function drawBoom(b,t){const {z,T1,AH}=scale(),v=Math.min(1,(t-b.t0)/.75),q=project(b.x,b.y),R=MET_R*b.k*T1*.5*(.3+.8*Math.sqrt(v)),a=1-v,id='r940:meteor:boom:'+b.t0.toFixed(2)+':'+b.x.toFixed(1);
+function drawBoom(b,t){const {z,T1,AH}=scale(),v=Math.min(1,(t-b.t0)/.75),q=project(b.x,b.y),R=MET_R*b.k*T1*.5*(.3+.8*Math.sqrt(v)),a=1-v,id='r946:meteor:boom:'+b.t0.toFixed(2)+':'+b.x.toFixed(1);
  sc({id:id,kind:'effect',pxfSide:'hero',x:b.x,y:b.y,groundAligned:true},()=>{ring(q,R,VIO_HOT,Math.max(2,8*z*a),a,.18*a);ring(q,R*.6,VIO,Math.max(1,3*z),a,0);
   ctx.save();try{ctx.globalAlpha*=a;ctx.fillStyle=`rgba(${VOID},.55)`;ctx.beginPath();ctx.ellipse(q.x,q.y,R*.35,R*.17,0,0,Math.PI*2);ctx.fill();}finally{ctx.restore();}});
  if(v<.35)sc({id:id+':flash',kind:'effect',pxfSide:'hero',x:b.x,y:b.y+.01},()=>glowOrb(q.x,q.y-AH*.3,AH*.45*(1-v/.35)+AH*.1,VIO_HOT,VIO,1-v/.35));}
 function draw(){if(typeof project!=='function'||typeof ctx==='undefined'||!ctx)return;const t=T();
  for(const x of acts){try{if(x.kind==='repulse')drawRepulse(x,t);else if(x.kind==='red')drawRed(x,t);else if(x.kind==='blue')drawBlue(x,t);else if(x.kind==='violet')drawViolet(x,t);else if(x.kind==='meteor')drawMeteor(x,t);}catch(err){fail(err);}}
  for(const b of booms){try{drawBoom(b,t);}catch(err){fail(err);}}stats.draws++;}
-const SENT={type:'r940-celestial',x:0,y:0,age:0,life:Infinity,r940Sentinel:true};
+const SENT={type:'r946-celestial',x:0,y:0,age:0,life:Infinity,r946Sentinel:true};
 function sentinel(want){try{if(typeof effects==='undefined'||!Array.isArray(effects))return;const i=effects.indexOf(SENT);if(want&&i<0)effects.push(SENT);else if(!want&&i>=0)effects.splice(i,1);SENT.age=0;
  const a=acts[0];if(want&&a){SENT.x=a.x;SENT.y=a.y;}}catch(_){}}
 let wrapped=false;function wrapEffect(){if(wrapped||typeof drawEffect!=='function')return wrapped;const base=drawEffect;
- drawEffect=function(e,...a){if(e&&e.r940Sentinel){try{ctx.save();try{ctx.globalCompositeOperation='source-over';draw();}finally{ctx.restore();}}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};wrapped=true;return true;}
+ drawEffect=function(e,...a){if(e&&e.r946Sentinel){try{ctx.save();try{ctx.globalCompositeOperation='source-over';draw();}finally{ctx.restore();}}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};wrapped=true;return true;}
 if(!wrapEffect()&&typeof setTimeout==='function'){let n=0;(function arm(){if(wrapEffect()||++n>40)return;setTimeout(arm,250);})();}
 function set(v){try{localStorage.setItem(KEY,JSON.stringify({on:v!==false}));}catch(_){}prefAt=-1e9;return on();}
 const KINDS=['repulse','red','blue','violet','meteor'];
-window.__STORYWORLD_LAUREN_CELESTIAL_R940__=Object.freeze({revision:REV,set,on:()=>on(),
+window.__STORYWORLD_LAUREN_CELESTIAL_R946__=Object.freeze({revision:REV,set,on:()=>on(),
  names:Object.freeze({passive:'천체 공명',repulse:'항성 반발',red:'적색 거성',blue:'청색 왜성',violet:'쌍성 소멸',meteor:'유성 궤도'}),
  qaForce:k=>{forced=KINDS.includes(k)?k:null;return forced;},qaRandom:f=>{rng=typeof f==='function'?f:null;return !!rng;},
  qaProps:()=>{const rm=curRoom();return (rm&&Array.isArray(rm.props)?rm.props:[]).filter(eligible).map(a=>({id:a.id,x:a.x,y:a.y,height:a.height,path:a.path}));},

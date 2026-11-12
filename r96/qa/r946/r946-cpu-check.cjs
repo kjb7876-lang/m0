@@ -1,4 +1,4 @@
-// R940 CPU 검사: 라우렌 확률 발동 특수 패시브 '천체 공명'.
+// R946 CPU 검사: 라우렌 확률 발동 특수 패시브 '천체 공명'.
 // 라우렌 본인 타격 때만 확률로(0.35초에 한 번 굴림, 발동 뒤 5초 대기) 다섯 가지 중 하나가 저절로 나간다. 키는 늘리지 않는다.
 //  항성 반발(척력 폭발) · 적색 거성(밀어내는 붉은 구) · 청색 왜성(끌어당기는 푸른 구) · 쌍성 소멸(붉은+푸른 → 보라 관통탄, 둘이 12초 안에 나간 뒤) · 유성 궤도(주변 조형물을 띄워 던져 중력 폭발)
 // 보스·중간 보스는 밀리거나 끌리지 않는다(맞기만 함). 이동은 moveActor(벽 존중). 조형물은 자리·충돌을 바꾸지 않고 잠깐 숨겼다가 되돌린다.
@@ -6,7 +6,7 @@
 const fs=require('fs'),path=require('path'),vm=require('vm');const R=path.join(__dirname,'..','..');
 const C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8'),RT=f=>fs.readFileSync(path.join(R,'runtime-text',f),'utf8');
 let pass=0,fail=0;const ok=(n,c)=>{if(c){pass++;console.log('PASS',n);}else{fail++;console.log('FAIL',n);}};
-const F='lauren-celestial-r940.js';const exists=fs.existsSync(path.join(R,'client-source',F));ok(F+' exists',exists);
+const F='lauren-celestial-r946.js';const exists=fs.existsSync(path.join(R,'client-source',F));ok(F+' exists',exists);
 if(exists){
  const src=C(F);
  ok('runtime copy matches source',fs.existsSync(path.join(R,'runtime-text',F))&&src===RT(F));
@@ -14,7 +14,7 @@ if(exists){
  ok('script tag once',RT('index.html').split('<script src="./'+F+'"></script>').length===2);
  ok('loads after hero-defense-r720 (deployed heroes) and before combat-r118',(()=>{const h=RT('index.html'),i=h.indexOf('./'+F+'"');return i>h.indexOf('./hero-defense-r720.js"')&&i<h.indexOf('<script src="./combat-r118.js"');})());
  ok('listed in verify-r96-public.py',new RegExp("'"+F.replace(/\./g,'\\.')+"'").test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')));
- ok('CI runs this check',/qa\/r940\/r940-cpu-check\.cjs/.test(fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8')));
+ ok('CI runs this check',/qa\/r946\/r946-cpu-check\.cjs/.test(fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8')));
  ok('in runtime-inputs.json',JSON.stringify(JSON.parse(fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8'))).includes(F));
  ok('no new key bindings',!/addEventListener\(\s*['"]key/.test(src));
  ok('no save writes / hero hp writes',!/saveGame|player\.hp\s*=[^=]/.test(src));
@@ -42,9 +42,9 @@ if(exists){
   vm.runInContext(src,g);return g;}
  const mob=(id,x,y,extra={})=>({id,x,y,hp:1000,maxHp:1000,radius:.3,spawnState:'active',...extra});
  const step=(g,n=1,dt=.05)=>{for(let i=0;i<n;i++){g.time=+(g.time+dt).toFixed(4);vm.runInContext('time='+g.time+';tick();for(const e of effects.slice())drawEffect(e)',g);}};
- const A=g=>g.__STORYWORLD_LAUREN_CELESTIAL_R940__;
+ const A=g=>g.__STORYWORLD_LAUREN_CELESTIAL_R946__;
  const heroHit=(g,id)=>vm.runInContext(`hitEnemy(room.enemies.find(e=>e.id===${JSON.stringify(id)}),1,{kind:'basic',sourceHero:player.hero})`,g);
- const procHits=(g,kind)=>g.hits.filter(h=>h.s&&h.s.r940&&(!kind||h.s.kind==='r940-'+kind));
+ const procHits=(g,kind)=>g.hits.filter(h=>h.s&&h.s.r946&&(!kind||h.s.kind==='r946-'+kind));
  let g=env();ok('API exposed',!!A(g)&&typeof A(g).inspect==='function'&&typeof A(g).qaForce==='function'&&typeof A(g).qaRandom==='function'&&typeof A(g).qaReset==='function');
  const tun=A(g).inspect().tuning;ok('tuning: chance 10%, roll gap .35 s, cooldown 5 s',tun.CHANCE===.10&&tun.ROLL_GAP===.35&&tun.ICD===5);
 
@@ -61,7 +61,7 @@ if(exists){
  g=env('neon');A(g).qaRandom(()=>0);g.room.enemies.push(mob('a',11,10));for(let i=0;i<20;i++){heroHit(g,'a');step(g,1,.4);}ok('other hero → never procs',A(g).inspect().stats.procTotal===0);
  g=env();A(g).qaRandom(()=>0);g.room.enemies.push(mob('a',11,10));vm.runInContext("hitEnemy(room.enemies[0],1,{kind:'ally',sourceHero:'neon'})",g);vm.runInContext("hitEnemy(room.enemies[0],1,{owner:'enemy'})",g);vm.runInContext("hitEnemy(room.enemies[0],1,{coopIdR62:2})",g);
  ok('hits by other heroes / enemies / coop allies never roll',A(g).inspect().stats.rolls===0);
- g=env();A(g).qaRandom(()=>0);g.localStorage.setItem('storyworld.r940.celestial','{"on":false}');g.room.enemies.push(mob('a',11,10));heroHit(g,'a');step(g,20);ok('switch off → nothing',A(g).inspect().stats.procTotal===0&&procHits(g).length===0);
+ g=env();A(g).qaRandom(()=>0);g.localStorage.setItem('storyworld.r946.celestial','{"on":false}');g.room.enemies.push(mob('a',11,10));heroHit(g,'a');step(g,20);ok('switch off → nothing',A(g).inspect().stats.procTotal===0&&procHits(g).length===0);
 
  // ---- ① 항성 반발 ----
  g=env();A(g).qaForce('repulse');const r1=mob('r1',11,10),r2=mob('r2',10,8.5),rf=mob('rf',14,10),rb=mob('rB',9,10,{boss:true});g.room.enemies.push(r1,r2,rf,rb);heroHit(g,'r1');step(g,10);
@@ -123,8 +123,8 @@ if(exists){
    function liveEnemies(){return room.enemies.filter(e=>e.hp>0);}function blocked(){return false;}function moveActor(a,dx,dy){a.x+=dx;a.y+=dy;}function attackPower(){return 10;}
    function hitEnemy(e,v,s){hits.push({id:e.id,v,s});e.hp-=v;return true;}function tick(){}function drawEffect(){}function drawProp(a){}function project(x,y){return{x,y};}function actorHeight(){return 66;}`,h);
   vm.runInContext(src2,h);const s1=prop('seen',11,11),u1=prop('unseen',10.5,11.5);h.room.props.push(s1,u1);h.room.enemies.push(mob('t',13,10));
-  vm.runInContext('drawProp(room.props[0])',h);h.__STORYWORLD_LAUREN_CELESTIAL_R940__.qaForce('meteor');vm.runInContext("hitEnemy(room.enemies[0],1,{kind:'basic',sourceHero:'lauren'})",h);
-  const act=h.__STORYWORLD_LAUREN_CELESTIAL_R940__.inspect().acts.find(a=>a.kind==='meteor');
+  vm.runInContext('drawProp(room.props[0])',h);h.__STORYWORLD_LAUREN_CELESTIAL_R946__.qaForce('meteor');vm.runInContext("hitEnemy(room.enemies[0],1,{kind:'basic',sourceHero:'lauren'})",h);
+  const act=h.__STORYWORLD_LAUREN_CELESTIAL_R946__.inspect().acts.find(a=>a.kind==='meteor');
   ok('with drawProp present, only props the engine drew in the last .5 s are thrown (seen yes, never-drawn no)',act&&act.rocks.some(r=>r.propId==='seen')&&!act.rocks.some(r=>r.propId==='unseen')&&u1.visible===true);}
  g=env();g.wall=11.5;A(g).qaForce('meteor');{const behind=prop('behind',12.5,10),front=prop('front',11,10.5);g.room.props.push(behind,front);g.room.enemies.push(mob('t',11.2,9));heroHit(g,'t');const act=A(g).inspect().acts.find(a=>a.kind==='meteor');
   ok('props behind a wall (no clear line from Lauren) are not thrown',act&&act.rocks.some(r=>r.propId==='front')&&!act.rocks.some(r=>r.propId==='behind')&&behind.visible===true);}
@@ -150,13 +150,13 @@ if(exists){
  g=env();A(g).qaRandom(()=>0);A(g).qaForce('repulse');{for(let i=0;i<8;i++)g.room.enemies.push(mob('m'+i,10+Math.cos(i)*1.5,10+Math.sin(i)*1.5));heroHit(g,'m0');ok('own proc damage never rolls a new proc',A(g).inspect().stats.rolls===1);}
  // ---- 그리기 ----
  g=env();for(const k of ['repulse','red','blue','violet','meteor']){A(g).qaReset();A(g).qaForce(k);g.room.enemies.push(mob('d'+k,13,10,{hp:1e9}));heroHit(g,'d'+k);step(g,8);}
- {const s=vm.runInContext('scopes',g);ok('all five draw through ctx.scope effect owners',['repulse','red','blue','violet','meteor'].every(k=>s.some(o=>o.kind==='effect'&&String(o.id).startsWith('r940:'+k))));
-  ok('ground rings are groundAligned',s.some(o=>o.groundAligned&&/r940:(repulse|blue)/.test(o.id)));
+ {const s=vm.runInContext('scopes',g);ok('all five draw through ctx.scope effect owners',['repulse','red','blue','violet','meteor'].every(k=>s.some(o=>o.kind==='effect'&&String(o.id).startsWith('r946:'+k))));
+  ok('ground rings are groundAligned',s.some(o=>o.groundAligned&&/r946:(repulse|blue)/.test(o.id)));
   ok('orbs drawn at least half hero height across (radius ≥ 16.5 px at zoom 1)',(()=>{const a=vm.runInContext('arcs',g);return a.some(r=>r>=16.5);})());
-  ok('meteor copies drawn from prop/debris pictures',vm.runInContext('drawn.length',g)>0||s.some(o=>/r940:meteor:rock/.test(o.id)));
-  ok('radial gradients are concentric only (3D recorder freezes the game on offset two-circle gradients — browser regression R940)',(()=>{const a=vm.runInContext('grads',g);return a.length>0&&a.every(v=>v[0]===v[3]&&v[1]===v[4]);})());
-  ok('sentinel effect in effects while active',vm.runInContext('effects.some(e=>e.r940Sentinel)',g));
-  step(g,120);ok('sentinel removed when idle',vm.runInContext('effects.filter(e=>e.r940Sentinel).length',g)===0);}
+  ok('meteor copies drawn from prop/debris pictures',vm.runInContext('drawn.length',g)>0||s.some(o=>/r946:meteor:rock/.test(o.id)));
+  ok('radial gradients are concentric only (3D recorder freezes the game on offset two-circle gradients — browser regression R946)',(()=>{const a=vm.runInContext('grads',g);return a.length>0&&a.every(v=>v[0]===v[3]&&v[1]===v[4]);})());
+  ok('sentinel effect in effects while active',vm.runInContext('effects.some(e=>e.r946Sentinel)',g));
+  step(g,120);ok('sentinel removed when idle',vm.runInContext('effects.filter(e=>e.r946Sentinel).length',g)===0);}
  ok('sounds use existing pleasant Lauren cues (no new paid audio)',(()=>{const g2=env();A(g2).qaForce('violet');g2.room.enemies.push(mob('t',13,10));heroHit(g2,'t');step(g2,20);return g2.sounds.length>0&&g2.sounds.every(k=>/^r546(Sp|Atk)_lauren$/.test(k));})());
  // ---- 렉 ----
  g=env();A(g).qaRandom(()=>0);for(let i=0;i<60;i++)g.room.enemies.push(mob('m'+i,10+Math.cos(i)*4,10+Math.sin(i)*4,{hp:1e9}));for(let i=0;i<6;i++)g.room.props.push(prop('p'+i,10+Math.cos(i)*3,10+Math.sin(i)*3));
@@ -164,4 +164,4 @@ if(exists){
  console.log('  60 mobs, 5 procs, ~54 ticks incl. draw: '+ms.toFixed(1)+' ms');ok('60 mobs stays cheap (< 150 ms in vm)',ms<150);
  ok('errors stay 0',A(g).inspect().stats.errors===0);
 }
-console.log(`R940 lauren-celestial cpu check: ${pass} pass, ${fail} fail`);process.exit(fail?1:0);
+console.log(`R946 lauren-celestial cpu check: ${pass} pass, ${fail} fail`);process.exit(fail?1:0);

@@ -1,4 +1,4 @@
-// R940 브라우저 검사(헤드리스, 소프트웨어 렌더): 라우렌으로 몹을 둘러 세우고 다섯 발동을 하나씩 강제(qaForce) → 피해·밀림·끌림·조형물 숨김/되돌림 확인 + 장면 사진.
+// R946 브라우저 검사(헤드리스, 소프트웨어 렌더): 라우렌으로 몹을 둘러 세우고 다섯 발동을 하나씩 강제(qaForce) → 피해·밀림·끌림·조형물 숨김/되돌림 확인 + 장면 사진.
 // SHOT=접두어 면 각 발동의 대표 순간을 찍는다(찍기 직전 tick 배율 1e-4 로 고정). 자연 발동(확률) 은 FREE=초 로 그 시간 동안 평타만으로 몇 번 나오는지 센다.
 import {chromium,boot,go} from '../r444/lib.mjs';
 const shot=process.env.SHOT||'',zone=process.env.ZONE||'dist00',free=+(process.env.FREE||0);
@@ -6,7 +6,7 @@ const b=await chromium.launch();const {p}=await boot(b,{vp:{width:960,height:540
 await go(p,zone);
 let fail=0;const ok=(n,c)=>{console.log(c?'PASS':'FAIL',n);if(!c)fail++;};
 await p.evaluate(async()=>{await ensureImages(heroPaths('lauren'));player.hero='lauren';player.hp=99999;window.__SLOW=1;const tb=tick;tick=function(dt,...a){return tb.call(this,dt*(window.__SLOW??1),...a);};});
-const A='window.__STORYWORLD_LAUREN_CELESTIAL_R940__';
+const A='window.__STORYWORLD_LAUREN_CELESTIAL_R946__';
 ok('module loaded',await p.evaluate(A+'&&'+A+'.revision'));
 const setup=(n=8,spread=2.4,dx=2.6)=>p.evaluate(([n,spread,dx])=>{const live=room.enemies.filter(e=>!e.boss&&!e.midboss).slice(0,n);room.enemies.filter(e=>!live.includes(e)&&!e.boss).forEach(e=>{e.hp=0;e.dead=true;});
  const c={x:player.x+dx,y:player.y+.3};live.forEach((e,i)=>{const a=i*2*Math.PI/live.length,r=i===0?0:spread*(.5+(i%3)*.35);e.x=c.x+Math.cos(a)*r;e.y=c.y+Math.sin(a)*r;e.dead=false;e.spawnState='active';e.hp=e.maxHp=99999;e.damage=0;e.speed=0;e.moveSpeed=0;});
@@ -38,9 +38,9 @@ const elig=await p.evaluate(A+'.qaProps()');console.log('  eligible props in roo
 if(elig.length){await p.evaluate(([x,y])=>{for(const [dx,dy] of [[1.6,0],[-1.6,0],[0,1.6],[0,-1.6],[1.2,1.2],[-1.2,-1.2]]){if(!blocked(x+dx,y+dy,.3)){player.x=x+dx;player.y=y+dy;return;}}},[elig[0].x,elig[0].y]);}
 await setup(6,1.6,3.6);t0=await fire('meteor');let i=await I();const met=i.acts.find(a=>a.kind==='meteor');console.log('  meteor rocks',JSON.stringify(met&&met.rocks));
 ok('meteor gathered 3 objects',met&&met.rocks.length===3);
-const hid=await p.evaluate(()=>(room.props||[]).filter(a=>a.r940Hidden).map(a=>[a.id,a.visible]));console.log('  hidden props',JSON.stringify(hid));
+const hid=await p.evaluate(()=>(room.props||[]).filter(a=>a.r946Hidden).map(a=>[a.id,a.visible]));console.log('  hidden props',JSON.stringify(hid));
 if(shot){await snap('meteor-orbit',t0,.8);await snap('meteor-impact',t0,1.32);}await waitT(t0,2.6);
-i=await I();ok('meteor exploded and props restored',i.stats.procs.meteor===1&&i.stats.hiddenProps===i.stats.restoredProps&&!(await p.evaluate(()=>(room.props||[]).some(a=>a.r940Hidden))));
+i=await I();ok('meteor exploded and props restored',i.stats.procs.meteor===1&&i.stats.hiddenProps===i.stats.restoredProps&&!(await p.evaluate(()=>(room.props||[]).some(a=>a.r946Hidden))));
 ok('no errors',i.stats.errors===0);console.log(JSON.stringify(i.stats));
 if(free){await setup(8,1.6,1.4);const r=await p.evaluate(async([A,free])=>{const api=eval(A);api.qaRandom(null);const s0=api.inspect().stats.procTotal,t0=time;let last=-9;
   while(time-t0<free){await new Promise(r=>requestAnimationFrame(r));if(time-last>.5){last=time;const e=room.enemies.find(v=>v.id===window.__ids[0]);hitEnemy(e,1,{kind:'basic',sourceHero:'lauren'});}}

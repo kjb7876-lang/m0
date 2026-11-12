@@ -1,4 +1,4 @@
-# R940: prop-hide-check.mjs 가 남긴 전/후 조각의 평균 픽셀 차(0~255). 8 넘으면 숨김이 화면에 닿음.
+# R946: prop-hide-check.mjs 가 남긴 전/후 조각의 평균 픽셀 차(0~255). 8 넘으면 숨김이 화면에 닿음.
 import sys,glob
 from PIL import Image,ImageChops,ImageStat
 bad=0
