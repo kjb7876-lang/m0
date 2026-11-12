@@ -13,13 +13,14 @@
 //     · 사몽 각성 뒤(player.finalAwakening) 영웅 발밑에 푸른 사몽 권한의 고리(정본 "푸른빛을 머금은 환도").
 //     · 최종 처치: 신경선이 다시 뻗지만 닿지 못하고 부서져 떨어진다(2.6초). 마지막 서사 창은 이 무너짐을 본 뒤(2.6초 뒤) 연다 — 글·순서는 그대로.
 //     신경선·고리는 코드로 그린 임시 연출이다(사용자 상시 규칙: 최종본은 Dots 프레임 시트 → CX-0085FN 요청).
+//  ④ 지배 연결 도중 남은 필드 잡몹이 죽으면 엔진이 단계를 'field' 로 덮어 다음 상호작용이 최종 결전을 건너뛰던 버그(공개 빌드 재현)를 막는다.
 //  판정·AI·공격·서사 글·순서·보상은 바꾸지 않는다. DREAM 층·협동·맘몬은 손대지 않는다.
 //  끄기: localStorage['storyworld.r950.finale']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_FINALE_R950__)return;
 const REV='R950-finale-1',KEY='storyworld.r950.finale',REC_KEY='storyworld.r950.finale.rec',ZONE='cult04',LEADER='c104-boss',FINAL_FRAC=.68,POST_DELAY=2.6,LINKS=6;
 let prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)prefs.on=false;}catch(_){}
-const stats={hpFixed:0,hpNoRecord:0,recorded:0,beatsShown:0,beatsSkipped:0,beatsMissing:0,linkSnaps:0,stitch:0,unstitched:0,deferred:0,flushed:0,swallowed:0,draws:0,errors:0};
+const stats={hpFixed:0,hpNoRecord:0,recorded:0,beatsShown:0,beatsSkipped:0,beatsMissing:0,linkSnaps:0,stitch:0,unstitched:0,deferred:0,flushed:0,swallowed:0,stageKept:0,draws:0,errors:0};
 let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,240);};
 const T=()=>typeof time==='number'?time:performance.now()/1e3;
 const clamp=(x,a=0,b=1)=>x<a?a:x>b?b:x;
@@ -128,9 +129,10 @@ function drawAll(){const t=T(),u=unit(),c=core(),cq=project(c.x,c.y),cs={x:cq.x,
       ctx.globalAlpha=a*.5;ctx.strokeStyle='#ff5468';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(p0.x+dx,p0.y+dy);ctx.lineTo(p1.x+dx,p1.y+dy);ctx.stroke();}}}});}
  // 사몽 권한의 푸른 고리(각성 뒤, 지역이 끝나기 전까지)
  if(player&&player.finalAwakening&&player.hp>0&&room.encounterStage!=='complete')scope('r950:aura',player.x,player.y,()=>{const q=project(player.x,player.y),pul=.5+.5*Math.sin(t*2.4);
-  ctx.globalAlpha=.16+.08*pul;ctx.fillStyle='#6fa8ff';ctx.beginPath();ctx.ellipse(q.x,q.y,u*.95,u*.48,0,0,Math.PI*2);ctx.fill();
-  ctx.globalAlpha=.5+.2*pul;ctx.strokeStyle='#d7ebff';ctx.lineWidth=1.4;ctx.beginPath();ctx.ellipse(q.x,q.y,u*(.78+.06*pul),u*(.39+.03*pul),0,0,Math.PI*2);ctx.stroke();
-  ctx.fillStyle='#eaf4ff';for(let s=0;s<6;s++){const a2=t*.9+s*Math.PI/3;ctx.globalAlpha=.55;ctx.beginPath();ctx.arc(q.x+Math.cos(a2)*u*.78,q.y+Math.sin(a2)*u*.39,1.6,0,Math.PI*2);ctx.fill();}});
+  ctx.globalAlpha=.26+.1*pul;ctx.fillStyle='#4f8fff';ctx.beginPath();ctx.ellipse(q.x,q.y,u*1.7,u*.85,0,0,Math.PI*2);ctx.fill();
+  ctx.globalAlpha=.3;ctx.strokeStyle='#2c63d8';ctx.lineWidth=Math.max(2.5,u*.12);ctx.beginPath();ctx.ellipse(q.x,q.y,u*(1.45+.08*pul),u*(.72+.04*pul),0,0,Math.PI*2);ctx.stroke();
+  ctx.globalAlpha=.75+.2*pul;ctx.strokeStyle='#d7ebff';ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(q.x,q.y,u*(1.45+.08*pul),u*(.72+.04*pul),0,0,Math.PI*2);ctx.stroke();
+  ctx.fillStyle='#eaf4ff';for(let s=0;s<6;s++){const a2=t*.9+s*Math.PI/3;ctx.globalAlpha=.85;ctx.beginPath();ctx.arc(q.x+Math.cos(a2)*u*1.45,q.y+Math.sin(a2)*u*.72,Math.max(2,u*.07),0,Math.PI*2);ctx.fill();}});
  ctx.restore();ctx.globalAlpha=1;}
 // ---- 마지막 서사 미루기(무너짐을 본 뒤) ----------------------------------------------------------------
 function flush(){if(!pending)return;const p=pending;pending=null;stats.flushed++;try{psBase.apply(p.self,[p.list,...p.args]);}catch(e){fail(e);}}
@@ -144,6 +146,13 @@ if(typeof playScenes==='function'){psBase=playScenes;playScenes=function(list,..
  return psBase.call(this,list,...args);};}
 // ---- 설치 --------------------------------------------------------------------------------------------------
 if(typeof window.spawnCosmic3==='function'){const base=window.spawnCosmic3;window.spawnCosmic3=function(...a){const r=base.apply(this,a);try{if(active()&&room.activeEncounter==='finalBoss')fixFinal();}catch(e){fail(e);}return r;};}
+// ④ 단계 지키기(공개 빌드 헤드리스 재현): 엔진 advanceFieldWave6 은 필드 잡몹 웨이브의 마지막 한 마리가 죽을 때마다 단계를 'field'/'fieldReady' 로 덮는다.
+//    지배 연결(cosmic) 도중 남은 잡몹이 죽으면 단계가 'field' 가 되고, 다음 제단 상호작용이 남은 연결·최종 결전을 건너뛰고 마지막 서사로 지역을 끝냈다.
+//    교주의 사몽(스토리 층)에서 보스 단계가 진행 중(activeEncounter 가 있음)일 때만 그 덮어쓰기를 되돌린다. 웨이브 번호·잡몹 처치 기록은 그대로 둔다.
+const HOLD=new Set(['bossReady','midbossReady','trialReady','cosmicReady','personaReady','summoning','active','complete']);
+if(typeof killEnemy==='function'){const base=killEnemy;killEnemy=function(enemy,...a){let keep=null;try{if(active()&&room.activeEncounter&&HOLD.has(room.encounterStage))keep={room,stage:room.encounterStage};}catch(e){fail(e);}
+ const r=base.call(this,enemy,...a);
+ try{if(keep&&room===keep.room&&(room.encounterStage==='field'||room.encounterStage==='fieldReady')&&room.encounterStage!==keep.stage){room.encounterStage=keep.stage;stats.stageKept++;}}catch(e){fail(e);}return r;};}
 if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e===SENT||e?.type==='r950-finale'){try{if(active())drawAll();}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};}
 let lastRoom=null;
 if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);

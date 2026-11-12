@@ -12,7 +12,7 @@ const errs=[];p.on('pageerror',e=>errs.push(String(e).slice(0,240)));
 await go(p,'cult04');
 let R=await p.evaluate(async()=>{
  const out={stages:[],scenes:[],errors:[]};
- const seenScene=new Set();const step=n=>{for(let i=0;i<n;i++){if(storyScene&&!seenScene.has(storyScene)&&String(storyScene.part||storyScene.items?.[0]?.part||JSON.stringify(storyScene).slice(0,400)).includes('post')){seenScene.add(storyScene);out.scenesShown=(out.scenesShown||0)+1;}if(storyScene&&out.finalDeathT!=null&&out.sceneAfterFinal==null)out.sceneAfterFinal=+time.toFixed(2);for(let k=0;k<60&&storyScene;k++)advanceScene();tick(.05);}};
+ const seenScene=new Set();const step=n=>{for(let i=0;i<n;i++){if(storyScene&&!seenScene.has(storyScene)&&String(storyScene.part||storyScene.items?.[0]?.part||JSON.stringify(storyScene).slice(0,400)).includes('post')){seenScene.add(storyScene);out.scenesShown=(out.scenesShown||0)+1;}if(storyScene&&out.finalDeathT!=null&&out.sceneAfterFinal==null)out.sceneAfterFinal=+time.toFixed(2);for(let k=0;k<60&&storyScene;k++)advanceScene();if(modal&&!storyScene&&typeof closePanel==='function'&&room.encounterStage!=='complete')try{closePanel(true)}catch(_){}/* 서사 쪽지 창은 사람이 닫는 것처럼 닫는다 */tick(.05);}};
  const ps=playScenes;playScenes=function(list,...a){try{for(const s of list||[])out.scenes.push({part:s.part,t:+time.toFixed(2)});}catch(_){}return ps.call(this,list,...a);};
  player.invincible=1e9;
  const boss=()=>room.enemies.find(e=>(e.boss||e.midboss||e.cosmic)&&e.hp>0&&!e.deadRecorded);
@@ -30,6 +30,8 @@ let R=await p.evaluate(async()=>{
    // 체력 절반 아래로 깎아 '절반' 박자가 나오는지
    e.hp=e.maxHp*.45;step(30);
   }
+  // 회귀(공개 빌드 재현): 지배 연결 중 남은 필드 잡몹이 죽으면 엔진 advanceFieldWave6 이 단계를 'field' 로 덮어 다음 제단 상호작용이 지역을 끝내 버렸다(최종 결전 건너뜀)
+  if(row.act==='cosmic'&&row.id==='kair-great-01'){const before=room.encounterStage;const mobs=room.enemies.filter(m=>m.hp>0&&!m.boss&&!m.midboss&&!m.cosmic&&Number.isInteger(m.fieldWaveIndex6));out.fieldMobsKilled=mobs.length;for(const m of mobs)kill(m);step(4);out.stageAfterMobKills={before,after:room.encounterStage};}
   step(10);kill(e);if(row.act==='finalBoss'){finalDeathT=time;out.finalDeathT=time;}step(30);
  }
  // 마지막 서사·엔딩까지(완료 뒤 마을로 가는 길은 길잡이가 실제 이동으로 걷는다 — 실플레이와 같은 길)
@@ -42,7 +44,7 @@ let R=await p.evaluate(async()=>{
  return out;});
 // 지역 이동(페이드·불러오기)은 실제 시간 비동기라 evaluate 를 나눠 기다린다. 결말 창(사람이 고름)은 닫고 길잡이가 걷게 둔다 — play.mjs 실플레이와 같은 처리.
 for(let i=0;i<600;i++){const r=await p.evaluate(()=>{if(!loading){window.__qaStep(4);if(modal&&typeof closePanel==='function'&&!storyScene)try{closePanel(true)}catch(_){}}return {room:room?.id,loading:!!loading};});if(r.room!=='cult04'&&!r.loading)break;await p.waitForTimeout(40);}
-Object.assign(R,await p.evaluate(()=>{const api=window.__STORYWORLD_FINALE_R950__,o=window.__qaOut;return {room:room.id,ending:typeof ending!=='undefined'?{...ending}:null,inspect:api?api.inspect():null,scenesShown:o.scenesShown,sceneAfterFinal:o.sceneAfterFinal,finalDeathT:o.finalDeathT};}));
+Object.assign(R,await p.evaluate(()=>{const api=window.__STORYWORLD_FINALE_R950__,o=window.__qaOut;return {room:room.id,ending:typeof ending!=='undefined'?{...ending}:null,inspect:api?api.inspect():null,scenesShown:o.scenesShown,fieldMobsKilled:o.fieldMobsKilled,stageAfterMobKills:o.stageAfterMobKills,sceneAfterFinal:o.sceneAfterFinal,finalDeathT:o.finalDeathT};}));
 await b.close();
 const fails=[];const ok=(c,m)=>{if(!c)fails.push(m);console.log((c?'PASS ':'FAIL ')+m);};
 console.log(JSON.stringify({endState:R.endState,room:R.room,ending:R.ending,scenes:R.scenes,sceneAfterFinal:R.sceneAfterFinal,finalDeathT:R.finalDeathT,inspect:R.inspect}).slice(0,2500));console.log(JSON.stringify({stages:R.stages,first:R.first,final:R.final,room:R.room,ending:R.ending,inspect:R.inspect,scenes:R.scenes},null,0).slice(0,3000));
@@ -54,9 +56,11 @@ ok(errs.length===0,'페이지 오류 0: '+errs.slice(0,3).join(' | '));
 const cosm=R.stages.filter(s=>s.act==='cosmic').map(s=>s.max);
 if(MODE==='off'){
  ok(R.inspect===null||R.inspect.on===false,'꺼짐: R950 꺼짐 상태');
+ ok(R.stageAfterMobKills?.after==='field','꺼짐: 옛 동작(잡몹이 죽으면 단계가 field 로 덮임) 그대로: '+JSON.stringify(R.stageAfterMobKills));
  ok(R.final&&R.final.max<R.first.max*.5,'꺼짐: 옛 동작(최종 형태 최대 체력이 1형태 절반 미만) 그대로: '+R.final?.max+' vs '+R.first?.max);
 }else{
  ok(!!R.inspect,'R950 API 있음');
+ ok(R.fieldMobsKilled>0&&R.stageAfterMobKills&&R.stageAfterMobKills.after===R.stageAfterMobKills.before,'지배 연결 중 필드 잡몹이 모두 죽어도 단계가 field 로 덮이지 않음: '+JSON.stringify(R.stageAfterMobKills)+' 잡몹 '+R.fieldMobsKilled);
  ok(R.final&&Math.abs(R.final.max-R.first.max)<=R.first.max*.01,'최종 형태 최대 체력 = 1형태 최대 체력(±1%): '+R.final?.max+' vs '+R.first?.max);
  ok(R.final&&R.final.frac>=.66&&R.final.frac<=.70,'최종 형태는 원래 의도대로 68% 체력에서 시작: '+R.final?.frac);
  ok(cosm.length===6&&cosm.every(m=>m<R.first.max),'지배 연결 체력은 바꾸지 않음(1형태보다 작음): '+cosm.join(','));

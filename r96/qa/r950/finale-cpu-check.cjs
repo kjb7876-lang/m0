@@ -20,6 +20,7 @@ function world(opt={}){const store={...(opt.store||{})};if(opt.off)store['storyw
   function drawEffect(e){log.push('base-draw:'+e.type);}
   function playScenes(list,done){log.push({scenes:list.map(s=>s.part),t:time});if(done)done();}
   function enterRegion(){log.push('enter');}
+  function killEnemy(e){e.hp=0;e.deadRecorded=true;if(e.fieldWaveIndex6!=null)room.encounterStage=e.lastOfWave?'fieldReady':'field';return true;}
   function spawnCosmic3(){if(room.cosmicIndex>=6){const e={nativeId:'c104-boss',id:'cult04:final-boss',maxHp:40945.56,hp:40945.56*.68,difficultyBaseHpR63:96815,difficultyFactorR63:.25,healthR71Adjusted:true,healthR71VisibleMaxHp:40945.56,spawnState:'summoning',x:17,y:10};room.enemies.push(e);room.activeEncounter='finalBoss';room.encounterStage='summoning';room.engaged=true;return;}
    room.enemies.push({cosmic:true,nativeId:'kair-great-0'+(room.cosmicIndex+1),maxHp:40945.56,hp:40945.56,spawnState:'active',x:15,y:9});room.activeEncounter='cosmic';room.engaged=true;}
   window.spawnCosmic3=spawnCosmic3;`,g);
@@ -78,7 +79,13 @@ for(const [n,o] of [['no record',{}],['off',{off:true,store:{'storyworld.r950.fi
 {const g=world();fullRun(g);run(g,`room.enemies[0].hp=0;tick(.05);playScenes([{part:'post'}],()=>{});enterRegion('village');`);
  ok('leaving the region flushes the deferred scene first',JSON.stringify(run(g,`log`).filter(r=>r.scenes||r==='enter').map(r=>r.scenes?'scene':r))==='["scene","enter"]',run(g,`log`));}
 {const g=world();run(g,`room.activeEncounter='boss';playScenes([{part:'post'}],()=>{});`);ok('only the finalBoss post is deferred',run(g,`log`).some(r=>r.scenes));}
-// ④ 연결
+// ④ 단계 지키기: 지배 연결 중 필드 잡몹이 죽어도 단계 유지, 보스 단계가 아닐 때(필드 진행)는 엔진 그대로
+for(const st of ['cosmicReady','summoning','active','bossReady']){const g=world();run(g,`room.activeEncounter='cosmic';room.encounterStage=${JSON.stringify(st)};killEnemy({fieldWaveIndex6:2,hp:5});`);
+ ok('stage kept during '+st,run(g,`room.encounterStage`)===st&&A(g).inspect().stats.stageKept===1,run(g,`room.encounterStage`));}
+{const g=world();run(g,`room.activeEncounter='cosmic';room.encounterStage='cosmicReady';killEnemy({fieldWaveIndex6:2,hp:5,lastOfWave:true});`);ok('fieldReady overwrite also reverted',run(g,`room.encounterStage`)==='cosmicReady');}
+{const g=world();run(g,`room.activeEncounter='';room.encounterStage='field';killEnemy({fieldWaveIndex6:0,hp:5,lastOfWave:true});`);ok('normal field progress untouched',run(g,`room.encounterStage`)==='fieldReady'&&A(g).inspect().stats.stageKept===0);}
+for(const [n,o] of [['other zone',{zone:'cult03'}],['DREAM',{layer:'DREAM'}],['off',{off:true}]]){const g=world(o);run(g,`room.activeEncounter='cosmic';room.encounterStage='cosmicReady';killEnemy({fieldWaveIndex6:2,hp:5});`);ok(n+': engine behaviour untouched',run(g,`room.encounterStage`)==='field');}
+// ⑤ 연결
 const idx=fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8');
 ok('index.html tag before combat-r118',/<script src="\.\/finale-r950\.js"><\/script>[\s\S]*combat-r118\.js/.test(idx));
 ok('runtime-inputs lists finale-r950.js',/finale-r950\.js/.test(fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8')));
