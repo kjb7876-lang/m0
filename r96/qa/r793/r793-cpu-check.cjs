@@ -7,7 +7,7 @@ const src=fs.readFileSync(path.join(R,'client-source','npc-r790.js'),'utf8');
 {const y=fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').split('\n'),i=y.findIndex(l=>l.includes('node r96/qa/r793/r793-cpu-check.cjs'));ok(i>0,'pages.yml CPU 검사 줄');ok(/^\s+- name: /.test(y[i-1])&&!y[i-1].replace(/^\s+- name: /,'').includes(': '),'pages.yml 단계 이름에 콜론+빈칸 없음');}
 ok(fs.readFileSync(path.join(R,'runtime-text','npc-r790.js'),'utf8')===src,'runtime-text 사본이 같다');
 const man=fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8');for(const f of ['seoyun-idle6','seoyun-bust']){ok(fs.existsSync(path.join(R,'runtime-text','assets','r790','npc',f+'.webp')),f+' 파일');ok(man.includes('assets/r790/npc/'+f+'.webp'),f+' 목록');}
-ok(!/yigyeong/.test(src)&&!man.includes('yigyeong'),'한이경은 넣지 않는다(온 그림이 정본과 달라 다시 요청)');
+/* R794: 한이경 여자판 그림이 와서 넣었다(r794 검사). 남자로 온 첫 그림 파일은 여전히 쓰지 않는다. */ok(!/CX-0073SN_04_idle6_r1/.test(fs.readFileSync(path.join(R,'..','scripts','r792-npc-sheets.py'),'utf8')),'남자로 온 첫 한이경 그림은 쓰지 않는다');
 const h791=fs.readFileSync(path.join(__dirname,'../r791/r791-cpu-check.cjs'),'utf8'),a=h791.indexOf('function world('),b=h791.indexOf("\n{const w=world();ok(w.api.zones()");ok(a>0&&b>a,'R791 검사 틀을 찾음');
 const world=new Function('vm','src','J','return '+h791.slice(a,b).trim())(vm,src,J);
 const P='assets/r790/npc/',Z='ep1b05',W=o=>world({zoneId:Z,phase:'door',...o}),nearDoor='player.x=20;player.y=22;';
