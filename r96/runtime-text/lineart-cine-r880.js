@@ -530,7 +530,7 @@ function planVoice(def){if(!voiceOn())return null;const R=VOX(),L=VLEN();
 function voiceClock(o,now){const dt=o.lastNow?Math.min(.25,Math.max(0,(now-o.lastNow)/1000)):0;o.lastNow=now;
  const seg=o.plan.find(p=>p&&o.vt>=p.a&&o.vt<p.next),sp=o.speak;const want=seg&&!seg.over?seg.rate:1;o.rate=o.rate==null?want:o.rate+(want-o.rate)*Math.min(1,dt*3.5);let nt=o.vt+dt*o.rate;
  // 말이 아직 안 끝났으면 다음 자막(마지막 줄은 끝 어두워지기) 직전에서 기다린다 — 끝 알림이 영영 안 와도 길이+4초 뒤에는 간다
- if(sp&&!sp.over&&nt>=sp.next-0.03){if((now-sp.at)/1000<sp.len+V_HOLD){if(!sp.held){sp.held=true;vstats.holds++;}nt=Math.min(nt,Math.max(o.vt,sp.next-0.03));}else{sp.over=true;o.speak=null;}}
+ if(sp&&!sp.over&&nt>=sp.next-0.03){if((now-sp.at)/1000<sp.len+V_HOLD){if(!sp.held){sp.held=true;vstats.holds++;}nt=Math.min(nt,Math.max(o.vt,sp.next-0.03));}else{sp.over=true;o.speak=null;try{sp.h?.stop?.();}catch(_){}}}/* 기다리다 포기한 녹음은 멈춘다 — 안 멈추면 컷씬이 닫힌 뒤 게임 중에 이어서 나올 수 있다 */
  o.vt=nt;
  for(const p of o.plan){if(!p||p.started||o.vt<p.a)continue;if(o.speak&&!o.speak.over)break;p.started=true;p.at=now;
   const done=()=>{p.over=true;if(o.speak===p)o.speak=null;};
