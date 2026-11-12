@@ -1,5 +1,5 @@
 // 완료 조건: 영화모드 서사가 25초 넘게 남아 있어도 777 지역 이동(go)의 enterRegion 은 지연 없이(<12초) 실행되어야 한다.
-import {createRequire} from 'node:module';const req=createRequire('../r444/lib.mjs');const {chromium}=req('playwright');
+import {createRequire} from 'node:module';const req=createRequire(new URL('../r444/lib.mjs',import.meta.url));const {chromium}=req('playwright');
 const b=await chromium.launch({args:['--no-sandbox']});const ctx=await b.newContext({viewport:{width:640,height:360}});
 await ctx.addInitScript(()=>{localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false}));});
 const p=await ctx.newPage();await p.goto('http://127.0.0.1:4396/');

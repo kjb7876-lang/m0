@@ -165,11 +165,13 @@ try{const R=window.__STORYWORLD_GUIDE_FRAGMENT_R365__;if(R&&typeof R.hold==='fun
    if(typeof toast==='function')toast('쪽지를 쪽지 모음에 넣었습니다 · 영화 모드',1.6);}catch(e){fail(e);}return true;}
   return R.hold(doc);}});}}catch(e){fail(e);}
 // 출구에서 머물기: 고른 문장이 1.3배속으로도 25초 넘게 남았으면 길잡이의 지역 이동을 최대 40초 늦춘다(직접 조작·복원·사망 귀환은 그대로).
-let lingerP=null;
+let lingerP=null,lingerTok=0;
 try{if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=function(id,from,opt){
-  try{if(prefs.on&&G('guide',false)&&!opt?.restore&&!opt?.travel777R72&&backlogSecs()>25){if(lingerP)return lingerP;stats.lingers++;const self=this,args=arguments,t0=now();
+  // 사용자가 직접 고른 777 이동은 기다리지 않고, 이미 걸려 있던 길잡이 이동은 취소한다(옛 목적지로 뒤늦게 가지 않게).
+  try{if(opt?.travel777R72){if(lingerP){lingerTok++;lingerP=null;}return base.apply(this,arguments);}}catch(e){fail(e);}
+  try{if(prefs.on&&G('guide',false)&&!opt?.restore&&backlogSecs()>25){if(lingerP)return lingerP;stats.lingers++;const self=this,args=arguments,t0=now(),tok=++lingerTok;
     try{if(typeof toast==='function')toast('서사를 마저 듣는 중…',2);}catch(_){}
-    lingerP=new Promise(res=>{const w=()=>{if(!prefs.on||!G('guide',false)||backlogSecs()<8||now()-t0>LINGER_MAX){lingerP=null;res(base.apply(self,args));}else setTimeout(w,500);};setTimeout(w,500);});return lingerP;}}catch(e){fail(e);}
+    lingerP=new Promise(res=>{const w=()=>{if(tok!==lingerTok){res(false);return;}if(!prefs.on||!G('guide',false)||backlogSecs()<8||now()-t0>LINGER_MAX){lingerP=null;res(base.apply(self,args));}else setTimeout(w,500);};setTimeout(w,500);});return lingerP;}}catch(e){fail(e);}
   return base.apply(this,arguments);};}}catch(e){fail(e);}
 // 길잡이 이어 켜기: 엔진이 사망·귀환에서 길잡이를 끄면, 손을 대지 않은 채 6초가 지나면 다시 켠다.
 let lastInput=0;for(const ev of['keydown','pointerdown','touchstart'])addEventListener(ev,e=>{if(e.target?.closest?.('#modal,#r370Subs'))return;lastInput=now();},{passive:true,capture:true});
