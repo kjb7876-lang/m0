@@ -44339,8 +44339,8 @@
     },
     {
       "path": "npc-r790.js",
-      "bytes": 25054,
-      "sha256": "b3c6c1a8092f89189b77c7a438722abef7004ab2c865749fd4f446ec5e46b996"
+      "bytes": 33959,
+      "sha256": "613aa1d9a1efd57c85440ce0347ee6b9e039d54440da5161130c86a82be9e633"
     },
     {
       "path": "painted-vfx-data-r87.js",
@@ -45054,7 +45054,7 @@
     }
   ],
   "fileCount": 9010,
-  "totalBytes": 1237466293,
+  "totalBytes": 1237475198,
   "webHTMLSha256": "ca0c74ac14a4352bbac8c51b2761c7daf1f7695b7cf35fd8dd4a6ac0c1667220",
   "largest": [
     {
