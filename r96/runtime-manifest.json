@@ -45159,8 +45159,8 @@
     },
     {
       "path": "survival-r600.js",
-      "bytes": 67733,
-      "sha256": "55cce192489851e96ae3a27cd24003a483136cf76d4b3048abaea74a75724410"
+      "bytes": 69423,
+      "sha256": "078c13ef2133000bbf2f4dc2a6d22e636ff52d166c5247cc8ade1d93abeb16b9"
     },
     {
       "path": "swamp-hands-r474.js",
@@ -45404,7 +45404,7 @@
     }
   ],
   "fileCount": 9080,
-  "totalBytes": 1240779833,
+  "totalBytes": 1240781523,
   "webHTMLSha256": "af24cb0570255ed75fe4071e677782b0ab7b5d702ec728887a57aa86b8957e6b",
   "largest": [
     {
