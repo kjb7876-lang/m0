@@ -44254,8 +44254,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6574736,
-      "sha256": "6b23edac88fc7e1237d51c0011aa9d4ac2270c7f2acf946f06be695501334483"
+      "bytes": 6574985,
+      "sha256": "f7c4cbcde8edb3c9ab98af610607debe0bb405e7683162e8cb9f1261794e613c"
     },
     {
       "path": "intro-r140.js",
@@ -44304,8 +44304,8 @@
     },
     {
       "path": "lineart-cine-r880.js",
-      "bytes": 51702,
-      "sha256": "c4ab4e3e5c179156b741761477f903935d9d1ac1251e322c53ab4deb3dd2a76c"
+      "bytes": 59353,
+      "sha256": "db872e8baf9ddf5fdc8dde468f43716497878f84935e2d4ed03249ab9e0d3769"
     },
     {
       "path": "lineart-scenes-r881.js",
@@ -44321,6 +44321,31 @@
       "path": "lineart-scenes-r883.js",
       "bytes": 22771,
       "sha256": "8b59b6723c588c7943e55f7b803e3460646d5f27569198592bd979d30f34f3d1"
+    },
+    {
+      "path": "lineart-scenes-r884.js",
+      "bytes": 32338,
+      "sha256": "63a23a23900d3b27cfce8c6e74337c31b5dcd1b800f2257ad4ccf979b2aae693"
+    },
+    {
+      "path": "lineart-scenes-r885.js",
+      "bytes": 31806,
+      "sha256": "506b98f5f4a797c5c3b855a70d3dcf93871dc5e8debb4b1033d2a1181a401dce"
+    },
+    {
+      "path": "lineart-scenes-r886.js",
+      "bytes": 21136,
+      "sha256": "fef99d55543099fa3cf858f64495ece3de876df41947b06551ad5e93735da150"
+    },
+    {
+      "path": "lineart-scenes-r887.js",
+      "bytes": 22840,
+      "sha256": "371a28b666e1f2c2b405a03783139b834cdd5c4e45aa7ea3c21f63a85d654322"
+    },
+    {
+      "path": "lineart-voice-r888-data.js",
+      "bytes": 5135,
+      "sha256": "4b32411b988f3fd7503542aa8066c5fa48e04d8f9fe66e7e75a78811529066cc"
     },
     {
       "path": "local-light-r451.js",
@@ -45273,9 +45298,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9054,
-  "totalBytes": 1239761686,
-  "webHTMLSha256": "6b23edac88fc7e1237d51c0011aa9d4ac2270c7f2acf946f06be695501334483",
+  "fileCount": 9059,
+  "totalBytes": 1239882841,
+  "webHTMLSha256": "f7c4cbcde8edb3c9ab98af610607debe0bb405e7683162e8cb9f1261794e613c",
   "largest": [
     {
       "path": "index.html",
