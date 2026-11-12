@@ -8243,7 +8243,8 @@
     "lineart-cine-r880.js",
     "lineart-scenes-r881.js",
     "enemy-hit-place-r860.js",
-    "lineart-scenes-r882.js"
+    "lineart-scenes-r882.js",
+    "lineart-scenes-r883.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9318,5 +9319,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "1ec01f4c2a2ca490f234c4a6b7fb1fe8f0dfc8e8c220946adcdd338363a695cd"
+  "runtimeManifestSHA256": "26c885fe00c7b504560c90d7f2f98d06ebea4a856670f50d9398e1b5a2b14422"
 }

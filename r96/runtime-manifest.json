@@ -44174,8 +44174,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6574370,
-      "sha256": "deeabf9b0c6d45a214599e37eb2392ccdda1f471df032c34c5fcb9d84ff1757d"
+      "bytes": 6574419,
+      "sha256": "8acdddef3f23a0cc5646fb06a8919a6410af00f5491698e7c46c85ebd1ce8bc6"
     },
     {
       "path": "intro-r140.js",
@@ -44236,6 +44236,11 @@
       "path": "lineart-scenes-r882.js",
       "bytes": 52198,
       "sha256": "115146da77dd058f652b648d4172aa0bb4ddfa45919f93dab6e93e1c3064d21c"
+    },
+    {
+      "path": "lineart-scenes-r883.js",
+      "bytes": 22771,
+      "sha256": "8b59b6723c588c7943e55f7b803e3460646d5f27569198592bd979d30f34f3d1"
     },
     {
       "path": "local-light-r451.js",
@@ -45168,9 +45173,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9033,
-  "totalBytes": 1239168662,
-  "webHTMLSha256": "deeabf9b0c6d45a214599e37eb2392ccdda1f471df032c34c5fcb9d84ff1757d",
+  "fileCount": 9034,
+  "totalBytes": 1239191482,
+  "webHTMLSha256": "8acdddef3f23a0cc5646fb06a8919a6410af00f5491698e7c46c85ebd1ce8bc6",
   "largest": [
     {
       "path": "index.html",
