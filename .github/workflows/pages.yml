@@ -653,6 +653,8 @@ jobs:
         run: node r96/qa/r760/r760-cpu-check.cjs
       - name: R800 floor edge mask reused for identical input (no double build on region entry) CPU check
         run: node r96/qa/r800/edges-cache-cpu-check.cjs
+      - name: R801 samong guide calm (kill quota met / explore / maze / door open → guide fights only enemies within 6 tiles and walks to clues and the door; quota left, B/D/G/H/F, hold, lead, outside samong unchanged) CPU check
+        run: node r96/qa/r801/samong-guide-calm-cpu-check.cjs
       - name: R790 story key NPC (last303 - the youth in the mist offers gwibitang at the boss door; no gwibitang → door story does not start and the Bulmyeongwi core stays sealed; old saves/guide/survival/co-op untouched) CPU check
         run: node r96/qa/r790/r790-cpu-check.cjs
       - name: R791 story key NPC 2 (last305 - the defeated goblin chief leaves the rose seal by the altar; no seal → exit story does not start; R790 gwibitang gate unchanged, ledgers do not mix) CPU check
