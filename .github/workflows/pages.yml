@@ -512,6 +512,8 @@ jobs:
         run: node r96/qa/r523/r523-cpu-check.cjs && node r96/qa/r730/r730-cpu-check.cjs && node r96/qa/r731/r731-cpu-check.cjs
       - name: R810 Bulmyeongwi night (last302/last303 navy moonlight ambient, deep amber lamps, no sepia, no spider-crack decals, night fog colour, lamps kept off the guide path; other zones unchanged) CPU check
         run: node r96/qa/r810/r810-cpu-check.cjs
+      - name: R851 region entry stall (cave-r204 decal atlas and edges-r188 edge mask read pixels from CPU canvases, no GPU sync readback) CPU check
+        run: node r96/qa/r851/r851-cpu-check.cjs
       - name: R590 hwando sword chain (A draw-cut, Q wind blades, E delayed flash, R seven-strike finale; no new keys, walls/map edge, caps) CPU check
         run: node r96/qa/r590/hwando-chain-cpu-check.cjs
       - name: R601 enemy attack tempo (enemy attack body motion drawn 2x faster, strike frame kept on the damage moment, telegraphs on real time, no timing/damage change) CPU check
@@ -737,6 +739,8 @@ jobs:
         run: node r96/qa/r795/r795-cpu-check.cjs
       - name: R821 hero readability on bright patterned floors (foot pool + body outline, rosehouse only) CPU check
         run: node r96/qa/r821/r821-cpu-check.cjs
+      - name: R832 region door leaves by map style + Joseon village trees (pine/persimmon) CPU check
+        run: node r96/qa/r832/r832-cpu-check.cjs
       - name: R830 thin partition walls become solid main walls
         run: node r96/qa/r830-walls/walls-cpu-check.cjs
       - name: Install pinned sandboxed Chromium

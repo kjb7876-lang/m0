@@ -8225,6 +8225,21 @@
     "assets/r770/villagers/sobok-hit.webp",
     "quest-r840.js",
     "walls-solid-r830.js",
+    "doors-theme-r832.js",
+    "assets/r832/doors/A-a.webp",
+    "assets/r832/doors/A-b.webp",
+    "assets/r99/outdoor/tree-joseon-00.webp",
+    "assets/r99/outdoor/tree-joseon-01.webp",
+    "assets/r99/outdoor/tree-joseon-02.webp",
+    "assets/r99/outdoor/tree-joseon-03.webp",
+    "assets/r99/outdoor/tree-joseon-04.webp",
+    "assets/r99/outdoor/tree-joseon-05.webp",
+    "assets/r99/outdoor/tree-joseon-06.webp",
+    "assets/r99/outdoor/tree-joseon-07.webp",
+    "assets/r99/outdoor/tree-joseon-08.webp",
+    "assets/r99/outdoor/tree-joseon-09.webp",
+    "assets/r99/outdoor/tree-joseon-10.webp",
+    "assets/r99/outdoor/tree-joseon-11.webp",
     "hero-idle-hit-r710.js",
     "assets/r710/gunner/hit-s.webp",
     "assets/r710/gunner/idle-s.webp",
@@ -9313,5 +9328,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "1b59c55e82af26ea1ea90387de7f2b79c5bf1f387aadb50af5ea30fd4fdda084"
+  "runtimeManifestSHA256": "8c7b9d730a2a16168930359ece7967aff22665803ecbfc85d643090c2239a3a5"
 }
