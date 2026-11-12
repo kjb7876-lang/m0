@@ -73,12 +73,13 @@ function pick(s){if(s.force){const k=s.force;s.force=null;return k;}
  return k&&T()>=s.ready[k]?k:null;}
 const nearOf=(p,r)=>{let b=null,bd=r;for(const e of foes()){if(!(e.hp>0)||!fin(e.x)||!fin(e.y))continue;const d=Math.hypot(e.x-p.x,e.y-p.y);if(d<=bd){bd=d;b=e;}}return b;};
 function onSwing(p,foe){const s=st(p);s.stats.swings++;if(!solo()){s.stats.coopSkipped++;return;}
- const k=pick(s);if(!k)return;s.ready[k]=T()+CFG[k].icd;
- if(k==='needle')castNeedle(s,p,foe);else if(k==='swords')castSwords(s,p);else castLattice(s,p);}
+ const k=pick(s);if(!k)return;
+ /* 대상이 없어 안 나가면 대기 시간도 쓰지 않음(R947-3) */
+ const fired=k==='needle'?castNeedle(s,p,foe):k==='swords'?castSwords(s,p):castLattice(s,p);if(fired)s.ready[k]=T()+CFG[k].icd;}
 // ② 혈침
 // 적혈 연쇄: 벤 적에서 시작해 0.07초마다 3.8칸 안 가장 가까운 다음 적으로 피 줄기가 튄다(최대 6명, 튈 때마다 ×0.85). 벽 너머로는 안 튐.
-function castNeedle(s,p,foe){const M=CFG.needle,e=foe&&foe.hp>0?foe:nearOf(p,M.first);if(!e)return;s.stats.needles++;
- s.needles.push({id:'n'+(++serial),last:{x:p.x,y:p.y},first:e,hit:new Set(),k:0,next:T(),pw:power(),room,seed:serial*7.13});while(s.needles.length>M.max)s.needles.shift();arm();}
+function castNeedle(s,p,foe){const M=CFG.needle,e=foe&&foe.hp>0?foe:nearOf(p,M.first);if(!e)return false;s.stats.needles++;
+ s.needles.push({id:'n'+(++serial),last:{x:p.x,y:p.y},first:e,hit:new Set(),k:0,next:T(),pw:power(),room,seed:serial*7.13});while(s.needles.length>M.max)s.needles.shift();arm();return true;}
 function stepNeedles(s){const M=CFG.needle,t=T();for(let i=s.needles.length-1;i>=0;i--){const c=s.needles[i];if(c.room!==room){s.needles.splice(i,1);continue;}let done=false;
  while(!done&&t>=c.next){if(c.k>=M.jumps){done=true;break;}let e=null;
   if(c.k===0)e=c.first&&c.first.hp>0?c.first:null;
@@ -90,11 +91,11 @@ function stepNeedles(s){const M=CFG.needle,t=T();for(let i=s.needles.length-1;i>
  if(done)s.needles.splice(i,1);}}
 // ③ 성혈검우
 function castSwords(s,p){const C=CFG.swords,near=foes().filter(e=>e.hp>0&&fin(e.x)&&fin(e.y)&&Math.hypot(e.x-p.x,e.y-p.y)<=C.range&&line(p,e)).sort((a,b)=>Math.hypot(a.x-p.x,a.y-p.y)-Math.hypot(b.x-p.x,b.y-p.y)).slice(0,C.count);
- if(!near.length)return;const t=T(),pw=power(),id='s'+(++serial);s.stats.swordCasts++;
+ if(!near.length)return false;const t=T(),pw=power(),id='s'+(++serial);s.stats.swordCasts++;
  for(let i=0;i<C.count;i++){const e=near[i%near.length],lap=Math.floor(i/near.length),a=i*2.39996,r=lap?.38:0;
   s.swords.push({i,foe:e,dx:Math.cos(a)*r,dy:Math.sin(a)*r,x:e.x,y:e.y,at:t+C.fall+i*C.stagger,t0:t+i*C.stagger,landed:false,end:t+C.fall+i*C.stagger+C.stuck+.3,pw,id:id+':'+i,room});}
  while(s.swords.length>C.count*2)s.swords.shift();
- say('성혈검우',p.x,p.y-.5);sfx('special');arm();}
+ say('성혈검우',p.x,p.y-.5);sfx('special');arm();return true;}
 function stepSwords(s){const t=T(),C=CFG.swords;for(let i=s.swords.length-1;i>=0;i--){const w=s.swords[i];if(w.room!==room){s.swords.splice(i,1);continue;}
  if(!w.landed){if(w.foe&&w.foe.hp>0&&fin(w.foe.x)){const tx=w.foe.x+w.dx,ty=w.foe.y+w.dy;if(open(tx,ty,.1)){w.x=tx;w.y=ty;}}
   if(t>=w.at){w.landed=true;const e=w.foe;if(e&&e.hp>0&&Math.hypot(e.x-w.x,e.y-w.y)<=.6+(e.radius||0))strike(s,e,C.mult,w.pw,'sword',w.id);
@@ -103,7 +104,7 @@ function stepSwords(s){const t=T(),C=CFG.swords;for(let i=s.swords.length-1;i>=0
  if(t>=w.end)s.swords.splice(i,1);}}
 // ① 혈격자
 function castLattice(s,p){const t=T();s.stats.lattices++;s.lattice={t0:t,room,pw:power(),wave:0,next:t+CFG.lattice.lead,lines:[],id:'l'+(++serial),cx:p.x,cy:p.y,crossKeys:new Set(),crossN:0};
- addVis({k:'pulse',x:p.x,y:p.y,life:.5});say('혈격자',p.x,p.y-.5);sfx('special');arm();}
+ addVis({k:'pulse',x:p.x,y:p.y,life:.5});say('혈격자',p.x,p.y-.5);sfx('special');arm();return true;}
 function stepLattice(s){const L=s.lattice;if(!L)return;const t=T(),C=CFG.lattice,b=bodyOf(s);if(L.room!==room||!isSl(b)){s.lattice=null;return;}
  L.cx=b.x;L.cy=b.y;
  while(L.wave<C.waves&&t>=L.next){const w=L.wave,dir=w%2?'v':'h',off=((w>>1)%2)*C.spacing/2,mid=dir==='h'?L.cy:L.cx,lines=[],K=Math.ceil(C.radius/C.spacing)+1;
