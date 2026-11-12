@@ -34833,6 +34833,11 @@
       "sha256": "d556891342041b28cef346538dcbcf062abccf18dd169fb3100dafa87362f6a9"
     },
     {
+      "path": "assets/r770/villagers/sobok-hit.webp",
+      "bytes": 33654,
+      "sha256": "439dc4f09ce826af8ade7a5d75e5580ae4d394a9951772d3e2cb5fa90c0392c5"
+    },
+    {
       "path": "assets/r770/villagers/sobok-idle.webp",
       "bytes": 47562,
       "sha256": "49ac13a0e0f346b3e0dfb15d00abc99faf8c5857e2bd7b9c528a258f06a97ef2"
@@ -43074,8 +43079,8 @@
     },
     {
       "path": "bulmyeongwi-r760.js",
-      "bytes": 44470,
-      "sha256": "32ee0cb2091c0b1bd5c6258e80b0b307b8b7b33f64b5930a4306344ee9338d71"
+      "bytes": 44784,
+      "sha256": "922b2f57b063c89cd76c16a15f51dc6f74b562708311e378adc252c3131344f3"
     },
     {
       "path": "canon-throw-r471.js",
@@ -45058,8 +45063,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9011,
-  "totalBytes": 1237499776,
+  "fileCount": 9012,
+  "totalBytes": 1237533744,
   "webHTMLSha256": "53ba48f25f08290ee567556cdee99d8fe2fe246212099bd495c3e8c71c40b503",
   "largest": [
     {
