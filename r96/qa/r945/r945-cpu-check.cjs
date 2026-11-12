@@ -106,6 +106,9 @@ const sumOn=(E,id,tag)=>E.hits.filter(h=>h.id===id&&(!tag||h.s?.r945===tag));
  E.run(7-1.1-.1);ok(E.api.inspect().clones.length===7,'7초 전까지 유지');E.run(.4);ok(E.api.inspect().clones.length===0,'7초 뒤 사라짐');
  E.heroDraws.length=0;E.adv(.01);E.ctx.drawHero();ok(E.heroDraws.length===1,'사라진 뒤엔 영웅만 그림');}
 {const E=engine({enemies:[]});E.api.force('clones');E.ctx.basicAttack();E.run(.1);ok(E.api.inspect().clones.length===0,'적이 없어 공격 안 나가면 분신 없음');}
+{const E=engine({enemies:[{id:'a',x:30,y:20}]});const near0=E.g.nearestEnemy;E.g.nearestEnemy=()=>({id:'ghost',x:21,y:20,hp:1});E.api.force('clones');E.ctx.basicAttack();E.run(.1);const I=E.api.inspect();ok(I.clones.length===0&&I.cd.clones===0&&I.stats.noTarget===1,'둘레에 적이 없어 칠묵영이 안 나가면 대기 시간을 쓰지 않음');
+ E.api.force('trio');E.run(.5);E.ctx.basicAttack();E.run(.1);const J=E.api.inspect();ok(J.stats.trios===0&&J.cd.trio===0&&J.stats.noTarget===2,'삼협묵희도 대상이 없으면 대기 시간을 쓰지 않음');
+ E.g.nearestEnemy=near0;E.g.room.enemies[0].x=21;E.run(.5);E.api.force('clones');E.ctx.basicAttack();E.run(.2);const K=E.api.inspect();ok(K.clones.length===7&&K.cd.clones>6,'적이 다가오면 칠묵영 정상 발동·대기 시간 7초');}
 {const E=engine({enemies:[{id:'a',x:22,y:20}]});E.api.force('clones');E.ctx.basicAttack();E.run(.2);E.api.force('clones');E.run(.5);E.ctx.basicAttack();E.run(.2);ok(E.api.inspect().clones.length===7,'다시 발동해도 7체 넘지 않음');}
 {const E=engine({enemies:[{id:'a',x:22,y:20}],lowFx:true});E.api.force('clones');E.ctx.basicAttack();E.run(.3);E.heroDraws.length=0;E.ctx.drawHero();ok(E.heroDraws.length===8,'저사양도 분신 7체(사용자 지정 수, 그림자 겹만 뺌)');}
 

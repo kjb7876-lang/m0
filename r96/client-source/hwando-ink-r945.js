@@ -17,7 +17,7 @@
 //  끄기: localStorage['storyworld.r945.hwandoInk']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_HWANDO_INK_R945__)return;
-const REV='R945-hwando-ink-2',KEY='storyworld.r945.hwandoInk';
+const REV='R945-hwando-ink-3',KEY='storyworld.r945.hwandoInk';
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const CFG=Object.freeze({
  moon:Object.freeze({chance:.18,icd:1.2,mult:.9,range:7,radius:.7,speed:13,max:4}),
@@ -47,7 +47,7 @@ const say=(t,x,y)=>{try{if(typeof floatText==='function')floatText(t,x,y,'#f4f1e
 const sfx=k=>{try{if(typeof sound==='function')sound(k);}catch(_){}};
 // ---- 상태: 조종 영웅 하나 + 생존 배치 영웅(r720Ally 몸)마다 하나 ------------------------------------------------
 const fresh=body=>({body,ready:{moon:-1e9,clones:-1e9,trio:-1e9},force:null,clones:[],cloneEnd:-1e9,phantoms:[],trio:null,blades:[],mim:{},drawT:null,drawC:null,
- stats:{swings:0,moons:0,cloneCasts:0,trios:0,multi:0,hits:0,damage:0,cloneHits:0,wallStops:0,coopSkipped:0,cloneDraws:0}});
+ stats:{swings:0,moons:0,cloneCasts:0,trios:0,multi:0,hits:0,damage:0,cloneHits:0,wallStops:0,coopSkipped:0,cloneDraws:0,noTarget:0}});
 const main=fresh(null),allyState=new WeakMap(),allies=[];
 function st(p,make=true){if(p&&p.r720Ally===true){let s=allyState.get(p);if(!s&&make){s=fresh(p);allyState.set(p,s);allies.push(s);if(allies.length>8)allies.shift();}return s||null;}return main;}
 const states=()=>[main,...allies];
@@ -70,8 +70,9 @@ function pick(s){const t=T();if(s.force){const k=s.force;s.force=null;return k;}
  const r=Math.random(),m=CFG.moon.chance,c=CFG.clones.chance,q=CFG.trio.chance,k=r<m?'moon':r<m+c?'clones':r<m+c+q?'trio':null;
  return k&&t>=s.ready[k]?k:null;}
 function onSwing(p){const s=st(p);s.stats.swings++;mimic(s,p,'a');if(!solo()){s.stats.coopSkipped++;return;}
- const k=pick(s);if(!k)return;const t=T();s.ready[k]=t+CFG[k].icd;
- if(k==='moon')castMoon(s,p);else if(k==='clones')castClones(s,p);else castTrio(s,p);}
+ const k=pick(s);if(!k)return;const t=T();
+ // 둘레에 대상이 없어 기술이 안 나가면 대기 시간을 쓰지 않는다(빈 휘두름이 칠묵영 7초·삼협묵희 20초를 헛되이 태우던 것).
+ const ok=k==='moon'?castMoon(s,p):k==='clones'?castClones(s,p):castTrio(s,p);if(ok!==false)s.ready[k]=t+CFG[k].icd;else s.stats.noTarget=(s.stats.noTarget||0)+1;}
 const nearOf=(p,r)=>{let b=null,bd=r;for(const e of foes()){if(!(e.hp>0)||!fin(e.x)||!fin(e.y))continue;const d=Math.hypot(e.x-p.x,e.y-p.y);if(d<=bd){bd=d;b=e;}}return b;};
 // ① 묵월
 function castMoon(s,p){const e=nearOf(p,4.5),a=e?Math.atan2(e.y-p.y,e.x-p.x):aim(),ux=Math.cos(a),uy=Math.sin(a),id='m'+(++serial);s.stats.moons++;
@@ -86,7 +87,7 @@ function stepBlades(s,dt){const M=CFG.moon;for(let i=s.blades.length-1;i>=0;i--)
 // ② 칠묵영
 function spot(e,i,ring){for(let k=0;k<8;k++){const a=i*2.39996+k*Math.PI/4,x=e.x+Math.cos(a)*ring,y=e.y+Math.sin(a)*ring;if(open(x,y,.2)&&line({x,y},e))return {x,y,a};}return {x:e.x,y:e.y,a:0};}
 function castClones(s,p){const C=CFG.clones,near=foes().filter(e=>e.hp>0&&fin(e.x)&&fin(e.y)&&Math.hypot(e.x-p.x,e.y-p.y)<=C.seek).sort((a,b)=>Math.hypot(a.x-p.x,a.y-p.y)-Math.hypot(b.x-p.x,b.y-p.y)).slice(0,C.count);
- if(!near.length)return;const t=T();s.stats.cloneCasts++;s.clones.length=0;s.cloneEnd=t+C.life;
+ if(!near.length)return false;const t=T();s.stats.cloneCasts++;s.clones.length=0;s.cloneEnd=t+C.life;
  for(let i=0;i<C.count;i++){const e=near[i%near.length],q=spot(e,i,C.ring);s.clones.push({i,foe:e,x:q.x,y:q.y,a:q.a,t0:t+i*.03});addVis({k:'puff',x:q.x,y:q.y,life:.5,size:1.2});}
  say('칠묵영',p.x,p.y-.4);sfx('blink');arm();}
 function stepClones(s,dt){if(!s.clones.length)return;const t=T(),C=CFG.clones,b=bodyOf(s);
@@ -100,7 +101,7 @@ function mimic(s,p,slot){if(!s||!s.clones.length||!solo())return;const t=T();if(
   if(strike(s,e,C.mult,pw,'clone',id+':'+c.i)&&!low())addVis({k:'cut',a:{x:c.x,y:c.y},b:{x:e.x,y:e.y},life:.22});}}
 // ③ 삼협묵희
 function castTrio(s,p){const Q=CFG.trio,near=foes().filter(e=>e.hp>0&&fin(e.x)&&fin(e.y)&&Math.hypot(e.x-p.x,e.y-p.y)<=Q.range).sort((a,b)=>Math.hypot(a.x-p.x,a.y-p.y)-Math.hypot(b.x-p.x,b.y-p.y)).slice(0,Q.marks);
- if(!near.length)return;let cx=0,cy=0;for(const e of near){cx+=e.x;cy+=e.y;}cx/=near.length;cy/=near.length;const t=T();s.stats.trios++;
+ if(!near.length)return false;let cx=0,cy=0;for(const e of near){cx+=e.x;cy+=e.y;}cx/=near.length;cy/=near.length;const t=T();s.stats.trios++;
  s.trio={t0:t,room,ox:p.x,oy:p.y,cx,cy,marks:near,pw:power(),struck:false,done:false,id:'t'+(++serial),flip:(Math.random()*128)|0,ph:[]};
  s.phantoms.length=0;for(let i=0;i<3;i++){const a=-Math.PI/2+i*Math.PI*2/3,R=2.4;let x=cx+Math.cos(a)*R,y=cy+Math.sin(a)*R;if(!open(x,y,.2)){x=cx+Math.cos(a)*.8;y=cy+Math.sin(a)*.8;}
   s.phantoms.push({i,x,y,t0:t+.75+i*.2,end:t+Q.strikeAt+.35});s.trio.ph.push({x,y});}
