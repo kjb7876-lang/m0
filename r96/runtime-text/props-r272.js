@@ -26,11 +26,14 @@ function transitionPoints(r){const out=[];try{const P=window.__STORYWORLD_ROUTES
 const PART1=Object.freeze(new Set(['hub','dist00','dist01','dist02','dist03','dist04','dist05','dist06','ep1a08','ep1a09','ep1a09b','ep1a10','ep1a11']));
 const MACHINE=/^(u20[1-6]|cult0[1-6]|kair(0[1-9]|10)|ep1b09|restU2|restKairo|restEp1b)$/;
 const BLOOD=Object.freeze(new Set(['corrupted_shrine','dead_tree','r299/tree'])),SIGIL='r299/hexagram',STONE='collapsed_pillar';
+// R832 피의 제단(blood_altar): 피 의식이 있는 곳에만 — 1부 본편, 솔로몬의 봉인식(ep1b01), 교단(cult01~06). 조선풍 마을·현대 주방·무대·호텔에서는 뺀다. 맘몬(ep1b06)은 손대지 않는다.
+const ALTAR='blood_altar',RITE=/^(ep1b01|cult0[1-6])$/,HANDS_OFF=/^ep1b06$/;
 const TECH=Object.freeze(new Set(['silver_seal_pillar','surveillance_console','chrono_engine','shattered_memory_core','rail_signal','industrial_barricade','ruined_portal','time_obelisk']));
 let canon=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.canon===false)canon=false;}catch(_){}
 const artName=path=>{const m=/(?:^|\/)(r299\/)?([^\/]+)\.(?:webp|png)$/.exec(String(path||''));return m?(m[1]||'')+m[2]:'';};
 // 순수(QA): 그림 이름 + 지역 사정 → true(둔다) · false(뺀다) · 문자열(그 그림으로 바꾼다)
 function fit(name,c){const p1=!!c&&PART1.has(c.id)&&!c.samong;
+ if(name===ALTAR){const id=String(c?.id||'');return HANDS_OFF.test(id)||p1||(!c?.samong&&RITE.test(id));}
  if(BLOOD.has(name))return p1&&!!c.outdoor;if(name===SIGIL)return p1;
  if(TECH.has(name))return MACHINE.test(String(c?.id||''))?true:(c?.outdoor?STONE:false);return true;}
 function ctxOf(r){const L=r?.exploration||{},mode=String(L.worldR74?.mode||'');let indoor=/indoor|cavern/.test(mode);

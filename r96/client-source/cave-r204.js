@@ -445,7 +445,7 @@ let SEED=1;const ZONES_SEED=()=>SEED;
 function decalAtlas(T,r,ims,cfg){const c=document.createElement('canvas');c.width=1024;c.height=768;/* R212: 4×3 칸(8~11 추가) */const g=c.getContext('2d');const rnd=rng(cfg.seed^0x77);
  const put=(im,k)=>{const x=(k%4)*256,y=Math.floor(k/4)*256;const w=im.naturalWidth,h=im.naturalHeight,s=Math.min(236/w,236/h);g.drawImage(im.__c||im,x+128-w*s/2,y+128-h*s/2,w*s,h*s);};
  // r106 균열은 원래 하얗게 빛나는 효과 그림 → 바닥 균열로 쓰도록 어둡게(밝기 반전에 가깝게 눌러) 칠한다
- {const c2=document.createElement('canvas');c2.width=ims.crack.naturalWidth;c2.height=ims.crack.naturalHeight;const g2=c2.getContext('2d',{willReadFrequently:true});/* R850: 되읽는 캔버스는 CPU 캔버스로(GPU 동기화 멈춤) */g2.drawImage(ims.crack,0,0);const id=g2.getImageData(0,0,c2.width,c2.height),d=id.data;
+ {const c2=document.createElement('canvas');c2.width=ims.crack.naturalWidth;c2.height=ims.crack.naturalHeight;const g2=c2.getContext('2d',{willReadFrequently:true});/* R851: 되읽는 캔버스는 CPU 캔버스로(GPU 동기화 멈춤) */g2.drawImage(ims.crack,0,0);const id=g2.getImageData(0,0,c2.width,c2.height),d=id.data;
   for(let i=0;i<d.length;i+=4){d[i]=26;d[i+1]=20;d[i+2]=16;d[i+3]=Math.min(255,d[i+3]*.85);}g2.putImageData(id,0,0);put({naturalWidth:c2.width,naturalHeight:c2.height,__c:c2},0);}
  put(ims.bones,1);put(ims.root,2);
  // 3: 거미줄(모서리형) 4: 거미줄(둥근형)
