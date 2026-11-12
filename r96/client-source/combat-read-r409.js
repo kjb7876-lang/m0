@@ -178,7 +178,10 @@ function process(commands){
  if(!Array.isArray(commands)||!commands.length)return;stats.frames++;bakeFrame.n=0;bakeFrame.ms=0;bakeFrame.at=performance.now();
  const enemyBoxes=[],bodies=[];
  for(const c of commands){
-  if(bodyOf(c,'enemy')&&aliveEnemy(c.owner)){stats.enemyBodies++;bodies.push(c);const q=bbox(c);if(prefs.outline){try{outline(c,'enemy');}catch(e){fail(e);}}
+  /* R953: 기억사수 '귀환 전우' 아군 보스(id 'r953:…')는 적 그리기 사슬로 그리지만 적이 아니다 → 핏빛 적 테 대신 영웅 테(차가운 빛), 적 가림 계산에서도 뺀다 */
+  const allyR953=/(^|:)r953:/.test(String(c.owner?.id||''));
+  if(allyR953){if(bodyOf(c,'enemy')&&prefs.outline){try{outline(c,'hero');}catch(e){fail(e);}}}
+  else if(bodyOf(c,'enemy')&&aliveEnemy(c.owner)){stats.enemyBodies++;bodies.push(c);const q=bbox(c);if(prefs.outline){try{outline(c,'enemy');}catch(e){fail(e);}}
    if(q){const w=q.x1-q.x0,h=q.y1-q.y0;/* 몸 중심부(여백 빼고) */const box={x0:q.x0+w*.2,x1:q.x1-w*.2,y0:q.y0+h*.12,y1:q.y1-h*.04};box.area=areaOf(box);if(box.area>16)enemyBoxes.push(box);}}
   else if(bodyOf(c,'hero')){stats.heroBodies++;if(prefs.outline){try{outline(c,'hero');}catch(e){fail(e);}}}}
  if(prefs.castBehind){try{castBehind(commands,bodies);}catch(e){fail(e);}}

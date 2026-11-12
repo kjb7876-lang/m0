@@ -3,35 +3,36 @@
  "note": "사용자 2026-11-06 지시: 책 영상은 오프닝으로 그대로, 실사풍 영상은 뿌리나무 보스(dist00 뿌리의 문지기) 문 상호작용 때 보스 입장 영상으로. 원래 두 업로드 원본은 저장소에 없어 R327 연결본에서 잘라 냈다(연결본은 지우지 않음).",
  "source": {
   "path": "assets/r309/intro/opening-hapil.mp4",
-  "sha256": "6854857dc1efa6ed0c9ab6de83a20dadf6a2f84b7d34a584bef6d17decbfd522",
-  "bytes": 5325543,
+  "sha256": "54973aa462568a347c884cff64ad16c896d957f3709e31e93dd6597e3179f742",
+  "bytes": 5897232,
   "originals": [
    "gemini_generated_video_34607f50.mp4 (책, sha256 32c4f7b3…)",
    "gemini_generated_video_c41bce7d.mp4 (실사, sha256 5b4dd8fd…)"
-  ]
+  ],
+  "note_r745": "R745: 두 영상 모두 표시 지운 연결본(아래 sha256)에서 다시 잘라 만듦"
  },
  "files": [
   {
    "path": "assets/r372/opening-book.mp4",
-   "bytes": 1957517,
-   "sha256": "db0aa84a3ae6b537151d5d8107a46b96da9e76a6113498b50edc8cc0e977a552",
-   "process": "연결본 0~9.45초(0.5초 크로스페이드 앞에서 자름), 끝 0.8초 소리 페이드, libx264 crf23 high@4.0, aac 96k, faststart",
+   "bytes": 2652810,
+   "sha256": "3a8a88fa04e22b8aa314ce342734710b823a0ef46d6be23a59ab5aba8d8907f9",
+   "process": "R745: 연결본 0~9.458초, 끝 0.8초 소리 페이드. 별 표시 생성 도구 표시를 흐림(delogo)이 아니라 역합성(표시 투명도 지도로 배경 = (관측−a·흰색)/(1−a), 윤곽 띠 라플라스 채움)으로 지움. hqdn3d 2, x264 veryslow. 소리: 30Hz 아래 자르기·약한 FFT 잡음 줄이기·EBU R128 2단계 −16 LUFS/트루 피크 −1.5 dBTP, 48 kHz 스테레오 AAC 128k",
    "use": "새 게임 오프닝(intro-video-r309.js), 제목 6.6초~",
    "applied": true
   },
   {
    "path": "assets/r372/root-gate.mp4",
-   "bytes": 2855170,
-   "sha256": "60241585b1c8e09d91b15d01f559e372eba40c1b08bc948675032051d137ffd4",
-   "process": "연결본 10.04초~끝(크로스페이드 뒤 실사만), 0.35초 페이드 인, libx264 crf26, aac 96k, faststart",
+   "bytes": 3804020,
+   "sha256": "86837c041789c603fbc042d8b0a4362c08b84ac832cec37b7fed429c9146732a",
+   "process": "R745: 연결본 10.04초~끝, 0.35초 페이드 인. 별 표시 생성 도구 표시를 흐림(delogo)이 아니라 역합성(표시 투명도 지도로 배경 = (관측−a·흰색)/(1−a), 윤곽 띠 라플라스 채움)으로 지움. hqdn3d 2, x264 veryslow. 소리: 30Hz 아래 자르기·약한 FFT 잡음 줄이기·EBU R128 2단계 −16 LUFS/트루 피크 −1.5 dBTP, 48 kHz 스테레오 AAC 128k",
    "use": "dist00 보스 문 상호작용 때 보스 입장 영상(root-gate-video-r372.js)",
    "applied": true
   },
   {
    "path": "assets/r372/root-gate-poster.jpg",
-   "bytes": 93767,
-   "sha256": "6f4052820b34faa8af915f8ce6a520679dd62d526f3d428da53c26f064564075",
-   "process": "root-gate.mp4 0.6초 프레임",
+   "bytes": 93669,
+   "sha256": "b5afde09c790b14d1cc187dba3a8ea75872545ba09e904343d5af7ec98232410",
+   "process": "R745: 새 영상 0.6초 프레임",
    "use": "영상 첫 프레임 전 포스터",
    "applied": true
   }

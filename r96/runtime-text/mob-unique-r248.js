@@ -24,7 +24,7 @@ const CW=256,CH=320,PX=128,PY=300,FPS=8;
 function baseName(n){return String(n||'').replace(/^중간보스\s*·\s*/,'').replace(/\s*·\s*짙은 형상$/,'').replace(/\s*(후속 증원|증원|추격대)$/,'').replace(/\s+\d+$/,'').trim();}
 const cache=new WeakMap();
 const dream=e=>!!(e&&(e.samongR103||(typeof layer!=='undefined'&&layer==='DREAM')));
-function sheetOf(e){if(!e)return null;let v=cache.get(e);if(v&&v.n===e.name&&v.k===e.r248Key)return v.s;const b=baseName(e.name);
+function sheetOf(e){if(!e)return null;if(e.boss&&e.nativeId&&window.__STORYWORLD_BOSS_KEYPOSES_R104__?.framesFor?.(e.nativeId))return null;/* R860: R104 열쇠 자세가 있는 본보스는 이름이 같은 몹 시트로 가로채지 않는다(교만의 사이보그 교주 ← m062) */let v=cache.get(e);if(v&&v.n===e.name&&v.k===e.r248Key)return v.s;const b=baseName(e.name);
  const id=(e.r248Key&&DATA.byName[e.r248Key])||(dream(e)&&DATA.byName['사몽:'+b])||DATA.byName[b]||null,s=id?DATA.sheets[id]||null:null;cache.set(e,{n:e.name,k:e.r248Key,s:s?{id,...s,path:s.path||DATA.dir+s.file}:null});return cache.get(e).s;}
 // 사몽에 본편 몹 이름이 그대로 나온 몹(기증 몹 이름이 남은 것): 그 구역(없으면 그 장)의 사몽 몹 이름으로 바꾸고, 그림은 사몽 전용 새 시트로.
 const STORY=new Set(DATA.storyNames||[]);

@@ -16,7 +16,7 @@ const IDX=JSON.parse(fs.readFileSync(path.join(R,'runtime-text/assets/r368/index
 ok([F,'assets/r368/index.json','assets/r368/betrayal.mp4','assets/r368/betrayal-poster.jpg'].every(p=>man.includes(p)),'runtime-manifest 에 오버레이·영상·포스터·index');
 for(const f of IDX.files){const b=fs.readFileSync(path.join(R,'runtime-text',f.path));ok(b.length===f.bytes&&crypto.createHash('sha256').update(b).digest('hex')===f.sha256,f.path+' 크기·sha256 일치');ok(f.applied===true&&f.use,'자산표 용도·적용 표기');}
 const mp4=fs.readFileSync(path.join(R,'runtime-text/assets/r368/betrayal.mp4'));
-ok(mp4.slice(4,8).toString()==='ftyp'&&mp4.length<=3000000,'영상 mp4(ftyp)·3MB 이하('+mp4.length+')');
+ok(mp4.slice(4,8).toString()==='ftyp'&&mp4.length<=4500000,'영상 mp4(ftyp)·4.5MB 이하(R745 veryslow 고화질 재인코딩, 이전 3MB)('+mp4.length+')');
 ok(mp4.indexOf('moov')<mp4.indexOf('mdat'),'faststart(moov 가 mdat 앞)');
 ok(!fs.existsSync(path.join(R,'runtime-text/assets/r368',IDX.source.name)),'사용자 원본 영상은 저장소에 넣지 않음');
 const code=strip(src);

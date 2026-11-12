@@ -11,7 +11,7 @@ const strip=s=>s.replace(/\/\*[\s\S]*?\*\//g,'').replace(/\/\/.*$/gm,'');
 // ---- 정적(빌드 연결 다섯 곳) ----
 ok(fs.existsSync(path.join(R,'runtime-text',F))&&src===fs.readFileSync(path.join(R,'runtime-text',F),'utf8'),'runtime-text 사본 일치');
 const html=fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8');
-ok(html.split('"./'+F+'"').length===2&&/<script src="\.\/enemy-attack-tempo-r601\.js"><\/script>\s*<script src="\.\/combat-r118\.js">/.test(html),'index.html 스크립트 태그 한 번(combat-r118 바로 앞 = drawEnemy 덧씌우기 중 가장 바깥)');
+ok(html.split('"./'+F+'"').length===2&&/<script src="\.\/enemy-attack-tempo-r601\.js"><\/script>(?:<script src="\.\/hit-feel-r750\.js"><\/script>)?\s*(?:<script src="\.\/hero-motion-r895\.js"><\/script>)?\s*<script src="\.\/combat-r118\.js">/.test(html),'index.html 스크립트 태그 한 번(combat-r118 바로 앞 = drawEnemy 덧씌우기 중 가장 바깥)');
 ok(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').includes("'"+F+"'"),'verify-r96-public.py 기대 목록');
 ok(/node r96\/qa\/r601\/attack-tempo-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8')),'pages.yml 검사 단계');
 ok(JSON.stringify(JSON.parse(fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8'))).includes(F),'runtime-manifest 에 들어 있음');
@@ -84,5 +84,16 @@ ok(mono,'보이는 시간은 줄지 않음(뒤로 감기 없음)');ok(bound,'모
 // 렉: 2만 번 그리기 덧씌우기 비용
 const t0=process.hrtime.bigint();const ee=mk(.3);for(let i=0;i<20000;i++){ee.attack.elapsed=(i%100)/100;S.drawEnemy(ee);}const ms=Number(process.hrtime.bigint()-t0)/1e6;
 ok(ms<400,'2만 번 그리기 '+ms.toFixed(1)+'ms(렉 없음)');
+
+// ---- R778 보스 연타(사용자 11-12 07:59Z "보스들은 공격모션 빠르게 여러번해서 생동감있게 자연스럽고") ----
+{ok(typeof api.flurry==='function','R778 flurry 내보냄');
+ for(const sh of [{windup:.6,active:.2,recovery:.7},{windup:1.1,active:.25,recovery:.9},{windup:.45,active:.15,recovery:.45}]){const {windup:W,active:A,recovery:Rr}=sh,end=W+A+Rr;
+  let strikes=0,inS=false,bound=true,last=0;for(let t=0;t<end;t+=.004){const v=api.flurry(t,W,A,Rr);if((v>=W)!==(t>=W))bound=false;if(v>=end)bound=false;const s=v>=W&&v<W+A;if(s&&!inS)strikes++;inS=s;last=v;}
+  ok(strikes>=2&&strikes<=4,'R778 보스 공격 한 번에 타격 자세 '+strikes+'번(빠르게 여러 번) W='+W);ok(bound,'R778 준비/타격 경계 = 실제 판정 경계, 끝을 넘지 않음 W='+W);
+  ok(api.flurry(W,W,A,Rr)>=W&&api.flurry(W,W,A,Rr)<W+A,'R778 첫 타격은 실제 판정 순간 W='+W);ok(last>W+A+Rr*.5,'R778 마지막은 회수 자세로 끝남 W='+W);}
+ // 보스만: 일반 몹은 예전처럼 2배속 한 번
+ const boss=mk(.9);boss.boss=true;const mob=mk(.9);const seenB=draw(boss).body0,seenM=draw(mob).body0;
+ ok(seenM>1.24&&seenM<1.25,'R778 일반 몹은 예전 2배속 '+seenM);ok(near(seenB,api.flurry(.9,.5,.15,.6)),'R778 보스는 연타 시간 '+seenB);
+ ok(boss.attack.elapsed===.9&&mob.attack.elapsed===.9,'R778 그린 뒤 실제 시간으로 돌아옴');}
 const st=api.inspect();ok(st.stats.remapped>0&&st.browser===false,'inspect 통계');
 console.log('R601 attack tempo CPU check: '+n+' passed');

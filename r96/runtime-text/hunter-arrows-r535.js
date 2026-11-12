@@ -22,7 +22,7 @@
 if(window.__STORYWORLD_HUNTER_ARROWS_R535__)return;
 const REV='R535',KEY='storyworld.r535.hunter',HERO='hunter';
 const TUNE=Object.freeze({
- storm:Object.freeze({cadence:.7,turn:9,life:1.3,seek:9}),
+ storm:Object.freeze({cadence:.7,turn:0,life:1.3,seek:9}),/* R765: turn 0 = 표적을 따라 휘지 않음(자동적중 없음, 활이 향한 줄로만) */
  split:Object.freeze({count:2,perCast:6,mult:.15,pierce:1,speed:15,life:.42,reach:5,burnTotal:.3,burnTime:2.5,burnEvery:.5,maxBurning:12}),
  lance:Object.freeze({direct:.2,blast:.8,radius:2.2,petal:.45,petalOld:.9,speed:15,range:8,width:.34}),
  chain:Object.freeze({qFinal:2,petalBurn:.5,petalBeat:.08}),
@@ -106,7 +106,7 @@ function flushSplits(){const S=TUNE.split;while(splitQ.length){const s=splitQ.sh
   if(p){p.hit.add(s.from);used++;stats.shards++;if(i===0){if(pops.length>=6)pops.shift();pops.push({x:s.x,y:s.y,t0:T(),ang:a});}}}
  castShards.set(s.cast,used);if(castShards.size>32)castShards.delete(castShards.keys().next().value);}}
 
-function steer(dt){const S=TUNE.storm,L=live();if(!L.length||!(dt>0))return;for(const p of projectiles){if(!p||p.dead||p.r535!=='storm')continue;
+function steer(dt){const S=TUNE.storm;if(!(S.turn>0))return;const L=live();if(!L.length||!(dt>0))return;for(const p of projectiles){if(!p||p.dead||p.r535!=='storm')continue;
  let tg=p.r535T!=null?L.find(e=>e.id===p.r535T):null;
  if(!tg){let best=null,d=rg(S.seek);for(const e of L){const q=Math.hypot(e.x-p.x,e.y-p.y);if(q<d&&!(p.hit&&p.hit.has(e.id))){d=q;best=e;}}tg=best;p.r535T=tg?tg.id:null;}
  if(!tg)continue;const sp=Math.hypot(p.vx,p.vy),cur=Math.atan2(p.vy,p.vx),want=Math.atan2(tg.y-p.y,tg.x-p.x),d=Math.atan2(Math.sin(want-cur),Math.cos(want-cur)),m=S.turn*dt,na=cur+Math.max(-m,Math.min(m,d));
@@ -143,7 +143,8 @@ function post0(){const t=T(),dt=Math.max(0,Math.min(.1,t-lastT));lastT=t;const r
  for(let i=fxList.length-1;i>=0;i--)if(t-fxList[i].t0>fxList[i].life||t<fxList[i].t0)fxList.splice(i,1);
  stats.maxLive=Math.max(stats.maxLive,mine());}
 
-if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{post();}catch(err){fail(err);}sentinel(fxList.length>0||burns.size>0||gates.length>0||volleys.length>0||pops.length>0);return r;};}
+const asHeroR720=(id,fn)=>{const D=window.__STORYWORLD_HERO_DEFENSE_R720__;return D&&typeof D.asHero==='function'?D.asHero(id,fn):fn();};/* R720-4: 다음 틱에 이어지는 기술을 그 영웅 몸(생존 배치 영웅이면 그 몸)으로 돌린다 */
+if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{asHeroR720('hunter',post);}catch(err){fail(err);}sentinel(fxList.length>0||burns.size>0||gates.length>0||volleys.length>0||pops.length>0);return r;};}
 
 // ---- 그리기 (임시 코드 연출 — Dots 시트 대기) ------------------------------------------------------------
 const CRIM='rgb(160,20,40)',ROSE='rgb(250,150,150)',GOLD='rgb(255,214,140)',EMBER='rgb(255,122,58)';

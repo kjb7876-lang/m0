@@ -18,12 +18,12 @@
 //  ⑨ 이름(사용자 11:50 "실검무 츠바메가에시 네이밍을 바람베기로 수정"): 패시브 threadTsubameR64 '실검무 · 츠바메가에시' → '실검무 · 바람베기',
 //     패시브 창 안내 문장의 '츠바메가에시'도 '바람베기'로(엔진 원문은 그대로 두고 덧씌움). 저장·효과는 id 로 묶여 있어 그대로.
 //  ⑩ 적 공격 그림 방향(사용자 13:12·13:20): 전수조사로 영웅 반대쪽을 보고 그려진 공격 그림만 골라, 공격 중일 때 대상 쪽을 보게 좌우만 바로잡는다. 아래 설명.
-//  끄기: localStorage['storyworld.r425.flow']='{"size":false}' / '{"punch":false}' / '{"laurenTip":false}' / '{"spiderX":false}' / '{"gaze":false}' / '{"gazeSlot":false}' / '{"plant":false}' / '{"hunter":false}' / '{"bossBar":false}' / '{"mobBar":false}' / '{"samongCross":false}' / '{"atkFace":false}', 예고 표시 켜기 '{"tele":true}'
+//  끄기: localStorage['storyworld.r425.flow']='{"size":false}' / '{"punch":false}' / '{"laurenTip":false}' / '{"spiderX":false}' / '{"gaze":false}' / '{"gazeSlot":false}' / '{"plant":false}' / '{"hunter":false}' / '{"bossBar":false}' / '{"mobBar":false}' / '{"feetBars":false}' / '{"samongCross":false}' / '{"atkFace":false}', 예고 표시 켜기 '{"tele":true}'
 (()=>{'use strict';
 if(window.__STORYWORLD_COMBAT_FLOW_R425__)return;
 const REV='R425-flow-8',KEY='storyworld.r425.flow';
 const BANDS={normal:[1.22,1.55],leader:[1.45,1.75],mid:[1.60,1.80],boss:[1.90,2.30]},SMIN=.55,SMAX=2.2;
-let prefs={face:true,size:true,punch:true,laurenTip:true,spiderX:true,gaze:true,gazeSlot:true,plant:true,hunter:true,bossBar:true,mobBar:true,tele:false,samongCross:true,atkFace:true,clean:true};
+let prefs={face:true,size:true,punch:true,laurenTip:true,spiderX:true,gaze:true,gazeSlot:true,plant:true,hunter:true,bossBar:true,mobBar:true,feetBars:true,tele:false,samongCross:true,atkFace:true,clean:true};
 const solo=()=>{let m=null;try{m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();}catch(_){}return !m||m==='off';};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={scaled:0,kept:0,refixed:0,sheets:0,punches:0,tips:0,skipped:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0;
@@ -73,6 +73,7 @@ function bboxOf(c){let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9,n=0;const add=p=>{if(Array.
 function isBar(c,e,fx,fy,SX,SY){if(c.kind!=='fill'||c.owner?.kind!=='enemy'||!Array.isArray(c.paths)||c.paths.length!==1||typeof c.style?.fillStyle!=='string')return false;const P=c.paths[0]?.points;if(!Array.isArray(P)||P.length<4||P.length>5)return false;
  const b=bboxOf(c);if(!b)return false;const S=Math.max(1,SY),X=Math.max(1,SX),lift=Math.max(0,+e.visualLiftPx||0);return b[3]-b[1]<=6.5*S&&b[0]>=fx-75*X&&b[2]<=fx+75*X&&b[1]>=fy-(lift+12)*S&&b[1]<=fy+26*S;}
 function unFont(c,X,Y){if(Array.isArray(c.matrix)&&(Math.abs(X-1)>.001||Math.abs(Y-1)>.001)){const m=c.matrix.slice();m[0]/=X;m[1]/=X;m[2]/=Y;m[3]/=Y;c.matrix=m;}}
+function feetStyle(c){const fs=c.style?.fillStyle,m=fs==='#302926'?'#241f1c':fs==='#795a50'?'#b4503f':fs==='rgba(10,10,9,.88)'?'rgba(8,7,7,.94)':null;if(!m)return;const bb=bboxOf(c);if(!bb)return;const mid=(bb[1]+bb[3])/2;mapCmd(c,p=>[p[0],p[1]>mid?p[1]+2:p[1]]);c.style={...c.style,fillStyle:m};stats.feetBars=(stats.feetBars||0)+1;}
 function post(e,C,st,fx,fy,SXe,SYe,SXs,SYs,teleOff,headBar,s){
  const scaledE=Math.abs(SXe-1)>.001||Math.abs(SYe-1)>.001,scaledS=Math.abs(SXs-1)>.001||Math.abs(SYs-1)>.001;if(!scaledE&&!scaledS&&!teleOff&&!headBar)return;
  const bars=[];let w=st;
@@ -84,14 +85,17 @@ function post(e,C,st,fx,fy,SXe,SYe,SXs,SYs,teleOff,headBar,s){
   if(keep)C[w++]=c;}
  C.length=w;
  if(scaledE)for(const c of bars)mapCmd(c,p=>[fx+(p[0]-fx)/SXe,fy+(p[1]-fy)/SYe]);
+ /* R786(사용자 2026-11-11 "그림 안 가리면서 잘 보이는 체력바"): R90 발치 막대(테두리 4px·바탕·채움 2px — 어두운 한 줄)를 어두운 테두리 6px + 바탕·채움 4px 로, 위쪽은 그대로 두고 아래로만 늘리며 채움을 밝은 붉은빛으로. 머리 위 줄({"feetBars":false})에는 쓰지 않는다. */
+ if(prefs.feetBars&&!headBar)for(const c of bars)feetStyle(c);
  if(headBar&&bars.length){const b=bodyCmd(C,st);if(!b)return;const inf=sheetInfo(b.image,b.sourceRect),P=b.points,top=Math.min(P[0][1],P[1][1]),bot=Math.max(P[2][1],P[3][1]),head=top+(bot-top)*(inf?.top??.06);
   let y0=1e9,y1=-1e9;for(const c of bars){const bb=bboxOf(c);if(bb){y0=Math.min(y0,bb[1]);y1=Math.max(y1,bb[3]);}}if(!(y1>=y0))return;
   const want=Math.max(56,head-8-(y1-y0)),now=T();if(s.barOff==null||now-(s.barAt??-9)>1)s.barOff=y0-fy;s.barOff+=(want-fy-s.barOff)*Math.min(1,Math.max(0,now-(s.barAt??now))*9||.25);s.barAt=now;
   const dy=fy+s.barOff-y0;for(const c of bars)mapCmd(c,p=>[p[0],p[1]+dy]);const ny=fy+s.barOff-5;
   for(let i=st;i<C.length;i++){const c=C[i];if(c?.kind==='text'&&c.text===e.name&&Array.isArray(c.point))c.point=[c.point[0],ny];}stats.headBars=(stats.headBars||0)+1;}}
 // R596(사용자 2026-11-10 "아래 이런 예고선이 아직도 나오는 문제"): 일반 몹 체력 줄(R90 '절제된 체력 표시' — 발밑에 2px 검붉은 가로 선)이 바닥 예고선처럼 읽혔다
+// R786(사용자 2026-11-11 "모든 것들 기본 체력바 발아래쪽에 둬 … 영웅처럼"): 기본은 모두 발 아래(feetBars:true) — 아래 머리 위 줄은 '{"feetBars":false}' 로만 다시 켠다.
 //  → 광폭화 보스에만 쓰던 머리 위 체력 줄을 일반 몹·중간 보스에도 쓴다(큰 보스의 평소 줄·탑·인형·맘몬은 그대로). 끄기 '{"mobBar":false}'.
-function wantHeadBar(e,ex){if(ex||!(e?.hp>0))return false;if(e.boss)return !!prefs.bossBar&&enr(e);return !!prefs.mobBar||!!prefs.bossBar&&enr(e);}
+function wantHeadBar(e,ex){if(prefs.feetBars||ex||!(e?.hp>0))return false;if(e.boss)return !!prefs.bossBar&&enr(e);return !!prefs.mobBar||!!prefs.bossBar&&enr(e);}
 if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){
  const rec=typeof ctx==='object'?ctx:null,cmds=Array.isArray(rec?.commands)?rec.commands:null;
  if(!e||!cmds||typeof project!=='function'){stats.skipped++;return base.apply(this,[e,...a]);}
@@ -252,7 +256,7 @@ function hunter(rec,st){huntIndex();if(!HUNT)return;const a=+player.attackAnim||
  for(let i=rec.commands.length-1;i>=st;i--){const c=rec.commands[i];if(c!==best&&c.kind==='image'&&c.owner?.kind==='hero'&&c.image===before)rec.commands.splice(i,1);}
  stats.hunterFrames=(stats.hunterFrames||0)+1;}
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
- try{if(prefs.hunter&&st>=0&&player?.hero==='hunter'&&player.hp>0&&solo())hunter(rec,st);else huntSwing.prev=+player?.attackAnim||0;}catch(e){fail(e);}return r;};}
+ try{if(prefs.hunter&&st>=0&&player?.hero==='hunter'&&player.hp>0&&solo())hunter(rec,st);else if(window.__STORYWORLD_HERO_DEFENSE_R720__?.has?.('hunter')!==true)huntSwing.prev=+player?.attackAnim||0;/* R720: 헌터가 다른 몸(배치 영웅 등)에 있으면 다른 영웅을 그릴 때 헌터 휘두르기 기록을 덮지 않는다 */}catch(e){fail(e);}return r;};}
 // ---- ⑧ 사몽 레이저 십자가 -------------------------------------------------------------------------------------
 //  · 판정은 엔진 그대로: R75 사몽 폭풍 선(0.12초마다 2줄)·R114 추가 선이 몹에 닿는 순간(선 나이 0.18초, R160 이 영웅 색 레이저를 밝히는 순간) hitEnemy 를 부른다.
 //    그 부름(kind hero-samong-storm-r75 / -r114)을 가장 바깥에서 받아 그 몹 몸 가운데에 영웅 색(R102 팔레트 — R160 레이저와 같은 색) 정십자가를 세운다.
