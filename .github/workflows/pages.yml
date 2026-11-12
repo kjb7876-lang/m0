@@ -438,6 +438,10 @@ jobs:
         run: node r96/qa/r787/r787-cpu-check.cjs
       - name: R788 per-boss hit/death/attack sounds (ElevenLabs) CPU check
         run: node r96/qa/r788/r788-cpu-check.cjs
+      - name: R789 per-midboss hit/death/attack sounds (ElevenLabs) CPU check
+        run: node r96/qa/r789/r789-cpu-check.cjs
+      - name: R964 boss attack sound also fires on story pattern attacks (no attack id, no bossVolley) CPU check
+        run: node r96/qa/r964/r964-cpu-check.cjs
       - name: R385 mob moves (review list v18 move/rename) CPU check
         run: node r96/qa/r385/r385-cpu-check.cjs
       - name: R390 cinema full narration + midboss hold + enemies keep chasing CPU check
