@@ -61,16 +61,22 @@ const on=(E,id,tag)=>E.hits.filter(h=>h.id===id&&(!tag||h.s?.r947===tag));
  ok(C.lattice.chance>0&&C.lattice.chance<=.06,'격자 레이저는 드묾(6% 이하)');ok(C.needle.chance>=.15&&C.needle.chance<=.3,'기본 피 탄은 흔함(15~30%)');
  ok(C.swords.count>=5,'십자검 여러 자루(5 이상)');}
 
-// ---- ② 기본 피 탄: 겨눈 쪽으로 관통 ----
-{const E=engine({enemies:[{id:'near',x:21,y:20},{id:'mid',x:24,y:20},{id:'far',x:27,y:20},{id:'out',x:29,y:20},{id:'off',x:23,y:23}]});
+// ---- ② 혈침: 적혈 연쇄(사용자 13:38Z "체인라이트닝 느낌마냥 연쇄되게 대신 적혈로") ----
+{const E=engine({enemies:[{id:'near',x:21,y:20},{id:'c1',x:23,y:21},{id:'c2',x:25,y:22.2},{id:'c3',x:27.5,y:22.6},{id:'iso',x:36,y:36},{id:'side',x:19,y:24.5}]});
  E.api.force('needle');E.ctx.basicAttack();ok(on(E,'near').length===1,'기본 공격 자체는 그대로 한 번');
- E.run(1);const I=E.api.inspect();ok(I.stats.needles===1,'피 탄 한 번 발동');
- ok(on(E,'near','needle').length===1&&on(E,'mid','needle').length===1&&on(E,'far','needle').length===1,'겨눈 줄 위 적 셋을 모두 관통(각 한 번)');
- ok(on(E,'out','needle').length===0,'사거리 밖은 안 맞음');ok(on(E,'off','needle').length===0,'줄 밖 적은 안 맞음');
- const h=on(E,'mid','needle')[0];ok(Math.abs(h.v-100*E.api.config.needle.mult)<1e-9,'피 탄 피해 = 공격력 × '+E.api.config.needle.mult);
- ok(h.s.sourceHero==='slayer'&&h.s.friendly===true&&h.s.owner==='hero','엔진 hitEnemy 로(영웅 피해 표식)');}
-{const E=engine({enemies:[{id:'a',x:13,y:20},{id:'behind',x:16.5,y:20}],px:12,py:20});
- E.api.force('needle');E.ctx.basicAttack();E.run(1);ok(on(E,'behind','needle').length===0&&E.api.inspect().stats.wallStops>=1,'벽에서 멈춤(벽 너머 적 안 맞음)');}
+ E.run(1.2);const I=E.api.inspect(),C=E.api.config.needle;ok(I.stats.needles===1,'혈침 한 번 발동');
+ const seq=E.hits.filter(h=>h.s?.r947==='needle');
+ ok(seq.length>=4&&seq.slice(0,4).map(h=>h.id).join()==='near,c1,c2,c3','벤 적에서 시작해 가까운 다음 적으로 차례로 연쇄(near→c1→c2→c3)');
+ ok(new Set(seq.map(h=>h.id)).size===seq.length,'같은 적은 한 번만');
+ ok(seq.every((h,i)=>i===0||h.t>seq[i-1].t),'한 번에 다 맞지 않고 튀어 가며 차례로(시간차)');
+ ok(seq.every((h,i)=>Math.abs(h.v-100*C.mult*Math.pow(C.decay,i))<1e-9),'튈 때마다 피해 줄어듦(×'+C.mult+' 에서 ×'+C.decay+'씩)');
+ ok(on(E,'iso').length===0,'튀는 거리('+C.jump+'칸) 밖 외딴 적은 안 맞음');
+ ok(seq.length<=C.jumps,'최대 '+C.jumps+'명');
+ ok(seq[0].s.sourceHero==='slayer'&&seq[0].s.friendly===true&&seq[0].s.owner==='hero','엔진 hitEnemy 로(영웅 피해 표식)');}
+{const foes=[];for(let i=0;i<12;i++)foes.push({id:'q'+i,x:21+i*1.2,y:20});const E=engine({enemies:foes});E.api.force('needle');E.ctx.basicAttack();E.run(2);
+ ok(E.hits.filter(h=>h.s?.r947==='needle').length===E.api.config.needle.jumps,'줄 선 적 12명이어도 최대 수에서 멈춤');}
+{const E=engine({enemies:[{id:'a',x:13,y:20},{id:'behind',x:15.9,y:20}],px:12,py:20});
+ E.api.force('needle');E.ctx.basicAttack();E.run(1);ok(on(E,'a','needle').length===1&&on(E,'behind','needle').length===0&&E.api.inspect().stats.wallStops>=1,'벽 너머로는 튀지 않음');}
 {const E=engine({enemies:[{id:'a',x:21,y:20}]});E.g.player.attackCD=.3;E.api.force('needle');E.ctx.basicAttack();E.run(.05);ok(E.api.inspect().stats.needles===0,'실패한 기본 공격은 발동하지 않음');
  E.run(.4);E.ctx.basicAttack();E.run(.5);ok(E.api.inspect().stats.needles===1,'강제 예약은 다음 성공한 공격에서 씀');}
 {const E=engine({enemies:[{id:'a',x:21,y:20}],hero:'hwando'});E.api.force('needle');E.ctx.basicAttack();E.run(1);ok(E.api.inspect().stats.needles===0,'다른 영웅은 발동 없음');}
@@ -108,6 +114,21 @@ const on=(E,id,tag)=>E.hits.filter(h=>h.id===id&&(!tag||h.s?.r947===tag));
  ok(on(E,'n','lattice').every(h=>Math.abs(h.v-100*C.mult)<1e-9),'줄 하나 피해 = 공격력 × '+C.mult);
  const waves=new Set(on(E,'n','lattice').map(h=>h.s.attackId9));ok(waves.size===on(E,'n','lattice').length,'한 번의 난사(줄 묶음)에 같은 적은 한 번만');
  ok(E.api.inspect().lattice===null,'끝나면 정리');ok(E.g.player.x===20&&E.g.player.y===20,'영웅은 옮기지 않음');}
+// 혈격자 교차점 적혈 십자가(사용자 13:39Z "피레이져 교차지점에 적혈피십자가 생기면서 적에게 피폭발피해")
+{const foes=[{id:'n',x:21.2,y:20.4},{id:'s',x:19.3,y:22.6},{id:'w',x:17.1,y:19.2},{id:'far',x:26.5,y:20}];
+ const E=engine({enemies:foes,px:20,py:20});E.api.force('lattice');E.ctx.basicAttack();E.run(.9);const C=E.api.config.lattice,sp=C.spacing/2;
+ const X=E.api.inspect().crosses;ok(X.length>=3,'교차점에 적혈 십자가가 섬('+X.length+')');
+ ok(X.every(c=>Math.abs(c.x/sp-Math.round(c.x/sp))<1e-6&&Math.abs(c.y/sp-Math.round(c.y/sp))<1e-6),'십자가 자리는 가로줄·세로줄 교차점');
+ ok(X.every(c=>Math.hypot(c.x-20,c.y-20)<=C.radius),'십자가는 격자 반경 안');
+ ok(new Set(X.map(c=>c.x+','+c.y)).size===X.length,'한 교차점에 하나만');
+ E.run(2.5);const ch=E.hits.filter(h=>h.s?.r947==='latticeCross');
+ ok(['n','s','w'].every(id=>ch.some(h=>h.id===id)),'교차점 십자가 피 폭발이 곁의 적에게');
+ ok(ch.every(h=>Math.abs(h.v-100*C.crossMult)<1e-9),'피 폭발 피해 = 공격력 × '+C.crossMult);
+ ok(!ch.some(h=>h.id==='far'),'격자 밖 적은 폭발 피해 없음');
+ const first=E.hits.find(h=>h.s?.kind==='basic').t;ok(Math.min(...ch.map(h=>h.t))-first>=C.lead+C.crossDelay*.9,'십자가가 솟은 뒤에 터짐');}
+{const E=engine({enemies:[{id:'a',x:21.2,y:20.4},{id:'b',x:19.3,y:22.6}]});E.api.force('lattice');E.ctx.basicAttack();E.run(.6);E.sheets.length=0;E.frame();
+ const cs=E.sheets.filter(s=>/assets\/r585\/slayer-r-cross\.webp/.test(s.src||''));ok(cs.length>=1,'교차점 십자가는 Dots 적혈 십자가 시트(R585) 재사용');
+ ok(cs.every(s=>Math.abs(s.rot)<1e-9&&s.sy>0),'교차점 십자가도 회전·상하 반전 없이 똑바로');}
 {const E=engine({enemies:[{id:'a',x:13,y:20},{id:'behind',x:16.2,y:20}],px:12,py:20});E.api.force('lattice');E.ctx.basicAttack();E.run(3);
  ok(on(E,'a','lattice').length>=1&&on(E,'behind','lattice').length===0,'벽 너머 적은 격자에 안 맞음');}
 {const E=engine({enemies:[{id:'a',x:21,y:20}]});E.api.force('lattice');E.ctx.basicAttack();E.run(.2);E.g.room={id:'room2',enemies:[{id:'z',x:21,y:20,radius:.3,hp:1e5}]};E.run(3);
