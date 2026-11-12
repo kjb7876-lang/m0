@@ -66,8 +66,8 @@ function drawFx(){const S=SPR(),hands=img(ART.hands),h=H();
 function drawCircle(e){const im=img(ART.circle),q=project(e.x,e.y),dead=e.hp<=0,age=dead?T()-(e.deadAt||T()):0;if(dead&&age>1)return;const h=H(),k=h*2.3/CC.w;
  ctx.save();try{ctx.globalAlpha*=dead?Math.max(0,1-age):1;const S=SPR();if(S)S.draw('glow',BLOOD,q.x,q.y-h*.15,h*2.2,h*.9,{alpha:.35+.2*Math.sin(T()*3)});
   if(im){const fr=Math.floor(T()*6+e.r251Circle.seed)%CC.n;ctx.filter=e.flash>0?'brightness(1.7)':'saturate(.95) contrast(1.05)';ctx.save();ctx.translate(q.x,q.y);ctx.scale(k,k);ctx.drawImage(im,fr*CC.w,0,CC.w,CC.h,-CC.px,-CC.py,CC.w,CC.h);ctx.restore();ctx.filter='none';}
-  const W=h*1.1,y=q.y-h*1.25,r=Math.max(0,Math.min(1,e.hp/Math.max(1,e.maxHp)));ctx.fillStyle='rgba(4,4,6,.85)';ctx.fillRect(q.x-W/2-1,y-1,W+2,6);ctx.fillStyle='#b8323a';ctx.fillRect(q.x-W/2,y,W*r,4);
-  ctx.font='12px sans-serif';ctx.textAlign='center';ctx.fillStyle='rgba(240,200,190,.95)';ctx.fillText(e.name,q.x,y-5);}finally{ctx.restore();}}
+  const W=h*1.1,y=q.y+Math.max(8,h*.12),r=Math.max(0,Math.min(1,e.hp/Math.max(1,e.maxHp)));ctx.fillStyle='rgba(4,4,6,.85)';ctx.fillRect(q.x-W/2-1,y-1,W+2,6);ctx.fillStyle='#b8323a';ctx.fillRect(q.x-W/2,y,W*r,4);
+  ctx.font='12px sans-serif';ctx.textAlign='center';ctx.fillStyle='rgba(240,200,190,.95)';ctx.fillText(e.name,q.x,y+17);}finally{ctx.restore();}}
 if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){if(e&&e.r251Circle){try{const f=()=>drawCircle(e);if(typeof ctx.scope==='function')ctx.scope({id:'r251:circle:'+e.id,kind:'enemy',x:e.x,y:e.y},f);else f();}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};}
 if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e&&e.type==='r251-fx'){try{drawFx();}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};}
 // 엔진 위험지대 그림은 이 손 공격을 그리지 않는다(위에서 직접 그림)

@@ -43809,8 +43809,8 @@
     },
     {
       "path": "combat-flow-r425.js",
-      "bytes": 62674,
-      "sha256": "0e31048d05c0ddf99129ccc525a998b6f3a2b13af0bb1a957f6348f9527ac003"
+      "bytes": 63697,
+      "sha256": "d2b7e09472747bb3397b32e65a8a8c830725ece51becca5bbe7bd3a41e3bf9d1"
     },
     {
       "path": "combat-r114.js",
@@ -43834,8 +43834,8 @@
     },
     {
       "path": "combat-r170.js",
-      "bytes": 27224,
-      "sha256": "3d442e548741a7ac3a80fcf08071c604cf53611a3754fe298e32501be9a456f7"
+      "bytes": 27249,
+      "sha256": "8eecab50a41268968ca3b5b4e4fdcae18912157fed6cedda71d9e9d3ad9596db"
     },
     {
       "path": "combat-r98.js",
@@ -43851,6 +43851,11 @@
       "path": "crates-r108.js",
       "bytes": 6746,
       "sha256": "1d8820f1f4884a00ff32ededbdd6d2cbcdffe831e18d9062cafb688acdcd868f"
+    },
+    {
+      "path": "cursor-r780.js",
+      "bytes": 22703,
+      "sha256": "ac61cc7865705c5a9b63caa248cd8426751cb36b321fdbab1888b00e3b7aeb47"
     },
     {
       "path": "dance-free-r706.js",
@@ -44334,8 +44339,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6575260,
-      "sha256": "fd627f02ba581c91de1db7e38007952eee6530db8f97b38777fa2cb70ba62904"
+      "bytes": 6575347,
+      "sha256": "98d31f138ea9d04c8be139c4f861eae456086b72143b8dec38821e19e5942fb4"
     },
     {
       "path": "intro-r140.js",
@@ -44843,9 +44848,14 @@
       "sha256": "39af4681d829411f0f00624d608ebe9e489ef7765b3e40318d2563a5751dfb84"
     },
     {
+      "path": "qa-snapshot-r940.js",
+      "bytes": 7504,
+      "sha256": "209462023335f445f4fb12e39484afea9bedf6a604c5bcb7327bcd9646387fde"
+    },
+    {
       "path": "quest-r840.js",
-      "bytes": 33443,
-      "sha256": "359b54d3d32c57d15cef5f5bb6b16fcf2b623f0c8edf53b8df5ec3062f28e0ac"
+      "bytes": 53131,
+      "sha256": "851cd3ce46351f9d06dc23bc1b7170908dfaa4e6fbdcbe6a266f368e62aad012"
     },
     {
       "path": "rally-waves-r905.js",
@@ -44924,8 +44934,8 @@
     },
     {
       "path": "samong-play-r162.js",
-      "bytes": 18972,
-      "sha256": "81f4aacd0cc46a20748cb59eedb781af38261d726f521ae32c85345937332550"
+      "bytes": 18983,
+      "sha256": "78913442e364256dcf534c8e0b936e40c5b3ee3e316fde953e37834bd213a2ea"
     },
     {
       "path": "samong-r103.js",
@@ -45154,8 +45164,8 @@
     },
     {
       "path": "summoning-r251.js",
-      "bytes": 10418,
-      "sha256": "38f7eb8714693e2728df62392bb8d67fd25817359d1babdf07a0e90eaa129a16"
+      "bytes": 10430,
+      "sha256": "7bf39f6e352e3b65c5173b252bfe92300e4f3aed2d62d19b5eb1329bba570ce8"
     },
     {
       "path": "surface-r435.js",
@@ -45408,9 +45418,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9081,
-  "totalBytes": 1240897430,
-  "webHTMLSha256": "fd627f02ba581c91de1db7e38007952eee6530db8f97b38777fa2cb70ba62904",
+  "fileCount": 9083,
+  "totalBytes": 1240948483,
+  "webHTMLSha256": "98d31f138ea9d04c8be139c4f861eae456086b72143b8dec38821e19e5942fb4",
   "largest": [
     {
       "path": "index.html",
