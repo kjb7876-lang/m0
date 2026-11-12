@@ -807,6 +807,8 @@ jobs:
         run: node r96/qa/r946/r946-cpu-check.cjs
       - name: R940 read-only state snapshot for QA (events, first-hit-after-entry, boss kill time; no game writes) CPU check
         run: node r96/qa/r940/r940-cpu-check.cjs
+      - name: R950 final boss (cult04) revived leader keeps first-form HP, canon beats, nerve-link staging, post scene after collapse CPU check
+        run: node r96/qa/r950/finale-cpu-check.cjs
       - name: Install pinned sandboxed Chromium
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0
