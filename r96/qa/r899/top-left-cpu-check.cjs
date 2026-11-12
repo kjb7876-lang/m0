@@ -1,9 +1,9 @@
-// R890 — 보스맵 서사 창·기억 조각 종이를 왼쪽 위로 옮기고, 왼쪽 위 길잡이 한 줄('다음 기억은 X입니다… → X')을 짧게 한 번만 적는다.
+// R899 — 보스맵 서사 창·기억 조각 종이를 왼쪽 위로 옮기고, 왼쪽 위 길잡이 한 줄('다음 기억은 X입니다… → X')을 짧게 한 번만 적는다.
 //  글 내용은 바꾸지 않고 위치·중복만. 헤드리스 CPU 검사(가짜 document) — 그래픽·실플레이 검증 아님.
 const fs=require('fs'),path=require('path'),vm=require('vm');const R=path.join(__dirname,'..','..');
-const file=path.join(R,'client-source','top-left-r890.js');
+const file=path.join(R,'client-source','top-left-r899.js');
 const checks=[];const ok=(name,pass,detail)=>checks.push({name,pass:!!pass,detail});
-let src='';try{src=fs.readFileSync(file,'utf8');}catch(e){ok('top-left-r890.js 가 있다',false,String(e.message));}
+let src='';try{src=fs.readFileSync(file,'utf8');}catch(e){ok('top-left-r899.js 가 있다',false,String(e.message));}
 function mk({questBottom=70,hasQuest=true,H=720}={}){
  const els={};const mkEl=id=>({id,textContent:'',style:{props:{},setProperty(k,v){this.props[k]=v;}},getBoundingClientRect:()=>({top:8,bottom:questBottom,height:questBottom-8})});
  els.questInlineSummary=mkEl('questInlineSummary');els.questText=mkEl('questText');els.questDestination=mkEl('questDestination');if(hasQuest)els.quest=mkEl('quest');
@@ -11,12 +11,12 @@ function mk({questBottom=70,hasQuest=true,H=720}={}){
  const timers=[];
  const sb={console,Math,JSON,Object,Array,Number,String,Set,Map,WeakMap,
   localStorage:{getItem:()=>null,setItem(){}},innerHeight:H,innerWidth:1280,
-  document:{documentElement:root,getElementById:id=>id==='r890Css'?styles.find(s=>s.id==='r890Css')||null:els[id]||null,createElement:()=>({style:{},id:'',textContent:''}),head:{appendChild(s){styles.push(s);}},body:{}},
+  document:{documentElement:root,getElementById:id=>id==='r899Css'?styles.find(s=>s.id==='r899Css')||null:els[id]||null,createElement:()=>({style:{},id:'',textContent:''}),head:{appendChild(s){styles.push(s);}},body:{}},
   setInterval:(f,ms)=>{timers.push(f);return timers.length;},
   started:true,updateHUD:function(){els.questInlineSummary.textContent=sb.__hud||'';}};
  sb.window=sb;if(src){vm.createContext(sb);vm.runInContext(src,sb);}return {sb,els,styles,root,timers};}
-const T=mk();const API=T.sb.__STORYWORLD_TOPLEFT_R890__;
-ok('모듈이 __STORYWORLD_TOPLEFT_R890__ 을 연다',API&&typeof API.summarize==='function'&&typeof API.place==='function',Object.keys(API||{}));
+const T=mk();const API=T.sb.__STORYWORLD_TOPLEFT_R899__;
+ok('모듈이 __STORYWORLD_TOPLEFT_R899__ 을 연다',API&&typeof API.summarize==='function'&&typeof API.place==='function',Object.keys(API||{}));
 if(API&&API.summarize){
  const S=API.summarize;
  // ① 정상 경로: 같은 목적지를 두 번 적던 문장
@@ -39,14 +39,14 @@ if(API&&API.summarize){
  ok('updateHUD 뒤 길잡이 한 줄이 짧아진다',t.els.questInlineSummary.textContent==='다음 기억 → 악마화 나무의 정원',t.els.questInlineSummary.textContent);
  t.sb.__hud='';t.sb.updateHUD();ok('빈 줄도 안 깨짐',t.els.questInlineSummary.textContent==='');}
 // ④ 위치: 쪽지·서사 창이 길잡이 패널 아래 왼쪽으로
-{const t=mk({questBottom:70});t.sb.__STORYWORLD_TOPLEFT_R890__?.place?.();const v=t.root.style.props['--r890-top'];ok('길잡이 패널 바닥+8px 아래에서 시작',v==='78px',v);}
-{const t=mk({hasQuest:false});t.sb.__STORYWORLD_TOPLEFT_R890__?.place?.();const v=t.root.style.props['--r890-top'];ok('패널이 없으면 12px',v==='12px',v);}
-{const t=mk({questBottom:900,H:720});t.sb.__STORYWORLD_TOPLEFT_R890__?.place?.();const v=t.root.style.props['--r890-top'];ok('패널이 아주 커도 화면 40% 안(288px)',v==='288px',v);}
-{const t=mk();const css=(t.styles.find(s=>s.id==='r890Css')||{}).textContent||'';
+{const t=mk({questBottom:70});t.sb.__STORYWORLD_TOPLEFT_R899__?.place?.();const v=t.root.style.props['--r899-top'];ok('길잡이 패널 바닥+8px 아래에서 시작',v==='78px',v);}
+{const t=mk({hasQuest:false});t.sb.__STORYWORLD_TOPLEFT_R899__?.place?.();const v=t.root.style.props['--r899-top'];ok('패널이 없으면 12px',v==='12px',v);}
+{const t=mk({questBottom:900,H:720});t.sb.__STORYWORLD_TOPLEFT_R899__?.place?.();const v=t.root.style.props['--r899-top'];ok('패널이 아주 커도 화면 40% 안(288px)',v==='288px',v);}
+{const t=mk();const css=(t.styles.find(s=>s.id==='r899Css')||{}).textContent||'';
  ok('R177 종이는 왼쪽(left)·right:auto',/#r177Doc\{[^}]*left:[^;}]*;[^}]*right:auto/.test(css)||/#r177Doc\{[^}]*right:auto[^}]*left:/.test(css),css.slice(0,200));
- ok('R177 종이 위치가 --r890-top',/#r177Doc\{[^}]*top:var\(--r890-top/.test(css));
+ ok('R177 종이 위치가 --r899-top',/#r177Doc\{[^}]*top:var\(--r899-top/.test(css));
  ok('R255 서사 창은 왼쪽 위(flex-start)',/#modal\.r255\{[^}]*justify-content:flex-start/.test(css)&&/#modal\.r255\{[^}]*align-items:flex-start/.test(css),css.slice(0,300));
- ok('R255 서사 종이 위 여백이 --r890-top',/#panel\.r255-doc\{[^}]*var\(--r890-top/.test(css));
+ ok('R255 서사 종이 위 여백이 --r899-top',/#panel\.r255-doc\{[^}]*var\(--r899-top/.test(css));
  ok('폰(700px 이하)·R255 아래쪽 배치는 건드리지 않음(데스크톱 전용 미디어)',/@media\s*\(min-width:\s*701px\)/.test(css)&&!/max-width:\s*700px/.test(css));
  ok('길잡이 한 줄은 줄바꿈(잘림 없음)',/#questInlineSummary\{[^}]*white-space:normal/.test(css)&&/text-overflow:clip/.test(css));}
 const bad=checks.filter(c=>!c.pass);for(const c of checks)console.log(c.pass?'PASS':'FAIL',c.name,c.pass?'':JSON.stringify(c.detail||'').slice(0,240));

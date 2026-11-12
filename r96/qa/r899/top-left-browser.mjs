@@ -1,4 +1,4 @@
-// R890 브라우저 검사(헤드리스 소프트웨어 렌더링 — 그래픽·실기기 검증 아님). 사용: SW_URL=http://127.0.0.1:4396/m0/ node top-left-browser.mjs <outdir>
+// R899 브라우저 검사(헤드리스 소프트웨어 렌더링 — 그래픽·실기기 검증 아님). 사용: SW_URL=http://127.0.0.1:4396/m0/ node top-left-browser.mjs <outdir>
 import {chromium,boot,go,skip} from '../r444/lib.mjs';import fs from 'node:fs';import assert from 'node:assert';
 const OUT=process.argv[2]||'.';fs.mkdirSync(OUT,{recursive:true});let n=0;const ok=(c,m,x)=>{console.log((c?'PASS ':'FAIL ')+m,x!==undefined?JSON.stringify(x).slice(0,300):'');assert.ok(c,m);n++;};
 const b=await chromium.launch();const {p}=await boot(b);const errs=[];p.on('pageerror',e=>errs.push(String(e).slice(0,200)));
@@ -18,7 +18,7 @@ for(const zone of ['dist06','last302']){
  await p.screenshot({path:OUT+'/'+zone+'-shard.png'});
  await p.evaluate(()=>{document.getElementById('r177Doc')?.click();for(let i=0;i<20;i++)document.getElementById('r177Doc')&&!document.getElementById('r177Doc').hidden&&document.querySelector('#r177Doc [data-r182=close]')?.click();});
  // R255 서사 창
- await p.evaluate(()=>{window.__r890done=false;playScenes([{id:room.id,key:'STORY:'+room.id+':pre:0',part:'pre',title:'시험 서사',text:'보스 서사 시험 글입니다. '.repeat(12)}],()=>{window.__r890done=true;});});
+ await p.evaluate(()=>{window.__r899done=false;playScenes([{id:room.id,key:'STORY:'+room.id+':pre:0',part:'pre',title:'시험 서사',text:'보스 서사 시험 글입니다. '.repeat(12)}],()=>{window.__r899done=true;});});
  await p.waitForFunction(()=>modal===true,null,{timeout:20000}).catch(()=>{});await p.waitForTimeout(600);
  const info=await p.evaluate(()=>({modal,cls:document.getElementById('panel')?.className,cin:!!document.getElementById('r255Cinema')}));console.log('modal',JSON.stringify(info));
  if(info.cin){await p.keyboard.press('Escape');await p.waitForTimeout(400);}
