@@ -5,7 +5,8 @@ const ZONES=(process.env.Z||'hub,hando01,hando02,hando03,kair02,kair03,last301,c
 const measure=()=>{const L=room.exploration,fl=new Set(L.floorCells.map(c=>c[0]+':'+c[1])),f=(x,y)=>fl.has(Math.floor(x)+':'+Math.floor(y));
  const thin=[],voidBoth=[];const cover=new Map();
  for(const w of L.walls||[]){if(w.decorative||w.presentationOnly||w.angle)continue;const hz=w.width>=w.depth,len=Math.max(w.width,w.depth),t=Math.min(w.width,w.depth);if(t>.7)continue;let both=0,none=0,m=0;
-  for(let s=.5;s<len;s+=1){const a=hz?[w.x-len/2+s,w.y-.5]:[w.x-.5,w.y-len/2+s],b=hz?[w.x-len/2+s,w.y+.5]:[w.x+.5,w.y-len/2+s];m++;const fa=f(...a),fb=f(...b);if(fa&&fb)both++;if(!fa&&!fb)none++;const k=(hz?'h:':'v:')+Math.floor(hz?a[0]:w.x+.01)+':'+Math.floor(hz?w.y+.01:a[1]);cover.set(k,(cover.get(k)||0)+1);}
+  /* R713(돌담 두께)이 벽판을 두껍게 하고 바깥으로 밀거나 모서리에서 늘려도 같은 변으로 읽히게: 모서리에서 늘어난 끝(.95 미만)은 세지 않고 칸 한가운데만, 양옆은 두께 바깥 .38 에서, 변 번호는 반올림으로 */const q=t/2+.38,c0=hz?w.x:w.y,first=Math.ceil(c0-len/2-.05),last=Math.floor(c0+len/2-.95);
+  for(let c=first;c<=last;c++){const s=c+.5-(c0-len/2);const a=hz?[w.x-len/2+s,w.y-q]:[w.x-q,w.y-len/2+s],b=hz?[w.x-len/2+s,w.y+q]:[w.x+q,w.y-len/2+s];m++;const fa=f(...a),fb=f(...b);if(fa&&fb)both++;if(!fa&&!fb)none++;const k=(hz?'h:':'v:')+(hz?Math.floor(a[0]):Math.round(w.x))+':'+(hz?Math.round(w.y):Math.floor(a[1]));cover.set(k,(cover.get(k)||0)+1);}
   if(both)thin.push([w.id,both,m]);if(none)voidBoth.push([w.id,none,m]);}
  // 바닥|비바닥 단위 변마다 벽판이 꼭 하나
  let missing=0,dup=0;for(const k of fl){const[x,y]=k.split(':').map(Number);for(const[e,o]of[['h:'+x+':'+y,[x,y-1]],['h:'+x+':'+(y+1),[x,y+1]],['v:'+x+':'+y,[x-1,y]],['v:'+(x+1)+':'+y,[x+1,y]]]){if(fl.has(o[0]+':'+o[1]))continue;const c=cover.get(e)||0;if(!c)missing++;if(c>1)dup++;}}

@@ -18,7 +18,7 @@
 //  끄기: localStorage['storyworld.r348.hwandoW']='{"on":false}' (예전 연출로)
 (()=>{'use strict';
 if(window.__STORYWORLD_HWANDO_W_CROSS_R348__)return;
-const REV='R348-hwando-w-cross-3',KEY='storyworld.r348.hwandoW';
+const REV='R348-hwando-w-cross-4',KEY='storyworld.r348.hwandoW';
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const CFG=Object.freeze({clones:7,ringWorld:3.15,ringCell:115/384*10/* R292 띠 칸 반지름(px)/칸 → 화면 칸 수 */,cloneScreen:1.42,maxWorld:7.5,enemyScreen:2.7,
  crossLife:.5,cloneIn:.2,hold:.7,slashLife:.42,splash:1.5,mult:1.25*.45,offset:.85});
@@ -58,12 +58,7 @@ function pickSpots(o){const B=screenBasis(o.x,o.y),ringPx=CFG.ringCell*unit(),sp
   /* 물러선 자리도 원 밖(판정 3.15칸 + 화면 원)인지 다시 본다 — 아니면 적 자리, 그것도 아니면 건너뜀 */
   const outside=p=>Math.hypot(p.x-o.x,p.y-o.y)>CFG.ringWorld&&sdist(p)>ringPx*1.02;
   const at=[p,{x:e.x,y:e.y}].find(c=>outside(c)&&open(c.x,c.y))||null;if(!at||!line(o,at))continue;const a=sAng(at);if(spots.some(s=>Math.abs(Math.atan2(Math.sin(a-s.ang),Math.cos(a-s.ang)))<.32))continue;spots.push({...at,ang:a,foe:e.id,face:Math.sign(e.x-at.x||1)});}
- // 나머지: 화면 원 둘레 바깥(반지름 ×1.42)에 고르게 — 화면 각도 기준(아이소 눌림과 상관없이 원 밖에 서게)
- const need=CFG.clones-spots.length,start=-Math.PI/2+(spots.length?spots[0].ang+Math.PI/2:0);
- for(let i=0;i<CFG.clones*3&&spots.length<CFG.clones;i++){const a=start+(i%CFG.clones)*Math.PI*2/CFG.clones+(i>=CFG.clones?(i>=CFG.clones*2?-.22:.22):0);
-  if(spots.some(s=>Math.abs(Math.atan2(Math.sin(a-s.ang),Math.cos(a-s.ang)))<.5))continue;
-  for(const k of [1,.9,1.15,.8]){const R=ringPx*CFG.cloneScreen*k,w=worldFromScreen(B,Math.cos(a)*R,Math.sin(a)*R+H()*.3);if(!w)break;const p={x:o.x+w.x,y:o.y+w.y},d=Math.hypot(w.x,w.y);
-   if(d<=CFG.ringWorld+.4||d>CFG.maxWorld||!open(p.x,p.y)||!line(o,p))continue;spots.push({...p,ang:a,foe:null,face:Math.sign(w.x||1)});break;}}
+ // R705c(사용자 2026-11-12 "근거리영웅인경우 적근거리에 분신이 나타났다 사라져야지"): 적이 없는 빈 둘레를 채우던 분신은 없앤다 — 분신은 적 곁에만 서고 피해도 그 적 자리에서만 난다.
  return spots.slice(0,CFG.clones);}
 // ---- 시전 ----------------------------------------------------------------------------------------------------
 const casts=[];const seen=new Set();
