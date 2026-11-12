@@ -32,10 +32,13 @@ function set(patch={}){for(const k of Object.keys(DEFAULTS))if(typeof patch[k]==
 const EAST=Object.freeze(new Set(['last302','last303']));
 const eastern=(z=typeof zone!=='undefined'?zone:null)=>EAST.has(z);
 const EAST_LIGHTS=Object.freeze(new Set(['lights_regional_02','lights_regional_03','lights_regional_04']));
+// R831(사용자 2026-11-12 "조형물 좀 이질감이 있어"): 붉은 천을 두른 돌 제단 등잔(lights_regional_04)은 서양식 석조 제단이라 조선풍 마을에 어울리지 않는다
+//  → 동양 장면에는 향로(02)와 석등(03)만 세운다. 다른 지역에서는 원래도 쓰지 않는다(아래 서양 등불로 바뀜).
+const EAST_KEEP=Object.freeze(new Set(['lights_regional_02','lights_regional_03']));
 // Western lamp pairs by R81 environment family (the R92 'regional' lamp group).
 const WEST_LIGHTS=Object.freeze({garden:['lights_stone_03','lights_regional_01'],snow:['lights_stone_02','lights_ash_03'],coast:['lights_domestic_03','lights_stone_02'],regional:['lights_regional_01','lights_stone_03']});
 function lamps(z,reg,items,list,fam){if(!prefs.theme||!Array.isArray(items)||!Array.isArray(list))return null;
- if(EAST.has(z)){const east=list.filter(i=>EAST_LIGHTS.has(i.id));return east.length?east:null;}
+ if(EAST.has(z)){const east=list.filter(i=>EAST_KEEP.has(i.id));return east.length?east:null;}
  if(!list.some(i=>EAST_LIGHTS.has(i?.id)))return null;
  const ids=WEST_LIGHTS[fam]||WEST_LIGHTS.regional,out=ids.map(id=>items.find(i=>i.id===id&&i.kind==='light')).filter(Boolean);stats.lampSwaps++;
  return out.length?out:list.filter(i=>!EAST_LIGHTS.has(i.id));}

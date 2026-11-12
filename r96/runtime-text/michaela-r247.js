@@ -19,6 +19,7 @@ const CD={w:5,e:9};
 const solo=()=>{let m=null;try{m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();}catch(_){}return !m||m==='off';};
 const mine=()=>on&&typeof player==='object'&&player?.hero==='michaela'&&solo();
 function level(slot){try{const st=window.__STORYWORLD_GROWTH_R103__?.state?.();return Math.max(0,Math.min(7,Number(st?.procs?.['michaela:'+slot])||0));}catch(_){return 0;}}
+const GS=sl=>{try{return window.__STORYWORLD_SKILL_GROWTH_R663__?.scale?.(sl)||{locked:false,range:1,power:1,cool:1};}catch(_){return {locked:false,range:1,power:1,cool:1};}};
 function rhythm(){return typeof COMBAT_RHYTHM_R26==='number'?COMBAT_RHYTHM_R26:1;}
 function power(){try{return typeof attackPower==='function'?attackPower():20;}catch(_){return 20;}}
 function live(){return (room?.enemies||[]).filter(e=>e&&e.hp>0&&!e.deadRecorded&&e.spawnState==='active'&&e.visible!==false);}
@@ -28,12 +29,12 @@ function hit(e,amount,tag){try{if(typeof hitEnemy==='function'){hitEnemy(e,amoun
 const fx=[];const SENT={type:'r247-fx',x:0,y:0,age:0,life:Infinity};
 function armSent(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)&&!effects.includes(SENT)){SENT.age=0;effects.push(SENT);}}catch(_){}}
 // Z 성흔 광시
-function castZ(){const lv=level('w'),a=aimAngle(),L=7+.5*lv,W=.8+.08*lv,dmg=power()*(1.5+.15*lv),o={x:player.x,y:player.y};let healed=0;
+function castZ(){const g=GS('w'),lv=level('w'),a=aimAngle(),L=(7+.5*lv)*g.range,W=(.8+.08*lv)*g.range,dmg=power()*(1.5+.15*lv)*g.power,o={x:player.x,y:player.y};let healed=0;
  for(const e of live()){const dx=e.x-o.x,dy=e.y-o.y,t=dx*Math.cos(a)+dy*Math.sin(a);if(t<0||t>L)continue;const perp=Math.abs(-dx*Math.sin(a)+dy*Math.cos(a));if(perp>W+(e.radius||.3))continue;
   try{if(typeof clearLine==='function'&&!clearLine(o,e))continue;}catch(_){}hit(e,dmg,'michaelaAngelRayR247');if(healed<5&&typeof maxHP==='function'){player.hp=Math.min(maxHP(),player.hp+maxHP()*.02);healed++;stats.heal++;}}
  fx.push({k:'z',t0:T(),life:.62,o,a,L,W,lv,seed:Math.random()*6});armSent();stats.z++;return true;}
 // X 제네시스 성광주
-function castX(){const lv=level('e'),tgt=nearest(10),a=aimAngle(),c=tgt?{x:tgt.x,y:tgt.y}:{x:player.x+Math.cos(a)*3,y:player.y+Math.sin(a)*3},n=5+lv,R=2.6+.3*lv,dmg=power()*(1.2+.12*lv),pts=[{...c,d:.45}];
+function castX(){const g=GS('e'),lv=level('e'),tgt=nearest(10*g.range),a=aimAngle(),c=tgt?{x:tgt.x,y:tgt.y}:{x:player.x+Math.cos(a)*3,y:player.y+Math.sin(a)*3},n=5+lv,R=(2.6+.3*lv)*g.range,dmg=power()*(1.2+.12*lv)*g.power,pts=[{...c,d:.45}];
  for(let i=1;i<n;i++){const ang=i/(n-1)*Math.PI*2+Math.random()*.4,r=R*(.45+.55*Math.random()),p={x:c.x+Math.cos(ang)*r,y:c.y+Math.sin(ang)*r,d:.45+i*.08};try{if(typeof blocked==='function'&&blocked(p.x,p.y,.2,room))continue;}catch(_){}pts.push(p);}
  const f={k:'x',t0:T(),life:.45+pts.length*.08+.7,c,R,lv,pts,hitDone:new Set(),dmg,seed:Math.random()*6};fx.push(f);armSent();stats.x++;return true;}
 function tickX(){const t=T();for(const f of fx){if(f.k!=='x')continue;for(let i=0;i<f.pts.length;i++){if(f.hitDone.has(i))continue;const p=f.pts[i];if(t-f.t0<p.d)continue;f.hitDone.add(i);for(const e of live())if(Math.hypot(e.x-p.x,e.y-p.y)<1.3+(e.radius||.3))hit(e,f.dmg,'michaelaGenesisR247');}}
@@ -60,8 +61,8 @@ function draw(){const S0=SPR();if(!S0||typeof project!=='function')return;const 
 let wrapped=false;
 const readyAt={w:0,e:0};
 function remain(sl){return Math.max(0,readyAt[sl]-T());}
-function fire(sl,automatic){if(!mine()||(sl!=='w'&&sl!=='e'))return false;if(readyAt[sl]>T())return false;if(automatic&&!nearest(9))return false;
- const ok=sl==='w'?castZ():castX();if(ok){readyAt[sl]=T()+CD[sl]*rhythm();player.skillAnim=.5;player.attackAngle=aimAngle();try{if(typeof sound==='function')sound('special');}catch(_){}try{if(typeof updateHUD==='function')updateHUD();}catch(_){}}return ok;}
+function fire(sl,automatic){if(!mine()||(sl!=='w'&&sl!=='e'))return false;if(readyAt[sl]>T())return false;if(GS(sl).locked)return false;if(automatic&&!nearest(9))return false;
+ const ok=sl==='w'?castZ():castX();if(ok){readyAt[sl]=T()+CD[sl]*rhythm()*GS(sl).cool;player.skillAnim=.5;player.attackAngle=aimAngle();try{if(typeof sound==='function')sound('special');}catch(_){}try{if(typeof updateHUD==='function')updateHUD();}catch(_){}}return ok;}
 function install(){const W=window.__STORYWORLD_WER__;if(!W||wrapped||W.__r247)return !!W;wrapped=true;const base=W.cast;
  window.__STORYWORLD_WER__=Object.freeze({...W,__r247:true,cast(slot,automatic,...a){const sl=String(slot).toLowerCase();if(mine()&&(sl==='w'||sl==='e')){try{return fire(sl,!!automatic);}catch(e){fail(e);return false;}}
    return base.call(this,slot,automatic,...a);}});return true;}

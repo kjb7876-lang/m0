@@ -47,9 +47,28 @@ function nextPhase(phase,hasBossPart){return phase==='pre'?(hasBossPart?'boss':'
 // 다음 지역(끝나면 처음으로, 회차 +1).
 function advance(i,loop,n){if(!(n>0))return {i:0,loop};return i+1>=n?{i:0,loop:loop+1}:{i:i+1,loop};}
 // 화면에 함께 있을 수 있는 몹 수: 처음 16 → 시간과 지역 순서로 늘고, 상한(PC 48·모바일/저사양 30).
-function cap(sec,idx,low){const top=low?30:48;return Math.round(clamp(16+sec/6+idx*.6,10,top));}
+function cap(sec,idx,low,diff){const top=low?30:48;return Math.round(clamp((16+sec/6+idx*.6)*diffOf(diff).cap,10,top));}
 // 몹 체력 배율: 지역 순서와 회차로 오른다.
-function hpMul(idx,loop){return (1+idx*.045)*(1+.6*loop);}
+function hpMul(idx,loop,diff){return (1+idx*.045)*(1+.6*loop)*diffOf(diff).hp;}
+// R850 밸런스: 보스·중간보스 체력은 원래 체력과 상관없이 영웅 공격력 기준(보스 ×100, 중간보스 ×50)에 지역·회차·난이도 배율을 곱한다.
+//  실측(헤드리스, 환도, 보통): 예전엔 원래 체력(약 1,100)에 묶여 대부분 1~2초에 죽고 원래 체력이 큰 집도의만 13초 → 보스 약 15~30초·중간보스 약 5~18초(영웅 셋, 봇이 붙어 때릴 때).
+//  피해는 일반몹처럼 지역(+1.5%/지역)·회차(+25%)로 오른다. 일반몹 피해도 너무 약해(첫 지역 한 대 약 4/777) 기본 ×.55→×.7(정예 ×.85→×1).
+const BOSS_HP=Object.freeze({boss:100,mid:50});
+const stageDmg=(idx,loop,diff)=>(1+.015*Math.max(0,idx||0))*(1+.25*Math.max(0,loop||0))*diffOf(diff).dmg;
+// 보스 체력 기준 공격력은 지역 동안의 이동 평균(약 20초) — 순간 강화(버프)가 켜진 때 보스가 나오면 체력이 튀던 것(실측 서하 141↔96)을 누른다.
+function smoothAtk(avg,a,dt){if(!(a>0))return avg;if(!(avg>0))return a;return avg+(a-avg)*Math.min(1,Math.max(0,dt)/20);}
+function bossStats(idx,loop,diff,atk,major,dmg){return {hp:Math.max(1,Math.round(Math.max(8,+atk||0)*(major?BOSS_HP.boss:BOSS_HP.mid)*hpMul(idx,loop,diff))),dmg:(+dmg>0?+dmg:8)*stageDmg(idx,loop,diff)};}
+function mobDamage(dmg,elite,idx,loop,diff){return (+dmg>0?+dmg:8)*(elite?1:.7)*stageDmg(idx,loop,diff);}
+// R701 난이도: 몹 체력(hp)·동시 몹 수(cap)·몹이 주는 피해(dmg)·경험치(xp) 배율. 보통=1. 어려울수록 경험치는 조금 덜 준다.
+const DIFFS=Object.freeze({easy:Object.freeze({name:'쉬움',text:'몹이 약하고 적게 나옵니다. 이야기를 따라가며 버티는 데 맞춰져 있습니다.',hp:.75,cap:.8,dmg:.7,xp:1.2}),
+ normal:Object.freeze({name:'보통',text:'기본 균형입니다.',hp:1,cap:1,dmg:1,xp:1}),
+ hard:Object.freeze({name:'어려움',text:'몹이 단단하고 많으며 더 아프게 때립니다. 강화 선택이 중요해집니다.',hp:1.35,cap:1.15,dmg:1.3,xp:.9}),
+ nightmare:Object.freeze({name:'악몽',text:'몹이 매우 단단하고 빽빽하게 몰려옵니다. 코어가 오래 버티지 못합니다.',hp:1.8,cap:1.3,dmg:1.6,xp:.8})});
+const diffOf=id=>Object.prototype.hasOwnProperty.call(DIFFS,id)?DIFFS[id]:DIFFS.normal;
+// R701 강화 창: 레벨이 올라도 창은 77초(전투가 실제로 흐른 시간)마다 한 번만 뜨고, 그사이 쌓인 강화를 그 한 창에서 한꺼번에 고른다(창 하나에 최대 WINDOW_MAX 번, 남으면 다음 창).
+const CHOICE_EVERY=77,WINDOW_MAX=10;
+function choiceDue(playT,lastIdx,queued){const t=+playT;if(!(t>=0))return {due:false,idx:Math.max(0,Math.floor(+lastIdx)||0)};const last=Math.max(0,Math.floor(+lastIdx)||0),idx=Math.max(last,Math.floor(t/CHOICE_EVERY));return {due:idx>last&&(+queued||0)>0,idx};}
+function windowPicks(q){const k=Math.floor(+q);return k>0?Math.min(k,WINDOW_MAX):0;}
 // 생존 경험치: 이 게임은 처치로 레벨이 오르지 않는다(R62 '지도 완료마다 한 레벨' 규칙) → 생존 모드는 자기 경험치·레벨로 3택을 연다.
 //  처치 경험치(엔진 값 12+장×3)를 조각으로 떨어뜨리고, 레벨 n → n+1 에 30+22n 이 든다(처음은 4~5마리, 10레벨쯤 20마리 남짓).
 const xpNeed=lv=>30+22*Math.max(1,Math.floor(+lv||1));
@@ -76,8 +95,8 @@ function sentences(text){const P=G(()=>window.__STORYWORLD_CINEMA_MODE_R370__.pu
 
 // ── 상태 ──
 let tainted=false;/* 생존 판이 엔진 진행을 새 게임으로 바꿔 놓았으니, 스토리를 다시 불러오거나 새로 시작하기 전까지는 저장하지 않는다 */
-let inHitR600=0,S=null,pending=false,stageRoom=null,entering=0,hudAt=0,inKill=false,beams=[],gems=[],tails=[],choosing=false,choiceQ=0;
-const fresh=hero=>({active:true,hero,i:0,loop:0,ids:stageIds(G(()=>regions,[])),phase:'pre',narrating:false,narrEndAt:NaN,stageAt:0,bossUp:false,clearAt:NaN,
+let inHitR600=0,S=null,pending=false,stageRoom=null,entering=0,hudAt=0,inKill=false,beams=[],gems=[],tails=[],choosing=false,choiceQ=0,pickRem=0,pickedDiff='normal';
+const fresh=(hero,diff)=>({active:true,hero,diff:diffOf(diff)===DIFFS[diff]?diff:'normal',playT:0,choiceIdx:0,i:0,loop:0,ids:stageIds(G(()=>regions,[])),phase:'pre',narrating:false,narrEndAt:NaN,stageAt:0,bossUp:false,clearAt:NaN,
  kills:0,stageKills:0,serial:0,xp:0,lv:1,core:{lv:{},hp:CORE0.max,cd:1,hitAt:-9},taken:{},over:false,best:0,startWall:Date.now()});
 const live=()=>!!S&&S.active&&G(()=>started,false)&&!!G(()=>player,null);
 const here=()=>live()&&!!stageRoom&&G(()=>room,null)===stageRoom;
@@ -103,7 +122,8 @@ function narrNext(){N.timer=null;if(paused()&&(N.q.length||S?.narrating)){N.time
  if(!ok&&prefs.voice&&vol()>0&&typeof speechSynthesis!=='undefined'){try{const v=(speechSynthesis.getVoices()||[]).find(v=>/^ko/i.test(v.lang));if(v){const u=new SpeechSynthesisUtterance(it.text);u.lang=v.lang;u.voice=v;u.volume=vol();u.onend=done;u.onerror=done;speechSynthesis.speak(u);ok=true;setTimeout(()=>{if(my===N.gen){try{speechSynthesis.cancel();}catch(_){}done();}},(est*2+4)*1000);}}catch(e){fail(e);}}
  if(!ok)silent();}
 let subsEl=null;
-function subs(it){try{if(!subsEl||!subsEl.isConnected){if(!document.getElementById('r600Style')){const st=document.createElement('style');st.id='r600Style';st.textContent=CSS;document.head.appendChild(st);}
+function ensureCss(){try{if(!document.getElementById('r600Style')){const st=document.createElement('style');st.id='r600Style';st.textContent=CSS;document.head.appendChild(st);}}catch(e){fail(e);}}
+function subs(it){try{if(!subsEl||!subsEl.isConnected){ensureCss();
   subsEl=document.createElement('div');subsEl.id='r600Subs';subsEl.innerHTML='<div class="w"><span class="n"></span><span class="t"></span></div>';document.body.appendChild(subsEl);}
  if(!it){subsEl.classList.remove('on');return;}subsEl.querySelector('.n').textContent=it.narr||'';subsEl.querySelector('.t').textContent=it.text;subsEl.classList.add('on');}catch(e){fail(e);}}
 const CSS='#r600Subs{position:fixed;left:50%;bottom:calc(136px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);width:min(820px,calc(100vw - 32px));z-index:8990;pointer-events:none;opacity:0;transition:opacity .4s ease;text-align:center}'+
@@ -116,7 +136,9 @@ const CSS='#r600Subs{position:fixed;left:50%;bottom:calc(136px + env(safe-area-i
  '.r600Cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}@media (max-width:640px){.r600Cards{grid-template-columns:1fr}}'+
  '.r600Card{display:flex;flex-direction:column;gap:6px;text-align:left;padding:12px 12px 14px;min-height:118px;border-radius:8px;border:1px solid rgba(201,184,140,.35);background:linear-gradient(180deg,rgba(32,26,30,.92),rgba(16,13,16,.95));color:#efe6d6;cursor:pointer}'+
  '.r600Card:hover,.r600Card:focus-visible{border-color:#c9b88c;outline:none;box-shadow:0 0 0 2px rgba(201,184,140,.35)}.r600Card.core{border-color:rgba(120,210,200,.45)}.r600Card b{font-size:14px}.r600Card span{font-size:12px;opacity:.85;line-height:1.45}.r600Card em{font-style:normal;font-size:11px;color:#c9b88c}.r600Card.core em{color:#8fd4c8}'+
- '.r600Heroes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:10px}@media (max-width:640px){.r600Heroes{grid-template-columns:repeat(2,minmax(0,1fr))}}';
+ '.r600Heroes{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:8px}.r600Heroes button{width:74px;padding:4px 2px;border-radius:8px;border:2px solid #4a4336;background:#141a20;color:#e8dcc0;font:11px \'Malgun Gothic\',sans-serif;cursor:pointer}.r600Heroes button img{width:40px;height:46px;object-fit:contain;display:block;margin:0 auto 2px}.r600Heroes button.sel{border-color:#c9b88c;box-shadow:0 0 10px rgba(201,184,140,.6);background:#1d2a2f;color:#fff}'+
+'.r600Stage{display:flex;gap:14px;align-items:center;margin-top:8px;padding:8px 10px;border:1px solid rgba(201,184,140,.3);border-radius:8px;background:linear-gradient(180deg,rgba(32,26,30,.9),rgba(16,13,16,.95))}.r600Stage .pt{flex:0 0 auto}.r600Stage .pt img{width:auto;height:158px;max-width:160px;object-fit:contain;display:block}.r600Stage .info{flex:1;min-width:0;text-align:left}.r600Stage .role{font-size:11px;color:#c9b88c}.r600Stage .nm{font-size:20px;font-weight:700;margin:2px 0 4px}.r600Stage .tags span{display:inline-block;font-size:11px;padding:1px 7px;margin:0 4px 6px 0;border-radius:10px;border:1px solid rgba(201,184,140,.4)}.r600Stage p{margin:4px 0;font-size:12.5px;line-height:1.5}.r600Stage p b{color:#c9b88c;margin-right:4px}@media (max-width:640px){.r600Stage{flex-direction:column;text-align:center}.r600Stage .pt img{height:150px}}'+
+'.r600Diffs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}@media (max-width:640px){.r600Diffs{grid-template-columns:1fr}}.r600Diff{display:flex;flex-direction:column;gap:6px;text-align:left;padding:12px;border-radius:8px;border:1px solid rgba(201,184,140,.35);background:linear-gradient(180deg,rgba(32,26,30,.92),rgba(16,13,16,.95));color:#efe6d6;cursor:pointer}.r600Diff:hover,.r600Diff:focus-visible,.r600Diff.sel{border-color:#c9b88c;outline:none;box-shadow:0 0 0 2px rgba(201,184,140,.35)}.r600Diff b{font-size:15px}.r600Diff span{font-size:12px;opacity:.85;line-height:1.45}.r600Diff em{font-style:normal;font-size:11px;color:#c9b88c}';
 
 // ── 지형·방 ──
 function layoutFor(id){const EX=window.__STORYWORLD_EXPLORATION__,host=G(()=>EX.layout(id),null),A=arena(host?.bounds),cells=[];
@@ -140,12 +162,17 @@ function buildRoom(id){const R=roster(id),t=R.template||{},L=layoutFor(id),c=L.s
  const r={...t,id,layer:'STORY',props:[{id:'r600:core',r600CoreProp:true,x:c.x,y:c.y,solid:false,visible:true,autoTargetEligible6:false,label:'정화 코어',height:80}],enemies:[],kills:0,engaged:false,cleared:false,finalizing:false,encounterStage:'survivalR600',activeEncounter:null,fieldWaves6:[],fieldWaveIndex6:0,fieldWaveTotal6:0,fieldWaveCleared6:true,
   storyRosterIds6:[],defeatedActorIds:new Set(),exploration:L,explorationGroups:[],worldR74:1,r75Decorated:true,worldCombatR78:true,worldEnvironmentR81:true,r99Trees:true,r40RosterApplied:true,
   persona:{...(t.persona||{}),phase:'none'},objective:{x:-60,y:-60,path:t.objective?.path}/* 엔진 '기억의 표식'은 지도 밖으로(코어가 그 자리) */,survivalR600:{roster:R,centre:c,arena:L.survivalR600.arena}};
- return r;}
+ guardTerrain(r,L);return r;}
+/* R850: 생존 무대 지형 잠금 — 지역 전용 스크립트가 방 id 만 보고 지형을 바꿔 끼우지 못하게 한다(실측: '피로 물든 병원' ep1a08 에서
+   병원 엔진 tick 이 매 프레임 room.exploration 을 병원 미로(벽 193개)로 갈아 끼워 몹이 벽 속 방에 갇히고 정화 완료가 안 됐다).
+   읽기는 그대로, 다른 지형을 넣는 쓰기는 무시하고 센다. 바닥·벽 배열 안을 손질하는 것(같은 객체)은 막지 않는다. */
+function guardTerrain(r,L){try{Object.defineProperty(r,'exploration',{configurable:true,enumerable:true,get:()=>L,set(v){if(v!==L)stats.terrainGuard=(stats.terrainGuard||0)+1;}});}catch(e){fail(e);}}
 function rosterPaths(R){const out=new Set();for(const e of [...R.normal,R.boss,R.mid].filter(Boolean)){const d=e.profile;if(!d)continue;if(d.path)out.add(d.path);for(const f of Object.values(d.frames||{}))if(f?.path)out.add(f.path);for(const f of Object.values(d.actions||{}))if(f?.path)out.add(f.path);if(e.path)out.add(e.path);}return[...out];}
 
 // ── 무대 들어가기 ──
 async function go(i){if(!S||entering)return false;const id=S.ids[i];const def=G(()=>regionById[id],null);if(!def)return false;
  narrStop();gems=[];beams=[];tails=[];S.ready=false;/* 들어가는 동안(엔진 tick 이 새 방으로 돌 수 있음) 단계 판정을 멈춘다 — 앞 지역 시각으로 '빈 방'을 보고 보스로 넘기던 문제 */S.i=i;S.phase='pre';S.narrating=false;S.narrEndAt=NaN;S.narrMinEnd=0;S.bossUp=false;S.clearAt=NaN;S.stageKills=0;S.core.hp=Math.max(S.core.hp,CS().max*.5);
+ S.moving=String(def.title||'');hud(true);/* R850: 불러오기 창이 뜨기 전 빈 시간(지역 스크립트들이 그림을 먼저 읽는 1~3초)에도 넘어가는 중임을 보여 준다 */
  const prev=stageRoom;stageRoom=buildRoom(id);
  if(id==='last301')Object.defineProperty(stageRoom,'r75Falling',{configurable:true,enumerable:false,get:()=>!inHitR600,set(){}});/* R75 마지막 결투의 '정해진 쓰러짐'(보스를 살려 두고 장면으로 넘김)은 스토리 전용 — fall() 은 이미 쓰러지는 중이면 그냥 돌아가므로 생존 방에서는 그렇게 답해 끈다.
   지역을 완료로 표시하면 R75 decorate 가 적을 모두 숨기므로 쓰지 않는다. 같은 값을 보는 R75 hitEnemy(쓰러지는 중 영웅 체력 20% 고정)는 생존 hitEnemy 안에서 false 를 보게 한다. 저장·복제 대상이 아니게 열거하지 않는다. */
@@ -154,7 +181,7 @@ const c=stageRoom.survivalR600.centre,extra=[...rosterPaths(stageRoom.survivalR6
  //  (엔진의 협동 '권한 있는 지역 불러오기' 질문에 이 지역만 예라고 답함 — QA 가 잠긴 지역에 들어갈 때 쓰는 것과 같은 길). 진행·해금 기록은 바꾸지 않는다.
  const CO=window.__STORYWORLD_COOP_SIM_R62__,lift=!!CO;if(lift){try{window.__STORYWORLD_COOP_SIM_R62__={...CO,authoritativeRegionLoad:(rid,l)=>(rid===id&&l==='STORY')||!!CO.authoritativeRegionLoad?.(rid,l)};}catch(e){fail(e);}}
  entering++;let ok=false;try{ok=await enterRegion(id,null,{layer:'STORY',restore:true,noStory:true,position:{x:c.x,y:c.y+1.8}});}catch(e){fail(e);}finally{entering--;def.paths=old;if(lift)try{window.__STORYWORLD_COOP_SIM_R62__=CO;}catch(e){fail(e);}}
- if(!ok||G(()=>room,null)!==stageRoom){stageRoom=prev&&G(()=>room,null)===prev?prev:null;return false;}
+ S.moving='';if(!ok||G(()=>room,null)!==stageRoom){stageRoom=prev&&G(()=>room,null)===prev?prev:null;hud(true);return false;}
  stats.stages++;S.stageAt=G(()=>time,0);S.startPos=G(()=>({x:player.x,y:player.y}),null);S.ready=true;try{auto=true;guide=false;}catch(_){}
  const pre=scenesOf(def,'pre');const n=narrPlay(pre.length?pre:scenesOf(def,'body'));if(!n){S.narrEndAt=G(()=>time,0)+NO_TEXT_SECS-TAIL;}
  try{toast('무한 생존 · '+(S.loop?(S.loop+1)+'회차 · ':'')+(i+1)+'/'+S.ids.length+' '+def.title,3.2);}catch(_){}hud(true);return true;}
@@ -164,7 +191,7 @@ function scenesOf(def,part){try{return (def.records||[]).map(r=>({text:part==='b
 function alignR101Hero(h){const R=window.__STORYWORLD_POLISH_R101__,ph=R?.pickedHero?.();if(!ph||ph===h)return;try{openPanel('<!-- r600: slotConfirmR73 처음부터 시작 — R101 영웅 줄 맞춤 --><div class="actions"></div>');document.querySelector('#heroRowR101 [data-hero="'+h+'"]')?.click();}catch(e){fail(e);}finally{try{closePanel(true);}catch(e){fail(e);}}}
 // 스토리 처치 보상(R64·R71 패시브 포인트 떨굼)은 생존에서 주지 않는다 — 처치 직후 생존 방의 떨굼 기록과 그림 소품을 지운다(생존 성장은 경험 조각·카드만).
 function stripPointDrops(r=G(()=>room,null)){if(!r||!here())return;try{if(Array.isArray(r.passivePointDropsR64)&&r.passivePointDropsR64.length)r.passivePointDropsR64.length=0;if(Array.isArray(r.props)&&r.props.some(q=>q?.passivePointDropR64))r.props=r.props.filter(q=>!q?.passivePointDropR64);}catch(e){fail(e);}}
-function deactivate(){if(S)S.active=false;stageRoom=null;narrStop();gems=[];beams=[];tails=[];choiceQ=0;choosing=false;hud(false);}
+function deactivate(){if(S)S.active=false;stageRoom=null;narrStop();gems=[];beams=[];tails=[];choiceQ=0;pickRem=0;choosing=false;hud(false);}
 
 // ── 몹 ──
 function baseAtk(){let v=40;try{v=Number(attackPower())||40;if(player.samong>0)v/=7+.4*(typeof rank==='function'?rank('samongPower'):0);else if(player.ego>0)v/=1.55;}catch(_){}return Math.max(8,v);}
@@ -175,16 +202,16 @@ function spawnAt(src,at,{major=false,mid=false}={}){const def=G(()=>regionById[r
  if(e.combatProfile)e.combatProfile={...e.combatProfile,aggro:80};room.enemies.push(e);stats.spawned++;return e;}
 function ringPoint(c,min,max,A){for(let t=0;t<20;t++){const a=Math.random()*Math.PI*2,d=min+Math.random()*(max-min),q={x:clamp(c.x+Math.cos(a)*d,A.x0+.8,A.x1-.8),y:clamp(c.y+Math.sin(a)*d,A.y0+.8,A.y1-.8)};
   if(Math.hypot(q.x-player.x,q.y-player.y)>=min*.75&&!G(()=>blocked(q.x,q.y,.45,room),false))return q;}return null;}
-function swarm(e,elite){const atk=baseAtk(),m=hpMul(S.i,S.loop);e.ai='melee';e.type='melee';e.rangedWindup=0;e.samongSurvival=true;e.speed=(e.speed||1)*(elite?1.3:1.55);
- e.damage=(e.damage||8)*(elite?.85:.55)*(1+.25*S.loop);e.maxHp=e.hp=Math.max(1,Math.round(atk*(elite?6:1.25)*m));if(elite){e.r600Elite=true;e.defScale=(e.defScale||1)*1.22;e.name=e.name+' · 짙은 형상';}
+function swarm(e,elite){const atk=baseAtk(),m=hpMul(S.i,S.loop,S.diff);e.ai='melee';e.type='melee';e.rangedWindup=0;e.samongSurvival=true;e.speed=(e.speed||1)*(elite?1.3:1.55);
+ e.damage=mobDamage(e.damage,elite,S.i,S.loop,S.diff);e.maxHp=e.hp=Math.max(1,Math.round(atk*(elite?6:1.25)*m));if(elite){e.r600Elite=true;e.defScale=(e.defScale||1)*1.22;e.name=e.name+' · 짙은 형상';}
  if(Math.random()<.32)e.r600Core=true;}
 let spawnAt0=0;
 function tickSpawn(){const x=room.survivalR600,R=x.roster,t=G(()=>time,0);if(!R.normal.length||!spawning(S,t))return;
- const alive=room.enemies.filter(living).length,c=cap(t-S.stageAt,S.i,low());if(t<spawnAt0||alive>=c)return;spawnAt0=t+.35;
+ const alive=room.enemies.filter(living).length,c=cap(t-S.stageAt,S.i,low(),S.diff);if(t<spawnAt0||alive>=c)return;spawnAt0=t+.35;
  const n=Math.min(4,c-alive);for(let k=0;k<n;k++){const q=ringPoint(player,RING[0],RING[1],x.arena);if(!q)break;const src=R.normal[S.serial%R.normal.length],e=spawnAt(src,q);if(e)swarm(e,(S.serial%13)===12);}}
 function bossIn(){const x=room.survivalR600,R=x.roster,src=R.boss||R.mid;if(!src)return null;const q=ringPoint(player,7,9,x.arena)||{x:x.centre.x,y:x.arena.y0+3};
- const e=spawnAt(src,q,{major:true,mid:!R.boss});if(!e)return null;const m=hpMul(S.i,S.loop),atk=baseAtk();
- e.maxHp=e.hp=Math.max(1,Math.round(Math.min(e.maxHp,atk*(R.boss?70:40))*m));e.r600Boss=true;if(R.boss){room.engaged=true;e.phaseStage='active';e.phaseAge=0;e.rest=1.2;e.cd=1.5;}
+ const e=spawnAt(src,q,{major:true,mid:!R.boss});if(!e)return null;
+ const B=bossStats(S.i,S.loop,S.diff,S.atkAvg>0?S.atkAvg:baseAtk(),!!R.boss,e.damage);e.damage=B.dmg;e.maxHp=e.hp=B.hp;e.r600Boss=true;if(R.boss){room.engaged=true;e.phaseStage='active';e.phaseAge=0;e.rest=1.2;e.cd=1.5;}
  stats.bosses++;S.bossUp=true;try{toast((R.boss?'보스 등장 · ':'중간보스 등장 · ')+e.name,3.4);sound?.('boss');}catch(_){}return e;}
 function attackTokens(){let busy=0;const ready=[];for(const e of room.enemies){if(!living(e)||!e.survivalR600||e.r600Boss)continue;if((e.attack&&!e.attack.committed)||e.rangedWindup>0)busy++;else if((e.cd||0)<=.2)ready.push(e);}
  ready.sort((a,b)=>Math.hypot(a.x-player.x,a.y-player.y)-Math.hypot(b.x-player.x,b.y-player.y));for(const e of ready.slice(Math.max(0,7-busy)))e.cd=Math.max(e.cd||0,.12+Math.random()*.2);}
@@ -210,7 +237,7 @@ function gemTick(dt,vacuum){const p=player;let got=0;for(const g of gems){const 
  if(got){gems=gems.filter(g=>!g.taken);credit(got);}}
 let rawGainXP=null;
 // 조각을 먹으면 생존 경험치. 레벨이 오르면 3택을 하나씩 열고, 영웅 레벨(엔진 공격력·최대 체력 비례)도 같이 올린다. 패시브 포인트는 주지 않는다.
-function credit(v){stats.gems++;const r=levelUps(S.xp,S.lv,v);S.xp=r.xp;S.lv=r.lv;if(r.ups>0){choiceQ+=r.ups;stats.levels+=r.ups;
+function credit(v){stats.gems++;const r=levelUps(S.xp,S.lv,v*diffOf(S.diff).xp);S.xp=r.xp;S.lv=r.lv;if(r.ups>0){choiceQ+=r.ups;stats.levels+=r.ups;
   try{player.level=Math.min(99,Math.max(player.level,S.lv));player.hp=Math.min(maxHP(),player.hp+maxHP()*.08*r.ups);fx?.('sigil',player.x,player.y,{asset:VFX.heal,size:2,life:.8});}catch(e){fail(e);}}}
 
 // ── 3택 강화 ──
@@ -220,12 +247,17 @@ function apply(o){try{if(o.kind==='mend'){player.hp=Math.min(maxHP(),player.hp+m
  if(o.kind==='core'){const before=CS().max;S.core.lv[o.key]=(S.core.lv[o.key]||0)+1;const after=CS().max;if(after>before)S.core.hp+=after-before;return;}
  player.upgrades=player.upgrades||{};player.upgrades[o.key]=(+player.upgrades[o.key]||0)+1;if(/vital$/.test(o.key))player.hp=Math.min(maxHP(),player.hp+(window.__STORYWORLD_HEALTH_R71__?.scaleLegacyHeal?.(35,player)??35));
  try{refreshIcons?.();}catch(_){}}catch(e){fail(e);}finally{S.taken[o.id]=(S.taken[o.id]||0)+1;stats.choices++;}}
-function showChoice(){if(choosing||!choiceQ||!here()||G(()=>modal,false)||G(()=>loading,false)||S.over)return;choosing=true;choiceQ--;try{document.body.classList.add('r600Modal');}catch(_){}
- const opts=pickThree(pool());const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
- openPanel('<div class="eyebrow">생존 레벨 '+(S.lv-choiceQ)+' · 강화 하나 고르기</div><h2>기억이 선명해집니다</h2><p class="small">세 갈래 중 하나를 고르세요. 고르는 동안 전투는 멈춥니다.</p><div class="r600Cards">'+
+function showChoice(){if(choosing||!here()||G(()=>modal,false)||G(()=>loading,false)||S.over)return;
+ const k=choiceDue(S.playT||0,S.choiceIdx||0,choiceQ);S.choiceIdx=k.idx;if(!k.due&&!S.forceChoice)return;S.forceChoice=false;
+ const total=windowPicks(choiceQ);if(!total)return;choosing=true;choiceQ-=total;pickRem=total;stats.windows=(stats.windows||0)+1;try{document.body.classList.add('r600Modal');}catch(_){}renderChoice(total);}
+function renderChoice(total){
+ const opts=pickThree(pool());const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));const nth=total-pickRem+1;
+ try{closePanel(true);}catch(_){}
+ openPanel('<div class="eyebrow">생존 레벨 '+S.lv+' · 쌓인 강화 '+nth+' / '+total+'</div><h2>기억이 선명해집니다</h2><p class="small">'+(total>1?'77초 동안 쌓인 강화를 한꺼번에 고릅니다. 세 갈래 중 하나씩, '+total+'번 고르세요.':'세 갈래 중 하나를 고르세요.')+' 고르는 동안 전투는 멈춥니다.</p><div class="r600Cards">'+
   opts.map((o,n)=>'<button type="button" class="r600Card '+(o.kind==='core'?'core':'')+'" id="r600Pick'+n+'"><b>'+esc(o.name)+'</b><span>'+esc(o.text)+'</span><em>'+(o.kind==='mend'?'즉시':((o.kind==='core'?'정화 코어 · ':'영웅 · ')+'단계 '+o.level+' → '+(o.level+1)+(Number.isFinite(o.max)?' / '+o.max:'')))+'</em></button>').join('')+'</div>');
- let used=false;// 한 창에서 한 번만(두 번 눌러도, 닫힌 창의 단추가 남아 있어도 다시 적용하지 않음)
- opts.forEach((o,n)=>{const b=document.getElementById('r600Pick'+n);if(b)b.onclick=()=>{if(used)return;used=true;for(let k=0;k<opts.length;k++){const x=document.getElementById('r600Pick'+k);if(x){x.disabled=true;x.removeAttribute('id');}}apply(o);choosing=false;try{closePanel(true);}catch(_){}hud(true);};});
+ let used=false;// 한 카드 줄에서 한 번만(두 번 눌러도, 닫힌 창의 단추가 남아 있어도 다시 적용하지 않음)
+ opts.forEach((o,n)=>{const b=document.getElementById('r600Pick'+n);if(b)b.onclick=()=>{if(used)return;used=true;for(let k=0;k<opts.length;k++){const x=document.getElementById('r600Pick'+k);if(x){x.disabled=true;x.removeAttribute('id');}}apply(o);pickRem--;
+   if(pickRem>0&&here()&&!S.over){renderChoice(total);return;}pickRem=0;choosing=false;try{closePanel(true);}catch(_){}hud(true);};});
  setTimeout(()=>{try{document.getElementById('r600Pick0')?.focus?.();}catch(_){}},30);}
 
 // ── 끝 ──
@@ -238,21 +270,26 @@ function resultPanel(){if(!S)return;const why=S.overWhy;
   '<p>'+(S.loop?(S.loop+1)+'회차 · ':'')+(S.i+1)+' / '+S.ids.length+' 지역 「'+(def?.title||'')+'」까지 · 처치 '+S.kills+' · 생존 레벨 '+S.lv+' · '+Math.floor(secs/60)+'분 '+(secs%60)+'초</p>'+
   '<div class="actions"><button id="r600Again" class="primary">다시 도전</button><button id="r600Title">처음 화면</button></div>');
  const again=document.getElementById('r600Again'),ttl=document.getElementById('r600Title');
- if(again)again.onclick=()=>{S.leaving=true;try{closePanel(true);}catch(_){}start(hero);};if(ttl)ttl.onclick=()=>{deactivate();try{showTitle();}catch(e){fail(e);}};}
+ if(again)again.onclick=()=>{S.leaving=true;try{closePanel(true);}catch(_){}start(hero,S.diff);};if(ttl)ttl.onclick=()=>{deactivate();try{showTitle();}catch(e){fail(e);}};}
 
 // ── 한 프레임 ──
 function step(dt){const t=G(()=>time,0);if(S.over||!S.ready)return;
- tickSpawn();attackTokens();coreTick(dt);gemTick(dt,S.phase==='clear');if(S.over)return;
+ tickSpawn();attackTokens();coreTick(dt);gemTick(dt,S.phase==='clear');if(S.over)return;S.atkAvg=smoothAtk(S.atkAvg,baseAtk(),dt);
  const alive=room.enemies.some(living),sp=spawning(S,t);
  if(S.phase!=='clear'&&!alive&&!sp&&t-S.stageAt>3){const def=G(()=>regionById[room.id],null);
   if(S.phase==='pre'){const post=scenesOf(def,'post'),R=room.survivalR600.roster,has=post.length>0||!!(R.boss||R.mid);S.phase=nextPhase('pre',has);
    if(S.phase==='boss'){const n=narrPlay(post);if(!n)S.narrEndAt=t;bossIn();}}
   else S.phase='clear';
-  if(S.phase==='clear'){S.clearAt=t+CLEAR_WAIT;stats.clears++;try{toast('정화 완료 · 남은 조각을 모읍니다',2.2);fx?.('sigil',room.survivalR600.centre.x,room.survivalR600.centre.y,{asset:VFX.cross,size:3,life:1.2});sound?.('clear');}catch(_){}}}
+  if(S.phase==='clear'){S.clearAt=t+CLEAR_WAIT;stats.clears++;prefetchNext();try{toast('정화 완료 · 남은 조각을 모읍니다',2.2);fx?.('sigil',room.survivalR600.centre.x,room.survivalR600.centre.y,{asset:VFX.cross,size:3,life:1.2});sound?.('clear');}catch(_){}}}
  room.enemies=room.enemies.filter(e=>living(e)||t-(e.deadAt||t)<1.5);
- if(S.phase==='clear'&&t>=S.clearAt&&!gems.length&&!entering&&!choiceQ&&!narrPlaying()){const n=advance(S.i,S.loop,S.ids.length);if(n.loop>S.loop)stats.loops++;S.loop=n.loop;go(n.i);}
+ if(S.phase==='clear'&&t>=S.clearAt&&!gems.length&&!entering&&!choosing&&!narrPlaying()){const n=advance(S.i,S.loop,S.ids.length);if(n.loop>S.loop)stats.loops++;S.loop=n.loop;go(n.i);}
  if(t-hudAt>.25)hud(true);}
 
+/* R850: 정화 완료 뒤 대기(2.2초+조각 흡수) 동안 다음 지역 지도·세계 그림을 미리 읽는다 — 넘어갈 때 불러오기 창이 짧아진다.
+   엔진 그림 저장소(ensureImages)를 그대로 쓰므로 같은 그림을 두 번 받지 않는다. 실패는 무시(넘어갈 때 엔진이 다시 읽고 알린다). */
+function prefetchNext(){try{if(!S||typeof ensureImages!=='function')return;const n=advance(S.i,S.loop,S.ids.length),id=S.ids[n.i],def=G(()=>regionById[id],null);if(!def)return;
+ const list=[...(def.paths||[]),...(G(()=>window.__STORYWORLD_WORLD_R74__.assetPaths(id,'STORY'),[])||[])];stats.prefetch=(stats.prefetch||0)+1;
+ Promise.resolve(ensureImages(list)).catch(()=>{stats.prefetchMiss=(stats.prefetchMiss||0)+1;});}catch(e){fail(e);}}
 // ── 그리기 ──
 const BEAM_LIFE=.32,DIE_MS=Math.round(SH.die.n/FPS*1000)+150;
 function coreState(t){if(S.over&&S.overWhy==='core')return['die',(performance.now()-(S.overWall??performance.now()))/1000];/* 결과 창(멈춤) 앞뒤로 벽시계 */if(t-S.core.hitAt<SH.hit.n/FPS)return['hit',t-S.core.hitAt];if(S.core.hp/CS().max<.35)return['crit',t];return['idle',t];}
@@ -293,19 +330,32 @@ function drawCore(){if(!here())return;const c=room.survivalR600.centre,q=project
 let hudEl=null;
 function hud(on){try{if(!hudEl||!hudEl.isConnected){subs(null);hudEl=document.createElement('div');hudEl.id='r600Hud';hudEl.innerHTML='<div class="s"></div><div class="c"><i></i></div><div class="x"><i></i></div>';document.body.appendChild(hudEl);}
  try{document.body.classList.toggle('r600On',!!(on&&here()));const bb=document.getElementById('bossbar');const br=bb&&!bb.classList.contains('hidden')?bb.getBoundingClientRect():null,showB=!!(br&&br.height>0&&getComputedStyle(bb).display!=='none'&&getComputedStyle(bb).visibility!=='hidden');/* bossbar 는 position:fixed 라 offsetParent 가 늘 null — 크기로 본다 */hudEl.classList.toggle('low',showB);hudEl.style.top=showB?Math.round(br.bottom+6)+'px':'';}catch(_){}
+ if(on&&S?.active&&S.moving&&!S.over){hudEl.querySelector('.s').textContent='무한 생존 · 다음 지역으로 이동 · '+S.moving;hudEl.classList.add('on');return;}
  if(!on||!here()){hudEl.classList.remove('on');return;}hudAt=G(()=>time,0);const def=G(()=>regionById[room.id],null),st=CS();
  const ph=S.phase==='pre'?(spawning(S,hudAt)?'몰려오는 적':'남은 적 정리'):S.phase==='boss'?(S.bossUp?'보스전':'보스 서사'):'정화 완료';
- hudEl.querySelector('.s').textContent='무한 생존 '+(S.loop?(S.loop+1)+'회차 · ':'· ')+(S.i+1)+'/'+S.ids.length+' '+(def?.title||'')+' · '+ph+' · 처치 '+S.kills;
+ hudEl.querySelector('.s').textContent='무한 생존 '+(S.loop?(S.loop+1)+'회차 · ':'· ')+(S.i+1)+'/'+S.ids.length+' '+(def?.title||'')+' · '+ph+' · 처치 '+S.kills+(choiceQ?' · 강화 '+choiceQ+' 대기('+Math.max(0,Math.ceil(((S.choiceIdx||0)+1)*CHOICE_EVERY-(S.playT||0)))+'초)':'');
  hudEl.querySelector('.c i').style.width=(100*clamp(S.core.hp/st.max,0,1)).toFixed(1)+'%';
  hudEl.querySelector('.x i').style.width=(100*clamp(S.xp/xpNeed(S.lv),0,1)).toFixed(1)+'%';hudEl.classList.add('on');}catch(e){fail(e);}}
 
 // ── 시작 ──
-function heroPicker(){const H=G(()=>HEROES,{}),ids=Object.keys(H);const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
- openPanel('<div class="eyebrow">무한 생존 · 영웅 고르기</div><h2>누구의 기억으로 버틸까요</h2><p class="small">맵 중앙의 정화 코어를 지키며 몰려오는 적을 버팁니다. 서사가 흐르는 동안 적이 계속 나오고, 보스 서사가 나오면 보스가 나타납니다. 모든 적을 정화하면 다음 기억으로 넘어갑니다. 이 모드는 저장하지 않습니다.</p>'+
-  '<div class="r600Heroes">'+ids.map(id=>'<button type="button" data-r600hero="'+esc(id)+'">'+esc(H[id]?.name||id)+'</button>').join('')+'</div><div class="actions"><button id="r600Back">뒤로</button></div>');
- for(const b of document.querySelectorAll('[data-r600hero]'))b.onclick=()=>start(b.getAttribute('data-r600hero'));
+function difficultyPicker(){ensureCss();const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+ const pct=v=>(v>=1?'+':'')+Math.round((v-1)*100)+'%';
+ openPanel('<div class="eyebrow">무한 생존 · 난이도</div><h2>얼마나 깊이 버틸까요</h2><p class="small">정화 코어를 지키며 몰려오는 적을 버팁니다. 난이도는 몹 체력·동시 등장 수·몹이 주는 피해·경험치에 반영됩니다. 강화 창은 난이도와 관계없이 77초마다 한 번, 쌓인 강화를 한꺼번에 고릅니다.</p>'+
+  '<div class="r600Diffs">'+Object.keys(DIFFS).map(id=>{const d=DIFFS[id];return '<button type="button" class="r600Diff'+(id===pickedDiff?' sel':'')+'" data-r600diff="'+id+'"><b>'+esc(d.name)+'</b><span>'+esc(d.text)+'</span><em>몹 체력 '+pct(d.hp)+' · 몹 수 '+pct(d.cap)+' · 받는 피해 '+pct(d.dmg)+' · 경험치 '+pct(d.xp)+'</em></button>';}).join('')+'</div><div class="actions"><button id="r600Back">뒤로</button></div>');
+ for(const b of document.querySelectorAll('[data-r600diff]'))b.onclick=()=>{pickedDiff=b.getAttribute('data-r600diff');heroPicker();};
  const back=document.getElementById('r600Back');if(back)back.onclick=()=>{pending=false;try{showTitle();}catch(e){fail(e);}};}
-async function start(hero){try{pending=false;stats.starts++;deactivate();S=fresh(hero||'hwando');choiceQ=0;spawnAt0=0;tainted=true;
+// 영웅 고르기: 스토리 모드 영웅 고르기처럼 초상화·역할·패시브·Q 설명을 보여 주고, 영웅을 눌러 바꿔 본 뒤 '이 영웅으로 시작'.
+function heroPicker(){ensureCss();const H=G(()=>HEROES,{}),ids=Object.keys(H);const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+ const art=id=>G(()=>urlFor(window.__STORYWORLD_HEROES_R108__.portraitPath(id)),'assets/r108/heroes/'+id+'.webp'),face=id=>G(()=>urlFor(heroArt[id].idle.front),art(id));
+ const role=id=>G(()=>window.__STORYWORLD_HEROES_R108__.roles[id],'')||'';
+ let sel=G(()=>window.__STORYWORLD_POLISH_R101__?.pickedHero?.(),null);if(!H[sel])sel=H.hwando?'hwando':ids[0];
+ const detail=id=>{const h=H[id]||{},ranged=!h.melee&&Number(h.range)>4;return '<div class="pt"><img alt="'+esc(h.name||id)+'" src="'+esc(art(id))+'" onerror="this.onerror=null;this.src=\''+esc(face(id))+'\'"></div><div class="info"><div class="role">'+esc(role(id))+'</div><div class="nm">'+esc(h.name||id)+'</div><div class="tags"><span>'+(ranged?'원거리':'근거리')+'</span>'+(h.resource?'<span>'+esc(h.resource)+'</span>':'')+'</div><p><b>패시브</b> '+esc(h.passive||'')+'</p><p><b>Q</b> '+esc(h.special||'')+'</p></div>';};
+ openPanel('<div class="eyebrow">무한 생존 · 영웅 고르기 · 난이도 '+esc(diffOf(pickedDiff).name)+'</div><h2>누구의 기억으로 버틸까요</h2><p class="small">정화 코어를 지키며 몰려오는 적을 버팁니다. 이 모드는 저장하지 않습니다.</p>'+
+  '<div class="r600Heroes">'+ids.map(id=>'<button type="button" data-r600hero="'+esc(id)+'" class="'+(id===sel?'sel':'')+'"><img alt="" src="'+esc(face(id))+'"><span>'+esc(H[id]?.name||id)+'</span></button>').join('')+'</div><div class="r600Stage" id="r600Stage">'+detail(sel)+'</div><div class="actions"><button id="r600Go">이 영웅으로 시작</button><button id="r600Back">난이도로</button></div>');
+ for(const b of document.querySelectorAll('[data-r600hero]'))b.onclick=()=>{sel=b.getAttribute('data-r600hero');for(const x of document.querySelectorAll('[data-r600hero]'))x.classList.toggle('sel',x===b);const st=document.getElementById('r600Stage');if(st)st.innerHTML=detail(sel);};
+ const go=document.getElementById('r600Go');if(go)go.onclick=()=>start(sel,pickedDiff);
+ const back=document.getElementById('r600Back');if(back)back.onclick=()=>{difficultyPicker();};}
+async function start(hero,diff){try{pending=false;stats.starts++;deactivate();if(diff)pickedDiff=diff;S=fresh(hero||'hwando',pickedDiff);choiceQ=0;spawnAt0=0;tainted=true;
  /* 스토리 세이브가 있으면 엔진 newGame 이 '새 여정 확인'을 요구하며 막는다(덮어쓰기 보호). 생존은 저장을 아예 쓰지 않으므로 이 한 번만
     'R73 새 여정 확인됨'으로 답해 통과시킨다 — 덮어쓰기 대기(pendingOverwrite5)는 켜지 않으므로 기존 세이브를 지우는 길도 타지 않는다. */
  const SL=window.__STORYWORLD_SAVE_SLOTS_R73__,liftSlots=!!SL;if(liftSlots){try{window.__STORYWORLD_SAVE_SLOTS_R73__=Object.freeze({...SL,confirmedNew:()=>true});}catch(e){fail(e);}}
@@ -315,14 +365,14 @@ async function start(hero){try{pending=false;stats.starts++;deactivate();S=fresh
  if(!S.ids.length){deactivate();return false;}return await go(0);}catch(e){fail(e);deactivate();return false;}}
 function titleButton(){const panel=document.getElementById('panel'),normal=document.getElementById('campaignNew54')||document.getElementById('newBtn');if(!panel||!normal||document.getElementById('survivalStartR600'))return;
  const b=document.createElement('button');b.id='survivalStartR600';b.type='button';b.textContent='무한 생존으로 시작';b.title='맵 중앙의 정화 코어를 지키며 서사 순서대로 몰려오는 적을 버팁니다(저장하지 않음)';
- b.onclick=()=>{pending=true;heroPicker();};const cin=document.getElementById('cinemaStartR461');if(cin&&cin.parentNode)cin.parentNode.insertBefore(b,cin);else(normal.parentNode||panel).appendChild(b);stats.titleButtons=(stats.titleButtons||0)+1;}
+ b.onclick=()=>{pending=true;difficultyPicker();};const cin=document.getElementById('cinemaStartR461');if(cin&&cin.parentNode)cin.parentNode.insertBefore(b,cin);else(normal.parentNode||panel).appendChild(b);stats.titleButtons=(stats.titleButtons||0)+1;}
 
 // ── 엔진 연결 ──
 function install(){makeNative=makeRoom;
  const EX=window.__STORYWORLD_EXPLORATION__;if(EX&&typeof EX.layout==='function'){const own={};for(const k of Object.keys(EX))own[k]=EX[k];own.layout=function(id,...a){if(stageRoom&&S?.active&&id===stageRoom.id&&G(()=>layer,'')==='STORY')return stageRoom.exploration;return EX.layout.call(EX,id,...a);};own.survivalR600=true;try{window.__STORYWORLD_EXPLORATION__=Object.freeze(own);}catch(e){fail(e);}}
  const getBase=getRoom;getRoom=function(id=zone,l=layer){if(stageRoom&&S?.active&&id===stageRoom.id&&l==='STORY')return stageRoom;return getBase.apply(this,arguments);};
  const enterBase=enterRegion;enterRegion=async function(...a){if(!entering&&S?.active){/* 메뉴 '쉼터로' 등 생존 밖으로 나가는 길은 타이틀로(엔진 진행이 생존용 새 게임이라 그대로 들어가면 자동 저장이 스토리 슬롯을 덮는다) */deactivate();try{showTitle();}catch(e){fail(e);}setTimeout(()=>{try{if(!S?.active&&!document.getElementById('survivalStartR600'))showTitle();}catch(e){fail(e);}},120);/* 바깥 감싸기가 창을 닫아도 타이틀이 남게 */return false;}return enterBase.apply(this,a);};
- const tickBase=tick;tick=function(dt){try{snapCoreWalkers();}catch(e){fail(e);}const t0=G(()=>time,0);const r=tickBase.apply(this,arguments);/* 캠페인 연출(R317 궁전 장면·R368 배신 영상 등)은 modal/loading 없이 tick 을 일찍 돌려보내 엔진 시간을 멈춘다 — 생존 단계는 엔진이 실제로 흘린 시간만큼만 진행 */const adv=G(()=>time,0)-t0;try{if(here()&&S.over&&!S.leaving&&performance.now()>=(S.panelAfter||0)&&!G(()=>modal,false)&&!G(()=>loading,false)){stats.resultRecovered=(stats.resultRecovered||0)+1;resultPanel();}/* 결과 창을 Esc 로 닫았으면 다시 띄운다(다시 도전·처음 화면 전까지 멈춤) */}catch(e){fail(e);}try{if(here()&&adv>0&&!G(()=>modal,false)&&!G(()=>loading,false)&&player.hp>0){if(choosing&&!S.over){choosing=false;choiceQ++;stats.choiceRecovered=(stats.choiceRecovered||0)+1;}/* 카드를 고르지 않고 창이 닫혔으면(Esc 등) 다시 띄운다 */step(adv);showChoice();}}catch(e){fail(e);}return r;};
+ const tickBase=tick;tick=function(dt){try{snapCoreWalkers();}catch(e){fail(e);}const t0=G(()=>time,0);const r=tickBase.apply(this,arguments);/* 캠페인 연출(R317 궁전 장면·R368 배신 영상 등)은 modal/loading 없이 tick 을 일찍 돌려보내 엔진 시간을 멈춘다 — 생존 단계는 엔진이 실제로 흘린 시간만큼만 진행 */const adv=G(()=>time,0)-t0;try{if(here()&&S.over&&!S.leaving&&performance.now()>=(S.panelAfter||0)&&!G(()=>modal,false)&&!G(()=>loading,false)){stats.resultRecovered=(stats.resultRecovered||0)+1;resultPanel();}/* 결과 창을 Esc 로 닫았으면 다시 띄운다(다시 도전·처음 화면 전까지 멈춤) */}catch(e){fail(e);}try{if(here()&&adv>0&&!G(()=>modal,false)&&!G(()=>loading,false)&&player.hp>0){if(choosing&&!S.over){choosing=false;choiceQ+=Math.max(1,pickRem);pickRem=0;S.forceChoice=true;stats.choiceRecovered=(stats.choiceRecovered||0)+1;}/* 카드를 고르지 않고 창이 닫혔으면(Esc 등) 다시 띄운다 */S.playT=(S.playT||0)+adv;step(adv);showChoice();}}catch(e){fail(e);}return r;};
  rawGainXP=gainXP;gainXP=function(v,...a){if(here()&&inKill){if(Number.isFinite(+v)&&+v>0&&inKill.e){gems.push({x:inKill.e.x+(Math.random()-.5)*.4,y:inKill.e.y+(Math.random()-.5)*.4,v:+v});
    if(gems.length>GEM_CAP){const a0=gems.shift(),b0=gems[0];b0.v+=a0.v;}}return;}return rawGainXP.call(this,v,...a);};
  const hitBaseR600=hitEnemy;hitEnemy=function(...a){if(!here())return hitBaseR600.apply(this,a);inHitR600++;try{return hitBaseR600.apply(this,a);}finally{inHitR600--;}};
@@ -346,9 +396,9 @@ function install(){makeNative=makeRoom;
 try{install();}catch(e){fail(e);}
 // 창(강화 고르기·결과·메뉴)이 열려 있으면 자막을 감춘다(카드를 가리지 않게).
 try{const iv=setInterval(()=>{try{document.body.classList.toggle('r600Modal',!!(S?.active&&G(()=>modal,false)));}catch(_){}},200);iv?.unref?.();}catch(_){}
-window.__STORYWORLD_SURVIVAL_R600__=Object.freeze({revision:REV,start,qaGo:i=>S?.active?go(i):false,qaCoreHp:v=>{if(!S?.active)return false;S.core.hp=Math.max(0,+v||0);S.core.hitAt=G(()=>time,0);if(S.core.hp<=0&&!S.over){stats.coreLost++;over('core');}return true;},/* 검사·스크린샷용: 코어 체력을 바로 정한다(0 이면 다음 단계에서 파괴) */stageIds:()=>S?[...S.ids]:[],active:()=>!!S?.active,here,
- state:()=>S?{tainted,narrMinEnd:S.narrMinEnd||0,ready:!!S.ready,startPos:S.startPos||null,i:S.i,loop:S.loop,id:S.ids[S.i],phase:S.phase,narrating:S.narrating,narrEndAt:S.narrEndAt,bossUp:S.bossUp,kills:S.kills,core:{...S.core,stats:CS()},choiceQ,gems:gems.length,over:S.over,ids:S.ids.length}:null,
+window.__STORYWORLD_SURVIVAL_R600__=Object.freeze({revision:REV,start,qaCredit:v=>{if(!S?.active)return false;credit(+v||0);return true;},qaPlayT:v=>{if(!S?.active)return false;S.playT=Math.max(0,+v||0);return true;},qaGo:i=>S?.active?go(i):false,qaCoreHp:v=>{if(!S?.active)return false;S.core.hp=Math.max(0,+v||0);S.core.hitAt=G(()=>time,0);if(S.core.hp<=0&&!S.over){stats.coreLost++;over('core');}return true;},/* 검사·스크린샷용: 코어 체력을 바로 정한다(0 이면 다음 단계에서 파괴) */stageIds:()=>S?[...S.ids]:[],active:()=>!!S?.active,here,
+ state:()=>S?{tainted,diff:S.diff,playT:S.playT,choiceIdx:S.choiceIdx,pickRem,narrMinEnd:S.narrMinEnd||0,ready:!!S.ready,startPos:S.startPos||null,i:S.i,loop:S.loop,id:S.ids[S.i],phase:S.phase,narrating:S.narrating,narrEndAt:S.narrEndAt,bossUp:S.bossUp,kills:S.kills,core:{...S.core,stats:CS()},choiceQ,gems:gems.length,over:S.over,ids:S.ids.length}:null,
  narr:()=>({playing:narrPlaying(),queued:N.q.length,cur:N.cur?.text||null}),skipNarration:()=>{N.q.length=0;if(S){S.narrMinEnd=0;/* 서사가 벽시계로 이미 끝났어도 남은 최소 웨이브 길이를 지금으로 당긴다 */if(!S.narrating&&S.narrEndAt>G(()=>time,0))S.narrEndAt=G(()=>time,0);}/* 일부러 건너뛰면 최소 웨이브 길이도 함께 끝낸다 */if(N.cur){N.gen++;N.cur=null;narrNext();}},
- pure:Object.freeze({xpNeed,levelUps,stageIds,arena,spawning,nextPhase,advance,cap,hpMul,coreStats,pickThree,sentences,TAIL,CORE0,CORE_UPS}),
+ pure:Object.freeze({DIFFS,diffOf,CHOICE_EVERY,WINDOW_MAX,choiceDue,windowPicks,xpNeed,levelUps,stageIds,arena,spawning,nextPhase,advance,cap,hpMul,bossStats,mobDamage,smoothAtk,BOSS_HP,coreStats,pickThree,sentences,TAIL,CORE0,CORE_UPS}),
  inspect:()=>({revision:REV,stats:{...stats},lastError,active:!!S?.active,here:here(),pending})});
 })();
