@@ -30,7 +30,9 @@
  function warm(list){try{if(typeof audioBuffer!=='function'||typeof audioUnlocked!=='undefined'&&!audioUnlocked)return;const ss=[...new Set(list.map(slugFor).filter(Boolean))].sort(),key=ss.join();if(!key||key===warmKey)return;warmKey=key;
   for(const s of ss)for(const [K] of SETS)for(const r of soundProfiles?.['r788'+K+'_'+s]||[])try{Promise.resolve(audioBuffer(r.path)).catch(()=>{});}catch(_){}stats.warmed++;}catch(_){stats.errors++;}}
  function tick(){try{const list=typeof room!=='undefined'&&room&&Array.isArray(room.enemies)?room.enemies:null;if(!list)return;warm(list);
-  for(const e of list){if(!slugFor(e))continue;const id=e.attack?.id;if(!seenAtk.has(e)){seenAtk.set(e,id);continue;}if(id==null||seenAtk.get(e)===id){seenAtk.set(e,id);continue;}seenAtk.set(e,id);attack(e);}
+  // R964: 엔진 서사 패턴 공격(setAttackPose5)은 attack 에 id 가 없고 bossVolley 도 안 부른다(타락천사 기사 등) → 패턴 시작 시각(storyAttackStart5)이 새 값으로 바뀐 순간도 공격 시작으로 본다.
+  for(const e of list){if(!slugFor(e))continue;const id=e.attack?.id,ps=typeof e.storyAttackStart5==='number'&&e.storyAttackStart5>0?e.storyAttackStart5:null,o=seenAtk.get(e);seenAtk.set(e,{id,ps});
+   if(o&&((id!=null&&o.id!==id)||(ps!=null&&o.ps!==ps)))attack(e);}
  }catch(_){stats.errors++;}}
  if(on){
   try{apply();}catch(_){stats.errors++;}

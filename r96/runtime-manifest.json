@@ -45434,8 +45434,8 @@
     },
     {
       "path": "combat-sfx-r788.js",
-      "bytes": 6553,
-      "sha256": "eec49db8c284930f4be54fc44b2b8c772419ce05d7070d39aa0ee7836f9b4be1"
+      "bytes": 6854,
+      "sha256": "3e7a6f084d212529cee86e39d732d61925240ba71a63d9d2f7e31896bb04932a"
     },
     {
       "path": "crates-r108.js",
@@ -47059,7 +47059,7 @@
     }
   ],
   "fileCount": 9411,
-  "totalBytes": 1253555828,
+  "totalBytes": 1253556129,
   "webHTMLSha256": "5136af1f08b6bc6dc06e7832868eba5a5c56437800d4e41d8bf9640584083b18",
   "largest": [
     {
