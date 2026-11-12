@@ -83,6 +83,8 @@ function assistTick(){if(!assisting()){return;}const t=now();
  const nativeSkills=typeof settings!=='undefined'&&settings.autoSkill===true&&typeof auto!=='undefined'&&auto;
  if(!nativeSkills&&t>=assist.skillAt){assist.skillAt=t+.35;const adm=window.__STORYWORLD_HANDO_FINAL_R49__,wer=window.__STORYWORLD_WER__;
   if(adm&&wer?.cast)for(const slot of['r','w','e']){const e=adm.autoTarget?.(slot);if(!e)continue;if(slot==='e'&&typeof HEROES!=='undefined'&&Math.hypot(e.x-player.x,e.y-player.y)<finite(HEROES[player.hero]?.range,2)*.7)continue;try{if(wer.cast(slot,true)){stats.autoSkills++;break;}}catch(err){fail(err);}}}
+ // R705: 반자동(길잡이 아님)은 공격만 자동 — 스스로 걷는 보조(장판 피하기·물러서기·옆걸음)는 건너뛴다.
+ if(window.__STORYWORLD_SEMI_AUTO_R705__?.holdStill?.())return;
  if(t<assist.next||t<assist.until)return;assist.next=t+.12;
  const list=threats(),near=foes(12),ranged=RANGED.has(player.hero);
  if(list.length&&inThreat(player.x,player.y,list,.25)){const p=escapePoint(list,near,1.4,3.2,ranged);if(p&&stepTo(p,.55)){stats.dodges++;return;}}
@@ -187,7 +189,7 @@ function reachTick(){if(!prefs.assist||typeof guide==='undefined'||!guide||!solo
 // ---- 설치 ----------------------------------------------------------------------------------------
 function install(){installCentre();installLight();installBook();
  const tb=tick;tick=function(dt,...a){scanBudget=6;const r=tb.call(this,dt,...a);if(!live()||!Number.isFinite(dt)||dt<=0)return r;
-  try{if(solo()&&!busy()){aimTick();spacingTick(dt);samongTick();}wallsTick();assistTick();reachTick();}catch(e){fail(e);}return r;};
+  try{window.__STORYWORLD_DANCE_FREE_R706__?.settle?.();/* R706: 춤 타격 뒤 본체 자리로 — 아래 보조·R597·R705 자동 시전이 본체에서 나가게 */if(solo()&&!busy()){aimTick();spacingTick(dt);samongTick();}wallsTick();assistTick();reachTick();}catch(e){fail(e);}return r;};
  if(typeof guideStep==='function'){const gs=guideStep;guideStep=function(...a){if(prefs.assist&&now()<assist.until)return;return gs.apply(this,a);};}
  if(typeof draw==='function'){const db=draw;draw=function(...a){try{if(live()){wallsTick();guardWallShapes();}}catch(e){fail(e);}return db.apply(this,a);};}}
 try{install();}catch(e){fail(e);}

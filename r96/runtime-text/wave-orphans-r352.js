@@ -15,7 +15,7 @@ const stats={woken:0,checks:0,errors:0};let lastError=null,next=0;const fail=e=>
 const T=()=>typeof time==='number'?time:0;
 const guest=()=>{try{return window.__STORYWORLD_COOP_SIM_R62__?.mode?.()==='guest';}catch(_){return false;}};
 const heroes=()=>{try{const c=window.__STORYWORLD_COOP_SIM_R62__,m=c?.mode?.();if(m==='host'){const l=c.livingPlayers?.();if(Array.isArray(l)&&l.length)return l;}}catch(_){}return typeof player==='object'&&player?[player]:[];};
-function orphan(e,r){if(!e||!(e.hp>0)||e.spawnState!=='hidden'||e.boss||e.midboss||e.deadRecorded)return false;const i=e.fieldWaveIndex6;
+function orphan(e,r){if(!e||!(e.hp>0)||e.spawnState!=='hidden'||e.boss||e.midboss||e.deadRecorded)return false;if(window.__STORYWORLD_RALLY_WAVES_R905__?.held?.(e))return false;/* R905: 보스 앞 집결에서 차례를 기다리는 적은 남겨진 몹이 아니다 */const i=e.fieldWaveIndex6;
  if(!Number.isInteger(i)||!Array.isArray(r.fieldWaves6))return false;const cur=Number.isInteger(r.fieldWaveIndex6)?r.fieldWaveIndex6:0;return i<cur||r.fieldWaveCleared6===true;}
 function sweep(){if(!on||guest()||typeof started==='undefined'||!started||typeof room!=='object'||!room||!Array.isArray(room.enemies))return;const t=T();if(t<next&&next-t<=.5)return;/* 지역에 들어가면 time 이 0 으로 돌아간다 — 되돌아간 시간이면 바로 다시 본다 */next=t+.5;stats.checks++;
  const hs=heroes().filter(a=>a&&a.hp>0);if(!hs.length)return;
