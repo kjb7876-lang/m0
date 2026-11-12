@@ -803,6 +803,8 @@ jobs:
         run: node r96/qa/r952/r952-cpu-check.cjs
       - name: R948 michaela heart passive CPU check
         run: node r96/qa/r948/r948-cpu-check.cjs
+      - name: R949 Seoha passive overlapped time (summoned heroes, friendly Arbelia boss summon, afterimage time collapse; summons never join room.enemies) CPU check
+        run: node r96/qa/r949/r949-cpu-check.cjs
       - name: R899 boss-map story window and memory-shard paper move to top-left, quest line shortened CPU check
         run: node r96/qa/r899/top-left-cpu-check.cjs
       - name: R930 Kaironomicon cyber-magitech floor/wall tiles and tech props (art only, layout unchanged) CPU check
