@@ -8,7 +8,7 @@ ok('source exists',!!src);
 ok('runtime copy matches source',!!src&&src===RT(F));
 try{new vm.Script(src);ok('syntax',true);}catch(e){ok('syntax '+e.message,false);}
 const html=RT('index.html')||'';
-ok('script tag once, after enemy-attack-tempo-r601 and right before combat-r118',html.split('"./'+F+'"').length===2&&/enemy-attack-tempo-r601\.js"><\/script>\s*<script src="\.\/hero-motion-r895\.js"><\/script>\s*<script src="\.\/combat-r118\.js">/.test(html));
+ok('script tag once, after enemy-attack-tempo-r601 and right before combat-r118',html.split('"./'+F+'"').length===2&&/enemy-attack-tempo-r601\.js"><\/script>(?:<script src="\.\/hit-feel-r750\.js"><\/script>)?\s*<script src="\.\/hero-motion-r895\.js"><\/script>\s*<script src="\.\/combat-r118\.js">/.test(html));
 ok('listed in verify-r96-public.py',/'hero-motion-r895\.js'/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')));
 ok('CI runs this check',/r96\/qa\/r895\/r895-cpu-check\.cjs/.test(fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8')));
 ok('no gameplay writes (damage/save/cooldowns/positions)',!!src&&!/\.damage\s*=|saveGame|(?:attackCD|specialCD|blinkCD|skillAnim|attackAnim|hurtAnim|dashAnim)\s*=[^=]|player\.(?:x|y|hp)\s*=[^=]/.test(src));

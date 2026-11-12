@@ -14,21 +14,21 @@
  "files": [
   {
    "path": "assets/r369/poison-city.mp4",
-   "bytes": 2776916,
-   "sha256": "57e8035a0d67f77c443f354a0343bc5d70d12a91f30929eaf6188bf86bc7420b",
+   "bytes": 4396161,
+   "sha256": "488ac2906ece3f7fb3e255a4471f1219db5d40ff8626195f58efd4d39b6d3abb",
    "size": [
     1280,
     720
    ],
-   "process": "ffmpeg delogo x968 y92 280x120 (3.55~6.55초, 가짜 HUD '위험: 환각성 약물 검출' 글자·틀 제거) + delogo x1130 y568 60x60(워터마크), libx264 crf25, aac 128k, faststart",
+   "process": "R745: 원본에서 다시 만듦. 별 표시 생성 도구 표시를 흐림(delogo)이 아니라 역합성(표시 투명도 지도로 배경 = (관측−a·흰색)/(1−a), 윤곽 띠 라플라스 채움)으로 지움(예전 delogo 흐림 자국 없음). 가짜 HUD '위험: 환각성 약물 검출' 글자·틀(x968 y92 280x120, 3.55~6.55초)은 예전처럼 delogo. CAS 0.2, x264 veryslow. 소리: 30Hz 아래 자르기·약한 FFT 잡음 줄이기·EBU R128 2단계 −16 LUFS/트루 피크 −1.5 dBTP, 48 kHz 스테레오 AAC 128k",
    "use": "환자와 중독의 도시(ep1a10) 첫 입장 서사 영상",
    "applied": true
   },
   {
    "path": "assets/r369/poison-city-poster.jpg",
-   "bytes": 97161,
-   "sha256": "fdad4fb6c17d04ae235a822ce1df2cb7fbed72f0c12a76502a7a060f572a84a3",
-   "process": "poison-city.mp4 0.3초 프레임",
+   "bytes": 111051,
+   "sha256": "06584ae2f9fb0ea5aa2122413660d8b9eab5366b2d39d88d9e385606768ab8fb",
+   "process": "R745: 새 영상 0.3초 프레임",
    "use": "영상 포스터",
    "applied": true
   }
