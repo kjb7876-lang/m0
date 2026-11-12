@@ -661,6 +661,8 @@ jobs:
         run: node r96/qa/r792/r792-cpu-check.cjs
       - name: R793 story key NPC 4 (ep1b05 Seoyun by the boss door - ask her permission before the door story; no kill seal; other gates unchanged) CPU check
         run: node r96/qa/r793/r793-cpu-check.cjs
+      - name: R840 story side quests (an NPC at each story map entrance - purge a tainted prop or hunt named mobs, a clue drops and goes to the note book; guide and cinema mode do it without panels; story gates untouched) CPU check
+        run: node r96/qa/r840/r840-cpu-check.cjs
       - name: R563 Michaela genesis chain (Q → sky light pillars, R → grand pillar + halo; no new keys, upright cross only, Dots MI sheets) CPU check
         run: node r96/qa/r563/michaela-genesis-cpu-check.cjs
       - name: R564 Seoha chrono chain (time stop shell + shatter, afterimage clones, haste; no new keys, caps, Dots SE sheets) CPU check

@@ -44049,8 +44049,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6573996,
-      "sha256": "ca0c74ac14a4352bbac8c51b2761c7daf1f7695b7cf35fd8dd4a6ac0c1667220"
+      "bytes": 6574036,
+      "sha256": "53ba48f25f08290ee567556cdee99d8fe2fe246212099bd495c3e8c71c40b503"
     },
     {
       "path": "intro-r140.js",
@@ -44486,6 +44486,11 @@
       "path": "props-variety-r140.js",
       "bytes": 2863,
       "sha256": "39af4681d829411f0f00624d608ebe9e489ef7765b3e40318d2563a5751dfb84"
+    },
+    {
+      "path": "quest-r840.js",
+      "bytes": 32562,
+      "sha256": "edb09df0413e0aec3a6a59174ee1e86dfb60ab6c69102cf1765eef5da74741fa"
     },
     {
       "path": "reach-r225.js",
@@ -45018,9 +45023,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9003,
-  "totalBytes": 1237085255,
-  "webHTMLSha256": "ca0c74ac14a4352bbac8c51b2761c7daf1f7695b7cf35fd8dd4a6ac0c1667220",
+  "fileCount": 9004,
+  "totalBytes": 1237117857,
+  "webHTMLSha256": "53ba48f25f08290ee567556cdee99d8fe2fe246212099bd495c3e8c71c40b503",
   "largest": [
     {
       "path": "index.html",
