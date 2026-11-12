@@ -19,7 +19,8 @@ const sb={console,Math,JSON,Set,Map,WeakMap,WeakSet,Object,Array,Number,String,B
  maxHP:()=>100,actorHeight:()=>60,project:(x,y)=>({x:(x-y)*34,y:(x+y)*17}),facing:(dx,dy)=>dx-dy>0?'right':'left',
  tick(dt){sb.time+=dt;},drawHero(){},drawEffect(){},drawProjectile(){},
  hitEnemy(e,value,source){hits.push({e,value,source});e.hp-=value;return true;},hurt(d){hurts.push(d);sb.player.hp-=d;},
- fx(type,x,y,o){effects.push({type,x,y,...o});}};
+ fx(type,x,y,o){effects.push({type,x,y,...o});},
+ blinkCalls:0,blink(){sb.blinkCalls++;},guideStep(dt){if(sb.player.hp/100<.35&&!(sb.player.blinkCD>0))sb.blink();}};
 sb.window=sb;
 sb.__STORYWORLD_WER__={defs:{seoha:{e:['E','x','dash']},hunter:{e:['E','x','dash']},gunner:{e:['E','x','dash']},michaela:{e:['E','x','escape']},hwando:{e:['E','x','dash']}}};
 let samongActive=true;sb.__STORYWORLD_SAMONG_R75__={active:()=>samongActive};
@@ -88,6 +89,15 @@ const html=fs.readFileSync(path.join(RT,'index.html'),'utf8');
   const rg=rate('gunner'),rh=rate('hunter'),rs=rate('seoha'),rm=rate('michaela');
   check('R766 miss rates ≈ 20/17/15/13% (gunner>hunter>seoha>michaela, each within ±3%) '+JSON.stringify({rg,rh,rs,rm}),Math.abs(rg-.20)<.03&&Math.abs(rh-.17)<.03&&Math.abs(rs-.15)<.03&&Math.abs(rm-.13)<.03);
   check('R767c PRD: no back-to-back misses over 80k hits',twos===0,{twos});
+  // R769(사용자 2026-11-12 "ego각성시 자동회피도 … 이동회피가 아니라 적공격회피확률판정으로"): EGO 중 블링크 쿨 0 이 길잡이 자동 블링크(체력 35%↓)를 매 0.5초 순간이동으로 만들었다
+  sb.player.hp=20;sb.player.blinkCD=0;sb.blinkCalls=0;sb.guideStep(.5);check('R769 guide (auto) never blinks the hero away — no move-dodge',sb.blinkCalls===0,{calls:sb.blinkCalls});
+  sb.blink();check('R769 a manual S blink still works',sb.blinkCalls===1,{calls:sb.blinkCalls});
+  sb.player.hero='hwando';sb.player.ego=5;hp0();setR(.99);sb.hurt(30,src);hp0();setR(0);sb.hurt(30,src);
+  check('R769 EGO: melee hero (hwando) gets the enemy-attack miss roll',hurts.length===0&&effects.some(e=>e.type==='text'&&/회피/.test(e.text||'')),{hurts});
+  sb.player.ego=0;hp0();setR(.99);sb.hurt(30,src);hp0();setR(0);sb.hurt(30,src);check('R769 melee hero without EGO: no miss chance',hurts.length===1,hurts);
+  Math.random=R0;sb.player.ego=5;let em=0;for(let i=0;i<20000;i++){sb.player.hp=100;const n=hurts.length;sb.hurt(1,src);if(hurts.length===n)em++;}sb.player.ego=0;
+  check('R769 EGO melee miss rate ≈ 15% '+(em/20000),Math.abs(em/20000-.15)<.03);
+  sb.player.hero='gunner';
   // 옛 이동 회피가 남아 있지 않다: 공격 예고 안에 서 있어도 몸이 밀리지 않는다
   sb.player.hero='gunner';sb.player.x=0;sb.player.y=0;sb.time+=30;const atk={id:'a1',x:1,y:0,hp:10,spawnState:'active',attack:{elapsed:.3,castWindup150:.4,committed:false}};sb.room.enemies=[atk];sb.tick(.016);
   check('R766 no more move-dodge: hero standing in a telegraph is not pushed',sb.player.x===0&&sb.player.y===0,{x:sb.player.x,y:sb.player.y});

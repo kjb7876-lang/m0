@@ -162,10 +162,12 @@ function applyRanged(){if(rangedState.applied||!prefs.ranged)return;const H=type
 const isRanged=p=>!!RANGED[p?.hero];
 // R767(사용자 2026-11-11): 모든 영웅 EGO 동안·슬레이어 R 적혈 오라(7초) 동안 S 블링크 재사용 대기 없음
 function blinkFree(){if(!(finite(player.blinkCD)>0))return;let free=egoOn(player);if(!free&&player.hero==='slayer'){try{free=window.__STORYWORLD_SLAYER_BLOOD_R425__?.auraOn?.()===true;}catch(_){}}if(free){player.blinkCD=0;stats.blinkFree=(stats.blinkFree||0)+1;}}
-function missRoll(damage,src){if(!prefs.ranged||!solo()||!isRanged(player)||!(player.hp>0)||!(Number.isFinite(damage)&&damage>0))return false;
+/* R769(사용자 11-12): EGO 각성 중에는 모든 영웅(근접 포함)이 같은 확률 빗나감 — 근접은 15%(PRD C .04393), 원거리는 제 값 */
+const EGO_MISS={miss:.15,prd:.04393};
+function missRoll(damage,src){const ego=egoOn(player),rng=isRanged(player)&&prefs.ranged;if(!solo()||!(rng||ego)||!(player.hp>0)||!(Number.isFinite(damage)&&damage>0))return false;
  if(src&&(src.r330||src.status||src.type==='r330-status'))return false;/* R767c 워크3식 의사난수(PRD): 직전 빗나감·영웅 바뀜 뒤 맞은 횟수 n 으로 확률 C·n — 첫 공격은 늘 맞고 연속 빗나감이 없다. C 는 장기 평균이 miss(20/17/15/13%)가 되게 맞춘 값 */
  if(rangedState.missHero!==player.hero){rangedState.missHero=player.hero;rangedState.missRun=0;}
- const C=RANGED[player.hero].prd,n=rangedState.missRun|0;if(!(Math.random()<C*n)){rangedState.missRun=n+1;return false;}rangedState.missRun=0;
+ const C=(rng?RANGED[player.hero]:EGO_MISS).prd,n=rangedState.missRun|0;if(!(Math.random()<C*n)){rangedState.missRun=n+1;return false;}rangedState.missRun=0;
  rangedState.dodges++;try{if(typeof fx==='function')fx('text',player.x,player.y,{text:'회피',color:'#cfe8ff',life:.7});}catch(_){}return true;}
 /* 옛 이동 회피 — R766 부터 부르지 않는다(기록용) */function autoDodge(){if(!prefs.ranged||!solo()||!isRanged(player)||player.hp<=0||(typeof modal!=='undefined'&&modal)||(typeof loading!=='undefined'&&loading))return;
  const cd=RANGED[player.hero].cd;if(time-rangedState.dodgeAt<cd||player.dashAnim>0||finite(player.invincible)>.2)return;
@@ -299,6 +301,8 @@ function install(){
    if(prefs.resonance777&&Number.isFinite(r0)&&Number.isFinite(player.resonance)&&player.resonance>r0&&player.resonance-r0<20){const want=Math.min(100,r0+(player.resonance-r0)*RES_GAIN);stats.resGain+=want-player.resonance;player.resonance=want;}
    applyRanged();blinkFree();guardTick(dt);samongTick();rootTick();faceTick();egoTick();fixDomText();if(prefs.props)spaceProps(room);}}catch(e){fail(e);}return out;};
  if(typeof updateHUD==='function'){const hudBase=updateHUD;updateHUD=function(...a){const r=hudBase.apply(this,a);try{resText();}catch(e){fail(e);}return r;};}
+ /* R769 길잡이(자동 진행)가 체력 35%↓에서 부르던 블링크 = 이동 회피 → 막는다. 손으로 누른 S 는 그대로 */
+ let guideBusy=false;if(typeof guideStep==='function'&&typeof blink==='function'){const gsBase=guideStep,blBase=blink;guideStep=function(...a){guideBusy=true;try{return gsBase.apply(this,a);}finally{guideBusy=false;}};blink=function(...a){if(guideBusy&&live()){stats.guideBlinkBlocked=(stats.guideBlinkBlocked||0)+1;return;}return blBase.apply(this,a);};}
  if(typeof hurt==='function'){const hurtBase=hurt;hurt=function(damage,...a){try{if(live()&&missRoll(damage,a[0]))return 'missed';}catch(e){fail(e);}if(prefs.guard&&live()&&player.guard&&Number.isFinite(damage)&&damage>0){const d=damage*GUARD_TAKEN/NATIVE_GUARD;guardState.blocked+=damage-d;damage=d;}return hurtBase.call(this,damage,...a);};}
  if(typeof toast==='function'){const toastBase=toast;toast=function(msg,...a){return toastBase.call(this,fixMsg(msg),...a);};}
  const heroBase=drawHero;drawHero=function(...a){const p=live()?player:null,ok=!!(p&&p.hp>0&&p.visible!==false&&Number.isFinite(p.x+p.y));const S=ok?SPR():null,ego=!!(S&&prefs.egoAura&&egoOn(p)),F=ego?palOf(p):null,I=ego?S.pal(F.b):null;
