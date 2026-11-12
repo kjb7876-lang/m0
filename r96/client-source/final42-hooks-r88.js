@@ -59,7 +59,7 @@
   ready:()=>prime(regionAssets())
  };
  const groundBase=groundImage;groundImage=function(...args){sync();warningPainted=new WeakSet();const result=groundBase.apply(this,args);api.draw({layer:'ground'});return result;};
- const heroBase=drawHero;drawHero=function(...args){sync();statusSync();if(!scoped())return heroBase.apply(this,args);api.draw({layer:'beforeActor',entity:player});const result=hideNativeStatusImages(()=>heroBase.apply(this,args));api.draw({layer:'afterActor',entity:player});api.draw({layer:'overlay'});return result;};
+ const heroBase=drawHero;drawHero=function(...args){if(typeof player==='object'&&player&&player.r720Ally===true)return heroBase.apply(this,args);/* R720: 생존 배치 영웅(player.r720Ally 몸)은 건너뛴다 — 이 덧씌우기의 상태는 조종 영웅 하나를 따른다(몸이 번갈아 그려지면 매번 초기화됐다) */sync();statusSync();if(!scoped())return heroBase.apply(this,args);api.draw({layer:'beforeActor',entity:player});const result=hideNativeStatusImages(()=>heroBase.apply(this,args));api.draw({layer:'afterActor',entity:player});api.draw({layer:'overlay'});return result;};
  const enemyBase=drawEnemy;drawEnemy=function(e,...args){const old=actorScope;actorScope=e;try{return enemyBase.apply(this,[e,...args]);}finally{actorScope=old;}};
  const strokeBase=strokeFootprint154;strokeFootprint154=function(g,stage,color){const result=strokeBase.apply(this,arguments);if(scoped()&&g&&stage==='warning'){
    const row=hazardScope?.row150,m=hazardScope?.medical20,a=actorScope?.attack,progress=row?(time-row.warningAt)/Math.max(.001,row.releaseAt-row.warningAt):m?(time-m.start)/Math.max(.001,m.releaseAt-m.start):hazardScope?hazardScope.age/Math.max(.001,hazardScope.warning):a?a.elapsed/Math.max(.001,a.castWindup150??a.shape154?.windup??1):0;

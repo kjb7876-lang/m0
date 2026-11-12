@@ -42979,8 +42979,8 @@
     },
     {
       "path": "attack-anim-r143.js",
-      "bytes": 20023,
-      "sha256": "a9f8a09ae457c4d18fbe913ad8f5dec492b3730f98a11569e69b2335d7cb4672"
+      "bytes": 20784,
+      "sha256": "6cb4913f1d60b069a1f0e3fb74f9cd39542a4b4e22e03374dc288f67f07e2a3a"
     },
     {
       "path": "audio-r108.js",
@@ -43744,13 +43744,13 @@
     },
     {
       "path": "combat-flow-r425.js",
-      "bytes": 62468,
-      "sha256": "32d8eb8a657431eb23234cf8c043230da4ab18a26e36fa9cb5640635067cc5b5"
+      "bytes": 62674,
+      "sha256": "0e31048d05c0ddf99129ccc525a998b6f3a2b13af0bb1a957f6348f9527ac003"
     },
     {
       "path": "combat-r114.js",
-      "bytes": 38113,
-      "sha256": "3e52a69ddb1222288ef3701bc0ee0b86a8ec990c29381dbc24a53c02abc170c2"
+      "bytes": 38848,
+      "sha256": "cc07d064b460195150ea5987695cb01882a950b4e77145a88be6a91649ed2158"
     },
     {
       "path": "combat-r118.js",
@@ -43984,8 +43984,8 @@
     },
     {
       "path": "final42-hooks-r88.js",
-      "bytes": 16439,
-      "sha256": "7b774d8c649b7997045b200629bd570ae9b2bee2c9c0d6ceb0c19088eaaad0f9"
+      "bytes": 16723,
+      "sha256": "998ecd094e50871483303554bf21e5e17367bf84f3cfa1ea2d5897e8eae8e2d8"
     },
     {
       "path": "final42-preview.html",
@@ -44089,8 +44089,8 @@
     },
     {
       "path": "hero-defense-r720.js",
-      "bytes": 31883,
-      "sha256": "7eca16e3f5ad2deee7dc7904af4ce4dec4f5bc3aca0cf84e4bea76a60c9067e1"
+      "bytes": 39198,
+      "sha256": "dfdacf4b55074cf2d21beeef7e1367b7ff18a063110922757d4ecbaf586a8015"
     },
     {
       "path": "hero-facing-r336.js",
@@ -44114,8 +44114,8 @@
     },
     {
       "path": "hero-motion-r895.js",
-      "bytes": 9725,
-      "sha256": "94f694ce2a4bc60b93811c2f9f540ff62b0764eaf54fec333ae88c2c3b51aee0"
+      "bytes": 10460,
+      "sha256": "632cebedada02c3349191d23d36a6c7caafb21261662d332a903a1acfb4b9531"
     },
     {
       "path": "hero-palette-r302.js",
@@ -44589,8 +44589,8 @@
     },
     {
       "path": "painted-vfx-r87.js",
-      "bytes": 10009,
-      "sha256": "df345cec31b6beb43f2fe457ce2d4821dfc90174c5837f9c47288e6fe375087e"
+      "bytes": 10293,
+      "sha256": "3759044d2de542d6fa1846d86121e23904f986660ca6d8516c3aa398b1b82d03"
     },
     {
       "path": "palette-r114-data.js",
@@ -44684,8 +44684,8 @@
     },
     {
       "path": "play-r113.js",
-      "bytes": 27792,
-      "sha256": "15ddcd51a939971bbaf064bf526e60dd0c26537e086b8aaa311bee15bde08490"
+      "bytes": 28527,
+      "sha256": "fa38cc81103df4c01bc1ac489b93b855c9f93f330473b3e788497b06b5683ab9"
     },
     {
       "path": "play-r115.js",
@@ -44969,8 +44969,8 @@
     },
     {
       "path": "skill-attack-r440.js",
-      "bytes": 4503,
-      "sha256": "544a981f948f7719a3dad27e0237dd3df51f65032fc22a84735f482db16c6180"
+      "bytes": 5238,
+      "sha256": "c1389189fdc98dc1cbb5cd47d85a874c34d97de1a7984b80875440f8ce7d1ec0"
     },
     {
       "path": "skill-fx-r292.js",
@@ -45014,8 +45014,8 @@
     },
     {
       "path": "slayer-r351.js",
-      "bytes": 20779,
-      "sha256": "d113827bda5f9f3645ffb1af9c8067d785fb03d1bbe1a401ca571604f2964012"
+      "bytes": 21519,
+      "sha256": "54f8a59d7f3fc172850390e1ee9ac3c3f48ebb5f7f908acb1cdb3d2c2f25c360"
     },
     {
       "path": "slayer-sheets-r585.js",
@@ -45024,8 +45024,8 @@
     },
     {
       "path": "status-r96.js",
-      "bytes": 5692,
-      "sha256": "01ab5961ac4af2100c63dfa51b32847d37cf12ac317b11fa0c9e3cec68ed9882"
+      "bytes": 5972,
+      "sha256": "8bcd3cf7e79f0e57ecd031fcb581e6df88bd984cf7e4b419e628c2662f725f12"
     },
     {
       "path": "story-batch-r139.js",
@@ -45189,8 +45189,8 @@
     },
     {
       "path": "visual-r119.js",
-      "bytes": 45664,
-      "sha256": "ccf7d9f15f3d97edb5c89918de8bde0247cc2933b7e02b1bc1467deabe4c49e1"
+      "bytes": 46399,
+      "sha256": "e9f0bc8b92ed97df4233b87fab0965be221c83c63e36a629e7f83adc5ecaac5c"
     },
     {
       "path": "visual-r90-world.js",
@@ -45229,8 +45229,8 @@
     },
     {
       "path": "visual-r93.js",
-      "bytes": 15487,
-      "sha256": "269659846edcc9421bfac56f832cb4cdb5adba101e84a1324622bc1815332a72"
+      "bytes": 16279,
+      "sha256": "ef8b854233ec0ef280a01c45aee5526da9961df0df3df36fa20a07ea9dcb29ff"
     },
     {
       "path": "voice-r381-data.js",
@@ -45334,7 +45334,7 @@
     }
   ],
   "fileCount": 9066,
-  "totalBytes": 1240057854,
+  "totalBytes": 1240072191,
   "webHTMLSha256": "259bd08417b246bd03bd92308563e5e7dface998b2a3d34f4cc4ee22d893b75a",
   "largest": [
     {

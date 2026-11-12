@@ -135,7 +135,8 @@
  //    방향마다 키가 59~104px로 달랐다. 영웅을 다 그린 뒤(기록된 그리기 명령) 이동 중이고 공격·스킬·맞음·대시·방어가 아니면,
  //    화면에서 실제 움직이는 방향(8방향)의 R91 걷기 묶음(4x2, 8프레임)을 걸은 거리에 맞춰 차례로 끼운다.
  //    칸마다 실제 몸 테두리로 잘라 키를 actorHeight x 0.98(R114 서 있기 기준)로 맞추고 발밑은 그대로. 그림이 없는 방향은 가까운 방향/좌우반전.
- const WALK_DIR='assets/r91/walk/',walkPlan={},walkBox=new Map(),walkMissing=new Set(),walkLoading=new Set(),walkState={d:0,x:null,y:null,dir:'s'};
+const perHeroR720=o=>{if(typeof Proxy!=='function'||typeof WeakMap!=='function')return o;const m=new WeakMap(),init=JSON.stringify(o),pick=()=>{let p=null;try{p=player;}catch(_){}if(p&&p.r720Ally===true){let s=m.get(p);if(!s){s=JSON.parse(init);m.set(p,s);}return s;}return o;};return new Proxy(o,{get:(_,k)=>pick()[k],set:(_,k,v)=>{pick()[k]=v;return true;},has:(_,k)=>k in pick(),deleteProperty:(_,k)=>delete pick()[k],ownKeys:()=>Reflect.ownKeys(pick()),getOwnPropertyDescriptor:(_,k)=>{const d=Object.getOwnPropertyDescriptor(pick(),k);if(d)d.configurable=true;return d;}});};/* R720: 생존 배치 영웅(player.r720Ally 몸)은 영웅마다 따로 상태를 갖는다 — 조종 영웅 상태와 섞이지 않게 */
+ const WALK_DIR='assets/r91/walk/',walkPlan={},walkBox=new Map(),walkMissing=new Set(),walkLoading=new Set(),walkState=perHeroR720({d:0,x:null,y:null,dir:'s'});
  try{if(typeof fetch==='function')fetch((typeof urlFor==='function'?urlFor(WALK_DIR+'index.json'):WALK_DIR+'index.json')).then(r=>r.ok?r.json():null).then(j=>{if(j?.plan)Object.assign(walkPlan,j.plan);}).catch(()=>{});}catch(_){}
  const WALK_RATE_R148=3.2;
  const DIR8=['e','se','s','sw','w','nw','n','ne'],NEAR={n:['ne','nw'],s:['se','sw'],e:['ne','se'],w:['nw','sw'],ne:['e','n'],nw:['w','n'],se:['e','s'],sw:['w','s']};
