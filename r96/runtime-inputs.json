@@ -8218,7 +8218,9 @@
     "assets/r770/villagers/herbwife-hit.webp",
     "assets/r770/villagers/sobok-atk.webp",
     "assets/r770/villagers/sobok-float.webp",
-    "assets/r770/villagers/sobok-idle.webp"
+    "assets/r770/villagers/sobok-idle.webp",
+    "assets/r790/npc/yigyeong-bust.webp",
+    "assets/r790/npc/yigyeong-idle6.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9293,5 +9295,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "db5a726fcf3829d99014a8d396b454ddce9d6e8b6c39fc8360960e3de7c2a242"
+  "runtimeManifestSHA256": "b4055cb409820afa3ae05e666e070be38ca96903cc8f63fe53f999e6ebf01da3"
 }
