@@ -434,6 +434,8 @@ jobs:
         run: node r96/qa/r785/r785-cpu-check.cjs
       - name: R664 regional ambience loops (ElevenLabs beds per episode, seamless, quiet) CPU check
         run: node r96/qa/r664/r664-cpu-check.cjs
+      - name: R787 per-hero W/E/R skill sounds and Hunter attack (ElevenLabs) CPU check
+        run: node r96/qa/r787/r787-cpu-check.cjs
       - name: R385 mob moves (review list v18 move/rename) CPU check
         run: node r96/qa/r385/r385-cpu-check.cjs
       - name: R390 cinema full narration + midboss hold + enemies keep chasing CPU check
