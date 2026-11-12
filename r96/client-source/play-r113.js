@@ -190,8 +190,9 @@ function install(){
   const before=new Map();if(ok&&prefs.dust)for(const e of room.enemies)if(liveFoe(e))before.set(e,e.x+e.y*1e-3);
   const r=tickBase.call(this,dt,...a);if(!ok||!Number.isFinite(dt)||dt<=0)return r;
   try{ // ① 실검무 고정점
-   if(prefs.ranged&&isRanged(player)&&dancing()){if(!dance.anchor){dance.anchor={x:pre.x,y:pre.y};dance.cam={x:pre.cx,y:pre.cy};stats.danceAnchors++;}if(typeof cam!=='undefined'){cam.x=dance.cam.x;cam.y=dance.cam.y;}stats.danceFrames++;}
-   else if(dance.anchor){const A=dance.anchor;dance.anchor=null;if(isRanged(player)&&!blockedAt(A.x,A.y,.23)&&Math.hypot(player.x-A.x,player.y-A.y)<14){player.x=A.x;player.y=A.y;player.moving=false;stats.danceReturns=(stats.danceReturns||0)+1;}}
+   /* R706: 실검무 중에도 본체를 직접 조종하면(dance-free-r706) 고정점·끝 되돌리기를 하지 않는다 */const freeR706=window.__STORYWORLD_DANCE_FREE_R706__?.on?.()===true;
+   if(!freeR706&&prefs.ranged&&isRanged(player)&&dancing()){if(!dance.anchor){dance.anchor={x:pre.x,y:pre.y};dance.cam={x:pre.cx,y:pre.cy};stats.danceAnchors++;}if(typeof cam!=='undefined'){cam.x=dance.cam.x;cam.y=dance.cam.y;}stats.danceFrames++;}
+   else if(dance.anchor){const A=dance.anchor;dance.anchor=null;if(!freeR706&&isRanged(player)&&!blockedAt(A.x,A.y,.23)&&Math.hypot(player.x-A.x,player.y-A.y)<14){player.x=A.x;player.y=A.y;player.moving=false;stats.danceReturns=(stats.danceReturns||0)+1;}}
    if(prefs.physics&&!busyMenu()){separate(dt);stepKnock(dt);}
    watchShots();
    if(prefs.dust&&!busyMenu()){const t=now(),moved=Math.hypot(player.x-pre.x,player.y-pre.y);if(moved>.02&&!dance.anchor&&moved<.6&&t-(hero.dustAt||0)>.16){hero.dustAt=t;dustAt(player.x,player.y);}

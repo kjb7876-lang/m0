@@ -8258,7 +8258,8 @@
     "assets/r710/neon/hit-s.webp",
     "assets/r710/neon/idle-s.webp",
     "assets/r710/seoha/hit-s.webp",
-    "assets/r710/seoha/idle-s.webp"
+    "assets/r710/seoha/idle-s.webp",
+    "dance-free-r706.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9333,5 +9334,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "e24fe6c4f893897641aa01d0baa02947f87217d49a00da29e21cbc1a511d59aa"
+  "runtimeManifestSHA256": "9906292ded2e50d46ba3622685d763b898b0965ec434453e1046ad8c4865b9b3"
 }

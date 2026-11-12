@@ -43773,6 +43773,11 @@
       "sha256": "1d8820f1f4884a00ff32ededbdd6d2cbcdffe831e18d9062cafb688acdcd868f"
     },
     {
+      "path": "dance-free-r706.js",
+      "bytes": 5310,
+      "sha256": "21094a55d20bdc33abd2404fb0b04b341b3e5cf3f7e2ba85864a2dea9fca95c7"
+    },
+    {
       "path": "dark-r123.js",
       "bytes": 15900,
       "sha256": "91f363c1bdad56c5433658de099caedb6bf4445112754c7fc25c32ae25f6add4"
@@ -44244,8 +44249,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6574458,
-      "sha256": "2f24feb00b2bf81726b2b7df56a9a0f66818d58984c42fc4778175dfb2e53f25"
+      "bytes": 6574503,
+      "sha256": "9e05de884a6d34b40f8d9a2f9b5a65b012ed1009a8442b5041c860ad076adec4"
     },
     {
       "path": "intro-r140.js",
@@ -44614,8 +44619,8 @@
     },
     {
       "path": "play-r113.js",
-      "bytes": 27572,
-      "sha256": "c1a0f4498178dea605beac124c90359589423ecc07c5a04475a1ddbf5b8f00f5"
+      "bytes": 27792,
+      "sha256": "15ddcd51a939971bbaf064bf526e60dd0c26537e086b8aaa311bee15bde08490"
     },
     {
       "path": "play-r115.js",
@@ -45243,9 +45248,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9048,
-  "totalBytes": 1239645414,
-  "webHTMLSha256": "2f24feb00b2bf81726b2b7df56a9a0f66818d58984c42fc4778175dfb2e53f25",
+  "fileCount": 9049,
+  "totalBytes": 1239650989,
+  "webHTMLSha256": "9e05de884a6d34b40f8d9a2f9b5a65b012ed1009a8442b5041c860ad076adec4",
   "largest": [
     {
       "path": "index.html",
