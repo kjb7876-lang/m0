@@ -1,22 +1,23 @@
 // R945 환도 확률 발동 수묵 패시브 — 사용자 2026-11-12 12:01Z (요약) 환도 확률 발동 특수 패시브 연출, 옛이야기 속 의협 세 사람(도술 부리는 도사·매화 가지를 남기는 의적·
 //  축지와 분신을 쓰는 두령) 모티브로 동양화·수묵화풍 기술. ① 흑백 검기·참격이 기본 공격 방향으로 적을 관통하며 날아감 ② 수묵 분신 7체를 7초간 적 주변에 불러
-//  환도의 모든 모션을 따라 하게 ③ 세 모티브를 엮은 수묵 합동 기술. 자산은 Dots 에 요청(CX-0085HI), 드라이브에 쓸 만한 이펙트가 있으면 개선 적용.
+//  환도의 모든 모션을 따라 하게 ③ 세 모티브를 엮은 수묵 합동 기술. 자산은 Dots 에 요청(CX-0086HI), 드라이브에 쓸 만한 이펙트가 있으면 개선 적용.
 //  다른 작품·인물은 느낌만 참고했다. 기술 이름·그림·연출은 StoryWorld 고유(먹 검정·여백 흰색·낙관 주홍 세 색).
 //  새 키·새 슬롯 없음. 기본 공격(A)이 성공할 때마다 주사위 한 번 → 셋 중 하나만 터진다(한 번의 공격에 하나).
 //   ① 「묵월(墨月)」 18%, 대기 1.2초 : 먹 초승달 한 줄이 방금 벤 적 쪽으로 7칸 날아가며 줄 위 적을 모두 꿰뚫는다(각 공격력 ×0.9, 벽에서 멈춤).
 //      그림 = Dots CX-0062HW 검풍 시트(assets/r590/hwando-q-wind-blade)를 먹 층(검정)·여백 층(흰색) 두 겹으로 크게 다시 씀 + 먹 붓 자국 꼬리.
 //   ② 「칠묵영(七墨影)」 6%, 대기 7초 : 수묵 분신 7체가 7초 동안 6칸 안 적들 곁에 선다. 분신은 진짜 영웅 그리기(drawHero)를 자리만 옮겨 먹빛으로 다시 그리므로
 //      걷기·기본 공격·Q·W·E·R·피격 자세까지 영웅과 같은 순간 같은 모션이다. 영웅이 기본 공격·Q·W·E·R 을 쓸 때마다 분신도 곁(1.8칸)의 적을 한 번씩 벤다(공격력 ×0.25).
-//   ③ 「삼협묵희(三俠墨戲)」 3%, 대기 20초 : 부적 7장이 7칸 안 적 일곱에게 날아가 붙고(도술) → 그 자리에 주홍 매화 낙관이 찍히고(매화 의적) →
-//      먹 그림자 셋이 구름을 타고 나타나 한 획씩 가로지른 뒤(축지 두령) 1.6초에 낙관이 터진다: 표식 적 ×2.2, 사거리 안 나머지 적 ×0.6. 영웅은 옮기지 않는다.
+//   ③ 「삼협묵희(三俠墨戲)」 3%, 대기 20초 : 7칸 안 적 일곱의 발밑에 수묵 난초가 하나씩 피어 흔들리고 → 먹 그림자 셋(세 의협)이 나타나
+//      저마다 흑백 검으로 무리를 한 획씩 가로지른 뒤(Dots HI-07 붓 획) → 1.6초에 난초가 한꺼번에 베어진다(Dots HI-05 난초 흑백검 베기, 흰 검흔 칸 = 피해):
+//      표식 적 ×2.2, 사거리 안 나머지 적 ×0.6. 영웅은 옮기지 않는다. (사용자 11-12 14:13Z: 부적·매화 낙관 대신 Dots 난초 흑백검 베기에 맞게)
 //  판정은 엔진 hitEnemy(난이도·노출·보스 규칙 그대로)·blocked·clearLine. 협동(R62 mode≠off)에서는 발동하지 않는다.
 //  생존 배치 영웅(R720, player.r720Ally 몸): 대기 시간·분신·합동기 상태를 몸마다 따로 둔다 — 배치된 환도가 부른 분신은 그 환도 곁 적에게 서고, 조종 영웅 상태와 섞이지 않는다.
-//  코드 그림(붓 자국·먹 번짐·매화·부적·낙관)은 처음 한 번 오프스크린 캔버스에 그려 둔 고정 그림(기록기 정적 원본)이며 Dots 시트가 오기 전 임시다.
+//  코드 그림(붓 자국·먹 번짐·구름)은 처음 한 번 오프스크린 캔버스에 그려 둔 고정 그림(기록기 정적 원본)이며 Dots 시트가 오기 전 임시다. 삼협묵희는 Dots 시트 둘을 쓴다.
 //  렉: 한 프레임 그림 48개 상한(저사양 28), 검기 동시 4개, 할 일이 없으면 그리기 표지를 effects 에서 뺀다. 필터는 grayscale·contrast·brightness 만.
 //  끄기: localStorage['storyworld.r945.hwandoInk']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_HWANDO_INK_R945__)return;
-const REV='R945-hwando-ink-1',KEY='storyworld.r945.hwandoInk';
+const REV='R945-hwando-ink-2',KEY='storyworld.r945.hwandoInk';
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const CFG=Object.freeze({
  moon:Object.freeze({chance:.18,icd:1.2,mult:.9,range:7,radius:.7,speed:13,max:4}),
@@ -25,6 +26,9 @@ const CFG=Object.freeze({
  maxDraws:48,maxVis:40});
 const INK='grayscale(1) contrast(1.5) brightness(0.92)',INKDARK='grayscale(1) brightness(0.1)';// 분신 수묵빛: 어두운 바닥에서 읽히게 한지처럼 밝은 무채색 몸에 먹 선(기록기 허용 필터만)
 const BLADE=Object.freeze({path:'assets/r590/hwando-q-wind-blade.webp',cell:256,cols:6,pivot:[205,122],th:150,loop:20});
+// 삼협묵희 Dots 시트(CX-0086HI): HI-05 난초 흑백검 베기 8칸(256칸 4x2, 1칸=핀 난초, 3칸=흰 검흔, 4~8칸=잘린 꽃잎 흩어짐), HI-07 먹 붓 획 16칸(2048x512 로 줄임, 512x128 칸 4x4)
+const ORCHID=Object.freeze({path:'assets/r945/hwando-orchid-slash.webp',cw:256,ch:256,cols:4,frames:8,pivot:[112,216],plantH:228,fps:12,cutFrame:2});
+const SWEEP=Object.freeze({path:'assets/r945/hwando-ink-sweep.webp',cw:512,ch:128,cols:4,frames:16,pivot:[20,70],len:334,fps:18});
 const fin=v=>typeof v==='number'&&Number.isFinite(v),clamp=(v,a,b)=>Math.min(b,Math.max(a,v)),smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
 let lastError=null,errors=0;const fail=e=>{errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0;
@@ -97,9 +101,9 @@ function mimic(s,p,slot){if(!s||!s.clones.length||!solo())return;const t=T();if(
 // ③ 삼협묵희
 function castTrio(s,p){const Q=CFG.trio,near=foes().filter(e=>e.hp>0&&fin(e.x)&&fin(e.y)&&Math.hypot(e.x-p.x,e.y-p.y)<=Q.range).sort((a,b)=>Math.hypot(a.x-p.x,a.y-p.y)-Math.hypot(b.x-p.x,b.y-p.y)).slice(0,Q.marks);
  if(!near.length)return;let cx=0,cy=0;for(const e of near){cx+=e.x;cy+=e.y;}cx/=near.length;cy/=near.length;const t=T();s.stats.trios++;
- s.trio={t0:t,room,ox:p.x,oy:p.y,cx,cy,marks:near,pw:power(),struck:false,done:false,id:'t'+(++serial)};
+ s.trio={t0:t,room,ox:p.x,oy:p.y,cx,cy,marks:near,pw:power(),struck:false,done:false,id:'t'+(++serial),flip:(Math.random()*128)|0,ph:[]};
  s.phantoms.length=0;for(let i=0;i<3;i++){const a=-Math.PI/2+i*Math.PI*2/3,R=2.4;let x=cx+Math.cos(a)*R,y=cy+Math.sin(a)*R;if(!open(x,y,.2)){x=cx+Math.cos(a)*.8;y=cy+Math.sin(a)*.8;}
-  s.phantoms.push({i,x,y,t0:t+.75+i*.2,end:t+Q.strikeAt+.35});}
+  s.phantoms.push({i,x,y,t0:t+.75+i*.2,end:t+Q.strikeAt+.35});s.trio.ph.push({x,y});}
  say('삼협묵희',p.x,p.y-.5);sfx('ego');arm();}
 function stepTrio(s){const R=s.trio;if(!R)return;const t=T(),Q=CFG.trio;if(R.room!==room||!isHw(bodyOf(s))){s.trio=null;s.phantoms.length=0;return;}
  if(!R.struck&&t>=R.t0+Q.strikeAt){R.struck=true;const set=new Set(R.marks),o={x:R.ox,y:R.oy};
@@ -128,19 +132,10 @@ function blotTex(white){const C=white?WHITERGB:INKRGB;return make(white?'blotw':
 function cloudTex(){return make('cloud',256,128,(g,w,h,r)=>{for(let i=0;i<16;i++){const x=w*(.15+r()*.7),y=h*(.35+r()*.4),R=22+r()*34,gr=g.createRadialGradient(x,y,2,x,y,R),v=205+Math.floor(r()*45);
    gr.addColorStop(0,`rgba(${v},${v},${v-6},.36)`);gr.addColorStop(1,`rgba(${v},${v},${v-6},0)`);g.fillStyle=gr;g.beginPath();g.arc(x,y,R,0,7);g.fill();}});}
 // 주홍 매화 낙관(다섯 꽃잎 + 먹 꽃술)
-function plumTex(){return make('plum',128,128,(g,w,h,r)=>{const cx=w/2,cy=h/2;for(let i=0;i<5;i++){const a=-Math.PI/2+i*Math.PI*2/5,x=cx+Math.cos(a)*27,y=cy+Math.sin(a)*27,gr=g.createRadialGradient(x,y,2,x,y,25);
-   gr.addColorStop(0,'rgba(226,58,44,.96)');gr.addColorStop(.75,'rgba(178,30,30,.9)');gr.addColorStop(1,'rgba(150,20,24,0)');g.fillStyle=gr;g.beginPath();g.arc(x,y,25,0,7);g.fill();}
-  g.fillStyle='rgba(250,236,214,.95)';g.beginPath();g.arc(cx,cy,9,0,7);g.fill();g.fillStyle='rgba(16,14,16,.9)';for(let i=0;i<9;i++){const a=i/9*Math.PI*2;g.beginPath();g.arc(cx+Math.cos(a)*13,cy+Math.sin(a)*13,2.2,0,7);g.fill();}});}
-// 부적(한지 + 먹 획 + 주홍 인장) — 글자가 아닌 붓 무늬만
-function charmTex(){return make('charm',64,128,(g,w,h,r)=>{g.fillStyle='rgba(239,230,205,.97)';g.fillRect(6,4,w-12,h-8);g.strokeStyle='rgba(18,16,18,.9)';g.lineWidth=2.5;g.strokeRect(9,7,w-18,h-14);
-  g.lineWidth=4;g.lineCap='round';g.beginPath();g.moveTo(w/2,16);g.lineTo(w/2,h-40);g.stroke();g.lineWidth=3;for(let i=0;i<4;i++){const y=26+i*16;g.beginPath();g.moveTo(17,y+(r()-.5)*4);g.quadraticCurveTo(w/2,y-7,w-17,y+(r()-.5)*4);g.stroke();}
-  g.fillStyle='rgba(198,40,34,.92)';g.fillRect(w/2-10,h-36,20,20);g.fillStyle='rgba(239,230,205,.9)';g.fillRect(w/2-5,h-31,10,3);g.fillRect(w/2-5,h-24,10,3);});}
-// 큰 낙관(네모 인장, 흰 새김 줄)
-function sealTex(){return make('seal',128,128,(g,w,h)=>{g.fillStyle='rgba(196,36,32,.94)';g.fillRect(10,10,w-20,h-20);g.strokeStyle='rgba(246,236,214,.95)';g.lineWidth=7;g.lineCap='square';
-  g.beginPath();g.moveTo(30,34);g.lineTo(98,34);g.moveTo(64,34);g.lineTo(64,96);g.moveTo(30,64);g.lineTo(98,64);g.moveTo(30,96);g.lineTo(98,96);g.moveTo(34,50);g.lineTo(34,80);g.moveTo(94,50);g.lineTo(94,80);g.stroke();});}
-function warm(){try{strokeTex('ink',INKRGB);strokeTex('white',WHITERGB);blotTex();blotTex(true);cloudTex();plumTex();charmTex();sealTex();if(typeof ensureImages==='function')Promise.resolve(ensureImages([BLADE.path])).catch(()=>{});}catch(e){fail(e);}}
-const asked={t:0};
-function bladeSheet(){try{const got=typeof readyImage==='function'?readyImage(BLADE.path):null;if(got?.image)return got.image;const t=Date.now();if(t-asked.t>1500){asked.t=t;if(typeof ensureImages==='function')Promise.resolve(ensureImages([BLADE.path])).catch(()=>{});}}catch(e){fail(e);}return null;}
+function warm(){try{strokeTex('ink',INKRGB);strokeTex('white',WHITERGB);blotTex();blotTex(true);cloudTex();if(typeof ensureImages==='function')Promise.resolve(ensureImages([BLADE.path,ORCHID.path,SWEEP.path])).catch(()=>{});}catch(e){fail(e);}}
+const asked=new Map();
+function sheetImg(path){try{const got=typeof readyImage==='function'?readyImage(path):null;if(got?.image)return got.image;const t=Date.now();if(t-(asked.get(path)||0)>1500){asked.set(path,t);if(typeof ensureImages==='function')Promise.resolve(ensureImages([path])).catch(()=>{});}}catch(e){fail(e);}return null;}
+const bladeSheet=()=>sheetImg(BLADE.path);
 // ---- 그리기 --------------------------------------------------------------------------------------------------
 let budget=0,drawCalls=0;
 // 조각 한 장: (x,y)=기준점, w·h=화면 크기, px·py=기준점 비율, reveal=왼쪽부터 드러난 비율(붓이 지나가며 그려지는 느낌)
@@ -150,6 +145,11 @@ function img(im,x,y,w,h,o={}){if(!im||budget<=0||!(w>0)||!(h>0))return false;bud
 function cellAt(im,fr,x,y,ang,sc,alpha,filter){if(!im||budget<=0)return false;budget--;drawCalls++;const C=BLADE.cell;fr=((Math.floor(fr)%BLADE.loop)+BLADE.loop)%BLADE.loop;ctx.save();
  try{ctx.globalCompositeOperation='source-over';ctx.globalAlpha*=clamp(alpha,0,1);ctx.filter=filter;ctx.translate(x,y);ctx.rotate(ang);ctx.scale(sc,Math.cos(ang)<0?-sc:sc);
   ctx.drawImage(im,(fr%BLADE.cols)*C,Math.floor(fr/BLADE.cols)*C,C,C,-BLADE.pivot[0],-BLADE.pivot[1],C,C);}catch(e){fail(e);}finally{ctx.restore();}return true;}
+// 시트 한 칸: (x,y)=피벗 자리, sc=배율, flip=좌우 뒤집기(회전 없음이면 0)
+const sheetDraws={orchid:0,sweep:0};
+function cell(im,S,fr,x,y,sc,o={}){if(!im||budget<=0||!(sc>0))return false;budget--;drawCalls++;if(S===ORCHID)sheetDraws.orchid++;else if(S===SWEEP)sheetDraws.sweep++;fr=clamp(Math.floor(fr),0,S.frames-1);ctx.save();
+ try{ctx.globalCompositeOperation='source-over';ctx.globalAlpha*=clamp(o.alpha??1,0,1);if(o.filter)ctx.filter=o.filter;ctx.translate(x,y);if(o.ang)ctx.rotate(o.ang);ctx.scale(o.flip?-sc:sc,sc*(o.sy||1));
+  ctx.drawImage(im,(fr%S.cols)*S.cw,Math.floor(fr/S.cols)*S.ch,S.cw,S.ch,-S.pivot[0],-S.pivot[1],S.cw,S.ch);}catch(e){fail(e);}finally{ctx.restore();}return true;}
 const scr=(x,y,lift=.42)=>{const q=project(x,y);return {x:q.x,y:q.y-H()*lift};};
 const SAN=(p,q)=>Math.atan2(q.y-p.y,q.x-p.x),SD=(p,q)=>Math.hypot(q.x-p.x,q.y-p.y);
 // 어두운 바닥에서도 먹이 읽히게: 여백(흰) 번짐을 먼저 넓게 깔고 그 위에 먹을 얹는다
@@ -157,25 +157,26 @@ function splat(x,y,w,h,alpha,ang=0){img(blotTex(true),x,y,w*1.28,h*1.28,{alpha:a
 function brush(A,B,th,alpha,reveal=1){stroke('white',A,B,th,alpha*.95,reveal);stroke('white',A,B,th*.8,alpha*.7,reveal);stroke('ink',A,B,th*.46,alpha,reveal);}
 function stroke(kind,A,B,th,alpha,reveal=1){const im=strokeTex(kind,kind==='ink'?INKRGB:WHITERGB);return img(im,A.x,A.y,SD(A,B)*1.06,th,{ang:SAN(A,B),px:.03,py:.5,alpha,reveal});}
 function drawAll(){const t=T(),lo=low(),h=H(),u=unit();budget=lo?28:CFG.maxDraws;
- const cloud=cloudTex(),plum=plumTex(),charm=charmTex(),seal=sealTex(),sheet=bladeSheet();
+ const cloud=cloudTex(),sheet=bladeSheet(),orchid=sheetImg(ORCHID.path),sweep=sheetImg(SWEEP.path);
  for(const s of states()){
   // ③ 삼협묵희(바닥 것부터)
   const R=s.trio;if(R){const a=t-R.t0,Q=CFG.trio,o=scr(R.ox,R.oy,.5),c=scr(R.cx,R.cy,.35);
    if(a<Q.strikeAt+.3&&!lo)img(cloud,c.x,c.y+h*.3,u*5.2,u*2.2,{alpha:.75*smooth(a/.5)*(1-smooth((a-Q.strikeAt)/.3))});
-   // 매화 가지: 영웅에게서 무리 가운데로 그려지는 먹 획
-   if(a>.3&&a<Q.strikeAt+.2)brush(o,c,h*.5,.85*(1-smooth((a-Q.strikeAt)/.2)),smooth((a-.3)/.45));
-   R.marks.forEach((e,i)=>{if(!(e.hp>0)&&!R.struck)return;const g=project(e.x,e.y),top={x:g.x,y:g.y-h*1.15};
-    // 부적: 영웅 → 적 머리 위로 날아가 붙어 흔들림
-    if(a<Q.strikeAt){const k=smooth((a-i*.03)/.4),x=o.x+(top.x-o.x)*k,y=o.y+(top.y-o.y)*k-Math.sin(k*Math.PI)*h*.6+(k>=1?Math.sin(t*6+i)*2:0);img(charm,x,y,h*.3,h*.6,{ang:(1-k)*(i%2?5:-5)+Math.sin(t*4+i)*.08,alpha:a<.05?0:1});}
-    // 매화 낙관: 발밑에 찍힘 → 터질 때 커지며 옅어짐
-    const m=a-.45-i*.05;if(m>0){const pop=a<Q.strikeAt?.7+.3*smooth(m/.12):1+smooth((a-Q.strikeAt)/.45)*1.5,al=a<Q.strikeAt?1:1-smooth((a-Q.strikeAt)/.5);img(plum,g.x,g.y-h*.08,u*1.05*pop,u*.62*pop,{alpha:.95*al});}
-    if(R.struck){const k=(a-Q.strikeAt)/.45;if(k<1)splat(g.x,g.y-h*.4,u*1.9*(.5+k),u*1.5*(.5+k),.9*(1-k*k),i);}});
-   // 먹 그림자 셋의 한 획씩(검정 굵게 + 흰 속심)
-   for(let i=0;i<3;i++){const k=(a-(.95+i*.2))/.6;if(k<=0||k>=1)continue;const ang=-Math.PI/2+i*Math.PI*2/3,L=3.4,A=scr(R.cx+Math.cos(ang)*L,R.cy+Math.sin(ang)*L,.4),B=scr(R.cx-Math.cos(ang)*L,R.cy-Math.sin(ang)*L,.4),rv=smooth(k/.22),al=1-smooth((k-.45)/.55);
-    brush(A,B,h*1.15,.95*al,rv);}
-   // 끝: 큰 낙관 + 여백을 쓸고 가는 흰 붓
-   const f=a-Q.strikeAt;if(f>0&&f<.7){img(seal,c.x+u*1.9,c.y-h*1.25,h*.78*(1.25-.25*smooth(f/.12)),h*.78*(1.25-.25*smooth(f/.12)),{alpha:1-smooth((f-.4)/.3),ang:-.08});
-    if(!lo)img(cloud,o.x,o.y+h*.3,u*CFG.trio.range*1.5*smooth(f/.5),u*CFG.trio.range*.75*smooth(f/.5),{alpha:.8*(1-smooth(f/.7))});}}
+   // 세 그림자의 흑백 검(HI-07 먹 붓 획): 그림자마다 제 자리에서 무리 가운데를 지나 맞은편까지 한 획. 한지빛(흰) 테두리 안에 먹 심 — 어두운 바닥에서도 흑백이 읽힘
+   //  시트는 Dots 먹 획에 한지빛 테두리를 미리 구워 둔 것(필터 없이 한 장) — 기록기는 필터를 선형 색 공간에서 곱해 먹빛을 흰빛으로 올리기 어렵고, 분신(먹빛 필터) 다음에 필터 붙은 그림이 화면에서 빠지던 것도 피함
+   for(let i=0;i<3;i++){const st=Q.strikeAt-.75+i*.18,f=(a-st)*SWEEP.fps;if(f<0||f>=SWEEP.frames)continue;const P0=R.ph[i]||{x:R.cx-2.4,y:R.cy},dx=R.cx-P0.x,dy=R.cy-P0.y,dl=Math.hypot(dx,dy)||1,L=3.2,A=scr(R.cx-dx/dl*L,R.cy-dy/dl*L,.45),B=scr(R.cx+dx/dl*L,R.cy+dy/dl*L,.45),sa=SAN(A,B),sc=SD(A,B)/SWEEP.len;
+    if(!sweep){brush(A,B,h*1.1,.95*(1-smooth((f-10)/6)),smooth(f/6));continue;}
+    const cm=Array.isArray(ctx.commands)?ctx.commands:null,n0=cm?cm.length:0;cell(sweep,SWEEP,f,A.x,A.y,sc,{ang:sa,sy:.7});
+    // 0.9초 마무리 획은 R350 가림 옅게에서 뺀다(영웅 곁을 가로질러도 흑백이 읽히게) — 기록기 명령에 owner.r350 표시
+    if(cm)for(let k=n0;k<cm.length;k++){const c=cm[k];if(c&&c.owner)c.owner={...c.owner,r350:true,r945Sweep:true};}}
+   // 난초: 표식 적 발밑에 하나씩 피어 흔들리다가(HI-05 1칸) 세 그림자의 흑백 검이 지나간 뒤 한꺼번에 베어짐(2~8칸, 3칸 흰 검흔 = 피해 순간)
+   const cut0=Q.strikeAt-ORCHID.cutFrame/ORCHID.fps,osc=h*1.4/ORCHID.plantH,OF='grayscale(1) brightness(1.35) contrast(1.25)';// 어두운 바닥에서 꽃잎(한지 흰빛)이 읽히게
+   R.marks.forEach((e,i)=>{if(!(e.hp>0)&&!R.struck)return;const g=project(e.x,e.y),fl=(R.flip>>i)&1,m=a-.25-i*.07;if(m<=0)return;
+    if(a<cut0){const k=smooth(m/.35),sw=Math.sin(t*2.4+i*1.7)*.035*k;cell(orchid,ORCHID,0,g.x,g.y+h*.02,osc*(.55+.45*k),{alpha:k,ang:sw,flip:fl,filter:OF});}
+    else{const f=(a-cut0)*ORCHID.fps;if(f<ORCHID.frames+1.5)cell(orchid,ORCHID,f,g.x,g.y+h*.02,osc,{alpha:1-smooth((f-ORCHID.frames+.5)/2),flip:fl,filter:OF});}
+    if(R.struck){const k=(a-Q.strikeAt)/.4;if(k<1&&!lo)splat(g.x,g.y-h*.4,u*1.5*(.5+k),u*1.1*(.5+k),.7*(1-k*k),i);}});
+   // 끝: 여백을 쓸고 가는 흰 구름
+   const f=a-Q.strikeAt;if(f>0&&f<.7&&!lo)img(cloud,o.x,o.y+h*.3,u*CFG.trio.range*1.5*smooth(f/.5),u*CFG.trio.range*.75*smooth(f/.5),{alpha:.8*(1-smooth(f/.7))});}
   // ① 묵월: 먹 꼬리 → 먹 층 → 여백 층
   for(const b of s.blades){const p=scr(b.x,b.y),q0=project(b.x+b.ux,b.y+b.uy),sa=Math.atan2(q0.y-h*.42-p.y,q0.x-p.x),back=Math.min(b.travel,2.6),tl=scr(b.x-b.ux*back,b.y-b.uy*back),kk=b.travel/CFG.moon.range,al=kk>.85?1-(kk-.85)/.15:1,sc=h*2.3/BLADE.th,fr=(t-b.t0)*14;
    brush(tl,p,h*1.0,.8*al);
@@ -201,7 +202,10 @@ function drawClones(self){const p=P();if(cloneBusy||!on||!p)return;const s=st(p,
   // 방향·공격·걷기·스킬 자세 값은 건드리지 않아 영웅과 같은 순간 같은 모션이 된다. 무적 깜빡임만 끈다.
   const keep={x:p.x,y:p.y,invincible:p.invincible};
   const lo=low();
-  const pass=(c,al,dx,flt)=>{ctx.save();try{p.x=c.x+dx;p.y=c.y+dx;p.invincible=0;ctx.globalAlpha=(ctx.globalAlpha??1)*al;withInk(()=>drawHero(),flt);s.stats.cloneDraws++;}catch(e){fail(e);}finally{ctx.restore();p.x=keep.x;p.y=keep.y;p.invincible=keep.invincible;}};
+  const cmds=Array.isArray(cm)?cm:null;
+  // 분신이 남긴 기록 명령은 '영웅 몸'에서 뺀다(owner.r350): R350 가림 옅게·R448·R409 가 분신까지 영웅 몸 상자로 묶으면 그 위를 지나는 검 획·난초가 거의 투명해졌다(헤드리스 실측).
+  const tag=n0=>{if(!cmds)return;for(let i=n0;i<cmds.length;i++){const c=cmds[i];if(c&&c.owner&&c.owner.kind==='hero')c.owner={...c.owner,r350:true,r945Clone:true};}};
+  const pass=(c,al,dx,flt)=>{const n0=cmds?cmds.length:0;ctx.save();try{p.x=c.x+dx;p.y=c.y+dx;p.invincible=0;ctx.globalAlpha=(ctx.globalAlpha??1)*al;withInk(()=>drawHero(),flt);s.stats.cloneDraws++;}catch(e){fail(e);}finally{ctx.restore();p.x=keep.x;p.y=keep.y;p.invincible=keep.invincible;try{tag(n0);}catch(e){fail(e);}}};
   // 먹 그림자 한 겹(오른쪽 아래로 살짝 비켜 짙은 먹) 위에 담묵 몸 — 수묵 윤곽처럼 읽히게. 저사양은 담묵 몸만.
   const one=(c,al)=>{if(!(al>0))return;if(!lo)pass(c,al*.75,.07,INKDARK);pass(c,al,0,INK);};
   for(const c of s.clones)one(c,.86*smooth((t-c.t0)/.3+.35)*(end-t<.5?clamp((end-t)/.5,.15,1):1));
@@ -228,7 +232,7 @@ try{
 function set(v){on=v!==false;if(!on)clearAll();try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}
 function force(kind,body){if(!CFG[kind]||kind==='maxDraws')return false;const s=st(body||P());if(!s)return false;s.force=kind;return true;}
 function inspect(body){const s=st(body||P(),false)||fresh(null),t=T(),left=k=>Math.max(0,+(s.ready[k]-t).toFixed(3));
- return {revision:REV,on,errors,lastError,stats:{...s.stats},cd:{moon:left('moon'),clones:left('clones'),trio:left('trio')},vis:vis.length,drawCalls,
+ return {revision:REV,on,errors,lastError,stats:{...s.stats},cd:{moon:left('moon'),clones:left('clones'),trio:left('trio')},vis:vis.length,drawCalls,sheetDraws:{...sheetDraws},
   clones:s.clones.map(c=>({i:c.i,x:+c.x.toFixed(3),y:+c.y.toFixed(3),foe:c.foe?.id??null})),phantoms:s.phantoms.length,
   blades:s.blades.map(b=>({id:b.id,x:+b.x.toFixed(2),y:+b.y.toFixed(2),travel:+b.travel.toFixed(2),hit:b.hit.size})),
   trio:s.trio?{age:+(t-s.trio.t0).toFixed(3),marks:s.trio.marks.map(e=>e.id),struck:s.trio.struck,done:s.trio.done}:null};}
