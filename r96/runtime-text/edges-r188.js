@@ -5,9 +5,9 @@
 //  그리기 1번(판 하나), 구역 바뀔 때 한 번 계산. storyworld.r188.edges {on:false} 로 끈다.
 (()=>{'use strict';
 if(window.__STORYWORLD_EDGES_R188__)return;
-const REV='R188-edges-1',KEY='storyworld.r188.edges',PX=4,PAD=4;
+const REV='R188-edges-2',KEY='storyworld.r188.edges',PX=4,PAD=4;
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
-const stats={built:0,ms:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
+const stats={built:0,ms:0,errors:0,reused:0,cached:0,cachedPx:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const solo=()=>{const m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();return !m||m==='off';};
 const isSamong=L=>!!(L&&(L.samongR103||L.samongR115||L.type==='r103-samong'));
 // 값 잡음(세계 좌표 기준, 결정적)
@@ -29,11 +29,23 @@ function buildMask(L){const t0=performance.now(),b=L.bounds,x0=b[0]-PAD,y0=b[1]-
    if(!inside&&s<.01)a=0;/* 멀리 빈 곳은 원래 그림(R186 판·빈 색)이 그대로 */
    const g=Math.round(a*255);O[k]=O[k+1]=O[k+2]=g;O[k+3]=255;if(g>8)any++;}}
  const c=mk();c.getContext('2d').putImageData(out,0,0);stats.ms=Math.round(performance.now()-t0);return any?{canvas:c,x0,y0,W:W/PX,H:H/PX}:null;}
+// R800 렉: 같은 입력이면 가림판 그림을 다시 쓴다. 헤드리스 실측에서 지역에 들어갈 때 엔진이 장면을 두 번 비워(clearScene)
+//  입력이 똑같은 판을 두 번 만들었고(한 번 0.2~0.3초), 다시 온 지역도 처음부터 다시 만들었다. 열쇠 = 판을 만드는 데 쓰는 값 전부
+//  (bounds·바닥·배경·연결 바닥·벽 사각형) — 같으면 그림이 같다. 사몽 여부는 재질만 바꾸므로 열쇠에 넣지 않는다. 최근 6장·600만 화소까지.
+const maskCache=new Map();let cachedPx=0;
+function sigOf(L){let h=2166136261,c=0;const add=v=>{h=Math.imul(h^(Math.round((+v||0)*4096)|0),16777619);c++;};
+ for(const v of L.bounds||[])add(v);
+ for(const arr of [L.floorRects,L.backdropRects,L.connectorFloorRects,L.walls]){const A=arr||[];add(A.length);for(const r of A){if(!r){add(-1);continue;}add(r.x);add(r.y);add(r.width);add(r.depth);}}
+ return (h>>>0).toString(36)+':'+c;}
+function maskFor(L){const k=sigOf(L);if(maskCache.has(k)){const m=maskCache.get(k);maskCache.delete(k);maskCache.set(k,m);stats.reused=(stats.reused||0)+1;return m;}
+ const m=buildMask(L),px=m?.canvas?m.canvas.width*m.canvas.height:0;maskCache.set(k,m);cachedPx+=px;
+ for(const [k0,m0] of maskCache){if(maskCache.size<=6&&cachedPx<=6e6)break;if(k0===k)continue;maskCache.delete(k0);cachedPx-=m0?.canvas?m0.canvas.width*m0.canvas.height:0;}
+ stats.cached=maskCache.size;stats.cachedPx=cachedPx;return m;}
 function install(){const A=window.StoryPhase1,C=A?.ThreeRenderer?.prototype;if(!C||typeof C.render!=='function')return false;
  function drop(r){if(r.r188Edge){try{r.spatialRoot?.remove(r.r188Edge);r.r188Edge.geometry?.dispose();r.r188Edge.material?.alphaMap?.dispose();r.r188Edge.material?.dispose();}catch(e){fail(e);}}r.r188Edge=null;r.r188EdgeKey=null;}
  function sync(r,frame){const T=r.T,L=frame?.exploration;if(!prefs.on||!solo()||!T||!r.spatialRoot||!L?.bounds){if(r.r188Edge)r.r188Edge.visible=false;return;}
   const sam=isSamong(L)&&window.__STORYWORLD_SAMONG_VOID_R186__?.inspect?.().prefs?.on!==false,key=String(L.id||'')+':'+(L.bounds||[]).join(',')+':'+(sam?'s':'d');
-  if(r.r188EdgeKey!==key){drop(r);r.r188EdgeKey=key;const m=buildMask(L);if(!m)return;
+  if(r.r188EdgeKey!==key){drop(r);r.r188EdgeKey=key;const m=maskFor(L);if(!m)return;
    const am=new T.CanvasTexture(m.canvas);am.colorSpace=T.NoColorSpace;am.flipY=true;am.needsUpdate=true;
    let mat;if(sam){const tex=new T.TextureLoader().load('assets/r186/flesh-void.webp');tex.colorSpace=T.SRGBColorSpace;tex.wrapS=tex.wrapT=T.RepeatWrapping;tex.repeat.set(m.W/9,m.H/9);
      /* R186 판(구역+160, 반복 9칸)과 같은 세계 좌표로 이어지게 */const b=L.bounds;tex.offset.set(((m.x0-(b[0]-80))/9)%1,(((b[3]+80)-(m.y0+m.H))/9)%1);
