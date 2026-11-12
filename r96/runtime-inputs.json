@@ -8264,7 +8264,8 @@
     "lineart-scenes-r883.js",
     "story-order-r853.js",
     "semi-auto-r705.js",
-    "dance-free-r706.js"
+    "dance-free-r706.js",
+    "rally-waves-r905.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9339,5 +9340,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "91ac2970dea144bb8c6f3094c08fb98f1183c4656a765b2ddc67ab30c84c38ce"
+  "runtimeManifestSHA256": "8645c755a8f68cbe54b9d2bc9c49e2912e3dd664481999f72e9ada2758074067"
 }
