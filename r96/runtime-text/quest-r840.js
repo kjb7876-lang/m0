@@ -157,7 +157,7 @@ function img(p){try{const r=typeof readyImage==='function'?readyImage(p):null;if
 // ── 방에 놓기: 상태에 맞게 NPC·조형물·단서를 맞춘다(여러 번 불러도 같음) ──
 function dropAt(r,pt){const cur=orbOf(r);if(cur)return cur;const o={id:'r840:clue:'+zid(r),x:pt.x,y:pt.y,path:ORB_ART,height:30,solid:false,visible:true,autoTargetEligible6:false,r840Clue:{at:T()}};r.props.push(o);stats.drops++;note('drop',{zone:zid(r),x:+pt.x.toFixed(2),y:+pt.y.toFixed(2)});return o;}
 function freeNear(r,pt){try{if(pt&&Number.isFinite(pt.x+pt.y)&&!blocked(pt.x,pt.y,.3,r))return {x:pt.x,y:pt.y};}catch(_){}return {x:player.x,y:player.y};}
-function ensure(r=here()){if(!r||!Array.isArray(r.props))return null;const want=visible(r),st=stOf(r),d=defOf(r);
+function ensure(r=here()){if(!r||!Array.isArray(r.props))return null;try{if(typeof storyScene!=='undefined'&&storyScene&&!npc(r))return null;}catch(_){}/* R841: 서사 창이 떠 있는 동안에는 새로 세우지 않는다(새 여정 첫 화면의 병원 소품 목록을 건드리지 않게, 창이 닫힌 뒤 첫 틱에 선다) */const want=visible(r),st=stOf(r),d=defOf(r);
  if(!want){if(r.props.some(p=>p&&(p.r840NPC||p.r840Amb||p.r840Prop||p.r840Clue)))r.props=r.props.filter(p=>!p.r840NPC&&!p.r840Amb&&!p.r840Prop&&!p.r840Clue);return null;}
  let sp=spots(r);if(st==='on'&&d.quest.type==='purge'&&!propOf(r)&&!sp.fresh){sp=respot(r);sp.fresh=true;}let n=npc(r);
  if(!n&&sp.npc){n={id:'r840:npc:'+zid(r)+':'+d.npc.kind,x:sp.npc.x,y:sp.npc.y,home:{...sp.npc},r840NPC:d.npc.kind,solid:false,visible:true,autoTargetEligible6:false};try{img(d.npc.sprite.path);}catch(e){fail(e);}r.props.push(n);stats.placed++;note('placed',{zone:zid(r),x:+n.x.toFixed(2),y:+n.y.toFixed(2)});}

@@ -128,6 +128,8 @@ function drive(w,max=400){/* 엔진 걸음 흉내: route 가 있으면 끝 점�
  w.at(n);w.run('interact()');w.run('__btn.questTakeR840()');eq(w.st(),'on','간호사에게 받음');w.run('killEnemy(room.enemies[6])');eq(w.api.inspect().kills,0,'백의 구속자는 세지 않는다');for(let i=0;i<5;i++)w.run(`killEnemy(room.enemies[${i}])`);eq(w.api.inspect().kills,5,'복도 비명잔영 5');
  w.run('time+=1');w.run('tick(.6)');eq(w.st(),'drop','다 잡으면 단서');ok(w.run('room.props.some(p=>p.r840Amb)'),'곁 인물은 끝까지 서 있다');w.run('drawProp(room.props.find(p=>p.r840Amb))');ok(w.log().drawn.some(d=>/medic-idle6/.test(d.path)),'곁 인물이 그려진다');}
 {const w=world({zoneId:'ep1a08',guideOn:true});w.run('tick(.1)');const am=w.run('room.props.find(p=>p.r840Amb)');w.at(am);w.run('interact()');eq(w.log().panel.length,0,'길잡이 중에는 곁 인물 창을 띄우지 않는다');}
+// 서사 창이 떠 있는 동안에는 세우지 않고(새 여정 첫 화면의 병원 소품 목록 그대로 — qa/r86 refined-static 회귀), 창이 닫힌 뒤 첫 틱에 선다.
+{const w=world({zoneId:'ep1a08',controlled:false});const n0=w.run('room.props.length');w.run('var storyScene={id:\'opening\'}');w.run('tick(.1)');eq(w.run('room.props.length'),n0,'서사 창이 떠 있으면 소품 목록을 건드리지 않는다');ok(!w.npc(),'아직 세우지 않음');w.run('storyScene=null');w.run('tick(.1)');ok(w.npc(),'창이 닫힌 뒤 첫 틱에 선다');}
 // ep1a08(새빛병원 지하)은 R78 뼈대가 아니다(헤드리스 실측: controlled=false, 들머리 43,109, 문 목록 없음) → free 정의는 들머리→목표물 길로 선다.
 {const w=world({zoneId:'ep1a08',controlled:false});w.run('tick(.1)');ok(w.npc()&&w.run('room.props.some(p=>p.r840Amb)'),'ep1a08: R78 진행이 아니어도 간호사·의사가 선다');}
 {const w=world({zoneId:'ep1a09',controlled:false});w.run('tick(.1)');ok(!w.run('room.props.some(p=>p.r840Amb||p.r840NPC)'),'free 가 아닌 곳은 R78 진행이 아니면 아무도 없다');}
