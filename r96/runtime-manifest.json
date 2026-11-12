@@ -44174,8 +44174,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6574321,
-      "sha256": "7332fc9b42c82ef6b3bb986c43c37f01de03830ec6740bebbcb9e6e3c4c4f09c"
+      "bytes": 6574367,
+      "sha256": "f5cc3f927725eaac92e1318f4cb17280d4a8dcc493d41bec06c998895ca1d061"
     },
     {
       "path": "intro-r140.js",
@@ -44903,6 +44903,11 @@
       "sha256": "97a26d602f159fb430dfa428acd7899f0dd6db80dad4775d59192c7d326d5e0a"
     },
     {
+      "path": "story-order-r853.js",
+      "bytes": 3883,
+      "sha256": "31dba3d60274266b4194306156d0bd0c77d52a1df33c9a5e07f917bfc0c19bf0"
+    },
+    {
       "path": "story-reader-r122.js",
       "bytes": 5020,
       "sha256": "8ae5c12368141823034fd67f6215c32613d7ba059257e1ff4b69252e7f18a6ed"
@@ -45163,9 +45168,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9032,
-  "totalBytes": 1239116101,
-  "webHTMLSha256": "7332fc9b42c82ef6b3bb986c43c37f01de03830ec6740bebbcb9e6e3c4c4f09c",
+  "fileCount": 9033,
+  "totalBytes": 1239120030,
+  "webHTMLSha256": "f5cc3f927725eaac92e1318f4cb17280d4a8dcc493d41bec06c998895ca1d061",
   "largest": [
     {
       "path": "index.html",
