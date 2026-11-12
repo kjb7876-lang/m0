@@ -659,6 +659,8 @@ jobs:
         run: python r96/qa/r700/boss-art-check.py
       - name: R760 Bulmyeongwi boss staging (one toned 4-pose set for idle/attack, one size, ink-violet tone + amber eyes, layered afterimages; mobs/other bosses untouched) CPU check
         run: node r96/qa/r760/r760-cpu-check.cjs
+      - name: R860 boss key-pose coverage (fallen angel knight, EGO-stealing nightmare king, Balrog draw their R104 key poses; old crop rects fit the whole new frame; the pride cyborg cult leader is no longer hijacked by a same-name mob sheet; Mammon/other mobs untouched) CPU check
+        run: node r96/qa/r860/boss-keypose-cover-cpu-check.cjs
       - name: R790 story key NPC (last303 - the youth in the mist offers gwibitang at the boss door; no gwibitang → door story does not start and the Bulmyeongwi core stays sealed; old saves/guide/survival/co-op untouched) CPU check
         run: node r96/qa/r790/r790-cpu-check.cjs
       - name: R791 story key NPC 2 (last305 - the defeated goblin chief leaves the rose seal by the altar; no seal → exit story does not start; R790 gwibitang gate unchanged, ledgers do not mix) CPU check
