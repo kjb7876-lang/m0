@@ -468,6 +468,10 @@ jobs:
         run: node r96/qa/r890/r890-cpu-check.cjs
       - name: R720 survival hero placement (I key, crystals, story-order prices, leash and range upgrades, swap rule) CPU check
         run: node r96/qa/r720/r720-cpu-check.cjs
+      - name: R945 hwando ink passives (piercing ink crescent, seven ink clones for 7 s, three-hero ink finale, per-body state) CPU check
+        run: node r96/qa/r945/r945-cpu-check.cjs
+      - name: R947 slayer blood passives (common piercing blood needle, blood cross-sword rain, rare lattice laser barrage, upright crosses, per-body state) CPU check
+        run: node r96/qa/r947/r947-cpu-check.cjs
       - name: R463 seven-sins boss art (one form per fight, one body height, no cut-out broom) CPU check
         run: node r96/qa/r463/r463-cpu-check.cjs
       - name: R511 empty samong rooms get a guarded memory shard CPU check
@@ -791,6 +795,8 @@ jobs:
         run: node r96/qa/r899/top-left-cpu-check.cjs
       - name: R930 Kaironomicon cyber-magitech floor/wall tiles and tech props (art only, layout unchanged) CPU check
         run: node r96/qa/r930/r930-cpu-check.cjs
+      - name: R946 Lauren passive celestial resonance (repulse burst, red push orb, blue pull orb, violet piercing fusion, prop meteors; per-hero instance)
+        run: node r96/qa/r946/r946-cpu-check.cjs
       - name: R940 read-only state snapshot for QA (events, first-hit-after-entry, boss kill time; no game writes) CPU check
         run: node r96/qa/r940/r940-cpu-check.cjs
       - name: Install pinned sandboxed Chromium
