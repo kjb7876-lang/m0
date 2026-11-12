@@ -119,6 +119,11 @@ function drive(w,max=400){/* 엔진 걸음 흉내: route 가 있으면 끝 점�
 {const w=world();w.run('tick(.1)');w.at(w.npc());w.run('interact();__btn.questTakeR840();guide=true');drive(w);eq(w.st(),'done','받은 뒤 길잡이를 켜면 이어서 마친다');}
 // ── ④ 회귀 ──
 // 서사 진행을 막지 않는다: killEnemy·interact 는 퀘스트와 무관할 때 그대로, 보스 처치도 그대로
+// 길 양옆이 다 비었으면 더 트인 쪽에 선다(들머리 문짝·벽 쪽을 피함). 벽이 없으면 앞 후보(+쪽) 그대로.
+{const w=world();const P=w.api.pure,e={x:0,y:0},g={x:20,y:0},pts=[e,g];const wall=(x,y)=>y>3;const a=P.npcSpot(e,g,pts,wall,[]),b=P.npcSpot(e,g,pts,()=>false,[]);
+ ok(a&&a.y<0,'벽이 +쪽 3칸에 있으면 -쪽(트인 쪽)에 선다 '+JSON.stringify(a));ok(b&&b.y>0,'양쪽이 같으면 앞 후보 그대로 '+JSON.stringify(b));}
+// 들머리 문짝(door-1 85.5,64)에서 5.5칸 넘게: 문짝 그림이 길어 가까이 서면 몸이 가린다(헤드리스 장면 실측).
+{const w=world();w.run('tick(.1)');const n=w.npc();ok(n&&Math.hypot(n.x-85.5,n.y-64)>=5.5,'NPC 는 들머리 문짝에서 5.5칸 넘게 '+Math.hypot(n.x-85.5,n.y-64).toFixed(2));}
 // 길 가 세움 등(R92 — 방 소품 목록에 없다)을 피한다: 받기 전 조형물이 설 자리에 등을 세우면, 받는 순간 다시 재어 4.5칸 밖에 선다.
 {const a=world();a.run('tick(.1)');a.at(a.npc());a.run('interact()');a.run('__btn.questTakeR840()');a.run('tick(.1)');const q0=a.prop();ok(q0,'기준: 조형물 자리');
  const w=world();w.run('tick(.1)');w.run(`window.__STORYWORLD_VISUAL_R92__={lightPoints:()=>[{id:'r92:x',x:${q0.x},y:${q0.y}}]}`);w.at(w.npc());w.run('interact()');w.run('__btn.questTakeR840()');w.run('tick(.1)');const q=w.prop();

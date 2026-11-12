@@ -23,7 +23,7 @@ const T=()=>typeof time==='number'&&Number.isFinite(time)?time:0;
 const note=(kind,d={})=>{events.push({kind,at:+T().toFixed(2),...d});if(events.length>40)events.shift();};
 const REACH=2.4,GUIDE_REACH=2.2,HIT_REACH=1.9,PICKUP=1.35,ORB_DELAY=.55,HIT_GAP=.2,GUIDE_HIT=.35,STALL=6,POINTS=2,ORB_ART='assets/vfx/v31315/spirit-orb.webp';
 const VIL='assets/r763/villagers/',N75='assets/r75/npcs.png';
-const sheet=(path,vis)=>Object.freeze({path,w:256,h:256,px:128,py:234.67,vis,scale:1.1,frames:6,fps:5,faces:'right',sheetW:1536,sheetH:256});
+const sheet=(path,vis)=>Object.freeze({path,w:256,h:256,px:128,py:234.67,vis,scale:1.3,frames:6,fps:5,faces:'right',sheetW:1536,sheetH:256});
 const still=(x,y,w,h,px,py,vis)=>Object.freeze({path:N75,x,y,w,h,px,py,vis,scale:1.1,frames:1,sheetW:1536,sheetH:1024});
 // 지역마다 부탁하는 인물 하나. episode = 서사 묶음(짧은 이야기 한 편). lore·clue.text 는 정본 문장 그대로(검사가 정본과 대조한다).
 const DEFS=Object.freeze({
@@ -68,7 +68,10 @@ function along(pts,want){if(!Array.isArray(pts)||pts.length<2)return null;let ac
 const lengthOf=pts=>{let n=0;for(let i=1;i<(pts?.length||0);i++)n+=Math.hypot(pts[i].x-pts[i-1].x,pts[i].y-pts[i-1].y);return n;};
 // 한 점에서 길 옆으로 비켜 선 빈 자리. avoid = [{x,y,min}] 에서 min 칸 안이면 건너뛴다.
 function beside(c,isBlocked,avoid,sides){if(!c||!Number.isFinite(c.x+c.y))return null;const t={x:-c.dir.y,y:c.dir.x};
- for(const s of sides){const q={x:c.x+t.x*s,y:c.y+t.y*s};if(isBlocked(q.x,q.y,.34))continue;if(avoid.some(a=>Math.hypot(a.x-q.x,a.y-q.y)<a.min))continue;return q;}return null;}
+ /* 길 양옆이 다 되면 더 트인 쪽(둘레 16점 가운데 빈 곳이 많은 쪽)에 선다 — 장면 실측: last302 어부가 들머리 문짝 뒤에 서서 반쯤 가렸다. 같으면 앞 후보 그대로. */
+ const open=q=>{let n=0;for(let i=0;i<8;i++){const a=i*Math.PI/4;for(const d of [1.2,2.4])if(!isBlocked(q.x+Math.cos(a)*d,q.y+Math.sin(a)*d,.34))n++;}return n;};
+ const ok=s=>{const q={x:c.x+t.x*s,y:c.y+t.y*s};if(isBlocked(q.x,q.y,.34))return null;if(avoid.some(a=>Math.hypot(a.x-q.x,a.y-q.y)<a.min))return null;return q;};
+ for(let i=0;i<sides.length;i+=2){const a=ok(sides[i]),b=i+1<sides.length?ok(sides[i+1]):null;if(a&&b)return open(b)>open(a)?b:a;if(a||b)return a||b;}return null;}
 // NPC: 들머리에서 가는 길로 6칸쯤 들어가 길 옆 1.7칸. 길이 없으면 집결실 쪽 직선으로 같은 계산.
 //  (헤드리스 장면 실측: 이 캠페인 맵은 들머리 3칸 안쪽에 방 목록에 없는 화로·촛대가 서 있어 3칸 자리는 그림이 겹쳤다 → 여섯 후보를 찍어 보고 6칸·+1.7 로 정함.)
 function npcSpot(entry,goal,pts,isBlocked,avoid=[]){if(!entry||!Number.isFinite(entry.x+entry.y))return null;const line=[entry,goal&&Number.isFinite(goal.x+goal.y)?goal:{x:entry.x-1,y:entry.y-1}];
@@ -83,7 +86,7 @@ function spots(r){/* 방마다 한 번 계산해 둔다(같은 구조면 같은 
  const doors=(ex.worldR74?.doors||[]).filter(v=>v&&Number.isFinite(v.x+v.y)).map(v=>({x:v.x,y:v.y,min:3.2})),solids=(r.props||[]).filter(p=>p&&!p.r840NPC&&!p.r840Prop&&!p.r840Clue&&Number.isFinite(p.x+p.y)).map(p=>({x:p.x,y:p.y,min:1.3}));
  /* 길 가 세움 등(R92)·벽 등(R91)은 방 소품 목록에 없다 → 그 자리 목록을 받아 4.5칸 안에는 놓지 않는다(장면 실측: last303 조형물이 석등 바로 옆에 섰다). */
  let lamps=[];try{lamps=[...(window.__STORYWORLD_VISUAL_R92__?.lightPoints?.()||[]),...(window.__STORYWORLD_VISUAL_R91__?.lightPoints?.()||[])].filter(v=>v&&Number.isFinite(v.x+v.y)).map(v=>({x:v.x,y:v.y,min:4.5}));}catch(e){fail(e);}
- const n=npcSpot(entry,goal,pts,isB,[...doors.map(v=>({...v,min:1.6})),...solids,...lamps]),q=d.quest.type==='purge'?propSpot(entry,goal,pts,isB,[...doors,...solids,...lamps],n):null;
+ const n=npcSpot(entry,goal,pts,isB,[...doors.map(v=>({...v,min:5.5})),...solids,...lamps.map(v=>({...v,min:1.6}))])/* NPC 는 등 곁에 서도 된다(겹치지만 않게). 들머리 문짝(door-1)에서는 5.5칸 — 문짝 그림이 길어 가까우면 몸이 가린다(last302 실측 4.3칸에서 가림). */,q=d.quest.type==='purge'?propSpot(entry,goal,pts,isB,[...doors,...solids,...lamps],n):null;
  return r.r840Spots={props:r.exploration,npc:n,prop:q,pathed:!!pts,lamps:lamps.length};}
 /* 조형물 자리는 퀘스트를 받는 순간(방 소품·등이 다 놓인 뒤)에 다시 잰다 — 방에 막 들어온 때는 다른 오버레이가 가구를 아직 덜 놓았을 수 있다. NPC 자리는 그대로 둔다. */
 function respot(r){const keep=r.r840Spots?.npc||null;r.r840Spots=null;const sp=spots(r);if(keep)sp.npc=keep;return sp;}
@@ -175,12 +178,12 @@ function drawNPC(p){const r=here(),d=defOf(r);if(!d)return false;const s=d.npc.s
  const h=actorHeight()*s.scale*(s.frames>1?1:1+.008*Math.sin(t*1.7)),paint=()=>drawAssetFrame3(s.path,fr,q.x,q.y,h,{angle:0,alpha:1,flip});stats.draws++;
  let res;const f0=ctx&&typeof ctx.filter==='string'?ctx.filter:null;try{if(f0!==null)ctx.filter='brightness(1.3)';res=ctx?.scope?ctx.scope({id:'prop:'+p.id,kind:'prop',x:p.x,y:p.y,bodyPath:s.path,alive:true},paint):paint();}finally{if(f0!==null)ctx.filter=f0;}
  if(stOf(r)==='new')label(d.npc.name,q.x,q.y-h-8);return res;}
-function aura(p,strength){/* 임시 표시(코드): 발치의 검붉은 기운. Dots 기운 시트가 오면 바꾼다 */try{if(typeof ctx?.createRadialGradient!=='function')return;const q=project(p.x,p.y),z=typeof zoom==='number'?zoom:1,t=T(),a=(.34+.14*Math.sin(t*2.3))*strength,rad=26*z;
-  ctx.save();ctx.globalAlpha=a;const g=ctx.createRadialGradient(q.x,q.y-6*z,0,q.x,q.y-6*z,rad);g.addColorStop(0,'rgba(120,10,24,.95)');g.addColorStop(.55,'rgba(40,6,18,.6)');g.addColorStop(1,'rgba(10,4,10,0)');ctx.fillStyle=g;ctx.fillRect(q.x-rad,q.y-6*z-rad*.55,rad*2,rad*1.1);ctx.restore();}catch(e){fail(e);}}
+function aura(p,strength){/* 임시 표시(코드): 발치의 검붉은 기운. Dots 기운 시트가 오면 바꾼다 */try{if(typeof ctx?.createRadialGradient!=='function')return;const q=project(p.x,p.y),z=typeof zoom==='number'?zoom:1,t=T(),a=(.5+.16*Math.sin(t*2.3))*strength,rad=40*z;
+  ctx.save();ctx.globalAlpha=a;const g=ctx.createRadialGradient(q.x,q.y-6*z,0,q.x,q.y-6*z,rad);g.addColorStop(0,'rgba(200,24,40,.95)');g.addColorStop(.5,'rgba(96,10,30,.6)');g.addColorStop(1,'rgba(10,4,10,0)');ctx.fillStyle=g;ctx.fillRect(q.x-rad,q.y-6*z-rad*.55,rad*2,rad*1.1);ctx.restore();}catch(e){fail(e);}}
 if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){if(!p||(!p.r840NPC&&!p.r840Prop&&!p.r840Clue))return base.apply(this,[p,...a]);
   try{if(p.r840NPC)return drawNPC(p);const r=here(),d=defOf(r),z=typeof zoom==='number'?zoom:1;
    if(p.r840Prop){aura(p,1);/* 그림 경로는 그리는 동안만 준다: 평소 path 가 없어야 불빛 계통(R123 isLight·R300·R451 — 경로의 lantern·shrine 낱말로 고름)이 '악에 물든' 조형물을 등불로 보지 않는다. */
-    let r0;p.path=p.r840Art;try{r0=base.apply(this,[p,...a]);}finally{delete p.path;}const q=project(p.x,p.y);if(d)label(d.quest.prop.name+' '+p.r840Prop.hits+'/'+d.quest.hits,q.x,q.y-(p.height||90)*z*.78-8,'#ff9c8a');return r0;}
+    let r0;const f0=ctx&&typeof ctx.filter==='string'?ctx.filter:null;p.path=p.r840Art;try{if(f0!==null)ctx.filter='brightness(1.35)';r0=base.apply(this,[p,...a]);}finally{delete p.path;if(f0!==null)ctx.filter=f0;}const q=project(p.x,p.y);if(d)label(d.quest.prop.name+' '+p.r840Prop.hits+'/'+d.quest.hits,q.x,q.y-(p.height||90)*z*.78-8,'#ff9c8a');return r0;}
    const r0=base.apply(this,[p,...a]);const q=project(p.x,p.y);label('단서',q.x,q.y-(24+4*Math.sin(T()*3))*z,'#ffe3a0');return r0;}catch(e){fail(e);}};}
 (function world(){const w=window.__STORYWORLD_WORLD_R74__;if(!w||typeof w.interactions!=='function')return;
  const mine=t=>{const id=String(t?.id||'');return id.startsWith('r840:npc:')||id.startsWith('r840:prop:');};
