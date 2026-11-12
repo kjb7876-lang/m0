@@ -43834,8 +43834,8 @@
     },
     {
       "path": "combat-read-r409.js",
-      "bytes": 25387,
-      "sha256": "d5dadb4509a47f9316cb93fd4558f2ab41254bcded9d8ec4ff7e11ebb2087b32"
+      "bytes": 25765,
+      "sha256": "2fe5812cc34de0713c5fb12c4079bb11ba4a1910695d5685ec9efb3cd8d379d0"
     },
     {
       "path": "crates-r108.js",
@@ -44139,8 +44139,13 @@
     },
     {
       "path": "gunner-arms-r561.js",
-      "bytes": 45445,
-      "sha256": "57bc356f91d1ef1167dd6953c2385a2fa693eba398e58d44abd172fac21fb0d1"
+      "bytes": 46187,
+      "sha256": "278a124ee312c641b95ac8649433dd281db1157bbbc44e67313c16ee2b2e951b"
+    },
+    {
+      "path": "gunner-veil-r953.js",
+      "bytes": 31922,
+      "sha256": "5bb14c28f74636ea928a97e21a4725d9f8d6be5e0860bb1468d9b58996d16cec"
     },
     {
       "path": "hero-defense-r720.js",
@@ -44324,8 +44329,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6575211,
-      "sha256": "0e8609cc9579843dc6520460e4c1fb0c38d7aacd9ec720a01a1bfe81ea568e85"
+      "bytes": 6575257,
+      "sha256": "cbba22cdaba7fe466c192df04f73d171e171eb1996a86b51ee7464159503c887"
     },
     {
       "path": "intro-r140.js",
@@ -45393,9 +45398,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9078,
-  "totalBytes": 1240728780,
-  "webHTMLSha256": "0e8609cc9579843dc6520460e4c1fb0c38d7aacd9ec720a01a1bfe81ea568e85",
+  "fileCount": 9079,
+  "totalBytes": 1240761868,
+  "webHTMLSha256": "cbba22cdaba7fe466c192df04f73d171e171eb1996a86b51ee7464159503c887",
   "largest": [
     {
       "path": "index.html",
