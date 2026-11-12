@@ -13,7 +13,7 @@ const slots=()=>A(()=>{const st=window.__STORYWORLD_TEST_STORAGE_B1__.store,k=no
 const skip=()=>A(()=>{for(let i=0;i<160&&storyScene;i++)advanceScene();if(modal)closePanel(true);});
 const panel=()=>A(()=>document.getElementById('panel')?.textContent||'');
 const SV=()=>A(()=>({active:window.__STORYWORLD_SURVIVAL_R600__.active(),st:window.__STORYWORLD_SURVIVAL_R600__.state()}));
-const startSurvival=async()=>{await p.locator('#survivalStartR600').click({timeout:120000});await p.locator('[data-r600hero="hwando"]').click();
+const startSurvival=async()=>{await p.locator('#survivalStartR600').click({timeout:120000});await p.locator('[data-r600diff="normal"]').click();/* R701 부터 난이도 창이 영웅 창 앞에 온다 */await p.locator('[data-r600hero="hwando"]').click();await p.locator('#r600Go').click();/* R701: 영웅을 고른 뒤 '이 영웅으로 시작' */
  try{await p.waitForFunction(()=>window.__STORYWORLD_SURVIVAL_R600__.here()&&!loading&&window.__STORYWORLD_SURVIVAL_R600__.state().ready,null,{timeout:240000});}catch(e){console.log('DBG',JSON.stringify(await A(()=>({room:room?.id,loading,modal,started,st:window.__STORYWORLD_SURVIVAL_R600__.state(),ins:window.__STORYWORLD_SURVIVAL_R600__.inspect().lastError,panel:(document.getElementById('panel')?.textContent||'').slice(0,120)}))).slice(0,800));throw e;}};
 await p.goto(URL);await p.locator('#campaignNew54').click({timeout:180000});await p.locator('#slotConfirmR73').click();
 await p.waitForFunction(()=>started&&!loading,null,{timeout:240000});await skip();
@@ -55,7 +55,7 @@ ok('narration holds while the game is paused (still narrating, minimum wave end 
 {await A(()=>{if(modal)closePanel(true);showTitle();});await p.waitForTimeout(500);
  await p.locator('#campaignNew54').click({timeout:60000});await p.waitForTimeout(500);const row=await A(()=>({row:!!document.getElementById('heroRowR101'),picked:window.__STORYWORLD_POLISH_R101__?.pickedHero?.()}));
  await A(()=>document.getElementById('slotCancelR73')?.click());await p.waitForTimeout(300);await A(()=>{if(modal)closePanel(true);showTitle();});await p.waitForTimeout(500);
- await p.locator('#survivalStartR600').click({timeout:60000});await p.locator('[data-r600hero="hunter"]').click();
+ await p.locator('#survivalStartR600').click({timeout:60000});await p.locator('[data-r600diff="normal"]').click();await p.locator('[data-r600hero="hunter"]').click();await p.locator('#r600Go').click();
  await p.waitForFunction(()=>window.__STORYWORLD_SURVIVAL_R600__.here()&&!loading&&window.__STORYWORLD_SURVIVAL_R600__.state().ready,null,{timeout:240000}).catch(()=>{});
  const h=await A(()=>({hero:player.hero,picked:window.__STORYWORLD_POLISH_R101__?.pickedHero?.()??null}));
  ok('survival starts with the survival-picked hero even after the campaign hero row was opened and cancelled',h.hero==='hunter',{...row,...h});
