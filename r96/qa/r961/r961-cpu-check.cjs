@@ -1,4 +1,4 @@
-// R960 무한 생존 효과음 디버깅 CPU 검사(사용자 2026-11-12 14:09Z "무한생존모드 효과음디버깅").
+// R961 무한 생존 효과음 디버깅 CPU 검사(사용자 2026-11-12 14:09Z "무한생존모드 효과음디버깅").
 //  공개판 측정(2지역 345초, sound() 536회)에서 나온 두 가지를 본다.
 //  ① 생존 전용 사건이 소리 없이 지나감: 조각 줍기·레벨 업·코어 피격·영웅 쓰러짐·코어 파괴(생존이 showDeath 를 가로채 R546 쓰러짐 소리를 건너뜀).
 //  ② 회복 차임(swHeal)이 다쳤을 때 0.85초마다 울림: 틱당 최대 체력 0.12% 짜리 실회복도 차임을 불렀다(40초에 178회 요청).
@@ -27,4 +27,4 @@ let plays=0,acc=0,last=-9;for(let t=0;t<40;t+=1/60){acc+=.0012*1000;if(P.healCue
 assert(plays>=8&&plays<=40/HEAL_GAP+1,'steady regen: '+plays);ok('heal chime rule: trickle regen is silent until 4% of max HP adds up, at most one chime per '+HEAL_GAP+'s ('+plays+' in 40s of constant regen, was 47)');
 assert(/if\(k==='swHeal'&&S\?\.active&&here\(\)\)/.test(sv)&&/sound=function\(k,\.\.\.a\)/.test(sv),'survival-only filter on the engine heal cue');
 assert(!/k==='swHeal'[^\n]*soundProfiles\[/.test(sv));ok('filter applies only inside a survival run; story mode and the sound files are untouched');
-console.log('R960 survival sfx CPU check: '+n+' groups passed');
+console.log('R961 survival sfx CPU check: '+n+' groups passed');

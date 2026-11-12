@@ -250,7 +250,7 @@ function coreTick(dt){const st=CS(),c=room.survivalR600.centre,core=S.core,t=G((
  if(core.hp<=0&&!S.over){core.hp=0;stats.coreLost++;over('core');}}
 function snapCoreWalkers(){if(!here())return;const c=room.survivalR600.centre;for(const e of room.enemies)if(living(e)&&e.r600Core&&Math.hypot(e.x-player.x,e.y-player.y)>4&&Math.hypot(e.x-c.x,e.y-c.y)>=1.35)e.r600Snap={x:e.x,y:e.y};}
 
-// ── R960 효과음(사용자 2026-11-12 "무한생존모드 효과음디버깅") ──
+// ── R961 효과음(사용자 2026-11-12 "무한생존모드 효과음디버깅") ──
 //  공개판 측정: 생존 전용 사건(조각 줍기·레벨 업·코어 피격·판 끝)은 sound() 를 한 번도 부르지 않았고, 엔진 회복 차임(swHeal)은 틱당 0.12% 실회복에도 불려
 //  다쳤을 때 0.85초마다 울렸다. 사건마다 이미 있는 소리를 간격을 두고 부르고, 회복 차임은 생존 안에서만 '모인 회복량 4% + 3초 간격'으로 줄인다. 소리 파일·스토리 모드는 그대로.
 const CORE_SND_GAP=1.5,GEM_SND_GAP=.3,HEAL_MIN=.04,HEAL_GAP=3,SFX=Object.freeze({CORE_SND_GAP,GEM_SND_GAP,HEAL_MIN,HEAL_GAP});
