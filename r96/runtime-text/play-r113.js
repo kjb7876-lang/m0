@@ -71,7 +71,8 @@ function enemyFace(e){const du=(player.x-player.y)-(e.x-e.y);let s=enemySide.get
  if(want!==s.dir){if(s.pend!==want){s.pend=want;s.since=t;}if(t-s.since>=.22||e.attack&&!s.attackSeen){s.dir=want;s.pend=null;}}else s.pend=null;
  s.attackSeen=!!e.attack;return s.dir;}
 const inFight=e=>liveFoe(e)&&Math.hypot(e.x-player.x,e.y-player.y)<(major(e)?22:10);// R115: 넓어진 보스방에서도 보스는 영웅을 본다
-const hero={dir:null,pend:null,since:0,fightAt:-99};
+const perHeroR720=o=>{if(typeof Proxy!=='function'||typeof WeakMap!=='function')return o;const m=new WeakMap(),init=JSON.stringify(o),pick=()=>{let p=null;try{p=player;}catch(_){}if(p&&p.r720Ally===true){let s=m.get(p);if(!s){s=JSON.parse(init);m.set(p,s);}return s;}return o;};return new Proxy(o,{get:(_,k)=>pick()[k],set:(_,k,v)=>{pick()[k]=v;return true;},has:(_,k)=>k in pick(),deleteProperty:(_,k)=>delete pick()[k],ownKeys:()=>Reflect.ownKeys(pick()),getOwnPropertyDescriptor:(_,k)=>{const d=Object.getOwnPropertyDescriptor(pick(),k);if(d)d.configurable=true;return d;}});};/* R720: 생존 배치 영웅(player.r720Ally 몸)은 영웅마다 따로 상태를 갖는다 — 조종 영웅 상태와 섞이지 않게 */
+const hero=perHeroR720({dir:null,pend:null,since:0,fightAt:-99});
 function heroFace(){const t=now();const swinging=finite(player.attackAnim)>0||finite(player.skillAnim)>0||(typeof keys!=='undefined'&&keys.has?.('attack'));
  // R114: 공격 중이면 가장 가까운 적이 아니라 지금 노리는 적(target)을 본다(옆의 다른 몹을 보면서 반대쪽을 쏘던 문제).
  const aimed=typeof target!=='undefined'&&target!=null?(room?.enemies||[]).find(e=>e&&e.id===target&&liveFoe(e)&&Math.hypot(e.x-player.x,e.y-player.y)<11):null;

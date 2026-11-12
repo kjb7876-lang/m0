@@ -39,10 +39,10 @@ function mk(o={}){
   addEventListener:(t,f)=>{(listeners[t]=listeners[t]||[]).push(f);},
   HEROES,VFX:{slash:'s',bolt:'b',burst:'u',heal:'h'},TILE:64,zoom:1,W:960,H:540,
   started:true,modal:false,loading:false,storyScene:null,time:10,layer:'STORY',zone:'dist00',settings:{},
-  player:{hero:o.hero||'hwando',x:50,y:52,hp:100,level:1,upgrades:{},combo:0,ego:0,samong:0,shield:0,direction:'front'},
+  player:{hero:o.hero||'hwando',x:50,y:52,hp:100,level:1,upgrades:{},combo:0,ego:0,samong:0,shield:0,direction:'front',attackCD:0,attackAnim:0,skillAnim:0,specialCD:0,progressionR62:{version:1,ranks:{}},poseStarted5:{}},
   heroArt:Object.fromEntries(Object.keys(HEROES).map(id=>[id,{idle:{front:id+'/i',left:id+'/il',right:id+'/ir',back:id+'/ib'},attack:{front:id+'/a',left:id+'/al',right:id+'/ar',back:id+'/ab'}}])),
   room:{id:'dist00',engaged:true,props:[{id:'r600:core',r600CoreProp:true,x:50,y:50}],enemies:[],survivalR600:{centre:{x:50,y:50},arena:{x0:1,y0:1,x1:99,y1:99}}},
-  calls:{open:[],close:0,hit:[],kill:[],fx:0,toast:[],ensure:[],drawBase:0,sprite:[],tickBase:0,icons:0},
+  calls:{attack:[],late:[],heroDraw:[],open:[],close:0,hit:[],kill:[],fx:0,toast:[],ensure:[],drawBase:0,sprite:[],tickBase:0,icons:0},
  };
  sb.attackPower=()=>2*HEROES[sb.player.hero].power;
  sb.facing=(x,y)=>{const sx=x-y,sy=(x+y)*.5;return Math.abs(sx)>Math.abs(sy)*1.35?(sx>0?'right':'left'):sy>0?'front':'back';};
@@ -53,7 +53,17 @@ function mk(o={}){
  sb.openPanel=h=>{sb.modal=true;sb.calls.open.push(String(h));};sb.closePanel=()=>{sb.modal=false;sb.calls.close++;};
  sb.killEnemy=function(e){if(e.deadRecorded)return;e.hp=0;e.deadRecorded=true;e.deadAt=sb.time;sb.calls.kill.push(e.id);};
  sb.hitEnemy=function(e,v){if(!e||e.hp<=0||!(v>0)||(e.boss&&!sb.room.engaged))return false;sb.calls.hit.push({id:e.id,v});e.hp-=Math.min(e.hp,v);if(e.hp<=0)sb.killEnemy(e);return true;};
- sb.tick=function(dt){sb.calls.tickBase++;if(sb.modal||sb.loading)return;sb.time+=dt;};
+ // 엔진 흉내: 기본 공격·영웅 그리기·지연 작업·투사체는 '지금 player 자리에 있는 몸'을 읽는다(배치 영웅은 그 몸을 끼워서 부른다)
+ sb.structuredClone=v=>JSON.parse(JSON.stringify(v));sb.delayed=[];sb.shots=[];sb.throwInAttack=false;
+ sb.target='mine';sb.command='mine';sb.route=['r'];/* 엔진의 겨눔·이동 명령(조종 영웅 것) */
+ sb.basicAttack=function(){const p=sb.player,h=HEROES[p.hero];if(sb.modal||sb.loading||!(p.hp>0)||p.attackCD>0)return;if(p.r720Ally){sb.target='foe';sb.command='foe';sb.route=[{x:1,y:1}];}/* 엔진 공격이 겨눔·추격 명령을 건다 */if(sb.throwInAttack)throw Error('boom');
+  let e=null,d=h.range;for(const v of sb.room.enemies){if(!(v.hp>0)||v.deadRecorded)continue;const q=Math.hypot(v.x-p.x,v.y-p.y);if(q<=d){d=q;e=v;}}if(!e)return;
+  p.combo++;p.attackCD=h.interval;p.attackAnim=.24;p.direction=sb.facing(e.x-p.x,e.y-p.y);sb.calls.attack.push({hero:p.hero,ally:p.r720Ally===true,x:p.x,y:p.y});sb.fx();sb.hitEnemy(e,sb.attackPower());
+  if(p.combo%3===0)sb.delay(.1,()=>{sb.calls.late.push({hero:sb.player.hero,ally:sb.player.r720Ally===true});sb.hitEnemy(e,sb.attackPower()*.5);});};
+ sb.delay=(sec,fn)=>{sb.delayed.push({at:sb.time+sec,fn});};
+ sb.makeShot=(x,y,a,spd,dmg)=>{sb.shots.push({x,y,dmg});return {};};
+ sb.drawHero=()=>{sb.calls.sprite.push(sb.heroArt[sb.player.hero].idle.front);sb.calls.heroDraw.push({hero:sb.player.hero,x:sb.player.x,y:sb.player.y});};
+ sb.tick=function(dt){sb.calls.tickBase++;if(sb.modal||sb.loading)return;sb.time+=dt;const due=sb.delayed.filter(d=>d.at<=sb.time);sb.delayed=sb.delayed.filter(d=>d.at>sb.time);for(const d of due)d.fn();};
  sb.drawProp=function(p){sb.calls.drawBase++;};
  sb.ctx={save(){},restore(){},beginPath(){},ellipse(){},stroke(){},fill(){},fillRect(){},setLineDash(){},moveTo(){},lineTo(){},arc(){},drawImage(){},globalAlpha:1};
  sb.window=sb;sb.globalThis=sb;
@@ -70,18 +80,21 @@ ok(!!A&&!!P,'모듈이 엔진 없이도 올라가고 공개 객체·순수 규�
 if(!P){console.log('\n'+(n-bad)+'/'+n+' — 모듈이 없어 나머지 검사를 건너뜀');process.exit(1);}
 
 // ── ② 순수 규칙 ──
-// 가격: 영웅 목록(서사) 순서로 뒤일수록 비싸다
-{const ids=P.order(HEROES),pr=ids.map(id=>P.price(id,HEROES));
+// 가격(사용자 2026-11-12 06:02Z): 미카엘라 가장 비쌈 > 네온·윤서하·라우렌 좀 비쌈 > 기억사수·환도 중간 > 슬레이어·헌터 쌈. 합계는 예전(1105)과 비슷하게.
+{const ids=P.order(HEROES),pr=Object.fromEntries(ids.map(id=>[id,P.price(id,HEROES)])),v=Object.values(pr);
  ok(ids.join()==='hwando,seoha,neon,michaela,lauren,hunter,slayer,gunner','영웅 순서 = 엔진 영웅 목록 순서',ids);
- ok(pr.every((v,i)=>i===0||v>pr[i-1]),'가격은 뒤 영웅일수록 비싸다(엄격 증가)',pr);
- ok(pr[0]===50&&pr[7]===280,'환도 50 · 기억사수 280',pr);
+ ok(pr.michaela===Math.max(...v)&&v.filter(x=>x===pr.michaela).length===1,'미카엘라가 혼자 가장 비싸다',pr);
+ const hi=Math.min(pr.neon,pr.seoha,pr.lauren),mid=[pr.gunner,pr.hwando],lo=Math.max(pr.slayer,pr.hunter);
+ ok(hi>Math.max(...mid)&&pr.michaela>Math.max(pr.neon,pr.seoha,pr.lauren),'네온·윤서하·라우렌은 중간 가격보다 비싸고 미카엘라보다 싸다',pr);
+ ok(Math.min(...mid)>lo,'기억사수·환도(중간)는 슬레이어·헌터(싼 쪽)보다 비싸다',pr);
+ const sum=v.reduce((a,b)=>a+b,0);ok(Math.abs(sum-1105)<=60&&v.every(x=>x>=40&&x%5===0),'합계는 예전과 비슷(1105±60), 5 단위',{sum,pr});
  ok(P.price('nobody',HEROES)===Infinity,'모르는 영웅은 살 수 없음');
- const tr=ids.map(id=>P.tier(id,HEROES));ok(tr[0]===1&&tr.every((v,i)=>i===0||v>tr[i-1]),'비싼 영웅일수록 기본 위력 배수도 높다',tr);}
+ const by=[...ids].sort((a,b)=>pr[a]-pr[b]),tr=by.map(id=>P.tier(id,HEROES));ok(tr[0]===1&&tr.every((x,i)=>i===0||x>tr[i-1]),'비싼 영웅일수록 기본 위력 배수도 높다',tr);}
 // 구매
 {const st=P.fresh('hwando');ok(st.crystals===0&&st.owned.hwando===true&&st.slots.length===0&&st.main==='hwando','새 판: 결정 0·조종 영웅 보유·빈 자리');
  let r=P.doBuy(st,'seoha',HEROES);ok(!r.ok&&r.why==='poor'&&!st.owned.seoha&&st.crystals===0,'결정이 모자라면 못 산다',r);
- st.crystals=64;r=P.doBuy(st,'seoha',HEROES);ok(!r.ok&&st.crystals===64,'1개 모자라도(64/65) 못 산다');
- st.crystals=65;r=P.doBuy(st,'seoha',HEROES);ok(r.ok&&st.owned.seoha===true&&st.crystals===0,'딱 맞는 값(65)이면 사고 0 이 남는다',r);
+ st.crystals=149;r=P.doBuy(st,'seoha',HEROES);ok(!r.ok&&st.crystals===149,'1개 모자라도(149/150) 못 산다');
+ st.crystals=150;r=P.doBuy(st,'seoha',HEROES);ok(r.ok&&st.owned.seoha===true&&st.crystals===0,'딱 맞는 값(150)이면 사고 0 이 남는다',r);
  st.crystals=999;r=P.doBuy(st,'seoha',HEROES);ok(!r.ok&&r.why==='owned'&&st.crystals===999,'이미 가진 영웅은 다시 사지 않는다');
  r=P.doBuy(st,'hwando',HEROES);ok(!r.ok&&r.why==='owned'&&st.crystals===999,'조종 중인 영웅은 이미 보유(사지 않음)');
  r=P.doBuy(st,'nobody',HEROES);ok(!r.ok&&st.crystals===999,'모르는 영웅은 거절');
@@ -119,11 +132,11 @@ if(!P){console.log('\n'+(n-bad)+'/'+n+' — 모듈이 없어 나머지 검사를
  ok(P.MAX.slots===4&&P.MAX.range===5&&P.MAX.radius===5&&P.MAX.level===10,'상한: 자리 4·사거리 5·반경 5·레벨 10');}
 // 자리 능력치
 {const s0={hero:'seoha',lv:1,rangeLv:0,radiusLv:0},a=P.slotStats(s0,HEROES);
- ok(near(a.range,8.1)&&a.radius>0&&a.targets===1&&a.interval>HEROES.seoha.interval,'1레벨: 사거리=영웅 사거리, 공격 간격은 조종 영웅보다 느리다',a);
+ ok(near(a.range,8.1)&&a.radius>0&&a.targets===undefined&&a.pace>1&&near(a.interval,HEROES.seoha.interval*a.pace),'1레벨: 사거리=영웅 사거리, 공격 간격은 조종 영웅보다 느리다',a);
  const b=P.slotStats({...s0,rangeLv:5,radiusLv:5,lv:10},HEROES);
  ok(near(b.range,8.1+3)&&near(b.radius,a.radius+4),'사거리 +0.6칸×5, 이동 반경 +0.8칸×5',b);
- ok(b.dmgMul>a.dmgMul*2&&b.interval<a.interval&&b.targets===3,'10레벨: 위력 2배 이상·더 빠름·3마리');
- const tg=[1,2,3,5,6,10].map(lv=>P.slotStats({...s0,lv},HEROES).targets);ok(tg.join()==='1,1,2,2,3,3','한 번에 맞히는 수: 3레벨 2·6레벨 3',tg);
+ ok(b.dmgMul>a.dmgMul*2&&b.interval<a.interval&&b.pace<a.pace&&b.pace>=1,'10레벨: 위력 2배 이상·더 빠름(그래도 조종 영웅보다 빠르지는 않다)',b);
+ // (사용자 2026-11-12: 스킬 구조는 원래 영웅 그대로 → '한 번에 N마리' 자체 규칙은 없앴다. 다중 타격은 영웅 본래 스킬이 한다)
  // 디펜스 균형: 1레벨 배치 영웅 화력은 조종 영웅 기본 공격의 1/4~1/2, 10레벨 단일 표적은 0.8~1.4배
  const dps=s=>{const x=P.slotStats(s,HEROES);return x.dmgMul/x.interval;},me=1/HEROES.seoha.interval;
  ok(dps(s0)/me>=.25&&dps(s0)/me<=.5,'1레벨 화력 ≈ 조종 영웅의 1/4~1/2',dps(s0)/me);ok(dps({...s0,lv:10})/me>=.8&&dps({...s0,lv:10})/me<=1.4,'10레벨 단일 표적 화력 ≈ 0.8~1.4배',dps({...s0,lv:10})/me);
@@ -172,7 +185,7 @@ if(!P){console.log('\n'+(n-bad)+'/'+n+' — 모듈이 없어 나머지 검사를
 // I 키: 생존 모드에서만 창이 열리고 다시 누르면 닫힌다
 {const m=mk();let ev=m.key('i');ok(m.sb.calls.open.length===1&&/영웅 배치/.test(m.sb.calls.open[0])&&ev.prevented,'생존 모드에서 I → 영웅 배치 창');
  ok(/정화 결정/.test(m.sb.calls.open[0])&&Object.values(HEROES).every(h=>m.sb.calls.open[0].includes(h.name)),'창에 재화와 영웅 여덟이 보인다');
- ok(/영입 65</.test(m.sb.calls.open[0])&&/영입 280</.test(m.sb.calls.open[0])&&!/영입 50</.test(m.sb.calls.open[0])&&/조종 중/.test(m.sb.calls.open[0]),'창에 가격이 보인다(조종 중인 환도는 값 대신 조종 중)');
+ ok(/영입 150</.test(m.sb.calls.open[0])&&/영입 280</.test(m.sb.calls.open[0])&&!/영입 95</.test(m.sb.calls.open[0])&&/조종 중/.test(m.sb.calls.open[0]),'창에 가격이 보인다(조종 중인 환도는 값 대신 조종 중)');
  m.key('i');ok(m.sb.calls.close===1&&m.sb.modal===false,'열린 채 I → 닫힘');
  m.key('I');ok(m.sb.calls.open.length===2,'대문자 I(Caps Lock)도 열린다');m.key('i');
  m.key('i',{repeat:true});m.key('i',{ctrlKey:true});m.key('i',{target:{tagName:'INPUT'}});ok(m.sb.calls.open.length===2,'키 반복·Ctrl+I·입력칸 안에서는 열지 않는다');
@@ -193,7 +206,7 @@ if(!P){console.log('\n'+(n-bad)+'/'+n+' — 모듈이 없어 나머지 검사를
  m.sv.phase='clear';m.run(.5);const c1=m.api.state().crystals;ok(c1===29+P.clearBonus(0),'지역 정화 완료 보너스 한 번',c1);m.run(.5);ok(m.api.state().crystals===c1,'같은 지역에서 다시 주지 않는다');
  m.sv.phase='pre';m.sv.i=1;m.run(.2);m.sv.phase='clear';m.run(.2);ok(m.api.state().crystals===c1+P.clearBonus(1),'다음 지역 정화 때 다시 준다');}
 // 구매 → 지금 선 자리에 배치 → 공격
-{const m=mk();m.sb.player.x=52;m.sb.player.y=50;ok(m.api.qaGive(65)===true,'검사용 지급');
+{const m=mk();m.sb.player.x=52;m.sb.player.y=50;ok(m.api.qaGive(150)===true,'검사용 지급');
  let r=m.api.buy('seoha');ok(r.ok&&r.placed===true&&m.api.state().slots.length===1&&m.api.state().crystals===0,'사면 지금 선 자리(코어 사거리 안)에 바로 배치',r);
  ok(m.sb.calls.ensure.length===1&&m.sb.calls.ensure[0].includes('seoha/i'),'배치 영웅 그림을 불러온다');
  m.run(.2);const props=m.sb.room.props.filter(p=>p.r720AllyProp);ok(props.length===1&&near(props[0].x,52)&&near(props[0].y,50),'방 소품으로 한 번만 올라간다(깊이 정렬용)',props.length);
@@ -202,24 +215,41 @@ if(!P){console.log('\n'+(n-bad)+'/'+n+' — 모듈이 없어 나머지 검사를
  const hits=m.sb.calls.hit;ok(hits.length>=2&&hits.every(h=>h.id==='in'),'사거리 안 적만 스스로 공격한다(밖의 적은 건드리지 않음)',hits.slice(0,3));
  const st=P.slotStats(m.api.state().slots[0],HEROES);ok(hits.length<=Math.ceil(3/st.interval)+1,'공격 간격을 지킨다(3초에 '+hits.length+'번)');
  ok(near(hits[0].v,2*HEROES.seoha.power*st.dmgMul,1e-6),'피해 = 그 영웅 기본 위력 × 자리 배수(조종 영웅이 누구든 같다)',hits[0]);
+ // 원래 영웅 그대로: 엔진 기본 공격을 '배치 영웅의 몸'으로 부른다. 조종 영웅 객체·상태는 그대로다.
+ {const at=m.sb.calls.attack,me=m.sb.player,bd=m.api.bodies()[0];
+  ok(at.length>=2&&at.every(c=>c.hero==='seoha'&&c.ally&&near(c.x,52)&&near(c.y,50)),'엔진 basicAttack 을 윤서하 몸(자리 위치)으로 부른다',at.slice(0,2));
+  ok(m.sb.target==='mine'&&m.sb.command==='mine'&&m.sb.route.length===1&&m.sb.route[0]==='r','배치 영웅의 공격이 조종 영웅의 겨눔·이동 명령(target·command·route)을 바꾸지 않는다(조종 영웅이 끌려가지 않음)',{target:m.sb.target,command:m.sb.command,route:m.sb.route});
+  ok(bd&&bd!==me&&bd.r720Ally===true&&bd.hero==='seoha'&&me.hero==='hwando'&&me.r720Ally===undefined,'몸은 조종 영웅과 다른 객체, 끝나면 player 는 조종 영웅으로 돌아와 있다');
+  ok(me.combo===0&&me.attackCD===0&&me.attackAnim===0&&me.x===52&&me.y===50&&me.direction==='front','조종 영웅의 콤보·쿨·자세·위치·방향은 안 바뀐다',{combo:me.combo,cd:me.attackCD});
+  ok(bd.combo===at.length&&bd.progressionR62===me.progressionR62&&bd.upgrades===me.upgrades&&bd.poseStarted5!==me.poseStarted5,'콤보는 몸마다 따로, 스킬 단계·패시브는 조종 영웅 것을 함께 쓴다');
+  ok(m.sb.calls.late.length>=1&&m.sb.calls.late.every(c=>c.hero==='seoha'&&c.ally),'지연 작업(연계 타격)도 같은 몸으로 돈다',m.sb.calls.late.slice(0,2));
+  const lateHit=hits.find(h=>near(h.v,2*HEROES.seoha.power*.5*st.dmgMul,1e-6));ok(!!lateHit,'지연 타격에도 자리 위력 배수가 한 번만 곱해진다',hits.slice(0,4).map(h=>h.v));
+  ok(JSON.stringify(m.api.allies()).length>0&&JSON.stringify(m.api.state()).length>0,'상태 출력은 JSON 으로 만들 수 있다(몸을 싣지 않는다)');
+  // 엔진 공격이 오류를 내도 player 는 조종 영웅으로 돌아온다
+  m.sb.throwInAttack=true;const e0=m.api.inspect().stats.errors;m.run(1.5);m.sb.throwInAttack=false;m.expErr=m.api.inspect().stats.errors;
+  ok(m.sb.player===me&&m.api.inspect().stats.errors>e0,'엔진 공격이 오류를 내도 player 는 조종 영웅으로 되돌아온다(오류는 기록)');
+  // 조종 영웅 자신의 공격에는 배수가 붙지 않는다
+  const n0=hits.length;m.sb.player.x=57;m.sb.basicAttack();m.sb.player.x=52;ok(hits.length===n0+1&&near(hits[n0].v,2*HEROES.hwando.power,1e-6),'조종 영웅 자신의 공격 피해는 그대로(배수 없음)',hits[n0]);m.sb.player.attackCD=0;m.sb.player.attackAnim=0;m.sb.player.combo=0;m.sb.player.direction='front';
+  // 그리기: 엔진 drawHero 를 그 몸으로
+  m.sb.calls.heroDraw.length=0;m.sb.drawProp(m.sb.room.props.find(p=>p.r720AllyProp));const hd=m.sb.calls.heroDraw;ok(hd.length===1&&hd[0].hero==='seoha'&&near(hd[0].x,52)&&m.sb.player===me,'배치 영웅은 엔진 영웅 그리기(drawHero)로 그린다',hd);}
  // 창·불러오기 중에는 멈춘다
- const h0=hits.length;m.sb.modal=true;m.run(2);ok(m.sb.calls.hit.length===h0,'창이 열려 전투가 멈춘 동안은 공격하지 않는다');m.sb.modal=false;
+ const h0=m.sb.calls.hit.length;m.sb.modal=true;m.run(2);ok(m.sb.calls.hit.length===h0,'창이 열려 전투가 멈춘 동안은 공격하지 않는다');m.sb.modal=false;
  // 그리기: 내 소품만 내가 그리고 나머지는 엔진에 넘긴다
  const d0=m.sb.calls.drawBase;m.sb.drawProp(m.sb.room.props.find(p=>p.r720AllyProp));ok(m.sb.calls.drawBase===d0&&m.sb.calls.sprite.some(p=>/^seoha\//.test(p)),'배치 영웅은 그 영웅 그림으로 그린다');
  m.sb.drawProp(m.sb.room.props[0]);m.sb.drawProp({id:'tree'});ok(m.sb.calls.drawBase===d0+2,'다른 소품(정화 코어 포함)은 원래 그리기로 넘긴다');
  // 코어 사거리 밖에서 사면 보유만 하고, 안으로 들어와 배치한다
- m.api.qaGive(80);m.sb.player.x=50;m.sb.player.y=60;r=m.api.buy('neon');ok(r.ok&&r.placed===false&&m.api.state().owned.neon&&m.api.state().slots.length===1,'사거리 밖에서 사면 보유만(결정은 빠짐)',r);
+ m.api.qaGive(165);m.sb.player.x=50;m.sb.player.y=60;r=m.api.buy('neon');ok(r.ok&&r.placed===false&&m.api.state().owned.neon&&m.api.state().slots.length===1,'사거리 밖에서 사면 보유만(결정은 빠짐)',r);
  ok(m.api.placeHere('neon').ok===false,'사거리 밖에서는 배치 거절');m.sb.player.x=48;m.sb.player.y=50;ok(m.api.placeHere('neon').ok===true&&m.api.state().slots.length===2,'안으로 들어와 배치');
  // 강화·옮기기
  m.api.qaGive(P.cost('range',0));ok(m.api.upgrade(0,'range').ok&&m.api.state().slots[0].rangeLv===1,'자리 사거리 강화');
  m.sb.player.x=50;m.sb.player.y=53;ok(m.api.moveHere(0).ok&&near(m.api.state().slots[0].oy,3),'자리 옮기기');m.run(.2);
  const pr=m.sb.room.props.find(p=>p.r720AllyProp&&p.r720Slot===0);ok(near(pr.x,50,.6)&&near(pr.y,53,.6),'옮기면 영웅도 새 자리로 온다',{x:pr.x,y:pr.y});
- ok(m.api.inspect().stats.errors===0,'오류 없음',m.api.inspect().lastError);}
+ ok(m.api.inspect().stats.errors===m.expErr,'일부러 낸 오류 말고는 오류 없음',m.api.inspect().lastError);}
 // 교대(엔진 영웅 변경으로 바뀌어도, 창의 교대 단추로 바꿔도)
-{const m=mk();m.sb.player.x=52;m.sb.player.y=50;m.api.qaGive(65);m.api.buy('seoha');m.api.qaGive(P.cost('level',1));m.api.upgrade(0,'level');m.run(.2);
+{const m=mk();m.sb.player.x=52;m.sb.player.y=50;m.api.qaGive(150);m.api.buy('seoha');m.api.qaGive(P.cost('level',1));m.api.upgrade(0,'level');m.run(.2);
  m.sb.player.hero='seoha';m.run(.2);const s=m.api.state();ok(s.main==='seoha'&&s.slots[0].hero==='hwando'&&s.slots[0].lv===2,'엔진 영웅 변경으로 윤서하가 되면 환도가 그 자리에(레벨 2 유지)',s.slots[0]);
  m.sb.calls.sprite.length=0;m.sb.drawProp(m.sb.room.props.find(p=>p.r720AllyProp));ok(m.sb.calls.sprite.some(p=>/^hwando\//.test(p)),'그 자리에 환도 그림이 선다');
- m.sb.room.enemies.push({id:'in',x:53,y:50,hp:1e9});m.run(2);ok(m.sb.calls.hit.length>0&&near(m.sb.calls.hit[0].v,2*HEROES.hwando.power*P.slotStats(s.slots[0],HEROES).dmgMul,1e-6),'들어간 환도는 환도 위력으로 싸운다',m.sb.calls.hit[0]);
+ m.sb.room.enemies.push({id:'in',x:53,y:50,hp:1e9});m.run(2);ok(m.sb.calls.hit.length>0&&near(m.sb.calls.hit[0].v,2*HEROES.hwando.power*P.slotStats(s.slots[0],HEROES).dmgMul,1e-6)&&m.sb.calls.attack.every(c=>c.hero==='hwando'&&c.ally),'들어간 환도는 환도 위력·환도 공격으로 싸운다',m.sb.calls.hit[0]);
  (async()=>{const r=await m.api.swapTo(0);const t=m.api.state();ok(r.ok&&m.sb.player.hero==='hwando'&&t.main==='hwando'&&t.slots[0].hero==='seoha','창의 교대 단추: 환도로 돌아오고 윤서하가 다시 그 자리',t.slots[0]);
   ok(m.sb.player.x===52&&m.sb.player.y===50,'교대해도 내 위치는 그대로');ok(m.sb.calls.icons>0,'교대 뒤 스킬 아이콘을 새로 그린다');
   ok((await m.api.swapTo(5)).ok===false,'없는 자리로는 교대하지 않는다');finish();})();}
@@ -229,7 +259,7 @@ function finish(){
   m.sv.starts=2;m.sb.room={...m.sb.room,props:[{id:'r600:core',r600CoreProp:true,x:50,y:50}],enemies:[]};m.run(.2);
   const s=m.api.state();ok(s.crystals===0&&s.slots.length===0&&Object.keys(s.owned).join()==='hwando','새 판(다시 도전)에서는 결정·보유·자리가 초기화',s);
   ok(m.sb.room.props.every(p=>!p.r720AllyProp),'새 판 방에 예전 배치 소품이 남지 않는다');}
- {const m=mk();m.sb.player.x=52;m.sb.player.y=50;m.api.qaGive(65);m.api.buy('seoha');m.run(.2);
+ {const m=mk();m.sb.player.x=52;m.sb.player.y=50;m.api.qaGive(150);m.api.buy('seoha');m.run(.2);
   // 다음 지역: 방이 새로 만들어져도(소품 목록 새로) 같은 코어 기준 자리에 다시 선다
   m.sb.room={id:'dist01',engaged:true,props:[{id:'r600:core',r600CoreProp:true,x:30,y:40}],enemies:[],survivalR600:{centre:{x:30,y:40},arena:{x0:1,y0:1,x1:59,y1:79}}};m.sv.i=1;m.run(.2);
   const pr=m.sb.room.props.filter(p=>p.r720AllyProp);ok(pr.length===1&&near(pr[0].x,32)&&near(pr[0].y,40),'다음 지역에서도 코어 기준 같은 자리에 선다',pr.map(p=>[p.x,p.y]));
