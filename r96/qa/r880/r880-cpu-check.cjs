@@ -172,6 +172,15 @@ const flat=s=>String(s).replace(/\s*\n\s*/g,' ');
  {const g=world({voice:true}),A=g.api;A.play({zone:'dist01'});for(let i=0;i<200;i++){g.raf(33);g.voiceTick();}const i1=A.inspect();
   ok('inspect reports voice state',i1.voice&&i1.voice.on===true&&i1.voice.spoken>=1,i1.voice);A.skip();}
 }
+// 8c) 화면 마감(R889, 사용자 2026-11-12 "조금만더 퀄리티업 전반적으로"): 전 장면 공통
+{const g=world(),A=g.api;A.play({zone:'dist01'});const root=g.dom.document.getElementById('r880'),cls=root.children.map(c=>c.className||'');
+ ok('finish: title card, top/bottom shade and grain layers exist; caption and skip still there',['ttl','shade t','shade b','grain','cap','skip','chap'].every(c=>cls.includes(c)),cls);
+ const ttl=root.children.find(c=>c.className==='ttl');ok('finish: title card shows the region title',String(ttl?.textContent||'').includes('제목 dist01'),ttl?.textContent);
+ ok('finish: grain uses no blend mode (measured −30% fps in software rendering)',!/\.grain\{[^}]*mix-blend-mode/.test(SRC));
+ ok('finish: reduced-motion stops grain and title animation',/prefers-reduced-motion: reduce\)\{[^@]*\.grain\{animation:none\}/.test(SRC));
+ ok('finish: cinema mode hides the title card',/#r880\.cinema \.ttl\{display:none\}/.test(SRC));
+ for(let i=0;i<60;i++)g.raf(33);ok('finish: no errors with dust, breathing camera and shadows',A.inspect().stats.errors===0,A.inspect().lastError);A.skip();
+ const g2=world(),A2=g2.api;A2.play({zone:'dist01',at:5});ok('finish: still frame (at=…) has no title card',!g2.dom.document.getElementById('r880').children.some(c=>c.className==='ttl'));A2.skip();}
 // 9) 빌드 연결 다섯 곳
 {const html=rd(path.join(R,'runtime-text','index.html'))||'',lines=html.split('\n');
  const iT=lines.findIndex(l=>l.includes('./title-bg-video-r667.js')),iE=lines.findIndex(l=>l.includes('./'+ENGINE)),iS=lines.findIndex(l=>l.includes('./'+SCENES[0])),iS2=SCENES.map(f=>lines.findIndex(l=>l.includes('./'+f)));
