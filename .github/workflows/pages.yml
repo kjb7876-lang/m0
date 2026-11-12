@@ -13,7 +13,7 @@ concurrency:
 jobs:
   verify:
     runs-on: ubuntu-22.04
-    timeout-minutes: 55
+    timeout-minutes: 65
     steps:
       - uses: actions/checkout@v6
         with:
@@ -510,6 +510,8 @@ jobs:
         run: node r96/qa/r522/r522-cpu-check.cjs
       - name: R523 story rooms (clinic ep1a09 + sloth home ep1b02 furnished by room name along the real back walls, presentation only, angle-matched art only) CPU check
         run: node r96/qa/r523/r523-cpu-check.cjs && node r96/qa/r730/r730-cpu-check.cjs
+      - name: R810 Bulmyeongwi night (last302/last303 navy moonlight ambient, deep amber lamps, no sepia, no spider-crack decals, night fog colour, lamps kept off the guide path; other zones unchanged) CPU check
+        run: node r96/qa/r810/r810-cpu-check.cjs
       - name: R590 hwando sword chain (A draw-cut, Q wind blades, E delayed flash, R seven-strike finale; no new keys, walls/map edge, caps) CPU check
         run: node r96/qa/r590/hwando-chain-cpu-check.cjs
       - name: R601 enemy attack tempo (enemy attack body motion drawn 2x faster, strike frame kept on the damage moment, telegraphs on real time, no timing/damage change) CPU check
@@ -655,6 +657,14 @@ jobs:
         run: python r96/qa/r700/boss-art-check.py
       - name: R760 Bulmyeongwi boss staging (one toned 4-pose set for idle/attack, one size, ink-violet tone + amber eyes, layered afterimages; mobs/other bosses untouched) CPU check
         run: node r96/qa/r760/r760-cpu-check.cjs
+      - name: R790 story key NPC (last303 - the youth in the mist offers gwibitang at the boss door; no gwibitang → door story does not start and the Bulmyeongwi core stays sealed; old saves/guide/survival/co-op untouched) CPU check
+        run: node r96/qa/r790/r790-cpu-check.cjs
+      - name: R791 story key NPC 2 (last305 - the defeated goblin chief leaves the rose seal by the altar; no seal → exit story does not start; R790 gwibitang gate unchanged, ledgers do not mix) CPU check
+        run: node r96/qa/r791/r791-cpu-check.cjs
+      - name: R792 story key NPC 3 (Dots sheets - the youth breathes and holds out the bowl when the hero comes near; ep1a10 medic and ep1a11 physician by the altar after the boss; chief single frame unchanged) CPU check
+        run: node r96/qa/r792/r792-cpu-check.cjs
+      - name: R793 story key NPC 4 (ep1b05 Seoyun by the boss door - ask her permission before the door story; no kill seal; other gates unchanged) CPU check
+        run: node r96/qa/r793/r793-cpu-check.cjs
       - name: R563 Michaela genesis chain (Q → sky light pillars, R → grand pillar + halo; no new keys, upright cross only, Dots MI sheets) CPU check
         run: node r96/qa/r563/michaela-genesis-cpu-check.cjs
       - name: R564 Seoha chrono chain (time stop shell + shatter, afterimage clones, haste; no new keys, caps, Dots SE sheets) CPU check
@@ -713,12 +723,17 @@ jobs:
         run: node r96/qa/r199/r199-cpu-check.cjs
       - name: R201 Michaela default-pack skill/ultimate S/E frames CPU check
         run: node r96/qa/r201/r201-cpu-check.cjs
+      - name: R795 hero sweep — engaged mobs stay copyable (R170 tower, R193 doll, R446 pillar donors) CPU check
+        run: node r96/qa/r795/r795-cpu-check.cjs
+      - name: R821 hero readability on bright patterned floors (foot pool + body outline, rosehouse only) CPU check
+        run: node r96/qa/r821/r821-cpu-check.cjs
       - name: Install pinned sandboxed Chromium
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0
           # 러너 apt 미러 DNS 장애(2026-11-11 'Temporary failure resolving azure.archive.ubuntu.com')로 글꼴 패키지 설치가 실패해도
-          # 브라우저 검사가 돌게: OS 의존성은 두 번까지 시도하고, 안 되면 경고를 남기고 Chromium 만 받는다(러너 이미지에 Chrome 라이브러리 있음).
-          ok=0; for i in 1 2; do if timeout 420 npx playwright install --with-deps chromium; then ok=1; break; fi; echo "playwright --with-deps attempt $i failed"; sleep 15; done
+          # 브라우저 검사가 돌게: OS 의존성은 한 번(240초) 시도하고, 안 되면 경고를 남기고 Chromium 만 받는다(러너 이미지에 Chrome 라이브러리 있음).
+          # 미러 이름이 안 풀리면 apt 를 아예 건너뛴다(2026-11-11 두 번의 420초 시도가 15분을 먹어 55분 작업 제한에 걸렸음).
+          ok=0; if getent hosts azure.archive.ubuntu.com >/dev/null && getent hosts security.ubuntu.com >/dev/null; then if timeout 240 npx playwright install --with-deps chromium; then ok=1; fi; else echo "apt mirror DNS unavailable — skip OS deps"; fi
           if [ "$ok" != 1 ]; then echo "::warning::apt 의존성 설치 실패 — OS 의존성 없이 Chromium 만 설치"; npx playwright install chromium; fi
       - name: Browser start, save, portal, exact atlas decode and native status lifecycle
         env:
@@ -806,8 +821,9 @@ jobs:
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0
           # 러너 apt 미러 DNS 장애(2026-11-11 'Temporary failure resolving azure.archive.ubuntu.com')로 글꼴 패키지 설치가 실패해도
-          # 브라우저 검사가 돌게: OS 의존성은 두 번까지 시도하고, 안 되면 경고를 남기고 Chromium 만 받는다(러너 이미지에 Chrome 라이브러리 있음).
-          ok=0; for i in 1 2; do if timeout 420 npx playwright install --with-deps chromium; then ok=1; break; fi; echo "playwright --with-deps attempt $i failed"; sleep 15; done
+          # 브라우저 검사가 돌게: OS 의존성은 한 번(240초) 시도하고, 안 되면 경고를 남기고 Chromium 만 받는다(러너 이미지에 Chrome 라이브러리 있음).
+          # 미러 이름이 안 풀리면 apt 를 아예 건너뛴다(2026-11-11 두 번의 420초 시도가 15분을 먹어 55분 작업 제한에 걸렸음).
+          ok=0; if getent hosts azure.archive.ubuntu.com >/dev/null && getent hosts security.ubuntu.com >/dev/null; then if timeout 240 npx playwright install --with-deps chromium; then ok=1; fi; else echo "apt mirror DNS unavailable — skip OS deps"; fi
           if [ "$ok" != 1 ]; then echo "::warning::apt 의존성 설치 실패 — OS 의존성 없이 Chromium 만 설치"; npx playwright install chromium; fi
       - name: Verify actual public start, save reload, E portal and status effects
         env:

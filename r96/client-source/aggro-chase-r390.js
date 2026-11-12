@@ -14,7 +14,7 @@ const G=(f,d)=>{try{const v=f();return v===undefined?d:v;}catch(_){return d;}};
 const live=e=>!!e&&e.hp>0&&!e.deadRecorded&&!['hidden','inactive','disabled','despawned','dead'].includes(e.spawnState);
 const inRoom=e=>{const r=G(()=>room,null);return !!r&&(r.enemies||[]).includes(e);};
 const engaged=e=>prefs.on&&live(e)&&e.r390Engaged===G(()=>room,null)&&inRoom(e);
-function mark(e,why){if(!prefs.on||!live(e)||!inRoom(e))return;const r=G(()=>room,null);if(e.r390Engaged===r)return;e.r390Engaged=r;stats[why]++;}
+function mark(e,why){if(!prefs.on||!live(e)||!inRoom(e))return;const r=G(()=>room,null);if(e.r390Engaged===r)return;/* R795: 셀 수 없는 속성으로 — 몹을 JSON·펼침으로 본뜰 때(R170 조형물·R193 인형 몹·R446 기둥 몹) 방 객체가 딸려 가 순환 참조로 터지지 않게 */try{Object.defineProperty(e,'r390Engaged',{value:r,writable:true,configurable:true,enumerable:false});}catch(_){e.r390Engaged=r;}stats[why]++;}
 function dist(a,b){return Math.hypot(a.x-b.x,a.y-b.y);}
 // 엔진 AI 가 싸움에 넣는 조건과 같은 판정
 // 엔진은 d>aggro 일 때만 싸움에서 뺀다 → aggro 가 숫자가 아니면(비교가 거짓) 늘 싸움 쪽.
