@@ -8214,6 +8214,11 @@
     "assets/r810/lantern-post-off.webp",
     "assets/r769/herbwife-proj6.webp",
     "assets/r763/villagers/sobok-walk.webp",
+    "assets/r770/villagers/sobok-float.webp",
+    "assets/r770/villagers/sobok-idle.webp",
+    "assets/r770/villagers/sobok-atk.webp",
+    "assets/r770/villagers/herbwife-hit.webp",
+    "assets/r770/villagers/herbwife-death.webp",
     "quest-r840.js"
   ],
   "mediaPaths": [
@@ -9289,5 +9294,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "74433d56101268cba0d1b5396a70908c616bf0bbfa919674cbcb102cc66943d6"
+  "runtimeManifestSHA256": "6ba5f69346739a7caa8fdcc5f30281c48bd163280787a53eb6aa5955b6e6bd03"
 }
