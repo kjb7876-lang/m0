@@ -3,7 +3,7 @@ const fs=require('fs'),path=require('path'),vm=require('vm');
 const R=path.join(__dirname,'..','..'),ROOT=path.join(R,'..');
 const rd=p=>{try{return fs.readFileSync(p,'utf8');}catch(_){return null;}};
 let pass=0,total=0;const ok=(n,c,d)=>{total++;if(c)pass++;else console.log('FAIL',n,d===undefined?'':JSON.stringify(d).slice(0,400));};
-const ENGINE='lineart-cine-r880.js',SCENES=['lineart-scenes-r881.js','lineart-scenes-r882.js','lineart-scenes-r883.js'];
+const ENGINE='lineart-cine-r880.js',SCENES=['lineart-scenes-r881.js','lineart-scenes-r882.js','lineart-scenes-r883.js','lineart-scenes-r884.js','lineart-scenes-r885.js','lineart-scenes-r886.js','lineart-scenes-r887.js'];
 const SRC=rd(path.join(R,'client-source',ENGINE)),SC=SCENES.map(f=>rd(path.join(R,'client-source',f)));
 const CANON=rd(path.join(R,'client-source','story-canon-r106-data.js'));
 ok('engine file exists',!!SRC);ok('scene files exist',SC.every(Boolean));
@@ -12,7 +12,7 @@ if(!SRC||!SC.every(Boolean)){console.log(`R880 CPU ${pass}/${total}`);process.ex
 const EXCLUDED=['dist00','ep1a09b','ep1a10','ep1a11','last301','last302','ep1b06','ep1b06b'];
 const BATCH1=['dist01','dist02','dist03','dist04','dist05','dist06','ep1a08','ep1a09','last304','last305','last303'];
 // 둘째 묶음(R882): 2부. 맘몬(ep1b06·ep1b06b)은 빼고 여덟 곳
-const BATCH2=['ep1b01','ep1b02','ep1b03','ep1b04','ep1b05','ep1b07','ep1b08','ep1b09'],BATCH3=['u201','u202','u204','u205','u206','u203'],ALL=[...BATCH1,...BATCH2,...BATCH3];// 셋째 묶음(R883): 3부 여섯 곳
+const BATCH2=['ep1b01','ep1b02','ep1b03','ep1b04','ep1b05','ep1b07','ep1b08','ep1b09'],BATCH3=['u201','u202','u204','u205','u206','u203'],BATCH4=['kair01','kair04','kair05','kair06','kair07','kair08','kair09','kair10','kair02','kair03'],BATCH5=['hando01','hando02','hando03','murder01','murder02','murder04','murder03'],BATCH6=['cult01','cult02','cult05','cult06','cult03','cult04'],BATCH7=['dreamRest','restEp1b','restU2','restLast3','restKairo','restHando'],ALL=[...BATCH1,...BATCH2,...BATCH3,...BATCH4,...BATCH5,...BATCH6,...BATCH7];// 셋째 묶음(R883): 3부 여섯 곳 · 넷째 묶음(R884): 5부 열 곳
 // ---- 가짜 DOM: 속성 값을 모두 적어 둔다 ----
 function fakeDom(){const attrs=[];let made=0;const byId=new Map();
  const node=tag=>{const n={tagName:tag,children:[],attrs:{},style:{setProperty(k,v){n.style[k]=v;},removeProperty(){} },dataset:{},listeners:{},parentNode:null,textContent:'',hidden:false,
@@ -57,6 +57,11 @@ const flat=s=>String(s).replace(/\s*\n\s*/g,' ');
 (async()=>{
 // 1) 등록·API
 {const g=world(),A=g.api;ok('API exposed',!!A&&typeof A.play==='function'&&typeof A.skip==='function'&&typeof A.inspect==='function'&&typeof A.add==='function');
+ ok('rest zones: a zone unfinished before arrival stays eligible for that arrival',/const was=finished\(id\);/.test(SRC)&&SRC.includes('fresh=!was&&finished(id)?id:null;')&&SRC.includes('(!finished(r.id)||fresh===r.id)'));
+ ok('seventh scene file adds only the rest zones',BATCH7.every(z=>SC[6].includes("zone:'"+z+"'"))&&[...BATCH1,...BATCH2,...BATCH3,...BATCH4,...BATCH5,...BATCH6].every(z=>!SC[6].includes("zone:'"+z+"'")));
+ ok('sixth scene file adds only the 8부 zones',BATCH6.every(z=>SC[5].includes("zone:'"+z+"'"))&&[...BATCH1,...BATCH2,...BATCH3,...BATCH4,...BATCH5].every(z=>!SC[5].includes("zone:'"+z+"'"))&&!SC[5].includes('역십자'));
+ ok('fifth scene file adds only the 6부·7부 zones',BATCH5.every(z=>SC[4].includes("zone:'"+z+"'"))&&[...BATCH1,...BATCH2,...BATCH3,...BATCH4].every(z=>!SC[4].includes("zone:'"+z+"'")));
+ ok('fourth scene file adds only the 5부 zones',BATCH4.every(z=>SC[3].includes("zone:'"+z+"'"))&&[...BATCH1,...BATCH2,...BATCH3].every(z=>!SC[3].includes("zone:'"+z+"'")));
  const zs=A?A.zones():[];ok('third scene file adds only the 3부 zones',BATCH3.every(z=>SC[2].includes("zone:'"+z+"'"))&&[...BATCH1,...BATCH2].every(z=>!SC[2].includes("zone:'"+z+"'")));
  ok('batch 1+2+3 zones registered exactly',JSON.stringify([...zs].sort())===JSON.stringify([...ALL].sort()),zs);
  ok('second scene file adds only the 2부 zones',BATCH2.every(z=>SC[1].includes("zone:'"+z+"'"))&&BATCH1.every(z=>!SC[1].includes("zone:'"+z+"'")));

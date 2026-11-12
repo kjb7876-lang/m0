@@ -5,7 +5,7 @@ const OUT=process.argv[2]||'/tmp/r880-shots';fs.mkdirSync(OUT,{recursive:true});
 let pass=0,total=0;const ok=(n,c,d)=>{total++;if(c)pass++;console.log(c?'PASS':'FAIL',n,d===undefined?'':JSON.stringify(d));};
 const b=await chromium.launch();const {p}=await boot(b,{vp:{width:1280,height:720}});const errs=[];p.on('pageerror',e=>errs.push(String(e).slice(0,160)));
 const A=()=>p.evaluate(()=>window.__STORYWORLD_LINEART_R880__.inspect());
-ok('API present, 25 zones (batch 1: 11, batch 2: 8, batch 3: 6)',await p.evaluate(()=>window.__STORYWORLD_LINEART_R880__.zones().length)===25);
+ok('API present, 54 zones (11+8+6, 5부 10, 6·7부 7, 8부 6, 쉼터 6)',await p.evaluate(()=>window.__STORYWORLD_LINEART_R880__.zones().length)===54);
 await p.evaluate(()=>window.__STORYWORLD_LINEART_R880__.set({on:true,resetSeen:true}));
 await p.evaluate(()=>{enterRegion('dist01',null,{layer:'STORY',restore:true});});await p.waitForFunction(()=>!loading&&room?.id==='dist01',null,{timeout:150000});await skip(p);
 let shown=true;try{await p.waitForSelector('#r880',{timeout:60000});}catch(_){shown=false;}
@@ -15,10 +15,14 @@ ok('game time frozen while playing',t1===t0,[t0,t1]);ok('scene advancing',i1.act
 ok('title uses region title',await p.evaluate(()=>document.querySelector('#r880 .chap').textContent.includes(regionById.dist01.title)));
 const f0=i1.stats.frames;await p.waitForTimeout(3000);const i2=await A();console.log('INFO headless frames/s',((i2.stats.frames-f0)/3).toFixed(1),'sim t',i2.t,'filterDropped',i2.stats.filterDropped);
 await p.screenshot({path:OUT+'/game_dist01_live.png'});
-await p.keyboard.press('Escape');await p.waitForTimeout(900);
+await p.keyboard.press('Escape');await p.waitForFunction(()=>!document.getElementById('r880'),null,{timeout:8000}).catch(()=>{});/* 헤드리스가 초당 2프레임이라 사라짐 타이머가 늦는다 — 정해진 0.9초 대신 사라질 때까지(최대 8초) 기다린 뒤 같은 조건을 본다 */
 ok('Escape skips and removes overlay',!(await p.$('#r880'))&&(await A()).stats.skips===1);
 const t2=await p.evaluate(()=>time);await p.waitForTimeout(2500);ok('game time resumes',await p.evaluate(()=>time)>t2);
 await go(p,'hub');await go(p,'dist01');await p.waitForTimeout(3000);ok('no replay on revisit',!(await p.$('#r880'))&&(await A()).stats.plays===1,await A());
+// 쉼터(R887): 들어서자마자 '끝낸 지역'이 되지만 첫 도착에는 튼다, 다시 오면 안 튼다
+await go(p,'dreamRest');const restShown=await p.waitForFunction(()=>window.__STORYWORLD_LINEART_R880__.inspect().zone==='dreamRest',null,{timeout:20000}).then(()=>true).catch(()=>false);ok('rest zone: cutscene appears on first arrival',restShown,await A());
+await p.evaluate(()=>window.__STORYWORLD_LINEART_R880__.skip());await p.waitForFunction(()=>!document.getElementById('r880'),null,{timeout:8000}).catch(()=>{});
+await go(p,'hub');await go(p,'dreamRest');await p.waitForTimeout(3000);ok('rest zone: no replay on revisit',!(await p.$('#r880'))&&(await A()).stats.plays===2,await A());
 // 영화 모드: 그림만 깔리고 자막 층 아래
 const cin=await p.evaluate(async()=>{const C=window.__STORYWORLD_CINEMA_MODE_R370__;if(!C?.prefs)return null;const was=C.prefs().on;try{C.set?.({on:true});}catch(_){}
  const on=C.prefs().on;window.__STORYWORLD_LINEART_R880__.play({zone:'dist03',at:9});await new Promise(r=>setTimeout(r,400));const el=document.getElementById('r880');

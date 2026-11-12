@@ -480,7 +480,8 @@ const reducedMotion=()=>{try{if(typeof settings!=='undefined'&&settings&&'reduce
 const OTHER=['r317Cinema','r368v','r369v','r372v','r617v','r568','r309','r309v'];
 const busy=()=>{try{if((typeof storyScene!=='undefined'&&!!storyScene)||(typeof loading!=='undefined'&&!!loading)||(typeof started!=='undefined'&&!started)||(typeof modal!=='undefined'&&!!modal))return true;
  if(typeof player!=='undefined'&&player&&!(player.hp>0))return true;if(typeof document!=='undefined'){if(document.hidden)return true;for(const id of OTHER)if(document.getElementById(id))return true;}return false;}catch(_){return false;}};
-function eligible(r){return !!(r&&SCENES.has(r.id)&&r.layer==='STORY'&&(typeof layer==='undefined'||layer==='STORY')&&!r.samongR103&&!r.samongR115&&!r.exploration?.samongR103&&!r.survivalR600&&solo()&&!prefs.seen.includes(r.id)&&!finished(r.id));}/* R890: 무한 생존 방(같은 id)에서는 틀지 않는다 — 생존 서사와 겹치고, 스토리용 '한 번 본 기록'을 생존이 써 버리던 것 */
+let fresh=null;/* R887: 쉼터는 들어서는 순간 '끝낸 지역'이 된다 — 들어서기 전에 안 끝난 곳이었으면 이번 도착에 한해 튼다 */
+function eligible(r){return !!(r&&SCENES.has(r.id)&&r.layer==='STORY'&&(typeof layer==='undefined'||layer==='STORY')&&!r.samongR103&&!r.samongR115&&!r.exploration?.samongR103&&!r.survivalR600&&solo()&&!prefs.seen.includes(r.id)&&(!finished(r.id)||fresh===r.id));}/* R890: 무한 생존 방(같은 id)에서는 틀지 않는다 — 생존 서사와 겹치고, 스토리용 '한 번 본 기록'을 생존이 써 버리던 것 */
 const titleFor=z=>{let t='';try{t=(typeof regionById!=='undefined'&&regionById?.[z]?.title)||'';}catch(_){}return t?t+' · 기억':'기억';};
 function css(){if(document.getElementById('r880Css'))return;const s=document.createElement('style');s.id='r880Css';
  s.textContent='#r880{position:fixed;inset:0;z-index:2147482000;background:#030304;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .45s;cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none}'
@@ -532,7 +533,7 @@ function key(ev){if(!active)return false;ev.preventDefault?.();ev.stopImmediateP
 try{(window.__STORYWORLD_CINEMA_GUARDS__=window.__STORYWORLD_CINEMA_GUARDS__||[]).push(key);}catch(_){}
 if(typeof addEventListener==='function'){addEventListener('keydown',key,true);addEventListener('keyup',key,true);}
 // 도착을 기억했다가, 조용해진 뒤 0.7초에 튼다
-if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(id,...a){const out=await base.call(this,id,...a);
+if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(id,...a){const was=finished(id);const out=await base.call(this,id,...a);fresh=!was&&finished(id)?id:null;
  try{const r=here();pending=prefs.on&&!automated()&&eligible(r)?{room:r,quietSince:nowMs()}:null;}catch(e){fail(e);}return out;};}
 function poll(){if(!pending||active||closing)return;const r=here();if(r!==pending.room||!prefs.on||!eligible(r)){pending=null;return;}
  if(busy()){pending.quietSince=null;return;}const n=nowMs();if(pending.quietSince==null){pending.quietSince=n;return;}
