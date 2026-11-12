@@ -681,6 +681,8 @@ jobs:
         run: node r96/qa/r710/r710-cpu-check.cjs
       - name: R760 Bulmyeongwi boss staging (one toned 4-pose set for idle/attack, one size, ink-violet tone + amber eyes, layered afterimages; mobs/other bosses untouched) CPU check
         run: node r96/qa/r760/r760-cpu-check.cjs
+      - name: R780 StoryWorld cursor (needle cursors per hover target matching the engine click test, click markers from the engine result, touch/off/caps, style writes only on change) CPU check
+        run: node r96/qa/r780/r780-cpu-check.cjs
       - name: R860 boss key-pose coverage (fallen angel knight, EGO-stealing nightmare king, Balrog draw their R104 key poses; old crop rects fit the whole new frame; the pride cyborg cult leader is no longer hijacked by a same-name mob sheet; Mammon/other mobs untouched) CPU check
         run: node r96/qa/r860/boss-keypose-cover-cpu-check.cjs
       - name: R800 floor edge mask reused for identical input (no double build on region entry) CPU check
@@ -713,6 +715,8 @@ jobs:
         run: node r96/qa/r440/r440-cpu-check.cjs
       - name: R596 leftover rift rings, tower silhouette shadow, mob health line over head CPU check
         run: node r96/qa/r596/r596-cpu-check.cjs
+      - name: R786 every default health bar under the feet (mobs, midbosses, enraged bosses, towers, summons, cores) CPU check
+        run: node r96/qa/r786/r786-cpu-check.cjs
       - name: R446 seven pillars moved to their own map as stationary attacking towers CPU check
         run: node r96/qa/r446/r446-cpu-check.cjs
       - name: R352 orphaned field-wave enemies wake near the hero CPU check
@@ -787,6 +791,8 @@ jobs:
         run: node r96/qa/r899/top-left-cpu-check.cjs
       - name: R930 Kaironomicon cyber-magitech floor/wall tiles and tech props (art only, layout unchanged) CPU check
         run: node r96/qa/r930/r930-cpu-check.cjs
+      - name: R940 read-only state snapshot for QA (events, first-hit-after-entry, boss kill time; no game writes) CPU check
+        run: node r96/qa/r940/r940-cpu-check.cjs
       - name: Install pinned sandboxed Chromium
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0
