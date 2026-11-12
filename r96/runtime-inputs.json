@@ -8288,7 +8288,9 @@
     "assets/r911/clean/assets/vfx/heroes/seoha-e.webp",
     "assets/r911/clean/assets/vfx/heroes/seoha-w.webp",
     "assets/r911/clean/assets/vfx/heroes/slayer-r.webp",
-    "assets/r911/derived/gunner-laser-bullet.webp"
+    "assets/r911/derived/gunner-laser-bullet.webp",
+    "cursor-r780.js",
+    "qa-snapshot-r940.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9363,5 +9365,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "a1378af9483fc91bc0b16896621da74199da22a00fbae759c9a3e08d6a7ce2b5"
+  "runtimeManifestSHA256": "5c16802a936cfdfaac67d369ab7aade2334bc83f933aa8e1ac402895f9ef53c2"
 }
