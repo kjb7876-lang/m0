@@ -44094,8 +44094,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6574043,
-      "sha256": "9f03ac1d61165bbb964a125f9836a88c77cd66a945a511e9772e400c8bc2f438"
+      "bytes": 6574129,
+      "sha256": "e079e43d91c213fc492b231038ac3b08d267d7bdf7ec94aa61705afd9bc4e356"
     },
     {
       "path": "intro-r140.js",
@@ -44509,8 +44509,8 @@
     },
     {
       "path": "props-r272.js",
-      "bytes": 8715,
-      "sha256": "fb1109f97c1939aa63ec4db94a45e50d98e1216cf43cf186e0e544832c21f07a"
+      "bytes": 9137,
+      "sha256": "8f55a1f3630e5b81ee75bc940ea27cdd4dd1c3b77725ad9bf5230a9230a65139"
     },
     {
       "path": "props-space-r449.js",
@@ -44531,6 +44531,11 @@
       "path": "props-variety-r140.js",
       "bytes": 2863,
       "sha256": "39af4681d829411f0f00624d608ebe9e489ef7765b3e40318d2563a5751dfb84"
+    },
+    {
+      "path": "quest-r840.js",
+      "bytes": 33443,
+      "sha256": "359b54d3d32c57d15cef5f5bb6b16fcf2b623f0c8edf53b8df5ec3062f28e0ac"
     },
     {
       "path": "reach-r225.js",
@@ -44978,6 +44983,11 @@
       "sha256": "d1fa85846f97e4e311e68a0994ca0f75ef56b95498e5950a1671d1bb312eb6f8"
     },
     {
+      "path": "walls-solid-r830.js",
+      "bytes": 14015,
+      "sha256": "addd57c4195f5fc53fd73db914995a0e7306e7f5a2991ee36f034001d0972c2c"
+    },
+    {
       "path": "wave-orphans-r352.js",
       "bytes": 3627,
       "sha256": "b24e630495e02cdd05ffceeb07d075f143afd512926e5a442b170747b80466a7"
@@ -45063,9 +45073,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9012,
-  "totalBytes": 1237560940,
-  "webHTMLSha256": "9f03ac1d61165bbb964a125f9836a88c77cd66a945a511e9772e400c8bc2f438",
+  "fileCount": 9014,
+  "totalBytes": 1237608906,
+  "webHTMLSha256": "e079e43d91c213fc492b231038ac3b08d267d7bdf7ec94aa61705afd9bc4e356",
   "largest": [
     {
       "path": "index.html",
