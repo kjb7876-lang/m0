@@ -809,6 +809,8 @@ jobs:
         run: node r96/qa/r899/top-left-cpu-check.cjs
       - name: R930 Kaironomicon cyber-magitech floor/wall tiles and tech props (art only, layout unchanged) CPU check
         run: node r96/qa/r930/r930-cpu-check.cjs
+      - name: R950 final boss (cult04) revived leader keeps first-form HP, canon beats, nerve-link staging, post scene after collapse CPU check
+        run: node r96/qa/r950/finale-cpu-check.cjs
       - name: R946 Lauren passive celestial resonance (repulse burst, red push orb, blue pull orb, violet piercing fusion, prop meteors; per-hero instance)
         run: node r96/qa/r946/r946-cpu-check.cjs
       - name: R940 read-only state snapshot for QA (events, first-hit-after-entry, boss kill time; no game writes) CPU check

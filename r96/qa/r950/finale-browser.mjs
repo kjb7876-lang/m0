@@ -73,8 +73,7 @@ if(MODE==='off'){
  ok((st.unstitched||0)>=1,'최종 처치 때 신경선이 다시 꿰매지 못하는 연출: '+st.unstitched);
  ok((st.hpFixed||0)===1,'최종 형태 체력 보정 정확히 1번: '+st.hpFixed);
  const gap=R.sceneAfterFinal!=null&&R.finalDeathT!=null?R.sceneAfterFinal-R.finalDeathT:null;
- ok(gap!=null&&gap>=2.0&&gap<=4.5,'최종 처치 뒤 마지막 서사 창은 2~4.5초 뒤에 열림(무너짐 연출을 본 뒤): '+(gap!=null?gap.toFixed(2):'없음'));
- ok((R.inspect?.stats?.flushed||0)===1&&!R.inspect?.pending,'미룬 마지막 서사는 정확히 한 번 열림(flushed=1): '+R.inspect?.stats?.flushed);
+ ok(gap!=null&&gap>=-0.05&&gap<=0.6,'최종 처치 뒤 마지막 서사 창은 엔진 그대로 곧바로 열림(R81 계약): '+(gap!=null?gap.toFixed(2):'없음'));
  ok(R.scenesShown===1,'마지막 서사 창이 실제로 한 번만 열림: '+R.scenesShown);
  ok(!R.inspect?.lastError,'R950 오류 없음: '+R.inspect?.lastError);
 }

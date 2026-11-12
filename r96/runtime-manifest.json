@@ -44069,8 +44069,8 @@
     },
     {
       "path": "finale-r950.js",
-      "bytes": 20792,
-      "sha256": "67abf4b98773e445e46d3bc963a9397687f5624e4470a7c5588bf4b6c7ad962b"
+      "bytes": 19637,
+      "sha256": "08a4ab2b7d733ebd39f2577d0329e66784e3123e03966324f3611e437280403f"
     },
     {
       "path": "fx-blood-r190.js",
@@ -45124,8 +45124,8 @@
     },
     {
       "path": "slayer-blood-passive-r947.js",
-      "bytes": 29333,
-      "sha256": "f57af4dc522452711087ad0c3a744b61b2c11771ca0a258b4e8eb61a726a473f"
+      "bytes": 27866,
+      "sha256": "bb379cd5b8ee7c65f5866b506814e15e2cc40d9293b582d1ebb56a2d537b0099"
     },
     {
       "path": "slayer-blood-r425.js",
@@ -45464,7 +45464,7 @@
     }
   ],
   "fileCount": 9092,
-  "totalBytes": 1241198007,
+  "totalBytes": 1241195385,
   "webHTMLSha256": "c2c4233c07a21580d608982b980b4f6287d3eb22eb54bf9021d15b95b21484dd",
   "largest": [
     {
