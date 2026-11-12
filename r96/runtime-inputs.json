@@ -8277,7 +8277,19 @@
     "lineart-scenes-r887.js",
     "lineart-voice-r888-data.js",
     "outcrops-r839.js",
-    "qa-snapshot-r940.js"
+    "qa-snapshot-r940.js",
+    "assets/r911/clean/assets/vfx/generated/v300/barrier-sigil.webp",
+    "assets/r911/clean/assets/vfx/generated/v300/time-ring.webp",
+    "assets/r911/clean/assets/vfx/heroes/gunner-e.webp",
+    "assets/r911/clean/assets/vfx/heroes/hwando-e.webp",
+    "assets/r911/clean/assets/vfx/heroes/lauren-q.webp",
+    "assets/r911/clean/assets/vfx/heroes/lauren-r.webp",
+    "assets/r911/clean/assets/vfx/heroes/neon-e.webp",
+    "assets/r911/clean/assets/vfx/heroes/seoha-e.webp",
+    "assets/r911/clean/assets/vfx/heroes/seoha-w.webp",
+    "assets/r911/clean/assets/vfx/heroes/slayer-r.webp",
+    "assets/r911/derived/gunner-laser-bullet.webp",
+    "projectile-size-r911.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9352,5 +9364,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "31c22fab176e256941c6f57f4dfa83a8f4ed091acd7bb8d6706dee959f5cd7ff"
+  "runtimeManifestSHA256": "c6be4da26bc5207cf93881bc0168a179bc71f04b42e397a87929954c3b86159a"
 }
