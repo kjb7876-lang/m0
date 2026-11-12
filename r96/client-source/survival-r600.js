@@ -64,6 +64,13 @@ function smoothAtk(avg,a,dt){if(!(a>0))return avg;if(!(avg>0))return a;return av
 //  일반몹 체력 = 공격력×1.25×hpMul(정예는 ×6). 예전 중간보스(×50)는 일반몹의 40배라 하한으로 올라가고, 보스(×100 = 80배)는 그대로다. mobAtk 는 보스가 나오는 순간의 실제 공격력(순간 강화 중이면 몹도 그만큼 단단해짐).
 const BOSS_MIN_MULT=66;
 function mobHp(idx,loop,diff,atk,elite){return Math.max(1,Math.round(Math.max(8,+atk||0)*(elite?6:1.25)*hpMul(idx,loop,diff)));}
+// R960 보스 초당 피해 상한(사용자 11-12 '보스는 1초에 최대 체력의 6% 이상 데미지가 입지 않음'): 보스 몸의 hp 를 접근자로 잠가, hitEnemy 를 몇 겹 감싸든(패시브·연쇄 번개) 직접 hp 를 깎든
+//  모든 감소가 '최근 1초 슬라이딩 창'의 예산(최대 체력 6%)을 거친다. 치유(올리는 값)는 막지 않고, 마지막 체력이 예산보다 작으면 그대로 죽을 수 있다. 생존 보스(bossIn)에만 건다 — 스토리 모드는 그대로.
+const BOSS_DPS_CAP=.06,BOSS_DPS_WIN=1;
+function guardBossHp(e,nowFn){let v=+e.hp;const cap=BOSS_DPS_CAP*(e.maxHp>0?e.maxHp:v),hits=[];
+ Object.defineProperty(e,'hp',{configurable:true,enumerable:true,get(){return v;},set(n){n=+n;if(!Number.isFinite(n))return;if(n>=v){v=n;return;}
+  const now=nowFn();while(hits.length&&hits[0].t<=now-BOSS_DPS_WIN)hits.shift();let used=0;for(const h of hits)used+=h.d;
+  const d=Math.min(v-n,Math.max(0,cap-used));if(d>1e-9){hits.push({t:now,d});v-=d;}}});}
 function bossStats(idx,loop,diff,atk,major,dmg,mobAtk){const a=Math.max(8,+atk||0),base=Math.round(a*(major?BOSS_HP.boss:BOSS_HP.mid)*hpMul(idx,loop,diff)),floor=BOSS_MIN_MULT*mobHp(idx,loop,diff,Math.max(a,+mobAtk||0),false);return {hp:Math.max(1,base,floor),dmg:(+dmg>0?+dmg:8)*stageDmg(idx,loop,diff)};}
 function mobDamage(dmg,elite,idx,loop,diff){return (+dmg>0?+dmg:8)*(elite?1:.7)*stageDmg(idx,loop,diff);}
 // R701 난이도: 몹 체력(hp)·동시 몹 수(cap)·몹이 주는 피해(dmg)·경험치(xp) 배율. 보통=1. 어려울수록 경험치는 조금 덜 준다.
@@ -234,7 +241,7 @@ function tickSpawn(){const x=room.survivalR600,R=x.roster,t=G(()=>time,0);if(!R.
  const n=Math.min(4,c-alive);for(let k=0;k<n;k++){const q=ringPoint(player,RING[0],RING[1],x.arena);if(!q)break;const src=R.normal[S.serial%R.normal.length],e=spawnAt(src,q);if(e)swarm(e,(S.serial%13)===12);}}
 function bossIn(){const x=room.survivalR600,R=x.roster,src=R.boss||R.mid;if(!src)return null;const q=ringPoint(player,7,9,x.arena)||{x:x.centre.x,y:x.arena.y0+3};
  const e=spawnAt(src,q,{major:true,mid:!R.boss});if(!e)return null;
- const B=bossStats(S.i,S.loop,S.diff,S.atkAvg>0?S.atkAvg:baseAtk(),!!R.boss,e.damage,baseAtk());e.damage=B.dmg;e.maxHp=e.hp=B.hp;e.r600Boss=true;if(R.boss){room.engaged=true;e.phaseStage='active';e.phaseAge=0;e.rest=1.2;e.cd=1.5;}
+ const B=bossStats(S.i,S.loop,S.diff,S.atkAvg>0?S.atkAvg:baseAtk(),!!R.boss,e.damage,baseAtk());e.damage=B.dmg;e.maxHp=e.hp=B.hp;e.r600Boss=true;guardBossHp(e,()=>G(()=>time,0));if(R.boss){room.engaged=true;e.phaseStage='active';e.phaseAge=0;e.rest=1.2;e.cd=1.5;}
  stats.bosses++;S.bossUp=true;try{toast((R.boss?'보스 등장 · ':'중간보스 등장 · ')+e.name,3.4);sound?.('boss');}catch(_){}return e;}
 function attackTokens(){let busy=0;const ready=[];for(const e of room.enemies){if(!living(e)||!e.survivalR600||e.r600Boss)continue;if((e.attack&&!e.attack.committed)||e.rangedWindup>0)busy++;else if((e.cd||0)<=.2)ready.push(e);}
  ready.sort((a,b)=>Math.hypot(a.x-player.x,a.y-player.y)-Math.hypot(b.x-player.x,b.y-player.y));for(const e of ready.slice(Math.max(0,7-busy)))e.cd=Math.max(e.cd||0,.12+Math.random()*.2);}
@@ -423,6 +430,6 @@ try{const iv=setInterval(()=>{try{document.body.classList.toggle('r600Modal',!!(
 window.__STORYWORLD_SURVIVAL_R600__=Object.freeze({revision:REV,start,qaCredit:v=>{if(!S?.active)return false;credit(+v||0);return true;},qaPlayT:v=>{if(!S?.active)return false;S.playT=Math.max(0,+v||0);return true;},qaGo:i=>S?.active?go(i):false,qaCoreHp:v=>{if(!S?.active)return false;S.core.hp=Math.max(0,+v||0);S.core.hitAt=G(()=>time,0);if(S.core.hp<=0&&!S.over){stats.coreLost++;over('core');}return true;},/* 검사·스크린샷용: 코어 체력을 바로 정한다(0 이면 다음 단계에서 파괴) */stageIds:()=>S?[...S.ids]:[],active:()=>!!S?.active,here,
  state:()=>S?{tainted,diff:S.diff,playT:S.playT,choiceIdx:S.choiceIdx,pickRem,narrMinEnd:S.narrMinEnd||0,ready:!!S.ready,startPos:S.startPos||null,i:S.i,loop:S.loop,id:S.ids[S.i],phase:S.phase,narrating:S.narrating,narrEndAt:S.narrEndAt,bossUp:S.bossUp,kills:S.kills,core:{...S.core,stats:CS()},choiceQ,gems:gems.length,over:S.over,ids:S.ids.length}:null,
  track:()=>prefs.track,setTrack,narr:()=>({playing:narrPlaying(),queued:N.q.length,cur:N.cur?.text||null}),skipNarration:()=>{N.q.length=0;if(S){S.narrMinEnd=0;/* 서사가 벽시계로 이미 끝났어도 남은 최소 웨이브 길이를 지금으로 당긴다 */if(!S.narrating&&S.narrEndAt>G(()=>time,0))S.narrEndAt=G(()=>time,0);}/* 일부러 건너뛰면 최소 웨이브 길이도 함께 끝낸다 */if(N.cur){N.gen++;N.cur=null;narrNext();}},
- pure:Object.freeze({DIFFS,diffOf,CHOICE_EVERY,WINDOW_MAX,choiceDue,windowPicks,xpNeed,levelUps,stageIds,arena,spawning,nextPhase,advance,cap,hpMul,mobHp,BOSS_MIN_MULT,trackOf,TRACKS,bossStats,mobDamage,smoothAtk,BOSS_HP,coreStats,pickThree,sentences,TAIL,CORE0,CORE_UPS}),
+ pure:Object.freeze({DIFFS,diffOf,CHOICE_EVERY,WINDOW_MAX,choiceDue,windowPicks,xpNeed,levelUps,stageIds,arena,spawning,nextPhase,advance,cap,hpMul,mobHp,BOSS_MIN_MULT,BOSS_DPS_CAP,guardBossHp,trackOf,TRACKS,bossStats,mobDamage,smoothAtk,BOSS_HP,coreStats,pickThree,sentences,TAIL,CORE0,CORE_UPS}),
  inspect:()=>({revision:REV,stats:{...stats},lastError,active:!!S?.active,here:here(),pending})});
 })();
