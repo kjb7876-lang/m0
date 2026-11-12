@@ -91,5 +91,9 @@ let id=1;const E=(name,o={})=>({name,hp:100,x:1,y:0,id:id++,...o});
  m=mk({pref:'0'});m.ctx.hitEnemy(E('숲 고블린'),5);ok(m.kinds().join()==='enemyHit'&&m.api.enabled()===false,'storyworld.r955.sfx=0 이면 원래대로');
  m=mk();ok(Object.keys(m.ctx.window.__STORYWORLD_SFX_COMFORT__.aliases).every(k=>!/^r955/.test(k)),'새 종류는 별칭 없이 종류마다 자체 쿨다운');
  m=mk();m.ctx.hitEnemy(null,5);m.ctx.killEnemy({name:'숲 고블린',hp:1});m.timers.forEach(f=>f());ok(m.api.inspect().stats.errors===0,'이상한 입력에도 오류 0');
+ // 실제 게임 이름(헤드리스 전수 r955-name-sweep.mjs 로 모은 일반 몹 753개, R385 등 런타임 이름 바꾸기 뒤)이 모두 계열에 잡히는지
+ {const R=JSON.parse(require('fs').readFileSync(require('path').join(__dirname,'real-names.json'),'utf8')).regular;m=mk();const miss=R.filter(nm=>!m.api.slugOf(nm));
+  ok(R.length>=700&&!miss.length,'실제 일반 몹 이름 '+R.length+'개 모두 계열 있음'+(miss.length?' (빠짐 '+miss.slice(0,8).join(', ')+')':''));
+  for(const [nm,f] of [['유리 망령 우두머리','glass'],['재 나방 3','spider'],['흑마법사의 저주창 후속 증원','zombieknight'],['중간보스 · 시간수문장 08','timegate3'],['시간수문장','timegate1'],['기계화 감옥 공명기사','resknight'],['기계화 망각거미','spider']])ok(m.api.slugOf(nm)===f,'실제 이름 '+nm+' → '+f+'('+m.api.slugOf(nm)+')');}
  console.log(`\nR955 CPU: ${n-bad}/${n}`);process.exit(bad?1:0);
 })();
