@@ -50,6 +50,15 @@ function advance(i,loop,n){if(!(n>0))return {i:0,loop};return i+1>=n?{i:0,loop:l
 function cap(sec,idx,low,diff){const top=low?30:48;return Math.round(clamp((16+sec/6+idx*.6)*diffOf(diff).cap,10,top));}
 // 몹 체력 배율: 지역 순서와 회차로 오른다.
 function hpMul(idx,loop,diff){return (1+idx*.045)*(1+.6*loop)*diffOf(diff).hp;}
+// R850 밸런스: 보스·중간보스 체력은 원래 체력과 상관없이 영웅 공격력 기준(보스 ×100, 중간보스 ×50)에 지역·회차·난이도 배율을 곱한다.
+//  실측(헤드리스, 환도, 보통): 예전엔 원래 체력(약 1,100)에 묶여 대부분 1~2초에 죽고 원래 체력이 큰 집도의만 13초 → 보스 약 15~30초·중간보스 약 5~18초(영웅 셋, 봇이 붙어 때릴 때).
+//  피해는 일반몹처럼 지역(+1.5%/지역)·회차(+25%)로 오른다. 일반몹 피해도 너무 약해(첫 지역 한 대 약 4/777) 기본 ×.55→×.7(정예 ×.85→×1).
+const BOSS_HP=Object.freeze({boss:100,mid:50});
+const stageDmg=(idx,loop,diff)=>(1+.015*Math.max(0,idx||0))*(1+.25*Math.max(0,loop||0))*diffOf(diff).dmg;
+// 보스 체력 기준 공격력은 지역 동안의 이동 평균(약 20초) — 순간 강화(버프)가 켜진 때 보스가 나오면 체력이 튀던 것(실측 서하 141↔96)을 누른다.
+function smoothAtk(avg,a,dt){if(!(a>0))return avg;if(!(avg>0))return a;return avg+(a-avg)*Math.min(1,Math.max(0,dt)/20);}
+function bossStats(idx,loop,diff,atk,major,dmg){return {hp:Math.max(1,Math.round(Math.max(8,+atk||0)*(major?BOSS_HP.boss:BOSS_HP.mid)*hpMul(idx,loop,diff))),dmg:(+dmg>0?+dmg:8)*stageDmg(idx,loop,diff)};}
+function mobDamage(dmg,elite,idx,loop,diff){return (+dmg>0?+dmg:8)*(elite?1:.7)*stageDmg(idx,loop,diff);}
 // R701 난이도: 몹 체력(hp)·동시 몹 수(cap)·몹이 주는 피해(dmg)·경험치(xp) 배율. 보통=1. 어려울수록 경험치는 조금 덜 준다.
 const DIFFS=Object.freeze({easy:Object.freeze({name:'쉬움',text:'몹이 약하고 적게 나옵니다. 이야기를 따라가며 버티는 데 맞춰져 있습니다.',hp:.75,cap:.8,dmg:.7,xp:1.2}),
  normal:Object.freeze({name:'보통',text:'기본 균형입니다.',hp:1,cap:1,dmg:1,xp:1}),
@@ -194,16 +203,15 @@ function spawnAt(src,at,{major=false,mid=false}={}){const def=G(()=>regionById[r
 function ringPoint(c,min,max,A){for(let t=0;t<20;t++){const a=Math.random()*Math.PI*2,d=min+Math.random()*(max-min),q={x:clamp(c.x+Math.cos(a)*d,A.x0+.8,A.x1-.8),y:clamp(c.y+Math.sin(a)*d,A.y0+.8,A.y1-.8)};
   if(Math.hypot(q.x-player.x,q.y-player.y)>=min*.75&&!G(()=>blocked(q.x,q.y,.45,room),false))return q;}return null;}
 function swarm(e,elite){const atk=baseAtk(),m=hpMul(S.i,S.loop,S.diff);e.ai='melee';e.type='melee';e.rangedWindup=0;e.samongSurvival=true;e.speed=(e.speed||1)*(elite?1.3:1.55);
- e.damage=(e.damage||8)*(elite?.85:.55)*(1+.25*S.loop)*diffOf(S.diff).dmg;e.maxHp=e.hp=Math.max(1,Math.round(atk*(elite?6:1.25)*m));if(elite){e.r600Elite=true;e.defScale=(e.defScale||1)*1.22;e.name=e.name+' · 짙은 형상';}
+ e.damage=mobDamage(e.damage,elite,S.i,S.loop,S.diff);e.maxHp=e.hp=Math.max(1,Math.round(atk*(elite?6:1.25)*m));if(elite){e.r600Elite=true;e.defScale=(e.defScale||1)*1.22;e.name=e.name+' · 짙은 형상';}
  if(Math.random()<.32)e.r600Core=true;}
 let spawnAt0=0;
 function tickSpawn(){const x=room.survivalR600,R=x.roster,t=G(()=>time,0);if(!R.normal.length||!spawning(S,t))return;
  const alive=room.enemies.filter(living).length,c=cap(t-S.stageAt,S.i,low(),S.diff);if(t<spawnAt0||alive>=c)return;spawnAt0=t+.35;
  const n=Math.min(4,c-alive);for(let k=0;k<n;k++){const q=ringPoint(player,RING[0],RING[1],x.arena);if(!q)break;const src=R.normal[S.serial%R.normal.length],e=spawnAt(src,q);if(e)swarm(e,(S.serial%13)===12);}}
 function bossIn(){const x=room.survivalR600,R=x.roster,src=R.boss||R.mid;if(!src)return null;const q=ringPoint(player,7,9,x.arena)||{x:x.centre.x,y:x.arena.y0+3};
- const e=spawnAt(src,q,{major:true,mid:!R.boss});if(!e)return null;const m=hpMul(S.i,S.loop,S.diff),atk=baseAtk();
- e.damage=(e.damage||8)*diffOf(S.diff).dmg;
- e.maxHp=e.hp=Math.max(1,Math.round(Math.min(e.maxHp,atk*(R.boss?70:40))*m));e.r600Boss=true;if(R.boss){room.engaged=true;e.phaseStage='active';e.phaseAge=0;e.rest=1.2;e.cd=1.5;}
+ const e=spawnAt(src,q,{major:true,mid:!R.boss});if(!e)return null;
+ const B=bossStats(S.i,S.loop,S.diff,S.atkAvg>0?S.atkAvg:baseAtk(),!!R.boss,e.damage);e.damage=B.dmg;e.maxHp=e.hp=B.hp;e.r600Boss=true;if(R.boss){room.engaged=true;e.phaseStage='active';e.phaseAge=0;e.rest=1.2;e.cd=1.5;}
  stats.bosses++;S.bossUp=true;try{toast((R.boss?'보스 등장 · ':'중간보스 등장 · ')+e.name,3.4);sound?.('boss');}catch(_){}return e;}
 function attackTokens(){let busy=0;const ready=[];for(const e of room.enemies){if(!living(e)||!e.survivalR600||e.r600Boss)continue;if((e.attack&&!e.attack.committed)||e.rangedWindup>0)busy++;else if((e.cd||0)<=.2)ready.push(e);}
  ready.sort((a,b)=>Math.hypot(a.x-player.x,a.y-player.y)-Math.hypot(b.x-player.x,b.y-player.y));for(const e of ready.slice(Math.max(0,7-busy)))e.cd=Math.max(e.cd||0,.12+Math.random()*.2);}
@@ -266,7 +274,7 @@ function resultPanel(){if(!S)return;const why=S.overWhy;
 
 // ── 한 프레임 ──
 function step(dt){const t=G(()=>time,0);if(S.over||!S.ready)return;
- tickSpawn();attackTokens();coreTick(dt);gemTick(dt,S.phase==='clear');if(S.over)return;
+ tickSpawn();attackTokens();coreTick(dt);gemTick(dt,S.phase==='clear');if(S.over)return;S.atkAvg=smoothAtk(S.atkAvg,baseAtk(),dt);
  const alive=room.enemies.some(living),sp=spawning(S,t);
  if(S.phase!=='clear'&&!alive&&!sp&&t-S.stageAt>3){const def=G(()=>regionById[room.id],null);
   if(S.phase==='pre'){const post=scenesOf(def,'post'),R=room.survivalR600.roster,has=post.length>0||!!(R.boss||R.mid);S.phase=nextPhase('pre',has);
@@ -391,6 +399,6 @@ try{const iv=setInterval(()=>{try{document.body.classList.toggle('r600Modal',!!(
 window.__STORYWORLD_SURVIVAL_R600__=Object.freeze({revision:REV,start,qaCredit:v=>{if(!S?.active)return false;credit(+v||0);return true;},qaPlayT:v=>{if(!S?.active)return false;S.playT=Math.max(0,+v||0);return true;},qaGo:i=>S?.active?go(i):false,qaCoreHp:v=>{if(!S?.active)return false;S.core.hp=Math.max(0,+v||0);S.core.hitAt=G(()=>time,0);if(S.core.hp<=0&&!S.over){stats.coreLost++;over('core');}return true;},/* 검사·스크린샷용: 코어 체력을 바로 정한다(0 이면 다음 단계에서 파괴) */stageIds:()=>S?[...S.ids]:[],active:()=>!!S?.active,here,
  state:()=>S?{tainted,diff:S.diff,playT:S.playT,choiceIdx:S.choiceIdx,pickRem,narrMinEnd:S.narrMinEnd||0,ready:!!S.ready,startPos:S.startPos||null,i:S.i,loop:S.loop,id:S.ids[S.i],phase:S.phase,narrating:S.narrating,narrEndAt:S.narrEndAt,bossUp:S.bossUp,kills:S.kills,core:{...S.core,stats:CS()},choiceQ,gems:gems.length,over:S.over,ids:S.ids.length}:null,
  narr:()=>({playing:narrPlaying(),queued:N.q.length,cur:N.cur?.text||null}),skipNarration:()=>{N.q.length=0;if(S){S.narrMinEnd=0;/* 서사가 벽시계로 이미 끝났어도 남은 최소 웨이브 길이를 지금으로 당긴다 */if(!S.narrating&&S.narrEndAt>G(()=>time,0))S.narrEndAt=G(()=>time,0);}/* 일부러 건너뛰면 최소 웨이브 길이도 함께 끝낸다 */if(N.cur){N.gen++;N.cur=null;narrNext();}},
- pure:Object.freeze({DIFFS,diffOf,CHOICE_EVERY,WINDOW_MAX,choiceDue,windowPicks,xpNeed,levelUps,stageIds,arena,spawning,nextPhase,advance,cap,hpMul,coreStats,pickThree,sentences,TAIL,CORE0,CORE_UPS}),
+ pure:Object.freeze({DIFFS,diffOf,CHOICE_EVERY,WINDOW_MAX,choiceDue,windowPicks,xpNeed,levelUps,stageIds,arena,spawning,nextPhase,advance,cap,hpMul,bossStats,mobDamage,smoothAtk,BOSS_HP,coreStats,pickThree,sentences,TAIL,CORE0,CORE_UPS}),
  inspect:()=>({revision:REV,stats:{...stats},lastError,active:!!S?.active,here:here(),pending})});
 })();

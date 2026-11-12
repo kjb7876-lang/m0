@@ -34,5 +34,21 @@ assert.strictEqual(sv,RT('survival-r600.js'));assert.strictEqual(hm,RT('hospital
 // ④ 전환 HUD
 {assert(/S\.moving=String\(def\.title\|\|''\);hud\(true\);/.test(sv)&&/S\.moving='';if\(!ok\|\|/.test(sv));
  assert(/if\(on&&S\?\.active&&S\.moving&&!S\.over\)\{hudEl\.querySelector\('\.s'\)\.textContent='무한 생존 · 다음 지역으로 이동 · '\+S\.moving;/.test(sv));ok('HUD shows "moving to next stage" from go() until the stage is entered (cleared on success and failure)');}
+// ⑤ 밸런스(사용자 11-12 02:07Z '밸런스도 맞춰줘 특히 보스들'): 실측 — 보스 체력이 원래 체력(약 1,100)에 묶여 대부분 1~2초에 죽고,
+//  원래 체력이 큰 보스(ep1a08 집도의)만 13초 걸렸다. 보스·중간보스 체력은 영웅 공격력 기준으로 같게, 피해는 지역·회차로 오르게.
+{const win={};const doc={getElementById:()=>null,createElement:()=>({}),addEventListener:()=>{},head:{appendChild(){}},body:{appendChild(){}},querySelectorAll:()=>[]};
+ new Function('window','document','localStorage',sv)(win,doc,{getItem:()=>null,setItem(){}});const P=win.__STORYWORLD_SURVIVAL_R600__.pure;
+ assert.strictEqual(typeof P.bossStats,'function');assert.strictEqual(typeof P.mobDamage,'function');
+ const per=(i,l,d,atk,major)=>P.bossStats(i,l,d,atk,major,8).hp/(atk*P.hpMul(i,l,d));
+ for(const i of [0,7,30,55])for(const atk of [40,95,214]){const b=per(i,0,'normal',atk,true),m=per(i,0,'normal',atk,false);
+  assert(b>=100&&b<=130,'boss hp per atk '+b);assert(m>=45&&m<=65,'mid hp per atk '+m);assert(b>=1.8*m);}
+ assert(P.bossStats(0,0,'normal',95,true,8).hp>=9500,'first boss no longer capped near its native ~1,100 hp');
+ assert(P.bossStats(0,0,'hard',95,true,8).hp>P.bossStats(0,0,'normal',95,true,8).hp);assert(P.bossStats(0,1,'normal',95,true,8).hp>P.bossStats(0,0,'normal',95,true,8).hp*1.5);
+ const D=(i,l,d)=>P.bossStats(i,l,d,95,true,10).dmg;assert(Math.abs(D(0,0,'normal')-10)<1e-9);assert(D(55,0,'normal')>=D(0,0,'normal')*1.7);assert(D(0,1,'normal')>=D(0,0,'normal')*1.2);
+ assert(D(0,0,'nightmare')>D(0,0,'normal')&&D(0,0,'easy')<D(0,0,'normal'));assert(P.bossStats(0,0,'normal',95,true,0).dmg>0);
+ const M=(i,e,l)=>P.mobDamage(8,e,i,l,'normal');assert(M(0,false,0)>8*.55&&M(0,false,0)<=8*.8);assert(M(0,true,0)>M(0,false,0));assert(M(55,false,0)>=M(0,false,0)*1.7);assert(M(0,false,1)>=M(0,false,0)*1.2);
+ assert(!/Math\.min\(e\.maxHp/.test(sv),'boss hp not capped by native hp');assert(/const B=bossStats\(S\.i,S\.loop,S\.diff,S\.atkAvg>0\?S\.atkAvg:baseAtk\(\),!!R\.boss,e\.damage\);/.test(sv));assert(/S\.atkAvg=smoothAtk\(S\.atkAvg,baseAtk\(\),dt\);/.test(sv));
+ {let v=P.smoothAtk(undefined,100,1/30);assert.strictEqual(v,100);for(let k=0;k<30*3;k++)v=P.smoothAtk(v,150,1/30);assert(v>100&&v<120,'3s buff moves the average only a little '+v);for(let k=0;k<30*60;k++)v=P.smoothAtk(v,150,1/30);assert(v>145);assert.strictEqual(P.smoothAtk(120,NaN,1/30),120);}assert(/e\.damage=mobDamage\(e\.damage,elite,S\.i,S\.loop,S\.diff\);/.test(sv));
+ ok('boss/mid hp follow hero attack (not native hp), boss and mob damage rise with stage, loop and difficulty');}
 assert(fs.readFileSync(path.join(root,'..','.github','workflows','pages.yml'),'utf8').includes('r96/qa/r850/r850-cpu-check.cjs'));ok('Pages CPU step');
 console.log('R850 CPU check passed '+n);
