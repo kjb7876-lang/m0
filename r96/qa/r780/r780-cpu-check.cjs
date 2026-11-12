@@ -20,7 +20,7 @@ function world({store={},enemies=[],props=[],objective={x:20,y:20},blockedFn=nul
  const document={createElement:mk,head,body:mk('body'),getElementById:id=>id==='game'?canvas:id==='stage'?stage:id==='r780Cursor'?head.children.find(c=>c.id==='r780Cursor')||null:null,
   addEventListener:(t,f)=>{(docListeners[t]||(docListeners[t]=[])).push(f);},hidden:false};
  const ctx={Math,String,Number,Array,Object,JSON,Map,WeakMap,Set,isFinite,RegExp,Date,console,document,devicePixelRatio:1,
-  performance:{now:()=>ctx.__now},__now:0,requestAnimationFrame:f=>{raf.push(f);return raf.length;},addEventListener:(t,f)=>{(docListeners['w:'+t]||(docListeners['w:'+t]=[])).push(f);},
+  performance:{now:()=>ctx.__now},__now:0,requestAnimationFrame:f=>{raf.push(f);return raf.length;},addEventListener:(t,f,o)=>{const k=(o===true||o?.capture?'wc:':'w:')+t;(docListeners[k]||(docListeners[k]=[])).push(f);},
   localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}},setTimeout:f=>{f();return 1;}};ctx.window=ctx;vm.createContext(ctx);
  ctx.canvas=canvas;ctx.__enemies=enemies;ctx.__props=props;ctx.__objective=objective;ctx.__blocked=blockedFn||(()=>false);
  vm.runInContext(`var started=${started},modal=${JSON.stringify(modal)},loading=${loading},storyScene=null,W=1280,H=676,TILE=32,zoom=1,cam={x:10,y:10},time=0,
@@ -35,9 +35,9 @@ function world({store={},enemies=[],props=[],objective={x:20,y:20},blockedFn=nul
   function distance(a,b){return Math.hypot(a.x-b.x,a.y-b.y);}
   `,ctx);const ENGINE=`
   // 엔진 클릭(index.html 416 그대로의 판정)
-  canvas.addEventListener('pointerdown',ev=>{if(!started||modal||loading)return;const rect=canvas.getBoundingClientRect(),x=ev.clientX-rect.left,y=ev.clientY-rect.top;let chosen=null,best=Infinity;if(ev.button!==2)for(const e of liveEnemies()){const q=project(e.x,e.y),h=actorHeight()*(e.boss?2.05:1);if(Math.abs(x-q.x)<h*.48&&y>q.y-h&&y<q.y+9){const d=Math.hypot(x-q.x,y-(q.y-h*.5));if(d<best){chosen=e;best=d}}}if(chosen){target=chosen.id;command=chosen.id;route=[];}else{const p=unproject(x,y);route=__blocked(p.x,p.y)?[]:[p];command=null;target=null;}});`;
+  canvas.addEventListener('pointerdown',ev=>{if(!started||modal||loading)return;const rect=canvas.getBoundingClientRect(),x=ev.clientX-rect.left,y=ev.clientY-rect.top;let chosen=null,best=Infinity;if(ev.button!==2)for(const e of liveEnemies()){const q=project(e.x,e.y),h=actorHeight()*(e.boss?2.05:1);if(Math.abs(x-q.x)<h*.48&&y>q.y-h&&y<q.y+9){const d=Math.hypot(x-q.x,y-(q.y-h*.5));if(d<best){chosen=e;best=d}}}if(chosen){target=chosen.id;command=chosen.id;route=[];}else{const p=unproject(x,y);target=null;command=null;if(!__blocked(p.x,p.y))route=[p];}});`;// 실제 commandMove: 길을 못 찾으면 route 를 그대로 둔다
  if(engineAfter){vm.runInContext(src,ctx);vm.runInContext(ENGINE,ctx);}else{vm.runInContext(ENGINE,ctx);vm.runInContext(src,ctx);}
- const fire=(t,ev)=>{const e={preventDefault(){},stopPropagation(){},pointerType:'mouse',button:0,buttons:0,target:canvas,...ev};for(const f of listeners[t]||[])f(e);for(const f of docListeners['w:'+t]||[])f(e);};// 캔버스(대상 단계) → window(거품 단계)
+ const fire=(t,ev)=>{const e={preventDefault(){},stopPropagation(){},pointerType:'mouse',button:0,buttons:0,target:canvas,...ev};for(const f of docListeners['wc:'+t]||[])f(e);for(const f of listeners[t]||[])f(e);for(const f of docListeners['w:'+t]||[])f(e);};// window(잡기 단계) → 캔버스(대상 단계) → window(거품 단계)
  const api=ctx.__STORYWORLD_CURSOR_R780__;
  const frame=(dt=.1)=>{ctx.__now+=dt*1000;const fs=raf.splice(0);for(const f of fs)f(ctx.__now);};
  return {ctx,api,canvas,stage,head,fire,frame,log,run:s=>vm.runInContext(s,ctx)};}
@@ -115,6 +115,12 @@ const move=(w,sx,sy,ev={})=>{w.fire('pointermove',{clientX:sx,clientY:sy+44,...e
  const g=at(w,12.5,12.5);w.fire('pointerdown',{clientX:g.x,clientY:g.y+44});ok(w.api.markers().at(-1)?.kind==='move','ground click after a later engine listener → move');
  // 다른 대상(창 단추 등)을 누른 것은 표시하지 않는다
  const n0=w.api.markers().length;w.fire('pointerdown',{clientX:g.x,clientY:g.y+44,target:{id:'panelBtn'}});ok(w.api.markers().length===n0,'pointerdown on another element → no marker');}
+{// 회귀(Codex 리뷰 #446): 걷는 중(route 남음)에 막힌 곳을 클릭하면 엔진은 이전 route 를 그대로 둔다 → '이동'이 아니라 '막힘'
+ const w=world({blockedFn:(x,y)=>x<9});const q=at(w,12,12),qb=at(w,5,12);
+ w.fire('pointerdown',{clientX:q.x,clientY:q.y+44});ok(w.api.markers().at(-1)?.kind==='move'&&w.run('route.length')===1,'first click starts a route');
+ w.fire('pointerdown',{clientX:qb.x,clientY:qb.y+44});ok(w.run('route.length')===1,'engine keeps the old route on a failed click');ok(w.api.markers().at(-1)?.kind==='blocked','blocked click while walking → blocked marker, not move');
+ // R790 이야기 인물(r790NPC)도 대화
+ const n={id:'r790:npc:z1:youth',x:13,y:9,r790NPC:'youth'};const w2=world({props:[n]});const qn=at(w2,13,9);move(w2,qn.x,qn.y-25);ok(w2.api.inspect().hover.kind==='talk','R790 story NPC → talk');}
 {// 렉: style 은 바뀔 때만, 판정은 간격을 두고
  const w=world();const q=at(w,12,12);move(w,q.x,q.y);const s0=w.api.inspect().styleWrites;for(let i=0;i<30;i++)move(w,q.x+i,q.y);ok(w.api.inspect().styleWrites===s0,'no style writes while state unchanged');
  const c0=w.api.inspect().classifies;for(let i=0;i<10;i++){w.fire('pointermove',{clientX:q.x+i,clientY:q.y+44});}ok(w.api.inspect().classifies===c0,'pointermove itself does not classify');

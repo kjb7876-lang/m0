@@ -84,7 +84,7 @@ function opened(p){try{return (W0.__STORYWORLD_GROWTH_R103__?.state?.()?.opened|
 function propAt(x,y){const rm=(typeof room!=='undefined'?room:undefined),P=(typeof project!=='undefined'?project:undefined),ah=((typeof actorHeight!=='undefined'?actorHeight:undefined)||(()=>66))();if(!rm)return null;let best=null,bd=Infinity;
  const take=(kind,o,q,hit)=>{if(!hit)return;const d=Math.hypot(x-q.x,y-q.y);const rank={talk:0,pickup:1,use:2}[kind];const score=rank*1e4+d;if(score<bd){bd=score;best={kind,target:o};}};
  for(const p of rm.props||[]){if(!p||p.visible===false||p.destroyed||!Number.isFinite(p.x)||!Number.isFinite(p.y))continue;const q=P(p.x,p.y);
-  if(p.r75NPC||p.r75NarrativeNPC||p.r75FortPerson)take('talk',p,q,inBox(x,y,q,ah*.62,ah*1.12));
+  if(p.r75NPC||p.r75NarrativeNPC||p.r75FortPerson||p.r790NPC)take('talk',p,q,inBox(x,y,q,ah*.62,ah*1.12));
   else if(p.r108Orb)take('pickup',p,q,Math.hypot(x-q.x,y-(q.y-6))<16);
   else if(p.r74Door)take('use',p,q,inBox(x,y,q,ah*.9,ah*1.5));
   else if(p.chestR103){if(!opened(p))take('use',p,q,inBox(x,y,q,ah*.7,ah*.7));}}
@@ -117,10 +117,12 @@ if(GC&&!off){
  GC.addEventListener('pointermove',ev=>{if(ev.pointerType&&ev.pointerType!=='mouse')return;const p=local(ev);ptr={x:p.x,y:p.y,buttons:ev.buttons|0};dirty=true;});
  GC.addEventListener('pointerleave',()=>{ptr=null;dirty=true;});
  // 엔진 클릭 판정이 끝난 뒤 결과를 읽는다 — window 거품 단계는 캔버스에 붙은 모든 리스너(엔진이 언제 붙였든) 다음에 온다
+ // 엔진 commandMove 는 길을 못 찾으면 route 를 그대로 두므로(걷는 중 막힌 곳 클릭), 클릭 전 route 를 잡기 단계에서 기억해 '새 길'인지 본다
+ let routeBefore=null;W0.addEventListener('pointerdown',ev=>{if(ev.target===GC)routeBefore=(typeof route!=='undefined'?route:null);},true);
  W0.addEventListener('pointerdown',ev=>{try{if(ev.target!==GC||!live())return;const p=local(ev),U=(typeof unproject!=='undefined'?unproject:undefined),R=(typeof route!=='undefined'?route:undefined),C=(typeof command!=='undefined'?command:undefined);stats.clicks++;let m;
   if(ev.button===2){const w=U(p.x,p.y);m={kind:'aim',x:w.x,y:w.y,life:.6};}
   else if(C!=null&&C!==''){const e=((typeof room!=='undefined'?room:undefined)?.enemies||[]).find(e=>e.id===C);m={kind:'attack',targetId:C,x:e?.x??U(p.x,p.y).x,y:e?.y??U(p.x,p.y).y,big:!!e?.boss,life:.7};}
-  else if(Array.isArray(R)&&R.length){const w=U(p.x,p.y);m={kind:'move',x:w.x,y:w.y,life:.55};}
+  else if(Array.isArray(R)&&R.length&&R!==routeBefore){const w=U(p.x,p.y);m={kind:'move',x:w.x,y:w.y,life:.55};}
   else{const w=U(p.x,p.y);m={kind:'blocked',x:w.x,y:w.y,life:.6};}
   m.age=0;markers.push(m);stats.lastClick={kind:m.kind,targetId:m.targetId??null};while(markers.length>MAX)markers.shift();
   if(ev.pointerType==='mouse'||!ev.pointerType){ptr={...local(ev),buttons:ev.button===2?2:1};dirty=true;}}catch(e){fail(e);}});
