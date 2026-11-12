@@ -8,7 +8,7 @@ const dummyMove=(dx,dy,from)=>{const d={x:(from||player).x,y:(from||player).y};t
 const arrows=()=>{const sx=(keys.has('ArrowRight')?1:0)-(keys.has('ArrowLeft')?1:0),sy=(keys.has('ArrowDown')?1:0)-(keys.has('ArrowUp')?1:0);if(!sx&&!sy)return null;const v=norm(sx+2*sy,2*sy-sx);return v;};
 const statusLabels=()=>{const out=[];try{for(const k of ['__STORYWORLD_FOUR_ELEMENTS_R61__','__STORYWORLD_REGION_AFFLICTIONS_R58__','__STORYWORLD_HOSPITAL_WOUNDS_R53__'])for(const r of (window[k]?.statusRows?.()||[]))out.push(String(r.key||r.kind||r.label||'?'));}catch(_){}if(player.storyStatus150)out.push('story150:'+(player.storyStatus150.kind||player.storyStatus150.key||'?'));if(Number(player.heroSlowUntil150)>time)out.push('slow150');return out;};
 // 이동 잠금 감시: 방향키를 누르고 있는데 0.6초 동안 0.25칸도 못 가고, 같은 자리의 허수 몸은 갈 수 있을 때.
-const lock={since:null,x:0,y:0,rows:[]};
+const lock={since:null,x:0,y:0,v:'',rows:[]};
 // 이동 잠금이 잡혔을 때 까닭을 남기는 틱 기록(읽기만): 틱마다 엔진이 영웅을 옮기려 한 횟수·거리(moveActor 를 바깥에서 한 겹 감싸 센다)와 틱 뒤 실제 위치,
 //  위치를 되돌리는 덧씌우기들의 누적 수(R425 발 딛기·R137 속박·R113 자리 복귀)를 0.9초치 둥근 기록에 둔다.
 const trace=[];const mv={calls:0,dist:0,ret:0};
@@ -21,6 +21,8 @@ function traceSummary(){const n=trace.length;if(!n)return null;const f=trace[0],
   planted:l.planted-f.planted,bindHeld:l.bindHeld-f.bindHeld,dance:l.dance-f.dance,r87:trace.some(r=>r.r87),aaTicks:trace.filter(r=>r.aa>0).length,saTicks:trace.filter(r=>r.sa>0).length,dashTicks:trace.filter(r=>r.dash>0).length,hurtTicks:trace.filter(r=>r.hurt>0).length,routeTicks:trace.filter(r=>r.route>0).length,dirs:[...new Set(trace.filter(r=>r.v).map(r=>r.v.join()))].slice(0,6)};}
 
 function watchLock(){const v=arrows();if(!v||modal||loading||player.hp<=0){lock.since=null;return;}
+ /* 방향이 바뀌면 처음부터 다시 잰다 — 벽 구석으로 0.6초 걷다가(정상) 방향을 바꾼 바로 그 틱에 새 방향의 허수 몸은 갈 수 있어 '잠금'으로 잘못 잡혔다(틱 기록으로 확인: 엔진 걸음 0, 발 딛기·속박 0, 양쪽이 벽) */
+ const vk=v.x.toFixed(2)+','+v.y.toFixed(2);if(vk!==lock.v){lock.v=vk;lock.since=null;}
  if(lock.since===null){lock.since=time;lock.x=player.x;lock.y=player.y;return;}
  const moved=Math.hypot(player.x-lock.x,player.y-lock.y);
  if(moved>.25){lock.since=time;lock.x=player.x;lock.y=player.y;return;}
