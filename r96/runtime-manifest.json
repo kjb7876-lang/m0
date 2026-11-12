@@ -34813,6 +34813,36 @@
       "sha256": "f54fc90509491040bb314c058fe25166dbfaa6bb3d14f175f420d838c7ff82a7"
     },
     {
+      "path": "assets/r770/villagers/herbwife-death.webp",
+      "bytes": 65510,
+      "sha256": "3448747a41c49f36fccac92d226dcdf9f92d0a97fe65b9565a9b5538eb307aba"
+    },
+    {
+      "path": "assets/r770/villagers/herbwife-hit.webp",
+      "bytes": 41910,
+      "sha256": "79d9d23cac27f14d069b3a29721bc13a524cdafb9b175b3817f6cb2c42fda65d"
+    },
+    {
+      "path": "assets/r770/villagers/sobok-atk.webp",
+      "bytes": 70266,
+      "sha256": "97aa0064b8cd63d8eaf2b47e303a17bcb3fd976d4fecd815ad9344ccd087dc0a"
+    },
+    {
+      "path": "assets/r770/villagers/sobok-float.webp",
+      "bytes": 64544,
+      "sha256": "d556891342041b28cef346538dcbcf062abccf18dd169fb3100dafa87362f6a9"
+    },
+    {
+      "path": "assets/r770/villagers/sobok-hit.webp",
+      "bytes": 33654,
+      "sha256": "439dc4f09ce826af8ade7a5d75e5580ae4d394a9951772d3e2cb5fa90c0392c5"
+    },
+    {
+      "path": "assets/r770/villagers/sobok-idle.webp",
+      "bytes": 47562,
+      "sha256": "49ac13a0e0f346b3e0dfb15d00abc99faf8c5857e2bd7b9c528a258f06a97ef2"
+    },
+    {
       "path": "assets/r790/npc/chief-bust.webp",
       "bytes": 59774,
       "sha256": "4411a9500ffc62cd0eecb1e3c7dddadc7dd07ac3bbe0e45c0aaa90c34f2d99d8"
@@ -34846,6 +34876,16 @@
       "path": "assets/r790/npc/seoyun-idle6.webp",
       "bytes": 115154,
       "sha256": "ff140798841045a7c276565f7dfe1f45fbd77ef4838b4afd78100296a1ce7fd1"
+    },
+    {
+      "path": "assets/r790/npc/yigyeong-bust.webp",
+      "bytes": 34936,
+      "sha256": "a7365f3697e084dd38ad95be2145e8ac0f9d0bf7cbe00e790ed508c10fe7b009"
+    },
+    {
+      "path": "assets/r790/npc/yigyeong-idle6.webp",
+      "bytes": 53938,
+      "sha256": "b31868bd76f908bf44181a4665c73832fd599c03f09a2805e802c9ae04cfe47b"
     },
     {
       "path": "assets/r790/npc/youth-bust-d.webp",
@@ -34993,12 +35033,12 @@
       "sha256": "afbff5e4100415e25847e93a0a73def59f98f46e807655eae8b7cdd517139acd"
     },
     {
-      "path": "assets/r830/doors/A-a.webp",
+      "path": "assets/r832/doors/A-a.webp",
       "bytes": 304344,
       "sha256": "8e5764bf4105a1d889cbf2fd1bb3ac8040936f1d3593f043235ea8cf0ef59132"
     },
     {
-      "path": "assets/r830/doors/A-b.webp",
+      "path": "assets/r832/doors/A-b.webp",
       "bytes": 269366,
       "sha256": "3adece88f6de3d7a0a58f4792b53265958c884c531faf13d98d6c8e8d68cc772"
     },
@@ -43109,8 +43149,8 @@
     },
     {
       "path": "bulmyeongwi-r760.js",
-      "bytes": 43521,
-      "sha256": "086e563746a8b7a280d70f39a971fa8a5b3c5ad7488f6baccbf68a36525d4882"
+      "bytes": 45084,
+      "sha256": "dd472d0079561549751c6ea50d068370dc54f77f8ea11378499cb8707689c0bf"
     },
     {
       "path": "canon-throw-r471.js",
@@ -43120,7 +43160,7 @@
     {
       "path": "cave-r204.js",
       "bytes": 130631,
-      "sha256": "4cd2328def110316f064f6d0ebd835e6aa16e57f8a694c7d82a3960986e83c8f"
+      "sha256": "4ae1858c62bdcf847b283094ba7ec228cfa1e722afe4f0c1b5df6eaaa600c4b2"
     },
     {
       "path": "chunks/ep1a08-0-0.json",
@@ -43649,8 +43689,8 @@
     },
     {
       "path": "combat-r170.js",
-      "bytes": 26534,
-      "sha256": "aaec25bc274bc0df278c67b88a29b360a7275da1a72a1dd3538dacbfa2e9348b"
+      "bytes": 27224,
+      "sha256": "3d442e548741a7ac3a80fcf08071c604cf53611a3754fe298e32501be9a456f7"
     },
     {
       "path": "combat-r98.js",
@@ -43758,9 +43798,9 @@
       "sha256": "31d98d078fe04545665fd1b88ce048b6a970dc69c8fe3897a55c228e7626c0af"
     },
     {
-      "path": "doors-theme-r830.js",
+      "path": "doors-theme-r832.js",
       "bytes": 3637,
-      "sha256": "801166f8cef6619c813a90ca11d83a4d6415f8ed9ab0242b025bafa4e463a549"
+      "sha256": "61b973fc29b004c869475a12ea13f9d0de07f2efa521710c065ca9ae1092e536"
     },
     {
       "path": "drive-buildings-r414.js",
@@ -43834,8 +43874,8 @@
     },
     {
       "path": "env-props-r299.js",
-      "bytes": 12928,
-      "sha256": "0bdf729e4cb743cb43a699032196a134273abf0aae9667ed4f266980ee9ce619"
+      "bytes": 13549,
+      "sha256": "0684a42d37b5baf835f8731512014c86cf25f9cf81ba56dce51e8eb70d39ad4e"
     },
     {
       "path": "era-r191.js",
@@ -43956,6 +43996,11 @@
       "path": "gunner-arms-r561.js",
       "bytes": 45009,
       "sha256": "f2d552ece57e6c3c309c3e2fe8130187340b8086bfdd5fcfb4a9df18dde18cf6"
+    },
+    {
+      "path": "hero-defense-r720.js",
+      "bytes": 31883,
+      "sha256": "7eca16e3f5ad2deee7dc7904af4ce4dec4f5bc3aca0cf84e4bea76a60c9067e1"
     },
     {
       "path": "hero-facing-r336.js",
@@ -44124,8 +44169,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6574042,
-      "sha256": "b949a0178528e00e48dceb76569e69f24e5a83be07cfeb4b7b5712c7816d4c6d"
+      "bytes": 6574089,
+      "sha256": "cc86fa7b664f0f6da6386b15d07fff2581adb202468f3c61a66f53180a4ab4a9"
     },
     {
       "path": "intro-r140.js",
@@ -44379,8 +44424,8 @@
     },
     {
       "path": "npc-r790.js",
-      "bytes": 23631,
-      "sha256": "ff086fab3934e54fb671de51c62cbb9fa75780c459f925e2d92da64c30e05a16"
+      "bytes": 25054,
+      "sha256": "b3c6c1a8092f89189b77c7a438722abef7004ab2c865749fd4f446ec5e46b996"
     },
     {
       "path": "painted-vfx-data-r87.js",
@@ -44519,8 +44564,8 @@
     },
     {
       "path": "prop-shadow-r329.js",
-      "bytes": 11523,
-      "sha256": "2cf6cbfd03f093f4891d8a11303a34d26c618327c7f4531eef80b5b500acccd3"
+      "bytes": 15678,
+      "sha256": "80ac28b4dae7239122c75941756fceacd8eafe1fab3a817f1e65d6f96b3a2c5a"
     },
     {
       "path": "props-fit-r303.js",
@@ -44534,13 +44579,13 @@
     },
     {
       "path": "props-r102.js",
-      "bytes": 13239,
-      "sha256": "51e170e36e8c1516ed3bfc9b12e313185fee38752c7a8d2843350b6d38b06e55"
+      "bytes": 13674,
+      "sha256": "d4937496380464a4756315b66b3d3e066faa8929b4f106268721b682034ea11f"
     },
     {
       "path": "props-r272.js",
-      "bytes": 3130,
-      "sha256": "e96f1d1a81d305007ab3afb0ee884edf68259ae07e8e719781bd1d3803aec9c9"
+      "bytes": 8715,
+      "sha256": "fb1109f97c1939aa63ec4db94a45e50d98e1216cf43cf186e0e544832c21f07a"
     },
     {
       "path": "props-space-r449.js",
@@ -44594,8 +44639,8 @@
     },
     {
       "path": "rooms-r523.js",
-      "bytes": 76792,
-      "sha256": "4a794e1552630b20972d02de22af2104d17fec13bcef820f9232e370a7aeb4e9"
+      "bytes": 80658,
+      "sha256": "fcb0d61b1a8445264187a967b19b4fcbdb2f7bc1b2f050e0a89f869e6c922116"
     },
     {
       "path": "root-gate-video-r372.js",
@@ -44984,8 +45029,8 @@
     },
     {
       "path": "visual-r92.js",
-      "bytes": 20326,
-      "sha256": "b3d81166ef15cf1617ed319e1da923d7e39c0e1bacb7e255b735a767e903faa3"
+      "bytes": 20667,
+      "sha256": "40503164f23854a1908fb84c281b7dffea27af5b3a20b0e789cdcf55f570ec0a"
     },
     {
       "path": "visual-r93-ui.js",
@@ -45050,7 +45095,7 @@
     {
       "path": "world-doors-r83.js",
       "bytes": 17061,
-      "sha256": "528267c189dac8c5ffc10566f873ff29776b277b5b89306eeb7ce34c7e7c9f1f"
+      "sha256": "59a884242c5b6ffc36d1240d9011d6280ba6e6447af0868d338617766cf3be1c"
     },
     {
       "path": "world-environment-r81.js",
@@ -45093,9 +45138,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9018,
-  "totalBytes": 1238465723,
-  "webHTMLSha256": "b949a0178528e00e48dceb76569e69f24e5a83be07cfeb4b7b5712c7816d4c6d",
+  "fileCount": 9027,
+  "totalBytes": 1238928652,
+  "webHTMLSha256": "cc86fa7b664f0f6da6386b15d07fff2581adb202468f3c61a66f53180a4ab4a9",
   "largest": [
     {
       "path": "index.html",

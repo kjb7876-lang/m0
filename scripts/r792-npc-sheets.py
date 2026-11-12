@@ -43,7 +43,9 @@ def main():
             ('sheet', s, 'CX-0073SN_01_idle6_r1_c1.png', 'medic-idle6.webp'), ('bust', s, 'CX-0073SN_01_bust_r1_c1.png', 'medic-bust.webp'),
             ('sheet', s, 'CX-0073SN_02_idle6_r1_c1.png', 'physician-idle6.webp'), ('bust', s, 'CX-0073SN_02_bust_r1_c1.png', 'physician-bust.webp'),
             # R793: 서윤(ep1b05)
-            ('sheet', s, 'CX-0073SN_03_idle6_r1_c1.png', 'seoyun-idle6.webp'), ('bust', s, 'CX-0073SN_03_bust_r1_c1.png', 'seoyun-bust.webp')]
+            ('sheet', s, 'CX-0073SN_03_idle6_r1_c1.png', 'seoyun-idle6.webp'), ('bust', s, 'CX-0073SN_03_bust_r1_c1.png', 'seoyun-bust.webp'),
+            # R794: 한이경(murder04) 여자판 r2
+            ('sheet', s, 'CX-0073SN_04r2_HanYigyeong_idle6_c1.png', 'yigyeong-idle6.webp'), ('bust', s, 'CX-0073SN_04r2_HanYigyeong_bust_c1.png', 'yigyeong-bust.webp')]
     for kind, d, a, b in jobs:
         src = os.path.join(d, a); r = sheet(src, b, align='physician' not in b) if kind == 'sheet' else bust(src, b)
         print(a, hashlib.sha256(open(src, 'rb').read()).hexdigest()[:8], os.path.getsize(src), '→', b, os.path.getsize(os.path.join(OUT, b)), r or '')

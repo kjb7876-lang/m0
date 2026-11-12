@@ -27,12 +27,12 @@
  let fitOn=true;try{const s=JSON.parse(localStorage.getItem('storyworld.r347.doorFit')||'null');if(s&&s.on===false)fitOn=false;}catch(_){}
  // 원본 문짝 정합점(leafPatch 와 같은 값)에서 잰 비율. 화면에서 바닥 1칸 길이 = √1.25·TILE, 높이 1 = √1.5·TILE.
  const LEAF_SRC={oak:{a:[112,251],b:[199,285],c:[112,122]},metal:{a:[728,254],b:[826,290],c:[728,127]},clinical:{a:[60,477],b:[237,431],c:[60,98]}};
- // R830(사용자 2026-11-12 "이런 문들도 주변에 맞게, 꼭 문 아니더라도"): 지역 양식별 문짝 그림(doors-theme-r830). 문짝 그림의 가로:세로를 쓰고 그림만 바뀐다(충돌·열림·문 폭 그대로).
- const THEME=r=>{try{return window.__STORYWORLD_DOOR_THEME_R830__?.leaf?.(r)||null;}catch(_){return null;}};
+ // R832(사용자 2026-11-12 "이런 문들도 주변에 맞게, 꼭 문 아니더라도"): 지역 양식별 문짝 그림(doors-theme-r832). 문짝 그림의 가로:세로를 쓰고 그림만 바뀐다(충돌·열림·문 폭 그대로).
+ const THEME=r=>{try{return window.__STORYWORLD_DOOR_THEME_R832__?.leaf?.(r)||null;}catch(_){return null;}};
  const leafAspect=k=>{if(k&&typeof k==='object')return k.aspect;const s=LEAF_SRC[k];return Math.hypot(s.b[0]-s.a[0],s.b[1]-s.a[1])/Math.hypot(s.c[0]-s.a[0],s.c[1]-s.a[1]);};
  const Z_PER_U=Math.sqrt(1.5)/Math.sqrt(1.25),MAX_STRETCH=1.12;
  /* 문 한 칸(문짝 전체)의 자연 폭(칸 단위): 병원 문은 외짝 둘이 한 칸 */
- const naturalBay=kind=>(DH()-JAMB)*Z_PER_U*leafAspect(kind)*(kind==='clinical'?2:1);/* kind 는 'oak'·'metal'·'clinical' 또는 R830 문짝 {aspect} */
+ const naturalBay=kind=>(DH()-JAMB)*Z_PER_U*leafAspect(kind)*(kind==='clinical'?2:1);/* kind 는 'oak'·'metal'·'clinical' 또는 R832 문짝 {aspect} */
  function bays(width,kind){const nat=naturalBay(kind);let best=null;for(let n=1;n<=8;n++){const bw=(width-(n-1)*JAMB)/n;if(bw<=.4)break;const cost=bw<nat?Math.log(nat/bw):.5*Math.log(Math.max(1,bw/(nat*MAX_STRETCH)));/* 줄이기는 그림이 찌그러지니 그대로, 넓히기는 12%까지 공짜·그 위는 기둥이 넓어질 뿐이라 반값 */if(!best||cost<best.cost-1e-9)best={n,bw,cost};}
   if(!best)best={n:1,bw:width,cost:0};const leafW=Math.min(best.bw,nat*MAX_STRETCH),pad=(best.bw-leafW)/2;return{n:best.n,bay:best.bw,leaf:leafW,pad,natural:nat,stretch:leafW/nat};}
  function geometry(d,open,clinical=false,metal=false){if(!d||!Number.isFinite(d.x+d.y+d.width+d.depth)||d.width<=0||d.depth<=0)throw Error('Invalid native ward door aperture');
@@ -55,7 +55,7 @@
    if(i===B.n-1&&B.pad>1e-6)strip('pad-right',l1,u1,0,(DH()-JAMB));
    if(clinical){const m=(l0+l1)/2;parts.push({id:'closed-left-'+i,a:along(l0),b:along(m),z0:0,z1:(DH()-JAMB),source:'leaf'});parts.push({id:'closed-right-'+i,a:along(m),b:along(l1),z0:0,z1:(DH()-JAMB),source:'leaf'});}
    else parts.push({id:'closed-leaf-'+i,a:along(l0),b:along(l1),z0:0,z1:(DH()-JAMB),source:'leaf',bay:i});}
-  return{width,height:DH(),faceOffset,aperture,parts,fit:{kind:th?'r830:'+th.family:kind,bays:B.n,bay:B.bay,leaf:B.leaf,pad:B.pad,natural:B.natural,stretch:B.stretch}};
+  return{width,height:DH(),faceOffset,aperture,parts,fit:{kind:th?'r832:'+th.family:kind,bays:B.n,bay:B.bay,leaf:B.leaf,pad:B.pad,natural:B.natural,stretch:B.stretch}};
  }
  const point=(p,z)=>{const q=project(p.x,p.y);return{x:q.x,y:q.y-z*TILE*Math.sqrt(1.5)*zoom};};
  const corners=p=>[point(p.a,p.z1),point(p.b,p.z1),point(p.b,p.z0),point(p.a,p.z0)];
@@ -70,7 +70,7 @@
  function affinePatch(image,rect0,ps,key){const rect=cropRect(rect0,ps,key),[sx,sy,sw,sh]=rect,[a,b,,d]=ps;ctx.save();try{ctx.transform((b.x-a.x)/sw,(b.y-a.y)/sw,(d.x-a.x)/sh,(d.y-a.y)/sh,a.x,a.y);ctx.drawImage(image,sx,sy,sw,sh,0,0,sw,sh);}finally{ctx.restore();}}
  // Rebase the already-isometric leaf art before projecting it onto the wall.
  // This removes the baked diagonal slope instead of skewing it a second time.
- // R830: 정면 입면도 문짝을 문 면 네 꼭짓점에 그대로(자르지 않고) 붙인다. 닫힌 칸은 r1a·r1b 를 번갈아, 열린 짝은 경첩 쪽 반쪽(오른쪽 짝은 그림 오른쪽 반)을 쓴다.
+ // R832: 정면 입면도 문짝을 문 면 네 꼭짓점에 그대로(자르지 않고) 붙인다. 닫힌 칸은 r1a·r1b 를 번갈아, 열린 짝은 경첩 쪽 반쪽(오른쪽 짝은 그림 오른쪽 반)을 쓴다.
  function themeLeaf(t,part,ps){if(!t)return false;const im=t.images?.[(part.bay||0)%t.images.length]||t.images?.[0];if(!im)return false;const W0=im.naturalWidth||im.width,H0=im.naturalHeight||im.height;if(!(W0>0&&H0>0))return false;
   const half=part.half,sx=half===1?W0/2:0,sw=half==null?W0:W0/2,[a,b,,d]=ps;ctx.save();try{
    if(half===1){/* 오른쪽 짝: a(경첩)=그림 오른쪽 끝 */ctx.transform((a.x-b.x)/sw,(a.y-b.y)/sw,(d.x-a.x)/H0,(d.y-a.y)/H0,b.x,b.y);ctx.drawImage(im,sx,0,sw,H0,0,0,sw,H0);}

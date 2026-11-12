@@ -1,6 +1,6 @@
-// R830 나무 가까이: r204-trees 스프라이트 몇 그루 앞에 영웅을 세우고 찍는다. SW_URL·ZONES·OUT·TAG
+// R832 나무 가까이: r204-trees 스프라이트 몇 그루 앞에 영웅을 세우고 찍는다. SW_URL·ZONES·OUT·TAG
 import {chromium,boot,go,skip} from '../r444/lib.mjs';import fs from 'node:fs';
-const OUT=process.env.OUT||'/tmp/r830-trees',TAG=process.env.TAG||'after';fs.mkdirSync(OUT,{recursive:true});
+const OUT=process.env.OUT||'/tmp/r832-trees',TAG=process.env.TAG||'after';fs.mkdirSync(OUT,{recursive:true});
 const b=await chromium.launch();const {p}=await boot(b,{vp:{width:960,height:540}});
 for(const z of (process.env.ZONES||'last302,last303').split(',')){await go(p,z);await p.waitForTimeout(3000);await skip(p);
  const pts=await p.evaluate(()=>{const t=window.__STORYWORLD_PHASE1__.controller.state.three;let g=null;t.spatialRoot.traverse(o=>{if(o.name==='r204-trees')g=o;});if(!g)return[];

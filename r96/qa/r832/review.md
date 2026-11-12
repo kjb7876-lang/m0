@@ -1,4 +1,4 @@
-# R830 7분야 심사 (지역 양식 문짝 A + 조선 마을 나무)
+# R832 7분야 심사 (지역 양식 문짝 A + 조선 마을 나무)
 
 대상: last302·last303(불면귀 마을) 진행 문 = Dots CX-0075DR A 조선 판문(r1a·r1b), R204 나무 = Dots CX-0074NT 1A 소나무·1B 감나무(tree-joseon-00..11).
 근거: 헤드리스 door-census(last302·last303 새 판문, dist02·ep1b02 참나무 유지, 페이지 오류 0), trees-shot·trees-near 스크린샷. 헤드리스 소프트웨어 렌더링이며 GPU·실기기는 미검증.
