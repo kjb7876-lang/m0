@@ -88,6 +88,13 @@ if(has){
   ctx.time=15;bo.hp=0;bo.deadRecorded=true;ctx.room.enemies.splice(ctx.room.enemies.indexOf(bo),1);api.tick();const f=api.snapshot().bossFights[0];
   ok('boss removed from the list on death still closes the fight (ttk 5s)',api.snapshot().counters.bossKills===1&&f&&f.end===15&&Math.abs(f.ttk-5)<1e-9,api.snapshot().bossFights);
   ctx.time=16;ctx.room={id:'dist02',enemies:[mob()]};api.tick();ctx.time=17;api.tick();ok('leaving the zone does not turn the old zone mobs into kills',api.snapshot().counters.kills===2,api.snapshot().counters);}
+ // 11) 회귀(리뷰 지적): 같은 지역에서 시간이 같거나 더 뒤인 저장을 불러오면 시간은 안 줄지만 room·player 객체가 새로 만들어진다 → 가짜 피격·처치 없이 기준을 다시 잡는다
+ {const g=state(),{ctx,api}=load(g);api.tick();ctx.time=12;ctx.player.hp=90;api.tick();const old=ctx.room.enemies[0];
+  ctx.time=20;ctx.player={hp:40,x:1,y:1};ctx.room={id:'dist01',enemies:[mob(),mob()]};old.hp=0;api.tick();const s=api.snapshot();
+  ok('later save in the same zone (new room and player objects): no fake hit or kill, entry rebased',s.counters.heroHits===1&&s.counters.heroDamage===10&&s.counters.kills===0&&s.entry.t===20&&s.entry.firstHitAfter===null&&api.events().some(e=>e.type==='reload'),{c:s.counters,e:s.entry});
+  ctx.time=21;ctx.player.hp=30;api.tick();ok('hits after the reload are counted again',api.snapshot().counters.heroHits===2&&Math.abs(api.snapshot().entry.firstHitAfter-1)<1e-9,api.snapshot().entry);
+  // 영웅 객체만 바뀐 경우(지역 객체는 그대로): 피격으로 세지 않고 입장 기록은 그대로
+  ctx.time=22;ctx.player={hp:5,x:1,y:1};api.tick();const s2=api.snapshot();ok('player object replaced alone: not a hit, entry kept',s2.counters.heroHits===2&&s2.entry.t===20,{c:s2.counters,e:s2.entry});}
  // 8) 두 번 실려도 하나
  {const {ctx,api,timers}=load(state());vm.runInContext(src,ctx);ok('double load keeps one api and one timer',ctx.window.__STORYWORLD_SNAPSHOT_R940__===api&&timers.length===1);}
 }

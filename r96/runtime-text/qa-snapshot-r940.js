@@ -1,7 +1,7 @@
 // R940 상태 스냅샷(읽기 전용) — 사용자 2026-11-12 "확실하게 사용하면 좋을것만 개선해서 충돌없이 버그없이 적용"
 //  (외부 프로토타입 '불씨의 서약' 검토에서 고른 것: 공개판에도 상태를 한 번에 읽는 함수를 두어, 만든 쪽이 아닌 점검자가 숫자로 재게 한다).
 //  하는 일: 0.25초마다 엔진 값(room·player·time)을 읽기만 해서 사건을 적는다.
-//   · enter 지역 입장 · heroHit 영웅 피격(피해량, 입장 뒤 몇 초) · heroDown 쓰러짐 · kill 처치 · bossDown 보스 처치(걸린 게임 시간) · rewind 불러오기
+//   · enter 지역 입장 · reload 같은 지역 불러오기 · heroHit 영웅 피격(피해량, 입장 뒤 몇 초) · heroDown 쓰러짐 · kill 처치 · bossDown 보스 처치(걸린 게임 시간) · rewind 불러오기
 //   · snapshot(): 지금 지역·시간·영웅 체력·적 수(깨어 있음/숨음/보스)·누계·입장 뒤 첫 피격 시간·보스 처치 기록
 //  하지 않는 일: 게임 값 쓰기, 엔진 함수 감싸기, 그리기, 소리, 저장. 화면·밸런스·조작 변화 없음.
 //  쓰는 법(검사 스크립트·콘솔): __STORYWORLD_SNAPSHOT_R940__.snapshot() / .events() / .reset() / .stop() / .start()
@@ -35,19 +35,23 @@ function look(e,s,next){
 function step(){
  const s=read();if(!s.R||!s.P||s.T===null||s.zone===null)return;
  const rewind=!!prev&&s.T<prev.T,moved=!prev||prev.zone!==s.zone;
- if(rewind){push({type:'rewind',t:s.T,from:prev.T,zone:s.zone});seen=new WeakSet();dead=new WeakSet();open=new WeakMap();for(const f of fights)if(f.end===null)f.end=undefined;fights=fights.filter(f=>f.end!==undefined);}
- if(moved||rewind){entry={zone:s.zone,t:s.T,firstHitAfter:null};if(moved)push({type:'enter',t:s.T,zone:s.zone});}
- else if(s.hp!==null&&prev.hp!==null){
+ // 같은 지역에서 시간이 같거나 뒤인 저장을 불러오면 시간은 안 줄지만 지역·영웅 객체가 새로 만들어진다 → 객체가 바뀌었는지도 본다
+ const reload=!!prev&&!moved&&!rewind&&prev.R!==s.R,swapped=!!prev&&prev.P!==s.P;
+ if(reload)push({type:'reload',t:s.T,zone:s.zone});
+ if(rewind)push({type:'rewind',t:s.T,from:prev.T,zone:s.zone});
+ if(rewind||reload){seen=new WeakSet();dead=new WeakSet();open=new WeakMap();for(const f of fights)if(f.end===null)f.end=undefined;fights=fights.filter(f=>f.end!==undefined);}
+ if(moved||rewind||reload){entry={zone:s.zone,t:s.T,firstHitAfter:null};if(moved)push({type:'enter',t:s.T,zone:s.zone});}
+ else if(!swapped&&s.hp!==null&&prev.hp!==null){
   if(s.hp<prev.hp){const dmg=prev.hp-s.hp,since=s.T-entry.t;counters.heroHits++;counters.heroDamage+=dmg;if(entry.firstHitAfter===null)entry.firstHitAfter=since;push({type:'heroHit',t:s.T,zone:s.zone,dmg,hp:s.hp,sinceEntry:since});}
   if(prev.hp>0&&s.hp<=0){counters.heroDowns++;push({type:'heroDown',t:s.T,zone:s.zone});}
  }
- if(moved||rewind)watch=[];
+ if(moved||rewind||reload)watch=[];
  // 엔진 killEnemy 는 죽은 적을 같은 프레임에 room.enemies 에서 뺀다 → 지난번에 살아 있던 적(watch)도 함께 본다
  const now=new Set(s.list),next=[];
  for(const e of s.list)look(e,s,next);
  for(const e of watch)if(!now.has(e))look(e,s,null);
  watch=next;
- prev={T:s.T,zone:s.zone,hp:s.hp};
+ prev={T:s.T,zone:s.zone,hp:s.hp,R:s.R,P:s.P};
 }
 function tick(){try{step();}catch(err){errors++;lastError=String(err&&err.message||err).slice(0,160);}}
 function snapshot(){

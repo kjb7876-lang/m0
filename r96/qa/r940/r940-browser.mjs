@@ -19,10 +19,14 @@ ok('영웅 피격이 적히고 입장 뒤 첫 피격 시간이 생긴다',s.coun
 // 처치: 엔진 killEnemy 로 한 마리
 const k0=s.counters.kills;await p.evaluate(()=>{player.hp=1e9;const e=room.enemies.find(e=>e.hp>0&&e.spawnState==='active'&&!e.boss)||room.enemies.find(e=>e.hp>0&&!e.boss);e.hp=0;killEnemy(e);});await settle();s=await A();
 ok('처치 한 번이 한 번으로 적힌다',s.counters.kills===k0+1,{k0,c:s.counters});
+// 평소 플레이 중에는 지역 객체가 바뀌지 않는다 → 가짜 reload 가 없어야 한다
+await waitT(1);ok('평소 플레이 중(dist01)에는 reload 사건이 없다(시작할 때 hub 를 다시 여는 것은 제외)',!(await E()).some(e=>e.type==='reload'&&e.zone==='dist01'),(await E()).filter(e=>e.type==='reload'));
 // 다른 지역으로: 입장 기록이 새로
 await go(p,'dist02');await settle();s=await A();ok('지역 이동 뒤 입장 기록이 새로 잡힌다',s.zone==='dist02'&&s.entry.zone==='dist02'&&s.entry.firstHitAfter===null,s.entry);
 // 저장·불러오기 뒤에도 오류 없이 읽는다
-await p.evaluate(async()=>{const raw=JSON.parse(JSON.stringify(serializeSave()));await restoreSave(raw);});await p.waitForFunction(()=>!loading,null,{timeout:120000});await skip(p);await settle();s=await A();
+await p.evaluate(()=>{player.hp=400;});await settle();const hb=(await A()).counters;
+await p.evaluate(async()=>{const raw=JSON.parse(JSON.stringify(serializeSave()));raw.player&&(raw.player.hp=100);await restoreSave(raw);});await p.waitForFunction(()=>!loading,null,{timeout:120000});await skip(p);await settle();s=await A();console.log('INFO after restore',JSON.stringify({hb,c:s.counters,hp:s.hero.hp,ev:(await E()).slice(-3)}));
+ok('같은 지역 저장을 불러오면 reload 가 적히고 피격·처치는 늘지 않는다',s.counters.heroHits===hb.heroHits&&s.counters.kills===hb.kills&&(await E()).some(e=>e.type==='reload'&&e.zone==='dist02'),{hb,c:s.counters});
 ok('불러온 뒤에도 준비됨·오류 0',s.ready===true&&s.errors===0,s);
 // 멈춤·다시 시작
 await p.evaluate(()=>window.__STORYWORLD_SNAPSHOT_R940__.stop());const c1=(await A()).counters.heroHits;await p.evaluate(()=>{player.hp=500;});await p.waitForTimeout(400);await p.evaluate(()=>{player.hp-=20;});await settle();
