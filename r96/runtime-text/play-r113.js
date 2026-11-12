@@ -56,7 +56,8 @@ const dance={anchor:null,cam:null,cloneAt:-9};
 //  영웅은 제자리에 그려지고 끝나면 제자리, 실제로 베는 자리에는 0.25초짜리 분신(엔진 ghost 잔상, 공격 자세)만 0.08초마다 남긴다. 피해·표적·시간은 그대로.
 const clones=[];let cloneBusy=false;
 function spawnClone(x,y,opt={}){if(!Number.isFinite(x)||!Number.isFinite(y))return false;if(clones.length>=6)clones.shift();clones.push({x,y,t0:now(),life:opt.life||.3,alpha:opt.alpha??.62,dir:opt.dir||null});return true;}
-const anchorHero=p=>!!p&&(isRanged(p)||prefs.cloneDance!==false);
+/* R706(dance-free) 이 켜져 있으면 실검무 고정점을 쓰지 않는다 — 그쪽 모듈이 본체 자리를 따로 관리 */
+const anchorHero=p=>!!p&&!window.__STORYWORLD_DANCE_FREE_R706__?.on?.()&&(isRanged(p)||prefs.cloneDance!==false);
 function danceClone(){const t=now();if(t-dance.cloneAt<.08||lowFx()&&t-dance.cloneAt<.16)return;let dir='front';try{if(typeof facing==='function'&&dance.anchor)dir=facing(player.x-dance.anchor.x,player.y-dance.anchor.y);}catch(_){}
  dance.cloneAt=t;try{spawnClone(player.x,player.y,{life:.25,alpha:.6,dir});stats.danceClones=(stats.danceClones||0)+1;}catch(e){fail(e);}}
 const DANCES=()=>window.__STORYWORLD_DANCES_R74__;

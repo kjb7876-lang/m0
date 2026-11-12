@@ -63,6 +63,8 @@ const foe=(id,x,y,o={})=>Object.assign({id,x,y,hp:50,maxHp:50,damage:5,spawnStat
   check('R767 clone is drawn through drawHero at the clone spot with alpha < 1, hero restored after',cl.length>=1&&cl.every(c=>c.a<1&&c.a>0)&&P.x===kx&&P.y===ky&&sb2.ctx.globalAlpha===1,JSON.stringify(d));}
  for(let i=0;i<4;i++)sb2.tick(.05);check('R767 clones are capped (≤ 6 live)',CL.live()<=6,CL.live());
  sb2.danceOn=false;sb2.tick(.05);check('R767 melee hero back on its own spot when 실검무 ends (no teleport onto the enemy)',sb2.player.x===10&&sb2.player.y===10,[sb2.player.x,sb2.player.y]);}
+ {const sb3=world();sb3.__STORYWORLD_DANCE_FREE_R706__={on:()=>true};Object.assign(sb3.player,{hero:'hwando',x:10,y:10});sb3.room.enemies=[foe('e',14,12)];sb3.danceOn=true;sb3.tick(.05);
+  const R=sb3.__STORYWORLD_PLAY_R113__,st=R.stats(),d=R.dance();check('R767/R706: with dance-free R706 on, play-r113 takes no 실검무 anchor (R706 owns the body spot)',!d.anchor&&!(st.danceFrames>0),JSON.stringify({d,f:st.danceFrames}));}
 
 // ② facing
 {const sb=world();sb.room.enemies=[foe('e',8,10)];const e=sb.room.enemies[0];const dirs=[];
