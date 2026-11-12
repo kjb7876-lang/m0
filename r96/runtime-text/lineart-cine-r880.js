@@ -480,7 +480,7 @@ const reducedMotion=()=>{try{if(typeof settings!=='undefined'&&settings&&'reduce
 const OTHER=['r317Cinema','r368v','r369v','r372v','r617v','r568','r309','r309v'];
 const busy=()=>{try{if((typeof storyScene!=='undefined'&&!!storyScene)||(typeof loading!=='undefined'&&!!loading)||(typeof started!=='undefined'&&!started)||(typeof modal!=='undefined'&&!!modal))return true;
  if(typeof player!=='undefined'&&player&&!(player.hp>0))return true;if(typeof document!=='undefined'){if(document.hidden)return true;for(const id of OTHER)if(document.getElementById(id))return true;}return false;}catch(_){return false;}};
-function eligible(r){return !!(r&&SCENES.has(r.id)&&r.layer==='STORY'&&(typeof layer==='undefined'||layer==='STORY')&&!r.samongR103&&!r.samongR115&&!r.exploration?.samongR103&&solo()&&!prefs.seen.includes(r.id)&&!finished(r.id));}
+function eligible(r){return !!(r&&SCENES.has(r.id)&&r.layer==='STORY'&&(typeof layer==='undefined'||layer==='STORY')&&!r.samongR103&&!r.samongR115&&!r.exploration?.samongR103&&!r.survivalR600&&solo()&&!prefs.seen.includes(r.id)&&!finished(r.id));}/* R890: 무한 생존 방(같은 id)에서는 틀지 않는다 — 생존 서사와 겹치고, 스토리용 '한 번 본 기록'을 생존이 써 버리던 것 */
 const titleFor=z=>{let t='';try{t=(typeof regionById!=='undefined'&&regionById?.[z]?.title)||'';}catch(_){}return t?t+' · 기억':'기억';};
 function css(){if(document.getElementById('r880Css'))return;const s=document.createElement('style');s.id='r880Css';
  s.textContent='#r880{position:fixed;inset:0;z-index:2147482000;background:#030304;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .45s;cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none}'
