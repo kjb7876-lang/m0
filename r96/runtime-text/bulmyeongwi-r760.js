@@ -218,6 +218,8 @@ function kindFor(e,zone){if(!prefs.on||!e||typeof e!=='object'||e.boss||e.hero||
  if(e.r763Zone===z&&(e.r763||e.r763N===e.name)){if(e.r763){if(e.r74Monster){e.r763Atlas=e.r74Monster;delete e.r74Monster;}if(OLD.test(String(e.name||'')))rename(e,e.r763);}return e.r763||null;}const id=String(e.nativeId||'');let k=null;
  // R769: l302-e3(근거리) 셋에 하나는 소복 처녀, last303 은 번호로 아낙·어부·소복을 차례로(소복을 끄면 그 자리는 어부).
  if((id==='l302-e1'||id==='l302-e3')&&(e.r763From||OLD.test(String(e.name||'')))){const n=slot(e);k=id==='l302-e3'?(n%2===0?'sobok':'fisher'):z==='last303'?['herbwife','fisher','sobok'][n%3]:'herbwife';if(k==='sobok'&&!prefs.sobok)k='fisher';}
+ // R773: 순찰·증원이 이미 바뀐 이름(잠식된 …)을 물려받고 옛 이름 흔적이 없으면 위에서 못 잡는다(last303 순찰 6명이 옛 그림) → 이름으로 고름.
+ else if(id==='l302-e1'||id==='l302-e3'){const nm=String(e.name||'');k=Object.keys(V).find(q=>nm.includes(V[q].name))||null;if(k==='sobok'&&!prefs.sobok)k='fisher';}
  e.r763=k;e.r763Zone=z;e.r763N=k?undefined:e.name;if(k){
   // R74 순찰(유리 망령)은 지도 괴물 그림 표시(r74Monster)가 있으면 frameFor 사슬을 타지 않고 이름도 그 표로 되돌아간다 → R386 처럼 표시를 떼어 둔다(원래 값은 r763Atlas).
   if(e.r74Monster){e.r763Atlas=e.r74Monster;delete e.r74Monster;}rename(e,k);stats.assigned++;}return k;}
