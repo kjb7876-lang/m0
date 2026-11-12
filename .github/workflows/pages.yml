@@ -510,6 +510,8 @@ jobs:
         run: node r96/qa/r522/r522-cpu-check.cjs
       - name: R523 story rooms (clinic ep1a09 + sloth home ep1b02 furnished by room name along the real back walls, presentation only, angle-matched art only) CPU check
         run: node r96/qa/r523/r523-cpu-check.cjs && node r96/qa/r730/r730-cpu-check.cjs && node r96/qa/r731/r731-cpu-check.cjs
+      - name: R713 refuge walls (first map hub stone walls 0.24 -> 0.64 outer / 0.48 inner, floor-side face unchanged, corners filled, hub only) CPU check
+        run: node r96/qa/r713/r713-cpu-check.cjs
       - name: R810 Bulmyeongwi night (last302/last303 navy moonlight ambient, deep amber lamps, no sepia, no spider-crack decals, night fog colour, lamps kept off the guide path; other zones unchanged) CPU check
         run: node r96/qa/r810/r810-cpu-check.cjs
       - name: R852 Bulmyeongwi night without the dirt trail band (last302/last303 only, the unlit band read as a black smoke column; other trail zones unchanged) CPU check
@@ -659,10 +661,20 @@ jobs:
         run: node r96/qa/r620/r620-cpu-check.cjs
       - name: R700 seven-sins boss art audit (size-lock heights match real art, no light matte fringe on drawn art, clean copies keep the body, originals kept) check
         run: python r96/qa/r700/boss-art-check.py
+      - name: R710 hero south idle 6 / hit 4 sheets (feet on the 226 line, stand height ±3%, no alpha residue, flicker ≤2× current, holds not applied) check
+        run: python r96/qa/r710/idle-hit-check.py
+      - name: R710 idle/hit wiring (R119 idle table wrap south only, R143 hit sheet 4 frames by hurt time, old sheets until ready) CPU check
+        run: node r96/qa/r710/r710-cpu-check.cjs
       - name: R760 Bulmyeongwi boss staging (one toned 4-pose set for idle/attack, one size, ink-violet tone + amber eyes, layered afterimages; mobs/other bosses untouched) CPU check
         run: node r96/qa/r760/r760-cpu-check.cjs
       - name: R860 boss key-pose coverage (fallen angel knight, EGO-stealing nightmare king, Balrog draw their R104 key poses; old crop rects fit the whole new frame; the pride cyborg cult leader is no longer hijacked by a same-name mob sheet; Mammon/other mobs untouched) CPU check
         run: node r96/qa/r860/boss-keypose-cover-cpu-check.cjs
+      - name: R800 floor edge mask reused for identical input (no double build on region entry) CPU check
+        run: node r96/qa/r800/edges-cache-cpu-check.cjs
+      - name: R801 samong guide calm (kill quota met / explore / maze / door open → guide fights only enemies within 2.5 tiles and walks to clues and the door; quota left, B/D/G/H/F, hold, lead, outside samong unchanged) CPU check
+        run: node r96/qa/r801/samong-guide-calm-cpu-check.cjs
+      - name: R802 samong S-02 plaza freeze (R615 student walk tint canvas marked static so 26 students stay under the Three recorder snapshot budget) CPU check
+        run: node r96/qa/r802/student-tint-static-cpu-check.cjs
       - name: R790 story key NPC (last303 - the youth in the mist offers gwibitang at the boss door; no gwibitang → door story does not start and the Bulmyeongwi core stays sealed; old saves/guide/survival/co-op untouched) CPU check
         run: node r96/qa/r790/r790-cpu-check.cjs
       - name: R791 story key NPC 2 (last305 - the defeated goblin chief leaves the rose seal by the altar; no seal → exit story does not start; R790 gwibitang gate unchanged, ledgers do not mix) CPU check
@@ -745,6 +757,8 @@ jobs:
         run: node r96/qa/r832/r832-cpu-check.cjs
       - name: R830 thin partition walls become solid main walls
         run: node r96/qa/r830-walls/walls-cpu-check.cjs
+      - name: R838 indoor doorway shapes differ per map (rooms and furniture unchanged)
+        run: node r96/qa/r838-passages/passages-cpu-check.cjs
       - name: R860 enemy-attack hit placement (core hit picture, R259 hero-hit not pinned to overlapping mobs) CPU check
         run: node r96/qa/r860/r860-cpu-check.cjs
       - name: Install pinned sandboxed Chromium

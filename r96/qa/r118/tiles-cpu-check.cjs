@@ -69,7 +69,7 @@ check('no runtime errors',X.inspect().stats.errors===0,X.inspect().lastError);
 // ---- 연결 -----------------------------------------------------------------------------------------------
 const html=fs.readFileSync(path.join(RT,'index.html'),'utf8'),ver=fs.readFileSync(path.join(ROOT,'..','scripts','verify-r96-public.py'),'utf8'),yml=fs.readFileSync(path.join(ROOT,'..','.github/workflows/pages.yml'),'utf8');
 const inputs=JSON.parse(fs.readFileSync(path.join(ROOT,'runtime-inputs.json'),'utf8'));
-check('runtime copy matches source and the script is the last tag in index.html',fs.readFileSync(path.join(RT,'world-tiles-r118.js'),'utf8')===code&&/world-tiles-r118\.js"><\/script>\s*$/.test(html));
+check('runtime copy matches source and the script is the last tag in index.html',fs.readFileSync(path.join(RT,'world-tiles-r118.js'),'utf8')===code&&/world-tiles-r118\.js"><\/script>\s*(?:<script src="\.\/refuge-walls-r713\.js"><\/script>\s*)?$/.test(html));
 check('public verify lists the script; all tile files are in runtime inputs',ver.includes("'world-tiles-r118.js'")&&files.concat(['index.json']).every(f=>inputs.textPaths.includes('assets/r118/tiles/'+f))&&inputs.textPaths.includes('world-tiles-r118.js'));
 check('CI runs this check',yml.includes('node r96/qa/r118/tiles-cpu-check.cjs'));
 console.log(`\n${n-failed}/${n} passed`);process.exit(failed?1:0);
