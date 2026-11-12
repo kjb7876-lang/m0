@@ -43980,7 +43980,7 @@
     {
       "path": "hospital-maze-progression.js",
       "bytes": 25042,
-      "sha256": "7838dc2f08917b12c0b413fabc1e887641935f4af44a84540289ac982904b2f5"
+      "sha256": "d9805ecd38a539e40cd2d7cb730b37103cf2140b6cf3865ff305c19777964463"
     },
     {
       "path": "hospital-maze-visuals.js",
@@ -44810,7 +44810,7 @@
     {
       "path": "survival-r600.js",
       "bytes": 62053,
-      "sha256": "203fc1219bd1e4ac53b1a8d7fcd6d81d466892dc11967b7e7c21d4cb8dcbb8fd"
+      "sha256": "fb8cbb026a12a475b9490c067097f24c590888f3884d97ad04128a82fa0f3f2b"
     },
     {
       "path": "swamp-hands-r474.js",

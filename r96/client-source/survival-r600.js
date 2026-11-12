@@ -154,7 +154,7 @@ function buildRoom(id){const R=roster(id),t=R.template||{},L=layoutFor(id),c=L.s
   storyRosterIds6:[],defeatedActorIds:new Set(),exploration:L,explorationGroups:[],worldR74:1,r75Decorated:true,worldCombatR78:true,worldEnvironmentR81:true,r99Trees:true,r40RosterApplied:true,
   persona:{...(t.persona||{}),phase:'none'},objective:{x:-60,y:-60,path:t.objective?.path}/* 엔진 '기억의 표식'은 지도 밖으로(코어가 그 자리) */,survivalR600:{roster:R,centre:c,arena:L.survivalR600.arena}};
  guardTerrain(r,L);return r;}
-/* R840: 생존 무대 지형 잠금 — 지역 전용 스크립트가 방 id 만 보고 지형을 바꿔 끼우지 못하게 한다(실측: '피로 물든 병원' ep1a08 에서
+/* R850: 생존 무대 지형 잠금 — 지역 전용 스크립트가 방 id 만 보고 지형을 바꿔 끼우지 못하게 한다(실측: '피로 물든 병원' ep1a08 에서
    병원 엔진 tick 이 매 프레임 room.exploration 을 병원 미로(벽 193개)로 갈아 끼워 몹이 벽 속 방에 갇히고 정화 완료가 안 됐다).
    읽기는 그대로, 다른 지형을 넣는 쓰기는 무시하고 센다. 바닥·벽 배열 안을 손질하는 것(같은 객체)은 막지 않는다. */
 function guardTerrain(r,L){try{Object.defineProperty(r,'exploration',{configurable:true,enumerable:true,get:()=>L,set(v){if(v!==L)stats.terrainGuard=(stats.terrainGuard||0)+1;}});}catch(e){fail(e);}}
@@ -163,7 +163,7 @@ function rosterPaths(R){const out=new Set();for(const e of [...R.normal,R.boss,R
 // ── 무대 들어가기 ──
 async function go(i){if(!S||entering)return false;const id=S.ids[i];const def=G(()=>regionById[id],null);if(!def)return false;
  narrStop();gems=[];beams=[];tails=[];S.ready=false;/* 들어가는 동안(엔진 tick 이 새 방으로 돌 수 있음) 단계 판정을 멈춘다 — 앞 지역 시각으로 '빈 방'을 보고 보스로 넘기던 문제 */S.i=i;S.phase='pre';S.narrating=false;S.narrEndAt=NaN;S.narrMinEnd=0;S.bossUp=false;S.clearAt=NaN;S.stageKills=0;S.core.hp=Math.max(S.core.hp,CS().max*.5);
- S.moving=String(def.title||'');hud(true);/* R840: 불러오기 창이 뜨기 전 빈 시간(지역 스크립트들이 그림을 먼저 읽는 1~3초)에도 넘어가는 중임을 보여 준다 */
+ S.moving=String(def.title||'');hud(true);/* R850: 불러오기 창이 뜨기 전 빈 시간(지역 스크립트들이 그림을 먼저 읽는 1~3초)에도 넘어가는 중임을 보여 준다 */
  const prev=stageRoom;stageRoom=buildRoom(id);
  if(id==='last301')Object.defineProperty(stageRoom,'r75Falling',{configurable:true,enumerable:false,get:()=>!inHitR600,set(){}});/* R75 마지막 결투의 '정해진 쓰러짐'(보스를 살려 두고 장면으로 넘김)은 스토리 전용 — fall() 은 이미 쓰러지는 중이면 그냥 돌아가므로 생존 방에서는 그렇게 답해 끈다.
   지역을 완료로 표시하면 R75 decorate 가 적을 모두 숨기므로 쓰지 않는다. 같은 값을 보는 R75 hitEnemy(쓰러지는 중 영웅 체력 20% 고정)는 생존 hitEnemy 안에서 false 를 보게 한다. 저장·복제 대상이 아니게 열거하지 않는다. */
@@ -277,7 +277,7 @@ function step(dt){const t=G(()=>time,0);if(S.over||!S.ready)return;
  if(S.phase==='clear'&&t>=S.clearAt&&!gems.length&&!entering&&!choosing&&!narrPlaying()){const n=advance(S.i,S.loop,S.ids.length);if(n.loop>S.loop)stats.loops++;S.loop=n.loop;go(n.i);}
  if(t-hudAt>.25)hud(true);}
 
-/* R840: 정화 완료 뒤 대기(2.2초+조각 흡수) 동안 다음 지역 지도·세계 그림을 미리 읽는다 — 넘어갈 때 불러오기 창이 짧아진다.
+/* R850: 정화 완료 뒤 대기(2.2초+조각 흡수) 동안 다음 지역 지도·세계 그림을 미리 읽는다 — 넘어갈 때 불러오기 창이 짧아진다.
    엔진 그림 저장소(ensureImages)를 그대로 쓰므로 같은 그림을 두 번 받지 않는다. 실패는 무시(넘어갈 때 엔진이 다시 읽고 알린다). */
 function prefetchNext(){try{if(!S||typeof ensureImages!=='function')return;const n=advance(S.i,S.loop,S.ids.length),id=S.ids[n.i],def=G(()=>regionById[id],null);if(!def)return;
  const list=[...(def.paths||[]),...(G(()=>window.__STORYWORLD_WORLD_R74__.assetPaths(id,'STORY'),[])||[])];stats.prefetch=(stats.prefetch||0)+1;

@@ -1,4 +1,4 @@
-// R840 무한 생존 실플레이 수정 CPU 검사: ① 생존 무대 지형 잠금(지역 스크립트가 room.exploration 을 바꿔 끼우지 못함)
+// R850 무한 생존 실플레이 수정 CPU 검사: ① 생존 무대 지형 잠금(지역 스크립트가 room.exploration 을 바꿔 끼우지 못함)
 //  ② 병원 미로 진행이 생존 방(ep1a08 같은 id)을 건너뜀 ③ 정화 완료 때 다음 지역 그림 미리 읽기 ④ 전환 중 HUD '다음 지역으로 이동'.
 const fs=require('fs'),path=require('path'),assert=require('assert');
 const root=path.resolve(__dirname,'../..');let n=0;const ok=m=>{n++;console.log('PASS',m);};
@@ -34,5 +34,5 @@ assert.strictEqual(sv,RT('survival-r600.js'));assert.strictEqual(hm,RT('hospital
 // ④ 전환 HUD
 {assert(/S\.moving=String\(def\.title\|\|''\);hud\(true\);/.test(sv)&&/S\.moving='';if\(!ok\|\|/.test(sv));
  assert(/if\(on&&S\?\.active&&S\.moving&&!S\.over\)\{hudEl\.querySelector\('\.s'\)\.textContent='무한 생존 · 다음 지역으로 이동 · '\+S\.moving;/.test(sv));ok('HUD shows "moving to next stage" from go() until the stage is entered (cleared on success and failure)');}
-assert(fs.readFileSync(path.join(root,'..','.github','workflows','pages.yml'),'utf8').includes('r96/qa/r840/r840-cpu-check.cjs'));ok('Pages CPU step');
-console.log('R840 CPU check passed '+n);
+assert(fs.readFileSync(path.join(root,'..','.github','workflows','pages.yml'),'utf8').includes('r96/qa/r850/r850-cpu-check.cjs'));ok('Pages CPU step');
+console.log('R850 CPU check passed '+n);
