@@ -653,6 +653,8 @@ jobs:
         run: node r96/qa/r535/hunter-arrows-cpu-check.cjs
       - name: R597 hold A to auto-cast Q W E R F T with basic attack (S D stay manual, keeps manual 77 percent bonus) CPU check
         run: node r96/qa/r597/auto-a-cpu-check.cjs
+      - name: R705 semi-auto (Space) attacks only and never walks on its own; guide keeps R115 dodge steps CPU check
+        run: node r96/qa/r705/semi-auto-cpu-check.cjs
       - name: R663 QWER locked until learned with passive points, skill level widens range (+8 percent per level), auto-level buys QWER and silk dances CPU check
         run: node r96/qa/r663/skill-growth-cpu-check.cjs
       - name: R561 Lauren gravity chain (Q → gravity well pull → collapse burst, R → crush vortices; no new keys, bosses not pulled, walls respected) CPU check
