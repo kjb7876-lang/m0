@@ -37673,6 +37673,21 @@
       "sha256": "4b21c40cbf37a9f02827e208cf01f2ec3fff32e1f84e9a1e15c3ef0e6ba61749"
     },
     {
+      "path": "assets/r930/tiles/index.json",
+      "bytes": 630,
+      "sha256": "7904ec5df201c088968b6489e62b50098f9c858c6df545136d2e45894a40c01e"
+    },
+    {
+      "path": "assets/r930/tiles/kc-deck.webp",
+      "bytes": 67398,
+      "sha256": "db7d142c5af1f6bd448ef49800f757eba9d5bf7bb9abcd6106092737280ad0fc"
+    },
+    {
+      "path": "assets/r930/tiles/kc-forge.webp",
+      "bytes": 63202,
+      "sha256": "24d7a44d7f21f771a102e3a79629b82f0e18857bec3f283031c03bff248cc0b6"
+    },
+    {
       "path": "assets/r99/clean/assets/cult-v3121/c101_black_rose_prior.webp",
       "bytes": 54936,
       "sha256": "9ac511764c7900ba8149b36c6806487b374d157541484eb1b5ec628f820772f0"
@@ -43224,8 +43239,8 @@
     },
     {
       "path": "cave-r204.js",
-      "bytes": 130834,
-      "sha256": "a11bd16348d8d9840b2abe1c0b931bcf53042c5ba4eb48c7ea83750900d3c9ca"
+      "bytes": 130930,
+      "sha256": "e6118384144bfe079151cb0782efb4b3d0e6afec1802f8058cd6e2427acf3098"
     },
     {
       "path": "chunks/ep1a08-0-0.json",
@@ -44244,8 +44259,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6574458,
-      "sha256": "2f24feb00b2bf81726b2b7df56a9a0f66818d58984c42fc4778175dfb2e53f25"
+      "bytes": 6574503,
+      "sha256": "1244a7cb7a1b47f791dc17be1d151b9004db222339f1d35bf28d48fb8a525d4f"
     },
     {
       "path": "intro-r140.js",
@@ -44266,6 +44281,11 @@
       "path": "kairo-homage-r356.js",
       "bytes": 21048,
       "sha256": "ff5769d70fe4c8e511e748f4099893a21985ab6960e4f1b47b8e21d397ecced6"
+    },
+    {
+      "path": "kairo-tech-r930.js",
+      "bytes": 7779,
+      "sha256": "71cfa4bef98aa52501155013f8bed2642a41d2ba218605d1d8f92e6ccb680b91"
     },
     {
       "path": "keys-r291.js",
@@ -45243,9 +45263,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9048,
-  "totalBytes": 1239645414,
-  "webHTMLSha256": "2f24feb00b2bf81726b2b7df56a9a0f66818d58984c42fc4778175dfb2e53f25",
+  "fileCount": 9052,
+  "totalBytes": 1239784564,
+  "webHTMLSha256": "1244a7cb7a1b47f791dc17be1d151b9004db222339f1d35bf28d48fb8a525d4f",
   "largest": [
     {
       "path": "index.html",
