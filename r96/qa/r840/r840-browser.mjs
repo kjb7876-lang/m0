@@ -27,19 +27,50 @@ if(want('manual')){console.log('manual last302');const {ctx,p}=await boot(b);hoo
  await p.evaluate(()=>{const o=room.props.find(q=>q.r840Clue);player.x=o.x;player.y=o.y;});await waitT(p,1);const i3=await Q(p);ok(i3.state==='done','단서 주움');
  const book=await p.evaluate(()=>window.__STORYWORLD_PLAY_R169__.book().find(n=>n.key==='quest:r840:last302'));ok(book&&/실 끊긴 붉은 부적/.test(book.title),'쪽지 모음에 단서 '+JSON.stringify(book));
  ok((await p.evaluate(()=>serializeSave().questR840))?.rooms?.['STORY:last302']?.s==='done','세이브 기록');ok(await ph(p)==='route','R78 단계는 그대로 route(진행을 건드리지 않음)');ok(!i3.lastError,'모듈 오류 없음 '+i3.lastError);await ctx.close();}
-for(const [key,z] of [['guide','last302'],['guide','last305'],['kill','last304'],['gates','last303']]){if(!want(key))continue;console.log(key+' '+z);const {ctx,p}=await boot(b,{vp:{width:640,height:360}});hook(p);await go(p,z);await strong(p);await waitT(p,.3);
+for(const [key,z] of [['guide','last302'],['guide','last305'],['kill','last304'],['gates','last303'],['ep1a','ep1a08'],['ep1a','ep1a09'],['ep1a','ep1a10']]){if(!want(key))continue;console.log(key+' '+z);const {ctx,p}=await boot(b,{vp:{width:640,height:360}});hook(p);await go(p,z);await strong(p);await waitT(p,.3);
+ if(key==='ep1a'){const am=await p.evaluate(()=>room.props.filter(q=>q.r840Amb||q.r840NPC).map(q=>({id:q.id,bl:blocked(q.x,q.y,.3,room)})));ok(am.length>=(z==='ep1a10'?1:2)&&am.every(a=>!a.bl),z+' 인물 자리 '+JSON.stringify(am));await p.evaluate(()=>{const n=room.props.find(q=>q.r840NPC),e=room.exploration.entry,pp=findPath(e,n,room,.31)||[];const at=pp.length>1?pp[pp.length-2]:e;/* 벽 속에 세우지 않게 길 위의 점에 */player.x=at.x;player.y=at.y;});await waitT(p,1.2);await p.screenshot({path:`${OUT}/${z}-npc.png`});}
  const r=await runGuide(p,z);ok(r.q.state==='done','길잡이가 퀘스트를 마친다 '+z+' '+r.secs+'s '+JSON.stringify(r.q.stats));ok(r.panels===0,'길잡이 중 퀘스트 창 0');ok((r.q.stats.fallback||0)===0,'대신 처리 없이 걸어서 마침');ok(!r.q.lastError,'모듈 오류 없음 '+r.q.lastError);
  if(key==='kill')ok(r.q.kills>=r.q.need&&r.q.need>=1,'처치 수 '+r.q.kills+'/'+r.q.need);
+ if(z==='ep1a08'){/* 새빛병원 지하는 R78 단계가 없는 맵 — 곁일만 확인한다 */ok(r.q.kills>=r.q.need,'처치 수 '+r.q.kills+'/'+r.q.need);await ctx.close();continue;}
  // 그 뒤에도 원래 길잡이가 이어진다: 집결(rally) 이후 단계로 넘어가는지. gates 는 R790 관문(door)을 지나 보스 단계까지.
  const goal=key==='gates'?['boss','exit','exitStory','done']:['rally','door','doorStory','boss','exit','exitStory','done'];const t0=Date.now();let cur=await ph(p);
  while(Date.now()-t0<900000&&!goal.includes(cur)){await p.evaluate(()=>{player.hp=player.maxHp=1e9;if(!guide)guide=true;for(let i=0;i<40&&storyScene;i++)advanceScene();});await p.waitForTimeout(2000);const c=await ph(p);if(c!==cur){cur=c;console.log('   ['+z+'] phase '+c+' '+((Date.now()-t0)/1000|0)+'s');}}
  ok(goal.includes(cur),'퀘스트 뒤 서사 진행이 이어진다 '+z+' → '+cur);if(key==='gates')ok(await p.evaluate(()=>window.__STORYWORLD_NPC_R790__.taken()),'R790 귀비탕 관문도 그대로 지나감');await ctx.close();}
-if(want('cinema')){console.log('cinema last302');const ctx=await b.newContext({viewport:{width:640,height:360},deviceScaleFactor:1});await ctx.addInitScript(()=>{localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false}));});
+// samong: 사몽 S-05 경성의 밤 — 길잡이가 S05-1(지현의 잔영)·S05-3(상관의 잔영) 곁일을 창 없이 마치고 사몽 구역 진행이 이어진다. 장면 사진도 남긴다.
+if(want('samong')){console.log('samong S-05');const {ctx,p}=await boot(b,{vp:{width:1280,height:720}});hook(p);
+ await p.evaluate(async()=>{await window.__STORYWORLD_CHEAT777__.activate('777');});await p.waitForFunction(()=>!loading,null,{timeout:90000});await skip(p);
+ ok(await p.evaluate(()=>window.__STORYWORLD_CHEAT777__.goSamong(5,'survival',{force:true}))!==false,'사몽 S-05 로 들어감');await p.waitForFunction(()=>!loading&&layer==='DREAM',null,{timeout:150000});await skip(p);await strong(p);await waitT(p,.5);
+ const zoneNow=()=>p.evaluate(()=>room.samongR103?.zone);ok(await zoneNow()==='sz115-S05-1','S05-1 '+await zoneNow());
+ const i0=await Q(p);ok(i0.visible&&i0.npc,'지현의 잔영이 선다 '+JSON.stringify(i0.npc));
+ const near=await p.evaluate(()=>{const n=room.props.find(q=>q.r840NPC);return {blocked:blocked(n.x,n.y,.3,room),clue:Math.min(...room.props.filter(q=>q.r115Clue).map(q=>Math.hypot(q.x-n.x,q.y-n.y))),entry:Math.hypot(n.x-room.exploration.entry.x,n.y-room.exploration.entry.y)};});
+ ok(!near.blocked&&near.clue>=1.3,'NPC 자리: 빈 칸, 원문 단서와 겹치지 않음 '+JSON.stringify(near));
+ await p.evaluate(()=>{const n=room.props.find(q=>q.r840NPC);player.x=n.x+1.6;player.y=n.y+1.8;});await waitT(p,1.5);await p.screenshot({path:`${OUT}/samong-S05-1-npc.png`});
+ let r=await runGuide(p,'S05-1');ok(r.q.state==='done','길잡이가 S05-1 곁일을 마친다 '+r.secs+'s '+JSON.stringify(r.q.stats));ok(r.panels===0,'퀘스트 창 0');ok((r.q.stats.fallback||0)===0,'대신 마침 없이');
+ ok((await p.evaluate(()=>serializeSave().questR840))?.rooms?.['DREAM:sz115-S05-1']?.s==='done','세이브 DREAM:sz115-S05-1');
+ const book=await p.evaluate(()=>window.__STORYWORLD_PLAY_R169__.book().find(n=>n.key==='quest:r840:sz115-S05-1'));ok(book&&/멎은 손길/.test(book.title),'쪽지 모음에 단서');
+ // 사몽 진행이 이어진다: 다음 구역(S05-2, 45 처치 전투)으로 넘어가는지. 전투 구역을 다 치르는 것은 헤드리스에서 25분을 넘겨(소프트웨어 렌더링) S05-3 은 구역 이동으로 바로 들어간다.
+ const t0=Date.now();let cur=await zoneNow();while(Date.now()-t0<600000&&cur==='sz115-S05-1'){await p.evaluate(()=>{player.hp=player.maxHp=1e9;if(!guide)guide=true;for(let i=0;i<40&&storyScene;i++)advanceScene();});await p.waitForTimeout(3000);cur=await zoneNow();}
+ ok(cur==='sz115-S05-2','곁일 뒤 사몽 진행이 이어져 다음 구역으로 → '+cur+' '+((Date.now()-t0)/1000|0)+'s');ok(!(await Q(p)).visible,'정의 없는 구역(S05-2)에는 세우지 않는다');
+ await p.evaluate(()=>{guide=false;});ok(await p.evaluate(()=>window.__STORYWORLD_SAMONG_R103__.go(5,'explore',{zone:'sz115-S05-3'}))!==false,'S05-3 으로 이동');await p.waitForFunction(()=>!loading&&room.samongR103?.zone==='sz115-S05-3',null,{timeout:150000});await skip(p);await strong(p);await waitT(p,.5);
+ const i3=await Q(p);ok(i3.visible&&i3.npc&&/superior/.test(i3.npc.id),'상관의 잔영이 선다 '+JSON.stringify(i3.npc));await p.evaluate(()=>{const n=room.props.find(q=>q.r840NPC);player.x=n.x+1.6;player.y=n.y+1.8;});await waitT(p,1.5);await p.screenshot({path:`${OUT}/samong-S05-3-npc.png`});
+ r=await runGuide(p,'S05-3');ok(r.q.state==='done','길잡이가 S05-3 곁일을 마친다 '+r.secs+'s');ok((r.q.stats.fallback||0)===0&&r.q.stats.broken>=2,'S05-3 도 대신 마침 없이 조형물을 부숴서 '+JSON.stringify(r.q.stats));ok(r.panels===0,'퀘스트 창 0');ok(!r.q.lastError,'모듈 오류 없음 '+r.q.lastError);await ctx.close();}
+// dys(R842): 사몽 S-06 디스토피아 다섯 구역 — 길잡이가 이야기 듣기·처치·조형물 곁일을 창 없이 마친다. 구역은 이동으로 바로 들어간다. R840_DYS_ZONES=2,3 처럼 고를 수 있다.
+if(want('dys')){console.log('dys S-06');const {ctx,p}=await boot(b,{vp:{width:640,height:360}});hook(p);
+ ok(await p.evaluate(()=>window.__STORYWORLD_CHEAT777__.goSamong(6,'survival',{force:true}))!==false,'사몽 S-06 으로 들어감');await p.waitForFunction(()=>!loading&&layer==='DREAM',null,{timeout:150000});await skip(p);await strong(p);
+ for(const k of (process.env.R840_DYS_ZONES||'2,3,15,18,22').split(',')){const z='sz115-S06-'+k;await p.evaluate(()=>{guide=false;});
+  await p.evaluate(z=>window.__STORYWORLD_SAMONG_R103__.go(6,'explore',{zone:z}),z);await p.waitForFunction(z=>!loading&&room.samongR103?.zone===z,z,{timeout:150000});await skip(p);await strong(p);await waitT(p,.5);
+  const i=await Q(p);ok(i.visible&&i.npc,z+' 인물이 선다 '+JSON.stringify(i.npc));const am=await p.evaluate(()=>room.props.filter(q=>q.r840Amb||q.r840NPC).map(q=>({id:q.id,bl:blocked(q.x,q.y,.3,room)})));ok(am.every(a=>!a.bl),z+' 인물 자리가 빈 칸 '+JSON.stringify(am));
+  await p.screenshot({path:`${OUT}/dys-${k}-npc.png`});
+  const r=await runGuide(p,'S06-'+k);ok(r.q.state==='done','길잡이가 '+z+' 곁일을 마친다 '+r.secs+'s '+JSON.stringify(r.q.stats));ok(r.panels===0,z+' 퀘스트 창 0');console.log('   fallback(누적) '+(r.q.stats.fallback||0));
+  ok((await p.evaluate(()=>serializeSave().questR840))?.rooms?.['DREAM:'+z]?.s==='done','세이브 DREAM:'+z);}
+ ok(((await Q(p)).stats.fallback||0)===0,'대신 마침 0(다섯 구역 누적)');ok(!(await Q(p)).lastError,'모듈 오류 없음');await ctx.close();}
+const CZ=process.env.R840_CINEMA_ZONE||'last302';/* 영화 모드로 확인할 지역(기본 last302, R841: ep1a09 등) */
+if(want('cinema')){console.log('cinema '+CZ);const ctx=await b.newContext({viewport:{width:640,height:360},deviceScaleFactor:1});await ctx.addInitScript(()=>{localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false}));});
  const p=await ctx.newPage();hook(p);await p.goto(URL);await p.locator('#cinemaStartR461').click({timeout:180000});const slot=p.locator('#slotConfirmR73');if(await slot.count())await slot.click().catch(()=>{});
  await p.waitForFunction(()=>started&&!loading,null,{timeout:240000});const mode=await p.evaluate(()=>({rec:serializeSave().playModeR461,on:window.__STORYWORLD_CINEMA_MODE_R370__?.prefs?.().on,guide}));ok(mode.rec==='cinema','영화 기록 '+JSON.stringify(mode));
  await skip(p);await p.evaluate(async()=>{await window.__STORYWORLD_CHEAT777__.activate('777');});await p.waitForFunction(()=>!loading,null,{timeout:90000});await skip(p);/* 새 여정은 dist00 만 열려 있다 → 777 로 연다 */
- for(let i=0;i<60&&await p.evaluate(()=>room?.id!=='last302');i++){await p.evaluate(()=>{for(let i=0;i<160&&storyScene;i++)advanceScene();if(!loading&&room?.id!=='last302')enterRegion('last302',null,{layer:'STORY',restore:true});});await p.waitForTimeout(5000);}
- await p.waitForFunction(()=>!loading&&room?.id==='last302',null,{timeout:120000});await strong(p);console.log('   [cinema] in last302 '+JSON.stringify(await p.evaluate(()=>({guide,cin:window.__STORYWORLD_CINEMA_MODE_R370__?.prefs?.().on,rec:serializeSave().playModeR461}))));
+ for(let i=0;i<60&&await p.evaluate(CZ=>room?.id!==CZ,CZ);i++){await p.evaluate(CZ=>{for(let i=0;i<160&&storyScene;i++)advanceScene();if(!loading&&room?.id!==CZ)enterRegion(CZ,null,{layer:'STORY',restore:true});},CZ);await p.waitForTimeout(5000);}
+ await p.waitForFunction(CZ=>!loading&&room?.id===CZ,CZ,{timeout:120000});await strong(p);console.log('   [cinema] in '+CZ+' '+JSON.stringify(await p.evaluate(()=>({guide,cin:window.__STORYWORLD_CINEMA_MODE_R370__?.prefs?.().on,rec:serializeSave().playModeR461}))));
  await p.evaluate(()=>{window.__r840Panels=0;window.__r840Modal=0;const o=openPanel;openPanel=function(h){if(/questTakeR840/.test(String(h)))window.__r840Panels++;return o.apply(this,arguments);};});
  const t0=Date.now();let last='';while(Date.now()-t0<900000){const q=await Q(p);const s=q.state+'/'+q.hits;if(s!==last){last=s;console.log('   [cinema] '+((Date.now()-t0)/1000|0)+'s '+s+' phase='+q.phase+' guide='+await p.evaluate(()=>guide));}if(q.state==='done')break;await strong(p);await p.waitForTimeout(1500);}
  const q=await Q(p);ok(q.state==='done','영화 모드: 퀘스트를 스스로 마친다 '+JSON.stringify(q.stats));ok(await p.evaluate(()=>window.__r840Panels)===0,'영화 모드: 퀘스트 창 0');ok(await p.evaluate(()=>guide===true),'영화 모드 길잡이는 그대로 켜져 있다');ok(!q.lastError,'모듈 오류 없음 '+q.lastError);
