@@ -144,11 +144,12 @@ function mulFor(r,e){if(!curPh||!(r.enemies||[]).includes(e)||!alive(e))return 1
 try{if(typeof hitEnemy==='function'){const base=hitEnemy;hitEnemy=function(e,value,...a){try{if((m!==1||addM!==1)&&Number.isFinite(value)&&value>0&&curPh&&active()){const r=G(()=>room,null);const k=r?mulFor(r,e):1;if(k!==1){value=value*k;stats.hits++;}}
    if(holding(e)&&Number.isFinite(value)&&value>0){value=Math.min(value,Math.max(0,e.hp-e.maxHp*HOLD_FLOOR));if(!(value>0))return false;}}catch(err){fail(err);}return base.call(this,e,value,...a);};}}catch(e){fail(e);}
 // 지역 이동 잠금(실화): 음성이 남아 있으면 음성이 끝날 때까지 이동을 미룬다.
-let lockP=null;
+let lockP=null,lockTok=0;
 try{if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=function(id,from,opt,...a){
-  try{if(prefs.lock&&!opt?.restore&&active()&&real()&&G(()=>player?.hp,0)>0&&voiceLeft()>DONE_V&&id!==G(()=>room?.id,null)){if(lockP)return lockP;stats.locks++;const self=this,args=[id,from,opt,...a],t0=now();
+  try{if(opt?.travel777R72){if(lockP){lockTok++;lockP=null;}return base.apply(this,arguments);}}catch(e){fail(e);}
+  try{if(prefs.lock&&!opt?.restore&&active()&&real()&&G(()=>player?.hp,0)>0&&voiceLeft()>DONE_V&&id!==G(()=>room?.id,null)){if(lockP)return lockP;stats.locks++;const self=this,args=[id,from,opt,...a],t0=now(),tok=++lockTok;
     try{if(typeof toast==='function')toast('서사가 끝나면 다음 지역으로 갑니다',2.2);}catch(_){}
-    lockP=new Promise(res=>{const w=()=>{let go=true;try{go=!prefs.lock||!active()||voiceLeft()<=DONE_V||now()-t0>LOCK_MAX||!(G(()=>player?.hp,0)>0);}catch(_){}
+    lockP=new Promise(res=>{const w=()=>{if(tok!==lockTok){res(false);return;}let go=true;try{go=!prefs.lock||!active()||voiceLeft()<=DONE_V||now()-t0>LOCK_MAX||!(G(()=>player?.hp,0)>0);}catch(_){}
       if(go){lockP=null;res(base.apply(self,args));}else setTimeout(w,300);};setTimeout(w,300);});return lockP;}}catch(e){fail(e);}
   return base.apply(this,arguments);};}}catch(e){fail(e);}
 function set(p={}){for(const k of Object.keys(prefs))if(typeof p[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}if(!prefs.pace){m=1;addM=1;}return{...prefs};}
