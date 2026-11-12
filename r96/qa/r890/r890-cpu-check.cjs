@@ -20,11 +20,18 @@ let saved=null;const win2={};new Function('window','document','localStorage',sv)
 assert.strictEqual(win2.__STORYWORLD_SURVIVAL_R600__.track(),'combat');assert.strictEqual(win2.__STORYWORLD_SURVIVAL_R600__.setTrack('story'),'story');
 assert.strictEqual(saved[0],'storyworld.r600.survival');const sp=JSON.parse(saved[1]);assert.strictEqual(sp.track,'story');assert.strictEqual(sp.voice,true);
 assert.strictEqual(win2.__STORYWORLD_SURVIVAL_R600__.setTrack('nope'),'story');ok('setTrack saves {track,voice} to the same key and ignores unknown values');
-assert(/id='r890TrackBtn'|b\.id='r890TrackBtn'/.test(sv));assert(/nav\.topnav/.test(sv));assert(/b\.style\.display=show\?'':'none'/.test(sv));ok('top bar toggle button exists and shows only inside survival');
+assert(/id='r890TrackBtn'|b\.id='r890TrackBtn'/.test(sv));assert(/nav\.topnav/.test(sv));assert(/for\(const x of \[b,sb,mb\]\)x\.style\.display=show\?'':'none'/.test(sv));ok('top bar toggle button exists and shows only inside survival');
 assert(/function applyTrack\(\)\{[^}]*__STORYWORLD_VOICE_R381__\?\.stop\?\.\(\)/.test(sv));ok('switching to combat stops the sentence being read aloud');
 assert(/!r\.survivalR600/.test(cine.match(/function eligible\(r\)\{[^\n]*\}/)[0]));
 {const m=cine.match(/function eligible\(r\)\{[^\n]*\}/)[0];const f=new Function('SCENES','solo','prefs','finished','layer','return ('+m+')')(new Set(['dist01']),()=>true,{seen:[]},()=>false,'STORY');
  assert.strictEqual(f({id:'dist01',layer:'STORY'}),true);assert.strictEqual(f({id:'dist01',layer:'STORY',survivalR600:{}}),false);}
 ok('R880 line-art cutscene skips survival rooms (same id) so story mode keeps its first viewing');
+// ⑤ 사용자 07:22Z "무한생존모드에서도 효과음이나 배경음 키고 끄는거 자유롭게": 생존 중 위쪽 단추 줄에 효과음·배경음 토글(엔진 설정 settings.sound·music 을 그대로 씀)
+{assert(/audioBtn\(n,'r890SfxBtn','sound','효과음'/.test(sv)&&/audioBtn\(n,'r890BgmBtn','music','배경음'/.test(sv),'sfx/bgm buttons');
+ const m=sv.match(/function toggleAudio\(k\)\{[\s\S]*?return settings\[k\];\}/);assert(m,'toggleAudio');
+ const settings={sound:true,music:true};let stopped=0,shown=[];const f=new Function('settings','stopEffects','toast','trackBtn','fail',m[0]+';return toggleAudio;')(settings,()=>stopped++,(t)=>shown.push(t),()=>{},e=>{throw e;});
+ assert.strictEqual(f('sound'),false);assert.strictEqual(settings.sound,false);assert.strictEqual(stopped,1);assert.strictEqual(f('sound'),true);assert.strictEqual(settings.sound,true);
+ assert.strictEqual(f('music'),false);assert.strictEqual(settings.music,false);assert.strictEqual(f('music'),true);assert.strictEqual(f('nope'),null);assert(shown.length===4);
+ ok('survival top bar toggles sound effects and background music freely (engine settings, effects stop at once)');}
 assert(fs.readFileSync(path.join(root,'..','.github','workflows','pages.yml'),'utf8').includes('r96/qa/r890/r890-cpu-check.cjs'));ok('Pages CPU step');
 console.log('R890 CPU check passed '+n);

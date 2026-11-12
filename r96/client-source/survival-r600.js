@@ -118,10 +118,15 @@ function applyTrack(){prefs.voice=TRACKS[prefs.track].voice;try{if(!prefs.voice)
   if(N.cur){N.q.unshift(N.cur);N.gen++;N.cur=null;clearTimeout(N.timer);N.timer=setTimeout(narrNext,0);}}/* 읽던 문장은 음성 없이 자막으로 다시 띄운다(내용이 빠지지 않게) */}catch(e){fail(e);}
  try{subsEl?.classList.toggle('compact',!!TRACKS[prefs.track].compact);}catch(_){}trackBtn();}
 function setTrack(t){if(!Object.prototype.hasOwnProperty.call(TRACKS,t))return prefs.track;prefs.track=t;try{localStorage.setItem(KEY,JSON.stringify({track:t,voice:TRACKS[t].voice}));}catch(_){}applyTrack();return t;}
+// 효과음·배경음 토글(사용자 11-12 07:22Z "무한생존모드에서도 효과음이나 배경음 키고 끄는거 자유롭게") — 엔진 설정(settings.sound·music, 설정 창의 같은 칸)을 그대로 바꾼다.
+function toggleAudio(k){if(k!=='sound'&&k!=='music')return null;settings[k]=!settings[k];if(k==='sound'&&!settings.sound){try{stopEffects();}catch(_){}}
+ try{toast?.((k==='sound'?'효과음 ':'배경음 ')+(settings[k]?'켬':'끔'),1.6);}catch(_){}trackBtn();return settings[k];}
+function audioBtn(n,id,k,label,before){let b=document.getElementById(id);if(!b){b=document.createElement('button');b.id=id;b.type='button';b.onclick=()=>{try{toggleAudio(k);}catch(e){fail(e);}};n.insertBefore(b,before||n.firstChild);}
+ const on=!!G(()=>settings[k],true);if(b.textContent!==label)b.textContent=label;b.classList.toggle('r890Off',!on);b.setAttribute('aria-pressed',on?'true':'false');b.title=label+' '+(on?'켜짐 — 눌러서 끄기':'꺼짐 — 눌러서 켜기');return b;}
 // 위쪽 단추 줄 '서사' 토글(길잡이 단추처럼 화면에 바로 보임) — 생존 안에서만. 첫 지역에서 한 번 알림.
 function trackBtn(){try{const n=document.querySelector('nav.topnav');if(!n)return;let b=document.getElementById('r890TrackBtn');
  if(!b){ensureCss();b=document.createElement('button');b.id='r890TrackBtn';b.type='button';b.onclick=()=>{try{const t=setTrack(prefs.track==='story'?'combat':'story');toast?.('서사 트랙 · '+TRACKS[t].name+(t==='story'?' (음성 + 자막)':' (음성 끔 · 짧은 자막)'),2.4);}catch(e){fail(e);}};n.insertBefore(b,n.firstChild);}
- const show=here();b.style.display=show?'':'none';if(!show)return;const tx=prefs.track==='story'?'서사 · 음미':'서사 · 전투';if(b.textContent!==tx)b.textContent=tx;
+ const show=here(),sb=audioBtn(n,'r890SfxBtn','sound','효과음',b.nextSibling),mb=audioBtn(n,'r890BgmBtn','music','배경음',sb.nextSibling);for(const x of [b,sb,mb])x.style.display=show?'':'none';if(!show)return;const tx=prefs.track==='story'?'서사 · 음미':'서사 · 전투';if(b.textContent!==tx)b.textContent=tx;
  b.title='서사 트랙 바꾸기 — 지금: '+TRACKS[prefs.track].name;b.setAttribute('aria-pressed',prefs.track==='combat'?'true':'false');b.classList.toggle('r890Combat',prefs.track==='combat');
  if(S&&!S.trackHint){S.trackHint=true;try{toast?.('서사 트랙: '+TRACKS[prefs.track].name+' — 위쪽 「서사」 단추로 바꿀 수 있습니다',3.4);}catch(_){}}}catch(e){fail(e);}}
 function vol(){return clamp(G(()=>Number.isFinite(+settings.voice)?+settings.voice:.8,.8),0,1);}
@@ -140,7 +145,7 @@ function subs(it){try{if(!subsEl||!subsEl.isConnected){ensureCss();
   subsEl=document.createElement('div');subsEl.id='r600Subs';subsEl.innerHTML='<div class="w"><span class="n"></span><span class="t"></span></div>';document.body.appendChild(subsEl);}
  subsEl.classList.toggle('compact',!!TRACKS[prefs.track].compact);if(!it){subsEl.classList.remove('on');return;}subsEl.querySelector('.n').textContent=it.narr||'';subsEl.querySelector('.t').textContent=it.text;subsEl.classList.add('on');}catch(e){fail(e);}}
 const CSS='#r600Subs{position:fixed;left:50%;bottom:calc(136px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);width:min(820px,calc(100vw - 32px));z-index:8990;pointer-events:none;opacity:0;transition:opacity .4s ease;text-align:center}'+
- '#r600Subs.compact{bottom:calc(150px + env(safe-area-inset-bottom,0px))}#r600Subs.compact .w{padding:4px 12px 5px;background:rgba(10,7,9,.36)}#r600Subs.compact .n{display:none}#r600Subs.compact .t{font-size:13px;line-height:1.4;opacity:.86}#r890TrackBtn.r890Combat{color:#e6c27a}'+
+ '#r600Subs.compact{bottom:calc(150px + env(safe-area-inset-bottom,0px))}#r600Subs.compact .w{padding:4px 12px 5px;background:rgba(10,7,9,.36)}#r600Subs.compact .n{display:none}#r600Subs.compact .t{font-size:13px;line-height:1.4;opacity:.86}#r890TrackBtn.r890Combat{color:#e6c27a}#r890SfxBtn.r890Off,#r890BgmBtn.r890Off{opacity:.55;text-decoration:line-through}'+
  '#r600Subs.on{opacity:1}#r600Subs .w{display:inline-block;max-width:100%;padding:7px 16px 9px;border-radius:6px;background:linear-gradient(180deg,rgba(10,7,9,.48),rgba(10,7,9,.7));box-shadow:0 0 0 1px rgba(120,210,200,.16) inset}'+
  '#r600Subs .n{display:block;font-size:12px;letter-spacing:.08em;color:#8fd4c8;opacity:.85;margin-bottom:2px}#r600Subs .n:empty{display:none}'+
  '#r600Subs .t{display:block;font-size:16px;line-height:1.5;color:#efe6d6;text-shadow:0 1px 2px #000,0 0 8px rgba(0,0,0,.8);word-break:keep-all;overflow-wrap:anywhere}'+
