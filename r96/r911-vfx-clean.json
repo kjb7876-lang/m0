@@ -1,0 +1,151 @@
+{
+ "revision": "R911-vfx-clean-2",
+ "rows": [
+  {
+   "path": "assets/vfx/heroes/gunner-e.webp",
+   "source_sha256": "15d8caa23b44d730e4690a7da39c42df38ceeb5c28465188165d8767e642d6fe",
+   "source_bytes": 14400,
+   "clean": "assets/r911/clean/assets/vfx/heroes/gunner-e.webp",
+   "clean_sha256": "0020e9f6c7771090df994d768812b1697a3690e823dda0f8c0e52b47f7076220",
+   "size": [
+    256,
+    256
+   ],
+   "removed_pixels": 5,
+   "reason": "몸통과 떨어진 가장자리 잔선(시트 이웃 칸 조각)만 투명하게, 다른 픽셀은 그대로"
+  },
+  {
+   "path": "assets/vfx/heroes/hwando-e.webp",
+   "source_sha256": "5e2a5aa060053f43db75e44bae9b134def7b435d3734f7e660cfa65bb827d5aa",
+   "source_bytes": 13042,
+   "clean": "assets/r911/clean/assets/vfx/heroes/hwando-e.webp",
+   "clean_sha256": "f723887780df7d2ef854ee1af4ad489c876d409b2c19ef2f37e652bd34f46646",
+   "size": [
+    256,
+    256
+   ],
+   "removed_pixels": 235,
+   "reason": "몸통과 떨어진 가장자리 잔선(시트 이웃 칸 조각)만 투명하게, 다른 픽셀은 그대로"
+  },
+  {
+   "path": "assets/vfx/heroes/lauren-q.webp",
+   "source_sha256": "f75d93fd44b48a297059f7f67a6bfaf244dbee6d65195a4ec0f3079abfbd4a60",
+   "source_bytes": 13136,
+   "clean": "assets/r911/clean/assets/vfx/heroes/lauren-q.webp",
+   "clean_sha256": "68d72c03f0d2bfd179992d39c4129861202f6717aff046a051336d008d3f13fa",
+   "size": [
+    256,
+    256
+   ],
+   "removed_pixels": 6,
+   "reason": "몸통과 떨어진 가장자리 잔선(시트 이웃 칸 조각)만 투명하게, 다른 픽셀은 그대로"
+  },
+  {
+   "path": "assets/vfx/heroes/lauren-r.webp",
+   "source_sha256": "bf4b31028591b0275f247b56f641eef3945e8add5bec80b6cd204a2c514bfa3f",
+   "source_bytes": 11460,
+   "clean": "assets/r911/clean/assets/vfx/heroes/lauren-r.webp",
+   "clean_sha256": "0921f3a496f7561bc8f65b94002a08cefdb6fd05335c4f9edccbd2f69d68c396",
+   "size": [
+    256,
+    256
+   ],
+   "removed_pixels": 29,
+   "reason": "몸통과 떨어진 가장자리 잔선(시트 이웃 칸 조각)만 투명하게, 다른 픽셀은 그대로"
+  },
+  {
+   "path": "assets/vfx/heroes/neon-e.webp",
+   "source_sha256": "b47b10e2618ed7f815ac884569d083e122273deef9f9761775f90d13b7ca5e26",
+   "source_bytes": 12814,
+   "clean": "assets/r911/clean/assets/vfx/heroes/neon-e.webp",
+   "clean_sha256": "2ddfd819a7381a56ba61079130f3ee09933b87dcba26cd9050fadc56e12ab9e5",
+   "size": [
+    256,
+    256
+   ],
+   "removed_pixels": 55,
+   "reason": "몸통과 떨어진 가장자리 잔선(시트 이웃 칸 조각)만 투명하게, 다른 픽셀은 그대로"
+  },
+  {
+   "path": "assets/vfx/heroes/seoha-e.webp",
+   "source_sha256": "e9296d49e53e65972b6fa042e6ba9fed50035bfa379a799cd636f2d47eae7f81",
+   "source_bytes": 9520,
+   "clean": "assets/r911/clean/assets/vfx/heroes/seoha-e.webp",
+   "clean_sha256": "3dd69e2d7b4b568b7c42ab891449d3bf5f3d7adc1a441020bd273b533f71cf50",
+   "size": [
+    256,
+    256
+   ],
+   "removed_pixels": 56,
+   "reason": "몸통과 떨어진 가장자리 잔선(시트 이웃 칸 조각)만 투명하게, 다른 픽셀은 그대로"
+  },
+  {
+   "path": "assets/vfx/heroes/seoha-w.webp",
+   "source_sha256": "e5f9c5600e340213acdfb04c4cdc11fef460c0949a0dfe39469ffad7e2656dde",
+   "source_bytes": 20766,
+   "clean": "assets/r911/clean/assets/vfx/heroes/seoha-w.webp",
+   "clean_sha256": "0d77a6e070e2db983cd199219e825b7e41607eeefff779f216a8e134e8f2a0ae",
+   "size": [
+    256,
+    256
+   ],
+   "removed_pixels": 46,
+   "reason": "몸통과 떨어진 가장자리 잔선(시트 이웃 칸 조각)만 투명하게, 다른 픽셀은 그대로"
+  },
+  {
+   "path": "assets/vfx/heroes/slayer-r.webp",
+   "source_sha256": "b3985c6f5040d98813c442a716aee87525463a27d5a3d17afa2ffbb4347972a5",
+   "source_bytes": 21084,
+   "clean": "assets/r911/clean/assets/vfx/heroes/slayer-r.webp",
+   "clean_sha256": "f10e264b690ddedaecd39458ee46f8508bab4a9454a1383a722246fc310bc2eb",
+   "size": [
+    256,
+    256
+   ],
+   "removed_pixels": 72,
+   "reason": "몸통과 떨어진 가장자리 잔선(시트 이웃 칸 조각)만 투명하게, 다른 픽셀은 그대로"
+  },
+  {
+   "path": "assets/vfx/generated/v300/barrier-sigil.webp",
+   "source_sha256": "6c2fd3c7b917591bebea369f15ad5c434e2b20e6f5c1a42e1a270198d1f40439",
+   "source_bytes": 35084,
+   "clean": "assets/r911/clean/assets/vfx/generated/v300/barrier-sigil.webp",
+   "clean_sha256": "ab66c52da74d110303cf78d590d37acf3981927c485f128dfa0c5c4dc8bff4a8",
+   "size": [
+    512,
+    512
+   ],
+   "removed_pixels": 27,
+   "reason": "몸통과 떨어진 가장자리 잔선(시트 이웃 칸 조각)만 투명하게, 다른 픽셀은 그대로"
+  },
+  {
+   "path": "assets/vfx/generated/v300/time-ring.webp",
+   "source_sha256": "337c866b9cb64eae70701c21fd87353f111be7ed9bf9f126ba60571ae0603eab",
+   "source_bytes": 38242,
+   "clean": "assets/r911/clean/assets/vfx/generated/v300/time-ring.webp",
+   "clean_sha256": "3fc52030de7d7cdcf2a7de3a59286842ba90a822ab9df31eff13024c07f9536f",
+   "size": [
+    512,
+    512
+   ],
+   "removed_pixels": 30,
+   "reason": "몸통과 떨어진 가장자리 잔선(시트 이웃 칸 조각)만 투명하게, 다른 픽셀은 그대로"
+  }
+ ],
+ "derived": [
+  {
+   "path": "assets/vfx/heroes/gunner-laser-bullet.webp",
+   "from": "assets/vfx/heroes/gunner-a.webp",
+   "rotate": 135,
+   "out": "assets/r911/derived/gunner-laser-bullet.webp",
+   "reason": "평면 벡터 캡슐(그라데이션 계단) → 같은 영웅의 칠한 혜성 그림. 머리 방향을 진행 방향으로 돌림",
+   "from_sha256": "cd3cdded50b80cbc3e51b18308945ea2b124978b48c4cee96f646f166ac0a5c9",
+   "replaced_sha256": "c936fb2b69b66d7b90f7de030602c8fa7a45fec6d3460310ab833b614623c9b6",
+   "out_sha256": "cdee5aec52a78ac3eec51a7ebb3557f21370429468f11507a7940def13b1e47a",
+   "size": [
+    256,
+    256
+   ]
+  }
+ ]
+}

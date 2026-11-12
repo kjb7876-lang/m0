@@ -9,6 +9,8 @@ for(const zone of ['dist06','last302']){
  const sum=await p.evaluate(()=>({s:document.getElementById('questInlineSummary').textContent,pend:typeof firstPending==='function'?firstPending(layer)?.id:null,zone}));
  console.log(zone,JSON.stringify(sum));
  ok(!/입니다\. 열린 길로/.test(sum.s),zone+' 길잡이 줄에 옛 긴 문장이 없다',sum.s);
+ ok(!/다음 기억/.test(sum.s),zone+' 길잡이 줄에 다음 기억 안내가 없다(맵 이름만)',sum.s);
+ {const v=await p.evaluate(()=>({title:document.getElementById('questTitle').textContent,goal:document.getElementById('questText').textContent,region:room.id&&regionById[room.id].title}));ok(v.title===v.region&&!/다음 기억은/.test(v.goal),zone+' 맵 이름은 그대로·목표 글에도 안내 없음',v);}
  const m=/→\s*(.+)$/.exec(sum.s);ok(!m||sum.s.split(m[1]).length===2,zone+' 목적지는 한 번만',sum.s);
  await p.screenshot({path:OUT+'/'+zone+'-hud.png',clip:{x:0,y:0,width:520,height:140}});
  // R177 종이
