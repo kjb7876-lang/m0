@@ -3,7 +3,7 @@
  * 맘몬 맵(금고 장부감시자, Codex 작업)·불면귀(검은 안개 심장, 불면귀 묶음)는 뺐다. 소리는 ElevenLabs 로 새로 만들어 scripts/build-sfx-r789.py 로 다듬었다.
  *  - 피격: hitEnemy 가 받아들인 타격 뒤, 중간보스가 아직 살아 있으면 r789MHit_<이름>. 중간보스마다 0.9초에 한 번. 무기 재질 적중음(R785)은 그대로.
  *  - 사망: killEnemy 로 처음 죽은 중간보스에 r789MDie_<이름>(allowModal). 엔진 처치음은 그대로.
- *  - 공격 시작: bossVolley 와 근접 공격 시작(e.attack.id 가 바뀐 순간)에 r789MAtk_<이름>. 1.2초에 한 번, 전투 중·창 없을 때만.
+ *  - 공격 시작: bossVolley, 근접 공격 시작(e.attack.id 가 바뀐 순간), 서사 패턴 공격 시작(e.storyAttackStart5 가 바뀐 순간, R965)에 r789MAtk_<이름>. 1.2초에 한 번, 전투 중·창 없을 때만.
  *  - 보스(e.boss)는 R788 몫이라 건드리지 않는다. 판정·체력·패턴은 손대지 않는다. 끄기: localStorage storyworld.r789.sfx = '0'. Canonical source; copied by scripts/sync-r99.py. */
 (()=>{'use strict';
  if(window.__STORYWORLD_SFX_R789__)return;
@@ -30,7 +30,9 @@
  function warm(list){try{if(typeof audioBuffer!=='function'||typeof audioUnlocked!=='undefined'&&!audioUnlocked)return;const ss=[...new Set(list.map(slugFor).filter(Boolean))].sort(),key=ss.join();if(!key||key===warmKey)return;warmKey=key;
   for(const s of ss)for(const [K] of SETS)for(const r of soundProfiles?.['r789'+K+'_'+s]||[])try{Promise.resolve(audioBuffer(r.path)).catch(()=>{});}catch(_){}stats.warmed++;}catch(_){stats.errors++;}}
  function tick(){try{const list=typeof room!=='undefined'&&room&&Array.isArray(room.enemies)?room.enemies:null;if(!list)return;warm(list);
-  for(const e of list){if(!slugFor(e))continue;const id=e.attack?.id;if(!seenAtk.has(e)){seenAtk.set(e,id);continue;}if(id==null||seenAtk.get(e)===id){seenAtk.set(e,id);continue;}seenAtk.set(e,id);attack(e);}
+  // R965: 엔진 서사 패턴 공격(setAttackPose5)은 attack 에 id 가 없고 bossVolley 도 안 부른다 → storyAttackStart5 가 바뀐 순간도 공격 시작으로 본다(R964 가 보스에서 고친 것과 같음).
+  for(const e of list){if(!slugFor(e))continue;const id=e.attack?.id,ps=typeof e.storyAttackStart5==='number'&&e.storyAttackStart5>0?e.storyAttackStart5:null,o=seenAtk.get(e);seenAtk.set(e,{id,ps});
+   if(o&&((id!=null&&o.id!==id)||(ps!=null&&o.ps!==ps)))attack(e);}
  }catch(_){stats.errors++;}}
  if(on){
   try{apply();}catch(_){stats.errors++;}
