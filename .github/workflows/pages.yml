@@ -430,6 +430,8 @@ jobs:
         run: node r96/qa/r545/r545-cpu-check.cjs
       - name: R546 per-hero attack and skill sounds, blink, parry, EGO, awakening, clear, upgrade, fall, panel, portal and enemy-shot sounds CPU check
         run: node r96/qa/r546/r546-cpu-check.cjs
+      - name: R785 per-hero weapon hit sounds, skill hits, kill finisher and hit overlap limit CPU check
+        run: node r96/qa/r785/r785-cpu-check.cjs
       - name: R664 regional ambience loops (ElevenLabs beds per episode, seamless, quiet) CPU check
         run: node r96/qa/r664/r664-cpu-check.cjs
       - name: R385 mob moves (review list v18 move/rename) CPU check

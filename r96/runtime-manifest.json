@@ -34908,6 +34908,276 @@
       "sha256": "49ac13a0e0f346b3e0dfb15d00abc99faf8c5857e2bd7b9c528a258f06a97ef2"
     },
     {
+      "path": "assets/r785/sfx/hit-gunner-1.ogg",
+      "bytes": 5139,
+      "sha256": "08e0fb76ce723a73d58483a432c070f501c838a9b21e568ac9549a1c49d6a34b"
+    },
+    {
+      "path": "assets/r785/sfx/hit-gunner-2.ogg",
+      "bytes": 5189,
+      "sha256": "600c1fba8de4ad558468724411b7fca1fc918b32c110d164ddffccfe6fd09a78"
+    },
+    {
+      "path": "assets/r785/sfx/hit-gunner-3.ogg",
+      "bytes": 5444,
+      "sha256": "988c30163636806232cdc0dd37389e43365c6c3467c2a586b657a5c5c2d809e2"
+    },
+    {
+      "path": "assets/r785/sfx/hit-gunner-4.ogg",
+      "bytes": 5362,
+      "sha256": "587031206189f67379afc639c25786bcfb78cf2ee8127ca02745c9ea9bfa156b"
+    },
+    {
+      "path": "assets/r785/sfx/hit-hunter-1.ogg",
+      "bytes": 5113,
+      "sha256": "68ac58ed8708fab78064ea881406b6995bb832bcdd3ef94c138317ce185554d1"
+    },
+    {
+      "path": "assets/r785/sfx/hit-hunter-2.ogg",
+      "bytes": 5146,
+      "sha256": "4544bb46f98f22c5702e258b73662774b309d536ae2e7d46b44165563e3817de"
+    },
+    {
+      "path": "assets/r785/sfx/hit-hunter-3.ogg",
+      "bytes": 5026,
+      "sha256": "459bb54ca5f468c61ff650e4f464755400f68f4b15907ff1f34fb6c8de34cc85"
+    },
+    {
+      "path": "assets/r785/sfx/hit-hunter-4.ogg",
+      "bytes": 5092,
+      "sha256": "a6f626800b66b61b46af756e8fd42497fc29c305b4d93e3f04e002a0df7a13e2"
+    },
+    {
+      "path": "assets/r785/sfx/hit-hwando-1.ogg",
+      "bytes": 5716,
+      "sha256": "76b7f243dfffc4ff966f5a31cdd666315d647249bda483b2f959f8adcd75de89"
+    },
+    {
+      "path": "assets/r785/sfx/hit-hwando-2.ogg",
+      "bytes": 5599,
+      "sha256": "a91808a5e33d081e37bcf4278c5fda110a1f0b58a8ad96c4ff206d607ca00917"
+    },
+    {
+      "path": "assets/r785/sfx/hit-hwando-3.ogg",
+      "bytes": 5538,
+      "sha256": "b371d82b32f38d9c906297326cad07a30fa1eb8d57c4edf9fd30527258bbf136"
+    },
+    {
+      "path": "assets/r785/sfx/hit-hwando-4.ogg",
+      "bytes": 5423,
+      "sha256": "2d4f9cfd5c76b531bba8396860e77b00c5e9cb41988568aec5e95ee2f0b70511"
+    },
+    {
+      "path": "assets/r785/sfx/hit-lauren-1.ogg",
+      "bytes": 5767,
+      "sha256": "07feb511f1b48eb6360a60bf072ed81aee2a8b08f165db0e7ea1e07447be8ff9"
+    },
+    {
+      "path": "assets/r785/sfx/hit-lauren-2.ogg",
+      "bytes": 5637,
+      "sha256": "ec901061afd8db36d2a0e496e1de35f6433b7c7211cf38cc08f89ca7eaead807"
+    },
+    {
+      "path": "assets/r785/sfx/hit-lauren-3.ogg",
+      "bytes": 5362,
+      "sha256": "0f417dbe12fa689a7351438782f12ad44e6ff808f58e3ecf82deff944c85fbd5"
+    },
+    {
+      "path": "assets/r785/sfx/hit-lauren-4.ogg",
+      "bytes": 6263,
+      "sha256": "6af2701ba7fcac83cf50dbf8a0b81ba84c38faee49c332f221064610e199b4e6"
+    },
+    {
+      "path": "assets/r785/sfx/hit-michaela-1.ogg",
+      "bytes": 5539,
+      "sha256": "6db46afa64df0f3169b6a86734000bc25d2c95b0c8408e1c5c3adcf73f8565e5"
+    },
+    {
+      "path": "assets/r785/sfx/hit-michaela-2.ogg",
+      "bytes": 5458,
+      "sha256": "c539a89ad903819bccb39d6094f5582015b7599979a8570ec7b70cd46fb8b412"
+    },
+    {
+      "path": "assets/r785/sfx/hit-michaela-3.ogg",
+      "bytes": 5353,
+      "sha256": "4d4e779ceb5a60155486718e08e65f0a1cb26219a5c88d1fdb4b7338b32cea2a"
+    },
+    {
+      "path": "assets/r785/sfx/hit-michaela-4.ogg",
+      "bytes": 5474,
+      "sha256": "98d7f1781e3572b463b1740050ad9d4973a3277fc6e4cec1ee6c90bba9b436bb"
+    },
+    {
+      "path": "assets/r785/sfx/hit-neon-1.ogg",
+      "bytes": 5696,
+      "sha256": "93050bec8b2429415c0953d2fb300f73feaf43f55c441a645f42a091a36dfbe4"
+    },
+    {
+      "path": "assets/r785/sfx/hit-neon-2.ogg",
+      "bytes": 5636,
+      "sha256": "d99fd330b90753367f73457efb56ff90352c55d104dd23dbe931f2d729482b1d"
+    },
+    {
+      "path": "assets/r785/sfx/hit-neon-3.ogg",
+      "bytes": 5823,
+      "sha256": "df37de6c9c8685a2eb2b8e095390426def618992ca95d8d504e33fa8e3757eb2"
+    },
+    {
+      "path": "assets/r785/sfx/hit-neon-4.ogg",
+      "bytes": 5538,
+      "sha256": "b289d873ca6c737055a6035fd467b31b41aa014aa9079ea37ddda8c0671b4523"
+    },
+    {
+      "path": "assets/r785/sfx/hit-seoha-1.ogg",
+      "bytes": 5576,
+      "sha256": "cb7f97cd58c02e1d7dba2bb66fc2a72c6746411dee9e75615da5b0b79c24da53"
+    },
+    {
+      "path": "assets/r785/sfx/hit-seoha-2.ogg",
+      "bytes": 5954,
+      "sha256": "c403ff95d3264bc070f24d730c0903b405f06d7829f12ca650b3f127c9760c7c"
+    },
+    {
+      "path": "assets/r785/sfx/hit-seoha-3.ogg",
+      "bytes": 5863,
+      "sha256": "cf817be7c7fb10b0a412a61e05e8fb770357436b6b8b0c8af213208de6a44ded"
+    },
+    {
+      "path": "assets/r785/sfx/hit-seoha-4.ogg",
+      "bytes": 5869,
+      "sha256": "d8362e21a0b428a25d811af1ac3556f04bcccaa3c601cbff1f917c735f1f0060"
+    },
+    {
+      "path": "assets/r785/sfx/hit-slayer-1.ogg",
+      "bytes": 5391,
+      "sha256": "bafbce4e1b57d8c364b302e66a9cabe9ea7acffe610916e2947bbd8b20888400"
+    },
+    {
+      "path": "assets/r785/sfx/hit-slayer-2.ogg",
+      "bytes": 5295,
+      "sha256": "e93e52bf5e6838ad4ae183d692afe7704f99feb883e0d64551d5cd746d9ec909"
+    },
+    {
+      "path": "assets/r785/sfx/hit-slayer-3.ogg",
+      "bytes": 5256,
+      "sha256": "5d6f34cdf2801e4587ffcc3188b8ae102c72460834db445f276fe2a9f6a3e3ec"
+    },
+    {
+      "path": "assets/r785/sfx/hit-slayer-4.ogg",
+      "bytes": 5014,
+      "sha256": "202cef6582a2abf063f701c978ec5fcd677602a4a4173875f0a61a0a10a5cea7"
+    },
+    {
+      "path": "assets/r785/sfx/hitbig-gunner-1.ogg",
+      "bytes": 5862,
+      "sha256": "de7881b5ba29a99eec0d2a638fabaaf5850c9e1b22bc2b47b85f695d64d2c27e"
+    },
+    {
+      "path": "assets/r785/sfx/hitbig-gunner-2.ogg",
+      "bytes": 5763,
+      "sha256": "89898ea8534b28a2e21bc88cbde76d115c0ad1ed026454e01d33c479bf11c722"
+    },
+    {
+      "path": "assets/r785/sfx/hitbig-hunter-1.ogg",
+      "bytes": 5299,
+      "sha256": "6367d47aac5d1c81b95ac89a4693609b505ea5865c135fb773aeb40aad879d6c"
+    },
+    {
+      "path": "assets/r785/sfx/hitbig-hunter-2.ogg",
+      "bytes": 5375,
+      "sha256": "c07d09f736896209e0a24c57580ad7470113749276ab654fcccbb57b38e05822"
+    },
+    {
+      "path": "assets/r785/sfx/hitbig-hwando-1.ogg",
+      "bytes": 6068,
+      "sha256": "15f8de90087deddba26508a47b9907462c91af794ad98e90628bd1aa632397e1"
+    },
+    {
+      "path": "assets/r785/sfx/hitbig-hwando-2.ogg",
+      "bytes": 5968,
+      "sha256": "2bc84e80d0065cb49e1aedd0c9080c094210f95c5d303084ec0462907feb5e46"
+    },
+    {
+      "path": "assets/r785/sfx/hitbig-lauren-1.ogg",
+      "bytes": 6031,
+      "sha256": "63099f2dedaa638919f5eebd540d4d8e660b9c640a42056d9371f87ac9d2fcb8"
+    },
+    {
+      "path": "assets/r785/sfx/hitbig-lauren-2.ogg",
+      "bytes": 6102,
+      "sha256": "7089d496c2f67947af188779938cd2f03a7d659eb9b74b49984194877c74cb1a"
+    },
+    {
+      "path": "assets/r785/sfx/hitbig-michaela-1.ogg",
+      "bytes": 5641,
+      "sha256": "913435e1196b82bf72a06865c4081090e0142232b26fc56294595139b004a305"
+    },
+    {
+      "path": "assets/r785/sfx/hitbig-michaela-2.ogg",
+      "bytes": 5692,
+      "sha256": "8e32e10cd6ff9f3c47b8031a847afc9ed7940f448193626cc7668f58ad1bc21e"
+    },
+    {
+      "path": "assets/r785/sfx/hitbig-neon-1.ogg",
+      "bytes": 6063,
+      "sha256": "31fd373d5f77249a5aa471d34d6bd4d555728f3c623155a519fef4002d36bbd3"
+    },
+    {
+      "path": "assets/r785/sfx/hitbig-neon-2.ogg",
+      "bytes": 6144,
+      "sha256": "f45f5d1c5893cba20892e788ff01e38d6ee46c66a41a6ec8d2dec49163123fa8"
+    },
+    {
+      "path": "assets/r785/sfx/hitbig-seoha-1.ogg",
+      "bytes": 6249,
+      "sha256": "12ae95b1b9cefb4f80b56f6e3832e4928b339c29f2bda39a603405d0fa5a7e5b"
+    },
+    {
+      "path": "assets/r785/sfx/hitbig-seoha-2.ogg",
+      "bytes": 6116,
+      "sha256": "da147ee1637975cff39210d763893729f980058834f23c0a3eb5f77dbc685f28"
+    },
+    {
+      "path": "assets/r785/sfx/hitbig-slayer-1.ogg",
+      "bytes": 5516,
+      "sha256": "dac71dd810a9f5debed18cff267517b67138b2ba1c4b8063299f8631e6bed73c"
+    },
+    {
+      "path": "assets/r785/sfx/hitbig-slayer-2.ogg",
+      "bytes": 5423,
+      "sha256": "810fb0dba99b742022289955538dd8907bb49c65fa33ebe15dce7cb9cc37c6b7"
+    },
+    {
+      "path": "assets/r785/sfx/index.json",
+      "bytes": 44101,
+      "sha256": "24560e5e32def9778ef8979e296ce19db9aced31a7cf9b2a74739c9b9a89add6"
+    },
+    {
+      "path": "assets/r785/sfx/kill-1.ogg",
+      "bytes": 5936,
+      "sha256": "92a732971ce7d21971a7688cb92ff4ccae95af9f5edac48631d1f49c512879f5"
+    },
+    {
+      "path": "assets/r785/sfx/kill-2.ogg",
+      "bytes": 6274,
+      "sha256": "26dcecf2cb3884fdffb19db007702e7f7e7d58991ae83be2712c464b5dbb4e40"
+    },
+    {
+      "path": "assets/r785/sfx/kill-3.ogg",
+      "bytes": 6540,
+      "sha256": "6a32c25b7b2216ca5a10f9d3be692a5e5e709ccb67fbede9681e90d993f3ca68"
+    },
+    {
+      "path": "assets/r785/sfx/kill-4.ogg",
+      "bytes": 5836,
+      "sha256": "b97f5d47f23c9073603e8b51e3753acd9d7308d5e51ed56a9395203c05ad60a1"
+    },
+    {
+      "path": "assets/r785/sfx/kill-5.ogg",
+      "bytes": 6008,
+      "sha256": "1915df4a0a6b3cad0ea5533d04600bff300c1af8af24418b08d3535f64b6a1fc"
+    },
+    {
       "path": "assets/r790/npc/chief-bust.webp",
       "bytes": 59774,
       "sha256": "4411a9500ffc62cd0eecb1e3c7dddadc7dd07ac3bbe0e45c0aaa90c34f2d99d8"
@@ -43858,6 +44128,11 @@
       "sha256": "2fe5812cc34de0713c5fb12c4079bb11ba4a1910695d5685ec9efb3cd8d379d0"
     },
     {
+      "path": "combat-sfx-r785.js",
+      "bytes": 5420,
+      "sha256": "c96dbcfee5cb31eca3cca37852ff56021c594da3599e3d4707466072f863879e"
+    },
+    {
       "path": "crates-r108.js",
       "bytes": 6746,
       "sha256": "1d8820f1f4884a00ff32ededbdd6d2cbcdffe831e18d9062cafb688acdcd868f"
@@ -44374,8 +44649,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6575817,
-      "sha256": "bd7f8fd3d8f90d190917d2066e6759df6bfe8d1307b81da6ad000efa868ea44d"
+      "bytes": 6575862,
+      "sha256": "1b2be1e3024bba52cb07a3db72b9b67c84f1e4ca1cda71b05ccae63596331b30"
     },
     {
       "path": "intro-r140.js",
@@ -45478,9 +45753,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9095,
-  "totalBytes": 1250922352,
-  "webHTMLSha256": "bd7f8fd3d8f90d190917d2066e6759df6bfe8d1307b81da6ad000efa868ea44d",
+  "fileCount": 9150,
+  "totalBytes": 1251271375,
+  "webHTMLSha256": "1b2be1e3024bba52cb07a3db72b9b67c84f1e4ca1cda71b05ccae63596331b30",
   "largest": [
     {
       "path": "index.html",
