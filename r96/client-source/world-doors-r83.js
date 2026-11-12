@@ -71,7 +71,7 @@
  // Rebase the already-isometric leaf art before projecting it onto the wall.
  // This removes the baked diagonal slope instead of skewing it a second time.
  // R830: 정면 입면도 문짝을 문 면 네 꼭짓점에 그대로(자르지 않고) 붙인다. 닫힌 칸은 r1a·r1b 를 번갈아, 열린 짝은 경첩 쪽 반쪽(오른쪽 짝은 그림 오른쪽 반)을 쓴다.
- function themeLeaf(t,part,ps){const im=t.images?.[(part.bay||0)%t.images.length]||t.images?.[0];if(!im)return false;const W0=im.naturalWidth||im.width,H0=im.naturalHeight||im.height;if(!(W0>0&&H0>0))return false;
+ function themeLeaf(t,part,ps){if(!t)return false;const im=t.images?.[(part.bay||0)%t.images.length]||t.images?.[0];if(!im)return false;const W0=im.naturalWidth||im.width,H0=im.naturalHeight||im.height;if(!(W0>0&&H0>0))return false;
   const half=part.half,sx=half===1?W0/2:0,sw=half==null?W0:W0/2,[a,b,,d]=ps;ctx.save();try{
    if(half===1){/* 오른쪽 짝: a(경첩)=그림 오른쪽 끝 */ctx.transform((a.x-b.x)/sw,(a.y-b.y)/sw,(d.x-a.x)/H0,(d.y-a.y)/H0,b.x,b.y);ctx.drawImage(im,sx,0,sw,H0,0,0,sw,H0);}
    else{ctx.transform((b.x-a.x)/sw,(b.y-a.y)/sw,(d.x-a.x)/H0,(d.y-a.y)/H0,a.x,a.y);ctx.drawImage(im,sx,0,sw,H0,0,0,sw,H0);}
@@ -91,7 +91,7 @@
   for(const part of g.parts){const ps=corners(part);if(!onScreen(ps)){stats.culled++;continue;}const path=part.source==='wall'?art?.path:atlas.path,plane={ax:part.a.x,ay:part.a.y,bx:part.b.x,by:part.b.y},owner={id:'r83-ward-door:'+p.id+':'+part.id,kind:'prop',x:(part.a.x+part.b.x)/2,y:(part.a.y+part.b.y)/2,alive:true,bodyPath:path,r83WardDoor:true,hospitalDoorR86:clinical,doorFaceOffsetR86:g.faceOffset,doorId:d.id,doorOpen:open,r83DoorPart:part.id,r83DoorPlane:plane,r83WallTint:part.source==='wall'?r.exploration.surface?.art?.r81Palette?.wall:undefined,groundAligned:false},paint=()=>{ctx.save();try{
    if(open&&part.source==='leaf')ctx.globalAlpha*=.88;
    if(part.source==='wall'){if(darkFrame(r)){/* R264: 유기 지형(R204) 지역은 문틀을 어두운 바위색으로 — 원래 병동 벽 그림(밝은 회색)·대체색 #687874 가 검은 동굴·늪 바닥 위에서 흰 테두리처럼 떠 보였다(사용자 "문에 흰테두리가 있는문제") */polygon(ps);const top=ps[0],bot=ps[3]||ps[0],gr=ctx.createLinearGradient?ctx.createLinearGradient(top.x,top.y,bot.x,bot.y):null;if(gr){gr.addColorStop(0,'#2b2520');gr.addColorStop(1,'#16120f');ctx.fillStyle=gr;}else ctx.fillStyle='#211c18';ctx.fill();}else if(wall&&art.wallRect)affinePatch(wall,art.wallRect,ps,part.id);else{polygon(ps);ctx.fillStyle='#687874';ctx.fill();}}
-   else{const cur=!clinical&&curtainFor(r,d);const tl=!clinical&&!cur&&THEME(r);if(cur)affinePatch(cur,[0,0,cur.naturalWidth||cur.width,cur.naturalHeight||cur.height],ps,part.id+':curtain');else if(tl&&themeLeaf(tl,part,ps)){}else{polygon(ps);ctx.fillStyle=clinical?'#365154':metal?'#665b3d':'#584336';ctx.fill();if(leaf&&cell)leafPatch(leaf,cell,part,ps,metal,clinical);}}
+   else{const cur=!clinical&&curtainFor(r,d);if(cur)affinePatch(cur,[0,0,cur.naturalWidth||cur.width,cur.naturalHeight||cur.height],ps,part.id+':curtain');else if(!clinical&&themeLeaf(THEME(r),part,ps)){}else{polygon(ps);ctx.fillStyle=clinical?'#365154':metal?'#665b3d':'#584336';ctx.fill();if(leaf&&cell)leafPatch(leaf,cell,part,ps,metal,clinical);}}
    stats.planes++;
   }finally{ctx.restore();}};
   if(typeof ctx.scope==='function')ctx.scope(owner,paint);else paint();}

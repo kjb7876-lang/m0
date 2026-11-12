@@ -25,7 +25,7 @@ const ZONE={
  last305:'K',kair05:'K',last304:'K',kair06:'K',
  kair03:'L'};
 // 검수(7분야 평균 7.77 초과)를 통과해 assets/r830/doors 에 들어온 묶음만. 파일: <묶음>-a.webp, <묶음>-b.webp
-const READY=new Set([]);
+const READY=new Set(['A']);// A: 11-12 Dots 조선 판문 r1a·r1b(미리보기에서 1024x704 로 잘라 불투명·밝기 1.3·대비 1.45·채도 1.35 — 밤 화면에서 쇠 띠·문고리가 읽히게, qa/r830)
 const stats={leaves:0,pending:0,fallback:0};
 function leaf(r){if(!on||!r||r.layer!=='STORY')return null;const fam=ZONE[r.id];if(!fam||!READY.has(fam)){stats.fallback++;return null;}
  const paths=[DIR+fam+'-a.webp',DIR+fam+'-b.webp'],ims=[];
