@@ -10,7 +10,7 @@
 //  끄기: localStorage 'storyworld.r706.danceFree'='0' 또는 __STORYWORLD_DANCE_FREE_R706__.set(false).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_DANCE_FREE_R706__)return;
-const REV='R706-dance-free-1',KEY='storyworld.r706.danceFree',GHOST_GAP=.12,GHOST_LIFE=.28,MIN_SHIFT=.35;
+const REV='R706-dance-free-2',KEY='storyworld.r706.danceFree',GHOST_GAP=.12,GHOST_LIFE=.28,MIN_SHIFT=.35,DASH=1;
 let on=true;try{if(localStorage.getItem(KEY)==='0')on=false;}catch(_){}
 const stats={ticks:0,restores:0,ghosts:0,blinks:0,resets:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const g=f=>{try{return f();}catch(_){return undefined;}};
@@ -22,15 +22,19 @@ const curRoom=()=>g(()=>typeof room!=='undefined'?room:null);
 let body=null,bodyRoom=null,start=null,inTick=0,lastGhost=-1e9,fxBase=null;
 const active=()=>on&&solo();
 function reset(){if(body)stats.resets++;body=null;bodyRoom=null;}
-function ghost(x,y){const t=T();if(t-lastGhost<GHOST_GAP)return;const p=P();if(!p||!fxBase)return;
+function ghost(x,y){const t=T();if(t<lastGhost)lastGhost=-1e9;if(t-lastGhost<GHOST_GAP)return;const p=P();if(!p||!fxBase)return;
  const art=g(()=>heroArt[p.hero]),dir=p.direction||'front',asset=art&&((art.attack&&(art.attack[dir]||art.attack.front))||(art.idle&&(art.idle[dir]||art.idle.front)));if(!asset)return;
  try{fxBase('ghost',x,y,{asset,life:GHOST_LIFE,size:1,r706:true});lastGhost=t;stats.ghosts++;}catch(e){fail(e);}}
 if(typeof fx==='function'){const base=fx;fxBase=(...a)=>base.apply(null,a);}
 // 걷기: 춤 중에는 본체 자리에서 계산한다.
 if(typeof moveActor==='function'){const base=moveActor;moveActor=function(actor,dx,dy,...a){const p=P();
- if(!inTick||!active()||!p||actor!==p||!(body||dancing(p)))return base.call(this,actor,dx,dy,...a);
+ if(!active()||!p||actor!==p||!(body||dancing(p)))return base.call(this,actor,dx,dy,...a);
+ // tick 밖(직접 누른 대시 등): 영웅은 이미 본체 자리에 있다 → 옮긴 자리를 본체 자리로 삼는다.
+ if(!inTick){const r=base.call(this,actor,dx,dy,...a);if(body){body.x=p.x;body.y=p.y;}return r;}
  if(!body){body=start?{x:start.x,y:start.y}:{x:p.x,y:p.y};bodyRoom=curRoom();}
- const cx=p.x,cy=p.y;p.x=body.x;p.y=body.y;let r;try{r=base.call(this,actor,dx,dy,...a);}finally{body.x=p.x;body.y=p.y;p.x=cx;p.y=cy;}return r;};}
+ // 한 번에 DASH 칸 이상 = 대시 같은 이동기: 시전 코드가 끝점을 바로 읽으므로 영웅을 옮긴 자리에 둔다(다음 타격 때 춤이 다시 적 곁으로 옮김).
+ const leap=Math.hypot(dx,dy)>=DASH;
+ const cx=p.x,cy=p.y;p.x=body.x;p.y=body.y;let r;try{r=base.call(this,actor,dx,dy,...a);}finally{body.x=p.x;body.y=p.y;if(!leap){p.x=cx;p.y=cy;}}return r;};}
 // 블링크: 옮긴 자리가 새 본체 자리.
 if(typeof blink==='function'){const base=blink;blink=function(...a){const p=P(),bx=p?.x,by=p?.y,r=base.apply(this,a);
  try{if(body&&p&&(p.x!==bx||p.y!==by)){body.x=p.x;body.y=p.y;stats.blinks++;}}catch(e){fail(e);}return r;};}

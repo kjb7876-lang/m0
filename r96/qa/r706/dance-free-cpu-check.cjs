@@ -32,6 +32,7 @@ function mk(o={}){
   dance:null,// {home,foe,until}
   tick(dt){sb.time+=dt;const p=sb.player;
    if(sb.input.x||sb.input.y)sb.moveActor(p,sb.input.x*dt*5,sb.input.y*dt*5);
+   if(sb.castDash){sb.castDash=false;const o={x:p.x,y:p.y};sb.moveActor(p,3.8,0);sb.dashSeen={from:o,to:{x:p.x,y:p.y}};}
    const d=sb.dance;if(d){if(sb.time<d.until){p.x=d.foe.x-.8;p.y=d.foe.y;sb.strikes.push({x:p.x,y:p.y});}else{p.x=d.home.x;p.y=d.home.y;sb.dance=null;}}},
   __STORYWORLD_DANCES_R74__:{moving:()=>!!sb.dance,nativeActive:()=>!!sb.dance}};
  sb.startDance=(fx,fy,dur)=>{sb.dance={home:{x:sb.player.x,y:sb.player.y},foe:{x:fx,y:fy},until:sb.time+dur};};
@@ -63,4 +64,14 @@ const near=(a,b,e=1e-6)=>Math.abs(a-b)<e;
  ok(s.localStorage.getItem('storyworld.r706.danceFree')==='0','끄기 저장');}
 // 8. 원거리 영웅도 같다(모든 영웅).
 {const s=mk({hero:'michaela'});s.startDance(18,10,1);s.input={x:0,y:1};s.run(30);ok(near(s.player.x,10)&&near(s.player.y,10+1.5*5),'미카엘라: 춤 중·뒤 모두 입력대로(y='+s.player.y.toFixed(2)+')');}
+// 9. 대시(E, 한 번에 3.8칸): 춤 중 자동 시전(tick 안) — 시전 코드가 바로 읽는 끝점이 실제 끝점이고, 그 자리가 유지된다.
+{const s=mk();s.startDance(18,10,1);s.run(3);s.castDash=true;s.run(1);
+ ok(s.dashSeen&&near(s.dashSeen.to.x,13.8)&&near(s.dashSeen.to.y,10),'tick 안 대시: 시전 코드가 읽는 끝점 = 본체+3.8(x='+(s.dashSeen?.to.x??NaN).toFixed(2)+')');
+ s.run(4);ok(near(s.player.x,13.8),'tick 안 대시 뒤 그 자리 유지(x='+s.player.x.toFixed(2)+')');}
+// 10. 대시를 직접 누름(tick 밖): 다음 tick 에 되돌려지지 않는다.
+{const s=mk();s.startDance(18,10,1);s.run(3);s.moveActor(s.player,3.8,0);ok(near(s.player.x,13.8),'tick 밖 대시: 바로 옮겨짐');
+ s.run(4);ok(near(s.player.x,13.8),'tick 밖 대시 뒤 다음 tick 에 되돌려지지 않음(x='+s.player.x.toFixed(2)+')');}
+// 11. 새 게임으로 시계가 0 으로 돌아가도 분신이 다시 나온다.
+{const s=mk();s.time=500;s.startDance(18,10,1);s.run(30);const g0=s.ghosts.length;s.time=0;s.startDance(18,10,1);s.run(10);
+ ok(g0>0&&s.ghosts.length>g0,'시계가 되감겨도 분신이 나온다('+g0+' → '+s.ghosts.length+')');}
 console.log(`\n${n-bad}/${n} 통과`);process.exit(bad?1:0);
