@@ -334,6 +334,9 @@ function stageKit(svg,scene,lite){
  const far=layer(0.35),back=layer(0.7,lite?{}:{filter:ink0.filter}),root=layer(1,lite?{}:{filter:ink0.filter});
  const glowWrap=grp(svg,{style:'mix-blend-mode:screen;pointer-events:none'}),glow=grp(glowWrap);layers.push({g:glow,depth:1});
  const front=layer(1),near=layer(1.4);
+ // R889: 앞쪽에 떠다니는 빛먼지(14점)
+ const dustG=grp(svg,{style:'pointer-events:none'}),dust=[];layers.push({g:dustG,depth:1.25});
+ {const rnd=seeded(scene.zone?scene.zone.length*7+3:5);for(let i=0;i<14;i++)dust.push({c:el('circle',{r:f(0.5+rnd()*0.9),fill:scene.ink||'#e9e3d6',opacity:0},dustG),x:rnd()*W,y:20+rnd()*(H-70),vx:(rnd()-.5)*5,vy:-1.5-rnd()*3,ph:rnd()*6.28,o:0.1+rnd()*0.22});}
  const hud=grp(svg,{style:'pointer-events:none'});
  el('rect',{x:-40,y:-30,width:W+80,height:H+70,fill:'url(#r880vig)'},hud);
  const fade=el('rect',{x:-40,y:-40,width:W+80,height:H+90,fill:'#000',opacity:1},hud);
@@ -342,8 +345,9 @@ function stageKit(svg,scene,lite){
  // 카메라 길: [초, x, y, 배율, 'cut'?] — 사이를 부드럽게 잇고 'cut' 은 그 순간 건너뜀
  const track=keys=>t=>{let i=0;while(i<keys.length-1&&t>=keys[i+1][0])i++;const a=keys[i],b=keys[Math.min(keys.length-1,i+1)];
   let u=b===a||b[4]==='cut'?0:ease(seg(t,a[0],b[0]));cam.x=lerp(a[1],b[1],u);cam.y=lerp(a[2],b[2],u);cam.z=lerp(a[3],b[3],u);};
- const applyCam=t=>{const jx=lite?0:wobble(t*0.9,1)*0.7,jy=lite?0:wobble(t*0.9+7,1)*0.5;
-  for(const {g,depth:d} of layers){const z=1+(cam.z-1)*d;g.setAttribute('transform',`translate(320 180) scale(${f(z)}) translate(${f(-320-(cam.x-320+jx)*d)} ${f(-180-(cam.y-180+jy)*d)})`);}};
+ const applyCam=(t,wt)=>{const w=Number.isFinite(wt)?wt:t,jx=lite?0:wobble(t*0.9,1)*0.7+wobble(w*0.31+3,1)*1.1,jy=lite?0:wobble(t*0.9+7,1)*0.5+wobble(w*0.27+11,1)*0.7,br=lite?1:1+0.007*Math.sin(w*0.42);
+  for(const p of dust){const x=((p.x+p.vx*w+Math.sin(w*0.5+p.ph)*6)%(W+40)+W+40)%(W+40)-20,y=((p.y+p.vy*w)%(H-40)+(H-40))%(H-40)+10;p.c.setAttribute('cx',f(x));p.c.setAttribute('cy',f(y));p.c.setAttribute('opacity',f(lite?p.o*0.6:p.o*(0.55+0.45*Math.sin(w*0.9+p.ph))));}
+  for(const {g,depth:d} of layers){const z=(1+(cam.z-1)*d)*br;g.setAttribute('transform',`translate(320 180) scale(${f(z)}) translate(${f(-320-(cam.x-320+jx)*d)} ${f(-180-(cam.y-180+jy)*d)})`);}};
  // 바람: 느린 산들바람(포인터 없이)
  const wind={value:.3,step(t){wind.value=.3+.5*Math.sin(t*.21)+.3*Math.sin(t*.67+1)+.12*Math.sin(t*1.9);return wind.value;}};
  const dropFilter=()=>{root.removeAttribute('filter');back.removeAttribute('filter');};
@@ -352,7 +356,8 @@ function stageKit(svg,scene,lite){
 
 // ── 인물: 열린 두 줄 팔다리, 얼굴 없음, 옷은 다리 둘레로 ──
 function figure(parent,o={}){
- const R=grp(parent),capeG=grp(R),cape=o.cape?paint(capeG,o.cape):null,capeTrim=o.cape?pen(capeG,PEN*0.5):null;
+ const R=grp(parent);if(o.shadow!==false)el('ellipse',{cx:40,cy:120.8,rx:o.shadowR||13,ry:2.7,fill:'#000',opacity:0.3},R);/* R889: 발밑 그림자 — 인물이 바닥에 붙어 보이게 */
+ const capeG=grp(R),cape=o.cape?paint(capeG,o.cape):null,capeTrim=o.cape?pen(capeG,PEN*0.5):null;
  const farArm=limb(R,3.6);if(o.sleeve)solid(farArm,o.sleeve);
  const legs=[limb(R,4.2),limb(R,4.2)];if(o.legs)legs.forEach(l=>solid(l,o.legs));
  const shoes=[blot(R),blot(R)],upper=grp(R),body=o.robeFill?paint(upper,o.robeFill):shape(upper);
@@ -480,8 +485,12 @@ const reducedMotion=()=>{try{if(typeof settings!=='undefined'&&settings&&'reduce
 const OTHER=['r317Cinema','r368v','r369v','r372v','r617v','r568','r309','r309v'];
 const busy=()=>{try{if((typeof storyScene!=='undefined'&&!!storyScene)||(typeof loading!=='undefined'&&!!loading)||(typeof started!=='undefined'&&!started)||(typeof modal!=='undefined'&&!!modal))return true;
  if(typeof player!=='undefined'&&player&&!(player.hp>0))return true;if(typeof document!=='undefined'){if(document.hidden)return true;for(const id of OTHER)if(document.getElementById(id))return true;}return false;}catch(_){return false;}};
-function eligible(r){return !!(r&&SCENES.has(r.id)&&r.layer==='STORY'&&(typeof layer==='undefined'||layer==='STORY')&&!r.samongR103&&!r.samongR115&&!r.exploration?.samongR103&&!r.survivalR600&&solo()&&!prefs.seen.includes(r.id)&&!finished(r.id));}/* R890: 무한 생존 방(같은 id)에서는 틀지 않는다 — 생존 서사와 겹치고, 스토리용 '한 번 본 기록'을 생존이 써 버리던 것 */
+let fresh=null;/* R887: 쉼터는 들어서는 순간 '끝낸 지역'이 된다 — 들어서기 전에 안 끝난 곳이었으면 이번 도착에 한해 튼다 */
+function eligible(r){return !!(r&&SCENES.has(r.id)&&r.layer==='STORY'&&(typeof layer==='undefined'||layer==='STORY')&&!r.samongR103&&!r.samongR115&&!r.exploration?.samongR103&&!r.survivalR600&&solo()&&!prefs.seen.includes(r.id)&&(!finished(r.id)||fresh===r.id));}/* R890: 무한 생존 방(같은 id)에서는 틀지 않는다 — 생존 서사와 겹치고, 스토리용 '한 번 본 기록'을 생존이 써 버리던 것 */
 const titleFor=z=>{let t='';try{t=(typeof regionById!=='undefined'&&regionById?.[z]?.title)||'';}catch(_){}return t?t+' · 기억':'기억';};
+// 섞기 방식(mix-blend-mode)은 쓰지 않는다 — 소프트웨어 렌더링에서 프레임이 30% 떨어졌다(실측 last303 43→32fps).
+// R889: 필름 결(작은 잡음 무늬 한 장을 만들어 깔고 자리만 바꾼다 — 필터가 아니라서 싸다)
+let grainCache=null;function grainUrl(){if(grainCache!==null)return grainCache;try{const c=document.createElement('canvas');c.width=c.height=128;const x=c.getContext('2d'),d=x.createImageData(128,128);let s=12345;for(let i=0;i<d.data.length;i+=4){s=(s*1103515245+12345)&0x7fffffff;const v=(s>>16)&255;d.data[i]=d.data[i+1]=d.data[i+2]=v;d.data[i+3]=255;}x.putImageData(d,0,0);grainCache=c.toDataURL('image/png');}catch(_){grainCache='';}return grainCache;}
 function css(){if(document.getElementById('r880Css'))return;const s=document.createElement('style');s.id='r880Css';
  s.textContent='#r880{position:fixed;inset:0;z-index:2147482000;background:#030304;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .45s;cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none}'
  +'#r880.on{opacity:1}#r880.out{opacity:0}'
@@ -490,17 +499,50 @@ function css(){if(document.getElementById('r880Css'))return;const s=document.cre
  +'#r880 svg{width:100%;height:100%;max-height:100%;display:block}#r880 svg .pp{fill:var(--paper)}'
  +'#r880 .chap{position:absolute;left:max(16px,3vw);top:max(14px,3vh);color:#d9d2c6;font:600 13px/1.4 "Gowun Batang","Noto Serif KR",serif;letter-spacing:.18em;opacity:.85;text-shadow:0 1px 4px #000;pointer-events:none}'
  +'#r880 .cap{position:absolute;left:0;right:0;margin:0 auto;width:fit-content;box-sizing:border-box;bottom:max(4vh,26px);max-width:min(88vw,820px);padding:8px 20px;text-align:center;color:#f1ebe0;'
- +'font:500 clamp(15px,2.2vw,23px)/1.55 "Gowun Batang","Noto Serif KR",serif;letter-spacing:.03em;text-shadow:0 0 10px #000,0 2px 6px #000;background:linear-gradient(90deg,transparent,rgba(6,6,8,.7) 16%,rgba(6,6,8,.7) 84%,transparent);'
- +'border-top:1px solid var(--r880line,rgba(200,190,170,.4));border-bottom:1px solid var(--r880line,rgba(200,190,170,.4));opacity:0;transition:opacity .4s;pointer-events:none;word-break:keep-all}#r880 .cap.on{opacity:1}'
+ +'font:500 clamp(15px,2.2vw,23px)/1.55 "Gowun Batang","Noto Serif KR",serif;letter-spacing:.03em;text-shadow:0 0 10px #000,0 2px 6px #000;background:radial-gradient(ellipse at 50% 60%,rgba(4,4,6,.72),rgba(4,4,6,.42) 55%,transparent 78%);'
+ +'opacity:0;transform:translateY(7px);transition:opacity .45s,transform .45s;pointer-events:none;word-break:keep-all}#r880 .cap.on{opacity:1;transform:none}'
+ +'#r880 .cap:before{content:"";display:block;width:54px;height:1px;margin:0 auto 7px;background:var(--r880line,rgba(200,190,170,.55))}'
+ +'#r880 .grain{position:absolute;inset:-40px;pointer-events:none;opacity:.045;background-size:128px 128px;animation:r880grain .6s steps(1) infinite}'
+ +'@keyframes r880grain{0%{transform:translate(0,0)}25%{transform:translate(17px,-11px)}50%{transform:translate(-13px,23px)}75%{transform:translate(29px,7px)}}'
+ +'#r880 .shade{position:absolute;left:0;right:0;height:16vh;pointer-events:none}#r880 .shade.t{top:0;background:linear-gradient(#000c,transparent)}#r880 .shade.b{bottom:0;height:24vh;background:linear-gradient(transparent,#000d)}'
+ +'#r880 .ttl{position:absolute;left:0;right:0;top:13vh;text-align:center;pointer-events:none;opacity:0;color:#f3ecdf;font:600 clamp(20px,3.4vw,38px)/1.3 "Gowun Batang","Noto Serif KR",serif;letter-spacing:.22em;text-shadow:0 0 18px #000,0 2px 8px #000;animation:r880ttl 3.6s ease .35s forwards}'
+ +'#r880 .ttl small{display:block;margin-top:10px;font-size:.36em;letter-spacing:.6em;opacity:.75}#r880 .ttl i{display:block;width:64px;height:1px;margin:10px auto 0;background:var(--r880line,rgba(200,190,170,.6))}'
+ +'@keyframes r880ttl{0%{opacity:0;transform:translateY(8px);letter-spacing:.32em}22%{opacity:1;transform:none;letter-spacing:.22em}72%{opacity:1}100%{opacity:0}}'
+ +'#r880.cinema .ttl{display:none}'
  +'#r880 .skip{position:absolute;right:max(16px,3vw);top:max(12px,2.4vh);padding:8px 16px;font:14px "Malgun Gothic",sans-serif;color:#efe9df;background:rgba(14,13,16,.66);border:1px solid #6a655c;border-radius:6px;cursor:pointer}'
- +'@media (prefers-reduced-motion: reduce){#r880,#r880 .cap{transition:none}}';document.head.appendChild(s);}
+ +'@media (prefers-reduced-motion: reduce){#r880,#r880 .cap{transition:none}#r880 .grain{animation:none}#r880 .ttl{animation-duration:.01s;animation-delay:0s;opacity:0}}';document.head.appendChild(s);}
 function buildScene(o){o.k=stageKit(o.svg,o.def,o.lite);o.draw=o.def.build(o.k,kit);o.simT=0;o.draw(0,1/60);o.k.applyCam(0);o.k.fade.setAttribute('opacity','1');}
 // t 초까지 장면을 진행한다(1/30초 걸음으로 적분 — 걷기·용수철이 프레임 속도와 무관하게 같게). 되감기는 처음부터 다시 그린다.
+// ── R888 자막 음성(사용자 2026-11-12 "모든영상 오디오음성도 나오게") ──
+// 자막은 정본 문장 그대로라 스토리 모드 녹음(R381)을 그대로 튼다(새 음성 파일 없음). 녹음이 자막 시간보다 길어서(평균 5.2초)
+// 자막 구간마다 장면 시계를 늦춰(느린 그림) 다음 자막 전에 말이 끝나게 하고, 그래도 안 끝났으면 다음 자막 직전에서 잠깐 기다린다.
+// 끄는 길: 설정 '서사 음성 자동 재생' 끔 · '서사 음성 음량' 0 · 영화 모드(영화 모드가 서사를 직접 읽음) · 정지 화면(at). 무한 생존에서는 컷씬 자체가 안 뜬다(R890).
+const VOX=()=>window.__STORYWORLD_VOICE_R381__,VLEN=()=>window.__STORYWORLD_LINEART_VOICE_R888__?.dur;
+const vstats={scenes:0,spoken:0,ended:0,failed:0,holds:0};
+const voiceVol=()=>{try{if(typeof settings!=='undefined'&&settings&&Number.isFinite(+settings.voice))return clamp(+settings.voice,0,1);}catch(_){}return .8;};
+function voiceOn(){try{if(cinemaMode())return false;if(typeof settings!=='undefined'&&settings&&settings.narration===false)return false;if(!(voiceVol()>0))return false;const R=VOX();return !!(R&&typeof R.play==='function'&&VLEN());}catch(_){return false;}}
+const V_PAD=0.35,V_MINRATE=0.3,V_TAIL=0.7,V_HOLD=4;
+function planVoice(def){if(!voiceOn())return null;const R=VOX(),L=VLEN();
+ const plan=def.subs.map(([a,b,text],i)=>{const len=+L[R.idOf(text)];if(!(len>0)||!R.has(text))return null;
+  const next=i+1<def.subs.length?def.subs[i+1][0]:Math.max(b,def.D-V_TAIL),rate=clamp((next-a-0.05)/(len+V_PAD),V_MINRATE,1);
+  return{i,a,b,text,len,next,rate,end:Math.min(next-0.02,Math.max(b,a+(len+0.25)*rate)),started:false,over:false,h:null,at:0};});
+ return plan.some(Boolean)?plan:null;}
+function voiceClock(o,now){const dt=o.lastNow?Math.min(.25,Math.max(0,(now-o.lastNow)/1000)):0;o.lastNow=now;
+ const seg=o.plan.find(p=>p&&o.vt>=p.a&&o.vt<p.next),sp=o.speak;const want=seg&&!seg.over?seg.rate:1;o.rate=o.rate==null?want:o.rate+(want-o.rate)*Math.min(1,dt*3.5);let nt=o.vt+dt*o.rate;
+ // 말이 아직 안 끝났으면 다음 자막(마지막 줄은 끝 어두워지기) 직전에서 기다린다 — 끝 알림이 영영 안 와도 길이+4초 뒤에는 간다
+ if(sp&&!sp.over&&nt>=sp.next-0.03){if((now-sp.at)/1000<sp.len+V_HOLD){if(!sp.held){sp.held=true;vstats.holds++;}nt=Math.min(nt,Math.max(o.vt,sp.next-0.03));}else{sp.over=true;o.speak=null;}}
+ o.vt=nt;
+ for(const p of o.plan){if(!p||p.started||o.vt<p.a)continue;if(o.speak&&!o.speak.over)break;p.started=true;p.at=now;
+  const done=()=>{p.over=true;if(o.speak===p)o.speak=null;};
+  try{p.h=VOX().play(p.text,{volume:voiceVol(),onend:()=>{vstats.ended++;done();},onerror:()=>{vstats.failed++;p.end=p.b;done();}});}catch(_){p.h=null;}
+  if(p.h){o.speak=p;vstats.spoken++;try{const nx=o.plan[p.i+1];if(nx)VOX().preload?.(nx.text);}catch(_){}}else{vstats.failed++;p.end=p.b;p.over=true;}break;}
+ return o.vt;}
+function voiceStop(o){try{const p=o.speak;o.speak=null;if(p){p.over=true;p.h?.stop?.();}if(o.plan)for(const q of o.plan)if(q)q.started=true;}catch(_){}}
 function advance(o,t){t=Math.max(0,Math.min(t,o.def.D));if(t<o.simT-1e-6)buildScene(o);let guard=0;
  while(o.simT<t-1e-6&&guard++<2000){const dt=Math.min(1/30,t-o.simT);o.simT+=dt;o.draw(o.simT,dt);}
- o.k.applyCam(o.simT);o.k.fade.setAttribute('opacity',f(clamp(1-es(o.simT,0.05,0.9)+es(o.simT,o.def.D-0.9,o.def.D-0.05),0,1)));
- const line=o.def.subs.find(([a,b])=>o.simT>=a&&o.simT<b),text=line?line[2]:'';if(text!==o.text){o.text=text;if(text)o.cap.textContent=text;o.cap.classList.toggle('on',!!text);}}
-function finish(o,reason){if(!o||o.done)return;o.done=true;if(active===o)active=null;closing=o;try{cancelAnimationFrame(o.raf);}catch(_){}
+ o.k.applyCam(o.simT,o.at!=null?o.simT:(o.wall||0));o.k.fade.setAttribute('opacity',f(clamp(1-es(o.simT,0.05,0.9)+es(o.simT,o.def.D-0.9,o.def.D-0.05),0,1)));
+ const line=o.def.subs.find(([a,b],i)=>o.simT>=a&&o.simT<(o.plan&&o.plan[i]?o.plan[i].end:b)),text=line?line[2]:'';if(text!==o.text){o.text=text;if(text)o.cap.textContent=text;o.cap.classList.toggle('on',!!text);}}
+function finish(o,reason){if(!o||o.done)return;o.done=true;if(active===o)active=null;closing=o;try{cancelAnimationFrame(o.raf);}catch(_){}voiceStop(o);
  if(reason==='ended')stats.ended++;else if(reason==='skip')stats.skips++;else if(reason==='room')stats.closedByRoom++;
  try{o.root.classList.remove('on');o.root.classList.add('out');}catch(_){}
  setTimeout(()=>{try{o.root.remove();}catch(_){}if(closing===o)closing=null;try{if(typeof keys!=='undefined'&&keys?.clear)keys.clear();}catch(_){}},reason==='room'?0:FADE_MS);}
@@ -510,15 +552,19 @@ function play(opt={}){if(active||typeof document==='undefined')return false;cons
  try{css();const root=document.createElement('div');root.id='r880';root.setAttribute('role','dialog');root.setAttribute('aria-modal','true');root.setAttribute('aria-label',titleFor(zone)+' 컷씬');
   if(cinemaMode())root.classList.add('cinema');root.style.setProperty('--r880line',def.line||'rgba(200,190,170,.4)');
   const svg=document.createElementNS(NS,'svg');svg.setAttribute('viewBox','0 14 640 360');svg.setAttribute('preserveAspectRatio','xMidYMid meet');svg.setAttribute('role','img');svg.setAttribute('aria-hidden','true');root.appendChild(svg);
+  const mk=(c,h)=>{const d=document.createElement('div');d.className=c;if(h!=null)d.textContent=h;root.appendChild(d);return d;};
+  mk('shade t');mk('shade b');const gr=mk('grain');try{const g=grainUrl();if(g)gr.style.backgroundImage='url('+g+')';else gr.style.display='none';}catch(_){gr.style.display='none';}
+  if(!Number.isFinite(opt.at)){const tt=mk('ttl');try{const nm=titleFor(zone).replace(/ · 기억$/,'');tt.textContent=nm==='기억'?'':nm;const ln=document.createElement('i');tt.appendChild(ln);const sm=document.createElement('small');sm.textContent='기억';tt.appendChild(sm);}catch(_){}}
   const chap=document.createElement('div');chap.className='chap';chap.textContent=titleFor(zone);root.appendChild(chap);
   const cap=document.createElement('div');cap.className='cap';cap.setAttribute('aria-live','polite');root.appendChild(cap);
   const skipBtn=document.createElement('button');skipBtn.type='button';skipBtn.className='skip';skipBtn.textContent='건너뛰기 ▸';root.appendChild(skipBtn);document.body.appendChild(root);
-  const o={def,zone,root,svg,cap,room:opt.force?here():r,t0:0,raf:0,done:false,at:Number.isFinite(opt.at)?opt.at:null,text:'',lite:reducedMotion()||!!opt.lite,simT:0,slow:0,n:0,last:0};
+  const o={def,zone,root,svg,cap,room:opt.force?here():r,t0:0,raf:0,done:false,at:Number.isFinite(opt.at)?opt.at:null,text:'',lite:reducedMotion()||!!opt.lite,simT:0,slow:0,n:0,last:0,vt:0,lastNow:0,plan:null,speak:null};
   buildScene(o);
+  if(o.at==null){try{o.plan=planVoice(def);if(o.plan){vstats.scenes++;VOX().preload?.(o.plan.find(Boolean).text);}}catch(_){o.plan=null;}}
   root.addEventListener('pointerdown',ev=>{ev.preventDefault?.();finish(o,'skip');});skipBtn.addEventListener('click',ev=>{ev.stopPropagation?.();finish(o,'skip');});
   try{if(typeof keys!=='undefined'&&keys?.clear)keys.clear();}catch(_){}
   active=o;stats.plays++;gateOuter();requestAnimationFrame(()=>{try{root.classList.add('on');}catch(_){}});
-  const loop=now=>{if(o.done)return;if(!o.t0)o.t0=now;const t=o.at!=null?o.at:(now-o.t0)/1000;o.t=t;stats.frames++;
+  const loop=now=>{if(o.done)return;if(!o.t0)o.t0=now;if(o.at!=null&&o.plan)voiceStop(o);const t=o.at!=null?o.at:(o.plan?voiceClock(o,now):(now-o.t0)/1000);o.t=t;o.wall=(now-o.t0)/1000;stats.frames++;
    try{advance(o,t);
     if(o.at==null&&!o.lite&&o.n<45){if(o.last)o.slow+=now-o.last;o.last=now;++o.n;if(!o.dropped&&((o.n===12&&o.slow/11>50)||(o.n===45&&o.slow/44>30))){o.dropped=true;o.k.dropFilter();stats.filterDropped++;}}
    }catch(err){fail(err);return finish(o,'error');}
@@ -532,7 +578,7 @@ function key(ev){if(!active)return false;ev.preventDefault?.();ev.stopImmediateP
 try{(window.__STORYWORLD_CINEMA_GUARDS__=window.__STORYWORLD_CINEMA_GUARDS__||[]).push(key);}catch(_){}
 if(typeof addEventListener==='function'){addEventListener('keydown',key,true);addEventListener('keyup',key,true);}
 // 도착을 기억했다가, 조용해진 뒤 0.7초에 튼다
-if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(id,...a){const out=await base.call(this,id,...a);
+if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(id,...a){const was=finished(id);const out=await base.call(this,id,...a);fresh=!was&&finished(id)?id:null;
  try{const r=here();pending=prefs.on&&!automated()&&eligible(r)?{room:r,quietSince:nowMs()}:null;}catch(e){fail(e);}return out;};}
 function poll(){if(!pending||active||closing)return;const r=here();if(r!==pending.room||!prefs.on||!eligible(r)){pending=null;return;}
  if(busy()){pending.quietSince=null;return;}const n=nowMs();if(pending.quietSince==null){pending.quietSince=n;return;}
@@ -544,5 +590,5 @@ function setPrefs(p){if(p&&typeof p.on==='boolean')prefs.on=p.on;if(p?.resetSeen
 window.__STORYWORLD_LINEART_R880__=Object.freeze({revision:REV,KEY,kit,add,zones:()=>[...SCENES.keys()],scene:z=>{const d=SCENES.get(z);return d?{zone:d.zone,D:d.D,subs:d.subs.map(s=>[...s])}:null;},
  titleFor,eligible,play:(o={})=>play({force:true,...o}),skip:()=>{if(!active)return false;finish(active,'skip');return true;},
  seek:t=>{if(!active||!Number.isFinite(t))return false;active.at=clamp(t,0,active.def.D);return true;},set:setPrefs,
- inspect:()=>({revision:REV,prefs:{on:prefs.on,seen:[...prefs.seen]},active:!!active,zone:active?.zone||null,t:active?active.simT:null,lite:active?active.lite:null,cinema:active?active.root.classList.contains('cinema'):null,pending:!!pending,stats:{...stats},lastError})});
+ inspect:()=>({revision:REV,prefs:{on:prefs.on,seen:[...prefs.seen]},active:!!active,zone:active?.zone||null,t:active?active.simT:null,lite:active?active.lite:null,cinema:active?active.root.classList.contains('cinema'):null,pending:!!pending,stats:{...stats},voice:{on:!!active?.plan,speaking:!!active?.speak,...vstats},lastError})});
 })();

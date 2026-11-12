@@ -3,7 +3,7 @@ const fs=require('fs'),path=require('path'),vm=require('vm');
 const R=path.join(__dirname,'..','..'),ROOT=path.join(R,'..');
 const rd=p=>{try{return fs.readFileSync(p,'utf8');}catch(_){return null;}};
 let pass=0,total=0;const ok=(n,c,d)=>{total++;if(c)pass++;else console.log('FAIL',n,d===undefined?'':JSON.stringify(d).slice(0,400));};
-const ENGINE='lineart-cine-r880.js',SCENES=['lineart-scenes-r881.js','lineart-scenes-r882.js','lineart-scenes-r883.js'];
+const ENGINE='lineart-cine-r880.js',SCENES=['lineart-scenes-r881.js','lineart-scenes-r882.js','lineart-scenes-r883.js','lineart-scenes-r884.js','lineart-scenes-r885.js','lineart-scenes-r886.js','lineart-scenes-r887.js'];
 const SRC=rd(path.join(R,'client-source',ENGINE)),SC=SCENES.map(f=>rd(path.join(R,'client-source',f)));
 const CANON=rd(path.join(R,'client-source','story-canon-r106-data.js'));
 ok('engine file exists',!!SRC);ok('scene files exist',SC.every(Boolean));
@@ -12,7 +12,7 @@ if(!SRC||!SC.every(Boolean)){console.log(`R880 CPU ${pass}/${total}`);process.ex
 const EXCLUDED=['dist00','ep1a09b','ep1a10','ep1a11','last301','last302','ep1b06','ep1b06b'];
 const BATCH1=['dist01','dist02','dist03','dist04','dist05','dist06','ep1a08','ep1a09','last304','last305','last303'];
 // 둘째 묶음(R882): 2부. 맘몬(ep1b06·ep1b06b)은 빼고 여덟 곳
-const BATCH2=['ep1b01','ep1b02','ep1b03','ep1b04','ep1b05','ep1b07','ep1b08','ep1b09'],BATCH3=['u201','u202','u204','u205','u206','u203'],ALL=[...BATCH1,...BATCH2,...BATCH3];// 셋째 묶음(R883): 3부 여섯 곳
+const BATCH2=['ep1b01','ep1b02','ep1b03','ep1b04','ep1b05','ep1b07','ep1b08','ep1b09'],BATCH3=['u201','u202','u204','u205','u206','u203'],BATCH4=['kair01','kair04','kair05','kair06','kair07','kair08','kair09','kair10','kair02','kair03'],BATCH5=['hando01','hando02','hando03','murder01','murder02','murder04','murder03'],BATCH6=['cult01','cult02','cult05','cult06','cult03','cult04'],BATCH7=['dreamRest','restEp1b','restU2','restLast3','restKairo','restHando'],ALL=[...BATCH1,...BATCH2,...BATCH3,...BATCH4,...BATCH5,...BATCH6,...BATCH7];// 셋째 묶음(R883): 3부 여섯 곳 · 넷째 묶음(R884): 5부 열 곳
 // ---- 가짜 DOM: 속성 값을 모두 적어 둔다 ----
 function fakeDom(){const attrs=[];let made=0;const byId=new Map();
  const node=tag=>{const n={tagName:tag,children:[],attrs:{},style:{setProperty(k,v){n.style[k]=v;},removeProperty(){} },dataset:{},listeners:{},parentNode:null,textContent:'',hidden:false,
@@ -46,6 +46,10 @@ function world(opt={}){const store={...(opt.store||{})};const dom=fakeDom();cons
  vm.createContext(g);
  vm.runInContext('var tick=function(){baseTicks++;};var enterRegion=async function(id,from,options){zone=id;if(options&&options.layer)layer=options.layer;room={id,layer,enemies:[]};return true;};',g);
  vm.runInContext(CANON,g);vm.runInContext(SRC,g,{filename:ENGINE});SC.forEach((s,i)=>vm.runInContext(s,g,{filename:SCENES[i]}));
+ if(opt.voice){g.voiceCalls=[];g.voiceStops=0;g.__STORYWORLD_VOICE_R381__={idOf:t=>sha16(t),has:t=>R381IDS.has(sha16(t)),preload(){return true;},play(text,o={}){const c={text,o,at:nowMs,ended:null,stopped:false};g.voiceCalls.push(c);if(opt.voice==='error'){g.setTimeout(()=>o.onerror&&o.onerror(),0);}return{id:sha16(text),stop(){c.stopped=true;g.voiceStops++;}};}};if(VDATA)vm.runInContext(VDATA,g);}
+ // 가짜 녹음: 실제 길이(+late)만큼 지나면 끝났다고 알린다
+ g.voiceTick=(late=0)=>{for(const c of g.voiceCalls||[]){if(c.ended==null&&!c.stopped&&nowMs>=c.at+(VDUR[sha16(c.text)]+late)*1000){c.ended=nowMs;c.o.onend&&c.o.onend();}}};
+ g.now=()=>nowMs;
  g.api=g.__STORYWORLD_LINEART_R880__;
  g.go=async(id,o)=>{await vm.runInContext('enterRegion',g)(id,null,o);};
  g.tk=(n=1)=>{for(let i=0;i<n;i++)vm.runInContext('tick',g)(1/60);};
@@ -53,10 +57,19 @@ function world(opt={}){const store={...(opt.store||{})};const dom=fakeDom();cons
  g.runTimers=()=>{const due=g.timers.filter(t=>t[0]<=nowMs);g.timers=g.timers.filter(t=>t[0]>nowMs);due.forEach(t=>t[1]());};
  g.key=(type,key)=>{const ev={type,key,code:key===' '?'Space':key,repeat:false,prevented:false,preventDefault(){ev.prevented=true;},stopImmediatePropagation(){ev.stopped=true;}};(g.winListeners[type]||[]).forEach(f=>f(ev));return ev;};
  return g;}
+const sha16=t=>require('crypto').createHash('sha1').update(String(t||'').trim()).digest('hex').slice(0,16);
+const VFILE='lineart-voice-r888-data.js',VDATA=rd(path.join(R,'client-source',VFILE));
+const R381IDS=new Set((()=>{try{return JSON.parse(rd(path.join(R,'client-source','voice-r381-data.js')).match(/Object\.freeze\((\{[\s\S]*\})\)/)[1]).ids;}catch(_){return[];}})());
+const VDUR=(()=>{try{const w={};vm.runInNewContext(VDATA,{window:w,Object});return w.__STORYWORLD_LINEART_VOICE_R888__.dur;}catch(_){return{};}})();
 const flat=s=>String(s).replace(/\s*\n\s*/g,' ');
 (async()=>{
 // 1) 등록·API
 {const g=world(),A=g.api;ok('API exposed',!!A&&typeof A.play==='function'&&typeof A.skip==='function'&&typeof A.inspect==='function'&&typeof A.add==='function');
+ ok('rest zones: a zone unfinished before arrival stays eligible for that arrival',/const was=finished\(id\);/.test(SRC)&&SRC.includes('fresh=!was&&finished(id)?id:null;')&&SRC.includes('(!finished(r.id)||fresh===r.id)'));
+ ok('seventh scene file adds only the rest zones',BATCH7.every(z=>SC[6].includes("zone:'"+z+"'"))&&[...BATCH1,...BATCH2,...BATCH3,...BATCH4,...BATCH5,...BATCH6].every(z=>!SC[6].includes("zone:'"+z+"'")));
+ ok('sixth scene file adds only the 8부 zones',BATCH6.every(z=>SC[5].includes("zone:'"+z+"'"))&&[...BATCH1,...BATCH2,...BATCH3,...BATCH4,...BATCH5].every(z=>!SC[5].includes("zone:'"+z+"'"))&&!SC[5].includes('역십자'));
+ ok('fifth scene file adds only the 6부·7부 zones',BATCH5.every(z=>SC[4].includes("zone:'"+z+"'"))&&[...BATCH1,...BATCH2,...BATCH3,...BATCH4].every(z=>!SC[4].includes("zone:'"+z+"'")));
+ ok('fourth scene file adds only the 5부 zones',BATCH4.every(z=>SC[3].includes("zone:'"+z+"'"))&&[...BATCH1,...BATCH2,...BATCH3].every(z=>!SC[3].includes("zone:'"+z+"'")));
  const zs=A?A.zones():[];ok('third scene file adds only the 3부 zones',BATCH3.every(z=>SC[2].includes("zone:'"+z+"'"))&&[...BATCH1,...BATCH2].every(z=>!SC[2].includes("zone:'"+z+"'")));
  ok('batch 1+2+3 zones registered exactly',JSON.stringify([...zs].sort())===JSON.stringify([...ALL].sort()),zs);
  ok('second scene file adds only the 2부 zones',BATCH2.every(z=>SC[1].includes("zone:'"+z+"'"))&&BATCH1.every(z=>!SC[1].includes("zone:'"+z+"'")));
@@ -128,13 +141,53 @@ const flat=s=>String(s).replace(/\s*\n\s*/g,' ');
   const bad=g.dom.attrs.filter(([, ,v])=>/NaN|undefined|Infinity/.test(v));ok(z+': every drawn value is a number',bad.length===0,bad.slice(0,3));
   ok(z+': draws something substantial (>=120 nodes) and no errors',g.dom.attrs.length>3000&&A.inspect().stats.errors===0,[g.dom.attrs.length,A.inspect().lastError]);
   A.skip();g.advance(600);g.runTimers();}}
+// 8b) 자막 음성(R888, 사용자 2026-11-12 "모든영상 오디오음성도 나오게"): 자막 문장은 스토리 모드와 같은 R381 녹음을 그대로 쓴다
+{const g0=world(),A0=g0.api;
+ const capsOf=z=>A0.scene(z).subs;
+ ok('voice: every caption of every scene has an R381 recording, its mp3 file and a length',ALL.every(z=>capsOf(z).every(([a,b,t])=>{const id=sha16(t);return R381IDS.has(id)&&VDUR[id]>0.3&&fs.existsSync(path.join(R,'runtime-text','assets','r381','voice',id+'.mp3'));})),ALL.filter(z=>!capsOf(z).every(([a,b,t])=>VDUR[sha16(t)]>0.3)));
+ ok('voice: length table has no extra entries',Object.keys(VDUR).length===new Set(ALL.flatMap(z=>capsOf(z).map(c=>sha16(c[2])))).size,Object.keys(VDUR).length);
+ const run=(g,z,{late=0,max=6000,skipAt=null}={})=>{const A=g.api;A.play({zone:z});const t0=g.now();let n=0;while(A.inspect().active&&n++<max){g.raf(33);g.voiceTick(late);if(skipAt!=null&&n===skipAt)A.skip();}return{ms:g.now()-t0,frames:n};};
+ for(const z of ['bmg01','dist01','kair01','restHando']){if(!ALL.includes(z))continue;
+  const g=world({voice:true}),A=g.api,sc=A.scene(z),r=run(g,z),c=g.voiceCalls;
+  ok(z+' voice: each caption is spoken once, in order, with the caption text',JSON.stringify(c.map(x=>x.text))===JSON.stringify(sc.subs.map(x=>x[2])),c.map(x=>x.text));
+  ok(z+' voice: a line never starts before the previous line has finished',c.every((x,i)=>i===0||(c[i-1].ended!=null&&x.at>=c[i-1].ended)),c.map(x=>[x.at,x.ended]));
+  ok(z+' voice: every line is heard to the end before the scene closes',c.every(x=>x.ended!=null&&!x.stopped)&&A.inspect().stats.ended===1&&A.inspect().stats.errors===0,A.inspect());
+  const need=sc.subs.reduce((n,x)=>n+VDUR[sha16(x[2])],0);
+  ok(z+' voice: scene stretches to fit the voice but not beyond (≤ D + voice + 6s)',r.ms/1000>=Math.min(sc.D,need)&&r.ms/1000<=sc.D+need+6,[r.ms/1000,sc.D,need]);
+  ok(z+' voice: default volume follows the voice volume setting (.8)',c.every(x=>Math.abs(x.o.volume-.8)<1e-9));}
+ {const g=world({voice:true}),A=g.api,sc=A.scene('dist01'),r=run(g,'dist01',{late:2.5}),c=g.voiceCalls;
+  ok('voice late by 2.5s (slow network): next line still waits for the previous one',c.length===sc.subs.length&&c.every((x,i)=>i===0||x.at>=c[i-1].ended),c.map(x=>[x.at,x.ended]));}
+ {const g=world({voice:true}),A=g.api,sc=A.scene('dist01'),r=run(g,'dist01',{late:1e6}),c=g.voiceCalls;
+  ok('voice that never reports its end: the scene still finishes (hold is bounded)',A.inspect().active===false&&A.inspect().stats.ended===1&&r.ms/1000<sc.D+sc.subs.reduce((n,x)=>n+VDUR[sha16(x[2])]+5,0),[r.ms/1000]);}
+ {const g=world({voice:'error'}),A=g.api,sc=A.scene('dist01');A.play({zone:'dist01'});const t0=g.now();let n=0;while(A.inspect().active&&n++<6000){g.raf(33);g.runTimers();}
+  ok('voice file fails: scene keeps its own pace (within 1.5s of D), no engine error',Math.abs((g.now()-t0)/1000-sc.D)<1.5&&A.inspect().stats.errors===0,[(g.now()-t0)/1000,sc.D]);}
+ {const g=world({voice:true});g.settings.narration=false;const sc=g.api.scene('dist01'),r=run(g,'dist01');
+  ok('setting 서사 음성 자동 재생 off: silent, own pace',g.voiceCalls.length===0&&Math.abs(r.ms/1000-sc.D)<0.2,[g.voiceCalls.length,r.ms]);}
+ {const g=world({voice:true});g.settings.voice=0;const r=run(g,'dist01');ok('voice volume 0: silent',g.voiceCalls.length===0);}
+ {const g=world({voice:true});g.settings.voice=.35;run(g,'dist01');ok('voice volume setting is passed on',g.voiceCalls.length>0&&g.voiceCalls.every(x=>Math.abs(x.o.volume-.35)<1e-9));}
+ {const g=world({voice:true,cinema:true});run(g,'dist01');ok('cinema mode: line-art stays silent (cinema mode speaks the story itself)',g.voiceCalls.length===0);}
+ {const g=world({voice:true});const r=run(g,'dist01',{skipAt:120});const c=g.voiceCalls;
+  ok('skip stops the voice at once and starts no further line',c.length>=1&&c[c.length-1].stopped===true&&g.api.inspect().stats.skips===1,c.map(x=>x.stopped));}
+ {const g=world({voice:true}),A=g.api;A.play({zone:'dist01',at:6});for(let i=0;i<20;i++)g.raf(33);ok('still frame (at=…): no voice',g.voiceCalls.length===0);A.skip();}
+ {const g=world({voice:true}),A=g.api;A.play({zone:'dist01'});for(let i=0;i<200;i++){g.raf(33);g.voiceTick();}const i1=A.inspect();
+  ok('inspect reports voice state',i1.voice&&i1.voice.on===true&&i1.voice.spoken>=1,i1.voice);A.skip();}
+}
+// 8c) 화면 마감(R889, 사용자 2026-11-12 "조금만더 퀄리티업 전반적으로"): 전 장면 공통
+{const g=world(),A=g.api;A.play({zone:'dist01'});const root=g.dom.document.getElementById('r880'),cls=root.children.map(c=>c.className||'');
+ ok('finish: title card, top/bottom shade and grain layers exist; caption and skip still there',['ttl','shade t','shade b','grain','cap','skip','chap'].every(c=>cls.includes(c)),cls);
+ const ttl=root.children.find(c=>c.className==='ttl');ok('finish: title card shows the region title',String(ttl?.textContent||'').includes('제목 dist01'),ttl?.textContent);
+ ok('finish: grain uses no blend mode (measured −30% fps in software rendering)',!/\.grain\{[^}]*mix-blend-mode/.test(SRC));
+ ok('finish: reduced-motion stops grain and title animation',/prefers-reduced-motion: reduce\)\{[^@]*\.grain\{animation:none\}/.test(SRC));
+ ok('finish: cinema mode hides the title card',/#r880\.cinema \.ttl\{display:none\}/.test(SRC));
+ for(let i=0;i<60;i++)g.raf(33);ok('finish: no errors with dust, breathing camera and shadows',A.inspect().stats.errors===0,A.inspect().lastError);A.skip();
+ const g2=world(),A2=g2.api;A2.play({zone:'dist01',at:5});ok('finish: still frame (at=…) has no title card',!g2.dom.document.getElementById('r880').children.some(c=>c.className==='ttl'));A2.skip();}
 // 9) 빌드 연결 다섯 곳
 {const html=rd(path.join(R,'runtime-text','index.html'))||'',lines=html.split('\n');
  const iT=lines.findIndex(l=>l.includes('./title-bg-video-r667.js')),iE=lines.findIndex(l=>l.includes('./'+ENGINE)),iS=lines.findIndex(l=>l.includes('./'+SCENES[0])),iS2=SCENES.map(f=>lines.findIndex(l=>l.includes('./'+f)));
  ok('script tags: every scene file follows the engine in order',iS2.every((v,i)=>v===iE+1+i),iS2);
  ok('script tags: engine then scenes, right after the video cinematics',iT>0&&iE===iT+1&&iS===iE+1&&lines[iE].trim()==='<script src="./'+ENGINE+'"></script>',[iT,iE,iS]);
- const ver=rd(path.join(ROOT,'scripts','verify-r96-public.py'))||'';ok('public verify list has both files',[ENGINE,...SCENES].every(f=>ver.includes("'"+f+"'")));
+ const ver=rd(path.join(ROOT,'scripts','verify-r96-public.py'))||'';ok('public verify list has both files',[ENGINE,...SCENES,VFILE].every(f=>ver.includes("'"+f+"'")));
  const yml=rd(path.join(ROOT,'.github','workflows','pages.yml'))||'';ok('CI runs this check',yml.includes('node r96/qa/r880/r880-cpu-check.cjs'));
- const man=rd(path.join(R,'runtime-inputs.json'))||'';ok('runtime inputs list both files',[ENGINE,...SCENES].every(f=>man.includes(f)));}
+ const man=rd(path.join(R,'runtime-inputs.json'))||'';ok('runtime inputs list both files',[ENGINE,...SCENES,VFILE].every(f=>man.includes(f)));}
 console.log(`R880 CPU ${pass}/${total}`);process.exit(pass===total?0:1);
 })().catch(e=>{console.log('CRASH',e&&e.stack||e);process.exit(1);});
