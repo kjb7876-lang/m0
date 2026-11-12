@@ -462,6 +462,8 @@ jobs:
         run: node r96/qa/r600/r600-cpu-check.cjs
       - name: R701 survival 77s choice window, difficulty, hero picker CPU check
         run: node r96/qa/r701/r701-cpu-check.cjs
+      - name: R720 survival hero placement (I key, crystals, story-order prices, leash and range upgrades, swap rule) CPU check
+        run: node r96/qa/r720/r720-cpu-check.cjs
       - name: R463 seven-sins boss art (one form per fight, one body height, no cut-out broom) CPU check
         run: node r96/qa/r463/r463-cpu-check.cjs
       - name: R511 empty samong rooms get a guarded memory shard CPU check
