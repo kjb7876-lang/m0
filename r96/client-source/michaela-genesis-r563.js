@@ -71,9 +71,10 @@ function patchSigil(){if(sigPatched)return;try{const TH=window.__STORYWORLD_SAMO
   const go=()=>{ctx.save();try{ctx.globalCompositeOperation='source-over';ctx.globalAlpha*=al;for(const[c0,c1]of(L==='front'?SIGCROP:[[0,SIGC]]))ctx.drawImage(im,u+c0,v,c1-c0,SIGC,x+(c0-SIGP[0])*sc,fy-SIGP[1]*sc,(c1-c0)*sc,SIGC*sc);}finally{ctx.restore();}};
   const own={id:'r563:sigil-'+L,kind:'effect',x:player?.x||0,y:player?.y||0,groundAligned:false,r572:true};if(L==='back')own.r350=true;
   if(typeof ctx.scope==='function')ctx.scope(own,go);else go();stats.sigils=(stats.sigils||0)+1;};sigPatched=true;}catch(err){fail(err);}}
+const asHeroR720=(id,fn)=>{const D=window.__STORYWORLD_HERO_DEFENSE_R720__;return D&&typeof D.asHero==='function'?D.asHero(id,fn):fn();};/* R720-4: 다음 틱에 이어지는 기술을 그 영웅 몸(생존 배치 영웅이면 그 몸)으로 돌린다 */
 if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);
  try{if(!sigPatched)patchSigil();}catch(err){fail(err);}
- try{if(typeof started!=='undefined'&&started)step();}catch(err){fail(err);cancel();}sentinel(!!(pillars.length||skies.length));return r;};}
+ try{if(typeof started!=='undefined'&&started)asHeroR720(HERO,step);}catch(err){fail(err);cancel();}sentinel(!!(pillars.length||skies.length));return r;};}
 // ---- 그리기 -------------------------------------------------------------------------------
 const GOLD='255,214,140',WHITE='255,250,236',ROSE='236,150,140',DEEP='180,110,40';
 // Dots CX-0059S MI-01(하늘 후광, 24장 한 번, 고리 중심 y111·너비 230/256)·MI-02 r2(빛기둥 폭 60~66px, 맞는 칸 4, 바닥 빛살 y218·149/256)·MI-03(큰 기둥, y212·157/256) — 칸 256, 6×4.

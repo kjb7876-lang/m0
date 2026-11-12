@@ -186,9 +186,10 @@ try{
   try{const o=opt||{};if(on&&type==='storySourceSkill'&&o.storyWER&&o.sourceHero==='hwando'&&isHw()&&!egoOn()&&o.castId!=null){
    if(o.sourceSlot==='e'&&o.stage==='flight')onFlight(x,y,o);else if(o.sourceSlot==='r'&&o.stage==='release'&&fin(x)&&fin(y))onWave(x,y,o);}}catch(e){fail(e);}return r;};}
  if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e===SENT){try{if(on)drawAll();}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};}
+ const asHeroR720=(id,fn)=>{const D=window.__STORYWORLD_HERO_DEFENSE_R720__;return D&&typeof D.asHero==='function'?D.asHero(id,fn):fn();};/* R720-4: 다음 틱에 이어지는 기술을 그 영웅 몸(생존 배치 영웅이면 그 몸)으로 돌린다 */
  if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{if(!themePatched)patchTheme();const t=T(),dt=lastT==null?0:clamp(t-lastT,0,.1);lastT=t;
-   for(let i=0;i<jobs.length;){const q=jobs[i];if(t>=q.at){jobs.splice(i,1);if(valid(q.j))q.fn();}else if(!valid(q.j))jobs.splice(i,1);else i++;}
-   if(dt>0)stepBlades(dt);
+   asHeroR720('hwando',()=>{for(let i=0;i<jobs.length;){const q=jobs[i];if(t>=q.at){jobs.splice(i,1);if(valid(q.j))q.fn();}else if(!valid(q.j))jobs.splice(i,1);else i++;}
+   if(dt>0)stepBlades(dt);});
    for(let i=vis.length-1;i>=0;i--)if(t-vis[i].t0>=vis[i].life||t<vis[i].t0-1)vis.splice(i,1);
    if(jobs.length||blades.length||vis.length)arm();else disarm();}catch(e){fail(e);}return r;};}
  if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){clearAll();const r=await base.apply(this,a);preload();return r;};}

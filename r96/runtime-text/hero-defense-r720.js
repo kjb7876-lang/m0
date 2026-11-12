@@ -22,7 +22,7 @@
 //  끄기: localStorage 'storyworld.r720.heroDefense'='0' (창·보상·배치가 모두 꺼진다).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_HERO_DEFENSE_R720__)return;
-const REV='R720-hero-defense-3',KEY='storyworld.r720.heroDefense';
+const REV='R720-hero-defense-4',KEY='storyworld.r720.heroDefense';
 let on=true;try{if(localStorage.getItem(KEY)==='0')on=false;}catch(_){}
 const stats={opens:0,buys:0,places:0,moves:0,upgrades:0,swaps:0,hits:0,rewards:0,clears:0,resets:0,draws:0,heroDraws:0,errors:0,casts:{basic:0,q:0,w:0,e:0,r:0}};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
@@ -83,7 +83,7 @@ function think(a,enemies,dt,st,anchor,env){const out={hits:[],target:null,moved:
  return out;}
 
 // ── 상태 ──
-let st=fresh(null),allies=[],runKey=null,lastRoom=null,clearKey=null,mine=false;
+let st=fresh(null),allies=[],runKey=null,lastRoom=null,clearKey=null,mine=false;const used=new Map();/* 영웅 → 배치 몸이 읽은 그림 주소 */
 const SV=()=>window.__STORYWORLD_SURVIVAL_R600__;
 const here=()=>on&&G(()=>SV().here()===true,false);
 const sv=()=>G(()=>SV().state(),null);
@@ -192,7 +192,7 @@ async function swapTo(i){if(!here())return {ok:false,why:'off'};ensure();const s
 // 검사 훅: 자리를 조금 옮겨 배치 영웅이 걸어가게 한다 / 배치 영웅에게 기본 공격·고유기를 바로 쓰게 한다(적이 없어도 조종 영웅의 빈 공격과 같은 길)
 let frozen=false;/* 검사: 배치 영웅이 스스로 공격하지 않게(걷기·자세 측정용) */
 function qaNudge(i,dx,dy){const s=st.slots[i];if(!here()||!s)return false;s.ox+=+dx||0;s.oy+=+dy||0;return true;}
-function qaCast(i,kind){const a=allies[i],s=st.slots[i];if(!here()||!a||!a.body||!s)return false;const b=a.body;return as(a,()=>{if(kind==='q'){b.specialCD=0;special();return b.skillAnim>0;}b.attackCD=0;basicAttack(true);return b.attackAnim>0;})===true;}
+function qaCast(i,kind){const a=allies[i],s=st.slots[i];if(!here()||!a||!a.body||!s)return false;const b=a.body;return as(a,()=>{if(kind==='q'){b.specialCD=0;special();return b.skillAnim>0;}if(kind==='w'||kind==='e'||kind==='r'){try{b.storyWER??={ready:{},buffs:{}};b.storyWER.ready[b.hero+':'+kind]=0;}catch(_){}if(G(()=>window.__STORYWORLD_WER__.cast(kind,true),false)===true)return true;const M=window.__STORYWORLD_MICHAELA_R247__;return (kind!=='r'&&b.hero==='michaela'&&G(()=>M.on(),false))?G(()=>M.fire(kind,true),false)===true:false;}b.attackCD=0;basicAttack(true);return b.attackAnim>0;})===true;}
 // 검사 훅: Q·W·E·R 을 배운 상태로(끄면 원래 단계로). 저장은 하지 않는 생존 모드 안에서만.
 let qaKeep=null;function qaSkills(v){if(!here())return false;const p=realP&&!cur.length?P():P(),A=window.__STORYWORLD_PROGRESSION_R62__;if(!p||p.r720Ally||!A?.state)return false;const rk=A.state(p).ranks;if(!rk)return false;
  const ids=['Q','W','E','R'].map(k=>'skill'+k+'R663');if(v){if(!qaKeep){qaKeep={};for(const k of ids){qaKeep[k]=rk[k];rk[k]=Math.max(1,+rk[k]||0);}}}else if(qaKeep){for(const k of ids){if(qaKeep[k]===undefined)delete rk[k];else rk[k]=qaKeep[k];}qaKeep=null;}return true;}
@@ -257,6 +257,12 @@ function install(){
  if(typeof delay==='function'){const base=delay;delay=function(sec,fn,...r){const a=curAlly();if(a&&typeof fn==='function'){const b=a.body,f=fn;fn=function(...x){if(!validAlly(a)||a.body!==b)return;return as(a,()=>f.apply(this,x));};}return base.call(this,sec,fn,...r);};}
  if(typeof hitEnemy==='function'){const base=hitEnemy;hitEnemy=function(e,dmg,...r){const a=curAlly();if(a&&fin(dmg)){dmg*=mulOf(a);const v=base.call(this,e,dmg,...r);if(v)stats.hits++;return v;}return base.call(this,e,dmg,...r);};}
  if(typeof makeShot==='function'){const base=makeShot;makeShot=function(x,y,ang,spd,dmg,...r){const a=curAlly();if(a&&fin(dmg)){dmg*=mulOf(a);const v=base.call(this,x,y,ang,spd,dmg,...r);if(v)stats.hits++;/* 원거리는 쏜 것을 센다(맞는 순간은 몸 밖에서 일어난다) */return v;}return base.call(this,x,y,ang,spd,dmg,...r);};}
+ // R720-4(사용자 2026-11-12 14:05Z "맵 바뀌면 배치한 영웅들 이미지 사라짐"): 엔진은 지역을 옮길 때 releaseImageMemory 로 조종 영웅 그림만 남기고 다 지운다
+ //  (배치 영웅은 대기 정면 한 장만 남아 몸이 안 그려짐). 배치 영웅 몸이 실제로 읽은 그림 주소를 영웅별로 모아 두고, 지울 때 그 줄을 다시 넣는다(다시 받지 않음).
+ if(typeof readyImage==='function'){const base=readyImage;readyImage=function(path,...r){const v=base.apply(this,[path,...r]);if(cur.length&&v&&typeof path==='string'){try{const h=G(()=>player.hero,null);if(h){const u=used.get(h)||(used.set(h,new Set()),used.get(h));if(u.size<600)u.add(path);}}catch(_){}}return v;};}
+ if(typeof releaseImageMemory==='function'){const base=releaseImageMemory;releaseImageMemory=function(...a){let keep=null;try{if(here()&&st.slots.length&&typeof imageCache!=='undefined'){keep=new Map();const main=G(()=>player.hero,null);
+    for(const s of st.slots){if(!s||s.hero===main)continue;const paths=[...(used.get(s.hero)||[]),...G(()=>heroPaths(s.hero),[])];for(const q of paths){const k=G(()=>cleanPath(q),q),row=imageCache.get(k);if(row&&row.ready)keep.set(k,row);}}}}catch(e){fail(e);}
+   const r=base.apply(this,a);if(keep&&keep.size){try{let n=0;for(const [k,row] of keep)if(!imageCache.has(k)){imageCache.set(k,row);n++;}stats.keptImages=(stats.keptImages||0)+n;}catch(e){fail(e);}}return r;};}
  if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){if(p&&p.r720AllyProp){try{if(here())drawAlly(p);}catch(e){fail(e);}return;}return base.apply(this,[p,...a]);};}
  if(typeof openPanel==='function'){const base=openPanel;openPanel=function(...a){mine=false;return base.apply(this,a);};}
  if(typeof closePanel==='function'){const base=closePanel;closePanel=function(...a){mine=false;return base.apply(this,a);};}
@@ -270,7 +276,8 @@ function install(){
  if(typeof setInterval==='function'){const iv=setInterval(nav,400);iv?.unref?.();}}
 try{install();}catch(e){fail(e);}
 const copy=()=>({crystals:st.crystals,main:st.main||G(()=>player.hero,null),owned:{...(st.main?st.owned:{[G(()=>player.hero,'')]:true})},slots:st.slots.map(s=>({...s}))});
-window.__STORYWORLD_HERO_DEFENSE_R720__=Object.freeze({revision:REV,enabled:()=>on,open,close,toggle,buy,placeHere,moveHere,upgrade,swapTo,qaGive:give,/* 그 영웅이 지금 이 판에 있는가(조종 영웅이거나 배치된 영웅) — 영웅별 덧씌우기가 '다른 몸을 그리는 차례'를 가릴 때 쓴다 */has:id=>{if(!here())return false;const m=cur.length?realP:P();return !!id&&((m&&m.hero===id)||st.slots.some(s=>s.hero===id));},qaSkills,qaNudge,qaCast,qaFreeze:v=>{frozen=v===true;return frozen;},bodies:()=>allies.map(a=>a.body||null),
+window.__STORYWORLD_HERO_DEFENSE_R720__=Object.freeze({revision:REV,enabled:()=>on,open,close,toggle,buy,placeHere,moveHere,upgrade,swapTo,qaGive:give,/* 그 영웅이 지금 이 판에 있는가(조종 영웅이거나 배치된 영웅) — 영웅별 덧씌우기가 '다른 몸을 그리는 차례'를 가릴 때 쓴다 */has:id=>{if(!here())return false;const m=cur.length?realP:P();return !!id&&((m&&m.hero===id)||st.slots.some(s=>s.hero===id));},/* R720-4: 영웅 전용 덧씌우기의 '다음 틱에 이어지는 기술'(회오리 날리기·폭발 예약 등)을 그 영웅의 몸으로 돌린다. 그 영웅이 배치 영웅이면 그 몸을 player 로 끼워 fn 을, 아니면(조종 영웅이거나 없음) 그대로 fn 을 부른다.
+   배치 영웅은 조종 영웅과 같은 영웅일 수 없으므로(교대 규칙) 영웅 전용 파일의 상태는 한 몸 것뿐이다. */asHero:(id,fn)=>{if(typeof fn!=='function')return undefined;if(!on||cur.length||!here())return fn();const m=P();if(!m||m.r720Ally||m.hero===id)return fn();const i=st.slots.findIndex(s=>s&&s.hero===id),a=i>=0?allies[i]:null;if(a&&a.body&&validAlly(a)&&a.body.hero===id)return as(a,fn);return fn();},qaSkills,qaNudge,qaCast,qaFreeze:v=>{frozen=v===true;return frozen;},bodies:()=>allies.map(a=>a.body||null),
  state:()=>{if(here())ensure();return copy();},allies:()=>allies.map((a,i)=>({slot:i,x:a.x,y:a.y,cd:a.cd,dir:a.dir,anim:a.anim,moving:a.moving})),
  pure:Object.freeze({PRICES,MAX,order,price,tier,cost,slotStats,reward,clearBonus,fresh,doBuy,doPlace,doMove,doUpgrade,onHeroChange,anchorOf,think}),
  inspect:()=>({revision:REV,on,mine,stats:{...stats},lastError})});

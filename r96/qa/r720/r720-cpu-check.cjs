@@ -62,9 +62,14 @@ function mk(o={}){
   if(p.combo%3===0)sb.delay(.1,()=>{sb.calls.late.push({hero:sb.player.hero,ally:sb.player.r720Ally===true});sb.hitEnemy(e,sb.attackPower()*.5);});};
  sb.delay=(sec,fn)=>{sb.delayed.push({at:sb.time+sec,fn});};
  sb.makeShot=(x,y,a,spd,dmg)=>{sb.shots.push({x,y,dmg});return {};};
- sb.drawHero=()=>{sb.calls.sprite.push(sb.heroArt[sb.player.hero].idle.front);sb.calls.heroDraw.push({hero:sb.player.hero,x:sb.player.x,y:sb.player.y});};
+ sb.drawHero=()=>{for(const q of sb.drawHeroReads)sb.readyImage(sb.player.hero+q);sb.calls.sprite.push(sb.heroArt[sb.player.hero].idle.front);sb.calls.heroDraw.push({hero:sb.player.hero,x:sb.player.x,y:sb.player.y});};
  sb.tick=function(dt){sb.calls.tickBase++;if(sb.modal||sb.loading)return;sb.time+=dt;const due=sb.delayed.filter(d=>d.at<=sb.time);sb.delayed=sb.delayed.filter(d=>d.at>sb.time);for(const d of due)d.fn();};
  sb.drawProp=function(p){sb.calls.drawBase++;};
+ // 엔진 흉내: 그림 기억과 지역 이동 때 비우기(조종 영웅 그림·모든 영웅 대기 정면만 남김)
+ sb.imageCache=new Map();sb.cleanPath=p=>p;const rdy=p=>{const r=sb.imageCache.get(p);return r&&r.ready?r:null;};
+ sb.readyImage=p=>sb.imageCache.size?rdy(p):({image:{naturalWidth:10,naturalHeight:20},path:p});
+ sb.releaseImageMemory=()=>{const keep=new Set([...sb.heroPaths(sb.player.hero),...Object.keys(HEROES).map(id=>sb.heroArt[id].idle.front)]);for(const [k,r] of sb.imageCache)if(!keep.has(k)&&r.ready)sb.imageCache.delete(k);};
+ sb.drawHeroReads=[];const dh0=null;
  sb.ctx={save(){},restore(){},beginPath(){},ellipse(){},stroke(){},fill(){},fillRect(){},setLineDash(){},moveTo(){},lineTo(){},arc(){},drawImage(){},globalAlpha:1};
  sb.window=sb;sb.globalThis=sb;
  sb.__STORYWORLD_SURVIVAL_R600__=Object.freeze({here:()=>sv.hereV,active:()=>sv.hereV,
@@ -218,6 +223,14 @@ if(!P){console.log('\n'+(n-bad)+'/'+n+' — 모듈이 없어 나머지 검사를
  // 원래 영웅 그대로: 엔진 기본 공격을 '배치 영웅의 몸'으로 부른다. 조종 영웅 객체·상태는 그대로다.
  {const at=m.sb.calls.attack,me=m.sb.player,bd=m.api.bodies()[0];
   ok(at.length>=2&&at.every(c=>c.hero==='seoha'&&c.ally&&near(c.x,52)&&near(c.y,50)),'엔진 basicAttack 을 윤서하 몸(자리 위치)으로 부른다',at.slice(0,2));
+  // R720-4: 지역을 옮겨 엔진이 그림 기억을 비워도 배치 영웅 몸이 읽은 그림은 남는다(사용자 2026-11-12 14:05Z '맵 바뀌면 배치 영웅 이미지 사라짐')
+  {const C=m.sb.imageCache,row=k=>({path:k,ready:true,image:{}});for(const k of ['seoha/i','seoha/a','seoha/sheet-walk','seoha/sheet-atk','hwando/i','hwando/a','hwando/il','junk/x'])C.set(k,row(k));
+   m.sb.drawHeroReads=['/sheet-walk','/sheet-atk'];for(const p of m.sb.room.props.filter(q=>q.r720AllyProp))m.sb.drawProp(p);m.sb.drawHeroReads=[];
+   m.sb.releaseImageMemory();ok(C.has('seoha/sheet-walk')&&C.has('seoha/sheet-atk')&&C.has('seoha/a'),'지역 이동 때 배치 영웅(윤서하)이 쓰던 그림은 지우지 않는다',[...C.keys()]);
+   ok(!C.has('junk/x')&&!C.has('hwando/il'),'다른 그림은 엔진대로 지운다',[...C.keys()]);C.clear();}
+  // R720-4: 영웅 전용 덧씌우기의 '다음 틱 기술'은 그 영웅 몸으로 돈다
+  {const A=m.api,me=m.sb.player;const inS=A.asHero('seoha',()=>m.sb.player),inMain=A.asHero('hwando',()=>m.sb.player),none=A.asHero('neon',()=>m.sb.player);
+   ok(inS&&inS!==me&&inS.r720Ally===true&&inS.hero==='seoha','배치된 영웅(윤서하)의 틱 작업은 그 몸을 player 로 돈다');ok(inMain===me&&none===me&&m.sb.player===me,'조종 영웅이나 없는 영웅이면 그대로(조종 영웅), 끝나면 player 는 조종 영웅');}
   ok(m.sb.target==='mine'&&m.sb.command==='mine'&&m.sb.route.length===1&&m.sb.route[0]==='r','배치 영웅의 공격이 조종 영웅의 겨눔·이동 명령(target·command·route)을 바꾸지 않는다(조종 영웅이 끌려가지 않음)',{target:m.sb.target,command:m.sb.command,route:m.sb.route});
   ok(bd&&bd!==me&&bd.r720Ally===true&&bd.hero==='seoha'&&me.hero==='hwando'&&me.r720Ally===undefined,'몸은 조종 영웅과 다른 객체, 끝나면 player 는 조종 영웅으로 돌아와 있다');
   ok(me.combo===0&&me.attackCD===0&&me.attackAnim===0&&me.x===52&&me.y===50&&me.direction==='front','조종 영웅의 콤보·쿨·자세·위치·방향은 안 바뀐다',{combo:me.combo,cd:me.attackCD});

@@ -84,6 +84,13 @@ const on=(E,id,tag)=>E.hits.filter(h=>h.id===id&&(!tag||h.s?.r947===tag));
 {const E=engine({enemies:[{id:'a',x:21,y:20}]});E.api.set(false);E.api.force('needle');E.ctx.basicAttack();E.run(1);ok(E.api.inspect().stats.needles===0,'끄면 발동 없음');E.api.set(true);}
 {const E=engine({enemies:[{id:'a',x:21,y:20}],rand:()=>0});E.ctx.basicAttack();E.run(.5);E.ctx.basicAttack();E.run(.05);
  ok(E.api.inspect().stats.needles===1,'대기 시간 안 두 번째 공격은 피 탄 없음');E.run(E.api.config.needle.icd);E.ctx.basicAttack();E.run(.05);ok(E.api.inspect().stats.needles===2,'대기 시간 뒤 다시 발동');}
+// 대상이 없어 발동이 안 나가면 대기 시간도 쓰지 않음(R947-3, 코디네이터 16:21Z 환도 스레드와 같은 결함)
+{const E=engine({enemies:[{id:'a',x:21,y:20,hp:50,maxHp:50},{id:'far',x:30,y:20}],rand:()=>0});E.ctx.basicAttack();E.run(.05);
+ ok(E.api.inspect().stats.needles===0&&E.api.inspect().cd.needle===0,'혈침: 벤 적이 죽고 둘레에 적이 없으면 대기 시간 안 씀');
+ E.g.room.enemies.push({id:'b',x:21.5,y:20,radius:.3,hp:1e5,maxHp:1e5,spawnState:'active'});E.run(.5);E.ctx.basicAttack();E.run(.05);ok(E.api.inspect().stats.needles===1,'혈침: 바로 다음 공격에 발동');}
+{const E=engine({enemies:[{id:'a',x:21,y:20,hp:50,maxHp:50},{id:'far',x:30,y:20}],rand:()=>.21});E.ctx.basicAttack();E.run(.05);
+ ok(E.api.inspect().stats.swordCasts===0&&E.api.inspect().cd.swords===0,'성혈검우: 범위 안 적이 없으면 대기 시간 안 씀');
+ E.g.room.enemies.push({id:'b',x:21.5,y:20,radius:.3,hp:1e5,maxHp:1e5,spawnState:'active'});E.run(.5);E.ctx.basicAttack();E.run(.05);ok(E.api.inspect().stats.swordCasts===1,'성혈검우: 바로 다음 공격에 발동');}
 // 패시브 자신의 피해는 다시 주사위를 굴리지 않음(연쇄 폭주 방지)
 {const E=engine({enemies:[{id:'a',x:21,y:20},{id:'b',x:23,y:20}],rand:()=>0});E.ctx.basicAttack();E.run(1);ok(E.api.inspect().stats.swings===1,'패시브 피해는 발동 기회로 세지 않음');}
 // 확률: 고정 시드 주사위
