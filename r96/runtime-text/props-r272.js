@@ -9,7 +9,7 @@
 if(window.__STORYWORLD_PROPS_R272__)return;
 const REV='R272-props-2-r830',KEY='storyworld.r272.props',NEAR=3.5;
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
-const stats={rooms:0,memorials:0,stairsDropped:0,stairsKept:0,canonDropped:0,canonSwapped:0,errors:0};let lastError=null,last=null,lastCanon=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
+const stats={rooms:0,memorials:0,stairsDropped:0,stairsKept:0,canonDropped:0,canonSwapped:0,detailHidden:0,detailSwapped:0,errors:0};let lastError=null,last=null,lastCanon=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const isMemorial=p=>/(^|\/)blank_memorial\.webp$/.test(String(p?.path||''))||p?.key==='memorial';
 const isStairs=p=>/(^|\/)collapsed_stairs\.webp$/.test(String(p?.path||''))||p?.key==='stairs';
 // 순수(QA): 남길지
@@ -49,6 +49,14 @@ function canonPass(r){if(!canon)return;const c=ctxOf(r);if(!r.props.some(p=>p!==
 function apply(r){if(!on||!r||!Array.isArray(r.props))return;try{canonPass(r);}catch(e){fail(e);}if(r.__r272props)return;try{const pts=transitionPoints(r);const before=r.props.length;let mem=0,sd=0,sk=0;
  r.props=r.props.filter(p=>{const k=keep(p,pts);if(isMemorial(p))mem++;else if(isStairs(p)){if(k)sk++;else sd++;}return k;});
  r.__r272props=true;stats.rooms++;stats.memorials+=mem;stats.stairsDropped+=sd;stats.stairsKept+=sk;last={zone:r.id,before,after:r.props.length,memorials:mem,stairsDropped:sd,stairsKept:sk,points:pts.length};}catch(e){fail(e);}}
+// R830: 엔진의 지역 세부 장식(regionalDecoration — room.props 밖 목록, 그릴 때만 붙는다)도 같은 규칙으로. 못 서는 그림은 그리지 않고, 바꿀 그림은 그 한 번만 경로를 바꿔 그린다.
+let ctxMemo=null;const ctxNow=()=>{const r=typeof room!=='undefined'?room:null;if(!r)return null;if(!ctxMemo||ctxMemo.r!==r||ctxMemo.L!==r.exploration)ctxMemo={r,L:r.exploration,c:ctxOf(r)};return ctxMemo.c;};
+try{if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){
+  if(on&&canon&&p&&p.regionalDecoration&&typeof p.path==='string'){let f=true;try{const c=ctxNow();if(c)f=fit(artName(p.path),c);}catch(e){fail(e);}
+   if(f===false){stats.detailHidden++;return;}
+   if(f!==true){const to='assets/props/v290/'+f+'.webp';try{if(typeof readyImage==='function'&&!readyImage(to)){if(typeof addImage==='function')addImage(to,'R830 canon');return;}}catch(e){fail(e);}
+    const o=p.path;p.path=to;stats.detailSwapped++;try{return base.apply(this,[p,...a]);}finally{p.path=o;}}}
+  return base.apply(this,[p,...a]);};}}catch(e){fail(e);}
 try{const base=getRoom;getRoom=function(...a){const r=base.apply(this,a);try{if(r&&r.id===zone)setTimeout(()=>apply(r),0);}catch(_){}return r;};}catch(e){fail(e);}
 setInterval(()=>{try{if(typeof room!=='undefined'&&room&&!loading)apply(room);}catch(e){fail(e);}},300);
 window.__STORYWORLD_PROPS_R272__=Object.freeze({revision:REV,keep,fit,fitPath,towerOk,artName,ctxOf,apply,PART1,TECH,BLOOD,MACHINE,inspect:()=>({revision:REV,on,canon,stats:{...stats},last,lastCanon,lastError,browserVerified:false,GPUVerified:false})});

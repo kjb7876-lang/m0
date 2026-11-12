@@ -9,7 +9,7 @@
 //  · storyworld.r329.propShadow = '0' 이면 끈다.
 (()=>{'use strict';
 if(window.__STORYWORLD_PROP_SHADOW_R329__)return;
-const REV='R329-prop-shadow-11-r831',KEY='storyworld.r329.propShadow',UKEY='storyworld.r448.shadowOneLight';
+const REV='R329-prop-shadow-10-r448',KEY='storyworld.r329.propShadow',UKEY='storyworld.r448.shadowOneLight';
 let on=true;try{on=localStorage.getItem(KEY)!=='0';}catch(_){}
 // R448(사용자 2026-11-09 "234번 우선적용", 레퍼런스 등각 맵의 규칙: 모든 물체가 같은 방향(왼쪽 위 광원)으로 부드러운 바닥 그림자를 떨어뜨린다):
 //  근처 불빛마다 그림자 방향이 제각각이던 것(R300 lightsOf·R330 불길 갈래)을 끄고, 모든 조형물이 한 방향 — 화면 오른쪽으로 바닥에 눕고 아주 조금만 뒤(위)로 — 떨어뜨린다.
@@ -35,13 +35,16 @@ const FOOT_BAND=.4,FOOT_MAX=.3,FOOT_SCALE=1.45,footMemo=new Map();
 function footShift(widths,aspect){const n=widths?.length|0;if(n<8||!(aspect>=.85))return 0;const band=Math.max(4,Math.round(n*FOOT_BAND));let wmax=0;for(let i=0;i<band;i++)if(widths[i]>wmax)wmax=widths[i];
  if(wmax<.5)return 0;const low=Math.max(1,Math.round(n*.04));let w0=0;for(let i=0;i<low;i++)w0=Math.max(w0,widths[i]);if(w0>wmax*.35)return 0;/* 밑이 넓으면 평평한 밑면 */
  for(let i=0;i<band;i++){if(widths[i]>=wmax*.9)return Math.min(FOOT_MAX,i/n);if(i&&widths[i]<widths[i-1]*.8)return 0;/* 중간에 잘록해지면(다리·줄기) 마름모 밑면이 아니다 */}return 0;}
+function footMeasure(image,b){const H=64,Wd=Math.max(8,Math.min(160,Math.round(H*b.w/b.h)));
+ const cv=typeof OffscreenCanvas==='function'?new OffscreenCanvas(Wd,H):Object.assign(document.createElement('canvas'),{width:Wd,height:H}),g=cv.getContext('2d',{willReadFrequently:true});
+ g.drawImage(image,b.x||0,b.y||0,b.w,b.h,0,0,Wd,H);const d=g.getImageData(0,0,Wd,H).data,rows=[];
+ for(let y=H-1;y>=0;y--){let l=-1,r=-1;for(let x=0;x<Wd;x++)if(d[(y*Wd+x)*4+3]>40){if(l<0)l=x;r=x;}rows.push(l<0?0:(r-l+1)/Wd);}
+ while(rows.length&&rows[0]===0)rows.shift();return footShift(rows,b.w/b.h);}
+const footKeep=(k,v)=>{if(footMemo.size>600)footMemo.clear();footMemo.set(k,v);return v;};
 function footOfPath(path){if(footMemo.has(path))return footMemo.get(path);let v=0;try{const row=typeof readyImage==='function'?readyImage(path):null;if(!row||!row.image)return 0;
-  const b=row.crop||{x:0,y:0,w:row.image.naturalWidth||row.image.width,h:row.image.naturalHeight||row.image.height},H=64,Wd=Math.max(8,Math.min(160,Math.round(H*b.w/b.h)));
-  const cv=typeof OffscreenCanvas==='function'?new OffscreenCanvas(Wd,H):Object.assign(document.createElement('canvas'),{width:Wd,height:H}),g=cv.getContext('2d',{willReadFrequently:true});
-  g.drawImage(row.image,b.x||0,b.y||0,b.w,b.h,0,0,Wd,H);const d=g.getImageData(0,0,Wd,H).data,rows=[];
-  for(let y=H-1;y>=0;y--){let l=-1,r=-1;for(let x=0;x<Wd;x++)if(d[(y*Wd+x)*4+3]>40){if(l<0)l=x;r=x;}rows.push(l<0?0:(r-l+1)/Wd);}
-  while(rows.length&&rows[0]===0)rows.shift();v=footShift(rows,b.w/b.h);}catch(e){fail(e);v=0;}
- if(footMemo.size>600)footMemo.clear();footMemo.set(path,v);return v;}
+  v=footMeasure(row.image,row.crop||{x:0,y:0,w:row.image.naturalWidth||row.image.width,h:row.image.naturalHeight||row.image.height});}catch(e){fail(e);v=0;}return footKeep(path,v);}
+// 자기 그림을 직접 그리는 모듈(R92 바닥 등불)이 묻는다: 이미 불러온 그림 + 기억할 이름 → 올릴 높이(그림 키 대비)
+function footOfImage(key,img){const k='img:'+key;if(footMemo.has(k))return footMemo.get(k);if(!footOn||!img)return 0;let v=0;try{const w=img.naturalWidth||img.width,h=img.naturalHeight||img.height;if(!(w>0&&h>0))return 0;v=footMeasure(img,{x:0,y:0,w,h});}catch(e){fail(e);v=0;}return footKeep(k,v);}
 const footPlain=p=>!!p&&typeof p.path==='string'&&!p.r80Dressing&&!p.r74Prop&&!p.r81NativeSkin&&!p.r99Tree&&!p.visualHospitalFrame&&!(p.visualLiftPx>0);
 let pend=null;
 const recent=[];let cur=null,depth=0;
@@ -91,7 +94,7 @@ function install(){
 const installed=(()=>{try{return install();}catch(e){fail(e);return false;}})();
 // R102 움직이는 조형물은 처음 실린 drawAssetFrame3 를 직접 잡아 쓰므로 그쪽 paint 가 이 함수를 먼저 부른다.
 function before(fn,args,footY){if(!on||depth<1)return;const c=take(+args[2]);if(!c)return;try{castVia(fn,null,args,2,3,4,5,Number.isFinite(footY)?footY:c.y,c);}catch(e){fail(e);}}
-window.__STORYWORLD_PROP_SHADOW_R329__=Object.freeze({revision:REV,installed,before,footShift,footOfPath,
+window.__STORYWORLD_PROP_SHADOW_R329__=Object.freeze({revision:REV,installed,before,footShift,footOfPath,footOfImage:(k,i)=>footOn?footOfImage(k,i):0,FOOT_SCALE,
  setFoot:v=>{footOn=!!v;try{localStorage.setItem('storyworld.r831.footShadow',footOn?'1':'0');}catch(_){}return footOn;},
  oneLight:()=>oneLight,setOneLight:v=>{oneLight=!!v;try{localStorage.setItem(UKEY,oneLight?'1':'0');}catch(_){}return oneLight;},
  inspect:()=>({revision:REV,on,oneLight,installed,stats:{...stats},recent:recent.slice(),lastError}),

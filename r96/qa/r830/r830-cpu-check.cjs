@@ -4,7 +4,7 @@
 'use strict';const fs=require('fs'),path=require('path'),vm=require('vm');
 const R=path.join(__dirname,'..','..'),rd=f=>{try{return fs.readFileSync(path.join(R,f),'utf8');}catch(_){return'';}};
 let bad=0,n=0;const ok=(m,c)=>{n++;if(!c){bad++;console.log('FAIL',m);}else console.log('ok  ',m);};
-const FILES=['props-r272.js','env-props-r299.js','combat-r170.js','prop-shadow-r329.js','props-r102.js'];
+const FILES=['props-r272.js','env-props-r299.js','combat-r170.js','prop-shadow-r329.js','props-r102.js','visual-r92.js'];
 ok('runtime copies match client-source',FILES.every(f=>rd('client-source/'+f)&&rd('client-source/'+f)===rd('runtime-text/'+f)));
 ok('CI runs this check',/node r96\/qa\/r830\/r830-cpu-check\.cjs/.test(rd('../.github/workflows/pages.yml')));
 function boot(stored){const c={localStorage:{getItem:k=>stored&&stored[k]||null,setItem(){}},setInterval:()=>0,setTimeout:()=>0,console,getRoom:()=>null,zone:'x',regionById:{}};c.window=c;vm.createContext(c);vm.runInContext(rd('client-source/props-r272.js'),c);return c;}
@@ -52,6 +52,12 @@ if(FX){const V='assets/props/v290/';const mk=z=>({id:z.id,layer:'STORY',explorat
  ok('off switch {"canon":false} leaves props as they were',r0.props.length===n0&&r0.props.every(p=>!p.r830From)&&off.towerOk({id:'u201'})===true);}
 {const g={id:'goal',path:'assets/props/v290/shattered_memory_core.webp'},r={id:'last302',layer:'STORY',objective:g,exploration:{worldR74:{mode:'outdoor'}},props:[g,{id:'x:objective:1',path:'assets/props/v290/shattered_memory_core.webp'},{id:'s',solid:true,path:'assets/props/v290/silver_seal_pillar.webp'},{id:'i',interactive:true,path:'assets/props/v290/corrupted_shrine.webp'},{id:'d',path:'assets/props/v290/corrupted_shrine.webp'}]};P.apply(r);
  ok('the objective marker, solid pieces and interactive pieces are never removed or swapped',r.props.map(p=>p.id).join()==='goal,x:objective:1,s,i'&&r.props.every(p=>!p.r830From));}
+{const drawn=[];const c={localStorage:{getItem:()=>null,setItem(){}},setInterval:()=>0,setTimeout:()=>0,console,getRoom:()=>null,zone:'x',regionById:{},readyImage:()=>({}),drawProp:p=>drawn.push(p.path.split('/').pop())};c.window=c;vm.createContext(c);vm.runInContext(rd('client-source/props-r272.js'),c);
+ const V='assets/props/v290/',d=(a,extra={})=>({id:'regional-detail:z:0',path:V+a+'.webp',regionalDecoration:true,...extra}),go=(room,p)=>{drawn.length=0;c.room=room;c.drawProp(p);return drawn.join();};
+ const out=id=>({id,layer:'STORY',exploration:{worldR74:{mode:'outdoor'}}}),tree=d('dead_tree'),pil=d('silver_seal_pillar');
+ ok('engine regional details (drawn outside room.props): demon tree is not drawn outside Part 1, still drawn in Part 1',go(out('last302'),tree)===''&&go(out('dist00'),tree)==='dead_tree.webp');
+ ok('engine regional details: a tech pillar is drawn as a fallen stone pillar outside machine regions, and the prop itself is left unchanged',go(out('last301'),pil)==='collapsed_pillar.webp'&&pil.path===V+'silver_seal_pillar.webp'&&go(out('u203'),pil)==='silver_seal_pillar.webp');
+ ok('ordinary props are drawn as they are',go(out('last302'),{id:'x',path:V+'dead_tree.webp'})==='dead_tree.webp'&&go(out('last302'),d('moss_boulders'))==='moss_boulders.webp');}
 // 5) 피의 육망성 조형물(R170 탑): 1부 본편에만, 사몽의 기억 조각은 그대로
 ok('blood hexagram tower: Part 1 story regions only',P1.every(id=>P.towerOk({id,exploration:{}})===true)&&OTHER.every(id=>P.towerOk({id,exploration:{}})===false));
 ok('samong memory-fragment towers are not affected',P.towerOk({id:'last302',samongR103:{zone:'x'},exploration:{}})===true&&P.towerOk({id:'u201',exploration:{samongR115:{zone:'z'}}})===true);
@@ -88,6 +94,7 @@ ok('samong memory-fragment towers are not affected',P.towerOk({id:'last302',samo
  ok('box: one ellipse, raised about a quarter of the drawn height (80px → ~20px) and widened, drawn before the art',a.filter(c=>c[0]==='shadow').length===1&&sh&&Math.abs((40-sh[2])-20)<3&&sh[4]>1.2&&a.indexOf(sh)<own);
  const sb=b.find(c=>c[0]==='shadow');ok('post: ellipse exactly where the engine put it, same size',b.filter(c=>c[0]==='shadow').length===1&&sb[2]===40&&sb[4]===1);
  W.api.setFoot(false);W.draw({id:'altar',path:'assets/x/box.webp',x:3,y:4});const o=log.find(c=>c[0]==='shadow');ok('off switch storyworld.r831.footShadow=0',o&&o[2]===40&&o[4]===1);}
+{const s=rd('client-source/visual-r92.js');ok('R92 floor lights (painted outside drawProp) ask the same rule and raise their ellipse',/footOfImage\?\.\(it\.id,img\)/.test(s)&&/if\(up>0\)shadow\(q\.x,q\.y-up,/.test(s)&&/else shadow\(q\.x,q\.y,Math\.max\(10,w\*\.45\)\);/.test(s));}
 // 8) 불면귀 마을의 제단 등불(붉은 천 돌 제단 + 금빛 등잔)은 마을에 어울리지 않아 석등·향로만 남긴다
 {const s=rd('client-source/props-r102.js');ok('Eastern village keeps the stone lantern and the censer; the cloth-draped stone altar lamp is no longer chosen',/EAST_KEEP=Object\.freeze\(new Set\(\['lights_regional_02','lights_regional_03'\]\)\)/.test(s)&&/list\.filter\(i=>EAST_KEEP\.has\(i\.id\)\)/.test(s));}
 console.log('\nR830 '+(n-bad)+'/'+n+' passed');process.exit(bad?1:0);
