@@ -8213,7 +8213,12 @@
     "assets/r810/thatched-hut-b.webp",
     "assets/r810/lantern-post-off.webp",
     "assets/r769/herbwife-proj6.webp",
-    "assets/r763/villagers/sobok-walk.webp"
+    "assets/r763/villagers/sobok-walk.webp",
+    "assets/r770/villagers/sobok-float.webp",
+    "assets/r770/villagers/sobok-idle.webp",
+    "assets/r770/villagers/sobok-atk.webp",
+    "assets/r770/villagers/herbwife-hit.webp",
+    "assets/r770/villagers/herbwife-death.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9288,5 +9293,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "c11e5c81776ba50d371e54f0377ccc34615a4272a108b61055eeaa0569879d62"
+  "runtimeManifestSHA256": "e3b4cff91842a4ddc08b6776456a900ba1ddbaabe14487c4fb16d0ba858df476"
 }
