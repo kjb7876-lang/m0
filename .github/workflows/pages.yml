@@ -512,6 +512,8 @@ jobs:
         run: node r96/qa/r523/r523-cpu-check.cjs && node r96/qa/r730/r730-cpu-check.cjs && node r96/qa/r731/r731-cpu-check.cjs
       - name: R810 Bulmyeongwi night (last302/last303 navy moonlight ambient, deep amber lamps, no sepia, no spider-crack decals, night fog colour, lamps kept off the guide path; other zones unchanged) CPU check
         run: node r96/qa/r810/r810-cpu-check.cjs
+      - name: R852 Bulmyeongwi night without the dirt trail band (last302/last303 only, the unlit band read as a black smoke column; other trail zones unchanged) CPU check
+        run: node r96/qa/r852/r852-cpu-check.cjs
       - name: R851 region entry stall (cave-r204 decal atlas and edges-r188 edge mask read pixels from CPU canvases, no GPU sync readback) CPU check
         run: node r96/qa/r851/r851-cpu-check.cjs
       - name: R590 hwando sword chain (A draw-cut, Q wind blades, E delayed flash, R seven-strike finale; no new keys, walls/map edge, caps) CPU check
