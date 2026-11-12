@@ -506,6 +506,8 @@ jobs:
         run: node r96/qa/r522/r522-cpu-check.cjs
       - name: R523 story rooms (clinic ep1a09 + sloth home ep1b02 furnished by room name along the real back walls, presentation only, angle-matched art only) CPU check
         run: node r96/qa/r523/r523-cpu-check.cjs && node r96/qa/r730/r730-cpu-check.cjs
+      - name: R810 Bulmyeongwi night (last302/last303 navy moonlight ambient, deep amber lamps, no sepia, no spider-crack decals, night fog colour, lamps kept off the guide path; other zones unchanged) CPU check
+        run: node r96/qa/r810/r810-cpu-check.cjs
       - name: R590 hwando sword chain (A draw-cut, Q wind blades, E delayed flash, R seven-strike finale; no new keys, walls/map edge, caps) CPU check
         run: node r96/qa/r590/hwando-chain-cpu-check.cjs
       - name: R601 enemy attack tempo (enemy attack body motion drawn 2x faster, strike frame kept on the damage moment, telegraphs on real time, no timing/damage change) CPU check
@@ -721,6 +723,10 @@ jobs:
         run: node r96/qa/r199/r199-cpu-check.cjs
       - name: R201 Michaela default-pack skill/ultimate S/E frames CPU check
         run: node r96/qa/r201/r201-cpu-check.cjs
+      - name: R795 hero sweep — engaged mobs stay copyable (R170 tower, R193 doll, R446 pillar donors) CPU check
+        run: node r96/qa/r795/r795-cpu-check.cjs
+      - name: R821 hero readability on bright patterned floors (foot pool + body outline, rosehouse only) CPU check
+        run: node r96/qa/r821/r821-cpu-check.cjs
       - name: Install pinned sandboxed Chromium
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0

@@ -246,9 +246,10 @@ const mid=o=>boss({id:'M',nativeId:'mb-last302-v31231',name:'검은 안개 심�
 // ── R763: 불면귀에 잠식된 주민(Dots CX-0070BM vil1 어부·vil2 약방 아낙, 256칸·발 (128,234.67)·오른쪽 봄) — last302·last303 일반몹 그림·이름 교체 ──
 function vworld({roomId='last302',store={},ready=true}={}){const timers=[];const c={Math,String,Number,Array,Object,JSON,Map,WeakMap,Set,Symbol,isFinite,RegExp,Promise,performance:{now:()=>0},
   setTimeout:(f)=>{timers.push(f);return timers.length;},localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}}};c.window=c;vm.createContext(c);
- vm.runInContext(`var time=0,room={id:${JSON.stringify(roomId)},enemies:[]},player={x:6,y:3,hero:'hwando'},ctx={commands:[]},modal=null,effects=[],__ready=${ready},__ens=[],__snd=[],__drawn=[],__base=[];
+ vm.runInContext(`var time=0,room={id:${JSON.stringify(roomId)},enemies:[]},player={x:6,y:3,hero:'hwando'},ctx={commands:[],__ops:[],save(){this.__ops.push(['s'])},restore(){this.__ops.push(['x'])},translate(x,y){this.__ops.push(['t',x,y])},rotate(r){this.__ops.push(['r',r])},drawImage(im,...a){this.__ops.push(['d',...a])}},modal=null,zoom=1,W=1280,H=720,__proj=[],projectiles=[],effects=[],__ready=${ready},__ens=[],__snd=[],__drawn=[],__base=[];
   var soundProfiles={};function sound(k){__snd.push(k);}function setupAudio(){}
-  function readyImage(p){if(String(p).includes('assets/r763/')&&!__ready)return null;const n=/-(walk|atk|death)\\./.test(p)?8:/-hit\\./.test(p)?4:6;return {ready:true,image:{naturalWidth:n*256,naturalHeight:256}};}
+  function drawProjectile(b){__proj.push(b.id);}
+  function readyImage(p){if((String(p).includes('assets/r763/')||String(p).includes('assets/r769/')||String(p).includes('assets/r770/'))&&!__ready)return null;if(/herbwife-proj6/.test(p))return {ready:true,image:{naturalWidth:768,naturalHeight:128}};const n=/-(walk|atk|death|float)\\./.test(p)?8:/-hit\\./.test(p)?4:6;return {ready:true,image:{naturalWidth:n*256,naturalHeight:256}};}
   function ensureImages(ps){__ens.push(...ps);return Promise.resolve();}
   function project(x,y){return {x:100+(x-3)*10,y:200+(y-3)*5};}
   function drawAssetFrame3(path,frame,x,y,h,opt){__drawn.push({path,rect:frame.assetFrame.sourceRect,x,y,h,alpha:opt?.alpha??1,flip:!!opt?.flip});return true;}
@@ -273,8 +274,8 @@ const FF=(c,e)=>c.__STORYWORLD_STORY_COMBAT_R54__.frameFor(e,null);const VAPI=c=
  const co=vworld({roomId:'last301'}),o=mob();ok(/^old\//.test(FF(co,o).path)&&o.name==='귀비탕 공명 안개핵 3','other region untouched');
  const cf=vworld({store:{'storyworld.r763.villagers':'{"on":false}'}}),of=mob();ok(/^old\//.test(FF(cf,of).path)&&of.name==='귀비탕 공명 안개핵 3','off switch: untouched');}
 {// last303 은 모두 l302-e1 → 번호로 어부·아낙을 나눔(남녀·근원거리 섞임)
- const c=vworld({roomId:'last303'});const ks=[...Array(10)].map((_,i)=>{const e=mob({id:'last303:l302-e1:'+i,nativeId:'l302-e1',name:'주민에게서 떨어진 검은 안개 '+i});FF(c,e);return e.name.startsWith('잠식된 어부')?'F':'H';}).join('');
- ok(/F/.test(ks)&&/H/.test(ks)&&ks.split('F').length-1===5,'last303 split fisher/herbwife evenly ('+ks+')');}
+ const c=vworld({roomId:'last303'});const ks=[...Array(10)].map((_,i)=>{const e=mob({id:'last303:l302-e1:'+i,nativeId:'l302-e1',name:'주민에게서 떨어진 검은 안개 '+i});FF(c,e);return e.name.startsWith('잠식된 어부')?'F':e.name.startsWith('잠식된 소복')?'S':'H';}).join('');
+ ok(ks==='HFSHFSHFSH','last303 split herbwife/fisher/sobok by number ('+ks+')');}
 {// 동작: 대기 6칸 돌고, 걷기 8칸, 공격은 준비 0→2(갈고리 치켜듦)·타격 3·뒤 4→7, 피격(어부) hit 시트, 왼쪽이면 뒤집기
  const c=vworld(),e=mob();const fr=[];for(let i=0;i<30;i++){vm.runInContext('time+=1/15',c);fr.push(FF(c,e).assetFrame.sourceRect[0]/256);}ok(new Set(fr).size>=5,'idle cycles ('+[...new Set(fr)].join('')+')');
  e.moving=true;const fw=FF(c,e);ok(/fisher-walk/.test(fw.path),'moving → walk');
@@ -284,20 +285,23 @@ const FF=(c,e)=>c.__STORYWORLD_STORY_COMBAT_R54__.frameFor(e,null);const VAPI=c=
  e.attack={elapsed:0,shape154:{windup:.6,active:.15,recovery:.6}};const at=[];for(let t=0;t<1.35;t+=.05){e.attack.elapsed=t;const f=FF(c,e);ok(/fisher-atk/.test(f.path),'attack sheet');at.push(f.assetFrame.sourceRect[0]/256);}
  ok(at[0]===0&&at.every((v,i)=>!i||v>=at[i-1])&&at[11]<=2&&at[13]===3&&at[at.length-1]===7,'attack frames: windup 0..2, strike 3, recover to 7 ('+at.join('')+')');e.attack=null;
  e.hitTimer=.14;const h=FF(c,e);ok(/fisher-hit/.test(h.path),'hit → fisher hit sheet');e.hitTimer=0;
- const b=mob({id:'b1',nativeId:'l302-e1',name:'포구 검은 안개 1',hitTimer:.14});ok(/herbwife-idle/.test(FF(c,b).path),'herbwife hit → idle (no hit sheet yet)');
+ const b=mob({id:'b1',nativeId:'l302-e1',name:'포구 검은 안개 1',hitTimer:.14});{const hs=[];for(let i=0;i<5;i++){const q=FF(c,b);hs.push(q);vm.runInContext('time+=1/16',c);}ok(hs.every(q=>/assets\/r770\/villagers\/herbwife-hit\.webp$/.test(q.path)),'R770 herbwife hit → Dots hit4 sheet ('+hs[0].path+')');const hf=hs.map(q=>q.assetFrame.sourceRect[0]/256);ok(hf.join('')==='01233','R770 herbwife hit 16fps 0→3 then hold ('+hf.join('')+')');}
  vm.runInContext('player.x=0',c);ok(FF(c,e).flip===true,'hero on the left → flipped');vm.runInContext('player.x=9',c);ok(FF(c,e).flip===false,'hero on the right → not flipped');}
 {// 그림이 아직 안 실렸으면 옛 그림 + 불러오기 요청(빈 화면 없음). 지역에 들어오면 8장 모두 한 번 청함
- const c=vworld({ready:false}),e=mob();ok(/^old\//.test(FF(c,e).path),'not loaded: old art kept');const ens=vm.runInContext('__ens',c);ok(['fisher-idle','fisher-walk','fisher-atk','fisher-hit','fisher-death','herbwife-idle','herbwife-walk','herbwife-atk'].every(k=>ens.some(p=>p.endsWith(k+'.webp'))),'all villager sheets requested');}
+ const c=vworld({ready:false}),e=mob();ok(/^old\//.test(FF(c,e).path),'not loaded: old art kept');const ens=vm.runInContext('__ens',c);ok(['fisher-idle','fisher-walk','fisher-atk','fisher-hit','fisher-death','herbwife-idle','herbwife-walk','herbwife-atk','herbwife-hit','herbwife-death'].every(k=>ens.some(p=>p.endsWith(k+'.webp'))),'all villager sheets requested');}
 {// 죽음: 어부는 death8 로 쓰러져 잠듦(R462 불·피 연출 대신), 아낙은 대기 그림이 가라앉으며 사라짐. 잠드는 소리, 피격 신음
  const c=vworld(),e=mob(),b=mob({id:'b2',nativeId:'l302-e1',name:'포구 검은 안개 2',x:5});FF(c,e);FF(c,b);
  c.hitEnemy(e);ok(JSON.stringify(vm.runInContext('__snd',c))==='["r761VillagerGroan"]','hit villager → groan ('+vm.runInContext('__snd',c)+')');
  c.killEnemy(e);ok(vm.runInContext('__snd',c).slice(-1)[0]==='r761VillagerSleep','death → sleep sound');
- const fx=vm.runInContext('effects',c)[0];ok(fx.r763?.k==='fisher'&&fx.life>=2,'death fx tagged and lengthened ('+fx.life+')');
+ const fx=vm.runInContext('effects',c)[0];ok(fx.r763?.k==='fisher'&&fx.life>=2,'death fx tagged and lengthened ('+fx.life+')');ok(fx.r462===null,'R770 villager death opts out of R462 burn/shatter (fx.r462 null → R462 adopt hands it back)');
  const seq=[];for(let a=0;a<fx.life;a+=.1){fx.age=a;vm.runInContext('__drawn.length=0',c);c.drawBurnDeath3(fx);const d=vm.runInContext('__drawn',c)[0];seq.push(d);}
  ok(vm.runInContext('__base',c).length===0,'R462/engine burn not drawn for villagers');ok(seq.every(d=>/fisher-death/.test(d.path)),'fisher death sheet');
  const fs=seq.map(d=>d.rect[0]/256);ok(fs[0]===0&&fs.every((v,i)=>!i||v>=fs[i-1])&&fs[fs.length-1]===7,'death frames 0→7 then hold ('+fs.join('')+')');ok(seq[seq.length-1].alpha<.35&&seq[3].alpha===1,'fades only at the end');
  ok(Math.abs(seq[0].h-60)<1e-9&&seq[0].x===100&&seq[0].y===200,'drawn at the death spot with the engine body height');
- c.killEnemy(b);const fb=vm.runInContext('effects',c)[1];fb.age=.5;vm.runInContext('__drawn.length=0',c);c.drawBurnDeath3(fb);const db=vm.runInContext('__drawn',c)[0];ok(/herbwife-idle/.test(db.path)&&db.alpha<1,'herbwife: idle frame sinking/fading');
+ c.killEnemy(b);const fb=vm.runInContext('effects',c)[1];ok(fb.life>=2,'R770 herbwife death lengthened ('+fb.life+')');const sb=[];for(let a=0;a<fb.life;a+=.05){fb.age=a;vm.runInContext('__drawn.length=0',c);c.drawBurnDeath3(fb);sb.push(vm.runInContext('__drawn',c)[0]);}
+ ok(sb.every(d=>/assets\/r770\/villagers\/herbwife-death\.webp$/.test(d.path)),'R770 herbwife death8 sheet');const bf=sb.map(d=>d.rect[0]/256);ok(bf[0]===0&&bf.every((v,i)=>!i||v>=bf[i-1])&&bf.indexOf(7)===14&&bf[bf.length-1]===7,'R770 herbwife death 10fps 0→7, no loop ('+bf.join('')+')');ok(sb[10].alpha===1&&sb[sb.length-1].alpha<.35&&sb.every(d=>d.h===60),'R770 herbwife death fades only at the end, no sinking');
+ {const cw=vworld(),w=mob({id:'w9',nativeId:'l302-e1',name:'포구 검은 안개 9'});FF(cw,w);vm.runInContext("var __rd=readyImage;readyImage=function(p){return /herbwife-death/.test(p)?null:__rd(p);}",cw);cw.killEnemy(w);const fw=vm.runInContext('effects',cw).slice(-1)[0];fw.age=.5;vm.runInContext('__drawn.length=0;__ens.length=0',cw);cw.drawBurnDeath3(fw);const dw=vm.runInContext('__drawn',cw)[0];
+  ok(dw&&/herbwife-idle/.test(dw.path)&&dw.alpha<1,'R770 herbwife death sheet not loaded yet → idle frame sinks (no empty spot)');ok(vm.runInContext('__ens',cw).some(p=>/herbwife-death/.test(p)),'R770 and the death sheet is requested');}
  const c2=vworld({roomId:'last301'}),o=mob();c2.killEnemy(o);c2.drawBurnDeath3(vm.runInContext('effects',c2)[0]);ok(vm.runInContext('__base',c2).length===1&&vm.runInContext('__snd',c2)[0]==='r541Death','other mobs: engine death + sound unchanged');
  ok(VAPI(c).inspect().stats.errors===0,'no errors');ok(vm.runInContext('soundProfiles',c).r761VillagerSleep?.length===2&&vm.runInContext('soundProfiles',c).r761VillagerGroan[0].path==='assets/r761/sfx/bmg-groan-1.ogg','villager sfx profiles');}
 {// 지역을 만들 때 모든 일반몹 이름을 바로 바꿈(아직 화면에 안 그려진 몹·숨은 증원 포함 — 이름표·목록이 섞이지 않게). 꿈 층·다른 지역은 그대로
@@ -334,4 +338,34 @@ const FF=(c,e)=>c.__STORYWORLD_STORY_COMBAT_R54__.frameFor(e,null);const VAPI=c=
   const I=c.__STORYWORLD_TELE_R768__;ok(I&&I.inspect().stats.hidden>=0&&I.inspect().wrapped===true,'R768 inspect exposed');}
  {const c=world({sheets:true,roomId:'last302',pre:PRE(false)});run(c,'__sf.length=0');const e=mob();c.drawEnemy(e);c.drawEnemy(e);ok(run(c,'__sf.length')===0&&c.__STORYWORLD_TELE_R768__.inspect().stats.hidden===2,'R768 counts hidden lanes');}
 }
+{// R769→R770: 소복 처녀(vil3)는 Dots 부유 이동 float8(사용자 검수: 걷기 대신 부유, 120ms)과 같은 인물 r1 대기6·공격8. 부유 그림은 발끝이 바닥에서 떠 있음(y316~332/352)
+ //  → 대기·공격도 같은 높이로 띄우고 같은 박자(0.96초)로 오르내린다(움직였다 멈출 때 툭 떨어지지 않게). 피격 시트는 없어 대기 첫 칸, 죽음은 대기 첫 칸이 가라앉음.
+ const c=vworld(),s=mob({id:'last302:r75-pack:10',name:'귀비탕 공명 안개핵 5'}),f=mob({id:'last302:r75-pack:13',name:'귀비탕 공명 안개핵 4'});const fs=FF(c,s),ff=FF(c,f);
+ ok(/assets\/r770\/villagers\/sobok-idle\.webp$/.test(fs.path)&&s.name==='잠식된 소복 처녀 5','R769 l302-e3 even slot → sobok ('+fs.path+' / '+s.name+')');ok(/fisher-/.test(ff.path),'R769 other l302-e3 stay fisher');
+ {const real=[1,4,10,13,16,19,22,25,28].map(n=>{const m=mob({id:'last302:r75-pack:'+n,name:'귀비탕 공명 안개핵'});return /sobok/.test(FF(c,m).path)?'S':'F';}).join('');ok(/S/.test(real)&&/F/.test(real)&&!/SSS|FFF/.test(real),'R769 real last302 l302-e3 slots (step 3) mix fisher/sobok ('+real+')');}
+ ok(fs.assetFrame.visibleHeight===193&&fs.assetFrame.pivot[0]===128,'R770 sobok frame: visible 193 (r1 idle body)');
+ const idle=[],lift=[];for(let i=0;i<20;i++){vm.runInContext('time+=.1',c);const q=FF(c,s);idle.push(q.assetFrame.sourceRect[0]/256);lift.push(q.assetFrame.pivot[1]-234.67);ok(/sobok-idle/.test(q.path),'R770 sobok idle sheet');
+  ok(Math.abs(q.normalizedFullRectangleExtents[1]+q.assetFrame.pivot[1]/193)<1e-9,'R770 extents follow the lifted pivot');}
+ ok(new Set(idle).size===6,'R770 sobok idle uses 6 frames ('+idle.join('')+')');ok(Math.min(...lift)>=10&&Math.max(...lift)<=26&&Math.max(...lift)-Math.min(...lift)>=6,'R770 sobok idle hovers like the float sheet ('+Math.min(...lift).toFixed(1)+'~'+Math.max(...lift).toFixed(1)+')');
+ s.moving=true;const wk=[];for(let i=0;i<30;i++){vm.runInContext('time+=1/30',c);const q=FF(c,s);ok(/assets\/r770\/villagers\/sobok-float\.webp$/.test(q.path)&&q.assetFrame.pivot[1]===234.67,'R770 sobok moves with the float sheet (lift already drawn)');wk.push(q.assetFrame.sourceRect[0]/256);}
+ const ch=wk.filter((v,i)=>i&&v!==wk[i-1]).length;ok(ch>=7&&ch<=9,'R770 sobok float 120ms (~8 changes/s, '+wk.join('')+')');s.moving=false;
+ s.attack={elapsed:0,shape154:{windup:.6,active:.15,recovery:.6}};const at=[];for(let t=0;t<1.35;t+=.05){s.attack.elapsed=t;const q=FF(c,s);ok(/sobok-atk/.test(q.path)&&q.assetFrame.pivot[1]>234.67+9,'R770 sobok attack sheet, hovering');at.push(q.assetFrame.sourceRect[0]/256);}
+ ok(at.every((v,i)=>!i||v>=at[i-1])&&at[0]===0&&at[at.length-1]===7,'R770 sobok attack frames 0→7 ('+at.join('')+')');s.attack=null;
+ s.hitTimer=.14;const h1=FF(c,s);vm.runInContext('time+=.05',c);const h2=FF(c,s);ok(/sobok-idle/.test(h1.path)&&h1.assetFrame.sourceRect[0]===0&&h2.assetFrame.sourceRect[0]===0,'R770 sobok hit holds idle frame 0 (no hit sheet)');s.hitTimer=0;
+ c.killEnemy(s);const fx=vm.runInContext('effects',c).slice(-1)[0];ok(fx.r763?.k==='sobok','R769 sobok death tagged');fx.age=.5;vm.runInContext('__drawn.length=0',c);c.drawBurnDeath3(fx);const d=vm.runInContext('__drawn',c)[0];
+ ok(d&&/sobok-idle/.test(d.path)&&d.rect[0]===0&&d.alpha<1,'R770 sobok death: idle frame 0 sinking/fading');
+ const co=vworld({store:{'storyworld.r763.villagers':'{"sobok":false}'}}),s2=mob({id:'last302:r75-pack:10',name:'귀비탕 공명 안개핵 5'});ok(/fisher-/.test(FF(co,s2).path)&&s2.name==='잠식된 어부 5','R769 sobok:false → fisher');
+ const cr=vworld({ready:false});FF(cr,mob());const ens=vm.runInContext('__ens',cr);ok(['r770/villagers/sobok-float','r770/villagers/sobok-idle','r770/villagers/sobok-atk','herbwife-proj6'].every(k=>ens.some(p=>p.endsWith(k+'.webp'))),'R770 sobok + projectile sheets requested');ok(!ens.some(p=>/sobok-walk/.test(p)),'R770 temp walk sheet no longer loaded');}
+{// R769 투사체: 약방 아낙이 쏜 적 투사체는 proj6 시트(128칸 6, 오른쪽으로 날아가는 그림)를 날아가는 쪽으로 돌려 그림. 다른 몹·영웅·지역·꺼짐·안 실림은 엔진 그대로
+ const c=vworld(),hw=mob({id:'last302:l302-e1:2',nativeId:'l302-e1',name:'포구 검은 안개 2'}),fi=mob();FF(c,hw);FF(c,fi);c.room.enemies.push(hw,fi);
+ const shot=(o)=>({id:'s'+Math.random(),owner:hw.id,friendly:false,x:4,y:3,vx:-3,vy:0,age:0,life:2,scale:1,...o});
+ const P=(cc,b)=>{vm.runInContext('ctx.__ops.length=0;__proj.length=0',cc);cc.drawProjectile(b);return {ops:vm.runInContext('ctx.__ops.slice()',cc),base:vm.runInContext('__proj.slice()',cc)};};
+ const r=P(c,shot());const dr=r.ops.find(o=>o[0]==='d'),ro=r.ops.find(o=>o[0]==='r');
+ ok(dr&&r.base.length===0,'R769 herbwife shot drawn from proj6 sheet, engine art skipped');ok(dr[1]%128===0&&dr[3]===128&&dr[4]===128&&dr[7]===dr[8]&&dr[7]>30,'R769 one 128 cell, square, sized ('+dr.slice(1).map(v=>Math.round(v)).join(',')+')');
+ ok(Math.abs(Math.abs(ro[1])-Math.PI)<.05,'R769 flying left → rotated ~π ('+ro[1].toFixed(2)+')');
+ const fr=new Set();for(let a=0;a<.6;a+=.05)fr.add(P(c,shot({id:'x',age:a})).ops.find(o=>o[0]==='d')[1]/128);ok(fr.size>=5,'R769 projectile animates ('+[...fr].join('')+')');
+ ok(P(c,shot({owner:fi.id})).base.length===1,'R769 fisher shot → engine');ok(P(c,shot({friendly:true})).base.length===1,'R769 friendly shot → engine');ok(P(c,shot({owner:'nobody'})).base.length===1,'R769 unknown owner → engine');
+ const cn=vworld({ready:false});cn.room.enemies.push(hw);ok(P(cn,shot()).base.length===1,'R769 sheet not loaded → engine');
+ const cz=vworld({roomId:'last301'});cz.room.enemies.push(hw);ok(P(cz,shot()).base.length===1,'R769 other region → engine');
+ const cf=vworld({store:{'storyworld.r763.villagers':'{"proj":false}'}});cf.room.enemies.push(hw);ok(P(cf,shot()).base.length===1,'R769 proj:false → engine');}
 console.log('R760 CPU check OK ('+n+' assertions)');
