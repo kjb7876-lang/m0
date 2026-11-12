@@ -43788,6 +43788,11 @@
       "sha256": "88d03ade2ead537bb9166f1c292f04f3854afec4e99a5b291edc0f2e4c60e8a1"
     },
     {
+      "path": "enemy-hit-place-r860.js",
+      "bytes": 4603,
+      "sha256": "bb4c3b1821a6c3f6929b4dee3894019ffb06e137737a73072f1b33463d3a7643"
+    },
+    {
       "path": "enemy-presentation-r86.js",
       "bytes": 6839,
       "sha256": "577694609c82a750b62b6a970443df726e58919768f7a9dfb2a2add66a1dd133"
@@ -43974,8 +43979,8 @@
     },
     {
       "path": "hit-center-r259.js",
-      "bytes": 7430,
-      "sha256": "47bbf9df75e99efc2b41015b0b964b391f7d428a45a2fc10067f852862e0316b"
+      "bytes": 8322,
+      "sha256": "3465bf0253efbf7136a43b92d0ee4d5fd3a69dd983c22124b848c929ef6ffb3b"
     },
     {
       "path": "hospital-direct-test.js",
@@ -44089,8 +44094,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6573996,
-      "sha256": "ca0c74ac14a4352bbac8c51b2761c7daf1f7695b7cf35fd8dd4a6ac0c1667220"
+      "bytes": 6574046,
+      "sha256": "8f86aafdf6499e3a48994e7ef4f841770fdfb1b8e374f7d3a64b950d7a271ea4"
     },
     {
       "path": "intro-r140.js",
@@ -45058,9 +45063,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9011,
-  "totalBytes": 1237500261,
-  "webHTMLSha256": "ca0c74ac14a4352bbac8c51b2761c7daf1f7695b7cf35fd8dd4a6ac0c1667220",
+  "fileCount": 9012,
+  "totalBytes": 1237505806,
+  "webHTMLSha256": "8f86aafdf6499e3a48994e7ef4f841770fdfb1b8e374f7d3a64b950d7a271ea4",
   "largest": [
     {
       "path": "index.html",
