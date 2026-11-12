@@ -9,6 +9,8 @@ const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(String(e
 const shot=async n=>{if(SHOTS)await p.screenshot({path:SHOTS+'/'+n+'.png'});};const A=(f,a)=>p.evaluate(f,a);
 const D=()=>A(()=>{const d=window.__STORYWORLD_HERO_DEFENSE_R720__;return {...d.state(),allies:d.allies(),ins:d.inspect(),modal:!!modal,hero:player.hero,px:player.x,py:player.y,panel:!!document.getElementById('r720Panel')&&!document.getElementById('modal').classList.contains('hidden')};});
 // 게임 시간으로 기다린다(헤드리스는 게임 시간이 벽시계보다 느리다)
+// 조종 영웅을 옮기기 전: 조종 영웅 자신의 실검무(R706 이 춤 동안 본체 자리를 기억했다가 끝날 때 되돌림)가 끝나기를 기다리고, 몇 초 공격을 쉬게 한다(옮긴 자리가 되돌려지지 않게)
+const calm=async()=>{await A(()=>{player.attackCD=Math.max(player.attackCD||0,4);player.specialCD=Math.max(player.specialCD||0,4);});await p.waitForFunction(()=>{const s=window.__STORYWORLD_DANCE_FREE_R706__?.state?.();return !s||(!s.body&&!s.dancing);},null,{timeout:120000});};
 const waitGame=async secs=>{const t0=await A(()=>time);await p.waitForFunction(a=>time>=a,t0+secs,{timeout:240000});};
 
 await p.goto(URL);await p.locator('#survivalStartR600').waitFor({timeout:180000});
@@ -33,7 +35,7 @@ const got=await A(()=>{const d=window.__STORYWORLD_HERO_DEFENSE_R720__,c0=d.stat
 ok('a kill gives one crystal',got.dead&&got.c1===got.c0+1,got);
 
 // 영입 → 지금 자리에 배치(코어 사거리 안)
-await A(()=>{const z=room.survivalR600.centre;player.x=z.x+2.5;player.y=z.y+1;window.__STORYWORLD_HERO_DEFENSE_R720__.qaGive(1000);});
+await calm();await A(()=>{const z=room.survivalR600.centre;player.x=z.x+2.5;player.y=z.y+1;window.__STORYWORLD_HERO_DEFENSE_R720__.qaGive(1000);});
 await p.keyboard.press('i');await p.waitForFunction(()=>!!document.querySelector('[data-r720buy="seoha"]'),null,{timeout:20000});
 await A(()=>document.querySelector('[data-r720buy="seoha"]').click());await p.waitForTimeout(200);s=await D();
 ok('buying places the hero where the player stands',s.slots.length===1&&s.slots[0].hero==='seoha'&&Math.abs(s.slots[0].ox-2.5)<.05&&Math.abs(s.slots[0].oy-1)<.05&&s.owned.seoha===true,s.slots);
@@ -44,13 +46,13 @@ const c0=s.crystals;for(const k of['level','range','radius']){await A(k=>documen
 s=await D();ok('upgrades apply to the slot and cost crystals',s.slots[0].lv===2&&s.slots[0].rangeLv===1&&s.slots[0].radiusLv===1&&s.crystals===c0-30-25-20,{c0,c:s.crystals,slot:s.slots[0]});
 // 코어 사거리 밖에서는 배치 불가(영입은 됨)
 await p.keyboard.press('i');await p.waitForTimeout(200);
-await A(()=>{const z=room.survivalR600.centre;player.x=z.x-9;player.y=z.y;});
+await calm();await A(()=>{const z=room.survivalR600.centre;player.x=z.x-9;player.y=z.y;});
 await p.keyboard.press('i');await p.waitForFunction(()=>!!document.querySelector('[data-r720buy="neon"]'),null,{timeout:20000});
 ok('outside the core ring the window says so',await A(()=>document.querySelector('.r720Spot').classList.contains('bad')&&/사거리 밖/.test(document.querySelector('.r720Spot').textContent)));
 await A(()=>document.querySelector('[data-r720buy="neon"]').click());await p.waitForTimeout(200);s=await D();
 ok('bought outside the ring: owned but not placed',s.owned.neon===true&&s.slots.length===1,s);
 await p.keyboard.press('i');await p.waitForTimeout(200);
-await A(()=>{const z=room.survivalR600.centre;player.x=z.x-2.5;player.y=z.y+1;});
+await calm();await A(()=>{const z=room.survivalR600.centre;player.x=z.x-2.5;player.y=z.y+1;});
 await p.keyboard.press('i');await p.waitForFunction(()=>!!document.querySelector('[data-r720place="neon"]'),null,{timeout:20000});
 await A(()=>document.querySelector('[data-r720place="neon"]').click());await p.waitForTimeout(200);s=await D();
 ok('placing an owned hero inside the ring',s.slots.length===2&&s.slots[1].hero==='neon',s.slots);

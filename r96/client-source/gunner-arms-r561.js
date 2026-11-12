@@ -260,7 +260,8 @@ function install(){const W=window.__STORYWORLD_WER__;if(!W||wrapped||W.__r561)re
 let nextAuto=0;
 function autoOn(){try{const mob=window.__STORYWORLD_MOBILE_R63__?.isMobile?.();return (mob?settings.autoSkill===true:(typeof auto!=='undefined'&&auto))||(typeof guide!=='undefined'&&guide);}catch(_){return false;}}
 function tickAuto(){if(!mine()||busy()||!autoOn())return;const t=T();if(t<nextAuto)return;nextAuto=t+.35;fire('r',true)||fire('w',true)||fire('e',true);}
-if(typeof tick==='function'){const b=tick;tick=function(...a){try{own();}catch(e){fail(e);}gate();const r=b.apply(this,a);try{warm();if(fx.length)step();stepChain();tickAuto();}catch(e){fail(e);}return r;};}
+const asHeroR720=(id,fn)=>{const D=window.__STORYWORLD_HERO_DEFENSE_R720__;return D&&typeof D.asHero==='function'?D.asHero(id,fn):fn();};/* R720-4: 다음 틱에 이어지는 기술을 그 영웅 몸(생존 배치 영웅이면 그 몸)으로 돌린다 */
+if(typeof tick==='function'){const b=tick;tick=function(...a){try{own();}catch(e){fail(e);}gate();const r=b.apply(this,a);try{warm();asHeroR720(HERO,()=>{if(fx.length)step();stepChain();});tickAuto();}catch(e){fail(e);}return r;};}
 if(typeof drawEffect==='function'){const b=drawEffect;drawEffect=function(e,...a){if(e&&e.type==='r561-fx'){try{draw();}catch(err){fail(err);}return;}return b.apply(this,[e,...a]);};}
 if(typeof serializeSave==='function'){const b=serializeSave;serializeSave=function(...a){const d=b.apply(this,a);try{const r=d?.storyWER?.remaining;if(r&&mine())for(const sl of SLOTS){const m=remain(sl);if(m>0)r[HERO+':'+sl]=+m.toFixed(2);else delete r[HERO+':'+sl];}}catch(e){fail(e);}return d;};}
 // 불러오기: 엔진 restoreSave 는 남은 대기를 옛 기억사수 스킬 한도(6/3.8/13×박자)로 자른다 → 저장 원본에서 새 스킬 한도로 되살린다(저장 형식은 그대로)
