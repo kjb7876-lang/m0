@@ -41,13 +41,13 @@ assert.strictEqual(sv,RT('survival-r600.js'));assert.strictEqual(hm,RT('hospital
  assert.strictEqual(typeof P.bossStats,'function');assert.strictEqual(typeof P.mobDamage,'function');
  const per=(i,l,d,atk,major)=>P.bossStats(i,l,d,atk,major,8).hp/(atk*P.hpMul(i,l,d));
  for(const i of [0,7,30,55])for(const atk of [40,95,214]){const b=per(i,0,'normal',atk,true),m=per(i,0,'normal',atk,false);
-  assert(b>=100&&b<=130,'boss hp per atk '+b);assert(m>=45&&m<=65,'mid hp per atk '+m);assert(b>=1.8*m);}
+  assert(b>=100&&b<=130,'boss hp per atk '+b);assert(m>=45&&m<=90,'mid hp per atk '+m);/* R960(사용자 지시): 중간보스는 일반몹(×1.25)의 66배 하한 → 약 ×82.5 로 올라감 */assert(b>=1.2*m);}
  assert(P.bossStats(0,0,'normal',95,true,8).hp>=9500,'first boss no longer capped near its native ~1,100 hp');
  assert(P.bossStats(0,0,'hard',95,true,8).hp>P.bossStats(0,0,'normal',95,true,8).hp);assert(P.bossStats(0,1,'normal',95,true,8).hp>P.bossStats(0,0,'normal',95,true,8).hp*1.5);
  const D=(i,l,d)=>P.bossStats(i,l,d,95,true,10).dmg;assert(Math.abs(D(0,0,'normal')-10)<1e-9);assert(D(55,0,'normal')>=D(0,0,'normal')*1.7);assert(D(0,1,'normal')>=D(0,0,'normal')*1.2);
  assert(D(0,0,'nightmare')>D(0,0,'normal')&&D(0,0,'easy')<D(0,0,'normal'));assert(P.bossStats(0,0,'normal',95,true,0).dmg>0);
  const M=(i,e,l)=>P.mobDamage(8,e,i,l,'normal');assert(M(0,false,0)>8*.55&&M(0,false,0)<=8*.8);assert(M(0,true,0)>M(0,false,0));assert(M(55,false,0)>=M(0,false,0)*1.7);assert(M(0,false,1)>=M(0,false,0)*1.2);
- assert(!/Math\.min\(e\.maxHp/.test(sv),'boss hp not capped by native hp');assert(/const B=bossStats\(S\.i,S\.loop,S\.diff,S\.atkAvg>0\?S\.atkAvg:baseAtk\(\),!!R\.boss,e\.damage\);/.test(sv));assert(/S\.atkAvg=smoothAtk\(S\.atkAvg,baseAtk\(\),dt\);/.test(sv));
+ assert(!/Math\.min\(e\.maxHp/.test(sv),'boss hp not capped by native hp');assert(/const B=bossStats\(S\.i,S\.loop,S\.diff,S\.atkAvg>0\?S\.atkAvg:baseAtk\(\),!!R\.boss,e\.damage,baseAtk\(\)\);/.test(sv));assert(/S\.atkAvg=smoothAtk\(S\.atkAvg,baseAtk\(\),dt\);/.test(sv));
  {let v=P.smoothAtk(undefined,100,1/30);assert.strictEqual(v,100);for(let k=0;k<30*3;k++)v=P.smoothAtk(v,150,1/30);assert(v>100&&v<120,'3s buff moves the average only a little '+v);for(let k=0;k<30*60;k++)v=P.smoothAtk(v,150,1/30);assert(v>145);assert.strictEqual(P.smoothAtk(120,NaN,1/30),120);}assert(/e\.damage=mobDamage\(e\.damage,elite,S\.i,S\.loop,S\.diff\);/.test(sv));
  ok('boss/mid hp follow hero attack (not native hp), boss and mob damage rise with stage, loop and difficulty');}
 assert(fs.readFileSync(path.join(root,'..','.github','workflows','pages.yml'),'utf8').includes('r96/qa/r850/r850-cpu-check.cjs'));ok('Pages CPU step');
