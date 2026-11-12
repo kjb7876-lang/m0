@@ -44283,6 +44283,11 @@
       "sha256": "b67dec5b1910267a6ecc95a22846733e5753a31bd44860a3b7a1d8a8e4a3e21f"
     },
     {
+      "path": "hunter-squad-r952.js",
+      "bytes": 25286,
+      "sha256": "f6a2d81c299e74ba64ea59d0495eef51751a5bf1293e16a84fb7002a5a307a94"
+    },
+    {
       "path": "hwando-arc-r349.js",
       "bytes": 6691,
       "sha256": "bb98bbf1c83b58a0825142142903a8f74c69119bf4d2b4b689eaf15a17b11059"
@@ -44324,8 +44329,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6575211,
-      "sha256": "0e8609cc9579843dc6520460e4c1fb0c38d7aacd9ec720a01a1bfe81ea568e85"
+      "bytes": 6575258,
+      "sha256": "b6ba8db35e4ab99ebc7a5014b33950acbf8b709e12ba6cbce1c6f5e6f46bfc94"
     },
     {
       "path": "intro-r140.js",
@@ -45064,8 +45069,8 @@
     },
     {
       "path": "slayer-blood-r425.js",
-      "bytes": 26756,
-      "sha256": "20f04ab2e7ddc51bc8eeba18e21f3105a30c1cb44897f4c1b31662480953939d"
+      "bytes": 27170,
+      "sha256": "7d57d20cab41c3294caa0c863097a3d8f47e2902769565cdaf2221d9d8c050e1"
     },
     {
       "path": "slayer-r-tornado-r366.js",
@@ -45393,9 +45398,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9078,
-  "totalBytes": 1240728780,
-  "webHTMLSha256": "0e8609cc9579843dc6520460e4c1fb0c38d7aacd9ec720a01a1bfe81ea568e85",
+  "fileCount": 9079,
+  "totalBytes": 1240754527,
+  "webHTMLSha256": "b6ba8db35e4ab99ebc7a5014b33950acbf8b709e12ba6cbce1c6f5e6f46bfc94",
   "largest": [
     {
       "path": "index.html",

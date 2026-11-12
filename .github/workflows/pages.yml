@@ -783,6 +783,8 @@ jobs:
         run: node r96/qa/r860/r860-cpu-check.cjs
       - name: R911 projectile minimum size (half hero height, visual only) CPU check
         run: node r96/qa/r911/r911-cpu-check.cjs
+      - name: R952 hunter chance passive 'hunt squad' (slayer summon / +slayer shades / +hunter clone formation, 7s, one tier per proc) CPU check
+        run: node r96/qa/r952/r952-cpu-check.cjs
       - name: R899 boss-map story window and memory-shard paper move to top-left, quest line shortened CPU check
         run: node r96/qa/r899/top-left-cpu-check.cjs
       - name: R930 Kaironomicon cyber-magitech floor/wall tiles and tech props (art only, layout unchanged) CPU check
