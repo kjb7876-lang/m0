@@ -767,6 +767,8 @@ jobs:
         run: node r96/qa/r880/r880-cpu-check.cjs
       - name: R832 region door leaves by map style + Joseon village trees (pine/persimmon) CPU check
         run: node r96/qa/r832/r832-cpu-check.cjs
+      - name: R905 pre-boss rally wakes in 2-6 region-specific waves (same total, capped concurrency, no stall) CPU check
+        run: node r96/qa/r905/r905-cpu-check.cjs
       - name: R830 thin partition walls become solid main walls
         run: node r96/qa/r830-walls/walls-cpu-check.cjs
       - name: R838 indoor doorway shapes differ per map (rooms and furniture unchanged)
