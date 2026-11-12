@@ -17,7 +17,7 @@
  */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_MICHAELA_HEART_R948__)return;
-const REV='R948-heart-1',KEY='storyworld.r948.heart',HERO='michaela';
+const REV='R948-heart-2',KEY='storyworld.r948.heart',HERO='michaela';
 const CHANCE=.11,CROWD_BONUS=.04,CROWD_N=4,CROWD_R=2,CHANCE_MAX=.35,ROLL_GAP=.35,ICD=5;
 const WEIGHTS=[['volley',.55],['tower',.30],['bloom',.15]];
 const VOLLEY_N=16,VOLLEY_V=9,VOLLEY_RANGE=6,VOLLEY_R=.5,VOLLEY_K=.55,CHARM_T=.5,CHARM_DIST=1.0,CHARM_STOP=.8,CHARM_CD=.6;
@@ -157,12 +157,13 @@ function drawVolley(x,t){const {z,AH}=scale(),s=AH*.55,lift=AH*.5,id='r948:volle
   sc({id:id+':h'+i,kind:'effect',pxfSide:'hero',x:h.x,y:h.y},()=>{for(let k=1;k<=3;k++){const p=project(h.x-h.ux*.28*k,h.y-h.uy*.28*k);glow(p.x,p.y-lift,s*(.5-.1*k),PINK,fade*(.5-.12*k));}
    if(h.done&&h.hit)return; // 맞은 하트는 팝(적중 시트)이 대신 그림
    flyHeart(q.x+wob,q.y-lift,s*(h.done?1+.4*(1-fade):1),fade,screenAng(h.ux,h.uy),t,i);});});}
-function drawBloom(x,t){const {z,T1,AH}=scale(),u=t-x.t0,q=project(x.x,x.y),id='r948:bloom:'+x.t0.toFixed(2);
+function drawBloom(x,t){const {z,T1,AH}=scale(),u=Math.max(0,t-x.t0),q=project(x.x,x.y),id='r948:bloom:'+x.t0.toFixed(2);
  if(!x.exploded){const f=Math.min(1,u/BLOOM_CHARGE),grow=Math.min(1,u/.35),beat=1+.08*Math.sin(u*(7+9*f))+(f>.85?.12*(f-.85)/.15:0),s=AH*(.6+1.1*grow)*beat,cy=q.y-AH*.95;
   sc({id:id+':mark',kind:'effect',pxfSide:'hero',x:x.x,y:x.y,groundAligned:true},()=>{groundHeart(q,BLOOM_R*x.k*T1*.5*Math.sqrt(grow),ROSE,Math.max(1.5,2.5*z),.35+.45*f,.06+.08*f);});
   sc({id:id+':heart',kind:'effect',pxfSide:'hero',x:x.x,y:x.y},()=>{glow(q.x,cy,s*(1.1+.5*f),PINK,.6+.4*f);paintHeart(q.x,cy,s,grow,false);
    if(f>.6){ctx.save();try{ctx.globalCompositeOperation='lighter';ctx.strokeStyle=`rgba(${PINK_HOT},${(f-.6)/.4})`;ctx.lineWidth=Math.max(1,2*z);for(let i=0;i<5;i++){const a=x.seed*.017+i*1.256;ctx.beginPath();ctx.moveTo(q.x,cy);ctx.lineTo(q.x+Math.cos(a)*s*.42,cy+Math.sin(a)*s*.36);ctx.stroke();}}finally{ctx.restore();}}});return;}
- const v=Math.min(1,(u-BLOOM_CHARGE)/BLOOM_FLASH),a=1-v,R=BLOOM_R*x.k*T1*.5*(.35+.8*Math.sqrt(v));
+ const v=Math.min(1,Math.max(0,(u-BLOOM_CHARGE)/BLOOM_FLASH)),a=1-v, // 폭발 판정은 u≥2-1e-9 라 v 가 아주 작은 음수일 수 있다 → sqrt(NaN) 이면 3D 기록기가 화면 실패로 게임을 세운다
+ R=BLOOM_R*x.k*T1*.5*(.35+.8*Math.sqrt(v));
  sc({id:id+':blast',kind:'effect',pxfSide:'hero',x:x.x,y:x.y,groundAligned:true},()=>{groundHeart(q,R*1.15,PINK_HOT,Math.max(2,9*z*a),a,.14*a);ring(q,R*.8,ROSE,Math.max(1,3*z),a);});
  sc({id:id+':flash',kind:'effect',pxfSide:'hero',x:x.x,y:x.y+.01},()=>{const cy=q.y-AH*.95;glow(q.x,cy,AH*(1.4+1.4*v),PINK_HOT,a);
   // 위로 선 큰 하트 충격파 두 겹(속은 채우고 바깥은 굵은 테)
