@@ -46,7 +46,8 @@ const outside=[{id:'a',x:25,y:20},{id:'b',x:20,y:25.2},{id:'c',x:16.5,y:23.5},{i
 {const E=engine({enemies:[inside,...outside]});const A=E.api;
  ok(A.owns('hwando','w')&&!A.owns('hwando','r')&&!A.owns('slayer','r')&&!A.owns('seoha','w'),'owns: 환도 W 만');
  E.ctx.drawHero();E.adv(.016);release(E);release(E);// 같은 castId 두 번 → 한 번만
- const c=A.inspect().casts;ok(c.length===1&&c[0].clones.length===7,'시전 한 번에 분신 7(같은 castId 는 한 번)');
+ const c=A.inspect().casts;ok(c.length===1&&c[0].clones.length===3&&c[0].clones.every(s=>s.foe),'R705c: 분신은 원 밖 적 곁에만(적 3 → 분신 3, 빈 자리 채움 없음, 같은 castId 는 한 번)');
+ ok(c[0].clones.every(s=>{const e=[...outside].find(e=>e.id===s.foe);return e&&Math.hypot(e.x-s.x,e.y-s.y)<=1;}),'R705c: 분신은 맡은 적에서 1칸 안(근접 영웅은 적 곁에 나타남)');
  ok(c[0].body,'분신은 그 순간 영웅 몸 그림(R271 몸)을 쓴다');
  const near=c[0].clones.filter(s=>s.foe).map(s=>s.foe).sort();ok(JSON.stringify(near)===JSON.stringify(['a','b','c']),'원 밖 적 곁을 먼저 고름(원 안·너무 먼 적 제외): '+near);
  ok(c[0].clones.every(s=>Math.hypot(s.x-20,s.y-20)>3.15&&!E.g.blocked(s.x,s.y)),'분신 자리는 모두 판정 원(3.15) 밖, 막힌 칸 아님');
@@ -57,12 +58,10 @@ const outside=[{id:'a',x:25,y:20},{id:'b',x:20,y:25.2},{id:'c',x:16.5,y:23.5},{i
  const ids=E.hits.map(h=>h.id).sort();ok(JSON.stringify(ids)===JSON.stringify(['a','b','c']),'0.7초 뒤 분신 십자 베기가 곁의 적에게 스플래시(원 안·먼 적은 분신 피해 없음): '+ids);
  ok(E.hits.every(h=>Math.abs(h.v-100*1.25*.45)<1e-9&&h.s.friendly&&h.s.owner==='hero'&&h.s.sourceHero==='hwando'&&h.s.r348Clone&&h.s.attackKind9==='skill'),'피해 = W 원 피해(공격력×1.25)의 0.45배, 영웅 피해 경로(hitEnemy friendly)');
  ok(E.floats.length===3,'피해 숫자 표시');
- const st=A.inspect().stats;ok(st.slashes===7&&st.clones===7,'분신 7 모두 한 번씩 베기');
+ const st=A.inspect().stats;ok(st.slashes===3&&st.clones===3,'분신(적 곁 3) 모두 한 번씩 베기');
  for(let i=0;i<30;i++)E.adv(.05);ok(E.hits.length===3&&A.inspect().casts.length===0,'끝난 뒤 다시 때리지 않고 정리됨');}
 {const E=engine({enemies:[inside]});E.ctx.drawHero();release(E,'wer:9');const c=E.api.inspect().casts[0];
- ok(c.clones.length===7&&c.clones.every(s=>!s.foe),'원 밖에 적이 없으면 원 둘레 바깥에 고르게 7');
- const ang=c.clones.map(s=>{const q=E.g.project(s.x,s.y),o=E.g.project(20,20);return Math.atan2(q.y-o.y,q.x-o.x);}).sort((a,b)=>a-b);
- let minGap=9;for(let i=0;i<ang.length;i++){const d=((ang[(i+1)%ang.length]-ang[i])+Math.PI*2)%(Math.PI*2)||Math.PI*2;minGap=Math.min(minGap,d);}ok(minGap>.5,'화면 각도로 고르게 퍼짐(가장 좁은 틈 '+minGap.toFixed(2)+')');
+ ok(c.clones.length===0,'R705c: 원 밖에 적이 없으면 분신 없음(적 없는 빈 자리에 서지 않음)');
  for(let i=0;i<40;i++)E.adv(.033);ok(E.hits.length===0,'적이 없으면 피해 없음');}
 {const E=engine({coop:'host',enemies:[inside,...outside]});E.ctx.drawHero();release(E);for(let i=0;i<40;i++)E.adv(.033);
  ok(E.api.inspect().casts.length===0||E.api.inspect().casts[0].clones.length===0,'협동(R62 mode≠off): 분신을 만들지 않음');ok(E.hits.length===0&&E.api.inspect().stats.coopSkipped===1,'협동: 분신 피해를 넣지 않음(권한 불분명)');}
@@ -84,6 +83,6 @@ function latin(cuts){const V=cuts.filter(c=>Math.abs(c.x0-c.x1)<1e-6&&c.y1>c.y0)
  ok(main.length===1&&Math.abs(main[0].side-1)<.1,'원 안 베기: 가로 칼 반폭이 위 칼과 거의 같음(라틴 십자가 비율 '+(main[0]?main[0].side.toFixed(2):'?')+')');
  const fl=E.sprites.filter(s=>s.nm==='flare');ok(fl.length===1&&Math.abs(fl[0].y-main[0].by)<1e-6&&!fl[0].o.angle,'교차점 반짝임은 가로 칼 높이(교차점)에, 돌리지 않음');
  E.adv(.9);E.cuts.length=0;E.sprites.length=0;E.ctx.drawEffect(S);
- const cl=latin(E.cuts);ok(cl.length===7&&cl.every(c=>c.top>0&&c.ratio>.45&&c.ratio<.6&&Math.abs(c.side-1)<.1),'분신 7 베기 모두 정십자가(위 짧고 아래 긴): '+cl.length+'개 '+cl.map(c=>c.ratio.toFixed(2)).join(','));
+ const cl=latin(E.cuts);ok(cl.length===3&&cl.every(c=>c.top>0&&c.ratio>.45&&c.ratio<.6&&Math.abs(c.side-1)<.1),'분신 베기 모두 정십자가(위 짧고 아래 긴): '+cl.length+'개 '+cl.map(c=>c.ratio.toFixed(2)).join(','));
  ok(E.cuts.every(c=>Math.abs(c.x0-c.x1)<1e-6&&c.y1>c.y0||Math.abs(c.y0-c.y1)<1e-6&&c.x1>c.x0),'베기는 세로(위→아래)·가로(왼→오른)뿐 — 기울거나 거꾸로 된 칼 없음');}
 console.log(JSON.stringify({ok:true,checks:n,method:'static+fake-engine'}));
