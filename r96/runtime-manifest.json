@@ -44244,8 +44244,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6574458,
-      "sha256": "2f24feb00b2bf81726b2b7df56a9a0f66818d58984c42fc4778175dfb2e53f25"
+      "bytes": 6574502,
+      "sha256": "dbaafd27d444114730b6687b2e8274734c8d2b479c0881e331a9fab5bffebe58"
     },
     {
       "path": "intro-r140.js",
@@ -44619,8 +44619,8 @@
     },
     {
       "path": "play-r115.js",
-      "bytes": 30077,
-      "sha256": "81c9f3689cf23d18ae3414a46856816015e882a11b921c41c144a9202475b2c6"
+      "bytes": 30287,
+      "sha256": "4cf01e02beeae0a3f1c7172d87acc4659f1737c0e519dc7239f3e13c806de10d"
     },
     {
       "path": "play-r169.js",
@@ -44856,6 +44856,11 @@
       "path": "seal-vision-r472.js",
       "bytes": 5501,
       "sha256": "af0a1f8395c6650faaba4be31737461a56d69be3e8e539aadce812819f4323a1"
+    },
+    {
+      "path": "semi-auto-r705.js",
+      "bytes": 4054,
+      "sha256": "414ffa814f3ecc336f69c0fbad372efb2adb220cd0f2635c1b2bbea212f5575c"
     },
     {
       "path": "seoha-chrono-r564.js",
@@ -45243,9 +45248,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9048,
-  "totalBytes": 1239645414,
-  "webHTMLSha256": "2f24feb00b2bf81726b2b7df56a9a0f66818d58984c42fc4778175dfb2e53f25",
+  "fileCount": 9049,
+  "totalBytes": 1239649722,
+  "webHTMLSha256": "dbaafd27d444114730b6687b2e8274734c8d2b479c0881e331a9fab5bffebe58",
   "largest": [
     {
       "path": "index.html",
