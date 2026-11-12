@@ -18,7 +18,7 @@ const solo=()=>{const m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();return !m||
 let saved=null;// 바꿔 둔 값(바깥 감싸기가 되돌린다)
 const cast={prevSk:0,prevUl:0,t0:-9,ult:false};
 function track(p){const sk=+p.skillAnim||0,ul=+p.ultimateAnim||0;
- if(sk>cast.prevSk+1e-6||ul>cast.prevUl+1e-6){/* R720 규칙 3: 0.25초 안에 다시 오른 값은 같은 시전(휘두르기 되감기 금지) */const m=window.__STORYWORLD_HERO_MOTION_R720__,t0=m?m.castStart():now();if(t0!==cast.t0){cast.t0=t0;cast.ult=ul>cast.prevUl+1e-6;stats.casts++;}}
+ if(sk>cast.prevSk+1e-6||ul>cast.prevUl+1e-6){/* R895 규칙 3: 0.25초 안에 다시 오른 값은 같은 시전(휘두르기 되감기 금지) */const m=window.__STORYWORLD_HERO_MOTION_R895__,t0=m?m.castStart():now();if(t0!==cast.t0){cast.t0=t0;cast.ult=ul>cast.prevUl+1e-6;stats.casts++;}}
  cast.prevSk=sk;cast.prevUl=ul;return sk>0||ul>0;}
 // R143 안쪽 고리가 부른다: 엔진·안쪽 덧씌우기가 몸을 그린 직후, 공격 그림 덧씌우기들이 상태를 읽기 직전.
 function swap(){if(saved||!prefs.on)return;const p=typeof player==='object'?player:null;if(!p||!(p.hp>0))return;
@@ -27,7 +27,7 @@ function swap(){if(saved||!prefs.on)return;const p=typeof player==='object'?play
  if(p.dashAnim>0){stats.skipped.dash++;return;}
  if(p.guard){stats.skipped.guard++;return;}
  if(p.ego>0||p.samong>0){stats.skipped.form++;return;}
- try{if(window.__STORYWORLD_HERO_MOTION_R720__?.moveCancel?.('skill')){stats.skipped.move++;return;}}catch(_){}/* R720 규칙 2: 커밋 창(0.18초) 뒤 이동 입력이면 걷기로 캔슬 */
+ try{if(window.__STORYWORLD_HERO_MOTION_R895__?.moveCancel?.('skill')){stats.skipped.move++;return;}}catch(_){}/* R895 규칙 2: 커밋 창(0.18초) 뒤 이동 입력이면 걷기로 캔슬 */
  try{if(window.__STORYWORLD_ATTACK_ANIM_R143__?.actSheet?.()){stats.skipped.sheet++;return;}}catch(_){}
  const D=cast.ult?ULT:SWING,el=Math.max(0,now()-cast.t0),real=+p.attackAnim||0;
  saved={p,skillAnim:p.skillAnim,ultimateAnim:p.ultimateAnim,attackAnim:p.attackAnim,attackCD:p.attackCD};

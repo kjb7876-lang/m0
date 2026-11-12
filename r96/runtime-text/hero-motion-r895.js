@@ -1,6 +1,6 @@
-// R720 — 영웅 모션 법칙(사용자 2026-11-11 "영웅들 모션법칙을 추가해서 AAA급 참조해서 이동·공격 등 스위칭할 때 버그 없고 자연스럽게 이어지도록").
+// R895 — 영웅 모션 법칙(사용자 2026-11-11 "영웅들 모션법칙을 추가해서 AAA급 참조해서 이동·공격 등 스위칭할 때 버그 없고 자연스럽게 이어지도록").
 //  몸 그림을 고르는 덧씌우기가 여럿(R119 걷기·R143 공격/피격/R201 시트·R271 환도·R351 슬레이어·R440 스킬 휘두르기)이라, 각자 '바쁨'을 따로 판단해
-//  전환 순간에 어긋났다(헤드리스 탐침 qa/r720/probe.mjs·rules.cjs 로 8영웅 전수 측정):
+//  전환 순간에 어긋났다(헤드리스 탐침 qa/r895/probe.mjs·rules.cjs 로 8영웅 전수 측정):
 //   · 멈추자마자 친 공격이 걷기 꼬리(멈춘 뒤 0.15초 걷기 유지)에 가려 마지막 한 칸만 번쩍(서하·네온 등)
 //   · 스킬 휘두르기·R201 스킬 시트·환도/슬레이어 공격이 움직이기 시작해도 0.3초 넘게 남아 미끄러짐(전 영웅)
 //   · 대시가 대시 방향이 아니라 적 쪽(또는 늘 오른쪽 'move-right')을 봄(환도·서하·미카엘라·라우렌·헌터·슬레이어)
@@ -13,11 +13,11 @@
 //   4) 대시 방향: 대시가 실제로 옮긴 화면 방향(좌·우)을 본다. 대시는 진행 중인 기본 공격을 끊는다(대시 뒤 옛 공격 칸 재등장 금지).
 //   5) 멈춘 직후 공격: 이동 입력을 뗀 뒤 시작한 공격은 걷기 꼬리보다 먼저 보인다.
 //   6) 피격 반응은 맞은 순간 0.12초 안에 시작하지 못하면 버린다(늦은 피격 금지).
-//  덧씌우기들은 window.__STORYWORLD_HERO_MOTION_R720__ 의 함수를 물어보고, 이 파일의 바깥 감싸기는 대시 방향만 마지막에 한 번 더 바로잡는다(안전망).
-//  판정·피해·쿨다운·세이브는 바꾸지 않는다(그림 고르기만). 끄기: localStorage storyworld.r720.motion = {"on":false}
+//  덧씌우기들은 window.__STORYWORLD_HERO_MOTION_R895__ 의 함수를 물어보고, 이 파일의 바깥 감싸기는 대시 방향만 마지막에 한 번 더 바로잡는다(안전망).
+//  판정·피해·쿨다운·세이브는 바꾸지 않는다(그림 고르기만). 끄기: localStorage storyworld.r895.motion = {"on":false}
 (()=>{'use strict';
-if(window.__STORYWORLD_HERO_MOTION_R720__)return;
-const REV='R720-hero-motion-1',KEY='storyworld.r720.motion';
+if(window.__STORYWORLD_HERO_MOTION_R895__)return;
+const REV='R895-hero-motion-1',KEY='storyworld.r895.motion';
 const RULES=Object.freeze({priority:Object.freeze(['dead','dash','hurt','ultimate','skill','attack','move','idle']),attackCommit:.12,skillCommit:.18,recastMerge:.25,hurtLate:.12,stopAttack:.4});
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={samples:0,dashes:0,dashFlips:0,moveCancels:{attack:0,skill:0},recastMerged:0,errors:0};let lastError=null;
@@ -69,10 +69,10 @@ const NOT_BODY=/fx|effect|thread|pixel|sigil|aura|ring|barrier|shadow/i;
 function faceOf(c){const name=String(c.sourcePath||c.image?.src||'').split('?')[0].split('/').pop();const m=/(?:^|[-_])(e|w|ne|se|nw|sw|right|left|r|l)(?=[-_.])/i.exec(name);if(!m)return 0;const d=m[1].toLowerCase();const f=/^(e|ne|se|right|r)$/.test(d)?1:-1;const mir=(c.points[1][0]-c.points[0][0])<0;return mir?-f:f;}
 function fixDash(rec,st){const d=dash();if(!d||!d.side)return;let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c?.kind!=='image'||c.owner?.kind!=='hero'||!Array.isArray(c.points)||c.points.length<4)continue;const s=String(c.sourcePath||c.image?.src||'');if(!BODY.test(s)||NOT_BODY.test(s.split('/').pop()))continue;const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>bh){bh=h;best=c;}}
  if(!best)return;const f=faceOf(best),want=d.side==='e'?1:-1;if(!f||f===want)return;const q=typeof project==='function'?project(player.x,player.y):null,ax=q?q.x:(best.points[2][0]+best.points[3][0])/2;
- best.points=best.points.map(([x,y])=>[2*ax-x,y]);best.r720DashFlip=true;stats.dashFlips++;}
+ best.points=best.points.map(([x,y])=>[2*ax-x,y]);best.r895DashFlip=true;stats.dashFlips++;}
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;try{sample();}catch(e){fail(e);}const r=base.apply(this,a);
  try{if(st>=0&&on()&&P()?.hp>0)fixDash(rec,st);}catch(e){fail(e);}return r;};}
 function set(k,v){prefs[k]=!!v;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return prefs[k];}
-window.__STORYWORLD_HERO_MOTION_R720__=Object.freeze({revision:REV,RULES,moveCancel,hurtFirst,hurtFresh,attackOverTail,dash,castStart,sample:()=>({...sample(),dash:S.dash&&{...S.dash}}),faceOf,set,
+window.__STORYWORLD_HERO_MOTION_R895__=Object.freeze({revision:REV,RULES,moveCancel,hurtFirst,hurtFresh,attackOverTail,dash,castStart,sample:()=>({...sample(),dash:S.dash&&{...S.dash}}),faceOf,set,
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats,moveCancels:{...stats.moveCancels}},lastError,browser:false,GPU:false})});
 })();

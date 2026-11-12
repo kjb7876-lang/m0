@@ -109,7 +109,7 @@ const specialBase=special;special=function(...a){if(!live()||!ownsHero(player.he
 // 찌르는 창이 192 칸을 넘어 칸이 넓고 발 x 가 다르다 → R143 place() 가 attackSheet() 의 cell·foot·body 를 쓴다.
 // tips = 칸마다 창끝(오른쪽 시트 좌표). R425 창끝 기운이 칸의 가장 위 점(창을 가로로 찌르면 머리)을 쓰지 않게 tipFor() 로 준다.
 // 대각(se·ne)·위·아래 공격은 예전 R143 시트 그대로. 끄기: localStorage['storyworld.r437.attack']='0'.
-/* R720 모션 법칙 '한 영웅 한 몸 크기': 라우렌 걷기·서 있기 시트는 머리 위로 솟은 창까지 몸 키로 재서(R140 약 205px) 몸이 0.87배로 그려지는데,
+/* R895 모션 법칙 '한 영웅 한 몸 크기': 라우렌 걷기·서 있기 시트는 머리 위로 솟은 창까지 몸 키로 재서(R140 약 205px) 몸이 0.87배로 그려지는데,
    새 공격 시트는 창을 뺀 몸 180 으로 맞춰 공격할 때마다 몸이 약 14% 커졌다 → 공격도 같은 기준(205)으로. 네온은 걷기 181·공격 180 으로 이미 같다. */
 const ATTACK=Object.freeze({"neon":{"path":"assets/r437/attack/neon/attack-e.webp","cell":[224,256],"foot":[69,226],"body":180.0,"tips":[[198.0,102.0],[190.0,101.0],[210.0,100.0],[219.0,97.0],[209.0,101.0],[198.0,102.0]]},"lauren":{"path":"assets/r437/attack/lauren/attack-e.webp","cell":[232,256],"foot":[84,226],"body":205.0,"tips":[[138.0,13.0],[200.0,67.0],[225.0,96.0],[226.0,92.0],[205.0,69.0],[137.0,11.0]]}});
 let attackOn=true;try{if(localStorage.getItem('storyworld.r437.attack')==='0')attackOn=false;}catch(_){}

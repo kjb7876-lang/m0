@@ -42355,7 +42355,7 @@
     {
       "path": "attack-anim-r143.js",
       "bytes": 19760,
-      "sha256": "8e7652de6e8c2d452241b88532501549a2cfcc6dd1616a3384b6cfc26d3aa442"
+      "sha256": "d72aae093f0b637c84965e3701e1fcc3fad3e4c4f605081e3bbca1ae77b8280e"
     },
     {
       "path": "audio-r108.js",
@@ -43453,9 +43453,9 @@
       "sha256": "4bd61e7c1c504d5c75548481ef3661eef5fd1ffda170aa0f5fac8b4979f49e87"
     },
     {
-      "path": "hero-motion-r720.js",
+      "path": "hero-motion-r895.js",
       "bytes": 9725,
-      "sha256": "827fae1b0deeb145026949a36ffa34c75dbb8e102d875769cc64243eb07a1c79"
+      "sha256": "94f694ce2a4bc60b93811c2f9f540ff62b0764eaf54fec333ae88c2c3b51aee0"
     },
     {
       "path": "hero-palette-r302.js",
@@ -43590,7 +43590,7 @@
     {
       "path": "hwando-r271.js",
       "bytes": 14499,
-      "sha256": "8c2c0afaf1b9be10f126e20a965af28a28f7b26d68fb803bf80aa04260224ce9"
+      "sha256": "40d1afa838fa08545dd98afe9fafb20500657a7e0100c163f30ed488ea297252"
     },
     {
       "path": "hwando-r277.js",
@@ -43610,7 +43610,7 @@
     {
       "path": "index.html",
       "bytes": 6573911,
-      "sha256": "c19142e25463aaa02378953c214ccc96e8a62a83131392161bd3b3c8f444a753"
+      "sha256": "2716c0f907dee80f1663823c56d9c69e16880861485b4e155bcfd6cc2d91d966"
     },
     {
       "path": "intro-r140.js",
@@ -43855,7 +43855,7 @@
     {
       "path": "neon-lauren-r437.js",
       "bytes": 16715,
-      "sha256": "1fe8e0d280fe110c2e6c5138be8176b3ce0107d33a1a4253b6b0a11a9fcd3383"
+      "sha256": "1c204245014e5d7f5a68ec139bf96cc194b3bc2616b96ef5ccf11379f3ce2561"
     },
     {
       "path": "neon-toxic-r562.js",
@@ -44225,7 +44225,7 @@
     {
       "path": "skill-attack-r440.js",
       "bytes": 4503,
-      "sha256": "6c9560c963e150aa84ba2ade7a4d089f3c30a720288824ce3af09ac44f7029c8"
+      "sha256": "544a981f948f7719a3dad27e0237dd3df51f65032fc22a84735f482db16c6180"
     },
     {
       "path": "skill-fx-r292.js",
@@ -44270,7 +44270,7 @@
     {
       "path": "slayer-r351.js",
       "bytes": 20779,
-      "sha256": "8cd374948c6689a2f85e757bf8901cc74b88f4ed363f7ed5d15fbc95d15ceec9"
+      "sha256": "d113827bda5f9f3645ffb1af9c8067d785fb03d1bbe1a401ca571604f2964012"
     },
     {
       "path": "slayer-sheets-r585.js",
@@ -44435,7 +44435,7 @@
     {
       "path": "visual-r119.js",
       "bytes": 45664,
-      "sha256": "a073dc48054c7af8cce377de556a3b8c4e59284f6abccc3bbb40a15b68c33c0a"
+      "sha256": "ccf7d9f15f3d97edb5c89918de8bde0247cc2933b7e02b1bc1467deabe4c49e1"
     },
     {
       "path": "visual-r90-world.js",
@@ -44475,7 +44475,7 @@
     {
       "path": "visual-r93.js",
       "bytes": 15487,
-      "sha256": "b35fd9778c4228487dcb30036ddfa000121bca4861687b1a767acfe3fc239df5"
+      "sha256": "269659846edcc9421bfac56f832cb4cdb5adba101e84a1324622bc1815332a72"
     },
     {
       "path": "voice-r381-data.js",
@@ -44575,7 +44575,7 @@
   ],
   "fileCount": 8914,
   "totalBytes": 1228696887,
-  "webHTMLSha256": "c19142e25463aaa02378953c214ccc96e8a62a83131392161bd3b3c8f444a753",
+  "webHTMLSha256": "2716c0f907dee80f1663823c56d9c69e16880861485b4e155bcfd6cc2d91d966",
   "largest": [
     {
       "path": "index.html",

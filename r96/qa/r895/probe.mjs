@@ -1,4 +1,4 @@
-// R720 영웅 동작 전환 탐침: 영웅마다 정해진 전환 시나리오(걷기→공격→걷기, 공격 중 대시, 스킬→걷기, 좌우 표적 바꾸기, 공격 중 피격)를
+// R895 영웅 동작 전환 탐침: 영웅마다 정해진 전환 시나리오(걷기→공격→걷기, 공격 중 대시, 스킬→걷기, 좌우 표적 바꾸기, 공격 중 피격)를
 // 게임 시간으로 몰고, 매 프레임 drawHero 가 남긴 몸 그림 명령(그림 경로·칸·좌우·키·발)을 적는다.
 // 실행: SW_URL=… node probe.mjs <out.json> [heroes,comma] [initJson]
 import {chromium,boot,go} from '../r444/lib.mjs';import fs from 'node:fs';

@@ -109,7 +109,7 @@ if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){con
   const hurtOnly=player?.hurtAnim>0&&!(player.skillAnim>0||player.dashAnim>0||player.ultimateAnim>0||player.guard);/* R194: 환도도 피격 시트가 생겨 맞을 땐 아래 applyHit 로 */
   if(prefs.on&&prefs.hwandoIdle&&st>=0&&solo()&&player?.hero==='hwando'&&!(player.attackAnim>0&&!busy)&&!hurtOnly){hwandoUnify(rec,st);return r;}
   if(prefs.on&&st>=0&&solo()&&player?.hurtAnim>0&&!(player.skillAnim>0||player.dashAnim>0||player.ultimateAnim>0||player.guard)){applyHit(rec,st);return r;}
-  if(prefs.on&&st>=0&&solo()&&player&&currentAct()){const ca=currentAct();/* R720 규칙 2: 스킬·궁극기 커밋 창 뒤 이동이면 전용 시트를 내려놓고 걷기(R119)에 맡긴다 */if(!((ca==='skill'||ca==='ultimate')&&window.__STORYWORLD_HERO_MOTION_R720__?.moveCancel?.('skill'))&&applyAct(rec,st))return r;}else cast.act=null;
+  if(prefs.on&&st>=0&&solo()&&player&&currentAct()){const ca=currentAct();/* R895 규칙 2: 스킬·궁극기 커밋 창 뒤 이동이면 전용 시트를 내려놓고 걷기(R119)에 맡긴다 */if(!((ca==='skill'||ca==='ultimate')&&window.__STORYWORLD_HERO_MOTION_R895__?.moveCancel?.('skill'))&&applyAct(rec,st))return r;}else cast.act=null;
   if(!prefs.on||st<0||!solo()||!player||!(player.attackAnim>0)||busy)return r;
   apply(rec,st);}catch(e){fail(e);}return r;};}
 function set(k,v){prefs[k]=!!v;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
