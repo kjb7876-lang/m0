@@ -200,9 +200,9 @@ const D='assets/r763/villagers/',CELL=256,PIV=[128,234.67];
 // 어부 걷기 8번 칸은 1번 칸과 같은 넓은 걸음이라 돌 때마다 멈칫했다(분석 스레드 실측 발 벌림 .57 .44 .21 .33 | .58 .42 .26 .56) → 8번 칸 자리에 4번 칸.
 const V={fisher:{name:'잠식된 어부',vis:208,n:{idle:6,walk:8,atk:8,hit:4,death:8},walkOrder:[0,1,2,3,4,5,6,3]},herbwife:{name:'잠식된 약방 아낙',vis:211,n:{idle:6,walk:8,atk:8,hit:4,death:8},hitStep:1/16,deathStep:.1,p:{hit:'assets/r770/villagers/herbwife-hit.webp',death:'assets/r770/villagers/herbwife-death.webp'}},
  // R770 소복 처녀(vil3): 사용자 검수 통과 Dots 부유 이동 float8(걷기 대신 부유, 120ms)과 같은 인물 r1 대기6·공격8. (R769 걷기 임시본 sobok-walk 은 파일만 남김)
- //  부유 그림은 발끝이 바닥 위 y316~332(384칸, 바닥 352)에서 오르내린다 → 바닥에 선 대기·공격도 hover(256칸 기준 평균 17.8px, ±5, 0.96초 한 바퀴)만큼 띄워 움직임과 멈춤 사이에 툭 떨어지지 않게.
+ //  부유 그림은 발끝이 바닥 위 y316~332(384칸, 바닥 352)에서 오르내린다 → 바닥에 선 대기·공격도 hover(256칸 기준 평균 17px, ±4, 0.96초 한 바퀴 — R772: 기준점이 칸 밖으로 나가지 않는 만큼)만큼 띄워 움직임과 멈춤 사이에 툭 떨어지지 않게.
  //  R771: 피격 hit4(같은 인물, 떠 있는 채 젖혀졌다 돌아옴, 16fps) — 부유 시트처럼 발끝이 이미 떠 있어 hover 를 더하지 않는다(hoverOn 은 바닥에 선 대기·공격만).
- sobok:{name:'잠식된 소복 처녀',vis:193,n:{idle:6,walk:8,atk:8,hit:4},hitStep:1/16,walkFps:1/.12,hover:[17.8,5,.96],hoverOn:['idle','atk'],p:{walk:'assets/r770/villagers/sobok-float.webp',idle:'assets/r770/villagers/sobok-idle.webp',atk:'assets/r770/villagers/sobok-atk.webp',hit:'assets/r770/villagers/sobok-hit.webp'}}};
+ sobok:{name:'잠식된 소복 처녀',vis:193,n:{idle:6,walk:8,atk:8,hit:4},hitStep:1/16,walkFps:1/.12,hover:[17,4,.96],hoverOn:['idle','atk'],p:{walk:'assets/r770/villagers/sobok-float.webp',idle:'assets/r770/villagers/sobok-idle.webp',atk:'assets/r770/villagers/sobok-atk.webp',hit:'assets/r770/villagers/sobok-hit.webp'}}};
 const pathOf=(k,a)=>V[k].p?.[a]||D+k+'-'+a+'.webp';
 const PROJ='assets/r769/herbwife-proj6.webp',PCELL=128,PN=6;
 const PATHS=[...Object.entries(V).flatMap(([k,v])=>Object.keys(v.n).map(a=>pathOf(k,a))),PROJ];
@@ -235,7 +235,8 @@ function cell(e,k){const v=V[k],t=T(),s=stOf(e);
  return ['idle',Math.floor(t*7+s.seed*6)%v.n.idle];}
 // hover(R770 소복): 바닥에 선 그림(부유 시트가 아닌 것)은 발 기준점을 칸 아래로 내려 그만큼 떠 보이게.
 function frameOf(k,a,f,flip,seed){const v=V[k],vh=v.vis,sx=f*CELL,hv=v.hover&&(v.hoverOn||[]).includes(a)?v.hover:null;
- const py=hv?PIV[1]+hv[0]+hv[1]*Math.sin((T()/hv[2]+(seed||0))*Math.PI*2):PIV[1],pv=hv?[PIV[0],py]:PIV;
+ // R772: 엔진 그림 검사는 pivot[1] 이 칸 높이(256)를 넘으면 그 그림을 버리고 시트 통째(6칸이 한 줄로)를 그린다(3D 화면, 사용자 신고 '여러 이미지가 한 번에') → 칸 안으로.
+ const py=hv?Math.min(CELL,PIV[1]+hv[0]+hv[1]*Math.sin((T()/hv[2]+(seed||0))*Math.PI*2)):PIV[1],pv=hv?[PIV[0],py]:PIV;
  return {path:pathOf(k,a),assetFrame:{sourceRect:[sx,0,CELL,CELL],pivot:pv,visibleHeight:vh},sourceAlphaCore:[sx,0,CELL,CELL],metricThreshold:16,sourcePixelsEdited:false,
   normalizedFullRectangleExtents:[-pv[0]/vh,-pv[1]/vh,(CELL-pv[0])/vh,(CELL-pv[1])/vh],flip,r763:k,r380Mob:'r763-'+k,r208Mob:'r763-'+k};}
 const ready=p=>{try{return typeof readyImage==='function'&&readyImage(p)?.image?.naturalWidth>0;}catch(_){return false;}};

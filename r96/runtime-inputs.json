@@ -8222,6 +8222,7 @@
     "assets/r770/villagers/sobok-float.webp",
     "assets/r770/villagers/sobok-idle.webp",
     "assets/r770/villagers/sobok-hit.webp",
+    "hero-defense-r720.js",
     "enemy-hit-place-r860.js"
   ],
   "mediaPaths": [
@@ -9297,5 +9298,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "7d11f72f892e4c767752e23494e2d77e6486754c3d1444547c3e3f8e573e478c"
+  "runtimeManifestSHA256": "8ff81bae24ab3d694b85a0abf0b62d1f924df842ff4fb7ccddc6ee87d56f8bf1"
 }
