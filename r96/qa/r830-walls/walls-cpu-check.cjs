@@ -1,5 +1,5 @@
 // R830 CPU check — 얇은 칸막이벽(양쪽이 다 바닥인 두께 0.24 벽판)을 옆 메인벽과 같은 '바닥 아닌 칸' 덩어리로 바꾸는 오버레이(walls-solid-r830.js).
-//  사용자 2026-11-12 "중간에 얇은 벽 나오는 거 구조를 옆에 붙은 메인벽들로 바꿔주고 모든맵". 브라우저 실측은 r830-browser.mjs (CI 밖, 헤드리스).
+//  사용자 2026-11-12 "중간에 얇은 벽 나오는 거 구조를 옆에 붙은 메인벽들로 바꿔주고 모든맵". 브라우저 실측은 walls-browser.mjs (CI 밖, 헤드리스).
 'use strict';const fs=require('fs'),path=require('path'),vm=require('vm');
 const R=path.join(__dirname,'..','..'),rd=f=>fs.readFileSync(path.join(R,f),'utf8');
 let bad=0,n=0;const ok=(m,c,x)=>{n++;if(!c){bad++;console.log('FAIL',m,x!==undefined?JSON.stringify(x):'');}else console.log('ok  ',m);};
@@ -10,7 +10,7 @@ try{new vm.Script(src);ok('syntax',true);}catch(e){ok('syntax '+e.message,false)
 const html=rd('runtime-text/index.html');
 ok('script tag once, right after story-maps-r171 and before the engine exploration adapter (so makeRoom is wrapped before the engine attaches its own layout)',html.split('"./'+F+'"').length===2&&/<script src="\.\/story-maps-r171\.js"><\/script>\s*<script src="\.\/walls-solid-r830\.js"><\/script>/.test(html)&&html.indexOf('"./'+F+'"')<html.indexOf('window.__STORYWORLD_EXPLORATION__=Object.freeze({layout:get,attach'));
 ok('listed in verify-r96-public.py',/'walls-solid-r830\.js'/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')));
-ok('CI runs this check',/node r96\/qa\/r830\/r830-cpu-check\.cjs/.test(fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8')));
+ok('CI runs this check',/node r96\/qa\/r830-walls\/walls-cpu-check\.cjs/.test(fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8')));
 const code=src.replace(/\/\/.*$/mg,'').replace(/\/\*[\s\S]*?\*\//g,'');
 ok('no combat/save-format/prop writes, no randomness, no drawing',!/\.hp\s*=[^=]|serializeSave|\.enemies\s*=[^=]|\.props\s*=[^=]|Math\.random|ctx\.|drawProp/.test(code));
 ok('hospital main building, safe rest rooms and R171 story maps are not in the zone table',(()=>{const m=/const ZONES=\{([\s\S]*?)\};/.exec(src);return!!m&&!/ep1a08|dreamRest|restEp1b|dist0|ep1b|murder|cult0[1-35-6]/.test(m[1])&&/hub:/.test(m[1])&&['hando01','hando02','hando03','kair02','kair03','last301','cult04'].every(z=>m[1].includes(z+':'));})());

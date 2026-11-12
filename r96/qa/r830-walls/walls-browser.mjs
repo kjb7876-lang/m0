@@ -1,5 +1,5 @@
 // R830 브라우저 검사 — 얇은 칸막이벽(양쪽이 다 바닥인 두께 0.24 벽판)이 메인벽 덩어리로 바뀌었는지, 그 뒤에도 길·문·조형물·NPC 가 온전한지.
-//  실행: 정적 서버에 빌드 결과를 올리고  SW_URL=http://127.0.0.1:4410/m0/ node r96/qa/r830/r830-browser.mjs  (헤드리스 소프트웨어 렌더 — GPU·실기기 아님)
+//  실행: 정적 서버에 빌드 결과를 올리고  SW_URL=http://127.0.0.1:4410/m0/ node r96/qa/r830-walls/walls-browser.mjs  (헤드리스 소프트웨어 렌더 — GPU·실기기 아님)
 import {chromium,boot,go,skip} from '../r444/lib.mjs';
 const ZONES=(process.env.Z||'hub,hando01,hando02,hando03,kair02,kair03,last301,cult04').split(',');let bad=0,n=0;const ok=(m,c,x)=>{n++;if(!c){bad++;console.log('FAIL',m,x!==undefined?JSON.stringify(x):'');}else console.log('ok  ',m);};
 const measure=()=>{const L=room.exploration,fl=new Set(L.floorCells.map(c=>c[0]+':'+c[1])),f=(x,y)=>fl.has(Math.floor(x)+':'+Math.floor(y));
