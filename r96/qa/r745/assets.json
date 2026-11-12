@@ -1,0 +1,405 @@
+{
+ "schema": "storyworld-r745-assets/v1",
+ "round": "R745",
+ "note": "사용자 2026-11-11 지시 \"게임에 들어간 시네마틱 영상 중 워터마크 있는 것 워터마크 제거랑 화질·퀄리티 개선 및 음성 개선\". 지운 표시는 모두 사용자가 만든 영상에 생성 도구(Gemini/Veo·Dreamina)가 자동으로 붙인 표시이며 다른 저작권자 표시는 없었다. 사용자 원본 영상은 저장소에 넣지 않음. 쓰지 않는 r140 영상(배포본 제외)은 손대지 않음.",
+ "marks": "scripts/r745/marks/marks.json",
+ "build": [
+  "scripts/build-cinematics-r745.py",
+  "scripts/build-title-loop-r667.py",
+  "scripts/r745/write-tables.py"
+ ],
+ "files": [
+  {
+   "path": "assets/r309/intro/opening-hapil.mp4",
+   "bytes": 5897232,
+   "sha256": "54973aa462568a347c884cff64ad16c896d957f3709e31e93dd6597e3179f742",
+   "source": "저장소 이전 파일(git c5aba56, R327 연결본 — 사용자 Gemini 영상 두 편; 원본 업로드는 이 세션에 없음)",
+   "use": "새 게임 오프닝(intro-video-r309.js)",
+   "process": "R745: 오른쪽 아래 Gemini 별 표시 생성 도구 표시를 흐림(delogo)이 아니라 역합성(표시 투명도 지도로 배경 = (관측−a·흰색)/(1−a), 윤곽 띠 라플라스 채움)으로 지움. 압축 잡음 줄이기(hqdn3d 2, 선명화 없음), x264 veryslow tune film. 소리: 30Hz 아래 자르기·약한 FFT 잡음 줄이기·EBU R128 2단계 −16 LUFS/트루 피크 −1.5 dBTP, 48 kHz 스테레오 AAC 128k",
+   "applied": true,
+   "measured": {
+    "size": [
+     1280,
+     720
+    ],
+    "seconds": 19.537,
+    "audio": {
+     "lufs": -15.8,
+     "truePeak": -2.8,
+     "rate": 48000,
+     "channels": 2,
+     "codec": "aac"
+    },
+    "marks": {
+     "gem-hapil": {
+      "frames": 230,
+      "median": 0.014,
+      "p90": 0.216
+     }
+    },
+    "x264": {
+     "crf": "23.0",
+     "subme": "10",
+     "me": "umh",
+     "ref": "9",
+     "psy_rd": "1.00:0.15"
+    }
+   }
+  },
+  {
+   "path": "assets/r309/intro/poster-hapil.jpg",
+   "bytes": 54504,
+   "sha256": "795a66093775f1ea837c26289eed7f5553c6d118793a0c32bd83ca558759e646",
+   "source": "R745 opening-hapil.mp4",
+   "use": "영상 첫 프레임이 뜨기 전 포스터",
+   "process": "R745: 새 영상 0.4초 프레임",
+   "applied": true
+  },
+  {
+   "path": "assets/r372/opening-book.mp4",
+   "bytes": 2652810,
+   "sha256": "3a8a88fa04e22b8aa314ce342734710b823a0ef46d6be23a59ab5aba8d8907f9",
+   "source": "R745 표시 지운 연결본",
+   "use": "새 게임 오프닝(intro-video-r309.js), 제목 6.6초~",
+   "process": "R745: 연결본 0~9.458초, 끝 0.8초 소리 페이드. 별 표시 생성 도구 표시를 흐림(delogo)이 아니라 역합성(표시 투명도 지도로 배경 = (관측−a·흰색)/(1−a), 윤곽 띠 라플라스 채움)으로 지움. hqdn3d 2, x264 veryslow. 소리: 30Hz 아래 자르기·약한 FFT 잡음 줄이기·EBU R128 2단계 −16 LUFS/트루 피크 −1.5 dBTP, 48 kHz 스테레오 AAC 128k",
+   "applied": true,
+   "measured": {
+    "size": [
+     1280,
+     720
+    ],
+    "seconds": 9.458,
+    "audio": {
+     "lufs": -15.7,
+     "truePeak": -3.0,
+     "rate": 48000,
+     "channels": 2,
+     "codec": "aac"
+    },
+    "marks": {
+     "gem-hapil": {
+      "frames": 114,
+      "median": 0.026,
+      "p90": 0.245
+     }
+    },
+    "x264": {
+     "crf": "20.0",
+     "subme": "10",
+     "me": "umh",
+     "ref": "9",
+     "psy_rd": "1.00:0.15"
+    }
+   }
+  },
+  {
+   "path": "assets/r372/root-gate.mp4",
+   "bytes": 3804020,
+   "sha256": "86837c041789c603fbc042d8b0a4362c08b84ac832cec37b7fed429c9146732a",
+   "source": "R745 표시 지운 연결본",
+   "use": "dist00 보스 문 상호작용 때 보스 입장 영상(root-gate-video-r372.js)",
+   "process": "R745: 연결본 10.04초~끝, 0.35초 페이드 인. 별 표시 생성 도구 표시를 흐림(delogo)이 아니라 역합성(표시 투명도 지도로 배경 = (관측−a·흰색)/(1−a), 윤곽 띠 라플라스 채움)으로 지움. hqdn3d 2, x264 veryslow. 소리: 30Hz 아래 자르기·약한 FFT 잡음 줄이기·EBU R128 2단계 −16 LUFS/트루 피크 −1.5 dBTP, 48 kHz 스테레오 AAC 128k",
+   "applied": true,
+   "measured": {
+    "size": [
+     1280,
+     720
+    ],
+    "seconds": 9.458,
+    "audio": {
+     "lufs": -16.1,
+     "truePeak": -3.0,
+     "rate": 48000,
+     "channels": 2,
+     "codec": "aac"
+    },
+    "marks": {
+     "gem-hapil": {
+      "frames": 110,
+      "median": -0.0,
+      "p90": 0.109
+     }
+    },
+    "x264": {
+     "crf": "22.0",
+     "subme": "10",
+     "me": "umh",
+     "ref": "9",
+     "psy_rd": "1.00:0.15"
+    }
+   }
+  },
+  {
+   "path": "assets/r372/root-gate-poster.jpg",
+   "bytes": 93669,
+   "sha256": "b5afde09c790b14d1cc187dba3a8ea75872545ba09e904343d5af7ec98232410",
+   "source": "R745 root-gate.mp4",
+   "use": "영상 첫 프레임 전 포스터",
+   "process": "R745: 새 영상 0.6초 프레임",
+   "applied": true
+  },
+  {
+   "path": "assets/r368/betrayal.mp4",
+   "bytes": 4278892,
+   "sha256": "f52148695b10843ea8e784a7a7a1ece52a0df221378dcb14dc5cfa99e3fbc857",
+   "source": "사용자 업로드 원본 gemini_generated_video_ec6954db.mp4 (sha256 bc84d313…)",
+   "use": "결전의 날 초천사 배신 장면",
+   "process": "R745: 원본에서 다시 만듦. crop=1280:548:0:12(아래 가짜 게임 UI·깨진 자막·별 표시 줄을 화면 밖으로, 예전과 같음), CAS 0.2, x264 veryslow. 소리: 30Hz 아래 자르기·약한 FFT 잡음 줄이기·EBU R128 2단계 −16 LUFS/트루 피크 −1.5 dBTP, 48 kHz 스테레오 AAC 128k",
+   "applied": true,
+   "measured": {
+    "size": [
+     1280,
+     548
+    ],
+    "seconds": 10.0,
+    "audio": {
+     "lufs": -16.1,
+     "truePeak": -2.5,
+     "rate": 48000,
+     "channels": 2,
+     "codec": "aac"
+    },
+    "marks": {},
+    "x264": {
+     "crf": "21.0",
+     "subme": "10",
+     "me": "umh",
+     "ref": "11",
+     "psy_rd": "1.00:0.15"
+    }
+   }
+  },
+  {
+   "path": "assets/r368/betrayal-poster.jpg",
+   "bytes": 73006,
+   "sha256": "12f770fddf0d4f52d603dd55ca73f6d64cd9835681b87df85f322056ff62b197",
+   "source": "R745 betrayal.mp4",
+   "use": "영상 포스터",
+   "process": "R745: 새 영상 0.3초 프레임",
+   "applied": true
+  },
+  {
+   "path": "assets/r369/poison-city.mp4",
+   "bytes": 4396161,
+   "sha256": "488ac2906ece3f7fb3e255a4471f1219db5d40ff8626195f58efd4d39b6d3abb",
+   "source": "사용자 업로드 원본 gemini_generated_video_f5fb3f35.mp4 (sha256 3232126a…)",
+   "use": "환자와 중독의 도시(ep1a10) 첫 입장 서사 영상",
+   "process": "R745: 원본에서 다시 만듦. 별 표시 생성 도구 표시를 흐림(delogo)이 아니라 역합성(표시 투명도 지도로 배경 = (관측−a·흰색)/(1−a), 윤곽 띠 라플라스 채움)으로 지움(예전 delogo 흐림 자국 없음). 가짜 HUD '위험: 환각성 약물 검출' 글자·틀(x968 y92 280x120, 3.55~6.55초)은 예전처럼 delogo. CAS 0.2, x264 veryslow. 소리: 30Hz 아래 자르기·약한 FFT 잡음 줄이기·EBU R128 2단계 −16 LUFS/트루 피크 −1.5 dBTP, 48 kHz 스테레오 AAC 128k",
+   "applied": true,
+   "measured": {
+    "size": [
+     1280,
+     720
+    ],
+    "seconds": 10.0,
+    "audio": {
+     "lufs": -16.6,
+     "truePeak": -2.3,
+     "rate": 48000,
+     "channels": 2,
+     "codec": "aac"
+    },
+    "marks": {
+     "gem-poison": {
+      "frames": 94,
+      "median": -0.004,
+      "p90": 0.007
+     }
+    },
+    "x264": {
+     "crf": "22.0",
+     "subme": "10",
+     "me": "umh",
+     "ref": "9",
+     "psy_rd": "1.00:0.15"
+    }
+   }
+  },
+  {
+   "path": "assets/r369/poison-city-poster.jpg",
+   "bytes": 111051,
+   "sha256": "06584ae2f9fb0ea5aa2122413660d8b9eab5366b2d39d88d9e385606768ab8fb",
+   "source": "R745 poison-city.mp4",
+   "use": "영상 포스터",
+   "process": "R745: 새 영상 0.3초 프레임",
+   "applied": true
+  },
+  {
+   "path": "assets/r617/knight.mp4",
+   "bytes": 1846537,
+   "sha256": "6541fa6aceaeeb4f6721f6d48b6db02267da0b1fe54117fa2ce653ed8b3d99f8",
+   "source": "사용자 2026-11-10 첨부 영상 「타락천사 기사 강림」(세로 720×1280, 8초, 24fps)",
+   "use": "last301 타락천사 기사가 깨어날 때(보스전 시작)",
+   "process": "R745: 원본에서 1280×720 으로 다시 만듦(예전 960×540). 자르지 않음: 원본 전체를 405×720 으로 가운데, 양옆은 같은 영상 확대·흐림·어둡게. 오른쪽 아래 Veo 표시 생성 도구 표시를 흐림(delogo)이 아니라 역합성(표시 투명도 지도로 배경 = (관측−a·흰색)/(1−a), 윤곽 띠 라플라스 채움)으로 지움. 0.35초 페이드인·0.45초 페이드아웃, CAS 0.25, x264 veryslow. 소리: 30Hz 아래 자르기·약한 FFT 잡음 줄이기·EBU R128 2단계 −16 LUFS/트루 피크 −1.5 dBTP, 48 kHz 스테레오 AAC 128k",
+   "applied": true,
+   "measured": {
+    "size": [
+     1280,
+     720
+    ],
+    "seconds": 8.0,
+    "audio": {
+     "lufs": -16.0,
+     "truePeak": -3.0,
+     "rate": 48000,
+     "channels": 2,
+     "codec": "aac"
+    },
+    "marks": {
+     "veo-knight": {
+      "frames": 83,
+      "median": -0.0,
+      "p90": 0.004
+     }
+    },
+    "x264": {
+     "crf": "22.0",
+     "subme": "10",
+     "me": "umh",
+     "ref": "9",
+     "psy_rd": "1.00:0.15"
+    }
+   }
+  },
+  {
+   "path": "assets/r617/knight-poster.jpg",
+   "bytes": 36757,
+   "sha256": "94650941aa9ba57cdfce32b87d58968e0f872f429f5ee77fdb9b9834a33e1717",
+   "source": "R745 knight.mp4",
+   "use": "영상 불러오기 전 첫 화면(포스터)",
+   "process": "R745: 처리한 영상 6.5초 프레임(자르지 않음, 표시 지움 반영)",
+   "applied": true
+  },
+  {
+   "path": "assets/r617/fall.mp4",
+   "bytes": 1748302,
+   "sha256": "9aa91de0c18c20f2c1d73c7361c12d9c853193cbfac93728b463d134c78d01bb",
+   "source": "사용자 2026-11-10 첨부 영상 「추락」(1112×834, 4.06초, 60fps)",
+   "use": "last301 타락천사 기사가 쓰러진 뒤 — 성벽에서 검은 바다로 추락",
+   "process": "R745: 원본에서 1280×720 으로 다시 만듦. 자르지 않음: 4:3 원본 전체를 960×720 가운데, 양옆 흐린 채움. 왼쪽 위 AI 배지·오른쪽 아래 Dreamina AI 표시 생성 도구 표시를 흐림(delogo)이 아니라 역합성(표시 투명도 지도로 배경 = (관측−a·흰색)/(1−a), 윤곽 띠 라플라스 채움)으로 지움. 0.8배 느리게(atempo 0.8), 60→24fps, eq gamma 1.22·contrast 1.04, 페이드 0.35/0.6초, x264 veryslow. 소리: 30Hz 아래 자르기·약한 FFT 잡음 줄이기·EBU R128 2단계 −16 LUFS/트루 피크 −1.5 dBTP, 48 kHz 스테레오 AAC 128k",
+   "applied": true,
+   "measured": {
+    "size": [
+     1280,
+     720
+    ],
+    "seconds": 5.0,
+    "audio": {
+     "lufs": -17.0,
+     "truePeak": -3.3,
+     "rate": 48000,
+     "channels": 2,
+     "codec": "aac"
+    },
+    "marks": {
+     "ai-fall": {
+      "frames": 47,
+      "median": 0.001,
+      "p90": 0.008
+     },
+     "dreamina-fall": {
+      "frames": 35,
+      "median": 0.001,
+      "p90": 0.006
+     }
+    },
+    "x264": {
+     "crf": "22.0",
+     "subme": "10",
+     "me": "umh",
+     "ref": "9",
+     "psy_rd": "1.00:0.15"
+    }
+   }
+  },
+  {
+   "path": "assets/r617/fall-poster.jpg",
+   "bytes": 34725,
+   "sha256": "1b7cd5e0bb8382d523e595cc81cf7e2d15b71d08bf2ea35ad77b533cc1fcb622",
+   "source": "R745 fall.mp4",
+   "use": "영상 불러오기 전 첫 화면(포스터)",
+   "process": "R745: 처리한 영상 1.0초 프레임(자르지 않음, 표시 지움 반영)",
+   "applied": true
+  },
+  {
+   "path": "assets/r617/beach.mp4",
+   "bytes": 1840562,
+   "sha256": "29c31151b43b4f958cb6c55e0bc331b0c4c10d1b556bb7ca201d7a961773ed4f",
+   "source": "사용자 2026-11-10 첨부 영상 「해변」(세로 720×1280, 8초, 24fps)",
+   "use": "last302 잠들지 못하는 마을 입장 — 젖은 모래 해안에서 깨어남",
+   "process": "R745: 원본에서 1280×720 으로 다시 만듦. 자르지 않음: 원본 전체를 가운데, 양옆 흐린 채움. 오른쪽 아래 Veo 표시 생성 도구 표시를 흐림(delogo)이 아니라 역합성(표시 투명도 지도로 배경 = (관측−a·흰색)/(1−a), 윤곽 띠 라플라스 채움)으로 지움. 페이드 0.35/0.6초, x264 veryslow. 소리: 30Hz 아래 자르기·약한 FFT 잡음 줄이기·EBU R128 2단계 −16 LUFS/트루 피크 −1.5 dBTP, 48 kHz 스테레오 AAC 128k",
+   "applied": true,
+   "measured": {
+    "size": [
+     1280,
+     720
+    ],
+    "seconds": 8.0,
+    "audio": {
+     "lufs": -16.1,
+     "truePeak": -2.9,
+     "rate": 48000,
+     "channels": 2,
+     "codec": "aac"
+    },
+    "marks": {
+     "veo-beach": {
+      "frames": 94,
+      "median": -0.053,
+      "p90": 0.25
+     }
+    },
+    "x264": {
+     "crf": "23.0",
+     "subme": "10",
+     "me": "umh",
+     "ref": "9",
+     "psy_rd": "1.00:0.15"
+    }
+   }
+  },
+  {
+   "path": "assets/r617/beach-poster.jpg",
+   "bytes": 54550,
+   "sha256": "8f0454ed2db43ab819e34fec11f8b27a6ea05b501eaded392d4b1817eaf10bc0",
+   "source": "R745 beach.mp4",
+   "use": "영상 불러오기 전 첫 화면(포스터)",
+   "process": "R745: 처리한 영상 1.0초 프레임(자르지 않음, 표시 지움 반영)",
+   "applied": true
+  },
+  {
+   "path": "assets/r667/title-video/loop.mp4",
+   "bytes": 618160,
+   "sha256": "5289ac5f5fb968333239c6911626ca927f7d8db002e100840b912b3877b9d0bc",
+   "source": "r96/runtime-text/assets/r309/intro/opening-hapil.mp4 (R745 표시 지운 오프닝, 444번째 프레임 = 18.50초)",
+   "use": "타이틀(메인 메뉴) 배경 10초 이음매 없는 루프 영상 960×540 24fps — Cloudflare(R615)에서 받음, Pages 배포본에서는 뺌",
+   "process": "R745: scripts/build-title-loop-r667.py 를 표시 지운 원천으로 다시 돌림(정지 화면 delogo 흐림 자국 없음) → 주기 10초 움직임(숨쉬기 카메라·붉은 맥동·불꽃·불티 70개·안개·하늘 번쩍임 1회·비네트) → H.264 veryslow CRF23 yuv420p faststart, 소리 없음",
+   "applied": true,
+   "measured": {
+    "size": [
+     960,
+     540
+    ],
+    "seconds": 10.0,
+    "audio": null,
+    "marks": {},
+    "x264": {
+     "crf": "23.0",
+     "subme": "10",
+     "me": "umh",
+     "ref": "16",
+     "psy_rd": "1.00:0.15"
+    }
+   }
+  },
+  {
+   "path": "assets/r667/title-poster.jpg",
+   "bytes": 56839,
+   "sha256": "359603343a0120e3f10ed2a5e3857ecac1dcd16050a2d1beaeb82c886681893e",
+   "source": "r96/runtime-text/assets/r309/intro/opening-hapil.mp4 (R745 표시 지운 오프닝, 444번째 프레임 = 18.50초)",
+   "use": "루프 첫 프레임 정지 이미지 — 영상 받기 전·실패·움직임 줄이기·데이터 절약일 때 (Pages)",
+   "process": "R745: scripts/build-title-loop-r667.py 를 표시 지운 원천으로 다시 돌린 루프의 첫 프레임",
+   "applied": true
+  }
+ ]
+}
