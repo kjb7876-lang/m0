@@ -51,7 +51,9 @@ await A(()=>{player.hp=maxHP()*.4;});await gameWait(3.2);await p.waitForTimeout(
 await A(async()=>{for(let i=0;i<120;i++){player.hp=Math.min(maxHP()*.9,player.hp+maxHP()*.0012);sound('swHeal');if(i%10===9)await new Promise(r=>setTimeout(r,20));}});
 {const h1=await hs(),dt=h1.t-h0.t;ok('trickle regen (120 × 0.12%) is mostly silent',h1.muted-h0.muted>=100,{h0,h1});
  ok('trickle regen chimes at most once per 3s of game time',h1.cues-h0.cues<=Math.floor(dt/3)+1,{cues:h1.cues-h0.cues,dt});}
-await gameWait(3.2);{const h1=await hs();await A(()=>{player.hp=Math.min(maxHP(),player.hp+maxHP()*.2);sound('swHeal');});const h2=await hs();ok('a large heal after the gap chimes',h2.cues-h1.cues===1,{h1,h2});
+// 기다리는 동안 전투 흡혈이 차임을 먼저 쓰지 않게 체력을 가득 채워 둔다(가득이면 회복이 없다)
+await A(()=>{window.__full=setInterval(()=>{try{player.hp=maxHP();}catch(_){}},15);});for(let i=0;i<5;i++){const c0=(await hs()).cues;await gameWait(3.4);if((await hs()).cues===c0)break;}/* 앞서 모인 잔회복이 간격 끝에 한 번 울릴 수 있으니, 3초 넘게 조용했던 것을 확인하고 넘어간다 */await A(()=>{clearInterval(window.__full);player.hp=maxHP()*.5;});await p.waitForTimeout(150);
+{const h1=await hs();await A(()=>{player.hp=Math.min(maxHP(),player.hp+maxHP()*.2);sound('swHeal');});const h2=await hs();ok('a large heal after the gap chimes',h2.cues-h1.cues===1,{h1,h2});
  await A(()=>{player.hp=Math.min(maxHP(),player.hp+maxHP()*.2);sound('swHeal');});const h3=await hs();ok('a second large heal right after stays silent',h3.cues===h2.cues&&h3.muted===h2.muted+1,{h2,h3});}
 await gameWait(1);await clear();await A(()=>window.__STORYWORLD_SURVIVAL_R600__.qaCoreHp(0));
 await p.waitForTimeout(400);
