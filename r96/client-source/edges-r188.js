@@ -18,10 +18,10 @@ const fbm=(x,y)=>.6*vnoise(x*.28,y*.28)+.28*vnoise(x*.8+31,y*.8+17)+.12*vnoise(x
 function buildMask(L){const t0=performance.now(),b=L.bounds,x0=b[0]-PAD,y0=b[1]-PAD,W=Math.ceil((b[2]-b[0]+2*PAD)*PX),H=Math.ceil((b[3]-b[1]+2*PAD)*PX);
  if(W*H>2.6e6)return null;
  const mk=()=>{const c=document.createElement('canvas');c.width=W;c.height=H;return c;};
- const area=mk(),ag=area.getContext('2d');ag.fillStyle='#000';ag.fillRect(0,0,W,H);ag.fillStyle='#fff';
+ const area=mk(),ag=area.getContext('2d',{willReadFrequently:true});ag.fillStyle='#000';ag.fillRect(0,0,W,H);ag.fillStyle='#fff';
  for(const r of [...(L.floorRects||[]),...(L.backdropRects||[]),...(L.connectorFloorRects||[])])if(r&&r.width>0&&r.depth>0)ag.fillRect((r.x-x0)*PX,(r.y-y0)*PX,r.width*PX,r.depth*PX);
- const soft=mk(),sg=soft.getContext('2d');sg.filter=`blur(${PX*2.2}px)`;sg.drawImage(area,0,0);
- const wall=mk(),wg=wall.getContext('2d');wg.fillStyle='#000';wg.fillRect(0,0,W,H);wg.filter=`blur(${PX*.9}px)`;wg.fillStyle='#fff';
+ const soft=mk(),sg=soft.getContext('2d',{willReadFrequently:true});sg.filter=`blur(${PX*2.2}px)`;sg.drawImage(area,0,0);
+ const wall=mk(),wg=wall.getContext('2d',{willReadFrequently:true});wg.fillStyle='#000';wg.fillRect(0,0,W,H);wg.filter=`blur(${PX*.9}px)`;wg.fillStyle='#fff';
  for(const w of L.walls||[]){if(!w||!(w.width>0)||!(w.depth>0))continue;const ww=Math.max(w.width,1.6),dd=Math.max(w.depth,1.6);wg.fillRect((w.x-ww/2-x0)*PX,(w.y-dd/2-y0)*PX,ww*PX,dd*PX);}
  const A=ag.getImageData(0,0,W,H).data,S=sg.getImageData(0,0,W,H).data,Wl=wg.getImageData(0,0,W,H).data,out=ag.createImageData(W,H),O=out.data;let any=0;
  for(let j=0;j<H;j++){const wy=y0+(j+.5)/PX;for(let i=0;i<W;i++){const k=(j*W+i)*4,inside=A[k]>127,s=S[k]/255;let a=0;

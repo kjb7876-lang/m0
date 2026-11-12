@@ -43159,8 +43159,8 @@
     },
     {
       "path": "cave-r204.js",
-      "bytes": 130631,
-      "sha256": "4ae1858c62bdcf847b283094ba7ec228cfa1e722afe4f0c1b5df6eaaa600c4b2"
+      "bytes": 130834,
+      "sha256": "080324574b1731faed2cee22e1ceadffd13e7f4f7bcb4f718ec2fdacc3051d85"
     },
     {
       "path": "chunks/ep1a08-0-0.json",
@@ -43824,8 +43824,8 @@
     },
     {
       "path": "edges-r188.js",
-      "bytes": 7520,
-      "sha256": "7b0721283fe7359de00ab68799d51faf7b209063ae6ce0b6a446e990e62a69aa"
+      "bytes": 7598,
+      "sha256": "cf0312ffa362902d87ef5a7de44deaabcce18fd5d08a1615cc247dc35c144f77"
     },
     {
       "path": "effect-presentation-r83.js",
@@ -43996,11 +43996,6 @@
       "path": "gunner-arms-r561.js",
       "bytes": 45009,
       "sha256": "f2d552ece57e6c3c309c3e2fe8130187340b8086bfdd5fcfb4a9df18dde18cf6"
-    },
-    {
-      "path": "hero-defense-r720.js",
-      "bytes": 31883,
-      "sha256": "7eca16e3f5ad2deee7dc7904af4ce4dec4f5bc3aca0cf84e4bea76a60c9067e1"
     },
     {
       "path": "hero-facing-r336.js",
@@ -45138,8 +45133,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9027,
-  "totalBytes": 1238928652,
+  "fileCount": 9026,
+  "totalBytes": 1238897050,
   "webHTMLSha256": "cc86fa7b664f0f6da6386b15d07fff2581adb202468f3c61a66f53180a4ab4a9",
   "largest": [
     {
