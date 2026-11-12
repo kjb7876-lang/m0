@@ -544,6 +544,8 @@ jobs:
         run: node r96/qa/r590/hwando-chain-cpu-check.cjs
       - name: R601 enemy attack tempo (enemy attack body motion drawn 2x faster, strike frame kept on the damage moment, telegraphs on real time, no timing/damage change) CPU check
         run: node r96/qa/r601/attack-tempo-cpu-check.cjs
+      - name: R750 hit feel (6 heroes show the weapon strike frame on the hit moment, hero impact art on the enemy body hit point, small capped hit-direction screen kick; no timing/damage change) CPU check
+        run: node r96/qa/r750/r750-cpu-check.cjs
       - name: R895 hero motion rules (priority, 0.12/0.18s commit then move-cancel, same-cast merge, dash faces its real side, stop-attack beats walk tail, late flinch dropped; drawing only) CPU check
         run: node r96/qa/r895/r895-cpu-check.cjs
       - name: R492 lag (R409 outline bake by one distance transform instead of dozens of drawImage dilations; same rim rule, size, colours) CPU check
