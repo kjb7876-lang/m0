@@ -182,23 +182,30 @@ window.__STORYWORLD_BULMYEONGWI_R760__=Object.freeze({rev:REV,inspect:()=>({rev:
 // R763 불면귀에 잠식된 주민 — 사용자 2026-11-11 "닷츠에게 불면귀쪽 불면귀에 잠식된 사람1,2,3 해서 근거리 원거리 남녀약간 좀비화해서 불면귀파트에 일반몹으로 적용하라고 해
 //  기존 불면귀 모든 일반몹 삭제". Dots CX-0070BM 의 7분야 심사 통과 시트(그림 스레드 손질본)로 last302(잠들지 못하는 마을)·last303 의 일반몹을 바꾼다.
 //  · 어부(vil1, 남·근거리, 갈고리): l302-e3(가까이 붙는 몹). 대기6·걷기8·공격8·피격4·죽음8 모두 있음.
-//  · 약방 아낙(vil2, 여·원거리, 실타래 사발): l302-e1(거리를 두는 몹). 대기6·걷기8·공격8 — 피격·죽음 시트는 Dots 재작업 대기(그동안 대기 그림).
-//  · last303 은 모두 l302-e1 이라 번호로 어부·아낙을 반씩 나눈다. 소복 처녀(vil3)는 요청과 다른 인물이 와서 다시 그리는 중.
+//  · 약방 아낙(vil2, 여·원거리, 실타래 사발): l302-e1(거리를 두는 몹). 대기6·걷기8·공격8, R770 부터 피격4(16fps)·죽음8(10fps) Dots r1.
+//  · last303 은 모두 l302-e1 이라 번호로 어부·아낙을 반씩 나눈다. 소복 처녀(vil3)는 R769 걷기 임시본 → R770 Dots 부유 이동·대기·공격.
 //  · '지우기' = 옛 안개 몹 그림·이름을 다 바꾸는 것. 정본 계약(지역마다 3×10 무리, 적 id·능력치·생성 지점 불변)·밸런스·저장은 그대로, 효과 키(r248Key)는 옛 이름.
 //    보스·중간보스(mb-last302)·'불면귀의 안개 잔영'(보스 쪽 서사)은 건드리지 않는다.
-//  · 죽음: 어부는 death8(무릎 꿇고 엎드려 잠듦)을 R462 불·피 연출 대신 그린다, 아낙은 대기 그림이 가라앉으며 사라진다. 소리는 그림 스레드의 신음(피격)·실 끊기고 잠드는 숨(죽음).
+//  · R770: R462(불타 부서짐·피 터짐) 이 바깥에서 같은 죽음을 가져가 death8 이 화면에 한 번도 안 나왔다(헤드리스 실측) → fx.r462=null 로 넘겨받지 않게(R462 owns 는 그대로라 R91 잔해·R165 연기도 안 겹침).
+//  · 죽음: 어부는 death8(무릎 꿇고 엎드려 잠듦)을 R462 불·피 연출 대신 그린다, 아낙은 R770 부터 death8(실 끊기고 사발 쥔 채 엎드려 잠듦), 소복은 대기 그림이 가라앉으며 사라진다. 소리는 그림 스레드의 신음(피격)·실 끊기고 잠드는 숨(죽음).
 //  · 엔진 frameFor 사슬(R54)에 R380 과 같은 꼴의 그림을 내준다. 끄기: localStorage['storyworld.r763.villagers']='{"on":false}'(소리만 '{"sfx":false}').
 (()=>{'use strict';
 if(window.__STORYWORLD_VILLAGERS_R763__)return;
 const REV='R763-villagers-1',KEY='storyworld.r763.villagers';
-let prefs={on:true,sfx:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object')for(const k of Object.keys(prefs))if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
-const stats={assigned:0,renamed:0,frames:0,waiting:0,deaths:0,groans:0,sleeps:0,reinstalls:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
+let prefs={on:true,sfx:true,sobok:true,proj:true,melee:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object')for(const k of Object.keys(prefs))if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
+const stats={assigned:0,renamed:0,frames:0,waiting:0,deaths:0,groans:0,sleeps:0,reinstalls:0,shots:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const T=()=>typeof time==='number'&&Number.isFinite(time)?time:performance.now()/1000;
 const D='assets/r763/villagers/',CELL=256,PIV=[128,234.67];
 // vis = 시트 보이는 키(256칸 기준, 발 줄 234.67 에서 머리끝까지 칸마다 재서 가운데 값).
 // 어부 걷기 8번 칸은 1번 칸과 같은 넓은 걸음이라 돌 때마다 멈칫했다(분석 스레드 실측 발 벌림 .57 .44 .21 .33 | .58 .42 .26 .56) → 8번 칸 자리에 4번 칸.
-const V={fisher:{name:'잠식된 어부',vis:208,n:{idle:6,walk:8,atk:8,hit:4,death:8},walkOrder:[0,1,2,3,4,5,6,3]},herbwife:{name:'잠식된 약방 아낙',vis:211,n:{idle:6,walk:8,atk:8}}};
-const PATHS=Object.entries(V).flatMap(([k,v])=>Object.keys(v.n).map(a=>D+k+'-'+a+'.webp'));
+const V={fisher:{name:'잠식된 어부',vis:208,n:{idle:6,walk:8,atk:8,hit:4,death:8},walkOrder:[0,1,2,3,4,5,6,3]},herbwife:{name:'잠식된 약방 아낙',vis:211,n:{idle:6,walk:8,atk:8,hit:4,death:8},hitStep:1/16,deathStep:.1,p:{hit:'assets/r770/villagers/herbwife-hit.webp',death:'assets/r770/villagers/herbwife-death.webp'}},
+ // R770 소복 처녀(vil3): 사용자 검수 통과 Dots 부유 이동 float8(걷기 대신 부유, 120ms)과 같은 인물 r1 대기6·공격8. (R769 걷기 임시본 sobok-walk 은 파일만 남김)
+ //  부유 그림은 발끝이 바닥 위 y316~332(384칸, 바닥 352)에서 오르내린다 → 바닥에 선 대기·공격도 hover(256칸 기준 평균 17px, ±4, 0.96초 한 바퀴 — R772: 기준점이 칸 밖으로 나가지 않는 만큼)만큼 띄워 움직임과 멈춤 사이에 툭 떨어지지 않게.
+ //  R771: 피격 hit4(같은 인물, 떠 있는 채 젖혀졌다 돌아옴, 16fps) — 부유 시트처럼 발끝이 이미 떠 있어 hover 를 더하지 않는다(hoverOn 은 바닥에 선 대기·공격만).
+ sobok:{name:'잠식된 소복 처녀',vis:193,n:{idle:6,walk:8,atk:8,hit:4},hitStep:1/16,walkFps:1/.12,hover:[17,4,.96],hoverOn:['idle','atk'],p:{walk:'assets/r770/villagers/sobok-float.webp',idle:'assets/r770/villagers/sobok-idle.webp',atk:'assets/r770/villagers/sobok-atk.webp',hit:'assets/r770/villagers/sobok-hit.webp'}}};
+const pathOf=(k,a)=>V[k].p?.[a]||D+k+'-'+a+'.webp';
+const PROJ='assets/r769/herbwife-proj6.webp',PCELL=128,PN=6;
+const PATHS=[...Object.entries(V).flatMap(([k,v])=>Object.keys(v.n).map(a=>pathOf(k,a))),PROJ];
 const ZONES=new Set(['last302','last303']),OLD=/포구 검은 안개|귀비탕 공명 안개핵|유리 망령|주민에게서 떨어진 검은 안개/;
 const zoneOf=()=>{try{return String(typeof room==='object'&&room?room.id||'':'');}catch(_){return '';}};
 const hash=s=>{let h=2166136261;for(const c of String(s))h=Math.imul(h^c.charCodeAt(0),16777619);return (h>>>0)/4294967296;};
@@ -206,13 +213,20 @@ const slot=e=>{const m=/(\d+)$/.exec(String(e.id||''));return m?+m[1]:Math.floor
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 function rename(e,k){const n=String(e.name||'');if(!OLD.test(n))return;if(!e.r763From)e.r763From=n;if(!e.r248Key)e.r248Key=n.replace(/^중간보스 · /,'').replace(/ \d+$/,'');
  e.name=n.replace(OLD,V[k].name);if(typeof e.r373Name==='string')e.r373Name=e.r373Name.replace(OLD,V[k].name);stats.renamed++;}
-function kindFor(e,zone){if(!prefs.on||!e||typeof e!=='object'||e.boss||e.hero||e.r170Tower||e.r251Circle)return null;const z=typeof zone==='string'?zone:zoneOf();if(!ZONES.has(z))return null;
+// R774(사용자 11-12 06:31Z '어부·소복은 근접 전용으로'): 둥지(last303)는 모두 l302-e1 이고 대부분 ai hybrid 라 어부·소복도 멀리서 시전 → 근접 AI(엔진 index.html 이 ai 를 melee 로 바꿀 때와 같은 방식: ai·선호 거리). 원래 값은 r774Ai·r774Pref.
+// 지역을 만들 때(makeRoom)는 이름만 바꾸고 AI 는 첫 갱신(0.7초 주기·그리기) 때 바꾼다 — 지역 데이터 표는 기준 그대로(r81 runtime-contracts).
+function melee(e,k){if(!prefs.melee||(k!=='fisher'&&k!=='sobok')||e.ai==='melee')return;if(e.r774Ai===undefined)e.r774Ai=e.ai;e.ai='melee';const P=e.combatProfile;
+ if(P&&typeof P==='object'){const r=Number(P.attackShape?.range);if(Number.isFinite(r)&&r>0){if(e.r774Pref===undefined)e.r774Pref=P.preferredRange;e.combatProfile={...P,preferredRange:r*.86};}}stats.melee=(stats.melee||0)+1;}
+function kindFor(e,zone,atMake){if(!prefs.on||!e||typeof e!=='object'||e.boss||e.hero||e.r170Tower||e.r251Circle)return null;const z=typeof zone==='string'?zone:zoneOf();if(!ZONES.has(z))return null;
  // 아니라고 정한 것은 이름이 그대로일 때만 기억한다(R74 순찰처럼 지역을 만든 뒤 이름이 바뀌는 몹이 있음).
- if(e.r763Zone===z&&(e.r763||e.r763N===e.name)){if(e.r763){if(e.r74Monster){e.r763Atlas=e.r74Monster;delete e.r74Monster;}if(OLD.test(String(e.name||'')))rename(e,e.r763);}return e.r763||null;}const id=String(e.nativeId||'');let k=null;
- if((id==='l302-e1'||id==='l302-e3')&&(e.r763From||OLD.test(String(e.name||''))))k=id==='l302-e3'?'fisher':z==='last303'?(slot(e)%2?'fisher':'herbwife'):'herbwife';
+ if(e.r763Zone===z&&(e.r763||e.r763N===e.name)){if(e.r763){if(e.r74Monster){e.r763Atlas=e.r74Monster;delete e.r74Monster;}if(OLD.test(String(e.name||'')))rename(e,e.r763);if(!atMake)melee(e,e.r763);}return e.r763||null;}const id=String(e.nativeId||'');let k=null;
+ // R769: l302-e3(근거리) 셋에 하나는 소복 처녀, last303 은 번호로 아낙·어부·소복을 차례로(소복을 끄면 그 자리는 어부).
+ if((id==='l302-e1'||id==='l302-e3')&&(e.r763From||OLD.test(String(e.name||'')))){const n=slot(e);k=id==='l302-e3'?(n%2===0?'sobok':'fisher'):z==='last303'?['herbwife','fisher','sobok'][n%3]:'herbwife';if(k==='sobok'&&!prefs.sobok)k='fisher';}
+ // R773: 순찰·증원이 이미 바뀐 이름(잠식된 …)을 물려받고 옛 이름 흔적이 없으면 위에서 못 잡는다(last303 순찰 6명이 옛 그림) → 이름으로 고름.
+ else if(id==='l302-e1'||id==='l302-e3'){const nm=String(e.name||'');k=Object.keys(V).find(q=>nm.includes(V[q].name))||null;if(k==='sobok'&&!prefs.sobok)k='fisher';}
  e.r763=k;e.r763Zone=z;e.r763N=k?undefined:e.name;if(k){
   // R74 순찰(유리 망령)은 지도 괴물 그림 표시(r74Monster)가 있으면 frameFor 사슬을 타지 않고 이름도 그 표로 되돌아간다 → R386 처럼 표시를 떼어 둔다(원래 값은 r763Atlas).
-  if(e.r74Monster){e.r763Atlas=e.r74Monster;delete e.r74Monster;}rename(e,k);stats.assigned++;}return k;}
+  if(e.r74Monster){e.r763Atlas=e.r74Monster;delete e.r74Monster;}rename(e,k);if(!atMake)melee(e,k);stats.assigned++;}return k;}
 const ST=new WeakMap();const stOf=e=>{let s=ST.get(e);if(!s)ST.set(e,s={seed:hash(e.id||e.name),hitAt:0});return s;};
 function faceLeft(e){try{const r=window.__STORYWORLD_ENEMY_FACE_R444__?.left?.(e);if(typeof r==='boolean')return r;}catch(_){}
  try{const A=e.attack;if(A&&Number.isFinite(A.angle))return Math.cos(A.angle)-Math.sin(A.angle)<0;return (player.x-player.y)<(e.x-e.y);}catch(_){return false;}}
@@ -222,36 +236,40 @@ function cell(e,k){const v=V[k],t=T(),s=stOf(e);
  const A=e.attack;if(A&&Number.isFinite(A.elapsed)){const sh=A.shape154||e.combatProfile?.attackShape||{},w=Math.max(.05,A.castWindup150??sh.windup??.45),act=sh.active??.15,rec=Math.max(.05,sh.recovery??.35),el=A.elapsed;
   const f=el<w?Math.floor(el/w*3):el<w+act?3:4+Math.floor((el-w-act)/rec*4);return ['atk',clamp(f,0,7)];}
  if(e.rangedWindup>0)return ['atk',2];
- if(e.hitTimer>0){if(!s.hitAt||t-s.hitAt>.4)s.hitAt=t;return v.n.hit?['hit',Math.min(v.n.hit-1,Math.floor((t-s.hitAt)/.035))]:['idle',0];}s.hitAt=0;
- if(e.moving){const i=Math.floor(t*10+s.seed*8)%v.n.walk;return ['walk',v.walkOrder?v.walkOrder[i]:i];}
+ if(e.hitTimer>0){if(!s.hitAt||t-s.hitAt>.4)s.hitAt=t;return v.n.hit?['hit',Math.min(v.n.hit-1,Math.floor((t-s.hitAt)/(v.hitStep||.035)+1e-9))]:['idle',0];}s.hitAt=0;
+ if(e.moving){const i=Math.floor(t*(v.walkFps||10)+s.seed*8)%v.n.walk;return ['walk',v.walkOrder?v.walkOrder[i]:i];}
  return ['idle',Math.floor(t*7+s.seed*6)%v.n.idle];}
-function frameOf(k,a,f,flip){const vh=V[k].vis,sx=f*CELL;
- return {path:D+k+'-'+a+'.webp',assetFrame:{sourceRect:[sx,0,CELL,CELL],pivot:PIV,visibleHeight:vh},sourceAlphaCore:[sx,0,CELL,CELL],metricThreshold:16,sourcePixelsEdited:false,
-  normalizedFullRectangleExtents:[-PIV[0]/vh,-PIV[1]/vh,(CELL-PIV[0])/vh,(CELL-PIV[1])/vh],flip,r763:k,r380Mob:'r763-'+k,r208Mob:'r763-'+k};}
+// hover(R770 소복): 바닥에 선 그림(부유 시트가 아닌 것)은 발 기준점을 칸 아래로 내려 그만큼 떠 보이게.
+function frameOf(k,a,f,flip,seed){const v=V[k],vh=v.vis,sx=f*CELL,hv=v.hover&&(v.hoverOn||[]).includes(a)?v.hover:null;
+ // R772: 엔진 그림 검사는 pivot[1] 이 칸 높이(256)를 넘으면 그 그림을 버리고 시트 통째(6칸이 한 줄로)를 그린다(3D 화면, 사용자 신고 '여러 이미지가 한 번에') → 칸 안으로.
+ const py=hv?Math.min(CELL,PIV[1]+hv[0]+hv[1]*Math.sin((T()/hv[2]+(seed||0))*Math.PI*2)):PIV[1],pv=hv?[PIV[0],py]:PIV;
+ return {path:pathOf(k,a),assetFrame:{sourceRect:[sx,0,CELL,CELL],pivot:pv,visibleHeight:vh},sourceAlphaCore:[sx,0,CELL,CELL],metricThreshold:16,sourcePixelsEdited:false,
+  normalizedFullRectangleExtents:[-pv[0]/vh,-pv[1]/vh,(CELL-pv[0])/vh,(CELL-pv[1])/vh],flip,r763:k,r380Mob:'r763-'+k,r208Mob:'r763-'+k};}
 const ready=p=>{try{return typeof readyImage==='function'&&readyImage(p)?.image?.naturalWidth>0;}catch(_){return false;}};
 let visit='';function preload(){const z=zoneOf();if(z===visit)return;visit=z;if(ZONES.has(z)&&typeof ensureImages==='function')try{Promise.resolve(ensureImages(PATHS)).catch(()=>{});}catch(_){}}
 function install(){const S=window.__STORYWORLD_STORY_COMBAT_R54__;if(!S||typeof S.frameFor!=='function')return false;if(S.__r763)return true;
- window.__STORYWORLD_STORY_COMBAT_R54__=Object.freeze({...S,__r763:true,frameFor(e,f){try{if(prefs.on){preload();const k=kindFor(e);if(k){const[a,i]=cell(e,k),fr=frameOf(k,a,i,faceLeft(e));
+ window.__STORYWORLD_STORY_COMBAT_R54__=Object.freeze({...S,__r763:true,frameFor(e,f){try{if(prefs.on){preload();const k=kindFor(e);if(k){const[a,i]=cell(e,k),fr=frameOf(k,a,i,faceLeft(e),stOf(e).seed);
    if(ready(fr.path)){stats.frames++;return fr;}stats.waiting++;if(typeof ensureImages==='function')Promise.resolve(ensureImages([fr.path])).catch(()=>{});}}}catch(err){fail(err);}return S.frameFor(e,f);}});
  stats.reinstalls++;return true;}
 // 지역을 만들 때 한 번 모두(아직 안 그려진 몹·숨은 증원까지 이름이 한꺼번에 바뀌게). 꿈 층(DREAM)은 사몽 쪽이라 그대로.
 function installRoom(){if(typeof makeRoom!=='function')return false;if(makeRoom.__r763)return true;const base=makeRoom;
- const w=function(id,l,...a){const r=base.call(this,id,l,...a);try{if(prefs.on&&r&&ZONES.has(String(id))&&l!=='DREAM'&&Array.isArray(r.enemies))for(const e of r.enemies)kindFor(e,String(id));if(prefs.on&&ZONES.has(String(id))&&typeof ensureImages==='function')Promise.resolve(ensureImages(PATHS)).catch(()=>{});}catch(err){fail(err);}return r;};
+ const w=function(id,l,...a){const r=base.call(this,id,l,...a);try{if(prefs.on&&r&&ZONES.has(String(id))&&l!=='DREAM'&&Array.isArray(r.enemies))for(const e of r.enemies)kindFor(e,String(id),true);if(prefs.on&&ZONES.has(String(id))&&typeof ensureImages==='function')Promise.resolve(ensureImages(PATHS)).catch(()=>{});}catch(err){fail(err);}return r;};
  for(const k of Object.keys(base))try{w[k]=base[k];}catch(_){}w.__r763=true;try{makeRoom=w;}catch(_){return false;}try{window.makeRoom=w;}catch(_){}return true;}
 // ── 죽음: 엔진 죽음 불꽃(spawnBurnDeath3 → drawBurnDeath3)을 주민만 '쓰러져 잠듦'으로 ──
-const LIFE={fisher:2.4,herbwife:1.6},FSTEP=.11;
+const LIFE={fisher:2.4,herbwife:2.4,sobok:1.6},FSTEP=.11;
 function wrapDeath(){let ok=true;
  if(typeof spawnBurnDeath3==='function'&&!spawnBurnDeath3.__r763){const base=spawnBurnDeath3;const w=function(e){const k=e&&prefs.on?(e.r763Zone===zoneOf()?e.r763:kindFor(e)):null,r=base.apply(this,arguments);
-   try{if(k&&typeof effects!=='undefined'&&Array.isArray(effects)){for(let i=effects.length-1;i>=0;i--){const f=effects[i];if(f?.type==='enemyBurnDeath'&&f.sourceId===e.id&&!f.r763){f.r763={k,flip:faceLeft(e)};f.life=Math.max(f.life||0,LIFE[k]);stats.deaths++;break;}}}}catch(err){fail(err);}return r;};
+   try{if(k&&typeof effects!=='undefined'&&Array.isArray(effects)){for(let i=effects.length-1;i>=0;i--){const f=effects[i];if(f?.type==='enemyBurnDeath'&&f.sourceId===e.id&&!f.r763){f.r763={k,flip:faceLeft(e)};if(f.r462===undefined)f.r462=null;f.life=Math.max(f.life||0,LIFE[k]);stats.deaths++;break;}}}}catch(err){fail(err);}return r;};
   w.__r763=true;try{spawnBurnDeath3=w;}catch(_){ok=false;}}else if(typeof spawnBurnDeath3!=='function')ok=false;
  if(typeof drawBurnDeath3==='function'&&!drawBurnDeath3.__r763){const base=drawBurnDeath3;const w=function(fx){try{if(fx?.r763&&prefs.on&&typeof drawAssetFrame3==='function'){drawDying(fx);return;}}catch(err){fail(err);}return base.apply(this,arguments);};
   w.__r763=true;try{drawBurnDeath3=w;}catch(_){ok=false;}}else if(typeof drawBurnDeath3!=='function')ok=false;
  return ok;}
 function drawDying(fx){const R=fx.r763,v=V[R.k],q=project(fx.x,fx.y),h=Number.isFinite(fx.bodyHeight)?fx.bodyHeight:60,a=Math.max(0,fx.age||0),life=fx.life||1;
  const end=clamp((life-a)/.7,0,1);
- if(v.n.death){const f=Math.min(v.n.death-1,Math.floor(a/FSTEP)),fr=frameOf(R.k,'death',f,R.flip);if(!ready(fr.path))return;drawAssetFrame3(fr.path,fr,q.x,q.y,h,{alpha:end,flip:R.flip});return;}
- // 죽음 시트가 없는 아낙: 대기 첫 칸이 무릎 높이까지 가라앉으며 사라진다(임시, Dots 재작업 대기).
- const u=clamp(a/life,0,1),fr=frameOf(R.k,'idle',0,R.flip);if(!ready(fr.path))return;drawAssetFrame3(fr.path,fr,q.x,q.y+h*.12*u,h*(1-.18*u),{alpha:Math.pow(1-u,.9),flip:R.flip});}
+ if(v.n.death){const f=Math.min(v.n.death-1,Math.floor(a/(v.deathStep||FSTEP)+1e-9)),fr=frameOf(R.k,'death',f,R.flip);if(ready(fr.path)){drawAssetFrame3(fr.path,fr,q.x,q.y,h,{alpha:end,flip:R.flip});return;}
+  if(typeof ensureImages==='function')try{Promise.resolve(ensureImages([fr.path])).catch(()=>{});}catch(_){}}
+ // 죽음 시트가 없는 몹(R770 부터 소복)·죽음 시트가 아직 안 실린 몹(R770 아낙 첫 죽음에 빈 자리가 되던 것): 대기 첫 칸이 무릎 높이까지 가라앉으며 사라진다.
+ const u=clamp(a/life,0,1),fr=frameOf(R.k,v.n.idle?'idle':'walk',0,R.flip);if(!ready(fr.path))return;drawAssetFrame3(fr.path,fr,q.x,q.y+h*.12*u,h*(1-.18*u),{alpha:Math.pow(1-u,.9),flip:R.flip});}
 // ── 소리: 피격 신음·죽음 잠드는 숨(그림 스레드가 만든 assets/r761/sfx) ──
 const VS={r761VillagerGroan:['groan',.55],r761VillagerSleep:['sleep',.65]},GROAN_GAP=1.5;let hitNow=null,dyingNow=null,lastGroan=-1e9;
 function sfxProfiles(){try{if(typeof soundProfiles==='undefined'||!soundProfiles)return;for(const[kind,[n,g]]of Object.entries(VS))if(!soundProfiles[kind]?.length)soundProfiles[kind]=[1,2].map(i=>({key:'r761-'+n+'-'+i,path:'assets/r761/sfx/bmg-'+n+'-'+i+'.ogg',gain:g,r541:true}));}catch(err){fail(err);}}
@@ -265,11 +283,20 @@ function wrapHits(){let ok=true;const vil=e=>{try{return !!(e&&prefs.on&&(e.r763
  if(typeof killEnemy==='function'&&!killEnemy.__r763){const base=killEnemy;const w=function(e){const prev=dyingNow;dyingNow=vil(e)?e:null;try{return base.apply(this,arguments);}finally{dyingNow=prev;}};w.__r763=true;try{killEnemy=w;}catch(_){ok=false;}}
  return ok&&typeof hitEnemy==='function'&&typeof killEnemy==='function';}
 sfxProfiles();if(typeof setupAudio==='function'){const base=setupAudio;setupAudio=function(){const r=base.apply(this,arguments);sfxProfiles();return r;};}
+// ── R769 약방 아낙 투사체: 엔진 적 투사체(enemyShot → drawProjectile)를 proj6 r4 시트(실타래 공, 오른쪽으로 날아가는 그림)로. 크기는 엔진 투사체 크기의 1.7배(칸의 공은 반쯤). ──
+function shooter(b){try{if(!b||b.friendly||!b.owner||!Array.isArray(room?.enemies))return null;for(const e of room.enemies)if(e&&e.id===b.owner)return e;}catch(_){}return null;}
+function drawShot(b){const e=shooter(b);if(!e)return false;const z=zoneOf();if(!ZONES.has(z)||(e.r763Zone===z?e.r763:kindFor(e,z))!=='herbwife')return false;
+ const im=(typeof readyImage==='function'&&readyImage(PROJ)?.image)||null;if(!im){if(typeof ensureImages==='function')try{Promise.resolve(ensureImages([PROJ])).catch(()=>{});}catch(_){}return false;}
+ const zz=typeof zoom==='number'&&zoom>0?zoom:1,q=project(b.x,b.y),pr=project(b.x-(b.vx||0)*.06,b.y-(b.vy||0)*.06),ang=Math.atan2(q.y-pr.y,q.x-pr.x);
+ const mx=(typeof W==='number'&&typeof H==='number')?Math.min(W,H)*.2/Math.SQRT2:120,sz=Math.min(mx,24*(b.scale||1)*zz)*1.7,f=Math.floor((b.age||0)*12+hash(b.id||'')*PN)%PN;
+ ctx.save();try{ctx.translate(q.x,q.y-18*zz);ctx.rotate(ang);ctx.drawImage(im,f*PCELL,0,PCELL,PCELL,-sz/2,-sz/2,sz,sz);}finally{ctx.restore();}stats.shots++;return true;}
+function wrapShots(){if(typeof drawProjectile!=='function')return false;if(drawProjectile.__r769)return true;const base=drawProjectile;
+ const w=function(b){try{if(prefs.on&&prefs.proj&&drawShot(b))return;}catch(err){fail(err);}return base.apply(this,arguments);};w.__r769=true;try{drawProjectile=w;}catch(_){return false;}return true;}
 // 다른 오버레이(R191 시대 순찰 등)가 지역에 들어온 뒤 이름을 다시 붙여도 0.7초 안에 다시 맞춘다(화면에 안 그려진 몹의 이름표·목록까지).
 if(typeof setInterval==='function')setInterval(()=>{try{const z=zoneOf();if(prefs.on&&ZONES.has(z)&&Array.isArray(room?.enemies))for(const e of room.enemies)kindFor(e,z);}catch(err){fail(err);}},700);
 // 다른 덧씌우기(R380·R188·R462·R541)가 먼저 감싼 뒤 바깥에서 감싸도록 늦게, 될 때까지 몇 번.
-let tries=0;(function arm(){let done=false;try{done=[install(),installRoom(),wrapDeath(),wrapSound(),wrapHits()].every(Boolean);}catch(e){fail(e);}if(!done&&++tries<80&&typeof setTimeout==='function')setTimeout(arm,250);})();
-if(typeof setTimeout==='function')setTimeout(()=>{try{install();installRoom();wrapDeath();wrapSound();wrapHits();}catch(e){fail(e);}},0);
+let tries=0;(function arm(){let done=false;try{done=[install(),installRoom(),wrapDeath(),wrapSound(),wrapHits(),wrapShots()].every(Boolean);}catch(e){fail(e);}if(!done&&++tries<80&&typeof setTimeout==='function')setTimeout(arm,250);})();
+if(typeof setTimeout==='function')setTimeout(()=>{try{install();installRoom();wrapDeath();wrapSound();wrapHits();wrapShots();}catch(e){fail(e);}},0);
 window.__STORYWORLD_VILLAGERS_R763__=Object.freeze({rev:REV,kindFor,cell,frameOf,villagers:V,inspect:()=>({rev:REV,prefs:{...prefs},stats:{...stats},lastError}),
  set(p={}){for(const k of Object.keys(prefs))if(typeof p[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return {...prefs};}});
 })();

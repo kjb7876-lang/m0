@@ -16,7 +16,7 @@
 //  끄기: localStorage['storyworld.r286.motion']='{"on":false}' (전부) · '{"charge":false}'(①) · '{"lunge":false}'(② 근접) · '{"shots":false}'(간접 사격)
 (()=>{'use strict';
 if(window.__STORYWORLD_MOB_MOTION_R286__)return;
-const REV='R286-motion-1',KEY='storyworld.r286.motion';
+const REV='R286-motion-2',KEY='storyworld.r286.motion';
 const CHARGE=.45,DASH=.24,DASH_GAP=2.2,MAXDASH=3.2,BLINK_MAX=4.6,AIM=.5,SHOT_K=.66,SHOT_GAP=6.6,SHOT_SPEED=4.6,MAXLIVE=3,RAD=.3,SIDE=.3,REACH=.42;
 const ART_MOVE=Object.freeze(['assets/r105/drive/mob-paper-figure.webp']);// R109 index 의 art 이동 줄(R110) — QA 가 index 와 맞는지 본다
 let prefs={on:true,charge:true,lunge:true,shots:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
@@ -95,6 +95,8 @@ function step(){if(!prefs.on||paused()||!solo()||hospital())return;const now=T()
   else{if(!prefs.shots||e.ai==='ranged'||e.ai==='hybrid'||d<3||d>6.5||now<st.nextShot||!sees(e.x,e.y))continue;st.mode='aim';st.t0=now;st.hx=e.x;st.hy=e.y;face(e);e.r230At=now;stats.aims++;n++;}}}
 // ---- 그리기: 몸 그림만(판정·좌표는 그리기가 끝나면 되돌린다) ----
 const ease=u=>{u=Math.max(0,Math.min(1,u));return u*u*(3-2*u);};
+// R776 걷기 들썩임: 초당 걸음 수, 들썩 높이(칸), 좌우 흔들림(칸). 몹마다 위상을 달리한다.
+const STEP_HZ=2.2,HOP=.07,SWAY=.025;const stillPhase=e=>{let h=0;for(const c of String(e.id||e.name||''))h=(h*31+c.charCodeAt(0))>>>0;return (h%1000)/1000;};
 // 순수(QA): 이동 칸으로 하는 근접 동작의 그림 자리 — 공격 시작부터 t초, 앞 방향 a, 옆 부호 side → 월드 옮김 [dx,dy]
 function lungeOffset(t,sh,a,side){const w=Math.max(.05,Number(sh.windup)||.3),act=Math.max(.05,Number(sh.active)||.15),rec=Math.max(.1,Number(sh.recovery)||.35);
  let f=0,p=0;if(t<w){const u=t/w;p=SIDE*side*Math.sin(Math.PI*u);f=-.12*ease(u);}else if(t<w+act){f=-.12+(REACH+.12)*ease((t-w)/act);}else f=REACH*(1-ease((t-w-act)/rec));
@@ -117,7 +119,14 @@ if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a
    else if(s?.mode==='aim'){const age=Math.max(0,now-s.t0),p=SIDE*.6*s.side*Math.sin(age/AIM*Math.PI*2),A=aimAt(e);
     saved={moving:e.moving,x:e.x,y:e.y};e.moving=true;e.x-=Math.sin(A)*p;e.y+=Math.cos(A)*p;}
    else if(e.attack&&!e.attack.r286Fake&&prefs.lunge&&Number.isFinite(e.attack.elapsed)&&kindOf(e)==='move-only'){const A=e.attack,sh=A.shape154||shapeOf(e),side=((Number(A.id)||0)%2)?1:-1,o=lungeOffset(A.elapsed,sh,Number.isFinite(A.angle)?A.angle:aimAt(e),side);
-    saved={attack:A,moving:e.moving,x:e.x,y:e.y};e.attack=null;e.moving=true;e.x+=o[0];e.y+=o[1];if(A.r286Seen!==true){A.r286Seen=true;stats.lunges++;}}}}
+    saved={attack:A,moving:e.moving,x:e.x,y:e.y};e.attack=null;e.moving=true;e.x+=o[0];e.y+=o[1];if(A.r286Seen!==true){A.r286Seen=true;stats.lunges++;}}
+   // R776(사용자 2026-11-12 07:11Z '모션이 없는 몹은 일단 너가 코드로 구현'): 그림 한 장·대기만 몹(Dots CX-0079MM 시트가 오기 전 임시)
+   //  · 공격: 그 한 장(엔진 공격 그림 그대로)을 move-only 와 같은 젖힘→옆걸음→내딛기 자리 옮김으로. · 걷기: 발걸음마다 들썩(화면 위로 최대 .07칸)·좌우 흔들림.
+   else if(prefs.still!==false&&!e.r286Fake){const k=kindOf(e);if(k==='static'||k==='idle-only'){const A=e.attack;
+    if(A&&!A.r286Fake&&Number.isFinite(A.elapsed)){const sh=A.shape154||shapeOf(e),side=((Number(A.id)||0)%2)?1:-1,o=lungeOffset(A.elapsed,sh,Number.isFinite(A.angle)?A.angle:aimAt(e),side);
+     saved={moving:e.moving,x:e.x,y:e.y};e.x+=o[0];e.y+=o[1];if(A.r286Still!==true){A.r286Still=true;stats.staticLunges=(stats.staticLunges||0)+1;}}
+    else if(e.moving){const ph=stillPhase(e),u=now*STEP_HZ+ph,hop=Math.abs(Math.sin(Math.PI*u))*HOP,sw=Math.sin(Math.PI*u*.5)*SWAY;
+     saved={moving:e.moving,x:e.x,y:e.y};e.x+=-hop/2+sw;e.y+=-hop/2-sw;stats.staticMoves=(stats.staticMoves||0)+1;}}}}}
  catch(err){fail(err);saved=null;}
  try{return base.apply(this,[e,...a]);}
  finally{if(saved){if('attack' in saved)e.attack=saved.attack;e.moving=saved.moving;if('x' in saved){e.x=saved.x;e.y=saved.y;}}}};}

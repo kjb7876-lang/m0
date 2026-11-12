@@ -97,11 +97,11 @@
     },
     {
       "path": "r96/ci-packs/inputs-019.bin",
-      "bytes": 763956,
-      "sha256": "e5ebfc78b3c9bbceacbdaa36debfd815220402c58fbc47825226bce3731bc027"
+      "bytes": 766734,
+      "sha256": "85567248afe91337cfb59a228904f0cb3752cd646e679ba912576caed86aec36"
     }
   ],
-  "archiveSHA256": "7d22360765cd4366681037c7f9a9bf6dc62836549266cdf130e84c7ee8f0afb7",
+  "archiveSHA256": "799af98afbdd8043b95473b2a0c5797fe74c410a964fb3db806b28ee5ba758f5",
   "files": [
     {
       "path": "handoff/baseline-inputs/hospital-refinement-v4/harness.cjs",
@@ -5397,8 +5397,8 @@
     },
     {
       "path": "qa/r81/legacy-castle-save-contracts.cjs",
-      "bytes": 6349,
-      "sha256": "c9287641dee44e313838787127808ec7208190e2256e12c0539387a8aeecf9a6"
+      "bytes": 6456,
+      "sha256": "fcb5523b5b8d6a0a12db707b87d7d30464c7f8007a1776f9df5a091607014caf"
     },
     {
       "path": "qa/r81/legacy-save-before-field-relocation-results.json",

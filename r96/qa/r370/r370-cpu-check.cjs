@@ -78,6 +78,14 @@ ok('isFinal: finale/ending scenes recognised',P.isFinal([{key:'finale.core-prese
  ok('guide travel waits at the exit while must-read lines remain (<=40 s)',mustBefore>25&&T.ev('entered.length')===0&&T.api.inspect().stats.lingers===1,{mustBefore});
  T.run(45);ok('…and then travels',T.ev('entered.includes("dist02")'));
  T.ev('enterRegion("hub",null,{restore:true})');ok('restore/return travel is never delayed',T.ev('entered.includes("hub")'));
+ // R882: 사용자가 직접 고른 777 이동은 머물기를 건너뛰고, 이미 걸려 있던 길잡이 이동은 취소한다(옛 목적지로 뒤늦게 가지 않음).
+ T.ev(`playScenes([{key:'dist01:post2',id:'dist01',title:'끝',text:${JSON.stringify(Array.from({length:30},(_,i)=>'다시 남은 장면 '+i+'의 문장이 이어졌다.').join(' '))}}],null)`);
+ const n0=T.ev('entered.length');T.ev('guide=true;enterRegion("u201",null,{}).then(()=>{})');
+ ok('guide travel waits again (777 test setup)',T.ev('entered.length')===n0);
+ T.ev('enterRegion("hub",null,{travel777R72:true})');
+ ok('777 travel is never delayed by the exit linger',T.ev('entered.length')===n0+1&&T.ev('entered[entered.length-1]')==='hub');
+ T.run(45);
+ ok('777 travel cancels the guide travel queued before it (no late jump to the old destination)',T.ev('entered.slice('+n0+').join()')==='hub');
  // 길잡이 이어 켜기
  T.ev('guide=false;');T.tickIv(8);ok('guide is switched back on after 6 s without input',T.ev('guide')===true&&T.api.inspect().stats.guideResumed>=1);
  // 끄기

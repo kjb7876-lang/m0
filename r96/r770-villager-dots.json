@@ -1,0 +1,169 @@
+{
+ "round": "R770",
+ "files": [
+  {
+   "villager": "sobok",
+   "anim": "float",
+   "frames": 8,
+   "source": "Dots CX-0070BM CX-0070BM_vil3_float8_r1_c1.png (그림 스레드 c1 손질)",
+   "sourceSha256": "0d734aa29fe4640b07777a517d0361d597c126ac2992f315a9a7d87179e38bda",
+   "path": "assets/r770/villagers/sobok-float.webp",
+   "cell": 256,
+   "pivot": [
+    128,
+    234.67
+   ],
+   "heights": [
+    206.7,
+    211.7,
+    212.7,
+    212.7,
+    209.7,
+    208.7,
+    206.7,
+    207.7
+   ],
+   "size": [
+    2048,
+    256
+   ],
+   "bytes": 64544,
+   "sha256": "d556891342041b28cef346538dcbcf062abccf18dd169fb3100dafa87362f6a9"
+  },
+  {
+   "villager": "sobok",
+   "anim": "idle",
+   "frames": 6,
+   "source": "Dots CX-0070BM CX-0070BM_vil3_idle6_r1_c1.png (그림 스레드 c1 손질)",
+   "sourceSha256": "a2d6a190d4808c3e11844519a976912308ff83bdefb3a5ef479d170a226b4dd0",
+   "path": "assets/r770/villagers/sobok-idle.webp",
+   "cell": 256,
+   "pivot": [
+    128,
+    234.67
+   ],
+   "heights": [
+    192.7,
+    192.7,
+    192.7,
+    192.7,
+    192.7,
+    192.7
+   ],
+   "size": [
+    1536,
+    256
+   ],
+   "bytes": 47562,
+   "sha256": "49ac13a0e0f346b3e0dfb15d00abc99faf8c5857e2bd7b9c528a258f06a97ef2"
+  },
+  {
+   "villager": "sobok",
+   "anim": "atk",
+   "frames": 8,
+   "source": "Dots CX-0070BM CX-0070BM_vil3_atk8_r1_c1.png (그림 스레드 c1 손질)",
+   "sourceSha256": "d885b305ac96b8be16221c167abca612908ea9d7270ac6c661a387e4611c6a61",
+   "path": "assets/r770/villagers/sobok-atk.webp",
+   "cell": 256,
+   "pivot": [
+    128,
+    234.67
+   ],
+   "heights": [
+    191.7,
+    191.7,
+    191.7,
+    191.7,
+    191.7,
+    191.7,
+    191.7,
+    191.7
+   ],
+   "size": [
+    2048,
+    256
+   ],
+   "bytes": 70266,
+   "sha256": "97aa0064b8cd63d8eaf2b47e303a17bcb3fd976d4fecd815ad9344ccd087dc0a"
+  },
+  {
+   "villager": "sobok",
+   "anim": "hit",
+   "frames": 4,
+   "source": "Dots CX-0070BM CX-0070BM_vil3_hit4_r1_c1.png (그림 스레드 c1 손질)",
+   "sourceSha256": "a3d66a1294606202345116c347088015d9e801c5d0fc0cae86841d40ec85a3c6",
+   "path": "assets/r770/villagers/sobok-hit.webp",
+   "cell": 256,
+   "pivot": [
+    128,
+    234.67
+   ],
+   "heights": [
+    206.7,
+    201.7,
+    201.7,
+    206.7
+   ],
+   "size": [
+    1024,
+    256
+   ],
+   "bytes": 33654,
+   "sha256": "439dc4f09ce826af8ade7a5d75e5580ae4d394a9951772d3e2cb5fa90c0392c5"
+  },
+  {
+   "villager": "herbwife",
+   "anim": "hit",
+   "frames": 4,
+   "source": "Dots CX-0070BM CX-0070BM_vil2_hit4_r1_c1.png (그림 스레드 c1 손질)",
+   "sourceSha256": "65a758f46d667a0dde9a4ef2d39386c70384f0642e1a6dada5c19abc6a656201",
+   "path": "assets/r770/villagers/herbwife-hit.webp",
+   "cell": 256,
+   "pivot": [
+    128,
+    234.67
+   ],
+   "heights": [
+    202.7,
+    195.7,
+    196.7,
+    198.7
+   ],
+   "size": [
+    1024,
+    256
+   ],
+   "bytes": 41910,
+   "sha256": "79d9d23cac27f14d069b3a29721bc13a524cdafb9b175b3817f6cb2c42fda65d"
+  },
+  {
+   "villager": "herbwife",
+   "anim": "death",
+   "frames": 8,
+   "source": "Dots CX-0070BM CX-0070BM_vil2_death8_r1_c1.png (그림 스레드 c1 손질)",
+   "sourceSha256": "4fc387d4f33dc119d0587ae4d1c18fff1174ec898daf36770ee1693eff0b85bc",
+   "path": "assets/r770/villagers/herbwife-death.webp",
+   "cell": 256,
+   "pivot": [
+    128,
+    234.67
+   ],
+   "heights": [
+    208.7,
+    196.7,
+    162.7,
+    134.7,
+    112.7,
+    108.7,
+    61.7,
+    62.7
+   ],
+   "size": [
+    2048,
+    256
+   ],
+   "bytes": 65510,
+   "sha256": "3448747a41c49f36fccac92d226dcdf9f92d0a97fe65b9565a9b5538eb307aba"
+  }
+ ]
+}
