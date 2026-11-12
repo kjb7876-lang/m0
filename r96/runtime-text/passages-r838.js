@@ -20,7 +20,7 @@
 //  끄기: localStorage['storyworld.r838.passages']='{"on":false}' 뒤 새로 고침
 (()=>{'use strict';
 if(window.__STORYWORLD_PASSAGES_R838__)return;
-const REV='R838-passages-2',KEY='storyworld.r838.passages',DETOUR=46;
+const REV='R838-passages-3',KEY='storyworld.r838.passages',DETOUR=46;
 const prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;}catch(_){}
 const stats={layouts:0,gaps:0,shaped:0,blocked:0,cells:0,nudged:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 // 지역 → 문간 모양 (지역 제목·원래 지형 이름은 story-maps-r171.js 머리말 표)
@@ -132,8 +132,10 @@ const solo=()=>(window.__STORYWORLD_COOP_SIM_R62__?.mode?.()||'off')==='off';
 // 지도 손질 사슬의 맨 바깥에 선다. 스크립트 태그는 앞쪽(walls-solid-r830 뒤)에 두고, 뒤에 오는 손질(동굴·궁전·보스방·죄의 방)이 훅을 갈아 끼워도
 // 늘 그 결과를 마지막에 다듬도록 훅 자리를 접근자로 바꾼다. 읽을 때마다 '그때의 안쪽 훅'을 감싼 함수를 주고, 안쪽에서 다시 불리면(뒤 손질이 previous 로 부를 때) 그대로 넘긴다.
 const HOOK='__STORYWORLD_LAYOUT_HOOK_R204__';let inner=window[HOOK],depth=0;
-const wrap=r=>function(id,L){if(depth)return r?.call(this,id,L);let out;depth++;try{out=r?.call(this,id,L)||L;}finally{depth--;}return solo()?shape(id,out):out;};
-try{Object.defineProperty(window,HOOK,{configurable:true,enumerable:true,get(){return wrap(inner);},set(f){inner=f;}});}catch(e){fail(e);const previous=inner;window[HOOK]=function(id,L){const out=previous?.(id,L)||L;return solo()?shape(id,out):out;};}
+// 맨 바깥 다듬기에 다른 손질을 이어 붙이는 자리(R839 야외 바위턱): extend(fn) 으로 넣은 함수가 문간 다듬기 뒤에 차례로 지도를 받는다.
+const extra=[],finish=(id,out)=>{if(!solo())return out;let r=shape(id,out);for(const f of extra){try{r=f(id,r)||r;}catch(e){fail(e);}}return r;};
+const wrap=r=>function(id,L){if(depth)return r?.call(this,id,L);let out;depth++;try{out=r?.call(this,id,L)||L;}finally{depth--;}return finish(id,out);};
+try{Object.defineProperty(window,HOOK,{configurable:true,enumerable:true,get(){return wrap(inner);},set(f){inner=f;}});}catch(e){fail(e);const previous=inner;window[HOOK]=function(id,L){const out=previous?.(id,L)||L;return finish(id,out);};}
 // 예전 저장: 영웅이 이제 벽 덩어리가 된 문간 칸에 서 있으면 엔진 복원이 엉뚱한 곳으로 옮긴다 → 복원이 끝난 바로 뒤 가장 가까운 바닥 칸 한가운데에 세운다(R830 과 같은 방식). 저장 객체는 고치지 않는다.
 function nudge(raw){try{const id=raw?.zone,P=raw?.player;if(!prefs.on||raw?.layer!=='STORY'||!STYLE[id]||!P||!Number.isFinite(P.x+P.y)||!solo())return null;
  let L=window.__STORYWORLD_EXPLORATION__?.layout?.(id,'STORY'),L0=sourceOf(id,L);
@@ -145,5 +147,5 @@ function nudge(raw){try{const id=raw?.zone,P=raw?.player;if(!prefs.on||raw?.laye
 if(typeof restoreSave==='function'){const base=restoreSave;restoreSave=async function(raw,...a){const to=nudge(raw),out=await base.call(this,raw,...a);
  try{if(to&&out!==false&&typeof player!=='undefined'&&player&&typeof zone!=='undefined'&&zone===to.zone&&typeof room!=='undefined'&&room?.exploration?.passagesR838&&!blocked(to.x,to.y,.29,room)){player.x=to.x;player.y=to.y;cam={x:to.x,y:to.y};route=[];command=null;target=null;stats.nudged++;}}catch(e){fail(e);}return out;};}
 function set(o){if(o&&typeof o.on==='boolean')prefs.on=o.on;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
-window.__STORYWORLD_PASSAGES_R838__=Object.freeze({revision:REV,STYLE,BLOCK,KEEP_OPEN,DETOUR,gaps,pattern,plan,fillCells:(L,cells)=>{filled=new Set(cells.map(c=>K(c[0],c[1])));try{return fillCells(L,cells);}finally{filled=new Set();}},shape,source:sourceOf,nudge,set,qa:o=>{qa=o||null;},inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError,collisionChanged:true})});
+window.__STORYWORLD_PASSAGES_R838__=Object.freeze({revision:REV,STYLE,BLOCK,KEEP_OPEN,DETOUR,gaps,pattern,plan,fillCells:(L,cells)=>{filled=new Set(cells.map(c=>K(c[0],c[1])));try{return fillCells(L,cells);}finally{filled=new Set();}},shape,source:sourceOf,nudge,set,qa:o=>{qa=o||null;},extend:f=>{if(typeof f==='function'&&!extra.includes(f))extra.push(f);return extra.length;},inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError,collisionChanged:true})});
 })();

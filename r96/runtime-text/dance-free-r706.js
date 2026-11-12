@@ -10,7 +10,7 @@
 //  끄기: localStorage 'storyworld.r706.danceFree'='0' 또는 __STORYWORLD_DANCE_FREE_R706__.set(false).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_DANCE_FREE_R706__)return;
-const REV='R706-dance-free-2',KEY='storyworld.r706.danceFree',GHOST_GAP=.12,GHOST_LIFE=.28,MIN_SHIFT=.35,DASH=1;
+const REV='R706-dance-free-3',KEY='storyworld.r706.danceFree',GHOST_GAP=.12,GHOST_LIFE=.28,MIN_SHIFT=.35,DASH=1;
 let on=true;try{if(localStorage.getItem(KEY)==='0')on=false;}catch(_){}
 const stats={ticks:0,restores:0,ghosts:0,blinks:0,resets:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const g=f=>{try{return f();}catch(_){return undefined;}};
@@ -38,20 +38,27 @@ if(typeof moveActor==='function'){const base=moveActor;moveActor=function(actor,
 // 블링크: 옮긴 자리가 새 본체 자리.
 if(typeof blink==='function'){const base=blink;blink=function(...a){const p=P(),bx=p?.x,by=p?.y,r=base.apply(this,a);
  try{if(body&&p&&(p.x!==bx||p.y!==by)){body.x=p.x;body.y=p.y;stats.blinks++;}}catch(e){fail(e);}return r;};}
+// 영웅을 본체 자리로 되돌리고 타격 자리에 분신을 남긴다. end=tick 끝(춤이 끝났으면 기억을 버림).
+//  settle(): 엔진·춤이 끝난 직후 안쪽 오버레이(play-r115)가 불러, 그 뒤의 자동 시전(R115 보조·R597·R705)이 분신 자리가 아니라 본체 자리에서 나가게 한다.
+function finish(p,end){if(bodyRoom&&bodyRoom!==curRoom()){reset();return;}
+ const d=dancing(p);if(!d&&!body)return;if(end)stats.ticks++;
+ if(!body){if(!start)return;body={x:start.x,y:start.y};bodyRoom=curRoom();}
+ if(!(p.hp>0)){reset();return;}
+ const shift=Math.hypot(p.x-body.x,p.y-body.y);
+ if(shift>1e-9){if(d&&shift>=MIN_SHIFT)ghost(p.x,p.y);p.x=body.x;p.y=body.y;stats.restores++;}
+ if(end&&!d){body=null;bodyRoom=null;}}
+function settle(){try{const p=P();if(inTick===1&&p&&active())finish(p,false);}catch(e){fail(e);}}
+// 저장: 엔진(R74)은 춤 중 시작 자리를 저장한다 → 지금 본체 자리로 바꾼다(춤이 끝나도 시작 자리로 돌아가지 않으므로).
+if(typeof serializeSave==='function'){const base=serializeSave;serializeSave=function(...a){const raw=base.apply(this,a);
+ try{if(body&&active()&&bodyRoom===curRoom()&&raw&&raw.player){raw.player.x=body.x;raw.player.y=body.y;}}catch(e){fail(e);}return raw;};}
 if(typeof tick==='function'){const base=tick;tick=function(dt,...a){const p=P();
  if(!active()||!p){if(body)reset();return base.call(this,dt,...a);}
  if(body&&bodyRoom!==curRoom())reset();
  start=inTick?start:{x:p.x,y:p.y};inTick++;let r;try{r=base.call(this,dt,...a);}finally{inTick--;}
  if(inTick)return r;
- try{const q=P();if(q!==p||bodyRoom&&bodyRoom!==curRoom()){reset();return r;}
-  const d=dancing(p);if(!d&&!body)return r;stats.ticks++;
-  if(!body){body={x:start.x,y:start.y};bodyRoom=curRoom();}
-  if(!(p.hp>0)){reset();return r;}
-  const shift=Math.hypot(p.x-body.x,p.y-body.y);
-  if(shift>1e-9){if(d&&shift>=MIN_SHIFT)ghost(p.x,p.y);p.x=body.x;p.y=body.y;stats.restores++;}
-  if(!d){body=null;bodyRoom=null;}}catch(e){fail(e);}return r;};}
+ try{if(P()!==p){reset();return r;}finish(p,true);}catch(e){fail(e);}return r;};}
 if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=function(...a){reset();return base.apply(this,a);};}
 function set(v){on=v!==false;try{localStorage.setItem(KEY,on?'1':'0');}catch(_){}if(!on)reset();return on;}
-window.__STORYWORLD_DANCE_FREE_R706__=Object.freeze({revision:REV,on:()=>on&&solo(),enabled:()=>on,set,
+window.__STORYWORLD_DANCE_FREE_R706__=Object.freeze({revision:REV,on:()=>on&&solo(),enabled:()=>on,set,settle,
  state:()=>({on,body:body?{...body}:null,dancing:!!(P()&&dancing(P()))}),stats:()=>({...stats,lastError})});
 })();

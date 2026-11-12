@@ -189,7 +189,7 @@ function reachTick(){if(!prefs.assist||typeof guide==='undefined'||!guide||!solo
 // ---- 설치 ----------------------------------------------------------------------------------------
 function install(){installCentre();installLight();installBook();
  const tb=tick;tick=function(dt,...a){scanBudget=6;const r=tb.call(this,dt,...a);if(!live()||!Number.isFinite(dt)||dt<=0)return r;
-  try{if(solo()&&!busy()){aimTick();spacingTick(dt);samongTick();}wallsTick();assistTick();reachTick();}catch(e){fail(e);}return r;};
+  try{window.__STORYWORLD_DANCE_FREE_R706__?.settle?.();/* R706: 춤 타격 뒤 본체 자리로 — 아래 보조·R597·R705 자동 시전이 본체에서 나가게 */if(solo()&&!busy()){aimTick();spacingTick(dt);samongTick();}wallsTick();assistTick();reachTick();}catch(e){fail(e);}return r;};
  if(typeof guideStep==='function'){const gs=guideStep;guideStep=function(...a){if(prefs.assist&&now()<assist.until)return;return gs.apply(this,a);};}
  if(typeof draw==='function'){const db=draw;draw=function(...a){try{if(live()){wallsTick();guardWallShapes();}}catch(e){fail(e);}return db.apply(this,a);};}}
 try{install();}catch(e){fail(e);}

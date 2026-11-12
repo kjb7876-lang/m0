@@ -51,7 +51,15 @@ function steering(){const k=typeof keys!=='undefined'?keys:null,j=typeof joystic
 function blinkAway(base,args){const j=typeof joystickVector!=='undefined'?joystickVector:null;const foe=nearestFoe(15);
  if(!j||!foe)return base.apply(this,args);let dx=player.x-foe.x,dy=player.y-foe.y;const d=Math.hypot(dx,dy)||1;dx/=d;dy/=d;
  const ox=j.x,oy=j.y;j.x=(dx-dy)/2;j.y=(dx+dy)/4;stats.blinkAway++;try{return base.apply(this,args);}finally{j.x=ox;j.y=oy;}}
-const dance={anchor:null,cam:null};
+const dance={anchor:null,cam:null,cloneAt:-9};
+// R767(사용자 2026-11-11 "영웅을 적에게 옮기는 스킬은 순간적으로 분신이 적에게 간 다음 스킬 적중시키고 분신은 사라지게"): 실검무 고정점을 근접 영웅에도 —
+//  영웅은 제자리에 그려지고 끝나면 제자리, 실제로 베는 자리에는 0.25초짜리 분신(엔진 ghost 잔상, 공격 자세)만 0.08초마다 남긴다. 피해·표적·시간은 그대로.
+const clones=[];let cloneBusy=false;
+function spawnClone(x,y,opt={}){if(!Number.isFinite(x)||!Number.isFinite(y))return false;if(clones.length>=6)clones.shift();clones.push({x,y,t0:now(),life:opt.life||.3,alpha:opt.alpha??.62,dir:opt.dir||null});return true;}
+/* R706(dance-free) 이 켜져 있으면 실검무 고정점을 쓰지 않는다 — 그쪽 모듈이 본체 자리를 따로 관리 */
+const anchorHero=p=>!!p&&!window.__STORYWORLD_DANCE_FREE_R706__?.on?.()&&(isRanged(p)||prefs.cloneDance!==false);
+function danceClone(){const t=now();if(t-dance.cloneAt<.08||lowFx()&&t-dance.cloneAt<.16)return;let dir='front';try{if(typeof facing==='function'&&dance.anchor)dir=facing(player.x-dance.anchor.x,player.y-dance.anchor.y);}catch(_){}
+ dance.cloneAt=t;try{spawnClone(player.x,player.y,{life:.25,alpha:.6,dir});stats.danceClones=(stats.danceClones||0)+1;}catch(e){fail(e);}}
 const DANCES=()=>window.__STORYWORLD_DANCES_R74__;
 const dancing=()=>{try{return !!DANCES()?.nativeActive?.(player);}catch(_){return false;}};
 
@@ -63,7 +71,8 @@ function enemyFace(e){const du=(player.x-player.y)-(e.x-e.y);let s=enemySide.get
  if(want!==s.dir){if(s.pend!==want){s.pend=want;s.since=t;}if(t-s.since>=.22||e.attack&&!s.attackSeen){s.dir=want;s.pend=null;}}else s.pend=null;
  s.attackSeen=!!e.attack;return s.dir;}
 const inFight=e=>liveFoe(e)&&Math.hypot(e.x-player.x,e.y-player.y)<(major(e)?22:10);// R115: 넓어진 보스방에서도 보스는 영웅을 본다
-const hero={dir:null,pend:null,since:0,fightAt:-99};
+const perHeroR720=o=>{if(typeof Proxy!=='function'||typeof WeakMap!=='function')return o;const m=new WeakMap(),init=JSON.stringify(o),pick=()=>{let p=null;try{p=player;}catch(_){}if(p&&p.r720Ally===true){let s=m.get(p);if(!s){s=JSON.parse(init);m.set(p,s);}return s;}return o;};return new Proxy(o,{get:(_,k)=>pick()[k],set:(_,k,v)=>{pick()[k]=v;return true;},has:(_,k)=>k in pick(),deleteProperty:(_,k)=>delete pick()[k],ownKeys:()=>Reflect.ownKeys(pick()),getOwnPropertyDescriptor:(_,k)=>{const d=Object.getOwnPropertyDescriptor(pick(),k);if(d)d.configurable=true;return d;}});};/* R720: 생존 배치 영웅(player.r720Ally 몸)은 영웅마다 따로 상태를 갖는다 — 조종 영웅 상태와 섞이지 않게 */
+const hero=perHeroR720({dir:null,pend:null,since:0,fightAt:-99});
 function heroFace(){const t=now();const swinging=finite(player.attackAnim)>0||finite(player.skillAnim)>0||(typeof keys!=='undefined'&&keys.has?.('attack'));
  // R114: 공격 중이면 가장 가까운 적이 아니라 지금 노리는 적(target)을 본다(옆의 다른 몹을 보면서 반대쪽을 쏘던 문제).
  const aimed=typeof target!=='undefined'&&target!=null?(room?.enemies||[]).find(e=>e&&e.id===target&&liveFoe(e)&&Math.hypot(e.x-player.x,e.y-player.y)<11):null;
@@ -191,8 +200,8 @@ function install(){
   const r=tickBase.call(this,dt,...a);if(!ok||!Number.isFinite(dt)||dt<=0)return r;
   try{ // ① 실검무 고정점
    /* R706: 실검무 중에도 본체를 직접 조종하면(dance-free-r706) 고정점·끝 되돌리기를 하지 않는다 */const freeR706=window.__STORYWORLD_DANCE_FREE_R706__?.on?.()===true;
-   if(!freeR706&&prefs.ranged&&isRanged(player)&&dancing()){if(!dance.anchor){dance.anchor={x:pre.x,y:pre.y};dance.cam={x:pre.cx,y:pre.cy};stats.danceAnchors++;}if(typeof cam!=='undefined'){cam.x=dance.cam.x;cam.y=dance.cam.y;}stats.danceFrames++;}
-   else if(dance.anchor){const A=dance.anchor;dance.anchor=null;if(!freeR706&&isRanged(player)&&!blockedAt(A.x,A.y,.23)&&Math.hypot(player.x-A.x,player.y-A.y)<14){player.x=A.x;player.y=A.y;player.moving=false;stats.danceReturns=(stats.danceReturns||0)+1;}}
+   if(!freeR706&&prefs.ranged&&anchorHero(player)&&dancing()){if(!dance.anchor){dance.anchor={x:pre.x,y:pre.y};dance.cam={x:pre.cx,y:pre.cy};stats.danceAnchors++;}if(typeof cam!=='undefined'){cam.x=dance.cam.x;cam.y=dance.cam.y;}stats.danceFrames++;danceClone();}
+   else if(dance.anchor){const A=dance.anchor;dance.anchor=null;dance.cloneAt=-9;if(!freeR706&&anchorHero(player)&&!blockedAt(A.x,A.y,.23)&&Math.hypot(player.x-A.x,player.y-A.y)<14){player.x=A.x;player.y=A.y;player.moving=false;stats.danceReturns=(stats.danceReturns||0)+1;}}
    if(prefs.physics&&!busyMenu()){separate(dt);stepKnock(dt);}
    watchShots();
    if(prefs.dust&&!busyMenu()){const t=now(),moved=Math.hypot(player.x-pre.x,player.y-pre.y);if(moved>.02&&!dance.anchor&&moved<.6&&t-(hero.dustAt||0)>.16){hero.dustAt=t;dustAt(player.x,player.y);}
@@ -204,6 +213,11 @@ function install(){
   const ox=player.x,oy=player.y;player.x=anc.x;player.y=anc.y;try{return drawBase.apply(this,a);}finally{player.x=ox;player.y=oy;}};
  if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){if(!prefs.facing||!live()||!inFight(e)||window.__STORYWORLD_ENEMY_FACE_R444__?.owns?.(e))return base.call(this,e,...a);/* R444 이 맡은 몹은 그쪽이 정한다 */
   const keep=e.direction;try{e.direction=enemyFace(e);stats.enemyFaced++;}catch(err){fail(err);return base.call(this,e,...a);}try{return base.call(this,e,...a);}finally{e.direction=keep;}};}
+ // R767 분신: 진짜 영웅 그리기(가장 바깥 drawHero)를 분신 자리에서 한 번 더 — 반투명·짧게. 엔진 ghost(알파 .32·옛 그림)는 거의 안 보여 이걸 쓴다.
+ if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const r=base.apply(this,a);if(cloneBusy||!clones.length||!live())return r;cloneBusy=true;const t=now(),P=player,keep={x:P.x,y:P.y,direction:P.direction,attackAnim:P.attackAnim,invincible:P.invincible,moving:P.moving};
+  try{for(const c of clones){const k=(t-c.t0)/c.life;if(k<0||k>=1)continue;P.x=c.x;P.y=c.y;if(c.dir)P.direction=c.dir;P.attackAnim=Math.max(.05,.24*(1-k));P.invincible=0;P.moving=false;
+   let sv=false;try{if(typeof ctx!=='undefined'&&ctx){ctx.save();sv=true;ctx.globalAlpha=(ctx.globalAlpha??1)*c.alpha*(1-k*k);}drawHero();stats.cloneDraws=(stats.cloneDraws||0)+1;}catch(e){fail(e);}finally{if(sv)ctx.restore();}}}
+  finally{Object.assign(P,keep);cloneBusy=false;for(let i=clones.length-1;i>=0;i--)if(t-clones[i].t0>=clones[i].life)clones.splice(i,1);}return r;};}
  if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){if(!prefs.facing||!live()||player.hp<=0)return base.apply(this,a);let want=null;try{want=heroFace();}catch(err){fail(err);}
   if(!want)return base.apply(this,a);const keep=player.direction;player.direction=want;stats.heroFaced++;try{return base.apply(this,a);}finally{player.direction=keep;}};}
  if(typeof fx==='function'){const base=fx;fx=function(type,x,y,o,...a){if(type==='threadSlashR63'&&dance.anchor&&o?.threadR63&&prefs.ranged)try{o={...o,threadR63:{...o.threadR63,from:{x:dance.anchor.x,y:dance.anchor.y}}};}catch(e){fail(e);}return base.call(this,type,x,y,o,...a);};}
@@ -213,5 +227,6 @@ function install(){
  if(!installGround())setTimeout(()=>{try{installGround();}catch(e){fail(e);}},0);
 }
 try{install();}catch(e){fail(e);}
+window.__STORYWORLD_CLONE_R767__=Object.freeze({spawn:spawnClone,live:()=>clones.length,list:()=>clones.map(c=>({...c}))});
 window.__STORYWORLD_PLAY_R113__=Object.freeze({revision:REV,set,prefs:()=>({...prefs}),stats:()=>({...stats,parts:parts.length,failures,lastError}),dance:()=>({...dance}),particles:()=>parts.length,popAt,knock});
 })();

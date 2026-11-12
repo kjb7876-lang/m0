@@ -508,6 +508,10 @@ jobs:
         run: node r96/qa/r561/r561-cpu-check.cjs
       - name: R561 gunner arms (기억사수 Q laser beam, W sniper, E rifle burst, R marked strike; engine originals held, save untouched) CPU check (R561c 연쇄 레이저)
         run: node r96/qa/r561/r561c-chain-check.cjs
+      - name: R561 gunner arms (기억사수 Q laser beam, W sniper, E rifle burst, R marked strike; engine originals held, save untouched) CPU check (R561d 총구 방향 고정)
+        run: node r96/qa/r561/r561d-aim-check.cjs
+      - name: R767 slayer R aura clone strikes (hero stays) and blink cooldown free during EGO / slayer aura CPU check
+        run: node r96/qa/r767/r767-cpu-check.cjs
       - name: R522 hospital thin walls (the two free-standing maze baffles of ep1a08 moved to touch a thick wall, hospital only, routes stay connected) CPU check
         run: node r96/qa/r522/r522-cpu-check.cjs
       - name: R523 story rooms (clinic ep1a09 + sloth home ep1b02 furnished by room name along the real back walls, presentation only, angle-matched art only) CPU check
@@ -767,14 +771,22 @@ jobs:
         run: node r96/qa/r880/r880-cpu-check.cjs
       - name: R832 region door leaves by map style + Joseon village trees (pine/persimmon) CPU check
         run: node r96/qa/r832/r832-cpu-check.cjs
+      - name: R905 pre-boss rally wakes in 2-6 region-specific waves (same total, capped concurrency, no stall) CPU check
+        run: node r96/qa/r905/r905-cpu-check.cjs
       - name: R830 thin partition walls become solid main walls
         run: node r96/qa/r830-walls/walls-cpu-check.cjs
       - name: R838 indoor doorway shapes differ per map (rooms and furniture unchanged)
         run: node r96/qa/r838-passages/passages-cpu-check.cjs
+      - name: R839 outdoor roads differ per map (rock outcrops; props and mobs unchanged)
+        run: node r96/qa/r839-outcrops/outcrops-cpu-check.cjs
       - name: R860 enemy-attack hit placement (core hit picture, R259 hero-hit not pinned to overlapping mobs) CPU check
         run: node r96/qa/r860/r860-cpu-check.cjs
       - name: R911 projectile minimum size (half hero height, visual only) CPU check
         run: node r96/qa/r911/r911-cpu-check.cjs
+      - name: R899 boss-map story window and memory-shard paper move to top-left, quest line shortened CPU check
+        run: node r96/qa/r899/top-left-cpu-check.cjs
+      - name: R930 Kaironomicon cyber-magitech floor/wall tiles and tech props (art only, layout unchanged) CPU check
+        run: node r96/qa/r930/r930-cpu-check.cjs
       - name: Install pinned sandboxed Chromium
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0

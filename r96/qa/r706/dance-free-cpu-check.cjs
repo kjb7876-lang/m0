@@ -33,7 +33,12 @@ function mk(o={}){
   tick(dt){sb.time+=dt;const p=sb.player;
    if(sb.input.x||sb.input.y)sb.moveActor(p,sb.input.x*dt*5,sb.input.y*dt*5);
    if(sb.castDash){sb.castDash=false;const o={x:p.x,y:p.y};sb.moveActor(p,3.8,0);sb.dashSeen={from:o,to:{x:p.x,y:p.y}};}
-   const d=sb.dance;if(d){if(sb.time<d.until){p.x=d.foe.x-.8;p.y=d.foe.y;sb.strikes.push({x:p.x,y:p.y});}else{p.x=d.home.x;p.y=d.home.y;sb.dance=null;}}},
+   const d=sb.dance;if(d){if(sb.time<d.until){p.x=d.foe.x-.8;p.y=d.foe.y;sb.strikes.push({x:p.x,y:p.y});}else{p.x=d.home.x;p.y=d.home.y;sb.dance=null;}}
+   // 안쪽 오버레이(play-r115 → R597·R705 자동 시전)를 흉내: 엔진·춤이 끝난 직후 settle 을 부르고 시전 원점을 읽는다.
+   if(sb.autoCast){sb.__STORYWORLD_DANCE_FREE_R706__?.settle?.();sb.castOrigins.push({x:p.x,y:p.y});}},
+  castOrigins:[],autoCast:false,
+  // R74 저장 감싸기 흉내: 춤 중에는 시작 자리(home)를 저장한다.
+  serializeSave(){const d=sb.dance;return{player:{x:d?d.home.x:sb.player.x,y:d?d.home.y:sb.player.y}};},
   __STORYWORLD_DANCES_R74__:{moving:()=>!!sb.dance,nativeActive:()=>!!sb.dance}};
  sb.startDance=(fx,fy,dur)=>{sb.dance={home:{x:sb.player.x,y:sb.player.y},foe:{x:fx,y:fy},until:sb.time+dur};};
  sb.window=sb;vm.createContext(sb);
@@ -74,4 +79,14 @@ const near=(a,b,e=1e-6)=>Math.abs(a-b)<e;
 // 11. 새 게임으로 시계가 0 으로 돌아가도 분신이 다시 나온다.
 {const s=mk();s.time=500;s.startDance(18,10,1);s.run(30);const g0=s.ghosts.length;s.time=0;s.startDance(18,10,1);s.run(10);
  ok(g0>0&&s.ghosts.length>g0,'시계가 되감겨도 분신이 나온다('+g0+' → '+s.ghosts.length+')');}
+// 12. 자동 시전(춤 직후 안쪽 오버레이)은 분신 자리가 아니라 본체 자리에서 나간다. 타격·분신은 그대로.
+{const s=mk();s.autoCast=true;s.startDance(18,10,1);s.input={x:0,y:1};s.run(10);
+ ok(s.castOrigins.length===10&&s.castOrigins.every((o,i)=>near(o.x,10)&&near(o.y,10+(i+1)*.25)),'자동 시전 원점 = 본체 자리(첫 원점 x='+s.castOrigins[0].x.toFixed(2)+', 적 곁 17.2 아님)');
+ ok(s.strikes.every(k=>near(k.x,17.2))&&s.ghosts.length>=1&&near(s.player.y,12.5),'settle 뒤에도 타격은 적 곁·분신 표시·본체 걷기 그대로');}
+// 13. 저장: 춤 중 저장은 시작 자리가 아니라 지금 본체 자리를 담는다(tick 안·밖 모두).
+{const s=mk();s.startDance(18,10,1);s.input={x:1,y:0};s.run(10);const out=s.serializeSave();
+ ok(near(out.player.x,12.5)&&near(out.player.y,10),'춤 중 저장 자리 = 본체 자리(x='+out.player.x.toFixed(2)+', 시작 자리 10 아님)');
+ s.run(20);s.input={x:0,y:0};s.player.x=30;const o2=s.serializeSave();ok(near(o2.player.x,30),'춤이 끝난 뒤 저장은 손대지 않음');}
+{const r115=rd(path.join(R,'client-source/play-r115.js')),i=r115.indexOf('__STORYWORLD_DANCE_FREE_R706__?.settle?.()');
+ ok(i>0&&i<r115.indexOf('aimTick();',i)&&i<r115.indexOf('assistTick();',i)&&html.indexOf('play-r115.js')<html.indexOf('auto-attack-r597.js'),'play-r115 tick 이 보조·자동 시전 앞에서 settle 을 부른다(R597·R705 보다 안쪽)');}
 console.log(`\n${n-bad}/${n} 통과`);process.exit(bad?1:0);

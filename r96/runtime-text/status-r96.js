@@ -56,7 +56,7 @@
    if(k==='root'&&side==='front'&&api.render(data[k].id,{...opt,frozenFrame:opt.frozenFrame&&{...row.frozen},part:'back',alpha:base*GHOST}))metrics.ghosted++;
   }
  }
- const hero=drawHero;drawHero=function(...args){sync();paint('back');const result=hero.apply(this,args);paint('front');return result;};
+ const hero=drawHero;drawHero=function(...args){if(typeof player==='object'&&player&&player.r720Ally===true)return hero.apply(this,args);/* R720: 생존 배치 영웅(player.r720Ally 몸)은 건너뛴다 — 이 덧씌우기의 상태는 조종 영웅 하나를 따른다(몸이 번갈아 그려지면 매번 초기화됐다) */sync();paint('back');const result=hero.apply(this,args);paint('front');return result;};
  const baseTick=tick;tick=function(...args){const result=baseTick.apply(this,args);sync();return result;};
  for(const name of ['restoreSave','enterRegion','newGame']){const base=name==='restoreSave'?restoreSave:name==='enterRegion'?enterRegion:newGame;const wrapped=async function(...args){clear();try{return await base.apply(this,args);}finally{clear();}};if(name==='restoreSave')restoreSave=wrapped;else if(name==='enterRegion')enterRegion=wrapped;else newGame=wrapped;}
  const death=showDeath;showDeath=function(...args){clear();return death.apply(this,args);};

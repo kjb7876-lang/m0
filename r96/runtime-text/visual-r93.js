@@ -16,16 +16,18 @@
  // R91 walk; facing keeps the last walking direction. Installed first so the
  // body-anchor pass below measures the idle frame actually drawn.
  const IDLE_INDEX='./assets/r93/idle/index.json',IDLE_STEP=.42,HERO_ART=/hero-authored|hero_direction33\d|heroes\/normalized|r128\/gunner\/|r130\/[a-z]+\//;
- const DIR4={front:'s',back:'n',left:'w',right:'e'};let idle=null,idleState='idle',idleAt=0,facing8=null;
+ const DIR4={front:'s',back:'n',left:'w',right:'e'};let idle=null,idleState='idle',idleAt=0;
+const perHeroR720=o=>{if(typeof Proxy!=='function'||typeof WeakMap!=='function')return o;const m=new WeakMap(),init=JSON.stringify(o),pick=()=>{let p=null;try{p=player;}catch(_){}if(p&&p.r720Ally===true){let s=m.get(p);if(!s){s=JSON.parse(init);m.set(p,s);}return s;}return o;};return new Proxy(o,{get:(_,k)=>pick()[k],set:(_,k,v)=>{pick()[k]=v;return true;},has:(_,k)=>k in pick(),deleteProperty:(_,k)=>delete pick()[k],ownKeys:()=>Reflect.ownKeys(pick()),getOwnPropertyDescriptor:(_,k)=>{const d=Object.getOwnPropertyDescriptor(pick(),k);if(d)d.configurable=true;return d;}});};/* R720: 생존 배치 영웅(player.r720Ally 몸)은 영웅마다 따로 상태를 갖는다 — 조종 영웅 상태와 섞이지 않게 */
+ const F8=perHeroR720({v:null});/* 마지막 걷던 8방향 — 영웅(몸)마다 따로 */
  function loadIdle(){if(idleState!=='idle')return;idleState='loading';fetch(IDLE_INDEX,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('R93 idle index '+r.status);return r.json();}).then(j=>{idle=j;idleState='ready';}).catch(e=>{idleState='failed';fail(e);});}
  function moveDir(){const vx=Number(player.moveVX150)||0,vy=Number(player.moveVY150)||0;if(Math.hypot(vx,vy)<.02)return null;
   const a=project(player.x,player.y),b=project(player.x+vx,player.y+vy),s=Math.round(Math.atan2(b.y-a.y,b.x-a.x)/(Math.PI/4));
   return{'0':'e','1':'se','2':'s','3':'sw','4':'w','-4':'w','-3':'nw','-2':'n','-1':'ne'}[s];}
  const plainStand=()=>player&&player.hp>0&&!player.moving&&!(player.attackAnim>0||player.skillAnim>0||player.dashAnim>0||player.hurtAnim>.05||player.ultimateAnim>0||player.guard)&&
   !window.__STORYWORLD_EGO151__?.inspect?.()?.state?.active&&(window.__STORYWORLD_COOP_SIM_R62__?.mode?.()||'off')==='off'&&(typeof layer==='undefined'||layer==='STORY');
- function idleFrame(){loadIdle();if(!idle||!player)return null;const d=moveDir();if(d){facing8=d;return null;}if(!plainStand()){/* R895 규칙 7: 공격·스킬로 몸을 돌렸으면 서 있기는 마지막 이동 방향이 아니라 그 방향(player.direction)을 본다 */if(player&&(player.attackAnim>0||player.skillAnim>0||player.ultimateAnim>0)&&window.__STORYWORLD_HERO_MOTION_R895__?.inspect?.().prefs.on!==false)facing8=null;return null;}
+ function idleFrame(){loadIdle();if(!idle||!player)return null;const d=moveDir();if(d){F8.v=d;return null;}if(!plainStand()){/* R895 규칙 7: 공격·스킬로 몸을 돌렸으면 서 있기는 마지막 이동 방향이 아니라 그 방향(player.direction)을 본다 */if(player&&(player.attackAnim>0||player.skillAnim>0||player.ultimateAnim>0)&&window.__STORYWORLD_HERO_MOTION_R895__?.inspect?.().prefs.on!==false)F8.v=null;return null;}
   const now=performance.now();if(now-idleAt>2000&&typeof addImage==='function'&&typeof readyImage==='function'){idleAt=now;for(const it of idle.items)if(it.hero===player.hero&&!readyImage(it.path))addImage(it.path,'R93 generated idle');}
-  const dir=facing8||DIR4[player.direction]||'s';
+  const dir=F8.v||DIR4[player.direction]||'s';
   // R131: Gemini 영웅 시트가 있는 영웅(visual-r119 __STORYWORLD_HERO_SHEETS__)은 새 8방향 서 있기 4프레임을 쓴다. 뒤집힌 그리기 안에서는 반대쪽 그림을 골라 화면에서 같은 쪽을 보게 한다.
   const sheets=window.__STORYWORLD_HERO_SHEETS__;if(sheets?.idleItem&&sheets.heroes().includes(player.hero)){const ov=sheets.idleItem(player.hero,dir,false);if(ov)return{it:ov,img:ov.image,f:Math.floor(time/IDLE_STEP)%ov.frames,sheet:{hero:player.hero,dir}};}
   const it=idle.items.find(i=>i.hero===player.hero&&i.dir===dir),img=it&&typeof readyImage==='function'&&readyImage(it.path)?.image;if(!img)return null;
