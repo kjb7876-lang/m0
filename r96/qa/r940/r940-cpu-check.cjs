@@ -95,6 +95,17 @@ if(has){
   ctx.time=21;ctx.player.hp=30;api.tick();ok('hits after the reload are counted again',api.snapshot().counters.heroHits===2&&Math.abs(api.snapshot().entry.firstHitAfter-1)<1e-9,api.snapshot().entry);
   // 영웅 객체만 바뀐 경우(지역 객체는 그대로): 피격으로 세지 않고 입장 기록은 그대로
   ctx.time=22;ctx.player={hp:5,x:1,y:1};api.tick();const s2=api.snapshot();ok('player object replaced alone: not a hit, entry kept',s2.counters.heroHits===2&&s2.entry.t===20,{c:s2.counters,e:s2.entry});}
+ // 12) 회귀(리뷰 지적): 보스를 때리다 귀환하면 엔진 returnHome 이 같은 보스 객체를 체력 가득으로 되돌리고 getRoom 이 그 객체를 다시 쓴다 → 다시 도전한 싸움은 새 기준으로 잰다
+ {const B=mob({boss:true,hp:500,maxHp:500,name:'B'}),R1={id:'ep1a11',enemies:[B]},g=state({room:R1}),{ctx,api}=load(g);api.tick();
+  ctx.time=11;B.hp=400;api.tick();ctx.time=12;ctx.room={id:'hub',enemies:[]};B.hp=500;api.tick();
+  ctx.time=100;ctx.room=R1;api.tick();ctx.time=101;B.hp=300;api.tick();ctx.time=102;B.hp=0;api.tick();
+  const done=api.snapshot().bossFights.filter(f=>f.end!==null&&f.end!==undefined);
+  ok('retry after leaving the zone: ttk measures the retry only (1s, not 91s)',done.length===1&&done[0].start===101&&Math.abs(done[0].ttk-1)<1e-9,api.snapshot().bossFights);
+  ok('abandoned attempt is kept as abandoned, not as a kill',api.snapshot().bossFights.some(f=>f.start===11&&f.abandoned===true&&f.ttk===null)&&api.snapshot().counters.bossKills===1,api.snapshot().bossFights);}
+ // 같은 지역 안에서 보스 체력이 가득으로 돌아가도(되살림) 그 싸움은 끝난 것으로 보고 다음 피해부터 새로 잰다
+ {const B=mob({boss:true,hp:500,maxHp:500}),g=state({room:{id:'ep1a11',enemies:[B]}}),{ctx,api}=load(g);api.tick();
+  ctx.time=11;B.hp=450;api.tick();ctx.time=20;B.hp=500;api.tick();ctx.time=30;B.hp=480;api.tick();ctx.time=33;B.hp=0;api.tick();
+  const done=api.snapshot().bossFights.filter(f=>typeof f.ttk==='number');ok('boss healed to full in place: next damage opens a fresh fight (ttk 3s)',done.length===1&&done[0].start===30&&Math.abs(done[0].ttk-3)<1e-9,api.snapshot().bossFights);}
  // 8) 두 번 실려도 하나
  {const {ctx,api,timers}=load(state());vm.runInContext(src,ctx);ok('double load keeps one api and one timer',ctx.window.__STORYWORLD_SNAPSHOT_R940__===api&&timers.length===1);}
 }

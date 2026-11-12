@@ -24,9 +24,13 @@ const alive=e=>!!e&&num(e.hp)!==null&&e.hp>0&&!e.deadRecorded&&e.spawnState!=='d
 // 최대 체력은 엔진 maxHP() 가 준다(player.maxHp 는 없다). 읽기 전용 계산이라 불러도 상태가 바뀌지 않는다
 const maxOf=P=>{try{if(typeof maxHP==='function'){const v=num(maxHP());if(v!==null)return v;}}catch(_){return null;}return num(P.maxHp);};
 const nameOf=e=>{const v=e.name||e.label||e.title||e.type||e.kind;return typeof v==='string'?v:null;};
+// 버린 싸움: end·ttk 는 비워 두고 abandoned 로 표시한다(처치 시간 통계에 섞이지 않게)
+const abandon=(f,t)=>{if(f&&f.end===null&&!f.abandoned){f.abandoned=true;f.abandonedAt=t;}};
 function look(e,s,next){
  if(!e||typeof e!=='object')return;const hp=num(e.hp);if(hp===null)return;
  if(alive(e)){seen.add(e);if(next)next.push(e);
+  // 보스가 체력 가득으로 돌아왔으면(귀환 뒤 되살림 등) 열린 싸움은 버린 것으로 닫는다 → 다음 피해부터 새로 잰다
+  if(e.boss&&open.has(e)&&num(e.maxHp)!==null&&hp>=e.maxHp){abandon(open.get(e),s.T);open.delete(e);}
   if(e.boss&&!open.has(e)&&num(e.maxHp)!==null&&hp<e.maxHp){const f={zone:s.zone,name:nameOf(e),start:s.T,end:null,ttk:null,maxHp:e.maxHp};open.set(e,f);fights.push(f);if(fights.length>40)fights.shift();}
  }else if(hp<=0&&seen.has(e)&&!dead.has(e)){dead.add(e);counters.kills++;push({type:'kill',t:s.T,zone:s.zone,boss:!!e.boss,name:nameOf(e)});
   if(e.boss){counters.bossKills++;let f=open.get(e);if(!f){f={zone:s.zone,name:nameOf(e),start:s.T,end:null,ttk:null,maxHp:num(e.maxHp)};fights.push(f);}f.end=s.T;f.ttk=s.T-f.start;push({type:'bossDown',t:s.T,zone:s.zone,name:f.name,ttk:f.ttk});}
@@ -39,7 +43,9 @@ function step(){
  const reload=!!prev&&!moved&&!rewind&&prev.R!==s.R,swapped=!!prev&&prev.P!==s.P;
  if(reload)push({type:'reload',t:s.T,zone:s.zone});
  if(rewind)push({type:'rewind',t:s.T,from:prev.T,zone:s.zone});
- if(rewind||reload){seen=new WeakSet();dead=new WeakSet();open=new WeakMap();for(const f of fights)if(f.end===null)f.end=undefined;fights=fights.filter(f=>f.end!==undefined);}
+ if(rewind||reload){seen=new WeakSet();dead=new WeakSet();open=new WeakMap();for(const f of fights)if(f.end===null&&!f.abandoned)f.end=undefined;fights=fights.filter(f=>f.end!==undefined);}
+ // 지역을 떠나면 그 지역에서 열려 있던 보스 싸움은 버린 것이다(엔진 returnHome 은 같은 보스 객체를 체력 가득으로 되돌려 다시 쓴다)
+ if(moved&&prev){for(const f of fights)abandon(f,s.T);open=new WeakMap();}
  if(moved||rewind||reload){entry={zone:s.zone,t:s.T,firstHitAfter:null};if(moved)push({type:'enter',t:s.T,zone:s.zone});}
  else if(!swapped&&s.hp!==null&&prev.hp!==null){
   if(s.hp<prev.hp){const dmg=prev.hp-s.hp,since=s.T-entry.t;counters.heroHits++;counters.heroDamage+=dmg;if(entry.firstHitAfter===null)entry.firstHitAfter=since;push({type:'heroHit',t:s.T,zone:s.zone,dmg,hp:s.hp,sinceEntry:since});}
