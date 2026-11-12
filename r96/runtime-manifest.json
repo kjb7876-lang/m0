@@ -35033,6 +35033,16 @@
       "sha256": "afbff5e4100415e25847e93a0a73def59f98f46e807655eae8b7cdd517139acd"
     },
     {
+      "path": "assets/r832/doors/A-a.webp",
+      "bytes": 304344,
+      "sha256": "8e5764bf4105a1d889cbf2fd1bb3ac8040936f1d3593f043235ea8cf0ef59132"
+    },
+    {
+      "path": "assets/r832/doors/A-b.webp",
+      "bytes": 269366,
+      "sha256": "3adece88f6de3d7a0a58f4792b53265958c884c531faf13d98d6c8e8d68cc772"
+    },
+    {
       "path": "assets/r91/death/death-crystal-core.png",
       "bytes": 252893,
       "sha256": "3a7fdf719f776526d6c7f2d88607cfe88851d8d4e4989b019fd2331c746de467"
@@ -37891,6 +37901,66 @@
       "path": "assets/r99/outdoor/tree-dead-11.webp",
       "bytes": 80726,
       "sha256": "1b564de906111e6c1f98f5efdaae569460d6aa2e0215b908a692edc53d977c2c"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-joseon-00.webp",
+      "bytes": 62826,
+      "sha256": "eb625c6409bc0ebb99c3ce2b61490315c34808f22b7cd18db06b0da2736b928f"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-joseon-01.webp",
+      "bytes": 54398,
+      "sha256": "86edda3a4299bcfaec6b8d6a20376daa339c020b8aed115dc3ccd5a7b07aa237"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-joseon-02.webp",
+      "bytes": 60522,
+      "sha256": "0abf5e8b82ebb74579bb394e9c27a08e2f9f16cd86235efcc323ae83e4fd1a41"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-joseon-03.webp",
+      "bytes": 62614,
+      "sha256": "e99a5d6cc45ea17726ed66bee4c4d5bb58051a27b8a5a756fad72b7ab7137758"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-joseon-04.webp",
+      "bytes": 54108,
+      "sha256": "06115a147f6f576d6a0a4c73145858b3f7cfb293a1f5060db974318ae8887a5e"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-joseon-05.webp",
+      "bytes": 60950,
+      "sha256": "056f01b1d27af83ecd147f2615276c80e9387c8cc12828135484b874d516a706"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-joseon-06.webp",
+      "bytes": 62826,
+      "sha256": "eb625c6409bc0ebb99c3ce2b61490315c34808f22b7cd18db06b0da2736b928f"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-joseon-07.webp",
+      "bytes": 60950,
+      "sha256": "056f01b1d27af83ecd147f2615276c80e9387c8cc12828135484b874d516a706"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-joseon-08.webp",
+      "bytes": 86136,
+      "sha256": "3785e095047c00fb18b1b01f6825bfac5dc28a2ed5cb77828f217368effd66f7"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-joseon-09.webp",
+      "bytes": 71378,
+      "sha256": "0259f2aa6adf432a391da48f8907c716323fbc37392f02254dad2be0fc4dfbe7"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-joseon-10.webp",
+      "bytes": 78280,
+      "sha256": "aa0fd27b5ff31310332240afb9b9144625d024f1c363445e7db07088bdb13a1f"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-joseon-11.webp",
+      "bytes": 86302,
+      "sha256": "e2a77b523b27eca04149d970d6fb8118ae505b7bf48ccb6b09daa5861cff0834"
     },
     {
       "path": "assets/r99/outdoor/tree-living-00.webp",
@@ -43069,8 +43139,8 @@
     },
     {
       "path": "bosses-r104.js",
-      "bytes": 5381,
-      "sha256": "1df0b490e44db39f4065db7c5dee91f6dad5116a72bba12610ae2a97701cf0e0"
+      "bytes": 6838,
+      "sha256": "daba8b32674813c7d955f80827f97a134ff252e38d40c67c2cf601adb43c80d1"
     },
     {
       "path": "bossroom-tidy-r438.js",
@@ -43089,8 +43159,8 @@
     },
     {
       "path": "cave-r204.js",
-      "bytes": 130386,
-      "sha256": "13e76723b770cdca40691d5ad1e823bc20bcd2bed45dac063cae68aa9bd2fce8"
+      "bytes": 130834,
+      "sha256": "a11bd16348d8d9840b2abe1c0b931bcf53042c5ba4eb48c7ea83750900d3c9ca"
     },
     {
       "path": "chunks/ep1a08-0-0.json",
@@ -43728,6 +43798,11 @@
       "sha256": "31d98d078fe04545665fd1b88ce048b6a970dc69c8fe3897a55c228e7626c0af"
     },
     {
+      "path": "doors-theme-r832.js",
+      "bytes": 3637,
+      "sha256": "61b973fc29b004c869475a12ea13f9d0de07f2efa521710c065ca9ae1092e536"
+    },
+    {
       "path": "drive-buildings-r414.js",
       "bytes": 9554,
       "sha256": "3953e753725747314f0918aef50ac95d26ac7bd1d7f3c85ebc45df970a3f155b"
@@ -43749,8 +43824,8 @@
     },
     {
       "path": "edges-r188.js",
-      "bytes": 7520,
-      "sha256": "7b0721283fe7359de00ab68799d51faf7b209063ae6ce0b6a446e990e62a69aa"
+      "bytes": 7598,
+      "sha256": "cf0312ffa362902d87ef5a7de44deaabcce18fd5d08a1615cc247dc35c144f77"
     },
     {
       "path": "effect-presentation-r83.js",
@@ -43786,6 +43861,11 @@
       "path": "enemy-hexagram-r341.js",
       "bytes": 6123,
       "sha256": "88d03ade2ead537bb9166f1c292f04f3854afec4e99a5b291edc0f2e4c60e8a1"
+    },
+    {
+      "path": "enemy-hit-place-r860.js",
+      "bytes": 4603,
+      "sha256": "bb4c3b1821a6c3f6929b4dee3894019ffb06e137737a73072f1b33463d3a7643"
     },
     {
       "path": "enemy-presentation-r86.js",
@@ -43979,8 +44059,8 @@
     },
     {
       "path": "hit-center-r259.js",
-      "bytes": 7430,
-      "sha256": "47bbf9df75e99efc2b41015b0b964b391f7d428a45a2fc10067f852862e0316b"
+      "bytes": 8322,
+      "sha256": "3465bf0253efbf7136a43b92d0ee4d5fd3a69dd983c22124b848c929ef6ffb3b"
     },
     {
       "path": "hospital-direct-test.js",
@@ -44094,8 +44174,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6574171,
-      "sha256": "84b6e51c45731cf613601d43be351e59dd75ac27eafadfbb6fe0447cc754f5cd"
+      "bytes": 6574363,
+      "sha256": "ec6094b8fb87cd90b09dbc683add276dfa330bddd7abbd677b2a8ed19dbd5fef"
     },
     {
       "path": "intro-r140.js",
@@ -44141,6 +44221,16 @@
       "path": "light-r182.js",
       "bytes": 16656,
       "sha256": "78d1d09e3d6e640274cba3a5a1a1f360d572760e3b97701d195ceebb2adcfaee"
+    },
+    {
+      "path": "lineart-cine-r880.js",
+      "bytes": 51522,
+      "sha256": "8e28b3fa538ae39728966e73d87af2c8f664c79f81a2abc96c728e2879f08adb"
+    },
+    {
+      "path": "lineart-scenes-r881.js",
+      "bytes": 67294,
+      "sha256": "f9c4e65ef9add80ba66e41219151ef15af32426258d91d8f1ee6ac639aa3eaeb"
     },
     {
       "path": "local-light-r451.js",
@@ -44294,8 +44384,8 @@
     },
     {
       "path": "mob-unique-r248.js",
-      "bytes": 17585,
-      "sha256": "cc445493f7a25c4451cd253d25b9fc14d57db9f7676104f727d36923a79ea5b3"
+      "bytes": 17833,
+      "sha256": "8da08db533e9e7915dffc7ec19651fe94e07adcca7666d6637de68cf821ac0a3"
     },
     {
       "path": "mobile-bonus-r286.js",
@@ -44869,8 +44959,8 @@
     },
     {
       "path": "trail-r482.js",
-      "bytes": 10684,
-      "sha256": "cfc62d270a81863a937b48c8e697b0ab6f63269ada2d469f64ae7f5320ee3a26"
+      "bytes": 10968,
+      "sha256": "7b0ce5acc60119a10cbad07af7110a2d0036fe1f8deb521139fd12506d55f1cc"
     },
     {
       "path": "ui-upgrades-r222.js",
@@ -45034,8 +45124,8 @@
     },
     {
       "path": "world-doors-r83.js",
-      "bytes": 15521,
-      "sha256": "0033bf272ba8b316d1818950c4f084d8ab1abc9b61f498b63597bc7d849be68a"
+      "bytes": 17061,
+      "sha256": "59a884242c5b6ffc36d1240d9011d6280ba6e6447af0868d338617766cf3be1c"
     },
     {
       "path": "world-environment-r81.js",
@@ -45078,9 +45168,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9015,
-  "totalBytes": 1237630125,
-  "webHTMLSha256": "84b6e51c45731cf613601d43be351e59dd75ac27eafadfbb6fe0447cc754f5cd",
+  "fileCount": 9033,
+  "totalBytes": 1239137320,
+  "webHTMLSha256": "ec6094b8fb87cd90b09dbc683add276dfa330bddd7abbd677b2a8ed19dbd5fef",
   "largest": [
     {
       "path": "index.html",
