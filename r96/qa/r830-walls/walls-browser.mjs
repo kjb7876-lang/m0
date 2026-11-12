@@ -51,7 +51,7 @@ for(const z of ZONES){await go(q,z);const r=await q.evaluate(measure);
  ok(z+': 조형물 수·이름은 끈 지도와 같다(조형물 '+B.size+'개, 몹 '+r.enemies+'마리)',A.size===B.size&&[...A].map(k=>k.split('@')[0]).sort().join('|')===[...B].map(k=>k.split('@')[0]).sort().join('|')&&on[z].enemies===r.enemies,{lost,added});
  // 병동 틀 지역: 진료실 C 북쪽 가림벽([57,57]~[68,57])은 어느 쪽을 메워도 그 방 조형물 1점이 벽 붙이기 규칙으로 자리를 옮긴다(가림벽을 하나씩 메워 본 실측).
  //  → 허용하는 변화는 그것뿐: 진료실 C(x50~68·y52~68) 안에서 1점이 (59,54.1) → (59,65.9). 그 밖의 조형물 자리는 모두 같아야 한다.
- const moved=z==='hub'?'':'59,54.1';
- ok(z+': 조형물 자리는 끈 지도와 같다'+(moved?' — 진료실 C 의 1점((59,54.1) → (59,65.9))만 예외':''),moved?(spots(lost.filter(k=>xy(k).join(',')!==moved))===spots(added.filter(k=>xy(k).join(',')!=='59,65.9'))&&lost.length<=2&&added.length<=2):(lost.length===0&&added.length===0),{lost,added});}
+ /* #442(조형물 서사 맞춤) 뒤 hando02·kair02·last301 에서는 같은 1점이 (52.1,65.9) 에서 온다 — 도착 자리 (59,65.9) 는 같다 */const moved=z==='hub'?'':['59,54.1','52.1,65.9'];
+ ok(z+': 조형물 자리는 끈 지도와 같다'+(moved?' — 진료실 C 의 1점((59,54.1) 또는 (52.1,65.9) → (59,65.9))만 예외':''),moved?(spots((m=>lost.filter(k=>xy(k).join(',')!==m))(moved.find(m=>lost.some(k=>xy(k).join(',')===m))))===spots(added.filter(k=>xy(k).join(',')!=='59,65.9'))&&lost.length<=2&&added.length<=2):(lost.length===0&&added.length===0),{lost,added});}
 ok('페이지 오류 0',errs.length===0,errs);
 await b.close();console.log(`\nR830 browser: ${n-bad}/${n} passed`);process.exit(bad?1:0);

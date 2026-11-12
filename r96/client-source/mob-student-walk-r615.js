@@ -11,7 +11,7 @@
 //  끄기: localStorage['storyworld.r615.student']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_STUDENT_WALK_R615__)return;
-const REV='R615-student-walk-1',KEY='storyworld.r615.student';
+const REV='R615-student-walk-2',KEY='storyworld.r615.student';
 const ORIG='assets/r105/drive/mob-student.webp',SHEET='assets/r615/mob-student-walk8.webp',OW=169,OH=420,N=8,STEP=.105,HOLD=.08;
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={walkDraws:0,origDraws:0,waits:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
@@ -26,7 +26,10 @@ const walking=(e,s)=>e.moving!==false&&s.movedAt>=0&&T()-s.movedAt<=HOLD&&!busy(
 let asked=0;function sheet(){try{const row=typeof readyImage==='function'?readyImage(SHEET):null;if(row?.image)return row.image;const t=Date.now();if(t-asked>1500){asked=t;if(typeof ensureImages==='function')Promise.resolve(ensureImages([SHEET])).catch(()=>{});}}catch(err){fail(err);}stats.waits++;return null;}
 // 엔진 sprite 는 몹 필터(saturate 등)를 ctx.filter 대신 미리 칠한 캔버스(__storyworldStaticTint {path,filter})로 그린다 → 걷기 시트도 같은 필터로 한 번 칠해 둔다.
 const tints=new Map();function tinted(im,filter){let c=tints.get(filter);if(c)return c;c=document.createElement('canvas');c.width=im.naturalWidth||im.width;c.height=im.naturalHeight||im.height;c.naturalWidth=c.width;c.naturalHeight=c.height;
- const g=c.getContext('2d');g.filter=filter;g.drawImage(im,0,0);tints.set(filter,c);if(tints.size>8)tints.delete(tints.keys().next().value);return c;}
+ const g=c.getContext('2d');g.filter=filter;g.drawImage(im,0,0);
+ // R802: 엔진 sprite 필터 캔버스처럼 정적 표시 — 없으면 Three 기록기가 몹마다 매 프레임 복사해 26마리에서 픽셀 예산을 넘고 게임이 멈춘다(사몽 S-02 광장).
+ try{Object.defineProperty(c,'__storyworldStaticTint',{value:Object.freeze({path:SHEET,filter})});}catch(_){}
+ tints.set(filter,c);if(tints.size>8)tints.delete(tints.keys().next().value);return c;}
 function remap(q,frame,im){const cw=(im.naturalWidth||im.width)/N,ch=im.naturalHeight||im.height,kx=cw/OW,ky=ch/OH,x0=frame*cw;
  if(q.length>=8)return [x0+q[0]*kx,q[1]*ky,q[2]*kx,q[3]*ky,q[4],q[5],q[6],q[7]];
  if(q.length>=4)return [x0,0,cw,ch,q[0],q[1],q[2],q[3]];
