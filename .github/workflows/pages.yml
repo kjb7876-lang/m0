@@ -464,12 +464,18 @@ jobs:
         run: node r96/qa/r701/r701-cpu-check.cjs
       - name: R850 survival play-test fixes (arena terrain lock, hospital maze skip, next-stage prefetch, moving HUD) CPU check
         run: node r96/qa/r850/r850-cpu-check.cjs
+      - name: R960 survival boss hp floor (>= 66 x normal mob hp) CPU check
+        run: node r96/qa/r960/r960-cpu-check.cjs
       - name: R890 survival story tracks (story / combat focus toggle, R880 cutscene skips survival) CPU check
         run: node r96/qa/r890/r890-cpu-check.cjs
       - name: R961 survival sound effects (shard pickup, level-up, core hit, run end sounds; heal chime only after 4% heal and 3s gap) CPU check
         run: node r96/qa/r961/r961-cpu-check.cjs
       - name: R720 survival hero placement (I key, crystals, story-order prices, leash and range upgrades, swap rule) CPU check
         run: node r96/qa/r720/r720-cpu-check.cjs
+      - name: R945 hwando ink passives (piercing ink crescent, seven ink clones for 7 s, three-hero ink finale, per-body state) CPU check
+        run: node r96/qa/r945/r945-cpu-check.cjs
+      - name: R947 slayer blood passives (common piercing blood needle, blood cross-sword rain, rare lattice laser barrage, upright crosses, per-body state) CPU check
+        run: node r96/qa/r947/r947-cpu-check.cjs
       - name: R463 seven-sins boss art (one form per fight, one body height, no cut-out broom) CPU check
         run: node r96/qa/r463/r463-cpu-check.cjs
       - name: R511 empty samong rooms get a guarded memory shard CPU check
@@ -789,10 +795,18 @@ jobs:
         run: node r96/qa/r860/r860-cpu-check.cjs
       - name: R911 projectile minimum size (half hero height, visual only) CPU check
         run: node r96/qa/r911/r911-cpu-check.cjs
+      - name: R951 neon storm passive CPU check
+        run: node r96/qa/r951/r951-cpu-check.cjs
+      - name: R948 michaela heart passive CPU check
+        run: node r96/qa/r948/r948-cpu-check.cjs
       - name: R899 boss-map story window and memory-shard paper move to top-left, quest line shortened CPU check
         run: node r96/qa/r899/top-left-cpu-check.cjs
       - name: R930 Kaironomicon cyber-magitech floor/wall tiles and tech props (art only, layout unchanged) CPU check
         run: node r96/qa/r930/r930-cpu-check.cjs
+      - name: R950 final boss (cult04) revived leader keeps first-form HP, canon beats, nerve-link staging, post scene after collapse CPU check
+        run: node r96/qa/r950/finale-cpu-check.cjs
+      - name: R946 Lauren passive celestial resonance (repulse burst, red push orb, blue pull orb, violet piercing fusion, prop meteors; per-hero instance)
+        run: node r96/qa/r946/r946-cpu-check.cjs
       - name: R940 read-only state snapshot for QA (events, first-hit-after-entry, boss kill time; no game writes) CPU check
         run: node r96/qa/r940/r940-cpu-check.cjs
       - name: Install pinned sandboxed Chromium
