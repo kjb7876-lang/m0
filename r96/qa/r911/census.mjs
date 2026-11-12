@@ -10,7 +10,7 @@ const zones=zl.split(',');const OUT=path.join(HERE,'census');fs.mkdirSync(path.j
 const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:960,height:540},deviceScaleFactor:1});
 await ctx.addInitScript(()=>{localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false}));localStorage.setItem('storyworld.r663.skillgrowth',JSON.stringify({on:false}));});
 const p=await ctx.newPage();p.on('pageerror',e=>console.log('PAGEERR',String(e).slice(0,200)));
-await p.goto(URL);await p.locator('#campaignNew54').click({timeout:180000});await p.locator(`.heroRowR101 button[data-hero="${hero}"]`).click({timeout:20000});await p.locator('#slotConfirmR73').click();
+await p.goto(URL,{timeout:240000});await p.locator('#campaignNew54').click({timeout:180000});await p.locator(`.heroRowR101 button[data-hero="${hero}"]`).click({timeout:20000});await p.locator('#slotConfirmR73').click();
 const skip=()=>p.evaluate(()=>{for(let i=0;i<160&&storyScene;i++)advanceScene();if(modal)closePanel(true);});
 await p.waitForFunction(()=>started&&!loading,null,{timeout:240000});await p.waitForTimeout(600);await skip();
 await p.evaluate(async()=>{await window.__STORYWORLD_CHEAT777__.activate('777');});await p.waitForFunction(()=>!loading,null,{timeout:90000});await skip();
@@ -33,7 +33,8 @@ async function crops(){const fr=await p.evaluate(()=>{window.__SLOW=1e-4;const f
 const KEYS=['a','a','s','a','d','a','f','q','a','w','e','r'];
 for(const z of zones){try{await p.evaluate(async z=>{if(zone!==z)await enterRegion(z,null,{layer:'STORY',restore:true});},z);await p.waitForFunction(z=>!loading&&zone===z,z,{timeout:150000});await skip();}catch(e){console.log('zone fail',z,String(e).slice(0,120));continue;}
  const n=Math.round(+secs/0.4);for(let i=0;i<n;i++){await p.evaluate(boss=>{player.hp=maxHP();const live=room.enemies.filter(e=>e.hp>0&&e.visible!==false);const bs=live.find(e=>e.boss);if(bs&&boss){room.engaged=true;const q=__HQ795.placeNear(bs,4)||__HQ795.placeNear(bs,5.5);if(q){__HQ795.tp(q);target=bs.id;}}else __HQ795.engage(false);},i%3===0);
-  const k=KEYS[i%KEYS.length];await p.keyboard.down(k);await p.evaluate(()=>__HQ795.step(.4,4));await p.keyboard.up(k);await skip();await crops();}}
+  const k=KEYS[i%KEYS.length];await p.keyboard.down(k);await p.evaluate(()=>__HQ795.step(.4,4));await p.keyboard.up(k);await skip();await crops();}
+ const part=await p.evaluate(()=>({seen:Object.fromEntries(Object.entries(window.__c911.seen).map(([k,v])=>[k,{...v,clone:undefined}])),stats:window.__STORYWORLD_PROJ_SIZE_R911__.stats,errors:window.__STORYWORLD_PROJ_SIZE_R911__.errors(),zoom}));fs.writeFileSync(path.join(OUT,`census-${hero}-${zones[0]}.json`),JSON.stringify(part,null,1));console.log('zone done',z);}
 const res=await p.evaluate(()=>({seen:window.__c911.seen,stats:window.__STORYWORLD_PROJ_SIZE_R911__.stats,errors:window.__STORYWORLD_PROJ_SIZE_R911__.errors(),zoom}));console.log(JSON.stringify(res.errors,null,1));
 fs.writeFileSync(path.join(OUT,`census-${hero}-${zones[0]}.json`),JSON.stringify(res,null,1));
 for(const s of Object.values(res.seen)){const mx=s.sizes.length?Math.max(...s.sizes):null;console.log(`${s.side}\t${s.who}\t${s.asset}\t${s.marks}\tn=${s.n}\tsize=${mx}\thalf=${(s.hero/2).toFixed(1)}\t${mx==null?'?':mx>=s.hero/2-.5?'OK':'SMALL'}\t${s.shot||''}`);}

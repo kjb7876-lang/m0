@@ -10,7 +10,7 @@ for(const hero of process.argv.slice(2)){
  const ctx=await b.newContext({viewport:{width:960,height:540},deviceScaleFactor:1});
  await ctx.addInitScript(()=>{localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false}));localStorage.setItem('storyworld.r663.skillgrowth',JSON.stringify({on:false}));});
  const p=await ctx.newPage();p.on('pageerror',e=>console.log('PAGEERR',String(e).slice(0,200)));
- await p.goto(URL);await p.locator('#campaignNew54').click({timeout:180000});await p.locator(`.heroRowR101 button[data-hero="${hero}"]`).click({timeout:20000});await p.locator('#slotConfirmR73').click();
+ await p.goto(URL,{timeout:240000});await p.locator('#campaignNew54').click({timeout:180000});await p.locator(`.heroRowR101 button[data-hero="${hero}"]`).click({timeout:20000});await p.locator('#slotConfirmR73').click();
  const skip=()=>p.evaluate(()=>{for(let i=0;i<160&&storyScene;i++)advanceScene();if(modal)closePanel(true);});
  await p.waitForFunction(()=>started&&!loading,null,{timeout:240000});await p.waitForTimeout(600);await skip();
  await p.evaluate(async()=>{await window.__STORYWORLD_CHEAT777__.activate('777');});await p.waitForFunction(()=>!loading,null,{timeout:90000});await skip();
@@ -20,7 +20,7 @@ for(const hero of process.argv.slice(2)){
  for(const k of ['a','s','d','f','q','w','e','r']){
   await p.evaluate(()=>{player.hp=maxHP();__HQ795.engage(false);for(const s of ['attackCD','specialCD','blinkCD','egoCD','samongCD'])if(s in player)player[s]=0;__HQ795.step(.3,6);});
   await p.keyboard.down(k);await p.evaluate(()=>__HQ795.step(.15,1));await p.keyboard.up(k);
-  await p.evaluate(()=>draw());await p.screenshot({path:path.join(OUT,`${hero}-${k}-1.png`),clip:rect});
-  await p.evaluate(()=>{__HQ795.step(.25,1);draw();});await p.screenshot({path:path.join(OUT,`${hero}-${k}-2.png`),clip:rect});}
+  await p.evaluate(()=>draw());await p.screenshot({path:path.join(OUT,`${hero}-${k}-1.png`),clip:rect,timeout:120000}).catch(e=>console.log('shot fail',hero,k));
+  await p.evaluate(()=>{__HQ795.step(.25,1);draw();});await p.screenshot({path:path.join(OUT,`${hero}-${k}-2.png`),clip:rect,timeout:120000}).catch(e=>console.log('shot fail',hero,k));}
  await ctx.close();console.log('done',hero);}
 await b.close();
