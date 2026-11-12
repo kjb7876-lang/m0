@@ -45064,8 +45064,8 @@
     },
     {
       "path": "slayer-blood-passive-r947.js",
-      "bytes": 22676,
-      "sha256": "7e8bbb6ec5d44a27d2fc078f47cc9235e4c91148eee8c5c09217fa8cf2166d5b"
+      "bytes": 23347,
+      "sha256": "35deba1b15b5533d37831e03de2f5482ab4526283d6bb02ad3074afd60c54d77"
     },
     {
       "path": "slayer-blood-r425.js",
@@ -45399,7 +45399,7 @@
     }
   ],
   "fileCount": 9079,
-  "totalBytes": 1240751511,
+  "totalBytes": 1240752182,
   "webHTMLSha256": "4f2a13fc7c47b7f2b279af36484ca0d6b900d9c7005b51bc4e0bd016e30b4e32",
   "largest": [
     {
