@@ -7,7 +7,7 @@
  const geometry=()=>window.__STORYWORLD_HOSPITAL_MAZE_LAYOUT__;
  const solo=()=>!window.__STORYWORLD_COOP_SIM_R62__||(window.__STORYWORLD_COOP_SIM_R62__.mode?.()||'off')==='off';
  const rendererReady=()=>{const c=window.__STORYWORLD_PHASE1__?.controller;return !!(c?.state.three&&!c.state.failed);};
- const hospital=r=>solo()&&r?.id==='ep1a08'&&r.layer==='STORY'&&!r.egoVisitId151;
+ const hospital=r=>solo()&&r?.id==='ep1a08'&&r.layer==='STORY'&&!r.egoVisitId151&&!r.survivalR600;/* R840: 무한 생존 무대(같은 id 의 빈 직사각형)는 병원 미로 진행(순찰 심기·집결 이동·문 열기)을 쓰지 않는다 */
  const living=e=>e&&e.hp>0&&!e.deadRecorded&&e.spawnState!=='dead';
  const bossRoomActor=e=>!!e&&(e.boss||e.midboss)&&!e.mazeEliteR2;
  const ordinary=e=>living(e)&&ordinaryActor3(e)&&!e.r61Summoned&&!e.r61Clone;
