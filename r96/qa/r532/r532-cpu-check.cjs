@@ -63,9 +63,10 @@ for(const [asp,low] of [[.8,false],[1.6,false],[.45,true]]){const S=M.shards(123
 const e2={id:'m2',name:'유리 망령',hp:5,drawn:'assets/r380/mobs/glass.webp'};vm.runInContext('drawEnemy',g)(e2);
 const fx2={type:'enemyBurnDeath',sourceId:'m2',x:5,y:5,age:0,life:.72,bodyPath:'assets/other/foreign.png'};
 const Fx=run(fx2,[.05,.25,.5,.9,1.4]);
-ok('fire: engine flame kept without its body, fire sheet drawn',Fx.some(r=>r.calls.some(c=>c.k==='base'&&c.p==='none'))&&Fx.some(r=>r.calls.some(c=>c.k==='drawImage'&&/boss-fire-wall/.test(c.src))));
+// R775(사용자 11-12 07:11Z '죽을때 불붙는 연출 없애'): 엔진 불꽃도 화염벽 시트도 없이 부서져 내려앉기만
+ok('R775 fire kind: no engine flame, no fire-wall sheet',Fx.every(r=>!r.calls.some(c=>c.k==='base'||c.k==='drawImage'&&/boss-fire-wall/.test(c.src))));
 ok('fire: whole body never rotated/squashed/angled',Fx.every(r=>r.f.rot===0&&r.f.squash===0&&r.f.angle===0),Fx.map(r=>r.f));
-ok('fire: red-hot body (same art, brightness ≥2) glows through widening cracks before it breaks (.25), no outline strokes',(()=>{const r=Fx.find(r=>r.a===.25),hot=r.calls.filter(c=>own(c)&&/brightness\((?:[2-9])/.test(c.opt.filter||''));return hot.length>=1&&r.f.clipped>=6&&Fx.every(x=>!x.calls.some(c=>c.k==='stroke'));})());
+ok('R775 fire kind: no red-hot glow (brightness ≤1.05, saturate ≤1.05), pieces by .25, no outline strokes',(()=>{const r=Fx.find(r=>r.a===.25),num=(f,k)=>{const m=new RegExp(k+'\\(([0-9.]+)').exec(f||'');return m?+m[1]:1;};return Fx.every(x=>x.calls.filter(own).every(c=>num(c.opt.filter,'brightness')<=1.05&&num(c.opt.filter,'saturate')<=1.05))&&r.f.clipped>=6&&Fx.every(x=>!x.calls.some(c=>c.k==='stroke'));})());
 ok('fire: body breaks into clipped pieces by .9',Fx.find(r=>r.a===.9).f.clipped>=6);
 // 사체: 같은 그림·같은 좌우·같은 키, 본체에 가까운 색
 vm.runInContext('time=5',g);g.calls.length=0;vm.runInContext('drawObjective',g)();
