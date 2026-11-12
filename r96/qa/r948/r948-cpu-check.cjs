@@ -139,6 +139,17 @@ if(exists){
  ok('hearts drawn from the Dots PJ-03 painted heart sheets (fly8 / hit6) when loaded',vm.runInContext('drawn.some(x=>/assets\\/r948\\/heart-fly8\\.webp/.test(x.src))&&drawn.some(x=>/assets\\/r948\\/heart-hit6\\.webp/.test(x.src))',g));
  g=env();vm.runInContext('imgReady=false',g);A(g).qaForce('tower');g.room.enemies.push(mob('t',13,10));heroHit(g,'t');step(g,10);ok('orgel picture not loaded yet → code-drawn box fallback, no error',A(g).inspect().stats.errors===0&&vm.runInContext('scopes',g).some(o=>/r948:tower/.test(o.id)));
  ok('sounds use existing Michaela cues only (no new paid audio)',(()=>{const g2=env();for(const k of ['volley','bloom','tower']){A(g2).qaReset();A(g2).qaForce(k);g2.room.enemies.push(mob('s'+k,13,10));heroHit(g2,'s'+k);step(g2,60);}return g2.sounds.length>0&&g2.sounds.every(k=>/^r546(Sp|Atk)_michaela$/.test(k));})());
+
+ // ---- 3D 기록기 안전(헤드리스 실측: 폭발 순간 u=2-1e-9 에서 sqrt(음수)=NaN → Three.js 'Nonfinite original draw command' → 화면 실패로 게임 정지) ----
+ {const bad=[];const watch=g=>{const raw=g.ctx;g.ctx=new Proxy(raw,{get(o,k){const v=o[k];if(typeof v!=='function')return v;return (...a)=>{a.forEach((x,i)=>{if(typeof x==='number'&&!Number.isFinite(x))bad.push(String(k)+'#'+i);});return v.apply(o,a);};},set(o,k,v){if(typeof v==='number'&&!Number.isFinite(v))bad.push('set:'+String(k));o[k]=v;return true;}});};
+  const at=(g,t)=>{g.time=t;vm.runInContext('time='+t+';tick();for(const e of effects.slice())drawEffect(e)',g);};
+  for(const k of ['bloom','volley','tower']){const g=env();watch(g);g.room.enemies.push(mob('t',12,10,{hp:1e9,maxHp:1e9}),mob('n',12.5,11,{hp:1e9,maxHp:1e9}),mob('m',11,12,{hp:1e9,maxHp:1e9}));A(g).qaForce(k);heroHit(g,'t');
+   const t0=A(g).inspect().acts[0]?.t0??0;
+   // 엔진처럼 1/60 을 더해 가며 실수 오차가 쌓인 시각 + 경계 바로 앞뒤(대개화 2 s, 구름 끝, 탑 끝)
+   let t=t0;for(let i=0;i<60*11;i++){t+=1/60;at(g,t);}
+   const g2=env();watch(g2);g2.room.enemies.push(mob('t',12,10,{hp:1e9,maxHp:1e9}));A(g2).qaForce(k);heroHit(g2,'t');const s0=A(g2).inspect().acts[0]?.t0??0;
+   for(const d of [1.999999999,2-1e-12,2,2+1e-12,2.6-1e-10,2.6,6-1e-10,6.3-1e-10,6.9999999999,7,7.0000001])at(g2,s0+d);}
+  ok('every draw-call number stays finite for all three kinds (3D recorder never fails) '+(bad.length?JSON.stringify([...new Set(bad)].slice(0,8)):''),bad.length===0);}
  // ---- 렉 ----
  g=env();A(g).qaRandom(()=>0);for(let i=0;i<60;i++)g.room.enemies.push(mob('m'+i,10+Math.cos(i)*4,10+Math.sin(i)*4,{hp:1e9}));
  const t0=process.hrtime.bigint();for(const k of ['tower','bloom','volley','tower','volley']){A(g).qaForce(k);heroHit(g,'m1');A(g).qaReset();step(g,24);}step(g,100);const ms=Number(process.hrtime.bigint()-t0)/1e6;
