@@ -43724,8 +43724,8 @@
     },
     {
       "path": "cinema-mode-r370.js",
-      "bytes": 26718,
-      "sha256": "5ff801d37b25028a99cc5823940155954975bb73579ae66137294be8732a71fa"
+      "bytes": 27070,
+      "sha256": "419c7e8c430b7827b12c20e2e8097575138833d12667742932ad784976a32437"
     },
     {
       "path": "cinema-r114.js",
@@ -43739,8 +43739,8 @@
     },
     {
       "path": "cinema-sync-r384.js",
-      "bytes": 19381,
-      "sha256": "4a166f90c72e788338d8e26052a8abf38a4de2efc3a4d9c78d3b7444c3910255"
+      "bytes": 19557,
+      "sha256": "6af0395be068f42297a40cda14427d9ac8df344274589406c7e13d12e90d3ef9"
     },
     {
       "path": "combat-flow-r425.js",
@@ -44259,8 +44259,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6574503,
-      "sha256": "1244a7cb7a1b47f791dc17be1d151b9004db222339f1d35bf28d48fb8a525d4f"
+      "bytes": 6574647,
+      "sha256": "6b056f15363ff41e6e981d092bcd89fd64bc71b2db8a0a2d27f82c992a916876"
     },
     {
       "path": "intro-r140.js",
@@ -44314,13 +44314,23 @@
     },
     {
       "path": "lineart-cine-r880.js",
-      "bytes": 51522,
-      "sha256": "8e28b3fa538ae39728966e73d87af2c8f664c79f81a2abc96c728e2879f08adb"
+      "bytes": 51702,
+      "sha256": "c4ab4e3e5c179156b741761477f903935d9d1ac1251e322c53ab4deb3dd2a76c"
     },
     {
       "path": "lineart-scenes-r881.js",
-      "bytes": 67294,
-      "sha256": "f9c4e65ef9add80ba66e41219151ef15af32426258d91d8f1ee6ac639aa3eaeb"
+      "bytes": 67608,
+      "sha256": "87fc2984179002d19cc4785d27b728151bbf3fafc35763db440d8b679b8ad763"
+    },
+    {
+      "path": "lineart-scenes-r882.js",
+      "bytes": 52198,
+      "sha256": "115146da77dd058f652b648d4172aa0bb4ddfa45919f93dab6e93e1c3064d21c"
+    },
+    {
+      "path": "lineart-scenes-r883.js",
+      "bytes": 22771,
+      "sha256": "8b59b6723c588c7943e55f7b803e3460646d5f27569198592bd979d30f34f3d1"
     },
     {
       "path": "local-light-r451.js",
@@ -44384,8 +44394,8 @@
     },
     {
       "path": "mob-death-r462.js",
-      "bytes": 35250,
-      "sha256": "c1a810c589150cf51c496f56c3258798da684efecc1015e09660c00d7611db75"
+      "bytes": 40562,
+      "sha256": "8f615e3f6ab8b8bbae5a468f0df97f81c302b1214d1168ffdcb0ab5cefefe603"
     },
     {
       "path": "mob-dots-r374.js",
@@ -44434,8 +44444,8 @@
     },
     {
       "path": "mob-motion-r286.js",
-      "bytes": 16425,
-      "sha256": "701116641ff8bef830346090c3d2d0f56dd17263921a5c31ab1a269a7fd7432e"
+      "bytes": 17802,
+      "sha256": "4bace235f854e1798dbeb605073091ad7b23ac303c8b077cf115c3e7ac3fc16a"
     },
     {
       "path": "mob-moves-r385.js",
@@ -45003,6 +45013,11 @@
       "sha256": "97a26d602f159fb430dfa428acd7899f0dd6db80dad4775d59192c7d326d5e0a"
     },
     {
+      "path": "story-order-r853.js",
+      "bytes": 3883,
+      "sha256": "31dba3d60274266b4194306156d0bd0c77d52a1df33c9a5e07f917bfc0c19bf0"
+    },
+    {
       "path": "story-reader-r122.js",
       "bytes": 5020,
       "sha256": "8ae5c12368141823034fd67f6215c32613d7ba059257e1ff4b69252e7f18a6ed"
@@ -45024,8 +45039,8 @@
     },
     {
       "path": "survival-r600.js",
-      "bytes": 63462,
-      "sha256": "142c8a617325674248300a544da959a608c98e916afa290fca8cae1386be2366"
+      "bytes": 67733,
+      "sha256": "55cce192489851e96ae3a27cd24003a483136cf76d4b3048abaea74a75724410"
     },
     {
       "path": "swamp-hands-r474.js",
@@ -45263,9 +45278,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9052,
-  "totalBytes": 1239784564,
-  "webHTMLSha256": "1244a7cb7a1b47f791dc17be1d151b9004db222339f1d35bf28d48fb8a525d4f",
+  "fileCount": 9055,
+  "totalBytes": 1239875542,
+  "webHTMLSha256": "6b056f15363ff41e6e981d092bcd89fd64bc71b2db8a0a2d27f82c992a916876",
   "largest": [
     {
       "path": "index.html",
