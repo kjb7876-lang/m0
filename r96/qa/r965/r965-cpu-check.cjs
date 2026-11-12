@@ -42,4 +42,9 @@ m=mk();e=boss('핏빛 수호로 추격자',{storyAttackStart5:0});m.ctx.room.ene
 m=mk();e=boss('첫 동료의 악마잔영',{storyAttackStart5:0});m.ctx.room.enemies=[e];m.tick();e.storyAttackStart5=NaN;m.tick();e.storyAttackStart5='x';m.adv(2000);m.tick();ok(m.atk('comradeecho')===0,'숫자가 아닌 값은 공격 시작으로 보지 않음');
 // 보스(e.boss)는 R788 몫 — R789 는 내지 않는다
 m=mk();e={name:'늪의 뿔악마 군주',boss:true,midboss:true,hp:100,storyAttackStart5:0};m.ctx.room.enemies=[e];m.tick();e.storyAttackStart5=3;m.tick();ok(!m.kinds().some(k=>/^r789/.test(k)),'보스 표시가 있으면 R789 는 내지 않음(R788 몫)');
+// 이름이 바뀐 중간보스: R385(검수 목록 42·43)가 ep1b08 '역십자가 시체경호체'를 실제 게임에서 '흑마법사의 시체경호체'로 바꾼다 → 실전투에서 corpseguard 피격·사망·공격음이 하나도 안 났다.
+ok(/흑마법사의 시체경호체/.test(fs.readFileSync(path.join(R,'client-source/mob-moves-r385.js'),'utf8')),'R385 가 여전히 흑마법사의 시체경호체로 바꾼다(이 고침의 전제)');
+m=mk();ok(m.ctx.window.__STORYWORLD_SFX_R789__.slugOf('흑마법사의 시체경호체')==='corpseguard','바뀐 이름도 corpseguard 로 알아봄');ok(m.ctx.window.__STORYWORLD_SFX_R789__.slugOf('역십자가 시체경호체')==='corpseguard','옛 이름도 그대로');
+e={name:'흑마법사의 시체경호체',midboss:true,hp:100};m.ctx.room.enemies=[e];m.ctx.hitEnemy(e,3);ok(m.kinds().includes('r789MHit_corpseguard'),'바뀐 이름 중간보스 피격음');
+m.ctx.killEnemy(e);ok(m.kinds().includes('r789MDie_corpseguard'),'바뀐 이름 중간보스 사망음');
 console.log(`\nR965 CPU: ${n-bad}/${n}`);process.exit(bad?1:0);
