@@ -42,7 +42,8 @@ function bodyOf(im){let v=bodyMemo.get(im);if(v)return v;v=180;try{const W=im.na
  hs.sort((a,b)=>a-b);const m=hs[hs.length>>1];if(m>=150&&m<=240)v=m;}catch(_){}bodyMemo.set(im,v);return v;}
 function dirNow(){try{const q=project(player.x,player.y);let best=null,bd=4;for(const e of room?.enemies||[]){if(!(e?.hp>0)||e.visible===false)continue;const d=Math.hypot(e.x-player.x,e.y-player.y);if(d<bd){bd=d;best=e;}}
  if(best){const b=project(best.x,best.y),ang=Math.atan2(b.y-q.y,b.x-q.x);if(player.hero==='gunner'){/* R425: 기억사수 좌·우 공격 그림이 각각 약 120°(±60°)를 맡는다(사용자 2026-11-08 "좋은 이미지라서") — 남은 위·아래 60°씩만 n·s */const d=Math.abs(ang)*180/Math.PI;stats.gunner120=(stats.gunner120||0)+1;return d<=60?'e':d>=120?'w':ang<0?'n':'s';}return DIR8[((Math.round(ang/(Math.PI/4))%8)+8)%8];}}catch(_){}return FOUR[player?.direction]||'s';}
-let swing={start:0,prev:0,dir:'s'};
+const perHeroR720=o=>{if(typeof Proxy!=='function'||typeof WeakMap!=='function')return o;const m=new WeakMap(),init=JSON.stringify(o),pick=()=>{let p=null;try{p=player;}catch(_){}if(p&&p.r720Ally===true){let s=m.get(p);if(!s){s=JSON.parse(init);m.set(p,s);}return s;}return o;};return new Proxy(o,{get:(_,k)=>pick()[k],set:(_,k,v)=>{pick()[k]=v;return true;},has:(_,k)=>k in pick(),deleteProperty:(_,k)=>delete pick()[k],ownKeys:()=>Reflect.ownKeys(pick()),getOwnPropertyDescriptor:(_,k)=>{const d=Object.getOwnPropertyDescriptor(pick(),k);if(d)d.configurable=true;return d;}});};/* R720: 생존 배치 영웅(player.r720Ally 몸)은 영웅마다 따로 상태를 갖는다 — 조종 영웅 상태와 섞이지 않게 */
+let swing=perHeroR720({start:0,prev:0,dir:'s'});
 function apply(rec,st){const h=player.hero;if(!HEROES.includes(h))return;
  const a=+player.attackAnim||0;if(a>swing.prev+1e-6||swing.start<=0){swing.start=a;swing.dir=dirNow();stats.swings++;}swing.prev=a;
  let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!BODY_ART.test(String(c.sourcePath||c.image?.src||'')))continue;if(c.r121Walk)return;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}
@@ -51,13 +52,13 @@ function apply(rec,st){const h=player.hero;if(!HEROES.includes(h))return;
 // 시트 칸 하나를 몸 그림 자리에 그린다(발 기준점·걷기와 같은 키). idle 이면 첫 칸 + 숨쉬기.
 function place(rec,st,best,h,dir8,a,start,idle,act='attack',fixed=null){const[sd0,mir]=SHEET[dir8]||SHEET.s,sd=act==='hit'&&HIT_FALLBACK[h]?.[sd0]||sd0;
  // R437: 네온·라우렌 새 좌·우 공격(넓은 칸·자기 발 자리·몸 180 고정) — 시트 표는 neon-lauren-r437.js. 끄면 예전 192 칸 시트.
- const alt0=act==='attack'&&!idle?window.__STORYWORLD_NEON_LAUREN_R437__?.attackSheet?.(h,sd):null,altIm=alt0?image(alt0.path):null,alt=altIm?alt0:null/* R437 시트가 아직 안 왔으면 예전 시트로 */,CW=alt?alt.cell[0]:192,FX=alt?alt.foot[0]:96,p=alt?alt.path:pathOf(h,sd,act),im=alt?altIm:image(p);if(!im)return null;
+ const alt0=act==='attack'&&!idle?window.__STORYWORLD_NEON_LAUREN_R437__?.attackSheet?.(h,sd):act==='hit'?window.__STORYWORLD_IDLE_HIT_R710__?.hitSheet?.(h,sd)/* R710 남쪽 피격 4칸 */:null,altIm=alt0?image(alt0.path):null,alt=altIm?alt0:null/* R437 시트가 아직 안 왔으면 예전 시트로 */,CW=alt?alt.cell[0]:192,FX=alt?alt.foot[0]:96,p=alt?alt.path:pathOf(h,sd,act),im=alt?altIm:image(p);if(!im)return null;
  const n=Math.max(1,Math.round((im.naturalWidth||im.width)/CW)),fr=fixed!=null?Math.min(n-1,fixed):idle?0:Math.min(n-1,Math.floor(Math.min(.999,Math.max(0,1-a/Math.max(.05,start)))*n));
  const bh=Math.abs(best.points[3][1]-best.points[0][1]),want=(typeof actorHeight==='function'?actorHeight():bh)*(r119Stats().standRatio||.98),k=want/(alt?alt.body:bodyOf(im)),ky=idle?k*(1+.01*Math.sin((typeof time==='number'?time:0)*2.2)):k;
  const q=project(player.x,player.y),lift=Math.min(Math.max(+player.visualLiftPx||0,0),want*.65),fx=q.x,fy=q.y-lift,f=mir?-1:1,ay=alt?alt.foot[1]:ACT_FOOT[h+':'+act]?.[sd]??(act==='walk'?226:(FOOT[h]?.[sd])||226);
  const sx=fr*CW,X=v=>fx+f*(v-FX)*k,Y=v=>fy+(v-ay)*ky,before=best.image;
  Object.assign(best,{image:im,sourcePath:p,immutableTint:null,sourceRect:[sx,0,CW,256],imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],
-  points:[[X(0),Y(0)],[X(CW),Y(0)],[X(CW),Y(256)],[X(0),Y(256)]],r143Attack:!idle&&act==='attack',r437Attack:alt?{hero:h,frame:fr}:null,r143Hit:act==='hit',r143Idle:!!idle});
+  points:[[X(0),Y(0)],[X(CW),Y(0)],[X(CW),Y(256)],[X(0),Y(256)]],r143Attack:!idle&&act==='attack',r437Attack:alt&&act==='attack'?{hero:h,frame:fr}:null,r710Hit:alt&&act==='hit'?{hero:h,frame:fr}:null,r143Hit:act==='hit',r143Idle:!!idle});
  // 몸을 두 번 그리는 영웅(환도: 몸 + 겹친 사본)은 같은 옛 그림의 다른 사본을 지운다.
  for(let i=rec.commands.length-1;i>=st;i--){const c=rec.commands[i];if(c!==best&&c.kind==='image'&&c.owner?.kind==='hero'&&c.image===before&&BODY_ART.test(String(c.sourcePath||c.image?.src||''))){rec.commands.splice(i,1);stats.dupRemoved++;}}
  return fr;}
@@ -74,8 +75,8 @@ function hwandoUnify(rec,st){let best=null,bh=0;for(let i=st;i<rec.commands.leng
 function gunnerDash(rec,st){let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points)continue;const src=String(c.sourcePath||c.image?.src||'');if(!BODY_ART.test(src))continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}
  if(!best||!/r128\/gunner\/g-dash/.test(String(best.sourcePath||best.image?.src||'')))return;const d=r119Stats().walkDir||FOUR[player.direction]||'e';
  if(place(rec,st,best,'gunner',DIR8.includes(d)?d:'e',0,1,0,'walk',3)!=null)stats.gunnerDash=(stats.gunnerDash||0)+1;}
-let hurt={start:0,prev:0,dir:'s'};
-const cast={act:null,start:0,prev:0,dir:'s',t0:0};
+let hurt=perHeroR720({start:0,prev:0,dir:'s'});
+const cast=perHeroR720({act:null,start:0,prev:0,dir:'s',t0:0});
 function currentAct(){if(player.dashAnim>0)return'dash';if(player.guard)return'guard';if(player.ultimateAnim>0)return'ultimate';if(player.skillAnim>0)return'skill';return null;}
 function applyAct(rec,st){const h=player.hero,act=currentAct();if(!act||!SKILLSET[h]?.[act])return false;
  const a=act==='guard'?1:(+player[act+'Anim']||0),now=typeof time==='number'?time:performance.now()/1000;
@@ -94,7 +95,7 @@ function swapWalk(rec,st){for(let i=st;i<rec.commands.length;i++){const c=rec.co
  const row=typeof readyImage==='function'?readyImage(to):null;if(!row?.image){image(to);continue;}c.image=row.image;c.sourcePath=to;stats.walkV1=(stats.walkV1||0)+1;}}
 // 미리 받기: 영웅이 바뀔 때뿐 아니라 지역을 옮길 때도(게임이 지역마다 그림 기억을 비운다) — 처음 쓰는 순간 그림이 없어
 //  옛 그림이 0.3초쯤 보이던 것(환도 스킬, 헤드리스 120초 관찰 8장면)을 막는다. 아직 못 받은 것은 2초마다 다시 묻는다.
-function preload(){try{const h=player?.hero;if(!HEROES.includes(h))return 0;let miss=0;const want=[];for(const [act,ds] of Object.entries(SKILLSET[h]||{}))for(const d of ds)want.push(pathOf(h,d,act));/* R201 *//* R437 새 공격 시트 */{const a=window.__STORYWORLD_NEON_LAUREN_R437__?.attackSheet?.(h,'e');if(a?.path)want.push(a.path);}for(const d of['s','se','e','ne','n']){want.push(pathOf(h,d));if(HIT.has(h)&&!HIT_FALLBACK[h]?.[d])want.push(pathOf(h,d,'hit'));if(h==='hwando'||h==='gunner')want.push(pathOf(h,d,'walk'));}if(h==='hwando'||h==='gunner')want.push('assets/r144/walk/'+h+'/walk-e.webp');
+function preload(){try{const h=player?.hero;if(!HEROES.includes(h))return 0;let miss=0;const want=[];for(const [act,ds] of Object.entries(SKILLSET[h]||{}))for(const d of ds)want.push(pathOf(h,d,act));/* R201 *//* R437 새 공격 시트 */{const a=window.__STORYWORLD_NEON_LAUREN_R437__?.attackSheet?.(h,'e');if(a?.path)want.push(a.path);}/* R710 */{const t=window.__STORYWORLD_IDLE_HIT_R710__?.hitSheet?.(h,'s');if(t?.path)want.push(t.path);}for(const d of['s','se','e','ne','n']){want.push(pathOf(h,d));if(HIT.has(h)&&!HIT_FALLBACK[h]?.[d])want.push(pathOf(h,d,'hit'));if(h==='hwando'||h==='gunner')want.push(pathOf(h,d,'walk'));}if(h==='hwando'||h==='gunner')want.push('assets/r144/walk/'+h+'/walk-e.webp');
  for(const p of want){if(typeof readyImage==='function'&&readyImage(p))continue;miss++;const t=Date.now();if(t-(asked.get(p)||0)>1000){asked.set(p,t);try{if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});}catch(_){}}}stats.preloadMiss=miss;return miss;}catch(_){return 0;}}
 let lastHero=null,lastRoom=null,nextPre=0;
 // R440: 몸 그림 덧씌우기들(이 파일·환도·슬레이어·헌터)이 상태를 읽기 직전에 스킬 중이면 '공격 중'으로 잠깐 바꿔 보인다(되돌림은 skill-attack-r440 바깥 감싸기).
@@ -109,7 +110,7 @@ if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){con
   const hurtOnly=player?.hurtAnim>0&&!(player.skillAnim>0||player.dashAnim>0||player.ultimateAnim>0||player.guard);/* R194: 환도도 피격 시트가 생겨 맞을 땐 아래 applyHit 로 */
   if(prefs.on&&prefs.hwandoIdle&&st>=0&&solo()&&player?.hero==='hwando'&&!(player.attackAnim>0&&!busy)&&!hurtOnly){hwandoUnify(rec,st);return r;}
   if(prefs.on&&st>=0&&solo()&&player?.hurtAnim>0&&!(player.skillAnim>0||player.dashAnim>0||player.ultimateAnim>0||player.guard)){applyHit(rec,st);return r;}
-  if(prefs.on&&st>=0&&solo()&&player&&currentAct()){if(applyAct(rec,st))return r;}else cast.act=null;
+  if(prefs.on&&st>=0&&solo()&&player&&currentAct()){const ca=currentAct();/* R895 규칙 2: 스킬·궁극기 커밋 창 뒤 이동이면 전용 시트를 내려놓고 걷기(R119)에 맡긴다 */if(!((ca==='skill'||ca==='ultimate')&&window.__STORYWORLD_HERO_MOTION_R895__?.moveCancel?.('skill'))&&applyAct(rec,st))return r;}else cast.act=null;
   if(!prefs.on||st<0||!solo()||!player||!(player.attackAnim>0)||busy)return r;
   apply(rec,st);}catch(e){fail(e);}return r;};}
 function set(k,v){prefs[k]=!!v;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}

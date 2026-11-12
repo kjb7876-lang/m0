@@ -80,7 +80,9 @@ function wall(x,y){try{return typeof blocked==='function'&&!!blocked(x,y,.1,room
 const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
 function nearest(r,from=player){let b=null,bd=r;for(const e of live()){const d=dist(e,from);if(d<bd&&los(from,e)){bd=d;b=e;}}return b;}
 function forward(){const v={front:[1,1],back:[-1,-1],left:[-1,1],right:[1,-1]}[player.direction]||[1,1];return Math.atan2(v[1],v[0]);}
-function aimAt(e){if(e)return Math.atan2(e.y-player.y,e.x-player.x);try{if(typeof storyAim22==='function'){const a=storyAim22();if(Number.isFinite(a))return a;}}catch(_){}return forward();}
+/* R561d: 총구가 향한 방향 = 영웅 그림 8방향 칸. 적은 '어느 칸을 겨눌지'만 정하고, 쏘는 각은 그 칸 한가운데 고정이라 적에게 꺾이지 않는다(줄에 걸린 적만 맞음). 화면각 S → 월드 방향: dx=(cosS+2sinS)/2, dy=(2sinS-cosS)/2 */
+function weaponAngle(a){const k=sectorOf(Math.cos(a),Math.sin(a)),S=SEC[k];return Math.atan2(2*Math.sin(S)-Math.cos(S),Math.cos(S)+2*Math.sin(S));}
+function aimAt(e){if(e)return weaponAngle(Math.atan2(e.y-player.y,e.x-player.x));try{if(typeof storyAim22==='function'){const a=storyAim22();if(Number.isFinite(a))return weaponAngle(a);}}catch(_){}return weaponAngle(forward());}
 // 벽까지 길이(0.2칸 걸음)
 function reach(o,a,max){const c=Math.cos(a),s=Math.sin(a);for(let d=.2;d<=max;d+=.2)if(wall(o.x+c*d,o.y+s*d))return Math.max(.3,d-.2);return max;}
 // 줄 위 적(가까운 순)
@@ -132,13 +134,13 @@ function planChain(f,rows,t){if(!rows.length||arcsOn===false)return;const taken=
 // ---- W 망각 저격 ----
 function snipeTarget(){const rows=live().filter(e=>dist(e,player)<=rgs('w',RANGE.w)&&los(player,e));const big=rows.filter(e=>e.boss||e.elite).sort((a,b)=>dist(a,player)-dist(b,player))[0];return big||rows.sort((a,b)=>dist(a,player)-dist(b,player))[0]||null;}
 function castW(){const tg=snipeTarget(),a=aimAt(tg);face(a);fx.push({k:'w',t0:T(),life:SNIPE.aim+1.3,tg,a,o:{x:player.x,y:player.y},fired:false,end:null,dmg:power()*SNIPE.dmg*grow('w')*GR663('w').power,seed:Math.random()*6});armSent();stats.w++;return true;}
-function fireW(f){f.fired=true;const o={x:player.x,y:player.y};if(f.tg&&f.tg.hp>0)f.a=Math.atan2(f.tg.y-o.y,f.tg.x-o.x);f.o=o;const L=reach(o,f.a,rgs('w',RANGE.w)),rows=onLine(o,f.a,L,SNIPE.half);
+function fireW(f){f.fired=true;const o={x:player.x,y:player.y};f.o=o;/* 총구 방향 고정 — 목표로 꺾지 않음 */const L=reach(o,f.a,rgs('w',RANGE.w)),rows=onLine(o,f.a,L,SNIPE.half);
  let endL=L;if(rows[0]){hit(rows[0],f.dmg,'gunnerSnipeR561');try{if(typeof moveActor==='function')moveActor(rows[0],Math.cos(f.a)*SNIPE.push,Math.sin(f.a)*SNIPE.push,rows[0].radius||.3);}catch(_){}endL=dist(rows[0],o);}
  if(rows[1]){hit(rows[1],f.dmg*SNIPE.pierce,'gunnerSnipeR561');endL=dist(rows[1],o);}
  f.L=Math.max(L*.999,endL);f.hitL=endL;f.tf=T();quake(.45);snd('special');face(f.a);player.skillAnim=Math.max(player.skillAnim||0,.35);}
 // ---- E 잔향 연사 ----
 function castE(){const e=nearest(rgs('e',RANGE.e)),a=aimAt(e);face(a);fx.push({k:'e',t0:T(),life:RIFLE.every*(RIFLE.n-1)+(gsOn('casing')?1.1:.5),a,done:0,rounds:[],dmg:power()*RIFLE.dmg*grow('e')*GR663('e').power});armSent();stats.e++;return true;}
-function shotE(f,i){const o={x:player.x,y:player.y},e=nearest(rgs('e',RANGE.e),o);let a=e?Math.atan2(e.y-o.y,e.x-o.x):f.a;a+=(i%2?1:-1)*.035*((i%3)/2);f.a=a;const L=reach(o,a,rgs('e',RANGE.e)),first=onLine(o,a,L,RIFLE.half)[0];let endL=L;
+function shotE(f,i){const o={x:player.x,y:player.y};if(f.a0==null)f.a0=f.a;const a=f.a0+(i%2?1:-1)*.035*((i%3)/2);f.a=a;const L=reach(o,a,rgs('e',RANGE.e)),first=onLine(o,a,L,RIFLE.half)[0];let endL=L;
  if(first){hit(first,f.dmg,'gunnerRifleR561');endL=dist(first,o);}f.rounds.push({t:T(),o,a,L:endL,hit:!!first});face(a);player.skillAnim=Math.max(player.skillAnim||0,.2);if(i%3===0)snd('attack');}
 // ---- R 기억 소거 폭격 ----
 function strikePoint(minCount=1){const rows=live().filter(e=>dist(e,player)<=rgs('r',RANGE.r));let best=null,bn=0;for(const e of rows){const n=rows.filter(v=>dist(v,e)<=rgs('r',STRIKE.R)*.75).length+(e.boss?2:0);if(n>bn||(n===bn&&best&&dist(e,player)<dist(best,player))){bn=n;best=e;}}

@@ -47,6 +47,8 @@ if(exists){
  step(g,2);let cl=A(g).inspect().clones;ok('Q: two clones 1.5 tiles to each side (perpendicular to aim)',cl.length===2&&cl.every(c=>Math.abs(Math.hypot(c.x-10,c.y-10)-1.5)<1e-9&&Math.abs(c.x-10)<1e-9));
  ok('clones drawn as hero ghosts',V(g,'ghosts.filter(x=>x.r564&&/^atk-/.test(x.asset)).length')===2);
  step(g,3);const sh=V(g,'shots.filter(s=>s.r564Clone)');ok('Q: each clone fires one piercing shot at 0.25×24=6',sh.length===2&&sh.every(s=>Math.abs(s.damage-6)<1e-9&&s.pierce===8&&s.friendly===true&&s.owner==='hero'));
+ ok('R705c: clone shots leave from the hero body (10,10), not from the clone spots',sh.length===2&&sh.every(s=>Math.abs(s.x-10)<1e-9&&Math.abs(s.y-10)<1e-9));
+ ok('R705c: the two body shots aim at different foes (one per clone side)',sh.length===2&&Math.abs(Math.atan2(sh[0].vy,sh[0].vx)-Math.atan2(sh[1].vy,sh[1].vx))>.05);
  step(g,10);ok('clones vanish by 0.75 s',A(g).inspect().clones.length===0);
  V(g,'special()');step(g,20);ok('Q on cooldown → no clones',V(g,'shots.filter(s=>s.r564Clone).length')===2);
  // R 시간 정지

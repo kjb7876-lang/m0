@@ -77,7 +77,10 @@ if(exists){
  // 표적 11.5칸: 9발이 모두 날아가는 중(0.53초)에 표적이 옆으로 3칸 비킨다
  const sidestep=(g,m)=>{run(g,'special()');for(let i=0;i<16;i++)step(g,1,1/30);m.y=13;for(let i=0;i<45;i++)step(g,1,1/30);return g.hits.filter(h=>h.id==='m').length;};
  g=env();const mover=foe('m',21.5,10);g.room.enemies.push(mover);const hitM=sidestep(g,mover);
- ok('storm shots curve and hit a target that side-stepped 3 tiles mid-flight ('+hitM+'/9)',hitM>=7);
+ // R765(사용자 2026-11-11 "자동적중 없애기"): 폭풍 화살은 더는 표적을 따라 휘지 않는다 — 활이 향한 줄에 걸린 적만 맞는다
+ ok('storm shots do NOT home: a target that side-stepped 3 tiles mid-flight is missed ('+hitM+'/9)',hitM===0);
+ g=env();const lined=foe('l',21.5,10);g.room.enemies.push(lined);run(g,'special()');for(let i=0;i<60;i++)step(g,1,1/30);
+ ok('storm shots still hit an enemy that stays on the bow line (fan edge shots miss now) ('+g.hits.filter(h=>h.id==='l').length+'/9)',g.hits.filter(h=>h.id==='l').length>=1);
  // 같은 상황 끄기 → 직진이라 못 맞힘(회귀 기준)
  g=env({off:true});const m2=foe('m',21.5,10);g.room.enemies.push(m2);const hitOff=sidestep(g,m2);
  ok('switch off → shots fly straight and miss the side-stepped target ('+hitOff+'/9)',hitOff===0&&g.projectiles.every(p=>!p.r535));
@@ -85,7 +88,7 @@ if(exists){
  // 선회 속도 상한·속력 유지
  g=env();const t3=foe('t',16,10);g.room.enemies.push(t3);run(g,'special()');step(g,1,.0001);const s3=g.projectiles[0];const a0=Math.atan2(s3.vy,s3.vx);t3.x=4;t3.y=10;step(g,1,1/30);
  const a1=Math.atan2(s3.vy,s3.vx),turn=Math.abs(Math.atan2(Math.sin(a1-a0),Math.cos(a1-a0)));
- ok('turn per frame bounded by tuning (no instant snap)',turn>0&&turn<=A(g).inspect().tuning.storm.turn/30+1e-6);
+ ok('turn per frame bounded by tuning (no instant snap)',turn<=A(g).inspect().tuning.storm.turn/30+1e-6);
  ok('speed preserved while turning',near(Math.hypot(s3.vx,s3.vy),19,1e-6));
  // 표적이 죽으면 가까운 다른 적으로 바꾼다
  g=env();const d1=foe('d1',16,10),d2=foe('d2',14,13);g.room.enemies.push(d1,d2);run(g,'special()');step(g,1,.0001);d1.hp=0;for(let i=0;i<40;i++)step(g,1,1/30);

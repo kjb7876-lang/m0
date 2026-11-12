@@ -1,0 +1,261 @@
+{
+  "method": "Native original burn/PXF DrawCommands capture + pinned real Three r186 CPU scene/material/shader-source checks; numerical Canvas blend reference. No GPU rendering.",
+  "checks": [
+    {
+      "name": "Shipped renderer already contains the exact R83 compatibility integration",
+      "passed": true
+    },
+    {
+      "name": "R83 renderer patch is byte-idempotent",
+      "passed": true
+    },
+    {
+      "name": "Preserved V6 reproduces screenshot failure from actual native living-burn draw",
+      "passed": true,
+      "detail": {
+        "error": "Unsupported original blend lighter",
+        "commands": [
+          {
+            "kind": "image",
+            "blend": "screen"
+          },
+          {
+            "kind": "fill",
+            "blend": "lighter"
+          },
+          {
+            "kind": "fill",
+            "blend": "lighter"
+          },
+          {
+            "kind": "fill",
+            "blend": "lighter"
+          },
+          {
+            "kind": "fill",
+            "blend": "lighter"
+          },
+          {
+            "kind": "fill",
+            "blend": "lighter"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Actual native living-burn commands replay through real Three CPU materials",
+      "passed": true,
+      "detail": {
+        "created": 6,
+        "removed": 0,
+        "texturesCreated": 1,
+        "texturesDisposed": 0,
+        "geometryComparisons": 0,
+        "cameraTranslationComparisons": 0,
+        "geometryUpdates": 0,
+        "cameraTranslationSkips": 0,
+        "screenPositionUpdates": 0,
+        "sightCacheHits": 0,
+        "styleReplacements": 0,
+        "filterUpdates": 0,
+        "pathPassChecksR68": 5,
+        "screenPositionBaselineBytes": 0,
+        "screenPositionAttributeBytes": 0,
+        "uvAttributeBytes": 7488,
+        "meshes": 6,
+        "textures": 1,
+        "labels": 0,
+        "execution": "real Three CPU scene; GPU unverified",
+        "ordering": "original final draw painter order",
+        "depthBodies": 0,
+        "lightCasters": 0
+      }
+    },
+    {
+      "name": "Actual native additive PXF image records lighter and replays",
+      "passed": true,
+      "detail": {
+        "count": 1,
+        "owner": {
+          "id": "r83-native-pxf",
+          "kind": "effect",
+          "pxf": true,
+          "pxfKey": "pxf-18",
+          "pxfSide": "player",
+          "sourcePath": "assets/pxf-baked-20261010/pxf-18-atlas.png",
+          "pivotScreen": {
+            "x": 640,
+            "y": 416
+          }
+        }
+      }
+    },
+    {
+      "name": "Reduced-motion PXF retains native source-over behavior",
+      "passed": true
+    },
+    {
+      "name": "Images, solid paths and gradients use additive RGB and separate alpha factors",
+      "passed": true
+    },
+    {
+      "name": "Lighter alpha is added once and translucent RGB matches Canvas reference",
+      "passed": true,
+      "detail": [
+        {
+          "rgb": [
+            0.30000000000000004,
+            0.30000000000000004,
+            0.35
+          ],
+          "alpha": 0.75,
+          "incorrectAlpha": 0.5625
+        },
+        {
+          "rgb": [
+            0.2,
+            0.1,
+            0.1
+          ],
+          "alpha": 0.3,
+          "incorrectAlpha": 0.3
+        },
+        {
+          "rgb": [
+            0.6200000000000001,
+            0.9200000000000002,
+            0.6599999999999999
+          ],
+          "alpha": 1,
+          "incorrectAlpha": 1
+        }
+      ]
+    },
+    {
+      "name": "Existing screen blend keeps premultiplied RGB and gradient premultiplies exactly once",
+      "passed": true
+    },
+    {
+      "name": "Changing additive paint reuses material without per-frame replacement",
+      "passed": true,
+      "detail": {
+        "created": 1,
+        "removed": 0,
+        "texturesCreated": 0,
+        "texturesDisposed": 0,
+        "geometryComparisons": 120,
+        "cameraTranslationComparisons": 0,
+        "geometryUpdates": 0,
+        "cameraTranslationSkips": 0,
+        "screenPositionUpdates": 0,
+        "sightCacheHits": 0,
+        "styleReplacements": 0,
+        "filterUpdates": 0,
+        "pathPassChecksR68": 1,
+        "solidPaintReuseR70": 120,
+        "screenPositionBaselineBytes": 0,
+        "screenPositionAttributeBytes": 0,
+        "uvAttributeBytes": 1488,
+        "meshes": 1,
+        "textures": 0,
+        "labels": 0,
+        "execution": "real Three CPU scene; GPU unverified",
+        "ordering": "original final draw painter order",
+        "depthBodies": 0,
+        "lightCasters": 0
+      }
+    },
+    {
+      "name": "Blend transitions replace materials rather than reusing incompatible shader state",
+      "passed": true,
+      "detail": {
+        "created": 3,
+        "removed": 2,
+        "texturesCreated": 0,
+        "texturesDisposed": 0,
+        "geometryComparisons": 120,
+        "cameraTranslationComparisons": 0,
+        "geometryUpdates": 0,
+        "cameraTranslationSkips": 0,
+        "screenPositionUpdates": 0,
+        "sightCacheHits": 0,
+        "styleReplacements": 2,
+        "filterUpdates": 0,
+        "pathPassChecksR68": 3,
+        "solidPaintReuseR70": 120,
+        "screenPositionBaselineBytes": 0,
+        "screenPositionAttributeBytes": 0,
+        "uvAttributeBytes": 1488,
+        "meshes": 1,
+        "textures": 0,
+        "labels": 0,
+        "execution": "real Three CPU scene; GPU unverified",
+        "ordering": "original final draw painter order",
+        "depthBodies": 0,
+        "lightCasters": 0
+      }
+    },
+    {
+      "name": "Repeated additive image frames release retained textures and geometry",
+      "passed": true,
+      "detail": {
+        "created": 1,
+        "removed": 1,
+        "texturesCreated": 1,
+        "texturesDisposed": 1,
+        "geometryComparisons": 80,
+        "cameraTranslationComparisons": 0,
+        "geometryUpdates": 0,
+        "cameraTranslationSkips": 0,
+        "screenPositionUpdates": 0,
+        "sightCacheHits": 0,
+        "styleReplacements": 0,
+        "filterUpdates": 0,
+        "screenPositionBaselineBytes": 0,
+        "screenPositionAttributeBytes": 0,
+        "uvAttributeBytes": 0,
+        "meshes": 0,
+        "textures": 0,
+        "labels": 0,
+        "execution": "real Three CPU scene; GPU unverified",
+        "ordering": "original final draw painter order",
+        "depthBodies": 0,
+        "lightCasters": 0
+      }
+    },
+    {
+      "name": "Unknown captured masking still fails explicitly and releases its image texture",
+      "passed": true,
+      "detail": {
+        "unknown": "Unsupported original blend destination-in",
+        "stats": {
+          "created": 0,
+          "removed": 0,
+          "texturesCreated": 1,
+          "texturesDisposed": 1,
+          "geometryComparisons": 0,
+          "cameraTranslationComparisons": 0,
+          "geometryUpdates": 0,
+          "cameraTranslationSkips": 0,
+          "screenPositionUpdates": 0,
+          "sightCacheHits": 0,
+          "styleReplacements": 0,
+          "filterUpdates": 0,
+          "screenPositionBaselineBytes": 0,
+          "screenPositionAttributeBytes": 0,
+          "uvAttributeBytes": 0,
+          "meshes": 0,
+          "textures": 0,
+          "labels": 0,
+          "execution": "real Three CPU scene; GPU unverified",
+          "ordering": "original final draw painter order",
+          "depthBodies": 0,
+          "lightCasters": 0
+        }
+      }
+    }
+  ],
+  "passed": true,
+  "browserVerified": false,
+  "GPUVerified": false
+}

@@ -1,0 +1,99 @@
+{
+ "checks": [
+  {
+   "name": "타락천사 기사 phase 0: 옛 그림 대신 R104",
+   "passed": true,
+   "detail": "l301-boss-p4.webp,l301-boss-p4.webp,l301-boss-p4.webp,l301-boss-p2.webp"
+  },
+  {
+   "name": "타락천사 기사 phase 1: 옛 그림 대신 R104",
+   "passed": true,
+   "detail": "l301-boss-p4.webp,l301-boss-p4.webp,l301-boss-p4.webp,l301-boss-p2.webp"
+  },
+  {
+   "name": "타락천사 기사 phase 2: 옛 그림 대신 R104",
+   "passed": true,
+   "detail": "l301-boss-p4.webp,l301-boss-p4.webp,l301-boss-p4.webp,l301-boss-p2.webp"
+  },
+  {
+   "name": "발록: R104",
+   "passed": true,
+   "detail": "assets/r104/bosses/dist06-boss-p4.webp,assets/r104/bosses/dist06-boss-p2.webp"
+  },
+  {
+   "name": "EGO 강탈 악몽왕 phase 0: R104",
+   "passed": true,
+   "detail": "assets/r104/bosses/h103-boss-p4.webp,assets/r104/bosses/h103-boss-p2.webp"
+  },
+  {
+   "name": "EGO 강탈 악몽왕 phase 1: R104",
+   "passed": true,
+   "detail": "assets/r104/bosses/h103-boss-p2.webp"
+  },
+  {
+   "name": "EGO 강탈 악몽왕 phase 2 변신 그림은 그대로(회귀)",
+   "passed": true,
+   "detail": "assets/generated-v31224/actors-normalized/9f29878c4e6b_hando_transition.webp"
+  },
+  {
+   "name": "다른 몹이 같은 경로를 물으면 그대로(회귀)",
+   "passed": true,
+   "detail": "assets/generated-v31224/actors-normalized/363f780dbb5a_Monster_FallenAngelKnight_Base.webp"
+  },
+  {
+   "name": "보스 그리기 밖 readyImage 는 그대로(회귀)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "기존 7대죄·루시퍼·교주 단계 표 유지(회귀)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "발록 공격(잘라 그리기 칸) → p2 칸 전체, 키=옛 화면 상자 키, 발·가운데 유지",
+   "passed": true,
+   "detail": "[\"assets/r104/bosses/dist06-boss-p2.webp\",0,0,508,501,104.96606786427147,50,150.06786427145707,148]"
+  },
+  {
+   "name": "좌우 뒤집힌 상자(dw<0)도 부호 유지",
+   "passed": true,
+   "detail": "[\"assets/r104/bosses/dist06-boss-p2.webp\",0,0,508,501,255.03393213572855,50,-150.06786427145707,148]"
+  },
+  {
+   "name": "칸 없이 그리면 손대지 않음(회귀)",
+   "passed": true,
+   "detail": "[\"assets/r104/bosses/l301-boss-p4.webp\",10,20,90,100]"
+  },
+  {
+   "name": "맘몬(b06, Codex 담당)은 잘라 그리기 칸을 바꾸지 않음(회귀)",
+   "passed": true,
+   "detail": "[\"assets/r104/bosses/b06-boss-p4.webp\",30,57,188,377,0,0,50,100]"
+  },
+  {
+   "name": "다른 몹의 잘라 그리기는 그대로(회귀)",
+   "passed": true,
+   "detail": "[\"assets/generated-v31224/actors-normalized/aa5052f514b2_balrog-attack.webp\",178.5,63,316.75,292.25,100,50,160,148]"
+  },
+  {
+   "name": "교만의 사이보그 교주 몸(cult-v3123) → R104",
+   "passed": true,
+   "detail": "assets/r104/bosses/c104-boss-p4.webp"
+  },
+  {
+   "name": "교만의 사이보그 교주(본보스 c104-boss): R248/R410 몹 시트 안 씀",
+   "passed": true,
+   "detail": "null"
+  },
+  {
+   "name": "같은 이름 일반 몹은 여전히 m062 시트(회귀)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "name": "R104 없는 본보스(아르벨리아를 묶은 변조 명령)는 R410 m048 그대로(회귀)",
+   "passed": true,
+   "detail": ""
+  }
+ ]
+}

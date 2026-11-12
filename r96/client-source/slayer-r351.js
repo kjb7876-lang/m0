@@ -49,14 +49,14 @@ const MIRROR_E=true,auxClip=()=>rawClip('attack','w');
 const IDLE_S_FRAME=2;function idleClip(){if(S.walkDir==='n'&&northReady()){const A=northClip();return [A,'n',A.idle_frame??0];}if(S.walkDir==='s'&&southReady()){const A=rawClip('walk','s');if(A)return [A,'s',IDLE_S_FRAME];}if(eReady()){const A=rawClip('walk','e');if(A)return [A,S.h,A.idle_frame??1];}const A=clip('walk',S.h);return [A,S.h,A?.idle_frame??(A?A.n-1:0)];}
 const baseFor=(d,A)=>A&&A===northClip()?NORTH_BASE:A?(A===rawClip('walk','w')||A===rawClip('attack','w')?BASE:SOUTH_BASE):d==='s'||(d==='e'&&eReady())?SOUTH_BASE:BASE;
 let preloadedRoom=null;
-function preload(force){if(!IDX||!isHero())return;loadSouth();let r=null;try{r=room;}catch(_){}if(!force&&preloadedRoom===r)return;preloadedRoom=r;loadNorth();{const N=northClip();if(N&&northOn)image(NORTH_BASE+N.file);}for(const a of ['walk','attack'])for(const d of ['w','s','e']){const A=rawClip(a,d);if(A?.file)image(baseFor(d,A)+A.file);}}
+function preload(force){if(!IDX||!(isHero()||window.__STORYWORLD_HERO_DEFENSE_R720__?.has?.(HERO)===true/* R720: 배치된 슬레이어 — 색인이 늦게 와도(그 순간 player 는 조종 영웅) 남·동향 그림을 받는다 */))return;loadSouth();let r=null;try{r=room;}catch(_){}if(!force&&preloadedRoom===r)return;preloadedRoom=r;loadNorth();{const N=northClip();if(N&&northOn)image(NORTH_BASE+N.file);}for(const a of ['walk','attack'])for(const d of ['w','s','e']){const A=rawClip(a,d);if(A?.file)image(baseFor(d,A)+A.file);}}
 const S={x:null,y:null,movedAt:-9,sx:0,sy:0,dist:0,h:'w',walkDir:'w',swing:null,prevAtk:0};
 // R336과 같은 화면 남향 ±30도. W/E 기억 S.h와 전역 R336 sticky 상태는 변경하지 않는다.
 const screenSouth=(x,y)=>Number.isFinite(x)&&Number.isFinite(y)&&y>1e-6&&Math.abs(x)<=y*Math.tan(Math.PI/6);
 const screenNorth=(x,y)=>Number.isFinite(x)&&Number.isFinite(y)&&y< -1e-6&&Math.abs(x)<=-y*Math.tan(Math.PI/6);
 const angleSouth=a=>Number.isFinite(a)&&screenSouth(Math.cos(a)-Math.sin(a),(Math.cos(a)+Math.sin(a))*.5);
 function cancelSouth(reason){if(southCast?.phase==='prepare'){southStats.cancelled++;southStats.lastCancel=reason;}southCast=null;}
-function scope(){return {p:typeof player==='object'?player:null,r:typeof room==='object'?room:null,z:typeof zone==='string'?zone:null,l:typeof layer==='string'?layer:null,t:T()};}
+function scope(){return {p:window.__STORYWORLD_HERO_DEFENSE_R720__?.has?.(HERO)===true?'r720-slayer':/* R720: 생존 배치 중에는 player 자리에 조종 영웅과 배치 영웅 몸이 번갈아 온다 — 슬레이어가 판에 있는 동안은 같은 맥락으로 본다 */typeof player==='object'?player:null,r:typeof room==='object'?room:null,z:typeof zone==='string'?zone:null,l:typeof layer==='string'?layer:null,t:T()};}
 function sameScope(a,b){return a.p===b.p&&a.r===b.r&&a.z===b.z&&a.l===b.l;}
 function syncContext(){const n=scope();if(context&&(!sameScope(context,n)||n.t<context.t)){cancelSouth('context');Object.assign(S,{x:null,y:null,movedAt:-9,sx:0,sy:0,dist:0,walkDir:S.h,swing:null,prevAtk:0});}context=n;}
 function southReady(){return !!southIndex&&['walk','attack'].every(a=>{const c=clip(a,'s');return !!(c&&ready(SOUTH_BASE+c.file));});}
@@ -126,17 +126,19 @@ function choose(rec,st){const best=pickBody(rec,st);if(!best)return;const t=T();
  const atk=+player.attackAnim||0,hurt=+player.hurtAnim||0,busy=player.skillAnim>0||player.dashAnim>0||player.ultimateAnim>0,A=clip('attack'),Wk=clip('walk');
  if(!southCast&&atk>S.prevAtk+1e-6&&A){const d=aimSide(),SA=clip('attack',d)||A,off=contactStart(SA),rest=SA.ms.reduce((x,y)=>x+y,0)-off,cd=Math.max(.2,+player.attackCD||.69);S.swing={t0:t,dir:d,A:SA,off,scale:Math.max(.36,Math.min(1,cd*.95*1000/rest))};}
  S.prevAtk=atk;
- const moving=t-S.movedAt<.15;
- if(busy){stats.skill++;if(player.dashAnim>0){const d=moving?S.h:aimSide();return draw(rec,st,best,'walk',d,3);}const d=aimSide(),BA=auxClip()||clip('attack',d)||A;stats.aux=(stats.aux||0)+1;return draw(rec,st,best,'attack',d,BA?.contact??3,undefined,BA);}
+ const M=window.__STORYWORLD_HERO_MOTION_R895__,moving=t-S.movedAt<.15&&!M?.attackOverTail?.()/* R895 규칙 5 */;
+ const skillCut=!(player.dashAnim>0)&&!!M?.moveCancel?.('skill');/* R895 규칙 2 */
+ if(busy&&!skillCut){stats.skill++;if(player.dashAnim>0){S.swing=null;/* R895 규칙 4: 대시가 공격을 끊고, 실제로 옮긴 쪽을 본다 */const dd=M?.dash?.()?.side,d=dd||(moving?S.h:aimSide());return draw(rec,st,best,'walk',d,3);}const d=aimSide(),BA=auxClip()||clip('attack',d)||A;stats.aux=(stats.aux||0)+1;return draw(rec,st,best,'attack',d,BA?.contact??3,undefined,BA);}
  if(southCast){const C=clip('attack','s'),pre=C.ms.slice(0,C.contact).reduce((a,b)=>a+b,0),tot=C.ms.reduce((a,b)=>a+b,0),el=southCast.phase==='prepare'?Math.min(pre-1,(t-southCast.t0)*1000):pre+(t-southCast.hitAt)*1000;
   if(el<tot)return draw(rec,st,best,'attack','s',frameAt(C.ms,el,false));southCast=null;}
  if(S.swing){const SA=S.swing.A||A,el=(t-S.swing.t0)*1000/S.swing.scale+S.swing.off,tot=SA.ms.reduce((x,y)=>x+y,0);
-  if(el<tot&&!(moving&&t-S.swing.t0>.35))return draw(rec,st,best,'attack',S.swing.dir,frameAt(SA.ms,el,false),undefined,SA);S.swing=null;}
+  /* R895 규칙 1 예외: 슬레이어는 피격 시트가 없고(옛 R143 피격 그림은 칼 없는 다른 화풍) 광전사라 기본 공격 중 피격에 밀리지 않는다(슈퍼아머) */
+  if(el<tot&&!(moving&&(M?M.moveCancel('attack'):t-S.swing.t0>.35)))return draw(rec,st,best,'attack',S.swing.dir,frameAt(SA.ms,el,false),undefined,SA);S.swing=null;}
  if(moving){const d=S.walkDir==='s'&&southReady()&&!otherAction()?'s':S.walkDir==='n'&&northReady()&&!otherAction()?'n':S.h,W=(d==='n'?northClip():clip('walk',d))||Wk,k=want()/(W?.body||180),per=(W?.stride?.px_per_frame||18)*k;return draw(rec,st,best,'walk',d,Math.floor(S.dist/Math.max(1,per)),undefined,W);}
  if(hurt>0)stats.hurt++;
  const v=enemyVec();if(v)side(v[0],v[1]);
  const [Wi,di,fi]=idleClip();return draw(rec,st,best,'walk',di,fi,'idle',Wi||Wk);}
-if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){syncContext();if(southCast&&(!on||!isHero()||!solo()||!(player.hp>0)||otherAction()))cancelSouth('draw-interrupted');const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
+if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const elsewhere=!isHero()&&window.__STORYWORLD_HERO_DEFENSE_R720__?.has?.(HERO)===true;/* R720: 생존 배치로 슬레이어가 다른 몸(조종 영웅 또는 배치 영웅)에 있으면, 다른 영웅을 그리는 차례에는 슬레이어 상태를 건드리지 않는다 */if(!elsewhere){syncContext();if(southCast&&(!on||!isHero()||!solo()||!(player.hp>0)||otherAction()))cancelSouth('draw-interrupted');}const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
  try{if(on&&st>=0&&solo()&&isHero()&&player.hp>0){loadIndex();if(IDX)choose(rec,st);}}catch(e){fail(e);}return r;};}
 loadIndex();
 window.__STORYWORLD_SLAYER_R351__=Object.freeze({revision:REV,active:()=>on&&!!IDX&&isHero()&&solo(),index:()=>IDX,state:()=>({...S,swing:S.swing&&{...S.swing}}),

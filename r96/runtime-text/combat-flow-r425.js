@@ -256,7 +256,7 @@ function hunter(rec,st){huntIndex();if(!HUNT)return;const a=+player.attackAnim||
  for(let i=rec.commands.length-1;i>=st;i--){const c=rec.commands[i];if(c!==best&&c.kind==='image'&&c.owner?.kind==='hero'&&c.image===before)rec.commands.splice(i,1);}
  stats.hunterFrames=(stats.hunterFrames||0)+1;}
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
- try{if(prefs.hunter&&st>=0&&player?.hero==='hunter'&&player.hp>0&&solo())hunter(rec,st);else huntSwing.prev=+player?.attackAnim||0;}catch(e){fail(e);}return r;};}
+ try{if(prefs.hunter&&st>=0&&player?.hero==='hunter'&&player.hp>0&&solo())hunter(rec,st);else if(window.__STORYWORLD_HERO_DEFENSE_R720__?.has?.('hunter')!==true)huntSwing.prev=+player?.attackAnim||0;/* R720: 헌터가 다른 몸(배치 영웅 등)에 있으면 다른 영웅을 그릴 때 헌터 휘두르기 기록을 덮지 않는다 */}catch(e){fail(e);}return r;};}
 // ---- ⑧ 사몽 레이저 십자가 -------------------------------------------------------------------------------------
 //  · 판정은 엔진 그대로: R75 사몽 폭풍 선(0.12초마다 2줄)·R114 추가 선이 몹에 닿는 순간(선 나이 0.18초, R160 이 영웅 색 레이저를 밝히는 순간) hitEnemy 를 부른다.
 //    그 부름(kind hero-samong-storm-r75 / -r114)을 가장 바깥에서 받아 그 몹 몸 가운데에 영웅 색(R102 팔레트 — R160 레이저와 같은 색) 정십자가를 세운다.

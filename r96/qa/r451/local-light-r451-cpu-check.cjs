@@ -110,7 +110,7 @@ ok('corpse glow (non-normal blending) stays unlit; the background-layer pass (ma
    function enterRegion(){return 1;}`,g);
   vm.runInContext(d,g);const M=g.__STORYWORLD_MOB_DEATH_R462__;
   vm.runInContext('drawEnemy',g)({id:'m1',name:'망각의 거미 1',hp:10,drawn:'assets/r380/mobs/spider-own.webp'});vm.runInContext('drawBurnDeath3',g)({type:'enemyBurnDeath',sourceId:'m1',x:3,y:4,age:.05,life:.72});
-  vm.runInContext('drawEnemy',g)({id:'m2',name:'유리 망령',hp:5,drawn:'assets/r380/mobs/glass.webp'});vm.runInContext('drawBurnDeath3',g)({type:'enemyBurnDeath',sourceId:'m2',x:7,y:2,age:.5,life:.72});
+  /* R777: 사체 불씨는 불에 탄 죽음에만 → 불 몹(이름 '불길')으로 불씨 계약을 잰다 */vm.runInContext('drawEnemy',g)({id:'m2',name:'불길 속의 유리 망령',hp:5,drawn:'assets/r380/mobs/glass.webp'});vm.runInContext('drawBurnDeath3',g)({type:'enemyBurnDeath',sourceId:'m2',x:7,y:2,age:.5,life:.72});
   vm.runInContext('time=3',g);calls.length=0;vm.runInContext('drawObjective',g)();return {M,calls:calls.slice()};};
  const a=run(true),b=run(false),ca=a.calls.filter(c=>c[0]!=='objective'),cb=b.calls.filter(c=>c[0]!=='objective');
  ok('R462 contract: on the 3D recorder (ctx.scope) every corpse draw (pool, body, ember) is owned by its own floor spot r462:corpse:<n> (scene, x·y)',a.M.corpseOwner==='r462:corpse:'&&ca.length>=5&&

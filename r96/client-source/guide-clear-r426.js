@@ -10,7 +10,7 @@
 //  끄기: localStorage storyworld.r426.clear = {"on":false}. 손으로 움직이면 엔진이 길잡이를 끄므로 이 오버레이도 쉰다.
 (()=>{'use strict';
 if(window.__STORYWORLD_GUIDE_CLEAR_R426__)return;
-const REV='R426-clear-1',KEY='storyworld.r426.clear',SIGHT=10,CHASE=16,STALL=8,REST=15,EVERY=.25;
+const REV='R426-clear-3',KEY='storyworld.r426.clear',SIGHT=10,CHASE=16,STALL=8,REST=15,EVERY=.25,CALM=2.5;
 const stats={picks:0,kept:0,gaveUp:0,passes:0,yields:0,menuToggles:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const G=(f,d)=>{try{const v=f();return v===undefined?d:v;}catch(_){return d;}};
@@ -18,20 +18,35 @@ let prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if
 function set(p){prefs={...prefs,...(p||{})};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return {...prefs};}
 const visible=e=>!!e&&e.hp>0&&!e.deadRecorded&&e.spawnState!=='hidden'&&e.spawnState!=='dead'&&!e.ally&&!e.friendly;
 // 순수 판단(QA 가 CPU 에서 부른다). rows=후보 적, me=영웅 위치, o={focusId,banned(Set),los(e),engaged(e),dist(a,b)}
-function pick(rows,me,o={}){const dist=o.dist||((a,b)=>Math.hypot(a.x-b.x,a.y-b.y)),banned=o.banned||new Set();
- const ok=(rows||[]).filter(e=>visible(e)&&!banned.has(e.id));
+function pick(rows,me,o={}){const dist=o.dist||((a,b)=>Math.hypot(a.x-b.x,a.y-b.y)),banned=o.banned||new Set(),max=o.max||Infinity;
+ const ok=(rows||[]).filter(e=>visible(e)&&!banned.has(e.id)&&dist(me,e)<=max);
  const kept=o.focusId!=null&&ok.find(e=>e.id===o.focusId);if(kept)return{enemy:kept,why:'kept'};
  let best=null,bd=Infinity,why=null;
  for(const e of ok){const d=dist(me,e);let w=null;
   if(d<=SIGHT&&(o.los?o.los(e):true))w='sight';else if(d<=CHASE&&o.engaged&&o.engaged(e))w='engaged';
   if(w&&d<bd){best=e;bd=d;why=w;}}
  return best?{enemy:best,why}:null;}
+// R801(사몽·사몽역행 헤드리스 실플레이 순회): 구역 안에서 몹이 영웅 둘레 8~14칸에 계속 생겨, 처치 수를 채운 뒤 단서만 남은 구역·탐색·미로·문이 열린 구역에서도
+//  길잡이가 10칸 시야의 몹만 쫓느라 단서·문에 가지 못했다(RA-3·RB-2 처치 66/66 단서 0, P-3·P-4·S01-3 문 열린 채 30초+).
+//  그런 '목표만 남은' 순간에는 붙어 싸우는 2.5칸(CALM) 안의 적만 먼저 처리하고 나머지는 길잡이 이동에 맡긴다.
+//  처치 수가 남은 구역·광장(B)·코어(D)·호위(G)·물결(H)·탑(F)·버티기·이끄는 적이 산 구역·사몽 밖은 예전 그대로.
+function calm(){const x=G(()=>room?.samongR103,null);if(!x||!x.zone)return false;if(x.portal)return true;
+ const z=G(()=>window.__STORYWORLD_SAMONG_ZONES_R115__?.zone?.(x.zone),null);if(!z)return false;
+ if(z.kind==='maze'||z.kind==='explore')return true;
+ // R803: 처치 수를 채운 탑(F)·이끄는 적 구역도 CALM — 남은 목표인 조각 탑·이끄는 적은 goal() 로 거리와 상관없이 고른다
+ //  (S-03~S-07 순회: F 구역이 '조각 3/6'·이끄는 적 구역(S06-18, 적 지휘 기체 40칸 밖)이 '단서 1/2'에서 몇 분씩 멈췄다).
+ if(z.kind!=='combat'||(z.mode&&z.mode!=='F'))return false;const g=z.goal||{};if(g.hold||!g.kills)return false;
+ return G(()=>window.__STORYWORLD_SAMONG_R103__?.state?.()?.kills,0)>=g.kills;}
+function goal(e){const x=G(()=>room?.samongR103,null);if(!e||!x||!x.zone||x.portal)return false;if(x.leadId&&e.id===x.leadId)return true;
+ if(!e.r170Tower)return false;const z=G(()=>window.__STORYWORLD_SAMONG_ZONES_R115__?.zone?.(x.zone),null);return z?.mode==='F';}
 let setAt=-1e9,focus=null,focusSince=0,bestD=Infinity,bestHp=Infinity,nextAt=0,lastRoom=null;const banned=new Map();
 const now=()=>G(()=>time,0);
 function bannedSet(t){for(const [id,until] of banned)if(until<=t)banned.delete(id);return new Set(banned.keys());}
 function choose(){const t=now();if(G(()=>room,null)!==lastRoom){lastRoom=G(()=>room,null);focus=null;banned.clear();}
  const rows=G(()=>liveEnemies(),[])||[],chase=window.__STORYWORLD_AGGRO_CHASE_R390__;
- const r=pick(rows,player,{focusId:focus?.id,banned:bannedSet(t),dist:(a,b)=>distance(a,b),los:e=>G(()=>clearLine(player,e),false),engaged:e=>G(()=>chase?.engaged?.(e)===true,false)});
+ const max=calm()?CALM:Infinity;stats.calm=max<Infinity;
+ const bs=bannedSet(t);let r=pick(rows,player,{max,focusId:focus?.id,banned:bs,dist:(a,b)=>distance(a,b),los:e=>G(()=>clearLine(player,e),false),engaged:e=>G(()=>chase?.engaged?.(e)===true,false)});
+ if(!r&&stats.calm){let bd=Infinity;for(const e of rows)if(visible(e)&&!bs.has(e.id)&&goal(e)){const d=distance(player,e);if(d<bd){bd=d;r={enemy:e,why:'goal'};}}if(r)stats.goals=(stats.goals||0)+1;}
  if(!r){focus=null;return null;}
  const e=r.enemy,d=distance(player,e);
  if(focus!==e){focus=e;focusSince=t;bestD=d;bestHp=e.hp;stats.picks++;}
@@ -43,7 +58,7 @@ try{if(typeof guideStep==='function'){const base=guideStep;guideStep=function(dt
    const t=now();
    // R115 반자동 비켜서기(예고 장판 피하기·원거리 물러서기)는 command 를 비우고 한 걸음 길만 둔다 — 그 걸음은 끝까지 걷게 둔다.
    if(focus&&command!==focus.id&&Array.isArray(route)&&route.length===1&&t-setAt<1.2){stats.yields++;return;}
-   if(focus&&t<nextAt&&visible(focus)&&G(()=>liveEnemies().includes(focus),false)){command=focus.id;target=focus.id;setAt=t;return;}
+   if(focus&&t<nextAt&&visible(focus)&&G(()=>liveEnemies().includes(focus),false)&&(!stats.calm||distance(player,focus)<=CALM||goal(focus))){command=focus.id;target=focus.id;setAt=t;return;}
    nextAt=t+EVERY;const e=choose();if(e){command=e.id;target=e.id;setAt=t;return;}stats.passes++;}}catch(err){fail(err);}
   return base.call(this,dt,...a);};}}catch(e){fail(e);}
 // ── 기본 메뉴에 '영화 길잡이 모드' 단추(사용자 2026-11-08 "기본메뉴에 영화길잡이모드ui도 나오게") ──
@@ -57,6 +72,6 @@ function menuButton(){try{const C=cine();if(!C||typeof document==='undefined')re
  const g=document.getElementById('menuGuide');if(g&&g.nextElementSibling!==b)g.insertAdjacentElement('afterend',b);else if(!g&&!b.isConnected)panel.querySelector('.actions')?.appendChild(b);
  return b;}catch(e){fail(e);return null;}}
 try{if(typeof showMenu==='function'){const base=showMenu;showMenu=function(...a){const r=base.apply(this,a);menuButton();try{setTimeout(menuButton,80);setTimeout(menuButton,400);}catch(_){}return r;};}}catch(e){fail(e);}
-window.__STORYWORLD_GUIDE_CLEAR_R426__=Object.freeze({menuButton,revision:REV,SIGHT,CHASE,STALL,REST,set,pick,visible,
+window.__STORYWORLD_GUIDE_CLEAR_R426__=Object.freeze({menuButton,revision:REV,SIGHT,CHASE,STALL,REST,CALM,calm,goal,set,pick,visible,
  inspect:()=>({revision:REV,prefs:{...prefs},focus:focus?.id??null,banned:[...banned.keys()],stats:{...stats},lastError})});
 })();
