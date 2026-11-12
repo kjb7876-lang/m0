@@ -69,10 +69,11 @@ function scan(from){const p=P(),s=p?.storyWER?.ready;if(!s)return;const t=T();
   if(slot==='w')queue.push({at:t+RULE.execDelay,kind:'exec'});
   // 대시는 다른 층이 몇 틱에 걸쳐 미끄러지게 할 수 있다 → 출발점만 기억하고 0.22초 뒤 실제 이동 방향으로 끈다.
   else{const o=from||prev;if(o)queue.push({at:t+RULE.pullDelay,kind:'pull',from:{x:o.x,y:o.y}});}}}
+const asHeroR720=(id,fn)=>{const D=window.__STORYWORLD_HERO_DEFENSE_R720__;return D&&typeof D.asHero==='function'?D.asHero(id,fn):fn();};/* R720-4: 다음 틱에 이어지는 기술을 그 영웅 몸(생존 배치 영웅이면 그 몸)으로 돌린다 */
 if(typeof tick==='function'){const base=tick;tick=function(...a){const p=P();
  try{scan(null);}catch(err){fail(err);}pre=p?{x:p.x,y:p.y}:null;const r=base.apply(this,a);
- try{scan(pre);const q=P();prev=q?{x:q.x,y:q.y}:null;if(queue.length){const t=T();for(let i=queue.length-1;i>=0;i--){const j=queue[i];if(t<j.at)continue;queue.splice(i,1);
-   if(!on||!isHero())continue;if(j.kind==='exec')execute(pickExec());else if(j.kind==='pull'){const q2=P(),d=q2?{x:q2.x-j.from.x,y:q2.y-j.from.y}:null;if(d&&Math.hypot(d.x,d.y)>.5)pull(d);}}}}catch(err){fail(err);}return r;};}
+ try{scan(pre);const q=P();prev=q?{x:q.x,y:q.y}:null;if(queue.length)asHeroR720('slayer',()=>{const t=T();for(let i=queue.length-1;i>=0;i--){const j=queue[i];if(t<j.at)continue;queue.splice(i,1);
+   if(!on||!isHero())continue;if(j.kind==='exec')execute(pickExec());else if(j.kind==='pull'){const q2=P(),d=q2?{x:q2.x-j.from.x,y:q2.y-j.from.y}:null;if(d&&Math.hypot(d.x,d.y)>.5)pull(d);}}});}catch(err){fail(err);}return r;};}
 // ---- 그리기: Dots 시트 먼저, 없으면 임시 코드 그림 ----
 // 사슬 시트는 무는 칸(6)부터 감겨 오는 모습만 튼다.
 const S585=()=>window.__STORYWORLD_SLAYER_SHEETS_R585__;

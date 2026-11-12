@@ -24,7 +24,7 @@ const CW=256,CH=320,PX=128,PY=300,FPS=8;
 function baseName(n){return String(n||'').replace(/^중간보스\s*·\s*/,'').replace(/\s*·\s*짙은 형상$/,'').replace(/\s*(후속 증원|증원|추격대)$/,'').replace(/\s+\d+$/,'').trim();}
 const cache=new WeakMap();
 const dream=e=>!!(e&&(e.samongR103||(typeof layer!=='undefined'&&layer==='DREAM')));
-function sheetOf(e){if(!e)return null;let v=cache.get(e);if(v&&v.n===e.name&&v.k===e.r248Key)return v.s;const b=baseName(e.name);
+function sheetOf(e){if(!e)return null;if(e.boss&&e.nativeId&&window.__STORYWORLD_BOSS_KEYPOSES_R104__?.framesFor?.(e.nativeId))return null;/* R860: R104 열쇠 자세가 있는 본보스는 이름이 같은 몹 시트로 가로채지 않는다(교만의 사이보그 교주 ← m062) */let v=cache.get(e);if(v&&v.n===e.name&&v.k===e.r248Key)return v.s;const b=baseName(e.name);
  const id=(e.r248Key&&DATA.byName[e.r248Key])||(dream(e)&&DATA.byName['사몽:'+b])||DATA.byName[b]||null,s=id?DATA.sheets[id]||null:null;cache.set(e,{n:e.name,k:e.r248Key,s:s?{id,...s,path:s.path||DATA.dir+s.file}:null});return cache.get(e).s;}
 // 사몽에 본편 몹 이름이 그대로 나온 몹(기증 몹 이름이 남은 것): 그 구역(없으면 그 장)의 사몽 몹 이름으로 바꾸고, 그림은 사몽 전용 새 시트로.
 const STORY=new Set(DATA.storyNames||[]);
@@ -59,7 +59,7 @@ function drawOwn(e,s,im){const dead=e.hp<=0||e.spawnState==='dead',age=T()-(Numb
  ctx.save();try{ctx.globalAlpha*=dead?Math.max(0,1-age/.8):1;ctx.filter=e.flash>0?'brightness(1.8) saturate(.5)':'saturate(.78) brightness(.86) contrast(1.08)';/* 칠한 배경과 덜 튀게 */
   ctx.translate(q.x,q.y-lift);ctx.scale(m.face*k,k);ctx.drawImage(im,sx0,sy0,CW,CH,-PX,-PY,CW,CH);}finally{ctx.restore();}stats.draws++;}
 if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){let s=null,im=null;
- try{if(prefs.on&&solo()&&e&&!e.r170Tower&&!e.r251Circle&&e.visible!==false&&e.disabled!==true&&!['hidden','inactive','disabled','despawned'].includes(e.spawnState)){/* R346: 엔진 drawEnemy 처럼 아직 등장하지 않은 몹(2차 웨이브 등)은 그리지 않는다 — 깨어나기 전부터 서서 좌우만 뒤집히던 것 */s=sheetOf(e);if(s&&(window.__STORYWORLD_MOB_DOTS_R374__?.assign?.(e)||window.__STORYWORLD_MOB_DOTS_R375__?.assign?.(e)||window.__STORYWORLD_APPROVED_MOBS_R380__?.assign?.(e)))s=null;/* R374: Dots 승인 그림을 받은 액터는 엔진 frameFor 사슬로 그린다 */if(s){im=image(s.path);if(!im)stats.waits++;}}}catch(err){fail(err);im=null;}
+ try{if(prefs.on&&solo()&&e&&!e.r170Tower&&!e.r251Circle&&e.visible!==false&&e.disabled!==true&&!['hidden','inactive','disabled','despawned'].includes(e.spawnState)){/* R346: 엔진 drawEnemy 처럼 아직 등장하지 않은 몹(2차 웨이브 등)은 그리지 않는다 — 깨어나기 전부터 서서 좌우만 뒤집히던 것 */s=sheetOf(e);if(s&&(window.__STORYWORLD_MOB_DOTS_R374__?.assign?.(e)||window.__STORYWORLD_MOB_DOTS_R375__?.assign?.(e)||window.__STORYWORLD_APPROVED_MOBS_R380__?.assign?.(e)))s=null;if(s&&window.__STORYWORLD_VILLAGERS_R763__?.kindFor?.(e))s=null;/* R763: 불면귀에 잠식된 주민도 frameFor 사슬로(공격 효과는 그대로) *//* R374: Dots 승인 그림을 받은 액터는 엔진 frameFor 사슬로 그린다 */if(s){im=image(s.path);if(!im)stats.waits++;}}}catch(err){fail(err);im=null;}
  if(!im)return base.apply(this,[e,...a]);
  const r=withoutBody(e,()=>base.apply(this,[e,...a]));
  try{const f=()=>drawOwn(e,s,im);if(typeof ctx.scope==='function')ctx.scope({id:'r248:mob:'+e.id,kind:'enemy',x:e.x,y:e.y},f);else f();}catch(err){fail(err);}return r;};}

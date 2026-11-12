@@ -28,9 +28,10 @@ function world(){
  sb.walk=null;sb.tick=function(dt){sb.time+=dt;if(sb.walk)sb.walk(dt);if(sb.danceOn){const e=sb.room.enemies[0];sb.player.x=e.x-.6;sb.player.y=e.y;}for(const b of sb.projectiles){b.age=(b.age||0)+dt;b.x+=b.vx*dt;b.y+=b.vy*dt;}};
  sb.drawnHero=[];sb.drawnEnemy=[];
  sb.draw=function(){sb.drawnHero.push({x:sb.player.x,y:sb.player.y});};
+ sb.fxs=[];sb.fx=function(type,x,y,o){sb.fxs.push({type,x,y,o});return null;};sb.heroArt={hwando:{attack:{right:'atk/r.webp',left:'atk/l.webp',front:'atk/f.webp'}},seoha:{attack:{right:'atk/sr.webp'}},michaela:{attack:{right:'atk/mr.webp'}}};
  sb.drawEnemy=e=>sb.drawnEnemy.push({id:e.id,dir:e.direction});
- sb.drawHero=()=>sb.drawnHero.push({dir:sb.player.direction});
- sb.fx=()=>{};sb.hitEnemy=(e,v)=>{e.hp-=v;return true;};sb.drawEffect=()=>{};sb.drawExits=()=>{};
+ sb.drawHero=()=>sb.drawnHero.push({dir:sb.player.direction,cx:sb.player.x,cy:sb.player.y,a:sb.ctx?sb.ctx.globalAlpha:1});
+ sb.hitEnemy=(e,v)=>{e.hp-=v;return true;};sb.drawEffect=()=>{};sb.drawExits=()=>{};
  class DrawCommands{constructor(){this.commands=[];this.dpr=1;}point(x,y){return[x,y];}scope(owner,fn){return fn();}}
  sb.StoryPhase1={DrawCommands};
  sb.window=sb;
@@ -53,7 +54,17 @@ const foe=(id,x,y,o={})=>Object.assign({id,x,y,hp:50,maxHp:50,damage:5,spawnStat
  check('ranged hero drawn at its own spot during 실검무 (no visual teleport)',drawn.every(h=>h.x===10&&h.y===10),JSON.stringify(drawn));
  sb.danceOn=false;sb.tick(.05);check('ranged hero returned to its spot when 실검무 ends',sb.player.x===10&&sb.player.y===10,[sb.player.x,sb.player.y]);
  const sb2=world();Object.assign(sb2.player,{hero:'hwando',x:10,y:10});sb2.room.enemies=[foe('e',14,12)];sb2.danceOn=true;sb2.tick(.05);sb2.draw();
- check('melee hero 실검무 unchanged',sb2.drawnHero.at(-1).x===13.4);}
+ // R767(사용자 2026-11-11 "영웅을 적에게 옮기는 스킬은 순간적으로 분신이 적에게 간 다음 스킬 적중시키고 분신은 사라지게"): 근접 영웅도 제자리에 그리고 끝나면 제자리,
+ //  실제 베는 자리에는 짧은 분신(ghost)만 — 옛 '근접 실검무 그대로'(13.4 로 옮겨 그림) 기대를 바꿈
+ check('R767 melee hero (hwando) drawn at its own spot during 실검무',sb2.drawnHero.at(-1).x===10&&sb2.drawnHero.at(-1).y===10,JSON.stringify(sb2.drawnHero.at(-1)));
+ const CL=sb2.__STORYWORLD_CLONE_R767__,g=CL?CL.list():[];check('R767 a short clone (life ≤ .3 s, translucent) is queued where the strike really is',g.length>=1&&g.every(c=>Math.abs(c.x-13.4)<1e-9&&c.y===12&&c.life<=.3&&c.alpha>0&&c.alpha<1),JSON.stringify(g));
+ // 분신 그리기: 진짜 drawHero 를 분신 자리에서 반투명으로 한 번 더(영웅 자리·상태는 그대로 돌려놓음)
+ {sb2.ctx={globalAlpha:1,_s:[],save(){this._s.push(this.globalAlpha);},restore(){this.globalAlpha=this._s.pop();}};const P=sb2.player,kx=P.x,ky=P.y,n0=sb2.drawnHero.length;sb2.drawHero();const d=sb2.drawnHero.slice(n0),cl=d.slice(1).filter(c=>Math.abs(c.cx-13.4)<1e-9);/* d[0] = 진짜 영웅 */
+  check('R767 clone is drawn through drawHero at the clone spot with alpha < 1, hero restored after',cl.length>=1&&cl.every(c=>c.a<1&&c.a>0)&&P.x===kx&&P.y===ky&&sb2.ctx.globalAlpha===1,JSON.stringify(d));}
+ for(let i=0;i<4;i++)sb2.tick(.05);check('R767 clones are capped (≤ 6 live)',CL.live()<=6,CL.live());
+ sb2.danceOn=false;sb2.tick(.05);check('R767 melee hero back on its own spot when 실검무 ends (no teleport onto the enemy)',sb2.player.x===10&&sb2.player.y===10,[sb2.player.x,sb2.player.y]);}
+ {const sb3=world();sb3.__STORYWORLD_DANCE_FREE_R706__={on:()=>true};Object.assign(sb3.player,{hero:'hwando',x:10,y:10});sb3.room.enemies=[foe('e',14,12)];sb3.danceOn=true;sb3.tick(.05);
+  const R=sb3.__STORYWORLD_PLAY_R113__,st=R.stats(),d=R.dance();check('R767/R706: with dance-free R706 on, play-r113 takes no 실검무 anchor (R706 owns the body spot)',!d.anchor&&!(st.danceFrames>0),JSON.stringify({d,f:st.danceFrames}));}
 
 // ② facing
 {const sb=world();sb.room.enemies=[foe('e',8,10)];const e=sb.room.enemies[0];const dirs=[];

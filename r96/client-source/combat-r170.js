@@ -47,13 +47,16 @@ function zoneMode(){try{const z=window.__STORYWORLD_SAMONG_ZONES_R115__?.zone?.(
 //  → 그 그림이 뽑히던 지역(8곳)의 탑은 피의 제단으로 선다(실내 지역에 무너진 돌기둥을 세우지 않으려고 목록의 다음 석상으로 넘기지 않는다). 다른 지역은 그대로.
 //  탑 수·자리·체력·공격은 그대로이고, 이미 서 있던 탑은 다음 틱에 그림만 바뀐다.
 const RETIRED=/(^|\/)blank_memorial\.webp$/,ALTAR='assets/props/v290/blood_altar.webp';
-function artOf(objects){const list=(objects||[]).map(o=>typeof o==='string'?{path:o}:o).filter(o=>o&&STATUE.test(String(o.path||'')));if(!list.length)return null;
+const canonArt=path=>{try{const P=window.__STORYWORLD_PROPS_R272__;return !P?.fitPath||typeof room==='undefined'||P.fitPath(path,room)===true;}catch(_){return true;}};// R830: 그 지역에 못 서는 그림(실내의 피분수 등)은 탑 그림으로도 안 쓴다
+function artOf(objects){const list=(objects||[]).map(o=>typeof o==='string'?{path:o}:o).filter(o=>o&&STATUE.test(String(o.path||''))&&canonArt(o.path));if(!list.length)return null;
  const o=list[0];if(RETIRED.test(String(o.path||'')))return{path:ALTAR,name:null,h:150};
  return{path:o.path,name:String(o.name||o.label||o.title||'').trim()||null,h:Math.max(150,(Number(o.height)||100)*1.7)};}
 function artFor(){if(samongRoom())return{path:SCULPT,name:'세뇌당한 기억의 조각',h:170};
  try{return artOf(regionById?.[room.id]?.regionObjects6);}catch(_){return null;}}
 const SPECIAL=new Set(['ep1a08']);// 특수 병동(본편 미로 진행·집결 규칙)은 손대지 않는다
-function wanted(){if(!live()||!solo()||SPECIAL.has(room.id))return 0;if(samongRoom()){const m=zoneMode();return m==='F'?6:m==='B'||m==='D'||m==='G'?2:m==='H'||m==='C'||m==='combat'?1:0;}// R173: F(조각 깨기)는 6개
+// R830(사용자 2026-11-12 "피의 육망성 조형물도 에피소드 1a 약물중독쪽에만"): 본편의 피의 육망성 조형물은 1부 지역에만 선다(규칙은 props-r272 towerOk, 사몽 구역의 기억 조각은 그대로).
+const canonTower=()=>{try{const P=window.__STORYWORLD_PROPS_R272__;return !P?.towerOk||P.towerOk(room)!==false;}catch(_){return true;}};
+function wanted(){if(!live()||!solo()||SPECIAL.has(room.id))return 0;if(!canonTower())return 0;if(samongRoom()){const m=zoneMode();return m==='F'?6:m==='B'||m==='D'||m==='G'?2:m==='H'||m==='C'||m==='combat'?1:0;}// R173: F(조각 깨기)는 6개
  try{if(typeof safeRegion==='function'&&safeRegion())return 0;}catch(_){}return (room.enemies||[]).filter(e=>e.hp>0&&!major(e)).length>=20?1:0;}
 const okCell=(x,y)=>{try{return typeof blocked!=='function'||[[0,0],[1,0],[-1,0],[0,1],[0,-1],[1,1],[-1,-1],[1,-1],[-1,1]].every(([a,b])=>!blocked(x+a*.8,y+b*.8,.3,room));}catch(_){return true;}};
 function spotFor(n,taken){const L=room.exploration;if(!L?.floorCells?.length)return null;const path=window.__STORYWORLD_PLAY_R169__?.pathCells?.(room)||null,entry=L.entry||room.r72Entry||player;
@@ -63,10 +66,13 @@ function spotFor(n,taken){const L=room.exploration;if(!L?.floorCells?.length)ret
 function towers(){return (room?.enemies||[]).filter(e=>e.r170Tower);}
 let placedKey='',storyAt=0,spotKey='',spot0=null;
 function nearSpot(){const key=String(room.id);if(spotKey!==key){spotKey=key;spot0=wanted()?spotFor(0,[]):null;}return !!spot0&&Math.hypot(spot0.x-player.x,spot0.y-player.y)<10;}
+// R795: 본뜰 잡몹을 글자로 떠 둘 때 방 객체·자기 자신을 가리키는 필드는 뺀다 — R390 이 싸움에 든 몹에 e.r390Engaged = 방 객체를 적어 두는데,
+//  그대로 JSON.stringify 하면 순환 참조로 터져 조형물이 서지 않았고(방은 '이미 세움'으로 적혀 다시 시도도 안 함) 방 전체를 떠 넣을 뻔했다.
+function snapOf(e){const stack=[],R=typeof room==='object'?room:null;return JSON.stringify(e,function(k,v){if(k==='r390Engaged')return undefined;if(v&&typeof v==='object'){while(stack.length&&stack[stack.length-1]!==this)stack.pop();if(v===R||stack.includes(v))return undefined;stack.push(v);}return v;});}
 function place(){const want=prefs.towers?wanted():0,key=String(room.id)+':'+String(room.samongR103?.zone||''),x=room.samongR103;if(!want){placedKey=key;if(x&&x.r173PlacedKey!==key){x.r173PlacedKey=key;x.r173Need=0;}return;}if(placedKey===key)return;// 한 구역에 한 번만(깨진 탑이 다시 서지 않게)
  if(x&&x.r173PlacedKey===key){placedKey=key;return;}// 같은 방 객체로 다시 들어와도 깨진 탑은 다시 서지 않는다
  const art=artFor();if(!art)return;const donor=(room.enemies||[]).find(e=>e.hp>0&&!major(e)&&!e.r170Tower);if(!donor)return;placedKey=key;
- let atk=40;try{atk=Math.max(1,Number(attackPower())||40);if(player.samong>0)atk/=7;else if(player.ego>0)atk/=1.55*(1+.07*Math.max(0,(player.egoStackR169||1)-1));}catch(_){}/* 잠깐 버프(사몽·EGO) 뺀 값 */const snap=JSON.stringify(donor),taken=[];
+ let atk=40;try{atk=Math.max(1,Number(attackPower())||40);if(player.samong>0)atk/=7;else if(player.ego>0)atk/=1.55*(1+.07*Math.max(0,(player.egoStackR169||1)-1));}catch(_){}/* 잠깐 버프(사몽·EGO) 뺀 값 */const snap=snapOf(donor),taken=[];
  for(let n=towers().length;n<want;n++){const at=spotFor(n,taken);if(!at)break;taken.push(at);let e;try{e=JSON.parse(snap);}catch(_){break;}
   Object.assign(e,{id:'r170:tower:'+room.id+':'+n,x:at.x,y:at.y,homeX:at.x,homeY:at.y,nav:[],navAt:0,attack:null,rangedWindup:0,deadRecorded:false,spawnState:'active',
    r170Tower:{art:art.path,h:art.h,next:T()+3,casts:0,summoned:0,snap},r75Tower:true,r61PreserveHealth:true,speed:0,ai:'melee',samongElite:false,samongSurvival:false,r162Lane:false,samongSubR170:false,
@@ -101,7 +107,7 @@ function drawHex(h){const q=project(h.x,h.y),w=h.radius*Math.SQRT2*Math.abs(proj
 function drawLight(c){const q=project(c.x,c.y),hh=H(),S=SPR(),T0=T(),hit=c.hp<c.max&&(c.lastHp??c.hp)>c.hp;c.lastHp=c.hp;const HOLY={a:[20,90,90],b:[200,255,240]},pulse=1+.06*Math.sin(T0*4);
  try{window.__STORYWORLD_PIXELFX_R163__?.play('core-orb-teal',c.x,c.y,{loop:true,key:'r173-light',k:.9,z:hh*.35,until:T0+.4});}catch(_){}
  ctx.save();try{if(S){S.draw('ring',HOLY,q.x,q.y,hh*1.8*pulse,hh*.9*pulse,{alpha:.7,overHero:true});S.draw('glow',hit?{a:[120,10,20],b:[255,90,90]}:HOLY,q.x,q.y-hh*.6,hh*1.8,hh*1.8,{alpha:.7,overHero:true});}
-  const W=hh*1.5,y=q.y-hh*1.45,r=Math.max(0,Math.min(1,c.hp/c.max));ctx.fillStyle='rgba(4,6,8,.85)';ctx.fillRect(q.x-W/2-1,y-1,W+2,7);ctx.fillStyle=r<.3?'#d0605a':'#7fd8cc';ctx.fillRect(q.x-W/2,y,W*r,5);}finally{ctx.restore();}}
+  const W=hh*1.5,y=q.y+Math.max(8,hh*.14),r=Math.max(0,Math.min(1,c.hp/c.max));ctx.fillStyle='rgba(4,6,8,.85)';ctx.fillRect(q.x-W/2-1,y-1,W+2,7);ctx.fillStyle=r<.3?'#d0605a':'#7fd8cc';ctx.fillRect(q.x-W/2,y,W*r,5);}finally{ctx.restore();}}
 // R173(사용자 "정화의 코어에 J의 인장이 박혀 있고(작은 십자가 문양)"): 코어 빛구슬 한가운데에 작은 금빛 십자가(R106 칠한 cross). 빛구슬(pixelfx) 앞에 그려지도록 조금 앞자리 scope 로.
 const SEAL_J={a:[60,36,8],b:[236,196,96]};// 흰 빛구슬 위에서도 보이게 짙은 금
 function sealAt(x,y,lift){const S=SPR();if(!S)return;const q=project(x,y),hh=H(),f=()=>{const p=1+.05*Math.sin(T()*2.4);S.draw('cross',SEAL_J,q.x,q.y-hh*lift,hh*.5*p,hh*.64*p,{alpha:1,overHero:true,blend:'source-over'});S.draw('cross',{a:[200,160,70],b:[255,246,210]},q.x,q.y-hh*lift,hh*.3*p,hh*.4*p,{alpha:.8,overHero:true});};
@@ -119,7 +125,7 @@ function drawTower(e){const t=e.r170Tower,row=typeof readyImage==='function'?rea
  ctx.save();try{ctx.globalAlpha*=dead?Math.max(0,1-age):1;if(S&&charge>0)S.draw('glow',P.main,q.x,q.y-hh*.1,hh*1.1,hh*.45,{alpha:.7*charge});/* R596: 늘 깔던 발밑 타원 빛무리(.25)는 어두운 탑 색이라 화면에서 '둥근 그림자 얼룩'으로 읽혔다 → 시전 직전(1.3초)에만 차오르는 예고 빛으로 */
   if(row){if(typeof sprite==='function'){towerShadow(e,t.art,q.x,q.y,hh);sprite(t.art,q.x,q.y,hh,{filter:e.flash>0?'brightness(1.7)':'saturate(.9) contrast(1.05)'});}}
   if(S&&charge>0)S.draw('flare',P.main,q.x,q.y-hh*.75,hh*.5*charge,hh*.5*charge,{angle:T(),alpha:charge*.8,overHero:true});
-  const W=hh*.55,y=q.y-hh-8,r=Math.max(0,Math.min(1,e.hp/Math.max(1,e.maxHp)));ctx.fillStyle='rgba(4,4,6,.85)';ctx.fillRect(q.x-W/2-1,y-1,W+2,6);ctx.fillStyle='#b8323a';ctx.fillRect(q.x-W/2,y,W*r,4);}finally{ctx.restore();}stats.towerDraws++;}
+  const W=hh*.55,y=q.y+Math.max(6,hh*.05),r=Math.max(0,Math.min(1,e.hp/Math.max(1,e.maxHp)));ctx.fillStyle='rgba(4,4,6,.85)';ctx.fillRect(q.x-W/2-1,y-1,W+2,6);ctx.fillStyle='#b8323a';ctx.fillRect(q.x-W/2,y,W*r,4);}finally{ctx.restore();}stats.towerDraws++;}
 
 // ---- ④ 본편 몹을 맵 곳곳에(사용자 "스토리모드 몹 분포 맵 곳곳에, 한쪽 길목에 몰지 말고") ----------------------------------
 //  맵에 들어설 때 아직 싸우지 않은 일반 몹을 셋까지의 무리(첫 몹에서 2.5칸 안)로 묶고, 바닥 칸에서 '가장 먼 점 고르기'로 고른 자리들(입구에서 8칸 넘게,

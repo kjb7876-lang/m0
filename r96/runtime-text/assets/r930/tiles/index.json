@@ -1,0 +1,27 @@
+{
+ "schema": "storyworld.r930.tiles/v1",
+ "temporary": true,
+ "dots": "CX-0081KC",
+ "looks": {
+  "kc-deck": {
+   "file": "kc-deck.webp",
+   "bytes": 67398,
+   "sha256": "db7d142c5af1f6bd448ef49800f757eba9d5bf7bb9abcd6106092737280ad0fc",
+   "size": [
+    2048,
+    1024
+   ],
+   "made": "code (scripts/r930-kairo-tiles.py), temporary until Dots CX-0081KC"
+  },
+  "kc-forge": {
+   "file": "kc-forge.webp",
+   "bytes": 63202,
+   "sha256": "24d7a44d7f21f771a102e3a79629b82f0e18857bec3f283031c03bff248cc0b6",
+   "size": [
+    2048,
+    1024
+   ],
+   "made": "code (scripts/r930-kairo-tiles.py), temporary until Dots CX-0081KC"
+  }
+ }
+}

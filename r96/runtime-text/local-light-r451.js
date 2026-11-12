@@ -37,7 +37,21 @@ const AMB_IN=Object.freeze({clinical:{k:.7,c:[.93,.97,1]},neural:{k:.68,c:[.9,.9
 const AMB_CAVE=Object.freeze({k:.6,c:[.88,.92,1]});
 // 빛 곱의 어깨: .92 를 넘는 몫은 부드럽게 눌러 최대 1.5 — 밝은 바닥(병원 타일)이 광원 밑에서 하얗게 날아가 결을 잃지 않게.
 const KNEE=.92,SHOULDER=.58,shoulder=v=>v<=KNEE?v:KNEE+SHOULDER*(1-Math.exp(-(v-KNEE)/SHOULDER));
-function ambientFor(fam,kind){if(kind==='in')return AMB_IN[fam]||AMB_IN.default;if(kind==='cave')return AMB_CAVE;return AMB[fam]||AMB.regional;}
+// R810 밤 지역: 채널마다 누르면 등불 밑 빨강만 눌려(2.0→1.41, 파랑 .97 그대로) 호박색이 바랜다 → 가장 밝은 채널로 한 번에 눌러 색 비율을 지킨다(무릎 아래는 같음).
+const shoulderHue=L=>{const m=Math.max(L[0],L[1],L[2]);if(!(m>KNEE))return L.map(v=>shoulder(v));const k=shoulder(m)/m;return L.map(v=>v*k);};
+// R810 불면귀 밤(사용자 2026-11-11 "불면귀 맵 홍보영상맵으로 쓸 정도로"): 두 구역만 바탕빛을 남색 달빛으로 낮추고(귀비탕 영상의 창살 너머 달빛),
+//  등불은 더 진한 호박색·더 세게, 반지름은 줄여(7.8→4칸) 길 전체가 아닌 석등 둘레 웅덩이로 — 길을 다 덮으면 어깨 눌림으로 흰 베이지 띠가 됐다(헤드리스 실측)(색채심리 9절: 차가운 바탕=위협, 따뜻한 등불=잠들지 못한 집의 기척).
+//  헤드리스 실측(전): 바탕 .8·[.86,.94,1.05] 에 R123 세피아까지 겹쳐 화면 파랑-빨강 평균 -0.03~-0.04(누런 모래빛), 호박빛 화소 0.2~1%.
+const NIGHT_R810=Object.freeze({last302:Object.freeze({k:.68,c:[.62,.8,1.2],lampK:1.4,lampR:.58,lampC:[1,.46,.12],heroC:[.8,.88,1.02],grade:[.85,.94,1],hue:1,pools:.42,poolR:.7}),last303:Object.freeze({k:.7,c:[.58,.8,1.28],lampK:1.4,lampR:.58,lampC:[1,.46,.08],heroC:[.8,.88,1.02],grade:[.85,.93,1],hue:1,pools:.42,poolR:.7})});
+//  grade: 장면 맨 끝에 곱하는 밤 색(빨강 ×.88·초록 ×.94) — 나무·기와집·몹 그림은 바닥 빛을 일부만 받아 갈색이 남아 밤이 반쯤만 읽혔다(헤드리스 실측, 숲이 많은 last303 파랑-빨강 -0.013).
+//   화면 전체 곱하기 판 1장(R300 어둡게 판과 같은 섞기)을 장면 맨 뒤(renderOrder 1e6)에 — 영웅도 함께 살짝 푸르다(영화의 밤 보정). 두 구역 밖·R451 을 안 맡는 때는 숨긴다.
+function nightGrade(r,a,on){try{let q=r.__r810Grade;const want=on&&!!a?.grade;if(!q){if(!want)return;const T=r.T;
+  q=new T.Mesh(new T.PlaneGeometry(2,2),new T.ShaderMaterial({uniforms:{g:{value:new T.Vector3(1,1,1)}},vertexShader:'void main(){gl_Position=vec4(position.xy,0.,1.);}',fragmentShader:'uniform vec3 g;void main(){gl_FragColor=vec4(g,1.);}',
+   transparent:true,depthTest:false,depthWrite:false,blending:T.CustomBlending,blendEquation:T.AddEquation,blendSrc:T.ZeroFactor,blendDst:T.SrcColorFactor,blendSrcAlpha:T.ZeroFactor,blendDstAlpha:T.OneFactor,toneMapped:false}));
+  q.name='r810-night-grade';q.renderOrder=1e6;q.frustumCulled=false;q.layers.set(2);q.userData={presentationOnly:true,r451:true};r.__r810Grade=q;}
+ if(q.parent!==r.scene&&want)r.scene.add(q);q.visible=want;if(want)q.material.uniforms.g.value.set(a.grade[0],a.grade[1],a.grade[2]);}catch(e){fail(e);}}
+const nightOf=id=>Object.prototype.hasOwnProperty.call(NIGHT_R810,id)?NIGHT_R810[id]:null;
+function ambientFor(fam,kind,id){const N=nightOf(id);if(N&&kind!=='in'&&kind!=='cave')return N;if(kind==='in')return AMB_IN[fam]||AMB_IN.default;if(kind==='cave')return AMB_CAVE;return AMB[fam]||AMB.regional;}
 // 영웅이 들고 다니는 빛(R89 의 따뜻한 중심을 이어받음): 반지름(칸)·세기·색. 등불 웅덩이가 묻히지 않게 등불보다 약하게.
 const HERO=Object.freeze({r:6.6,k:.36,c:[1,.92,.8]});
 // ---- 광원 종류 -------------------------------------------------------------------------------------------------
@@ -84,7 +98,8 @@ function collect(r){const L=r?.exploration;if(!L)return[];const r92=window.__STO
  const fam=familyOf(r),place=placeKind(r),indoor=place==='in',fireOk=FIRE_OK.has(r.id),G=REACH[place]||REACH.out,list=[];
  const add=(x,y,label,color,src)=>{if(!finite(x)||!finite(y))return;if(list.some(q=>Math.hypot(q.x-x,q.y-y)<.6))return;const type=classify(label,fam,indoor,color,fireOk),T=TYPE[type];
   const c=(type==='magic'||type==='lamp'&&color&&!indoor)&&Array.isArray(color)?color.slice(0,3):T.c;
-  list.push({x,y,type,color:c,k:T.k*G.k,r:T.r*G.r,fl:T.fl,stutter:!!T.stutter,src,id:String(label||'').slice(0,48),ph:((Math.abs(x*12.9898+y*78.233)*43758.5453)%1)*6.283});};
+  const N=(type==='lamp'||type==='fire')&&!indoor?nightOf(r.id):null;/* R810: 불면귀 밤의 등불·화로는 진한 호박색으로 더 세게 */
+  list.push({x,y,type,color:N?N.lampC.slice():c,k:T.k*G.k*(N?N.lampK:1),r:T.r*G.r*(N?N.lampR:1),fl:T.fl,stutter:!!T.stutter,src,id:String(label||'').slice(0,48),ph:((Math.abs(x*12.9898+y*78.233)*43758.5453)%1)*6.283});};
  for(const p of p92)add(p.x,p.y,p.id,p.color,'r92');
  for(const p of p91)add(p.x,p.y,p.id,null,'r91');
  for(const p of r.props||[])if(isLightProp(p))add(p.x,p.y,[p.r74Prop,p.r105Prop,p.r115Prop,p.kind,p.id,p.path].join(' '),null,'prop');
@@ -186,18 +201,18 @@ function mapAt(x,y){const g=o451.grid;if(!g)return[0,0,0];const fx=(x-g.gx0)*g.S
  return out;}
 function lightAt(x,y,opt={}){if(!o451.owned||!finite(x+y))return null;const m=mapAt(x,y),a=o451.amb,h=o451.hero,c=HERO.c;
  const hd=h?Math.hypot(x-h.x,y-h.y)/HERO.r:9,hk=opt.noHero?0:HERO.k*o451.heroK*(1-smooth(0,1,hd));
- return[shoulder(a.c[0]*a.k+m[0]+c[0]*hk),shoulder(a.c[1]*a.k+m[1]+c[1]*hk),shoulder(a.c[2]*a.k+m[2]+c[2]*hk)];}
+ const L=[a.c[0]*a.k+m[0]+c[0]*hk,a.c[1]*a.k+m[1]+c[1]*hk,a.c[2]*a.k+m[2]+c[2]*hk];return a.hue?shoulderHue(L):L.map(v=>shoulder(v));}
 
 // ---- 셰이더 덧붙이기 ----------------------------------------------------------------------------------------------
 let U=null;
 function uniforms(T){if(U)return U;U={r451On:{value:0},r451Map:{value:null},r451Box:{value:new T.Vector4(0,0,1,1)},r451Amb:{value:new T.Vector3(1,1,1)},
- r451Hero:{value:new T.Vector4(0,0,6,0)},r451HeroC:{value:new T.Vector3(1,.93,.82)},r451Fl:{value:Array.from({length:4},()=>new T.Vector4(0,0,1,0))},r451Top:{value:.28}};return U;}
+ r451Hero:{value:new T.Vector4(0,0,6,0)},r451HeroC:{value:new T.Vector3(1,.93,.82)},r451Fl:{value:Array.from({length:4},()=>new T.Vector4(0,0,1,0))},r451Top:{value:.28},r451Hue:{value:0}};return U;}
 const HEAD=`#define R451_KNEE ${KNEE}
 #define R451_SH ${SHOULDER}
 #ifndef R451_HKT
 #define R451_HKT .4
 #endif
-uniform float r451On;uniform sampler2D r451Map;uniform vec4 r451Box;uniform vec3 r451Amb;uniform vec4 r451Hero;uniform vec3 r451HeroC;uniform vec4 r451Fl[4];uniform float r451Top;
+uniform float r451On;uniform sampler2D r451Map;uniform vec4 r451Box;uniform vec3 r451Amb;uniform vec4 r451Hero;uniform vec3 r451HeroC;uniform vec4 r451Fl[4];uniform float r451Top;uniform float r451Hue;
 varying vec3 r451P;varying vec3 r451N;
 vec3 r451Light(){vec3 n=r451N;bool vert=abs(n.y)<.6;vec2 q=r451P.xz;
  if(vert){vec2 h=n.xz;float hl=length(h);if(hl>1e-4)q+=h/hl*.42;}
@@ -206,7 +221,8 @@ vec3 r451Light(){vec3 n=r451N;bool vert=abs(n.y)<.6;vec2 q=r451P.xz;
  float f=1.;for(int i=0;i<4;i++){vec4 F=r451Fl[i];f+=F.w*(1.-smoothstep(0.,F.z,length(r451P.xz-F.xy)));}lm*=max(f,0.);
  float up=1.;if(vert)up=mix(1.,.5,smoothstep(1.1,3.,r451P.y));else if(r451P.y>.3)up=r451Top;lm*=up;
  float hd=length(r451P.xz-r451Hero.xy)/max(r451Hero.z,.1);float hk=r451Hero.w*(1.-smoothstep(0.,1.,hd))*(vert?.82:(r451P.y>.3?R451_HKT:1.));
- vec3 L=r451Amb+lm+r451HeroC*hk;L=mix(L,R451_KNEE+R451_SH*(1.-exp(-(L-R451_KNEE)/R451_SH)),step(vec3(R451_KNEE),L));
+ vec3 L=r451Amb+lm+r451HeroC*hk;vec3 Ls=mix(L,R451_KNEE+R451_SH*(1.-exp(-(L-R451_KNEE)/R451_SH)),step(vec3(R451_KNEE),L));
+ float r451Mx=max(L.r,max(L.g,L.b));vec3 Lh=r451Mx>R451_KNEE?L*((R451_KNEE+R451_SH*(1.-exp(-(r451Mx-R451_KNEE)/R451_SH)))/r451Mx):Ls;L=mix(Ls,Lh,r451Hue);
  return mix(vec3(1.),L,r451On);}
 `;
 // 맵 텍셀 알파 = 열린 칸(255)/막힌 칸(0). 선형 보간에서 막힌 텍셀(빛 0)이 섞여 벽가 바닥이 검게 번지지 않도록 rgb/a 로 되돌린다.
@@ -271,17 +287,17 @@ function floorOwned(L){if(!L?.floorCells?.length)return false;try{const f=window
  return !!(L.hospitalCoreB2||L.worldWardR81||L.refugeR82);}
 function wantFor(frame){return !disposed&&prefs.on&&!!frame&&frame.layer==='STORY'&&solo()&&!sightOn()&&typeof room!=='undefined'&&floorOwned(room?.exploration);}
 function update(r,frame){const want=wantFor(frame);const u=uniforms(r.T);
- if(!want){o451.owned=false;u.r451On.value=0;return;}
+ if(!want){o451.owned=false;u.r451On.value=0;nightGrade(r,null,false);return;}
  const L=room.exploration,lights=collect(room),lsig=lightCache?.lsig;
  if(o451.layout!==L||o451.cells!==L.floorCells.length||!o451.tex||!o451.B){o451.layout=L;o451.cells=L.floorCells.length;o451.lsig=lsig;o451.scanSig=0;   // 새 지역·새 바닥: 전부 굽고 바로 훑는다
-  if(!bake(o451,r,room,lights)){o451.owned=false;u.r451On.value=0;return;}}
+  if(!bake(o451,r,room,lights)){o451.owned=false;u.r451On.value=0;nightGrade(r,null,false);return;}}
  else if(o451.lsig!==lsig){o451.lsig=lsig;rebake(o451,lights);}                // 같은 바닥에서 등만 바뀜: 바뀐 몫만
  o451.lights=lights;/* 같은 빛(굽기 그대로)이어도 목록은 새것으로 — 깜빡임·먼 등불 구멍·R453 이 쓰는 목록 */
  patchIfChanged(r,true);
- const fam=lightCache?.fam||'regional',a=ambientFor(fam,lightCache?.place||'out');o451.amb=a;u.r451Amb.value.set(a.c[0]*a.k,a.c[1]*a.k,a.c[2]*a.k);
+ const fam=lightCache?.fam||'regional',a=ambientFor(fam,lightCache?.place||'out',room?.id);o451.amb=a;u.r451Amb.value.set(a.c[0]*a.k,a.c[1]*a.k,a.c[2]*a.k);u.r451Hue.value=a.hue?1:0;nightGrade(r,a,true);
  const hero=frame.entities?.find?.(e=>e.hero&&finite(e.x+e.y))||(typeof player!=='undefined'&&player&&finite(player.x+player.y)?player:null);o451.hero=hero?{x:hero.x,y:hero.y}:null;
  o451.heroK=fam==='snow'?.6:lightCache?.place==='cave'?1.1:1;
- if(hero){u.r451Hero.value.set(hero.x,hero.y,HERO.r,HERO.k*o451.heroK);u.r451HeroC.value.set(...HERO.c);}else u.r451Hero.value.w=0;
+ if(hero){const N=a.heroC?a:null;/* R810: 불면귀 밤에는 영웅 둘레 빛도 달빛 쪽(따뜻한 등불은 석등만) */u.r451Hero.value.set(hero.x,hero.y,HERO.r,HERO.k*o451.heroK);u.r451HeroC.value.set(...(N?N.heroC:HERO.c));}else u.r451Hero.value.w=0;
  // 깜빡임: 영웅에 가까운 불꽃·등잔 4개(화면 안 쪽). 형광등은 가끔 한 번 '툭' 꺼질 듯 떨린다(6~14초에 90ms, 공포 연출 — 움직임 줄이기에서는 없음).
  const t=performance.now(),tm=(frame.time??t/1000),calm=!prefs.flicker||reduced(frame);let n=0;
  if(hero){const near=o451.lights.filter(l=>(l.fl>0||l.stutter)&&Math.hypot(l.x-hero.x,l.y-hero.y)<16).sort((p,q)=>Math.hypot(p.x-hero.x,p.y-hero.y)-Math.hypot(q.x-hero.x,q.y-hero.y)).slice(0,4);
@@ -352,8 +368,8 @@ function settingsSection(){const panel=typeof document!=='undefined'&&document.g
 if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const r=base.apply(this,a);try{if(!disposed)settingsSection();}catch(e){fail(e);}return r;};}
 
 function dispose(){disposed=true;if(timer)clearInterval(timer);o451.owned=false;if(U)U.r451On.value=0;try{o451.tex?.dispose?.();}catch(_){}o451.tex=null;o451.data=null;o451.B=null;o451.grid=null;o451.layout=null;}
-window.__STORYWORLD_LOCAL_LIGHT_R451__=Object.freeze({revision:REV,storageKey:KEY,types:TYPE,ambient:AMB,ambientIn:AMB_IN,ambientCave:AMB_CAVE,prefs:()=>({...prefs}),set,owns,lightAt,lights,glowHoles,glowEdge,classify,ambientFor,dispose,
- pure:Object.freeze({wallBox,grid,seen,bell,shoulder,bakeAcc,bakeDelta,lightContrib,markTiles,lightKey,posHash,sceneSig,floorOwned,litRow,eligible,drawnProp,patchMaterial:patch,LMAX,KNEE,SHOULDER,TILE,FIRE_OK:[...FIRE_OK],REACH,GLOW_SCALE,GLOW_FAM}),
+window.__STORYWORLD_LOCAL_LIGHT_R451__=Object.freeze({revision:REV,storageKey:KEY,types:TYPE,ambient:AMB,ambientIn:AMB_IN,ambientCave:AMB_CAVE,prefs:()=>({...prefs}),set,owns,lightAt,lights,glowHoles,glowEdge,classify,ambientFor,night:id=>nightOf(id),dispose,
+ pure:Object.freeze({wallBox,grid,seen,bell,shoulder,shoulderHue,bakeAcc,bakeDelta,lightContrib,markTiles,lightKey,posHash,sceneSig,floorOwned,litRow,eligible,drawnProp,patchMaterial:patch,LMAX,KNEE,SHOULDER,TILE,FIRE_OK:[...FIRE_OK],REACH,GLOW_SCALE,GLOW_FAM}),
  inspect:()=>({revision:REV,prefs:{...prefs},owned:o451.owned,stats:{...stats},lastError,family:lightCache?.fam||null,indoor:lightCache?.indoor??null,place:lightCache?.place||null,ambient:o451.amb,
   lights:o451.lights.map(l=>({x:+l.x.toFixed(2),y:+l.y.toFixed(2),type:l.type,src:l.src,id:l.id})),grid:o451.grid?{W:o451.grid.W,H:o451.grid.H,S:o451.grid.S}:null,
   collisionChanged:false,gameplayChanged:false,GPUVerified:false})});

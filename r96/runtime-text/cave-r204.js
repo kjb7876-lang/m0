@@ -74,13 +74,13 @@ const ZONES={
   decalMix:{near:[[2,3],[5,2],[6,2],[0,1]],open:[[0,3],[5,2],[6,2],[7,1],[11,1]]},decalDensity:12,tufts:['assets/r138/props/weed.webp',.1,1/50],
   tex:{floorA:['assets/r118/tiles/garden.webp',0],floorB:['assets/r118/tiles/meadow.webp',0],rock:['assets/r99/outdoor/ground-ruin.webp',1],face:['assets/r99/outdoor/ground-moss.webp',1]}},
  // 잠들지 못하는 마을(4부): 바닷가 마을 — 포장 돌길·모래, 낮은 언덕, 둔덕 위 풀
- last302:{seed:0x5d3020,tint:[.9,.88,.84],floorBGain:1.03,topK:1.9,floorK:1.05,hiTop:1.4,loTop:.5,bulge:.8,widen:false,web:false,pillars:false,boulders:1/130,
-  decalMix:{near:[[5,3],[6,3],[2,1],[11,1]],open:[[0,2],[5,3],[6,2],[7,2]]},decalDensity:13,tufts:['assets/r138/props/weed.webp',.1,1/60],
-  tex:{floorA:['assets/r118/tiles/sleepport.webp',0],floorB:['assets/r118/tiles/sandgold.webp',0],rock:['assets/r99/outdoor/surround-cliff.webp',-1],face:['assets/r99/outdoor/ground-cliff.webp',1]}},/* R407: 드라이브 SW-TILE B19 포구 젖은 모래(전엔 포장 돌길) */
+ last302:{seed:0x5d3020,tint:[.74,.8,.96]/* R730: 남색 달빛(귀비탕 영상의 창살 너머 달빛) — 석등·화로의 호박색과 맞서게. 전엔 [.9,.88,.84] */,floorBGain:1.03,topK:1.9,floorK:1.05,hiTop:1.4,loTop:.5,bulge:.8,widen:false,web:false,pillars:false,trees:'joseon'/* R832: 언덕 위 대지에 소나무·감나무(문 둘레 비움, R481 덤불도 같은 그림) */,boulders:1/130,
+  decalMix:{near:[[5,3],[6,3],[2,1],[11,1]],open:[[5,3],[6,2],[7,2],[11,1],[2,.5]]}/* R810: 거미 모양 균열(0번) 뺌 — 마을 길에 벌레처럼 읽혔다 */,decalDensity:13,tufts:['assets/r138/props/weed.webp',.1,1/60],
+  tex:{floorA:['assets/r118/tiles/sleepport.webp',0],floorB:['assets/r118/tiles/gravepath.webp',1]/* R810: 금빛 사막 모래(r118 금모래) → 잿빛 막돌 길(마을 골목) — 밤 장면이 누런 사막으로 읽혔다 */,rock:['assets/r99/outdoor/surround-cliff.webp',-1],face:['assets/r99/outdoor/ground-cliff.webp',1]}},/* R407: 드라이브 SW-TILE B19 포구 젖은 모래(전엔 포장 돌길) */
  // 한약과 불면귀(4부): 약초 마을 — 돌길·풀밭, 살아 있는 나무 몇 그루
- last303:{seed:0x5d3030,tint:[.88,.9,.8],floorBGain:1.02,topK:1.9,floorK:1.03,hiTop:1.4,loTop:.48,bulge:.85,widen:false,web:false,pillars:false,trees:'living',boulders:1/150,
-  decalMix:{near:[[2,2],[11,2],[5,2],[6,2]],open:[[0,1],[11,2],[5,2],[6,2],[7,1]]},decalDensity:12,tufts:['assets/r138/props/weed.webp',.11,1/40],
-  tex:{floorA:['assets/r99/outdoor/ground-paving.webp',0],floorB:['assets/r118/tiles/meadow.webp',0],rock:['assets/r99/outdoor/surround-moss.webp',-1],face:['assets/r99/outdoor/ground-moss.webp',1]}},
+ last303:{seed:0x5d3030,tint:[.72,.82,.9]/* R730: 달빛 아래 약초 마을. 전엔 [.88,.9,.8] */,floorBGain:1.02,topK:1.9,floorK:1.03,hiTop:1.4,loTop:.48,bulge:.85,widen:false,web:false,pillars:false,trees:'joseon'/* R832: Dots CX-0074NT 굽은 소나무·잎 진 감나무 3각도(+좌우) — 전엔 서양 활엽수 1종 흔들림 12장 */,boulders:1/150,
+  decalMix:{near:[[2,2],[11,2],[5,2],[6,2]],open:[[11,2],[5,2],[6,2],[7,1]]}/* R810: 균열(0번) 뺌 */,decalDensity:12,tufts:['assets/r138/props/weed.webp',.11,1/40],
+  tex:{floorA:['assets/r118/tiles/gravepath.webp',1]/* R810: 서양식 네모 판석 → 잿빛 막돌 길(약초 마을 골목) */,floorB:['assets/r118/tiles/meadow.webp',0],rock:['assets/r99/outdoor/surround-moss.webp',-1],face:['assets/r99/outdoor/ground-moss.webp',1]}},
  // 눈보라 속의 소년(2부): 눈 덮인 바위 언덕·검은 돌
  ep1b06b:{seed:0x5d1066,tint:[.92,.96,1.06],topK:2.1,floorK:1.04,hiTop:1.5,loTop:.45,bulge:1.15,widen:false,web:false,pillars:false,trees:'dead',boulders:1/80,
   decalMix:{near:[[5,4],[6,3],[7,2]],open:[[5,3],[6,3],[7,2],[0,1]]},decalDensity:13,
@@ -445,7 +445,7 @@ let SEED=1;const ZONES_SEED=()=>SEED;
 function decalAtlas(T,r,ims,cfg){const c=document.createElement('canvas');c.width=1024;c.height=768;/* R212: 4×3 칸(8~11 추가) */const g=c.getContext('2d');const rnd=rng(cfg.seed^0x77);
  const put=(im,k)=>{const x=(k%4)*256,y=Math.floor(k/4)*256;const w=im.naturalWidth,h=im.naturalHeight,s=Math.min(236/w,236/h);g.drawImage(im.__c||im,x+128-w*s/2,y+128-h*s/2,w*s,h*s);};
  // r106 균열은 원래 하얗게 빛나는 효과 그림 → 바닥 균열로 쓰도록 어둡게(밝기 반전에 가깝게 눌러) 칠한다
- {const c2=document.createElement('canvas');c2.width=ims.crack.naturalWidth;c2.height=ims.crack.naturalHeight;const g2=c2.getContext('2d');g2.drawImage(ims.crack,0,0);const id=g2.getImageData(0,0,c2.width,c2.height),d=id.data;
+ {const c2=document.createElement('canvas');c2.width=ims.crack.naturalWidth;c2.height=ims.crack.naturalHeight;const g2=c2.getContext('2d',{willReadFrequently:true});/* R851: 되읽는 캔버스는 CPU 캔버스로(GPU 동기화 멈춤) */g2.drawImage(ims.crack,0,0);const id=g2.getImageData(0,0,c2.width,c2.height),d=id.data;
   for(let i=0;i<d.length;i+=4){d[i]=26;d[i+1]=20;d[i+2]=16;d[i+3]=Math.min(255,d[i+3]*.85);}g2.putImageData(id,0,0);put({naturalWidth:c2.width,naturalHeight:c2.height,__c:c2},0);}
  put(ims.bones,1);put(ims.root,2);
  // 3: 거미줄(모서리형) 4: 거미줄(둥근형)
@@ -461,7 +461,7 @@ function decalAtlas(T,r,ims,cfg){const c=document.createElement('canvas');c.widt
    g.fillStyle=gr;g.beginPath();const m=6+Math.floor(rnd()*3);for(let q=0;q<m;q++){const aa=q/m*Math.PI*2,rr=s*(.7+rnd()*.35);const px=x+Math.cos(aa)*rr,py=y+Math.sin(aa)*rr*.75;q?g.lineTo(px,py):g.moveTo(px,py);}g.closePath();g.fill();}}
  // R212 8: 땅에 떨어진 쇠사슬(r138, 성) 9: 물결(r138 ripple, 늪 웅덩이 위) 10: 늪 웅덩이(검푸른 물·젖은 가장자리) 11: 이끼 얼룩
  if(ims.chain)put(ims.chain,8);
- if(ims.ripple){const c3=document.createElement('canvas');c3.width=ims.ripple.naturalWidth;c3.height=ims.ripple.naturalHeight;const g3=c3.getContext('2d');g3.drawImage(ims.ripple,0,0);const id=g3.getImageData(0,0,c3.width,c3.height),d=id.data;
+ if(ims.ripple){const c3=document.createElement('canvas');c3.width=ims.ripple.naturalWidth;c3.height=ims.ripple.naturalHeight;const g3=c3.getContext('2d',{willReadFrequently:true});g3.drawImage(ims.ripple,0,0);const id=g3.getImageData(0,0,c3.width,c3.height),d=id.data;
   for(let i=0;i<d.length;i+=4){d[i]=Math.min(255,d[i]*.55+20);d[i+1]=Math.min(255,d[i+1]*.62+24);d[i+2]=Math.min(255,d[i+2]*.6+22);d[i+3]=d[i+3]*.55;}g3.putImageData(id,0,0);put({naturalWidth:c3.width,naturalHeight:c3.height,__c:c3},9);}
  {const ox=2*256,oy=2*256;for(let i=0;i<5;i++){const x=ox+128+(rnd()-.5)*70,y=oy+128+(rnd()-.5)*40,rx=40+rnd()*50,ry=rx*(.45+rnd()*.2);
    const gr=g.createRadialGradient(x,y,rx*.1,x,y,rx);gr.addColorStop(0,'rgba(44,58,54,.9)');gr.addColorStop(.55,'rgba(30,40,34,.86)');gr.addColorStop(.86,'rgba(50,54,36,.55)');/* 탁한 늪물(검은 구멍처럼 보이지 않게) */gr.addColorStop(1,'rgba(40,36,24,0)');
@@ -650,11 +650,11 @@ function treeSprites(T,r,F,cfg,ims){const rnd=rng(cfg.seed^0x7ee5),g=new T.Group
 const ISO_T=34;
 function isoQuad(cx,cy,box,s,yOff){const P=(px,py)=>{const dx=(px-box.cx)*s,dy=(py-box.cy)*s;return[cx+(dx/ISO_T+dy/(ISO_T/2))/2,yOff,cy+(dy/(ISO_T/2)-dx/ISO_T)/2];};
  return[P(box.x0,box.y0),P(box.x1,box.y0),P(box.x1,box.y1),P(box.x0,box.y1)];}
-function bboxOf(im){const c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;const g=c.getContext('2d');g.drawImage(im,0,0);const d=g.getImageData(0,0,c.width,c.height).data;
+function bboxOf(im){const c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,0,0);const d=g.getImageData(0,0,c.width,c.height).data;
  let x0=c.width,y0=c.height,x1=0,y1=0;for(let y=0;y<c.height;y+=2)for(let x=0;x<c.width;x+=2)if(d[(y*c.width+x)*4+3]>24){if(x<x0)x0=x;if(y<y0)y0=y;if(x>x1)x1=x;if(y>y1)y1=y;}
  return{x0,y0,x1:x1+2,y1:y1+2,cx:(x0+x1)/2,cy:(y0+y1)/2,w:c.width,h:c.height};}
 // 바위 조각은 회보라 암석이라 지역 색(tint)으로 다시 칠한다(밝기만 살림) — 화풍·색 일관
-function tintedCanvas(im,tint){const c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;const g=c.getContext('2d');g.drawImage(im,0,0);const id=g.getImageData(0,0,c.width,c.height),d=id.data;
+function tintedCanvas(im,tint){const c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,0,0);const id=g.getImageData(0,0,c.width,c.height),d=id.data;
  for(let i=0;i<d.length;i+=4){const l=(d[i]*.3+d[i+1]*.59+d[i+2]*.11)/255,k=Math.pow(l,1.1)*1.05;d[i]=Math.min(255,k*255*tint[0]);d[i+1]=Math.min(255,k*255*tint[1]);d[i+2]=Math.min(255,k*255*tint[2]);}g.putImageData(id,0,0);return c;}
 function organicDecor(T,r,F,cfg,ims,rm){const rnd=rng(cfg.seed^0x0207),g=new T.Group();let np=0,nu=0;
  const avoid=[...(F.doors||[]).map(d=>[d[0],d[1],Math.max(3,(d[2]||3.5)-.5)]),...(rm?.props||[]).filter(q=>Number.isFinite(q.x)).map(q=>[q.x,q.y,1.4+(Number(q.radius)||0)])];
@@ -683,7 +683,7 @@ function organicDecor(T,r,F,cfg,ims,rm){const rnd=rng(cfg.seed^0x0207),g=new T.G
 //  카메라 쪽을 보는 판(스프라이트와 같은 면)에 세로 기울임(shear)만 더해 돌줄이 축과 나란하게 한다(세로 모서리는 그대로 세로).
 //  반대 대각선 축은 좌우 뒤집어 쓴다. 곧은 구간이 2장 길이가 안 되면 아예 두지 않는다(단독 금지). 끄기: storyworld.r204.cave {"borderRuns":false}.
 const rowGeo=new WeakMap();
-function rowOf(im){let o=rowGeo.get(im);if(o)return o;const w=im.naturalWidth,h=im.naturalHeight,c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d');g.drawImage(im,0,0);const d=g.getImageData(0,0,w,h).data;
+function rowOf(im){let o=rowGeo.get(im);if(o)return o;const w=im.naturalWidth,h=im.naturalHeight,c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,0,0);const d=g.getImageData(0,0,w,h).data;
  const cols=[];for(let x=0;x<w;x+=2){let b=-1;for(let y=h-1;y>=0;y--)if(d[(y*w+x)*4+3]>200){b=y;break;}if(b>=0)cols.push([x,b]);}
  const x0=cols[0][0],x1=cols[cols.length-1][0],mid=cols.filter(q=>q[0]>x0+(x1-x0)*.12&&q[0]<x1-(x1-x0)*.12);
  let mx=0,my=0;for(const q of mid){mx+=q[0];my+=q[1];}mx/=mid.length;my/=mid.length;let sxy=0,sxx=0;for(const q of mid){sxy+=(q[0]-mx)*(q[1]-my);sxx+=(q[0]-mx)**2;}
@@ -737,7 +737,7 @@ const roomOf=frame=>typeof room!=='undefined'&&room?.exploration===frame?.explor
 function eligible(r,frame){const rm=roomOf(frame);return !!(rm&&roomOn(rm)&&frame?.layer==='STORY'&&r.spatialBuilt);}
 function build(r,frame){const t0=performance.now(),T=r.T,cfg=ZONES[frame.zone],ex=frame.exploration;SEED=cfg.seed;
  const gen=r.sceneGeneration;r.__r204={gen,pending:true,zone:frame.zone};
- const TX={...TEX,...(cfg.tex||{})},want=cfg.decorOnly?{crack:loadImg(TEX.crack[0]),bones:loadImg(TEX.bones[0]),root:loadImg(TEX.root[0])}/* R216: 디테일 전용은 장식판에 쓰는 그림만 */:Object.fromEntries(Object.entries(TX).map(([k,[p]])=>[k,loadImg(p)]));
+ const TX={...TEX,...(cfg.tex||{}),...((()=>{try{return window.__STORYWORLD_R204_TEX__?.(frame.zone)||{};}catch(_){return{};}})())},want=cfg.decorOnly?{crack:loadImg(TEX.crack[0]),bones:loadImg(TEX.bones[0]),root:loadImg(TEX.root[0])}/* R216: 디테일 전용은 장식판에 쓰는 그림만 */:Object.fromEntries(Object.entries(TX).map(([k,[p]])=>[k,loadImg(p)]));
  for(const [n] of [...(cfg.patches||[]),...(cfg.uprights||[])])want['org:'+n]=loadImg(orgPath(n));
  want.chain=loadImg('assets/r138/props/chain.webp').catch(()=>null);want.ripple=loadImg('assets/r138/props/ripple.webp').catch(()=>null);/* R212 */
  if(cfg.tufts)want.tuft=loadImg(cfg.tufts[0]).catch(()=>null);
@@ -876,6 +876,6 @@ const wrappedRenderers=new WeakSet();
 function wrapInst(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(r&&Object.prototype.hasOwnProperty.call(r,'render')&&!wrappedRenderers.has(r)){wrappedRenderers.add(r);r.render=wrapFn(r.render);}}catch(e){fail(e);}}
 setInterval(wrapInst,500);wrapInst();
 function set(p){if(typeof p?.on==='boolean')prefs.on=p.on;if(typeof p?.widen==='boolean')prefs.widen=p.widen;if(typeof p?.skeleton==='boolean')prefs.skeleton=p.skeleton;if(typeof p?.inflate==='boolean')prefs.inflate=p.inflate;if(typeof p?.unify==='boolean')prefs.unify=p.unify;if(typeof p?.rooms==='boolean')prefs.rooms=p.rooms;if(typeof p?.borderRuns==='boolean')prefs.borderRuns=p.borderRuns;if(typeof p?.edge==='boolean')prefs.edge=p.edge;if(typeof p?.round==='boolean')prefs.round=p.round;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
-window.__STORYWORLD_CAVE_R204__=Object.freeze({revision:REV,set,skeletonPoints,inflate,interiorProps,furnish,zones:Object.keys(ZONES),field,topHeight:(F,z,x,y)=>topHeight(F,ZONES[z],x,y),at,
+window.__STORYWORLD_CAVE_R204__=Object.freeze({revision:REV,set,decalKinds:id=>{const m=ZONES[id]?.decalMix;return m?[...new Set([...m.near,...m.open].map(q=>q[0]))].sort((a,b)=>a-b):null;}/* R810 검사용: 지역 데칼 칸 목록 */,skeletonPoints,inflate,interiorProps,furnish,zones:Object.keys(ZONES),field,topHeight:(F,z,x,y)=>topHeight(F,ZONES[z],x,y),at,
  inspect:()=>{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three,st=r?.__r204,F=st?.F;return{revision:REV,prefs:{...prefs},active:!!st?.group?.visible,zone:st?.zone||null,field:F?{ms:F.ms,bulgedCells:F.bulgedCells,protect:F.protect,size:[F.W,F.H]}:null,stats:{...stats},lastError};}});
 })();

@@ -46,39 +46,52 @@ function shakeIt(v){try{if(typeof shake==='number'&&!(typeof settings==='object'
 // ---------------------------------------------------------------- R
 let R=null;// {t0,x,y,power,crosses:[{x,y,k}],burst:false,auraEnd}
 const chainSeen=new Map();
-function startR(x,y,castId){const p=player;R={t0:T(),x,y,castId,room:typeof room==='object'?room:null,power:typeof attackPower==='function'?attackPower():48,burst:false,auraStart:T()+.75,auraEnd:T()+.75+7,crosses:[]};
+/* R952: 소환된 슬레이어 몸(player.r952Summon)이 건 R·Q 는 그 몸을 기억해, 조종 영웅이 다른 영웅이어도 그 몸 기준으로 이어 간다(다른 경우는 예전과 같다) */
+const summonR952=()=>typeof player==='object'&&player&&player.r952Summon===true?player:null;
+function startR(x,y,castId){const p=player;R={t0:T(),x,y,castId,p:summonR952(),room:typeof room==='object'?room:null,power:typeof attackPower==='function'?attackPower():48,burst:false,auraStart:T()+.75,auraEnd:T()+.75+7,crosses:[]};
  // 화면 좌상·좌하·우상·우하 ≈ 2.3칸: 화면 가로 +1 = 월드 (+.5,-.5) 방향, 화면 세로 +1 = (+1,+1)/√2
  const scr=(sx,sy)=>({x:x+sx*.5*2.3+sy*.5*1.1,y:y-sx*.5*2.3+sy*.5*1.1});
  R.crosses=[{...scr(0,0),k:2.6,r:3.2,m:2.6,big:true},{...scr(-2,-1),k:1.3,r:1.7,m:1.1},{...scr(-2,1),k:1.3,r:1.7,m:1.1},{...scr(2,-1),k:1.3,r:1.7,m:1.1},{...scr(2,1),k:1.3,r:1.7,m:1.1}];
  stats.rCasts++;}
 function rTick(){if(!R)return;const t=T(),age=t-R.t0;let rm=null;try{rm=room;}catch(_){}
- if(rm!==R.room||!isHero()){R=null;return;}
+ if(rm!==R.room||!(R.p?R.p.hp>0:isHero())){R=null;return;}
  if(!R.burst&&age>=.55){R.burst=true;const hit=new Set();
   for(const c of R.crosses){blood(c.big?'blood-death':'blood-burst',c.x,c.y,{k:c.k*1.15,z:0});for(const e of live())if(!hit.has(e)&&dist(e,c)<=c.r+(e.radius||.3)&&seeLine(c,e)){hit.add(e);deal(e,R.power*c.m,'r-burst');}stats.bursts++;}
   shakeIt(7);}
- if(t>=R.auraStart&&t<R.auraEnd&&solo())chase();
+ if(t>=R.auraStart&&t<R.auraEnd&&solo()&&!R.p)chase();
  if(t>=R.auraEnd&&age>1)R=null;}
-const auraOn=()=>!!(R&&T()>=R.auraStart&&T()<R.auraEnd&&isHero());
+const auraOn=()=>!!(R&&T()>=R.auraStart&&T()<R.auraEnd&&(R.p?player===R.p&&R.p.hp>0:isHero()));
 function manualInput(){try{const k=typeof keys==='object'&&keys?keys:null,j=typeof joystickVector==='object'?joystickVector:{x:0,y:0};return !!((k&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].some(x=>k.has(x)))||Math.hypot(j.x||0,j.y||0)>.15||(typeof route!=='undefined'&&Array.isArray(route)&&route.length>0)||(typeof command!=='undefined'&&!!command));}catch(_){return false;}}
 let lastChase=0;
+function cloneStrike(p,e,d){const v={x:(e.x-p.x)/d,y:(e.y-p.y)/d},gx=e.x-v.x*.7,gy=e.y-v.y*.7;let dir='front';try{if(typeof facing==='function')dir=facing(v.x,v.y);}catch(_){}
+ let asset=null;try{const A=typeof heroArt!=='undefined'?heroArt[HERO]:null;asset=A&&A.attack&&(A.attack[dir]||A.attack.front)||null;}catch(_){}
+ /* 분신: R767 공용 그리기(진짜 영웅 그림을 반투명으로 한 번 더) — 영웅에서 적 쪽 잔상 둘(.15초) + 적 앞 본체(.3초). 없으면 엔진 ghost */
+ try{const CL=window.__STORYWORLD_CLONE_R767__;if(CL?.spawn){for(const k of [.4,.7])CL.spawn(p.x+(gx-p.x)*k,p.y+(gy-p.y)*k,{life:.15,alpha:.3,dir});CL.spawn(gx,gy,{life:.3,alpha:.65,dir});}else if(asset&&typeof fx==='function')fx('ghost',gx,gy,{asset,life:.3,size:1,r767:true});}catch(err){fail(err);}
+ try{if(typeof hitEnemy==='function')hitEnemy(e,(typeof attackPower==='function'?attackPower():48),{kind:'r425-clone',friendly:true,owner:'hero',r425:'clone',sourceHero:HERO,attackKind9:'basic'});}catch(err){fail(err);}
+ blood('blood-burst',e.x,e.y,{k:.8,z:0});p.attackCD=Math.max(p.attackCD||0,.48);try{p.direction=dir;}catch(_){}stats.cloneStrikes=(stats.cloneStrikes||0)+1;}
 function chase(){const p=player,t=T();const dt=Math.min(.05,Math.max(0,t-lastChase));lastChase=t;if(manualInput()||(typeof modal!=='undefined'&&modal))return;
  let best=null,bd=9;for(const e of live()){const d=dist(e,p);if(d<bd&&dmgOK(e)&&seeLine(p,e)){bd=d;best=e;}}if(!best)return;
  const h=typeof HEROES==='object'?HEROES[p.hero]:null,range=(h?.range||3.3)*.8;
  try{if(typeof target!=='undefined')target=best.id;}catch(_){}
- if(bd>range&&dt>0&&typeof moveActor==='function'){const v={x:(best.x-p.x)/bd,y:(best.y-p.y)/bd},sp=4.4*dt;moveActor(p,v.x*sp,v.y*sp);p.moveVX150=v.x;p.moveVY150=v.y;try{if(typeof facing==='function')p.direction=facing(v.x,v.y);}catch(_){}stats.chaseSteps++;}
+ /* R767(사용자 2026-11-11 "영웅을 적에게 옮기는 스킬은 순간적으로 분신이 적에게 간 다음 스킬 적중시키고 분신은 사라지게"): 영웅은 걸어가지 않고,
+    기본 공격 박자마다 분신(엔진 ghost 잔상, 슬레이어 공격 자세)이 적 바로 앞에 나타나 한 번 베고 0.3초 뒤 사라진다. 피해 = 공격력 ×1(기본 공격과 같은 규모). */
+ if(bd>range){if(!(p.attackCD>0))cloneStrike(p,best,bd);}
  else if(!(p.attackCD>0)&&typeof basicAttack==='function'){try{basicAttack(true);stats.autoSwings++;}catch(e){fail(e);}}}
 function chainBurst(e,depth){const k=e.boss||e.midboss?1.6:1.3;blood('blood-burst',e.x,e.y,{k,z:0});const hit=[];for(const v of live())if(dist(v,e)<=1.5+(v.radius||.3)&&seeLine(e,v)){hit.push(v);deal(v,R.power*(depth?.3:.45),'r-chain');}stats.chains++;
  if(depth<1){const next=live().filter(v=>v!==e&&dmgOK(v)&&dist(v,e)<=2.6&&seeLine(e,v)).sort((a,b)=>dist(a,e)-dist(b,e))[0];if(next&&typeof delay==='function')delay(.12,()=>{if(auraOn()&&dmgOK(next))chainBurst(next,depth+1);},'hero');}}
 // ---------------------------------------------------------------- Q
+/* R765: 쏘는 각 = 영웅 그림 8방향 칸 중심(적은 어느 칸인지만 정함) — 적에게 정확히 꺾지 않는다. 화면각 S → 월드: dx=(cosS+2sinS)/2, dy=(2sinS-cosS)/2 */
+const wSEC={e:0,se:Math.PI/4,s:Math.PI/2,sw:Math.PI*.75,w:Math.PI,nw:-Math.PI*.75,n:-Math.PI/2,ne:-Math.PI/4};
+function weaponAngle(a){const sc=Math.atan2((Math.cos(a)+Math.sin(a))*.5,Math.cos(a)-Math.sin(a));let S=0,b=9;for(const k in wSEC){const d=Math.abs(Math.atan2(Math.sin(sc-wSEC[k]),Math.cos(sc-wSEC[k])));if(d<b){b=d;S=wSEC[k];}}return Math.atan2(2*Math.sin(S)-Math.cos(S),Math.cos(S)+2*Math.sin(S));}
 let Q=null;// {t0,x,y,angle,power,launched,hit:Set,fx}
 const bleeds=new Map();// e -> {next,left,amt}
 function qReady(){return on&&isHero()&&solo()&&typeof started!=='undefined'&&started&&!(typeof modal!=='undefined'&&modal)&&!(typeof loading!=='undefined'&&loading)&&!(player.specialCD>0);}
 function castQ(){const p=player,rk=typeof rank==='function'?rank('special'):0;p.specialCD=10*(1-.05*rk)*(typeof COMBAT_RHYTHM_R26==='number'?COMBAT_RHYTHM_R26:1);p.specialCD=Math.max(.22,p.specialCD*coolK());p.skillAnim=.6;
- const power=(typeof attackPower==='function'?attackPower():48)*(2.4+.36*rk),e=typeof nearestEnemy==='function'?nearestEnemy(12):null,a=e?Math.atan2(e.y-p.y,e.x-p.x):(typeof storyAim22==='function'?storyAim22():0);
+ const power=(typeof attackPower==='function'?attackPower():48)*(2.4+.36*rk),e=typeof nearestEnemy==='function'?nearestEnemy(12):null,a=weaponAngle(e?Math.atan2(e.y-p.y,e.x-p.x):(typeof storyAim22==='function'?storyAim22():0));
  try{if(typeof facing==='function')p.direction=facing(Math.cos(a),Math.sin(a));}catch(_){}try{if(typeof sound==='function')sound('special');}catch(_){}
- Q={t0:T(),x:p.x,y:p.y,angle:a,power,launched:false,hit:new Set(),room:typeof room==='object'?room:null,fx:null};stats.qCasts++;if(!warmed)warm();return true;}
-function qTick(dtGuess){if(!Q)return;const t=T(),age=t-Q.t0;let rm=null;try{rm=room;}catch(_){}if(rm!==Q.room||!(player?.hp>0)){Q=null;return;}
- if(!Q.launched&&age>=.32){Q.launched=true;Q.x=player.x;Q.y=player.y;Q.ft=t;shakeIt(3.5);
+ Q={t0:T(),x:p.x,y:p.y,p:summonR952(),angle:a,power,launched:false,hit:new Set(),room:typeof room==='object'?room:null,fx:null};stats.qCasts++;if(!warmed)warm();return true;}
+function qTick(dtGuess){if(!Q)return;const t=T(),age=t-Q.t0;let rm=null;try{rm=room;}catch(_){}const who=Q.p||player;if(rm!==Q.room||!(who?.hp>0)){Q=null;return;}
+ if(!Q.launched&&age>=.32){Q.launched=true;Q.x=who.x;Q.y=who.y;Q.ft=t;shakeIt(3.5);
   const f={type:'r425-tornado',x:Q.x,y:Q.y,age:0,life:1.05,q:Q};try{if(Array.isArray(effects))effects.push(f);}catch(_){}Q.fx=f;}
  if(Q.launched){const u=Math.min(1,(t-Q.ft)/.95),nx=Q.x+Math.cos(Q.angle)*8.5*u,ny=Q.y+Math.sin(Q.angle)*8.5*u;
   if(typeof blocked==='function'&&blocked(nx,ny,.2)&&u>.05){Q.stopU??=u;}
@@ -159,12 +172,13 @@ if(typeof fx==='function'){const base=fx;fx=function(type,x,y,opt){
 if(typeof hitEnemy==='function'){const base=hitEnemy;hitEnemy=function(e,amount,source,...a){
  if(on&&solo()&&!ego()&&source&&source.storyWER&&source.sourceHero===HERO&&source.sourceSlot==='r'&&!source.r425&&typeof player==='object'&&player?.hero===HERO){stats.rBlocked++;return false;}/* 옛 R 7회 둘레 베기 피해 → 십자가 폭발로 대신 */
  const old=e?.hp;const r=base.apply(this,[e,amount,source,...a]);
- try{if(auraOn()&&e&&old>e.hp&&!(source&&(source.r425||source.r118Splash||source.kind==='narrative-companion-r75'||source.kind==='awakening-shock'||/samong|사몽/i.test(String(source.kind||''))))&&!(source&&source.friendly===false)){const t=T(),last=chainSeen.get(e)||-9;if(t-last>.25){chainSeen.set(e,t);if(chainSeen.size>64)chainSeen.delete(chainSeen.keys().next().value);chainBurst(e,0);}}}catch(err){fail(err);}
+ try{if(auraOn()&&e&&old>e.hp&&!(source&&((source.r425&&source.r425!=='clone')||source.r118Splash||source.kind==='narrative-companion-r75'||source.kind==='awakening-shock'||/samong|사몽/i.test(String(source.kind||''))))&&!(source&&source.friendly===false)){const t=T(),last=chainSeen.get(e)||-9;if(t-last>.25){chainSeen.set(e,t);if(chainSeen.size>64)chainSeen.delete(chainSeen.keys().next().value);chainBurst(e,0);}}}catch(err){fail(err);}
  return r;};}
 if(typeof special==='function'){const base=special;special=function(...a){if(on&&!ego()&&typeof player==='object'&&player?.hero===HERO&&solo()){if(qReady())castQ();return;}return base.apply(this,a);};}
-if(typeof tick==='function'){const base=tick;tick=function(dt,...a){const r=base.apply(this,[dt,...a]);try{if(on){if(!warmed&&isHero())warm();rTick();qTick(dt);bleedTick();}}catch(e){fail(e);}return r;};}
+const asHeroR720=(id,fn)=>{const D=window.__STORYWORLD_HERO_DEFENSE_R720__;return D&&typeof D.asHero==='function'?D.asHero(id,fn):fn();};/* R720-4: 다음 틱에 이어지는 기술을 그 영웅 몸(생존 배치 영웅이면 그 몸)으로 돌린다 */
+if(typeof tick==='function'){const base=tick;tick=function(dt,...a){const r=base.apply(this,[dt,...a]);try{if(on){if(!warmed&&isHero())warm();asHeroR720(HERO,()=>{rTick();qTick(dt);bleedTick();});}}catch(e){fail(e);}return r;};}
 if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(f,...a){if(f&&f.type==='r425-tornado'){try{scope({id:'r425:tornado',kind:'effect',x:f.x,y:f.y,groundAligned:false},()=>drawTornado(f));}catch(e){fail(e);}return;}return base.apply(this,[f,...a]);};}
-if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const aura=on&&auraOn(),spin=on&&!!Q&&isHero()&&(!Q.launched||T()-Q.ft<.16);
+if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const aura=on&&auraOn(),spin=on&&!!Q&&isHero()&&(!Q.p||Q.p===player)&&(!Q.launched||T()-Q.ft<.16);
  if(aura)try{scope({id:'r425:aura-back',kind:'effect',x:player.x,y:player.y,groundAligned:false},()=>{ctx.save();try{auraBack();}finally{ctx.restore();}});stats.auraFrames++;}catch(e){fail(e);}
  if(spin)try{scope({id:'r425:spin-back',kind:'effect',x:player.x,y:player.y,groundAligned:false},()=>{ctx.save();try{spinHero(-1);}finally{ctx.restore();}});}catch(e){fail(e);}
  const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
@@ -174,7 +188,7 @@ if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){con
  if(on&&R)try{scope({id:'r425:crosses',kind:'effect',x:R.x,y:R.y,groundAligned:false},()=>{ctx.save();try{drawCrosses();}finally{ctx.restore();}});}catch(e){fail(e);}
  return r;};}
 window.__STORYWORLD_SLAYER_BLOOD_R425__=Object.freeze({revision:REV,on:()=>on,auraOn:()=>auraOn(),
- state:()=>({R:R&&{age:+(T()-R.t0).toFixed(2),burst:R.burst,aura:auraOn(),auraLeft:+(R.auraEnd-T()).toFixed(2)},Q:Q&&{age:+(T()-Q.t0).toFixed(2),launched:Q.launched,hits:Q.hit.size},bleeding:bleeds.size}),
+ state:()=>({R:R&&{age:+(T()-R.t0).toFixed(2),burst:R.burst,aura:auraOn(),auraLeft:+(R.auraEnd-T()).toFixed(2)},Q:Q&&{age:+(T()-Q.t0).toFixed(2),angle:Q.angle,launched:Q.launched,hits:Q.hit.size},bleeding:bleeds.size}),
  inspect:()=>({revision:REV,on,stats:{...stats},lastError,browser:false,GPU:false}),
  set:v=>{on=v!==false;if(!on){R=null;Q=null;bleeds.clear();}try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}});
 })();

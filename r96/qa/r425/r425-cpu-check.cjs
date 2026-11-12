@@ -6,7 +6,7 @@ const checks=[];const ok=(n,p,d)=>checks.push({name:n,pass:!!p,detail:d});
 const FILES=['slayer-blood-r425.js','combat-flow-r425.js','fx-sprites-r106.js','attack-anim-r143.js','slayer-r351.js','slayer-r-tornado-r366.js','hwando-r277.js'];
 ok('runtime copies match client-source',FILES.every(f=>fs.readFileSync(path.join(RT,f),'utf8')===C(f)),FILES.filter(f=>fs.readFileSync(path.join(RT,f),'utf8')!==C(f)));
 const html=fs.readFileSync(path.join(RT,'index.html'),'utf8');
-ok('script tags once, right after combat-read-r409 and before combat-r118',/<script src="\.\/combat-read-r409\.js"><\/script><script src="\.\/slayer-blood-r425\.js"><\/script><script src="\.\/combat-flow-r425\.js"><\/script>(?:<script src="\.\/neon-lauren-r437\.js"><\/script>)?(?:<script src="\.\/perf-r441\.js"><\/script>)?(?:<script src="\.\/skill-attack-r440\.js"><\/script>)?(?:<script src="\.\/enemy-skill-pose-r442\.js"><\/script>)?(?:<script src="\.\/depth-overlap-r448\.js"><\/script>)?(?:<script src="\.\/cinema-run-r461\.js"><\/script>)?(?:<script src="\.\/mob-death-r462\.js"><\/script>)?(?:<script src="\.\/sin-boss-art-r463-data\.js"><\/script><script src="\.\/sin-boss-art-r463\.js"><\/script>)?(<script src="\.\/samong-rooms-r511\.js"><\/script>)?(?:<script src="\.\/weather-r450\.js"><\/script><script src="\.\/local-light-r451\.js"><\/script><script src="\.\/ground-fringe-r452\.js"><\/script><script src="\.\/actor-tone-r453\.js"><\/script>(?:<script src="\.\/hwando-chain-r590\.js"><\/script>)?(?:<script src="\.\/[a-z-]+-r56[1-4]\.js"><\/script>)*(?:<script src="\.\/samong-theme-r572\.js"><\/script>)?(?:<script src="\.\/samong-surge-r571\.js"><\/script>)?(?:<script src="\.\/survival-r600\.js"><\/script>)?(?:<script src="\.\/slayer-sheets-r585\.js"><\/script>)?(?:<script src="\.\/slayer-berserk-r586\.js"><\/script>)?(?:<script src="\.\/enemy-attack-tempo-r601\.js"><\/script>)?)?\s*<script src="\.\/combat-r118\.js">/.test(html)&&html.split('"./combat-flow-r425.js"').length===2&&html.split('"./slayer-blood-r425.js"').length===2);
+ok('script tags once, right after combat-read-r409 and before combat-r118',/<script src="\.\/combat-read-r409\.js"><\/script><script src="\.\/slayer-blood-r425\.js"><\/script><script src="\.\/combat-flow-r425\.js"><\/script>(?:<script src="\.\/neon-lauren-r437\.js"><\/script>)?(?:<script src="\.\/perf-r441\.js"><\/script>)?(?:<script src="\.\/skill-attack-r440\.js"><\/script>)?(?:<script src="\.\/enemy-skill-pose-r442\.js"><\/script>)?(?:<script src="\.\/depth-overlap-r448\.js"><\/script>)?(?:<script src="\.\/cinema-run-r461\.js"><\/script>)?(?:<script src="\.\/mob-death-r462\.js"><\/script>)?(?:<script src="\.\/sin-boss-art-r463-data\.js"><\/script><script src="\.\/sin-boss-art-r463\.js"><\/script>)?(<script src="\.\/samong-rooms-r511\.js"><\/script>)?(?:<script src="\.\/weather-r450\.js"><\/script><script src="\.\/local-light-r451\.js"><\/script><script src="\.\/ground-fringe-r452\.js"><\/script><script src="\.\/actor-tone-r453\.js"><\/script>(?:<script src="\.\/hwando-chain-r590\.js"><\/script>)?(?:<script src="\.\/[a-z-]+-r56[1-4]\.js"><\/script>)*(?:<script src="\.\/samong-theme-r572\.js"><\/script>)?(?:<script src="\.\/samong-surge-r571\.js"><\/script>)?(?:<script src="\.\/survival-r600\.js"><\/script>)?(?:<script src="\.\/slayer-sheets-r585\.js"><\/script>)?(?:<script src="\.\/slayer-berserk-r586\.js"><\/script>)?(?:<script src="\.\/enemy-attack-tempo-r601\.js"><\/script>)?(?:<script src="\.\/hero-motion-r895\.js"><\/script>)?)?\s*<script src="\.\/combat-r118\.js">/.test(html)&&html.split('"./combat-flow-r425.js"').length===2&&html.split('"./slayer-blood-r425.js"').length===2);
 const ver=fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8');{let comp=true;try{require('child_process').execFileSync('python3',['-m','py_compile',path.join(R,'..','scripts','verify-r96-public.py')],{stdio:'pipe'});}catch(_){comp=false;}ok('listed inside the expected list of verify-r96-public.py, and it compiles',comp&&/'slayer-blood-r425\.js',/.test(ver)&&/'combat-flow-r425\.js',/.test(ver));}
 ok('pages.yml runs this check',fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('r96/qa/r425/r425-cpu-check.cjs'));
 const man=JSON.parse(fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8')),M=new Map(man.files.map(f=>[f.path,f.sha256]));const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(path.join(RT,p))).digest('hex');
@@ -66,7 +66,10 @@ const near=(a,b,t=.6)=>Math.abs(a-b)<=t;
  const body=cs.find(c=>c.kind==='image'),opaque=(bbox(body)[3]-bbox(body)[1])*FR,bars=cs.filter(c=>c.kind==='fill'),q=env.project(e.x,e.y),txt=cs.find(c=>c.kind==='text');
  ok('size band: oversized normal mob drawn at 1.55× hero height',near(opaque,1.55*54,1),opaque);
  /* R596(사용자 2026-11-10 "아래 이런 예고선이 아직도 나오는 문제"): 일반 몹 발밑 체력 선이 바닥 예고선으로 읽혀 머리 위로 옮김 → 이 항목의 기대(발밑)가 바뀜. 발밑 배치는 mobBar 끄기에서 아래 항목으로 계속 검사 */
- ok('HP bar keeps native width and sits over the head (R596) when the body is rescaled',bars.length===2&&bars.every(b=>{const bb=bbox(b);return near(bb[2]-bb[0],55)&&bb[3]<bbox(body)[1]+(bbox(body)[3]-bbox(body)[1])*.25;}),bars.map(bbox));
+ /* R786(사용자 2026-11-11 "모든 것들 기본 체력바 발아래쪽에 둬"): 기본은 다시 발 아래(feetBars). 머리 위 배치(R596)는 {"feetBars":false} 로만 — 아래 두 항목이 각각 검사 */
+ ok('R786 default: HP bar keeps native width and stays under the feet when the body is rescaled',bars.length===2&&bars.every(b=>{const bb=bbox(b);return near(bb[2]-bb[0],55)&&bb[1]>=q.y;}),bars.map(bbox));
+ {const envH=makeEnv({'storyworld.r425.flow':'{"feetBars":false}'});let cH;const eH={id:'m1h',name:'시험 몹',x:0,y:-1,hp:10,maxHp:10,k:2.5};for(let i=0;i<4;i++)cH=frame(envH,eH);const bodyH=cH.find(c=>c.kind==='image'),barsH=cH.filter(c=>c.kind==='fill');
+  ok('feetBars:false: HP bar keeps native width and sits over the head (R596) when the body is rescaled',barsH.length===2&&barsH.every(b=>{const bb=bbox(b);return near(bb[2]-bb[0],55)&&bb[3]<bbox(bodyH)[1]+(bbox(bodyH)[3]-bbox(bodyH)[1])*.25;}),barsH.map(bbox));}
  {const env2=makeEnv({'storyworld.r425.flow':'{"mobBar":false}'});let c2;const e2={id:'m1b',name:'시험 몹',x:0,y:-1,hp:10,maxHp:10,k:2.5};for(let i=0;i<4;i++)c2=frame(env2,e2);const q2=env2.project(e2.x,e2.y),b2=c2.filter(c=>c.kind==='fill');
   ok('mobBar off: HP bar keeps native width and place under the feet when the body is rescaled (old behaviour)',b2.length===2&&b2.every(b=>{const bb=bbox(b);return near(bb[2]-bb[0],55)&&near(bb[1],q2.y+6);}),b2.map(bbox));}
  ok('name label keeps its font size (matrix scale 1) while following the scaled head',txt&&near(txt.matrix[0],1,.01)&&near(txt.matrix[3],1,.01),txt?.matrix);
@@ -77,14 +80,34 @@ const near=(a,b,t=.6)=>Math.abs(a-b)<=t;
  ok('telegraphs ON: shown, and the aim lane still ends on the real target (rescale undone)',lane&&near(lane.paths[0].points[1][0],to.x)&&near(lane.paths[0].points[1][1],to.y)&&cs.some(c=>c.text==='원거리 조준'),lane?.paths?.[0]?.points);
  F.teleSet(false);let eff=env.baseCalls.effects;env.drawEffect({type:'sigil',asset:env.VFX.mark,size:1.15});const skipped=env.baseCalls.effects===eff;env.drawEffect({type:'sigil',asset:'assets/other.webp'});env.drawEffect({type:'sigil',asset:env.VFX.mark,size:.62});env.drawEffect({type:'sigil',asset:env.VFX.mark,size:1});
  ok('R116 charge target sigil (VFX.mark, size 1.15) hidden when OFF; other sigils and the click-move/select markers (size .62/1) still drawn',skipped&&env.baseCalls.effects===eff+3);}
-{const env=makeEnv();env.__STORYWORLD_BOSS_R205__={inspect:()=>({prefs:{enrage:true}}),constants:{ENRAGE_SIZE:2}};
+{const env=makeEnv({'storyworld.r425.flow':'{"feetBars":false}'});env.__STORYWORLD_BOSS_R205__={inspect:()=>({prefs:{enrage:true}}),constants:{ENRAGE_SIZE:2}};
  const b={id:'b1',name:'시험 보스',boss:true,x:0,y:0,hp:100,maxHp:100,k:2.1};let cs;for(let i=0;i<4;i++)cs=frame(env,b);const q=env.project(0,0);
  const bar0=cs.filter(c=>c.kind==='fill').map(bbox);ok('boss before enrage: bar under the feet',bar0.length===2&&bar0.every(bb=>near(bb[1],q.y+6)),bar0);
  b.r205Enraged={at:1};b.hp=25;b.k=4.2;for(let i=0;i<12;i++)cs=frame(env,b);
  const body=cs.find(c=>c.kind==='image'),bb=bbox(body),opaque=(bb[3]-bb[1])*FR,head=bb[1]+(bb[3]-bb[1])*TOP,bars=cs.filter(c=>c.kind==='fill').map(bbox),txt=cs.find(c=>c.text==='시험 보스');
- ok('enraged boss keeps the R205 2× size (boss band × 2, not shrunk back)',opaque>=1.9*2*54-2&&opaque<=2.3*2*54+2,opaque/54);
- ok('enraged boss: HP bar moves above the head (8 px over the sheet head line), not in the middle of the body',bars.length===2&&bars.every(x=>x[3]<=head-7&&x[3]>=head-12),{head,bars});
- ok('enraged boss: name label sits right above the bar',txt&&near(txt.point[1],bars[0][1]-5,1),{name:txt?.point,bar:bars[0]});}
+ ok('feetBars:false: enraged boss keeps the R205 2× size (boss band × 2, not shrunk back)',opaque>=1.9*2*54-2&&opaque<=2.3*2*54+2,opaque/54);
+ ok('feetBars:false: enraged boss: HP bar moves above the head (8 px over the sheet head line), not in the middle of the body',bars.length===2&&bars.every(x=>x[3]<=head-7&&x[3]>=head-12),{head,bars});
+ ok('feetBars:false: enraged boss: name label sits right above the bar',txt&&near(txt.point[1],bars[0][1]-5,1),{name:txt?.point,bar:bars[0]});}
+{const env=makeEnv();env.__STORYWORLD_BOSS_R205__={inspect:()=>({prefs:{enrage:true}}),constants:{ENRAGE_SIZE:2}};/* R786 기본: 광폭화해도 막대는 발 아래 */
+ const b={id:'b1f',name:'시험 보스',boss:true,x:0,y:0,hp:100,maxHp:100,k:2.1};let cs;for(let i=0;i<4;i++)cs=frame(env,b);const q=env.project(0,0);
+ b.r205Enraged={at:1};b.hp=25;b.k=4.2;for(let i=0;i<12;i++)cs=frame(env,b);const bars=cs.filter(c=>c.kind==='fill').map(bbox);
+ ok('R786 default: enraged boss HP bar stays under the feet (not over the head, not mid-body)',bars.length===2&&bars.every(x=>x[1]>=q.y),{q:q.y,bars});}
+/* R786: R90 발치 막대(테두리 4px·바탕 2px·채움 2px, 어두운 한 줄)를 대비 있게 — 테두리 6px·바탕 4px·채움 4px, 위쪽 y 는 그대로(아래로만 늘림) */
+{const lum=c=>{const t=String(c).match(/#(..)(..)(..)/);return t?(parseInt(t[1],16)*.3+parseInt(t[2],16)*.59+parseInt(t[3],16)*.11):255;};
+ const pre=env=>{const base=env.drawEnemy;env.drawEnemy=function(e){base.call(this,e);const R=env.ctx,q=env.project(e.x,e.y),W=55,y=q.y+6,r=e.hp/e.maxHp;
+  /* base 가 이미 낸 얇은 바탕·채움 2개를 지우고 R90 실제 모양 3개(테두리·바탕·채움 비율)로 다시 낸다 */
+  for(let i=R.commands.length-1;i>=0;i--){const c=R.commands[i];if(c.kind==='fill'&&['#302926','#795a50'].includes(c.style.fillStyle))R.commands.splice(i,1);}
+  const rect=(col,x0,y0,w,h)=>R.commands.push({kind:'fill',owner:{...R.owner},style:{fillStyle:col},paths:[{points:[R.pt(x0,y0),R.pt(x0+w,y0),R.pt(x0+w,y0+h),R.pt(x0,y0+h)]}]});
+  R.scope({id:'enemy:'+e.id,kind:'enemy'},()=>{rect('rgba(10,10,9,.88)',q.x-W/2-1.5,y-1,W+3,4);rect('#302926',q.x-W/2,y,W,2);rect('#795a50',q.x-W/2,y,W*r,2);});};};
+ const env=makeEnv({},null,pre),m={id:'rs1',name:'시험 몹',x:0,y:-1,hp:5,maxHp:10,k:1.4};let cs;for(let i=0;i<4;i++)cs=frame(env,m);const q=env.project(m.x,m.y),B=cs.filter(c=>c.kind==='fill'),bb=B.map(bbox),fs=B.map(c=>c.style.fillStyle);
+ ok('R786 restyle: three bar rects kept (frame, track, fill)',B.length===3,fs);
+ ok('R786 restyle: heights 6 / 4 / 4 (was 4 / 2 / 2)',bb.length===3&&near(bb[0][3]-bb[0][1],6,.01)&&near(bb[1][3]-bb[1][1],4,.01)&&near(bb[2][3]-bb[2][1],4,.01),bb);
+ ok('R786 restyle: tops unchanged (still under the feet, grows downward only)',bb.every((x,i)=>near(x[1],q.y+(i?6:5),.01)),bb);
+ ok('R786 restyle: frame encloses track and fill by >=1px top and bottom',bb[0][1]<=bb[1][1]-1&&bb[0][3]>=bb[1][3]+1,bb);
+ ok('R786 restyle: dark track, fill >=60 luma brighter',lum(fs[1])<60&&lum(fs[2])-lum(fs[1])>=60,fs);
+ ok('R786 restyle: half HP fills half the track, widths untouched',near((bb[2][2]-bb[2][0])*2,bb[1][2]-bb[1][0],.01)&&near(bb[1][2]-bb[1][0],55,.01),bb);
+ const off=makeEnv({'storyworld.r425.flow':'{"feetBars":false}'},null,pre);let co;const m2={id:'rs2',name:'시험 몹',x:0,y:-1,hp:5,maxHp:10,k:1.4};for(let i=0;i<4;i++)co=frame(off,m2);
+ ok('feetBars:false: no restyle on the overhead bars (old look)',co.filter(c=>c.kind==='fill').every(c=>['rgba(10,10,9,.88)','#302926','#795a50'].includes(c.style.fillStyle)));}
 // ---- ④ 시선 3부류: 엔진 걸음 흉내(벽 없음)로 걸음 방향을 본다 ----
 async function gazeChecks(){
  // 가짜 R53(R230 이 이미 감싼 꼴): 근접 준비 때 R230 처럼 2.4초 간격 안이면 건너뛰고, 아니면 가로 옆자리 블링크를 셈
@@ -192,6 +215,8 @@ function slayerQChecks(){
  vm.createContext(env);vm.runInContext(C('slayer-blood-r425.js'),env);const SB=env.__STORYWORLD_SLAYER_BLOOD_R425__,DT=1/60,step=()=>env.tick(DT);
  env.special();const s0=SB.state();
  ok('slayer Q: cast through special() (native special not called), cooldown 10 s at rank 0, windup first, sprites warmed',!env.nativeSpecial&&env.player.specialCD===10&&s0.Q&&!s0.Q.launched&&env.warmCalls>=2,{s0,warm:env.warmCalls});
+ // R765(사용자 2026-11-11 "8방향 칸으로 고정, 적중보다 자연스럽게"): 회오리는 적 정확한 방향이 아니라 그 적이 든 8방향 칸 중심으로 나간다(적 (4,0) → 화면 남동 칸 중심)
+ {const S=Math.PI/4,want=Math.atan2(2*Math.sin(S)-Math.cos(S),Math.cos(S)+2*Math.sin(S));ok('R765 slayer Q: whirlwind angle = 8-sector centre (not the exact enemy angle 0)',s0.Q&&Number.isFinite(s0.Q.angle)&&Math.abs(s0.Q.angle-want)<1e-9,{angle:s0.Q&&s0.Q.angle,want});}
  // 시전 0.32초: 몸은 0.05초마다 좌·우 반전(가로 폭·세로 그대로), 베기 고리 뒤쪽 반은 몸 앞에, 앞쪽 반은 몸 뒤에 그려진다
  const mir=[],order=[],shape=[],backY=[],frontY=[],spinNames=new Set();
  for(let i=0;i<18;i++){step();env.ctx.commands.length=0;env.drawHero();const cmds=env.ctx.commands,hi=cmds.findIndex(c=>c.owner?.kind==='hero'),hc=cmds[hi],xs=hc.points.map(p=>p[0]),ys=hc.points.map(p=>p[1]);

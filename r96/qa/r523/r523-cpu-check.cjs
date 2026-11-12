@@ -46,7 +46,7 @@ function boot(opt={}){const drawn=[],asked=[],ready=new Set(opt.ready||[]),frame
   project:(x,y)=>({x:640+(x-y-(ctx.cam.x-ctx.cam.y))*27,y:340+(x+y-(ctx.cam.x+ctx.cam.y))*13.5}),cam:{x:40,y:70},W:1280,H:676,zoom:1,room:undefined,
   draw:function(){const r=ctx.room;frames.push(r.props.map(p=>p.id));for(const p of r.props)ctx.drawProp(p);},drawProp:function(p){drawn.push(p.id);}};
  Object.assign(ctx,opt.extra||{});ctx.window=ctx;vm.createContext(ctx);vm.runInContext(src,ctx);return{ctx,api:ctx.__STORYWORLD_ROOMS_R523__,drawn,asked,frames};}
-const FX={};for(const id of['ep1a09','ep1b02','ep1b03','ep1b04','ep1b07','murder02','murder04']){try{FX[id]=JSON.parse(rd('qa/r523/fixtures/'+id+'.json'));}catch(_){}}
+const FX={};for(const id of['ep1a09','ep1b02','ep1b03','ep1b04','ep1b07','murder02','murder04','u205','u206','cult03']){try{FX[id]=JSON.parse(rd('qa/r523/fixtures/'+id+'.json'));}catch(_){}}
 ok('fixtures present (real maps of ep1a09 · ep1b02 · ep1b03 · ep1b04 · ep1b07 · murder02 · murder04)',!!FX.ep1a09&&!!FX.ep1b02&&!!FX.ep1b03&&!!FX.ep1b04&&!!FX.ep1b07&&!!FX.murder02&&!!FX.murder04&&Object.keys(FX.ep1a09.floorSpans).length>50&&Object.keys(FX.ep1b03.floorSpans).length>50);
 let B=null;try{B=boot();}catch(e){console.log(String(e.stack).slice(0,300));}
 const api=B&&B.api;
@@ -62,15 +62,15 @@ ok('two-direction pieces point at each other and face different walls',keys.filt
 const OFF=/r80-(?:024|027|051|144|148)\.webp|hospital-maze\/cabinet|r415\/props\/(?:care-table|grand-desk|record-cabinet|report-desk|low-table|waiting-bench|student-desk|lobby-counter)|mammon/;
 ok('no off-angle (front 3/4 view) art and nothing from the Mammon sheet in the table',keys.every(k=>!OFF.test(ART[k].path)));
 ok('every art file is a shipped runtime file',keys.every(k=>manifest.includes('"'+ART[k].path+'"')||manifest.includes(ART[k].path)));
-for(const rd_ of['r523','r524','r528','r529']){const dir=path.join(R,'runtime-text/assets/'+rd_);let idx=null;try{idx=JSON.parse(fs.readFileSync(path.join(dir,'index.json'),'utf8'));}catch(_){}
+for(const rd_ of['r523','r524','r527','r528','r529']){const dir=path.join(R,'runtime-text/assets/'+rd_);let idx=null;try{idx=JSON.parse(fs.readFileSync(path.join(dir,'index.json'),'utf8'));}catch(_){}
  const files=fs.existsSync(dir)?fs.readdirSync(dir).filter(f=>f!=='index.json'):[];
  ok(rd_+' asset record: every file listed with its real size and sha256, a source and a use; no Drive link or id',!!idx&&files.length>0&&files.every(f=>{const e=(idx.files||[]).find(x=>x.file==='assets/'+rd_+'/'+f),b=fs.readFileSync(path.join(dir,f));return!!e&&e.bytes===b.length&&e.sha256===crypto.createHash('sha256').update(b).digest('hex')&&!!e.source&&!!e.use;})&&(idx.files||[]).length===files.length&&!/drive\.google|docs\.google|[?&]id=/.test(JSON.stringify(idx)));}
 const G=api.G,USE=api.USE,REG=api.REGION;
 ok('groups only use known art; uses only use known groups; regions only use known uses',Object.values(G).every(g=>g.w>0&&g.it.every(it=>ART[it[0]]))&&Object.values(USE).every(u=>[...u.main,...u.side].every(g=>G[g])&&(!u.corner||ART[u.corner]))&&Object.values(REG).every(l=>l.every(([re,u])=>[].concat(u).every(v=>USE[v])))&&Object.values(G).every(g=>!g.lim||Object.keys(g.lim).every(k=>api.LIMIT[k]>0)));
-ok('handled regions: clinic ep1a09 · sloth home ep1b02 (first batch), envy house ep1b03 · gluttony kitchen ep1b04 (second batch), fire floor ep1b07 · tower floor murder02 · shared housing murder04 (third batch) — nothing else',Object.keys(REG).sort().join()==='ep1a09,ep1b02,ep1b03,ep1b04,ep1b07,murder02,murder04');
+ok('handled regions: clinic ep1a09 · sloth home ep1b02 (first batch), envy house ep1b03 · gluttony kitchen ep1b04 (second batch), fire floor ep1b07 · tower floor murder02 · shared housing murder04 (third batch), admin rights u205 · core transfer u206 · threshold of Samong cult03 (fourth batch) — nothing else',Object.keys(REG).sort().join()==='cult03,ep1a09,ep1b02,ep1b03,ep1b04,ep1b07,murder02,murder04,u205,u206');
 ok('room names → uses; fight rooms·exit gates·junctions stay untouched, the entrance gets a light set',api.useOf('ep1a09','주사실')==='inject'&&api.useOf('ep1a09','처치 대기실')==='wait'&&api.useOf('ep1a09','관찰실')==='observe'&&api.useOf('ep1a09','약품 보관실')==='drug'&&api.useOf('ep1a09','길목')==='hall'&&
  api.useOf('ep1b02','거실')==='living'&&api.useOf('ep1b02','작은 방')==='bedroom'&&api.useOf('ep1b02','물품 보관실')==='store'&&api.useOf('ep1b02','현관')==='foyer'&&api.useOf('ep1a09','입구')==='lobby'&&api.useOf('ep1b02','입구')==='foyer'&&
- ['보스 전투실','중앙 전투실','다음 구역 문','갈림길','작은 마당',''].every(nm=>api.useOf('ep1a09',nm)===null&&api.useOf('ep1b02',nm)===null)&&api.useOf('u205','거실')===null&&api.useOf('u205','입구')===null);
+ ['보스 전투실','중앙 전투실','다음 구역 문','갈림길','작은 마당',''].every(nm=>api.useOf('ep1a09',nm)===null&&api.useOf('ep1b02',nm)===null)&&api.useOf('last302','거실')===null&&api.useOf('last302','입구')===null);
 
 // ---- 실제 지도 두 곳 --------------------------------------------------------------------------------
 const CLINIC=new Set(['bed','stretcher','overbed','medcab','trolley','wheelchair','monitor','iv','stool','lamp','crutches','curtain','chair145','table146']);
@@ -173,6 +173,26 @@ const Fl=audit('murder04',FLAT,50,['den','den2','den3']);
  {let near=1e9;for(const A of[Fi,Tw,Fl])for(const p of A.rows)if(p.r523.art==='steps')for(const q of A.w.props)if(!q.r523Room&&!q.r449Furniture&&!q.r224Furniture)near=Math.min(near,Math.hypot(q.x-p.x,q.y-p.y));
   ok('a flight of steps is a big piece: it keeps 2.4 clear of every other standing prop (nearest '+near.toFixed(2)+')',ART.steps.clear>=1.3&&near>=2.4);}
  ok('third batch: one-direction art is mirrored only on the opposite wall',[...Fi.rows,...Tw.rows,...Fl.rows].filter(p=>!ART[p.r523.art].pair&&ART[p.r523.art].ang==='iso'&&p.r523.tag!=='screen').every(p=>!!p.r303Flip===(ART[p.r523.art].face!==p.r523.wall)));}
+// ---- 넷째 묶음(R527): 관리자 권한 u205 · 중앙 코어 이주실 u206 · 사몽의 문턱 cult03 -------------------------------
+//  기억의 방·중앙 이주실·보호 구획 = 캡슐 + 심박 모니터 / 기계 육체실 = 거치대 줄 / 닫힌 구획·연결실 = 기계·냉각기 / 수확실 = 연꽃 코어 받침 + 수조 / 방벽 구획 = 돌 방벽 줄 / 코어 전실 = 받침 + 성물함 + 등불
+const ADMIN=new Set(['pod','vitals','tank','kiosk','machine','cooler','vent','rig']);
+const CULT=new Set(['lotus','tank','barrier','lanterns','reliq']);
+ok('fourth batch room names → uses (memory rooms, sealed sections, body rooms, transfer rooms, harvest rooms, barrier sections; empty corridors, connecting galleries and connectors are left alone)',api.useOf('u205','기억의 방')==='memory'&&api.useOf('u205','기억 전실')==='memhall'&&api.useOf('u205','닫힌 구획')==='sealed'&&api.useOf('u205','앞방')==='annex'&&api.useOf('u205','입구')==='gate'&&api.useOf('u205','빈 복도')===null&&api.useOf('u205','길목')===null&&
+ api.useOf('u206','연결실')==='link'&&api.useOf('u206','보호 구획')==='ward'&&api.useOf('u206','기계 육체실')==='bodies'&&api.useOf('u206','중앙 이주실')==='transfer'&&api.useOf('u206','앞방')==='annex'&&api.useOf('u206','입구')==='gate'&&api.useOf('u206','길목')===null&&
+ api.useOf('cult03','수확실')==='harvest'&&api.useOf('cult03','방벽 구획')==='bulwark'&&api.useOf('cult03','코어 전실')==='corehall'&&api.useOf('cult03','앞방')==='narthex'&&api.useOf('cult03','입구')==='narthex'&&api.useOf('cult03','연결 회랑')===null&&api.useOf('cult03','길목')===null);
+const Ad=audit('u205',ADMIN,30,['memory','memhall','sealed']);
+const Co=audit('u206',ADMIN,25,['link','ward','bodies','transfer']);
+const Cu=audit('cult03',CULT,18,['harvest','bulwark','corehall']);
+{const pods=[Ad,Co].flatMap(A=>perRoom(A,/^pod$/)),vit=[Ad,Co].flatMap(A=>perRoom(A,/^vitals$/)),rigs=[Ad,Co].flatMap(A=>perRoom(A,/^rig$/));
+ ok('capsule rooms: capsules only in memory rooms, transfer rooms and protected sections, at most three per room, and every room with a capsule has a vitals monitor ('+pods.filter(q=>q.n>0).length+' rooms, at least 8)',pods.filter(q=>q.n>0).length>=8&&pods.every(q=>q.n<=3)&&pods.filter(q=>q.n>0).every(q=>/^(memory|transfer|ward)$/.test(q.use))&&pods.every((q,i)=>q.n===0||vit[i].n>=1));
+ ok('machine-body rooms hold body rigs: every body room has one, at least two of them are rows (two or more); rigs stand nowhere but body rooms and sealed sections',rigs.filter(q=>q.use==='bodies').length>=3&&rigs.filter(q=>q.use==='bodies').every(q=>q.n>=1)&&rigs.filter(q=>q.use==='bodies'&&q.n>=2).length>=2&&rigs.filter(q=>q.n>0).every(q=>/^(bodies|sealed)$/.test(q.use)));
+ ok('sealed sections and link rooms read as plant: machines or coolers in each region, no capsules there',Ad.rows.some(p=>p.r523.use==='sealed'&&/^(machine|cooler)$/.test(p.r523.art))&&Co.rows.some(p=>p.r523.use==='link'&&/^(machine|cooler)$/.test(p.r523.art))&&[...Ad.rows,...Co.rows].every(p=>!/^(sealed|link)$/.test(p.r523.use)||p.r523.art!=='pod'));
+ const bar=perRoom(Cu,/^barrier$/),lot=perRoom(Cu,/^lotus$/);
+ ok('threshold of Samong: at least two barrier sections are rows of stone barriers (three or more), lotus core stands in every harvest room, barriers only in barrier sections',bar.filter(q=>q.use==='bulwark'&&q.n>=3).length>=2&&bar.filter(q=>q.n>0).every(q=>q.use==='bulwark')&&lot.filter(q=>q.use==='harvest').length>=3&&lot.filter(q=>q.use==='harvest').every(q=>q.n>=1));
+ ok('fourth batch: no household furniture, no stairs or alarm boxes in any of the three regions',[...Ad.rows,...Co.rows,...Cu.rows].every(p=>!/sofa|bed|tv|fridge|table|chair|wardrobe|suitcase|trash|mirror|shelf|flamp|range|steps|alarm/.test(p.r523.art)));
+ ok('fourth batch: connectors (길목), empty corridors (빈 복도) and connecting galleries (연결 회랑) get nothing',[Ad,Co,Cu].every(A=>{const nm=new Map(A.L.worldR74.rooms.map(q=>[q.id,q.name]));return A.rows.every(p=>!/^(길목|빈 복도|연결 회랑)$/.test(nm.get(p.r523.room)||''));}));
+ ok('new art for the fourth batch: five existing game pieces put on the 2:1 floor as one-direction art in assets/r527, three direction-less pieces straight from world-r80',['rig','pod','tank','lanterns','barrier'].every(k=>ART[k]&&ART[k].ang==='iso'&&!ART[k].pair&&/^assets\/r527\/[a-z-]+\.webp$/.test(ART[k].path))&&['vitals','lotus','reliq'].every(k=>ART[k]&&ART[k].ang==='pole'&&/^assets\/world-r80\/r80-\d+\.webp$/.test(ART[k].path)));
+ ok('fourth batch: one-direction art is mirrored only on the opposite wall',[...Ad.rows,...Co.rows,...Cu.rows].filter(p=>!ART[p.r523.art].pair&&ART[p.r523.art].ang==='iso'&&p.r523.tag!=='screen').every(p=>!!p.r303Flip===(ART[p.r523.art].face!==p.r523.wall)));}
 ok('corridors stay passable: a connector gets at most 3 pieces',[C,Hm].every(A=>{const c={};for(const p of A.rows)if(/hall|passage/.test(p.r523.use))c[p.r523.room]=(c[p.r523.room]||0)+1;return Object.values(c).every(v=>v<=3);}));
 // 그림 방향: 두 방향 그림은 벽에 맞는 쪽을 쓰고(거울 아님), 한 방향 그림만 반대 벽에서 좌우 거울
 ok('two-direction art is used unmirrored on its own wall',Hm.rows.filter(p=>ART[p.r523.art].pair).length>20&&Hm.rows.filter(p=>ART[p.r523.art].pair).every(p=>!p.r303Flip&&ART[p.r523.art].face===p.r523.wall));
@@ -213,7 +233,7 @@ ok('observation beds get a screen at the foot (entrance side)',C.rows.some(p=>p.
  const mk=(id,q)=>({id,path:'assets/world-r80/r80-026.webp',x:(q.x0+q.x1)/2,y:(q.y0+q.y1)/2,height:70,solid:false,visible:true,r80Dressing:true,r449Furniture:true});
  w.props.push(mk('r449:old:corridor',cor),mk('r449:old:study',std));b.ctx.room=w;b.ctx.cam={x:50,y:50};b.ctx.draw();const fr=b.frames[0]||[];
  ok('old angle-matched furniture is rested only inside rooms this overlay furnishes; in rooms it leaves alone (corridors) it stays',fr.some(i=>/^r523:/.test(i))&&fr.includes('r449:old:corridor')&&!fr.includes('r449:old:study'));}
-{const b=boot();for(const[id,layer,extra]of[['ep1b06','STORY',{}],['ep1a08','STORY',{}],['ep1a09','SAMONG',{}],['u205','STORY',{}]]){const w=world(FX.ep1a09,{id,layer});Object.assign(w.exploration,extra);ok('not handled: '+id+' / '+layer,b.api.enabled(w)===false&&b.api.list(w).length===0);}
+{const b=boot();for(const[id,layer,extra]of[['ep1b06','STORY',{}],['ep1a08','STORY',{}],['ep1a09','SAMONG',{}],['last302','STORY',{}]]){const w=world(FX.ep1a09,{id,layer});Object.assign(w.exploration,extra);ok('not handled: '+id+' / '+layer,b.api.enabled(w)===false&&b.api.list(w).length===0);}
  const w=world(FX.ep1a09);w.exploration.samongR103={};ok('not handled: samong maps',b.api.enabled(w)===false);}
 
 // ---- 작은 가짜 방: 벽 줄·문 틈·구석·거울 대칭 ------------------------------------------------------------
