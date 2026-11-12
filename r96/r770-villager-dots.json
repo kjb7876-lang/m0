@@ -87,6 +87,31 @@
    "sha256": "97aa0064b8cd63d8eaf2b47e303a17bcb3fd976d4fecd815ad9344ccd087dc0a"
   },
   {
+   "villager": "sobok",
+   "anim": "hit",
+   "frames": 4,
+   "source": "Dots CX-0070BM CX-0070BM_vil3_hit4_r1_c1.png (그림 스레드 c1 손질)",
+   "sourceSha256": "a3d66a1294606202345116c347088015d9e801c5d0fc0cae86841d40ec85a3c6",
+   "path": "assets/r770/villagers/sobok-hit.webp",
+   "cell": 256,
+   "pivot": [
+    128,
+    234.67
+   ],
+   "heights": [
+    206.7,
+    201.7,
+    201.7,
+    206.7
+   ],
+   "size": [
+    1024,
+    256
+   ],
+   "bytes": 33654,
+   "sha256": "439dc4f09ce826af8ade7a5d75e5580ae4d394a9951772d3e2cb5fa90c0392c5"
+  },
+  {
    "villager": "herbwife",
    "anim": "hit",
    "frames": 4,
