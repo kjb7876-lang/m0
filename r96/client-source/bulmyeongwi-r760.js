@@ -191,14 +191,17 @@ window.__STORYWORLD_BULMYEONGWI_R760__=Object.freeze({rev:REV,inspect:()=>({rev:
 (()=>{'use strict';
 if(window.__STORYWORLD_VILLAGERS_R763__)return;
 const REV='R763-villagers-1',KEY='storyworld.r763.villagers';
-let prefs={on:true,sfx:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object')for(const k of Object.keys(prefs))if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
-const stats={assigned:0,renamed:0,frames:0,waiting:0,deaths:0,groans:0,sleeps:0,reinstalls:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
+let prefs={on:true,sfx:true,sobok:true,proj:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object')for(const k of Object.keys(prefs))if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
+const stats={assigned:0,renamed:0,frames:0,waiting:0,deaths:0,groans:0,sleeps:0,reinstalls:0,shots:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const T=()=>typeof time==='number'&&Number.isFinite(time)?time:performance.now()/1000;
 const D='assets/r763/villagers/',CELL=256,PIV=[128,234.67];
 // vis = 시트 보이는 키(256칸 기준, 발 줄 234.67 에서 머리끝까지 칸마다 재서 가운데 값).
 // 어부 걷기 8번 칸은 1번 칸과 같은 넓은 걸음이라 돌 때마다 멈칫했다(분석 스레드 실측 발 벌림 .57 .44 .21 .33 | .58 .42 .26 .56) → 8번 칸 자리에 4번 칸.
-const V={fisher:{name:'잠식된 어부',vis:208,n:{idle:6,walk:8,atk:8,hit:4,death:8},walkOrder:[0,1,2,3,4,5,6,3]},herbwife:{name:'잠식된 약방 아낙',vis:211,n:{idle:6,walk:8,atk:8}}};
-const PATHS=Object.entries(V).flatMap(([k,v])=>Object.keys(v.n).map(a=>D+k+'-'+a+'.webp'));
+const V={fisher:{name:'잠식된 어부',vis:208,n:{idle:6,walk:8,atk:8,hit:4,death:8},walkOrder:[0,1,2,3,4,5,6,3]},herbwife:{name:'잠식된 약방 아낙',vis:211,n:{idle:6,walk:8,atk:8}},
+ // R769 소복 처녀(vil3): 걷기 8칸 임시본 하나뿐(보폭이 모든 칸 같음) → 모든 동작을 걷기 칸으로, 걷기는 6fps 로 '실에 끌려 미끄러지듯'. vis 186 = 머리 위 꼭두각시 실을 뺀 몸 키.
+ sobok:{name:'잠식된 소복 처녀',vis:186,n:{walk:8},walkFps:6,temp:true}};
+const PROJ='assets/r769/herbwife-proj6.webp',PCELL=128,PN=6;
+const PATHS=[...Object.entries(V).flatMap(([k,v])=>Object.keys(v.n).map(a=>D+k+'-'+a+'.webp')),PROJ];
 const ZONES=new Set(['last302','last303']),OLD=/포구 검은 안개|귀비탕 공명 안개핵|유리 망령|주민에게서 떨어진 검은 안개/;
 const zoneOf=()=>{try{return String(typeof room==='object'&&room?room.id||'':'');}catch(_){return '';}};
 const hash=s=>{let h=2166136261;for(const c of String(s))h=Math.imul(h^c.charCodeAt(0),16777619);return (h>>>0)/4294967296;};
@@ -209,7 +212,8 @@ function rename(e,k){const n=String(e.name||'');if(!OLD.test(n))return;if(!e.r76
 function kindFor(e,zone){if(!prefs.on||!e||typeof e!=='object'||e.boss||e.hero||e.r170Tower||e.r251Circle)return null;const z=typeof zone==='string'?zone:zoneOf();if(!ZONES.has(z))return null;
  // 아니라고 정한 것은 이름이 그대로일 때만 기억한다(R74 순찰처럼 지역을 만든 뒤 이름이 바뀌는 몹이 있음).
  if(e.r763Zone===z&&(e.r763||e.r763N===e.name)){if(e.r763){if(e.r74Monster){e.r763Atlas=e.r74Monster;delete e.r74Monster;}if(OLD.test(String(e.name||'')))rename(e,e.r763);}return e.r763||null;}const id=String(e.nativeId||'');let k=null;
- if((id==='l302-e1'||id==='l302-e3')&&(e.r763From||OLD.test(String(e.name||''))))k=id==='l302-e3'?'fisher':z==='last303'?(slot(e)%2?'fisher':'herbwife'):'herbwife';
+ // R769: l302-e3(근거리) 셋에 하나는 소복 처녀, last303 은 번호로 아낙·어부·소복을 차례로(소복을 끄면 그 자리는 어부).
+ if((id==='l302-e1'||id==='l302-e3')&&(e.r763From||OLD.test(String(e.name||'')))){const n=slot(e);k=id==='l302-e3'?(n%2===0?'sobok':'fisher'):z==='last303'?['herbwife','fisher','sobok'][n%3]:'herbwife';if(k==='sobok'&&!prefs.sobok)k='fisher';}
  e.r763=k;e.r763Zone=z;e.r763N=k?undefined:e.name;if(k){
   // R74 순찰(유리 망령)은 지도 괴물 그림 표시(r74Monster)가 있으면 frameFor 사슬을 타지 않고 이름도 그 표로 되돌아간다 → R386 처럼 표시를 떼어 둔다(원래 값은 r763Atlas).
   if(e.r74Monster){e.r763Atlas=e.r74Monster;delete e.r74Monster;}rename(e,k);stats.assigned++;}return k;}
@@ -217,13 +221,16 @@ const ST=new WeakMap();const stOf=e=>{let s=ST.get(e);if(!s)ST.set(e,s={seed:has
 function faceLeft(e){try{const r=window.__STORYWORLD_ENEMY_FACE_R444__?.left?.(e);if(typeof r==='boolean')return r;}catch(_){}
  try{const A=e.attack;if(A&&Number.isFinite(A.angle))return Math.cos(A.angle)-Math.sin(A.angle)<0;return (player.x-player.y)<(e.x-e.y);}catch(_){return false;}}
 // 칸 고르기. 공격: 준비 동안 0→2(치켜듦), 맞히는 동안 3(내리찍기·던짐), 거둠 4→7.
-function cell(e,k){const v=V[k],t=T(),s=stOf(e);
+function cell(e,k){const v=V[k];return v.n.idle?cell0(e,k):walkOnly(cell0(e,k),e,v);}
+// 걷기 시트만 있는 몹(R769 소복): 대기는 걷기 칸을 느리게(2.5fps, 실에 매달려 흔들림), 공격은 걷기 칸을 차례로(앞으로 쏠림), 피격·죽음은 0번 칸.
+function walkOnly([a,f],e,v){if(a==='walk')return [a,f];const n=v.n.walk;if(a==='atk')return ['walk',clamp(f,0,n-1)];if(a==='idle'){const s=stOf(e);return ['walk',Math.floor(T()*2.5+s.seed*n)%n];}return ['walk',0];}
+function cell0(e,k){const v=V[k],t=T(),s=stOf(e);
  if(!(e.hp>0))return v.n.death?['death',v.n.death-1]:['idle',0];
  const A=e.attack;if(A&&Number.isFinite(A.elapsed)){const sh=A.shape154||e.combatProfile?.attackShape||{},w=Math.max(.05,A.castWindup150??sh.windup??.45),act=sh.active??.15,rec=Math.max(.05,sh.recovery??.35),el=A.elapsed;
   const f=el<w?Math.floor(el/w*3):el<w+act?3:4+Math.floor((el-w-act)/rec*4);return ['atk',clamp(f,0,7)];}
  if(e.rangedWindup>0)return ['atk',2];
  if(e.hitTimer>0){if(!s.hitAt||t-s.hitAt>.4)s.hitAt=t;return v.n.hit?['hit',Math.min(v.n.hit-1,Math.floor((t-s.hitAt)/.035))]:['idle',0];}s.hitAt=0;
- if(e.moving){const i=Math.floor(t*10+s.seed*8)%v.n.walk;return ['walk',v.walkOrder?v.walkOrder[i]:i];}
+ if(e.moving){const i=Math.floor(t*(v.walkFps||10)+s.seed*8)%v.n.walk;return ['walk',v.walkOrder?v.walkOrder[i]:i];}
  return ['idle',Math.floor(t*7+s.seed*6)%v.n.idle];}
 function frameOf(k,a,f,flip){const vh=V[k].vis,sx=f*CELL;
  return {path:D+k+'-'+a+'.webp',assetFrame:{sourceRect:[sx,0,CELL,CELL],pivot:PIV,visibleHeight:vh},sourceAlphaCore:[sx,0,CELL,CELL],metricThreshold:16,sourcePixelsEdited:false,
@@ -239,7 +246,7 @@ function installRoom(){if(typeof makeRoom!=='function')return false;if(makeRoom.
  const w=function(id,l,...a){const r=base.call(this,id,l,...a);try{if(prefs.on&&r&&ZONES.has(String(id))&&l!=='DREAM'&&Array.isArray(r.enemies))for(const e of r.enemies)kindFor(e,String(id));if(prefs.on&&ZONES.has(String(id))&&typeof ensureImages==='function')Promise.resolve(ensureImages(PATHS)).catch(()=>{});}catch(err){fail(err);}return r;};
  for(const k of Object.keys(base))try{w[k]=base[k];}catch(_){}w.__r763=true;try{makeRoom=w;}catch(_){return false;}try{window.makeRoom=w;}catch(_){}return true;}
 // ── 죽음: 엔진 죽음 불꽃(spawnBurnDeath3 → drawBurnDeath3)을 주민만 '쓰러져 잠듦'으로 ──
-const LIFE={fisher:2.4,herbwife:1.6},FSTEP=.11;
+const LIFE={fisher:2.4,herbwife:1.6,sobok:1.6},FSTEP=.11;
 function wrapDeath(){let ok=true;
  if(typeof spawnBurnDeath3==='function'&&!spawnBurnDeath3.__r763){const base=spawnBurnDeath3;const w=function(e){const k=e&&prefs.on?(e.r763Zone===zoneOf()?e.r763:kindFor(e)):null,r=base.apply(this,arguments);
    try{if(k&&typeof effects!=='undefined'&&Array.isArray(effects)){for(let i=effects.length-1;i>=0;i--){const f=effects[i];if(f?.type==='enemyBurnDeath'&&f.sourceId===e.id&&!f.r763){f.r763={k,flip:faceLeft(e)};f.life=Math.max(f.life||0,LIFE[k]);stats.deaths++;break;}}}}catch(err){fail(err);}return r;};
@@ -251,7 +258,7 @@ function drawDying(fx){const R=fx.r763,v=V[R.k],q=project(fx.x,fx.y),h=Number.is
  const end=clamp((life-a)/.7,0,1);
  if(v.n.death){const f=Math.min(v.n.death-1,Math.floor(a/FSTEP)),fr=frameOf(R.k,'death',f,R.flip);if(!ready(fr.path))return;drawAssetFrame3(fr.path,fr,q.x,q.y,h,{alpha:end,flip:R.flip});return;}
  // 죽음 시트가 없는 아낙: 대기 첫 칸이 무릎 높이까지 가라앉으며 사라진다(임시, Dots 재작업 대기).
- const u=clamp(a/life,0,1),fr=frameOf(R.k,'idle',0,R.flip);if(!ready(fr.path))return;drawAssetFrame3(fr.path,fr,q.x,q.y+h*.12*u,h*(1-.18*u),{alpha:Math.pow(1-u,.9),flip:R.flip});}
+ const u=clamp(a/life,0,1),fr=frameOf(R.k,v.n.idle?'idle':'walk',0,R.flip);if(!ready(fr.path))return;drawAssetFrame3(fr.path,fr,q.x,q.y+h*.12*u,h*(1-.18*u),{alpha:Math.pow(1-u,.9),flip:R.flip});}
 // ── 소리: 피격 신음·죽음 잠드는 숨(그림 스레드가 만든 assets/r761/sfx) ──
 const VS={r761VillagerGroan:['groan',.55],r761VillagerSleep:['sleep',.65]},GROAN_GAP=1.5;let hitNow=null,dyingNow=null,lastGroan=-1e9;
 function sfxProfiles(){try{if(typeof soundProfiles==='undefined'||!soundProfiles)return;for(const[kind,[n,g]]of Object.entries(VS))if(!soundProfiles[kind]?.length)soundProfiles[kind]=[1,2].map(i=>({key:'r761-'+n+'-'+i,path:'assets/r761/sfx/bmg-'+n+'-'+i+'.ogg',gain:g,r541:true}));}catch(err){fail(err);}}
@@ -265,11 +272,20 @@ function wrapHits(){let ok=true;const vil=e=>{try{return !!(e&&prefs.on&&(e.r763
  if(typeof killEnemy==='function'&&!killEnemy.__r763){const base=killEnemy;const w=function(e){const prev=dyingNow;dyingNow=vil(e)?e:null;try{return base.apply(this,arguments);}finally{dyingNow=prev;}};w.__r763=true;try{killEnemy=w;}catch(_){ok=false;}}
  return ok&&typeof hitEnemy==='function'&&typeof killEnemy==='function';}
 sfxProfiles();if(typeof setupAudio==='function'){const base=setupAudio;setupAudio=function(){const r=base.apply(this,arguments);sfxProfiles();return r;};}
+// ── R769 약방 아낙 투사체: 엔진 적 투사체(enemyShot → drawProjectile)를 proj6 r4 시트(실타래 공, 오른쪽으로 날아가는 그림)로. 크기는 엔진 투사체 크기의 1.7배(칸의 공은 반쯤). ──
+function shooter(b){try{if(!b||b.friendly||!b.owner||!Array.isArray(room?.enemies))return null;for(const e of room.enemies)if(e&&e.id===b.owner)return e;}catch(_){}return null;}
+function drawShot(b){const e=shooter(b);if(!e)return false;const z=zoneOf();if(!ZONES.has(z)||(e.r763Zone===z?e.r763:kindFor(e,z))!=='herbwife')return false;
+ const im=(typeof readyImage==='function'&&readyImage(PROJ)?.image)||null;if(!im){if(typeof ensureImages==='function')try{Promise.resolve(ensureImages([PROJ])).catch(()=>{});}catch(_){}return false;}
+ const zz=typeof zoom==='number'&&zoom>0?zoom:1,q=project(b.x,b.y),pr=project(b.x-(b.vx||0)*.06,b.y-(b.vy||0)*.06),ang=Math.atan2(q.y-pr.y,q.x-pr.x);
+ const mx=(typeof W==='number'&&typeof H==='number')?Math.min(W,H)*.2/Math.SQRT2:120,sz=Math.min(mx,24*(b.scale||1)*zz)*1.7,f=Math.floor((b.age||0)*12+hash(b.id||'')*PN)%PN;
+ ctx.save();try{ctx.translate(q.x,q.y-18*zz);ctx.rotate(ang);ctx.drawImage(im,f*PCELL,0,PCELL,PCELL,-sz/2,-sz/2,sz,sz);}finally{ctx.restore();}stats.shots++;return true;}
+function wrapShots(){if(typeof drawProjectile!=='function')return false;if(drawProjectile.__r769)return true;const base=drawProjectile;
+ const w=function(b){try{if(prefs.on&&prefs.proj&&drawShot(b))return;}catch(err){fail(err);}return base.apply(this,arguments);};w.__r769=true;try{drawProjectile=w;}catch(_){return false;}return true;}
 // 다른 오버레이(R191 시대 순찰 등)가 지역에 들어온 뒤 이름을 다시 붙여도 0.7초 안에 다시 맞춘다(화면에 안 그려진 몹의 이름표·목록까지).
 if(typeof setInterval==='function')setInterval(()=>{try{const z=zoneOf();if(prefs.on&&ZONES.has(z)&&Array.isArray(room?.enemies))for(const e of room.enemies)kindFor(e,z);}catch(err){fail(err);}},700);
 // 다른 덧씌우기(R380·R188·R462·R541)가 먼저 감싼 뒤 바깥에서 감싸도록 늦게, 될 때까지 몇 번.
-let tries=0;(function arm(){let done=false;try{done=[install(),installRoom(),wrapDeath(),wrapSound(),wrapHits()].every(Boolean);}catch(e){fail(e);}if(!done&&++tries<80&&typeof setTimeout==='function')setTimeout(arm,250);})();
-if(typeof setTimeout==='function')setTimeout(()=>{try{install();installRoom();wrapDeath();wrapSound();wrapHits();}catch(e){fail(e);}},0);
+let tries=0;(function arm(){let done=false;try{done=[install(),installRoom(),wrapDeath(),wrapSound(),wrapHits(),wrapShots()].every(Boolean);}catch(e){fail(e);}if(!done&&++tries<80&&typeof setTimeout==='function')setTimeout(arm,250);})();
+if(typeof setTimeout==='function')setTimeout(()=>{try{install();installRoom();wrapDeath();wrapSound();wrapHits();wrapShots();}catch(e){fail(e);}},0);
 window.__STORYWORLD_VILLAGERS_R763__=Object.freeze({rev:REV,kindFor,cell,frameOf,villagers:V,inspect:()=>({rev:REV,prefs:{...prefs},stats:{...stats},lastError}),
  set(p={}){for(const k of Object.keys(prefs))if(typeof p[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return {...prefs};}});
 })();

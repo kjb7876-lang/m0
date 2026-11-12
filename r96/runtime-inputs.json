@@ -8212,7 +8212,10 @@
     "assets/r810/tiled-house-b-l.webp",
     "assets/r810/tiled-house-b-r.webp",
     "assets/r810/yakbang-house-a.webp",
-    "assets/r810/yakbang-house-b.webp"
+    "assets/r810/yakbang-house-b.webp",
+    "assets/r763/villagers/sobok-walk.webp",
+    "assets/r769/herbwife-proj6.webp",
+    "hero-ground-r821.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9287,5 +9290,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "40307938fb1be946121aadb94914f50fa675c0dd8f46c58b59426ef4b1415c39"
+  "runtimeManifestSHA256": "7f52be16a99c973354cc2f9d129a0ac7e0be52f557d341cff034acb98866aa38"
 }
