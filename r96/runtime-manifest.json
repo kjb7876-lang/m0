@@ -37743,6 +37743,16 @@
       "sha256": "24d7a44d7f21f771a102e3a79629b82f0e18857bec3f283031c03bff248cc0b6"
     },
     {
+      "path": "assets/r948/heart-fly8.webp",
+      "bytes": 77962,
+      "sha256": "02ec0492466b78b30c7dbcbba9b5d1434213c41f8ad769f1700b29edfeded12a"
+    },
+    {
+      "path": "assets/r948/heart-hit6.webp",
+      "bytes": 60044,
+      "sha256": "a442a8da37dc38a57d1dda36a2e6ae7acd1953d6ec90ac5306ce50c97a6e0afd"
+    },
+    {
       "path": "assets/r99/clean/assets/cult-v3121/c101_black_rose_prior.webp",
       "bytes": 54936,
       "sha256": "9ac511764c7900ba8149b36c6806487b374d157541484eb1b5ec628f820772f0"
@@ -44324,8 +44334,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6575211,
-      "sha256": "0e8609cc9579843dc6520460e4c1fb0c38d7aacd9ec720a01a1bfe81ea568e85"
+      "bytes": 6575260,
+      "sha256": "fd627f02ba581c91de1db7e38007952eee6530db8f97b38777fa2cb70ba62904"
     },
     {
       "path": "intro-r140.js",
@@ -44451,6 +44461,11 @@
       "path": "michaela-genesis-r563.js",
       "bytes": 17672,
       "sha256": "0ec8e14598dde48fedcda9f7d79e043baeefef2b7631b46a0dedd5fd0958e1ac"
+    },
+    {
+      "path": "michaela-heart-r948.js",
+      "bytes": 30595,
+      "sha256": "0720da364ac8747143c6b2db862504217c5bcdc2884290af89841244ffa85532"
     },
     {
       "path": "michaela-r247.js",
@@ -45393,9 +45408,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9078,
-  "totalBytes": 1240728780,
-  "webHTMLSha256": "0e8609cc9579843dc6520460e4c1fb0c38d7aacd9ec720a01a1bfe81ea568e85",
+  "fileCount": 9081,
+  "totalBytes": 1240897430,
+  "webHTMLSha256": "fd627f02ba581c91de1db7e38007952eee6530db8f97b38777fa2cb70ba62904",
   "largest": [
     {
       "path": "index.html",
