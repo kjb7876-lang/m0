@@ -442,6 +442,8 @@ jobs:
         run: node r96/qa/r789/r789-cpu-check.cjs
       - name: R954 insomnia-ghost zone hit/death/attack sounds (ElevenLabs) CPU check
         run: node r96/qa/r954/r954-cpu-check.cjs
+      - name: R955 regular mob family hit/death/attack sounds (ElevenLabs) CPU check
+        run: node r96/qa/r955/r955-cpu-check.cjs
       - name: R964 boss attack sound also fires on story pattern attacks (no attack id, no bossVolley) CPU check
         run: node r96/qa/r964/r964-cpu-check.cjs
       - name: R965 midboss attack sound also fires on story pattern attacks (no attack id, no bossVolley) CPU check

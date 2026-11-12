@@ -15,7 +15,9 @@
   phantomblade:'환수검 모조체',rainwitness:'파란불 역주행 목격자',hotelclerk:'공실장부 당직감사',silentalarm:'진술 봉쇄 인과핵',rooftopecho:'옥상 인과보관인',chipfirewall:'칩 제단 방화벽',idmanager:'ID 생체조 관리자',judgecore:'기계재판 집행핵',
   antichristcradle:'적그리스도 배양좌'};
  const DIR='assets/r789/sfx/',SETS=[['MHit','hit',3,.55],['MDie','die',2,.8],['MAtk','atk',2,.6]],HIT_GAP=900,ATK_GAP=1200;
- const BY_NAME=new Map(Object.entries(BOSSES).map(([s,n])=>[n,s])),slugCache=new Map();
+ // R965: R385 가 실제 게임에서 이름을 바꾼 중간보스(검수 목록 42·43 역십자가 → 흑마법사).
+ const ALIAS={'흑마법사의 시체경호체':'corpseguard'};
+ const BY_NAME=new Map([...Object.entries(BOSSES).map(([s,n])=>[n,s]),...Object.entries(ALIAS)]),slugCache=new Map();
  function slugOf(name){if(typeof name!=='string')return null;const k=name.trim();if(slugCache.has(k))return slugCache.get(k);let s=BY_NAME.get(k)||null;
   if(!s)for(const [n,v] of BY_NAME)if(k.length>=n.length&&k.includes(n)){s=v;break;}slugCache.set(k,s);return s;}
  const stats={hit:0,hitSkipped:0,die:0,atk:0,atkSkipped:0,warmed:0,errors:0};const lastHit={},lastAtk={},seenAtk=new WeakMap();let warmKey='';
