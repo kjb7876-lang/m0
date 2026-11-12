@@ -8295,7 +8295,8 @@
     "slayer-blood-passive-r947.js",
     "qa-snapshot-r940.js",
     "cursor-r780.js",
-    "hunter-squad-r952.js"
+    "hunter-squad-r952.js",
+    "seoha-epoch-r949.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9370,5 +9371,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "60101cfa72f0e418055ad9d3968ad85e038adb458f75c6dc085ae297d1bdc802"
+  "runtimeManifestSHA256": "6424acfaa1b634a6d04db1bdcd2e0cba15b295d02700bc1b55ed548e66659d09"
 }
