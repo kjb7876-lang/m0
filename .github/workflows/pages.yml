@@ -681,6 +681,8 @@ jobs:
         run: node r96/qa/r710/r710-cpu-check.cjs
       - name: R760 Bulmyeongwi boss staging (one toned 4-pose set for idle/attack, one size, ink-violet tone + amber eyes, layered afterimages; mobs/other bosses untouched) CPU check
         run: node r96/qa/r760/r760-cpu-check.cjs
+      - name: R780 StoryWorld cursor (needle cursors per hover target matching the engine click test, click markers from the engine result, touch/off/caps, style writes only on change) CPU check
+        run: node r96/qa/r780/r780-cpu-check.cjs
       - name: R860 boss key-pose coverage (fallen angel knight, EGO-stealing nightmare king, Balrog draw their R104 key poses; old crop rects fit the whole new frame; the pride cyborg cult leader is no longer hijacked by a same-name mob sheet; Mammon/other mobs untouched) CPU check
         run: node r96/qa/r860/boss-keypose-cover-cpu-check.cjs
       - name: R800 floor edge mask reused for identical input (no double build on region entry) CPU check
