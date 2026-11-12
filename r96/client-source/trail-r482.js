@@ -11,7 +11,7 @@ if(window.__STORYWORLD_TRAIL_R482__)return;
 const REV='R482-trail-4',KEY='storyworld.r482.trail';
 let prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;}catch(e){}
 // R204 이 바닥을 그리는 실외 지역(정본 PLACE 'out'). 동굴 dist01·실내·기억 공간은 뺀다. 맘몬 ep1b06 은 Codex 몫.
-const ZONES=new Set(['hub','dist00','dist02','dist03','dist04','dist05','dist06','last304','last305','kair05','last302','last303','ep1b06b','kair04','last301','hando01','hando02']),NEVER=new Set(['ep1b06']);
+const ZONES=new Set(['hub','dist00','dist02','dist03','dist04','dist05','dist06','last304','last305','kair05','last302','last303','ep1b06b','kair04','last301','hando01','hando02']),NEVER=new Set(['ep1b06','last302','last303']);/* R852(사용자 2026-11-12 결정): 불면귀 밤 두 구역은 길 띠 없음 — 빛을 받지 않는 띠가 등불·달빛 받은 바닥보다 어두워 검은 연기 기둥처럼 보였다. 길은 길가 등롱(R810)·길잡이 화살표가 보여 준다. */
 const zoneOk=z=>typeof z==='string'&&ZONES.has(z)&&!NEVER.has(z);
 const HALF=1.05,MAXGOALS=6,WANDER=.85;
 const stats={builds:0,paths:0,points:0,ms:0,errors:0,zone:null};let lastError=null;
