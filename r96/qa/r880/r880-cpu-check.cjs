@@ -3,7 +3,7 @@ const fs=require('fs'),path=require('path'),vm=require('vm');
 const R=path.join(__dirname,'..','..'),ROOT=path.join(R,'..');
 const rd=p=>{try{return fs.readFileSync(p,'utf8');}catch(_){return null;}};
 let pass=0,total=0;const ok=(n,c,d)=>{total++;if(c)pass++;else console.log('FAIL',n,d===undefined?'':JSON.stringify(d).slice(0,400));};
-const ENGINE='lineart-cine-r880.js',SCENES=['lineart-scenes-r881.js'];
+const ENGINE='lineart-cine-r880.js',SCENES=['lineart-scenes-r881.js','lineart-scenes-r882.js','lineart-scenes-r883.js'];
 const SRC=rd(path.join(R,'client-source',ENGINE)),SC=SCENES.map(f=>rd(path.join(R,'client-source',f)));
 const CANON=rd(path.join(R,'client-source','story-canon-r106-data.js'));
 ok('engine file exists',!!SRC);ok('scene files exist',SC.every(Boolean));
@@ -11,6 +11,8 @@ if(!SRC||!SC.every(Boolean)){console.log(`R880 CPU ${pass}/${total}`);process.ex
 // 이미 영상·컷신이 있는 곳과 다른 작업 몫(맘몬)은 넣지 않는다
 const EXCLUDED=['dist00','ep1a09b','ep1a10','ep1a11','last301','last302','ep1b06','ep1b06b'];
 const BATCH1=['dist01','dist02','dist03','dist04','dist05','dist06','ep1a08','ep1a09','last304','last305','last303'];
+// 둘째 묶음(R882): 2부. 맘몬(ep1b06·ep1b06b)은 빼고 여덟 곳
+const BATCH2=['ep1b01','ep1b02','ep1b03','ep1b04','ep1b05','ep1b07','ep1b08','ep1b09'],BATCH3=['u201','u202','u204','u205','u206','u203'],ALL=[...BATCH1,...BATCH2,...BATCH3];// 셋째 묶음(R883): 3부 여섯 곳
 // ---- 가짜 DOM: 속성 값을 모두 적어 둔다 ----
 function fakeDom(){const attrs=[];let made=0;const byId=new Map();
  const node=tag=>{const n={tagName:tag,children:[],attrs:{},style:{setProperty(k,v){n.style[k]=v;},removeProperty(){} },dataset:{},listeners:{},parentNode:null,textContent:'',hidden:false,
@@ -36,7 +38,7 @@ function world(opt={}){const store={...(opt.store||{})};const dom=fakeDom();cons
   // 엔진 전역
   started:true,loading:false,modal:null,storyScene:null,layer:'STORY',zone:'hub',time:0,keys:new Set(),settings:{reducedMotion:!!opt.reduced},
   player:{hp:100,hero:'ego',x:0,y:0},room:{id:'hub',layer:'STORY',enemies:[]},regionById:{},baseTicks:0,done:new Set(opt.completed||[])};
- for(const z of [...BATCH1,...EXCLUDED,'hub'])g.regionById[z]={id:z,title:'제목 '+z,chapter:'장'};
+ for(const z of [...ALL,...EXCLUDED,'hub'])g.regionById[z]={id:z,title:'제목 '+z,chapter:'장'};
  g.window=g;g.globalThis=g;
  g.completed=(id,l)=>g.done.has((l||g.layer)+':'+id);
  g.__STORYWORLD_COOP_SIM_R62__={mode:()=>opt.coop?'host':'off'};
@@ -55,7 +57,10 @@ const flat=s=>String(s).replace(/\s*\n\s*/g,' ');
 (async()=>{
 // 1) 등록·API
 {const g=world(),A=g.api;ok('API exposed',!!A&&typeof A.play==='function'&&typeof A.skip==='function'&&typeof A.inspect==='function'&&typeof A.add==='function');
- const zs=A?A.zones():[];ok('batch 1 zones registered exactly',JSON.stringify([...zs].sort())===JSON.stringify([...BATCH1].sort()),zs);
+ const zs=A?A.zones():[];ok('third scene file adds only the 3부 zones',BATCH3.every(z=>SC[2].includes("zone:'"+z+"'"))&&[...BATCH1,...BATCH2].every(z=>!SC[2].includes("zone:'"+z+"'")));
+ ok('batch 1+2+3 zones registered exactly',JSON.stringify([...zs].sort())===JSON.stringify([...ALL].sort()),zs);
+ ok('second scene file adds only the 2부 zones',BATCH2.every(z=>SC[1].includes("zone:'"+z+"'"))&&BATCH1.every(z=>!SC[1].includes("zone:'"+z+"'")));
+ ok('no inverted-cross or hexagram sentence is used as a caption',zs.every(z=>A.scene(z).subs.every(s=>!/십자가|육망성/.test(s[2]))));
  ok('no zone that already has a cinematic or belongs to another task',zs.every(z=>!EXCLUDED.includes(z)),zs.filter(z=>EXCLUDED.includes(z)));
  ok('third-party notice kept in engine (MIT)',/MIT/.test(SRC)&&/JDhruv14/.test(SRC));
  // 2) 장면 규격: 길이(15~20초: 시안 12초보다 몇 초 길게), 자막 3줄 이상·순서·정본 문장 그대로(보스 앞 서사 범위)
@@ -125,7 +130,8 @@ const flat=s=>String(s).replace(/\s*\n\s*/g,' ');
   A.skip();g.advance(600);g.runTimers();}}
 // 9) 빌드 연결 다섯 곳
 {const html=rd(path.join(R,'runtime-text','index.html'))||'',lines=html.split('\n');
- const iT=lines.findIndex(l=>l.includes('./title-bg-video-r667.js')),iE=lines.findIndex(l=>l.includes('./'+ENGINE)),iS=lines.findIndex(l=>l.includes('./'+SCENES[0]));
+ const iT=lines.findIndex(l=>l.includes('./title-bg-video-r667.js')),iE=lines.findIndex(l=>l.includes('./'+ENGINE)),iS=lines.findIndex(l=>l.includes('./'+SCENES[0])),iS2=SCENES.map(f=>lines.findIndex(l=>l.includes('./'+f)));
+ ok('script tags: every scene file follows the engine in order',iS2.every((v,i)=>v===iE+1+i),iS2);
  ok('script tags: engine then scenes, right after the video cinematics',iT>0&&iE===iT+1&&iS===iE+1&&lines[iE].trim()==='<script src="./'+ENGINE+'"></script>',[iT,iE,iS]);
  const ver=rd(path.join(ROOT,'scripts','verify-r96-public.py'))||'';ok('public verify list has both files',[ENGINE,...SCENES].every(f=>ver.includes("'"+f+"'")));
  const yml=rd(path.join(ROOT,'.github','workflows','pages.yml'))||'';ok('CI runs this check',yml.includes('node r96/qa/r880/r880-cpu-check.cjs'));

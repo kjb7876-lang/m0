@@ -8243,6 +8243,8 @@
     "lineart-cine-r880.js",
     "lineart-scenes-r881.js",
     "enemy-hit-place-r860.js",
+    "lineart-scenes-r882.js",
+    "lineart-scenes-r883.js",
     "passages-r838.js",
     "refuge-walls-r713.js",
     "hero-idle-hit-r710.js",
@@ -8259,6 +8261,7 @@
     "assets/r710/neon/idle-s.webp",
     "assets/r710/seoha/hit-s.webp",
     "assets/r710/seoha/idle-s.webp",
+    "story-order-r853.js",
     "dance-free-r706.js"
   ],
   "mediaPaths": [
@@ -9334,5 +9337,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "9906292ded2e50d46ba3622685d763b898b0965ec434453e1046ad8c4865b9b3"
+  "runtimeManifestSHA256": "a0c43a955c3100ec5013a47c0b7c77b14a62bd7a4c16eb1175ac2ba233ce7e06"
 }
