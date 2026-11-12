@@ -85,7 +85,8 @@ if(!ONLY||ONLY==='2'){const {p,ctx,errs}=await survival('lauren');
  ok('2: the core really fired during the locked window',c1>c0,{c0,c1});
  ok('2: locked controlled lauren never rolls (core beams / ally shots are not hers)',!(r.rolls['lauren:main']>0)&&!(r.hits.lauren>0),r);
  // 풀어 주면 조종 라우렌이 자기 타격으로 패시브를 굴린다(생존에서 조종 영웅 패시브)
- await unlockMain(p);await waitGame(p,8);
+ await unlockMain(p);/* 심연 왜성 등은 날아가서 맞으므로 피해가 늦을 수 있다 → 5초씩 최대 6번 */
+ for(let k=0;k<6;k++){await waitGame(p,k?5:8);const h=await A(p,()=>window.__r962.hits);if((h.lauren||0)>0)break;}
  r=await A(p,()=>{const W=window.__r962,rolls={};for(const x of W.rolls){const k=x.h+(x.ally?':ally':':main');rolls[k]=(rolls[k]||0)+1;}return {rolls,hits:W.hits};});
  ok('2: controlled lauren passive rolls and hits in survival',(r.rolls['lauren:main']||0)>0&&(r.hits.lauren||0)>0,r);
  const e=await errsOf(p);ok('2: no passive module errors',Object.values(e).every(v=>v===0||(typeof v==='string'&&v!=='missing')),e);ok('2: no page errors',errs.length===0,errs);
