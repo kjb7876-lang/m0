@@ -57,6 +57,8 @@ function hpMul(idx,loop,diff){return (1+idx*.045)*(1+.6*loop)*diffOf(diff).hp;}
 //  실측(헤드리스, 환도, 보통): 예전엔 원래 체력(약 1,100)에 묶여 대부분 1~2초에 죽고 원래 체력이 큰 집도의만 13초 → 보스 약 15~30초·중간보스 약 5~18초(영웅 셋, 봇이 붙어 때릴 때).
 //  피해는 일반몹처럼 지역(+1.5%/지역)·회차(+25%)로 오른다. 일반몹 피해도 너무 약해(첫 지역 한 대 약 4/777) 기본 ×.55→×.7(정예 ×.85→×1).
 const BOSS_HP=Object.freeze({boss:100,mid:50});
+// R962: 코어 빛줄기 타격 출처 — 영웅 타격이 아니다(friendly:false·sourceHero). 출처가 없으면 조종 영웅의 타격 확률 패시브(라우렌·미카엘라·네온)와 영웅 광역(R118)이 코어 타격으로 발동했다.
+const coreSrc=()=>({kind:'r600-core-beam',friendly:false,owner:'core',sourceHero:'r600-core',r600Core:true});/* 타격마다 새 객체: 다른 덧씌우기가 출처에 표식을 적는다 */
 const stageDmg=(idx,loop,diff)=>(1+.015*Math.max(0,idx||0))*(1+.25*Math.max(0,loop||0))*diffOf(diff).dmg;
 // 보스 체력 기준 공격력은 지역 동안의 이동 평균(약 20초) — 순간 강화(버프)가 켜진 때 보스가 나오면 체력이 튀던 것(실측 서하 141↔96)을 누른다.
 function smoothAtk(avg,a,dt){if(!(a>0))return avg;if(!(avg>0))return a;return avg+(a-avg)*Math.min(1,Math.max(0,dt)/20);}
@@ -255,7 +257,7 @@ function coreTick(dt){const st=CS(),c=room.survivalR600.centre,core=S.core,t=G((
   e.r600Snap=null;}
  // 정화 공격
  core.cd-=dt;if(core.cd<=0){core.cd=st.rate;const tg=room.enemies.filter(e=>living(e)&&(!e.boss||room.engaged)&&Math.hypot(e.x-c.x,e.y-c.y)<=st.range).sort((a,b)=>Math.hypot(a.x-c.x,a.y-c.y)-Math.hypot(b.x-c.x,b.y-c.y)).slice(0,st.shots);
-  for(const e of tg){beams.push({x:e.x,y:e.y,at:t});try{hitEnemy(e,baseAtk()*1.1*st.dmg);}catch(err){fail(err);}stats.coreShots++;}
+  for(const e of tg){beams.push({x:e.x,y:e.y,at:t});try{hitEnemy(e,baseAtk()*1.1*st.dmg,coreSrc());}catch(err){fail(err);}stats.coreShots++;}
   if(!tg.length)core.cd=.25;}
  beams=beams.filter(b=>t-b.at<BEAM_LIFE);
  if(core.hp<=0&&!S.over){core.hp=0;stats.coreLost++;over('core');}}

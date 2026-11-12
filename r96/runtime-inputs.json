@@ -8302,6 +8302,7 @@
     "michaela-heart-r948.js",
     "assets/r948/heart-fly8.webp",
     "assets/r948/heart-hit6.webp",
+    "survival-passives-r962.js",
     "assets/r945/hwando-orchid-slash.webp",
     "assets/r945/hwando-ink-sweep.webp"
   ],
@@ -9378,5 +9379,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "7eb91da51d03e7bb8c0fd3e2f9d5f908530c5aeb5b564cb7d229ac0067556537"
+  "runtimeManifestSHA256": "b774b0d503a18b1b18139021b5a288435c7134e0955a6cd41bb2678d4c326cc0"
 }
