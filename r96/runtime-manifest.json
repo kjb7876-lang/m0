@@ -44739,8 +44739,8 @@
     },
     {
       "path": "rooms-r523.js",
-      "bytes": 80658,
-      "sha256": "fcb0d61b1a8445264187a967b19b4fcbdb2f7bc1b2f050e0a89f869e6c922116"
+      "bytes": 81019,
+      "sha256": "4fce7db13cba3e78c88b7f56655937e7df836bb621a77316d328ebe4d5460b64"
     },
     {
       "path": "root-gate-video-r372.js",
@@ -45244,7 +45244,7 @@
     }
   ],
   "fileCount": 9048,
-  "totalBytes": 1239645414,
+  "totalBytes": 1239645775,
   "webHTMLSha256": "2f24feb00b2bf81726b2b7df56a9a0f66818d58984c42fc4778175dfb2e53f25",
   "largest": [
     {
