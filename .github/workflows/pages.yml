@@ -366,7 +366,7 @@ jobs:
       - name: R271 hwando unified v2 polish assets CPU check
         run: node r96/qa/r271/r271-cpu-check.cjs
       - name: R272 guide (hospital route/door, 777 forward) CPU check
-        run: node r96/qa/r272/r272-cpu-check.cjs
+        run: node r96/qa/r272/r272-cpu-check.cjs && node r96/qa/r830/r830-cpu-check.cjs
       - name: R277 hwando motion consistency CPU check
         run: node r96/qa/r277/r277-cpu-check.cjs
       - name: R274 manual play rewards CPU check
@@ -464,6 +464,8 @@ jobs:
         run: node r96/qa/r701/r701-cpu-check.cjs
       - name: R850 survival play-test fixes (arena terrain lock, hospital maze skip, next-stage prefetch, moving HUD) CPU check
         run: node r96/qa/r850/r850-cpu-check.cjs
+      - name: R720 survival hero placement (I key, crystals, story-order prices, leash and range upgrades, swap rule) CPU check
+        run: node r96/qa/r720/r720-cpu-check.cjs
       - name: R463 seven-sins boss art (one form per fight, one body height, no cut-out broom) CPU check
         run: node r96/qa/r463/r463-cpu-check.cjs
       - name: R511 empty samong rooms get a guarded memory shard CPU check
@@ -507,7 +509,7 @@ jobs:
       - name: R522 hospital thin walls (the two free-standing maze baffles of ep1a08 moved to touch a thick wall, hospital only, routes stay connected) CPU check
         run: node r96/qa/r522/r522-cpu-check.cjs
       - name: R523 story rooms (clinic ep1a09 + sloth home ep1b02 furnished by room name along the real back walls, presentation only, angle-matched art only) CPU check
-        run: node r96/qa/r523/r523-cpu-check.cjs && node r96/qa/r730/r730-cpu-check.cjs
+        run: node r96/qa/r523/r523-cpu-check.cjs && node r96/qa/r730/r730-cpu-check.cjs && node r96/qa/r731/r731-cpu-check.cjs
       - name: R810 Bulmyeongwi night (last302/last303 navy moonlight ambient, deep amber lamps, no sepia, no spider-crack decals, night fog colour, lamps kept off the guide path; other zones unchanged) CPU check
         run: node r96/qa/r810/r810-cpu-check.cjs
       - name: R590 hwando sword chain (A draw-cut, Q wind blades, E delayed flash, R seven-strike finale; no new keys, walls/map edge, caps) CPU check
