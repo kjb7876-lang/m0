@@ -36073,6 +36073,61 @@
       "sha256": "d3074c771913e0c5e156582c131ccecd73e8de69daa7accf19c083a0baf9af75"
     },
     {
+      "path": "assets/r911/clean/assets/vfx/generated/v300/barrier-sigil.webp",
+      "bytes": 152994,
+      "sha256": "ab66c52da74d110303cf78d590d37acf3981927c485f128dfa0c5c4dc8bff4a8"
+    },
+    {
+      "path": "assets/r911/clean/assets/vfx/generated/v300/time-ring.webp",
+      "bytes": 147034,
+      "sha256": "3fc52030de7d7cdcf2a7de3a59286842ba90a822ab9df31eff13024c07f9536f"
+    },
+    {
+      "path": "assets/r911/clean/assets/vfx/heroes/gunner-e.webp",
+      "bytes": 34550,
+      "sha256": "0020e9f6c7771090df994d768812b1697a3690e823dda0f8c0e52b47f7076220"
+    },
+    {
+      "path": "assets/r911/clean/assets/vfx/heroes/hwando-e.webp",
+      "bytes": 24366,
+      "sha256": "f723887780df7d2ef854ee1af4ad489c876d409b2c19ef2f37e652bd34f46646"
+    },
+    {
+      "path": "assets/r911/clean/assets/vfx/heroes/lauren-q.webp",
+      "bytes": 31736,
+      "sha256": "68d72c03f0d2bfd179992d39c4129861202f6717aff046a051336d008d3f13fa"
+    },
+    {
+      "path": "assets/r911/clean/assets/vfx/heroes/lauren-r.webp",
+      "bytes": 40810,
+      "sha256": "0921f3a496f7561bc8f65b94002a08cefdb6fd05335c4f9edccbd2f69d68c396"
+    },
+    {
+      "path": "assets/r911/clean/assets/vfx/heroes/neon-e.webp",
+      "bytes": 30492,
+      "sha256": "2ddfd819a7381a56ba61079130f3ee09933b87dcba26cd9050fadc56e12ab9e5"
+    },
+    {
+      "path": "assets/r911/clean/assets/vfx/heroes/seoha-e.webp",
+      "bytes": 23852,
+      "sha256": "3dd69e2d7b4b568b7c42ab891449d3bf5f3d7adc1a441020bd273b533f71cf50"
+    },
+    {
+      "path": "assets/r911/clean/assets/vfx/heroes/seoha-w.webp",
+      "bytes": 45504,
+      "sha256": "0d77a6e070e2db983cd199219e825b7e41607eeefff779f216a8e134e8f2a0ae"
+    },
+    {
+      "path": "assets/r911/clean/assets/vfx/heroes/slayer-r.webp",
+      "bytes": 67234,
+      "sha256": "f10e264b690ddedaecd39458ee46f8508bab4a9454a1383a722246fc310bc2eb"
+    },
+    {
+      "path": "assets/r911/derived/gunner-laser-bullet.webp",
+      "bytes": 34714,
+      "sha256": "cdee5aec52a78ac3eec51a7ebb3557f21370429468f11507a7940def13b1e47a"
+    },
+    {
       "path": "assets/r92/boss/c102-boss-death.png",
       "bytes": 278381,
       "sha256": "8131fafeaf9ddee4f145500b991ade26d847b196c860a71ce507515761af76cc"
@@ -44269,8 +44324,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6575212,
-      "sha256": "9fef509800fbf9fdbd218f267e729f482745fe7faadb97c87395d5f68930754f"
+      "bytes": 6575262,
+      "sha256": "018f4619bb3ae09eddfb9855d6f2484301e6f5244840f39391322d77a3a345f8"
     },
     {
       "path": "intro-r140.js",
@@ -44309,8 +44364,8 @@
     },
     {
       "path": "lauren-celestial-r940.js",
-      "bytes": 29709,
-      "sha256": "58469069dab9544fb5291043c68a784d64f9274bd703c8c03219907e45644f7d"
+      "bytes": 32559,
+      "sha256": "6cab58f45efa9cfc4a0c1b5c26fab973858eed83f3ec2b0ff71431159fe76fec"
     },
     {
       "path": "lauren-gravity-r561.js",
@@ -44728,6 +44783,11 @@
       "sha256": "17d11b2b6c6a8aaa3bb2c07a1e7b0e9bdafeed50878c0f8e83d8abdfb6754816"
     },
     {
+      "path": "projectile-size-r911.js",
+      "bytes": 12461,
+      "sha256": "b1cae37ec719a9d2049e0b9d5bee094574c462d5020b27e3cb380b2d494c3ee6"
+    },
+    {
       "path": "prop-shadow-r329.js",
       "bytes": 15678,
       "sha256": "80ac28b4dae7239122c75941756fceacd8eafe1fab3a817f1e65d6f96b3a2c5a"
@@ -45124,8 +45184,8 @@
     },
     {
       "path": "top-left-r899.js",
-      "bytes": 3253,
-      "sha256": "59b73a050ae0bfe3ef752d7c84fcfd3ec3f1969614999104c68c6df65e9ad519"
+      "bytes": 3910,
+      "sha256": "79be33f12cd8d16fc76bb7ab4651282b74f17cf8be4e5b3ebd3286e7a4d47b21"
     },
     {
       "path": "trail-r482.js",
@@ -45338,9 +45398,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9067,
-  "totalBytes": 1240112086,
-  "webHTMLSha256": "9fef509800fbf9fdbd218f267e729f482745fe7faadb97c87395d5f68930754f",
+  "fileCount": 9079,
+  "totalBytes": 1240761390,
+  "webHTMLSha256": "018f4619bb3ae09eddfb9855d6f2484301e6f5244840f39391322d77a3a345f8",
   "largest": [
     {
       "path": "index.html",
