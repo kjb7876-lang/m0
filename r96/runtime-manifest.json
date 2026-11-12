@@ -44094,8 +44094,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6574083,
-      "sha256": "d8ae8ad1ce730a04b1b85e03f1df2e17bb9563190bdd073cbdf65d466b525e16"
+      "bytes": 6574129,
+      "sha256": "e079e43d91c213fc492b231038ac3b08d267d7bdf7ec94aa61705afd9bc4e356"
     },
     {
       "path": "intro-r140.js",
@@ -44983,6 +44983,11 @@
       "sha256": "d1fa85846f97e4e311e68a0994ca0f75ef56b95498e5950a1671d1bb312eb6f8"
     },
     {
+      "path": "walls-solid-r830.js",
+      "bytes": 14015,
+      "sha256": "addd57c4195f5fc53fd73db914995a0e7306e7f5a2991ee36f034001d0972c2c"
+    },
+    {
       "path": "wave-orphans-r352.js",
       "bytes": 3627,
       "sha256": "b24e630495e02cdd05ffceeb07d075f143afd512926e5a442b170747b80466a7"
@@ -45068,9 +45073,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9013,
-  "totalBytes": 1237594423,
-  "webHTMLSha256": "d8ae8ad1ce730a04b1b85e03f1df2e17bb9563190bdd073cbdf65d466b525e16",
+  "fileCount": 9014,
+  "totalBytes": 1237608484,
+  "webHTMLSha256": "e079e43d91c213fc492b231038ac3b08d267d7bdf7ec94aa61705afd9bc4e356",
   "largest": [
     {
       "path": "index.html",
