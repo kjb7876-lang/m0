@@ -17,6 +17,7 @@ const srcPath=path.join(R,'client-source','quest-r840.js');ok(fs.existsSync(srcP
  ok(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8').includes("'quest-r840.js'"),'verify-r96-public 기대 목록');
  ok(fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8').includes('quest-r840.js'),'runtime-manifest 에 등록');}
 const CANON=fs.readFileSync(path.join(R,'..','story-source','hapil-canon-r106-improved.txt'),'utf8');
+const CANON448=fs.readFileSync(path.join(R,'..','story-source','hapil-canon-r448-samong-aspect.txt'),'utf8');
 const ENTRY={x:88,y:60.5},GATHER={x:16,y:33};
 function world({store={},zoneId='last302',phase='route',controlled=true,survival=false,ego=false,coop='off',guideOn=false,done=false,ready=true,nav=true,enemyNear=false}={}){
  const c={Math,String,Number,Array,Object,JSON,Map,WeakMap,Set,Symbol,isFinite,RegExp,Promise,performance:{now:()=>0},setTimeout:f=>0,localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}}};c.window=c;vm.createContext(c);
@@ -119,6 +120,54 @@ function drive(w,max=400){/* 엔진 걸음 흉내: route 가 있으면 끝 점�
 {const w=world();w.run('tick(.1)');w.at(w.npc());w.run('interact();__btn.questTakeR840();guide=true');drive(w);eq(w.st(),'done','받은 뒤 길잡이를 켜면 이어서 마친다');}
 // ── ④ 회귀 ──
 // 서사 진행을 막지 않는다: killEnemy·interact 는 퀘스트와 무관할 때 그대로, 보스 처치도 그대로
+// ── 곁에 서 있기만 하는 인물(also) + 의목사A ──
+{const w=world({zoneId:'ep1a08'});w.run("room.enemies.slice(0,6).forEach((e,i)=>{e.nativeId='a08-s1';e.name='복도 비명잔영';});room.enemies[6].nativeId='a08-o1';room.enemies[6].name='백의 구속자';");w.run('tick(.1)');
+ const n=w.npc(),am=w.run('room.props.find(p=>p.r840Amb)');ok(n&&/nurse/.test(n.id),'ep1a08: 주사기를 든 간호사');ok(am&&am.r840Amb==='doctor'&&am.id==='r840:amb:ep1a08:doctor','ep1a08: 곁에 의사가 선다 '+(am&&am.id));
+ ok(Math.hypot(am.x-n.x,am.y-n.y)>=3,'두 사람은 3칸 넘게 떨어져 선다');ok(am.solid===false&&!w.run(`blocked(${am.x},${am.y},.34)`),'곁 인물은 길을 막지 않고 빈 칸에 선다');
+ w.at(am);ok(w.run('interact()')===true,'곁 인물 곁 E 는 퀘스트 모듈이 받는다');const h=w.log().panel[0];ok(h.includes('말이 들리지 않는 의사')&&h.includes('questLookR840')&&!h.includes('questTakeR840'),'곁 인물 창: 묘사와 닫기만');eq(w.st(),'new','곁 인물과 말해도 퀘스트 상태는 그대로');w.run('__btn.questLookR840()');ok(!w.run('modal'),'닫기');
+ w.at(n);w.run('interact()');w.run('__btn.questTakeR840()');eq(w.st(),'on','간호사에게 받음');w.run('killEnemy(room.enemies[6])');eq(w.api.inspect().kills,0,'백의 구속자는 세지 않는다');for(let i=0;i<5;i++)w.run(`killEnemy(room.enemies[${i}])`);eq(w.api.inspect().kills,5,'복도 비명잔영 5');
+ w.run('time+=1');w.run('tick(.6)');eq(w.st(),'drop','다 잡으면 단서');ok(w.run('room.props.some(p=>p.r840Amb)'),'곁 인물은 끝까지 서 있다');w.run('drawProp(room.props.find(p=>p.r840Amb))');ok(w.log().drawn.some(d=>/medic-idle6/.test(d.path)),'곁 인물이 그려진다');}
+{const w=world({zoneId:'ep1a08',guideOn:true});w.run('tick(.1)');const am=w.run('room.props.find(p=>p.r840Amb)');w.at(am);w.run('interact()');eq(w.log().panel.length,0,'길잡이 중에는 곁 인물 창을 띄우지 않는다');}
+// 서사 창이 떠 있는 동안에는 세우지 않고(새 여정 첫 화면의 병원 소품 목록 그대로 — qa/r86 refined-static 회귀), 창이 닫힌 뒤 첫 틱에 선다.
+{const w=world({zoneId:'ep1a08',controlled:false});const n0=w.run('room.props.length');w.run('var storyScene={id:\'opening\'}');w.run('tick(.1)');eq(w.run('room.props.length'),n0,'서사 창이 떠 있으면 소품 목록을 건드리지 않는다');ok(!w.npc(),'아직 세우지 않음');w.run('storyScene=null');w.run('tick(.1)');ok(w.npc(),'창이 닫힌 뒤 첫 틱에 선다');}
+// ep1a08(새빛병원 지하)은 R78 뼈대가 아니다(헤드리스 실측: controlled=false, 들머리 43,109, 문 목록 없음) → free 정의는 들머리→목표물 길로 선다.
+{const w=world({zoneId:'ep1a08',controlled:false});w.run('tick(.1)');ok(w.npc()&&w.run('room.props.some(p=>p.r840Amb)'),'ep1a08: R78 진행이 아니어도 간호사·의사가 선다');}
+{const w=world({zoneId:'ep1a09',controlled:false});w.run('tick(.1)');ok(!w.run('room.props.some(p=>p.r840Amb||p.r840NPC)'),'free 가 아닌 곳은 R78 진행이 아니면 아무도 없다');}
+{const w=world({zoneId:'ep1a08',controlled:false,guideOn:true});w.run('tick(.1)');w.run('player.x=20;player.y=20;');w.run('guideStep()');eq(w.log().guideBase,1,'ep1a08: 이미 안쪽까지 간 길잡이는 들머리로 되돌아가지 않는다');eq(w.st(),'new','받지 않음');}
+{const w=world({zoneId:'ep1a08',controlled:false,guideOn:true});w.run('room.enemies.forEach(e=>{e.x=10;e.y=10;})');w.run('tick(.1)');for(let i=0;i<60&&w.st()==='new';i++){w.run('time+=.25');w.run('guideStep()');w.run('tick(.25)');w.run('if(route.length){const t=route[route.length-1];player.x=t.x;player.y=t.y;route=[];}');}ok(w.st()!=='new'&&w.api.inspect().stats.taken===1,'ep1a08: 들머리의 길잡이는 간호사에게 받는다 '+w.st());eq(w.log().panel.length,0,'창 없이');}
+{const w=world({zoneId:'ep1a10'});w.run('tick(.1)');const n=w.npc();ok(n&&/first-self/.test(n.id),'ep1a10: 처음 약을 쓰던 나의 잔영');w.at(n);w.run('interact()');w.run('__btn.questTakeR840()');ok(/syringe\.webp$/.test(w.prop().r840Art),'ep1a10: 주사기 더미');}
+// ── 사몽 구역(DREAM): room.id 는 바탕 지역(last302)이고 구역은 room.samongR103.zone. R78 진행이 없어도 돈다. ──
+{const dreamify=(w,z='sz115-S05-1')=>w.run(`layer='DREAM';room.layer='DREAM';room.samongR103={zone:${JSON.stringify(z)},bossUp:false,portal:null};var __zd=[];window.__STORYWORLD_SAMONG_R103__={state:()=>({zoneDone:__zd})};room.props.push({id:'r115:c0',x:40,y:40,r115Clue:'c0',solid:false,visible:true});`);
+ {const w=world({controlled:false});dreamify(w);w.run('tick(.1)');const n=w.npc();ok(n,'사몽 S05-1: 지현의 잔영이 선다(R78 진행이 아니어도)');ok(/^r840:npc:sz115-S05-1:jihyeon$/.test(n.id),'id 는 구역 id 로 '+n.id);
+  w.at(n);w.run('interact()');ok(w.log().panel[0].includes('지현의 잔영'),'창: 지현의 잔영');w.run('__btn.questTakeR840()');eq(w.api.inspect().state,'on','받음');const q=w.prop();ok(q&&/prop-glass\.webp$/.test(q.r840Art),'인장이 번진 잔');
+  w.at(q);for(let i=0;i<3;i++){w.run('time+=1');w.run('interact()');}eq(w.api.inspect().state,'drop','세 번 → 단서');w.run('time+=2');w.at(w.run('room.props.find(p=>p.r840Clue)'));w.run('tick(.1)');eq(w.api.inspect().state,'done','줍기 → 끝');
+  const c=w.log().collect[0];ok(c&&c.key==='quest:r840:sz115-S05-1'&&c.place==='경성의 밤'&&c.text.includes('지현의 손길'),'쪽지: 경성의 밤 단서');
+  const raw=w.run('serializeSave()');ok(raw.questR840.rooms['DREAM:sz115-S05-1']?.s==='done','세이브 열쇠는 DREAM:구역');}
+ {const w=world({controlled:true});w.run('tick(.1)');ok(w.npc()&&/fisher/.test(w.npc().id),'같은 바탕 지역(last302)의 본편은 그대로 어부');}
+ // R842 미로 구역은 다음 문이 처음부터 열려 있다: 들머리 가까이에서는 길잡이가 곁일을 받고, 멀리 간 뒤에는 되돌아가지 않는다. 받은 곁일은 문이 열려도 마저 한다.
+ {const w=world({controlled:false,guideOn:true});dreamify(w,'sz115-S06-15');w.run('room.samongR103.portal={x:1,y:1};room.enemies.forEach(e=>{e.x=-50;e.y=-50;})');w.run('tick(.1)');for(let i=0;i<400&&w.api.inspect().state!=='done';i++){w.run('time+=.25');w.run('guideStep()');w.run('tick(.25)');w.run('if(route.length){const t=route[route.length-1];player.x=t.x;player.y=t.y;route=[];}');}
+  const q=w.api.inspect();eq(q.state,'done','문이 열린 미로 구역(S06-15): 길잡이가 들머리에서 곁일을 받아 마친다');eq(q.stats.fallback,0,'대신 마침 0');ok(q.stats.broken>=1,'기계 잔해를 부숨');}
+ {const w=world({controlled:false,guideOn:true});dreamify(w,'sz115-S06-15');w.run('room.samongR103.portal={x:1,y:1};room.enemies.forEach(e=>{e.x=-50;e.y=-50;})');w.run('tick(.1)');w.run('player.x=room.exploration.entry.x-40;player.y=room.exploration.entry.y-30');w.run('guideStep()');eq(w.log().guideBase,1,'문이 열린 뒤 멀리 간 길잡이는 곁일로 되돌아가지 않는다');eq(w.st(),'new','받지 않음');}
+ // R842 이야기만 듣는 곁일(talk): 받는 순간 단서가 떨어지고, 주우면 끝난다. 길잡이도 창 없이 마친다.
+ {const w=world({controlled:false});dreamify(w,'sz115-S06-2');w.run('room.enemies.forEach(e=>{e.x=-50;e.y=-50;})');w.run('tick(.1)');const n=w.npc();ok(n&&/waiting-her$/.test(n.id),'사몽 S06-2: 기다리던 그녀의 잔영이 선다');eq(w.api.def('sz115-S06-2').quest.type,'talk','S06-2 는 이야기 듣기');
+  w.at(n);w.run('interact()');ok(w.log().panel[0].includes('기다리던 그녀의 잔영'),'창: 기다리던 그녀의 잔영');w.run('__btn.questTakeR840()');eq(w.st(),'drop','이야기 듣기: 받으면 바로 단서가 떨어진다');ok(w.run("room.props.some(p=>p.r840Clue)"),'단서가 방에 있다');ok(!w.run("room.props.some(p=>p.r840Prop)"),'이야기 듣기에는 조형물이 없다');w.run('time+=2');w.at(w.run('room.props.find(p=>p.r840Clue)'));w.run('tick(.1)');eq(w.st(),'done','줍기 → 끝');}
+ {const w=world({controlled:false,guideOn:true});dreamify(w,'sz115-S06-22');w.run('room.enemies.forEach(e=>{e.x=-50;e.y=-50;})');w.run('tick(.1)');for(let i=0;i<400&&w.api.inspect().state!=='done';i++){w.run('time+=.25');w.run('guideStep()');w.run('tick(.25)');w.run('if(route.length){const t=route[route.length-1];player.x=t.x;player.y=t.y;route=[];}');}
+  const q=w.api.inspect();eq(q.state,'done','길잡이: S06-22 젊은 날의 나 이야기 듣기를 마친다');eq(q.stats.fallback,0,'대신 마침 0');eq(q.stats.hits,0,'치는 일 없음');}
+ {const w=world({controlled:false});dreamify(w,'sz115-S06-3');w.run('tick(.1)');ok(w.npc(),'사몽 S06-3: 수비대원의 잔영이 선다');const m=w.api.def('sz115-S06-3').quest.match;ok(m({name:'x'})&&!m({r170Tower:true})&&!m(null),'사몽 처치 곁일은 움직이지 않는 조형물 몹을 세지 않는다');}
+ {const w=world({controlled:false});dreamify(w,'sz115-S05-2');w.run('tick(.1)');ok(!w.npc(),'정의 없는 사몽 구역(S05-2)에는 세우지 않는다');}
+ {const w=world({controlled:false});dreamify(w);w.run("__zd.push('sz115-S05-1')");w.run('tick(.1)');ok(!w.npc(),'받지 않고 이미 끝낸 사몽 구역에는 다시 세우지 않는다');}
+ {const w=world({controlled:false,guideOn:true});dreamify(w);w.run('room.samongR103.bossUp=true');w.run('tick(.1)');w.run('guideStep()');eq(w.log().guideBase,1,'대면이 시작된 사몽 구역: 길잡이는 원래대로');}
+ {const w=world({controlled:false,guideOn:true});dreamify(w);w.run('room.enemies.forEach(e=>{e.x=-50;e.y=-50;})');/* 가짜 세계의 몹은 길 위에 서 있고 죽지 않는다 — 치워 둔다 */w.run('tick(.1)');for(let i=0;i<400&&w.api.inspect().state!=='done';i++){w.run('time+=.25');w.run('guideStep()');w.run('tick(.25)');w.run('if(route.length){const t=route[route.length-1];player.x=t.x;player.y=t.y;route=[];}');}
+  eq(w.api.inspect().state,'done','사몽 길잡이: NPC → 잔 → 단서를 스스로');eq(w.log().panel.length,0,'창을 띄우지 않는다');eq(w.api.inspect().stats.fallback,0,'대신 마침 없이');}
+ // 사몽 탐색 구역: 움직이지 않는 조형물 몹(R170)이 곁에 있어도 곁일을 받는다. 움직이는 몹이 5칸 안이면 전투에 넘긴다(헤드리스 S05-3 실측에서 나온 회귀).
+ {const w=world({controlled:false,guideOn:true,enemyNear:true});dreamify(w);w.run('tick(.1)');w.run('room.enemies.forEach(e=>{e.x=-50;e.y=-50;});const t=room.enemies[0];t.r170Tower={};t.x=player.x+2;t.y=player.y;');w.run('guideStep()');eq(w.log().guideBase,0,'조형물 몹만 곁에 있으면 곁일 길잡이가 맡는다');
+  w.run('const m=room.enemies[1];m.x=player.x+3;m.y=player.y;');w.run('guideStep()');eq(w.log().guideBase,1,'움직이는 몹이 5칸 안이면 원래 길잡이(전투)');
+  w.run('const m2=room.enemies[1];m2.x=player.x+7;m2.y=player.y;');w.run('guideStep()');eq(w.log().guideBase,1,'7칸 밖의 몹은 사몽에서는 기다리지 않는다');}
+ {const cl=world().api.pure.clean;eq(JSON.parse(JSON.stringify(cl({version:1,rooms:{'DREAM:sz115-S05-1':{s:'on',k:0},'STORY:sz115-S05-1':{s:'on',k:0},'DREAM:last302':{s:'on',k:0}}}))),{'DREAM:sz115-S05-1':{s:'on',k:0}},'세이브: 층이 맞는 열쇠만 남긴다');}}
+// 좁은 복도: 들머리 7칸까지는 길 옆 1칸 밖이 다 벽이면, 더 들어간 곳에서 선다(엔트리 13칸 안).
+{const P=world().api.pure,e={x:0,y:0},g={x:30,y:0},pts=[e,g],wall=(x,y)=>x<7?Math.abs(y)>.6:Math.abs(y)>2.4;const q=P.npcSpot(e,g,pts,wall,[]);ok(q&&q.x>=7&&Math.hypot(q.x,q.y)<=13&&!wall(q.x,q.y),'좁은 복도에서는 더 들어간 곳에 선다 '+JSON.stringify(q));}
+// 작은 맵(사몽 구역): 길이 9칸뿐이어도 조형물 자리가 나온다(near). 본편 규칙(12칸부터)으로는 없다.
+{const P=world().api.pure,e={x:0,y:0},g={x:9,y:0},pts=[e,g],free=()=>false;ok(P.propSpot(e,g,pts,free,[],{x:0,y:1.7})===null,'본편 규칙: 9칸 길에는 자리 없음');const q=P.propSpot(e,g,pts,free,[],{x:0,y:1.7},true);ok(q&&q.x>=5&&q.x<=7.5&&Math.hypot(q.x,q.y-1.7)>=4,'near: 5칸부터, NPC 에서 4칸 넘게 '+JSON.stringify(q));}
 // 길 양옆이 다 비었으면 더 트인 쪽에 선다(들머리 문짝·벽 쪽을 피함). 벽이 없으면 앞 후보(+쪽) 그대로.
 {const w=world();const P=w.api.pure,e={x:0,y:0},g={x:20,y:0},pts=[e,g];const wall=(x,y)=>y>3;const a=P.npcSpot(e,g,pts,wall,[]),b=P.npcSpot(e,g,pts,()=>false,[]);
  ok(a&&a.y<0,'벽이 +쪽 3칸에 있으면 -쪽(트인 쪽)에 선다 '+JSON.stringify(a));ok(b&&b.y>0,'양쪽이 같으면 앞 후보 그대로 '+JSON.stringify(b));}
@@ -150,12 +199,14 @@ function drive(w,max=400){/* 엔진 걸음 흉내: route 가 있으면 끝 점�
   w.run('var __raw={questR840:"garbage"}');await w.run('restoreSave(__raw)');w.run('tick(.1)');eq(w.st(),'new','깨진 기록: 처음부터, 던지지 않음');ok(!w.api.inspect().lastError,'오류 없음');}
  // 정의 점검: 서사마다 정본 문장, 그림 경로는 게임에 있는 것
  {const w=world(),man=fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8')+fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8');
-  for(const z of w.api.zones()){const d=w.api.def(z);ok(d&&d.npc&&d.quest&&d.clue,z+': 정의 모양');ok(['purge','kill'].includes(d.quest.type),z+': 종류');ok(typeof d.episode==='string'&&d.episode,z+': 서사 묶음 이름');
-   for(const s of d.clue.text.split(/(?<=\.)\s+/))ok(CANON.includes(s.trim()),z+': 단서 글은 정본 그대로');for(const s of String(d.npc.lore||'').split(/(?<=\.)\s+/).filter(Boolean))ok(CANON.includes(s.trim()),z+': NPC 창의 인용도 정본 그대로');
+  for(const z of w.api.zones()){const d=w.api.def(z);ok(d&&d.npc&&d.quest&&d.clue,z+': 정의 모양');ok(['purge','kill','talk'].includes(d.quest.type),z+': 종류');ok(typeof d.episode==='string'&&d.episode,z+': 서사 묶음 이름');
+   const CN=d.canon==='r448'?CANON448:CANON;/* 사몽 편은 게임이 쓰는 사몽 정본(r448 회상 진행형) */ok(d.layer==='DREAM'?d.canon==='r448'&&/^sz115-/.test(z):!d.canon,z+': 층과 정본 짝');
+   for(const s of d.clue.text.split(/(?<=\.)\s+/))ok(CN.includes(s.trim()),z+': 단서 글은 정본 그대로');for(const s of String(d.npc.lore||'').split(/(?<=\.)\s+/).filter(Boolean))ok(CN.includes(s.trim()),z+': NPC 창의 인용도 정본 그대로');
    ok(fs.existsSync(path.join(R,'runtime-text',d.npc.sprite.path))||man.includes(d.npc.sprite.path),z+': NPC 그림이 게임에 있다 '+d.npc.sprite.path);
+   for(const am of d.also||[]){ok(am.kind&&am.name&&am.body&&am.lore&&am.sprite,z+': 곁 인물 모양 '+am.kind);for(const t of String(am.lore).split(/(?<=\.)\s+/).filter(Boolean))ok(CN.includes(t.trim()),z+': 곁 인물 인용도 정본 그대로 '+am.kind);ok(man.includes(am.sprite.path),z+': 곁 인물 그림이 게임에 있다 '+am.sprite.path);}
    if(d.quest.type==='purge')ok(fs.existsSync(path.join(R,'runtime-text',d.quest.prop.path))||man.includes(d.quest.prop.path),z+': 조형물 그림이 게임에 있다 '+d.quest.prop.path);
    if(d.quest.type==='kill')ok(d.quest.count>=3&&d.quest.count<=8&&typeof d.quest.match==='function',z+': 처치 수 3~8');}
-  const eps=new Map();for(const z of w.api.zones()){const e=w.api.def(z).episode;eps.set(e,(eps.get(e)||0)+1);}for(const [e,k] of eps)ok(k+1>=2&&k+1<=3,'서사 '+e+': NPC '+(k+1)+'명(기존 핵심 NPC 포함 2~3)');
+  const eps=new Map();for(const z of w.api.zones()){const d=w.api.def(z),e=d.episode;eps.set(e,(eps.get(e)||0)+1+(d.layer==='DREAM'?(d.also||[]).length:0)/* 사몽 편은 곁 인물도 센다 */);}const dreamEp=new Set(w.api.zones().filter(z=>w.api.def(z).layer==='DREAM').map(z=>w.api.def(z).episode));for(const [e,k] of eps){const n=dreamEp.has(e)?k:k+1;ok(n>=2&&n<=3,'서사 '+e+': NPC '+n+'명(본편은 기존 핵심 NPC 포함, 2~3)');}
   const types=new Set(w.api.zones().map(z=>w.api.def(z).quest.type));ok(types.has('purge')&&types.has('kill'),'두 종류 퀘스트가 모두 쓰인다');
   ok(!/주민|어부|아낙|소복/.test(String(w.api.zones().filter(z=>w.api.def(z).quest.type==='kill').map(z=>w.api.def(z).quest.hud))),'정본 34·35장: 주민 처치를 목표로 삼지 않는다');}
  console.log('R840 CPU 검사 통과: '+n+'개');

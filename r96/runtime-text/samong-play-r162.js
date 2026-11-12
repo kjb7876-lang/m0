@@ -101,7 +101,7 @@ function drawCore(){const z=zoneNow();if(!z||z.mode!=='D')return;const L=room.ex
  const X=PFX();if(X)X.play('core-orb-teal',core.x,core.y,{loop:true,key:'r162-core',k:1.0,z:h*.35,until:T()+.5});
  ctx.save();try{if(S){S.draw('ring',HOLY,q.x,q.y,h*2.2*pulse,h*1.1*pulse,{alpha:.75});S.draw('glow',hit?BLOOD:HOLY,q.x,q.y-h*.7,h*2.2,h*2.2,{alpha:.75});if(!X){S.draw('orb',HOLY,q.x,q.y-h*.7,h*.9*pulse,h*.9*pulse,{alpha:1});S.draw('flare',HOLY,q.x,q.y-h*.7,h*1.6,h*1.6,{angle:T()*.6,alpha:.7});}}
   else{ctx.fillStyle=hit?'rgba(255,90,90,.8)':'rgba(140,240,230,.8)';ctx.beginPath();ctx.arc(q.x,q.y-h*.7,h*.4,0,TAU);ctx.fill();}
-  if(c){const W=h*1.6,y=q.y-h*1.55,r=clamp(c.hp/c.max,0,1);ctx.fillStyle='rgba(4,6,8,.85)';ctx.fillRect(q.x-W/2-1,y-1,W+2,7);ctx.fillStyle=r<.3?'#d0605a':'#7fd8cc';ctx.fillRect(q.x-W/2,y,W*r,5);}}finally{ctx.restore();}}
+  if(c){const W=h*1.6,y=q.y+Math.max(8,h*.14),r=clamp(c.hp/c.max,0,1);ctx.fillStyle='rgba(4,6,8,.85)';ctx.fillRect(q.x-W/2-1,y-1,W+2,7);ctx.fillStyle=r<.3?'#d0605a':'#7fd8cc';ctx.fillRect(q.x-W/2,y,W*r,5);}}finally{ctx.restore();}}
 function drawAll(){if(typeof ctx==='undefined'||!ctx)return;const h=H(),t0=T();
  for(const e of fxList){const t=t0-e.t0;if(t<0||t>e.life)continue;ctx.save();try{scope({id:'r162:'+e.kind+':'+e.t0,kind:'effect',x:player.x,y:player.y,r162:true},()=>{if(e.kind==='clones')drawClones(e,t,h);else if(e.kind==='meteor')drawMeteors(e,t,h);else drawTentacles(e,t,h);});stats.drawn++;}catch(err){fail(err);}finally{ctx.restore();}}
  try{if(here())scope({id:'r162:core',kind:'effect',x:player.x,y:player.y},drawCore);}catch(err){fail(err);}}
