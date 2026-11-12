@@ -1,0 +1,33 @@
+ok     hwando    q  frames=20 novel=7 delay=0 cast=true body=hwando/attack-e.webp r271/walk-e.webp
+ok     hwando    w  frames=20 novel=7 delay=0 cast=true body=hwando/attack-e.webp r271/walk-e.webp
+ok     hwando    e  frames=20 novel=10 delay=0 cast=true body=hwando/attack-e.webp r271/walk-e.webp r271/walk-w.webp
+ok     hwando    r  frames=20 novel=7 delay=0 cast=true body=hwando/attack-e.webp r271/walk-e.webp
+ok     seoha     q  frames=20 novel=12 delay=0 cast=true body=seoha/attack-e.webp seoha/idle-e.webp
+ok     seoha     w  frames=20 novel=12 delay=0 cast=true body=seoha/attack-e.webp seoha/idle-e.webp
+ok     seoha     e  frames=20 novel=12 delay=0 cast=true body=seoha/attack-e.webp seoha/actions-v3126-seoha-move-right.webp seoha/idle-e.webp
+ok     seoha     r  frames=20 novel=12 delay=0 cast=true body=seoha/attack-e.webp seoha/idle-e.webp
+ok     neon      q  frames=20 novel=12 delay=0 cast=true body=neon/attack-e.webp neon/idle-e.webp
+ok     neon      w  frames=20 novel=12 delay=0 cast=true body=neon/attack-e.webp neon/idle-e.webp
+ok     neon      e  frames=20 novel=12 delay=0 cast=true body=neon/attack-e.webp neon/actions-v3126-neon-move-left.webp neon/idle-w.webp
+ok     neon      r  frames=20 novel=12 delay=0 cast=true body=neon/attack-e.webp neon/idle-e.webp
+ok     michaela  q  frames=20 novel=12 delay=0 cast=true body=michaela/skill-e.webp michaela/idle-e.webp
+ok     michaela  w  frames=20 novel=10 delay=0 cast=true body=michaela/skill-e.webp michaela/idle-e.webp
+ok     michaela  e  frames=20 novel=10 delay=0 cast=true body=michaela/skill-e.webp michaela/idle-e.webp
+ok     michaela  r  frames=20 novel=12 delay=0 cast=true body=michaela/skill-e.webp michaela/idle-e.webp
+ok     lauren    q  frames=20 novel=12 delay=0 cast=true body=lauren/skill-e.webp lauren/idle-e.webp
+ok     lauren    w  frames=20 novel=12 delay=0 cast=true body=lauren/skill-e.webp lauren/idle-e.webp
+ok     lauren    e  frames=20 novel=12 delay=0 cast=true body=lauren/skill-e.webp lauren/actions-v3126-lauren-move-right.webp lauren/idle-w.webp
+ok     lauren    r  frames=20 novel=12 delay=0 cast=true body=lauren/attack-se.webp lauren/idle-w.webp
+ok     hunter    q  frames=20 novel=12 delay=0 cast=true body=hunter/attack-se.webp hunter/attack-l.webp hunter/idle-w.webp hunter/idle-s.webp
+ok     hunter    w  frames=20 novel=12 delay=0 cast=true body=hunter/attack-l.webp hunter/attack-e.webp hunter/idle-w.webp
+ok     hunter    e  frames=20 novel=12 delay=0 cast=true body=hunter/attack-l.webp hunter/actions-v3126-hunter-move-left.webp hunter/idle-w.webp
+ok     hunter    r  frames=20 novel=12 delay=0 cast=true body=hunter/attack-l.webp hunter/attack-e.webp hunter/idle-w.webp
+ok     slayer    q  frames=20 novel=6 delay=0 cast=true body=slayer/attack-e.webp slayer/walk-e.webp
+ok     slayer    w  frames=20 novel=6 delay=0 cast=true body=slayer/attack-e.webp slayer/walk-e.webp
+ok     slayer    e  frames=20 novel=9 delay=0 cast=true body=slayer/attack-e.webp slayer/walk-w.webp slayer/walk-e.webp
+ok     slayer    r  frames=20 novel=11 delay=0 cast=true body=slayer/attack-e.webp slayer/walk-e.webp
+ok     gunner    q  frames=20 novel=20 delay=0 cast=true body=gunner/attack-e.webp
+ok     gunner    w  frames=20 novel=14 delay=0 cast=true body=gunner/attack-e.webp gunner/idle-e.webp
+ok     gunner    e  frames=20 novel=18 delay=0 cast=true body=gunner/attack-e.webp gunner/idle-e.webp
+ok     gunner    r  frames=20 novel=10 delay=0 cast=true body=gunner/attack-e.webp gunner/idle-e.webp
+S1 스킬 시전에 몸 동작 없음: 0

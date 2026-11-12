@@ -5,7 +5,8 @@ const ZONES=(process.env.Z||'hub,hando01,hando02,hando03,kair02,kair03,last301,c
 const measure=()=>{const L=room.exploration,fl=new Set(L.floorCells.map(c=>c[0]+':'+c[1])),f=(x,y)=>fl.has(Math.floor(x)+':'+Math.floor(y));
  const thin=[],voidBoth=[];const cover=new Map();
  for(const w of L.walls||[]){if(w.decorative||w.presentationOnly||w.angle)continue;const hz=w.width>=w.depth,len=Math.max(w.width,w.depth),t=Math.min(w.width,w.depth);if(t>.7)continue;let both=0,none=0,m=0;
-  for(let s=.5;s<len;s+=1){const a=hz?[w.x-len/2+s,w.y-.5]:[w.x-.5,w.y-len/2+s],b=hz?[w.x-len/2+s,w.y+.5]:[w.x+.5,w.y-len/2+s];m++;const fa=f(...a),fb=f(...b);if(fa&&fb)both++;if(!fa&&!fb)none++;const k=(hz?'h:':'v:')+Math.floor(hz?a[0]:w.x+.01)+':'+Math.floor(hz?w.y+.01:a[1]);cover.set(k,(cover.get(k)||0)+1);}
+  /* R713(돌담 두께)이 벽판을 두껍게 하고 바깥으로 밀거나 모서리에서 늘려도 같은 변으로 읽히게: 모서리에서 늘어난 끝(.95 미만)은 세지 않고 칸 한가운데만, 양옆은 두께 바깥 .38 에서, 변 번호는 반올림으로 */const q=t/2+.38,c0=hz?w.x:w.y,first=Math.ceil(c0-len/2-.05),last=Math.floor(c0+len/2-.95);
+  for(let c=first;c<=last;c++){const s=c+.5-(c0-len/2);const a=hz?[w.x-len/2+s,w.y-q]:[w.x-q,w.y-len/2+s],b=hz?[w.x-len/2+s,w.y+q]:[w.x+q,w.y-len/2+s];m++;const fa=f(...a),fb=f(...b);if(fa&&fb)both++;if(!fa&&!fb)none++;const k=(hz?'h:':'v:')+(hz?Math.floor(a[0]):Math.round(w.x))+':'+(hz?Math.round(w.y):Math.floor(a[1]));cover.set(k,(cover.get(k)||0)+1);}
   if(both)thin.push([w.id,both,m]);if(none)voidBoth.push([w.id,none,m]);}
  // 바닥|비바닥 단위 변마다 벽판이 꼭 하나
  let missing=0,dup=0;for(const k of fl){const[x,y]=k.split(':').map(Number);for(const[e,o]of[['h:'+x+':'+y,[x,y-1]],['h:'+x+':'+(y+1),[x,y+1]],['v:'+x+':'+y,[x-1,y]],['v:'+(x+1)+':'+y,[x+1,y]]]){if(fl.has(o[0]+':'+o[1]))continue;const c=cover.get(e)||0;if(!c)missing++;if(c>1)dup++;}}
@@ -51,7 +52,7 @@ for(const z of ZONES){await go(q,z);const r=await q.evaluate(measure);
  ok(z+': 조형물 수·이름은 끈 지도와 같다(조형물 '+B.size+'개, 몹 '+r.enemies+'마리)',A.size===B.size&&[...A].map(k=>k.split('@')[0]).sort().join('|')===[...B].map(k=>k.split('@')[0]).sort().join('|')&&on[z].enemies===r.enemies,{lost,added});
  // 병동 틀 지역: 진료실 C 북쪽 가림벽([57,57]~[68,57])은 어느 쪽을 메워도 그 방 조형물 1점이 벽 붙이기 규칙으로 자리를 옮긴다(가림벽을 하나씩 메워 본 실측).
  //  → 허용하는 변화는 그것뿐: 진료실 C(x50~68·y52~68) 안에서 1점이 (59,54.1) → (59,65.9). 그 밖의 조형물 자리는 모두 같아야 한다.
- const moved=z==='hub'?'':'59,54.1';
- ok(z+': 조형물 자리는 끈 지도와 같다'+(moved?' — 진료실 C 의 1점((59,54.1) → (59,65.9))만 예외':''),moved?(spots(lost.filter(k=>xy(k).join(',')!==moved))===spots(added.filter(k=>xy(k).join(',')!=='59,65.9'))&&lost.length<=2&&added.length<=2):(lost.length===0&&added.length===0),{lost,added});}
+ /* #442(조형물 서사 맞춤) 뒤 hando02·kair02·last301 에서는 같은 1점이 (52.1,65.9) 에서 온다 — 도착 자리 (59,65.9) 는 같다 */const moved=z==='hub'?'':['59,54.1','52.1,65.9'];
+ ok(z+': 조형물 자리는 끈 지도와 같다'+(moved?' — 진료실 C 의 1점((59,54.1) 또는 (52.1,65.9) → (59,65.9))만 예외':''),moved?(spots((m=>lost.filter(k=>xy(k).join(',')!==m))(moved.find(m=>lost.some(k=>xy(k).join(',')===m))))===spots(added.filter(k=>xy(k).join(',')!=='59,65.9'))&&lost.length<=2&&added.length<=2):(lost.length===0&&added.length===0),{lost,added});}
 ok('페이지 오류 0',errs.length===0,errs);
 await b.close();console.log(`\nR830 browser: ${n-bad}/${n} passed`);process.exit(bad?1:0);

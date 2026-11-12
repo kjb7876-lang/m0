@@ -315,6 +315,16 @@ const FF=(c,e)=>c.__STORYWORLD_STORY_COMBAT_R54__.frameFor(e,null);const VAPI=c=
  const c=vworld({roomId:'last303'}),e=mob({id:'last303:r74-patrol:0',nativeId:'l302-e1',name:'잠식된 약방 아낙',r248Key:'주민에게서 떨어진 검은 안개'});const f=FF(c,e);ok(f&&/herbwife/.test(f.path),'R773 inherited villager name → herbwife art ('+(f&&f.path)+')');
  const l=mob({id:'last303:r74-patrol:5',nativeId:'l302-e1',name:'잠식된 소복 처녀 우두머리'});ok(c.window.__STORYWORLD_VILLAGERS_R763__.kindFor(l)==='sobok','R773 leader name → sobok');
  const o=mob({id:'last303:x',nativeId:'l302-e1',name:'불면귀의 안개 잔영 1'});ok(c.window.__STORYWORLD_VILLAGERS_R763__.kindFor(o)===null,'R773 boss add stays engine art');}
+{// R774(사용자 11-12 06:31Z 선택 '어부·소복은 근접 전용으로'): 둥지(last303)는 모두 l302-e1(대부분 ai hybrid)이라 어부·소복도 원거리 시전 → 근접 AI 로, 약방 아낙은 그대로
+ const c=vworld({roomId:'last303'}),V=c.window.__STORYWORLD_VILLAGERS_R763__,cp=()=>({attackShape:{range:1.1,windup:.4},preferredRange:3.6,aggro:12});
+ const f=mob({id:'last303:r75-pack:10',nativeId:'l302-e1',name:'주민에게서 떨어진 검은 안개 1',ai:'hybrid',combatProfile:cp()}),s=mob({id:'last303:r75-pack:11',nativeId:'l302-e1',name:'주민에게서 떨어진 검은 안개 3',ai:'ranged',combatProfile:cp()}),h=mob({id:'last303:r75-pack:9',nativeId:'l302-e1',name:'주민에게서 떨어진 검은 안개 3',ai:'hybrid',combatProfile:cp()});
+ ok(V.kindFor(f)==='fisher'&&V.kindFor(s)==='sobok'&&V.kindFor(h)==='herbwife','R774 kinds (fisher/sobok/herbwife)');
+ ok(f.ai==='melee'&&s.ai==='melee'&&f.r774Ai==='hybrid'&&s.r774Ai==='ranged','R774 fisher/sobok melee AI ('+f.ai+'/'+s.ai+')');ok(Math.abs(f.combatProfile.preferredRange-1.1*.86)<1e-9,'R774 preferred range = melee reach');
+ ok(h.ai==='hybrid'&&h.combatProfile.preferredRange===3.6,'R774 herbwife keeps ranged AI');
+ f.ai='hybrid';V.kindFor(f);ok(f.ai==='melee','R774 re-applied if something resets ai');
+ {// 지역 데이터 계약(r81 runtime-contracts: 만든 직후 몹 표가 기준과 같아야 함) → makeRoom 때는 ai 를 안 바꾸고 첫 갱신 때 바꿈
+  const c3=vworld({roomId:'dist01'}),r=c3.makeRoom('last302','STORY'),x=r.enemies[0];ok(x.ai===undefined&&x.r774Ai===undefined,'R774 makeRoom leaves enemy table untouched');x.ai='hybrid';c3.window.__STORYWORLD_VILLAGERS_R763__.kindFor(x,'last302');ok(x.ai==='melee','R774 applied on the next update');}
+ const e3=mob({id:'last302:r75-pack:19',nativeId:'l302-e3',name:'귀비탕 공명 안개핵',ai:'ranged',combatProfile:cp()});const c2=vworld();c2.window.__STORYWORLD_VILLAGERS_R763__.kindFor(e3);ok(e3.ai==='melee','R774 also last302 fisher/sobok');}
 {// 회귀(헤드리스 실측): R74 순찰(r74Monster 'glass')은 지도 괴물 그림으로 그려지고 이름이 되돌아갔다 → 표시를 떼고(r763Atlas 에 기억) 이름이 되돌아가도 다시 바꿈
  const c=vworld(),e=mob({id:'last302:r74-patrol:2',nativeId:'l302-e1',name:'유리 망령',r74Monster:'glass'});FF(c,e);ok(e.r74Monster===undefined&&e.r763Atlas==='glass'&&e.name==='잠식된 약방 아낙','r74 patrol: atlas mark removed, renamed');
  e.name='유리 망령';e.r74Monster='glass';FF(c,e);ok(e.name==='잠식된 약방 아낙'&&e.r763From==='유리 망령'&&e.r74Monster===undefined,'R191 re-applied glass patrol → renamed and detached again');}

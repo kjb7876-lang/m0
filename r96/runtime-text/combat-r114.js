@@ -261,7 +261,8 @@ function fitHero(rec,start){try{unifyHero(rec,start);}catch(e){fail(e);}if(!Arra
  stats.heroFits++;stats.heroFitK=Math.round(k*1000)/1000;}
 // 걷기 아틀라스가 없는 영웅(서하·네온·미카엘라·라우렌·사냥꾼·기억사수)은 8방향 정지 그림이 미끄러지기만 했다.
 // 이동 중에는 걸음에 맞춰 몸이 살짝 오르내리고(키의 3.5%), 걸음마다 좌우로 기울고(±1.7°), 디딜 때 조금 눌린다(2%).
-const walk={phase:0,x:null,y:null,amp:0};
+const perHeroR720=o=>{if(typeof Proxy!=='function'||typeof WeakMap!=='function')return o;const m=new WeakMap(),init=JSON.stringify(o),pick=()=>{let p=null;try{p=player;}catch(_){}if(p&&p.r720Ally===true){let s=m.get(p);if(!s){s=JSON.parse(init);m.set(p,s);}return s;}return o;};return new Proxy(o,{get:(_,k)=>pick()[k],set:(_,k,v)=>{pick()[k]=v;return true;},has:(_,k)=>k in pick(),deleteProperty:(_,k)=>delete pick()[k],ownKeys:()=>Reflect.ownKeys(pick()),getOwnPropertyDescriptor:(_,k)=>{const d=Object.getOwnPropertyDescriptor(pick(),k);if(d)d.configurable=true;return d;}});};/* R720: 생존 배치 영웅(player.r720Ally 몸)은 영웅마다 따로 상태를 갖는다 — 조종 영웅 상태와 섞이지 않게 */
+const walk=perHeroR720({phase:0,x:null,y:null,amp:0});
 function walkHero(rec,start,dt){const moving=!!player.moving&&!(finite(player.attackAnim)>0)&&!(finite(player.skillAnim)>0);
  if(walk.x!=null){const d=Math.hypot(player.x-walk.x,player.y-walk.y);if(d<1.2)walk.phase+=d*Math.PI*1.45;}walk.x=player.x;walk.y=player.y;
  walk.amp+=((moving?1:0)-walk.amp)*Math.min(1,dt*10);if(walk.amp<.02)return;
