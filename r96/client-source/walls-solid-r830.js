@@ -31,7 +31,7 @@ function keepOut(L){const out=[],pt=(q,r)=>{if(q&&Number.isFinite(q.x)&&Number.i
  for(const d of L.worldR74?.doors||[])pt(d,Math.max(2.5,(Number(d.width)||0)/2+1.5));for(const q of[L.entry,L.entrance,L.gate,L.objective,...(L.starts||[])])pt(q,2);for(const n of L.nodes||[])pt(n,.8);return out;}
 function solidify(L,pick,force){const why={};
  const S=new Set(L.floorCells.map(c=>K(c[0],c[1]))),has=(x,y)=>S.has(K(x,y)),guard=keepOut(L),near=(x,y)=>guard.some(([gx,gy,r])=>Math.hypot(gx-Math.max(x,Math.min(x+1,gx)),gy-Math.max(y,Math.min(y+1,gy)))<r);/* 지킬 점에서 그 칸(사각형)까지 거리 */
- const parts=[],done=[];for(const w of L.walls||[]){if(!pick(w))continue;const s=seg(w);if(s)parts.push({w,s});}
+ const parts=[],done=[],kept=[];for(const w of L.walls||[]){if(!pick(w))continue;const s=seg(w);if(s)parts.push({w,s});}
  for(const p of parts){const cand=[];
   for(const side of[-1,1]){
    // 메울 칸은 '건너편도 바닥'인 칸만(이미 한쪽이 벽 덩어리인 구간은 그대로 메인벽이다)
@@ -43,8 +43,9 @@ function solidify(L,pick,force){const why={};
   cand.sort((a,b)=>b.depth-a.depth||a.side-b.side);let used=null;const name=String(p.w.id).replace(/^.*?:/,''),f=force?force[p.w.id]??force[name]:undefined;
   if(f===0){stats.skipped++;why[p.w.id]='forced-skip';continue;}
   const order=f?cand.filter(c=>c.side===f):cand;if(!order.length)why[p.w.id]='guarded';
-  for(const c of order){if(!c.real.length){used=c;break;}if(c.depth<2){why[p.w.id]='shallow';continue;}const T=new Set(S);for(const[x,y]of c.real)T.delete(K(x,y));if(!connected(T)){why[p.w.id]='splits';continue;}for(const[x,y]of c.real)S.delete(K(x,y));used=c;break;}
-  if(used){delete why[p.w.id];done.push({id:p.w.id,side:used.side,cells:used.real.length});stats.filled+=used.real.length;}else stats.skipped++;}
+  if(order.length&&order.every(c=>!c.real.length)){kept.push(p.w.id);continue;}/* 이미 온 길이가 벽 덩어리 가장자리인 칸막이: 그대로 둔다 */
+  for(const c of order){if(!c.real.length)continue;if(c.depth<2){why[p.w.id]='shallow';continue;}const T=new Set(S);for(const[x,y]of c.real)T.delete(K(x,y));if(!connected(T)){why[p.w.id]='splits';continue;}for(const[x,y]of c.real)S.delete(K(x,y));used=c;break;}
+  if(used){delete why[p.w.id];done.push({id:p.w.id,side:used.side,cells:used.real.length,hz:p.s.hz,fixed:p.s.fixed,a:p.s.a,b:p.s.b,flag:p.w.partition===true});stats.filled+=used.real.length;}else stats.skipped++;}
  if(!done.length)return null;
  const gone=new Set(done.map(d=>d.id)),need=new Set();// 필요한 단위 변: 'h:x:y'(칸 (x,y-1)|(x,y) 사이), 'v:x:y'(칸 (x-1,y)|(x,y) 사이)
  const [bx0,by0,bx1,by1]=L.bounds||[0,0,128,128];
@@ -53,19 +54,23 @@ function solidify(L,pick,force){const why={};
  const covered=new Set(),walls=[];let tpl=null,serial=0;
  const mk=(src,hz,fixed,a,b)=>{const len=b-a,t=Math.min(src.width,src.depth),o={...src,id:String(src.id)+':r830:'+(serial++),x:hz?a+len/2:fixed,y:hz?fixed:a+len/2,width:hz?len:t,depth:hz?t:len,wallsSolidR830:true};
   if(src.endpoints)o.endpoints=hz?[[a,fixed],[b,fixed]]:[[fixed,a],[fixed,b]];if(src.analyticBounds12)o.analyticBounds12=hz?[a,fixed-t/2,b,fixed+t/2]:[fixed-t/2,a,fixed+t/2,b];delete o.partition;return o;};
- for(const w of L.walls||[]){if(gone.has(w.id))continue;const s=seg(w);if(!s){walls.push(w);continue;}if(!tpl&&!pick(w))tpl=w;const es=edgesOf(s),keep=es.map(e=>need.has(e));
-  if(pick(w)||keep.every(Boolean)){walls.push(w);for(const e of es)covered.add(e);continue;}// 남은 칸막이(못 메운 것)·그대로 필요한 경계벽
-  // 일부 구간이 벽 덩어리 속으로 들어간 경계벽 → 남은 구간만
+ // 남는 칸막이(못 메운 것·그대로 둔 것)를 먼저 세우고, 경계벽은 그 아래 겹치는 구간과 벽 덩어리 속으로 들어간 구간을 뺀다
+ for(const w of L.walls||[]){if(gone.has(w.id)||!pick(w))continue;const s=seg(w);walls.push(w);if(s)for(const e of edgesOf(s))covered.add(e);}
+ for(const w of L.walls||[]){if(gone.has(w.id)||pick(w))continue;const s=seg(w);if(!s){walls.push(w);continue;}if(!tpl)tpl=w;const es=edgesOf(s),keep=es.map(e=>need.has(e)&&!covered.has(e));
+  if(keep.every(Boolean)){walls.push(w);for(const e of es)covered.add(e);continue;}
   for(let i=0;i<es.length;){if(!keep[i]){i++;continue;}let j=i;while(j<es.length&&keep[j])j++;walls.push(mk(w,s.hz,s.fixed,s.a+i,s.a+j));for(let k=i;k<j;k++)covered.add(es[k]);i=j;}}
  if(!tpl)return null;
  // 새 경계 변(아직 벽판이 없는 것)을 이어 붙여 세운다
  const runs=new Map();for(const e of need){if(covered.has(e))continue;const[ax,p,q]=e.split(':'),hz=ax==='h',fixed=hz?+q:+p,at=hz?+p:+q,k=ax+':'+fixed;if(!runs.has(k))runs.set(k,[]);runs.get(k).push(at);}
  for(const[k,list]of runs){const[ax,f]=k.split(':'),hz=ax==='h',fixed=+f;list.sort((a,b)=>a-b);for(let i=0;i<list.length;){const a=list[i];let b=a+1;i++;while(i<list.length&&list[i]===b){b++;i++;}walls.push(mk(tpl,hz,fixed,a,b));}}
+ // 칸막이가 서 있던 줄에 새로 선 벽판(메운 줄과 건너편 바닥 사이)이 그 칸막이의 역할을 잇는다: 출처를 적고, 칸막이 표시(partition)가 있던 지도는 그 표시도 잇는다
+ for(const d of done){let best=null;for(const w of walls){if(!w.wallsSolidR830||w.r830From)continue;const s=seg(w);if(!s||s.hz!==d.hz||s.fixed!==d.fixed||s.b<=d.a||s.a>=d.b)continue;if(!best||s.b-s.a>best[0])best=[s.b-s.a,w];}
+  if(best){best[1].r830From=d.id;if(d.flag)best[1].partition=true;}delete d.hz;delete d.fixed;delete d.a;delete d.b;delete d.flag;}
  // 바닥 사각형: 행 구간이 이어지는 행끼리 묶음(엔진과 같은 방식)
  const rects=[],open=new Map();for(let y=by0;y<=by1;y++){const next=new Map();let x=bx0;while(x<bx1){if(!has(x,y)){x++;continue;}const s0=x;while(x<bx1&&has(x,y))x++;const id=s0+':'+x,o=open.get(id);if(o&&o.y+o.depth===y){o.depth++;next.set(id,o);}else{const r={x:s0,y,width:x-s0,depth:1};rects.push(r);next.set(id,r);}}open.clear();for(const[k2,v]of next)open.set(k2,v);}
  const floorCells=[...S].map(k=>k.split(':').map(Number)).sort((a,b)=>a[1]-b[1]||a[0]-b[0]);
  stats.partitions+=done.length;
- return{...L,floorCells,floorRects:rects,walls,wallsSolidR830:{revision:REV,partitions:done,skipped:why,before:L.floorCells.length,after:floorCells.length}};}
+ return{...L,floorCells,floorRects:rects,walls,wallsSolidR830:{revision:REV,partitions:done,kept,skipped:why,before:L.floorCells.length,after:floorCells.length}};}
 const cache=new WeakMap();
 let qaForce=null;// 검사용: {지역:{가림벽 이름:쪽(-1|1|0)}} — 켜면 캐시를 쓰지 않는다
 function layoutFor(id,L){try{if(!prefs.on||!L?.floorCells?.length||L.wallsSolidR830)return L;const pick=ZONES[id];if(!pick)return L;

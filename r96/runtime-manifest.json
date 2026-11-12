@@ -44934,8 +44934,8 @@
     },
     {
       "path": "walls-solid-r830.js",
-      "bytes": 13025,
-      "sha256": "9f3b3bc0d8d21428cde0b4c02fea31673d62eebded559d14e05ef1172c7f5be4"
+      "bytes": 14015,
+      "sha256": "addd57c4195f5fc53fd73db914995a0e7306e7f5a2991ee36f034001d0972c2c"
     },
     {
       "path": "wave-orphans-r352.js",
@@ -45024,7 +45024,7 @@
     }
   ],
   "fileCount": 9004,
-  "totalBytes": 1237098326,
+  "totalBytes": 1237099316,
   "webHTMLSha256": "a4bd38e1c963be3a8df70262e41b6297554af072168055a6d1a1dabb5d90441f",
   "largest": [
     {
