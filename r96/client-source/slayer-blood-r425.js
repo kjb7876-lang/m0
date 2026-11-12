@@ -46,19 +46,21 @@ function shakeIt(v){try{if(typeof shake==='number'&&!(typeof settings==='object'
 // ---------------------------------------------------------------- R
 let R=null;// {t0,x,y,power,crosses:[{x,y,k}],burst:false,auraEnd}
 const chainSeen=new Map();
-function startR(x,y,castId){const p=player;R={t0:T(),x,y,castId,room:typeof room==='object'?room:null,power:typeof attackPower==='function'?attackPower():48,burst:false,auraStart:T()+.75,auraEnd:T()+.75+7,crosses:[]};
+/* R952: 소환된 슬레이어 몸(player.r952Summon)이 건 R·Q 는 그 몸을 기억해, 조종 영웅이 다른 영웅이어도 그 몸 기준으로 이어 간다(다른 경우는 예전과 같다) */
+const summonR952=()=>typeof player==='object'&&player&&player.r952Summon===true?player:null;
+function startR(x,y,castId){const p=player;R={t0:T(),x,y,castId,p:summonR952(),room:typeof room==='object'?room:null,power:typeof attackPower==='function'?attackPower():48,burst:false,auraStart:T()+.75,auraEnd:T()+.75+7,crosses:[]};
  // 화면 좌상·좌하·우상·우하 ≈ 2.3칸: 화면 가로 +1 = 월드 (+.5,-.5) 방향, 화면 세로 +1 = (+1,+1)/√2
  const scr=(sx,sy)=>({x:x+sx*.5*2.3+sy*.5*1.1,y:y-sx*.5*2.3+sy*.5*1.1});
  R.crosses=[{...scr(0,0),k:2.6,r:3.2,m:2.6,big:true},{...scr(-2,-1),k:1.3,r:1.7,m:1.1},{...scr(-2,1),k:1.3,r:1.7,m:1.1},{...scr(2,-1),k:1.3,r:1.7,m:1.1},{...scr(2,1),k:1.3,r:1.7,m:1.1}];
  stats.rCasts++;}
 function rTick(){if(!R)return;const t=T(),age=t-R.t0;let rm=null;try{rm=room;}catch(_){}
- if(rm!==R.room||!isHero()){R=null;return;}
+ if(rm!==R.room||!(R.p?R.p.hp>0:isHero())){R=null;return;}
  if(!R.burst&&age>=.55){R.burst=true;const hit=new Set();
   for(const c of R.crosses){blood(c.big?'blood-death':'blood-burst',c.x,c.y,{k:c.k*1.15,z:0});for(const e of live())if(!hit.has(e)&&dist(e,c)<=c.r+(e.radius||.3)&&seeLine(c,e)){hit.add(e);deal(e,R.power*c.m,'r-burst');}stats.bursts++;}
   shakeIt(7);}
- if(t>=R.auraStart&&t<R.auraEnd&&solo())chase();
+ if(t>=R.auraStart&&t<R.auraEnd&&solo()&&!R.p)chase();
  if(t>=R.auraEnd&&age>1)R=null;}
-const auraOn=()=>!!(R&&T()>=R.auraStart&&T()<R.auraEnd&&isHero());
+const auraOn=()=>!!(R&&T()>=R.auraStart&&T()<R.auraEnd&&(R.p?player===R.p&&R.p.hp>0:isHero()));
 function manualInput(){try{const k=typeof keys==='object'&&keys?keys:null,j=typeof joystickVector==='object'?joystickVector:{x:0,y:0};return !!((k&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].some(x=>k.has(x)))||Math.hypot(j.x||0,j.y||0)>.15||(typeof route!=='undefined'&&Array.isArray(route)&&route.length>0)||(typeof command!=='undefined'&&!!command));}catch(_){return false;}}
 let lastChase=0;
 function cloneStrike(p,e,d){const v={x:(e.x-p.x)/d,y:(e.y-p.y)/d},gx=e.x-v.x*.7,gy=e.y-v.y*.7;let dir='front';try{if(typeof facing==='function')dir=facing(v.x,v.y);}catch(_){}
@@ -87,9 +89,9 @@ function qReady(){return on&&isHero()&&solo()&&typeof started!=='undefined'&&sta
 function castQ(){const p=player,rk=typeof rank==='function'?rank('special'):0;p.specialCD=10*(1-.05*rk)*(typeof COMBAT_RHYTHM_R26==='number'?COMBAT_RHYTHM_R26:1);p.specialCD=Math.max(.22,p.specialCD*coolK());p.skillAnim=.6;
  const power=(typeof attackPower==='function'?attackPower():48)*(2.4+.36*rk),e=typeof nearestEnemy==='function'?nearestEnemy(12):null,a=weaponAngle(e?Math.atan2(e.y-p.y,e.x-p.x):(typeof storyAim22==='function'?storyAim22():0));
  try{if(typeof facing==='function')p.direction=facing(Math.cos(a),Math.sin(a));}catch(_){}try{if(typeof sound==='function')sound('special');}catch(_){}
- Q={t0:T(),x:p.x,y:p.y,angle:a,power,launched:false,hit:new Set(),room:typeof room==='object'?room:null,fx:null};stats.qCasts++;if(!warmed)warm();return true;}
-function qTick(dtGuess){if(!Q)return;const t=T(),age=t-Q.t0;let rm=null;try{rm=room;}catch(_){}if(rm!==Q.room||!(player?.hp>0)){Q=null;return;}
- if(!Q.launched&&age>=.32){Q.launched=true;Q.x=player.x;Q.y=player.y;Q.ft=t;shakeIt(3.5);
+ Q={t0:T(),x:p.x,y:p.y,p:summonR952(),angle:a,power,launched:false,hit:new Set(),room:typeof room==='object'?room:null,fx:null};stats.qCasts++;if(!warmed)warm();return true;}
+function qTick(dtGuess){if(!Q)return;const t=T(),age=t-Q.t0;let rm=null;try{rm=room;}catch(_){}const who=Q.p||player;if(rm!==Q.room||!(who?.hp>0)){Q=null;return;}
+ if(!Q.launched&&age>=.32){Q.launched=true;Q.x=who.x;Q.y=who.y;Q.ft=t;shakeIt(3.5);
   const f={type:'r425-tornado',x:Q.x,y:Q.y,age:0,life:1.05,q:Q};try{if(Array.isArray(effects))effects.push(f);}catch(_){}Q.fx=f;}
  if(Q.launched){const u=Math.min(1,(t-Q.ft)/.95),nx=Q.x+Math.cos(Q.angle)*8.5*u,ny=Q.y+Math.sin(Q.angle)*8.5*u;
   if(typeof blocked==='function'&&blocked(nx,ny,.2)&&u>.05){Q.stopU??=u;}
@@ -176,7 +178,7 @@ if(typeof special==='function'){const base=special;special=function(...a){if(on&
 const asHeroR720=(id,fn)=>{const D=window.__STORYWORLD_HERO_DEFENSE_R720__;return D&&typeof D.asHero==='function'?D.asHero(id,fn):fn();};/* R720-4: 다음 틱에 이어지는 기술을 그 영웅 몸(생존 배치 영웅이면 그 몸)으로 돌린다 */
 if(typeof tick==='function'){const base=tick;tick=function(dt,...a){const r=base.apply(this,[dt,...a]);try{if(on){if(!warmed&&isHero())warm();asHeroR720(HERO,()=>{rTick();qTick(dt);bleedTick();});}}catch(e){fail(e);}return r;};}
 if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(f,...a){if(f&&f.type==='r425-tornado'){try{scope({id:'r425:tornado',kind:'effect',x:f.x,y:f.y,groundAligned:false},()=>drawTornado(f));}catch(e){fail(e);}return;}return base.apply(this,[f,...a]);};}
-if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const aura=on&&auraOn(),spin=on&&!!Q&&isHero()&&(!Q.launched||T()-Q.ft<.16);
+if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const aura=on&&auraOn(),spin=on&&!!Q&&isHero()&&(!Q.p||Q.p===player)&&(!Q.launched||T()-Q.ft<.16);
  if(aura)try{scope({id:'r425:aura-back',kind:'effect',x:player.x,y:player.y,groundAligned:false},()=>{ctx.save();try{auraBack();}finally{ctx.restore();}});stats.auraFrames++;}catch(e){fail(e);}
  if(spin)try{scope({id:'r425:spin-back',kind:'effect',x:player.x,y:player.y,groundAligned:false},()=>{ctx.save();try{spinHero(-1);}finally{ctx.restore();}});}catch(e){fail(e);}
  const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);

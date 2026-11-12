@@ -8288,7 +8288,20 @@
     "assets/r911/clean/assets/vfx/heroes/seoha-e.webp",
     "assets/r911/clean/assets/vfx/heroes/seoha-w.webp",
     "assets/r911/clean/assets/vfx/heroes/slayer-r.webp",
-    "assets/r911/derived/gunner-laser-bullet.webp"
+    "assets/r911/derived/gunner-laser-bullet.webp",
+    "gunner-veil-r953.js",
+    "hwando-ink-r945.js",
+    "lauren-celestial-r946.js",
+    "slayer-blood-passive-r947.js",
+    "qa-snapshot-r940.js",
+    "cursor-r780.js",
+    "hunter-squad-r952.js",
+    "seoha-epoch-r949.js",
+    "finale-r950.js",
+    "neon-storm-r951.js",
+    "michaela-heart-r948.js",
+    "assets/r948/heart-fly8.webp",
+    "assets/r948/heart-hit6.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9363,5 +9376,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "f3772da1e1c76659c7daddb7ec9c46621ceef5f2301c033e68697325bce5c088"
+  "runtimeManifestSHA256": "8bd97493d7ab92f576014693d3b71c8465325ecd7707a28b6773a398c222b09e"
 }
