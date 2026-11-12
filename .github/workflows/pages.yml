@@ -791,6 +791,8 @@ jobs:
         run: node r96/qa/r860/r860-cpu-check.cjs
       - name: R911 projectile minimum size (half hero height, visual only) CPU check
         run: node r96/qa/r911/r911-cpu-check.cjs
+      - name: R951 neon storm passive CPU check
+        run: node r96/qa/r951/r951-cpu-check.cjs
       - name: R899 boss-map story window and memory-shard paper move to top-left, quest line shortened CPU check
         run: node r96/qa/r899/top-left-cpu-check.cjs
       - name: R930 Kaironomicon cyber-magitech floor/wall tiles and tech props (art only, layout unchanged) CPU check
