@@ -44324,8 +44324,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6575211,
-      "sha256": "0e8609cc9579843dc6520460e4c1fb0c38d7aacd9ec720a01a1bfe81ea568e85"
+      "bytes": 6575266,
+      "sha256": "4f2a13fc7c47b7f2b279af36484ca0d6b900d9c7005b51bc4e0bd016e30b4e32"
     },
     {
       "path": "intro-r140.js",
@@ -45063,6 +45063,11 @@
       "sha256": "f7c80761658674e6a91c0dbb22ad7441245bb381ccace8e231dabc14bdb1ee6e"
     },
     {
+      "path": "slayer-blood-passive-r947.js",
+      "bytes": 22676,
+      "sha256": "7e8bbb6ec5d44a27d2fc078f47cc9235e4c91148eee8c5c09217fa8cf2166d5b"
+    },
+    {
       "path": "slayer-blood-r425.js",
       "bytes": 26756,
       "sha256": "20f04ab2e7ddc51bc8eeba18e21f3105a30c1cb44897f4c1b31662480953939d"
@@ -45393,9 +45398,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9078,
-  "totalBytes": 1240728780,
-  "webHTMLSha256": "0e8609cc9579843dc6520460e4c1fb0c38d7aacd9ec720a01a1bfe81ea568e85",
+  "fileCount": 9079,
+  "totalBytes": 1240751511,
+  "webHTMLSha256": "4f2a13fc7c47b7f2b279af36484ca0d6b900d9c7005b51bc4e0bd016e30b4e32",
   "largest": [
     {
       "path": "index.html",
