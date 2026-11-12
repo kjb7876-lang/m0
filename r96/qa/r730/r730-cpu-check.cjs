@@ -16,6 +16,13 @@ function boot(){const ctx={localStorage:{getItem:()=>null,setItem:()=>{}},consol
 const api=boot();ok('api',!!api&&typeof api.plan==='function'&&typeof api.apply==='function');
 if(!api||!FX.last302){console.log('\nR730 '+(n-bad)+'/'+n+' passed (stopped early)');process.exit(1);}
 const PX=34,SUM=17;
+// R204 지형장 — 둔덕 경계(보이는 바위 벽)를 그대로 계산하려고 진짜 모듈을 최소 스텁으로 올린다(수치는 cave-r204.js ZONES 의 last302·last303 줄과 같다)
+const MIN_F=.9,CAVE_CFG={last302:{seed:0x5d3020,bulge:.8,topK:1.9,floorK:1.05,hiTop:1.4,loTop:.5},last303:{seed:0x5d3030,bulge:.85,topK:1.9,floorK:1.03,hiTop:1.4,loTop:.48}};
+const cave=(()=>{const cs=rd('client-source/cave-r204.js'),z=s=>{const m=cs.match(new RegExp(s+':\\{seed:(0x[0-9a-f]+)[^\\n]*?bulge:([.0-9]+)'));return m&&[parseInt(m[1],16),parseFloat(m[2])];};
+ for(const id of Object.keys(CAVE_CFG)){const m=z(id);ok(id+': test mirrors cave-r204 ZONES (seed, bulge)',!!m&&m[0]===CAVE_CFG[id].seed&&m[1]===CAVE_CFG[id].bulge);}
+ const cx={console,Math,JSON,Number,String,Object,Array,Set,Map,WeakMap,Promise,Date,Float32Array,Uint8Array,Uint16Array,Int32Array,performance:{now:()=>Date.now()},localStorage:{getItem:()=>null,setItem(){}},setTimeout:()=>0,setInterval:()=>0,clearInterval(){}};cx.window=cx;cx.StoryPhase1={ThreeRenderer:{prototype:{render(){}}}};vm.createContext(cx);
+ try{vm.runInContext(cs,cx);}catch(e){}return cx.__STORYWORLD_CAVE_R204__||null;})();
+ok('R204 field loads for the terrain check',!!cave&&typeof cave.field==='function'&&typeof cave.at==='function');
 for(const id of['last302','last303']){const fx=FX[id],P=api.plan(fx),P2=api.plan(JSON.parse(JSON.stringify(fx)));
  const Fset=new Set(fx.floorCells.map(([x,y])=>x+','+y)),onFloor=p=>Fset.has(Math.floor(p.x)+','+Math.floor(p.y));
  // R810: 집 앞 언덕 소품(댓돌 신발·장독대)은 집처럼 언덕 위(바닥 밖)에 서고, 등롱대(post)는 석등과 같은 길 등불로 센다
@@ -48,6 +55,12 @@ for(const id of['last302','last303']){const fx=FX[id],P=api.plan(fx),P2=api.plan
  const MINI={tree:1.75,lamp:1.0,censer:.75,giwa:.75,post:1.0,rope:1.0,boat:1.75,rack:1.75,herbrack:1.0,tpost:1.0,seaweed:.5,deadpost:1.0};/* R814 꺼진 등롱대는 등롱대(post)와 같은 그림 크기 *//* R812 미역 무더기는 높이 22px 로 바닥에 깔려 절벽에 감길 일이 없다 *//* R810 새 길 가 소품: 등롱대는 석등과 같게, 금줄은 석등만큼, 배·건조대는 나무만큼 띄운다 */
  ok(id+': lane props stand back far enough from the cliff behind them (tree 1.75, lamp 1.0, censer/giwa .75 cells from the back edge)',floor.every(p=>insetOf(p)>=MINI[p.kind]-1e-9),floor.filter(p=>insetOf(p)<MINI[p.kind]-1e-9).map(p=>p.kind+'@'+p.x+','+p.y+':'+insetOf(p)).slice(0,4));
  ok(id+': lane props still hug the back lane edge (never mid-lane, within 3 cells)',floor.every(p=>insetOf(p)<=3));
+ // 2026-11-12 사용자 "화로가 또 벽에 겹쳐져 있음"(화면 첨부): 위 거리는 R412 벽 상자 기준이라 통과했지만, 눈에 보이는 바위 둔덕은 R204 지형장(F.f, 0 등고선이 둔덕 경계)이다.
+ //  실측(헤드리스, last302·303 전수): 향로·기와 더미가 F.f 0.44~0.5 에 서서 그림 뒤쪽 절반이 둔덕에 걸쳤다(석등 .83·부적 기둥 .74). R204 의 진짜 field() 를 같은 칸 자료로 돌려, 길 가 조형물 발 자리가 둔덕 경계에서 MIN_F 이상 떨어졌는지 잰다.
+ {const hill=new Set(['house','jang','shoes','trays','yakfire']),lane=floor.filter(p=>!hill.has(p.kind));
+  if(cave){const c=CAVE_CFG[id],prot=[[fx.entry.x,fx.entry.y,1.6],...fx.props.map(q=>[q.x,q.y,.9]),...fx.doors.map(d=>[d.x,d.y,2.4]),...P.map(q=>[q.x,q.y,.9])];
+   const F=cave.field({bounds:fx.bounds,floorCells:fx.floorCells,walls:fx.walls||[]},c,prot),low=lane.map(p=>({p,f:cave.at(F,F.f,p.x,p.y)})).filter(r=>r.f<MIN_F);
+   ok(id+': every lane prop stands at least '+MIN_F+' cells inside the visible rock-mound edge (R204 field)'+(low.length?' '+JSON.stringify(low.sort((a,b)=>a.f-b.f).slice(0,6).map(r=>r.p.kind+'@'+r.p.x+','+r.p.y+' f='+r.f.toFixed(2))):''),low.length===0,low.sort((a,b)=>a.f-b.f).slice(0,5).map(r=>r.p.kind+'@'+r.p.x+','+r.p.y+' f='+r.f.toFixed(2)));}}
  ok(id+': total stays modest ('+P.length+')',P.length<=80);}
 // 방에 붙이기
 {const fx=FX.last302,room={id:'last302',layer:'STORY',props:fx.props.map(p=>({...p})),exploration:{floorCells:fx.floorCells,worldR74:{rooms:fx.rooms,doors:fx.doors},worldWardR81:{bossBounds:fx.ward.boss,gatherBounds:fx.ward.gather},entry:fx.entry}};
