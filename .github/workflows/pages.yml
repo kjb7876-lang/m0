@@ -530,6 +530,8 @@ jobs:
         run: node r96/qa/r590/hwando-chain-cpu-check.cjs
       - name: R601 enemy attack tempo (enemy attack body motion drawn 2x faster, strike frame kept on the damage moment, telegraphs on real time, no timing/damage change) CPU check
         run: node r96/qa/r601/attack-tempo-cpu-check.cjs
+      - name: R895 hero motion rules (priority, 0.12/0.18s commit then move-cancel, same-cast merge, dash faces its real side, stop-attack beats walk tail, late flinch dropped; drawing only) CPU check
+        run: node r96/qa/r895/r895-cpu-check.cjs
       - name: R492 lag (R409 outline bake by one distance transform instead of dozens of drawImage dilations; same rim rule, size, colours) CPU check
         run: node r96/qa/r492/r492-cpu-check.cjs
       - name: R493 lag (keep compiled shader programs pinned so material churn stops relinking the same programs) CPU check
@@ -655,6 +657,10 @@ jobs:
         run: node r96/qa/r535/hunter-arrows-cpu-check.cjs
       - name: R597 hold A to auto-cast Q W E R F T with basic attack (S D stay manual, keeps manual 77 percent bonus) CPU check
         run: node r96/qa/r597/auto-a-cpu-check.cjs
+      - name: R705 semi-auto (Space) attacks only and never walks on its own; guide keeps R115 dodge steps CPU check
+        run: node r96/qa/r705/semi-auto-cpu-check.cjs
+      - name: R706 thread dance keeps the hero under player control (clone at strike spot, no snap back to start) CPU check
+        run: node r96/qa/r706/dance-free-cpu-check.cjs
       - name: R663 QWER locked until learned with passive points, skill level widens range (+8 percent per level), auto-level buys QWER and silk dances CPU check
         run: node r96/qa/r663/skill-growth-cpu-check.cjs
       - name: R561 Lauren gravity chain (Q → gravity well pull → collapse burst, R → crush vortices; no new keys, bosses not pulled, walls respected) CPU check
@@ -683,6 +689,8 @@ jobs:
         run: node r96/qa/r801/samong-guide-calm-cpu-check.cjs
       - name: R802 samong S-02 plaza freeze (R615 student walk tint canvas marked static so 26 students stay under the Three recorder snapshot budget) CPU check
         run: node r96/qa/r802/student-tint-static-cpu-check.cjs
+      - name: R803 samong guide goals (kill quota met in tower F / lead zones → spawns outside 2.5 tiles ignored, remaining shard towers and the lead picked at any distance) CPU check
+        run: node r96/qa/r803/samong-guide-goal-cpu-check.cjs
       - name: R790 story key NPC (last303 - the youth in the mist offers gwibitang at the boss door; no gwibitang → door story does not start and the Bulmyeongwi core stays sealed; old saves/guide/survival/co-op untouched) CPU check
         run: node r96/qa/r790/r790-cpu-check.cjs
       - name: R791 story key NPC 2 (last305 - the defeated goblin chief leaves the rose seal by the altar; no seal → exit story does not start; R790 gwibitang gate unchanged, ledgers do not mix) CPU check
@@ -763,12 +771,20 @@ jobs:
         run: node r96/qa/r880/r880-cpu-check.cjs
       - name: R832 region door leaves by map style + Joseon village trees (pine/persimmon) CPU check
         run: node r96/qa/r832/r832-cpu-check.cjs
+      - name: R905 pre-boss rally wakes in 2-6 region-specific waves (same total, capped concurrency, no stall) CPU check
+        run: node r96/qa/r905/r905-cpu-check.cjs
       - name: R830 thin partition walls become solid main walls
         run: node r96/qa/r830-walls/walls-cpu-check.cjs
       - name: R838 indoor doorway shapes differ per map (rooms and furniture unchanged)
         run: node r96/qa/r838-passages/passages-cpu-check.cjs
+      - name: R839 outdoor roads differ per map (rock outcrops; props and mobs unchanged)
+        run: node r96/qa/r839-outcrops/outcrops-cpu-check.cjs
       - name: R860 enemy-attack hit placement (core hit picture, R259 hero-hit not pinned to overlapping mobs) CPU check
         run: node r96/qa/r860/r860-cpu-check.cjs
+      - name: R899 boss-map story window and memory-shard paper move to top-left, quest line shortened CPU check
+        run: node r96/qa/r899/top-left-cpu-check.cjs
+      - name: R930 Kaironomicon cyber-magitech floor/wall tiles and tech props (art only, layout unchanged) CPU check
+        run: node r96/qa/r930/r930-cpu-check.cjs
       - name: Install pinned sandboxed Chromium
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0

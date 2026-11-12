@@ -417,7 +417,7 @@ window.__STORYWORLD_ROOMS_R523__=Object.freeze({revision:REV,ART,G,USE,REGION,LI
 //  · 몹·보스는 R760(bulmyeongwi-r760.js) 스레드가 맡는다. 등롱·부적 줄·댓돌 신발·장독대·약방은 Dots 그림이 오면 2차로 더한다(지금은 기존 그림만).
 (()=>{'use strict';
 if(window.__STORYWORLD_VILLAGE_R730__)return;
-const REV='R730-village-10',KEY='storyworld.r730.village',PX=34,SUM=17,BACK=3.6,MARGIN=1;
+const REV='R730-village-11',KEY='storyworld.r730.village',PX=34,SUM=17,BACK=3.6,MARGIN=1;
 const prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;}catch(_){}
 const stats={rooms:0,placed:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,400);};
 const HOUSE=Object.freeze([
@@ -442,7 +442,8 @@ const THATCH=Object.freeze([Object.freeze({path:'assets/r810/thatched-hut-a.webp
 const YFIRE=Object.freeze({path:'assets/r810/decoction-brazier.webp',height:44}),TRAYS=Object.freeze({path:'assets/r810/herb-trays.webp',height:24});
 const HANOK='assets/world-r80/r80-010.webp',HANOK_LIT='assets/r730/tiled-house-lit.webp';/* r80-010 의 창호에 호박색 불빛을 넣은 파생본(qa/r730/make-lit-house.py) */
 /* 칸 시작에서 안쪽으로 띄우는 거리. R412 의 3D 벽 검사(그림 불투명 점의 3% 이하)로 헤드리스 실측: 나무 1.75·석등 1.0·향로 .75·기와 .75 부터 절벽에 안 파묻힘(전엔 모두 .75 → 나무 8~16%·석등 5~7%가 벽에 감김). 석등은 여유 .25 */
-const INSET=Object.freeze({tree:1.75,lamp:1.25,censer:.75,giwa:.75,post:1.25,rope:1.25,boat:1.75,rack:1.75,herbrack:1.25,tpost:1.0,seaweed:1.25,deadpost:1.25});
+/* R730-4(2026-11-12 "화로가 또 벽에 겹침"): 위 값은 R412 벽 상자 기준이라 통과했지만 보이는 둔덕 경계는 R204 지형장 0 등고선이다. 그 경계에서 발 자리가 .9칸 이상 떨어져야 해서(qa/r730 가 R204 field 로 잼; f ≈ 안쪽 거리 − .31) 향로·기와·부적 기둥·석등 등을 1.5칸으로 올렸다. */
+const INSET=Object.freeze({tree:1.75,lamp:1.5,censer:1.5,giwa:1.5,post:1.5,rope:1.5,boat:1.75,rack:1.75,herbrack:1.5,tpost:1.5,seaweed:1.5,deadpost:1.5});
 const LAMP=Object.freeze({path:'assets/r92/lights/lights_regional_03.png',height:84}),CENSER=Object.freeze({path:'assets/r92/lights/lights_regional_02.png',height:52}),
  TREE=Object.freeze({path:'assets/r299/tree.webp',height:150}),GIWA=Object.freeze({path:'assets/world-r80/r80-007.webp',height:44});
 /* R810: 그림 스레드 CX-0071BV 대체본(ElevenLabs seedream, 7분야 7.86~8.07 통과, 원본 /mnt/project-files/bulmyeongwi-art/cx0071bv-el-cleaned/ → assets/r810, 표 assets/r810/index.json).

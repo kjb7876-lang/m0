@@ -72,11 +72,16 @@ function choose(rec,st){const best=pickBody(rec,st);if(!best)return;const t=T(),
  if(atk>S.prevAtk+1e-6){const d=aimDir(),a=atkOf(d);if(a){const off=contactStart(a.ms),rest=a.ms.reduce((x,y)=>x+y,0)-off,cd=Math.max(.2,+player.attackCD||.48);S.swing={t0:t,dir:d,off,scale:Math.max(.36,Math.min(1,cd*.95*1000/rest))};}}
  S.prevAtk=atk;
  if(hurt>S.prevHurt+1e-6)S.hit={t0:t,dir:enemyDir()||S.dir};S.prevHurt=hurt;
- const moving=t-S.movedAt<.15;
- if(busy){const d=player.dashAnim>0?(enemyDir()||S.dir):aimDir();S.dir=d;stats.skill++;if(player.dashAnim>0)return draw(rec,st,best,'walk',d,3);const a=atkOf(d);return a&&draw(rec,st,best,'attack',d,Math.floor(a.n*(player.ultimateAnim>0?.55:.45)));}
+ const M=window.__STORYWORLD_HERO_MOTION_R895__,moving=t-S.movedAt<.15&&!M?.attackOverTail?.()/* R895 규칙 5 */;
+ if(M?.hurtFirst?.()&&S.hit&&S.swing){S.swing=null;stats.hurtCut=(stats.hurtCut||0)+1;}/* R895 규칙 1: 피격이 기본 공격을 끊는다 */
+ const skillCut=!(player.dashAnim>0)&&!!M?.moveCancel?.('skill');/* R895 규칙 2: 스킬 커밋 창 뒤 이동이면 걷기로 */
+ if(busy&&!skillCut){const dd=player.dashAnim>0?M?.dash?.()?.side:null/* R895 규칙 4: 대시는 실제로 옮긴 쪽 */,d=player.dashAnim>0?(dd||enemyDir()||S.dir):aimDir();S.dir=d;stats.skill++;if(player.dashAnim>0){S.swing=null;/* 대시가 공격을 끊는다 — 대시 뒤 옛 공격 칸 재등장 금지 */return draw(rec,st,best,'walk',d,3);}const a=atkOf(d);return a&&draw(rec,st,best,'attack',d,Math.floor(a.n*(player.ultimateAnim>0?.55:.45)));}
  if(S.swing){const a=atkOf(S.swing.dir),el=(t-S.swing.t0)*ms/S.swing.scale+S.swing.off,tot=a.ms.reduce((x,y)=>x+y,0);
-  if(el<tot&&!(moving&&t-S.swing.t0>.35)){S.dir=S.swing.dir;return draw(rec,st,best,'attack',S.swing.dir,frameAt(a.ms,el,false));}S.swing=null;}
- if(S.hit&&!moving){const d=S.hit.dir,h=res('hit',d)?.A,el=(t-S.hit.t0)*ms/.6;if(h&&el<h.ms.reduce((x,y)=>x+y,0)){S.dir=d;return draw(rec,st,best,'hit',d,frameAt(h.ms,el,false));}S.hit=null;}
+  if(el<tot&&!(moving&&(M?M.moveCancel('attack'):t-S.swing.t0>.35))){/* R895 규칙 2: 기본 공격 커밋 0.12초 뒤 이동 입력이면 캔슬 */S.dir=S.swing.dir;return draw(rec,st,best,'attack',S.swing.dir,frameAt(a.ms,el,false));}S.swing=null;}
+ if(S.hit&&!S.hit.shown&&M&&!M.hurtFresh()){S.hit=null;stats.hurtLate=(stats.hurtLate||0)+1;}/* R895 규칙 6: 늦은 피격 금지 */
+ if(S.hit&&M&&S.hit.shown&&!(hurt>0)&&t-(S.hit.lastHurt??S.hit.t0)>.05){S.hit=null;}/* R895 규칙 6: 피격 반응은 피격 시간이 끝나면 0.05초 안에 끝난다 */
+ if(S.hit&&hurt>0)S.hit.lastHurt=t;
+ if(S.hit&&!moving){S.hit.shown=true;const d=S.hit.dir,h=res('hit',d)?.A,el=(t-S.hit.t0)*ms/.6;if(h&&el<h.ms.reduce((x,y)=>x+y,0)){S.dir=d;return draw(rec,st,best,'hit',d,frameAt(h.ms,el,false));}S.hit=null;}
  if(moving){const P=P277();S.dir=P?.walkDir?P.walkDir(S.walkDir,S.sx):S.walkDir;P?.face(S.dir);const ws=S.dir==='s'?wsRes():null,R=ws||res('walk',S.dir),k=want()/(R?.A?.body||180),fps=R?.A?.frames_per_stride,per=(IDX.anims.walk?.stride?.px_per_frame||12.8)*k*(fps?(IDX.anims.walk?.stride?.frames_per_stride||12)/fps:1);/* R436: 6키 = 두 걸음 → 칸당 거리 2배(보폭 같게) */return draw(rec,st,best,'walk',S.dir,Math.floor(S.dist/Math.max(1,per)),{s:!!ws});}
  const fd=enemyDir()||S.dir;S.dir=fd;const P=P277();if(P){P.face(fd);const I=window.__STORYWORLD_HWANDO_R283__?.idle?.(P),dd=I?I.dir:fd;S.dir=dd;/* R354: 날개(R101) 등이 실제로 그린 선 자세 방향을 보게 */const w=res('walk',dd)?.A;if(!w)return;P.idle(dd);return draw(rec,st,best,'walk',dd,I?Math.min(I.frame,w.n-1):w.n-1);}/* R283: 좌·우 걷기의 선 자세 칸 *//* R277: 걷기 마지막 칸으로 멈춘 대기 */const a=res('idle',fd)?.A;if(!a)return;
  return draw(rec,st,best,'idle',fd,frameAt(a.ms,t*ms,true),{breath:true});}

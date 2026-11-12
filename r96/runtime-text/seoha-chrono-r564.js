@@ -12,7 +12,7 @@
  */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_SEOHA_CHRONO_R564__)return;
-const REV='R564-chrono-5',KEY='storyworld.r564.chrono',HERO='seoha';
+const REV='R564-chrono-6',KEY='storyworld.r564.chrono',HERO='seoha';
 const TRAIL_GAP=.1,TRAIL_LIFE=.36,TRAIL_MAX=4,CLONE_AT=.15,CLONE_SHOT=.3,CLONE_END=.75,CLONE_OFF=1.5,CLONE_K=.25,CLONE_RANGE=13,
  STOP_AT=.14,STOP_R=6,STOP_T=1.6,STOP_MOB_MAX=20,STOP_SHOT_MAX=40,SHATTER_T=.45;
 const stats={hasteTrails:0,qCasts:0,cloneShots:0,stops:0,frozenMobs:0,frozenShots:0,blockedHurts:0,draws:0,errors:0,lastError:null};
@@ -40,14 +40,14 @@ function trailStep(t){if(!hasteOn()||!player.moving){return;}if(t-lastTrail<TRAI
  // 동시 잔상 수 상한: 잔상 수명/간격 = 3.6 → 4개를 넘지 않는다.
  lastTrail=t;if(ghost(player.x,player.y,'dash',player.direction||'front',TRAIL_LIFE))stats.hasteTrails++;}
 // ---- Q: 평행세계 분신 ------------------------------------------------------------------------
-function nearestFrom(p,r){let b=null,bd=r;for(const e of enemiesNow()){if(!alive(e))continue;const d=dist(e,p);if(d<bd){bd=d;b=e;}}return b;}
+function nearestFrom(p,r,skip){let b=null,bd=r;for(const e of enemiesNow()){if(!alive(e)||e===skip)continue;const d=dist(e,p);if(d<bd){bd=d;b=e;}}return b;}
 function onQ(){const t=T(),o={x:player.x,y:player.y},power=qPower(),tg=typeof nearestEnemy==='function'?nearestEnemy(12):null;
  const a=tg?Math.atan2(tg.y-o.y,tg.x-o.x):(typeof storyAim22==='function'?storyAim22():0),nx=-Math.sin(a),ny=Math.cos(a);stats.qCasts++;lastRoom=curRoom();
  const pair=[1,-1].map(s=>({x:o.x+nx*CLONE_OFF*s,y:o.y+ny*CLONE_OFF*s,a,side:s}));
  jobs.push({at:t+CLONE_AT,run:()=>{clones=pair.map(c=>({...c,t0:T()}));for(const c of clones){if(blinks.length>=BLINK_MAX)blinks.shift();blinks.push({x:c.x,y:c.y,t0:c.t0});}for(const c of clones)ghost(c.x,c.y,'attack',face(Math.cos(a),Math.sin(a)),CLONE_END-CLONE_AT);}});
- jobs.push({at:t+CLONE_SHOT,run:()=>{for(const c of clones){const e=nearestFrom(c,CLONE_RANGE),ang=e?Math.atan2(e.y-c.y,e.x-c.x):c.a;
-   try{if(typeof makeShot==='function'){makeShot(c.x,c.y,ang,20,power*CLONE_K,{friendly:true,owner:'hero',asset:typeof VFX!=='undefined'?VFX.flare:undefined,pierce:8,life:.8,scale:1.3,r564Clone:true});stats.cloneShots++;}}catch(err){fail(err);}
-   c.fireAt=T();c.fireA=ang;}}});
+ jobs.push({at:t+CLONE_SHOT,run:()=>{let taken=null;for(const c of clones){/* R705c(사용자 2026-11-12 "원거리영웅인 경우 본체와 가까이에 분신이 나타나겠고 … 본체는 항상 본체쪽에서 작동"): 분신은 모습만, 사격은 본체 자리에서 그 분신 쪽 적에게 */const e=(taken&&nearestFrom(c,CLONE_RANGE,taken))||nearestFrom(c,CLONE_RANGE),o={x:player.x,y:player.y},same=e&&e===taken,ang=(e?Math.atan2(e.y-o.y,e.x-o.x):c.a)+(same||!e?c.side*.09:0);taken=taken||e;/* 두 발이 한 줄로 겹치지 않게: 다른 적이 있으면 나눠 겨누고, 없으면 좌우로 조금 벌린다 */
+   try{if(typeof makeShot==='function'){makeShot(o.x,o.y,ang,20,power*CLONE_K,{friendly:true,owner:'hero',asset:typeof VFX!=='undefined'?VFX.flare:undefined,pierce:8,life:.8,scale:1.3,r564Clone:true});stats.cloneShots++;}}catch(err){fail(err);}
+   }}});
  jobs.push({at:t+CLONE_END,run:()=>{clones=[];}});}
 // ---- R: 시간 정지 ----------------------------------------------------------------------------
 // 사몽 발현(R571) 중 반경 배율(최대 2배): 생길 때 한 번 정해 끝까지 같은 크기.
