@@ -117,7 +117,8 @@
  function drawLights(){if(!prefs.lightProps||!story()||typeof ctx==='undefined'||typeof project!=='function')return;const p=current();if(!p)return;preload(p);const body=typeof actorHeight==='function'?actorHeight():66;
   p.lights.forEach((l,i)=>{if(l.ceiling438||!sightOk(l))return;const q=project(l.x,l.y);if(!inView(q))return;const it=byId(l.item),img=it&&image(it);if(!img)return;
    const k=body*1.3/200,w=it.w*k,h=it.h*k;
-   const paint=()=>{if(typeof shadow==='function')shadow(q.x,q.y,Math.max(10,w*.45));ctx.save();try{if(l.flip){ctx.translate(q.x,q.y);ctx.scale(-1,1);ctx.translate(-q.x,-q.y);}ctx.drawImage(img,0,0,img.naturalWidth||img.width,img.naturalHeight||img.height,q.x-w/2,q.y-h+2,w,h);stats.propDraws++;}finally{ctx.restore();}};
+   /* R831: 밑면이 마름모인 등불(제단형 화로 등)은 발밑 타원을 밑면 가운데로 올린다 — 맨 아래 꼭짓점에 두면 물체가 떠 보였다 */let up=0;try{up=(window.__STORYWORLD_PROP_SHADOW_R329__?.footOfImage?.(it.id,img)||0)*h;}catch(_){}
+   const paint=()=>{if(typeof shadow==='function'){if(up>0)shadow(q.x,q.y-up,Math.max(10,w*.45),{scale:1.25});else shadow(q.x,q.y,Math.max(10,w*.45));}ctx.save();try{if(l.flip){ctx.translate(q.x,q.y);ctx.scale(-1,1);ctx.translate(-q.x,-q.y);}ctx.drawImage(img,0,0,img.naturalWidth||img.width,img.naturalHeight||img.height,q.x-w/2,q.y-h+2,w,h);stats.propDraws++;}finally{ctx.restore();}};
    if(typeof ctx.scope==='function')ctx.scope({id:'r92:light:'+zone+':'+i,kind:'prop',x:l.x,y:l.y,alive:true,presentationOnly:true,r92Light:true,sourcePath:it.path},paint);else paint();});}
  if(typeof groundImage==='function'){const base=groundImage;groundImage=function(...args){const result=base.apply(this,args);try{drawDecals();}catch(e){fail(e);}return result;};}
  // Props are drawn once per frame alongside the native hero pass; the command
