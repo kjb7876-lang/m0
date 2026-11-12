@@ -1,7 +1,7 @@
 // R850 무한 생존 밸런스 측정(헤드리스·빠른 감기 — 실제 손맛·GPU 미검증).
 //  봇: 반자동 켬, 가장 가까운 적 쪽으로 초당 4.5칸 걷기, 강화 카드는 무작위(SEED 고정). 영웅·코어는 죽지 않게 매 틱 채우되,
 //  채우기 전에 깎인 양을 '받은 피해'로 센다(그 판에서 쓰러졌을지 가늠). 지역마다: 웨이브 시간, 보스 체력·처치 시간·보스전 받은 피해, 생존 레벨.
-//  SW_URL · FROM·TO · HERO · DIFF · OUT(json) · LIMIT(지역당 게임 초)
+//  SW_URL · FROM·TO · HERO · DIFF · OUT(json) · LIMIT(지역당 게임 초) · ALLIES=n(R720 배치 영웅 n명을 첫 지역에 사서 코어 둘레에 둠) · ALLYLV=k(각 레벨 강화 k번)
 import {createRequire} from 'node:module';import fs from 'node:fs';const req=createRequire(import.meta.url);const {chromium}=req('playwright');
 const E=process.env,URL=E.SW_URL||'http://127.0.0.1:4410/m0/',LIMIT=+E.LIMIT||400,HERO=E.HERO||'hwando',DIFF=E.DIFF||'normal';
 const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:480,height:270}});
@@ -11,6 +11,10 @@ await p.goto(URL,{timeout:180000});await p.locator('#campaignNew54').waitFor({ti
 await p.locator('#survivalStartR600').click();await p.locator(`[data-r600diff="${DIFF}"]`).click();await p.locator(`[data-r600hero="${HERO}"]`).click();await p.locator('#r600Go').click();
 const ready=()=>p.waitForFunction(()=>{const Z=window.__STORYWORLD_SURVIVAL_R600__;return Z.here()&&!loading&&Z.state().ready;},null,{timeout:240000,polling:200});
 await ready();
+if(+E.ALLIES>0){const r=await A(({n,k})=>{const D=window.__STORYWORLD_HERO_DEFENSE_R720__,Z=window.__STORYWORLD_SURVIVAL_R600__;if(!D)return {none:1};D.qaGive(99999);
+  const c=room.survivalR600.centre,ids=Object.keys(HEROES).filter(h=>h!==player.hero).slice(0,n),out=[];const sx=player.x,sy=player.y;
+  ids.forEach((id,j)=>{const a=j/ids.length*Math.PI*2;player.x=c.x+Math.cos(a)*2.4;player.y=c.y+Math.sin(a)*2.4;const b=D.buy(id);out.push({id,ok:b.ok,placed:b.placed,why:b.why||b.placeWhy});for(let q=0;q<k;q++)D.upgrade(j,'level');});
+  player.x=sx;player.y=sy;return out;},{n:+E.ALLIES,k:+E.ALLYLV||0});console.log('allies',JSON.stringify(r));}
 await A(()=>{let s=12345;Math.random=()=>{s=(s*1103515245+12345)%2147483648;return s/2147483648;};});
 const N=await A(()=>window.__STORYWORLD_SURVIVAL_R600__.state().ids),FROM=+(E.FROM||0),TO=Math.min(N-1,E.TO!==undefined?+E.TO:N-1);const rows=[];
 if(FROM>0){await A(i=>window.__STORYWORLD_SURVIVAL_R600__.qaGo(i),FROM);await ready();}

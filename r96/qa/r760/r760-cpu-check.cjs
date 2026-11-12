@@ -311,6 +311,10 @@ const FF=(c,e)=>c.__STORYWORLD_STORY_COMBAT_R54__.frameFor(e,null);const VAPI=c=
 {// 회귀(헤드리스 실측): R74 순찰은 지역을 만든 뒤에 '유리 망령'으로 이름이 바뀐다 → 아니라고 기억한 몹도 이름이 바뀌면 다시 본다
  const c=vworld(),e=mob({id:'last302:r74-patrol:1',nativeId:'l302-e3',name:'순찰 1'});ok(c.window.__STORYWORLD_VILLAGERS_R763__.kindFor(e)===null,'unknown name: not a villager');e.name='유리 망령 우두머리';
  ok(/fisher/.test(FF(c,e).path)&&e.name==='잠식된 어부 우두머리','renamed patrol picked up later ('+e.name+')');}
+{// R773 회귀(헤드리스 실측, last303): 순찰이 이미 바뀐 이름(잠식된 약방 아낙)을 물려받고 옛 이름 흔적(r763From)이 없으면 주민 그림이 안 씌워졌다 → 이름으로 종류를 고름
+ const c=vworld({roomId:'last303'}),e=mob({id:'last303:r74-patrol:0',nativeId:'l302-e1',name:'잠식된 약방 아낙',r248Key:'주민에게서 떨어진 검은 안개'});const f=FF(c,e);ok(f&&/herbwife/.test(f.path),'R773 inherited villager name → herbwife art ('+(f&&f.path)+')');
+ const l=mob({id:'last303:r74-patrol:5',nativeId:'l302-e1',name:'잠식된 소복 처녀 우두머리'});ok(c.window.__STORYWORLD_VILLAGERS_R763__.kindFor(l)==='sobok','R773 leader name → sobok');
+ const o=mob({id:'last303:x',nativeId:'l302-e1',name:'불면귀의 안개 잔영 1'});ok(c.window.__STORYWORLD_VILLAGERS_R763__.kindFor(o)===null,'R773 boss add stays engine art');}
 {// 회귀(헤드리스 실측): R74 순찰(r74Monster 'glass')은 지도 괴물 그림으로 그려지고 이름이 되돌아갔다 → 표시를 떼고(r763Atlas 에 기억) 이름이 되돌아가도 다시 바꿈
  const c=vworld(),e=mob({id:'last302:r74-patrol:2',nativeId:'l302-e1',name:'유리 망령',r74Monster:'glass'});FF(c,e);ok(e.r74Monster===undefined&&e.r763Atlas==='glass'&&e.name==='잠식된 약방 아낙','r74 patrol: atlas mark removed, renamed');
  e.name='유리 망령';e.r74Monster='glass';FF(c,e);ok(e.name==='잠식된 약방 아낙'&&e.r763From==='유리 망령'&&e.r74Monster===undefined,'R191 re-applied glass patrol → renamed and detached again');}
