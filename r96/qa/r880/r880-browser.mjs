@@ -14,6 +14,12 @@ const t0=await p.evaluate(()=>time);await p.waitForTimeout(2500);const t1=await 
 ok('game time frozen while playing',t1===t0,[t0,t1]);ok('scene advancing',i1.active&&i1.zone==='dist01'&&i1.t>0.5,i1);
 ok('title uses region title',await p.evaluate(()=>document.querySelector('#r880 .chap').textContent.includes(regionById.dist01.title)));
 const f0=i1.stats.frames;await p.waitForTimeout(3000);const i2=await A();console.log('INFO headless frames/s',((i2.stats.frames-f0)/3).toFixed(1),'sim t',i2.t,'filterDropped',i2.stats.filterDropped);
+// 자막 음성(R888): 실제 게임에서 스토리 모드 녹음(R381)이 자막 문장으로 재생되고 끝까지 들린다(헤드리스 — 소리를 사람이 들은 것은 아님)
+const spoke=await p.waitForFunction(()=>window.__STORYWORLD_LINEART_R880__.inspect().voice?.spoken>=1,null,{timeout:90000}).then(()=>true).catch(()=>false);
+const v1=await p.evaluate(()=>({la:window.__STORYWORLD_LINEART_R880__.inspect().voice,r381:window.__STORYWORLD_VOICE_R381__.inspect(),cap:document.querySelector('#r880 .cap')?.textContent||''}));
+ok('voice: first caption is spoken with the R381 recording of that sentence',spoke&&v1.la.on&&v1.r381.stats.played>=1&&(v1.r381.playing===null||v1.r381.playing===await p.evaluate(t=>window.__STORYWORLD_VOICE_R381__.idOf(t),v1.cap)),v1);
+const heard=await p.waitForFunction(()=>window.__STORYWORLD_LINEART_R880__.inspect().voice?.ended>=1,null,{timeout:90000}).then(()=>true).catch(()=>false);
+ok('voice: the recording plays to its end (audio element ended), no failure',heard&&(await A()).voice.failed===0,(await A()).voice);
 await p.screenshot({path:OUT+'/game_dist01_live.png'});
 await p.keyboard.press('Escape');await p.waitForFunction(()=>!document.getElementById('r880'),null,{timeout:8000}).catch(()=>{});/* 헤드리스가 초당 2프레임이라 사라짐 타이머가 늦는다 — 정해진 0.9초 대신 사라질 때까지(최대 8초) 기다린 뒤 같은 조건을 본다 */
 ok('Escape skips and removes overlay',!(await p.$('#r880'))&&(await A()).stats.skips===1);

@@ -44244,8 +44244,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6574798,
-      "sha256": "e587b0e0e121167f479cb5c93f884c6eb9dcf230e891159874a399e33b2478ae"
+      "bytes": 6574851,
+      "sha256": "bad13ae307d5ffc2b1fc3a89d058ab11d9ec0fb01e2b811027b86042d1312381"
     },
     {
       "path": "intro-r140.js",
@@ -44294,8 +44294,8 @@
     },
     {
       "path": "lineart-cine-r880.js",
-      "bytes": 51939,
-      "sha256": "4229abb97f4df192ff667e833fc99723c5ec68bca9a315fa32b2c612833a3a65"
+      "bytes": 55328,
+      "sha256": "1cda1446ad5b8b1e5ea17e4589628e49786713af4ff3dbbe8ddea24632c7902d"
     },
     {
       "path": "lineart-scenes-r881.js",
@@ -44331,6 +44331,11 @@
       "path": "lineart-scenes-r887.js",
       "bytes": 22756,
       "sha256": "c25e63af212f8fd429f4203bbb3e619861ac00587055d4c4be0e352c52c7e357"
+    },
+    {
+      "path": "lineart-voice-r888-data.js",
+      "bytes": 5135,
+      "sha256": "4b32411b988f3fd7503542aa8066c5fa48e04d8f9fe66e7e75a78811529066cc"
     },
     {
       "path": "local-light-r451.js",
@@ -45278,9 +45283,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9055,
-  "totalBytes": 1239844861,
-  "webHTMLSha256": "e587b0e0e121167f479cb5c93f884c6eb9dcf230e891159874a399e33b2478ae",
+  "fileCount": 9056,
+  "totalBytes": 1239853438,
+  "webHTMLSha256": "bad13ae307d5ffc2b1fc3a89d058ab11d9ec0fb01e2b811027b86042d1312381",
   "largest": [
     {
       "path": "index.html",

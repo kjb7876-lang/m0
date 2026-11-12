@@ -497,11 +497,36 @@ function css(){if(document.getElementById('r880Css'))return;const s=document.cre
  +'@media (prefers-reduced-motion: reduce){#r880,#r880 .cap{transition:none}}';document.head.appendChild(s);}
 function buildScene(o){o.k=stageKit(o.svg,o.def,o.lite);o.draw=o.def.build(o.k,kit);o.simT=0;o.draw(0,1/60);o.k.applyCam(0);o.k.fade.setAttribute('opacity','1');}
 // t 초까지 장면을 진행한다(1/30초 걸음으로 적분 — 걷기·용수철이 프레임 속도와 무관하게 같게). 되감기는 처음부터 다시 그린다.
+// ── R888 자막 음성(사용자 2026-11-12 "모든영상 오디오음성도 나오게") ──
+// 자막은 정본 문장 그대로라 스토리 모드 녹음(R381)을 그대로 튼다(새 음성 파일 없음). 녹음이 자막 시간보다 길어서(평균 5.2초)
+// 자막 구간마다 장면 시계를 늦춰(느린 그림) 다음 자막 전에 말이 끝나게 하고, 그래도 안 끝났으면 다음 자막 직전에서 잠깐 기다린다.
+// 끄는 길: 설정 '서사 음성 자동 재생' 끔 · '서사 음성 음량' 0 · 영화 모드(영화 모드가 서사를 직접 읽음) · 정지 화면(at). 무한 생존에서는 컷씬 자체가 안 뜬다(R890).
+const VOX=()=>window.__STORYWORLD_VOICE_R381__,VLEN=()=>window.__STORYWORLD_LINEART_VOICE_R888__?.dur;
+const vstats={scenes:0,spoken:0,ended:0,failed:0,holds:0};
+const voiceVol=()=>{try{if(typeof settings!=='undefined'&&settings&&Number.isFinite(+settings.voice))return clamp(+settings.voice,0,1);}catch(_){}return .8;};
+function voiceOn(){try{if(cinemaMode())return false;if(typeof settings!=='undefined'&&settings&&settings.narration===false)return false;if(!(voiceVol()>0))return false;const R=VOX();return !!(R&&typeof R.play==='function'&&VLEN());}catch(_){return false;}}
+const V_PAD=0.35,V_MINRATE=0.3,V_TAIL=0.7,V_HOLD=4;
+function planVoice(def){if(!voiceOn())return null;const R=VOX(),L=VLEN();
+ const plan=def.subs.map(([a,b,text],i)=>{const len=+L[R.idOf(text)];if(!(len>0)||!R.has(text))return null;
+  const next=i+1<def.subs.length?def.subs[i+1][0]:Math.max(b,def.D-V_TAIL),rate=clamp((next-a-0.05)/(len+V_PAD),V_MINRATE,1);
+  return{i,a,b,text,len,next,rate,end:Math.min(next-0.02,Math.max(b,a+(len+0.25)*rate)),started:false,over:false,h:null,at:0};});
+ return plan.some(Boolean)?plan:null;}
+function voiceClock(o,now){const dt=o.lastNow?Math.min(.25,Math.max(0,(now-o.lastNow)/1000)):0;o.lastNow=now;
+ const seg=o.plan.find(p=>p&&o.vt>=p.a&&o.vt<p.next),sp=o.speak;let nt=o.vt+dt*(seg&&!seg.over?seg.rate:1);
+ // 말이 아직 안 끝났으면 다음 자막(마지막 줄은 끝 어두워지기) 직전에서 기다린다 — 끝 알림이 영영 안 와도 길이+4초 뒤에는 간다
+ if(sp&&!sp.over&&nt>=sp.next-0.03){if((now-sp.at)/1000<sp.len+V_HOLD){if(!sp.held){sp.held=true;vstats.holds++;}nt=Math.min(nt,Math.max(o.vt,sp.next-0.03));}else{sp.over=true;o.speak=null;}}
+ o.vt=nt;
+ for(const p of o.plan){if(!p||p.started||o.vt<p.a)continue;if(o.speak&&!o.speak.over)break;p.started=true;p.at=now;
+  const done=()=>{p.over=true;if(o.speak===p)o.speak=null;};
+  try{p.h=VOX().play(p.text,{volume:voiceVol(),onend:()=>{vstats.ended++;done();},onerror:()=>{vstats.failed++;p.end=p.b;done();}});}catch(_){p.h=null;}
+  if(p.h){o.speak=p;vstats.spoken++;try{const nx=o.plan[p.i+1];if(nx)VOX().preload?.(nx.text);}catch(_){}}else{vstats.failed++;p.end=p.b;p.over=true;}break;}
+ return o.vt;}
+function voiceStop(o){try{const p=o.speak;o.speak=null;if(p){p.over=true;p.h?.stop?.();}if(o.plan)for(const q of o.plan)if(q)q.started=true;}catch(_){}}
 function advance(o,t){t=Math.max(0,Math.min(t,o.def.D));if(t<o.simT-1e-6)buildScene(o);let guard=0;
  while(o.simT<t-1e-6&&guard++<2000){const dt=Math.min(1/30,t-o.simT);o.simT+=dt;o.draw(o.simT,dt);}
  o.k.applyCam(o.simT);o.k.fade.setAttribute('opacity',f(clamp(1-es(o.simT,0.05,0.9)+es(o.simT,o.def.D-0.9,o.def.D-0.05),0,1)));
- const line=o.def.subs.find(([a,b])=>o.simT>=a&&o.simT<b),text=line?line[2]:'';if(text!==o.text){o.text=text;if(text)o.cap.textContent=text;o.cap.classList.toggle('on',!!text);}}
-function finish(o,reason){if(!o||o.done)return;o.done=true;if(active===o)active=null;closing=o;try{cancelAnimationFrame(o.raf);}catch(_){}
+ const line=o.def.subs.find(([a,b],i)=>o.simT>=a&&o.simT<(o.plan&&o.plan[i]?o.plan[i].end:b)),text=line?line[2]:'';if(text!==o.text){o.text=text;if(text)o.cap.textContent=text;o.cap.classList.toggle('on',!!text);}}
+function finish(o,reason){if(!o||o.done)return;o.done=true;if(active===o)active=null;closing=o;try{cancelAnimationFrame(o.raf);}catch(_){}voiceStop(o);
  if(reason==='ended')stats.ended++;else if(reason==='skip')stats.skips++;else if(reason==='room')stats.closedByRoom++;
  try{o.root.classList.remove('on');o.root.classList.add('out');}catch(_){}
  setTimeout(()=>{try{o.root.remove();}catch(_){}if(closing===o)closing=null;try{if(typeof keys!=='undefined'&&keys?.clear)keys.clear();}catch(_){}},reason==='room'?0:FADE_MS);}
@@ -514,12 +539,13 @@ function play(opt={}){if(active||typeof document==='undefined')return false;cons
   const chap=document.createElement('div');chap.className='chap';chap.textContent=titleFor(zone);root.appendChild(chap);
   const cap=document.createElement('div');cap.className='cap';cap.setAttribute('aria-live','polite');root.appendChild(cap);
   const skipBtn=document.createElement('button');skipBtn.type='button';skipBtn.className='skip';skipBtn.textContent='건너뛰기 ▸';root.appendChild(skipBtn);document.body.appendChild(root);
-  const o={def,zone,root,svg,cap,room:opt.force?here():r,t0:0,raf:0,done:false,at:Number.isFinite(opt.at)?opt.at:null,text:'',lite:reducedMotion()||!!opt.lite,simT:0,slow:0,n:0,last:0};
+  const o={def,zone,root,svg,cap,room:opt.force?here():r,t0:0,raf:0,done:false,at:Number.isFinite(opt.at)?opt.at:null,text:'',lite:reducedMotion()||!!opt.lite,simT:0,slow:0,n:0,last:0,vt:0,lastNow:0,plan:null,speak:null};
   buildScene(o);
+  if(o.at==null){try{o.plan=planVoice(def);if(o.plan){vstats.scenes++;VOX().preload?.(o.plan.find(Boolean).text);}}catch(_){o.plan=null;}}
   root.addEventListener('pointerdown',ev=>{ev.preventDefault?.();finish(o,'skip');});skipBtn.addEventListener('click',ev=>{ev.stopPropagation?.();finish(o,'skip');});
   try{if(typeof keys!=='undefined'&&keys?.clear)keys.clear();}catch(_){}
   active=o;stats.plays++;gateOuter();requestAnimationFrame(()=>{try{root.classList.add('on');}catch(_){}});
-  const loop=now=>{if(o.done)return;if(!o.t0)o.t0=now;const t=o.at!=null?o.at:(now-o.t0)/1000;o.t=t;stats.frames++;
+  const loop=now=>{if(o.done)return;if(!o.t0)o.t0=now;if(o.at!=null&&o.plan)voiceStop(o);const t=o.at!=null?o.at:(o.plan?voiceClock(o,now):(now-o.t0)/1000);o.t=t;stats.frames++;
    try{advance(o,t);
     if(o.at==null&&!o.lite&&o.n<45){if(o.last)o.slow+=now-o.last;o.last=now;++o.n;if(!o.dropped&&((o.n===12&&o.slow/11>50)||(o.n===45&&o.slow/44>30))){o.dropped=true;o.k.dropFilter();stats.filterDropped++;}}
    }catch(err){fail(err);return finish(o,'error');}
@@ -545,5 +571,5 @@ function setPrefs(p){if(p&&typeof p.on==='boolean')prefs.on=p.on;if(p?.resetSeen
 window.__STORYWORLD_LINEART_R880__=Object.freeze({revision:REV,KEY,kit,add,zones:()=>[...SCENES.keys()],scene:z=>{const d=SCENES.get(z);return d?{zone:d.zone,D:d.D,subs:d.subs.map(s=>[...s])}:null;},
  titleFor,eligible,play:(o={})=>play({force:true,...o}),skip:()=>{if(!active)return false;finish(active,'skip');return true;},
  seek:t=>{if(!active||!Number.isFinite(t))return false;active.at=clamp(t,0,active.def.D);return true;},set:setPrefs,
- inspect:()=>({revision:REV,prefs:{on:prefs.on,seen:[...prefs.seen]},active:!!active,zone:active?.zone||null,t:active?active.simT:null,lite:active?active.lite:null,cinema:active?active.root.classList.contains('cinema'):null,pending:!!pending,stats:{...stats},lastError})});
+ inspect:()=>({revision:REV,prefs:{on:prefs.on,seen:[...prefs.seen]},active:!!active,zone:active?.zone||null,t:active?active.simT:null,lite:active?active.lite:null,cinema:active?active.root.classList.contains('cinema'):null,pending:!!pending,stats:{...stats},voice:{on:!!active?.plan,speaking:!!active?.speak,...vstats},lastError})});
 })();
