@@ -47,13 +47,16 @@ function zoneMode(){try{const z=window.__STORYWORLD_SAMONG_ZONES_R115__?.zone?.(
 //  → 그 그림이 뽑히던 지역(8곳)의 탑은 피의 제단으로 선다(실내 지역에 무너진 돌기둥을 세우지 않으려고 목록의 다음 석상으로 넘기지 않는다). 다른 지역은 그대로.
 //  탑 수·자리·체력·공격은 그대로이고, 이미 서 있던 탑은 다음 틱에 그림만 바뀐다.
 const RETIRED=/(^|\/)blank_memorial\.webp$/,ALTAR='assets/props/v290/blood_altar.webp';
-function artOf(objects){const list=(objects||[]).map(o=>typeof o==='string'?{path:o}:o).filter(o=>o&&STATUE.test(String(o.path||'')));if(!list.length)return null;
+const canonArt=path=>{try{const P=window.__STORYWORLD_PROPS_R272__;return !P?.fitPath||typeof room==='undefined'||P.fitPath(path,room)===true;}catch(_){return true;}};// R830: 그 지역에 못 서는 그림(실내의 피분수 등)은 탑 그림으로도 안 쓴다
+function artOf(objects){const list=(objects||[]).map(o=>typeof o==='string'?{path:o}:o).filter(o=>o&&STATUE.test(String(o.path||''))&&canonArt(o.path));if(!list.length)return null;
  const o=list[0];if(RETIRED.test(String(o.path||'')))return{path:ALTAR,name:null,h:150};
  return{path:o.path,name:String(o.name||o.label||o.title||'').trim()||null,h:Math.max(150,(Number(o.height)||100)*1.7)};}
 function artFor(){if(samongRoom())return{path:SCULPT,name:'세뇌당한 기억의 조각',h:170};
  try{return artOf(regionById?.[room.id]?.regionObjects6);}catch(_){return null;}}
 const SPECIAL=new Set(['ep1a08']);// 특수 병동(본편 미로 진행·집결 규칙)은 손대지 않는다
-function wanted(){if(!live()||!solo()||SPECIAL.has(room.id))return 0;if(samongRoom()){const m=zoneMode();return m==='F'?6:m==='B'||m==='D'||m==='G'?2:m==='H'||m==='C'||m==='combat'?1:0;}// R173: F(조각 깨기)는 6개
+// R830(사용자 2026-11-12 "피의 육망성 조형물도 에피소드 1a 약물중독쪽에만"): 본편의 피의 육망성 조형물은 1부 지역에만 선다(규칙은 props-r272 towerOk, 사몽 구역의 기억 조각은 그대로).
+const canonTower=()=>{try{const P=window.__STORYWORLD_PROPS_R272__;return !P?.towerOk||P.towerOk(room)!==false;}catch(_){return true;}};
+function wanted(){if(!live()||!solo()||SPECIAL.has(room.id))return 0;if(!canonTower())return 0;if(samongRoom()){const m=zoneMode();return m==='F'?6:m==='B'||m==='D'||m==='G'?2:m==='H'||m==='C'||m==='combat'?1:0;}// R173: F(조각 깨기)는 6개
  try{if(typeof safeRegion==='function'&&safeRegion())return 0;}catch(_){}return (room.enemies||[]).filter(e=>e.hp>0&&!major(e)).length>=20?1:0;}
 const okCell=(x,y)=>{try{return typeof blocked!=='function'||[[0,0],[1,0],[-1,0],[0,1],[0,-1],[1,1],[-1,-1],[1,-1],[-1,1]].every(([a,b])=>!blocked(x+a*.8,y+b*.8,.3,room));}catch(_){return true;}};
 function spotFor(n,taken){const L=room.exploration;if(!L?.floorCells?.length)return null;const path=window.__STORYWORLD_PLAY_R169__?.pathCells?.(room)||null,entry=L.entry||room.r72Entry||player;

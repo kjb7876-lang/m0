@@ -9,7 +9,7 @@
 //  · storyworld.r329.propShadow = '0' 이면 끈다.
 (()=>{'use strict';
 if(window.__STORYWORLD_PROP_SHADOW_R329__)return;
-const REV='R329-prop-shadow-10-r448',KEY='storyworld.r329.propShadow',UKEY='storyworld.r448.shadowOneLight';
+const REV='R329-prop-shadow-11-r831',KEY='storyworld.r329.propShadow',UKEY='storyworld.r448.shadowOneLight';
 let on=true;try{on=localStorage.getItem(KEY)!=='0';}catch(_){}
 // R448(사용자 2026-11-09 "234번 우선적용", 레퍼런스 등각 맵의 규칙: 모든 물체가 같은 방향(왼쪽 위 광원)으로 부드러운 바닥 그림자를 떨어뜨린다):
 //  근처 불빛마다 그림자 방향이 제각각이던 것(R300 lightsOf·R330 불길 갈래)을 끄고, 모든 조형물이 한 방향 — 화면 오른쪽으로 바닥에 눕고 아주 조금만 뒤(위)로 — 떨어뜨린다.
@@ -18,13 +18,32 @@ let on=true;try{on=localStorage.getItem(KEY)!=='0';}catch(_){}
 //  몹·보스·영웅 그림자는 건드리지 않는다(몹 그림자는 R444 가 뺐다). storyworld.r448.shadowOneLight='0' 이면 R412 방식(근처 불빛 따라)으로 돌아간다.
 let oneLight=true;try{oneLight=localStorage.getItem(UKEY)!=='0';}catch(_){}
 const U_LEN=.5,U_LEAN=.8,U_RISE=.03,U_ALPHA=.21,U_STEPS=[1/3,2/3,1],U_MAXPX=150;
-const stats={props:0,cast:0,skipped:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
+const stats={props:0,cast:0,skipped:0,footed:0,errors:0};let lastError=null,baseShadow=()=>{};const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 // 그림자: 키의 LEN 배로 눕히고, 키의 SHIFT 만큼 오른쪽·RISE 만큼 위(물체 뒤)로. 진하기 ALPHA(두 장 겹침 기준).
 const LEN=.9,SHIFT=.12,RISE=.1,ALPHA=.25,SOFT=2,MAX_SIDE=.3;
 // R412 심사(7분야, 2026-11-08): 두 장 겹친 검정(.42 → 합 .66, 빛 곁 .83)이 바닥(L*31) 위에서 L*9~13 구멍처럼 읽혔다 → 한 장 .25(합 ≈.44, 바닥보다 L* 10~14 낮게),
 //  빛 곁에서 더 진하게 하던 것(1+.4k)은 뺐다. 발밑에서 통째로 .3h 옆으로 밀어 조형물과 그림자 사이에 밝은 틈이 보이던 것 → .12h.
 // 낱말 경계로만 맞춘다('outdoor' 안의 door 처럼 경로 일부에 걸려 R99 나무가 모두 빠지던 것 — Codex 리뷰).
 const WALLISH=/(?:^|[^a-z])(?:walls?|doors?|gates?|banners?|torch(?:es)?|reliefs?|frames?|windows?|paintings?|portals?|signs?|sconces?|curtains?|posters?|clocks?|mirrors?|vents?|rugs?|carpets?|decals?|stains?|puddles?|blood(?=-)|cracks?)(?=[^a-z]|$)/i;
+// R831(사용자 2026-11-12 "그림자가 이런식이면 상자가 공중에 떠있는거 같잖아"): 엔진 발밑 타원은 그림 맨 아래 점 가운데에 놓인다.
+//  밑면이 마름모로 그려진 조형물(제단 등불·보물상자·피의 제단처럼 앞 모서리가 맨 아래 한 점인 그림)은 그 점이 밑면의 앞 꼭짓점이라
+//  타원 절반이 물체 앞 바닥으로 빠져나와 물체가 떠 보였다 → 그런 그림만 타원을 밑면 가운데(양옆 모서리 높이)로 올리고 밑면 폭에 맞춰 넓힌다.
+//  밑이 평평한 그림(나무·기둥·가로등·화로)은 그대로. 그림 알파를 한 번만 읽어 경로별로 기억한다. 끄기: storyworld.r831.footShadow='0'
+let footOn=true;try{footOn=localStorage.getItem('storyworld.r831.footShadow')!=='0';}catch(_){}
+const FOOT_BAND=.4,FOOT_MAX=.3,FOOT_SCALE=1.45,footMemo=new Map();
+// 순수(QA): 아래에서 위로 잰 줄별 폭(그림 폭 대비 0~1) + 그림 가로/세로 비 → 타원을 올릴 높이(그림 키 대비 0~.3)
+function footShift(widths,aspect){const n=widths?.length|0;if(n<8||!(aspect>=.85))return 0;const band=Math.max(4,Math.round(n*FOOT_BAND));let wmax=0;for(let i=0;i<band;i++)if(widths[i]>wmax)wmax=widths[i];
+ if(wmax<.5)return 0;const low=Math.max(1,Math.round(n*.04));let w0=0;for(let i=0;i<low;i++)w0=Math.max(w0,widths[i]);if(w0>wmax*.35)return 0;/* 밑이 넓으면 평평한 밑면 */
+ for(let i=0;i<band;i++){if(widths[i]>=wmax*.9)return Math.min(FOOT_MAX,i/n);if(i&&widths[i]<widths[i-1]*.8)return 0;/* 중간에 잘록해지면(다리·줄기) 마름모 밑면이 아니다 */}return 0;}
+function footOfPath(path){if(footMemo.has(path))return footMemo.get(path);let v=0;try{const row=typeof readyImage==='function'?readyImage(path):null;if(!row||!row.image)return 0;
+  const b=row.crop||{x:0,y:0,w:row.image.naturalWidth||row.image.width,h:row.image.naturalHeight||row.image.height},H=64,Wd=Math.max(8,Math.min(160,Math.round(H*b.w/b.h)));
+  const cv=typeof OffscreenCanvas==='function'?new OffscreenCanvas(Wd,H):Object.assign(document.createElement('canvas'),{width:Wd,height:H}),g=cv.getContext('2d',{willReadFrequently:true});
+  g.drawImage(row.image,b.x||0,b.y||0,b.w,b.h,0,0,Wd,H);const d=g.getImageData(0,0,Wd,H).data,rows=[];
+  for(let y=H-1;y>=0;y--){let l=-1,r=-1;for(let x=0;x<Wd;x++)if(d[(y*Wd+x)*4+3]>40){if(l<0)l=x;r=x;}rows.push(l<0?0:(r-l+1)/Wd);}
+  while(rows.length&&rows[0]===0)rows.shift();v=footShift(rows,b.w/b.h);}catch(e){fail(e);v=0;}
+ if(footMemo.size>600)footMemo.clear();footMemo.set(path,v);return v;}
+const footPlain=p=>!!p&&typeof p.path==='string'&&!p.r80Dressing&&!p.r74Prop&&!p.r81NativeSkin&&!p.r99Tree&&!p.visualHospitalFrame&&!(p.visualLiftPx>0);
+let pend=null;
 const recent=[];let cur=null,depth=0;
 // fn 으로 그 그림을 그대로 다시 그리되 발(x,footY)을 축으로 눕힌 검은 실루엣으로.
 // 근처(LIGHT_R 칸 안)에 빛나는 것(R300 lightsOf: 화로·횃불·촛대·등불·벽 촛대, R330 불길)이 있으면 그 빛 반대쪽으로 그림자를 민다.
@@ -63,15 +82,17 @@ function install(){
   /* R412: R111(벽 간격)·R412 가 옮긴 조형물은 x·y 가 아니라 숨은 r111To 자리에 그려진다 → 그 자리(거울 전, 그리기 함수가 받는 자리)로 맞춰야
      그림자가 붙는다(x·y 로 맞추면 2px 넘게 어긋나 그림자가 빠졌다). 빛 방향·시야는 보이는 발 자리(거울 반영)로, 가로 밀기 뒤집기는 R303·R140 거울을 합친 것으로. */
   const prev=cur;let q=null,s=p,f=p,mir=!!p.r303Flip;try{const T=window.__STORYWORLD_PROPS_TIDY_R412__;if(T&&typeof T.spotOf==='function'){s=T.spotOf(p)||p;f=T.footOf(p)||p;mir=!!T.mirrored(p);}}catch(_){s=p;f=p;}
-  try{q=project(s.x,s.y);}catch(_){}cur=q?{x:q.x,y:q.y,wx:f.x,wy:f.y,self:p,flip:mir,done:false}:null;depth++;stats.props++;
-  try{return baseProp.apply(this,[p,...a]);}finally{depth--;cur=prev;}};
- if(typeof sprite==='function'){const baseSprite=sprite;sprite=function(path,x,y,height,opt){const c=depth>0&&typeof path==='string'?take(x):null;if(c&&y<=c.y+2&&y>=c.y-height*.75){try{castVia(baseSprite,this,[path,x,y,height,opt||{}],1,2,3,4,c.y,c);}catch(e){fail(e);}}return baseSprite.apply(this,arguments);};}
+  try{q=project(s.x,s.y);}catch(_){}cur=q?{x:q.x,y:q.y,wx:f.x,wy:f.y,self:p,flip:mir,done:false,foot:footOn&&footPlain(p)?footOfPath(p.path):0}:null;depth++;stats.props++;const keep=pend;pend=null;
+  try{return baseProp.apply(this,[p,...a]);}finally{if(pend){const d=pend;pend=null;try{baseShadow.call(this,d.x,d.y,d.radius,d.opt);}catch(e){fail(e);}}pend=keep;depth--;cur=prev;}};
+ if(typeof shadow==='function'){baseShadow=shadow;shadow=function(x,y,radius,opt){if(depth>0&&cur&&cur.foot>0&&!pend){pend={x,y,radius,opt};return;}return baseShadow.apply(this,arguments);};}
+ if(typeof sprite==='function'){const baseSprite=sprite;sprite=function(path,x,y,height,opt){if(pend&&cur&&typeof path==='string'){const d=pend;pend=null;try{const up=path===cur.self?.path?cur.foot*height:0;baseShadow.call(this,d.x,d.y-up,d.radius,up?{...(d.opt||{}),scale:FOOT_SCALE}:d.opt);if(up)stats.footed++;}catch(e){fail(e);}}const c=depth>0&&typeof path==='string'?take(x):null;if(c&&y<=c.y+2&&y>=c.y-height*.75){try{castVia(baseSprite,this,[path,x,y,height,opt||{}],1,2,3,4,c.y,c);}catch(e){fail(e);}}return baseSprite.apply(this,arguments);};}
  if(typeof drawAssetFrame3==='function'){const baseF=drawAssetFrame3;drawAssetFrame3=function(path,frame,x,y,height,opt){const c=depth>0?take(x):null;if(c){try{castVia(baseF,this,[path,frame,x,y,height,opt||{}],2,3,4,5,c.y,c);}catch(e){fail(e);}}return baseF.apply(this,arguments);};}
  return true;}
 const installed=(()=>{try{return install();}catch(e){fail(e);return false;}})();
 // R102 움직이는 조형물은 처음 실린 drawAssetFrame3 를 직접 잡아 쓰므로 그쪽 paint 가 이 함수를 먼저 부른다.
 function before(fn,args,footY){if(!on||depth<1)return;const c=take(+args[2]);if(!c)return;try{castVia(fn,null,args,2,3,4,5,Number.isFinite(footY)?footY:c.y,c);}catch(e){fail(e);}}
-window.__STORYWORLD_PROP_SHADOW_R329__=Object.freeze({revision:REV,installed,before,
+window.__STORYWORLD_PROP_SHADOW_R329__=Object.freeze({revision:REV,installed,before,footShift,footOfPath,
+ setFoot:v=>{footOn=!!v;try{localStorage.setItem('storyworld.r831.footShadow',footOn?'1':'0');}catch(_){}return footOn;},
  oneLight:()=>oneLight,setOneLight:v=>{oneLight=!!v;try{localStorage.setItem(UKEY,oneLight?'1':'0');}catch(_){}return oneLight;},
  inspect:()=>({revision:REV,on,oneLight,installed,stats:{...stats},recent:recent.slice(),lastError}),
  set:v=>{on=!!v;try{localStorage.setItem(KEY,on?'1':'0');}catch(_){}return on;}});
