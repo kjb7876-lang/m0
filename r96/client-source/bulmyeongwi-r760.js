@@ -192,7 +192,7 @@ window.__STORYWORLD_BULMYEONGWI_R760__=Object.freeze({rev:REV,inspect:()=>({rev:
 (()=>{'use strict';
 if(window.__STORYWORLD_VILLAGERS_R763__)return;
 const REV='R763-villagers-1',KEY='storyworld.r763.villagers';
-let prefs={on:true,sfx:true,sobok:true,proj:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object')for(const k of Object.keys(prefs))if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
+let prefs={on:true,sfx:true,sobok:true,proj:true,melee:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object')for(const k of Object.keys(prefs))if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={assigned:0,renamed:0,frames:0,waiting:0,deaths:0,groans:0,sleeps:0,reinstalls:0,shots:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const T=()=>typeof time==='number'&&Number.isFinite(time)?time:performance.now()/1000;
 const D='assets/r763/villagers/',CELL=256,PIV=[128,234.67];
@@ -213,16 +213,19 @@ const slot=e=>{const m=/(\d+)$/.exec(String(e.id||''));return m?+m[1]:Math.floor
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 function rename(e,k){const n=String(e.name||'');if(!OLD.test(n))return;if(!e.r763From)e.r763From=n;if(!e.r248Key)e.r248Key=n.replace(/^중간보스 · /,'').replace(/ \d+$/,'');
  e.name=n.replace(OLD,V[k].name);if(typeof e.r373Name==='string')e.r373Name=e.r373Name.replace(OLD,V[k].name);stats.renamed++;}
+// R774(사용자 11-12 06:31Z '어부·소복은 근접 전용으로'): 둥지(last303)는 모두 l302-e1 이고 대부분 ai hybrid 라 어부·소복도 멀리서 시전 → 근접 AI(엔진 index.html 이 ai 를 melee 로 바꿀 때와 같은 방식: ai·선호 거리). 원래 값은 r774Ai·r774Pref.
+function melee(e,k){if(!prefs.melee||(k!=='fisher'&&k!=='sobok')||e.ai==='melee')return;if(e.r774Ai===undefined)e.r774Ai=e.ai;e.ai='melee';const P=e.combatProfile;
+ if(P&&typeof P==='object'){const r=Number(P.attackShape?.range);if(Number.isFinite(r)&&r>0){if(e.r774Pref===undefined)e.r774Pref=P.preferredRange;e.combatProfile={...P,preferredRange:r*.86};}}stats.melee=(stats.melee||0)+1;}
 function kindFor(e,zone){if(!prefs.on||!e||typeof e!=='object'||e.boss||e.hero||e.r170Tower||e.r251Circle)return null;const z=typeof zone==='string'?zone:zoneOf();if(!ZONES.has(z))return null;
  // 아니라고 정한 것은 이름이 그대로일 때만 기억한다(R74 순찰처럼 지역을 만든 뒤 이름이 바뀌는 몹이 있음).
- if(e.r763Zone===z&&(e.r763||e.r763N===e.name)){if(e.r763){if(e.r74Monster){e.r763Atlas=e.r74Monster;delete e.r74Monster;}if(OLD.test(String(e.name||'')))rename(e,e.r763);}return e.r763||null;}const id=String(e.nativeId||'');let k=null;
+ if(e.r763Zone===z&&(e.r763||e.r763N===e.name)){if(e.r763){if(e.r74Monster){e.r763Atlas=e.r74Monster;delete e.r74Monster;}if(OLD.test(String(e.name||'')))rename(e,e.r763);melee(e,e.r763);}return e.r763||null;}const id=String(e.nativeId||'');let k=null;
  // R769: l302-e3(근거리) 셋에 하나는 소복 처녀, last303 은 번호로 아낙·어부·소복을 차례로(소복을 끄면 그 자리는 어부).
  if((id==='l302-e1'||id==='l302-e3')&&(e.r763From||OLD.test(String(e.name||'')))){const n=slot(e);k=id==='l302-e3'?(n%2===0?'sobok':'fisher'):z==='last303'?['herbwife','fisher','sobok'][n%3]:'herbwife';if(k==='sobok'&&!prefs.sobok)k='fisher';}
  // R773: 순찰·증원이 이미 바뀐 이름(잠식된 …)을 물려받고 옛 이름 흔적이 없으면 위에서 못 잡는다(last303 순찰 6명이 옛 그림) → 이름으로 고름.
  else if(id==='l302-e1'||id==='l302-e3'){const nm=String(e.name||'');k=Object.keys(V).find(q=>nm.includes(V[q].name))||null;if(k==='sobok'&&!prefs.sobok)k='fisher';}
  e.r763=k;e.r763Zone=z;e.r763N=k?undefined:e.name;if(k){
   // R74 순찰(유리 망령)은 지도 괴물 그림 표시(r74Monster)가 있으면 frameFor 사슬을 타지 않고 이름도 그 표로 되돌아간다 → R386 처럼 표시를 떼어 둔다(원래 값은 r763Atlas).
-  if(e.r74Monster){e.r763Atlas=e.r74Monster;delete e.r74Monster;}rename(e,k);stats.assigned++;}return k;}
+  if(e.r74Monster){e.r763Atlas=e.r74Monster;delete e.r74Monster;}rename(e,k);melee(e,k);stats.assigned++;}return k;}
 const ST=new WeakMap();const stOf=e=>{let s=ST.get(e);if(!s)ST.set(e,s={seed:hash(e.id||e.name),hitAt:0});return s;};
 function faceLeft(e){try{const r=window.__STORYWORLD_ENEMY_FACE_R444__?.left?.(e);if(typeof r==='boolean')return r;}catch(_){}
  try{const A=e.attack;if(A&&Number.isFinite(A.angle))return Math.cos(A.angle)-Math.sin(A.angle)<0;return (player.x-player.y)<(e.x-e.y);}catch(_){return false;}}
