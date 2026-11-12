@@ -491,4 +491,6 @@ A.add({zone:'last303',paper:'#1a2131',ink:'#d9dde6',sky:[[0,'#0f1522'],[0.55,'#1
    wisps.forEach((n,i)=>{const x0=GX-30+i*15,P=[];for(let j=0;j<5;j++)P.push([x0+Math.sin(t*2+i+j)*3+w*j,GY+80+j*5]);n.setAttribute('d',smoothD(P));});
    threads.forEach((n,i)=>{const x0=GX-24+i*8,P=[];for(let j=0;j<5;j++)P.push([x0+Math.sin(t*1.3+i*1.7+j*.9)*3+j*j*.12*(i-3),GY-70+i%3*6+j*22]);n.setAttribute('d',smoothD(P));});
    setA(core,{r:26*form*(1+.15*Math.sin(t*5))});};}});
+// 다음 묶음 장면 파일(lineart-scenes-r882.js …)이 같은 도우미를 쓰도록 내준다
+window.__STORYWORLD_LINEART_SK_R881__=Object.freeze({STAND,SHUF,RUN,vis,op,dipper,ground,scratches,actor,crouch,EGO,HWANDO,PATIENT,pillar,balrog,deadTree,pine,grass,fogBand,spark,archKnee,web,dark,whiten,FONT});
 })();

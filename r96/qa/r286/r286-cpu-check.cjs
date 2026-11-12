@@ -67,7 +67,7 @@ function arena({kind='attack-only',ai='melee',wall=null}={}){const ctx={window:{
  function enemyShot(e,a,v,d,o){const s={owner:e.id,a,v,d,o};shots.push(s);return s}
  function drawEnemy(e){drawn.push({x:e.x,y:e.y,attack:e.attack,moving:e.moving})}
  function tick(dt){time+=dt;for(const e of room.enemies)if(!e.attack&&e.moving){const d=Math.hypot(player.x-e.x,player.y-e.y);if(d>1){e.x-=(e.x-player.x)/d*e.speed*dt;e.y-=(e.y-player.y)/d*e.speed*dt;}}}
- window.__STORYWORLD_MOBS_R109__={trackFor:e=>__KIND==='attack-only'?{attack:{path:'a'},move:null}:__KIND==='move-only'?{move:{path:'m'},attack:null}:{move:{},attack:{}},inspect:()=>({state:'ready'})};`,ctx);
+ window.__STORYWORLD_MOBS_R109__={trackFor:e=>__KIND==='attack-only'?{attack:{path:'a'},move:null}:__KIND==='move-only'?{move:{path:'m'},attack:null}:__KIND==='static'?null:__KIND==='idle-only'?{idle:{path:'i'}}:{move:{},attack:{}},inspect:()=>({state:'ready'})};`,ctx);
  vm.runInContext(motionSrc,ctx);return ctx;}
 {const c=arena();const M=c.__STORYWORLD_MOB_MOTION_R286__,E=()=>run(c,'room.enemies[0]');
  ok(M.kindOf(E())==='attack-only','fake R109 track -> attack-only');
@@ -92,6 +92,17 @@ function arena({kind='attack-only',ai='melee',wall=null}={}){const ctx={window:{
  A.elapsed=.2;run(c,'drawn=[];drawEnemy(room.enemies[0])');ok(Math.abs(run(c,'drawn[0].y'))>.25,'side-step during windup');
  const L=M.lungeOffset;let mx=0;for(let t=0;t<=.9;t+=.01){const o=L(t,{windup:.4,active:.15,recovery:.35},0,1);mx=Math.max(mx,Math.hypot(o[0],o[1]));}ok(mx<=.43,'lunge offset bounded');ok(Math.hypot(...L(.9,{windup:.4,active:.15,recovery:.35},0,1))<1e-9,'lunge returns to place');
  ok(M.inspect().stats.lunges>=1,'lunge counted');}
+// R776(사용자 11-12 07:11Z '모션이 없는 몹은 일단 너가 코드로 구현'): 그림 한 장·대기만 몹 — 걷는 동안 발걸음 들썩임, 공격 동안 젖힘→내딛기(그릴 때만, 공격 그림은 그대로)
+for(const kind of ['static','idle-only']){const c=arena({kind});const M=c.__STORYWORLD_MOB_MOTION_R286__,E=()=>run(c,'room.enemies[0]');ok(M.kindOf(E())===kind,'R776 fake track -> '+kind);
+ run(c,'room.enemies[0].x=3;room.enemies[0].y=0;room.enemies[0].moving=true;room.enemies[0].r286={mode:null,t0:0,nextDash:99,nextShot:99,side:1}');
+ const ys=[];for(let i=0;i<12;i++){run(c,'time+=.035;drawn=[];drawEnemy(room.enemies[0])');const d=run(c,'drawn[0]');ys.push(d.x+d.y);}
+ const span=Math.max(...ys)-Math.min(...ys);ok(span>.03&&span<.2,'R776 '+kind+' walk: footstep bob on screen ('+span.toFixed(3)+')');ok(E().x===3&&E().y===0,'R776 position restored after walk draw');
+ const A={elapsed:.4+.15,angle:Math.PI,id:4,shape154:{range:1.2,windup:.4,active:.15,recovery:.35}};E().attack=A;E().moving=false;E().x=1.2;E().y=0;
+ run(c,'drawn=[];drawEnemy(room.enemies[0])');const dd=run(c,'drawn[0]');ok(dd.attack===A,'R776 '+kind+' attack keeps its own attack drawing');near(dd.x,1.2-.42,'R776 '+kind+' attack lunges .42 toward the hero');
+ A.elapsed=.15;run(c,'drawn=[];drawEnemy(room.enemies[0])');ok(run(c,'drawn[0].x')>1.2,'R776 '+kind+' windup leans back');ok(E().attack===A&&E().x===1.2,'R776 restored after attack draw');
+ ok(M.inspect().stats.staticMoves>=1&&M.inspect().stats.staticLunges>=1,'R776 counted');}
+{const c=arena({kind:'full'});const E=()=>run(c,'room.enemies[0]');run(c,'room.enemies[0].moving=true;room.enemies[0].r286={mode:null,t0:0,nextDash:99,nextShot:99,side:1}');const x0=E().x;
+ run(c,'time+=.05;drawn=[];drawEnemy(room.enemies[0])');ok(run(c,'drawn[0].x')===x0&&run(c,'drawn[0].y')===0,'R776 full-motion mob untouched');}
 {const c=arena({kind:'move-only',ai:'ranged'});run(c,'room.enemies[0].x=4.5;room.enemies[0].r286={mode:null,t0:0,nextDash:0,nextShot:0,side:1};tick(.016)');ok(run(c,'room.enemies[0].r286.mode')===null,'native ranged move-only mob keeps its own shots');}
 {const c=arena({kind:'full'});run(c,'room.enemies[0].r286={mode:null,t0:0,nextDash:0,nextShot:0,side:1};for(let i=0;i<40;i++)tick(.016)');ok(run(c,'room.enemies[0].r286.mode')===null&&run(c,'shots.length')===0,'full-art mob untouched');}
 {const c=arena();run(c,"room.enemies[0].boss=true;room.enemies[0].r286={mode:null,t0:0,nextDash:0,nextShot:0,side:1};tick(.016)");ok(run(c,'room.enemies[0].r286.mode')===null,'boss untouched');}

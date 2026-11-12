@@ -17,7 +17,7 @@
 //  · 뱀서류 일반 규칙: 화면 밖 고리에서 몰려오는 적, 시간이 갈수록 늘어나는 물량(상한 있음), 처치 → 경험치 조각 → 가까이 가면 끌려와 흡수,
 //    레벨이 오르면 게임을 멈추고 강화 제안 3개 중 하나를 고른다(영웅 재능·고유 기술·고유 패시브 + 정화 코어 강화). 길잡이는 없고 반자동(자동 공격)은 켜진 채 시작한다.
 //  · 이 모드는 저장하지 않는다(기존 저장 슬롯·스토리 진행을 건드리지 않음). 판정·그림·서사 글·영웅 스킬은 엔진 것을 그대로 부른다.
-//  끄기: 없음(처음 화면에서 고르지 않으면 아무것도 바꾸지 않는다). localStorage storyworld.r600.survival {"voice":false} → 서사 음성 없이 자막만.
+//  끄기: 없음(처음 화면에서 고르지 않으면 아무것도 바꾸지 않는다). 서사 트랙(R890): 생존 중 위쪽 「서사」 단추, localStorage storyworld.r600.survival {"track":"combat"} → 음성 없이 짧은 자막(옛 {"voice":false} 도 같음).
 (()=>{'use strict';
 if(window.__STORYWORLD_SURVIVAL_R600__)return;
 const REV='R600-survival-1',KEY='storyworld.r600.survival';
@@ -27,7 +27,10 @@ const ORB='assets/r163/pixelfx/core-orb-teal.webp',GEM='assets/r106/fx/shard.web
 const DOT='assets/r600/dots/',SH={idle:{p:DOT+'sv-core-01.webp',n:24,w:256,h:320,loop:1},hit:{p:DOT+'sv-core-02.webp',n:8,w:256,h:320},crit:{p:DOT+'sv-core-03.webp',n:24,w:256,h:320,loop:1},die:{p:DOT+'sv-core-04.webp',n:12,w:256,h:320},beam:{p:DOT+'sv-beam-01.webp',n:24,w:512,h:48,loop:1},bstart:{p:DOT+'sv-beam-start.webp',n:8,w:64,h:64},bhit:{p:DOT+'sv-beam-hit.webp',n:8,w:64,h:64},gem:{p:DOT+'sv-gem-01.webp',n:12,w:32,h:48,loop:1},tail:{p:DOT+'sv-gem-tail.webp',n:8,w:32,h:48}},FPS=12.5;
 const sheetImg=k=>{const im=G(()=>readyImage(SH[k].p),null)?.image;return im&&(im.naturalWidth||im.width)>0?im:null;};
 const sheetFrame=(k,age,fps=FPS)=>{const d=SH[k],f=Math.floor(Math.max(0,age)*fps);return d.loop?f%d.n:Math.min(d.n-1,f);};
-let prefs={voice:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');if(s&&s.voice===false)prefs.voice=false;}catch(_){}
+// R890 서사 두 트랙(사용자 11-12 06:59Z): '스토리 음미' = 녹음 음성+자막(기본), '전투 집중' = 음성 없이 짧은 자막. 서사 글·순서·웨이브 길이(narrMinEnd, 문장 길이 기준)는 그대로.
+const TRACKS=Object.freeze({story:Object.freeze({name:'스토리 음미',voice:true,compact:false}),combat:Object.freeze({name:'전투 집중',voice:false,compact:true})});
+function trackOf(s){if(s&&Object.prototype.hasOwnProperty.call(TRACKS,s.track))return s.track;if(s&&s.track===undefined&&s.voice===false)return 'combat';return 'story';}
+let prefs={voice:true,track:'story'};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');prefs.track=trackOf(s);prefs.voice=TRACKS[prefs.track].voice;}catch(_){}
 const stats={starts:0,stages:0,spawned:0,bosses:0,kills:0,gems:0,levels:0,choices:0,coreHits:0,coreShots:0,clears:0,loops:0,deaths:0,coreLost:0,saveBlocked:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 const G=(f,d)=>{try{const v=f();return v===undefined?d:v;}catch(_){return d;}};
@@ -111,6 +114,21 @@ function narrStop(){N.gen++;N.q.length=0;N.cur=null;clearTimeout(N.timer);N.time
 function narrPlay(scenes){const list=[];for(const s of scenes||[]){const narr=String(s?.narrator||'').replace(/[〈〉<>]/g,'').trim();for(const t of sentences(s?.text))list.push({text:t,narr});}
  if(S&&list.length){let sum=0;for(const x of list)sum+=Math.max(1.2,x.text.length/CPS)+GAP;S.narrMinEnd=Math.max(S.narrMinEnd||0,G(()=>time,0))+sum;}
  N.q.push(...list);if(!N.cur&&!N.timer)narrNext();return list.length;}
+function applyTrack(){prefs.voice=TRACKS[prefs.track].voice;try{if(!prefs.voice){window.__STORYWORLD_VOICE_R381__?.stop?.();try{speechSynthesis.cancel();}catch(_){}
+  if(N.cur){N.q.unshift(N.cur);N.gen++;N.cur=null;clearTimeout(N.timer);N.timer=setTimeout(narrNext,0);}}/* 읽던 문장은 음성 없이 자막으로 다시 띄운다(내용이 빠지지 않게) */}catch(e){fail(e);}
+ try{subsEl?.classList.toggle('compact',!!TRACKS[prefs.track].compact);}catch(_){}trackBtn();}
+function setTrack(t){if(!Object.prototype.hasOwnProperty.call(TRACKS,t))return prefs.track;prefs.track=t;try{localStorage.setItem(KEY,JSON.stringify({track:t,voice:TRACKS[t].voice}));}catch(_){}applyTrack();return t;}
+// 효과음·배경음 토글(사용자 11-12 07:22Z "무한생존모드에서도 효과음이나 배경음 키고 끄는거 자유롭게") — 엔진 설정(settings.sound·music, 설정 창의 같은 칸)을 그대로 바꾼다.
+function toggleAudio(k){if(k!=='sound'&&k!=='music')return null;settings[k]=!settings[k];if(k==='sound'&&!settings.sound){try{stopEffects();}catch(_){}}
+ try{toast?.((k==='sound'?'효과음 ':'배경음 ')+(settings[k]?'켬':'끔'),1.6);}catch(_){}trackBtn();return settings[k];}
+function audioBtn(n,id,k,label,before){let b=document.getElementById(id);if(!b){b=document.createElement('button');b.id=id;b.type='button';b.onclick=()=>{try{toggleAudio(k);}catch(e){fail(e);}};n.insertBefore(b,before||n.firstChild);}
+ const on=!!G(()=>settings[k],true);if(b.textContent!==label)b.textContent=label;b.classList.toggle('r890Off',!on);b.setAttribute('aria-pressed',on?'true':'false');b.title=label+' '+(on?'켜짐 — 눌러서 끄기':'꺼짐 — 눌러서 켜기');return b;}
+// 위쪽 단추 줄 '서사' 토글(길잡이 단추처럼 화면에 바로 보임) — 생존 안에서만. 첫 지역에서 한 번 알림.
+function trackBtn(){try{const n=document.querySelector('nav.topnav');if(!n)return;let b=document.getElementById('r890TrackBtn');
+ if(!b){ensureCss();b=document.createElement('button');b.id='r890TrackBtn';b.type='button';b.onclick=()=>{try{const t=setTrack(prefs.track==='story'?'combat':'story');toast?.('서사 트랙 · '+TRACKS[t].name+(t==='story'?' (음성 + 자막)':' (음성 끔 · 짧은 자막)'),2.4);}catch(e){fail(e);}};n.insertBefore(b,n.firstChild);}
+ const show=here(),sb=audioBtn(n,'r890SfxBtn','sound','효과음',b.nextSibling),mb=audioBtn(n,'r890BgmBtn','music','배경음',sb.nextSibling);for(const x of [b,sb,mb])x.style.display=show?'':'none';if(!show)return;const tx=prefs.track==='story'?'서사 · 음미':'서사 · 전투';if(b.textContent!==tx)b.textContent=tx;
+ b.title='서사 트랙 바꾸기 — 지금: '+TRACKS[prefs.track].name;b.setAttribute('aria-pressed',prefs.track==='combat'?'true':'false');b.classList.toggle('r890Combat',prefs.track==='combat');
+ if(S&&!S.trackHint){S.trackHint=true;try{toast?.('서사 트랙: '+TRACKS[prefs.track].name+' — 위쪽 「서사」 단추로 바꿀 수 있습니다',3.4);}catch(_){}}}catch(e){fail(e);}}
 function vol(){return clamp(G(()=>Number.isFinite(+settings.voice)?+settings.voice:.8,.8),0,1);}
 function paused(){return !!(S?.active&&!S.over&&(G(()=>modal,false)||G(()=>loading,false)));}
 function narrNext(){N.timer=null;if(paused()&&(N.q.length||S?.narrating)){N.timer=setTimeout(narrNext,250);return;}/* 강화 창·메뉴가 열려 전투가 멈춘 동안은 다음 문장으로 넘어가지 않는다 */const it=N.q.shift()||null;N.cur=it;if(!it){subs(null);if(S&&S.narrating){S.narrating=false;S.narrEndAt=Math.max(G(()=>time,0),S.narrMinEnd||0);}return;}/* 웨이브 길이는 게임 시간 기준 최소(문장 길이 합)를 보장 — 멈춘 사이 벽시계로 서사가 끝나도 짧아지지 않게 */
@@ -125,8 +143,9 @@ let subsEl=null;
 function ensureCss(){try{if(!document.getElementById('r600Style')){const st=document.createElement('style');st.id='r600Style';st.textContent=CSS;document.head.appendChild(st);}}catch(e){fail(e);}}
 function subs(it){try{if(!subsEl||!subsEl.isConnected){ensureCss();
   subsEl=document.createElement('div');subsEl.id='r600Subs';subsEl.innerHTML='<div class="w"><span class="n"></span><span class="t"></span></div>';document.body.appendChild(subsEl);}
- if(!it){subsEl.classList.remove('on');return;}subsEl.querySelector('.n').textContent=it.narr||'';subsEl.querySelector('.t').textContent=it.text;subsEl.classList.add('on');}catch(e){fail(e);}}
+ subsEl.classList.toggle('compact',!!TRACKS[prefs.track].compact);if(!it){subsEl.classList.remove('on');return;}subsEl.querySelector('.n').textContent=it.narr||'';subsEl.querySelector('.t').textContent=it.text;subsEl.classList.add('on');}catch(e){fail(e);}}
 const CSS='#r600Subs{position:fixed;left:50%;bottom:calc(136px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);width:min(820px,calc(100vw - 32px));z-index:8990;pointer-events:none;opacity:0;transition:opacity .4s ease;text-align:center}'+
+ '#r600Subs.compact{bottom:calc(150px + env(safe-area-inset-bottom,0px))}#r600Subs.compact .w{padding:4px 12px 5px;background:rgba(10,7,9,.36)}#r600Subs.compact .n{display:none}#r600Subs.compact .t{font-size:13px;line-height:1.4;opacity:.86}#r890TrackBtn.r890Combat{color:#e6c27a}#r890SfxBtn.r890Off,#r890BgmBtn.r890Off{opacity:.55;text-decoration:line-through}'+
  '#r600Subs.on{opacity:1}#r600Subs .w{display:inline-block;max-width:100%;padding:7px 16px 9px;border-radius:6px;background:linear-gradient(180deg,rgba(10,7,9,.48),rgba(10,7,9,.7));box-shadow:0 0 0 1px rgba(120,210,200,.16) inset}'+
  '#r600Subs .n{display:block;font-size:12px;letter-spacing:.08em;color:#8fd4c8;opacity:.85;margin-bottom:2px}#r600Subs .n:empty{display:none}'+
  '#r600Subs .t{display:block;font-size:16px;line-height:1.5;color:#efe6d6;text-shadow:0 1px 2px #000,0 0 8px rgba(0,0,0,.8);word-break:keep-all;overflow-wrap:anywhere}'+
@@ -395,10 +414,11 @@ function install(){makeNative=makeRoom;
  try{titleButton();}catch(e){fail(e);}}
 try{install();}catch(e){fail(e);}
 // 창(강화 고르기·결과·메뉴)이 열려 있으면 자막을 감춘다(카드를 가리지 않게).
+try{const iv=setInterval(trackBtn,400);iv?.unref?.();}catch(_){}
 try{const iv=setInterval(()=>{try{document.body.classList.toggle('r600Modal',!!(S?.active&&G(()=>modal,false)));}catch(_){}},200);iv?.unref?.();}catch(_){}
 window.__STORYWORLD_SURVIVAL_R600__=Object.freeze({revision:REV,start,qaCredit:v=>{if(!S?.active)return false;credit(+v||0);return true;},qaPlayT:v=>{if(!S?.active)return false;S.playT=Math.max(0,+v||0);return true;},qaGo:i=>S?.active?go(i):false,qaCoreHp:v=>{if(!S?.active)return false;S.core.hp=Math.max(0,+v||0);S.core.hitAt=G(()=>time,0);if(S.core.hp<=0&&!S.over){stats.coreLost++;over('core');}return true;},/* 검사·스크린샷용: 코어 체력을 바로 정한다(0 이면 다음 단계에서 파괴) */stageIds:()=>S?[...S.ids]:[],active:()=>!!S?.active,here,
  state:()=>S?{tainted,diff:S.diff,playT:S.playT,choiceIdx:S.choiceIdx,pickRem,narrMinEnd:S.narrMinEnd||0,ready:!!S.ready,startPos:S.startPos||null,i:S.i,loop:S.loop,id:S.ids[S.i],phase:S.phase,narrating:S.narrating,narrEndAt:S.narrEndAt,bossUp:S.bossUp,kills:S.kills,core:{...S.core,stats:CS()},choiceQ,gems:gems.length,over:S.over,ids:S.ids.length}:null,
- narr:()=>({playing:narrPlaying(),queued:N.q.length,cur:N.cur?.text||null}),skipNarration:()=>{N.q.length=0;if(S){S.narrMinEnd=0;/* 서사가 벽시계로 이미 끝났어도 남은 최소 웨이브 길이를 지금으로 당긴다 */if(!S.narrating&&S.narrEndAt>G(()=>time,0))S.narrEndAt=G(()=>time,0);}/* 일부러 건너뛰면 최소 웨이브 길이도 함께 끝낸다 */if(N.cur){N.gen++;N.cur=null;narrNext();}},
- pure:Object.freeze({DIFFS,diffOf,CHOICE_EVERY,WINDOW_MAX,choiceDue,windowPicks,xpNeed,levelUps,stageIds,arena,spawning,nextPhase,advance,cap,hpMul,bossStats,mobDamage,smoothAtk,BOSS_HP,coreStats,pickThree,sentences,TAIL,CORE0,CORE_UPS}),
+ track:()=>prefs.track,setTrack,narr:()=>({playing:narrPlaying(),queued:N.q.length,cur:N.cur?.text||null}),skipNarration:()=>{N.q.length=0;if(S){S.narrMinEnd=0;/* 서사가 벽시계로 이미 끝났어도 남은 최소 웨이브 길이를 지금으로 당긴다 */if(!S.narrating&&S.narrEndAt>G(()=>time,0))S.narrEndAt=G(()=>time,0);}/* 일부러 건너뛰면 최소 웨이브 길이도 함께 끝낸다 */if(N.cur){N.gen++;N.cur=null;narrNext();}},
+ pure:Object.freeze({DIFFS,diffOf,CHOICE_EVERY,WINDOW_MAX,choiceDue,windowPicks,xpNeed,levelUps,stageIds,arena,spawning,nextPhase,advance,cap,hpMul,trackOf,TRACKS,bossStats,mobDamage,smoothAtk,BOSS_HP,coreStats,pickThree,sentences,TAIL,CORE0,CORE_UPS}),
  inspect:()=>({revision:REV,stats:{...stats},lastError,active:!!S?.active,here:here(),pending})});
 })();
