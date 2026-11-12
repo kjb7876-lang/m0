@@ -40663,6 +40663,266 @@
       "sha256": "a442a8da37dc38a57d1dda36a2e6ae7acd1953d6ec90ac5306ce50c97a6e0afd"
     },
     {
+      "path": "assets/r954/sfx/atk-fisherman-1.ogg",
+      "bytes": 7161,
+      "sha256": "72651a7fa25a4fbd5b060e3f89cd8b5b3539cc62834915e733aaee4a0ea1949e"
+    },
+    {
+      "path": "assets/r954/sfx/atk-fisherman-2.ogg",
+      "bytes": 7612,
+      "sha256": "e4611897167661238a6e854fcde4b158ad41b8263f235c071efb22b7a0bb2eb4"
+    },
+    {
+      "path": "assets/r954/sfx/atk-fisherman-3.ogg",
+      "bytes": 8241,
+      "sha256": "e495eb74986f8a12ee5db0dfc283c07f88b0577e4f9ccc9cdda1568d07791e98"
+    },
+    {
+      "path": "assets/r954/sfx/atk-herbwoman-1.ogg",
+      "bytes": 6971,
+      "sha256": "91b020757dc40a93e9b5bd30cb8fc81b0ce4248a3e86299f85ff418b8dd5ae8e"
+    },
+    {
+      "path": "assets/r954/sfx/atk-herbwoman-2.ogg",
+      "bytes": 6533,
+      "sha256": "c5546875a889e39d9f768de14ce9537c8fa8f27efc12bdac92126f9fca33ef14"
+    },
+    {
+      "path": "assets/r954/sfx/atk-herbwoman-3.ogg",
+      "bytes": 5745,
+      "sha256": "429469ee2eddf4e5b9861f0aa4de2146cfd15e597212115fed47933bfde17dbb"
+    },
+    {
+      "path": "assets/r954/sfx/atk-maiden-1.ogg",
+      "bytes": 7764,
+      "sha256": "6c50e2c3515d0de4228db50e6b65dd02a842f48267e5cbd4180224fd4f8f90ed"
+    },
+    {
+      "path": "assets/r954/sfx/atk-maiden-2.ogg",
+      "bytes": 8096,
+      "sha256": "7d06f9a2ed81c79c4afc564ae0af4384a8f20963b707d4560cfbff5b82df1d0f"
+    },
+    {
+      "path": "assets/r954/sfx/atk-maiden-3.ogg",
+      "bytes": 8348,
+      "sha256": "52d7aa58bc56c1d7c35dbc5ae7995aa006ad9cb563e9a0cbea1904d95576490e"
+    },
+    {
+      "path": "assets/r954/sfx/atk-mistheart-1.ogg",
+      "bytes": 7321,
+      "sha256": "377889dd4283019d3b631c02c9374c8306d34526d197658c9ec475d59497e987"
+    },
+    {
+      "path": "assets/r954/sfx/atk-mistheart-2.ogg",
+      "bytes": 6829,
+      "sha256": "66debd9de4e0b2bd630098755cdf50df7596372b561190d5917643cf0fcc4ec1"
+    },
+    {
+      "path": "assets/r954/sfx/atk-mistheart-3.ogg",
+      "bytes": 7345,
+      "sha256": "2136dfc1201d11ca5438ebe8f4ebae1aef6af62ea0eeda26bb15d351da45d642"
+    },
+    {
+      "path": "assets/r954/sfx/atk-mistremnant-1.ogg",
+      "bytes": 7651,
+      "sha256": "193431e070526efde7654a9c8d303ef7dd0b7408864aa7bfe8e848ede71d71a8"
+    },
+    {
+      "path": "assets/r954/sfx/atk-mistremnant-2.ogg",
+      "bytes": 7937,
+      "sha256": "2813a75b4c31b265ddac2141481aa5f9d87730c11c56516b917c25536b94576d"
+    },
+    {
+      "path": "assets/r954/sfx/atk-mistremnant-3.ogg",
+      "bytes": 7609,
+      "sha256": "ab241f1a2bcc7ad22a8073c45ea910d6b5bfb89ea4b7716349fe6c7b50feefa6"
+    },
+    {
+      "path": "assets/r954/sfx/die-bulmyeongwi-1.ogg",
+      "bytes": 9299,
+      "sha256": "d12088547d24e0ca2d06ccdbeeb7190773d72be7beaeef8bbb106fb68336ba70"
+    },
+    {
+      "path": "assets/r954/sfx/die-bulmyeongwi-2.ogg",
+      "bytes": 10255,
+      "sha256": "559e92cacca12540bc33812ef3f23f5f98a799231dc47bc8210c7dbf4e242eb2"
+    },
+    {
+      "path": "assets/r954/sfx/die-bulmyeongwi-3.ogg",
+      "bytes": 12596,
+      "sha256": "36dcfe6f1c57b8b724d6ef8754510deca41ac4f2abbd22fc950bdd264aa47747"
+    },
+    {
+      "path": "assets/r954/sfx/die-fisherman-1.ogg",
+      "bytes": 10113,
+      "sha256": "438e4e167b634464abcef6ac62c6c0d1bf8ecfef89ac176cb8d07e14d0024f2a"
+    },
+    {
+      "path": "assets/r954/sfx/die-fisherman-2.ogg",
+      "bytes": 10313,
+      "sha256": "a0c529aac06ec7fd8cfbce0c5b6fa480918c75ec8207e1b5870c4103f18746ae"
+    },
+    {
+      "path": "assets/r954/sfx/die-fisherman-3.ogg",
+      "bytes": 9033,
+      "sha256": "a71eaf5f832511d59724734d3b2dde0585b9b3dd95173c1b5c1b83f249967546"
+    },
+    {
+      "path": "assets/r954/sfx/die-herbwoman-1.ogg",
+      "bytes": 11660,
+      "sha256": "e8333cc57d22ee05fa7e93f3f849d5e3e95603112738d8d1823cdce3f47da03d"
+    },
+    {
+      "path": "assets/r954/sfx/die-herbwoman-2.ogg",
+      "bytes": 11123,
+      "sha256": "d3ee5516ee75e429de6e78b54896b300baeaed1cbae17cc437376bd3dac49b6e"
+    },
+    {
+      "path": "assets/r954/sfx/die-herbwoman-3.ogg",
+      "bytes": 11450,
+      "sha256": "b67897f2c4eeaea966757116bbfdfccb15681c31b7f4f3bd85096ae164cd1a29"
+    },
+    {
+      "path": "assets/r954/sfx/die-maiden-1.ogg",
+      "bytes": 9920,
+      "sha256": "9f77936bf138b0647029431f97918f3c0cd64587752e7b7c7a312a931fdfb7d8"
+    },
+    {
+      "path": "assets/r954/sfx/die-maiden-2.ogg",
+      "bytes": 10190,
+      "sha256": "51aa74b3dad3e9cd1b39fade2deae6c576acce782483e9a74004447e94388ef1"
+    },
+    {
+      "path": "assets/r954/sfx/die-maiden-3.ogg",
+      "bytes": 11141,
+      "sha256": "6006f0464810cb074cb53fb9d05a567b4331024ed92dc9712b8db612e146a2bc"
+    },
+    {
+      "path": "assets/r954/sfx/die-mistheart-1.ogg",
+      "bytes": 5847,
+      "sha256": "f9896c01c5d3302f17022d2f81bc09bbcd857f1092b49f1433c2807f925e1eb4"
+    },
+    {
+      "path": "assets/r954/sfx/die-mistheart-2.ogg",
+      "bytes": 5781,
+      "sha256": "d46199c731320e4910ada4f87d3b5b63cbbf621366545588eb571c512cda8992"
+    },
+    {
+      "path": "assets/r954/sfx/die-mistheart-3.ogg",
+      "bytes": 6446,
+      "sha256": "ed7a483672a1cd0e2aadbc9ced186318859de8f78e6e51267811ec7767781259"
+    },
+    {
+      "path": "assets/r954/sfx/die-mistremnant-1.ogg",
+      "bytes": 9538,
+      "sha256": "aa922569f32281d2fc90e08a86db53fe714bff8d5407d1af872ae9fc413577c6"
+    },
+    {
+      "path": "assets/r954/sfx/die-mistremnant-2.ogg",
+      "bytes": 6186,
+      "sha256": "8a5895b711aa9966eff274da2d11a6925ef1b51701a6ada4b07f1854491887b3"
+    },
+    {
+      "path": "assets/r954/sfx/die-mistremnant-3.ogg",
+      "bytes": 12864,
+      "sha256": "5cb878027896d78557e3cfa19dd0008dfc7b02b81039ed22fd3ff516fe8a8816"
+    },
+    {
+      "path": "assets/r954/sfx/hit-bulmyeongwi-1.ogg",
+      "bytes": 6447,
+      "sha256": "6f9ad8d3a588abfcbbcf1b24240179f87eedcdd61cbb30245e376abec6304827"
+    },
+    {
+      "path": "assets/r954/sfx/hit-bulmyeongwi-2.ogg",
+      "bytes": 6477,
+      "sha256": "6c5a5c045c23126abbeb086bbea68fd746d94be37bdf1caea7cf61ff2ca59d82"
+    },
+    {
+      "path": "assets/r954/sfx/hit-bulmyeongwi-3.ogg",
+      "bytes": 5988,
+      "sha256": "212ed8221f65ad7ae9311996ed2255600cd5a98283f88e135ea5fb664ea79f4d"
+    },
+    {
+      "path": "assets/r954/sfx/hit-fisherman-1.ogg",
+      "bytes": 5839,
+      "sha256": "0107e4590284dd7e9659c925ffdbd61e58e02e534ba4f9976dbab5c09ccb4312"
+    },
+    {
+      "path": "assets/r954/sfx/hit-fisherman-2.ogg",
+      "bytes": 5691,
+      "sha256": "ca951aaba0f460e0a6018daaa89b5826a3835fa1b8f11b4054c5343a9af3b558"
+    },
+    {
+      "path": "assets/r954/sfx/hit-fisherman-3.ogg",
+      "bytes": 5953,
+      "sha256": "3d9b983574e9a04713049e16505896d924de5b595f83f813e87c06edd58b4487"
+    },
+    {
+      "path": "assets/r954/sfx/hit-herbwoman-1.ogg",
+      "bytes": 6052,
+      "sha256": "0b345be8c4396d1689b24dcfe3a255da9749fe177d780b75230732cb02b20c0f"
+    },
+    {
+      "path": "assets/r954/sfx/hit-herbwoman-2.ogg",
+      "bytes": 5441,
+      "sha256": "63ca8e598c06a2bef067a26d04804108270cdb10fc8441b50e715281d0430d45"
+    },
+    {
+      "path": "assets/r954/sfx/hit-herbwoman-3.ogg",
+      "bytes": 5998,
+      "sha256": "af5f6c0d934a2a33342869a62820daa4c8ad39d3472bde8eaf558518b1c2812e"
+    },
+    {
+      "path": "assets/r954/sfx/hit-maiden-1.ogg",
+      "bytes": 6024,
+      "sha256": "482bf0254774ee0d46c28a9cc15a1c6cda9f0cf3167daf52fdcd9bb2aafaffed"
+    },
+    {
+      "path": "assets/r954/sfx/hit-maiden-2.ogg",
+      "bytes": 6052,
+      "sha256": "abbe718ae46450c494560bd120e96ac66d383974dd113a21bd62087d8cb4bb64"
+    },
+    {
+      "path": "assets/r954/sfx/hit-maiden-3.ogg",
+      "bytes": 6336,
+      "sha256": "e9f136ba32e603acefd174af191e1e59f834d579bff7d055bd89315691697320"
+    },
+    {
+      "path": "assets/r954/sfx/hit-mistheart-1.ogg",
+      "bytes": 5547,
+      "sha256": "4daf2d9aabcb57621506defff329ed7b41392a1e186175bee7d9bf3ee9b3e9e1"
+    },
+    {
+      "path": "assets/r954/sfx/hit-mistheart-2.ogg",
+      "bytes": 5931,
+      "sha256": "99277a8a026fd38e9961b414f4b415f58b4325ae9b2c5385213fd11f8f4a1b26"
+    },
+    {
+      "path": "assets/r954/sfx/hit-mistheart-3.ogg",
+      "bytes": 5567,
+      "sha256": "db201c35c7100a52a7b64cfcaaca3601fa5d28578ef9a8c51d4059a8e5643ca2"
+    },
+    {
+      "path": "assets/r954/sfx/hit-mistremnant-1.ogg",
+      "bytes": 6531,
+      "sha256": "623ff8c56fa949ffc04df4e603267d8342b55a77cc791adeaf413fbc0af6846c"
+    },
+    {
+      "path": "assets/r954/sfx/hit-mistremnant-2.ogg",
+      "bytes": 6721,
+      "sha256": "3720266f0e2d8d193b9f66fa5396aaf1dbe0f6d0ac943e03f1a375dbe22a6f2a"
+    },
+    {
+      "path": "assets/r954/sfx/hit-mistremnant-3.ogg",
+      "bytes": 6530,
+      "sha256": "811c457b5bd6534b65756e88d37054e92f50cc1ac3a6ff9b496e17ab4ac5192d"
+    },
+    {
+      "path": "assets/r954/sfx/index.json",
+      "bytes": 46359,
+      "sha256": "47e5ae1d33c06b427a63a856ee08c60212b92388aa44ff3a8a7ec746e98bfa11"
+    },
+    {
       "path": "assets/r99/clean/assets/cult-v3121/c101_black_rose_prior.webp",
       "bytes": 54936,
       "sha256": "9ac511764c7900ba8149b36c6806487b374d157541484eb1b5ec628f820772f0"
@@ -46778,6 +47038,11 @@
       "sha256": "49c467f9d595b467fa0457e72b123433d7c04d0c089f72bdac8ba157a653c40e"
     },
     {
+      "path": "combat-sfx-r954.js",
+      "bytes": 7462,
+      "sha256": "400b575274076968ea2e6f0c59779142c498d8e8a2063a604d352e0a7604ea0b"
+    },
+    {
       "path": "crates-r108.js",
       "bytes": 6746,
       "sha256": "1d8820f1f4884a00ff32ededbdd6d2cbcdffe831e18d9062cafb688acdcd868f"
@@ -47294,8 +47559,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6575997,
-      "sha256": "ffb3da95c498d295710d2c94dc34a5c7661c2c18867faa712565c9b6ef19f0cf"
+      "bytes": 6576042,
+      "sha256": "cc569ddbe4637abd9e8bc514963cdca85566b5b2e6eceaac6cb125baa1f08c7e"
     },
     {
       "path": "intro-r140.js",
@@ -48398,9 +48663,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9679,
-  "totalBytes": 1255856911,
-  "webHTMLSha256": "ffb3da95c498d295710d2c94dc34a5c7661c2c18867faa712565c9b6ef19f0cf",
+  "fileCount": 9732,
+  "totalBytes": 1256304820,
+  "webHTMLSha256": "cc569ddbe4637abd9e8bc514963cdca85566b5b2e6eceaac6cb125baa1f08c7e",
   "largest": [
     {
       "path": "index.html",
