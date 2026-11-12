@@ -54,7 +54,11 @@ function candidates(L,avoid){const F=new Set(L.floorCells.map(c=>c[0]+','+c[1]))
  return{open,wall};}
 function pick(list,used,gap,rand){const order=list.map((p,i)=>[rand(),i]).sort((a,b)=>a[0]-b[0]);for(const[,i]of order){const p=list[i];if(used.every(q=>Math.hypot(q.x-p.x,q.y-p.y)>=gap))return p;}return null;}
 // 순수(QA): 방 → 놓을 목록(결정적). 원래 room 은 바꾸지 않는다.
-function plan(r){const t=themeOf(r);if(!t)return{theme:null,items:[]};const L=r.exploration,T=THEME[t],rand=rng('r299:'+r.id+':'+t),{open,wall}=candidates(L,avoidPoints(r)),used=[],items=[];
+// R830(사용자 2026-11-12): 피의 육망성 바닥 그림과 붉은 천 고목은 1부(에피소드 1a) 본편에만 — 규칙은 props-r272 fit. 사몽 묶음에서는 빠지고, 1부 지역 묶음에는 육망성이 후보로 들어간다.
+function canonTheme(r,t){const base=THEME[t];let P=null;try{P=window.__STORYWORLD_PROPS_R272__;}catch(_){}if(!P||typeof P.fitPath!=='function')return base;
+ const ok=n=>P.fitPath(D+n+'.webp',r)===true,decal=base.decal.filter(ok);if(!decal.includes('hexagram')&&ok('hexagram'))decal.push('hexagram');
+ return{decal,prop:base.prop.filter(ok),big:base.big.filter(ok)};}
+function plan(r){const t=themeOf(r);if(!t)return{theme:null,items:[]};const L=r.exploration,T=canonTheme(r,t),rand=rng('r299:'+r.id+':'+t),{open,wall}=candidates(L,avoidPoints(r)),used=[],items=[];
  const take=(kind,names,n)=>{const pool=names.slice();for(let i=0;i<n&&pool.length;i++){const name=pool.splice(Math.floor(rand()*pool.length),1)[0],a=PROP[name];
   const far=a?.doorGap?q=>(L.worldR74?.doors||[]).every(d=>Math.hypot(d.x-q.x,d.y-q.y)>=a.doorGap):()=>true;
   const p=kind==='decal'?pick(open,used,4,rand):a?.wall?pick(wall.filter(far),used,kind==='big'?7:4,rand):pick(open.filter(q=>far(q)&&(kind!=='big'||q.n>=25)),used,kind==='big'?7:4,rand);if(!p)continue;used.push(p);
