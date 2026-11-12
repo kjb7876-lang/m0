@@ -28,8 +28,9 @@ const solo=()=>{const m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();return !m||
 // 화면 방향: 세계 (dx,dy) → 화면 가로 sx=dx-dy, 세로 sy=(dx+dy)/2 (R336 과 같은 투영)
 const screenOf=(dx,dy)=>({sx:dx-dy,sy:(dx+dy)*.5});
 const DIR8=['e','se','s','sw','w','nw','n','ne'];
-const S={t:null,x:null,y:null,hero:null,at:0,sk:0,ul:0,da:0,hu:0,mv:false,
- atkT0:-9,castT0:-9,castRiseT:-9,castKind:null,hurtT0:-9,moveT0:-9,moveEndT:-9,dash:null};
+const perHeroR720=o=>{if(typeof Proxy!=='function'||typeof WeakMap!=='function')return o;const m=new WeakMap(),init=JSON.stringify(o),pick=()=>{let p=null;try{p=player;}catch(_){}if(p&&p.r720Ally===true){let s=m.get(p);if(!s){s=JSON.parse(init);m.set(p,s);}return s;}return o;};return new Proxy(o,{get:(_,k)=>pick()[k],set:(_,k,v)=>{pick()[k]=v;return true;},has:(_,k)=>k in pick(),deleteProperty:(_,k)=>delete pick()[k],ownKeys:()=>Reflect.ownKeys(pick()),getOwnPropertyDescriptor:(_,k)=>{const d=Object.getOwnPropertyDescriptor(pick(),k);if(d)d.configurable=true;return d;}});};/* R720: 생존 배치 영웅(player.r720Ally 몸)은 영웅마다 따로 상태를 갖는다 — 조종 영웅 상태와 섞이지 않게 */
+const S=perHeroR720({t:null,x:null,y:null,hero:null,at:0,sk:0,ul:0,da:0,hu:0,mv:false,
+ atkT0:-9,castT0:-9,castRiseT:-9,castKind:null,hurtT0:-9,moveT0:-9,moveEndT:-9,dash:null});
 // 한 화면에 한 번만 상태를 읽는다(누가 먼저 묻든 같은 값). 이 파일의 바깥 감싸기가 drawHero 맨 앞에서 읽어 두므로,
 //  R440 이 그리는 동안 잠깐 바꿔 보이는 공격 값(가짜 attackAnim)이 '새 공격'으로 잘못 읽히지 않는다.
 function sample(){const p=P();if(!p)return S;const t=now();if(S.t===t&&S.hero===p.hero)return S;stats.samples++;

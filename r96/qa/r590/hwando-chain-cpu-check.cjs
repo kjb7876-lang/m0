@@ -20,7 +20,10 @@ ok(!/'rune'|'runecross'|'cross'/.test(code),'상징 규칙: 룬·십자 문양�
 
 // ---- 가짜 엔진 ----
 // 벽: 14<x<15.5 (세로 벽), 맵: 1..N-1, N=40
-function engine({coop=null,enemies=[],hero='hwando',lowFx=false,px=20,py=20,ready=false}={}){
+// R765: 검풍·종섬은 8방향 칸 중심으로만 나가므로, 옛 시험의 '월드 x축 위 적'은 칸 중심 줄로 옮긴다(영웅 기준 회전, 거리 그대로). rot:true 인 시험(Q 검풍·R 종섬)만 회전.
+const RO765=Math.atan2(2*Math.sin(Math.PI/4)-Math.cos(Math.PI/4),Math.cos(Math.PI/4)+2*Math.sin(Math.PI/4));
+function engine(o={}){const px=o.px??20,py=o.py??20,c=Math.cos(RO765),n=Math.sin(RO765);return engine0({...o,enemies:(o.enemies||[]).map(e=>!o.rot?e:{...e,x:px+(e.x-px)*c-(e.y-py)*n,y:py+(e.x-px)*n+(e.y-py)*c})});}
+function engine0({coop=null,enemies=[],hero='hwando',lowFx=false,px=20,py=20,ready=false}={}){
  const hits=[],draws=[],floats=[];let clock=10;const N=40;
  const room={id:'room1',props:[],enemies:enemies.map(e=>({radius:.3,hp:1000,maxHp:1000,...e}))};
  const W={};const g={window:W,localStorage:{getItem:()=>null,setItem:()=>{}},console,Math,JSON,Set,Map,WeakMap,WeakSet,Array,Object,String,Number,Error,
@@ -72,7 +75,7 @@ const wave=(E,id,x=20,y=20,ang=0)=>E.ctx.fx('storySourceSkill',x,y,{storyWER:tru
 {const E=engine({enemies:[]});E.ctx.basicAttack();ok(E.api.inspect().stats.draws===0,'적이 없어 공격이 안 나가면 발도 소모 없음');}
 
 // ---- Q → 은빛 검풍 ----
-{const E=engine({enemies:[{id:'q1',x:23,y:20},{id:'q2',x:25.5,y:20},{id:'off',x:23,y:24}]});
+{const E=engine({rot:true,enemies:[{id:'q1',x:23,y:20},{id:'q2',x:25.5,y:20},{id:'off',x:23,y:24}]});
  E.ctx.special();const base=E.hits.length;ok(base===0||E.hits[0].s.kind==='special','Q 본 기술은 그대로');
  E.run(.3);ok(E.api.inspect().blades.length===0,'검풍은 연참 뒤(0.3초엔 아직 없음)');
  E.run(.4);ok(E.api.inspect().blades.length===E.api.config.windCount,'연참 뒤 검풍 '+E.api.config.windCount+'개 자동 발사');
@@ -87,8 +90,8 @@ const wave=(E,id,x=20,y=20,ang=0)=>E.ctx.fx('storySourceSkill',x,y,{storyWER:tru
  ok(E.api.inspect().blades.length===0&&E.api.inspect().stats.wallStops>=1,'벽에 닿은 검풍은 바로 사라짐(벽 정지 '+E.api.inspect().stats.wallStops+')');}
 {const E=engine({enemies:[{id:'edge',x:38.2,y:20}],px:37,py:20});E.ctx.special();E.run(1.6);
  const st=E.api.inspect();ok(st.blades.length===0&&st.stats.errors===0,'맵 끝(N-1)에서 검풍이 맵 밖으로 나가지 않고 사라짐, 오류 0');}
-{const E=engine({enemies:[{id:'q1',x:23,y:20}]});E.ctx.player.specialCD=3;E.ctx.special();E.run(1);ok(E.api.inspect().stats.winds===0,'쿨다운 중 Q 실패 → 검풍 없음');}
-{const E=engine({enemies:[{id:'q1',x:23,y:20}]});for(let i=0;i<6;i++){E.ctx.player.specialCD=0;E.ctx.special();E.run(.6);}
+{const E=engine({rot:true,enemies:[{id:'q1',x:23,y:20}]});E.ctx.player.specialCD=3;E.ctx.special();E.run(1);ok(E.api.inspect().stats.winds===0,'쿨다운 중 Q 실패 → 검풍 없음');}
+{const E=engine({rot:true,enemies:[{id:'q1',x:23,y:20}]});for(let i=0;i<6;i++){E.ctx.player.specialCD=0;E.ctx.special();E.run(.6);}
  ok(E.api.inspect().blades.length<=E.api.config.maxBlades,'검풍 동시 상한 '+E.api.config.maxBlades+' (지금 '+E.api.inspect().blades.length+')');}
 
 // ---- E → 유영 일섬 ----
@@ -104,7 +107,7 @@ const wave=(E,id,x=20,y=20,ang=0)=>E.ctx.fx('storySourceSkill',x,y,{storyWER:tru
 {const E=engine({enemies:[{id:'on',x:22,y:20.3}]});E.ctx.fx('storySourceSkill',20,20,{storyWER:true,sourceHero:'hwando',sourceSlot:'e',stage:'flight',castId:'wer:nan',tx:NaN,ty:20});E.run(.6);ok(E.hits.length===0&&E.api.inspect().stats.errors===0,'좌표가 이상하면 무시(오류 없이)');}
 
 // ---- R 칠연 환수검 → 종섬 ----
-{const E=engine({enemies:[{id:'r1',x:24,y:20},{id:'r2',x:20,y:24}]});
+{const E=engine({rot:true,enemies:[{id:'r1',x:24,y:20},{id:'r2',x:20,y:24}]});
  for(let i=0;i<6;i++){wave(E,'wer:r1');E.run(.14);}ok(E.hits.filter(h=>h.s.r590==='finale').length===0,'6파까지는 종섬 없음');
  ok(E.api.inspect().stats.waves===6,'파 수 세기(6)');
  wave(E,'wer:r1');E.run(.15);ok(E.hits.filter(h=>h.s.r590==='finale').length===0,'7파 직후 잠깐 멈춤(납도) — 아직 종섬 없음');
@@ -117,27 +120,27 @@ const wave=(E,id,x=20,y=20,ang=0)=>E.ctx.fx('storySourceSkill',x,y,{storyWER:tru
 {const E=engine({enemies:[],px:38,py:20});E.ctx.player.x=38;for(let i=0;i<7;i++)wave(E,'wer:redge',38,20,0);E.run(.7);
  const L=E.api.inspect().lastFinale;ok(L&&L.x1<=E.g.N-1&&!E.g.blocked(L.x1,L.y1,.2)&&E.api.inspect().stats.errors===0,'맵 끝에서 종섬 칼길이 맵 밖으로 안 나감');
  ok(E.ctx.player.x===38&&E.ctx.player.y===20,'종섬은 영웅을 옮기지 않음(벽 통과·맵 이탈 없음)');}
-{const E=engine({enemies:[{id:'r1',x:24,y:20}]});for(let i=0;i<7;i++)wave(E,'wer:r9');E.ctx.player.hp=0;E.run(.7);ok(E.hits.length===0,'쓰러지면 종섬 취소');}
+{const E=engine({rot:true,enemies:[{id:'r1',x:24,y:20}]});for(let i=0;i<7;i++)wave(E,'wer:r9');E.ctx.player.hp=0;E.run(.7);ok(E.hits.length===0,'쓰러지면 종섬 취소');}
 
 // ---- 협동·끄기·다른 영웅 ----
-{const E=engine({coop:'host',enemies:[{id:'a',x:21,y:20.2},{id:'q1',x:23,y:20}]});E.ctx.special();E.run(1.2);flight(E,'wer:c',20,20,23.8,20);E.run(.6);for(let i=0;i<7;i++)wave(E,'wer:cr');E.run(.7);
+{const E=engine({rot:true,coop:'host',enemies:[{id:'a',x:21,y:20.2},{id:'q1',x:23,y:20}]});E.ctx.special();E.run(1.2);flight(E,'wer:c',20,20,23.8,20);E.run(.6);for(let i=0;i<7;i++)wave(E,'wer:cr');E.run(.7);
  ok(E.hits.every(h=>!h.s.r590),'협동(R62 mode≠off): 연계 피해 없음');}
-{const E=engine({enemies:[{id:'a',x:21,y:20.2},{id:'q1',x:23,y:20}]});E.api.set(false);E.ctx.basicAttack();E.ctx.special();E.run(1.2);flight(E,'wer:o',20,20,23.8,20);E.run(.6);for(let i=0;i<7;i++)wave(E,'wer:or');E.run(.7);
+{const E=engine({rot:true,enemies:[{id:'a',x:21,y:20.2},{id:'q1',x:23,y:20}]});E.api.set(false);E.ctx.basicAttack();E.ctx.special();E.run(1.2);flight(E,'wer:o',20,20,23.8,20);E.run(.6);for(let i=0;i<7;i++)wave(E,'wer:or');E.run(.7);
  ok(E.hits.every(h=>!h.s.r590)&&E.hits[0].v===100,'끄면 예전 그대로');}
-{const E=engine({hero:'slayer',enemies:[{id:'q1',x:23,y:20}]});E.ctx.special();E.run(1.2);ok(E.api.inspect().stats.winds===0,'다른 영웅 Q 는 검풍 없음');}
+{const E=engine({rot:true,hero:'slayer',enemies:[{id:'q1',x:23,y:20}]});E.ctx.special();E.run(1.2);ok(E.api.inspect().stats.winds===0,'다른 영웅 Q 는 검풍 없음');}
 
 // ---- 그리기·상한(렉) ----
-{const E=engine({enemies:[{id:'q1',x:23,y:20},{id:'r1',x:24,y:20}]});
+{const E=engine({rot:true,enemies:[{id:'q1',x:23,y:20},{id:'r1',x:24,y:20}]});
  E.ctx.basicAttack();E.ctx.special();E.run(.6);flight(E,'wer:d',20,20,23.8,20);for(let i=0;i<7;i++){wave(E,'wer:dr');E.run(.05);}
  let mx=0;for(let i=0;i<40;i++){E.adv(.033);mx=Math.max(mx,E.frame());}
  ok(mx>0&&mx<=E.api.config.maxDraws,'모든 연계가 한꺼번에 겹쳐도 한 프레임 그리기 ≤ '+E.api.config.maxDraws+' (최대 '+mx+')');
  ok(E.draws.length>=0&&E.api.inspect().stats.errors===0,'그리기 오류 0');}
-{const E=engine({enemies:[{id:'q1',x:23,y:20},{id:'r1',x:24,y:20}]});// 몰아치기: Q 여러 번 + R 세 번 + E 세 번이 한 순간에
+{const E=engine({rot:true,enemies:[{id:'q1',x:23,y:20},{id:'r1',x:24,y:20}]});// 몰아치기: Q 여러 번 + R 세 번 + E 세 번이 한 순간에
  for(let k=0;k<4;k++){E.ctx.player.specialCD=0;E.ctx.special();}E.run(.75);for(let k=0;k<3;k++){flight(E,'wer:s'+k,20,20,23.8,20);for(let i=0;i<7;i++)wave(E,'wer:sr'+k);}
  let mx=0;for(let i=0;i<20;i++){E.adv(.02);mx=Math.max(mx,E.frame());}ok(mx<=E.api.config.maxDraws&&E.api.inspect().vis<=E.api.config.maxVis,'몰아쳐도 그리기 ≤ '+E.api.config.maxDraws+'(최대 '+mx+')·그림 목록 ≤ '+E.api.config.maxVis);
  ok(E.api.inspect().stats.budgetSkips>0,'상한을 넘는 조각은 건너뜀(건너뜀 '+E.api.inspect().stats.budgetSkips+')');}
-{const E=engine({lowFx:true,enemies:[{id:'q1',x:23,y:20}]});E.ctx.special();E.run(.6);let lo=0;for(let i=0;i<10;i++){E.adv(.033);lo=Math.max(lo,E.frame());}
- const E2=engine({enemies:[{id:'q1',x:23,y:20}]});E2.ctx.special();E2.run(.6);let hi=0;for(let i=0;i<10;i++){E2.adv(.033);hi=Math.max(hi,E2.frame());}
+{const E=engine({rot:true,lowFx:true,enemies:[{id:'q1',x:23,y:20}]});E.ctx.special();E.run(.6);let lo=0;for(let i=0;i<10;i++){E.adv(.033);lo=Math.max(lo,E.frame());}
+ const E2=engine({rot:true,enemies:[{id:'q1',x:23,y:20}]});E2.ctx.special();E2.run(.6);let hi=0;for(let i=0;i<10;i++){E2.adv(.033);hi=Math.max(hi,E2.frame());}
  ok(lo>0&&lo<hi,'저사양(lowFx) 모드는 그리기를 줄임('+lo+' < '+hi+')');}
 {const E=engine({enemies:[]});E.run(1);ok(!E.g.effects.some(e=>e&&e.r590Sentinel),'할 일이 없으면 그리기 표지를 effects 에서 뺌');}
 
@@ -145,17 +148,17 @@ const wave=(E,id,x=20,y=20,ang=0)=>E.ctx.fx('storySourceSkill',x,y,{storyWER:tru
 for(const a of ['hwando-wind-tornado.webp','hwando-iai-ring.webp','hwando-a-draw-cut.webp','hwando-q-wind-blade.webp','hwando-e-delayed-flash.webp','hwando-r-finale-draw.webp','hwando-sigil-back.webp','hwando-sigil-front.webp']){const f=path.join(R,'runtime-text','assets','r590',a);ok(fs.existsSync(f)&&fs.statSync(f).size<250000,'시트 '+a+' 있음, 250KB 미만');
  ok(JSON.stringify(JSON.parse(fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8'))).includes('assets/r590/'+a),'manifest 에 '+a);}
 ok(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').includes("assets/r590/"),'verify-r96-public.py 가 assets/r590/ 확인');
-{const E=engine({ready:'b',enemies:[{id:'q1',x:23,y:20}]});E.ctx.special();E.run(.62);E.frame();
+{const E=engine({rot:true,ready:'b',enemies:[{id:'q1',x:23,y:20}]});E.ctx.special();E.run(.62);E.frame();
  ok(E.draws.includes('sheet:hwando-wind-tornado.webp'),'시트가 준비되면 검풍은 은빛 회오리 시트로 그림');
  const E2=engine({ready:true,enemies:[{id:'a',x:21,y:20}]});E2.ctx.basicAttack();E2.adv(.05);E2.frame();ok(E2.draws.includes('sheet:hwando-iai-ring.webp'),'발도 순간 발밑 착지 고리 시트');
- const E3=engine({ready:true,enemies:[{id:'r1',x:24,y:20}]});for(let i=0;i<7;i++)wave(E3,'wer:rs');E3.run(.36);E3.frame();ok(E3.draws.includes('sheet:hwando-iai-ring.webp'),'종섬 끝자리에도 고리');}
-{const E=engine({ready:false,enemies:[{id:'q1',x:23,y:20}]});E.ctx.special();E.run(.62);E.frame();
+ const E3=engine({rot:true,ready:true,enemies:[{id:'r1',x:24,y:20}]});for(let i=0;i<7;i++)wave(E3,'wer:rs');E3.run(.36);E3.frame();ok(E3.draws.includes('sheet:hwando-iai-ring.webp'),'종섬 끝자리에도 고리');}
+{const E=engine({rot:true,ready:false,enemies:[{id:'q1',x:23,y:20}]});E.ctx.special();E.run(.62);E.frame();
  ok(!E.draws.some(d=>String(d).startsWith('sheet:'))&&E.draws.includes('slash')&&(E.g.__asked||[]).some(p=>/r590\/hwando-wind-tornado/.test(p)),'시트가 아직 없으면 코드 그림으로 대신하고 불러오기를 요청');}
-{const E=engine({ready:true,enemies:[{id:'q1',x:23,y:20},{id:'r1',x:24,y:20}]});for(let k=0;k<4;k++){E.ctx.player.specialCD=0;E.ctx.special();}E.run(.75);for(let k=0;k<3;k++){flight(E,'wer:t'+k,20,20,23.8,20);for(let i=0;i<7;i++)wave(E,'wer:tr'+k);}
+{const E=engine({rot:true,ready:true,enemies:[{id:'q1',x:23,y:20},{id:'r1',x:24,y:20}]});for(let k=0;k<4;k++){E.ctx.player.specialCD=0;E.ctx.special();}E.run(.75);for(let k=0;k<3;k++){flight(E,'wer:t'+k,20,20,23.8,20);for(let i=0;i<7;i++)wave(E,'wer:tr'+k);}
  let mx=0;for(let i=0;i<20;i++){E.adv(.02);mx=Math.max(mx,E.frame());}ok(mx<=E.api.config.maxDraws,'시트를 써도 한 프레임 그리기 ≤ '+E.api.config.maxDraws+'(최대 '+mx+')');}
 
 // ---- R590d: Dots CX-0062HW 시트 4장(발도·검풍·일섬·종섬) ----
-{const E=engine({ready:true,enemies:[{id:'q1',x:23,y:20}]});E.ctx.special();E.run(.62);E.frame();
+{const E=engine({rot:true,ready:true,enemies:[{id:'q1',x:23,y:20}]});E.ctx.special();E.run(.62);E.frame();
  ok(E.draws.includes('sheet:hwando-q-wind-blade.webp')&&!E.draws.includes('sheet:hwando-wind-tornado.webp')&&!E.draws.includes('slash'),'Dots 시트가 있으면 검풍은 HW-02 칼바람 시트 한 장으로(회오리·코드 선 대신)');}
 {const E=engine({ready:true,enemies:[{id:'a',x:21,y:20}]});E.ctx.basicAttack();E.adv(.06);E.g.__fr=[];E.frame();const f=E.g.__fr.find(x=>x[0]==='hwando-a-draw-cut.webp');
  ok(f&&!E.draws.includes('slashline'),'발도는 HW-01 발도 시트(코드 빛줄 없음)');ok(f&&f[1]>=4&&f[1]<=6,'발도 시트는 맞는 프레임 5 근처부터 재생(지금 '+(f&&f[1])+')');}
@@ -163,14 +166,14 @@ ok(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').incl
  ok(a&&a[1]<7,'일섬: 피해 전에는 HW-03 금이 번지는 앞 프레임(지금 '+(a&&a[1])+')');
  let fr=null;for(let i=0;i<20&&!E.hits.some(h=>h.s.r590==='flash');i++)E.adv(.02);E.g.__fr=[];E.frame();fr=E.g.__fr.find(x=>x[0]==='hwando-e-delayed-flash.webp');
  ok(fr&&fr[1]>=6&&fr[1]<=8,'일섬 피해 순간 = HW-03 맞는 프레임 7 근처(지금 '+(fr&&fr[1])+')');ok(!E.draws.includes('iai-cut'),'일섬은 코드 칼자국 대신 시트');}
-{const E=engine({ready:true,enemies:[{id:'r1',x:24,y:20}]});for(let i=0;i<6;i++)wave(E,'wer:rd');E.adv(.02);E.frame();ok(E.draws.includes('sheet:hwando-a-draw-cut.webp')&&!E.draws.includes('iai-cut'),'일곱 파 베기 선도 발도 시트를 돌려 씀');
+{const E=engine({rot:true,ready:true,enemies:[{id:'r1',x:24,y:20}]});for(let i=0;i<6;i++)wave(E,'wer:rd');E.adv(.02);E.frame();ok(E.draws.includes('sheet:hwando-a-draw-cut.webp')&&!E.draws.includes('iai-cut'),'일곱 파 베기 선도 발도 시트를 돌려 씀');
  wave(E,'wer:rd');E.adv(.1);E.g.__fr=[];E.frame();const c=E.g.__fr.find(x=>x[0]==='hwando-r-finale-draw.webp');ok(c&&c[1]<4,'7파 뒤 납도 0.3초 동안 HW-04 기운 모임(프레임 0~3, 지금 '+(c&&c[1])+')');
  for(let i=0;i<20&&!E.hits.some(h=>h.s.r590==='finale');i++)E.adv(.02);E.adv(.05);E.g.__fr=[];E.frame();const f=E.g.__fr.find(x=>x[0]==='hwando-r-finale-draw.webp');
  ok(f&&f[1]>=4&&f[1]<=6,'종섬 피해 직후 = HW-04 맞는 프레임 5 근처(지금 '+(f&&f[1])+')');}
-{const E=engine({ready:true,enemies:[{id:'q1',x:23,y:20},{id:'r1',x:24,y:20}]});for(let k=0;k<4;k++){E.ctx.player.specialCD=0;E.ctx.special();}E.run(.75);for(let k=0;k<3;k++){flight(E,'wer:u'+k,20,20,23.8,20);for(let i=0;i<7;i++)wave(E,'wer:ur'+k);}
+{const E=engine({rot:true,ready:true,enemies:[{id:'q1',x:23,y:20},{id:'r1',x:24,y:20}]});for(let k=0;k<4;k++){E.ctx.player.specialCD=0;E.ctx.special();}E.run(.75);for(let k=0;k<3;k++){flight(E,'wer:u'+k,20,20,23.8,20);for(let i=0;i<7;i++)wave(E,'wer:ur'+k);}
  let mx=0;for(let i=0;i<30;i++){E.adv(.02);mx=Math.max(mx,E.frame());}ok(mx<=E.api.config.maxDraws,'Dots 시트로도 한 프레임 그리기 ≤ '+E.api.config.maxDraws+'(최대 '+mx+')');}
 
-{const mk=lo=>{const E=engine({ready:true,lowFx:lo,enemies:[{id:'r1',x:24,y:20}]});for(let i=0;i<7;i++)wave(E,'wer:ink');for(let i=0;i<20&&!E.hits.some(h=>h.s.r590==='finale');i++)E.adv(.02);E.adv(.04);E.g.__flt=[];E.frame();return E;};
+{const mk=lo=>{const E=engine({rot:true,ready:true,lowFx:lo,enemies:[{id:'r1',x:24,y:20}]});for(let i=0;i<7;i++)wave(E,'wer:ink');for(let i=0;i<20&&!E.hits.some(h=>h.s.r590==='finale');i++)E.adv(.02);E.adv(.04);E.g.__flt=[];E.frame();return E;};
  const A=mk(false),B=mk(true);ok(A.g.__flt.length>0&&A.g.__flt.every(f=>/^brightness\([0-9.]+\)$/.test(f))&&A.g.__flt.includes('brightness(0.18)'),'먹 받침은 brightness 필터만 씀('+[...new Set(A.g.__flt)]+')');ok(!B.g.__flt.includes('brightness(0.18)'),'저사양에서는 먹 받침 생략');}
 
 // ---- CX-0064T 수묵 문양: R572 환도 몸 둘레 문양을 시트로 ----
@@ -182,7 +185,7 @@ ok(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').incl
  const D=mk(true);const d0=D.T.draw;D.E.adv(.02);D.E.adv(.02);ok(D.T.draw===d0,'문양 감싸기는 한 번만');}
 
 // ---- R571 사몽 발현 배수: 연계 자체 틱의 사거리·반경만 ×1.77, 상한 그대로 ----
-{const mk=on=>{const E=engine({enemies:[{id:'n',x:22,y:20},{id:'far',x:28.6,y:20}]});E.g.window.__STORYWORLD_SAMONG_SURGE_R571__={active:()=>on,range:r=>on?r*1.77:r,cd:s=>on?s*.23:s};return E;};
+{const mk=on=>{const E=engine({rot:true,enemies:[{id:'n',x:22,y:20},{id:'far',x:28.6,y:20}]});E.g.window.__STORYWORLD_SAMONG_SURGE_R571__={active:()=>on,range:r=>on?r*1.77:r,cd:s=>on?s*.23:s};return E;};
  const A=mk(false);A.ctx.special();A.run(1.6);const B=mk(true);B.ctx.special();B.run(1.6);
  const hw=E=>E.hits.filter(h=>h.s.r590==='wind').map(h=>h.id);
  ok(!hw(A).includes('far')&&hw(B).includes('far'),'사몽 발현 중 검풍 사거리 ×1.77(6칸 너머 적까지): 평소 '+hw(A)+' / 발현 '+hw(B));
@@ -192,5 +195,18 @@ ok(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').incl
  ok(!hf(C).includes('far')&&hf(D).includes('far'),'사몽 발현 중 종섬 길이 ×1.77: 평소 '+hf(C)+' / 발현 '+hf(D));
  const S=mk(true);for(let k=0;k<6;k++){S.ctx.player.specialCD=0;S.ctx.special();}S.run(.9);ok(S.api.inspect().blades.length<=S.api.config.maxBlades,'발현 중에도 칼바람 상한 '+S.api.config.maxBlades+' 유지');
  const X=mk(true);X.g.window.__STORYWORLD_SAMONG_SURGE_R571__={range:()=>{throw new Error('x');}};X.ctx.special();X.run(1);ok(hw(X).includes('n'),'배수 API 오류가 나도 평소 값으로 동작');}
+
+// ---- R765: 8방향 칸 고정(사용자 2026-11-11 "8방향 칸으로 고정, 적중보다 자연스럽게") ----
+{const SEC={e:0,se:Math.PI/4,s:Math.PI/2,sw:Math.PI*.75,w:Math.PI,nw:-Math.PI*.75,n:-Math.PI/2,ne:-Math.PI/4};
+ const secOf=a=>{const sc=Math.atan2((Math.cos(a)+Math.sin(a))*.5,Math.cos(a)-Math.sin(a));let k='s',b=9;for(const q in SEC){const d=Math.abs(Math.atan2(Math.sin(sc-SEC[q]),Math.cos(sc-SEC[q])));if(d<b){b=d;k=q;}}return k;};
+ const wA=k=>{const S=SEC[k];return Math.atan2(2*Math.sin(S)-Math.cos(S),Math.cos(S)+2*Math.sin(S));};
+ for(const k of ['e','se','sw','nw']){const room=sg=>{let t=0;while(t<1.5&&secOf(wA(k)+sg*(t+.01))===k)t+=.01;return t;},rp=room(1),rn=room(-1),sk=wA(k)+(rp>=rn?1:-1)*.85*Math.max(rp,rn),px=26,py=26,D=5.5;/* x 14~15.5 시험 벽을 피해 26,26 */
+  ok(secOf(sk)===k,'R765 setup '+k);
+  const E=engine({px,py,enemies:[{id:'sk',x:px+Math.cos(sk)*D,y:py+Math.sin(sk)*D},{id:'on',x:px+Math.cos(wA(k))*(D+1.5),y:py+Math.sin(wA(k))*(D+1.5)}]});
+  E.ctx.special();E.run(2);const w=E.hits.filter(h=>h.s.r590==='wind').map(h=>h.id);
+  ok(w.includes('on')&&!w.includes('sk'),'R765 Q 검풍 '+k+': 8방향 칸 중심으로만 나간다(옆 적은 안 맞고 줄 위 적은 맞음) '+w);
+  const F=engine({px,py,enemies:[{id:'sk',x:px+Math.cos(sk)*D,y:py+Math.sin(sk)*D}]});
+  for(let i=0;i<7;i++){wave(F,'wer:r765'+k,px,py);F.run(.14);}F.run(.6);
+  ok(F.hits.filter(h=>h.s.r590==='finale').length===0,'R765 R 종섬 '+k+': 적 방향이 아니라 8방향 칸 중심 일직선(옆 적은 안 맞음)');}}
 
 console.log('R590 hwando chain CPU check: '+n+' passed');
