@@ -35,7 +35,8 @@ ok('kill quota not met yet: enemy 9 tiles away is fought as before',attacks({zon
 ok('explore zone: enemy 9 tiles away does not stop the guide',!attacks({zone:ZONES.explore},far)&&attacks({zone:ZONES.explore},near));
 ok('maze zone: enemy 9 tiles away does not stop the guide',!attacks({zone:ZONES.maze},far)&&attacks({zone:ZONES.maze},near));
 ok('door open (any zone, even B): enemy 9 tiles away does not stop the guide',!attacks({zone:ZONES.B,kills:100,portal:true},far)&&attacks({zone:ZONES.B,portal:true},near));
-ok('plaza B / tower F / hold / living lead: unchanged (fight what is in sight)',attacks({zone:ZONES.B,kills:700},far)&&attacks({zone:ZONES.F,kills:66},far)&&attacks({zone:ZONES.hold,kills:66},far)&&attacks({zone:ZONES.lead,kills:66,lead:true},far));
+// R803 이후 처치 수를 채운 탑(F)·이끄는 적 구역도 CALM(남은 조각 탑·이끄는 적은 거리 상관없이 고름) → r96/qa/r803/samong-guide-goal-cpu-check.cjs 가 본다.
+ok('plaza B / hold: unchanged (fight what is in sight); F and living lead before the kill quota: unchanged',attacks({zone:ZONES.B,kills:700},far)&&attacks({zone:ZONES.hold,kills:66},far)&&attacks({zone:ZONES.F,kills:20},far)&&attacks({zone:ZONES.lead,kills:5,lead:true},far));
 ok('outside samong: unchanged',attacks({},far));
 {const F=gc({zone:ZONES.kill,kills:20});F.ev(far);F.step();const before=F.ev('command');
  F.ev("__base=0");vm.runInContext;F.ev("void 0");

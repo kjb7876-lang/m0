@@ -29,12 +29,12 @@ const C=(()=>{const c={window:{}};c.window=c;vm.createContext(c);vm.runInContext
 const P=C.zones.last302.blocks.flatMap(b=>b.paras);
 ok(P.length===3,'정본 last302 는 3문단');
 ok(/젖은 모래 해안/.test(P[0])&&/잠에 들지도 못하고/.test(P[1])&&/보이지 않는 실에 끌리는/.test(P[2]),'문단 내용 확인');
-{const {played,run}=boot();
- const door=run(`nextScenes({id:'last302'},'pre')`);
+{const {ctx,played,run}=boot();
+ ctx.__phase='door';const door=run(`nextScenes({id:'last302'},'pre')`);ctx.__phase='route';
  ok(door.length===1&&door[0].text===P[2],'보스 문(전투 전)은 ③ 주민 습격 문단 그대로');
  ok(!/젖은 모래/.test(door.map(s=>s.text).join('')),'보스 문 글에 해안 깨어남이 없음');
  ok(/r853/.test(door[0].key),'보스 문 장면 열쇠가 새것(옛 세이브의 읽음 표시와 섞이지 않음)');
- ok(run(`nextScenes({id:'last302'},'post')`).length===0,'보스 처치 뒤 글 없음(다음 지역이 이어 받음)');
+ ctx.__phase='exit';ok(run(`nextScenes({id:'last302'},'post')`).length===0,'보스 처치 뒤 글 없음(다음 지역이 이어 받음)');ctx.__phase='route';
  ok(run(`nextScenes({id:'last303'},'pre')`)[0].text==='BASE-last303-pre','다른 지역은 그대로');
  ok(run(`nextScenes({id:'last301'},'post')`)[0].text==='BASE-last301-post','last301 처치 뒤 글 그대로');
  run(`tick(0.3)`);ok(played.length===0,'들어오자마자는 아직(0.8초 기다림)');
@@ -50,6 +50,17 @@ ok(/젖은 모래 해안/.test(P[0])&&/잠에 들지도 못하고/.test(P[1])&&/
 {const {played,run}=boot();run(`modal=true`);run(`tick(2)`);ok(played.length===0,'다른 창이 열려 있으면 기다림');run(`modal=false;tick(0.1)`);ok(played.length===0,'창 닫힌 뒤에도 0.8초 기다림');run(`tick(0.8)`);ok(played.length===1,'창 닫히고 0.8초 뒤 나옴');}
 {const {played,run}=boot();run(`layer='DREAM'`);run(`tick(2)`);ok(played.length===0,'스토리 층에서만');ok(run(`nextScenes({id:'last302'},'pre')`)[0].text==='BASE-last302-pre','다른 층 글은 그대로');}
 {const {played,run}=boot();run(`progress.STORY.last302=true`);run(`tick(2)`);ok(played.length===0,'깬 지역은 안 나옴');}
+// Codex 리뷰(#479): 영화 모드(R384)는 길·집결 단계에서 'pre' 를 바로 흘린다 → 그때는 ①②③ 순서 전체, 읽음 표시로 입장·문 앞 글은 다시 안 나옴.
+{const {ctx,played,run}=boot();const route=run(`nextScenes({id:'last302'},'pre')`);
+ ok(route.map(s=>s.text).join('\n\n')===P.join('\n\n'),'길·집결 단계의 pre 요청(영화 모드)은 ①②③ 순서 그대로');
+ ctx.__phase='boss';ok(run(`nextScenes({id:'last302'},'post')`).length===0,'영화 모드 보스 단계 post 없음');ctx.__phase='route';
+ run(`for(const s of nextScenes({id:'last302'},'pre'))readScenes.add(s.key)`);run(`tick(2)`);ok(played.length===0,'영화 모드가 읽은 뒤 입장 글 다시 안 나옴');
+ ctx.__phase='door';ok(run(`nextScenes({id:'last302'},'pre').filter(s=>!readScenes.has(s.key))`).length===0,'영화 모드가 읽은 뒤 보스 문 글도 건너뜀');}
+// Codex 리뷰(#479): R78 이 맡지 않는 방(협동 등, 상태 null)은 원래 정본 자리 그대로.
+{const {ctx,played,run}=boot();ctx.__STORYWORLD_WORLD_COMBAT_R78__={state:()=>null,controlled:()=>false};
+ ok(run(`nextScenes({id:'last302'},'pre')`)[0].text==='BASE-last302-pre','R78 밖(협동)은 pre 원래대로');
+ ok(run(`nextScenes({id:'last302'},'post')`)[0].text==='BASE-last302-post','R78 밖(협동)은 post 원래대로');
+ run(`tick(2)`);ok(played.length===0,'R78 밖은 입장 글 없음');}
 const html=src('runtime-text/index.html'),at=f=>html.indexOf('<script src="./'+f+'"></script>');
 ok(at(FILE)>at('hwando-fall-video-r617.js')&&at('hwando-fall-video-r617.js')>0,'스크립트가 해안 영상 뒤');
 ok(at(FILE)>html.indexOf('story-canon-r106.js')&&html.indexOf('world-combat-r78.js')<at(FILE),'정본·R78 뒤');

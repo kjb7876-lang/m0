@@ -20,7 +20,7 @@
 //  끄기: localStorage['storyworld.r838.passages']='{"on":false}' 뒤 새로 고침
 (()=>{'use strict';
 if(window.__STORYWORLD_PASSAGES_R838__)return;
-const REV='R838-passages-1',KEY='storyworld.r838.passages',DETOUR=46;
+const REV='R838-passages-2',KEY='storyworld.r838.passages',DETOUR=46;
 const prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;}catch(_){}
 const stats={layouts:0,gaps:0,shaped:0,blocked:0,cells:0,nudged:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 // 지역 → 문간 모양 (지역 제목·원래 지형 이름은 story-maps-r171.js 머리말 표)
@@ -136,7 +136,8 @@ const wrap=r=>function(id,L){if(depth)return r?.call(this,id,L);let out;depth++;
 try{Object.defineProperty(window,HOOK,{configurable:true,enumerable:true,get(){return wrap(inner);},set(f){inner=f;}});}catch(e){fail(e);const previous=inner;window[HOOK]=function(id,L){const out=previous?.(id,L)||L;return solo()?shape(id,out):out;};}
 // 예전 저장: 영웅이 이제 벽 덩어리가 된 문간 칸에 서 있으면 엔진 복원이 엉뚱한 곳으로 옮긴다 → 복원이 끝난 바로 뒤 가장 가까운 바닥 칸 한가운데에 세운다(R830 과 같은 방식). 저장 객체는 고치지 않는다.
 function nudge(raw){try{const id=raw?.zone,P=raw?.player;if(!prefs.on||raw?.layer!=='STORY'||!STYLE[id]||!P||!Number.isFinite(P.x+P.y)||!solo())return null;
- const L=window.__STORYWORLD_EXPLORATION__?.layout?.(id,'STORY'),L0=sourceOf(id,L);if(!L0)return null;
+ let L=window.__STORYWORLD_EXPLORATION__?.layout?.(id,'STORY'),L0=sourceOf(id,L);
+ /* 지도 보관함에 다듬기 전 지도가 남아 있을 수 있다(검사용 끔/켬을 오간 뒤) — 그럴 땐 여기서 다시 다듬어 비교한다. */if(!L0&&L&&!L.passagesR838){const S=shape(id,L);if(S&&S!==L&&S.passagesR838){L0=L;L=S;}}if(!L0)return null;
  const now=new Set(L.floorCells.map(c=>K(c[0],c[1]))),was=new Set(L0.floorCells.map(c=>K(c[0],c[1]))),cx=Math.floor(P.x),cy=Math.floor(P.y);
  const gone=(x,y)=>was.has(K(x,y))&&!now.has(K(x,y)),R=.3;let hit=false;for(const[dx,dy]of[[0,0],[R,0],[-R,0],[0,R],[0,-R]])if(gone(Math.floor(P.x+dx),Math.floor(P.y+dy)))hit=true;if(!hit)return null;
  let best=null;for(let dy=-3;dy<=3;dy++)for(let dx=-3;dx<=3;dx++){const x=cx+dx,y=cy+dy;if(!now.has(K(x,y))||![[1,0],[-1,0],[0,1],[0,-1]].every(([ax,ay])=>now.has(K(x+ax,y+ay))))continue;const d=Math.hypot(x+.5-P.x,y+.5-P.y);if(!best||d<best[0])best=[d,x+.5,y+.5];}
