@@ -470,6 +470,8 @@ jobs:
         run: node r96/qa/r720/r720-cpu-check.cjs
       - name: R945 hwando ink passives (piercing ink crescent, seven ink clones for 7 s, three-hero ink finale, per-body state) CPU check
         run: node r96/qa/r945/r945-cpu-check.cjs
+      - name: R947 slayer blood passives (common piercing blood needle, blood cross-sword rain, rare lattice laser barrage, upright crosses, per-body state) CPU check
+        run: node r96/qa/r947/r947-cpu-check.cjs
       - name: R463 seven-sins boss art (one form per fight, one body height, no cut-out broom) CPU check
         run: node r96/qa/r463/r463-cpu-check.cjs
       - name: R511 empty samong rooms get a guarded memory shard CPU check
