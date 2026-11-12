@@ -464,6 +464,8 @@ jobs:
         run: node r96/qa/r701/r701-cpu-check.cjs
       - name: R850 survival play-test fixes (arena terrain lock, hospital maze skip, next-stage prefetch, moving HUD) CPU check
         run: node r96/qa/r850/r850-cpu-check.cjs
+      - name: R890 survival story tracks (story / combat focus toggle, R880 cutscene skips survival) CPU check
+        run: node r96/qa/r890/r890-cpu-check.cjs
       - name: R720 survival hero placement (I key, crystals, story-order prices, leash and range upgrades, swap rule) CPU check
         run: node r96/qa/r720/r720-cpu-check.cjs
       - name: R463 seven-sins boss art (one form per fight, one body height, no cut-out broom) CPU check
@@ -516,12 +518,16 @@ jobs:
         run: node r96/qa/r810/r810-cpu-check.cjs
       - name: R852 Bulmyeongwi night without the dirt trail band (last302/last303 only, the unlit band read as a black smoke column; other trail zones unchanged) CPU check
         run: node r96/qa/r852/r852-cpu-check.cjs
+      - name: R853 Sleepless village memory text order (last302 arrival paragraphs after the beach video, attack paragraph at the boss door, canon text unchanged) CPU check
+        run: node r96/qa/r853/r853-cpu-check.cjs
       - name: R851 region entry stall (cave-r204 decal atlas and edges-r188 edge mask read pixels from CPU canvases, no GPU sync readback) CPU check
         run: node r96/qa/r851/r851-cpu-check.cjs
       - name: R590 hwando sword chain (A draw-cut, Q wind blades, E delayed flash, R seven-strike finale; no new keys, walls/map edge, caps) CPU check
         run: node r96/qa/r590/hwando-chain-cpu-check.cjs
       - name: R601 enemy attack tempo (enemy attack body motion drawn 2x faster, strike frame kept on the damage moment, telegraphs on real time, no timing/damage change) CPU check
         run: node r96/qa/r601/attack-tempo-cpu-check.cjs
+      - name: R895 hero motion rules (priority, 0.12/0.18s commit then move-cancel, same-cast merge, dash faces its real side, stop-attack beats walk tail, late flinch dropped; drawing only) CPU check
+        run: node r96/qa/r895/r895-cpu-check.cjs
       - name: R492 lag (R409 outline bake by one distance transform instead of dozens of drawImage dilations; same rim rule, size, colours) CPU check
         run: node r96/qa/r492/r492-cpu-check.cjs
       - name: R493 lag (keep compiled shader programs pinned so material churn stops relinking the same programs) CPU check
@@ -647,6 +653,10 @@ jobs:
         run: node r96/qa/r535/hunter-arrows-cpu-check.cjs
       - name: R597 hold A to auto-cast Q W E R F T with basic attack (S D stay manual, keeps manual 77 percent bonus) CPU check
         run: node r96/qa/r597/auto-a-cpu-check.cjs
+      - name: R705 semi-auto (Space) attacks only and never walks on its own; guide keeps R115 dodge steps CPU check
+        run: node r96/qa/r705/semi-auto-cpu-check.cjs
+      - name: R706 thread dance keeps the hero under player control (clone at strike spot, no snap back to start) CPU check
+        run: node r96/qa/r706/dance-free-cpu-check.cjs
       - name: R663 QWER locked until learned with passive points, skill level widens range (+8 percent per level), auto-level buys QWER and silk dances CPU check
         run: node r96/qa/r663/skill-growth-cpu-check.cjs
       - name: R561 Lauren gravity chain (Q → gravity well pull → collapse burst, R → crush vortices; no new keys, bosses not pulled, walls respected) CPU check
@@ -675,6 +685,8 @@ jobs:
         run: node r96/qa/r801/samong-guide-calm-cpu-check.cjs
       - name: R802 samong S-02 plaza freeze (R615 student walk tint canvas marked static so 26 students stay under the Three recorder snapshot budget) CPU check
         run: node r96/qa/r802/student-tint-static-cpu-check.cjs
+      - name: R803 samong guide goals (kill quota met in tower F / lead zones → spawns outside 2.5 tiles ignored, remaining shard towers and the lead picked at any distance) CPU check
+        run: node r96/qa/r803/samong-guide-goal-cpu-check.cjs
       - name: R790 story key NPC (last303 - the youth in the mist offers gwibitang at the boss door; no gwibitang → door story does not start and the Bulmyeongwi core stays sealed; old saves/guide/survival/co-op untouched) CPU check
         run: node r96/qa/r790/r790-cpu-check.cjs
       - name: R791 story key NPC 2 (last305 - the defeated goblin chief leaves the rose seal by the altar; no seal → exit story does not start; R790 gwibitang gate unchanged, ledgers do not mix) CPU check
