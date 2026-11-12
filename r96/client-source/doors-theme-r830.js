@@ -17,13 +17,13 @@ const ZONE={
  ep1b01:'C',ep1b08:'C',dist05:'C',cult06:'C',
  ep1b02:'D',ep1b03:'D',ep1b04:'D',murder04:'D',u205:'D',ep1b07:'D2',murder02:'D2',
  hando01:'E',hando02:'E',hando03:'E',cult04:'E',dist00:'E',ep1a09b:'E',kair01:'E',
- cult03:'F',kair07:'F',u206:'F',kair02:'F',
+ cult03:'F',kair07:'F',u206:'F',kair02:'F',u201:'F',u203:'F',u204:'F',/* 3부 기계·디스토피아(props-era-audit-r830) */
  u202:'G',
  dist01:'H',cult05:'H',cult01:'H',cult02:'H',ep1b09:'H',kair08:'H',dist02:'H',
- dist04:'I',kair04:'I',kair09:'I',kair10:'I',dist06:'I',
- dist03:'J',ep1a10:'J',murder01:'J',murder03:'J',
+ dist03:'I',last301:'I',dist04:'I',kair04:'I',kair09:'I',kair10:'I',dist06:'I',
+ ep1a10:'J',murder01:'J',murder03:'J',
  last305:'K',kair05:'K',last304:'K',kair06:'K',
- u201:'L',u203:'L',u204:'L',kair03:'L',last301:'L'};
+ kair03:'L'};
 // 검수(7분야 평균 7.77 초과)를 통과해 assets/r830/doors 에 들어온 묶음만. 파일: <묶음>-a.webp, <묶음>-b.webp
 const READY=new Set([]);
 const stats={leaves:0,pending:0,fallback:0};
