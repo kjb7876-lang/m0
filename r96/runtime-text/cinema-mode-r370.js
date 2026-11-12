@@ -167,7 +167,7 @@ try{const R=window.__STORYWORLD_GUIDE_FRAGMENT_R365__;if(R&&typeof R.hold==='fun
 // 출구에서 머물기: 고른 문장이 1.3배속으로도 25초 넘게 남았으면 길잡이의 지역 이동을 최대 40초 늦춘다(직접 조작·복원·사망 귀환은 그대로).
 let lingerP=null;
 try{if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=function(id,from,opt){
-  try{if(prefs.on&&G('guide',false)&&!opt?.restore&&backlogSecs()>25){if(lingerP)return lingerP;stats.lingers++;const self=this,args=arguments,t0=now();
+  try{if(prefs.on&&G('guide',false)&&!opt?.restore&&!opt?.travel777R72&&backlogSecs()>25){if(lingerP)return lingerP;stats.lingers++;const self=this,args=arguments,t0=now();
     try{if(typeof toast==='function')toast('서사를 마저 듣는 중…',2);}catch(_){}
     lingerP=new Promise(res=>{const w=()=>{if(!prefs.on||!G('guide',false)||backlogSecs()<8||now()-t0>LINGER_MAX){lingerP=null;res(base.apply(self,args));}else setTimeout(w,500);};setTimeout(w,500);});return lingerP;}}catch(e){fail(e);}
   return base.apply(this,arguments);};}}catch(e){fail(e);}
