@@ -516,6 +516,8 @@ jobs:
         run: node r96/qa/r810/r810-cpu-check.cjs
       - name: R852 Bulmyeongwi night without the dirt trail band (last302/last303 only, the unlit band read as a black smoke column; other trail zones unchanged) CPU check
         run: node r96/qa/r852/r852-cpu-check.cjs
+      - name: R853 Sleepless village memory text order (last302 arrival paragraphs after the beach video, attack paragraph at the boss door, canon text unchanged) CPU check
+        run: node r96/qa/r853/r853-cpu-check.cjs
       - name: R851 region entry stall (cave-r204 decal atlas and edges-r188 edge mask read pixels from CPU canvases, no GPU sync readback) CPU check
         run: node r96/qa/r851/r851-cpu-check.cjs
       - name: R590 hwando sword chain (A draw-cut, Q wind blades, E delayed flash, R seven-strike finale; no new keys, walls/map edge, caps) CPU check
