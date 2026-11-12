@@ -44254,8 +44254,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6574736,
-      "sha256": "6b23edac88fc7e1237d51c0011aa9d4ac2270c7f2acf946f06be695501334483"
+      "bytes": 6574778,
+      "sha256": "11aa392e4fe824729c582d4c07dd3c264faec81e4662d7109bcef9e5880bdb63"
     },
     {
       "path": "intro-r140.js",
@@ -44533,6 +44533,11 @@
       "sha256": "613aa1d9a1efd57c85440ce0347ee6b9e039d54440da5161130c86a82be9e633"
     },
     {
+      "path": "outcrops-r839.js",
+      "bytes": 16828,
+      "sha256": "601b12d0d919f471fc7b2b3317fc8f4285b1698cb86270716ffcbd79f5f497d1"
+    },
+    {
       "path": "painted-vfx-data-r87.js",
       "bytes": 3052,
       "sha256": "d463255e4a8dab4a43f72c9ea3343897103faca3356bb7c908b639b190866333"
@@ -44549,8 +44554,8 @@
     },
     {
       "path": "passages-r838.js",
-      "bytes": 21428,
-      "sha256": "b45bb07c36b0b7aa5672df99253e37517089c38cc6509f176fad81cca91c9bb0"
+      "bytes": 21828,
+      "sha256": "a8dcd2b222d1bb00a02006b652f1666ea9a9b7f25bf7573a0245e8b52b1c9401"
     },
     {
       "path": "perf-groups-r266.js",
@@ -45273,9 +45278,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9054,
-  "totalBytes": 1239761686,
-  "webHTMLSha256": "6b23edac88fc7e1237d51c0011aa9d4ac2270c7f2acf946f06be695501334483",
+  "fileCount": 9055,
+  "totalBytes": 1239778956,
+  "webHTMLSha256": "11aa392e4fe824729c582d4c07dd3c264faec81e4662d7109bcef9e5880bdb63",
   "largest": [
     {
       "path": "index.html",

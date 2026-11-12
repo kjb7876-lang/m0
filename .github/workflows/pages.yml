@@ -771,6 +771,8 @@ jobs:
         run: node r96/qa/r830-walls/walls-cpu-check.cjs
       - name: R838 indoor doorway shapes differ per map (rooms and furniture unchanged)
         run: node r96/qa/r838-passages/passages-cpu-check.cjs
+      - name: R839 outdoor roads differ per map (rock outcrops; props and mobs unchanged)
+        run: node r96/qa/r839-outcrops/outcrops-cpu-check.cjs
       - name: R860 enemy-attack hit placement (core hit picture, R259 hero-hit not pinned to overlapping mobs) CPU check
         run: node r96/qa/r860/r860-cpu-check.cjs
       - name: Install pinned sandboxed Chromium
