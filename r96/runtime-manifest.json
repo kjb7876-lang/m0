@@ -35558,6 +35558,921 @@
       "sha256": "6ed472d6d447dbf8b82143e66d8985de8415b71e2d20cdee498de0e14748905a"
     },
     {
+      "path": "assets/r788/sfx/atk-arbelia-1.ogg",
+      "bytes": 6516,
+      "sha256": "b646f5bd27be0f80937b6c5afb0b13e7f08a3c98c812de58b04e1a9011382c54"
+    },
+    {
+      "path": "assets/r788/sfx/atk-arbelia-2.ogg",
+      "bytes": 9576,
+      "sha256": "1f3d777904ea63c68b918dd569a292dba04cd527d802f28677b0e1e2d73ebfaa"
+    },
+    {
+      "path": "assets/r788/sfx/atk-baekion-1.ogg",
+      "bytes": 6778,
+      "sha256": "1a98f3267e06302e109d84379bcd7b65207020e45836e72abd814f8df2dd9a76"
+    },
+    {
+      "path": "assets/r788/sfx/atk-baekion-2.ogg",
+      "bytes": 6897,
+      "sha256": "eddcd5e146d1f20d2903488e1672fdad9118bd09f7bf403ae798b74b4c15b0cc"
+    },
+    {
+      "path": "assets/r788/sfx/atk-balrog-1.ogg",
+      "bytes": 7811,
+      "sha256": "830c94b4a518a29ba5ae374e8ff0fbcdd89ee35e3915cabf0fafdb5f574778a2"
+    },
+    {
+      "path": "assets/r788/sfx/atk-balrog-2.ogg",
+      "bytes": 7324,
+      "sha256": "bd1f88bb1ae09d1a4797109ef61be63b0b8b90eb8097971a00225518eead0c7a"
+    },
+    {
+      "path": "assets/r788/sfx/atk-beelzebub-1.ogg",
+      "bytes": 7323,
+      "sha256": "f7fb37685efcd7e913432d073db2f7007383078972d7ec4ec5599e07f8175272"
+    },
+    {
+      "path": "assets/r788/sfx/atk-beelzebub-2.ogg",
+      "bytes": 6795,
+      "sha256": "5130cbce461479e4a42070a67e77a9c7df9c30269052b3204d8040c796958326"
+    },
+    {
+      "path": "assets/r788/sfx/atk-bluelight-1.ogg",
+      "bytes": 7021,
+      "sha256": "1da7695947df6574a47f8fd1c17a218476e007cd8049d5b477f36a38a3a573d8"
+    },
+    {
+      "path": "assets/r788/sfx/atk-bluelight-2.ogg",
+      "bytes": 8156,
+      "sha256": "855097069c5151e08e48f8e811a6d96d665f8a6151ffd93d146e8a92d6e9ddd3"
+    },
+    {
+      "path": "assets/r788/sfx/atk-bootloader-1.ogg",
+      "bytes": 8201,
+      "sha256": "2a242293157e218d23772ddba62753467877f1e0612608ffa34394ac7b477a0f"
+    },
+    {
+      "path": "assets/r788/sfx/atk-bootloader-2.ogg",
+      "bytes": 8413,
+      "sha256": "ea0bc5b059b0452586ff9cd63d6250a84095c6fe4a2d77baa7492c42bc1c6355"
+    },
+    {
+      "path": "assets/r788/sfx/atk-chairman-1.ogg",
+      "bytes": 7636,
+      "sha256": "83522d36edddc2a9769ce542097ce34ce99ab34c86ef73725c752830b5c2fb29"
+    },
+    {
+      "path": "assets/r788/sfx/atk-chairman-2.ogg",
+      "bytes": 7926,
+      "sha256": "5d3b2c7326d7928e7f2af7348af6dcfbf05ea0e14047d34c32723a9e07075122"
+    },
+    {
+      "path": "assets/r788/sfx/atk-choir-1.ogg",
+      "bytes": 7445,
+      "sha256": "6b43a0f6fcff2bbc1568d262a1caff7887196192e7a49ea4fbb0838e7105fe62"
+    },
+    {
+      "path": "assets/r788/sfx/atk-choir-2.ogg",
+      "bytes": 7410,
+      "sha256": "59bdf2131b55ae76cc541f24f30f4853c3ac2cf47ac5709f3356fe51944ae06a"
+    },
+    {
+      "path": "assets/r788/sfx/atk-controller-1.ogg",
+      "bytes": 9219,
+      "sha256": "4784a6db5efc9cc68972fb2cbf7c7399cfd8164ed77f600e5cb690cbd6c57065"
+    },
+    {
+      "path": "assets/r788/sfx/atk-controller-2.ogg",
+      "bytes": 8116,
+      "sha256": "b544243e31c229d16d1c77902b22ce75fbe7afd2cf9df08c0805f0dc67025837"
+    },
+    {
+      "path": "assets/r788/sfx/atk-cultleader-1.ogg",
+      "bytes": 7332,
+      "sha256": "25246766aaa2c838073b393b181e173bccac99ef4544b4a319c80cad72db5c6d"
+    },
+    {
+      "path": "assets/r788/sfx/atk-cultleader-2.ogg",
+      "bytes": 7483,
+      "sha256": "09ecfa5fb6b693431a0a943b1f6f8cd2ea91a0300e4ce50559181e33254177d7"
+    },
+    {
+      "path": "assets/r788/sfx/atk-gate01-1.ogg",
+      "bytes": 8425,
+      "sha256": "2e899b8c490dbd636d102fa052fa574c2e1d466d61002d89a38d40ece2183846"
+    },
+    {
+      "path": "assets/r788/sfx/atk-gate01-2.ogg",
+      "bytes": 8603,
+      "sha256": "71d8368807ecff1abdc57ece3afc51eff84224aa8ab5764943088b6a5b0e83d7"
+    },
+    {
+      "path": "assets/r788/sfx/atk-gate02-1.ogg",
+      "bytes": 8484,
+      "sha256": "7300407a876bc09de325d86fea889f0e3959a2c4412a728d8acd4a8898094477"
+    },
+    {
+      "path": "assets/r788/sfx/atk-gate02-2.ogg",
+      "bytes": 8424,
+      "sha256": "8b614b109d1c4ba459ebbba5e12b78fea42a4634edc14f8f28ede5684ec18307"
+    },
+    {
+      "path": "assets/r788/sfx/atk-gate04-1.ogg",
+      "bytes": 7871,
+      "sha256": "ec7dcb9a5d06e1f4f1adbb5c965fcc68279b66b737e47397d86c398106836b60"
+    },
+    {
+      "path": "assets/r788/sfx/atk-gate04-2.ogg",
+      "bytes": 7789,
+      "sha256": "d73fb62c8b64f5dcebf4116cda9efd606a149e6554d65a462293cae5f4db162a"
+    },
+    {
+      "path": "assets/r788/sfx/atk-gate06-1.ogg",
+      "bytes": 6333,
+      "sha256": "a8f0f6425cd445695d535829e2690bcb1ebf1ae1fc048366dbe984c6b51aa858"
+    },
+    {
+      "path": "assets/r788/sfx/atk-gate06-2.ogg",
+      "bytes": 6432,
+      "sha256": "b501d0f0becb1e6877375d636358c61b6eecf345ff2e7e4bddcb603a5bc4ac80"
+    },
+    {
+      "path": "assets/r788/sfx/atk-goblin-1.ogg",
+      "bytes": 6920,
+      "sha256": "91767d77f5bc008ce011a58bca09ae0c4d8250a47576e6ff8a833d2a90aa4749"
+    },
+    {
+      "path": "assets/r788/sfx/atk-goblin-2.ogg",
+      "bytes": 7313,
+      "sha256": "5cacc5ea2aab372248cf19b1278d570993424ebe6df652c8c2ed1494b916e0f7"
+    },
+    {
+      "path": "assets/r788/sfx/atk-gravekeeper-1.ogg",
+      "bytes": 7661,
+      "sha256": "9733386fa33a336e96e32e8afd9bcb1f172a5bfa8aeac8c9f5a9a63dd211647f"
+    },
+    {
+      "path": "assets/r788/sfx/atk-gravekeeper-2.ogg",
+      "bytes": 6963,
+      "sha256": "d9579d09e20d7fd63fb49a9e831515ac39123e24dd3b954bb7b50768dfddcf0b"
+    },
+    {
+      "path": "assets/r788/sfx/atk-hanrian-1.ogg",
+      "bytes": 7261,
+      "sha256": "20f0dcebc5fcc2007a08ea2fe777481cb2c24d6cc1965543abc462c466b6526e"
+    },
+    {
+      "path": "assets/r788/sfx/atk-hanrian-2.ogg",
+      "bytes": 8154,
+      "sha256": "bca401e48f50d9b9553c7c4adaf5e4dda99ddf1a33a31875c6752cde46dbb828"
+    },
+    {
+      "path": "assets/r788/sfx/atk-knight-1.ogg",
+      "bytes": 7753,
+      "sha256": "063845270ede77c2fa4c4aa089aa259b8c1511eb5a29a036911490dfc813252d"
+    },
+    {
+      "path": "assets/r788/sfx/atk-knight-2.ogg",
+      "bytes": 7828,
+      "sha256": "69749c377e91b7990023525cf14edada519749c585d5be7d47d89a026a4081c5"
+    },
+    {
+      "path": "assets/r788/sfx/atk-leviathan-1.ogg",
+      "bytes": 8498,
+      "sha256": "5a4322a49eb237eee6165cae47e7cd7a5aa49c4e3aa21e2d4e610811fabc1c44"
+    },
+    {
+      "path": "assets/r788/sfx/atk-leviathan-2.ogg",
+      "bytes": 8631,
+      "sha256": "dd9466089ed83fe7c35b521221ad846c69db8e748d77686bb5e19068af11ed1e"
+    },
+    {
+      "path": "assets/r788/sfx/atk-lucifer-1.ogg",
+      "bytes": 9151,
+      "sha256": "acfc53aeda5d43b1e5aa2a8e1b2f588e2b22911b294fb107436749a5961315e0"
+    },
+    {
+      "path": "assets/r788/sfx/atk-lucifer-2.ogg",
+      "bytes": 6749,
+      "sha256": "e35b2046f4ca5fd62fbd06972b7352ec8dcf2c580ec8000c4dd364c23a603b31"
+    },
+    {
+      "path": "assets/r788/sfx/atk-nightmare-1.ogg",
+      "bytes": 8272,
+      "sha256": "5713e0a703989bb5ba11ba32d63c1983f7c097e359ab634081a4fcade20a867f"
+    },
+    {
+      "path": "assets/r788/sfx/atk-nightmare-2.ogg",
+      "bytes": 7854,
+      "sha256": "74dc685f33a1aadaa05a4d3005720107a04cad56c0dcbf8c3782a52389f86173"
+    },
+    {
+      "path": "assets/r788/sfx/atk-root-1.ogg",
+      "bytes": 8270,
+      "sha256": "115fd5cf669f398d410db0f3be460ad819d8f47d0a5fe04a1d0364443c30cdae"
+    },
+    {
+      "path": "assets/r788/sfx/atk-root-2.ogg",
+      "bytes": 8670,
+      "sha256": "986dfce74a95f6d2f75228780345082b176a6ee15c4cd081744aed6156a2d59e"
+    },
+    {
+      "path": "assets/r788/sfx/atk-satan-1.ogg",
+      "bytes": 7588,
+      "sha256": "bde3ee3297bbd23e04ac38f29258d04f838c67b74b7c9d29e11bad0f3791ac3f"
+    },
+    {
+      "path": "assets/r788/sfx/atk-satan-2.ogg",
+      "bytes": 8072,
+      "sha256": "ca3c41f97bdfd362d2db46f230b231ed672344e46f9d64cb13f3a7220a997b2c"
+    },
+    {
+      "path": "assets/r788/sfx/atk-seoyun-1.ogg",
+      "bytes": 7683,
+      "sha256": "1c6d7bb8d06d28b39d4a6c9bccf958ea4ca58197d007c26ebbb81445e30ce3ed"
+    },
+    {
+      "path": "assets/r788/sfx/atk-seoyun-2.ogg",
+      "bytes": 7726,
+      "sha256": "ed40aa2eb7ce27b0a3312bf2ecd9bbfc498b82872e266e9b36021b7098eb5b84"
+    },
+    {
+      "path": "assets/r788/sfx/atk-siren-1.ogg",
+      "bytes": 7017,
+      "sha256": "3ac1f8ad9e76623da359c8a749f0db92721d95939c7648e1b5868e4da2160576"
+    },
+    {
+      "path": "assets/r788/sfx/atk-siren-2.ogg",
+      "bytes": 7226,
+      "sha256": "8c3633387d4141216f35c11d53f40969b182b14fb8c3cc602f6c29a22a21fc31"
+    },
+    {
+      "path": "assets/r788/sfx/atk-sloth-1.ogg",
+      "bytes": 7180,
+      "sha256": "2a7ef0ed70a51a7488699b62868b950a26dbc1259761a4e374a7de05c6357824"
+    },
+    {
+      "path": "assets/r788/sfx/atk-sloth-2.ogg",
+      "bytes": 7488,
+      "sha256": "b88882d45251d3de935230894f209b6ac5770b94783a0f92e0b279311f6ffdad"
+    },
+    {
+      "path": "assets/r788/sfx/die-arbelia-1.ogg",
+      "bytes": 12554,
+      "sha256": "6131fb4ffbde626e5b019646c4d0a2dd760f8104a71b5a7fd8006455d634b3e4"
+    },
+    {
+      "path": "assets/r788/sfx/die-arbelia-2.ogg",
+      "bytes": 12580,
+      "sha256": "d11617266bbffa8a757b0f7f2ec2fd3f622f566696691c905c1cd167b8bced2e"
+    },
+    {
+      "path": "assets/r788/sfx/die-baekion-1.ogg",
+      "bytes": 8049,
+      "sha256": "5c171994004e3e1c2afbb248d90b2512e6fe8459521c53b0cff538f7f50ae68c"
+    },
+    {
+      "path": "assets/r788/sfx/die-baekion-2.ogg",
+      "bytes": 8178,
+      "sha256": "23a61360392dfbd47f42aebc5f2b178542cc1b21f826c8bf5b4a6109d64a1f6d"
+    },
+    {
+      "path": "assets/r788/sfx/die-balrog-1.ogg",
+      "bytes": 9096,
+      "sha256": "606d484826e23b16abaea8551ad9ec074b50ad4b55dddb2a0a0000e5f0ad8b0b"
+    },
+    {
+      "path": "assets/r788/sfx/die-balrog-2.ogg",
+      "bytes": 8648,
+      "sha256": "c3fbe0b19aaa711e660bbf1bec0cc8911275d4481a9e1da00406a5c438fb633d"
+    },
+    {
+      "path": "assets/r788/sfx/die-beelzebub-1.ogg",
+      "bytes": 10530,
+      "sha256": "570c40367477be4ade24b92db4cac2e5eba6880a1ae16e4b01984b9814cba81b"
+    },
+    {
+      "path": "assets/r788/sfx/die-beelzebub-2.ogg",
+      "bytes": 11508,
+      "sha256": "070df2cb58bd8421b9932de1db8cb0e2b713552c07da2d7c7293b465e2fdd02b"
+    },
+    {
+      "path": "assets/r788/sfx/die-bluelight-1.ogg",
+      "bytes": 10003,
+      "sha256": "1ad4de1e2cd3b0329ac821e63ade2f2a393084b2608b7932429fb2c23569ca5b"
+    },
+    {
+      "path": "assets/r788/sfx/die-bluelight-2.ogg",
+      "bytes": 11490,
+      "sha256": "d70a895e90694137fd6e406cce25306020ead0195fec4d99722ce1ddddee7797"
+    },
+    {
+      "path": "assets/r788/sfx/die-bootloader-1.ogg",
+      "bytes": 11145,
+      "sha256": "4f5a30b762365bdc27c56b3a5335ec8f17c3f5cd46acad3187214e9afbc4ccef"
+    },
+    {
+      "path": "assets/r788/sfx/die-bootloader-2.ogg",
+      "bytes": 10218,
+      "sha256": "032a62709abbb3daa0e3b878522a90a41baaf882b28ab1867da02aeae2349923"
+    },
+    {
+      "path": "assets/r788/sfx/die-chairman-1.ogg",
+      "bytes": 13251,
+      "sha256": "7ae92c2ebf2e9e7dfd3cba0a179e3644081d0e15f63d91b58d11aab761457f7d"
+    },
+    {
+      "path": "assets/r788/sfx/die-chairman-2.ogg",
+      "bytes": 13023,
+      "sha256": "377d1858cf11e08e862235f2a293e3e480e8eb2a61438b90f3c686a7dd8247e4"
+    },
+    {
+      "path": "assets/r788/sfx/die-choir-1.ogg",
+      "bytes": 9460,
+      "sha256": "a80e375efdd804c68bf8f67798ef42533fb823683b0ebc267ef8793e723b519e"
+    },
+    {
+      "path": "assets/r788/sfx/die-choir-2.ogg",
+      "bytes": 9050,
+      "sha256": "b2e18144aaaae7a61df5108b341feda2c42cf24482e7d47ef7cbe837e41a2cbb"
+    },
+    {
+      "path": "assets/r788/sfx/die-controller-1.ogg",
+      "bytes": 10063,
+      "sha256": "527cf321e265286e10fc9ad85b21afeed75ec0fad2184b8562f329a90ac7f295"
+    },
+    {
+      "path": "assets/r788/sfx/die-controller-2.ogg",
+      "bytes": 10858,
+      "sha256": "4daca45fe2600d7411289a8d23eeec8f3c3c71d64e48af56a2d946a72177bce1"
+    },
+    {
+      "path": "assets/r788/sfx/die-cultleader-1.ogg",
+      "bytes": 9619,
+      "sha256": "bdd46634581b619166029680eb8e7de1127accd6e3eee121e44832efe54f5eab"
+    },
+    {
+      "path": "assets/r788/sfx/die-cultleader-2.ogg",
+      "bytes": 11525,
+      "sha256": "5bde46f44c6d31125f735ac2a8770e092b115b31f2562269e1f20ef7bfc0425b"
+    },
+    {
+      "path": "assets/r788/sfx/die-gate01-1.ogg",
+      "bytes": 11651,
+      "sha256": "af74bac0854f014b86eba6b3dfed5f314ddb1c5657101e4109b15e0f41039b68"
+    },
+    {
+      "path": "assets/r788/sfx/die-gate01-2.ogg",
+      "bytes": 10728,
+      "sha256": "c5284857e6e2b12074304c7c2b11bbb16de3f33e01b4e4fc4ade424d41293dd2"
+    },
+    {
+      "path": "assets/r788/sfx/die-gate02-1.ogg",
+      "bytes": 12415,
+      "sha256": "f59790b6a44c330b057cec1bc61acfd3c4671e84f20fba708f9c52d690b1cf00"
+    },
+    {
+      "path": "assets/r788/sfx/die-gate02-2.ogg",
+      "bytes": 9661,
+      "sha256": "fc212e98ebd1d8bd6e96cf4972e7f7318cdf83ceb03c85d47b5eb57ceef685e0"
+    },
+    {
+      "path": "assets/r788/sfx/die-gate04-1.ogg",
+      "bytes": 10593,
+      "sha256": "a1e20b58f2f713f865988d871e561984f2f20c260705d15a1d5019f460848bd1"
+    },
+    {
+      "path": "assets/r788/sfx/die-gate04-2.ogg",
+      "bytes": 10037,
+      "sha256": "98d006661df0ecd14ed8a96ee78aee65f99fe6fa307c76ed67275007c77316bd"
+    },
+    {
+      "path": "assets/r788/sfx/die-gate06-1.ogg",
+      "bytes": 9185,
+      "sha256": "f4d8c04b5127bd551da73e3588797d1a0f21c83d3e7fdf8b0476b75ab9159cf6"
+    },
+    {
+      "path": "assets/r788/sfx/die-gate06-2.ogg",
+      "bytes": 7637,
+      "sha256": "6e1c0ef2378097a90e5b5dcdcdf86fc2df9bf9608805c4897db761d124725fe8"
+    },
+    {
+      "path": "assets/r788/sfx/die-goblin-1.ogg",
+      "bytes": 9742,
+      "sha256": "12e2e539625348192e6849eada76c2ace859cb68a5bd66706c937a8b1cbf10b5"
+    },
+    {
+      "path": "assets/r788/sfx/die-goblin-2.ogg",
+      "bytes": 5939,
+      "sha256": "7ff0c0d144de186c6b20aa6c1bc2ff8825dbb3469a324acea562d73d4a29fcfe"
+    },
+    {
+      "path": "assets/r788/sfx/die-gravekeeper-1.ogg",
+      "bytes": 6154,
+      "sha256": "c34dc011fe0f162155c0e813a5b3544fb7ca193c8432075fdf50c911bb0e383d"
+    },
+    {
+      "path": "assets/r788/sfx/die-gravekeeper-2.ogg",
+      "bytes": 9037,
+      "sha256": "a2a27bcfdff740ce44abe272e6098734d56e8295ac59324e5b63566e34eada26"
+    },
+    {
+      "path": "assets/r788/sfx/die-hanrian-1.ogg",
+      "bytes": 8773,
+      "sha256": "ecaf84caf7f3f1981282b3a672e0c9279827441c234a74170044f2f680ec8a6a"
+    },
+    {
+      "path": "assets/r788/sfx/die-hanrian-2.ogg",
+      "bytes": 9530,
+      "sha256": "fa3ea51ada9fcfd6c281f3ea191cae4ac04cfba1a652d24777f5fe779dfd4237"
+    },
+    {
+      "path": "assets/r788/sfx/die-knight-1.ogg",
+      "bytes": 9268,
+      "sha256": "1929519ff95620b1b045aee76e9c2f29a398f3a47bd9728a3e1c34661a714711"
+    },
+    {
+      "path": "assets/r788/sfx/die-knight-2.ogg",
+      "bytes": 9611,
+      "sha256": "4163f06651733a41e597fb003daf8e13b75895f7e1e20b90351e49b532803001"
+    },
+    {
+      "path": "assets/r788/sfx/die-leviathan-1.ogg",
+      "bytes": 9623,
+      "sha256": "5ace967c22f4370944d9b19c7ffc7ad23eee82f6b0c621ff6ffe7b2f2ec722e7"
+    },
+    {
+      "path": "assets/r788/sfx/die-leviathan-2.ogg",
+      "bytes": 8698,
+      "sha256": "317aac049d882acb8e182a9f3cf14497e481017eb48ebd9adefae06a167dfce4"
+    },
+    {
+      "path": "assets/r788/sfx/die-lucifer-1.ogg",
+      "bytes": 5125,
+      "sha256": "c8c76cc824fc40c9e16b2a2b8e8acfbe9c9f6a7dd04885eac641beb7853b5061"
+    },
+    {
+      "path": "assets/r788/sfx/die-lucifer-2.ogg",
+      "bytes": 8439,
+      "sha256": "ed908bcf342f7e3e1d101c698b1251d9704b453e57d17b29719d24c5fa906939"
+    },
+    {
+      "path": "assets/r788/sfx/die-nightmare-1.ogg",
+      "bytes": 8627,
+      "sha256": "d9de377ac627080402d864254019c98006c6cd86faa0492be234bde62c3b4bd3"
+    },
+    {
+      "path": "assets/r788/sfx/die-nightmare-2.ogg",
+      "bytes": 8638,
+      "sha256": "53133c527377b9d13610a4a3d22a728cab9aee2c1f20f15551091030e8e2b86e"
+    },
+    {
+      "path": "assets/r788/sfx/die-root-1.ogg",
+      "bytes": 9775,
+      "sha256": "ef1c1f4fe1e5953d6fa3e27a20976ea0ef9aa9cb1c652b88322dce67b9ee94f5"
+    },
+    {
+      "path": "assets/r788/sfx/die-root-2.ogg",
+      "bytes": 10966,
+      "sha256": "b982696e2a28c32341d81ff227808bba6e0910aa3985a471991747923996832b"
+    },
+    {
+      "path": "assets/r788/sfx/die-satan-1.ogg",
+      "bytes": 5723,
+      "sha256": "621bfac59ee1dfea123563f8ad1f18e9f110021ef925cf50d2aca00d4f007787"
+    },
+    {
+      "path": "assets/r788/sfx/die-satan-2.ogg",
+      "bytes": 11779,
+      "sha256": "12d638e3753362c4e77ee5a761400120c64eb73b554decc35e2f897a866aa37e"
+    },
+    {
+      "path": "assets/r788/sfx/die-seoyun-1.ogg",
+      "bytes": 8752,
+      "sha256": "a45514cf18e1cc40361307c14dc09b4bf310222de697bfd33abfc5aae7b4c815"
+    },
+    {
+      "path": "assets/r788/sfx/die-seoyun-2.ogg",
+      "bytes": 6732,
+      "sha256": "4d0342ce61be39f23ad1e054aefd08279bd3785846e5d89eccc2932b06631902"
+    },
+    {
+      "path": "assets/r788/sfx/die-siren-1.ogg",
+      "bytes": 9390,
+      "sha256": "5060c11995eeb5dfa9ee54010b8450d796bd07715d308e574540832f301d4e7b"
+    },
+    {
+      "path": "assets/r788/sfx/die-siren-2.ogg",
+      "bytes": 10660,
+      "sha256": "fc948c1373fd9a274d0c15ca4c292dcfb2e8bb14eb9d446435043eba7f08da2d"
+    },
+    {
+      "path": "assets/r788/sfx/die-sloth-1.ogg",
+      "bytes": 8435,
+      "sha256": "88ba2c9a00203e6e28f2a862d316c0d371df4ca14e9d7385341a67bad79ec373"
+    },
+    {
+      "path": "assets/r788/sfx/die-sloth-2.ogg",
+      "bytes": 9947,
+      "sha256": "d9472314a9ee88eff65b38e17f3c1ae5d32d8a4cda04cd29e5079cf1ff83192f"
+    },
+    {
+      "path": "assets/r788/sfx/hit-arbelia-1.ogg",
+      "bytes": 7051,
+      "sha256": "5a9020b8166d553a601a0118a7b3f7ca9b65892bc18b982f345a9ef1a035d066"
+    },
+    {
+      "path": "assets/r788/sfx/hit-arbelia-2.ogg",
+      "bytes": 6609,
+      "sha256": "b5e5430606b5fa4c6c18d3db1b71da73c1f94db68cd3976524e75a77010cb052"
+    },
+    {
+      "path": "assets/r788/sfx/hit-arbelia-3.ogg",
+      "bytes": 6858,
+      "sha256": "6b964ac7208c14d2421ec09987aa04e6b796e3a83bbf297d621c207d07824cd1"
+    },
+    {
+      "path": "assets/r788/sfx/hit-baekion-1.ogg",
+      "bytes": 5644,
+      "sha256": "fe1f1777eae028285f537654497120da879f3d748c3266d638015244a7758b8a"
+    },
+    {
+      "path": "assets/r788/sfx/hit-baekion-2.ogg",
+      "bytes": 6060,
+      "sha256": "2df7a7f96859d570733bc3d3ce9c1c4cce7eb7dea8c8ef9c242bb26345ca22e8"
+    },
+    {
+      "path": "assets/r788/sfx/hit-baekion-3.ogg",
+      "bytes": 5679,
+      "sha256": "efd702458b658183d828ac1b283fca4f57f3a3de70efdb85a47f1bae9257af26"
+    },
+    {
+      "path": "assets/r788/sfx/hit-balrog-1.ogg",
+      "bytes": 6473,
+      "sha256": "8c886d7e062333ce715b357a0124bd3b9183c8b709ca96d56d95f57d5f394f27"
+    },
+    {
+      "path": "assets/r788/sfx/hit-balrog-2.ogg",
+      "bytes": 6385,
+      "sha256": "0ac3fcc468223c17e3794d91fde09d48a2fa242718dd3ef04b8199de84c53f6a"
+    },
+    {
+      "path": "assets/r788/sfx/hit-balrog-3.ogg",
+      "bytes": 6371,
+      "sha256": "cc49becf8d49a642e8bbd3e5edda279346a593093b27ee84fb947016e425cc94"
+    },
+    {
+      "path": "assets/r788/sfx/hit-beelzebub-1.ogg",
+      "bytes": 6446,
+      "sha256": "7ea11f7e0900573ddadaabd64f1bbca9c39850610629a4338e8d65543e34fdfb"
+    },
+    {
+      "path": "assets/r788/sfx/hit-beelzebub-2.ogg",
+      "bytes": 6342,
+      "sha256": "4b18d6507fe9915082084002ab3b17d14f2c1a748ae8e1d9af46c4af94d6b254"
+    },
+    {
+      "path": "assets/r788/sfx/hit-beelzebub-3.ogg",
+      "bytes": 6410,
+      "sha256": "3a5095c00673ae2e5997075b485a37a59b56adc0539bad80f6855e9b2764f35c"
+    },
+    {
+      "path": "assets/r788/sfx/hit-bluelight-1.ogg",
+      "bytes": 5694,
+      "sha256": "06de800d2be921b37c7d72b69d3352651be7a1b81edb104d5bd4d090feb79496"
+    },
+    {
+      "path": "assets/r788/sfx/hit-bluelight-2.ogg",
+      "bytes": 5687,
+      "sha256": "0f3c8ac29bab8c91a38b17091fb1c06d5af628059f1eee72416fcce626e4dd4d"
+    },
+    {
+      "path": "assets/r788/sfx/hit-bluelight-3.ogg",
+      "bytes": 5609,
+      "sha256": "2da9886d1b8d92e9ad424dd9fb294c6cc8be49e22e7e16b172ca5ca900194715"
+    },
+    {
+      "path": "assets/r788/sfx/hit-bootloader-1.ogg",
+      "bytes": 6243,
+      "sha256": "dd293f6fd656d064f54e31bc9ca3c6960f77773e1f7db729e8fcae6bff299be0"
+    },
+    {
+      "path": "assets/r788/sfx/hit-bootloader-2.ogg",
+      "bytes": 6149,
+      "sha256": "d3b29236181aa99778f0ae8672f71e9eb2326f7f2794277b1f9f397c193b32e7"
+    },
+    {
+      "path": "assets/r788/sfx/hit-bootloader-3.ogg",
+      "bytes": 6266,
+      "sha256": "b5e03160e1fcfe2ff7a4f1147952989d1fb644ff3f7e5551d07051944619631b"
+    },
+    {
+      "path": "assets/r788/sfx/hit-chairman-1.ogg",
+      "bytes": 5992,
+      "sha256": "2579a469c96618910fee340b25a79aea0a0779bd7f3272dcd511c723b93949cd"
+    },
+    {
+      "path": "assets/r788/sfx/hit-chairman-2.ogg",
+      "bytes": 5714,
+      "sha256": "cc99fffd5823f8b094b81b76ea1418af37ca3cfa5fe4b1d25b6ccbf56683f6b4"
+    },
+    {
+      "path": "assets/r788/sfx/hit-chairman-3.ogg",
+      "bytes": 5902,
+      "sha256": "b094cb9dab1239f61f6bede88c2eed3dff9a315dfe0988ad50f2af7ad9285138"
+    },
+    {
+      "path": "assets/r788/sfx/hit-choir-1.ogg",
+      "bytes": 5900,
+      "sha256": "9db3988c8264edba70b9f6384ef5f5b09745957e042738cec9f59dd0357c4d49"
+    },
+    {
+      "path": "assets/r788/sfx/hit-choir-2.ogg",
+      "bytes": 6006,
+      "sha256": "99ea984ac07635cd0924ab4224af3c03ae135034572535bae71c91d1dfdfe4ff"
+    },
+    {
+      "path": "assets/r788/sfx/hit-choir-3.ogg",
+      "bytes": 5944,
+      "sha256": "0f1d8fd895b9ef865711c5501a7e2cdb9b14d97704fc4b09e8685cdf4085831a"
+    },
+    {
+      "path": "assets/r788/sfx/hit-controller-1.ogg",
+      "bytes": 6251,
+      "sha256": "03f81266812e9a05b38c0b8c243a85acd4dc8351c0b4326c3c69f912bbfc8a64"
+    },
+    {
+      "path": "assets/r788/sfx/hit-controller-2.ogg",
+      "bytes": 6753,
+      "sha256": "e6e6a9a80701599b9e005c0c6dd7e9dec64e599ff9b6c5b65f85d1e4344ad48a"
+    },
+    {
+      "path": "assets/r788/sfx/hit-controller-3.ogg",
+      "bytes": 6266,
+      "sha256": "64b3a4326324bbcfc6c04071a56e5b0316698d0a9e78fd44e38f2123688cce12"
+    },
+    {
+      "path": "assets/r788/sfx/hit-cultleader-1.ogg",
+      "bytes": 6319,
+      "sha256": "2ffb43fa46da228e49d151f17957d821b42925e9efc9913b13e61282a40f0aea"
+    },
+    {
+      "path": "assets/r788/sfx/hit-cultleader-2.ogg",
+      "bytes": 6292,
+      "sha256": "6ffc94cd74b64ef64f2c49ba23d024e2fb7c5dccfd76e4d94bdda616307acfcd"
+    },
+    {
+      "path": "assets/r788/sfx/hit-cultleader-3.ogg",
+      "bytes": 6619,
+      "sha256": "5d58cb9d2005365d1e6017fa4c37e089f5cc5ba7c3021f66c01498071fc99ff5"
+    },
+    {
+      "path": "assets/r788/sfx/hit-gate01-1.ogg",
+      "bytes": 6480,
+      "sha256": "03eaed9028e2d1fd42b55e3f06d4ef0fd238269abab14768a181e8ec191b3b99"
+    },
+    {
+      "path": "assets/r788/sfx/hit-gate01-2.ogg",
+      "bytes": 6326,
+      "sha256": "76ae9120e6ff1c6ab49db26e2777db5e6b239dde6f44e1a3391bc7a9c9d02e67"
+    },
+    {
+      "path": "assets/r788/sfx/hit-gate01-3.ogg",
+      "bytes": 6436,
+      "sha256": "25c54c619c0cc962025048351a54befcd67bdd2ea5daa00256a11d0c3b60c482"
+    },
+    {
+      "path": "assets/r788/sfx/hit-gate02-1.ogg",
+      "bytes": 5747,
+      "sha256": "8638251ccfdb8ecba7706ee3cae04328728d0006fabea41676d8c19d72545ac3"
+    },
+    {
+      "path": "assets/r788/sfx/hit-gate02-2.ogg",
+      "bytes": 5739,
+      "sha256": "6e091eee0476b817ffe0c6dccbdbda811fa6edcf0f04a4576e2860f1fe2aee12"
+    },
+    {
+      "path": "assets/r788/sfx/hit-gate02-3.ogg",
+      "bytes": 5814,
+      "sha256": "64898ec53b1ed5e4c85d65ef8a65dbec727e9f1bbe29a0c37dd96cc099823137"
+    },
+    {
+      "path": "assets/r788/sfx/hit-gate04-1.ogg",
+      "bytes": 6200,
+      "sha256": "4c4958f2c36857aa166fd7ad1946b972da60c0a8e92349f45508e6142f93bcd9"
+    },
+    {
+      "path": "assets/r788/sfx/hit-gate04-2.ogg",
+      "bytes": 6739,
+      "sha256": "96fdb6ba74776ea38cdcdb0ee83b3426d7a85f95e068fa065d2d3c954161a7c8"
+    },
+    {
+      "path": "assets/r788/sfx/hit-gate04-3.ogg",
+      "bytes": 6187,
+      "sha256": "8282c80e7a6b3983b67d9c0556426201442a1e421abbd6d55e97049b41243645"
+    },
+    {
+      "path": "assets/r788/sfx/hit-gate06-1.ogg",
+      "bytes": 5261,
+      "sha256": "c7b049f547f06175de02f2d23037cf31900be37cd39db17795b72c2d152ced67"
+    },
+    {
+      "path": "assets/r788/sfx/hit-gate06-2.ogg",
+      "bytes": 5734,
+      "sha256": "64e5b8054a6dd8ab78cc1516c936d52bd358cd0efb2449054cac64bd2befd1d1"
+    },
+    {
+      "path": "assets/r788/sfx/hit-gate06-3.ogg",
+      "bytes": 5280,
+      "sha256": "fe2da55e50825a65443c505aa319a371a8ec6fdeefff3cb89eb69081e5f1d5d0"
+    },
+    {
+      "path": "assets/r788/sfx/hit-goblin-1.ogg",
+      "bytes": 6169,
+      "sha256": "88bf50bd87b71ced9310f249f2ee617a394a8d317e1d42d6b2416811b71037ac"
+    },
+    {
+      "path": "assets/r788/sfx/hit-goblin-2.ogg",
+      "bytes": 5983,
+      "sha256": "6703ad843201cefe980768c512592562f91c5b65106338ee51278905b4019bbd"
+    },
+    {
+      "path": "assets/r788/sfx/hit-goblin-3.ogg",
+      "bytes": 6266,
+      "sha256": "b8cdf58132f40f34a692e39f246d8ded2ec5d45d87e824ef2bec92a90b1f30f0"
+    },
+    {
+      "path": "assets/r788/sfx/hit-gravekeeper-1.ogg",
+      "bytes": 6239,
+      "sha256": "7ac279fb082d497f579acdd3b070851e6842d006bd068c609708085f9119abe9"
+    },
+    {
+      "path": "assets/r788/sfx/hit-gravekeeper-2.ogg",
+      "bytes": 5914,
+      "sha256": "84931ebef6387cfe15c860eb516b79c96aba9f1211ab7e9b17509542b5d61f2f"
+    },
+    {
+      "path": "assets/r788/sfx/hit-gravekeeper-3.ogg",
+      "bytes": 6216,
+      "sha256": "0b333ad58785562305bbcb667dfcf5777be5576454b7eb949ae530d58f3d4998"
+    },
+    {
+      "path": "assets/r788/sfx/hit-hanrian-1.ogg",
+      "bytes": 5712,
+      "sha256": "a47cbe45e9b64b85277d73cb207753b4486f39ebcce1385168d4fb98f63e8fac"
+    },
+    {
+      "path": "assets/r788/sfx/hit-hanrian-2.ogg",
+      "bytes": 5898,
+      "sha256": "70960e4efad3f6b8e3c0871516cd00dfa9e88aa9f39e2a6316323546db2c04d9"
+    },
+    {
+      "path": "assets/r788/sfx/hit-hanrian-3.ogg",
+      "bytes": 5716,
+      "sha256": "88bb95d23fb29258aa8337c552b97a664a7205a591ff5eaa23ca742bfbec3177"
+    },
+    {
+      "path": "assets/r788/sfx/hit-knight-1.ogg",
+      "bytes": 6400,
+      "sha256": "23654efb18c747a41d0d1373ec9a1128f10be0b74acd12a627dfa99b343fe029"
+    },
+    {
+      "path": "assets/r788/sfx/hit-knight-2.ogg",
+      "bytes": 5927,
+      "sha256": "ac54ef208b9cb1788f234e2b1f6e30e4c85eb2e77c1f94ce66b471b641fedfa5"
+    },
+    {
+      "path": "assets/r788/sfx/hit-knight-3.ogg",
+      "bytes": 6293,
+      "sha256": "82975edf5218203cca3448d4ac788e8bda6097f18e7c760a891279211ebcee85"
+    },
+    {
+      "path": "assets/r788/sfx/hit-leviathan-1.ogg",
+      "bytes": 6352,
+      "sha256": "e35d0c5016085ba7b685cd4a8b07e37629566beabce6325be964ec7e1fac3d9e"
+    },
+    {
+      "path": "assets/r788/sfx/hit-leviathan-2.ogg",
+      "bytes": 6939,
+      "sha256": "16639ea42957476095fb4ea2e5f6d6c7363b4a270a979216db9a5d0b36f88992"
+    },
+    {
+      "path": "assets/r788/sfx/hit-leviathan-3.ogg",
+      "bytes": 6478,
+      "sha256": "418e939e00bcbb8b73a22b821fdb2ef1a6f059bae84b5d82e12926846d819f4e"
+    },
+    {
+      "path": "assets/r788/sfx/hit-lucifer-1.ogg",
+      "bytes": 6625,
+      "sha256": "98f9a16b943ad4fb296c0a370227246750fe661e0f138a78eda22597a8486345"
+    },
+    {
+      "path": "assets/r788/sfx/hit-lucifer-2.ogg",
+      "bytes": 6477,
+      "sha256": "daf34fbcee1e433c9713582b02c8a786bdc23b07d0a7718a136a28ce301dae83"
+    },
+    {
+      "path": "assets/r788/sfx/hit-lucifer-3.ogg",
+      "bytes": 6613,
+      "sha256": "12f957275cd303722f4028f0cf6b072efb94336a2b916d3d557c755d5382b803"
+    },
+    {
+      "path": "assets/r788/sfx/hit-nightmare-1.ogg",
+      "bytes": 6267,
+      "sha256": "da8b14107e6b509391768bf74f410ad7431cb47675068dd547fd8abff7c0e0ba"
+    },
+    {
+      "path": "assets/r788/sfx/hit-nightmare-2.ogg",
+      "bytes": 5992,
+      "sha256": "75b19599c8502530cfcc6888aed1f33caf74ee95d1dd7df92783ac016d1fe973"
+    },
+    {
+      "path": "assets/r788/sfx/hit-nightmare-3.ogg",
+      "bytes": 6272,
+      "sha256": "dcac94d227fa256a24ce1bafaa6339013b241e1efc60ca6ba0cb6f17fce481b3"
+    },
+    {
+      "path": "assets/r788/sfx/hit-root-1.ogg",
+      "bytes": 6153,
+      "sha256": "6a58b895b9bba7a8710b50c328832bc54c0befe651dbb750c5a09638c4eb6563"
+    },
+    {
+      "path": "assets/r788/sfx/hit-root-2.ogg",
+      "bytes": 6235,
+      "sha256": "d34b1ec8639017329b3e3c61f23512ca1f4ecc8f317a81e6c7827b60a31a55bf"
+    },
+    {
+      "path": "assets/r788/sfx/hit-root-3.ogg",
+      "bytes": 6204,
+      "sha256": "bd533bb0e5d4bdc4af37c86f29515ac4e52c6b2e52a6055b0be8e2dc0458c64c"
+    },
+    {
+      "path": "assets/r788/sfx/hit-satan-1.ogg",
+      "bytes": 5921,
+      "sha256": "72b6f6c5f0a801fe3f892c0ff3cad882da87da175193a12316a708c0f69f3de2"
+    },
+    {
+      "path": "assets/r788/sfx/hit-satan-2.ogg",
+      "bytes": 5997,
+      "sha256": "055d6512945cb16160ee417c85753edbe18eac47c18a8211d149b318b2509683"
+    },
+    {
+      "path": "assets/r788/sfx/hit-satan-3.ogg",
+      "bytes": 5934,
+      "sha256": "c0be2b1ca7ad2b25d2c9cc1e1a7664b4de5913046e55ffe990e0d7c1a10a165b"
+    },
+    {
+      "path": "assets/r788/sfx/hit-seoyun-1.ogg",
+      "bytes": 5690,
+      "sha256": "695e13ea41f6d5b8e2f6fb721a93d9efb29eded0d10aeb89778806f0e4920c9f"
+    },
+    {
+      "path": "assets/r788/sfx/hit-seoyun-2.ogg",
+      "bytes": 6030,
+      "sha256": "b66dc1cf5be11dd4292c76c8fe4c4ab8dbe60ccc6388c3d14b6826370c7aaa82"
+    },
+    {
+      "path": "assets/r788/sfx/hit-seoyun-3.ogg",
+      "bytes": 5684,
+      "sha256": "64a16605e5705de0169eddef4a49c769942d1ac4f4a76940bc8f58689a9a8f76"
+    },
+    {
+      "path": "assets/r788/sfx/hit-siren-1.ogg",
+      "bytes": 5960,
+      "sha256": "2e24ad570a09c334c3b56a5bdc6709484336e4509c7748509f96279f673cdc83"
+    },
+    {
+      "path": "assets/r788/sfx/hit-siren-2.ogg",
+      "bytes": 6401,
+      "sha256": "5005f156391533b09bde458b5c1cb94f5248530f9c483dd8323e9f9d12849c7e"
+    },
+    {
+      "path": "assets/r788/sfx/hit-siren-3.ogg",
+      "bytes": 5873,
+      "sha256": "59656290993c3a3b1dae75ccba371390bbbd0cb8731b951f2ebe030e386edea0"
+    },
+    {
+      "path": "assets/r788/sfx/hit-sloth-1.ogg",
+      "bytes": 6285,
+      "sha256": "fa0dcf37d2d78e5e940d49e8680b27bcad4f0e5e3faa6c26b97bc2435fbef01b"
+    },
+    {
+      "path": "assets/r788/sfx/hit-sloth-2.ogg",
+      "bytes": 6221,
+      "sha256": "89a8c2fd31193d9846ef59cf95ffa6a03bd96fbbc5fe4e528d891fe6a280f3e5"
+    },
+    {
+      "path": "assets/r788/sfx/hit-sloth-3.ogg",
+      "bytes": 6295,
+      "sha256": "38b855018100142a9c96f9c1f6a340eee7d33a3b861b9369c0a178a0f84ecf90"
+    },
+    {
+      "path": "assets/r788/sfx/index.json",
+      "bytes": 160751,
+      "sha256": "7add2131c580bf71be33a0369f112018b4cae1e449082e79cf9e4de3d8109f97"
+    },
+    {
       "path": "assets/r790/npc/chief-bust.webp",
       "bytes": 59774,
       "sha256": "4411a9500ffc62cd0eecb1e3c7dddadc7dd07ac3bbe0e45c0aaa90c34f2d99d8"
@@ -44518,6 +45433,11 @@
       "sha256": "65421f04668da47a9096b64e1219e7c56404fe7631cc6dba883d7b7f16cd4c49"
     },
     {
+      "path": "combat-sfx-r788.js",
+      "bytes": 6553,
+      "sha256": "eec49db8c284930f4be54fc44b2b8c772419ce05d7070d39aa0ee7836f9b4be1"
+    },
+    {
       "path": "crates-r108.js",
       "bytes": 6746,
       "sha256": "1d8820f1f4884a00ff32ededbdd6d2cbcdffe831e18d9062cafb688acdcd868f"
@@ -45034,8 +45954,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6575907,
-      "sha256": "16fe3a56e2e280a556bee983ab740dfbe200ba731c8e9776216e6a6ad839b397"
+      "bytes": 6575952,
+      "sha256": "5136af1f08b6bc6dc06e7832868eba5a5c56437800d4e41d8bf9640584083b18"
     },
     {
       "path": "intro-r140.js",
@@ -45894,8 +46814,8 @@
     },
     {
       "path": "survival-r600.js",
-      "bytes": 71713,
-      "sha256": "5f8bc136836ade800d5290bbe9b15d8e983b6b326dde0c45b0de36383fe198cd"
+      "bytes": 72330,
+      "sha256": "e206858b9378440bbfbbb05436b67a1fe0a00a80a37fbba55079dc24b108cfc1"
     },
     {
       "path": "swamp-hands-r474.js",
@@ -46138,9 +47058,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9227,
-  "totalBytes": 1252004569,
-  "webHTMLSha256": "16fe3a56e2e280a556bee983ab740dfbe200ba731c8e9776216e6a6ad839b397",
+  "fileCount": 9411,
+  "totalBytes": 1253555828,
+  "webHTMLSha256": "5136af1f08b6bc6dc06e7832868eba5a5c56437800d4e41d8bf9640584083b18",
   "largest": [
     {
       "path": "index.html",
