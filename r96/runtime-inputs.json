@@ -8277,6 +8277,7 @@
     "lineart-scenes-r887.js",
     "lineart-voice-r888-data.js",
     "outcrops-r839.js",
+    "hwando-ink-r945.js",
     "projectile-size-r911.js",
     "assets/r911/clean/assets/vfx/generated/v300/barrier-sigil.webp",
     "assets/r911/clean/assets/vfx/generated/v300/time-ring.webp",
@@ -8289,8 +8290,10 @@
     "assets/r911/clean/assets/vfx/heroes/seoha-w.webp",
     "assets/r911/clean/assets/vfx/heroes/slayer-r.webp",
     "assets/r911/derived/gunner-laser-bullet.webp",
-    "cursor-r780.js",
+    "lauren-celestial-r946.js",
+    "slayer-blood-passive-r947.js",
     "qa-snapshot-r940.js",
+    "cursor-r780.js",
     "neon-storm-r951.js"
   ],
   "mediaPaths": [
@@ -9366,5 +9369,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "80cd0ed32dfa1e21792bcd2bd2c98b7d855732c84ba87a73ccb9873cd38baf06"
+  "runtimeManifestSHA256": "1878c587829aba8e883468ef1dbdd67b624c03a6ac622eee022004fa1d26995a"
 }
