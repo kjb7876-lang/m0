@@ -34813,6 +34813,31 @@
       "sha256": "f54fc90509491040bb314c058fe25166dbfaa6bb3d14f175f420d838c7ff82a7"
     },
     {
+      "path": "assets/r770/villagers/herbwife-death.webp",
+      "bytes": 65510,
+      "sha256": "3448747a41c49f36fccac92d226dcdf9f92d0a97fe65b9565a9b5538eb307aba"
+    },
+    {
+      "path": "assets/r770/villagers/herbwife-hit.webp",
+      "bytes": 41910,
+      "sha256": "79d9d23cac27f14d069b3a29721bc13a524cdafb9b175b3817f6cb2c42fda65d"
+    },
+    {
+      "path": "assets/r770/villagers/sobok-atk.webp",
+      "bytes": 70266,
+      "sha256": "97aa0064b8cd63d8eaf2b47e303a17bcb3fd976d4fecd815ad9344ccd087dc0a"
+    },
+    {
+      "path": "assets/r770/villagers/sobok-float.webp",
+      "bytes": 64544,
+      "sha256": "d556891342041b28cef346538dcbcf062abccf18dd169fb3100dafa87362f6a9"
+    },
+    {
+      "path": "assets/r770/villagers/sobok-idle.webp",
+      "bytes": 47562,
+      "sha256": "49ac13a0e0f346b3e0dfb15d00abc99faf8c5857e2bd7b9c528a258f06a97ef2"
+    },
+    {
       "path": "assets/r790/npc/chief-bust.webp",
       "bytes": 59774,
       "sha256": "4411a9500ffc62cd0eecb1e3c7dddadc7dd07ac3bbe0e45c0aaa90c34f2d99d8"
@@ -34846,6 +34871,16 @@
       "path": "assets/r790/npc/seoyun-idle6.webp",
       "bytes": 115154,
       "sha256": "ff140798841045a7c276565f7dfe1f45fbd77ef4838b4afd78100296a1ce7fd1"
+    },
+    {
+      "path": "assets/r790/npc/yigyeong-bust.webp",
+      "bytes": 34936,
+      "sha256": "a7365f3697e084dd38ad95be2145e8ac0f9d0bf7cbe00e790ed508c10fe7b009"
+    },
+    {
+      "path": "assets/r790/npc/yigyeong-idle6.webp",
+      "bytes": 53938,
+      "sha256": "b31868bd76f908bf44181a4665c73832fd599c03f09a2805e802c9ae04cfe47b"
     },
     {
       "path": "assets/r790/npc/youth-bust-d.webp",
@@ -43039,8 +43074,8 @@
     },
     {
       "path": "bulmyeongwi-r760.js",
-      "bytes": 43521,
-      "sha256": "086e563746a8b7a280d70f39a971fa8a5b3c5ad7488f6baccbf68a36525d4882"
+      "bytes": 44470,
+      "sha256": "32ee0cb2091c0b1bd5c6258e80b0b307b8b7b33f64b5930a4306344ee9338d71"
     },
     {
       "path": "canon-throw-r471.js",
@@ -44304,8 +44339,8 @@
     },
     {
       "path": "npc-r790.js",
-      "bytes": 23631,
-      "sha256": "ff086fab3934e54fb671de51c62cbb9fa75780c459f925e2d92da64c30e05a16"
+      "bytes": 25054,
+      "sha256": "b3c6c1a8092f89189b77c7a438722abef7004ab2c865749fd4f446ec5e46b996"
     },
     {
       "path": "painted-vfx-data-r87.js",
@@ -45023,8 +45058,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 9004,
-  "totalBytes": 1237099316,
+  "fileCount": 9011,
+  "totalBytes": 1237480354,
   "webHTMLSha256": "a4bd38e1c963be3a8df70262e41b6297554af072168055a6d1a1dabb5d90441f",
   "largest": [
     {
