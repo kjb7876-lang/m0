@@ -21,6 +21,14 @@ if(exists){
  ok('no ctx.filter blur/drop-shadow',!/drop-shadow|blur\(/.test(src));
  ok('Mammon zones not touched',!/ep1b06|mammon/i.test(src));
  ok('no prop position/collision writes (a.x=, .solid=, .radius=)',!/\b(?:a|p|prop)\.(?:x|y|solid|radius)\s*=[^=]/.test(src));
+
+ // 사용자 2026-11-12 13:40Z "보라색 채도 연한 거·짙은 거 + 실버로 차별화, 적색·청색 등을 이걸로": 그림에 쓰는 색은 보라 계열(색상 255~300°) 또는 무채색에 가까운 실버·검정(채도 .18 이하)만.
+ {const trip=[...src.matchAll(/'(\d{1,3}),(\d{1,3}),(\d{1,3})'/g),...src.matchAll(/rgba?\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})/g)].map(m=>[+m[1],+m[2],+m[3]]);
+  const hsl=([r,g,b])=>{r/=255;g/=255;b/=255;const mx=Math.max(r,g,b),mn=Math.min(r,g,b),l=(mx+mn)/2,d=mx-mn;if(d<1e-9)return {h:0,s:0,l};const s=d/(1-Math.abs(2*l-1));let h;if(mx===r)h=60*(((g-b)/d)%6);else if(mx===g)h=60*((b-r)/d+2);else h=60*((r-g)/d+4);if(h<0)h+=360;return {h,s,l};};
+  const bad=trip.filter(c=>{const v=hsl(c);return !(v.s<=.18||v.l>=.93||(v.h>=255&&v.h<=300));});
+  ok('palette: only violets (light/deep) and silver/near-neutral — no red or blue ('+trip.length+' colours, off: '+JSON.stringify(bad.slice(0,4))+')',trip.length>=8&&bad.length===0);
+  const vi=trip.map(hsl).filter(v=>v.s>.18&&v.h>=255&&v.h<=300);ok('palette has both a pale violet (s<.45, l>.6) and a deep violet (l<.45, s>.45)',vi.some(v=>v.s<.45&&v.l>.6)&&vi.some(v=>v.l<.45&&v.s>.45));
+  ok('palette has silver (neutral, l .7~.93)',trip.map(hsl).some(v=>v.s<=.18&&v.l>=.7&&v.l<.93));}
  function env(hero='lauren'){const hits=[],moves=[],sounds=[];const g={localStorage:{_s:{},getItem(k){return this._s[k]??null;},setItem(k,v){this._s[k]=String(v);}},console,hits,moves,sounds,Math};g.window=g;vm.createContext(g);
   vm.runInContext(`var time=0,started=true,loading=false,modal=null,storyScene=null,zoom=1,TILE=34,shake=0;
   var player={hero:${JSON.stringify(hero)},x:10,y:10,hp:100,ap:10};var room={id:'z1',engaged:true,enemies:[],props:[]};var effects=[];var wall=null;
