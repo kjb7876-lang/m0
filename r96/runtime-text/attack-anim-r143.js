@@ -42,7 +42,8 @@ function bodyOf(im){let v=bodyMemo.get(im);if(v)return v;v=180;try{const W=im.na
  hs.sort((a,b)=>a-b);const m=hs[hs.length>>1];if(m>=150&&m<=240)v=m;}catch(_){}bodyMemo.set(im,v);return v;}
 function dirNow(){try{const q=project(player.x,player.y);let best=null,bd=4;for(const e of room?.enemies||[]){if(!(e?.hp>0)||e.visible===false)continue;const d=Math.hypot(e.x-player.x,e.y-player.y);if(d<bd){bd=d;best=e;}}
  if(best){const b=project(best.x,best.y),ang=Math.atan2(b.y-q.y,b.x-q.x);if(player.hero==='gunner'){/* R425: 기억사수 좌·우 공격 그림이 각각 약 120°(±60°)를 맡는다(사용자 2026-11-08 "좋은 이미지라서") — 남은 위·아래 60°씩만 n·s */const d=Math.abs(ang)*180/Math.PI;stats.gunner120=(stats.gunner120||0)+1;return d<=60?'e':d>=120?'w':ang<0?'n':'s';}return DIR8[((Math.round(ang/(Math.PI/4))%8)+8)%8];}}catch(_){}return FOUR[player?.direction]||'s';}
-let swing={start:0,prev:0,dir:'s'};
+const perHeroR720=o=>{if(typeof Proxy!=='function'||typeof WeakMap!=='function')return o;const m=new WeakMap(),init=JSON.stringify(o),pick=()=>{let p=null;try{p=player;}catch(_){}if(p&&p.r720Ally===true){let s=m.get(p);if(!s){s=JSON.parse(init);m.set(p,s);}return s;}return o;};return new Proxy(o,{get:(_,k)=>pick()[k],set:(_,k,v)=>{pick()[k]=v;return true;},has:(_,k)=>k in pick(),deleteProperty:(_,k)=>delete pick()[k],ownKeys:()=>Reflect.ownKeys(pick()),getOwnPropertyDescriptor:(_,k)=>{const d=Object.getOwnPropertyDescriptor(pick(),k);if(d)d.configurable=true;return d;}});};/* R720: 생존 배치 영웅(player.r720Ally 몸)은 영웅마다 따로 상태를 갖는다 — 조종 영웅 상태와 섞이지 않게 */
+let swing=perHeroR720({start:0,prev:0,dir:'s'});
 function apply(rec,st){const h=player.hero;if(!HEROES.includes(h))return;
  const a=+player.attackAnim||0;if(a>swing.prev+1e-6||swing.start<=0){swing.start=a;swing.dir=dirNow();stats.swings++;}swing.prev=a;
  let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!BODY_ART.test(String(c.sourcePath||c.image?.src||'')))continue;if(c.r121Walk)return;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}
@@ -74,8 +75,8 @@ function hwandoUnify(rec,st){let best=null,bh=0;for(let i=st;i<rec.commands.leng
 function gunnerDash(rec,st){let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points)continue;const src=String(c.sourcePath||c.image?.src||'');if(!BODY_ART.test(src))continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}
  if(!best||!/r128\/gunner\/g-dash/.test(String(best.sourcePath||best.image?.src||'')))return;const d=r119Stats().walkDir||FOUR[player.direction]||'e';
  if(place(rec,st,best,'gunner',DIR8.includes(d)?d:'e',0,1,0,'walk',3)!=null)stats.gunnerDash=(stats.gunnerDash||0)+1;}
-let hurt={start:0,prev:0,dir:'s'};
-const cast={act:null,start:0,prev:0,dir:'s',t0:0};
+let hurt=perHeroR720({start:0,prev:0,dir:'s'});
+const cast=perHeroR720({act:null,start:0,prev:0,dir:'s',t0:0});
 function currentAct(){if(player.dashAnim>0)return'dash';if(player.guard)return'guard';if(player.ultimateAnim>0)return'ultimate';if(player.skillAnim>0)return'skill';return null;}
 function applyAct(rec,st){const h=player.hero,act=currentAct();if(!act||!SKILLSET[h]?.[act])return false;
  const a=act==='guard'?1:(+player[act+'Anim']||0),now=typeof time==='number'?time:performance.now()/1000;

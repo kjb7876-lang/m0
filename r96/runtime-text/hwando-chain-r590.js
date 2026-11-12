@@ -69,6 +69,10 @@ const line=(a,b)=>typeof clearLine!=='function'||clearLine(a,b,room);
 const foes=()=>{try{return typeof liveEnemies==='function'?liveEnemies():[];}catch(_){return [];}};
 const nearest=r=>{try{return typeof nearestEnemy==='function'?nearestEnemy(r):null;}catch(_){return null;}};
 const aim=()=>{try{return typeof storyAim22==='function'?storyAim22():0;}catch(_){return 0;}};
+/* R765: 쏘는 각 = 영웅 그림 8방향 칸 중심(적은 어느 칸인지만 정함) — 적에게 정확히 꺾지 않는다. 화면각 S → 월드: dx=(cosS+2sinS)/2, dy=(2sinS-cosS)/2 */
+const wSEC={e:0,se:Math.PI/4,s:Math.PI/2,sw:Math.PI*.75,w:Math.PI,nw:-Math.PI*.75,n:-Math.PI/2,ne:-Math.PI/4};
+function weaponAngle(a){const sc=Math.atan2((Math.cos(a)+Math.sin(a))*.5,Math.cos(a)-Math.sin(a));let S=0,b=9;for(const k in wSEC){const d=Math.abs(Math.atan2(Math.sin(sc-wSEC[k]),Math.cos(sc-wSEC[k])));if(d<b){b=d;S=wSEC[k];}}return Math.atan2(2*Math.sin(S)-Math.cos(S),Math.cos(S)+2*Math.sin(S));}
+
 const power=()=>{try{return typeof attackPower==='function'?attackPower():0;}catch(_){return 0;}};
 function snapshot(){return {room,player,zone:typeof zone!=='undefined'?zone:null};}
 function valid(j){return on&&isHw()&&j.room===room&&j.player===player&&(typeof zone==='undefined'||zone===j.zone);}
@@ -98,7 +102,7 @@ function onBasic(base,self,args){
  return r;}
 // ---- Q → 은빛 검풍 -------------------------------------------------------------------------------------------
 function onSpecial(base,self,args){const cd0=player?.specialCD,r=base.apply(self,args);
- try{if(on&&isHw()&&!egoOn()&&!(cd0>0)&&player.specialCD>0){lastSwing=T();const j=snapshot(),e=nearest(12),a=e?Math.atan2(e.y-player.y,e.x-player.x):aim(),pw=power(),id='q'+(++stats.winds);
+ try{if(on&&isHw()&&!egoOn()&&!(cd0>0)&&player.specialCD>0){lastSwing=T();const j=snapshot(),e=nearest(12),a=weaponAngle(e?Math.atan2(e.y-player.y,e.x-player.x):aim()),pw=power(),id='q'+(++stats.winds);
   for(let i=0;i<CFG.windCount;i++){const off=CFG.windCount>1?(i/(CFG.windCount-1)-.5)*2*CFG.windSpread:0;
    later(CFG.windDelay+i*CFG.windGap,j,()=>launch(player.x,player.y,a+off,pw,id+':'+i,j));}}}catch(e){fail(e);}
  return r;}
@@ -122,7 +126,7 @@ function onWave(x,y,o){let w=waves.get(o.castId);if(!w){w={n:0,done:false,a:fin(
  addVis({k:'wave',x,y,a:w.a+w.n*2.39996,r:fin(o.size)?o.size:3.3,n:w.n,life:.24});
  if(w.n>=CFG.waves){w.done=true;const j=snapshot(),pw=power(),id='r:'+o.castId,fa=w.a;
   addVis({k:'charge',x:player.x,y:player.y,a:fa,life:CFG.finaleDelay});later(CFG.finaleDelay,j,()=>finale(pw,id,fa));}}
-function finale(pw,id,fallback){const o={x:player.x,y:player.y},e=nearest(7),a=e?Math.atan2(e.y-o.y,e.x-o.x):fin(fallback)?fallback:aim(),end=rayEnd(o,a,rng(CFG.finaleRange));
+function finale(pw,id,fallback){const o={x:player.x,y:player.y},e=nearest(7),a=weaponAngle(e?Math.atan2(e.y-o.y,e.x-o.x):fin(fallback)?fallback:aim()),end=rayEnd(o,a,rng(CFG.finaleRange));
  stats.finales++;lastFinale={x0:o.x,y0:o.y,x1:end.x,y1:end.y,at:T()};addVis({k:'finale',a:o,b:end,life:ready('finale')?19/14:.46});addVis({k:'ring',x:end.x,y:end.y,life:FRAMES/FPS*.55,size:1.25});segHits(o,end,rng(CFG.finaleRadius),CFG.finaleMult,pw,'finale','r',id);}
 // ---- 그리기(R106 조각만, 실버+황금) --------------------------------------------------------------------------
 let budget=0;
