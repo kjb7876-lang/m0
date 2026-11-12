@@ -8293,7 +8293,10 @@
     "assets/r948/heart-fly8.webp",
     "assets/r948/heart-hit6.webp",
     "cursor-r780.js",
-    "qa-snapshot-r940.js"
+    "qa-snapshot-r940.js",
+    "hwando-ink-r945.js",
+    "lauren-celestial-r946.js",
+    "slayer-blood-passive-r947.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -9368,5 +9371,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "c3856a1498e84397d9bf03fe9c6b4a79415520a3a992cc5df5452293048e94ed"
+  "runtimeManifestSHA256": "5ff26b26f28ad41743d53035dc7f599f7472956bde358d3a76731cd184880f86"
 }
