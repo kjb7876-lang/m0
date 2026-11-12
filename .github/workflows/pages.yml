@@ -462,6 +462,8 @@ jobs:
         run: node r96/qa/r600/r600-cpu-check.cjs
       - name: R701 survival 77s choice window, difficulty, hero picker CPU check
         run: node r96/qa/r701/r701-cpu-check.cjs
+      - name: R850 survival play-test fixes (arena terrain lock, hospital maze skip, next-stage prefetch, moving HUD) CPU check
+        run: node r96/qa/r850/r850-cpu-check.cjs
       - name: R720 survival hero placement (I key, crystals, story-order prices, leash and range upgrades, swap rule) CPU check
         run: node r96/qa/r720/r720-cpu-check.cjs
       - name: R463 seven-sins boss art (one form per fight, one body height, no cut-out broom) CPU check
@@ -665,6 +667,10 @@ jobs:
         run: node r96/qa/r793/r793-cpu-check.cjs
       - name: R794 story key NPC 5 (murder04 Han Yigyeong by the boss door - tell her the truth must come out before the door story; no kill seal) CPU check
         run: node r96/qa/r794/r794-cpu-check.cjs
+      - name: R840 story side quests (an NPC at each story map entrance - purge a tainted prop or hunt named mobs, a clue drops and goes to the note book; guide and cinema mode do it without panels; story gates untouched) CPU check
+        run: node r96/qa/r840/r840-cpu-check.cjs
+      - name: R796 story NPC reply choices (one line from the NPC and three replies - a wrong reply gets a scolding plus three field mobs and the talk must be redone; story and saves unchanged) CPU check
+        run: node r96/qa/r796/r796-cpu-check.cjs
       - name: R563 Michaela genesis chain (Q → sky light pillars, R → grand pillar + halo; no new keys, upright cross only, Dots MI sheets) CPU check
         run: node r96/qa/r563/michaela-genesis-cpu-check.cjs
       - name: R564 Seoha chrono chain (time stop shell + shatter, afterimage clones, haste; no new keys, caps, Dots SE sheets) CPU check
@@ -727,6 +733,8 @@ jobs:
         run: node r96/qa/r795/r795-cpu-check.cjs
       - name: R821 hero readability on bright patterned floors (foot pool + body outline, rosehouse only) CPU check
         run: node r96/qa/r821/r821-cpu-check.cjs
+      - name: R830 thin partition walls become solid main walls
+        run: node r96/qa/r830-walls/walls-cpu-check.cjs
       - name: Install pinned sandboxed Chromium
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0
