@@ -21,7 +21,7 @@ const plan=[['needle',[.1,.22,.36]],['swords',[.25,.5,.75,1.1]],['lattice',[.45,
 for(const [k,ts] of plan){await reset();await pin();await p.waitForTimeout(300);
  const t0=await now();log[k+'-cast']=await p.evaluate(([A,k])=>{window[A].force(k);basicAttack();return {cd:player.attackCD,modal,stats:window[A].inspect().stats};},[A,k]);
  for(const dt of ts){await at(t0+dt);await p.screenshot({path:`${OUT}/${k}-${String(dt).replace('.','')}-${MODE}.png`});}
- await at(t0+2.4);log[k+'-after']=await p.evaluate(([A])=>{const i=window[A].inspect();return {stats:i.stats,errors:i.errors,lastError:i.lastError,drawCalls:i.drawCalls,boltSheet:i.boltSheet,modal,time};},[A]);}
+ await at(t0+2.4);log[k+'-after']=await p.evaluate(([A])=>{const i=window[A].inspect();return {stats:i.stats,errors:i.errors,lastError:i.lastError,drawCalls:i.drawCalls,modal,time};},[A]);}
 // 게임 시간이 멈추지 않는지(3D 기록기 함정): 1초 기다려 time 이 흐르는지
 const tA=await now();await p.waitForTimeout(2500);log.timeFlows=(await now())>tA;
 log.errs=errs.slice(0,6);console.log(JSON.stringify(log,null,1));await b.close();

@@ -8294,6 +8294,11 @@
     "slayer-blood-passive-r947.js",
     "qa-snapshot-r940.js",
     "cursor-r780.js",
+    "finale-r950.js",
+    "neon-storm-r951.js",
+    "michaela-heart-r948.js",
+    "assets/r948/heart-fly8.webp",
+    "assets/r948/heart-hit6.webp",
     "assets/r945/hwando-orchid-slash.webp",
     "assets/r945/hwando-ink-sweep.webp"
   ],
@@ -9370,5 +9375,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "a2bcd6fe770792b62b267ec8e33c0bf2b962f48dd282437bf2c0a3556f39e0a6"
+  "runtimeManifestSHA256": "46bfd668fc18f593b05a7d66232787f2c83f48be6a87e10c5fca8c004b203a68"
 }
