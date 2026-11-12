@@ -4,7 +4,8 @@
    ①은 입장 해안 영상(R617)과 같은 순간이고 ③은 마을을 다 뚫은 뒤에야 나와 순서가 거꾸로였다.
    바꾼 자리: 입장(해안 영상이 끝나고 0.8초 뒤, 영상이 꺼져 있으면 들어온 뒤 0.8초) ①② → 보스 문 앞 ③(주민을 조종하는 힘을 찾아 나섬 → 보스)
    → 처치 뒤 글 없음(다음 지역 '한약과 불면귀' 첫 문단이 "나를 덮치려던 주민들도 걸음을 멈추고"로 이어 받는다).
-   스토리 층·R78 진행(route/rally 단계)에서만, 한 번만. 다른 지역·층은 손대지 않는다. */
+   스토리 층·R78 진행(route/rally 단계)에서만, 한 번만. 다른 지역·층·R78 밖 방(협동)은 손대지 않는다.
+   영화 모드(R384)가 길·집결 단계에 'pre' 를 미리 흘리면 ①②③ 을 순서대로 한 번에 준다(R853b, Codex 리뷰 #479). */
 (()=>{'use strict';
 const REV='R853',ZONE='last302',WAIT=0.8;
 const stats={arrive:0,door:0,post:0,waits:0,errors:0};let lastError=null,since=null,sinceRoom=null,prevTime=0;
@@ -18,8 +19,12 @@ let base=null;
 function arriveScenes(){const f=paras();if(!base||!f||f.length!==3)return [];const tmpl=base({id:ZONE,...(typeof regionById!=='undefined'?regionById[ZONE]:{})},'pre')?.[0];return make(tmpl,'arrive',f.slice(0,2));}
 if(typeof nextScenes==='function'){base=nextScenes;nextScenes=function(def,part,...rest){const list=base.call(this,def,part,...rest);
  try{if(def?.id!==ZONE||!story()||!['pre','post'].includes(part))return list;const f=paras();if(!f||f.length!==3)return list;
+  const ph=window.__STORYWORLD_WORLD_COMBAT_R78__?.state?.()?.phase;if(!ph)return list;/* R78 이 맡지 않는 방(협동 등)은 입장 글을 틀 수 없으니 원래 정본 자리 그대로 */
   if(part==='post'){stats.post++;return [];}
-  stats.door++;const out=make(list?.[0],'door',f.slice(2));return out.length?out:list;}catch(e){fail(e);return list;}};}
+  const tmpl=list?.[0],door=make(tmpl,'door',f.slice(2));if(!door.length)return list;
+  /* 영화 모드(R384)는 길·집결 단계에서 'pre' 를 바로 흘린다 → 그때는 ①②③ 순서 전체(같은 열쇠라 읽음 표시로 입장·문 앞에서 다시 안 나옴) */
+  if(['route','rally'].includes(ph)){stats.door++;return [...make(tmpl,'arrive',f.slice(0,2)),...door];}
+  stats.door++;return door;}catch(e){fail(e);return list;}};}
 function ready(){
  if(typeof started==='undefined'||!started||loading||modal||storyScene||(Array.isArray(storyQueue)&&storyQueue.length))return false;
  if(zone!==ZONE||!story()||(typeof completed==='function'&&completed(ZONE)))return false;
