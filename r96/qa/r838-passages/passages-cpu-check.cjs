@@ -77,6 +77,12 @@ if(A){const ids=Object.keys(A.STYLE),byStyle=s=>ids.find(i=>A.STYLE[i]===s);
   const w2=world({'storyworld.r838.passages':'{"on":false}'}),L=layout();ok('off switch (storyworld.r838.passages {"on":false}): hook returns the layout as it came',w2.sb.__STORYWORLD_LAYOUT_HOOK_R204__('u204',L)===L);
   const st={};const w3=world(st);w3.api.set({on:false});ok('set({on:false}) persists',JSON.parse(st['storyworld.r838.passages']).on===false);
   const w4=world({},{__STORYWORLD_COOP_SIM_R62__:{mode:()=>'host'}}),L4=layout();ok('co-op is left alone',w4.sb.__STORYWORLD_LAYOUT_HOOK_R204__('u204',L4)===L4);
+  {const src=layout(),holder={L:null},w=world({},{__STORYWORLD_EXPLORATION__:{layout:()=>holder.L}}),out=w.sb.__STORYWORLD_LAYOUT_HOOK_R204__('u204',src);
+   const now=new Set(out.floorCells.map(c=>c[0]+':'+c[1])),gone=src.floorCells.filter(c=>!now.has(c[0]+':'+c[1])),c=gone[gone.length>>1],raw={zone:'u204',layer:'STORY',player:{x:c[0]+.5,y:c[1]+.5}};
+   const near=n=>!!n&&n.zone==='u204'&&now.has(Math.floor(n.x)+':'+Math.floor(n.y))&&Math.hypot(n.x-raw.player.x,n.y-raw.player.y)<3.6;
+   holder.L={...out};ok('old save on a filled doorway cell: moved to a floor cell within 3 cells (layout handed back as a plain copy)',gone.length>0&&near(w.api.nudge(raw)));
+   holder.L=src;ok('same when the layout store still holds the unshaped layout (after the test switch was toggled)',near(w.api.nudge(raw)));
+   ok('a save standing on untouched floor is not moved',w.api.nudge({zone:'u204',layer:'STORY',player:{x:src.entry.x,y:src.entry.y}})===null);}
   const w5=world({'storyworld.r838.passages.qa':JSON.stringify({u204:{keepOpen:[]}})});ok('test override (storyworld.r838.passages.qa): listed zone shaped with the given table, unlisted zone returns the source',!!w5.sb.__STORYWORLD_LAYOUT_HOOK_R204__('u204',layout()).passagesR838&&!w5.sb.__STORYWORLD_LAYOUT_HOOK_R204__('u205',layout()).passagesR838);}
   {const w=world({}),sb=w.sb,order=[];/* 뒤에 오는 손질 둘이 previous 를 잡고 훅을 갈아 끼운다 */
    for(const tag of['A','B']){const previous=sb.__STORYWORLD_LAYOUT_HOOK_R204__;sb.__STORYWORLD_LAYOUT_HOOK_R204__=function(id,L){const base=previous?.(id,L)||L;order.push(tag+(base.passagesR838?':shaped':':plain'));return{...base,['mark'+tag]:true,r224Rooms:base.r224Rooms};};}
