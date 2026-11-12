@@ -41,7 +41,9 @@ const LOOK={
 //  붉은 계열 고유색(미카엘라·슬레이어·헌터)은 적 테(핏빛)와 섞이지 않게 은색(보조색). 끄기: localStorage storyworld.r434.readability {"heroRim":false}.
 const RED_HERO=new Set(['michaela','slayer','hunter']);
 function heroRimOn(){try{return JSON.parse(localStorage.getItem('storyworld.r434.readability')||'{}').heroRim!==false;}catch(_){return true;}}
-function heroLook(){try{if(!heroRimOn())return null;const id=typeof player!=='undefined'&&player?String(player.hero||''):'';const P=window.__STORYWORLD_HERO_PALETTE_R302__?.palette?.[id];if(!P)return null;
+// R821: 흑백 마름모 바닥(찻잔 안의 집)처럼 밝은 무늬 바닥에서는 밝은 테가 흰 칸에 녹는다 → 그 방에서는 R821 이 주는 어두운 테를 쓴다.
+function heroLook(){try{const D=window.__STORYWORLD_HERO_GROUND_R821__?.rim?.();if(D&&D.outer&&D.inner)return{key:'hero:'+D.key,outer:D.outer,inner:D.inner,k:Number(D.k)||1.05};}catch(_){}
+ try{if(!heroRimOn())return null;const id=typeof player!=='undefined'&&player?String(player.hero||''):'';const P=window.__STORYWORLD_HERO_PALETTE_R302__?.palette?.[id];if(!P)return null;
  const c=RED_HERO.has(id)?(P.sub||[226,232,242]):P.main;return{key:'hero:'+id,outer:'rgba('+c.join(',')+',0.72)',inner:'rgba(6,8,12,0.88)',k:1.05};}catch(_){return null;}}
 const BUCKETS=[1,2,3,4,6,8,11,15,20];
 const bucket=v=>{for(const b of BUCKETS)if(v<=b)return b;return BUCKETS[BUCKETS.length-1];};
