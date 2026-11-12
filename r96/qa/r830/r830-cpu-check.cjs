@@ -29,7 +29,7 @@ const MACH=['u201','u202','u203','u204','u205','u206','ep1b09','cult01','cult02'
 const NOMACH=['hub','dist00','dist05','ep1a10','ep1b01','ep1b08','last301','last302','last303','last304','last305','hando01','hando02','hando03','murder01','restLast3','restHando','village'];
 ok('tech pieces stay in machine-themed regions (controller, bio-bootloader, cyborg cult, Kaironomicon), indoors and outdoors, samong donors too',TECH.every(a=>MACH.every(id=>P.fit(a,out(id))===true&&P.fit(a,inn(id))===true&&P.fit(a,{id,outdoor:true,samong:true})===true)));
 ok('tech pieces elsewhere: a fallen stone pillar outdoors, nothing indoors',TECH.every(a=>NOMACH.every(id=>P.fit(a,out(id))==='collapsed_pillar'&&P.fit(a,inn(id))===false)));
-ok('everything else is left alone',['moss_boulders','collapsed_pillar','blood_altar','bone_heap','broken_gate','village_well','r80-021','tree-dead-00','tree','hexagram','','chest-closed'].every(a=>[...P1,...OTHER].every(id=>P.fit(a,out(id))===true&&P.fit(a,inn(id))===true)));
+ok('everything else is left alone',['moss_boulders','collapsed_pillar','bone_heap','broken_gate','village_well','r80-021','tree-dead-00','tree','hexagram','','chest-closed'].every(a=>[...P1,...OTHER].every(id=>P.fit(a,out(id))===true&&P.fit(a,inn(id))===true)));
 ok('art names: r299 pieces keep their folder so other art called tree/hexagram is untouched',P.artName('assets/r299/tree.webp')==='r299/tree'&&P.artName('assets/r99/outdoor/tree.webp')==='tree'&&P.artName('assets/props/v290/dead_tree.webp')==='dead_tree'&&P.artName('assets/vfx/v31324/salvage-zones/last301/silver_seal_pillar.webp')==='silver_seal_pillar'&&P.artName(undefined)==='');
 // 4) 실제 지역 자료에 적용
 let FX=null;try{FX=JSON.parse(rd('qa/r830/fixtures/regions.json'));}catch(_){}
@@ -97,4 +97,14 @@ ok('samong memory-fragment towers are not affected',P.towerOk({id:'last302',samo
 {const s=rd('client-source/visual-r92.js');ok('R92 floor lights (painted outside drawProp) ask the same rule and raise their ellipse',/footOfImage\?\.\(it\.id,img\)/.test(s)&&/if\(up>0\)shadow\(q\.x,q\.y-up,/.test(s)&&/else shadow\(q\.x,q\.y,Math\.max\(10,w\*\.45\)\);/.test(s));}
 // 8) 불면귀 마을의 제단 등불(붉은 천 돌 제단 + 금빛 등잔)은 마을에 어울리지 않아 석등·향로만 남긴다
 {const s=rd('client-source/props-r102.js');ok('Eastern village keeps the stone lantern and the censer; the cloth-draped stone altar lamp is no longer chosen',/EAST_KEEP=Object\.freeze\(new Set\(\['lights_regional_02','lights_regional_03'\]\)\)/.test(s)&&/list\.filter\(i=>EAST_KEEP\.has\(i\.id\)\)/.test(s));}
+// 9) R832 피의 제단(blood_altar): 피 의식이 있는 곳에만 — 1부 본편, 솔로몬의 봉인식(ep1b01), 교단(cult01~06). 맘몬(ep1b06)은 손대지 않는다.
+{const A='blood_altar';
+ ok('R832 blood altar: stays in Part 1 story regions',P1.every(id=>P.fit(A,out(id))===true&&P.fit(A,inn(id))===true));
+ ok('R832 blood altar: stays in the sealing rite and the cult',['ep1b01','cult01','cult02','cult03','cult04','cult05','cult06'].every(id=>P.fit(A,out(id))===true&&P.fit(A,inn(id))===true));
+ ok('R832 blood altar: Mammon map (ep1b06) is left alone',P.fit(A,inn('ep1b06'))===true&&P.fit(A,out('ep1b06'))===true);
+ ok('R832 blood altar: gone from the Joseon village, the modern kitchen, stage and hotel, and anywhere else',['last303','last302','ep1b04','ep1b05','ep1b07','murder01','u201','kair05','hando01','dreamRest'].every(id=>P.fit(A,out(id))===false&&P.fit(A,inn(id))===false));
+ ok('R832 blood altar: not in a samong zone that borrows a Part 1 region (Mammon donor still untouched)',P.fit(A,{id:'dist04',outdoor:true,samong:true})===false&&P.fit(A,{id:'ep1b06',outdoor:false,samong:true})===true);
+ if(FX){const mk=z=>({id:z.id,layer:'STORY',exploration:{worldR74:{mode:z.indoor?'indoor':'outdoor'}},props:z.props.map((q,i)=>({id:z.id+':'+i,path:(q.a.startsWith('r299/')?'assets/':'assets/props/v290/')+q.a+'.webp',height:100,key:'k'}))}),name=p=>P.artName(p.path);
+  const left=FX.filter(z=>{const r=mk(z);P.apply(r);return r.props.some(p=>name(p)===A);}).map(z=>z.id).sort().join();
+  ok('R832 real regions that still show a blood altar: '+left,left==='cult01,cult03,cult04,cult05,cult06,dist04,dist05,dist06,ep1b01,ep1b06');}}
 console.log('\nR830 '+(n-bad)+'/'+n+' passed');process.exit(bad?1:0);
