@@ -29,7 +29,8 @@ const b=await chromium.launch();const errs=[];
 // 한 쪽에서 지역마다 끈 지도·켠 지도로 각각 '처음 들어가듯' 다시 짓는다: 방 보관(world)을 지우고 같은 씨앗으로 들어가 가구(R224·R449·R523 — 그리는 동안 놓임)가 다 놓일 때까지 기다린다.
 //  끈 지도 = 검사용 덮어쓰기 qa({})(표에 없는 지역은 원래 지도), 켠 지도 = 덮어쓰기 없음(실제 기본 경로).
 const {p}=await boot(b,{vp:{width:640,height:360}});p.on('pageerror',e=>errs.push(String(e).slice(0,160)));
-const enter=async(z,mode)=>{await go(p,'hub');await p.evaluate(([z,mode])=>{window.__STORYWORLD_PASSAGES_R838__.qa(mode==='off'?{}:null);delete world[layerKey(z,'STORY')];let s=12345;Math.random=()=>{s=(Math.imul(s,1664525)+1013904223)>>>0;return s/4294967296;};},[z,mode]);await go(p,z);
+/* 대조 실험: NULLRUN=1 이면 '켠 지도' 차례에도 끈 지도로 들어간다 — 가구 배치 자체의 흔들림(측정 잡음)이 얼마나 되는지 본다. */const NULLRUN=process.env.NULLRUN==='1';
+const enter=async(z,mode)=>{await go(p,'hub');await p.evaluate(([z,mode,NULLRUN])=>{window.__STORYWORLD_PASSAGES_R838__.qa(mode==='off'||NULLRUN?{}:null);delete world[layerKey(z,'STORY')];let s=12345;Math.random=()=>{s=(Math.imul(s,1664525)+1013904223)>>>0;return s/4294967296;};},[z,mode,NULLRUN]);await go(p,z);
  let last=-1,since=await p.evaluate(()=>time);for(let i=0;i<400;i++){await p.waitForTimeout(250);const[n,t]=await p.evaluate(()=>[(room.props||[]).length,time]);if(n!==last){last=n;since=t;}else if(t-since>2.5)break;}return p.evaluate(measure);};
 const strip=l=>l.filter(k=>!/^r103chest[:@]/.test(k));
 const diff=(A,B)=>{const a=new Set(strip(A)),bb=new Set(strip(B));return{lost:[...bb].filter(k=>!a.has(k)),added:[...a].filter(k=>!bb.has(k))};};
