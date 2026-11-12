@@ -21,6 +21,7 @@ function env(o={}){const calls=[];const g={window:{},localStorage:{getItem:()=>o
  function drawEnemy(e){sprite(e.drawn,0,0,60*(e.big||1),{flip:false});sprite('assets/vfx/status.png',0,0,12,{});}
  function drawBurnDeath3(fx){calls.push('base:'+(fx.bodyPath||'none'));if(fx.age<.52)texture(VFX.burnFlame);if((fx.embers||[]).length)calls.push('embers');}
  function drawObjective(){calls.push('objective');}
+ function hitEnemy(e,v,s){calls.push('hit');return true;}
  function enterRegion(){return 1;}`,g);
  vm.runInContext(src,g);return g;}
 const g=env(),M=g.__STORYWORLD_MOB_DEATH_R462__;ok('installed',M.inspect().installed);
@@ -66,4 +67,26 @@ const go=env({prefs:{on:false}});vm.runInContext('drawEnemy',go)({id:'m1',name:'
 ok('off switch keeps engine death (R775 flame removal is its own setting)',go.calls.join()==='base:p.png'&&fo.life===.72,go.calls);
 {const gf=env({prefs:{flame:true}});const ff={type:'enemyBurnDeath',sourceId:'q',x:1,y:1,age:.1,life:.72,bodyPath:'p.png'};gf.calls.length=0;vm.runInContext('drawBurnDeath3',gf)(ff);ok('R775 flame:true brings the old engine flame back',gf.calls.includes('texture:assets/vfx/burn.png'),gf.calls);}
 const gc=env({prefs:{corpses:false}});vm.runInContext('drawEnemy',gc)({id:'m1',name:'망각의 거미',hp:3,drawn:'s.webp'});vm.runInContext('drawBurnDeath3',gc)({type:'enemyBurnDeath',sourceId:'m1',x:1,y:1,age:.1,life:.72});ok('corpses:false → no corpse',gc.__STORYWORLD_MOB_DEATH_R462__.inspect().corpses===0);
+
+// R777(사용자 11-12 07:35Z '불연출은 불관련 테마나 스킬에 나오도록 불관련스킬에 적중시 나오는이펙트', '근데 그것도 자연스럽게 나와야해')
+{const g=env(),M=g.__STORYWORLD_MOB_DEATH_R462__,hit=vm.runInContext('hitEnemy',g),draw=vm.runInContext('drawEnemy',g),burn=vm.runInContext('drawBurnDeath3',g);
+ const die=(id,name,extra={})=>{draw({id,name,hp:3,drawn:'assets/x/'+id+'.webp'});const f={type:'enemyBurnDeath',sourceId:id,x:2,y:2,age:.5,life:.72,bodyPath:'p.png',embers:[{delay:0}],...extra};g.calls.length=0;burn(f);return f;};
+ ok('R777 hitEnemy wrapped, returns base result',hit({id:'a1',hp:3},5,{kind:'r535-burn',r535:'burn'})===true&&g.calls.includes('hit'));
+ let f=die('a1','숲 고블린');ok('R777 hunter burn hit → flesh mob burns (fire kind, flame on)',f.r462?.kind==='fire'&&f.r462?.flame===true,f.r462);
+ ok('R777 burning death draws the fire-wall sheet over its own pieces',g.calls.includes('ctx.drawImage:assets/r411/fx/boss-fire-wall.webp')&&g.calls.some(c=>c.startsWith('sprite:assets/x/a1.webp')));
+ ok('R777 natural: no flat engine flame texture, no foreign engine body, embers kept',!g.calls.some(c=>c.startsWith('texture:')||c.startsWith('base:p.png'))&&g.calls.includes('embers'),g.calls);
+ hit({id:'a2',hp:3},5,{kind:'basic',owner:'hero'});f=die('a2','숲 고블린');ok('R777 normal hit → normal blood death, no fire',f.r462?.kind==='blood'&&!f.r462?.flame&&!g.calls.some(c=>/boss-fire-wall|^texture:/.test(c)));
+ hit({id:'a3',hp:3},5,{kind:'hero-skill-r561',ability:'gunnerStrikeR561'});vm.runInContext('time=5',g);f=die('a3','유리 망령');ok('R777 fire hit long ago (5s) → no fire',!f.r462?.flame&&!g.calls.includes('ctx.drawImage:assets/r411/fx/boss-fire-wall.webp'));
+ hit({id:'a4',hp:3},5,{kind:'hero-skill-r561',ability:'gunnerStrikeR561'});f=die('a4','유리 망령');ok('R777 gunner bombardment kill burns',f.r462?.flame===true&&g.calls.includes('ctx.drawImage:assets/r411/fx/boss-fire-wall.webp'));
+ hit({id:'a5',hp:3},5,{kind:'hero-skill-r561',ability:'gunnerBeamR561'});f=die('a5','유리 망령');ok('R777 gunner beam (cobalt light) is not fire',!f.r462?.flame);
+ f=die('a6','호텔 화염기사');ok('R777 fire-natured mob (화염/불길) burns anywhere',f.r462?.flame===true);
+ vm.runInContext('room.id="ep1b07"',g);f=die('a7','숲 고블린');ok('R777 fire-theme zone ep1b07 → burns',f.r462?.flame===true&&f.r462?.kind==='fire');
+ vm.runInContext('room.id="dist01"',g);
+ const fb={type:'enemyBurnDeath',sourceId:'b1',boss:true,x:1,y:1,age:.1,life:1.25,bodyPath:'assets/boss.png',embers:[{delay:0}]};
+ hit({id:'b1',hp:3,boss:true},5,{kind:'r535-blast',r535:'blast'});g.calls.length=0;burn(fb);ok('R777 boss killed by fire skill keeps engine flame',g.calls.includes('texture:assets/vfx/burn.png')&&g.calls.includes('embers'),g.calls);
+ const fc={type:'enemyBurnDeath',sourceId:'b2',boss:true,x:1,y:1,age:.1,life:1.25,bodyPath:'assets/boss.png',embers:[{delay:0}]};g.calls.length=0;burn(fc);ok('R777 boss normal death still no flame',!g.calls.some(c=>c.startsWith('texture:'))&&!g.calls.includes('embers'));
+ // 사체: 불 연출 죽음만 남은 불씨, 일반 불 갈래(숯 부서짐)는 불씨 없음
+ vm.runInContext('time=7',g);g.calls.length=0;vm.runInContext('drawObjective',g)();const tex=g.calls.filter(c=>c==='texture:assets/vfx/burn.png').length;
+ ok("R777 corpse embers only on burned corpses",tex>=1&&tex===M.inspect().corpsesBurning)
+ const I=M.inspect();ok('R777 inspect lists fire rules',Array.isArray(I.fireZones)&&I.fireZones.includes('ep1b07')&&I.fireZones.includes('dist06')&&I.fireZones.includes('kair07')&&I.stats.fireDeaths>=4);}
 console.log(`R462 mob death: ${pass} pass, ${fail} fail`);process.exit(fail?1:0);
