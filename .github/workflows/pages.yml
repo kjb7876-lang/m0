@@ -468,6 +468,8 @@ jobs:
         run: node r96/qa/r960/r960-cpu-check.cjs
       - name: R890 survival story tracks (story / combat focus toggle, R880 cutscene skips survival) CPU check
         run: node r96/qa/r890/r890-cpu-check.cjs
+      - name: R961 survival sound effects (shard pickup, level-up, core hit, run end sounds; heal chime only after 4% heal and 3s gap) CPU check
+        run: node r96/qa/r961/r961-cpu-check.cjs
       - name: R720 survival hero placement (I key, crystals, story-order prices, leash and range upgrades, swap rule) CPU check
         run: node r96/qa/r720/r720-cpu-check.cjs
       - name: R953 gunner veil passives (cloak cuts ultimate cooldown and cast delay by 77%, lock-on barrage, machine-boss allies for 7s kept out of the enemy list) CPU check
