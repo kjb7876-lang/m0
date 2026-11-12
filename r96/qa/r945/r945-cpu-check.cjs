@@ -106,6 +106,9 @@ const sumOn=(E,id,tag)=>E.hits.filter(h=>h.id===id&&(!tag||h.s?.r945===tag));
  E.run(7-1.1-.1);ok(E.api.inspect().clones.length===7,'7초 전까지 유지');E.run(.4);ok(E.api.inspect().clones.length===0,'7초 뒤 사라짐');
  E.heroDraws.length=0;E.adv(.01);E.ctx.drawHero();ok(E.heroDraws.length===1,'사라진 뒤엔 영웅만 그림');}
 {const E=engine({enemies:[]});E.api.force('clones');E.ctx.basicAttack();E.run(.1);ok(E.api.inspect().clones.length===0,'적이 없어 공격 안 나가면 분신 없음');}
+{const E=engine({enemies:[{id:'a',x:30,y:20}]});const near0=E.g.nearestEnemy;E.g.nearestEnemy=()=>({id:'ghost',x:21,y:20,hp:1});E.api.force('clones');E.ctx.basicAttack();E.run(.1);const I=E.api.inspect();ok(I.clones.length===0&&I.cd.clones===0&&I.stats.noTarget===1,'둘레에 적이 없어 칠묵영이 안 나가면 대기 시간을 쓰지 않음');
+ E.api.force('trio');E.run(.5);E.ctx.basicAttack();E.run(.1);const J=E.api.inspect();ok(J.stats.trios===0&&J.cd.trio===0&&J.stats.noTarget===2,'삼협묵희도 대상이 없으면 대기 시간을 쓰지 않음');
+ E.g.nearestEnemy=near0;E.g.room.enemies[0].x=21;E.run(.5);E.api.force('clones');E.ctx.basicAttack();E.run(.2);const K=E.api.inspect();ok(K.clones.length===7&&K.cd.clones>6,'적이 다가오면 칠묵영 정상 발동·대기 시간 7초');}
 {const E=engine({enemies:[{id:'a',x:22,y:20}]});E.api.force('clones');E.ctx.basicAttack();E.run(.2);E.api.force('clones');E.run(.5);E.ctx.basicAttack();E.run(.2);ok(E.api.inspect().clones.length===7,'다시 발동해도 7체 넘지 않음');}
 {const E=engine({enemies:[{id:'a',x:22,y:20}],lowFx:true});E.api.force('clones');E.ctx.basicAttack();E.run(.3);E.heroDraws.length=0;E.ctx.drawHero();ok(E.heroDraws.length===8,'저사양도 분신 7체(사용자 지정 수, 그림자 겹만 뺌)');}
 
@@ -124,6 +127,21 @@ const sumOn=(E,id,tag)=>E.hits.filter(h=>h.id===id&&(!tag||h.s?.r945===tag));
  ok(E.g.player.x===20&&E.g.player.y===20,'영웅은 옮기지 않음');}
 {const E=engine({enemies:[{id:'a',x:21,y:20}]});E.api.force('trio');E.ctx.basicAttack();E.run(.1);E.g.room={id:'room2',enemies:[]};E.run(3);
  ok(E.hits.filter(h=>h.s?.r945==='trio').length===0,'방이 바뀌면 남은 합동기 피해 취소');}
+
+// ---- ③ 그림: Dots 난초 흑백검 베기(HI-05) + 먹 붓 획(HI-07), 부적·매화·낙관 코드 그림 없음(사용자 11-12 14:13Z) ----
+{const fs=require('fs'),path=require('path');const R=path.join(__dirname,'..','..','runtime-text');
+ ok(fs.existsSync(path.join(R,'assets/r945/hwando-orchid-slash.webp'))&&fs.existsSync(path.join(R,'assets/r945/hwando-ink-sweep.webp')),'Dots 난초 베기·붓 획 시트 파일 있음');
+ ok(!/charmTex|plumTex|sealTex/.test(code),'부적·매화·낙관 코드 그림 없앰');
+ const foes=[];for(let i=0;i<7;i++)foes.push({id:'m'+i,x:20+Math.cos(i)*2,y:20+Math.sin(i)*2});
+ const E=engine({enemies:foes});const Q=E.api.config.trio;E.api.force('trio');E.ctx.basicAttack();E.run(.7);
+ E.sheets.length=0;E.frame();ok(E.sheets.filter(s=>/hwando-orchid-slash/.test(s.src||'')).length===7,'표식 적 일곱 발밑에 난초 하나씩');
+ const cut=()=>E.hits.filter(h=>h.s?.r945==='trio').length;
+ E.run(Q.strikeAt-.7-.45);E.sheets.length=0;E.frame();ok(E.sheets.some(s=>/hwando-ink-sweep/.test(s.src||'')),'세 그림자의 흑백 검 획(붓 획 시트)');
+ ok(E.sheets.filter(s=>/hwando-ink-sweep/.test(s.src||'')).every(s=>!s.filter||s.filter==='none'),'붓 획은 한지빛 테두리를 구워 둔 흑백 시트 한 장(필터 없음)');
+ ok(cut()===0,'베기 전엔 피해 없음');
+ E.run(.6);ok(cut()===7,'난초가 베어지는 순간 표식 적 피해');
+ E.sheets.length=0;E.frame();ok(E.sheets.some(s=>/hwando-orchid-slash/.test(s.src||'')),'베어진 꽃잎 흩어짐 칸 이어서 그림');
+ ok(E.api.inspect().errors===0,'그리기 오류 0');}
 
 // ---- 그리기: 그리기 표지 · 상한 ----
 {const E=engine({enemies:[{id:'a',x:21,y:20},{id:'b',x:23,y:21}]});E.api.force('moon');E.ctx.basicAttack();E.run(.1);
