@@ -113,7 +113,7 @@ if(exists){
   for(let i=0;i<50;i++){g.drawn.length=0;g.scopes.length=0;step(g,1);maxD=Math.max(maxD,g.drawn.length);maxS=Math.max(maxS,g.scopes.length);}
   ok('storm draw budget: ≤ 16 sheet draws and ≤ 40 scoped pieces per frame (30 enemies)',maxD>0&&maxD<=16&&maxS<=40);
   ok('every effect piece has a world anchor (ctx.scope with x,y)',g.scopes.every(s=>s.kind==='effect'&&Number.isFinite(s.x)&&Number.isFinite(s.y)));}
- g=env();A(g).qaForce('fog');{g.room.enemies.push(mob('a',12,10));heroHit(g,'a');let maxD=0,maxA=0;for(let i=0;i<90;i++){g.drawn.length=0;step(g,1);maxD=Math.max(maxD,g.drawn.length);for(const d of g.drawn)maxA=Math.max(maxA,d.alpha);}
+ g=env();A(g).qaForce('fog');{g.room.enemies.push(mob('a',12,10));heroHit(g,'a');let maxD=0,maxA=0;for(let i=0;i<90;i++){g.drawn.length=0;step(g,1);const mist=g.drawn.filter(d=>/neon-toxic-mist/.test(d.src));maxD=Math.max(maxD,mist.length);for(const d of mist)maxA=Math.max(maxA,d.alpha);} // 사용자 2026-11-13 00:47Z 승인: 안개 시트만 센다(NS-06 경보 표식 시트는 안개가 아님), 기준값 그대로
   ok('fog draw budget: ≤ 12 mist puffs per frame',maxD>0&&maxD<=12);ok('fog stays see-through (sheet alpha ≤ .6)',maxA<=.6);
   ok('fog readable: tuning FOG_VEIL ≤ .25',A(g).inspect().tuning.FOG_VEIL<=.25);}
  g=env();A(g).qaForce('lance');{g.room.enemies.push(mob('a',12,10));heroHit(g,'a');let n=0;for(let i=0;i<40;i++){g.scopes.length=0;step(g,1);n=Math.max(n,g.scopes.length);}ok('lance draws (≥1 scoped piece) within budget (≤ 30)',n>=1&&n<=30);}

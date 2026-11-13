@@ -29,26 +29,26 @@ if(shot)await snap('call-enter',t0,.25);if(shot)await snap('call-fight',t0,2.2);
  console.log('  slayer casts',JSON.stringify(i.stats.casts),'slayer hits',sl.length,'dmg',Math.round(sl.reduce((a,x)=>a+x.d,0)),'hunter hits',me.length,'dmg',Math.round(me.reduce((a,x)=>a+x.d,0)));
  ok('슬레이어가 엔진 공격으로 적을 침',sl.length>=3&&i.stats.casts.basic>=2);ok('슬레이어 고유기·스킬도 나감',i.stats.casts.q+i.stats.casts.w+i.stats.casts.e+i.stats.casts.r>=1);
  ok('분신 없음(①)',h.every(x=>x.tag!=='shade'));ok('player 는 헌터',await p.evaluate(()=>player.hero==='hunter'&&!player.r952Summon));}
-await waitT(t0,7.3);i=await I();ok('7초 뒤 해산',!i.active);await sane('①');
+if(shot)await snap('call-leave',t0,6.45);await waitT(t0,7.3);i=await I();ok('7초 뒤 해산',!i.active);await sane('①');ok('해산 덧그림(HS-02 시트)이 그려짐',i.stats.leaveDraws>0);
 
 // ② 혈영 강습
 await setup();await p.evaluate(()=>{window.__rnd=Math.random;Math.random=()=>.01;});t0=await fire('shade');
 if(shot){await waitT(t0,.6);for(let k=0;k<40;k++){if((await I()).shades>0)break;await p.waitForTimeout(150);}await p.evaluate(()=>{window.__SLOW=1e-4;});await p.waitForTimeout(700);await p.screenshot({path:shot+'-shade.jpg',quality:88,clip:{x:120,y:40,width:720,height:450}});await p.evaluate(()=>{window.__SLOW=1;});}
 await waitT(t0,4.5);await p.evaluate(()=>{Math.random=window.__rnd;});
 {const h=await hits(),sh=h.filter(x=>x.tag==='shade');i=await I();console.log('  shades',i.stats.shades,'shade hits',sh.length,'targets',new Set(sh.map(x=>x.id)).size);
- ok('② 슬레이어 분신이 나와 벰',i.tier==='shade'&&sh.length>=2&&sh.every(x=>x.d>0));ok('분신이 여러 적에게',new Set(sh.map(x=>x.id)).size>=2);ok('헌터 분신 없음(②)',i.units.length===1);}
+ ok('② 슬레이어 분신이 나와 벰',i.tier==='shade'&&sh.length>=2&&sh.every(x=>x.d>0));ok('분신이 여러 적에게',new Set(sh.map(x=>x.id)).size>=2);ok('분신 베기 궤적(HS-03 시트)이 그려짐',i.stats.slashDraws>0);ok('헌터 분신 없음(②)',i.units.length===1);}
 await waitT(t0,7.3);ok('② 7초 뒤 해산',!(await I()).active);await sane('②');
 
 // ③ 기러기진 섬멸
 await setup(8,2.0,4.2);t0=await fire('squad');i=await I();ok('③ 발동: 슬레이어 1 + 헌터 분신 4',i.tier==='squad'&&i.units.filter(u=>u.kind==='hunter').length===4&&i.units.filter(u=>u.kind==='slayer').length===1);
-if(shot)await snap('squad-form',t0,.5);if(shot)await snap('squad-volley',t0,1.15);if(shot)await snap('squad-fight',t0,3.2);await waitT(t0,4.5);
+if(shot)await snap('squad-form',t0,.5);if(shot)await snap('squad-flash',t0,.62);if(shot)await snap('squad-volley',t0,1.15);if(shot)await snap('squad-fight',t0,3.2);await waitT(t0,4.5);
 {const h=await hits(),sh=await p.evaluate(()=>window.__shots.slice());i=await I();const hc=sh.filter(x=>x.summon&&x.hero==='hunter'),hh=h.filter(x=>x.summon&&x.hero==='hunter');
  console.log('  clone shots',hc.length,'clone hits',hh.length,'volleys',i.stats.volleys,'cloneShots',i.stats.cloneShots,'slayer',h.filter(x=>x.summon&&x.hero==='slayer').length,'shade',h.filter(x=>x.tag==='shade').length);
  ok('헌터 분신이 엔진 화살을 쏨',hc.length>=8&&i.stats.cloneShots>=8);ok('고유기 일제 사격 4회',i.stats.volleys===4);
  ok('분신이 진법 자리에 섬',i.units.filter(u=>u.kind==='hunter').every(u=>Math.hypot(u.x-i.slots[u.i].x,u.y-i.slots[u.i].y)<.3));
  const me=h.filter(x=>!x.summon&&x.kind!=='r952-shade'),tot=h.reduce((a,x)=>a+x.d,0),mine=me.reduce((a,x)=>a+x.d,0);console.log('  damage share: hunter',Math.round(mine),'squad',Math.round(tot-mine));}
 await waitT(t0,7.3);ok('③ 7초 뒤 해산',!(await I()).active);await sane('③');
-i=await I();ok('오류 0',i.errors===0);if(i.errors)console.log('  lastError',i.lastError);console.log(JSON.stringify(i.stats));
+i=await I();ok('오류 0',i.errors===0);ok('R952-3 Dots 시트가 그려짐(등장 문·일제 사격 섬광·발동 아이콘)',i.stats.gateDraws>0&&i.stats.volleyDraws>0&&i.stats.iconDraws>0);console.log('  fx draws',JSON.stringify({gate:i.stats.gateDraws,volley:i.stats.volleyDraws,icon:i.stats.iconDraws,slash:i.stats.slashDraws,leave:i.stats.leaveDraws}));if(i.errors)console.log('  lastError',i.lastError);console.log(JSON.stringify(i.stats));
 ok('치명 오류 없음',await p.evaluate(()=>!document.getElementById('fatal').textContent.trim()));
 if(free){await setup(8,1.6,3);const r=await p.evaluate(async([A,free])=>{const api=eval(A),s0=api.inspect().stats,p0={...s0.procs},t0=time;
   while(time-t0<free){await new Promise(r=>requestAnimationFrame(r));if(!(player.attackCD>0))basicAttack(true);}

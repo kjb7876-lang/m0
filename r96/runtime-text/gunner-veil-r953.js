@@ -19,7 +19,7 @@
 //  끄기: localStorage['storyworld.r953.gunnerVeil']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_GUNNER_VEIL_R953__)return;
-const REV='R953-gunner-veil-1',KEY='storyworld.r953.gunnerVeil',HERO='gunner';
+const REV='R953-gunner-veil-2',KEY='storyworld.r953.gunnerVeil',HERO='gunner';
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const CFG=Object.freeze({
  cloak:Object.freeze({chance:.10,icd:16,duration:6,ultScale:.23,alpha:.5}),
@@ -32,7 +32,14 @@ const BOSSES=Object.freeze([['u201','u201-mid'],['u202','u202-mid'],['u203','u20
 const SHEET=Object.freeze({
  tracer:Object.freeze({path:'assets/r561/gunner-w-tracer.webp',cw:512,ch:128,cols:6,frames:24,vis:14}),
  impact:Object.freeze({path:'assets/r561/gunner-w-impact.webp',cw:256,ch:256,cols:6,frames:24,px:146/256,py:136/256,vis:200,fps:40}),
- muzzle:Object.freeze({path:'assets/r561/gunner-e-rifle.webp',cw:256,ch:256,cols:6,frames:24,px:35/256,py:139/256,vis:165,fps:40})});
+ muzzle:Object.freeze({path:'assets/r561/gunner-e-rifle.webp',cw:256,ch:256,cols:6,frames:24,px:35/256,py:139/256,vis:165,fps:40}),
+ // R953-2: Dots CX-0095GV 시트(알파 16 이하 잔티를 걷어낸 사본). 그림이 아직 안 읽혔으면 코드 그림이 대신 나온다.
+ lock:Object.freeze({path:'assets/r953/gv-lock.webp',cw:256,ch:256,cols:6,frames:24,px:.5,py:.52,close:6,hold:18}),      // GV-04 조준 표식: 0~5 조임 · 6~17 잠금 고동 · 18~23 흩어짐
+ friend:Object.freeze({path:'assets/r953/gv-friend.webp',cw:256,ch:128,cols:6,frames:24,px:.5,py:.547,fps:12.5,fill:.84}), // GV-08 벗 고리(반복)
+ call:Object.freeze({path:'assets/r953/gv-call.webp',cw:128,ch:384,cols:6,frames:24,px:.5,py:.911}),                      // GV-06 전우 호출 빛기둥(한 번)
+ // R989: 남은 Dots 시트 가운데 7분야 심사를 넘은 둘. GV-01 은신 걸림·GV-03 은신 풀림은 탈락(사람 몸 윤곽·파편 가독성) → 은신은 코드 그림 유지.
+ spin:Object.freeze({path:'assets/r953/gv-spin.webp',cw:192,ch:192,cols:6,frames:24,px:.5,py:.5,last:22,fill:.73}),   // GV-05 난사 회전 섬광(한 번, 24번째 칸은 빈칸)
+ mend:Object.freeze({path:'assets/r953/gv-mend.webp',cw:192,ch:384,cols:6,frames:24,px:.5,py:.875,fill:.75})});        // GV-07 귀환, 치유의 빛(한 번)
 const SHAPES=['line','circle','cone','cross','donut'];
 const fin=v=>typeof v==='number'&&Number.isFinite(v),clamp=(v,a,b)=>Math.min(b,Math.max(a,v)),smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
 let lastError=null,errors=0;const fail=e=>{errors++;lastError=String(e?.message||e).slice(0,200);};
@@ -75,11 +82,12 @@ const SENT={type:'r953-gunner-veil',x:0,y:0,age:0,life:Infinity,r953Sentinel:tru
 function arm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)&&!effects.includes(SENT)){SENT.age=0;effects.push(SENT);}}catch(_){}}
 function disarm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)){const i=effects.indexOf(SENT);if(i>=0)effects.splice(i,1);}}catch(_){}}
 // ---- 발동 ----------------------------------------------------------------------------------------------------
+const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
 function pick(s){if(s.force){const k=s.force;s.force=null;return k;}
- const r=Math.random(),a=CFG.cloak.chance,b=CFG.barrage.chance,c=CFG.summon.chance,k=r<a?'cloak':r<a+b?'barrage':r<a+b+c?'summon':null;
+ const r=Math.random(),[a,b,c]=G971(HERO,[CFG.cloak.chance,CFG.barrage.chance,CFG.summon.chance]),k=r<a?'cloak':r<a+b?'barrage':r<a+b+c?'summon':null;
  return k&&T()>=s.ready[k]?k:null;}
 function onSwing(p){const s=st(p);s.stats.rolls++;if(!solo()){s.stats.coopSkipped++;s.force=null;return;}
- const k=pick(s);if(!k)return;s.ready[k]=T()+CFG[k].icd;ownRoom=RM();
+ const k=pick(s);if(!k)return;s.ready[k]=T()+D971(HERO,CFG[k].icd);ownRoom=RM();
  if(k==='cloak')castCloak(s,p);else if(k==='barrage')castBarrage(s,p);else castSummon(s,p);}
 // ① 잔영 위장
 function castCloak(s,p){s.stats.cloaks++;s.cloakT0=T();s.cloakUntil=T()+CFG.cloak.duration;
@@ -88,7 +96,7 @@ function castCloak(s,p){s.stats.cloaks++;s.cloakT0=T();s.cloakUntil=T()+CFG.cloa
 function ult(body){const p=body||P(),s=p?st(p,false):null;return cloakOn(s)&&isG(p)?{cd:CFG.cloak.ultScale,delay:CFG.cloak.ultScale}:{cd:1,delay:1};}
 // ② 표적 소거 난사
 function castBarrage(s,p){const B=CFG.barrage,rows=foes().map(e=>({e,d:Math.hypot(e.x-p.x,e.y-p.y)})).filter(v=>v.d<=B.radius&&line(p,v.e)).sort((a,b)=>a.d-b.d).slice(0,B.maxTargets);
- s.stats.barrages++;if(!rows.length)return;s.barrage={t0:T(),round:0,targets:rows.map(v=>v.e),pw:power(),room:RM(),id:'b'+(++serial)};
+ s.stats.barrages++;if(!rows.length)return;s.barrage={t0:T(),round:0,targets:rows.map(v=>v.e),pw:power(),room:RM(),id:'b'+(++serial)};addVis({k:'spin',x:p.x,y:p.y,body:p,life:B.lock+B.rounds*B.gap+.15});
  say(NAME.barrage,p.x,p.y);try{p.skillAnim=Math.max(p.skillAnim||0,B.lock+B.gap*B.rounds);}catch(_){}arm();}
 function stepBarrage(s){const b=s.barrage;if(!b)return;const B=CFG.barrage,p=bodyOf(s),t=T();if(!p||b.room!==RM()){s.barrage=null;return;}
  while(b.round<B.rounds&&t>=b.t0+B.lock+b.round*B.gap-1e-9){const i=b.round++;let shown=0;
@@ -112,7 +120,7 @@ function castSummon(s,p){const S=CFG.summon,room0=RM(),n=Math.min(S.count,S.max-
   a.boss=false;a.midboss=true;a.r953Ally=true;a.spawnState='active';a.visible=true;a.hp=a.maxHp;a.phase=0;a.tell=0;a.state='idle';a.homeX=q.x;a.homeY=q.y;
   const pats=patternsOf(zid,bid,src.d.name);allies.push({a,zone:zid,bid,s,t0:T(),until:T()+S.duration,leaveAt:null,castAt:T()+S.firstCast+made*.22,k:made,pats,room:room0});made++;
   paths.push(a.path);for(const pt of pats){const art=artOf(bid,pt);paths.push(art.path,art.warn,art.impact);}
-  addVis({k:'call',x:q.x,y:q.y,life:.6});}
+  addVis({k:'call',x:q.x,y:q.y,life:1.2});}
  if(made){say(NAME.summon,p.x,p.y);sfx('special');try{if(typeof ensureImages==='function')Promise.resolve(ensureImages([...new Set(paths.filter(Boolean))])).catch(()=>{});}catch(e){fail(e);}arm();}}
 function nearestTo(o,r){let b=null,bd=r;for(const e of foes()){const d=Math.hypot(e.x-o.x,e.y-o.y);if(d<=bd){bd=d;b=e;}}return b;}
 function allyCast(A,foe){const S=CFG.summon,a=A.a,t=T(),idx=A.k%A.pats.length,p=A.pats[idx];A.k++;A.s.stats.allyCasts++;
@@ -136,7 +144,7 @@ function stepHazards(){const t=T(),rm=RM();for(let i=hz.length-1;i>=0;i--){const
 function stepAllies(dt){const S=CFG.summon,t=T(),rm=RM();for(let i=allies.length-1;i>=0;i--){const A=allies[i],a=A.a,p=bodyOf(A.s);
   if(A.room!==rm||!isG(p)){allies.splice(i,1);continue;}
   if(A.leaveAt!=null){if(t>=A.leaveAt+S.leave)allies.splice(i,1);continue;}
-  if(t>=A.until){A.leaveAt=t;a.state='idle';a.moving=false;addVis({k:'mend',x:a.x,y:a.y,life:S.leave+.5});continue;}
+  if(t>=A.until){A.leaveAt=t;a.state='idle';a.moving=false;addVis({k:'mend',x:a.x,y:a.y,life:S.leave+.8});continue;}
   a.flash=0;a.hp=a.maxHp;const posing=t<(a.r953PoseUntil||0);if(!posing&&a.state==='attack')a.state='idle';
   const foe=nearestTo(a,S.seek),goal=foe||p,d=Math.hypot(goal.x-a.x,goal.y-a.y),want=foe?S.keep:S.leash;let moved=false;
   if(!posing&&d>want&&dt>0){const k=Math.min(S.speed*dt,d-want)/d,dx=(goal.x-a.x)*k,dy=(goal.y-a.y)*k,x0=a.x,y0=a.y;
@@ -168,7 +176,7 @@ function pillarTex(){return make('pillar',96,384,(g,w,h)=>{const gr=g.createLine
 function moteTex(){return make('mote',32,32,(g,w,h)=>{for(const [r,c] of [[15,'rgba(120,170,255,.10)'],[12,'rgba(150,196,255,.18)'],[9,'rgba(190,220,255,.30)'],[6,'rgba(225,238,255,.55)'],[3.5,'rgba(255,255,255,.9)']]){g.fillStyle=c;g.beginPath();g.arc(w/2,h/2,r,0,7);g.fill();}
   g.fillStyle='rgba(255,255,255,.95)';g.beginPath();g.moveTo(w/2,5);g.lineTo(w/2+4,h/2);g.lineTo(w/2,h-5);g.lineTo(w/2-4,h/2);g.closePath();g.fill();});}
 const asked={t:0};
-function allPaths(){const out=[SHEET.tracer.path,SHEET.impact.path,SHEET.muzzle.path];return out;}
+function allPaths(){return Object.values(SHEET).map(S=>S.path);}
 function bossPaths(){const out=[];for(const [zid,bid] of BOSSES){const src=bossDef(zid,bid);if(!src)continue;out.push(src.d.path);for(const p of patternsOf(zid,bid,src.d.name)){const a=artOf(bid,p);out.push(a.path,a.warn,a.impact);}}return [...new Set(out.filter(Boolean))];}
 let warmedBoss=false;
 function warm(){try{veilTex();lockTex();friendTex();pillarTex();moteTex();if(typeof ensureImages!=='function')return;Promise.resolve(ensureImages(allPaths())).catch(()=>{});
@@ -176,7 +184,7 @@ function warm(){try{veilTex();lockTex();friendTex();pillarTex();moteTex();if(typ
 function sheetImg(k){const S=SHEET[k];try{const got=typeof readyImage==='function'?readyImage(S.path):null;if(got?.image)return got.image;const t=Date.now();if(t-asked.t>1500){asked.t=t;if(typeof ensureImages==='function')Promise.resolve(ensureImages(allPaths())).catch(()=>{});}}catch(e){fail(e);}return null;}
 // ---- 그리기 --------------------------------------------------------------------------------------------------
 let budget=0,drawCalls=0;
-const GROUND=new Set(['friend','call','mend-ring']);
+const GROUND=new Set(['friend','call','mend-ring','spin']);
 function refill(){budget=low()?CFG.lowDraws:CFG.maxDraws;}
 function scoped(id,fn){const own={id:'r953:'+id,kind:'effect',r953:true,groundAligned:GROUND.has(id)};try{if(typeof ctx.scope==='function')return ctx.scope(own,fn);return fn();}catch(e){fail(e);}}
 // 조각 한 장: (x,y)=기준점, w·h=화면 크기, px·py=기준점 비율
@@ -184,13 +192,14 @@ function scoped(id,fn){const own={id:'r953:'+id,kind:'effect',r953:true,groundAl
 function img(id,im,x,y,w,h,o={}){if(!im||!(w>0)||!(h>0))return false;if(!o.free){if(budget<=0)return false;budget--;}drawCalls++;
  scoped(id,()=>{ctx.save();try{ctx.globalCompositeOperation=o.add?'lighter':'source-over';ctx.globalAlpha*=clamp(o.alpha??1,0,1);ctx.translate(x,y);if(o.ang)ctx.rotate(o.ang);
   if(o.src)ctx.drawImage(im,o.src[0],o.src[1],o.src[2],o.src[3],-w*(o.px??.5),-h*(o.py??.5),w,h);else ctx.drawImage(im,-w*(o.px??.5),-h*(o.py??.5),w,h);}catch(e){fail(e);}finally{ctx.restore();}});return true;}
-function cell(id,k,fr,x,y,size,o={}){const S=SHEET[k],im=sheetImg(k);if(!im)return false;fr=((Math.floor(fr)%S.frames)+S.frames)%S.frames;
+function cell(id,k,fr,x,y,size,o={}){const S=SHEET[k],im=sheetImg(k);if(!im)return false;fr=o.once?clamp(Math.floor(fr),0,S.frames-1):((Math.floor(fr)%S.frames)+S.frames)%S.frames;
  return img(id,im,x,y,size,o.h??size*S.ch/S.cw,{...o,src:[(fr%S.cols)*S.cw,Math.floor(fr/S.cols)*S.ch,S.cw,S.ch],px:o.px??S.px??.5,py:o.py??S.py??.5});}
 const scr=(x,y,lift=.45)=>{const q=project(x,y);return {x:q.x,y:q.y-H()*lift};};
 function drawCloak(s,p){const t=T(),h=H(),q=project(p.x,p.y),age=t-s.cloakT0,left=s.cloakUntil-t,k=Math.min(smooth(age/.3),smooth(left/.4)),wob=.5+.5*Math.sin(t*7);
  img('cloak',veilTex(),q.x,q.y-h*.52,h*.62*(1+.04*wob),h*1.18,{alpha:(.75+.25*wob)*k,add:true,free:true});
  if(!low())img('cloak',veilTex(),q.x,q.y-h*.52+((t*38)%(h*.3))-h*.15,h*.5,h*.9,{alpha:.28*k,add:true,free:true});}
 function drawFriend(A){const a=A.a,t=T(),h=H(),u=unit(),g=project(a.x,a.y),k=A.leaveAt!=null?1-smooth((t-A.leaveAt)/CFG.summon.leave):smooth((t-A.t0)/.35),w=u*2.9*(1+.04*Math.sin(t*4+A.t0));
+ if(cell('friend','friend',(t-A.t0)*SHEET.friend.fps,g.x,g.y,w/SHEET.friend.fill,{alpha:k,free:true})){if(!low())cell('friend','friend',(t-A.t0)*SHEET.friend.fps,g.x,g.y,w/SHEET.friend.fill,{alpha:.35*k,add:true,free:true});return k;}
  img('friend',friendTex(),g.x,g.y,w,w*.5,{alpha:k,free:true});img('friend',friendTex(),g.x,g.y,w,w*.5,{alpha:.5*k,add:true,free:true});return k;}
 // 아군 보스 몸: 엔진 적 그리기 그대로(보스 그림·자세 사슬). 나타날 때·돌아갈 때만 옅게.
 function drawAlly(A){const k=drawFriend(A);if(typeof drawEnemy!=='function')return;ctx.save();try{ctx.globalAlpha*=clamp(.15+.85*k,0,1);drawEnemy(A.a);}catch(e){fail(e);}finally{ctx.restore();}
@@ -200,15 +209,21 @@ function drawAll(){const t=T(),lo=low(),h=H(),u=unit();refill();
  // 보스 스킬: 엔진 위험지대 그리기(원래 스킬 그림·경고·비행·착탄 단계) 그대로
  if(typeof drawHazard==='function')for(const z of hz){try{z.h.age=t-z.row.warningAt;drawHazard(z.h);}catch(e){fail(e);}}
  // 조준 표식
- const lock=lockTex();for(const s of states()){const b=s.barrage;if(!b)continue;const age=t-b.t0,k=smooth(age/CFG.barrage.lock);
-  for(const e of b.targets){if(!(e.hp>0))continue;const g=scr(e.x,e.y,.5),sz=h*(1.25-.5*k);img('lock',lock,g.x,g.y,sz,sz*.72,{alpha:.55+.45*k,ang:(1-k)*.9});}}
+ const lock=lockTex(),LS=SHEET.lock;for(const s of states()){const b=s.barrage;if(!b)continue;const B=CFG.barrage,age=t-b.t0,k=smooth(age/B.lock),fireT=Math.max(.05,B.rounds*B.gap),
+   fr=age<B.lock?clamp(age/B.lock,0,1)*LS.close:LS.close+clamp((age-B.lock)/fireT,0,1)*(LS.frames-1-LS.close); // 조이는 동안 0~6, 쏘는 동안 잠금 고동, 끝 발에 흩어짐
+  for(const e of b.targets){if(!(e.hp>0))continue;const g=scr(e.x,e.y,.5),sz=h*(1.25-.5*k);
+   if(!cell('lock','lock',fr,g.x,g.y,h*1.9,{once:true,alpha:.7+.3*k}))img('lock',lock,g.x,g.y,sz,sz*.72,{alpha:.55+.45*k,ang:(1-k)*.9});}}
  for(const v of vis){const age=t-v.t0,k=age/v.life;if(k<0||k>=1)continue;
   if(v.k==='tracer'){const A=scr(v.a.x,v.a.y,.55),B=scr(v.b.x,v.b.y,.5),L=Math.hypot(B.x-A.x,B.y-A.y);if(L>2)cell('tracer','tracer',age*60+v.t0*97,A.x,A.y,L,{h:h*1.1,ang:Math.atan2(B.y-A.y,B.x-A.x),px:0,py:.5,alpha:1-k*.6,add:true});}
   else if(v.k==='impact'){const g=scr(v.x,v.y,.5);cell('impact','impact',age*SHEET.impact.fps,g.x,g.y,h*1.25,{alpha:1-smooth((k-.6)/.4)});}
   else if(v.k==='muzzle'){const g=scr(v.x,v.y,.6);cell('muzzle','muzzle',age*SHEET.muzzle.fps+6,g.x,g.y,h*1.1,{ang:v.ang,alpha:1-k,add:true});}
   else if(v.k==='veil'){const g=project(v.x,v.y);img('cloak',friendTex(),g.x,g.y,u*(1+2.6*smooth(k)),u*(.5+1.3*smooth(k)),{alpha:.9*(1-k),add:true});}
-  else if(v.k==='call'){const g=project(v.x,v.y);img('call',pillarTex(),g.x,g.y,h*(.9-.5*k),h*3.6,{py:1,alpha:.95*(1-k*k),add:true});img('call',friendTex(),g.x,g.y,u*2.6*smooth(k/.6),u*1.3*smooth(k/.6),{alpha:.9*(1-k)});}
-  else if(v.k==='mend'){const g=project(v.x,v.y),mote=moteTex();img('mend',pillarTex(),g.x,g.y,h*(.5+.5*k),h*(2.6+2*k),{py:1,alpha:.75*(1-k)*smooth(k/.15),add:true});
+  else if(v.k==='call'){const g=project(v.x,v.y);if(cell('call','call',k*SHEET.call.frames,g.x,g.y,h*1.5,{once:true,alpha:1-smooth((k-.85)/.15)}))continue;img('call',pillarTex(),g.x,g.y,h*(.9-.5*k),h*3.6,{py:1,alpha:.95*(1-k*k),add:true});img('call',friendTex(),g.x,g.y,u*2.6*smooth(k/.6),u*1.3*smooth(k/.6),{alpha:.9*(1-k)});}
+  else if(v.k==='spin'){const S=SHEET.spin,b=v.body,g=project(b?b.x:v.x,b?b.y:v.y),w=h*2/S.fill,al=Math.min(smooth(k/.12),1-smooth((k-.85)/.15)); // 영웅 발밑 둘레를 한 바퀴 도는 총구 섬광. 바닥에 붙여 그린다(몸 위에 겹치는 영웅 쪽 이펙트는 R350 이 85%까지 옅게 해서 안 보임)
+   cell('spin','spin',k*S.last,g.x,g.y,w,{once:true,alpha:al,add:true});if(!lo)cell('spin','spin',k*S.last,g.x,g.y,w,{once:true,alpha:.45*al});}
+  else if(v.k==='mend'){const g=project(v.x,v.y),mote=moteTex(),M=SHEET.mend,mw=u*2.9/M.fill;
+   if(cell('mend','mend',k*M.frames,g.x,g.y,mw,{once:true,alpha:1-smooth((k-.88)/.12)})){if(!lo)cell('mend','mend',k*M.frames,g.x,g.y,mw,{once:true,alpha:.5*(1-smooth((k-.88)/.12)),add:true});continue;}
+   img('mend',pillarTex(),g.x,g.y,h*(.5+.5*k),h*(2.6+2*k),{py:1,alpha:.75*(1-k)*smooth(k/.15),add:true});
    img('mend-ring',friendTex(),g.x,g.y,u*(2.2+1.6*k),u*(1.1+.8*k),{alpha:.7*(1-k)});
    const n=lo?5:11;for(let i=0;i<n;i++){const ph=(i*.37+v.t0)%1,kk=clamp(k*1.25-ph*.25,0,1),ax=Math.sin(i*2.4+v.t0*3)*h*(.45+.2*kk),sz=h*(.2-.08*kk);
     if(kk>0&&kk<1)img('mend',mote,g.x+ax,g.y-h*(.2+2.4*kk*kk+ (i%3)*.25),sz,sz,{alpha:(1-kk)*smooth(kk/.12),add:true});}}}}
@@ -241,6 +256,6 @@ function inspect(body){const s=st(body||P(),false)||fresh(null),t=T(),left=k=>Ma
   cloak:{active:cloakOn(s),left:cloakOn(s)?+(s.cloakUntil-t).toFixed(3):0},
   barrage:s.barrage?{round:s.barrage.round,targets:s.barrage.targets.map(e=>e.id)}:null,
   allies:allies.map(A=>({id:A.a.id,nativeId:A.a.nativeId,name:A.a.name,x:+A.a.x.toFixed(2),y:+A.a.y.toFixed(2),state:A.a.state,left:+Math.max(0,A.until-t).toFixed(2),leaving:A.leaveAt!=null}))};}
-window.__STORYWORLD_GUNNER_VEIL_R953__=Object.freeze({revision:REV,config:CFG,names:NAME,on:()=>on,set,force,inspect,ult,
+window.__STORYWORLD_GUNNER_VEIL_R953__=Object.freeze({revision:REV,sheets:Object.freeze(Object.keys(SHEET)),config:CFG,names:NAME,on:()=>on,set,force,inspect,ult,
  cloaked:body=>{const p=body||P();return cloakOn(p?st(p,false):null)&&isG(p);},allies:()=>allies.map(A=>A.a)});
 })();

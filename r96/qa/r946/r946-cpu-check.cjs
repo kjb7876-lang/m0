@@ -166,6 +166,39 @@ if(exists){
   ok('sentinel effect in effects while active',vm.runInContext('effects.some(e=>e.r946Sentinel)',g));
   step(g,120);ok('sentinel removed when idle',vm.runInContext('effects.filter(e=>e.r946Sentinel).length',g)===0);}
  ok('sounds use existing pleasant Lauren cues (no new paid audio)',(()=>{const g2=env();A(g2).qaForce('violet');g2.room.enemies.push(mob('t',13,10));heroHit(g2,'t');step(g2,20);return g2.sounds.length>0&&g2.sounds.every(k=>/^r546(Sp|Atk)_lauren$/.test(k));})());
+ // ---- R946-2 Dots CX-0087LC 추가1 시트(실버·보라판): 읽힌 시트가 있으면 시트로, 없으면 코드 그림 ----
+ {const AD=path.join(R,'runtime-text','assets','r946'),IX=path.join(AD,'index.json'),have=fs.existsSync(IX);ok('assets/r946/index.json exists',have);
+  const NAMES=['lauren-red','lauren-blue','lauren-blue-disk','lauren-fuse','lauren-violet','lauren-aura'];
+  if(have){const ix=JSON.parse(fs.readFileSync(IX,'utf8'));const crypto=require('crypto');
+   ok('index lists the six applied sheets (LC-01·02·03·04·05·07) with matching bytes/sha256',NAMES.every(n=>{const m=ix.sheets&&ix.sheets[n],f=path.join(AD,n+'.webp');if(!m||!fs.existsSync(f))return false;const b=fs.readFileSync(f);return b.length===m.bytes&&crypto.createHash('sha256').update(b).digest('hex')===m.sha256;}));
+   ok('held Dots items (LC-05b tail, LC-06 repulse, LC-08 impact) are not applied',!['lauren-tail','lauren-repulse','lauren-impact'].some(n=>ix.sheets&&ix.sheets[n]));
+   ok('sheets in runtime-inputs.json',NAMES.every(n=>fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8').includes('assets/r946/'+n+'.webp')));
+   ok('total sheet bytes ≤ 1.6 MB',NAMES.reduce((s,n)=>s+fs.statSync(path.join(AD,n+'.webp')).size,0)<=1.6e6);}
+  const sheetEnv=(ready=true)=>{const g=env();vm.runInContext(`var asked=[],scaled=[];readyImage=function(p){if(/assets\\/r946\\//.test(p))return ${ready}?{image:{src:p,naturalWidth:1152,naturalHeight:p.includes('fuse')?384:768}}:null;return {image:{src:p,naturalWidth:100,naturalHeight:200}};};
+    ensureImages=function(a){asked.push(...a);return Promise.resolve();};ctx.scale=function(x,y){scaled.push([x,y]);};`,g);return g;};
+  const used=(g,n)=>vm.runInContext('drawn',g).filter(d=>d.src==='assets/r946/'+n+'.webp');
+  let s=sheetEnv();s.room.enemies.push(mob('a',14,10));A(s).qaForce('red');heroHit(s,'a');step(s,6);
+  ok('은빛 거성 draws LC-01 sheet',used(s,'lauren-red').length>0);
+  {const d=used(s,'lauren-red').slice(-1)[0];ok('은빛 거성 sheet body ≥ half hero height (R911)',!!d&&d.a[6]*145/256>=33);}
+  {const f=new Set(used(s,'lauren-red').map(d=>d.a[0]+','+d.a[1]));ok('sheet frames advance over time',f.size>=2);}
+  s=sheetEnv();s.room.enemies.push(mob('a',6,10));A(s).qaForce('red');heroHit(s,'a');step(s,4);
+  ok('leftward 은빛 거성 is mirrored (scale(-1,1))',used(s,'lauren-red').length>0&&vm.runInContext('scaled',s).some(([x,y])=>x===-1&&y===1));
+  s=sheetEnv();s.room.enemies.push(mob('a',13,10));A(s).qaForce('blue');heroHit(s,'a');step(s,12);
+  ok('심연 왜성 draws LC-02 orb and LC-03 ground disk',used(s,'lauren-blue').length>0&&used(s,'lauren-blue-disk').length>0);
+  ok('ground disk is drawn in a groundAligned scope',vm.runInContext('scopes',s).some(o=>o.groundAligned&&/r946:blue:.*:disk/.test(o.id)));
+  s=sheetEnv();s.room.enemies.push(mob('a',14,10,{hp:1e9}));A(s).qaForce('violet');heroHit(s,'a');step(s,4);
+  ok('쌍성 소멸 charge draws LC-04 fusion sheet',used(s,'lauren-fuse').length>0);
+  ok('charge sheet draws only its painted part (cropped, so R350 hero veil does not erase it)',used(s,'lauren-fuse').every(d=>d.a[2]<192&&d.a[3]<192));step(s,8);
+  ok('쌍성 소멸 bolt draws LC-05 sheet',used(s,'lauren-violet').length>0);
+  s=sheetEnv();s.room.enemies.push(mob('a',13,10));for(let i=0;i<3;i++)s.room.props.push(prop('p'+i,10+i,11));A(s).qaForce('meteor');heroHit(s,'a');step(s,10);
+  ok('유성 궤도 wraps rocks with LC-07 aura sheet',used(s,'lauren-aura').length>0);
+  s=sheetEnv();s.room.enemies.push(mob('a',13,10));A(s).qaForce('repulse');heroHit(s,'a');step(s,4);
+  ok('항성 반발 keeps code drawing (LC-06 on hold)',vm.runInContext('drawn',s).every(d=>!/assets\/r946\//.test(d.src)));
+  s=sheetEnv(false);s.room.enemies.push(mob('a',14,10));A(s).qaForce('red');heroHit(s,'a');step(s,6);
+  ok('missing sheet → code orb fallback and the sheet is requested',vm.runInContext('arcs',s).some(r=>r>=16.5)&&vm.runInContext('asked',s).some(p=>p==='assets/r946/lauren-red.webp'));
+  s=sheetEnv();A(s).qaSheets(false);s.room.enemies.push(mob('a',14,10));A(s).qaForce('red');heroHit(s,'a');step(s,6);
+  ok('qaSheets(false) → code drawing',used(s,'lauren-red').length===0&&typeof A(s).inspect().stats.sheetDraws==='number');
+  ok('sheet images of the wrong size are ignored (code drawing)',(()=>{const g2=env();g2.room.enemies.push(mob('a',14,10));A(g2).qaForce('red');heroHit(g2,'a');step(g2,6);return vm.runInContext('drawn',g2).every(d=>!/assets\/r946\//.test(d.src));})());}
  // ---- 렉 ----
  g=env();A(g).qaRandom(()=>0);for(let i=0;i<60;i++)g.room.enemies.push(mob('m'+i,10+Math.cos(i)*4,10+Math.sin(i)*4,{hp:1e9}));for(let i=0;i<6;i++)g.room.props.push(prop('p'+i,10+Math.cos(i)*3,10+Math.sin(i)*3));
  const t0=process.hrtime.bigint();for(const k of ['meteor','violet','blue','red','repulse']){A(g).qaForce(k);heroHit(g,'m1');A(g).qaReset();g.time+=5.1;step(g,6);}step(g,24);const ms=Number(process.hrtime.bigint()-t0)/1e6;
