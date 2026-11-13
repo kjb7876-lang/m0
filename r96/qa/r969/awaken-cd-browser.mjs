@@ -1,6 +1,6 @@
-// R967 브라우저 검사(헤드리스, 소프트웨어 렌더링): 실제 빌드에서 EGO·사몽 진입 전·중·후 Q·S·W 재사용 대기를 잰다. GPU·실기기·자연 플레이 아님.
+// R969 브라우저 검사(헤드리스, 소프트웨어 렌더링): 실제 빌드에서 EGO·사몽 진입 전·중·후 Q·S·W 재사용 대기를 잰다. GPU·실기기·자연 플레이 아님.
 import {chromium,boot,skip} from '../r444/lib.mjs';
-const b=await chromium.launch();const {p}=await boot(b,{vp:{width:640,height:360},init:process.env.R967_OFF?{'storyworld.r571.surge':JSON.stringify({ego:false})}:null});
+const b=await chromium.launch();const {p}=await boot(b,{vp:{width:640,height:360},init:process.env.R969_OFF?{'storyworld.r571.surge':JSON.stringify({ego:false})}:null});
 const errs=[];p.on('pageerror',e=>errs.push(String(e).slice(0,200)));
 await p.evaluate(()=>enterRegion('dist01',null,{layer:'DREAM',restore:true}));await p.waitForFunction(()=>!loading&&layer==='DREAM',null,{timeout:150000});await skip(p);
 const r=await p.evaluate(async()=>{const S=window.__STORYWORLD_SAMONG_SURGE_R571__,W=window.__STORYWORLD_WER__;

@@ -1,4 +1,4 @@
-// R967 CPU check — EGO 각성·사몽 각성 중 모든 스킬 재사용 대기 감소(사용자 2026-11-13 "ego 각성는 모든 스킬쿨타임 줄여주고 사몽각성은 그거보다 더줄여주게").
+// R969 CPU check — EGO 각성·사몽 각성 중 모든 스킬 재사용 대기 감소(사용자 2026-11-13 "ego 각성는 모든 스킬쿨타임 줄여주고 사몽각성은 그거보다 더줄여주게").
 //  규칙: EGO 중 새로 거는 대기 ×0.77(−23%), EGO 진입 순간 돌고 있던 대기 ×0.77. 사몽 중 새로 거는 대기 ×0.23(−77%, R571 그대로), 사몽 진입 순간 돌던 대기 ×0.60(−40%).
 //  EGO 자기 대기(egoCD)·사몽 자기 대기(samongCD)·기본 공격 간격·600초 넘는 막힘은 그대로. 각성이 끝나면 새로 거는 대기는 원래 값.
 'use strict';
@@ -101,7 +101,7 @@ if(S){const {run,sb}=S;const A=sb.__STORYWORLD_SAMONG_SURGE_R571__;const fresh='
  check('EGO → 사몽 upgrade: total entry cut is .60 (not .77×.60)',near(run('player.specialCD'),(8-F)*.6-2*F,5e-3),run('player.specialCD'));
  run('player.samong=0;tick(F)');
  // ---- 저장 ----
- check('nothing of R967 is written into the save',!/r571|r967|surge|egoEntry/i.test(run('JSON.stringify(serializeSave())')));
+ check('nothing of R969 is written into the save',!/r571|r969|surge|egoEntry/i.test(run('JSON.stringify(serializeSave())')));
 }
 {let T=null;try{T=stage({store:{'storyworld.r571.surge':JSON.stringify({on:false})}});}catch(e){}
  if(T){T.run('var F='+F+';ego();tick(F);special();tick(F)');check('pref off: no EGO cooldown change',near(T.run('player.specialCD'),10-F,1e-6));}
