@@ -19,6 +19,7 @@
 if(typeof window==='undefined'||window.__STORYWORLD_MICHAELA_HEART_R948__)return;
 const REV='R948-heart-2',KEY='storyworld.r948.heart',HERO='michaela';
 const CHANCE=.11,CROWD_BONUS=.04,CROWD_N=4,CROWD_R=2,CHANCE_MAX=.35,ROLL_GAP=.35,ICD=5;
+const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
 const WEIGHTS=[['volley',.55],['tower',.30],['bloom',.15]];
 const VOLLEY_N=16,VOLLEY_V=9,VOLLEY_RANGE=6,VOLLEY_R=.5,VOLLEY_K=.55,CHARM_T=.5,CHARM_DIST=1.0,CHARM_STOP=.8,CHARM_CD=.6;
 const BLOOM_FAR=7,BLOOM_AHEAD=3,BLOOM_CHARGE=2.0,BLOOM_R=3.0,BLOOM_K=3.2,BLOOM_BOSS_K=2.0,BLOOM_STUN=.5,BLOOM_FLASH=.6;
@@ -73,9 +74,9 @@ function fire(kind,o,tg){const t=T(),power=ap(),k=Math.min(2,Math.max(1,surge('r
   acts.push({...base,x:p.x,y:p.y,shots:0});play('r546Sp_'+HERO);shakeBy(2);return;}}
 function pick(o,t){let k;if(forced){k=forced;forced=null;}else{let r=rnd()*WEIGHTS.reduce((n,w)=>n+w[1],0);k=WEIGHTS[WEIGHTS.length-1][0];for(const [n,w] of WEIGHTS){if(r<w){k=n;break;}r-=w;}}
  if(k==='tower'&&towerOf(o))k='volley';return k;}
-function chanceFor(o){let n=0;for(const e of enemiesNow())if(!hiddenActor(e)&&dist(e,o)<=CROWD_R)n++;const c=CHANCE+(n>=CROWD_N?CROWD_BONUS:0);return Math.min(CHANCE_MAX,surge('chance',c));}
+function chanceFor(o){let n=0;for(const e of enemiesNow())if(!hiddenActor(e)&&dist(e,o)<=CROWD_R)n++;const c=CHANCE+(n>=CROWD_N?CROWD_BONUS:0);return Math.min(CHANCE_MAX,surge('chance',G971(HERO,[c])[0]));}
 function roll(e){const o=P();if(!o||o.hero!==HERO||o.hp<=0||blockedNow())return;preload();const s=stateOf(o),t=T();if(t<s.readyAt||t-s.lastRoll<ROLL_GAP)return;s.lastRoll=t;stats.rolls++;
- if(!forced&&!(rnd()<chanceFor(o)))return;const kind=pick(o,t);s.readyAt=t+ICD;lastRoom=curRoom();fire(kind,o,e&&Number.isFinite(e.x)?{x:e.x,y:e.y}:null);}
+ if(!forced&&!(rnd()<chanceFor(o)))return;const kind=pick(o,t);s.readyAt=t+D971(HERO,ICD);lastRoom=curRoom();fire(kind,o,e&&Number.isFinite(e.x)?{x:e.x,y:e.y}:null);}
 // 미카엘라 본인 타격만(다른 영웅·협동 동료·적·이 패시브 자신의 피해 제외).
 function mine(src){const o=P();if(!o||o.hero!==HERO)return false;if(src&&typeof src==='object'){if(src.r948||src.sourceHero&&src.sourceHero!==HERO)return false;if(src.coopIdR62||src.ally||src.owner==='ally'||src.owner==='enemy'||src.hostile)return false;}return true;}
 if(typeof hitEnemy==='function'){const base=hitEnemy;hitEnemy=function(e,value,source,...a){const r=base.call(this,e,value,source,...a);
