@@ -1,0 +1,145 @@
+{
+ "c2d": {
+  "at footOf (http://127.0.0.1:4410/m0new/mob-foot-r332.js:17:4) < at gridInfo (http://127.0.0.1:4410/m0new/mob-foot-r332.js:23:65) < at shiftFor (http://127.0.0.1:4410/m0new/mob-foot-r332.js:24:44)": 11,
+  "at opaqueBox (http://127.0.0.1:4410/m0new/play-r115.js:40:187) < at record (http://127.0.0.1:4410/m0new/play-r115.js:44:78) < at drawEnemy (http://127.0.0.1:4410/m0new/play-r115.js:55:106)": 7,
+  "at opaqueBox (http://127.0.0.1:4410/m0new/hit-center-r259.js:22:187) < at record (http://127.0.0.1:4410/m0new/hit-center-r259.js:26:75) < at drawEnemy (http://127.0.0.1:4410/m0new/hit-center-r259.js:41:135)": 8,
+  "at sheetInfo (http://127.0.0.1:4410/m0new/combat-flow-r425.js:38:101) < at sheetFrac (http://127.0.0.1:4410/m0new/combat-flow-r425.js:42:26) < at drawEnemy (http://127.0.0.1:4410/m0new/combat-flow-r425.js:109:99)": 1,
+  "at maskBits (http://127.0.0.1:4410/m0new/combat-read-r409.js:123:116) < at bakeFast (http://127.0.0.1:4410/m0new/combat-read-r409.js:130:10) < at bake0 (http://127.0.0.1:4410/m0new/combat-read-r409.js:144:85)": 3,
+  "at bakeFast (http://127.0.0.1:4410/m0new/combat-read-r409.js:139:28) < at bake0 (http://127.0.0.1:4410/m0new/combat-read-r409.js:144:85) < at bake (http://127.0.0.1:4410/m0new/combat-read-r409.js:95:54)": 3,
+  "at footOf (http://127.0.0.1:4410/m0new/mob-foot-r332.js:17:4) < at shiftFor (http://127.0.0.1:4410/m0new/mob-foot-r332.js:24:114) < at c.drawImage (http://127.0.0.1:4410/m0new/mob-foot-r332.js:32:154)": 3
+ },
+ "gameSec": 64.6,
+ "frames": 18820,
+ "old": {},
+ "oldT": [],
+ "body": {
+  "move|boss/sheet-idle.webp": 79,
+  "move|boss/sheet-move.webp": 220,
+  "atk|boss/sheet-atkA.webp": 170,
+  "hit|boss/sheet-atkA.webp": 6,
+  "move|boss/sheet-atkA.webp": 179,
+  "move|boss/sheet-atkB2.webp": 112,
+  "hit|boss/sheet-hit.webp": 8,
+  "atk|boss/sheet-atkB2.webp": 295,
+  "hit|boss/sheet-atkB2.webp": 13,
+  "idle|boss/sheet-idle.webp": 2,
+  "move|boss/sheet-reveal.webp": 12,
+  "move|boss/sheet-hit.webp": 9,
+  "atk|boss/sheet-reveal.webp": 16,
+  "hit|boss/sheet-reveal.webp": 2,
+  "move|boss/sheet-moveDown.webp": 7,
+  "move|boss/sheet-moveUp.webp": 15,
+  "hit|boss/sheet-hit2.webp": 11,
+  "move|boss/sheet-hit2.webp": 11,
+  "move|boss/sheet-idle2.webp": 123,
+  "move|boss/sheet-cast.webp": 1,
+  "idle|boss/sheet-idle2.webp": 2
+ },
+ "drawMs": {
+  "avg": 37.26,
+  "p95": 69.1,
+  "n": 1293
+ },
+ "tickMs": {
+  "avg": 1.2,
+  "p95": 3.3
+ },
+ "liveMax": 52,
+ "summonedMax": 8,
+ "summonedSeries": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,6,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,8,8,8,8,8,8,8,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5",
+ "r61": {
+  "attempts": 0,
+  "prepared": 0,
+  "waves": 0,
+  "minions": 0,
+  "clones": 0,
+  "refused": 0,
+  "cancelled": 0,
+  "despawned": 0,
+  "restored": 0,
+  "telegraphs": 0
+ },
+ "r990": {
+  "rev": "R990-bmg-fog-1",
+  "prefs": {
+   "on": true,
+   "summon": true,
+   "patterns": true,
+   "art": true
+  },
+  "installed": {
+   "tick": true,
+   "effect": true
+  },
+  "stats": {
+   "waves": 6,
+   "units": 27,
+   "refused": 0,
+   "cancelled": 0,
+   "r61Held": 2,
+   "fogFx": 15,
+   "fogSkipped": 0,
+   "patternsSet": 2,
+   "casts": {
+    "불면의 십자시선": 1,
+    "검은 안개 웅덩이": 1,
+    "검은 안개 · 조준 연격": 1,
+    "검은 영혼 부채살": 1,
+    "안개 장막 확산": 1,
+    "검은 안개 · 교차 파열": 1,
+    "잠들 수 없는 안전지대": 1,
+    "검은 안개 분사": 1,
+    "검은 안개 · 잔류 맥동": 1
+   },
+   "artSwaps": 2,
+   "errors": 0,
+   "echoFixed": 2
+  },
+  "lastError": null,
+  "fogRatio": 0.636,
+  "patterns": [
+   "불면의 십자시선",
+   "검은 안개 웅덩이",
+   "검은 안개 · 조준 연격",
+   "검은 영혼 부채살",
+   "안개 장막 확산",
+   "검은 안개 · 교차 파열",
+   "잠들 수 없는 안전지대",
+   "검은 안개 분사",
+   "검은 안개 · 잔류 맥동",
+   "악몽 잔상 폭우",
+   "검은 안개 웅덩이"
+  ],
+  "summon": {
+   "used": 27,
+   "next": 1.42,
+   "alive": 5,
+   "cap": 8,
+   "period": 6.5
+  }
+ },
+ "casts": [
+  "불면의 십자시선",
+  "검은 안개 웅덩이",
+  "검은 안개 · 조준 연격",
+  "검은 영혼 부채살",
+  "안개 장막 확산",
+  "검은 안개 · 교차 파열",
+  "잠들 수 없는 안전지대",
+  "검은 안개 분사",
+  "검은 안개 · 잔류 맥동"
+ ],
+ "r760": {
+  "draws": 1298,
+  "swapped": 0,
+  "waiting": 0,
+  "patterns": 0,
+  "ghosted": 1293,
+  "errors": 0,
+  "sheets": 1259,
+  "label": 890,
+  "cues": 28,
+  "cueSkipped": 22
+ },
+ "errs": []
+}

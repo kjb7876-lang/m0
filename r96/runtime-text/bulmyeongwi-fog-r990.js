@@ -30,7 +30,7 @@ const lowFx=()=>{try{return !!settings?.lowFx;}catch(_){return false;}};
 const mobile=()=>{try{return matchMedia('(pointer:coarse)').matches||innerWidth<760;}catch(_){return false;}};
 // ── 수치(보고서 전후 표와 같음) ──
 const SUMMON=Object.freeze({first:4.5,periodHi:10.2,periodLo:6.5,loAt:.25,count:4,countLow:5,lowAt:.5,cap:8,capLow:6,lifetime:48,windup:1.1,recovery:.5,crowd:24,near:12});
-const FOG=Object.freeze({max:6,maxLow:3,alpha:.58,filter:'hue-rotate(205deg) saturate(.55) brightness(.42) contrast(1.1)'});
+const FOG=Object.freeze({max:6,maxLow:3,alpha:.58,filter:'hue-rotate(215deg) saturate(.45) brightness(.95) contrast(1.05)'});
 const NAMES=['잠식된 약방 아낙','잠식된 어부','잠식된 소복 처녀'];
 const CORE={path:'assets/r990/fog-core.webp',cell:256,n:24,fps:18},MIST={path:'assets/r430/mist-loop.webp',cell:192,cols:6,n:22,fps:12};
 function img(p){try{const r=typeof readyImage==='function'?readyImage(p):null;if(r&&r.ready!==false&&r.image)return r.image;}catch(_){}try{if(typeof addImage==='function')addImage(p,'R990 불면귀 안개');}catch(_){}return null;}
@@ -79,12 +79,12 @@ function frameOf(path,cell,col,row,pivotY){return {path,assetFrame:{sourceRect:[
 function drawFog(f){if(!img(MIST.path))return true;const q=project(f.x,f.y),a=clamp(f.age/Math.max(.01,f.life),0,1),w=f.warn/Math.max(.01,f.life);
  // 예고 동안 짙어지고(.32→.58) 터진 뒤 남았다 흩어짐
  const alpha=FOG.alpha*(a<w?.55+.45*(a/Math.max(.01,w)):1-Math.max(0,(a-.7)/.3));if(!(alpha>0.01)||!Number.isFinite(q?.x)||!Number.isFinite(q?.y)||!Number.isFinite(f.r)||!Number.isFinite(f.age))return true;
- const i=Math.floor(fin(f.age)*MIST.fps+f.seed)%MIST.n,h=clamp(f.r*2.6*tileLen(f.x,f.y)*.72,8,1200),fr=frameOf(MIST.path,MIST.cell,i%MIST.cols,Math.floor(i/MIST.cols),118);
+ const i=Math.floor(fin(f.age)*MIST.fps+f.seed)%MIST.n,h=clamp(f.r*2.2*tileLen(f.x,f.y),8,1200),fr=frameOf(MIST.path,MIST.cell,i%MIST.cols,Math.floor(i/MIST.cols),118);
  const paint=()=>{ctx.save();try{drawAssetFrame3(MIST.path,fr,q.x,q.y,h,{alpha:clamp(alpha,0,1),filter:FOG.filter});}finally{ctx.restore();}};
  if(typeof ctx.scope==='function')ctx.scope({id:'r990-fog-'+(f.id??f.seed),kind:'effect',sourcePath:MIST.path,x:f.x,y:f.y,groundAligned:false,lightShadowApproved:true},paint);else paint();return true;}
 function drawCore(f){if(!img(CORE.path))return true;const q=project(f.x,f.y),a=clamp(f.age/Math.max(.01,f.life),0,1);if(!Number.isFinite(q?.x)||!Number.isFinite(q?.y))return true;
- let s,alpha;if(f.phase==='gate'){s=.45+.55*a;alpha=.35+.55*a;}else{s=1+.45*a;alpha=.9*(1-a);}if(!(alpha>0.01))return true;
- let ah=110;try{ah=fin(actorHeight(),110);}catch(_){}const i=Math.floor(fin(f.age)*CORE.fps+f.seed)%CORE.n,h=clamp(ah*.95*s,8,900),fr=frameOf(CORE.path,CORE.cell,i,0,212);
+ let s,alpha;if(f.phase==='gate'){s=.55+.65*a;alpha=.5+.5*a;}else{s=1.2+.5*a;alpha=1-a;}if(!(alpha>0.01))return true;
+ let ah=110;try{ah=fin(actorHeight(),110);}catch(_){}const i=Math.floor(fin(f.age)*CORE.fps+f.seed)%CORE.n,h=clamp(ah*1.1*s,8,900),fr=frameOf(CORE.path,CORE.cell,i,0,212);
  const paint=()=>{ctx.save();try{drawAssetFrame3(CORE.path,fr,q.x,q.y,h,{alpha:clamp(alpha,0,1)});}finally{ctx.restore();}};
  if(typeof ctx.scope==='function')ctx.scope({id:'r990-core-'+(f.id??f.seed),kind:'effect',sourcePath:CORE.path,x:f.x,y:f.y,groundAligned:false,lightShadowApproved:true},paint);else paint();return true;}
 

@@ -59,6 +59,11 @@ const run=(c,s)=>vm.runInContext(s,c);
  run(c,"window.__STORYWORLD_BMG_FOG_R990__.set({patterns:true});var A=portable.assetMap.zones[0].actors[0];portable.assetMap.zones[0].actors[0]={id:'l303-boss',patterns:"+JSON.stringify([ORIG[0],X[0],ORIG[1],X[1],ORIG[2],X[2],ORIG[3]])+"};tickEnemies(.1)");
  ok(run(c,"portable.assetMap.zones[0].actors[0].patterns.length")===11,'월드를 다시 만들어 새 보스 객체가 와도 다시 적용');}
 {const c=world({names:['불면의 십자시선','검은 영혼 부채살','잠들 수 없는 안전지대','악몽 잔상 폭우','모르는 패턴']});ok(run(c,"portable.assetMap.zones[0].actors[0].patterns.length")===5,'모르는 패턴이 섞이면 안 건드림');}
+// R58 이 이 파일보다 늦게 끼우는 순서(헤드리스 실측: 불러올 때 4칸 → R990 11칸 → R58 compileWorld 가 늪 3종을 끼워 14칸)
+{const c=world();run(c,`var A=portable.assetMap.zones[0].actors[0],cur=A.patterns.slice(),Xs=${JSON.stringify(X)};A.patterns=[];for(let i=0;i<cur.length;i++){A.patterns.push(cur[i]);if(Xs[i])A.patterns.push(Xs[i]);}tickEnemies(.1)`);
+ const P=run(c,"portable.assetMap.zones[0].actors[0].patterns");ok(P.length===11&&P.filter(p=>p.r990Fog).length===7,'늦게 끼운 R58 도 다시 짜서 11칸·안개 7 '+P.length);
+ ok(P.map(p=>p.name).join('|')==='불면의 십자시선|검은 안개 웅덩이|검은 안개 · 조준 연격|검은 영혼 부채살|안개 장막 확산|검은 안개 · 교차 파열|잠들 수 없는 안전지대|검은 안개 분사|검은 안개 · 잔류 맥동|악몽 잔상 폭우|검은 안개 웅덩이','차례 '+P.map(p=>p.name).join('|'));
+ run(c,"window.__STORYWORLD_BMG_FOG_R990__.set({patterns:false})");ok(run(c,"portable.assetMap.zones[0].actors[0].patterns.map(p=>p.name).join('|')")==='불면의 십자시선|독수렁 · 조준 연격|검은 영혼 부채살|독수렁 · 교차 파열|잠들 수 없는 안전지대|독수렁 · 잔류 맥동|악몽 잔상 폭우','끄면 R58 원래 7칸 차례');}
 {const c=world({names:['a','b','c','d']});ok(run(c,"portable.assetMap.zones[0].actors[0].patterns.length")===4,'이름이 다른 표는 안 건드림');}
 {const c=world({store:{'storyworld.r990.bmgfog':'{"on":false}'}});ok(run(c,"portable.assetMap.zones[0].actors[0].patterns.length")===4,'전체 끄기면 원래 4종');}
 // ── ② 안개 소환 ──
@@ -86,7 +91,9 @@ function step(c,t1,dt=.1){run(c,`while(time<${t1}-1e-9){time+=${dt};tickEnemies(
  const total=run(c,"room.enemies.filter(e=>e.r990Fog).length");ok(total===48,'평생 48 '+total);}
 {const c=world({coarse:true});run(c,boss(1));step(c,60);ok(run(c,"room.enemies.filter(e=>e.r990Fog&&e.hp>0).length")===6,'모바일 동시 상한 6');}
 {const c=world({lowFx:true});run(c,boss(1));step(c,60);ok(run(c,"room.enemies.filter(e=>e.r990Fog&&e.hp>0).length")===6,'저사양 동시 상한 6');}
-{const c=world();run(c,boss(1)+"for(let i=0;i<28;i++)room.enemies.push({id:'x'+i,hp:5,spawnState:'active'});");step(c,8);ok(run(c,"room.enemies.filter(e=>e.r990Fog).length")===1,'살아 있는 적 30 상한(보스+28 → 빈자리 1)');}
+{const c=world();run(c,boss(1)+"for(let i=0;i<22;i++)room.enemies.push({id:'x'+i,hp:5,spawnState:'active',x:12,y:11});");step(c,8);ok(run(c,"room.enemies.filter(e=>e.r990Fog).length")===1,'보스 12칸 안 살아 있는 적 24 상한(보스+22 → 빈자리 1)');}
+{const c=world();run(c,boss(1)+"for(let i=0;i<40;i++)room.enemies.push({id:'far'+i,hp:5,spawnState:'active',x:40,y:40});");step(c,8);ok(run(c,"room.enemies.filter(e=>e.r990Fog).length")===4,'멀리 남은 순찰 40은 상한에 안 셈(실측: R61 은 이것 때문에 0회)');}
+{const c=world();run(c,boss(1)+"for(let i=0;i<40;i++)room.enemies.push({id:'nan'+i,hp:5,spawnState:'active',x:NaN,y:NaN});");step(c,8);ok(run(c,"room.enemies.filter(e=>e.r990Fog).length")===4,'위치 NaN 적은 멀리로 셈');}
 {const c=world({roomId:'last302'});run(c,boss(1).replace(/l303-boss'/g,"mb-last302-v31231'"));step(c,20);ok(run(c,"__motions.length")===0&&run(c,"__r61.owner.nextAt")===0,'다른 지역·중간보스는 R61 그대로');}
 {const c=world();run(c,boss(1)+"room.engaged=false;");step(c,20);ok(run(c,"__motions.length")===0,'전투 전엔 소환 없음');}
 {const c=world({store:{'storyworld.r990.bmgfog':'{"summon":false}'}});run(c,boss(1));step(c,20);ok(run(c,"__motions.length")===0&&run(c,"__r61.owner.nextAt")===0,'소환 끄기면 R61 그대로');}
