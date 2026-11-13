@@ -13,7 +13,7 @@ const IDLE='assets/r425/clean/assets/generated-v31224/actors-normalized/692e4ae0
 function world({store={},roomId='last303',with620=false,ready=true,sheets=false,audio=true,between='',pre=''}={}){const timers=[];const ctx={Math,String,Number,Array,Object,JSON,Map,WeakMap,Set,Symbol,isFinite,RegExp,performance:{now:()=>0},
   setTimeout:(f)=>{timers.push(f);return timers.length;},localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}}};ctx.window=ctx;vm.createContext(ctx);
  vm.runInContext(`var time=0,room={id:${JSON.stringify(roomId)},enemies:[]},player={x:6,y:3},ctx={commands:[]};var __ready=${ready},__sheets=${sheets},__added=[],__snd=[];${audio?"var soundProfiles={boss:[{key:'b',path:'x.ogg',gain:1}]};function sound(k){__snd.push(k);}function setupAudio(){soundProfiles={boss:[]};}var modal=null;":''}
-  function addImage(p){__added.push(p);}function readyImage(p){if(String(p).includes('assets/r760/')&&!__ready)return null;if(/sheet-/.test(p)){if(!__sheets)return null;const n=/[/]mid[/]sheet-hit/.test(p)?4:/[/]mid[/]sheet-idle/.test(p)?6:/[/]mid[/]/.test(p)?8:/sheet-(idle|move|idle2)[.]/.test(p)?6:/sheet-hit2?[.]/.test(p)?4:/sheet-death/.test(p)?10:8;return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:n*512,naturalHeight:512}};}const w=/-p[0-9][.]/.test(p)?393:672,h=/-p[0-9][.]/.test(p)?432:384;return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:w,naturalHeight:h}};}
+  function addImage(p){__added.push(p);}function readyImage(p){if(String(p).includes('assets/r760/')&&!__ready)return null;if(/sheet-/.test(p)){if(!__sheets)return null;if(/sheet-move(Up|Down|Side)[.]/.test(p))return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:1536,naturalHeight:384}};const n=/[/]mid[/]sheet-hit/.test(p)?4:/[/]mid[/]sheet-idle/.test(p)?6:/[/]mid[/]/.test(p)?8:/sheet-(idle|move|idle2)[.]/.test(p)?6:/sheet-hit2?[.]/.test(p)?4:/sheet-death/.test(p)?10:8;return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:n*512,naturalHeight:512}};}const w=/-p[0-9][.]/.test(p)?393:672,h=/-p[0-9][.]/.test(p)?432:384;return {ready:true,image:{src:'http://x/m0/'+p,naturalWidth:w,naturalHeight:h}};}
   var effects=[],__drawn=[],__base=[];function spawnBurnDeath3(e){effects.push({type:'enemyBurnDeath',x:e.x,y:e.y,age:0,life:e.boss?1.25:e.midboss?.95:.72,sourceId:e.id,bodyHeight:70});return true;}function drawBurnDeath3(f){__base.push(f.sourceId);}
   function drawAssetFrame3(path,frame,x,y,h,opt){if(!readyImage(path))return false;__drawn.push({path,rect:frame.assetFrame.sourceRect,vis:frame.assetFrame.visibleHeight,pivot:frame.assetFrame.pivot,x,y,h,alpha:opt?.alpha??1,flip:!!opt?.flip});return true;}
   var zoom=1;function project(x,y){return {x:100+(x-3)*10*zoom,y:200+(y-3)*5*zoom};}
@@ -383,4 +383,40 @@ const FF=(c,e)=>c.__STORYWORLD_STORY_COMBAT_R54__.frameFor(e,null);const VAPI=c=
  const cn=vworld({ready:false});cn.room.enemies.push(hw);ok(P(cn,shot()).base.length===1,'R769 sheet not loaded → engine');
  const cz=vworld({roomId:'last301'});cz.room.enemies.push(hw);ok(P(cz,shot()).base.length===1,'R769 other region → engine');
  const cf=vworld({store:{'storyworld.r763.villagers':'{"proj":false}'}});cf.room.enemies.push(hw);ok(P(cf,shot()).base.length===1,'R769 proj:false → engine');}
+{// R973 방향 이동(Dots CX-0082MV B35·B36): 화면 위·아래로 움직이면 위·아래 4프레임 시트(384칸), 옆으로는 기존 옆 걷기. 좌우는 뒤집기. 공격·피격·정지는 그대로.
+ //  검사 화면: project x=100+(x-3)*10, y=200+(y-3)*5 → 세계 y+ 가 화면 아래.
+ const F4=k=>Math.round(k.sourceRect[0]/384),bot=k=>Math.max(...k.points.map(q=>q[1])),lr=k=>k.points[1][0]-k.points[0][0];
+ const c=world({sheets:true}),e=boss();const D=frames(c,e,1,{step:(e)=>{e.y+=.06;}}),d=D[D.length-1].b;
+ const footD=Math.min(...d.points.map(q=>q[1]))+H(d)*338/384,footP=c.project(e.x,e.y).y;ok(SH(d)==='moveDown','boss moving down the screen → sheet-moveDown ('+SH(d)+')');ok(JSON.stringify(d.sourceRect.slice(1))==='[0,384,384]'&&JSON.stringify(d.imageSize)==='[1536,384]','moveDown uses one 384 cell of a 1536x384 sheet ('+d.sourceRect+')');
+ const fr=new Set(D.slice(10).map(x=>F4(x.b)));ok(fr.size===4&&[...fr].every(v=>v>=0&&v<4),'moveDown cycles 4 frames ('+[...fr].join('')+')');
+ const ch=D.slice(10).filter((x,i,a)=>i&&F4(x.b)!==F4(a[i-1].b)).length;ok(ch>=4&&ch<=7,'moveDown about 8fps ('+ch+' changes in '+((D.length-10)/30).toFixed(2)+'s)');
+ const U=frames(c,e,1,{step:(e)=>{e.y-=.06;}});ok(SH(U[U.length-1].b)==='moveUp','boss moving up the screen → sheet-moveUp ('+SH(U[U.length-1].b)+')');
+ const S=frames(c,e,1,{step:(e)=>{e.x+=.06;}});ok(SH(S[S.length-1].b)==='move'&&S[S.length-1].b.sourceRect[2]===512,'boss moving sideways → existing sheet-move (512 cell)');
+ // 크기·발: 방향이 바뀌어도 보이는 키와 발 줄이 같다(위·아래 384칸 보이는 키 275·발 줄 338, 옆 512칸 383·469.33)
+ const visS=H(S[S.length-1].b)*383/512,visD=H(d)*275/384;ok(Math.abs(visD/visS-1)<.03,'up/down body as tall as the side walk ('+visD.toFixed(1)+' vs '+visS.toFixed(1)+')');
+ ok(Math.abs(footD-footP)<1e-6,'moveDown foot row 338/384 sits on the enemy point ('+footD.toFixed(2)+' vs '+footP.toFixed(2)+')');
+ // 위·아래 그림은 좌우로 뒤집지 않는다(앞·뒤 모습이라 플레이어가 좌우로 넘어가도 튀지 않게)
+ run(c,'player.x=-5');const D2=frames(c,e,.6,{step:(e)=>{e.y+=.06;}});ok(SH(D2[D2.length-1].b)==='moveDown'&&lr(D2[D2.length-1].b)>0,'up/down art is not mirrored');run(c,'player.x=6');
+ // 대각선: 옆 성분이 크면 옆, 방향이 살짝 흔들려도 그림이 오락가락하지 않는다
+ const G=frames(c,e,1,{step:(e)=>{e.x+=.06;e.y+=.03;}});ok(SH(G[G.length-1].b)==='move','diagonal (side-heavy on screen) → side walk');
+ const J=frames(c,e,1.2,{step:(e,t)=>{e.y+=.06;e.x+=(Math.floor(t*30)%2?.07:-.07);}});const flips=J.slice(12).filter((x,i,a)=>i&&SH(x.b)!==SH(a[i-1].b)).length;ok(flips<=1,'jittery heading does not flicker between sheets ('+flips+' switches)');
+ // 정지·공격·피격은 그대로
+ ok(SH(frames(c,e,1.2).pop().b)==='idle','standing → idle');
+ const ca=world({sheets:true}),ea=boss();frames(ca,ea,.8,{step:(e)=>{e.y+=.06;}});ea.attack={elapsed:.1,angle:0,shape154:{windup:.35}};ok(/^atk/.test(SH(frames(ca,ea,.1,{step:(e)=>{e.y+=.06;}}).pop().b)),'attack while moving down → attack sheet');
+ ea.attack=null;ea.hitTimer=.2;ok(SH(frames(ca,ea,.05,{step:(e)=>{e.y+=.06;}})[0].b)==='hit','hit while moving down → flinch');
+ // 방향 시트가 안 실렸으면 기존 옆 걷기, 끄면 기존 그대로
+ const cn=world({sheets:true,pre:"var __noDir=true;"});run(cn,"{const b=readyImage;readyImage=function(p){return /sheet-move(Up|Down|Side)[.]/.test(p)?null:b(p);};}");const en=boss();ok(SH(frames(cn,en,.8,{step:(e)=>{e.y+=.06;}}).pop().b)==='move','direction sheet not loaded → side walk kept');
+ ok(run(cn,'__added').some(p=>/boss\/sheet-moveDown\.webp$/.test(p)),'direction sheets requested');
+ const co=world({sheets:true,store:{'storyworld.r760.bulmyeongwi':'{"dirMove":false}'}}),eo=boss();ok(SH(frames(co,eo,.8,{step:(e)=>{e.y+=.06;}}).pop().b)==='move','dirMove:false → side walk');
+ // 중간보스(검은 안개 심장): 옆·아래·위 4프레임, 서 있으면 대기 그대로, 크기는 대기와 같게
+ const cm=world({sheets:true,roomId:'last302'}),m=mid();const I=frames(cm,m,.6);const visI=H(I[I.length-1].b)*400/512;
+ const MD=frames(cm,m,1,{step:(e)=>{e.y+=.06;}}),md=MD[MD.length-1].b;ok(/mid\/sheet-moveDown\.webp$/.test(md.sourcePath)&&md.sourceRect[2]===384,'mid moving down → mid/sheet-moveDown ('+md.sourcePath.split('/').pop()+')');
+ ok(new Set(MD.slice(10).map(x=>F4(x.b))).size===4,'mid moveDown cycles 4 frames');ok(Math.abs(H(md)*265/384/visI-1)<.03,'mid walk as tall as its idle ('+(H(md)*265/384).toFixed(1)+' vs '+visI.toFixed(1)+')');
+ const MU=frames(cm,m,1,{step:(e)=>{e.y-=.06;}});ok(/mid\/sheet-moveUp\.webp$/.test(MU[MU.length-1].b.sourcePath),'mid moving up → moveUp');
+ const MS=frames(cm,m,1,{step:(e)=>{e.x+=.06;}}),ms=MS[MS.length-1];ok(/mid\/sheet-moveSide\.webp$/.test(ms.b.sourcePath)&&lr(ms.b)>0,'mid moving right → moveSide facing right');
+ const ML=frames(cm,m,1,{step:(e)=>{e.x-=.06;}}),ml=ML[ML.length-1];ok(/mid\/sheet-moveSide\.webp$/.test(ml.b.sourcePath)&&lr(ml.b)<0,'mid moving left → moveSide mirrored');
+ ok(ms.ghosts.length===1&&ms.ghosts[0].sourcePath===ms.b.sourcePath&&ms.ghosts[0].sourceRect[0]===ms.b.sourceRect[0],'mid afterimage follows the walk frame');
+ ok(/sheet-idle/.test(frames(cm,m,1.2).pop().b.sourcePath),'mid standing → idle');
+ m.attack={elapsed:.1,angle:0,shape154:{windup:.35}};ok(/sheet-atk/.test(frames(cm,m,.1,{step:(e)=>{e.y+=.06;}}).pop().b.sourcePath),'mid attack while moving → attack sheet');m.attack=null;
+ ok(/R973/.test(API(c).rev),'rev names R973 ('+API(c).rev+')');}
 console.log('R760 CPU check OK ('+n+' assertions)');
