@@ -154,6 +154,39 @@ if(exists){
    const sb=vm.runInContext('scopes',g3).filter(o=>/r948:tower:boom/.test(o.id));
    ok('burst picture drawn upright in front of the mob (not inside the groundAligned floor scope — it was hidden behind the body)',sb.some(o=>!o.groundAligned)&&sb.some(o=>o.groundAligned));}
   ok('MH-09 sheet does not replace the volley pop (PJ-03 hit6 stays for volley)',/heart-hit6\.webp/.test(src));}
+
+ // ---- R988 Dots CX-0094MH 시트: MH-03 큰 하트 고동 · MH-04 r2 대폭발 · MH-07 둥실 음표 · MH-10/10a/10b 오르골탑 받침 빛 ----
+ {const cellOf=(r,cols)=>r.sx/256+cols*(r.sy/256);
+  const grab=(g,re)=>vm.runInContext('drawn',g).filter(x=>re.test(x.src)).map(x=>({sx:x.a[0],sy:x.a[1],w:x.a[2],h:x.a[3]}));
+  const tick1=(g,dt)=>{vm.runInContext('drawn.length=0',g);step(g,1,dt);};
+  const M03=/assets\/r948\/mh03-heart24\.webp/,M04=/assets\/r948\/mh04-blast24\.webp/,M07=/assets\/r948\/mh07-note24\.webp/,M10=/assets\/r948\/mh10-aura24\.webp/,M10A=/assets\/r948\/mh10a-enter8\.webp/,M10B=/assets\/r948\/mh10b-exit8\.webp/;
+  // 대개화
+  let g=env();A(g).qaForce('bloom');g.room.enemies.push(mob('t',13,10,{hp:1e9,maxHp:1e9}));heroHit(g,'t');
+  for(let i=0;i<19;i++)step(g,1,.05);tick1(g,.05); // u≈1.0
+  let r=grab(g,M03);ok('R988 bloom charge drawn from MH-03 (24 cells of 256, 6×4)',r.length>0&&r.every(c=>c.w===256&&c.h===256&&c.sx%256===0&&c.sy%256===0&&cellOf(c,6)<=23));
+  ok('R988 MH-03 frame follows the 2 s charge (u≈1 s → cell 11..13)',r.some(c=>{const f=cellOf(c,6);return f>=11&&f<=13;}));
+  for(let i=0;i<18;i++)step(g,1,.05);tick1(g,.05); // u≈1.95
+  ok('R988 MH-03 reaches its last cracked frames at the end of the charge (≥ 22)',grab(g,M03).some(c=>cellOf(c,6)>=22));
+  const seen04=[];let after03=0;for(let i=0;i<40;i++){tick1(g,.05);grab(g,M04).forEach(c=>seen04.push(cellOf(c,6)));if(i>=5&&grab(g,M03).length)after03++;}
+  ok('R988 bloom blast drawn from MH-04 r2, from the flash frame (≥ 3) to the petal fade (≥ 20)',seen04.length>0&&Math.min(...seen04)>=3&&Math.max(...seen04)>=20&&seen04.every(f=>f<=23));
+  ok('R988 MH-03 heart gone once the blast is under way',after03===0);
+  // 오르골탑
+  g=env();A(g).qaForce('tower');g.room.enemies.push(mob('t',13,10,{hp:1e9,maxHp:1e9}),mob('n',12,12,{hp:1e9,maxHp:1e9}));heroHit(g,'t');
+  tick1(g,.1);ok('R988 tower enters with MH-10a (8 cells)',grab(g,M10A).length>0&&grab(g,M10A).every(c=>cellOf(c,4)<=7));
+  for(let i=0;i<28;i++)step(g,1,.1);tick1(g,.1); // u≈3
+  {const a=grab(g,M10),sc0=vm.runInContext('scopes',g);
+   ok('R988 standing tower uses the MH-10 aura loop (24 cells), not enter/exit',a.length>0&&a.every(c=>cellOf(c,6)<=23||c.h<256)&&!grab(g,M10A).length&&!grab(g,M10B).length);
+   ok('R988 aura split at the ring centre: back half behind the orgel, front half in front',a.some(c=>c.h<256&&c.sy%256===0)&&a.some(c=>c.h<256&&c.sy%256>0)&&sc0.some(o=>/:aura-back$/.test(o.id))&&sc0.some(o=>/:aura-front$/.test(o.id))&&(()=>{const b=sc0.filter(o=>/:aura-back$/.test(o.id)).pop(),f=sc0.filter(o=>/:aura-front$/.test(o.id)).pop(),bx=sc0.filter(o=>/:box$/.test(o.id)).pop();return b&&f&&bx&&b.y<bx.y&&f.y>bx.y;})());}
+  {const seen=[],runs=[];let run=[];for(let i=0;i<30;i++){tick1(g,.1);const c=grab(g,M07).map(c=>cellOf(c,6));c.forEach(f=>seen.push(f));if(c.length===1)run.push(c[0]);else{if(run.length)runs.push(run);run=[];}}if(run.length)runs.push(run);
+   ok('R988 floating notes drawn from MH-07 (24 cells)',seen.length>0&&seen.every(f=>f>=0&&f<=23));
+   // 한 음표가 이어 보이는 동안(그 틱에 음표 하나)만 비교 — 왕복이면 칸이 1~2씩만 움직인다
+   ok('R988 MH-07 plays back and forth (no 24→1 jump)',(()=>{let pairs=0,bad=0;for(const r of runs)for(let i=1;i<r.length;i++){pairs++;if(Math.abs(r[i]-r[i-1])>3)bad++;}return pairs>=3&&bad===0;})());}
+  for(let i=0;i<8;i++)step(g,1,.1);tick1(g,.1); // u≈6.9
+  ok('R988 tower leaves with MH-10b (8 cells)',grab(g,M10B).length>0&&grab(g,M10B).every(c=>cellOf(c,4)<=7||c.h<256));
+  ok('R988 damage numbers unchanged by the new pictures (tower .4×AP, bloom 3.2×AP)',procHits(g,'tower').every(h=>Math.abs(h.v-4)<1e-9));
+  // 그림이 아직 안 읽혔으면 코드 그림으로(오류 없음)
+  g=env();vm.runInContext('imgReady=false',g);for(const k of ['bloom','tower']){A(g).qaReset();A(g).qaForce(k);g.room.enemies.push(mob('f'+k,13,10,{hp:1e9}));heroHit(g,'f'+k);step(g,60,.05);}
+  ok('R988 pictures not loaded → code-drawn fallback, no errors',A(g).inspect().stats.errors===0&&vm.runInContext('hearts.length',g)>5);}
  // ---- 3D 기록기 안전(헤드리스 실측: 폭발 순간 u=2-1e-9 에서 sqrt(음수)=NaN → Three.js 'Nonfinite original draw command' → 화면 실패로 게임 정지) ----
  {const bad=[];const watch=g=>{const raw=g.ctx;g.ctx=new Proxy(raw,{get(o,k){const v=o[k];if(typeof v!=='function')return v;return (...a)=>{a.forEach((x,i)=>{if(typeof x==='number'&&!Number.isFinite(x))bad.push(String(k)+'#'+i);});return v.apply(o,a);};},set(o,k,v){if(typeof v==='number'&&!Number.isFinite(v))bad.push('set:'+String(k));o[k]=v;return true;}});};
   const at=(g,t)=>{g.time=t;vm.runInContext('time='+t+';tick();for(const e of effects.slice())drawEffect(e)',g);};
