@@ -64,6 +64,11 @@ for(let k=0;k<16;k++){const e=EP[k];if(ONLY&&!ONLY.includes(e.key))continue;
   await A(p,()=>{delete window.__STORYWORLD_SURVIVAL_FINALE_R1010__;});await A(p,()=>window.__STORYWORLD_SURVIVAL_R600__.qaGo(71));await p.waitForTimeout(300);await ready(p);
   const l=await run(p,'leave:71',180000);await ready(p);const s3=await A(p,()=>window.__STORYWORLD_SURVIVAL_R600__.state());
   ok('M without R1010: clears with no 미카엘라 boss and the run continues to round 2 stage 1',l.r==='leave'&&!l.seen.boss&&s3.i===0&&s3.loop===1&&s3.id===base.story[0],{r:l.r,boss:l.seen.boss,i:s3.i,loop:s3.loop,id:s3.id});}}
+// 결과 창(코어 파괴)도 사몽 장 제목을 보인다
+{await A(p,()=>window.__STORYWORLD_SURVIVAL_R600__.qaGo(57));await p.waitForTimeout(300);await ready(p);await A(p,()=>window.__STORYWORLD_SURVIVAL_R600__.qaCoreHp(0));
+ let txt='';for(let k=0;k<60&&!/코어가 부서졌/.test(txt);k++){await A(p,()=>{for(let j=0;j<10;j++)if(!modal)tick(1/30);});await p.waitForTimeout(100);txt=await A(p,()=>document.getElementById('panel')?.textContent||'');}
+ ok('result panel after a samong stage names the chapter (not an empty 「」)',/코어가 부서졌/.test(txt)&&txt.includes(EP[1].title)&&!txt.includes('「」'),txt.replace(/\s+/g,' ').slice(0,200));
+ await A(p,()=>document.querySelector('[data-r600again],#r600Again')?.click());}
 const fin=await A(p,()=>({ins:window.__STORYWORLD_SURVIVAL_R600__.inspect(),ext:window.__STORYWORLD_SURVIVAL_SAMONG_R1006__?.inspect?.(),nan:window.__R1006QA.nan,nanAt:window.__R1006QA.nanAt}));
 ok('no survival errors, no NaN/Infinity draw values, no page errors',fin.ins.stats.errors===0&&(fin.ext?.stats?.errors||0)===0&&fin.nan===0&&errs.length===0,{err:fin.ins.lastError,ext:fin.ext?.lastError,nan:fin.nanAt,errs:errs.slice(0,3)});
 console.log(JSON.stringify(rows));await ctx.close();

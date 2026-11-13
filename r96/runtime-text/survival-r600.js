@@ -315,7 +315,7 @@ function over(why){if(!S||S.over)return;snd('r546Fall',true);S.over=true;S.overW
  /* 코어 파괴는 Dots 파괴 시트(12칸 ≈ 1초)를 다 보여 준 뒤 결과 창 — 창이 열리면 화면이 멈추고 어두워져 파괴 장면이 안 보인다 */
  if(why==='core')S.panelAfter=S.overWall+DIE_MS;/* 창은 tick 감싸기가 이 시각 뒤에 연다 */else resultPanel();}
 function resultPanel(){if(!S)return;const why=S.overWhy;
- const def=G(()=>regionById[S.ids[S.i]],null),secs=S.overSecs||0,hero=S.hero;
+ const X=extOf(S.ids[S.i]),def=X?{title:X.title}:G(()=>regionById[S.ids[S.i]],null),secs=S.overSecs||0,hero=S.hero;
  openPanel('<div class="eyebrow">무한 생존 · 기록</div><h2>'+(why==='core'?'정화 코어가 부서졌습니다':'정화가 끊겼습니다')+'</h2>'+
   '<p>'+(S.loop?(S.loop+1)+'회차 · ':'')+(S.i+1)+' / '+S.ids.length+' 지역 「'+(def?.title||'')+'」까지 · 처치 '+S.kills+' · 생존 레벨 '+S.lv+' · '+Math.floor(secs/60)+'분 '+(secs%60)+'초</p>'+
   '<div class="actions"><button id="r600Again" class="primary">다시 도전</button><button id="r600Title">처음 화면</button></div>');
