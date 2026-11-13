@@ -448,6 +448,8 @@ jobs:
         run: node r96/qa/r955/r955-cpu-check.cjs
       - name: R967 boss/midboss sound gaps (hospital surgeon, syringe phantom new ElevenLabs sounds, wrath boss uses the R788 satan set) CPU check
         run: node r96/qa/r967/r967-cpu-check.cjs
+      - name: R993 SFX audit mix (category loudness trim, pitch variation, mob-layer admission, ducking, 4 cut-off sounds re-edited) CPU check
+        run: node r96/qa/r993/r993-cpu-check.cjs
       - name: R968 boss/midboss attack sounds also fire on route phases and rooms without an R78 phase (same rule as R966) CPU check
         run: node r96/qa/r968/r968-cpu-check.cjs
       - name: R975 hwando E ilseom boss-first 7-hit left/right multi-hit (sum stays x0.6, per-hit sound, E dash unchanged) CPU check
@@ -490,6 +492,8 @@ jobs:
         run: node r96/qa/r461/r461-cpu-check.cjs
       - name: R600 survival mode (pixel entry replaced, arena, narration-timed spawns, core, 3-choice upgrades, endless maps) CPU check
         run: node r96/qa/r600/r600-cpu-check.cjs
+      - name: R976 samong first region pixel art to painted assets CPU check
+        run: node r96/qa/r976/r976-cpu-check.cjs
       - name: R701 survival 77s choice window, difficulty, hero picker CPU check
         run: node r96/qa/r701/r701-cpu-check.cjs
       - name: R850 survival play-test fixes (arena terrain lock, hospital maze skip, next-stage prefetch, moving HUD) CPU check
@@ -516,6 +520,8 @@ jobs:
         run: node r96/qa/r962/r962-cpu-check.cjs
       - name: R970 777 developer test mode level input (level-based skill points, same rule as normal play, 1..99) CPU check
         run: node r96/qa/r970/r970-cpu-check.cjs
+      - name: R1011 hero level cap 777 shared by story/samong/survival/777 code (777 code reaches Lv.777, stats finite at Lv.777) CPU check
+        run: node r96/qa/r1011/r1011-cpu-check.cjs
       - name: R972 skill DoT / multi-hit split (total damage kept, lethal hits not split, own tick sounds rate-limited) CPU check
         run: node r96/qa/r972/r972-cpu-check.cjs
       - name: R971 hero special passive growth CPU check

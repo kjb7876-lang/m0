@@ -44213,6 +44213,31 @@
       "sha256": "228944db475a63737b99209e86110f48dd679148d7dd96b6cb7092f6372c86c9"
     },
     {
+      "path": "assets/r976/ash-flakes.webp",
+      "bytes": 5016,
+      "sha256": "95f57db293bd3697a29da26a9eff2465615f24731224fd2db66c726ba5ccbed9"
+    },
+    {
+      "path": "assets/r976/index.json",
+      "bytes": 1401,
+      "sha256": "4affdd8804da29fdabda1b822240223dca7ef1d5fd705b5ef4cccdc2d725e10e"
+    },
+    {
+      "path": "assets/r976/portal-teal.webp",
+      "bytes": 105680,
+      "sha256": "9957aa369a551ae89bddb25075c6040c648ce5ee320c70e2c97e8ad60b9c201a"
+    },
+    {
+      "path": "assets/r976/root-tendril.webp",
+      "bytes": 6314,
+      "sha256": "98ec3b04b84252e2163d5d5fcde6a8fbb3345f51cfbc7ba4c2841710e665a695"
+    },
+    {
+      "path": "assets/r976/tendrils-blood.webp",
+      "bytes": 304266,
+      "sha256": "9897cc20dd60cf2a49292cae5136fae0257459b485cc3b36a852af61e128c639"
+    },
+    {
       "path": "assets/r986/seoha-hand-strike.webp",
       "bytes": 174810,
       "sha256": "2ab11e88c943c520532ae505b188c2ce097960e4c2685465f232fa84a64511ff"
@@ -44661,6 +44686,26 @@
       "path": "assets/r990/fog-core.webp",
       "bytes": 340952,
       "sha256": "a03aaa9d21b300cc10b102254501329041c6c3c7cacaf9dbc56f0c0f07ca233d"
+    },
+    {
+      "path": "assets/r993/sfx/bmg-rain-1.ogg",
+      "bytes": 7979,
+      "sha256": "a108998ef207d116b3324dcd974cc21151abd61316ddd93fe1cde71b1dae4133"
+    },
+    {
+      "path": "assets/r993/sfx/boss-dark-attack.ogg",
+      "bytes": 11004,
+      "sha256": "9457284fb835d5772276085ff4ecb24fc852e3426c18722c11fe54b9ebca99ba"
+    },
+    {
+      "path": "assets/r993/sfx/index.json",
+      "bytes": 2611,
+      "sha256": "b7ac07eab063b4ed0a4ffef08318f118068cd6920b27e0e3bf8dd38c1a4f8235"
+    },
+    {
+      "path": "assets/r993/sfx/seoha-awake.ogg",
+      "bytes": 10046,
+      "sha256": "032c2405bae852dd1de68f2b637c07180b6a404e9971eb34da4fcc8e1c3d3401"
     },
     {
       "path": "assets/rc133/art/arena.webp",
@@ -49794,8 +49839,8 @@
     },
     {
       "path": "cheat-level-r970.js",
-      "bytes": 9531,
-      "sha256": "e579ef2f1b5a10e97e59bb226584b8518b806f75d436431b01a04aaf01abc341"
+      "bytes": 9631,
+      "sha256": "c59837592f9f3b08d29bbc860040b8b137605dae916d0441a5598f1ed274981b"
     },
     {
       "path": "chunks/ep1a08-0-0.json",
@@ -50899,8 +50944,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6577009,
-      "sha256": "cba4fb4905ee0899ec021d462ecb801997fe2f1109d199b2b4c559b57d67a362"
+      "bytes": 6577723,
+      "sha256": "7adc278fd27f1b6b20c60592394e0ff4b4fc2b947e6d061feffca6bd6f9ed806"
     },
     {
       "path": "intro-r140.js",
@@ -51543,6 +51588,11 @@
       "sha256": "8edd24260437bd660e934c0371e078a7eb97f37ef6778f8f1cafed35febddda8"
     },
     {
+      "path": "samong-p-art-r976.js",
+      "bytes": 8981,
+      "sha256": "1c1a96be256cc80ba8a8bcf1c32e9f7cf4aef3602f2a40b438ae6914c1ed6ad3"
+    },
+    {
       "path": "samong-play-r162.js",
       "bytes": 18983,
       "sha256": "78913442e364256dcf534c8e0b936e40c5b3ee3e316fde953e37834bd213a2ea"
@@ -51651,6 +51701,11 @@
       "path": "seven-sins-bossrooms.js",
       "bytes": 14689,
       "sha256": "f6f539296fd11946a0688a5d82be7bf68b32f5c8d560aff5369e92f7dd439fc5"
+    },
+    {
+      "path": "sfx-mix-r993.js",
+      "bytes": 14870,
+      "sha256": "b5b40b34d00700ac7f0d99cfd308b8fc749807892834e9f631796b3976f69fd1"
     },
     {
       "path": "sfx-r541.js",
@@ -51809,8 +51864,8 @@
     },
     {
       "path": "survival-r600.js",
-      "bytes": 72330,
-      "sha256": "e206858b9378440bbfbbb05436b67a1fe0a00a80a37fbba55079dc24b108cfc1"
+      "bytes": 72464,
+      "sha256": "7e7202eaf3f86878420984ce6586b052735aa4860b04d52b5176fefe7184abf3"
     },
     {
       "path": "swamp-hands-r474.js",
@@ -52053,9 +52108,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10410,
-  "totalBytes": 1279541038,
-  "webHTMLSha256": "cba4fb4905ee0899ec021d462ecb801997fe2f1109d199b2b4c559b57d67a362",
+  "fileCount": 10421,
+  "totalBytes": 1280020154,
+  "webHTMLSha256": "7adc278fd27f1b6b20c60592394e0ff4b4fc2b947e6d061feffca6bd6f9ed806",
   "largest": [
     {
       "path": "index.html",
