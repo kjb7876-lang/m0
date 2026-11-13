@@ -514,6 +514,8 @@ jobs:
         run: node r96/qa/r981/puppet-cpu-check.cjs
       - name: R990 bulmyeongwi fog skills (fog summon of village mobs, fog-weighted patterns, old boss art in summon ghosts) CPU check
         run: node r96/qa/r990/r990-cpu-check.cjs
+      - name: R974 boss/midboss directional walk (Dots CX-0082MV up/down/side 4-frame sheets only while walking on the engine idle art; attack/hit/other art untouched) CPU check
+        run: node r96/qa/r974/move-dir-cpu-check.cjs
       - name: R963 survival BGM note sits below the survival HUD line (no overlapped text) CPU check
         run: node r96/qa/r963/r963-cpu-check.cjs
       - name: R980 mobile memory budget (R163/R106 tint caches capped by pixels on mobile, idle decoded images trimmed, desktop unchanged) CPU check
