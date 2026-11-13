@@ -40818,6 +40818,16 @@
       "sha256": "2aeef038bdff1fa29c399f687abc5e53c0ae484a08edae5bfa9dbdf4d66f9557"
     },
     {
+      "path": "assets/r952/hs04-flow-line.webp",
+      "bytes": 33226,
+      "sha256": "60308bfb44b06ff5328f78ae61138a58ffb2d3dc660873b309c9d497f787202f"
+    },
+    {
+      "path": "assets/r952/hs05-feather-ring.webp",
+      "bytes": 330416,
+      "sha256": "502087fbec05ccc9456a5a5e25f77a8ae50d7c10fb7498ca08b091c3e3262bf9"
+    },
+    {
       "path": "assets/r952/hs06-volley-flash.webp",
       "bytes": 448274,
       "sha256": "b145efdd1e2cea7c4fa56ec1f662139f35e533adcda9a6bb8f5718b1e5aaa07b"
@@ -50014,8 +50024,8 @@
     },
     {
       "path": "hunter-squad-r952.js",
-      "bytes": 33712,
-      "sha256": "1b26d525cbd1f4265cf0c7042565015bfdcfb0ac96da5e082b8fc7cb7cebe508"
+      "bytes": 36630,
+      "sha256": "0e898d96e79727281e3dc9db8d8c062902edd0648579a30809da5d88da14cc68"
     },
     {
       "path": "hwando-arc-r349.js",
@@ -51193,8 +51203,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10238,
-  "totalBytes": 1267579044,
+  "fileCount": 10240,
+  "totalBytes": 1267945604,
   "webHTMLSha256": "ca9665a649d6bb9d5e4138ad3632667d4a64db7e60d3094190ede3cf5efc1e6e",
   "largest": [
     {
