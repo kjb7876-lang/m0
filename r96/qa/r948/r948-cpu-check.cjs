@@ -140,6 +140,68 @@ if(exists){
  g=env();vm.runInContext('imgReady=false',g);A(g).qaForce('tower');g.room.enemies.push(mob('t',13,10));heroHit(g,'t');step(g,10);ok('orgel picture not loaded yet → code-drawn box fallback, no error',A(g).inspect().stats.errors===0&&vm.runInContext('scopes',g).some(o=>/r948:tower/.test(o.id)));
  ok('sounds use existing Michaela cues only (no new paid audio)',(()=>{const g2=env();for(const k of ['volley','bloom','tower']){A(g2).qaReset();A(g2).qaForce(k);g2.room.enemies.push(mob('s'+k,13,10));heroHit(g2,'s'+k);step(g2,60);}return g2.sounds.length>0&&g2.sounds.every(k=>/^r546(Sp|Atk)_michaela$/.test(k));})());
 
+
+ // ---- Dots MH-09 r2 작은 하트 폭발(16장, 6×3 아틀라스 256 칸, 12.5fps) — 오르골탑 투사체 폭발에 적용 ----
+ {const g=env();A(g).qaForce('tower');g.room.enemies.push(mob('t',13,10,{hp:1e9,maxHp:1e9}));heroHit(g,'t');
+  const BURST=/assets\/r948\/heart-burst16\.webp/;let n=0;while(A(g).inspect().stats.bursts<1&&n++<600)step(g,1,.02);
+  const steps=[];for(let i=0;i<80;i++){vm.runInContext('drawn.length=0',g);step(g,1,.02);steps.push(vm.runInContext('drawn',g).filter(x=>BURST.test(x.src)).map(x=>({sx:x.a[0],sy:x.a[1],w:x.a[2],h:x.a[3]})));}
+  const all=steps.flat(),idx=all.map(r=>r.sx/256+6*(r.sy/256));
+  ok('tower burst drawn from the MH-09 sheet',all.length>0);
+  ok('MH-09 cells are whole 256 cells of the 6×3 atlas, only frames 0..15 (slots 17·18 are packing)',all.every(r=>r.w===256&&r.h===256&&r.sx%256===0&&r.sy%256===0)&&idx.every(i=>i>=0&&i<=15));
+  ok('MH-09 plays through to its fade (frame ≥ 13 reached → ~1.28 s, not cut at .5 s)',Math.max(...idx)>=13);
+  ok('jewel heart (3rd) → outline heart (4th) cross-fades: both drawn in one moment',steps.some(s=>{const f=s.map(r=>r.sx/256+6*(r.sy/256));return f.includes(2)&&f.includes(3);}));
+  {const g3=env();A(g3).qaForce('tower');g3.room.enemies.push(mob('t',13,10,{hp:1e9,maxHp:1e9}));heroHit(g3,'t');let k=0;while(A(g3).inspect().stats.bursts<1&&k++<600)step(g3,1,.02);step(g3,10,.02);
+   const sb=vm.runInContext('scopes',g3).filter(o=>/r948:tower:boom/.test(o.id));
+   ok('burst picture drawn upright in front of the mob (not inside the groundAligned floor scope — it was hidden behind the body)',sb.some(o=>!o.groundAligned)&&sb.some(o=>o.groundAligned));}
+  ok('MH-09 sheet does not replace the volley pop (PJ-03 hit6 stays for volley)',/heart-hit6\.webp/.test(src));}
+
+ // ---- R988 Dots CX-0094MH 시트: MH-03 큰 하트 고동 · MH-04 r2 대폭발 · MH-07 둥실 음표 · MH-10/10a/10b 오르골탑 받침 빛 ----
+ {const cellOf=(r,cols)=>r.sx/256+cols*(r.sy/256);
+  const grab=(g,re)=>vm.runInContext('drawn',g).filter(x=>re.test(x.src)).map(x=>({sx:x.a[0],sy:x.a[1],w:x.a[2],h:x.a[3]}));
+  const tick1=(g,dt)=>{vm.runInContext('drawn.length=0',g);step(g,1,dt);};
+  const M03=/assets\/r948\/mh03-heart24\.webp/,M04=/assets\/r948\/mh04-blast24\.webp/,M07=/assets\/r948\/mh07-note24\.webp/,M10=/assets\/r948\/mh10-aura24\.webp/,M10A=/assets\/r948\/mh10a-enter8\.webp/,M10B=/assets\/r948\/mh10b-exit8\.webp/;
+  // 대개화
+  let g=env();A(g).qaForce('bloom');g.room.enemies.push(mob('t',13,10,{hp:1e9,maxHp:1e9}));heroHit(g,'t');
+  for(let i=0;i<19;i++)step(g,1,.05);tick1(g,.05); // u≈1.0
+  let r=grab(g,M03);ok('R988 bloom charge drawn from MH-03 (24 cells of 256, 6×4)',r.length>0&&r.every(c=>c.w===256&&c.h===256&&c.sx%256===0&&c.sy%256===0&&cellOf(c,6)<=23));
+  ok('R988 MH-03 frame follows the 2 s charge (u≈1 s → cell 11..13)',r.some(c=>{const f=cellOf(c,6);return f>=11&&f<=13;}));
+  for(let i=0;i<18;i++)step(g,1,.05);tick1(g,.05); // u≈1.95
+  ok('R988 MH-03 reaches its last cracked frames at the end of the charge (≥ 22)',grab(g,M03).some(c=>cellOf(c,6)>=22));
+  const seen04=[];let after03=0;for(let i=0;i<40;i++){tick1(g,.05);grab(g,M04).forEach(c=>seen04.push(cellOf(c,6)));if(i>=5&&grab(g,M03).length)after03++;}
+  ok('R988 bloom blast drawn from MH-04 r2, from the flash frame (≥ 3) to the petal fade (≥ 20)',seen04.length>0&&Math.min(...seen04)>=3&&Math.max(...seen04)>=20&&seen04.every(f=>f<=23));
+  ok('R988 MH-03 heart gone once the blast is under way',after03===0);
+  // 오르골탑
+  g=env();A(g).qaForce('tower');g.room.enemies.push(mob('t',13,10,{hp:1e9,maxHp:1e9}),mob('n',12,12,{hp:1e9,maxHp:1e9}));heroHit(g,'t');
+  tick1(g,.1);ok('R988 tower enters with MH-10a (8 cells)',grab(g,M10A).length>0&&grab(g,M10A).every(c=>cellOf(c,4)<=7));
+  for(let i=0;i<28;i++)step(g,1,.1);tick1(g,.1); // u≈3
+  {const a=grab(g,M10),sc0=vm.runInContext('scopes',g);
+   ok('R988 standing tower uses the MH-10 aura loop (24 cells), not enter/exit',a.length>0&&a.every(c=>cellOf(c,6)<=23||c.h<256)&&!grab(g,M10A).length&&!grab(g,M10B).length);
+   ok('R988 aura split at the ring centre: back half behind the orgel, front half in front',a.some(c=>c.h<256&&c.sy%256===0)&&a.some(c=>c.h<256&&c.sy%256>0)&&sc0.some(o=>/:aura-back$/.test(o.id))&&sc0.some(o=>/:aura-front$/.test(o.id))&&(()=>{const b=sc0.filter(o=>/:aura-back$/.test(o.id)).pop(),f=sc0.filter(o=>/:aura-front$/.test(o.id)).pop(),bx=sc0.filter(o=>/:box$/.test(o.id)).pop();return b&&f&&bx&&b.y<bx.y&&f.y>bx.y;})());}
+  {const seen=[],runs=[];let run=[];for(let i=0;i<30;i++){tick1(g,.1);const c=grab(g,M07).map(c=>cellOf(c,6));c.forEach(f=>seen.push(f));if(c.length===1)run.push(c[0]);else{if(run.length)runs.push(run);run=[];}}if(run.length)runs.push(run);
+   ok('R988 floating notes drawn from MH-07 (24 cells)',seen.length>0&&seen.every(f=>f>=0&&f<=23));
+   // 한 음표가 이어 보이는 동안(그 틱에 음표 하나)만 비교 — 왕복이면 칸이 1~2씩만 움직인다
+   ok('R988 MH-07 plays back and forth (no 24→1 jump)',(()=>{let pairs=0,bad=0;for(const r of runs)for(let i=1;i<r.length;i++){pairs++;if(Math.abs(r[i]-r[i-1])>3)bad++;}return pairs>=3&&bad===0;})());}
+  for(let i=0;i<8;i++)step(g,1,.1);tick1(g,.1); // u≈6.9
+  ok('R988 tower leaves with MH-10b (8 cells)',grab(g,M10B).length>0&&grab(g,M10B).every(c=>cellOf(c,4)<=7||c.h<256));
+  ok('R988 damage numbers unchanged by the new pictures (tower .4×AP, bloom 3.2×AP)',procHits(g,'tower').every(h=>Math.abs(h.v-4)<1e-9));
+  // 그림이 아직 안 읽혔으면 코드 그림으로(오류 없음)
+  g=env();vm.runInContext('imgReady=false',g);for(const k of ['bloom','tower']){A(g).qaReset();A(g).qaForce(k);g.room.enemies.push(mob('f'+k,13,10,{hp:1e9}));heroHit(g,'f'+k);step(g,60,.05);}
+  ok('R988 pictures not loaded → code-drawn fallback, no errors',A(g).inspect().stats.errors===0&&vm.runInContext('hearts.length',g)>5);}
+ // ---- R998 Dots CX-0094MH MH-05 하트 구름(기존 24장 알파 60% 정리판) ----
+ {const cellOf=(r,cols)=>r.sx/256+cols*(r.sy/256);
+  const M05=/assets\/r948\/mh05-cloud24\.webp/,grab=(g)=>vm.runInContext('drawn',g).filter(x=>M05.test(x.src)).map(x=>({sx:x.a[0],sy:x.a[1],w:x.a[2],h:x.a[3]}));
+  const tick1=(g,dt)=>{vm.runInContext('drawn.length=0',g);step(g,1,dt);};
+  let g=env();A(g).qaForce('bloom');g.room.enemies.push(mob('c',13,10,{hp:1e9,maxHp:1e9}));heroHit(g,'c');
+  for(let i=0;i<40;i++)step(g,1,.05); // 충전 2초 → 폭발, 구름 시작
+  const seen=[];for(let i=0;i<90;i++){tick1(g,.05);const r=grab(g);if(r.length)seen.push({i,cells:r});}
+  const all=seen.flatMap(s=>s.cells);
+  ok('R998 heart cloud drawn from MH-05 (24 cells of 256, 6×4)',all.length>0&&all.every(c=>c.w===256&&c.h===256&&c.sx%256===0&&c.sy%256===0&&cellOf(c,6)<=23));
+  const fr=seen.map(s=>Math.max(...s.cells.map(c=>cellOf(c,6))));
+  ok('R998 MH-05 plays once across the cloud life: starts small (≤ 2), swells mid-way, ends on the last frames (≥ 21)',fr.length>20&&fr[0]<=2&&fr.some(f=>f>=10&&f<=13)&&fr[fr.length-1]>=21);
+  ok('R998 MH-05 never jumps back (frame order kept)',fr.every((f,i)=>i===0||f>=fr[i-1]));
+  ok('R998 cloud damage unchanged (power × .3 per .5 s tick, 8 ticks)',procHits(g,'cloud').length===8&&procHits(g,'cloud').every(h=>Math.abs(h.v-procHits(g,'cloud')[0].v)<1e-9));
+  g=env();vm.runInContext('imgReady=false',g);A(g).qaForce('bloom');g.room.enemies.push(mob('d',13,10,{hp:1e9}));heroHit(g,'d');step(g,140,.05);
+  ok('R998 MH-05 not loaded → code puffs fallback, no errors',A(g).inspect().stats.errors===0&&!grab(g).length);}
  // ---- 3D 기록기 안전(헤드리스 실측: 폭발 순간 u=2-1e-9 에서 sqrt(음수)=NaN → Three.js 'Nonfinite original draw command' → 화면 실패로 게임 정지) ----
  {const bad=[];const watch=g=>{const raw=g.ctx;g.ctx=new Proxy(raw,{get(o,k){const v=o[k];if(typeof v!=='function')return v;return (...a)=>{a.forEach((x,i)=>{if(typeof x==='number'&&!Number.isFinite(x))bad.push(String(k)+'#'+i);});return v.apply(o,a);};},set(o,k,v){if(typeof v==='number'&&!Number.isFinite(v))bad.push('set:'+String(k));o[k]=v;return true;}});};
   const at=(g,t)=>{g.time=t;vm.runInContext('time='+t+';tick();for(const e of effects.slice())drawEffect(e)',g);};

@@ -29,5 +29,152 @@
     256
    ]
   }
+ ],
+ "dots": [
+  {
+   "id": "CX-0094MH MH-09 r2 heart_burst_small",
+   "driveFile": "CX-0094MH_MH-09_r2_candidate.zip",
+   "zipSha256": "0c96158e816a0265f4477e65ae35a7ba68c12efd9728bdf71a4462af8f0e7319",
+   "src": "CX-0094MH_r2_MH-09_heart_burst_small.png",
+   "srcSha256": "fe97b008d85bd346a5122aa5dbe684f81519b92b5f8ebed27f62dd1347ee7017",
+   "out": "heart-burst16.webp",
+   "outSha256": "4a410a271f31e0f5b75a89c2c5c8300baf3996a03564efc1298a7889a4298297",
+   "bytes": 98002,
+   "size": [
+    1536,
+    768
+   ],
+   "grid": "6x3 칸 256, 16장(17·18 칸은 빈 포장칸, 재생 안 함), 12.5fps 1.28초 한 번",
+   "use": "오르골탑 투사체가 달라붙었다 터지는 하트 폭발(기존 PJ-03 hit6 대체). 하트 세례 적중 팝은 hit6 유지",
+   "edit": "webp q90 변환만. 코드에서 칸별 피벗 y(137→111)로 중심 맞춤, 3→4장 교차 페이드(검토 지시)",
+   "status": "코디네이터 검토 '유지'(2026-11-13), 적용"
+  },
+  {
+   "id": "CX-0094MH MH-03 큰 하트 충전",
+   "driveFile": "드라이브 CLAUDE-ASSET-CONDITIONAL-APPLY-20261113-v1 (alpha16 정리판)",
+   "src": "MH03_alpha16_HOLD.png",
+   "srcSha256": "48e77e7a23d17f8e4fd7c8e4e82b2fb7b3e344865268638c3326fb8d479b91af",
+   "out": "mh03-heart24.webp",
+   "outSha256": "8314dd6ed01b2d9e115c30499989b85d1c56c9c22c7375b7a309c44f2ceb4585",
+   "bytes": 301454,
+   "size": [
+    1536,
+    1024
+   ],
+   "grid": "6x4 칸 256(원본 512를 0.5배), 24장 12.5fps 1.92초 한 번(대개화 2초 충전과 같아 24→1 이음매가 안 보임)",
+   "use": "대개화 충전 하트(코드 하트·금 대체)",
+   "pivot": "피벗 (128,134)",
+   "edit": "LANCZOS 축소(해당 시트), 알파 16 이하 0, webp q88. 그림 내용·색·순서는 바꾸지 않음",
+   "status": "R988 7분야 심사 통과(review.md), 적용. 헤드리스 확인만"
+  },
+  {
+   "id": "CX-0094MH MH-04 r2 하트 대폭발",
+   "driveFile": "드라이브 CLAUDE-ASSET-CONDITIONAL-APPLY-20261113-v1 (alpha16 정리판)",
+   "src": "MH04_r2_tech_256_HOLD.png",
+   "srcSha256": "66399ca0e670f84e3969d2b6ec53eb87fcebc29c2346f902687c2706c5e23f1b",
+   "out": "mh04-blast24.webp",
+   "outSha256": "c0973e2fdd354700cc81e82ad470e9876861269bf586d0d76cc8c553283c2c52",
+   "bytes": 391788,
+   "size": [
+    1536,
+    1024
+   ],
+   "grid": "6x4 칸 256, 3장(섬광)부터 23장까지 한 번 1.68초",
+   "use": "대개화 대폭발 충격파(코드 이중 하트 테 대체, 빛·바닥 폭발은 유지)",
+   "pivot": "피벗 (130,135)",
+   "edit": "LANCZOS 축소(해당 시트), 알파 16 이하 0, webp q88. 그림 내용·색·순서는 바꾸지 않음",
+   "status": "R988 7분야 심사 통과(review.md), 적용. 헤드리스 확인만"
+  },
+  {
+   "id": "CX-0094MH MH-07 하트·음표 둥실 투사체",
+   "driveFile": "드라이브 CLAUDE-ASSET-CONDITIONAL-APPLY-20261113-v1 (alpha16 정리판)",
+   "src": "MH-07_r1_alpha16_HOLD.png",
+   "srcSha256": "1d9b71671ace4c8d9917f3577b66465b14f823793e682dd72427143bb3919894",
+   "out": "mh07-note24.webp",
+   "outSha256": "bb82345cbf807139590baf32a6b773bbfa9eb972040c93697e3442cbe480a1ea",
+   "bytes": 149816,
+   "size": [
+    1536,
+    1024
+   ],
+   "grid": "6x4 칸 256, 24장 왕복(ping-pong) 12.5fps 루프로 24→1 튐 제거",
+   "use": "오르골탑 둥실 투사체(비행·달라붙음, 코드 음표 대체)",
+   "pivot": "피벗 (130,140)",
+   "edit": "LANCZOS 축소(해당 시트), 알파 16 이하 0, webp q88. 그림 내용·색·순서는 바꾸지 않음",
+   "status": "R988 7분야 심사 통과(review.md), 적용. 헤드리스 확인만"
+  },
+  {
+   "id": "CX-0094MH MH-10 오르골 받침 빛",
+   "driveFile": "드라이브 CLAUDE-ASSET-CONDITIONAL-APPLY-20261113-v1 (alpha16 정리판)",
+   "src": "MH10_orgel_aura_alpha16_HOLD.png",
+   "srcSha256": "dde01df43f280b086d1f108b37a4491a2231de316946fe61ce67012c7cdbc5d4",
+   "out": "mh10-aura24.webp",
+   "outSha256": "fbc879e2f7c6fc825283fd586d45cbafb52d92afeaef435e27c17b4218d32542",
+   "bytes": 230326,
+   "size": [
+    1536,
+    1024
+   ],
+   "grid": "6x4 칸 256(0.5배), 24장 루프",
+   "use": "오르골탑 유지 중 받침 빛(코드 고리 대체, 앞·뒤 두 층으로 나눔)",
+   "pivot": "고리 중심 y 188, 고리 폭 218 → 영웅 키 1.9배로 맞춤",
+   "edit": "LANCZOS 축소(해당 시트), 알파 16 이하 0, webp q88. 그림 내용·색·순서는 바꾸지 않음",
+   "status": "R988 7분야 심사 통과(review.md), 적용. 헤드리스 확인만"
+  },
+  {
+   "id": "CX-0094MH MH-10a 받침 빛 등장",
+   "driveFile": "드라이브 CLAUDE-ASSET-CONDITIONAL-APPLY-20261113-v1 (alpha16 정리판)",
+   "src": "MH10a_alpha16_HOLD.png",
+   "srcSha256": "196bcd0278c6070833a9a8099dc018149f52d8b42648f9bd17f3c000512a14b5",
+   "out": "mh10a-enter8.webp",
+   "outSha256": "47fd07b2dcf3a33d9888b277f980693db6ba87f00d90b1a07453ea914540eb03",
+   "bytes": 82046,
+   "size": [
+    1024,
+    512
+   ],
+   "grid": "4x2 칸 256(0.5배), 8장 0.64초 한 번",
+   "use": "오르골탑 등장",
+   "pivot": "고리 중심 y 219, 폭 160(MH-10과 75px 차를 코드 피벗으로 맞춤)",
+   "edit": "LANCZOS 축소(해당 시트), 알파 16 이하 0, webp q88. 그림 내용·색·순서는 바꾸지 않음",
+   "status": "R988 7분야 심사 통과(review.md), 적용. 헤드리스 확인만"
+  },
+  {
+   "id": "CX-0094MH MH-10b 받침 빛 퇴장",
+   "driveFile": "드라이브 CLAUDE-ASSET-CONDITIONAL-APPLY-20261113-v1 (alpha16 정리판)",
+   "src": "MH-10b_r1_alpha16_HOLD.png",
+   "srcSha256": "b701639b3efeddfbf2306729614c6ea0d7c850167fd06ddb87362c792b6ed605",
+   "out": "mh10b-exit8.webp",
+   "outSha256": "cf28048bb844ae6cb99948c65130372512821f9f9d1f1b8285cf561ee01748cd",
+   "bytes": 75054,
+   "size": [
+    1024,
+    512
+   ],
+   "grid": "4x2 칸 256(0.5배), 8장 0.64초 한 번",
+   "use": "오르골탑 사라짐(마지막 0.64초)",
+   "pivot": "고리 중심 y 225, 폭 177",
+   "edit": "LANCZOS 축소(해당 시트), 알파 16 이하 0, webp q88. 그림 내용·색·순서는 바꾸지 않음",
+   "status": "R988 7분야 심사 통과(review.md), 적용. 헤드리스 확인만"
+  },
+  {
+   "id": "CX-0094MH MH-05 r2 하트 구름(기존 24장 알파 60%)",
+   "driveFile": "MH05_r2_part04_legacy24_alpha060_HOLD.zip",
+   "zipSha256": "0b8a6ad45c9344defca4cfeaf2550895f7d4eb5fb349e6c8536ec99c85a1165b",
+   "src": "MH05_existing24_alpha060_HOLD.png",
+   "srcSha256": "fbac70f6cd9e7a870be41c9ea858f2f36c8cc41eddb5547e00c96431e01c283b",
+   "out": "mh05-cloud24.webp",
+   "outSha256": "303c261b3877e4264a3c78850195f253d85c756c350818bd0e8f055d55b90686",
+   "bytes": 176888,
+   "size": [
+    1536,
+    1024
+   ],
+   "grid": "6x4 칸 256(원본 512 를 0.5배), 24장, 구름 수명 4.3초에 걸쳐 한 번",
+   "use": "연심 대개화 폭발 뒤 하트 구름(코드 뭉게 덩이 대체, 바닥 하트 표식 유지)",
+   "pivot": "칸 무게중심 (128,114), 가장 큰 장 폭 224px",
+   "edit": "LANCZOS 0.5배, 알파 16 이하 0, webp q88. 알파 60% 상한(Dots 처리) 그대로",
+   "status": "R998 7분야 심사 7.86 통과(review.md), 적용. 헤드리스 확인만. 새 4장 시험본(part01)은 미완성이라 미적용"
+  }
  ]
 }
