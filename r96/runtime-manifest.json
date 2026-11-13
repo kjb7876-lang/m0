@@ -40683,9 +40683,19 @@
       "sha256": "cbb8ec41cf0d4b5ba273f90bc077fc7b4808b1049859529af6fc1def9ebefe05"
     },
     {
+      "path": "assets/r945/hwando-ink-burst.webp",
+      "bytes": 104888,
+      "sha256": "4d60d1089285a7ecb4564f023040b7dedf08002dac5fd4a8b9f00123da21a32b"
+    },
+    {
       "path": "assets/r945/hwando-ink-sweep.webp",
       "bytes": 110830,
       "sha256": "05559ba6cc4431426b7b1a5f8fffffbbccc3b11a5ca52d14850ac0d7bbfa1361"
+    },
+    {
+      "path": "assets/r945/hwando-ink-vapor.webp",
+      "bytes": 109598,
+      "sha256": "e38ea2cf9dd912e384a11e08a0d50da3dd3507a65a038e3b08de5199228b7394"
     },
     {
       "path": "assets/r945/hwando-orchid-slash.webp",
@@ -40783,6 +40793,11 @@
       "sha256": "05ddfbbc73a83d4cf6931c7c9e9a315e27c30101254d0b93848dc782bab2cb03"
     },
     {
+      "path": "assets/r952/hs01-blood-pact-gate.webp",
+      "bytes": 682844,
+      "sha256": "e79c173c105c79a3ccf536caea1c33060514d14cb6e896283cf9406c0befb45a"
+    },
+    {
       "path": "assets/r952/hs02-blood-pact-leave.webp",
       "bytes": 67800,
       "sha256": "71535c8769d37c39b4e8d8fc58241ee8edb65175ba8faf52597570b13476009f"
@@ -40791,6 +40806,16 @@
       "path": "assets/r952/hs03-shade-slash.webp",
       "bytes": 122874,
       "sha256": "2aeef038bdff1fa29c399f687abc5e53c0ae484a08edae5bfa9dbdf4d66f9557"
+    },
+    {
+      "path": "assets/r952/hs06-volley-flash.webp",
+      "bytes": 448274,
+      "sha256": "b145efdd1e2cea7c4fa56ec1f662139f35e533adcda9a6bb8f5718b1e5aaa07b"
+    },
+    {
+      "path": "assets/r952/hs07-tier-icons.webp",
+      "bytes": 28768,
+      "sha256": "476933d8ad3a8395012f206a662f0ead50f335470bd3de0e89c593fc477a8796"
     },
     {
       "path": "assets/r953/gv-call.webp",
@@ -49749,8 +49774,8 @@
     },
     {
       "path": "fx-sprites-r106.js",
-      "bytes": 13960,
-      "sha256": "52460ef81b2bab2a1fc73251f343100be44b3301e1f75134d618aa2b6bc8d5c4"
+      "bytes": 14316,
+      "sha256": "b4c986bf71d04cdaea3b87f9a0681b53e3444a21199649fe24b510b137ea9a80"
     },
     {
       "path": "ground-fringe-r452.js",
@@ -49954,8 +49979,8 @@
     },
     {
       "path": "hunter-squad-r952.js",
-      "bytes": 29552,
-      "sha256": "3b7011366b1c86f9dc28e57d76f3ebe66ab1d9cb1320bf3c4efd1846486d46c9"
+      "bytes": 33712,
+      "sha256": "1b26d525cbd1f4265cf0c7042565015bfdcfb0ac96da5e082b8fc7cb7cebe508"
     },
     {
       "path": "hwando-arc-r349.js",
@@ -49974,8 +49999,8 @@
     },
     {
       "path": "hwando-ink-r945.js",
-      "bytes": 34968,
-      "sha256": "13304c7032961dea293d035fde7e1bd74cdefc81a5f2c8d3d6d15f345e044659"
+      "bytes": 36842,
+      "sha256": "03ab93eb01b5e0b1049e6876a44f2f620f7b1bead2cd74ad8a75f5edddda14f7"
     },
     {
       "path": "hwando-r242.js",
@@ -50004,8 +50029,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6576268,
-      "sha256": "a2271c2c541c359adfd307b07e3fcb0af75ac83fea241a8f6ad80277b232750d"
+      "bytes": 6576316,
+      "sha256": "2bf13e1d6ee86ffe4802e61e35c9fd192399e344879189841e838b41ca012b7b"
     },
     {
       "path": "intro-r140.js",
@@ -50278,6 +50303,11 @@
       "sha256": "3c9b0d9900c8fe6f9dbfa29ad0fe0946ccd9835bb8ed5d1e993170ecae9c8724"
     },
     {
+      "path": "mobile-memory-r980.js",
+      "bytes": 4605,
+      "sha256": "0ea070eaeaefe2e7794358991a0e2e15a8a4bcf401339b7d43e4786fe8894637"
+    },
+    {
       "path": "mobile-perf-r298.js",
       "bytes": 4776,
       "sha256": "c2978bca5b0456eb963e11c492bbc3038e976d6b0a66e00f56c8e3e013a23d3d"
@@ -50434,8 +50464,8 @@
     },
     {
       "path": "pixelfx-r163.js",
-      "bytes": 8365,
-      "sha256": "c6ea5237eee7459a2b88d7ed60948e9c5a4c2c156c26483087add79a653aa8b6"
+      "bytes": 8950,
+      "sha256": "1fa59f6002dd21d6c0f498b3f26b48f6d7259c16f4b56817751500a0e8ae8bc3"
     },
     {
       "path": "play-r106.js",
@@ -51123,9 +51153,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10224,
-  "totalBytes": 1265115716,
-  "webHTMLSha256": "a2271c2c541c359adfd307b07e3fcb0af75ac83fea241a8f6ad80277b232750d",
+  "fileCount": 10230,
+  "totalBytes": 1266501716,
+  "webHTMLSha256": "2bf13e1d6ee86ffe4802e61e35c9fd192399e344879189841e838b41ca012b7b",
   "largest": [
     {
       "path": "index.html",
