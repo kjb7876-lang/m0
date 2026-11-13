@@ -29,7 +29,13 @@ const CFG=Object.freeze({
 const SHEET=Object.freeze({
  burst:Object.freeze({path:'assets/r585/slayer-burst-small.webp',cell:192,cols:6,frames:24,fps:30,px:128/256,py:224/256}),
  hit:Object.freeze({path:'assets/r587/slayer-hit.webp',cell:192,cols:6,frames:24,fps:40,px:132/256,py:158/256}),
- cross:Object.freeze({path:'assets/r585/slayer-r-cross.webp',cell:192,cols:6,frames:24,fps:23.6,px:128/256,py:224/256})});
+ cross:Object.freeze({path:'assets/r585/slayer-r-cross.webp',cell:192,cols:6,frames:24,fps:23.6,px:128/256,py:224/256}),
+ // Dots CX-0089SB(11-13 적용): SB-01 떨어지는 십자검 12장(칼끝 피벗 128,252/256), SB-02 꽂힘 16장(128,225/256, 끝은 흩어져 사라짐),
+ // SB-06 추가2 액체 피 줄기 12장 루프(256×64, 줄기 x 11~245) + 머리 핏덩이(앞 4장만: 5~8장은 위로 16px 어긋남). 알파 16 이하는 포장 때 지움.
+ fall:Object.freeze({path:'assets/r947/slayer-sword-fall.webp',cell:192,cols:6,frames:12,fps:16,px:.5,py:252/256,body:217/256}),
+ stab:Object.freeze({path:'assets/r947/slayer-sword-stab.webp',cell:192,cols:4,frames:16,fps:15,px:.5,py:225/256}),
+ stream:Object.freeze({path:'assets/r947/slayer-blood-stream.webp',cw:256,ch:64,cols:1,frames:12,fps:20,x0:11/256,x1:245/256,band:31/64}),
+ head:Object.freeze({path:'assets/r947/slayer-blood-head.webp',cell:64,cols:4,frames:4,fps:20,px:.5,py:.5})});
 const SHEET_PATHS=Object.values(SHEET).map(v=>v.path);
 const fin=v=>typeof v==='number'&&Number.isFinite(v),clamp=(v,a,b)=>Math.min(b,Math.max(a,v)),smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
 let lastError=null,errors=0;const fail=e=>{errors++;lastError=String(e?.message||e).slice(0,200);};
@@ -136,24 +142,6 @@ function beamTex(){return make('beam',256,32,(g,w,h)=>{const cy=h/2;
   const band=(th,col)=>{const gr=g.createLinearGradient(0,0,w,0);gr.addColorStop(0,col.replace('A','0'));gr.addColorStop(.08,col.replace('A','1'));gr.addColorStop(.92,col.replace('A','1'));gr.addColorStop(1,col.replace('A','0'));
    g.fillStyle=gr;g.beginPath();g.ellipse(w/2,cy,w/2,th/2,0,0,7);g.fill();};
   g.globalAlpha=.45;band(30,'rgba(110,0,14,A)');g.globalAlpha=.8;band(16,'rgba(200,10,32,A)');g.globalAlpha=1;band(7,'rgba(255,90,96,A)');band(3,'rgba(255,240,236,A)');});}
-// 피 십자검: 칼날이 아래. 위(손잡이·머리) 짧고 아래(칼날) 긴 정십자 모양. 진홍 날 + 검붉은 테 + 흰 날선 + 엷은 피 빛무리.
-function swordTex(){return make('sword',96,288,(g,w,h)=>{const cx=w/2,guardY=62;
-  const shape=(grow)=>{g.beginPath();g.arc(cx,14,9+grow,0,7);g.fill();g.fillRect(cx-5-grow,20,10+grow*2,guardY-20);
-   g.beginPath();g.moveTo(cx-40-grow,guardY-6-grow);g.lineTo(cx+40+grow,guardY-6-grow);g.lineTo(cx+34+grow,guardY+8+grow);g.lineTo(cx-34-grow,guardY+8+grow);g.closePath();g.fill();
-   g.beginPath();g.moveTo(cx-12-grow,guardY+8);g.lineTo(cx+12+grow,guardY+8);g.lineTo(cx+8+grow*.6,h-30);g.lineTo(cx,h-4+grow*.5);g.lineTo(cx-8-grow*.6,h-30);g.closePath();g.fill();};
-  g.fillStyle='rgba(150,0,20,.16)';shape(9);g.fillStyle='rgba(170,0,24,.26)';shape(5);
-  g.fillStyle='rgba(58,0,8,1)';shape(2);
-  const gr=g.createLinearGradient(cx-12,0,cx+12,0);gr.addColorStop(0,'rgba(120,0,18,1)');gr.addColorStop(.45,'rgba(220,20,40,1)');gr.addColorStop(.55,'rgba(236,40,56,1)');gr.addColorStop(1,'rgba(110,0,16,1)');g.fillStyle=gr;shape(0);
-  g.strokeStyle='rgba(255,226,220,.95)';g.lineWidth=2;g.beginPath();g.moveTo(cx,guardY+12);g.lineTo(cx,h-18);g.stroke();
-  g.fillStyle='rgba(255,210,200,.9)';g.beginPath();g.arc(cx,guardY+1,4.5,0,7);g.fill();g.beginPath();g.arc(cx,14,3.5,0,7);g.fill();
-  g.fillStyle='rgba(120,0,14,.9)';for(let i=0;i<5;i++){g.beginPath();g.ellipse(cx+(i%2?7:-6),guardY+30+i*36,2,4+i%3,0,0,7);g.fill();}});}
-// 액체 피 줄기: 가로로 늘여 쓰는 띠. 검붉은 테 + 진홍 몸 + 위쪽 윤기 한 줄, 가장자리가 출렁이게(빛 아님 — 덮어 그리기)
-function streamTex(){return make('bloodstream',256,48,(g,w,h)=>{const cy=h/2;
-  const body=(th,col)=>{g.fillStyle=col;g.beginPath();g.moveTo(0,cy);for(let x=0;x<=w;x+=8){const y=cy-th/2*(.82+.18*Math.sin(x*.11)+.08*Math.sin(x*.37));g.lineTo(x,y);}
-   for(let x=w;x>=0;x-=8){const y=cy+th/2*(.82+.18*Math.sin(x*.09+1)+.08*Math.sin(x*.29));g.lineTo(x,y);}g.closePath();g.fill();};
-  body(44,'rgba(52,0,8,.95)');body(34,'rgba(128,0,18,1)');body(22,'rgba(206,16,36,1)');
-  g.fillStyle='rgba(255,170,170,.55)';g.beginPath();g.ellipse(w/2,cy-7,w*.46,2.4,0,0,7);g.fill();
-  g.fillStyle='rgba(90,0,12,.9)';for(let i=0;i<6;i++){g.beginPath();g.ellipse(20+i*42,cy+14+(i%2)*3,3,4+(i%3)*2,0,0,7);g.fill();}});}
 // 핏방울: 위가 뾰족한 물방울 + 윤기 점
 function dropTex(){return make('blooddrop',32,48,(g,w,h)=>{const cx=w/2;g.fillStyle='rgba(60,0,8,1)';g.beginPath();g.moveTo(cx,2);g.quadraticCurveTo(w-2,h*.62,cx,h-2);g.quadraticCurveTo(2,h*.62,cx,2);g.fill();
   g.fillStyle='rgba(176,8,28,1)';g.beginPath();g.moveTo(cx,7);g.quadraticCurveTo(w-6,h*.62,cx,h-6);g.quadraticCurveTo(6,h*.62,cx,7);g.fill();
@@ -161,7 +149,7 @@ function dropTex(){return make('blooddrop',32,48,(g,w,h)=>{const cx=w/2;g.fillSt
 // 바닥 고리(시전 맥동): 진홍 고리 한 겹
 function ringTex(){return make('ring',256,128,(g,w,h)=>{g.strokeStyle='rgba(160,0,24,.5)';g.lineWidth=14;g.beginPath();g.ellipse(w/2,h/2,w/2-10,h/2-8,0,0,7);g.stroke();
   g.strokeStyle='rgba(255,70,80,.95)';g.lineWidth=4;g.beginPath();g.ellipse(w/2,h/2,w/2-10,h/2-8,0,0,7);g.stroke();});}
-function warm(){try{beamTex();swordTex();streamTex();dropTex();ringTex();if(typeof ensureImages==='function')Promise.resolve(ensureImages(SHEET_PATHS)).catch(()=>{});}catch(e){fail(e);}}
+function warm(){try{beamTex();dropTex();ringTex();if(typeof ensureImages==='function')Promise.resolve(ensureImages(SHEET_PATHS)).catch(()=>{});}catch(e){fail(e);}}
 const asked={t:0};
 function sheetImg(k){const S=SHEET[k];try{const got=typeof readyImage==='function'?readyImage(S.path):null;if(got?.image)return got.image;const t=Date.now();if(t-asked.t>1500){asked.t=t;if(typeof ensureImages==='function')Promise.resolve(ensureImages(SHEET_PATHS)).catch(()=>{});}}catch(e){fail(e);}return null;}
 // ---- 그리기 --------------------------------------------------------------------------------------------------
@@ -173,7 +161,7 @@ function scoped(id,fn){const own={id:'r947:'+id,kind:'effect',r947:true,groundAl
 function img(id,im,x,y,w,h,o={}){if(!im||budget<=0||!(w>0)||!(h>0))return false;budget--;drawCalls++;
  scoped(id,()=>{ctx.save();try{ctx.globalCompositeOperation=o.add?'lighter':'source-over';ctx.globalAlpha*=clamp(o.alpha??1,0,1);ctx.translate(x,y);if(o.ang)ctx.rotate(o.ang);
   ctx.drawImage(im,-w*(o.px??.5),-h*(o.py??.5),w,h);}catch(e){fail(e);}finally{ctx.restore();}});return true;}
-function cell(id,k,fr,x,y,size,alpha,flip){const S=SHEET[k],im=sheetImg(k);if(!im||budget<=0)return false;budget--;drawCalls++;fr=clamp(Math.floor(fr),0,S.frames-1);
+function cell(id,k,fr,x,y,size,alpha,flip){const S=SHEET[k],im=sheetImg(k);if(!im||budget<=0||!(alpha>0))return false;budget--;drawCalls++;fr=clamp(Math.floor(fr),0,S.frames-1);
  scoped(id,()=>{ctx.save();try{ctx.globalCompositeOperation='source-over';ctx.globalAlpha*=clamp(alpha,0,1);ctx.translate(x,y);if(flip)ctx.scale(-1,1);
   ctx.drawImage(im,(fr%S.cols)*S.cell,Math.floor(fr/S.cols)*S.cell,S.cell,S.cell,-size*S.px,-size*S.py,size,size);}catch(e){fail(e);}finally{ctx.restore();}});return true;}
 const scr=(x,y,lift=.4)=>{const q=project(x,y);return {x:q.x,y:q.y-H()*lift};};
@@ -181,15 +169,17 @@ function beam(id,A,B,th,alpha){const L=Math.hypot(B.x-A.x,B.y-A.y);if(!(L>1))ret
 // 적혈 연쇄 한 줄기(사용자 14:12Z "번개보다는 완전한 적혈 느낌"): 번개 대신 액체 피 줄기가 A→B 로 활처럼 휘어 0.09초에 뻗고(머리는 굵은 핏덩이),
 // 지나간 자리에서 핏방울이 떨어지며, 닿은 자리는 Dots 피 튐(R585 burst-small). 덮어 그리기(빛이 아니라 피).
 function bloodArc(v,age,k,h,lo){const A=scr(v.a.x,v.a.y,v.lead?.55:.45),B=scr(v.b.x,v.b.y,.45),dx=B.x-A.x,dy=B.y-A.y,L=Math.hypot(dx,dy);if(!(L>2))return;
- const st=streamTex(),dr=dropTex(),side=(Math.floor(v.seed*7)%2)?1:-1,lift=Math.min(L*.28,h*.7),C={x:(A.x+B.x)/2-dy/L*lift*.25*side,y:(A.y+B.y)/2-lift};
- const at=t=>{const u=1-t;return {x:u*u*A.x+2*u*t*C.x+t*t*B.x,y:u*u*A.y+2*u*t*C.y+t*t*B.y};};
- const reach=smooth(age/.09),al=k<.3?1:1-smooth((k-.3)/.7),n=lo?5:8;let prev=at(0);
- for(let i=1;i<=n;i++){const t=reach*i/n,q=at(t),w=h*(.15+.27*(i/n))*(1-k*.35);img('needle',st,(prev.x+q.x)/2,(prev.y+q.y)/2,Math.hypot(q.x-prev.x,q.y-prev.y)*1.25+w*.5,w,{ang:Math.atan2(q.y-prev.y,q.x-prev.x),alpha:.95*al});prev=q;}
- if(reach<1){const q=at(reach);img('needle',dr,q.x,q.y,h*.34,h*.3,{ang:Math.atan2(B.y-A.y,B.x-A.x)+Math.PI/2,alpha:1});}
- const m=lo?2:4;for(let i=0;i<m;i++){const t=(i+.5)/m,a0=t*.09,fa=age-a0;if(fa<0)continue;const q=at(t),fall=.5*h*7*fa*fa,da=1-smooth((fa-.15)/.2);if(da<=0)continue;
+ const S=SHEET.stream,im=sheetImg('stream'),dr=dropTex(),ang=Math.atan2(dy,dx),reach=smooth(age/.09),al=k<.3?1:1-smooth((k-.3)/.7);
+ // Dots SB-06 줄기 한 장을 A→B 로 눕혀 그리되, 뻗는 동안은 원본 왼쪽부터 reach 만큼만 잘라 보여 준다(늘임 없이 '흘러 나감').
+ if(im&&budget>0&&al>0){budget--;drawCalls++;const fr=Math.floor(age*S.fps)%S.frames,span=S.x1-S.x0,dw=L/span,dh=h*.55/S.band,sw=S.cw*(S.x0+span*reach);
+  scoped('needle',()=>{ctx.save();try{ctx.globalCompositeOperation='source-over';ctx.globalAlpha*=clamp(al,0,1);ctx.translate(A.x,A.y);ctx.rotate(ang);
+   ctx.drawImage(im,0,fr*S.ch,sw,S.ch,-dw*S.x0,-dh/2,dw*sw/S.cw,dh);}catch(e){fail(e);}finally{ctx.restore();}});}
+ if(reach<1){const H2=SHEET.head,hi=sheetImg('head');if(hi&&budget>0){budget--;drawCalls++;const q={x:A.x+dx*reach,y:A.y+dy*reach},sz=h*.36,fr=Math.floor(age*H2.fps)%H2.frames;
+  scoped('needle',()=>{ctx.save();try{ctx.translate(q.x,q.y);ctx.rotate(ang);ctx.drawImage(hi,fr*H2.cell,0,H2.cell,H2.cell,-sz*.8,-sz/2,sz,sz);}catch(e){fail(e);}finally{ctx.restore();}});}}
+ const m=lo?2:4;for(let i=0;i<m;i++){const t=(i+.5)/m,a0=t*.09,fa=age-a0;if(fa<0)continue;const q={x:A.x+dx*t,y:A.y+dy*t},fall=.5*h*7*fa*fa,da=1-smooth((fa-.15)/.2);if(da<=0)continue;
   img('needle',dr,q.x+((i*37+v.seed*11)%9-4)*h*.02,q.y+fall,h*.1,h*.15,{alpha:da*al});}}
 function drawAll(){const t=T(),lo=low(),h=H(),u=unit();budget=lo?28:CFG.maxDraws;
- const sword=swordTex(),ring=ringTex();
+ const ring=ringTex();
  for(const s of states()){
   // ① 혈격자: 바닥 높이(살짝 띄움) 줄. 한 줄은 0.05초에 굵어졌다 0.3초에 사라짐.
   const L=s.lattice;if(L){for(const q of L.lines){const a=t-q.t;if(a<0||a>.34)continue;const k=a<.05?smooth(a/.05):1-smooth((a-.05)/.29),lift=.12;
@@ -197,11 +187,9 @@ function drawAll(){const t=T(),lo=low(),h=H(),u=unit();budget=lo?28:CFG.maxDraws
   // ① 혈격자 교차점 적혈 십자가(Dots R585 적혈 십자가 시트, 회전·뒤집기 없음 — 정십자)
   for(const x of s.crosses){const a=t-x.t0;if(a<0)continue;const g=project(x.x,x.y);cell('cross','cross',a*SHEET.cross.fps,g.x,g.y+h*.04,h*1.3,a>x.boom-x.t0+.3?1-smooth((a-(x.boom-x.t0+.3))/.15):1,false);}
   // ③ 성혈검우: 떨어지는 동안 하늘에서 가속, 꽂힌 뒤 칼끝이 땅에 박혀 흔들림 없이 서 있다가 사라짐. 회전 없음(정십자).
-  for(const w of s.swords){const g=project(w.x,w.y),sh=h*1.55,sw=sh/3;let y,al=1;
-   if(!w.landed){const k=clamp((t-w.t0)/(w.at-w.t0),0,1),fall=(1-k*k)*h*4.2;y=g.y-fall;al=smooth(k/.15);
-    if(k<1&&!lo)beam('trail',{x:g.x,y:y-sh*.95-h*.9},{x:g.x,y:y-sh*.6},sw*.55,.55*al);}
-   else{const a=t-w.at;y=g.y+h*.08;al=a<w.end-w.at-.3?1:1-smooth((a-(w.end-w.at-.3))/.3);}
-   img('sword',sword,g.x,y,sw,sh,{px:.5,py:.985,alpha:al});}}
+  for(const w of s.swords){const g=project(w.x,w.y),F=SHEET.fall,size=h*1.55/F.body;
+   if(!w.landed){const k=clamp((t-w.t0)/(w.at-w.t0),0,1),fall=(1-k*k)*h*4.2;cell('sword','fall',((t-w.t0)*F.fps)%F.frames,g.x,g.y-fall,size,smooth(k/.15),false);}
+   else{const a=t-w.at,S=SHEET.stab,fr=a*S.fps,left=w.end-t;cell('sword','stab',Math.min(fr,S.frames-1),g.x,g.y+h*.08,size*1.06,left<.12?smooth(left/.12):1,false);}}}
  for(const v of vis){const age=t-v.t0,k=age/v.life;if(k<0||k>=1)continue;
   if(v.k==='hit'){const g=scr(v.x,v.y,.45);cell('hit','hit',age*SHEET.hit.fps,g.x,g.y,h*(v.small?1.1:1.5),1-smooth((k-.7)/.3),(v.t0*13|0)%2===1);}
   else if(v.k==='burst'){const g=project(v.x,v.y);cell('burst','burst',age*SHEET.burst.fps,g.x,g.y+h*.06,h*2.1,1-smooth((k-.75)/.25),false);}

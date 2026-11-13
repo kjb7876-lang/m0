@@ -40643,6 +40643,21 @@
       "sha256": "24d7a44d7f21f771a102e3a79629b82f0e18857bec3f283031c03bff248cc0b6"
     },
     {
+      "path": "assets/r945/hwando-cutin-dosa.webp",
+      "bytes": 60676,
+      "sha256": "344b0e08e2fdc25d534422cec3d2c6485d09968626fdaae33f51acacd7477394"
+    },
+    {
+      "path": "assets/r945/hwando-cutin-gat.webp",
+      "bytes": 79456,
+      "sha256": "a48da7ba2dfe58eb418988ca3b6f27e01a872cc3dbb847d9dbdd7db4b3d91e28"
+    },
+    {
+      "path": "assets/r945/hwando-cutin-plum.webp",
+      "bytes": 70042,
+      "sha256": "cbb8ec41cf0d4b5ba273f90bc077fc7b4808b1049859529af6fc1def9ebefe05"
+    },
+    {
       "path": "assets/r945/hwando-ink-sweep.webp",
       "bytes": 110830,
       "sha256": "05559ba6cc4431426b7b1a5f8fffffbbccc3b11a5ca52d14850ac0d7bbfa1361"
@@ -40651,6 +40666,26 @@
       "path": "assets/r945/hwando-orchid-slash.webp",
       "bytes": 89066,
       "sha256": "462a047b018fe41ffdc74bc295535eb626b1ab2c7e4fea37ba31c98b2bd0fd4e"
+    },
+    {
+      "path": "assets/r947/slayer-blood-head.webp",
+      "bytes": 4020,
+      "sha256": "46eba9db815e582487245410110aaa72c5bbf8eaf8779c0cd03eb7729ffc752b"
+    },
+    {
+      "path": "assets/r947/slayer-blood-stream.webp",
+      "bytes": 36146,
+      "sha256": "0d17b29def905a0fba888f95c427b07ab69549aec0d4e4bdbf28a331a0d51820"
+    },
+    {
+      "path": "assets/r947/slayer-sword-fall.webp",
+      "bytes": 62242,
+      "sha256": "25c215c3e141b9e7a1749400260aed315d3c41765c06201eb5b2ce75868b89d0"
+    },
+    {
+      "path": "assets/r947/slayer-sword-stab.webp",
+      "bytes": 98904,
+      "sha256": "7f9664b23d1265e175822587c92dd7529eee1a2ac907b1fb4b0a736403dc4a8d"
     },
     {
       "path": "assets/r948/heart-fly8.webp",
@@ -49819,8 +49854,8 @@
     },
     {
       "path": "hwando-ink-r945.js",
-      "bytes": 30949,
-      "sha256": "f007b57d969bcad009ae040505f5f1d513fbd6448937020a3a50679eb762eb67"
+      "bytes": 34532,
+      "sha256": "a17217a45ef1151d3a324e9eb4d05980f13ee958395abe73a11153a96df12b11"
     },
     {
       "path": "hwando-r242.js",
@@ -50614,8 +50649,8 @@
     },
     {
       "path": "slayer-blood-passive-r947.js",
-      "bytes": 27996,
-      "sha256": "f5350561220ce0a1339d26a0a313e68cf8b739d8212926320de88a7f31c0618b"
+      "bytes": 26859,
+      "sha256": "a008d3be1fe651a04d39df7eb3ffadbd2c123051e144b041680d5e15ef223179"
     },
     {
       "path": "slayer-blood-r425.js",
@@ -50953,8 +50988,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10190,
-  "totalBytes": 1260381115,
+  "fileCount": 10197,
+  "totalBytes": 1260795047,
   "webHTMLSha256": "4914603ff1124c6a77c77c859269c2b0d9bf848b3460cf82f0bd091c970dd829",
   "largest": [
     {
