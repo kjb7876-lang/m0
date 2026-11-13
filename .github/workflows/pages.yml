@@ -546,7 +546,7 @@ jobs:
         run: node r96/qa/r1007/stmt-spread-cpu-check.cjs
       - name: R1010 survival Michaela finale (4 knots in order, not killed) and shared story ending CPU check
         run: node r96/qa/r1010/r1010-cpu-check.cjs
-      - name: R1015 clean UI (title: 2 main buttons + 2 mode cards + small links, co-op/notes folded; menu quick row + folded groups; PC settings folded; quiet header track/footer details) CPU check
+      - name: R1015 clean UI (title = 2 main buttons + 2 mode cards + small links, co-op/notes folded; menu quick row + folded groups; PC settings folded; quiet header track/footer details) CPU check
         run: node r96/qa/r1015/r1015-cpu-check.cjs
       - name: R963 survival BGM note sits below the survival HUD line (no overlapped text) CPU check
         run: node r96/qa/r963/r963-cpu-check.cjs
