@@ -3,7 +3,7 @@
 //  정본 35장: 주민 어깨의 검은 안개가 엉겨 불면귀 형상이 되고, 불면귀는 주민을 실처럼 끌어 쓴다 → 소환·패턴을 '검은 안개' 한 계열로 묶는다.
 //  · B 안개 소환(본체 불면귀 l303-boss 만): 엔진 공용 소환(R61: 17초→체력 0에 12초, 분신 1 + 주민 2, 동시 6·평생 24)을 이 보스만 쉬게 하고
 //    R990 '검은 안개 끌어내기'로 대신한다 — 첫 소환 4.5초, 주기 10.2초(체력 100%) → 6.5초(체력 25% 이하), 한 번에 주민 4명(체력 절반 이하 5명),
-//    동시 생존 상한 8(모바일·저사양 6), 평생 48. 주민은 불면귀 맵 일반몹(l302-e1 · 잠식된 약방 아낙·어부·소복 처녀 차례)만, 능력치는 R61 소환과 같은 정규화.
+//    동시 생존 상한 8(모바일·저사양 6), 평생 48, 보스 12칸 안에 살아 있는 적이 24 넘으면 쉰다(엔진 R61 은 지역 전체 24 라 순찰이 남아 있으면 한 번도 못 부름 — 실측). 주민은 불면귀 맵 일반몹(l302-e1 · 잠식된 약방 아낙·어부·소복 처녀 차례)만, 능력치는 R61 소환과 같은 정규화.
 //    준비 1.1초 동안 소환 자리마다 Dots 검은 안개 핵(CX-0070BM fx_core24)이 엉기고, 풀리면 주민이 끌려 나온 자리에서 핵이 흩어진다.
 //    R61 표시(r61Summoned)를 그대로 달아 주인이 죽거나 전투가 끝나면 엔진이 함께 거둔다(보상·진행 집계 없음).
 //  · C 안개 위주 패턴: 지금 차례 7칸 = 원래 4종(불면의 십자시선·검은 영혼 부채살·잠들 수 없는 안전지대·악몽 잔상 폭우) + 엔진 R58 늪 테마 3종('독수렁 · …', 안개 0칸).
@@ -29,7 +29,7 @@ const live=e=>!!e&&e.hp>0&&!e.deadRecorded&&e.spawnState==='active';
 const lowFx=()=>{try{return !!settings?.lowFx;}catch(_){return false;}};
 const mobile=()=>{try{return matchMedia('(pointer:coarse)').matches||innerWidth<760;}catch(_){return false;}};
 // ── 수치(보고서 전후 표와 같음) ──
-const SUMMON=Object.freeze({first:4.5,periodHi:10.2,periodLo:6.5,loAt:.25,count:4,countLow:5,lowAt:.5,cap:8,capLow:6,lifetime:48,windup:1.1,recovery:.5,crowd:30});
+const SUMMON=Object.freeze({first:4.5,periodHi:10.2,periodLo:6.5,loAt:.25,count:4,countLow:5,lowAt:.5,cap:8,capLow:6,lifetime:48,windup:1.1,recovery:.5,crowd:24,near:12});
 const FOG=Object.freeze({max:6,maxLow:3,alpha:.58,filter:'hue-rotate(205deg) saturate(.55) brightness(.42) contrast(1.1)'});
 const NAMES=['잠식된 약방 아낙','잠식된 어부','잠식된 소복 처녀'];
 const CORE={path:'assets/r990/fog-core.webp',cell:256,n:24,fps:18},MIST={path:'assets/r430/mist-loop.webp',cell:192,cols:6,n:22,fps:12};
@@ -47,16 +47,22 @@ const ORIG=['불면의 십자시선','검은 영혼 부채살','잠들 수 없�
 // 차례(엔진은 boss.beat % 칸 수 로 고른다): 원래 4종(O)·R58 3종(X)은 각자 순서 그대로 사이사이에, 새 안개 3종(F) — 11칸 중 안개 7칸(64%).
 const ORDER=['O0','F1','X0','O1','F2','X1','O2','F3','X2','O3','F1'];
 const ORDER_NO_R58=['O0','F1','F2','O1','F3','F1','O2','F2','F3','O3','F1'];
-let patternState={actor:null,original:null,mixed:null};
+let patternState={actor:null,O:null,X:null,original:null,mixed:null};
 function bossActor(){try{const z=(portable?.assetMap?.zones||[]).find(r=>r.id===ZONE);return (z?.actors||[]).find(a=>a.id===BOSS)||null;}catch(_){return null;}}
-function applyPatterns(){const a=bossActor();if(!a||!Array.isArray(a.patterns))return false;
- if(patternState.actor!==a||!patternState.original){const p=a.patterns;if(patternState.mixed&&p.length===patternState.mixed.length&&p.every((x,i)=>x===patternState.mixed[i])){patternState.actor=a;}else{
-  const O=ORIG.map(n=>p.find(x=>x?.name===n&&!x.r58Variant&&!x.r990Fog));if(O.some(x=>!x))return false;const X=p.filter(x=>x?.r58Variant&&!x.r990Fog);
-  if(p.some(x=>!O.includes(x)&&!X.includes(x)))return false; // 모르는 패턴이 섞였으면 손대지 않는다
-  patternState.actor=a;patternState.original=p.slice();const fogX=X.map(x=>({...x,name:String(x.name||'').replace(/^[^·]+·\s*/,'검은 안개 · '),r990Fog:true,r990From:x.name}));
-  const F={F1,F2,F3},order=X.length===3?ORDER:ORDER_NO_R58;patternState.mixed=order.map(k=>k[0]==='O'?O[+k[1]]:k[0]==='X'?fogX[+k[1]]:F[k]);}}
+// 엔진 R58 은 월드를 다시 만들 때(compileWorld) 아직 손대지 않은 보스 표에 늪 3종을 끼운다 → 이 파일이 먼저 섞은 뒤에 끼워질 수도 있다(헤드리스 실측: 14칸).
+//  그래서 매번 지금 표에서 원래 4종(O)·R58 3종(X)만 골라 내고(이 파일이 만든 칸은 버림) 같은 차례로 다시 짠다.
+function applyPatterns(){const a=bossActor();if(!a||!Array.isArray(a.patterns))return false;const p=a.patterns;
+ const O=ORIG.map(n=>p.find(x=>x?.name===n&&!x.r58Variant&&!x.r990Fog));if(O.some(x=>!x))return false;let X=p.filter(x=>x?.r58Variant&&!x.r990Fog);
+ // 섞인 표에는 R58 원본 대신 이름만 바꾼 사본이 들어 있다 → 같은 보스면 기억해 둔 원본을 쓴다
+ if(!X.length&&patternState.actor===a&&patternState.X?.length&&p.some(x=>x?.r990From))X=patternState.X;
+ if(p.some(x=>!x?.r990Fog&&!O.includes(x)&&!X.includes(x)))return false; // 모르는 패턴이 섞였으면 손대지 않는다
+ if(patternState.actor!==a||patternState.O?.some((x,i)=>x!==O[i])||patternState.X?.length!==X.length||patternState.X.some((x,i)=>x!==X[i])){
+  patternState.actor=a;patternState.O=O;patternState.X=X;
+  patternState.original=X.length===3?[O[0],X[0],O[1],X[1],O[2],X[2],O[3]]:O.slice();
+  const fogX=X.map(x=>({...x,name:String(x.name||'').replace(/^[^·]+·\s*/,'검은 안개 · '),r990Fog:true,r990From:x.name}));
+  const F={F1,F2,F3},order=X.length===3?ORDER:ORDER_NO_R58;patternState.mixed=order.map(k=>k[0]==='O'?O[+k[1]]:k[0]==='X'?fogX[+k[1]]:F[k]);}
  const want=prefs.on&&prefs.patterns?patternState.mixed:patternState.original;
- if(a.patterns.length!==want.length||a.patterns.some((p,i)=>p!==want[i])){a.patterns.length=0;a.patterns.push(...want);stats.patternsSet++;}return true;}
+ if(p.length!==want.length||p.some((x,i)=>x!==want[i])){p.length=0;p.push(...want);stats.patternsSet++;}return true;}
 const fogRatio=()=>{const m=patternState.mixed;return m?m.filter(p=>p.r990Fog).length/m.length:0;};
 
 // ── 안개 그림(효과) ──
@@ -96,7 +102,7 @@ function makeUnit(B,s,i){const prof=profileFor(s);if(!prof||typeof actor3!=='fun
  Object.assign(e,{boss:false,midboss:false,persona:false,cosmic:false,trial:false,r61Summoned:{version:1,owner:B.id,kind:'minion'},r990Fog:true,spawnState:'active',deadRecorded:false,graceUntil:T()+.8,cd:1.2,rest:0,
   explorationGroup:null,fieldWaveIndex6:undefined,fieldWave:undefined,sourcePlan6:false,sourcePlanId6:undefined,state:'idle',phaseStage:'active',attack:null,rangedWindup:0,r61OriginZone:ZONE});
  e.name=NAMES[(s.used+i)%NAMES.length];try{window.__STORYWORLD_SCALE_MELEE_R61__?.normalize?.(e,room,{});}catch(err){fail(err);}return e;}
-function plan(B,s){const alive=room.enemies.filter(mine).length,liveAll=room.enemies.filter(live).length,hp=fin(B.hp)/Math.max(1,fin(B.maxHp,1));
+function plan(B,s){const alive=room.enemies.filter(mine).length,liveAll=room.enemies.filter(e=>live(e)&&(e.r990Fog||Math.hypot(fin(e.x,1e9)-B.x,fin(e.y,1e9)-B.y)<=SUMMON.near)).length,hp=fin(B.hp)/Math.max(1,fin(B.maxHp,1));
  const want=hp<=SUMMON.lowAt?SUMMON.countLow:SUMMON.count,n=Math.max(0,Math.min(want,cap()-alive,SUMMON.lifetime-s.used,SUMMON.crowd-liveAll));const rows=[];
  for(let i=0;i<n;i++){const u=makeUnit(B,s,i);if(!u)continue;let p=null;try{p=R61()?.position?.(u,B,i+1,rows.map(r=>r.point));}catch(err){fail(err);}if(p&&Number.isFinite(p.x)&&Number.isFinite(p.y))rows.push({unit:u,point:{x:p.x,y:p.y}});}
  return rows;}
