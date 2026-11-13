@@ -9554,7 +9554,11 @@
     "assets/r1001/move/denial-specter-down.webp",
     "assets/r1001/move/denial-specter-up.webp",
     "assets/r1001/move/horned-swamp-demon-down.webp",
-    "assets/r1001/move/horned-swamp-demon-up.webp"
+    "assets/r1001/move/horned-swamp-demon-up.webp",
+    "assets/r1001/move/corridor-scream-echo-down.webp",
+    "assets/r1001/move/corridor-scream-echo-up.webp",
+    "assets/r1001/move/hallucinated-orderly-down.webp",
+    "assets/r1001/move/hallucinated-orderly-up.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -10629,5 +10633,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "ae9aadac4d761877d094054c9853fce6d1db83b59da9242dc959fce94f8f97d4"
+  "runtimeManifestSHA256": "dbe7df42c4112c4752b245faa9abf47385dbf7920930f290ac1a3b3e7a4b8c98"
 }

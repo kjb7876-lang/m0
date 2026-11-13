@@ -14,10 +14,10 @@ def strip(w,h,n,y=0):return [[i*w,y,w,h] for i in range(n)]
 # (Dots 번호, 열쇠, 적 nativeId 들, [(지금 걷는 동안 그리는 그림, 칸들 또는 None=통째)…] — 첫 그림이 색 기준)
 MAP=[
  ('M040','denial-specter',['a10-s1'],[('r92/mobs/M016-move.png',strip(141,172,4)),('episode1a/generated-v392/denial_specter.webp',None)]),
+ ('M038','corridor-scream-echo',['a08-s1'],[('visual-test/hospital-ranged-motion-r52.png',[[0,718,350,368]]),('episode1a/generated-v392/corridor_scream_echo.webp',None)]),
+ ('M041','hallucinated-orderly',['a08-o1'],[('visual-test/hospital-orderly-motion-r51-v2.png',[[0,0,444,444]]),('episode1a/hallucinated_orderly.webp',None)]),
  ('M042','horned-swamp-demon',['dist05-h1'],[('r109/mobs/M008-move.png',strip(148,158,4)),('r116/mobs/M008-idle.png',strip(137,153,4)),('episode1a/horned_swamp_demon.webp',None)]),
 ]
-EXTRA=ROOT/'scripts/r1001-mob-move-extra.json'
-if EXTRA.exists():MAP+=[tuple(x) for x in json.loads(EXTRA.read_text(encoding='utf8'))]
 HOLD={'M039':'게임은 갈망의 약병핵을 r275 vial-collector(녹색 인간형) 그림으로 그림 — 원본 약병 그림 기준 시트와 다른 인물',
  'M043':'게임은 보랏빛 알집지기를 r380 purple-eggkeeper, 기억 운반거미를 r290 m005 그림으로 그림 — 다른 거미',
  'M041(일부)':'주사실 감시환각(r275 thread-nurse)·암시장의 수상한 자(r380 blackmarket-suspect)는 다른 인물 — 백의 구속자(ep1a08)에만 적용',

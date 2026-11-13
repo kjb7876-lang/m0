@@ -49,6 +49,98 @@
    "applied": true
   },
   {
+   "dots": "M038",
+   "enemies": [
+    "a08-s1"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV M038/corridor_scream_echo-walk-down.png",
+   "sourceSha256": "92cee53485ae3fd24a933149c6625206c3f0f21c8be6ba1f5e516166f67e9200",
+   "toneGain": [
+    0.916,
+    0.907,
+    0.849
+   ],
+   "path": "assets/r1001/move/corridor-scream-echo-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 88968,
+   "sha256": "874d442d8b210ac663fa852f927a32cc64f1a32798c7828867b25692dbb42b4e",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "M038",
+   "enemies": [
+    "a08-s1"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV M038/corridor_scream_echo-walk-up.png",
+   "sourceSha256": "5793a87fbc472761a6dee87ad738da2796a2ade813e89f916819846c5fdd8a51",
+   "toneGain": [
+    0.916,
+    0.907,
+    0.849
+   ],
+   "path": "assets/r1001/move/corridor-scream-echo-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 84350,
+   "sha256": "ff9eb43351c13a63b13588188f59f8c35328da65c5ebb818f96c36fe6a2a74e9",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "M041",
+   "enemies": [
+    "a08-o1"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV M041/hallucinated_orderly-walk-down.png",
+   "sourceSha256": "def78635616928410ce19e368e505c99c765977534e7e80e8f4e1e19dfa1dbcd",
+   "toneGain": [
+    1.1,
+    1.011,
+    0.959
+   ],
+   "path": "assets/r1001/move/hallucinated-orderly-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 55430,
+   "sha256": "903f9153021652b276f7b004c77fbc7c5c9f3e59634f2812550d3dcf2b61e58a",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "M041",
+   "enemies": [
+    "a08-o1"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV M041/hallucinated_orderly-walk-up.png",
+   "sourceSha256": "e6b47ed64d61156cc754dd8489ca0f5ca52af70fa7bc617e4e84b61ee9f73f5e",
+   "toneGain": [
+    1.1,
+    1.011,
+    0.959
+   ],
+   "path": "assets/r1001/move/hallucinated-orderly-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 53586,
+   "sha256": "721a4ee0de76304ddfe1821c6bc8803be27e8b7d7a0080e4f766db2907ef9df3",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
    "dots": "M042",
    "enemies": [
     "dist05-h1"
