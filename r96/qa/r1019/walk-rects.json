@@ -1,0 +1,762 @@
+{
+ "cult05": {
+  "c105-e2|생체기계 악몽": {
+   "r380/mobs/legacy-m134-nightmare-v4-walk-d1.webp|1920,0,192,256|2304x256|free": {
+    "n": 244,
+    "h": [
+     129,
+     114,
+     114
+    ]
+   },
+   "r380/mobs/legacy-m134-nightmare-v4-walk-d1.webp|1152,0,192,256|2304x256|free": {
+    "n": 273,
+    "h": [
+     129,
+     114,
+     114
+    ]
+   },
+   "r380/mobs/legacy-m134-nightmare-v4-walk-d1.webp|2112,0,192,256|2304x256|free": {
+    "n": 257,
+    "h": [
+     114,
+     129,
+     129
+    ]
+   },
+   "r380/mobs/legacy-m134-nightmare-v4-walk-d1.webp|0,0,192,256|2304x256|free": {
+    "n": 697,
+    "h": [
+     116,
+     116,
+     116
+    ]
+   },
+   "r380/mobs/legacy-m134-nightmare-v4-walk-d1.webp|768,0,192,256|2304x256|free": {
+    "n": 237,
+    "h": [
+     114,
+     114,
+     114
+    ]
+   },
+   "r380/mobs/legacy-m134-nightmare-v4-walk-d1.webp|1536,0,192,256|2304x256|free": {
+    "n": 256,
+    "h": [
+     114,
+     114,
+     114
+    ]
+   },
+   "r380/mobs/legacy-m134-nightmare-v4-walk-d1.webp|1344,0,192,256|2304x256|free": {
+    "n": 270,
+    "h": [
+     129,
+     114,
+     114
+    ]
+   },
+   "r380/mobs/legacy-m134-nightmare-v4-walk-d1.webp|960,0,192,256|2304x256|free": {
+    "n": 250,
+    "h": [
+     114,
+     114,
+     114
+    ]
+   },
+   "r380/mobs/legacy-m134-nightmare-v4-walk-d1.webp|1728,0,192,256|2304x256|free": {
+    "n": 235,
+    "h": [
+     114,
+     114,
+     114
+    ]
+   },
+   "r380/mobs/legacy-m134-nightmare-v4-walk-d1.webp|0,0,192,256|2304x256|busy": {
+    "n": 526,
+    "h": [
+     114,
+     114,
+     114
+    ]
+   }
+  }
+ },
+ "ep1b09": {
+  "b09-h1|강철 턱의 사이보그 개": {
+   "r380/mobs/ep1b-steel-jaw-hound-walk-d1.webp|320,0,320,320|2880x320|free": {
+    "n": 264,
+    "h": [
+     116,
+     116,
+     116
+    ]
+   },
+   "r380/mobs/ep1b-steel-jaw-hound-walk-d1.webp|1280,0,320,320|2880x320|free": {
+    "n": 305,
+    "h": [
+     116,
+     116,
+     116
+    ]
+   },
+   "r380/mobs/ep1b-steel-jaw-hound-walk-d1.webp|960,0,320,320|2880x320|free": {
+    "n": 259,
+    "h": [
+     116,
+     116,
+     116
+    ]
+   },
+   "r380/mobs/ep1b-steel-jaw-hound-walk-d1.webp|2240,0,320,320|2880x320|free": {
+    "n": 245,
+    "h": [
+     116,
+     116,
+     116
+    ]
+   },
+   "r380/mobs/ep1b-steel-jaw-hound-walk-d1.webp|640,0,320,320|2880x320|free": {
+    "n": 280,
+    "h": [
+     116,
+     116,
+     116
+    ]
+   },
+   "r380/mobs/ep1b-steel-jaw-hound-walk-d1.webp|1600,0,320,320|2880x320|free": {
+    "n": 226,
+    "h": [
+     116,
+     116,
+     138
+    ]
+   },
+   "r380/mobs/ep1b-steel-jaw-hound-walk-d1.webp|2560,0,320,320|2880x320|free": {
+    "n": 291,
+    "h": [
+     116,
+     116,
+     116
+    ]
+   },
+   "r380/mobs/ep1b-steel-jaw-hound-walk-d1.webp|0,0,320,320|2880x320|free": {
+    "n": 373,
+    "h": [
+     116,
+     116,
+     116
+    ]
+   },
+   "r380/mobs/ep1b-steel-jaw-hound-walk-d1.webp|1920,0,320,320|2880x320|free": {
+    "n": 293,
+    "h": [
+     116,
+     116,
+     138
+    ]
+   },
+   "r380/mobs/ep1b-steel-jaw-hound-walk-d1.webp|0,0,320,320|2880x320|busy": {
+    "n": 254,
+    "h": [
+     116,
+     116,
+     116
+    ]
+   }
+  }
+ },
+ "cult06": {
+  "c106-e2|기계재판 연결자": {
+   "r275/mobs/superego-inquisitor.webp|228,0,76,186|836x186|free": {
+    "n": 461,
+    "h": [
+     102,
+     102,
+     116
+    ]
+   },
+   "r275/mobs/superego-inquisitor.webp|304,0,76,186|836x186|free": {
+    "n": 453,
+    "h": [
+     102,
+     116,
+     102
+    ]
+   },
+   "r275/mobs/superego-inquisitor.webp|152,0,76,186|836x186|free": {
+    "n": 460,
+    "h": [
+     102,
+     102,
+     102
+    ]
+   },
+   "r275/mobs/superego-inquisitor.webp|0,0,76,186|836x186|free": {
+    "n": 564,
+    "h": [
+     102,
+     102,
+     102
+    ]
+   },
+   "r275/mobs/superego-inquisitor.webp|76,0,76,186|836x186|free": {
+    "n": 861,
+    "h": [
+     102,
+     102,
+     102
+    ]
+   },
+   "r275/mobs/superego-inquisitor.webp|380,0,76,186|836x186|free": {
+    "n": 206,
+    "h": [
+     102,
+     102,
+     102
+    ]
+   },
+   "r275/mobs/superego-inquisitor.webp|608,0,76,186|836x186|busy": {
+    "n": 187,
+    "h": [
+     102,
+     102,
+     102
+    ]
+   },
+   "r275/mobs/superego-inquisitor.webp|456,0,76,186|836x186|busy": {
+    "n": 115,
+    "h": [
+     102,
+     102,
+     102
+    ]
+   },
+   "r275/mobs/superego-inquisitor.webp|532,0,76,186|836x186|busy": {
+    "n": 140,
+    "h": [
+     102,
+     102,
+     102
+    ]
+   },
+   "r275/mobs/superego-inquisitor.webp|0,0,76,186|836x186|busy": {
+    "n": 63,
+    "h": [
+     102,
+     102,
+     102
+    ]
+   },
+   "r275/mobs/superego-inquisitor.webp|76,0,76,186|836x186|busy": {
+    "n": 90,
+    "h": [
+     102,
+     102,
+     102
+    ]
+   }
+  }
+ },
+ "hando02": {
+  "h102-s1|붕괴선 파수병": {
+   "r380/mobs/hando-silver-seal-sentinel-walk-d1.webp|960,0,320,320|2880x320|free": {
+    "n": 198,
+    "h": [
+     82,
+     82,
+     82
+    ]
+   },
+   "r380/mobs/hando-silver-seal-sentinel-walk-d1.webp|2560,0,320,320|2880x320|free": {
+    "n": 243,
+    "h": [
+     82,
+     82,
+     82
+    ]
+   },
+   "r380/mobs/hando-silver-seal-sentinel-walk-d1.webp|2240,0,320,320|2880x320|free": {
+    "n": 196,
+    "h": [
+     82,
+     82,
+     82
+    ]
+   },
+   "r380/mobs/hando-silver-seal-sentinel-walk-d1.webp|1280,0,320,320|2880x320|free": {
+    "n": 222,
+    "h": [
+     82,
+     82,
+     82
+    ]
+   },
+   "r380/mobs/hando-silver-seal-sentinel-walk-d1.webp|320,0,320,320|2880x320|free": {
+    "n": 201,
+    "h": [
+     82,
+     82,
+     82
+    ]
+   },
+   "r380/mobs/hando-silver-seal-sentinel-walk-d1.webp|1600,0,320,320|2880x320|free": {
+    "n": 177,
+    "h": [
+     82,
+     82,
+     82
+    ]
+   },
+   "r380/mobs/hando-silver-seal-sentinel-walk-d1.webp|640,0,320,320|2880x320|free": {
+    "n": 221,
+    "h": [
+     82,
+     82,
+     82
+    ]
+   },
+   "r380/mobs/hando-silver-seal-sentinel-walk-d1.webp|1920,0,320,320|2880x320|free": {
+    "n": 199,
+    "h": [
+     82,
+     82,
+     82
+    ]
+   },
+   "r380/mobs/hando-silver-seal-sentinel-walk-d1.webp|0,0,320,320|2880x320|free": {
+    "n": 638,
+    "h": [
+     82,
+     82,
+     82
+    ]
+   }
+  }
+ },
+ "hando01": {
+  "h101-t1|악몽 정찰체": {
+   "r380/mobs/hando-timeless-silver-scout-walk-d1.webp|2560,0,320,320|2880x320|free": {
+    "n": 234,
+    "h": [
+     86,
+     86,
+     86
+    ]
+   },
+   "r380/mobs/hando-timeless-silver-scout-walk-d1.webp|960,0,320,320|2880x320|free": {
+    "n": 251,
+    "h": [
+     86,
+     86,
+     86
+    ]
+   },
+   "r380/mobs/hando-timeless-silver-scout-walk-d1.webp|1600,0,320,320|2880x320|free": {
+    "n": 276,
+    "h": [
+     86,
+     86,
+     86
+    ]
+   },
+   "r380/mobs/hando-timeless-silver-scout-walk-d1.webp|0,0,320,320|2880x320|free": {
+    "n": 1301,
+    "h": [
+     86,
+     86,
+     86
+    ]
+   },
+   "r380/mobs/hando-timeless-silver-scout-walk-d1.webp|1280,0,320,320|2880x320|free": {
+    "n": 224,
+    "h": [
+     86,
+     86,
+     86
+    ]
+   },
+   "r380/mobs/hando-timeless-silver-scout-walk-d1.webp|1920,0,320,320|2880x320|free": {
+    "n": 204,
+    "h": [
+     86,
+     86,
+     86
+    ]
+   },
+   "r380/mobs/hando-timeless-silver-scout-walk-d1.webp|320,0,320,320|2880x320|free": {
+    "n": 296,
+    "h": [
+     86,
+     86,
+     86
+    ]
+   },
+   "r380/mobs/hando-timeless-silver-scout-walk-d1.webp|2240,0,320,320|2880x320|free": {
+    "n": 288,
+    "h": [
+     86,
+     86,
+     86
+    ]
+   },
+   "r380/mobs/hando-timeless-silver-scout-walk-d1.webp|640,0,320,320|2880x320|free": {
+    "n": 237,
+    "h": [
+     86,
+     86,
+     86
+    ]
+   }
+  }
+ },
+ "dist02": {
+  "dist02-m1|수렁 주문사": {
+   "r380/mobs/swamp-mage-darkgreen-v1.webp|256,0,256,256|2048x256|free": {
+    "n": 399,
+    "h": [
+     98,
+     113,
+     98
+    ]
+   },
+   "r380/mobs/swamp-mage-darkgreen-v1.webp|512,0,256,256|2048x256|free": {
+    "n": 307,
+    "h": [
+     98,
+     98,
+     113
+    ]
+   },
+   "r380/mobs/swamp-mage-darkgreen-v1.webp|0,0,256,256|2048x256|free": {
+    "n": 442,
+    "h": [
+     98,
+     98,
+     98
+    ]
+   },
+   "r380/mobs/swamp-mage-darkgreen-v1.webp|768,0,256,256|2048x256|free": {
+    "n": 286,
+    "h": [
+     98,
+     98,
+     98
+    ]
+   },
+   "r380/mobs/swamp-mage-darkgreen-v1.webp|1024,0,256,256|2048x256|busy": {
+    "n": 132,
+    "h": [
+     98,
+     98,
+     98
+    ]
+   },
+   "r380/mobs/swamp-mage-darkgreen-v1.webp|0,0,256,256|2048x256|busy": {
+    "n": 2,
+    "h": [
+     98,
+     98
+    ]
+   },
+   "r380/mobs/swamp-mage-darkgreen-v1.webp|256,0,256,256|2048x256|busy": {
+    "n": 4,
+    "h": [
+     98,
+     98,
+     98
+    ]
+   }
+  }
+ },
+ "dist01": {
+  "dist01-sp1|기억 운반거미": {
+   "r290/mobs/m005.webp|256,0,256,320|1024x960|free": {
+    "n": 50,
+    "h": [
+     164,
+     164,
+     164
+    ]
+   },
+   "r290/mobs/m005.webp|768,0,256,320|1024x960|free": {
+    "n": 48,
+    "h": [
+     164,
+     164,
+     164
+    ]
+   },
+   "r290/mobs/m005.webp|0,320,256,320|1024x960|free": {
+    "n": 28,
+    "h": [
+     164,
+     164,
+     164
+    ]
+   },
+   "r290/mobs/m005.webp|256,320,256,320|1024x960|free": {
+    "n": 45,
+    "h": [
+     164,
+     164,
+     164
+    ]
+   },
+   "r290/mobs/m005.webp|512,320,256,320|1024x960|free": {
+    "n": 32,
+    "h": [
+     164,
+     164,
+     164
+    ]
+   },
+   "r290/mobs/m005.webp|768,320,256,320|1024x960|free": {
+    "n": 48,
+    "h": [
+     164,
+     164,
+     164
+    ]
+   },
+   "r290/mobs/m005.webp|0,0,256,320|1024x960|free": {
+    "n": 32,
+    "h": [
+     164,
+     164,
+     164
+    ]
+   },
+   "r290/mobs/m005.webp|512,0,256,320|1024x960|free": {
+    "n": 34,
+    "h": [
+     164,
+     164,
+     164
+    ]
+   }
+  }
+ },
+ "dist03": {},
+ "ep1b02": {
+  "b02-m1|곰팡이와 오물 봉투": {
+   "episode1b/generated-v394/sloth_moldling.webp|0,0,418,418|418x418|free": {
+    "n": 30,
+    "h": [
+     219,
+     252,
+     219
+    ]
+   },
+   "r198/mobs/M022-move.png|342,0,342,156|684x156|free": {
+    "n": 1111,
+    "h": [
+     85,
+     85,
+     85
+    ]
+   },
+   "r198/mobs/M022-move.png|0,0,342,156|684x156|free": {
+    "n": 1096,
+    "h": [
+     96,
+     85,
+     85
+    ]
+   },
+   "r116/mobs/M022-idle.png|0,0,239,156|956x156|free": {
+    "n": 53,
+    "h": [
+     85,
+     85,
+     85
+    ]
+   },
+   "r116/mobs/M022-idle.png|239,0,239,156|956x156|free": {
+    "n": 37,
+    "h": [
+     85,
+     85,
+     85
+    ]
+   },
+   "r116/mobs/M022-idle.png|478,0,239,156|956x156|free": {
+    "n": 61,
+    "h": [
+     85,
+     85,
+     85
+    ]
+   },
+   "r116/mobs/M022-idle.png|717,0,239,156|956x156|free": {
+    "n": 30,
+    "h": [
+     85,
+     85,
+     96
+    ]
+   },
+   "r116/mobs/M022-idle.png|478,0,239,156|956x156|busy": {
+    "n": 42,
+    "h": [
+     85,
+     85,
+     85
+    ]
+   },
+   "r116/mobs/M022-idle.png|717,0,239,156|956x156|busy": {
+    "n": 35,
+    "h": [
+     85,
+     85,
+     85
+    ]
+   },
+   "r116/mobs/M022-idle.png|239,0,239,156|956x156|busy": {
+    "n": 44,
+    "h": [
+     85,
+     85,
+     85
+    ]
+   },
+   "r116/mobs/M022-idle.png|0,0,239,156|956x156|busy": {
+    "n": 48,
+    "h": [
+     85,
+     85,
+     85
+    ]
+   }
+  },
+  "b02-m1|중간보스 · 곰팡이와 오물 봉투": {
+   "episode1b/generated-v394/sloth_moldling.webp|0,0,418,418|418x418|free": {
+    "n": 3,
+    "h": [
+     245,
+     245,
+     245
+    ]
+   },
+   "r198/mobs/M022-move.png|342,0,342,156|684x156|free": {
+    "n": 137,
+    "h": [
+     96,
+     99,
+     99
+    ]
+   },
+   "r198/mobs/M022-move.png|0,0,342,156|684x156|free": {
+    "n": 139,
+    "h": [
+     99,
+     99,
+     99
+    ]
+   }
+  }
+ },
+ "ep1b07": {
+  "b07-f1|불길 속의 늑대": {
+   "episode1b/generated-v394/wrath_fire_beast.webp|0,0,418,418|418x418|free": {
+    "n": 44,
+    "h": [
+     141,
+     141,
+     141
+    ]
+   },
+   "r198/mobs/M030-move.png|250,0,250,155|500x155|free": {
+    "n": 1119,
+    "h": [
+     79,
+     79,
+     79
+    ]
+   },
+   "r198/mobs/M030-move.png|0,0,250,155|500x155|free": {
+    "n": 1113,
+    "h": [
+     79,
+     79,
+     79
+    ]
+   },
+   "r198/mobs/M030-idle.png|223,0,223,157|446x157|free": {
+    "n": 59,
+    "h": [
+     80,
+     80,
+     80
+    ]
+   },
+   "r198/mobs/M030-idle.png|0,0,223,157|446x157|free": {
+    "n": 83,
+    "h": [
+     80,
+     80,
+     80
+    ]
+   },
+   "r198/mobs/M030-idle.png|0,0,223,157|446x157|busy": {
+    "n": 47,
+    "h": [
+     80,
+     80,
+     80
+    ]
+   },
+   "r198/mobs/M030-idle.png|223,0,223,157|446x157|busy": {
+    "n": 66,
+    "h": [
+     80,
+     80,
+     80
+    ]
+   }
+  },
+  "b07-f1|중간보스 · 불길 속의 늑대": {
+   "episode1b/generated-v394/wrath_fire_beast.webp|0,0,418,418|418x418|free": {
+    "n": 4,
+    "h": [
+     163,
+     163,
+     163
+    ]
+   },
+   "r198/mobs/M030-move.png|250,0,250,155|500x155|free": {
+    "n": 63,
+    "h": [
+     91,
+     91,
+     91
+    ]
+   },
+   "r198/mobs/M030-move.png|0,0,250,155|500x155|free": {
+    "n": 59,
+    "h": [
+     93,
+     93,
+     93
+    ]
+   },
+   "r198/mobs/M030-idle.png|0,0,223,157|446x157|busy": {
+    "n": 18,
+    "h": [
+     96,
+     96,
+     96
+    ]
+   },
+   "r198/mobs/M030-idle.png|223,0,223,157|446x157|busy": {
+    "n": 18,
+    "h": [
+     91,
+     91,
+     91
+    ]
+   }
+  }
+ }
+}

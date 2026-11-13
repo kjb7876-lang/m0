@@ -1,0 +1,533 @@
+{
+ "c105-e2": {
+  "zone": "cult05",
+  "name": "생체기계 악몽",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 23,
+    "settled": {
+     "still": 12
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 26,
+    "settled": {
+     "down": 13
+    },
+    "frames": "0123",
+    "vis": [
+     78
+    ]
+   },
+   "up": {
+    "n": 22,
+    "settled": {
+     "busy": 4,
+     "up": 7
+    },
+    "frames": "123",
+    "vis": [
+     78
+    ]
+   },
+   "right": {
+    "n": 28,
+    "settled": {
+     "no-side": 14
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 25,
+    "settled": {
+     "busy": 13
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 181,
+    "swapped": 33,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "b09-h1": {
+  "zone": "ep1b09",
+  "name": "강철 턱의 사이보그 개",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 27,
+    "settled": {
+     "still": 14
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 24,
+    "settled": {
+     "down": 12
+    },
+    "frames": "0123",
+    "vis": [
+     60
+    ]
+   },
+   "up": {
+    "n": 29,
+    "settled": {
+     "busy": 3,
+     "up": 12
+    },
+    "frames": "0123",
+    "vis": [
+     60
+    ]
+   },
+   "right": {
+    "n": 27,
+    "settled": {
+     "no-side": 14
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 26,
+    "settled": {
+     "busy": 4,
+     "no-side": 9
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 246,
+    "swapped": 36,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "c106-e2": {
+  "zone": "cult06",
+  "name": "기계재판 연결자",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 24,
+    "settled": {
+     "still": 12
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 24,
+    "settled": {
+     "down": 12
+    },
+    "frames": "0123",
+    "vis": [
+     81
+    ]
+   },
+   "up": {
+    "n": 25,
+    "settled": {
+     "busy": 6,
+     "no-up": 7
+    },
+    "frames": "",
+    "vis": []
+   },
+   "right": {
+    "n": 25,
+    "settled": {
+     "no-side": 13
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 21,
+    "settled": {
+     "busy": 11
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 175,
+    "swapped": 23,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "h102-s1": {
+  "zone": "hando02",
+  "name": "붕괴선 파수병",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 25,
+    "settled": {
+     "still": 13
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 26,
+    "settled": {
+     "down": 13
+    },
+    "frames": "0123",
+    "vis": [
+     65
+    ]
+   },
+   "up": {
+    "n": 26,
+    "settled": {
+     "up": 13
+    },
+    "frames": "0123",
+    "vis": [
+     65
+    ]
+   },
+   "right": {
+    "n": 26,
+    "settled": {
+     "no-side": 13
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 25,
+    "settled": {
+     "no-side": 13
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 208,
+    "swapped": 52,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "h101-t1": {
+  "zone": "hando01",
+  "name": "악몽 정찰체",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 27,
+    "settled": {
+     "still": 14
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 24,
+    "settled": {
+     "down": 12
+    },
+    "frames": "0123",
+    "vis": [
+     73
+    ]
+   },
+   "up": {
+    "n": 23,
+    "settled": {
+     "busy": 5,
+     "up": 7
+    },
+    "frames": "0123",
+    "vis": [
+     73
+    ]
+   },
+   "right": {
+    "n": 24,
+    "settled": {
+     "no-side": 12
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 26,
+    "settled": {
+     "busy": 13
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 271,
+    "swapped": 32,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "dist02-m1": {
+  "zone": "dist02",
+  "name": "수렁 주문사",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 27,
+    "settled": {
+     "still": 14
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 26,
+    "settled": {
+     "down": 13
+    },
+    "frames": "0123",
+    "vis": [
+     73
+    ]
+   },
+   "up": {
+    "n": 28,
+    "settled": {
+     "busy": 3,
+     "up": 11
+    },
+    "frames": "0123",
+    "vis": [
+     73
+    ]
+   },
+   "right": {
+    "n": 26,
+    "settled": {
+     "no-side": 13
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 26,
+    "settled": {
+     "busy": 6,
+     "no-side": 7
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 265,
+    "swapped": 38,
+    "waiting": 0,
+    "otherArt": 2,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "dist01-sp1": {
+  "zone": "dist01",
+  "name": "기억 운반거미",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 27,
+    "settled": {
+     "still": 14
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 26,
+    "settled": {
+     "no-side": 13
+    },
+    "frames": "",
+    "vis": []
+   },
+   "up": {
+    "n": 24,
+    "settled": {
+     "up": 12
+    },
+    "frames": "0123",
+    "vis": [
+     60
+    ]
+   },
+   "right": {
+    "n": 23,
+    "settled": {
+     "no-side": 12
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 21,
+    "settled": {
+     "no-side": 11
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 237,
+    "swapped": 21,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "b02-m1": {
+  "zone": "ep1b02",
+  "name": "곰팡이와 오물 봉투",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 25,
+    "settled": {
+     "still": 13
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 25,
+    "settled": {
+     "down": 13
+    },
+    "frames": "0123",
+    "vis": [
+     71
+    ]
+   },
+   "up": {
+    "n": 24,
+    "settled": {
+     "up": 12
+    },
+    "frames": "0123",
+    "vis": [
+     71
+    ]
+   },
+   "right": {
+    "n": 23,
+    "settled": {
+     "no-side": 12
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 23,
+    "settled": {
+     "no-side": 12
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 302,
+    "swapped": 49,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ }
+}

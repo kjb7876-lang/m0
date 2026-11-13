@@ -536,6 +536,8 @@ jobs:
         run: node r96/qa/r1001/mob-move-cpu-check.cjs
       - name: R1018 regular-mob up/down walk sheets, batch 2 (Dots CX-0082MV add1, joined to the R974 table; own side walk kept) CPU check
         run: node r96/qa/r1018/mob-move-cpu-check.cjs
+      - name: R1019 regular-mob up/down walk sheets, batch 3 (Dots CX-0082MV add1 second pass, joined to the R974 table) CPU check
+        run: node r96/qa/r1019/mob-move-cpu-check.cjs
       - name: R996 bulmyeongwi fog summon still fires in the boss phase after every field mob is gone CPU check
         run: node r96/qa/r996/r996-cpu-check.cjs
       - name: R1008 cinema mode finishes (hero stands up instead of the sanctuary trip, ending windows move on 20 s after the subtitles, normal records unchanged) CPU check
@@ -546,6 +548,8 @@ jobs:
         run: node r96/qa/r1007/stmt-spread-cpu-check.cjs
       - name: R1010 survival Michaela finale (4 knots in order, not killed) and shared story ending CPU check
         run: node r96/qa/r1010/r1010-cpu-check.cjs
+      - name: R1015 clean UI (title = 2 main buttons + 2 mode cards + small links, co-op/notes folded; menu quick row + folded groups; PC settings folded; quiet header track/footer details) CPU check
+        run: node r96/qa/r1015/r1015-cpu-check.cjs
       - name: R963 survival BGM note sits below the survival HUD line (no overlapped text) CPU check
         run: node r96/qa/r963/r963-cpu-check.cjs
       - name: R980 mobile memory budget (R163/R106 tint caches capped by pixels on mobile, idle decoded images trimmed, desktop unchanged) CPU check

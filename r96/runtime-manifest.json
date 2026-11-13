@@ -6748,6 +6748,81 @@
       "sha256": "bbf669475115972572423133515087a8841d1c80b3ee7df2bbf3f2c16d931db1"
     },
     {
+      "path": "assets/r1019/move/m005-down.webp",
+      "bytes": 86402,
+      "sha256": "f1561bb1fbfee40a8801504106a5cfeab364b2bef139f2f09439fc5518c193d3"
+    },
+    {
+      "path": "assets/r1019/move/m005-up.webp",
+      "bytes": 79310,
+      "sha256": "4fb689802508a94df1de84d1711a4d112007670b0837843bc4bdf695d6ff4a7a"
+    },
+    {
+      "path": "assets/r1019/move/m134-nightmare-down.webp",
+      "bytes": 94542,
+      "sha256": "91ac39af9e1da75e11121fcbfbce023e7a4f86cc44738e8b5704dc973b63242c"
+    },
+    {
+      "path": "assets/r1019/move/m134-nightmare-up.webp",
+      "bytes": 86126,
+      "sha256": "82a875685c42124c91acbca48974e2973d13b4f48c47aea282e76b3d11877666"
+    },
+    {
+      "path": "assets/r1019/move/silver-seal-sentinel-down.webp",
+      "bytes": 86508,
+      "sha256": "54619ae99d427cbe40a7e3626d671ec6d2d34895d22f4833dfbd0177cc35cb68"
+    },
+    {
+      "path": "assets/r1019/move/silver-seal-sentinel-up.webp",
+      "bytes": 82734,
+      "sha256": "4d83043eda127ee36c3fd7c2343065d557045042e7b0f0f5c1161268431c4a5d"
+    },
+    {
+      "path": "assets/r1019/move/sloth-moldling-down.webp",
+      "bytes": 159212,
+      "sha256": "ee6750e2b9014b61f78d244c20654b0bc8777cf93f4901ed5c332fe3edafe32c"
+    },
+    {
+      "path": "assets/r1019/move/sloth-moldling-up.webp",
+      "bytes": 163808,
+      "sha256": "e06fc6b88f151ab735d6a7d3d882dd863e7c94fd48414023c955a649437a311d"
+    },
+    {
+      "path": "assets/r1019/move/steel-jaw-hound-down.webp",
+      "bytes": 88046,
+      "sha256": "c68c2987a08e50dc245ee67cdc7f5acbd0f19b796423fc59fdaa6265a126536f"
+    },
+    {
+      "path": "assets/r1019/move/steel-jaw-hound-up.webp",
+      "bytes": 85008,
+      "sha256": "d5315822cbdebb34913968b9786972892b43d4c2bcc78fa9d87c039f97ce162d"
+    },
+    {
+      "path": "assets/r1019/move/superego-inquisitor-down.webp",
+      "bytes": 40418,
+      "sha256": "0a3834e7d8f9dc2f5696447e002a7ce7591569982320d18a56195c7e1a25287d"
+    },
+    {
+      "path": "assets/r1019/move/swamp-mage-down.webp",
+      "bytes": 99392,
+      "sha256": "6307b399a0e801be0c0c529aa7d7ca3fd881c38d265abe2765ea68e6cc5e3795"
+    },
+    {
+      "path": "assets/r1019/move/swamp-mage-up.webp",
+      "bytes": 90984,
+      "sha256": "152a9515813fc6fcc3f937e907c81159232c86967c2a00be4568ecca1e841163"
+    },
+    {
+      "path": "assets/r1019/move/timeless-silver-scout-down.webp",
+      "bytes": 90846,
+      "sha256": "8479b01ad0d31c52626c9d183e5fce91f85bdb6ab67a06494c8f67b31bcc1b3a"
+    },
+    {
+      "path": "assets/r1019/move/timeless-silver-scout-up.webp",
+      "bytes": 85780,
+      "sha256": "8b398bb9c7e4c07943ad38cf5c498d6a0a2d67c5a82eb9d4cf50d3b97524ebeb"
+    },
+    {
       "path": "assets/r103/chest-closed.svg",
       "bytes": 2508,
       "sha256": "d3e981852d7785f5749b633ca6f136c5ae378ef0efc7b3562059ceae43bd3e10"
@@ -51199,8 +51274,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6578125,
-      "sha256": "1c88d87d8d378c45bd426927fd472ef84d0ec4fa02eff25cc7057bf20d70a8fd"
+      "bytes": 6578218,
+      "sha256": "51e36763e64b89c2497e1bda92b35d076357bfb393c9d51a631771526ded1e27"
     },
     {
       "path": "intro-r140.js",
@@ -51511,6 +51586,11 @@
       "path": "move-dir-r1018-data.js",
       "bytes": 23988,
       "sha256": "91e6053fa3feb4dcbcfec43ed19c399c95c5f04a8e71ccf0103e4be332ed093e"
+    },
+    {
+      "path": "move-dir-r1019-data.js",
+      "bytes": 11566,
+      "sha256": "b605e849cd1309b392adfb82e07cd9b7b562665b0cc70ce2c8c8d9cc31f9d221"
     },
     {
       "path": "move-dir-r974-data.js",
@@ -52188,6 +52268,11 @@
       "sha256": "7b0ce5acc60119a10cbad07af7110a2d0036fe1f8deb521139fd12506d55f1cc"
     },
     {
+      "path": "ui-clean-r1015.js",
+      "bytes": 19337,
+      "sha256": "f54beb3daf65f78fcf2850099419505267fabd3357847d4180c35927f584daec"
+    },
+    {
       "path": "ui-upgrades-r222.js",
       "bytes": 8667,
       "sha256": "e4a29248249cedbeead2fd7760775904e5f5a609acdca33c70d89fb2d9607a2f"
@@ -52393,9 +52478,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10478,
-  "totalBytes": 1286437113,
-  "webHTMLSha256": "1c88d87d8d378c45bd426927fd472ef84d0ec4fa02eff25cc7057bf20d70a8fd",
+  "fileCount": 10495,
+  "totalBytes": 1287887225,
+  "webHTMLSha256": "51e36763e64b89c2497e1bda92b35d076357bfb393c9d51a631771526ded1e27",
   "largest": [
     {
       "path": "index.html",
