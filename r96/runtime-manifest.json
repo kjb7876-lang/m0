@@ -49394,8 +49394,8 @@
     },
     {
       "path": "combat-sfx-r954.js",
-      "bytes": 7914,
-      "sha256": "5022a542bed8bac393008aa62ef8bc86762524ad7358d2c354c9176b6852f16c"
+      "bytes": 8146,
+      "sha256": "ea1783d4e167b027ffaa6a614d73ef6eaff82818ce5a5187e8b00fa10e431786"
     },
     {
       "path": "combat-sfx-r955.js",
@@ -49924,8 +49924,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6576181,
-      "sha256": "f78375e17e91d4218ad4766ba5c06b820db4b21a79bc5bb1ac2a7beb459adc26"
+      "bytes": 6576229,
+      "sha256": "15f8e3f1e7a1f959eeec83ffd6fab15230b02a9a32febb26c11dbe9b5925552e"
     },
     {
       "path": "intro-r140.js",
@@ -50066,6 +50066,11 @@
       "path": "michaela-r247.js",
       "bytes": 12747,
       "sha256": "b56501f9b42eb76dbe6ae6d035caf6eb69a577cefb5e125ae1100b485d7a4a5b"
+    },
+    {
+      "path": "midboss-puppet-r981.js",
+      "bytes": 10677,
+      "sha256": "be18dc7734aa236a945be7137f0fc4cb33c00d3d03b44a4f32c5098e42a38966"
     },
     {
       "path": "mob-art-r290.js",
@@ -51033,9 +51038,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10206,
-  "totalBytes": 1261901212,
-  "webHTMLSha256": "f78375e17e91d4218ad4766ba5c06b820db4b21a79bc5bb1ac2a7beb459adc26",
+  "fileCount": 10207,
+  "totalBytes": 1261912169,
+  "webHTMLSha256": "15f8e3f1e7a1f959eeec83ffd6fab15230b02a9a32febb26c11dbe9b5925552e",
   "largest": [
     {
       "path": "index.html",
