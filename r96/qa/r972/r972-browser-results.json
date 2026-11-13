@@ -1,0 +1,780 @@
+[
+ [
+  "hwando",
+  "q",
+  {
+   "off": {
+    "total": 138776.88158208015,
+    "stats": {
+     "extraTicks": 0,
+     "seen": 0,
+     "classified": 0,
+     "received": 0,
+     "delivered": 0,
+     "split": 0,
+     "dots": 0,
+     "multis": 0,
+     "ticks": 0,
+     "follow": 0,
+     "lethal": 0,
+     "sounds": 0,
+     "soundGated": 0,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {},
+    "pending": 0
+   },
+   "on": {
+    "total": 116033.37467904034,
+    "stats": {
+     "extraTicks": 0,
+     "seen": 26,
+     "classified": 26,
+     "received": 25821.57312,
+     "delivered": 25821.57311999999,
+     "split": 26,
+     "dots": 0,
+     "multis": 26,
+     "ticks": 0,
+     "follow": 26,
+     "lethal": 0,
+     "sounds": 5,
+     "soundGated": 21,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {
+     "r972_slash": 5
+    },
+    "pending": 0
+   }
+  }
+ ],
+ [
+  "hwando",
+  "w",
+  {
+   "off": {
+    "total": 25500.78720000002,
+    "stats": {
+     "extraTicks": 0,
+     "seen": 0,
+     "classified": 0,
+     "received": 0,
+     "delivered": 0,
+     "split": 0,
+     "dots": 0,
+     "multis": 0,
+     "ticks": 0,
+     "follow": 0,
+     "lethal": 0,
+     "sounds": 0,
+     "soundGated": 0,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {},
+    "pending": 0
+   },
+   "on": {
+    "total": 20431.353599999915,
+    "stats": {
+     "extraTicks": 0,
+     "seen": 8,
+     "classified": 8,
+     "received": 4233.599999999999,
+     "delivered": 4233.599999999999,
+     "split": 8,
+     "dots": 0,
+     "multis": 8,
+     "ticks": 0,
+     "follow": 8,
+     "lethal": 0,
+     "sounds": 1,
+     "soundGated": 7,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {
+     "r972_slash": 1
+    },
+    "pending": 0
+   }
+  }
+ ],
+ [
+  "seoha",
+  "q",
+  {
+   "off": {
+    "total": 32164.78809599996,
+    "stats": {
+     "extraTicks": 0,
+     "seen": 0,
+     "classified": 0,
+     "received": 0,
+     "delivered": 0,
+     "split": 0,
+     "dots": 0,
+     "multis": 0,
+     "ticks": 0,
+     "follow": 0,
+     "lethal": 0,
+     "sounds": 0,
+     "soundGated": 0,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {},
+    "pending": 0
+   },
+   "on": {
+    "total": 59117.852807999996,
+    "stats": {
+     "extraTicks": 0,
+     "seen": 38,
+     "classified": 4,
+     "received": 3539.289600000001,
+     "delivered": 3539.2896000000005,
+     "split": 4,
+     "dots": 0,
+     "multis": 4,
+     "ticks": 0,
+     "follow": 4,
+     "lethal": 0,
+     "sounds": 2,
+     "soundGated": 2,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {
+     "r972_echo": 2
+    },
+    "pending": 0
+   }
+  }
+ ],
+ [
+  "seoha",
+  "r",
+  {
+   "off": {
+    "total": 79370.81611200012,
+    "stats": {
+     "extraTicks": 0,
+     "seen": 0,
+     "classified": 0,
+     "received": 0,
+     "delivered": 0,
+     "split": 0,
+     "dots": 0,
+     "multis": 0,
+     "ticks": 0,
+     "follow": 0,
+     "lethal": 0,
+     "sounds": 0,
+     "soundGated": 0,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {},
+    "pending": 0
+   },
+   "on": {
+    "total": 41784.42240000004,
+    "stats": {
+     "extraTicks": 0,
+     "seen": 8,
+     "classified": 8,
+     "received": 6773.760000000001,
+     "delivered": 6773.759999999998,
+     "split": 8,
+     "dots": 0,
+     "multis": 8,
+     "ticks": 0,
+     "follow": 8,
+     "lethal": 0,
+     "sounds": 1,
+     "soundGated": 7,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {
+     "r972_echo": 1
+    },
+    "pending": 0
+   }
+  }
+ ],
+ [
+  "neon",
+  "q",
+  {
+   "off": {
+    "total": 59492.83266662377,
+    "stats": {
+     "extraTicks": 0,
+     "seen": 0,
+     "classified": 0,
+     "received": 0,
+     "delivered": 0,
+     "split": 0,
+     "dots": 0,
+     "multis": 0,
+     "ticks": 0,
+     "follow": 0,
+     "lethal": 0,
+     "sounds": 0,
+     "soundGated": 0,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {},
+    "pending": 0
+   },
+   "on": {
+    "total": 89515.1478541823,
+    "stats": {
+     "extraTicks": 24,
+     "seen": 61,
+     "classified": 7,
+     "received": 9009.100800000002,
+     "delivered": 9009.100800000006,
+     "split": 7,
+     "dots": 7,
+     "multis": 0,
+     "ticks": 21,
+     "follow": 0,
+     "lethal": 0,
+     "sounds": 5,
+     "soundGated": 40,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {
+     "r972_shock": 2,
+     "r972_poison": 3
+    },
+    "pending": 0
+   }
+  }
+ ],
+ [
+  "neon",
+  "r",
+  {
+   "off": {
+    "total": 30053.585911910515,
+    "stats": {
+     "extraTicks": 0,
+     "seen": 0,
+     "classified": 0,
+     "received": 0,
+     "delivered": 0,
+     "split": 0,
+     "dots": 0,
+     "multis": 0,
+     "ticks": 0,
+     "follow": 0,
+     "lethal": 0,
+     "sounds": 0,
+     "soundGated": 0,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {},
+    "pending": 0
+   },
+   "on": {
+    "total": 26548.336188057583,
+    "stats": {
+     "extraTicks": 0,
+     "seen": 20,
+     "classified": 6,
+     "received": 4064.2560000000003,
+     "delivered": 4064.2559999999967,
+     "split": 6,
+     "dots": 6,
+     "multis": 0,
+     "ticks": 30,
+     "follow": 0,
+     "lethal": 0,
+     "sounds": 5,
+     "soundGated": 25,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {
+     "r972_poison": 5
+    },
+    "pending": 0
+   }
+  }
+ ],
+ [
+  "michaela",
+  "q",
+  {
+   "off": {
+    "total": 72175.33272499191,
+    "stats": {
+     "extraTicks": 0,
+     "seen": 0,
+     "classified": 0,
+     "received": 0,
+     "delivered": 0,
+     "split": 0,
+     "dots": 0,
+     "multis": 0,
+     "ticks": 0,
+     "follow": 0,
+     "lethal": 0,
+     "sounds": 0,
+     "soundGated": 0,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {},
+    "pending": 0
+   },
+   "on": {
+    "total": 67635.5968681345,
+    "stats": {
+     "extraTicks": 0,
+     "seen": 13,
+     "classified": 13,
+     "received": 12669.048,
+     "delivered": 12669.047999999997,
+     "split": 13,
+     "dots": 13,
+     "multis": 0,
+     "ticks": 34,
+     "follow": 0,
+     "lethal": 0,
+     "sounds": 5,
+     "soundGated": 29,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {
+     "r972_holy": 5
+    },
+    "pending": 0
+   }
+  }
+ ],
+ [
+  "michaela",
+  "r",
+  {
+   "off": {
+    "total": 29916.80153280012,
+    "stats": {
+     "extraTicks": 0,
+     "seen": 0,
+     "classified": 0,
+     "received": 0,
+     "delivered": 0,
+     "split": 0,
+     "dots": 0,
+     "multis": 0,
+     "ticks": 0,
+     "follow": 0,
+     "lethal": 0,
+     "sounds": 0,
+     "soundGated": 0,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {},
+    "pending": 0
+   },
+   "on": {
+    "total": 27835.33818239998,
+    "stats": {
+     "extraTicks": 0,
+     "seen": 22,
+     "classified": 8,
+     "received": 3810.239999999999,
+     "delivered": 3810.240000000005,
+     "split": 8,
+     "dots": 8,
+     "multis": 0,
+     "ticks": 32,
+     "follow": 0,
+     "lethal": 0,
+     "sounds": 4,
+     "soundGated": 28,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {
+     "r972_holy": 4
+    },
+    "pending": 0
+   }
+  }
+ ],
+ [
+  "lauren",
+  "q",
+  {
+   "off": {
+    "total": 108490.4876159999,
+    "stats": {
+     "extraTicks": 0,
+     "seen": 0,
+     "classified": 0,
+     "received": 0,
+     "delivered": 0,
+     "split": 0,
+     "dots": 0,
+     "multis": 0,
+     "ticks": 0,
+     "follow": 0,
+     "lethal": 0,
+     "sounds": 0,
+     "soundGated": 0,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {},
+    "pending": 0
+   },
+   "on": {
+    "total": 104802.3364147199,
+    "stats": {
+     "extraTicks": 0,
+     "seen": 36,
+     "classified": 36,
+     "received": 22587.102720000003,
+     "delivered": 22587.102719999984,
+     "split": 36,
+     "dots": 0,
+     "multis": 36,
+     "ticks": 0,
+     "follow": 72,
+     "lethal": 0,
+     "sounds": 9,
+     "soundGated": 63,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {
+     "r972_gravity": 9
+    },
+    "pending": 0
+   }
+  }
+ ],
+ [
+  "hunter",
+  "q",
+  {
+   "off": {
+    "total": 32651.677146066795,
+    "stats": {
+     "extraTicks": 0,
+     "seen": 0,
+     "classified": 0,
+     "received": 0,
+     "delivered": 0,
+     "split": 0,
+     "dots": 0,
+     "multis": 0,
+     "ticks": 0,
+     "follow": 0,
+     "lethal": 0,
+     "sounds": 0,
+     "soundGated": 0,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {},
+    "pending": 0
+   },
+   "on": {
+    "total": 23796.364983852065,
+    "stats": {
+     "extraTicks": 15,
+     "seen": 26,
+     "classified": 9,
+     "received": 2664.1198080000004,
+     "delivered": 2664.1198080000004,
+     "split": 9,
+     "dots": 9,
+     "multis": 0,
+     "ticks": 4,
+     "follow": 0,
+     "lethal": 0,
+     "sounds": 6,
+     "soundGated": 13,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {
+     "r972_burn": 6
+    },
+    "pending": 0
+   }
+  }
+ ],
+ [
+  "hunter",
+  "w",
+  {
+   "off": {
+    "total": 21249.454642991986,
+    "stats": {
+     "extraTicks": 0,
+     "seen": 0,
+     "classified": 0,
+     "received": 0,
+     "delivered": 0,
+     "split": 0,
+     "dots": 0,
+     "multis": 0,
+     "ticks": 0,
+     "follow": 0,
+     "lethal": 0,
+     "sounds": 0,
+     "soundGated": 0,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {},
+    "pending": 0
+   },
+   "on": {
+    "total": 14661.079893661852,
+    "stats": {
+     "extraTicks": 48,
+     "seen": 63,
+     "classified": 3,
+     "received": 689.724,
+     "delivered": 689.7240000000003,
+     "split": 3,
+     "dots": 3,
+     "multis": 0,
+     "ticks": 12,
+     "follow": 0,
+     "lethal": 0,
+     "sounds": 9,
+     "soundGated": 51,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {
+     "r972_burn": 9
+    },
+    "pending": 0
+   }
+  }
+ ],
+ [
+  "slayer",
+  "q",
+  {
+   "off": {
+    "total": 12223.901125854754,
+    "stats": {
+     "extraTicks": 0,
+     "seen": 0,
+     "classified": 0,
+     "received": 0,
+     "delivered": 0,
+     "split": 0,
+     "dots": 0,
+     "multis": 0,
+     "ticks": 0,
+     "follow": 0,
+     "lethal": 0,
+     "sounds": 0,
+     "soundGated": 0,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {},
+    "pending": 0
+   },
+   "on": {
+    "total": 26907.275437056014,
+    "stats": {
+     "extraTicks": 4,
+     "seen": 5,
+     "classified": 1,
+     "received": 2316.6259200000004,
+     "delivered": 2316.6259200000004,
+     "split": 1,
+     "dots": 0,
+     "multis": 1,
+     "ticks": 0,
+     "follow": 1,
+     "lethal": 0,
+     "sounds": 5,
+     "soundGated": 0,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {
+     "r972_slash": 1,
+     "r972_bleed": 4
+    },
+    "pending": 0
+   }
+  }
+ ],
+ [
+  "slayer",
+  "r",
+  {
+   "off": {
+    "total": 259771.2633815042,
+    "stats": {
+     "extraTicks": 0,
+     "seen": 0,
+     "classified": 0,
+     "received": 0,
+     "delivered": 0,
+     "split": 0,
+     "dots": 0,
+     "multis": 0,
+     "ticks": 0,
+     "follow": 0,
+     "lethal": 0,
+     "sounds": 0,
+     "soundGated": 0,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {},
+    "pending": 0
+   },
+   "on": {
+    "total": 333902.9210517504,
+    "stats": {
+     "extraTicks": 0,
+     "seen": 320,
+     "classified": 64,
+     "received": 11741.184000000001,
+     "delivered": 11741.184000000021,
+     "split": 8,
+     "dots": 8,
+     "multis": 0,
+     "ticks": 32,
+     "follow": 0,
+     "lethal": 0,
+     "sounds": 4,
+     "soundGated": 28,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {
+     "r972_bleed": 4
+    },
+    "pending": 0
+   }
+  }
+ ],
+ [
+  "hwando",
+  "e",
+  {
+   "off": {
+    "total": 14140.647360000032,
+    "stats": {
+     "extraTicks": 0,
+     "seen": 0,
+     "classified": 0,
+     "received": 0,
+     "delivered": 0,
+     "split": 0,
+     "dots": 0,
+     "multis": 0,
+     "ticks": 0,
+     "follow": 0,
+     "lethal": 0,
+     "sounds": 0,
+     "soundGated": 0,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {},
+    "pending": 0
+   },
+   "on": {
+    "total": 13532.315328000026,
+    "stats": {
+     "extraTicks": 0,
+     "seen": 3,
+     "classified": 0,
+     "received": 0,
+     "delivered": 0,
+     "split": 0,
+     "dots": 0,
+     "multis": 0,
+     "ticks": 0,
+     "follow": 0,
+     "lethal": 0,
+     "sounds": 0,
+     "soundGated": 0,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {},
+    "pending": 0
+   }
+  }
+ ],
+ [
+  "lauren",
+  "r",
+  {
+   "off": {
+    "total": 22646.542464,
+    "stats": {
+     "extraTicks": 0,
+     "seen": 0,
+     "classified": 0,
+     "received": 0,
+     "delivered": 0,
+     "split": 0,
+     "dots": 0,
+     "multis": 0,
+     "ticks": 0,
+     "follow": 0,
+     "lethal": 0,
+     "sounds": 0,
+     "soundGated": 0,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {},
+    "pending": 0
+   },
+   "on": {
+    "total": 30057.13267199992,
+    "stats": {
+     "extraTicks": 0,
+     "seen": 11,
+     "classified": 0,
+     "received": 0,
+     "delivered": 0,
+     "split": 0,
+     "dots": 0,
+     "multis": 0,
+     "ticks": 0,
+     "follow": 0,
+     "lethal": 0,
+     "sounds": 0,
+     "soundGated": 0,
+     "dropped": 0,
+     "errors": 0
+    },
+    "snd": {},
+    "pending": 0
+   }
+  }
+ ]
+]

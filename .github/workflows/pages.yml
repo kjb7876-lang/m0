@@ -508,6 +508,8 @@ jobs:
         run: node r96/qa/r962/r962-cpu-check.cjs
       - name: R970 777 developer test mode level input (level-based skill points, same rule as normal play, 1..99) CPU check
         run: node r96/qa/r970/r970-cpu-check.cjs
+      - name: R972 skill DoT / multi-hit split (total damage kept, lethal hits not split, own tick sounds rate-limited) CPU check
+        run: node r96/qa/r972/r972-cpu-check.cjs
       - name: R971 hero special passive growth CPU check
         run: node r96/qa/r971/r971-cpu-check.cjs
       - name: R981 insomnia-ghost midboss renamed and set apart from the main boss CPU check
