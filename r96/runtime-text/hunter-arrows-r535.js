@@ -143,7 +143,8 @@ function post0(){const t=T(),dt=Math.max(0,Math.min(.1,t-lastT));lastT=t;const r
  for(let i=fxList.length-1;i>=0;i--)if(t-fxList[i].t0>fxList[i].life||t<fxList[i].t0)fxList.splice(i,1);
  stats.maxLive=Math.max(stats.maxLive,mine());}
 
-if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{post();}catch(err){fail(err);}sentinel(fxList.length>0||burns.size>0||gates.length>0||volleys.length>0||pops.length>0);return r;};}
+const asHeroR720=(id,fn)=>{const D=window.__STORYWORLD_HERO_DEFENSE_R720__;return D&&typeof D.asHero==='function'?D.asHero(id,fn):fn();};/* R720-4: 다음 틱에 이어지는 기술을 그 영웅 몸(생존 배치 영웅이면 그 몸)으로 돌린다 */
+if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{asHeroR720('hunter',post);}catch(err){fail(err);}sentinel(fxList.length>0||burns.size>0||gates.length>0||volleys.length>0||pops.length>0);return r;};}
 
 // ---- 그리기 (임시 코드 연출 — Dots 시트 대기) ------------------------------------------------------------
 const CRIM='rgb(160,20,40)',ROSE='rgb(250,150,150)',GOLD='rgb(255,214,140)',EMBER='rgb(255,122,58)';

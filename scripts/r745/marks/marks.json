@@ -1,0 +1,80 @@
+{
+ "gem-hapil": {
+  "png": "scripts/r745/marks/gem-hapil.png",
+  "x": 1112,
+  "y": 552,
+  "w": 96,
+  "h": 96,
+  "label": "Gemini 별 표시(오른쪽 아래)",
+  "estimatedFrom": "r309 연결본(책+실사)",
+  "maxAlpha": 0.401,
+  "model": "Y(휘도) = (1-a)·배경 + a·255, 프레임 수백 장에서 a 중앙값 추정(둘레 라플라스 배경)",
+  "gain": 0.947,
+  "gainNote": "지도 a 에 곱하는 세기: 원본에서 지운 뒤 남은 표시 세기(r96/qa/r745 측정 방식) 중앙값이 0 이 되는 값(이분 탐색)"
+ },
+ "gem-poison": {
+  "png": "scripts/r745/marks/gem-poison.png",
+  "x": 1112,
+  "y": 552,
+  "w": 96,
+  "h": 96,
+  "label": "Gemini 별 표시(오른쪽 아래)",
+  "estimatedFrom": "gemini_generated_video_f5fb3f35.mp4",
+  "maxAlpha": 0.315,
+  "model": "Y(휘도) = (1-a)·배경 + a·255, 프레임 수백 장에서 a 중앙값 추정(둘레 라플라스 배경)",
+  "gain": 1.027,
+  "gainNote": "지도 a 에 곱하는 세기: 원본에서 지운 뒤 남은 표시 세기(r96/qa/r745 측정 방식) 중앙값이 0 이 되는 값(이분 탐색)"
+ },
+ "veo-knight": {
+  "png": "scripts/r745/marks/veo-knight.png",
+  "x": 620,
+  "y": 1214,
+  "w": 96,
+  "h": 62,
+  "label": "Veo 글자 표시(오른쪽 아래)",
+  "estimatedFrom": "타락천사 기사 강림 원본",
+  "maxAlpha": 0.52,
+  "model": "Y(휘도) = (1-a)·배경 + a·255, 프레임 수백 장에서 a 중앙값 추정(둘레 라플라스 배경)",
+  "gain": 1.003,
+  "gainNote": "지도 a 에 곱하는 세기: 원본에서 지운 뒤 남은 표시 세기(r96/qa/r745 측정 방식) 중앙값이 0 이 되는 값(이분 탐색)"
+ },
+ "veo-beach": {
+  "png": "scripts/r745/marks/veo-beach.png",
+  "x": 620,
+  "y": 1214,
+  "w": 96,
+  "h": 62,
+  "label": "Veo 글자 표시(오른쪽 아래)",
+  "estimatedFrom": "해변 원본",
+  "maxAlpha": 0.558,
+  "model": "Y(휘도) = (1-a)·배경 + a·255, 프레임 수백 장에서 a 중앙값 추정(둘레 라플라스 배경)",
+  "gain": 0.982,
+  "gainNote": "지도 a 에 곱하는 세기: 원본에서 지운 뒤 남은 표시 세기(r96/qa/r745 측정 방식) 중앙값이 0 이 되는 값(이분 탐색)"
+ },
+ "ai-fall": {
+  "png": "scripts/r745/marks/ai-fall.png",
+  "x": 0,
+  "y": 0,
+  "w": 72,
+  "h": 64,
+  "label": "AI 배지(왼쪽 위)",
+  "estimatedFrom": "추락 원본",
+  "maxAlpha": 0.4,
+  "model": "Y(휘도) = (1-a)·배경 + a·255, 프레임 수백 장에서 a 중앙값 추정(둘레 라플라스 배경)",
+  "gain": 1.009,
+  "gainNote": "지도 a 에 곱하는 세기: 원본에서 지운 뒤 남은 표시 세기(r96/qa/r745 측정 방식) 중앙값이 0 이 되는 값(이분 탐색)"
+ },
+ "dreamina-fall": {
+  "png": "scripts/r745/marks/dreamina-fall.png",
+  "x": 928,
+  "y": 756,
+  "w": 164,
+  "h": 58,
+  "label": "Dreamina AI 글자 표시(오른쪽 아래)",
+  "estimatedFrom": "추락 원본",
+  "maxAlpha": 0.943,
+  "model": "Y(휘도) = (1-a)·배경 + a·255, 프레임 수백 장에서 a 중앙값 추정(둘레 라플라스 배경)",
+  "gain": 1.0,
+  "gainNote": "지도 a 에 곱하는 세기: 원본에서 지운 뒤 남은 표시 세기(r96/qa/r745 측정 방식) 중앙값이 0 이 되는 값(이분 탐색)"
+ }
+}

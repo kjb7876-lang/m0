@@ -403,6 +403,8 @@ jobs:
         run: node r96/qa/r619/video-render-pause-cpu-check.cjs
       - name: R667 title screen background loop video CPU check
         run: node r96/qa/r667/title-bg-video-cpu-check.cjs
+      - name: R745 cinematic videos generator mark removal, quality and sound CPU check
+        run: node r96/qa/r745/cinematic-clean-cpu-check.cjs
       - name: R373 mob squads and leaders CPU check
         run: node r96/qa/r373/r373-cpu-check.cjs
 
@@ -428,8 +430,24 @@ jobs:
         run: node r96/qa/r545/r545-cpu-check.cjs
       - name: R546 per-hero attack and skill sounds, blink, parry, EGO, awakening, clear, upgrade, fall, panel, portal and enemy-shot sounds CPU check
         run: node r96/qa/r546/r546-cpu-check.cjs
+      - name: R785 per-hero weapon hit sounds, skill hits, kill finisher and hit overlap limit CPU check
+        run: node r96/qa/r785/r785-cpu-check.cjs
       - name: R664 regional ambience loops (ElevenLabs beds per episode, seamless, quiet) CPU check
         run: node r96/qa/r664/r664-cpu-check.cjs
+      - name: R787 per-hero W/E/R skill sounds and Hunter attack (ElevenLabs) CPU check
+        run: node r96/qa/r787/r787-cpu-check.cjs
+      - name: R788 per-boss hit/death/attack sounds (ElevenLabs) CPU check
+        run: node r96/qa/r788/r788-cpu-check.cjs
+      - name: R789 per-midboss hit/death/attack sounds (ElevenLabs) CPU check
+        run: node r96/qa/r789/r789-cpu-check.cjs
+      - name: R954 insomnia-ghost zone hit/death/attack sounds (ElevenLabs) CPU check
+        run: node r96/qa/r954/r954-cpu-check.cjs
+      - name: R955 regular mob family hit/death/attack sounds (ElevenLabs) CPU check
+        run: node r96/qa/r955/r955-cpu-check.cjs
+      - name: R964 boss attack sound also fires on story pattern attacks (no attack id, no bossVolley) CPU check
+        run: node r96/qa/r964/r964-cpu-check.cjs
+      - name: R965 midboss attack sound also fires on story pattern attacks (no attack id, no bossVolley) CPU check
+        run: node r96/qa/r965/r965-cpu-check.cjs
       - name: R385 mob moves (review list v18 move/rename) CPU check
         run: node r96/qa/r385/r385-cpu-check.cjs
       - name: R390 cinema full narration + midboss hold + enemies keep chasing CPU check
@@ -464,14 +482,24 @@ jobs:
         run: node r96/qa/r701/r701-cpu-check.cjs
       - name: R850 survival play-test fixes (arena terrain lock, hospital maze skip, next-stage prefetch, moving HUD) CPU check
         run: node r96/qa/r850/r850-cpu-check.cjs
+      - name: R960 survival boss hp floor (>= 66 x normal mob hp) CPU check
+        run: node r96/qa/r960/r960-cpu-check.cjs
       - name: R890 survival story tracks (story / combat focus toggle, R880 cutscene skips survival) CPU check
         run: node r96/qa/r890/r890-cpu-check.cjs
+      - name: R961 survival sound effects (shard pickup, level-up, core hit, run end sounds; heal chime only after 4% heal and 3s gap) CPU check
+        run: node r96/qa/r961/r961-cpu-check.cjs
       - name: R720 survival hero placement (I key, crystals, story-order prices, leash and range upgrades, swap rule) CPU check
         run: node r96/qa/r720/r720-cpu-check.cjs
+      - name: R953 gunner veil passives (cloak cuts ultimate cooldown and cast delay by 77%, lock-on barrage, machine-boss allies for 7s kept out of the enemy list) CPU check
+        run: node r96/qa/r953/r953-cpu-check.cjs
       - name: R945 hwando ink passives (piercing ink crescent, seven ink clones for 7 s, three-hero ink finale, per-body state) CPU check
         run: node r96/qa/r945/r945-cpu-check.cjs
       - name: R947 slayer blood passives (common piercing blood needle, blood cross-sword rain, rare lattice laser barrage, upright crosses, per-body state) CPU check
         run: node r96/qa/r947/r947-cpu-check.cjs
+      - name: R962 survival passives (core beam is not a hero hit, placed-hero shots credit their own body, R950 finale off on the survival stage) CPU check
+        run: node r96/qa/r962/r962-cpu-check.cjs
+      - name: R963 survival BGM note sits below the survival HUD line (no overlapped text) CPU check
+        run: node r96/qa/r963/r963-cpu-check.cjs
       - name: R463 seven-sins boss art (one form per fight, one body height, no cut-out broom) CPU check
         run: node r96/qa/r463/r463-cpu-check.cjs
       - name: R511 empty samong rooms get a guarded memory shard CPU check
@@ -534,6 +562,8 @@ jobs:
         run: node r96/qa/r590/hwando-chain-cpu-check.cjs
       - name: R601 enemy attack tempo (enemy attack body motion drawn 2x faster, strike frame kept on the damage moment, telegraphs on real time, no timing/damage change) CPU check
         run: node r96/qa/r601/attack-tempo-cpu-check.cjs
+      - name: R750 hit feel (6 heroes show the weapon strike frame on the hit moment, hero impact art on the enemy body hit point, small capped hit-direction screen kick; no timing/damage change) CPU check
+        run: node r96/qa/r750/r750-cpu-check.cjs
       - name: R895 hero motion rules (priority, 0.12/0.18s commit then move-cancel, same-cast merge, dash faces its real side, stop-attack beats walk tail, late flinch dropped; drawing only) CPU check
         run: node r96/qa/r895/r895-cpu-check.cjs
       - name: R492 lag (R409 outline bake by one distance transform instead of dozens of drawImage dilations; same rim rule, size, colours) CPU check
@@ -791,12 +821,20 @@ jobs:
         run: node r96/qa/r860/r860-cpu-check.cjs
       - name: R911 projectile minimum size (half hero height, visual only) CPU check
         run: node r96/qa/r911/r911-cpu-check.cjs
+      - name: R952 hunter chance passive 'hunt squad' (slayer summon / +slayer shades / +hunter clone formation, 7s, one tier per proc) CPU check
+        run: node r96/qa/r952/r952-cpu-check.cjs
+      - name: R949 Seoha passive overlapped time (summoned heroes, friendly Arbelia boss summon, afterimage time collapse; summons never join room.enemies) CPU check
+        run: node r96/qa/r949/r949-cpu-check.cjs
       - name: R951 neon storm passive CPU check
         run: node r96/qa/r951/r951-cpu-check.cjs
+      - name: R948 michaela heart passive CPU check
+        run: node r96/qa/r948/r948-cpu-check.cjs
       - name: R899 boss-map story window and memory-shard paper move to top-left, quest line shortened CPU check
         run: node r96/qa/r899/top-left-cpu-check.cjs
       - name: R930 Kaironomicon cyber-magitech floor/wall tiles and tech props (art only, layout unchanged) CPU check
         run: node r96/qa/r930/r930-cpu-check.cjs
+      - name: R950 final boss (cult04) revived leader keeps first-form HP, canon beats, nerve-link staging, post scene after collapse CPU check
+        run: node r96/qa/r950/finale-cpu-check.cjs
       - name: R946 Lauren passive celestial resonance (repulse burst, red push orb, blue pull orb, violet piercing fusion, prop meteors; per-hero instance)
         run: node r96/qa/r946/r946-cpu-check.cjs
       - name: R940 read-only state snapshot for QA (events, first-hit-after-entry, boss kill time; no game writes) CPU check
