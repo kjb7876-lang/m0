@@ -75,11 +75,12 @@ const SENT={type:'r953-gunner-veil',x:0,y:0,age:0,life:Infinity,r953Sentinel:tru
 function arm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)&&!effects.includes(SENT)){SENT.age=0;effects.push(SENT);}}catch(_){}}
 function disarm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)){const i=effects.indexOf(SENT);if(i>=0)effects.splice(i,1);}}catch(_){}}
 // ---- 발동 ----------------------------------------------------------------------------------------------------
+const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
 function pick(s){if(s.force){const k=s.force;s.force=null;return k;}
- const r=Math.random(),a=CFG.cloak.chance,b=CFG.barrage.chance,c=CFG.summon.chance,k=r<a?'cloak':r<a+b?'barrage':r<a+b+c?'summon':null;
+ const r=Math.random(),[a,b,c]=G971(HERO,[CFG.cloak.chance,CFG.barrage.chance,CFG.summon.chance]),k=r<a?'cloak':r<a+b?'barrage':r<a+b+c?'summon':null;
  return k&&T()>=s.ready[k]?k:null;}
 function onSwing(p){const s=st(p);s.stats.rolls++;if(!solo()){s.stats.coopSkipped++;s.force=null;return;}
- const k=pick(s);if(!k)return;s.ready[k]=T()+CFG[k].icd;ownRoom=RM();
+ const k=pick(s);if(!k)return;s.ready[k]=T()+D971(HERO,CFG[k].icd);ownRoom=RM();
  if(k==='cloak')castCloak(s,p);else if(k==='barrage')castBarrage(s,p);else castSummon(s,p);}
 // ① 잔영 위장
 function castCloak(s,p){s.stats.cloaks++;s.cloakT0=T();s.cloakUntil=T()+CFG.cloak.duration;

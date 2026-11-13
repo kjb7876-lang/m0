@@ -18,6 +18,7 @@
 if(typeof window==='undefined'||window.__STORYWORLD_SEOHA_EPOCH_R949__)return;
 const REV='R949-epoch-1',KEY='storyworld.r949.epoch',HERO='seoha';
 const CHANCE=.05,CHANCE_MAX=.2,ROLL_GAP=.35,DUR=7,ICD=14,MAX_ACTS=2;
+const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
 const WEIGHTS=[['collapse',.5],['heroes',.3],['arbelia',.2]];
 // ③ 시간 붕괴
 const COL_PULSES=14,COL_PULSE0=.15,COL_GAP=.48,COL_WIND=.35,COL_R=7.5,COL_SPOTS=3,COL_BOOM_R=1.3,COL_K=.45,COL_STUN=.25,COL_BOOM_T=.45,GH_GAP=.14,GH_LIFE=.45,GH_MAX=6,SPOT_GAP=.4,SPOT_LIFE=2.4,SPOT_MAX=7;
@@ -128,7 +129,7 @@ function fire(kind,o,tg){const t=T(),d=dirTo(o,tg),base={owner:o,t0:t,until:t+DU
 function pick(){if(forced){const f=forced;forced=null;return f;}let r=rnd()*WEIGHTS.reduce((n,w)=>n+w[1],0);for(const [k,w] of WEIGHTS){if(r<w)return k;r-=w;}return 'collapse';}
 function roll(e){const o=P();if(!o||o.hero!==HERO||o.hp<=0||blockedNow()||!solo())return;const s=stateOf(o),t=T();if(t<s.readyAt||t-s.lastRoll<ROLL_GAP)return;s.lastRoll=t;stats.rolls++;preload();
  if(acts.length>=MAX_ACTS||acts.some(x=>x.owner===o))return;
- if(!forced&&!(rnd()<Math.min(CHANCE_MAX,surge('chance',CHANCE))))return;const kind=pick();s.readyAt=t+ICD;lastRoom=curRoom();fire(kind,o,e&&fin(e.x)?{x:e.x,y:e.y}:null);}
+ if(!forced&&!(rnd()<Math.min(CHANCE_MAX,surge('chance',G971(HERO,[CHANCE])[0]))))return;const kind=pick();s.readyAt=t+D971(HERO,ICD);lastRoom=curRoom();fire(kind,o,e&&fin(e.x)?{x:e.x,y:e.y}:null);}
 // 서하 본인 타격만(다른 영웅·협동 동료·적·이 패시브 자신의 피해·소환 영웅이 쏜 탄 제외).
 function mine(src){const o=P();if(!o||o.hero!==HERO||o.r949Summon)return false;if(src&&typeof src==='object'){if(src.r949||src.r949Summon||src.sourceHero&&src.sourceHero!==HERO)return false;if(src.coopIdR62||src.ally||src.owner==='ally'||src.owner==='enemy'||src.hostile)return false;}return true;}
 

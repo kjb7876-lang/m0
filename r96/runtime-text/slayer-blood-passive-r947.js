@@ -68,14 +68,15 @@ function arm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)&&!eff
 function disarm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)){const i=effects.indexOf(SENT);if(i>=0)effects.splice(i,1);}}catch(_){}}
 function clearAll(){for(const s of states())wipe(s);vis.length=0;disarm();}
 // ---- 발동 ----------------------------------------------------------------------------------------------------
+const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
 function pick(s){if(s.force){const k=s.force;s.force=null;return k;}
- const r=Math.random(),a=CFG.needle.chance,b=CFG.swords.chance,c=CFG.lattice.chance,k=r<a?'needle':r<a+b?'swords':r<a+b+c?'lattice':null;
+ const r=Math.random(),[a,b,c]=G971(HERO,[CFG.needle.chance,CFG.swords.chance,CFG.lattice.chance]),k=r<a?'needle':r<a+b?'swords':r<a+b+c?'lattice':null;
  return k&&T()>=s.ready[k]?k:null;}
 const nearOf=(p,r)=>{let b=null,bd=r;for(const e of foes()){if(!(e.hp>0)||!fin(e.x)||!fin(e.y))continue;const d=Math.hypot(e.x-p.x,e.y-p.y);if(d<=bd){bd=d;b=e;}}return b;};
 function onSwing(p,foe){const s=st(p);s.stats.swings++;if(!solo()){s.stats.coopSkipped++;return;}
  const k=pick(s);if(!k)return;
  /* 대상이 없어 안 나가면 대기 시간도 쓰지 않음(R947-3) */
- const fired=k==='needle'?castNeedle(s,p,foe):k==='swords'?castSwords(s,p):castLattice(s,p);if(fired)s.ready[k]=T()+CFG[k].icd;}
+ const fired=k==='needle'?castNeedle(s,p,foe):k==='swords'?castSwords(s,p):castLattice(s,p);if(fired)s.ready[k]=T()+D971(HERO,CFG[k].icd);}
 // ② 혈침
 // 적혈 연쇄: 벤 적에서 시작해 0.07초마다 3.8칸 안 가장 가까운 다음 적으로 피 줄기가 튄다(최대 6명, 튈 때마다 ×0.85). 벽 너머로는 안 튐.
 function castNeedle(s,p,foe){const M=CFG.needle,e=foe&&foe.hp>0?foe:nearOf(p,M.first);if(!e)return false;s.stats.needles++;
