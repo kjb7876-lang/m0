@@ -38,7 +38,9 @@
  function apply(){if(!on||typeof soundProfiles==='undefined'||!soundProfiles)return;
   for(const s of ALL)for(const [K,f,n] of SETS)soundProfiles['r955'+K+'_'+s]=Array.from({length:FEW[K+'_'+s]||n},(_,i)=>({key:'r955-'+f+'-'+s+'-'+(i+1),path:DIR+f+'-'+s+'-'+(i+1)+'.ogg',gain:GAIN[f],r541:true}));}
  function play(kind,allow){try{if(typeof sound==='function'&&soundProfiles?.[kind]?.length){allow?sound(kind,true):sound(kind);return true;}}catch(_){stats.errors++;}return false;}
- function attack(e){try{const s=slugFor(e);if(!s||!(e.hp>0)||quiet()||typeof room!=='undefined'&&room&&room.engaged===false)return;
+ // R966: 길을 따라 싸우는 구간(R78 phase route)은 room.engaged 가 내내 false 다(집결·보스 구간만 true) → 그 방을 R78 이 맡고 있고 몹이 실제로 나와 있으면(active) 전투 중으로 본다.
+ const idle=e=>{if(typeof room==='undefined'||!room||room.engaged!==false)return false;try{const p=window.__STORYWORLD_WORLD_COMBAT_R78__?.state?.()?.phase;return !(e.spawnState==='active'&&(p==='route'||p==='rally'||p==='door'||p==='boss'));}catch(_){return true;}};
+ function attack(e){try{const s=slugFor(e);if(!s||!(e.hp>0)||quiet()||idle(e))return;
   if(!gate('atk',s)){stats.atkSkipped++;return;}if(play('r955Atk_'+s))stats.atk++;}catch(_){stats.errors++;}}
  function warm(list){try{if(typeof audioBuffer!=='function'||typeof audioUnlocked!=='undefined'&&!audioUnlocked)return;const ss=[...new Set(list.map(slugFor).filter(Boolean))].sort(),key=ss.join();if(!key||key===warmKey)return;warmKey=key;
   for(const s of ss)for(const [K] of SETS)for(const r of soundProfiles?.['r955'+K+'_'+s]||[])try{Promise.resolve(audioBuffer(r.path)).catch(()=>{});}catch(_){}stats.warmed++;}catch(_){stats.errors++;}}
