@@ -17,7 +17,7 @@
 //  점검: window.__STORYWORLD_BMG_FOG_R990__.inspect()
 (()=>{'use strict';
 if(window.__STORYWORLD_BMG_FOG_R990__)return;
-const REV='R990-bmg-fog-1',KEY='storyworld.r990.bmgfog',ZONE='last303',BOSS='l303-boss';
+const REV='R990-bmg-fog-2',KEY='storyworld.r990.bmgfog',ZONE='last303',BOSS='l303-boss';
 let prefs={on:true,summon:true,patterns:true,art:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object')for(const k of Object.keys(prefs))if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={waves:0,units:0,refused:0,cancelled:0,r61Held:0,fogFx:0,fogSkipped:0,patternsSet:0,casts:{},artSwaps:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
@@ -95,8 +95,12 @@ const mine=e=>!!e?.r990Fog&&live(e);
 function cap(){return mobile()||lowFx()?SUMMON.capLow:SUMMON.cap;}
 function period(B){const hp=clamp(fin(B.hp)/Math.max(1,fin(B.maxHp,1)),0,1),t=clamp((1-hp)/(1-SUMMON.loAt),0,1);return SUMMON.periodHi+(SUMMON.periodLo-SUMMON.periodHi)*t;}
 function busy(B){try{return !!(B.attack||B.rangedWindup>0||(B.storyPreparedCast150&&!B.storyPreparedCast150.consumed)||T()<fin(B.storyAttackUntil5)||T()<fin(B.r61BusyUntil)||fields()?.activeAction?.(B));}catch(_){return true;}}
-function profileFor(s){if(s.profile)return s.profile;try{const e=room.enemies.find(o=>o?.nativeId==='l302-e1'&&o.profile&&!o.boss&&!o.midboss);if(e)s.profile=e.profile;}catch(_){}
- if(!s.profile)try{const def=regionById?.[ZONE];const p=(def?.roster||[]).find(r=>r?.id==='l302-e1');if(p)s.profile=p;}catch(_){}return s.profile;}
+// R996: 지역 진입 때(순찰이 살아 있을 때) 본 l302-e1 프로필을 기억한다 — 일반몹을 다 잡은 뒤 보스 단계엔 방에 보스만 남고 last303 roster 도 비어 있다.
+let seenProfile=null,seenAt=-1;const nativeMob=o=>o?.nativeId==='l302-e1'&&o.profile&&typeof o.profile==='object'&&!o.boss&&!o.midboss&&!o.r61Summoned&&!o.r990Fog;
+function noteProfile(){const t=T();if(seenProfile&&t>=seenAt&&t-seenAt<1)return;try{const e=room.enemies.find(nativeMob);if(e){seenProfile=e.profile;seenAt=t;}}catch(_){}}
+function rosterProfile(){try{const order=[ZONE,'last302',...Object.keys(regionById||{})];for(const k of order){const p=(regionById?.[k]?.roster||[]).find(r=>r?.id==='l302-e1');if(p)return p;}}catch(_){}return null;}
+function profileFor(s){if(s.profile)return s.profile;try{const e=room.enemies.find(nativeMob);if(e)s.profile=e.profile;}catch(_){}
+ if(!s.profile)s.profile=seenProfile||rosterProfile();return s.profile;}
 function makeUnit(B,s,i){const prof=profileFor(s);if(!prof||typeof actor3!=='function')return null;const def=typeof regionById!=='undefined'?regionById[ZONE]:null;if(!def)return null;
  const id=ZONE+':r990-fog:'+(++s.serial),e=actor3(prof,id,B.x,B.y,false,room.layer,def,false);if(!e)return null;
  Object.assign(e,{boss:false,midboss:false,persona:false,cosmic:false,trial:false,r61Summoned:{version:1,owner:B.id,kind:'minion'},r990Fog:true,spawnState:'active',deadRecorded:false,graceUntil:T()+.8,cd:1.2,rest:0,
@@ -140,7 +144,7 @@ function fixEcho(){if(!prefs.on||!prefs.art||roomId()!==ZONE)return;
 // ── 설치 ──
 let installed={tick:false,effect:false};
 function install(){
- if(!installed.tick&&typeof tickEnemies==='function'){const base=tickEnemies;tickEnemies=function(dt){try{if(prefs.on){applyPatterns();watchHazards();sfxProfile();fixEcho();
+ if(!installed.tick&&typeof tickEnemies==='function'){const base=tickEnemies;tickEnemies=function(dt){try{if(prefs.on){applyPatterns();watchHazards();sfxProfile();fixEcho();if(roomId()===ZONE)noteProfile();
    if(prefs.summon&&roomId()===ZONE&&room?.engaged&&!room.cleared&&!room.finalizing&&player?.hp>0&&!modal&&!loading){const B=room.enemies.find(e=>isBoss(e)&&live(e));if(B)tickBoss(B);}}}catch(err){fail(err);}
    const r=base.apply(this,arguments);try{fixEcho();watchHazards();}catch(err){fail(err);}return r;};installed.tick=true;}
  if(!installed.effect&&typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(f,...a){
