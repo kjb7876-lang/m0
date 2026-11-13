@@ -446,6 +446,8 @@ jobs:
         run: node r96/qa/r955/r955-cpu-check.cjs
       - name: R967 boss/midboss sound gaps (hospital surgeon, syringe phantom new ElevenLabs sounds, wrath boss uses the R788 satan set) CPU check
         run: node r96/qa/r967/r967-cpu-check.cjs
+      - name: R975 hwando E ilseom boss-first 7-hit left/right multi-hit (sum stays x0.6, per-hit sound, E dash unchanged) CPU check
+        run: node r96/qa/r975/r975-cpu-check.cjs
       - name: R964 boss attack sound also fires on story pattern attacks (no attack id, no bossVolley) CPU check
         run: node r96/qa/r964/r964-cpu-check.cjs
       - name: R965 midboss attack sound also fires on story pattern attacks (no attack id, no bossVolley) CPU check

@@ -13,6 +13,7 @@
 //  렉: 검풍 동시 6개, 그림 조각 한 프레임 24개 상한, 저사양(lowFx·모바일)이면 곁불(섬광·잔광)을 뺀다. 할 일이 없으면 그리기 표지를 effects 에서 뺀다.
 //  R590b(같은 날, 7분야 심사 7.49 → 보강): 드라이브 core24 시트를 실버+황금으로 색만 바꾼 두 장(hero-fx-recolor, 원본 moving_tornado_v001·R438 enemy-shockwave)을
 //   검풍 = 땅 위를 나아가는 은빛 회오리(코드 초승달은 앞날로 작게 남김), 발도·종섬 끝 = 발밑 황금 착지 고리로 쓴다. 시트가 아직 안 왔으면 코드 그림으로 대신한다.
+//  R975(2026-11-13): E 늦은 일섬 피해는 hwando-ilseom-r975.js 가 있으면 넘겨받아 보스 우선·좌우 7연 다단히트로 나눈다(총합 ×0.6 그대로).
 //  끄기: localStorage['storyworld.r590.hwandoChain']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_HWANDO_CHAIN_R590__)return;
@@ -118,7 +119,10 @@ function stepBlades(dt){for(let i=blades.length-1;i>=0;i--){const b=blades[i];if
 function onFlight(x,y,o){if(seenE.has(o.castId))return;seenE.add(o.castId);if(seenE.size>64)seenE.delete(seenE.values().next().value);
  if(!fin(x)||!fin(y)||!fin(o.tx)||!fin(o.ty))return;const a={x,y},b={x:o.tx,y:o.ty};if(Math.hypot(b.x-a.x,b.y-a.y)<.05)return;
  lastSwing=T();const j=snapshot(),pw=power(),id='e:'+o.castId;addVis({k:'trail',a,b,life:CFG.flashDelay});if(ready('flash'))stats.sheetE=(stats.sheetE||0)+1;
- later(CFG.flashDelay,j,()=>{stats.flashes++;addVis({k:'flash',a,b,life:ready('flash')?17/16:.34});segHits(a,b,rng(CFG.flashRadius),CFG.flashMult,pw,'flash','e',id);});}
+ later(CFG.flashDelay,j,()=>{stats.flashes++;addVis({k:'flash',a,b,life:ready('flash')?17/16:.34});
+  // R975: 보스 우선·좌우 7연 다단히트가 켜져 있으면 이 한 방 피해(×0.6)를 넘겨받아 7타로 나눈다(돌진 자체는 그대로). 없거나 꺼져 있으면 원래대로.
+  let took=false;try{const M=window.__STORYWORLD_HWANDO_ILSEOM_R975__;took=!!(M&&typeof M.take==='function'&&M.take({a,b,pw,id,mult:CFG.flashMult,radius:rng(CFG.flashRadius)}));}catch(e){fail(e);}
+  if(!took)segHits(a,b,rng(CFG.flashRadius),CFG.flashMult,pw,'flash','e',id);});}
 // ---- R 칠연 환수검 → 종섬 ------------------------------------------------------------------------------------
 function onWave(x,y,o){let w=waves.get(o.castId);if(!w){w={n:0,done:false,a:fin(o.visualWorldAngle35)?o.visualWorldAngle35:aim()};waves.set(o.castId,w);if(waves.size>16)waves.delete(waves.keys().next().value);}
  if(w.done)return;w.n++;stats.waves++;lastSwing=T();
