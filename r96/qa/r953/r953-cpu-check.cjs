@@ -193,4 +193,11 @@ ok(E.arms&&E.arms.on(),'진짜 R561 총기 모듈이 같이 올라옴');
  X.api.force('cloak',body);X.g.player=body;X.g.basicAttack();X.g.player=main;
  ok(X.api.cloaked(body)===true&&X.api.cloaked()===false&&X.api.ult().cd===1,'생존 배치 영웅 몸의 은신은 조종 영웅과 따로');}
 {const X=engine({enemies:[foe('a',13,10)],withArms:false});X.api.force('cloak');X.swing();X.run(11);ok(X.api.cloaked()===true&&X.api.inspect().errors===0,'R561 이 없어도(꺼져 있어도) 오류 없이 은신');}
+// ---- R953-2: Dots CX-0095GV 시트(조준 표식 GV-04 · 벗 고리 GV-08 · 전우 호출 빛기둥 GV-06) ---- (은신 풀림 GV-03 은 화면에서 읽히지 않아 보류)
+{const names=['gv-lock.webp','gv-friend.webp','gv-call.webp'],man=JSON.parse(fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8')).files.map(f=>f.path);
+ for(const nm of names)ok(fs.existsSync(path.join(R,'runtime-text/assets/r953',nm))&&man.includes('assets/r953/'+nm),'Dots 시트 파일이 런타임 목록에 있음: '+nm);
+ const drew=(X,nm)=>X.sheets.some(s=>String(s.src||'').endsWith('assets/r953/'+nm));
+ {const X=engine({enemies:[foe('a',13,10),foe('b',12,11)]});X.api.force('barrage');X.swing();X.run(X.g.time+.3);ok(drew(X,'gv-lock.webp'),'난사 조준 표식을 Dots 시트로 그림');}
+ {const X=engine({enemies:[foe('a',13,10)]});X.api.force('summon');X.swing();X.run(X.g.time+.3);ok(drew(X,'gv-call.webp'),'전우 호출 빛기둥을 Dots 시트로 그림');X.run(X.g.time+1);ok(drew(X,'gv-friend.webp'),'아군 보스 발밑 벗 고리를 Dots 시트로 그림');}
+ ok(/R953-gunner-veil-2/.test(String(engine({enemies:[]}).api.revision)),'개정 표식 R953-gunner-veil-2');}
 console.log('R953 CPU 검사 통과: '+n+'항목');
