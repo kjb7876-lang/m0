@@ -77,7 +77,9 @@ const BOSS_DPS_CAP=.06,BOSS_DPS_WIN=1;
 function guardBossHp(e,nowFn){let v=+e.hp;const cap=BOSS_DPS_CAP*(e.maxHp>0?e.maxHp:v),hits=[];
  Object.defineProperty(e,'hp',{configurable:true,enumerable:true,get(){return v;},set(n){n=+n;if(!Number.isFinite(n))return;if(n>=v){v=n;return;}
   const now=nowFn();while(hits.length&&hits[0].t<=now-BOSS_DPS_WIN)hits.shift();let used=0;for(const h of hits)used+=h.d;
-  const d=Math.min(v-n,Math.max(0,cap-used));if(d>1e-9){hits.push({t:now,d});v-=d;}}});}
+  const want=v-n;/* R1014: 아주 작은 감소(<=1e-6)는 예산과 상관없이 그대로 — 엔진 중간보스 단계 문턱이 '문턱까지만' 깎으라고 넘긴 7e-12 같은 값을 버리면 체력이 문턱 위에 영영 걸렸다 */
+  if(want<=1e-6){v=n;return;}
+  const d=Math.min(want,Math.max(0,cap-used));if(d>1e-9){hits.push({t:now,d});v=want-d<1e-6?n:v-d;/* R1014: 예산이 요청보다 소수 오차만큼만 모자라면 요청값 그대로(6% 다섯 번 = 70% 문턱에 소수 찌꺼기가 남던 것) */}}});}
 function bossStats(idx,loop,diff,atk,major,dmg,mobAtk){const a=Math.max(8,+atk||0),base=Math.round(a*(major?BOSS_HP.boss:BOSS_HP.mid)*hpMul(idx,loop,diff)),floor=BOSS_MIN_MULT*mobHp(idx,loop,diff,Math.max(a,+mobAtk||0),false);return {hp:Math.max(1,base,floor),dmg:(+dmg>0?+dmg:8)*stageDmg(idx,loop,diff)};}
 function mobDamage(dmg,elite,idx,loop,diff){return (+dmg>0?+dmg:8)*(elite?1:.7)*stageDmg(idx,loop,diff);}
 // R701 난이도: 몹 체력(hp)·동시 몹 수(cap)·몹이 주는 피해(dmg)·경험치(xp) 배율. 보통=1. 어려울수록 경험치는 조금 덜 준다.
