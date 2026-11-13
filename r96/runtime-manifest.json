@@ -49189,8 +49189,8 @@
     },
     {
       "path": "bulmyeongwi-fog-r990.js",
-      "bytes": 21177,
-      "sha256": "78c3921fa132a92295d483a782c7de213166b0beca99e47ee09a373d98c25b66"
+      "bytes": 21839,
+      "sha256": "2274339dae2473c31fb68205cc888fe849553d2c901a6ba8eaad585f66e4d5aa"
     },
     {
       "path": "bulmyeongwi-r760.js",
@@ -50579,8 +50579,8 @@
     },
     {
       "path": "mobile-memory-r980.js",
-      "bytes": 7995,
-      "sha256": "796b1fe87bbc5051a64cfae5b1196f2ba85ac786806c8b7ce066af557f0538ba"
+      "bytes": 9566,
+      "sha256": "008f85dad05feed13d065a61ae9acc54df36ca4e842d09f8d682487b60d893b5"
     },
     {
       "path": "mobile-perf-r298.js",
@@ -51439,7 +51439,7 @@
     }
   ],
   "fileCount": 10287,
-  "totalBytes": 1270127300,
+  "totalBytes": 1270129533,
   "webHTMLSha256": "8eb16bc207c40e6ae35debde3bfa724518ee038f831017b360b94cc16a97e3c6",
   "largest": [
     {
