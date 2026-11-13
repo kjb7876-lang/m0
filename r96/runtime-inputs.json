@@ -9385,6 +9385,22 @@
     "assets/r955/sfx/hit-zombieknight-2.ogg",
     "assets/r955/sfx/hit-zombieknight-3.ogg",
     "assets/r955/sfx/index.json",
+    "combat-sfx-r967.js",
+    "assets/r967/sfx/atk-surgeon-1.ogg",
+    "assets/r967/sfx/atk-surgeon-2.ogg",
+    "assets/r967/sfx/atk-syringe-1.ogg",
+    "assets/r967/sfx/atk-syringe-2.ogg",
+    "assets/r967/sfx/die-surgeon-1.ogg",
+    "assets/r967/sfx/die-surgeon-2.ogg",
+    "assets/r967/sfx/die-syringe-1.ogg",
+    "assets/r967/sfx/die-syringe-2.ogg",
+    "assets/r967/sfx/hit-surgeon-1.ogg",
+    "assets/r967/sfx/hit-surgeon-2.ogg",
+    "assets/r967/sfx/hit-surgeon-3.ogg",
+    "assets/r967/sfx/hit-syringe-1.ogg",
+    "assets/r967/sfx/hit-syringe-2.ogg",
+    "assets/r967/sfx/hit-syringe-3.ogg",
+    "assets/r967/sfx/index.json",
     "assets/r951/neon-skybeam.webp",
     "assets/r951/neon-big-strike.webp",
     "assets/r951/neon-lance.webp",
@@ -10464,5 +10480,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "639666a5ff994e4455501518e099aa86945530730a7edf6c8ec02635d113cab7"
+  "runtimeManifestSHA256": "ded8653760d97bfb1873e7f38bf0807ff88aece83058a7cb347d2ce842c91166"
 }
