@@ -65,7 +65,8 @@ function mapPal(F,h,file){const S0=SP0;let P;try{P=S0.pal(F);}catch(_){return F;
  let A,B;if(THREAD_FILES.has(file)){const second=isGold(P.a)||isGold(P.b)?THREAD.gold:THREAD.silver;A=C.main;B=second;}else{A=C.main;B=C.sub;}
  // 원래 어두운 쪽 → 두 색 중 어두운 쪽
  const dark=lum(A)<=lum(B)?A:B,light=dark===A?B:A;return lum(P.a)<=lum(P.b)?S0.pal(dark,light):S0.pal(light,dark);}
-function remapF(F){const h=hero();if(!on||!h||!F)return F;stats.sp++;
+function remapF(F,name){const h=hero();if(!on||!h||!F)return F;stats.sp++;
+ {const q=memoHit(F,h,name);if(q!==MISS){if(!shadow)return q;shadowQ=q;}}
  // R361 렉: 호출 파일은 거의 늘 스택 위 4칸 안에 있다 → 먼저 4칸만 잡는다(스택 잡기·글자 만들기 비용 절반 이하).
  //  4칸 스택은 전체 스택의 앞부분이라 거기서 찾은 파일·threadSlash 줄은 전체에서 찾은 것과 같다.
  //  못 찾았거나, R111 인데 4칸 안에 threadSlash 가 없으면(더 깊이 있을 수 있음) 예전처럼 전체를 다시 잡는다.
@@ -78,15 +79,38 @@ function remapF(F){const h=hero();if(!on||!h||!F)return F;stats.sp++;
   else if(L>SHORT){const head=String(stack).split('\n').slice(0,SHORT+1).join('\n');if(shortOk(callerFile(head),head))needFull.delete(k0);}}
  // R111 also renders bosses: only its silver-thread slash is a thread caller.
  const thread=THREAD_FILES.has(file)||(file==='play-r111'&&T111.test(String(stack)));
- const kind=thread?'thread':HERO_FILES.has(file)?'hero':'other';
+ const kind=thread?'thread':HERO_FILES.has(file)?'hero':'other';seenFile=file;seenKind=kind;
  const k=k0+'|'+h+'|'+kind;
  let d=decided.get(k);if(d===undefined){d=kind==='other'?null:mapPal(F,h,thread?'hero-threads-r174':file);decided.set(k,d);stats.files[file||'?']=(stats.files[file||'?']||0)+1;if(decided.size>400)decided.delete(decided.keys().next().value);}
- if(d){stats.spMapped++;return d;}return F;}
+ if(d){stats.spMapped++;return memoNote(F,d);}return memoNote(F,F);}
+// R1012 렉(사용자 2026-11-13 "사몽모드에서 환도로 광장처치666 에서 777코드로 플레이 하는데 렉이 심함"):
+//  광장에서 환도 777 은 한 장면에 remapF 를 300~650번 부르고 그때마다 호출 파일을 찾으려 스택을 잡는다. 이 게임은 그리기가 감싸기 수백 겹 안에서
+//  돌아 Error 하나 만드는 데 약 50마이크로초(스택 깊이에 비례, 칸 수 한도와 무관)라 장면당 19~51ms(그리기의 18~36%, 헤드리스)를 썼다.
+//  → '그리는 자리' 열쇠(지금 그리는 엔진 효과 종류 | 그림 이름 | 팔레트 값 | 영웅)가 같은 파일에서 MEMO_OK 번 잇달아 같은 판정을 받으면
+//  그 뒤로는 스택 없이 그 결과를 돌려주고(memoHit), MEMO_EVERY 번째마다 예전 길(스택)로 다시 확인한다(memoNote).
+//  한 번이라도 파일·판정이 어긋난 열쇠는 영영 예전 길이다. play-r111(같은 파일 안에서 threadSlash 만 실 규칙)과 파일을 못 찾은 호출도 영영 예전 길.
+//  판정 표(decided)·통계(sp·spMapped)·색 규칙은 그대로. 끄기: __STORYWORLD_HERO_PALETTE_R302__.memo(false)
+const MISS={},memo=new Map(),MEMO_OK=32,MEMO_EVERY=16,MEMO_MAX=3000;let seenFile=null,seenKind=null,memoOn=true,shadow=false,shadowQ=MISS,memoKey=null,fxType='';
+const samePal=(x,y)=>x===y||(!!x&&!!y&&!!x.a&&!!y.a&&!!x.b&&!!y.b&&x.a.join()===y.a.join()&&x.b.join()===y.b.join());
+function memoHit(F,h,name){memoKey=null;seenFile=null;seenKind=null;shadowQ=MISS;if(!memoOn)return MISS;
+ try{const P=SP0.pal(F);memoKey=fxType+'|'+(name||'')+'|'+P.a.join()+'|'+P.b.join()+'|'+h;}catch(_){return MISS;}
+ const m=memo.get(memoKey);if(!m||m.slow||m.ok<MEMO_OK||!(++m.n%MEMO_EVERY))return MISS;
+ stats.spFast=(stats.spFast||0)+1;if(m.same)return F;if(!shadow)stats.spMapped++;return m.res;}
+function memoNote(F,res){const key=memoKey,file=seenFile,kind=seenKind;if(!memoOn||key===null)return res;
+ // 그림자 검사(shadow, 실플레이 검증용): 빠른 길이 내놓은 팔레트를 쓰지 않고 예전 길 결과와 값으로 대조해 어긋난 수를 센다(게임은 예전 길 결과로 그림)
+ if(shadowQ!==MISS){const q=shadowQ;shadowQ=MISS;let bad=false;try{bad=!samePal(SP0.pal(q),SP0.pal(res));}catch(_){bad=true;}
+  if(bad){stats.fastWrong=(stats.fastWrong||0)+1;const W=stats.wrong||(stats.wrong={}),k=key+' memo='+memo.get(key)?.file+' now='+file;if(W[k]||Object.keys(W).length<40)W[k]=(W[k]||0)+1;}
+  else if(memo.get(key)?.file!==file)stats.fastOtherFile=(stats.fastOtherFile||0)+1;return res;}
+ const same=res===F;let m=memo.get(key);if(!m){if(memo.size>=MEMO_MAX)memo.clear();m={file,kind,res,same,ok:0,n:0,slow:false};memo.set(key,m);}
+ if(!file||file==='play-r111')m.slow=true;
+ else if(m.file!==file||m.kind!==kind||m.same!==same||(!same&&!samePal(m.res,res))){if(!m.slow)stats.memoMixed=(stats.memoMixed||0)+1;m.slow=true;}
+ else{m.ok++;m.res=res;}
+ return res;}
 let SP0=null;
 function wrapSP(){const S=window.__STORYWORLD_FX_SPRITES_R106__;if(!S||S.r302||S===SP0)return;SP0=S;
  const W={...S,r302:true,
-  draw:(name,F,...a)=>S.draw(name,remapF(F),...a),along:(name,F,...a)=>S.along(name,remapF(F),...a),poly:(F,...a)=>S.poly(remapF(F),...a),
-  warm:(F,...a)=>S.warm(remapF(F),...a),ready:(n,F)=>S.ready(n,remapF(F))};
+  draw:(name,F,...a)=>S.draw(name,remapF(F,name),...a),along:(name,F,...a)=>S.along(name,remapF(F,name),...a),poly:(F,...a)=>S.poly(remapF(F,'~poly'),...a),
+  warm:(F,...a)=>S.warm(remapF(F,'~warm'),...a),ready:(n,F)=>S.ready(n,remapF(F,n))};
  window.__STORYWORLD_FX_SPRITES_R106__=Object.freeze(W);}
 // ---- ③ pixelfx tint ---------------------------------------------------------------------
 let PX0=null;
@@ -145,12 +169,12 @@ try{
  if(typeof fx==='function'){const base=fx;fx=function(type,x,y,opt){const n0=typeof effects!=='undefined'&&Array.isArray(effects)?effects.length:0,res=base.apply(this,arguments);
   try{const h=hero();if(on&&h&&FX_TYPES.has(type)){const mine=isHero(opt||{},h,lazyStack);
     if(mine)for(let i=effects.length-1;i>=n0;i--){const e=effects[i];if(e&&e.type===type&&!e.r302&&ownership(e,h)!==false){seenFx.add(e);markHero(e,h);break;}}}}catch(err){fail(err);}return res;};}
- if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){try{patchCtx(ctx);wrapSP();wrapPX();}catch(_){}if(e&&e.r302&&on){heroDraw++;try{return base.apply(this,[e,...a]);}finally{heroDraw--;}}return base.apply(this,[e,...a]);};}
+ if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){try{patchCtx(ctx);wrapSP();wrapPX();}catch(_){}const t0=fxType;fxType=e&&typeof e.type==='string'?e.type:'?';try{if(e&&e.r302&&on){heroDraw++;try{return base.apply(this,[e,...a]);}finally{heroDraw--;}}return base.apply(this,[e,...a]);}finally{fxType=t0;}};}
  if(typeof tick==='function'){const base=tick;tick=function(...a){try{wrapSP();wrapPX();if(typeof ctx!=='undefined')patchCtx(ctx);}catch(e){fail(e);}const r=base.apply(this,a);try{markNew();}catch(e){fail(e);}return r;};}
 }catch(e){fail(e);}
 try{wrapSP();wrapPX();}catch(e){fail(e);}
-function set(v){on=v!==false;decided.clear();try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}
-window.__STORYWORLD_HERO_PALETTE_R302__=Object.freeze({revision:REV,palette:PALETTE,thread:THREAD,strips:STRIPS,heroFiles:[...HERO_FILES],threadFiles:[...THREAD_FILES],swapPath,on:()=>on,set,
+function set(v){on=v!==false;decided.clear();memo.clear();try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}
+window.__STORYWORLD_HERO_PALETTE_R302__=Object.freeze({revision:REV,palette:PALETTE,thread:THREAD,strips:STRIPS,heroFiles:[...HERO_FILES],threadFiles:[...THREAD_FILES],swapPath,on:()=>on,set,memo:v=>{if(v!==undefined){memoOn=v!==false;memo.clear();}return memoOn;},shadow:v=>{if(v!==undefined)shadow=!!v;return shadow;},
  mapPal:(F,h,file)=>SP0?mapPal(F,h,file):null,targetHue,rampOf,
  inspect:()=>({revision:REV,on,hero:hero(),stats:JSON.parse(JSON.stringify(stats)),decided:[...decided].map(([k,v])=>[k,v?v.a.join()+'|'+v.b.join():null]),lastError})});
 })();
