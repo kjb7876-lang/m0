@@ -44688,6 +44688,26 @@
       "sha256": "a03aaa9d21b300cc10b102254501329041c6c3c7cacaf9dbc56f0c0f07ca233d"
     },
     {
+      "path": "assets/r993/sfx/bmg-rain-1.ogg",
+      "bytes": 7979,
+      "sha256": "a108998ef207d116b3324dcd974cc21151abd61316ddd93fe1cde71b1dae4133"
+    },
+    {
+      "path": "assets/r993/sfx/boss-dark-attack.ogg",
+      "bytes": 11004,
+      "sha256": "9457284fb835d5772276085ff4ecb24fc852e3426c18722c11fe54b9ebca99ba"
+    },
+    {
+      "path": "assets/r993/sfx/index.json",
+      "bytes": 2611,
+      "sha256": "b7ac07eab063b4ed0a4ffef08318f118068cd6920b27e0e3bf8dd38c1a4f8235"
+    },
+    {
+      "path": "assets/r993/sfx/seoha-awake.ogg",
+      "bytes": 10046,
+      "sha256": "032c2405bae852dd1de68f2b637c07180b6a404e9971eb34da4fcc8e1c3d3401"
+    },
+    {
       "path": "assets/rc133/art/arena.webp",
       "bytes": 2409050,
       "sha256": "02798e550e6b070c3f43258f83be23f95273ca3ec1c05a7717091c471b2d9978"
@@ -50924,8 +50944,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6577055,
-      "sha256": "9db633131c33f8db2bc5c25bd366e94c2cfada15bc6140222924c23ce2c1ba59"
+      "bytes": 6577097,
+      "sha256": "45c464b2f365ae70c07f6f5ff3648a2fde7f7b9b0181482efedf0b6d5c803445"
     },
     {
       "path": "intro-r140.js",
@@ -51683,6 +51703,11 @@
       "sha256": "f6f539296fd11946a0688a5d82be7bf68b32f5c8d560aff5369e92f7dd439fc5"
     },
     {
+      "path": "sfx-mix-r993.js",
+      "bytes": 14870,
+      "sha256": "b5b40b34d00700ac7f0d99cfd308b8fc749807892834e9f631796b3976f69fd1"
+    },
+    {
       "path": "sfx-r541.js",
       "bytes": 19927,
       "sha256": "20df6f80ad033dbd7e4f0fb44967748b35c1a0b11c7c420e0912d25bf216a655"
@@ -52083,9 +52108,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10416,
-  "totalBytes": 1279972742,
-  "webHTMLSha256": "9db633131c33f8db2bc5c25bd366e94c2cfada15bc6140222924c23ce2c1ba59",
+  "fileCount": 10421,
+  "totalBytes": 1280019294,
+  "webHTMLSha256": "45c464b2f365ae70c07f6f5ff3648a2fde7f7b9b0181482efedf0b6d5c803445",
   "largest": [
     {
       "path": "index.html",

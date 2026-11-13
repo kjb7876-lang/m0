@@ -9626,7 +9626,12 @@
     "assets/r976/portal-teal.webp",
     "assets/r976/root-tendril.webp",
     "assets/r976/tendrils-blood.webp",
-    "samong-p-art-r976.js"
+    "samong-p-art-r976.js",
+    "assets/r993/sfx/bmg-rain-1.ogg",
+    "assets/r993/sfx/boss-dark-attack.ogg",
+    "assets/r993/sfx/index.json",
+    "assets/r993/sfx/seoha-awake.ogg",
+    "sfx-mix-r993.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -10701,5 +10706,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "96c41f37c087abc1a473ce70ac315b9227ee0e3559cd03cebdbeb9324404b004"
+  "runtimeManifestSHA256": "cff56c02e338c6166fbf58027089214a28c1a200c8591356307649caeae006cf"
 }
