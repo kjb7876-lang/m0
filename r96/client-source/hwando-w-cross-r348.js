@@ -101,9 +101,10 @@ try{
  if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
   try{if(on&&st>=0&&player?.hero==='hwando'&&player.hp>0)snap(rec,st);}catch(e){fail(e);}return r;};}
  if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e===SENT){try{if(on)for(const c of casts)if(valid(c))drawCast(c);}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};}
+ const asHeroR720=(id,fn)=>{const D=window.__STORYWORLD_HERO_DEFENSE_R720__;return D&&typeof D.asHero==='function'?D.asHero(id,fn):fn();};/* R720-4: 다음 틱에 이어지는 기술을 그 영웅 몸(생존 배치 영웅이면 그 몸)으로 돌린다 */
  if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{const t=T();
-   for(let i=casts.length-1;i>=0;i--){const c=casts[i];if(!valid(c)||t-c.t0>total()||t<c.t0-1){casts.splice(i,1);continue;}
-    for(const s of c.clones)if(!s.hit&&t-c.t0>=CFG.cloneIn+CFG.hold+.06)strike(c,s);}
+   asHeroR720('hwando',()=>{for(let i=casts.length-1;i>=0;i--){const c=casts[i];if(!valid(c)||t-c.t0>total()||t<c.t0-1){casts.splice(i,1);continue;}
+    for(const s of c.clones)if(!s.hit&&t-c.t0>=CFG.cloneIn+CFG.hold+.06)strike(c,s);}});
    if(casts.length)arm();else if(typeof effects!=='undefined'&&Array.isArray(effects)){const i=effects.indexOf(SENT);if(i>=0)effects.splice(i,1);}}catch(e){fail(e);}return r;};}
  if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){casts.length=0;return base.apply(this,a);};}
  try{SP()?.warm?.(PAL,['iai-cut','slashline','cross','glow']);SP()?.warm?.(GOLD,['flare']);}catch(_){}

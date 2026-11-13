@@ -1,0 +1,33 @@
+{
+ "drive": {
+  "file": "CX-0084PJ_PJ03_heart_candidate.zip",
+  "zipSha256": "05a3215146317c30944cbd27d6281a6efec89afa08212d441defe0c7ce5849e0",
+  "status": "Dots 후보(기본탄 대체 검토용, 기본탄에는 적용 안 함)"
+ },
+ "use": "R948 하트 세례·오르골탑 하트 투사체(fly8 12fps 루프)·적중 팝/하트 폭발(hit6 14fps 한 번)",
+ "edit": "알파 16 이하 잔여를 0으로(안개 알파 제거), webp q90",
+ "files": [
+  {
+   "src": "PJ-03-heart-fly8.png",
+   "srcSha256": "e64bcf357401edd1dcbf810a0c1ddc2e141c6efe1b457d931355ac26aada3236",
+   "out": "heart-fly8.webp",
+   "outSha256": "02ec0492466b78b30c7dbcbba9b5d1434213c41f8ad769f1700b29edfeded12a",
+   "bytes": 77962,
+   "size": [
+    2048,
+    256
+   ]
+  },
+  {
+   "src": "PJ-03-heart-hit6.png",
+   "srcSha256": "305d7275a725a9ed56da85aec6d2ee5b6c0ca1ef7bc605e6b00184b069180374",
+   "out": "heart-hit6.webp",
+   "outSha256": "a442a8da37dc38a57d1dda36a2e6ae7acd1953d6ec90ac5306ce50c97a6e0afd",
+   "bytes": 60044,
+   "size": [
+    1536,
+    256
+   ]
+  }
+ ]
+}

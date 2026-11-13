@@ -16,7 +16,7 @@ ok(idx.files.every(f=>{const b=fs.readFileSync(path.join(R,'runtime-text',f.path
 const dur=f=>{const b=fs.readFileSync(path.join(A,f)),mv=b.indexOf('mvhd'),ver=b[mv+4],ts=ver?b.readUInt32BE(mv+24):b.readUInt32BE(mv+16),du=ver?Number(b.readBigUInt64BE(mv+28)):b.readUInt32BE(mv+20);return{sec:du/ts,fast:b.indexOf('moov')<b.indexOf('mdat'),bytes:b.length};};
 const ob=dur('opening-book.mp4'),rg=dur('root-gate.mp4');
 ok(ob.sec>9.3&&ob.sec<9.6&&ob.fast&&ob.bytes<3e6,'책 오프닝 9.3–9.6초·faststart·3MB 미만',ob);
-ok(rg.sec>9.3&&rg.sec<9.7&&rg.fast&&rg.bytes<3e6,'실사 보스 입장 9.3–9.7초·faststart·3MB 미만',rg);
+ok(rg.sec>9.3&&rg.sec<9.7&&rg.fast&&rg.bytes<4e6,'실사 보스 입장 9.3–9.7초·faststart·4MB 미만(R745 화질 올리며 3→4MB)',rg);
 ok(fs.existsSync(path.join(R,'runtime-text','assets','r309','intro','opening-hapil.mp4')),'원래 연결본(R327)은 지우지 않음');
 ok(/SRC='assets\/r372\/opening-book\.mp4'/.test(r309)&&/CUT=9\.4,TITLE_AT=6\.6,/.test(r309),'R309 오프닝: 책 영상, 9.4초 컷, 제목 6.6초~');
 ok(/ZONE='dist00'/.test(src)&&/s\.phase!=='door'/.test(src)&&/bossDoorId/.test(src),'dist00 보스 문(door 단계)에서만');

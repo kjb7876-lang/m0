@@ -20,17 +20,17 @@
  "files": [
   {
    "path": "opening-hapil.mp4",
-   "bytes": 5325543,
-   "sha256": "6854857dc1efa6ed0c9ab6de83a20dadf6a2f84b7d34a584bef6d17decbfd522",
+   "bytes": 5897232,
+   "sha256": "54973aa462568a347c884cff64ad16c896d957f3709e31e93dd6597e3179f742",
    "use": "새 게임 오프닝(intro-video-r309.js)",
-   "derive": "책(앞)→실사(뒤) 0.5초 페이드 연결, 19.553초, H.264 High@4.0 yuv420p CRF25 faststart, AAC 96k 스테레오 0.5초 크로스페이드, 끝 0.6초 소리 페이드"
+   "derive": "R745: 오른쪽 아래 Gemini 별 표시 생성 도구 표시를 흐림(delogo)이 아니라 역합성(표시 투명도 지도로 배경 = (관측−a·흰색)/(1−a), 윤곽 띠 라플라스 채움)으로 지움. 압축 잡음 줄이기(hqdn3d 2, 선명화 없음), x264 veryslow tune film. 소리: 30Hz 아래 자르기·약한 FFT 잡음 줄이기·EBU R128 2단계 −16 LUFS/트루 피크 −1.5 dBTP, 48 kHz 스테레오 AAC 128k"
   },
   {
    "path": "poster-hapil.jpg",
-   "bytes": 55280,
-   "sha256": "2d19610d1d722ce14a8d51f1fc3ca8618c8d2d6e1bdabb1b50cbd1d725083f5e",
+   "bytes": 54504,
+   "sha256": "795a66093775f1ea837c26289eed7f5553c6d118793a0c32bd83ca558759e646",
    "use": "영상 첫 프레임이 뜨기 전 포스터",
-   "derive": "0.4초 프레임 JPEG"
+   "derive": "R745: 새 영상 0.4초 프레임"
   }
  ]
 }

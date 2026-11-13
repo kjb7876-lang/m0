@@ -1,0 +1,290 @@
+{
+ "schema": "storyworld-r745-measure/v1",
+ "files": [
+  {
+   "path": "assets/r309/intro/opening-hapil.mp4",
+   "bytes": 5897232,
+   "sha256": "54973aa462568a347c884cff64ad16c896d957f3709e31e93dd6597e3179f742",
+   "size": [
+    1280,
+    720
+   ],
+   "seconds": 19.537,
+   "pix_fmt": "yuv420p",
+   "codec": "h264",
+   "x264": {
+    "crf": "23.0",
+    "subme": "10",
+    "me": "umh",
+    "ref": "9",
+    "psy_rd": "1.00:0.15"
+   },
+   "audio": {
+    "lufs": -15.8,
+    "truePeak": -2.8,
+    "rate": 48000,
+    "channels": 2,
+    "codec": "aac"
+   },
+   "marks": {
+    "gem-hapil": {
+     "frames": 230,
+     "median": 0.014,
+     "p90": 0.216
+    }
+   }
+  },
+  {
+   "path": "assets/r372/opening-book.mp4",
+   "bytes": 2652810,
+   "sha256": "3a8a88fa04e22b8aa314ce342734710b823a0ef46d6be23a59ab5aba8d8907f9",
+   "size": [
+    1280,
+    720
+   ],
+   "seconds": 9.458,
+   "pix_fmt": "yuv420p",
+   "codec": "h264",
+   "x264": {
+    "crf": "20.0",
+    "subme": "10",
+    "me": "umh",
+    "ref": "9",
+    "psy_rd": "1.00:0.15"
+   },
+   "audio": {
+    "lufs": -15.7,
+    "truePeak": -3.0,
+    "rate": 48000,
+    "channels": 2,
+    "codec": "aac"
+   },
+   "marks": {
+    "gem-hapil": {
+     "frames": 114,
+     "median": 0.026,
+     "p90": 0.245
+    }
+   }
+  },
+  {
+   "path": "assets/r372/root-gate.mp4",
+   "bytes": 3804020,
+   "sha256": "86837c041789c603fbc042d8b0a4362c08b84ac832cec37b7fed429c9146732a",
+   "size": [
+    1280,
+    720
+   ],
+   "seconds": 9.458,
+   "pix_fmt": "yuv420p",
+   "codec": "h264",
+   "x264": {
+    "crf": "22.0",
+    "subme": "10",
+    "me": "umh",
+    "ref": "9",
+    "psy_rd": "1.00:0.15"
+   },
+   "audio": {
+    "lufs": -16.1,
+    "truePeak": -3.0,
+    "rate": 48000,
+    "channels": 2,
+    "codec": "aac"
+   },
+   "marks": {
+    "gem-hapil": {
+     "frames": 110,
+     "median": -0.0,
+     "p90": 0.109
+    }
+   }
+  },
+  {
+   "path": "assets/r369/poison-city.mp4",
+   "bytes": 4396161,
+   "sha256": "488ac2906ece3f7fb3e255a4471f1219db5d40ff8626195f58efd4d39b6d3abb",
+   "size": [
+    1280,
+    720
+   ],
+   "seconds": 10.0,
+   "pix_fmt": "yuv420p",
+   "codec": "h264",
+   "x264": {
+    "crf": "22.0",
+    "subme": "10",
+    "me": "umh",
+    "ref": "9",
+    "psy_rd": "1.00:0.15"
+   },
+   "audio": {
+    "lufs": -16.6,
+    "truePeak": -2.3,
+    "rate": 48000,
+    "channels": 2,
+    "codec": "aac"
+   },
+   "marks": {
+    "gem-poison": {
+     "frames": 94,
+     "median": -0.004,
+     "p90": 0.007
+    }
+   }
+  },
+  {
+   "path": "assets/r368/betrayal.mp4",
+   "bytes": 4278892,
+   "sha256": "f52148695b10843ea8e784a7a7a1ece52a0df221378dcb14dc5cfa99e3fbc857",
+   "size": [
+    1280,
+    548
+   ],
+   "seconds": 10.0,
+   "pix_fmt": "yuv420p",
+   "codec": "h264",
+   "x264": {
+    "crf": "21.0",
+    "subme": "10",
+    "me": "umh",
+    "ref": "11",
+    "psy_rd": "1.00:0.15"
+   },
+   "audio": {
+    "lufs": -16.1,
+    "truePeak": -2.5,
+    "rate": 48000,
+    "channels": 2,
+    "codec": "aac"
+   },
+   "marks": {}
+  },
+  {
+   "path": "assets/r617/knight.mp4",
+   "bytes": 1846537,
+   "sha256": "6541fa6aceaeeb4f6721f6d48b6db02267da0b1fe54117fa2ce653ed8b3d99f8",
+   "size": [
+    1280,
+    720
+   ],
+   "seconds": 8.0,
+   "pix_fmt": "yuv420p",
+   "codec": "h264",
+   "x264": {
+    "crf": "22.0",
+    "subme": "10",
+    "me": "umh",
+    "ref": "9",
+    "psy_rd": "1.00:0.15"
+   },
+   "audio": {
+    "lufs": -16.0,
+    "truePeak": -3.0,
+    "rate": 48000,
+    "channels": 2,
+    "codec": "aac"
+   },
+   "marks": {
+    "veo-knight": {
+     "frames": 83,
+     "median": -0.0,
+     "p90": 0.004
+    }
+   }
+  },
+  {
+   "path": "assets/r617/beach.mp4",
+   "bytes": 1840562,
+   "sha256": "29c31151b43b4f958cb6c55e0bc331b0c4c10d1b556bb7ca201d7a961773ed4f",
+   "size": [
+    1280,
+    720
+   ],
+   "seconds": 8.0,
+   "pix_fmt": "yuv420p",
+   "codec": "h264",
+   "x264": {
+    "crf": "23.0",
+    "subme": "10",
+    "me": "umh",
+    "ref": "9",
+    "psy_rd": "1.00:0.15"
+   },
+   "audio": {
+    "lufs": -16.1,
+    "truePeak": -2.9,
+    "rate": 48000,
+    "channels": 2,
+    "codec": "aac"
+   },
+   "marks": {
+    "veo-beach": {
+     "frames": 94,
+     "median": -0.053,
+     "p90": 0.25
+    }
+   }
+  },
+  {
+   "path": "assets/r617/fall.mp4",
+   "bytes": 1748302,
+   "sha256": "9aa91de0c18c20f2c1d73c7361c12d9c853193cbfac93728b463d134c78d01bb",
+   "size": [
+    1280,
+    720
+   ],
+   "seconds": 5.0,
+   "pix_fmt": "yuv420p",
+   "codec": "h264",
+   "x264": {
+    "crf": "22.0",
+    "subme": "10",
+    "me": "umh",
+    "ref": "9",
+    "psy_rd": "1.00:0.15"
+   },
+   "audio": {
+    "lufs": -17.0,
+    "truePeak": -3.3,
+    "rate": 48000,
+    "channels": 2,
+    "codec": "aac"
+   },
+   "marks": {
+    "ai-fall": {
+     "frames": 47,
+     "median": 0.001,
+     "p90": 0.008
+    },
+    "dreamina-fall": {
+     "frames": 35,
+     "median": 0.001,
+     "p90": 0.006
+    }
+   }
+  },
+  {
+   "path": "assets/r667/title-video/loop.mp4",
+   "bytes": 618160,
+   "sha256": "5289ac5f5fb968333239c6911626ca927f7d8db002e100840b912b3877b9d0bc",
+   "size": [
+    960,
+    540
+   ],
+   "seconds": 10.0,
+   "pix_fmt": "yuv420p",
+   "codec": "h264",
+   "x264": {
+    "crf": "23.0",
+    "subme": "10",
+    "me": "umh",
+    "ref": "16",
+    "psy_rd": "1.00:0.15"
+   },
+   "marks": {}
+  }
+ ],
+ "r617TotalBytes": 5435401,
+ "fails": []
+}

@@ -14,21 +14,21 @@
  "files": [
   {
    "path": "assets/r368/betrayal.mp4",
-   "bytes": 2779195,
-   "sha256": "8eee42e9a4eacdb5968fab16badeadcc6706e1a059af5417bc6dd2c5330c5c6c",
+   "bytes": 4278892,
+   "sha256": "f52148695b10843ea8e784a7a7a1ece52a0df221378dcb14dc5cfa99e3fbc857",
    "size": [
     1280,
     548
    ],
-   "process": "ffmpeg crop=1280:548:0:12 (아래쪽 가짜 게임 UI·깨진 자막·워터마크 제거), libx264 crf24, aac 128k, faststart",
+   "process": "R745: 원본에서 다시 만듦. crop=1280:548:0:12(아래 가짜 게임 UI·깨진 자막·별 표시 줄을 화면 밖으로, 예전과 같음), CAS 0.2, x264 veryslow. 소리: 30Hz 아래 자르기·약한 FFT 잡음 줄이기·EBU R128 2단계 −16 LUFS/트루 피크 −1.5 dBTP, 48 kHz 스테레오 AAC 128k",
    "use": "결전의 날 초천사 배신 장면",
    "applied": true
   },
   {
    "path": "assets/r368/betrayal-poster.jpg",
-   "bytes": 64552,
-   "sha256": "8023a1c69c6abe20c3f2f1ecd7623c2f40ed362fd756b5b02216994f4bccd343",
-   "process": "betrayal.mp4 0.3초 프레임",
+   "bytes": 73006,
+   "sha256": "12f770fddf0d4f52d603dd55ca73f6d64cd9835681b87df85f322056ff62b197",
+   "process": "R745: 새 영상 0.3초 프레임",
    "use": "영상 포스터",
    "applied": true
   }

@@ -2,7 +2,8 @@
 """R667 타이틀 화면 배경 루프 영상 만들기 (재현용).
 
 원천: 사용자 오프닝 영상 r96/runtime-text/assets/r309/intro/opening-hapil.mp4 의 18.50초(444번째 프레임) 한 장면
-(악마화된 나무와 무너진 회랑, 번개 없는 순간). 생성 도구 표시(오른쪽 아래 별)는 delogo 로 지운다.
+(악마화된 나무와 무너진 회랑, 번개 없는 순간). R745 부터 원천 영상의 생성 도구 표시(오른쪽 아래 별)는
+scripts/build-cinematics-r745.py 가 역합성으로 이미 지웠으므로 여기서는 흐림(delogo)을 하지 않는다.
 그 정지 화면 위에 시간이 정확히 10초마다 처음으로 돌아오는 움직임만 얹어 이음매 없는 루프를 만든다.
   · 카메라: 아주 느린 숨쉬기 확대(1.050~1.075배)와 좌우·상하 흔들림(주기 10초).
   · 붉은 핏줄·불씨 빛: 밝은 붉은 부분만 골라 두 번 맥동(주기 5초) + 불꽃 깜빡임(주기 10/7… 정수배).
@@ -23,11 +24,11 @@ from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, 'r96/runtime-text/assets/r309/intro/opening-hapil.mp4')
-FRAME, DELOGO = 444, 'delogo=x=1130:y=570:w=60:h=60'  # 444번째 프레임 = 18.50초
+FRAME, DELOGO = 444, 'null'  # 444번째 프레임 = 18.50초 (R745: 별 표시는 원천에서 이미 지움, 예전 R667 은 delogo=x=1130:y=570:w=60:h=60)
 W, H, FPS, SECONDS = 960, 540, 24, 10
 N = FPS * SECONDS
 # 한 GOP 끝의 화질 흐림이 루프 이음매에서 튀지 않게 키프레임을 2초마다, I/P 화질 차이를 줄인다.
-ENC = os.environ.get('R667_ENC', 'libx264 -preset veryslow -crf 26 -tune film -g 48 -keyint_min 48 -sc_threshold 0 -x264-params ipratio=1.1:pbratio=1.1').split()
+ENC = os.environ.get('R667_ENC', 'libx264 -preset veryslow -crf 23 -tune film -g 48 -keyint_min 48 -sc_threshold 0 -x264-params ipratio=1.1:pbratio=1.1').split()
 ENC = ['-c:v'] + ENC
 TAU = 2 * math.pi
 rng = np.random.default_rng(667)

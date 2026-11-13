@@ -55,8 +55,9 @@ if(typeof special==='function'){const base=special;special=function(...a){let be
  try{if(point&&heroNow()===HERO&&player.specialCD>0&&!(before>0))startWell(point,qPower());}catch(err){fail(err);}return r;};}
 if(typeof fx==='function'){const base=fx;fx=function(type,x,y,opt){const r=base.apply(this,arguments);
  try{const o=opt||{};if(type==='storySourceSkill'&&o.storyWER&&o.stage==='release'&&o.sourceHero===HERO&&o.sourceSlot==='r'&&o.tx==null&&on()&&heroNow()===HERO)startCrush(x,y);}catch(err){fail(err);}return r;};}
+const asHeroR720=(id,fn)=>{const D=window.__STORYWORLD_HERO_DEFENSE_R720__;return D&&typeof D.asHero==='function'?D.asHero(id,fn):fn();};/* R720-4: 다음 틱에 이어지는 기술을 그 영웅 몸(생존 배치 영웅이면 그 몸)으로 돌린다 */
 if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);
- try{if(typeof started!=='undefined'&&started)step();}catch(err){fail(err);cancel();}bursts=bursts.filter(b=>T()-b.t0<BURST_T&&T()>=b.t0-.05);sentinel(!!(well||crushes.length||bursts.length));return r;};}
+ try{if(typeof started!=='undefined'&&started)asHeroR720(HERO,step);}catch(err){fail(err);cancel();}bursts=bursts.filter(b=>T()-b.t0<BURST_T&&T()>=b.t0-.05);sentinel(!!(well||crushes.length||bursts.length));return r;};}
 // ---- 그리기(효과 단계 표지 하나, 3D 기록기에는 ctx.scope 로 자리 주인을 붙인다) -------------------------
 const VIOLET='200,160,223',DEEP='74,26,120',HOT='240,216,255';
 function sc(o,f){if(typeof ctx!=='undefined'&&ctx&&typeof ctx.scope==='function')ctx.scope(o,f);else f();}

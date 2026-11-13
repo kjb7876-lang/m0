@@ -84,6 +84,13 @@ const on=(E,id,tag)=>E.hits.filter(h=>h.id===id&&(!tag||h.s?.r947===tag));
 {const E=engine({enemies:[{id:'a',x:21,y:20}]});E.api.set(false);E.api.force('needle');E.ctx.basicAttack();E.run(1);ok(E.api.inspect().stats.needles===0,'끄면 발동 없음');E.api.set(true);}
 {const E=engine({enemies:[{id:'a',x:21,y:20}],rand:()=>0});E.ctx.basicAttack();E.run(.5);E.ctx.basicAttack();E.run(.05);
  ok(E.api.inspect().stats.needles===1,'대기 시간 안 두 번째 공격은 피 탄 없음');E.run(E.api.config.needle.icd);E.ctx.basicAttack();E.run(.05);ok(E.api.inspect().stats.needles===2,'대기 시간 뒤 다시 발동');}
+// 대상이 없어 발동이 안 나가면 대기 시간도 쓰지 않음(R947-3, 코디네이터 16:21Z 환도 스레드와 같은 결함)
+{const E=engine({enemies:[{id:'a',x:21,y:20,hp:50,maxHp:50},{id:'far',x:30,y:20}],rand:()=>0});E.ctx.basicAttack();E.run(.05);
+ ok(E.api.inspect().stats.needles===0&&E.api.inspect().cd.needle===0,'혈침: 벤 적이 죽고 둘레에 적이 없으면 대기 시간 안 씀');
+ E.g.room.enemies.push({id:'b',x:21.5,y:20,radius:.3,hp:1e5,maxHp:1e5,spawnState:'active'});E.run(.5);E.ctx.basicAttack();E.run(.05);ok(E.api.inspect().stats.needles===1,'혈침: 바로 다음 공격에 발동');}
+{const E=engine({enemies:[{id:'a',x:21,y:20,hp:50,maxHp:50},{id:'far',x:30,y:20}],rand:()=>.21});E.ctx.basicAttack();E.run(.05);
+ ok(E.api.inspect().stats.swordCasts===0&&E.api.inspect().cd.swords===0,'성혈검우: 범위 안 적이 없으면 대기 시간 안 씀');
+ E.g.room.enemies.push({id:'b',x:21.5,y:20,radius:.3,hp:1e5,maxHp:1e5,spawnState:'active'});E.run(.5);E.ctx.basicAttack();E.run(.05);ok(E.api.inspect().stats.swordCasts===1,'성혈검우: 바로 다음 공격에 발동');}
 // 패시브 자신의 피해는 다시 주사위를 굴리지 않음(연쇄 폭주 방지)
 {const E=engine({enemies:[{id:'a',x:21,y:20},{id:'b',x:23,y:20}],rand:()=>0});E.ctx.basicAttack();E.run(1);ok(E.api.inspect().stats.swings===1,'패시브 피해는 발동 기회로 세지 않음');}
 // 확률: 고정 시드 주사위
@@ -159,6 +166,12 @@ const on=(E,id,tag)=>E.hits.filter(h=>h.id===id&&(!tag||h.s?.r947===tag));
 {const E=engine({enemies:[{id:'a',x:21,y:20},{id:'b',x:24,y:20}]});E.api.force('needle');E.ctx.basicAttack();E.run(.12);E.sheets.length=0;E.frame();
  ok(E.sheets.some(s=>/r947:needle/.test(s.own||'')),'피 탄 그림');E.run(.1);E.sheets.length=0;E.frame();
  ok(E.sheets.some(s=>/assets\/r587\/slayer-hit\.webp/.test(s.src||'')),'피 탄 적중은 Dots 시트(R587 SL11 적중) 재사용');}
+// 사용자 14:12Z "번개보다는 완전한 적혈 느낌": 번개 시트·번개 모양 없이 피 줄기·핏방울·피 튐(Dots)으로
+ok(!/lightning|bolt|번개 줄기/i.test(code),'적혈 연쇄에 번개 시트·번개 그림을 쓰지 않음');
+{const E=engine({enemies:[{id:'a',x:21,y:20},{id:'b',x:23,y:21},{id:'c',x:25,y:22}]});E.api.force('needle');E.ctx.basicAttack();E.run(.2);E.sheets.length=0;E.frame();
+ const own=E.sheets.filter(s=>/r947:needle/.test(s.own||''));ok(own.some(s=>/r947:bloodstream/.test(s.src||'')),'적혈 연쇄 줄기는 피 줄기 그림');
+ ok(own.some(s=>/r947:blooddrop/.test(s.src||'')),'줄기에서 핏방울이 떨어짐');
+ ok(E.sheets.some(s=>/assets\/r585\/slayer-burst-small\.webp/.test(s.src||'')),'튄 자리마다 Dots 피 튐(R585 burst-small)');}
 {const foes=[];for(let i=0;i<20;i++)foes.push({id:'m'+i,x:20+Math.cos(i)*(1+i*.2),y:20+Math.sin(i)*(1+i*.2)});
  const E=engine({enemies:foes});E.api.force('lattice');E.ctx.basicAttack();E.run(.45);E.sheets.length=0;E.frame();
  ok(E.sheets.some(s=>/r947:lattice/.test(s.own||'')),'격자 레이저 그림');ok(E.sheets.length<=E.api.config.maxDraws,'한 프레임 그림 상한('+E.sheets.length+' ≤ '+E.api.config.maxDraws+')');}
