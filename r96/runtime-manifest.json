@@ -50954,8 +50954,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6577774,
-      "sha256": "bdf531b74c609f403a87500acc81e2bfd69a5fd8055bcc47bed54204a22a8ea7"
+      "bytes": 6577834,
+      "sha256": "7244be1ff58917af019f1dc80d09ef6890fafd7f1eb5b0ac5b94194184bcd8e1"
     },
     {
       "path": "intro-r140.js",
@@ -51609,8 +51609,8 @@
     },
     {
       "path": "samong-r103.js",
-      "bytes": 87829,
-      "sha256": "dcfc8479b87dc2c47adf8f1e6c9db61cef0d2172136476af453fbef0eb8f7582"
+      "bytes": 88037,
+      "sha256": "282ebd08fa46cb05a78bee493be6e3792400c04dc0c457a575a1bc50bb295cc4"
     },
     {
       "path": "samong-r161.js",
@@ -51868,14 +51868,19 @@
       "sha256": "d8f8aae6834324a74f511e8296540889e8143696f339761963250a67ec2849af"
     },
     {
+      "path": "survival-michaela-ending-r1010.js",
+      "bytes": 19698,
+      "sha256": "b65ce2e75596cd11509511389949dabb778f2dfc4b3726ad11c64a2d593df1ce"
+    },
+    {
       "path": "survival-passives-r962.js",
       "bytes": 5153,
       "sha256": "e1581e7df6d0682a905460015c0f628c704eef4ccd5d25322da5564082a5a3f1"
     },
     {
       "path": "survival-r600.js",
-      "bytes": 73809,
-      "sha256": "5f3e429075311041c2e670f030e9a606ec9cdf890bd09e674fcb16a8330c04c7"
+      "bytes": 74604,
+      "sha256": "fdcb252e97d9165bad7bfce33985653dced7efa5c1b6b140ad29b0b49d91a5cf"
     },
     {
       "path": "survival-samong-r1006.js",
@@ -52123,9 +52128,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10424,
-  "totalBytes": 1280399428,
-  "webHTMLSha256": "bdf531b74c609f403a87500acc81e2bfd69a5fd8055bcc47bed54204a22a8ea7",
+  "fileCount": 10425,
+  "totalBytes": 1280420189,
+  "webHTMLSha256": "7244be1ff58917af019f1dc80d09ef6890fafd7f1eb5b0ac5b94194184bcd8e1",
   "largest": [
     {
       "path": "index.html",
