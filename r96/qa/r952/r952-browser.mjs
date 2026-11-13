@@ -29,14 +29,14 @@ if(shot)await snap('call-enter',t0,.25);if(shot)await snap('call-fight',t0,2.2);
  console.log('  slayer casts',JSON.stringify(i.stats.casts),'slayer hits',sl.length,'dmg',Math.round(sl.reduce((a,x)=>a+x.d,0)),'hunter hits',me.length,'dmg',Math.round(me.reduce((a,x)=>a+x.d,0)));
  ok('슬레이어가 엔진 공격으로 적을 침',sl.length>=3&&i.stats.casts.basic>=2);ok('슬레이어 고유기·스킬도 나감',i.stats.casts.q+i.stats.casts.w+i.stats.casts.e+i.stats.casts.r>=1);
  ok('분신 없음(①)',h.every(x=>x.tag!=='shade'));ok('player 는 헌터',await p.evaluate(()=>player.hero==='hunter'&&!player.r952Summon));}
-await waitT(t0,7.3);i=await I();ok('7초 뒤 해산',!i.active);await sane('①');
+if(shot)await snap('call-leave',t0,6.45);await waitT(t0,7.3);i=await I();ok('7초 뒤 해산',!i.active);await sane('①');ok('해산 덧그림(HS-02 시트)이 그려짐',i.stats.leaveDraws>0);
 
 // ② 혈영 강습
 await setup();await p.evaluate(()=>{window.__rnd=Math.random;Math.random=()=>.01;});t0=await fire('shade');
 if(shot){await waitT(t0,.6);for(let k=0;k<40;k++){if((await I()).shades>0)break;await p.waitForTimeout(150);}await p.evaluate(()=>{window.__SLOW=1e-4;});await p.waitForTimeout(700);await p.screenshot({path:shot+'-shade.jpg',quality:88,clip:{x:120,y:40,width:720,height:450}});await p.evaluate(()=>{window.__SLOW=1;});}
 await waitT(t0,4.5);await p.evaluate(()=>{Math.random=window.__rnd;});
 {const h=await hits(),sh=h.filter(x=>x.tag==='shade');i=await I();console.log('  shades',i.stats.shades,'shade hits',sh.length,'targets',new Set(sh.map(x=>x.id)).size);
- ok('② 슬레이어 분신이 나와 벰',i.tier==='shade'&&sh.length>=2&&sh.every(x=>x.d>0));ok('분신이 여러 적에게',new Set(sh.map(x=>x.id)).size>=2);ok('헌터 분신 없음(②)',i.units.length===1);}
+ ok('② 슬레이어 분신이 나와 벰',i.tier==='shade'&&sh.length>=2&&sh.every(x=>x.d>0));ok('분신이 여러 적에게',new Set(sh.map(x=>x.id)).size>=2);ok('분신 베기 궤적(HS-03 시트)이 그려짐',i.stats.slashDraws>0);ok('헌터 분신 없음(②)',i.units.length===1);}
 await waitT(t0,7.3);ok('② 7초 뒤 해산',!(await I()).active);await sane('②');
 
 // ③ 기러기진 섬멸
