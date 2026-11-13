@@ -9688,7 +9688,23 @@
     "assets/r1018/move/u206-mech-01-up.webp",
     "assets/r1018/move/u206-mech-02-down.webp",
     "assets/r1018/move/u206-mech-02-up.webp",
-    "move-dir-r1018-data.js"
+    "move-dir-r1018-data.js",
+    "move-dir-r1019-data.js",
+    "assets/r1019/move/m005-down.webp",
+    "assets/r1019/move/m005-up.webp",
+    "assets/r1019/move/m134-nightmare-down.webp",
+    "assets/r1019/move/m134-nightmare-up.webp",
+    "assets/r1019/move/silver-seal-sentinel-down.webp",
+    "assets/r1019/move/silver-seal-sentinel-up.webp",
+    "assets/r1019/move/sloth-moldling-down.webp",
+    "assets/r1019/move/sloth-moldling-up.webp",
+    "assets/r1019/move/steel-jaw-hound-down.webp",
+    "assets/r1019/move/steel-jaw-hound-up.webp",
+    "assets/r1019/move/superego-inquisitor-down.webp",
+    "assets/r1019/move/swamp-mage-down.webp",
+    "assets/r1019/move/swamp-mage-up.webp",
+    "assets/r1019/move/timeless-silver-scout-down.webp",
+    "assets/r1019/move/timeless-silver-scout-up.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -10763,5 +10779,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "e2f6978b09b0e6feaebd4dbaad4f09cb52b7a4e2c97bd3e8d3a6fcb096c13676"
+  "runtimeManifestSHA256": "bc24aebc856c91481865ccdac65a544c2ae9822a721b2ff0fd4d759ea829b3bc"
 }

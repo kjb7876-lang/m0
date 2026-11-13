@@ -1,0 +1,363 @@
+{
+ "round": "R1019",
+ "request": "CX-0082MV",
+ "files": [
+  {
+   "dots": "004_legacy-m134-nightmare-v4",
+   "enemies": [
+    "c105-e2"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV 추가1 004_legacy-m134-nightmare-v4/legacy-m134-nightmare-v4-walk-down.png",
+   "sourceSha256": "c4eeae1a6ee7a7b6d5220b62408b23c66bbe43114259c3a7e63f7da1382ffab4",
+   "toneGain": [
+    0.936,
+    0.759,
+    0.779
+   ],
+   "path": "assets/r1019/move/m134-nightmare-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 94542,
+   "sha256": "91ac39af9e1da75e11121fcbfbce023e7a4f86cc44738e8b5704dc973b63242c",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "004_legacy-m134-nightmare-v4",
+   "enemies": [
+    "c105-e2"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV 추가1 004_legacy-m134-nightmare-v4/legacy-m134-nightmare-v4-walk-up.png",
+   "sourceSha256": "632bb2d0b4bb41ae9115a1113346e584d4106db6eaa38107e147e69e9cef52bb",
+   "toneGain": [
+    0.936,
+    0.759,
+    0.779
+   ],
+   "path": "assets/r1019/move/m134-nightmare-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 86126,
+   "sha256": "82a875685c42124c91acbca48974e2973d13b4f48c47aea282e76b3d11877666",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "005_ep1b-steel-jaw-hound",
+   "enemies": [
+    "b09-h1"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV 추가1 005_ep1b-steel-jaw-hound/ep1b-steel-jaw-hound-walk-down.png",
+   "sourceSha256": "86de14b1380ffbf232a5a37660b8ce39516ee0b22f871f77f91478370a39192c",
+   "toneGain": [
+    0.65,
+    0.65,
+    0.65
+   ],
+   "path": "assets/r1019/move/steel-jaw-hound-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 88046,
+   "sha256": "c68c2987a08e50dc245ee67cdc7f5acbd0f19b796423fc59fdaa6265a126536f",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "005_ep1b-steel-jaw-hound",
+   "enemies": [
+    "b09-h1"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV 추가1 005_ep1b-steel-jaw-hound/ep1b-steel-jaw-hound-walk-up.png",
+   "sourceSha256": "a631c6716b49ced2a7f00a4867104f1cbecc7068dad0a50847cfe49e6a29ab33",
+   "toneGain": [
+    0.65,
+    0.65,
+    0.65
+   ],
+   "path": "assets/r1019/move/steel-jaw-hound-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 85008,
+   "sha256": "d5315822cbdebb34913968b9786972892b43d4c2bcc78fa9d87c039f97ce162d",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "014_superego-inquisitor",
+   "enemies": [
+    "c106-e2"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV 추가1 014_superego-inquisitor/superego-inquisitor-walk-down.png",
+   "sourceSha256": "a8914607ba8e9dffe702cc19dd2b77c179cfedded8a78f93f2786d9dc81b3a0e",
+   "toneGain": [
+    0.786,
+    0.791,
+    0.767
+   ],
+   "path": "assets/r1019/move/superego-inquisitor-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 40418,
+   "sha256": "0a3834e7d8f9dc2f5696447e002a7ce7591569982320d18a56195c7e1a25287d",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "020_hando-silver-seal-sentinel",
+   "enemies": [
+    "h102-s1"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV 추가1 020_hando-silver-seal-sentinel/hando-silver-seal-sentinel-walk-down.png",
+   "sourceSha256": "c5271bd2d069cc68c2af208e9a8a0ab486b8b5f453c1de1853a7125ee4088f8a",
+   "toneGain": [
+    0.65,
+    0.67,
+    0.684
+   ],
+   "path": "assets/r1019/move/silver-seal-sentinel-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 86508,
+   "sha256": "54619ae99d427cbe40a7e3626d671ec6d2d34895d22f4833dfbd0177cc35cb68",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "020_hando-silver-seal-sentinel",
+   "enemies": [
+    "h102-s1"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV 추가1 020_hando-silver-seal-sentinel/hando-silver-seal-sentinel-walk-up.png",
+   "sourceSha256": "3160dbc44aa286794baf8e2175c66624e8976d6ab160e3e3137f3d1f7988f8e2",
+   "toneGain": [
+    0.65,
+    0.67,
+    0.684
+   ],
+   "path": "assets/r1019/move/silver-seal-sentinel-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 82734,
+   "sha256": "4d83043eda127ee36c3fd7c2343065d557045042e7b0f0f5c1161268431c4a5d",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "021_hando-timeless-silver-scout",
+   "enemies": [
+    "h101-t1"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV 추가1 021_hando-timeless-silver-scout/hando-timeless-silver-scout-walk-down.png",
+   "sourceSha256": "870ac394ab168606f2f1aa1f8aa7d5d769eab63261b43f80eeb587b5580781ed",
+   "toneGain": [
+    0.804,
+    0.842,
+    0.896
+   ],
+   "path": "assets/r1019/move/timeless-silver-scout-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 90846,
+   "sha256": "8479b01ad0d31c52626c9d183e5fce91f85bdb6ab67a06494c8f67b31bcc1b3a",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "021_hando-timeless-silver-scout",
+   "enemies": [
+    "h101-t1"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV 추가1 021_hando-timeless-silver-scout/hando-timeless-silver-scout-walk-up.png",
+   "sourceSha256": "cbf7015398a90ea65cff106277134e664cb775f6b9d2ee3988492d18422e1a01",
+   "toneGain": [
+    0.804,
+    0.842,
+    0.896
+   ],
+   "path": "assets/r1019/move/timeless-silver-scout-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 85780,
+   "sha256": "8b398bb9c7e4c07943ad38cf5c498d6a0a2d67c5a82eb9d4cf50d3b97524ebeb",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "033_swamp-mage-darkgreen-v1",
+   "enemies": [
+    "dist02-m1"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV 추가1 033_swamp-mage-darkgreen-v1/swamp-mage-darkgreen-v1-walk-down.png",
+   "sourceSha256": "ddd263c8b436a45582bf7c72e68e5f32a0747374a4a952324f186368494eed07",
+   "toneGain": [
+    0.785,
+    0.823,
+    0.886
+   ],
+   "path": "assets/r1019/move/swamp-mage-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 99392,
+   "sha256": "6307b399a0e801be0c0c529aa7d7ca3fd881c38d265abe2765ea68e6cc5e3795",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "033_swamp-mage-darkgreen-v1",
+   "enemies": [
+    "dist02-m1"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV 추가1 033_swamp-mage-darkgreen-v1/swamp-mage-darkgreen-v1-walk-up.png",
+   "sourceSha256": "2d4b0a61d938aeb73a37e55dc252a31fae36c46d1f2206b1a7fd679340ea3108",
+   "toneGain": [
+    0.785,
+    0.823,
+    0.886
+   ],
+   "path": "assets/r1019/move/swamp-mage-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 90984,
+   "sha256": "152a9515813fc6fcc3f937e907c81159232c86967c2a00be4568ecca1e841163",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "043_m005",
+   "enemies": [
+    "dist01-sp1",
+    "dist03-sp1"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV 추가1 043_m005/m005-walk-down.png",
+   "sourceSha256": "f58e7545f4b16fc81527e4494c5c65052b721c76a8d9e6e3c14206d8975aeecb",
+   "toneGain": [
+    0.945,
+    0.955,
+    0.958
+   ],
+   "path": "assets/r1019/move/m005-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 86402,
+   "sha256": "f1561bb1fbfee40a8801504106a5cfeab364b2bef139f2f09439fc5518c193d3",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "043_m005",
+   "enemies": [
+    "dist01-sp1",
+    "dist03-sp1"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV 추가1 043_m005/m005-walk-up.png",
+   "sourceSha256": "764f63bf7a24c45ae5cf1e5c6fb974f0224962a99c7069e5ec8a6ab3d4475b1d",
+   "toneGain": [
+    0.945,
+    0.955,
+    0.958
+   ],
+   "path": "assets/r1019/move/m005-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 79310,
+   "sha256": "4fb689802508a94df1de84d1711a4d112007670b0837843bc4bdf695d6ff4a7a",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "M050_sloth_moldling",
+   "enemies": [
+    "b02-m1"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV 추가1 M050_sloth_moldling/sloth_moldling-walk-down.png",
+   "sourceSha256": "87d64b8a4676cf4fc6c5ad6da3288b7c28ee04f4089be4a966526eed50c514de",
+   "toneGain": [
+    0.939,
+    0.827,
+    0.65
+   ],
+   "path": "assets/r1019/move/sloth-moldling-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 159212,
+   "sha256": "ee6750e2b9014b61f78d244c20654b0bc8777cf93f4901ed5c332fe3edafe32c",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "M050_sloth_moldling",
+   "enemies": [
+    "b02-m1"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV 추가1 M050_sloth_moldling/sloth_moldling-walk-up.png",
+   "sourceSha256": "757b937df76effbd65f7dd2f821c6e840faba4e8567b9f208f09b9808cae2f94",
+   "toneGain": [
+    0.939,
+    0.827,
+    0.65
+   ],
+   "path": "assets/r1019/move/sloth-moldling-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 163808,
+   "sha256": "e06fc6b88f151ab735d6a7d3d882dd863e7c94fd48414023c955a649437a311d",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "M051_wrath_fire_beast",
+   "applied": false,
+   "why": "불길 속의 늑대(b07-f1): 게임은 몸 전체에 용암 균열이 빛나는 r198 M030 걷기 그림을 쓰는데 시트는 어두운 몸에 갈기 불꽃만 있어, 게임 안에서 앞·뒤로 바뀔 때 불빛이 꺼진 듯 보임 — 7.6 으로 보류"
+  },
+  {
+   "dots": "014 옆(side) 시트",
+   "applied": false,
+   "why": "기계재판 연결자는 게임에 옆 걷기가 이미 있어 옆은 그대로 둔다. 위(up) 시트는 Dots 가 보내지 않아 아래만 적용"
+  }
+ ]
+}
