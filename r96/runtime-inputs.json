@@ -9408,6 +9408,15 @@
     "assets/r947/slayer-blood-stream.webp",
     "assets/r947/slayer-sword-fall.webp",
     "assets/r947/slayer-sword-stab.webp",
+    "assets/r760/boss/sheet-moveDown.webp",
+    "assets/r760/boss/sheet-moveUp.webp",
+    "assets/r760/mid/sheet-moveDown.webp",
+    "assets/r760/mid/sheet-moveSide.webp",
+    "assets/r760/mid/sheet-moveUp.webp",
+    "assets/r953/gv-lock.webp",
+    "assets/r953/gv-friend.webp",
+    "assets/r953/gv-call.webp",
+    "passive-growth-r971.js",
     "perf-r979.js"
   ],
   "mediaPaths": [
@@ -10483,5 +10492,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "8467af85ba1fae4332819a47ca7fe57d06923d0ae4a04518e88a6c1a934f1750"
+  "runtimeManifestSHA256": "6202f2db23d839994b6fb37013963be689e33766031e579138865c730553b79e"
 }
