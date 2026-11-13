@@ -20,15 +20,18 @@
 //   ⑤ 모바일 생존에서는 releaseImageMemory 를 건너뛴다(데스크톱·캠페인은 그대로).
 //   ⑥ 단계가 바뀌면 엔진 지면 캐시(groundCache3, 지역 그림 크기 캔버스 최대 6장 약 41MB)를 지금 지역 것만 남긴다.
 //   ⑦ R409 외곽선 캐시 픽셀 상한을 모바일 3M(약 12MB)로(데스크톱 7M 그대로).
+//  R1000(사용자 기기 아이폰 13 미니, 생존 3~4분·첫 보스 즈음 꺼짐): ⑧ 엔진 addImage 는 받는 그림마다 im.decode() 로 픽셀까지 풀어 둔다.
+//   생존 15단계에 한 번도 안 그린 캐시 그림이 165장(해독 약 210MB)이었다. 크롬은 해독 메모리를 스스로 약 530MB 로 묶지만 아이폰 사파리는
+//   decode() 로 푼 픽셀을 들고 있을 수 있다 → 모바일에서는 decode() 가 '받기 끝'만 기다리고, 픽셀은 처음 그릴 때 풀린다(화면 그대로).
 //  그림·전투·세이브는 바꾸지 않는다(표시·소리 캐시만).
 (()=>{'use strict';
 if(window.__STORYWORLD_MOBILE_MEMORY_R980__)return;
-const REV='R992-mobile-memory-3',KEY='storyworld.r980.mobileMemory';
+const REV='R1000-mobile-memory-4',KEY='storyworld.r980.mobileMemory';
 // 모바일 예산(픽셀 수, 1픽셀 = 4바이트)
 const MOBILE_PX={'r163-tint':12e6/* 약 48MB */,'r106-tint':6e6/* 약 24MB */,'r409-outline':3e6/* 약 12MB */};
 const AUDIO_MB=24,EVERY_MS=2000;
 let on=true,lastError=null;try{on=JSON.parse(localStorage.getItem(KEY)||'null')?.on!==false;}catch(_){}
-const stats={releaseSkipped:0,groundTrimmed:0,roomsCleared:0,checks:0,audioTrims:0,audioEvicted:0,audioEvictedMB:0,audioPeakMB:0,audioLastMB:0,errors:0};
+const stats={decodeSkipped:0,releaseSkipped:0,groundTrimmed:0,roomsCleared:0,checks:0,audioTrims:0,audioEvicted:0,audioEvictedMB:0,audioPeakMB:0,audioLastMB:0,errors:0};
 function fail(e){stats.errors++;lastError=String(e?.stack||e).slice(0,300);}
 function mobile(){
  try{const m=window.__STORYWORLD_MOBILE_R63__;if(typeof m?.isMobile==='function')return !!m.isMobile();}catch(_){}
@@ -62,14 +65,21 @@ function wrapRelease(){if(relWrapped||typeof releaseImageMemory!=='function')ret
 function trimGround(){try{if(typeof groundCache3==='undefined'||!(groundCache3 instanceof Map)||groundCache3.size<=1)return;
  const path=typeof regionById!=='undefined'&&typeof zone!=='undefined'?regionById[zone]?.map:null;
  for(const k of [...groundCache3.keys()])if(!path||String(k).split('|')[0]!==path){groundCache3.delete(k);stats.groundTrimmed++;}}catch(e){fail(e);}}
+// ⑧ 모바일: decode() 는 받기 끝만 기다린다(이미 받았으면 바로). 깨진 그림은 원래 decode 가 거절하게 둔다.
+let decWrapped=false;
+function wrapDecode(){try{if(decWrapped||!active()||typeof HTMLImageElement!=='function')return;const P=HTMLImageElement.prototype,orig=P.decode;if(typeof orig!=='function')return;
+ P.decode=function(){try{if(!active())return orig.apply(this,arguments);const im=this;if(im.complete){if(im.naturalWidth>0){stats.decodeSkipped++;return Promise.resolve();}return orig.apply(this,arguments);}
+  stats.decodeSkipped++;return new Promise((res,rej)=>{const off=()=>{im.removeEventListener('load',ok);im.removeEventListener('error',bad);},ok=()=>{off();res();},bad=()=>{off();rej(new DOMException('The source image cannot be decoded.','EncodingError'));};im.addEventListener('load',ok);im.addEventListener('error',bad);});
+ }catch(e){fail(e);return orig.apply(this,arguments);}};decWrapped=true;}catch(e){fail(e);}}
+wrapDecode();
 // ④ R61 지난 방
 let lastStage=null;
 function trimRooms(){try{const H=window.__STORYWORLD_R61_OTHER_ROOMS__;if(!H||typeof room==='undefined'||!room?.survivalR600)return;if(room.id===lastStage)return;lastStage=room.id;const n=H.clear();if(n)stats.roomsCleared+=n;trimGround();}catch(e){fail(e);}}
 function check(){stats.checks++;try{if(!active())return;wrap();wrapRelease();trimAudio();trimRooms();}catch(e){fail(e);}}
 let timer=null;
-function start(){wrap();wrapRelease();if(!timer)timer=setInterval(check,EVERY_MS);}
+function start(){wrapDecode();wrap();wrapRelease();if(!timer)timer=setInterval(check,EVERY_MS);}
 if(document.readyState==='complete')start();else window.addEventListener('load',start,{once:true});
 window.__STORYWORLD_MOBILE_MEMORY_R980__=Object.freeze({revision:REV,mobile,active,px,audioBudgetMB,check,roomsCleared:()=>stats.roomsCleared,
  set:v=>{on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;},
- inspect:()=>({revision:REV,on,mobile:mobile(),wrapped,relWrapped,budgets:{...MOBILE_PX,audioMB:AUDIO_MB},stats:{...stats},lastError,presentationOnly:true,gameplayChanged:false,savesTouched:false})});
+ inspect:()=>({revision:REV,on,mobile:mobile(),wrapped,relWrapped,decWrapped,budgets:{...MOBILE_PX,audioMB:AUDIO_MB},stats:{...stats},lastError,presentationOnly:true,gameplayChanged:false,savesTouched:false})});
 })();
