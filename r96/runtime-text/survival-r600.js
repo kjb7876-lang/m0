@@ -124,7 +124,7 @@ const CS=()=>coreStats(S?.core?.lv);
 const N={q:[],cur:null,gen:0,timer:null};
 function narrPlaying(){return !!N.cur||N.q.length>0;}
 function narrStop(){N.gen++;N.q.length=0;N.cur=null;clearTimeout(N.timer);N.timer=null;try{window.__STORYWORLD_VOICE_R381__?.stop?.();}catch(_){}try{speechSynthesis.cancel();}catch(_){}subs(null);}
-function narrPlay(scenes){const list=[];for(const s of scenes||[]){const narr=String(s?.narrator||'').replace(/[〈〉<>]/g,'').trim();for(const t of sentences(s?.text))list.push({text:t,narr});}
+function narrPlay(scenes,opt){const list=[],noTts=!!opt?.noTts;for(const s of scenes||[]){const narr=String(s?.narrator||'').replace(/[〈〉<>]/g,'').trim();for(const t of sentences(s?.text))list.push(noTts?{text:t,narr,noTts}:{text:t,narr});}
  if(S&&list.length){let sum=0;for(const x of list)sum+=Math.max(1.2,x.text.length/CPS)+GAP;S.narrMinEnd=Math.max(S.narrMinEnd||0,G(()=>time,0))+sum;}
  N.q.push(...list);if(!N.cur&&!N.timer)narrNext();return list.length;}
 function applyTrack(){prefs.voice=TRACKS[prefs.track].voice;try{if(!prefs.voice){window.__STORYWORLD_VOICE_R381__?.stop?.();try{speechSynthesis.cancel();}catch(_){}
@@ -150,7 +150,7 @@ function narrNext(){N.timer=null;if(paused()&&(N.q.length||S?.narrating)){N.time
  const silent=()=>{const w=()=>{if(my!==N.gen)return;if(paused()){setTimeout(w,250);return;}done();};setTimeout(w,est*1000);};
  const R=window.__STORYWORLD_VOICE_R381__;let ok=false;
  if(prefs.voice&&vol()>0&&R&&typeof R.has==='function'){try{if(R.has(it.text)){const h=R.play(it.text,{rate:1,volume:vol(),onend:done,onerror:()=>{if(my===N.gen)silent();}});ok=!!h;if(h&&N.q[0])R.preload(N.q[0].text);if(h)setTimeout(()=>{if(my===N.gen){try{h.stop();}catch(_){}done();}},(est*2+4)*1000);}}catch(e){fail(e);}}
- if(!ok&&prefs.voice&&vol()>0&&typeof speechSynthesis!=='undefined'){try{const v=(speechSynthesis.getVoices()||[]).find(v=>/^ko/i.test(v.lang));if(v){const u=new SpeechSynthesisUtterance(it.text);u.lang=v.lang;u.voice=v;u.volume=vol();u.onend=done;u.onerror=done;speechSynthesis.speak(u);ok=true;setTimeout(()=>{if(my===N.gen){try{speechSynthesis.cancel();}catch(_){}done();}},(est*2+4)*1000);}}catch(e){fail(e);}}
+ if(!ok&&!it.noTts&&prefs.voice&&vol()>0&&typeof speechSynthesis!=='undefined'){/* R1010: 녹음 보류 구간은 브라우저 음성으로 대신하지 않는다(녹음이 생기면 위 R381 이 그대로 튼다) */try{const v=(speechSynthesis.getVoices()||[]).find(v=>/^ko/i.test(v.lang));if(v){const u=new SpeechSynthesisUtterance(it.text);u.lang=v.lang;u.voice=v;u.volume=vol();u.onend=done;u.onerror=done;speechSynthesis.speak(u);ok=true;setTimeout(()=>{if(my===N.gen){try{speechSynthesis.cancel();}catch(_){}done();}},(est*2+4)*1000);}}catch(e){fail(e);}}
  if(!ok)silent();}
 let subsEl=null;
 function ensureCss(){try{if(!document.getElementById('r600Style')){const st=document.createElement('style');st.id='r600Style';st.textContent=CSS;document.head.appendChild(st);}}catch(e){fail(e);}}
@@ -240,9 +240,9 @@ function swarm(e,elite){const atk=baseAtk(),m=hpMul(S.i,S.loop,S.diff);e.ai='mel
  e.damage=mobDamage(e.damage,elite,S.i,S.loop,S.diff);e.maxHp=e.hp=mobHp(S.i,S.loop,S.diff,atk,elite);if(elite){e.r600Elite=true;e.defScale=(e.defScale||1)*1.22;e.name=e.name+' · 짙은 형상';}
  if(Math.random()<.32)e.r600Core=true;}
 let spawnAt0=0;
-function tickSpawn(){const x=room.survivalR600,R=x.roster,t=G(()=>time,0);if(!R.normal.length||!spawning(S,t))return;
- const alive=room.enemies.filter(living).length,c=cap(t-S.stageAt,S.i,low(),S.diff);if(t<spawnAt0||alive>=c)return;spawnAt0=t+.35;
- const n=Math.min(4,c-alive);for(let k=0;k<n;k++){const q=ringPoint(player,RING[0],RING[1],x.arena);if(!q)break;const src=R.normal[S.serial%R.normal.length],e=spawnAt(src,q);if(e)swarm(e,(S.serial%13)===12);}}
+function tickSpawn(force){const x=room.survivalR600,R=x.roster,t=G(()=>time,0);if(!R.normal.length||!force&&!spawning(S,t))return 0;/* R1010: 미카엘라 결전은 서사가 끝난 뒤에도 같은 규칙으로 물결을 낸다(force) */
+ const alive=room.enemies.filter(living).length,c=cap(t-S.stageAt,S.i,low(),S.diff);if(t<spawnAt0||alive>=c)return 0;spawnAt0=t+.35;let made=0;
+ const n=Math.min(4,c-alive);for(let k=0;k<n;k++){const q=ringPoint(player,RING[0],RING[1],x.arena);if(!q)break;const src=R.normal[S.serial%R.normal.length],e=spawnAt(src,q);if(e){swarm(e,(S.serial%13)===12);made++;}}return made;}
 function bossIn(){const x=room.survivalR600,R=x.roster,src=R.boss||R.mid;if(!src)return null;const q=ringPoint(player,7,9,x.arena)||{x:x.centre.x,y:x.arena.y0+3};
  const e=spawnAt(src,q,{major:true,mid:!R.boss});if(!e)return null;
  const B=bossStats(S.i,S.loop,S.diff,S.atkAvg>0?S.atkAvg:baseAtk(),!!R.boss,e.damage,baseAtk());e.damage=B.dmg;e.maxHp=e.hp=B.hp;e.r600Boss=true;guardBossHp(e,()=>G(()=>time,0));if(R.boss){room.engaged=true;e.phaseStage='active';e.phaseAge=0;e.rest=1.2;e.cd=1.5;}
@@ -443,8 +443,9 @@ try{install();}catch(e){fail(e);}
 try{const iv=setInterval(trackBtn,400);iv?.unref?.();}catch(_){}
 try{const iv=setInterval(()=>{try{document.body.classList.toggle('r600Modal',!!(S?.active&&G(()=>modal,false)));}catch(_){}},200);iv?.unref?.();}catch(_){}
 window.__STORYWORLD_SURVIVAL_R600__=Object.freeze({revision:REV,start,qaCredit:v=>{if(!S?.active)return false;credit(+v||0);return true;},qaPlayT:v=>{if(!S?.active)return false;S.playT=Math.max(0,+v||0);return true;},qaGo:i=>S?.active?go(i):false,qaCoreHp:v=>{if(!S?.active)return false;S.core.hp=Math.max(0,+v||0);S.core.hitAt=G(()=>time,0);if(S.core.hp<=0&&!S.over){stats.coreLost++;over('core');}return true;},/* 검사·스크린샷용: 코어 체력을 바로 정한다(0 이면 다음 단계에서 파괴) */stageIds:()=>S?[...S.ids]:[],active:()=>!!S?.active,here,
- state:()=>S?{tainted,diff:S.diff,playT:S.playT,choiceIdx:S.choiceIdx,pickRem,narrMinEnd:S.narrMinEnd||0,ready:!!S.ready,startPos:S.startPos||null,i:S.i,loop:S.loop,id:S.ids[S.i],phase:S.phase,narrating:S.narrating,narrEndAt:S.narrEndAt,bossUp:S.bossUp,kills:S.kills,core:{...S.core,stats:CS()},choiceQ,gems:gems.length,over:S.over,ids:S.ids.length}:null,
- track:()=>prefs.track,setTrack,narr:()=>({playing:narrPlaying(),queued:N.q.length,cur:N.cur?.text||null}),skipNarration:()=>{N.q.length=0;if(S){S.narrMinEnd=0;/* 서사가 벽시계로 이미 끝났어도 남은 최소 웨이브 길이를 지금으로 당긴다 */if(!S.narrating&&S.narrEndAt>G(()=>time,0))S.narrEndAt=G(()=>time,0);}/* 일부러 건너뛰면 최소 웨이브 길이도 함께 끝낸다 */if(N.cur){N.gen++;N.cur=null;narrNext();}},
+ state:()=>S?{tainted,diff:S.diff,playT:S.playT,choiceIdx:S.choiceIdx,pickRem,narrMinEnd:S.narrMinEnd||0,ready:!!S.ready,startPos:S.startPos||null,i:S.i,loop:S.loop,id:S.ids[S.i],phase:S.phase,narrating:S.narrating,narrEndAt:S.narrEndAt,bossUp:S.bossUp,kills:S.kills,core:{...S.core,stats:CS()},choiceQ,gems:gems.length,over:S.over,ids:S.ids.length,lv:S.lv,hero:S.hero,secs:Math.round(((S.over&&S.overSecs)||(Date.now()-S.startWall)/1000))}:null,
+  finaleWave:()=>{try{if(!here()||!S||S.over||!S.ready)return 0;return tickSpawn(true)||0;}catch(e){fail(e);return 0;}},/* R1010 결전 물결 */
+ track:()=>prefs.track,setTrack,narr:()=>({playing:narrPlaying(),queued:N.q.length,cur:N.cur?.text||null,list:[N.cur?.text,...N.q.map(x=>x.text)].filter(Boolean)}),narrate:(scenes,opt)=>{try{return here()?narrPlay(scenes,opt):0;}catch(e){fail(e);return 0;}},/* R1010: 결전 대면 서사를 생존 자막으로 */skipNarration:()=>{N.q.length=0;if(S){S.narrMinEnd=0;/* 서사가 벽시계로 이미 끝났어도 남은 최소 웨이브 길이를 지금으로 당긴다 */if(!S.narrating&&S.narrEndAt>G(()=>time,0))S.narrEndAt=G(()=>time,0);}/* 일부러 건너뛰면 최소 웨이브 길이도 함께 끝낸다 */if(N.cur){N.gen++;N.cur=null;narrNext();}},
  pure:Object.freeze({DIFFS,diffOf,CHOICE_EVERY,WINDOW_MAX,choiceDue,windowPicks,xpNeed,levelUps,stageIds,arena,spawning,nextPhase,advance,cap,hpMul,mobHp,BOSS_MIN_MULT,BOSS_DPS_CAP,guardBossHp,trackOf,TRACKS,healCue,SFX,bossStats,mobDamage,smoothAtk,BOSS_HP,coreStats,pickThree,sentences,TAIL,CORE0,CORE_UPS}),
  inspect:()=>({revision:REV,stats:{...stats},lastError,active:!!S?.active,here:here(),pending})});
 })();
