@@ -40663,6 +40663,26 @@
       "sha256": "a442a8da37dc38a57d1dda36a2e6ae7acd1953d6ec90ac5306ce50c97a6e0afd"
     },
     {
+      "path": "assets/r951/neon-big-strike.webp",
+      "bytes": 278688,
+      "sha256": "057b11774efe6e4144db37f9770796b37cf357778e23d7474b09bc34099da40d"
+    },
+    {
+      "path": "assets/r951/neon-lance-impact.webp",
+      "bytes": 96714,
+      "sha256": "f58459e8218b5013afa0266cc03d669e69ef55550237e11672a3251b2ee35f45"
+    },
+    {
+      "path": "assets/r951/neon-lance.webp",
+      "bytes": 513672,
+      "sha256": "c6794ea8c7a3d8858487f3407147cefca11c18ab7429cd9e0ca0ff959e0d9df8"
+    },
+    {
+      "path": "assets/r951/neon-skybeam.webp",
+      "bytes": 339538,
+      "sha256": "05ddfbbc73a83d4cf6931c7c9e9a315e27c30101254d0b93848dc782bab2cb03"
+    },
+    {
       "path": "assets/r954/sfx/atk-fisherman-1.ogg",
       "bytes": 7161,
       "sha256": "72651a7fa25a4fbd5b060e3f89cd8b5b3539cc62834915e733aaee4a0ea1949e"
@@ -50079,8 +50099,8 @@
     },
     {
       "path": "neon-storm-r951.js",
-      "bytes": 26313,
-      "sha256": "6ca428e23daa9e4de162e544c37a475ef1bc7a46c3af5bac299b002dd1097e9f"
+      "bytes": 29044,
+      "sha256": "741ac361ad77dcb2fd6fc29b1bd0375b17c2de8d509a93a1597f28b43957f5a1"
     },
     {
       "path": "neon-toxic-r562.js",
@@ -50873,8 +50893,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10174,
-  "totalBytes": 1260245011,
+  "fileCount": 10178,
+  "totalBytes": 1261476354,
   "webHTMLSha256": "d65f74274a6e04cf2a6776d84760bc969260cd49e4b9ed063fba15c01a40f3e3",
   "largest": [
     {

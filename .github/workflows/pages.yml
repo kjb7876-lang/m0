@@ -827,6 +827,8 @@ jobs:
         run: node r96/qa/r949/r949-cpu-check.cjs
       - name: R951 neon storm passive CPU check
         run: node r96/qa/r951/r951-cpu-check.cjs
+      - name: R951 neon storm Dots sheets CPU check
+        run: node r96/qa/r951/r951-dots-sheets-cpu-check.cjs
       - name: R948 michaela heart passive CPU check
         run: node r96/qa/r948/r948-cpu-check.cjs
       - name: R899 boss-map story window and memory-shard paper move to top-left, quest line shortened CPU check
