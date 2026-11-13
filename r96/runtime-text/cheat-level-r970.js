@@ -1,16 +1,16 @@
 // R970 — 777 개발자 시험 모드: 레벨 입력 → 레벨 규칙대로 스킬 포인트(사용자 2026-11-13
 //  "777코드사용하면 이제 레벨을 적는칸이 나오고 레벨에따라 스킬포인트가 지급되는구조로 바꿔줘 777은 개발자테스트모드라서").
-//  ① 코드 창에 777 을 적으면 '레벨(1~99)' 칸이 나온다. 적용하면 그 레벨이 되고, 일반 진행과 같은 규칙
+//  ① 코드 창에 777 을 적으면 '레벨(1~만렙)' 칸이 나온다. 적용하면 그 레벨이 되고, 일반 진행과 같은 규칙
 //     (R62: 새 영웅 Lv.1·포인트 1, 레벨이 1 오를 때마다 포인트 +1)으로 지금 레벨과의 차이만큼 포인트를 받는다.
 //     레벨을 낮추면 남은 포인트에서 차이만큼 빼되 0 아래로는 안 내려간다(이미 배운 기술은 그대로).
-//  ② 이 모드에서는 예전 777 처럼 레벨 99·기술 상한을 강제로 채우지 않는다. 포인트로 직접(자동 스킬레벨업 포함) 성장한다.
-//     index.html 777 블록은 지역 이동·저장·불러오기 때마다 applyCaps(레벨 99·상한)를 부르므로, 그 세 길을 바깥에서 감싸
+//  ② 이 모드에서는 예전 777 처럼 만렙·기술 상한을 강제로 채우지 않는다. 포인트로 직접(자동 스킬레벨업 포함) 성장한다.
+//     index.html 777 블록은 지역 이동·저장·불러오기 때마다 applyCaps(만렙·상한)를 부르므로, 그 세 길을 바깥에서 감싸
 //     부르기 전 레벨·경험치·기술 단계를 기억했다가 되돌린다. 777 저장본에는 cheat777.levelR970 으로 남긴다.
 //  ③ 레벨 없이 부르는 예전 API(__STORYWORLD_CHEAT777__.activate('777'))와 R970 기록이 없는 예전 777 저장은 예전 방식 그대로.
-//  레벨 범위 1~99 = 777 블록 LEVEL_CAP 과 일반 gainXP 상한. 새 키·자산·서사 변화 없음. 일반 저장은 건드리지 않는다(777 은 별도 슬롯).
+//  레벨 범위 1~HERO_LEVEL_CAP(R1011 부터 777) = 777 블록 LEVEL_CAP 과 일반 gainXP 상한. 새 키·자산·서사 변화 없음. 일반 저장은 건드리지 않는다(777 은 별도 슬롯).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_CHEAT_LEVEL_R970__)return;
-const REV='R970-cheat-level-1',MIN=1,MAX=99,PER_LEVEL=1,START_POINTS=1;
+const REV='R970-cheat-level-1',MIN=1,MAX=(typeof HERO_LEVEL_CAP!=='undefined'&&HERO_LEVEL_CAP>0)?HERO_LEVEL_CAP:777,PER_LEVEL=1,START_POINTS=1;
 const C=()=>window.__STORYWORLD_CHEAT777__,on=()=>{try{return C()?.active?.()===true;}catch(_){return false;}};
 const P=()=>typeof player==='object'&&player?player:null;
 const copy=v=>JSON.parse(JSON.stringify(v));

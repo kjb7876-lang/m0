@@ -41133,6 +41133,16 @@
       "sha256": "2aeef038bdff1fa29c399f687abc5e53c0ae484a08edae5bfa9dbdf4d66f9557"
     },
     {
+      "path": "assets/r952/hs04-flow-line.webp",
+      "bytes": 33226,
+      "sha256": "60308bfb44b06ff5328f78ae61138a58ffb2d3dc660873b309c9d497f787202f"
+    },
+    {
+      "path": "assets/r952/hs05-feather-ring.webp",
+      "bytes": 330416,
+      "sha256": "502087fbec05ccc9456a5a5e25f77a8ae50d7c10fb7498ca08b091c3e3262bf9"
+    },
+    {
       "path": "assets/r952/hs06-volley-flash.webp",
       "bytes": 448274,
       "sha256": "b145efdd1e2cea7c4fa56ec1f662139f35e533adcda9a6bb8f5718b1e5aaa07b"
@@ -44213,6 +44223,31 @@
       "sha256": "228944db475a63737b99209e86110f48dd679148d7dd96b6cb7092f6372c86c9"
     },
     {
+      "path": "assets/r976/ash-flakes.webp",
+      "bytes": 5016,
+      "sha256": "95f57db293bd3697a29da26a9eff2465615f24731224fd2db66c726ba5ccbed9"
+    },
+    {
+      "path": "assets/r976/index.json",
+      "bytes": 1401,
+      "sha256": "4affdd8804da29fdabda1b822240223dca7ef1d5fd705b5ef4cccdc2d725e10e"
+    },
+    {
+      "path": "assets/r976/portal-teal.webp",
+      "bytes": 105680,
+      "sha256": "9957aa369a551ae89bddb25075c6040c648ce5ee320c70e2c97e8ad60b9c201a"
+    },
+    {
+      "path": "assets/r976/root-tendril.webp",
+      "bytes": 6314,
+      "sha256": "98ec3b04b84252e2163d5d5fcde6a8fbb3345f51cfbc7ba4c2841710e665a695"
+    },
+    {
+      "path": "assets/r976/tendrils-blood.webp",
+      "bytes": 304266,
+      "sha256": "9897cc20dd60cf2a49292cae5136fae0257459b485cc3b36a852af61e128c639"
+    },
+    {
       "path": "assets/r986/seoha-hand-strike.webp",
       "bytes": 174810,
       "sha256": "2ab11e88c943c520532ae505b188c2ce097960e4c2685465f232fa84a64511ff"
@@ -44661,6 +44696,26 @@
       "path": "assets/r990/fog-core.webp",
       "bytes": 340952,
       "sha256": "a03aaa9d21b300cc10b102254501329041c6c3c7cacaf9dbc56f0c0f07ca233d"
+    },
+    {
+      "path": "assets/r993/sfx/bmg-rain-1.ogg",
+      "bytes": 7979,
+      "sha256": "a108998ef207d116b3324dcd974cc21151abd61316ddd93fe1cde71b1dae4133"
+    },
+    {
+      "path": "assets/r993/sfx/boss-dark-attack.ogg",
+      "bytes": 11004,
+      "sha256": "9457284fb835d5772276085ff4ecb24fc852e3426c18722c11fe54b9ebca99ba"
+    },
+    {
+      "path": "assets/r993/sfx/index.json",
+      "bytes": 2611,
+      "sha256": "b7ac07eab063b4ed0a4ffef08318f118068cd6920b27e0e3bf8dd38c1a4f8235"
+    },
+    {
+      "path": "assets/r993/sfx/seoha-awake.ogg",
+      "bytes": 10046,
+      "sha256": "032c2405bae852dd1de68f2b637c07180b6a404e9971eb34da4fcc8e1c3d3401"
     },
     {
       "path": "assets/rc133/art/arena.webp",
@@ -49794,8 +49849,8 @@
     },
     {
       "path": "cheat-level-r970.js",
-      "bytes": 9531,
-      "sha256": "e579ef2f1b5a10e97e59bb226584b8518b806f75d436431b01a04aaf01abc341"
+      "bytes": 9631,
+      "sha256": "c59837592f9f3b08d29bbc860040b8b137605dae916d0441a5598f1ed274981b"
     },
     {
       "path": "chunks/ep1a08-0-0.json",
@@ -50734,8 +50789,8 @@
     },
     {
       "path": "hero-palette-r302.js",
-      "bytes": 18002,
-      "sha256": "2ea8e8a7ce318509928ed5776a7b38b0361d8a221acb2178c4c57882863379d9"
+      "bytes": 22378,
+      "sha256": "52fb53e702345291aefd222092f342a02c3cbdedbe6720130ce0b51b97aa2e04"
     },
     {
       "path": "hero-presentation-r83.js",
@@ -50849,8 +50904,8 @@
     },
     {
       "path": "hunter-squad-r952.js",
-      "bytes": 33712,
-      "sha256": "1b26d525cbd1f4265cf0c7042565015bfdcfb0ac96da5e082b8fc7cb7cebe508"
+      "bytes": 36630,
+      "sha256": "0e898d96e79727281e3dc9db8d8c062902edd0648579a30809da5d88da14cc68"
     },
     {
       "path": "hwando-arc-r349.js",
@@ -50904,8 +50959,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6577058,
-      "sha256": "2fe7e68ebd62d9fc1c1218057b0194aaf1557c151e2a94c4d5fd61c7bafbd909"
+      "bytes": 6577823,
+      "sha256": "5f2b2dd67a20c34d58e8f67673a9868bb445e895ae3d96d44eab7680bfba70f1"
     },
     {
       "path": "intro-r140.js",
@@ -51548,14 +51603,19 @@
       "sha256": "8edd24260437bd660e934c0371e078a7eb97f37ef6778f8f1cafed35febddda8"
     },
     {
+      "path": "samong-p-art-r976.js",
+      "bytes": 8981,
+      "sha256": "1c1a96be256cc80ba8a8bcf1c32e9f7cf4aef3602f2a40b438ae6914c1ed6ad3"
+    },
+    {
       "path": "samong-play-r162.js",
       "bytes": 18983,
       "sha256": "78913442e364256dcf534c8e0b936e40c5b3ee3e316fde953e37834bd213a2ea"
     },
     {
       "path": "samong-r103.js",
-      "bytes": 87567,
-      "sha256": "a013ea34b191bb6e453f543609f86b6a64d9cf64242634452b9e0efde908bea4"
+      "bytes": 87829,
+      "sha256": "dcfc8479b87dc2c47adf8f1e6c9db61cef0d2172136476af453fbef0eb8f7582"
     },
     {
       "path": "samong-r161.js",
@@ -51656,6 +51716,11 @@
       "path": "seven-sins-bossrooms.js",
       "bytes": 14689,
       "sha256": "f6f539296fd11946a0688a5d82be7bf68b32f5c8d560aff5369e92f7dd439fc5"
+    },
+    {
+      "path": "sfx-mix-r993.js",
+      "bytes": 14870,
+      "sha256": "b5b40b34d00700ac7f0d99cfd308b8fc749807892834e9f631796b3976f69fd1"
     },
     {
       "path": "sfx-r541.js",
@@ -51814,8 +51879,13 @@
     },
     {
       "path": "survival-r600.js",
-      "bytes": 72330,
-      "sha256": "e206858b9378440bbfbbb05436b67a1fe0a00a80a37fbba55079dc24b108cfc1"
+      "bytes": 73809,
+      "sha256": "5f3e429075311041c2e670f030e9a606ec9cdf890bd09e674fcb16a8330c04c7"
+    },
+    {
+      "path": "survival-samong-r1006.js",
+      "bytes": 6680,
+      "sha256": "e17ae3f17d20a14de432debacbbdb867b43b2e2bbad9e9e021c9504064a47c23"
     },
     {
       "path": "swamp-hands-r474.js",
@@ -52058,9 +52128,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10411,
-  "totalBytes": 1279545059,
-  "webHTMLSha256": "2fe7e68ebd62d9fc1c1218057b0194aaf1557c151e2a94c4d5fd61c7bafbd909",
+  "fileCount": 10425,
+  "totalBytes": 1280403449,
+  "webHTMLSha256": "5f2b2dd67a20c34d58e8f67673a9868bb445e895ae3d96d44eab7680bfba70f1",
   "largest": [
     {
       "path": "index.html",

@@ -48,7 +48,7 @@ if(shot)await snap('squad-form',t0,.5);if(shot)await snap('squad-flash',t0,.62);
  ok('분신이 진법 자리에 섬',i.units.filter(u=>u.kind==='hunter').every(u=>Math.hypot(u.x-i.slots[u.i].x,u.y-i.slots[u.i].y)<.3));
  const me=h.filter(x=>!x.summon&&x.kind!=='r952-shade'),tot=h.reduce((a,x)=>a+x.d,0),mine=me.reduce((a,x)=>a+x.d,0);console.log('  damage share: hunter',Math.round(mine),'squad',Math.round(tot-mine));}
 await waitT(t0,7.3);ok('③ 7초 뒤 해산',!(await I()).active);await sane('③');
-i=await I();ok('오류 0',i.errors===0);ok('R952-3 Dots 시트가 그려짐(등장 문·일제 사격 섬광·발동 아이콘)',i.stats.gateDraws>0&&i.stats.volleyDraws>0&&i.stats.iconDraws>0);console.log('  fx draws',JSON.stringify({gate:i.stats.gateDraws,volley:i.stats.volleyDraws,icon:i.stats.iconDraws,slash:i.stats.slashDraws,leave:i.stats.leaveDraws}));if(i.errors)console.log('  lastError',i.lastError);console.log(JSON.stringify(i.stats));
+i=await I();ok('오류 0',i.errors===0);ok('R952-3 Dots 시트가 그려짐(등장 문·일제 사격 섬광·발동 아이콘)',i.stats.gateDraws>0&&i.stats.volleyDraws>0&&i.stats.iconDraws>0);ok('R952-4 Dots 수정본이 그려짐(분신 발밑 깃털 고리·진법 선 조각)',i.stats.ringDraws>0&&i.stats.lineDraws>0);console.log('  fx draws',JSON.stringify({gate:i.stats.gateDraws,volley:i.stats.volleyDraws,icon:i.stats.iconDraws,slash:i.stats.slashDraws,leave:i.stats.leaveDraws}));if(i.errors)console.log('  lastError',i.lastError);console.log(JSON.stringify(i.stats));
 ok('치명 오류 없음',await p.evaluate(()=>!document.getElementById('fatal').textContent.trim()));
 if(free){await setup(8,1.6,3);const r=await p.evaluate(async([A,free])=>{const api=eval(A),s0=api.inspect().stats,p0={...s0.procs},t0=time;
   while(time-t0<free){await new Promise(r=>requestAnimationFrame(r));if(!(player.attackCD>0))basicAttack(true);}

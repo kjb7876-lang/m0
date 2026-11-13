@@ -1,0 +1,544 @@
+{
+ "at": "2026-11-13T04:42:57.296Z",
+ "url": "http://127.0.0.1:4410/m0/",
+ "summary": {
+  "타격": {
+   "n": 5,
+   "devSpreadBefore": 6.9,
+   "devSpreadAfter": 2.6,
+   "beforeMed": -40.5,
+   "beforeSpread": 6.9,
+   "afterMed": -38.7,
+   "afterSpread": 2.6,
+   "silentAfter": 0
+  },
+  "적피격": {
+   "n": 5,
+   "devSpreadBefore": 4.2,
+   "devSpreadAfter": 1.8,
+   "beforeMed": -41.4,
+   "beforeSpread": 4.2,
+   "afterMed": -40.8,
+   "afterSpread": 1.8,
+   "silentAfter": 0
+  },
+  "영웅피격": {
+   "n": 5,
+   "devSpreadBefore": 8.7,
+   "devSpreadAfter": 4.7,
+   "beforeMed": -44.1,
+   "beforeSpread": 8.7,
+   "afterMed": -36.2,
+   "afterSpread": 4.7,
+   "silentAfter": 0
+  },
+  "스킬": {
+   "n": 5,
+   "devSpreadBefore": 16.1,
+   "devSpreadAfter": 0.9,
+   "beforeMed": -37.7,
+   "beforeSpread": 14.6,
+   "afterMed": -35.9,
+   "afterSpread": 1.8,
+   "silentAfter": 0
+  },
+  "투사체": {
+   "n": 4,
+   "devSpreadBefore": 0.7,
+   "devSpreadAfter": 5.3,
+   "beforeMed": -43.3,
+   "beforeSpread": 0.7,
+   "afterMed": -41.7,
+   "afterSpread": 5.3,
+   "silentAfter": 0
+  },
+  "보스": {
+   "n": 6,
+   "devSpreadBefore": 10.6,
+   "devSpreadAfter": 0.5,
+   "beforeMed": -38.8,
+   "beforeSpread": 12.6,
+   "afterMed": -37.1,
+   "afterSpread": 5,
+   "silentAfter": 0
+  },
+  "일반몹": {
+   "n": 5,
+   "devSpreadBefore": 5.6,
+   "devSpreadAfter": 2.3,
+   "beforeMed": -40.2,
+   "beforeSpread": 4.6,
+   "afterMed": -42.5,
+   "afterSpread": 2.7,
+   "silentAfter": 0
+  },
+  "패시브·회복": {
+   "n": 1,
+   "devSpreadBefore": 0,
+   "devSpreadAfter": 0,
+   "beforeMed": -39.4,
+   "beforeSpread": 0,
+   "afterMed": -40.2,
+   "afterSpread": 0,
+   "silentAfter": 0
+  },
+  "UI·보상": {
+   "n": 5,
+   "devSpreadBefore": 12.1,
+   "devSpreadAfter": 4.4,
+   "beforeMed": -39.6,
+   "beforeSpread": 12.1,
+   "afterMed": -38.9,
+   "afterSpread": 4.4,
+   "silentAfter": 0
+  },
+  "환경": {
+   "n": 1,
+   "devSpreadBefore": 0,
+   "devSpreadAfter": 0,
+   "beforeMed": -43.4,
+   "beforeSpread": 0,
+   "afterMed": -42.8,
+   "afterSpread": 0,
+   "silentAfter": 0
+  }
+ },
+ "table": [
+  {
+   "cat": "타격",
+   "kind": "r546Atk_hwando",
+   "target": -38,
+   "before": -42.26485667654441,
+   "after": -40.141285720122866,
+   "devBefore": -4.264856676544412,
+   "devAfter": -2.141285720122866
+  },
+  {
+   "cat": "타격",
+   "kind": "r546Atk_slayer",
+   "target": -38,
+   "before": -36.011872100879934,
+   "after": -37.544789429654614,
+   "devBefore": 1.988127899120066,
+   "devAfter": 0.45521057034538615
+  },
+  {
+   "cat": "타격",
+   "kind": "r546Atk_neon",
+   "target": -38,
+   "before": -42.8891799473372,
+   "after": -39.4525741423218,
+   "devBefore": -4.8891799473371975,
+   "devAfter": -1.4525741423218008
+  },
+  {
+   "cat": "타격",
+   "kind": "r787Atk_hunter",
+   "target": -38,
+   "before": -40.52117324508546,
+   "after": -38.65165107366583,
+   "devBefore": -2.521173245085457,
+   "devAfter": -0.6516510736658319
+  },
+  {
+   "cat": "타격",
+   "kind": "swMetal",
+   "target": -38,
+   "before": -36.80171627543551,
+   "after": -37.62985053805176,
+   "devBefore": 1.1982837245644902,
+   "devAfter": 0.3701494619482375
+  },
+  {
+   "cat": "적피격",
+   "kind": "r785Hit_hwando",
+   "target": -41,
+   "before": -41.39552845328454,
+   "after": -39.60321130720649,
+   "devBefore": -0.3955284532845411,
+   "devAfter": 1.396788692793507
+  },
+  {
+   "cat": "적피격",
+   "kind": "r785Hit_gunner",
+   "target": -41,
+   "before": -44.2192195228795,
+   "after": -40.812016216507715,
+   "devBefore": -3.2192195228794986,
+   "devAfter": 0.18798378349228528
+  },
+  {
+   "cat": "적피격",
+   "kind": "r785HitBig_slayer",
+   "target": -41,
+   "before": -39.992726722477165,
+   "after": -41.00777902623283,
+   "devBefore": 1.0072732775228346,
+   "devAfter": -0.007779026232832109
+  },
+  {
+   "cat": "적피격",
+   "kind": "r785Kill",
+   "target": -41,
+   "before": -40.48287978205424,
+   "after": -39.16965986357489,
+   "devBefore": 0.5171202179457595,
+   "devAfter": 1.8303401364251073
+  },
+  {
+   "cat": "적피격",
+   "kind": "r785Hit_michaela",
+   "target": -41,
+   "before": -41.584254709195136,
+   "after": -40.82731078685663,
+   "devBefore": -0.584254709195136,
+   "devAfter": 0.1726892131433715
+  },
+  {
+   "cat": "영웅피격",
+   "kind": "r544Hurt_hwando",
+   "target": -37,
+   "before": -43.32458091598039,
+   "after": -36.22060483845064,
+   "devBefore": -6.324580915980391,
+   "devAfter": 0.7793951615493597
+  },
+  {
+   "cat": "영웅피격",
+   "kind": "r544Hurt_slayer",
+   "target": -37,
+   "before": -44.878813429481404,
+   "after": -36.55152100788163,
+   "devBefore": -7.878813429481404,
+   "devAfter": 0.4484789921183676
+  },
+  {
+   "cat": "영웅피격",
+   "kind": "r544Hurt_neon",
+   "target": -37,
+   "before": -44.64968167489919,
+   "after": -36.193244071027934,
+   "devBefore": -7.649681674899192,
+   "devAfter": 0.8067559289720663
+  },
+  {
+   "cat": "영웅피격",
+   "kind": "hurt",
+   "target": -37,
+   "before": -44.14493464049063,
+   "after": -40.92514481990318,
+   "devBefore": -7.144934640490632,
+   "devAfter": -3.9251448199031813
+  },
+  {
+   "cat": "영웅피격",
+   "kind": "swShield",
+   "target": -37,
+   "before": -36.22331644190642,
+   "after": -36.24416320418406,
+   "devBefore": 0.7766835580935805,
+   "devAfter": 0.755836795815938
+  },
+  {
+   "cat": "스킬",
+   "kind": "r787Sk_hwando_w",
+   "target": -37.5,
+   "before": -34.518951843018456,
+   "after": -35.90710010020371,
+   "devBefore": 2.9810481569815437,
+   "devAfter": 1.5928998997962935
+  },
+  {
+   "cat": "스킬",
+   "kind": "r787Sk_neon_r",
+   "target": -37.5,
+   "before": -35.40783746965681,
+   "after": -35.73743681758496,
+   "devBefore": 2.092162530343188,
+   "devAfter": 1.7625631824150432
+  },
+  {
+   "cat": "스킬",
+   "kind": "r546Sp_lauren",
+   "target": -37.5,
+   "before": -37.675020281247185,
+   "after": -36.225733401126725,
+   "devBefore": -0.1750202812471855,
+   "devAfter": 1.2742665988732753
+  },
+  {
+   "cat": "스킬",
+   "kind": "r546Ego",
+   "target": -37.5,
+   "before": -41.03343288524876,
+   "after": -36.60763281728626,
+   "devBefore": -3.5334328852487573,
+   "devAfter": 0.8923671827137412
+  },
+  {
+   "cat": "스킬",
+   "kind": "rc141TimeAwakening5",
+   "target": -36,
+   "before": -49.126904978423326,
+   "after": -34.81166628356148,
+   "devBefore": -13.126904978423326,
+   "devAfter": 1.188333716438521
+  },
+  {
+   "cat": "투사체",
+   "kind": "r546EnemyShot",
+   "target": -43,
+   "before": -43.48581786247789,
+   "after": -44.36623167871062,
+   "devBefore": -0.4858178624778873,
+   "devAfter": -1.3662316787106192
+  },
+  {
+   "cat": "투사체",
+   "kind": "swEnemyEnergy",
+   "target": -43,
+   "before": -43.33642976130241,
+   "after": -41.67159545079555,
+   "devBefore": -0.3364297613024121,
+   "devAfter": 1.3284045492044498
+  },
+  {
+   "cat": "투사체",
+   "kind": "swEnemyHeavy",
+   "target": -43,
+   "before": -42.82579491111748,
+   "after": -46.710153929650104,
+   "devBefore": 0.17420508888252328,
+   "devAfter": -3.7101539296501045
+  },
+  {
+   "cat": "투사체",
+   "kind": "swEnemyDark",
+   "target": -43,
+   "before": -43.45265619795655,
+   "after": -41.40626381788872,
+   "devBefore": -0.45265619795655,
+   "devAfter": 1.5937361821112788
+  },
+  {
+   "cat": "보스",
+   "kind": "r788BAtk_root",
+   "target": -38.5,
+   "before": -38.83148564234147,
+   "after": -37.50086734771621,
+   "devBefore": -0.3314856423414696,
+   "devAfter": 0.9991326522837909
+  },
+  {
+   "cat": "보스",
+   "kind": "r788BDie_balrog",
+   "target": -36.5,
+   "before": -35.91035195589486,
+   "after": -35.58499084363154,
+   "devBefore": 0.5896480441051395,
+   "devAfter": 0.9150091563684626
+  },
+  {
+   "cat": "보스",
+   "kind": "r788BHit_lucifer",
+   "target": -42,
+   "before": -42.436865511356814,
+   "after": -40.61729909544232,
+   "devBefore": -0.43686551135681384,
+   "devAfter": 1.3827009045576801
+  },
+  {
+   "cat": "보스",
+   "kind": "r789MAtk_spiderangel",
+   "target": -38.5,
+   "before": -37.89146795101442,
+   "after": -37.0729278544825,
+   "devBefore": 0.6085320489855803,
+   "devAfter": 1.4270721455174993
+  },
+  {
+   "cat": "보스",
+   "kind": "r761BossRain",
+   "target": -38.5,
+   "before": -45.7648610178523,
+   "after": -37.38289739577626,
+   "devBefore": -7.264861017852297,
+   "devAfter": 1.1171026042237386
+  },
+  {
+   "cat": "보스",
+   "kind": "boss",
+   "target": -38.5,
+   "before": -48.507763278387024,
+   "after": -37.07445988069198,
+   "devBefore": -10.007763278387024,
+   "devAfter": 1.4255401193080175
+  },
+  {
+   "cat": "일반몹",
+   "kind": "r955Hit_spider",
+   "target": -46,
+   "before": -37.43649974070467,
+   "after": -42.531317997566774,
+   "devBefore": 8.563500259295331,
+   "devAfter": 3.4686820024332263
+  },
+  {
+   "cat": "일반몹",
+   "kind": "r955Die_ghoul",
+   "target": -43.5,
+   "before": -40.1617575652313,
+   "after": -41.096718817495855,
+   "devBefore": 3.338242434768702,
+   "devAfter": 2.403281182504145
+  },
+  {
+   "cat": "일반몹",
+   "kind": "r955Atk_boneguard",
+   "target": -45,
+   "before": -39.56046540392423,
+   "after": -42.38556371932046,
+   "devBefore": 5.439534596075767,
+   "devAfter": 2.6144362806795414
+  },
+  {
+   "cat": "일반몹",
+   "kind": "r954Hit_bulmyeongwi",
+   "target": -46,
+   "before": -41.89050070491474,
+   "after": -43.79466646918606,
+   "devBefore": 4.109499295085257,
+   "devAfter": 2.205333530813938
+  },
+  {
+   "cat": "일반몹",
+   "kind": "r543Growl",
+   "target": -45,
+   "before": -42.03560551631406,
+   "after": -43.821211965080096,
+   "devBefore": 2.9643944836859433,
+   "devAfter": 1.1787880349199042
+  },
+  {
+   "cat": "패시브·회복",
+   "kind": "swHeal",
+   "target": -42,
+   "before": -39.4237627560153,
+   "after": -40.20871793592673,
+   "devBefore": 2.5762372439847,
+   "devAfter": 1.7912820640732718
+  },
+  {
+   "cat": "UI·보상",
+   "kind": "r544Click",
+   "target": -40,
+   "before": -49.286465863277684,
+   "after": -42.79465560337429,
+   "devBefore": -9.286465863277684,
+   "devAfter": -2.794655603374288
+  },
+  {
+   "cat": "UI·보상",
+   "kind": "r546Clear",
+   "target": -40,
+   "before": -39.56310856229132,
+   "after": -38.90010384992344,
+   "devBefore": 0.436891437708681,
+   "devAfter": 1.0998961500765603
+  },
+  {
+   "cat": "UI·보상",
+   "kind": "r546Upgrade",
+   "target": -40,
+   "before": -37.23485319390088,
+   "after": -38.754904307406626,
+   "devBefore": 2.765146806099118,
+   "devAfter": 1.2450956925933738
+  },
+  {
+   "cat": "UI·보상",
+   "kind": "pickup",
+   "target": -40,
+   "before": -37.56443514333874,
+   "after": -38.927259352505445,
+   "devBefore": 2.4355648566612587,
+   "devAfter": 1.0727406474945553
+  },
+  {
+   "cat": "UI·보상",
+   "kind": "r541Door",
+   "target": -40,
+   "before": -41.65589766001443,
+   "after": -38.42657153766898,
+   "devBefore": -1.655897660014432,
+   "devAfter": 1.573428462331023
+  },
+  {
+   "cat": "환경",
+   "kind": "r543Thunder",
+   "target": -44,
+   "before": -43.42409001527924,
+   "after": -42.791697448209476,
+   "devBefore": 0.5759099847207594,
+   "devAfter": 1.2083025517905241
+  }
+ ],
+ "watch": {
+  "off": {
+   "total": 4,
+   "low": 3,
+   "heroStolen": 0,
+   "heroStarted": 7
+  },
+  "on": {
+   "total": 4,
+   "low": 2,
+   "heroStolen": 0,
+   "heroStarted": 8
+  }
+ },
+ "targets": {
+  "영웅피격/hurt": -37,
+  "일반몹/hit": -46,
+  "일반몹/die": -43.5,
+  "일반몹/atk": -45,
+  "보스/hit": -42,
+  "보스/die": -36.5,
+  "보스/atk": -38.5,
+  "적피격/hit": -41,
+  "투사체/shot": -43,
+  "타격/atk": -38,
+  "스킬/tick": -43,
+  "스킬/awake": -36,
+  "스킬/cast": -37.5,
+  "패시브·회복/heal": -42,
+  "UI·보상/ui": -40,
+  "환경/env": -44
+ },
+ "comfort": {
+  "off": {
+   "conditioned": 49,
+   "cacheHits": 5,
+   "cacheBytes": 1551524,
+   "evictions": 37,
+   "played": 54,
+   "throttled": 58,
+   "stolen": 2,
+   "mutedWhileLoading": 1,
+   "activePeak": 4,
+   "conditioningFallback": 0
+  },
+  "on": {
+   "conditioned": 48,
+   "cacheHits": 6,
+   "cacheBytes": 1442508,
+   "evictions": 36,
+   "played": 54,
+   "throttled": 0,
+   "stolen": 1,
+   "mutedWhileLoading": 1,
+   "activePeak": 4,
+   "conditioningFallback": 0
+  }
+ }
+}

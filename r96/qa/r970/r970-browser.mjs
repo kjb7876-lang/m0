@@ -23,8 +23,8 @@ const msg=await p.locator('#codeMessage').textContent();ok(/Lv\.30/.test(msg)&&/
 await p.screenshot({path:OUT+'/r970-active.png'});
 await p.locator('#r970Level').fill('45');await p.locator('#r970LevelApply').click();await p.waitForTimeout(150);
 const c=await P();ok(c.level===45&&c.points===a.points+15,'레벨 적용 단추로 45 → +15',c);
-await p.locator('#r970Level').fill('500');await p.locator('#r970Level').press('Enter');await p.waitForTimeout(150);
-const d=await P();ok(d.level===99&&d.points===c.points+54,'500 은 99 로 잘림(Enter)',d);
+await p.locator('#r970Level').fill('1000');await p.locator('#r970Level').press('Enter');await p.waitForTimeout(150);
+const d=await P();ok(d.level===777&&d.points===c.points+732,'1000 은 만렙 777 로 잘림(Enter, R1011)',d);
 await p.evaluate(()=>closePanel(true));
 const go=await p.evaluate(async()=>__STORYWORLD_CHEAT777__.go('dist01','STORY'));
 await p.waitForFunction(()=>!loading,null,{timeout:120000}).catch(()=>{});
@@ -32,11 +32,11 @@ await p.evaluate(()=>{const d=window.__STORYWORLD_PROGRESSION_R71__?.difficultyS
 await p.evaluate(async()=>{const d=window.__STORYWORLD_PROGRESSION_R71__?.difficultyState?.();if(d?.open)await window.__STORYWORLD_PROGRESSION_R71__.confirmDifficulty();});
 await p.waitForFunction(()=>!loading&&zone==='dist01',null,{timeout:120000}).catch(()=>{});await skip();
 const capped=()=>p.evaluate(()=>UPGRADES.filter(u=>!u.hero).every(u=>Number(player.upgrades[u.id]||0)>=u.max));
-const e=await P();ok(e.zone==='dist01'&&e.level===99&&!(await capped()),'지역 이동 뒤에도 Lv.99 유지 · 기술을 상한으로 강제 채우지 않음(자동 스킬레벨업이 포인트를 쓰는 건 일반 진행과 같음)',{go,e});
+const e=await P();ok(e.zone==='dist01'&&e.level===777&&!(await capped()),'지역 이동 뒤에도 Lv.777 유지 · 기술을 상한으로 강제 채우지 않음(자동 스킬레벨업이 포인트를 쓰는 건 일반 진행과 같음)',{go,e});
 // 저장·불러오기 사이에 자동 스킬레벨업이 포인트를 쓰지 않게 남은 포인트를 0 으로 둔 채 비교한다(검사 도구 안에서만)
 await p.evaluate(()=>{player.points=0;});const keepUp=(await P()).up,keepPts=0;const saved=await p.evaluate(()=>saveGame(false));
 await p.evaluate(()=>{player.level=2;});await p.evaluate(async()=>__STORYWORLD_CHEAT777__.load());await p.waitForFunction(()=>!loading,null,{timeout:120000}).catch(()=>{});
-const f=await P();ok(saved&&f.level===99&&f.up===keepUp&&f.points===keepPts&&f.r970.chosen===99,'777 저장·불러오기 뒤 레벨·기술·포인트가 저장 때 그대로',{f,keepUp,keepPts});
+const f=await P();ok(saved&&f.level===777&&f.up===keepUp&&f.points===keepPts&&f.r970.chosen===777,'777 저장·불러오기 뒤 레벨·기술·포인트가 저장 때 그대로',{f,keepUp,keepPts});
 const left=await p.evaluate(async()=>__STORYWORLD_CHEAT777__.leave());await p.waitForFunction(()=>!loading,null,{timeout:120000}).catch(()=>{});
 const g=await P();ok(left&&!g.active&&g.level===before.level&&g.points===before.points&&g.r970.chosen===null,'일반 진행 복귀 → 원래 레벨·포인트',g);
 ok(errs.length===0,'페이지 오류 없음',errs);

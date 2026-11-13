@@ -9621,6 +9621,20 @@
     "assets/r975/sfx/manifest.json",
     "hwando-ilseom-r975.js",
     "projectile-sheets-r912.js",
+    "assets/r976/ash-flakes.webp",
+    "assets/r976/index.json",
+    "assets/r976/portal-teal.webp",
+    "assets/r976/root-tendril.webp",
+    "assets/r976/tendrils-blood.webp",
+    "samong-p-art-r976.js",
+    "assets/r993/sfx/bmg-rain-1.ogg",
+    "assets/r993/sfx/boss-dark-attack.ogg",
+    "assets/r993/sfx/index.json",
+    "assets/r993/sfx/seoha-awake.ogg",
+    "sfx-mix-r993.js",
+    "survival-samong-r1006.js",
+    "assets/r952/hs05-feather-ring.webp",
+    "assets/r952/hs04-flow-line.webp",
     "cinema-finish-r1008.js"
   ],
   "mediaPaths": [
@@ -10696,5 +10710,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "9721a8dc052654b06fe166038cf3227f84907fe6b9147df2475febb3f5d5a130"
+  "runtimeManifestSHA256": "46bb82d2f89772757622e117887ebbd842a4c7d7175eeb561868ab4fff816658"
 }
