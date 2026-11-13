@@ -1,0 +1,815 @@
+{
+ "round": "R1018",
+ "request": "CX-0082MV",
+ "files": [
+  {
+   "dots": "012_u205-e3-new",
+   "enemies": [
+    "u205-e3"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV 추가1 012_u205-e3-new/u205-e3-new-walk-down.png",
+   "sourceSha256": "7e2dacbdaeeef4829c8e0de85265074c1c87248fc1df7cefdcc0daef3629931f",
+   "toneGain": [
+    0.828,
+    0.864,
+    0.892
+   ],
+   "path": "assets/r1018/move/u205-e3-new-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 41894,
+   "sha256": "2989baa67adbcdd203693ab50bbea57aecd1c2c3dcaa702115dcb562f58a9ba2",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "012_u205-e3-new",
+   "enemies": [
+    "u205-e3"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV 추가1 012_u205-e3-new/u205-e3-new-walk-up.png",
+   "sourceSha256": "678cf7370043ae1a5e676e0aa03f022299da97def962c6bf606dd5ae607a861f",
+   "toneGain": [
+    0.828,
+    0.864,
+    0.892
+   ],
+   "path": "assets/r1018/move/u205-e3-new-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 39424,
+   "sha256": "34f7b2ff394d67936329d4bc6edf0f3ba58aea11ee8ebd2c67936c07b4d93790",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "019_snow-lurker-walker-v1",
+   "enemies": [
+    "b09-c1"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV 추가1 019_snow-lurker-walker-v1/snow-lurker-walker-v1-walk-down.png",
+   "sourceSha256": "4336be1d73c75c160954d16aa2a869fc55dbaaccaa0df83997d9c8b72fa6af5a",
+   "toneGain": [
+    1.004,
+    1.025,
+    1.051
+   ],
+   "path": "assets/r1018/move/snow-lurker-walker-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 66654,
+   "sha256": "6bd8c264b09d3ea2e5c6e9aef6dd605541ba5f40d7216f802df4771766f2c754",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "019_snow-lurker-walker-v1",
+   "enemies": [
+    "b09-c1"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV 추가1 019_snow-lurker-walker-v1/snow-lurker-walker-v1-walk-up.png",
+   "sourceSha256": "bac160e7b535f246e13a2f70c8dbd6296d6e4d19df064f7ca1007697cb607a8b",
+   "toneGain": [
+    1.004,
+    1.025,
+    1.051
+   ],
+   "path": "assets/r1018/move/snow-lurker-walker-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 63498,
+   "sha256": "4f11204317e4c86ebea646c6e11a5c2527bdb3907b7d4ab60276e299ad2eb565",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "025_swamp-goat-darkgreen-v1",
+   "enemies": [
+    "dist02-h1"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV 추가1 025_swamp-goat-darkgreen-v1/swamp-goat-darkgreen-v1-walk-down.png",
+   "sourceSha256": "6daaacc4f68d018a1d95eea0382df75557fb92edca745e8a149626fbef14897d",
+   "toneGain": [
+    0.979,
+    0.996,
+    0.898
+   ],
+   "path": "assets/r1018/move/swamp-goat-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 87734,
+   "sha256": "35f0a9af858409d240de171875f8efd2ebd1816746f1c335e0202aedd729909f",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "025_swamp-goat-darkgreen-v1",
+   "enemies": [
+    "dist02-h1"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV 추가1 025_swamp-goat-darkgreen-v1/swamp-goat-darkgreen-v1-walk-up.png",
+   "sourceSha256": "180ec54c759d158c4e88ddb87c51d0972319d48e6cbcc9216d932dcaf03823f9",
+   "toneGain": [
+    0.979,
+    0.996,
+    0.898
+   ],
+   "path": "assets/r1018/move/swamp-goat-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 85612,
+   "sha256": "aa57806cd9f522335d97d9d8635ab500c330bb3dcbcc450131dc23e12680bea5",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "026_m060",
+   "enemies": [
+    "c103-e3"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV 추가1 026_m060/m060-walk-down.png",
+   "sourceSha256": "8ba8783affcf237e6674b9da73335cdf2230ec57e8273fa8a03829efb7dc8527",
+   "toneGain": [
+    0.908,
+    0.889,
+    0.916
+   ],
+   "path": "assets/r1018/move/m060-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 32968,
+   "sha256": "9806983c4627b56068bd23540617a55bcdb5ff411fd24ab832dcdb3c57fda884",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "026_m060",
+   "enemies": [
+    "c103-e3"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV 추가1 026_m060/m060-walk-up.png",
+   "sourceSha256": "ec2bd5a713846308d60c368f8f408eb5d4d209c8b79eb87ce136661751c8423d",
+   "toneGain": [
+    0.908,
+    0.889,
+    0.916
+   ],
+   "path": "assets/r1018/move/m060-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 32336,
+   "sha256": "a5e28dcdbd9156923007ac76d9b700b4753d381795b959e071e06daaf5d55f44",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "030_u204-mech-03-v1",
+   "enemies": [
+    "u204-e3"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV 추가1 030_u204-mech-03-v1/u204-mech-03-v1-walk-down.png",
+   "sourceSha256": "9ca96b7a56e612019ef369a454c21531e30cd8986225fb38e63d632afd3a1c50",
+   "toneGain": [
+    0.972,
+    0.96,
+    0.968
+   ],
+   "path": "assets/r1018/move/u204-mech-03-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 73584,
+   "sha256": "52b5cc286dc6d1e3e6bdb573ce53ebbc8715b411d3bd123d8799ff73eabb5ec6",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "030_u204-mech-03-v1",
+   "enemies": [
+    "u204-e3"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV 추가1 030_u204-mech-03-v1/u204-mech-03-v1-walk-up.png",
+   "sourceSha256": "2e70bb3002ef6acf9fc040f514b6014a56a5c614523915df3506fd2025dcc67f",
+   "toneGain": [
+    0.972,
+    0.96,
+    0.968
+   ],
+   "path": "assets/r1018/move/u204-mech-03-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 66996,
+   "sha256": "e1bc74c6a1b68535de07bb8bd32fb5351bad9724b507434f92bd063471eb6854",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "041_blackmarket-suspect-v1",
+   "enemies": [
+    "a10-o1"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV 추가1 041_blackmarket-suspect-v1/blackmarket-suspect-v1-walk-down.png",
+   "sourceSha256": "fd42da6beaf709e12155253af6c0b0961001abb32c51606f19d274eb609b1055",
+   "toneGain": [
+    0.978,
+    1.0,
+    1.016
+   ],
+   "path": "assets/r1018/move/blackmarket-suspect-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 42192,
+   "sha256": "55189c1d235b0b32dfd01e8a81c8b8a319548652f32538347a68940d8f699092",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "041_blackmarket-suspect-v1",
+   "enemies": [
+    "a10-o1"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV 추가1 041_blackmarket-suspect-v1/blackmarket-suspect-v1-walk-up.png",
+   "sourceSha256": "9699402edb96e7bf4db072d7e4b0241a7e0fa8eb993b0b7314d97b62f8ccfad5",
+   "toneGain": [
+    0.978,
+    1.0,
+    1.016
+   ],
+   "path": "assets/r1018/move/blackmarket-suspect-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 41266,
+   "sha256": "13bcd47f3faad8fcca1111f09092c32c7d9eb840582ffc1d332e1f0371ddc4f7",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "054_clockwork-sentinel",
+   "enemies": [
+    "kair-academy-wave-1",
+    "kair-academy-wave-2",
+    "kair-academy-wave-3",
+    "kair-academy-wave-4",
+    "kair-academy-wave-5",
+    "kair-academy-wave-6"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV 추가1 054_clockwork-sentinel/clockwork-sentinel-walk-down.png",
+   "sourceSha256": "a19a85260b0def10f907aec47971cf02b7889d71d8b855e319f5f1927277d6bb",
+   "toneGain": [
+    0.801,
+    0.836,
+    0.836
+   ],
+   "path": "assets/r1018/move/clockwork-sentinel-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 55582,
+   "sha256": "eac14eb492b9e55f83d7c62ce98d4d92c2d8adc7ec09034132b4f1e70b3575e9",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "054_clockwork-sentinel",
+   "enemies": [
+    "kair-academy-wave-1",
+    "kair-academy-wave-2",
+    "kair-academy-wave-3",
+    "kair-academy-wave-4",
+    "kair-academy-wave-5",
+    "kair-academy-wave-6"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV 추가1 054_clockwork-sentinel/clockwork-sentinel-walk-up.png",
+   "sourceSha256": "3999a96d106278596148ee16aec6072e22a6c038583bb44efd7a711d49d48f6f",
+   "toneGain": [
+    0.801,
+    0.836,
+    0.836
+   ],
+   "path": "assets/r1018/move/clockwork-sentinel-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 52654,
+   "sha256": "391d9ab23b9d51933a0f0ef7af364311a336762f2ebe5c3a168e1871d80bde1f",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "055_m044",
+   "enemies": [
+    "l305-e2"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV 추가1 055_m044/m044-walk-down.png",
+   "sourceSha256": "5b32c9e9493436570042a4da22f46781548d57d78a21298c6e729996b07a52bd",
+   "toneGain": [
+    0.913,
+    0.808,
+    0.807
+   ],
+   "path": "assets/r1018/move/m044-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 29690,
+   "sha256": "91bca01ec9ed698a2df02e19c445ff7a953ba74e69377213271ce801e299ce00",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "055_m044",
+   "enemies": [
+    "l305-e2"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV 추가1 055_m044/m044-walk-up.png",
+   "sourceSha256": "40375340c5983387c5022736d22e3c12c72e1f8123575c49b77d0ccd1c991537",
+   "toneGain": [
+    0.913,
+    0.808,
+    0.807
+   ],
+   "path": "assets/r1018/move/m044-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 27710,
+   "sha256": "117eee43203f026ac49113a4097a07607e2493cbbd01794d4d023b2716f37c65",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "058_signal-golem",
+   "enemies": [
+    "murder04-e2"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV 추가1 058_signal-golem/signal-golem-walk-down.png",
+   "sourceSha256": "5c2493cbdfbc6763779f1530cc3cecc6c40a3d802e07d7a971100c555066cc61",
+   "toneGain": [
+    0.65,
+    0.724,
+    0.723
+   ],
+   "path": "assets/r1018/move/signal-golem-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 49488,
+   "sha256": "1a183d95e6b72ba39a0621654c0262f7af738314edb6de7a356662139a9e77a7",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "058_signal-golem",
+   "enemies": [
+    "murder04-e2"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV 추가1 058_signal-golem/signal-golem-walk-up.png",
+   "sourceSha256": "0612180146ac18fb0921b032ce0cc46033f543c2dc795506b5e8a33dc9b69c3d",
+   "toneGain": [
+    0.65,
+    0.724,
+    0.723
+   ],
+   "path": "assets/r1018/move/signal-golem-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 51676,
+   "sha256": "a6f9c65202ec5422285191a635e0cd00bed4e902fc59b5b35c2cff1df71b7c5a",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "066_L128",
+   "enemies": [
+    "c101-e1"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV 추가1 066_L128/L128-walk-down.png",
+   "sourceSha256": "0606c86380a1a460a96badbc273c7df2cee55d4669e04955cd77f9c7a8e78b9b",
+   "toneGain": [
+    0.755,
+    0.761,
+    0.767
+   ],
+   "path": "assets/r1018/move/l128-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 47226,
+   "sha256": "e6b14ac1fb42c74b1ac76e8a7e1d9945bd52cb43b03af13a1808af506259226c",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "066_L128",
+   "enemies": [
+    "c101-e1"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV 추가1 066_L128/L128-walk-up.png",
+   "sourceSha256": "b784d5c5b9eea071f40bc1b1bd49908588be6d42af4c66e8ddc6fb18d0be67db",
+   "toneGain": [
+    0.755,
+    0.761,
+    0.767
+   ],
+   "path": "assets/r1018/move/l128-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 49328,
+   "sha256": "4df33c1068e91c4c88f2c9cff12a8f90ddee7f48532b5c263d20fa8f39f980cd",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "066_censer-priest",
+   "enemies": [
+    "c101-e2"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV 추가1 066_censer-priest/censer-priest-walk-down.png",
+   "sourceSha256": "d3dccaf81d0a2356216169223e1a249e02ef3984118fa7d7582bf035b83860d1",
+   "toneGain": [
+    0.871,
+    0.874,
+    0.837
+   ],
+   "path": "assets/r1018/move/censer-priest-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 54272,
+   "sha256": "9160a5e5fa304ecbe6760423ab1afbf566f6615dd3b1cfc6d33a06498331ea1f",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "066_censer-priest",
+   "enemies": [
+    "c101-e2"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV 추가1 066_censer-priest/censer-priest-walk-up.png",
+   "sourceSha256": "2d38abddefff22992e943e1a404274cf1fc326711e7a00ed8ddff18f0368770b",
+   "toneGain": [
+    0.871,
+    0.874,
+    0.837
+   ],
+   "path": "assets/r1018/move/censer-priest-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 49918,
+   "sha256": "a9b024a6234f92d2ab9c8afaa054810c09d128c92ea4e53ecb77a34d455fb0ae",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "new_hexagram-experiment-m031-v1",
+   "enemies": [
+    "b08-v1"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV 추가1 new_hexagram-experiment-m031-v1/hexagram-experiment-m031-v1-walk-down.png",
+   "sourceSha256": "ba48bdd29b526a14696b25a4f693f467af808117373e57c882f58eab973f31a1",
+   "toneGain": [
+    0.823,
+    0.846,
+    0.839
+   ],
+   "path": "assets/r1018/move/hexagram-experiment-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 24958,
+   "sha256": "b2cc6250b11cb1dac185d697f02da8dafdbba85cd69713cc6c5daee71f4ad961",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "new_hexagram-experiment-m031-v1",
+   "enemies": [
+    "b08-v1"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV 추가1 new_hexagram-experiment-m031-v1/hexagram-experiment-m031-v1-walk-up.png",
+   "sourceSha256": "17c01fafbdadd7a3784b3477f8e22484a3677922c0812fa05bbe7d3a87bccb56",
+   "toneGain": [
+    0.823,
+    0.846,
+    0.839
+   ],
+   "path": "assets/r1018/move/hexagram-experiment-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 26570,
+   "sha256": "1f2e9f86a215107c73663349bce15eba90fe89c3b203da32bbb1cf30b10edf1b",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "062_u206-mech-01-v1",
+   "enemies": [
+    "u206-e1"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV 추가1 062_u206-mech-01-v1/u206-mech-01-v1-walk-down.png",
+   "sourceSha256": "e8124809674c328a538b6740b6c054f532841fd865f2f443e31e309f7fe75701",
+   "toneGain": [
+    0.949,
+    0.983,
+    1.02
+   ],
+   "path": "assets/r1018/move/u206-mech-01-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 62070,
+   "sha256": "4233e271624ac4ba3d4e4cb6d05a82408a84d06dbe25352218e3258549e79e1b",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "062_u206-mech-01-v1",
+   "enemies": [
+    "u206-e1"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV 추가1 062_u206-mech-01-v1/u206-mech-01-v1-walk-up.png",
+   "sourceSha256": "ad81ae241187ec4dd584fc5cf0f7408e4a56c12416678d4ae9380ed91d52fdfe",
+   "toneGain": [
+    0.949,
+    0.983,
+    1.02
+   ],
+   "path": "assets/r1018/move/u206-mech-01-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 60668,
+   "sha256": "5cc2acee7819ce99bfef764cead8da0c1235163f5a045483a021de4b9d6b7d06",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "063_u206-mech-02-v1",
+   "enemies": [
+    "u206-e2"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV 추가1 063_u206-mech-02-v1/u206-mech-02-v1-walk-down.png",
+   "sourceSha256": "9e121cf80c52e4fd74cb2dab44aa9a0a2e58a872f937a895e8315c0b6907f240",
+   "toneGain": [
+    1.035,
+    1.026,
+    1.046
+   ],
+   "path": "assets/r1018/move/u206-mech-02-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 47170,
+   "sha256": "7a7c5a7eddd36533c40885d0ef838a0afb6d62defe1bd434cc80971570434c01",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "063_u206-mech-02-v1",
+   "enemies": [
+    "u206-e2"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV 추가1 063_u206-mech-02-v1/u206-mech-02-v1-walk-up.png",
+   "sourceSha256": "c6cb22327e6c73460535c32c85243c042b03c35f22a98351d90a2f5fe224f950",
+   "toneGain": [
+    1.035,
+    1.026,
+    1.046
+   ],
+   "path": "assets/r1018/move/u206-mech-02-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 46138,
+   "sha256": "bbf669475115972572423133515087a8841d1c80b3ee7df2bbf3f2c16d931db1",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "049_living-trash-v1",
+   "enemies": [
+    "b02-b1",
+    "b02-o1"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV 추가1 049_living-trash-v1/living-trash-v1-walk-down.png",
+   "sourceSha256": "d40b5405402be156726d4961b22b4415b7319d7415cb32993623f1a922aa81ae",
+   "toneGain": [
+    0.92,
+    0.928,
+    0.888
+   ],
+   "path": "assets/r1018/move/living-trash-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 57708,
+   "sha256": "e546f56809ce668acc8cc96b4c6e38e51959ce0a36746d0e2c3365e0158bca71",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "049_living-trash-v1",
+   "enemies": [
+    "b02-b1",
+    "b02-o1"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV 추가1 049_living-trash-v1/living-trash-v1-walk-up.png",
+   "sourceSha256": "500b5b28e3f17ac6c4ca41ebfa00569d78ce011f6a6cea8953020caf3a5542a4",
+   "toneGain": [
+    0.92,
+    0.928,
+    0.888
+   ],
+   "path": "assets/r1018/move/living-trash-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 53480,
+   "sha256": "6837bf15a8fb2a3a1f795ef914ddcffebf510b61d9fa4b98ee3029fa9bcc776f",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "053_ash-mason",
+   "enemies": [
+    "h101-s1"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV 추가1 053_ash-mason/ash-mason-walk-down.png",
+   "sourceSha256": "4e82a67a0685a853570341f72c507f0463acf495017d6d26dc15adf2ab3ba27f",
+   "toneGain": [
+    0.944,
+    0.965,
+    0.967
+   ],
+   "path": "assets/r1018/move/ash-mason-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 53568,
+   "sha256": "09208bf4efe7635486819a1442501bd28b2da591ba7260941171eb69b0618a46",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "053_ash-mason",
+   "enemies": [
+    "h101-s1"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV 추가1 053_ash-mason/ash-mason-walk-up.png",
+   "sourceSha256": "87170c4f3747832bc9245c00d0c240224c936ad27a04aaa4f8b1fdc244616193",
+   "toneGain": [
+    0.944,
+    0.965,
+    0.967
+   ],
+   "path": "assets/r1018/move/ash-mason-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 53444,
+   "sha256": "54a8684b727353d30c7151b539f6482061bf974f6746f4a0849073a52923a288",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "065_electrode-machine-knight-v1",
+   "enemies": [
+    "b08-c1"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV 추가1 065_electrode-machine-knight-v1/electrode-machine-knight-v1-walk-down.png",
+   "sourceSha256": "f214a76d47a2265d999b325e1488a3cf0b089cb3bab61cee40e85d12263293c9",
+   "toneGain": [
+    1.066,
+    1.078,
+    1.106
+   ],
+   "path": "assets/r1018/move/electrode-machine-knight-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 61544,
+   "sha256": "2b3f5b1089e8841a3b84877dd429574b20096e6129452180693ac6053f66c482",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "065_electrode-machine-knight-v1",
+   "enemies": [
+    "b08-c1"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV 추가1 065_electrode-machine-knight-v1/electrode-machine-knight-v1-walk-up.png",
+   "sourceSha256": "d9519deedb52224e39f53c3abd1712404e0c3995915cbf6f13540e3432e8fd7f",
+   "toneGain": [
+    1.066,
+    1.078,
+    1.106
+   ],
+   "path": "assets/r1018/move/electrode-machine-knight-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 59274,
+   "sha256": "ad726fa5328bd58db37639d9b16940bb87d27a483651550c2bead72f078b7ec6",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "061_u205-e2-new · 061_war-machine-hound-v1",
+   "applied": false,
+   "why": "네발 몹(관리자 추적견·전쟁기계사냥개): 게임 안 실측에서 옆 그림(길게 누운 몸)에서 앞·뒤 그림으로 바뀔 때 덩치가 절반쯤으로 줄어 보이고 추적견 아래 그림은 비스듬한 3/4 — 심사 7.5 로 보류"
+  },
+  {
+   "dots": "066_cult-memory-orb-float-d1",
+   "applied": false,
+   "why": "기계화 복종 봉인구는 c101-e1·e2 를 흑장미 신도 두 종과 같이 쓴다(표는 nativeId 하나에 시트 한 벌) — 일부 개체만 바뀌면 어색해 이번엔 뺌"
+  },
+  {
+   "dots": "옆(side) 시트 전부",
+   "applied": false,
+   "why": "이 몹들은 게임에 4~8칸 옆 걷기가 이미 있어 옆은 지금 그림 그대로 둔다(요청은 옆모습이 없을 때만 생성)"
+  }
+ ]
+}
