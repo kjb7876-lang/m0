@@ -227,12 +227,12 @@ function installGray(){const DC=window.StoryPhase1?.DrawCommands,P=DC?.prototype
    if(st){for(const k of ['fillStyle','strokeStyle'])if(typeof st[k]==='string')st[k]=grayColour(st[k]);samongState.grayFills++;}}return r;};
  Object.defineProperty(P,'r111Gray',{value:true});return true;}
 // R977: 각성이 끝나도 흑백 사본을 버리지 않고 다음 각성에서 다시 쓴다(각성마다 사본 55~88장을 다시 만들고 GPU 에 다시 올려 첫 장면들이 100~280ms 걸렸음).
-//  버리는 때: 각성이 끝나고 100 게임초가 지남 · 다음 각성 시작 때 지역이 바뀌었거나 사본이 한도의 60% 를 넘음. 각성 도중에는 버리지 않는다.
+//  버리는 때: 각성이 끝나고 100 게임초가 지남 · 다음 각성 시작 때 지역이 바뀌었거나 사본이 한도의 85% 를 넘음(한 지역이 1,500만~2,100만 화소를 쓰므로 그보다 낮으면 매번 비운다). 각성 도중에는 버리지 않는다.
 let grayRoom=null,grayOff=0;
 const grayRoomKey=()=>{try{return typeof room!=='undefined'&&room?String(room.id??''):'';}catch(_){return '';}};
 function samongTick(){const on=samongOn();
  if(on!==samongState.on){samongState.on=on;
-  if(on){if(grayList.length&&(grayRoomKey()!==grayRoom||samongState.grayPixels>(lowFx()?12e6:28e6)*.6))grayReset();grayRoom=grayRoomKey();}
+  if(on){if(grayList.length&&(grayRoomKey()!==grayRoom||samongState.grayPixels>(lowFx()?12e6:28e6)*.85))grayReset();grayRoom=grayRoomKey();}
   else grayOff=time;}
  else if(!on&&grayList.length&&!(time-grayOff>=0&&time-grayOff<=100))grayReset();
  grayBudget=lowFx()?2e6:6e6;}

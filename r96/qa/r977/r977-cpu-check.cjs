@@ -4,7 +4,7 @@
 //  각성 동안 영웅·이펙트·투사체가 아닌 그림은 미리 만든 흑백 사본으로 바꿔 그리는데(R111), 각성이 끝나면 사본을 전부 버려서
 //  각성할 때마다 사본 55~88장을 다시 만들고(큰 것은 한 장 69ms) GPU 에도 17~22백만 화소를 다시 올렸다.
 //  고침: 각성이 끝나도 흑백 사본을 버리지 않고 다음 각성에서 다시 쓴다. 버리는 때는
-//   · 지역이 바뀐 뒤 다음 각성(그림이 달라짐) · 각성이 끝나고 100 게임초가 지남(메모리) · 다음 각성 시작 때 사본이 한도의 60% 를 넘음(새 그림 자리).
+//   · 지역이 바뀐 뒤 다음 각성(그림이 달라짐) · 각성이 끝나고 100 게임초가 지남(메모리) · 다음 각성 시작 때 사본이 한도의 85% 를 넘음(새 그림 자리).
 //  각성 중 흑백 그림·한도(일반 2,800만·저사양 1,200만 화소)·장면당 예산은 그대로. 화면에 보이는 것은 같다.
 const fs=require('fs'),path=require('path'),vm=require('vm');
 const ROOT=path.join(__dirname,'..','..'),SRC=path.join(ROOT,'client-source'),RT=path.join(ROOT,'runtime-text');
@@ -52,10 +52,12 @@ m=mk();a=IMG(400,300,'floor');m.set(true);m.tick();const z1=m.draw(a);m.set(fals
 m.set(true);m.tick();ok(m.freed()===1,'지역이 바뀐 뒤 각성하면 옛 사본을 버림');const z2=m.draw(a);ok(isGray(z2)&&z2!==z1,'새 지역에서는 새 사본');
 // 같은 각성 도중 지역이 바뀌는 경우는 예전 그대로(각성이 이어지는 동안 버리지 않음)
 m=mk();a=IMG(400,300,'floor');m.set(true);m.tick();const k1=m.draw(a);m.sb.room={id:'zoneB',enemies:[],props:[]};m.tick();ok(m.draw(a)===k1&&m.freed()===0,'각성 도중에는 사본을 버리지 않음');
-// 한도의 60% 를 넘게 들고 있으면 다음 각성 시작 때 비움(새 그림이 한도에 막혀 색으로 남지 않게)
-m=mk();m.set(true);const bigs=[];for(let i=0;i<4;i++){m.tick();const im=IMG(2400,2000,'big'+i);bigs.push(im);ok(isGray(m.draw(im)),'큰 그림 '+(i+1)+' 흑백(누적 '+(m.st().grayPixels/1e6).toFixed(1)+'M)');}
-m.set(false);m.tick();m.tick(10);m.set(true);m.tick();ok(m.freed()===4&&m.st().grayPixels===0,'사본이 한도의 60%(1,680만 화소)를 넘으면 다음 각성 시작 때 비움(버린 수 '+m.freed()+')');
+// 한도의 85% 를 넘게 들고 있으면 다음 각성 시작 때 비움(새 그림이 한도에 막혀 색으로 남지 않게)
+m=mk();m.set(true);const bigs=[];for(let i=0;i<5;i++){m.tick();const im=IMG(2400,2000,'big'+i);bigs.push(im);ok(isGray(m.draw(im)),'큰 그림 '+(i+1)+' 흑백(누적 '+(m.st().grayPixels/1e6).toFixed(1)+'M)');}
+m.set(false);m.tick();m.tick(10);m.set(true);m.tick();ok(m.freed()===5&&m.st().grayPixels===0,'사본이 한도의 85%(2,380만 화소)를 넘으면 다음 각성 시작 때 비움(버린 수 '+m.freed()+')');
 ok(isGray(m.draw(IMG(2400,2000,'fresh'))),'비운 뒤 새 그림은 흑백으로');
+// 실측한 한 지역 분량(2,140만 화소, 한도의 76%)은 비우지 않고 다시 씀
+m=mk();m.set(true);for(let i=0;i<4;i++){m.tick();m.draw(IMG(2675,2000,'zone'+i));}m.set(false);m.tick();m.tick(10);m.set(true);m.tick();ok(m.freed()===0&&m.st().grayPixels===4*2675*2000,'한 지역 분량(2,140만 화소)은 다음 각성에서 그대로 씀');
 // 한도·예산은 그대로
 m=mk();m.set(true);m.tick();ok(isGray(m.draw(IMG(2500,2500,'p1')))&&m.draw(IMG(1000,1000,'p2'))!==undefined&&!isGray(m.dc.got[0]),'장면당 예산(600만 화소)은 그대로: 넘는 그림은 그 장면에선 원본');
 m.tick();ok(isGray(m.draw(IMG(1000,1000,'p2b'))),'다음 장면에서 예산이 다시 참');
