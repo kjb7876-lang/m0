@@ -20,6 +20,7 @@
 if(typeof window==='undefined'||window.__STORYWORLD_NEON_STORM_R951__)return;
 const REV='R951-neon-storm-2',KEY='storyworld.r951.neonStorm',HERO='neon';
 const CHANCE=.09,CROWD_BONUS=.03,CROWD_N=4,CROWD_R=2,CHANCE_MAX=.30,ROLL_GAP=.35,ICD=6,STORM_CD=30,ACT_MAX=3,SCREEN_R=9;
+const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
 const WEIGHTS={lance:.55,fog:.33,storm:.12};
 const ST_CHARGE=.5,ST_GAP=.6,ST_WAVES=3,ST_PER=8,ST_MAXHIT=3,ST_K=1.1,ST_BOSS_K=.7,ST_DECOR=4,ST_LIFE=2.6,STRIKE_LIFE=.55,STRIKE_DRAW_MAX=12;
 const LA_N=6,LA_RANGE=8,LA_GAP=.09,LA_FALL=.45,LA_R=.9,LA_K=1.5,LA_BOSS_K=1.0,LA_MAXHIT=2,LA_STAY=.6;
@@ -62,9 +63,9 @@ function fire(kind,o,tg){const t=T(),power=ap(),k=Math.min(2,Math.max(1,surge('r
  if(kind==='storm'){acts.push({...base,waves:0,hitN:new Map(),strikes:[],flashes:[]});play('r546Sp_neon');shakeBy(2);return;}}
 function pick(s,t){let k;if(forced){k=forced;forced=null;}else{const tot=WEIGHTS.lance+WEIGHTS.fog+WEIGHTS.storm;let r=rnd()*tot;k='storm';for(const n of ['lance','fog','storm']){if(r<WEIGHTS[n]){k=n;break;}r-=WEIGHTS[n];}}
  if(k==='storm'&&t-s.stormAt<STORM_CD)k='lance';return k;}
-function chanceFor(o){let n=0;for(const e of enemiesNow())if(!hiddenActor(e)&&dist(e,o)<=CROWD_R)n++;const c=CHANCE+(n>=CROWD_N?CROWD_BONUS:0);return Math.min(CHANCE_MAX,surge('chance',c));}
+function chanceFor(o){let n=0;for(const e of enemiesNow())if(!hiddenActor(e)&&dist(e,o)<=CROWD_R)n++;const c=CHANCE+(n>=CROWD_N?CROWD_BONUS:0);return Math.min(CHANCE_MAX,surge('chance',G971(HERO,[c])[0]));}
 function roll(e){const o=P();if(!o||o.hero!==HERO||o.hp<=0||blockedNow())return;const s=stateOf(o),t=T();if(t<s.readyAt||t-s.lastRoll<ROLL_GAP)return;s.lastRoll=t;stats.rolls++;
- if(acts.length>=ACT_MAX)return;if(!forced&&!(rnd()<chanceFor(o)))return;const kind=pick(s,t);s.readyAt=t+ICD;if(kind==='storm')s.stormAt=t;
+ if(acts.length>=ACT_MAX)return;if(!forced&&!(rnd()<chanceFor(o)))return;const kind=pick(s,t);s.readyAt=t+D971(HERO,ICD);if(kind==='storm')s.stormAt=t;
  lastRoom=curRoom();fire(kind,o,e&&Number.isFinite(e.x)?{x:e.x,y:e.y}:null);}
 // 네온 본인 타격만(다른 영웅·협동 동료·적·이 패시브 자신의 피해 제외).
 function mine(src){const o=P();if(!o||o.hero!==HERO)return false;if(src&&typeof src==='object'){if(src.r951||src.sourceHero&&src.sourceHero!==HERO)return false;if(src.coopIdR62||src.ally||src.owner==='ally'||src.owner==='enemy'||src.hostile)return false;}return true;}
