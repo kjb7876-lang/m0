@@ -450,12 +450,16 @@ jobs:
         run: node r96/qa/r967/r967-cpu-check.cjs
       - name: R968 boss/midboss attack sounds also fire on route phases and rooms without an R78 phase (same rule as R966) CPU check
         run: node r96/qa/r968/r968-cpu-check.cjs
+      - name: R975 hwando E ilseom boss-first 7-hit left/right multi-hit (sum stays x0.6, per-hit sound, E dash unchanged) CPU check
+        run: node r96/qa/r975/r975-cpu-check.cjs
       - name: R964 boss attack sound also fires on story pattern attacks (no attack id, no bossVolley) CPU check
         run: node r96/qa/r964/r964-cpu-check.cjs
       - name: R965 midboss attack sound also fires on story pattern attacks (no attack id, no bossVolley) CPU check
         run: node r96/qa/r965/r965-cpu-check.cjs
       - name: R966 regular-mob and bulmyeongwi-zone attack sounds also fire during the route phase (room.engaged false) CPU check
         run: node r96/qa/r966/r966-cpu-check.cjs
+      - name: R977 사몽 각성 흑백 사본 재사용 CPU 검사
+        run: node r96/qa/r977/r977-cpu-check.cjs
       - name: R385 mob moves (review list v18 move/rename) CPU check
         run: node r96/qa/r385/r385-cpu-check.cjs
       - name: R390 cinema full narration + midboss hold + enemies keep chasing CPU check
@@ -855,6 +859,8 @@ jobs:
         run: node r96/qa/r860/r860-cpu-check.cjs
       - name: R911 projectile minimum size (half hero height, visual only) CPU check
         run: node r96/qa/r911/r911-cpu-check.cjs
+      - name: R912 projectile frame sheets (Dots CX-0084PJ fly8/hit6, visual only) CPU check
+        run: node r96/qa/r912/r912-cpu-check.cjs
       - name: R952 hunter chance passive 'hunt squad' (slayer summon / +slayer shades / +hunter clone formation, 7s, one tier per proc) CPU check
         run: node r96/qa/r952/r952-cpu-check.cjs
       - name: R949 Seoha passive overlapped time (summoned heroes, friendly Arbelia boss summon, afterimage time collapse; summons never join room.enemies) CPU check

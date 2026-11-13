@@ -39103,6 +39103,121 @@
       "sha256": "cdee5aec52a78ac3eec51a7ebb3557f21370429468f11507a7940def13b1e47a"
     },
     {
+      "path": "assets/r912/pj01-fly.webp",
+      "bytes": 84916,
+      "sha256": "ce03631aad5ce8f97664c38aee89928d8793e121047db52f18e489cab02dfef4"
+    },
+    {
+      "path": "assets/r912/pj01-hit.webp",
+      "bytes": 102986,
+      "sha256": "a8ad8c4aac1a7a3b328627b0b80d35a2215904299dfd310ab13f6029cd2717c1"
+    },
+    {
+      "path": "assets/r912/pj02-fly.webp",
+      "bytes": 50122,
+      "sha256": "73379936285a59159bc3c997fe62ffa0b2e2a60c697c8d9e9a7f30327b5f9617"
+    },
+    {
+      "path": "assets/r912/pj02-hit.webp",
+      "bytes": 63750,
+      "sha256": "b91b04e01d7926fd78940948a9ad66f96248c6df86b2f09348fcc0b5eedc9899"
+    },
+    {
+      "path": "assets/r912/pj03-fly.webp",
+      "bytes": 89514,
+      "sha256": "a1795cef46cf0ed90979c1faec018a3d73d502b4858c03d4c1cbd354906fa364"
+    },
+    {
+      "path": "assets/r912/pj03-hit.webp",
+      "bytes": 63920,
+      "sha256": "59d6bd04c93cf15e4bceef29c92ad128c254a36246e3fbb8965a122358fde5f7"
+    },
+    {
+      "path": "assets/r912/pj03x-fly.webp",
+      "bytes": 91424,
+      "sha256": "0d78dd9756820c2fa7a033ad139a11f3c516fe737006a80bdc4463bd82e39128"
+    },
+    {
+      "path": "assets/r912/pj03x-hit.webp",
+      "bytes": 54350,
+      "sha256": "963d47dcf4680d84811c0887a0ffacfd2e29accd82f6d413ecdffbd06eb611e8"
+    },
+    {
+      "path": "assets/r912/pj04-fly.webp",
+      "bytes": 75950,
+      "sha256": "35f66e12c792d0f88f9ea25405ad1284c2f076803c84522adbb04bf4ff1dce56"
+    },
+    {
+      "path": "assets/r912/pj04-hit.webp",
+      "bytes": 76384,
+      "sha256": "ea984d873ee8312a413edd711ec48fe77924c807d5c2d61c94a675da8b83f160"
+    },
+    {
+      "path": "assets/r912/pj05-fly.webp",
+      "bytes": 36214,
+      "sha256": "581611e42271e4d356d1809eabdb1bc55f3a89f56dafa3c80fa9bd857c508827"
+    },
+    {
+      "path": "assets/r912/pj05-hit.webp",
+      "bytes": 33638,
+      "sha256": "3f3d9b4e143026c1b7eedacddb825f8e40b3f0252dc145b69ec850a50f9b18e5"
+    },
+    {
+      "path": "assets/r912/pj06-fly.webp",
+      "bytes": 47536,
+      "sha256": "50921d99cb6d63a063a0124d370d4a7bf5246f7dd0e65bc5fe3d1a13c0c2d5a7"
+    },
+    {
+      "path": "assets/r912/pj06-hit.webp",
+      "bytes": 58934,
+      "sha256": "faa14fa11c1bd884c73c6cb123263aeff893b9b9e2c2ae11caa91f0b877aac34"
+    },
+    {
+      "path": "assets/r912/pj07-fly.webp",
+      "bytes": 20498,
+      "sha256": "c02ac9254e0bdaa4a4d35c46e69d1460d9fa07b9034c9ad75921b736e8958158"
+    },
+    {
+      "path": "assets/r912/pj09a-fly.webp",
+      "bytes": 84210,
+      "sha256": "9079c679d7615d26443b96dbfd296fbcb9522aed07178c352de4d54da2f03024"
+    },
+    {
+      "path": "assets/r912/pj09a-hit.webp",
+      "bytes": 32276,
+      "sha256": "175324050da073866a70631896e1eb74769dbfd225b54b4b5c7f22f89d5f4b29"
+    },
+    {
+      "path": "assets/r912/pj09b-fly.webp",
+      "bytes": 71114,
+      "sha256": "f8ed19e8337b363b0cbb8151d63c2c215132cbca8d0520291347dc03f1a31270"
+    },
+    {
+      "path": "assets/r912/pj09b-hit.webp",
+      "bytes": 65434,
+      "sha256": "aae09fc7ba1cbc3468b8b31cc02193d6c415eb8e46e3122f382e0f70869895bf"
+    },
+    {
+      "path": "assets/r912/pj09c-fly.webp",
+      "bytes": 39852,
+      "sha256": "edf8e2ee1753f1f6b96cf850135d42243df3648955ae4604dfcb52e9430027c9"
+    },
+    {
+      "path": "assets/r912/pj09c-hit.webp",
+      "bytes": 52896,
+      "sha256": "bd14b4313ed8a085f057166fe345b582fc8185724c56bf549780c09a5c914fbf"
+    },
+    {
+      "path": "assets/r912/pj10-fly.webp",
+      "bytes": 97000,
+      "sha256": "8d8245b4aac04907d2a07b06ba554cad99d16671dd3a3ff27ed9f8d9eedada72"
+    },
+    {
+      "path": "assets/r912/pj10-hit.webp",
+      "bytes": 45300,
+      "sha256": "a52c61080990376a7ae98c5b1b42e8fdad8e634920133794c7c23e128588f260"
+    },
+    {
       "path": "assets/r92/boss/c102-boss-death.png",
       "bytes": 278381,
       "sha256": "8131fafeaf9ddee4f145500b991ade26d847b196c860a71ce507515761af76cc"
@@ -44056,6 +44171,46 @@
       "path": "assets/r974/move/u206-mid-up.webp",
       "bytes": 60348,
       "sha256": "7be21815eccdf5e66b5eba45b318643d062e493e89e523853bdb103a660c61ce"
+    },
+    {
+      "path": "assets/r975/sfx/ilseom-1.ogg",
+      "bytes": 5477,
+      "sha256": "8a052d57186e2473c945f537820c49c330e5947e2fd954c5fc641408079fe094"
+    },
+    {
+      "path": "assets/r975/sfx/ilseom-2.ogg",
+      "bytes": 5520,
+      "sha256": "9c421284bc165061ffbfc79e59ca07d839a88ee22c1944c5b6abf33c441a1a88"
+    },
+    {
+      "path": "assets/r975/sfx/ilseom-3.ogg",
+      "bytes": 5479,
+      "sha256": "b483c48ab5c0ee4bca0fe4eb8bf521a065b103aa9917c059dd51e7d4560073af"
+    },
+    {
+      "path": "assets/r975/sfx/ilseom-4.ogg",
+      "bytes": 5486,
+      "sha256": "1e832563c32903784ac62d32ffa3833d71e88b396fcaf78f5ec2e2f7d1349a18"
+    },
+    {
+      "path": "assets/r975/sfx/ilseom-5.ogg",
+      "bytes": 5503,
+      "sha256": "b2f48dd4b8b72b863341b2747c88d13b6181f1e7c33e66bb5740db35cb961283"
+    },
+    {
+      "path": "assets/r975/sfx/ilseom-6.ogg",
+      "bytes": 5549,
+      "sha256": "32f843d9e5d026c08d07f3edb28db1e3fdc5fb927c9a44af4a62c1621eb13623"
+    },
+    {
+      "path": "assets/r975/sfx/ilseom-7.ogg",
+      "bytes": 6241,
+      "sha256": "59eb806917d74a38b5546673c322ef8873f84b03de929232902d3f59d53a4c89"
+    },
+    {
+      "path": "assets/r975/sfx/manifest.json",
+      "bytes": 2098,
+      "sha256": "228944db475a63737b99209e86110f48dd679148d7dd96b6cb7092f6372c86c9"
     },
     {
       "path": "assets/r986/seoha-hand-strike.webp",
@@ -50699,13 +50854,18 @@
     },
     {
       "path": "hwando-chain-r590.js",
-      "bytes": 26171,
-      "sha256": "6c168542fba73696a833da77e8803734a26d93f1d3aefd3017f3df994775fc32"
+      "bytes": 26756,
+      "sha256": "d8269691f3af50bd16cb5df157712051cb9725e736052905a022db1c178c0528"
     },
     {
       "path": "hwando-fall-video-r617.js",
       "bytes": 19256,
       "sha256": "8c033820ee305fd49f8a8ec3cc696e7ea11055dda98f5529830704fd0e401b78"
+    },
+    {
+      "path": "hwando-ilseom-r975.js",
+      "bytes": 14171,
+      "sha256": "b4b6d46d4c03c74da17bcbd25df78c851e51f94f463c22251bc1a86876a9bd6e"
     },
     {
       "path": "hwando-ink-r945.js",
@@ -50739,8 +50899,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6576909,
-      "sha256": "11a5c2ffb1e60d8a975f91b9b09f76f6f079de9134a5572e8d28544ec6350d92"
+      "bytes": 6577009,
+      "sha256": "cba4fb4905ee0899ec021d462ecb801997fe2f1109d199b2b4c559b57d67a362"
     },
     {
       "path": "intro-r140.js",
@@ -51199,8 +51359,8 @@
     },
     {
       "path": "play-r111.js",
-      "bytes": 46349,
-      "sha256": "6a49aa7c6eacf2609513819f48993723a8991b72ab7277d6426dcc568b9fd70a"
+      "bytes": 47604,
+      "sha256": "cefad71e89043d4a9d90c6dadc9d9dfebf4a98a11d685e641e599ad7bf63273e"
     },
     {
       "path": "play-r113.js",
@@ -51241,6 +51401,11 @@
       "path": "portal-interaction-r83.js",
       "bytes": 3309,
       "sha256": "17d11b2b6c6a8aaa3bb2c07a1e7b0e9bdafeed50878c0f8e83d8abdfb6754816"
+    },
+    {
+      "path": "projectile-sheets-r912.js",
+      "bytes": 15540,
+      "sha256": "7898ce92e3273e1426a7f3a87969a36c73907b09487be258491498c834a00b41"
     },
     {
       "path": "projectile-size-r911.js",
@@ -51888,9 +52053,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10377,
-  "totalBytes": 1278029816,
-  "webHTMLSha256": "11a5c2ffb1e60d8a975f91b9b09f76f6f079de9134a5572e8d28544ec6350d92",
+  "fileCount": 10410,
+  "totalBytes": 1279541038,
+  "webHTMLSha256": "cba4fb4905ee0899ec021d462ecb801997fe2f1109d199b2b4c559b57d67a362",
   "largest": [
     {
       "path": "index.html",
