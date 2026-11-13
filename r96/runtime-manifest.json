@@ -40853,6 +40853,21 @@
       "sha256": "6f48044138bad518ec4b096d9dee20084efd4168c6695822c6fbba9f67bb1ed0"
     },
     {
+      "path": "assets/r953/gv-veil-in.webp",
+      "bytes": 165210,
+      "sha256": "c60c2ebedf1fcc97652c64519bb42c8b7e28f0f621876b48ada1f1a0a1e80715"
+    },
+    {
+      "path": "assets/r953/gv-veil-loop.webp",
+      "bytes": 230398,
+      "sha256": "6b595e482d34b0b0bd9bc9dbba0b6c373b9f67afaa16e4f9e84de1872d98428b"
+    },
+    {
+      "path": "assets/r953/gv-veil-out.webp",
+      "bytes": 132916,
+      "sha256": "a42941478ee5ea35e263e2568b3e6af2041e3148426e4cf1be94041465635b2d"
+    },
+    {
       "path": "assets/r954/sfx/atk-fisherman-1.ogg",
       "bytes": 7161,
       "sha256": "72651a7fa25a4fbd5b060e3f89cd8b5b3539cc62834915e733aaee4a0ea1949e"
@@ -49864,8 +49879,8 @@
     },
     {
       "path": "gunner-veil-r953.js",
-      "bytes": 35023,
-      "sha256": "02c9d76442c860167ca1e5d219dd333655815aa7c2608b554a677762ea29b3ea"
+      "bytes": 38104,
+      "sha256": "b18bcf87221e659adb0fcf74bea414918231311d25bba79bd44edbb3b944da3d"
     },
     {
       "path": "hero-defense-r720.js",
@@ -51193,8 +51208,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10238,
-  "totalBytes": 1267579044,
+  "fileCount": 10241,
+  "totalBytes": 1268110649,
   "webHTMLSha256": "ca9665a649d6bb9d5e4138ad3632667d4a64db7e60d3094190ede3cf5efc1e6e",
   "largest": [
     {

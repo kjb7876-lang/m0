@@ -211,4 +211,18 @@ ok(E.arms&&E.arms.on(),'진짜 R561 총기 모듈이 같이 올라옴');
  {const X=engine({enemies:[foe('a',13,10)]});X.api.force('summon');X.swing();const D=X.api.config.summon.duration;X.run(X.g.time+D-.5);ok(!drew(X,'gv-mend.webp'),'전우가 싸우는 동안에는 귀환 빛을 그리지 않음');
   X.run(X.g.time+1);ok(drew(X,'gv-mend.webp'),'전우가 돌아갈 때 귀환 치유의 빛을 Dots 시트로 그림');X.run(X.g.time+3);ok(X.api.allies().length===0&&X.api.inspect().errors===0,'귀환 뒤 아군 0 · 오류 0');}
  const S=engine({enemies:[]}).api.sheets;ok(Array.isArray(S)&&['lock','friend','call','spin','mend'].every(k=>S.includes(k)),'쓰는 Dots 시트 목록에 spin·mend 포함',S);}
+// ---- R997: Dots CX-0095GV r3 은신 장막(걸림 GV-01 · 유지 GV-02 · 풀림 GV-03). 사람 윤곽 없이 몸 둘레 육각 판 ----
+{const names=['gv-veil-in.webp','gv-veil-loop.webp','gv-veil-out.webp'],man=JSON.parse(fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8')).files.map(f=>f.path);
+ for(const nm of names)ok(fs.existsSync(path.join(R,'runtime-text/assets/r953',nm))&&man.includes('assets/r953/'+nm),'장막 시트 파일이 런타임 목록에 있음: '+nm);
+ const since=(X,k,nm)=>X.sheets.slice(k).some(s=>String(s.src||'').endsWith('assets/r953/'+nm));
+ const X=engine({enemies:[foe('a',13,10)]});X.frame();const t0=X.g.time,D=X.api.config.cloak.duration;X.api.force('cloak');X.swing();
+ let k=X.sheets.length;X.run(t0+.3);ok(since(X,k,'gv-veil-in.webp')&&!since(X,k,'gv-veil-out.webp'),'은신이 걸릴 때 육각 판이 올라오는 시트를 그림');
+ X.run(t0+2);k=X.sheets.length;X.run(t0+3);ok(since(X,k,'gv-veil-loop.webp')&&!since(X,k,'gv-veil-in.webp')&&!since(X,k,'gv-veil-out.webp'),'은신 중에는 도는 판 시트만 그림');
+ ok(X.sheets.slice(k).filter(s=>String(s.src||'').includes('gv-veil')).every(s=>String(s.own).startsWith('r953:cloak')&&s.alpha>=0&&s.alpha<=1),'장막 그림은 은신 그림 이름표·알파 0~1');
+ X.run(t0+D-.6);k=X.sheets.length;X.run(t0+D-.05);ok(since(X,k,'gv-veil-out.webp'),'은신이 풀리기 직전 판이 흩어지는 시트를 그림');
+ X.run(t0+D+.3);k=X.sheets.length;X.run(t0+D+1.3);ok(!X.sheets.slice(k).some(s=>String(s.src||'').includes('gv-veil'))&&X.api.cloaked()===false,'은신이 끝나면 장막 그림이 남지 않음');
+ ok(X.api.inspect().errors===0&&X.api.ult().cd===1,'장막 뒤 오류 0 · 궁극기 배수 1');
+ const A=engine({enemies:[foe('a',13,10)]}),B=engine({enemies:[foe('a',13,10)]});for(const E of [A,B]){E.api.force('cloak');E.swing();}A.run(A.g.time+D+1);B.run(B.g.time+D+1,.05,false);
+ ok(A.api.inspect().stats.cloaks===1&&B.api.inspect().stats.cloaks===1&&A.api.cloaked()===B.api.cloaked(),'그림을 그리든 안 그리든 은신 시간·횟수가 같음(판정 불변)');
+ const S=engine({enemies:[]}).api.sheets;ok(['veilIn','veilLoop','veilOut'].every(q=>S.includes(q)),'쓰는 Dots 시트 목록에 장막 셋 포함',S);}
 console.log('R953 CPU 검사 통과: '+n+'항목');

@@ -37,9 +37,13 @@ const SHEET=Object.freeze({
  lock:Object.freeze({path:'assets/r953/gv-lock.webp',cw:256,ch:256,cols:6,frames:24,px:.5,py:.52,close:6,hold:18}),      // GV-04 조준 표식: 0~5 조임 · 6~17 잠금 고동 · 18~23 흩어짐
  friend:Object.freeze({path:'assets/r953/gv-friend.webp',cw:256,ch:128,cols:6,frames:24,px:.5,py:.547,fps:12.5,fill:.84}), // GV-08 벗 고리(반복)
  call:Object.freeze({path:'assets/r953/gv-call.webp',cw:128,ch:384,cols:6,frames:24,px:.5,py:.911}),                      // GV-06 전우 호출 빛기둥(한 번)
- // R989: 남은 Dots 시트 가운데 7분야 심사를 넘은 둘. GV-01 은신 걸림·GV-03 은신 풀림은 탈락(사람 몸 윤곽·파편 가독성) → 은신은 코드 그림 유지.
+ // R989: 남은 Dots 시트 가운데 7분야 심사를 넘은 둘(GV-01 r2·GV-03 r1 은 그때 탈락, r3 수정본은 아래 R997).
  spin:Object.freeze({path:'assets/r953/gv-spin.webp',cw:192,ch:192,cols:6,frames:24,px:.5,py:.5,last:22,fill:.73}),   // GV-05 난사 회전 섬광(한 번, 24번째 칸은 빈칸)
- mend:Object.freeze({path:'assets/r953/gv-mend.webp',cw:192,ch:384,cols:6,frames:24,px:.5,py:.875,fill:.75})});        // GV-07 귀환, 치유의 빛(한 번)
+ mend:Object.freeze({path:'assets/r953/gv-mend.webp',cw:192,ch:384,cols:6,frames:24,px:.5,py:.875,fill:.75}),         // GV-07 귀환, 치유의 빛(한 번)
+ // R997: Dots r3 은신 장막 — 사람 윤곽 없이 몸 둘레에 뜬 육각 광학 판. 가운데(몸 자리)는 비어 있다. 기준점은 발 고리 중심(128,350). hollow=가운데 빈 타원 높이/칸 높이
+ veilIn:Object.freeze({path:'assets/r953/gv-veil-in.webp',cw:256,ch:384,cols:6,frames:12,px:.5,py:350/384,last:10,hollow:238/384,tiles:Object.freeze([16711680,16756736,16759552,16759728,16759792,16776191,16775679,16775679,16775679,16759184,16560896,0])}),     // GV-01 r3 걸림(한 번, 12번째 칸은 빈칸)
+ veilLoop:Object.freeze({path:'assets/r953/gv-veil-loop.webp',cw:256,ch:384,cols:6,frames:16,px:.5,py:350/384,fps:12.5,hollow:238/384,tiles:Object.freeze([16777200,16694640,16710516,16777076,16777206,16777206,16236518,16759795,16759287,16693620,16710518,16777206,16777206,16235490,16751091,16751091])}), // GV-02 r3 유지(반복 16장)
+ veilOut:Object.freeze({path:'assets/r953/gv-veil-out.webp',cw:256,ch:384,cols:6,frames:12,px:.5,py:350/384,last:8,hollow:238/384,tiles:Object.freeze([458592,1048566,7340022,15728127,16751103,16751007,16751007,16751007,16488863,3,0,0])})});   // GV-03 r3 풀림(한 번, 9장까지)
 const SHAPES=['line','circle','cone','cross','donut'];
 const fin=v=>typeof v==='number'&&Number.isFinite(v),clamp=(v,a,b)=>Math.min(b,Math.max(a,v)),smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
 let lastError=null,errors=0;const fail=e=>{errors++;lastError=String(e?.message||e).slice(0,200);};
@@ -195,7 +199,21 @@ function img(id,im,x,y,w,h,o={}){if(!im||!(w>0)||!(h>0))return false;if(!o.free)
 function cell(id,k,fr,x,y,size,o={}){const S=SHEET[k],im=sheetImg(k);if(!im)return false;fr=o.once?clamp(Math.floor(fr),0,S.frames-1):((Math.floor(fr)%S.frames)+S.frames)%S.frames;
  return img(id,im,x,y,size,o.h??size*S.ch/S.cw,{...o,src:[(fr%S.cols)*S.cw,Math.floor(fr/S.cols)*S.ch,S.cw,S.ch],px:o.px??S.px??.5,py:o.py??S.py??.5});}
 const scr=(x,y,lift=.45)=>{const q=project(x,y);return {x:q.x,y:q.y-H()*lift};};
-function drawCloak(s,p){const t=T(),h=H(),q=project(p.x,p.y),age=t-s.cloakT0,left=s.cloakUntil-t,k=Math.min(smooth(age/.3),smooth(left/.4)),wob=.5+.5*Math.sin(t*7);
+// 은신 장막: 걸림(VEIL.in 초) → 유지(반복) → 풀림(끝나기 VEIL.out 초 전부터). 시트가 아직 안 읽혔으면 코드 그림(빛 기둥)이 대신 나온다.
+const VEIL=Object.freeze({in:.8,out:.55,cross:.25,tall:1.1});
+// 장막 한 칸을 4×6 조각으로 나눠, 그림이 있는 조각만 그린다(가운데 빈 몸 자리는 아예 안 그림).
+// 한 장으로 그리면 빈 가운데까지 '영웅을 덮는 큰 그림'으로 계산돼 R350 이 장막 전체를 85% 옅게 만든다. 조각이면 영웅 앞을 지나는 판만 조금 옅어지고, R350 의 가림 합계·영웅 다시 보이기는 그대로 돈다.
+function veilTiles(key,fr,x,y,w,once,alpha,add){const S=SHEET[key],im=sheetImg(key);if(!im)return false;fr=once?clamp(Math.floor(fr),0,S.frames-1):((Math.floor(fr)%S.frames)+S.frames)%S.frames;
+ const m=S.tiles[fr]|0;if(!m)return true;const h=w*S.ch/S.cw,tw=w/4,th=h/6,x0=x-w*S.px,y0=y-h*S.py,sx=(fr%S.cols)*S.cw,sy=Math.floor(fr/S.cols)*S.ch,cs=S.cw/4,rs=S.ch/6;
+ for(let r=0;r<6;r++)for(let c=0;c<4;c++)if(m&(1<<(r*4+c)))img('cloak',im,x0+(c+.5)*tw,y0+(r+.5)*th,tw,th,{alpha,add,free:true,src:[sx+c*cs,sy+r*rs,cs,rs]});return true;}
+function drawCloak(s,p){const t=T(),h=H(),q=project(p.x,p.y),age=Math.max(0,t-s.cloakT0),left=Math.max(0,s.cloakUntil-t),k=Math.min(smooth(age/.3),smooth(left/.4)),wob=.5+.5*Math.sin(t*7);
+ if(sheetImg('veilIn')&&sheetImg('veilLoop')&&sheetImg('veilOut')){const L=SHEET.veilLoop,w=h*VEIL.tall/L.hollow*L.cw/L.ch,lo=low();
+  const two=(key,fr,al,once)=>{al=clamp(al,0,1);if(!(al>.004))return;veilTiles(key,fr,q.x,q.y,w,once,al,false);if(!lo)veilTiles(key,fr,q.x,q.y,w,once,.4*al,true);};
+  const out=left<VEIL.out?clamp(1-left/VEIL.out,0,1):0;
+  if(out>0)two('veilOut',out*SHEET.veilOut.last,1-smooth((out-.72)/.28),true);
+  else if(age<VEIL.in)two('veilIn',age/VEIL.in*SHEET.veilIn.last,1,true);
+  const loopA=Math.min(smooth((age-(VEIL.in-VEIL.cross))/VEIL.cross),1-smooth(out*VEIL.out/.15)); // 풀림이 시작되면 .15초 동안 도는 판이 풀림 그림으로 넘어간다(빈 순간 없이)
+  two('veilLoop',age*L.fps,loopA*(.86+.14*wob),false);return;}
  img('cloak',veilTex(),q.x,q.y-h*.52,h*.62*(1+.04*wob),h*1.18,{alpha:(.75+.25*wob)*k,add:true,free:true});
  if(!low())img('cloak',veilTex(),q.x,q.y-h*.52+((t*38)%(h*.3))-h*.15,h*.5,h*.9,{alpha:.28*k,add:true,free:true});}
 function drawFriend(A){const a=A.a,t=T(),h=H(),u=unit(),g=project(a.x,a.y),k=A.leaveAt!=null?1-smooth((t-A.leaveAt)/CFG.summon.leave):smooth((t-A.t0)/.35),w=u*2.9*(1+.04*Math.sin(t*4+A.t0));
