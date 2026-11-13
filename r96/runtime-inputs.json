@@ -9704,7 +9704,8 @@
     "assets/r1019/move/swamp-mage-up.webp",
     "assets/r1019/move/timeless-silver-scout-down.webp",
     "assets/r1019/move/timeless-silver-scout-up.webp",
-    "move-dir-r1019-data.js"
+    "move-dir-r1019-data.js",
+    "ui-clean-r1015.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -10779,5 +10780,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "9f292e9bac010fa38e6fae457732489cb8563343569ac408a684ec39d1e1f8a7"
+  "runtimeManifestSHA256": "f88b03d8c370bf5c912c78ae83268eb776bf3fb7f8f0a800a2dcaea353556a40"
 }
