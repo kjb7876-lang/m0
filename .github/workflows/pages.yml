@@ -450,6 +450,8 @@ jobs:
         run: node r96/qa/r967/r967-cpu-check.cjs
       - name: R968 boss/midboss attack sounds also fire on route phases and rooms without an R78 phase (same rule as R966) CPU check
         run: node r96/qa/r968/r968-cpu-check.cjs
+      - name: R975 hwando E ilseom boss-first 7-hit left/right multi-hit (sum stays x0.6, per-hit sound, E dash unchanged) CPU check
+        run: node r96/qa/r975/r975-cpu-check.cjs
       - name: R964 boss attack sound also fires on story pattern attacks (no attack id, no bossVolley) CPU check
         run: node r96/qa/r964/r964-cpu-check.cjs
       - name: R965 midboss attack sound also fires on story pattern attacks (no attack id, no bossVolley) CPU check
