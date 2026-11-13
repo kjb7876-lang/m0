@@ -1,0 +1,640 @@
+{
+ "dist01": {
+  "id": "mb-dist01",
+  "sum": {
+   "idle": {
+    "n": 24,
+    "settled": {
+     "down": 10,
+     "side(flip)": 2
+    },
+    "frames": "0123",
+    "vis": [
+     84
+    ]
+   },
+   "down": {
+    "n": 27,
+    "settled": {
+     "down": 6,
+     "busy": 8
+    },
+    "frames": "013",
+    "vis": [
+     84
+    ]
+   },
+   "up": {
+    "n": 25,
+    "settled": {
+     "busy": 1,
+     "other-art:mb-dist01-p2.webp": 2,
+     "up": 10
+    },
+    "frames": "0123",
+    "vis": [
+     92,
+     84
+    ]
+   },
+   "right": {
+    "n": 23,
+    "settled": {
+     "side": 12
+    },
+    "frames": "0123",
+    "vis": [
+     84
+    ]
+   },
+   "left": {
+    "n": 23,
+    "settled": {
+     "side(flip)": 11,
+     "busy": 1
+    },
+    "frames": "0123",
+    "vis": [
+     84
+    ]
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 126,
+    "swapped": 87,
+    "waiting": 0,
+    "otherArt": 2,
+    "dropped": 2,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "shots": {
+   "down": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-dist01-down.png",
+   "up": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-dist01-up.png",
+   "right": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-dist01-right.png",
+   "left": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-dist01-left.png",
+   "idle": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-dist01-idle.png"
+  },
+  "errs": []
+ },
+ "ep1b02": {
+  "id": "mb-ep1b02",
+  "sum": {
+   "idle": {
+    "n": 23,
+    "settled": {
+     "busy": 12
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 28,
+    "settled": {
+     "down": 4,
+     "busy": 10
+    },
+    "frames": "23",
+    "vis": [
+     84
+    ]
+   },
+   "up": {
+    "n": 21,
+    "settled": {
+     "busy": 2,
+     "other-art:mb-ep1b02-p2.webp": 3,
+     "up": 6
+    },
+    "frames": "123",
+    "vis": [
+     84
+    ]
+   },
+   "right": {
+    "n": 22,
+    "settled": {
+     "side": 11
+    },
+    "frames": "0123",
+    "vis": [
+     84
+    ]
+   },
+   "left": {
+    "n": 22,
+    "settled": {
+     "side(flip)": 11
+    },
+    "frames": "0123",
+    "vis": [
+     84
+    ]
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 259,
+    "swapped": 157,
+    "waiting": 0,
+    "otherArt": 5,
+    "dropped": 6,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "shots": {
+   "down": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-ep1b02-down.png",
+   "up": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-ep1b02-up.png",
+   "right": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-ep1b02-right.png",
+   "left": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-ep1b02-left.png",
+   "idle": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-ep1b02-idle.png"
+  },
+  "errs": []
+ },
+ "ep1b07": {
+  "id": "mb-ep1b07",
+  "sum": {
+   "idle": {
+    "n": 27,
+    "settled": {
+     "busy": 14
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 21,
+    "settled": {
+     "down": 10,
+     "still": 1
+    },
+    "frames": "0123",
+    "vis": [
+     83
+    ]
+   },
+   "up": {
+    "n": 23,
+    "settled": {
+     "busy": 10,
+     "other-art:mb-ep1b07-p2.webp": 2
+    },
+    "frames": "",
+    "vis": []
+   },
+   "right": {
+    "n": 23,
+    "settled": {
+     "side": 12
+    },
+    "frames": "0123",
+    "vis": [
+     83
+    ]
+   },
+   "left": {
+    "n": 22,
+    "settled": {
+     "side(flip)": 11
+    },
+    "frames": "0123",
+    "vis": [
+     83
+    ]
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 386,
+    "swapped": 221,
+    "waiting": 0,
+    "otherArt": 7,
+    "dropped": 8,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "shots": {
+   "down": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-ep1b07-down.png",
+   "up": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-ep1b07-up.png",
+   "right": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-ep1b07-right.png",
+   "left": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-ep1b07-left.png",
+   "idle": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-ep1b07-idle.png"
+  },
+  "errs": []
+ },
+ "u206": {
+  "id": "u206-mid",
+  "sum": {
+   "idle": {
+    "n": 25,
+    "settled": {
+     "still": 12,
+     "side": 1
+    },
+    "frames": "0",
+    "vis": [
+     84
+    ]
+   },
+   "down": {
+    "n": 25,
+    "settled": {
+     "down": 6,
+     "still": 1,
+     "busy": 6
+    },
+    "frames": "123",
+    "vis": [
+     84
+    ]
+   },
+   "up": {
+    "n": 24,
+    "settled": {
+     "busy": 3,
+     "other-art:u206-mid.png": 2,
+     "up": 7
+    },
+    "frames": "123",
+    "vis": [
+     84
+    ]
+   },
+   "right": {
+    "n": 27,
+    "settled": {
+     "side": 14
+    },
+    "frames": "0123",
+    "vis": [
+     84
+    ]
+   },
+   "left": {
+    "n": 23,
+    "settled": {
+     "side(flip)": 11,
+     "busy": 1
+    },
+    "frames": "0123",
+    "vis": [
+     84
+    ]
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 518,
+    "swapped": 295,
+    "waiting": 0,
+    "otherArt": 9,
+    "dropped": 8,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "shots": {
+   "down": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-u206-down.png",
+   "up": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-u206-up.png",
+   "right": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-u206-right.png",
+   "left": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-u206-left.png",
+   "idle": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-u206-idle.png"
+  },
+  "errs": []
+ },
+ "last301": {
+  "id": "l301-boss",
+  "sum": {
+   "idle": {
+    "n": 25,
+    "settled": {
+     "busy": 13
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 24,
+    "settled": {
+     "down": 6,
+     "busy": 6
+    },
+    "frames": "023",
+    "vis": [
+     97,
+     99,
+     100,
+     98,
+     96
+    ]
+   },
+   "up": {
+    "n": 23,
+    "settled": {
+     "busy": 7,
+     "other-art:l301-boss-p2.webp": 2,
+     "up": 3
+    },
+    "frames": "03",
+    "vis": [
+     96,
+     98,
+     100
+    ]
+   },
+   "right": {
+    "n": 26,
+    "settled": {
+     "no-side": 13
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 23,
+    "settled": {
+     "no-side": 12
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 652,
+    "swapped": 316,
+    "waiting": 0,
+    "otherArt": 11,
+    "dropped": 10,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "shots": {
+   "down": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-last301-down.png",
+   "up": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-last301-up.png",
+   "right": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-last301-right.png",
+   "left": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-last301-left.png",
+   "idle": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-last301-idle.png"
+  },
+  "errs": []
+ },
+ "kair05": {
+  "id": "kair-great-01",
+  "sum": {
+   "idle": {
+    "n": 26,
+    "settled": {
+     "still": 12,
+     "side": 1
+    },
+    "frames": "1",
+    "vis": [
+     104
+    ]
+   },
+   "down": {
+    "n": 25,
+    "settled": {
+     "down": 12,
+     "still": 1
+    },
+    "frames": "0123",
+    "vis": [
+     103,
+     104,
+     102
+    ]
+   },
+   "up": {
+    "n": 23,
+    "settled": {
+     "busy": 12
+    },
+    "frames": "",
+    "vis": []
+   },
+   "right": {
+    "n": 23,
+    "settled": {
+     "other-art:great-01-atlas.webp": 8,
+     "side": 4
+    },
+    "frames": "23",
+    "vis": [
+     103,
+     102
+    ]
+   },
+   "left": {
+    "n": 26,
+    "settled": {
+     "side(flip)": 13
+    },
+    "frames": "0123",
+    "vis": [
+     104,
+     102,
+     103
+    ]
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 789,
+    "swapped": 370,
+    "waiting": 0,
+    "otherArt": 20,
+    "dropped": 10,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "shots": {
+   "down": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-kair05-down.png",
+   "up": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-kair05-up.png",
+   "right": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-kair05-right.png",
+   "left": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-kair05-left.png",
+   "idle": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-kair05-idle.png"
+  },
+  "errs": []
+ },
+ "kair02": {
+  "id": "kair-great-03",
+  "sum": {
+   "idle": {
+    "n": 24,
+    "settled": {
+     "still": 12
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 26,
+    "settled": {
+     "down": 10,
+     "still": 3
+    },
+    "frames": "0123",
+    "vis": [
+     88,
+     89,
+     85,
+     92
+    ]
+   },
+   "up": {
+    "n": 27,
+    "settled": {
+     "up": 10,
+     "still": 4
+    },
+    "frames": "0123",
+    "vis": [
+     92,
+     88,
+     89,
+     85
+    ]
+   },
+   "right": {
+    "n": 27,
+    "settled": {
+     "busy": 14
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 25,
+    "settled": {
+     "busy": 8,
+     "no-side": 3,
+     "still": 2
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 930,
+    "swapped": 411,
+    "waiting": 0,
+    "otherArt": 20,
+    "dropped": 10,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "shots": {
+   "down": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-kair02-down.png",
+   "up": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-kair02-up.png",
+   "right": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-kair02-right.png",
+   "left": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-kair02-left.png",
+   "idle": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-kair02-idle.png"
+  },
+  "errs": []
+ },
+ "hando01": {
+  "id": "mb-hando01",
+  "sum": {
+   "idle": {
+    "n": 28,
+    "settled": {
+     "busy": 14
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 23,
+    "settled": {
+     "down": 12
+    },
+    "frames": "0123",
+    "vis": [
+     89
+    ]
+   },
+   "up": {
+    "n": 24,
+    "settled": {
+     "up": 12
+    },
+    "frames": "0123",
+    "vis": [
+     89
+    ]
+   },
+   "right": {
+    "n": 27,
+    "settled": {
+     "side": 14
+    },
+    "frames": "0123",
+    "vis": [
+     89
+    ]
+   },
+   "left": {
+    "n": 25,
+    "settled": {
+     "side(flip)": 13
+    },
+    "frames": "0123",
+    "vis": [
+     89
+    ]
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 1066,
+    "swapped": 509,
+    "waiting": 0,
+    "otherArt": 20,
+    "dropped": 10,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "shots": {
+   "down": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-hando01-down.png",
+   "up": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-hando01-up.png",
+   "right": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-hando01-right.png",
+   "left": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-hando01-left.png",
+   "idle": "/tmp/claude-0/-home-user/73df89bd-b346-5480-ad49-257ea25c779f/scratchpad/r974s/r974-hando01-idle.png"
+  },
+  "errs": []
+ }
+}

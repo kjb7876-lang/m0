@@ -10,7 +10,9 @@ from pathlib import Path
 from PIL import Image
 import numpy as np
 ROOT=Path(__file__).resolve().parents[1];R=ROOT/'r96';OUT=R/'runtime-text/assets/r974/move'
-# (Dots 번호, 적 nativeId, 지금 게임 대기 그림(assets/ 아래), 칸 [x,y,w,h] 또는 None=그림 전체)
+# (Dots 번호, 적 nativeId, 지금 게임 대기 그림(assets/ 아래), 칸 [x,y,w,h] 또는 None=그림 전체 또는 칸 여러 개 — 엔진이 걷는 동안 돌려 그리는 칸 전부)
+# NO_SIDE: 자기 옆 걷기 그림이 이미 있는 몹은 옆 시트를 쓰지 않는다(위·아래만).
+NO_SIDE={'kair-great-03'}
 MAP=[('B02','mb-dist01','r104/bosses/mb-dist01-p4.webp',None),('B05','mb-dist04','r104/bosses/mb-dist04-p4.webp',None),('B09','mb-ep1a08','r104/bosses/mb-ep1a08-p4.webp',None),
 ('B13','mb-ep1b01','r104/bosses/mb-ep1b01-p4.webp',None),('B14','mb-ep1b02','r104/bosses/mb-ep1b02-p4.webp',None),('B16','mb-ep1b03','r104/bosses/mb-ep1b03-p4.webp',None),
 ('B18','mb-ep1b04','r104/bosses/mb-ep1b04-p4.webp',None),('B20','mb-ep1b05','r104/bosses/mb-ep1b05-p4.webp',None),('B22','mb-ep1b07','r104/bosses/mb-ep1b07-p4.webp',None),
@@ -20,12 +22,15 @@ MAP=[('B02','mb-dist01','r104/bosses/mb-dist01-p4.webp',None),('B05','mb-dist04'
 ('B38','mb-kair04-v31231','rc140/story-cycle-motions/mb-kair04-v31231.png',[0,0,681,724]),('B39','kair-great-01','actors/v31345/guardians/great-01-atlas.webp',[120,51,485,582]),
 ('B40','kair-great-02','actors/v31345/guardians/great-02-atlas.webp',[122,19,437,578]),('B42','kair-great-05','rc140/story-cycle-motions/kair-great-05.png',[0,0,680,724]),
 ('B43','mb-kair09-v31231','boss-actions-20261011/mb-kair09-v31231-poses.png',[200,10,410,490]),('B44','kair-great-06','actors/v31345/guardians/great-06-atlas.webp',[139,13,379,596]),
-('B45','kair-great-03','r410/mobs/m048.webp',[0,0,256,320]),('B47','mb-hando01','r104/bosses/mb-hando01-p4.webp',None),('B48','mb-hando02','r104/bosses/mb-hando02-p4.webp',None)]
+('B45','kair-great-03','r410/mobs/m048.webp',[[x,y,256,320] for y in (0,320) for x in (0,256,512,768)]),('B47','mb-hando01','r104/bosses/mb-hando01-p4.webp',None),('B48','mb-hando02','r104/bosses/mb-hando02-p4.webp',None)]
 HOLD={'B11':'게임 대기 그림은 붉은 톤, 새 그림은 회갈색','B17':'게임은 사람 단계(시기의 언니) 그림, 새 그림은 청록 잔영 단계','B19':'게임은 사람 단계(총주방장) 그림, 새 그림은 탐식체 단계',
  'B23':'게임은 사람 단계(청소부) 그림, 새 그림은 검은 갑주 단계','B27':'게임은 사람 단계(회장) 그림, 새 그림은 사이보그 갑주 단계','B46':'게임 그림보다 밝고 붉은 톤, 옆 걷기 원본 미확인','B49':'Drive 파일 10MB 초과로 못 받음'}
 CELL,N=384,4
 def bbox(a):
   ys,xs=np.where(a>16);return [int(xs.min()),int(ys.min()),int(xs.max())+1,int(ys.max())+1]
+def body(a):
+  # 몸통 키: 줄마다 불투명(알파>100) 칸 수가 가장 넓은 줄의 12% 넘는 줄의 범위(R205 fitMin 과 같은 잣대 — 가는 꼬리·칼끝·후광 끝은 뺀다)
+  rows=(a>100).sum(axis=1);th=rows.max()*.12;ys=np.where(rows>=th)[0];return int(ys.max()-ys.min()+1)
 def mean(im):
   a=np.asarray(im).astype(np.float32);m=a[...,3]>128;return a[...,:3][m].mean(axis=0)
 def tone(im,g):
@@ -35,29 +40,31 @@ def tone(im,g):
 def main(src,site):
   src=Path(src);site=Path(site);OUT.mkdir(parents=True,exist_ok=True);table={};rows=[]
   for b,eid,rel,rect in MAP:
-    ip=site/rel;idle=Image.open(ip).convert('RGBA');full=list(idle.size)
-    if rect:idle=idle.crop((rect[0],rect[1],rect[0]+rect[2],rect[1]+rect[3]))
-    ib=bbox(np.asarray(idle)[...,3]);im0=mean(idle)
+    ip=site/rel;whole=Image.open(ip).convert('RGBA');full=list(whole.size);rects=rect if rect and isinstance(rect[0],list) else [rect or [0,0]+full];idles=[]
+    for rc in rects:
+      idle=whole.crop((rc[0],rc[1],rc[0]+rc[2],rc[1]+rc[3]));ia=np.asarray(idle)[...,3];idles.append({'path':'assets/'+rel,'rect':rc,'size':full,'bbox':bbox(ia),'body':body(ia)})
+    idle=whole.crop((rects[0][0],rects[0][1],rects[0][0]+rects[0][2],rects[0][1]+rects[0][3]));im0=mean(idle)
     sheets={}
     for d in ('side','down','up'):
+      if d=='side' and eid in NO_SIDE:continue
       f=glob.glob(str(src/b/('*-walk-'+d+'.png')))
       if f:
         im=Image.open(f[0]).convert('RGBA');assert im.size==(CELL*N,CELL),(b,d,im.size);sheets[d]=(f[0],im)
     pooled=np.concatenate([np.asarray(im).reshape(-1,4) for _,im in sheets.values()]).astype(np.float32);m1=pooled[pooled[:,3]>128][:,:3].mean(axis=0)
     g=[float(np.clip(im0[c]/max(1,m1[c]),.65,1.35)) for c in range(3)]
-    ent={'idle':[{'path':'assets/'+rel,'rect':rect or [0,0]+full,'size':full,'bbox':ib}],'cell':CELL,'n':N,'fps':8,'dirs':{}}
+    ent={'idle':idles,'cell':CELL,'n':N,'fps':8,'dirs':{}}
     for d,(f,im) in sheets.items():
       o=tone(im,g);a=np.asarray(o)[...,3];bbs=[bbox(a[:,i*CELL:(i+1)*CELL]) for i in range(N)]
-      py=float(np.median([q[3] for q in bbs]));top=float(np.median([q[1] for q in bbs]));px=float(np.median([(q[0]+q[2])/2 for q in bbs]))
+      py=float(np.median([q[3] for q in bbs]));vis=float(np.median([body(a[:,i*CELL:(i+1)*CELL]) for i in range(N)]));px=float(np.median([(q[0]+q[2])/2 for q in bbs]))
       buf=io.BytesIO();o.save(buf,'WEBP',quality=88,method=6,exact=False);by=buf.getvalue();name=eid+'-'+d+'.webp';(OUT/name).write_bytes(by)
-      ent['dirs'][d]={'path':'assets/r974/move/'+name,'px':round(px,1),'py':round(py,1),'vis':round(py-top,1)}
+      ent['dirs'][d]={'path':'assets/r974/move/'+name,'px':round(px,1),'py':round(py,1),'vis':round(vis,1)}
       rows.append({'dots':b,'enemy':eid,'dir':d,'source':'Dots CX-0082MV '+b+'/'+os.path.basename(f),'sourceSha256':hashlib.sha256(Path(f).read_bytes()).hexdigest(),'toneGain':[round(v,3) for v in g],
         'path':'assets/r974/move/'+name,'size':list(o.size),'bytes':len(by),'sha256':hashlib.sha256(by).hexdigest(),'use':'보스·중간보스 방향 이동','applied':True})
     table[eid]=ent
   for b,why in HOLD.items():rows.append({'dots':b,'applied':False,'why':why})
-  js='// R974 방향 이동 표 — scripts/r974-move-dir.py 가 만든다(손으로 고치지 않는다). 적 nativeId → 대기 그림(경로·칸·보이는 테두리)·방향 시트(경로·가운데 x·발 줄·보이는 키).\nwindow.__STORYWORLD_MOVE_DIR_R974_DATA__='+json.dumps({'revision':'R974','enemies':table},ensure_ascii=False,separators=(',',':'))+';\n'
+  js='// R974 방향 이동 표 — scripts/r974-move-dir.py 가 만든다(손으로 고치지 않는다). 적 nativeId → 대기 그림(경로·칸·알파 테두리·몸통 키)·방향 시트(경로·가운데 x·발 줄·몸통 키).\nwindow.__STORYWORLD_MOVE_DIR_R974_DATA__='+json.dumps({'revision':'R974','enemies':table},ensure_ascii=False,separators=(',',':'))+';\n'
   (R/'client-source/move-dir-r974-data.js').write_text(js,encoding='utf8')
   (R/'r974-move-dir.json').write_text(json.dumps({'round':'R974','request':'CX-0082MV','files':rows},ensure_ascii=False,indent=1)+'\n',encoding='utf8')
   print(len(table),'enemies',sum(1 for r in rows if r.get('applied')),'sheets',sum(r.get('bytes',0) for r in rows),'bytes')
-  for k,v in table.items():print(k,v['idle'][0]['bbox'],{d:(q['px'],q['py'],q['vis']) for d,q in v['dirs'].items()})
+  for k,v in table.items():print(k,v['idle'][0]['bbox'],v['idle'][0]['body'],{d:(q['px'],q['py'],q['vis']) for d,q in v['dirs'].items()})
 if __name__=='__main__':main(sys.argv[1],sys.argv[2])
