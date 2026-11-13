@@ -10344,7 +10344,7 @@ window.__STORYWORLD_STATUS_ATLAS_R58__=Object.freeze({"pxf-28":{"path":"assets/p
  if(window.__STORYWORLD_PORTALS_R61__)return;
  const native=window.__STORYWORLD_REGION_ROUTES__;
  if(!native)throw Error('R61 portals require the native regional route controller');
- const vectors={n:[0,-1],s:[0,1],e:[1,0],w:[-1,0]},placements=new WeakMap(),otherRooms=new Map();
+ const vectors={n:[0,-1],s:[0,1],e:[1,0],w:[-1,0]},placements=new WeakMap(),otherRooms=new Map();window.__STORYWORLD_R61_OTHER_ROOMS__=Object.freeze({size:()=>otherRooms.size,clear:()=>{const n=otherRooms.size;otherRooms.clear();return n;}});/* R992: 모바일 생존이 지난 방 보관을 비우는 손잡이 */
  const nativeTravel=travel,nativeInteract=interact,nativeSpawn=spawnPoint,nativeGuide=guideStep,nativeHUD=updateHUD;
  const enterBase=enterRegion,compileBase=compileWorld;
  function requirePortalArt(id){for(const def of regions)if((!id||def.id===id)&&!def.paths.includes(PROPS.portal))def.paths.push(PROPS.portal);register(PROPS.portal,'image','R61 transparent regional warp');}
