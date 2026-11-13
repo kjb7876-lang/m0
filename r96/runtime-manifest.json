@@ -50944,8 +50944,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6577723,
-      "sha256": "7adc278fd27f1b6b20c60592394e0ff4b4fc2b947e6d061feffca6bd6f9ed806"
+      "bytes": 6577774,
+      "sha256": "bdf531b74c609f403a87500acc81e2bfd69a5fd8055bcc47bed54204a22a8ea7"
     },
     {
       "path": "intro-r140.js",
@@ -51599,8 +51599,8 @@
     },
     {
       "path": "samong-r103.js",
-      "bytes": 87567,
-      "sha256": "a013ea34b191bb6e453f543609f86b6a64d9cf64242634452b9e0efde908bea4"
+      "bytes": 87829,
+      "sha256": "dcfc8479b87dc2c47adf8f1e6c9db61cef0d2172136476af453fbef0eb8f7582"
     },
     {
       "path": "samong-r161.js",
@@ -51864,8 +51864,13 @@
     },
     {
       "path": "survival-r600.js",
-      "bytes": 72464,
-      "sha256": "7e7202eaf3f86878420984ce6586b052735aa4860b04d52b5176fefe7184abf3"
+      "bytes": 73809,
+      "sha256": "5f3e429075311041c2e670f030e9a606ec9cdf890bd09e674fcb16a8330c04c7"
+    },
+    {
+      "path": "survival-samong-r1006.js",
+      "bytes": 6680,
+      "sha256": "e17ae3f17d20a14de432debacbbdb867b43b2e2bbad9e9e021c9504064a47c23"
     },
     {
       "path": "swamp-hands-r474.js",
@@ -52108,9 +52113,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10421,
-  "totalBytes": 1280024530,
-  "webHTMLSha256": "7adc278fd27f1b6b20c60592394e0ff4b4fc2b947e6d061feffca6bd6f9ed806",
+  "fileCount": 10422,
+  "totalBytes": 1280032868,
+  "webHTMLSha256": "bdf531b74c609f403a87500acc81e2bfd69a5fd8055bcc47bed54204a22a8ea7",
   "largest": [
     {
       "path": "index.html",
