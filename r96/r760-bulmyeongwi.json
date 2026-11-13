@@ -368,5 +368,87 @@
    "bytes": 370360,
    "sha256": "0f3af3c908da8e14a290e658001fa464740267d5c72662bf8f82f9b854f10b6c"
   }
+ ],
+ "sheets973": [
+  {
+   "who": "boss",
+   "key": "moveDown",
+   "source": "Dots CX-0082MV 692e4ae01c29_bulmyeongwi_idle-walk-down.png",
+   "sourceSha256": "973e88b9dec23fa6d7a6a9881c05b560c69b54e5c6a866ecfe10f32d5a4b80e0",
+   "frames": 4,
+   "cell": 384,
+   "toneGain": 0.76,
+   "path": "assets/r760/boss/sheet-moveDown.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 103638,
+   "sha256": "c0e743291e587394ce6689d6fd13a2cbb2acc0f0e6b73fafce3ba31908b84e11"
+  },
+  {
+   "who": "boss",
+   "key": "moveUp",
+   "source": "Dots CX-0082MV 692e4ae01c29_bulmyeongwi_idle-walk-up.png",
+   "sourceSha256": "6e0b1a3372966c4b032c947a6bd8335aa9c4f61c100eeafefe8b654b1890d022",
+   "frames": 4,
+   "cell": 384,
+   "toneGain": 0.76,
+   "path": "assets/r760/boss/sheet-moveUp.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 105030,
+   "sha256": "3dae5ae8d5bd0ea9e41afae7412aa555a99ecd4a79b59dc5779deab489bedc21"
+  },
+  {
+   "who": "mid",
+   "key": "moveSide",
+   "source": "Dots CX-0082MV bulmyeongwi_b-walk-side.png",
+   "sourceSha256": "ef3c26bf25059cca282ca09592f60bd489ceb47e5edd752a0cbc4b470145444e",
+   "frames": 4,
+   "cell": 384,
+   "toneGain": 0.7,
+   "path": "assets/r760/mid/sheet-moveSide.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 74388,
+   "sha256": "b1f241314e5cfd456b9dc849d408548ed1d4e7ad5ebe77aecf1ff469a99c056e"
+  },
+  {
+   "who": "mid",
+   "key": "moveDown",
+   "source": "Dots CX-0082MV bulmyeongwi_b-walk-down.png",
+   "sourceSha256": "508a5b1144ce06429165b3c2a48b2062d43183c263add068d1e79e1ead69301c",
+   "frames": 4,
+   "cell": 384,
+   "toneGain": 0.7,
+   "path": "assets/r760/mid/sheet-moveDown.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 71788,
+   "sha256": "c49a5b399db59d377b0aaff419f11bce8d352638ab340373ca36bd3bf5cc7f7e"
+  },
+  {
+   "who": "mid",
+   "key": "moveUp",
+   "source": "Dots CX-0082MV bulmyeongwi_b-walk-up.png",
+   "sourceSha256": "74419cf8ae527744bacc754e830219af97c62c6faa64b45edd4d816fba8f1e19",
+   "frames": 4,
+   "cell": 384,
+   "toneGain": 0.7,
+   "path": "assets/r760/mid/sheet-moveUp.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 74484,
+   "sha256": "2ad3400987a505a460126f363fc11de558270511432003181277170bec2c8281"
+  }
  ]
 }
