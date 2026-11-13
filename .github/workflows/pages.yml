@@ -518,6 +518,8 @@ jobs:
         run: node r96/qa/r990/r990-cpu-check.cjs
       - name: R996 bulmyeongwi fog summon still fires in the boss phase after every field mob is gone CPU check
         run: node r96/qa/r996/r996-cpu-check.cjs
+      - name: R1007 samong confront statement markers never overlap (4-marker zones M-1 Michaela, S-04 16th floor were unpassable) CPU check
+        run: node r96/qa/r1007/stmt-spread-cpu-check.cjs
       - name: R963 survival BGM note sits below the survival HUD line (no overlapped text) CPU check
         run: node r96/qa/r963/r963-cpu-check.cjs
       - name: R980 mobile memory budget (R163/R106 tint caches capped by pixels on mobile, idle decoded images trimmed, desktop unchanged) CPU check
