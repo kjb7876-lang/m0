@@ -283,8 +283,9 @@ function drawArbFx(x,t){const {z,T1,AH}=scale(),id='r949:arb:'+x.t0.toFixed(2);
     if(orb){ctx.save();try{ctx.globalCompositeOperation='lighter';ctx.globalAlpha*=1-v;ctx.drawImage(orb,hp.x-S/2,hp.y-AH*.45-S/2,S,S);}finally{ctx.restore();}}else glow(hp.x,hp.y-AH*.45,S*.5,ICE,1-v);ring(hp,R*(.4+.6*v),PALE,Math.max(2,6*z*(1-v)),1-v,.12*(1-v));});}}
   else{const p=project(c.x,c.y),Rs=ARB_ROOM.safe*T1*.5,hd=sheet('haste');
    sc({id:cid,kind:'effect',pxfSide:'hero',x:c.x,y:c.y,groundAligned:true},()=>{if(hd)cell(hd,'haste',Math.floor(t*12.5),p.x,p.y,Rs*2/SH.haste.span,'source-over',.5+.4*w);ring(p,Rs,PALE,Math.max(2,3*z),.6+.4*w,.06);
-    if(hv!=null){const R=Rs+(ARB_ROOM.r*T1*.5-Rs)*Math.sqrt(hv),f=1-hv;if(!(X986()&&X986().room&&X986().room(p,R,f,cid,c,sc))){ring(p,R,VIO,Math.max(2,9*z*f),f,0);ring(p,R*.86,PALE,Math.max(1,3*z),f*.8,0);}}});}}}
+    if(hv!=null){const R=Rs+(ARB_ROOM.r*T1*.5-Rs)*Math.sqrt(hv),f=1-hv;if(!(X995()&&X995().wave&&X995().wave(p,R,ARB_ROOM.r*T1*.5,f,cid,c,sc))&&!(X986()&&X986().room&&X986().room(p,R,f,cid,c,sc))){ring(p,R,VIO,Math.max(2,9*z*f),f,0);ring(p,R*.86,PALE,Math.max(1,3*z),f*.8,0);}}});}}}
 const X986=()=>{try{return window.__STORYWORLD_SEOHA_FX_R986__||null;}catch(_){return null;}};
+const X995=()=>{try{return window.__STORYWORLD_SEOHA_FX_R995__||null;}catch(_){return null;}};
 function drawBlinks(t){if(!blinks.length)return;const {AH}=scale(),rb=sheet('riftB'),rf=sheet('riftF');for(const b of blinks){const fr=Math.max(0,Math.min(23,Math.floor((t-b.t0)*30))),q=project(b.x,b.y),W=256*AH/150*b.k,id='r949:rift:'+b.t0.toFixed(2)+':'+b.x.toFixed(1)+':'+b.y.toFixed(1);
   /* R986: Dots 소집 문 시트가 준비됐으면 그쪽이 그린다(아니면 아래 기존 틈새 그림). */
   if(X986()&&X986().gate&&X986().gate(b,t,q,AH,sc))continue;
