@@ -506,6 +506,8 @@ jobs:
         run: node r96/qa/r962/r962-cpu-check.cjs
       - name: R971 hero special passive growth CPU check
         run: node r96/qa/r971/r971-cpu-check.cjs
+      - name: R990 bulmyeongwi fog skills (fog summon of village mobs, fog-weighted patterns, old boss art in summon ghosts) CPU check
+        run: node r96/qa/r990/r990-cpu-check.cjs
       - name: R963 survival BGM note sits below the survival HUD line (no overlapped text) CPU check
         run: node r96/qa/r963/r963-cpu-check.cjs
       - name: R463 seven-sins boss art (one form per fight, one body height, no cut-out broom) CPU check
