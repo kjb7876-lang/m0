@@ -9497,6 +9497,7 @@
     "assets/r990/fog-core.webp",
     "bulmyeongwi-fog-r990.js",
     "seoha-epoch-fx-r986.js",
+    "assets/r948/mh05-cloud24.webp",
     "assets/r912/pj01-fly.webp",
     "assets/r912/pj01-hit.webp",
     "assets/r912/pj02-fly.webp",
@@ -10604,5 +10605,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "607340cabdca97f39b09e27dd372e1218a434a5bf11f13021591b1ef92b04d07"
+  "runtimeManifestSHA256": "d0485f3304cb00e9fbea27ef98979cac4effe69ad204b339e9f65fa128a6647c"
 }

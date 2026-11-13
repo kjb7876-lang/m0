@@ -187,6 +187,21 @@ if(exists){
   // 그림이 아직 안 읽혔으면 코드 그림으로(오류 없음)
   g=env();vm.runInContext('imgReady=false',g);for(const k of ['bloom','tower']){A(g).qaReset();A(g).qaForce(k);g.room.enemies.push(mob('f'+k,13,10,{hp:1e9}));heroHit(g,'f'+k);step(g,60,.05);}
   ok('R988 pictures not loaded → code-drawn fallback, no errors',A(g).inspect().stats.errors===0&&vm.runInContext('hearts.length',g)>5);}
+ // ---- R998 Dots CX-0094MH MH-05 하트 구름(기존 24장 알파 60% 정리판) ----
+ {const cellOf=(r,cols)=>r.sx/256+cols*(r.sy/256);
+  const M05=/assets\/r948\/mh05-cloud24\.webp/,grab=(g)=>vm.runInContext('drawn',g).filter(x=>M05.test(x.src)).map(x=>({sx:x.a[0],sy:x.a[1],w:x.a[2],h:x.a[3]}));
+  const tick1=(g,dt)=>{vm.runInContext('drawn.length=0',g);step(g,1,dt);};
+  let g=env();A(g).qaForce('bloom');g.room.enemies.push(mob('c',13,10,{hp:1e9,maxHp:1e9}));heroHit(g,'c');
+  for(let i=0;i<40;i++)step(g,1,.05); // 충전 2초 → 폭발, 구름 시작
+  const seen=[];for(let i=0;i<90;i++){tick1(g,.05);const r=grab(g);if(r.length)seen.push({i,cells:r});}
+  const all=seen.flatMap(s=>s.cells);
+  ok('R998 heart cloud drawn from MH-05 (24 cells of 256, 6×4)',all.length>0&&all.every(c=>c.w===256&&c.h===256&&c.sx%256===0&&c.sy%256===0&&cellOf(c,6)<=23));
+  const fr=seen.map(s=>Math.max(...s.cells.map(c=>cellOf(c,6))));
+  ok('R998 MH-05 plays once across the cloud life: starts small (≤ 2), swells mid-way, ends on the last frames (≥ 21)',fr.length>20&&fr[0]<=2&&fr.some(f=>f>=10&&f<=13)&&fr[fr.length-1]>=21);
+  ok('R998 MH-05 never jumps back (frame order kept)',fr.every((f,i)=>i===0||f>=fr[i-1]));
+  ok('R998 cloud damage unchanged (power × .3 per .5 s tick, 8 ticks)',procHits(g,'cloud').length===8&&procHits(g,'cloud').every(h=>Math.abs(h.v-procHits(g,'cloud')[0].v)<1e-9));
+  g=env();vm.runInContext('imgReady=false',g);A(g).qaForce('bloom');g.room.enemies.push(mob('d',13,10,{hp:1e9}));heroHit(g,'d');step(g,140,.05);
+  ok('R998 MH-05 not loaded → code puffs fallback, no errors',A(g).inspect().stats.errors===0&&!grab(g).length);}
  // ---- 3D 기록기 안전(헤드리스 실측: 폭발 순간 u=2-1e-9 에서 sqrt(음수)=NaN → Three.js 'Nonfinite original draw command' → 화면 실패로 게임 정지) ----
  {const bad=[];const watch=g=>{const raw=g.ctx;g.ctx=new Proxy(raw,{get(o,k){const v=o[k];if(typeof v!=='function')return v;return (...a)=>{a.forEach((x,i)=>{if(typeof x==='number'&&!Number.isFinite(x))bad.push(String(k)+'#'+i);});return v.apply(o,a);};},set(o,k,v){if(typeof v==='number'&&!Number.isFinite(v))bad.push('set:'+String(k));o[k]=v;return true;}});};
   const at=(g,t)=>{g.time=t;vm.runInContext('time='+t+';tick();for(const e of effects.slice())drawEffect(e)',g);};
