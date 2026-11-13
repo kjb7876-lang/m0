@@ -446,6 +446,8 @@ jobs:
         run: node r96/qa/r955/r955-cpu-check.cjs
       - name: R967 boss/midboss sound gaps (hospital surgeon, syringe phantom new ElevenLabs sounds, wrath boss uses the R788 satan set) CPU check
         run: node r96/qa/r967/r967-cpu-check.cjs
+      - name: R993 SFX audit mix (category loudness trim, pitch variation, mob-layer admission, ducking, 4 cut-off sounds re-edited) CPU check
+        run: node r96/qa/r993/r993-cpu-check.cjs
       - name: R968 boss/midboss attack sounds also fire on route phases and rooms without an R78 phase (same rule as R966) CPU check
         run: node r96/qa/r968/r968-cpu-check.cjs
       - name: R964 boss attack sound also fires on story pattern attacks (no attack id, no bossVolley) CPU check

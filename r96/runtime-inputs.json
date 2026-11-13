@@ -9430,7 +9430,12 @@
     "assets/r953/gv-call.webp",
     "assets/r953/gv-friend.webp",
     "assets/r953/gv-lock.webp",
-    "passive-growth-r971.js"
+    "passive-growth-r971.js",
+    "sfx-mix-r993.js",
+    "assets/r993/sfx/seoha-awake.ogg",
+    "assets/r993/sfx/boss-dark-attack.ogg",
+    "assets/r993/sfx/bmg-rain-1.ogg",
+    "assets/r993/sfx/index.json"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -10505,5 +10510,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "798ee290b998bdb80ff5957d5ad39a5eed42e80d848439c1e0cd8c292a701d52"
+  "runtimeManifestSHA256": "150d2cd22391c28a2a83b1ca5e5a3110e9a85379ecc3244c77076bf58d9956c2"
 }
