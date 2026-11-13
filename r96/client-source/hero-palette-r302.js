@@ -87,14 +87,16 @@ function remapF(F,name){const h=hero();if(!on||!h||!F)return F;stats.sp++;
 //  광장에서 환도 777 은 한 장면에 remapF 를 300~650번 부르고 그때마다 호출 파일을 찾으려 스택을 잡는다. 이 게임은 그리기가 감싸기 수백 겹 안에서
 //  돌아 Error 하나 만드는 데 약 50마이크로초(스택 깊이에 비례, 칸 수 한도와 무관)라 장면당 19~51ms(그리기의 18~36%, 헤드리스)를 썼다.
 //  → '그리는 자리' 열쇠(지금 그리는 엔진 효과 종류 | 그림 이름 | 팔레트 값 | 영웅)가 같은 파일에서 MEMO_OK 번 잇달아 같은 판정을 받으면
-//  그 뒤로는 스택 없이 그 결과를 돌려주고(memoHit), MEMO_EVERY 번째마다 예전 길(스택)로 다시 확인한다(memoNote).
+//  그 뒤로는 스택 없이 그 결과를 돌려주고(memoHit), 무작위로 골라(처음 256번은 4번에 1번, 그 뒤 16번에 1번) 예전 길(스택)로 다시 확인한다(memoNote).
+//  정해진 간격이 아니라 무작위인 까닭: 한 장면에 같은 열쇠를 8·16번씩 같은 순서로 그리면 간격 확인이 늘 같은 자리만 봐서 가끔 끼는 다른 파일을 영영 못 본다(실측).
 //  한 번이라도 파일·판정이 어긋난 열쇠는 영영 예전 길이다. play-r111(같은 파일 안에서 threadSlash 만 실 규칙)과 파일을 못 찾은 호출도 영영 예전 길.
 //  판정 표(decided)·통계(sp·spMapped)·색 규칙은 그대로. 끄기: __STORYWORLD_HERO_PALETTE_R302__.memo(false)
-const MISS={},memo=new Map(),MEMO_OK=32,MEMO_EVERY=16,MEMO_MAX=3000;let seenFile=null,seenKind=null,memoOn=true,shadow=false,shadowQ=MISS,memoKey=null,fxType='';
+const MISS={},memo=new Map(),MEMO_OK=32,MEMO_EARLY=256,MEMO_MAX=3000;let memoRnd=0x9e3779b9;
+const memoCheck=m=>{memoRnd=(Math.imul(memoRnd,1103515245)+12345)>>>0;return (memoRnd>>>16)%(++m.n<=MEMO_EARLY?4:16)===0;};let seenFile=null,seenKind=null,memoOn=true,shadow=false,shadowQ=MISS,memoKey=null,fxType='';
 const samePal=(x,y)=>x===y||(!!x&&!!y&&!!x.a&&!!y.a&&!!x.b&&!!y.b&&x.a.join()===y.a.join()&&x.b.join()===y.b.join());
 function memoHit(F,h,name){memoKey=null;seenFile=null;seenKind=null;shadowQ=MISS;if(!memoOn)return MISS;
  try{const P=SP0.pal(F);memoKey=fxType+'|'+(name||'')+'|'+P.a.join()+'|'+P.b.join()+'|'+h;}catch(_){return MISS;}
- const m=memo.get(memoKey);if(!m||m.slow||m.ok<MEMO_OK||!(++m.n%MEMO_EVERY))return MISS;
+ const m=memo.get(memoKey);if(!m||m.slow||m.ok<MEMO_OK||memoCheck(m))return MISS;
  stats.spFast=(stats.spFast||0)+1;if(m.same)return F;if(!shadow)stats.spMapped++;return m.res;}
 function memoNote(F,res){const key=memoKey,file=seenFile,kind=seenKind;if(!memoOn||key===null)return res;
  // 그림자 검사(shadow, 실플레이 검증용): 빠른 길이 내놓은 팔레트를 쓰지 않고 예전 길 결과와 값으로 대조해 어긋난 수를 센다(게임은 예전 길 결과로 그림)

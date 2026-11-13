@@ -4,8 +4,8 @@
 //  열쇠 = 지금 그리는 엔진 효과 종류 | 그림 이름 | 팔레트 값 | 영웅.
 //  ① 성능 성질: 같은 열쇠를 같은 파일이 계속 그리면 스택 잡기가 호출 수의 1/8 아래로 준다(예전 코드는 호출마다 1번 — 이 검사에서 실패)
 //  ② 그리는 색: 열쇠마다 그리는 파일이 하나일 때 기억을 끈 것(memo(false) = 예전 길)과 하나하나 같다(영웅 8명 × 파일 × 호출 모양 × 팔레트, 반복·섞은 순서)
-//  ③ play-r111 은 기억하지 않는다(threadSlash 만 실 규칙) ④ 같은 열쇠를 판정이 다른 파일이 이어서 쓰면 MEMO_EVERY 번 안에 알아채고 그 뒤 영영 예전 길
-//     (알려진 한계: 그 사이 최대 15번은 앞 파일의 판정으로 그려질 수 있다. 처음부터 섞어 쓰는 열쇠는 한 번도 안 틀린다. 엔진 효과 종류가 다르면 열쇠가 다르다)
+//  ③ play-r111 은 기억하지 않는다(threadSlash 만 실 규칙) ④ 같은 열쇠를 판정이 다른 파일이 이어서 쓰면 무작위 재확인(4번에 1번, 256번 뒤 16번에 1번)이 알아채고 그 뒤 영영 예전 길
+//     (알려진 한계: 그 사이 평균 3번, 늦게 끼어들면 평균 15번은 앞 파일의 판정으로 그려질 수 있다. 처음부터 섞어 쓰는 열쇠는 한 번도 안 틀린다. 엔진 효과 종류가 다르면 열쇠가 다르다)
 //  ⑤ 팔레트 값·영웅이 바뀌면 열쇠가 달라 다시 센다 ⑥ 끄기·영웅 없음은 스택 0 ⑦ 그림자 검사(shadow) ⑧ 연결(런타임 사본·CI)
 //  SRC=<파일> 로 다른 소스(예: 고치기 전)를 넣어 돌릴 수 있다.
 'use strict';const fs=require('fs'),path=require('path'),vm=require('vm');
@@ -35,12 +35,12 @@ const mkPals=()=>[{a:[40,170,176],b:[170,250,240]},{a:[120,80,18],b:[255,236,170
 const HEROES=['hwando','seoha','neon','michaela','lauren','hunter','slayer','gunner'];
 const hasMemo=typeof engine().API.memo==='function';
 // ① 성능 성질 — 광장 모양: 영웅 파일들이 저마다 제 팔레트 객체로 계속 그림
-{const E=engine(),N=1600,rows=[];let capsAll=0,drawsAll=0;
+{const E=engine(),N=3200,rows=[];let capsAll=0,drawsAll=0;
  for(const [file,sh] of [['play-r113.js','draw'],['hero-fx-r102.js','along'],['fx-d2s-r106.js','draw'],['polish-r101.js','method'],['combat-r160.js','arrow'],['mob-motion-r286.js','draw']]){
   const go=E.mk(file,SHAPES[sh]),F={a:[40+rows.length,170,176],b:[170,250,240]};let c=0,d=0;for(let i=0;i<N;i++){const r=E.call(go,F);c+=r.caps;d+=r.draws;}rows.push([file,c,d]);capsAll+=c;drawsAll+=d;}
  console.log('stack captures per draw (same palette object, same file, '+N+' draws each): '+(capsAll/drawsAll).toFixed(3)+' '+JSON.stringify(rows));
  ok('steady drawing captures a stack for fewer than 1 in 8 draws',capsAll/drawsAll<1/8,{capsAll,drawsAll});
- ok('each caller still verified now and then (≥ 1 capture per 16 draws once trusted)',rows.every(([f,c,d])=>c>=32+Math.floor((d-32)/16)-1&&c<=32+Math.ceil((d-32)/16)+1),rows);
+ ok('each caller still verified now and then (32 to earn trust, then about 1 in 4 for 256 draws, then about 1 in 16)',rows.every(([f,c,d])=>c>=32+40+100&&c<=32+90+270),rows);
  const st=E.API.inspect().stats;ok('stats: sp counts every call, fast path used, nothing mixed',st.sp===drawsAll&&st.spFast>0&&!st.memoMixed&&!st.fastWrong,st);}
 // ② 그리는 색이 예전 길과 같다
 function drive(memoOn,{rep=1,shuffle=0}={}){const E=engine();if(hasMemo)E.API.memo(memoOn);const PALS=mkPals(),jobs=[],out=[];
@@ -65,18 +65,22 @@ function drive(memoOn,{rep=1,shuffle=0}={}){const E=engine();if(hasMemo)E.API.me
  for(let i=0;i<120;i++){const r=E.call(boss,F);c+=r.caps;d+=r.draws;if(r.got!==want.boss)bad++;}for(let i=0;i<120;i++){const r=E.call(thr,F);c+=r.caps;d+=r.draws;if(r.got!==want.thr)bad++;}
  for(let i=0;i<120;i++){const r=E.call(i%2?thr:boss,F);c+=r.caps;d+=r.draws;if(r.got!==(i%2?want.thr:want.boss))bad++;}
  ok('play-r111 always decided by stack (no memo), never wrong',bad===0&&c===d,{bad,c,d});}
-// ④ 같은 객체를 판정이 다른 파일이 이어서 씀: 어긋남을 MEMO_EVERY(16)번 안에 알아채고 그 뒤 영영 예전 길
+// ④ 같은 열쇠를 판정이 다른 파일이 이어서 씀: 무작위 재확인이 곧 알아채고 그 뒤 영영 예전 길
 {const E=engine();E.g.player.hero='neon';const F=mkPals()[1],heroF=E.mk('hero-fx-r102.js',SHAPES.draw),thrF=E.mk('hero-threads-r174.js',SHAPES.draw),mobF=E.mk('mob-motion-r286.js',SHAPES.draw);
  const ref=engine();ref.g.player.hero='neon';if(hasMemo)ref.API.memo(false);const want={hero:ref.call(ref.mk('hero-fx-r102.js',SHAPES.draw),mkPals()[1]).got,thr:ref.call(ref.mk('hero-threads-r174.js',SHAPES.draw),mkPals()[1]).got,mob:ref.call(ref.mk('mob-motion-r286.js',SHAPES.draw),mkPals()[1]).got};
  ok('reference: three different decisions for this palette',new Set(Object.values(want)).size===3,want);
  for(let i=0;i<100;i++)E.call(heroF,F);let wrong=0,lastWrong=-1;for(let i=0;i<100;i++){if(E.call(thrF,F).got!==want.thr){wrong++;lastWrong=i;}}
- ok('shared key switching file: wrong draws bounded (< 16) then correct',wrong<16&&lastWrong<16,{wrong,lastWrong});
+ ok('shared key switching file: wrong draws bounded (< 24) then correct',wrong<24&&lastWrong<24,{wrong,lastWrong});
  let c=0,d=0,bad=0;for(let i=0;i<60;i++){for(const [go,w] of [[heroF,want.hero],[thrF,want.thr],[mobF,want.mob]]){const r=E.call(go,F);c+=r.caps;d+=r.draws;if(r.got!==w)bad++;}}
  ok('after a mismatch that key is always decided by stack and always right',bad===0&&c===d,{bad,c,d});
  ok('mismatch recorded',E.API.inspect().stats.memoMixed>=1,E.API.inspect().stats);
  // 처음부터 섞어 쓰는 객체(잇달아 32번을 못 채움)는 한 번도 틀리지 않는다
  const E2=engine();E2.g.player.hero='neon';const G=mkPals()[1],h2=E2.mk('hero-fx-r102.js',SHAPES.draw),t2=E2.mk('hero-threads-r174.js',SHAPES.draw);let bad2=0;for(let i=0;i<300;i++){const th=i%5===4;if(E2.call(th?t2:h2,G).got!==(th?want.thr:want.hero))bad2++;}
  ok('key shared from the start (interleaved) is never wrong',bad2===0,{bad2});
+ // 한 장면에 영웅 파일 15번 + 다른 파일 1번을 늘 같은 순서로(주기 16) 그려도 곧 알아챈다(정해진 간격 확인이면 영영 못 봄 — 실측에서 나온 모양)
+ {const E4=engine();E4.g.player.hero='neon';const P4=mkPals()[1],h4=E4.mk('hero-fx-r102.js',SHAPES.draw),m4=E4.mk('mob-motion-r286.js',SHAPES.draw);let w4=0;
+  for(let i=0;i<64;i++)E4.call(h4,P4);for(let fr=0;fr<200;fr++){for(let i=0;i<15;i++)if(E4.call(h4,P4).got!==want.hero)w4++;if(E4.call(m4,P4).got!==want.mob)w4++;}
+  ok('period-16 pattern with one foreign draw per frame: caught early (wrong < 24), then exact',w4<24&&E4.API.inspect().stats.memoMixed===1,{w4});}
  // 엔진 효과 종류가 다르면 열쇠가 달라, 같은 그림·같은 팔레트를 영웅 파일과 몹 파일이 길게 번갈아 그려도 안 틀리고 둘 다 빠른 길
  const E3=engine();E3.g.player.hero='neon';const H3=mkPals()[1],h3=E3.mk('hero-fx-r102.js',`function go(F){drawEffect({type:'heroCast'},()=>${S}.draw('glow',F,0,0));}`),m3=E3.mk('mob-motion-r286.js',`function go(F){drawEffect({type:'mobSlam'},()=>${S}.draw('glow',F,0,0));}`);let bad3=0,c3=0,d3=0;
  for(let r=0;r<4;r++){for(let i=0;i<200;i++){const x=E3.call(h3,H3);c3+=x.caps;d3+=x.draws;if(x.got!==want.hero)bad3++;}for(let i=0;i<200;i++){const x=E3.call(m3,H3);c3+=x.caps;d3+=x.draws;if(x.got!==want.mob)bad3++;}}
@@ -95,7 +99,7 @@ function drive(memoOn,{rep=1,shuffle=0}={}){const E=engine();if(hasMemo)E.API.me
 {const E=engine();ok('shadow API present',typeof E.API.shadow==='function');if(typeof E.API.shadow==='function'){E.API.shadow(true);E.g.player.hero='neon';const F=mkPals()[1],go=E.mk('hero-fx-r102.js',SHAPES.draw),mob=E.mk('mob-motion-r286.js',SHAPES.draw);
   const ref=engine();ref.g.player.hero='neon';ref.API.memo(false);const wh=ref.call(ref.mk('hero-fx-r102.js',SHAPES.draw),mkPals()[1]).got,wm=ref.call(ref.mk('mob-motion-r286.js',SHAPES.draw),mkPals()[1]).got;
   let bad=0;for(let i=0;i<200;i++)if(E.call(go,F).got!==wh)bad++;let st=E.API.inspect().stats;ok('shadow, one file: fast path checked against the stack path, 0 wrong',bad===0&&st.spFast>100&&!st.fastWrong,st);
-  for(let i=0;i<10;i++)if(E.call(mob,F).got!==wm)bad++;st=E.API.inspect().stats;ok('shadow, other file takes over the key: draws stay right (shadow draws the stack result) and the mismatches are counted',bad===0&&st.fastWrong>=5&&st.wrong&&Object.keys(st.wrong).length===1,st);}}
+  for(let i=0;i<10;i++)if(E.call(mob,F).got!==wm)bad++;st=E.API.inspect().stats;ok('shadow, other file takes over the key: draws stay right (shadow draws the stack result) and the mismatches are counted',bad===0&&st.fastWrong>=1&&st.wrong&&Object.keys(st.wrong).length===1,st);}}
 // ⑧ 연결
 ok('runtime copy matches client-source',fs.readFileSync(path.join(R,'runtime-text/hero-palette-r302.js'),'utf8')===fs.readFileSync(path.join(R,'client-source/hero-palette-r302.js'),'utf8'));
 ok('CI step',fs.readFileSync(path.join(ROOT,'.github/workflows/pages.yml'),'utf8').includes('node r96/qa/r1012/r1012-cpu-check.cjs'));
