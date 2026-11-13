@@ -119,7 +119,7 @@ for(const mobile of[false,true]){const {doc,sb,flush}=make({mobile});const panel
  check('CSS: CSS filter(blur·drop-shadow) 안 씀(Three.js 기록기 함정)',!/filter\s*:/.test(css));}
 // ⑤ 연결
 const idx=fs.readFileSync(path.join(root,'runtime-text','index.html'),'utf8');
-check('태그 한 번, 영화 마무리 R1008 바로 뒤',idx.split('"./ui-clean-r1015.js"').length===2&&/cinema-finish-r1008\.js"><\/script>\n<script src="\.\/ui-clean-r1015\.js"><\/script>/.test(idx));
+check('태그 한 번, 실 커스텀 R1016(영화 마무리 R1008 바로 뒤) 다음',idx.split('"./ui-clean-r1015.js"').length===2&&/cinema-finish-r1008\.js"><\/script>\n<script src="\.\/thread-custom-r1016\.js"><\/script>\n<script src="\.\/ui-clean-r1015\.js"><\/script>/.test(idx));
 const rt=path.join(root,'runtime-text','ui-clean-r1015.js');check('runtime-text 사본이 같음(sync)',fs.existsSync(rt)&&fs.readFileSync(rt,'utf8')===src);
 check('runtime-inputs·manifest 에 들어감',fs.readFileSync(path.join(root,'runtime-inputs.json'),'utf8').includes('"ui-clean-r1015.js"')&&fs.readFileSync(path.join(root,'runtime-manifest.json'),'utf8').includes('"ui-clean-r1015.js"'));
 check('공개 확인 목록에 들어감',fs.readFileSync(path.join(root,'..','scripts','verify-r96-public.py'),'utf8').includes("'ui-clean-r1015.js'"));

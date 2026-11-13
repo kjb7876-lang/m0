@@ -1,0 +1,1148 @@
+{
+ "u205-e3": {
+  "zone": "u205",
+  "name": "역전기록 수집가",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 27,
+    "settled": {
+     "still": 14
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 26,
+    "settled": {
+     "down": 13
+    },
+    "frames": "0123",
+    "vis": [
+     74
+    ]
+   },
+   "up": {
+    "n": 25,
+    "settled": {
+     "busy": 3,
+     "up": 10
+    },
+    "frames": "0123",
+    "vis": [
+     74
+    ]
+   },
+   "right": {
+    "n": 25,
+    "settled": {
+     "no-side": 13
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 26,
+    "settled": {
+     "busy": 9,
+     "no-side": 4
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 207,
+    "swapped": 37,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "b09-c1": {
+  "zone": "ep1b09",
+  "name": "설원 잠복 보행기",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 24,
+    "settled": {
+     "still": 12
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 27,
+    "settled": {
+     "down": 14
+    },
+    "frames": "0123",
+    "vis": [
+     58
+    ]
+   },
+   "up": {
+    "n": 27,
+    "settled": {
+     "busy": 1,
+     "up": 13
+    },
+    "frames": "0123",
+    "vis": [
+     58
+    ]
+   },
+   "right": {
+    "n": 25,
+    "settled": {
+     "no-side": 13
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 26,
+    "settled": {
+     "busy": 6,
+     "no-side": 7
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 190,
+    "swapped": 40,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "dist02-h1": {
+  "zone": "dist02",
+  "name": "늪의 염소머리 악마",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 23,
+    "settled": {
+     "still": 12
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 26,
+    "settled": {
+     "down": 13
+    },
+    "frames": "0123",
+    "vis": [
+     82
+    ]
+   },
+   "up": {
+    "n": 25,
+    "settled": {
+     "busy": 2,
+     "up": 11
+    },
+    "frames": "0123",
+    "vis": [
+     82
+    ]
+   },
+   "right": {
+    "n": 29,
+    "settled": {
+     "no-side": 15
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 25,
+    "settled": {
+     "busy": 5,
+     "no-side": 8
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 223,
+    "swapped": 38,
+    "waiting": 0,
+    "otherArt": 2,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "c103-e3": {
+  "zone": "cult03",
+  "name": "ID 잔류 점액체",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 24,
+    "settled": {
+     "still": 12
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 26,
+    "settled": {
+     "down": 13
+    },
+    "frames": "0123",
+    "vis": [
+     66
+    ]
+   },
+   "up": {
+    "n": 23,
+    "settled": {
+     "up": 12
+    },
+    "frames": "0123",
+    "vis": [
+     66
+    ]
+   },
+   "right": {
+    "n": 26,
+    "settled": {
+     "no-side": 13
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 25,
+    "settled": {
+     "no-side": 13
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 151,
+    "swapped": 49,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "u204-e3": {
+  "zone": "u204",
+  "name": "기계화 문턱 관측거미",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 26,
+    "settled": {
+     "still": 13
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 27,
+    "settled": {
+     "no-side": 10,
+     "busy": 4
+    },
+    "frames": "",
+    "vis": []
+   },
+   "up": {
+    "n": 25,
+    "settled": {
+     "busy": 2,
+     "up": 11
+    },
+    "frames": "0123",
+    "vis": [
+     53
+    ]
+   },
+   "right": {
+    "n": 26,
+    "settled": {
+     "no-side": 13
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 23,
+    "settled": {
+     "busy": 9,
+     "no-side": 3
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 154,
+    "swapped": 20,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "a10-o1": {
+  "zone": "ep1a10",
+  "name": "암시장의 수상한 자",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 26,
+    "settled": {
+     "still": 13
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 689,
+    "settled": {
+     "down": 345
+    },
+    "frames": "0123",
+    "vis": [
+     77
+    ]
+   },
+   "up": {
+    "n": 24,
+    "settled": {
+     "busy": 3,
+     "up": 9
+    },
+    "frames": "0123",
+    "vis": [
+     77
+    ]
+   },
+   "right": {
+    "n": 22,
+    "settled": {
+     "no-side": 11
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 24,
+    "settled": {
+     "busy": 12
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 321,
+    "swapped": 38,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "kair-academy-wave-1": {
+  "zone": "kair01",
+  "name": "최초명령 훈련파동",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 29,
+    "settled": {
+     "still": 15
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 25,
+    "settled": {
+     "down": 13
+    },
+    "frames": "0123",
+    "vis": [
+     68
+    ]
+   },
+   "up": {
+    "n": 26,
+    "settled": {
+     "busy": 5,
+     "up": 8
+    },
+    "frames": "0123",
+    "vis": [
+     68
+    ]
+   },
+   "right": {
+    "n": 23,
+    "settled": {
+     "no-side": 12
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 27,
+    "settled": {
+     "busy": 12,
+     "no-side": 2
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 287,
+    "swapped": 36,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "l305-e2": {
+  "zone": "last305",
+  "name": "피리 고블린",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 29,
+    "settled": {
+     "still": 15
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 24,
+    "settled": {
+     "down": 12
+    },
+    "frames": "0123",
+    "vis": [
+     69
+    ]
+   },
+   "up": {
+    "n": 22,
+    "settled": {
+     "busy": 4,
+     "up": 7
+    },
+    "frames": "123",
+    "vis": [
+     69
+    ]
+   },
+   "right": {
+    "n": 25,
+    "settled": {
+     "no-side": 13
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 23,
+    "settled": {
+     "busy": 12
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 244,
+    "swapped": 35,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "murder04-e2": {
+  "zone": "murder01",
+  "name": "빗속 횡단보도의 기억 잔향",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 26,
+    "settled": {
+     "still": 13
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 28,
+    "settled": {
+     "down": 14
+    },
+    "frames": "0123",
+    "vis": [
+     82
+    ]
+   },
+   "up": {
+    "n": 23,
+    "settled": {
+     "busy": 4,
+     "up": 8
+    },
+    "frames": "0123",
+    "vis": [
+     82
+    ]
+   },
+   "right": {
+    "n": 25,
+    "settled": {
+     "no-side": 13
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 24,
+    "settled": {
+     "busy": 12
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 235,
+    "swapped": 36,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "c101-e1": {
+  "zone": "cult01",
+  "name": "흑장미 눈가린 신도",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 25,
+    "settled": {
+     "still": 13
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 24,
+    "settled": {
+     "down": 12
+    },
+    "frames": "0123",
+    "vis": [
+     69
+    ]
+   },
+   "up": {
+    "n": 26,
+    "settled": {
+     "busy": 5,
+     "up": 8
+    },
+    "frames": "0123",
+    "vis": [
+     69
+    ]
+   },
+   "right": {
+    "n": 27,
+    "settled": {
+     "no-side": 14
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 26,
+    "settled": {
+     "busy": 8,
+     "no-side": 5
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 249,
+    "swapped": 33,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "c101-e2": {
+  "zone": "cult01",
+  "name": "흑장미 귀막은 신도",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 23,
+    "settled": {
+     "still": 12
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 25,
+    "settled": {
+     "down": 13
+    },
+    "frames": "0123",
+    "vis": [
+     69
+    ]
+   },
+   "up": {
+    "n": 24,
+    "settled": {
+     "busy": 3,
+     "up": 9
+    },
+    "frames": "0123",
+    "vis": [
+     69
+    ]
+   },
+   "right": {
+    "n": 27,
+    "settled": {
+     "no-side": 14
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 26,
+    "settled": {
+     "busy": 8,
+     "no-side": 5
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 246,
+    "swapped": 35,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "b08-v1": {
+  "zone": "ep1b08",
+  "name": "육망성의 흑마술 실험체",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 27,
+    "settled": {
+     "still": 14
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 25,
+    "settled": {
+     "down": 13
+    },
+    "frames": "0123",
+    "vis": [
+     75
+    ]
+   },
+   "up": {
+    "n": 22,
+    "settled": {
+     "busy": 4,
+     "up": 7
+    },
+    "frames": "0123",
+    "vis": [
+     75
+    ]
+   },
+   "right": {
+    "n": 24,
+    "settled": {
+     "no-side": 12
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 28,
+    "settled": {
+     "busy": 12,
+     "no-side": 2
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 267,
+    "swapped": 34,
+    "waiting": 0,
+    "otherArt": 2,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "u206-e1": {
+  "zone": "u206",
+  "name": "기계화 기억이주 연결자",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 23,
+    "settled": {
+     "still": 12
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 28,
+    "settled": {
+     "down": 14
+    },
+    "frames": "0123",
+    "vis": [
+     69
+    ]
+   },
+   "up": {
+    "n": 26,
+    "settled": {
+     "busy": 5,
+     "up": 8
+    },
+    "frames": "0123",
+    "vis": [
+     69
+    ]
+   },
+   "right": {
+    "n": 24,
+    "settled": {
+     "no-side": 12
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 26,
+    "settled": {
+     "busy": 11,
+     "no-side": 2
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 309,
+    "swapped": 38,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "u206-e2": {
+  "zone": "u206",
+  "name": "기계화 공명술사",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 26,
+    "settled": {
+     "still": 13
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 25,
+    "settled": {
+     "down": 13
+    },
+    "frames": "0123",
+    "vis": [
+     82
+    ]
+   },
+   "up": {
+    "n": 26,
+    "settled": {
+     "busy": 1,
+     "up": 12
+    },
+    "frames": "0123",
+    "vis": [
+     82
+    ]
+   },
+   "right": {
+    "n": 26,
+    "settled": {
+     "no-side": 13
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 24,
+    "settled": {
+     "busy": 7,
+     "no-side": 5
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 272,
+    "swapped": 37,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "b02-b1": {
+  "zone": "ep1b02",
+  "name": "살아 움직이는 쓰레기들",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 25,
+    "settled": {
+     "still": 13
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 25,
+    "settled": {
+     "down": 13
+    },
+    "frames": "0123",
+    "vis": [
+     79
+    ]
+   },
+   "up": {
+    "n": 26,
+    "settled": {
+     "busy": 4,
+     "up": 9
+    },
+    "frames": "0123",
+    "vis": [
+     79
+    ]
+   },
+   "right": {
+    "n": 26,
+    "settled": {
+     "no-side": 13
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 23,
+    "settled": {
+     "busy": 10,
+     "no-side": 2
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 262,
+    "swapped": 37,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "h101-s1": {
+  "zone": "hando01",
+  "name": "성벽 침식 봉인병",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 28,
+    "settled": {
+     "still": 14
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 25,
+    "settled": {
+     "down": 13
+    },
+    "frames": "0123",
+    "vis": [
+     81
+    ]
+   },
+   "up": {
+    "n": 25,
+    "settled": {
+     "up": 13
+    },
+    "frames": "0123",
+    "vis": [
+     81
+    ]
+   },
+   "right": {
+    "n": 26,
+    "settled": {
+     "no-side": 13
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 22,
+    "settled": {
+     "no-side": 11
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 187,
+    "swapped": 50,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "b08-c1": {
+  "zone": "ep1b08",
+  "name": "전극기계수호기사",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 24,
+    "settled": {
+     "still": 12
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 25,
+    "settled": {
+     "down": 13
+    },
+    "frames": "0123",
+    "vis": [
+     72
+    ]
+   },
+   "up": {
+    "n": 27,
+    "settled": {
+     "up": 14
+    },
+    "frames": "0123",
+    "vis": [
+     72
+    ]
+   },
+   "right": {
+    "n": 25,
+    "settled": {
+     "no-side": 13
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 26,
+    "settled": {
+     "no-side": 13
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 268,
+    "swapped": 52,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ }
+}
