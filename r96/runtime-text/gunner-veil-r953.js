@@ -36,7 +36,10 @@ const SHEET=Object.freeze({
  // R953-2: Dots CX-0095GV 시트(알파 16 이하 잔티를 걷어낸 사본). 그림이 아직 안 읽혔으면 코드 그림이 대신 나온다.
  lock:Object.freeze({path:'assets/r953/gv-lock.webp',cw:256,ch:256,cols:6,frames:24,px:.5,py:.52,close:6,hold:18}),      // GV-04 조준 표식: 0~5 조임 · 6~17 잠금 고동 · 18~23 흩어짐
  friend:Object.freeze({path:'assets/r953/gv-friend.webp',cw:256,ch:128,cols:6,frames:24,px:.5,py:.547,fps:12.5,fill:.84}), // GV-08 벗 고리(반복)
- call:Object.freeze({path:'assets/r953/gv-call.webp',cw:128,ch:384,cols:6,frames:24,px:.5,py:.911})});                      // GV-06 전우 호출 빛기둥(한 번)
+ call:Object.freeze({path:'assets/r953/gv-call.webp',cw:128,ch:384,cols:6,frames:24,px:.5,py:.911}),                      // GV-06 전우 호출 빛기둥(한 번)
+ // R989: 남은 Dots 시트 가운데 7분야 심사를 넘은 둘. GV-01 은신 걸림·GV-03 은신 풀림은 탈락(사람 몸 윤곽·파편 가독성) → 은신은 코드 그림 유지.
+ spin:Object.freeze({path:'assets/r953/gv-spin.webp',cw:192,ch:192,cols:6,frames:24,px:.5,py:.5,last:22,fill:.73}),   // GV-05 난사 회전 섬광(한 번, 24번째 칸은 빈칸)
+ mend:Object.freeze({path:'assets/r953/gv-mend.webp',cw:192,ch:384,cols:6,frames:24,px:.5,py:.875,fill:.75})});        // GV-07 귀환, 치유의 빛(한 번)
 const SHAPES=['line','circle','cone','cross','donut'];
 const fin=v=>typeof v==='number'&&Number.isFinite(v),clamp=(v,a,b)=>Math.min(b,Math.max(a,v)),smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
 let lastError=null,errors=0;const fail=e=>{errors++;lastError=String(e?.message||e).slice(0,200);};
@@ -93,7 +96,7 @@ function castCloak(s,p){s.stats.cloaks++;s.cloakT0=T();s.cloakUntil=T()+CFG.cloa
 function ult(body){const p=body||P(),s=p?st(p,false):null;return cloakOn(s)&&isG(p)?{cd:CFG.cloak.ultScale,delay:CFG.cloak.ultScale}:{cd:1,delay:1};}
 // ② 표적 소거 난사
 function castBarrage(s,p){const B=CFG.barrage,rows=foes().map(e=>({e,d:Math.hypot(e.x-p.x,e.y-p.y)})).filter(v=>v.d<=B.radius&&line(p,v.e)).sort((a,b)=>a.d-b.d).slice(0,B.maxTargets);
- s.stats.barrages++;if(!rows.length)return;s.barrage={t0:T(),round:0,targets:rows.map(v=>v.e),pw:power(),room:RM(),id:'b'+(++serial)};
+ s.stats.barrages++;if(!rows.length)return;s.barrage={t0:T(),round:0,targets:rows.map(v=>v.e),pw:power(),room:RM(),id:'b'+(++serial)};addVis({k:'spin',x:p.x,y:p.y,body:p,life:B.lock+B.rounds*B.gap+.15});
  say(NAME.barrage,p.x,p.y);try{p.skillAnim=Math.max(p.skillAnim||0,B.lock+B.gap*B.rounds);}catch(_){}arm();}
 function stepBarrage(s){const b=s.barrage;if(!b)return;const B=CFG.barrage,p=bodyOf(s),t=T();if(!p||b.room!==RM()){s.barrage=null;return;}
  while(b.round<B.rounds&&t>=b.t0+B.lock+b.round*B.gap-1e-9){const i=b.round++;let shown=0;
@@ -141,7 +144,7 @@ function stepHazards(){const t=T(),rm=RM();for(let i=hz.length-1;i>=0;i--){const
 function stepAllies(dt){const S=CFG.summon,t=T(),rm=RM();for(let i=allies.length-1;i>=0;i--){const A=allies[i],a=A.a,p=bodyOf(A.s);
   if(A.room!==rm||!isG(p)){allies.splice(i,1);continue;}
   if(A.leaveAt!=null){if(t>=A.leaveAt+S.leave)allies.splice(i,1);continue;}
-  if(t>=A.until){A.leaveAt=t;a.state='idle';a.moving=false;addVis({k:'mend',x:a.x,y:a.y,life:S.leave+.5});continue;}
+  if(t>=A.until){A.leaveAt=t;a.state='idle';a.moving=false;addVis({k:'mend',x:a.x,y:a.y,life:S.leave+.8});continue;}
   a.flash=0;a.hp=a.maxHp;const posing=t<(a.r953PoseUntil||0);if(!posing&&a.state==='attack')a.state='idle';
   const foe=nearestTo(a,S.seek),goal=foe||p,d=Math.hypot(goal.x-a.x,goal.y-a.y),want=foe?S.keep:S.leash;let moved=false;
   if(!posing&&d>want&&dt>0){const k=Math.min(S.speed*dt,d-want)/d,dx=(goal.x-a.x)*k,dy=(goal.y-a.y)*k,x0=a.x,y0=a.y;
@@ -181,7 +184,7 @@ function warm(){try{veilTex();lockTex();friendTex();pillarTex();moteTex();if(typ
 function sheetImg(k){const S=SHEET[k];try{const got=typeof readyImage==='function'?readyImage(S.path):null;if(got?.image)return got.image;const t=Date.now();if(t-asked.t>1500){asked.t=t;if(typeof ensureImages==='function')Promise.resolve(ensureImages(allPaths())).catch(()=>{});}}catch(e){fail(e);}return null;}
 // ---- 그리기 --------------------------------------------------------------------------------------------------
 let budget=0,drawCalls=0;
-const GROUND=new Set(['friend','call','mend-ring']);
+const GROUND=new Set(['friend','call','mend-ring','spin']);
 function refill(){budget=low()?CFG.lowDraws:CFG.maxDraws;}
 function scoped(id,fn){const own={id:'r953:'+id,kind:'effect',r953:true,groundAligned:GROUND.has(id)};try{if(typeof ctx.scope==='function')return ctx.scope(own,fn);return fn();}catch(e){fail(e);}}
 // 조각 한 장: (x,y)=기준점, w·h=화면 크기, px·py=기준점 비율
@@ -216,7 +219,11 @@ function drawAll(){const t=T(),lo=low(),h=H(),u=unit();refill();
   else if(v.k==='muzzle'){const g=scr(v.x,v.y,.6);cell('muzzle','muzzle',age*SHEET.muzzle.fps+6,g.x,g.y,h*1.1,{ang:v.ang,alpha:1-k,add:true});}
   else if(v.k==='veil'){const g=project(v.x,v.y);img('cloak',friendTex(),g.x,g.y,u*(1+2.6*smooth(k)),u*(.5+1.3*smooth(k)),{alpha:.9*(1-k),add:true});}
   else if(v.k==='call'){const g=project(v.x,v.y);if(cell('call','call',k*SHEET.call.frames,g.x,g.y,h*1.5,{once:true,alpha:1-smooth((k-.85)/.15)}))continue;img('call',pillarTex(),g.x,g.y,h*(.9-.5*k),h*3.6,{py:1,alpha:.95*(1-k*k),add:true});img('call',friendTex(),g.x,g.y,u*2.6*smooth(k/.6),u*1.3*smooth(k/.6),{alpha:.9*(1-k)});}
-  else if(v.k==='mend'){const g=project(v.x,v.y),mote=moteTex();img('mend',pillarTex(),g.x,g.y,h*(.5+.5*k),h*(2.6+2*k),{py:1,alpha:.75*(1-k)*smooth(k/.15),add:true});
+  else if(v.k==='spin'){const S=SHEET.spin,b=v.body,g=project(b?b.x:v.x,b?b.y:v.y),w=h*2/S.fill,al=Math.min(smooth(k/.12),1-smooth((k-.85)/.15)); // 영웅 발밑 둘레를 한 바퀴 도는 총구 섬광. 바닥에 붙여 그린다(몸 위에 겹치는 영웅 쪽 이펙트는 R350 이 85%까지 옅게 해서 안 보임)
+   cell('spin','spin',k*S.last,g.x,g.y,w,{once:true,alpha:al,add:true});if(!lo)cell('spin','spin',k*S.last,g.x,g.y,w,{once:true,alpha:.45*al});}
+  else if(v.k==='mend'){const g=project(v.x,v.y),mote=moteTex(),M=SHEET.mend,mw=u*2.9/M.fill;
+   if(cell('mend','mend',k*M.frames,g.x,g.y,mw,{once:true,alpha:1-smooth((k-.88)/.12)})){if(!lo)cell('mend','mend',k*M.frames,g.x,g.y,mw,{once:true,alpha:.5*(1-smooth((k-.88)/.12)),add:true});continue;}
+   img('mend',pillarTex(),g.x,g.y,h*(.5+.5*k),h*(2.6+2*k),{py:1,alpha:.75*(1-k)*smooth(k/.15),add:true});
    img('mend-ring',friendTex(),g.x,g.y,u*(2.2+1.6*k),u*(1.1+.8*k),{alpha:.7*(1-k)});
    const n=lo?5:11;for(let i=0;i<n;i++){const ph=(i*.37+v.t0)%1,kk=clamp(k*1.25-ph*.25,0,1),ax=Math.sin(i*2.4+v.t0*3)*h*(.45+.2*kk),sz=h*(.2-.08*kk);
     if(kk>0&&kk<1)img('mend',mote,g.x+ax,g.y-h*(.2+2.4*kk*kk+ (i%3)*.25),sz,sz,{alpha:(1-kk)*smooth(kk/.12),add:true});}}}}
@@ -249,6 +256,6 @@ function inspect(body){const s=st(body||P(),false)||fresh(null),t=T(),left=k=>Ma
   cloak:{active:cloakOn(s),left:cloakOn(s)?+(s.cloakUntil-t).toFixed(3):0},
   barrage:s.barrage?{round:s.barrage.round,targets:s.barrage.targets.map(e=>e.id)}:null,
   allies:allies.map(A=>({id:A.a.id,nativeId:A.a.nativeId,name:A.a.name,x:+A.a.x.toFixed(2),y:+A.a.y.toFixed(2),state:A.a.state,left:+Math.max(0,A.until-t).toFixed(2),leaving:A.leaveAt!=null}))};}
-window.__STORYWORLD_GUNNER_VEIL_R953__=Object.freeze({revision:REV,config:CFG,names:NAME,on:()=>on,set,force,inspect,ult,
+window.__STORYWORLD_GUNNER_VEIL_R953__=Object.freeze({revision:REV,sheets:Object.freeze(Object.keys(SHEET)),config:CFG,names:NAME,on:()=>on,set,force,inspect,ult,
  cloaked:body=>{const p=body||P();return cloakOn(p?st(p,false):null)&&isG(p);},allies:()=>allies.map(A=>A.a)});
 })();

@@ -40808,6 +40808,16 @@
       "sha256": "696ea991dd8abacbf2adfa0b3d1d8ee84211201f50f2ccc12ff7688d35ec0911"
     },
     {
+      "path": "assets/r953/gv-mend.webp",
+      "bytes": 122576,
+      "sha256": "0183e74bcc78669dd096f048a0a2a868099cc0552947151ce0ee1c603fed1980"
+    },
+    {
+      "path": "assets/r953/gv-spin.webp",
+      "bytes": 153396,
+      "sha256": "6f48044138bad518ec4b096d9dee20084efd4168c6695822c6fbba9f67bb1ed0"
+    },
+    {
       "path": "assets/r954/sfx/atk-fisherman-1.ogg",
       "bytes": 7161,
       "sha256": "72651a7fa25a4fbd5b060e3f89cd8b5b3539cc62834915e733aaee4a0ea1949e"
@@ -49464,8 +49474,8 @@
     },
     {
       "path": "combat-sfx-r954.js",
-      "bytes": 7914,
-      "sha256": "5022a542bed8bac393008aa62ef8bc86762524ad7358d2c354c9176b6852f16c"
+      "bytes": 8146,
+      "sha256": "ea1783d4e167b027ffaa6a614d73ef6eaff82818ce5a5187e8b00fa10e431786"
     },
     {
       "path": "combat-sfx-r955.js",
@@ -49794,8 +49804,8 @@
     },
     {
       "path": "gunner-veil-r953.js",
-      "bytes": 33671,
-      "sha256": "ad09c6a47de12d01bd0521f739aab4d451e2dc03ee30792f3fbbd1a62c78c58b"
+      "bytes": 35023,
+      "sha256": "02c9d76442c860167ca1e5d219dd333655815aa7c2608b554a677762ea29b3ea"
     },
     {
       "path": "hero-defense-r720.js",
@@ -49994,8 +50004,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6576181,
-      "sha256": "f78375e17e91d4218ad4766ba5c06b820db4b21a79bc5bb1ac2a7beb459adc26"
+      "bytes": 6576268,
+      "sha256": "a2271c2c541c359adfd307b07e3fcb0af75ac83fea241a8f6ad80277b232750d"
     },
     {
       "path": "intro-r140.js",
@@ -50136,6 +50146,11 @@
       "path": "michaela-r247.js",
       "bytes": 12747,
       "sha256": "b56501f9b42eb76dbe6ae6d035caf6eb69a577cefb5e125ae1100b485d7a4a5b"
+    },
+    {
+      "path": "midboss-puppet-r981.js",
+      "bytes": 10677,
+      "sha256": "be18dc7734aa236a945be7137f0fc4cb33c00d3d03b44a4f32c5098e42a38966"
     },
     {
       "path": "mob-art-r290.js",
@@ -50406,6 +50421,11 @@
       "path": "perf-r97.js",
       "bytes": 5359,
       "sha256": "446e18d7e54633bcdc29fa73a32bd5a2a8c2f38c6e29a7036dd0daa026ada90c"
+    },
+    {
+      "path": "perf-r979.js",
+      "bytes": 4233,
+      "sha256": "9733951b134154f84eefad78c920eddbadc816b957e23360a7b120306186f80e"
     },
     {
       "path": "pixel-readable-r325.js",
@@ -51103,9 +51123,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10220,
-  "totalBytes": 1264823163,
-  "webHTMLSha256": "f78375e17e91d4218ad4766ba5c06b820db4b21a79bc5bb1ac2a7beb459adc26",
+  "fileCount": 10224,
+  "totalBytes": 1265115716,
+  "webHTMLSha256": "a2271c2c541c359adfd307b07e3fcb0af75ac83fea241a8f6ad80277b232750d",
   "largest": [
     {
       "path": "index.html",
