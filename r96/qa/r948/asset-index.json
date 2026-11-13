@@ -83,7 +83,7 @@
    "use": "대개화 대폭발 충격파(코드 이중 하트 테 대체, 빛·바닥 폭발은 유지)",
    "pivot": "피벗 (130,135)",
    "edit": "LANCZOS 축소(해당 시트), 알파 16 이하 0, webp q88. 그림 내용·색·순서는 바꾸지 않음",
-   "status": "R988 7분야 심사 통과(review.md), 적용. 헤드리스 확인만"
+   "status": "R988 7분야 심사 통과(review.md), 적용. 헤드리스 확인만 → R1004 에서 mh04-blast24-r3 으로 교체(파일은 보존)"
   },
   {
    "id": "CX-0094MH MH-07 하트·음표 둥실 투사체",
@@ -175,6 +175,25 @@
    "pivot": "칸 무게중심 (128,114), 가장 큰 장 폭 224px",
    "edit": "LANCZOS 0.5배, 알파 16 이하 0, webp q88. 알파 60% 상한(Dots 처리) 그대로",
    "status": "R998 7분야 심사 7.86 통과(review.md), 적용. 헤드리스 확인만. 새 4장 시험본(part01)은 미완성이라 미적용"
+  },
+  {
+   "id": "CX-0094MH MH-04 R988 가운데 비운 대폭발",
+   "driveFile": "MH04_R988_part01_candidate_QA_HOLD.zip",
+   "zipSha256": "351893a642c2bb937565c101c2363587b67e7d0d07586a7eca29828edcfc4cd8",
+   "src": "MH04_R988_hollow_center_256cells_CANDIDATE_HOLD.png",
+   "srcSha256": "463da0c9accc1232cad3f632eda255561513cbe34d7e992d8e75a37d2f06b70a",
+   "out": "mh04-blast24-r3.webp",
+   "outSha256": "0690d1b6328e0520fc4b455a0498abd51a61098e905d058cd723066d3e216071",
+   "bytes": 455314,
+   "size": [
+    1536,
+    1024
+   ],
+   "grid": "6x4 칸 256, 24장, 3번(섬광)부터 한 번 1.68초 — r2 와 같음",
+   "use": "연심 대개화 대폭발 충격파(r2 대체)",
+   "pivot": "(130,135) r2 와 같음",
+   "edit": "알파 16 이하 0(이미 Dots 처리), webp q88. 크기 변경 없음",
+   "status": "R1004 7분야 심사 7.89 통과(review.md). 헤드리스 확인만"
   }
  ]
 }
