@@ -185,6 +185,11 @@ ok(['slayer-sword-fall','slayer-sword-stab','slayer-blood-stream','slayer-blood-
  ok(own.some(s=>/assets\/r947\/slayer-lattice-end\.webp/.test(s.src||'')),'줄 양 끝은 Dots SB-03b 끝조각');
  ok(!own.some(s=>/r947:beam/.test(s.src||'')),'코드로 그린 임시 레이저 줄은 더 안 씀');}
 ok(['slayer-lattice-beam','slayer-lattice-end'].every(n=>fs.existsSync(path.join(ROOT,'r96/runtime-text/assets/r947/'+n+'.webp'))),'SB-03 시트 2장이 runtime-text/assets/r947 에 있음');
+// R999 Dots SB-04c 시전 바닥 고리(코드 고리 그림 대신)
+{const E=engine({enemies:[{id:'a',x:21,y:20}]});E.api.force('lattice');E.ctx.basicAttack();E.run(.15);E.sheets.length=0;E.frame();
+ const own=E.sheets.filter(s=>/r947:lattice/.test(s.own||''));ok(own.some(s=>/assets\/r947\/slayer-cast-ring\.webp/.test(s.src||'')),'혈격자 시전 바닥 고리는 Dots SB-04c 시트');
+ ok(!E.sheets.some(s=>/r947:ring/.test(s.src||'')),'코드로 그린 임시 고리는 더 안 씀');}
+ok(fs.existsSync(path.join(ROOT,'r96/runtime-text/assets/r947/slayer-cast-ring.webp')),'SB-04c 시트가 runtime-text/assets/r947 에 있음');
 {const foes=[];for(let i=0;i<20;i++)foes.push({id:'m'+i,x:20+Math.cos(i)*(1+i*.2),y:20+Math.sin(i)*(1+i*.2)});
  const E=engine({enemies:foes});E.api.force('lattice');E.ctx.basicAttack();E.run(.45);E.sheets.length=0;E.frame();
  ok(E.sheets.some(s=>/r947:lattice/.test(s.own||'')),'격자 레이저 그림');ok(E.sheets.length<=E.api.config.maxDraws,'한 프레임 그림 상한('+E.sheets.length+' ≤ '+E.api.config.maxDraws+')');}

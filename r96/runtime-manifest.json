@@ -41023,6 +41023,11 @@
       "sha256": "0d17b29def905a0fba888f95c427b07ab69549aec0d4e4bdbf28a331a0d51820"
     },
     {
+      "path": "assets/r947/slayer-cast-ring.webp",
+      "bytes": 60212,
+      "sha256": "557407997095c9b1d0a8f2ae7d9107adbaa439710406dc5b947d67c6068b8619"
+    },
+    {
       "path": "assets/r947/slayer-lattice-beam.webp",
       "bytes": 168674,
       "sha256": "5337e1aba18f720afa40faa428e275dd190f82e1a5a63e90cf433bdee0010c9f"
@@ -51804,8 +51809,8 @@
     },
     {
       "path": "slayer-blood-passive-r947.js",
-      "bytes": 28494,
-      "sha256": "0dfd04617cc32db9fc0adccf7d6000fff5146988abf8c4ae1dccf592d2d4ee14"
+      "bytes": 28698,
+      "sha256": "1170e466acf0920f444a3163206179cc836b06fb3f35e27ad59695388a63edda"
     },
     {
       "path": "slayer-blood-r425.js",
@@ -52153,8 +52158,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10430,
-  "totalBytes": 1281386943,
+  "fileCount": 10431,
+  "totalBytes": 1281447359,
   "webHTMLSha256": "69ed5aee32eb3d082baca5f02a404ea8e4f5e525c3abbbfac439ef48a47cc907",
   "largest": [
     {
