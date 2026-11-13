@@ -127,7 +127,9 @@ function touchUse(){try{let on=false;if(F.active&&F.phase==='fight'&&here()&&doc
 function drawKnot(p){if(!here())return;const im=G(()=>readyImage(KNOT_ART),null)?.image;const q=G(()=>project(p.x,p.y),null);if(!q||!fin(q.x,q.y)){stats.nanDraw++;return;}
  const z=G(()=>zoom,1),tl=G(()=>TILE,64),w=clamp(tl*z*1.5,24,220),h=w*600/640,t=G(()=>time,0),cur=!p.r1010Cut&&p.r1010Knot===F.cut&&F.phase!=='released';
  const a=p.r1010Cut?.16:cur?clamp(.72+.22*Math.sin(t*4),0,1):.42;if(!fin(w,h,a)){stats.nanDraw++;return;}
- ctx.save();try{ctx.globalAlpha=a;if(im&&(im.naturalWidth||im.width)>0)ctx.drawImage(im,q.x-w/2,q.y-h*.82,w,h);
+ ctx.save();try{const okIm=im&&(im.naturalWidth||im.width)>0;
+  if(cur&&okIm){/* 지금 차례 매듭: 같은 실 그림을 크게 한 번 더(더하기 합성) 깔아 영웅이 위에 서도 둘레 빛이 보이게 — 새 그림·절차적 선 없음 */const g=clamp(1.75+.12*Math.sin(t*3),1.5,2),gw=w*g,gh=h*g;if(fin(gw,gh)){ctx.globalCompositeOperation='lighter';ctx.globalAlpha=clamp(.30+.12*Math.sin(t*4),0,1);ctx.drawImage(im,q.x-gw/2,q.y-gh*.62,gw,gh);ctx.globalCompositeOperation='source-over';}}
+  ctx.globalAlpha=a;if(okIm)ctx.drawImage(im,q.x-w/2,q.y-h*.82,w,h);
   if(cur&&Math.hypot(p.x-player.x,p.y-player.y)<3.2){ctx.globalAlpha=.92;ctx.fillStyle='#f3e3d0';ctx.font='12px sans-serif';ctx.textAlign='center';ctx.fillText(useName()+' · '+(solve().word||'매듭')+' '+(p.r1010Knot+1),q.x,q.y+14);}}
  catch(e){fail(e);}finally{ctx.restore();}}
 

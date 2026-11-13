@@ -35,7 +35,7 @@ async function full(label,opt){const {ctx,p,errs}=await boot(opt);const how=opt.
  if(opt.real){/* 실제 연결: R1006 사몽 M 단계(sm1006:M)로 가서 서사·몹 물결을 넘기면 R1006 이 스스로 begin 을 부른다 */
   await A(p,async()=>{const Z=window.__STORYWORLD_SURVIVAL_R600__;await Z.start('hwando','normal');await Z.qaGo(Z.stageIds().indexOf('sm1006:M'));});
   await until(p,()=>window.__STORYWORLD_SURVIVAL_R600__.here()&&window.__STORYWORLD_SURVIVAL_R600__.state().id==='sm1006:M'&&room.id==='kair05'&&!loading);
-  await until(p,()=>{const Z=window.__STORYWORLD_SURVIVAL_R600__;player.hp=maxHP();if(window.__STORYWORLD_SURVIVAL_FINALE_R1010__.state().active)return true;/* 대면 자막이 시작된 뒤에는 건너뛰지 않는다(앞 단계 서사만 넘김) */Z.skipNarration();for(const e of room.enemies)if(e.hp>0&&!e.deadRecorded&&time>(e.graceUntil||0))try{killEnemy(e);}catch(_){}return false;},null,600000);
+  await until(p,()=>{const Z=window.__STORYWORLD_SURVIVAL_R600__;player.hp=maxHP();if(window.__STORYWORLD_SURVIVAL_FINALE_R1010__.state().active)return true;/* 대면 자막이 시작된 뒤에는 건너뛰지 않는다(앞 단계 서사만 넘김) */{const c=Z.state().core;if(c&&c.stats&&c.hp<c.stats.max*.9)Z.qaCoreHp(c.stats.max);}/* 1단계 영웅을 72단계로 바로 보내므로 코어를 지킨다(안 지키면 코어 파괴 = 정상 게임 오버) */Z.skipNarration();for(const e of room.enemies)if(e.hp>0&&!e.deadRecorded&&time>(e.graceUntil||0))try{hitEnemy(e,1e7);}catch(_){}/* 실제 피해 길(killEnemy 직접 호출은 일부 적에게 무시됨) */return false;},null,600000);
   const h=await A(p,()=>({st:window.__STORYWORLD_SURVIVAL_R600__.state(),f:window.__STORYWORLD_SURVIVAL_FINALE_R1010__.state()}));
   ok(label+': R1006 M 단계 물결 뒤 R1006 이 begin 을 부름(R600 handoff, 다음 지역으로 안 넘어감)',h.f.active&&h.f.stageId==='sm1006:M'&&h.st.phase==='handoff'&&h.st.id==='sm1006:M'&&!h.st.over,h);
   ok(label+': M 단계 끝 begin → 대면 시작',true);}
