@@ -20,8 +20,9 @@ const Hq=c=>Math.abs(c.points[3][1]-c.points[0][1]);
 function entry(e){if(!e||!(e.hp>0)||e.persona)return null;return DATA[String(e.nativeId||'')]||null;}
 function img(p){try{const r=typeof readyImage==='function'?readyImage(p):null;if(r&&r.ready!==false&&r.image)return r.image;}catch(_){}
  try{if(typeof addImage==='function')addImage(p,'R974 방향 이동');}catch(_){}return null;}
+// 이펙트 그림은 몸으로 치지 않는다. 단 육망성 실험체 몹 그림(mobs/hexagram-experiment)과 방향 이동 시트는 이름에 hexagram 이 있어도 몸이다(R1018 육망성 실험체).
 function bodyCmd(cmds,st0){let best=null,bh=0;for(let i=st0;i<cmds.length;i++){const c=cmds[i];if(c?.kind!=='image'||c.owner?.kind!=='enemy'||c.r620Ghost||c.r760Ghost||!Array.isArray(c.points)||c.points.length<4)continue;
-  if(FX.test(srcOf(c))&&!/assets\/r974\//.test(srcOf(c)))continue;const h=Hq(c);if(h>bh){bh=h;best=c;}}return best;}
+  if(FX.test(srcOf(c))&&!/assets\/r974\/|\/mobs\/hexagram-experiment|assets\/r\d+\/move\//.test(srcOf(c)))continue;const h=Hq(c);if(h>bh){bh=h;best=c;}}return best;}
 // 지금 그려진 몸이 표의 대기 그림인가(경로 끝·칸이 같아야 함)
 function idleOf(D,c){const p=srcOf(c),r=c.sourceRect;for(const I of D.idle){if(!p.endsWith(I.path))continue;if(!Array.isArray(r)||r.length<4)return I;
   if(Math.abs(r[0]-I.rect[0])<=1.5&&Math.abs(r[1]-I.rect[1])<=1.5&&Math.abs(r[2]-I.rect[2])<=1.5&&Math.abs(r[3]-I.rect[3])<=1.5)return I;}return null;}
