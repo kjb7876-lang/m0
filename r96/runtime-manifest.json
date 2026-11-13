@@ -49629,8 +49629,8 @@
     },
     {
       "path": "fx-sprites-r106.js",
-      "bytes": 13960,
-      "sha256": "52460ef81b2bab2a1fc73251f343100be44b3301e1f75134d618aa2b6bc8d5c4"
+      "bytes": 14316,
+      "sha256": "b4c986bf71d04cdaea3b87f9a0681b53e3444a21199649fe24b510b137ea9a80"
     },
     {
       "path": "ground-fringe-r452.js",
@@ -49884,8 +49884,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6576132,
-      "sha256": "4914603ff1124c6a77c77c859269c2b0d9bf848b3460cf82f0bd091c970dd829"
+      "bytes": 6576180,
+      "sha256": "e0d3af4b46d30645675f8c5ba569427a4fac3cfb9df48b4b75908c72ced57878"
     },
     {
       "path": "intro-r140.js",
@@ -50153,6 +50153,11 @@
       "sha256": "3c9b0d9900c8fe6f9dbfa29ad0fe0946ccd9835bb8ed5d1e993170ecae9c8724"
     },
     {
+      "path": "mobile-memory-r980.js",
+      "bytes": 4605,
+      "sha256": "0ea070eaeaefe2e7794358991a0e2e15a8a4bcf401339b7d43e4786fe8894637"
+    },
+    {
       "path": "mobile-perf-r298.js",
       "bytes": 4776,
       "sha256": "c2978bca5b0456eb963e11c492bbc3038e976d6b0a66e00f56c8e3e013a23d3d"
@@ -50299,8 +50304,8 @@
     },
     {
       "path": "pixelfx-r163.js",
-      "bytes": 8365,
-      "sha256": "c6ea5237eee7459a2b88d7ed60948e9c5a4c2c156c26483087add79a653aa8b6"
+      "bytes": 8950,
+      "sha256": "1fa59f6002dd21d6c0f498b3f26b48f6d7259c16f4b56817751500a0e8ae8bc3"
     },
     {
       "path": "play-r106.js",
@@ -50988,9 +50993,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10197,
-  "totalBytes": 1260795047,
-  "webHTMLSha256": "4914603ff1124c6a77c77c859269c2b0d9bf848b3460cf82f0bd091c970dd829",
+  "fileCount": 10198,
+  "totalBytes": 1260800641,
+  "webHTMLSha256": "e0d3af4b46d30645675f8c5ba569427a4fac3cfb9df48b4b75908c72ced57878",
   "largest": [
     {
       "path": "index.html",
