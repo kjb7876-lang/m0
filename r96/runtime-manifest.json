@@ -50454,8 +50454,8 @@
     },
     {
       "path": "mobile-memory-r980.js",
-      "bytes": 9566,
-      "sha256": "008f85dad05feed13d065a61ae9acc54df36ca4e842d09f8d682487b60d893b5"
+      "bytes": 14738,
+      "sha256": "7c25ca762404f5af5ced7f531fca1be26eba59f9e37ca1e084aa2a2bad3e05f3"
     },
     {
       "path": "mobile-perf-r298.js",
@@ -51309,7 +51309,7 @@
     }
   ],
   "fileCount": 10261,
-  "totalBytes": 1268494649,
+  "totalBytes": 1268499821,
   "webHTMLSha256": "ad584241211d5379c456cb2927bc997d5826033b391c506a49f8cadd76911547",
   "largest": [
     {
