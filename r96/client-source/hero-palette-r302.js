@@ -89,7 +89,9 @@ function remapF(F,name){const h=hero();if(!on||!h||!F)return F;stats.sp++;
 //  → '그리는 자리' 열쇠(지금 그리는 엔진 효과 종류 | 그림 이름 | 팔레트 값 | 영웅)가 같은 파일에서 MEMO_OK 번 잇달아 같은 판정을 받으면
 //  그 뒤로는 스택 없이 그 결과를 돌려주고(memoHit), 무작위로 골라(처음 256번은 4번에 1번, 그 뒤 16번에 1번) 예전 길(스택)로 다시 확인한다(memoNote).
 //  정해진 간격이 아니라 무작위인 까닭: 한 장면에 같은 열쇠를 8·16번씩 같은 순서로 그리면 간격 확인이 늘 같은 자리만 봐서 가끔 끼는 다른 파일을 영영 못 본다(실측).
-//  한 번이라도 파일·판정이 어긋난 열쇠는 영영 예전 길이다. play-r111(같은 파일 안에서 threadSlash 만 실 규칙)과 파일을 못 찾은 호출도 영영 예전 길.
+//  한 번이라도 파일·판정이 어긋난 열쇠는 영영 예전 길이다. 파일을 못 찾은 호출도 영영 예전 길.
+//  play-r111 은 같은 파일 안에서 threadSlash 만 실 규칙인데, threadSlash 는 엔진 효과 threadSlashR63 을 그릴 때만 불려 열쇠(효과 종류)가 갈린다.
+//  (광장 환도 777 은 호출의 58%가 play-r111 이라 이 파일을 빼면 효과가 1/3 로 준다.) 같은 열쇠에 두 판정이 섞이면 위 규칙대로 예전 길.
 //  판정 표(decided)·통계(sp·spMapped)·색 규칙은 그대로. 끄기: __STORYWORLD_HERO_PALETTE_R302__.memo(false)
 const MISS={},memo=new Map(),MEMO_OK=32,MEMO_EARLY=256,MEMO_MAX=3000;let memoRnd=0x9e3779b9;
 const memoCheck=m=>{memoRnd=(Math.imul(memoRnd,1103515245)+12345)>>>0;return (memoRnd>>>16)%(++m.n<=MEMO_EARLY?4:16)===0;};let seenFile=null,seenKind=null,memoOn=true,shadow=false,shadowQ=MISS,memoKey=null,fxType='';
@@ -104,7 +106,7 @@ function memoNote(F,res){const key=memoKey,file=seenFile,kind=seenKind;if(!memoO
   if(bad){stats.fastWrong=(stats.fastWrong||0)+1;const W=stats.wrong||(stats.wrong={}),k=key+' memo='+memo.get(key)?.file+' now='+file;if(W[k]||Object.keys(W).length<40)W[k]=(W[k]||0)+1;}
   else if(memo.get(key)?.file!==file)stats.fastOtherFile=(stats.fastOtherFile||0)+1;return res;}
  const same=res===F;let m=memo.get(key);if(!m){if(memo.size>=MEMO_MAX)memo.clear();m={file,kind,res,same,ok:0,n:0,slow:false};memo.set(key,m);}
- if(!file||file==='play-r111')m.slow=true;
+ if(!file)m.slow=true;
  else if(m.file!==file||m.kind!==kind||m.same!==same||(!same&&!samePal(m.res,res))){if(!m.slow)stats.memoMixed=(stats.memoMixed||0)+1;m.slow=true;}
  else{m.ok++;m.res=res;}
  return res;}

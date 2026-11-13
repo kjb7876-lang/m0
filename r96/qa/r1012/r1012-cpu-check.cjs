@@ -4,7 +4,7 @@
 //  열쇠 = 지금 그리는 엔진 효과 종류 | 그림 이름 | 팔레트 값 | 영웅.
 //  ① 성능 성질: 같은 열쇠를 같은 파일이 계속 그리면 스택 잡기가 호출 수의 1/8 아래로 준다(예전 코드는 호출마다 1번 — 이 검사에서 실패)
 //  ② 그리는 색: 열쇠마다 그리는 파일이 하나일 때 기억을 끈 것(memo(false) = 예전 길)과 하나하나 같다(영웅 8명 × 파일 × 호출 모양 × 팔레트, 반복·섞은 순서)
-//  ③ play-r111 은 기억하지 않는다(threadSlash 만 실 규칙) ④ 같은 열쇠를 판정이 다른 파일이 이어서 쓰면 무작위 재확인(4번에 1번, 256번 뒤 16번에 1번)이 알아채고 그 뒤 영영 예전 길
+//  ③ play-r111(threadSlash 만 실 규칙): 엔진 효과 threadSlashR63 로 열쇠가 갈린다 ④ 같은 열쇠를 판정이 다른 파일이 이어서 쓰면 무작위 재확인(4번에 1번, 256번 뒤 16번에 1번)이 알아채고 그 뒤 영영 예전 길
 //     (알려진 한계: 그 사이 평균 3번, 늦게 끼어들면 평균 15번은 앞 파일의 판정으로 그려질 수 있다. 처음부터 섞어 쓰는 열쇠는 한 번도 안 틀린다. 엔진 효과 종류가 다르면 열쇠가 다르다)
 //  ⑤ 팔레트 값·영웅이 바뀌면 열쇠가 달라 다시 센다 ⑥ 끄기·영웅 없음은 스택 0 ⑦ 그림자 검사(shadow) ⑧ 연결(런타임 사본·CI)
 //  SRC=<파일> 로 다른 소스(예: 고치기 전)를 넣어 돌릴 수 있다.
@@ -59,12 +59,17 @@ function drive(memoOn,{rep=1,shuffle=0}={}){const E=engine();if(hasMemo)E.API.me
  ok('stats sp·spMapped·files identical',ia.stats.sp===ib.stats.sp&&ia.stats.spMapped===ib.stats.spMapped&&JSON.stringify(ia.stats.files)===JSON.stringify(ib.stats.files),[ia.stats.sp,ib.stats.sp,ia.stats.spMapped,ib.stats.spMapped]);
  ok('memo actually used in that run',(ib.stats.spFast||0)>ib.stats.sp*.15&&!(ia.stats.spFast>0),[ib.stats.spFast,ib.stats.sp]);
  for(const seed of [7,2024]){const a=drive(false,{rep:40,shuffle:seed}).out,b=drive(true,{rep:40,shuffle:seed}).out;ok('shuffled order '+seed+': identical',a.length===b.length&&a.every((r,i)=>r===b[i]));}}
-// ③ play-r111: 기억 안 함 — 같은 객체를 threadSlash 와 보스 함수가 번갈아·몰아서 써도 늘 맞고 늘 스택
-{const E=engine(),F=mkPals()[1],thr=E.mk('play-r111.js',SHAPES.threadSlash),boss=E.mk('play-r111.js',SHAPES.bossFn);let bad=0,c=0,d=0;
- const want={thr:E.call(thr,F).got,boss:E.call(boss,F).got};ok('R111 threadSlash themed, boss fn untouched',want.thr!==want.boss&&want.boss.includes('120,80,18'));
- for(let i=0;i<120;i++){const r=E.call(boss,F);c+=r.caps;d+=r.draws;if(r.got!==want.boss)bad++;}for(let i=0;i<120;i++){const r=E.call(thr,F);c+=r.caps;d+=r.draws;if(r.got!==want.thr)bad++;}
- for(let i=0;i<120;i++){const r=E.call(i%2?thr:boss,F);c+=r.caps;d+=r.draws;if(r.got!==(i%2?want.thr:want.boss))bad++;}
- ok('play-r111 always decided by stack (no memo), never wrong',bad===0&&c===d,{bad,c,d});}
+// ③ play-r111: threadSlash 만 실 규칙 — 게임처럼 threadSlash 는 엔진 효과 threadSlashR63 안에서, 보스·자아 그림은 그 밖에서 그리면 열쇠가 갈려 늘 맞고 대부분 스택 없음
+{const E=engine(),F=mkPals()[1],thr=E.mk('play-r111.js',`function threadSlash(F){const cut=()=>${S}.along('glow',F,0,0,1,1,1);${S}.draw('glow',F,0,0);cut();} function go(F){drawEffect({type:'threadSlashR63'},()=>threadSlash(F));}`),boss=E.mk('play-r111.js',SHAPES.bossFn);let bad=0,c=0,d=0;
+ const ref=engine();ref.API.memo(false);const want={thr:ref.call(ref.mk('play-r111.js',`function threadSlash(F){const cut=()=>${S}.along('glow',F,0,0,1,1,1);${S}.draw('glow',F,0,0);cut();} function go(F){drawEffect({type:'threadSlashR63'},()=>threadSlash(F));}`),mkPals()[1]).got,boss:ref.call(ref.mk('play-r111.js',SHAPES.bossFn),mkPals()[1]).got};
+ ok('R111 threadSlash themed (direct and via cut), boss fn untouched',want.thr!==JSON.stringify([F,F])&&want.boss===JSON.stringify([F]),want);
+ for(let i=0;i<300;i++){const r=E.call(boss,F);c+=r.caps;d+=r.draws;if(r.got!==want.boss)bad++;}for(let i=0;i<300;i++){const r=E.call(thr,F);c+=r.caps;d+=r.draws;if(r.got!==want.thr)bad++;}
+ for(let i=0;i<600;i++){const r=E.call(i%2?thr:boss,F);c+=r.caps;d+=r.draws;if(r.got!==(i%2?want.thr:want.boss))bad++;}
+ ok('play-r111 thread effect vs boss art: never wrong, mostly stack-free',bad===0&&c<d/3&&!E.API.inspect().stats.memoMixed,{bad,c,d});
+ // 같은 열쇠로(효과 종류 구분 없이) threadSlash 와 보스 함수가 섞이면: 처음부터 번갈아면 안 틀리고 그 열쇠는 예전 길
+ const E2=engine(),G=mkPals()[1],t2=E2.mk('play-r111.js',SHAPES.threadSlash),b2=E2.mk('play-r111.js',SHAPES.bossFn),w2={thr:ref.call(ref.mk('play-r111.js',SHAPES.threadSlash),mkPals()[1]).got,boss:want.boss};let bad2=0,c2=0,d2=0;
+ for(let i=0;i<300;i++){const r=E2.call(i%2?t2:b2,G);c2+=r.caps;d2+=r.draws;if(r.got!==(i%2?w2.thr:w2.boss))bad2++;}
+ ok('play-r111 same key, both decisions interleaved: never wrong, falls back to the stack',bad2===0&&c2===d2&&E2.API.inspect().stats.memoMixed===1,{bad2,c2,d2});}
 // ④ 같은 열쇠를 판정이 다른 파일이 이어서 씀: 무작위 재확인이 곧 알아채고 그 뒤 영영 예전 길
 {const E=engine();E.g.player.hero='neon';const F=mkPals()[1],heroF=E.mk('hero-fx-r102.js',SHAPES.draw),thrF=E.mk('hero-threads-r174.js',SHAPES.draw),mobF=E.mk('mob-motion-r286.js',SHAPES.draw);
  const ref=engine();ref.g.player.hero='neon';if(hasMemo)ref.API.memo(false);const want={hero:ref.call(ref.mk('hero-fx-r102.js',SHAPES.draw),mkPals()[1]).got,thr:ref.call(ref.mk('hero-threads-r174.js',SHAPES.draw),mkPals()[1]).got,mob:ref.call(ref.mk('mob-motion-r286.js',SHAPES.draw),mkPals()[1]).got};
