@@ -140,6 +140,20 @@ if(exists){
  g=env();vm.runInContext('imgReady=false',g);A(g).qaForce('tower');g.room.enemies.push(mob('t',13,10));heroHit(g,'t');step(g,10);ok('orgel picture not loaded yet → code-drawn box fallback, no error',A(g).inspect().stats.errors===0&&vm.runInContext('scopes',g).some(o=>/r948:tower/.test(o.id)));
  ok('sounds use existing Michaela cues only (no new paid audio)',(()=>{const g2=env();for(const k of ['volley','bloom','tower']){A(g2).qaReset();A(g2).qaForce(k);g2.room.enemies.push(mob('s'+k,13,10));heroHit(g2,'s'+k);step(g2,60);}return g2.sounds.length>0&&g2.sounds.every(k=>/^r546(Sp|Atk)_michaela$/.test(k));})());
 
+
+ // ---- Dots MH-09 r2 작은 하트 폭발(16장, 6×3 아틀라스 256 칸, 12.5fps) — 오르골탑 투사체 폭발에 적용 ----
+ {const g=env();A(g).qaForce('tower');g.room.enemies.push(mob('t',13,10,{hp:1e9,maxHp:1e9}));heroHit(g,'t');
+  const BURST=/assets\/r948\/heart-burst16\.webp/;let n=0;while(A(g).inspect().stats.bursts<1&&n++<600)step(g,1,.02);
+  const steps=[];for(let i=0;i<80;i++){vm.runInContext('drawn.length=0',g);step(g,1,.02);steps.push(vm.runInContext('drawn',g).filter(x=>BURST.test(x.src)).map(x=>({sx:x.a[0],sy:x.a[1],w:x.a[2],h:x.a[3]})));}
+  const all=steps.flat(),idx=all.map(r=>r.sx/256+6*(r.sy/256));
+  ok('tower burst drawn from the MH-09 sheet',all.length>0);
+  ok('MH-09 cells are whole 256 cells of the 6×3 atlas, only frames 0..15 (slots 17·18 are packing)',all.every(r=>r.w===256&&r.h===256&&r.sx%256===0&&r.sy%256===0)&&idx.every(i=>i>=0&&i<=15));
+  ok('MH-09 plays through to its fade (frame ≥ 13 reached → ~1.28 s, not cut at .5 s)',Math.max(...idx)>=13);
+  ok('jewel heart (3rd) → outline heart (4th) cross-fades: both drawn in one moment',steps.some(s=>{const f=s.map(r=>r.sx/256+6*(r.sy/256));return f.includes(2)&&f.includes(3);}));
+  {const g3=env();A(g3).qaForce('tower');g3.room.enemies.push(mob('t',13,10,{hp:1e9,maxHp:1e9}));heroHit(g3,'t');let k=0;while(A(g3).inspect().stats.bursts<1&&k++<600)step(g3,1,.02);step(g3,10,.02);
+   const sb=vm.runInContext('scopes',g3).filter(o=>/r948:tower:boom/.test(o.id));
+   ok('burst picture drawn upright in front of the mob (not inside the groundAligned floor scope — it was hidden behind the body)',sb.some(o=>!o.groundAligned)&&sb.some(o=>o.groundAligned));}
+  ok('MH-09 sheet does not replace the volley pop (PJ-03 hit6 stays for volley)',/heart-hit6\.webp/.test(src));}
  // ---- 3D 기록기 안전(헤드리스 실측: 폭발 순간 u=2-1e-9 에서 sqrt(음수)=NaN → Three.js 'Nonfinite original draw command' → 화면 실패로 게임 정지) ----
  {const bad=[];const watch=g=>{const raw=g.ctx;g.ctx=new Proxy(raw,{get(o,k){const v=o[k];if(typeof v!=='function')return v;return (...a)=>{a.forEach((x,i)=>{if(typeof x==='number'&&!Number.isFinite(x))bad.push(String(k)+'#'+i);});return v.apply(o,a);};},set(o,k,v){if(typeof v==='number'&&!Number.isFinite(v))bad.push('set:'+String(k));o[k]=v;return true;}});};
   const at=(g,t)=>{g.time=t;vm.runInContext('time='+t+';tick();for(const e of effects.slice())drawEffect(e)',g);};
