@@ -9384,7 +9384,8 @@
     "assets/r955/sfx/hit-zombieknight-1.ogg",
     "assets/r955/sfx/hit-zombieknight-2.ogg",
     "assets/r955/sfx/hit-zombieknight-3.ogg",
-    "assets/r955/sfx/index.json"
+    "assets/r955/sfx/index.json",
+    "assets/r948/heart-burst16.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -10459,5 +10460,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "0afd5b33712756cf401f0acec4e08f6b4257e49c8a27b52fce2c9e65a6044b0d"
+  "runtimeManifestSHA256": "bba2c2d0e5000b9c8d9d06e9a7b992730d86d69f97a7411f8403c655058fed63"
 }

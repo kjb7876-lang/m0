@@ -29,5 +29,25 @@
     256
    ]
   }
+ ],
+ "dots": [
+  {
+   "id": "CX-0094MH MH-09 r2 heart_burst_small",
+   "driveFile": "CX-0094MH_MH-09_r2_candidate.zip",
+   "zipSha256": "0c96158e816a0265f4477e65ae35a7ba68c12efd9728bdf71a4462af8f0e7319",
+   "src": "CX-0094MH_r2_MH-09_heart_burst_small.png",
+   "srcSha256": "fe97b008d85bd346a5122aa5dbe684f81519b92b5f8ebed27f62dd1347ee7017",
+   "out": "heart-burst16.webp",
+   "outSha256": "4a410a271f31e0f5b75a89c2c5c8300baf3996a03564efc1298a7889a4298297",
+   "bytes": 98002,
+   "size": [
+    1536,
+    768
+   ],
+   "grid": "6x3 칸 256, 16장(17·18 칸은 빈 포장칸, 재생 안 함), 12.5fps 1.28초 한 번",
+   "use": "오르골탑 투사체가 달라붙었다 터지는 하트 폭발(기존 PJ-03 hit6 대체). 하트 세례 적중 팝은 hit6 유지",
+   "edit": "webp q90 변환만. 코드에서 칸별 피벗 y(137→111)로 중심 맞춤, 3→4장 교차 페이드(검토 지시)",
+   "status": "코디네이터 검토 '유지'(2026-11-13), 적용"
+  }
  ]
 }

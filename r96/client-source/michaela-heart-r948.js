@@ -17,19 +17,21 @@
  */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_MICHAELA_HEART_R948__)return;
-const REV='R948-heart-2',KEY='storyworld.r948.heart',HERO='michaela';
+const REV='R948-heart-3',KEY='storyworld.r948.heart',HERO='michaela';
 const CHANCE=.11,CROWD_BONUS=.04,CROWD_N=4,CROWD_R=2,CHANCE_MAX=.35,ROLL_GAP=.35,ICD=5;
 const WEIGHTS=[['volley',.55],['tower',.30],['bloom',.15]];
 const VOLLEY_N=16,VOLLEY_V=9,VOLLEY_RANGE=6,VOLLEY_R=.5,VOLLEY_K=.55,CHARM_T=.5,CHARM_DIST=1.0,CHARM_STOP=.8,CHARM_CD=.6;
 const BLOOM_FAR=7,BLOOM_AHEAD=3,BLOOM_CHARGE=2.0,BLOOM_R=3.0,BLOOM_K=3.2,BLOOM_BOSS_K=2.0,BLOOM_STUN=.5,BLOOM_FLASH=.6;
 const CLOUD_T=4,CLOUD_R=2.2,CLOUD_TICK=.5,CLOUD_K=.3;
 const TOWER_LIFE=7,TOWER_OFF=1.4,TOWER_FIRST=.3,TOWER_GAP=.9,TOWER_TARGETS=3,TOWER_RANGE=6.5,FLOAT_V=4.5,FLOAT_LIFE=3,STICK_T=.7,BURST_R=1.3,BURST_K=.4,FLOAT_CAP=14,RETARGET_R=4;
-const stats={rolls:0,procTotal:0,procs:{volley:0,tower:0,bloom:0},hits:0,charmed:0,stuck:0,bursts:0,draws:0,errors:0,lastError:null,minProjPx:Infinity,maxFloaters:0};
+const stats={rolls:0,procTotal:0,procs:{volley:0,tower:0,bloom:0},hits:0,charmed:0,stuck:0,bursts:0,draws:0,errors:0,lastError:null,minProjPx:Infinity,maxFloaters:0,burstCells:0,burstMaxPx:0};
 const owners=new WeakMap();let ownerCount=0;
 let acts=[],floaters=[],charms=[],booms=[],lastRoom=null,lastT=null,prefAt=-1e9,prefOn=true,inner=0,forced=null,rng=null,shapeN=0,lastBurstSound=-1e9,preloaded=false;
 const ORGEL=[0,1,2,3,4,5,6,7].map(i=>'assets/r378/orgel-'+i+'.webp');
 // Dots CX-0084PJ PJ-03 칠한 장미 하트 시트(드라이브 후보, assets/r948/index.json): 비행 8칸 12fps 루프(오른쪽을 향함) · 적중 6칸 14fps 한 번.
-const FLY='assets/r948/heart-fly8.webp',HIT='assets/r948/heart-hit6.webp',CELL=256,FLY_PIV={x:150,y:128},FLY_BODY=.53;
+const FLY='assets/r948/heart-fly8.webp',HIT='assets/r948/heart-hit6.webp',BURST='assets/r948/heart-burst16.webp',BURST_N=16,BURST_COLS=6,BURST_FPS=12.5,BURST_LIFE=BURST_N/BURST_FPS,
+ // MH-09 칸마다 그림 중심이 위로 옮겨 감(보석 핵 y≈137 → 테 하트 y≈110): 피벗을 따라 옮겨 한 자리에서 터지게
+ BURST_PIV_Y=[137,137,137,134,124,118,114,112,112,111,111,111,111,111,111,111],CELL=256,FLY_PIV={x:150,y:128},FLY_BODY=.53;
 const T=()=>{try{return typeof time==='number'?time:0;}catch(_){return 0;}};
 const fail=e=>{stats.errors++;stats.lastError=String(e&&e.message||e).slice(0,200);};
 const rnd=()=>{try{return rng?rng():Math.random();}catch(_){return Math.random();}};
@@ -53,7 +55,7 @@ function play(k){try{if(typeof sound==='function')sound(k);}catch(_){}}
 function shakeBy(v){try{if(typeof shake==='number')shake=Math.max(shake,v);}catch(_){}}
 function deal(e,v,kind){if(!e||hiddenActor(e)||!canHit(e)||!(v>0))return false;inner++;try{const r=hitEnemy(e,v,{kind:'r948-'+kind,friendly:true,owner:'hero',sourceHero:HERO,r948:true});if(r!==false)stats.hits++;return r;}catch(err){fail(err);return false;}finally{inner--;}}
 function stateOf(o){let s=owners.get(o);if(!s){s={lastRoll:-1e9,readyAt:-1e9};owners.set(o,s);ownerCount++;}return s;}
-function preload(){if(preloaded)return;preloaded=true;try{if(typeof addImage==='function'&&typeof readyImage==='function')for(const p of [...ORGEL,FLY,HIT])if(!readyImage(p))addImage(p);}catch(err){fail(err);}}
+function preload(){if(preloaded)return;preloaded=true;try{if(typeof addImage==='function'&&typeof readyImage==='function')for(const p of [...ORGEL,FLY,HIT,BURST])if(!readyImage(p))addImage(p);}catch(err){fail(err);}}
 // ---- 홀림(엔진 moveActor, 벽 존중) ----------------------------------------------------------------
 function charm(e,o){if(major(e)||hiddenActor(e))return;if(charms.some(c=>c.e===e))return;stats.charmed++;e.cd=Math.max(Number(e.cd)||0,CHARM_CD);
  charms.push({e,o:{x:o.x,y:o.y},left:CHARM_DIST,v:CHARM_DIST/CHARM_T,until:T()+CHARM_T+.05});}
@@ -117,7 +119,7 @@ function step(){const t=T(),rm=curRoom();if(rm!==lastRoom){if(lastRoom!==null)ca
  if(!on()||blockedNow()){cancel();return;}
  const cur=acts.slice();acts=[];const keep=[];for(const x of cur){try{if(stepAct(x,t,dt))keep.push(x);}catch(err){fail(err);}}acts=keep.concat(acts);
  try{stepFloaters(t,dt);}catch(err){fail(err);floaters=[];}
- runCharms(dt,t);booms=booms.filter(b=>t-b.t0<(b.big?1.0:.5));}
+ runCharms(dt,t);booms=booms.filter(b=>t-b.t0<(b.big?1.0:b.kind==='burst'?BURST_LIFE:.5));}
 if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);
  try{if(typeof started==='undefined'||started)step();}catch(err){fail(err);cancel();}sentinel(acts.length>0||floaters.length>0||booms.length>0);return r;};}
 // ---- 그리기(효과 표지 하나, 3D 기록기에는 ctx.scope 로 자리 주인을 붙인다) -----------------------------------------
@@ -147,6 +149,14 @@ function paintNote(x,y,s,a,proj){if(proj)stats.minProjPx=Math.min(stats.minProjP
 function sheet(path,n,i,x,y,size,ang,a,piv){let row=null;try{row=typeof readyImage==='function'?readyImage(path):null;if(!row&&typeof addImage==='function')addImage(path);}catch(_){}
  if(!row||!row.image)return false;const k=size/CELL,f=((i%n)+n)%n;ctx.save();try{ctx.globalAlpha*=a;ctx.globalCompositeOperation='source-over';ctx.translate(x,y);if(ang)ctx.rotate(ang);
  ctx.drawImage(row.image,f*CELL,0,CELL,CELL,-(piv?piv.x:CELL/2)*k,-(piv?piv.y:CELL/2)*k,CELL*k,CELL*k);}finally{ctx.restore();}return true;}
+function gridCell(path,cols,f,x,y,size,a,px,py,glowPass=0){const row=typeof readyImage==='function'?readyImage(path):null;if(!row||!row.image){if(typeof addImage==='function')addImage(path);return false;}
+ if(a<=0)return true;const k=size/CELL,cx=(f%cols)*CELL,cy=Math.floor(f/cols)*CELL;ctx.save();try{ctx.globalAlpha*=Math.min(1,a);ctx.globalCompositeOperation='source-over';ctx.drawImage(row.image,cx,cy,CELL,CELL,x-px*k,y-py*k,CELL*k,CELL*k);
+  // 어두운 맵·검붉은 몹 위에서 가는 테가 묻혀서(헤드리스 실측) 같은 칸을 'lighter' 로 한 번 더 옅게 — 오르골탑과 같은 방식
+  if(glowPass>0){ctx.globalCompositeOperation='lighter';ctx.globalAlpha*=glowPass;ctx.drawImage(row.image,cx,cy,CELL,CELL,x-px*k,y-py*k,CELL*k,CELL*k);}stats.burstCells++;stats.burstMaxPx=Math.max(stats.burstMaxPx,CELL*k);}finally{ctx.restore();}return true;}
+// Dots MH-09 r2: 12.5fps 16장 한 번. 3장(보석 하트)→4장(테 하트)이 한 번에 바뀌어 튀므로 3장 구간 동안 4장을 교차 페이드로 겹친다(검토 지시).
+function burstSheet(b,t,x,y,size){const u=Math.max(0,t-b.t0)*BURST_FPS,f=Math.min(BURST_N-1,Math.floor(u)),w=Math.min(1,Math.max(0,u-f)),piv=i=>BURST_PIV_Y[i]??111;
+ if(f===2){if(!gridCell(BURST,BURST_COLS,2,x,y,size,1-w,126,piv(2)))return false;gridCell(BURST,BURST_COLS,3,x,y,size,w,126,piv(3),.45);glow(x,y-size*.02,size*.3,PINK_HOT,.5*w);return true;}
+ return gridCell(BURST,BURST_COLS,f,x,y,size,1,126,piv(f),f>=3?.45:0);}
 // 시트(칠한 장미 꽃잎 소용돌이)를 몸으로 깔고, 하트 실루엣이 멀리서도 읽히게 칠한 하트를 가운데에 겹친다(7분야 심사: UX·연출).
 function flyHeart(x,y,s,a,ang,t,seed){glow(x,y,s*.9,PINK,a*.6);if(sheet(FLY,8,Math.floor(t*12+seed),x,y,s*1.15/FLY_BODY,ang,a,FLY_PIV)){stats.minProjPx=Math.min(stats.minProjPx,s);paintHeart(x,y,s*.78,a,false);return;}paintHeart(x,y,s,a,true);}
 function screenAng(ux,uy){if(typeof project!=='function')return 0;const a=project(0,0),b=project(ux,uy);return Math.atan2(b.y-a.y,b.x-a.x);}
@@ -200,11 +210,17 @@ function drawFloater(f,t,i){const {z,AH}=scale(),s=AH*.52,q=project(f.x,f.y),bob
    if(f.shape==='note')paintNote(q.x,q.y-lift,s*pulse,1,true);else flyHeart(q.x,q.y-lift,s*pulse,1,0,t*2,f.seed);return;}
   for(let k=1;k<=3;k++)glow(q.x-Math.sin(t*5+f.seed-k*.6)*3*z,q.y-lift+k*s*.18,s*(.35-.07*k),PINK,.35);
   if(f.shape==='note')paintNote(q.x,q.y-lift,s,1,true);else{const e=f.target,ang=e?screenAng(e.x-f.x,e.y-f.y):0;flyHeart(q.x,q.y-lift,s,1,ang,t,f.seed);}});}
+function R0burst(T1){return BURST_R*T1*.5;}
 function drawBoom(b,t){const {z,T1,AH}=scale(),life=b.big?1.0:.5,v=Math.min(1,(t-b.t0)/life),a=1-v,q=project(b.x,b.y),id='r948:'+(b.kind==='bloom'?'bloom':b.kind==='pop'?'volley':'tower')+':boom:'+b.t0.toFixed(2)+':'+b.x.toFixed(1)+':'+b.y.toFixed(1);
  if(b.kind==='bloom')return; // 큰 폭발은 drawBloom 이 그림
  const R=(b.kind==='burst'?BURST_R*T1*.5:AH*.4)*(.4+.8*Math.sqrt(v));
- sc({id,kind:'effect',pxfSide:'hero',x:b.x,y:b.y,groundAligned:b.kind==='burst'},()=>{if(b.kind==='burst')groundHeart(q,R*1.6,PINK_HOT,Math.max(1.5,5*z*a),a,.12*a);
-  const cy=q.y-AH*.6;glow(q.x,cy,AH*.5*(1+v),PINK_HOT,a);
+ // 바닥 하트 표식만 바닥 층(groundAligned), 폭발 그림은 선 층으로 몹 앞에(같은 층에 넣으면 몹 몸에 가려 안 보였음 — 헤드리스 실측)
+ if(b.kind==='burst')sc({id:id+':ground',kind:'effect',pxfSide:'hero',x:b.x,y:b.y,groundAligned:true},()=>{groundHeart(q,R*1.6,PINK_HOT,Math.max(1.5,5*z*a),a,.12*a);});
+ sc({id,kind:'effect',pxfSide:'hero',x:b.x,y:b.y+.05},()=>{
+  const cy=q.y-AH*.6;if(b.kind==='burst'){glow(q.x,cy,AH*.45*(1+v),PINK_HOT,a*.7);
+   // 시트의 테 하트 반폭(≈75/256 칸)이 피해 반지름(1.3칸)과 맞게
+   if(burstSheet(b,t,q.x,cy,Math.max(AH*2.1,R0burst(T1)*3.4)))return;}
+  else glow(q.x,cy,AH*.5*(1+v),PINK_HOT,a);
   if(sheet(HIT,6,Math.min(5,Math.floor((t-b.t0)*14)),q.x,cy,AH*(b.kind==='burst'?1.5:1.1),0,Math.min(1,a*1.6),null))return;
   const n=b.kind==='burst'?6:4;for(let i=0;i<n;i++){const an=i*Math.PI*2/n+b.t0,d=AH*.55*v;paintHeart(q.x+Math.cos(an)*d,cy+Math.sin(an)*d*.6-AH*.2*v,AH*.2*(1-.4*v),a,false);}});}
 function draw(){if(typeof project!=='function'||typeof ctx==='undefined'||!ctx)return;const t=T();

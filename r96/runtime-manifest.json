@@ -40653,6 +40653,11 @@
       "sha256": "462a047b018fe41ffdc74bc295535eb626b1ab2c7e4fea37ba31c98b2bd0fd4e"
     },
     {
+      "path": "assets/r948/heart-burst16.webp",
+      "bytes": 98002,
+      "sha256": "4a410a271f31e0f5b75a89c2c5c8300baf3996a03564efc1298a7889a4298297"
+    },
+    {
       "path": "assets/r948/heart-fly8.webp",
       "bytes": 77962,
       "sha256": "02ec0492466b78b30c7dbcbba9b5d1434213c41f8ad769f1700b29edfeded12a"
@@ -49904,8 +49909,8 @@
     },
     {
       "path": "michaela-heart-r948.js",
-      "bytes": 30771,
-      "sha256": "aedac7941dcbb031d7b01079c157b9a949956e7fd5cf875709dca7ec5958431e"
+      "bytes": 33173,
+      "sha256": "d2cae158c7c424a5a55cf6c14e1526c5638c9b6797c67430c81d70eded207803"
     },
     {
       "path": "michaela-r247.js",
@@ -50873,8 +50878,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10174,
-  "totalBytes": 1260245011,
+  "fileCount": 10175,
+  "totalBytes": 1260345415,
   "webHTMLSha256": "d65f74274a6e04cf2a6776d84760bc969260cd49e4b9ed063fba15c01a40f3e3",
   "largest": [
     {
