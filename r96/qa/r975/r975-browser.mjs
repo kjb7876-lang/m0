@@ -25,6 +25,13 @@ ok(r.cast,'E 시전됨');ok(r.moved>0.5,'E 돌진으로 영웅이 움직임(돌�
 const hb=(r.hits||[]).filter(h=>h.boss);ok(hb.length===7,'보스 7타 ('+hb.length+')');
 ok(r.api?.stats?.bossFirst>=1,'보스 우선 잡음');ok((r.api?.lastCuts||[]).map(c=>c.dir).join()==='1,-1,1,-1,1,-1,1','좌우 번갈아 7번');
 ok((r.snd||[]).length===7,'타마다 효과음 요청 7개 ('+(r.snd||[]).length+')');
+// 일반몹만 있을 때(보스 표지를 잠시 끔): 7연 없이 R590 원래 일섬으로 넘김
+const r2=await p.evaluate(async()=>{const wait=ms=>new Promise(r=>setTimeout(r,ms));const b=room.enemies.find(e=>e.boss&&e.hp>0);const A=window.__STORYWORLD_HWANDO_ILSEOM_R975__;const KS=['boss','midboss','miniBoss','samongBoss','sinBoss','majorBoss','bossR104'],keep=Object.fromEntries(KS.map(k=>[k,b[k]]));for(const k of KS)b[k]=false;
+ let s=null;for(let i=0;i<32&&!s;i++){const a=i/32*Math.PI*2,x=b.x+Math.cos(a)*4,y=b.y+Math.sin(a)*4;if(!blocked(x,y,.3,room)&&clearLine({x,y},b,room))s={x,y};}player.x=s.x;player.y=s.y;target=b;
+ if(player.storyWER?.ready)for(const k in player.storyWER.ready)player.storyWER.ready[k]=0;
+ const c0=A.inspect().stats.casts,n0=A.inspect().stats.normalPassed,f0=window.__STORYWORLD_HWANDO_CHAIN_R590__.inspect().stats.flashes;const cast=__STORYWORLD_WER__.cast('e');const t0=time,st=Date.now();while(time-t0<1.2&&Date.now()-st<40000)await wait(50);Object.assign(b,keep);
+ return {flags:keep,cast:!!cast,casts:A.inspect().stats.casts-c0,normal:A.inspect().stats.normalPassed-n0,flashes:window.__STORYWORLD_HWANDO_CHAIN_R590__.inspect().stats.flashes-f0};});
+console.log(JSON.stringify(r2));ok(r2.cast&&r2.flashes===1&&r2.casts===0&&r2.normal===1,'일반몹만: 7연 없이 R590 원래 일섬으로 넘김');
 ok(!errs.length&&!r.api?.stats?.errors,'페이지·R975 오류 0 '+errs.slice(0,2));
 if(process.env.SHOT_DIR){for(const k of [2,3,7]){await p.evaluate(()=>{const A=window.__STORYWORLD_HWANDO_ILSEOM_R975__;const b=room.enemies.find(e=>e.boss&&e.hp>0);let s=null;for(let i=0;i<32&&!s;i++){const a=i/32*Math.PI*2,x=b.x+Math.cos(a)*4,y=b.y+Math.sin(a)*4;if(!blocked(x,y,.3,room)&&clearLine({x,y},b,room))s={x,y};}player.x=s.x;player.y=s.y;target=b;player.specialCD=0;for(const k in player)if(/CD$|Cd$|cooldown/i.test(k)&&typeof player[k]==='number')player[k]=0;window.__c0=A.inspect().stats.cuts;__STORYWORLD_WER__.cast('e');});
   await p.waitForFunction(k=>window.__STORYWORLD_HWANDO_ILSEOM_R975__.inspect().stats.cuts>=window.__c0+k,k,{timeout:60000,polling:5}).catch(()=>{});await p.screenshot({path:OUT+'/r975-cut'+k+'.png'});}}

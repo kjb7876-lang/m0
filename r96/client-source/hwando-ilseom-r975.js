@@ -3,7 +3,8 @@
  *  E 돌진(백은 유영보, 엔진·WER) 자체는 바꾸지 않는다. R590 이 돌진 0.32초 뒤 지나온 길을 한 번 베던 「유영 일섬」 피해(공격력×0.6)를
  *  여기서 넘겨받아 7타로 나눈다(1~6타 각 1/8, 7타 마무리 2/8 → 총합은 그대로 ×0.6).
  *   - 대상: 돌진 끝에서 3.5칸 안(벽 너머 제외)에 보스·중간보스가 있으면 가장 가까운 보스를 첫 대상으로 잡고, 타마다 보스를 먼저 때린다.
- *           지나온 길 위 적(R590 과 같은 반경)도 그대로 함께 7타. 길 위에 아무도 없고 보스도 없으면 돌진 끝 2.2칸 안 가까운 적 하나.
+ *           지나온 길 위 적(R590 과 같은 반경)도 그대로 함께 7타.
+ *           보스·중간보스가 범위 안에 없으면(일반몹뿐) 넘겨받지 않는다 → R590 원래 한 방 일섬(사용자 02:17Z "일반몹한테는 그전처럼").
  *   - 연출: 0.07초 간격 7번, 첫 대상 몸통을 가로지르는 일섬이 왼쪽→오른쪽, 오른쪽→왼쪽 번갈아(Dots CX-0062HW 일섬 시트 hwando-e-delayed-flash).
  *           7타는 조금 크게 + 황금 섬광. 대상이 죽으면 다음 대상 자리로 옮겨 남은 타를 잇는다.
  *   - 소리: 타마다 짧은 칼날 적중음 1개(assets/r975/sfx/ilseom-1~7, R785 환도 적중음 재가공, 음높이 차츰 올림·좌우 번갈아 팬, 7타는 묵직하게).
@@ -14,14 +15,14 @@
  *  Canonical source; copied by scripts/sync-r99.py. */
 (()=>{'use strict';
 if(window.__STORYWORLD_HWANDO_ILSEOM_R975__)return;
-const REV='R975-hwando-ilseom-2',KEY='storyworld.r975.hwandoIlseom';
+const REV='R975-hwando-ilseom-3',KEY='storyworld.r975.hwandoIlseom';
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const W8=Object.freeze([1,1,1,1,1,1,2]);
-const CFG=Object.freeze({hits:7,gap:.07,weights:W8,bossRange:3.5,pickRange:2.2,tilt:.3,cutLife:.26,finalLife:.4,maxVis:10,maxDraws:24});
+const CFG=Object.freeze({hits:7,gap:.07,weights:W8,bossRange:3.5,tilt:.3,cutLife:.26,finalLife:.4,maxVis:10,maxDraws:24});
 const SFX=Object.freeze([1,2,3,4,5,6,7].map(i=>Object.freeze({kind:'r975Ilseom'+i,path:'assets/r975/sfx/ilseom-'+i+'.ogg'})));
 const SHEET=Object.freeze({path:'assets/r590/hwando-e-delayed-flash.webp',cell:256,cols:6,frames:24,pivot:[17,132],len:223,th:90,hit:7,lift:1.7,crop:[0,80,256,184]});
 const PAL=Object.freeze({a:Object.freeze([214,222,234]),b:Object.freeze([244,248,255])}),GOLD=Object.freeze({a:Object.freeze([255,198,72]),b:Object.freeze([255,232,170])});
-const stats={casts:0,bossFirst:0,hits:0,damage:0,sounds:0,cuts:0,hushed:0,cancelled:0,draws:0,coopSkipped:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
+const stats={normalPassed:0,casts:0,bossFirst:0,hits:0,damage:0,sounds:0,cuts:0,hushed:0,cancelled:0,draws:0,coopSkipped:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const fin=v=>typeof v==='number'&&Number.isFinite(v),clamp=(v,a,b)=>Math.min(b,Math.max(a,v)),smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
 const T=()=>typeof time==='number'&&fin(time)?time:0;
 const solo=()=>{let m=null;try{m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();}catch(_){}return !m||m==='off';};
@@ -42,8 +43,7 @@ function pickTargets(a,b,radius){const all=foes().filter(okFoe);let boss=null,bd
  for(const e of all){const c=near(a,b,e),d=Math.hypot(e.x-c.x,e.y-c.y);
   if(d<radius+(e.radius||0)&&line(c,e))path.push(e);
   if(isBoss(e)){const db=Math.hypot(e.x-b.x,e.y-b.y);if((db<=br+(e.radius||0)||d<=br)&&db<bd&&(line(b,e)||line(c,e))){bd=db;boss=e;}}}
- const list=boss?[boss,...path.filter(e=>e!==boss)]:path.slice();
- if(!list.length){let best=null,dd=Infinity;const pr=rng(CFG.pickRange);for(const e of all){const d=Math.hypot(e.x-b.x,e.y-b.y);if(d<=pr+(e.radius||0)&&d<dd&&line(b,e)){dd=d;best=e;}}if(best)list.push(best);}
+ const list=boss?[boss,...path.filter(e=>e!==boss)]:[];
  return {list,boss};}
 // ---- 7연 일섬 ------------------------------------------------------------------------------------------------
 const seqs=[],vis=[];let lastCuts=[],lastT=null;
@@ -71,9 +71,9 @@ function step(q){const i=++q.n,wsum=W8.reduce((s,v)=>s+v,0),dmg=q.pw*q.mult*W8[i
  playHit(i);arm();if(i>=CFG.hits)q.done=true;}
 // R590 이 늦은 일섬 순간에 부른다. true 를 돌려주면 R590 은 한 방 피해를 넣지 않는다.
 function take(o){try{if(!on||!isHw()||!solo())return false;if(!o||!o.a||!o.b||![o.a.x,o.a.y,o.b.x,o.b.y,o.pw,o.mult].every(fin)||!(o.pw>0))return false;
-  const radius=fin(o.radius)&&o.radius>0?o.radius:.6,{list,boss}=pickTargets(o.a,o.b,radius);stats.casts++;if(boss)stats.bossFirst++;
+  // 사용자 02:17Z: 7번 베기는 보스·중간보스한테만. 범위 안에 보스가 없으면 넘겨받지 않는다 → R590 원래 한 방 일섬.
+  const radius=fin(o.radius)&&o.radius>0?o.radius:.6,{list,boss}=pickTargets(o.a,o.b,radius);if(!boss){stats.normalPassed++;return false;}stats.casts++;stats.bossFirst++;
   const q={id:String(o.id||stats.casts),a:{x:o.a.x,y:o.a.y},b:{x:o.b.x,y:o.b.y},pw:o.pw,mult:o.mult,list,n:0,done:false,t0:T(),j:snap(),cuts:[]};lastCuts=q.cuts;
-  if(!list.length)return true;// 대상이 없으면 R590 한 방도 맞을 적이 없다(같은 반경) — 넘겨받고 끝
   asHero('hwando',()=>step(q));if(!q.done){seqs.push(q);while(seqs.length>4)seqs.shift();}arm();return true;}catch(e){fail(e);return false;}}
 function tickSeqs(){const t=T();for(let k=seqs.length-1;k>=0;k--){const q=seqs[k];if(!valid(q.j)){seqs.splice(k,1);stats.cancelled++;continue;}
   let guard=0;while(!q.done&&t>=q.t0+q.n*CFG.gap-1e-9&&guard++<CFG.hits)asHero('hwando',()=>step(q));if(q.done)seqs.splice(k,1);}}

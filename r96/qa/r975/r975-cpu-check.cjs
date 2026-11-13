@@ -86,17 +86,22 @@ const EPS=1e-6;
 // 2) 중간보스(midboss)도 보스로 친다
 {const E=engine({enemies:[{id:'mid',x:24.5,y:22,midboss:true}]});flight(E,'wer:m1',20,20,23.8,20);E.run(1.3);
  ok(ilseom(E).filter(x=>x.id==='mid').length===7,'중간보스도 범위 안이면 우선 7타');}
-// 3) 보스가 범위 밖이면 대상 아님 — 길 위 졸개만 7타(기존처럼)
+// 3) 사용자 02:17Z "7번베기는 보스나 중간보스한테만 발동하는거야 일반몹한테는 그전처럼 나가고"
+//    → 범위 안에 보스가 없으면 R590 원래 한 방 일섬(길 위 적 ×0.6, 한 번)
 {const E=engine({enemies:[{id:'mob',x:22,y:20.3},{id:'boss',x:30,y:20,boss:true}]});flight(E,'wer:far',20,20,23.8,20);E.run(1.3);
- ok(ilseom(E).filter(x=>x.id==='boss').length===0,'범위 밖 보스는 안 맞음');ok(ilseom(E).filter(x=>x.id==='mob').length===7,'길 위 졸개 7타');}
-// 4) 벽 너머 보스는 대상 아님
+ const f=E.hits.filter(x=>x.s.r590==='flash');ok(ilseom(E).length===0,'범위 밖 보스·일반몹뿐: 7타 없음');
+ ok(f.length===1&&f[0].id==='mob'&&Math.abs(f[0].v-60)<EPS,'일반몹은 그전처럼 한 방 일섬(×0.6)');
+ ok(E.sounds.filter(s=>/^r975/.test(s.k)).length===0&&E.api.inspect().stats.casts===0,'7연 효과음·시전 기록 없음');}
+{const E=engine({enemies:[{id:'m1',x:21,y:20.2},{id:'m2',x:23,y:19.8}]});flight(E,'wer:mobs',20,20,23.8,20);E.run(1.3);
+ const f=E.hits.filter(x=>x.s.r590==='flash');ok(ilseom(E).length===0&&f.length===2,'일반몹 여럿: 각자 한 방씩(원래대로)');}
+// 4) 벽 너머 보스는 대상 아님 — 벽 너머라 원래 일섬도 안 닿음
 {const E=engine({enemies:[{id:'boss',x:16.3,y:20,boss:true}]});flight(E,'wer:wall',12,20,13.7,20);E.run(1.3);
- ok(ilseom(E).length===0,'벽 너머 보스는 안 맞음');}
-// 5) 보스 없음·길 위 적 없음 → 돌진 끝 가까운 적(2.2칸 안) 하나를 7타
+ ok(E.hits.length===0,'벽 너머 보스는 안 맞음');}
+// 5) 보스 없음·길 밖 일반몹은 원래처럼 안 맞음(7타 대상 찾기 없음)
 {const E=engine({enemies:[{id:'near',x:24.6,y:21.4}]});flight(E,'wer:near',20,20,23.8,20);E.run(1.3);
- ok(ilseom(E).filter(x=>x.id==='near').length===7,'길 밖이지만 돌진 끝 가까운 적 하나를 7타');}
+ ok(E.hits.length===0,'보스가 없으면 길 밖 일반몹을 따로 찾아 때리지 않음');}
 {const E=engine({enemies:[{id:'nobody',x:30,y:30}]});flight(E,'wer:none',20,20,23.8,20);E.run(1.3);
- ok(ilseom(E).length===0&&E.sounds.filter(s=>/^r975/.test(s.k)).length===0,'대상이 없으면 피해·효과음 없음');}
+ ok(E.hits.length===0&&E.sounds.filter(s=>/^r975/.test(s.k)).length===0,'대상이 없으면 피해·효과음 없음');}
 // 6) 보스가 중간에 죽으면 다음 대상으로, 오류 없이
 {const E=engine({enemies:[{id:'boss',x:25,y:21,boss:true,hp:20},{id:'mob',x:22,y:20.2}]});flight(E,'wer:die',20,20,23.8,20);E.run(1.3);
  const hb=ilseom(E).filter(x=>x.id==='boss'),hm=ilseom(E).filter(x=>x.id==='mob');ok(hb.length>=1&&hb.length<7,'보스가 죽으면 더 안 때림(실제 '+hb.length+'타)');
