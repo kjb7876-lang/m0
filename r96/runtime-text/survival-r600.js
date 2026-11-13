@@ -280,10 +280,11 @@ if(typeof sound==='function'){const base=sound;sound=function(k,...a){
 function gemTick(dt,vacuum){const p=player;let got=0;for(const g of gems){const d=Math.hypot(g.x-p.x,g.y-p.y);if(vacuum||d<GEM_PULL||g.pull){g.pull=true;const sp=(vacuum?14:9)*dt,k=Math.min(1,sp/Math.max(.001,d));g.x+=(p.x-g.x)*k;g.y+=(p.y-g.y)*k;}
   if(Math.hypot(g.x-p.x,g.y-p.y)<GEM_TAKE){g.taken=true;got+=g.v;tails.push({x:g.x,y:g.y,at:G(()=>time,0)});if(tails.length>40)tails.shift();}}
  if(got){gems=gems.filter(g=>!g.taken);{const t=G(()=>time,0);if(t-gemSndAt>=GEM_SND_GAP||t<gemSndAt){gemSndAt=t;snd('pickup');}}credit(got);}}
+const CAP=()=>(typeof HERO_LEVEL_CAP!=='undefined'&&HERO_LEVEL_CAP>0)?HERO_LEVEL_CAP:777; // R1011 영웅 만렙 공유(예전 99)
 let rawGainXP=null;
 // 조각을 먹으면 생존 경험치. 레벨이 오르면 3택을 하나씩 열고, 영웅 레벨(엔진 공격력·최대 체력 비례)도 같이 올린다. 패시브 포인트는 주지 않는다.
 function credit(v){stats.gems++;const r=levelUps(S.xp,S.lv,v*diffOf(S.diff).xp);S.xp=r.xp;S.lv=r.lv;if(r.ups>0){choiceQ+=r.ups;stats.levels+=r.ups;snd('upgrade');
-  try{player.level=Math.min(99,Math.max(player.level,S.lv));player.hp=Math.min(maxHP(),player.hp+maxHP()*.08*r.ups);fx?.('sigil',player.x,player.y,{asset:VFX.heal,size:2,life:.8});}catch(e){fail(e);}}}
+  try{player.level=Math.min(CAP(),Math.max(player.level,S.lv));player.hp=Math.min(maxHP(),player.hp+maxHP()*.08*r.ups);fx?.('sigil',player.x,player.y,{asset:VFX.heal,size:2,life:.8});}catch(e){fail(e);}}}
 
 // ── 3택 강화 ──
 function pool(){const out=[];try{for(const u of UPGRADES){if(u.dream)continue;const k=typeof upgradeKey==='function'?upgradeKey(u):u.id;out.push({id:'u:'+u.id,key:k,name:u.name,text:u.text,max:u.max,level:+(player.upgrades?.[k]||0),kind:'hero'});}}catch(e){fail(e);}

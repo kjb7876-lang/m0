@@ -1,7 +1,7 @@
 // R970 777 개발자 시험 모드 · 레벨 입력 → 레벨 규칙대로 스킬 포인트 — CPU 검사(정적 + 실제 777 블록 + 가짜 엔진).
 //  node r96/qa/r970/r970-cpu-check.cjs
 //  사용자 2026-11-13 "777코드사용하면 이제 레벨을 적는칸이 나오고 레벨에따라 스킬포인트가 지급되는구조로 바꿔줘 777은 개발자테스트모드라서".
-//  규칙(일반 진행과 같게): R62 — 새 영웅 Lv.1·포인트 1, 레벨이 1 오를 때마다 포인트 +1. 레벨 범위 1~99(777 상한 LEVEL_CAP 99).
+//  규칙(일반 진행과 같게): R62 — 새 영웅 Lv.1·포인트 1, 레벨이 1 오를 때마다 포인트 +1. 레벨 범위 1~만렙(R1011 부터 HERO_LEVEL_CAP 777, 그 전 99).
 //  index.html 의 실제 777 블록을 그대로 떼어 가짜 엔진에서 돌리고 그 위에 R970 을 얹는다.
 const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('assert');
 const R=path.resolve(__dirname,'../..'),ROOT=path.resolve(R,'..');let n=0;
@@ -19,7 +19,7 @@ const strip=s=>s.replace(/\/\*[\s\S]*?\*\//g,'').replace(/\/\/.*$/gm,'');
 ok(!/ctx\.|drawImage|\.filter\s*=|(?:window|document)\.addEventListener\(\s*['"]key/.test(strip(src)),'그림·필터·전역 키 처리 없음(키는 레벨 칸 안에서만)');
 // 일반 진행 규칙이 그대로인지(바뀌면 이 검사가 알려 준다)
 ok(/freshPlayer=function\(\.\.\.args\)\{const p=freshBase\.apply\(this,args\);p\.points=1;/.test(html),'R62: 새 영웅 포인트 1');
-ok(/p\.level=Math\.min\(MAX,Math\.max\(1,integer\(p\.level,1\)\)\+1\);p\.points=Math\.min\(MAX,integer\(p\.points\)\+1\);/.test(html),'R62: 레벨 +1 마다 포인트 +1');
+ok(/p\.level=Math\.min\(MAX,Math\.max\(1,integer\(p\.level,1\)\)\+1\);[^;]*;p\.points=Math\.min\(MAX,integer\(p\.points\)\+1\);/.test(html),'R62: 레벨 +1 마다 포인트 +1');
 ok(/const SLOT=SAVE\+'\.cheat777',LEVEL_CAP=99;/.test(html),'777 레벨 상한 99');
 // ---- 실제 777 블록 떼기 ----
 const a=html.indexOf('/* User-approved 777'),b=html.indexOf('})();',a)+5;ok(a>0&&b>a,'777 블록 찾음');
@@ -31,7 +31,7 @@ function boot(){
   localStorage:{getItem:()=>null,setItem(){}},
   document:{getElementById:id=>els.has(id)?els.get(id):null,createElement:()=>el('story-code-button'),body:{appendChild(){}}},
  };ctx.window=ctx;vm.createContext(ctx);
- vm.runInContext(`var SAVE='save.test',toasts=[];
+ vm.runInContext(`var HERO_LEVEL_CAP=${/const HERO_LEVEL_CAP=(\d+);/.exec(html)[1]};var SAVE='save.test',toasts=[];
   var UPGRADES=[{id:'vital',max:4},{id:'power',max:5},{id:'heroMechanic',max:3,hero:true}];
   var HEROES={hwando:{},lauren:{}};
   var regions=[{id:'hub',title:'쉼터'},{id:'dist01',title:'병원'}],regionById={hub:regions[0],dist01:regions[1]};
@@ -81,11 +81,11 @@ function boot(){
  ok(t.run('player.hp')<=t.run('maxHP()'),'체력이 최대 체력을 넘지 않음');
  // ⑥ 켜진 상태에서 레벨 바꾸기: 올리면 +차이, 상한·하한·이상값
  r=L().setLevel(99);ok(r.ok&&t.run('player.level')===99&&t.run('player.points')===25+69,'Lv.99 로 올리면 +69',t.run('player'));
- r=L().setLevel(150);ok(r.ok&&t.run('player.level')===99&&t.run('player.points')===94,'150 은 99 로 잘림(포인트 그대로)',t.run('player'));
- r=L().setLevel('abc');ok(!r.ok&&t.run('player.level')===99&&t.run('player.points')===94,'숫자가 아니면 거절',r);
- r=L().setLevel('');ok(!r.ok&&t.run('player.level')===99,'빈칸 거절',r);
- r=L().setLevel(Infinity);ok(!r.ok&&t.run('player.level')===99,'Infinity 거절',r);
- r=L().setLevel('12.7');ok(r.ok&&t.run('player.level')===12&&t.run('player.points')===94-87,'소수는 내림(12), 내리면 남은 포인트에서 차이만큼 뺌',t.run('player'));
+ r=L().setLevel(1000);ok(r.ok&&t.run('player.level')===777&&t.run('player.points')===94+678,'1000 은 777 로 잘림(+678)',t.run('player'));
+ r=L().setLevel('abc');ok(!r.ok&&t.run('player.level')===777&&t.run('player.points')===772,'숫자가 아니면 거절',r);
+ r=L().setLevel('');ok(!r.ok&&t.run('player.level')===777,'빈칸 거절',r);
+ r=L().setLevel(Infinity);ok(!r.ok&&t.run('player.level')===777,'Infinity 거절',r);
+ r=L().setLevel('12.7');ok(r.ok&&t.run('player.level')===12&&t.run('player.points')===772-765,'소수는 내림(12), 내리면 남은 포인트에서 차이만큼 뺌',t.run('player'));
  r=L().setLevel(-5);ok(r.ok&&t.run('player.level')===1&&t.run('player.points')===0,'음수는 1, 남은 포인트는 0 아래로 안 내려감',t.run('player'));
  r=L().setLevel(0);ok(r.ok&&t.run('player.level')===1,'0 은 1');
  r=L().setLevel(' 20 ');ok(r.ok&&t.run('player.level')===20&&t.run('player.points')===19,'앞뒤 빈칸 허용, 1→20 은 +19',t.run('player'));
