@@ -6493,6 +6493,26 @@
       "sha256": "17df1f7aeaac815bce5e4e04569382469d96cdc4b98d30af7690f335608d2bd8"
     },
     {
+      "path": "assets/r1001/move/denial-specter-down.webp",
+      "bytes": 96772,
+      "sha256": "359de2ac16e5d8e3312fd167a37149122b0af8d16b1ca438b54e0e70b3156eed"
+    },
+    {
+      "path": "assets/r1001/move/denial-specter-up.webp",
+      "bytes": 93578,
+      "sha256": "d93f386207ba822cef3531d7bcdd9cca77348b1fed41747242264be20fdc3b63"
+    },
+    {
+      "path": "assets/r1001/move/horned-swamp-demon-down.webp",
+      "bytes": 83754,
+      "sha256": "154af07ed7f38413ecc5ad2979fa64fae4ac5e9a4e927733fc5c4d00c7ac4dbf"
+    },
+    {
+      "path": "assets/r1001/move/horned-swamp-demon-up.webp",
+      "bytes": 79642,
+      "sha256": "5c8c2162ce9db057b658b78617fface8d5a96627aabe132114ef63327ef51d18"
+    },
+    {
       "path": "assets/r103/chest-closed.svg",
       "bytes": 2508,
       "sha256": "d3e981852d7785f5749b633ca6f136c5ae378ef0efc7b3562059ceae43bd3e10"
@@ -50559,8 +50579,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6576769,
-      "sha256": "443ab5071f2d1c10f86eab64615a17a9b51d39f2a1d2c7c6be1b703787d061cb"
+      "bytes": 6576818,
+      "sha256": "b613a7ccb5bc29fc930e0dcc883e319441b9cf185ac9bad6932fd6777ffe6942"
     },
     {
       "path": "intro-r140.js",
@@ -50861,6 +50881,11 @@
       "path": "mobs-tune-r116.js",
       "bytes": 8744,
       "sha256": "c805ad734279a79ff81f741d1818997ec6d415a1429d3774aab578def4fd8d91"
+    },
+    {
+      "path": "move-dir-r1001-data.js",
+      "bytes": 2577,
+      "sha256": "e3f3d87f37dabec66f11a9f312b4689009e86fc565fadcb7fadbe90df87c8e2f"
     },
     {
       "path": "move-dir-r974-data.js",
@@ -51698,9 +51723,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10339,
-  "totalBytes": 1275571443,
-  "webHTMLSha256": "443ab5071f2d1c10f86eab64615a17a9b51d39f2a1d2c7c6be1b703787d061cb",
+  "fileCount": 10344,
+  "totalBytes": 1275927815,
+  "webHTMLSha256": "b613a7ccb5bc29fc930e0dcc883e319441b9cf185ac9bad6932fd6777ffe6942",
   "largest": [
     {
       "path": "index.html",

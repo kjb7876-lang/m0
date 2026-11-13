@@ -1,0 +1,118 @@
+{
+ "round": "R1001",
+ "request": "CX-0082MV",
+ "files": [
+  {
+   "dots": "M040",
+   "enemies": [
+    "a10-s1"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV M040/denial_specter-walk-down.png",
+   "sourceSha256": "9d20fec587b3ecdd77a756dcb883eda3d4df950dee5fc70fbfe8ff2a60e8b343",
+   "toneGain": [
+    0.858,
+    0.838,
+    0.845
+   ],
+   "path": "assets/r1001/move/denial-specter-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 96772,
+   "sha256": "359de2ac16e5d8e3312fd167a37149122b0af8d16b1ca438b54e0e70b3156eed",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "M040",
+   "enemies": [
+    "a10-s1"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV M040/denial_specter-walk-up.png",
+   "sourceSha256": "45a08e9931711a1d10ee347f3234ce0c84c3eb7c4d50ef99f509447215a6cdfe",
+   "toneGain": [
+    0.858,
+    0.838,
+    0.845
+   ],
+   "path": "assets/r1001/move/denial-specter-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 93578,
+   "sha256": "d93f386207ba822cef3531d7bcdd9cca77348b1fed41747242264be20fdc3b63",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "M042",
+   "enemies": [
+    "dist05-h1"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV M042/horned_swamp_demon-walk-down.png",
+   "sourceSha256": "eb11374d170b3519ff0d384830678ab5f8b7bcc8def4e7021c829ac3c33acd65",
+   "toneGain": [
+    0.834,
+    0.771,
+    0.65
+   ],
+   "path": "assets/r1001/move/horned-swamp-demon-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 83754,
+   "sha256": "154af07ed7f38413ecc5ad2979fa64fae4ac5e9a4e927733fc5c4d00c7ac4dbf",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "M042",
+   "enemies": [
+    "dist05-h1"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV M042/horned_swamp_demon-walk-up.png",
+   "sourceSha256": "339867b79c2f4a4732db55eec84314ec965d085131caf7da3e9e746fc78454e9",
+   "toneGain": [
+    0.834,
+    0.771,
+    0.65
+   ],
+   "path": "assets/r1001/move/horned-swamp-demon-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 79642,
+   "sha256": "5c8c2162ce9db057b658b78617fface8d5a96627aabe132114ef63327ef51d18",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "M039",
+   "applied": false,
+   "why": "게임은 갈망의 약병핵을 r275 vial-collector(녹색 인간형) 그림으로 그림 — 원본 약병 그림 기준 시트와 다른 인물"
+  },
+  {
+   "dots": "M043",
+   "applied": false,
+   "why": "게임은 보랏빛 알집지기를 r380 purple-eggkeeper, 기억 운반거미를 r290 m005 그림으로 그림 — 다른 거미"
+  },
+  {
+   "dots": "M041(일부)",
+   "applied": false,
+   "why": "주사실 감시환각(r275 thread-nurse)·암시장의 수상한 자(r380 blackmarket-suspect)는 다른 인물 — 백의 구속자(ep1a08)에만 적용"
+  },
+  {
+   "dots": "M042(일부)",
+   "applied": false,
+   "why": "지옥문 파수악마(dist06, r410 m011)는 다른 그림 — 소환진 순례악마(dist05)에만 적용"
+  }
+ ]
+}
