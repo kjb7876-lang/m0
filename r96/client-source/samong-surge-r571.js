@@ -14,34 +14,49 @@
 //   ④ 오라: 영웅 몸을 주색(바깥)·보조색(안쪽) 불꽃이 감싼다(R302 팔레트, 환도 = 실버 바깥 + 골드 안쪽). 코드로만 그림(새 자산 없음),
 //      ctx.filter 안 씀(Three.js 기록기 안전), lowFx 면 혀·불티 수를 줄인다. 시작 .4초 서서히, 끝나기 .6초 전부터 서서히 사라진다.
 //  다른 스레드(영웅별 스킬 개편)가 쓰는 공용 API: __STORYWORLD_SAMONG_SURGE_R571__.active() · cd(s) · range(r) · chance(p) · scope(fn).
+//  R967(사용자 2026-11-13 "ego 각성는 모든 스킬쿨타임 줄여주고 사몽각성은 그거보다 더줄여주게") — 같은 ① 장치에 EGO 를 더한다:
+//   · EGO(player.ego > 0, 사몽 아님) 중 새로 거는 스킬 대기 ×0.77(−23%). EGO 자기 대기(egoCD)는 줄이지 않는다(사몽의 samongCD 처럼).
+//   · 각성에 들어가는 순간 이미 돌고 있던 대기도 줄인다: EGO 진입 ×0.77, 사몽 진입 ×0.60. EGO 중에 사몽으로 올라가면 나머지만 더 줄여
+//     합계가 ×0.60 이 되게 한다(겹곱 없음). EGO 중첩(R169)처럼 이미 켜진 각성을 다시 채우는 것은 진입이 아니다.
+//   · 사몽 중 새로 거는 대기 ×0.23 은 R571 그대로 → 사몽이 EGO 보다 항상 더 줄인다. cd() API 는 예전처럼 사몽 전용(다른 모듈이 마감을 직접 넣음).
+//   · {ego:false} 로 EGO 몫만 끈다.
 //  저장 파일에는 아무것도 쓰지 않는다. localStorage 'storyworld.r571.surge' {on:false} 로 전부, {aura:false} 로 오라만 끈다.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_SAMONG_SURGE_R571__)return;
-const REV='R571-samong-surge-1',KEY='storyworld.r571.surge';
-const RULES=Object.freeze({cooldown:.23,chance:1.77,range:1.77});
+const REV='R571-samong-surge-2+R967',KEY='storyworld.r571.surge';
+const RULES=Object.freeze({cooldown:.23,chance:1.77,range:1.77,egoCooldown:.77,egoEntry:.77,samongEntry:.6});
 const K=RULES.cooldown,R=RULES.range,INV=1/RULES.range,FAR=600;
-let prefs={on:true,aura:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
-const stats={scaledCD:0,scaledDeadline:0,shots:0,fx:0,auraDraws:0,scopes:0,errors:0};let lastError=null;
+let prefs={on:true,aura:true,ego:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
+const stats={entryCut:0,scaledCD:0,scaledDeadline:0,shots:0,fx:0,auraDraws:0,scopes:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e&&e.message||e).slice(0,160);};
 const P=()=>typeof player==='object'&&player?player:null;
 const now=()=>typeof time==='number'&&Number.isFinite(time)?time:0;
 function active(p=P()){return !!(prefs.on&&p&&Number(p.samong)>0&&!(Number(p.hp)<=0));}
+function egoActive(p=P()){return !!(prefs.on&&prefs.ego!==false&&p&&Number(p.ego)>0&&!(Number(p.samong)>0)&&!(Number(p.hp)<=0));}
+// 각성 단계: 0 없음 · 1 EGO · 2 사몽. 단계마다 새 대기 배율과 진입 배율(누적값).
+function mode(p=P()){return active(p)?2:egoActive(p)?1:0;}
+const NEW_K=[1,RULES.egoCooldown,RULES.cooldown],ENTRY_K=[1,RULES.egoEntry,RULES.samongEntry];
+const OWN={1:'egoCD'};// EGO 는 자기 대기를 줄이지 않는다(사몽 자기 대기 samongCD 는 처음부터 표에 없음).
 
 // ---- ① 재사용 대기 ----------------------------------------------------------------------------------
 const CD_FIELDS=['specialCD','blinkCD','egoCD','guardCD'];
 const snaps=new WeakMap();
-function sync(){const p=P();if(!p)return;const t=now();let s=snaps.get(p);
- if(!s){s={t,rem:Object.create(null),dl:Object.create(null)};snaps.set(p,s);}
- const on=active(p),el=Math.max(0,t-s.t);
- for(const f of CD_FIELDS){let v=Number(p[f]);if(!Number.isFinite(v))continue;const exp=Math.max(0,(s.rem[f]??v)-el);
-  if(on&&v>exp+1e-6&&v-exp<FAR){v=exp+(v-exp)*K;p[f]=v;stats.scaledCD++;}s.rem[f]=v;}
+function sync(){const p=P();if(!p)return;const t=now();let s=snaps.get(p);const m=mode(p);
+ if(!s){s={t,m,rem:Object.create(null),dl:Object.create(null)};snaps.set(p,s);}
+ const el=Math.max(0,t-s.t),k=NEW_K[m],up=m>s.m?ENTRY_K[m]/ENTRY_K[s.m]:1;
+ for(const f of CD_FIELDS){let v=Number(p[f]);if(!Number.isFinite(v))continue;const own=OWN[m]===f;let exp=Math.max(0,(s.rem[f]??v)-el);
+  // 진입: 돌던 몫(exp)만 줄이고, 같은 순간 새로 걸린 몫은 아래 새 대기 배율로.
+  if(up<1&&!own&&exp>1e-6&&exp<FAR&&v>=exp-1e-6){const cut=exp*(1-up);exp-=cut;v-=cut;stats.entryCut++;}
+  if(k<1&&!own&&v>exp+1e-6&&v-exp<FAR){v=exp+(v-exp)*k;stats.scaledCD++;}
+  if(v!==Number(p[f]))p[f]=v;s.rem[f]=v;}
  const ready=p.storyWER?.ready;
  // 표에서 사라진 칸(대기 표를 비움·새 표로 바꿈)은 지난 마감도 잊는다 — 다시 걸 때 옛 마감을 기준으로 삼지 않게.
- for(const k of Object.keys(s.dl))if(!ready||typeof ready!=='object'||!(k in ready))delete s.dl[k];
- if(ready&&typeof ready==='object')for(const k of Object.keys(ready)){let v=Number(ready[k]);if(!Number.isFinite(v))continue;const prev=s.dl[k];
-  if(on&&v!==prev&&v>t&&v-t<FAR){const base=Math.max(t,Number.isFinite(prev)?prev:t);if(v>base+1e-6){v=base+(v-base)*K;ready[k]=v;stats.scaledDeadline++;}}
-  s.dl[k]=v;}
- s.t=t;}
+ for(const key of Object.keys(s.dl))if(!ready||typeof ready!=='object'||!(key in ready))delete s.dl[key];
+ if(ready&&typeof ready==='object')for(const key of Object.keys(ready)){let v=Number(ready[key]);if(!Number.isFinite(v))continue;let prev=s.dl[key];
+  if(up<1&&Number.isFinite(prev)&&prev>t+1e-6&&prev-t<FAR&&v>=prev-1e-6){const cut=(prev-t)*(1-up);prev-=cut;v-=cut;ready[key]=v;stats.entryCut++;}
+  if(k<1&&v!==prev&&v>t&&v-t<FAR){const base=Math.max(t,Number.isFinite(prev)?prev:t);if(v>base+1e-6){v=base+(v-base)*k;ready[key]=v;stats.scaledDeadline++;}}
+  s.dl[key]=v;}
+ s.t=t;s.m=m;}
 
 // ---- ③ 사거리·범위 맥락 ------------------------------------------------------------------------------
 let depth=0,susp=0,scaleOn=false;
@@ -129,11 +144,13 @@ wrapGlobal('drawHero',b=>function(...a){const p=P(),on=!!(prefs.aura&&active(p)&
 // ---- 공용 API -----------------------------------------------------------------------------------------
 window.__STORYWORLD_SAMONG_SURGE_R571__=Object.freeze({revision:REV,rules:RULES,
  active:()=>active(),
+ egoActive:()=>egoActive(),
+ cdFactor:()=>NEW_K[mode()],
  cd:s=>active()?Number(s)*K:Number(s),
  range:r=>active()?Number(r)*R:Number(r),
  chance:c=>{const v=Number(c);if(!(v>0))return v>0?v:0;return active()?Math.min(1,v*RULES.chance):v;},
  scope:(fn,...a)=>scope(fn,null,a),
  palette,sync,drawAura:layer=>{const p=P();if(p&&active(p))aura(p,layer==='front'?'front':'back');},
  set(next){prefs={...prefs,...next};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};},
- inspect:()=>({revision:REV,prefs:{...prefs},active:active(),stats:{...stats},lastError,depth,susp})});
+ inspect:()=>({revision:REV,prefs:{...prefs},active:active(),egoActive:egoActive(),stats:{...stats},lastError,depth,susp})});
 })();
