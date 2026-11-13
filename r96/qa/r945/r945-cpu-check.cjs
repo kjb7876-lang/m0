@@ -143,6 +143,21 @@ const sumOn=(E,id,tag)=>E.hits.filter(h=>h.id===id&&(!tag||h.s?.r945===tag));
  E.sheets.length=0;E.frame();ok(E.sheets.some(s=>/hwando-orchid-slash/.test(s.src||'')),'베어진 꽃잎 흩어짐 칸 이어서 그림');
  ok(E.api.inspect().errors===0,'그리기 오류 0');}
 
+// ---- 합동기 컷인(HI-09 세 사람) ----
+{const fakeDoc=()=>{const made=[];const node=tag=>{const n={tag,children:[],attrs:{},cls:new Set(),offsetWidth:1,appendChild(c){this.children.push(c);return c;},setAttribute(k,v){this.attrs[k]=v;},classList:null};n.classList={add:c=>n.cls.add(c),remove:c=>n.cls.delete(c),contains:c=>n.cls.has(c)};made.push(n);return n;};
+  return {made,createElement:node,head:node('head'),body:node('body')};};
+ for(const k of ['dosa','plum','gat'])ok(fs.existsSync(path.join(R,'runtime-text/assets/r945/hwando-cutin-'+k+'.webp')),'컷인 그림 '+k);
+ {const E=engine({enemies:[{id:'a',x:22,y:20}]});const D=fakeDoc();E.g.document=D;E.g.setTimeout=()=>0;E.g.clearTimeout=()=>{};E.api.force('trio');E.ctx.basicAttack();E.run(.1);
+  const I=E.api.inspect(),el=D.body.children.find(n=>n.attrs.id==='r945Cutin'||n.id==='r945Cutin');
+  ok(I.cutin.shown===1&&el&&el.cls.has('on'),'삼협묵희가 나가면 컷인 한 번');
+  ok(el&&el.children.length===3&&el.children.map(c=>c.src).join()==='assets/r945/hwando-cutin-dosa.webp,assets/r945/hwando-cutin-plum.webp,assets/r945/hwando-cutin-gat.webp','컷인 세 사람(도사·매화 의적·삿갓 두령) 차례');
+  ok(el&&el.attrs['aria-hidden']==='true','컷인은 화면 읽기에서 숨김');
+  E.run(25);E.g.modal=true;E.api.force('trio');E.ctx.basicAttack();E.run(.1);ok(E.api.inspect().cutin.shown===1&&E.api.inspect().cutin.skipped===1,'대화창 중엔 컷인 안 띄움');}
+ {const E=engine({enemies:[{id:'a',x:22,y:20}]});const D=fakeDoc();E.g.document=D;E.g.setTimeout=()=>0;E.g.clearTimeout=()=>{};const main=E.g.player;
+  const ally={x:20,y:20.5,hp:100,hero:'hwando',direction:'right',attackCD:0,specialCD:0,attackAnim:0,r720Ally:true};E.g.__allies=[ally];
+  E.g.player=ally;E.api.force('trio',ally);E.ctx.basicAttack();E.g.player=main;E.run(.1);const I=E.api.inspect(ally);ok(I.stats.trios===1&&I.cutin.shown===0,'생존 배치 영웅 몸이 쓸 땐 컷인 없음(화면 덮지 않게)');}
+ {const E=engine({enemies:[{id:'a',x:22,y:20}]});E.api.force('trio');E.ctx.basicAttack();E.run(.1);const I=E.api.inspect();ok(I.stats.trios===1&&I.errors===0,'문서가 없어도 합동기는 그대로');}}
+
 // ---- 그리기: 그리기 표지 · 상한 ----
 {const E=engine({enemies:[{id:'a',x:21,y:20},{id:'b',x:23,y:21}]});E.api.force('moon');E.ctx.basicAttack();E.run(.1);
  ok(E.g.effects.some(e=>e&&e.r945Sentinel),'할 일이 있으면 그리기 표지 등록');E.sheets.length=0;E.frame();
