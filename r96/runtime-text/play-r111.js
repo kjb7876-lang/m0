@@ -230,10 +230,12 @@ function installGray(){const DC=window.StoryPhase1?.DrawCommands,P=DC?.prototype
 //  버리는 때: 각성이 끝나고 100 게임초가 지남 · 다음 각성 시작 때 지역이 바뀌었거나 사본이 한도의 85% 를 넘음(한 지역이 1,500만~2,100만 화소를 쓰므로 그보다 낮으면 매번 비운다). 각성 도중에는 버리지 않는다.
 let grayRoom=null,grayOff=0;
 const grayRoomKey=()=>{try{return typeof room!=='undefined'&&room?String(room.id??''):'';}catch(_){return '';}};
+// 모바일은 메모리가 빠듯해(R980 모바일 탭 꺼짐) 예전처럼 각성이 끝나면 곧바로 버린다.
+const grayMobile=()=>{try{const m=window.__STORYWORLD_MOBILE_R63__;if(typeof m?.isMobile==='function')return !!m.isMobile();}catch(_){}try{return typeof matchMedia==='function'&&matchMedia('(pointer:coarse)').matches;}catch(_){return false;}};
 function samongTick(){const on=samongOn();
  if(on!==samongState.on){samongState.on=on;
   if(on){if(grayList.length&&(grayRoomKey()!==grayRoom||samongState.grayPixels>(lowFx()?12e6:28e6)*.85))grayReset();grayRoom=grayRoomKey();}
-  else grayOff=time;}
+  else{grayOff=time;if(grayMobile())grayReset();}}
  else if(!on&&grayList.length&&!(time-grayOff>=0&&time-grayOff<=100))grayReset();
  grayBudget=lowFx()?2e6:6e6;}
 const majorFoe=e=>!!(e&&(e.boss||e.midboss||e.persona||e.majorBoss||e.r54Boss||e.combatProfile?.boss));

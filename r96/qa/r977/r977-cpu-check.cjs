@@ -5,6 +5,7 @@
 //  각성할 때마다 사본 55~88장을 다시 만들고(큰 것은 한 장 69ms) GPU 에도 17~22백만 화소를 다시 올렸다.
 //  고침: 각성이 끝나도 흑백 사본을 버리지 않고 다음 각성에서 다시 쓴다. 버리는 때는
 //   · 지역이 바뀐 뒤 다음 각성(그림이 달라짐) · 각성이 끝나고 100 게임초가 지남(메모리) · 다음 각성 시작 때 사본이 한도의 85% 를 넘음(새 그림 자리).
+//  모바일(R63 isMobile, 없으면 pointer:coarse)은 메모리 때문에 예전처럼 각성이 끝나면 곧바로 버린다.
 //  각성 중 흑백 그림·한도(일반 2,800만·저사양 1,200만 화소)·장면당 예산은 그대로. 화면에 보이는 것은 같다.
 const fs=require('fs'),path=require('path'),vm=require('vm');
 const ROOT=path.join(__dirname,'..','..'),SRC=path.join(ROOT,'client-source'),RT=path.join(ROOT,'runtime-text');
@@ -23,7 +24,7 @@ function mk(opt={}){let made=0,freed=0;const canvases=[];
   maxHP:()=>100,actorHeight:()=>60,project:(x,y)=>({x:(x-y)*34,y:(x+y)*17}),facing:()=>'left',
   tick(dt){sb.time+=dt;},drawHero(){},drawEffect(){},drawProjectile(){},hitEnemy(){return true;},hurt(){},fx(){},blink(){},guideStep(){},
   StoryPhase1:{DrawCommands}};
- sb.window=sb;let active=false;sb.__STORYWORLD_SAMONG_R75__={active:()=>active};sb.__STORYWORLD_WER__={defs:{hwando:{e:['E','x','dash']}}};
+ sb.window=sb;if(opt.mobile)sb.__STORYWORLD_MOBILE_R63__={isMobile:()=>true};let active=false;sb.__STORYWORLD_SAMONG_R75__={active:()=>active};sb.__STORYWORLD_WER__={defs:{hwando:{e:['E','x','dash']}}};
  vm.createContext(sb);vm.runInContext(src,sb,{filename:'play-r111.js'});
  const dc=new DrawCommands();const P=sb.__STORYWORLD_PLAY_R111__;
  return{sb,dc,P,set:v=>{active=v;},tick:(dt=.016)=>sb.tick(dt),draw:img=>{dc.got.length=0;dc.drawImage(img,0,0);return dc.got[0];},made:()=>made,freed:()=>freed,st:()=>P.inspect().samong};}
@@ -62,6 +63,8 @@ m=mk();m.set(true);for(let i=0;i<4;i++){m.tick();m.draw(IMG(2675,2000,'zone'+i))
 m=mk();m.set(true);m.tick();ok(isGray(m.draw(IMG(2500,2500,'p1')))&&m.draw(IMG(1000,1000,'p2'))!==undefined&&!isGray(m.dc.got[0]),'장면당 예산(600만 화소)은 그대로: 넘는 그림은 그 장면에선 원본');
 m.tick();ok(isGray(m.draw(IMG(1000,1000,'p2b'))),'다음 장면에서 예산이 다시 참');
 m=mk({lowFx:true});m.set(true);m.tick();ok(isGray(m.draw(IMG(1500,1400,'l1')))&&!isGray(m.draw(IMG(1200,1000,'l2'))),'저사양 예산(200만 화소)은 그대로');
+// 모바일은 메모리 때문에 예전처럼 각성이 끝나면 곧바로 버림(R980 모바일 탭 꺼짐 대응과 맞춤)
+m=mk({mobile:true});m.set(true);m.tick();const mg=m.draw(IMG(400,300,'mfloor'));ok(isGray(mg),'모바일: 각성 중엔 흑백 사본');m.set(false);m.tick();ok(m.freed()===1&&m.st().grayPixels===0,'모바일: 각성이 끝나면 사본을 곧바로 버림(버린 수 '+m.freed()+')');
 // 바뀌는 캔버스(정적 표시 없음)는 예전처럼 바꾸지 않음
 m=mk();m.set(true);m.tick();const live={width:64,height:64,getContext(){}};ok(m.draw(live)===live,'매 장면 바뀌는 캔버스는 흑백 사본을 만들지 않음');
 ok(m.P.inspect().lastError==null,'오버레이 오류 없음 '+JSON.stringify(m.P.inspect().lastError));
