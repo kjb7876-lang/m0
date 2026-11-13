@@ -17,9 +17,12 @@
  const BIG=new Set(['bulmyeongwi','mistheart']),NO_ATK=new Set(['bulmyeongwi']),NO_HIT_IF_GROAN=new Set(['herbwoman','fisherman','maiden']);
  const DIR='assets/r954/sfx/',SETS=[['Hit','hit',3],['Die','die',3],['Atk','atk',3]],GAIN={hit:[.55,.42],die:[.8,.45],atk:[.6,.45]};
  const GAP={hit:[900,450],die:[0,300],atk:[1200,900]};
+ const ALIAS=[['꼭두각시 실안개','mistheart']];
  const ORDER=Object.entries(BOSSES).sort((a,b)=>b[1].length-a[1].length),slugCache=new Map();
  function slugOf(name){if(typeof name!=='string')return null;const k=name.trim();if(slugCache.has(k))return slugCache.get(k);let s=null;
   for(const [v,n] of ORDER){if(k===n){s=v;break;}}
+  // R981: 중간보스 새 이름(꼭두각시 실안개, midboss-puppet-r981.js)도 같은 중간보스 소리.
+  if(!s)for(const [n,v] of ALIAS)if(k.includes(n)){s=v;break;}
   if(!s)for(const [v,n] of ORDER){if(v==='bulmyeongwi')continue;if(k.includes(n)){s=v;break;}}
   slugCache.set(k,s);return s;}
  const stats={hit:0,hitSkipped:0,hitYield:0,die:0,dieSkipped:0,atk:0,atkSkipped:0,warmed:0,errors:0};const last={},seenAtk=new WeakMap();let warmKey='';
