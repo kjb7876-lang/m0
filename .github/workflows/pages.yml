@@ -500,6 +500,10 @@ jobs:
         run: node r96/qa/r720/r720-cpu-check.cjs
       - name: R953 gunner veil passives (cloak cuts ultimate cooldown and cast delay by 77%, lock-on barrage, machine-boss allies for 7s kept out of the enemy list) CPU check
         run: node r96/qa/r953/r953-cpu-check.cjs
+      - name: R991 gunner aim CPU check
+        run: node r96/qa/r991/r991-cpu-check.cjs
+      - name: R1003 gunner aim down art CPU check
+        run: node r96/qa/r1003/r1003-cpu-check.cjs
       - name: R945 hwando ink passives (piercing ink crescent, seven ink clones for 7 s, three-hero ink finale, per-body state) CPU check
         run: node r96/qa/r945/r945-cpu-check.cjs
       - name: R947 slayer blood passives (common piercing blood needle, blood cross-sword rain, rare lattice laser barrage, upright crosses, per-body state) CPU check
@@ -516,8 +520,14 @@ jobs:
         run: node r96/qa/r981/puppet-cpu-check.cjs
       - name: R990 bulmyeongwi fog skills (fog summon of village mobs, fog-weighted patterns, old boss art in summon ghosts) CPU check
         run: node r96/qa/r990/r990-cpu-check.cjs
+      - name: R974 boss/midboss directional walk (Dots CX-0082MV up/down/side 4-frame sheets only while walking on the engine idle art; attack/hit/other art untouched) CPU check
+        run: node r96/qa/r974/move-dir-cpu-check.cjs
+      - name: R1001 regular-mob up/down walk sheets (Dots CX-0082MV, joined to the R974 table; only mobs whose in-game art matches) CPU check
+        run: node r96/qa/r1001/mob-move-cpu-check.cjs
       - name: R996 bulmyeongwi fog summon still fires in the boss phase after every field mob is gone CPU check
         run: node r96/qa/r996/r996-cpu-check.cjs
+      - name: R1007 samong confront statement markers never overlap (4-marker zones M-1 Michaela, S-04 16th floor were unpassable) CPU check
+        run: node r96/qa/r1007/stmt-spread-cpu-check.cjs
       - name: R963 survival BGM note sits below the survival HUD line (no overlapped text) CPU check
         run: node r96/qa/r963/r963-cpu-check.cjs
       - name: R980 mobile memory budget (R163/R106 tint caches capped by pixels on mobile, idle decoded images trimmed, desktop unchanged) CPU check
