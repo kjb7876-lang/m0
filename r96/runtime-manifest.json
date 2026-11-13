@@ -49474,8 +49474,8 @@
     },
     {
       "path": "combat-read-r409.js",
-      "bytes": 25765,
-      "sha256": "2fe5812cc34de0713c5fb12c4079bb11ba4a1910695d5685ec9efb3cd8d379d0"
+      "bytes": 26041,
+      "sha256": "152eadfd1fe62eb63d4491aa2c7a9bf89ca3cc0a40071dca0184496cfbed27c3"
     },
     {
       "path": "combat-sfx-r785.js",
@@ -50304,8 +50304,8 @@
     },
     {
       "path": "mobile-memory-r980.js",
-      "bytes": 5787,
-      "sha256": "b257fb2e9bab297bf7bf6bceb9553d6eea94997c2b7a170e88a836bb19ce7817"
+      "bytes": 7995,
+      "sha256": "796b1fe87bbc5051a64cfae5b1196f2ba85ac786806c8b7ce066af557f0538ba"
     },
     {
       "path": "mobile-perf-r298.js",
@@ -51154,7 +51154,7 @@
     }
   ],
   "fileCount": 10230,
-  "totalBytes": 1266503115,
+  "totalBytes": 1266505599,
   "webHTMLSha256": "0cd9b56d870178666cb2109d75fb99840758d6c3751510c72f56d5d16fb6420c",
   "largest": [
     {

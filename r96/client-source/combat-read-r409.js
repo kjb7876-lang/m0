@@ -49,6 +49,8 @@ const BUCKETS=[1,2,3,4,6,8,11,15,20];
 const bucket=v=>{for(const b of BUCKETS)if(v<=b)return b;return BUCKETS[BUCKETS.length-1];};
 const SCREEN_R=2.4;/* 화면에서 바깥 테 두께(px) — 1280×720 기준. 안쪽 선은 그 절반쯤 */
 const MAX_PX=1600000,CACHE_MAX=288,CACHE_PX=7000000;
+// R992: 모바일은 R980 예산(px('r409-outline'))으로 더 낮춘다. 데스크톱은 7M 그대로.
+const capPx=()=>{try{const v=window.__STORYWORLD_MOBILE_MEMORY_R980__?.px?.('r409-outline',CACHE_PX);return Number.isFinite(v)&&v>0?v:CACHE_PX;}catch(_){return CACHE_PX;}};
 // R441 렉: 예전 96장 상한은 영웅 동작 칸 + 몹 여러 종의 걷기·공격 칸을 다 못 담아, 꽉 찬 뒤엔 같은 그림을 버렸다 다시 구웠다
 //  (헤드리스 40초: ep1a10·dist02·ep1b06 에서 새로 굽기 80~88번 = 버리기 78~84번). 장수 상한을 288 로 올리고 대신 픽셀 합계 7M(약 28MB)로 묶는다.
 const BAKE_BUDGET_MS=6;const bakeFrame={n:0,ms:0,at:-1e9};
@@ -139,7 +141,7 @@ function bakeFast(src,sx,sy,sw,sh,r,side,key,pad,W,H){
  g.putImageData(img,0,0);g.drawImage(src,sx,sy,sw,sh,pad,pad,sw,sh);
  const row={canvas:out,pad,sw,sh};out.__storyworldStaticSource={path:'r409:outline:'+side+':'+key};
  cache.set(key,row);stats.baked++;stats.fastBaked=(stats.fastBaked||0)+1;cachePx+=out.width*out.height;
- while(cache.size>CACHE_MAX||cachePx>CACHE_PX){const k=cache.keys().next().value,old=cache.get(k);cache.delete(k);cachePx-=old.canvas.width*old.canvas.height;stats.cacheEvicted++;}
+ while(cache.size>CACHE_MAX||cachePx>capPx()){const k=cache.keys().next().value,old=cache.get(k);cache.delete(k);cachePx-=old.canvas.width*old.canvas.height;stats.cacheEvicted++;}
  return row;}
 function bake0(src,sx,sy,sw,sh,r,side,key,pad,W,H){if(prefs.fastBake!==false)return bakeFast(src,sx,sy,sw,sh,r,side,key,pad,W,H);
  const m=mask(src,sx,sy,sw,sh,side);if(!m){stats.bakeSkipped++;return null;}
@@ -150,7 +152,7 @@ function bake0(src,sx,sy,sw,sh,r,side,key,pad,W,H){if(prefs.fastBake!==false)ret
  const row={canvas:out,pad,sw,sh};out.__storyworldStaticSource={path:'r409:outline:'+side+':'+key};
  cache.set(key,row);stats.baked++;
  cachePx+=out.width*out.height;
- while(cache.size>CACHE_MAX||cachePx>CACHE_PX){const k=cache.keys().next().value,old=cache.get(k);cache.delete(k);cachePx-=old.canvas.width*old.canvas.height;stats.cacheEvicted++;}/* 쓰던 캔버스는 렌더러가 참조를 놓으면 GC */
+ while(cache.size>CACHE_MAX||cachePx>capPx()){const k=cache.keys().next().value,old=cache.get(k);cache.delete(k);cachePx-=old.canvas.width*old.canvas.height;stats.cacheEvicted++;}/* 쓰던 캔버스는 렌더러가 참조를 놓으면 GC */
  return row;}
 // 화면 네 귀퉁이를 원본 칸 바깥으로 pad 만큼 넓힌다(u·v 방향 각각 비율로).
 function grow(points,sw,sh,pad){const [a,b,,d]=points,u=[(b[0]-a[0])/sw,(b[1]-a[1])/sw],v=[(d[0]-a[0])/sh,(d[1]-a[1])/sh];
