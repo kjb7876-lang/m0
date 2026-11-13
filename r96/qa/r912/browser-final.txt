@@ -1,0 +1,42 @@
+  ✓ seoha·2D: R912 가 켜져 있고 R911 이 맨 바깥이다
+  ✓ seoha·2D: pj01 탄을 그렸다(350번)
+  ✓ seoha·2D: pj05 탄을 그렸다(152번)
+  ✓ seoha·2D: pj06 탄을 그렸다(180번)
+  ✓ seoha·2D: 시트로 바꿔 그림 919+276번, 못 바꾼 그리기 9/1204
+  ✓ seoha·2D: 적중 효과 8번 생기고 112번 그려졌다
+  ✓ seoha·2D: 시트로 그린 탄 468개 모두 R911 확대 없이도 몸통 ≥ 영웅 키 절반
+  ✓ seoha·2D: 그려진 투사체 500개 모두 기준 이상
+  ✓ seoha·2D: 모듈·페이지 오류 없음
+  ✓ seoha·2D: Three.js 그리기 명령 실패 없음
+   kinds {"pj01":350,"pj06":180,"pj04":96,"pj05":152} shots pj05,pj04,pj01
+  ✓ hunter·2D: R912 가 켜져 있고 R911 이 맨 바깥이다
+  ✓ hunter·2D: pj02 탄을 그렸다(467번)
+  ✓ hunter·2D: pj07 탄을 그렸다(137번)
+  ✓ hunter·2D: 시트로 바꿔 그림 842+0번, 못 바꾼 그리기 8/850
+  ✓ hunter·2D: 적중 효과 8번 생기고 90번 그려졌다
+  ✓ hunter·2D: 시트로 그린 탄 218개 모두 R911 확대 없이도 몸통 ≥ 영웅 키 절반
+  ✓ hunter·2D: 그려진 투사체 500개 모두 기준 이상
+  ✓ hunter·2D: 모듈·페이지 오류 없음
+  ✓ hunter·2D: Three.js 그리기 명령 실패 없음
+   kinds {"pj02":467,"-":625,"pj07":137,"pj09a":18} shots pj02
+  ✓ michaela·2D: R912 가 켜져 있고 R911 이 맨 바깥이다
+  ✓ michaela·2D: pj03 탄을 그렸다(293번)
+  ✓ michaela·2D: 시트로 바꿔 그림 656+0번, 못 바꾼 그리기 3/659
+  ✓ michaela·2D: 적중 효과 6번 생기고 66번 그려졌다
+  ✓ michaela·2D: 시트로 그린 탄 307개 모두 R911 확대 없이도 몸통 ≥ 영웅 키 절반
+  ✓ michaela·2D: 그려진 투사체 313개 모두 기준 이상
+  ✓ michaela·2D: 모듈·페이지 오류 없음
+  ✓ michaela·2D: Three.js 그리기 명령 실패 없음
+   kinds {"pj03":293,"pj09a":20} shots 
+  ✓ gunner·3D: R912 가 켜져 있고 R911 이 맨 바깥이다
+  ✓ gunner·3D: pj04 탄을 그렸다(439번)
+  ✓ gunner·3D: 시트로 바꿔 그림 881+0번, 못 바꾼 그리기 3/884
+  ✓ gunner·3D: 적중 효과 7번 생기고 75번 그려졌다
+  ✓ gunner·3D: 시트로 그린 탄 414개 모두 R911 확대 없이도 몸통 ≥ 영웅 키 절반
+  ✓ gunner·3D: 그려진 투사체 451개 모두 기준 이상
+  ✓ gunner·3D: 모듈·페이지 오류 없음
+  ✓ gunner·3D: Three.js 그리기 명령 실패 없음
+   kinds {"pj04":439,"pj09a":12} shots 
+
+R912 browser 35 통과 / 0 실패
+done
