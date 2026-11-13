@@ -17,7 +17,7 @@
  */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_MICHAELA_HEART_R948__)return;
-const REV='R948-heart-5',KEY='storyworld.r948.heart',HERO='michaela';
+const REV='R948-heart-6',KEY='storyworld.r948.heart',HERO='michaela';
 const CHANCE=.11,CROWD_BONUS=.04,CROWD_N=4,CROWD_R=2,CHANCE_MAX=.35,ROLL_GAP=.35,ICD=5;
 const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
 const WEIGHTS=[['volley',.55],['tower',.30],['bloom',.15]];
@@ -34,7 +34,7 @@ const FLY='assets/r948/heart-fly8.webp',HIT='assets/r948/heart-hit6.webp',BURST=
  // MH-09 칸마다 그림 중심이 위로 옮겨 감(보석 핵 y≈137 → 테 하트 y≈110): 피벗을 따라 옮겨 한 자리에서 터지게
  BURST_PIV_Y=[137,137,137,134,124,118,114,112,112,111,111,111,111,111,111,111],CELL=256,FLY_PIV={x:150,y:128},FLY_BODY=.53;
 // R988 Dots CX-0094MH 시트(드라이브 alpha16 정리판 → 512 칸은 256 칸으로 줄임, 12.5fps). 칸 안 기준점은 그림 실측값.
-const M03='assets/r948/mh03-heart24.webp',M04='assets/r948/mh04-blast24.webp',M07='assets/r948/mh07-note24.webp',M10='assets/r948/mh10-aura24.webp',M10A='assets/r948/mh10a-enter8.webp',M10B='assets/r948/mh10b-exit8.webp',M05='assets/r948/mh05-cloud24.webp',M05_PIV={x:128,y:114},M05_W=224,SFPS=12.5,
+const M03='assets/r948/mh03-heart24.webp',M04='assets/r948/mh04-blast24-r3.webp',M07='assets/r948/mh07-note24.webp',M10='assets/r948/mh10-aura24.webp',M10A='assets/r948/mh10a-enter8.webp',M10B='assets/r948/mh10b-exit8.webp',M05='assets/r948/mh05-cloud24.webp',M05_PIV={x:128,y:114},M05_W=224,SFPS=12.5,
  M03_PIV={x:128,y:134},M03_W=182,      // 큰 장미 하트: 중심·폭
  M04_PIV={x:130,y:135},M04_FROM=3,M04_LIFE=(24-M04_FROM)/SFPS, // 대폭발: 섬광 칸(4번째)부터 꽃잎 소멸까지 1.68초
  M07_PIV={x:130,y:140},                // 둥실 음표

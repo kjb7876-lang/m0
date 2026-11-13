@@ -38,7 +38,9 @@ const SHEET=Object.freeze({
  head:Object.freeze({path:'assets/r947/slayer-blood-head.webp',cell:64,cols:4,frames:4,fps:20,px:.5,py:.5}),
  // R985 Dots SB-03 피 레이저 줄기(원본 512×64 12장 → 384×48, 양 끝이 잘린 띠라 늘여 씀) + SB-03b 끝조각(64×64 12장, 왼쪽 x3 에서 줄기와 이어지고 x52 에서 끝남)
  lbeam:Object.freeze({path:'assets/r947/slayer-lattice-beam.webp',cw:384,ch:48,cols:6,frames:12,fps:30}),
- lend:Object.freeze({path:'assets/r947/slayer-lattice-end.webp',cell:64,cols:6,frames:12,fps:30,x0:3/64,x1:52/64})});
+ lend:Object.freeze({path:'assets/r947/slayer-lattice-end.webp',cell:64,cols:6,frames:12,fps:30,x0:3/64,x1:52/64}),
+ // R999 Dots SB-04c r2 시전 바닥 고리(원본 512×256 12장 → 256×128, 피벗 가운데, 가장 클 때 칸 너비의 0.885, 12장은 빈칸)
+ ring:Object.freeze({path:'assets/r947/slayer-cast-ring.webp',cw:256,ch:128,cols:4,frames:12,fps:24,span:.885})});
 const SHEET_PATHS=Object.values(SHEET).map(v=>v.path);
 const fin=v=>typeof v==='number'&&Number.isFinite(v),clamp=(v,a,b)=>Math.min(b,Math.max(a,v)),smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
 let lastError=null,errors=0;const fail=e=>{errors++;lastError=String(e?.message||e).slice(0,200);};
@@ -145,10 +147,7 @@ function make(key,w,h,paint){if(tex.has(key))return tex.get(key);let c=null;try{
 function dropTex(){return make('blooddrop',32,48,(g,w,h)=>{const cx=w/2;g.fillStyle='rgba(60,0,8,1)';g.beginPath();g.moveTo(cx,2);g.quadraticCurveTo(w-2,h*.62,cx,h-2);g.quadraticCurveTo(2,h*.62,cx,2);g.fill();
   g.fillStyle='rgba(176,8,28,1)';g.beginPath();g.moveTo(cx,7);g.quadraticCurveTo(w-6,h*.62,cx,h-6);g.quadraticCurveTo(6,h*.62,cx,7);g.fill();
   g.fillStyle='rgba(255,200,196,.8)';g.beginPath();g.ellipse(cx-4,h*.6,2.4,4,-.3,0,7);g.fill();});}
-// 바닥 고리(시전 맥동): 진홍 고리 한 겹
-function ringTex(){return make('ring',256,128,(g,w,h)=>{g.strokeStyle='rgba(160,0,24,.5)';g.lineWidth=14;g.beginPath();g.ellipse(w/2,h/2,w/2-10,h/2-8,0,0,7);g.stroke();
-  g.strokeStyle='rgba(255,70,80,.95)';g.lineWidth=4;g.beginPath();g.ellipse(w/2,h/2,w/2-10,h/2-8,0,0,7);g.stroke();});}
-function warm(){try{dropTex();ringTex();if(typeof ensureImages==='function')Promise.resolve(ensureImages(SHEET_PATHS)).catch(()=>{});}catch(e){fail(e);}}
+function warm(){try{dropTex();if(typeof ensureImages==='function')Promise.resolve(ensureImages(SHEET_PATHS)).catch(()=>{});}catch(e){fail(e);}}
 const asked={t:0};
 function sheetImg(k){const S=SHEET[k];try{const got=typeof readyImage==='function'?readyImage(S.path):null;if(got?.image)return got.image;const t=Date.now();if(t-asked.t>1500){asked.t=t;if(typeof ensureImages==='function')Promise.resolve(ensureImages(SHEET_PATHS)).catch(()=>{});}}catch(e){fail(e);}return null;}
 // ---- 그리기 --------------------------------------------------------------------------------------------------
@@ -186,7 +185,6 @@ function bloodArc(v,age,k,h,lo){const A=scr(v.a.x,v.a.y,v.lead?.55:.45),B=scr(v.
  const m=lo?2:4;for(let i=0;i<m;i++){const t=(i+.5)/m,a0=t*.09,fa=age-a0;if(fa<0)continue;const q={x:A.x+dx*t,y:A.y+dy*t},fall=.5*h*7*fa*fa,da=1-smooth((fa-.15)/.2);if(da<=0)continue;
   img('needle',dr,q.x+((i*37+v.seed*11)%9-4)*h*.02,q.y+fall,h*.1,h*.15,{alpha:da*al});}}
 function drawAll(){const t=T(),lo=low(),h=H(),u=unit();budget=lo?28:CFG.maxDraws;
- const ring=ringTex();
  for(const s of states()){
   // ① 혈격자: 바닥 높이(살짝 띄움) 줄. 한 줄은 0.05초에 굵어졌다 0.3초에 사라짐.
   const L=s.lattice;if(L){for(const q of L.lines){const a=t-q.t;if(a<0||a>.34)continue;const k=a<.05?smooth(a/.05):1-smooth((a-.05)/.29),lift=.12;
@@ -201,7 +199,8 @@ function drawAll(){const t=T(),lo=low(),h=H(),u=unit();budget=lo?28:CFG.maxDraws
   if(v.k==='hit'){const g=scr(v.x,v.y,.45);cell('hit','hit',age*SHEET.hit.fps,g.x,g.y,h*(v.small?1.1:1.5),1-smooth((k-.7)/.3),(v.t0*13|0)%2===1);}
   else if(v.k==='burst'){const g=project(v.x,v.y);cell('burst','burst',age*SHEET.burst.fps,g.x,g.y+h*.06,h*2.1,1-smooth((k-.75)/.25),false);}
   else if(v.k==='arc')bloodArc(v,age,k,h,lo);
-  else if(v.k==='pulse'){const g=project(v.x,v.y),r=u*CFG.lattice.radius*2*smooth(k/.6);img('lattice',ring,g.x,g.y,r*1.41,r*.71,{alpha:.9*(1-k)});}}}
+  else if(v.k==='pulse'){const R=SHEET.ring,im=sheetImg('ring'),w=u*CFG.lattice.radius*2*1.41/R.span,fr=Math.min(Math.floor(age*R.fps),R.frames-1);/* 시트가 스스로 퍼지고 사라짐 */
+   if(im&&budget>0&&w>0){budget--;drawCalls++;const g=project(v.x,v.y);scoped('lattice',()=>{ctx.save();try{ctx.globalAlpha*=.95;ctx.drawImage(im,(fr%R.cols)*R.cw,Math.floor(fr/R.cols)*R.ch,R.cw,R.ch,g.x-w/2,g.y-w/4,w,w/2);}catch(e){fail(e);}finally{ctx.restore();}});}}}}
 // ---- 설치 ----------------------------------------------------------------------------------------------------
 let lastT=null;
 try{
