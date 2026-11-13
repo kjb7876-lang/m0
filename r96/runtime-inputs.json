@@ -9463,7 +9463,16 @@
     "assets/r972/sfx/shock-2.ogg",
     "assets/r972/sfx/slash-1.ogg",
     "assets/r972/sfx/slash-2.ogg",
-    "skill-style-r972.js"
+    "skill-style-r972.js",
+    "assets/r760/boss/sheet-moveDown.webp",
+    "assets/r760/boss/sheet-moveUp.webp",
+    "assets/r760/mid/sheet-moveDown.webp",
+    "assets/r760/mid/sheet-moveSide.webp",
+    "assets/r760/mid/sheet-moveUp.webp",
+    "assets/r953/gv-call.webp",
+    "assets/r953/gv-friend.webp",
+    "assets/r953/gv-lock.webp",
+    "passive-growth-r971.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -10538,5 +10547,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "e7c6d56a077fa147e4363286e60592fcc4b8bb738190b7b14bac09142ac23b3a"
+  "runtimeManifestSHA256": "1e042afd2f520168213b528f053daa8fd447bd26c4ea270f4f7c29e996fcf86b"
 }

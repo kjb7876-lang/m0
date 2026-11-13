@@ -67,13 +67,14 @@ function arm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)&&!eff
 function disarm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)){const i=effects.indexOf(SENT);if(i>=0)effects.splice(i,1);}}catch(_){}}
 function clearAll(){for(const s of states())wipe(s);vis.length=0;disarm();}
 // ---- 발동 ----------------------------------------------------------------------------------------------------
+const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
 function pick(s){const t=T();if(s.force){const k=s.force;s.force=null;return k;}
- const r=Math.random(),m=CFG.moon.chance,c=CFG.clones.chance,q=CFG.trio.chance,k=r<m?'moon':r<m+c?'clones':r<m+c+q?'trio':null;
+ const r=Math.random(),[m,c,q]=G971('hwando',[CFG.moon.chance,CFG.clones.chance,CFG.trio.chance]),k=r<m?'moon':r<m+c?'clones':r<m+c+q?'trio':null;
  return k&&t>=s.ready[k]?k:null;}
 function onSwing(p){const s=st(p);s.stats.swings++;mimic(s,p,'a');if(!solo()){s.stats.coopSkipped++;return;}
  const k=pick(s);if(!k)return;const t=T();
  // 둘레에 대상이 없어 기술이 안 나가면 대기 시간을 쓰지 않는다(빈 휘두름이 칠묵영 7초·삼협묵희 20초를 헛되이 태우던 것).
- const ok=k==='moon'?castMoon(s,p):k==='clones'?castClones(s,p):castTrio(s,p);if(ok!==false)s.ready[k]=t+CFG[k].icd;else s.stats.noTarget=(s.stats.noTarget||0)+1;}
+ const ok=k==='moon'?castMoon(s,p):k==='clones'?castClones(s,p):castTrio(s,p);if(ok!==false)s.ready[k]=t+D971('hwando',CFG[k].icd);else s.stats.noTarget=(s.stats.noTarget||0)+1;}
 const nearOf=(p,r)=>{let b=null,bd=r;for(const e of foes()){if(!(e.hp>0)||!fin(e.x)||!fin(e.y))continue;const d=Math.hypot(e.x-p.x,e.y-p.y);if(d<=bd){bd=d;b=e;}}return b;};
 // ① 묵월
 function castMoon(s,p){const e=nearOf(p,4.5),a=e?Math.atan2(e.y-p.y,e.x-p.x):aim(),ux=Math.cos(a),uy=Math.sin(a),id='m'+(++serial);s.stats.moons++;
