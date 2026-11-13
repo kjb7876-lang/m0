@@ -141,7 +141,7 @@ function bakeFast(src,sx,sy,sw,sh,r,side,key,pad,W,H){
  g.putImageData(img,0,0);g.drawImage(src,sx,sy,sw,sh,pad,pad,sw,sh);
  const row={canvas:out,pad,sw,sh};out.__storyworldStaticSource={path:'r409:outline:'+side+':'+key};
  cache.set(key,row);stats.baked++;stats.fastBaked=(stats.fastBaked||0)+1;cachePx+=out.width*out.height;
- while(cache.size>CACHE_MAX||cachePx>capPx()){const k=cache.keys().next().value,old=cache.get(k);cache.delete(k);cachePx-=old.canvas.width*old.canvas.height;stats.cacheEvicted++;}
+ while(cache.size>CACHE_MAX||cachePx>CACHE_PX||cachePx>capPx()){const k=cache.keys().next().value,old=cache.get(k);cache.delete(k);cachePx-=old.canvas.width*old.canvas.height;stats.cacheEvicted++;}
  return row;}
 function bake0(src,sx,sy,sw,sh,r,side,key,pad,W,H){if(prefs.fastBake!==false)return bakeFast(src,sx,sy,sw,sh,r,side,key,pad,W,H);
  const m=mask(src,sx,sy,sw,sh,side);if(!m){stats.bakeSkipped++;return null;}
@@ -152,7 +152,7 @@ function bake0(src,sx,sy,sw,sh,r,side,key,pad,W,H){if(prefs.fastBake!==false)ret
  const row={canvas:out,pad,sw,sh};out.__storyworldStaticSource={path:'r409:outline:'+side+':'+key};
  cache.set(key,row);stats.baked++;
  cachePx+=out.width*out.height;
- while(cache.size>CACHE_MAX||cachePx>capPx()){const k=cache.keys().next().value,old=cache.get(k);cache.delete(k);cachePx-=old.canvas.width*old.canvas.height;stats.cacheEvicted++;}/* 쓰던 캔버스는 렌더러가 참조를 놓으면 GC */
+ while(cache.size>CACHE_MAX||cachePx>CACHE_PX||cachePx>capPx()){const k=cache.keys().next().value,old=cache.get(k);cache.delete(k);cachePx-=old.canvas.width*old.canvas.height;stats.cacheEvicted++;}/* 쓰던 캔버스는 렌더러가 참조를 놓으면 GC */
  return row;}
 // 화면 네 귀퉁이를 원본 칸 바깥으로 pad 만큼 넓힌다(u·v 방향 각각 비율로).
 function grow(points,sw,sh,pad){const [a,b,,d]=points,u=[(b[0]-a[0])/sw,(b[1]-a[1])/sw],v=[(d[0]-a[0])/sh,(d[1]-a[1])/sh];
