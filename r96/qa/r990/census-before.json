@@ -1,0 +1,357 @@
+{
+ "c2d": {
+  "at footOf (http://127.0.0.1:4410/m0/mob-foot-r332.js:17:4) < at gridInfo (http://127.0.0.1:4410/m0/mob-foot-r332.js:23:65) < at shiftFor (http://127.0.0.1:4410/m0/mob-foot-r332.js:24:44)": 9,
+  "at opaqueBox (http://127.0.0.1:4410/m0/play-r115.js:40:187) < at record (http://127.0.0.1:4410/m0/play-r115.js:44:78) < at drawEnemy (http://127.0.0.1:4410/m0/play-r115.js:55:106)": 6,
+  "at opaqueBox (http://127.0.0.1:4410/m0/hit-center-r259.js:22:187) < at record (http://127.0.0.1:4410/m0/hit-center-r259.js:26:75) < at drawEnemy (http://127.0.0.1:4410/m0/hit-center-r259.js:41:135)": 6,
+  "at footOf (http://127.0.0.1:4410/m0/mob-foot-r332.js:17:4) < at shiftFor (http://127.0.0.1:4410/m0/mob-foot-r332.js:24:114) < at c.drawImage (http://127.0.0.1:4410/m0/mob-foot-r332.js:32:154)": 3,
+  "at maskBits (http://127.0.0.1:4410/m0/combat-read-r409.js:123:116) < at bakeFast (http://127.0.0.1:4410/m0/combat-read-r409.js:130:10) < at bake0 (http://127.0.0.1:4410/m0/combat-read-r409.js:144:85)": 6,
+  "at bakeFast (http://127.0.0.1:4410/m0/combat-read-r409.js:139:28) < at bake0 (http://127.0.0.1:4410/m0/combat-read-r409.js:144:85) < at bake (http://127.0.0.1:4410/m0/combat-read-r409.js:95:54)": 6,
+  "at opaqueRect (http://127.0.0.1:4410/m0/projectile-size-r911.js:32:9) < at Proxy.drawImage (http://127.0.0.1:4410/m0/projectile-size-r911.js:77:30) < at drawAssetFrame3 (http://127.0.0.1:4410/m0/:1143:650)": 1,
+  "at Object.imageFor (http://127.0.0.1:4410/m0/:6423:9) < at tint (http://127.0.0.1:4410/m0/enemy-presentation-r86.js:44:45) < at ctx.drawImage (http://127.0.0.1:4410/m0/enemy-presentation-r86.js:49:63)": 1,
+  "at bodyFrac (http://127.0.0.1:4410/m0/boss-r205.js:82:195) < at fitMin (http://127.0.0.1:4410/m0/boss-r205.js:86:32) < at drawEnemy (http://127.0.0.1:4410/m0/boss-r205.js:97:83)": 1,
+  "at sheetInfo (http://127.0.0.1:4410/m0/combat-flow-r425.js:38:101) < at sheetFrac (http://127.0.0.1:4410/m0/combat-flow-r425.js:42:26) < at drawEnemy (http://127.0.0.1:4410/m0/combat-flow-r425.js:109:99)": 1
+ },
+ "gameSec": 64.5,
+ "frames": 16707,
+ "old": {
+  "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp": 54
+ },
+ "oldT": [
+  [
+   13.6,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   13.6,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   13.6,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   13.65,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   13.65,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   13.65,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   13.7,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   13.7,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   13.7,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   13.75,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   13.75,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   13.75,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   13.8,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   13.8,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   13.8,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   13.85,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   13.85,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   13.85,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   13.9,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   13.9,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   13.9,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   13.95,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   13.95,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   13.95,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   14,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   14,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   14,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   14.05,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   14.05,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   14.05,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   14.1,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   14.1,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   14.1,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   14.15,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   14.15,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   14.15,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   14.2,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   14.2,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   14.2,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   56.45,
+   "BODY move|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp",
+   "{\"k\":\"attack\",\"tl\":27.65,\"H\":293.1,\"unitPerTile\":5.65,\"sheet\":\"atkA\",\"frame\":7}"
+  ],
+  [
+   56.55,
+   "BODY move|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp",
+   "{\"k\":\"attack\",\"tl\":27.65,\"H\":295.7,\"unitPerTile\":5.65,\"sheet\":\"atkA\",\"frame\":7}"
+  ],
+  [
+   56.65,
+   "BODY move|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp",
+   "{\"k\":\"attack\",\"tl\":27.65,\"H\":292.7,\"unitPerTile\":5.65,\"sheet\":\"atkA\",\"frame\":7}"
+  ],
+  [
+   56.75,
+   "BODY move|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp",
+   "{\"k\":\"attack\",\"tl\":27.65,\"H\":289.4,\"unitPerTile\":5.65,\"sheet\":\"atkA\",\"frame\":7}"
+  ],
+  [
+   56.85,
+   "BODY move|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp",
+   "{\"k\":\"attack\",\"tl\":27.65,\"H\":286.3,\"unitPerTile\":5.65,\"sheet\":\"atkA\",\"frame\":7}"
+  ],
+  [
+   56.95,
+   "BODY move|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp",
+   "{\"k\":\"attack\",\"tl\":27.65,\"H\":283.5,\"unitPerTile\":5.65,\"sheet\":\"atkA\",\"frame\":7}"
+  ],
+  [
+   57.05,
+   "BODY move|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp",
+   "{\"k\":\"attack\",\"tl\":27.65,\"H\":281.4,\"unitPerTile\":5.65,\"sheet\":\"atkA\",\"frame\":7}"
+  ],
+  [
+   57.15,
+   "BODY move|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp",
+   "{\"k\":\"attack\",\"tl\":27.65,\"H\":280.3,\"unitPerTile\":5.65,\"sheet\":\"atkA\",\"frame\":7}"
+  ],
+  [
+   57.25,
+   "BODY move|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp",
+   "{\"k\":\"attack\",\"tl\":27.65,\"H\":280.4,\"unitPerTile\":5.65,\"sheet\":\"atkA\",\"frame\":7}"
+  ],
+  [
+   57.35,
+   "BODY move|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp",
+   "{\"k\":\"attack\",\"tl\":27.65,\"H\":281.7,\"unitPerTile\":5.65,\"sheet\":\"atkA\",\"frame\":7}"
+  ],
+  [
+   57.45,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   57.45,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   57.45,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   57.5,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   57.5,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   57.5,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   57.55,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   57.55,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   57.55,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   57.6,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   57.6,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   57.6,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   57.65,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   57.65,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ],
+  [
+   57.65,
+   "projectile:echo|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp"
+  ]
+ ],
+ "body": {
+  "move|boss/sheet-idle.webp": 59,
+  "move|boss/sheet-move.webp": 348,
+  "atk|boss/sheet-atkA.webp": 174,
+  "hit|boss/sheet-atkA.webp": 2,
+  "move|boss/sheet-atkA.webp": 170,
+  "move|boss/sheet-atkB2.webp": 98,
+  "hit|boss/sheet-hit.webp": 16,
+  "move|boss/sheet-hit.webp": 17,
+  "atk|boss/sheet-atkB2.webp": 254,
+  "move|boss/sheet-moveUp.webp": 3,
+  "move|boss/sheet-moveDown.webp": 3,
+  "hit|boss/sheet-reveal.webp": 2,
+  "move|boss/sheet-reveal.webp": 4,
+  "hit|boss/sheet-atkB2.webp": 6,
+  "atk|boss/sheet-reveal.webp": 5,
+  "move|boss/sheet-idle2.webp": 81,
+  "hit|boss/sheet-hit2.webp": 14,
+  "move|boss/sheet-hit2.webp": 25,
+  "move|actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp": 10
+ },
+ "drawMs": {
+  "avg": 38.45,
+  "p95": 77.4,
+  "n": 1291
+ },
+ "tickMs": {
+  "avg": 1.27,
+  "p95": 4.1
+ },
+ "liveMax": 44,
+ "summonedMax": 0,
+ "summonedSeries": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+ "r61": {
+  "attempts": 5,
+  "prepared": 0,
+  "waves": 0,
+  "minions": 0,
+  "clones": 0,
+  "refused": 5,
+  "cancelled": 0,
+  "despawned": 0,
+  "restored": 0,
+  "telegraphs": 0
+ },
+ "casts": [
+  "불면의 십자시선",
+  "독수렁 · 조준 연격",
+  "검은 영혼 부채살",
+  "독수렁 · 교차 파열",
+  "잠들 수 없는 안전지대",
+  "독수렁 · 잔류 맥동",
+  "악몽 잔상 폭우",
+  "불면의 십자시선",
+  "독수렁 · 조준 연격",
+  "검은 영혼 부채살"
+ ],
+ "r760": {
+  "draws": 1296,
+  "swapped": 0,
+  "waiting": 0,
+  "patterns": 0,
+  "ghosted": 1291,
+  "errors": 0,
+  "sheets": 1291,
+  "label": 982,
+  "cues": 29,
+  "cueSkipped": 13
+ },
+ "errs": []
+}
