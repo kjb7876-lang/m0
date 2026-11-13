@@ -40628,6 +40628,116 @@
       "sha256": "4b21c40cbf37a9f02827e208cf01f2ec3fff32e1f84e9a1e15c3ef0e6ba61749"
     },
     {
+      "path": "assets/r930/props/index.json",
+      "bytes": 8670,
+      "sha256": "41569ece8cc283e1711a648eae1b67a69bce3c7b6a97893ba5e7fbb94549d01d"
+    },
+    {
+      "path": "assets/r930/props/kc-black-sand-wreck-a.webp",
+      "bytes": 41308,
+      "sha256": "042e6769c2c4f9f440032ed09aa74840c585a2babd4e6a1f59660e2b65b9ae44"
+    },
+    {
+      "path": "assets/r930/props/kc-black-sand-wreck-b.webp",
+      "bytes": 41564,
+      "sha256": "284a98ce588867930f83108e208f7eb7936a667c4c95534faef01bf6fa2e8fc4"
+    },
+    {
+      "path": "assets/r930/props/kc-brass-manifold-a.webp",
+      "bytes": 62694,
+      "sha256": "dcf741945ef944f0015ab330714ceec7351569b592bd067f4d4d21c17d658d5c"
+    },
+    {
+      "path": "assets/r930/props/kc-brass-manifold-b.webp",
+      "bytes": 64640,
+      "sha256": "699b30c81b766217cde077c9ef0acc00fd18915fe208f1030f66cc77984c4d62"
+    },
+    {
+      "path": "assets/r930/props/kc-cable-duct-a.webp",
+      "bytes": 31982,
+      "sha256": "b5b8e87cbfa78a259080d7cd71b51488ac5dd972f6db0e526f063db450adf245"
+    },
+    {
+      "path": "assets/r930/props/kc-cable-duct-b.webp",
+      "bytes": 31200,
+      "sha256": "b54f15ec3ed9caace19dbba9784deeb53ebf4d28d7a3d6d19288368e0ed87a67"
+    },
+    {
+      "path": "assets/r930/props/kc-clock-generator-a.webp",
+      "bytes": 57846,
+      "sha256": "51f9ff8b39615420a04583a14b46f8ddc22a721e83c62a935b5aea316c171236"
+    },
+    {
+      "path": "assets/r930/props/kc-clock-generator-b.webp",
+      "bytes": 55696,
+      "sha256": "32b7dbb420f93ca6a7153c3d6bfd744f2ddc6e33fe925445a50692e57821306e"
+    },
+    {
+      "path": "assets/r930/props/kc-command-console-a.webp",
+      "bytes": 42808,
+      "sha256": "cc6f7bf451ea8894deff22a87931523c6b0f8c167ef7f1466bca90a3f8306f23"
+    },
+    {
+      "path": "assets/r930/props/kc-command-console-b.webp",
+      "bytes": 35600,
+      "sha256": "e47d0b8d3a53a123989205157cdc164405d1cda3c95e12a351714df23d8c5b10"
+    },
+    {
+      "path": "assets/r930/props/kc-data-gravestone-a.webp",
+      "bytes": 33768,
+      "sha256": "0928b52324468a29180158d122dafbcdd45b6612e916ce441af0799efaf43e87"
+    },
+    {
+      "path": "assets/r930/props/kc-data-gravestone-b.webp",
+      "bytes": 31204,
+      "sha256": "19c253e76fddb3ef1d5e8815dd176acd15e12c01846e65a3da5aa2999b7bcf8f"
+    },
+    {
+      "path": "assets/r930/props/kc-drainage-pump-a.webp",
+      "bytes": 48452,
+      "sha256": "f826b8158a2cd06eda788e22849150e076f645eba5fdbe2229432589408e69bb"
+    },
+    {
+      "path": "assets/r930/props/kc-drainage-pump-b.webp",
+      "bytes": 50494,
+      "sha256": "4beb99854c6b09d40b318979d682786b64f004db29bd9aee05404c5cac95002c"
+    },
+    {
+      "path": "assets/r930/props/kc-mold-ladle-a.webp",
+      "bytes": 34752,
+      "sha256": "cb67fd7359935c4595471bf35ebfdf49ce2e5a2b12acfd56339added0d46de45"
+    },
+    {
+      "path": "assets/r930/props/kc-mold-ladle-b.webp",
+      "bytes": 43080,
+      "sha256": "ea5df411243958ad811c3d64a7a62bb61798129e6029fcf1442fb1cc24424617"
+    },
+    {
+      "path": "assets/r930/props/kc-neon-streetlamp-a.webp",
+      "bytes": 15066,
+      "sha256": "65d3c6adb7e9c42212972e02dc7820102f2acb5ad439ce7f6dca36281a15d09a"
+    },
+    {
+      "path": "assets/r930/props/kc-synapse-arch-a.webp",
+      "bytes": 43868,
+      "sha256": "8a3b7a2a5321ef8df36a2da46e8bee6427fdbb73c5126fca0c1897ee5204fdf1"
+    },
+    {
+      "path": "assets/r930/props/kc-synapse-arch-b.webp",
+      "bytes": 41396,
+      "sha256": "dcde66c7e8ef8f9420f126659e730bd821032e446df1fef9afded8d63ed0490d"
+    },
+    {
+      "path": "assets/r930/props/kc-terminal-pillar-a.webp",
+      "bytes": 40336,
+      "sha256": "1d703a28f9c92cb07becaba4cab26ee56eb9e53f8d5e62e1d436502ff4a64380"
+    },
+    {
+      "path": "assets/r930/props/kc-terminal-pillar-b.webp",
+      "bytes": 37602,
+      "sha256": "dfec1fe5286c76b7e09e7c57f8ced79bebba37ff8da509c8aef2908de41310f8"
+    },
+    {
       "path": "assets/r930/tiles/index.json",
       "bytes": 630,
       "sha256": "7904ec5df201c088968b6489e62b50098f9c858c6df545136d2e45894a40c01e"
@@ -49794,8 +49904,8 @@
     },
     {
       "path": "kairo-tech-r930.js",
-      "bytes": 7779,
-      "sha256": "71cfa4bef98aa52501155013f8bed2642a41d2ba218605d1d8f92e6ccb680b91"
+      "bytes": 12226,
+      "sha256": "c512e504f321d14d489b05bb38cf1c84999fc9637171e5cf8768cad01d16352e"
     },
     {
       "path": "keys-r291.js",
@@ -50873,8 +50983,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10174,
-  "totalBytes": 1260245011,
+  "fileCount": 10196,
+  "totalBytes": 1261143484,
   "webHTMLSha256": "d65f74274a6e04cf2a6776d84760bc969260cd49e4b9ed063fba15c01a40f3e3",
   "largest": [
     {
