@@ -175,6 +175,29 @@ const sumOn=(E,id,tag)=>E.hits.filter(h=>h.id===id&&(!tag||h.s?.r945===tag));
  ok(I.clones.length===7&&I.clones.every(c=>!E.g.blocked(c.x,c.y,.2)),'벽 곁에서도 분신은 벽 밖(안쪽으로 당겨 섬)');}
 {const E=engine({enemies:[{id:'a',x:21,y:20}],coop:'online'});E.api.force('clones');E.ctx.basicAttack();E.run(1.5);ok((E.api.inspect().stats.guardHits||0)===0,'협동 모드에선 경호 베기 없음');}
 
+// ---- R982 난초 크게·또렷하게(사용자 11-13 02:58Z) ----
+{const foes=[];for(let i=0;i<7;i++)foes.push({id:'m'+i,x:20+Math.cos(i)*2,y:20+Math.sin(i)*2});
+ const E=engine({enemies:foes});const cx=E.g.ctx;let lastSc=0;const rec=[];const sc0=cx.scale,di0=cx.drawImage;
+ cx.scale=function(a,b){lastSc=Math.abs(a);return sc0.call(this,a,b);};cx.drawImage=function(im,...r){rec.push({src:im&&(im.src||''),sc:lastSc,filter:this.filter});return di0.call(this,im,...r);};
+ const Q=E.api.config.trio;E.api.force('trio');E.ctx.basicAttack();E.run(1);rec.length=0;E.frame();
+ const orc=rec.filter(d=>/hwando-orchid-slash/.test(d.src));const h=60,plantH=228;
+ ok(orc.length===7&&orc.every(d=>d.sc*plantH>=h*2.4&&d.sc*plantH<=h*2.8),'난초 높이 = 영웅 키 약 2.6배(이전 1.4배의 약 1.9배)');
+ ok(orc.every(d=>/brightness\(1\.5/.test(d.filter||'')&&/contrast\(1\.4/.test(d.filter||'')),'난초 밝기·대비 올림');
+ const st=E.api.inspect().stats;E.run(Q.strikeAt-1+.05);ok(E.hits.filter(x=>x.s?.r945==='trio').length===7,'피해 시각·대상은 그대로(1.6초, 표식 7)');
+ E.g.ctx.commands=[];const n=[];E.g.ctx.drawImage=function(im,...r){if(/hwando-orchid-slash/.test(im&&im.src||''))this.commands.push({owner:{kind:'effect',id:'x'}});return di0.call(this,im,...r);};E.frame();
+ ok(E.g.ctx.commands.length>0&&E.g.ctx.commands.every(c=>c.owner.r350===true),'난초 그림은 영웅 가림 옅게(R350)에서 뺌');
+ ok(E.api.inspect().errors===0,'R982 그리기 오류 0');}
+
+// ---- R984 Dots 후보 심사 통과분(HI-02 먹 튐, HI-03 먹 연기) — 그림만 바꿈 ----
+ok(fs.existsSync(path.join(R,'runtime-text','assets','r945','hwando-ink-burst.webp'))&&fs.existsSync(path.join(R,'runtime-text','assets','r945','hwando-ink-vapor.webp')),'R984 시트 두 장 있음');
+{const E=engine({enemies:[{id:'near',x:21,y:20},{id:'mid',x:24,y:20}]});E.api.force('moon');E.ctx.basicAttack();E.run(.3);E.sheets.length=0;E.frame();
+ ok(E.sheets.some(s=>/hwando-ink-burst/.test(s.src||'')),'묵월 적중 먹 튐 = HI-02 시트');
+ ok(sumOn(E,'mid','moon').length===1&&Math.abs(sumOn(E,'mid','moon')[0].v-100*E.api.config.moon.mult)<1e-9,'R984 뒤에도 검기 피해·관통 그대로');
+ const E2=engine({enemies:[{id:'a',x:22,y:20},{id:'b',x:23,y:21}]});E2.api.force('clones');E2.ctx.basicAttack();E2.run(.2);E2.sheets.length=0;E2.frame();
+ ok(E2.sheets.some(s=>/hwando-ink-vapor/.test(s.src||'')),'분신 등장 먹 연기 = HI-03 시트');
+ E2.run(E2.api.config.clones.life+.2);E2.sheets.length=0;E2.frame();ok(E2.api.inspect().clones.length===0&&E2.sheets.some(s=>/hwando-ink-vapor/.test(s.src||'')),'분신 퇴장 먹 연기 = HI-03 시트');
+ const I=E2.api.inspect();ok(I.sheetDraws.vapor>0&&I.errors===0&&E.api.inspect().sheetDraws.burst>0&&E.api.inspect().errors===0,'R984 그리기 오류 0');}
+
 // ---- 그리기: 그리기 표지 · 상한 ----
 {const E=engine({enemies:[{id:'a',x:21,y:20},{id:'b',x:23,y:21}]});E.api.force('moon');E.ctx.basicAttack();E.run(.1);
  ok(E.g.effects.some(e=>e&&e.r945Sentinel),'할 일이 있으면 그리기 표지 등록');E.sheets.length=0;E.frame();
