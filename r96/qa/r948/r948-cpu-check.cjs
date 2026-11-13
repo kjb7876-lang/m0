@@ -159,7 +159,7 @@ if(exists){
  {const cellOf=(r,cols)=>r.sx/256+cols*(r.sy/256);
   const grab=(g,re)=>vm.runInContext('drawn',g).filter(x=>re.test(x.src)).map(x=>({sx:x.a[0],sy:x.a[1],w:x.a[2],h:x.a[3]}));
   const tick1=(g,dt)=>{vm.runInContext('drawn.length=0',g);step(g,1,dt);};
-  const M03=/assets\/r948\/mh03-heart24\.webp/,M04=/assets\/r948\/mh04-blast24\.webp/,M07=/assets\/r948\/mh07-note24\.webp/,M10=/assets\/r948\/mh10-aura24\.webp/,M10A=/assets\/r948\/mh10a-enter8\.webp/,M10B=/assets\/r948\/mh10b-exit8\.webp/;
+  const M03=/assets\/r948\/mh03-heart24\.webp/,M04=/assets\/r948\/mh04-blast24(-r3)?\.webp/,M07=/assets\/r948\/mh07-note24\.webp/,M10=/assets\/r948\/mh10-aura24\.webp/,M10A=/assets\/r948\/mh10a-enter8\.webp/,M10B=/assets\/r948\/mh10b-exit8\.webp/;
   // 대개화
   let g=env();A(g).qaForce('bloom');g.room.enemies.push(mob('t',13,10,{hp:1e9,maxHp:1e9}));heroHit(g,'t');
   for(let i=0;i<19;i++)step(g,1,.05);tick1(g,.05); // u≈1.0
@@ -202,6 +202,11 @@ if(exists){
   ok('R998 cloud damage unchanged (power × .3 per .5 s tick, 8 ticks)',procHits(g,'cloud').length===8&&procHits(g,'cloud').every(h=>Math.abs(h.v-procHits(g,'cloud')[0].v)<1e-9));
   g=env();vm.runInContext('imgReady=false',g);A(g).qaForce('bloom');g.room.enemies.push(mob('d',13,10,{hp:1e9}));heroHit(g,'d');step(g,140,.05);
   ok('R998 MH-05 not loaded → code puffs fallback, no errors',A(g).inspect().stats.errors===0&&!grab(g).length);}
+ // ---- R1004 Dots MH-04 R988 가운데 비운 대폭발(몹을 덜 덮음) ----
+ {const M4N=/assets\/r948\/mh04-blast24-r3\.webp/,M4O=/assets\/r948\/mh04-blast24\.webp/;
+  const g=env();A(g).qaForce('bloom');g.room.enemies.push(mob('h',13,10,{hp:1e9,maxHp:1e9}));heroHit(g,'h');
+  let nN=0,nO=0;for(let i=0;i<80;i++){vm.runInContext('drawn.length=0',g);step(g,1,.05);const d=vm.runInContext('drawn',g);nN+=d.filter(x=>M4N.test(x.src)).length;nO+=d.filter(x=>M4O.test(x.src)).length;}
+  ok('R1004 bloom blast drawn from the hollow-centre MH-04 sheet (mh04-blast24-r3), r2 no longer drawn',nN>0&&nO===0);}
  // ---- 3D 기록기 안전(헤드리스 실측: 폭발 순간 u=2-1e-9 에서 sqrt(음수)=NaN → Three.js 'Nonfinite original draw command' → 화면 실패로 게임 정지) ----
  {const bad=[];const watch=g=>{const raw=g.ctx;g.ctx=new Proxy(raw,{get(o,k){const v=o[k];if(typeof v!=='function')return v;return (...a)=>{a.forEach((x,i)=>{if(typeof x==='number'&&!Number.isFinite(x))bad.push(String(k)+'#'+i);});return v.apply(o,a);};},set(o,k,v){if(typeof v==='number'&&!Number.isFinite(v))bad.push('set:'+String(k));o[k]=v;return true;}});};
   const at=(g,t)=>{g.time=t;vm.runInContext('time='+t+';tick();for(const e of effects.slice())drawEffect(e)',g);};
