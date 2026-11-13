@@ -9471,7 +9471,14 @@
     "assets/r986/seoha-summon-gate.webp",
     "assets/r990/fog-core.webp",
     "bulmyeongwi-fog-r990.js",
-    "seoha-epoch-fx-r986.js"
+    "seoha-epoch-fx-r986.js",
+    "finale-fx-r1002.js",
+    "assets/r1002/fb-nerve-link-loop.webp",
+    "assets/r1002/fb-nerve-link-snap.webp",
+    "assets/r1002/fb-nerve-stitch.webp",
+    "assets/r1002/fb-nerve-unstitch-fail.webp",
+    "assets/r1002/fb-core-pulse.webp",
+    "assets/r1002/fb-samong-ring.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -10546,5 +10553,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "da515209bb1abf39400c28d6eb8be7e6f36e4cde48cfd5ff355e2483b37b365c"
+  "runtimeManifestSHA256": "48b4eef5e925c7d2b7a64945a0fbadd76f9643ee2fad99b694f1265294e81b00"
 }

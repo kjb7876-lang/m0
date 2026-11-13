@@ -14,19 +14,19 @@ const SHEET={link:'assets/r1002/fb-nerve-link-loop.webp',snap:'assets/r1002/fb-n
 const DIM={link:[2048,768,512,128,24],snap:[2048,384,512,128,12],stitch:[1024,2048,256,512,16],unstitch:[1024,2048,256,512,16],core:[1024,1024,256,256,16],ring:[1024,768,256,128,24]};
 const kindOf=p=>Object.keys(SHEET).find(k=>SHEET[k]===p);
 function world(opt={}){const store={...(opt.store||{})};
- const g={console,Math,Number,Object,JSON,Map,WeakMap,Set,String,Array,Error,Promise,Date,performance:{now:()=>0},matchMedia:()=>({matches:false}),
+ const g={console,Math,Number,Object,JSON,Map,WeakMap,Set,String,Array,Error,Promise,Date,performance:{now:()=>g.realMs},matchMedia:()=>({matches:false}),
   localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}},store,
   document:{body:{appendChild(){}},createElement:()=>({style:{},setAttribute(){},isConnected:true}),getElementById:()=>null}};
- g.window=g;vm.createContext(g);vm.runInContext(CANON,g);
+ g.realMs=0;g.window=g;vm.createContext(g);vm.runInContext(CANON,g);
  vm.runInContext(`var time=0,layer=${JSON.stringify(opt.layer||'STORY')},storyScene=null,modal=false,TILE=34,zoom=1,effects=[];
   var ops=[],lines=0,asks=[],loaded=new Set(${JSON.stringify(opt.loaded===false?[]:Object.values(SHEET))}),imgs={};
   var M=[1,0,0,1,0,0],GA=1,stack=[];
   function mul(a,b){return[a[0]*b[0]+a[2]*b[1],a[1]*b[0]+a[3]*b[1],a[0]*b[2]+a[2]*b[3],a[1]*b[2]+a[3]*b[3],a[0]*b[4]+a[2]*b[5]+a[4],a[1]*b[4]+a[3]*b[5]+a[5]];}
   var ctx={save(){stack.push([M.slice(),this.globalAlpha]);},restore(){const s=stack.pop();M=s[0];this.globalAlpha=s[1];},globalAlpha:1,
    translate(x,y){M=mul(M,[1,0,0,1,x,y]);},rotate(a){const c=Math.cos(a),s=Math.sin(a);M=mul(M,[c,s,-s,c,0,0]);},scale(x,y){M=mul(M,[x,0,0,y,0,0]);},
-   beginPath(){},moveTo(){},lineTo(){},stroke(){lines++;},fill(){lines++;},arc(){},ellipse(){},scope(o,f){this._scope=o.id;f();this._scope=null;},
-   drawImage(im,sx,sy,sw,sh,dx,dy,dw,dh){const P=(x,y)=>({x:M[0]*x+M[2]*y+M[4],y:M[1]*x+M[3]*y+M[5]});
-    ops.push({path:im.path,src:[sx,sy,sw,sh],dst:[dx,dy,dw,dh],m:M.slice(),alpha:this.globalAlpha,scope:this._scope,pass:pass_,t:time,
+   beginPath(){},moveTo(){},lineTo(){},stroke(){lines++;},fill(){lines++;},arc(){},ellipse(){},scope(o,f){const p=this._owner;this._owner=o;try{f();}finally{this._owner=p;}},_owner:null,
+   drawImage(im,sx,sy,sw,sh,dx,dy,dw,dh){const m=M.slice(),P=(x,y)=>({x:m[0]*x+m[2]*y+m[4],y:m[1]*x+m[3]*y+m[5]});
+    ops.push({path:im.path,src:[sx,sy,sw,sh],dst:[dx,dy,dw,dh],m:M.slice(),alpha:this.globalAlpha,scope:this._owner&&this._owner.id,ground:!!(this._owner&&this._owner.groundAligned),pass:pass_,t:time,
      at:(lx,ly)=>P(dx+lx*dw/sw,dy+ly*dh/sh)});}};
   var pass_='effect';
   function readyImage(p){if(!loaded.has(p))return null;return imgs[p]||(imgs[p]={image:{path:p}});}
@@ -49,7 +49,10 @@ function world(opt={}){const store={...(opt.store||{})};
 const run=(g,code)=>vm.runInContext(code,g);
 const A=g=>g.__STORYWORLD_FINALE_R950__,F=g=>g.__STORYWORLD_FINALE_FX_R1002__;
 const toLinks=g=>run(g,`room.finalStage=2;player.finalAwakening=true;room.encounterStage='cosmicReady';room.cosmicIndex=0;`);
-const of=(ops,k)=>ops.filter(o=>o.path===SHEET[k]);
+// 가는 선 시트(고리·꿰맴)는 또렷하게 두 번 겹쳐 그린다 → 같은 그리기가 연달아 오면 하나로 센다(겹침 횟수는 따로 검사)
+const same=(a,b)=>a&&b&&a.path===b.path&&a.pass===b.pass&&a.src.join()===b.src.join()&&a.dst.join()===b.dst.join()&&a.m.join()===b.m.join();
+const raw=(ops,k)=>ops.filter(o=>o.path===SHEET[k]);
+const of=(ops,k)=>raw(ops,k).filter((o,i,l)=>!same(o,l[i-1]));
 const inSheet=o=>{const k=kindOf(o.path);if(!k)return false;const [W,H,cw,ch]=DIM[k],[sx,sy,sw,sh]=o.src;const cx=Math.floor(sx/cw),cy=Math.floor(sy/ch);
  return sx>=0&&sy>=0&&sw>0&&sh>0&&sx+sw<=W&&sy+sh<=H&&sx+sw<=(cx+1)*cw&&sy+sh<=(cy+1)*ch;};
 const frameOf=o=>{const k=kindOf(o.path),[W,,cw,ch]=DIM[k];return Math.floor(o.src[1]/ch)*(W/cw)+Math.floor(o.src[0]/cw);};
@@ -61,25 +64,27 @@ if(SRC1002){
 {const g=world();toLinks(g);const ops=run(g,`frame(.1)`);const L=of(ops,'link');
  ok('six link strands from the sheet',L.length===6,L.length);
  ok('core heart drawn once from the sheet',of(ops,'core').length===1);
- ok('ring drawn from the sheet (back half before hero + front half after)',of(ops,'ring').length===2&&of(ops,'ring')[0].pass==='hero'&&of(ops,'ring')[1].pass==='effect',of(ops,'ring').map(o=>o.pass));
+ ok('ring drawn once from the sheet, as a ground-aligned effect (lies under the hero, not veiled by R350)',of(ops,'ring').length===1&&of(ops,'ring')[0].ground===true&&of(ops,'ring')[0].src[3]===128,of(ops,'ring').map(o=>[o.ground,o.src]));
+ ok('thin sheets (ring) are drawn in two passes, strands and core once',raw(ops,'ring').length===2&&raw(ops,'link').length===6&&raw(ops,'core').length===1,[raw(ops,'ring').length,raw(ops,'link').length,raw(ops,'core').length]);
  ok('no code-drawn lines while sheets are ready',run(g,`lines`)===0,run(g,`lines`));
  ok('every source rect stays inside one sheet cell',ops.length>0&&ops.every(inSheet),ops.filter(o=>!inSheet(o)).map(o=>o.src));
  ok('alpha within 0..1',ops.every(o=>o.alpha>0&&o.alpha<=1));
  // 좌표: 가닥의 다발 왼쪽 끝(12,64.9)=코어, 오른쪽 끝(500,64.9)=연결 끝. 그림 윗면(작은 y)이 화면 위쪽
- const u=34,c=run(g,`project(16,12)`),cs={x:c.x,y:c.y-u*2.75};let geo=true,up=true,dirs=0;
+ const u=34,c=run(g,`project(16,12)`),cs={x:c.x,y:c.y-u*3.35};let geo=true,up=true,dirs=0;
  for(let k=0;k<6;k++){const a=-Math.PI/2+k*Math.PI*2/6+.35,p=run(g,`project(${16+Math.cos(a)*3.4},${12+Math.sin(a)*3.4})`),end={x:p.x,y:p.y-u*1.4};
-  const o=L[k],s=o.at(12-o.src[0],64.9-o.src[1]),e=o.at(500-o.src[0],64.9-o.src[1]);if(!(near(s.x,cs.x)&&near(s.y,cs.y)&&near(e.x,end.x)&&near(e.y,end.y)))geo=false;
-  const top=o.at(256-o.src[0],0-o.src[1]),bot=o.at(256-o.src[0],128-o.src[1]);if(!(top.y<bot.y||Math.abs(end.x-cs.x)<1))up=false;if(end.x<cs.x)dirs++;}
+  const o=L[k],s=o.at(12-o.src[0]%512,64.9-o.src[1]%128),e=o.at(500-o.src[0]%512,64.9-o.src[1]%128);if(!(near(s.x,cs.x)&&near(s.y,cs.y)&&near(e.x,end.x)&&near(e.y,end.y)))geo=false;
+  const top=o.at(256-o.src[0]%512,0-o.src[1]%128),bot=o.at(256-o.src[0]%512,128-o.src[1]%128);if(!(top.y<bot.y||Math.abs(end.x-cs.x)<1))up=false;if(end.x<cs.x)dirs++;}
  ok('strands run exactly core → link end',geo);ok('strand art keeps its lit top side up (left-going strands are mirrored, not turned upside down)',up&&dirs>=2,{up,dirs});
- const thick=L.map(o=>{const a=o.at(0,29-o.src[1]),b=o.at(0,101-o.src[1]);return Math.hypot(a.x-b.x,a.y-b.y);});
+ const thick=L.map(o=>{const a=o.at(0,29-o.src[1]%128),b=o.at(0,101-o.src[1]%128);return Math.hypot(a.x-b.x,a.y-b.y);});
  ok('strand thickness is fixed (stretch is horizontal only)',thick.every(t=>near(t,u*.62,.1)),thick);
- const co=of(ops,'core')[0],tip=co.at(128,240),topc=co.at(128,41);ok('core floats over the altar (tip 2 tiles up, 1.5 tiles tall)',near(tip.x,c.x)&&near(tip.y,c.y-u*2)&&near(tip.y-topc.y,u*1.5,1),{tip,c});
- const pq=run(g,`project(player.x,player.y)`),rb=of(ops,'ring')[0],rf=of(ops,'ring')[1],cen=rb.at(128,64),cen2=rf.at(128,64-64);
- ok('ring is centred on the hero feet, back half = upper half, front half = lower half',near(cen.x,pq.x)&&near(cen.y,pq.y)&&near(cen2.x,pq.x)&&near(cen2.y,pq.y)&&rb.src[3]===64&&rf.src[3]===64&&rb.src[1]%128===0&&rf.src[1]%128===64,{rb:rb.src,rf:rf.src});
- const rr=rb.at(228,64);ok('ring radius 1.45 tiles',near(rr.x-pq.x,u*1.45,.5));
- ok('same ring frame in both halves',frameOf(rb)===frameOf(rf));
- // 영웅을 안 그리는 프레임이면 고리 전체를 이펙트 차례에
- const o2=run(g,`frame(.1,false)`);ok('without a hero pass the whole ring is drawn in the effect pass',of(o2,'ring').length===1&&of(o2,'ring')[0].src[3]===128);
+ const co=of(ops,'core')[0],tip=co.at(128,240),topc=co.at(128,41);ok('core floats over the altar (tip 2.2 tiles up, 2.3 tiles tall)',near(tip.x,c.x)&&near(tip.y,c.y-u*2.2)&&near(tip.y-topc.y,u*2.3,1),{tip,c});
+ const pq=run(g,`project(player.x,player.y)`),rg=of(ops,'ring')[0],cen=rg.at(128,64),rr=rg.at(228,64);
+ ok('ring is centred on the hero feet, radius 1.6 tiles',near(cen.x,pq.x)&&near(cen.y,pq.y)&&near(rr.x-pq.x,u*1.6,.5),{cen,pq});
+ // 소유자 이름: 교주 쪽 그림은 R350 '영웅 가림 옅게'가 지우지 않는 이름이어야 한다(R350 원본 정규식으로 확인)
+ const r350=rd('client-source','hero-visibility-r350.js'),EW=new RegExp(r350.match(/const ENEMY_WORD=\/(.+?)\/i;/)[1],'i');
+ const bossSide=ops.filter(o=>kindOf(o.path)!=='ring');
+ ok('boss-side sheets carry an owner id R350 treats as enemy-side (never veiled over the hero)',bossSide.length>=7&&bossSide.every(o=>EW.test(o.scope)),[...new Set(bossSide.map(o=>o.scope))]);
+ ok('ring owner stays hero-side',!EW.test(rg.scope),rg.scope);
  // 반복: 24장 모두, 가닥마다 4장씩 어긋남
  const seen=new Set();let stag=true;for(let i=0;i<60;i++){const o=of(run(g,`frame(.04)`),'link');o.forEach(x=>seen.add(frameOf(x)));if(((frameOf(o[1])-frameOf(o[0]))%24+24)%24!==4)stag=false;}
  ok('link loop uses all 24 frames',seen.size===24,seen.size);ok('strands pulse 4 frames apart',stag);
@@ -93,9 +98,9 @@ if(SRC1002){
 // ---- 끊김: 대수문장을 쓰러뜨릴 때마다 한 번, 0..10번 장 순서대로, 빈 칸 뒤로는 안 그림 ----
 {const g=world();toLinks(g);run(g,`frame(.1)`);run(g,`room.cosmicIndex=1;`);const fr=[];let linksDuring=null,strokes=0;
  for(let i=0;i<40;i++){const ops=run(g,`frame(.04)`);const s=of(ops,'snap');if(s.length)fr.push(frameOf(s[0]));if(i===0){linksDuring=of(ops,'link').length;
-   const u=34,c=run(g,`project(16,12)`),cs={x:c.x,y:c.y-u*2.75},a=-Math.PI/2+.35,p=run(g,`project(${16+Math.cos(a)*3.4},${12+Math.sin(a)*3.4})`),end={x:p.x,y:p.y-u*1.4},o=s[0],sa=o.at(102-o.src[0],50.5-o.src[1]),sb=o.at(412-o.src[0],50.5-o.src[1]);
+   const u=34,c=run(g,`project(16,12)`),cs={x:c.x,y:c.y-u*3.35},a=-Math.PI/2+.35,p=run(g,`project(${16+Math.cos(a)*3.4},${12+Math.sin(a)*3.4})`),end={x:p.x,y:p.y-u*1.4},o=s[0],sa=o.at(102-o.src[0]%512,50.5-o.src[1]%128),sb=o.at(412-o.src[0]%512,50.5-o.src[1]%128);
    ok('snap sits on the cut strand (bundle ends = strand ends)',near(sa.x,cs.x)&&near(sa.y,cs.y)&&near(sb.x,end.x)&&near(sb.y,end.y),{sa,cs,sb,end});
-   const th=Math.hypot(o.at(0,23-o.src[1]).x-o.at(0,79-o.src[1]).x,o.at(0,23-o.src[1]).y-o.at(0,79-o.src[1]).y);ok('snap bundle is as thick as the live strand',near(th,u*.62,.1),th);}
+   const th=Math.hypot(o.at(0,23-o.src[1]%128).x-o.at(0,79-o.src[1]%128).x,o.at(0,23-o.src[1]%128).y-o.at(0,79-o.src[1]%128).y);ok('snap bundle is as thick as the live strand',near(th,u*.62,.1),th);}
   strokes+=run(g,`lines`);}
  ok('five strands remain after one is cut',linksDuring===5,linksDuring);
  ok('snap plays frames 0..10 in order, once',fr[0]===0&&fr[fr.length-1]===10&&fr.every((f,i)=>i===0||f>=fr[i-1])&&new Set(fr).size===11,fr);
@@ -125,6 +130,20 @@ if(SRC1002){
  run(g,`room.encounterStage='complete';`);ok('ring ends with the region',of(run(g,`frame(.1)`),'ring').length===0);
  ok('R950 counters unchanged in meaning',A(g).inspect().stats.stitch===1&&A(g).inspect().stats.unstitched===1,A(g).inspect().stats);
  ok('no errors (full run)',A(g).inspect().stats.errors===0&&F(g).inspect().stats.errors===0,[A(g).inspect().lastError,F(g).inspect().stats.lastError]);}
+// ---- 연출 시계: 최종 처치 직후 서사 창이 열려 게임 시간이 멈춰도 꿰매기 실패가 실제 시간으로 이어진다 ----
+{const g=world();toLinks(g);run(g,`room.cosmicIndex=6;spawnCosmic3();`);for(let i=0;i<80;i++)run(g,`frame(.04)`);
+ run(g,`killEnemy(room.enemies.find(e=>e.nativeId==='c104-boss'));tick(.001);storyScene={part:'post'};modal=true;`);
+ const EW=/boss/;const seen=[];let ids=new Set(),plays=0,prev=-1;
+ const real=(ms,n)=>{for(let i=0;i<n;i++){g.realMs+=ms;const ops=run(g,`frame(0)`);const u_=of(ops,'unstitch');ops.forEach(o=>{if(kindOf(o.path)!=='ring')ids.add(o.scope);});if(u_.length){const f=frameOf(u_[0]);if(f<prev)plays++;if(prev<0)plays=1;prev=f;seen.push(f);}}};
+ real(40,70);// 2.8초(실제)
+ ok('game time is frozen but the fail effect still plays through (frames 0..14)',run(g,`time`)<3.3&&seen[0]===0&&Math.max(...seen)===14&&new Set(seen).size===15,seen);
+ ok('fail-effect owners are boss-side',[...ids].every(x=>EW.test(x))&&ids.size>=3,[...ids]);
+ real(40,400);// 16초 더: 사이를 두고 두 번 더, 그 뒤로는 안 나옴
+ ok('while the scene stays open it replays twice more, then stops',plays===3,plays);
+ const tail=of(run(g,`frame(0)`),'unstitch').length;g.realMs+=5000;ok('no endless loop behind the scene',tail===0&&of(run(g,`frame(0)`),'unstitch').length===0);
+ run(g,`storyScene=null;modal=false;`);const o=run(g,`frame(.1)`);ok('after the scene closes nothing of it remains',of(o,'unstitch').length+of(o,'snap').length+of(o,'link').length===0);
+ ok('one real frame never advances the effect clock by more than 0.1s (tab switch safe)',(()=>{const g2=world();toLinks(g2);run(g2,`frame(.1);storyScene={};`);const a=of(run(g2,`frame(0)`),'link').map(frameOf)[0];g2.realMs+=60000;const b=of(run(g2,`frame(0)`),'link').map(frameOf)[0];return ((b-a)%24+24)%24<=2;})());
+ ok('R950 still counts one collapse',A(g).inspect().stats.unstitched===1&&A(g).inspect().stats.errors===0,A(g).inspect().stats);}
 // ---- ④ 시트 없음 / 꺼짐 / 모듈 없음: R950 코드 그림 그대로 ----
 for(const [n,o] of [['sheets not loaded',{loaded:false}],['switched off',{store:{'storyworld.r1002.finaleFx':'{"on":false}'}}],['module absent',{noFx:true}]]){
  const g=world(o);toLinks(g);const ops=run(g,`frame(.1)`);ok(n+': no sheet draws',ops.length===0,ops.length);ok(n+': code-drawn links still shown',run(g,`lines`)>=20,run(g,`lines`));

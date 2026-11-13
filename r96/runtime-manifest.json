@@ -6493,6 +6493,36 @@
       "sha256": "17df1f7aeaac815bce5e4e04569382469d96cdc4b98d30af7690f335608d2bd8"
     },
     {
+      "path": "assets/r1002/fb-core-pulse.webp",
+      "bytes": 646358,
+      "sha256": "6e9479edcc3eba3ba76ea24d8081de399a44079bacce9b658ba2ee11d6af839c"
+    },
+    {
+      "path": "assets/r1002/fb-nerve-link-loop.webp",
+      "bytes": 328442,
+      "sha256": "f288ec4940cf19c0f463139a88f14800fae1dbabb6ec525521ec25f3a6cf1358"
+    },
+    {
+      "path": "assets/r1002/fb-nerve-link-snap.webp",
+      "bytes": 178734,
+      "sha256": "aa19fc35dcf522ea85f653839b14a7ea0a437702ad3441f9dda43815c2a405b7"
+    },
+    {
+      "path": "assets/r1002/fb-nerve-stitch.webp",
+      "bytes": 547480,
+      "sha256": "90c61788f452ea3c244516fce5ec82ddff54a887f6f756ef10ed92b369f684a9"
+    },
+    {
+      "path": "assets/r1002/fb-nerve-unstitch-fail.webp",
+      "bytes": 243516,
+      "sha256": "aef7884fb4e047f472f7dce2d7baff3f1c088fdba7d0d888504475b4b67c5cfe"
+    },
+    {
+      "path": "assets/r1002/fb-samong-ring.webp",
+      "bytes": 323042,
+      "sha256": "77b52cf18441eac1c26225ef8a16dcc8276b71b1b1ae161e2f548c4a1c565461"
+    },
+    {
       "path": "assets/r103/chest-closed.svg",
       "bytes": 2508,
       "sha256": "d3e981852d7785f5749b633ca6f136c5ae378ef0efc7b3562059ceae43bd3e10"
@@ -49883,9 +49913,14 @@
       "sha256": "f0201ecfd605210a91455ad2ee54091a0b6ba72e57540879330c1f6ccd3675f3"
     },
     {
+      "path": "finale-fx-r1002.js",
+      "bytes": 9493,
+      "sha256": "14595bdb869aa2a5e46d329b60e50ea09a9891eaf764e797b758a6b8edde93fd"
+    },
+    {
       "path": "finale-r950.js",
-      "bytes": 19637,
-      "sha256": "08a4ab2b7d733ebd39f2577d0329e66784e3123e03966324f3611e437280403f"
+      "bytes": 23459,
+      "sha256": "7ed9cad50189441bf74385b9177fecf8fbc4514ef559652c649e3b1952c4994f"
     },
     {
       "path": "fx-blood-r190.js",
@@ -50179,8 +50214,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6576678,
-      "sha256": "ad584241211d5379c456cb2927bc997d5826033b391c506a49f8cadd76911547"
+      "bytes": 6576723,
+      "sha256": "9e5d40d1aacc3a162b451684a5193f38522efc0200729523e5f674eaf1f1987a"
     },
     {
       "path": "intro-r140.js",
@@ -51308,9 +51343,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10261,
-  "totalBytes": 1268493078,
-  "webHTMLSha256": "ad584241211d5379c456cb2927bc997d5826033b391c506a49f8cadd76911547",
+  "fileCount": 10268,
+  "totalBytes": 1270774010,
+  "webHTMLSha256": "9e5d40d1aacc3a162b451684a5193f38522efc0200729523e5f674eaf1f1987a",
   "largest": [
     {
       "path": "index.html",
