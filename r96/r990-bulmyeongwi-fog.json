@@ -1,0 +1,27 @@
+{
+ "revision": "R990",
+ "assets": [
+  {
+   "key": "fog-core",
+   "source": "Dots CX-0070BM CX-0070BM_fx_core24_r1_c1.png",
+   "sourceSha256": "d47d1a2f56e0cb8e8d24154f80d5a3902d9bd6061f578cceafaf0cac6ba19332",
+   "review": "그림 스레드 7분야 7.93 통과(README_review r2)",
+   "frames": 24,
+   "cell": 256,
+   "path": "assets/r990/fog-core.webp",
+   "size": [
+    6144,
+    256
+   ],
+   "bytes": 340952,
+   "sha256": "a03aaa9d21b300cc10b102254501329041c6c3c7cacaf9dbc56f0c0f07ca233d"
+  }
+ ],
+ "reused": [
+  {
+   "key": "fog-mist",
+   "path": "assets/r430/mist-loop.webp",
+   "note": "R430 기존 자산(192칸 22장) 재사용, 게임 안에서 hue-rotate·brightness 로 먹빛 보라 안개"
+  }
+ ]
+}

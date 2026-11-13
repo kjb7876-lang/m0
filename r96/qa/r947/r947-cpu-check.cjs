@@ -179,6 +179,12 @@ ok(!/lightning|bolt|번개 줄기/i.test(code),'적혈 연쇄에 번개 시트·
  ok(g.length>=2&&g.every(s=>Math.abs(s.rot)<1e-9&&s.sy>0),'꽂힌 십자검은 Dots SB-02 시트, 똑바로');
  ok(!E.sheets.some(s=>/r947:sword/.test(s.own||'')&&/r947:sword/.test(s.src||'')),'코드로 그린 임시 십자검은 더 안 씀');}
 ok(['slayer-sword-fall','slayer-sword-stab','slayer-blood-stream','slayer-blood-head'].every(n=>fs.existsSync(path.join(ROOT,'r96/runtime-text/assets/r947/'+n+'.webp'))),'Dots 시트 파일 4장이 runtime-text/assets/r947 에 있음');
+// R985 Dots SB-03 피 레이저 줄기·SB-03b 끝조각을 혈격자 줄에 적용(판정·피해 불변, 코드 레이저 그림 대신)
+{const foes=[];for(let i=0;i<6;i++)foes.push({id:'L'+i,x:18+i*1.3,y:18+(i%3)*1.4});const E=engine({enemies:foes});E.api.force('lattice');E.ctx.basicAttack();E.run(.35);E.sheets.length=0;E.frame();
+ const own=E.sheets.filter(s=>/r947:lattice/.test(s.own||''));ok(own.some(s=>/assets\/r947\/slayer-lattice-beam\.webp/.test(s.src||'')),'혈격자 줄은 Dots SB-03 피 레이저 시트');
+ ok(own.some(s=>/assets\/r947\/slayer-lattice-end\.webp/.test(s.src||'')),'줄 양 끝은 Dots SB-03b 끝조각');
+ ok(!own.some(s=>/r947:beam/.test(s.src||'')),'코드로 그린 임시 레이저 줄은 더 안 씀');}
+ok(['slayer-lattice-beam','slayer-lattice-end'].every(n=>fs.existsSync(path.join(ROOT,'r96/runtime-text/assets/r947/'+n+'.webp'))),'SB-03 시트 2장이 runtime-text/assets/r947 에 있음');
 {const foes=[];for(let i=0;i<20;i++)foes.push({id:'m'+i,x:20+Math.cos(i)*(1+i*.2),y:20+Math.sin(i)*(1+i*.2)});
  const E=engine({enemies:foes});E.api.force('lattice');E.ctx.basicAttack();E.run(.45);E.sheets.length=0;E.frame();
  ok(E.sheets.some(s=>/r947:lattice/.test(s.own||'')),'격자 레이저 그림');ok(E.sheets.length<=E.api.config.maxDraws,'한 프레임 그림 상한('+E.sheets.length+' ≤ '+E.api.config.maxDraws+')');}
