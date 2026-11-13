@@ -9384,7 +9384,10 @@
     "assets/r955/sfx/hit-zombieknight-1.ogg",
     "assets/r955/sfx/hit-zombieknight-2.ogg",
     "assets/r955/sfx/hit-zombieknight-3.ogg",
-    "assets/r955/sfx/index.json"
+    "assets/r955/sfx/index.json",
+    "assets/r953/gv-lock.webp",
+    "assets/r953/gv-friend.webp",
+    "assets/r953/gv-call.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -10459,5 +10462,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "0afd5b33712756cf401f0acec4e08f6b4257e49c8a27b52fce2c9e65a6044b0d"
+  "runtimeManifestSHA256": "ef62052bd7afd3e3910392434145b40464aebef90bb14e47c651aa0c118856a0"
 }
