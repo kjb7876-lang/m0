@@ -17,17 +17,21 @@
 //  · 헌터 분신은 기본 공격과 고유기 일제 사격 한 번만 쓴다(돌진 E 처럼 자리를 벗어나는 스킬은 쓰지 않는다). 분신 넷의 발사 소리는 하나만 낸다.
 //  · 그림: 몸은 엔진 영웅 그림 그대로(방 조형물 줄에 끼워 깊이 정렬). 발밑 소환 문은 Dots 헌터 문 시트(R535 hunter-gate, 24칸: 열림 0-4·반복 5-19·닫힘 20-23)를 다시 쓴다.
 //    슬레이어가 나타나는 순간은 R190 피 터짐 시트. 진법 줄(헌터에서 두 날개로 뻗는 점선)만 코드로 그린 임시 그림이다 — Dots 시트(요청 CX-0096HS)가 오면 바꾼다.
+//    R952-2(2026-11-13): CX-0096HS 가운데 HS-02 해산(r2)·HS-03 분신 베기(r1) 시트를 적용. 진법 줄(HS-04)은 Dots 수정 대기라 아직 임시 점선.
 //  · 협동 모드에서는 발동하지 않는다. 생존 배치(R720)된 헌터도 몸마다 따로 발동한다.
 //  끄기: localStorage['storyworld.r952.hunterSquad']='{"on":false}'
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_HUNTER_SQUAD_R952__)return;
-const REV='R952-hunter-squad-1',KEY='storyworld.r952.hunterSquad',HERO='hunter',ALLY='slayer';
+const REV='R952-hunter-squad-2',KEY='storyworld.r952.hunterSquad',HERO='hunter',ALLY='slayer';
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const CFG=Object.freeze({chance:.09,gap:.35,icd:21,life:7,fade:.45,
  tiers:Object.freeze({call:.6,shade:.28,squad:.12}),
  slayer:Object.freeze({mul:.1,seek:9,leash:10,speed:4.8}),
  shade:Object.freeze({chance:.5,mul:.15,reach:5.5,life:.34,max:4}),
- squad:Object.freeze({count:4,mul:.22,gap:1.15,back:.62,speed:7,stagger:.09})});
+ squad:Object.freeze({count:4,mul:.22,gap:1.15,back:.62,speed:7,stagger:.09}),
+ // R952-2: Dots CX-0096HS 시트. HS-02 혈맹 해산(r2, 몸 위 덧그림, 깃털이 위로 흩어짐)·HS-03 혈영 강습 베기(r1, 오른쪽 기준·왼쪽은 좌우 반전)
+ sheets:Object.freeze({leave:Object.freeze({path:'assets/r952/hs02-blood-pact-leave.webp',cell:Object.freeze([256,256]),cols:6,frames:12,piv:Object.freeze([128,244]),dur:.8}),
+  slash:Object.freeze({path:'assets/r952/hs03-shade-slash.webp',cell:Object.freeze([384,256]),cols:6,frames:12,piv:Object.freeze([192,128]),hit:4})})});
 const NAMES={call:'혈맹 호출',shade:'혈영 강습',squad:'기러기진 섬멸'},BEAT=.42;
 let errors=0,lastError=null;const fail=e=>{errors++;lastError=String(e?.stack||e).slice(0,300);};
 const G=(f,d)=>{try{const v=f();return v===undefined?d:v;}catch(_){return d;}};
@@ -49,12 +53,12 @@ function slotsFor(px,py,aim,count,gap,back,k=1){const fx=Math.cos(aim),fy=Math.s
  for(let i=0;i<count;i++){const side=i%2?1:-1,rank=1+(i>>1);out.push({x:px+(lx*side*gap*rank-fx*back*rank)*k,y:py+(ly*side*gap*rank-fy*back*rank)*k});}return out;}
 
 // ── 상태(영웅 몸마다 따로: 조종 영웅 하나 + R720 배치 몸은 WeakMap) ──
-const fresh=()=>({squad:null,readyAt:-1e9,rollAt:-1e9,force:null,stats:{swings:0,rolls:0,procs:{call:0,shade:0,squad:0},ends:0,casts:{basic:0,q:0,w:0,e:0,r:0},shades:0,shadeHits:0,volleys:0,cloneShots:0,coopSkipped:0,draws:0}});
+const fresh=()=>({squad:null,readyAt:-1e9,rollAt:-1e9,force:null,stats:{swings:0,rolls:0,procs:{call:0,shade:0,squad:0},ends:0,casts:{basic:0,q:0,w:0,e:0,r:0},shades:0,shadeHits:0,volleys:0,cloneShots:0,coopSkipped:0,draws:0,slashDraws:0,leaveDraws:0}});
 const main=fresh(),allyState=new WeakMap(),shadeAt=new WeakMap(),live=[];let serial=0,warmed=false;
 function st(p,make=true){if(p&&p.r720Ally===true){let s=allyState.get(p);if(!s&&make){s=fresh();allyState.set(p,s);}return s||null;}return main;}
 const alive=u=>!!u&&live.includes(u.sq);
 const GATE=Object.freeze({path:'assets/r535/dots/hunter-gate.webp',cell:256,cols:6,piv:[128,145],oval:90,open:5,loop:15,close:4});
-function warm(){if(warmed)return;warmed=true;try{const p=ensureImages([...heroPaths(ALLY),GATE.path]);if(p&&p.catch)p.catch(()=>{});}catch(_){}}
+function warm(){if(warmed)return;warmed=true;try{const p=ensureImages([...heroPaths(ALLY),GATE.path,CFG.sheets.leave.path,CFG.sheets.slash.path]);if(p&&p.catch)p.catch(()=>{});}catch(_){}}
 
 // ── 몸: 주인(헌터)과 같은 모양의 사본. 엔진 함수를 부르는 동안만 player 자리에 끼운다(R720 과 같은 방식) ──
 const SHARED=['upgrades','progressionR62'],TIMERS=['attackCD','attackAnim','skillAnim','blinkCD','specialCD','invincible','parry','ego','egoCD','samong','samongCD','grazeGuard','counter'];
@@ -108,7 +112,12 @@ function valid(sq){const p=sq.owner;if(!on||!solo()||!p||!(p.hp>0)||p.hero!==HER
  if(p.r720Ally===true){const bs=G(()=>window.__STORYWORLD_HERO_DEFENSE_R720__.bodies(),null);return !Array.isArray(bs)||bs.length===0||bs.includes(p);}
  return p===P();}
 function syncProps(sq){const r=sq.room;if(!r||!Array.isArray(r.props))return;for(const u of sq.units)if(!r.props.includes(u.prop))r.props.push(u.prop);
- if(sq.form){let m=sq.owner.x+sq.owner.y;for(const u of sq.units)m=Math.min(m,u.x+u.y);for(const s of sq.slots)m=Math.min(m,s.x+s.y);sq.form.x=sq.form.y=(m-.8)/2;/* 모든 분대원보다 먼저(바닥에) 그려지게 */if(!r.props.includes(sq.form))r.props.push(sq.form);}}
+ if(sq.form){let m=sq.owner.x+sq.owner.y;for(const u of sq.units)m=Math.min(m,u.x+u.y);for(const s of sq.slots)m=Math.min(m,s.x+s.y);sq.form.x=sq.form.y=(m-.8)/2;/* 모든 분대원보다 먼저(바닥에) 그려지게 */if(!r.props.includes(sq.form))r.props.push(sq.form);}
+ /* R952-2: 분신 베기 궤적은 따로 한 항목으로, 베이는 적들보다 앞(화면 아래)에서 그린다 — 슬레이어 몸 순서로 그리면 적 그림에 가려 안 보였다 */
+ if(sq.shades.length){let m=-Infinity;for(const c of sq.shades){m=Math.max(m,c.x+c.y);if(c.e&&isFinite(c.e.x))m=Math.max(m,c.e.x+c.e.y);}
+  if(!sq.fx){sq.fx={id:'r952:fx:'+(++serial),r952Prop:true,r952Fx:true,x:0,y:0,solid:false,visible:true,autoTargetEligible6:false,label:'',height:1};Object.defineProperty(sq.fx,'r952Squad',{value:sq,enumerable:false});}
+  sq.fx.x=sq.fx.y=(m+.9)/2;if(!r.props.includes(sq.fx))r.props.push(sq.fx);}
+ else if(sq.fx&&r.props.includes(sq.fx))r.props=r.props.filter(p=>p!==sq.fx);}
 
 // ── 한 걸음 ──
 const angDiff=(a,b)=>Math.atan2(Math.sin(a-b),Math.cos(a-b));
@@ -171,14 +180,31 @@ function drawForm(sq){const t=T(),k=clamp((t-sq.t0)/.35,0,1)*clamp((sq.end-t)/CF
    for(const wing of [[0,2],[1,3]]){ctx.beginPath();ctx.moveTo(o.x,o.y);for(const i of wing)ctx.lineTo(q[i].x,q[i].y);ctx.stroke();}ctx.setLineDash?.([]);}
   /* 겨눈 쪽 화살촉(진의 앞) */const tip=project(p.x+Math.cos(sq.aim)*1.1,p.y+Math.sin(sq.aim)*1.1);ctx.globalAlpha=.5*k;ctx.lineWidth=1.6*ui;ctx.beginPath();ctx.moveTo(o.x,o.y);ctx.lineTo(tip.x,tip.y);ctx.stroke();
  }finally{ctx.restore();}}
+// R952-2 시트 칸 고르기(순수 함수). 베기: 분신 수명(kk 0→1) 동안 12칸, 분신이 베는 순간(0.1초)에 가장 진한 칸. 해산: 끝나기 전 dur 초 동안 12칸(마지막 칸은 빈칸).
+function slashFrame(kk){if(!(kk>=0&&kk<1))return -1;const S=CFG.sheets.slash,h=clamp(.1/CFG.shade.life,.05,.9);return kk<h?Math.min(S.hit-1,Math.floor(kk/h*S.hit)):Math.min(S.frames-1,S.hit+Math.floor((kk-h)/(1-h)*(S.frames-S.hit)));}
+function leaveFrame(left){const S=CFG.sheets.leave;if(!(left>0&&left<=S.dur))return -1;return Math.min(S.frames-1,Math.floor((1-left/S.dur)*S.frames));}
+let askedSheet=-9;
+function sheetAt(S,f,x,y,h,flip,al){if(f<0||!(al>0))return false;const row=G(()=>readyImage(S.path),null),im=row&&row.image;
+ if(!im){const n=Date.now();if(n-askedSheet>1500){askedSheet=n;try{const pr=ensureImages([CFG.sheets.leave.path,CFG.sheets.slash.path]);if(pr&&pr.catch)pr.catch(()=>{});}catch(_){}}return false;}
+ const cw=S.cell[0],ch=S.cell[1],sc=h/ch,sx=(f%S.cols)*cw,sy=Math.floor(f/S.cols)*ch;
+ ctx.save();try{ctx.translate(x,y);if(flip)ctx.scale(-1,1);ctx.globalCompositeOperation='source-over';ctx.globalAlpha=al;ctx.drawImage(im,sx,sy,cw,ch,-S.piv[0]*sc,-S.piv[1]*sc,cw*sc,ch*sc);
+  ctx.globalCompositeOperation='lighter';ctx.globalAlpha=al*.35;ctx.drawImage(im,sx,sy,cw,ch,-S.piv[0]*sc,-S.piv[1]*sc,cw*sc,ch*sc);}finally{ctx.restore();}return true;}
+function bodyH(){return G(()=>actorHeight(),0)||G(()=>TILE,64)*G(()=>zoom,1)*1.5;}
 function drawBody(u,alpha){const b=u.body;if(!(alpha>0))return;ctx.save();try{if(alpha<.999)ctx.globalAlpha=(ctx.globalAlpha??1)*alpha;as(u,()=>drawHero());u.sq.state.stats.draws++;}finally{ctx.restore();}}
+function drawSlashes(sq){const t=T(),k=clamp((sq.end-t)/CFG.fade,0,1),H=bodyH();/* 분신 베기 궤적(HS-03): 분신과 적 사이 몸 가운데 높이, 적이 화면 왼쪽이면 좌우 반전 */
+ for(const c of sq.shades){const kk=(t-c.t0)/c.life,f=slashFrame(kk);if(f<0)continue;const a=project(c.x,c.y),e=c.e&&isFinite(c.e.x)?project(c.e.x,c.e.y):a,left=e.x<a.x-.5;
+  if(sheetAt(CFG.sheets.slash,f,(a.x+e.x)/2,(a.y+e.y)/2-H*.48,H*1.5,left,.95*k))sq.state.stats.slashDraws++;}}
 function drawUnit(p){if(p.r952Form){const sq=p.r952Squad;if(live.includes(sq))drawForm(sq);return;}
+ if(p.r952Fx){const sq=p.r952Squad;if(live.includes(sq))drawSlashes(sq);return;}
  const u=p.r952Unit;if(!alive(u)||!u.body)return;const sq=u.sq,b=u.body,t=T(),k=clamp((t-u.born)/.3,0,1)*clamp((sq.end-t)/CFG.fade,0,1),q=project(u.x,u.y),own=u.kind===ALLY;
  ctx.save();try{if(!gateAt(q,t-u.born,sq.end-t,own?1.5:1.05,own?.95:.8))ringAt(q,own?SLAYER_RGB:HUNTER_RGB,k,Math.sin(t*3+u.i));ctx.globalAlpha=1;}catch(e){fail(e);}finally{ctx.restore();}
  const pose=G(()=>heroArt[b.hero].idle.front,null);if(!pose||!G(()=>readyImage(pose),null)){if(!(u.loadAt>t-3)){u.loadAt=t;try{const pr=ensureImages(heroPaths(b.hero));if(pr&&pr.catch)pr.catch(()=>{});}catch(_){}}return;}
  b.x=u.x;b.y=u.y;drawBody(u,(own?1:.8)*k);
  if(own&&sq.shades.length){const keep={x:b.x,y:b.y,direction:b.direction,attackAnim:b.attackAnim,moving:b.moving,invincible:b.invincible};
-  try{for(const c of sq.shades){const kk=(t-c.t0)/c.life;if(kk<0||kk>=1)continue;b.x=c.x;b.y=c.y;b.direction=c.dir;b.attackAnim=Math.max(.05,.24*(1-kk));b.moving=false;b.invincible=0;drawBody(u,.66*(1-kk*kk)*k);}}finally{Object.assign(b,keep);}}}
+  try{for(const c of sq.shades){const kk=(t-c.t0)/c.life;if(kk<0||kk>=1)continue;b.x=c.x;b.y=c.y;b.direction=c.dir;b.attackAnim=Math.max(.05,.24*(1-kk));b.moving=false;b.invincible=0;drawBody(u,.66*(1-kk*kk)*k);}}finally{Object.assign(b,keep);}
+}
+ /* 해산 덧그림(HS-02): 끝나기 전 0.8초 동안 몸 위에서 깃털이 위로 흩어진다(몸은 그 사이 흐려진다) */
+ try{const f=leaveFrame(sq.end-t);if(f>=0){const H=bodyH()*(own?2:1.7);if(sheetAt(CFG.sheets.leave,f,q.x,q.y,H,u.i%2===1,own?1:.85))sq.state.stats.leaveDraws++;}}catch(e){fail(e);}}
 
 // ── 엔진 연결(이 파일이 가장 바깥에서 감싼다) ──
 let baseAP=null,lastT=null;const rawPower=()=>baseAP?baseAP():G(()=>attackPower(),0);
@@ -203,5 +229,5 @@ function inspect(body){const s=st(body||P(),false)||fresh(),t=T(),sq=s.squad;
   units:sq?sq.units.map(u=>({kind:u.kind,i:u.i,x:u.x,y:u.y,hero:u.kind===ALLY?ALLY:HERO,dir:u.body?.direction||null,anim:+u.body?.attackAnim||0})):[],slots:sq?sq.slots.map(q=>({x:q.x,y:q.y})):[],shades:sq?sq.shades.length:0,
   stats:{...s.stats,procs:{...s.stats.procs},casts:{...s.stats.casts}},squads:live.length,errors,lastError};}
 window.__STORYWORLD_HUNTER_SQUAD_R952__=Object.freeze({revision:REV,config:CFG,names:Object.freeze({...NAMES}),on:()=>on,set,force,inspect,present,
- bodies:()=>live.flatMap(sq=>sq.units.map(u=>u.body).filter(Boolean)),pure:Object.freeze({pickTier,slotsFor})});
+ bodies:()=>live.flatMap(sq=>sq.units.map(u=>u.body).filter(Boolean)),pure:Object.freeze({pickTier,slotsFor,slashFrame,leaveFrame})});
 })();

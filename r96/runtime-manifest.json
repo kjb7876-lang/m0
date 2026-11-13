@@ -40663,6 +40663,16 @@
       "sha256": "a442a8da37dc38a57d1dda36a2e6ae7acd1953d6ec90ac5306ce50c97a6e0afd"
     },
     {
+      "path": "assets/r952/hs02-blood-pact-leave.webp",
+      "bytes": 67800,
+      "sha256": "71535c8769d37c39b4e8d8fc58241ee8edb65175ba8faf52597570b13476009f"
+    },
+    {
+      "path": "assets/r952/hs03-shade-slash.webp",
+      "bytes": 122874,
+      "sha256": "2aeef038bdff1fa29c399f687abc5e53c0ae484a08edae5bfa9dbdf4d66f9557"
+    },
+    {
       "path": "assets/r954/sfx/atk-fisherman-1.ogg",
       "bytes": 7161,
       "sha256": "72651a7fa25a4fbd5b060e3f89cd8b5b3539cc62834915e733aaee4a0ea1949e"
@@ -49719,8 +49729,8 @@
     },
     {
       "path": "hunter-squad-r952.js",
-      "bytes": 25286,
-      "sha256": "f6a2d81c299e74ba64ea59d0495eef51751a5bf1293e16a84fb7002a5a307a94"
+      "bytes": 29123,
+      "sha256": "6c8cf337f7964bbc0e0b7ee94c73462d39924ce7f443a71c15273ecbb1201fe8"
     },
     {
       "path": "hwando-arc-r349.js",
@@ -50873,8 +50883,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10174,
-  "totalBytes": 1260245011,
+  "fileCount": 10176,
+  "totalBytes": 1260439522,
   "webHTMLSha256": "d65f74274a6e04cf2a6776d84760bc969260cd49e4b9ed063fba15c01a40f3e3",
   "largest": [
     {
