@@ -9496,7 +9496,40 @@
     "assets/r986/seoha-summon-gate.webp",
     "assets/r990/fog-core.webp",
     "bulmyeongwi-fog-r990.js",
-    "seoha-epoch-fx-r986.js"
+    "seoha-epoch-fx-r986.js",
+    "assets/r912/pj01-fly.webp",
+    "assets/r912/pj01-hit.webp",
+    "assets/r912/pj02-fly.webp",
+    "assets/r912/pj02-hit.webp",
+    "assets/r912/pj03-fly.webp",
+    "assets/r912/pj03-hit.webp",
+    "assets/r912/pj03x-fly.webp",
+    "assets/r912/pj03x-hit.webp",
+    "assets/r912/pj04-fly.webp",
+    "assets/r912/pj04-hit.webp",
+    "assets/r912/pj05-fly.webp",
+    "assets/r912/pj05-hit.webp",
+    "assets/r912/pj06-fly.webp",
+    "assets/r912/pj06-hit.webp",
+    "assets/r912/pj07-fly.webp",
+    "assets/r912/pj09a-fly.webp",
+    "assets/r912/pj09a-hit.webp",
+    "assets/r912/pj09b-fly.webp",
+    "assets/r912/pj09b-hit.webp",
+    "assets/r912/pj09c-fly.webp",
+    "assets/r912/pj09c-hit.webp",
+    "assets/r912/pj10-fly.webp",
+    "assets/r912/pj10-hit.webp",
+    "assets/r975/sfx/ilseom-1.ogg",
+    "assets/r975/sfx/ilseom-2.ogg",
+    "assets/r975/sfx/ilseom-3.ogg",
+    "assets/r975/sfx/ilseom-4.ogg",
+    "assets/r975/sfx/ilseom-5.ogg",
+    "assets/r975/sfx/ilseom-6.ogg",
+    "assets/r975/sfx/ilseom-7.ogg",
+    "assets/r975/sfx/manifest.json",
+    "hwando-ilseom-r975.js",
+    "projectile-sheets-r912.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -10571,5 +10604,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "3fe15623c7563ec13af74989c059f593ff2f70e33564115a0a2ccdbaf1b13d9b"
+  "runtimeManifestSHA256": "607340cabdca97f39b09e27dd372e1218a434a5bf11f13021591b1ef92b04d07"
 }
