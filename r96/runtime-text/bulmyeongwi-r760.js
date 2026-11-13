@@ -21,11 +21,15 @@
 //    중간보스 '검은 안개 심장'은 엔진 4자세 대신 시트(대기6·공격8·피격4·죽음8, 512칸·발 (256,470)), 보이는 키는 엔진 대기와 같게.
 //    넷째 묶음: 눈빛 공격은 예비 동작이 생긴 atkB8_r2(1~3칸 움츠림·4칸 쏠림·5칸 시선 = 타격, sheet-atkB2), 체력 절반 이하 피격은 hit2nd4(sheet-hit2).
 //    scripts/r764-bulmyeongwi-sheets.py → assets/r760/{boss,mid}/sheet-*.webp. 시트가 안 실렸으면 지금 그림·엔진 죽음 그대로.
+//  · R970 방향 이동(사용자 2026-11-12 "위아래 이동모션은 최소4프레임… 위아래옆3가지 방향만 있으면됨 좌우는 서로 반전"): Dots CX-0082MV B36(불면귀 위·아래 4칸)·B35(검은 안개 심장 옆·아래·위 4칸).
+//    화면에서 위·아래로 움직이면 앞·뒤 모습 시트(384칸 4, 8fps), 옆으로는 기존 옆 걷기(보스 move6)·새 옆 시트(중간보스). 앞·뒤 모습은 좌우로 뒤집지 않는다.
+//    방향은 화면 속도를 고르게 한 값으로 고르고 문턱을 둘로 둬(들어갈 때 1.25배·나올 때 .8배) 오락가락하지 않게. 공격·피격·정지는 그대로. 크기는 보이는 키를 맞춘다.
+//    scripts/r970-bulmyeongwi-move.py → assets/r760/{boss,mid}/sheet-move{Up,Down,Side}.webp. 안 실렸으면 기존 그림. 끄기 '{"dirMove":false}'.
 //  끄기: localStorage['storyworld.r760.bulmyeongwi']='{"on":false}'(시트만 끄기 '{"sheets":false}', 소리만 끄기 '{"sfx":false}'). 점검: window.__STORYWORLD_BULMYEONGWI_R760__.inspect()
 (()=>{'use strict';
 if(window.__STORYWORLD_BULMYEONGWI_R760__)return;
-const REV='R760-bulmyeongwi-4',KEY='storyworld.r760.bulmyeongwi';
-let prefs={on:true,ghosts:true,sheets:true,sfx:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object')for(const k of Object.keys(prefs))if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
+const REV='R760-R970-bulmyeongwi-5',KEY='storyworld.r760.bulmyeongwi';
+let prefs={on:true,ghosts:true,sheets:true,sfx:true,dirMove:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object')for(const k of Object.keys(prefs))if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={draws:0,swapped:0,waiting:0,patterns:0,ghosted:0,errors:0};let lastError=null,last=null,lastDeath=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const T=()=>typeof time==='number'&&Number.isFinite(time)?time:performance.now()/1000;
@@ -36,9 +40,11 @@ const SCALE=1.3;                                      // 대기 기준 대비 �
 const PATTERN={rain:{foot:353},transition:{foot:353}}; // 672x384 패턴 그림의 발 줄
 // R761 Dots 시트: 512칸, 발 (256,469.33)(768칸 (384,704)), 보이는 키 약 383px(768칸 약 575px). fps 는 칸이 바뀌는 빠르기.
 const SC={cell:512,px:256,py:469.33,vis:383};
-const SHEET={idle:{n:6,fps:7},move:{n:6,fps:9},atkA:{n:8},atkB:{n:8},cast:{n:8,step:.11,loop:[4,6]},reveal:{n:8,step:.14},idle2:{n:6,fps:7},hit:{n:4,step:.075},atkB2:{n:8,strike:4},hit2:{n:4,step:.075}};
+const SHEET={idle:{n:6,fps:7},move:{n:6,fps:9},atkA:{n:8},atkB:{n:8},cast:{n:8,step:.11,loop:[4,6]},reveal:{n:8,step:.14},idle2:{n:6,fps:7},hit:{n:4,step:.075},atkB2:{n:8,strike:4},hit2:{n:4,step:.075},
+ // R970 위·아래 이동(384칸, 보이는 키 275·발 줄 338 — 칸마다 잰 알파 테두리)
+ moveUp:{n:4,fps:8,geo:{cell:384,px:192,py:338,vis:275},front:true},moveDown:{n:4,fps:8,geo:{cell:384,px:192,py:338,vis:275},front:true}};
 // R764 중간보스 시트(원래 512칸, 발 줄 470, 보이는 키 약 400) · 죽음 시트(보스 death10 은 0~8칸, 중간보스 death8 은 0~6칸 — 마지막은 빈 칸)
-const MC={cell:512,px:256,py:470,vis:400},MSHEET={idle:{n:6,fps:7},atk:{n:8},hit:{n:4,step:.075},death:{n:8}},MPATH=k=>'assets/r760/mid/sheet-'+k+'.webp';
+const MC={cell:512,px:256,py:470,vis:400},MG={cell:384,px:188,py:350,vis:265},MSHEET={idle:{n:6,fps:7},atk:{n:8},hit:{n:4,step:.075},death:{n:8},moveSide:{n:4,fps:8,geo:MG},moveDown:{n:4,fps:8,geo:MG,front:true},moveUp:{n:4,fps:8,geo:MG,front:true}},MPATH=k=>'assets/r760/mid/sheet-'+k+'.webp';
 const DEATH={boss:{n:10,last:8,step:.13,fade:.7,path:()=>SPATH('death'),py:469.33,vis:383},mid:{n:8,last:6,step:.12,fade:.6,path:()=>MPATH('death'),py:470,vis:400}};
 const FLINCH_GAP=1.5;
 const SPATH=k=>DIR.replace(/bulmyeongwi-$/,'')+'sheet-'+k+'.webp';
@@ -63,7 +69,15 @@ const ST=new WeakMap();const stOf=e=>{let s=ST.get(e);if(!s)ST.set(e,s={unit:0,w
 // 걷는지(시트 고르기·잔상 꼬리). 그리기 한 번에 한 번, 게임 시간으로.
 function track(e,s){const t=T(),dt=s.lastT<0?0:Math.max(0,Math.min(.1,t-s.lastT));s.lastT=t;let sp=0;
  if(Number.isFinite(s.wx)&&dt>0){sp=Math.hypot(e.x-s.wx,e.y-s.wy)/dt;const d=(e.x-s.wx)-(e.y-s.wy);if(Math.abs(d)>1e-4)s.vx=d>0?1:-1;}
+ if(Number.isFinite(s.wx)&&dt>0)heading(e,s,dt);
  s.wx=e.x;s.wy=e.y;if(dt>0)s.move+=((sp>.18?1:0)-s.move)*Math.min(1,dt*8);}
+// R970 화면에서 어느 쪽으로 움직이나: 'side'|'up'|'down'. 화면 속도를 고르게 한 뒤, 위·아래로 들어갈 때는 세로가 가로의 1.25배 넘게, 나올 때는 .8배 아래로.
+function heading(e,s,dt){let sx,sy;try{const a=project(s.wx,s.wy),b=project(e.x,e.y);sx=(b.x-a.x)/dt;sy=(b.y-a.y)/dt;}catch(_){sx=((e.x-s.wx)-(e.y-s.wy))/dt;sy=((e.x-s.wx)+(e.y-s.wy))/dt;}
+ if(!Number.isFinite(sx)||!Number.isFinite(sy))return;const k=Math.min(1,dt*6);s.hx=(s.hx||0)+(sx-(s.hx||0))*k;s.hy=(s.hy||0)+(sy-(s.hy||0))*k;
+ const ax=Math.abs(s.hx),ay=Math.abs(s.hy),v=s.dir==='up'||s.dir==='down';
+ if(v?ay<ax*.8:!(ay>ax*1.25)){s.dir='side';if(ax>1e-6)s.sideSg=s.hx>0?1:-1;}else s.dir=s.hy<0?'up':'down';}
+// 방향 시트 키: 움직이는 중이고 시트가 실렸을 때만. table = SHEET(보스) 또는 MSHEET(중간보스), pathOf = SPATH·MPATH
+function dirKey(s,table,pathOf){if(!prefs.dirMove||!(s.move>.5))return null;const k=s.dir==='up'?'moveUp':s.dir==='down'?'moveDown':'moveSide';return table[k]&&img(pathOf(k))?k:null;}
 const Hq=c=>Math.abs(c.points[3][1]-c.points[0][1]);
 // 렌더러는 sourceRect 를 imageSize 로 나눠 칸 좌표를 만든다 → 그림을 바꾸면 imageSize 도 새 그림 크기로(안 그러면 옛 크기 기준으로 잘려 늘어남).
 function setImg(c,im,path,w,h){c.image=im;c.sourcePath=path;const iw=im.naturalWidth||im.width||w,ih=im.naturalHeight||im.height||h;c.imageSize=[iw,ih];}
@@ -94,7 +108,7 @@ function sheetPick(e,k,s){const t=T();
  // 눈빛 공격은 넷째 묶음 atkB8_r2(예비 동작, 타격 칸 4)가 실렸으면 그것, 아니면 r1(타격 칸 3)
  if(atk){if(s.atkN%2)return ['atkA',atkFrame(e)];const b2=!!img(SPATH('atkB2'));return [b2?'atkB2':'atkB',atkFrame(e,b2?SHEET.atkB2.strike:3)];}
  const p2=e.maxHp>0&&e.hp/e.maxHp<=.5,hk=p2&&img(SPATH('hit2'))?'hit2':'hit',h=flinch(e,s,SHEET[hk]);if(h>=0)return [hk,h];
- if(s.move>.5)return ['move',Math.floor(t*SHEET.move.fps+s.seed)%6];
+ if(s.move>.5){const dk=dirKey(s,SHEET,SPATH);if(dk)return [dk,Math.floor(t*SHEET[dk].fps+s.seed)%SHEET[dk].n];return ['move',Math.floor(t*SHEET.move.fps+s.seed)%6];}
  // 체력 절반 이하로 서 있으면 실타래가 풀려 흐트러진 2페이즈 대기
  return [p2?'idle2':'idle',Math.floor(t*SHEET.idle.fps+s.seed*3)%6];}
 // R764 중간보스: 엔진 4자세(-p1~-p4) 몸을 시트 칸으로. 크기 기준은 엔진 대기 자세(p4)의 보이는 키(400/432)를 칸 길이로 나눈 값.
@@ -103,10 +117,10 @@ function sheetPick(e,k,s){const t=T();
 function midSwap(e,cmds,st0){if(!prefs.sheets)return;const c=bodyCmd(cmds,st0);if(!c)return;const p=srcOf(c);if(!/mb-last302-v31231-p[1-4]\./i.test(p))return;
  for(let i=cmds.length-1;i>=st0;i--){const k=cmds[i];if(k!==c&&k?.kind==='image'&&k.r620Ghost&&/mb-last302-v31231-p[1-4]\./i.test(srcOf(k))){cmds.splice(i,1);stats.dropped=(stats.dropped||0)+1;}}
  const s=stOf(e),tl=tileLen(e);if(/-p4\./i.test(p)){const u=Hq(c)*POSE.vis/POSE.h/tl;s.unit=s.unit?s.unit+(u-s.unit)*.2:u;}const unit=(s.unit||Hq(c)*POSE.vis/POSE.h/tl)*tl;track(e,s);
- const A=e.attack,atk=!!A||e.state==='attack';let k='idle',f=Math.floor(T()*MSHEET.idle.fps+s.seed*3)%6;if(atk){k='atk';f=atkFrame(e);}else{const h=flinch(e,s,MSHEET.hit);if(h>=0){k='hit';f=h;}}
+ const A=e.attack,atk=!!A||e.state==='attack';let k='idle',f=Math.floor(T()*MSHEET.idle.fps+s.seed*3)%6;if(atk){k='atk';f=atkFrame(e);}else{const h=flinch(e,s,MSHEET.hit);if(h>=0){k='hit';f=h;}else{const dk=dirKey(s,MSHEET,MPATH);if(dk){k=dk;f=Math.floor(T()*MSHEET[dk].fps+s.seed)%MSHEET[dk].n;}}}
  const path=MPATH(k),im=img(path);last={who:'mid',src:p.split('/').pop(),H:+Hq(c).toFixed(1),tl:+tl.toFixed(2),unitPerTile:+(s.unit||0).toFixed(2),sheet:k,frame:f};if(!im){stats.waiting++;return;}
- const kk=unit/MC.vis,sg=facing(e),[fx,fy]=footOf(e,c),x0=fx-sg*MC.px*kk,y0=fy-MC.py*kk,w=MC.cell*kk;
- c.points=[[x0,y0],[x0+sg*w,y0],[x0+sg*w,y0+w],[x0,y0+w]];setImg(c,im,path,MC.cell*MSHEET[k].n,MC.cell);c.sourceRect=[f*MC.cell,0,MC.cell,MC.cell];stats.mid=(stats.mid||0)+1;}
+ const G=MSHEET[k].geo||MC,kk=unit/G.vis,sg=MSHEET[k].front?1:k==='moveSide'?(s.sideSg||facing(e)):facing(e),[fx,fy]=footOf(e,c),x0=fx-sg*G.px*kk,y0=fy-G.py*kk,w=G.cell*kk;
+ c.points=[[x0,y0],[x0+sg*w,y0],[x0+sg*w,y0+w],[x0,y0+w]];setImg(c,im,path,G.cell*MSHEET[k].n,G.cell);c.sourceRect=[f*G.cell,0,G.cell,G.cell];stats.mid=(stats.mid||0)+1;}
 // 피격 움찔: 맞은 순간(hitTimer>0) 시작, 1.5초 안 연타는 다시 움찔하지 않는다(떨림 방지). 움찔 중이면 칸 번호, 아니면 -1.
 function flinch(e,s,D){const t=T();if(!(s.hitT0>-1e9))s.hitT0=-1e9;if(e.hitTimer>0&&t-s.hitT0>=FLINCH_GAP)s.hitT0=t;const f=Math.floor((t-s.hitT0)/D.step);return f>=0&&f<D.n?f:-1;}
 // 공격 칸: 준비 동안 0→3칸(3칸 = 타격), 뒤로 .12초마다 한 칸씩 7칸까지(보스·중간보스 같은 박자)
@@ -118,8 +132,8 @@ function swap(e,cmds,st0){const c=bodyCmd(cmds,st0);if(!c)return;const p=srcOf(c
  const unit=(s.unit||Hq(c)*IDLE_VIS/tl)*tl;last={k,tl:+tl.toFixed(2),H:+Hq(c).toFixed(1),unitPerTile:+(s.unit||0).toFixed(2)};
  track(e,s);cue(phase(e,k,s));
  if(prefs.sheets){const[sk,f]=sheetPick(e,k,s),D=SHEET[sk],path=SPATH(sk),im=img(path);
-  if(im){const kk=unit*SCALE/SC.vis,sg=facing(e),[fx,fy]=footOf(e,c),x0=fx-sg*SC.px*kk,y0=fy-SC.py*kk,w=SC.cell*kk;
-   c.points=[[x0,y0],[x0+sg*w,y0],[x0+sg*w,y0+w],[x0,y0+w]];setImg(c,im,path,SC.cell*D.n,SC.cell);c.sourceRect=[f*SC.cell,0,SC.cell,SC.cell];
+  if(im){const G=D.geo||SC,kk=unit*SCALE/G.vis,sg=D.front?1:facing(e),[fx,fy]=footOf(e,c),x0=fx-sg*G.px*kk,y0=fy-G.py*kk,w=G.cell*kk;
+   c.points=[[x0,y0],[x0+sg*w,y0],[x0+sg*w,y0+w],[x0,y0+w]];setImg(c,im,path,G.cell*D.n,G.cell);c.sourceRect=[f*G.cell,0,G.cell,G.cell];
    last={...last,sheet:sk,frame:f};stats.sheets=(stats.sheets||0)+1;return;}}
  if(k==='rain'||k==='transition'){const path=DIR+k+'.webp',im=img(path);if(!im){stats.waiting++;return;}
   const P=c.points,sg=P[1][0]>=P[0][0]?1:-1,iw=Math.abs(P[1][0]-P[0][0])/Math.max(1e-6,Hq(c)),nh=unit/IDLE_VIS*SCALE,nw=nh*iw,[fx,fy]=footOf(e,c);
@@ -152,7 +166,7 @@ function wrap(fn,pre){if(typeof drawEnemy!=='function')return false;const base=d
 // 마지막으로 그려진 시트 몸 칸 키(칸 길이당) — 죽음 시트를 살아 있을 때와 같은 크기로 그리려고.
 //  헤드리스 실측: R205 최소 크기 맞춤(fitMin)이 더 늦게 감싸 몸을 바깥에서 다시 키운다(중간보스 안쪽 49.5px → 화면 125px 칸) → 재는 감싸기는
 //  보스·중간보스를 처음 그릴 때 맨 바깥에 한 번 씌운다(그 뒤 누가 또 감싸면 다시, 최대 5번). 원래 함수의 표시(__rNNN)는 옮겨 붙여 이중 감싸기를 막는다.
-function measure(e,cm,st0){const c=bodyCmd(cm,st0);if(c&&/assets\/r760\/(boss|mid)\/sheet-/.test(srcOf(c))){const tl=tileLen(e);if(tl>0)stOf(e).cellTile=Hq(c)/tl;}}
+function measure(e,cm,st0){const c=bodyCmd(cm,st0);if(c&&/assets\/r760\/(boss|mid)\/sheet-/.test(srcOf(c))&&c.sourceRect?.[2]===512){const tl=tileLen(e);if(tl>0)stOf(e).cellTile=Hq(c)/tl;}}
 let mWraps=0;function ensureMeasure(){if(typeof drawEnemy!=='function'||drawEnemy.__r764m||mWraps>=5)return;const base=drawEnemy;mWraps++;
  const w=function(e,...a){const who=prefs.on?role(e):null;if(!who)return base.call(this,e,...a);const cm=(typeof ctx!=='undefined'&&Array.isArray(ctx?.commands))?ctx.commands:null,st0=cm?cm.length:-1;
   const r=base.call(this,e,...a);if(cm&&st0>=0)try{measure(e,cm,st0);}catch(err){fail(err);}return r;};

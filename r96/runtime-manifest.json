@@ -34743,6 +34743,16 @@
       "sha256": "66879d1eb1fa1bc881f1365794c4aec0c324fccc4a68fc336b6e8047956d061d"
     },
     {
+      "path": "assets/r760/boss/sheet-moveDown.webp",
+      "bytes": 103638,
+      "sha256": "c0e743291e587394ce6689d6fd13a2cbb2acc0f0e6b73fafce3ba31908b84e11"
+    },
+    {
+      "path": "assets/r760/boss/sheet-moveUp.webp",
+      "bytes": 105030,
+      "sha256": "3dae5ae8d5bd0ea9e41afae7412aa555a99ecd4a79b59dc5779deab489bedc21"
+    },
+    {
       "path": "assets/r760/boss/sheet-reveal.webp",
       "bytes": 489304,
       "sha256": "ff3eb8c4a0571a2858d6aec2bf0204248d1ffd9cc2453c6ff52f82b729c5be4e"
@@ -34766,6 +34776,21 @@
       "path": "assets/r760/mid/sheet-idle.webp",
       "bytes": 313296,
       "sha256": "0275d42fe4c495e0451dd1053d5bc506b46e6bab518939f2c85238f75e935dd1"
+    },
+    {
+      "path": "assets/r760/mid/sheet-moveDown.webp",
+      "bytes": 71788,
+      "sha256": "c49a5b399db59d377b0aaff419f11bce8d352638ab340373ca36bd3bf5cc7f7e"
+    },
+    {
+      "path": "assets/r760/mid/sheet-moveSide.webp",
+      "bytes": 74388,
+      "sha256": "b1f241314e5cfd456b9dc849d408548ed1d4e7ad5ebe77aecf1ff469a99c056e"
+    },
+    {
+      "path": "assets/r760/mid/sheet-moveUp.webp",
+      "bytes": 74484,
+      "sha256": "2ad3400987a505a460126f363fc11de558270511432003181277170bec2c8281"
     },
     {
       "path": "assets/r761/sfx/bmg-gaze-1.ogg",
@@ -48669,8 +48694,8 @@
     },
     {
       "path": "bulmyeongwi-r760.js",
-      "bytes": 46398,
-      "sha256": "a8395cf43857dfd052c114f710a52005112f929332901cd6df1ef462bc34bd39"
+      "bytes": 49067,
+      "sha256": "8a85841af909d2b1accf18aab6551e3b7e0ca607f1f89e918cd085090d1ad982"
     },
     {
       "path": "canon-throw-r471.js",
@@ -50873,8 +50898,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10174,
-  "totalBytes": 1260245011,
+  "fileCount": 10179,
+  "totalBytes": 1260677008,
   "webHTMLSha256": "d65f74274a6e04cf2a6776d84760bc969260cd49e4b9ed063fba15c01a40f3e3",
   "largest": [
     {
