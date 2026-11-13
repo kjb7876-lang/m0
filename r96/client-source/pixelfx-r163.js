@@ -22,13 +22,16 @@ const list=[],SENT={type:'r163-pixelfx',x:0,y:0,age:0,life:Infinity,r163Sentinel
 // R175: tint {a,b} — 회색으로 뽑은 시트를 그 몹의 고유색(a)·보조색/발광색(b)으로 물들인다(R106 스프라이트와 같은 밝기 → 어두운 주색 → 주색 → 보조색 → 흰색).
 //  물들인 시트는 바뀌지 않는 캔버스(__storyworldStaticTint)라 three 렌더러가 한 번만 올린다. 색은 16 단위로 묶어 캐시(최대 40장).
 const tinted=new Map();
-function tintedSheet(name,im,t){const q=c=>(c||[0,0,0]).map(v=>Math.max(0,Math.min(255,Math.round(v/16)*16))),A=q(t.a),B=q(t.b),key=name+'|'+A+'|'+B;let c=tinted.get(key);if(c)return c;
+// R980: 모바일은 픽셀 상한(__STORYWORLD_MOBILE_MEMORY_R980__.px)까지만 둔다 — 쓰면 맨 뒤로(LRU), 넘치면 오래된 것부터 버린다. 데스크톱은 40장 그대로.
+let tintedPx=0;const sheetPx=c=>c&&typeof c.getContext==='function'?(c.width|0)*(c.height|0):0;
+function tintedSheet(name,im,t){const q=c=>(c||[0,0,0]).map(v=>Math.max(0,Math.min(255,Math.round(v/16)*16))),A=q(t.a),B=q(t.b),key=name+'|'+A+'|'+B;let c=tinted.get(key);if(c){tinted.delete(key);tinted.set(key,c);return c;}
  try{const w=im.naturalWidth||im.width,h=im.naturalHeight||im.height;c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,0,0);const d=g.getImageData(0,0,w,h),px=d.data,D=A.map(v=>v*.35);
   for(let i=0;i<px.length;i+=4){if(!px[i+3])continue;const l=(px[i]*.3+px[i+1]*.59+px[i+2]*.11)/255;let r,gg,b;
    if(l<.5){const k=l/.5;r=D[0]+(A[0]-D[0])*k;gg=D[1]+(A[1]-D[1])*k;b=D[2]+(A[2]-D[2])*k;}else if(l<.85){const k=(l-.5)/.35;r=A[0]+(B[0]-A[0])*k;gg=A[1]+(B[1]-A[1])*k;b=A[2]+(B[2]-A[2])*k;}else{const k=(l-.85)/.15;r=B[0]+(255-B[0])*k*.6;gg=B[1]+(255-B[1])*k*.6;b=B[2]+(255-B[2])*k*.6;}
    px[i]=r;px[i+1]=gg;px[i+2]=b;}
   g.putImageData(d,0,0);c.__storyworldStaticTint=true;}catch(e){fail(e);c=im;}// 못 물들이면(오염된 캔버스 등) 원본을 캐시해 매 프레임 다시 시도하지 않는다
- tinted.set(key,c);if(tinted.size>40)tinted.delete(tinted.keys().next().value);stats.tinted=(stats.tinted||0)+1;return c;}
+ tinted.set(key,c);tintedPx+=sheetPx(c);let cap=Infinity;try{cap=window.__STORYWORLD_MOBILE_MEMORY_R980__?.px('r163-tint',Infinity)??Infinity;}catch(_){}
+ while(tinted.size>40||(tinted.size>1&&tintedPx>cap)){const k=tinted.keys().next().value;tintedPx-=sheetPx(tinted.get(k));tinted.delete(k);stats.tintEvicted=(stats.tintEvicted||0)+1;}stats.tinted=(stats.tinted||0)+1;return c;}
 // play(이름, 바닥 x, y, {h: 화면에서의 키(px, 기본 영웅 키 배수 k), k, delay(초), rate(재생 속도), alpha, flip, loop, key(같은 key 는 하나만), z(띄움 px), until(이 시각에 지움), fade(until 전 이 초 동안 옅어짐, R440)})
 // R440: 반복(loop) 시트를 until 없이 부르면 지역을 나갈 때까지 바닥에 남는다(피의 육망성 소환 균열 문 = 사용자 '빨간 원 계속 남음'). 반복 시트에는 until 을 꼭 준다.
 function play(name,x,y,o={}){if(!prefs.on||!meta?.[name]||!Number.isFinite(x+y))return null;image(name);
