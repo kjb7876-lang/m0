@@ -25,7 +25,7 @@ const CFG=Object.freeze({
  needle:Object.freeze({chance:.2,icd:.9,mult:.85,decay:.85,jumps:6,jump:3.8,first:4.5,gap:.07,max:4}),
  swords:Object.freeze({chance:.08,icd:6,count:7,range:6.5,fall:.55,stagger:.07,mult:1.3,splash:.9,splashMult:.4,stuck:.75}),
  lattice:Object.freeze({chance:.04,icd:14,radius:5,waves:8,gap:.2,lead:.08,spacing:1.25,half:.2,mult:.32,life:2,crossMult:.55,crossDelay:.55,crossRadius:1,crossNear:.95,crossMax:10,crossLife:1}),
- maxDraws:60,maxVis:48});
+ maxDraws:96,maxVis:48});/* R985: 혈격자 줄이 줄기+양끝 3장이 되어 60→96 */
 const SHEET=Object.freeze({
  burst:Object.freeze({path:'assets/r585/slayer-burst-small.webp',cell:192,cols:6,frames:24,fps:30,px:128/256,py:224/256}),
  hit:Object.freeze({path:'assets/r587/slayer-hit.webp',cell:192,cols:6,frames:24,fps:40,px:132/256,py:158/256}),
@@ -35,7 +35,10 @@ const SHEET=Object.freeze({
  fall:Object.freeze({path:'assets/r947/slayer-sword-fall.webp',cell:192,cols:6,frames:12,fps:16,px:.5,py:252/256,body:217/256}),
  stab:Object.freeze({path:'assets/r947/slayer-sword-stab.webp',cell:192,cols:4,frames:16,fps:15,px:.5,py:225/256}),
  stream:Object.freeze({path:'assets/r947/slayer-blood-stream.webp',cw:256,ch:64,cols:1,frames:12,fps:20,x0:11/256,x1:245/256,band:31/64}),
- head:Object.freeze({path:'assets/r947/slayer-blood-head.webp',cell:64,cols:4,frames:4,fps:20,px:.5,py:.5})});
+ head:Object.freeze({path:'assets/r947/slayer-blood-head.webp',cell:64,cols:4,frames:4,fps:20,px:.5,py:.5}),
+ // R985 Dots SB-03 피 레이저 줄기(원본 512×64 12장 → 384×48, 양 끝이 잘린 띠라 늘여 씀) + SB-03b 끝조각(64×64 12장, 왼쪽 x3 에서 줄기와 이어지고 x52 에서 끝남)
+ lbeam:Object.freeze({path:'assets/r947/slayer-lattice-beam.webp',cw:384,ch:48,cols:6,frames:12,fps:30}),
+ lend:Object.freeze({path:'assets/r947/slayer-lattice-end.webp',cell:64,cols:6,frames:12,fps:30,x0:3/64,x1:52/64})});
 const SHEET_PATHS=Object.values(SHEET).map(v=>v.path);
 const fin=v=>typeof v==='number'&&Number.isFinite(v),clamp=(v,a,b)=>Math.min(b,Math.max(a,v)),smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
 let lastError=null,errors=0;const fail=e=>{errors++;lastError=String(e?.message||e).slice(0,200);};
@@ -138,11 +141,6 @@ function stepCrosses(s){const t=T(),C=CFG.lattice;for(let i=s.crosses.length-1;i
 const tex=new Map();
 function make(key,w,h,paint){if(tex.has(key))return tex.get(key);let c=null;try{if(typeof document==='undefined')return null;c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d');if(!g)return null;paint(g,w,h);
   c.__storyworldStaticSource=Object.freeze({path:'r947:'+key,immutable:true});}catch(e){fail(e);c=null;}tex.set(key,c);return c;}
-// 피 레이저 줄기: 흰 빛심 + 진홍 테 + 검붉은 바깥 번짐(가로로 늘여 씀, 양 끝은 뾰족하게 사라짐)
-function beamTex(){return make('beam',256,32,(g,w,h)=>{const cy=h/2;
-  const band=(th,col)=>{const gr=g.createLinearGradient(0,0,w,0);gr.addColorStop(0,col.replace('A','0'));gr.addColorStop(.08,col.replace('A','1'));gr.addColorStop(.92,col.replace('A','1'));gr.addColorStop(1,col.replace('A','0'));
-   g.fillStyle=gr;g.beginPath();g.ellipse(w/2,cy,w/2,th/2,0,0,7);g.fill();};
-  g.globalAlpha=.45;band(30,'rgba(110,0,14,A)');g.globalAlpha=.8;band(16,'rgba(200,10,32,A)');g.globalAlpha=1;band(7,'rgba(255,90,96,A)');band(3,'rgba(255,240,236,A)');});}
 // 핏방울: 위가 뾰족한 물방울 + 윤기 점
 function dropTex(){return make('blooddrop',32,48,(g,w,h)=>{const cx=w/2;g.fillStyle='rgba(60,0,8,1)';g.beginPath();g.moveTo(cx,2);g.quadraticCurveTo(w-2,h*.62,cx,h-2);g.quadraticCurveTo(2,h*.62,cx,2);g.fill();
   g.fillStyle='rgba(176,8,28,1)';g.beginPath();g.moveTo(cx,7);g.quadraticCurveTo(w-6,h*.62,cx,h-6);g.quadraticCurveTo(6,h*.62,cx,7);g.fill();
@@ -150,7 +148,7 @@ function dropTex(){return make('blooddrop',32,48,(g,w,h)=>{const cx=w/2;g.fillSt
 // 바닥 고리(시전 맥동): 진홍 고리 한 겹
 function ringTex(){return make('ring',256,128,(g,w,h)=>{g.strokeStyle='rgba(160,0,24,.5)';g.lineWidth=14;g.beginPath();g.ellipse(w/2,h/2,w/2-10,h/2-8,0,0,7);g.stroke();
   g.strokeStyle='rgba(255,70,80,.95)';g.lineWidth=4;g.beginPath();g.ellipse(w/2,h/2,w/2-10,h/2-8,0,0,7);g.stroke();});}
-function warm(){try{beamTex();dropTex();ringTex();if(typeof ensureImages==='function')Promise.resolve(ensureImages(SHEET_PATHS)).catch(()=>{});}catch(e){fail(e);}}
+function warm(){try{dropTex();ringTex();if(typeof ensureImages==='function')Promise.resolve(ensureImages(SHEET_PATHS)).catch(()=>{});}catch(e){fail(e);}}
 const asked={t:0};
 function sheetImg(k){const S=SHEET[k];try{const got=typeof readyImage==='function'?readyImage(S.path):null;if(got?.image)return got.image;const t=Date.now();if(t-asked.t>1500){asked.t=t;if(typeof ensureImages==='function')Promise.resolve(ensureImages(SHEET_PATHS)).catch(()=>{});}}catch(e){fail(e);}return null;}
 // ---- 그리기 --------------------------------------------------------------------------------------------------
@@ -166,7 +164,15 @@ function cell(id,k,fr,x,y,size,alpha,flip){const S=SHEET[k],im=sheetImg(k);if(!i
  scoped(id,()=>{ctx.save();try{ctx.globalCompositeOperation='source-over';ctx.globalAlpha*=clamp(alpha,0,1);ctx.translate(x,y);if(flip)ctx.scale(-1,1);
   ctx.drawImage(im,(fr%S.cols)*S.cell,Math.floor(fr/S.cols)*S.cell,S.cell,S.cell,-size*S.px,-size*S.py,size,size);}catch(e){fail(e);}finally{ctx.restore();}});return true;}
 const scr=(x,y,lift=.4)=>{const q=project(x,y);return {x:q.x,y:q.y-H()*lift};};
-function beam(id,A,B,th,alpha){const L=Math.hypot(B.x-A.x,B.y-A.y);if(!(L>1))return;img(id,beamTex(),(A.x+B.x)/2,(A.y+B.y)/2,L,th,{ang:Math.atan2(B.y-A.y,B.x-A.x),alpha,add:true});}
+// 혈격자 레이저 한 줄(R985): A→B 로 눕힌 Dots SB-03 줄기 + 양 끝 SB-03b 끝조각(왼쪽은 좌우 뒤집음 — 레이저라 뒤집어도 됨, 십자가 아님).
+// 덮어 그리기(더하기면 분홍·흰빛으로 바래 피가 아니라 빛으로 읽힘). 끝조각 끝이 정확히 A·B 에 오도록 줄기를 안쪽으로 줄인다(벽에서 끊긴 줄이 벽을 넘지 않게). 시트 2장만 재사용, 새 캔버스 없음.
+function beam(id,A,B,th,alpha,age){const L=Math.hypot(B.x-A.x,B.y-A.y);if(!(L>1)||!(th>0)||!(alpha>0))return;const ang=Math.atan2(B.y-A.y,B.x-A.x),S=SHEET.lbeam,E=SHEET.lend,bi=sheetImg('lbeam'),ei=sheetImg('lend');if(!bi)return;
+ const fr=Math.floor((Number.isFinite(age)?age:0)*S.fps)%S.frames,cap=ei&&!low()?Math.min(th*(E.x1-E.x0),L*.3):0,inner=L-cap*2;
+ const put=(im,sx,sy,sw,sh,dx,dy,dw,dh,flip)=>{if(budget<=0)return;budget--;drawCalls++;scoped(id,()=>{ctx.save();try{ctx.globalCompositeOperation='source-over';ctx.globalAlpha*=clamp(alpha,0,1);ctx.translate(A.x,A.y);ctx.rotate(ang);if(flip){ctx.translate(L,0);ctx.scale(-1,1);}
+  ctx.drawImage(im,sx,sy,sw,sh,dx,dy,dw,dh);}catch(e){fail(e);}finally{ctx.restore();}});};
+ put(bi,(fr%S.cols)*S.cw,Math.floor(fr/S.cols)*S.ch,S.cw,S.ch,cap-1,-th/2,inner+2,th,false);
+ if(cap>0){const ef=Math.floor((Number.isFinite(age)?age:0)*E.fps+3)%E.frames,sx=(ef%E.cols)*E.cell,sy=Math.floor(ef/E.cols)*E.cell,sc=cap/(E.x1-E.x0)/E.cell;
+  put(ei,sx,sy,E.cell,E.cell,L-cap-E.x0*E.cell*sc,-th/2,E.cell*sc,th,false);put(ei,sx,sy,E.cell,E.cell,L-cap-E.x0*E.cell*sc,-th/2,E.cell*sc,th,true);}}
 // 적혈 연쇄 한 줄기(사용자 14:12Z "번개보다는 완전한 적혈 느낌"): 번개 대신 액체 피 줄기가 A→B 로 활처럼 휘어 0.09초에 뻗고(머리는 굵은 핏덩이),
 // 지나간 자리에서 핏방울이 떨어지며, 닿은 자리는 Dots 피 튐(R585 burst-small). 덮어 그리기(빛이 아니라 피).
 function bloodArc(v,age,k,h,lo){const A=scr(v.a.x,v.a.y,v.lead?.55:.45),B=scr(v.b.x,v.b.y,.45),dx=B.x-A.x,dy=B.y-A.y,L=Math.hypot(dx,dy);if(!(L>2))return;
@@ -184,7 +190,7 @@ function drawAll(){const t=T(),lo=low(),h=H(),u=unit();budget=lo?28:CFG.maxDraws
  for(const s of states()){
   // ① 혈격자: 바닥 높이(살짝 띄움) 줄. 한 줄은 0.05초에 굵어졌다 0.3초에 사라짐.
   const L=s.lattice;if(L){for(const q of L.lines){const a=t-q.t;if(a<0||a>.34)continue;const k=a<.05?smooth(a/.05):1-smooth((a-.05)/.29),lift=.12;
-    const A=q.dir==='h'?scr(q.a0,q.c,lift):scr(q.c,q.a0,lift),B=q.dir==='h'?scr(q.a1,q.c,lift):scr(q.c,q.a1,lift);beam('lattice',A,B,h*(.2+.12*k),k);}}
+    const A=q.dir==='h'?scr(q.a0,q.c,lift):scr(q.c,q.a0,lift),B=q.dir==='h'?scr(q.a1,q.c,lift):scr(q.c,q.a1,lift);beam('lattice',A,B,h*(.34+.16*k),k,a);}}
   // ① 혈격자 교차점 적혈 십자가(Dots R585 적혈 십자가 시트, 회전·뒤집기 없음 — 정십자)
   for(const x of s.crosses){const a=t-x.t0;if(a<0)continue;const g=project(x.x,x.y);cell('cross','cross',a*SHEET.cross.fps,g.x,g.y+h*.04,h*1.3,a>x.boom-x.t0+.3?1-smooth((a-(x.boom-x.t0+.3))/.15):1,false);}
   // ③ 성혈검우: 떨어지는 동안 하늘에서 가속, 꽂힌 뒤 칼끝이 땅에 박혀 흔들림 없이 서 있다가 사라짐. 회전 없음(정십자).

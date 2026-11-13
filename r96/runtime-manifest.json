@@ -40703,6 +40703,16 @@
       "sha256": "0d17b29def905a0fba888f95c427b07ab69549aec0d4e4bdbf28a331a0d51820"
     },
     {
+      "path": "assets/r947/slayer-lattice-beam.webp",
+      "bytes": 168674,
+      "sha256": "5337e1aba18f720afa40faa428e275dd190f82e1a5a63e90cf433bdee0010c9f"
+    },
+    {
+      "path": "assets/r947/slayer-lattice-end.webp",
+      "bytes": 14516,
+      "sha256": "4653822c0dc51139c2d394e86b97d13b2e166f94621e514d03aea937f59b39cf"
+    },
+    {
       "path": "assets/r947/slayer-sword-fall.webp",
       "bytes": 62242,
       "sha256": "25c215c3e141b9e7a1749400260aed315d3c41765c06201eb5b2ce75868b89d0"
@@ -50694,8 +50704,8 @@
     },
     {
       "path": "slayer-blood-passive-r947.js",
-      "bytes": 27287,
-      "sha256": "3f93c2c7e01a2c9d7e3c471762dc4854f94597a1bc1d6e0d69c4dd48e9ca389a"
+      "bytes": 28494,
+      "sha256": "0dfd04617cc32db9fc0adccf7d6000fff5146988abf8c4ae1dccf592d2d4ee14"
     },
     {
       "path": "slayer-blood-r425.js",
@@ -51033,8 +51043,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10206,
-  "totalBytes": 1261901212,
+  "fileCount": 10208,
+  "totalBytes": 1262085609,
   "webHTMLSha256": "f78375e17e91d4218ad4766ba5c06b820db4b21a79bc5bb1ac2a7beb459adc26",
   "largest": [
     {
