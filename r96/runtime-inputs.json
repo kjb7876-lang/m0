@@ -9472,7 +9472,8 @@
     "assets/r990/fog-core.webp",
     "bulmyeongwi-fog-r990.js",
     "seoha-epoch-fx-r986.js",
-    "survival-michaela-ending-r1010.js"
+    "survival-michaela-ending-r1010.js",
+    "survival-samong-r1006.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -10547,5 +10548,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "133081caf94665526e78299d948c05d1dd218dac432a819d0b98fcb0adcb04aa"
+  "runtimeManifestSHA256": "a2ba5e0e2bf1cfce41ca9840922f4f3fdfeb729a5c35d8420306496fc5c71311"
 }

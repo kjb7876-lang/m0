@@ -35,6 +35,11 @@ const stats={starts:0,stages:0,spawned:0,bosses:0,kills:0,gems:0,levels:0,choice
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 const G=(f,d)=>{try{const v=f();return v===undefined?d:v;}catch(_){return d;}};
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+// R1006: 스토리 56지역 뒤 사몽 16장(survival-samong-r1006.js). 단계 id 'sm1006:키' → 그 장의 바탕 지역(host)·기증 몹·원문 구간·제목. 없으면 예전 그대로.
+const EXT=()=>G(()=>window.__STORYWORLD_SURVIVAL_SAMONG_R1006__,null);
+const extOf=id=>{const X=EXT();return X&&typeof X.stage==='function'?G(()=>X.stage(id),null):null;};
+const extIds=()=>{const X=EXT();const a=X&&typeof X.ids==='function'?G(()=>X.ids(),[]):[];return Array.isArray(a)?a.filter(x=>typeof x==='string'&&!!extOf(x)):[];};
+const extHandoff=()=>{const X=EXT();return !!(X&&typeof X.handoff==='function'&&G(()=>X.handoff(S.ids[S.i],{loop:S.loop,kills:S.kills,i:S.i}),false)===true);};
 
 // ── 순수 함수(QA 가 CPU 에서 부른다) ──
 // 스토리 모드 전투 지역을 서사 순서대로(쉼터·사몽 층 제외).
@@ -112,7 +117,7 @@ function sentences(text){const P=G(()=>window.__STORYWORLD_CINEMA_MODE_R370__.pu
 // ── 상태 ──
 let tainted=false;/* 생존 판이 엔진 진행을 새 게임으로 바꿔 놓았으니, 스토리를 다시 불러오거나 새로 시작하기 전까지는 저장하지 않는다 */
 let inHitR600=0,S=null,pending=false,stageRoom=null,entering=0,hudAt=0,inKill=false,beams=[],gems=[],tails=[],choosing=false,choiceQ=0,pickRem=0,pickedDiff='normal';
-const fresh=(hero,diff)=>({active:true,hero,diff:diffOf(diff)===DIFFS[diff]?diff:'normal',playT:0,choiceIdx:0,i:0,loop:0,ids:stageIds(G(()=>regions,[])),phase:'pre',narrating:false,narrEndAt:NaN,stageAt:0,bossUp:false,clearAt:NaN,
+const fresh=(hero,diff)=>({active:true,hero,diff:diffOf(diff)===DIFFS[diff]?diff:'normal',playT:0,choiceIdx:0,i:0,loop:0,ids:[...stageIds(G(()=>regions,[])),...extIds()],phase:'pre',narrating:false,narrEndAt:NaN,stageAt:0,bossUp:false,clearAt:NaN,
  kills:0,stageKills:0,serial:0,xp:0,lv:1,core:{lv:{},hp:CORE0.max,cd:1,hitAt:-9},taken:{},over:false,best:0,startWall:Date.now()});
 const live=()=>!!S&&S.active&&G(()=>started,false)&&!!G(()=>player,null);
 const here=()=>live()&&!!stageRoom&&G(()=>room,null)===stageRoom;
@@ -192,7 +197,7 @@ function roster(id){const t=G(()=>makeNative(id,'STORY'),null),out={normal:[],bo
   if(e.boss){if(!out.boss)out.boss=e;continue;}if(mid){if(!out.mid)out.mid=e;continue;}
   const k=String(e.nativeId||e.name);if(seen.has(k))continue;seen.add(k);out.normal.push(e);}
  return out;}
-function buildRoom(id){const R=roster(id),t=R.template||{},L=layoutFor(id),c=L.survivalR600.centre;
+function buildRoom(id,X){const R=X?X.roster(makeNative,roster):roster(id),t=R.template||{},L=layoutFor(id),c=L.survivalR600.centre;
  const r={...t,id,layer:'STORY',props:[{id:'r600:core',r600CoreProp:true,x:c.x,y:c.y,solid:false,visible:true,autoTargetEligible6:false,label:'정화 코어',height:80}],enemies:[],kills:0,engaged:false,cleared:false,finalizing:false,encounterStage:'survivalR600',activeEncounter:null,fieldWaves6:[],fieldWaveIndex6:0,fieldWaveTotal6:0,fieldWaveCleared6:true,
   storyRosterIds6:[],defeatedActorIds:new Set(),exploration:L,explorationGroups:[],worldR74:1,r75Decorated:true,worldCombatR78:true,worldEnvironmentR81:true,r99Trees:true,r40RosterApplied:true,
   persona:{...(t.persona||{}),phase:'none'},objective:{x:-60,y:-60,path:t.objective?.path}/* 엔진 '기억의 표식'은 지도 밖으로(코어가 그 자리) */,survivalR600:{roster:R,centre:c,arena:L.survivalR600.arena}};
@@ -204,10 +209,10 @@ function guardTerrain(r,L){try{Object.defineProperty(r,'exploration',{configurab
 function rosterPaths(R){const out=new Set();for(const e of [...R.normal,R.boss,R.mid].filter(Boolean)){const d=e.profile;if(!d)continue;if(d.path)out.add(d.path);for(const f of Object.values(d.frames||{}))if(f?.path)out.add(f.path);for(const f of Object.values(d.actions||{}))if(f?.path)out.add(f.path);if(e.path)out.add(e.path);}return[...out];}
 
 // ── 무대 들어가기 ──
-async function go(i){if(!S||entering)return false;const id=S.ids[i];const def=G(()=>regionById[id],null);if(!def)return false;
+async function go(i){if(!S||entering)return false;const sid=S.ids[i],X=extOf(sid),id=X?X.host:sid;const def=G(()=>regionById[id],null);if(!def)return false;
  narrStop();gems=[];beams=[];tails=[];S.ready=false;/* 들어가는 동안(엔진 tick 이 새 방으로 돌 수 있음) 단계 판정을 멈춘다 — 앞 지역 시각으로 '빈 방'을 보고 보스로 넘기던 문제 */S.i=i;S.phase='pre';S.narrating=false;S.narrEndAt=NaN;S.narrMinEnd=0;S.bossUp=false;S.clearAt=NaN;S.stageKills=0;S.core.hp=Math.max(S.core.hp,CS().max*.5);
- S.moving=String(def.title||'');hud(true);/* R850: 불러오기 창이 뜨기 전 빈 시간(지역 스크립트들이 그림을 먼저 읽는 1~3초)에도 넘어가는 중임을 보여 준다 */
- const prev=stageRoom;stageRoom=buildRoom(id);
+ S.moving=String(def.title||'');hud(true);if(X){S.moving=String(X.title);hud(true);}/* R1006 사몽 장 제목 *//* R850: 불러오기 창이 뜨기 전 빈 시간(지역 스크립트들이 그림을 먼저 읽는 1~3초)에도 넘어가는 중임을 보여 준다 */
+ const prev=stageRoom;stageRoom=buildRoom(id,X);
  if(id==='last301')Object.defineProperty(stageRoom,'r75Falling',{configurable:true,enumerable:false,get:()=>!inHitR600,set(){}});/* R75 마지막 결투의 '정해진 쓰러짐'(보스를 살려 두고 장면으로 넘김)은 스토리 전용 — fall() 은 이미 쓰러지는 중이면 그냥 돌아가므로 생존 방에서는 그렇게 답해 끈다.
   지역을 완료로 표시하면 R75 decorate 가 적을 모두 숨기므로 쓰지 않는다. 같은 값을 보는 R75 hitEnemy(쓰러지는 중 영웅 체력 20% 고정)는 생존 hitEnemy 안에서 false 를 보게 한다. 저장·복제 대상이 아니게 열거하지 않는다. */
 const c=stageRoom.survivalR600.centre,extra=[...rosterPaths(stageRoom.survivalR600.roster),ORB,GEM,...Object.values(SH).map(d=>d.p)],old=def.paths;def.paths=[...new Set([...(old||[]),...extra])];
@@ -217,8 +222,8 @@ const c=stageRoom.survivalR600.centre,extra=[...rosterPaths(stageRoom.survivalR6
  entering++;let ok=false;try{ok=await enterRegion(id,null,{layer:'STORY',restore:true,noStory:true,position:{x:c.x,y:c.y+1.8}});}catch(e){fail(e);}finally{entering--;def.paths=old;if(lift)try{window.__STORYWORLD_COOP_SIM_R62__=CO;}catch(e){fail(e);}}
  S.moving='';if(!ok||G(()=>room,null)!==stageRoom){stageRoom=prev&&G(()=>room,null)===prev?prev:null;hud(true);return false;}
  stats.stages++;S.stageAt=G(()=>time,0);S.startPos=G(()=>({x:player.x,y:player.y}),null);S.ready=true;try{auto=true;guide=false;}catch(_){}
- const pre=scenesOf(def,'pre');const n=narrPlay(pre.length?pre:scenesOf(def,'body'));if(!n){S.narrEndAt=G(()=>time,0)+NO_TEXT_SECS-TAIL;}
- try{toast('무한 생존 · '+(S.loop?(S.loop+1)+'회차 · ':'')+(i+1)+'/'+S.ids.length+' '+def.title,3.2);}catch(_){}hud(true);return true;}
+ const pre=X?X.pre:scenesOf(def,'pre');const n=narrPlay(pre.length||X?pre:scenesOf(def,'body'));if(!n){S.narrEndAt=G(()=>time,0)+(X&&Number.isFinite(X.idle)?X.idle:NO_TEXT_SECS)-TAIL;}
+ try{toast('무한 생존 · '+(S.loop?(S.loop+1)+'회차 · ':'')+(i+1)+'/'+S.ids.length+' '+(X?X.title:def.title),3.2);}catch(_){}hud(true);return true;}
 function scenesOf(def,part){try{return (def.records||[]).map(r=>({text:part==='body'?(r.paragraphs||[]).join('\n\n'):String(r[part]||''),narrator:r.narrator})).filter(s=>s.text.trim());}catch(e){fail(e);return[];}}
 // R101 의 스토리 새 게임 확인 창 영웅 줄은 고른 영웅을 기억했다가 다음 newGame 의 영웅을 바꿔 끼운다(창을 열기만 해도 환도).
 //  생존에서 고른 영웅이 이기도록, 남은 선택이 다르면 그 영웅 줄을 화면 밖 한 번 열어 생존 영웅을 누르고 닫는다(R101 공개 동작만 씀).
@@ -310,7 +315,7 @@ function over(why){if(!S||S.over)return;snd('r546Fall',true);S.over=true;S.overW
  /* 코어 파괴는 Dots 파괴 시트(12칸 ≈ 1초)를 다 보여 준 뒤 결과 창 — 창이 열리면 화면이 멈추고 어두워져 파괴 장면이 안 보인다 */
  if(why==='core')S.panelAfter=S.overWall+DIE_MS;/* 창은 tick 감싸기가 이 시각 뒤에 연다 */else resultPanel();}
 function resultPanel(){if(!S)return;const why=S.overWhy;
- const def=G(()=>regionById[S.ids[S.i]],null),secs=S.overSecs||0,hero=S.hero;
+ const X=extOf(S.ids[S.i]),def=X?{title:X.title}:G(()=>regionById[S.ids[S.i]],null),secs=S.overSecs||0,hero=S.hero;
  openPanel('<div class="eyebrow">무한 생존 · 기록</div><h2>'+(why==='core'?'정화 코어가 부서졌습니다':'정화가 끊겼습니다')+'</h2>'+
   '<p>'+(S.loop?(S.loop+1)+'회차 · ':'')+(S.i+1)+' / '+S.ids.length+' 지역 「'+(def?.title||'')+'」까지 · 처치 '+S.kills+' · 생존 레벨 '+S.lv+' · '+Math.floor(secs/60)+'분 '+(secs%60)+'초</p>'+
   '<div class="actions"><button id="r600Again" class="primary">다시 도전</button><button id="r600Title">처음 화면</button></div>');
@@ -321,8 +326,9 @@ function resultPanel(){if(!S)return;const why=S.overWhy;
 function step(dt){const t=G(()=>time,0);healTrack();if(S.over||!S.ready)return;
  tickSpawn();attackTokens();coreTick(dt);gemTick(dt,S.phase==='clear');if(S.over)return;S.atkAvg=smoothAtk(S.atkAvg,baseAtk(),dt);
  const alive=room.enemies.some(living),sp=spawning(S,t);
- if(S.phase!=='clear'&&!alive&&!sp&&t-S.stageAt>3){const def=G(()=>regionById[room.id],null);
-  if(S.phase==='pre'){const post=scenesOf(def,'post'),R=room.survivalR600.roster,has=post.length>0||!!(R.boss||R.mid);S.phase=nextPhase('pre',has);
+ if(S.phase!=='clear'&&S.phase!=='handoff'&&!alive&&!sp&&t-S.stageAt>3){const def=G(()=>regionById[room.id],null),X=extOf(S.ids[S.i]);
+  if(S.phase==='pre'&&X&&X.finale&&extHandoff()){S.phase='handoff';stats.handoffs=(stats.handoffs||0)+1;}/* R1006: M(미카엘라) 몹 물결 뒤는 R1010 결전·엔딩이 이어 간다 — 이 단계는 더 진행하지 않는다 */
+  else if(S.phase==='pre'){const post=X?X.post:scenesOf(def,'post'),R=room.survivalR600.roster,has=post.length>0||!!(R.boss||R.mid);S.phase=nextPhase('pre',has);
    if(S.phase==='boss'){const n=narrPlay(post);if(!n)S.narrEndAt=t;bossIn();}}
   else S.phase='clear';
   if(S.phase==='clear'){S.clearAt=t+CLEAR_WAIT;stats.clears++;prefetchNext();try{toast('정화 완료 · 남은 조각을 모읍니다',2.2);fx?.('sigil',room.survivalR600.centre.x,room.survivalR600.centre.y,{asset:VFX.cross,size:3,life:1.2});sound?.('clear');}catch(_){}}}
@@ -332,7 +338,7 @@ function step(dt){const t=G(()=>time,0);healTrack();if(S.over||!S.ready)return;
 
 /* R850: 정화 완료 뒤 대기(2.2초+조각 흡수) 동안 다음 지역 지도·세계 그림을 미리 읽는다 — 넘어갈 때 불러오기 창이 짧아진다.
    엔진 그림 저장소(ensureImages)를 그대로 쓰므로 같은 그림을 두 번 받지 않는다. 실패는 무시(넘어갈 때 엔진이 다시 읽고 알린다). */
-function prefetchNext(){try{if(!S||typeof ensureImages!=='function')return;const n=advance(S.i,S.loop,S.ids.length),id=S.ids[n.i],def=G(()=>regionById[id],null);if(!def)return;
+function prefetchNext(){try{if(!S||typeof ensureImages!=='function')return;const n=advance(S.i,S.loop,S.ids.length),id=G(()=>extOf(S.ids[n.i])?.host,null)||S.ids[n.i],def=G(()=>regionById[id],null);if(!def)return;
  const list=[...(def.paths||[]),...(G(()=>window.__STORYWORLD_WORLD_R74__.assetPaths(id,'STORY'),[])||[])];stats.prefetch=(stats.prefetch||0)+1;
  Promise.resolve(ensureImages(list)).catch(()=>{stats.prefetchMiss=(stats.prefetchMiss||0)+1;});}catch(e){fail(e);}}
 // ── 그리기 ──
@@ -376,8 +382,8 @@ let hudEl=null;
 function hud(on){try{if(!hudEl||!hudEl.isConnected){subs(null);hudEl=document.createElement('div');hudEl.id='r600Hud';hudEl.innerHTML='<div class="s"></div><div class="c"><i></i></div><div class="x"><i></i></div>';document.body.appendChild(hudEl);}
  try{document.body.classList.toggle('r600On',!!(on&&here()));const bb=document.getElementById('bossbar');const br=bb&&!bb.classList.contains('hidden')?bb.getBoundingClientRect():null,showB=!!(br&&br.height>0&&getComputedStyle(bb).display!=='none'&&getComputedStyle(bb).visibility!=='hidden');/* bossbar 는 position:fixed 라 offsetParent 가 늘 null — 크기로 본다 */hudEl.classList.toggle('low',showB);hudEl.style.top=showB?Math.round(br.bottom+6)+'px':'';}catch(_){}
  if(on&&S?.active&&S.moving&&!S.over){hudEl.querySelector('.s').textContent='무한 생존 · 다음 지역으로 이동 · '+S.moving;hudEl.classList.add('on');return;}
- if(!on||!here()){hudEl.classList.remove('on');return;}hudAt=G(()=>time,0);const def=G(()=>regionById[room.id],null),st=CS();
- const ph=S.phase==='pre'?(spawning(S,hudAt)?'몰려오는 적':'남은 적 정리'):S.phase==='boss'?(S.bossUp?'보스전':'보스 서사'):'정화 완료';
+ if(!on||!here()){hudEl.classList.remove('on');return;}hudAt=G(()=>time,0);const X=extOf(S.ids[S.i]),def=X?{title:X.title}:G(()=>regionById[room.id],null),st=CS();
+ const ph=S.phase==='pre'?(spawning(S,hudAt)?'몰려오는 적':'남은 적 정리'):S.phase==='boss'?(S.bossUp?'보스전':'보스 서사'):S.phase==='handoff'?'마지막 대면':'정화 완료';
  hudEl.querySelector('.s').textContent='무한 생존 '+(S.loop?(S.loop+1)+'회차 · ':'· ')+(S.i+1)+'/'+S.ids.length+' '+(def?.title||'')+' · '+ph+' · 처치 '+S.kills+(choiceQ?' · 강화 '+choiceQ+' 대기('+Math.max(0,Math.ceil(((S.choiceIdx||0)+1)*CHOICE_EVERY-(S.playT||0)))+'초)':'');
  hudEl.querySelector('.c i').style.width=(100*clamp(S.core.hp/st.max,0,1)).toFixed(1)+'%';
  hudEl.querySelector('.x i').style.width=(100*clamp(S.xp/xpNeed(S.lv),0,1)).toFixed(1)+'%';hudEl.classList.add('on');}catch(e){fail(e);}}

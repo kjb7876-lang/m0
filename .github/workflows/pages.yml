@@ -522,6 +522,8 @@ jobs:
         run: node r96/qa/r963/r963-cpu-check.cjs
       - name: R980 mobile memory budget (R163/R106 tint caches capped by pixels on mobile, idle decoded images trimmed, desktop unchanged) CPU check
         run: node r96/qa/r980/r980-cpu-check.cjs
+      - name: R1006 survival samong chapters (16 samong stages after the 56 story regions, story-mode cue text, EP donors, M hands over to R1010) CPU check
+        run: node r96/qa/r1006/r1006-cpu-check.cjs
       - name: R463 seven-sins boss art (one form per fight, one body height, no cut-out broom) CPU check
         run: node r96/qa/r463/r463-cpu-check.cjs
       - name: R511 empty samong rooms get a guarded memory shard CPU check
