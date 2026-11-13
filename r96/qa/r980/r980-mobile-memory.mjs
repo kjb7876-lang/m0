@@ -3,6 +3,8 @@
 //  R980 전 측정(844×390, DPR2, 슬레이어): 렌더러 프로세스 시작 약 1.2GB → 15분 약 1.65GB. 살아 있는 캔버스 픽셀 2700게임초 약 410MB,
 //   효과음 디코딩 캐시 상한 없음(900게임초 51MB, 계속 증가). 이 검사는 빠른 감기로 여러 지역을 돌며 모바일 예산 안에 머무는지 본다.
 //   소리를 실제로 디코딩하도록 autoplay 정책을 풀고 unlockAudio 를 부른다.
+//  R1013(사용자 2026-11-13 16:32Z 결정 카드 "사본은 빼고 세기"): R1000 모바일 절반 해상도 사본(캔버스, 자체 상한 48MB LRU)은 원본 텍스처·해독을
+//   대신하는 것이라 캔버스 합계에서 빼고, 자기 상한 안에 있는지 따로 본다. 230MB 기준은 그대로.
 //  SW_URL(기본 http://127.0.0.1:4410/m0/) · GAME(게임 초, 기본 600) · HERO(기본 slayer) · OUT(json)
 import {createRequire} from 'node:module';import fs from 'node:fs';const req=createRequire(import.meta.url);const {chromium}=req('playwright');
 const E=process.env,URL=E.SW_URL||'http://127.0.0.1:4410/m0/',HERO=E.HERO||'slayer',GAME=+E.GAME||600,EVERY=+E.EVERY||60;
@@ -34,11 +36,11 @@ const rows=[];
 async function sample(tag){const au=await A(async()=>{let n=0,by=0;for(const [,pr] of buffers){const a=await Promise.race([pr,new Promise(r=>setTimeout(()=>r(null),30))]);if(!a)continue;n++;by+=a.length*a.numberOfChannels*4;}return {n,MB:+(by/1e6).toFixed(1),unlocked:audioUnlocked,played:audioStats.played,failed:audioStats.failed};});
  await cdp.send('HeapProfiler.collectGarbage');await cdp.send('HeapProfiler.collectGarbage');
  const m=Object.fromEntries((await cdp.send('Performance.getMetrics')).metrics.map(x=>[x.name,x.value]));
- const s=await A(()=>{const W=window.__R980QA;let px=0,n=0;for(const r of W.canv){const c=r.deref();if(c){n++;px+=(c.width|0)*(c.height|0);}}
+ const s=await A(()=>{const W=window.__R980QA;let px=0,n=0,hpx=0,hn=0;for(const r of W.canv){const c=r.deref();if(c){if(c.r1000Full){hn++;hpx+=(c.width|0)*(c.height|0);continue;}n++;px+=(c.width|0)*(c.height|0);}}const HI=window.__STORYWORLD_MOBILE_MEMORY_R980__?.inspect?.()||{};
   let ip=0,inn=0;for(const [,row] of imageCache){const im=row&&row.ready&&row.image;if(im){inn++;ip+=(im.naturalWidth||0)*(im.naturalHeight||0);}}
   const hp=heroPaths(player.hero).filter(Boolean),heroMissing=hp.filter(x=>!readyImage(x)).length;
   const Z=window.__STORYWORLD_SURVIVAL_R600__.state();
-  return {t:+time.toFixed(0),stage:Z.i,canvN:n,canvasMB:Math.round(px*4/1e6),images:inn,imageMB:Math.round(ip*4/1e6),heroMissing,heroPaths:hp.length,tinted163:window.__STORYWORLD_PIXELFX_R163__.inspect().stats.tinted||0,builds106:window.__STORYWORLD_FX_SPRITES_R106__.inspect().builds||0,trim:window.__STORYWORLD_MOBILE_MEMORY_R980__?.inspect?.().stats||null,nan:W.nan,nanAt:W.nanAt};});
+  return {t:+time.toFixed(0),stage:Z.i,canvN:n,canvasMB:Math.round(px*4/1e6),halfN:hn,halfLiveMB:Math.round(hpx*4/1e6),halfMB:HI.halfMB??null,halfPeakMB:HI.halfPeakMB??null,halfBudgetMB:HI.halfBudgetMB??null,images:inn,imageMB:Math.round(ip*4/1e6),heroMissing,heroPaths:hp.length,tinted163:window.__STORYWORLD_PIXELFX_R163__.inspect().stats.tinted||0,builds106:window.__STORYWORLD_FX_SPRITES_R106__.inspect().builds||0,trim:window.__STORYWORLD_MOBILE_MEMORY_R980__?.inspect?.().stats||null,nan:W.nan,nanAt:W.nanAt};});
  const row={tag,audio:au,heapMB:+(m.JSHeapUsedSize/1e6).toFixed(1),...s};rows.push(row);console.log(JSON.stringify(row));}
 await sample('start');const t0=await A(()=>time);let next=EVERY;const W0=Date.now();
 while(true){
@@ -57,6 +59,7 @@ if(E.OUT)fs.writeFileSync(E.OUT,JSON.stringify({rows,errs,ins},null,1));
 const warm=rows.filter(r=>r.t>=120);
 const cMax=Math.max(...warm.map(r=>r.canvasMB));const last0=()=>rows[rows.length-1];
 ok(`mobile: live canvas pixels stay within ${CANVAS_MB}MB after warm-up (peak)`,cMax<=CANVAS_MB,{peak:cMax,series:warm.map(r=>r.canvasMB)});
+{const L=rows[rows.length-1];ok('mobile: R1000 half-resolution copies (counted apart from the canvas total) stay within their own cap',L.halfBudgetMB>0&&L.halfBudgetMB<=48&&L.halfPeakMB<=L.halfBudgetMB+8&&rows.every(r=>r.halfMB===null||r.halfMB<=r.halfBudgetMB+8),{budget:L.halfBudgetMB,peak:L.halfPeakMB,series:rows.map(r=>r.halfMB),liveSeries:rows.map(r=>r.halfLiveMB)});}
 const aMax=Math.max(...rows.map(r=>r.audio.MB));
 ok('audio really decodes in this run (unlocked, ≥ 60 sounds played)',last0().audio.unlocked===true&&last0().audio.played>=60,last0().audio);
 ok(`mobile: decoded sound cache stays within ${AUDIO_MB}MB (peak over the run)`,aMax<=AUDIO_MB,{peak:aMax,series:rows.map(r=>r.audio.MB)});
