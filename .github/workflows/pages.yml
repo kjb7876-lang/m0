@@ -534,6 +534,8 @@ jobs:
         run: node r96/qa/r974/move-dir-cpu-check.cjs
       - name: R1001 regular-mob up/down walk sheets (Dots CX-0082MV, joined to the R974 table; only mobs whose in-game art matches) CPU check
         run: node r96/qa/r1001/mob-move-cpu-check.cjs
+      - name: R1018 regular-mob up/down walk sheets, batch 2 (Dots CX-0082MV add1, joined to the R974 table; own side walk kept) CPU check
+        run: node r96/qa/r1018/mob-move-cpu-check.cjs
       - name: R996 bulmyeongwi fog summon still fires in the boss phase after every field mob is gone CPU check
         run: node r96/qa/r996/r996-cpu-check.cjs
       - name: R1008 cinema mode finishes (hero stands up instead of the sanctuary trip, ending windows move on 20 s after the subtitles, normal records unchanged) CPU check
