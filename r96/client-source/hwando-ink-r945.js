@@ -10,6 +10,7 @@
 //   ③ 「삼협묵희(三俠墨戲)」 3%, 대기 20초 : 7칸 안 적 일곱의 발밑에 수묵 난초가 하나씩 피어 흔들리고 → 먹 그림자 셋(세 의협)이 나타나
 //      저마다 흑백 검으로 무리를 한 획씩 가로지른 뒤(Dots HI-07 붓 획) → 1.6초에 난초가 한꺼번에 베어진다(Dots HI-05 난초 흑백검 베기, 흰 검흔 칸 = 피해):
 //      표식 적 ×2.2, 사거리 안 나머지 적 ×0.6. 영웅은 옮기지 않는다. (사용자 11-12 14:13Z: 부적·매화 낙관 대신 Dots 난초 흑백검 베기에 맞게)
+//      시전 순간 화면 위쪽에 한지 띠 컷인 — 도사·매화 의적·삿갓 두령 세 사람 수묵 상반신(Dots CX-0086HI HI-09)이 차례로 스쳐 지나간다(조종 영웅만, 1.2초).
 //  판정은 엔진 hitEnemy(난이도·노출·보스 규칙 그대로)·blocked·clearLine. 협동(R62 mode≠off)에서는 발동하지 않는다.
 //  생존 배치 영웅(R720, player.r720Ally 몸): 대기 시간·분신·합동기 상태를 몸마다 따로 둔다 — 배치된 환도가 부른 분신은 그 환도 곁 적에게 서고, 조종 영웅 상태와 섞이지 않는다.
 //  코드 그림(붓 자국·먹 번짐·구름)은 처음 한 번 오프스크린 캔버스에 그려 둔 고정 그림(기록기 정적 원본)이며 Dots 시트가 오기 전 임시다. 삼협묵희는 Dots 시트 둘을 쓴다.
@@ -17,7 +18,7 @@
 //  끄기: localStorage['storyworld.r945.hwandoInk']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_HWANDO_INK_R945__)return;
-const REV='R945-hwando-ink-3',KEY='storyworld.r945.hwandoInk';
+const REV='R945-hwando-ink-4',KEY='storyworld.r945.hwandoInk';
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const CFG=Object.freeze({
  moon:Object.freeze({chance:.18,icd:1.2,mult:.9,range:7,radius:.7,speed:13,max:4}),
@@ -105,7 +106,7 @@ function castTrio(s,p){const Q=CFG.trio,near=foes().filter(e=>e.hp>0&&fin(e.x)&&
  s.trio={t0:t,room,ox:p.x,oy:p.y,cx,cy,marks:near,pw:power(),struck:false,done:false,id:'t'+(++serial),flip:(Math.random()*128)|0,ph:[]};
  s.phantoms.length=0;for(let i=0;i<3;i++){const a=-Math.PI/2+i*Math.PI*2/3,R=2.4;let x=cx+Math.cos(a)*R,y=cy+Math.sin(a)*R;if(!open(x,y,.2)){x=cx+Math.cos(a)*.8;y=cy+Math.sin(a)*.8;}
   s.phantoms.push({i,x,y,t0:t+.75+i*.2,end:t+Q.strikeAt+.35});s.trio.ph.push({x,y});}
- say('삼협묵희',p.x,p.y-.5);sfx('ego');arm();}
+ say('삼협묵희',p.x,p.y-.5);sfx('ego');if(!p.r720Ally)cutin();arm();}
 function stepTrio(s){const R=s.trio;if(!R)return;const t=T(),Q=CFG.trio;if(R.room!==room||!isHw(bodyOf(s))){s.trio=null;s.phantoms.length=0;return;}
  if(!R.struck&&t>=R.t0+Q.strikeAt){R.struck=true;const set=new Set(R.marks),o={x:R.ox,y:R.oy};
   for(const e of R.marks)if(e.hp>0)strike(s,e,Q.mult,R.pw,'trio',R.id);
@@ -133,7 +134,31 @@ function blotTex(white){const C=white?WHITERGB:INKRGB;return make(white?'blotw':
 function cloudTex(){return make('cloud',256,128,(g,w,h,r)=>{for(let i=0;i<16;i++){const x=w*(.15+r()*.7),y=h*(.35+r()*.4),R=22+r()*34,gr=g.createRadialGradient(x,y,2,x,y,R),v=205+Math.floor(r()*45);
    gr.addColorStop(0,`rgba(${v},${v},${v-6},.36)`);gr.addColorStop(1,`rgba(${v},${v},${v-6},0)`);g.fillStyle=gr;g.beginPath();g.arc(x,y,R,0,7);g.fill();}});}
 // 주홍 매화 낙관(다섯 꽃잎 + 먹 꽃술)
-function warm(){try{strokeTex('ink',INKRGB);strokeTex('white',WHITERGB);blotTex();blotTex(true);cloudTex();if(typeof ensureImages==='function')Promise.resolve(ensureImages([BLADE.path,ORCHID.path,SWEEP.path])).catch(()=>{});}catch(e){fail(e);}}
+// ---- 합동기 컷인(Dots CX-0086HI HI-09: 도사·매화 의적·삿갓 두령 수묵 상반신 3장) --------------------------------
+// 삼협묵희가 나갈 때 화면 위쪽 1/3 에 한지 띠를 깔고 세 사람이 오른쪽에서 차례로 스치듯 들어와 1.2초 안에 사라진다.
+// 게임 캔버스(3D 기록기) 밖 DOM 이라 렌더러 필터·몸 가림(R350)과 얽히지 않는다. 조종 영웅이 쓸 때만(R720 배치 몸은 player 를 바꿔 끼워 부르므로 r720Ally 로 가름), 대화창·컷신 중엔 안 띄움.
+const CUTIN=Object.freeze({paths:['assets/r945/hwando-cutin-dosa.webp','assets/r945/hwando-cutin-plum.webp','assets/r945/hwando-cutin-gat.webp'],ms:1250});
+const cutStats={shown:0,skipped:0};let cutEl=null,cutTimer=0;
+function cutBuild(){if(cutEl)return cutEl;if(typeof document==='undefined'||!document||typeof document.createElement!=='function'||!document.body)return null;
+ const st=document.createElement('style');st.id='r945CutinStyle';st.textContent=[
+  '#r945Cutin{position:fixed;left:0;right:0;top:13vh;height:min(30vh,250px,31vw);pointer-events:none;z-index:45;display:flex;justify-content:center;align-items:flex-end;opacity:0;visibility:hidden;contain:layout paint}',
+  '#r945Cutin::before{content:"";position:absolute;left:-6%;right:-6%;top:14%;bottom:3%;background:linear-gradient(90deg,rgba(242,238,226,0) 0%,rgba(242,238,226,.80) 20%,rgba(246,242,232,.86) 50%,rgba(242,238,226,.80) 80%,rgba(242,238,226,0) 100%);transform:skewY(-2.5deg);-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 24%,#000 80%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0%,#000 24%,#000 80%,transparent 100%)}',
+  '#r945Cutin img{position:relative;height:100%;width:auto;margin:0 -2.2%;opacity:0;transform:translateX(18vw)}',
+  '#r945Cutin.on{visibility:visible;animation:r945cBand 1.15s linear forwards}',
+  '#r945Cutin.on img{animation:r945cIn 1.05s cubic-bezier(.2,.8,.2,1) forwards}',
+  '#r945Cutin.on img:nth-of-type(2){animation-delay:.07s}#r945Cutin.on img:nth-of-type(3){animation-delay:.14s}',
+  '@keyframes r945cBand{0%{opacity:0}10%{opacity:1}70%{opacity:1}96%{opacity:0}100%{opacity:0}}',
+  '@keyframes r945cIn{0%{opacity:0;transform:translateX(18vw)}22%{opacity:1;transform:translateX(0)}74%{opacity:1;transform:translateX(-1.5vw)}100%{opacity:0;transform:translateX(-6vw)}}',
+  '@keyframes r945cFade{0%{opacity:0}20%{opacity:1}74%{opacity:1}100%{opacity:0}}',
+  '@media (prefers-reduced-motion:reduce){#r945Cutin.on img{animation-name:r945cFade}}'].join('\n');
+ const el=document.createElement('div');el.id='r945Cutin';el.setAttribute('aria-hidden','true');
+ for(const p of CUTIN.paths){const im=document.createElement('img');im.alt='';im.decoding='async';im.src=p;el.appendChild(im);}
+ document.head?.appendChild(st);document.body.appendChild(el);cutEl=el;return el;}
+function cutin(){try{if((typeof modal!=='undefined'&&modal)||(typeof storyScene!=='undefined'&&storyScene)){cutStats.skipped++;return false;}
+  const el=cutBuild();if(!el){cutStats.skipped++;return false;}
+  el.classList.remove('on');void el.offsetWidth;el.classList.add('on');clearTimeout(cutTimer);cutTimer=setTimeout(()=>{try{el.classList.remove('on');}catch(_){}},CUTIN.ms);
+  cutStats.shown++;return true;}catch(e){fail(e);cutStats.skipped++;return false;}}
+function warm(){try{strokeTex('ink',INKRGB);strokeTex('white',WHITERGB);blotTex();blotTex(true);cloudTex();if(typeof ensureImages==='function')Promise.resolve(ensureImages([BLADE.path,ORCHID.path,SWEEP.path])).catch(()=>{});cutBuild();}catch(e){fail(e);}}
 const asked=new Map();
 function sheetImg(path){try{const got=typeof readyImage==='function'?readyImage(path):null;if(got?.image)return got.image;const t=Date.now();if(t-(asked.get(path)||0)>1500){asked.set(path,t);if(typeof ensureImages==='function')Promise.resolve(ensureImages([path])).catch(()=>{});}}catch(e){fail(e);}return null;}
 const bladeSheet=()=>sheetImg(BLADE.path);
@@ -233,7 +258,7 @@ try{
 function set(v){on=v!==false;if(!on)clearAll();try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}
 function force(kind,body){if(!CFG[kind]||kind==='maxDraws')return false;const s=st(body||P());if(!s)return false;s.force=kind;return true;}
 function inspect(body){const s=st(body||P(),false)||fresh(null),t=T(),left=k=>Math.max(0,+(s.ready[k]-t).toFixed(3));
- return {revision:REV,on,errors,lastError,stats:{...s.stats},cd:{moon:left('moon'),clones:left('clones'),trio:left('trio')},vis:vis.length,drawCalls,sheetDraws:{...sheetDraws},
+ return {revision:REV,on,errors,lastError,stats:{...s.stats},cd:{moon:left('moon'),clones:left('clones'),trio:left('trio')},vis:vis.length,drawCalls,sheetDraws:{...sheetDraws},cutin:{...cutStats},
   clones:s.clones.map(c=>({i:c.i,x:+c.x.toFixed(3),y:+c.y.toFixed(3),foe:c.foe?.id??null})),phantoms:s.phantoms.length,
   blades:s.blades.map(b=>({id:b.id,x:+b.x.toFixed(2),y:+b.y.toFixed(2),travel:+b.travel.toFixed(2),hit:b.hit.size})),
   trio:s.trio?{age:+(t-s.trio.t0).toFixed(3),marks:s.trio.marks.map(e=>e.id),struck:s.trio.struck,done:s.trio.done}:null};}
