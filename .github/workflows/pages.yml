@@ -821,6 +821,8 @@ jobs:
         run: node r96/qa/r860/r860-cpu-check.cjs
       - name: R911 projectile minimum size (half hero height, visual only) CPU check
         run: node r96/qa/r911/r911-cpu-check.cjs
+      - name: R912 projectile frame sheets (Dots CX-0084PJ fly8/hit6, visual only) CPU check
+        run: node r96/qa/r912/r912-cpu-check.cjs
       - name: R952 hunter chance passive 'hunt squad' (slayer summon / +slayer shades / +hunter clone formation, 7s, one tier per proc) CPU check
         run: node r96/qa/r952/r952-cpu-check.cjs
       - name: R949 Seoha passive overlapped time (summoned heroes, friendly Arbelia boss summon, afterimage time collapse; summons never join room.enemies) CPU check
