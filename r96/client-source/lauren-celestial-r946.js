@@ -11,12 +11,14 @@
  *     조형물의 자리·충돌은 바꾸지 않는다: 날아가는 동안 원본만 숨기고(visible) 폭발 0.5초 뒤 원래 값으로 되돌린다(지역 이동·장면·끄기 때도 즉시 되돌림).
  * 보스·중간 보스는 밀리거나 끌리지 않는다(맞기만 함). 밀기·끌기는 엔진 moveActor 로 해서 벽을 넘지 않는다.
  * 상태는 영웅 몸(player 객체)마다 따로 둔다: 생존 모드 배치 영웅(R720)이 player 를 몸으로 바꿔 끼워 공격할 때도 그 몸의 공격력·자리·대기를 쓴다.
- * 그림은 코드로 그린 임시 연출(최종은 Dots 프레임 시트 CX-0087LC 요청 대상, 오면 교체). 소리는 기존 R546 라우렌 공격·고유기 소리를 다시 씀.
+ * 그림: R946-2(2026-11-13) Dots CX-0087LC 추가1 실버·보라판 시트를 씀(assets/r946, index.json) — 은빛 거성 LC-01, 심연 왜성 LC-02 구 + LC-03 바닥 원반,
+ *  쌍성 소멸 충전 LC-04 + 소멸탄 LC-05, 유성 궤도 조형물 고리 LC-07. 시트가 아직 안 읽혔거나 크기가 다르면 예전 코드 그림으로 그린다.
+ *  Dots 가 보류한 LC-05b 꼬리 띠·LC-06 항성 반발·LC-08 중력 폭발과 결과가 없는 LC-09 돌 파편은 코드 그림을 그대로 쓴다. 소리는 기존 R546 라우렌 공격·고유기 소리를 다시 씀.
  * 끄기: localStorage['storyworld.r946.celestial']='{"on":false}'
  */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_LAUREN_CELESTIAL_R946__)return;
-const REV='R946-celestial-1',KEY='storyworld.r946.celestial',HERO='lauren';
+const REV='R946-celestial-2-sheets',KEY='storyworld.r946.celestial',HERO='lauren';
 const CHANCE=.10,CROWD_BONUS=.04,CROWD_N=4,CROWD_R=2,CHANCE_MAX=.35,ROLL_GAP=.35,ICD=5,COMBO_WINDOW=12;
 const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
 const REP_R=2.8,REP_K=1.2,REP_PUSH=2.0,REP_PUSH_T=.25,REP_STUN=.45,REP_LIFE=.7;
@@ -27,7 +29,7 @@ const MET_N=3,MET_PICK_R=6,MET_RISE=.4,MET_ORBIT=.6,MET_STAGGER=.08,MET_V=16,MET
 const WEIGHTS=[['repulse',.28],['red',.24],['blue',.24],['meteor',.24]];
 const NO_PROP=/npc|door|gate|altar|chest|portal|exit|quest|note|memory|fragment|crate|objective|shrine|seal|stairs|lever|switch|sign/i,
  FLAT_PROP=/root|decal|crack|stain|puddle|blood_pool|carpet|rug|floor|grass|moss_patch|shadow|rune|circle|hexagram|mark/i; // 바닥에 붙은 납작한 그림은 던지지 않는다
-const stats={rolls:0,procTotal:0,procs:{repulse:0,red:0,blue:0,violet:0,meteor:0},hits:0,hiddenProps:0,restoredProps:0,debris:0,draws:0,errors:0,lastError:null,repulseCentres:[]};
+const stats={rolls:0,procTotal:0,procs:{repulse:0,red:0,blue:0,violet:0,meteor:0},hits:0,hiddenProps:0,restoredProps:0,debris:0,draws:0,sheetDraws:0,sheetAsk:0,errors:0,lastError:null,repulseCentres:[]};
 const owners=new WeakMap();let ownerCount=0;
 let acts=[],pushers=[],pullers=[],booms=[],lastRoom=null,lastT=null,prefAt=-1e9,prefOn=true,inner=0,forced=null,rng=null;
 const T=()=>{try{return typeof time==='number'?time:0;}catch(_){return 0;}};
@@ -133,6 +135,7 @@ function stepAct(x,t,dt){const u=t-x.t0;
 function step(){const t=T(),rm=curRoom();if(rm!==lastRoom){if(lastRoom!==null)cancel();lastRoom=rm;}
  const dt=lastT==null||t<lastT?0:Math.min(.1,t-lastT);lastT=t;
  if(!on()||blockedNow()){cancel();return;}
+ {const o=P();if(o&&o.hero===HERO)askSheets();}
  acts=acts.filter(x=>{try{if(x.kind!=='meteor'&&x.kind!=='repulse'&&!ownerOk(x.owner)&&x.kind!=='red'){return false;}const keep=stepAct(x,t,dt);if(!keep)restoreAct(x);return keep;}catch(err){fail(err);restoreAct(x);return false;}});
  runPushers(dt);pullers=pullers.filter(p=>{if(t>p.until)return false;pull(p.c,p.r,MET_PULL_V,.4,dt);return true;});booms=booms.filter(b=>t-b.t0<.75);}
 if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);
@@ -141,6 +144,22 @@ if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.ap
 // 색(사용자 2026-11-12 13:40Z "보라 채도 연한 것·짙은 것 + 실버로 차별화"): 밀어내는 구 = 연보라+실버, 끌어당기는 구 = 짙은 보라, 융합탄 = 보라+실버 테.
 const PALE='176,160,206',SILVER='224,224,230',DEEP='86,30,150',DEEP_HOT='190,150,240',VIO='150,84,220',VIO_HOT='232,226,244',VOID='12,2,22';
 const RED=PALE,RED_HOT=SILVER,BLUE=DEEP,BLUE_HOT=DEEP_HOT;
+// ---- R946-2 Dots 시트(assets/r946/index.json 과 같음 — CPU 검사가 대조). pivot·body 는 원본 256 칸 기준, body = 그림 속 몸(구·원반·고리) 지름 ----
+const SDIR='assets/r946/',SCELL=192,SCOLS=6;
+const SHEETS={red:{n:'lauren-red',frames:24,fps:12.5,loop:true,piv:[141,137],body:145},blue:{n:'lauren-blue',frames:24,fps:12.5,loop:true,piv:[128,126],body:127},
+ disk:{n:'lauren-blue-disk',frames:24,fps:12.5,loop:true,piv:[127,134],body:192},fuse:{n:'lauren-fuse',frames:12,fps:24,loop:false,piv:[128,128],body:107,crop:[60,60,196,200]},
+ violet:{n:'lauren-violet',frames:24,fps:12.5,loop:true,piv:[144,128],body:150},aura:{n:'lauren-aura',frames:24,fps:12.5,loop:true,piv:[128,124],body:194}};
+const SPATH=k=>SDIR+SHEETS[k].n+'.webp';let sheetsOn=true,askAt=-1e9;
+// 크기가 시트 규격(6열×192)과 다르면 쓰지 않는다(엉뚱한 그림·덜 읽힌 그림 방지)
+function simg(k){try{const r=typeof readyImage==='function'?readyImage(SPATH(k)):null,im=r&&r.image;if(!im)return null;const w=im.naturalWidth||im.width||0,h=im.naturalHeight||im.height||0,rows=Math.ceil(SHEETS[k].frames/SCOLS);return w===SCOLS*SCELL&&h===rows*SCELL?im:null;}catch(_){return null;}}
+// 엔진 그림 저장소는 지역 이동 때 비워질 수 있다 → 안 읽힌 시트만 게임 시간 2초마다 다시 부탁
+function askSheets(){if(!sheetsOn)return;const t=T();if(t-askAt<2&&t>=askAt)return;const miss=Object.keys(SHEETS).filter(k=>!simg(k));if(!miss.length)return;askAt=t;try{if(typeof ensureImages==='function'){const r=ensureImages(miss.map(SPATH));if(r&&typeof r.catch==='function')r.catch(()=>{});stats.sheetAsk++;}}catch(e){fail(e);}}
+function sframe(k,age){const m=SHEETS[k];let f=Math.floor(Math.max(0,age)*m.fps+1e-6);if(m.loop)f%=m.frames;else if(f>=m.frames)f=m.frames-1;return f;}
+// d = 화면에 그릴 몸 지름(px). crop = 칸에서 그림이 있는 부분만(256 기준) — 빈 칸 상자가 영웅 몸을 덮으면 R350 가림 옅게가 그림을 지워 버린다(충전 LC-04 헤드리스 실측). o.flip 좌우 뒤집기(오른쪽을 향한 그림), o.angle 회전, o.squash 세로 배율
+function sheet(k,age,x,y,d,o={}){if(!sheetsOn)return false;const im=simg(k);if(!im)return false;const m=SHEETS[k],f=sframe(k,age),sx=(f%SCOLS)*SCELL,sy=Math.floor(f/SCOLS)*SCELL,w=d*256/m.body,h=w*(o.squash||1),c=m.crop||[0,0,256,256],K=SCELL/256;
+ ctx.save();try{ctx.globalAlpha*=Math.max(0,Math.min(1,o.alpha??1));ctx.translate(x,y);if(o.flip)ctx.scale(-1,1);if(o.angle)ctx.rotate(o.angle);ctx.drawImage(im,sx+c[0]*K,sy+c[1]*K,(c[2]-c[0])*K,(c[3]-c[1])*K,(c[0]-m.piv[0])/256*w,(c[1]-m.piv[1])/256*h,(c[2]-c[0])/256*w,(c[3]-c[1])/256*h);stats.sheetDraws++;}finally{ctx.restore();}return true;}
+// 진행 방향(화면) → 오른쪽 그림을 뒤집을지·기울일지(광원 왼쪽 위가 크게 돌지 않게 ±0.6 rad 까지)
+function heading(x){const a=project(x.x,x.y),b=project(x.x+(x.ux||1),x.y+(x.uy||0)),dx=b.x-a.x,dy=b.y-a.y;return {flip:dx<0,angle:Math.max(-.6,Math.min(.6,Math.atan2(dy,Math.abs(dx)||1e-6)))};}
 function sc(o,f){if(typeof ctx!=='undefined'&&ctx&&typeof ctx.scope==='function')ctx.scope(o,f);else f();}
 function scale(){const z=typeof zoom==='number'&&zoom>0?zoom:1,TL=typeof TILE==='number'?TILE:34;return {z,T1:TL*z*Math.SQRT2,AH:typeof actorHeight==='function'?actorHeight():66*z};}
 function glowOrb(x,y,r,core,mid,alpha){ctx.save();try{ctx.globalAlpha*=alpha;const prev=ctx.globalCompositeOperation;ctx.globalCompositeOperation='lighter';
@@ -164,18 +183,18 @@ function drawRepulse(x,t){const u=t-x.t0,v=Math.min(1,u/REP_LIFE),q=project(x.x,
   ctx.globalCompositeOperation=prev;}finally{ctx.restore();}});}
 function drawRed(x,t){const {z,AH}=scale(),q=project(x.x,x.y),lift=AH*.55,r=AH*.28,fade=x.end==null?1:Math.max(0,1-(t-x.end)/.3),id='r946:red:'+x.t0.toFixed(2);
  sc({id:id+':orb',kind:'effect',pxfSide:'hero',x:x.x,y:x.y},()=>{for(let i=0;i<x.trail.length;i++){const p=project(x.trail[i].x,x.trail[i].y),k=(i+1)/(x.trail.length+1);glowOrb(p.x,p.y-lift,r*(.35+.45*k),RED_HOT,RED,.22*k*fade);}
-  glowOrb(q.x,q.y-lift,r,RED_HOT,RED,fade);swirl(q.x,q.y-lift,r,RED_HOT,t*9+(x.seed||0),3,fade*.9);});}
+  if(!sheet('red',t-x.t0,q.x,q.y-lift,r*2,{alpha:fade,flip:heading(x).flip})){glowOrb(q.x,q.y-lift,r,RED_HOT,RED,fade);swirl(q.x,q.y-lift,r,RED_HOT,t*9+(x.seed||0),3,fade*.9);}});}
 function drawBlue(x,t){const {z,T1,AH}=scale(),q=project(x.x,x.y),u=t-x.t0,v=Math.max(0,u-BLUE_FLY),lift=AH*.6,r=AH*.26,fade=v>BLUE_T?Math.max(0,1-(v-BLUE_T)/.3):1,id='r946:blue:'+x.t0.toFixed(2);
- if(u>=BLUE_FLY)sc({id:id+':disk',kind:'effect',pxfSide:'hero',x:x.x,y:x.y,groundAligned:true},()=>{const R=BLUE_R*x.k*T1*.5*Math.min(1,v/.2);ring(q,R,BLUE,Math.max(1.5,2.5*z),fade*.75,.1);
+ if(u>=BLUE_FLY)sc({id:id+':disk',kind:'effect',pxfSide:'hero',x:x.x,y:x.y,groundAligned:true},()=>{const R=BLUE_R*x.k*T1*.5*Math.min(1,v/.2);if(sheet('disk',v,q.x,q.y,R*2,{alpha:fade*.9}))return;ring(q,R,BLUE,Math.max(1.5,2.5*z),fade*.75,.1);
   ctx.save();try{ctx.globalAlpha*=fade*.7;ctx.lineWidth=Math.max(1,1.6*z);for(let i=0;i<4;i++){const a0=-t*5+i*Math.PI/2;ctx.strokeStyle=`rgba(${BLUE_HOT},.55)`;ctx.beginPath();ctx.ellipse(q.x,q.y,R*(.3+.15*i),R*(.15+.075*i),0,a0,a0+1.4);ctx.stroke();}}finally{ctx.restore();}});
- sc({id:id+':orb',kind:'effect',pxfSide:'hero',x:x.x,y:x.y},()=>{const cy=q.y-lift;if(u>=BLUE_FLY){ctx.save();try{ctx.globalAlpha*=fade;const prev=ctx.globalCompositeOperation;ctx.globalCompositeOperation='lighter';
+ sc({id:id+':orb',kind:'effect',pxfSide:'hero',x:x.x,y:x.y},()=>{const cy=q.y-lift;if(sheet('blue',u,q.x,cy,r*2,{alpha:fade}))return;if(u>=BLUE_FLY){ctx.save();try{ctx.globalAlpha*=fade;const prev=ctx.globalCompositeOperation;ctx.globalCompositeOperation='lighter';
    for(let i=0;i<12;i++){const ph=((t*1.8+i*.173)%1),a=i*2.399,d=(1-ph)*r*4;const sx=q.x+Math.cos(a)*d,sy=cy+Math.sin(a)*d*.6;ctx.strokeStyle=`rgba(${BLUE_HOT},${.1+.5*ph})`;ctx.lineWidth=Math.max(1,(1+ph*2)*z);ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(sx+(q.x-sx)*.25,sy+(cy-sy)*.25);ctx.stroke();}
    ctx.globalCompositeOperation=prev;}finally{ctx.restore();}}
   glowOrb(q.x,cy,r,BLUE_HOT,BLUE,fade);swirl(q.x,cy,r,BLUE_HOT,-t*8+(x.seed||0),3,fade*.9);});}
 function drawViolet(x,t){const {z,AH}=scale(),u=t-x.t0,lift=AH*.55,id='r946:violet:'+x.t0.toFixed(2);
  if(u<VIO_CHARGE){const f=u/VIO_CHARGE,e=f*f,px=-x.uy,py=x.ux,o=x.owner&&ownerOk(x.owner)?x.owner:x,cx=o.x+x.ux*.9,cy=o.y+x.uy*.9,sep=1.3*(1-e),r=AH*.2;
   const a=project(cx+px*sep,cy+py*sep),b=project(cx-px*sep,cy-py*sep),m=project(cx,cy);
-  sc({id:id+':charge',kind:'effect',pxfSide:'hero',x:cx,y:cy},()=>{glowOrb(a.x,a.y-lift,r,RED_HOT,RED,1);glowOrb(b.x,b.y-lift,r,BLUE_HOT,BLUE,1);if(f>.6)glowOrb(m.x,m.y-lift,AH*.32*(f-.6)/.4,VIO_HOT,VIO,(f-.6)/.4);
+  sc({id:id+':charge',kind:'effect',pxfSide:'hero',x:cx,y:cy},()=>{{const mf=project(cx+x.ux*.6,cy+x.uy*.6);if(sheet('fuse',u,mf.x,mf.y-lift,AH*.8))return;}glowOrb(a.x,a.y-lift,r,RED_HOT,RED,1);glowOrb(b.x,b.y-lift,r,BLUE_HOT,BLUE,1);if(f>.6)glowOrb(m.x,m.y-lift,AH*.32*(f-.6)/.4,VIO_HOT,VIO,(f-.6)/.4);
    ctx.save();try{ctx.globalCompositeOperation='lighter';ctx.strokeStyle=`rgba(${VIO_HOT},${.3+.5*f})`;ctx.lineWidth=Math.max(1,2*z);ctx.beginPath();ctx.moveTo(a.x,a.y-lift);ctx.lineTo(b.x,b.y-lift);ctx.stroke();}finally{ctx.restore();}});return;}
  const s=project(x.sx,x.sy),q=project(x.x,x.y),r=AH*.32,fade=x.end==null?1:Math.max(0,1-(t-x.end)/VIO_TRAIL);
  sc({id:id+':scar',kind:'effect',pxfSide:'hero',x:(x.sx+x.x)/2,y:(x.sy+x.y)/2,groundAligned:true},()=>{ctx.save();try{ctx.globalAlpha*=fade*.8;ctx.strokeStyle=`rgba(${VOID},.7)`;ctx.lineWidth=Math.max(2,r*.35);ctx.beginPath();ctx.moveTo(s.x,s.y);ctx.lineTo(q.x,q.y);ctx.stroke();
@@ -183,7 +202,7 @@ function drawViolet(x,t){const {z,AH}=scale(),u=t-x.t0,lift=AH*.55,id='r946:viol
  // 혜성 꼬리: 지나온 길을 따라 작아지고 옅어지는 보라 구 열두 개(직사각형 띠 대신)
  sc({id:id+':trail',kind:'effect',pxfSide:'hero',x:(x.sx+x.x)/2,y:(x.sy+x.y)/2},()=>{const L=Math.hypot(q.x-s.x,q.y-s.y),n=12;for(let i=n;i>=1;i--){const f=i/n,d=Math.min(L,r*7)*f,px=q.x+(s.x-q.x)/(L||1)*d,py=q.y+(s.y-q.y)/(L||1)*d;
    ctx.save();try{ctx.globalAlpha*=fade*(1-f)*.75;const prev=ctx.globalCompositeOperation;ctx.globalCompositeOperation='lighter';ctx.fillStyle=`rgba(${i%2?VIO:VIO_HOT},.8)`;ctx.beginPath();ctx.arc(px,py-lift,r*(1-.75*f),0,Math.PI*2);ctx.fill();ctx.globalCompositeOperation=prev;}finally{ctx.restore();}}});
- if(x.end==null||t-x.end<.15)sc({id:id+':orb',kind:'effect',pxfSide:'hero',x:x.x,y:x.y},()=>{glowOrb(q.x,q.y-lift,r,VIO_HOT,VIO,1);ctx.save();try{ctx.fillStyle=`rgba(${VOID},.9)`;ctx.beginPath();ctx.arc(q.x,q.y-lift,r*.42,0,Math.PI*2);ctx.fill();}finally{ctx.restore();}swirl(q.x,q.y-lift,r,VIO_HOT,t*11,4,1);});}
+ if(x.end==null||t-x.end<.15)sc({id:id+':orb',kind:'effect',pxfSide:'hero',x:x.x,y:x.y},()=>{if(sheet('violet',t-x.t0-VIO_CHARGE,q.x,q.y-lift,r*2,heading(x)))return;glowOrb(q.x,q.y-lift,r,VIO_HOT,VIO,1);ctx.save();try{ctx.fillStyle=`rgba(${VOID},.9)`;ctx.beginPath();ctx.arc(q.x,q.y-lift,r*.42,0,Math.PI*2);ctx.fill();}finally{ctx.restore();}swirl(q.x,q.y-lift,r,VIO_HOT,t*11,4,1);});}
 function rockShape(cx,cy,s,shape){const pts=[[-.5,.1],[-.35,-.38],[.05,-.5],[.42,-.3],[.5,.12],[.2,.42],[-.28,.4]];ctx.beginPath();pts.forEach(([px,py],i)=>{const j=1+((shape*7+i*3)%5-2)*.06,X=cx+px*s*j,Y=cy+py*s*.8*j;if(i)ctx.lineTo(X,Y);else ctx.moveTo(X,Y);});ctx.closePath();}
 // 돌 파편: 윗면 밝게·왼면 중간·오른면 어둡게(광원 왼쪽 위, CX-0056) + 보라 균열
 function rockFaces(cx,cy,s,shape,z){rockShape(cx,cy,s,shape);ctx.fillStyle='rgba(58,52,70,.98)';ctx.fill();
@@ -197,8 +216,8 @@ function drawMeteor(x,t){const {z,AH}=scale(),o=x.owner&&ownerOk(x.owner)?x.owne
    if(r.state!=='fly'){const prev=ctx.globalCompositeOperation;ctx.globalCompositeOperation='lighter';ctx.strokeStyle=`rgba(${VIO},.45)`;ctx.lineWidth=Math.max(1,1.5*z);ctx.beginPath();ctx.moveTo(oq.x,oq.y-AH*.6);ctx.quadraticCurveTo((oq.x+q.x)/2,cy-AH*.4,q.x,cy-h*.5);ctx.stroke();
     if(r.state==='orbit'&&u>MET_RISE+MET_ORBIT-.18&&r.target){const tq=project(r.target.x,r.target.y);ctx.setLineDash&&ctx.setLineDash([6*z,5*z]);ctx.strokeStyle=`rgba(${VIO_HOT},.6)`;ctx.beginPath();ctx.moveTo(q.x,cy-h*.5);ctx.lineTo(tq.x,tq.y-AH*.3);ctx.stroke();ctx.setLineDash&&ctx.setLineDash([]);}
     ctx.globalCompositeOperation=prev;}
-   glowOrb(q.x,cy-h*.5,Math.max(AH*.26,h*.42),VIO_HOT,VIO,r.state==='fly'?.55:.35);
    const wob=r.state==='fly'?0:Math.sin(t*22+i)*1.5*z;
+   if(!sheet('aura',u+i*.3,q.x+wob,cy-h*.5,Math.max(AH*1.05,h*1.35),{alpha:r.state==='fly'?.9:.8,squash:.9}))glowOrb(q.x,cy-h*.5,Math.max(AH*.26,h*.42),VIO_HOT,VIO,r.state==='fly'?.55:.35);
    if(r.path&&typeof readyImage==='function'){const row=readyImage(r.path);if(row&&row.image){const b=row.crop||{w:row.image.naturalWidth||1,h:row.image.naturalHeight||1};
      if(typeof sprite==='function')sprite(r.path,q.x+wob,cy,h,{alpha:1});else{const w=h*b.w/b.h;if(b.x!=null)ctx.drawImage(row.image,b.x,b.y,b.w,b.h,q.x-w/2+wob,cy-h,w,h);else ctx.drawImage(row.image,q.x-w/2+wob,cy-h,w,h);}stats.draws++;return;}}
    const s=Math.max(AH*.62,h);rockFaces(q.x+wob,cy-s*.4,s,r.shape||i,z);stats.draws++;
@@ -222,6 +241,7 @@ window.__STORYWORLD_LAUREN_CELESTIAL_R946__=Object.freeze({revision:REV,set,on:(
  names:Object.freeze({passive:'천체 공명',repulse:'항성 반발',red:'은빛 거성',blue:'심연 왜성',violet:'쌍성 소멸',meteor:'유성 궤도'}),
  qaForce:k=>{forced=KINDS.includes(k)?k:null;return forced;},qaRandom:f=>{rng=typeof f==='function'?f:null;return !!rng;},
  qaProps:()=>{const rm=curRoom();return (rm&&Array.isArray(rm.props)?rm.props:[]).filter(eligible).map(a=>({id:a.id,x:a.x,y:a.y,height:a.height,path:a.path}));},
+ qaSheets:v=>{sheetsOn=v!==false;return sheetsOn;},sheets:()=>Object.fromEntries(Object.keys(SHEETS).map(k=>[k,{path:SPATH(k),ready:!!simg(k)}])),
  qaReset:()=>{const o=P();if(o){const s=stateOf(o);s.readyAt=-1e9;s.lastRoll=-1e9;}return true;},
  inspect:()=>{const o=P(),s=o?owners.get(o):null;return {revision:REV,on:prefOn,owners:ownerCount,comboReady:!!(s&&comboOf(s,T())),
   acts:acts.map(x=>({kind:x.kind,x:x.x,y:x.y,t0:x.t0,rocks:x.rocks?x.rocks.map(r=>({propId:r.propId,state:r.state})):undefined})),

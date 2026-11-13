@@ -215,4 +215,21 @@ const units=E=>E.api.inspect().units;
  E.run(7.2);ok(!E.api.inspect(body).active&&myProps(E).length===0,'배치 헌터의 분대도 7초 뒤 해산');}
 {const E=engine({enemies:[{id:'a',x:24,y:20}],noR720:true});E.api.force('call');E.ctx.basicAttack();E.run(1);ok(E.api.inspect().active&&E.api.inspect().errors===0,'R720 이 없어도 동작');}
 
+// R952-2 (2026-11-13): Dots CX-0096HS 시트 — HS-02 혈맹 해산(r2), HS-03 혈영 강습 베기(r1)
+{const fs=require('fs'),path=require('path'),R=path.resolve(__dirname,'../..');const E=engine({enemies:[{id:'a',x:24,y:20}]}),A=E.api,SH=A.config.sheets;
+ ok(SH&&SH.leave&&SH.slash,'시트 설정이 있음(leave·slash)');
+ ok(SH.leave.path==='assets/r952/hs02-blood-pact-leave.webp'&&SH.leave.cell[0]===256&&SH.leave.cell[1]===256&&SH.leave.cols===6&&SH.leave.frames===12,'HS-02: 256×256 칸 6열 12장');
+ ok(SH.slash.path==='assets/r952/hs03-shade-slash.webp'&&SH.slash.cell[0]===384&&SH.slash.cell[1]===256&&SH.slash.cols===6&&SH.slash.frames===12,'HS-03: 384×256 칸 6열 12장');
+ for(const k of ['leave','slash']){const f=path.join(R,'runtime-text',SH[k].path);ok(fs.existsSync(f)&&fs.statSync(f).size>20000,k+' 시트 파일이 런타임에 있음');
+  const m=JSON.parse(fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8')),sp=JSON.parse(fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8'));
+  ok(m.files.some(r=>r.path===SH[k].path)&&sp.textPaths.includes(SH[k].path),k+' 시트가 런타임 목록에 있음');}
+ const sf=A.pure.slashFrame,lf=A.pure.leaveFrame,C=A.config;
+ ok(sf(-.01)===-1&&sf(0)===0&&sf(1)===-1&&sf(.999)===11,'베기 칸: 분신 수명 동안 0→11, 밖이면 없음');
+ ok(sf(.1/C.shade.life)===SH.slash.hit,'베기 칸: 분신이 베는 순간(0.1초)에 가장 진한 칸(5번째)');
+ let mono=true,last=-1;for(let i=0;i<=100;i++){const f=sf(i/101);if(f<last)mono=false;last=f;}ok(mono,'베기 칸은 뒤로 가지 않음');
+ ok(lf(SH.leave.dur+.01)===-1&&lf(SH.leave.dur)===0&&lf(1e-6)===11&&lf(0)===-1&&lf(-1)===-1,'해산 칸: 해산 전 '+SH.leave.dur+'초 동안 0→11, 끝나면 없음(마지막 칸은 빈칸)');
+ ok(SH.leave.dur>=C.fade&&SH.leave.dur<=1,'해산 덧그림은 몸이 흐려지는 동안을 덮는다');
+ const src=fs.readFileSync(path.join(R,'client-source','hunter-squad-r952.js'),'utf8');ok(/CX-0096HS/.test(src)&&/hs02-blood-pact-leave/.test(src)&&/hs03-shade-slash/.test(src),'모듈이 두 시트를 씀');
+ A.force('shade');E.ctx.basicAttack(true);E.run(7.2);ok(A.inspect().errors===0&&!A.inspect().active,'시트를 넣은 뒤에도 7초 해산·오류 0');}
+
 console.log('\nR952 CPU 검사 '+n+'개 통과');
