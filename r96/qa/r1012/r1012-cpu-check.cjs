@@ -105,6 +105,15 @@ function drive(memoOn,{rep=1,shuffle=0}={}){const E=engine();if(hasMemo)E.API.me
   const ref=engine();ref.g.player.hero='neon';ref.API.memo(false);const wh=ref.call(ref.mk('hero-fx-r102.js',SHAPES.draw),mkPals()[1]).got,wm=ref.call(ref.mk('mob-motion-r286.js',SHAPES.draw),mkPals()[1]).got;
   let bad=0;for(let i=0;i<200;i++)if(E.call(go,F).got!==wh)bad++;let st=E.API.inspect().stats;ok('shadow, one file: fast path checked against the stack path, 0 wrong',bad===0&&st.spFast>100&&!st.fastWrong,st);
   for(let i=0;i<10;i++)if(E.call(mob,F).got!==wm)bad++;st=E.API.inspect().stats;ok('shadow, other file takes over the key: draws stay right (shadow draws the stack result) and the mismatches are counted',bad===0&&st.fastWrong>=1&&st.wrong&&Object.keys(st.wrong).length===1,st);}}
+// 끄는 스위치: localStorage['storyworld.r302.memo']='0' 이면 처음부터 예전 길(호출마다 스택), memo(false) 는 그 값을 저장하고 memo(true) 는 지운다
+{const mk=()=>{const g={console,Math,JSON,Object,Array,Map,Set,WeakMap,WeakSet,String,Number,Error,RegExp,Promise,performance:{now:()=>0}};g.window=g;g.globalThis=g;g.localStorage={s:{'storyworld.r302.memo':'0'},getItem(k){return this.s[k]??null;},setItem(k,v){this.s[k]=String(v);},removeItem(k){delete this.s[k];}};g.document={createElement:()=>({getContext:()=>null})};g.player={hero:'hwando'};g.ctx=null;g.drawEffect=function(e,f){return f();};
+  const pal=(a,b)=>{if(a&&a.a&&a.b)return a;return{a:a.slice(),b:(b||a).slice()};};g.__STORYWORLD_FX_SPRITES_R106__=Object.freeze({pal,draw:()=>true,along:()=>true,poly:()=>true,warm:()=>{},ready:()=>true,on:()=>true,parseColour:()=>null});g.__STORYWORLD_PIXELFX_R163__=Object.freeze({play:()=>({}),frameAt:()=>true});
+  vm.createContext(g);vm.runInContext(SRC,g,{filename:'http://h/m0/hero-palette-r302.js'});return g;};
+ const g=mk(),API=g.__STORYWORLD_HERO_PALETTE_R302__;ok('switch API present',typeof API.memo==='function');
+ if(typeof API.memo==='function'){ok("localStorage 'storyworld.r302.memo'='0' starts with the memo off",API.memo()===false);
+  const go=vm.runInContext(`(function(){return F=>${S}.draw('glow',F,0,0);})()`,g,{filename:'http://h/m0/hero-fx-r102.js'}),F={a:[1,2,3],b:[4,5,6]};let c=0;for(let i=0;i<200;i++){caps=0;Error.prepareStackTrace=COUNT;try{go(F);}finally{Error.prepareStackTrace=undefined;}c+=caps;}
+  ok('memo off: one stack capture per draw (old path)',c===200&&!API.inspect().stats.spFast,{c});
+  API.memo(true);ok('memo(true) clears the stored switch',g.localStorage.getItem('storyworld.r302.memo')===null&&API.memo()===true);API.memo(false);ok('memo(false) stores the switch',g.localStorage.getItem('storyworld.r302.memo')==='0');}}
 // ⑧ 연결
 ok('runtime copy matches client-source',fs.readFileSync(path.join(R,'runtime-text/hero-palette-r302.js'),'utf8')===fs.readFileSync(path.join(R,'client-source/hero-palette-r302.js'),'utf8'));
 ok('CI step',fs.readFileSync(path.join(ROOT,'.github/workflows/pages.yml'),'utf8').includes('node r96/qa/r1012/r1012-cpu-check.cjs'));

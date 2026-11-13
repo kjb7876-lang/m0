@@ -92,9 +92,11 @@ function remapF(F,name){const h=hero();if(!on||!h||!F)return F;stats.sp++;
 //  한 번이라도 파일·판정이 어긋난 열쇠는 영영 예전 길이다. 파일을 못 찾은 호출도 영영 예전 길.
 //  play-r111 은 같은 파일 안에서 threadSlash 만 실 규칙인데, threadSlash 는 엔진 효과 threadSlashR63 을 그릴 때만 불려 열쇠(효과 종류)가 갈린다.
 //  (광장 환도 777 은 호출의 58%가 play-r111 이라 이 파일을 빼면 효과가 1/3 로 준다.) 같은 열쇠에 두 판정이 섞이면 위 규칙대로 예전 길.
-//  판정 표(decided)·통계(sp·spMapped)·색 규칙은 그대로. 끄기: __STORYWORLD_HERO_PALETTE_R302__.memo(false)
+//  판정 표(decided)·통계(sp·spMapped)·색 규칙은 그대로.
+//  끄기(예전 길로): localStorage['storyworld.r302.memo']='0' 뒤 새로 고침, 또는 __STORYWORLD_HERO_PALETTE_R302__.memo(false) (끄면 그 값을 저장, 켜면 지움)
+let memoOn=true;try{if(localStorage.getItem('storyworld.r302.memo')==='0')memoOn=false;}catch(_){}
 const MISS={},memo=new Map(),MEMO_OK=32,MEMO_EARLY=256,MEMO_MAX=3000;let memoRnd=0x9e3779b9;
-const memoCheck=m=>{memoRnd=(Math.imul(memoRnd,1103515245)+12345)>>>0;return (memoRnd>>>16)%(++m.n<=MEMO_EARLY?4:16)===0;};let seenFile=null,seenKind=null,memoOn=true,shadow=false,shadowQ=MISS,memoKey=null,fxType='';
+const memoCheck=m=>{memoRnd=(Math.imul(memoRnd,1103515245)+12345)>>>0;return (memoRnd>>>16)%(++m.n<=MEMO_EARLY?4:16)===0;};let seenFile=null,seenKind=null,shadow=false,shadowQ=MISS,memoKey=null,fxType='';
 const samePal=(x,y)=>x===y||(!!x&&!!y&&!!x.a&&!!y.a&&!!x.b&&!!y.b&&x.a.join()===y.a.join()&&x.b.join()===y.b.join());
 function memoHit(F,h,name){memoKey=null;seenFile=null;seenKind=null;shadowQ=MISS;if(!memoOn)return MISS;
  try{const P=SP0.pal(F);memoKey=fxType+'|'+(name||'')+'|'+P.a.join()+'|'+P.b.join()+'|'+h;}catch(_){return MISS;}
@@ -178,7 +180,7 @@ try{
 }catch(e){fail(e);}
 try{wrapSP();wrapPX();}catch(e){fail(e);}
 function set(v){on=v!==false;decided.clear();memo.clear();try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}
-window.__STORYWORLD_HERO_PALETTE_R302__=Object.freeze({revision:REV,palette:PALETTE,thread:THREAD,strips:STRIPS,heroFiles:[...HERO_FILES],threadFiles:[...THREAD_FILES],swapPath,on:()=>on,set,memo:v=>{if(v!==undefined){memoOn=v!==false;memo.clear();}return memoOn;},shadow:v=>{if(v!==undefined)shadow=!!v;return shadow;},
+window.__STORYWORLD_HERO_PALETTE_R302__=Object.freeze({revision:REV,palette:PALETTE,thread:THREAD,strips:STRIPS,heroFiles:[...HERO_FILES],threadFiles:[...THREAD_FILES],swapPath,on:()=>on,set,memo:v=>{if(v!==undefined){memoOn=v!==false;memo.clear();try{if(memoOn)localStorage.removeItem('storyworld.r302.memo');else localStorage.setItem('storyworld.r302.memo','0');}catch(_){}}return memoOn;},shadow:v=>{if(v!==undefined)shadow=!!v;return shadow;},
  mapPal:(F,h,file)=>SP0?mapPal(F,h,file):null,targetHue,rampOf,
  inspect:()=>({revision:REV,on,hero:hero(),stats:JSON.parse(JSON.stringify(stats)),decided:[...decided].map(([k,v])=>[k,v?v.a.join()+'|'+v.b.join():null]),lastError})});
 })();
