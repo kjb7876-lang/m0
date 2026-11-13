@@ -9472,6 +9472,32 @@
     "assets/r990/fog-core.webp",
     "bulmyeongwi-fog-r990.js",
     "seoha-epoch-fx-r986.js",
+    "assets/r948/heart-burst16.webp",
+    "assets/r948/mh03-heart24.webp",
+    "assets/r948/mh04-blast24.webp",
+    "assets/r948/mh05-cloud24.webp",
+    "assets/r948/mh07-note24.webp",
+    "assets/r948/mh10-aura24.webp",
+    "assets/r948/mh10a-enter8.webp",
+    "assets/r948/mh10b-exit8.webp",
+    "assets/r972/sfx/bleed-1.ogg",
+    "assets/r972/sfx/bleed-2.ogg",
+    "assets/r972/sfx/burn-1.ogg",
+    "assets/r972/sfx/burn-2.ogg",
+    "assets/r972/sfx/echo-1.ogg",
+    "assets/r972/sfx/echo-2.ogg",
+    "assets/r972/sfx/gravity-1.ogg",
+    "assets/r972/sfx/gravity-2.ogg",
+    "assets/r972/sfx/holy-1.ogg",
+    "assets/r972/sfx/holy-2.ogg",
+    "assets/r972/sfx/index.json",
+    "assets/r972/sfx/poison-1.ogg",
+    "assets/r972/sfx/poison-2.ogg",
+    "assets/r972/sfx/shock-1.ogg",
+    "assets/r972/sfx/shock-2.ogg",
+    "assets/r972/sfx/slash-1.ogg",
+    "assets/r972/sfx/slash-2.ogg",
+    "skill-style-r972.js",
     "survival-samong-r1006.js"
   ],
   "mediaPaths": [
@@ -10547,5 +10573,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "cc2ece2ecc3e6223b4d35b21d0443eaf623e89f5bc23fb051a939a2cc4275e54"
+  "runtimeManifestSHA256": "392b04163e132471f8f27532bcbffc3be44cae1e92a1be919ab7875676e20da7"
 }
