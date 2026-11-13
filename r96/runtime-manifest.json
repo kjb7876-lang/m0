@@ -43128,6 +43128,81 @@
       "sha256": "a93f0324d9176d44bc4dc0177fdf8e7580d00c5e0d66493746947303f5ed2a73"
     },
     {
+      "path": "assets/r967/sfx/atk-surgeon-1.ogg",
+      "bytes": 8184,
+      "sha256": "31e102cbfb7851410caa5e2f1a1df0cab21083a996f9de8097ea7e9daa8cae1a"
+    },
+    {
+      "path": "assets/r967/sfx/atk-surgeon-2.ogg",
+      "bytes": 7826,
+      "sha256": "7fb04b3875f1c58947c38668e853edccdcd7400fe245331399da32926fc6ea81"
+    },
+    {
+      "path": "assets/r967/sfx/atk-syringe-1.ogg",
+      "bytes": 7648,
+      "sha256": "ac79c5f7ec6710e745ed3735a8d888f69357a07510b99faa8f2100c3f594cc28"
+    },
+    {
+      "path": "assets/r967/sfx/atk-syringe-2.ogg",
+      "bytes": 8485,
+      "sha256": "66da40f74e329a9900472fc7401bd846b367d9945f154329c8b4ba139d2e0cab"
+    },
+    {
+      "path": "assets/r967/sfx/die-surgeon-1.ogg",
+      "bytes": 12459,
+      "sha256": "95a6234fdc9b84ce27c19f48f717053a1818cbb0ffb3fd485a532b04b9e73c36"
+    },
+    {
+      "path": "assets/r967/sfx/die-surgeon-2.ogg",
+      "bytes": 12136,
+      "sha256": "61a2b863d16025bf72d17ea979cb5fa1c25b3685f5336c2df5af05f07e336478"
+    },
+    {
+      "path": "assets/r967/sfx/die-syringe-1.ogg",
+      "bytes": 11407,
+      "sha256": "fe03cbb50df6bbf945e4d3f117577a5f008ec551730f9c70a4265febc3ad3c6c"
+    },
+    {
+      "path": "assets/r967/sfx/die-syringe-2.ogg",
+      "bytes": 8873,
+      "sha256": "140f924fbc090422ab3098bf3ac224b7a081f200679393e30b73815c193e688e"
+    },
+    {
+      "path": "assets/r967/sfx/hit-surgeon-1.ogg",
+      "bytes": 5864,
+      "sha256": "68ddf2e9765b3f19cbde2af94c7625a510ba3826e41cb9f0dd1c126073379b34"
+    },
+    {
+      "path": "assets/r967/sfx/hit-surgeon-2.ogg",
+      "bytes": 5831,
+      "sha256": "1f57b80e8b19ec01967502d9efbf9b25ba16a66331dde20495c72f3465e16c62"
+    },
+    {
+      "path": "assets/r967/sfx/hit-surgeon-3.ogg",
+      "bytes": 6088,
+      "sha256": "84571e83d3d9484910126423aab429c1a2a81c23132bb764c3eb9d3af5610b30"
+    },
+    {
+      "path": "assets/r967/sfx/hit-syringe-1.ogg",
+      "bytes": 6408,
+      "sha256": "76efbc9693689bb1d9870da9f30bdf7b474ebd16b19df3bdd4a28cd5aeb5c4cd"
+    },
+    {
+      "path": "assets/r967/sfx/hit-syringe-2.ogg",
+      "bytes": 6593,
+      "sha256": "04fea2f2dd92f212dd1d54b888fc3727f97af05c2d0e8a8c68587ad53f0e51f3"
+    },
+    {
+      "path": "assets/r967/sfx/hit-syringe-3.ogg",
+      "bytes": 6441,
+      "sha256": "8380e8ca56d9dde39f808956c40ac341b8e12c438ab64f50e67be0b0b7ef1d35"
+    },
+    {
+      "path": "assets/r967/sfx/index.json",
+      "bytes": 13192,
+      "sha256": "48e492881171a13cf636614d341ff000517befd0203ed4b57204804fe90d2179"
+    },
+    {
       "path": "assets/r99/clean/assets/cult-v3121/c101_black_rose_prior.webp",
       "bytes": 54936,
       "sha256": "9ac511764c7900ba8149b36c6806487b374d157541484eb1b5ec628f820772f0"
@@ -49253,6 +49328,11 @@
       "sha256": "5c0294ef86ef524265ca63a8f45d6aa1f07b89d5ff287e1580e95ea9820e0a97"
     },
     {
+      "path": "combat-sfx-r967.js",
+      "bytes": 6450,
+      "sha256": "7721215586134646c06dbc8168c8b36a30a1f27b44f452c6aad406a4e76a8a6e"
+    },
+    {
       "path": "crates-r108.js",
       "bytes": 6746,
       "sha256": "1d8820f1f4884a00ff32ededbdd6d2cbcdffe831e18d9062cafb688acdcd868f"
@@ -49769,8 +49849,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6576087,
-      "sha256": "d65f74274a6e04cf2a6776d84760bc969260cd49e4b9ed063fba15c01a40f3e3"
+      "bytes": 6576132,
+      "sha256": "4914603ff1124c6a77c77c859269c2b0d9bf848b3460cf82f0bd091c970dd829"
     },
     {
       "path": "intro-r140.js",
@@ -50873,9 +50953,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10174,
-  "totalBytes": 1260245915,
-  "webHTMLSha256": "d65f74274a6e04cf2a6776d84760bc969260cd49e4b9ed063fba15c01a40f3e3",
+  "fileCount": 10190,
+  "totalBytes": 1260379845,
+  "webHTMLSha256": "4914603ff1124c6a77c77c859269c2b0d9bf848b3460cf82f0bd091c970dd829",
   "largest": [
     {
       "path": "index.html",
