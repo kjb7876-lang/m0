@@ -40903,6 +40903,11 @@
       "sha256": "c0973e2fdd354700cc81e82ad470e9876861269bf586d0d76cc8c553283c2c52"
     },
     {
+      "path": "assets/r948/mh05-cloud24.webp",
+      "bytes": 176888,
+      "sha256": "303c261b3877e4264a3c78850195f253d85c756c350818bd0e8f055d55b90686"
+    },
+    {
       "path": "assets/r948/mh07-note24.webp",
       "bytes": 149816,
       "sha256": "bb82345cbf807139590baf32a6b773bbfa9eb972040c93697e3442cbe480a1ea"
@@ -50434,8 +50439,8 @@
     },
     {
       "path": "michaela-heart-r948.js",
-      "bytes": 37879,
-      "sha256": "37c09aa42880c7ce7877f4d11f3ddebbce9a1a5f36c80a401e334ed02cb0f145"
+      "bytes": 38373,
+      "sha256": "32e79d5362dfa28472f34b9ebd2516fe41ae897778824102df85df1f7d9df5ff"
     },
     {
       "path": "michaela-r247.js",
@@ -51433,8 +51438,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10286,
-  "totalBytes": 1269949918,
+  "fileCount": 10287,
+  "totalBytes": 1270127300,
   "webHTMLSha256": "8eb16bc207c40e6ae35debde3bfa724518ee038f831017b360b94cc16a97e3c6",
   "largest": [
     {

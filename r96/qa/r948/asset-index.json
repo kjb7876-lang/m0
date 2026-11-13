@@ -156,6 +156,25 @@
    "pivot": "고리 중심 y 225, 폭 177",
    "edit": "LANCZOS 축소(해당 시트), 알파 16 이하 0, webp q88. 그림 내용·색·순서는 바꾸지 않음",
    "status": "R988 7분야 심사 통과(review.md), 적용. 헤드리스 확인만"
+  },
+  {
+   "id": "CX-0094MH MH-05 r2 하트 구름(기존 24장 알파 60%)",
+   "driveFile": "MH05_r2_part04_legacy24_alpha060_HOLD.zip",
+   "zipSha256": "0b8a6ad45c9344defca4cfeaf2550895f7d4eb5fb349e6c8536ec99c85a1165b",
+   "src": "MH05_existing24_alpha060_HOLD.png",
+   "srcSha256": "fbac70f6cd9e7a870be41c9ea858f2f36c8cc41eddb5547e00c96431e01c283b",
+   "out": "mh05-cloud24.webp",
+   "outSha256": "303c261b3877e4264a3c78850195f253d85c756c350818bd0e8f055d55b90686",
+   "bytes": 176888,
+   "size": [
+    1536,
+    1024
+   ],
+   "grid": "6x4 칸 256(원본 512 를 0.5배), 24장, 구름 수명 4.3초에 걸쳐 한 번",
+   "use": "연심 대개화 폭발 뒤 하트 구름(코드 뭉게 덩이 대체, 바닥 하트 표식 유지)",
+   "pivot": "칸 무게중심 (128,114), 가장 큰 장 폭 224px",
+   "edit": "LANCZOS 0.5배, 알파 16 이하 0, webp q88. 알파 60% 상한(Dots 처리) 그대로",
+   "status": "R998 7분야 심사 7.86 통과(review.md), 적용. 헤드리스 확인만. 새 4장 시험본(part01)은 미완성이라 미적용"
   }
  ]
 }
