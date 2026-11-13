@@ -8,6 +8,9 @@ let fail=0;const ok=(n,c)=>{console.log(c?'PASS':'FAIL',n);if(!c)fail++;};
 await p.evaluate(async()=>{await ensureImages(heroPaths('lauren'));player.hero='lauren';player.hp=99999;window.__SLOW=1;const tb=tick;tick=function(dt,...a){return tb.call(this,dt*(window.__SLOW??1),...a);};});
 const A='window.__STORYWORLD_LAUREN_CELESTIAL_R946__';
 ok('module loaded',await p.evaluate(A+'&&'+A+'.revision'));
+// R946-2: Dots 시트를 먼저 읽혀 둔다(게임 안에서는 라우렌일 때 2초마다 부탁) — SHEETS=0 이면 코드 그림 비교용
+const useSheets=process.env.SHEETS!=='0';await p.evaluate(async([A,on])=>{const api=eval(A);api.qaSheets(on);if(on)await ensureImages(Object.values(api.sheets()).map(v=>v.path));},[A,useSheets]);
+if(useSheets)ok('all six Dots sheets ready',await p.evaluate(A+'.sheets()').then(s=>Object.values(s).every(v=>v.ready)));
 const setup=(n=8,spread=2.4,dx=2.6)=>p.evaluate(([n,spread,dx])=>{const live=room.enemies.filter(e=>!e.boss&&!e.midboss).slice(0,n);room.enemies.filter(e=>!live.includes(e)&&!e.boss).forEach(e=>{e.hp=0;e.dead=true;});
  const c={x:player.x+dx,y:player.y+.3};live.forEach((e,i)=>{const a=i*2*Math.PI/live.length,r=i===0?0:spread*(.5+(i%3)*.35);e.x=c.x+Math.cos(a)*r;e.y=c.y+Math.sin(a)*r;e.dead=false;e.spawnState='active';e.hp=e.maxHp=99999;e.damage=0;e.speed=0;e.moveSpeed=0;});
  window.__ids=live.map(e=>e.id);return live.length;},[n,spread,dx]);
@@ -41,7 +44,7 @@ ok('meteor gathered 3 objects',met&&met.rocks.length===3);
 const hid=await p.evaluate(()=>(room.props||[]).filter(a=>a.r946Hidden).map(a=>[a.id,a.visible]));console.log('  hidden props',JSON.stringify(hid));
 if(shot){await snap('meteor-orbit',t0,.8);await snap('meteor-impact',t0,1.32);}await waitT(t0,2.6);
 i=await I();ok('meteor exploded and props restored',i.stats.procs.meteor===1&&i.stats.hiddenProps===i.stats.restoredProps&&!(await p.evaluate(()=>(room.props||[]).some(a=>a.r946Hidden))));
-ok('no errors',i.stats.errors===0);console.log(JSON.stringify(i.stats));
+ok('no errors',i.stats.errors===0);if(useSheets)ok('Dots sheets drawn ('+i.stats.sheetDraws+')',i.stats.sheetDraws>20);console.log(JSON.stringify(i.stats));
 if(free){await setup(8,1.6,1.4);const r=await p.evaluate(async([A,free])=>{const api=eval(A);api.qaRandom(null);const s0=api.inspect().stats.procTotal,t0=time;let last=-9;
   while(time-t0<free){await new Promise(r=>requestAnimationFrame(r));if(time-last>.5){last=time;const e=room.enemies.find(v=>v.id===window.__ids[0]);hitEnemy(e,1,{kind:'basic',sourceHero:'lauren'});}}
   return {procs:api.inspect().stats.procTotal-s0,secs:time-t0,by:api.inspect().stats.procs};},[A,free]);console.log('  natural procs',JSON.stringify(r));}
