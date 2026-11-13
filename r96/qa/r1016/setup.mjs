@@ -1,0 +1,6 @@
+// programmatic setup: thread dance + gold/silver design learned+equipped
+export const SHAPE=[[{x:-1,y:-1},{x:1,y:1}],[{x:1,y:-1},{x:-1,y:1}],[{x:-1,y:0},{x:0,y:-1},{x:1,y:0},{x:0,y:1},{x:-1,y:0}]];
+export const setup=p=>p.evaluate(shape=>{player.points=Math.max(player.points||0,500);const P=window.__STORYWORLD_PROGRESSION_R62__;if(!P.ranks('threadDanceR63',player))P.purchase('threadDanceR63');const D=window.__STORYWORLD_DANCES_R74__,out={};
+ for(const k of ['gold','silver']){const r=D.command(k,player,{op:'save',name:k+'T',strokes:shape});const l=D.command(k,player,{op:'learn'});const e=D.command(k,player,{op:'equip',id:r.id});out[k]=[r,l,e];}return out;},SHAPE);
+export const diag=(p,k)=>p.evaluate(k=>{const D=window.__STORYWORLD_DANCES_R74__,s=D.state(k,player),pol=window.__STORYWORLD_DANCE_POLICY_R75__;const e=liveEnemies().sort((a,b)=>distance(player,a)-distance(player,b))[0];
+ return{k,started,loading,modal:!!modal,safe:safeRegion(),hp:player.hp,stun:player.stun,polCan:pol?.can?.(k,player),polTarget:e&&pol?.target?.(k,e,player),learned:s.learned,eq:s.equipped,cd:D.cooldown(k,player),time,nearest:e&&{id:e.id,d:distance(player,e),spawn:e.spawnState},moving:D.moving(player),native:D.nativeActive(player),insp:D.inspect(k).queue};},k);
