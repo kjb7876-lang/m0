@@ -506,6 +506,8 @@ jobs:
         run: node r96/qa/r962/r962-cpu-check.cjs
       - name: R970 777 developer test mode level input (level-based skill points, same rule as normal play, 1..99) CPU check
         run: node r96/qa/r970/r970-cpu-check.cjs
+      - name: R972 skill DoT / multi-hit split (total damage kept, lethal hits not split, own tick sounds rate-limited) CPU check
+        run: node r96/qa/r972/r972-cpu-check.cjs
       - name: R963 survival BGM note sits below the survival HUD line (no overlapped text) CPU check
         run: node r96/qa/r963/r963-cpu-check.cjs
       - name: R463 seven-sins boss art (one form per fight, one body height, no cut-out broom) CPU check
