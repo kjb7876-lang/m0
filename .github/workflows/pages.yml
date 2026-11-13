@@ -536,6 +536,8 @@ jobs:
         run: node r96/qa/r1001/mob-move-cpu-check.cjs
       - name: R996 bulmyeongwi fog summon still fires in the boss phase after every field mob is gone CPU check
         run: node r96/qa/r996/r996-cpu-check.cjs
+      - name: R1008 cinema mode finishes (hero stands up instead of the sanctuary trip, ending windows move on 20 s after the subtitles, normal records unchanged) CPU check
+        run: node r96/qa/r1008/r1008-cpu-check.cjs
       - name: R1007 samong confront statement markers never overlap (4-marker zones M-1 Michaela, S-04 16th floor were unpassable) CPU check
         run: node r96/qa/r1007/stmt-spread-cpu-check.cjs
       - name: R1010 survival Michaela finale (4 knots in order, not killed) and shared story ending CPU check
