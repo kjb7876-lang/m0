@@ -232,4 +232,24 @@ const units=E=>E.api.inspect().units;
  const src=fs.readFileSync(path.join(R,'client-source','hunter-squad-r952.js'),'utf8');ok(/CX-0096HS/.test(src)&&/hs02-blood-pact-leave/.test(src)&&/hs03-shade-slash/.test(src),'모듈이 두 시트를 씀');
  A.force('shade');E.ctx.basicAttack(true);E.run(7.2);ok(A.inspect().errors===0&&!A.inspect().active,'시트를 넣은 뒤에도 7초 해산·오류 0');}
 
+// R952-3 (R983, 2026-11-13): Dots CX-0096HS 나머지 — HS-01 등장 문, HS-06 일제 사격 섬광, HS-07 발동 아이콘(HS-04·HS-05 는 심사 미달로 미적용)
+{const fs=require('fs'),path=require('path'),R=path.resolve(__dirname,'../..');const E=engine({enemies:[{id:'a',x:24,y:20},{id:'b',x:25,y:21}]}),A=E.api,SH=A.config.sheets,P=A.pure;
+ const want={gate:['assets/r952/hs01-blood-pact-gate.webp',256,256,6,24],volley:['assets/r952/hs06-volley-flash.webp',384,256,6,12],icons:['assets/r952/hs07-tier-icons.webp',128,128,3,3]};
+ const m=JSON.parse(fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8')),sp=JSON.parse(fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8'));
+ for(const k in want){if(!Object.prototype.hasOwnProperty.call(want,k))continue;const w=want[k],S=SH[k];ok(S&&S.path===w[0]&&S.cell[0]===w[1]&&S.cell[1]===w[2]&&S.cols===w[3]&&S.frames===w[4],k+' 시트 설정('+w[1]+'×'+w[2]+', '+w[4]+'장)');
+  ok(S&&fs.existsSync(path.join(R,'runtime-text',S.path))&&m.files.some(r=>r.path===S.path)&&sp.textPaths.includes(S.path),k+' 시트 파일이 런타임과 목록에 있음');}
+ ok(!SH.sigil&&!SH.mark&&!/hs04|hs05/.test(JSON.stringify(SH))&&!m.files.some(r=>/assets\/r952\/hs0[45]/.test(r.path)),'HS-04 진법 그림·HS-05 발밑 표식은 넣지 않음(심사 미달, 점선·기존 문 유지)');
+ const g=P.gateFrame,G=SH.gate;ok(g(-.01)===-1&&g(0)===0&&g(G.openT-1e-6)===G.open-1,'등장 문: 열림 0→'+(G.open-1));
+ let lo=99,hi=-1;for(let i=0;i<200;i++){const f=g(G.openT+1e-6+i/200*(G.holdT-2e-6));lo=Math.min(lo,f);hi=Math.max(hi,f);}ok(lo>=G.open&&hi<G.open+G.loop,'등장 문: 머무는 동안 도는 칸만('+G.open+'~'+(G.open+G.loop-1)+')');
+ ok(g(G.openT+G.holdT)===G.frames-G.close&&g(G.openT+G.holdT+G.closeT-1e-6)===G.frames-1&&g(G.openT+G.holdT+G.closeT)===-1,'등장 문: 닫힘 뒤 사라짐(마지막 칸까지)');
+ ok(G.openT+G.holdT+G.closeT<=2,'등장 문은 2초 안에 끝난다(7초 내내 따라다니지 않음)');
+ const vf=P.volleyFrame,V=SH.volley;ok(vf(-.01)===-1&&vf(0)===0&&vf(V.dur-1e-6)===V.frames-1&&vf(V.dur)===-1&&vf(NaN)===-1,'일제 사격 섬광 칸: 0→11 한 번, 끝나면 없음');
+ ok(P.iconFrame('call')===0&&P.iconFrame('shade')===1&&P.iconFrame('squad')===2&&P.iconFrame('x')===-1,'발동 아이콘 칸: 혈맹 0·혈영 1·기러기진 2');
+ const ia=P.iconAlpha,I=SH.icons;ok(ia(-.1)===0&&ia(I.dur)===0&&ia(I.dur/2)===1&&ia(NaN)===0&&ia(.01)>0&&ia(.01)<1,'발동 아이콘: 나타났다 '+I.dur+'초 뒤 사라짐');
+ const fl=P.flashPose;{const a=fl(0),b=fl(Math.PI),c=fl(Math.PI/2),d=fl(NaN);ok(a.flip===false&&near(a.rot,0)&&b.flip===true&&near(b.rot,0)&&c.flip===false&&near(c.rot,Math.PI/2)&&d.flip===false&&d.rot===0,'섬광 방향: 오른쪽 기준, 왼쪽은 좌우 반전(위아래가 뒤집히지 않음), NaN 은 0');
+  let up=true;for(let i=0;i<64;i++){const q=fl(-Math.PI+i/64*2*Math.PI);if(!(Math.abs(q.rot)<=Math.PI/2+1e-9))up=false;}ok(up,'섬광 그림은 어느 각에서도 ±90° 넘게 돌지 않음');}
+ A.force('squad');E.ctx.basicAttack(true);E.run(2.5);{const i=A.inspect();ok(i.active&&i.fx&&i.fx.icon===2&&i.fx.volleys===4&&i.fx.gates===1,'③ 발동: 아이콘 2번·분신 일제 사격 섬광 4·슬레이어 등장 문 1(헌터 분신은 문 없음)');}
+ E.run(5);ok(A.inspect().errors===0&&!A.inspect().active&&myProps(E).length===0,'시트 넣은 뒤에도 7초 해산·남은 조형물 0·오류 0');
+ ok(A.config.slayer.mul===.1&&A.config.shade.mul===.15&&A.config.squad.mul===.22&&A.config.life===7&&A.config.chance===.09&&A.config.icd===21,'피해 배율·확률·지속·재발동은 그대로');}
+
 console.log('\nR952 CPU 검사 '+n+'개 통과');

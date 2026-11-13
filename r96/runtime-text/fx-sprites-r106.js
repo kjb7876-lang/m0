@@ -40,7 +40,8 @@ const parsed=new Map();
 function parseColour(s){if(typeof s!=='string')return null;let v=parsed.get(s);if(v!==undefined)return v;const m=/^rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*(?:,\s*([\d.]+)\s*)?\)$/.exec(s);v=m?{c:[+m[1],+m[2],+m[3]],a:m[4]===undefined?1:+m[4]}:null;if(parsed.size>512)parsed.clear();parsed.set(s,v);return v;}
 
 // ---- tinted copies ---------------------------------------------------------------------
-const tints=new Map(),MAXT=220;let budgetAt=null,budget=0;
+const tints=new Map(),MAXT=220;let tintsPx=0;
+const capR980=()=>{try{return window.__STORYWORLD_MOBILE_MEMORY_R980__?.px('r106-tint',Infinity)??Infinity;}catch(_){return Infinity;}};let budgetAt=null,budget=0;
 // R107: painted wing views (ChatGPT sheet, keyed) live under assets/r107/fx.
 const R107=new Set(["wingback", "wingfront", "wingside", "wingback-f", "wingfront-f", "wingside-f", "iai-cut", "iai-x", "iai-star", "iai-hash", "iai-burst", "iai-sheath"]);
 function source(name){const path=(R107.has(name)?'assets/r107/fx/':BASE)+name+'.webp';if(typeof readyImage!=='function')return null;const row=readyImage(path);if(row?.image)return row.image;
@@ -50,11 +51,12 @@ function build(name,F,im){const w=im.naturalWidth||im.width,h=im.naturalHeight||
  const d=g.getImageData(0,0,w,h),px=d.data,L=lut(F);for(let i=0;i<px.length;i+=4){if(px[i+3]===0)continue;const j=px[i]*3;px[i]=L[j];px[i+1]=L[j+1];px[i+2]=L[j+2];}g.putImageData(d,0,0);
  cv.naturalWidth=w;cv.naturalHeight=h;try{Object.defineProperty(cv,'__storyworldStaticTint',{value:Object.freeze({path:'r106fx:'+name+':'+F.a.join('.')+':'+F.b.join('.'),immutable:true,r106:true})});}catch(_){}
  stats.builds++;return cv;}
-function tinted(name,F,force=false){const k=name+'#'+F.a.join()+'|'+F.b.join();let c=tints.get(k);if(c){if(tints.size>MAXT/2){tints.delete(k);tints.set(k,c);}return c;}
+function tinted(name,F,force=false){const k=name+'#'+F.a.join()+'|'+F.b.join();let c=tints.get(k);if(c){if(tints.size>MAXT/2||capR980()<Infinity){tints.delete(k);tints.set(k,c);}return c;}
  if(!META[name])return null;const im=source(name);if(!im)return null;
  const now=typeof time==='number'?time:0;if(budgetAt!==now){budgetAt=now;budget=lowFx()?1:3;}if(!force&&budget<=0){stats.deferred++;return null;}budget--;
  try{c=build(name,F,im);}catch(e){fail(e);c=null;}if(!c)return null;
- tints.set(k,c);while(tints.size>MAXT){tints.delete(tints.keys().next().value);stats.evicted++;}return c;}
+ tints.set(k,c);tintsPx+=(c.width|0)*(c.height|0);const cap=capR980();/* R980: 모바일 픽셀 상한 */
+ while(tints.size>MAXT||(tints.size>1&&tintsPx>cap)){const ok=tints.keys().next().value,oc=tints.get(ok);tintsPx-=(oc.width|0)*(oc.height|0);tints.delete(ok);stats.evicted++;}return c;}
 const ready=(name,F)=>!!tints.get(name+'#'+F.a.join()+'|'+F.b.join());
 
 // R106 (사용자 요청 "플레이어 모습이 이펙트에 너무 가리지 않도록"): 그림이 영웅 몸통 상자를 덮는 비율만큼

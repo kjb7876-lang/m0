@@ -9435,6 +9435,12 @@
     "assets/r953/gv-spin.webp",
     "midboss-puppet-r981.js",
     "perf-r979.js",
+    "assets/r945/hwando-ink-burst.webp",
+    "assets/r945/hwando-ink-vapor.webp",
+    "assets/r952/hs01-blood-pact-gate.webp",
+    "assets/r952/hs06-volley-flash.webp",
+    "assets/r952/hs07-tier-icons.webp",
+    "mobile-memory-r980.js",
     "sfx-mix-r993.js",
     "assets/r993/sfx/seoha-awake.ogg",
     "assets/r993/sfx/boss-dark-attack.ogg",
@@ -10514,5 +10520,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "4fa38a7dbd67a05370bcf9eddf841df5d28699fc12008c2f5df33acb062c13a5"
+  "runtimeManifestSHA256": "72a5c3fcb2aba44859d4c4789bcb9c3abd3809bae7fa01dff94f64df93f6d64d"
 }
