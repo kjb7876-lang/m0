@@ -71,7 +71,8 @@ let nextAuto=0;
 function autoOn(){try{const mob=window.__STORYWORLD_MOBILE_R63__?.isMobile?.();return (mob?settings.autoSkill===true:(typeof auto!=='undefined'&&auto))||(typeof guide!=='undefined'&&guide);}catch(_){return false;}}
 function tickAuto(){if(!mine()||busy()||!autoOn())return;const t=T();if(t<nextAuto)return;nextAuto=t+.35;if(!fire('e',true))fire('w',true);}
 if(typeof updateHUD==='function'){const b=updateHUD;updateHUD=function(...a){const r=b.apply(this,a);try{if(mine())for(const sl of ['w','e']){const el=document.getElementById('story-wer-'+sl);if(!el)continue;const cd=el.querySelector('.cd'),m=remain(sl);if(cd)cd.textContent=m>0?String(Math.ceil(m)):'';el.title=sl==='w'?'성흔 광시':'제네시스 성광주';el.setAttribute('aria-label',el.title+' · '+(typeof KR291!=='undefined'&&KR291?KR291[sl]:(sl==='w'?'W':'E')));const lb=el.querySelector('.label');if(lb&&lb.textContent!==(sl==='w'?'성흔 광시':'성광주'))lb.textContent=sl==='w'?'성흔 광시':'성광주';}}catch(e){fail(e);}return r;};}
-if(typeof tick==='function'){const b=tick;tick=function(...a){const r=b.apply(this,a);try{if(fx.length)tickX();tickAuto();}catch(e){fail(e);}return r;};}
+const asHeroR720=(id,fn)=>{const D=window.__STORYWORLD_HERO_DEFENSE_R720__;return D&&typeof D.asHero==='function'?D.asHero(id,fn):fn();};/* R720-4: 다음 틱에 이어지는 기술을 그 영웅 몸(생존 배치 영웅이면 그 몸)으로 돌린다 */
+if(typeof tick==='function'){const b=tick;tick=function(...a){const r=b.apply(this,a);try{if(fx.length)asHeroR720('michaela',tickX);tickAuto();}catch(e){fail(e);}return r;};}
 if(typeof drawEffect==='function'){const b=drawEffect;drawEffect=function(e,...a){if(e&&e.type==='r247-fx'){try{draw();}catch(err){fail(err);}return;}return b.apply(this,[e,...a]);};}
 // 입구: 엔진 Z·X 키·단추·자동 시전은 엔진 안쪽 cast 를 바로 부른다(창구 감싸기를 안 탄다). R209 가 미카엘라 원래 W·E 를 먼 재사용 대기로 막아 두므로
 // 키(Z·X)·단추(본편 W·E)는 먼저(capture) 받아 이 스킬을 쓰고, 자동 시전·길잡이는 아래 tick 에서 따로 쓴다. 재사용 대기는 이 오버레이가 따로 센다.
