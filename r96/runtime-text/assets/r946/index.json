@@ -1,0 +1,134 @@
+{
+ "schema": "storyworld.r946.lauren-sheets.v1",
+ "request": "CX-0087LC_추가1 (실버·보라판, Dots 2026-11-12 13:56~14:13Z)",
+ "author": "Dots 후보 → Claude 알파 정리(1~16 → 0)·칸 경계 3px 비움·192칸 webp",
+ "sourceCell": 256,
+ "held": {
+  "LC-05b": "꼬리 띠 HOLD(반복 연결) → 코드 혜성 꼬리 유지",
+  "LC-06": "PARTIAL_HOLD → 코드 그림 유지",
+  "LC-08": "PARTIAL_HOLD → 코드 그림 유지",
+  "LC-09": "결과 없음 → 코드 돌 파편 유지"
+ },
+ "sheets": {
+  "lauren-red": {
+   "use": "LC-01 은빛 거성 밀어내는 구",
+   "frames": 24,
+   "fps": 12.5,
+   "loop": true,
+   "pivot": [
+    141,
+    137
+   ],
+   "body": 145,
+   "cell": 192,
+   "cols": 6,
+   "rows": 4,
+   "source": "LC01/CX-0087LC_add1_LC-01_red_giant_orb.png",
+   "sourceSha256": "192978ff96669aafcdc465900736eea4e2dfd88e6e1cc83e53aba430e4e8b2e7",
+   "file": "lauren-red.webp",
+   "bytes": 156738,
+   "sha256": "5978010b2829a068c05c050aeb3cab806d53d37d67c2afe016e19a3addffcd56"
+  },
+  "lauren-blue": {
+   "use": "LC-02 심연 왜성 끌어당기는 구",
+   "frames": 24,
+   "fps": 12.5,
+   "loop": true,
+   "pivot": [
+    128,
+    126
+   ],
+   "body": 127,
+   "cell": 192,
+   "cols": 6,
+   "rows": 4,
+   "source": "LC02/CX-0087LC_add1_LC-02_blue_dwarf_orb.png",
+   "sourceSha256": "f655a8a9f93fc53b160d7915a3bbc276782c607ecb7187474f5af9ec1de35ddd",
+   "file": "lauren-blue.webp",
+   "bytes": 292482,
+   "sha256": "df2ee3bf797ef0e5ba62fd5ba2a760e1db8f33db25c6e4cf886c10be7db15f30"
+  },
+  "lauren-blue-disk": {
+   "use": "LC-03 심연 왜성 바닥 끌림 원반(위에서 본 2:1)",
+   "frames": 24,
+   "fps": 12.5,
+   "loop": true,
+   "pivot": [
+    127,
+    134
+   ],
+   "body": 192,
+   "cell": 192,
+   "cols": 6,
+   "rows": 4,
+   "source": "LC03/CX-0087LC_add1_LC-03_blue_dwarf_ground.png",
+   "sourceSha256": "6c27525cfee738655335b545406051e339d4607bb389a4520b46583abb2bcef7",
+   "file": "lauren-blue-disk.webp",
+   "bytes": 260870,
+   "sha256": "4c209d1d51dd127bed83ed43e1f8955c34d0b0c17d189404b3ce85a69fd2a18c"
+  },
+  "lauren-fuse": {
+   "use": "LC-04 쌍성 소멸 충전(12장 한 번, 0.5초에 맞춰 24fps)",
+   "frames": 12,
+   "fps": 24,
+   "loop": false,
+   "pivot": [
+    128,
+    128
+   ],
+   "body": 107,
+   "cell": 192,
+   "cols": 6,
+   "rows": 2,
+   "source": "LC04/CX-0087LC_add1_LC-04_binary_fusion_charge.png",
+   "sourceSha256": "d860adb16e54df7ceca2b60479f79d58847800f0965d735ca7afb280ace6e437",
+   "file": "lauren-fuse.webp",
+   "bytes": 73042,
+   "sha256": "a9dbd5f35f4defe02c9889bb1a0a187f980c6a4b519be885361171dc5e15c15e",
+   "crop": [
+    60,
+    60,
+    196,
+    200
+   ]
+  },
+  "lauren-violet": {
+   "use": "LC-05 쌍성 소멸탄(오른쪽 진행)",
+   "frames": 24,
+   "fps": 12.5,
+   "loop": true,
+   "pivot": [
+    144,
+    128
+   ],
+   "body": 150,
+   "cell": 192,
+   "cols": 6,
+   "rows": 4,
+   "source": "LC05/CX-0087LC_add1_LC-05_binary_annihilation_bolt.png",
+   "sourceSha256": "ae50384d91361e705a2908311495e47da19c829ba13e1ca014fb2e49aba08a06",
+   "file": "lauren-violet.webp",
+   "bytes": 185268,
+   "sha256": "e86d6d6d215198fd36a9b8ce6a8b56dd1648d052e498fbaf93209102669bce1f"
+  },
+  "lauren-aura": {
+   "use": "LC-07 유성 궤도 조형물 감싸는 중력장 고리",
+   "frames": 24,
+   "fps": 12.5,
+   "loop": true,
+   "pivot": [
+    128,
+    124
+   ],
+   "body": 194,
+   "cell": 192,
+   "cols": 6,
+   "rows": 4,
+   "source": "LC07/CX-0087LC_add1_LC-07_meteor_aura.png",
+   "sourceSha256": "e8463a410e41cc5ce1601b6ec59772e7bc2454e3b8cb0665e12f2e37ce875a4b",
+   "file": "lauren-aura.webp",
+   "bytes": 217132,
+   "sha256": "3acb354537d8bd25f5559e9e1318a0c30df5410cbfd2b9e085687af07bece4ff"
+  }
+ }
+}
