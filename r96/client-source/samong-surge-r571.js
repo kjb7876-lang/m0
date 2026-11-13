@@ -14,7 +14,7 @@
 //   ④ 오라: 영웅 몸을 주색(바깥)·보조색(안쪽) 불꽃이 감싼다(R302 팔레트, 환도 = 실버 바깥 + 골드 안쪽). 코드로만 그림(새 자산 없음),
 //      ctx.filter 안 씀(Three.js 기록기 안전), lowFx 면 혀·불티 수를 줄인다. 시작 .4초 서서히, 끝나기 .6초 전부터 서서히 사라진다.
 //  다른 스레드(영웅별 스킬 개편)가 쓰는 공용 API: __STORYWORLD_SAMONG_SURGE_R571__.active() · cd(s) · range(r) · chance(p) · scope(fn).
-//  R967(사용자 2026-11-13 "ego 각성는 모든 스킬쿨타임 줄여주고 사몽각성은 그거보다 더줄여주게") — 같은 ① 장치에 EGO 를 더한다:
+//  R969(사용자 2026-11-13 "ego 각성는 모든 스킬쿨타임 줄여주고 사몽각성은 그거보다 더줄여주게") — 같은 ① 장치에 EGO 를 더한다:
 //   · EGO(player.ego > 0, 사몽 아님) 중 새로 거는 스킬 대기 ×0.77(−23%). EGO 자기 대기(egoCD)는 줄이지 않는다(사몽의 samongCD 처럼).
 //   · 각성에 들어가는 순간 이미 돌고 있던 대기도 줄인다: EGO 진입 ×0.77, 사몽 진입 ×0.60. EGO 중에 사몽으로 올라가면 나머지만 더 줄여
 //     합계가 ×0.60 이 되게 한다(겹곱 없음). EGO 중첩(R169)처럼 이미 켜진 각성을 다시 채우는 것은 진입이 아니다.
@@ -23,7 +23,7 @@
 //  저장 파일에는 아무것도 쓰지 않는다. localStorage 'storyworld.r571.surge' {on:false} 로 전부, {aura:false} 로 오라만 끈다.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_SAMONG_SURGE_R571__)return;
-const REV='R571-samong-surge-2+R967',KEY='storyworld.r571.surge';
+const REV='R571-samong-surge-2+R969',KEY='storyworld.r571.surge';
 const RULES=Object.freeze({cooldown:.23,chance:1.77,range:1.77,egoCooldown:.77,egoEntry:.77,samongEntry:.6});
 const K=RULES.cooldown,R=RULES.range,INV=1/RULES.range,FAR=600;
 let prefs={on:true,aura:true,ego:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
