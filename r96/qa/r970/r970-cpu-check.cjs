@@ -19,7 +19,7 @@ const strip=s=>s.replace(/\/\*[\s\S]*?\*\//g,'').replace(/\/\/.*$/gm,'');
 ok(!/ctx\.|drawImage|\.filter\s*=|(?:window|document)\.addEventListener\(\s*['"]key/.test(strip(src)),'그림·필터·전역 키 처리 없음(키는 레벨 칸 안에서만)');
 // 일반 진행 규칙이 그대로인지(바뀌면 이 검사가 알려 준다)
 ok(/freshPlayer=function\(\.\.\.args\)\{const p=freshBase\.apply\(this,args\);p\.points=1;/.test(html),'R62: 새 영웅 포인트 1');
-ok(/p\.level=Math\.min\(HERO_LEVEL_CAP,Math\.max\(1,integer\(p\.level,1\)\)\+1\);p\.points=Math\.min\(MAX,integer\(p\.points\)\+1\);/.test(html),'R62: 레벨 +1 마다 포인트 +1');
+ok(/p\.level=Math\.min\(MAX,Math\.max\(1,integer\(p\.level,1\)\)\+1\);[^;]*;p\.points=Math\.min\(MAX,integer\(p\.points\)\+1\);/.test(html),'R62: 레벨 +1 마다 포인트 +1');
 ok(/const SLOT=SAVE\+'\.cheat777',LEVEL_CAP=99;/.test(html),'777 레벨 상한 99');
 // ---- 실제 777 블록 떼기 ----
 const a=html.indexOf('/* User-approved 777'),b=html.indexOf('})();',a)+5;ok(a>0&&b>a,'777 블록 찾음');

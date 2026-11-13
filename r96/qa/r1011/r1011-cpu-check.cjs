@@ -13,7 +13,7 @@ ok(/function gainXP\(value\)\{player\.xp\+=value;let n=0;while\(player\.level<HE
 ok(/out\.level=clamp\(Math\.floor\(finite\(p\.level,1\)\),1,HERO_LEVEL_CAP\);/.test(html),'validateSave 레벨 자르기 = HERO_LEVEL_CAP(예전 99)');
 ok(!/out\.level=clamp\(Math\.floor\(finite\(p\.level,1\)\),1,99\)/.test(html)&&!/player\.level<99&&/.test(html),'엔진에 레벨 99 상한이 남지 않음');
 ok(/const SLOT=SAVE\+'\.cheat777',LEVEL_CAP=99;/.test(html),'레벨 없이 부르는 예전 777 API(검사 도구) 채우기 레벨은 99 그대로(CI 고정 검사 r81 계약)');
-ok(/p\.level=Math\.min\(HERO_LEVEL_CAP,Math\.max\(1,integer\(p\.level,1\)\)\+1\);/.test(html),'R62 지역 완료 레벨업도 상한에서 멈춤');
+ok(/p\.level=Math\.min\(MAX,Math\.max\(1,integer\(p\.level,1\)\)\+1\);if\(p\.level>HERO_LEVEL_CAP\)p\.level=HERO_LEVEL_CAP;/.test(html),'R62 지역 완료 레벨업도 상한에서 멈춤');
 ok(/p\.level=Math\.min\(HERO_LEVEL_CAP,Math\.max\(1,integer\(data\.level,1\)\)\);/.test(html),'R62 저장 불러오기 레벨도 상한으로 자름');
 ok(/p\.level=Math\.min\(HERO_LEVEL_CAP,Math\.max\(1,integer\(p\.level,1\)\)\);p\.points=integer\(p\.points\);return p;/.test(html),'R62 normalizePlayer 도 상한으로 자름');
 ok(/player\.level=Math\.min\(CAP\(\),Math\.max\(player\.level,S\.lv\)\)/.test(SV)&&!/Math\.min\(99,Math\.max\(player\.level,S\.lv\)\)/.test(SV)&&SV===rd('runtime-text','survival-r600.js'),'무한생존 영웅 레벨 상한 = 공유 상한(사본 일치)');
