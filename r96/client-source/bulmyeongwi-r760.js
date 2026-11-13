@@ -21,14 +21,14 @@
 //    중간보스 '검은 안개 심장'은 엔진 4자세 대신 시트(대기6·공격8·피격4·죽음8, 512칸·발 (256,470)), 보이는 키는 엔진 대기와 같게.
 //    넷째 묶음: 눈빛 공격은 예비 동작이 생긴 atkB8_r2(1~3칸 움츠림·4칸 쏠림·5칸 시선 = 타격, sheet-atkB2), 체력 절반 이하 피격은 hit2nd4(sheet-hit2).
 //    scripts/r764-bulmyeongwi-sheets.py → assets/r760/{boss,mid}/sheet-*.webp. 시트가 안 실렸으면 지금 그림·엔진 죽음 그대로.
-//  · R970 방향 이동(사용자 2026-11-12 "위아래 이동모션은 최소4프레임… 위아래옆3가지 방향만 있으면됨 좌우는 서로 반전"): Dots CX-0082MV B36(불면귀 위·아래 4칸)·B35(검은 안개 심장 옆·아래·위 4칸).
+//  · R973 방향 이동(사용자 2026-11-12 "위아래 이동모션은 최소4프레임… 위아래옆3가지 방향만 있으면됨 좌우는 서로 반전"): Dots CX-0082MV B36(불면귀 위·아래 4칸)·B35(검은 안개 심장 옆·아래·위 4칸).
 //    화면에서 위·아래로 움직이면 앞·뒤 모습 시트(384칸 4, 8fps), 옆으로는 기존 옆 걷기(보스 move6)·새 옆 시트(중간보스). 앞·뒤 모습은 좌우로 뒤집지 않는다.
 //    방향은 화면 속도를 고르게 한 값으로 고르고 문턱을 둘로 둬(들어갈 때 1.25배·나올 때 .8배) 오락가락하지 않게. 공격·피격·정지는 그대로. 크기는 보이는 키를 맞춘다.
-//    scripts/r970-bulmyeongwi-move.py → assets/r760/{boss,mid}/sheet-move{Up,Down,Side}.webp. 안 실렸으면 기존 그림. 끄기 '{"dirMove":false}'.
+//    scripts/r973-bulmyeongwi-move.py → assets/r760/{boss,mid}/sheet-move{Up,Down,Side}.webp. 안 실렸으면 기존 그림. 끄기 '{"dirMove":false}'.
 //  끄기: localStorage['storyworld.r760.bulmyeongwi']='{"on":false}'(시트만 끄기 '{"sheets":false}', 소리만 끄기 '{"sfx":false}'). 점검: window.__STORYWORLD_BULMYEONGWI_R760__.inspect()
 (()=>{'use strict';
 if(window.__STORYWORLD_BULMYEONGWI_R760__)return;
-const REV='R760-R970-bulmyeongwi-5',KEY='storyworld.r760.bulmyeongwi';
+const REV='R760-R973-bulmyeongwi-5',KEY='storyworld.r760.bulmyeongwi';
 let prefs={on:true,ghosts:true,sheets:true,sfx:true,dirMove:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object')for(const k of Object.keys(prefs))if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={draws:0,swapped:0,waiting:0,patterns:0,ghosted:0,errors:0};let lastError=null,last=null,lastDeath=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
@@ -41,7 +41,7 @@ const PATTERN={rain:{foot:353},transition:{foot:353}}; // 672x384 패턴 그림�
 // R761 Dots 시트: 512칸, 발 (256,469.33)(768칸 (384,704)), 보이는 키 약 383px(768칸 약 575px). fps 는 칸이 바뀌는 빠르기.
 const SC={cell:512,px:256,py:469.33,vis:383};
 const SHEET={idle:{n:6,fps:7},move:{n:6,fps:9},atkA:{n:8},atkB:{n:8},cast:{n:8,step:.11,loop:[4,6]},reveal:{n:8,step:.14},idle2:{n:6,fps:7},hit:{n:4,step:.075},atkB2:{n:8,strike:4},hit2:{n:4,step:.075},
- // R970 위·아래 이동(384칸, 보이는 키 275·발 줄 338 — 칸마다 잰 알파 테두리)
+ // R973 위·아래 이동(384칸, 보이는 키 275·발 줄 338 — 칸마다 잰 알파 테두리)
  moveUp:{n:4,fps:8,geo:{cell:384,px:192,py:338,vis:275},front:true},moveDown:{n:4,fps:8,geo:{cell:384,px:192,py:338,vis:275},front:true}};
 // R764 중간보스 시트(원래 512칸, 발 줄 470, 보이는 키 약 400) · 죽음 시트(보스 death10 은 0~8칸, 중간보스 death8 은 0~6칸 — 마지막은 빈 칸)
 const MC={cell:512,px:256,py:470,vis:400},MG={cell:384,px:188,py:350,vis:265},MSHEET={idle:{n:6,fps:7},atk:{n:8},hit:{n:4,step:.075},death:{n:8},moveSide:{n:4,fps:8,geo:MG},moveDown:{n:4,fps:8,geo:MG,front:true},moveUp:{n:4,fps:8,geo:MG,front:true}},MPATH=k=>'assets/r760/mid/sheet-'+k+'.webp';
@@ -71,7 +71,7 @@ function track(e,s){const t=T(),dt=s.lastT<0?0:Math.max(0,Math.min(.1,t-s.lastT)
  if(Number.isFinite(s.wx)&&dt>0){sp=Math.hypot(e.x-s.wx,e.y-s.wy)/dt;const d=(e.x-s.wx)-(e.y-s.wy);if(Math.abs(d)>1e-4)s.vx=d>0?1:-1;}
  if(Number.isFinite(s.wx)&&dt>0)heading(e,s,dt);
  s.wx=e.x;s.wy=e.y;if(dt>0)s.move+=((sp>.18?1:0)-s.move)*Math.min(1,dt*8);}
-// R970 화면에서 어느 쪽으로 움직이나: 'side'|'up'|'down'. 화면 속도를 고르게 한 뒤, 위·아래로 들어갈 때는 세로가 가로의 1.25배 넘게, 나올 때는 .8배 아래로.
+// R973 화면에서 어느 쪽으로 움직이나: 'side'|'up'|'down'. 화면 속도를 고르게 한 뒤, 위·아래로 들어갈 때는 세로가 가로의 1.25배 넘게, 나올 때는 .8배 아래로.
 function heading(e,s,dt){let sx,sy;try{const a=project(s.wx,s.wy),b=project(e.x,e.y);sx=(b.x-a.x)/dt;sy=(b.y-a.y)/dt;}catch(_){sx=((e.x-s.wx)-(e.y-s.wy))/dt;sy=((e.x-s.wx)+(e.y-s.wy))/dt;}
  if(!Number.isFinite(sx)||!Number.isFinite(sy))return;const k=Math.min(1,dt*6);s.hx=(s.hx||0)+(sx-(s.hx||0))*k;s.hy=(s.hy||0)+(sy-(s.hy||0))*k;
  const ax=Math.abs(s.hx),ay=Math.abs(s.hy),v=s.dir==='up'||s.dir==='down';

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""R970: Dots CX-0082MV 불면귀(B36 위·아래)·검은 안개 심장(B35 옆·아래·위) 이동 4프레임 시트 → 게임용 webp(384칸 그대로).
+"""R973: Dots CX-0082MV 불면귀(B36 위·아래)·검은 안개 심장(B35 옆·아래·위) 이동 4프레임 시트 → 게임용 webp(384칸 그대로).
 입력: Dots 결과 폴더 사본(예: /mnt/project-files/bulmyeongwi-art/cx0082mv-bmg-move). 원본은 지우거나 덮어쓰지 않는다.
 그림(형태·자세)은 Dots 원본 그대로. 밝기만 지금 게임 시트에 맞춘다(불투명 평균 밝기: 보스 옆 걷기 59·새 그림 79 → ×.76, 중간보스 대기·공격 48~50·새 그림 70 → ×.70).
 밝은 곳(호박색 눈빛, 가장 밝은 채널 150 위)은 덜 낮춰 230 위는 그대로 둔다 — R760 톤 사본과 같은 뜻.
-출력: r96/runtime-text/assets/r760/{boss,mid}/sheet-move{Up,Down,Side}.webp, 목록·해시는 r96/r760-bulmyeongwi.json 의 sheets970.
-usage: python3 scripts/r970-bulmyeongwi-move.py <cx0082mv-bmg-move 폴더>"""
+출력: r96/runtime-text/assets/r760/{boss,mid}/sheet-move{Up,Down,Side}.webp, 목록·해시는 r96/r760-bulmyeongwi.json 의 sheets973.
+usage: python3 scripts/r973-bulmyeongwi-move.py <cx0082mv-bmg-move 폴더>"""
 import hashlib,io,json,sys
 from pathlib import Path
 from PIL import Image
@@ -24,6 +24,6 @@ def main(d):
     (OUT/sub).mkdir(parents=True,exist_ok=True);(OUT/sub/('sheet-'+k+'.webp')).write_bytes(b)
     rows.append({'who':sub,'key':k,'source':'Dots CX-0082MV '+f,'sourceSha256':hashlib.sha256(src.read_bytes()).hexdigest(),'frames':N,'cell':CELL,'toneGain':g,
       'path':'assets/r760/'+sub+'/sheet-'+k+'.webp','size':list(o.size),'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()})
-  spec=json.loads(SPEC.read_text(encoding='utf8'));spec['sheets970']=rows;SPEC.write_text(json.dumps(spec,ensure_ascii=False,indent=1)+'\n',encoding='utf8')
+  spec=json.loads(SPEC.read_text(encoding='utf8'));spec['sheets973']=rows;SPEC.write_text(json.dumps(spec,ensure_ascii=False,indent=1)+'\n',encoding='utf8')
   for r in rows:print(r['path'],r['size'],r['bytes'])
 if __name__=='__main__':main(sys.argv[1])

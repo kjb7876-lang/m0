@@ -383,7 +383,7 @@ const FF=(c,e)=>c.__STORYWORLD_STORY_COMBAT_R54__.frameFor(e,null);const VAPI=c=
  const cn=vworld({ready:false});cn.room.enemies.push(hw);ok(P(cn,shot()).base.length===1,'R769 sheet not loaded → engine');
  const cz=vworld({roomId:'last301'});cz.room.enemies.push(hw);ok(P(cz,shot()).base.length===1,'R769 other region → engine');
  const cf=vworld({store:{'storyworld.r763.villagers':'{"proj":false}'}});cf.room.enemies.push(hw);ok(P(cf,shot()).base.length===1,'R769 proj:false → engine');}
-{// R970 방향 이동(Dots CX-0082MV B35·B36): 화면 위·아래로 움직이면 위·아래 4프레임 시트(384칸), 옆으로는 기존 옆 걷기. 좌우는 뒤집기. 공격·피격·정지는 그대로.
+{// R973 방향 이동(Dots CX-0082MV B35·B36): 화면 위·아래로 움직이면 위·아래 4프레임 시트(384칸), 옆으로는 기존 옆 걷기. 좌우는 뒤집기. 공격·피격·정지는 그대로.
  //  검사 화면: project x=100+(x-3)*10, y=200+(y-3)*5 → 세계 y+ 가 화면 아래.
  const F4=k=>Math.round(k.sourceRect[0]/384),bot=k=>Math.max(...k.points.map(q=>q[1])),lr=k=>k.points[1][0]-k.points[0][0];
  const c=world({sheets:true}),e=boss();const D=frames(c,e,1,{step:(e)=>{e.y+=.06;}}),d=D[D.length-1].b;
@@ -418,5 +418,5 @@ const FF=(c,e)=>c.__STORYWORLD_STORY_COMBAT_R54__.frameFor(e,null);const VAPI=c=
  ok(ms.ghosts.length===1&&ms.ghosts[0].sourcePath===ms.b.sourcePath&&ms.ghosts[0].sourceRect[0]===ms.b.sourceRect[0],'mid afterimage follows the walk frame');
  ok(/sheet-idle/.test(frames(cm,m,1.2).pop().b.sourcePath),'mid standing → idle');
  m.attack={elapsed:.1,angle:0,shape154:{windup:.35}};ok(/sheet-atk/.test(frames(cm,m,.1,{step:(e)=>{e.y+=.06;}}).pop().b.sourcePath),'mid attack while moving → attack sheet');m.attack=null;
- ok(/R970/.test(API(c).rev),'rev names R970 ('+API(c).rev+')');}
+ ok(/R973/.test(API(c).rev),'rev names R973 ('+API(c).rev+')');}
 console.log('R760 CPU check OK ('+n+' assertions)');
