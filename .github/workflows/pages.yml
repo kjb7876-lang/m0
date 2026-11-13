@@ -448,6 +448,8 @@ jobs:
         run: node r96/qa/r964/r964-cpu-check.cjs
       - name: R965 midboss attack sound also fires on story pattern attacks (no attack id, no bossVolley) CPU check
         run: node r96/qa/r965/r965-cpu-check.cjs
+      - name: R966 regular-mob and bulmyeongwi-zone attack sounds also fire during the route phase (room.engaged false) CPU check
+        run: node r96/qa/r966/r966-cpu-check.cjs
       - name: R385 mob moves (review list v18 move/rename) CPU check
         run: node r96/qa/r385/r385-cpu-check.cjs
       - name: R390 cinema full narration + midboss hold + enemies keep chasing CPU check
