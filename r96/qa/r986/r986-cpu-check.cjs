@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// R986: 한서하 패시브(R949) 소집 문·열린 시간방 물결을 Dots 시트(CX-0091SE SE-07·SE-06)로 그린다.
+// R986: 한서하 패시브(R949) 소집 문·초침 일격·열린 시간방 고리를 Dots 시트(CX-0091SE SE-07·SE-04·SE-06)로 그린다.
 // 판정·피해는 건드리지 않는다. 시트가 안 읽혔거나 꺼져 있으면 R949 의 기존 그림으로 돌아간다. 좌표가 깨지면(NaN) 그리지 않는다.
 'use strict';
 const fs=require('fs'),path=require('path'),vm=require('vm');
@@ -17,11 +17,12 @@ ok('script tag after seoha-epoch-r949',html.indexOf('./'+NAME)>html.indexOf('./s
 ok('script tag before story-reader line',html.indexOf('./'+NAME)<html.indexOf('./story-reader-r122.js'));
 ok('verify list has overlay and assets',verify.includes("'"+NAME+"'")&&verify.includes("'assets/r986/'"));
 ok('pages.yml runs this check',yml.includes('node r96/qa/r986/r986-cpu-check.cjs'));
-ok('manifest lists overlay and both sheets',man.includes('"'+NAME+'"')&&man.includes('assets/r986/seoha-summon-gate.webp')&&man.includes('assets/r986/seoha-room-dial.webp')&&man.includes('assets/r986/seoha-hand-strike.webp')&&man.includes('assets/r986/seoha-rewind-ring.webp'));
-for(const f of ['seoha-summon-gate.webp','seoha-room-dial.webp','seoha-hand-strike.webp','seoha-rewind-ring.webp'])ok('asset present '+f,fs.existsSync(path.join(root,'runtime-text','assets','r986',f)));
+ok('manifest lists overlay and both sheets',man.includes('"'+NAME+'"')&&man.includes('assets/r986/seoha-summon-gate.webp')&&man.includes('assets/r986/seoha-room-dial.webp')&&man.includes('assets/r986/seoha-hand-strike.webp'));
+for(const f of ['seoha-summon-gate.webp','seoha-room-dial.webp','seoha-hand-strike.webp'])ok('asset present '+f,fs.existsSync(path.join(root,'runtime-text','assets','r986',f)));
 ok('R949 asks the gate hook before its rift sheets',/__STORYWORLD_SEOHA_FX_R986__/.test(r949)&&/\.gate\(b,t,q,AH,sc\)\)continue/.test(r949));
 ok('R949 asks the room hook before its code rings',/\.room\(p,R,f,cid,c,sc\)/.test(r949));
-ok('R949 asks the hand and ring hooks',/\.hand\(a,b,lift,w,/.test(r949)&&/\.donut\(p,R1,w,since,/.test(r949));
+ok('R949 asks the hand hook',/\.hand\(a,b,lift,w,/.test(r949));
+ok('rewind ring (SE-05) is not wired: it failed the in-game review',!/donut\(/.test(src)&&!/\.donut\(/.test(r949)&&!man.includes('seoha-rewind-ring'));
 ok('R949 keeps its own drawings as fallback',r949.includes("cell(rb,'riftB'")&&r949.includes('ring(p,R,VIO'));
 ok('no damage or judgement calls in overlay',!/hitEnemy|killEnemy|\.hp\s*[-+]?=|room\.enemies/.test(src));
 ok('no blur/drop-shadow filter and no gradients',!/blur\(|drop-shadow|createRadialGradient|createLinearGradient/.test(src));
@@ -89,21 +90,12 @@ if(src){
   for(const [n,args] of [['NaN start',[{x:NaN,y:1},b0,30,1,0]],['zero length',[a0,a0,30,1,0]],['NaN lift',[a0,b0,NaN,1,0]]]){
     E.calls.length=0;let r,threw=false;try{r=A.hand(...args,'cid',c,E.sc);}catch(_){threw=true;}ok('hand refuses '+n+' without drawing',!threw&&r===false&&!E.calls.some(c=>c.a));}
   E.calls.length=0;A.hand(a0,b0,30,NaN,-3,'cid',c,E.sc);d=E.calls.find(c=>c.a);ok('hand negative time clamps to frame 6 with finite numbers',!!d&&d.a[2]===96&&d.a[1]===0&&fin(d));
-  // 되감긴 시간로
-  E.calls.length=0;ok('ring wind-up draws and claims',A.donut(p,172,.5,null,false,'cid',c,E.sc)===true);d=E.calls.find(c=>c.a);
-  ok('ring wind-up frame 5, outer radius = R1, centred',d.a[1]===5*384&&d.a[2]===0&&Math.abs(d.a[7]-768)<.01&&Math.abs(d.a[5]+192*2-500)<.01&&Math.abs(d.a[6]+115.5*2-400)<.01&&d.alpha<.82&&d.alpha>.4);
-  E.calls.length=0;A.donut(p,172,1,.04,false,'cid',c,E.sc);d=E.calls.find(c=>c.a);ok('ring burst starts at frame 10+',d.a[1]===(11%6)*384&&d.a[2]===192);
-  E.calls.length=0;A.donut(p,172,1,3,false,'cid',c,E.sc);d=E.calls.find(c=>c.a);ok('ring waits on frame 9 between beats',!!d&&d.a[1]===3*384&&d.a[2]===192);
-  E.calls.length=0;ok('ring finished claims without drawing',A.donut(p,172,1,3,true,'cid',c,E.sc)===true&&!E.calls.some(c=>c.a));
-  for(const [n,args] of [['NaN radius',[p,NaN,1,0,false]],['zero radius',[p,0,1,0,false]],['NaN point',[{x:1,y:NaN},172,1,0,false]]]){
-    E.calls.length=0;let r,threw=false;try{r=A.donut(...args,'cid',c,E.sc);}catch(_){threw=true;}ok('ring refuses '+n+' without drawing',!threw&&r===false&&!E.calls.some(c=>c.a));}
-  E.calls.length=0;A.donut(p,172,NaN,-1,false,'cid',c,E.sc);d=E.calls.find(c=>c.a);ok('ring negative time clamps to frame 10 with finite numbers',!!d&&d.a[1]===4*384&&d.a[2]===192&&fin(d));
   // 대체 길
   E=boot({ready:false});
   ok('sheet not ready → gate falls back and asks for the image',E.api.gate(b,10.1,q,120,E.sc)===false&&E.asked.some(p=>p.includes('seoha-summon-gate')));
   ok('sheet not ready → room falls back',E.api.room(p,200,.5,'cid',c,E.sc)===false&&!E.calls.some(c=>c.a));
   E=boot({off:true});
-  ok('switched off → both fall back',E.api.gate(b,10.1,q,120,E.sc)===false&&E.api.room(p,200,.5,'cid',c,E.sc)===false&&E.api.hand(a0,b0,30,1,0,'cid',c,E.sc)===false&&E.api.donut(p,172,1,0,false,'cid',c,E.sc)===false&&E.api.on()===false);
+  ok('switched off → both fall back',E.api.gate(b,10.1,q,120,E.sc)===false&&E.api.room(p,200,.5,'cid',c,E.sc)===false&&E.api.hand(a0,b0,30,1,0,'cid',c,E.sc)===false&&E.api.on()===false);
   E=boot();E.ctx.drawImage=()=>{throw new Error('boom');};
   let r1,threw=false;try{r1=E.api.gate(b,10.1,q,120,E.sc);}catch(_){threw=true;}
   ok('draw error is swallowed, counted, and falls back',!threw&&r1===false&&E.api.inspect().errors===1&&E.ctx.globalAlpha===1);
