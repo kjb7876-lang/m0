@@ -9455,7 +9455,8 @@
     "assets/r948/mh07-note24.webp",
     "assets/r948/mh10-aura24.webp",
     "assets/r948/mh10a-enter8.webp",
-    "assets/r948/mh10b-exit8.webp"
+    "assets/r948/mh10b-exit8.webp",
+    "assets/r948/mh05-cloud24.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -10530,5 +10531,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "88749e37469d25c9e8fd184cf89b3e5a43b824c7f41100daf2c9cd47a1e7625c"
+  "runtimeManifestSHA256": "5f612957971625a4ecf5944667f4a4fd04b206ae5184487ff6cc870444c8ce51"
 }

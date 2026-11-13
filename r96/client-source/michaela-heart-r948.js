@@ -17,7 +17,7 @@
  */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_MICHAELA_HEART_R948__)return;
-const REV='R948-heart-4',KEY='storyworld.r948.heart',HERO='michaela';
+const REV='R948-heart-5',KEY='storyworld.r948.heart',HERO='michaela';
 const CHANCE=.11,CROWD_BONUS=.04,CROWD_N=4,CROWD_R=2,CHANCE_MAX=.35,ROLL_GAP=.35,ICD=5;
 const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
 const WEIGHTS=[['volley',.55],['tower',.30],['bloom',.15]];
@@ -34,7 +34,7 @@ const FLY='assets/r948/heart-fly8.webp',HIT='assets/r948/heart-hit6.webp',BURST=
  // MH-09 칸마다 그림 중심이 위로 옮겨 감(보석 핵 y≈137 → 테 하트 y≈110): 피벗을 따라 옮겨 한 자리에서 터지게
  BURST_PIV_Y=[137,137,137,134,124,118,114,112,112,111,111,111,111,111,111,111],CELL=256,FLY_PIV={x:150,y:128},FLY_BODY=.53;
 // R988 Dots CX-0094MH 시트(드라이브 alpha16 정리판 → 512 칸은 256 칸으로 줄임, 12.5fps). 칸 안 기준점은 그림 실측값.
-const M03='assets/r948/mh03-heart24.webp',M04='assets/r948/mh04-blast24.webp',M07='assets/r948/mh07-note24.webp',M10='assets/r948/mh10-aura24.webp',M10A='assets/r948/mh10a-enter8.webp',M10B='assets/r948/mh10b-exit8.webp',SFPS=12.5,
+const M03='assets/r948/mh03-heart24.webp',M04='assets/r948/mh04-blast24.webp',M07='assets/r948/mh07-note24.webp',M10='assets/r948/mh10-aura24.webp',M10A='assets/r948/mh10a-enter8.webp',M10B='assets/r948/mh10b-exit8.webp',M05='assets/r948/mh05-cloud24.webp',M05_PIV={x:128,y:114},M05_W=224,SFPS=12.5,
  M03_PIV={x:128,y:134},M03_W=182,      // 큰 장미 하트: 중심·폭
  M04_PIV={x:130,y:135},M04_FROM=3,M04_LIFE=(24-M04_FROM)/SFPS, // 대폭발: 섬광 칸(4번째)부터 꽃잎 소멸까지 1.68초
  M07_PIV={x:130,y:140},                // 둥실 음표
@@ -62,7 +62,7 @@ function play(k){try{if(typeof sound==='function')sound(k);}catch(_){}}
 function shakeBy(v){try{if(typeof shake==='number')shake=Math.max(shake,v);}catch(_){}}
 function deal(e,v,kind){if(!e||hiddenActor(e)||!canHit(e)||!(v>0))return false;inner++;try{const r=hitEnemy(e,v,{kind:'r948-'+kind,friendly:true,owner:'hero',sourceHero:HERO,r948:true});if(r!==false)stats.hits++;return r;}catch(err){fail(err);return false;}finally{inner--;}}
 function stateOf(o){let s=owners.get(o);if(!s){s={lastRoll:-1e9,readyAt:-1e9};owners.set(o,s);ownerCount++;}return s;}
-function preload(){if(preloaded)return;preloaded=true;try{if(typeof addImage==='function'&&typeof readyImage==='function')for(const p of [...ORGEL,FLY,HIT,BURST,M03,M04,M07,M10,M10A,M10B])if(!readyImage(p))addImage(p);}catch(err){fail(err);}}
+function preload(){if(preloaded)return;preloaded=true;try{if(typeof addImage==='function'&&typeof readyImage==='function')for(const p of [...ORGEL,FLY,HIT,BURST,M03,M04,M07,M10,M10A,M10B,M05])if(!readyImage(p))addImage(p);}catch(err){fail(err);}}
 // ---- 홀림(엔진 moveActor, 벽 존중) ----------------------------------------------------------------
 function charm(e,o){if(major(e)||hiddenActor(e))return;if(charms.some(c=>c.e===e))return;stats.charmed++;e.cd=Math.max(Number(e.cd)||0,CHARM_CD);
  charms.push({e,o:{x:o.x,y:o.y},left:CHARM_DIST,v:CHARM_DIST/CHARM_T,until:T()+CHARM_T+.05});}
@@ -203,6 +203,9 @@ function drawCloud(x,t){const {z,T1,AH}=scale(),u=t-x.t0,q=project(x.x,x.y),a=Ma
  sc({id:id+':ground',kind:'effect',pxfSide:'hero',x:x.x,y:x.y,groundAligned:true},()=>{groundHeart(q,R*2,ROSE,Math.max(1,2*z),a*.6,.12);});
  // 공중에 선 하트 모양 구름: 하트 테두리를 따라 뭉게 덩이(가운데가 같은 그라데이션 원) + 옅게 채운 하트 — 천천히 숨쉬듯 부풂
  sc({id:id+':puffs',kind:'effect',pxfSide:'hero',x:x.x,y:x.y+.01},()=>{const S=Math.max(AH*1.9,R*1.9),cy=q.y-AH*.9-Math.sin(t*1.3)*2*z,n=18;
+  // R998: Dots MH-05 하트 구름 24장(알파 60% 상한 정리판)을 구름 수명(4.3초)에 걸쳐 한 번 — 작게 피어 부풀었다 줄며 사라짐. 가장 큰 장 폭 224px 를 코드 구름 폭에 맞춤
+  const f5=Math.min(23,Math.max(0,Math.floor((Number.isFinite(u)?u:0)/(CLOUD_T+.3)*24)));
+  if(gridCell(M05,6,f5,q.x,cy,S*.95*CELL/M05_W,a,M05_PIV.x,M05_PIV.y,.35)){glow(q.x,cy,S*.4,ROSE,a*.3);return;}
   ctx.save();try{ctx.globalAlpha*=a;heartPath(q.x,cy,S*.92);ctx.fillStyle=`rgba(${PINK},.26)`;ctx.fill();}finally{ctx.restore();}
   for(let i=0;i<n;i++){const th=i/n*Math.PI*2,hx=Math.pow(Math.sin(th),3),hy=-(13*Math.cos(th)-5*Math.cos(2*th)-2*Math.cos(3*th)-Math.cos(4*th))/17;
    const br=1+.07*Math.sin(t*2.2+i),px=q.x+hx*S*.5*br,py=cy+hy*S*.5*br+S*.04,r=AH*(.26+.06*Math.sin(t*1.7+i*1.3));
