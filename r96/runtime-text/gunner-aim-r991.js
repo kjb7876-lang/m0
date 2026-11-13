@@ -12,7 +12,7 @@
  *  설정 storyworld.r991.gunnerAim {"on":false} 로 끄면 예전 그대로. Canonical source; copied by scripts/sync-r99.py. */
 (()=>{'use strict';
 if(window.__STORYWORLD_GUNNER_AIM_R991__)return;
-const REV='R991-gunner-aim-1',KEY='storyworld.r991.gunnerAim',HERO='gunner';
+const REV='R1003-gunner-aim-2',KEY='storyworld.r991.gunnerAim',HERO='gunner';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={walk:0,idle:0,swings:0,replaced:0,shots:0,moved:0,blocked:0,waiting:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
@@ -25,7 +25,9 @@ const SHEET={e:{gun:-3,face:0,body:181,tip:[[159,75],[154,72],[172,83],[151,71],
  se:{gun:35,face:45,body:182,tip:[[158,133],[155,130],[163,143],[152,126],[158,133],[159,137]]},
  s:{gun:50,face:90,body:182,tip:[[128,126],[128,126],[132,131],[125,119],[135,169],[135,169]]},
  ne:{gun:-52,face:-60,body:180,tip:[[156,38],[150,36],[170,43],[146,35],[156,38],[160,39]]},
- n:{gun:-57,face:-90,body:182,tip:[[134,44],[130,44],[145,47],[128,44],[135,45],[138,45]]}};
+ n:{gun:-57,face:-90,body:182,tip:[[134,44],[130,44],[145,47],[128,44],[135,45],[138,45]]},
+ // R1003 Dots 정 아래 조준(앞모습, 총구가 화면 앞으로) — 드라이브 HERO-gunner-attack-s2 후보, 7분야 심사 통과분. 대칭 그림이라 반전하지 않는다. tip 은 Dots 수동 측정값.
+ s2:{gun:87,face:90,body:181,noMirror:true,path:'assets/r1003/gunner/attack-s2.webp',tip:[[93,131],[94,131],[94,131],[94,128],[94,128],[94,128]]}};
 const SHEETS=Object.freeze(Object.keys(SHEET));
 // 걸으며 쏠 때: R128 걷기 시트(8칸 192×256, 발 96·226, walk-e 는 R144 v1 사본) — 같은 총 각도, 칸마다 총구 끝
 const WALK={e:{path:'assets/r144/walk/gunner/walk-e.webp',tip:[[165,81],[166,76],[166,76],[166,80],[165,80],[164,76],[163,76],[164,81]]},
@@ -33,15 +35,18 @@ const WALK={e:{path:'assets/r144/walk/gunner/walk-e.webp',tip:[[165,81],[166,76]
  s:{path:'assets/r128/gunner/walk-s.webp',tip:[[127,149],[125,149],[124,149],[124,149],[123,149],[122,149],[124,149],[126,149]]},
  ne:{path:'assets/r128/gunner/walk-ne.webp',tip:[[164,39],[163,42],[162,41],[161,38],[160,39],[161,43],[162,41],[163,38]]},
  n:{path:'assets/r128/gunner/walk-n.webp',tip:[[142,45],[141,48],[140,47],[139,44],[138,45],[138,48],[140,47],[141,44]]}};
+WALK.s2=WALK.s; // 정 아래 걷기 사격 그림은 아직 없음 → 앞모습 걷기 그대로
+// R1003 쏜 뒤 정 아래 서 있기: Dots idle-s2 v4(4칸 192×256, 발 96·227, 몸 181) — 사용자 방향 확인("이건 맞음") + 7분야 심사 통과분
+const IDLE_S2={path:'assets/r1003/gunner/idle-s2.webp',cellW:192,cellH:256,footX:96,footY:227,refBody:181,frames:4};
 const WFY=226;
-const pathOf=s=>'assets/r143/attack/gunner/attack-'+s+'.webp';
+const pathOf=s=>SHEET[s]?.path||'assets/r143/attack/gunner/attack-'+s+'.webp';
 const gunAngle=(s,mirror)=>{const g=(SHEET[s]||SHEET.e).gun*D;return mirror?Math.PI-g:g;};
 const angDiff=(a,b)=>Math.abs(Math.atan2(Math.sin(a-b),Math.cos(a-b)));
 const faceAngle=(s,mirror)=>{const g=(SHEET[s]||SHEET.e).face*D;return mirror?Math.PI-g:g;};
 // 화면 각 a 에 맞는 칸: 총 각도 오차 + 몸 방향 오차×0.25 가 가장 작은 칸(같으면 앞 순서)
 const FACE_W=.25,cost=(a,s,m)=>angDiff(a,gunAngle(s,m))+FACE_W*angDiff(a,faceAngle(s,m));
 function pick(a){a=Number.isFinite(a)?Math.atan2(Math.sin(a),Math.cos(a)):0;if(!Number.isFinite(a))a=0;let best={sheet:'e',mirror:false},bd=Infinity;
- for(const s of SHEETS)for(const m of [false,true]){const d=cost(a,s,m);if(d<bd-1e-9){bd=d;best={sheet:s,mirror:m};}}return best;}
+ for(const s of SHEETS)for(const m of (SHEET[s].noMirror?[false]:[false,true])){const d=cost(a,s,m);if(d<bd-1e-9){bd=d;best={sheet:s,mirror:m};}}return best;}
 function tip(s,fr){const t=(SHEET[s]||SHEET.e).tip;const i=clamp(Math.round(fin(fr,0)),0,t.length-1);return t[i].slice();}
 // 화면 오프셋(rx,ry px) → 땅 좌표: 엔진 project(x,y)=((x−y)·TILE·zoom, (x+y)·TILE·.5·zoom) 의 역
 function screenToGround(o,rx,ry,TILE,zoom){const T=fin(TILE,64)*Math.max(.05,fin(zoom,1)),a=fin(rx)/T,b=fin(ry)/(T*.5);return{x:fin(o?.x)+(a+b)/2,y:fin(o?.y)+(b-a)/2};}
@@ -76,7 +81,7 @@ function wrapShot(){if(typeof makeShot!=='function'||makeShot.r991)return;const 
 // 몸 그림: R143 이 그린 공격 칸을 고른 칸(같은 프레임·같은 키·같은 발)으로 바꿔 놓는다
 function replace(rec,st){const sw=swingOf(player);if(!sw||!(player.attackAnim>0)||T()-sw.at>.6)return;
  for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||!c.r143Attack||!c.points||!c.sourceRect)continue;
-  const m=/r143\/attack\/gunner\/attack-([a-z]+)\.webp/.exec(String(c.sourcePath||c.image?.src||''));if(!m)continue;
+  const m=/(?:r143\/attack|r1003)\/gunner\/attack-([a-z0-9]+)\.webp/.exec(String(c.sourcePath||c.image?.src||''));if(!m)continue;
   const P=c.points,oldMir=P[1][0]<P[0][0],fOld=oldMir?-1:1,k=Math.abs(P[1][0]-P[0][0])/CW,ky=(P[3][1]-P[0][1])/CH;if(!(k>0)||!Number.isFinite(ky))return;
   if(m[1]===sw.sheet&&oldMir===sw.mirror)return;const p=pathOf(sw.sheet),im=image(p);if(!im)return;
   const fx=P[0][0]+fOld*FX*k,fy=P[0][1]+FY*ky,f=sw.mirror?-1:1,X=v=>fx+f*(v-FX)*k,Y=v=>fy+(v-FY)*ky,sx=clamp(Math.round(fin(c.sourceRect[0])/CW),0,5)*CW;
@@ -88,10 +93,10 @@ const SEC8=['e','se','s','sw','w','nw','n','ne'];
 const sector8=a=>SEC8[((Math.round(fin(a)/(Math.PI/4))%8)+8)%8];
 function replaceIdle(rec,st){const S=window.__STORYWORLD_HERO_SHEETS__;if(!S?.idleItem)return;
  for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||!c.points||!c.sourceRect)continue;
-  const m=/r128\/gunner\/idle-([a-z]+)\.webp/.exec(String(c.sourcePath||c.image?.src||''));if(!m)continue;
+  const src=String(c.sourcePath||c.image?.src||''),m=/(?:r128|r710)\/gunner\/idle-([a-z]+)\.webp/.exec(src);if(!m)continue;
   const aim=aimNow((typeof HEROES!=='undefined'&&HEROES?.[HERO]?.range)||7);if(!aim)return;const d=sector8(aim.a),P=c.points,oldMir=P[1][0]<P[0][0];
-  const oldShown=oldMir?({e:'w',w:'e',se:'sw',sw:'se',ne:'nw',nw:'ne'}[m[1]]||m[1]):m[1];if(oldShown===d)return;
-  const it=S.idleItem(HERO,d,false),from=S.idleItem(HERO,m[1],false);if(!it?.image)return;
+  const oldShown=oldMir?({e:'w',w:'e',se:'sw',sw:'se',ne:'nw',nw:'ne'}[m[1]]||m[1]):m[1];const s2=d==='s'&&prefs.s2!==false;if(oldShown===d&&!s2)return;
+  let it=S.idleItem(HERO,d,false);const from=S.idleItem(HERO,m[1],false);if(s2){const im=image(IDLE_S2.path);if(!im)return;it={...IDLE_S2,image:im};}if(!it?.image)return;
   const cw=fin(it.cellW,192),ch=fin(it.cellH,256),k0=Math.abs(P[1][0]-P[0][0])/fin(from?.cellW,192),ky0=(P[3][1]-P[0][1])/fin(from?.cellH,256);if(!(k0>0)||!Number.isFinite(ky0))return;
   const r=clamp(fin(from?.refBody,183)/fin(it.refBody,183),.8,1.25),k=k0*r,ky=ky0*r,fo=oldMir?-1:1,fx=P[0][0]+fo*fin(from?.footX,96)*k0,fy=P[0][1]+fin(from?.footY,226)*ky0;
   const X=v=>fx+(v-fin(it.footX,96))*k,Y=v=>fy+(v-fin(it.footY,226))*ky,fr=clamp(Math.round(fin(c.sourceRect[0])/fin(from?.cellW,192)),0,Math.max(0,fin(it.frames,4)-1));
@@ -108,7 +113,7 @@ function replaceWalk(rec,st){const sw=swingOf(player);
   const pts=[[X(idx*CW),Y(0)],[X(idx*CW+CW),Y(0)],[X(idx*CW+CW),Y(CH)],[X(idx*CW),Y(CH)]];if(pts.flat().some(v=>!Number.isFinite(v)))return;
   Object.assign(c,{image:im,sourcePath:W.path,sourceRect:[idx*CW,0,CW,CH],imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],points:pts,r991Walk:{sheet:sw.sheet,mirror:sw.mirror}});stats.walk=(stats.walk||0)+1;return;}}
 // 처음 쓰는 순간 그림이 없어 예전 그림이 한 번 보이지 않게 기억사수일 때 미리 받는다(지역을 옮기면 게임이 그림 기억을 비우므로 2초마다 확인)
-let preAt=0;function preload(){const t=Date.now();if(t-preAt<2000)return;preAt=t;try{for(const p of [...SHEETS.map(pathOf),...Object.values(WALK).map(w=>w.path)])if(!(typeof readyImage==='function'&&readyImage(p)))image(p);}catch(e){fail(e);}}
+let preAt=0;function preload(){const t=Date.now();if(t-preAt<2000)return;preAt=t;try{for(const p of [...SHEETS.map(pathOf),...Object.values(WALK).map(w=>w.path),IDLE_S2.path])if(!(typeof readyImage==='function'&&readyImage(p)))image(p);}catch(e){fail(e);}}
 function wrapDraw(){if(typeof drawHero!=='function'||drawHero.r991)return;const base=drawHero;const w=function(...a){if(on())preload();const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
   try{if(st>=0&&on()){for(let i=st;i<rec.commands.length;i++)if(rec.commands[i]?.r121Walk){walkAt=T();break;}if(solo()){replace(rec,st);if(T()-walkAt<.05)replaceWalk(rec,st);if(!(player.attackAnim>0)&&prefs.idle!==false)replaceIdle(rec,st);}}}catch(e){fail(e);}return r;};w.r991=true;drawHero=w;}
 function install(){try{wrapAttack();wrapShot();wrapDraw();}catch(e){fail(e);}}

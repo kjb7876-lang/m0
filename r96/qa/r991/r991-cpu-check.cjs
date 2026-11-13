@@ -34,12 +34,13 @@ console.log('PICK '+JSON.stringify(rows));
 ok(['e','w','se','sw','ne','nw'].every(k=>rows[k].err<=13),'옆·대각 6방향: 총 각도 오차 13° 이하',rows);
 ok(rows.n.err<=34&&rows.s.err<=41,'정 위·정 아래: 있는 그림 중 가장 가까운 것(위 ≤34°, 아래 ≤41° — 정면 조준 그림이 없어 Dots 요청)',rows);
 ok(rows.w.mirror&&rows.sw.mirror&&rows.nw.mirror&&!rows.e.mirror&&!rows.se.mirror&&!rows.ne.mirror,'왼쪽은 오른쪽 그림 반전, 오른쪽은 반전 없음',rows);
-ok(rows.se.sheet==='se'&&rows.sw.sheet==='se'&&rows.ne.sheet==='ne'&&rows.nw.sheet==='ne'&&rows.n.sheet==='n'&&rows.s.sheet==='s','대각선은 몸을 돌린 대각 그림, 정 위·아래는 뒷모습·앞모습',rows);
+ok(rows.se.sheet==='se'&&rows.sw.sheet==='se'&&rows.ne.sheet==='ne'&&rows.nw.sheet==='ne'&&rows.n.sheet==='n'&&rows.s.sheet===(A.SHEETS.includes('s2')?'s2':'s'),'대각선은 몸을 돌린 대각 그림, 정 위·아래는 뒷모습·앞모습(R1003 뒤 정 아래는 Dots s2)',rows);
 // 360° 전부: 총 각도 오차가 가장 가까운 후보보다 10° 넘게 나쁘지 않음(몸 방향 가중이 총 방향을 해치지 않게)
 let worst=0,nonOpt=0;for(let d=-180;d<180;d+=1){const p=A.pick(d*D),e=angDiff(d*D,A.gunAngle(p.sheet,p.mirror));let best=1e9;for(const s of A.SHEETS)for(const m of [false,true])best=Math.min(best,angDiff(d*D,A.gunAngle(s,m)));if(e>best+10+1e-9)nonOpt++;worst=Math.max(worst,e);}
 ok(nonOpt===0,'360° 모든 각에서 총 각도 오차 ≤ 최적+10°',{nonOpt});
 // 연속성: 각을 1°씩 돌릴 때 고른 그림이 오락가락하지 않음(바뀌는 지점 10곳 이하)
-{let ch=0,prev=null;for(let d=-180;d<=180;d++){const p=A.pick(d*D),k=p.sheet+p.mirror;if(prev&&k!==prev)ch++;prev=k;}ok(ch<=10,'1° 단위로 돌릴 때 그림 바뀜 10번 이하(깜빡임 없음)',{ch});}
+{let ch=0,prev=null,run=0,minRun=1e9;const cand=A.SHEETS.length*2-(A.SHEETS.includes('s2')?1:0);for(let d=-180;d<=180;d++){const p=A.pick(d*D),k=p.sheet+p.mirror;if(prev&&k!==prev){ch++;if(ch>1)minRun=Math.min(minRun,run);run=0;}run++;prev=k;}
+ ok(ch<=Math.max(10,cand)&&minRun>=5,'1° 단위로 돌릴 때 그림 바뀜이 후보 수 이하·한 그림이 최소 5° 유지(깜빡임 없음, R1003 s2 로 후보 11)',{ch,cand,minRun});}
 ok(worst<=41,'최악 오차 41° 이하(정 아래)',{worst});
 // 경계값: NaN·Infinity·큰 각도
 const bad=[NaN,Infinity,-Infinity,1e12,-7*Math.PI];for(const v of bad){const p=A.pick(v);ok(p&&A.SHEETS.includes(p.sheet)&&typeof p.mirror==='boolean','pick('+v+') 은 유효한 그림을 돌려줌(멈추지 않음)',p);}

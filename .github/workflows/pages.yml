@@ -502,6 +502,8 @@ jobs:
         run: node r96/qa/r953/r953-cpu-check.cjs
       - name: R991 gunner aim CPU check
         run: node r96/qa/r991/r991-cpu-check.cjs
+      - name: R1003 gunner aim down art CPU check
+        run: node r96/qa/r1003/r1003-cpu-check.cjs
       - name: R945 hwando ink passives (piercing ink crescent, seven ink clones for 7 s, three-hero ink finale, per-body state) CPU check
         run: node r96/qa/r945/r945-cpu-check.cjs
       - name: R947 slayer blood passives (common piercing blood needle, blood cross-sword rain, rare lattice laser barrage, upright crosses, per-body state) CPU check

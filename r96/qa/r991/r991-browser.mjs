@@ -10,9 +10,9 @@ const req=createRequire(import.meta.url);let chromium;for(const p of ['playwrigh
 const URL=process.env.STORYWORLD_URL||'http://127.0.0.1:4396/m0/',OUT=process.env.OUT||'out/r991',MOVE=process.env.MOVE==='1',TAG=process.env.TAG||'';fs.mkdirSync(OUT,{recursive:true});
 let fails=0;const check=(n,ok,info)=>{if(!ok)fails++;console.log((ok?'PASS ':'FAIL ')+n+(info===undefined?'':' '+JSON.stringify(info).slice(0,900)));};
 // R143 기억사수 공격 시트(192×256 칸) — 총 각도(화면, 개머리→총구)와 칸마다 총구 끝(그림을 열어 잰 값, qa/r991/tips.png)
-const GUN={e:-3,se:35,s:50,ne:-52,n:-57};
+const GUN={e:-3,se:35,s:50,ne:-52,n:-57,s2:87};/* s2: R1003 Dots 정 아래 조준(반전 안 함) */
 const WTIP={e:[[165,81],[166,76],[166,76],[166,80],[165,80],[164,76],[163,76],[164,81]],se:[[162,136],[161,140],[160,139],[159,135],[158,136],[159,140],[160,139],[161,136]],s:[[127,149],[125,149],[124,149],[124,149],[123,149],[122,149],[124,149],[126,149]],ne:[[164,39],[163,42],[162,41],[161,38],[160,39],[161,43],[162,41],[163,38]],n:[[142,45],[141,48],[140,47],[139,44],[138,45],[138,48],[140,47],[141,44]]};
-const TIP={e:[[159,75],[154,72],[172,83],[151,71],[159,75],[163,77]],se:[[158,133],[155,130],[163,143],[152,126],[158,133],[159,137]],s:[[128,126],[128,126],[132,131],[125,119],[135,169],[135,169]],ne:[[156,38],[150,36],[170,43],[146,35],[156,38],[160,39]],n:[[134,44],[130,44],[145,47],[128,44],[135,45],[138,45]]};
+const TIP={s2:[[93,131],[94,131],[94,131],[94,128],[94,128],[94,128]],e:[[159,75],[154,72],[172,83],[151,71],[159,75],[163,77]],se:[[158,133],[155,130],[163,143],[152,126],[158,133],[159,137]],s:[[128,126],[128,126],[132,131],[125,119],[135,169],[135,169]],ne:[[156,38],[150,36],[170,43],[146,35],[156,38],[160,39]],n:[[134,44],[130,44],[145,47],[128,44],[135,45],[138,45]]};
 const b=await chromium.launch({headless:true});const ctx=await b.newContext({viewport:{width:960,height:540},deviceScaleFactor:2});
 await ctx.addInitScript((OFF)=>{try{localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false}));localStorage.setItem('storyworld.r953.gunnerVeil','{"on":false}');if(OFF)localStorage.setItem('storyworld.r991.gunnerAim','{"on":false}');}catch(_){}},process.env.OFF==='1');
 const p=await ctx.newPage();const errors=[];p.on('pageerror',e=>errors.push(String(e).slice(0,200)));
@@ -26,7 +26,7 @@ await p.evaluate(async()=>{try{window.__STORYWORLD_GUNNER_ARMS_R561__.set({chain
  window.__r991={body:null,shots:[],pin:null,nan:0};window.__SLOW=1;const tb=tick;tick=function(dt,...a){return tb.call(this,dt*(window.__SLOW??1),...a);};/* 찍는 순간만 게임 시간을 거의 멈춤(qa/r444/scene4 방식) */
  const dh=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=dh.apply(this,a);
   try{if(st>=0&&player.hero==='gunner'){let bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind==='image'&&c.owner?.kind==='hero'&&c.points){const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;window.__r991.last={src:String(c.sourcePath||c.image?.src||'').split('/').slice(-2).join('/'),mir:c.points[1][0]<c.points[0][0],sx:c.sourceRect?.[0]};}}}}if(st>=0&&player.hero==='gunner'&&player.attackAnim>0&&!window.__r991.wbody)for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];const m=/gunner\/walk-([a-z]+)\.webp/.exec(String(c.sourcePath||c.image?.src||''));if(c.kind==='image'&&c.r121Walk&&m&&c.points)window.__r991.wbody={sheet:m[1],rect:c.sourceRect.slice(),points:c.points.map(q=>[q[0],q[1]]),t:time};}
-  if(st>=0&&player.hero==='gunner'&&player.attackAnim>0)for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];const s=String(c.sourcePath||c.image?.src||'');const m=/r143\/attack\/gunner\/attack-([a-z]+)\.webp/.exec(s);
+  if(st>=0&&player.hero==='gunner'&&player.attackAnim>0)for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];const s=String(c.sourcePath||c.image?.src||'');const m=/(?:r143\/attack|r1003)\/gunner\/attack-([a-z0-9]+)\.webp/.exec(s);
     if(c.kind==='image'&&m&&c.points){if(c.points.flat().some(v=>!Number.isFinite(v)))window.__r991.nan++;window.__r991.body={sheet:m[1],sx:c.sourceRect[0],points:c.points.map(q=>[q[0],q[1]]),t:time};}}}catch(_){}return r;};
  const ms=makeShot;makeShot=function(...args){const s=ms.apply(this,args);try{if(s?.friendly&&player.hero==='gunner'){const o=project(s.x,s.y);window.__r991.shots.push({x:s.x,y:s.y,vx:s.vx,vy:s.vy,sx:o.x,sy:o.y,t:time,damage:s.damage,radius:s.radius,speed:Math.hypot(s.vx,s.vy),life:s.life,mz:!!s.currentPublicMuzzle?.applied});}}catch(_){}return s;};
  /* 8방향 표적 자리가 모두 빈 바닥인 곳에 영웅을 세운다(벽에 걸린 몹은 엔진이 제자리로 되밀어 조준이 틀어진다) */
@@ -37,7 +37,7 @@ await p.evaluate(async()=>{try{window.__STORYWORLD_GUNNER_ARMS_R561__.set({chain
 });
 const SEC={e:0,se:45,s:90,sw:135,w:180,nw:-135,n:-90,ne:-45},D=Math.PI/180,ad=(a,c)=>Math.abs(Math.atan2(Math.sin(a-c),Math.cos(a-c)))/D;
 const gunAngle=(s,m)=>m?Math.PI-GUN[s]*D:GUN[s]*D;
-const best=a=>{let v=1e9;for(const s in GUN)for(const m of [false,true])v=Math.min(v,ad(a,gunAngle(s,m)));return v;};
+const best=a=>{let v=1e9;for(const s in GUN)for(const m of (s==='s2'?[false]:[false,true]))v=Math.min(v,ad(a,gunAngle(s,m)));return v;};
 const rows=[];
 const ONLY=(process.env.ONLY||'').split(',').filter(Boolean);
 for(const [name,deg] of Object.entries(SEC)){if(ONLY.length&&!ONLY.includes(name))continue;
@@ -67,13 +67,15 @@ for(const [name,deg] of Object.entries(SEC)){if(ONLY.length&&!ONLY.includes(name
 }
 fs.writeFileSync(`${OUT}/${TAG}${MOVE?'move':'still'}.json`,JSON.stringify(rows,null,1));
 const tbl=rows.filter(r=>r.sheet);
-if(MOVE){/* 이동 사격: 걷기 그림(R119)이 그려지고 R991 은 손대지 않음 — 기록만(review.md) */console.log('MOVE '+JSON.stringify(rows.map(r=>[r.name,r.drawn?.src,r.moving,r.sheet||null])));const mv=rows.filter(r=>r.walkSheet);check('이동 사격 8방향 기록',mv.length===8,rows.map(r=>[r.name,r.walkSheet]));check('이동 사격: 걷기 그림도 조준 쪽(옆·대각 ≤13°, 위·아래 최선+3°)',mv.every(r=>['n','s'].includes(r.name)?r.walkGunErr<=r.bestErr+3:r.walkGunErr<=13),mv.map(r=>[r.name,r.walkSheet,r.walkGunErr]));check('이동 사격: 탄이 걷기 그림 총구 끝 근처에서 나옴(≤8px, 걸음 1칸 차이 허용)',mv.every(r=>r.walkSpawnOff<=8),mv.map(r=>[r.name,r.walkSpawnOff]));check('이동 사격: 페이지 오류 없음',errors.length===0,errors);console.log(JSON.stringify({fails}));await b.close();process.exit(fails?1:0);}
+if(MOVE){/* 이동 사격: 걷기 그림(R119)이 그려지고 R991 은 손대지 않음 — 기록만(review.md) */console.log('MOVE '+JSON.stringify(rows.map(r=>[r.name,r.drawn?.src,r.moving,r.sheet||null])));const mv=rows.filter(r=>r.walkSheet);check('이동 사격 8방향 기록',mv.length===8,rows.map(r=>[r.name,r.walkSheet]));/* 걷기 그림은 R128 5방향뿐(정 아래 조준 걷기 s2 없음) → 위·아래 기준은 걷기 그림 중 최선(s2 제외) */const bestWalk=a=>{let v=1e9;for(const k in GUN)if(k!=='s2')for(const m of [false,true])v=Math.min(v,ad(a,gunAngle(k,m)));return v;};
+check('이동 사격: 걷기 그림도 조준 쪽(옆·대각 ≤13°, 위·아래는 걷기 그림 중 최선+3°)',mv.every(r=>['n','s'].includes(r.name)?r.walkGunErr<=bestWalk(r.aimDeg*D)+3:r.walkGunErr<=13),mv.map(r=>[r.name,r.walkSheet,r.walkGunErr]));check('이동 사격: 탄이 걷기 그림 총구 끝 근처에서 나옴(≤8px, 걸음 1칸 차이 허용)',mv.every(r=>r.walkSpawnOff<=8),mv.map(r=>[r.name,r.walkSpawnOff]));check('이동 사격: 페이지 오류 없음',errors.length===0,errors);console.log(JSON.stringify({fails}));await b.close();process.exit(fails?1:0);}
 check('8방향 모두 몸 그림·탄이 기록됨',tbl.length===8,rows.map(r=>r.name+':'+!!r.sheet));
 check('몸 그림의 총 각도가 쏜 방향에 맞음(옆·대각 ≤13°, 정 위·아래는 있는 그림 중 최선+3°)',tbl.every(r=>['n','s'].includes(r.name)?r.gunErr<=r.bestErr+3:r.gunErr<=13),tbl.map(r=>[r.name,r.sheet,r.gunErr,r.bestErr]));
 check('탄이 그려진 총구 끝에서 나옴(≤6px, 화면 2배 아닌 CSS px)',tbl.every(r=>r.spawnOff<=6),tbl.map(r=>[r.name,r.spawnOff]));
 check('탄이 표적을 향함(≤4°)',tbl.every(r=>r.shotToTarget<=4),tbl.map(r=>[r.name,r.shotToTarget]));
-const OPP={e:'w',w:'e',se:'sw',sw:'se',ne:'nw',nw:'ne'},shown=i=>{const m=/idle-([a-z]+)\.webp/.exec(i?.src||'');return m?(i.mir?OPP[m[1]]||m[1]:m[1]):null;};
+const OPP={e:'w',w:'e',se:'sw',sw:'se',ne:'nw',nw:'ne'},shown=i=>{const m=/idle-([a-z]+)\d*\.webp/.exec(i?.src||'');return m?(i.mir?OPP[m[1]]||m[1]:m[1]):null;};
 check('쏜 뒤 서 있기도 표적 쪽 8방향 그림(총이 표적 쪽)',rows.every(r=>shown(r.idle)===r.name),rows.map(r=>[r.name,r.idle?.src,r.idle?.mir]));
+{const rs=rows.find(r=>r.name==='s');if(rs)check('R1003: 정 아래 표적이면 쏜 뒤 대기도 Dots 정면 조준 idle-s2',/idle-s2\.webp/.test(rs.idle?.src||''),rs.idle);}
 check('피해·반경·탄속은 방향과 무관하게 같음(판정 불변)',new Set(tbl.map(r=>r.damage+'|'+r.radius+'|'+r.speed)).size===1,tbl.map(r=>[r.damage,r.radius,r.speed]));
 const fin=await p.evaluate(()=>({nan:window.__r991.nan,st:window.__STORYWORLD_GUNNER_AIM_R991__?.inspect?.()}));
 check('그리기 좌표 NaN/Infinity 없음',fin.nan===0,fin);

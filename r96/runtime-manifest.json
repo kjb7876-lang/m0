@@ -6493,6 +6493,16 @@
       "sha256": "17df1f7aeaac815bce5e4e04569382469d96cdc4b98d30af7690f335608d2bd8"
     },
     {
+      "path": "assets/r1003/gunner/attack-s2.webp",
+      "bytes": 93562,
+      "sha256": "18012f89d3b14f2ce6368dc904c5c22ca51c0daeadffc0c8296a5ac4597055d2"
+    },
+    {
+      "path": "assets/r1003/gunner/idle-s2.webp",
+      "bytes": 66648,
+      "sha256": "4345a195eb73505981809e6109060c93b98c36d7995796370ed7885fed20ce38"
+    },
+    {
       "path": "assets/r103/chest-closed.svg",
       "bytes": 2508,
       "sha256": "d3e981852d7785f5749b633ca6f136c5ae378ef0efc7b3562059ceae43bd3e10"
@@ -49974,8 +49984,8 @@
     },
     {
       "path": "gunner-aim-r991.js",
-      "bytes": 15547,
-      "sha256": "ba9bce64d007c32100b338a1fb0ce5fb1cc17c1afc44e17b08e97665b2dbc4a9"
+      "bytes": 16503,
+      "sha256": "9a770e6c0ef0914b155e2145a6702904a3104f3f2a99b07f6924f4b6b796a368"
     },
     {
       "path": "gunner-arms-r561.js",
@@ -51313,8 +51323,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10262,
-  "totalBytes": 1268508670,
+  "fileCount": 10264,
+  "totalBytes": 1268669836,
   "webHTMLSha256": "b589cda73a1d4aaa15dc4721397d524ac97b2164d5e6c56b56df102102456f8b",
   "largest": [
     {
