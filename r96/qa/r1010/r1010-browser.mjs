@@ -1,7 +1,7 @@
 // R1010 무한생존 미카엘라 결전·엔딩 — 브라우저 검사(헤드리스 소프트웨어 렌더링. 그래픽·실기기·자연 플레이 검증 아님).
 //  실제 입력(C 키·터치 상호작용 단추·계속 단추·Esc)으로 M 단계 대면 → 매듭 4개 → 엔딩 서사 → 진료기록 → 에필로그 → 결과 창.
 //  skip 갈래: 서사 창마다 Esc(서사 창은 안 닫힘) 뒤 Enter 로 빠르게 넘기고, 진료기록·결과 창은 Esc 로 닫아도 다시 뜨는지 본다.
-//  SW_URL(기본 http://127.0.0.1:4410/m0/), SHOTS=폴더(스크린샷), ONLY=pc|skip|death|mobile 로 한 갈래만.
+//  SW_URL(기본 http://127.0.0.1:4410/m0/), SHOTS=폴더(스크린샷), ONLY=pc|skip|death|mobile|real 로 한 갈래만.
 import {createRequire} from 'node:module';const req=createRequire(import.meta.url);const {chromium}=req('playwright');
 const URL=process.env.SW_URL||'http://127.0.0.1:4410/m0/',SHOTS=process.env.SHOTS||'',ONLY=process.env.ONLY||'';
 let fail=0,n=0;const ok=(m,c,x)=>{n++;console.log(c?'PASS':'FAIL',m,x!==undefined?JSON.stringify(x).slice(0,300):'');if(!c)fail++;};
@@ -13,7 +13,7 @@ async function boot(opt={}){const ctx=await b.newContext({viewport:opt.vp||{widt
 const A=(p,f,a)=>p.evaluate(f,a);
 // 레벨업 강화 창이 끼면 첫 카드를 눌러 넘긴다(생존 규칙 그대로).
 const pick=p=>A(p,()=>{const b=document.getElementById('r600Pick0');if(b&&modal){b.click();return 1;}return 0;});
-const until=async(p,fn,arg,limit=180000)=>{const end=Date.now()+limit;for(;;){await pick(p).catch(()=>0);const v=await p.evaluate(fn,arg).catch(()=>false);if(v)return v;if(Date.now()>end)throw new Error('timeout '+String(fn).slice(0,120));await p.waitForTimeout(200);}};
+const until=async(p,fn,arg,limit=180000)=>{const end=Date.now()+limit;for(;;){await pick(p).catch(()=>0);const v=await p.evaluate(fn,arg).catch(()=>false);if(v)return v;if(Date.now()>end){const why=await p.evaluate(()=>{const s=window.__STORYWORLD_SURVIVAL_R600__?.state?.()||{};return{i:s.i,id:s.id,phase:s.phase,narr:s.narrating,over:s.over,t:time,alive:room.enemies.filter(e=>e.hp>0&&!e.deadRecorded).length,modal,loading,story:!!storyScene,panel:(document.getElementById('panel')?.textContent||'').slice(0,80),f:window.__STORYWORLD_SURVIVAL_FINALE_R1010__?.state?.(),room:room.id};}).catch(e=>String(e));throw new Error('timeout '+String(fn).slice(0,120)+' '+JSON.stringify(why));}await p.waitForTimeout(200);}};
 async function toKair05(p){await A(p,async()=>{const Z=window.__STORYWORLD_SURVIVAL_R600__;await Z.start('hwando','normal');await Z.qaGo(Z.stageIds().indexOf('kair05'));});
  await until(p,()=>window.__STORYWORLD_SURVIVAL_R600__.here()&&room.id==='kair05'&&!loading);}
 const F=p=>A(p,()=>window.__STORYWORLD_SURVIVAL_FINALE_R1010__?.state?.()||null);
@@ -31,12 +31,19 @@ async function cutKnot(p,i,how='key'){await until(p,()=>!modal);await keepAlive(
 async function full(label,opt){const {ctx,p,errs}=await boot(opt);const how=opt.touch?'tap':opt.esc?'esc':'click';
  ok(label+': R1010 이 실려 있음',await A(p,()=>!!window.__STORYWORLD_SURVIVAL_FINALE_R1010__));
  ok(label+': 스토리(생존 밖)에서는 begin 거절',await A(p,()=>window.__STORYWORLD_SURVIVAL_FINALE_R1010__.begin({key:'M'})===false));
- await toKair05(p);/* R1006 처럼 M 단계 서사·물결이 끝난 뒤 부르는 상황: 생존 서사를 넘기고 꼬리(6.5초)가 지나 생성이 멈출 때까지 */
- await A(p,()=>window.__STORYWORLD_SURVIVAL_R600__.skipNarration());{const t=await A(p,()=>time);await until(p,t=>{player.hp=maxHP();return time>=t+7.5;},t,300000);}
  const want=await A(p,()=>{const P=window.__STORYWORLD_SURVIVAL_FINALE_R1010__.pure;return{cf:P.confrontScenes().map(s=>s.text),en:P.endingScenes().map(s=>s.text),ks:P.knotRecords().length};});
- const began=await A(p,()=>window.__STORYWORLD_SURVIVAL_FINALE_R1010__.begin({stageId:'sm1006:M',key:'M'}));ok(label+': M 단계 끝 begin → 대면 시작',began===true);
+ if(opt.real){/* 실제 연결: R1006 사몽 M 단계(sm1006:M)로 가서 서사·몹 물결을 넘기면 R1006 이 스스로 begin 을 부른다 */
+  await A(p,async()=>{const Z=window.__STORYWORLD_SURVIVAL_R600__;await Z.start('hwando','normal');await Z.qaGo(Z.stageIds().indexOf('sm1006:M'));});
+  await until(p,()=>window.__STORYWORLD_SURVIVAL_R600__.here()&&window.__STORYWORLD_SURVIVAL_R600__.state().id==='sm1006:M'&&room.id==='kair05'&&!loading);
+  await until(p,()=>{const Z=window.__STORYWORLD_SURVIVAL_R600__;player.hp=maxHP();if(window.__STORYWORLD_SURVIVAL_FINALE_R1010__.state().active)return true;/* 대면 자막이 시작된 뒤에는 건너뛰지 않는다(앞 단계 서사만 넘김) */Z.skipNarration();for(const e of room.enemies)if(e.hp>0&&!e.deadRecorded&&time>(e.graceUntil||0))try{killEnemy(e);}catch(_){}return false;},null,600000);
+  const h=await A(p,()=>({st:window.__STORYWORLD_SURVIVAL_R600__.state(),f:window.__STORYWORLD_SURVIVAL_FINALE_R1010__.state()}));
+  ok(label+': R1006 M 단계 물결 뒤 R1006 이 begin 을 부름(R600 handoff, 다음 지역으로 안 넘어감)',h.f.active&&h.f.stageId==='sm1006:M'&&h.st.phase==='handoff'&&h.st.id==='sm1006:M'&&!h.st.over,h);
+  ok(label+': M 단계 끝 begin → 대면 시작',true);}
+ else{await toKair05(p);/* R1006 처럼 M 단계 서사·물결이 끝난 뒤 부르는 상황: 생존 서사를 넘기고 꼬리(6.5초)가 지나 생성이 멈출 때까지 */
+ await A(p,()=>window.__STORYWORLD_SURVIVAL_R600__.skipNarration());{const t=await A(p,()=>time);await until(p,t=>{player.hp=maxHP();return time>=t+7.5;},t,300000);}
+ const began=await A(p,()=>window.__STORYWORLD_SURVIVAL_FINALE_R1010__.begin({stageId:'sm1006:M',key:'M'}));ok(label+': M 단계 끝 begin → 대면 시작',began===true);}
  const m0=await A(p,()=>{const m=room.enemies.find(e=>e.r1010Michaela);return m&&{name:m.name,hp:m.hp,max:m.maxHp,living:m.hp>0&&!m.deadRecorded}});ok(label+': 미카엘라가 무대에 나옴',m0&&m0.name==='미카엘라'&&m0.living,m0);
- ok(label+': 대면 직후 R600 은 다음 지역으로 넘어가지 않음',await A(p,()=>{const s=window.__STORYWORLD_SURVIVAL_R600__.state();return s.id==='kair05'&&!s.over;}));
+ ok(label+': 대면 직후 R600 은 다음 지역으로 넘어가지 않음',await A(p,r=>{const s=window.__STORYWORLD_SURVIVAL_R600__.state();return s.id===(r?'sm1006:M':'kair05')&&room.id==='kair05'&&!s.over;},!!opt.real));
  const sub=await A(p,()=>{const Z=window.__STORYWORLD_SURVIVAL_R600__;return{list:Z.narr().list,want:window.__STORYWORLD_SURVIVAL_FINALE_R1010__.pure.confrontScenes().flatMap(s=>Z.pure.sentences(s.text))};});
  ok(label+': 대면 서사 = 원문(M1 0~3) 문장 그대로 생존 자막으로',sub.list.length>0&&sub.list.join(' ')===sub.want.join(' ')&&sub.want.join(' ').replace(/\s+/g,'')===want.cf.join('').replace(/\s+/g,''),{n:sub.list.length,w:sub.want.length});
  ok(label+': 대면과 함께 바로 결전(서사 동안 전투 계속)',(await F(p)).phase==='fight'&&!(await A(p,()=>modal)));
@@ -45,12 +52,13 @@ async function full(label,opt){const {ctx,p,errs}=await boot(opt);const how=opt.
  const k0=await A(p,()=>window.__STORYWORLD_SURVIVAL_R600__.inspect().stats.spawned||0);
  await keepAlive(p);const t0=await A(p,()=>time);await until(p,t=>{player.hp=maxHP();return time>=t+4;},t0,240000);
  ok(label+': 결전 중 몹 물결이 계속 나옴(생존 생성 규칙 그대로)',await A(p,k=>(window.__STORYWORLD_SURVIVAL_R600__.inspect().stats.spawned||0)>k&&room.enemies.some(e=>e.survivalR600&&!e.r1010Michaela&&e.hp>0),k0));
+ if(SHOTS){await A(p,()=>{try{auto=false;settings.autoSkill=false;}catch(_){}const k=room.props.find(q=>q.r1010Knot===0);player.x=k.x+.6;player.y=k.y+.8;});await p.waitForTimeout(600);await p.screenshot({path:SHOTS+'/r1010-fight-'+label+'.jpg',quality:85});}
  if(!opt.touch&&!opt.esc){// 미카엘라는 피해로 쓰러지지 않는다
   const r=await A(p,()=>{const m=room.enemies.find(e=>e.r1010Michaela);for(let i=0;i<6;i++)hitEnemy(m,1e9);m.hp=0;m.hp=-5;killEnemy(m);return{hp:m.hp,max:m.maxHp,dead:!!m.deadRecorded,st:m.spawnState,in:room.enemies.includes(m)};});
   ok(label+': 큰 피해·hp=0·killEnemy 에도 미카엘라 생존(하한 70%)',r.hp>=r.max*.7-1e-6&&r.hp>0&&!r.dead&&r.in,r);
   await cutKnot(p,2);ok(label+': 차례가 아닌 매듭(3번)은 안 끊김',(await F(p)).cut===0&&!(await A(p,()=>modal)));}
  const kt=[];for(let i=0;i<want.ks;i++){await cutKnot(p,i,opt.touch?'tap':'key');const t=await storyText(p);kt.push(t);
-  ok(label+': 매듭 '+(i+1)+' 원문 창이 열림',!!t,(await F(p)));
+  ok(label+': 매듭 '+(i+1)+' 원문 창이 열림',!!t,t?(await F(p)):await A(p,i=>{const k=room.props.find(q=>q.r1010Knot===i);return{f:window.__STORYWORLD_SURVIVAL_FINALE_R1010__.state(),modal,loading,story:!!storyScene,panel:(document.getElementById('panel')?.textContent||'').slice(0,60),p:[player.x,player.y,player.hp],k:k&&[k.x,k.y],room:room.id,log:window.__STORYWORLD_SURVIVAL_FINALE_R1010__.inspect().log.slice(-4)};},i));
   if(i<want.ks-1){await drain(p,()=>window.__STORYWORLD_SURVIVAL_FINALE_R1010__.state().phase!=='cutting'&&!modal,how);const s=await F(p);ok(label+': 매듭 '+(i+1)+'/'+want.ks+' 끊음, 아직 결전 중',s.cut===i+1&&s.phase==='fight'&&s.active,s);
    if(i===2)ok(label+': 3개로는 안 끝남(미카엘라 그대로·엔딩 없음)',await A(p,()=>{const m=room.enemies.find(e=>e.r1010Michaela);return !!m&&!m.r1010Released&&!window.__STORYWORLD_SURVIVAL_FINALE_R1010__.inspect().log.includes('ending');}));}}
  // 4번째 진술 창 → 엔딩 서사 → 진료기록
@@ -84,6 +92,7 @@ async function death(){const {ctx,p,errs}=await boot();await toKair05(p);{const 
  ok('death: 매듭 도중 영웅이 쓰러지면 생존 기존 패배 결과 창',s.r.over&&/정화가 끊겼습니다/.test(s.h)&&!s.f.active&&!s.again,{over:s.r.over,f:s.f});
  ok('death: 페이지 오류 0',errs.length===0,errs);await ctx.close();}
 
+if(!ONLY||ONLY==='real')await full('real',{real:true});
 if(!ONLY||ONLY==='pc')await full('pc',{});
 if(!ONLY||ONLY==='skip')await full('skip',{esc:true,again:true});
 if(!ONLY||ONLY==='death')await death();

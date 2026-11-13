@@ -22,6 +22,7 @@ const fin=(...a)=>a.every(Number.isFinite);
 const SV=()=>window.__STORYWORLD_SURVIVAL_R600__,ZN=()=>window.__STORYWORLD_SAMONG_ZONES_R115__,SM=()=>window.__STORYWORLD_SAMONG_R103__,MP=()=>window.__STORYWORLD_SAMONG_MAPS_R105__;
 const zoneDef=id=>G(()=>ZN().zone(id),null);
 const keyName=()=>G(()=>KR291.i,'C')||'C';
+const useName=()=>G(()=>document.body.classList.contains('mobile-live-r63'),false)?'상호작용':keyName();/* 모바일은 C 키 대신 상호작용 단추 */
 const keyText=t=>String(t||'').replace(/(^|[^A-Za-z0-9])E(?![A-Za-z0-9])/g,'$1'+keyName());/* R115 keyText 와 같은 규칙 */
 
 // ── 순수 함수(CPU 검사가 부른다) ──
@@ -127,14 +128,15 @@ function drawKnot(p){if(!here())return;const im=G(()=>readyImage(KNOT_ART),null)
  const z=G(()=>zoom,1),tl=G(()=>TILE,64),w=clamp(tl*z*1.5,24,220),h=w*600/640,t=G(()=>time,0),cur=!p.r1010Cut&&p.r1010Knot===F.cut&&F.phase!=='released';
  const a=p.r1010Cut?.16:cur?clamp(.72+.22*Math.sin(t*4),0,1):.42;if(!fin(w,h,a)){stats.nanDraw++;return;}
  ctx.save();try{ctx.globalAlpha=a;if(im&&(im.naturalWidth||im.width)>0)ctx.drawImage(im,q.x-w/2,q.y-h*.82,w,h);
-  if(cur&&Math.hypot(p.x-player.x,p.y-player.y)<3.2){ctx.globalAlpha=.92;ctx.fillStyle='#f3e3d0';ctx.font='12px sans-serif';ctx.textAlign='center';ctx.fillText(keyName()+' · '+(solve().word||'매듭')+' '+(p.r1010Knot+1),q.x,q.y+14);}}
+  if(cur&&Math.hypot(p.x-player.x,p.y-player.y)<3.2){ctx.globalAlpha=.92;ctx.fillStyle='#f3e3d0';ctx.font='12px sans-serif';ctx.textAlign='center';ctx.fillText(useName()+' · '+(solve().word||'매듭')+' '+(p.r1010Knot+1),q.x,q.y+14);}}
  catch(e){fail(e);}finally{ctx.restore();}}
 
 // ── 안내 줄 ──
 let hudEl=null;
 function hud(){try{if(!hudEl||!hudEl.isConnected){hudEl=document.createElement('div');hudEl.id='r1010Hud';hudEl.style.cssText='position:fixed;left:50%;transform:translateX(-50%);top:calc(122px + env(safe-area-inset-top,0px));z-index:8979;pointer-events:none;font-size:12px;color:#f0d9cf;text-shadow:0 1px 2px #000;letter-spacing:.04em;display:none;text-align:center;max-width:calc(100vw - 32px)';document.body.appendChild(hudEl);}
  const on=F.active&&here()&&(F.phase==='fight'||F.phase==='cutting');hudEl.style.display=on?'block':'none';if(!on)return;
- const tx=NAME+' · 처치하지 않습니다 · '+(solve().word||'매듭')+' '+F.cut+' / '+F.knots.length+' · 붉은 매듭에서 '+keyName();if(hudEl.textContent!==tx)hudEl.textContent=tx;}catch(e){fail(e);}}
+ {const h=document.getElementById('r600Hud'),r=h&&h.classList.contains('on')?h.getBoundingClientRect():null,top=r&&Number.isFinite(r.bottom)&&r.bottom>0?Math.round(r.bottom+6)+'px':'calc(122px + env(safe-area-inset-top,0px))';if(hudEl.style.top!==top)hudEl.style.top=top;}/* 생존 HUD(보스 막대가 있으면 아래로 내려감·좁은 화면 두 줄) 바로 아래 — 코어·경험치 막대와 겹치지 않게 */
+ const tx=NAME+' · 처치하지 않습니다 · '+(solve().word||'매듭')+' '+F.cut+' / '+F.knots.length+' · 붉은 매듭에서 '+useName();if(hudEl.textContent!==tx)hudEl.textContent=tx;}catch(e){fail(e);}}
 
 // ── 엔진 연결(모든 스크립트가 실린 뒤 — 생존·사몽 덧씌우기보다 바깥에 선다) ──
 let installed=false;
