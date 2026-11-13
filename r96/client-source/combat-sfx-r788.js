@@ -25,7 +25,9 @@
  function apply(){if(!on||typeof soundProfiles==='undefined'||!soundProfiles)return;
   for(const s of Object.keys(BOSSES))for(const [K,f,n,g] of SETS)soundProfiles['r788'+K+'_'+s]=Array.from({length:n},(_,i)=>({key:'r788-'+f+'-'+s+'-'+(i+1),path:DIR+f+'-'+s+'-'+(i+1)+'.ogg',gain:g,r541:true}));}
  function play(kind,allow){try{if(typeof sound==='function'&&soundProfiles?.[kind]?.length){allow?sound(kind,true):sound(kind);return true;}}catch(_){stats.errors++;}return false;}
- function attack(e){try{const s=slugFor(e);if(!s||!(e.hp>0)||quiet()||typeof room!=='undefined'&&room&&room.engaged===false)return;const t=now();
+ // R968: 길 구간(R78 phase route)·R78 구간이 없는 방(ep1a08·hando·kair02/03·cult04·last301, phase null)은 room.engaged 가 false 로 남는다 → R966(#522)과 같게 R78 이 맡은 방이고 보스가 실제로 나와 있으면(active) 전투 중으로 본다(phase 가 비어 있는 방도 포함, done·exit 는 막음).
+ const idle=e=>{if(typeof room==='undefined'||!room||room.engaged!==false)return false;try{const R=window.__STORYWORLD_WORLD_COMBAT_R78__;if(!R||typeof R.state!=='function')return true;const p=R.state()?.phase??null;return !(e.spawnState==='active'&&(p==null||p==='route'||p==='rally'||p==='door'||p==='boss'));}catch(_){return true;}};
+ function attack(e){try{const s=slugFor(e);if(!s||!(e.hp>0)||quiet()||idle(e))return;const t=now();
   if(t-(lastAtk[s]??-1e9)<ATK_GAP){stats.atkSkipped++;return;}lastAtk[s]=t;if(play('r788BAtk_'+s))stats.atk++;}catch(_){stats.errors++;}}
  function warm(list){try{if(typeof audioBuffer!=='function'||typeof audioUnlocked!=='undefined'&&!audioUnlocked)return;const ss=[...new Set(list.map(slugFor).filter(Boolean))].sort(),key=ss.join();if(!key||key===warmKey)return;warmKey=key;
   for(const s of ss)for(const [K] of SETS)for(const r of soundProfiles?.['r788'+K+'_'+s]||[])try{Promise.resolve(audioBuffer(r.path)).catch(()=>{});}catch(_){}stats.warmed++;}catch(_){stats.errors++;}}

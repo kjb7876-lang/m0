@@ -169,9 +169,16 @@ const on=(E,id,tag)=>E.hits.filter(h=>h.id===id&&(!tag||h.s?.r947===tag));
 // 사용자 14:12Z "번개보다는 완전한 적혈 느낌": 번개 시트·번개 모양 없이 피 줄기·핏방울·피 튐(Dots)으로
 ok(!/lightning|bolt|번개 줄기/i.test(code),'적혈 연쇄에 번개 시트·번개 그림을 쓰지 않음');
 {const E=engine({enemies:[{id:'a',x:21,y:20},{id:'b',x:23,y:21},{id:'c',x:25,y:22}]});E.api.force('needle');E.ctx.basicAttack();E.run(.2);E.sheets.length=0;E.frame();
- const own=E.sheets.filter(s=>/r947:needle/.test(s.own||''));ok(own.some(s=>/r947:bloodstream/.test(s.src||'')),'적혈 연쇄 줄기는 피 줄기 그림');
+ const own=E.sheets.filter(s=>/r947:needle/.test(s.own||''));ok(own.some(s=>/assets\/r947\/slayer-blood-stream\.webp/.test(s.src||'')),'적혈 연쇄 줄기는 피 줄기 그림(Dots SB-06 액체 피 줄기 시트, 11-13 코드 그림에서 교체)');
  ok(own.some(s=>/r947:blooddrop/.test(s.src||'')),'줄기에서 핏방울이 떨어짐');
  ok(E.sheets.some(s=>/assets\/r585\/slayer-burst-small\.webp/.test(s.src||'')),'튄 자리마다 Dots 피 튐(R585 burst-small)');}
+// Dots CX-0089SB 시트 적용(11-13): SB-01 떨어지는 십자검, SB-02 꽂힘, SB-06 피 줄기 — 십자검은 회전·뒤집기 없음
+{const E=engine({enemies:[{id:'a',x:22,y:20},{id:'b',x:20,y:23}]});E.api.force('swords');E.ctx.basicAttack();E.run(.2);E.sheets.length=0;E.frame();
+ const f=E.sheets.filter(s=>/r947:sword/.test(s.own||'')&&/assets\/r947\/slayer-sword-fall\.webp/.test(s.src||''));ok(f.length>=2&&f.every(s=>Math.abs(s.rot)<1e-9&&s.sy>0),'떨어지는 십자검은 Dots SB-01 시트, 똑바로');
+ E.run(.7);E.sheets.length=0;E.frame();const g=E.sheets.filter(s=>/r947:sword/.test(s.own||'')&&/assets\/r947\/slayer-sword-stab\.webp/.test(s.src||''));
+ ok(g.length>=2&&g.every(s=>Math.abs(s.rot)<1e-9&&s.sy>0),'꽂힌 십자검은 Dots SB-02 시트, 똑바로');
+ ok(!E.sheets.some(s=>/r947:sword/.test(s.own||'')&&/r947:sword/.test(s.src||'')),'코드로 그린 임시 십자검은 더 안 씀');}
+ok(['slayer-sword-fall','slayer-sword-stab','slayer-blood-stream','slayer-blood-head'].every(n=>fs.existsSync(path.join(ROOT,'r96/runtime-text/assets/r947/'+n+'.webp'))),'Dots 시트 파일 4장이 runtime-text/assets/r947 에 있음');
 {const foes=[];for(let i=0;i<20;i++)foes.push({id:'m'+i,x:20+Math.cos(i)*(1+i*.2),y:20+Math.sin(i)*(1+i*.2)});
  const E=engine({enemies:foes});E.api.force('lattice');E.ctx.basicAttack();E.run(.45);E.sheets.length=0;E.frame();
  ok(E.sheets.some(s=>/r947:lattice/.test(s.own||'')),'격자 레이저 그림');ok(E.sheets.length<=E.api.config.maxDraws,'한 프레임 그림 상한('+E.sheets.length+' ≤ '+E.api.config.maxDraws+')');}

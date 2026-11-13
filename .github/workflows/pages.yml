@@ -444,10 +444,16 @@ jobs:
         run: node r96/qa/r954/r954-cpu-check.cjs
       - name: R955 regular mob family hit/death/attack sounds (ElevenLabs) CPU check
         run: node r96/qa/r955/r955-cpu-check.cjs
+      - name: R967 boss/midboss sound gaps (hospital surgeon, syringe phantom new ElevenLabs sounds, wrath boss uses the R788 satan set) CPU check
+        run: node r96/qa/r967/r967-cpu-check.cjs
+      - name: R968 boss/midboss attack sounds also fire on route phases and rooms without an R78 phase (same rule as R966) CPU check
+        run: node r96/qa/r968/r968-cpu-check.cjs
       - name: R964 boss attack sound also fires on story pattern attacks (no attack id, no bossVolley) CPU check
         run: node r96/qa/r964/r964-cpu-check.cjs
       - name: R965 midboss attack sound also fires on story pattern attacks (no attack id, no bossVolley) CPU check
         run: node r96/qa/r965/r965-cpu-check.cjs
+      - name: R966 regular-mob and bulmyeongwi-zone attack sounds also fire during the route phase (room.engaged false) CPU check
+        run: node r96/qa/r966/r966-cpu-check.cjs
       - name: R385 mob moves (review list v18 move/rename) CPU check
         run: node r96/qa/r385/r385-cpu-check.cjs
       - name: R390 cinema full narration + midboss hold + enemies keep chasing CPU check
@@ -498,6 +504,8 @@ jobs:
         run: node r96/qa/r947/r947-cpu-check.cjs
       - name: R962 survival passives (core beam is not a hero hit, placed-hero shots credit their own body, R950 finale off on the survival stage) CPU check
         run: node r96/qa/r962/r962-cpu-check.cjs
+      - name: R971 hero special passive growth CPU check
+        run: node r96/qa/r971/r971-cpu-check.cjs
       - name: R963 survival BGM note sits below the survival HUD line (no overlapped text) CPU check
         run: node r96/qa/r963/r963-cpu-check.cjs
       - name: R463 seven-sins boss art (one form per fight, one body height, no cut-out broom) CPU check
@@ -827,6 +835,8 @@ jobs:
         run: node r96/qa/r949/r949-cpu-check.cjs
       - name: R951 neon storm passive CPU check
         run: node r96/qa/r951/r951-cpu-check.cjs
+      - name: R951 neon storm Dots sheets CPU check
+        run: node r96/qa/r951/r951-dots-sheets-cpu-check.cjs
       - name: R948 michaela heart passive CPU check
         run: node r96/qa/r948/r948-cpu-check.cjs
       - name: R899 boss-map story window and memory-shard paper move to top-left, quest line shortened CPU check
