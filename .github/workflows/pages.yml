@@ -506,10 +506,14 @@ jobs:
         run: node r96/qa/r947/r947-cpu-check.cjs
       - name: R962 survival passives (core beam is not a hero hit, placed-hero shots credit their own body, R950 finale off on the survival stage) CPU check
         run: node r96/qa/r962/r962-cpu-check.cjs
+      - name: R970 777 developer test mode level input (level-based skill points, same rule as normal play, 1..99) CPU check
+        run: node r96/qa/r970/r970-cpu-check.cjs
       - name: R971 hero special passive growth CPU check
         run: node r96/qa/r971/r971-cpu-check.cjs
       - name: R981 insomnia-ghost midboss renamed and set apart from the main boss CPU check
         run: node r96/qa/r981/puppet-cpu-check.cjs
+      - name: R990 bulmyeongwi fog skills (fog summon of village mobs, fog-weighted patterns, old boss art in summon ghosts) CPU check
+        run: node r96/qa/r990/r990-cpu-check.cjs
       - name: R963 survival BGM note sits below the survival HUD line (no overlapped text) CPU check
         run: node r96/qa/r963/r963-cpu-check.cjs
       - name: R980 mobile memory budget (R163/R106 tint caches capped by pixels on mobile, idle decoded images trimmed, desktop unchanged) CPU check
@@ -546,6 +550,8 @@ jobs:
         run: node r96/qa/r453/actor-tone-r453-cpu-check.cjs
       - name: R571 samong surge (during 사몽 only - skill cooldown x0.23, proc chance x1.77 capped 100%, skill range/area x1.77, restored after; hero main-colour flame aura, code only) CPU check
         run: node r96/qa/r571/r571-cpu-check.cjs
+      - name: R969 awakening cooldown cut (EGO new cooldowns x0.77 and running x0.77 on entry, samong running x0.60 on entry, samong new x0.23 kept, own cooldowns untouched) CPU check
+        run: node r96/qa/r969/r969-awaken-cd-cpu-check.cjs
       - name: R572 samong hero themes (during 사몽 only - per-hero motif around the body + skill-hit marks, upright cross only, capped marks, code only) CPU check
         run: node r96/qa/r572/r572-cpu-check.cjs
       - name: R521 hospital rooms (ep1a08 wards/consult/prep/lobby furnished by room function along the back walls, presentation only, drive hospital props) CPU check
@@ -839,6 +845,8 @@ jobs:
         run: node r96/qa/r952/r952-cpu-check.cjs
       - name: R949 Seoha passive overlapped time (summoned heroes, friendly Arbelia boss summon, afterimage time collapse; summons never join room.enemies) CPU check
         run: node r96/qa/r949/r949-cpu-check.cjs
+      - name: R986 Seoha passive Dots sheets (summon gate SE-07, time-room dial SE-06; falls back to R949 drawings; NaN-safe) CPU check
+        run: node r96/qa/r986/r986-cpu-check.cjs
       - name: R951 neon storm passive CPU check
         run: node r96/qa/r951/r951-cpu-check.cjs
       - name: R951 neon storm Dots sheets CPU check

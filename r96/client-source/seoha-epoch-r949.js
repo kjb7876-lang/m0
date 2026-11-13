@@ -263,6 +263,8 @@ function drawCollapse(x,t){const {z,T1,AH}=scale(),o=x.owner,u=t-x.t0,fade=Math.
 function drawArbFx(x,t){const {z,T1,AH}=scale(),id='r949:arb:'+x.t0.toFixed(2);
  for(const c of x.casts){const cid=id+':'+c.kind+':'+c.t0.toFixed(2),w=Math.min(1,(t-c.t0)/ARB_WIND),hv=c.hitAt!=null?Math.min(1,Math.max(0,(t-c.hitAt)/.4)):null;
   if(c.kind==='line'){const a=project(c.x,c.y),b=project(c.x+c.ux*ARB_LINE.len,c.y+c.uy*ARB_LINE.len),lift=AH*.55;
+   /* R986: Dots 초침 시트가 준비됐으면 그쪽이 예고·일격을 그린다(아니면 아래 기존 그림). */
+   if(X986()&&X986().hand&&X986().hand(a,b,lift,w,c.hitAt!=null?t-c.hitAt:null,cid,c,sc))continue;
    sc({id:cid,kind:'effect',pxfSide:'hero',x:c.x+c.ux*ARB_LINE.len*.5,y:c.y+c.uy*ARB_LINE.len*.5,groundAligned:true},()=>{ctx.save();try{ctx.globalCompositeOperation='lighter';
     if(hv==null){ctx.globalAlpha*=.35+.5*w;ctx.strokeStyle=`rgba(${GOLD},.8)`;ctx.lineWidth=Math.max(1.5,2*z);ctx.setLineDash&&ctx.setLineDash([10*z,7*z]);ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(a.x+(b.x-a.x)*w,a.y+(b.y-a.y)*w);ctx.stroke();ctx.setLineDash&&ctx.setLineDash([]);}
     else{const f=1-hv;ctx.globalAlpha*=f;ctx.strokeStyle=`rgba(${GOLD},.4)`;ctx.lineWidth=Math.max(2,ARB_LINE.w*T1*.28*(.5+.5*f));ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}}finally{ctx.restore();}});
@@ -281,8 +283,11 @@ function drawArbFx(x,t){const {z,T1,AH}=scale(),id='r949:arb:'+x.t0.toFixed(2);
     if(orb){ctx.save();try{ctx.globalCompositeOperation='lighter';ctx.globalAlpha*=1-v;ctx.drawImage(orb,hp.x-S/2,hp.y-AH*.45-S/2,S,S);}finally{ctx.restore();}}else glow(hp.x,hp.y-AH*.45,S*.5,ICE,1-v);ring(hp,R*(.4+.6*v),PALE,Math.max(2,6*z*(1-v)),1-v,.12*(1-v));});}}
   else{const p=project(c.x,c.y),Rs=ARB_ROOM.safe*T1*.5,hd=sheet('haste');
    sc({id:cid,kind:'effect',pxfSide:'hero',x:c.x,y:c.y,groundAligned:true},()=>{if(hd)cell(hd,'haste',Math.floor(t*12.5),p.x,p.y,Rs*2/SH.haste.span,'source-over',.5+.4*w);ring(p,Rs,PALE,Math.max(2,3*z),.6+.4*w,.06);
-    if(hv!=null){const R=Rs+(ARB_ROOM.r*T1*.5-Rs)*Math.sqrt(hv),f=1-hv;ring(p,R,VIO,Math.max(2,9*z*f),f,0);ring(p,R*.86,PALE,Math.max(1,3*z),f*.8,0);}});}}}
+    if(hv!=null){const R=Rs+(ARB_ROOM.r*T1*.5-Rs)*Math.sqrt(hv),f=1-hv;if(!(X986()&&X986().room&&X986().room(p,R,f,cid,c,sc))){ring(p,R,VIO,Math.max(2,9*z*f),f,0);ring(p,R*.86,PALE,Math.max(1,3*z),f*.8,0);}}});}}}
+const X986=()=>{try{return window.__STORYWORLD_SEOHA_FX_R986__||null;}catch(_){return null;}};
 function drawBlinks(t){if(!blinks.length)return;const {AH}=scale(),rb=sheet('riftB'),rf=sheet('riftF');for(const b of blinks){const fr=Math.max(0,Math.min(23,Math.floor((t-b.t0)*30))),q=project(b.x,b.y),W=256*AH/150*b.k,id='r949:rift:'+b.t0.toFixed(2)+':'+b.x.toFixed(1)+':'+b.y.toFixed(1);
+  /* R986: Dots 소집 문 시트가 준비됐으면 그쪽이 그린다(아니면 아래 기존 틈새 그림). */
+  if(X986()&&X986().gate&&X986().gate(b,t,q,AH,sc))continue;
   if(rb&&rf){sc({id:id+':b',kind:'effect',pxfSide:'hero',x:b.x,y:b.y-.02},()=>cell(rb,'riftB',fr,q.x,q.y,W,'lighter',1));sc({id:id+':f',kind:'effect',pxfSide:'hero',x:b.x,y:b.y+.02},()=>cell(rf,'riftF',fr,q.x,q.y,W,'lighter',1));}
   else sc({id,kind:'effect',pxfSide:'hero',x:b.x,y:b.y},()=>glow(q.x,q.y-AH*.5*b.k,AH*.6*b.k,ICE,Math.max(0,1-(t-b.t0)/.8)));}}
 function draw(){if(typeof project!=='function'||typeof ctx==='undefined'||!ctx)return;const t=T();

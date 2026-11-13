@@ -9422,6 +9422,29 @@
     "assets/r951/neon-skybeam.webp",
     "assets/r952/hs02-blood-pact-leave.webp",
     "assets/r952/hs03-shade-slash.webp",
+    "assets/r930/props/index.json",
+    "assets/r930/props/kc-black-sand-wreck-a.webp",
+    "assets/r930/props/kc-black-sand-wreck-b.webp",
+    "assets/r930/props/kc-brass-manifold-a.webp",
+    "assets/r930/props/kc-brass-manifold-b.webp",
+    "assets/r930/props/kc-cable-duct-a.webp",
+    "assets/r930/props/kc-cable-duct-b.webp",
+    "assets/r930/props/kc-clock-generator-a.webp",
+    "assets/r930/props/kc-clock-generator-b.webp",
+    "assets/r930/props/kc-command-console-a.webp",
+    "assets/r930/props/kc-command-console-b.webp",
+    "assets/r930/props/kc-data-gravestone-a.webp",
+    "assets/r930/props/kc-data-gravestone-b.webp",
+    "assets/r930/props/kc-drainage-pump-a.webp",
+    "assets/r930/props/kc-drainage-pump-b.webp",
+    "assets/r930/props/kc-mold-ladle-a.webp",
+    "assets/r930/props/kc-mold-ladle-b.webp",
+    "assets/r930/props/kc-neon-streetlamp-a.webp",
+    "assets/r930/props/kc-synapse-arch-a.webp",
+    "assets/r930/props/kc-synapse-arch-b.webp",
+    "assets/r930/props/kc-terminal-pillar-a.webp",
+    "assets/r930/props/kc-terminal-pillar-b.webp",
+    "cheat-level-r970.js",
     "assets/r760/boss/sheet-moveDown.webp",
     "assets/r760/boss/sheet-moveUp.webp",
     "assets/r760/mid/sheet-moveDown.webp",
@@ -9440,7 +9463,15 @@
     "assets/r952/hs01-blood-pact-gate.webp",
     "assets/r952/hs06-volley-flash.webp",
     "assets/r952/hs07-tier-icons.webp",
-    "mobile-memory-r980.js"
+    "mobile-memory-r980.js",
+    "assets/r947/slayer-lattice-beam.webp",
+    "assets/r947/slayer-lattice-end.webp",
+    "assets/r986/seoha-hand-strike.webp",
+    "assets/r986/seoha-room-dial.webp",
+    "assets/r986/seoha-summon-gate.webp",
+    "assets/r990/fog-core.webp",
+    "bulmyeongwi-fog-r990.js",
+    "seoha-epoch-fx-r986.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -10515,5 +10546,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "1f4f5fa3af2138de92d696b9276f7b61d8b5be01437babe4e97a22c125b8ddb6"
+  "runtimeManifestSHA256": "da515209bb1abf39400c28d6eb8be7e6f36e4cde48cfd5ff355e2483b37b365c"
 }
