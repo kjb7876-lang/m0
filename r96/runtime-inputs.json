@@ -9474,6 +9474,15 @@
     "seoha-epoch-fx-r986.js",
     "move-dir-r974.js",
     "move-dir-r974-data.js",
+    "move-dir-r1001-data.js",
+    "assets/r1001/move/corridor-scream-echo-down.webp",
+    "assets/r1001/move/corridor-scream-echo-up.webp",
+    "assets/r1001/move/denial-specter-down.webp",
+    "assets/r1001/move/denial-specter-up.webp",
+    "assets/r1001/move/hallucinated-orderly-down.webp",
+    "assets/r1001/move/hallucinated-orderly-up.webp",
+    "assets/r1001/move/horned-swamp-demon-down.webp",
+    "assets/r1001/move/horned-swamp-demon-up.webp",
     "assets/r974/move/kair-great-01-down.webp",
     "assets/r974/move/kair-great-01-side.webp",
     "assets/r974/move/kair-great-01-up.webp",
@@ -9549,16 +9558,7 @@
     "assets/r974/move/u203-mid-up.webp",
     "assets/r974/move/u206-mid-down.webp",
     "assets/r974/move/u206-mid-side.webp",
-    "assets/r974/move/u206-mid-up.webp",
-    "move-dir-r1001-data.js",
-    "assets/r1001/move/denial-specter-down.webp",
-    "assets/r1001/move/denial-specter-up.webp",
-    "assets/r1001/move/horned-swamp-demon-down.webp",
-    "assets/r1001/move/horned-swamp-demon-up.webp",
-    "assets/r1001/move/corridor-scream-echo-down.webp",
-    "assets/r1001/move/corridor-scream-echo-up.webp",
-    "assets/r1001/move/hallucinated-orderly-down.webp",
-    "assets/r1001/move/hallucinated-orderly-up.webp"
+    "assets/r974/move/u206-mid-up.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -10633,5 +10633,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "dbe7df42c4112c4752b245faa9abf47385dbf7920930f290ac1a3b3e7a4b8c98"
+  "runtimeManifestSHA256": "f76de320f43884eb0f02d3f92a3fdbba3d5659d5e584f0ebb9cce2bcf2b1bcbc"
 }

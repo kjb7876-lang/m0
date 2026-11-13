@@ -49484,8 +49484,8 @@
     },
     {
       "path": "bulmyeongwi-fog-r990.js",
-      "bytes": 21177,
-      "sha256": "78c3921fa132a92295d483a782c7de213166b0beca99e47ee09a373d98c25b66"
+      "bytes": 21839,
+      "sha256": "2274339dae2473c31fb68205cc888fe849553d2c901a6ba8eaad585f66e4d5aa"
     },
     {
       "path": "bulmyeongwi-r760.js",
@@ -51744,7 +51744,7 @@
     }
   ],
   "fileCount": 10348,
-  "totalBytes": 1276211196,
+  "totalBytes": 1276211858,
   "webHTMLSha256": "b613a7ccb5bc29fc930e0dcc883e319441b9cf185ac9bad6932fd6777ffe6942",
   "largest": [
     {
