@@ -833,6 +833,8 @@ jobs:
         run: node r96/qa/r952/r952-cpu-check.cjs
       - name: R949 Seoha passive overlapped time (summoned heroes, friendly Arbelia boss summon, afterimage time collapse; summons never join room.enemies) CPU check
         run: node r96/qa/r949/r949-cpu-check.cjs
+      - name: R986 Seoha passive Dots sheets (summon gate SE-07, time-room dial SE-06; falls back to R949 drawings; NaN-safe) CPU check
+        run: node r96/qa/r986/r986-cpu-check.cjs
       - name: R951 neon storm passive CPU check
         run: node r96/qa/r951/r951-cpu-check.cjs
       - name: R948 michaela heart passive CPU check
