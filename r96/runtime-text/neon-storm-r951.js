@@ -12,8 +12,8 @@
  * 상태는 영웅 몸(player 객체)마다 따로 둔다: 생존 모드 배치 영웅(R720)이 player 를 몸으로 바꿔 끼워 공격할 때도 그 몸의 공격력·자리·대기를 쓴다.
  * 그림: 낙뢰·안개는 드라이브 네온 시트(R562 neon-lightning-strike·neon-toxic-mist) 재사용, 창·표식·회로진은 코드로 그린 임시 연출(최종은 Dots 프레임 시트 요청 대상, 오면 교체).
  * Dots CX-0092NS 적용(2026-11-13): NS-04 충전 빛기둥(끝 섬광 뒤 160ms 알파 감쇠로 이어 끊김 없앰) · NS-05 큰 낙뢰(R562 낙뢰 대신, 0.96초) · NS-01 쌍갈래 뇌창 · NS-02 뇌창 착지(타원이 2.7:1 로 납작해 세로 1.15배)
- *   알파 16 이하 잔티는 포장 때 0 으로 정리. 시트가 아직 안 읽혔으면 예전 그림(R562 낙뢰·코드 창)으로 그린다.
- *   NS-06 경보 표식은 기존 검사(안개 중 시트 알파 ≤.6)와 부딪혀 보류(사용자 확인 대기), NS-03 회로진(루프 이음 HOLD)·NS-07/08 독안개(수정 요청 중)는 아직 코드 + R562 안개.
+ *   · NS-06 생화학 경보 표식(사용자 11-13 00:47Z 승인). 알파 16 이하 잔티는 포장 때 0 으로 정리. 시트가 아직 안 읽혔으면 예전 그림(R562 낙뢰·코드 창·코드 표식)으로 그린다.
+ *   NS-03 회로진(루프 이음 HOLD)·NS-07/08 독안개(수정 요청 중)는 아직 코드 + R562 안개.
  * 소리는 기존 R546 네온 공격·고유기 소리를 다시 씀. 끄기: localStorage['storyworld.r951.neonStorm']='{"on":false}'
  */
 (()=>{'use strict';
@@ -102,7 +102,7 @@ const MINT='94,234,212',TEAL='24,168,154',WHITE='228,255,248',HOLY='255,214,120'
 function sc(o,f){if(typeof ctx!=='undefined'&&ctx&&typeof ctx.scope==='function')ctx.scope(o,f);else f();}
 function scale(){const z=typeof zoom==='number'&&zoom>0?zoom:1,TL=typeof TILE==='number'?TILE:34;return {z,T1:TL*z*Math.SQRT2,AH:typeof actorHeight==='function'?actorHeight():66*z};}
 const NS={skybeam:{p:'assets/r951/neon-skybeam.webp',cw:256,ch:1024,cols:6},bigStrike:{p:'assets/r951/neon-big-strike.webp',cw:256,ch:768,cols:6},
- lance:{p:'assets/r951/neon-lance.webp',cw:256,ch:768,cols:6},impact:{p:'assets/r951/neon-lance-impact.webp',cw:256,ch:256,cols:6}};
+ lance:{p:'assets/r951/neon-lance.webp',cw:256,ch:768,cols:6},impact:{p:'assets/r951/neon-lance-impact.webp',cw:256,ch:256,cols:6},sign:{p:'assets/r951/neon-hazard-sign.webp',cw:256,ch:256,cols:6}};
 const SKY_T=.54,SKY_FADE=.16,BIG_LIFE=.96,LANCE_TIP=714,LANCE_LEN=658,IMPACT_SQ=1.15;
 const SH={strike:'assets/r562/neon-lightning-strike.webp',mist:'assets/r562/neon-toxic-mist.webp'},CELL=192,COLS=6,asked={};
 function sheetImg(k){const p=SH[k]||NS[k].p;try{const g=typeof readyImage==='function'?readyImage(p):null;if(g&&g.image)return g.image;const n=Date.now();if(n-(asked[p]||-1e9)>1500){asked[p]=n;if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});}}catch(err){fail(err);}return null;}
@@ -183,7 +183,10 @@ function hazard(cx,cy,r,a,spin){ctx.save();try{ctx.globalAlpha=a;ctx.fillStyle=`
  ctx.beginPath();ctx.arc(cx,cy,r*.18,0,Math.PI*2);ctx.fill();
  ctx.globalCompositeOperation='lighter';ctx.strokeStyle=`rgba(${MINT},.7)`;ctx.lineWidth=Math.max(1,r*.05);ctx.beginPath();ctx.arc(cx,cy,r*1.32,spin*2,spin*2+Math.PI*1.3);ctx.stroke();}finally{ctx.restore();}}
 function drawFog(x,t){const {z,T1,AH}=scale(),u=t-x.t0,id='r951:fog:'+x.t0.toFixed(2),o=ownerOk(x.owner)?x.owner:x;
- if(u<FOG_SIGN+.5){const q=project(o.x,o.y),f=Math.min(1,u/.18),out=u>FOG_SIGN?Math.max(0,1-(u-FOG_SIGN)/.5):1,pulse=1+.08*Math.sin(u*28),r=AH*.42*f*pulse;
+ const sg=sheetImg('sign');
+ if(sg&&u<FOG_SIGN+.5){const q=project(o.x,o.y),fr=u<.18?u/.18*6:u<FOG_SIGN?Math.min(17,6+(u-.18)/(FOG_SIGN-.18)*12):18+Math.min(5,(u-FOG_SIGN)/.5*6),W=AH*1.6;
+  sc({id:id+':sign',kind:'effect',pxfSide:'hero',x:o.x,y:o.y+.03},()=>{ctx.save();try{ctx.globalAlpha=1;ctx.globalCompositeOperation='source-over';nsDraw('sign',sg,fr,q.x,q.y-AH*1.55,W,W,.5,.5);}finally{ctx.restore();}});}
+ else if(u<FOG_SIGN+.5){const q=project(o.x,o.y),f=Math.min(1,u/.18),out=u>FOG_SIGN?Math.max(0,1-(u-FOG_SIGN)/.5):1,pulse=1+.08*Math.sin(u*28),r=AH*.42*f*pulse;
   sc({id:id+':sign',kind:'effect',pxfSide:'hero',x:o.x,y:o.y+.03},()=>{ctx.save();try{ctx.globalAlpha=.55*f*out;ctx.globalCompositeOperation='lighter';ctx.fillStyle=`rgba(${TOX_D},1)`;ctx.beginPath();ctx.arc(q.x,q.y-AH*1.55,r*1.7,0,Math.PI*2);ctx.fill();}finally{ctx.restore();}
    hazard(q.x,q.y-AH*1.55-(1-f)*AH*.3,r,out,u*1.5);});}
  if(x.phase!=='fog')return;const v=u-FOG_SIGN,grow=Math.min(1,v/.6),fade=v>FOG_T?Math.max(0,1-(v-FOG_T)/FOG_FADE):1,c={x:x.cx??o.x,y:x.cy??o.y},q=project(c.x,c.y),R=SCREEN_R*x.k*T1*.5*grow;

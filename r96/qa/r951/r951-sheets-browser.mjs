@@ -6,7 +6,7 @@ const b=await chromium.launch();const {p}=await boot(b,{vp:{width:960,height:540
 await go(p,zone);
 let fail=0;const ok=(n,c)=>{console.log(c?'PASS':'FAIL',n);if(!c)fail++;};
 await p.evaluate(async()=>{await ensureImages(heroPaths('neon'));player.hero='neon';player.hp=99999;window.__SLOW=1;const tb=tick;tick=function(dt,...a){return tb.call(this,dt*(window.__SLOW??1),...a);};
- await ensureImages(['assets/r562/neon-lightning-strike.webp','assets/r562/neon-toxic-mist.webp','assets/r951/neon-skybeam.webp','assets/r951/neon-big-strike.webp','assets/r951/neon-lance.webp','assets/r951/neon-lance-impact.webp']);
+ await ensureImages(['assets/r562/neon-lightning-strike.webp','assets/r562/neon-toxic-mist.webp','assets/r951/neon-skybeam.webp','assets/r951/neon-big-strike.webp','assets/r951/neon-lance.webp','assets/r951/neon-lance-impact.webp','assets/r951/neon-hazard-sign.webp']);
  window.__r951src={};const hook=()=>{try{if(ctx&&!ctx.__r951hook){const di=ctx.drawImage;ctx.__r951hook=1;ctx.drawImage=function(im,...a){try{const m=/assets\/r951\/([a-z-]+)\.webp/.exec(im&&(im.currentSrc||im.src)||'');if(m)window.__r951src[m[1]]=(window.__r951src[m[1]]||0)+1;}catch(_){}return di.apply(this,[im,...a]);};}}catch(_){}};hook();const de2=drawEffect;drawEffect=function(...a){hook();return de2.apply(this,a);};});
 const A='window.__STORYWORLD_NEON_STORM_R951__';
 ok('module loaded',await p.evaluate(A+'&&'+A+'.revision'));
@@ -35,7 +35,7 @@ const stMs=await frameMs(1200);console.log('  frame ms storm',JSON.stringify(stM
 {const lost=await hpLost(),i=await I();ok('storm: 3 waves, ≥10 mobs struck ('+lost.filter(v=>v>0).length+')',i.stats.stormWaves===3&&lost.filter(v=>v>0).length>=10);
  ok('no errors',i.stats.errors===0);ok('sheets drawn (Drive strike / mist)',i.stats.sheetDraws>0);console.log(JSON.stringify(i.stats));}
 ok('storm frame time within 1.6× idle (headless software)',stMs.avg<=base.avg*1.6+4);
-{const n=await p.evaluate(()=>window.__r951src);console.log('  r951 sheet draws (game ctx)',JSON.stringify(n));ok('all four Dots sheets reached a real drawImage',['neon-skybeam','neon-big-strike','neon-lance','neon-lance-impact'].every(k=>n[k]>0));}
+{const n=await p.evaluate(()=>window.__r951src);console.log('  r951 sheet draws (game ctx)',JSON.stringify(n));ok('all five Dots sheets reached a real drawImage',['neon-skybeam','neon-big-strike','neon-lance','neon-lance-impact','neon-hazard-sign'].every(k=>n[k]>0));}
 if(free){await setup(8,2);const r=await p.evaluate(async([A,free])=>{const api=eval(A);api.qaRandom(null);const s0=api.inspect().stats.procTotal,t0=time;let last=-9;
   while(time-t0<free){await new Promise(r=>requestAnimationFrame(r));if(time-last>.5){last=time;const e=room.enemies.find(v=>v.id===window.__ids[0]);hitEnemy(e,1,{kind:'basic',sourceHero:'neon'});}}
   return {procs:api.inspect().stats.procTotal-s0,secs:time-t0,by:api.inspect().stats.procs};},[A,free]);console.log('  natural procs',JSON.stringify(r));}
