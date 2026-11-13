@@ -276,7 +276,8 @@ function drawArbFx(x,t){const {z,T1,AH}=scale(),id='r949:arb:'+x.t0.toFixed(2);
   else if(c.kind==='donut'){const p=project(c.x,c.y),R0=ARB_DONUT.r0*T1*.5,R1=ARB_DONUT.r1*T1*.5,since=c.hitAt!=null?t-c.hitAt:null,f=since!=null?Math.max(0,1-since/.4):0;
    sc({id:cid,kind:'effect',pxfSide:'hero',x:c.x,y:c.y,groundAligned:true},()=>{ring(p,R0,VIO,Math.max(1.5,2.5*z),.45+.4*w,0);ring(p,R1,VIO,Math.max(1.5,2.5*z),.45+.4*w,0);
     ctx.save();try{ctx.globalCompositeOperation='lighter';ctx.lineWidth=Math.max(1.5,2.2*z);for(let i=0;i<12;i++){const an=-t*2.2+i*Math.PI/6,k0=i%3===0?0:.35;ctx.strokeStyle=`rgba(${PALE},${.25+.5*f})`;ctx.beginPath();ctx.moveTo(p.x+Math.cos(an)*(R0+(R1-R0)*k0),p.y+Math.sin(an)*(R0+(R1-R0)*k0)*.5);ctx.lineTo(p.x+Math.cos(an)*R1,p.y+Math.sin(an)*R1*.5);ctx.stroke();}
-     if(f>0){ctx.globalAlpha*=f;for(let i=1;i<=4;i++){const R=R0+(R1-R0)*i/5;ctx.strokeStyle=`rgba(${VIO},.55)`;ctx.lineWidth=Math.max(3,(R1-R0)*.1);ctx.beginPath();ctx.ellipse(p.x,p.y,R,R*.5,0,0,Math.PI*2);ctx.stroke();}}}finally{ctx.restore();}});}
+     /* R1005: Dots 폭발 시트가 준비됐으면 맞는 순간은 그쪽이 그린다(아니면 아래 보라 고리). */
+     if(since!=null&&X1005()&&X1005().burst&&X1005().burst(p,R1,since,cid,c,sc)){}else if(f>0){ctx.globalAlpha*=f;for(let i=1;i<=4;i++){const R=R0+(R1-R0)*i/5;ctx.strokeStyle=`rgba(${VIO},.55)`;ctx.lineWidth=Math.max(3,(R1-R0)*.1);ctx.beginPath();ctx.ellipse(p.x,p.y,R,R*.5,0,0,Math.PI*2);ctx.stroke();}}}finally{ctx.restore();}});}
   else if(c.kind==='circle'){const ck=sheet('clock'),orb=img(ARB_ORB),p=project(c.x,c.y),R=ARB_CIRCLE.r*T1*.5;
    sc({id:cid,kind:'effect',pxfSide:'hero',x:c.x,y:c.y,groundAligned:true},()=>{if(ck)cell(ck,'clock',-Math.floor((t-c.t0)*30),p.x,p.y,R*2/SH.clock.span,'source-over',.55+.35*w);else dial(p.x,p.y,R,-t,.8,z,[[9,.6],[2,.85]]);ring(p,R,ICE,Math.max(1.5,2.5*z),.6,0);});
    if(c.hitAt!=null&&t-c.hitAt<.26&&c.px!=null){const v=(t-c.hitAt)/.26,hp=project(c.px,c.py);sc({id:cid+':orb',kind:'effect',pxfSide:'hero',x:c.px,y:c.py+.01},()=>{const S=AH*(1.5+.6*v);
@@ -286,6 +287,7 @@ function drawArbFx(x,t){const {z,T1,AH}=scale(),id='r949:arb:'+x.t0.toFixed(2);
     if(hv!=null){const R=Rs+(ARB_ROOM.r*T1*.5-Rs)*Math.sqrt(hv),f=1-hv;if(!(X995()&&X995().wave&&X995().wave(p,R,ARB_ROOM.r*T1*.5,f,cid,c,sc))&&!(X986()&&X986().room&&X986().room(p,R,f,cid,c,sc))){ring(p,R,VIO,Math.max(2,9*z*f),f,0);ring(p,R*.86,PALE,Math.max(1,3*z),f*.8,0);}}});}}}
 const X986=()=>{try{return window.__STORYWORLD_SEOHA_FX_R986__||null;}catch(_){return null;}};
 const X995=()=>{try{return window.__STORYWORLD_SEOHA_FX_R995__||null;}catch(_){return null;}};
+const X1005=()=>{try{return window.__STORYWORLD_SEOHA_FX_R1005__||null;}catch(_){return null;}};
 function drawBlinks(t){if(!blinks.length)return;const {AH}=scale(),rb=sheet('riftB'),rf=sheet('riftF');for(const b of blinks){const fr=Math.max(0,Math.min(23,Math.floor((t-b.t0)*30))),q=project(b.x,b.y),W=256*AH/150*b.k,id='r949:rift:'+b.t0.toFixed(2)+':'+b.x.toFixed(1)+':'+b.y.toFixed(1);
   /* R986: Dots 소집 문 시트가 준비됐으면 그쪽이 그린다(아니면 아래 기존 틈새 그림). */
   if(X986()&&X986().gate&&X986().gate(b,t,q,AH,sc))continue;

@@ -881,6 +881,8 @@ jobs:
         run: node r96/qa/r986/r986-cpu-check.cjs
       - name: R995 Seoha passive Dots r2 sheets (time-room wave SE-06 r2, rewind burst SE-05 r2; falls back; NaN-safe) CPU check
         run: node r96/qa/r995/r995-cpu-check.cjs
+      - name: R1005 Seoha passive rewind-kiln burst sheet (SE-05 r3 frames 11-24; falls back to R949 flash; NaN-safe) CPU check
+        run: node r96/qa/r1005/r1005-cpu-check.cjs
       - name: R951 neon storm passive CPU check
         run: node r96/qa/r951/r951-cpu-check.cjs
       - name: R951 neon storm Dots sheets CPU check

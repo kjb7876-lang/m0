@@ -6543,6 +6543,11 @@
       "sha256": "4345a195eb73505981809e6109060c93b98c36d7995796370ed7885fed20ce38"
     },
     {
+      "path": "assets/r1005/seoha-kiln-burst.webp",
+      "bytes": 465052,
+      "sha256": "4bbcad0e1717a11d4373ab7e8463a36ab682bdb99fb840f2783d6fbe1c1c761a"
+    },
+    {
       "path": "assets/r103/chest-closed.svg",
       "bytes": 2508,
       "sha256": "d3e981852d7785f5749b633ca6f136c5ae378ef0efc7b3562059ceae43bd3e10"
@@ -50974,8 +50979,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6577883,
-      "sha256": "69ed5aee32eb3d082baca5f02a404ea8e4f5e525c3abbbfac439ef48a47cc907"
+      "bytes": 6577933,
+      "sha256": "34ee439c0dba554125ec8a0efab5a7b75422f1d5d1ee93c8adc5f75f9f07de92"
     },
     {
       "path": "intro-r140.js",
@@ -51718,6 +51723,11 @@
       "sha256": "da784047ae1254e1e906b4b205a7ab0a6daeedbc8f7d7c73129753c72b1d5870"
     },
     {
+      "path": "seoha-epoch-fx-r1005.js",
+      "bytes": 3240,
+      "sha256": "909f125ee5a643424b2b5346ee3c53d6512d0be7cf823d5f60311536f8a48462"
+    },
+    {
       "path": "seoha-epoch-fx-r986.js",
       "bytes": 5801,
       "sha256": "22e2a37d8058a040e644240966ad3a86c5c16fda3c8a4d9d3ba5557d9d2bfa8b"
@@ -51729,8 +51739,8 @@
     },
     {
       "path": "seoha-epoch-r949.js",
-      "bytes": 45078,
-      "sha256": "691c434045192028967e6856f5f9b74506c71779e497236edefa7dcc8e68c7cf"
+      "bytes": 45383,
+      "sha256": "4a76d0f37e192984dbd01e2f9382d313859f156abd348e05d746d217e3384bba"
     },
     {
       "path": "seven-sins-bossrooms.js",
@@ -52153,9 +52163,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10430,
-  "totalBytes": 1281386943,
-  "webHTMLSha256": "69ed5aee32eb3d082baca5f02a404ea8e4f5e525c3abbbfac439ef48a47cc907",
+  "fileCount": 10432,
+  "totalBytes": 1281855590,
+  "webHTMLSha256": "34ee439c0dba554125ec8a0efab5a7b75422f1d5d1ee93c8adc5f75f9f07de92",
   "largest": [
     {
       "path": "index.html",
