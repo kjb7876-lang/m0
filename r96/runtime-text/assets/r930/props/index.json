@@ -1,0 +1,373 @@
+{
+ "canvas": [
+  512,
+  512
+ ],
+ "dots": "CX-0081KC",
+ "foot": "bottom-center",
+ "notApplied": {
+  "2Dprime_indoor-wall-lamp": "벽에 다는 등 — 조형물은 바닥에 서는 자리뿐이라 벽 부착 자리가 생길 때까지 보류",
+  "2K_command-dais": "밟고 올라서는 단 — 지나갈 수 있는 장식 자리에 두면 발이 단을 뚫고 지나가 보류(충돌을 바꾸지 않는다)"
+ },
+ "pieces": {
+  "kc-black-sand-wreck-a": {
+   "bytes": 41308,
+   "drawn": [
+    440,
+    321
+   ],
+   "sha256": "042e6769c2c4f9f440032ed09aa74840c585a2babd4e6a1f59660e2b65b9ae44",
+   "source": "CX-0081KC_2H_black-sand-wreck_a_r1.png",
+   "sourceBox": [
+    40,
+    171,
+    472,
+    486
+   ],
+   "sourceBytes": 156421,
+   "sourceSha256": "15d9672e3ce14be1317ce774c540a8137482c2f8facb253d42765cff9c10c40c"
+  },
+  "kc-black-sand-wreck-b": {
+   "bytes": 41564,
+   "drawn": [
+    440,
+    330
+   ],
+   "sha256": "284a98ce588867930f83108e208f7eb7936a667c4c95534faef01bf6fa2e8fc4",
+   "source": "CX-0081KC_2H_black-sand-wreck_b_r1.png",
+   "sourceBox": [
+    42,
+    164,
+    471,
+    486
+   ],
+   "sourceBytes": 157785,
+   "sourceSha256": "0c925c62d7a2f4a8a3e92f897a40ea0d73f22e5733b7185fc2cb7ea77845148b"
+  },
+  "kc-brass-manifold-a": {
+   "bytes": 62694,
+   "drawn": [
+    363,
+    400
+   ],
+   "sha256": "dcf741945ef944f0015ab330714ceec7351569b592bd067f4d4d21c17d658d5c",
+   "source": "CX-0081KC_2F_brass-manifold_a_r1.png",
+   "sourceBox": [
+    56,
+    46,
+    455,
+    486
+   ],
+   "sourceBytes": 265002,
+   "sourceSha256": "ab4b27bb299b78c301d1230826ad7d78a4086076c1aac70f225007c5265f26dc"
+  },
+  "kc-brass-manifold-b": {
+   "bytes": 64640,
+   "drawn": [
+    421,
+    400
+   ],
+   "sha256": "699b30c81b766217cde077c9ef0acc00fd18915fe208f1030f66cc77984c4d62",
+   "source": "CX-0081KC_2F_brass-manifold_b_r1.png",
+   "sourceBox": [
+    55,
+    105,
+    456,
+    486
+   ],
+   "sourceBytes": 236598,
+   "sourceSha256": "26c886e003ddc516ea35628daa5177569be3fd4f3795a8f0619290c7e9bcae8b"
+  },
+  "kc-cable-duct-a": {
+   "bytes": 31982,
+   "drawn": [
+    431,
+    330
+   ],
+   "sha256": "b5b8e87cbfa78a259080d7cd71b51488ac5dd972f6db0e526f063db450adf245",
+   "source": "CX-0081KC_2E_cable-duct_a_r1.png",
+   "sourceBox": [
+    45,
+    164,
+    466,
+    486
+   ],
+   "sourceBytes": 142552,
+   "sourceSha256": "5dee87c2d7014fdf92f84af78f7ac8e2d30789a29f25b6ca96edda484b25f18c"
+  },
+  "kc-cable-duct-b": {
+   "bytes": 31200,
+   "drawn": [
+    421,
+    330
+   ],
+   "sha256": "b54f15ec3ed9caace19dbba9784deeb53ebf4d28d7a3d6d19288368e0ed87a67",
+   "source": "CX-0081KC_2E_cable-duct_b_r1.png",
+   "sourceBox": [
+    48,
+    160,
+    464,
+    486
+   ],
+   "sourceBytes": 144921,
+   "sourceSha256": "e6ff97c180dc0c29b569def358f42211fc3394fbc3d301edeff9234cc847ba1b"
+  },
+  "kc-clock-generator-a": {
+   "bytes": 57846,
+   "drawn": [
+    496,
+    325
+   ],
+   "sha256": "51f9ff8b39615420a04583a14b46f8ddc22a721e83c62a935b5aea316c171236",
+   "source": "CX-0081KC_2C_clock-generator_a_r1.png",
+   "sourceBox": [
+    35,
+    197,
+    476,
+    486
+   ],
+   "sourceBytes": 226170,
+   "sourceSha256": "b05a00cc76b95f940b8765e55f35e3ca7c4c58e1c317f9bdf83002fa9c2de554"
+  },
+  "kc-clock-generator-b": {
+   "bytes": 55696,
+   "drawn": [
+    496,
+    329
+   ],
+   "sha256": "32b7dbb420f93ca6a7153c3d6bfd744f2ddc6e33fe925445a50692e57821306e",
+   "source": "CX-0081KC_2C_clock-generator_b_r1.png",
+   "sourceBox": [
+    37,
+    196,
+    474,
+    486
+   ],
+   "sourceBytes": 214779,
+   "sourceSha256": "c304355bec7cef9e34da84453d42c3a2eec71d757ea6ad9748b0dee856087e90"
+  },
+  "kc-command-console-a": {
+   "bytes": 42808,
+   "drawn": [
+    287,
+    400
+   ],
+   "sha256": "cc6f7bf451ea8894deff22a87931523c6b0f8c167ef7f1466bca90a3f8306f23",
+   "source": "CX-0081KC_2B_command-console_a_r1.png",
+   "sourceBox": [
+    96,
+    41,
+    415,
+    486
+   ],
+   "sourceBytes": 225067,
+   "sourceSha256": "94f4b3c6d22508b0604ce263460230be7a5bd2529964b6fdc945218da3f62587"
+  },
+  "kc-command-console-b": {
+   "bytes": 35600,
+   "drawn": [
+    288,
+    400
+   ],
+   "sha256": "e47d0b8d3a53a123989205157cdc164405d1cda3c95e12a351714df23d8c5b10",
+   "source": "CX-0081KC_2B_command-console_b_r1.png",
+   "sourceBox": [
+    96,
+    42,
+    416,
+    486
+   ],
+   "sourceBytes": 189074,
+   "sourceSha256": "d1b3c05976bd2682743d394267ed6d7eba8ffc9ce5d11b9da61f5535145eb646"
+  },
+  "kc-data-gravestone-a": {
+   "bytes": 33768,
+   "drawn": [
+    273,
+    430
+   ],
+   "sha256": "0928b52324468a29180158d122dafbcdd45b6612e916ce441af0799efaf43e87",
+   "source": "CX-0081KC_2G_data-gravestone_a_r1.png",
+   "sourceBox": [
+    108,
+    22,
+    403,
+    486
+   ],
+   "sourceBytes": 201824,
+   "sourceSha256": "263b30d17ac8e1fe2c24d9af7fa77ee46e92847e887782c12625da5d74a93f81"
+  },
+  "kc-data-gravestone-b": {
+   "bytes": 31204,
+   "drawn": [
+    268,
+    430
+   ],
+   "sha256": "19c253e76fddb3ef1d5e8815dd176acd15e12c01846e65a3da5aa2999b7bcf8f",
+   "source": "CX-0081KC_2G_data-gravestone_b_r1.png",
+   "sourceBox": [
+    111,
+    23,
+    400,
+    486
+   ],
+   "sourceBytes": 191784,
+   "sourceSha256": "b42dc7e1a9e95494ddda3aba7753e0730ecb41a686658b0bb9964057292df9a6"
+  },
+  "kc-drainage-pump-a": {
+   "bytes": 48452,
+   "drawn": [
+    373,
+    400
+   ],
+   "sha256": "f826b8158a2cd06eda788e22849150e076f645eba5fdbe2229432589408e69bb",
+   "source": "CX-0081KC_2J_drainage-pump_a_r1.png",
+   "sourceBox": [
+    59,
+    63,
+    453,
+    486
+   ],
+   "sourceBytes": 235648,
+   "sourceSha256": "e5457db3c7b04e2bcc199e7c4ac9fc76d62a016718b5b82afdcab65f369a34b5"
+  },
+  "kc-drainage-pump-b": {
+   "bytes": 50494,
+   "drawn": [
+    396,
+    400
+   ],
+   "sha256": "4beb99854c6b09d40b318979d682786b64f004db29bd9aee05404c5cac95002c",
+   "source": "CX-0081KC_2J_drainage-pump_b_r1.png",
+   "sourceBox": [
+    56,
+    82,
+    456,
+    486
+   ],
+   "sourceBytes": 230199,
+   "sourceSha256": "6b78a0efeeea02eea1a33e22ccdb0ab8beaad8434b603ce09579978a741d4e14"
+  },
+  "kc-mold-ladle-a": {
+   "bytes": 34752,
+   "drawn": [
+    373,
+    330
+   ],
+   "sha256": "cb67fd7359935c4595471bf35ebfdf49ce2e5a2b12acfd56339added0d46de45",
+   "source": "CX-0081KC_2L_mold-ladle_a_r1.png",
+   "sourceBox": [
+    47,
+    116,
+    465,
+    486
+   ],
+   "sourceBytes": 188057,
+   "sourceSha256": "0e77f41c2cbccc3120e780f9c6c39319fb614722d12a6aa33660d6babcb28c2f"
+  },
+  "kc-mold-ladle-b": {
+   "bytes": 43080,
+   "drawn": [
+    440,
+    312
+   ],
+   "sha256": "ea5df411243958ad811c3d64a7a62bb61798129e6029fcf1442fb1cc24424617",
+   "source": "CX-0081KC_2L_mold-ladle_b_r1.png",
+   "sourceBox": [
+    46,
+    188,
+    466,
+    486
+   ],
+   "sourceBytes": 183462,
+   "sourceSha256": "34028a8eb6a0de22497b2fc139e521212ecb65eb29203ca95c6a5d84fcf39e34"
+  },
+  "kc-neon-streetlamp-a": {
+   "bytes": 15066,
+   "drawn": [
+    79,
+    508
+   ],
+   "sha256": "65d3c6adb7e9c42212972e02dc7820102f2acb5ad439ce7f6dca36281a15d09a",
+   "source": "CX-0081KC_2D_neon-streetlamp_a_r1.png",
+   "sourceBox": [
+    220,
+    22,
+    292,
+    486
+   ],
+   "sourceBytes": 47928,
+   "sourceSha256": "defa0b810579dda60a59a8443217475c12088925be6394f2ce89c55cf53af5a9"
+  },
+  "kc-synapse-arch-a": {
+   "bytes": 43868,
+   "drawn": [
+    337,
+    470
+   ],
+   "sha256": "8a3b7a2a5321ef8df36a2da46e8bee6427fdbb73c5126fca0c1897ee5204fdf1",
+   "source": "CX-0081KC_2I_synapse-arch_a_r1.png",
+   "sourceBox": [
+    95,
+    38,
+    416,
+    486
+   ],
+   "sourceBytes": 154427,
+   "sourceSha256": "6494812cfebc81a13fe3a3b834a96fccc26f0fc3ab36f61dd2b75fcdb5c2f027"
+  },
+  "kc-synapse-arch-b": {
+   "bytes": 41396,
+   "drawn": [
+    328,
+    470
+   ],
+   "sha256": "dcde66c7e8ef8f9420f126659e730bd821032e446df1fef9afded8d63ed0490d",
+   "source": "CX-0081KC_2I_synapse-arch_b_r1.png",
+   "sourceBox": [
+    97,
+    30,
+    415,
+    486
+   ],
+   "sourceBytes": 150683,
+   "sourceSha256": "108392fbc076a110b7588353161451d03bd59cac16a34d11fc8501df4d25d631"
+  },
+  "kc-terminal-pillar-a": {
+   "bytes": 40336,
+   "drawn": [
+    211,
+    470
+   ],
+   "sha256": "1d703a28f9c92cb07becaba4cab26ee56eb9e53f8d5e62e1d436502ff4a64380",
+   "source": "CX-0081KC_2A_terminal-pillar_a_r1.png",
+   "sourceBox": [
+    156,
+    40,
+    356,
+    486
+   ],
+   "sourceBytes": 168859,
+   "sourceSha256": "285df7d43339715271de6474fbcfa405e39be0443450e0272e40cfae441a6c3b"
+  },
+  "kc-terminal-pillar-b": {
+   "bytes": 37602,
+   "drawn": [
+    210,
+    470
+   ],
+   "sha256": "dfec1fe5286c76b7e09e7c57f8ced79bebba37ff8da509c8aef2908de41310f8",
+   "source": "CX-0081KC_2A_terminal-pillar_b_r1.png",
+   "sourceBox": [
+    157,
+    42,
+    355,
+    486
+   ],
+   "sourceBytes": 158443,
+   "sourceSha256": "8559cd08a801e1364c8064aac4bed32ddd6c1397e83cf1c3b7712ff1e96512fb"
+  }
+ },
+ "round": "r1",
+ "temporary": false
+}

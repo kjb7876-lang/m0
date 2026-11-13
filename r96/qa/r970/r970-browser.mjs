@@ -1,0 +1,44 @@
+// R970 헤드리스 브라우저: 실제 코드 창에서 777 → 레벨 칸이 나오는지, 레벨 30 적용 → Lv.30·포인트, 지역 이동·저장·불러오기 뒤 유지.
+// 헤드리스 소프트웨어 렌더링(GPU·실기기 아님). 사용: node r970-browser.mjs <출력폴더> <URL>
+import {createRequire} from 'node:module';import fs from 'node:fs';const req=createRequire(import.meta.url);const {chromium}=req('playwright');
+const [OUT,URL]=process.argv.slice(2);fs.mkdirSync(OUT,{recursive:true});const b=await chromium.launch();const log={checks:[]};
+const ctx=await b.newContext({viewport:{width:1280,height:720},deviceScaleFactor:1});const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(String(e).slice(0,200)));
+const ok=(c,m,d)=>{log.checks.push({ok:!!c,m,d});console.log(c?'PASS':'FAIL',m,d===undefined?'':JSON.stringify(d).slice(0,300));};
+const skip=()=>p.evaluate(()=>{for(let i=0;i<200&&storyScene;i++)advanceScene();if(modal)closePanel(true);});
+const P=()=>p.evaluate(()=>({level:player.level,points:player.points,up:JSON.stringify(player.upgrades),zone,active:__STORYWORLD_CHEAT777__.active(),r970:__STORYWORLD_CHEAT_LEVEL_R970__.inspect()}));
+await p.goto(URL,{timeout:180000});await p.locator('#campaignNew54').click({timeout:120000});await p.locator('#slotConfirmR73').click();
+await p.waitForFunction(()=>started&&!loading,null,{timeout:180000});await skip();
+const before=await P();log.before=before;
+await p.evaluate(()=>{const b=document.getElementById('story-code-button');b.click();});await p.waitForSelector('#story-code-input',{state:'attached',timeout:60000});await p.waitForFunction(()=>!!document.getElementById('r970LevelRow'),null,{timeout:60000});
+ok(await p.locator('#r970LevelRow').isHidden(),'777 을 적기 전에는 레벨 칸이 숨어 있음');
+await p.locator('#story-code-input').fill('777');
+ok(await p.locator('#r970LevelRow').isVisible(),'777 을 적으면 레벨 칸이 나옴');
+await p.screenshot({path:OUT+'/r970-level-field.png'});
+await p.locator('#r970Level').fill('30');await p.locator('#codeApply').click();
+await p.waitForFunction(()=>__STORYWORLD_CHEAT777__.active()&&player.level===30,null,{timeout:20000}).catch(()=>{});await p.waitForTimeout(100);
+const a=await P();log.after=a;
+ok(a.active&&a.level===30&&a.points===before.points+29&&a.r970.chosen===30,'적용하면 Lv.30 · 포인트 +29(레벨 1→30)',a);
+ok(await p.locator('#r970LevelApply').isVisible(),'켜진 뒤 창에 레벨 적용 단추',null);
+const msg=await p.locator('#codeMessage').textContent();ok(/Lv\.30/.test(msg)&&/스킬 포인트/.test(msg),'상태 글에 레벨·포인트',msg);
+await p.screenshot({path:OUT+'/r970-active.png'});
+await p.locator('#r970Level').fill('45');await p.locator('#r970LevelApply').click();await p.waitForTimeout(150);
+const c=await P();ok(c.level===45&&c.points===a.points+15,'레벨 적용 단추로 45 → +15',c);
+await p.locator('#r970Level').fill('500');await p.locator('#r970Level').press('Enter');await p.waitForTimeout(150);
+const d=await P();ok(d.level===99&&d.points===c.points+54,'500 은 99 로 잘림(Enter)',d);
+await p.evaluate(()=>closePanel(true));
+const go=await p.evaluate(async()=>__STORYWORLD_CHEAT777__.go('dist01','STORY'));
+await p.waitForFunction(()=>!loading,null,{timeout:120000}).catch(()=>{});
+await p.evaluate(()=>{const d=window.__STORYWORLD_PROGRESSION_R71__?.difficultyState?.();if(d?.open)window.__STORYWORLD_PROGRESSION_R71__.selectDifficulty('normal');});
+await p.evaluate(async()=>{const d=window.__STORYWORLD_PROGRESSION_R71__?.difficultyState?.();if(d?.open)await window.__STORYWORLD_PROGRESSION_R71__.confirmDifficulty();});
+await p.waitForFunction(()=>!loading&&zone==='dist01',null,{timeout:120000}).catch(()=>{});await skip();
+const capped=()=>p.evaluate(()=>UPGRADES.filter(u=>!u.hero).every(u=>Number(player.upgrades[u.id]||0)>=u.max));
+const e=await P();ok(e.zone==='dist01'&&e.level===99&&!(await capped()),'지역 이동 뒤에도 Lv.99 유지 · 기술을 상한으로 강제 채우지 않음(자동 스킬레벨업이 포인트를 쓰는 건 일반 진행과 같음)',{go,e});
+// 저장·불러오기 사이에 자동 스킬레벨업이 포인트를 쓰지 않게 남은 포인트를 0 으로 둔 채 비교한다(검사 도구 안에서만)
+await p.evaluate(()=>{player.points=0;});const keepUp=(await P()).up,keepPts=0;const saved=await p.evaluate(()=>saveGame(false));
+await p.evaluate(()=>{player.level=2;});await p.evaluate(async()=>__STORYWORLD_CHEAT777__.load());await p.waitForFunction(()=>!loading,null,{timeout:120000}).catch(()=>{});
+const f=await P();ok(saved&&f.level===99&&f.up===keepUp&&f.points===keepPts&&f.r970.chosen===99,'777 저장·불러오기 뒤 레벨·기술·포인트가 저장 때 그대로',{f,keepUp,keepPts});
+const left=await p.evaluate(async()=>__STORYWORLD_CHEAT777__.leave());await p.waitForFunction(()=>!loading,null,{timeout:120000}).catch(()=>{});
+const g=await P();ok(left&&!g.active&&g.level===before.level&&g.points===before.points&&g.r970.chosen===null,'일반 진행 복귀 → 원래 레벨·포인트',g);
+ok(errs.length===0,'페이지 오류 없음',errs);
+log.errs=errs;fs.writeFileSync(OUT+'/r970-browser.json',JSON.stringify(log,null,2));await b.close();
+const bad=log.checks.filter(x=>!x.ok).length;console.log(bad?'R970 브라우저 '+bad+'개 실패':'R970 브라우저 '+log.checks.length+'개 통과');process.exit(bad?1:0);
