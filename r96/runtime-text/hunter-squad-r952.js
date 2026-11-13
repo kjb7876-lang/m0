@@ -28,6 +28,7 @@ const CFG=Object.freeze({chance:.09,gap:.35,icd:21,life:7,fade:.45,
  slayer:Object.freeze({mul:.1,seek:9,leash:10,speed:4.8}),
  shade:Object.freeze({chance:.5,mul:.15,reach:5.5,life:.34,max:4}),
  squad:Object.freeze({count:4,mul:.22,gap:1.15,back:.62,speed:7,stagger:.09})});
+const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
 const NAMES={call:'혈맹 호출',shade:'혈영 강습',squad:'기러기진 섬멸'},BEAT=.42;
 let errors=0,lastError=null;const fail=e=>{errors++;lastError=String(e?.stack||e).slice(0,300);};
 const G=(f,d)=>{try{const v=f();return v===undefined?d:v;}catch(_){return d;}};
@@ -92,7 +93,7 @@ function start(s,p,tier){const t=T(),rm=G(()=>room,null);if(!rm||!NAMES[tier])re
  if(tier==='squad'){for(let i=0;i<CFG.squad.count;i++)sq.units.push(mkUnit(sq,HERO,i,p.x,p.y,CFG.squad.mul));
   sq.form={id:'r952:form:'+(++serial),r952Prop:true,r952Form:true,x:p.x,y:p.y,solid:false,visible:true,autoTargetEligible6:false,label:'',height:1};Object.defineProperty(sq.form,'r952Squad',{value:sq,enumerable:false});}
  formation(sq,foes);for(const u of sq.units)u.body=mkBody(p,u);
- s.squad=sq;s.readyAt=t+CFG.icd;s.stats.procs[tier]++;live.push(sq);syncProps(sq);
+ s.squad=sq;s.readyAt=t+D971(HERO,CFG.icd);s.stats.procs[tier]++;live.push(sq);syncProps(sq);
  try{floatText(NAMES[tier],p.x,p.y,tier==='squad'?'#f1d9a0':'#e08a92');}catch(_){}
  try{window.__STORYWORLD_BLOOD_R190__?.play?.('blood-burst',sp.x,sp.y,{k:1.1,z:0});}catch(_){}
  return true;}
@@ -102,7 +103,7 @@ function end(sq){const i=live.indexOf(sq);if(i>=0)live.splice(i,1);if(sq.state.s
 function endAll(){for(const sq of live.slice())end(sq);}
 function onSwing(p){const s=st(p),t=T();s.stats.swings++;warm();if(!solo()){s.stats.coopSkipped++;return;}if(s.squad)return;let tier=null;
  if(s.force){tier=s.force;s.force=null;}
- else{if(t<s.rollAt||t<s.readyAt)return;s.rollAt=t+CFG.gap;s.stats.rolls++;if(!(Math.random()<CFG.chance))return;tier=pickTier(Math.random());}
+ else{if(t<s.rollAt||t<s.readyAt)return;s.rollAt=t+CFG.gap;s.stats.rolls++;if(!(Math.random()<G971(HERO,[CFG.chance])[0]))return;tier=pickTier(Math.random());}
  start(s,p,tier);}
 function valid(sq){const p=sq.owner;if(!on||!solo()||!p||!(p.hp>0)||p.hero!==HERO||sq.room!==G(()=>room,null))return false;
  if(p.r720Ally===true){const bs=G(()=>window.__STORYWORLD_HERO_DEFENSE_R720__.bodies(),null);return !Array.isArray(bs)||bs.length===0||bs.includes(p);}
