@@ -9777,6 +9777,7 @@
     "assets/r1026/sfx/r955-hit-egovessel-3.ogg",
     "assets/r1026/sfx/r955-hit-vialcore-2.ogg",
     "sfx-punch-r1026.js",
+    "ui-combat-r1021.js",
     "tentacle-strike-r1028.js"
   ],
   "mediaPaths": [
@@ -10852,5 +10853,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "67e591dd3af546aa4e13fc235014b0b1420bac68cf28294c07c524ddf83d03d0"
+  "runtimeManifestSHA256": "247e614b792d332e28813bdd7fbf9c36af20df77ba5f0d122209125c71c51bc4"
 }

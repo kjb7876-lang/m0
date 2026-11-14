@@ -72,7 +72,8 @@ html.r90-ui .muted{color:#b8ad9c}html.r90-ui .bar{border-color:#75634e;border-ra
   c.save();try{c.globalAlpha=.8;c.strokeStyle='#9f5146';c.lineWidth=1.25;c.beginPath();c.ellipse(q.x,q.y+1,clamp(19*z,12,32),clamp(7*z,4,12),0,0,Math.PI*2);c.stroke();
    // R301: drawEnemy already labels bosses; retain the target ring/bar without a second name.
    c.globalAlpha=1;c.font='11px "Malgun Gothic",sans-serif';c.textAlign='center';c.fillStyle='#d6c8b8';c.shadowColor='#090808';c.shadowBlur=3;if(!e.boss)c.fillText(String(e.name||''),q.x,Math.max(12,top-5));c.shadowBlur=0;
-   const y=Math.max(15,top);c.fillStyle='rgba(12,10,10,.9)';c.fillRect(q.x-width/2-1,y-1,width+2,4);c.fillStyle='#332826';c.fillRect(q.x-width/2,y,width,2);c.fillStyle='#865b50';c.fillRect(q.x-width/2,y,width*ratio,2);stats.targetPaints++;
+   /* R1021(사용자 2026-11-14 "체력바 다 아래에" — 간이 체력바): 고른 적의 체력은 엔진이 발밑(q.y+8)에 이미 그리므로 머리 위 막대는 그리지 않는다 */
+   const under=(()=>{try{return !!window.__STORYWORLD_UI_COMBAT_R1021__?.on?.();}catch(_){return false;}})();if(under){stats.targetBarUnder=(stats.targetBarUnder||0)+1;}else{const y=Math.max(15,top);c.fillStyle='rgba(12,10,10,.9)';c.fillRect(q.x-width/2-1,y-1,width+2,4);c.fillStyle='#332826';c.fillRect(q.x-width/2,y,width,2);c.fillStyle='#865b50';c.fillRect(q.x-width/2,y,width*ratio,2);}stats.targetPaints++;
   }finally{c.restore();}
  }
  function paintHUD(){const api=window.__STORYWORLD_COMBAT_HUD_R51__,s=document.querySelector('canvas#combat-hud-r51');if(!api||!s||(!prefs.health&&!prefs.target)||!solo())return;
