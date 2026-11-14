@@ -128,6 +128,22 @@ function voice(kind){const ac=fakeAC(),trim=ac.createGain(),vg=ac.createGain(),s
  ctx.sfxLive.push(mk('r955Hit_y',true));ok(Q.beforePlay(M.category('r955Die_ghoul'))===1,'사망음 직전에도 정리(엔진이 사망음을 버리지 않게)');}
 {const {mix:M,P:Q,ctx}=load({'storyworld.r1026.sfx':'0'});ctx.sfxLive=[{kind:'x',stopping:true}];ok(Q.beforePlay(M.category('hurt'))===0&&ctx.sfxLive.length===1,'끄기: 정리 안 함');}
 ok(/__STORYWORLD_SFX_PUNCH_R1026__[^\n]*\.beforePlay\(/.test(r993),'R993 훅(beforePlay)');
+// ⑧ 끝 '띡' 고친 파생본(사용자 04:06Z "맨끝에 띡하며 높은음나는거 없애 초반잘나온음들로사용", "일레븐랩스도사용해")
+{let idx={};try{idx=JSON.parse(rd(path.join(R,'runtime-text/assets/r1026/sfx/index.json')));}catch(_){}
+ const T2=idx.trimmed||{},RP=idx.replaced||{},man=rd(path.join(R,'runtime-manifest.json'));
+ ok(Object.keys(T2).length>=20&&(idx.scanned||0)>=500,'끝 핑 파생본 '+Object.keys(T2).length+'개(전수 '+idx.scanned+'개 중)');
+ const crypto=require('crypto');let bad2=[];
+ for(const [src,f] of Object.entries(T2)){let b=null;try{b=fs.readFileSync(path.join(R,'runtime-text',f.path));}catch(_){}
+  if(!b||crypto.createHash('sha256').update(b).digest('hex')!==f.sha256||!man.includes(f.path)||!(f.cut<f.pingAt)||!(f.duration<f.sourceDuration)||!(f.duration>=.1)||!fs.existsSync(path.join(R,'runtime-text',src)))bad2.push(src);}
+ ok(!bad2.length,'파생본 해시·manifest·자른 위치 < 핑 위치·길이 줄어듦·원본 그대로 있음 '+bad2.slice(0,3));
+ const el=[...(RP['r955/hit-glass']||[]),...(RP['r955/die-glass']||[])];
+ ok((RP['r955/hit-glass']||[]).length>=2&&(RP['r955/die-glass']||[]).length>=2&&el.every(f=>/elevenlabs|glass-(hit|die)-\d\.mp3/.test(f.elevenlabsSource||'')&&man.includes(f.path)),'유리 몹 피격·사망 ElevenLabs 새 소리 연결('+el.length+'개)');
+ const {P:Q,ctx}=load({});ctx.soundProfiles={r955Hit_egovessel:[{key:'a',path:'assets/r955/sfx/hit-egovessel-1.ogg',gain:.42},{key:'b',path:'assets/r955/sfx/hit-egovessel-2.ogg',gain:.42}],r955Hit_glass:[{key:'g',path:'assets/r955/sfx/hit-glass-1.ogg',gain:.42}],hurt:[{key:'h',path:'x.ogg'}]};
+ const n1=Q.applyFiles(),sp=ctx.soundProfiles;
+ ok(n1>=4&&/assets\/r1026\/sfx\//.test(sp.r955Hit_egovessel[0].path)&&sp.r955Hit_egovessel[1].path==='assets/r955/sfx/hit-egovessel-2.ogg'&&sp.r955Hit_glass.every(r=>/r1026\/sfx\/el-glass-hit/.test(r.path))&&sp.hurt[0].path==='x.ogg','applyFiles: 핑 있는 줄만 파생본·유리 몹은 새 소리·나머지 그대로');
+ ok(Q.applyFiles()===0,'두 번 불러도 다시 바꾸지 않음');
+ const {P:Q0,ctx:c0}=load({'storyworld.r1026.sfx':'0'});c0.soundProfiles={r955Hit_glass:[{path:'assets/r955/sfx/hit-glass-1.ogg'}]};ok(Q0.applyFiles()===0&&c0.soundProfiles.r955Hit_glass[0].path==='assets/r955/sfx/hit-glass-1.ogg','끄기: 원래 파일');}
+ok(rd(path.join(ROOT,'scripts/verify-r96-public.py')).includes("'assets/r1026/'"),'verify-r96-public.py 에 assets/r1026/');
 let threw=false;try{P.admit(null,NaN,null);P.admit(C('r955Die_ghoul'),NaN,undefined);P.onVoice(null,null,null,NaN,null);P.onVoice({kind:'r955Die_ghoul'},{},C('r955Die_ghoul'),NaN,{level:NaN});P.extraDb(null);P.beforePlay(undefined);P.beforePlay({cls:'high'});}catch(e){threw=String(e);}
 ok(!threw,'이상 입력에 던지지 않음 '+(threw||''));
 ok(Number.isFinite(P.extraDb(null))&&P.extraDb(null)===0,'extraDb(null)=0');

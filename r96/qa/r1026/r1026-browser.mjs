@@ -34,7 +34,11 @@ async function run(on){
   setTimeout(()=>{try{sound('r544Hurt_hwando');}catch(_){}},310);setTimeout(()=>{try{sfxCooldown.delete('hurt');sound('r544Hurt_slayer');}catch(_){}},710);
   await wait(2400);clearInterval(iv);sp.disconnect();masterGain.disconnect(sp);
   const X=window.__STORYWORLD_SFX_MIX_R993__,P=window.__STORYWORLD_SFX_PUNCH_R1026__;
-  return {sr,chunks,plays,watch:{total:watch.total,deathPeak:watch.deathPeak,deathStarted:watch.deathStarted,heroStolen:watch.heroStolen,heroStarted:watch.heroStarted},r993:X?X.inspect().stats:null,r1026:P?P.inspect():null};},{SOLO});
+  // 끝 '띡' 파생본·유리 몹 새 소리: 실제 soundProfiles 경로와 해독
+  const want=P?[...Object.values(P.remap),...Object.values(P.replace).flat()]:[];const used=new Set(Object.values(soundProfiles).flat().map(r=>r&&r.path));
+  const dec=await Promise.all(want.map(async p=>{try{const b=await audioBuffer(p);return b?b.duration:0;}catch(_){return 0;}}));
+  const swap={want:want.length,inProfiles:want.filter(p=>used.has(p)).length,decoded:dec.filter(d=>d>.05).length,glassHit:(soundProfiles.r955Hit_glass||[]).map(r=>r.path),glassDie:(soundProfiles.r955Die_glass||[]).map(r=>r.path)};
+  return {sr,swap,chunks,plays,watch:{total:watch.total,deathPeak:watch.deathPeak,deathStarted:watch.deathStarted,heroStolen:watch.heroStolen,heroStarted:watch.heroStarted},r993:X?X.inspect().stats:null,r1026:P?P.inspect():null};},{SOLO});
  await ctx.close();return res;}
 function kw(x,fs){const bq=(sig,b,a)=>{let x1=0,x2=0,y1=0,y2=0;const y=new Float64Array(sig.length);for(let i=0;i<sig.length;i++){const v=b[0]*sig[i]+b[1]*x1+b[2]*x2-a[1]*y1-a[2]*y2;x2=x1;x1=sig[i];y2=y1;y1=v;y[i]=v;}return y;};
  let f0=1681.974450955533,G=3.999843853973347,Q=.7071752369554196,K=Math.tan(Math.PI*f0/fs),Vh=Math.pow(10,G/20),Vb=Math.pow(Vh,.4996667741545416),a0=1+K/Q+K*K;
@@ -77,6 +81,9 @@ ok(on.watch.total<=4&&on.watch.deathPeak<=2,'동시 ≤4·사망음 동시 ≤2 
 console.log('R1026 통계',JSON.stringify(on.r1026&&on.r1026.stats));
 ok(on.r1026&&on.r1026.stats.errors===0&&on.r993&&on.r993.errors===0&&on.r1026.stats.tails>=3&&on.r1026.stats.eq>=5,'R993·R1026 내부 오류 0·꼬리 '+(on.r1026&&on.r1026.stats.tails)+'·EQ '+(on.r1026&&on.r1026.stats.eq));
 ok(off.r1026&&off.r1026.on===false&&off.r1026.stats.eq===0,'끈 상태: R1026 아무것도 안 함');
+console.log('파생본',JSON.stringify(on.swap),'끔',JSON.stringify(off.swap&&{glassHit:off.swap.glassHit}));
+ok(on.swap.want>=26&&on.swap.inProfiles===on.swap.want&&on.swap.decoded===on.swap.want,'끝 핑 파생본·유리 몹 새 소리 '+on.swap.want+'개 모두 실제 soundProfiles 에 있고 해독됨('+on.swap.inProfiles+'·'+on.swap.decoded+')');
+ok(on.swap.glassHit.length>=2&&on.swap.glassHit.every(p=>/assets\/r1026\/sfx\/el-glass-hit/.test(p))&&off.swap.glassHit.every(p=>/assets\/r955\/sfx\/hit-glass/.test(p)),'유리 몹 피격: 켬=ElevenLabs 새 소리, 끔=원래 파일');
 ok(!errs.length,'페이지 오류 0 '+errs.slice(0,2));
 fs.writeFileSync(path.join(HERE,'browser-results.json'),JSON.stringify({at:new Date().toISOString(),url:process.env.SW_URL||null,directListeningVerified:false,table,watch:{off:off.watch,on:on.watch},r1026:on.r1026&&on.r1026.stats,r993:{off:off.r993,on:on.r993}},null,1));
 console.log(`\nR1026 browser: ${n-bad}/${n}`);await b.close();process.exit(bad?1:0);

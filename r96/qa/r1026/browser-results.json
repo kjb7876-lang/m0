@@ -1,5 +1,5 @@
 {
- "at": "2026-11-14T02:38:04.129Z",
+ "at": "2026-11-14T04:16:19.587Z",
  "url": "http://127.0.0.1:4410/m0/",
  "directListeningVerified": false,
  "table": [
@@ -7,93 +7,93 @@
    "cat": "몹사망",
    "kind": "r955Die_ghoul",
    "n": 3,
-   "off": -43.723969240895215,
-   "on": -39.62979177138051,
-   "delta": 4.09,
+   "off": -43.01350494094651,
+   "on": -40.117624343286565,
+   "delta": 2.9,
    "tailOff": -140,
-   "tailOn": -54.3,
-   "ringOff": 1.16,
-   "ringOn": 1.26
+   "tailOn": -56.2,
+   "ringOff": 1.14,
+   "ringOn": 1.36
   },
   {
    "cat": "몹사망",
    "kind": "r955Die_spider",
    "n": 3,
-   "off": -43.894773140103865,
-   "on": -40.03798449591204,
-   "delta": 3.86,
+   "off": -42.83148811391913,
+   "on": -40.36623934455834,
+   "delta": 2.47,
    "tailOff": -140,
-   "tailOn": -83.1,
+   "tailOn": -60.2,
    "ringOff": 0.36,
-   "ringOn": 0.28
+   "ringOn": 0.34
   },
   {
    "cat": "몹사망",
    "kind": "r541Death",
    "n": 3,
-   "off": -42.94900905437538,
-   "on": -38.784200606050916,
-   "delta": 4.16,
+   "off": -43.450491398304486,
+   "on": -39.79916576091034,
+   "delta": 3.65,
    "tailOff": -140,
-   "tailOn": -92.4,
-   "ringOff": 0.82,
-   "ringOn": 0.86
+   "tailOn": -93.5,
+   "ringOff": 0.8,
+   "ringOn": 0.82
   },
   {
    "cat": "몹피격",
    "kind": "r955Hit_spider",
    "n": 3,
-   "off": -47.22372170547528,
-   "on": -42.268010913750956,
-   "delta": 4.96
+   "off": -45.76472878810452,
+   "on": -41.41911844221724,
+   "delta": 4.35
   },
   {
    "cat": "몹피격",
    "kind": "r955Hit_glass",
    "n": 3,
-   "off": -45.81830643568739,
-   "on": -40.71025634799961,
-   "delta": 5.11
+   "off": -45.2581547558539,
+   "on": -46.210235517373334,
+   "delta": -0.95
   },
   {
    "cat": "적중음",
    "kind": "r785Hit_hwando",
    "n": 3,
-   "off": -42.33450905030467,
-   "on": -39.561059113360635,
-   "delta": 2.77
+   "off": -42.08703881586923,
+   "on": -39.47099109239014,
+   "delta": 2.62
   },
   {
    "cat": "적중음",
    "kind": "enemyHit",
    "n": 3,
-   "off": -42.69879017354694,
-   "on": -39.74531217788571,
-   "delta": 2.95
+   "off": -43.067385564558506,
+   "on": -39.69431337531241,
+   "delta": 3.37
   },
   {
    "cat": "보스피격",
    "kind": "r788BHit_root",
    "n": 3,
-   "off": -41.76992278063566,
-   "on": -39.332921048234454,
-   "delta": 2.44
+   "off": -42.09634214669771,
+   "on": -39.526474896121336,
+   "delta": 2.57
   },
   {
    "cat": "영웅타격",
    "kind": "r546Atk_hwando",
    "n": 3,
-   "off": -40.115826251840694,
-   "on": -39.597093547688026,
-   "delta": 0.52
+   "off": -39.96209092384872,
+   "on": -40.42535333880518,
+   "delta": -0.46
   },
   {
    "cat": "영웅피격",
    "kind": "r544Hurt_hwando",
    "n": 3,
-   "off": -37.814017044704784,
-   "on": -37.566543388467394,
-   "delta": 0.25
+   "off": -36.957325112109515,
+   "on": -37.86074037084613,
+   "delta": -0.9
   }
  ],
  "watch": {
@@ -113,16 +113,17 @@
   }
  },
  "r1026": {
+  "filesSwapped": 96,
   "buses": 1,
   "deathIn": 16,
   "deathDrop": 5,
-  "deathRetired": 2,
+  "deathRetired": 1,
   "roomMade": 1,
-  "flushed": 5,
+  "flushed": 6,
   "hitIn": 9,
   "hitDrop": 27,
-  "boosted": 3,
-  "eq": 32,
+  "boosted": 5,
+  "eq": 33,
   "tails": 16,
   "peakGuarded": 0,
   "errors": 0
@@ -134,7 +135,7 @@
    "trimmed": 43,
    "varied": 43,
    "demoted": 37,
-   "ducked": 2,
+   "ducked": 1,
    "admitLowDrop": 69,
    "admitMidDrop": 0,
    "measured": 36,
@@ -160,14 +161,14 @@
   },
   "on": {
    "remapped": 10,
-   "started": 49,
-   "trimmed": 49,
-   "varied": 49,
-   "demoted": 43,
-   "ducked": 2,
+   "started": 50,
+   "trimmed": 50,
+   "varied": 50,
+   "demoted": 44,
+   "ducked": 1,
    "admitLowDrop": 61,
    "admitMidDrop": 0,
-   "measured": 43,
+   "measured": 44,
    "errors": 0,
    "targets": {
     "영웅피격/hurt": -37,

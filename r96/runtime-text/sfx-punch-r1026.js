@@ -12,6 +12,7 @@
  *  - 사망: 200Hz +2.5dB·1.6kHz +1.5dB, 재생 속도 ×0.96(무게), 짧은 꼬리(지연 .06·.13·.22초, 탭 이득 .32·.2·.11, 1.5kHz 저역통과)를 목소리 엔벨로프 밖(마스터)으로 보내
  *    소리가 끝나도 짧게 남는다. 꼬리 지연망은 컨텍스트마다 하나를 함께 쓰고, 소리마다 EQ 2개(저사양 1개)·보내기 GainNode 1개만 만들어 끝나고 .7초 뒤 끊는다.
  *  - 영웅·보스·UI 소리와 사망음이 오기 직전 이미 걷히는 중인 소리를 3ms 에 끝내 목록에서 뺀다(엔진이 걷히는 소리 때문에 영웅 소리를 버리지 않게).
+ *  - 끝에 '띡' 하고 높은 음이 다시 나는 피격·사망 파일 26개는 앞부분만 남긴 파생본으로, 유리 몹 피격·사망은 ElevenLabs 새 소리로 바꾼다(assets/r1026/sfx).
  * 쾌적 계층(동시 4음·역할 길이 상한·저역통과)·R993 목표·변주·더킹은 그대로. 값은 모두 유한값으로 clamp.
  * 끄기: localStorage storyworld.r1026.sfx = '0'(R993 동작으로 돌아감). Canonical source; copied by scripts/sync-r99.py. */
 (()=>{'use strict';
@@ -23,7 +24,7 @@
  const DEATH={gap:.07,perSec:7,live:2,prio:4,boostStep:.75,boostMax:3},HIT={gap:.09,perSec:10,live:2,prio:2};
  const EQ={hit:[[240,2,1],[1900,2.5,.9]],death:[[200,2.5,.9],[1600,1.5,1]]};
  const TAIL={taps:[[.06,.32],[.13,.2],[.22,.11]],lp:1500,rate:.96,release:.7};
- const stats={buses:0,deathIn:0,deathDrop:0,deathRetired:0,roomMade:0,flushed:0,hitIn:0,hitDrop:0,boosted:0,eq:0,tails:0,peakGuarded:0,errors:0};
+ const stats={filesSwapped:0,buses:0,deathIn:0,deathDrop:0,deathRetired:0,roomMade:0,flushed:0,hitIn:0,hitDrop:0,boosted:0,eq:0,tails:0,peakGuarded:0,errors:0};
  const cat=k=>{try{const M=window.__STORYWORLD_SFX_MIX_R993__;return M&&typeof k==='string'?M.category(k):null;}catch(_){return null;}};
  // 길: 사망(몹 사망·r541Death) / 피격(몹 피격·적중음·보스 피격). 영웅 소리·몹 공격·보스 사망은 null.
  function lane(c){if(!c||typeof c!=='object')return null;if(c.cat==='일반몹'&&c.sub==='die')return 'death';if(c.sub==='hit'&&(c.cat==='일반몹'||c.cat==='적피격'||c.cat==='보스'))return 'hit';return null;}
@@ -84,6 +85,20 @@ let prev=src;const made=[];try{src.disconnect();}catch(_){}
      const bus=tailBus(ac,master);if(bus){const tin=ac.createGain();tin.gain.value=lv;trim.connect(tin);tin.connect(bus);nodes.push(tin);stats.tails++;}}}}
    if(nodes.length&&typeof src.addEventListener==='function')src.addEventListener('ended',()=>{try{setTimeout(()=>{for(const x of nodes)try{x.disconnect();}catch(_){}},TAIL.release*1000);}catch(_){}});
   }catch(_){stats.errors++;}}
- window.__STORYWORLD_SFX_PUNCH_R1026__=Object.freeze({revision:REV,enabled:()=>on,lane,extraDb,eqCompDb,effectiveTarget,admit,onVoice,beforePlay,pendingBoostDb:()=>S.boost,
+ // ---- 끝 '띡' 고친 파생본(사용자 2026-11-14 04:06Z "맨끝에 띡하며 높은음나는거 없애 초반잘나온음들로사용", "일레븐랩스도사용해").
+ // scripts/build-sfx-r1026.py: 본체 뒤 다시 솟는 높은 음 앞 골에서 25ms 페이드로 자른 파생본(앞의 잘 나온 부분만), 원본 파일은 그대로.
+ // 유리 몹(r955 glass) 피격·사망은 끝 '띡' 이 계열 전체라 ElevenLabs 새 소리(끝 핑 없는 것만 다듬음)로 바꾼다.
+ const REMAP=Object.freeze({"assets/r955/sfx/hit-egovessel-1.ogg": "assets/r1026/sfx/r955-hit-egovessel-1.ogg", "assets/r955/sfx/hit-egovessel-3.ogg": "assets/r1026/sfx/r955-hit-egovessel-3.ogg", "assets/r955/sfx/hit-vialcore-2.ogg": "assets/r1026/sfx/r955-hit-vialcore-2.ogg", "assets/r955/sfx/die-boneguard-2.ogg": "assets/r1026/sfx/r955-die-boneguard-2.ogg", "assets/r955/sfx/die-brainwave-1.ogg": "assets/r1026/sfx/r955-die-brainwave-1.ogg", "assets/r955/sfx/die-brainwave-3.ogg": "assets/r1026/sfx/r955-die-brainwave-3.ogg", "assets/r955/sfx/die-meadowslime-1.ogg": "assets/r1026/sfx/r955-die-meadowslime-1.ogg", "assets/r955/sfx/die-meadowslime-2.ogg": "assets/r1026/sfx/r955-die-meadowslime-2.ogg", "assets/r955/sfx/die-meadowslime-3.ogg": "assets/r1026/sfx/r955-die-meadowslime-3.ogg", "assets/r955/sfx/die-sealguard-3.ogg": "assets/r1026/sfx/r955-die-sealguard-3.ogg", "assets/r955/sfx/die-silverscout-3.ogg": "assets/r1026/sfx/r955-die-silverscout-3.ogg", "assets/r955/sfx/die-timegate3-1.ogg": "assets/r1026/sfx/r955-die-timegate3-1.ogg", "assets/r955/sfx/die-timegate3-2.ogg": "assets/r1026/sfx/r955-die-timegate3-2.ogg", "assets/r955/sfx/die-timegate3-3.ogg": "assets/r1026/sfx/r955-die-timegate3-3.ogg", "assets/r955/sfx/die-zombieknight-1.ogg": "assets/r1026/sfx/r955-die-zombieknight-1.ogg", "assets/r954/sfx/hit-herbwoman-3.ogg": "assets/r1026/sfx/r954-hit-herbwoman-3.ogg", "assets/r785/sfx/hit-lauren-4.ogg": "assets/r1026/sfx/r785-hit-lauren-4.ogg", "assets/r544/sfx/death-slime.ogg": "assets/r1026/sfx/r544-death-slime.ogg", "assets/r788/sfx/hit-leviathan-1.ogg": "assets/r1026/sfx/r788-hit-leviathan-1.ogg", "assets/r788/sfx/hit-leviathan-3.ogg": "assets/r1026/sfx/r788-hit-leviathan-3.ogg", "assets/r789/sfx/hit-censor-2.ogg": "assets/r1026/sfx/r789-hit-censor-2.ogg", "assets/r789/sfx/hit-crackmirror-1.ogg": "assets/r1026/sfx/r789-hit-crackmirror-1.ogg", "assets/r789/sfx/hit-crackmirror-2.ogg": "assets/r1026/sfx/r789-hit-crackmirror-2.ogg", "assets/r789/sfx/hit-crackmirror-3.ogg": "assets/r1026/sfx/r789-hit-crackmirror-3.ogg", "assets/r789/sfx/hit-silentalarm-2.ogg": "assets/r1026/sfx/r789-hit-silentalarm-2.ogg", "assets/r789/sfx/hit-slothshell-3.ogg": "assets/r1026/sfx/r789-hit-slothshell-3.ogg"});
+ const REPLACE=Object.freeze({"r955Hit_glass": ["assets/r1026/sfx/el-glass-hit-1.ogg", "assets/r1026/sfx/el-glass-hit-2.ogg", "assets/r1026/sfx/el-glass-hit-3.ogg"], "r955Die_glass": ["assets/r1026/sfx/el-glass-die-1.ogg", "assets/r1026/sfx/el-glass-die-2.ogg", "assets/r1026/sfx/el-glass-die-3.ogg"]});
+ function applyFiles(){let n=0;try{if(!on||typeof soundProfiles==='undefined'||!soundProfiles)return 0;
+   for(const [kind,rows] of Object.entries(soundProfiles)){if(!Array.isArray(rows))continue;
+    if(REPLACE[kind]&&!rows.r1026){const g=rows[0]&&Number.isFinite(rows[0].gain)?rows[0].gain:.42;const nr=REPLACE[kind].map((path,i)=>({key:'r1026-'+kind+'-'+(i+1),path,gain:g,r541:true,r1026From:rows.map(r=>r&&r.path)}));nr.r1026=true;soundProfiles[kind]=nr;n+=nr.length;for(const r of nr)reg(r.path);continue;}
+    for(let i=0;i<rows.length;i++){const r=rows[i],to=r&&REMAP[r.path];if(to){rows[i]={...r,path:to,key:(r.key||'')+'-r1026',r1026From:r.path};n++;reg(to);}}}
+   stats.filesSwapped+=n;}catch(_){stats.errors++;}return n;}
+ function reg(p){try{if(typeof register==='function')register(p,'audio','sfx r1026 '+p);}catch(_){}}
+ if(on){try{applyFiles();}catch(_){}
+  try{if(typeof setupAudio==='function'){const base=setupAudio;setupAudio=function(){const r=base.apply(this,arguments);try{applyFiles();}catch(_){stats.errors++;}return r;};}}catch(_){}
+  try{if(document.readyState==='complete')applyFiles();else window.addEventListener('load',()=>{applyFiles();try{setTimeout(applyFiles,1500);}catch(_){}},{once:true});}catch(_){}}
+ window.__STORYWORLD_SFX_PUNCH_R1026__=Object.freeze({revision:REV,enabled:()=>on,lane,extraDb,eqCompDb,effectiveTarget,admit,onVoice,beforePlay,applyFiles,remap:REMAP,replace:REPLACE,pendingBoostDb:()=>S.boost,
   inspect:()=>({revision:REV,on,stats:{...stats},extraDb:{...EXTRA},death:{...DEATH},hit:{...HIT},eq:EQ,tail:TAIL,peakMax:PEAK_MAX,directListeningVerified:false})});
 })();
