@@ -21,6 +21,7 @@ const REV='R948-heart-6',KEY='storyworld.r948.heart',HERO='michaela';
 const CHANCE=.11,CROWD_BONUS=.04,CROWD_N=4,CROWD_R=2,CHANCE_MAX=.35,ROLL_GAP=.35,ICD=5;
 const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
 const U1025=(h,a,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__,v=u&&u.mask(h,a,k);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},S1025=h=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.share(h);return Number.isFinite(v)?Math.max(0,Math.min(1,v)):1;}catch(_){return 1;}},W1025=(h,w)=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.weights(h,w);return v||w;}catch(_){return w;}},A1025=(h,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.unlocked(h,k)!==false:true;}catch(_){return true;}},O1025=id=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.summonOpen(id)!==false:true;}catch(_){return true;}};/* R1025 특수 패시브 레벨별 해금·소환 영웅 서사 확인(파일 없으면 원래 값) */
+const C1033=(h,k,o,x)=>{try{window.__STORYWORLD_PASSIVE_CUTIN_R1033__?.fire(h,k,o,x);}catch(_){}};/* R1033 세 번째 특수 패시브 컷인(1·2단·몸·끔은 그쪽에서 거름) */
 const WEIGHTS=[['volley',.55],['tower',.30],['bloom',.15]];
 const VOLLEY_N=16,VOLLEY_V=9,VOLLEY_RANGE=6,VOLLEY_R=.5,VOLLEY_K=.55,CHARM_T=.5,CHARM_DIST=1.0,CHARM_STOP=.8,CHARM_CD=.6;
 const BLOOM_FAR=7,BLOOM_AHEAD=3,BLOOM_CHARGE=2.0,BLOOM_R=3.0,BLOOM_K=3.2,BLOOM_BOSS_K=2.0,BLOOM_STUN=.5,BLOOM_FLASH=.6;
@@ -74,7 +75,7 @@ function runCharms(dt,t){charms=charms.filter(c=>{const e=c.e;if(hiddenActor(e)|
 function dirTo(o,tg){let ux,uy;if(tg){ux=tg.x-o.x;uy=tg.y-o.y;}const L=Math.hypot(ux||0,uy||0);if(!(L>1e-6)){const a=aim();return {ux:Math.cos(a),uy:Math.sin(a)};}return {ux:ux/L,uy:uy/L};}
 function towerOf(o){return acts.find(x=>x.kind==='tower'&&x.owner===o);}
 function fire(kind,o,tg){const t=T(),power=ap(),k=Math.min(2,Math.max(1,surge('range',1))),{ux,uy}=dirTo(o,tg),base={kind,owner:o,t0:t,power,k,ux,uy,seed:(stats.procTotal*7919)%360};
- stats.procTotal++;stats.procs[kind]++;
+ stats.procTotal++;stats.procs[kind]++;C1033(HERO,kind,o);
  if(kind==='volley'){const a0=Math.atan2(uy,ux),hearts=[];for(let i=0;i<VOLLEY_N;i++){const a=a0+i*Math.PI*2/VOLLEY_N;hearts.push({x:o.x,y:o.y,ux:Math.cos(a),uy:Math.sin(a),trav:0,done:false,endAt:null});}
   acts.push({...base,x:o.x,y:o.y,ox:o.x,oy:o.y,hearts});play('r546Atk_'+HERO);shakeBy(2);return;}
  if(kind==='bloom'){let p=tg&&Math.hypot(tg.x-o.x,tg.y-o.y)<=BLOOM_FAR?{x:tg.x,y:tg.y}:{x:o.x+ux*BLOOM_AHEAD,y:o.y+uy*BLOOM_AHEAD};if(wallAt(p.x,p.y)||!lineOk(o,p))p={x:o.x,y:o.y};

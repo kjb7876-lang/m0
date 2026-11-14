@@ -22,6 +22,7 @@ const REV='R946-celestial-2-sheets',KEY='storyworld.r946.celestial',HERO='lauren
 const CHANCE=.10,CROWD_BONUS=.04,CROWD_N=4,CROWD_R=2,CHANCE_MAX=.35,ROLL_GAP=.35,ICD=5,COMBO_WINDOW=12;
 const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
 const U1025=(h,a,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__,v=u&&u.mask(h,a,k);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},S1025=h=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.share(h);return Number.isFinite(v)?Math.max(0,Math.min(1,v)):1;}catch(_){return 1;}},W1025=(h,w)=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.weights(h,w);return v||w;}catch(_){return w;}},A1025=(h,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.unlocked(h,k)!==false:true;}catch(_){return true;}},O1025=id=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.summonOpen(id)!==false:true;}catch(_){return true;}};/* R1025 특수 패시브 레벨별 해금·소환 영웅 서사 확인(파일 없으면 원래 값) */
+const C1033=(h,k,o,x)=>{try{window.__STORYWORLD_PASSIVE_CUTIN_R1033__?.fire(h,k,o,x);}catch(_){}};/* R1033 세 번째 특수 패시브 컷인(1·2단·몸·끔은 그쪽에서 거름) */
 const REP_R=2.8,REP_K=1.2,REP_PUSH=2.0,REP_PUSH_T=.25,REP_STUN=.45,REP_LIFE=.7;
 const RED_V=7,RED_RANGE=8,RED_R=.85,RED_K=.9,RED_PUSH=1.8,RED_PUSH_T=.3;
 const BLUE_FLY=.3,BLUE_T=1.4,BLUE_R=3.4,BLUE_CORE=.5,BLUE_V=2.6,BLUE_TICK=.35,BLUE_TICKS=4,BLUE_HIT_R=1.6,BLUE_K=.25;
@@ -77,7 +78,7 @@ function cancel(){for(const x of acts)restoreAct(x);acts=[];pushers=[];pullers=[
 // ---- 다섯 가지 발동 ---------------------------------------------------------------------------------
 function dirTo(o,tg){let ux,uy;if(tg){ux=tg.x-o.x;uy=tg.y-o.y;}const L=Math.hypot(ux||0,uy||0);if(!(L>1e-6)){const a=aim();return {ux:Math.cos(a),uy:Math.sin(a)};}return {ux:ux/L,uy:uy/L};}
 function fire(kind,o,tg){const t=T(),power=ap(),k=Math.min(2,Math.max(1,surge('range',1))),{ux,uy}=dirTo(o,tg),base={kind,owner:o,t0:t,power,k,ux,uy,seed:(stats.procTotal*7919)%360};
- stats.procTotal++;stats.procs[kind]++;
+ stats.procTotal++;stats.procs[kind]++;C1033(HERO,kind,o);
  if(kind==='repulse'){const c={x:o.x,y:o.y};stats.repulseCentres.push(c.x+','+c.y);if(stats.repulseCentres.length>20)stats.repulseCentres.shift();
   for(const e of enemiesNow()){if(hiddenActor(e))continue;const d=dist(e,c);if(d>REP_R*k||!lineOk(c,e))continue;deal(e,power*REP_K,'repulse');
    if(!major(e)&&e.hp>0){const L=d>1e-6?d:1,vx=d>1e-6?(e.x-c.x)/L:ux,vy=d>1e-6?(e.y-c.y)/L:uy;push(e,vx,vy,REP_PUSH,REP_PUSH_T);e.cd=Math.max(Number(e.cd)||0,REP_STUN);}}
