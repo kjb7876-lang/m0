@@ -1,0 +1,293 @@
+[
+ {
+  "hero": "hunter",
+  "secs": 70,
+  "checks": [
+   {
+    "pass": true,
+    "m": "실행: ok"
+   },
+   {
+    "pass": true,
+    "m": "그리기 표본 352장"
+   },
+   {
+    "pass": true,
+    "m": "영웅 쪽 PXF 도트 0: {}"
+   },
+   {
+    "pass": true,
+    "m": "R163 영웅 픽셀 시트 0: {}"
+   },
+   {
+    "pass": true,
+    "m": "정지 보호막·회복 문장 0: {}"
+   },
+   {
+    "pass": true,
+    "m": "R1027 칠한 시트 그려짐: {\"barrier\":412,\"r912/pj02-hit\":43,\"mend\":25}"
+   },
+   {
+    "pass": true,
+    "m": "시트마다 다른 칸 ≥4: {\"barrier\":22,\"r912/pj02-hit\":6,\"mend\":7}"
+   },
+   {
+    "pass": true,
+    "m": "칠한 그림 좌표 유한(NaN 0)"
+   },
+   {
+    "pass": true,
+    "m": "페이지 오류 0: []"
+   },
+   {
+    "pass": true,
+    "m": "R1027 내부 오류 0: {\"errors\":0,\"lastError\":null,\"replaced\":{\"barrier-loop\":471,\"barrier\":162,\"hit-hunter\":120,\"mend\":40}}"
+   }
+  ],
+  "raw": {
+   "hero": "hunter",
+   "dots": {},
+   "r163": {},
+   "sigil": {},
+   "painted": {
+    "barrier": 412,
+    "r912/pj02-hit": 43,
+    "mend": 25
+   },
+   "nan": 0,
+   "frames": 352,
+   "rects": {
+    "barrier": 22,
+    "r912/pj02-hit": 6,
+    "mend": 7
+   },
+   "r1027": {
+    "errors": 0,
+    "lastError": null,
+    "replaced": {
+     "barrier-loop": 471,
+     "barrier": 162,
+     "hit-hunter": 120,
+     "mend": 40
+    }
+   },
+   "errs": []
+  }
+ },
+ {
+  "hero": "seoha",
+  "secs": 64,
+  "checks": [
+   {
+    "pass": true,
+    "m": "실행: ok"
+   },
+   {
+    "pass": true,
+    "m": "그리기 표본 352장"
+   },
+   {
+    "pass": true,
+    "m": "영웅 쪽 PXF 도트 0: {}"
+   },
+   {
+    "pass": true,
+    "m": "R163 영웅 픽셀 시트 0: {}"
+   },
+   {
+    "pass": true,
+    "m": "정지 보호막·회복 문장 0: {}"
+   },
+   {
+    "pass": true,
+    "m": "R1027 칠한 시트 그려짐: {\"barrier\":427,\"mend\":34}"
+   },
+   {
+    "pass": true,
+    "m": "시트마다 다른 칸 ≥4: {\"barrier\":22,\"mend\":12}"
+   },
+   {
+    "pass": true,
+    "m": "칠한 그림 좌표 유한(NaN 0)"
+   },
+   {
+    "pass": true,
+    "m": "페이지 오류 0: []"
+   },
+   {
+    "pass": true,
+    "m": "R1027 내부 오류 0: {\"errors\":0,\"lastError\":null,\"replaced\":{\"barrier-loop\":476,\"barrier\":165,\"mend\":66}}"
+   }
+  ],
+  "raw": {
+   "hero": "seoha",
+   "dots": {},
+   "r163": {},
+   "sigil": {},
+   "painted": {
+    "barrier": 427,
+    "mend": 34
+   },
+   "nan": 0,
+   "frames": 352,
+   "rects": {
+    "barrier": 22,
+    "mend": 12
+   },
+   "r1027": {
+    "errors": 0,
+    "lastError": null,
+    "replaced": {
+     "barrier-loop": 476,
+     "barrier": 165,
+     "mend": 66
+    }
+   },
+   "errs": []
+  }
+ },
+ {
+  "hero": "lauren",
+  "secs": 67,
+  "checks": [
+   {
+    "pass": true,
+    "m": "실행: ok"
+   },
+   {
+    "pass": true,
+    "m": "그리기 표본 352장"
+   },
+   {
+    "pass": true,
+    "m": "영웅 쪽 PXF 도트 0: {}"
+   },
+   {
+    "pass": true,
+    "m": "R163 영웅 픽셀 시트 0: {}"
+   },
+   {
+    "pass": true,
+    "m": "정지 보호막·회복 문장 0: {}"
+   },
+   {
+    "pass": true,
+    "m": "R1027 칠한 시트 그려짐: {\"barrier\":309,\"mend\":37}"
+   },
+   {
+    "pass": true,
+    "m": "시트마다 다른 칸 ≥4: {\"barrier\":19,\"mend\":11}"
+   },
+   {
+    "pass": true,
+    "m": "칠한 그림 좌표 유한(NaN 0)"
+   },
+   {
+    "pass": true,
+    "m": "페이지 오류 0: []"
+   },
+   {
+    "pass": true,
+    "m": "R1027 내부 오류 0: {\"errors\":0,\"lastError\":null,\"replaced\":{\"barrier-loop\":316,\"barrier\":151,\"mend\":67}}"
+   }
+  ],
+  "raw": {
+   "hero": "lauren",
+   "dots": {},
+   "r163": {},
+   "sigil": {},
+   "painted": {
+    "barrier": 309,
+    "mend": 37
+   },
+   "nan": 0,
+   "frames": 352,
+   "rects": {
+    "barrier": 19,
+    "mend": 11
+   },
+   "r1027": {
+    "errors": 0,
+    "lastError": null,
+    "replaced": {
+     "barrier-loop": 316,
+     "barrier": 151,
+     "mend": 67
+    }
+   },
+   "errs": []
+  }
+ },
+ {
+  "hero": "hwando",
+  "secs": 61,
+  "checks": [
+   {
+    "pass": true,
+    "m": "실행: ok"
+   },
+   {
+    "pass": true,
+    "m": "그리기 표본 352장"
+   },
+   {
+    "pass": true,
+    "m": "영웅 쪽 PXF 도트 0: {}"
+   },
+   {
+    "pass": true,
+    "m": "R163 영웅 픽셀 시트 0: {}"
+   },
+   {
+    "pass": true,
+    "m": "정지 보호막·회복 문장 0: {}"
+   },
+   {
+    "pass": true,
+    "m": "R1027 칠한 시트 그려짐: {\"barrier\":326,\"mend\":25}"
+   },
+   {
+    "pass": true,
+    "m": "시트마다 다른 칸 ≥4: {\"barrier\":20,\"mend\":7}"
+   },
+   {
+    "pass": true,
+    "m": "칠한 그림 좌표 유한(NaN 0)"
+   },
+   {
+    "pass": true,
+    "m": "페이지 오류 0: []"
+   },
+   {
+    "pass": true,
+    "m": "R1027 내부 오류 0: {\"errors\":0,\"lastError\":null,\"replaced\":{\"barrier-loop\":313,\"barrier\":173,\"mend\":40}}"
+   }
+  ],
+  "raw": {
+   "hero": "hwando",
+   "dots": {},
+   "r163": {},
+   "sigil": {},
+   "painted": {
+    "barrier": 326,
+    "mend": 25
+   },
+   "nan": 0,
+   "frames": 352,
+   "rects": {
+    "barrier": 20,
+    "mend": 7
+   },
+   "r1027": {
+    "errors": 0,
+    "lastError": null,
+    "replaced": {
+     "barrier-loop": 313,
+     "barrier": 173,
+     "mend": 40
+    }
+   },
+   "errs": []
+  }
+ }
+]
