@@ -1,0 +1,33 @@
+PASS gather holds, burst moves with existing path
+PASS uninterrupted cycle conserves movement budget and speed stat
+PASS idle-only and static actors also use short bursts
+PASS full and move-only actors retain continuous locomotion
+PASS new walk sheet immediately disables fallback
+PASS lazy R363 walk assignment is recognized before first draw
+PASS pixel mode, unknown native walk and hospital preserved
+PASS all fixed and major flags excluded
+PASS name-only miniboss, zero speed and hidden excluded
+PASS render-only anticipation/strike use existing attack frames
+PASS real attacks and hits are not replaced with fake poses
+PASS existing R286/R268 actions keep their own motion
+PASS render exceptions restore actor attack/moving state
+PASS pause, clock rewind and room changes discard motion credit
+PASS combat interrupts credit without a delayed post-attack lunge
+PASS long inactivity resets movement credit
+PASS coop/disabled path passes through unchanged
+PASS no save schema or new enemy fields for motion state
+PASS blocked direct path cannot blink to a free endpoint
+PASS full body radius, diagonal corner and path bound enforced
+PASS player and other actor arrival overlap rejected
+PASS unavailable collision fails closed for targeted relocations
+PASS ordinary actor movement does not invoke destination population scan
+PASS R230 public flank respects wall hook and preserves no-hook behavior
+PASS R268 direct relocation respects wall hook
+PASS R268 private RAF loop respects hook, not only exported function
+PASS R268 clear relocation remains allowed
+PASS R286 blocked dash cannot use old wall-blink fallback
+PASS R286 closed door during dash checked before moving
+PASS R286 clear dash remains functional
+PASS bounded sweep cost
+PASS no added effects, paid API, save writer or damage calls
+{"ok":true,"checks":32}

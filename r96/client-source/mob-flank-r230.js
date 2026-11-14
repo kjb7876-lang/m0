@@ -25,7 +25,7 @@ function flank(e){if(!on||!eligible(e)||typeof player!=='object'||!player)return
  if(e.r230At!=null&&T()-e.r230At<GAP){stats.skipped++;return false;}e.r230At=T();
  const range=Number(e.combatProfile?.attackShape?.range)||1.4,r=Math.max(.8,range*.75),k=r/Math.SQRT2;
  const first=sx>0?-1:1;/* 몹이 영웅의 화면 왼쪽(sx>0 → 영웅이 오른쪽)이면 영웅 왼쪽 자리부터 */
- for(const side of [first,-first]){const tx=player.x+side*k,ty=player.y-side*k;if(Math.hypot(tx-e.x,ty-e.y)>MAXD||!free(tx,ty))continue;
+ for(const side of [first,-first]){const tx=player.x+side*k,ty=player.y-side*k;if(Math.hypot(tx-e.x,ty-e.y)>MAXD||!free(tx,ty)||(window.__STORYWORLD_MOB_SHADOW_R374__?.canRelocate(e,{x:tx,y:ty})===false))continue;
   const from=[+e.x.toFixed(2),+e.y.toFixed(2)];puff(e.x,e.y,0);e.x=tx;e.y=ty;e.nav=[];e.moving=false;puff(tx,ty,.06);
   if(typeof facing==='function')e.direction=facing(player.x-e.x,player.y-e.y);e.r230Flanks=(e.r230Flanks||0)+1;stats.flanks++;stats.last={id:e.nativeId||e.id,from,to:[+tx.toFixed(2),+ty.toFixed(2)]};return true;}
  stats.blocked++;return false;}

@@ -68,8 +68,9 @@ function startCharge(e,s,now){s.mode='charge';s.t0=now;s.hx=e.x;s.hy=e.y;s.shoot
 function planDash(e,s,now){const d=Math.hypot(player.x-e.x,player.y-e.y);if(!(d>.01)){stop(e,s);return;}
  const want=Math.max(.9,rangeOf(e)*.8),travel=Math.min(MAXDASH,d-want);if(!(travel>.25)){stop(e,s);return;}
  const ux=(player.x-e.x)/d,uy=(player.y-e.y)/d,tx=e.x+ux*travel,ty=e.y+uy*travel,from=[+e.x.toFixed(2),+e.y.toFixed(2)];
- if(pathFree(e.x,e.y,tx,ty)){s.mode='dash';s.t0=now;s.fx=e.x;s.fy=e.y;s.tx=tx;s.ty=ty;s.trail=0;stats.dashes++;last={id:e.nativeId||e.id,kind:'dash',from,to:[+tx.toFixed(2),+ty.toFixed(2)]};return;}
- if(travel<=BLINK_MAX&&free(tx,ty)&&sees(tx,ty)){puff(e.x,e.y);e.x=tx;e.y=ty;e.nav=[];puff(tx,ty,.06);face(e);crack(tx,ty);stats.blinks++;last={id:e.nativeId||e.id,kind:'blink',from,to:[+tx.toFixed(2),+ty.toFixed(2)]};}
+ const admitted=window.__STORYWORLD_MOB_SHADOW_R374__?.canRelocate(e,{x:tx,y:ty})!==false;
+ if(admitted&&pathFree(e.x,e.y,tx,ty)){s.mode='dash';s.t0=now;s.fx=e.x;s.fy=e.y;s.tx=tx;s.ty=ty;s.trail=0;stats.dashes++;last={id:e.nativeId||e.id,kind:'dash',from,to:[+tx.toFixed(2),+ty.toFixed(2)]};return;}
+ if(admitted&&travel<=BLINK_MAX&&free(tx,ty)&&sees(tx,ty)){puff(e.x,e.y);e.x=tx;e.y=ty;e.nav=[];puff(tx,ty,.06);face(e);crack(tx,ty);stats.blinks++;last={id:e.nativeId||e.id,kind:'blink',from,to:[+tx.toFixed(2),+ty.toFixed(2)]};}
  else stats.blocked++;
  s.nextDash=now+DASH_GAP+hash(e.id+now)*.6;stop(e,s);}
 function advance(e,s,now){
@@ -79,7 +80,9 @@ function advance(e,s,now){
   if(s.mode==='charge'&&age>=CHARGE){if(s.shoot&&fire(e))s.nextShot=now+SHOT_GAP+hash(e.id+now)*.6;planDash(e,s,now);}
   else if(s.mode==='aim'&&age>=AIM){fire(e);s.nextShot=now+SHOT_GAP+hash(e.id+now)*.6;stop(e,s);}
   return;}
- if(s.mode==='dash'){const u=Math.min(1,age/DASH),k=1-(1-u)*(1-u),px=e.x,py=e.y;e.x=s.fx+(s.tx-s.fx)*k;e.y=s.fy+(s.ty-s.fy)*k;e.moving=false;e.nav=[];e.r230At=now;
+ if(s.mode==='dash'){const u=Math.min(1,age/DASH),k=1-(1-u)*(1-u),px=e.x,py=e.y,next={x:s.fx+(s.tx-s.fx)*k,y:s.fy+(s.ty-s.fy)*k};
+  if(window.__STORYWORLD_MOB_SHADOW_R374__?.canRelocate(e,next)===false){s.nextDash=now+DASH_GAP;stats.blocked++;stop(e,s,true);return;}
+  e.x=next.x;e.y=next.y;e.moving=false;e.nav=[];e.r230At=now;
   s.trail+=Math.hypot(e.x-px,e.y-py);if(s.trail>.5){s.trail=0;smoke(px,py);}
   if(u>=1){e.x=s.tx;e.y=s.ty;face(e);crack(e.x,e.y);s.nextDash=now+DASH_GAP+hash(e.id+now)*.6;stop(e,s);}}}
 function eligible(e){return !!(e&&e.hp>0&&e.spawnState==='active'&&e.visible!==false&&!e.disabled&&!major(e)&&!fixed(e)&&!e.r193Doll);}

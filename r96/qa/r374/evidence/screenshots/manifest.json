@@ -1,0 +1,92 @@
+[
+  {
+    "file": "pc-before.webp",
+    "bytes": 1774400,
+    "sha256": "1c1cc63a7e65cc20676662fc70ff26cd9328d06296aa08cfe0867dfabd5b63f7",
+    "original_png_sha256": "3188b59389f0963d0d2d1295df23293f2c14f07885dac563d4e7e42b571b661e",
+    "width": 1920,
+    "height": 1080,
+    "pixel_equal": true
+  },
+  {
+    "file": "pc-after.webp",
+    "bytes": 1773388,
+    "sha256": "f09cea942b04f01ec93d549c9a5f765ed303a03ccef243864d5590653a742297",
+    "original_png_sha256": "8ad26759600e9111e842cf25963c7cb2d8cccc1f5daaca7f4a7aaf6d5eecfd23",
+    "width": 1920,
+    "height": 1080,
+    "pixel_equal": true
+  },
+  {
+    "file": "pc-motion-5.webp",
+    "bytes": 1774410,
+    "sha256": "c863d21c5cca8eecf8be1ea16d27b983042ccbc32432618d86b9b948908b3ca1",
+    "original_png_sha256": "f035ef61b35485bd97f3d0053d573c342fb04c85ea17b33a394a72e4c3ba3430",
+    "width": 1920,
+    "height": 1080,
+    "pixel_equal": true
+  },
+  {
+    "file": "pc-motion-16.webp",
+    "bytes": 1773792,
+    "sha256": "1d5ca90d3be01d2bcef9c159d5c959d34e8673e1126e41af00e3c3b75512e8a0",
+    "original_png_sha256": "c2821defdfdb29a7b6672059ddc0329831de1cedaafef6929d70752b56802c0c",
+    "width": 1920,
+    "height": 1080,
+    "pixel_equal": true
+  },
+  {
+    "file": "pc-motion-38.webp",
+    "bytes": 1773414,
+    "sha256": "ee71ecb7a80ac22582b118f5d17c6f06807f6a1d5a3195c30e457a25ac79497b",
+    "original_png_sha256": "bfbdc6ee52f9eab924cc6b01f351ac96e629506ba29f0c243d0ee007b3672a88",
+    "width": 1920,
+    "height": 1080,
+    "pixel_equal": true
+  },
+  {
+    "file": "mobile-before.webp",
+    "bytes": 2300120,
+    "sha256": "c044b40922fdbd15e2ccac3840ec31352f83b6b0b577c8eda32248272f7c6c9a",
+    "original_png_sha256": "a8e93c045070b3b783118fc08430cd7982b346a82a97a8288e8a6464a77cf928",
+    "width": 1170,
+    "height": 2532,
+    "pixel_equal": true
+  },
+  {
+    "file": "mobile-after.webp",
+    "bytes": 2298350,
+    "sha256": "c52d69f20c37635746677c085108a1db03bb64ab48715ce4543e08805aa291fa",
+    "original_png_sha256": "fc9086139b7d131bc376a505de495ad014421e652faa58bf7117ae7d1b909f60",
+    "width": 1170,
+    "height": 2532,
+    "pixel_equal": true
+  },
+  {
+    "file": "mobile-motion-5.webp",
+    "bytes": 2296848,
+    "sha256": "b03630460cabaafc9b3d9ccd3b250552ef3280be080c5f3741d11295d2b0fb19",
+    "original_png_sha256": "d2688ff08ed5bbbf187d7499c0e798ec1aab545d5cb5a02859506b517128539d",
+    "width": 1170,
+    "height": 2532,
+    "pixel_equal": true
+  },
+  {
+    "file": "mobile-motion-16.webp",
+    "bytes": 2296940,
+    "sha256": "0684e3bc1f45be198693ddd88390b35beecb88ede02f0139f65eef6239108b96",
+    "original_png_sha256": "c44ea2dc60fc366ff65aa9f1dd6ea254429a6e1d28092caf1f7a8834f8382329",
+    "width": 1170,
+    "height": 2532,
+    "pixel_equal": true
+  },
+  {
+    "file": "mobile-motion-38.webp",
+    "bytes": 2298360,
+    "sha256": "b4d777592913ad77866b065e2b55b70a19b620d76b1da5c2e2cf6b477a648dfa",
+    "original_png_sha256": "2f9541f17f3f5d4497cfec010a6f2d53cc4dab1bfa579759f9917d407c73235b",
+    "width": 1170,
+    "height": 2532,
+    "pixel_equal": true
+  }
+]
