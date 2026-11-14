@@ -9863,6 +9863,8 @@
     "assets/r1029/float/mob-paper-figure.webp",
     "gear-r1032.js",
     "mobile-tier-r1023.js",
+    "entry-video-r1036.js",
+    "boot-lean-r1038.js",
     "boss-pattern-fx-r1040.js"
   ],
   "mediaPaths": [
@@ -10938,5 +10940,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "028225c682a9833ea23d7d123b0c498f53fbf3ac5ee418ceaf0fb2dfb76064f0"
+  "runtimeManifestSHA256": "9cdc50e530ace7c8d3111aa5e8fd7cf8c05fd2ff610014eac0398a666c9c6cb9"
 }
