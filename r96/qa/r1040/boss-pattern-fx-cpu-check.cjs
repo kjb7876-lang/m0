@@ -95,7 +95,12 @@ function field(g,o={}){const h={id:'f'+(++serial),type:'field',owner:o.owner||'b
  ok('field: ctx.stroke restored to prototype',!Object.prototype.hasOwnProperty.call(g.ctx,'stroke')&&!Object.prototype.hasOwnProperty.call(g.ctx,'fill'));
  const f1=ring[0]?.frame.assetFrame.sourceRect.join();g.tick(.3);g.draws.length=0;g.frame();const f2=g.draws.find(d=>d.path==='assets/r430/mist-loop.webp')?.frame.assetFrame.sourceRect.join();ok('field ring animates',f1&&f2&&f1!==f2,[f1,f2]);
  g.hazards.length=0;const hi=field(g,{age:1.5});g.strokesC=0;g.fills=0;g.draws.length=0;g.frame();ok('field impact: no code stroke/fill',g.strokesC===0&&g.fills===0);
- ok('field impact: no warning mist',!g.draws.some(d=>d.path==='assets/r430/mist-loop.webp'));}
+ // R1040b(#636 리뷰 P1): 터짐 0.34초 뒤에도 장판 피해가 이어지는 동안 암흑 안개가 남아야 한다(코드 잔광 선을 지웠으므로)
+ const m=()=>g.draws.filter(d=>d.path==='assets/r430/mist-loop.webp');ok('field impact: dark mist stays',m().length===1&&allFinite(m()));
+ for(const age of [2.0,2.4]){g.hazards.length=0;field(g,{age});g.strokesC=0;g.fills=0;g.draws.length=0;g.frame();const d=m();
+  ok('field linger age '+age+': no code stroke/fill',g.strokesC===0&&g.fills===0);ok('field linger age '+age+': dark mist while damage lasts',d.length===1&&allFinite(d)&&d[0].o.alpha>0,d.map(x=>x.o));}
+ {g.hazards.length=0;field(g,{age:2.0});g.draws.length=0;g.frame();const a1=m()[0]?.o.alpha;g.hazards.length=0;field(g,{age:2.45});g.draws.length=0;g.frame();const a2=m()[0]?.o.alpha;ok('field linger fades toward end of life',a1>a2&&a2>0,[a1,a2]);}
+ {g.hazards.length=0;const hl=field(g,{age:2.0});hl.life=NaN;g.strokesC=0;g.draws.length=0;g.frame();ok('field NaN life → no NaN draw',allFinite(g.draws));}}
 {const g=world({store:{'storyworld.r1040.patternFx':'{"on":false}'}});field(g);g.frame();ok('field off → original strokes',g.strokesC>0&&g.fills>0);}
 {const g=world();field(g,{radius:NaN});g.frame();ok('field NaN radius → passthrough',g.strokesC>0&&g.draws.length===0);}
 {const g=world();field(g,{owner:'nobody'});g.frame();ok('field without enemy owner → passthrough',g.strokesC>0);}
