@@ -450,6 +450,8 @@ jobs:
         run: node r96/qa/r967/r967-cpu-check.cjs
       - name: R993 SFX audit mix (category loudness trim, pitch variation, mob-layer admission, ducking, 4 cut-off sounds re-edited) CPU check
         run: node r96/qa/r993/r993-cpu-check.cjs
+      - name: R1026 enemy hit/death SFX punch (own death/hit lanes, level lift, EQ, short death tail) CPU check
+        run: node r96/qa/r1026/r1026-cpu-check.cjs
       - name: R968 boss/midboss attack sounds also fire on route phases and rooms without an R78 phase (same rule as R966) CPU check
         run: node r96/qa/r968/r968-cpu-check.cjs
       - name: R975 hwando E ilseom boss-first 7-hit left/right multi-hit (sum stays x0.6, per-hit sound, E dash unchanged) CPU check

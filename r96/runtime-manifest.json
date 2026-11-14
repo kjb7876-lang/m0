@@ -6903,6 +6903,171 @@
       "sha256": "070f63b5c7f086154fd799533666e61dd136260074cd263e67ae3efb6e441e0a"
     },
     {
+      "path": "assets/r1026/sfx/el-glass-die-1.ogg",
+      "bytes": 11835,
+      "sha256": "dbbe4f4274c6883161ab05878736d803d7087b663f37fec48460613321b2924e"
+    },
+    {
+      "path": "assets/r1026/sfx/el-glass-die-2.ogg",
+      "bytes": 11748,
+      "sha256": "dde3f7521f58c7cb2f3113359a0755cbe2ba88b355676c02453e083a5e207d6c"
+    },
+    {
+      "path": "assets/r1026/sfx/el-glass-die-3.ogg",
+      "bytes": 9194,
+      "sha256": "5bd298c8a8b68e5797fdc87a750f7ba229a90550b07f8145800e6fd8c4d1c3b7"
+    },
+    {
+      "path": "assets/r1026/sfx/el-glass-hit-1.ogg",
+      "bytes": 5648,
+      "sha256": "cc46ef226bc01ba87410b0dbfb6bd2fd893244eb1836a12d366d819cf23d5f78"
+    },
+    {
+      "path": "assets/r1026/sfx/el-glass-hit-2.ogg",
+      "bytes": 5383,
+      "sha256": "231a6246504d8c90dc817fd005ca0d1bc43be7037b76d6ac9ae92ec1291c991a"
+    },
+    {
+      "path": "assets/r1026/sfx/el-glass-hit-3.ogg",
+      "bytes": 5487,
+      "sha256": "992ac5a524f39502b5de7316786ea4f725f7abcba059b49eecd0b753d6b60bf6"
+    },
+    {
+      "path": "assets/r1026/sfx/index.json",
+      "bytes": 10859,
+      "sha256": "a3930caf42b78affda174ea8545fc41ff952eb9ab3bc0e353eb68dacfc4cefe7"
+    },
+    {
+      "path": "assets/r1026/sfx/r544-death-slime.ogg",
+      "bytes": 6855,
+      "sha256": "5c7a310f6d8fe91f5365bb668b80d976062be7b70268a4d884b755da9f559c98"
+    },
+    {
+      "path": "assets/r1026/sfx/r785-hit-lauren-4.ogg",
+      "bytes": 5329,
+      "sha256": "d3b87cfaec848f1b991fce3561a53c4249db3020910aed42616378cf6e0355d3"
+    },
+    {
+      "path": "assets/r1026/sfx/r788-hit-leviathan-1.ogg",
+      "bytes": 5880,
+      "sha256": "1449258a88f95d39b77430dc155bff036caba26dde146e80e05bfe6bed562009"
+    },
+    {
+      "path": "assets/r1026/sfx/r788-hit-leviathan-3.ogg",
+      "bytes": 5861,
+      "sha256": "7c3f42a9df39dc0bf6ec3cc3b7b45796c573f23530dbaf977c50ca1143f62bde"
+    },
+    {
+      "path": "assets/r1026/sfx/r789-hit-censor-2.ogg",
+      "bytes": 7299,
+      "sha256": "a47a7a1a37a13ce6b0549d8e8422e5d8c2ae0042083d2e2ff5ea310614f603d7"
+    },
+    {
+      "path": "assets/r1026/sfx/r789-hit-crackmirror-1.ogg",
+      "bytes": 5749,
+      "sha256": "54b00c24ac80cf2eb8d934493c6d2e2ce453d69e58ba78031aa86c4cda68b535"
+    },
+    {
+      "path": "assets/r1026/sfx/r789-hit-crackmirror-2.ogg",
+      "bytes": 6694,
+      "sha256": "623f48091ed0be53ca13156d09b0dc59aebb1f820ce4c6ca11583a169f2c214d"
+    },
+    {
+      "path": "assets/r1026/sfx/r789-hit-crackmirror-3.ogg",
+      "bytes": 5777,
+      "sha256": "eb84a00d21d9a8c4069f707608db3d5401d1d77348350f5d7567e3bb9b52d1a5"
+    },
+    {
+      "path": "assets/r1026/sfx/r789-hit-silentalarm-2.ogg",
+      "bytes": 5103,
+      "sha256": "18e8e1d04e928d10dbe057ad9c434a57e56a5d3274c4d6a2b72b8f20a87bfa06"
+    },
+    {
+      "path": "assets/r1026/sfx/r789-hit-slothshell-3.ogg",
+      "bytes": 5020,
+      "sha256": "be1ea79a153ab085a91d9572bb36eca1ca3f0b76849093882459bf9e31257686"
+    },
+    {
+      "path": "assets/r1026/sfx/r954-hit-herbwoman-3.ogg",
+      "bytes": 5469,
+      "sha256": "ba183605e4e034f7149fc2a8df586ae171ffadf1b9e9fd39544e70a6bbadc3ee"
+    },
+    {
+      "path": "assets/r1026/sfx/r955-die-boneguard-2.ogg",
+      "bytes": 9499,
+      "sha256": "5b03c3b4da6e71b7f42edddcba0ac4dfa6dc92643384d6a0d216313e12770f1d"
+    },
+    {
+      "path": "assets/r1026/sfx/r955-die-brainwave-1.ogg",
+      "bytes": 9233,
+      "sha256": "b07be723a1bf33aadebd4ffd3c92d17ef329d62f07e65e0ff27186e4e0af5f4b"
+    },
+    {
+      "path": "assets/r1026/sfx/r955-die-brainwave-3.ogg",
+      "bytes": 9408,
+      "sha256": "01ac6fc2e832596789f30c4013cb668ab4330b1a2e7938444d7f732da1363eef"
+    },
+    {
+      "path": "assets/r1026/sfx/r955-die-meadowslime-1.ogg",
+      "bytes": 6902,
+      "sha256": "61791e93a3d3c482aceb411bf5b726e3be699060e59022943add9f11bfea9b99"
+    },
+    {
+      "path": "assets/r1026/sfx/r955-die-meadowslime-2.ogg",
+      "bytes": 7431,
+      "sha256": "5c1db4ee9a8b13f4123d29ac0bedb2ae1fae3f49294ba816146def5c9cfd7924"
+    },
+    {
+      "path": "assets/r1026/sfx/r955-die-meadowslime-3.ogg",
+      "bytes": 7248,
+      "sha256": "2da85c282384c28245ef8d3a887cd0ea2659fba5d0217c5d840046909ab28648"
+    },
+    {
+      "path": "assets/r1026/sfx/r955-die-sealguard-3.ogg",
+      "bytes": 7377,
+      "sha256": "4723257682d27f65272ff5dac2ae00d8da020b54bd1ff40f9b5b0f850d4888b2"
+    },
+    {
+      "path": "assets/r1026/sfx/r955-die-silverscout-3.ogg",
+      "bytes": 11650,
+      "sha256": "50bac64191d6d4a31c817e050c16b18e14db0c68365fb480cb6250e72bdc4714"
+    },
+    {
+      "path": "assets/r1026/sfx/r955-die-timegate3-1.ogg",
+      "bytes": 5744,
+      "sha256": "5b40cc38d1cfd26c4c98d75eaa21f7d19943c82880d242bfe9a92a418cb27b76"
+    },
+    {
+      "path": "assets/r1026/sfx/r955-die-timegate3-2.ogg",
+      "bytes": 5302,
+      "sha256": "b6a85947bfdc91aed5022f30d968c6f7f014decf19e931690426e8eea6ed13a8"
+    },
+    {
+      "path": "assets/r1026/sfx/r955-die-timegate3-3.ogg",
+      "bytes": 5171,
+      "sha256": "588b41d005b2424ac463535c9c48bc6c4b1bcb88e943c83c71457310ed961902"
+    },
+    {
+      "path": "assets/r1026/sfx/r955-die-zombieknight-1.ogg",
+      "bytes": 10906,
+      "sha256": "27df42687f6ac299e8c39ca588853f24889e0643d068f8f7cf317b1ff6f2d737"
+    },
+    {
+      "path": "assets/r1026/sfx/r955-hit-egovessel-1.ogg",
+      "bytes": 6431,
+      "sha256": "18740829383c25aa402a3d87a6d41d104ba44c30dc87eae5f9b6375aa4ec71e5"
+    },
+    {
+      "path": "assets/r1026/sfx/r955-hit-egovessel-3.ogg",
+      "bytes": 6339,
+      "sha256": "f35122412fb9775ecbb0c2eba5882d8719b467bc3e90f444a41942669af9a231"
+    },
+    {
+      "path": "assets/r1026/sfx/r955-hit-vialcore-2.ogg",
+      "bytes": 5106,
+      "sha256": "85c7d51a0bf10170395b58d1230905276ce1e5b19847b61169768442485afb13"
+    },
+    {
       "path": "assets/r103/chest-closed.svg",
       "bytes": 2508,
       "sha256": "d3e981852d7785f5749b633ca6f136c5ae378ef0efc7b3562059ceae43bd3e10"
@@ -51449,8 +51614,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6578362,
-      "sha256": "45b11073b4a86998e23c6b3d27dd2699438e22867a8f5bab518e0c844ac476b8"
+      "bytes": 6578407,
+      "sha256": "02724a429ed56e9b7a400b046bdd8d89a2f05723bb8df3d3e069e06e373a7fb3"
     },
     {
       "path": "intro-r140.js",
@@ -52239,8 +52404,13 @@
     },
     {
       "path": "sfx-mix-r993.js",
-      "bytes": 14870,
-      "sha256": "b5b40b34d00700ac7f0d99cfd308b8fc749807892834e9f631796b3976f69fd1"
+      "bytes": 15449,
+      "sha256": "e7302f7d608cf700a621cd6f62a88b2131e54e536893f8ecf140b685328991dd"
+    },
+    {
+      "path": "sfx-punch-r1026.js",
+      "bytes": 16509,
+      "sha256": "dd7b2d0270dc183549e035e19de26ca1678fe819e9f3cb7004cd499fedec84d6"
     },
     {
       "path": "sfx-r541.js",
@@ -52663,9 +52833,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10532,
-  "totalBytes": 1289351759,
-  "webHTMLSha256": "45b11073b4a86998e23c6b3d27dd2699438e22867a8f5bab518e0c844ac476b8",
+  "fileCount": 10566,
+  "totalBytes": 1289607829,
+  "webHTMLSha256": "02724a429ed56e9b7a400b046bdd8d89a2f05723bb8df3d3e069e06e373a7fb3",
   "largest": [
     {
       "path": "index.html",
