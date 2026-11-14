@@ -22,6 +22,7 @@ const REV='R951-neon-storm-2',KEY='storyworld.r951.neonStorm',HERO='neon';
 const CHANCE=.09,CROWD_BONUS=.03,CROWD_N=4,CROWD_R=2,CHANCE_MAX=.30,ROLL_GAP=.35,ICD=6,STORM_CD=30,ACT_MAX=3,SCREEN_R=9;
 const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
 const U1025=(h,a,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__,v=u&&u.mask(h,a,k);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},S1025=h=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.share(h);return Number.isFinite(v)?Math.max(0,Math.min(1,v)):1;}catch(_){return 1;}},W1025=(h,w)=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.weights(h,w);return v||w;}catch(_){return w;}},A1025=(h,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.unlocked(h,k)!==false:true;}catch(_){return true;}},O1025=id=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.summonOpen(id)!==false:true;}catch(_){return true;}};/* R1025 특수 패시브 레벨별 해금·소환 영웅 서사 확인(파일 없으면 원래 값) */
+const C1033=(h,k,o,x)=>{try{window.__STORYWORLD_PASSIVE_CUTIN_R1033__?.fire(h,k,o,x);}catch(_){}};/* R1033 세 번째 특수 패시브 컷인(1·2단·몸·끔은 그쪽에서 거름) */
 const WEIGHTS={lance:.55,fog:.33,storm:.12};
 const ST_CHARGE=.5,ST_GAP=.6,ST_WAVES=3,ST_PER=8,ST_MAXHIT=3,ST_K=1.1,ST_BOSS_K=.7,ST_DECOR=4,ST_LIFE=2.6,STRIKE_LIFE=.55,STRIKE_DRAW_MAX=12;
 const LA_N=6,LA_RANGE=8,LA_GAP=.09,LA_FALL=.45,LA_R=.9,LA_K=1.5,LA_BOSS_K=1.0,LA_MAXHIT=2,LA_STAY=.6;
@@ -54,7 +55,7 @@ function centre(x){return ownerOk(x.owner)?{x:x.owner.x,y:x.owner.y}:{x:x.x,y:x.
 function inScreen(c,r){return enemiesNow().filter(e=>!hiddenActor(e)&&dist(e,c)<=r+(e.radius||0)).sort((a,b)=>dist(a,c)-dist(b,c));}
 // ---- 세 가지 발동 -----------------------------------------------------------------------------------
 function fire(kind,o,tg){const t=T(),power=ap(),k=Math.min(2,Math.max(1,surge('range',1))),base={kind,owner:o,t0:t,power,k,x:o.x,y:o.y,seed:stats.procTotal*37+1};
- stats.procTotal++;stats.procs[kind]++;
+ stats.procTotal++;stats.procs[kind]++;C1033(HERO,kind,o);
  if(kind==='lance'){const foes=inScreen(o,LA_RANGE*k),slots=[];for(let pass=0;pass<LA_MAXHIT&&slots.length<LA_N;pass++)for(const e of foes){if(slots.length>=LA_N)break;slots.push(e);}
   const anchor=tg||foes[0]||{x:o.x+1.5,y:o.y};const lances=[];
   for(let i=0;i<LA_N;i++){const e=slots[i]||null,a=(base.seed+i)*2.399,d=1.7+hash(base.seed+i)*1.2,p=e?{x:e.x,y:e.y}:{x:anchor.x+Math.cos(a)*d,y:anchor.y+Math.sin(a)*d};

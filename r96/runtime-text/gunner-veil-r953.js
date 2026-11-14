@@ -88,6 +88,7 @@ function disarm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)){c
 // ---- 발동 ----------------------------------------------------------------------------------------------------
 const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
 const U1025=(h,a,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__,v=u&&u.mask(h,a,k);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},S1025=h=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.share(h);return Number.isFinite(v)?Math.max(0,Math.min(1,v)):1;}catch(_){return 1;}},W1025=(h,w)=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.weights(h,w);return v||w;}catch(_){return w;}},A1025=(h,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.unlocked(h,k)!==false:true;}catch(_){return true;}},O1025=id=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.summonOpen(id)!==false:true;}catch(_){return true;}};/* R1025 특수 패시브 레벨별 해금·소환 영웅 서사 확인(파일 없으면 원래 값) */
+const C1033=(h,k,o,x)=>{try{window.__STORYWORLD_PASSIVE_CUTIN_R1033__?.fire(h,k,o,x);}catch(_){}};/* R1033 세 번째 특수 패시브 컷인(1·2단·몸·끔은 그쪽에서 거름) */
 function pick(s){if(s.force){const k=s.force;s.force=null;return k;}
  const r=Math.random(),[a,b,c]=U1025(HERO,G971(HERO,[CFG.cloak.chance,CFG.barrage.chance,CFG.summon.chance]),['cloak','barrage','summon']),k=r<a?'cloak':r<a+b?'barrage':r<a+b+c?'summon':null;
  return k&&T()>=s.ready[k]?k:null;}
@@ -126,6 +127,7 @@ function castSummon(s,p){const S=CFG.summon,room0=RM(),n=Math.min(S.count,S.max-
   const pats=patternsOf(zid,bid,src.d.name);allies.push({a,zone:zid,bid,s,t0:T(),until:T()+S.duration,leaveAt:null,castAt:T()+S.firstCast+made*.22,k:made,pats,room:room0});made++;
   paths.push(a.path);for(const pt of pats){const art=artOf(bid,pt);paths.push(art.path,art.warn,art.impact);}
   addVis({k:'call',x:q.x,y:q.y,life:1.2});}
+ if(made)C1033(HERO,'summon',p,{art:allies.slice(-made).map(v=>v.a.path)});
  if(made){say(NAME.summon,p.x,p.y);sfx('special');try{if(typeof ensureImages==='function')Promise.resolve(ensureImages([...new Set(paths.filter(Boolean))])).catch(()=>{});}catch(e){fail(e);}arm();}}
 function nearestTo(o,r){let b=null,bd=r;for(const e of foes()){const d=Math.hypot(e.x-o.x,e.y-o.y);if(d<=bd){bd=d;b=e;}}return b;}
 function allyCast(A,foe){const S=CFG.summon,a=A.a,t=T(),idx=A.k%A.pats.length,p=A.pats[idx];A.k++;A.s.stats.allyCasts++;

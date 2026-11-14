@@ -42,6 +42,7 @@ const CFG=Object.freeze({chance:.09,gap:.35,icd:21,life:7,fade:.45,
   line:Object.freeze({path:'assets/r952/hs04-flow-line.webp',cell:Object.freeze([256,64]),cols:1,frames:8,piv:Object.freeze([0,32]),fps:8,maxSpans:24})})});
 const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
 const U1025=(h,a,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__,v=u&&u.mask(h,a,k);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},S1025=h=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.share(h);return Number.isFinite(v)?Math.max(0,Math.min(1,v)):1;}catch(_){return 1;}},W1025=(h,w)=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.weights(h,w);return v||w;}catch(_){return w;}},A1025=(h,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.unlocked(h,k)!==false:true;}catch(_){return true;}},O1025=id=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.summonOpen(id)!==false:true;}catch(_){return true;}};/* R1025 특수 패시브 레벨별 해금·소환 영웅 서사 확인(파일 없으면 원래 값) */
+const C1033=(h,k,o,x)=>{try{window.__STORYWORLD_PASSIVE_CUTIN_R1033__?.fire(h,k,o,x);}catch(_){}};/* R1033 세 번째 특수 패시브 컷인(1·2단·몸·끔은 그쪽에서 거름) */
 const NAMES={call:'혈맹 호출',shade:'혈영 강습',squad:'기러기진 섬멸'},BEAT=.42;
 let errors=0,lastError=null;const fail=e=>{errors++;lastError=String(e?.stack||e).slice(0,300);};
 const G=(f,d)=>{try{const v=f();return v===undefined?d:v;}catch(_){return d;}};
@@ -108,7 +109,7 @@ function start(s,p,tier){const t=T(),rm=G(()=>room,null);if(!rm||!NAMES[tier])re
  if(tier==='squad'){for(let i=0;i<CFG.squad.count;i++)sq.units.push(mkUnit(sq,HERO,i,p.x,p.y,CFG.squad.mul));
   sq.form={id:'r952:form:'+(++serial),r952Prop:true,r952Form:true,x:p.x,y:p.y,solid:false,visible:true,autoTargetEligible6:false,label:'',height:1};Object.defineProperty(sq.form,'r952Squad',{value:sq,enumerable:false});}
  formation(sq,foes);for(const u of sq.units)u.body=mkBody(p,u);
- s.squad=sq;s.readyAt=t+D971(HERO,CFG.icd);s.stats.procs[tier]++;live.push(sq);syncProps(sq);
+ s.squad=sq;s.readyAt=t+D971(HERO,CFG.icd);s.stats.procs[tier]++;C1033(HERO,tier,p,{heroes:sq.units.map(u=>u.kind)});live.push(sq);syncProps(sq);
  try{floatText(NAMES[tier],p.x,p.y,tier==='squad'?'#f1d9a0':'#e08a92');}catch(_){}
  try{window.__STORYWORLD_BLOOD_R190__?.play?.('blood-burst',sp.x,sp.y,{k:1.1,z:0});}catch(_){}
  return true;}

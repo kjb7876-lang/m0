@@ -20,6 +20,7 @@ const REV='R949-epoch-1',KEY='storyworld.r949.epoch',HERO='seoha';
 const CHANCE=.05,CHANCE_MAX=.2,ROLL_GAP=.35,DUR=7,ICD=14,MAX_ACTS=2;
 const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
 const U1025=(h,a,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__,v=u&&u.mask(h,a,k);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},S1025=h=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.share(h);return Number.isFinite(v)?Math.max(0,Math.min(1,v)):1;}catch(_){return 1;}},W1025=(h,w)=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.weights(h,w);return v||w;}catch(_){return w;}},A1025=(h,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.unlocked(h,k)!==false:true;}catch(_){return true;}},O1025=id=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.summonOpen(id)!==false:true;}catch(_){return true;}};/* R1025 특수 패시브 레벨별 해금·소환 영웅 서사 확인(파일 없으면 원래 값) */
+const C1033=(h,k,o,x)=>{try{window.__STORYWORLD_PASSIVE_CUTIN_R1033__?.fire(h,k,o,x);}catch(_){}};/* R1033 세 번째 특수 패시브 컷인(1·2단·몸·끔은 그쪽에서 거름) */
 const L1025=real=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u&&typeof u.summonList==='function'?u.summonList('seoha',['seoha',real&&real.hero]):null;}catch(_){return null;}};/* R1025: 소환 영웅 = 서사 순, 레벨마다 하나씩 최대 7명 */
 const WEIGHTS=[['collapse',.5],['heroes',.3],['arbelia',.2]];
 // ③ 시간 붕괴
@@ -127,7 +128,7 @@ function startHeroes(base,d){if(typeof basicAttack!=='function'||typeof drawHero
 function fire(kind,o,tg){const t=T(),d=dirTo(o,tg),base={owner:o,t0:t,until:t+DUR,power:ap(),room:curRoom(),props:[],seed:(stats.procTotal*7919)%360};let x=null;
  try{if(kind==='arbelia')x=startArbelia(base,d);else if(kind==='heroes')x=startHeroes(base,d);}catch(err){fail(err);x=null;}
  if(!x){if(kind!=='collapse')stats.fallbacks++;kind='collapse';x=startCollapse(base);}
- stats.procTotal++;stats.procs[kind]++;acts.push(x);play('r546Sp_'+HERO);say(NAMES.passive+' · '+NAMES[kind]);return x;}
+ stats.procTotal++;stats.procs[kind]++;C1033(HERO,kind,o,kind==='arbelia'?{art:[ARB_ART.idle]}:null);acts.push(x);play('r546Sp_'+HERO);say(NAMES.passive+' · '+NAMES[kind]);return x;}
 function pick(){if(forced){const f=forced;forced=null;return f;}const WS=W1025(HERO,WEIGHTS);let r=rnd()*WS.reduce((n,w)=>n+w[1],0);for(const [k,w] of WS){if(r<w)return k;r-=w;}return WS.length?WS[WS.length-1][0]:'collapse';}
 function roll(e){const o=P();if(!o||o.hero!==HERO||o.hp<=0||blockedNow()||!solo())return;const s=stateOf(o),t=T();if(t<s.readyAt||t-s.lastRoll<ROLL_GAP)return;s.lastRoll=t;stats.rolls++;preload();
  if(acts.length>=MAX_ACTS||acts.some(x=>x.owner===o))return;

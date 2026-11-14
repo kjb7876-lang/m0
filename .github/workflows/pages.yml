@@ -540,6 +540,8 @@ jobs:
         run: node r96/qa/r971/r971-cpu-check.cjs
       - name: R1025 hero special passive level unlock CPU check
         run: node r96/qa/r1025/r1025-cpu-check.cjs
+      - name: R1033 third special passive cut-in (7 heroes, shared DOM band like Hwando trio; bodies/scenes/off skipped; 8s story / 20s survival gap) CPU check
+        run: node r96/qa/r1033/r1033-cpu-check.cjs
       - name: R981 insomnia-ghost midboss renamed and set apart from the main boss CPU check
         run: node r96/qa/r981/puppet-cpu-check.cjs
       - name: R990 bulmyeongwi fog skills (fog summon of village mobs, fog-weighted patterns, old boss art in summon ghosts) CPU check
@@ -680,6 +682,8 @@ jobs:
         run: node r96/qa/r1032/r1032-cpu-check.cjs
       - name: R1039 hero EGO aura and hit/hurt code sprites replaced by painted R100 frame sheets CPU check
         run: node r96/qa/r1039/r1039-cpu-check.cjs
+      - name: R1040 boss pattern frame fx CPU check
+        run: node r96/qa/r1040/boss-pattern-fx-cpu-check.cjs
       - name: R1038 defer hidden boot self-tests until diagnostics open CPU check
         run: node r96/qa/r1038/r1038-cpu-check.cjs
       - name: R1037 narration always-off button (boss entry story window + memory fragment note) and settings rows CPU check
