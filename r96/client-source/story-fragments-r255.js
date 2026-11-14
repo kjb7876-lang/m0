@@ -10,7 +10,7 @@
 //  끄기: localStorage['storyworld.r255.fragments']='{"on":false}' ({"cinema":false} 로 연출만 끔)
 (()=>{'use strict';
 if(window.__STORYWORLD_STORY_FRAGMENTS_R255__)return;
-const REV='R255-fragments-3-R682',KEY='storyworld.r255.fragments';
+const REV='R255-fragments-3-R682-R1036',KEY='storyworld.r255.fragments';
 let prefs={on:true,cinema:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={styled:0,cinemas:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const solo=()=>{let m=null;try{m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();}catch(_){}return !m||m==='off';};
@@ -43,11 +43,14 @@ function style(s){const pn=document.getElementById('panel'),md=document.getEleme
 //  Dots 자산(CX-0069BT 이름 카드 장식·잿불 시트)이 오면 장식선·잿불을 그 시트로 바꾼다. 지금 것은 코드 임시본.
 const shown=new Set();
 function bossInfo(s){try{if(!s||s.part!=='pre')return null;const r=regionById?.[s.id];if(!r||!(r.bosses?.length))return null;const k=String(s.id)+':'+(typeof layer!=='undefined'?layer:'');if(shown.has(k))return null;shown.add(k);
-  const live=(typeof room!=='undefined'&&room?.enemies||[]).find(e=>e&&e.boss&&e.hp>0);return {region:String(r.title||''),boss:String(live?.name||r.bosses[0]?.name||''),path:live?.path||null};}catch(e){fail(e);return null;}}
+  const live=(typeof room!=='undefined'&&room?.enemies||[]).find(e=>e&&e.boss&&e.hp>0);return {region:String(r.title||''),boss:String(live?.name||r.bosses[0]?.name||''),...artOf(live)};}catch(e){fail(e);return null;}}
+// R1036: 실루엣 그림은 게임이 지금 그 보스 몸을 그리는 그림으로(불면귀는 R760 portrait — 엔진 e.path 는 옛 회백 해골). 없으면 e.path 그대로.
+function artOf(e){let p=null;try{p=e?window.__STORYWORLD_BULMYEONGWI_R760__?.portrait?.(e)||null:null;}catch(err){fail(err);}
+ return p&&p.path?{path:String(p.path),crop:p.crop||null}:{path:e?.path||null,crop:null};}
 const GOLD='#c9a46a',IVORY='#efe2cf',SHADE='58,13,34',SERIF='"Gowun Batang","Noto Serif KR","Nanum Myeongjo","Malgun Gothic",serif';
 const ease=x=>x<=0?0:x>=1?1:x*x*(3-2*x),win=(t,a,b)=>ease((t-a)/(b-a));
-function bossArt(path){try{if(!path||typeof readyImage!=='function')return null;const r=readyImage(path);const im=r?.image;if(!im)return null;const iw=im.naturalWidth||im.width||0,ih=im.naturalHeight||im.height||0;if(!(iw>1&&ih>1))return null;
- const c=r.crop||{x:0,y:0,w:iw,h:ih},k=Math.min(1,512/Math.max(c.w||iw,c.h||ih)),w=Math.max(1,Math.round((c.w||iw)*k)),h=Math.max(1,Math.round((c.h||ih)*k));
+function bossArt(path,crop){try{if(!path||typeof readyImage!=='function')return null;const r=readyImage(path);const im=r?.image;if(!im)return null;const iw=im.naturalWidth||im.width||0,ih=im.naturalHeight||im.height||0;if(!(iw>1&&ih>1))return null;
+ const c=crop||r.crop||{x:0,y:0,w:iw,h:ih},k=Math.min(1,512/Math.max(c.w||iw,c.h||ih)),w=Math.max(1,Math.round((c.w||iw)*k)),h=Math.max(1,Math.round((c.h||ih)*k));
  // 원본이 칼로 자른 듯 끝나면(끝 열 불투명 > 높이 12%, 루시퍼 오른쪽 날개 등) 그쪽 14% 를 서서히 투명하게(R568 과 같은 처리)
  const base=document.createElement('canvas');base.width=w;base.height=h;const bg=base.getContext('2d');if(!bg)return null;bg.drawImage(im,+c.x||0,+c.y||0,c.w||iw,c.h||ih,0,0,w,h);
  try{const d=bg.getImageData?.(0,0,w,h)?.data;if(d){const col=x=>{let n=0;for(let y=0;y<h;y++)if(d[(y*w+x)*4+3]>40)n++;return n;},F=Math.max(8,w*.14);
@@ -81,7 +84,7 @@ function cinema(info){if(!prefs.cinema||!info||typeof document==='undefined')ret
  const frame=()=>{if(done)return;const t=(performance.now()-t0)/D;if(t>=1){end();return;}const W=innerWidth,H=innerHeight,dp=Math.min(2,devicePixelRatio||1);
   if(c.width!==Math.round(W*dp)||c.height!==Math.round(H*dp)){c.width=Math.round(W*dp);c.height=Math.round(H*dp);lay=null;}
   const g=c.getContext('2d');if(!g){end();return;}if(!lay)lay=layout(W,H,dp);
-  if(!art&&info.path&&artTry<40&&(artTry++%6===0))art=bossArt(info.path);
+  if(!art&&info.path&&artTry<40&&(artTry++%6===0))art=bossArt(info.path,info.crop);
   g.setTransform(dp,0,0,dp,0,0);g.globalCompositeOperation='source-over';g.globalAlpha=1;g.clearRect(0,0,W,H);
   const out=1-win(t,.84,1),shut=win(t,0,.14)*out,L=lay;
   // 가라앉는 화면 + 가운데 검붉은 그늘(빛 번짐 아님)
@@ -113,6 +116,6 @@ if(typeof closePanel==='function'){const base=closePanel;closePanel=function(...
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return {...prefs};}
 // 미리보기(검수·녹화용): 지금 지역·살아 있는 보스로 이름 카드를 한 번 띄운다. 진행·저장은 건드리지 않는다.
 function preview(o={}){try{const r=regionById?.[o.id||(typeof room!=='undefined'?room?.id:'')];const live=(typeof room!=='undefined'&&room?.enemies||[]).find(e=>e&&e.boss&&e.hp>0);
- cinema({region:String(o.region??r?.title??''),boss:String(o.boss??live?.name??r?.bosses?.[0]?.name??''),path:o.path??live?.path??null});return true;}catch(e){fail(e);return false;}}
+ const a=o.path!=null?{path:o.path,crop:o.crop||null}:artOf(live);cinema({region:String(o.region??r?.title??''),boss:String(o.boss??live?.name??r?.bosses?.[0]?.name??''),...a});return true;}catch(e){fail(e);return false;}}
 window.__STORYWORLD_STORY_FRAGMENTS_R255__=Object.freeze({revision:REV,set,preview,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError})});
 })();
