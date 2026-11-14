@@ -18,11 +18,11 @@
 //  끄기: localStorage['storyworld.r945.hwandoInk']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_HWANDO_INK_R945__)return;
-const REV='R945-hwando-ink-8',KEY='storyworld.r945.hwandoInk';
+const REV='R945-hwando-ink-9',KEY='storyworld.r945.hwandoInk';
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const CFG=Object.freeze({
  moon:Object.freeze({chance:.18,icd:1.2,mult:.9,range:7,radius:.7,speed:13,max:4}),
- clones:Object.freeze({chance:.06,count:7,life:7,icd:7,mult:.25,seek:6,ring:1,reach:1.8,guard:2,guardGap:1.2,guardReach:1.15,lunge:.45}),
+ clones:Object.freeze({chance:.06,count:7,life:7,icd:7,mult:.25,seek:6,ring:1,reach:1.8,guard:4,zone:4,chase:7.5,stand:.85,guardGap:1.2,guardReach:1.15,lunge:.45}),
  trio:Object.freeze({chance:.03,icd:20,mult:2.2,bloomMult:.6,range:7,marks:7,strikeAt:1.6,life:2.3}),
  maxDraws:48,maxVis:40});
 const INK='grayscale(1) contrast(1.5) brightness(0.92)',INKDARK='grayscale(1) brightness(0.1)';// 분신 수묵빛: 어두운 바닥에서 읽히게 한지처럼 밝은 무채색 몸에 먹 선(기록기 허용 필터만)
@@ -95,26 +95,45 @@ function stepBlades(s,dt){const M=CFG.moon;for(let i=s.blades.length-1;i>=0;i--)
 // 분신 일곱이 영웅 둘레 2칸에 7방향(바라보는 쪽이 한 자리)으로 둘러서서 영웅을 따라 움직인다. 벽이면 그 방향만 안쪽으로 당겨 선다.
 // 영웅이 칠 때(기본 공격·Q·WER) 저마다 곁(1.8칸)의 적을 함께 베고, 적이 경호 자리 1.15칸 안으로 파고들면 1.2초에 한 번 스스로 끊어 낸다(×0.25).
 // 벨 때는 그 적 쪽으로 한 걸음 내디뎠다가(0.45칸) 제자리로 돌아온다.
+// R1034(사용자 2026-11-14 13:34Z "원지름을 2배정도 넓힌다음 그원만큼 소환된분신들을 각각 중심으로 또원을그려 행동반경으로 하여 각원안에 적이들어오면 분신이 그리로가 적과 전투"):
+//  경호 원 반지름 2→4칸(지름 2배). 분신마다 제자리(경호 자리)를 중심으로 큰 원과 같은 반지름 4칸의 행동 원을 둔다.
+//  행동 원 안에 적이 있으면 그 분신이 초당 7.5칸으로 달려가(적 0.85칸 앞에 섬) 1.2초마다 공격력 ×0.25(경호 베기 그대로)로 싸우고,
+//  적이 죽거나 행동 원 밖으로 나가면(또는 벽에 가려지면) 제자리로 돌아온다. 적이 여럿이면 다른 분신이 아직 맡지 않은 적을 먼저 고른다.
+//  벽: 한 걸음마다 blocked 확인, 막히면 축 하나로 미끄러지고 그래도 막히면 멈춘다. 제자리에서 행동 원 2배 넘게 떨어지면 제자리로 바로 옮긴다.
 const GUARD_TURN=Math.PI*2/7;
 function guardSpot(p,i,face){const C=CFG.clones,a=(fin(face)?face:0)+i*GUARD_TURN;
- for(const r of [C.guard,C.guard*.75,C.guard*.5]){const x=p.x+Math.cos(a)*r,y=p.y+Math.sin(a)*r;if(fin(x)&&fin(y)&&open(x,y,.2)&&line(p,{x,y}))return {x,y,a};}
+ for(const r of [C.guard,C.guard*.75,C.guard*.5,C.guard*.25]){const x=p.x+Math.cos(a)*r,y=p.y+Math.sin(a)*r;if(fin(x)&&fin(y)&&open(x,y,.2)&&line(p,{x,y}))return {x,y,a};}
  return {x:p.x,y:p.y,a};}
 function faceOf(p){const d=String(p?.direction||'');return d==='left'?Math.PI:d==='up'||d==='back'?-Math.PI/2:d==='down'||d==='front'?Math.PI/2:0;}
 // 한 걸음 내딛기: 분신 자리를 적 쪽으로 옮겨 두면 경호 자리 따라가기(초당 10배 감쇠)가 0.2초쯤에 제자리로 되돌린다.
 function lungeAt(c,e){const dx=e.x-c.x,dy=e.y-c.y,d=Math.hypot(dx,dy);if(!(d>1e-6))return;const k=Math.min(CFG.clones.lunge,d*.5)/d,x=c.x+dx*k,y=c.y+dy*k;if(fin(x)&&fin(y)&&open(x,y,.2)){c.x=x;c.y=y;}}
 function castClones(s,p){const C=CFG.clones,near=foes().filter(e=>e.hp>0&&fin(e.x)&&fin(e.y)&&Math.hypot(e.x-p.x,e.y-p.y)<=C.seek);
  if(!near.length)return false;const t=T();s.stats.cloneCasts++;s.clones.length=0;s.cloneEnd=t+C.life;const face=faceOf(p);s.guardFace=face;
- for(let i=0;i<C.count;i++){const q=guardSpot(p,i,face);s.clones.push({i,foe:null,x:q.x,y:q.y,a:q.a,t0:t+i*.03,next:t+.35+i*.11});addVis({k:'puff',x:q.x,y:q.y,life:.8,size:1.2});}
+ for(let i=0;i<C.count;i++){const q=guardSpot(p,i,face);s.clones.push({i,foe:null,x:q.x,y:q.y,hx:q.x,hy:q.y,a:q.a,t0:t+i*.03,next:t+.35+i*.11});addVis({k:'puff',x:q.x,y:q.y,life:.8,size:1.2});}
  say('칠묵영',p.x,p.y-.4);sfx('blink');arm();}
 function stepClones(s,dt){if(!s.clones.length)return;const t=T(),C=CFG.clones,b=bodyOf(s);
  if(t>=s.cloneEnd||!isHw(b)){for(const c of s.clones)addVis({k:'puff',x:c.x,y:c.y,life:.8,size:1});s.clones.length=0;return;}
  if(!fin(b.x)||!fin(b.y))return;const face=fin(s.guardFace)?s.guardFace:faceOf(b),k=Math.min(1,Math.max(0,fin(dt)?dt:0)*10);
- for(const c of s.clones){const q=guardSpot(b,c.i,face);c.a=q.a;
-  if(Math.hypot(q.x-c.x,q.y-c.y)>4){c.x=q.x;c.y=q.y;}else{c.x+=(q.x-c.x)*k;c.y+=(q.y-c.y)*k;}
-  if(!fin(c.x)||!fin(c.y)){c.x=q.x;c.y=q.y;}
-  // 경호: 자리 가까이 파고든 적을 스스로 끊는다
-  if(solo()&&t>=c.next){const e=nearOf(c,C.guardReach);if(e&&line(c,e)){c.next=t+C.guardGap;c.foe=e;lungeAt(c,e);
-    if(strike(s,e,C.mult,power(),'clone','g'+(++serial)+':'+c.i)){s.stats.guardHits=(s.stats.guardHits||0)+1;if(!low())addVis({k:'cut',a:{x:c.x,y:c.y},b:{x:e.x,y:e.y},life:.22});}}}}}
+ const sd=Math.max(0,fin(dt)?dt:0),list=solo()?foes().filter(e=>e.hp>0&&fin(e.x)&&fin(e.y)):[];
+ const inZone=(c,e)=>Math.hypot(e.x-c.hx,e.y-c.hy)<=C.zone+(e.radius||0)&&line({x:c.hx,y:c.hy},e);
+ for(const c of s.clones){const q=guardSpot(b,c.i,face);c.a=q.a;c.hx=q.x;c.hy=q.y;}
+ // 맡은 적 정리(죽음·원 밖·벽 너머면 놓음) → 빈 분신은 원 안 적 가운데 아직 아무도 안 맡은 가까운 적, 없으면 가까운 적
+ const taken=new Set();for(const c of s.clones){if(c.foe&&!(list.includes(c.foe)&&inZone(c,c.foe)))c.foe=null;if(c.foe)taken.add(c.foe);}
+ for(const c of s.clones){if(c.foe)continue;let best=null,bd=1e9,free=false;
+  for(const e of list){if(!inZone(c,e))continue;const f=!taken.has(e),dd=Math.hypot(e.x-c.hx,e.y-c.hy);if(f&&!free||f===free&&dd<bd){best=e;bd=dd;free=f;}}
+  if(best){c.foe=best;taken.add(best);s.stats.chases=(s.stats.chases||0)+1;}}
+ for(const c of s.clones){const e=c.foe;let tx=c.hx,ty=c.hy,run=false;
+  if(e){const dx=c.x-e.x,dy=c.y-e.y,dd=Math.hypot(dx,dy)||1,st=C.stand+(e.radius||0);tx=e.x+dx/dd*st;ty=e.y+dy/dd*st;run=true;}
+  if(Math.hypot(c.hx-c.x,c.hy-c.y)>C.zone*2+1){c.x=c.hx;c.y=c.hy;}
+  else if(run){const dx=tx-c.x,dy=ty-c.y,dd=Math.hypot(dx,dy),mv=Math.min(dd,C.chase*sd);if(dd>1e-6&&mv>0){const nx=c.x+dx/dd*mv,ny=c.y+dy/dd*mv;
+    if(open(nx,ny,.2)){c.x=nx;c.y=ny;}else if(open(nx,c.y,.2)){c.x=nx;}else if(open(c.x,ny,.2)){c.y=ny;}}}
+  else{const nx=c.x+(tx-c.x)*k,ny=c.y+(ty-c.y)*k,far=Math.hypot(tx-c.x,ty-c.y);
+   // 돌아올 때 지름길이 벽이면 축 하나로 미끄러지고, 막혀 갇히면 제자리로 옮긴다
+   if(open(nx,ny,.2)){c.x=nx;c.y=ny;}else if(open(nx,c.y,.2))c.x=nx;else if(open(c.x,ny,.2))c.y=ny;else if(far>.3){c.x=tx;c.y=ty;}}
+  if(!fin(c.x)||!fin(c.y)){c.x=c.hx;c.y=c.hy;}
+  // 싸움: 맡은 적(없으면 곁에 파고든 적)이 손닿는 곳(1.15칸)이면 1.2초에 한 번 벤다
+  if(solo()&&t>=c.next){const near=e&&Math.hypot(e.x-c.x,e.y-c.y)<=C.guardReach+(e.radius||0)?e:nearOf(c,C.guardReach);if(near&&line(c,near)){c.next=t+C.guardGap;if(!c.foe)c.foe=near;if(!run)lungeAt(c,near);
+    if(strike(s,near,C.mult,power(),'clone','g'+(++serial)+':'+c.i)){s.stats.guardHits=(s.stats.guardHits||0)+1;if(!low())addVis({k:'cut',a:{x:c.x,y:c.y},b:{x:near.x,y:near.y},life:.22});}}}}}
 // 영웅 모션을 따라 벤다: 기본 공격·Q·W·E·R 한 번마다 분신도 곁의 적을 한 번씩
 function mimic(s,p,slot){if(!s||!s.clones.length||!solo())return;const t=T();if(s.mim[slot]===t&&slot!=='a'&&slot!=='q')return;s.mim[slot]=t;const C=CFG.clones,pw=power(),id='c'+(++serial);
  for(const c of s.clones){let e=c.foe&&c.foe.hp>0&&Math.hypot(c.foe.x-c.x,c.foe.y-c.y)<=C.reach?c.foe:nearOf(c,C.reach);if(!e||!line(c,e))continue;
@@ -286,7 +305,7 @@ function set(v){on=v!==false;if(!on)clearAll();try{localStorage.setItem(KEY,JSON
 function force(kind,body){if(!CFG[kind]||kind==='maxDraws')return false;const s=st(body||P());if(!s)return false;s.force=kind;return true;}
 function inspect(body){const s=st(body||P(),false)||fresh(null),t=T(),left=k=>Math.max(0,+(s.ready[k]-t).toFixed(3));
  return {revision:REV,on,errors,lastError,stats:{...s.stats},cd:{moon:left('moon'),clones:left('clones'),trio:left('trio')},vis:vis.length,drawCalls,sheetDraws:{...sheetDraws},cutin:{...cutStats},
-  clones:s.clones.map(c=>({i:c.i,x:+c.x.toFixed(3),y:+c.y.toFixed(3),foe:c.foe?.id??null})),phantoms:s.phantoms.length,
+  clones:s.clones.map(c=>({i:c.i,x:+c.x.toFixed(3),y:+c.y.toFixed(3),foe:c.foe?.id??null,home:fin(c.hx)&&fin(c.hy)?{x:+c.hx.toFixed(3),y:+c.hy.toFixed(3)}:null})),phantoms:s.phantoms.length,
   blades:s.blades.map(b=>({id:b.id,x:+b.x.toFixed(2),y:+b.y.toFixed(2),travel:+b.travel.toFixed(2),hit:b.hit.size})),
   trio:s.trio?{age:+(t-s.trio.t0).toFixed(3),marks:s.trio.marks.map(e=>e.id),struck:s.trio.struck,done:s.trio.done}:null};}
 window.__STORYWORLD_HWANDO_INK_R945__=Object.freeze({revision:REV,config:CFG,on:()=>on,set,force,inspect});

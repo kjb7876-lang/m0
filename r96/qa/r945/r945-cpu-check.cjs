@@ -91,7 +91,8 @@ const sumOn=(E,id,tag)=>E.hits.filter(h=>h.id===id&&(!tag||h.s?.r945===tag));
  E.api.force('clones');E.ctx.basicAttack();E.run(.6);let I=E.api.inspect();ok(I.clones.length===7,'분신 7체 소환');
  // R978(사용자 11-13 01:51Z 동작 변경): 적 곁에 흩어지던 분신이 이제 영웅 둘레 7방향 경호 자리에 선다
  const P0=E.g.player,ds=I.clones.map(c=>Math.hypot(c.x-P0.x,c.y-P0.y)),as=I.clones.map(c=>Math.atan2(c.y-P0.y,c.x-P0.x)).sort((a,b)=>a-b);
- ok(ds.every(d=>d>=.8&&d<=2.6),'분신은 영웅 둘레(경호 자리 2칸, 벨 때 한 걸음 0.45칸)에 섬');ok(as.every((a,i)=>i===0||a-as[i-1]>.5),'분신 7체가 7방향으로 고르게 둘러섬(한쪽에 안 뭉침)');
+ /* R1034(사용자 11-14 동작 변경): 경호 원 2→4칸, 분신마다 제자리 중심 4칸 행동 원 안 적에게 달려가 싸움 */const hs=I.clones.map(c=>Math.hypot(c.home.x-P0.x,c.home.y-P0.y)),ha=I.clones.map(c=>Math.atan2(c.home.y-P0.y,c.home.x-P0.x)).sort((a,b)=>a-b);
+ ok(hs.every(d=>d>=.8&&d<=4.05)&&I.clones.every(c=>Math.hypot(c.x-c.home.x,c.y-c.home.y)<=4+1.2),'분신 제자리는 영웅 둘레 4칸(R1034), 분신은 제자리 행동 원(4칸) 안');ok(ha.every((a,i)=>i===0||a-ha[i-1]>.5),'분신 7체 제자리가 7방향으로 고르게 둘러섬(한쪽에 안 뭉침)');
  ok(I.clones.every(c=>!E.g.blocked(c.x,c.y,.2)),'분신은 벽 안에 서지 않음');
  // 따라 하기: 영웅 그리기 한 번에 분신 7번(영웅 자세 그대로, 자리만 옮겨 먹빛 필터)
  E.heroDraws.length=0;E.g.player.direction='left';E.g.player.attackAnim=.2;E.ctx.drawHero();
@@ -163,7 +164,7 @@ const sumOn=(E,id,tag)=>E.hits.filter(h=>h.id===id&&(!tag||h.s?.r945===tag));
 // ---- R978 칠묵영 경호 대형(영웅 둘레 7방향·따라 움직임·파고든 적 끊기) ----
 {const E=engine({enemies:[{id:'a',x:22.5,y:20}]});E.api.force('clones');E.ctx.basicAttack();E.run(.3);
  E.g.player.x=24;E.g.player.y=24;E.run(.8);let I=E.api.inspect();const P0=E.g.player;
- ok(I.clones.length===7&&I.clones.every(c=>Math.hypot(c.x-P0.x,c.y-P0.y)<=2.6),'영웅이 옮겨 가면 분신도 둘레 대형 그대로 따라감');
+ ok(I.clones.length===7&&I.clones.every(c=>Math.hypot(c.home.x-P0.x,c.home.y-P0.y)<=4.05&&Math.hypot(c.x-c.home.x,c.y-c.home.y)<=4+1.2),'영웅이 옮겨 가면 분신도 둘레 대형(R1034 4칸) 그대로 따라감');
  ok(I.clones.every(c=>!E.g.blocked(c.x,c.y,.2)),'따라가도 벽 안에 서지 않음');
  const g0=I.stats.guardHits||0,h0=E.hits.filter(h=>h.s?.r945==='clone').length;E.g.room.enemies[0].x=25.2;E.g.room.enemies[0].y=24;E.run(1.5);I=E.api.inspect();
  ok(I.stats.guardHits>g0&&E.hits.filter(h=>h.s?.r945==='clone').length>h0,'영웅이 안 쳐도 경호 자리로 파고든 적은 분신이 스스로 끊음');
@@ -212,7 +213,7 @@ ok(fs.existsSync(path.join(R,'runtime-text','assets','r945','hwando-ink-burst.we
  ok(E.api.inspect(ally).clones.length===7&&E.api.inspect(main).clones.length===0,'배치 영웅이 부른 분신은 그 몸 것(조종 영웅과 섞이지 않음)');
  E.heroDraws.length=0;E.ctx.drawHero();ok(E.heroDraws.length===1,'조종 영웅 그리기에는 배치 영웅 분신 없음');
  E.g.player=ally;E.heroDraws.length=0;E.ctx.drawHero();ok(E.heroDraws.length===15&&E.heroDraws.every(d=>d.body===ally),'배치 영웅 그리기에 자기 분신 7');E.g.player=main;
- ok(E.api.inspect(ally).clones.every(c=>Math.hypot(c.x-ally.x,c.y-ally.y)<=2.6),'배치 영웅 분신은 그 영웅 둘레(R978 경호 자리)');
+ ok(E.api.inspect(ally).clones.every(c=>Math.hypot(c.home.x-ally.x,c.home.y-ally.y)<=4.05),'배치 영웅 분신은 그 영웅 둘레(R978 경호 자리, R1034 4칸)');
  // 조종 영웅의 검기 대기 시간은 배치 영웅과 따로
  E.api.force('moon');E.ctx.basicAttack();E.run(.1);ok(E.api.inspect(main).stats.moons===1&&E.api.inspect(ally).cd.moon===0,'대기 시간·통계 몸마다 따로');}
 // 지역 바꾸면 모두 정리

@@ -12,11 +12,14 @@
 //  · 그림: 불면귀 편은 Dots 주민 숨쉬기 시트(R763)·부적 말뚝·꺼진 등롱대(R810), 고블린 편은 R75 피난민 그림·v290 오염된 사당. 조형물의 검은 기운은 코드로 얹은 임시 표시다
 //    (Dots 전용 NPC·기운 시트가 오면 바꾼다 — 최종 아트로 보고하지 않는다).
 //  · 세이브 raw.questR840={version:1,rooms:{'STORY:last302':{s:'on'|'drop'|'done',k:처치 수}}}. 무한 생존·협동·EGO 재방문·사몽 층·R78 밖 지역은 건드리지 않는다.
+//  · R1035(사용자 2026-11-14 "npc 상호작용 제거하는거 미션 맵 왼쪽 오른쪽 둘다 가도록 유도 배치해서 맵전역을 돌아다니게"): 넓은 맵(바닥 칸이 있고 화면 가로 폭 36칸 이상)이면
+//    악에 물든 조형물을 화면 왼쪽 끝 쪽·오른쪽 끝 쪽 두 곳에 하나씩 세운다(들머리에서 이어진 칸만, 보스 구역·문턱·등·다른 조형물 곁은 피함). 둘 다 부숴야 단서가 떨어진다.
+//    부순 곳은 세이브 k 의 비트(1 = 왼쪽, 2 = 오른쪽)로 남는다. 좁은 맵(사몽 작은 구역 등)은 예전처럼 길 곁 한 곳. 끄기 {"spread":false}.
 //  끄기: localStorage['storyworld.r840.quest']='{"on":false}'. 점검: window.__STORYWORLD_QUEST_R840__.inspect()
 (()=>{'use strict';
 if(window.__STORYWORLD_QUEST_R840__)return;
-const REV='R840-story-quest-1+R843-dots-art',KEY='storyworld.r840.quest';
-let prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object'&&typeof s.on==='boolean')prefs.on=s.on;}catch(_){}
+const REV='R840-story-quest-1+R843-dots-art+R1035-spread',KEY='storyworld.r840.quest';
+let prefs={on:true,spread:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object'){if(typeof s.on==='boolean')prefs.on=s.on;if(typeof s.spread==='boolean')prefs.spread=s.spread;}}catch(_){}
 const stats={placed:0,offers:0,taken:0,auto:0,hits:0,broken:0,kills:0,drops:0,done:0,walks:0,fallback:0,draws:0,errors:0};let lastError=null;const events=[];
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const T=()=>typeof time==='number'&&Number.isFinite(time)?time:0;
@@ -123,7 +126,10 @@ function zoneDone(r){try{if(dream(r)){const S=window.__STORYWORLD_SAMONG_R103__?
 // 보이는 조건: 받지 않은 채 이미 끝낸 지역에는 다시 세우지 않는다(옛 세이브·재방문에 새 일을 만들지 않음).
 const visible=(r=here())=>applies(r)&&(stOf(r)!=='new'||!zoneDone(r));
 function phaseOf(r){try{return R78()?.state?.(r)?.phase||null;}catch(e){fail(e);return null;}}
-const npc=(r=here())=>r?.props?.find(p=>p&&p.r840NPC)||null,propOf=(r=here())=>r?.props?.find(p=>p&&p.r840Prop)||null,orbOf=(r=here())=>r?.props?.find(p=>p&&p.r840Clue)||null;
+const propsOf=(r=here())=>(r?.props||[]).filter(p=>p&&p.r840Prop);
+/* R1035: 조형물이 둘이면 영웅에게 가까운 쪽 */
+const propOf=(r=here())=>{const ps=propsOf(r);if(ps.length<2)return ps[0]||null;let pl=null;try{pl=player;}catch(_){}if(!pl||!Number.isFinite(pl.x+pl.y))return ps[0];return ps.reduce((a,b)=>dist(pl,b)<dist(pl,a)?b:a);};
+const npc=(r=here())=>r?.props?.find(p=>p&&p.r840NPC)||null,orbOf=(r=here())=>r?.props?.find(p=>p&&p.r840Clue)||null;
 // ── 자리(순수) ──
 const unit=(a,b)=>{const d=Math.hypot(b.x-a.x,b.y-a.y)||1;return {x:(b.x-a.x)/d,y:(b.y-a.y)/d};};
 // 길(점 목록)에서 처음부터 want 칸 간 곳과 그곳의 진행 방향.
@@ -148,6 +154,22 @@ function propSpot(entry,goal,pts,isBlocked,avoid=[],from=null,near=false){/* nea
    const q=beside(c,isBlocked,avoid,[1.8,-1.8,2.3,-2.3,1.4,-1.4]);if(q&&(!from||Math.hypot(q.x-from.x,q.y-from.y)>=FAR))return q;}}return null;}
 // 사몽 구역의 길 끝: 들머리에서 가장 먼 원문 단서(그 구역에서 영웅이 어차피 가는 곳). 단서가 없으면 구역 목표물.
 function dreamGoal(r,entry){let best=null,bd=-1;for(const p of r.props||[]){if(!p||!p.r115Clue||!Number.isFinite(p.x+p.y))continue;const dd=entry?Math.hypot(p.x-entry.x,p.y-entry.y):0;if(dd>bd){bd=dd;best=p;}}return best?{x:best.x,y:best.y}:r.objective;}
+// R1035 넓은 맵: 화면 왼쪽(x−y 가 작은 쪽) 끝과 오른쪽(x−y 가 큰 쪽) 끝에 하나씩. 들머리에서 걸어서 이어진 바닥 칸만(BFS, 칸 중심 .34), 보스 구역 +3칸·들머리 14칸 안·avoid 는 뺀다.
+//  각 쪽 끝 16% 띠에서 둘레가 가장 트인 칸들 가운데 가장 끝 칸(같으면 가운데 깊이에 가까운 칸). 화면 가로 폭이 36칸 아래거나 두 곳이 40칸 안이면 null(예전처럼 한 곳).
+const SIDE_SPAN=36,SIDE_BAND=.16,SIDE_GAP=40,SIDE_ENTRY=14;
+const openness=(q,isBlocked)=>{let n=0;for(let i=0;i<8;i++){const a=i*Math.PI/4;for(const d of [1.2,2.4])if(!isBlocked(q.x+Math.cos(a)*d,q.y+Math.sin(a)*d,.34))n++;}return n;};
+function sideSpots(ex,isBlocked,avoid=[]){const cells=ex?.floorCells,entry=ex?.entry;if(!Array.isArray(cells)||cells.length<200||!entry||!Number.isFinite(entry.x+entry.y))return null;
+ const set=new Set();for(const c of cells){const x=c?.x??c?.[0],y=c?.y??c?.[1];if(Number.isInteger(x)&&Number.isInteger(y))set.add(x+','+y);}
+ const bb=ex.worldWardR81?.bossBounds,inBoss=(x,y)=>Array.isArray(bb)&&bb.length===4&&x>=bb[0]-3&&x<=bb[2]+3&&y>=bb[1]-3&&y<=bb[3]+3;
+ const sx=Math.floor(entry.x),sy=Math.floor(entry.y),seen=new Set([sx+','+sy]),queue=[[sx,sy]],live=[];
+ for(let h=0;h<queue.length&&h<20000;h++){const [x,y]=queue[h];for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){const nx=x+dx,ny=y+dy,k=nx+','+ny;if(seen.has(k)||!set.has(k))continue;seen.add(k);if(isBlocked(nx+.5,ny+.5,.34))continue;queue.push([nx,ny]);live.push({x:nx+.5,y:ny+.5});}}
+ const cand=live.filter(q=>!inBoss(q.x,q.y)&&Math.hypot(q.x-entry.x,q.y-entry.y)>=SIDE_ENTRY&&!avoid.some(a=>Math.hypot(a.x-q.x,a.y-q.y)<a.min));if(cand.length<2)return null;
+ let lo=Infinity,hi=-Infinity;for(const q of live){const v=q.x-q.y;if(v<lo)lo=v;if(v>hi)hi=v;}if(!(hi-lo>=SIDE_SPAN))return null;
+ const depths=live.map(q=>q.x+q.y).sort((a,b)=>a-b),mid=depths[depths.length>>1];
+ const pick=sign=>{const edge=sign<0?lo:hi,band=(hi-lo)*SIDE_BAND,pool=cand.filter(q=>Math.abs((q.x-q.y)-edge)<=band);if(!pool.length)return null;
+  for(const q of pool)q.o=openness(q,isBlocked);const best=Math.max(...pool.map(q=>q.o)),top=pool.filter(q=>q.o>=Math.min(best,14));
+  top.sort((a,b)=>sign*((b.x-b.y)-(a.x-a.y))||Math.abs(a.x+a.y-mid)-Math.abs(b.x+b.y-mid)||a.x-b.x||a.y-b.y);return {x:top[0].x,y:top[0].y};};
+ const L=pick(-1),R=pick(1);if(!L||!R||Math.hypot(L.x-R.x,L.y-R.y)<SIDE_GAP)return null;return [L,R];}
 function spots(r){/* 방마다 한 번 계산해 둔다(같은 구조면 같은 자리) */if(r.r840Spots&&r.r840Spots.props===r.exploration)return r.r840Spots;const d=defOf(r),ex=r.exploration||{},entry=ex.entry,goal=dream(r)?dreamGoal(r,entry):ex.worldWardR81?.gatherAnchor||r.objective;
  const isB=(x,y,rad)=>{try{return !!blocked(x,y,rad,r);}catch(_){return true;}};let pts=null;
  try{if(entry&&goal&&typeof findPath==='function'){const p=findPath(entry,goal,r,.31);if(Array.isArray(p)&&p.length)pts=[{x:entry.x,y:entry.y},...p];}}catch(e){fail(e);}
@@ -155,10 +177,11 @@ function spots(r){/* 방마다 한 번 계산해 둔다(같은 구조면 같은 
  /* 길 가 세움 등(R92)·벽 등(R91)은 방 소품 목록에 없다 → 그 자리 목록을 받아 4.5칸 안에는 놓지 않는다(장면 실측: last303 조형물이 석등 바로 옆에 섰다). */
  let lamps=[];try{lamps=[...(window.__STORYWORLD_VISUAL_R92__?.lightPoints?.()||[]),...(window.__STORYWORLD_VISUAL_R91__?.lightPoints?.()||[])].filter(v=>v&&Number.isFinite(v.x+v.y)).map(v=>({x:v.x,y:v.y,min:4.5}));}catch(e){fail(e);}
  const n=npcSpot(entry,goal,pts,isB,[...doors.map(v=>({...v,min:dream(r)?2.2:5.5/* 사몽 구역은 방이 작고 문이 방마다 있다 — 들머리 문짝 그림(본편 door-1)이 없으니 겹치지만 않게 */})),...solids,...lamps.map(v=>({...v,min:1.6}))])/* NPC 는 등 곁에 서도 된다(겹치지만 않게). 들머리 문짝(door-1)에서는 5.5칸 — 문짝 그림이 길어 가까우면 몸이 가린다(last302 실측 4.3칸에서 가림). */,q=d.quest.type==='purge'?propSpot(entry,goal,pts,isB,[...doors.map(v=>dream(r)?{...v,min:2.2}:v),...solids,...lamps],n,dream(r)):null;
+ let sides=null;if(d.quest.type==='purge'&&prefs.spread&&d.quest.spread!==false){try{sides=sideSpots(ex,isB,[...doors,...solids.map(v=>({...v,min:2.6}))/* 장면 실측: 1.3칸이면 끝자리 석등·나무에 붙어 섰다 */,...lamps,...(n?[{x:n.x,y:n.y,min:8}]:[])]);}catch(e){fail(e);sides=null;}}
  /* 곁에 서 있기만 하는 인물(also): 길로 더 들어간 곳(10칸쯤)·퀘스트 NPC 에서 3칸 넘게. 자리가 없으면 세우지 않는다. */
  const amb=[];for(const a of d.also||[]){let got=null;const av=[...doors.map(v=>({...v,min:dream(r)?2.2:5.5})),...solids,...lamps.map(v=>({...v,min:1.6})),...(n?[{x:n.x,y:n.y,min:3}]:[]),...(q?[{x:q.x,y:q.y,min:3}]:[]),...amb.filter(Boolean).map(v=>({x:v.x,y:v.y,min:3}))];
   for(const want of [10.5,9.5,12,8.5,13.5]){const c=along(pts||[entry,goal||entry],want);if(!c)continue;got=beside(c,isB,av,[-1.7,1.7,-2.2,2.2]);if(got)break;}amb.push(got);}
- return r.r840Spots={props:r.exploration,npc:n,prop:q,amb,pathed:!!pts,lamps:lamps.length};}
+ return r.r840Spots={props:r.exploration,npc:n,prop:q,sides,amb,pathed:!!pts,lamps:lamps.length};}
 /* 조형물 자리는 퀘스트를 받는 순간(방 소품·등이 다 놓인 뒤)에 다시 잰다 — 방에 막 들어온 때는 다른 오버레이가 가구를 아직 덜 놓았을 수 있다. NPC 자리는 그대로 둔다. */
 function respot(r){const keep=r.r840Spots?.npc||null,ka=r.r840Spots?.amb||null;r.r840Spots=null;const sp=spots(r);if(keep)sp.npc=keep;if(ka)sp.amb=ka;return sp;}
 function img(p){try{const r=typeof readyImage==='function'?readyImage(p):null;if(r&&r.ready!==false&&r.image)return r.image;}catch(_){}try{if(typeof addImage==='function')addImage(p,'R840 서사 퀘스트');}catch(_){}return null;}
@@ -170,10 +193,13 @@ function ensure(r=here()){if(!r||!Array.isArray(r.props))return null;try{if(type
  let sp=spots(r);if(st==='on'&&d.quest.type==='purge'&&!propOf(r)&&!sp.fresh){sp=respot(r);sp.fresh=true;}let n=npc(r);
  if(!n&&sp.npc){n={id:'r840:npc:'+zid(r)+':'+d.npc.kind,x:sp.npc.x,y:sp.npc.y,home:{...sp.npc},r840NPC:d.npc.kind,solid:false,visible:true,autoTargetEligible6:false};try{img(d.npc.sprite.path);}catch(e){fail(e);}r.props.push(n);stats.placed++;note('placed',{zone:zid(r),x:+n.x.toFixed(2),y:+n.y.toFixed(2)});}
  (d.also||[]).forEach((a,i)=>{const at=sp.amb?.[i];if(!at||r.props.some(p=>p&&p.r840Amb===a.kind))return;try{img(a.sprite.path);}catch(e){fail(e);}r.props.push({id:'r840:amb:'+zid(r)+':'+a.kind,x:at.x,y:at.y,r840Amb:a.kind,solid:false,visible:true,autoTargetEligible6:false});});
- const wantProp=st==='on'&&d.quest.type==='purge'&&!!sp.prop,q=propOf(r);
- if(wantProp&&!q){try{img(d.quest.prop.path);}catch(e){fail(e);}r.props.push({id:'r840:prop:'+zid(r),x:sp.prop.x,y:sp.prop.y,r840Art:d.quest.prop.path,height:d.quest.prop.height,solid:false,visible:true,autoTargetEligible6:false,r840Prop:{hits:0,at:T(),lastHit:-99}});}
- else if(!wantProp&&q)r.props=r.props.filter(p=>!p.r840Prop);
- if(st==='on'&&d.quest.type==='purge'&&!sp.prop){/* 놓을 자리를 못 찾은 맵: 막히지 않게 바로 단서를 떨어뜨린다 */stats.fallback++;setState(r,'drop');dropAt(r,freeNear(r,n||player));return n;}
+ const sides=st==='on'&&d.quest.type==='purge'&&Array.isArray(sp.sides)?sp.sides:null,wantProp=st==='on'&&d.quest.type==='purge'&&!!(sides||sp.prop);
+ const mk=(id,at,idx)=>{try{img(d.quest.prop.path);}catch(e){fail(e);}r.props.push({id,x:at.x,y:at.y,r840Art:d.quest.prop.path,height:d.quest.prop.height,solid:false,visible:true,autoTargetEligible6:false,r840Prop:{hits:0,at:T(),lastHit:-99,...(idx===null?{}:{idx})}});};
+ if(!wantProp){if(propsOf(r).length)r.props=r.props.filter(p=>!p.r840Prop);}
+ else if(sides){/* R1035: 왼쪽(0)·오른쪽(1) — 부순 쪽(k 비트)은 다시 세우지 않는다. 예전 한 곳짜리 조형물이 남아 있으면 걷는다. */const k=killsOf(r);r.props=r.props.filter(p=>!p.r840Prop||(Number.isInteger(p.r840Prop.idx)&&!(k&(1<<p.r840Prop.idx))));
+  sides.forEach((at,i)=>{if(k&(1<<i))return;if(!propsOf(r).some(p=>p.r840Prop.idx===i))mk('r840:prop:'+zid(r)+':'+i,at,i);});}
+ else{if(propsOf(r).some(p=>Number.isInteger(p.r840Prop.idx)))r.props=r.props.filter(p=>!p.r840Prop);if(!propOf(r))mk('r840:prop:'+zid(r),sp.prop,null);}
+ if(st==='on'&&d.quest.type==='purge'&&!sp.prop&&!sides){/* 놓을 자리를 못 찾은 맵: 막히지 않게 바로 단서를 떨어뜨린다 */stats.fallback++;setState(r,'drop');dropAt(r,freeNear(r,n||player));return n;}
  if(st==='drop'){if(!orbOf(r))dropAt(r,sp.prop||freeNear(r,player));}else if(orbOf(r))r.props=r.props.filter(p=>!p.r840Clue);
  return n;}
 function setState(r,s){const cur=ledger[keyOf(r)]||{s:'new',k:0};ledger[keyOf(r)]={s,k:cur.k||0};}
@@ -185,7 +211,7 @@ function need(r=here()){const d=defOf(r);if(!d||d.quest.type!=='kill')return 0;c
 function take(r){const d=defOf(r);if(stOf(r)!=='new')return false;ledger[keyOf(r)]={s:'on',k:0};stats.taken++;note('taken',{zone:zid(r),type:d.quest.type});try{if(modal)closePanel(true);}catch(e){fail(e);}
  if(d.quest.type==='kill')for(const e of matching(r))if(!aliveOf(e))e.r840Seen=true;/* 받기 전에 쓰러진 몹은 세지 않는다 */
  if(d.quest.type==='talk'){/* R842 이야기만 듣는 곁일: 받는 순간 단서가 발치에 떨어진다 */setState(r,'drop');dropAt(r,freeNear(r,player));}
- ensure(r);try{toast(d.quest.hud,3.5);}catch(e){fail(e);}try{saveGame(false);}catch(e){fail(e);}try{if(typeof updateHUD==='function')updateHUD();}catch(e){fail(e);}return true;}
+ ensure(r);try{toast(d.quest.hud+(propsOf(r).length>1?' · 맵 왼쪽과 오른쪽 두 곳':''),3.5);}catch(e){fail(e);}try{saveGame(false);}catch(e){fail(e);}try{if(typeof updateHUD==='function')updateHUD();}catch(e){fail(e);}return true;}
 /* 창 초상(148칸): 흉상(bust)이 있으면 흉상, 없으면 서 있기 첫 칸을 위쪽 중심으로 잘라 얼굴·윗몸이 보이게(R843). 임시 잔영은 흐린 실루엣. */
 function face(n){const s=n.sprite,box='width:148px;height:148px;display:flex;justify-content:center;border-radius:10px;border:1px solid rgba(255,190,110,.35);background:#0d1018;overflow:hidden';
  if(n.bust)return '<div style="'+box+'"><div style="width:148px;height:148px;background:url(./'+n.bust+') 50% 30%/cover no-repeat"></div></div>';
@@ -199,8 +225,13 @@ function offer(r){const d=defOf(r);stats.offers++;if(autoRun()){stats.auto++;ret
   +'<div style="max-width:360px;text-align:left"><p style="margin:0 0 8px">'+esc(d.npc.body)+'</p><p style="margin:0 0 8px;opacity:.72;font-size:.92em">'+esc(d.npc.lore)+'</p><p style="margin:0;color:#f1cf9a;font-size:.92em">곁일 · '+esc(d.quest.hud)+' → 단서</p></div></div>'
   +'<div class="actions"><button id="questTakeR840">'+esc(d.quest.take)+'</button><button id="questWaitR840">나중에</button></div>');
  button('questTakeR840',()=>{const now=here();if(now===r&&visible(r)&&stOf(r)==='new')take(r);else closePanel(true);});button('questWaitR840',()=>closePanel(true));return true;}
-function hit(r,all){const q=propOf(r),d=defOf(r);if(!q||stOf(r)!=='on')return false;const s=q.r840Prop;if(!all&&T()-s.lastHit<HIT_GAP)return true;s.lastHit=T();s.hits=all?d.quest.hits:s.hits+1;stats.hits++;
+/* R1035: 남은 조형물의 방향(영웅 기준 화면 왼쪽/오른쪽) */
+function where(r){let ps=0;try{ps=player.x-player.y;}catch(_){}const w=new Set();for(const q of propsOf(r))w.add(q.x-q.y<ps?'왼쪽':'오른쪽');return ['왼쪽','오른쪽'].filter(v=>w.has(v)).join('·');}
+function hit(r,all,target){const q=target&&target.r840Prop?target:propOf(r),d=defOf(r);if(!q||stOf(r)!=='on')return false;const s=q.r840Prop;if(!all&&T()-s.lastHit<HIT_GAP)return true;s.lastHit=T();s.hits=all?d.quest.hits:s.hits+1;stats.hits++;
  try{if(typeof fx==='function'&&typeof VFX!=='undefined'&&VFX.burst)fx('burst',q.x,q.y,{asset:VFX.burst,size:.7,life:.3});}catch(_){}try{if(typeof sound==='function')sound('attack');}catch(_){}
+ if(s.hits>=d.quest.hits&&Number.isInteger(s.idx)){/* R1035: 두 곳 가운데 하나 — 비트를 남기고, 남은 곳이 있으면 단서는 아직 */const cur=ledger[keyOf(r)];cur.k=(cur.k|0)|(1<<s.idx);r.props=r.props.filter(p=>p!==q);stats.broken++;note('broken',{zone:zid(r),idx:s.idx});
+  const left=propsOf(r).length;if(left>0){try{toast(d.quest.prop.name+'이(가) 부서졌습니다 · 남은 '+left+'곳('+where(r)+')',3);}catch(e){fail(e);}try{saveGame(false);}catch(e){fail(e);}try{if(typeof updateHUD==='function')updateHUD();}catch(e){fail(e);}return true;}
+  const pt={x:q.x,y:q.y};setState(r,'drop');dropAt(r,pt);try{toast(d.quest.prop.name+'이(가) 모두 부서졌습니다 · 떨어진 단서를 주우세요.',3);}catch(e){fail(e);}try{saveGame(false);}catch(e){fail(e);}return true;}
  if(s.hits>=d.quest.hits){const pt={x:q.x,y:q.y};r.props=r.props.filter(p=>p!==q);setState(r,'drop');stats.broken++;note('broken',{zone:zid(r)});dropAt(r,pt);
   try{if(typeof sound==='function')sound(typeof soundProfiles!=='undefined'&&soundProfiles.r542Crush?.length?'r542Crush':'attack');}catch(_){}try{toast(d.quest.prop.name+'이(가) 부서졌습니다 · 떨어진 단서를 주우세요.',3);}catch(e){fail(e);}try{saveGame(false);}catch(e){fail(e);}}return true;}
 function finish(r){const d=defOf(r);if(stOf(r)!=='drop')return false;setState(r,'done');r.props=r.props.filter(p=>!p.r840Clue);stats.done++;note('done',{zone:zid(r)});
@@ -254,7 +285,7 @@ for(const name of ['basicAttack','special']){if(typeof window[name]!=='function'
 if(typeof killEnemy==='function'){const base=killEnemy;killEnemy=function(e,...a){const r0=base.apply(this,[e,...a]);try{const r=here();if(e&&visible(r))counted(r,e);}catch(err){fail(err);}return r0;};}
 if(typeof guideStep==='function'){const base=guideStep;guideStep=function(...a){try{if(guideLive()&&guideStepR840())return;}catch(e){fail(e);}return base.apply(this,a);};}
 if(typeof updateHUD==='function'){const base=updateHUD;updateHUD=function(...a){const r0=base.apply(this,a);try{const r=here();if(started&&visible(r)){const st=stOf(r),d=defOf(r),el=$('questText');
-   if(el&&(st==='on'||st==='drop')){const add=st==='drop'?'떨어진 단서 줍기':d.quest.hud+(d.quest.type==='kill'?' '+killsOf(r)+'/'+need(r):'');if(!String(el.textContent).includes(add))el.textContent=String(el.textContent)+' · 곁일: '+add;}}}catch(e){fail(e);}return r0;};}
+   if(el&&(st==='on'||st==='drop')){const many=d.quest.type==='purge'&&Array.isArray(r.r840Spots?.sides)&&propsOf(r).length>0,add=st==='drop'?'떨어진 단서 줍기':d.quest.hud+(d.quest.type==='kill'?' '+killsOf(r)+'/'+need(r):'')+(many?' · 남은 '+propsOf(r).length+'곳('+where(r)+')':'');if(!String(el.textContent).includes(add))el.textContent=String(el.textContent)+' · 곁일: '+add;}}}catch(e){fail(e);}return r0;};}
 }
 if(typeof tick==='function'){const base=tick;tick=function(...a){const r0=base.apply(this,a);try{install();upkeep(here());}catch(e){fail(e);}return r0;};}
 // ── 그리기 ──
@@ -278,17 +309,17 @@ if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){i
    const r0=base.apply(this,[p,...a]);const q=project(p.x,p.y);label('단서',q.x,q.y-(24+4*Math.sin(T()*3))*z,'#ffe3a0');return r0;}catch(e){fail(e);}};}
 (function world(){const w=window.__STORYWORLD_WORLD_R74__;if(!w||typeof w.interactions!=='function')return;
  const mine=t=>{const id=String(t?.id||'');return id.startsWith('r840:npc:')||id.startsWith('r840:prop:')||id.startsWith('r840:amb:');};
- const canUse=(t,pl)=>{const r=here();pl=pl||player;if(!visible(r)||loading||!(pl?.hp>0))return false;const st=stOf(r),p=npc(r),q=propOf(r);if(p&&t.id===p.id)return st==='new'&&dist(pl,p)<=REACH;if(q&&t.id===q.id)return st==='on'&&dist(pl,q)<=HIT_REACH;const ap=(r.props||[]).find(x=>x&&x.r840Amb&&x.id===t.id);if(ap)return dist(pl,ap)<=REACH;return false;};
+ const canUse=(t,pl)=>{const r=here();pl=pl||player;if(!visible(r)||loading||!(pl?.hp>0))return false;const st=stOf(r),p=npc(r),q=propOf(r);if(p&&t.id===p.id)return st==='new'&&dist(pl,p)<=REACH;const tq=propsOf(r).find(x=>x.id===t.id);if(tq)return st==='on'&&dist(pl,tq)<=HIT_REACH;const ap=(r.props||[]).find(x=>x&&x.r840Amb&&x.id===t.id);if(ap)return dist(pl,ap)<=REACH;return false;};
  window.__STORYWORLD_WORLD_R74__=Object.freeze({...w,interactions(){const rows=w.interactions();try{const r=here();if(visible(r)){const st=stOf(r),d=defOf(r),p=npc(r),q=propOf(r);for(const ap of r.props||[])if(ap&&ap.r840Amb){const am=ambOf(r,ap);if(am)rows.push({id:ap.id,kind:'npc',label:am.label,point:{x:ap.x,y:ap.y},reach:REACH});}
-    if(st==='new'&&p)return rows.concat({id:p.id,kind:'npc',label:d.npc.label,point:{x:p.x,y:p.y},reach:REACH});if(st==='on'&&q)return rows.concat({id:q.id,kind:'npc',label:d.quest.prop.name+' 부수기',point:{x:q.x,y:q.y},reach:HIT_REACH});}}catch(e){fail(e);}return rows;},
-  canUse(t,pl,...a){return mine(t)?canUse(t,pl):w.canUse(t,pl,...a);},use(t,...a){if(!mine(t))return w.use(t,...a);try{if(!canUse(t))return false;const r=here();if(String(t.id).startsWith('r840:npc:'))return offer(r);return hit(r,false);}catch(e){fail(e);return false;}}});})();
+    if(st==='new'&&p)return rows.concat({id:p.id,kind:'npc',label:d.npc.label,point:{x:p.x,y:p.y},reach:REACH});if(st==='on'&&q)return rows.concat(propsOf(r).map(x=>({id:x.id,kind:'npc',label:d.quest.prop.name+' 부수기',point:{x:x.x,y:x.y},reach:HIT_REACH})));}}catch(e){fail(e);}return rows;},
+  canUse(t,pl,...a){return mine(t)?canUse(t,pl):w.canUse(t,pl,...a);},use(t,...a){if(!mine(t))return w.use(t,...a);try{if(!canUse(t))return false;const r=here();if(String(t.id).startsWith('r840:npc:'))return offer(r);return hit(r,false,propsOf(r).find(x=>x.id===t.id));}catch(e){fail(e);return false;}}});})();
 if(typeof serializeSave==='function'){const base=serializeSave;serializeSave=function(...a){const raw=base.apply(this,a);try{if(raw&&typeof raw==='object'){const rooms={};for(const [k,v] of Object.entries(ledger))if(STATES.includes(v.s))rooms[k]={s:v.s,k:v.k||0};raw.questR840={version:1,rooms};}}catch(e){fail(e);}return raw;};}
 if(typeof restoreSave==='function'){const base=restoreSave;restoreSave=async function(raw,...a){const prior=ledger;let next={};try{next=clean(raw?.questR840);}catch(e){fail(e);}ledger=next;walk=null;
   try{const r=await base.call(this,raw,...a);if(r===false)ledger=prior;else try{ensure();}catch(e){fail(e);}return r;}catch(e){ledger=prior;throw e;}};}
 if(typeof newGame==='function'){const base=newGame;newGame=async function(...a){const prior=ledger,before=typeof player!=='undefined'?player:null;ledger={};walk=null;
   try{const r=await base.apply(this,a);if(r===false||(before&&player===before&&r!==true&&r!==undefined))ledger=prior;return r;}catch(e){ledger=prior;throw e;}};}
-function set(p){if(p&&typeof p.on==='boolean')prefs.on=p.on;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}try{ensure();}catch(e){fail(e);}return {...prefs};}
-window.__STORYWORLD_QUEST_R840__=Object.freeze({rev:REV,set,ensure,zones:()=>Object.keys(DEFS),def:z=>Object.prototype.hasOwnProperty.call(DEFS,z)?DEFS[z]:null,pure:Object.freeze({clean,along,npcSpot,propSpot}),
+function set(p){if(p&&typeof p.on==='boolean')prefs.on=p.on;if(p&&typeof p.spread==='boolean'){prefs.spread=p.spread;try{const r=here();if(r)r.r840Spots=null;}catch(_){}}try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}try{ensure();}catch(e){fail(e);}return {...prefs};}
+window.__STORYWORLD_QUEST_R840__=Object.freeze({rev:REV,set,ensure,zones:()=>Object.keys(DEFS),def:z=>Object.prototype.hasOwnProperty.call(DEFS,z)?DEFS[z]:null,pure:Object.freeze({clean,along,npcSpot,propSpot,sideSpots}),
  inspect:()=>{const r=here(),p=npc(r),q=propOf(r),o=orbOf(r);return {rev:REV,prefs:{...prefs},zone:r?.id||null,applies:applies(r),visible:visible(r),phase:phaseOf(r),state:stOf(r),hits:q?q.r840Prop.hits:0,kills:killsOf(r),need:need(r),
-  npc:p?{id:p.id,x:p.x,y:p.y}:null,prop:q?{id:q.id,x:q.x,y:q.y}:null,orb:o?{x:o.x,y:o.y}:null,pathed:r?.r840Spots?.pathed??null,ledger:JSON.parse(JSON.stringify(ledger)),stats:{...stats},events:[...events],lastError,browserVerified:false};}});
+  npc:p?{id:p.id,x:p.x,y:p.y}:null,prop:q?{id:q.id,x:q.x,y:q.y}:null,props:propsOf(r).map(x=>({id:x.id,x:x.x,y:x.y,hits:x.r840Prop.hits})),sides:r?.r840Spots?.sides||null,orb:o?{x:o.x,y:o.y}:null,pathed:r?.r840Spots?.pathed??null,ledger:JSON.parse(JSON.stringify(ledger)),stats:{...stats},events:[...events],lastError,browserVerified:false};}});
 })();
