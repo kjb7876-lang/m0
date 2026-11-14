@@ -31,7 +31,7 @@ const sheetFrame=(k,age,fps=FPS)=>{const d=SH[k],f=Math.floor(Math.max(0,age)*fp
 const TRACKS=Object.freeze({story:Object.freeze({name:'스토리 음미',voice:true,compact:false}),combat:Object.freeze({name:'전투 집중',voice:false,compact:true})});
 function trackOf(s){if(s&&Object.prototype.hasOwnProperty.call(TRACKS,s.track))return s.track;if(s&&s.track===undefined&&s.voice===false)return 'combat';return 'story';}
 let prefs={voice:true,track:'story'};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');prefs.track=trackOf(s);prefs.voice=TRACKS[prefs.track].voice;}catch(_){}
-const stats={starts:0,stages:0,spawned:0,bosses:0,kills:0,gems:0,levels:0,choices:0,coreHits:0,coreShots:0,clears:0,loops:0,deaths:0,coreLost:0,saveBlocked:0,errors:0};let lastError=null;
+const stats={starts:0,stages:0,spawned:0,bosses:0,kills:0,gems:0,levels:0,choices:0,coreHits:0,coreShots:0,clears:0,loops:0,deaths:0,coreLost:0,saveBlocked:0,errors:0,coreLabel:0};let lastError=null,coreLabelText='';
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 const G=(f,d)=>{try{const v=f();return v===undefined?d:v;}catch(_){return d;}};
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -371,7 +371,10 @@ function drawCore(){if(!here())return;const c=room.survivalR600.centre,q=project
    if(si)ctx.drawImage(si,sheetFrame('bstart',ag,ff)*64,0,64,64,q.x-fs/2,oy-fs/2,fs,fs);
    if(hi)ctx.drawImage(hi,sheetFrame('bhit',ag,ff)*64,0,64,64,tx-fs/2,ty-fs/2,fs,fs);}
   // 체력 막대
-  ctx.globalAlpha=1;const w=Math.max(64,D*1.3),hp=clamp(S.core.hp/st.max,0,1);ctx.fillStyle='rgba(0,0,0,.65)';ctx.fillRect(q.x-w/2-1,top-7,w+2,7);ctx.fillStyle=hp>.35?'#7fe0d0':'#ff7a5a';ctx.fillRect(q.x-w/2,top-6,w*hp,5);
+  ctx.globalAlpha=1;const big=G(()=>!!window.__STORYWORLD_UI_COMBAT_R1021__?.on?.(),false),w=Math.max(big?96:64,D*(big?1.6:1.3)),cbh=big?8:5,hp=clamp(S.core.hp/st.max,0,1);ctx.fillStyle='rgba(0,0,0,.65)';ctx.fillRect(q.x-w/2-1,top-cbh-2,w+2,cbh+2);ctx.fillStyle=hp>.35?'#7fe0d0':'#ff7a5a';ctx.fillRect(q.x-w/2,top-cbh-1,w*hp,cbh);
+  // R1021: 가운데 막대가 정화 구슬 체력임을 글로(사용자 2026-11-14 "가운데 체력바로 정화구슬 체력알게") — 위쪽 HUD 의 같은 막대는 R1021 이 숨긴다
+  if(big&&typeof ctx.fillText==='function'){const cur=Math.max(0,Math.ceil(Number.isFinite(+S.core.hp)?+S.core.hp:0)),mx=Math.max(1,Math.round(Number.isFinite(+st.max)?+st.max:1));coreLabelText='정화 구슬 '+cur+'/'+mx;
+   ctx.font='bold 12px "Malgun Gothic",sans-serif';ctx.textAlign='center';ctx.textBaseline='bottom';ctx.fillStyle='rgba(0,0,0,.85)';ctx.fillText(coreLabelText,q.x+1,top-cbh-3);ctx.fillStyle=hp>.35?'#dffaf4':'#ffd2c4';ctx.fillText(coreLabelText,q.x,top-cbh-4);stats.coreLabel=(stats.coreLabel||0)+1;}
   // 경험치 조각
   const gs=sheetImg('gem'),g0=gs?null:G(()=>readyImage(GEM),null)?.image,gk=Math.max(.32,ah*.0055);// 조각 높이 ≈ 영웅 키의 1/4
   for(const g of gems){const p=project(g.x,g.y);if(p.x<-20||p.y<-20||p.x>W+20||p.y>H+20)continue;
@@ -456,5 +459,5 @@ window.__STORYWORLD_SURVIVAL_R600__=Object.freeze({revision:REV,start,qaCredit:v
   finaleWave:()=>{try{if(!here()||!S||S.over||!S.ready)return 0;return tickSpawn(true)||0;}catch(e){fail(e);return 0;}},/* R1010 결전 물결 */
  track:()=>prefs.track,setTrack,narr:()=>({playing:narrPlaying(),queued:N.q.length,cur:N.cur?.text||null,list:[N.cur?.text,...N.q.map(x=>x.text)].filter(Boolean)}),narrate:(scenes,opt)=>{try{return here()?narrPlay(scenes,opt):0;}catch(e){fail(e);return 0;}},/* R1010: 결전 대면 서사를 생존 자막으로 */skipNarration:()=>{N.q.length=0;if(S){S.narrMinEnd=0;/* 서사가 벽시계로 이미 끝났어도 남은 최소 웨이브 길이를 지금으로 당긴다 */if(!S.narrating&&S.narrEndAt>G(()=>time,0))S.narrEndAt=G(()=>time,0);}/* 일부러 건너뛰면 최소 웨이브 길이도 함께 끝낸다 */if(N.cur){N.gen++;N.cur=null;narrNext();}},
  pure:Object.freeze({DIFFS,diffOf,CHOICE_EVERY,WINDOW_MAX,choiceDue,windowPicks,xpNeed,levelUps,stageIds,arena,spawning,nextPhase,advance,cap,hpMul,mobHp,BOSS_MIN_MULT,BOSS_DPS_CAP,guardBossHp,trackOf,TRACKS,healCue,SFX,bossStats,mobDamage,smoothAtk,BOSS_HP,coreStats,pickThree,sentences,TAIL,CORE0,CORE_UPS}),
- inspect:()=>({revision:REV,stats:{...stats},lastError,active:!!S?.active,here:here(),pending})});
+ inspect:()=>({revision:REV,stats:{...stats},lastError,coreLabelText,active:!!S?.active,here:here(),pending})});
 })();

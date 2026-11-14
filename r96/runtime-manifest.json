@@ -51274,8 +51274,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6578218,
-      "sha256": "51e36763e64b89c2497e1bda92b35d076357bfb393c9d51a631771526ded1e27"
+      "bytes": 6578263,
+      "sha256": "57fd74228113cd8a92d3a3026baa6f45c9e1a4729ebed2529d6e10c5e3885229"
     },
     {
       "path": "intro-r140.js",
@@ -52219,8 +52219,8 @@
     },
     {
       "path": "survival-r600.js",
-      "bytes": 75048,
-      "sha256": "61947ba5f971181865d2306dc1b43526ac6b3a9665efce9a33d11b16fec0f95d"
+      "bytes": 75917,
+      "sha256": "7770ccfaa91c57c9222a627a2922e8c3f02259c3f11dc004152591db076ce3b9"
     },
     {
       "path": "survival-samong-r1006.js",
@@ -52271,6 +52271,11 @@
       "path": "ui-clean-r1015.js",
       "bytes": 19337,
       "sha256": "f54beb3daf65f78fcf2850099419505267fabd3357847d4180c35927f584daec"
+    },
+    {
+      "path": "ui-combat-r1021.js",
+      "bytes": 15023,
+      "sha256": "68a4e133e9bb1909ff32d30fd6f3eea9ceee29885a46190db56e8c51ca1f26ff"
     },
     {
       "path": "ui-upgrades-r222.js",
@@ -52478,9 +52483,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10495,
-  "totalBytes": 1287887225,
-  "webHTMLSha256": "51e36763e64b89c2497e1bda92b35d076357bfb393c9d51a631771526ded1e27",
+  "fileCount": 10496,
+  "totalBytes": 1287903162,
+  "webHTMLSha256": "57fd74228113cd8a92d3a3026baa6f45c9e1a4729ebed2529d6e10c5e3885229",
   "largest": [
     {
       "path": "index.html",
