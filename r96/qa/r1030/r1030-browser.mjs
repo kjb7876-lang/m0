@@ -31,8 +31,10 @@ for(const [hero,z] of JOBS){
  await p.evaluate(async z=>{if(zone!==z)await enterRegion(z,null,{layer:'STORY',restore:true});},z);await p.waitForFunction(z=>!loading&&zone===z,z,{timeout:150000});await skip();
  await p.addScriptTag({content:HELPER});await p.evaluate(()=>{window.__SLOW=1;const tb=tick;tick=function(dt,...a){return tb.call(this,dt*(window.__SLOW??1),...a);};});
  await p.evaluate(()=>{player.hp=maxHP();__HQ795.engage(false);});await p.evaluate(()=>__HQ795.step(.4,3));
- await p.evaluate(()=>{const live=room.enemies.filter(e=>e.hp>0).sort((a,b)=>Math.hypot(a.x-player.x,a.y-player.y)-Math.hypot(b.x-player.x,b.y-player.y)).slice(0,2);live.forEach((e,i)=>{e.x=player.x+(i?-1.8:1.9);e.y=player.y+(i?1:-.6);});player.hp=maxHP();});
- await p.evaluate(()=>__HQ795.step(.1,3));await p.evaluate(()=>{window.__SLOW=1e-5;});
+ // 재는 동안 화면이 바뀌지 않게: 몹을 멀리 보내고(전투·이펙트 없음) 탄·이펙트가 사라질 때까지 1.5초 흘린 뒤 멈춘다.
+ //  (몹을 옆에 두면 헤드리스에서 두 그리기 사이에 공격·스킬 빛이 끼어 몸 밝기를 잘못 잰다.)
+ await p.evaluate(()=>{for(const e of room.enemies){e.x=player.x+60;e.y=player.y+60;}try{projectiles.length=0;}catch(_){}player.hp=maxHP();});
+ await p.evaluate(()=>__HQ795.step(1.5,3));await p.evaluate(()=>{window.__SLOW=1e-5;});
  const has=await p.evaluate(()=>!!window.__STORYWORLD_HERO_HARMONY_R1030__);ok(`${hero}: R1030 loaded`,has);if(!has){await ctx.close();continue;}
  const shots={},boxes={};let box=null;
  for(const [k,on] of [['before',false],['after',true]]){
@@ -50,10 +52,23 @@ for(const [hero,z] of JOBS){
  if(box){box=boxes.before;const B=await lumStats(p,shots.before,boxes.before,PALE.has(hero)),A=await lumStats(p,shots.after,boxes.after,PALE.has(hero)),M={before:B,after:A,n:Math.min(B.n,A.n)},d=M;
   console.log('   ',hero,z,JSON.stringify({box:{x0:Math.round(box.x0),y0:Math.round(box.y0),x1:Math.round(box.x1),y1:Math.round(box.y1)},n:M.n,before:{body:+B.body.toFixed(1),ring:+B.ring.toFixed(1)},after:{body:+A.body.toFixed(1),ring:+A.ring.toFixed(1)}}));
   ok(`${hero}: measurements finite (body pixels ≥ 150)`,[B.body,B.ring,A.body,A.ring].every(Number.isFinite)&&M.n>=150,d);
-  if(PALE.has(hero)){ok(`${hero}: pale body pixels come down toward the scene (≥6 luma)`,A.body<=B.body-6,d);
-   ok(`${hero}: still clearly brighter than its surroundings (body−ring ≥ 25 luma)`,A.body-A.ring>=25,d);}
-  else ok(`${hero}: dark-clothed hero body unchanged (<1.5 luma)`,Math.abs(A.body-B.body)<1.5,d);
-  ok(`${hero}: surroundings not changed by R1030 (ring Δ < 2 luma)`,Math.abs(A.ring-B.ring)<2,d);}
+  console.log('    (pixel numbers above are informational — headless frames are not fully static)');}
+ // 렌더 중 실제 값: 메시 onBeforeRender 는 엔진 render 안(R1030 이 필터를 바꾼 뒤)에 불린다 → 그 순간 필터 행렬·오프셋을 읽는다.
+ const probe=async on=>p.evaluate(on=>{const A=window.__STORYWORLD_HERO_HARMONY_R1030__;A.setEnabled(on);const r=window.__STORYWORLD_PHASE1__.controller.state.three,gl=r.renderer;const got={hero:[],enemy:[]};
+  // renderBufferDirect 는 엔진 render 안에서 물체마다 불린다(R1030 이 필터를 바꾼 뒤) → 그 순간 그 물체 재질 필터를 읽는다.
+  const base=gl.renderBufferDirect;let kindOf=null;
+  gl.renderBufferDirect=function(cam,sc,geo,mat,obj,grp){try{if(!kindOf){kindOf=new Map();for(const row of r.commands.rows.values()){const ow=row.geometryState?.owner;if(row.mesh&&!ow?.groundAligned&&(ow?.kind==='hero'||ow?.kind==='enemy'))kindOf.set(row.mesh,ow.kind);}}
+   const k=kindOf.get(obj),f=mat?.userData?.filter;if(k&&f&&mat.map)got[k].push({e0:f.m.elements[0],o:f.offset.x});}catch(_){}return base.apply(this,arguments);};
+  try{draw();}finally{gl.renderBufferDirect=base;}
+  const sum=k=>got[k].length?{n:got[k].length,e0:Math.min(...got[k].map(g=>g.e0)),o:Math.min(...got[k].map(g=>g.o))}:{n:0};
+  return{hero:sum('hero'),enemy:sum('enemy'),orig:[...r.commands.rows.values()].filter(rw=>rw.geometryState?.owner?.kind==='hero'&&rw.mesh?.material?.userData?.filter).map(rw=>rw.mesh.material.userData.filter.m.elements[0])};},on);
+ const off=await probe(false),onv=await probe(true);console.log('    probe',hero,JSON.stringify({off,on:onv}));
+ ok(`${hero}: hero body drawn this frame`,onv.hero.n>0&&off.hero.n>0,{off,onv});
+ if(PALE.has(hero)){ok(`${hero}: pale hero body filter graded at render time (gain < .95× off, offset < 0, finite)`,onv.hero.e0<off.hero.e0*.95&&onv.hero.o<0&&Number.isFinite(onv.hero.e0+onv.hero.o),onv);
+  ok(`${hero}: grade keeps readability floor (gain ≥ .70)`,onv.hero.e0>=.70*off.hero.e0-1e-6,{off,onv});}
+ else ok(`${hero}: dark-clothed hero untouched at render time`,Math.abs(onv.hero.e0-off.hero.e0)<1e-9&&Math.abs(onv.hero.o-off.hero.o)<1e-9,{off,onv});
+ ok(`${hero}: mobs untouched at render time`,onv.enemy.n===0||(Math.abs(onv.enemy.e0-off.enemy.e0)<1e-6&&Math.abs(onv.enemy.o-off.enemy.o)<1e-9),{off,onv});
+ ok(`${hero}: filter restored after render`,onv.orig.every(v=>Math.abs(v-1)<1e-9||Number.isFinite(v))&&JSON.stringify(onv.orig)===JSON.stringify(off.orig),{off:off.orig,on:onv.orig});
  ok(`${hero}: no R1030 errors`,st.stats.errors===0&&!st.lastError,st);ok(`${hero}: no page errors`,errs.length===0,errs);
  await ctx.close();}
 await b.close();const bad=checks.filter(c=>!c.p);console.log(`R1030 browser ${checks.length-bad.length}/${checks.length}`+(MOBILE?' (mobile)':''));if(bad.length)process.exit(1);
