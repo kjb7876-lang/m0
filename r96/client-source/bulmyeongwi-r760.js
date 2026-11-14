@@ -28,7 +28,7 @@
 //  끄기: localStorage['storyworld.r760.bulmyeongwi']='{"on":false}'(시트만 끄기 '{"sheets":false}', 소리만 끄기 '{"sfx":false}'). 점검: window.__STORYWORLD_BULMYEONGWI_R760__.inspect()
 (()=>{'use strict';
 if(window.__STORYWORLD_BULMYEONGWI_R760__)return;
-const REV='R760-R973-bulmyeongwi-5',KEY='storyworld.r760.bulmyeongwi';
+const REV='R760-R973-R1036-bulmyeongwi-6',KEY='storyworld.r760.bulmyeongwi';
 let prefs={on:true,ghosts:true,sheets:true,sfx:true,dirMove:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object')for(const k of Object.keys(prefs))if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={draws:0,swapped:0,waiting:0,patterns:0,ghosted:0,errors:0};let lastError=null,last=null,lastDeath=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
@@ -75,7 +75,11 @@ function track(e,s){const t=T(),dt=s.lastT<0?0:Math.max(0,Math.min(.1,t-s.lastT)
 function heading(e,s,dt){let sx,sy;try{const a=project(s.wx,s.wy),b=project(e.x,e.y);sx=(b.x-a.x)/dt;sy=(b.y-a.y)/dt;}catch(_){sx=((e.x-s.wx)-(e.y-s.wy))/dt;sy=((e.x-s.wx)+(e.y-s.wy))/dt;}
  if(!Number.isFinite(sx)||!Number.isFinite(sy))return;const k=Math.min(1,dt*6);s.hx=(s.hx||0)+(sx-(s.hx||0))*k;s.hy=(s.hy||0)+(sy-(s.hy||0))*k;
  const ax=Math.abs(s.hx),ay=Math.abs(s.hy),v=s.dir==='up'||s.dir==='down';
- if(v?ay<ax*.8:!(ay>ax*1.25)){s.dir='side';if(ax>1e-6)s.sideSg=s.hx>0?1:-1;}else s.dir=s.hy<0?'up':'down';}
+ // R1036(공개본 재점검: 영웅 곁에서 0.05초마다 세로 ±0.02칸 비틀거리며 move↔moveUp 이 1프레임씩 5번 번갈아 바뀜): 새 방향은 DIR_HOLD 초 이어질 때만 받는다.
+ let want;if(v?ay<ax*.8:!(ay>ax*1.25))want='side';else want=s.hy<0?'up':'down';
+ if(!s.dir){s.dir=want;s.pend=null;}else if(want===s.dir){s.pend=null;s.pendT=0;}else{if(s.pend!==want){s.pend=want;s.pendT=0;}s.pendT+=dt;if(s.pendT>=DIR_HOLD){s.dir=want;s.pend=null;s.pendT=0;}}
+ if(s.dir==='side'&&ax>1e-6&&want==='side')s.sideSg=s.hx>0?1:-1;}
+const DIR_HOLD=.25;
 // 방향 시트 키: 움직이는 중이고 시트가 실렸을 때만. table = SHEET(보스) 또는 MSHEET(중간보스), pathOf = SPATH·MPATH
 function dirKey(s,table,pathOf){if(!prefs.dirMove||!(s.move>.5))return null;const k=s.dir==='up'?'moveUp':s.dir==='down'?'moveDown':'moveSide';return table[k]&&img(pathOf(k))?k:null;}
 const Hq=c=>Math.abs(c.points[3][1]-c.points[0][1]);
