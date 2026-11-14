@@ -117,6 +117,8 @@ for(const mob of[false,true]){const T=mob?'폰':'PC';const {doc,sb,flush,ls}=mak
  subs.checked=true;subs.onchange();check(`④ ${T} 서사 자막 다시 켜기`,!doc.body.classList.contains('r1021SubsOff'));
  {const other=mk(doc,'div','autoMoveR1022','r1021-row','자동 순간이동');sec.appendChild(other);sb.__STORYWORLD_UI_COMBAT_R1021__.settings();check(`⑤ ${T} 다른 덧씌움이 묶음에 붙인 줄(R1022)은 다시 그려도 남음`,doc.getElementById('autoMoveR1022')&&doc.getElementById('autoMoveR1022').parentNode===sec&&sec.querySelectorAll('h3').length===1);}
  sb.showSettings();flush();check(`⑤ ${T} 설정을 다시 열어도 스킬창·묶음 하나씩`,panel.querySelectorAll('#r1021Skills').length===1&&panel.querySelectorAll('#combatScreenR1021').length===1);}
+{const {doc,sb,flush}=make({mobile:true});sb.showSettings();const q=doc.getElementById('quickSettingsR114');q.appendChild(mk(doc,'div','autoMoveR1022','r1021-row','기술이 영웅을 순간이동시키기'));flush();
+ check('⑤ R1022 자동 순간이동 줄이 간이설정 끝에 붙어 있으면 \'전투 화면\' 묶음으로 옮김',doc.getElementById('autoMoveR1022').parentNode===doc.getElementById('combatScreenR1021'));}
 {const {doc,api,flush}=make({mobile:true});doc.body.appendChild(mk(doc,'section','panel'));doc.getElementById('panel').append(mk(doc,'h2','','','메뉴'));api.settings();flush();
  check('⑤ 설정 창이 아니면 스킬창을 넣지 않음',!doc.getElementById('r1021Skills'));}
 {const {doc,api}=make({mobile:true});api.set('buttons',false);check('③ 화면 단추 끄기 → body.r1021BtnOff',doc.body.classList.contains('r1021BtnOff'));}
@@ -138,7 +140,7 @@ for(const mob of[false,true]){const T=mob?'폰':'PC';const {doc,sb,flush,ls}=mak
  check('간이 체력바: 정화 구슬 막대는 바닥점 아래(top=q.y+ah*.3)',/const top=q\.y\+ah\*\.3;/.test(sv));}
 // 연결
 {const idx=fs.readFileSync(path.join(root,'runtime-text','index.html'),'utf8');
- check('태그 한 번, UI 정리 R1015 바로 뒤',idx.split('"./ui-combat-r1021.js"').length===2&&/<script src="\.\/ui-clean-r1015\.js"><\/script>\n<script src="\.\/ui-combat-r1021\.js"><\/script>/.test(idx));
+ check('태그 한 번, UI 정리 R1015 → 자동 순간이동 R1022 바로 뒤',idx.split('"./ui-combat-r1021.js"').length===2&&/<script src="\.\/ui-clean-r1015\.js"><\/script>\n<script src="\.\/auto-move-r1022\.js"><\/script>\n<script src="\.\/ui-combat-r1021\.js"><\/script>/.test(idx));
  const rt=path.join(root,'runtime-text','ui-combat-r1021.js');check('runtime-text 사본이 같음(sync)',fs.existsSync(rt)&&fs.readFileSync(rt,'utf8')===src);
  check('runtime-inputs·manifest 에 들어감',fs.readFileSync(path.join(root,'runtime-inputs.json'),'utf8').includes('"ui-combat-r1021.js"')&&fs.readFileSync(path.join(root,'runtime-manifest.json'),'utf8').includes('"ui-combat-r1021.js"'));
  check('공개 확인 목록에 들어감',fs.readFileSync(path.join(root,'..','scripts','verify-r96-public.py'),'utf8').includes("'ui-combat-r1021.js'"));

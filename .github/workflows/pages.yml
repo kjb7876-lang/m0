@@ -526,6 +526,8 @@ jobs:
         run: node r96/qa/r972/r972-cpu-check.cjs
       - name: R971 hero special passive growth CPU check
         run: node r96/qa/r971/r971-cpu-check.cjs
+      - name: R1025 hero special passive level unlock CPU check
+        run: node r96/qa/r1025/r1025-cpu-check.cjs
       - name: R981 insomnia-ghost midboss renamed and set apart from the main boss CPU check
         run: node r96/qa/r981/puppet-cpu-check.cjs
       - name: R990 bulmyeongwi fog skills (fog summon of village mobs, fog-weighted patterns, old boss art in summon ghosts) CPU check
@@ -546,6 +548,8 @@ jobs:
         run: node r96/qa/r1008/r1008-cpu-check.cjs
       - name: R1016 golden/silver custom thread dance (manual G explains why it did not fire, manager says what was done, survival keeps the editor closed) CPU check
         run: node r96/qa/r1016/r1016-cpu-check.cjs
+      - name: R1022 auto-move toggle CPU check
+        run: node r96/qa/r1022/r1022-cpu-check.cjs
       - name: R1007 samong confront statement markers never overlap (4-marker zones M-1 Michaela, S-04 16th floor were unpassable) CPU check
         run: node r96/qa/r1007/stmt-spread-cpu-check.cjs
       - name: R1010 survival Michaela finale (4 knots in order, not killed) and shared story ending CPU check
@@ -554,6 +558,10 @@ jobs:
         run: node r96/qa/r1015/r1015-cpu-check.cjs
       - name: R1021 combat screen focus (no top gold-thread row, core HP label, phone buttons = blink + hero with Q and F auto, subtitles toggle on PC and phone, skill window on top of settings) CPU check
         run: node r96/qa/r1021/r1021-cpu-check.cjs
+      - name: R1017 Diablo-style props from patch.gg (Poly Haven CC0 renders) slotted into the R449 space templates CPU check
+        run: node r96/qa/r1017/r1017-cpu-check.cjs
+      - name: R1020 partial quarter view 3D props (two-direction Poly Haven CC0 renders picked by wall) in the R523 room sets CPU check
+        run: node r96/qa/r1020/r1020-cpu-check.cjs
       - name: R963 survival BGM note sits below the survival HUD line (no overlapped text) CPU check
         run: node r96/qa/r963/r963-cpu-check.cjs
       - name: R980 mobile memory budget (R163/R106 tint caches capped by pixels on mobile, idle decoded images trimmed, desktop unchanged) CPU check

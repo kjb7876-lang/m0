@@ -119,6 +119,8 @@ function settings(){try{if(!on)return false;const panel=$('panel');if(!panel)ret
  const sk=skills(),sec=section();if(!sk||!sec)return false;
  if(h2.nextElementSibling!==sk)panel.insertBefore(sk,h2.nextElementSibling);
  if(sk.nextElementSibling!==sec)panel.insertBefore(sec,sk.nextElementSibling);
+ // R1022 자동 순간이동 줄은 R1022 가 먼저 읽혀 이 묶음이 생기기 전에 간이설정 끝에 붙는다 → 이 묶음으로 옮긴다(id·동작 그대로)
+ const am=$('autoMoveR1022');if(am&&am.parentNode!==sec){sec.appendChild(am);stats.adopted=(stats.adopted||0)+1;}
  return true;}catch(e){fail(e);return false;}}
 function set(k,v){if(!(k in DEF))return null;P[k]=!!v;stats.toggles++;save();flags();try{if($('r1021Skills'))skills();}catch(e){fail(e);}return P[k];}
 function apply(){try{style();flags();if(on)buttons();stats.applied++;}catch(e){fail(e);}}
