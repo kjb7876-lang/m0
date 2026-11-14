@@ -403,6 +403,8 @@ jobs:
         run: node r96/qa/r617/hwando-fall-video-cpu-check.cjs
       - name: R619 pause game drawing while a full-screen story video is open
         run: node r96/qa/r619/video-render-pause-cpu-check.cjs
+      - name: R1036 entry video starts with region loading, map warmed behind the video CPU check
+        run: node r96/qa/r1036/r1036-entry-video-cpu-check.cjs
       - name: R667 title screen background loop video CPU check
         run: node r96/qa/r667/title-bg-video-cpu-check.cjs
       - name: R745 cinematic videos generator mark removal, quality and sound CPU check
