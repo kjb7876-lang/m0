@@ -9706,19 +9706,13 @@
     "assets/r1019/move/timeless-silver-scout-up.webp",
     "move-dir-r1019-data.js",
     "ui-clean-r1015.js",
-    "props-diablo-r1017.js",
-    "assets/r1017/x1017-gate.webp",
     "assets/r1017/x1017-candles.webp",
-    "assets/r1017/x1017-bed.webp",
-    "assets/r1017/x1017-veiled-king.webp",
     "assets/r1020/x1020-clock-n.webp",
     "assets/r1020/x1020-clock-w.webp",
     "assets/r1020/x1020-gbed-n.webp",
     "assets/r1020/x1020-gbed-w.webp",
     "assets/r1020/x1020-gcab-n.webp",
     "assets/r1020/x1020-gcab-w.webp",
-    "assets/r1020/x1020-rock-n.webp",
-    "assets/r1020/x1020-rock-w.webp",
     "assets/r1020/x1020-wchair-n.webp",
     "assets/r1020/x1020-wchair-w.webp",
     "assets/r1020/x1020-wheel-n.webp",
@@ -10797,5 +10791,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "5268791df73631940a68388801a0488dd07ceca8ed659c01de75e4d22d279f7b"
+  "runtimeManifestSHA256": "9f27e594f4fb81f06e2adc7654b166676d3f3e5926b84c2b8de511e96876915c"
 }

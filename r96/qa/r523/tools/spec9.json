@@ -42,20 +42,6 @@
   "ch": 132
  },
  {
-  "key": "rock",
-  "src": "assets/r1020/x1020-rock-n.webp",
-  "face": "n",
-  "pair": "rockW",
-  "ch": 74
- },
- {
-  "key": "rockW",
-  "src": "assets/r1020/x1020-rock-w.webp",
-  "face": "w",
-  "pair": "rock",
-  "ch": 74
- },
- {
   "key": "spin",
   "src": "assets/r1020/x1020-wheel-n.webp",
   "face": "n",

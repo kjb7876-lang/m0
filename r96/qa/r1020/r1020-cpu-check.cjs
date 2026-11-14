@@ -1,7 +1,7 @@
 // R1020 CPU check — 3D 조형물 '부분 쿼터뷰'(사용자 2026-11-14 00:25Z "서사 시대상과 테마보고 … 보는각도따라 부분쿼터뷰 적용", 00:39Z 추천 6개 고름).
-//  patch.gg(Poly Haven CC0) 6점(고딕 침대·고딕 장식장·괘종시계·흔들의자·물레·휠체어)을 북벽용·서벽용 두 방향으로 미리 렌더해,
+//  patch.gg(Poly Haven CC0) 5점(고딕 침대·고딕 장식장·괘종시계·물레·휠체어 — 흔들의자는 사용자 2026-11-14 02:03Z '시대·테마 안 맞으면 제외' 재심사로 뺌, 기대값 바꿈)을 북벽용·서벽용 두 방향으로 미리 렌더해,
 //  R523 방 묶음이 가구를 놓는 벽 방향에 맞는 그림을 고른다(뒤집은 거울상이 아니라 실제로 돌린 렌더). 이 카메라에서 가구 등은 늘 북·서 벽에 붙으므로 두 방향이면 된다.
-//  놓는 곳: 환도 성(hando01~03, 정본 시대 = 잔혹 동화 성 + 의목사) 방 이름별 — 병동 = 고딕 침대, 진찰실 = 흔들의자·괘종시계·장식장, 준비실 = 물레, 남쪽 방 = 침대 + 장식장,
+//  놓는 곳: 환도 성(hando01~03, 정본 시대 = 잔혹 동화 성 + 의목사) 방 이름별 — 병동 = 고딕 침대, 진찰실 = 괘종시계·장식장, 준비실 = 물레, 남쪽 방 = 침대 + 장식장,
 //  북쪽 방·입구 홀 = 괘종시계. 휠체어는 병원(ep1a09) 대기실. 그리기 전용(충돌·저장·문·서사·몹 불변).
 'use strict';const fs=require('fs'),path=require('path'),vm=require('vm'),crypto=require('crypto');
 const R=path.join(__dirname,'..','..'),ROOT=path.join(R,'..'),rd=f=>{try{return fs.readFileSync(path.join(R,f),'utf8');}catch(_){return'';}};
@@ -10,17 +10,18 @@ const src=rd('client-source/rooms-r523.js');
 ok('R523 runtime copy matches client source',src.length>0&&rd('runtime-text/rooms-r523.js')===src);
 ok('CI runs this check',/node r96\/qa\/r1020\/r1020-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8')));
 // ---- 그림 12장 ---------------------------------------------------------------------------------------
-const KEYS=['gbed','gcab','clock','rock','spin','chair3'],FILE={gbed:'gbed',gcab:'gcab',clock:'clock',rock:'rock',spin:'wheel',chair3:'wchair'};
+const KEYS=['gbed','gcab','clock','spin','chair3'],FILE={gbed:'gbed',gcab:'gcab',clock:'clock',spin:'wheel',chair3:'wchair'};
 const man=JSON.parse(rd('runtime-manifest.json')||'{"files":[]}'),rows=new Map(man.files.map(r=>[r.path,r])),inputs=JSON.parse(rd('runtime-inputs.json')||'{"textPaths":[]}');
 let total=0;
 for(const k of KEYS)for(const f of['n','w']){const p='assets/r1020/x1020-'+FILE[k]+'-'+f+'.webp';let b=null;try{b=fs.readFileSync(path.join(R,'runtime-text',p));}catch(_){}
  total+=b?b.length:0;
  ok('art '+k+'/'+f+': file present, ≤40KB, webp, in manifest (sha256) and inputs',!!b&&b.length<=40960&&b.slice(8,12).toString()==='WEBP'&&rows.get(p)?.sha256===crypto.createHash('sha256').update(b).digest('hex')&&inputs.textPaths.includes(p));}
-ok('twelve pictures together under 300KB ('+total+')',total>0&&total<=300*1024);
+ok('ten pictures together under 300KB ('+total+')',total>0&&total<=300*1024);
 ok('only the two directions this camera uses are shipped (no r180/r270 files)',!fs.readdirSync(path.join(R,'runtime-text','assets','r1020')).some(f=>!/^x1020-[a-z]+-[nw]\.webp$/.test(f)));
 ok('listed for the public check',/'assets\/r1020\/'/.test(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8')));
 let credits='';try{credits=fs.readFileSync(path.join(ROOT,'CREDITS.md'),'utf8');}catch(_){}
-ok('CREDITS.md names all six with Poly Haven and CC0',['GothicBed_01','GothicCabinet_01','vintage_grandfather_clock_01','Rockingchair_01','spinning_wheel_01','wheelchair_01'].every(t=>credits.includes(t))&&/R1020/.test(credits));
+ok('CREDITS.md names all five with Poly Haven and CC0, rocking chair row gone',['GothicBed_01','GothicCabinet_01','vintage_grandfather_clock_01','spinning_wheel_01','wheelchair_01'].every(t=>credits.includes(t))&&!/\| Rockingchair_01/.test(credits)&&/R1020/.test(credits));
+ok('rocking chair removed (no picture shipped, no art entry, not placed)',!fs.existsSync(path.join(R,'runtime-text','assets','r1020','x1020-rock-n.webp'))&&!fs.existsSync(path.join(R,'runtime-text','assets','r1020','x1020-rock-w.webp'))&&!/x1020-rock|\brock1\b|\bnook\b/.test(src));
 // ---- R523 그림 표: 두 방향 짝 ------------------------------------------------------------------------
 let api=null,E=null,ART=null;
 try{const c={window:{},console,performance:{now:()=>0}};vm.createContext(c);vm.runInContext(rd('runtime-text/dist/phase1.js'),c);E=c.window.StoryPhase1.explorationBlocked;}catch(e){}
@@ -32,7 +33,7 @@ try{api=boot();ART=api.ART;}catch(e){console.log(String(e.stack).slice(0,300));}
 ok('R523 boots',!!api&&!!ART);
 const W_=k=>k+'W';
 ok('each piece has a north-wall and a west-wall picture that point at each other (pair), both one-direction iso art',!!ART&&KEYS.every(k=>{const a=ART[k],b=ART[W_(k)];return a&&b&&a.face==='n'&&b.face==='w'&&a.pair===W_(k)&&b.pair===k&&a.ang==='iso'&&b.ang==='iso'&&a.path==='assets/r1020/x1020-'+FILE[k]+'-n.webp'&&b.path==='assets/r1020/x1020-'+FILE[k]+'-w.webp';}));
-ok('real-world size order: clock and cabinet taller than the hero-height rocking chair and spinning wheel; bed and wheelchair low',!!ART&&KEYS.every(k=>ART[k])&&ART.clock.h>ART.rock.h&&ART.gcab.h>ART.rock.h&&ART.chair3.h<ART.gcab.h&&ART.gbed.h<ART.clock.h);
+ok('real-world size order: clock and cabinet taller than the hero-height spinning wheel; bed and wheelchair low',!!ART&&KEYS.every(k=>ART[k])&&ART.clock.h>ART.spin.h&&ART.gcab.h>ART.spin.h&&ART.chair3.h<ART.gcab.h&&ART.gbed.h<ART.clock.h);
 // ---- 실제 지도 고정본 ------------------------------------------------------------------------------
 const lay=fx=>{const cells=[];for(const[y,sp]of Object.entries(fx.floorSpans))for(let i=0;i<sp.length;i+=2)for(let x=sp[i];x<sp[i+1];x++)cells.push([x,+y]);
  return{bounds:[0,0,112,112],floorCells:cells,walls:fx.walls.map(w=>({...w})),r224Rooms:fx.r224Rooms?fx.r224Rooms.map(q=>({...q})):undefined,worldR74:{rooms:fx.rooms.map(q=>({...q})),doors:(fx.doors||[]).map(d=>({...d}))},worldWardR81:fx.worldWardR81?{...fx.worldWardR81}:{},entry:fx.entry,starts:fx.starts};};
@@ -45,7 +46,7 @@ if(api&&E&&FX.hando01){
  const H=look('hando01');const base=k=>k.replace(/W$/,'');const of=(X,re)=>X.mine.filter(p=>re.test(X.nm.get(p.r523.room)||''));
  ok('hando castle furnished from its room rectangles (no R224 rooms there): '+H.rows.length+' pieces',H.rows.length>=14&&H.rows.every(p=>NEW.test(p.r523.art)));
  ok('wards hold gothic beds (the ward walls take one bed each; a bed that would stand in a scenery prop is left out)',of(H,/^ward-/).filter(p=>base(p.r523.art)==='gbed').length>=1&&of(H,/^ward-/).every(p=>base(p.r523.art)==='gbed'));
- ok('consult rooms: rocking chair and grandfather clock (sitting corner of the summoned doctor)',of(H,/^consult-/).some(p=>base(p.r523.art)==='rock')&&of(H,/^consult-/).some(p=>base(p.r523.art)==='clock'));
+ ok('consult rooms: grandfather clock and cabinet',of(H,/^consult-/).some(p=>base(p.r523.art)==='gcab')&&of(H,/^consult-/).some(p=>base(p.r523.art)==='clock'));
  ok('preparation rooms: spinning wheel (cruel fairy-tale castle)',of(H,/^preparation/).some(p=>base(p.r523.art)==='spin'));
  ok('south chambers: a gothic bed with a cabinet',of(H,/^south-/).some(p=>base(p.r523.art)==='gbed')&&of(H,/^south-/).some(p=>base(p.r523.art)==='gcab'));
  ok('north rooms / entry hall: a grandfather clock',of(H,/^(north-|entry-hall)/).some(p=>base(p.r523.art)==='clock'));
