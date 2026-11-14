@@ -1,0 +1,273 @@
+{
+ "pc": {
+  "defaults": {
+   "mobile": false,
+   "autoMove": true,
+   "stored": null
+  },
+  "hwando": {
+   "on": {
+    "cast": true,
+    "on": true,
+    "end": 4.56,
+    "maxSeenAtFrames": 4.56,
+    "dmg": 1752.7,
+    "restores": 0,
+    "clones": 0,
+    "errors": 0
+   },
+   "off": {
+    "cast": true,
+    "on": false,
+    "end": 0,
+    "maxSeenAtFrames": 0,
+    "dmg": 1752.7,
+    "restores": 1,
+    "clones": 1,
+    "errors": 0
+   }
+  },
+  "seoha": {
+   "on": {
+    "cast": true,
+    "on": true,
+    "end": 4.56,
+    "maxSeenAtFrames": 4.56,
+    "dmg": 0,
+    "restores": 0,
+    "clones": 0,
+    "errors": 0
+   },
+   "off": {
+    "cast": true,
+    "on": false,
+    "end": 0,
+    "maxSeenAtFrames": 0,
+    "dmg": 0,
+    "restores": 1,
+    "clones": 1,
+    "errors": 0
+   }
+  },
+  "neon": {
+   "on": {
+    "cast": true,
+    "on": true,
+    "end": 4.88,
+    "maxSeenAtFrames": 4.88,
+    "dmg": 844.8,
+    "restores": 0,
+    "clones": 0,
+    "errors": 0
+   },
+   "off": {
+    "cast": true,
+    "on": false,
+    "end": 0,
+    "maxSeenAtFrames": 0,
+    "dmg": 946.2,
+    "restores": 1,
+    "clones": 1,
+    "errors": 0
+   }
+  },
+  "michaela": {
+   "on": {
+    "cast": true,
+    "on": true,
+    "end": 0,
+    "maxSeenAtFrames": 0,
+    "dmg": 972.1,
+    "restores": 0,
+    "clones": 0,
+    "errors": 0
+   },
+   "off": {
+    "cast": false,
+    "on": false,
+    "end": 0,
+    "maxSeenAtFrames": 0,
+    "dmg": 0,
+    "restores": 0,
+    "clones": 0,
+    "errors": 0
+   }
+  },
+  "lauren": {
+   "on": {
+    "cast": true,
+    "on": true,
+    "end": 5.2,
+    "maxSeenAtFrames": 5.2,
+    "dmg": 1012.6,
+    "restores": 0,
+    "clones": 0,
+    "errors": 0
+   },
+   "off": {
+    "cast": true,
+    "on": false,
+    "end": 0,
+    "maxSeenAtFrames": 0,
+    "dmg": 1012.6,
+    "restores": 1,
+    "clones": 1,
+    "errors": 0
+   }
+  },
+  "hunter": {
+   "on": {
+    "cast": true,
+    "on": true,
+    "end": 4.88,
+    "maxSeenAtFrames": 4.88,
+    "dmg": 0,
+    "restores": 0,
+    "clones": 0,
+    "errors": 0
+   },
+   "off": {
+    "cast": true,
+    "on": false,
+    "end": 0,
+    "maxSeenAtFrames": 0,
+    "dmg": 0,
+    "restores": 1,
+    "clones": 1,
+    "errors": 0
+   }
+  },
+  "slayer": {
+   "on": {
+    "cast": true,
+    "on": true,
+    "end": 4.56,
+    "maxSeenAtFrames": 4.56,
+    "dmg": 1579.1,
+    "restores": 0,
+    "clones": 0,
+    "errors": 0
+   },
+   "off": {
+    "cast": true,
+    "on": false,
+    "end": 0,
+    "maxSeenAtFrames": 0,
+    "dmg": 1579.1,
+    "restores": 1,
+    "clones": 1,
+    "errors": 0
+   }
+  },
+  "gunner": {
+   "on": {
+    "cast": true,
+    "on": true,
+    "end": 0,
+    "maxSeenAtFrames": 0,
+    "dmg": 0,
+    "restores": 0,
+    "clones": 0,
+    "errors": 0
+   },
+   "off": {
+    "cast": false,
+    "on": false,
+    "end": 0,
+    "maxSeenAtFrames": 0,
+    "dmg": 0,
+    "restores": 0,
+    "clones": 0,
+    "errors": 0
+   }
+  },
+  "manualBlink": {
+   "moved": 3.8
+  },
+  "guideBlink": {
+   "blocked": 0,
+   "biggestFrameJump": 0.32
+  }
+ },
+ "mobile": {
+  "defaults": {
+   "mobile": true,
+   "autoMove": false,
+   "stored": null
+  },
+  "neon": {
+   "on": {
+    "cast": true,
+    "on": true,
+    "end": 6.16,
+    "maxSeenAtFrames": 6.16,
+    "dmg": 4000,
+    "restores": 0,
+    "clones": 0,
+    "errors": 0
+   },
+   "off": {
+    "cast": true,
+    "on": false,
+    "end": 0,
+    "maxSeenAtFrames": 0,
+    "dmg": 4000,
+    "restores": 1,
+    "clones": 1,
+    "errors": 0
+   }
+  },
+  "slayer": {
+   "on": {
+    "cast": true,
+    "on": true,
+    "end": 6.16,
+    "maxSeenAtFrames": 6.16,
+    "dmg": 4000,
+    "restores": 0,
+    "clones": 0,
+    "errors": 0
+   },
+   "off": {
+    "cast": true,
+    "on": false,
+    "end": 0,
+    "maxSeenAtFrames": 0,
+    "dmg": 4000,
+    "restores": 1,
+    "clones": 1,
+    "errors": 0
+   }
+  },
+  "gunner": {
+   "on": {
+    "cast": true,
+    "on": true,
+    "end": 0,
+    "maxSeenAtFrames": 0,
+    "dmg": 2176.7,
+    "restores": 0,
+    "clones": 0,
+    "errors": 0
+   },
+   "off": {
+    "cast": false,
+    "on": false,
+    "end": 0,
+    "maxSeenAtFrames": 0,
+    "dmg": 0,
+    "restores": 0,
+    "clones": 0,
+    "errors": 0
+   }
+  },
+  "manualBlink": {
+   "moved": 3.8
+  },
+  "guideBlink": {
+   "blocked": 0,
+   "biggestFrameJump": 0.32
+  }
+ },
+ "errors": []
+}
