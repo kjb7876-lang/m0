@@ -6578,6 +6578,31 @@
       "sha256": "4bbcad0e1717a11d4373ab7e8463a36ab682bdb99fb840f2783d6fbe1c1c761a"
     },
     {
+      "path": "assets/r1017/x1017-bed.webp",
+      "bytes": 34210,
+      "sha256": "941ee3a4cf47894091e4c9f393f654d91c268fe70589f36db3ecd11bec2b49d7"
+    },
+    {
+      "path": "assets/r1017/x1017-candles.webp",
+      "bytes": 26802,
+      "sha256": "e8bf2fb6c9a7e14a4f43e176ad6331f5d54464f2157b445ffaecde94371c4f6f"
+    },
+    {
+      "path": "assets/r1017/x1017-chest.webp",
+      "bytes": 29084,
+      "sha256": "aff829d62fb2d564ec93c1fb2350a0c6591f0eec3004f560549c8dc06e1ef6d9"
+    },
+    {
+      "path": "assets/r1017/x1017-gate.webp",
+      "bytes": 22362,
+      "sha256": "188cf890c4c17f5ec151faab9413daa1b8bbe7b7856c2b32ea123fc179c28aa3"
+    },
+    {
+      "path": "assets/r1017/x1017-veiled-king.webp",
+      "bytes": 27930,
+      "sha256": "4fdc9b9cd8fbd6972659f2d64fb4507a6a1fb13c091849535143d12864220a04"
+    },
+    {
       "path": "assets/r1018/move/ash-mason-down.webp",
       "bytes": 53568,
       "sha256": "09208bf4efe7635486819a1442501bd28b2da591ba7260941171eb69b0618a46"
@@ -51274,8 +51299,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6578218,
-      "sha256": "51e36763e64b89c2497e1bda92b35d076357bfb393c9d51a631771526ded1e27"
+      "bytes": 6578266,
+      "sha256": "f5716b2bd41308d4cee52720ca6f7120efcf1ab9bc70db939ad39bd56b12d847"
     },
     {
       "path": "intro-r140.js",
@@ -51801,6 +51826,11 @@
       "path": "prop-shadow-r329.js",
       "bytes": 15678,
       "sha256": "80ac28b4dae7239122c75941756fceacd8eafe1fab3a817f1e65d6f96b3a2c5a"
+    },
+    {
+      "path": "props-diablo-r1017.js",
+      "bytes": 6438,
+      "sha256": "aa8c65d988adf5958f8e8e7998ade80344c4ddbe536e57e0143ee8743c8cb3a9"
     },
     {
       "path": "props-fit-r303.js",
@@ -52478,9 +52508,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10495,
-  "totalBytes": 1287887225,
-  "webHTMLSha256": "51e36763e64b89c2497e1bda92b35d076357bfb393c9d51a631771526ded1e27",
+  "fileCount": 10501,
+  "totalBytes": 1288034099,
+  "webHTMLSha256": "f5716b2bd41308d4cee52720ca6f7120efcf1ab9bc70db939ad39bd56b12d847",
   "largest": [
     {
       "path": "index.html",
