@@ -195,7 +195,13 @@ function drawDying(fx){const R=fx.r764,D=DEATH[R.who],path=D.path(),a=Math.max(0
  const fr={path,assetFrame:{sourceRect:[sx,0,512,512],pivot:[256,D.py],visibleHeight:D.vis},sourceAlphaCore:[sx,0,512,512],metricThreshold:16,sourcePixelsEdited:false};
  const tl=tileLen(fx);lastDeath={who:R.who,unit:+R.unit.toFixed(2),tl:+tl.toFixed(2),f,age:+a.toFixed(2)};return drawAssetFrame3(path,fr,q.x,q.y,R.unit*tl,{alpha:Math.max(0,Math.min(1,(life-a)/D.fade)),flip:R.flip});}
 let dTries=0;(function armDeath(){let done=false;try{done=wrapDeath();}catch(e){fail(e);}if(!done&&++dTries<80&&typeof setTimeout==='function')setTimeout(armDeath,250);})();
-window.__STORYWORLD_BULMYEONGWI_R760__=Object.freeze({rev:REV,inspect:()=>({rev:REV,inner,outer,last,lastDeath,prefs:{...prefs},stats:{...stats},lastError,scale:SCALE}),
+// R1036(사용자 2026-11-14 "불면귀예고 실루엣 예전불면귀라 거슬림"): 보스 구역 이름 카드(R255)·컷신 같은 '그림 한 장' 자리는 엔진 e.path(옛 회백 해골 bulmyeongwi_idle)를 읽었다.
+//  → 지금 몸을 그리는 그림 한 칸을 알려 준다: 시트 켜짐 = 대기 시트 첫 칸(칸마다 잰 알파 테두리를 감싸는 자리), 시트 끔 = 톤 자세 p4, R760 꺼짐 = null(엔진 그림 그대로 — 몸도 엔진 그림).
+const PORTRAIT={boss:{path:()=>SPATH('idle'),crop:{x:84,y:60,w:348,h:420}},mid:{path:()=>MPATH('idle'),crop:{x:66,y:56,w:378,h:424}}};
+function portrait(e){try{if(!prefs.on)return null;const who=roleAny(e);if(!who)return null;
+ if(prefs.sheets){const P=PORTRAIT[who];return {path:P.path(),crop:{...P.crop}};}
+ return who==='boss'?{path:DIR+'p4.webp',crop:{x:0,y:0,w:POSE.w,h:POSE.h}}:null;}catch(err){fail(err);return null;}}
+window.__STORYWORLD_BULMYEONGWI_R760__=Object.freeze({rev:REV,portrait,inspect:()=>({rev:REV,inner,outer,last,lastDeath,prefs:{...prefs},stats:{...stats},lastError,scale:SCALE}),
  set(p={}){for(const k of Object.keys(prefs))if(typeof p[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return {...prefs};}});
 })();
 // R763 불면귀에 잠식된 주민 — 사용자 2026-11-11 "닷츠에게 불면귀쪽 불면귀에 잠식된 사람1,2,3 해서 근거리 원거리 남녀약간 좀비화해서 불면귀파트에 일반몹으로 적용하라고 해
