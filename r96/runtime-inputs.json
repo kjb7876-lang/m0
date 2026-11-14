@@ -9706,6 +9706,12 @@
     "assets/r1019/move/timeless-silver-scout-up.webp",
     "move-dir-r1019-data.js",
     "ui-clean-r1015.js",
+    "move-dir-r1024-data.js",
+    "assets/r1024/move/jealousy-wraith-down.webp",
+    "assets/r1024/move/jealousy-wraith-up.webp",
+    "assets/r1024/move/m119-nameless-scar-down.webp",
+    "assets/r1024/move/m119-nameless-scar-up.webp",
+    "assets/r1024/move/superego-inquisitor-up.webp",
     "ui-combat-r1021.js"
   ],
   "mediaPaths": [
@@ -10781,5 +10787,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "8c92c04702b3e38e72bfbbcf18d612b62b40aac4f7ae046b0238568621f884c1"
+  "runtimeManifestSHA256": "0f2819e2452d3c868255c1c605eb845b78411a34a3627be6535fd62c7d2a8ec6"
 }
