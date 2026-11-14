@@ -51484,8 +51484,8 @@
     },
     {
       "path": "hero-paint-r1027.js",
-      "bytes": 16930,
-      "sha256": "63f582c89ef7a37c943f0c00ca24851aa5dde5e61fdad3a2e1897b3ffb01c844"
+      "bytes": 16985,
+      "sha256": "ccc3ddc30046988872966b0e0b7dedb6ac3b11ecc30ae67f2f09a4f108c59b3a"
     },
     {
       "path": "hero-palette-r302.js",
@@ -52889,7 +52889,7 @@
     }
   ],
   "fileCount": 10577,
-  "totalBytes": 1290281573,
+  "totalBytes": 1290281628,
   "webHTMLSha256": "d16d42df9b4fa0d60fba7acd60c9e7a25c5e1aeaecd0e39c1b067eb52d5815b8",
   "largest": [
     {

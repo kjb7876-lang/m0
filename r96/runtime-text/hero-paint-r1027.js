@@ -60,9 +60,10 @@ function classify(e){
 function frameAt(name,age,life){const S=SHEETS[name];if(!S||!fin(age)||!fin(life)||life<=0||age<=0)return 0;return Math.max(0,Math.min(S.frames-1,Math.floor(age/life*S.frames)));}
 // 그림 불러오기(지역을 옮기면 엔진이 안 쓰는 그림을 내리므로 다시 부른다)
 const asked=new Map(),firstAsk=new Map();
-// 그림이 아직 안 받아진 첫 몇 초(또는 한 번 받았다가 지역 이동으로 내려간 동안)는 도트·정지 그림으로 되돌아가지 않고 그 한 장만 건너뛴다(받기 실패가 4초 넘게 이어지면 원래 그림으로 되돌림).
-const loadedOnce=new Set();const waiting=name=>{const p=SHEETS[name]?.path;if(!p)return false;if(loadedOnce.has(p))return true;/* 지역을 옮겨 엔진이 내린 그림: 다시 받는 동안 건너뜀 */const t=Date.now();if(!firstAsk.has(p))firstAsk.set(p,t);return t-firstAsk.get(p)<4000;};
-function image(name){const S=SHEETS[name];if(!S)return null;try{const r=typeof readyImage==='function'?readyImage(S.path):null;if(r?.image){loadedOnce.add(S.path);return r.image;}
+// 한 번 받았다가 지역 이동으로 내려간 그림은 다시 받는 동안(최대 4초) 정지 그림으로 되돌아가지 않고 그 한 장만 건너뛴다.
+// 아직 한 번도 못 받은 그림은 원래 그림(도트)으로 둔다 — 효과가 통째로 사라지지 않게(설치 때부터 미리 받아 둔다).
+const loadedOnce=new Set();const waiting=name=>{const p=SHEETS[name]?.path;if(!p||!loadedOnce.has(p))return false;const t=Date.now();if(!firstAsk.has(p))firstAsk.set(p,t);if(t-firstAsk.get(p)<4000)return true;firstAsk.delete(p);return false;};
+function image(name){const S=SHEETS[name];if(!S)return null;try{const r=typeof readyImage==='function'?readyImage(S.path):null;if(r?.image){loadedOnce.add(S.path);firstAsk.delete(S.path);return r.image;}
  const t=Date.now();if(t-(asked.get(S.path)||0)>1500){asked.set(S.path,t);if(typeof ensureImages==='function')Promise.resolve(ensureImages([S.path])).catch(()=>{});}}catch(e){fail(e);}return null;}
 function warm(){const h=hero();for(const n of ['barrier','heal','mend','slash-'+h,OWN_HIT[h]])if(n&&SHEETS[n])image(n);}
 // 가로챈 한 번의 그리기를 칠한 칸으로: 원래 상자(dx,dy,dw,dh)의 가운데·크기를 기준으로, 원래 변환(이동·회전) 그대로.
@@ -133,7 +134,7 @@ function wrapTick(){if(typeof tick!=='function'||tick.__r1027)return;const base=
  const w=function(...a){const r=base.apply(this,a);try{swapR163();const t=T();for(let i=own.length-1;i>=0;i--)if(t-own[i].t0>=own[i].life||t<own[i].t0-2)own.splice(i,1);
   if(!own.length){const i=typeof effects!=='undefined'&&Array.isArray(effects)?effects.indexOf(SENT):-1;if(i>=0)effects.splice(i,1);}
   if(prefs.on&&Date.now()>next){next=Date.now()+2000;warm();}}catch(err){fail(err);}return r;};w.__r1027=true;tick=w;}
-function install(){try{wrapDraw();wrapHero();wrapFx();wrapTick();swapR163();}catch(e){fail(e);}}
+function install(){try{wrapDraw();wrapHero();wrapFx();wrapTick();swapR163();if(prefs.on)warm();}catch(e){fail(e);}}
 install();
 try{setTimeout(()=>{try{for(const n of ['barrier','heal','mend'])image(n);}catch(_){}},0);}catch(_){}
 try{if(typeof drawEffect==='function'){const inner=drawEffect;drawEffect=function(e,...a){if(e&&e.type==='r1027-paint'){try{drawOwn();}catch(err){fail(err);}return;}return inner.call(this,e,...a);};drawEffect.__r1027=true;}}catch(e){fail(e);}
