@@ -45,10 +45,13 @@ if(typeof addEventListener==='function'){addEventListener('keydown',key,true);ad
 function atEnd(o){if(!current(o)||o.ending)return;o.ending=true;clearTimeout(o.stall);try{o.video.pause();}catch(_){}o.ttl.classList.add('on');o.hold=setTimeout(()=>close(o,'ended'),HOLD_MS);}
 function watch(o){clearTimeout(o.stall);o.stall=setTimeout(()=>{if(!current(o)||o.ending)return;const t=Number(o.video.currentTime)||0;if(t>=CUT){atEnd(o);return;}if(t>o.lastTime+.01){o.lastTime=t;watch(o);return;}close(o,'stall');},STALL_MS);}
 function progress(o){if(!current(o)||o.ending)return;const t=Number(o.video.currentTime)||0;if(t>=TITLE_AT)o.ttl.classList.add('on');if(t>=CUT){atEnd(o);return;}if(t>o.lastTime+.01){o.lastTime=t;watch(o);}}
+// R1037: 효과음·배경음·서사 음성 설정을 따른다 — 모두 끄면 음소거, 아니면 켜진 것 중 가장 큰 음량(R368·R372 영상과 같은 규칙)
+const audioLevel=()=>{try{const s=typeof settings!=='undefined'?settings:null;if(!s)return 1;const c=x=>Math.max(0,Math.min(1,Number(x)||0));
+ return Math.max(s.sound?c(s.volume):0,s.music?c(s.bgm??s.volume):0,s.narration?c(s.voice??s.volume):0);}catch(_){return 1;}};
 function play(opt={}){if(open)return false;if(typeof document==='undefined')return false;if(!opt.force&&(!prefs.on||(navigator.webdriver&&!forced())))return false;
  css();const root=document.createElement('div');root.id='r309v';root.setAttribute('role','dialog');root.setAttribute('aria-label','오프닝 영상');
  const video=document.createElement('video');video.src=url(SRC);video.poster=url(POSTER);video.playsInline=true;video.setAttribute('playsinline','');video.preload='auto';video.autoplay=true;
- if(opt.muted)video.muted=true;
+ const lv=audioLevel();if(opt.muted||lv<=0)video.muted=true;else video.volume=lv;/* R1037: 소리 설정을 따른다(R368 과 같게) */
  root.innerHTML='<div class="ttl">'+(SHOW_TITLE?TITLE:'')+'</div><button type="button" class="skip">건너뛰기 ▸</button><div class="fade"></div>';root.insertBefore(video,root.firstChild);
  document.body.appendChild(root);requestAnimationFrame(()=>{root.style.opacity='1';});
  const ttl=root.querySelector('.ttl'),fade=root.querySelector('.fade'),skip=root.querySelector('.skip');

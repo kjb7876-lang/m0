@@ -678,6 +678,8 @@ jobs:
         run: node r96/qa/r1032/r1032-cpu-check.cjs
       - name: R1038 defer hidden boot self-tests until diagnostics open CPU check
         run: node r96/qa/r1038/r1038-cpu-check.cjs
+      - name: R1037 narration always-off button (boss entry story window + memory fragment note) and settings rows CPU check
+        run: node r96/qa/r1037/r1037-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
         run: node r96/qa/r430/r430-cpu-check.cjs
       - name: R431 boss-room center fights + theme boss skill 6s + touch status/DoT + black-flame prop throws CPU check
