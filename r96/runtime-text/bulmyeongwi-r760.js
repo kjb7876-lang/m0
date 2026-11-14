@@ -172,7 +172,11 @@ let mWraps=0;function ensureMeasure(){if(typeof drawEnemy!=='function'||drawEnem
  const w=function(e,...a){const who=prefs.on?role(e):null;if(!who)return base.call(this,e,...a);const cm=(typeof ctx!=='undefined'&&Array.isArray(ctx?.commands))?ctx.commands:null,st0=cm?cm.length:-1;
   const r=base.call(this,e,...a);if(cm&&st0>=0)try{measure(e,cm,st0);}catch(err){fail(err);}return r;};
  for(const k of Object.keys(base))try{w[k]=base[k];}catch(_){}w.__r764m=true;try{drawEnemy=w;}catch(_){}}
-const inner=wrap((e,who,cm,st0)=>{stats.draws++;if(who==='boss')swap(e,cm,st0);try{ensureMeasure();}catch(err){fail(err);}},true);
+// R1031 후속: R620 이 이 감싸기보다 안쪽이면(스크립트가 늦게 붙어 R620 이 먼저 감싼 경우 — 공개본에서 지역을 옮긴 뒤 재현) R620 이 엔진 원래 그림끼리
+//  교차 보간한 잔상(r620Ghost)이 옛 회백 그림 그대로 몸 위에 0.09초 겹쳤다(공격 전환마다 2프레임, 절반은 반대 방향). 몸은 위 swap 이 바꾸므로 옛 그림 잔상은 뺀다.
+const OLDART=/bulmyeongwi_(idle|attack|rain|transition)\.webp/i;
+function dropOldGhosts(cm,st0){for(let i=cm.length-1;i>=st0;i--){const k=cm[i];if(k&&k.r620Ghost&&OLDART.test(srcOf(k))){cm.splice(i,1);stats.oldGhostsDropped=(stats.oldGhostsDropped||0)+1;}}}
+const inner=wrap((e,who,cm,st0)=>{stats.draws++;if(who==='boss'){swap(e,cm,st0);dropOldGhosts(cm,st0);}try{ensureMeasure();}catch(err){fail(err);}},true);
 let outer=false;const installOuter=()=>{if(!outer)outer=wrap((e,who,cm,st0)=>{if(who==='mid')midSwap(e,cm,st0);ghosts(e,who,cm,st0);});};
 if(typeof setTimeout==='function')setTimeout(installOuter,0);else installOuter();
 // 보스 구역에 들어가기 전에 미리 불러 둔다(첫 등장에 원본이 한 번 비치지 않게).
