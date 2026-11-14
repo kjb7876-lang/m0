@@ -524,6 +524,8 @@ jobs:
         run: |
           node r96/qa/r1034/r1034-w-cpu-check.cjs
           node r96/qa/r1034/r1034-passive-cpu-check.cjs
+      - name: R1034b hwando ink sword traces (Dots HI-07 brush stroke on basic hits and W upright crosses) CPU check
+        run: node r96/qa/r1034/r1034-ink-trace-cpu-check.cjs
       - name: R947 slayer blood passives (common piercing blood needle, blood cross-sword rain, rare lattice laser barrage, upright crosses, per-body state) CPU check
         run: node r96/qa/r947/r947-cpu-check.cjs
       - name: R962 survival passives (core beam is not a hero hit, placed-hero shots credit their own body, R950 finale off on the survival stage) CPU check
