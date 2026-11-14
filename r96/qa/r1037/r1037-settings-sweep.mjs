@@ -11,19 +11,23 @@ const b=await chromium.launch({args:['--autoplay-policy=no-user-gesture-required
 const ctx=await b.newContext({viewport:{width:1280,height:720},deviceScaleFactor:1});
 await ctx.addInitScript(()=>{localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false}));
  // 배경음은 R195·R308 이 new Audio() 로 튼다(DOM 밖) → play() 를 지켜 재생 중인 소리 요소를 센다
+ addEventListener('submit',e=>console.log('R1037NAV submit '+(e.target&&e.target.outerHTML||'').slice(0,200)),true);addEventListener('beforeunload',()=>console.log('R1037NAV beforeunload '+location.href));
  const M=window.__r1037Media=new Set();const pl=HTMLMediaElement.prototype.play;HTMLMediaElement.prototype.play=function(...a){if(this.tagName==='AUDIO')M.add(this);return pl.apply(this,a);};});
 const p=await ctx.newPage();p.on('pageerror',e=>errors.push(String(e).slice(0,200)));
-await p.goto(URL,{timeout:180000,waitUntil:'domcontentloaded'});
+// 창 닫기(R176)가 history.back 을 쓰므로, 시험 첫 쪽(about:blank)으로 밀려나지 않게 같은 주소를 한 번 더 깔아 둔다. 실제 문서 새로 읽기(load)는 따로 센다.
+let loads=0;p.on('load',()=>loads++);const T0=Date.now();p.on('request',r=>{if(r.isNavigationRequest()&&r.frame()===p.mainFrame())console.log('NAVREQ '+((Date.now()-T0)/1000|0)+'s '+r.method()+' '+r.url().slice(0,120));});p.on('console',m=>{if(/R1037NAV/.test(m.text()))console.log(m.text());});p.on('crash',()=>console.log('PAGE CRASH at '+((Date.now()-T0)/1000|0)+'s'));
+await p.goto(URL+'?r1037=pad',{timeout:180000,waitUntil:'domcontentloaded'});await p.goto(URL,{timeout:180000,waitUntil:'domcontentloaded'});
 await p.waitForFunction(()=>typeof booted!=='undefined'&&booted&&document.getElementById('campaignNew54'),null,{timeout:240000});
 await p.click('#campaignNew54');await p.locator('button',{hasText:'새 게임 시작'}).first().click();
 await p.waitForFunction(()=>started&&!loading,null,{timeout:240000});await p.evaluate(()=>{while(storyScene)advanceScene();closePanel(true);});
 // 어떤 설정은 바꾸면 페이지를 새로 읽는다(지역 타일 등) → 그 조작을 '새로 읽음'으로 적고 이어하기로 돌아온다
-async function ensureGame(){await p.waitForFunction(()=>typeof booted!=='undefined'&&booted,null,{timeout:240000});if(await p.evaluate(()=>started&&!loading))return;
+async function ensureGame(){try{await p.waitForFunction(()=>typeof booted!=='undefined'&&booted,null,{timeout:240000});}catch(e){await p.screenshot({path:'/tmp/claude-0/sweep-stuck.png'}).catch(()=>{});console.log('STUCK url='+p.url()+' body='+(await p.evaluate(()=>document.body.innerText.slice(0,300)).catch(()=>'?')));throw e;}if(await p.evaluate(()=>started&&!loading))return;
  await p.waitForFunction(()=>document.getElementById('campaignContinue54')||document.getElementById('campaignNew54'),null,{timeout:240000});
  const cont=await p.evaluate(()=>{const b=document.getElementById('campaignContinue54');return !!b&&!b.disabled;});
  if(cont){await p.click('#campaignContinue54');}else{await p.click('#campaignNew54');await p.locator('button',{hasText:'새 게임 시작'}).first().click();}
  await p.waitForFunction(()=>started&&!loading,null,{timeout:240000});await p.evaluate(()=>{while(storyScene)advanceScene();closePanel(true);});}
-const openS=async()=>{await p.evaluate(()=>{closePanel(true);showSettings();});await p.waitForTimeout(650);};
+// 창 닫기(R176)는 history.go(-n) 을 비동기로 부른다 → 닫자마자 다시 열면 기록이 엇갈려 페이지를 떠날 수 있어 닫은 뒤 잠깐 기다린다
+const openS=async()=>{await p.evaluate(()=>{if(modal)closePanel(true);});await p.waitForTimeout(250);await p.evaluate(()=>showSettings());await p.waitForTimeout(650);};
 // 창을 떠나게 하거나 판을 바꾸는 단추(따로 다룸)는 뺀다
 const SKIP_ID=new Set(['settingsClose','r195CreditsBtn','hospitalDirectStart','campaignMapButtonR63','r71OpenDifficulty','r1032OpenK','r1032OpenI','story-audio-preview','r370Preview','cameraResetR63','r353Next','r370Cinema','r376Real']);
 await openS();
@@ -35,8 +39,8 @@ const list=await p.evaluate(()=>{const out=[];const seen=new Map();
 const find=`(k,n)=>{const all=[...document.querySelectorAll('#panel input,#panel select,#panel button')];const seen=new Map();for(const e of all){const l=e.closest('label');const ds=Object.entries(e.dataset).map(([a,v])=>a+'='+v).join('&');
  const base=e.id?'#'+e.id:ds?'['+ds+']':'label:'+((l?l.textContent:e.textContent)||'').trim().replace(/\\d+(\\.\\d+)?/g,'').slice(0,40);const m=seen.get(base)||0;seen.set(base,m+1);if(base===k&&m===n)return e;}return null;}`;
 const snap=()=>p.evaluate(()=>{const ls={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(/save|slot|r370\.zoneTimes|r1023\.(stats|samples)/i.test(k))continue;ls[k]=localStorage.getItem(k);}return JSON.stringify({s:typeof settings!=='undefined'?settings:null,ls,body:document.body.className});});
-const rows=[];let n=0;
-for(const c of list){try{if(c.tag==='BUTTON'&&c.type==='submit'&&!c.key.startsWith('['))continue;if(SKIP_ID.has(c.key.replace(/^#/,'')))continue;if(c.key.startsWith('[r176='))continue;if(/현재 검사 기록 저장/.test(c.label))continue;
+const rows=[];let n=0;const loads0=loads;
+for(const c of list){if(process.env.SW_LOG)console.log('… '+((Date.now()-T0)/1000|0)+'s '+c.key+' '+c.nth+' '+c.label.slice(0,30));try{if(c.tag==='BUTTON'&&c.type==='submit'&&!c.key.startsWith('['))continue;if(SKIP_ID.has(c.key.replace(/^#/,'')))continue;if(c.key.startsWith('[r176='))continue;if(/현재 검사 기록 저장/.test(c.label))continue;
  n++;await openS();const e0=errors.length,before=await snap();
  const act=await p.evaluate(([f,k,nn])=>{const e=eval(f)(k,nn);if(!e)return {missing:true};const r={tag:e.tagName,type:e.type};
   if(e.tagName==='INPUT'&&e.type==='checkbox'){r.from=e.checked;e.click();r.to=e.checked;}
@@ -54,6 +58,7 @@ for(const c of list){try{if(c.tag==='BUTTON'&&c.type==='submit'&&!c.key.startsWi
   try{await openS();await p.evaluate(([f,k,nn])=>{const e=eval(f)(k,nn);if(e&&e.type==='checkbox'){e.click();}},[find,c.key,c.nth]);await p.waitForTimeout(400);}catch(e2){if(!/context was destroyed|navigation/i.test(String(e2)))throw e2;}await ensureGame();}}
 await p.evaluate(()=>closePanel(true));
 const t0=await p.evaluate(()=>time);await p.waitForFunction(t=>time>t+.3,t0,{timeout:120000}).catch(()=>{});const t1=await p.evaluate(()=>time);
+console.log('document loads during sweep: '+(loads-loads0)+' reloads by controls: '+rows.filter(r=>r.reload).map(r=>r.key).join(','));
 const bad=rows.filter(r=>r.err>0||!r.panelOk||r.act.missing);const quiet=rows.filter(r=>!r.changed&&!r.act.missing&&!r.act.noop);
 check(`① 설정 조작 ${rows.length}개 하나씩 바꾸고 되돌리기: 페이지 오류·창 깨짐·못 찾음 0`,rows.length>=150&&bad.length===0,JSON.stringify(bad.slice(0,5).map(r=>[r.key,r.label,r.err,r.act])));
 check(`① 바꿨을 때 저장소·settings·화면 표시가 실제로 바뀐 조작 ${rows.length-quiet.length}/${rows.length}`,quiet.length<=Math.max(3,rows.length*.05),JSON.stringify(quiet.map(r=>[r.key,r.label])));
