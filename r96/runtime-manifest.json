@@ -38388,6 +38388,96 @@
       "sha256": "3adece88f6de3d7a0a58f4792b53265958c884c531faf13d98d6c8e8d68cc772"
     },
     {
+      "path": "assets/r843/aura-loop8.webp",
+      "bytes": 78044,
+      "sha256": "67aa5f38af80c2a4dc9d28c2db71c5746c9b7fc489ed23ed072984f609b75bf9"
+    },
+    {
+      "path": "assets/r843/barstaff-idle6.webp",
+      "bytes": 62822,
+      "sha256": "f756e082ae724186ce7edbbdf02a5d25bad282591d9d07103990d7a3ae58bb8b"
+    },
+    {
+      "path": "assets/r843/clue-lantern.webp",
+      "bytes": 4220,
+      "sha256": "e275c269af2553e172461a771eb147cd58656102ab73dc923d5fcfb68f2a080c"
+    },
+    {
+      "path": "assets/r843/clue-signpost.webp",
+      "bytes": 3488,
+      "sha256": "2fc2d8768944f280acc05965935c394b2afff08ecc8e1ac67fd43904bbb7f833"
+    },
+    {
+      "path": "assets/r843/clue-skystone.webp",
+      "bytes": 4246,
+      "sha256": "cabc7f090c5c38b2e50f0a81a54c24ae4ef3a2de384e037479f2a2b45bd40623"
+    },
+    {
+      "path": "assets/r843/clue-talisman.webp",
+      "bytes": 3694,
+      "sha256": "1886182bac794bbde203ef230c84daf90c22911c940ff0479d228f75c5402348"
+    },
+    {
+      "path": "assets/r843/doctor-idle6.webp",
+      "bytes": 72556,
+      "sha256": "ae70742f2c526f9bd31a866e73e39aec381992d33747c2d00ad6b073affb56c7"
+    },
+    {
+      "path": "assets/r843/extra-newspaper.webp",
+      "bytes": 25152,
+      "sha256": "b0866197927a928cdb8999a83707b7fd35f7b2ed4ee66c836e6c9d5c8a27b0a7"
+    },
+    {
+      "path": "assets/r843/fisher-bust.webp",
+      "bytes": 54094,
+      "sha256": "2a992cae52309fc077cc1d2d994777d1ea2bbdb6bace09234c742be5efd312da"
+    },
+    {
+      "path": "assets/r843/fisher-idle6.webp",
+      "bytes": 64754,
+      "sha256": "77bfe9e308980963e2306dc1e4bb2476d7019d61a91d36b856b8813d48a140e5"
+    },
+    {
+      "path": "assets/r843/garrison-idle6.webp",
+      "bytes": 81324,
+      "sha256": "05805b088be602e58c2b56a967163747fe74ed796ace75514da3fbda47aef323"
+    },
+    {
+      "path": "assets/r843/her-seated-idle6.webp",
+      "bytes": 72786,
+      "sha256": "07081b16f87c575074ef52f538bfdd568115a91d3718bd7d0480c9a292ac3811"
+    },
+    {
+      "path": "assets/r843/herbwife-bust.webp",
+      "bytes": 46020,
+      "sha256": "8654bdaf43956dbdeba4dcc93e9a03fe7e4479de20a3da514c10e5db6764cf64"
+    },
+    {
+      "path": "assets/r843/herbwife-idle6.webp",
+      "bytes": 49710,
+      "sha256": "ac5f365b33bf15b90e5511247dec36c6df7ccd0f9714f451d86e56e2f4d13076"
+    },
+    {
+      "path": "assets/r843/jihyeon-idle6.webp",
+      "bytes": 51546,
+      "sha256": "59f1580c8964c482040bc62c561980e5266bdc5935c0bc90a4bd4e1aadabfe97"
+    },
+    {
+      "path": "assets/r843/nurse-idle6.webp",
+      "bytes": 51112,
+      "sha256": "e778666781babe7a1fb2e5f8634c57fa4957f01cabfad21d0dcfd8dd350beb14"
+    },
+    {
+      "path": "assets/r843/superior-idle6.webp",
+      "bytes": 64732,
+      "sha256": "034294597c0cbb3f79a74783c9fb3d3f9b4bc6211cd29e76655b08f1ebb45dfb"
+    },
+    {
+      "path": "assets/r843/young-self-idle6.webp",
+      "bytes": 59094,
+      "sha256": "473ebc3b7a17e67a5b8a20263d2629e161749ba2a8c73525182a466e43da1820"
+    },
+    {
       "path": "assets/r91/death/death-crystal-core.png",
       "bytes": 252893,
       "sha256": "3a7fdf719f776526d6c7f2d88607cfe88851d8d4e4989b019fd2331c746de467"
@@ -50083,6 +50173,11 @@
       "sha256": "5f863d3c2f0c59362c4380694251c6e27e28dacb3b5766b0b035035b08b6b9d1"
     },
     {
+      "path": "auto-move-r1022.js",
+      "bytes": 8897,
+      "sha256": "77fa3e69af738a5fdc5a5e731b2f3291bd82463bf77a1544f5adedcb1c5dd102"
+    },
+    {
       "path": "balance-r179.js",
       "bytes": 2962,
       "sha256": "5eb46b1d466fd2b4c3b5ee6dbf12e2148292a82ed842626d7ae2f2eb806a3058"
@@ -50779,8 +50874,8 @@
     },
     {
       "path": "dance-free-r706.js",
-      "bytes": 6740,
-      "sha256": "0bee6bc3e26473c8ca0d51c9cc58c847b73b4da037a93a59737be64c191ff26f"
+      "bytes": 6978,
+      "sha256": "fe768206ea6b1e7e96430a676f321839248c76ba359bc9ef0ef07e16d12699be"
     },
     {
       "path": "dark-r123.js",
@@ -51299,8 +51394,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6578267,
-      "sha256": "a9b02008e6122dde503dbe1d2385b3ab198c427d1aa0afd4c3d5bbc5fa5e592d"
+      "bytes": 6578312,
+      "sha256": "314e63d3ec6719b9712581179a52620d82cd4a146e9ea3cf1c5bfdcf8d92fc9e"
     },
     {
       "path": "intro-r140.js",
@@ -51879,8 +51974,8 @@
     },
     {
       "path": "quest-r840.js",
-      "bytes": 53131,
-      "sha256": "851cd3ce46351f9d06dc23bc1b7170908dfaa4e6fbdcbe6a266f368e62aad012"
+      "bytes": 55614,
+      "sha256": "24da19785ca2c2f40e2a5cc2808f9569f3785a04c422de0e56200a4b69278158"
     },
     {
       "path": "rally-waves-r905.js",
@@ -52508,9 +52603,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10501,
-  "totalBytes": 1288232873,
-  "webHTMLSha256": "a9b02008e6122dde503dbe1d2385b3ab198c427d1aa0afd4c3d5bbc5fa5e592d",
+  "fileCount": 10520,
+  "totalBytes": 1289093930,
+  "webHTMLSha256": "314e63d3ec6719b9712581179a52620d82cd4a146e9ea3cf1c5bfdcf8d92fc9e",
   "largest": [
     {
       "path": "index.html",
