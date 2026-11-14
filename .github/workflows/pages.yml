@@ -452,6 +452,8 @@ jobs:
         run: node r96/qa/r993/r993-cpu-check.cjs
       - name: R1026 enemy hit/death SFX punch (own death/hit lanes, level lift, EQ, short death tail) CPU check
         run: node r96/qa/r1026/r1026-cpu-check.cjs
+      - name: R1027 hero dot (pixel atlas) skill FX and static buff sigils replaced by painted frame sheets CPU check
+        run: node r96/qa/r1027/r1027-cpu-check.cjs
       - name: R968 boss/midboss attack sounds also fire on route phases and rooms without an R78 phase (same rule as R966) CPU check
         run: node r96/qa/r968/r968-cpu-check.cjs
       - name: R975 hwando E ilseom boss-first 7-hit left/right multi-hit (sum stays x0.6, per-hit sound, E dash unchanged) CPU check
