@@ -9863,6 +9863,7 @@
     "assets/r1029/float/mob-paper-figure.webp",
     "gear-r1032.js",
     "mobile-tier-r1023.js",
+    "entry-video-r1036.js",
     "assets/r1027/barrier.webp",
     "assets/r1027/heal.webp",
     "assets/r1027/index.json",
@@ -10947,5 +10948,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "ab4331088dfe0a40469600095851255c9dadc75d4cedca4ddb957c786778e47d"
+  "runtimeManifestSHA256": "9da39826cadf57089fe42dedaff1fb72c5614c7410760bec49415db76dc6dfb3"
 }

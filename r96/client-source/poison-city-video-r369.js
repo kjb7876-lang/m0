@@ -66,7 +66,7 @@ function play(r,opt={}){if(open||typeof document==='undefined')return false;if(!
  const title=(typeof regionById!=='undefined'&&regionById?.[ZONE]?.title)||'환자와 중독의 도시';
  root.innerHTML='<div class="chap"></div><div class="cap" aria-live="polite"></div><button type="button" class="skip">건너뛰기 ▸</button><div class="fade"></div>';
  root.querySelector('.chap').textContent=title+' · 기억';root.insertBefore(v,root.firstChild);document.body.appendChild(root);requestAnimationFrame(()=>{root.style.opacity='1';});
- const o=open={root,video:v,cap:root.querySelector('.cap'),fade:root.querySelector('.fade'),stall:0,hold:0,events:[],closed:false,ending:false,lastTime:-1,text:'',focus:document.activeElement,room:r};
+ const o=open={root,video:v,cap:root.querySelector('.cap'),fade:root.querySelector('.fade'),stall:0,hold:0,events:[],closed:false,ending:false,lastTime:-1,text:'',focus:document.activeElement,room:opt.early?null:r,early:!!opt.early,from:r}; // R1036: early = 입장 로딩과 함께 튼 영상(로딩이 끝나면 그 지역 방을 제 방으로)
  const skip=root.querySelector('.skip');stats.plays++;
  const on=(type,fn)=>{const own=e=>{if(current(o))fn(e);};o.events.push([type,own]);v.addEventListener(type,own);};
  try{if(typeof keys!=='undefined'&&keys?.clear)keys.clear();}catch(_){}
@@ -80,7 +80,7 @@ function play(r,opt={}){if(open||typeof document==='undefined')return false;if(!
 function poll(){if(!pending||open)return;const r=here();if(r!==pending.room||!eligible(r)||!prefs.on||prefs.seen){pending=null;return;}
  if(busy()){if(!pending.story){pending.story=true;stats.waitedStory++;}pending.at=now();return;}
  if(now()-pending.at>=DELAY_MS)play(r);}
-if(typeof tick==='function'){const base=tick;tick=function(...a){if(open){if(here()&&open.room&&here()!==open.room)close(open,'skip');return;}
+if(typeof tick==='function'){const base=tick;tick=function(...a){if(open){if(open.early&&!open.room){if(!(typeof loading!=='undefined'&&loading)){if(here()?.id===ZONE)open.room=here();else if(here()!==open.from)close(open,'room');}return;}if(here()&&open.room&&here()!==open.room)close(open,'skip');return;}
  const out=base.apply(this,a);try{poll();}catch(e){fail(e);}return out;};}
 window.__STORYWORLD_POISON_CITY_VIDEO_R369__=Object.freeze({revision:REV,KEY,SRC,POSTER,ZONE,CUES,
  bgmGain:()=>open?0:1,play:(o={})=>play(here(),{force:true,...o}),skip:()=>{if(open)close(open,'skip');},preload,poll,
