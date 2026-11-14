@@ -55,7 +55,7 @@ function bossArt(path){try{if(!path||typeof readyImage!=='function')return null;
    gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(1,'rgba(0,0,0,1)');bg.globalCompositeOperation='destination-out';bg.fillStyle=gr;if(side==='right')bg.fillRect(w-F,0,F,h);else bg.fillRect(0,0,F,h);bg.globalCompositeOperation='source-over';}}}catch(_){}
  const tint=col=>{const t=document.createElement('canvas');t.width=w;t.height=h;t.__bossArt=true;const g=t.getContext('2d');if(!g)return null;g.drawImage(base,0,0);g.globalCompositeOperation='source-atop';g.fillStyle=col;g.fillRect(0,0,w,h);return t;};
  const dark=tint('#0b0608'),rim=tint(GOLD);return dark&&rim?{dark,rim,w,h}:null;}catch(e){fail(e);return null;}}
-function cinema(info){if(!prefs.cinema||!info||typeof document==='undefined')return;const st=document.getElementById('stage')||document.body;if(!st)return;stats.cinemas++;
+function cinema(info){if(!prefs.cinema||!info||window.__STORYWORLD_NARRATION_R1037__?.storyOff?.()||typeof document==='undefined')return;/* R1037: 서사를 끄면 이름 카드 없이 바로 입장 */const st=document.getElementById('stage')||document.body;if(!st)return;stats.cinemas++;
  const c=document.createElement('canvas');c.id='r255Cinema';c.style.cssText='position:fixed;inset:0;width:100%;height:100%;z-index:2147482400;cursor:pointer';document.body.appendChild(c);
  let reduced=false;try{reduced=!!(typeof matchMedia==='function'&&matchMedia('(prefers-reduced-motion: reduce)').matches);}catch(_){}
  const t0=performance.now(),D=reduced?1800:3400;let done=false,art=null,artTry=0,lay=null;
