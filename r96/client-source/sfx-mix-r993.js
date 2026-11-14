@@ -69,6 +69,7 @@
  const admitState=()=>({low:[],mid:[],shot:-1e9});
  const kindOf=v=>v&&(v.kind||v.k)||null;
  function admit(state,kind,t,live){try{const c=category(kind);if(!state||!c||c.cls==='high'||c.cls==='impact')return true;t=fin(t,0);const L=Array.isArray(live)?live:[];
+  {const PX=window.__STORYWORLD_SFX_PUNCH_R1026__;if(PX&&PX.enabled()){const o=PX.admit(c,t,L);if(o===true||o===false)return o;}}// R1026 사망·몹 피격 자체 길
   state.low=state.low.filter(x=>t-x<.06&&x<=t);state.mid=state.mid.filter(x=>t-x<.12&&x<=t);
   if(c.cls==='low'){const nLow=L.filter(v=>category(kindOf(v))?.cls==='low').length;if(L.length>=3||Math.max(nLow,state.low.length)>=2)return false;state.low.push(t);return true;}
   if(c.sub==='shot'){if(t-state.shot<.15)return false;state.shot=t;}
@@ -99,11 +100,12 @@
   try{src.addEventListener('ended',()=>{try{trim.disconnect();}catch(_){}});}catch(_){}
   if(src.playbackRate&&vr.rate!==1){src.playbackRate.value=clamp(vr.rate,.9,1.1);stats.varied++;}
   if(Number.isFinite(c.prio)&&v.priority!==c.prio){v.priority=c.prio;stats.demoted++;if(c.cat==='타격'){const id=v;try{setTimeout(()=>{if(id&&!id.stopping)id.priority=Math.min(id.priority,HERO_TAIL_PRIO);},HERO_TAIL*1000);}catch(_){}}}
+  try{const PX=window.__STORYWORLD_SFX_PUNCH_R1026__;if(PX&&PX.enabled())PX.onVoice(v,src,c,now,{row:rowGainOf(v.kind),role:roleGainOf(v.kind),peakDb:m.peakDb,master:typeof masterGain!=='undefined'?masterGain:null});}catch(_){stats.errors++;}// R1026 덧보정·EQ·사망 꼬리
   if(c.cls==='impact')duck(now,v);
   log({kind:'start',kindName:v.kind,cat:c.cat,sub:c.sub,lufs:m.lufs==null?null:Math.round(m.lufs*10)/10,trimDb:t,gainDb:Math.round(vr.gainDb*100)/100,rate:Math.round(src.playbackRate?.value*10000)/10000,priority:v.priority,at:now});}catch(_){stats.errors++;}}
  const state=admitState();
  function install(){try{const P=window.AudioBufferSourceNode&&AudioBufferSourceNode.prototype;if(P&&!P.start.__r993){const base=P.start;const w=function(){onStart(this);return base.apply(this,arguments);};w.__r993=true;P.start=w;}}catch(_){stats.errors++;}
-  try{if(typeof sound==='function'&&!sound.__r993){const base=sound;const s=function(kind,...a){try{if(on){const t=(typeof performance!=='undefined'?performance.now():Date.now())/1000;if(!admit(state,kind,t,live())){const c=category(kind);if(c&&c.cls==='low')stats.admitLowDrop++;else stats.admitMidDrop++;return undefined;}}}catch(_){stats.errors++;}return base.call(this,kind,...a);};s.__r993=true;sound=s;}}catch(_){stats.errors++;}
+  try{if(typeof sound==='function'&&!sound.__r993){const base=sound;const s=function(kind,...a){try{if(on){const t=(typeof performance!=='undefined'?performance.now():Date.now())/1000;if(!admit(state,kind,t,live())){const c=category(kind);if(c&&c.cls==='low')stats.admitLowDrop++;else stats.admitMidDrop++;return undefined;}}}catch(_){stats.errors++;}try{const PX=window.__STORYWORLD_SFX_PUNCH_R1026__;if(on&&PX&&PX.enabled())PX.beforePlay(category(kind));}catch(_){stats.errors++;}return base.call(this,kind,...a);};s.__r993=true;sound=s;}}catch(_){stats.errors++;}
   applyRemap();}
  if(on){
   if(typeof setupAudio==='function'){const base=setupAudio;setupAudio=function(){const r=base.apply(this,arguments);try{applyRemap();}catch(_){stats.errors++;}return r;};}

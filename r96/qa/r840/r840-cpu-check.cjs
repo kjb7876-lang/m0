@@ -97,7 +97,7 @@ for(const [o,m] of [[{controlled:false},'R78 제어 밖'],[{ego:true},'EGO 재�
 {const w=world();w.run('tick(.1)');const p=w.npc();w.run(`player.x=${p.x+2.6};player.y=${p.y};`);const b=w.log().base;w.run('interact()');eq(w.log().base,b+1,'2.6칸 밖: 엔진으로');w.run(`player.x=${p.x+2.2};`);w.run('interact()');eq(w.log().panel.length,1,'2.2칸: 받는다');
  w.run('closePanel();player.hp=0');const b2=w.log().base;w.run('interact()');eq(w.log().panel.length,1,'쓰러진 영웅은 못 받는다');}
 // 그리기: 시트 칸, 받기 전 이름표
-{const w=world();w.run('tick(.1)');w.run('drawProp(room.props.find(p=>p.r840NPC))');const d=w.log().drawn;eq(d.length,1,'NPC 를 한 번 그린다');ok(/fisher-idle\.webp$/.test(d[0].path),'어부 숨쉬기 시트');eq(d[0].rect[2],256,'한 칸 256');ok(d[0].rect[0]%256===0&&d[0].rect[0]<1536,'칸 경계');
+{const w=world();w.run('tick(.1)');w.run('drawProp(room.props.find(p=>p.r840NPC))');const d=w.log().drawn;eq(d.length,1,'NPC 를 한 번 그린다');ok(/r843\/fisher-idle6\.webp$/.test(d[0].path),"어부 숨쉬기 시트(R843 Dots CX-0076QN)");eq(d[0].rect[2],256,'한 칸 256');ok(d[0].rect[0]%256===0&&d[0].rect[0]<1536,'칸 경계');
  eq(w.log().propBase.length,0,'엔진 그리기로 새지 않는다');w.run('drawProp(room.props[0])');eq(w.log().propBase.length,1,'다른 조형물은 엔진 그대로');}
 // ── ③ 길잡이·영화 모드 ──
 function drive(w,max=400){/* 엔진 걸음 흉내: route 가 있으면 끝 점으로 옮기고 시간을 흘린다 */let i=0;for(;i<max&&w.st()!=='done';i++){w.run('guideStep(.25)');w.run('if(route.length){var e=route[route.length-1];player.x=e.x;player.y=e.y;route=[];}tick(.25)');}return i;}
@@ -126,7 +126,7 @@ function drive(w,max=400){/* 엔진 걸음 흉내: route 가 있으면 끝 점�
  ok(Math.hypot(am.x-n.x,am.y-n.y)>=3,'두 사람은 3칸 넘게 떨어져 선다');ok(am.solid===false&&!w.run(`blocked(${am.x},${am.y},.34)`),'곁 인물은 길을 막지 않고 빈 칸에 선다');
  w.at(am);ok(w.run('interact()')===true,'곁 인물 곁 E 는 퀘스트 모듈이 받는다');const h=w.log().panel[0];ok(h.includes('말이 들리지 않는 의사')&&h.includes('questLookR840')&&!h.includes('questTakeR840'),'곁 인물 창: 묘사와 닫기만');eq(w.st(),'new','곁 인물과 말해도 퀘스트 상태는 그대로');w.run('__btn.questLookR840()');ok(!w.run('modal'),'닫기');
  w.at(n);w.run('interact()');w.run('__btn.questTakeR840()');eq(w.st(),'on','간호사에게 받음');w.run('killEnemy(room.enemies[6])');eq(w.api.inspect().kills,0,'백의 구속자는 세지 않는다');for(let i=0;i<5;i++)w.run(`killEnemy(room.enemies[${i}])`);eq(w.api.inspect().kills,5,'복도 비명잔영 5');
- w.run('time+=1');w.run('tick(.6)');eq(w.st(),'drop','다 잡으면 단서');ok(w.run('room.props.some(p=>p.r840Amb)'),'곁 인물은 끝까지 서 있다');w.run('drawProp(room.props.find(p=>p.r840Amb))');ok(w.log().drawn.some(d=>/medic-idle6/.test(d.path)),'곁 인물이 그려진다');}
+ w.run('time+=1');w.run('tick(.6)');eq(w.st(),'drop','다 잡으면 단서');ok(w.run('room.props.some(p=>p.r840Amb)'),'곁 인물은 끝까지 서 있다');w.run('drawProp(room.props.find(p=>p.r840Amb))');ok(w.log().drawn.some(d=>/r843\/doctor-idle6/.test(d.path)),'곁 인물이 그려진다');}
 {const w=world({zoneId:'ep1a08',guideOn:true});w.run('tick(.1)');const am=w.run('room.props.find(p=>p.r840Amb)');w.at(am);w.run('interact()');eq(w.log().panel.length,0,'길잡이 중에는 곁 인물 창을 띄우지 않는다');}
 // 서사 창이 떠 있는 동안에는 세우지 않고(새 여정 첫 화면의 병원 소품 목록 그대로 — qa/r86 refined-static 회귀), 창이 닫힌 뒤 첫 틱에 선다.
 {const w=world({zoneId:'ep1a08',controlled:false});const n0=w.run('room.props.length');w.run('var storyScene={id:\'opening\'}');w.run('tick(.1)');eq(w.run('room.props.length'),n0,'서사 창이 떠 있으면 소품 목록을 건드리지 않는다');ok(!w.npc(),'아직 세우지 않음');w.run('storyScene=null');w.run('tick(.1)');ok(w.npc(),'창이 닫힌 뒤 첫 틱에 선다');}
@@ -209,5 +209,24 @@ function drive(w,max=400){/* 엔진 걸음 흉내: route 가 있으면 끝 점�
   const eps=new Map();for(const z of w.api.zones()){const d=w.api.def(z),e=d.episode;eps.set(e,(eps.get(e)||0)+1+(d.layer==='DREAM'?(d.also||[]).length:0)/* 사몽 편은 곁 인물도 센다 */);}const dreamEp=new Set(w.api.zones().filter(z=>w.api.def(z).layer==='DREAM').map(z=>w.api.def(z).episode));for(const [e,k] of eps){const n=dreamEp.has(e)?k:k+1;ok(n>=2&&n<=3,'서사 '+e+': NPC '+n+'명(본편은 기존 핵심 NPC 포함, 2~3)');}
   const types=new Set(w.api.zones().map(z=>w.api.def(z).quest.type));ok(types.has('purge')&&types.has('kill'),'두 종류 퀘스트가 모두 쓰인다');
   ok(!/주민|어부|아낙|소복/.test(String(w.api.zones().filter(z=>w.api.def(z).quest.type==='kill').map(z=>w.api.def(z).quest.hud))),'정본 34·35장: 주민 처치를 목표로 삼지 않는다');}
+ // ── R843: Dots 그림(CX-0076QN·CX-0077SN) — 시트 크기·칸·발 기준점·초상·단서 아이콘·오염 기운 ──
+ {const w=world(),src843=fs.readFileSync(srcPath,'utf8');
+  const dim=f=>{const b=fs.readFileSync(path.join(R,'runtime-text',f));ok(b.toString('ascii',0,4)==='RIFF'&&b.toString('ascii',8,12)==='WEBP',f+': webp');const c=b.toString('ascii',12,16);
+   if(c==='VP8X')return [1+b.readUIntLE(24,3),1+b.readUIntLE(27,3)];if(c==='VP8L'){const v=b.readUInt32LE(21);return [1+(v&0x3fff),1+((v>>14)&0x3fff)];}return [b.readUInt16LE(26)&0x3fff,b.readUInt16LE(28)&0x3fff];};
+  const seen=new Set();
+  for(const z of w.api.zones()){const d=w.api.def(z);for(const nd of [d.npc,...(d.also||[])]){const s=nd.sprite;if(!/assets\/r843\//.test(s.path))continue;seen.add(nd.kind);
+    eq(dim(s.path),[s.sheetW,s.sheetH],z+' '+nd.kind+': 시트 크기 = 설정');eq(s.sheetW,s.w*s.frames,z+' '+nd.kind+': 칸 '+s.frames+'개');eq(s.px,s.w/2,z+' '+nd.kind+': 발 x 는 칸 가운데');
+    ok(s.py<=s.h&&s.py-s.vis>=0&&s.vis>s.h*.5,z+' '+nd.kind+': 발 y·보이는 키가 칸 안');ok(!s.shade,z+' '+nd.kind+': Dots 그림은 잔영 필터를 쓰지 않는다');}
+   if(d.npc.bust){eq(dim(d.npc.bust),[512,512],z+': 흉상 512');}
+   if(d.clue.icon){eq(dim(d.clue.icon),[128,128],z+': 단서 아이콘 128');}
+   if(d.quest.type==='purge'&&/r843/.test(d.quest.prop.path))eq(dim(d.quest.prop.path),[384,384],z+': 조형물 384');}
+  for(const k of ['fisher','herbwife','jihyeon','superior','barstaff','nurse','doctor','waiting-her','garrison','young-self'])ok(seen.has(k),'R843 그림이 붙은 인물: '+k);
+  eq(dim('assets/r843/aura-loop8.webp'),[2048,256],'오염 기운 8칸');ok(/aura-loop8\.webp/.test(src843),'오염 기운 시트를 쓴다');
+  // 곁일 하나를 끝까지: 조형물을 그릴 때 오염 기운이 조형물보다 먼저(뒤에) 그려지고, 부수면 단서 아이콘이 떨어진다
+  const v=world();v.run('tick(.1)');const vp=v.npc();v.at(vp);v.run('interact()');ok(v.log().panel.at(-1).includes('fisher-bust.webp'),'받기 창: 어부 흉상');v.run('__btn.questTakeR840()');
+  const n0=v.log().drawn.length;v.run('drawProp(room.props.find(p=>p.r840Prop))');const dr=v.log().drawn.slice(n0);ok(dr.length>=1&&/aura-loop8\.webp$/.test(dr[0].path),'조형물 발치에 Dots 오염 기운');ok(dr[0].rect[2]===256&&dr[0].rect[0]%256===0&&dr[0].rect[0]<2048,'오염 기운 칸 경계');
+  const vq=v.prop();v.at(vq,.4,.2);for(let i=0;i<3;i++){v.run('time+=1');v.run('basicAttack()');}eq(v.st(),'drop','부수면 단서');ok(/r843\/clue-talisman\.webp$/.test(v.orb().path),'떨어진 단서는 실 끊긴 붉은 부적 아이콘');
+  ok(w.api.def('sz115-S05-1').also.some(a=>a.kind==='barstaff'&&a.lore==='낯선 점원이 내 앞에 차가운 잔을 내려놓았다.'),'경성의 밤: 낯선 점원 곁 인물(정본 r448 문장)');
+ }
  console.log('R840 CPU 검사 통과: '+n+'개');
 })().catch(e=>{console.error(e);process.exit(1);});

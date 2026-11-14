@@ -87,8 +87,9 @@ function arm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)&&!eff
 function disarm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)){const i=effects.indexOf(SENT);if(i>=0)effects.splice(i,1);}}catch(_){}}
 // ---- 발동 ----------------------------------------------------------------------------------------------------
 const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
+const U1025=(h,a,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__,v=u&&u.mask(h,a,k);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},S1025=h=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.share(h);return Number.isFinite(v)?Math.max(0,Math.min(1,v)):1;}catch(_){return 1;}},W1025=(h,w)=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.weights(h,w);return v||w;}catch(_){return w;}},A1025=(h,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.unlocked(h,k)!==false:true;}catch(_){return true;}},O1025=id=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.summonOpen(id)!==false:true;}catch(_){return true;}};/* R1025 특수 패시브 레벨별 해금·소환 영웅 서사 확인(파일 없으면 원래 값) */
 function pick(s){if(s.force){const k=s.force;s.force=null;return k;}
- const r=Math.random(),[a,b,c]=G971(HERO,[CFG.cloak.chance,CFG.barrage.chance,CFG.summon.chance]),k=r<a?'cloak':r<a+b?'barrage':r<a+b+c?'summon':null;
+ const r=Math.random(),[a,b,c]=U1025(HERO,G971(HERO,[CFG.cloak.chance,CFG.barrage.chance,CFG.summon.chance]),['cloak','barrage','summon']),k=r<a?'cloak':r<a+b?'barrage':r<a+b+c?'summon':null;
  return k&&T()>=s.ready[k]?k:null;}
 function onSwing(p){const s=st(p);s.stats.rolls++;if(!solo()){s.stats.coopSkipped++;s.force=null;return;}
  const k=pick(s);if(!k)return;s.ready[k]=T()+D971(HERO,CFG[k].icd);ownRoom=RM();

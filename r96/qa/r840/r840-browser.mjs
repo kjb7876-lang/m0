@@ -4,7 +4,8 @@
 import {chromium,boot,go,skip,URL} from '../r444/lib.mjs';import fs from 'node:fs';import assert from 'node:assert';
 const OUT=process.argv[2]||'.',WHICH=process.argv.slice(3);fs.mkdirSync(OUT,{recursive:true});let n=0;const ok=(c,m)=>{assert.ok(c,m);n++;console.log('  ok '+m);};const want=k=>!WHICH.length||WHICH.includes(k);
 const b=await chromium.launch();const errs=[];const Q=p=>p.evaluate(()=>window.__STORYWORLD_QUEST_R840__.inspect());const ph=p=>p.evaluate(()=>window.__STORYWORLD_WORLD_COMBAT_R78__.state(room)?.phase);
-const waitT=(p,dt)=>p.evaluate(()=>time).then(t0=>p.waitForFunction(([t,d])=>time>t+d,[t0,dt],{timeout:300000}));
+/* 게임 시간으로 기다린다. 지역 서사 읽기 창(storyScene)은 게임 시간을 멈추므로, 기다리는 동안 뜨면 넘긴다(2026-11 main: 불면귀 마을은 들어선 뒤 1초쯤 34장 창이 뜬다). 퀘스트 창(modal)은 건드리지 않는다. */
+const waitT=async(p,dt)=>{const t0=await p.evaluate(()=>time);for(let i=0;i<1500;i++){if(await p.evaluate(([t,d])=>{if(typeof storyScene!=='undefined'&&storyScene)for(let k=0;k<160&&storyScene;k++)advanceScene();return time>t+d;},[t0,dt]))return;await p.waitForTimeout(200);}throw new Error('waitT timeout');};
 const hook=p=>p.on('pageerror',e=>errs.push(String(e).slice(0,200)));
 const strong=p=>p.evaluate(()=>{player.hp=player.maxHp=1e9;});
 // 길잡이로 퀘스트가 끝날 때까지. 모달·서사 창이 뜨면 기록한다(길잡이 중 퀘스트 창은 0 이어야 한다).

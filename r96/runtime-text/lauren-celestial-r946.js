@@ -21,6 +21,7 @@ if(typeof window==='undefined'||window.__STORYWORLD_LAUREN_CELESTIAL_R946__)retu
 const REV='R946-celestial-2-sheets',KEY='storyworld.r946.celestial',HERO='lauren';
 const CHANCE=.10,CROWD_BONUS=.04,CROWD_N=4,CROWD_R=2,CHANCE_MAX=.35,ROLL_GAP=.35,ICD=5,COMBO_WINDOW=12;
 const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
+const U1025=(h,a,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__,v=u&&u.mask(h,a,k);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},S1025=h=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.share(h);return Number.isFinite(v)?Math.max(0,Math.min(1,v)):1;}catch(_){return 1;}},W1025=(h,w)=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.weights(h,w);return v||w;}catch(_){return w;}},A1025=(h,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.unlocked(h,k)!==false:true;}catch(_){return true;}},O1025=id=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.summonOpen(id)!==false:true;}catch(_){return true;}};/* R1025 특수 패시브 레벨별 해금·소환 영웅 서사 확인(파일 없으면 원래 값) */
 const REP_R=2.8,REP_K=1.2,REP_PUSH=2.0,REP_PUSH_T=.25,REP_STUN=.45,REP_LIFE=.7;
 const RED_V=7,RED_RANGE=8,RED_R=.85,RED_K=.9,RED_PUSH=1.8,RED_PUSH_T=.3;
 const BLUE_FLY=.3,BLUE_T=1.4,BLUE_R=3.4,BLUE_CORE=.5,BLUE_V=2.6,BLUE_TICK=.35,BLUE_TICKS=4,BLUE_HIT_R=1.6,BLUE_K=.25;
@@ -90,8 +91,8 @@ function fire(kind,o,tg){const t=T(),power=ap(),k=Math.min(2,Math.max(1,surge('r
   const foes=enemiesNow().filter(e=>!hiddenActor(e)&&dist(e,o)<=MET_AIM_R).sort((p,q)=>dist(p,o)-dist(q,o));
   rocks.forEach((r,i)=>{r.x=r.ox;r.y=r.oy;r.lift=0;r.state='rise';r.target=foes.length?foes[i%foes.length]:tg||null;});
   acts.push({...base,x:o.x,y:o.y,rocks});play('r546Sp_lauren');return;}}
-function pick(s,t){if(forced){const f=forced;forced=null;return f;}if(comboOf(s,t))return 'violet';let r=rnd()*WEIGHTS.reduce((n,w)=>n+w[1],0);for(const [k,w] of WEIGHTS){if(r<w)return k;r-=w;}return 'meteor';}
-function chanceFor(o){let n=0;for(const e of enemiesNow())if(!hiddenActor(e)&&dist(e,o)<=CROWD_R)n++;const c=CHANCE+(n>=CROWD_N?CROWD_BONUS:0);return Math.min(CHANCE_MAX,surge('chance',G971(HERO,[c])[0]));}
+function pick(s,t){if(forced){const f=forced;forced=null;return f;}if(comboOf(s,t)&&A1025(HERO,'violet'))return 'violet';const WS=W1025(HERO,WEIGHTS);let r=rnd()*WS.reduce((n,w)=>n+w[1],0);for(const [k,w] of WS){if(r<w)return k;r-=w;}return WS.length?WS[WS.length-1][0]:'repulse';}
+function chanceFor(o){let n=0;for(const e of enemiesNow())if(!hiddenActor(e)&&dist(e,o)<=CROWD_R)n++;const c=CHANCE+(n>=CROWD_N?CROWD_BONUS:0);return Math.min(CHANCE_MAX,surge('chance',G971(HERO,[c])[0]))*S1025(HERO);}
 function roll(e){const o=P();if(!o||o.hero!==HERO||o.hp<=0||blockedNow())return;const s=stateOf(o),t=T();if(t<s.readyAt||t-s.lastRoll<ROLL_GAP)return;s.lastRoll=t;stats.rolls++;
  if(!forced&&!(rnd()<chanceFor(o)))return;const kind=pick(s,t);s.readyAt=t+D971(HERO,ICD);
  if(kind==='red')s.redAt=t;else if(kind==='blue')s.blueAt=t;else if(kind==='violet'){s.redAt=-1e9;s.blueAt=-1e9;}
