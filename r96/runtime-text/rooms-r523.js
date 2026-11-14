@@ -75,9 +75,7 @@ const ART=Object.freeze(/*ART*/{
  vitals:{path:'assets/world-r80/r80-151.webp',h:63,face:'s',ang:'pole',up:0.006,d:0.55,r:[-0.376,0.379,0,1.295],m:'03e001ffe07fffc7ffffffffffffffffffffffffffffffffffffffefffff7ffff0fffb01ff30ffc33ffe63fffc3fffe03ffe3fff87fffce1ffee070e4070e0070600f0000600'},
  lotus:{path:'assets/world-r80/r80-061.webp',h:59,face:'s',ang:'pole',up:0.006,d:0.9,r:[-0.663,0.666,0,1.211],m:'0200003060078e0078e007df027df03fffc3fffc3fffc1fff81fff83fffc7fffe7fffe7fffe7fffe7fffe7fffefffffffffffffff0fff00fff007fe00fff00f0f00e07004020'},
  reliq:{path:'assets/world-r80/r80-065.webp',h:71,face:'s',ang:'pole',up:0.006,d:0.8,r:[-0.622,0.622,0,1.459],m:'00100003000078001f8003bc003fc003fe007ff007ff00fff00fff80fffc1fffc1fffc1fffc3fffc3fffe3fffe7fffffffffffff25ffc00ff8007f0003c0003c0003c0001800'},
- veiledking:{path:'assets/r1017/x1017-veiled-king.webp',h:118,face:'n',ang:'iso',flat:true,ft:[-0.917,0.917,0.141],r:[-0.923,0.923,0,2.454],m:'01c0001c0003c0003c0003c0003c0007c0007e0007e0007f0007e0007e000fe000fe000ff001bf701fffe3ffff7ffffffffffffffffffffffff63aff063fe003fe007f8007e0'},
- candles:{path:'assets/r1017/x1017-candles.webp',h:66,face:'s',ang:'pole',d:0.6,r:[-0.708,0.708,0,1.373],m:'000000001000018000990019900199001bb401bb401bb423bb42bf342b7f42bfe428fe4387ec1c30c0e3000830008300081001810018100001000010000380007c0007c00078'},
- rustbed:{path:'assets/r1017/x1017-bed.webp',h:96,face:'n',ang:'iso',flat:true,ft:[-1.012,1.012,-0.4],r:[-1.017,1.017,0,1.997],m:'00030000480004600042000410004100041000610004100061001d90034500c4301843c2007bc01998031ec061e4180fa3009ec008f800870000200002000020000200000000'}
+ candles:{path:'assets/r1017/x1017-candles.webp',h:66,face:'s',ang:'pole',d:0.6,r:[-0.708,0.708,0,1.373],m:'000000001000018000990019900199001bb401bb401bb423bb42bf342b7f42bfe428fe4387ec1c30c0e3000830008300081001810018100001000010000380007c0007c00078'}
 }/*ART*/);
 const sampMemo=new Map();
 // 불투명 칸 → 발 기준 3D 점 [dx,dy,z] — 조형물 그림은 발을 지나 카메라를 향해 서고 위로 갈수록 뒤(-x·-y)로 30° 눕는 판(R412·R521 과 같은 식)
@@ -174,22 +172,20 @@ const G=Object.freeze({
  barrier1:{w:1.7,lim:{barrier:1},it:[['barrier',.85]]},
  barrier2:{w:3.5,lim:{barrier:2},it:[['barrier',.85],['barrier',2.6]]},
  lantern1:{w:1.6,lim:{lanterns:1},it:[['lanterns',.8]]},
- // R1017(사용자 2026-11-14 고른 patch.gg Poly Haven CC0 렌더): 코어 전실 = 너울 쓴 왕 석상 + 촛대, 앞방·입구 = 촛대, 관찰실 = 녹슨 쇠침대 + 수액대
- shrine:{w:2.9,lim:{king:1,candles:1},it:[['veiledking',.95],['candles',2.25]]},
+ // R1017(사용자 2026-11-14 고른 patch.gg Poly Haven CC0 렌더): 앞방·입구 = 촛대. 석상·녹슨 침대·철문은 시대·테마 재심사(11-14 02:03Z 사용자 '안 맞는 건 빼')로 뺌
  candle1:{w:1.4,lim:{candles:1},it:[['candles',.7]]},
- rustIv:{w:2.25,it:[['rustbed',.62],['iv',1.75]]},
  reliq1:{w:1.4,lim:{reliq:1},it:[['reliq',.7]]}
 });
 // 한 방에 같은 물건이 되풀이되지 않게(사용자 2026-11-09 "같은 물건이 같은 간격으로 반복되는 현상은 줄이고"): 묶음의 lim 이 방마다 이 수를 넘으면 그 묶음은 건너뛴다
 //  쓰임새가 lim 을 따로 가지면 그 방에서는 그 수를 쓴다(거울 회랑의 거울, 화구 구획의 화구처럼 되풀이가 그 방의 뜻인 곳)
-const LIMIT=Object.freeze({tv:1,sofa:2,table:1,trash:1,wardrobe:3,fridge:2,bed:3,case:3,chair:3,mirror:1,range:2,shelf:3,flamp:1,steps:1,alarm:1,machine:2,cooler:2,vent:1,kiosk:2,pod:3,vitals:3,tank:1,rig:2,lotus:1,barrier:2,lanterns:1,reliq:1,king:1,candles:1});
+const LIMIT=Object.freeze({tv:1,sofa:2,table:1,trash:1,wardrobe:3,fridge:2,bed:3,case:3,chair:3,mirror:1,range:2,shelf:3,flamp:1,steps:1,alarm:1,machine:2,cooler:2,vent:1,kiosk:2,pod:3,vitals:3,tank:1,rig:2,lotus:1,barrier:2,lanterns:1,reliq:1,candles:1});
 const fits=(g,cnt,U)=>!g.lim||Object.keys(g.lim).every(k=>(cnt[k]||0)+g.lim[k]<=((U&&U.lim&&U.lim[k])||LIMIT[k]));
 const take=(g,cnt,s)=>{if(g.lim)for(const k in g.lim)cnt[k]=(cnt[k]||0)+s*g.lim[k];};
 // 쓰임새 = [큰 벽 줄(차례로 돌려 가며 채움), 옆 벽 줄, 안쪽 구석 가구, 큰 벽·옆 벽에 놓을 묶음 상한]
 const USE=Object.freeze({
  inject:{main:['treat','cart','treatLamp','ivs','treat','cabCart'],side:['cab2','wheel','cart'],corner:'medcab',cap:[6,3]},
  wait:{main:['seats','seatsTable','seats','wheel'],side:['seats','crutch','wheel'],corner:null,cap:[6,4]},
- observe:{main:['bedScreen','rustIv','bedMon','bedTray','bedIv'],side:['cabCart','wheel','parked'],corner:'medcab',cap:[6,3]},
+ observe:{main:['bedScreen','bedIv','bedMon','bedTray'],side:['cabCart','wheel','parked'],corner:'medcab',cap:[6,3]},
  drug:{main:['cab2','cart','cab2','ivs','cab2','cart'],side:['cab2','parked','cab'],corner:'medcab',cap:[6,3]},
  ante:{main:['parked','wheel','crutch'],side:['wheel'],corner:null,cap:[3,1]},
  lobby:{main:['seats','seatsTable','wheel'],side:['seats','crutch'],corner:null,cap:[3,2]},/* 의원 입구 = 접수 앞 대기 자리 */
@@ -236,7 +232,7 @@ const USE=Object.freeze({
  transfer:{main:['podMon','tank1','podMon','kiosk1'],side:['podMon','mon1'],corner:null,cap:[4,2]},
  harvest:{main:['lotusTank','lantern1','tank1'],side:['lantern1','lotus1'],corner:null,cap:[3,2]},
  bulwark:{main:['barrier2','lantern1','barrier1'],side:['barrier1','lantern1'],corner:null,cap:[3,2],lim:{barrier:4}},
- corehall:{main:['shrine','lotus1','reliq1','lantern1'],side:['reliq1','lantern1'],corner:null,cap:[3,2]},
+ corehall:{main:['lotus1','reliq1','lantern1'],side:['reliq1','lantern1'],corner:null,cap:[3,2]},
  narthex:{main:['lantern1','candle1','reliq1'],side:['lantern1','reliq1'],corner:null,cap:[2,1],more:false},
  // 사몽 구역(R731): 식당 = 식탁 줄, 창고 = 장·짐, 서류 창고 = 책장 줄, 상담실 = 소파와 책상
  canteen:{main:['dine','chairs2','dine','wardrobe','dine'],side:['dine','trash','chairs2'],corner:null,cap:[5,3],lim:{table:5,chair:6}},

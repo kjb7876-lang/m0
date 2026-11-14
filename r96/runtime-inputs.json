@@ -9706,11 +9706,7 @@
     "assets/r1019/move/timeless-silver-scout-up.webp",
     "move-dir-r1019-data.js",
     "ui-clean-r1015.js",
-    "props-diablo-r1017.js",
-    "assets/r1017/x1017-gate.webp",
-    "assets/r1017/x1017-candles.webp",
-    "assets/r1017/x1017-bed.webp",
-    "assets/r1017/x1017-veiled-king.webp"
+    "assets/r1017/x1017-candles.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -10785,5 +10781,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "ee6bb9eb2446264f9c761e39e11c275d3e8c06ffc95456f3455ad778b886aa7b"
+  "runtimeManifestSHA256": "4c995fbf818e73fa3f9e895107b82e6d89b3413a3b76e45f39f0272361016717"
 }

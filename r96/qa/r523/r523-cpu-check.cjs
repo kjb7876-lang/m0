@@ -73,7 +73,7 @@ ok('room names → uses; fight rooms·exit gates·junctions stay untouched, the 
  ['보스 전투실','중앙 전투실','다음 구역 문','갈림길','작은 마당',''].every(nm=>api.useOf('ep1a09',nm)===null&&api.useOf('ep1b02',nm)===null)&&api.useOf('last302','거실')===null&&api.useOf('last302','입구')===null);
 
 // ---- 실제 지도 두 곳 --------------------------------------------------------------------------------
-const CLINIC=new Set(['bed','stretcher','overbed','medcab','trolley','wheelchair','monitor','iv','stool','lamp','crutches','curtain','chair145','table146','rustbed'/* R1017 사용자 2026-11-14 고른 녹슨 쇠침대 */]);
+const CLINIC=new Set(['bed','stretcher','overbed','medcab','trolley','wheelchair','monitor','iv','stool','lamp','crutches','curtain','chair145','table146']);
 const HOME=new Set(['sofa_sloth','bed_sloth','fridge_sloth','tv_sloth','wardrobe_n','wardrobe_w','table_n','table_w','suitcase_n','suitcase_w','chair_n','chair_w','chairb_n','chairb_w','trash']);
 const hitOf=L=>(x,y)=>!!E(L,x,y,.02);/* 반지름 0 이면 엔진이 얇은 벽을 못 본다 */
 function audit(id,palette,min,uses){const w=world(FX[id]),L=w.exploration,hit=hitOf(L),rows=api.list(w),I=api.inspect(),W=L.worldWardR81,names=new Map(L.worldR74.rooms.map(q=>[q.id,q.name]));
@@ -176,7 +176,7 @@ const Fl=audit('murder04',FLAT,50,['den','den2','den3']);
 // ---- 넷째 묶음(R527): 관리자 권한 u205 · 중앙 코어 이주실 u206 · 사몽의 문턱 cult03 -------------------------------
 //  기억의 방·중앙 이주실·보호 구획 = 캡슐 + 심박 모니터 / 기계 육체실 = 거치대 줄 / 닫힌 구획·연결실 = 기계·냉각기 / 수확실 = 연꽃 코어 받침 + 수조 / 방벽 구획 = 돌 방벽 줄 / 코어 전실 = 받침 + 성물함 + 등불
 const ADMIN=new Set(['pod','vitals','tank','kiosk','machine','cooler','vent','rig']);
-const CULT=new Set(['lotus','tank','barrier','lanterns','reliq','veiledking','candles'/* R1017 사용자 2026-11-14 고른 석상·촛대 */]);
+const CULT=new Set(['lotus','tank','barrier','lanterns','reliq','candles'/* R1017 촛대(석상·녹슨 침대는 11-14 재심사로 뺌) */]);
 ok('fourth batch room names → uses (memory rooms, sealed sections, body rooms, transfer rooms, harvest rooms, barrier sections; empty corridors, connecting galleries and connectors are left alone)',api.useOf('u205','기억의 방')==='memory'&&api.useOf('u205','기억 전실')==='memhall'&&api.useOf('u205','닫힌 구획')==='sealed'&&api.useOf('u205','앞방')==='annex'&&api.useOf('u205','입구')==='gate'&&api.useOf('u205','빈 복도')===null&&api.useOf('u205','길목')===null&&
  api.useOf('u206','연결실')==='link'&&api.useOf('u206','보호 구획')==='ward'&&api.useOf('u206','기계 육체실')==='bodies'&&api.useOf('u206','중앙 이주실')==='transfer'&&api.useOf('u206','앞방')==='annex'&&api.useOf('u206','입구')==='gate'&&api.useOf('u206','길목')===null&&
  api.useOf('cult03','수확실')==='harvest'&&api.useOf('cult03','방벽 구획')==='bulwark'&&api.useOf('cult03','코어 전실')==='corehall'&&api.useOf('cult03','앞방')==='narthex'&&api.useOf('cult03','입구')==='narthex'&&api.useOf('cult03','연결 회랑')===null&&api.useOf('cult03','길목')===null);

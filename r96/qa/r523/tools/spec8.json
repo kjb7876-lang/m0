@@ -1,5 +1,9 @@
 [
- {"key": "veiledking", "src": "assets/r1017/x1017-veiled-king.webp", "L": 1.5, "face": "n"},
- {"key": "candles", "src": "assets/r1017/x1017-candles.webp", "ch": 66, "ang": "pole", "d": 0.6},
- {"key": "rustbed", "src": "assets/r1017/x1017-bed.webp", "L": 2.0, "face": "n"}
+ {
+  "key": "candles",
+  "src": "assets/r1017/x1017-candles.webp",
+  "ch": 66,
+  "ang": "pole",
+  "d": 0.6
+ }
 ]
