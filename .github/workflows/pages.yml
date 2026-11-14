@@ -666,6 +666,8 @@ jobs:
         run: node r96/qa/r1031b/r1031b-cpu-check.cjs
       - name: R1036 Bulmyeongwi boss-zone name card silhouette uses current R760 art, not old grey skull CPU check
         run: node r96/qa/r1036/r1036-silhouette-cpu-check.cjs
+      - name: R1036 Bulmyeongwi walk direction sheet does not flicker when wobbling near the hero CPU check
+        run: node r96/qa/r1036/r1036-dirflip-cpu-check.cjs
       - name: R1032 unique gear (J seal, rose seal, hero weapons) + dream-fragment n^2 upgrades + K passive / I gear+memory / B placement windows CPU check
         run: node r96/qa/r1032/r1032-cpu-check.cjs
       - name: R1037 narration always-off button (boss entry story window + memory fragment note) and settings rows CPU check
