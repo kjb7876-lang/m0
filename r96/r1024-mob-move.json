@@ -1,0 +1,126 @@
+{
+ "round": "R1024",
+ "request": "CX-0082MV",
+ "files": [
+  {
+   "dots": "002_legacy-m119-nameless-scar-v4",
+   "enemies": [
+    "h102-t1"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV 추가1 002_legacy-m119-nameless-scar-v4/legacy-m119-nameless-scar-v4-walk-down.png",
+   "sourceSha256": "7ff822131d81e67436cdd49e99402284000e4c1a219e2a1bf8a5c1cb92fd8fb7",
+   "toneGain": [
+    0.88,
+    0.893,
+    0.919
+   ],
+   "path": "assets/r1024/move/m119-nameless-scar-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 72400,
+   "sha256": "46a6d86ad89cabd593b0f3372e544f2341969e3df22de948ebd3e83987916a0e",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "002_legacy-m119-nameless-scar-v4",
+   "enemies": [
+    "h102-t1"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV 추가1 002_legacy-m119-nameless-scar-v4/legacy-m119-nameless-scar-v4-walk-up.png",
+   "sourceSha256": "81bd08808b1cc39b05e2f52a7699c7b5a29472cf0b94836902eb47b8906ba157",
+   "toneGain": [
+    0.88,
+    0.893,
+    0.919
+   ],
+   "path": "assets/r1024/move/m119-nameless-scar-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 70098,
+   "sha256": "1d46b68fcbc3de85e21128a96e3a1c96ff5625ffa3806e3c9840efbe0b4575ff",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "044_jealousy-wraith-v1",
+   "enemies": [
+    "b03-g1"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0082MV 추가1 044_jealousy-wraith-v1/jealousy-wraith-v1-walk-down.png",
+   "sourceSha256": "6fa16135c4a30ccc1d1eaa142f6886d6de665c8c13de3481cca7256c6fcbfeb1",
+   "toneGain": [
+    0.976,
+    0.985,
+    0.97
+   ],
+   "path": "assets/r1024/move/jealousy-wraith-down.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 80116,
+   "sha256": "8bb4438eeb523d4b289d942f07af5cd997b7c3ff306bddc9ac322ed8cab4606f",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "044_jealousy-wraith-v1",
+   "enemies": [
+    "b03-g1"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV 추가1 044_jealousy-wraith-v1/jealousy-wraith-v1-walk-up.png",
+   "sourceSha256": "c6ac0fdc474bb6c130309bed5020d4ebcd2a6293380bd4a3b4331ba31e82b966",
+   "toneGain": [
+    0.976,
+    0.985,
+    0.97
+   ],
+   "path": "assets/r1024/move/jealousy-wraith-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 79330,
+   "sha256": "3169ca5e7e3d0cca0bdebc2aa4f5eeccff4b60854ee167dcceeec3ff82a0ef57",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "014_superego-inquisitor",
+   "enemies": [
+    "c106-e2"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0082MV 추가1 014_superego-inquisitor/superego-inquisitor-walk-up.png",
+   "sourceSha256": "92a3363fd4866dc4ceac3377f05c6a800344d717bb2ffa7565d56aac28eb28da",
+   "toneGain": [
+    0.854,
+    0.853,
+    0.807
+   ],
+   "path": "assets/r1024/move/superego-inquisitor-up.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 39728,
+   "sha256": "070f63b5c7f086154fd799533666e61dd136260074cd263e67ae3efb6e441e0a",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "046 discarded-delicacy · M051 wrath_fire_beast",
+   "applied": false,
+   "why": "Dots r3 대기(드라이브·Dots 스레드 심사 미통과 또는 미도착)"
+  }
+ ]
+}

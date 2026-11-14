@@ -1,0 +1,203 @@
+{
+ "h102-t1": {
+  "zone": "hando02",
+  "name": "무명 검흔",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 27,
+    "settled": {
+     "still": 14
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 25,
+    "settled": {
+     "down": 13
+    },
+    "frames": "0123",
+    "vis": [
+     76
+    ]
+   },
+   "up": {
+    "n": 26,
+    "settled": {
+     "busy": 5,
+     "up": 8
+    },
+    "frames": "0123",
+    "vis": [
+     76
+    ]
+   },
+   "right": {
+    "n": 24,
+    "settled": {
+     "no-side": 12
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 23,
+    "settled": {
+     "busy": 12
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 221,
+    "swapped": 34,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "b03-g1": {
+  "zone": "ep1b03",
+  "name": "질투로 얼룩진 망령",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 27,
+    "settled": {
+     "still": 14
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 25,
+    "settled": {
+     "down": 13
+    },
+    "frames": "0123",
+    "vis": [
+     68
+    ]
+   },
+   "up": {
+    "n": 24,
+    "settled": {
+     "busy": 4,
+     "up": 8
+    },
+    "frames": "0123",
+    "vis": [
+     68
+    ]
+   },
+   "right": {
+    "n": 25,
+    "settled": {
+     "no-side": 13
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 24,
+    "settled": {
+     "busy": 12
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 183,
+    "swapped": 34,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "c106-e2": {
+  "zone": "cult06",
+  "name": "기계재판 연결자",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 23,
+    "settled": {
+     "still": 12
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 21,
+    "settled": {
+     "down": 11
+    },
+    "frames": "0123",
+    "vis": [
+     81
+    ]
+   },
+   "up": {
+    "n": 26,
+    "settled": {
+     "busy": 5,
+     "up": 8
+    },
+    "frames": "0123",
+    "vis": [
+     81
+    ]
+   },
+   "right": {
+    "n": 24,
+    "settled": {
+     "no-side": 12
+    },
+    "frames": "",
+    "vis": []
+   },
+   "left": {
+    "n": 24,
+    "settled": {
+     "busy": 12
+    },
+    "frames": "",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 158,
+    "swapped": 30,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "lastError": null
+  },
+  "errs": []
+ }
+}
