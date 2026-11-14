@@ -73,6 +73,28 @@
 
 새로 받은 파일·새 파생본은 없다(모두 이미 게임에 있는 자산).
 
+## R843 — 임시 그림을 Dots 그림으로(2026-11-14)
+
+Dots CX-0076QN(불면귀 마을)·CX-0077SN(사몽·의목사A) 결과(프로젝트 파일 `dots-results/cx0098dn-npc`, 이미지 7분야 심사 7.86~8.07)를 붙였다. 파생은 `scripts/r843-npc-art.py`(첫 칸 발 무게중심을 칸 가운데로, 밝기 ×1.2·대비 ×1.05, R792 와 같은 방법). 서 있기 시트는 한 칸짜리 아틀라스가 아니라 6칸이라 `dots(파일,칸,발y,보이는 키,배율)` 로 칸·발 기준점을 따로 준다.
+
+| 원본(Dots) | 게임 경로 | 인물·용도 | 칸·발 기준 |
+|---|---|---|---|
+| CX-0076QN 1a 어부 서 있기 6칸 · 흉상 | assets/r843/fisher-idle6.webp · fisher-bust.webp | last302 잠들지 못한 어부 | 256 · (128,236) |
+| CX-0076QN 1b 약방 아낙 서 있기 6칸 · 흉상 | assets/r843/herbwife-idle6.webp · herbwife-bust.webp | last303 약방 아낙 | 256 · (128,235) |
+| CX-0076QN 2a 오염 기운 8칸 | assets/r843/aura-loop8.webp | 악에 물든 조형물 발치(모든 부수기 곁일) | 256 · (130,236) |
+| CX-0076QN 3a~3d 단서 아이콘 | assets/r843/clue-talisman·lantern·signpost·skystone.webp | last302·303·304·305 떨어진 단서 | 128 |
+| CX-0077SN N1 지현 | assets/r843/jihyeon-idle6.webp | sz115-S05-1 지현의 잔영 | 384 · (192,352) |
+| CX-0077SN N2 바 직원 | assets/r843/barstaff-idle6.webp | sz115-S05-1 곁 인물 '낯선 점원의 잔영'(정본 r448 "낯선 점원이 내 앞에 차가운 잔을 내려놓았다.") | 384 · (192,352) |
+| CX-0077SN N3 상관 | assets/r843/superior-idle6.webp | sz115-S05-3 상관의 잔영 | 384 · (192,352) |
+| CX-0077SN P1 신문 더미 | assets/r843/extra-newspaper.webp | sz115-S05-3 인장이 찍힌 호외 | 384 |
+| CX-0077SN N4 간호사 · N5 의사 | assets/r843/nurse-idle6.webp · doctor-idle6.webp | ep1a08 간호사 · 곁 인물 의사 | 384 · (192,352) |
+| CX-0077SN N6 의료 지원반의 그녀(앉은 자세) | assets/r843/her-seated-idle6.webp | sz115-S06-2 기다리던 그녀(플라스틱 의자) | 384 · (192,352), 배율 1.09 |
+| CX-0077SN N7 저항군 부대원 | assets/r843/garrison-idle6.webp | sz115-S06-3 수비대원의 잔영 | 384 · (192,352) |
+| CX-0077SN N10 어린 자신 | assets/r843/young-self-idle6.webp | sz115-S06-22 젊은 날의 나 | 384 · (192,352) |
+
+아직 임시: 꾸러미를 든 그녀(S06-15)·엄호하는 그녀(S06-18)는 N6 이 앉은 자세라 맞지 않고, 어린 동생(N8)은 Dots 미도착, 처음 약을 쓰던 나의 잔영(ep1a10)은 요청에 없었다. 쓰지 않은 것: N9 벙커 노인·P2 배양조 기록함(그 장면의 곁일이 없음 — 계획에서 뺐다).
+받은 PNG 의 해시는 묶음의 SHA256.txt(Dots 원본 기준)와 다르다(옮기면서 다시 저장된 것으로 보임, 크기·칸은 같음). 파생 스크립트 출력에 지금 파일 해시를 남긴다.
+
 ## 더하는 법
 
 `DEFS[지역]={episode, npc:{kind,name,label,sub,sprite,body,lore(정본 문장)}, quest:{type:'purge'|'kill', …}, clue:{title,text(정본 문장)}}`.
