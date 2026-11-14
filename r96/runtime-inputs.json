@@ -9710,7 +9710,19 @@
     "assets/r1017/x1017-gate.webp",
     "assets/r1017/x1017-candles.webp",
     "assets/r1017/x1017-bed.webp",
-    "assets/r1017/x1017-veiled-king.webp"
+    "assets/r1017/x1017-veiled-king.webp",
+    "assets/r1020/x1020-clock-n.webp",
+    "assets/r1020/x1020-clock-w.webp",
+    "assets/r1020/x1020-gbed-n.webp",
+    "assets/r1020/x1020-gbed-w.webp",
+    "assets/r1020/x1020-gcab-n.webp",
+    "assets/r1020/x1020-gcab-w.webp",
+    "assets/r1020/x1020-rock-n.webp",
+    "assets/r1020/x1020-rock-w.webp",
+    "assets/r1020/x1020-wchair-n.webp",
+    "assets/r1020/x1020-wchair-w.webp",
+    "assets/r1020/x1020-wheel-n.webp",
+    "assets/r1020/x1020-wheel-w.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -10785,5 +10797,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "ba6797e209cd59554f610476f01a2f6a22b1cdd14369b81f666c8fb1a4ad8e18"
+  "runtimeManifestSHA256": "6320892a07f0b930fbe75e30c43ed3402db0d862cdf913c321a81e6c52c3ca63"
 }

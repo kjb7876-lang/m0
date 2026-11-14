@@ -77,7 +77,19 @@ const ART=Object.freeze(/*ART*/{
  reliq:{path:'assets/world-r80/r80-065.webp',h:71,face:'s',ang:'pole',up:0.006,d:0.8,r:[-0.622,0.622,0,1.459],m:'00100003000078001f8003bc003fc003fe007ff007ff00fff00fff80fffc1fffc1fffc1fffc3fffc3fffe3fffe7fffffffffffff25ffc00ff8007f0003c0003c0003c0001800'},
  veiledking:{path:'assets/r1017/x1017-veiled-king.webp',h:118,face:'n',ang:'iso',flat:true,ft:[-0.917,0.917,0.141],r:[-0.923,0.923,0,2.454],m:'01c0001c0003c0003c0003c0003c0007c0007e0007e0007f0007e0007e000fe000fe000ff001bf701fffe3ffff7ffffffffffffffffffffffff63aff063fe003fe007f8007e0'},
  candles:{path:'assets/r1017/x1017-candles.webp',h:66,face:'s',ang:'pole',d:0.6,r:[-0.708,0.708,0,1.373],m:'000000001000018000990019900199001bb401bb401bb423bb42bf342b7f42bfe428fe4387ec1c30c0e3000830008300081001810018100001000010000380007c0007c00078'},
- rustbed:{path:'assets/r1017/x1017-bed.webp',h:96,face:'n',ang:'iso',flat:true,ft:[-1.012,1.012,-0.4],r:[-1.017,1.017,0,1.997],m:'00030000480004600042000410004100041000610004100061001d90034500c4301843c2007bc01998031ec061e4180fa3009ec008f800870000200002000020000200000000'}
+ rustbed:{path:'assets/r1017/x1017-bed.webp',h:96,face:'n',ang:'iso',flat:true,ft:[-1.012,1.012,-0.4],r:[-1.017,1.017,0,1.997],m:'00030000480004600042000410004100041000610004100061001d90034500c4301843c2007bc01998031ec061e4180fa3009ec008f800870000200002000020000200000000'},
+ gbed:{path:'assets/r1020/x1020-gbed-n.webp',h:124,face:'n',ang:'iso',flat:true,ft:[-1.242,1.242,-0.238],pair:'gbedW',r:[-1.242,1.242,0,2.579],m:'0000000000000000000000100001c0001e0001f1001fd001ff001ff003ff007ff80fff81fffc7fffffffffffffffffffffffffffeffff8ffff03ffc00ff8007e0001c0000800'},
+ gbedW:{path:'assets/r1020/x1020-gbed-w.webp',h:125,face:'w',ang:'iso',flat:true,ft:[-1.252,1.252,0.234],pair:'gbed',r:[-1.252,1.252,0,2.6],m:'000000000000000000000080003800078001f800bf800ff800ff800ff800ffe00fff01fff81fffe3ffff7fffffffffffffff7ffff1ffff0ffff03ffc01ff0007e00038000100'},
+ gcab:{path:'assets/r1020/x1020-gcab-n.webp',h:108,face:'n',ang:'iso',flat:true,ft:[-0.725,0.702,0.202],pair:'gcabW',r:[-0.725,0.725,0,2.246],m:'038000fe003ff80ffff07fffc7ffff7fffffffff7ffff7ffff7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff4ffff03fff00fff003f0000c000080'},
+ gcabW:{path:'assets/r1020/x1020-gcab-w.webp',h:108,face:'w',ang:'iso',flat:true,ft:[-0.702,0.725,-0.208],pair:'gcab',r:[-0.725,0.725,0,2.246],m:'001c0007f001ffc0ffff3fffeffffeffffefffffffffeffffeffffefffffffffffffffffffffffffffffffffffffffffffffffffffffffffff2fffc0fff000fc000300001000'},
+ clock:{path:'assets/r1020/x1020-clock-n.webp',h:132,face:'n',ang:'iso',flat:true,ft:[-0.411,0.447,0],pair:'clockW',r:[-0.461,0.461,0,2.745],m:'01fe01fff8ffffc3ffff3fffc3fffc3fffc3fffc3fffc1fffe1fffc1fffc1fffc1fffc1fffc1fffc1fffc1fffc1fffc1fffc3fffc3fffe3fffe3fffe3fffe7fffe07ffe007e0'},
+ clockW:{path:'assets/r1020/x1020-clock-w.webp',h:132,face:'w',ang:'iso',flat:true,ft:[-0.447,0.411,-0.15],pair:'clock',r:[-0.461,0.461,0,2.745],m:'07f801fff83ffffffffc3fffc3fffc3fffc3fffc3fffc7fff83fff83fff83fff83fff83fff83fff83fff83fff83fff83fff83fffc7fffc7fffc7fffc7fffc7fffe7ffe007e00'},
+ rock:{path:'assets/r1020/x1020-rock-n.webp',h:74,face:'n',ang:'iso',flat:true,ft:[-0.571,0.571,-0.088],pair:'rockW',r:[-0.571,0.571,0,1.539],m:'00300003c0003f0000fc0007c0026c00a6807ec83f2c8082d00b2d80b2f00bef007ff01fff03ffe03ffe02fff13ff932cf1243c1647c0c7c408e041800470004c000f8000e00'},
+ rockW:{path:'assets/r1020/x1020-rock-w.webp',h:74,face:'w',ang:'iso',flat:true,ft:[-0.573,0.573,0.066],pair:'rock',r:[-0.573,0.573,0,1.539],m:'00c0003c000fc003e0003e4003640016700167e01347c0b4101b4901f4d00f7c00ffe00fff807ffc07ffc8fff4c9ffc48f34683c2303e21023e182070e2000320001f0000700'},
+ spin:{path:'assets/r1020/x1020-wheel-n.webp',h:80,face:'n',ang:'iso',flat:true,ft:[-0.548,0.496,0.009],pair:'spinW',r:[-0.613,0.613,0,1.664],m:'00000038000ffd01d3f0357f0759f16bb7a47f3eff13c8fb7cbfffccffe49bfc4ebf84cbf0473e043fc0403404054040f41c09ffc1ff807fd0043e0001c0001c000120000200'},
+ spinW:{path:'assets/r1020/x1020-wheel-w.webp',h:80,face:'w',ang:'iso',flat:true,ft:[-0.609,0.635,0.039],pair:'spin',r:[-0.635,0.635,0,1.664],m:'04000047c00cee01cd70fdd58fdbd87ddec7cbe4fe9fe1fff21fffa17ff61bffa19fde08fde087fe083fc08128081380c1dc0e18c07f06033ff01ffe00f80006000070000300'},
+ chair3:{path:'assets/r1020/x1020-wchair-n.webp',h:68,face:'n',ang:'iso',flat:true,ft:[-0.602,0.595,-0.18],pair:'chair3W',r:[-0.602,0.602,0,1.414],m:'00200004000060000f8000fc802ff00eff018ff023fe00ffe03ffe03ffe07ffee7ffff7fff14ffe14bfe15bff96fef9479f3401f2c0fc6c09c4c187801830018000380003000'},
+ chair3W:{path:'assets/r1020/x1020-wchair-w.webp',h:68,face:'w',ang:'iso',flat:true,ft:[-0.597,0.604,0.153],pair:'chair3',r:[-0.604,0.604,0,1.414],m:'00400002000060001f0013f000ff400ff700ff1807fcc07ff007ffc07ffc77ffeffffe8fffe87ff287fd29ffda9fff6cf9e24f10263707239031e1830c18000180001c0000c0'}
 }/*ART*/);
 const sampMemo=new Map();
 // 불투명 칸 → 발 기준 3D 점 [dx,dy,z] — 조형물 그림은 발을 지나 카메라를 향해 서고 위로 갈수록 뒤(-x·-y)로 30° 눕는 판(R412·R521 과 같은 식)
@@ -178,17 +190,26 @@ const G=Object.freeze({
  shrine:{w:2.9,lim:{king:1,candles:1},it:[['veiledking',.95],['candles',2.25]]},
  candle1:{w:1.4,lim:{candles:1},it:[['candles',.7]]},
  rustIv:{w:2.25,it:[['rustbed',.62],['iv',1.75]]},
+ // R1020 부분 쿼터뷰(사용자 2026-11-14 "보는각도따라 부분쿼터뷰", 추천 6개): 북벽용·서벽용 두 방향 렌더 짝(pair) — seat() 가 벽에 맞는 쪽을 고른다(뒤집지 않음)
+ gbed1:{w:1.9,lim:{bed:1},it:[['gbed',.75]]},
+ gbed2:{w:3.6,lim:{bed:2},it:[['gbed',.75],['gbed',2.55]]},
+ cab3:{w:1.6,lim:{gcab:1},it:[['gcab',.8]]},
+ clock1:{w:1.0,lim:{clock:1},it:[['clock',.5]]},
+ rock1:{w:1.3,lim:{rock:1},it:[['rock',.65]]},
+ nook:{w:2.4,lim:{rock:1,clock:1},it:[['rock',.65],['clock',1.85]]},
+ spin1:{w:1.5,lim:{spin:1},it:[['spin',.75]]},
+ chair3g:{w:1.4,lim:{chair3:1},it:[['chair3',.7]]},
  reliq1:{w:1.4,lim:{reliq:1},it:[['reliq',.7]]}
 });
 // 한 방에 같은 물건이 되풀이되지 않게(사용자 2026-11-09 "같은 물건이 같은 간격으로 반복되는 현상은 줄이고"): 묶음의 lim 이 방마다 이 수를 넘으면 그 묶음은 건너뛴다
 //  쓰임새가 lim 을 따로 가지면 그 방에서는 그 수를 쓴다(거울 회랑의 거울, 화구 구획의 화구처럼 되풀이가 그 방의 뜻인 곳)
-const LIMIT=Object.freeze({tv:1,sofa:2,table:1,trash:1,wardrobe:3,fridge:2,bed:3,case:3,chair:3,mirror:1,range:2,shelf:3,flamp:1,steps:1,alarm:1,machine:2,cooler:2,vent:1,kiosk:2,pod:3,vitals:3,tank:1,rig:2,lotus:1,barrier:2,lanterns:1,reliq:1,king:1,candles:1});
+const LIMIT=Object.freeze({tv:1,sofa:2,table:1,trash:1,wardrobe:3,fridge:2,bed:3,case:3,chair:3,mirror:1,range:2,shelf:3,flamp:1,steps:1,alarm:1,machine:2,cooler:2,vent:1,kiosk:2,pod:3,vitals:3,tank:1,rig:2,lotus:1,barrier:2,lanterns:1,reliq:1,king:1,candles:1,clock:1,rock:1,spin:1,gcab:2,chair3:1});
 const fits=(g,cnt,U)=>!g.lim||Object.keys(g.lim).every(k=>(cnt[k]||0)+g.lim[k]<=((U&&U.lim&&U.lim[k])||LIMIT[k]));
 const take=(g,cnt,s)=>{if(g.lim)for(const k in g.lim)cnt[k]=(cnt[k]||0)+s*g.lim[k];};
 // 쓰임새 = [큰 벽 줄(차례로 돌려 가며 채움), 옆 벽 줄, 안쪽 구석 가구, 큰 벽·옆 벽에 놓을 묶음 상한]
 const USE=Object.freeze({
  inject:{main:['treat','cart','treatLamp','ivs','treat','cabCart'],side:['cab2','wheel','cart'],corner:'medcab',cap:[6,3]},
- wait:{main:['seats','seatsTable','seats','wheel'],side:['seats','crutch','wheel'],corner:null,cap:[6,4]},
+ wait:{main:['seats','seatsTable','seats','wheel'],side:['chair3g','seats','crutch','wheel'],corner:null,cap:[6,4]},
  observe:{main:['bedScreen','rustIv','bedMon','bedTray','bedIv'],side:['cabCart','wheel','parked'],corner:'medcab',cap:[6,3]},
  drug:{main:['cab2','cart','cab2','ivs','cab2','cart'],side:['cab2','parked','cab'],corner:'medcab',cap:[6,3]},
  ante:{main:['parked','wheel','crutch'],side:['wheel'],corner:null,cap:[3,1]},
@@ -238,6 +259,12 @@ const USE=Object.freeze({
  bulwark:{main:['barrier2','lantern1','barrier1'],side:['barrier1','lantern1'],corner:null,cap:[3,2],lim:{barrier:4}},
  corehall:{main:['shrine','lotus1','reliq1','lantern1'],side:['reliq1','lantern1'],corner:null,cap:[3,2]},
  narthex:{main:['lantern1','candle1','reliq1'],side:['lantern1','reliq1'],corner:null,cap:[2,1],more:false},
+ // R1020 환도 성(잔혹 동화 성 + 의목사): 병동 = 고딕 침대 줄, 진찰실 = 흔들의자 + 괘종시계 구석·장식장, 준비실 = 물레·장식장, 남쪽 방 = 침대 + 장식장, 북쪽 방·입구 홀 = 괘종시계 하나
+ ward3:{main:['gbed1'],side:['gbed1','cab3'],corner:null,cap:[3,1]},
+ consult3:{main:['nook','cab3','rock1','cab3'],side:['cab3'],corner:null,cap:[2,1],more:false},
+ spinroom:{main:['spin1','cab3'],side:['rock1'],corner:null,cap:[2,1],more:false},
+ chamber:{main:['gbed1','cab3'],side:['rock1'],corner:null,cap:[2,1],more:false},
+ hall3:{main:['clock1'],side:['clock1'],corner:null,cap:[1,0],more:false},
  // 사몽 구역(R731): 식당 = 식탁 줄, 창고 = 장·짐, 서류 창고 = 책장 줄, 상담실 = 소파와 책상
  canteen:{main:['dine','chairs2','dine','wardrobe','dine'],side:['dine','trash','chairs2'],corner:null,cap:[5,3],lim:{table:5,chair:6}},
  depot:{main:['wardrobe2','cases','wardrobe','case1','trash'],side:['wardrobe','cases','case1'],corner:'wardrobe_n',cap:[5,3],lim:{wardrobe:5,case:5}},
@@ -248,6 +275,8 @@ const USE=Object.freeze({
  passage:{main:['trash','case1'],side:[],corner:null,cap:[1,0],min:5,more:false}
 });
 // 지역 → [방 이름, 쓰임새]. 여기에 없는 방(길목·갈림길·마당·보스 전투실·중앙 전투실·입구·다음 구역 문)은 손대지 않는다.
+const RECT_REGIONS=new Set(['hando01','hando02','hando03']);/* R1020: R224 방이 없어 worldR74 사각형으로 방을 읽는 지역 */
+const HANDO=[[/^ward-(west|east)$/,'ward3'],[/^consult-[a-d]$/,'consult3'],[/^preparation(-east|-annex)?$/,'spinroom'],[/^south-[a-d]$/,'chamber'],[/^(north-[a-c]|entry-hall)$/,'hall3']];/* 세 지역이 같은 성 지도 */
 const REGION=Object.freeze({
  ep1a09:[[/주사실/,'inject'],[/처치 대기실/,'wait'],[/관찰실/,'observe'],[/약품 보관실/,'drug'],[/^앞방$/,'ante'],[/^입구$/,'lobby'],[/^길목$/,'hall']],
  ep1b02:[[/거실/,'living'],[/작은 방/,'bedroom'],[/물품 보관실/,'store'],[/현관/,'foyer'],[/^앞방$/,['den','den2','den3']],[/^입구$/,'foyer'],[/^길목$/,'passage']],
@@ -258,6 +287,7 @@ const REGION=Object.freeze({
  murder04:[[/공동 계단/,'stairs'],[/계단참/,'landing'],[/빈 방/,'vacant'],[/^앞방$/,['den','den2','den3']],[/^입구$/,'foyer']],/* 공동 복도·길목은 손대지 않는다 */
  u205:[[/기억의 방/,'memory'],[/기억 전실/,'memhall'],[/닫힌 구획/,'sealed'],[/^앞방$/,'annex'],[/^입구$/,'gate']],/* 빈 복도·길목은 손대지 않는다 */
  u206:[[/연결실/,'link'],[/보호 구획/,'ward'],[/기계 육체실/,'bodies'],[/중앙 이주실/,'transfer'],[/^앞방$/,'annex'],[/^입구$/,'gate']],
+ hando01:HANDO,hando02:HANDO,hando03:HANDO,/* R1020: worldR74 방 사각형(가운데 ± 반폭)으로 꾸민다 — R224 방 없음 */
  cult03:[[/수확실/,'harvest'],[/방벽 구획/,'bulwark'],[/코어 전실/,'corehall'],[/^앞방$/,'narthex'],[/^입구$/,'narthex']]/* 연결 회랑·길목은 손대지 않는다 */
 });
 const SKIP=/보스|전투실|다음 구역|갈림길|순환로|마당|쉼길/;
@@ -279,9 +309,10 @@ const samongUse=(name,k=1)=>pickUse(SAMONG,name,k);
 const roomMemo=new WeakMap();
 function roomsOf(L){let a=roomMemo.get(L);if(a)return a;
  if(smOn(L))a=L.worldR74.rooms.map((q,i)=>q&&(q.kind==='room'||q.kind==='hall')&&fin(q.x+q.y+q.w+q.h)?{id:i,x0:q.x,y0:q.y,x1:q.x+q.w,y1:q.y+q.h,name:String(q.name||'')}:null).filter(Boolean);
- else{const names=new Map((L.worldR74?.rooms||[]).map(q=>[q.id,q.name||q.purpose||'']));a=(L.r224Rooms||[]).map(q=>({id:q.id,x0:q.x0,y0:q.y0,x1:q.x1,y1:q.y1,name:names.get(q.id)||''}));}
+ else{const names=new Map((L.worldR74?.rooms||[]).map(q=>[q.id,q.name||q.purpose||'']));a=Array.isArray(L.r224Rooms)?L.r224Rooms.map(q=>({id:q.id,x0:q.x0,y0:q.y0,x1:q.x1,y1:q.y1,name:names.get(q.id)||''})):
+  (L.worldR74?.rooms||[]).filter(q=>q&&fin(q.x+q.y+q.width+q.depth)&&q.width>0&&q.depth>0).map(q=>({id:q.id,x0:q.x-q.width/2,y0:q.y-q.depth/2,x1:q.x+q.width/2,y1:q.y+q.depth/2,name:String(q.name||'')}));}/* R1020: R224 방이 없는 지역(RECT_REGIONS)은 worldR74 가운데·폭·깊이 */
  roomMemo.set(L,a);return a;}
-const enabled=r=>!!(prefs.on&&r&&r.exploration&&Array.isArray(r.props)&&((r.id!=='ep1b06'&&smOn(r.exploration))||(REGION[r.id]&&(!r.layer||r.layer==='STORY')&&Array.isArray(r.exploration.r224Rooms)&&!r.exploration.samongR103&&!r.exploration.samongR115)));
+const enabled=r=>!!(prefs.on&&r&&r.exploration&&Array.isArray(r.props)&&((r.id!=='ep1b06'&&smOn(r.exploration))||(REGION[r.id]&&(!r.layer||r.layer==='STORY')&&(Array.isArray(r.exploration.r224Rooms)||RECT_REGIONS.has(r.id))&&!r.exploration.samongR103&&!r.exploration.samongR115)));
 const useOf=(id,name,k=1)=>pickUse(REGION[id],name,k);
 const useIn=(r,name,k)=>r.id!=='ep1b06'&&smOn(r.exploration)?samongUse(name,k):useOf(r.id,name,k);
 
@@ -329,7 +360,7 @@ function keepClear(r){const L=r.exploration||{},out=[];
  for(const s of L.starts||[])if(s&&fin(s.x+s.y))out.push([s.x,s.y,3]);
  for(const q of[L.entry,L.entrance,L.gate,r.objective,r.altar])if(q&&fin(q.x+q.y))out.push([q.x,q.y,2.6]);
  const FB=fightOf(L),UB=usedOf(r),sm=smOn(L);if(sm)for(const q of roomsOf(L))out.push([(q.x0+q.x1)/2,(q.y0+q.y1)/2,SM_CENTER]);
- for(const p of r.props)if(p&&(sm||!rests(p,FB,UB))&&p.visible!==false&&!p.r303Hide&&fin(p.x+p.y))out.push([+p.x,+p.y,DOORISH(p)?1.6:KEYISH(p)?1.5:1.1]);
+ for(const p of r.props)if(p&&(sm||!rests(p,FB,UB))&&p.visible!==false&&!p.r303Hide&&fin(p.x+p.y))out.push([+p.x,+p.y,Math.max(DOORISH(p)?1.6:KEYISH(p)?1.5:1.1,RECT_REGIONS.has(r.id)?1.75:0)]);/* R1020 환도 성: 대포·바위 무더기 같은 큰 풍경 조형물이라 둘레를 더 비운다 */
  return out;}
 const sigOf=r=>{let n=0;for(const p of r.props)if(p&&!FURN(p)&&p.visible!==false&&!p.r303Hide)n++;return n;};
 function hitOf(r){const L=r.exploration,E=window.StoryPhase1&&typeof window.StoryPhase1.explorationBlocked==='function'?window.StoryPhase1.explorationBlocked:null;

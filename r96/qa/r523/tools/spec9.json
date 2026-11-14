@@ -1,0 +1,86 @@
+[
+ {
+  "key": "gbed",
+  "src": "assets/r1020/x1020-gbed-n.webp",
+  "face": "n",
+  "pair": "gbedW",
+  "L": 2.1
+ },
+ {
+  "key": "gbedW",
+  "src": "assets/r1020/x1020-gbed-w.webp",
+  "face": "w",
+  "pair": "gbed",
+  "L": 2.1
+ },
+ {
+  "key": "gcab",
+  "src": "assets/r1020/x1020-gcab-n.webp",
+  "face": "n",
+  "pair": "gcabW",
+  "ch": 108
+ },
+ {
+  "key": "gcabW",
+  "src": "assets/r1020/x1020-gcab-w.webp",
+  "face": "w",
+  "pair": "gcab",
+  "ch": 108
+ },
+ {
+  "key": "clock",
+  "src": "assets/r1020/x1020-clock-n.webp",
+  "face": "n",
+  "pair": "clockW",
+  "ch": 132
+ },
+ {
+  "key": "clockW",
+  "src": "assets/r1020/x1020-clock-w.webp",
+  "face": "w",
+  "pair": "clock",
+  "ch": 132
+ },
+ {
+  "key": "rock",
+  "src": "assets/r1020/x1020-rock-n.webp",
+  "face": "n",
+  "pair": "rockW",
+  "ch": 74
+ },
+ {
+  "key": "rockW",
+  "src": "assets/r1020/x1020-rock-w.webp",
+  "face": "w",
+  "pair": "rock",
+  "ch": 74
+ },
+ {
+  "key": "spin",
+  "src": "assets/r1020/x1020-wheel-n.webp",
+  "face": "n",
+  "pair": "spinW",
+  "ch": 80
+ },
+ {
+  "key": "spinW",
+  "src": "assets/r1020/x1020-wheel-w.webp",
+  "face": "w",
+  "pair": "spin",
+  "ch": 80
+ },
+ {
+  "key": "chair3",
+  "src": "assets/r1020/x1020-wchair-n.webp",
+  "face": "n",
+  "pair": "chair3W",
+  "ch": 68
+ },
+ {
+  "key": "chair3W",
+  "src": "assets/r1020/x1020-wchair-w.webp",
+  "face": "w",
+  "pair": "chair3",
+  "ch": 68
+ }
+]

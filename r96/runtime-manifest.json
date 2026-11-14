@@ -6843,6 +6843,66 @@
       "sha256": "8b398bb9c7e4c07943ad38cf5c498d6a0a2d67c5a82eb9d4cf50d3b97524ebeb"
     },
     {
+      "path": "assets/r1020/x1020-clock-n.webp",
+      "bytes": 10498,
+      "sha256": "4a184ec4921a631a1635e49c27bbc4946d6ec4e50a615fe8726602b31e7cc5f4"
+    },
+    {
+      "path": "assets/r1020/x1020-clock-w.webp",
+      "bytes": 10490,
+      "sha256": "2d0131f5cf45a2f1177be5d01050475184c89168d7f4cd699ede0fe7141e9737"
+    },
+    {
+      "path": "assets/r1020/x1020-gbed-n.webp",
+      "bytes": 18976,
+      "sha256": "72a2579e98dc6f94696b6beb1989db10afc203aa77731cacd53a0508b08ba55c"
+    },
+    {
+      "path": "assets/r1020/x1020-gbed-w.webp",
+      "bytes": 17924,
+      "sha256": "47f7bdba1f750237163429047406e085690d40212596651ee1e5c842d399bcd4"
+    },
+    {
+      "path": "assets/r1020/x1020-gcab-n.webp",
+      "bytes": 17396,
+      "sha256": "ab345c0d1a3eff99d2724da9688a5b3e082d193141b8e724832a4d2052bff36d"
+    },
+    {
+      "path": "assets/r1020/x1020-gcab-w.webp",
+      "bytes": 15304,
+      "sha256": "dae3bd33467dd4fbd0db260ce2757ecfbf564e7a5d46204d8cb967a36cc89513"
+    },
+    {
+      "path": "assets/r1020/x1020-rock-n.webp",
+      "bytes": 20158,
+      "sha256": "a9222c2eef55833237691eec36e467a3396d3dabf822b827dad7e4301b8a7e3a"
+    },
+    {
+      "path": "assets/r1020/x1020-rock-w.webp",
+      "bytes": 20574,
+      "sha256": "9084b13076574bf3050041d035f13f07fb601551378d97430632c5610e5b8b88"
+    },
+    {
+      "path": "assets/r1020/x1020-wchair-n.webp",
+      "bytes": 30600,
+      "sha256": "3df2a3f45c155590d3f50b47a1ad44ad56706566cc5c546e9c9322ffb979d6df"
+    },
+    {
+      "path": "assets/r1020/x1020-wchair-w.webp",
+      "bytes": 31680,
+      "sha256": "c95e9a15572606d744481e63b90cc02564af52d6f4b30c43e8b5f691792cf183"
+    },
+    {
+      "path": "assets/r1020/x1020-wheel-n.webp",
+      "bytes": 27622,
+      "sha256": "5db3b97222b88a2f6670b9ff15426e4b447f6095a66f5edf775c69952a702ba9"
+    },
+    {
+      "path": "assets/r1020/x1020-wheel-w.webp",
+      "bytes": 28422,
+      "sha256": "f4f1f6920b97e384099da94def6bc75e5a3318b973ac3da1cf8ec0c569de5327"
+    },
+    {
       "path": "assets/r103/chest-closed.svg",
       "bytes": 2508,
       "sha256": "d3e981852d7785f5749b633ca6f136c5ae378ef0efc7b3562059ceae43bd3e10"
@@ -51919,8 +51979,8 @@
     },
     {
       "path": "rooms-r523.js",
-      "bytes": 82248,
-      "sha256": "ddc878869e8f17930262b8f2075d95eb07efb444ccfe18acbeedc5a98fcae51c"
+      "bytes": 88040,
+      "sha256": "4565d4721409c130d9d5850f32084d264a0c92f3a8595c5bcdbdb4938bd6a28a"
     },
     {
       "path": "root-gate-video-r372.js",
@@ -52503,8 +52563,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10500,
-  "totalBytes": 1288013043,
+  "fileCount": 10512,
+  "totalBytes": 1288268479,
   "webHTMLSha256": "f5716b2bd41308d4cee52720ca6f7120efcf1ab9bc70db939ad39bd56b12d847",
   "largest": [
     {
