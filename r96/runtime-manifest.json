@@ -50838,6 +50838,11 @@
       "sha256": "ac9d4830ab58b165f1031e0086f02ed731416ec9fb78d40a4a0b47d4c8353c68"
     },
     {
+      "path": "boot-lean-r1038.js",
+      "bytes": 2142,
+      "sha256": "67fd27b461c55ff3de66e0b4e484a76960a013a791fd609d911d9405e20d5d5b"
+    },
+    {
       "path": "boss-arena-r431.js",
       "bytes": 13212,
       "sha256": "b69a8451603bf3c840e301651d4a737ceb2a7441854318ba2926aaa7600982ef"
@@ -51999,8 +52004,8 @@
     },
     {
       "path": "hwando-ink-r945.js",
-      "bytes": 39340,
-      "sha256": "a92264edbab2cd7a447b9b86429fd9e05f115fd2efeedbb9b5f7f8b42c84faea"
+      "bytes": 42163,
+      "sha256": "3d325941e18479a44016634468491f4e1ccf98c200aea5fa2c218baa29b9a822"
     },
     {
       "path": "hwando-ink-trace-r1034.js",
@@ -52029,13 +52034,13 @@
     },
     {
       "path": "hwando-w-cross-r348.js",
-      "bytes": 15687,
-      "sha256": "a54b0b774959a664a96db83d56d1c6b251984c5256a1cd826a523a08c856cd20"
+      "bytes": 16921,
+      "sha256": "138c15f8046791617abb38145f03ce298d2e9e40f9dbe09fbe29f56092188eea"
     },
     {
       "path": "index.html",
-      "bytes": 6578740,
-      "sha256": "9a04b72d70a1c94764235f6bafc0ed7ad7b4ca0823a57347c23194b2bff06e9e"
+      "bytes": 6578785,
+      "sha256": "41901ded150069b22f4c3631493a577ccfa36eda9acf7a0e01b3b8338f6c7454"
     },
     {
       "path": "intro-r140.js",
@@ -52629,8 +52634,8 @@
     },
     {
       "path": "quest-r840.js",
-      "bytes": 55614,
-      "sha256": "24da19785ca2c2f40e2a5cc2808f9569f3785a04c422de0e56200a4b69278158"
+      "bytes": 61746,
+      "sha256": "00af3c3510db1cd601e9592868a6ae5fc76360958e818489cd2e53968ffefaad"
     },
     {
       "path": "rally-waves-r905.js",
@@ -53273,9 +53278,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10654,
-  "totalBytes": 1297059297,
-  "webHTMLSha256": "9a04b72d70a1c94764235f6bafc0ed7ad7b4ca0823a57347c23194b2bff06e9e",
+  "fileCount": 10655,
+  "totalBytes": 1297071673,
+  "webHTMLSha256": "41901ded150069b22f4c3631493a577ccfa36eda9acf7a0e01b3b8338f6c7454",
   "largest": [
     {
       "path": "index.html",

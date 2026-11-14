@@ -18,9 +18,9 @@
 //  끄기: localStorage['storyworld.r348.hwandoW']='{"on":false}' (예전 연출로)
 (()=>{'use strict';
 if(window.__STORYWORLD_HWANDO_W_CROSS_R348__)return;
-const REV='R348-hwando-w-cross-4',KEY='storyworld.r348.hwandoW';
+const REV='R348-hwando-w-cross-5',KEY='storyworld.r348.hwandoW';
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
-const CFG=Object.freeze({clones:7,ringWorld:3.15,ringCell:115/384*10/* R292 띠 칸 반지름(px)/칸 → 화면 칸 수 */,cloneScreen:1.42,maxWorld:7.5,enemyScreen:2.7,
+const CFG=Object.freeze({clones:7,fill:true,ringWorld:3.15,ringCell:115/384*10/* R292 띠 칸 반지름(px)/칸 → 화면 칸 수 */,cloneScreen:1.42,maxWorld:7.5,enemyScreen:2.7,
  crossLife:.5,cloneIn:.2,hold:.7,slashLife:.42,splash:1.5,mult:1.25*.45,offset:.85});
 const PAL=Object.freeze({a:Object.freeze([214,222,234]),b:Object.freeze([244,248,255])}),GOLD=Object.freeze({a:Object.freeze([255,198,72]),b:Object.freeze([255,232,170])});
 const stats={casts:0,clones:0,slashes:0,hits:0,damage:0,draws:0,snapshots:0,coopSkipped:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
@@ -49,7 +49,7 @@ function screenBasis(x,y){const q=project(x,y),a=project(x+1,y),b=project(x,y+1)
 function worldFromScreen(B,sx,sy){const [a,b,c,d]=B.m,det=a*d-b*c;if(Math.abs(det)<1e-6)return null;return {x:(d*sx-b*sy)/det,y:(-c*sx+a*sy)/det};}
 const open=(x,y)=>typeof blocked!=='function'||!blocked(x,y,.34,room);
 const line=(a,b)=>typeof clearLine!=='function'||clearLine(a,b,room);
-function pickSpots(o){const B=screenBasis(o.x,o.y),ringPx=CFG.ringCell*unit(),spots=[],sAng=p=>{const q=project(p.x,p.y);return Math.atan2(q.y-B.q.y,q.x-B.q.x);};
+function pickSpots(o,fill=CFG.fill){const B=screenBasis(o.x,o.y),ringPx=CFG.ringCell*unit(),spots=[],sAng=p=>{const q=project(p.x,p.y);return Math.atan2(q.y-B.q.y,q.x-B.q.x);};
  const sdist=p=>{const q=project(p.x,p.y);return Math.hypot(q.x-B.q.x,q.y-B.q.y);};
  // 원 밖(판정 원 3.15칸 밖이고 화면 원 밖) 적 곁: 가까운 적부터, 분신은 적에서 원점 쪽으로 조금 물러선 자리
  let foes=[];try{foes=(typeof liveEnemies==='function'?liveEnemies():[]).filter(e=>{const d=Math.hypot(e.x-o.x,e.y-o.y);return d>CFG.ringWorld+(e.radius||.3)&&d<=CFG.maxWorld&&sdist(e)>ringPx*1.02&&sdist(e)<=ringPx*CFG.enemyScreen&&(typeof damageable3!=='function'||damageable3(e));})
@@ -58,7 +58,15 @@ function pickSpots(o){const B=screenBasis(o.x,o.y),ringPx=CFG.ringCell*unit(),sp
   /* 물러선 자리도 원 밖(판정 3.15칸 + 화면 원)인지 다시 본다 — 아니면 적 자리, 그것도 아니면 건너뜀 */
   const outside=p=>Math.hypot(p.x-o.x,p.y-o.y)>CFG.ringWorld&&sdist(p)>ringPx*1.02;
   const at=[p,{x:e.x,y:e.y}].find(c=>outside(c)&&open(c.x,c.y))||null;if(!at||!line(o,at))continue;const a=sAng(at);if(spots.some(s=>Math.abs(Math.atan2(Math.sin(a-s.ang),Math.cos(a-s.ang)))<.32))continue;spots.push({...at,ang:a,foe:e.id,face:Math.sign(e.x-at.x||1)});}
- // R705c(사용자 2026-11-12 "근거리영웅인경우 적근거리에 분신이 나타났다 사라져야지"): 적이 없는 빈 둘레를 채우던 분신은 없앤다 — 분신은 적 곁에만 서고 피해도 그 적 자리에서만 난다.
+ // R705c(사용자 2026-11-12 "근거리영웅인경우 적근거리에 분신이 나타났다 사라져야지"): 원 밖 적이 있으면 분신은 먼저 그 적 곁에 선다(위).
+ // R1034(사용자 2026-11-14 13:34Z "7방향에 환도분신 나오고 십자가베기 하면서 사라지는 이펙트 그거 멋있었는데 왜 없어짐"): R705c 가 빈 둘레 채우기를 지워
+ //  원 밖 적이 없으면 분신이 하나도 안 나왔다 → 남은 자리는 예전처럼 화면 원 둘레 바깥(반지름 ×1.42)에 고르게 채워 늘 7방향이 되게 되살린다.
+ //  빈 자리 분신의 십자 베기도 반경 1.5칸 스플래시는 그대로(곁에 적이 없으면 피해 없음). 화면 각도 기준(아이소 눌림과 상관없이 원 밖에 서게).
+ if(fill){const start=-Math.PI/2+(spots.length?spots[0].ang+Math.PI/2:0);
+  for(let i=0;i<CFG.clones*3&&spots.length<CFG.clones;i++){const a=start+(i%CFG.clones)*Math.PI*2/CFG.clones+(i>=CFG.clones?(i>=CFG.clones*2?-.22:.22):0);
+   if(spots.some(s=>Math.abs(Math.atan2(Math.sin(a-s.ang),Math.cos(a-s.ang)))<.5))continue;
+   for(const k of [1,.9,1.15,.8]){const R=ringPx*CFG.cloneScreen*k,w=worldFromScreen(B,Math.cos(a)*R,Math.sin(a)*R+H()*.3);if(!w||!fin(w.x)||!fin(w.y))break;const p={x:o.x+w.x,y:o.y+w.y},d=Math.hypot(w.x,w.y);
+    if(d<=CFG.ringWorld+.4||d>CFG.maxWorld||!open(p.x,p.y)||!line(o,p))continue;spots.push({...p,ang:a,foe:null,face:Math.sign(w.x||1)});break;}}}
  return spots.slice(0,CFG.clones);}
 // ---- 시전 ----------------------------------------------------------------------------------------------------
 const casts=[];const seen=new Set();

@@ -9864,6 +9864,7 @@
     "gear-r1032.js",
     "mobile-tier-r1023.js",
     "entry-video-r1036.js",
+    "boot-lean-r1038.js",
     "hwando-ink-trace-r1034.js"
   ],
   "mediaPaths": [
@@ -10939,5 +10940,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "6abe28fef091c4a0087b232e94fdcc77a9de665b72d84a64041b836601534989"
+  "runtimeManifestSHA256": "50ad9a3fd3d6c1c76fb0732dbb42c2837151560cef2bdeb9cd7496ab1cea335f"
 }
