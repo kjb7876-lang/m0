@@ -1,0 +1,401 @@
+{
+ "when": "2026-11-14T14:27:13.052Z",
+ "headless": true,
+ "GPUVerified": false,
+ "naturalPlayVerified": false,
+ "allOk": true,
+ "results": {
+  "hwando": {
+   "checks": [
+    {
+     "ok": true,
+     "m": "EGO 오라가 그려짐(명령 수)",
+     "d": 170
+    },
+    {
+     "ok": true,
+     "m": "EGO 범위 R106 코드 1장 그림 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "영웅색 sig-aura 서로 다른 칸 ≥8",
+     "d": 12
+    },
+    {
+     "ok": true,
+     "m": "발동 sig-gather 소용돌이 칸 ≥3",
+     "d": 5
+    },
+    {
+     "ok": true,
+     "m": "다른 영웅 색 시트 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "그림 좌표 NaN 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "R1039 설치·내부 오류 0",
+     "d": {
+      "errors": 0,
+      "painted": 330,
+      "cut": 0,
+      "last": null
+     }
+    },
+    {
+     "ok": true,
+     "m": "페이지 오류 0",
+     "d": []
+    }
+   ]
+  },
+  "seoha": {
+   "checks": [
+    {
+     "ok": true,
+     "m": "EGO 오라가 그려짐(명령 수)",
+     "d": 168
+    },
+    {
+     "ok": true,
+     "m": "EGO 범위 R106 코드 1장 그림 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "영웅색 sig-aura 서로 다른 칸 ≥8",
+     "d": 12
+    },
+    {
+     "ok": true,
+     "m": "발동 sig-gather 소용돌이 칸 ≥3",
+     "d": 4
+    },
+    {
+     "ok": true,
+     "m": "다른 영웅 색 시트 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "그림 좌표 NaN 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "R1039 설치·내부 오류 0",
+     "d": {
+      "errors": 0,
+      "painted": 324,
+      "cut": 0,
+      "last": null
+     }
+    },
+    {
+     "ok": true,
+     "m": "페이지 오류 0",
+     "d": []
+    }
+   ]
+  },
+  "neon": {
+   "checks": [
+    {
+     "ok": true,
+     "m": "EGO 오라가 그려짐(명령 수)",
+     "d": 170
+    },
+    {
+     "ok": true,
+     "m": "EGO 범위 R106 코드 1장 그림 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "영웅색 sig-aura 서로 다른 칸 ≥8",
+     "d": 12
+    },
+    {
+     "ok": true,
+     "m": "발동 sig-gather 소용돌이 칸 ≥3",
+     "d": 5
+    },
+    {
+     "ok": true,
+     "m": "다른 영웅 색 시트 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "그림 좌표 NaN 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "R1039 설치·내부 오류 0",
+     "d": {
+      "errors": 0,
+      "painted": 308,
+      "cut": 0,
+      "last": null
+     }
+    },
+    {
+     "ok": true,
+     "m": "페이지 오류 0",
+     "d": []
+    }
+   ]
+  },
+  "michaela": {
+   "checks": [
+    {
+     "ok": true,
+     "m": "EGO 오라가 그려짐(명령 수)",
+     "d": 170
+    },
+    {
+     "ok": true,
+     "m": "EGO 범위 R106 코드 1장 그림 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "영웅색 sig-aura 서로 다른 칸 ≥8",
+     "d": 12
+    },
+    {
+     "ok": true,
+     "m": "발동 sig-gather 소용돌이 칸 ≥3",
+     "d": 5
+    },
+    {
+     "ok": true,
+     "m": "다른 영웅 색 시트 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "그림 좌표 NaN 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "R1039 설치·내부 오류 0",
+     "d": {
+      "errors": 0,
+      "painted": 314,
+      "cut": 0,
+      "last": null
+     }
+    },
+    {
+     "ok": true,
+     "m": "페이지 오류 0",
+     "d": []
+    }
+   ]
+  },
+  "lauren": {
+   "checks": [
+    {
+     "ok": true,
+     "m": "EGO 오라가 그려짐(명령 수)",
+     "d": 170
+    },
+    {
+     "ok": true,
+     "m": "EGO 범위 R106 코드 1장 그림 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "영웅색 sig-aura 서로 다른 칸 ≥8",
+     "d": 12
+    },
+    {
+     "ok": true,
+     "m": "발동 sig-gather 소용돌이 칸 ≥3",
+     "d": 5
+    },
+    {
+     "ok": true,
+     "m": "다른 영웅 색 시트 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "그림 좌표 NaN 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "R1039 설치·내부 오류 0",
+     "d": {
+      "errors": 0,
+      "painted": 322,
+      "cut": 0,
+      "last": null
+     }
+    },
+    {
+     "ok": true,
+     "m": "페이지 오류 0",
+     "d": []
+    }
+   ]
+  },
+  "hunter": {
+   "checks": [
+    {
+     "ok": true,
+     "m": "EGO 오라가 그려짐(명령 수)",
+     "d": 168
+    },
+    {
+     "ok": true,
+     "m": "EGO 범위 R106 코드 1장 그림 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "영웅색 sig-aura 서로 다른 칸 ≥8",
+     "d": 12
+    },
+    {
+     "ok": true,
+     "m": "발동 sig-gather 소용돌이 칸 ≥3",
+     "d": 4
+    },
+    {
+     "ok": true,
+     "m": "다른 영웅 색 시트 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "그림 좌표 NaN 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "R1039 설치·내부 오류 0",
+     "d": {
+      "errors": 0,
+      "painted": 328,
+      "cut": 0,
+      "last": null
+     }
+    },
+    {
+     "ok": true,
+     "m": "페이지 오류 0",
+     "d": []
+    }
+   ]
+  },
+  "slayer": {
+   "checks": [
+    {
+     "ok": true,
+     "m": "EGO 오라가 그려짐(명령 수)",
+     "d": 168
+    },
+    {
+     "ok": true,
+     "m": "EGO 범위 R106 코드 1장 그림 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "영웅색 sig-aura 서로 다른 칸 ≥8",
+     "d": 12
+    },
+    {
+     "ok": true,
+     "m": "발동 sig-gather 소용돌이 칸 ≥3",
+     "d": 4
+    },
+    {
+     "ok": true,
+     "m": "다른 영웅 색 시트 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "그림 좌표 NaN 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "R1039 설치·내부 오류 0",
+     "d": {
+      "errors": 0,
+      "painted": 326,
+      "cut": 0,
+      "last": null
+     }
+    },
+    {
+     "ok": true,
+     "m": "페이지 오류 0",
+     "d": []
+    }
+   ]
+  },
+  "gunner": {
+   "checks": [
+    {
+     "ok": true,
+     "m": "EGO 오라가 그려짐(명령 수)",
+     "d": 170
+    },
+    {
+     "ok": true,
+     "m": "EGO 범위 R106 코드 1장 그림 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "영웅색 sig-aura 서로 다른 칸 ≥8",
+     "d": 12
+    },
+    {
+     "ok": true,
+     "m": "발동 sig-gather 소용돌이 칸 ≥3",
+     "d": 5
+    },
+    {
+     "ok": true,
+     "m": "다른 영웅 색 시트 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "그림 좌표 NaN 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "R1039 설치·내부 오류 0",
+     "d": {
+      "errors": 0,
+      "painted": 328,
+      "cut": 0,
+      "last": null
+     }
+    },
+    {
+     "ok": true,
+     "m": "페이지 오류 0",
+     "d": []
+    }
+   ]
+  }
+ }
+}

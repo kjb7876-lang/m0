@@ -51683,6 +51683,11 @@
       "sha256": "c924228f95ce8b22109b1b5a43c6fbeb9a8f6aaff057bd8c374593c00ec8d90f"
     },
     {
+      "path": "ego-paint-r1039.js",
+      "bytes": 8528,
+      "sha256": "abf73915c9990c95b9552e971310311876c2c78c8b629276afe846e4bc13cd96"
+    },
+    {
       "path": "ego-restore-health-r79.js",
       "bytes": 1215,
       "sha256": "ff8cbdd5af4146ffe677acf229d85897144d5f61061d981f02ecf4478d208b63"
@@ -52089,8 +52094,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6578924,
-      "sha256": "fd65055972763113e0c8fcfa7bffe8135ed59e98b6e2b4c10f380bced97a260d"
+      "bytes": 6578969,
+      "sha256": "1d7ada494593ee0958ba58f3c7ade8335e904983b68421fb0fa8b7eff42c7984"
     },
     {
       "path": "intro-r140.js",
@@ -53333,9 +53338,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10666,
-  "totalBytes": 1297739608,
-  "webHTMLSha256": "fd65055972763113e0c8fcfa7bffe8135ed59e98b6e2b4c10f380bced97a260d",
+  "fileCount": 10667,
+  "totalBytes": 1297748181,
+  "webHTMLSha256": "1d7ada494593ee0958ba58f3c7ade8335e904983b68421fb0fa8b7eff42c7984",
   "largest": [
     {
       "path": "index.html",
