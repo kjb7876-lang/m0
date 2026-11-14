@@ -51998,6 +51998,11 @@
       "sha256": "a92264edbab2cd7a447b9b86429fd9e05f115fd2efeedbb9b5f7f8b42c84faea"
     },
     {
+      "path": "hwando-ink-trace-r1034.js",
+      "bytes": 10254,
+      "sha256": "da380c35d4e375c05c2e6fc4d9f4dc6b29fa96efa6bb5149ff6f27165b35dbdc"
+    },
+    {
       "path": "hwando-r242.js",
       "bytes": 12495,
       "sha256": "d590b8a16d4b6651e91ffb7eebe35aeacc8e77a6f33503f9cf04aced0a828d27"
@@ -52024,8 +52029,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6578641,
-      "sha256": "c0ba81c674524e1afee9803106af6f58280788e9fa0081a6a4ef8aa475f2020c"
+      "bytes": 6578693,
+      "sha256": "3451b1ef06922c3a29b1947a3400aecc71418e7cab4022a10c92c2ea6da99db5"
     },
     {
       "path": "intro-r140.js",
@@ -53263,9 +53268,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10652,
-  "totalBytes": 1297039659,
-  "webHTMLSha256": "c0ba81c674524e1afee9803106af6f58280788e9fa0081a6a4ef8aa475f2020c",
+  "fileCount": 10653,
+  "totalBytes": 1297049965,
+  "webHTMLSha256": "3451b1ef06922c3a29b1947a3400aecc71418e7cab4022a10c92c2ea6da99db5",
   "largest": [
     {
       "path": "index.html",
