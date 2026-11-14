@@ -51274,8 +51274,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6578218,
-      "sha256": "51e36763e64b89c2497e1bda92b35d076357bfb393c9d51a631771526ded1e27"
+      "bytes": 6578263,
+      "sha256": "5641ffc85689ea387a14de71d2edfe289dc7cd2a24fe00040d0f59cb96b9ada0"
     },
     {
       "path": "intro-r140.js",
@@ -52054,8 +52054,13 @@
     },
     {
       "path": "sfx-mix-r993.js",
-      "bytes": 14870,
-      "sha256": "b5b40b34d00700ac7f0d99cfd308b8fc749807892834e9f631796b3976f69fd1"
+      "bytes": 15449,
+      "sha256": "e7302f7d608cf700a621cd6f62a88b2131e54e536893f8ecf140b685328991dd"
+    },
+    {
+      "path": "sfx-punch-r1026.js",
+      "bytes": 11980,
+      "sha256": "b0153ef5fb504d72df775e3c8e42c27b2f1952c18dd19132a6019ae52f2fc4dc"
     },
     {
       "path": "sfx-r541.js",
@@ -52478,9 +52483,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10495,
-  "totalBytes": 1287887225,
-  "webHTMLSha256": "51e36763e64b89c2497e1bda92b35d076357bfb393c9d51a631771526ded1e27",
+  "fileCount": 10496,
+  "totalBytes": 1287899829,
+  "webHTMLSha256": "5641ffc85689ea387a14de71d2edfe289dc7cd2a24fe00040d0f59cb96b9ada0",
   "largest": [
     {
       "path": "index.html",
