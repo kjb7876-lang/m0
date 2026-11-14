@@ -19,7 +19,7 @@
 //  끄기: localStorage storyworld.r444.face {"on":false}.
 (()=>{'use strict';
 if(window.__STORYWORLD_ENEMY_FACE_R444__)return;
-const REV='R444-face-7+R702',KEY='storyworld.r444.face';
+const REV='R444-face-8+R702+R1028',KEY='storyworld.r444.face';
 let prefs={on:true,debug:false,shadows:false};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={updates:0,spawns:0,jumps:0,turns:0,attackLocks:0,draws:0,owner:{},errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0;
@@ -27,7 +27,11 @@ const P=()=>{try{return typeof player==='object'&&player?player:null;}catch(_){r
 const num=(v,d)=>Number.isFinite(Number(v))?Number(v):d;
 const S=new WeakMap();
 // 판정과 같은 각도: 근접 = e.attack.angle(meleeFootprint154 가 쓰는 값), 원거리 = rangedAim(투사체 방향), R61 동작 = a.angle(추적형은 R61 이 갱신).
-function atkAngle(e){const a=e.attack;if(a&&Number.isFinite(a.angle))return{g:a.angle,k:'melee'};if(e.rangedWindup>0&&Number.isFinite(e.rangedAim))return{g:e.rangedAim,k:'ranged'};
+// R1028(사용자 2026-11-14 "보스들 이미지 좌우바뀌면서 갈팡질팡하는거 보라검천사같이 하는거 개선"): 엔진 drawEnemy 는 이야기 공격 자세 창(storyAttackUntil5)에서
+//  그리는 동안만 e.attack={angle:0, storyWorldPose5:true} 가짜를 꽂는다(자세 칸 고르기용, 판정 아님). 이 각 0(화면 오른쪽)을 판정 각으로 믿으면
+//  그리기 안에서만 좌우가 오른쪽으로 잠겼다가 다음 프레임 조준 각으로 되돌아가 0.05~0.15초 깜빡였다(보라검천사 30초 6번) → 가짜는 각으로 쓰지 않는다.
+const fakeAtk=a=>!!(a&&a.storyWorldPose5);
+function atkAngle(e){const a=e.attack;if(a&&!fakeAtk(a)&&Number.isFinite(a.angle))return{g:a.angle,k:'melee'};if(e.rangedWindup>0&&Number.isFinite(e.rangedAim))return{g:e.rangedAim,k:'ranged'};
  const r=e.r61Action;if(r&&Number.isFinite(r.angle)&&T()<num(r.endAt,-1))return{g:r.angle,k:'r61'};
  // R442 보스 테마 기술 동작(0.9초): 기술이 떨어지는 쪽(theme-fx-r430 castSkill 의 대상 영웅)으로 — 몸 동작·장판 예고와 같은 방향
  let k=null;try{k=window.__STORYWORLD_ENEMY_SKILL_POSE_R442__?.angle?.(e);}catch(_){}if(Number.isFinite(k))return{g:k,k:'skill'};return null;}
