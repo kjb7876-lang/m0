@@ -131,6 +131,11 @@ for(const mob of[false,true]){const T=mob?'폰':'PC';const {doc,sb,flush,ls}=mak
  check('② 이름표 숫자는 유한값으로 거름(NaN 이 그리기에 안 들어감)',/Number\.isFinite\(\+S\.core\.hp\)/.test(sv)&&/Number\.isFinite\(\+st\.max\)/.test(sv));
  let parsed=true,perr='';try{new Function(sv);}catch(e){parsed=false;perr=String(e.message);}check('② survival-r600.js 가 문법 오류 없이 읽힘(이름 겹침 없음)',parsed,perr);
  check('② inspect 에 coreLabel 수·글',/coreLabel:0/.test(sv)&&/lastError,coreLabelText,/.test(sv));}
+// 간이 체력바는 모두 발밑(사용자 2026-11-14 "체력바 다 아래에")
+{const v=fs.readFileSync(path.join(root,'client-source','visual-r90.js'),'utf8'),idx=fs.readFileSync(path.join(root,'runtime-text','index.html'),'utf8'),sv=fs.readFileSync(path.join(root,'client-source','survival-r600.js'),'utf8');
+ check('간이 체력바: R1021 이 켜지면 고른 적의 머리 위 막대(R90)를 그리지 않음',/__STORYWORLD_UI_COMBAT_R1021__\?\.on\?\.\(\)[^]{0,80}if\(under\)\{stats\.targetBarUnder/.test(v));
+ check('간이 체력바: 엔진 몹·보스 막대는 발밑(q.y+8), 고른 적도 포함',/if\(e\.boss\|\|e\.hp<e\.maxHp\|\|e\.id===target\)\{const width=\(e\.boss\?82:44\)\*zoom,barY=q\.y\+8\*zoom/.test(idx));
+ check('간이 체력바: 정화 구슬 막대는 바닥점 아래(top=q.y+ah*.3)',/const top=q\.y\+ah\*\.3;/.test(sv));}
 // 연결
 {const idx=fs.readFileSync(path.join(root,'runtime-text','index.html'),'utf8');
  check('태그 한 번, UI 정리 R1015 바로 뒤',idx.split('"./ui-combat-r1021.js"').length===2&&/<script src="\.\/ui-clean-r1015\.js"><\/script>\n<script src="\.\/ui-combat-r1021\.js"><\/script>/.test(idx));
