@@ -1,0 +1,204 @@
+{
+ "hando02": {
+  "h102-t1|무명 검흔": {
+   "r380/mobs/legacy-m119-nameless-scar-v4-walk-d1.webp|2112,0,192,256|2304x256|free": {
+    "n": 221,
+    "h": [
+     111,
+     111,
+     111
+    ]
+   },
+   "r380/mobs/legacy-m119-nameless-scar-v4-walk-d1.webp|768,0,192,256|2304x256|free": {
+    "n": 222,
+    "h": [
+     111,
+     111,
+     111
+    ]
+   },
+   "r380/mobs/legacy-m119-nameless-scar-v4-walk-d1.webp|1344,0,192,256|2304x256|free": {
+    "n": 252,
+    "h": [
+     111,
+     111,
+     111
+    ]
+   },
+   "r380/mobs/legacy-m119-nameless-scar-v4-walk-d1.webp|1536,0,192,256|2304x256|free": {
+    "n": 230,
+    "h": [
+     111,
+     111,
+     111
+    ]
+   },
+   "r380/mobs/legacy-m119-nameless-scar-v4-walk-d1.webp|960,0,192,256|2304x256|free": {
+    "n": 238,
+    "h": [
+     111,
+     111,
+     111
+    ]
+   },
+   "r380/mobs/legacy-m119-nameless-scar-v4-walk-d1.webp|1728,0,192,256|2304x256|free": {
+    "n": 218,
+    "h": [
+     111,
+     111,
+     111
+    ]
+   },
+   "r380/mobs/legacy-m119-nameless-scar-v4-walk-d1.webp|1152,0,192,256|2304x256|free": {
+    "n": 222,
+    "h": [
+     111,
+     111,
+     111
+    ]
+   },
+   "r380/mobs/legacy-m119-nameless-scar-v4-walk-d1.webp|1920,0,192,256|2304x256|free": {
+    "n": 215,
+    "h": [
+     111,
+     111,
+     111
+    ]
+   },
+   "r380/mobs/legacy-m119-nameless-scar-v4-walk-d1.webp|0,0,192,256|2304x256|free": {
+    "n": 887,
+    "h": [
+     111,
+     111,
+     111
+    ]
+   }
+  }
+ },
+ "ep1b03": {
+  "b03-g1|질투로 얼룩진 망령": {
+   "r380/mobs/jealousy-wraith-v1.webp|0,0,256,256|2048x256|free": {
+    "n": 960,
+    "h": [
+     115,
+     115,
+     115
+    ]
+   },
+   "r380/mobs/jealousy-wraith-v1.webp|768,0,256,256|2048x256|free": {
+    "n": 755,
+    "h": [
+     132,
+     115,
+     132
+    ]
+   },
+   "r380/mobs/jealousy-wraith-v1.webp|512,0,256,256|2048x256|free": {
+    "n": 741,
+    "h": [
+     115,
+     115,
+     115
+    ]
+   },
+   "r380/mobs/jealousy-wraith-v1.webp|256,0,256,256|2048x256|free": {
+    "n": 974,
+    "h": [
+     115,
+     115,
+     115
+    ]
+   },
+   "r380/mobs/jealousy-wraith-v1.webp|1024,0,256,256|2048x256|busy": {
+    "n": 552,
+    "h": [
+     115,
+     115,
+     115
+    ]
+   },
+   "r380/mobs/jealousy-wraith-v1.webp|256,0,256,256|2048x256|busy": {
+    "n": 7,
+    "h": [
+     115,
+     115,
+     115
+    ]
+   },
+   "r380/mobs/jealousy-wraith-v1.webp|0,0,256,256|2048x256|busy": {
+    "n": 4,
+    "h": [
+     115,
+     115,
+     115
+    ]
+   }
+  },
+  "b03-g1|중간보스 · 질투로 얼룩진 망령": {
+   "r380/mobs/jealousy-wraith-v1.webp|256,0,256,256|2048x256|free": {
+    "n": 36,
+    "h": [
+     142,
+     142,
+     142
+    ]
+   },
+   "r380/mobs/jealousy-wraith-v1.webp|512,0,256,256|2048x256|free": {
+    "n": 26,
+    "h": [
+     146,
+     146,
+     146
+    ]
+   },
+   "r380/mobs/jealousy-wraith-v1.webp|768,0,256,256|2048x256|free": {
+    "n": 45,
+    "h": [
+     142,
+     142,
+     142
+    ]
+   },
+   "r380/mobs/jealousy-wraith-v1.webp|0,0,256,256|2048x256|free": {
+    "n": 22,
+    "h": [
+     138,
+     138,
+     138
+    ]
+   },
+   "r380/mobs/jealousy-wraith-v1.webp|1024,0,256,256|2048x256|busy": {
+    "n": 24,
+    "h": [
+     142,
+     142,
+     142
+    ]
+   },
+   "r380/mobs/jealousy-wraith-v1.webp|1280,0,256,256|2048x256|busy": {
+    "n": 75,
+    "h": [
+     146,
+     146,
+     146
+    ]
+   },
+   "r380/mobs/jealousy-wraith-v1.webp|1536,0,256,256|2048x256|busy": {
+    "n": 32,
+    "h": [
+     150,
+     150,
+     150
+    ]
+   },
+   "r380/mobs/jealousy-wraith-v1.webp|1792,0,256,256|2048x256|busy": {
+    "n": 103,
+    "h": [
+     146,
+     146,
+     146
+    ]
+   }
+  }
+ }
+}
