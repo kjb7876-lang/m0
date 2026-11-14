@@ -63,6 +63,7 @@ ok('gate R80 entry registered with finite size, scale and a pivot inside the ima
  Array.isArray(e.frame?.pivot)&&e.frame.pivot.every(Number.isFinite)&&e.frame.pivot[0]>=0&&e.frame.pivot[0]<=e.width&&e.frame.pivot[1]>0&&e.frame.pivot[1]<=e.height&&e.frame.sourceRect?.[2]===e.width&&e.frame.sourceRect?.[3]===e.height;}));
 ok('gate is taller than the hero (1.3–1.7 hero heights)',b.assets[nk('gate')].scale>1.3&&b.assets[nk('gate')].scale<1.7);
 {const g=fs.readFileSync(path.join(R,'runtime-text','assets','r1017','x1017-gate.webp'));ok('gate lifted from the near-black render (file changed from the first cut 188cf890…)',crypto.createHash('sha256').update(g).digest('hex').slice(0,8)!=='188cf890');}
+ok('gate stays out of the R83 selected catalog enumeration (non-enumerable key; qa/r86 active-asset-usage counts 153 there) but is reachable by key',!Object.keys(b.assets).includes(nk('gate'))&&!!b.assets[nk('gate')]&&Object.keys(b.assets).length===Object.keys(freshAssets()).length);
 ok('existing R80 entries untouched',Object.entries(freshAssets()).every(([k,v])=>JSON.stringify(b.assets[k])===JSON.stringify(v)));
 const mine=w=>w.props.filter(p=>p&&p.r449Furniture&&!p.r303Hide);const arts=(w,room)=>mine(w).filter(p=>room==null||p.r449.room===room).map(p=>String(p.r80Art).replace(/^r80-/,''));
 // 계열별 배치 (실제 전수에서 그 공간이 있는 계열만: cult 예배실·긴 회랑, home 보관실, clinic 처치실)
