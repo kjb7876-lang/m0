@@ -879,6 +879,8 @@ jobs:
         run: node r96/qa/r795/r795-cpu-check.cjs
       - name: R821 hero readability on bright patterned floors (foot pool + body outline, rosehouse only) CPU check
         run: node r96/qa/r821/r821-cpu-check.cjs
+      - name: R1030 hero harmony (pale hero exposure toward scene key with readability floor, contact shadow) CPU check
+        run: node r96/qa/r1030/r1030-cpu-check.cjs
       - name: R880 line-art zone cutscenes (SVG, canon captions, game paused, skip, cinema mode) CPU check
         run: node r96/qa/r880/r880-cpu-check.cjs
       - name: R832 region door leaves by map style + Joseon village trees (pine/persimmon) CPU check

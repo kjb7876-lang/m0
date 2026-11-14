@@ -51433,6 +51433,11 @@
       "sha256": "7854103af8f4052d0e317725667899a75425324b8c96bbaab66eaa19f46101ac"
     },
     {
+      "path": "hero-harmony-r1030.js",
+      "bytes": 9403,
+      "sha256": "ba04e3f6121137b41c7f8c52e860a5e3fe9dfc9cc46504494594b6d7a0c1bc42"
+    },
+    {
       "path": "hero-idle-hit-r710.js",
       "bytes": 3966,
       "sha256": "fc624139df7d38a447501471c4ed21eff3663619e8567457525570c3e1bdd04b"
@@ -51614,8 +51619,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6578407,
-      "sha256": "02724a429ed56e9b7a400b046bdd8d89a2f05723bb8df3d3e069e06e373a7fb3"
+      "bytes": 6578455,
+      "sha256": "d59578e8ce873d2b06cd77734248d1ec17d4249d91026a3dfa917fbbe33a9b97"
     },
     {
       "path": "intro-r140.js",
@@ -52833,9 +52838,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10566,
-  "totalBytes": 1289607829,
-  "webHTMLSha256": "02724a429ed56e9b7a400b046bdd8d89a2f05723bb8df3d3e069e06e373a7fb3",
+  "fileCount": 10567,
+  "totalBytes": 1289617280,
+  "webHTMLSha256": "d59578e8ce873d2b06cd77734248d1ec17d4249d91026a3dfa917fbbe33a9b97",
   "largest": [
     {
       "path": "index.html",
