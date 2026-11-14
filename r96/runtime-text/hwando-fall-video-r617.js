@@ -94,7 +94,10 @@ function cue(o){const t=Number(o.video.currentTime)||0,c=o.clip.cues.find(([a,b]
 function watch(o){clearTimeout(o.stall);o.stall=setTimeout(()=>{if(!current(o)||o.ending)return;const t=Number(o.video.currentTime)||0;if(t>o.lastTime+.01){o.lastTime=t;watch(o);return;}close(o,'stall');},STALL_MS);}
 function atEnd(o){if(!current(o)||o.ending)return;o.ending=true;clearTimeout(o.stall);if(o.nm)o.nm.classList.add('on');o.hold=setTimeout(()=>close(o,'ended'),HOLD_MS);}
 // 이 파일보다 뒤에 실린 tick 감싸개(mobile-bonus-r286 의 재사용 대기 회복 등)도 영상 동안 멈추게, 재생할 때 가장 바깥 tick 에 문을 단다(R568 과 같은 방식)
-function gateOuter(){try{if(typeof tick!=='function'||tick===gateFn)return;const outer=tick;const gf=function(...a){if(open){if(here()!==open.room)close(open,'room');else return;}if(closing)return;return outer.apply(this,a);};gateFn=gf;tick=gf;}catch(e){fail(e);}}
+// R1036 입장 영상 먼저(entry-video-r1036): early 로 튼 영상은 로딩이 끝날 때까지 옛 방 위에서 버티고, 다 실리면 그 지역 방을 제 방으로 삼는다(그 밖의 방이면 닫힘).
+function holds(o){if(o.room!==null||!o.early)return here()===o.room;try{if(typeof loading!=='undefined'&&loading)return true;}catch(_){}const h=here();if(h&&h.id===o.clip.zone){o.room=h;return true;}
+ return h===o.from;} // 아직 옛 방이면(바깥 감싸개가 엔진 로딩 전에 기다리는 틈) 버틴다 — 진입이 실패하면 entry-video-r1036 이 닫는다
+function gateOuter(){try{if(typeof tick!=='function'||tick===gateFn)return;const outer=tick;const gf=function(...a){if(open){if(!holds(open))close(open,'room');else return;}if(closing)return;return outer.apply(this,a);};gateFn=gf;tick=gf;}catch(e){fail(e);}}
 function play(id,r,opt={}){const c=byId[id];if(!c||open||typeof document==='undefined')return false;
  if(!opt.force&&(!prefs.on||seen(id)||!eligible(r,c)))return false;if(pending&&pending.id===id)pending=null;
  css();const v=pre[id]||preload(id)||document.createElement('video');delete pre[id];if(!v.src)v.src=url(c.src);
@@ -104,7 +107,7 @@ function play(id,r,opt={}){const c=byId[id];if(!c||open||typeof document==='unde
  root.innerHTML='<div class="chap"></div>'+(c.nameAt!=null?'<div class="name"><small>BOSS</small><b></b></div>':'')+'<div class="cap" aria-live="polite"></div><button type="button" class="skip">건너뛰기 ▸</button><div class="fade"></div>';
  root.querySelector('.chap').textContent=(title?title+' · ':'')+'환도의 기억';const nm=c.nameAt!=null?root.querySelector('.name'):null;if(nm)nm.querySelector('b').textContent=bossName(r);
  root.insertBefore(v,root.firstChild);document.body.appendChild(root);requestAnimationFrame(()=>{root.style.opacity='1';});
- const o=open={clip:c,root,video:v,cap:root.querySelector('.cap'),nm,fade:root.querySelector('.fade'),stall:0,hold:0,events:[],closed:false,ending:false,lastTime:0,text:'',focus:document.activeElement,room:r};
+ const o=open={clip:c,root,video:v,cap:root.querySelector('.cap'),nm,fade:root.querySelector('.fade'),stall:0,hold:0,events:[],closed:false,ending:false,lastTime:0,text:'',focus:document.activeElement,room:opt.early?null:r,early:!!opt.early,from:r};
  const skip=root.querySelector('.skip');stats.plays++;tries[id]=(tries[id]||0)+1;gateOuter();
  const on=(type,fn)=>{const own=e=>{if(current(o))fn(e);};o.events.push([type,own]);v.addEventListener(type,own);};
  try{if(typeof keys!=='undefined'&&keys?.clear)keys.clear();}catch(_){}
@@ -134,7 +137,7 @@ if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async fun
  try{const r=here();if(prefs.on&&!seen('beach')&&eligible(r,byId.beach)){preload('beach');pending={id:'beach',room:r,at:now()};}
   else if(pending&&pending.room!==r)pending=null;
   if(prefs.on&&!seen('knight')&&eligible(r,byId.knight))preload('knight');}catch(e){fail(e);}return out;};}
-if(typeof tick==='function'){const base=tick;tick=function(...a){if(open){if(here()!==open.room)close(open,'room');else return;}if(closing)return;
+if(typeof tick==='function'){const base=tick;tick=function(...a){if(open){if(!holds(open))close(open,'room');else return;}if(closing)return;
  const out=base.apply(this,a);try{poll();}catch(e){fail(e);}return out;};}
 window.__STORYWORLD_HWANDO_FALL_VIDEO_R617__=Object.freeze({revision:REV,KEY,BOSS,CLIPS,
  bgmGain:()=>open?0:1,play:(id='knight',o={})=>play(id,here(),{force:true,...o}),skip:()=>{if(open)close(open,'skip');},preload,poll,want:()=>want(),
