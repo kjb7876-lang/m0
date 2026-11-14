@@ -552,6 +552,8 @@ jobs:
         run: node r96/qa/r1008/r1008-cpu-check.cjs
       - name: R1016 golden/silver custom thread dance (manual G explains why it did not fire, manager says what was done, survival keeps the editor closed) CPU check
         run: node r96/qa/r1016/r1016-cpu-check.cjs
+      - name: R1023 mobile graphics tier (starts at current public settings, steps up on smooth frames and known memory, steps down on slow frames or heap pressure, unclean exit caps the auto tier) CPU check
+        run: node r96/qa/r1023/r1023-cpu-check.cjs
       - name: R1022 auto-move toggle CPU check
         run: node r96/qa/r1022/r1022-cpu-check.cjs
       - name: R1007 samong confront statement markers never overlap (4-marker zones M-1 Michaela, S-04 16th floor were unpassable) CPU check

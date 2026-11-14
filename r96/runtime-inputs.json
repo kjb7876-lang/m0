@@ -9861,7 +9861,8 @@
     "assets/r1029/float/zombie-guardian-knight-bloodied.webp",
     "assets/r1029/float/memory-fragment.webp",
     "assets/r1029/float/mob-paper-figure.webp",
-    "gear-r1032.js"
+    "gear-r1032.js",
+    "mobile-tier-r1023.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -10936,5 +10937,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "1fb8336704d548cfa3828d8bcea180980be135d18cd0e3bb269feb9b5983135d"
+  "runtimeManifestSHA256": "984a01d1ede3356caf670f0d3285466e7b512e21701abdc017a64ce636b12973"
 }
