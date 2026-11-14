@@ -867,5 +867,27 @@
 504
 ],
 "kind": "mist"
+},
+{
+"who": "사몽 · 세뇌당한 기억의 조각",
+"path": "r161/sculpture/memory-fragment.webp",
+"rect": [
+99,
+12,
+292,
+399
+],
+"kind": "hover"
+},
+{
+"who": "사몽 · 종이 형상",
+"path": "r105/drive/mob-paper-figure.webp",
+"rect": [
+8,
+8,
+271,
+405
+],
+"kind": "ghost"
 }
 ]

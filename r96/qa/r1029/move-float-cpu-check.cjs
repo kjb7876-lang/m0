@@ -22,6 +22,8 @@ for(const k of KEYS){const A=ARTS[k],[p,r]=k.split('|');ok(/^assets\/r1029\/floa
  const b=fs.readFileSync(path.join(R,'runtime-text',A.path));ok(b.slice(0,4).toString()==='RIFF'&&b.length<400000,'webp under 400KB '+A.path);}
 ok(KIND.wing>=5&&KIND.ghost>=10&&KIND.mist>=30,'all three treatments are used: '+JSON.stringify(KIND));
 ok(new Set(KEYS.map(k=>ARTS[k].path)).size===KEYS.length,'one sheet per art');
+// 사몽 구역의 한 장짜리 몹 2종(세뇌당한 기억의 조각 · 종이 형상)도 표에 있다
+ok(ARTS['r161/sculpture/memory-fragment.webp|99,12,292,399']?.kind==='hover'&&ARTS['r105/drive/mob-paper-figure.webp|8,8,271,405']?.kind==='ghost','Samong fragment and paper figure are in the table');
 const artOf=k=>{const [p,r]=k.split('|'),rc=r.split(',').map(Number);return {path:p,rect:rc,size:[rc[0]+rc[2],rc[1]+rc[3]]};};
 const mk=(id,k,o)=>({id:id+'#1',nativeId:id,name:id,x:3,y:3,hp:100,maxHp:100,hitTimer:0,state:'chase',__art:artOf(k),...o});
 function frames(c,e,secs,step){const out=[];for(let t=0;t<secs-1e-9;t+=1/30){run(c,'time+=1/30');if(step)step(e,t,out.length);run(c,'ctx.commands.length=0');c.drawEnemy(e);out.push(JSON.parse(JSON.stringify(run(c,'ctx.commands').find(k=>/enemy:/.test(k.key||'')))));}return out;}
