@@ -9871,7 +9871,8 @@
     "assets/r1027/slash-lauren.webp",
     "assets/r1027/slash-neon.webp",
     "assets/r1027/slash-slayer.webp",
-    "hero-paint-r1027.js"
+    "hero-paint-r1027.js",
+    "hero-harmony-r1030.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -10946,5 +10947,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "24b54b8dad8e0b0571c417950ced7e34450b8e1d07fdd609eb903ff0f648b792"
+  "runtimeManifestSHA256": "1063318a556262a78dd849ba698d1a812ee17b643d6126331e4f9e0a3a69231c"
 }
