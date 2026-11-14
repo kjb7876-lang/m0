@@ -119,6 +119,19 @@ const HOOK={'lauren-celestial-r946.js':/stats\.procTotal\+\+;stats\.procs\[kind\
 for(const [f,re] of Object.entries(HOOK)){const s=fs.readFileSync(path.join(CS,f),'utf8');let parsed=true;try{new Function(s);}catch(_){parsed=false;}
  check(`⑥ ${f}: 발동 자리에 R1033 한 줄 + 도우미(오류는 삼킴)`,re.test(s)&&/const C1033=\(h,k,o,x\)=>\{try\{window\.__STORYWORLD_PASSIVE_CUTIN_R1033__\?\.fire\(h,k,o,x\);\}catch\(_\)\{\}\};/.test(s)&&parsed);}
 {const s=fs.readFileSync(path.join(CS,'hwando-ink-r945.js'),'utf8');check('⑥ 환도 삼협묵희 컷인도 같은 끄기를 따름(모듈 없으면 그대로)',/function cutin\(\)\{try\{if\(window\.__STORYWORLD_PASSIVE_CUTIN_R1033__\?\.allow\?\.\('hwando'\)===false\)\{cutStats\.skipped\+\+;return false;\}/.test(s));}
+// ⑧b R1033b(11-14 20:13Z 공개본 재점검): 그림 주소는 본편처럼 urlFor 로 바꿔 넣는다 — 원래 경로(generated-v31224/…)는 공개본에 없어 404 → 기억사수 곁 보스 빈 칸.
+{const e=make();e.sb.urlFor=p=>'blob:'+p;e.api.fire('gunner','summon',e.sb.player,{art:['assets/generated-v31224/actors-normalized/suppression_knight.webp','assets/a/u2.webp']});const f=e.figs();
+ check('⑧b 기억사수 귀환 전우: 곁 보스·주인공 그림 src 가 urlFor 결과',f.filter(v=>v.fig==='boss').map(v=>v.src).join()==='blob:assets/generated-v31224/actors-normalized/suppression_knight.webp,blob:assets/a/u2.webp'&&f.some(v=>v.fig==='main'&&v.src==='blob:assets/r108/heroes/gunner.webp'),JSON.stringify(f));}
+{const e=make();e.sb.urlFor=p=>'blob:'+p;e.api.fire('seoha','arbelia',e.sb.player,{art:['assets/generated-v31224/actors-normalized/arvelia_delay_archon.webp']});const f=e.figs();
+ check('⑧b 서하 아르벨리아: 보스 그림 src 가 urlFor 결과',f.some(v=>v.fig==='boss'&&v.src==='blob:assets/generated-v31224/actors-normalized/arvelia_delay_archon.webp'),JSON.stringify(f));}
+{const e=make();e.sb.urlFor=p=>'blob:'+p;e.api.fire('hunter','squad',e.sb.player,{heroes:['slayer','hunter']});const f=e.figs();
+ check('⑧b 헌터 분대: 슬레이어·분신 초상화도 urlFor 결과',f.filter(v=>v.fig!=='deco').every(v=>v.src.startsWith('blob:assets/r108/heroes/'))&&f.length>=3,JSON.stringify(f));}
+{const e=make();e.sb.urlFor=p=>'blob:'+p;e.api.fire('slayer','lattice',e.sb.player);const d=e.el().all().filter(x=>x.getAttribute('data-fig')==='deco');
+ check('⑧b 시트 칸 배경도 urlFor 결과',d.length===2&&d.every(x=>String(x.style.backgroundImage).includes('blob:assets/r585/slayer-r-cross.webp')),JSON.stringify(d.map(x=>x.style.backgroundImage)));}
+{const e=make();e.sb.urlFor=()=>{throw new Error('x');};e.api.fire('gunner','summon',e.sb.player,{art:['assets/a/u1.webp']});const f=e.figs();
+ check('⑧b urlFor 가 실패하면 원래 경로로(멈추지 않음)',f.some(v=>v.fig==='boss'&&v.src==='assets/a/u1.webp')&&e.api.inspect().shown===1,JSON.stringify(f));}
+{const e=make();const got=[];e.sb.Image=function(){const o={};Object.defineProperty(o,'src',{set:v=>got.push(v),get:()=>''});return o;};e.sb.urlFor=p=>'blob:'+p;e.sb.player.hero='hunter';e.api.warm();
+ check('⑧b 미리 받기도 urlFor 주소로',got.length>0&&got.every(v=>v.startsWith('blob:assets/')),JSON.stringify(got));}
 // ⑦ 그림·연결
 {const man=fs.readFileSync(path.join(root,'runtime-manifest.json'),'utf8');const A7=['seoha','hunter','slayer','michaela','gunner','lauren','neon','hwando'];
  check('⑦ 영웅 선택 창 초상화(assets/r108/heroes) 8장이 배포 목록에 있음 — 컷인은 이 그림을 씀(사용자 13:53Z)',A7.every(h=>man.includes('"assets/r108/heroes/'+h+'.webp"')));

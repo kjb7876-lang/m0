@@ -38,7 +38,7 @@ for(const [h,k] of CASES){let c=null;
  ok(`① ${h} ${k}: 컷인 뜸(발동 순간 on·data-hero)`,c.last&&c.last.hero===h&&c.last.kind===k&&c.onNow&&c.heroNow===h&&f&&f.hero===h,{c,f});
  ok(`① ${h}: 그림 모두 읽힘·크기 있음`,f&&f.out.length>=2&&f.out.every(v=>v.loaded&&v.w>0&&v.h>0),f&&f.out);
  if(h==='hunter')ok('② 헌터: 실제 분대에 슬레이어 → 슬레이어 그림, 헌터 분신 둘',f.out.some(v=>v.fig==='ally'&&v.src.includes('r108/heroes/slayer'))&&f.out.filter(v=>v.fig==='shade').length===2,f.out);
- if(h==='gunner'){const al=await p.evaluate(()=>window.__STORYWORLD_GUNNER_VEIL_R953__.allies().map(a=>a.path));ok('② 기억사수: 컷인 보스 그림 = 실제로 불려 온 기계 보스',f.out.filter(v=>v.fig==='boss').map(v=>v.src).every(s=>al.includes(s))&&f.out.some(v=>v.fig==='boss'),{al,f:f.out});}
+ if(h==='gunner'){const al=await p.evaluate(()=>window.__STORYWORLD_GUNNER_VEIL_R953__.allies().map(a=>a.path));ok('② 기억사수: 컷인 보스 그림 = 실제로 불려 온 기계 보스',f.out.filter(v=>v.fig==='boss').map(v=>decodeURIComponent(v.src).replace(/^\.\//,'').replace(/^assets\/r99\/clean\//,'')).every(s=>al.includes(s))/* R1033b: 주소는 urlFor 결과(공개본 정리본 assets/r99/clean/…) */&&f.out.some(v=>v.fig==='boss'),{al,f:f.out});}
  if(h==='seoha')ok('② 서하: 아르벨리아 그림',f.out.some(v=>v.fig==='boss'&&/arvelia/.test(v.src)),f.out);
  if(shot){await p.waitForFunction(()=>!document.getElementById('r1033Cutin').classList.contains('on'),null,{timeout:20000});await freeze(450);await p.waitForTimeout(400);await p.screenshot({path:`${shot}-${h}.jpg`,quality:86});await thaw();}
  await p.waitForTimeout(1400);}
