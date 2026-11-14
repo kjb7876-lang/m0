@@ -15,7 +15,7 @@
 //  끄기: localStorage['storyworld.r1040.patternFx']='{"on":false}' · 점검: window.__STORYWORLD_BOSS_PATTERN_FX_R1040__.inspect()
 (()=>{'use strict';
 if(window.__STORYWORLD_BOSS_PATTERN_FX_R1040__)return;
-const REV='R1040-pattern-fx-1',KEY='storyworld.r1040.patternFx';
+const REV='R1040-pattern-fx-2',KEY='storyworld.r1040.patternFx';
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const stats={casts:0,suppressed:0,fallback:0,draws:0,capped:0,skippedNaN:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
@@ -80,8 +80,9 @@ function fieldOn(h){return on&&!!window.__STORYWORLD_BOSS_FX_R105__&&[h.x,h.y,h.
 function fieldDraw(h,base){const c=ctx,own={stroke:Object.prototype.hasOwnProperty.call(c,'stroke'),fill:Object.prototype.hasOwnProperty.call(c,'fill')},old={stroke:c.stroke,fill:c.fill};
  let r;try{c.stroke=function(){stats.fieldCode=(stats.fieldCode||0)+1;};c.fill=function(){stats.fieldCode=(stats.fieldCode||0)+1;};r=base();}
  finally{for(const k of ['stroke','fill']){if(own[k])c[k]=old[k];else delete c[k];}}
- try{if(h.age<h.warning){const sh=SHEET.mist,u=clamp(h.age/Math.max(.01,h.warning),0,1),[a,b]=sh.loop,i=a+Math.floor(h.age*sh.fps+(Number.isFinite(+h.id)?+h.id:0))%(b-a),q=project(h.x,h.y),tl=tileLen(h.x,h.y),hh=clamp(h.radius*2.3*tl,8,1200);
-  if([q?.x,q?.y,hh].every(Number.isFinite)){const paint=()=>{ctx.save();try{drawAssetFrame3(sh.path,frameOf(sh,i),q.x,q.y,hh,{alpha:clamp(.45+.4*u,0,DARK_ALPHA),filter:DARK_FILTER});}finally{ctx.restore();}};
+ try{const warn=h.age<h.warning,rem=Number.isFinite(h.life)?h.life-h.age:0,al=warn?clamp(.45+.4*clamp(h.age/Math.max(.01,h.warning),0,1),0,DARK_ALPHA):clamp(DARK_ALPHA*clamp(rem*2,0,1),0,DARK_ALPHA);
+ if(al>0.01){const sh=SHEET.mist,[a,b]=sh.loop,i=a+Math.floor(h.age*sh.fps+(Number.isFinite(+h.id)?+h.id:0))%(b-a),q=project(h.x,h.y),tl=tileLen(h.x,h.y),hh=clamp(h.radius*2.3*tl,8,1200);
+  if([q?.x,q?.y,hh].every(Number.isFinite)){const paint=()=>{ctx.save();try{drawAssetFrame3(sh.path,frameOf(sh,i),q.x,q.y,hh,{alpha:al,filter:DARK_FILTER});}finally{ctx.restore();}};
    if(typeof ctx.scope==='function')ctx.scope({id:'r1040:boss:field:'+h.id,kind:'effect',sourcePath:sh.path,x:h.x,y:h.y,groundAligned:false,lightShadowApproved:true},paint);else paint();stats.fields=(stats.fields||0)+1;}}}catch(e){fail(e);}
  return r;}
 // ── 끼우기 ──
