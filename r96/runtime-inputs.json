@@ -9706,6 +9706,12 @@
     "assets/r1019/move/timeless-silver-scout-up.webp",
     "move-dir-r1019-data.js",
     "ui-clean-r1015.js",
+    "move-dir-r1024-data.js",
+    "assets/r1024/move/jealousy-wraith-down.webp",
+    "assets/r1024/move/jealousy-wraith-up.webp",
+    "assets/r1024/move/m119-nameless-scar-down.webp",
+    "assets/r1024/move/m119-nameless-scar-up.webp",
+    "assets/r1024/move/superego-inquisitor-up.webp",
     "assets/r843/aura-loop8.webp",
     "assets/r843/barstaff-idle6.webp",
     "assets/r843/clue-lantern.webp",
@@ -10798,5 +10804,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "45a9f8382bfffb38f670231ef23bc9767b72ec436c57d3012a61c9b0859d3ced"
+  "runtimeManifestSHA256": "6dda69031ecdb16090e3baa87e2a227dd2e2fd475643babf06055b25c121e0c0"
 }
