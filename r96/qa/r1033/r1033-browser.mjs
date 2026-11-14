@@ -37,7 +37,7 @@ for(const [h,k] of CASES){let c=null;
  const f=await figs();
  ok(`① ${h} ${k}: 컷인 뜸(발동 순간 on·data-hero)`,c.last&&c.last.hero===h&&c.last.kind===k&&c.onNow&&c.heroNow===h&&f&&f.hero===h,{c,f});
  ok(`① ${h}: 그림 모두 읽힘·크기 있음`,f&&f.out.length>=2&&f.out.every(v=>v.loaded&&v.w>0&&v.h>0),f&&f.out);
- if(h==='hunter')ok('② 헌터: 실제 분대에 슬레이어 → 슬레이어 그림, 헌터 분신 둘',f.out.some(v=>v.fig==='ally'&&v.src.includes('slayer-bust'))&&f.out.filter(v=>v.fig==='shade').length===2,f.out);
+ if(h==='hunter')ok('② 헌터: 실제 분대에 슬레이어 → 슬레이어 그림, 헌터 분신 둘',f.out.some(v=>v.fig==='ally'&&v.src.includes('r108/heroes/slayer'))&&f.out.filter(v=>v.fig==='shade').length===2,f.out);
  if(h==='gunner'){const al=await p.evaluate(()=>window.__STORYWORLD_GUNNER_VEIL_R953__.allies().map(a=>a.path));ok('② 기억사수: 컷인 보스 그림 = 실제로 불려 온 기계 보스',f.out.filter(v=>v.fig==='boss').map(v=>v.src).every(s=>al.includes(s))&&f.out.some(v=>v.fig==='boss'),{al,f:f.out});}
  if(h==='seoha')ok('② 서하: 아르벨리아 그림',f.out.some(v=>v.fig==='boss'&&/arvelia/.test(v.src)),f.out);
  if(shot){await p.waitForFunction(()=>!document.getElementById('r1033Cutin').classList.contains('on'),null,{timeout:20000});await freeze(450);await p.waitForTimeout(400);await p.screenshot({path:`${shot}-${h}.jpg`,quality:86});await thaw();}
@@ -52,5 +52,12 @@ for(const [h,k] of CASES){let c=null;
  ok('④ 끄면 슬레이어 컷인 없음',s1.shown===s0&&s1.skipped.off>=1,s1);ok('④ 끄면 환도 삼협묵희 컷인도 없음',hw1.shown===hw0.shown&&hw1.skipped>hw0.skipped,{hw0,hw1});
  await p.evaluate(C+'.set(true)');await p.waitForTimeout(21000);
  const hw2=await p.evaluate(()=>{player.attackCD=0;const a=window.__STORYWORLD_HWANDO_INK_R945__;a.force('trio');basicAttack(true);return a.inspect().cutin;});ok('④ 다시 켜면 환도 컷인 그대로(회귀)',hw2.shown===hw1.shown+1,{hw1,hw2});}
+// ⑥ 사몽 각성 컷인 = 영웅 선택 창 초상화(사용자 13:53Z "특히 기억사수 사몽")
+{const r=await p.evaluate(async()=>{player.hero='gunner';const before=heroArt.gunner.awakening;showAwakening('test');const a=document.getElementById('awakeImage'),b=document.querySelector('#sw8Awakening img'),o=document.getElementById('sw8Awakening');
+  const out={before,after:heroArt.gunner.awakening,a:a.getAttribute('src'),am:a.getAttribute('data-r1033'),b:b&&b.getAttribute('src'),bm:b&&b.getAttribute('data-r1033'),side:o&&o.dataset.side,mask:getComputedStyle(a).webkitMaskImage||getComputedStyle(a).maskImage};
+  await new Promise(r=>{if(a.complete)r();else{a.onload=a.onerror=r;setTimeout(r,8000);}});out.loaded=a.naturalWidth>0;return out;});
+ ok('⑥ 기억사수 사몽 각성: 작은 그림·가운데 그림 모두 영웅 선택 창 초상화 + 마스크, 각성 경로는 되돌림',/r108\/heroes\/gunner\.webp/.test(decodeURIComponent(r.a))&&r.am==='1'&&/r108\/heroes\/gunner/.test(decodeURIComponent(r.b||''))&&r.bm==='1'&&r.after===r.before&&/rc91/.test(r.before)&&r.loaded&&/gradient/.test(r.mask),r);
+ if(shot){await p.evaluate(()=>{for(const a of document.getAnimations()){const t=a.effect&&a.effect.target;if(t&&t.closest?.('#sw8Awakening')){a.pause();a.currentTime=300;}}const tb=tick;window.__tb=tb;tick=function(dt,...a){return tb.call(this,dt*1e-4,...a);};});await p.waitForTimeout(500);await p.screenshot({path:`${shot}-samong-gunner.jpg`,quality:86});await thaw();}
+ await p.waitForTimeout(2500);}
 const I=await p.evaluate(C+'.inspect()');ok('⑤ 오류 0(모듈·페이지)',I.errors===0&&errs.length===0,{I,errs});
 await ctx.close();await b.close();console.log(JSON.stringify({fail}));process.exit(fail?1:0);

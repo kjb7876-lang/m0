@@ -10,16 +10,18 @@
 //   · 서하 수문장 아르벨리아 — 서하 + 아르벨리아(카이로 02 보스 그림 그대로, R949 이 넘김) + 시계 고리 띠.
 //   · 헌터 기러기진 섬멸 — 헌터 + 슬레이어(분대에 실제로 있을 때만, 서사 전이면 없음) + 헌터 분신 둘(기러기 두 날개).
 //   · 기억사수 귀환 전우 — 기억사수 + 실제로 불려 온 통제자 이야기 기계 보스(최대 3, 코발트 벗 빛) + 코발트 띠.
-//  상반신은 게임에 이미 있는 영웅 각성 일러스트(assets/rc91/awakening/*.png)를 잘라 줄인 webp(assets/r1033/*-bust.webp). 새 그림을 그리지 않았다.
+//  영웅 그림은 영웅 선택 창 초상화(assets/r108/heroes/*.webp) 그대로 — 사각 그림의 가장자리는 CSS 마스크로 녹인다(사용자 13:53Z). 새 그림을 그리지 않았다.
+//  같은 요청으로 사몽 각성 컷인(#cutin 작은 그림·가운데 sw8 큰 그림)도 각성 일러스트(rc91) 대신 이 초상화를 보인다(특히 기억사수). 각성 그림 경로는
+//   showAwakening 이 도는 동안만 바꿔 넘기고 곧바로 되돌린다 → 제목·엔딩·궁극기 자세 등 다른 쓰임은 그대로. 끄기: localStorage 'storyworld.r1033.portrait'='0'.
 //  안 띄움: 배치·소환 몸(r720Ally·r949Summon·r952Body·r952Unit)이 쓸 때, 대화창·서사 장면 중, 끔일 때, document 없을 때.
 //  빈도: 스토리·영화 8초, 무한생존 20초에 한 번(영웅이 달라도 하나의 시계, 실제 시간 기준). 환도 컷인은 끄기만 함께 따른다(hwando-ink-r945 cutin → allow('hwando')).
 //  설정: 설정 창 '전투 화면' 묶음(R1021)에 한 줄, 없으면 간이설정 끝. 끄기/켜기: localStorage 'storyworld.r1033.cutin' = '0'/'1' 또는 set(bool).
 //  렉: 조종 영웅의 그림만 미리 읽음(상반신 1장 + 시트 0~2장, 영웅이 바뀔 때만), DOM 노드 9개 이하, 그리기 루프 없음. 모션 줄이기 설정이면 미끄러짐 없이 나타났다 사라짐.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_PASSIVE_CUTIN_R1033__)return;
-const REV='R1033-passive-cutin-1',KEY='storyworld.r1033.cutin',MS=1250,GAP=Object.freeze({story:8,survival:20});
+const REV='R1033-passive-cutin-2',KEY='storyworld.r1033.cutin',MS=1250,GAP=Object.freeze({story:8,survival:20});
 const G=(f,d)=>{try{const v=f();return v===undefined?d:v;}catch(_){return d;}};
-const BUST=h=>'assets/r1033/'+h+'-bust.webp';
+const BUST=h=>'assets/r108/heroes/'+h+'.webp',KEY_P='storyworld.r1033.portrait';/* 영웅 선택 창 초상화(R108, 384×512) — 사용자 13:53Z "영웅 고르는 창에 나오는 간지나는 초상화 기준" */
 // 시트 한 칸(Dots 시트 재사용): cols×rows 칸, f = 보여 줄 칸, ar = 칸 가로/세로
 const SHEET=Object.freeze({
  cross:{path:'assets/r585/slayer-r-cross.webp',cols:6,rows:4,f:9,ar:1},
@@ -53,9 +55,10 @@ const CSS=[
  '#r1033Cutin::before{content:"";position:absolute;left:-6%;right:-6%;top:14%;bottom:3%;background:linear-gradient(90deg,transparent 0%,var(--b) 20%,var(--b) 80%,transparent 100%);transform:skewY(-2.5deg);-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 24%,#000 80%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0%,#000 24%,#000 80%,transparent 100%)}',
  '#r1033Cutin::after{content:"";position:absolute;left:8%;right:8%;top:20%;bottom:9%;background:var(--c);transform:skewY(-2.5deg);opacity:.85;-webkit-mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent);mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent)}',
  '#r1033Cutin .r1033f{position:relative;flex:none;height:100%;width:auto;margin:0 -2.2%;opacity:0;transform:translateX(18vw);z-index:3}',
- '#r1033Cutin .r1033main{height:114%;margin:0 -1.2%}',
- '#r1033Cutin .r1033ally{height:94%;margin:0 -6% 0 -2%;z-index:2}',
- '#r1033Cutin .r1033shade{height:66%;align-self:flex-start;margin:0 -5%;z-index:1;filter:brightness(.7) saturate(.5) sepia(.35) contrast(1.05)}',
+ '#r1033Cutin img.r1033main,#r1033Cutin img.r1033ally,#r1033Cutin img.r1033shade{aspect-ratio:.92;object-fit:cover;object-position:50% 4%;-webkit-mask-image:radial-gradient(ellipse 50% 54% at 50% 42%,#000 62%,transparent 100%);mask-image:radial-gradient(ellipse 50% 54% at 50% 42%,#000 62%,transparent 100%)}',
+ '#r1033Cutin .r1033main{height:100%;margin:0 -1%;filter:brightness(1.12) contrast(1.06)}',
+ '#r1033Cutin .r1033ally{height:92%;margin:0 -5% 0 -2%;z-index:2;filter:brightness(1.05)}',
+ '#r1033Cutin .r1033shade{height:68%;align-self:flex-start;margin:0 -4%;z-index:1;filter:brightness(.7) saturate(.5) sepia(.35) contrast(1.05)}',
  '#r1033Cutin .r1033boss{height:124%;margin:0 -13%;z-index:1;filter:brightness(1.35) drop-shadow(0 0 5px rgba(120,176,255,.95))}',
  '#r1033Cutin .r1033deco{height:62%;align-self:center;margin:0 2.5%;background-repeat:no-repeat;z-index:4}',
  '#r1033Cutin .r1033deco[data-sheet="bolt"]{height:132%;align-self:flex-end;margin:0 1.5%}',
@@ -69,6 +72,9 @@ const CSS=[
  '@keyframes r1033Pop{0%{opacity:0;transform:scale(.55)}24%{opacity:1;transform:scale(1.06)}36%{transform:scale(1)}74%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.12)}}',
  '@keyframes r1033Fade{0%{opacity:0}20%{opacity:1}74%{opacity:1}100%{opacity:0}}',
  '@media (prefers-reduced-motion:reduce){#r1033Cutin.on .r1033f{animation-name:r1033Fade}}',
+ '#awakeImage[data-r1033]{object-fit:cover!important;object-position:50% 12%;-webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 46%,#000 62%,transparent 100%);mask-image:radial-gradient(ellipse 50% 50% at 50% 46%,#000 62%,transparent 100%);filter:drop-shadow(0 0 14px #b5a5d6aa)}',
+ '#sw8Awakening[data-side="hero"] img[data-r1033]{width:min(34vw,300px);height:min(60vh,400px);object-fit:cover;object-position:50% 14%;opacity:.9;-webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 46%,#000 58%,transparent 100%);mask-image:radial-gradient(ellipse 50% 50% at 50% 46%,#000 58%,transparent 100%)}',
+ '@media (max-width:780px){#sw8Awakening[data-side="hero"] img[data-r1033]{width:min(52vw,210px);height:min(42vh,280px)}}',
  '@media (max-width:560px){#r1033Cutin .r1033boss{height:100%;margin:0 -19%}#r1033Cutin .r1033deco{margin:0 1%}}',
  // 영웅별 띠(고유색: R302 두 색 규칙 — 주색 + 보조색)
  '#r1033Cutin[data-hero="slayer"]{--b:rgba(34,4,8,.84);--c:repeating-linear-gradient(45deg,transparent 0 22px,rgba(200,20,34,.55) 22px 24px),repeating-linear-gradient(-45deg,transparent 0 22px,rgba(200,20,34,.55) 22px 24px)}',
@@ -106,8 +112,8 @@ function fire(hero,kind,owner,extra){try{
 function allow(hero){return on();}
 // ---- 조종 영웅 그림만 미리 읽기(영웅이 바뀔 때만) ----
 const warmed=new Set();
-function warm(){try{const h=G(()=>typeof player==='object'&&player&&!isBody(player)?player.hero:null,null);if(!h||!HEROES[h]||warmed.has(h)||!on())return;warmed.add(h);
-  const list=[BUST(h)];for(const [k,a] of HEROES[h].cast({heroes:['slayer']}))if(k==='deco'&&SHEET[a])list.push(SHEET[a].path);else if(k==='ally'||k==='shade')list.push(BUST(a));
+function warm(){try{const h=G(()=>typeof player==='object'&&player&&!isBody(player)?player.hero:null,null);if(!h||!HEROES_ALL.includes(h)||warmed.has(h))return;warmed.add(h);
+  const list=[BUST(h)];if(HEROES[h]&&on())for(const [k,a] of HEROES[h].cast({heroes:['slayer']}))if(k==='deco'&&SHEET[a])list.push(SHEET[a].path);else if(k==='ally'||k==='shade')list.push(BUST(a));
   if(typeof Image==='function')for(const p of new Set(list)){const im=new Image();im.decoding='async';im.src=p;stats.warmed++;}build();}catch(e){fail(e);}}
 // ---- 설정 창 한 줄 ----
 function row(){const d=G(()=>typeof document!=='undefined'?document:null,null);if(!d||!d.getElementById||d.getElementById('passiveCutinR1033'))return;
@@ -117,10 +123,22 @@ function row(){const d=G(()=>typeof document!=='undefined'?document:null,null);i
  lab.appendChild(box);lab.appendChild(d.createTextNode?d.createTextNode(' 세 번째 특수 패시브 컷인'):Object.assign(d.createElement('span'),{textContent:' 세 번째 특수 패시브 컷인'}));
  const p=d.createElement('p');p.className='small muted';p.textContent='가장 드문 특수 패시브(환도 삼협묵희 등)가 터질 때 화면 위쪽에 1.2초 컷인. 게임은 멈추지 않습니다. 무한생존은 20초에 한 번까지.';
  r.appendChild(lab);r.appendChild(p);host.appendChild(r);}
-function install(){try{if(typeof showSettings==='function'&&!showSettings.r1033){const base=showSettings;showSettings=function(...a){const r=base.apply(this,a);try{row();}catch(e){fail(e);}return r;};showSettings.r1033=true;}}catch(e){fail(e);}
+const portraitOn=()=>G(()=>localStorage.getItem(KEY_P),null)!=='0';
+// 사몽 각성: 도는 동안만 각성 그림 경로를 초상화로 바꿔 넘기고(#cutin·sw8 둘 다 이 경로를 읽음) 끝나면 되돌린다
+function wrapAwake(){try{if(typeof showAwakening!=='function'||showAwakening.r1033)return;const base=showAwakening;
+  const w=function(...a){let art=null,old;try{const h=G(()=>player.hero,null);art=G(()=>heroArt[h],null);if(art&&HEROES_ALL.includes(h)&&portraitOn()){old=art.awakening;art.awakening=BUST(h);}else art=null;}catch(e){fail(e);art=null;}
+   try{return base.apply(this,a);}finally{if(art){art.awakening=old;try{mark(G(()=>player.hero,''));}catch(e){fail(e);}}}};
+  w.r1033=true;showAwakening=w;}catch(e){fail(e);}}
+const HEROES_ALL=['seoha','hunter','slayer','michaela','gunner','lauren','neon','hwando'];
+// 마스크 표식: #awakeImage 는 지금 그림이 초상화일 때만(EGO 컷인 그림 등은 그대로). 가운데 sw8 그림은 영웅 쪽(data-side=hero)일 때만 CSS 가 먹고,
+//  영웅 쪽은 언제나 각성 그림 경로(= 이 동안 초상화)를 쓰므로 표식을 붙여 둔다(줄 서 있다가 나중에 뜨는 경우도 같은 그림).
+function mark(h){const d=G(()=>document,null);if(!d||!d.getElementById)return;
+ const a=d.getElementById('awakeImage');if(a){const want=G(()=>urlFor(BUST(h)),BUST(h));const src=G(()=>a.getAttribute('src'),'')||'';if(src===want||src.endsWith(BUST(h)))a.setAttribute('data-r1033','1');else if(a.removeAttribute)a.removeAttribute('data-r1033');}
+ const b=G(()=>d.querySelector('#sw8Awakening img'),null);if(b)b.setAttribute('data-r1033','1');}
+function install(){wrapAwake();try{if(typeof showSettings==='function'&&!showSettings.r1033){const base=showSettings;showSettings=function(...a){const r=base.apply(this,a);try{row();}catch(e){fail(e);}return r;};showSettings.r1033=true;}}catch(e){fail(e);}
  G(()=>setInterval(warm,1500));warm();}
 if(G(()=>document.readyState==='complete',false))install();else G(()=>window.addEventListener('load',install));
-window.__STORYWORLD_PASSIVE_CUTIN_R1033__=Object.freeze({revision:REV,on,set,allow,fire,row,warm,gap,
+window.__STORYWORLD_PASSIVE_CUTIN_R1033__=Object.freeze({revision:REV,on,set,allow,fire,row,warm,gap,install,portraitOn,
  table:()=>Object.fromEntries(Object.entries(HEROES).map(([h,v])=>[h,[...v.kinds]])),
  inspect:()=>({revision:REV,on:on(),shown:stats.shown,skipped:{...stats.skipped},errors:stats.errors,lastError,warmed:stats.warmed,lastAt,gap:gap(),last:last&&{...last},
   visible:!!(el&&el.classList.contains('on')),hero:el?el.getAttribute('data-hero'):null}),

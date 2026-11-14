@@ -48,14 +48,14 @@ if(!A)done();
 const FIRE=[['slayer','lattice'],['michaela','bloom'],['lauren','meteor'],['lauren','violet'],['neon','storm'],['seoha','arbelia',{art:['assets/generated-v31224/actors-normalized/b9b65cd61430_arvelia_delay_archon.webp']}],
  ['hunter','squad',{heroes:['slayer','hunter','hunter','hunter','hunter']}],['gunner','summon',{art:['assets/a/u1.webp','assets/a/u2.webp','assets/a/u3.webp']}]];
 for(const [h,k,x] of FIRE){const e=make();e.sb.player.hero=h;const ok=e.api.fire(h,k,e.sb.player,x);const el=e.el(),f=e.figs();
- check(`① ${h} ${k}: 컷인 뜸(on, data-hero=${h}, 영웅 상반신)`,ok===true&&el&&el.cls.has('on')&&el.getAttribute('data-hero')===h&&f.some(v=>v.fig==='main'&&v.src==='assets/r1033/'+h+'-bust.webp'),JSON.stringify({ok,f,cls:el&&[...el.cls]}));
+ check(`① ${h} ${k}: 컷인 뜸(on, data-hero=${h}, 영웅 상반신)`,ok===true&&el&&el.cls.has('on')&&el.getAttribute('data-hero')===h&&f.some(v=>v.fig==='main'&&v.src==='assets/r108/heroes/'+h+'.webp'),JSON.stringify({ok,f,cls:el&&[...el.cls]}));
  e.adv(1.3);check(`① ${h} ${k}: 1.25초 뒤 내려감(전투 흐름 오래 안 끊음)`,!e.el().cls.has('on'));}
 {const e=make();for(const [h,k] of [['slayer','needle'],['slayer','swords'],['michaela','volley'],['michaela','tower'],['lauren','repulse'],['lauren','red'],['lauren','blue'],['neon','lance'],['neon','fog'],['seoha','collapse'],['seoha','heroes'],['hunter','call'],['hunter','shade'],['gunner','cloak'],['gunner','barrage']]){e.sb.player.hero=h;e.api.fire(h,k,e.sb.player);}
  check('① 1·2단 패시브(15가지)는 컷인 없음',e.api.inspect().shown===0&&!(e.el()&&e.el().cls.has('on')),JSON.stringify(e.api.inspect()));
  e.api.fire('hwando','trio',e.sb.player);e.api.fire('nobody','x',e.sb.player);check('① 환도·모르는 영웅은 이 모듈이 안 띄움',e.api.inspect().shown===0);}
 // ② 인물 구성
 {const e=make();e.api.fire('hunter','squad',e.sb.player,{heroes:['slayer','hunter','hunter','hunter','hunter']});const f=e.figs();
- check('② 헌터 기러기진: 헌터 + 슬레이어 + 헌터 분신 둘(기러기 대형)',f.filter(v=>v.fig==='main').length===1&&f.some(v=>v.fig==='ally'&&v.src==='assets/r1033/slayer-bust.webp')&&f.filter(v=>v.fig==='shade'&&v.src==='assets/r1033/hunter-bust.webp').length===2,JSON.stringify(f));}
+ check('② 헌터 기러기진: 헌터 + 슬레이어 + 헌터 분신 둘(기러기 대형)',f.filter(v=>v.fig==='main').length===1&&f.some(v=>v.fig==='ally'&&v.src==='assets/r108/heroes/slayer.webp')&&f.filter(v=>v.fig==='shade'&&v.src==='assets/r108/heroes/hunter.webp').length===2,JSON.stringify(f));}
 {const e=make();e.api.fire('hunter','squad',e.sb.player,{heroes:['hunter','hunter','hunter','hunter']});const f=e.figs();
  check('② 헌터: 슬레이어 서사 전(분대에 슬레이어 없음)이면 슬레이어 그림 없음',!f.some(v=>v.src.includes('slayer'))&&f.filter(v=>v.fig==='shade').length===2,JSON.stringify(f));}
 {const e=make();e.api.fire('gunner','summon',e.sb.player,{art:['assets/a/u1.webp','assets/a/u2.webp','assets/a/u3.webp','assets/a/u4.webp']});const f=e.figs();
@@ -91,6 +91,22 @@ for(const flag of ['r720Ally','r949Summon','r952Body','r952Unit']){const e=make(
  check('④ 무한생존: 영웅이 달라도 20초에 한 번(19.5초 건너뜀, 20.1초 뜸)',a.shown===1&&a.skipped.gap===1&&b.shown===2&&b.gap===20,JSON.stringify({a,b}));}
 {const e=make();e.setNow(NaN);let threw=false;try{e.api.fire('slayer','lattice',e.sb.player);e.api.fire('slayer','lattice',e.sb.player);}catch(_){threw=true;}e.setNow(5000);e.api.fire('slayer','lattice',e.sb.player);
  check('⑤ NaN 시각: 멈추지 않고, 마지막 시각을 NaN 으로 덮지 않음(다음 정상 시각에 뜸)',!threw&&e.api.inspect().shown>=1&&Number.isFinite(e.api.inspect().lastAt),JSON.stringify(e.api.inspect()));}
+// ⑧ 사몽 각성 컷인(#cutin 작은 그림 + 가운데 sw8 큰 그림)도 영웅 선택 창 초상화로(사용자 13:53Z "특히 기억사수 사몽")
+{const e=make();const seen=[];e.sb.heroArt={gunner:{awakening:'assets/rc91/awakening/gunner.png',idle:{front:'f.webp'}}};e.sb.player.hero='gunner';
+ e.sb.showAwakening=function(r){seen.push(e.sb.heroArt[e.sb.player.hero].awakening);return 'ok:'+r;};e.api.install();const r=e.sb.showAwakening('seven');
+ check('⑧ 사몽 각성 중엔 각성 그림 자리에 초상화(r108)를 넘기고, 끝나면 원래 경로로 되돌림(제목·엔딩·궁극기 자세는 그대로)',seen[0]==='assets/r108/heroes/gunner.webp'&&r==='ok:seven'&&e.sb.heroArt.gunner.awakening==='assets/rc91/awakening/gunner.png',JSON.stringify({seen,after:e.sb.heroArt.gunner.awakening}));
+ e.sb.showAwakening=function(){throw new Error('x');};e.api.install();let threw=false;try{e.sb.showAwakening('seven');}catch(_){threw=true;}
+ check('⑧ 원래 함수가 오류를 내도 경로는 되돌림',threw&&e.sb.heroArt.gunner.awakening==='assets/rc91/awakening/gunner.png');}
+{const e=make({ls:{'storyworld.r1033.portrait':'0'}});const seen=[];e.sb.heroArt={gunner:{awakening:'A.png'}};e.sb.player.hero='gunner';e.sb.showAwakening=()=>seen.push(e.sb.heroArt.gunner.awakening);e.api.install();e.sb.showAwakening('x');
+ check('⑧ storyworld.r1033.portrait=0 이면 예전 각성 그림 그대로',seen[0]==='A.png');}
+{const e=make();const seen=[];e.sb.heroArt={};e.sb.player.hero='nobody';e.sb.showAwakening=()=>{seen.push(1);};e.api.install();let threw=false;try{e.sb.showAwakening('x');}catch(_){threw=true;}
+ check('⑧ 모르는 영웅·heroArt 없음: 원래대로 부르고 오류 없음',!threw&&seen.length===1);}
+{const e=make();const d=e.doc;const a=d.createElement('img');a.id='awakeImage';d.body.appendChild(a);const sw=d.createElement('div');sw.id='sw8Awakening';const b=d.createElement('img');sw.appendChild(b);d.body.appendChild(sw);
+ d.querySelector=sel=>sel==='#sw8Awakening img'?b:null;e.sb.urlFor=p=>'blob:'+p;e.sb.heroArt={gunner:{awakening:'A.png'}};e.sb.player.hero='gunner';
+ e.sb.showAwakening=()=>{a.setAttribute('src',e.sb.urlFor(e.sb.heroArt.gunner.awakening));b.setAttribute('src',e.sb.urlFor(e.sb.heroArt.gunner.awakening));};e.api.install();e.sb.showAwakening('x');
+ check('⑧ 초상화가 걸린 #awakeImage·sw8 그림에 마스크 표식(data-r1033)',a.getAttribute('data-r1033')==='1'&&b.getAttribute('data-r1033')==='1');
+ e.sb.showAwakening=()=>{a.setAttribute('src','blob:ego.png');};e.api.install();e.sb.showAwakening('x');check('⑧ EGO 컷인처럼 다른 그림이면 #awakeImage 표식 뗌',a.getAttribute('data-r1033')===null);}
+{check('⑧ 초상화 테두리를 부드럽게 지우는 마스크(#awakeImage·sw8 영웅 쪽)',/#awakeImage\[data-r1033\][^}]*mask-image/.test(src)&&/#sw8Awakening\[data-side="hero"\] img\[data-r1033\][^}]*mask-image/.test(src));}
 // 설정 줄
 {const e=make();const host=e.doc.createElement('section');host.id='combatScreenR1021';e.doc.body.appendChild(host);e.sb.showSettings();
  const row=e.doc.getElementById('passiveCutinR1033');check('설정 창 \'전투 화면\' 묶음에 컷인 켜고 끄기 한 줄',row&&row.parentNode===host,row&&row.parentNode&&row.parentNode.id);}
@@ -104,16 +120,15 @@ for(const [f,re] of Object.entries(HOOK)){const s=fs.readFileSync(path.join(CS,f
  check(`⑥ ${f}: 발동 자리에 R1033 한 줄 + 도우미(오류는 삼킴)`,re.test(s)&&/const C1033=\(h,k,o,x\)=>\{try\{window\.__STORYWORLD_PASSIVE_CUTIN_R1033__\?\.fire\(h,k,o,x\);\}catch\(_\)\{\}\};/.test(s)&&parsed);}
 {const s=fs.readFileSync(path.join(CS,'hwando-ink-r945.js'),'utf8');check('⑥ 환도 삼협묵희 컷인도 같은 끄기를 따름(모듈 없으면 그대로)',/function cutin\(\)\{try\{if\(window\.__STORYWORLD_PASSIVE_CUTIN_R1033__\?\.allow\?\.\('hwando'\)===false\)\{cutStats\.skipped\+\+;return false;\}/.test(s));}
 // ⑦ 그림·연결
-{const A7=['seoha','hunter','slayer','michaela','gunner','lauren','neon'];let okAll=true,why=[];
- for(const h of A7){const p=path.join(root,'runtime-text','assets','r1033',h+'-bust.webp');if(!fs.existsSync(p)){okAll=false;why.push(h+' 없음');continue;}const b=fs.readFileSync(p);
-  if(b.toString('ascii',0,4)!=='RIFF'||b.toString('ascii',8,12)!=='WEBP'){okAll=false;why.push(h+' webp 아님');}if(b.length>110000){okAll=false;why.push(h+' '+b.length+'B');}}
- check('⑦ 상반신 7장(각성 일러스트 rc91 에서 잘라 낸 webp, 장당 110KB 이하)',okAll,why.join(', '));
- for(const sh of ['r585/slayer-r-cross.webp','r948/mh03-heart24.webp','r946/lauren-red.webp','r946/lauren-blue.webp','r951/neon-skybeam.webp'])check('⑦ 재사용 시트가 src 에 적힘: '+sh,src.includes("'assets/"+sh+"'"));}
+{const man=fs.readFileSync(path.join(root,'runtime-manifest.json'),'utf8');const A7=['seoha','hunter','slayer','michaela','gunner','lauren','neon','hwando'];
+ check('⑦ 영웅 선택 창 초상화(assets/r108/heroes) 8장이 배포 목록에 있음 — 컷인은 이 그림을 씀(사용자 13:53Z)',A7.every(h=>man.includes('"assets/r108/heroes/'+h+'.webp"')));
+ check('⑦ 예전 각성 일러스트 잘라 낸 상반신(assets/r1033/*-bust)은 더 쓰지 않음',!/r1033\/[a-z]+-bust/.test(src)&&!fs.existsSync(path.join(root,'runtime-text','assets','r1033')));
+for(const sh of ['r585/slayer-r-cross.webp','r948/mh03-heart24.webp','r946/lauren-red.webp','r946/lauren-blue.webp','r951/neon-skybeam.webp'])check('⑦ 재사용 시트가 src 에 적힘: '+sh,src.includes("'assets/"+sh+"'"));}
 {const idx=fs.readFileSync(path.join(root,'runtime-text','index.html'),'utf8');
  check('⑦ 태그 한 번, passive-unlock-r1025 바로 뒤',idx.split('"./passive-cutin-r1033.js"').length===2&&/<script src="\.\/passive-unlock-r1025\.js"><\/script>\n<script src="\.\/passive-cutin-r1033\.js"><\/script>/.test(idx));
  const rt=path.join(root,'runtime-text','passive-cutin-r1033.js');check('⑦ runtime-text 사본이 같음(sync)',fs.existsSync(rt)&&fs.readFileSync(rt,'utf8')===src);
  const inp=fs.readFileSync(path.join(root,'runtime-inputs.json'),'utf8'),man=fs.readFileSync(path.join(root,'runtime-manifest.json'),'utf8');
- check('⑦ runtime-inputs·manifest 에 모듈과 상반신 7장',inp.includes('"passive-cutin-r1033.js"')&&man.includes('"passive-cutin-r1033.js"')&&['seoha','neon'].every(h=>man.includes('assets/r1033/'+h+'-bust.webp')&&inp.includes('assets/r1033/'+h+'-bust.webp')));
+ check('⑦ runtime-inputs·manifest 에 모듈과 상반신 7장',inp.includes('"passive-cutin-r1033.js"')&&man.includes('"passive-cutin-r1033.js"')&&['seoha','neon'].every(h=>man.includes('assets/r108/heroes/'+h+'.webp')&&inp.includes('assets/r108/heroes/'+h+'.webp')));
  for(const f of Object.keys(HOOK).concat('hwando-ink-r945.js')){const a=path.join(root,'runtime-text',f);check('⑦ 고친 모듈 runtime-text 사본 같음: '+f,fs.existsSync(a)&&fs.readFileSync(a,'utf8')===fs.readFileSync(path.join(CS,f),'utf8'));}
  check('⑦ 공개 확인 목록',fs.readFileSync(path.join(root,'..','scripts','verify-r96-public.py'),'utf8').includes("'passive-cutin-r1033.js'"));
  check('⑦ CI 줄',fs.readFileSync(path.join(root,'..','.github','workflows','pages.yml'),'utf8').includes('node r96/qa/r1033/r1033-cpu-check.cjs'));}
