@@ -41,6 +41,7 @@ const CFG=Object.freeze({chance:.09,gap:.35,icd:21,life:7,fade:.45,
   ring:Object.freeze({path:'assets/r952/hs05-feather-ring.webp',cell:Object.freeze([256,128]),cols:3,frames:12,piv:Object.freeze([128,64]),fps:12.5}),
   line:Object.freeze({path:'assets/r952/hs04-flow-line.webp',cell:Object.freeze([256,64]),cols:1,frames:8,piv:Object.freeze([0,32]),fps:8,maxSpans:24})})});
 const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
+const U1025=(h,a,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__,v=u&&u.mask(h,a,k);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},S1025=h=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.share(h);return Number.isFinite(v)?Math.max(0,Math.min(1,v)):1;}catch(_){return 1;}},W1025=(h,w)=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.weights(h,w);return v||w;}catch(_){return w;}},A1025=(h,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.unlocked(h,k)!==false:true;}catch(_){return true;}},O1025=id=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.summonOpen(id)!==false:true;}catch(_){return true;}};/* R1025 특수 패시브 레벨별 해금·소환 영웅 서사 확인(파일 없으면 원래 값) */
 const NAMES={call:'혈맹 호출',shade:'혈영 강습',squad:'기러기진 섬멸'},BEAT=.42;
 let errors=0,lastError=null;const fail=e=>{errors++;lastError=String(e?.stack||e).slice(0,300);};
 const G=(f,d)=>{try{const v=f();return v===undefined?d:v;}catch(_){return d;}};
@@ -56,6 +57,7 @@ const isSummon=p=>!!p&&p.r952Summon===true;
 const isOwner=p=>!!p&&p.hero===HERO&&p.hp>0&&!isSummon(p);
 
 // ── 순수 규칙(QA 가 CPU 에서 부른다) ──
+function pickTier1025(r){/* R1025: 열린 단계만, 슬레이어 서사 전(스토리)이면 슬레이어 없는 기러기진만 */const t=CFG.tiers,ally=O1025(ALLY),ks=['call','shade','squad'].filter(k=>A1025(HERO,k)&&(ally||k==='squad'));if(!ks.length)return null;const tot=ks.reduce((n,k)=>n+t[k],0);let x=r*tot;for(const k of ks){if(x<t[k])return k;x-=t[k];}return ks[ks.length-1];}
 function pickTier(r){const t=CFG.tiers;return r<t.call?'call':r<t.call+t.shade?'shade':'squad';}
 // 기러기 대형: 헌터(px,py)가 꼭짓점, 겨눈 쪽(aim)이 앞. i 짝수 = 왼 날개, 홀수 = 오른 날개, 바깥 줄일수록 더 벌어지고 더 뒤.
 function slotsFor(px,py,aim,count,gap,back,k=1){const fx=Math.cos(aim),fy=Math.sin(aim),lx=-fy,ly=fx,out=[];
@@ -102,7 +104,7 @@ function mkUnit(sq,kind,i,x,y,mul){const u={sq,kind,i,x,y,mul,body:null,prop:nul
  Object.defineProperty(u.prop,'r952Unit',{value:u,enumerable:false});return u;}
 function start(s,p,tier){const t=T(),rm=G(()=>room,null);if(!rm||!NAMES[tier])return false;const foes=foesNow();
  const sq={tier,t0:t,end:t+CFG.life,room:rm,owner:p,state:s,units:[],shades:[],aim:null,slots:[],form:null};
- const sp=spotNear(p,nearestTo(p,CFG.slayer.seek,foes));sq.units.push(mkUnit(sq,ALLY,0,sp.x,sp.y,CFG.slayer.mul));
+ const ally=O1025(ALLY);if(!ally&&tier!=='squad')return false;const sp=spotNear(p,nearestTo(p,CFG.slayer.seek,foes));if(ally)sq.units.push(mkUnit(sq,ALLY,0,sp.x,sp.y,CFG.slayer.mul));
  if(tier==='squad'){for(let i=0;i<CFG.squad.count;i++)sq.units.push(mkUnit(sq,HERO,i,p.x,p.y,CFG.squad.mul));
   sq.form={id:'r952:form:'+(++serial),r952Prop:true,r952Form:true,x:p.x,y:p.y,solid:false,visible:true,autoTargetEligible6:false,label:'',height:1};Object.defineProperty(sq.form,'r952Squad',{value:sq,enumerable:false});}
  formation(sq,foes);for(const u of sq.units)u.body=mkBody(p,u);
@@ -116,7 +118,7 @@ function end(sq){const i=live.indexOf(sq);if(i>=0)live.splice(i,1);if(sq.state.s
 function endAll(){for(const sq of live.slice())end(sq);}
 function onSwing(p){const s=st(p),t=T();s.stats.swings++;warm();if(!solo()){s.stats.coopSkipped++;return;}if(s.squad)return;let tier=null;
  if(s.force){tier=s.force;s.force=null;}
- else{if(t<s.rollAt||t<s.readyAt)return;s.rollAt=t+CFG.gap;s.stats.rolls++;if(!(Math.random()<G971(HERO,[CFG.chance])[0]))return;tier=pickTier(Math.random());}
+ else{if(t<s.rollAt||t<s.readyAt)return;s.rollAt=t+CFG.gap;s.stats.rolls++;if(!(Math.random()<G971(HERO,[CFG.chance])[0]*S1025(HERO)))return;tier=pickTier1025(Math.random());if(!tier)return;}
  start(s,p,tier);}
 function valid(sq){const p=sq.owner;if(!on||!solo()||!p||!(p.hp>0)||p.hero!==HERO||sq.room!==G(()=>room,null))return false;
  if(p.r720Ally===true){const bs=G(()=>window.__STORYWORLD_HERO_DEFENSE_R720__.bodies(),null);return !Array.isArray(bs)||bs.length===0||bs.includes(p);}
