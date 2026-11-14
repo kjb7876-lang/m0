@@ -40,7 +40,7 @@ ok('라우렌: 쌍성 소멸(violet) 연계도 해금 뒤에만',/comboOf\(s,t\)
 ok('헌터: 확률 × 열린 몫, 단계 뽑기는 열린 단계만',/S1025\(HERO\)/.test(C(MODS.hunter))&&/pickTier1025\(/.test(C(MODS.hunter)));
 ok('헌터: 슬레이어 서사 전이면 슬레이어 없이(기러기진만)',/O1025\(ALLY\)/.test(C(MODS.hunter)));
 ok('서하: 소집 영웅은 서사 열린 영웅만(O1025)',/O1025\(/.test(C(MODS.seoha))&&/function others\(\)\{[^}]*O1025\(k\)/.test(C(MODS.seoha)));
-ok('서하: 미리 고른 셋(trio)도 서사 확인을 거침',/const pool=\[\.\.\.trio\.filter\(k=>O1025\(k\)\)/.test(C(MODS.seoha)));
+ok('서하: 미리 고른 셋(trio)도 서사 확인을 거침',/pool=\[\.\.\.trio\.filter\(k=>O1025\(k\)\)/.test(C(MODS.seoha)));
 ok('서하·헌터: 소환 몸은 진짜 영웅 그리기(drawHero) 그대로',/as\(s,\(\)=>drawHero\(\)\)/.test(C(MODS.seoha))&&/as\(u,\(\)=>drawHero\(\)\)/.test(C(MODS.hunter)));
 
 // ── vm: 모듈 단독 ──
@@ -90,11 +90,12 @@ if(A.api){const u=A.api;
  ok('weights: 잠긴 갈래 빼고 비중 그대로',JSON.stringify(u.weights('seoha',[['collapse',.5],['heroes',.3],['arbelia',.2]]))==='[["collapse",0.5],["heroes",0.3]]');
  // 서사 지역(스토리)
  A.ctx.player.hero='seoha';A.ctx.player.level=777;
- ok('서사 지역 표',JSON.stringify(u.storyGate())===JSON.stringify({hunter:'dreamRest',slayer:'dreamRest',michaela:'restEp1b',gunner:'u201',hwando:'restU2',seoha:'kair01',lauren:'hando03',neon:null}));
+ ok('서사 지역 표',JSON.stringify(u.storyGate())===JSON.stringify({hunter:'dreamRest',slayer:'dreamRest',michaela:'restEp1b',gunner:'u201',hwando:'restU2',seoha:'kair01',lauren:'hando01',neon:'hando01'}));
  ok('새 여정: 모든 영웅 소환 잠김',HEROES.every(h=>!u.summonOpen(h)));
  A.ctx.visited.add('STORY:dreamRest');ok('의목사 A 지역 뒤: 헌터·슬레이어만 열림',u.summonOpen('slayer')&&u.summonOpen('hunter')&&!u.summonOpen('gunner')&&!u.summonOpen('lauren'));
- for(const z of ['restEp1b','u201','restU2','kair01','hando03'])A.ctx.visited.add('STORY:'+z);
- ok('모든 서사 지역 뒤: 네온 빼고 열림',HEROES.filter(h=>h!=='neon').every(h=>u.summonOpen(h))&&!u.summonOpen('neon'));
+ for(const z of ['restEp1b','u201','restU2','kair01'])A.ctx.visited.add('STORY:'+z);
+ ok('쌍둥이몽세(hando01) 전: 라우렌·네온만 잠김',HEROES.filter(h=>h!=='neon'&&h!=='lauren').every(h=>u.summonOpen(h))&&!u.summonOpen('neon')&&!u.summonOpen('lauren'));
+ A.ctx.visited.add('STORY:hando01');ok('쌍둥이몽세(hando01) 뒤: 네온·라우렌 포함 모두 열림',HEROES.every(h=>u.summonOpen(h)));
  A.ctx.visited.clear();A.ctx.progress.STORY.u201=true;ok('완료 기록(progress)도 서사 진행으로',u.summonOpen('gunner'));
  A.ctx.progress.STORY={};A.ctx.visited.add('DREAM:kair01');ok('사몽(DREAM) 층 방문도 인정',u.summonOpen('seoha'));
 }
@@ -121,11 +122,32 @@ if(N.api){const u=N.api;u.tick();N.ctx.player.level=5;u.tick();u.tick();
 // 끄기: 모두 열림(원래 동작)
 const O=mk({ls:{'storyworld.r1025.unlock':'0'},player:{level:1}});
 if(O.api)ok('끄기(localStorage storyworld.r1025.unlock=0): 모두 열림·소환 열림',O.api.unlocked('hwando','trio')&&O.api.summonOpen('neon')&&O.api.share('hwando')===1);
+
+// ── 소환 수: 레벨마다 하나씩, 최대 7명, 서사 순(사용자 02:19Z "영웅소환수 레벨올리면 하나씩 증가 ... 서사순으로", "최대 7영웅") ──
+{const Q=mk({player:{level:1,hero:'seoha'}});const u=Q.api;
+ if(u){ok('서사 순서 표',JSON.stringify(u.storyOrder())===JSON.stringify(['hunter','slayer','michaela','gunner','hwando','seoha','lauren','neon']));
+  const cnt=lv=>{Q.ctx.player.level=lv;return u.summonCount('seoha');};
+  ok('스토리: Lv14 0명 / Lv15 1명 / Lv24 1명 / Lv25 2명',cnt(14)===0&&cnt(15)===1&&cnt(24)===1&&cnt(25)===2);
+  ok('스토리: Lv75 7명, Lv777 도 7명(상한)',cnt(75)===7&&cnt(777)===7&&cnt(74)===6);
+  ok('소환 수는 NaN 레벨에도 0',cnt(NaN)===0);
+  Q.ctx.player.level=777;ok('서사 전: 목록 비어 있음',u.summonList('seoha',['seoha']).length===0);
+  Q.ctx.visited.add('STORY:dreamRest');Q.ctx.visited.add('STORY:u201');
+  ok('열린 영웅만 서사 순(헌터·슬레이어·기억사수)',JSON.stringify(u.summonList('seoha',['seoha']))==='["hunter","slayer","gunner"]');
+  for(const z of ['restEp1b','restU2','kair01','hando01'])Q.ctx.visited.add('STORY:'+z);
+  ok('모두 열림 Lv777: 자기 빼고 7명 서사 순',JSON.stringify(u.summonList('seoha',['seoha']))==='["hunter","slayer","michaela","gunner","hwando","lauren","neon"]');
+  Q.ctx.player.level=25;ok('Lv25: 앞의 2명(헌터·슬레이어)',JSON.stringify(u.summonList('seoha',['seoha']))==='["hunter","slayer"]');
+  ok('exclude 로 조종 영웅 뺌',!u.summonList('seoha',['seoha','hunter']).includes('hunter'));}
+ const V=mk({survival:true,survLv:1});const v=V.api;
+ if(v){const c=lv=>{V.surv.lv=lv;return v.summonCount('seoha');};
+  ok('생존: Lv3 0 / Lv4 1 / Lv6 2 / Lv16 7 / Lv99 7 (2레벨마다 하나)',c(3)===0&&c(4)===1&&c(5)===1&&c(6)===2&&c(16)===7&&c(15)===6&&c(99)===7);
+  V.surv.lv=16;ok('생존: 서사 없어도 7명 서사 순',JSON.stringify(v.summonList('seoha',['seoha']))==='["hunter","slayer","michaela","gunner","hwando","lauren","neon"]');}
+}
+ok('서하: 소환 목록을 R1025 summonList 로(서사 순·레벨별 수)',/summonList\('seoha'/.test(C(MODS.seoha))||/L1025\(/.test(C(MODS.seoha)));
 // 서사 지역 표 = 정본 화자 + R461 규칙에서 다시 만든 값
 {const W={};const c={window:W};vm.createContext(c);try{vm.runInContext(C('story-canon-r106-data.js'),c);}catch(_){}
  const d=W.__STORYWORLD_STORY_CANON_R106__,order=JSON.parse(rd(path.join(ROOT,'story-source/catalog-r75.json'))||'{}').portalOrder||[];
  const ALIAS={'의목사 A':['hunter','slayer'],'의목사 B':['gunner'],'미카엘라':['michaela'],'환도':['hwando'],'윤서하':['seoha']};
- const first={};if(d)for(const id of order){const z=d.zones[id];if(!z)continue;const s=JSON.stringify(z);for(const m of s.match(/〈([^〉]*)의 기억〉/g)||[]){const n=m.slice(1,-5);for(const h of ALIAS[n]||[])if(!first[h])first[h]=id;}if(s.includes('라우렌')&&!first.lauren)first.lauren=id;if(s.includes('네온')&&!first.neon)first.neon=id;}
+ const first={};if(d)for(const id of order){const z=d.zones[id];if(!z)continue;const s=JSON.stringify(z);for(const m of s.match(/〈([^〉]*)의 기억〉/g)||[]){const n=m.slice(1,-5);for(const h of ALIAS[n]||[])if(!first[h])first[h]=id;}if(s.includes('라우렌')&&!first.lauren){const ch=z.chapter||(JSON.stringify(z).match(/제6부[^"]*/)||[''])[0];const z0=order.find(q=>d.zones[q]&&JSON.stringify(d.zones[q]).includes('제6부'));first.lauren=first.neon=s.includes('제6부')?z0:id;}}
  ok('정본에서 다시 만든 서사 지역 = 표('+JSON.stringify(first)+')',A.api&&HEROES.every(h=>(first[h]||null)===A.api.storyGate()[h]));}
 // NaN 방지·성능: 굴림 질의는 가볍게
 if(A.api){const t0=Date.now();for(let i=0;i<20000;i++)A.api.mask('hwando',[.18,.06,.03],['moon','clones','trio']);ok('질의 2만 번 < 300ms',Date.now()-t0<300);}

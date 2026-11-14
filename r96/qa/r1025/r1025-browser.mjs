@@ -1,6 +1,6 @@
 // R1025 브라우저 검사(헤드리스, 소프트웨어 렌더): 특수 패시브 레벨 해금·소환 영웅 서사 확인을 실제 게임에서 확인.
 //  ① 스토리: 해금 API 가 스토리 모드·영웅 레벨을 읽음. Lv1 은 주사위 0 이어도 서하 패시브 0번, Lv5 는 시간 붕괴만.
-//  ② 스토리 서사 잠금: 서사 지역 방문 전 서하 평행세계 소집은 영웅 0명(시간 붕괴로 대신), dreamRest·hando03 방문 뒤 헌터·라우렌만(네온 빠짐).
+//  ② 스토리 서사 잠금·소환 수: 서사 전 소집은 영웅 0명(시간 붕괴로 대신), dreamRest·hando01 방문 뒤 Lv777 은 서사 순 헌터·슬레이어·라우렌·네온 4명, Lv25 는 앞 2명.
 //     소환 몸은 진짜 영웅 그리기(drawHero) — 그린 횟수·소환 영웅 그림 읽힘 확인 + 장면 사진.
 //  ③ 헌터: 슬레이어 서사 전 혈맹 호출은 안 나가고, 기러기진은 슬레이어 없이. dreamRest 뒤에는 슬레이어가 나옴.
 //  ④ 무한생존: 모드 'survival', 생존 레벨 기준, 서사 없어도 소환 열림, 생존 레벨이 문턱을 넘으면 해금 알림.
@@ -26,17 +26,20 @@ const U='window.__STORYWORLD_PASSIVE_UNLOCK_R1025__',SE='window.__STORYWORLD_SEO
  r=await roll(5);ok('① Lv5: 1단 시간 붕괴 발동',r.procs===1&&r.kind==='collapse',r);
  const t=await p.evaluate(U+'.table()');ok('① 표: Lv5 서하 1단만 열림',t.seoha[0].open&&!t.seoha[1].open&&!t.seoha[2].open,t.seoha);
  // ② 서사 잠금
- const summon=trio=>p.evaluate(([SE,trio])=>{const a=eval(SE);player.level=777;a.qaReset();a.qaTrio(trio);a.qaForce('heroes');const f0=a.inspect().stats.fallbacks;const e=room.enemies.find(v=>v.id===window.__ids[0]);hitEnemy(e,1,{kind:'basic',sourceHero:'seoha'});const i=a.inspect();return {kind:i.active?i.active.kind:null,heroes:i.summons.map(s=>s.hero),fallback:i.stats.fallbacks-f0};},[SE,trio]);
+ const summon=trio=>p.evaluate(([SE,trio])=>{const a=eval(SE);player.level=777;a.qaReset();if(trio)a.qaTrio(trio);a.qaForce('heroes');const f0=a.inspect().stats.fallbacks;const e=room.enemies.find(v=>v.id===window.__ids[0]);hitEnemy(e,1,{kind:'basic',sourceHero:'seoha'});const i=a.inspect();return {kind:i.active?i.active.kind:null,heroes:i.summons.map(s=>s.hero),fallback:i.stats.fallbacks-f0};},[SE,trio]);
  const visited0=await p.evaluate(()=>[...visited]);
  r=await summon(['neon','hunter','lauren']);ok('② 서사 전: 영웅 0명, 시간 붕괴로 대신',r.heroes.length===0&&r.kind==='collapse'&&r.fallback===1,{r,visited0});
  await p.evaluate(SE+'.qaReset()');await p.waitForFunction(SE+'.inspect().active===null',null,{timeout:600000,polling:200}).catch(()=>{});
- await p.evaluate(()=>{visited.add('STORY:dreamRest');visited.add('STORY:hando03');});
- r=await summon(['neon','hunter','lauren']);const OPEN=['hunter','slayer','lauren'];ok('② dreamRest·hando03 뒤: 서사 열린 헌터·슬레이어·라우렌 안에서만(네온 빠짐, 빈자리는 열린 영웅으로)',r.kind==='heroes'&&r.heroes.length===3&&r.heroes.every(h=>OPEN.includes(h))&&r.heroes.includes('hunter')&&r.heroes.includes('lauren'),r);
+ await p.evaluate(()=>{visited.add('STORY:dreamRest');visited.add('STORY:hando01');});
+ r=await summon(null);const OPEN=['hunter','slayer','lauren','neon'];ok('② dreamRest·hando01 뒤 Lv777: 서사 순 4명(헌터·슬레이어·라우렌·네온)',r.kind==='heroes'&&JSON.stringify(r.heroes)===JSON.stringify(OPEN),r);
  const t0=await p.evaluate(()=>time);await p.waitForFunction(t0=>time-t0>=1.4,t0,{timeout:600000,polling:200});
  const d=await p.evaluate(SE+'.inspect()');ok('② 소환 몸을 진짜 영웅 그리기로 그림(bodyDraws '+d.stats.bodyDraws+')',d.stats.bodyDraws>0&&d.summons.every(s=>OPEN.includes(s.hero)));
  const ready=await p.evaluate(()=>['hunter','lauren','slayer'].every(h=>!!readyImage(heroArt[h].idle.front)));ok('② 소환 영웅 그림 = 그 영웅 그림 경로(heroArt)',ready);
  if(shot){await p.evaluate(()=>{const tb=tick;window.__tb=tb;tick=function(dt,...a){return tb.call(this,dt*1e-4,...a);};});await p.waitForTimeout(800);await p.screenshot({path:shot+'-story-summon.jpg',quality:88});await p.evaluate(()=>{tick=window.__tb;});}
  await p.waitForFunction(SE+'.inspect().active===null',null,{timeout:600000,polling:200}).catch(()=>{});
+ {const r2=await p.evaluate(([SE])=>{const a=eval(SE);a.qaReset();player.level=25;a.qaForce('heroes');const e=room.enemies.find(v=>v.id===window.__ids[0]);hitEnemy(e,1,{kind:'basic',sourceHero:'seoha'});const i=a.inspect();return {kind:i.active?i.active.kind:null,heroes:i.summons.map(s=>s.hero)};},[SE]);
+  ok('② Lv25: 서사 순 앞 2명(헌터·슬레이어)',r2.kind==='heroes'&&JSON.stringify(r2.heroes)==='["hunter","slayer"]',r2);
+  await p.waitForFunction(SE+'.inspect().active===null',null,{timeout:600000,polling:200}).catch(()=>{});}
  // ③ 헌터
  await p.evaluate(()=>{visited.delete('STORY:dreamRest');player.hero='hunter';player.level=777;});
  const hfire=k=>p.evaluate(([HU,k])=>{const a=eval(HU);a.force(k);player.attackCD=0;target=room.enemies.find(v=>v.id===window.__ids[0]);basicAttack(true);const i=a.inspect();return {active:i.active,tier:i.tier,units:i.units.map(u=>u.hero)};},[HU,k]);
