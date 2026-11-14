@@ -682,6 +682,8 @@ jobs:
         run: node r96/qa/r1032/r1032-cpu-check.cjs
       - name: R1039 hero EGO aura and hit/hurt code sprites replaced by painted R100 frame sheets CPU check
         run: node r96/qa/r1039/r1039-cpu-check.cjs
+      - name: R1040 boss pattern frame fx CPU check
+        run: node r96/qa/r1040/boss-pattern-fx-cpu-check.cjs
       - name: R1038 defer hidden boot self-tests until diagnostics open CPU check
         run: node r96/qa/r1038/r1038-cpu-check.cjs
       - name: R1037 narration always-off button (boss entry story window + memory fragment note) and settings rows CPU check
