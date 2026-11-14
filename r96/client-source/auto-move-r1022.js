@@ -14,8 +14,15 @@
 //  끄기/켜기: localStorage 'storyworld.r1022.autoMove' = '0'/'1' 또는 __STORYWORLD_AUTO_MOVE_R1022__.set(bool).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_AUTO_MOVE_R1022__)return;
-const REV='R1022-auto-move-1',KEY='storyworld.r1022.autoMove',LEAP=1,CLONE_MIN=.35;
-const stats={ticks:0,restores:0,clones:0,autoBlinksBlocked:0,outsideRestores:0,skipped:0,errors:0};let lastError=null;
+const REV='R1022-auto-move-2',KEY='storyworld.r1022.autoMove',LEAP=1,CLONE_MIN=.35;
+// 끔일 때 밸런스(사용자 2026-11-14 "모바일 최적화로 네온 데미지 올리고 서하 헌터 회피를 확률회피로 변경해서 밸런스 맞추셈").
+//  헤드리스 오토 12초 × 3회(qa/r1022/autodps.mjs): 끔/켬 피해 네온 0.895 · 서하 0.95 · 헌터 0.97 → 네온 공격력 ×1.12(1/0.895).
+//  회피형 E(본편 E 가 'escape' — 서하·헌터, R111 원거리 자동 회피 포함)는 몸이 안 빠지는 대신 1.2초 동안 들어오는 피격의 60% 를 무시(첫 타는 피함,
+//  난수 대신 누적 방식이라 같은 상황이면 같은 결과 — CI 재현 가능).
+const NEON_POWER=1.12,DODGE_T=1.2,DODGE_P=.6;let dodgeUntil=-1e9,dodgeAcc=0;
+const T=()=>g(()=>typeof time==='number'?time:0)||0;
+const escapeKind=h=>g(()=>window.__STORYWORLD_WER__?.defs?.[h]?.e?.[2])==='escape';
+const stats={ticks:0,restores:0,clones:0,autoBlinksBlocked:0,outsideRestores:0,skipped:0,dodgeWindows:0,dodged:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const g=f=>{try{return f();}catch(_){return undefined;}};
 const fin=Number.isFinite;
@@ -45,6 +52,7 @@ function settle(p,rec){
   for(const e of rec.ends)if(e!==rec.ends[rec.ends.length-1]&&Math.sqrt((e.x-tx)**2+(e.y-ty)**2)>=CLONE_MIN)clone(e.x,e.y,dir,.22,.42);
   clone(px,py,dir,.4,.62);}
  p.x=tx;p.y=ty;stats.restores++;
+ if(rec.leap&&escapeKind(p.hero)){dodgeUntil=T()+DODGE_T;dodgeAcc=1-DODGE_P;stats.dodgeWindows++;}
  try{r706()?.rebase?.(tx,ty);}catch(e){fail(e);}
  return true;}
 function install(){
@@ -63,6 +71,11 @@ function install(){
  if(typeof blink==='function'){const base=blink;blink=function(...a){
   if(depth&&off()){stats.autoBlinksBlocked++;return;}
   manual++;try{return base.apply(this,a);}finally{manual--;}};}
+ if(typeof attackPower==='function'){const base=attackPower;attackPower=function(...a){const v=base.apply(this,a);const p=P();return p&&p.hero==='neon'&&fin(v)&&off()?v*NEON_POWER:v;};}
+ if(typeof hurt==='function'){const base=hurt;hurt=function(damage,...a){const p=P();
+  if(p&&p.hp>0&&fin(damage)&&damage>0&&T()<dodgeUntil&&T()>=dodgeUntil-DODGE_T-1e-9&&off()){dodgeAcc+=DODGE_P;
+   if(dodgeAcc>=1-1e-9){dodgeAcc-=1;stats.dodged++;try{if(typeof defenceCue==='function')defenceCue('확률 회피','dodge');}catch(e){fail(e);}return 'missed';}}
+  return base.call(this,damage,...a);};}
  if(typeof tick==='function'){const base=tick;tick=function(...a){const p=P();
   if(depth||!p||!off())return base.apply(this,a);
   cur=fresh(p);const rec=cur;depth++;let r;try{r=base.apply(this,a);}finally{depth--;cur=null;}

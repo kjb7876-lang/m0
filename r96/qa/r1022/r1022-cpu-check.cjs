@@ -21,9 +21,11 @@ function mk(o={}){
  sb.moveActor=function(a,dx,dy){const nx=a.x+dx,ny=a.y+dy;if(!sb.blocked(nx,ny)){a.x=nx;a.y=ny;}return true;};
  sb.blink=function(){if(sb.player.blinkCD>0)return;sb.moveActor(sb.player,3.8,0);sb.player.blinkCD=4;};
  sb.dash=function(){const p=sb.player,o0={x:p.x,y:p.y};sb.moveActor(p,3.8,0);const end={x:p.x,y:p.y};for(const e of sb.enemies)if(e.x>=o0.x&&e.x<=end.x+.01){e.hp-=30;sb.hits.push({x:e.x,end});}return end;};
+ sb.attackPower=()=>100;sb.hurtLog=[];sb.hurt=function(d,src){if(!Number.isFinite(d)||d<=0)return 'ignored';sb.hurtLog.push(d);sb.player.hp-=d;return 'hit';};sb.cues=[];sb.defenceCue=(t,k)=>sb.cues.push(k);
  sb.steps=[];sb.tick=function(dt){for(const s of sb.steps.splice(0))s();sb.time+=dt;};
  sb.window={addEventListener:(t,f)=>listeners.push({t,f}),__STORYWORLD_CLONE_R767__:{spawn:(x,y,opt)=>{clones.push({x,y,opt});return true;}},
   __STORYWORLD_MOBILE_R63__:{isMobile:()=>!!o.mobile}};
+ sb.window.__STORYWORLD_WER__={defs:{neon:{e:['네온 돌파',4.3,'dash']},seoha:{e:['카이로스의 순간',4.2,'escape']},hunter:{e:['피의 대시',4,'escape']}}};
  if(o.r706)sb.window.__STORYWORLD_DANCE_FREE_R706__={state:()=>({body:o.r706.body}),rebase:(x,y)=>{rebased.push({x,y});if(o.r706.body){o.r706.body.x=x;o.r706.body.y=y;}}};
  if(o.orbit)sb.window.__STORYWORLD_THREADS_R174__={active:()=>o.orbit.on?{target:1}:null};
  if(o.coop)sb.window.__STORYWORLD_COOP_SIM_R62__={mode:()=>'host'};
@@ -73,5 +75,16 @@ const run=(m,fn)=>{m.sb.steps.push(fn);m.sb.tick(.016);};
 {const m=mk({mobile:true});m.API.set(true);const a=m.API.on(),s1=m.ls['storyworld.r1022.autoMove'];m.API.set(false);ok('set() stores 1/0 and switches live',a===true&&s1==='1'&&m.API.on()===false&&m.ls['storyworld.r1022.autoMove']==='0');}
 // ⑫ 설정 창 줄: R1021 '전투 화면' 구역이 있으면 그 안, 없으면 #quickSettingsR114 끝.
 ok('settings row targets section#combatScreenR1021 (div.r1021-row) with #quickSettingsR114 fallback',/combatScreenR1021/.test(src)&&/r1021-row/.test(src)&&/quickSettingsR114/.test(src));
+
+// ⑬ 밸런스(사용자 2026-11-14 "모바일 최적화로 네온 데미지 올리고 서하 헌터 회피를 확률회피로 변경해서 밸런스 맞추셈") — 끔일 때만.
+{const m=mk({mobile:true});const a=m.sb.attackPower();m.sb.player.hero='seoha';const b2=m.sb.attackPower();const pc=mk();const c=pc.sb.attackPower();const co=mk({mobile:true,coop:true});const d=co.sb.attackPower();
+ ok('off: neon attack power ×1.12; other heroes, on (PC) and co-op unchanged',near(a,112)&&near(b2,100)&&near(c,100)&&near(d,100),{a,b2,c,d});}
+{const m=mk({mobile:true});m.sb.player.hero='seoha';run(m,()=>m.sb.dash());const res=[];for(let i=0;i<5;i++)res.push(m.sb.hurt(10));
+ ok('off: escape-type E (seoha) keeps the body home and opens a chance-dodge window: 60% of hits ignored, first hit dodged',near(m.sb.player.x,10)&&res.join(',')==='missed,hit,missed,hit,missed'&&m.sb.hurtLog.length===2&&m.sb.cues.filter(k=>k==='dodge').length===3,{res,log:m.sb.hurtLog});
+ m.sb.time+=1.3;const after=m.sb.hurt(10);ok('chance-dodge window ends after 1.2 s',after==='hit'&&m.sb.hurtLog.length===3,{after});}
+{const m=mk({mobile:true});m.sb.player.hero='hunter';run(m,()=>m.sb.dash());ok('off: hunter escape also gets the window',m.sb.hurt(10)==='missed');}
+{const m=mk({mobile:true});m.sb.player.hero='neon';run(m,()=>m.sb.dash());ok('off: dash-type E (neon) gives no dodge window',m.sb.hurt(10)==='hit');}
+{const m=mk();m.sb.player.hero='seoha';run(m,()=>m.sb.dash());ok('on (PC): escape moves the body as before and no chance-dodge is added',near(m.sb.player.x,13.8)&&m.sb.hurt(10)==='hit');}
+{const m=mk({mobile:true});m.sb.player.hero='seoha';run(m,()=>m.sb.dash());ok('chance-dodge ignores bad damage values (NaN/0) and passes them to the engine untouched',m.sb.hurt(NaN)==='ignored'&&m.sb.hurt(0)==='ignored'&&m.sb.hurt(10)==='missed'&&Number.isFinite(m.sb.player.hp));}
 const fail=checks.filter(c=>!c.pass);for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail??'')));
 console.log(JSON.stringify({status:fail.length?'R1022_FAILED':'R1022_PASSED',passed:checks.length-fail.length,total:checks.length}));process.exit(fail.length?1:0);

@@ -55,7 +55,7 @@
     "on": true,
     "end": 4.88,
     "maxSeenAtFrames": 4.88,
-    "dmg": 2872.3,
+    "dmg": 844.8,
     "restores": 0,
     "clones": 0,
     "errors": 0
@@ -65,7 +65,7 @@
     "on": false,
     "end": 0,
     "maxSeenAtFrames": 0,
-    "dmg": 844.8,
+    "dmg": 946.2,
     "restores": 1,
     "clones": 1,
     "errors": 0
@@ -77,7 +77,7 @@
     "on": true,
     "end": 0,
     "maxSeenAtFrames": 0,
-    "dmg": 1944.1,
+    "dmg": 972.1,
     "restores": 0,
     "clones": 0,
     "errors": 0
@@ -97,9 +97,9 @@
    "on": {
     "cast": true,
     "on": true,
-    "end": 5.52,
-    "maxSeenAtFrames": 5.52,
-    "dmg": 1074.7,
+    "end": 5.2,
+    "maxSeenAtFrames": 5.2,
+    "dmg": 1012.6,
     "restores": 0,
     "clones": 0,
     "errors": 0
@@ -109,7 +109,7 @@
     "on": false,
     "end": 0,
     "maxSeenAtFrames": 0,
-    "dmg": 1074.7,
+    "dmg": 1012.6,
     "restores": 1,
     "clones": 1,
     "errors": 0
@@ -119,8 +119,8 @@
    "on": {
     "cast": true,
     "on": true,
-    "end": 5.2,
-    "maxSeenAtFrames": 5.2,
+    "end": 4.88,
+    "maxSeenAtFrames": 4.88,
     "dmg": 0,
     "restores": 0,
     "clones": 0,
@@ -141,9 +141,9 @@
    "on": {
     "cast": true,
     "on": true,
-    "end": 4.88,
-    "maxSeenAtFrames": 4.88,
-    "dmg": 1689.6,
+    "end": 4.56,
+    "maxSeenAtFrames": 4.56,
+    "dmg": 1579.1,
     "restores": 0,
     "clones": 0,
     "errors": 0
@@ -153,7 +153,7 @@
     "on": false,
     "end": 0,
     "maxSeenAtFrames": 0,
-    "dmg": 1689.6,
+    "dmg": 1579.1,
     "restores": 1,
     "clones": 1,
     "errors": 0
@@ -245,7 +245,7 @@
     "on": true,
     "end": 0,
     "maxSeenAtFrames": 0,
-    "dmg": 3283.8,
+    "dmg": 2176.7,
     "restores": 0,
     "clones": 0,
     "errors": 0
@@ -255,7 +255,7 @@
     "on": false,
     "end": 0,
     "maxSeenAtFrames": 0,
-    "dmg": 393.8,
+    "dmg": 0,
     "restores": 0,
     "clones": 0,
     "errors": 0

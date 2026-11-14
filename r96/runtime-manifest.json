@@ -50059,8 +50059,8 @@
     },
     {
       "path": "auto-move-r1022.js",
-      "bytes": 7352,
-      "sha256": "3cd3bcc5c6bfc843ff28ef2fd924d6b8d01b9503e07f82195e5731282da9f853"
+      "bytes": 8897,
+      "sha256": "77fa3e69af738a5fdc5a5e731b2f3291bd82463bf77a1544f5adedcb1c5dd102"
     },
     {
       "path": "balance-r179.js",
@@ -52484,7 +52484,7 @@
     }
   ],
   "fileCount": 10496,
-  "totalBytes": 1287894860,
+  "totalBytes": 1287896405,
   "webHTMLSha256": "16d74373f522e959ac3cdde01ff87c140a8899aef66282d39df114bbe19f04f3",
   "largest": [
     {
