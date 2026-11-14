@@ -829,6 +829,8 @@ jobs:
         run: node r96/qa/r794/r794-cpu-check.cjs
       - name: R840 story side quests (an NPC at each story map entrance - purge a tainted prop or hunt named mobs, a clue drops and goes to the note book; guide and cinema mode do it without panels; story gates untouched) CPU check
         run: node r96/qa/r840/r840-cpu-check.cjs
+      - name: R1035 side quest tainted props split to the left and right ends of wide maps so the player roams the whole map CPU check
+        run: node r96/qa/r1035/r1035-cpu-check.cjs
       - name: R796 story NPC reply choices (one line from the NPC and three replies - a wrong reply gets a scolding plus three field mobs and the talk must be redone; story and saves unchanged) CPU check
         run: node r96/qa/r796/r796-cpu-check.cjs
       - name: R563 Michaela genesis chain (Q → sky light pillars, R → grand pillar + halo; no new keys, upright cross only, Dots MI sheets) CPU check
