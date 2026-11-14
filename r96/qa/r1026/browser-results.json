@@ -1,0 +1,193 @@
+{
+ "at": "2026-11-14T04:16:19.587Z",
+ "url": "http://127.0.0.1:4410/m0/",
+ "directListeningVerified": false,
+ "table": [
+  {
+   "cat": "몹사망",
+   "kind": "r955Die_ghoul",
+   "n": 3,
+   "off": -43.01350494094651,
+   "on": -40.117624343286565,
+   "delta": 2.9,
+   "tailOff": -140,
+   "tailOn": -56.2,
+   "ringOff": 1.14,
+   "ringOn": 1.36
+  },
+  {
+   "cat": "몹사망",
+   "kind": "r955Die_spider",
+   "n": 3,
+   "off": -42.83148811391913,
+   "on": -40.36623934455834,
+   "delta": 2.47,
+   "tailOff": -140,
+   "tailOn": -60.2,
+   "ringOff": 0.36,
+   "ringOn": 0.34
+  },
+  {
+   "cat": "몹사망",
+   "kind": "r541Death",
+   "n": 3,
+   "off": -43.450491398304486,
+   "on": -39.79916576091034,
+   "delta": 3.65,
+   "tailOff": -140,
+   "tailOn": -93.5,
+   "ringOff": 0.8,
+   "ringOn": 0.82
+  },
+  {
+   "cat": "몹피격",
+   "kind": "r955Hit_spider",
+   "n": 3,
+   "off": -45.76472878810452,
+   "on": -41.41911844221724,
+   "delta": 4.35
+  },
+  {
+   "cat": "몹피격",
+   "kind": "r955Hit_glass",
+   "n": 3,
+   "off": -45.2581547558539,
+   "on": -46.210235517373334,
+   "delta": -0.95
+  },
+  {
+   "cat": "적중음",
+   "kind": "r785Hit_hwando",
+   "n": 3,
+   "off": -42.08703881586923,
+   "on": -39.47099109239014,
+   "delta": 2.62
+  },
+  {
+   "cat": "적중음",
+   "kind": "enemyHit",
+   "n": 3,
+   "off": -43.067385564558506,
+   "on": -39.69431337531241,
+   "delta": 3.37
+  },
+  {
+   "cat": "보스피격",
+   "kind": "r788BHit_root",
+   "n": 3,
+   "off": -42.09634214669771,
+   "on": -39.526474896121336,
+   "delta": 2.57
+  },
+  {
+   "cat": "영웅타격",
+   "kind": "r546Atk_hwando",
+   "n": 3,
+   "off": -39.96209092384872,
+   "on": -40.42535333880518,
+   "delta": -0.46
+  },
+  {
+   "cat": "영웅피격",
+   "kind": "r544Hurt_hwando",
+   "n": 3,
+   "off": -36.957325112109515,
+   "on": -37.86074037084613,
+   "delta": -0.9
+  }
+ ],
+ "watch": {
+  "off": {
+   "total": 4,
+   "deathPeak": 1,
+   "deathStarted": 1,
+   "heroStolen": 0,
+   "heroStarted": 8
+  },
+  "on": {
+   "total": 4,
+   "deathPeak": 2,
+   "deathStarted": 7,
+   "heroStolen": 0,
+   "heroStarted": 8
+  }
+ },
+ "r1026": {
+  "filesSwapped": 96,
+  "buses": 1,
+  "deathIn": 16,
+  "deathDrop": 5,
+  "deathRetired": 1,
+  "roomMade": 1,
+  "flushed": 6,
+  "hitIn": 9,
+  "hitDrop": 27,
+  "boosted": 5,
+  "eq": 33,
+  "tails": 16,
+  "peakGuarded": 0,
+  "errors": 0
+ },
+ "r993": {
+  "off": {
+   "remapped": 10,
+   "started": 43,
+   "trimmed": 43,
+   "varied": 43,
+   "demoted": 37,
+   "ducked": 1,
+   "admitLowDrop": 69,
+   "admitMidDrop": 0,
+   "measured": 36,
+   "errors": 0,
+   "targets": {
+    "영웅피격/hurt": -37,
+    "일반몹/hit": -46,
+    "일반몹/die": -43.5,
+    "일반몹/atk": -45,
+    "보스/hit": -42,
+    "보스/die": -36.5,
+    "보스/atk": -38.5,
+    "적피격/hit": -41,
+    "투사체/shot": -43,
+    "타격/atk": -38,
+    "스킬/tick": -43,
+    "스킬/awake": -36,
+    "스킬/cast": -37.5,
+    "패시브·회복/heal": -42,
+    "UI·보상/ui": -40,
+    "환경/env": -44
+   }
+  },
+  "on": {
+   "remapped": 10,
+   "started": 50,
+   "trimmed": 50,
+   "varied": 50,
+   "demoted": 44,
+   "ducked": 1,
+   "admitLowDrop": 61,
+   "admitMidDrop": 0,
+   "measured": 44,
+   "errors": 0,
+   "targets": {
+    "영웅피격/hurt": -37,
+    "일반몹/hit": -46,
+    "일반몹/die": -43.5,
+    "일반몹/atk": -45,
+    "보스/hit": -42,
+    "보스/die": -36.5,
+    "보스/atk": -38.5,
+    "적피격/hit": -41,
+    "투사체/shot": -43,
+    "타격/atk": -38,
+    "스킬/tick": -43,
+    "스킬/awake": -36,
+    "스킬/cast": -37.5,
+    "패시브·회복/heal": -42,
+    "UI·보상/ui": -40,
+    "환경/env": -44
+   }
+  }
+ }
+}
