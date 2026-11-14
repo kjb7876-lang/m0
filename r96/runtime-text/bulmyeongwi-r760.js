@@ -28,7 +28,7 @@
 //  끄기: localStorage['storyworld.r760.bulmyeongwi']='{"on":false}'(시트만 끄기 '{"sheets":false}', 소리만 끄기 '{"sfx":false}'). 점검: window.__STORYWORLD_BULMYEONGWI_R760__.inspect()
 (()=>{'use strict';
 if(window.__STORYWORLD_BULMYEONGWI_R760__)return;
-const REV='R760-R973-bulmyeongwi-5',KEY='storyworld.r760.bulmyeongwi';
+const REV='R760-R973-R1036-bulmyeongwi-6',KEY='storyworld.r760.bulmyeongwi';
 let prefs={on:true,ghosts:true,sheets:true,sfx:true,dirMove:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object')for(const k of Object.keys(prefs))if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={draws:0,swapped:0,waiting:0,patterns:0,ghosted:0,errors:0};let lastError=null,last=null,lastDeath=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
@@ -75,7 +75,11 @@ function track(e,s){const t=T(),dt=s.lastT<0?0:Math.max(0,Math.min(.1,t-s.lastT)
 function heading(e,s,dt){let sx,sy;try{const a=project(s.wx,s.wy),b=project(e.x,e.y);sx=(b.x-a.x)/dt;sy=(b.y-a.y)/dt;}catch(_){sx=((e.x-s.wx)-(e.y-s.wy))/dt;sy=((e.x-s.wx)+(e.y-s.wy))/dt;}
  if(!Number.isFinite(sx)||!Number.isFinite(sy))return;const k=Math.min(1,dt*6);s.hx=(s.hx||0)+(sx-(s.hx||0))*k;s.hy=(s.hy||0)+(sy-(s.hy||0))*k;
  const ax=Math.abs(s.hx),ay=Math.abs(s.hy),v=s.dir==='up'||s.dir==='down';
- if(v?ay<ax*.8:!(ay>ax*1.25)){s.dir='side';if(ax>1e-6)s.sideSg=s.hx>0?1:-1;}else s.dir=s.hy<0?'up':'down';}
+ // R1036(공개본 재점검: 영웅 곁에서 0.05초마다 세로 ±0.02칸 비틀거리며 move↔moveUp 이 1프레임씩 5번 번갈아 바뀜): 새 방향은 DIR_HOLD 초 이어질 때만 받는다.
+ let want;if(v?ay<ax*.8:!(ay>ax*1.25))want='side';else want=s.hy<0?'up':'down';
+ if(!s.dir){s.dir=want;s.pend=null;}else if(want===s.dir){s.pend=null;s.pendT=0;}else{if(s.pend!==want){s.pend=want;s.pendT=0;}s.pendT+=dt;if(s.pendT>=DIR_HOLD){s.dir=want;s.pend=null;s.pendT=0;}}
+ if(s.dir==='side'&&ax>1e-6&&want==='side')s.sideSg=s.hx>0?1:-1;}
+const DIR_HOLD=.25;
 // 방향 시트 키: 움직이는 중이고 시트가 실렸을 때만. table = SHEET(보스) 또는 MSHEET(중간보스), pathOf = SPATH·MPATH
 function dirKey(s,table,pathOf){if(!prefs.dirMove||!(s.move>.5))return null;const k=s.dir==='up'?'moveUp':s.dir==='down'?'moveDown':'moveSide';return table[k]&&img(pathOf(k))?k:null;}
 const Hq=c=>Math.abs(c.points[3][1]-c.points[0][1]);
@@ -172,7 +176,11 @@ let mWraps=0;function ensureMeasure(){if(typeof drawEnemy!=='function'||drawEnem
  const w=function(e,...a){const who=prefs.on?role(e):null;if(!who)return base.call(this,e,...a);const cm=(typeof ctx!=='undefined'&&Array.isArray(ctx?.commands))?ctx.commands:null,st0=cm?cm.length:-1;
   const r=base.call(this,e,...a);if(cm&&st0>=0)try{measure(e,cm,st0);}catch(err){fail(err);}return r;};
  for(const k of Object.keys(base))try{w[k]=base[k];}catch(_){}w.__r764m=true;try{drawEnemy=w;}catch(_){}}
-const inner=wrap((e,who,cm,st0)=>{stats.draws++;if(who==='boss')swap(e,cm,st0);try{ensureMeasure();}catch(err){fail(err);}},true);
+// R1031 후속: R620 이 이 감싸기보다 안쪽이면(스크립트가 늦게 붙어 R620 이 먼저 감싼 경우 — 공개본에서 지역을 옮긴 뒤 재현) R620 이 엔진 원래 그림끼리
+//  교차 보간한 잔상(r620Ghost)이 옛 회백 그림 그대로 몸 위에 0.09초 겹쳤다(공격 전환마다 2프레임, 절반은 반대 방향). 몸은 위 swap 이 바꾸므로 옛 그림 잔상은 뺀다.
+const OLDART=/bulmyeongwi_(idle|attack|rain|transition)\.webp/i;
+function dropOldGhosts(cm,st0){for(let i=cm.length-1;i>=st0;i--){const k=cm[i];if(k&&k.r620Ghost&&OLDART.test(srcOf(k))){cm.splice(i,1);stats.oldGhostsDropped=(stats.oldGhostsDropped||0)+1;}}}
+const inner=wrap((e,who,cm,st0)=>{stats.draws++;if(who==='boss'){swap(e,cm,st0);dropOldGhosts(cm,st0);}try{ensureMeasure();}catch(err){fail(err);}},true);
 let outer=false;const installOuter=()=>{if(!outer)outer=wrap((e,who,cm,st0)=>{if(who==='mid')midSwap(e,cm,st0);ghosts(e,who,cm,st0);});};
 if(typeof setTimeout==='function')setTimeout(installOuter,0);else installOuter();
 // 보스 구역에 들어가기 전에 미리 불러 둔다(첫 등장에 원본이 한 번 비치지 않게).
@@ -191,7 +199,13 @@ function drawDying(fx){const R=fx.r764,D=DEATH[R.who],path=D.path(),a=Math.max(0
  const fr={path,assetFrame:{sourceRect:[sx,0,512,512],pivot:[256,D.py],visibleHeight:D.vis},sourceAlphaCore:[sx,0,512,512],metricThreshold:16,sourcePixelsEdited:false};
  const tl=tileLen(fx);lastDeath={who:R.who,unit:+R.unit.toFixed(2),tl:+tl.toFixed(2),f,age:+a.toFixed(2)};return drawAssetFrame3(path,fr,q.x,q.y,R.unit*tl,{alpha:Math.max(0,Math.min(1,(life-a)/D.fade)),flip:R.flip});}
 let dTries=0;(function armDeath(){let done=false;try{done=wrapDeath();}catch(e){fail(e);}if(!done&&++dTries<80&&typeof setTimeout==='function')setTimeout(armDeath,250);})();
-window.__STORYWORLD_BULMYEONGWI_R760__=Object.freeze({rev:REV,inspect:()=>({rev:REV,inner,outer,last,lastDeath,prefs:{...prefs},stats:{...stats},lastError,scale:SCALE}),
+// R1036(사용자 2026-11-14 "불면귀예고 실루엣 예전불면귀라 거슬림"): 보스 구역 이름 카드(R255)·컷신 같은 '그림 한 장' 자리는 엔진 e.path(옛 회백 해골 bulmyeongwi_idle)를 읽었다.
+//  → 지금 몸을 그리는 그림 한 칸을 알려 준다: 시트 켜짐 = 대기 시트 첫 칸(칸마다 잰 알파 테두리를 감싸는 자리), 시트 끔 = 톤 자세 p4, R760 꺼짐 = null(엔진 그림 그대로 — 몸도 엔진 그림).
+const PORTRAIT={boss:{path:()=>SPATH('idle'),crop:{x:84,y:60,w:348,h:420}},mid:{path:()=>MPATH('idle'),crop:{x:66,y:56,w:378,h:424}}};
+function portrait(e){try{if(!prefs.on)return null;const who=roleAny(e);if(!who)return null;
+ if(prefs.sheets){const P=PORTRAIT[who];return {path:P.path(),crop:{...P.crop}};}
+ return who==='boss'?{path:DIR+'p4.webp',crop:{x:0,y:0,w:POSE.w,h:POSE.h}}:null;}catch(err){fail(err);return null;}}
+window.__STORYWORLD_BULMYEONGWI_R760__=Object.freeze({rev:REV,portrait,inspect:()=>({rev:REV,inner,outer,last,lastDeath,prefs:{...prefs},stats:{...stats},lastError,scale:SCALE}),
  set(p={}){for(const k of Object.keys(prefs))if(typeof p[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return {...prefs};}});
 })();
 // R763 불면귀에 잠식된 주민 — 사용자 2026-11-11 "닷츠에게 불면귀쪽 불면귀에 잠식된 사람1,2,3 해서 근거리 원거리 남녀약간 좀비화해서 불면귀파트에 일반몹으로 적용하라고 해

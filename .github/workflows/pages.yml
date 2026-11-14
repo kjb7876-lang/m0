@@ -403,6 +403,8 @@ jobs:
         run: node r96/qa/r617/hwando-fall-video-cpu-check.cjs
       - name: R619 pause game drawing while a full-screen story video is open
         run: node r96/qa/r619/video-render-pause-cpu-check.cjs
+      - name: R1036 entry video starts with region loading, map warmed behind the video CPU check
+        run: node r96/qa/r1036/r1036-entry-video-cpu-check.cjs
       - name: R667 title screen background loop video CPU check
         run: node r96/qa/r667/title-bg-video-cpu-check.cjs
       - name: R745 cinematic videos generator mark removal, quality and sound CPU check
@@ -516,6 +518,10 @@ jobs:
         run: node r96/qa/r1003/r1003-cpu-check.cjs
       - name: R945 hwando ink passives (piercing ink crescent, seven ink clones for 7 s, three-hero ink finale, per-body state) CPU check
         run: node r96/qa/r945/r945-cpu-check.cjs
+      - name: R1034 hwando W seven-direction clones restored + ink clone action circles CPU check
+        run: |
+          node r96/qa/r1034/r1034-w-cpu-check.cjs
+          node r96/qa/r1034/r1034-passive-cpu-check.cjs
       - name: R947 slayer blood passives (common piercing blood needle, blood cross-sword rain, rare lattice laser barrage, upright crosses, per-body state) CPU check
         run: node r96/qa/r947/r947-cpu-check.cjs
       - name: R962 survival passives (core beam is not a hero hit, placed-hero shots credit their own body, R950 finale off on the survival stage) CPU check
@@ -662,6 +668,16 @@ jobs:
         run: node r96/qa/r1028/tentacle-cpu-check.cjs
       - name: R1031 Bulmyeongwi (R760) body sheets follow R444 facing, not the engine fake attack CPU check
         run: node r96/qa/r1031/r1031-cpu-check.cjs
+      - name: R1031 follow-up Bulmyeongwi no old grey art R620 cross-fade ghost at pose changes CPU check
+        run: node r96/qa/r1031b/r1031b-cpu-check.cjs
+      - name: R1036 Bulmyeongwi boss-zone name card silhouette uses current R760 art, not old grey skull CPU check
+        run: node r96/qa/r1036/r1036-silhouette-cpu-check.cjs
+      - name: R1036 Bulmyeongwi walk direction sheet does not flicker when wobbling near the hero CPU check
+        run: node r96/qa/r1036/r1036-dirflip-cpu-check.cjs
+      - name: R1032 unique gear (J seal, rose seal, hero weapons) + dream-fragment n^2 upgrades + K passive / I gear+memory / B placement windows CPU check
+        run: node r96/qa/r1032/r1032-cpu-check.cjs
+      - name: R1038 defer hidden boot self-tests until diagnostics open CPU check
+        run: node r96/qa/r1038/r1038-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
         run: node r96/qa/r430/r430-cpu-check.cjs
       - name: R431 boss-room center fights + theme boss skill 6s + touch status/DoT + black-flame prop throws CPU check
@@ -827,6 +843,8 @@ jobs:
         run: node r96/qa/r794/r794-cpu-check.cjs
       - name: R840 story side quests (an NPC at each story map entrance - purge a tainted prop or hunt named mobs, a clue drops and goes to the note book; guide and cinema mode do it without panels; story gates untouched) CPU check
         run: node r96/qa/r840/r840-cpu-check.cjs
+      - name: R1035 side quest tainted props split to the left and right ends of wide maps so the player roams the whole map CPU check
+        run: node r96/qa/r1035/r1035-cpu-check.cjs
       - name: R796 story NPC reply choices (one line from the NPC and three replies - a wrong reply gets a scolding plus three field mobs and the talk must be redone; story and saves unchanged) CPU check
         run: node r96/qa/r796/r796-cpu-check.cjs
       - name: R563 Michaela genesis chain (Q → sky light pillars, R → grand pillar + halo; no new keys, upright cross only, Dots MI sheets) CPU check

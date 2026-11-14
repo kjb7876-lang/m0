@@ -94,7 +94,7 @@ function rows(){const id=heroId(),H=G(()=>HEROES[id],null)||{},mob=mobile(),auto
   ['W·E·R','숙련 기술',semi?'자동':'직접',semi],
   ['F EGO','EGO 각성 · 공명 '+res+'/30 · '+cd('egoCD'),auto?'자동':(mob?'단추':'F 키'),auto],
   ['회피','블링크 · '+cd('blinkCD'),mob?'단추':'S 키',false],
-  ['패시브',H.passive||'—','항상',true]].concat(survival()?[['영웅 배치','정화 결정으로 영웅을 사서 구슬 곁에 세움',mob?'단추':'I 키',false]]:[]);}
+  ['패시브',H.passive||'—','항상',true]].concat(survival()?[['영웅 배치','정화 결정으로 영웅을 사서 구슬 곁에 세움',mob?'단추':'B 키',false]]:[]);}
 function upgrades(){try{const U=G(()=>UPGRADES,[])||[],have=G(()=>player.upgrades,{})||{};const key=u=>{try{return typeof upgradeKey==='function'?upgradeKey(u):u.id;}catch(_){return u.id;}};
  return U.map(u=>({name:u.name,lv:+(have[key(u)]||0),max:u.max})).filter(x=>x.lv>0);}catch(e){fail(e);return [];}}
 function skills(){try{let s=$('r1021Skills');if(!s){s=el('section');s.id='r1021Skills';}

@@ -9861,7 +9861,10 @@
     "assets/r1029/float/zombie-guardian-knight-bloodied.webp",
     "assets/r1029/float/memory-fragment.webp",
     "assets/r1029/float/mob-paper-figure.webp",
+    "gear-r1032.js",
     "mobile-tier-r1023.js",
+    "entry-video-r1036.js",
+    "boot-lean-r1038.js",
     "passive-cutin-r1033.js"
   ],
   "mediaPaths": [
@@ -10937,5 +10940,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "e9e78302504c99154d56e7145129edc8e06f7357ca59633dcea037920526d161"
+  "runtimeManifestSHA256": "cc67e1698e53ea043b7ccb8763eba5d10e408a0ce222daa828f354c0eb68e2c3"
 }
