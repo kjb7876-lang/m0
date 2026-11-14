@@ -271,7 +271,7 @@ function install(){
    if(!here())return;if(G(()=>modal,false)?!mine:!canOpen())return;ev.preventDefault();toggle();}catch(e){fail(e);}});
  // 위쪽 단추 줄 '배치' 단추(모바일·마우스) — 생존 안에서만 보이고, 정화 결정 수를 함께 보여 준다
  const nav=()=>{try{const n=document.querySelector('nav.topnav');if(!n)return;let b=document.getElementById('r720NavBtn');
-   if(!b){css();b=document.createElement('button');b.id='r720NavBtn';b.type='button';b.title='영웅 배치 창 열기 (I)';b.onclick=()=>{try{if(mine&&G(()=>modal,false))close();else if(!open())toast?.('지금은 영웅 배치 창을 열 수 없습니다.',2);}catch(e){fail(e);}};n.insertBefore(b,n.firstChild);}
+   if(!b){css();b=document.createElement('button');b.id='r720NavBtn';b.type='button';b.title='영웅 배치 창 열기 (B)';b.onclick=()=>{try{if(mine&&G(()=>modal,false))close();else if(!open())toast?.('지금은 영웅 배치 창을 열 수 없습니다.',2);}catch(e){fail(e);}};n.insertBefore(b,n.firstChild);}
    const show=here();b.style.display=show?'':'none';if(show){const tx='배치 ◆'+Math.floor(st.crystals);if(b.textContent!==tx)b.textContent=tx;}}catch(e){fail(e);}};
  if(typeof setInterval==='function'){const iv=setInterval(nav,400);iv?.unref?.();}}
 try{install();}catch(e){fail(e);}
