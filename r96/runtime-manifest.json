@@ -6588,14 +6588,9 @@
       "sha256": "e8bf2fb6c9a7e14a4f43e176ad6331f5d54464f2157b445ffaecde94371c4f6f"
     },
     {
-      "path": "assets/r1017/x1017-chest.webp",
-      "bytes": 29084,
-      "sha256": "aff829d62fb2d564ec93c1fb2350a0c6591f0eec3004f560549c8dc06e1ef6d9"
-    },
-    {
       "path": "assets/r1017/x1017-gate.webp",
-      "bytes": 22362,
-      "sha256": "188cf890c4c17f5ec151faab9413daa1b8bbe7b7856c2b32ea123fc179c28aa3"
+      "bytes": 29062,
+      "sha256": "2ddc463c5143762a555eb04f2027efe47108bbecdac17bc083df501f717ef0e8"
     },
     {
       "path": "assets/r1017/x1017-veiled-king.webp",
@@ -51829,8 +51824,8 @@
     },
     {
       "path": "props-diablo-r1017.js",
-      "bytes": 6438,
-      "sha256": "aa8c65d988adf5958f8e8e7998ade80344c4ddbe536e57e0143ee8743c8cb3a9"
+      "bytes": 6537,
+      "sha256": "d1fea9ffb039385a5865be77a0841d6b669a8f8c2a1595ae93022364bf8c18ef"
     },
     {
       "path": "props-fit-r303.js",
@@ -51924,8 +51919,8 @@
     },
     {
       "path": "rooms-r523.js",
-      "bytes": 81019,
-      "sha256": "4fce7db13cba3e78c88b7f56655937e7df836bb621a77316d328ebe4d5460b64"
+      "bytes": 82248,
+      "sha256": "ddc878869e8f17930262b8f2075d95eb07efb444ccfe18acbeedc5a98fcae51c"
     },
     {
       "path": "root-gate-video-r372.js",
@@ -52508,8 +52503,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10501,
-  "totalBytes": 1288034099,
+  "fileCount": 10500,
+  "totalBytes": 1288013043,
   "webHTMLSha256": "f5716b2bd41308d4cee52720ca6f7120efcf1ab9bc70db939ad39bd56b12d847",
   "largest": [
     {

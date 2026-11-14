@@ -9708,7 +9708,6 @@
     "ui-clean-r1015.js",
     "props-diablo-r1017.js",
     "assets/r1017/x1017-gate.webp",
-    "assets/r1017/x1017-chest.webp",
     "assets/r1017/x1017-candles.webp",
     "assets/r1017/x1017-bed.webp",
     "assets/r1017/x1017-veiled-king.webp"
@@ -10786,5 +10785,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "dfa1a8c21b42bb081e6ad1952da2b0f8a03d50bddd78a7528e901b486589bb35"
+  "runtimeManifestSHA256": "ba6797e209cd59554f610476f01a2f6a22b1cdd14369b81f666c8fb1a4ad8e18"
 }

@@ -1,6 +1,8 @@
-// R1017 CPU check — patch.gg(Poly Haven CC0) 디아블로풍 조형물 5점(철문·너울 쓴 왕 석상·보물상자·촛대·녹슨 침대)을
-//  (사용자가 고른 6점 중 돌 화덕은 상시 규칙 '실내 화로 금지'로 뺌 — 첫 판 검사에서 바꾼 기대값, 보고서에 적음)
-//  R449 공간 기능별 배치표에 묶음으로 끼운다. 그리기 전용(충돌·저장·문·서사 불변), 결정적, 그림은 쿼터뷰 렌더 webp 384px.
+// R1017 CPU check — patch.gg(Poly Haven CC0) 디아블로풍 조형물 4점(철문·너울 쓴 왕 석상·촛대·녹슨 침대).
+//  (사용자가 고른 6점 중 돌 화덕은 상시 규칙 '실내 화로 금지', 보물상자는 시대 맞는 보관실 없음(현대 호텔·빌라)으로 뺌 — 첫 판 검사에서 바꾼 기대값, 보고서에 적음)
+//  철문은 R449 공간 기능별 배치표(예배 계열 긴 회랑)에, 석상·촛대·녹슨 침대는 R523 방 묶음(cult03 코어 전실·앞방·입구, ep1a09 관찰실)에 넣는다
+//  (브라우저 그리기 명령 실측: R523 이 맡은 방에서는 R449 가구가 그리는 동안 빠져 화면에 0점 — 두 번째 판에서 바꾼 기대값, 보고서에 적음).
+//  그리기 전용(충돌·저장·문·서사 불변), 결정적, 그림은 쿼터뷰 렌더 webp 384px.
 'use strict';const fs=require('fs'),path=require('path'),vm=require('vm'),crypto=require('crypto');
 const R=path.join(__dirname,'..','..'),ROOT=path.join(R,'..'),C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8'),RT=f=>fs.readFileSync(path.join(R,'runtime-text',f),'utf8');
 let bad=0,n=0;const ok=(m,c)=>{n++;if(!c){bad++;console.log('FAIL',m);}else console.log('ok  ',m);};
@@ -15,7 +17,7 @@ ok('script tag once, own line before the story-reader line (so before R449), aft
 ok('listed in verify-r96-public.py',fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').includes("'"+F+"'"));
 ok('CI runs this check',/node r96\/qa\/r1017\/r1017-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8')));
 // ---- 그림 6점 -------------------------------------------------------------------------------------
-const ARTS=['gate','veiled-king','chest','candles','bed'];
+const ARTS=['gate','veiled-king','candles','bed'];
 const man=JSON.parse(fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8'));const rows=new Map(man.files.map(r=>[r.path,r]));
 const inputs=JSON.parse(fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8'));
 for(const a of ARTS){const p='assets/r1017/x1017-'+a+'.webp',fp=path.join(R,'runtime-text',p);let b=null;try{b=fs.readFileSync(fp);}catch(_){}
@@ -23,8 +25,9 @@ for(const a of ARTS){const p='assets/r1017/x1017-'+a+'.webp',fp=path.join(R,'run
  ok('art '+a+': in runtime manifest with matching sha256 and in runtime inputs',!!b&&rows.get(p)?.sha256===crypto.createHash('sha256').update(b).digest('hex')&&inputs.textPaths.includes(p));
  ok('art '+a+': listed for the public check',/'assets\/r1017\/'/.test(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8')));}
 let credits='';try{credits=fs.readFileSync(path.join(ROOT,'CREDITS.md'),'utf8');}catch(_){}
-ok('CREDITS.md names all five with source Poly Haven and CC0 (checked via patch.gg)',['Large Iron Gate','Gothic Statue','Treasure Chest','Brass Candleholders','Old Bed Frame'].every(t=>credits.includes(t))&&/Poly Haven/.test(credits)&&/CC0/.test(credits)&&/patch\.gg/.test(credits));
+ok('CREDITS.md names all four with source Poly Haven and CC0 (checked via patch.gg)',['Large Iron Gate','Gothic Statue','Brass Candleholders','Old Bed Frame'].every(t=>credits.includes(t))&&/Poly Haven/.test(credits)&&/CC0/.test(credits)&&/patch\.gg/.test(credits));
 const code=src.replace(/\/\/.*$/mg,'');
+ok('no treasure chest shipped (no era-fit storage room)',!fs.existsSync(path.join(R,'runtime-text','assets','r1017','x1017-chest.webp'))&&!/x1017-chest/.test(code));
 ok('no fire/brazier art shipped or placed (user rule: no indoor fire)',!/firepit|brazier|화로/.test(code)&&!fs.existsSync(path.join(R,'runtime-text','assets','r1017','x1017-firepit.webp')));
 {const m=/const OUTDOOR=(\/.*\/);/.exec(C('props-fit-r303.js'));const OUT=m?eval(m[1]):null;
  ok('art paths are not read as outdoor things by R303 (statue/gate/well names hide indoor art)',!!OUT&&ARTS.every(a=>!OUT.test('assets/r1017/x1017-'+a+'.webp')));}
@@ -55,25 +58,25 @@ const b=boot();
 ok('api exported',!!b.me&&typeof b.me.inspect==='function');
 if(b.me){
 const nk=a=>'r80-x1017-'+a;
-ok('six R80 art entries registered with finite size, scale and a pivot inside the image',ARTS.every(a=>{const e=b.assets[nk(a)];return e&&e.path==='assets/r1017/x1017-'+a+'.webp'&&e.width>0&&e.width<=384&&e.height>0&&e.height<=384&&Number.isFinite(e.scale)&&e.scale>0&&e.scale<2&&
+ok('R449 path: only the gate is an R80 entry (the other three ride R523)',Object.keys(b.me.ART).join()==='gate'&&!b.assets[nk('veiled-king')]&&!b.assets[nk('bed')]);
+ok('gate R80 entry registered with finite size, scale and a pivot inside the image',['gate'].every(a=>{const e=b.assets[nk(a)];return e&&e.path==='assets/r1017/x1017-'+a+'.webp'&&e.width>0&&e.width<=384&&e.height>0&&e.height<=384&&Number.isFinite(e.scale)&&e.scale>0&&e.scale<2&&
  Array.isArray(e.frame?.pivot)&&e.frame.pivot.every(Number.isFinite)&&e.frame.pivot[0]>=0&&e.frame.pivot[0]<=e.width&&e.frame.pivot[1]>0&&e.frame.pivot[1]<=e.height&&e.frame.sourceRect?.[2]===e.width&&e.frame.sourceRect?.[3]===e.height;}));
-ok('real-world size order: gate tallest, chest/candles below the hero, old bed near the hospital bed (R102 .9)',(()=>{const s=a=>b.assets[nk(a)].scale;return s('gate')>s('veiled-king')&&s('veiled-king')>s('bed')*1.05&&['chest','candles'].every(a=>s(a)<.7)&&Math.abs(s('bed')-.9)<.15;})());
+ok('gate is taller than the hero (1.3–1.7 hero heights)',b.assets[nk('gate')].scale>1.3&&b.assets[nk('gate')].scale<1.7);
+{const g=fs.readFileSync(path.join(R,'runtime-text','assets','r1017','x1017-gate.webp'));ok('gate lifted from the near-black render (file changed from the first cut 188cf890…)',crypto.createHash('sha256').update(g).digest('hex').slice(0,8)!=='188cf890');}
 ok('existing R80 entries untouched',Object.entries(freshAssets()).every(([k,v])=>JSON.stringify(b.assets[k])===JSON.stringify(v)));
 const mine=w=>w.props.filter(p=>p&&p.r449Furniture&&!p.r303Hide);const arts=(w,room)=>mine(w).filter(p=>room==null||p.r449.room===room).map(p=>String(p.r80Art).replace(/^r80-/,''));
 // 계열별 배치 (실제 전수에서 그 공간이 있는 계열만: cult 예배실·긴 회랑, home 보관실, clinic 처치실)
 const wc=world('cult01','cult',['예배당','긴 회랑','긴 회랑','긴 회랑','긴 회랑','작은 방']);b.ctx.room=wc;b.api.curate(wc);b.me.cap(wc);
-ok('cult worship room: veiled-king figure as the core piece with the candelabra beside it',arts(wc,0)[0]==='x1017-veiled-king'&&arts(wc,0).includes('x1017-candles'));
+ok('cult worship room (R523 rooms rest R449 furniture there): no R449 statue/candles any more',!arts(wc).some(a=>/veiled|candles/.test(a)));
 ok('cult long corridors: iron gate placed by R449, but only one stays visible per region (cap 1)',wc.props.filter(p=>p.r80Art===nk('gate')).length>=2&&mine(wc).filter(p=>p.r80Art===nk('gate')).length===1&&wc.props.filter(p=>p.r303Hide==='r1017cap').every(p=>p.r80Art===nk('gate')));
 ok('cap keeps the lowest id (deterministic)',(()=>{const g=wc.props.filter(p=>p.r80Art===nk('gate')).sort((x,y)=>String(x.id).localeCompare(String(y.id)));return !g[0].r303Hide&&g.slice(1).every(p=>p.r303Hide==='r1017cap');})());
 ok('cap is stable: running again changes nothing',(()=>{const before=JSON.stringify(wc.props.map(p=>p.r303Hide||''));b.me.cap(wc);return JSON.stringify(wc.props.map(p=>p.r303Hide||''))===before;})());
 const wm=world('murder02','home',['물품 보관실','거실','작업실']);b.ctx.room=wm;b.api.curate(wm);b.me.cap(wm);
-ok('home (murder mansion) storage room: treasure chest',arts(wm,0)[0]==='x1017-chest');
-ok('home living/work rooms keep their R449 sets (no new art)',[1,2].every(i=>arts(wm,i).length>0&&arts(wm,i).every(a=>!/x1017/.test(a))));
+ok('home family (modern hotel/villa/house, R830 era table) gets no gothic art in any room',arts(wm).length>0&&arts(wm).every(a=>!/x1017/.test(a)));
 const wh=world('clinic01','clinic',['주사실','처치실','검사실']);b.ctx.room=wh;b.api.curate(wh);b.me.cap(wh);
-ok('clinic: first work room keeps the hospital bed, second gets the rusty iron bed + IV stand',arts(wh,0)[0]==='142'&&arts(wh,1)[0]==='x1017-bed'&&arts(wh,1).includes('141'));
+ok('clinic work rooms keep R449 as it was (rusty bed moved to R523 observation rooms)',arts(wh,0)[0]==='142'&&!arts(wh).some(a=>/x1017/.test(a)));
 const all=[wc,wm,wh].flatMap(mine).filter(p=>/x1017/.test(p.r80Art));
-ok('new pieces are non-solid presentation props with finite coordinates and R449 ids',all.length>=5&&all.every(p=>p.solid===false&&p.r80PresentationOnly===true&&Number.isFinite(p.x+p.y+p.height)&&p.height>0&&/^r449:furn:/.test(p.id)&&p.path===b.assets[p.r80Art].path));
-ok('bed head against the wall: rusty bed ≥1.1 tiles from its wall (2 m long, pivot at the middle)',mine(wh).filter(p=>p.r80Art===nk('bed')).every(p=>{const q=wh.exploration.r224Rooms.find(r=>r.id===p.r449.room);return (p.r449.wall==='n'?p.y-q.y0:p.x-q.x0)>=1.1;}));
+ok('new pieces are non-solid presentation props with finite coordinates and R449 ids',all.length>=1&&all.every(p=>p.solid===false&&p.r80PresentationOnly===true&&Number.isFinite(p.x+p.y+p.height)&&p.height>0&&/^r449:furn:/.test(p.id)&&p.path===b.assets[p.r80Art].path));
 // 결정성·멱등
 const sig=w=>mine(w).map(p=>p.id+'|'+p.r80Art+'|'+(+p.x).toFixed(3)+','+(+p.y).toFixed(3)).sort().join(';');
 {const b2=boot({twice:true}),w2=world('cult01','cult',['예배당','긴 회랑','긴 회랑','긴 회랑','긴 회랑','작은 방']);b2.ctx.room=w2;b2.api.curate(w2);b2.me.cap(w2);
@@ -90,4 +93,35 @@ ok('R449 api still reachable and frozen after the hook',!!b.api&&Object.isFrozen
 {const b5=boot(),w5=world('ep1b03','home',['물품 보관실','거실']);w5.exploration.sinRoomArt='sin-room-art-v1';b5.ctx.room=w5;b5.api.curate(w5);
  ok('sin region with its own art rule: no new art',!arts(w5).some(a=>/x1017/.test(a)));}
 }
+// ---- R523 방 묶음: 석상·촛대·녹슨 침대 (실제 지도 고정본 + 실제 엔진 벽 판정) -----------------------------------
+{const S523=C('rooms-r523.js');let rt523='';try{rt523=RT('rooms-r523.js');}catch(_){}
+ ok('R523 runtime copy matches client source',S523.length>0&&rt523===S523);
+ ok('R523 art table: veiledking·candles·rustbed point at the R1017 renders (table written by qa/r523/tools/apply-art.py from art8.json)',/ veiledking:\{path:'assets\/r1017\/x1017-veiled-king\.webp',[^\n]*face:'n',ang:'iso'/.test(S523)&&/ candles:\{path:'assets\/r1017\/x1017-candles\.webp',[^\n]*ang:'pole'/.test(S523)&&/ rustbed:\{path:'assets\/r1017\/x1017-bed\.webp',[^\n]*face:'n',ang:'iso'/.test(S523)&&fs.existsSync(path.join(R,'qa','r523','tools','art8.json')));
+ const rd=f=>{try{return fs.readFileSync(path.join(R,f),'utf8');}catch(_){return'';}};
+ let E=null;try{const c={window:{},console,performance:{now:()=>0}};vm.createContext(c);vm.runInContext(rd('runtime-text/dist/phase1.js'),c);E=c.window.StoryPhase1.explorationBlocked;}catch(e){}
+ ok('engine explorationBlocked loaded',typeof E==='function');
+ const lay=fx=>{const cells=[];for(const[y,sp]of Object.entries(fx.floorSpans))for(let i=0;i<sp.length;i+=2)for(let x=sp[i];x<sp[i+1];x++)cells.push([x,+y]);
+  return{bounds:[0,0,100,104],floorCells:cells,walls:fx.walls.map(w=>({...w})),r224Rooms:fx.r224Rooms.map(q=>({...q})),worldR74:{rooms:fx.rooms.map(q=>({...q})),doors:fx.doors.map(d=>({...d}))},worldWardR81:fx.worldWardR81?{...fx.worldWardR81}:{},entry:fx.entry,starts:fx.starts};};
+ const W5=fx=>({id:fx.id,layer:'STORY',exploration:lay(fx),props:fx.props.map(p=>({...p,solid:false,visible:true})),enemies:[],objective:fx.objective||null});
+ const boot5=stored=>{const ctx={localStorage:{getItem:()=>stored||null,setItem:()=>{}},console,Math,JSON,Number,String,Object,Array,Set,Map,WeakMap,Promise,Date,StoryPhase1:{explorationBlocked:E},
+   regionById:{ep1a09:{paths:[]}},readyImage:()=>null,ensureImages:()=>Promise.resolve(),project:(x,y)=>({x:640+(x-y)*27,y:340+(x+y)*13.5}),W:1280,H:676,zoom:1,room:undefined,draw:function(){},drawProp:function(){}};
+  ctx.window=ctx;vm.createContext(ctx);vm.runInContext(S523,ctx);return ctx.__STORYWORLD_ROOMS_R523__;};
+ const FX={};for(const id of['ep1a09','cult03']){try{FX[id]=JSON.parse(rd('qa/r523/fixtures/'+id+'.json'));}catch(_){}}
+ let A=null;try{A=boot5();}catch(e){console.log(String(e.stack).slice(0,300));}
+ ok('R523 boots with the real fixtures',!!A&&!!FX.ep1a09&&!!FX.cult03);
+ if(A&&E&&FX.ep1a09&&FX.cult03){const NEW=/^(veiledking|candles|rustbed)$/;
+  const look=id=>{const w=W5(FX[id]),L=w.exploration,rows=A.list(w),nm=new Map(L.worldR74.rooms.map(q=>[q.id,q.name])),hit=(x,y)=>!!E(L,x,y,.02);return{w,L,rows,nm,hit,mine:rows.filter(p=>NEW.test(p.r523.art))};};
+  const cu=look('cult03'),cl=look('ep1a09');
+  const kings=cu.mine.filter(p=>p.r523.art==='veiledking');
+  ok('cult03 core antechamber (코어 전실): the veiled-king figure stands with a candelabra in the same room ('+kings.length+')',kings.length>=1&&kings.every(k=>cu.nm.get(k.r523.room)==='코어 전실'&&cu.mine.some(c=>c.r523.art==='candles'&&c.r523.room===k.r523.room)));
+  ok('cult03 entrance rooms (앞방·입구) light a candelabra',cu.mine.some(p=>p.r523.art==='candles'&&cu.nm.get(p.r523.room)==='앞방')&&cu.mine.some(p=>p.r523.art==='candles'&&cu.nm.get(p.r523.room)==='입구'));
+  ok('statue and candles nowhere else in cult03 (not in harvest rooms, barrier sections or corridors), at most one statue per room',cu.mine.every(p=>/^(corehall|narthex)$/.test(p.r523.use))&&new Set(kings.map(k=>k.r523.room)).size===kings.length);
+  const rust=cl.mine.filter(p=>p.r523.art==='rustbed');
+  ok('ep1a09 observation rooms (관찰실): a rusty iron bed with an IV stand in each, hospital beds still there ('+rust.length+')',rust.length>=2&&rust.every(p=>p.r523.use==='observe'&&cl.rows.some(q=>q.r523.art==='iv'&&q.r523.room===p.r523.room))&&cl.rows.some(p=>p.r523.use==='observe'&&p.r523.art==='bed')&&cl.mine.every(p=>p.r523.art==='rustbed'));
+  const all5=[...cu.mine.map(p=>[p,cu]),...cl.mine.map(p=>[p,cl])];
+  ok('new pieces: feet on floor, not sunk into a wall (≤1%), not hidden behind a front wall (≤20%)',all5.length>=5&&all5.every(([p,X])=>{const S=A.samplesOf(p.r523.art,!!p.r303Flip);return !X.hit(p.x,p.y)&&A.embedOf(S,p.x,p.y,X.hit)<=.01&&A.hiddenOf(S,p.x,p.y,X.hit)<=.2;}));
+  ok('one-direction art (statue, bed) mirrored only on the opposite wall; candles never mirrored',all5.every(([p])=>p.r523.art==='candles'?!p.r303Flip:!!p.r303Flip===(p.r523.wall!=='n')));
+  ok('presentation only: not solid, no targeting, rides the R521 draw path',all5.every(([p])=>p.solid===false&&p.presentationOnly===true&&p.autoTargetEligible6===false&&p.r521Ward===true));
+  ok('deterministic: same plan twice',(()=>{const A2=boot5(),s=a=>a.list(W5(FX.cult03)).map(p=>p.id+p.r523.art+p.x.toFixed(3)+p.y.toFixed(3)).join();return s(A)===s(A2);})());
+  ok('R523 switch off: no new pieces drawn by it',(()=>{const A3=boot5('{"on":false}');try{return !A3.enabled(W5(FX.cult03));}catch(_){return false;}})());}}
 console.log(`\nR1017 cpu check: ${n-bad}/${n} passed`);process.exit(bad?1:0);
