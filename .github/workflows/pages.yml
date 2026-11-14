@@ -540,6 +540,8 @@ jobs:
         run: node r96/qa/r971/r971-cpu-check.cjs
       - name: R1025 hero special passive level unlock CPU check
         run: node r96/qa/r1025/r1025-cpu-check.cjs
+      - name: R1033 third special passive cut-in (7 heroes, shared DOM band like Hwando trio; bodies/scenes/off skipped; 8s story / 20s survival gap) CPU check
+        run: node r96/qa/r1033/r1033-cpu-check.cjs
       - name: R981 insomnia-ghost midboss renamed and set apart from the main boss CPU check
         run: node r96/qa/r981/puppet-cpu-check.cjs
       - name: R990 bulmyeongwi fog skills (fog summon of village mobs, fog-weighted patterns, old boss art in summon ghosts) CPU check

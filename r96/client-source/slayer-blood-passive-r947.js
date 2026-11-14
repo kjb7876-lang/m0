@@ -81,6 +81,7 @@ function clearAll(){for(const s of states())wipe(s);vis.length=0;disarm();}
 // ---- 발동 ----------------------------------------------------------------------------------------------------
 const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
 const U1025=(h,a,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__,v=u&&u.mask(h,a,k);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},S1025=h=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.share(h);return Number.isFinite(v)?Math.max(0,Math.min(1,v)):1;}catch(_){return 1;}},W1025=(h,w)=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.weights(h,w);return v||w;}catch(_){return w;}},A1025=(h,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.unlocked(h,k)!==false:true;}catch(_){return true;}},O1025=id=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.summonOpen(id)!==false:true;}catch(_){return true;}};/* R1025 특수 패시브 레벨별 해금·소환 영웅 서사 확인(파일 없으면 원래 값) */
+const C1033=(h,k,o,x)=>{try{window.__STORYWORLD_PASSIVE_CUTIN_R1033__?.fire(h,k,o,x);}catch(_){}};/* R1033 세 번째 특수 패시브 컷인(1·2단·몸·끔은 그쪽에서 거름) */
 function pick(s){if(s.force){const k=s.force;s.force=null;return k;}
  const r=Math.random(),[a,b,c]=U1025(HERO,G971(HERO,[CFG.needle.chance,CFG.swords.chance,CFG.lattice.chance]),['needle','swords','lattice']),k=r<a?'needle':r<a+b?'swords':r<a+b+c?'lattice':null;
  return k&&T()>=s.ready[k]?k:null;}
@@ -116,7 +117,7 @@ function stepSwords(s){const t=T(),C=CFG.swords;for(let i=s.swords.length-1;i>=0
    addVis({k:'burst',x:w.x,y:w.y,life:.8});if(w.i===0||w.i===C.count-1)try{if(typeof shake!=='undefined'&&fin(shake))shake=Math.max(shake,.7);}catch(_){}}}
  if(t>=w.end)s.swords.splice(i,1);}}
 // ① 혈격자
-function castLattice(s,p){const t=T();s.stats.lattices++;s.lattice={t0:t,room,pw:power(),wave:0,next:t+CFG.lattice.lead,lines:[],id:'l'+(++serial),cx:p.x,cy:p.y,crossKeys:new Set(),crossN:0};
+function castLattice(s,p){const t=T();s.stats.lattices++;C1033(HERO,'lattice',p);s.lattice={t0:t,room,pw:power(),wave:0,next:t+CFG.lattice.lead,lines:[],id:'l'+(++serial),cx:p.x,cy:p.y,crossKeys:new Set(),crossN:0};
  addVis({k:'pulse',x:p.x,y:p.y,life:.5});say('혈격자',p.x,p.y-.5);sfx('special');arm();return true;}
 function stepLattice(s){const L=s.lattice;if(!L)return;const t=T(),C=CFG.lattice,b=bodyOf(s);if(L.room!==room||!isSl(b)){s.lattice=null;return;}
  L.cx=b.x;L.cy=b.y;

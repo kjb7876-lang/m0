@@ -9877,7 +9877,8 @@
     "hero-paint-r1027.js",
     "narration-r1037.js",
     "hwando-ink-trace-r1034.js",
-    "ego-paint-r1039.js"
+    "ego-paint-r1039.js",
+    "passive-cutin-r1033.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -10952,5 +10953,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "5e5cfea3ad74ef853ae3197a1b09668a74244975f1871f5424df8b5f25aa95ce"
+  "runtimeManifestSHA256": "d36bff91f2b6ad801187ee95ef6ab8532df5d6f05ba692b9f3acf585baa142e5"
 }
