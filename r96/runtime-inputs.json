@@ -9705,7 +9705,8 @@
     "assets/r1019/move/timeless-silver-scout-down.webp",
     "assets/r1019/move/timeless-silver-scout-up.webp",
     "move-dir-r1019-data.js",
-    "ui-clean-r1015.js"
+    "ui-clean-r1015.js",
+    "auto-move-r1022.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -10780,5 +10781,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "f88b03d8c370bf5c912c78ae83268eb776bf3fb7f8f0a800a2dcaea353556a40"
+  "runtimeManifestSHA256": "895a5ef93219eaf88f9f552bfe7b254d7927b704f990122ec7dc1ada6d5a4b82"
 }

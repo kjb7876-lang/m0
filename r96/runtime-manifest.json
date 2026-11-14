@@ -50058,6 +50058,11 @@
       "sha256": "5f863d3c2f0c59362c4380694251c6e27e28dacb3b5766b0b035035b08b6b9d1"
     },
     {
+      "path": "auto-move-r1022.js",
+      "bytes": 7352,
+      "sha256": "3cd3bcc5c6bfc843ff28ef2fd924d6b8d01b9503e07f82195e5731282da9f853"
+    },
+    {
       "path": "balance-r179.js",
       "bytes": 2962,
       "sha256": "5eb46b1d466fd2b4c3b5ee6dbf12e2148292a82ed842626d7ae2f2eb806a3058"
@@ -50754,8 +50759,8 @@
     },
     {
       "path": "dance-free-r706.js",
-      "bytes": 6740,
-      "sha256": "0bee6bc3e26473c8ca0d51c9cc58c847b73b4da037a93a59737be64c191ff26f"
+      "bytes": 6978,
+      "sha256": "fe768206ea6b1e7e96430a676f321839248c76ba359bc9ef0ef07e16d12699be"
     },
     {
       "path": "dark-r123.js",
@@ -51274,8 +51279,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6578218,
-      "sha256": "51e36763e64b89c2497e1bda92b35d076357bfb393c9d51a631771526ded1e27"
+      "bytes": 6578263,
+      "sha256": "16d74373f522e959ac3cdde01ff87c140a8899aef66282d39df114bbe19f04f3"
     },
     {
       "path": "intro-r140.js",
@@ -52478,9 +52483,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10495,
-  "totalBytes": 1287887225,
-  "webHTMLSha256": "51e36763e64b89c2497e1bda92b35d076357bfb393c9d51a631771526ded1e27",
+  "fileCount": 10496,
+  "totalBytes": 1287894860,
+  "webHTMLSha256": "16d74373f522e959ac3cdde01ff87c140a8899aef66282d39df114bbe19f04f3",
   "largest": [
     {
       "path": "index.html",
