@@ -50838,6 +50838,11 @@
       "sha256": "ac9d4830ab58b165f1031e0086f02ed731416ec9fb78d40a4a0b47d4c8353c68"
     },
     {
+      "path": "boot-lean-r1038.js",
+      "bytes": 2142,
+      "sha256": "67fd27b461c55ff3de66e0b4e484a76960a013a791fd609d911d9405e20d5d5b"
+    },
+    {
       "path": "boss-arena-r431.js",
       "bytes": 13212,
       "sha256": "b69a8451603bf3c840e301651d4a737ceb2a7441854318ba2926aaa7600982ef"
@@ -52029,8 +52034,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6578688,
-      "sha256": "80abe9e222ad3571d323124554c426d0413a9b0daa9cf2ea528c3381af2acde2"
+      "bytes": 6578733,
+      "sha256": "3f8ebdc1473a78617f56cb741653f77b281a8e4f5ad69ad7f57ad3a8e59b9a7b"
     },
     {
       "path": "intro-r140.js",
@@ -53268,9 +53273,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10653,
-  "totalBytes": 1297048524,
-  "webHTMLSha256": "80abe9e222ad3571d323124554c426d0413a9b0daa9cf2ea528c3381af2acde2",
+  "fileCount": 10654,
+  "totalBytes": 1297050711,
+  "webHTMLSha256": "3f8ebdc1473a78617f56cb741653f77b281a8e4f5ad69ad7f57ad3a8e59b9a7b",
   "largest": [
     {
       "path": "index.html",
