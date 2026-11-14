@@ -454,6 +454,8 @@ jobs:
         run: node r96/qa/r993/r993-cpu-check.cjs
       - name: R1026 enemy hit/death SFX punch (own death/hit lanes, level lift, EQ, short death tail) CPU check
         run: node r96/qa/r1026/r1026-cpu-check.cjs
+      - name: R1027 hero dot (pixel atlas) skill FX and static buff sigils replaced by painted frame sheets CPU check
+        run: node r96/qa/r1027/r1027-cpu-check.cjs
       - name: R968 boss/midboss attack sounds also fire on route phases and rooms without an R78 phase (same rule as R966) CPU check
         run: node r96/qa/r968/r968-cpu-check.cjs
       - name: R975 hwando E ilseom boss-first 7-hit left/right multi-hit (sum stays x0.6, per-hit sound, E dash unchanged) CPU check
@@ -522,6 +524,8 @@ jobs:
         run: |
           node r96/qa/r1034/r1034-w-cpu-check.cjs
           node r96/qa/r1034/r1034-passive-cpu-check.cjs
+      - name: R1034b hwando ink sword traces (Dots HI-07 brush stroke on basic hits and W upright crosses) CPU check
+        run: node r96/qa/r1034/r1034-ink-trace-cpu-check.cjs
       - name: R947 slayer blood passives (common piercing blood needle, blood cross-sword rain, rare lattice laser barrage, upright crosses, per-body state) CPU check
         run: node r96/qa/r947/r947-cpu-check.cjs
       - name: R962 survival passives (core beam is not a hero hit, placed-hero shots credit their own body, R950 finale off on the survival stage) CPU check
@@ -678,6 +682,8 @@ jobs:
         run: node r96/qa/r1032/r1032-cpu-check.cjs
       - name: R1038 defer hidden boot self-tests until diagnostics open CPU check
         run: node r96/qa/r1038/r1038-cpu-check.cjs
+      - name: R1037 narration always-off button (boss entry story window + memory fragment note) and settings rows CPU check
+        run: node r96/qa/r1037/r1037-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
         run: node r96/qa/r430/r430-cpu-check.cjs
       - name: R431 boss-room center fights + theme boss skill 6s + touch status/DoT + black-flame prop throws CPU check
@@ -911,6 +917,8 @@ jobs:
         run: node r96/qa/r795/r795-cpu-check.cjs
       - name: R821 hero readability on bright patterned floors (foot pool + body outline, rosehouse only) CPU check
         run: node r96/qa/r821/r821-cpu-check.cjs
+      - name: R1030 hero harmony (pale hero exposure toward scene key with readability floor, contact shadow) CPU check
+        run: node r96/qa/r1030/r1030-cpu-check.cjs
       - name: R880 line-art zone cutscenes (SVG, canon captions, game paused, skip, cinema mode) CPU check
         run: node r96/qa/r880/r880-cpu-check.cjs
       - name: R832 region door leaves by map style + Joseon village trees (pine/persimmon) CPU check

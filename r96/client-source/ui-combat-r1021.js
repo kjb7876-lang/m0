@@ -110,7 +110,7 @@ function toggleRow(k,label,note){const row=el('label','r1021-row');const i=el('i
 // 다른 덧씌움(R1022 자동 순간이동 줄 등)이 이 묶음에 붙인 줄은 남기고, 이 모듈이 만든 줄(r1021Own)만 다시 만든다
 function section(){try{let s=$('combatScreenR1021');if(!s){s=el('section');s.id='combatScreenR1021';}
  for(const c of [...s.children])if(c.classList.contains('r1021Own'))s.removeChild(c);
- const mine=[el('h3','r1021Own','전투 화면'),toggleRow('subs','서사 자막','무한 생존·영화 모드 화면 글')];
+ const mine=[el('h3','r1021Own','전투 화면'),toggleRow('subs','서사 자막','생존·영화 자막·컷신 글')];
  if(mobile())mine.push(toggleRow('buttons','화면 단추','회피·영웅 배치 동그라미'),toggleRow('autoSkills','기술·EGO 자동 발동','끄면 단추로 직접'));
  const first=s.firstElementChild;for(const m of mine){m.classList.add('r1021Own');s.insertBefore(m,first);}
  stats.section++;return s;}catch(e){fail(e);return null;}}
