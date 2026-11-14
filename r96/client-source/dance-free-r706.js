@@ -59,6 +59,8 @@ if(typeof tick==='function'){const base=tick;tick=function(dt,...a){const p=P();
  try{if(P()!==p){reset();return r;}finish(p,true);}catch(e){fail(e);}return r;};}
 if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=function(...a){reset();return base.apply(this,a);};}
 function set(v){on=v!==false;try{localStorage.setItem(KEY,on?'1':'0');}catch(_){}if(!on)reset();return on;}
-window.__STORYWORLD_DANCE_FREE_R706__=Object.freeze({revision:REV,on:()=>on&&solo(),enabled:()=>on,set,settle,
+// rebase(x,y): R1022(자동 순간이동 끔)가 본체를 제자리로 되돌릴 때 춤 중 기억한 본체 자리도 같이 맞춘다.
+function rebase(x,y){if(body&&Number.isFinite(x)&&Number.isFinite(y)){body.x=x;body.y=y;}}
+window.__STORYWORLD_DANCE_FREE_R706__=Object.freeze({revision:REV,on:()=>on&&solo(),enabled:()=>on,set,settle,rebase,
  state:()=>({on,body:body?{...body}:null,dancing:!!(P()&&dancing(P()))}),stats:()=>({...stats,lastError})});
 })();

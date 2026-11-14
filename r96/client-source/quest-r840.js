@@ -15,7 +15,7 @@
 //  끄기: localStorage['storyworld.r840.quest']='{"on":false}'. 점검: window.__STORYWORLD_QUEST_R840__.inspect()
 (()=>{'use strict';
 if(window.__STORYWORLD_QUEST_R840__)return;
-const REV='R840-story-quest-1',KEY='storyworld.r840.quest';
+const REV='R840-story-quest-1+R843-dots-art',KEY='storyworld.r840.quest';
 let prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object'&&typeof s.on==='boolean')prefs.on=s.on;}catch(_){}
 const stats={placed:0,offers:0,taken:0,auto:0,hits:0,broken:0,kills:0,drops:0,done:0,walks:0,fallback:0,draws:0,errors:0};let lastError=null;const events=[];
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
@@ -25,35 +25,41 @@ const REACH=2.4,GUIDE_REACH=2.2,HIT_REACH=1.9,PICKUP=1.35,ORB_DELAY=.55,HIT_GAP=
 const VIL='assets/r763/villagers/',N75='assets/r75/npcs.png';
 const sheet=(path,vis)=>Object.freeze({path,w:256,h:256,px:128,py:234.67,vis,scale:1.3,frames:6,fps:5,faces:'right',sheetW:1536,sheetH:256});
 const still=(x,y,w,h,px,py,vis)=>Object.freeze({path:N75,x,y,w,h,px,py,vis,scale:1.1,frames:1,sheetW:1536,sheetH:1024});
-// R790 의료진 숨쉬기 시트(임시 재사용 — 간호사·의사 전용 그림 Dots CX-0077SN 이 오면 바꾼다. 최종 아트 아님).
+// R790 의료진 숨쉬기 시트(Dots CX-0073SN) — ep1a09 문밖의 의료진. 간호사·의사는 R843 부터 전용 그림.
 const medic=()=>Object.freeze({path:'assets/r790/npc/medic-idle6.webp',w:384,h:384,px:192,py:352,vis:284,scale:1.35,frames:6,fps:5,faces:'right',sheetW:2304,sheetH:384});
 // 사몽(기억 속) 인물의 임시 그림: R75 주민 그림의 색을 뺀 창백한 '잔영'(사몽 맵이 어두워 어둡게 하면 안 보인다 — 헤드리스 실측). 인물 전용 그림(Dots CX-0077SN)이 오면 sheet() 로 바꾼다 — 최종 아트 아님.
 const shade=(x,y,w,h,px,py,vis)=>Object.freeze({path:N75,x,y,w,h,px,py,vis,scale:1.3,frames:1,sheetW:1536,sheetH:1024,shade:true});
+// R843 Dots 그림(CX-0076QN 불면귀 마을 · CX-0077SN 사몽·의목사A, 7분야 이미지 심사 7.86~8.07 → 게임 파생본 scripts/r843-npc-art.py). 서 있기 6칸, 칸 가운데·Dots 발 기준선.
+const R843='assets/r843/';
+const dots=(file,cell,py,vis,scale,fps)=>Object.freeze({path:R843+file,w:cell,h:cell,px:cell/2,py,vis,scale,frames:6,fps:fps||5,faces:'right',sheetW:cell*6,sheetH:cell,dots:true});
+const SN=(file,vis,scale)=>dots(file,384,352,vis,scale||1.3);
+// 오염 기운(발밑 8칸 고리, CX-0076QN 2a) — 악에 물든 조형물 발치. 그림이 아직 안 실렸으면 예전 코드 기운으로 그린다.
+const AURA=Object.freeze({path:R843+'aura-loop8.webp',w:256,h:256,px:130,py:236,vis:134,frames:8,fps:9,sheetW:2048,sheetH:256});
 // 지역마다 부탁하는 인물 하나. episode = 서사 묶음(짧은 이야기 한 편). lore·clue.text 는 정본 문장 그대로(검사가 정본과 대조한다).
 const DEFS=Object.freeze({
- last302:Object.freeze({episode:'한약과 불면귀',npc:Object.freeze({kind:'fisher',name:'잠들지 못한 어부',label:'잠들지 못한 어부 · 가리키는 곳',sub:'포구 · 그물을 멘 어부',sprite:sheet(VIL+'fisher-idle.webp',208),
+ last302:Object.freeze({episode:'한약과 불면귀',npc:Object.freeze({kind:'fisher',name:'잠들지 못한 어부',label:'잠들지 못한 어부 · 가리키는 곳',sub:'포구 · 그물을 멘 어부',sprite:Object.freeze({...dots('fisher-idle6.webp',256,236,190,1.3),fps:4}),bust:R843+'fisher-bust.webp',
    body:'그물을 멘 어부가 충혈된 눈으로 길 가의 붉은 부적 말뚝을 가리킨다. 얼굴의 표정과 몸의 움직임이 어긋나 있다.',lore:'포구 마을에서는 사람들이 살아가는 소리가 들리지 않았다. 주민들은 젖은 한지처럼 납작했고, 눈은 충혈되어 있었다.'}),
   quest:Object.freeze({type:'purge',hits:3,take:'말뚝을 찾아 부순다',hud:'어부가 가리킨 붉은 부적 말뚝 부수기',prop:Object.freeze({path:'assets/r810/talisman-post.webp',height:96,name:'악에 물든 부적 말뚝'})}),
-  clue:Object.freeze({title:'실 끊긴 붉은 부적',text:'그런 주민들이 보이지 않는 실에 끌리듯 나를 향해 달려왔다. 얼굴의 표정과 몸의 움직임이 어긋나 있었다. 지친 몸이 바라는 것과 그 몸을 움직이는 힘은 달랐다.'})}),
- last303:Object.freeze({episode:'한약과 불면귀',npc:Object.freeze({kind:'herbwife',name:'약방 아낙',label:'약방 아낙 · 돌아보는 곳',sub:'안개 마을 · 약사발을 든 아낙',sprite:sheet(VIL+'herbwife-idle.webp',211),
+  clue:Object.freeze({icon:R843+'clue-talisman.webp',title:'실 끊긴 붉은 부적',text:'그런 주민들이 보이지 않는 실에 끌리듯 나를 향해 달려왔다. 얼굴의 표정과 몸의 움직임이 어긋나 있었다. 지친 몸이 바라는 것과 그 몸을 움직이는 힘은 달랐다.'})}),
+ last303:Object.freeze({episode:'한약과 불면귀',npc:Object.freeze({kind:'herbwife',name:'약방 아낙',label:'약방 아낙 · 돌아보는 곳',sub:'안개 마을 · 약사발을 든 아낙',sprite:dots('herbwife-idle6.webp',256,235,197,1.3,4),bust:R843+'herbwife-bust.webp',
    body:'약사발을 든 아낙이 길 가의 꺼진 등롱대 쪽으로 고개를 돌린다. 찢긴 등롱에 검은 안개가 서려 있다.',lore:'그들은 오랫동안 잠을 잃은 채 버티고 있었다.'}),
   quest:Object.freeze({type:'purge',hits:3,take:'등롱대를 찾아 부순다',hud:'아낙이 돌아본 꺼진 등롱대 부수기',prop:Object.freeze({path:'assets/r810/lantern-post-off.webp',height:104,name:'검은 안개가 서린 등롱대'})}),
-  clue:Object.freeze({title:'안개 묻은 등롱 조각',text:'그들이 잠들지 못해 느끼는 두려움과 불면귀의 명령은 구분해야 했다.'})}),
+  clue:Object.freeze({icon:R843+'clue-lantern.webp',title:'안개 묻은 등롱 조각',text:'그들이 잠들지 못해 느끼는 두려움과 불면귀의 명령은 구분해야 했다.'})}),
  last304:Object.freeze({episode:'고블린 두목과 장미 인장',npc:Object.freeze({kind:'refugee-elder',name:'피난민 노인',label:'피난민 노인 · 바라보는 곳',sub:'중립 지역 · 길 가의 노인',sprite:still(252,15,201,490,82.04,486,482),
    body:'해진 숄을 두른 노인이 숲 쪽을 바라본다. 늑대 울음이 가까이에서 들린다.',lore:'숲에는 슬라임과 늑대, 고블린이 들끓었다.'}),
   quest:Object.freeze({type:'kill',count:5,take:'늑대를 쫓는다',hud:'길 가의 늑대 쫓기',match:e=>/^l304-e2(\b|-|$)/.test(String(e?.nativeId||''))||/늑대/.test(String(e?.name||''))}),
-  clue:Object.freeze({title:'충돌의 흔적',text:'서로 어울리지 않는 풍경들이 맞붙은 그곳은, 둘째와 셋째의 세계가 충돌하는 중립 지역이었다.'})}),
+  clue:Object.freeze({icon:R843+'clue-signpost.webp',title:'충돌의 흔적',text:'서로 어울리지 않는 풍경들이 맞붙은 그곳은, 둘째와 셋째의 세계가 충돌하는 중립 지역이었다.'})}),
  last305:Object.freeze({episode:'고블린 두목과 장미 인장',npc:Object.freeze({kind:'refugee-woman',name:'피난민 여인',label:'피난민 여인 · 가리키는 곳',sub:'늑대·고블린 숲 · 길 가의 여인',sprite:still(690,21,183,481,88.34,477,473),
    body:'머릿수건을 쓴 여인이 길 가의 검게 물든 사당을 가리킨다. 피리 소리가 그쪽에서 새어 나온다.',lore:'숲 깊은 곳에서 피리로 늑대를 조종하는 고블린 두목이 길을 막았다.'}),
   quest:Object.freeze({type:'purge',hits:3,take:'사당을 찾아 부순다',hud:'여인이 가리킨 악에 물든 사당 부수기',prop:Object.freeze({path:'assets/props/v290/corrupted_shrine.webp',height:104,name:'악에 물든 사당'})}),
-  clue:Object.freeze({title:'갈라진 하늘의 날',text:'하늘이 갈라지던 날 무너진 성에 방향을 알 수 없는 문이 열렸고, 그때부터 서쪽과 동쪽, 산 자와 죽은 자가 뒤섞였다는 것이었다.'})}),
+  clue:Object.freeze({icon:R843+'clue-skystone.webp',title:'갈라진 하늘의 날',text:'하늘이 갈라지던 날 무너진 성에 방향을 알 수 없는 문이 열렸고, 그때부터 서쪽과 동쪽, 산 자와 죽은 자가 뒤섞였다는 것이었다.'})}),
  // ── 의목사A(1부 병원, 짧은 이야기 세 편): ① 피로 물든 병원(ep1a08) ② 주사실과 결전의 날(ep1a09) ③ 중독의 도시와 의목사 후보생(ep1a10·ep1a11 — 의료진·의목사는 R790) ──
- ep1a08:Object.freeze({free:true,episode:'피로 물든 병원',npc:Object.freeze({kind:'nurse',name:'주사기를 든 간호사',label:'주사기를 든 간호사 · 다가오는 걸음',sub:'병원 복도 · 주사기를 든 간호사',sprite:medic(),
+ ep1a08:Object.freeze({free:true,episode:'피로 물든 병원',npc:Object.freeze({kind:'nurse',name:'주사기를 든 간호사',label:'주사기를 든 간호사 · 다가오는 걸음',sub:'병원 복도 · 주사기를 든 간호사',sprite:SN('nurse-idle6.webp',280),
    body:'주사기를 든 간호사가 복도 끝의 비명 쪽을 돌아본다. 해치려는 것인지 도우려는 것인지 알 수 없다.',lore:'어느새 주사기를 든 간호사가 다가왔다. 몸이 굳었다. 나를 해치려는 것인지 도우려는 것인지 판단할 수 없었다.'}),
-  also:Object.freeze([Object.freeze({kind:'doctor',name:'말이 들리지 않는 의사',label:'말이 들리지 않는 의사',sub:'병원 복도 · 다가오는 의사',sprite:medic(),body:'의사가 다가와 무언가 말한다. 입 모양은 보이는데 말은 제대로 들리지 않는다.',lore:'의사가 다가왔지만 그의 말은 제대로 들리지 않았다.'})]),
+  also:Object.freeze([Object.freeze({kind:'doctor',name:'말이 들리지 않는 의사',label:'말이 들리지 않는 의사',sub:'병원 복도 · 다가오는 의사',sprite:SN('doctor-idle6.webp',280),body:'의사가 다가와 무언가 말한다. 입 모양은 보이는데 말은 제대로 들리지 않는다.',lore:'의사가 다가왔지만 그의 말은 제대로 들리지 않았다.'})]),
   quest:Object.freeze({type:'kill',count:5,match:e=>/^a08-s1(\b|-|$)/.test(String(e?.nativeId||''))||/비명잔영/.test(String(e?.name||'')),take:'복도의 비명을 가라앉힌다',hud:'간호사가 돌아본 복도 비명잔영 가라앉히기'}),
   clue:Object.freeze({title:'겹쳐 보인 얼굴',text:'피처럼 보이던 것이 사라지고, 악마의 얼굴 위로 의료진의 얼굴이 겹쳤다.'})}),
- ep1a09:Object.freeze({episode:'주사실과 결전의 날',npc:Object.freeze({kind:'medic-door',name:'문밖의 의료진',label:'문밖의 의료진 · 막아서는 손',sub:'주사실 앞 · 외치는 의료진',sprite:medic(),
+ ep1a09:Object.freeze({episode:'주사실과 결전의 날',npc:Object.freeze({kind:'medic-door',name:'문밖의 의료진',label:'문밖의 의료진 · 막아서는 손',sub:'주사실 앞 · 외치는 의료진',sprite:medic(),bust:'assets/r790/npc/medic-bust.webp',
    body:'의료진이 주사실 쪽을 가리키며 외친다. 안쪽에서 지켜보는 것들이 길을 막고 있다.',lore:'문밖에서 의료진이 외치며 나를 막으려 했다.'}),
   also:Object.freeze([Object.freeze({kind:'comrade',name:'쓰러지는 동료의 잔영',label:'쓰러지는 동료의 잔영',sub:'결전의 날 · 적을 막던 동료',sprite:Object.freeze({path:'assets/episode1a/generated-v392/falling_comrade_echo.webp',x:0,y:0,w:418,h:418,px:209,py:400,vis:380,scale:1.1,frames:1,sheetW:418,sheetH:418}),body:'적을 막아서던 동료의 모습이 잠깐 비쳤다 흐려진다.',lore:'동료들이 적을 막는 동안 나는 봉인이 있는 곳으로 달려갔다.'})]),
   quest:Object.freeze({type:'kill',count:5,match:e=>/^a09-o1(\b|-|$)/.test(String(e?.nativeId||''))||/감시환각/.test(String(e?.name||'')),take:'지켜보는 것들을 걷어 낸다',hud:'의료진이 가리킨 주사실 감시환각 걷어 내기'}),
@@ -63,20 +69,22 @@ const DEFS=Object.freeze({
   quest:Object.freeze({type:'purge',hits:3,take:'주사기 더미를 찾아 부순다',hud:'잔영이 내려다본 주사기 더미 부수기',prop:Object.freeze({path:'assets/r138/props/syringe.webp',height:40,name:'악에 물든 주사기 더미'})}),
   clue:Object.freeze({title:'내려놓은 이름',text:'선택받은 수호자라는 이름을 내려놓자 치료가 필요한 내가 남았다.'})}),
  // ── 사몽 S-05 경성의 밤(짧은 이야기 한 편, 정본 = story-source/hapil-canon-r448-samong-aspect.txt) ──
- 'sz115-S05-1':Object.freeze({layer:'DREAM',canon:'r448',episode:'경성의 밤',npc:Object.freeze({kind:'jihyeon',name:'지현의 잔영',label:'지현의 잔영 · 잔을 닦는 손',sub:'전차 지나는 술집 · 붉은 립스틱의 여자',sprite:shade(690,21,183,481,88.34,477,473),
+ 'sz115-S05-1':Object.freeze({layer:'DREAM',canon:'r448',episode:'경성의 밤',npc:Object.freeze({kind:'jihyeon',name:'지현의 잔영',label:'지현의 잔영 · 잔을 닦는 손',sub:'전차 지나는 술집 · 붉은 립스틱의 여자',sprite:SN('jihyeon-idle6.webp',281),
    body:'붉은 립스틱의 여자가 마른행주로 잔을 닦다 손을 멈춘다. 시선은 구석 자리의 잔에 머물러 있다.',lore:'핏빛처럼 선명한 붉은 립스틱을 입술에 문지르고, 발목이 가늘어 보이는 굽 높은 구두를 신은 자태가 서글플 만큼 잘 어울리는 여자였다.'}),
+  also:Object.freeze([Object.freeze({kind:'barstaff',name:'낯선 점원의 잔영',label:'낯선 점원의 잔영',sub:'전차 지나는 술집 · 앞치마를 두른 점원',sprite:SN('barstaff-idle6.webp',283),body:'앞치마를 두른 점원이 쟁반을 든 채 구석 자리를 흘끗 본다. 지현이 서던 자리다.',lore:'낯선 점원이 내 앞에 차가운 잔을 내려놓았다.'})]),
   quest:Object.freeze({type:'purge',hits:3,take:'잔을 찾아 깨뜨린다',hud:'지현의 잔영이 바라본 인장 번진 잔 깨뜨리기',prop:Object.freeze({path:'assets/r105/drive/prop-glass.webp',height:54,name:'인장이 번진 잔'})}),
   clue:Object.freeze({title:'멎은 손길',text:'마른행주로 잔의 물기를 훔치던 지현의 손길이 찰나간 멎었다.'})}),
- 'sz115-S05-3':Object.freeze({layer:'DREAM',canon:'r448',episode:'경성의 밤',npc:Object.freeze({kind:'superior',name:'상관의 잔영',label:'상관의 잔영 · 신문을 짚는 손',sub:'사무실 책상 · 환하게 웃는 상관',sprite:shade(1136,17,193,484,96.5,480,476),
+ 'sz115-S05-3':Object.freeze({layer:'DREAM',canon:'r448',episode:'경성의 밤',npc:Object.freeze({kind:'superior',name:'상관의 잔영',label:'상관의 잔영 · 신문을 짚는 손',sub:'사무실 책상 · 환하게 웃는 상관',sprite:SN('superior-idle6.webp',281),
    body:'환하게 웃는 상관이 책상 위 호외를 손가락으로 짚는다. 군복 소매가 신문지를 스친다.',lore:'나를 개 취급하던 상관이 만면에 기괴할 정도로 환한 미소를 띤 채 걸어 들어와, 내 특진이 상부에서 최종 결정되었노라고 외쳤다.'}),
-  quest:Object.freeze({type:'purge',hits:3,take:'호외를 찾아 찢는다',hud:'상관의 잔영이 짚은 인장 찍힌 호외 찢기',prop:Object.freeze({path:'assets/r105/drive/prop-newspaper-1.webp',height:58,name:'인장이 찍힌 호외'})}),
+  quest:Object.freeze({type:'purge',hits:3,take:'호외를 찾아 찢는다',hud:'상관의 잔영이 짚은 인장 찍힌 호외 찢기',prop:Object.freeze({path:R843+'extra-newspaper.webp',height:62,name:'인장이 찍힌 호외'})}),
   clue:Object.freeze({title:'바스락거리는 호외',text:'마른 종이가 바스락거리며 비명 같은 마찰음을 냈다.'})}),
- // R842 디스토피아(사몽 S-06) 세 편 — ① 침공과 기지(S06-2·3) ② 귀환로와 제3 대피소(S06-15) ③ 되풀이되는 실패와 스무 살의 원룸(S06-18·22). 그림은 모두 임시 잔영.
- 'sz115-S06-2':Object.freeze({layer:'DREAM',canon:'r448',episode:'디스토피아 · 침공과 기지',npc:Object.freeze({kind:'waiting-her',name:'기다리던 그녀의 잔영',label:'기다리던 그녀의 잔영 · 무릎 위의 점검 키트',sub:'방폭 격벽 안 대기실 · 플라스틱 의자의 그녀',sprite:shade(690,21,183,481,88.34,477,473),
+ // R842 디스토피아(사몽 S-06) 세 편 — ① 침공과 기지(S06-2·3) ② 귀환로와 제3 대피소(S06-15) ③ 되풀이되는 실패와 스무 살의 원룸(S06-18·22).
+ // R843: S06-2 그녀(앉은 그림)·S06-3 수비대원·S06-22 젊은 날의 나는 Dots 그림. 꾸러미를 든 그녀(S06-15)·엄호하는 그녀(S06-18)·어린 동생은 맞는 자세 그림이 없어 아직 임시 잔영.
+ 'sz115-S06-2':Object.freeze({layer:'DREAM',canon:'r448',episode:'디스토피아 · 침공과 기지',npc:Object.freeze({kind:'waiting-her',name:'기다리던 그녀의 잔영',label:'기다리던 그녀의 잔영 · 무릎 위의 점검 키트',sub:'방폭 격벽 안 대기실 · 플라스틱 의자의 그녀',sprite:SN('her-seated-idle6.webp',235,1.09),
    body:'플라스틱 의자에 앉은 그녀가 무릎 위에 작은 점검 키트를 올려놓고 복도 쪽을 본다. 발소리를 알아듣고 자리에서 일어난다.',lore:'민간인 대피 구역의 의료 지원반에 소속된 그녀는, 내가 사지(死地)의 작전에 투입되었다가 돌아오는 날이면 언제나 무릎 위에 작은 의료용 점검 키트를 올려놓고 저 자리에서 나를 기다리곤 했다.'}),
   quest:Object.freeze({type:'talk',take:'곁에 앉아 이야기를 듣는다',hud:'기다리던 그녀의 이야기 듣기'}),
   clue:Object.freeze({title:'미지근한 전투식량',text:'그녀는 내 육성 대답을 듣고 나서야 안도하듯 작게 한숨을 내쉬더니, 내 손바닥 위에 자신의 체온으로 미지근하게 데운 전투식량 팩 하나를 살며시 쥐여 주었다.'})}),
- 'sz115-S06-3':Object.freeze({layer:'DREAM',canon:'r448',episode:'디스토피아 · 침공과 기지',npc:Object.freeze({kind:'garrison',name:'수비대원의 잔영',label:'수비대원의 잔영 · 밀려나는 진지',sub:'북부 방어선 · 아군 수비대',sprite:shade(1136,17,193,484,96.5,480,476),
+ 'sz115-S06-3':Object.freeze({layer:'DREAM',canon:'r448',episode:'디스토피아 · 침공과 기지',npc:Object.freeze({kind:'garrison',name:'수비대원의 잔영',label:'수비대원의 잔영 · 밀려나는 진지',sub:'북부 방어선 · 아군 수비대',sprite:SN('garrison-idle6.webp',280),
    body:'피를 흘리는 수비대원이 무너진 엄폐물에 기대어 방어선 너머를 가리킨다.',lore:'내가 중무장을 갖추고 지상의 교전 현장에 도착했을 때, 아군 일반 수비대는 고출력 음파 공진에 고막과 내장이 터져 피를 흘리며 속절없이 밀려나고 있었다.'}),
   quest:Object.freeze({type:'kill',count:5,match:e=>!!e&&!e.r170Tower,take:'방어선으로 밀려드는 것들을 막는다',hud:'수비대원이 가리킨 방어선의 적 막기'}),
   clue:Object.freeze({title:'적색경보',text:'불과 세 시간 뒤, 기지 북쪽의 최전방 방어선에서 귀를 찢는 적색경보가 울려 퍼졌다.'})}),
@@ -89,7 +97,7 @@ const DEFS=Object.freeze({
    body:'소총을 든 그녀가 얼어붙은 눈 능선에서 기어오르는 것들을 겨눈다.',lore:'그녀는 내 바로 옆의 얼어붙은 눈 능선에 낮게 엎드려, 포탑의 화망을 뚫고 가까이 기어오르는 생체병기들의 머리 유리관을 침착하게 하나씩 쏘아 깨뜨리고 있었다.'}),
   quest:Object.freeze({type:'kill',count:5,match:e=>!!e&&!e.r170Tower,take:'기어오르는 것들을 함께 막는다',hud:'그녀의 잔영이 겨눈 눈밭의 적 막기'}),
   clue:Object.freeze({title:'엄호 사격',text:'내 등 뒤에서 그녀의 정확한 엄호 사격이 한 박자도 놓치지 않고 내 발걸음을 따라오고 있었다.'})}),
- 'sz115-S06-22':Object.freeze({layer:'DREAM',canon:'r448',episode:'디스토피아 · 되풀이되는 실패와 스무 살의 원룸',npc:Object.freeze({kind:'young-self',name:'젊은 날의 나',label:'젊은 날의 나 · 원룸 철문',sub:'스무 살의 원룸 · 헐렁한 평상복 차림',sprite:shade(252,15,201,490,82.04,486,482),
+ 'sz115-S06-22':Object.freeze({layer:'DREAM',canon:'r448',episode:'디스토피아 · 되풀이되는 실패와 스무 살의 원룸',npc:Object.freeze({kind:'young-self',name:'젊은 날의 나',label:'젊은 날의 나 · 원룸 철문',sub:'스무 살의 원룸 · 헐렁한 평상복 차림',sprite:SN('young-self-idle6.webp',279),
    body:'헐렁한 평상복 차림의 젊은 사람이 문고리를 잡은 채 이쪽 눈동자를 들여다본다.',lore:'젊은 나는 문고리를 잡은 채 한동안 말없이 내 눈동자를 들여다보았다.'}),
   quest:Object.freeze({type:'talk',take:'마주 앉아 이야기를 꺼낸다',hud:'젊은 날의 나와 마주 앉기'}),
   clue:Object.freeze({title:'접이식 의자',text:'나는 좁은 원룸의 책상 맞은편에 놓인 작은 접이식 의자에 마주 앉았다.'})})});
@@ -155,7 +163,7 @@ function spots(r){/* 방마다 한 번 계산해 둔다(같은 구조면 같은 
 function respot(r){const keep=r.r840Spots?.npc||null,ka=r.r840Spots?.amb||null;r.r840Spots=null;const sp=spots(r);if(keep)sp.npc=keep;if(ka)sp.amb=ka;return sp;}
 function img(p){try{const r=typeof readyImage==='function'?readyImage(p):null;if(r&&r.ready!==false&&r.image)return r.image;}catch(_){}try{if(typeof addImage==='function')addImage(p,'R840 서사 퀘스트');}catch(_){}return null;}
 // ── 방에 놓기: 상태에 맞게 NPC·조형물·단서를 맞춘다(여러 번 불러도 같음) ──
-function dropAt(r,pt){const cur=orbOf(r);if(cur)return cur;const o={id:'r840:clue:'+zid(r),x:pt.x,y:pt.y,path:ORB_ART,height:30,solid:false,visible:true,autoTargetEligible6:false,r840Clue:{at:T()}};r.props.push(o);stats.drops++;note('drop',{zone:zid(r),x:+pt.x.toFixed(2),y:+pt.y.toFixed(2)});return o;}
+function dropAt(r,pt){const cur=orbOf(r);if(cur)return cur;const ic=defOf(r)?.clue?.icon;if(ic)try{img(ic);}catch(e){fail(e);}const o={id:'r840:clue:'+zid(r),x:pt.x,y:pt.y,path:ic||ORB_ART,height:ic?38:30,solid:false,visible:true,autoTargetEligible6:false,r840Clue:{at:T()}};r.props.push(o);stats.drops++;note('drop',{zone:zid(r),x:+pt.x.toFixed(2),y:+pt.y.toFixed(2)});return o;}
 function freeNear(r,pt){try{if(pt&&Number.isFinite(pt.x+pt.y)&&!blocked(pt.x,pt.y,.3,r))return {x:pt.x,y:pt.y};}catch(_){}return {x:player.x,y:player.y};}
 function ensure(r=here()){if(!r||!Array.isArray(r.props))return null;try{if(typeof storyScene!=='undefined'&&storyScene&&!npc(r))return null;}catch(_){}/* R841: 서사 창이 떠 있는 동안에는 새로 세우지 않는다(새 여정 첫 화면의 병원 소품 목록을 건드리지 않게, 창이 닫힌 뒤 첫 틱에 선다) */const want=visible(r),st=stOf(r),d=defOf(r);
  if(!want){if(r.props.some(p=>p&&(p.r840NPC||p.r840Amb||p.r840Prop||p.r840Clue)))r.props=r.props.filter(p=>!p.r840NPC&&!p.r840Amb&&!p.r840Prop&&!p.r840Clue);return null;}
@@ -178,11 +186,16 @@ function take(r){const d=defOf(r);if(stOf(r)!=='new')return false;ledger[keyOf(r
  if(d.quest.type==='kill')for(const e of matching(r))if(!aliveOf(e))e.r840Seen=true;/* 받기 전에 쓰러진 몹은 세지 않는다 */
  if(d.quest.type==='talk'){/* R842 이야기만 듣는 곁일: 받는 순간 단서가 발치에 떨어진다 */setState(r,'drop');dropAt(r,freeNear(r,player));}
  ensure(r);try{toast(d.quest.hud,3.5);}catch(e){fail(e);}try{saveGame(false);}catch(e){fail(e);}try{if(typeof updateHUD==='function')updateHUD();}catch(e){fail(e);}return true;}
+/* 창 초상(148칸): 흉상(bust)이 있으면 흉상, 없으면 서 있기 첫 칸을 위쪽 중심으로 잘라 얼굴·윗몸이 보이게(R843). 임시 잔영은 흐린 실루엣. */
+function face(n){const s=n.sprite,box='width:148px;height:148px;display:flex;justify-content:center;border-radius:10px;border:1px solid rgba(255,190,110,.35);background:#0d1018;overflow:hidden';
+ if(n.bust)return '<div style="'+box+'"><div style="width:148px;height:148px;background:url(./'+n.bust+') 50% 30%/cover no-repeat"></div></div>';
+ if(s.dots){const k=148/(s.vis*.62),top=s.py-s.vis;/* 머리부터 몸 62% 를 창에 */return '<div style="'+box+'"><div style="width:'+Math.round(s.w*k)+'px;height:148px;flex:none;background-image:url(./'+s.path+');background-repeat:no-repeat;background-size:'+Math.round(s.sheetW*k)+'px '+Math.round(s.sheetH*k)+'px;background-position:0 '+(-Math.round((top-6)*k))+'px"></div></div>';}
+ const k=148/s.h,bw=Math.round(s.w*k),bg='background-image:url(./'+s.path+');background-repeat:no-repeat;background-size:'+Math.round(s.sheetW*k)+'px '+Math.round(s.sheetH*k)+'px;background-position:'+(-Math.round((s.x||0)*k))+'px '+(-Math.round((s.y||0)*k))+'px'+(s.shade?';filter:grayscale(1) brightness(1.5) contrast(.62) blur(1.1px);opacity:.78':'');
+ return '<div style="'+box+'"><div style="width:'+bw+'px;height:148px;'+bg+'"></div></div>';}
 function offer(r){const d=defOf(r);stats.offers++;if(autoRun()){stats.auto++;return take(r);}
- const esc=typeof escapeHTML==='function'?escapeHTML:s=>String(s),s=d.npc.sprite,k=148/(s.frames>1?s.h:s.h),bw=Math.round((s.frames>1?s.w:s.w)*k);
- const bg='background-image:url(./'+s.path+');background-repeat:no-repeat;background-size:'+Math.round(s.sheetW*k)+'px '+Math.round(s.sheetH*k)+'px;background-position:'+(-Math.round((s.x||0)*k))+'px '+(-Math.round((s.y||0)*k))+'px'+(s.shade?';filter:grayscale(1) brightness(1.5) contrast(.62) blur(1.1px);opacity:.78':'');
+ const esc=typeof escapeHTML==='function'?escapeHTML:s=>String(s);
  openPanel('<h2>'+esc(d.npc.name)+'</h2><p>'+esc(d.npc.sub)+'</p><div class="questR840" style="display:flex;gap:16px;align-items:center;justify-content:flex-start;flex-wrap:wrap;margin:10px 0 14px">'
-  +'<div style="width:148px;height:148px;display:flex;justify-content:center;border-radius:10px;border:1px solid rgba(255,190,110,.35);background:#0d1018;overflow:hidden"><div style="width:'+bw+'px;height:148px;'+bg+'"></div></div>'
+  +face(d.npc)
   +'<div style="max-width:360px;text-align:left"><p style="margin:0 0 8px">'+esc(d.npc.body)+'</p><p style="margin:0 0 8px;opacity:.72;font-size:.92em">'+esc(d.npc.lore)+'</p><p style="margin:0;color:#f1cf9a;font-size:.92em">곁일 · '+esc(d.quest.hud)+' → 단서</p></div></div>'
   +'<div class="actions"><button id="questTakeR840">'+esc(d.quest.take)+'</button><button id="questWaitR840">나중에</button></div>');
  button('questTakeR840',()=>{const now=here();if(now===r&&visible(r)&&stOf(r)==='new')take(r);else closePanel(true);});button('questWaitR840',()=>closePanel(true));return true;}
@@ -202,10 +215,9 @@ function upkeep(r){/* tick 뒤: 놓기 맞추기, 처치 수 줄이기, 단서 �
  if(st==='on'&&defOf(r).quest.type==='kill'&&T()>=nextCheck){nextCheck=T()+.5;if(killsOf(r)>=need(r)){setState(r,'drop');dropAt(r,freeNear(r,player));try{saveGame(false);}catch(e){fail(e);}}}
  if(st==='drop'&&player?.hp>0&&!loading){const o=orbOf(r);if(o&&T()-o.r840Clue.at>=ORB_DELAY&&dist(player,o)<=PICKUP)finish(r);}}
 const ambOf=(r,p)=>(defOf(r)?.also||[]).find(a=>a.kind===p?.r840Amb)||null;
-function look(r,a){/* 곁에 선 인물: 장면 묘사 + 정본 한 줄만. 퀘스트·진행과 무관 */if(autoRun())return true;const esc=typeof escapeHTML==='function'?escapeHTML:s=>String(s),s=a.sprite,k=148/s.h,bw=Math.round(s.w*k);stats.looks=(stats.looks||0)+1;
- const bg='background-image:url(./'+s.path+');background-repeat:no-repeat;background-size:'+Math.round(s.sheetW*k)+'px '+Math.round(s.sheetH*k)+'px;background-position:'+(-Math.round((s.x||0)*k))+'px '+(-Math.round((s.y||0)*k))+'px'+(s.shade?';filter:grayscale(1) brightness(1.5) contrast(.62) blur(1.1px);opacity:.78':'');
+function look(r,a){/* 곁에 선 인물: 장면 묘사 + 정본 한 줄만. 퀘스트·진행과 무관 */if(autoRun())return true;const esc=typeof escapeHTML==='function'?escapeHTML:s=>String(s);stats.looks=(stats.looks||0)+1;
  openPanel('<h2>'+esc(a.name)+'</h2><p>'+esc(a.sub)+'</p><div class="questR840" style="display:flex;gap:16px;align-items:center;justify-content:flex-start;flex-wrap:wrap;margin:10px 0 14px">'
-  +'<div style="width:148px;height:148px;display:flex;justify-content:center;border-radius:10px;border:1px solid rgba(255,190,110,.35);background:#0d1018;overflow:hidden"><div style="width:'+bw+'px;height:148px;'+bg+'"></div></div>'
+  +face(a)
   +'<div style="max-width:360px;text-align:left"><p style="margin:0 0 8px">'+esc(a.body)+'</p><p style="margin:0;opacity:.72;font-size:.92em">'+esc(a.lore)+'</p></div></div>'
   +'<div class="actions"><button id="questLookR840">닫기</button></div>');button('questLookR840',()=>closePanel(true));return true;}
 function tryUse(){const r=here();if(!visible(r))return false;const st=stOf(r),d=defOf(r),p=npc(r);
@@ -253,7 +265,11 @@ function drawNPC(p){const r=here(),d=defOf(r);if(!d)return false;const nd=p.r840
  const h=actorHeight()*s.scale*(s.frames>1?1:1+.008*Math.sin(t*1.7)),paint=()=>drawAssetFrame3(s.path,fr,q.x,q.y,h,{angle:0,alpha:1,flip});stats.draws++;
  let res;const f0=ctx&&typeof ctx.filter==='string'?ctx.filter:null;try{if(f0!==null)ctx.filter=s.shade?'brightness(1.9) saturate(0.15)':'brightness(1.3)';res=ctx?.scope?ctx.scope({id:'prop:'+p.id,kind:'prop',x:p.x,y:p.y,bodyPath:s.path,alive:true},paint):paint();}finally{if(f0!==null)ctx.filter=f0;}
  if(p.r840Amb||stOf(r)==='new')label(nd.name,q.x,q.y-h-8,p.r840Amb?'#c9c2b4':undefined);return res;}
-function aura(p,strength){/* 임시 표시(코드): 발치의 검붉은 기운. Dots 기운 시트가 오면 바꾼다 */try{if(typeof ctx?.createRadialGradient!=='function')return;const q=project(p.x,p.y),z=typeof zoom==='number'?zoom:1,t=T(),a=(.5+.16*Math.sin(t*2.3))*strength,rad=40*z;
+function aura(p,strength){/* R843: Dots 오염 기운 8칸 고리를 조형물 뒤에 그린다(발 기준). 그림이 안 실렸으면 아래 코드 기운. */
+ try{if(typeof drawAssetFrame3==='function'&&img(AURA.path)){const q=project(p.x,p.y),z=typeof zoom==='number'?zoom:1,f=((Math.floor(T()*AURA.fps)%AURA.frames)+AURA.frames)%AURA.frames,rect=[f*AURA.w,0,AURA.w,AURA.h];
+   const fr={path:AURA.path,assetFrame:{sourceRect:rect,pivot:[AURA.px,AURA.py],visibleHeight:AURA.vis},sourceAlphaCore:rect,metricThreshold:16,sourcePixelsEdited:false};stats.auras=(stats.auras||0)+1;
+   return drawAssetFrame3(AURA.path,fr,q.x,q.y+2*z,Math.max(34,(p.height||90)*.72)*z,{angle:0,alpha:.92*strength,flip:false});}}catch(e){fail(e);}
+ try{if(typeof ctx?.createRadialGradient!=='function')return;const q=project(p.x,p.y),z=typeof zoom==='number'?zoom:1,t=T(),a=(.5+.16*Math.sin(t*2.3))*strength,rad=40*z;
   ctx.save();ctx.globalAlpha=a;const g=ctx.createRadialGradient(q.x,q.y-6*z,0,q.x,q.y-6*z,rad);g.addColorStop(0,'rgba(200,24,40,.95)');g.addColorStop(.5,'rgba(96,10,30,.6)');g.addColorStop(1,'rgba(10,4,10,0)');ctx.fillStyle=g;ctx.fillRect(q.x-rad,q.y-6*z-rad*.55,rad*2,rad*1.1);ctx.restore();}catch(e){fail(e);}}
 if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){if(!p||(!p.r840NPC&&!p.r840Amb&&!p.r840Prop&&!p.r840Clue))return base.apply(this,[p,...a]);
   try{if(p.r840NPC||p.r840Amb)return drawNPC(p);const r=here(),d=defOf(r),z=typeof zoom==='number'?zoom:1;

@@ -450,6 +450,8 @@ jobs:
         run: node r96/qa/r967/r967-cpu-check.cjs
       - name: R993 SFX audit mix (category loudness trim, pitch variation, mob-layer admission, ducking, 4 cut-off sounds re-edited) CPU check
         run: node r96/qa/r993/r993-cpu-check.cjs
+      - name: R1026 enemy hit/death SFX punch (own death/hit lanes, level lift, EQ, short death tail) CPU check
+        run: node r96/qa/r1026/r1026-cpu-check.cjs
       - name: R968 boss/midboss attack sounds also fire on route phases and rooms without an R78 phase (same rule as R966) CPU check
         run: node r96/qa/r968/r968-cpu-check.cjs
       - name: R975 hwando E ilseom boss-first 7-hit left/right multi-hit (sum stays x0.6, per-hit sound, E dash unchanged) CPU check
@@ -526,6 +528,8 @@ jobs:
         run: node r96/qa/r972/r972-cpu-check.cjs
       - name: R971 hero special passive growth CPU check
         run: node r96/qa/r971/r971-cpu-check.cjs
+      - name: R1025 hero special passive level unlock CPU check
+        run: node r96/qa/r1025/r1025-cpu-check.cjs
       - name: R981 insomnia-ghost midboss renamed and set apart from the main boss CPU check
         run: node r96/qa/r981/puppet-cpu-check.cjs
       - name: R990 bulmyeongwi fog skills (fog summon of village mobs, fog-weighted patterns, old boss art in summon ghosts) CPU check
@@ -538,6 +542,10 @@ jobs:
         run: node r96/qa/r1018/mob-move-cpu-check.cjs
       - name: R1019 regular-mob up/down walk sheets, batch 3 (Dots CX-0082MV add1 second pass, joined to the R974 table) CPU check
         run: node r96/qa/r1019/mob-move-cpu-check.cjs
+      - name: R1024 regular-mob up/down walk sheets, batch 4 (Dots CX-0082MV add1 r2; adds the missing up sheet to c106-e2 without touching its R1019 entry) CPU check
+        run: node r96/qa/r1024/mob-move-cpu-check.cjs
+      - name: R1029 float movement for mobs and bosses that slide on one image (wing flap, ghost hem, dark flame mist; looked up by art, direction sheets win) CPU check
+        run: node r96/qa/r1029/move-float-cpu-check.cjs
       - name: R996 bulmyeongwi fog summon still fires in the boss phase after every field mob is gone CPU check
         run: node r96/qa/r996/r996-cpu-check.cjs
       - name: R1008 cinema mode finishes (hero stands up instead of the sanctuary trip, ending windows move on 20 s after the subtitles, normal records unchanged) CPU check
@@ -546,12 +554,20 @@ jobs:
         run: node r96/qa/r1016/r1016-cpu-check.cjs
       - name: R1023 mobile graphics tier (starts at current public settings, steps up on smooth frames and known memory, steps down on slow frames or heap pressure, unclean exit caps the auto tier) CPU check
         run: node r96/qa/r1023/r1023-cpu-check.cjs
+      - name: R1022 auto-move toggle CPU check
+        run: node r96/qa/r1022/r1022-cpu-check.cjs
       - name: R1007 samong confront statement markers never overlap (4-marker zones M-1 Michaela, S-04 16th floor were unpassable) CPU check
         run: node r96/qa/r1007/stmt-spread-cpu-check.cjs
       - name: R1010 survival Michaela finale (4 knots in order, not killed) and shared story ending CPU check
         run: node r96/qa/r1010/r1010-cpu-check.cjs
       - name: R1015 clean UI (title = 2 main buttons + 2 mode cards + small links, co-op/notes folded; menu quick row + folded groups; PC settings folded; quiet header track/footer details) CPU check
         run: node r96/qa/r1015/r1015-cpu-check.cjs
+      - name: R1021 combat screen focus (no top gold-thread row, core HP label, phone buttons = blink + hero with Q and F auto, subtitles toggle on PC and phone, skill window on top of settings) CPU check
+        run: node r96/qa/r1021/r1021-cpu-check.cjs
+      - name: R1017 Diablo-style props from patch.gg (Poly Haven CC0 renders) slotted into the R449 space templates CPU check
+        run: node r96/qa/r1017/r1017-cpu-check.cjs
+      - name: R1020 partial quarter view 3D props (two-direction Poly Haven CC0 renders picked by wall) in the R523 room sets CPU check
+        run: node r96/qa/r1020/r1020-cpu-check.cjs
       - name: R963 survival BGM note sits below the survival HUD line (no overlapped text) CPU check
         run: node r96/qa/r963/r963-cpu-check.cjs
       - name: R980 mobile memory budget (R163/R106 tint caches capped by pixels on mobile, idle decoded images trimmed, desktop unchanged) CPU check
@@ -638,6 +654,12 @@ jobs:
         run: node r96/qa/r444/r444-cpu-check.cjs
       - name: R702 boss/mob facing does not flip on grid staircase walks (cinema-mode head shake) CPU check
         run: node r96/qa/r702/r702-cpu-check.cjs
+      - name: R1028 boss/mob facing ignores the engine's draw-only fake attack angle (boss left/right flicker) CPU check
+        run: node r96/qa/r1028/r1028-cpu-check.cjs
+      - name: R1028 enemy tentacles strike on the hit frame (painted sheet everywhere, impact burst on the hero) CPU check
+        run: node r96/qa/r1028/tentacle-cpu-check.cjs
+      - name: R1031 Bulmyeongwi (R760) body sheets follow R444 facing, not the engine fake attack CPU check
+        run: node r96/qa/r1031/r1031-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
         run: node r96/qa/r430/r430-cpu-check.cjs
       - name: R431 boss-room center fights + theme boss skill 6s + touch status/DoT + black-flame prop throws CPU check
