@@ -7423,6 +7423,16 @@
       "sha256": "8fb191c7f2b131246bf7b68083432e5512779d9ac4b0dddbcc4704cb290f411f"
     },
     {
+      "path": "assets/r1029/float/memory-fragment.webp",
+      "bytes": 130516,
+      "sha256": "6b8bf6fdc39dba11fe7d96b58af6741a97887360183787e3eb4828f190b8e404"
+    },
+    {
+      "path": "assets/r1029/float/mob-paper-figure.webp",
+      "bytes": 131508,
+      "sha256": "9cad53774beca464327449946b0634f6c09a16322bc0479255d1414ccfd98bf0"
+    },
+    {
       "path": "assets/r1029/float/murder04-mid-p4.webp",
       "bytes": 144656,
       "sha256": "7d511fb70feaf46fd4ae6bc5668c7a435f49f2a6e0b22d6695070969a4c1e9cc"
@@ -52344,8 +52354,8 @@
     },
     {
       "path": "move-float-r1029-data.js",
-      "bytes": 15504,
-      "sha256": "73fbfd8eca1224ac51a84491adf0781eee562c93039c4bf7f645c531beaac4de"
+      "bytes": 15869,
+      "sha256": "17b11f56503ad0d9bd180913b77562ed54a75f434a4fd4789a5150c288f2c734"
     },
     {
       "path": "music-box-r378.js",
@@ -53243,8 +53253,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10648,
-  "totalBytes": 1296732095,
+  "fileCount": 10650,
+  "totalBytes": 1296994484,
   "webHTMLSha256": "332703f9f5e665c79d5d80cd60028c22792418d89030def693fde47b2293c279",
   "largest": [
     {

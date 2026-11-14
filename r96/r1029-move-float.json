@@ -1738,6 +1738,50 @@
    "sha256": "6ef021c5ad826a4b522c146b10c385320b8b73b4e783cb7afe5d3134173aebe2",
    "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
    "applied": true
+  },
+  {
+   "who": "사몽 · 세뇌당한 기억의 조각",
+   "source": "assets/r161/sculpture/memory-fragment.webp",
+   "sourceRect": [
+    99,
+    12,
+    292,
+    399
+   ],
+   "sourceSha256": "6b2f032e0ce0c85bb81b4c185925cc8f0f37a4d2affdd352d807044e93332f6d",
+   "kind": "hover",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/memory-fragment.webp",
+   "size": [
+    1680,
+    256
+   ],
+   "bytes": 130516,
+   "sha256": "6b8bf6fdc39dba11fe7d96b58af6741a97887360183787e3eb4828f190b8e404",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "사몽 · 종이 형상",
+   "source": "assets/r105/drive/mob-paper-figure.webp",
+   "sourceRect": [
+    8,
+    8,
+    271,
+    405
+   ],
+   "sourceSha256": "ce58e26f4f9548a99b5e67ee24a1acbb7a663371567eff58a2ea6384e06117c8",
+   "kind": "ghost",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/mob-paper-figure.webp",
+   "size": [
+    1536,
+    256
+   ],
+   "bytes": 131508,
+   "sha256": "9cad53774beca464327449946b0634f6c09a16322bc0479255d1414ccfd98bf0",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
   }
  ]
 }
