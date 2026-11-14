@@ -24,8 +24,10 @@ const ART=Object.freeze({gate:[249,384,1.47,123.531,324.774]});
 const id=a=>'x1017-'+a;
 function register(){const A=window.__STORYWORLD_ASSETS_R80_DATA__?.assets;if(!A)return false;
  for(const[a,[w,h,s,px,py]]of Object.entries(ART)){const k='r80-'+id(a);if(A[k])continue;
-  A[k]={path:'assets/r1017/'+id(a)+'.webp',source:'patch.gg polyhaven (CC0) render R1017',width:w,height:h,rgbaBytes:w*h*4,kind:'prop',scale:s,
-   frame:{sourceRect:[0,0,w,h],pivot:[px,py],visibleHeight:h,visibleBounds:[0,0,w,h]},r1017:true};stats.registered++;}
+  /* 열거되지 않는 속성으로 둔다: R80 표는 R83 이 고른 153점 목록이고(qa/r86 active-asset-usage 가 개수·해시·장면 연결을 센다) 이 그림은 그 목록 밖이다.
+     R449 asset()·R80 drawProp 는 키로만 찾으므로 그대로 그려진다. */
+  Object.defineProperty(A,k,{enumerable:false,configurable:true,writable:true,value:{path:'assets/r1017/'+id(a)+'.webp',source:'patch.gg polyhaven (CC0) render R1017',width:w,height:h,rgbaBytes:w*h*4,kind:'prop',scale:s,
+   frame:{sourceRect:[0,0,w,h],pivot:[px,py],visibleHeight:h,visibleBounds:[0,0,w,h]},r1017:true}});stats.registered++;}
  return true;}
 // R449 묶음: P(그림, 벽을 따라 칸, 벽에서 칸) — 첫 줄이 핵심 가구. at = 그 공간 종류 돌려쓰기 목록에서 들어갈 자리(0 = 그 종류 첫 방).
 const P=(art,a,d)=>({art,a,d});
