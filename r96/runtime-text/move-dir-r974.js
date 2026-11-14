@@ -50,18 +50,34 @@ function swap(e,D,cmds,st0){stats.draws++;const s=stOf(e);track(e,s);if(busy(e)|
  for(let i=cmds.length-1;i>=st0;i--){const k=cmds[i];if(k!==c&&k?.kind==='image'&&k.r620Ghost&&k.owner?.kind==='enemy'){cmds.splice(i,1);stats.dropped++;}}
  c.points=[[x0,y0],[x0+sg*w,y0],[x0+sg*w,y0+w],[x0,y0+w]];setImg(c,im,S.path,D.cell*D.n,D.cell);c.sourceRect=[f*D.cell,0,D.cell,D.cell];c.r974=s.dir;
  stats.swapped++;last={id:e.nativeId,dir:s.dir,frame:f,vis:+vis.toFixed(1),flip:sg<0};}
+// R1029 떠서 이동: 방향 시트가 없는 몹·보스(걷는 동안 그림이 한 장뿐) — 사용자 2026-11-14 "날개가 펄럭이며 이동 혹은 유령은 아래발을 유령답게 흩날리게 … 다리쪽을 흑색짙은불꽃안개구름".
+//  표(move-float-r1029-data.js)는 그림(경로|칸)으로 찾는다. 엔진이 그린 몸 사각형을 시트 여백만큼만 넓혀 같은 자리·같은 좌우 뒤집힘·같은 기울기로 8칸 시트를 놓는다. 끄기: localStorage['storyworld.r1029.moveFloat']='{"on":false}'
+const FKEY='storyworld.r1029.moveFloat';let fprefs={on:true};try{const s=JSON.parse(localStorage.getItem(FKEY)||'null');if(s&&typeof s.on==='boolean')fprefs.on=s.on;}catch(_){}
+const fstats={draws:0,swapped:0,waiting:0};let FIDX=null,FSRC=null;
+function fIndex(){const A=window.__STORYWORLD_MOVE_FLOAT_R1029_DATA__?.arts||null;if(A===FSRC)return FIDX;FSRC=A;FIDX=null;if(!A)return null;const M=new Map();
+ for(const k of Object.keys(A)){const i=k.lastIndexOf('|'),p=k.slice(0,i),r=k.slice(i+1).split(',').map(Number),b=p.split('/').pop();if(r.length!==4||!r.every(Number.isFinite))continue;if(!M.has(b))M.set(b,[]);M.get(b).push({p,r,S:A[k]});}
+ FIDX=M;return M;}
+function floatOf(c){const M=FIDX;if(!M)return null;const p=srcOf(c).split('?')[0],L=M.get(p.split('/').pop());if(!L)return null;const r=c.sourceRect;
+ for(const q of L){if(!(p===q.p||p.endsWith('/'+q.p)))continue;if(!Array.isArray(r)||r.length<4){const z=c.imageSize;if(Array.isArray(z)&&q.r[0]===0&&q.r[1]===0&&Math.abs(z[0]-q.r[2])<=1.5&&Math.abs(z[1]-q.r[3])<=1.5)return q.S;continue;}
+  if(Math.abs(r[0]-q.r[0])<=1.5&&Math.abs(r[1]-q.r[1])<=1.5&&Math.abs(r[2]-q.r[2])<=1.5&&Math.abs(r[3]-q.r[3])<=1.5)return q.S;}return null;}
+function floatSwap(e,cmds,st0){if(!e||!(e.hp>0)||e.persona)return;const s=stOf(e);track(e,s);if(busy(e)||!(s.move>.5))return;
+ const c=bodyCmd(cmds,st0);if(!c||c.r974)return;const S=floatOf(c);if(!S)return;fstats.draws++;const im=img(S.path);if(!im){fstats.waiting++;return;}
+ const P=c.points,ux=P[1][0]-P[0][0],uy=P[1][1]-P[0][1],vx=P[3][0]-P[0][0],vy=P[3][1]-P[0][1],[l,t,r,b]=S.pad,f=(Math.floor(T()*S.fps)+s.seed)%S.n;
+ if(![ux,uy,vx,vy].every(Number.isFinite))return;
+ c.points=[[P[0][0]-ux*l-vx*t,P[0][1]-uy*l-vy*t],[P[1][0]+ux*r-vx*t,P[1][1]+uy*r-vy*t],[P[2][0]+ux*r+vx*b,P[2][1]+uy*r+vy*b],[P[3][0]-ux*l+vx*b,P[3][1]-uy*l+vy*b]];
+ setImg(c,im,S.path,S.cw*S.n,S.ch);c.sourceRect=[f*S.cw,0,S.cw,S.ch];c.r1029='float';fstats.swapped++;last={id:e.nativeId,float:S.kind,frame:f};}
 const asked=new WeakSet();
 // 맨 바깥에서 바꿔야 한다(R620 보간·R425 크기·R205 최소 크기가 다 다듬은 몸을 읽으려고). 이 파일 뒤에 실리는 덧씌우기가 drawEnemy 를 또 감싸므로
 //  불러온 뒤 한 번 미뤄 씌우고, 그 뒤에도 누가 바깥을 감싼 것이 보이면(drawEnemy 가 내 함수가 아님) 다시 맨 바깥에 씌운다(최대 6번). 안쪽에 남은 내 옛 감싸기는 그냥 지나간다(depth).
 let mine=null,wraps=0,depth=0;
 function wrap(){if(typeof drawEnemy!=='function'||drawEnemy===mine||wraps>=6)return !!mine;const base=drawEnemy;
- const w=function(e,...a){const D=prefs.on?entry(e):null;if(!D)return base.call(this,e,...a);
-  if(!asked.has(e)){asked.add(e);for(const k of Object.keys(D.dirs))img(D.dirs[k].path);}
+ const w=function(e,...a){const D=prefs.on?entry(e):null,F=fprefs.on?fIndex():null;if(!D&&!F)return base.call(this,e,...a);
+  if(D&&!asked.has(e)){asked.add(e);for(const k of Object.keys(D.dirs))img(D.dirs[k].path);}
   const cm=(typeof ctx!=='undefined'&&Array.isArray(ctx?.commands))?ctx.commands:null,st0=cm?cm.length:-1;depth++;let r;try{r=base.call(this,e,...a);}finally{depth--;}
-  if(depth===0){if(cm&&st0>=0)try{swap(e,D,cm,st0);}catch(err){fail(err);}try{if(drawEnemy!==mine)wrap();}catch(err){fail(err);}}return r;};
+  if(depth===0){if(cm&&st0>=0)try{if(D)swap(e,D,cm,st0);if(F)floatSwap(e,cm,st0);}catch(err){fail(err);}try{if(drawEnemy!==mine)wrap();}catch(err){fail(err);}}return r;};
  for(const k of Object.keys(base))try{w[k]=base[k];}catch(_){}w.__r974=true;try{drawEnemy=w;}catch(_){return !!mine;}mine=w;wraps++;return true;}
 let installed=false;const install=()=>{installed=wrap()||installed;};
 if(typeof setTimeout==='function')setTimeout(install,0);else install();
-window.__STORYWORLD_MOVE_DIR_R974__=Object.freeze({rev:REV,inspect:()=>({rev:REV,installed,wraps,outermost:typeof drawEnemy==='function'&&drawEnemy===mine,enemies:Object.keys(DATA).length,prefs:{...prefs},stats:{...stats},last,lastError}),
+window.__STORYWORLD_MOVE_DIR_R974__=Object.freeze({rev:REV,inspect:()=>({rev:REV,installed,wraps,outermost:typeof drawEnemy==='function'&&drawEnemy===mine,enemies:Object.keys(DATA).length,prefs:{...prefs},stats:{...stats},float:{on:fprefs.on,arts:Object.keys(window.__STORYWORLD_MOVE_FLOAT_R1029_DATA__?.arts||{}).length,...fstats},last,lastError}),
  set(p={}){for(const k of Object.keys(prefs))if(typeof p[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return {...prefs};}});
 })();

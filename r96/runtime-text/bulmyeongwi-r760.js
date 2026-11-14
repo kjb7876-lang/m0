@@ -84,7 +84,8 @@ function setImg(c,im,path,w,h){c.image=im;c.sourcePath=path;const iw=im.naturalW
 function footOf(e,c){try{if(typeof project==='function'){const q=project(e.x,e.y);if(q&&Number.isFinite(q.x)&&Number.isFinite(q.y))return [q.x,q.y];}}catch(_){}
  const P=c.points;return [(P[2][0]+P[3][0])/2,(P[2][1]+P[3][1])/2];}
 function tileLen(e){try{if(typeof project==='function'){const a=project(e.x,e.y),b=project(e.x+1,e.y+1),d=Math.hypot(b.x-a.x,b.y-a.y);if(d>1e-3&&Number.isFinite(d))return d;}}catch(_){}return 1;}
-function facing(e){try{const A=e.attack;if(A&&Number.isFinite(A.angle))return Math.cos(A.angle)-Math.sin(A.angle)>=0?1:-1;const d=(player.x-e.x)-(player.y-e.y);return d>=0?1:-1;}catch(_){return 1;}}
+// R1031: 몸 그림 좌우도 R444 방향 권위를 먼저 따른다(엔진 자세 그림용 가짜 공격 storyWorldPose5·angle 0 은 근거로 쓰지 않음 — R1028 뒤 몸만 오른쪽으로 튀던 갈팡질팡)
+function facing(e){try{const r=window.__STORYWORLD_ENEMY_FACE_R444__?.left?.(e);if(typeof r==='boolean')return r?-1:1;}catch(_){}try{const A=e.attack;if(A&&!A.storyWorldPose5&&Number.isFinite(A.angle))return Math.cos(A.angle)-Math.sin(A.angle)>=0?1:-1;const d=(player.x-e.x)-(player.y-e.y);return d>=0?1:-1;}catch(_){return 1;}}
 function windupOf(A,e){const w=A?.castWindup150??A?.shape154?.windup??e?.combatProfile?.attackShape?.windup;return Number.isFinite(w)&&w>0?w:.35;}
 // 엔진은 휘두르는 동안 e.attack 없이 state 'attack' + 공격 그림만 줄 때가 있다(헤드리스 실측) → 그때는 상태 나이로 자세를 고른다.
 function poseFor(e,k){const A=e.attack;if(!A){if(k==='attack'||e.state==='attack'){const a=Number(e.stateAge)||0;return a<.25?1:a<.45?2:3;}return 4;}const w=windupOf(A,e),el=Number(A.elapsed)||0;return el<w?1:el<w+.18?2:3;}

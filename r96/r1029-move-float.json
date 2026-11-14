@@ -1,0 +1,1787 @@
+{
+ "revision": "R1029",
+ "rows": [
+  {
+   "who": "dist00-boss|뿌리의 문지기|boss",
+   "source": "assets/r104/bosses/dist00-boss-p4.webp",
+   "sourceRect": [
+    0,
+    0,
+    421,
+    463
+   ],
+   "sourceSha256": "a13546965754c8f864eb3bb3adc502d2ecff8b213a2d7371357e1d068303f0ce",
+   "kind": "wing",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/dist00-boss-p4.webp",
+   "size": [
+    2080,
+    256
+   ],
+   "bytes": 150352,
+   "sha256": "8e4439c8eb4b4dfe62877a38da73d43039546be21f415344bc3cb0b11e11d3ba",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "mb-dist02|늪의 뿔악마 군주|mid",
+   "source": "assets/r104/bosses/mb-dist02-p4.webp",
+   "sourceRect": [
+    0,
+    0,
+    386,
+    405
+   ],
+   "sourceSha256": "87335e28a416ff04dad69c2a02cddf9927dcdfcc5a218bcc52fd407f8beea845",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/mb-dist02-p4.webp",
+   "size": [
+    2192,
+    256
+   ],
+   "bytes": 123556,
+   "sha256": "7fa56a09500fb1361759269e01774c0a376f8f704ca68a0dcfe795f20dbd1964",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "mb-dist03|핏빛 수호로 추격자|mid",
+   "source": "assets/r104/bosses/mb-dist03-p4.webp",
+   "sourceRect": [
+    0,
+    0,
+    438,
+    495
+   ],
+   "sourceSha256": "fc8cd3b5a4e937d48672139764dc31a5ee63685e3665bd67d6a81d2007803489",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/mb-dist03-p4.webp",
+   "size": [
+    2024,
+    256
+   ],
+   "bytes": 108528,
+   "sha256": "3504cc0a2a9fbc07252246fb69946659cf5083ea3ce718d8532bba245e415192",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "dist04-c2|되살아난 수호기사",
+   "source": "assets/episode1b/generated-v31342-rc39/zombie_guardian_knight_bloodied.webp",
+   "sourceRect": [
+    0,
+    0,
+    1024,
+    1536
+   ],
+   "sourceSha256": "5ef8be714a241330274fafddb5dd29c0bc9f74f1f1e05d5687cf549a9952801c",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/zombie-guardian-knight-bloodied.webp",
+   "size": [
+    1528,
+    256
+   ],
+   "bytes": 110920,
+   "sha256": "5c2e6324617ec390328db9e7e623aef006ed9dc39069783ee624e9a3ad242d4a",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "mb-dist05|숨이 끊긴 전령의 그림자|mid",
+   "source": "assets/r104/bosses/mb-dist05-p4.webp",
+   "sourceRect": [
+    0,
+    0,
+    370,
+    435
+   ],
+   "sourceSha256": "cfe484e61933be542baf1a97a2994ba93444c496f3c84b9297b74ea0191b728f",
+   "kind": "ghost",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/mb-dist05-p4.webp",
+   "size": [
+    1944,
+    256
+   ],
+   "bytes": 118892,
+   "sha256": "af815eba2f9dc2d9c85e64018228847e2055c3ca348368a8dac939bda61a4168",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "dist06-boss|발록 · 지옥의 문지기|boss",
+   "source": "assets/r104/bosses/dist06-boss-p4.webp",
+   "sourceRect": [
+    0,
+    0,
+    508,
+    501
+   ],
+   "sourceSha256": "77a8d9296411e75404a4d3a303feedc47d280cc35e923fb13e3973988f30e4aa",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/dist06-boss-p4.webp",
+   "size": [
+    2320,
+    256
+   ],
+   "bytes": 145358,
+   "sha256": "724fc3fb1c3a7bc6d46352968e8c476d8efccd4e4bbbd79dfa84bd32c1958a7d",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "mb-ep1a10|오만의 폐허핵|mid",
+   "source": "assets/generated-story10-cycle-20261005/ep1a10/mb-ep1a10-pride-ruin-core-atlas.png",
+   "sourceRect": [
+    96,
+    0,
+    600,
+    724
+   ],
+   "sourceSha256": "fdcaf1b370816931cce64086ce9128d93e483fedbd46a972b16407f4d3e35212",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/mb-ep1a10-pride-ruin-core-atlas.webp",
+   "size": [
+    1896,
+    256
+   ],
+   "bytes": 102982,
+   "sha256": "fd7db54d30217191b45b1b2d3eae725c27c743e87b1ff9d8336658bb9af19784",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "a10-v1|중독의 폐허핵",
+   "source": "assets/episode1a/generated-v392/addiction_ruin_core.webp",
+   "sourceRect": [
+    0,
+    0,
+    418,
+    418
+   ],
+   "sourceSha256": "a0cf49876e7cf2a0ac4b59db92c2bcb36d9f14c9e49fefbf4cd23e6c5d9a1ea1",
+   "kind": "hover",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/addiction-ruin-core.webp",
+   "size": [
+    2296,
+    256
+   ],
+   "bytes": 144270,
+   "sha256": "f3e4437b88e6fcc6b0f922fc55f92f2a3e1c99e08d07986c7bd9417a612f5367",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "a11-d1|초자아 잠식체",
+   "source": "assets/episode1a/generated-v392/ego_corrosion_vessel.webp",
+   "sourceRect": [
+    0,
+    0,
+    418,
+    418
+   ],
+   "sourceSha256": "7cf33d4f1d4bc1b54fe003036b162557cd610c5158aa430a49d27330cfb9eb05",
+   "kind": "wing",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/ego-corrosion-vessel.webp",
+   "size": [
+    2296,
+    256
+   ],
+   "bytes": 186148,
+   "sha256": "66edda117fcc05a1ee558cfe2ec54cf48ef051642f73486fc4e1aac56ee66499",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "a11-boss|루시퍼 · 가면 벗은 초천사|boss",
+   "source": "assets/r104/bosses/a11-boss-p4.webp",
+   "sourceRect": [
+    0,
+    0,
+    466,
+    432
+   ],
+   "sourceSha256": "37072b37c0bbdb64f3fddc01339e6fe613e245cd2d23b30309f2c08734477146",
+   "kind": "wing",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/a11-boss-p4.webp",
+   "size": [
+    2472,
+    256
+   ],
+   "bytes": 209696,
+   "sha256": "d9ca66daedf0759a29db2665f9c2c102f031a62e5bd6330b50c9e477fb7ff264",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "mb-ep1a11|초천사의 웃는 가면|mid",
+   "source": "assets/r104/bosses/mb-ep1a11-p4.webp",
+   "sourceRect": [
+    0,
+    0,
+    408,
+    420
+   ],
+   "sourceSha256": "34a7859c3878de6765d2a057fdf25ad23dc7dc2c8d88ea79897b3b580c95c9e0",
+   "kind": "wing",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/mb-ep1a11-p4.webp",
+   "size": [
+    2224,
+    256
+   ],
+   "bytes": 214286,
+   "sha256": "906ddaa70ed0ad73c8ca2cd270a9b37ae7a4c1058511d612c22cf6bf5a4d66d9",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "b03-boss|호텔 부매니저 · 레비아탄|boss",
+   "source": "assets/generated-v31224/actors-normalized/1a8ca2c5759b_ep1b03_envy_sister_phase0.webp",
+   "sourceRect": [
+    0,
+    0,
+    672,
+    384
+   ],
+   "sourceSha256": "ef48c98de8ff222572d585ef057d742d21a3469bf923a69ae10cf06625970cfe",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/1a8ca2c5759b-ep1b03-envy-sister-phase0.webp",
+   "size": [
+    4016,
+    256
+   ],
+   "bytes": 69446,
+   "sha256": "ac0ad48c9754e2955bf5a9a0f297a3e1bae54dbfb8f343d487b40e1d890d53bd",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "b04-boss|최고급 호텔의 총주방장 · 탐식의 귀 베엘제붑|boss",
+   "source": "assets/generated-v31224/actors-normalized/fbc0132dd447_ep1b04_glutton_head_chef_phase0.webp",
+   "sourceRect": [
+    0,
+    0,
+    672,
+    384
+   ],
+   "sourceSha256": "3912296ca3807b1041be248430862c8a803672ff13bc1dda7ee56784f3b29f47",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/132dd447-ep1b04-glutton-head-chef-phase0.webp",
+   "size": [
+    4016,
+    256
+   ],
+   "bytes": 92288,
+   "sha256": "3952809dfe51b1bec14002d87ce806a666620307249ba416ef906c78f8a1cc29",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "b05-boss|붉은 하이힐의 서윤|boss",
+   "source": "assets/generated-v31224/actors-normalized/6861c5126992_ep1b05_lust_seoyun_puppet_phase0.webp",
+   "sourceRect": [
+    0,
+    0,
+    672,
+    384
+   ],
+   "sourceSha256": "f670b6897873798908623e6141275c912a48aafe575bc4ba93578fcf1b06d4fb",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/5126992-ep1b05-lust-seoyun-puppet-phase0.webp",
+   "size": [
+    4016,
+    256
+   ],
+   "bytes": 44208,
+   "sha256": "beb1d3a00d7ec652e7f116828555d2ebd875c12c8d569581e79eec86b1050754",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "b07-s1|불길 속의 용",
+   "source": "assets/episode1b/generated-v394/wrath_satan.webp",
+   "sourceRect": [
+    0,
+    0,
+    418,
+    418
+   ],
+   "sourceSha256": "ce5867cba50374d54a6c542d05a6e659e86f3f34d779f5fe22b30f6660d23514",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/wrath-satan.webp",
+   "size": [
+    2296,
+    256
+   ],
+   "bytes": 43474,
+   "sha256": "708200db34608b7c510cd568d22f7a20ea17cf7da75bab12e016f475e500bfca",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "b07-boss|불을 지른 청소부 · 분노의 귀|boss",
+   "source": "assets/r104/bosses/b07-boss-p4.webp",
+   "sourceRect": [
+    0,
+    0,
+    411,
+    473
+   ],
+   "sourceSha256": "b463a34621acc56b33839171b02bbac99e81797f821256d4a5ad5d088cce15f6",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/b07-boss-p4.webp",
+   "size": [
+    1992,
+    256
+   ],
+   "bytes": 55390,
+   "sha256": "e488a688ceecdc7ecb75a79878c62dfbacbfb7179ea5fd8c7654e0fb4bb0f786",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "b08-boss|백색 정장의 호텔 그룹 회장|boss",
+   "source": "assets/r104/bosses/b08-boss-p4.webp",
+   "sourceRect": [
+    0,
+    0,
+    232,
+    423
+   ],
+   "sourceSha256": "15a1c29629d388ce1ecbb041168c74ab16bc65fe3e2f3c64e672893cdd31ee8a",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/b08-boss-p4.webp",
+   "size": [
+    1256,
+    256
+   ],
+   "bytes": 75190,
+   "sha256": "9632067bee2d61dd624f915e7622c32916b16b234e4a4d3ed036470c51ff8e7f",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "b09-boss|사이보그 회장 · 생체 부트로더|boss",
+   "source": "assets/generated-v31224/actors-normalized/99c6dd7d202b_ep1b09_biobootloader_chairman_phase0.webp",
+   "sourceRect": [
+    0,
+    0,
+    672,
+    384
+   ],
+   "sourceSha256": "972f52fff6e1441b604e080964baa2fa64f4c16e6f651b5862b0354fce66532a",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/02b-ep1b09-biobootloader-chairman-phase0.webp",
+   "size": [
+    4016,
+    256
+   ],
+   "bytes": 83170,
+   "sha256": "330fcef69ce9083fb42e11886ad251b779b9c9cddbdfeb1505c59f8df663376d",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "l301-boss|타락천사 기사|boss",
+   "source": "assets/r104/bosses/l301-boss-p4.webp",
+   "sourceRect": [
+    0,
+    0,
+    450,
+    472
+   ],
+   "sourceSha256": "683f2ff636726596c2b0a44aa3074b8432996db9108501dddf8f6a0ee23c66bb",
+   "kind": "wing",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/l301-boss-p4.webp",
+   "size": [
+    2184,
+    256
+   ],
+   "bytes": 123776,
+   "sha256": "438f236a1c2ecc9c7ca379c21c9aad790ae05fbc983b88bb1530d7e4b96df0f9",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-05|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_05.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "05e39d41735ffce99410ad8eb7c02bf37bde91c4a848b761de2c85dc4224a7ed",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-05.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 48500,
+   "sha256": "0593ab0f9a7ffe7c11254d9721ef6b357ba2579312c2d690b0079e587373bd13",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-02|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_02.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "7cd165fb05afab2bb1cd80ec1938553434f71a5181acd61b9e33bd973ac7ecac",
+   "kind": "ghost",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-02.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 59304,
+   "sha256": "8d97b8174cc95c52b0368bf80a392e6f01ba9fab010ff76e82d17f274f96fef9",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-01|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_01.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "f140ad813fd1200f853b74e96c33f9370f483e1397f98075e8baf77fa3b18d54",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-01.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 46308,
+   "sha256": "edde0ad31f0625b1cc9d4b3bfc518a29da6b7ea0f498019a0de32404790427d0",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-04|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_04.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "c7f198a4918f8519bc174b825c848d7de7c353205397011f2b0d7abb055c3d40",
+   "kind": "ghost",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-04.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 55884,
+   "sha256": "e91118561d057e74cfc94db9a867c10f075b52c5691483f738eea7e16ea88930",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-06|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_06.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "789b016a7c2e81fa193848fe38dd5fe3dd7a0c3efe56990754effc95f143f049",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-06.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 52130,
+   "sha256": "cafc2a915af722e0e1b794cf6be9b72313c77faadd5fb1fee73bd89602cfda14",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-elite-49|상위수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_49.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "abb9fd0f78d2de2e9f381e0145c433d86866a383c4b0c08fc3502668c55be47d",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-49.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 55512,
+   "sha256": "470acf917f0128a5267c01bd8cad981fc2b4d6c0260c9a77b1411a09474764fc",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-elite-50|상위수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_50.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "8395fb454c814c0214078b768a2700ef78244e447eb63de0cd6090a04a22d3e8",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-50.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 58572,
+   "sha256": "e210eb8eca5d180ca85265fcc0b5c13652411df6aa45ab45095d0722d15e45d7",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-07|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_07.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "9cf8de2be1e8b231a3e1f1797119dfbc572658fa6cf0bf4c7bbe7a4bcf933367",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-07.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 43274,
+   "sha256": "5f86880c29cad0b99d4c7e3f45212bef69fa01d20a71b0e2978bd3d25b05ad64",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-08|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_08.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "2e2425c14de4d4e60d331cbe60a2d60f8199868e031a39705c593afe588c75ed",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-08.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 45514,
+   "sha256": "26b75f6722cecc84693e318cc6f3015b7e9d3a8192e73982704a1804cbac3b6e",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-10|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_10.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "00cecc737f97eb105f2a348aeed332842d5c0f15fc530492c6d88d25bcbeb633",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-10.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 45796,
+   "sha256": "fff5899cfb48a58297a7ede9b1da53561c2330dadd0e11f5e25b5ba807618b01",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-11|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_11.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "d598a95c1c1c2ec1e5b6f0d4af670248508c105bb32afc1a0dac6318f4477115",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-11.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 42240,
+   "sha256": "aaeb94d3b0c8215ce0c8b55ad469ab138f4d9108962b464c49ec44f49798d7c2",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-09|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_09.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "ebf2a943dc7c6f422772c961c3ef32c3c28593b82d058eecd4bfc9ba3666009a",
+   "kind": "ghost",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-09.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 56846,
+   "sha256": "093888363a363cc725ca29214aa2a207a3a789fb199079b50a4d8b8430d6512b",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-12|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_12.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "e79d54f4d359f1fe8c5f2616b60cd23c8d88e4b515fc535a95a78b73c56cb58b",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-12.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 53982,
+   "sha256": "26616760256359bf255515a193c0c73ca352ea8e254e047be37403f64c536652",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-elite-51|상위수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_51.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "81d6cc74dc4b153aa9f4abb7686fd6fb6e3390f7c6ca04f504d5c30d699fc083",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-51.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 54308,
+   "sha256": "eea15207d989b7769d83f430a5a5f93eec75e3edb7bc42e1cd8e1c45a09d8e46",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-15|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_15.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "8ec54b3b92feb111411cd26d5d341ef06a035f457a4fcb7fbb484b4a1c518aae",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-15.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 53614,
+   "sha256": "46331d72aa1b01415b90293c8e8698791a0141516a7a7ecb2b0be9e09e22296c",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-17|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_17.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "e8400e8329f988eef6a78e048efdd235abb4ad21ddbe71bd67119bccfc60aea2",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-17.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 62686,
+   "sha256": "6cc2d0efaa419cb8eb7ea2af58e66a4043f9408573d375086cf883dcbe1a7d94",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-16|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_16.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "e95fa7c663efc46978b34fd82547f12ad48a3c5156c927be03aa2336543f0cd0",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-16.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 49720,
+   "sha256": "013f4b120f7244420b53f73007f5f17b637cc47d2bb5eedc652d508ba6365c6d",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-13|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_13.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "f9cf0a9ff71fb29d8fb5f432f22a10751ba501fe56bdbb74fe8bde836b8cac94",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-13.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 50582,
+   "sha256": "55b98dff1a227828a8e1b754ca948ba7dcf4f64fb05b49156690de49df8a9b77",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-14|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_14.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "657c66b5b6f1fdf945a0667b74b76da7db89c9f70cbf256d5db76e1de32dbfc3",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-14.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 52580,
+   "sha256": "eccf478329e2e7360569e61663ac309150e29fda5d8b32d3ee6de82b77fdcdca",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-great-04|대수문장|boss",
+   "source": "assets/actors/v31345/guardians/great-04-atlas.webp",
+   "sourceRect": [
+    32,
+    33,
+    562,
+    586
+   ],
+   "sourceSha256": "6b0d2198b6289b7a342e02c4cc8ae3bb6cea1f8874558b9b76355df35b0231a4",
+   "kind": "ghost",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/great-04-atlas.webp",
+   "size": [
+    2192,
+    256
+   ],
+   "bytes": 164446,
+   "sha256": "738f5afa605b8e2ef904b8a9d5ffd71b108d584f4c5d5da4f3caaa56920f7064",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-21|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_21.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "fea4fdd1bb8b984f1f69c83cae98fdbb9de00bda34a8995949684bc877b21465",
+   "kind": "wing",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-21.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 59582,
+   "sha256": "2373173db22786ad96d7375e5b37dc9957e1b1b776e3dc3cc74fda3bdff0e15e",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-20|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_20.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "2bdc94104017e6b5269d6b0e44db31cf4fc101059563ec2d6169ce425ad68478",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-20.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 52014,
+   "sha256": "0fe33577138cc0ab77e3edbe1019bcd4bcf2909459c3d4a97863698859f223b7",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-22|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_22.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "ac25cb3a83c22a9c61386679acbc8d3e83a742d4e58c3ae943115f99bc5ca78d",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-22.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 49288,
+   "sha256": "305220bbabd20b0112f2cf3f30ebf6e84ac1f9d46ba57affe56c8cc09a337e1b",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-19|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_19.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "293b718fa3980e7f602e57cf790f6fca9765b0aba9af4d07016f85228243182b",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-19.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 51640,
+   "sha256": "fb41e1b8afc1f0418dcad59d05ad4d5d5eefbcbf645c8f659afdba6508c948bd",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-22|기계화 감옥 공명기사",
+   "source": "assets/u2/generated-v350/u2_suppression_knight.webp",
+   "sourceRect": [
+    0,
+    0,
+    512,
+    512
+   ],
+   "sourceSha256": "7374cc4164e865bb1898f1c916b6b57a349545cab40291cd05aad8711b85aab9",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/u2-suppression-knight.webp",
+   "size": [
+    2296,
+    256
+   ],
+   "bytes": 99300,
+   "sha256": "0e2743894778082f8c7fa3b8871258537b41ef46ee41367c4ff3f2ae14d7d5b6",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-24|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_24.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "b0d8d1893b654cbf17f30968414bf5bcabe6de06bcbf65221bd3582699b5c63b",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-24.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 45904,
+   "sha256": "e51858b6b8d4877a95dd9ed6a2066aca46a203c2af3b3fbcd871f02329b2f650",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-elite-53|상위수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_53.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "703699c44e54c2a23f0f44cb45f34d0fc0daa4171c5c7a3184c950c4ed9b0d65",
+   "kind": "ghost",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-53.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 76456,
+   "sha256": "1acd76171b730db7add93033f593d437bf7937ce8268c6a621b266d00a30c910",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-elite-54|상위수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_54.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "6244c1c2c59342dcc06ee9d6dd31d2f5ccf288c42bb166e0ae42c4da8ef5d87b",
+   "kind": "ghost",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-54.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 63980,
+   "sha256": "020e4f37fc75e222e75c1db065065e5e42527e59e663e7b8974744ae33dc44d4",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-29|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_29.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "6c22d46a80260896f5d9a2e36e04479b1cc8cc1e0719afecfb17a288e209830e",
+   "kind": "ghost",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-29.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 54482,
+   "sha256": "69dd61b3561f094d2c1e703eda4dfdfdc5a947b4fcd038dc7f72f0bec2cdcdeb",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-25|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_25.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "9555851abf11bef54024cc5c3dd71fbf824d5dc1fb89f72c894c100afb8dec03",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-25.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 48686,
+   "sha256": "bf9fa1249993c6a060fa9a3661fb226e4477c6f9a1af79f74717636827ca257e",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-26|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_26.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "30f6a92051185668d9dbf75a2c8fe7b27f9476a01094e446eb26002f5384d2b5",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-26.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 49244,
+   "sha256": "d9bff774fe042f22eeee86ccaf9b5eb8af3e98b263732f2bd56d1653d6900e37",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-30|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_30.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "e4ee048711451a2910cab7c0d15f7e879cfb455ec3b56f2382574745d4cd5e39",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-30.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 47850,
+   "sha256": "c25c00944b2f50883c9719f04a4fdf3685db4fe70f26b5b49b2640d4053ab566",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-35|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_35.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "413215f1dbd4005e622e9c0fe0e0ad2b8351322cf10a8b82db58462d34c3376c",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-35.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 48432,
+   "sha256": "e1f77a7946df29fdbab67a33afab93c031bed49d6404ca36ca07c3d4c6564952",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-33|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_33.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "65606e04feb9ca0314e6c1a81ebc2ea29edc383d87917b44cfc50208a481e470",
+   "kind": "ghost",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-33.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 52712,
+   "sha256": "6c3689692009554cfedf8ed27ba04f45435defecb359f14d86ec659bfb7f5186",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-32|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_32.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "2d11deb358b7fcf71e77c1e4325df449f535adabb7a3b73bdcb748a150d5cbc4",
+   "kind": "ghost",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-32.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 52938,
+   "sha256": "70b819358e7201a43b5baad2bc0b78223e4e8764c2e4fefd3be8da243e0dc886",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-31|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_31.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "baa01c6ed39527c7973db1612a1d97af60f805e078345985f650eb93433b3ba0",
+   "kind": "ghost",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-31.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 59800,
+   "sha256": "bb796cf73fbc7ec6aa2f6b36485e5614219399795d7fd77e0726567cfea88930",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-elite-56|상위수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_56.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "9c6914a65f158d05c388d6f209a317167af93111abeb0807d62037011b522d42",
+   "kind": "ghost",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-56.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 67894,
+   "sha256": "ab6b06bb80062704c1394a1634b3dd3fdbc0c9bd22f882c58ab15f2466c49fc6",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-elite-57|상위수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_57.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "732c483a9a7c0f3fb7bfb9c01989f88860d70a7e885a258b78e569c47e0d3a15",
+   "kind": "ghost",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-57.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 60428,
+   "sha256": "e83f65b0cd191bab148032c6b6e1fe568167c051b1382298ef0c72b1612fb375",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-38|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_38.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "a13aa9da5ac0b2a02f19248e0816c65094bf65b31d1b7fc02f80a8396b8730e2",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-38.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 55108,
+   "sha256": "ada48bfc5731072ed1be11a2769afedbf3663d2b0a9d34fc2a7317b98419ae40",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-37|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_37.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "bb9e03557c7d65135a186a58c531cf7b8b17f60a83a37d31655d0ed8dc478b00",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-37.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 46596,
+   "sha256": "5bc5758f2b29c198481b3aa30469fefe578f70f1c5c247dfa8a58eb9ca57e644",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-41|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_41.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "42e19428dc61168a481d58f4c8c0ef77092a592c26dd9f5b6a360d4810574a4b",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-41.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 50296,
+   "sha256": "000c05a0cc51d587a6d24b31c25c82da43e8f9556c8a039110f741067ad5f608",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-42|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_42.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "d25f6078f967b56892c0efd15b7d37959ec893923076c4e6b80ac3247f9ff2fb",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-42.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 45266,
+   "sha256": "77bb1ef52aa81e95e10548fac56bdab6e55c4771766ad710d22460cdd0ab5c77",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-guardian-43|시간수문장",
+   "source": "assets/generated-v3125/kair-guardians/guardian_43.webp",
+   "sourceRect": [
+    0,
+    0,
+    192,
+    192
+   ],
+   "sourceSha256": "6e2f93b2fadcf723cac0017c3d4a511d0f112dac7c6254fda2de2abf62f481de",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/guardian-43.webp",
+   "size": [
+    2032,
+    226
+   ],
+   "bytes": 53976,
+   "sha256": "a884544ccb9d537a7c1a76f91b69ac061218684440232d8b49c77cc71921bc8a",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-academy-wave-2|시간핵의 명령 파동",
+   "source": "assets/kair/enemies/connector.png",
+   "sourceRect": [
+    0,
+    0,
+    362,
+    362
+   ],
+   "sourceSha256": "0266a862ab1d9268954e17a61f86bd9eb1673ab02d66eca3c9bd84b5ed04110a",
+   "kind": "ghost",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/connector.webp",
+   "size": [
+    2296,
+    256
+   ],
+   "bytes": 135206,
+   "sha256": "cceab17a54ac434b02ea8776f0bf20be2a63abb590d53f4e685c9a35896f9c59",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "kair-academy-wave-3|시간핵의 명령 파동",
+   "source": "assets/kair/enemies/resonance-slave.png",
+   "sourceRect": [
+    0,
+    0,
+    362,
+    362
+   ],
+   "sourceSha256": "b5b9b0686105fdd7ed404c4d81255b107a9fca43ce6332d82f3a571be6186f36",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/resonance-slave.webp",
+   "size": [
+    2296,
+    256
+   ],
+   "bytes": 85146,
+   "sha256": "fd3a5d53ef52c9bde93656b71e678c1ab5c605e49fbab5defad81942c263c9f1",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "h101-s2|의존 신호 포식자",
+   "source": "assets/hando-v3123/return_coordinate_devourer.webp",
+   "sourceRect": [
+    0,
+    0,
+    418,
+    418
+   ],
+   "sourceSha256": "6564a8e5f2b8649dc56fabbdc66788e185db82cfa73e26bbc59af7636b7a2e72",
+   "kind": "ghost",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/return-coordinate-devourer.webp",
+   "size": [
+    2296,
+    256
+   ],
+   "bytes": 171324,
+   "sha256": "cea4ff67993a1e5bc2fb4c44b787aa90070309cc04458733b632a2aad4ef0a4c",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "h102-s2|코어 운반 집행자",
+   "source": "assets/hando-v3123/order_seal_officer.webp",
+   "sourceRect": [
+    0,
+    0,
+    418,
+    418
+   ],
+   "sourceSha256": "48b00e028da3adb59768e85fa9efc22525cb76708b6792d02142f591001c478c",
+   "kind": "ghost",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/order-seal-officer.webp",
+   "size": [
+    2296,
+    256
+   ],
+   "bytes": 147306,
+   "sha256": "690644c17d517148d3a4308347372fc253716e5dcd992c64a4f17814cb230a8d",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "h103-s1|환수검 모조체",
+   "source": "assets/hando-v3123/phantom_reclaim_blade.webp",
+   "sourceRect": [
+    0,
+    0,
+    418,
+    418
+   ],
+   "sourceSha256": "c67a79587efafab31803f8f8fede5e195ca2d75a3fb1503bce0ae960d8d25136",
+   "kind": "ghost",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/phantom-reclaim-blade.webp",
+   "size": [
+    2296,
+    256
+   ],
+   "bytes": 180754,
+   "sha256": "542dacab6630684687ea368cb5310c0b79d82e7695657772c3c0851d6e3ffd1f",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "h103-boss|EGO 강탈 악몽왕|boss",
+   "source": "assets/r104/bosses/h103-boss-p4.webp",
+   "sourceRect": [
+    0,
+    0,
+    434,
+    423
+   ],
+   "sourceSha256": "050bb92487e11e245fdce35d405b6fc1e5ebec044ff655a554ffc85a4bb01b62",
+   "kind": "wing",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/h103-boss-p4.webp",
+   "size": [
+    2344,
+    256
+   ],
+   "bytes": 175620,
+   "sha256": "01ce3874a8c41606f7295a27196aaf3e3aeac8d6fa4c7fdc886f8db95bb88167",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "mb-hando03|환수검 모조체|mid",
+   "source": "assets/r104/bosses/mb-hando03-p4.webp",
+   "sourceRect": [
+    0,
+    0,
+    391,
+    430
+   ],
+   "sourceSha256": "04f7647f098d9519b1fa918887b9997f4d3de4e7f7f31f556ec3aa0417a02a50",
+   "kind": "ghost",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/mb-hando03-p4.webp",
+   "size": [
+    2088,
+    256
+   ],
+   "bytes": 181648,
+   "sha256": "92de9247d21750b6dcd0366ac784fc9aa331a743544a0442535ac3c2abc233c1",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "mb-murder01|파란불 역주행 목격자|mid",
+   "source": "assets/r104/bosses/mb-murder01-p4.webp",
+   "sourceRect": [
+    0,
+    0,
+    367,
+    418
+   ],
+   "sourceSha256": "279aafa0e177e5063bb55dcf39d80f26b24e9b39605b7415facb553c31f02d8b",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/mb-murder01-p4.webp",
+   "size": [
+    2016,
+    256
+   ],
+   "bytes": 136240,
+   "sha256": "2b9b4f397da3322b0dcf4d44978bedaa5ee1c73af527f6c2387696e0bd547dc7",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "mb-murder02|공실장부 당직감사|mid",
+   "source": "assets/r104/bosses/mb-murder02-p4.webp",
+   "sourceRect": [
+    0,
+    0,
+    305,
+    412
+   ],
+   "sourceSha256": "73fb7f3a2da14453335077913777ad81511219e0ecc56c7f8b8f380bdaeb598b",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/mb-murder02-p4.webp",
+   "size": [
+    1696,
+    256
+   ],
+   "bytes": 103894,
+   "sha256": "26662f54339e00f1e9bd8790a38728926236cdfed59d70d33c290c9e26a7157c",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "murder04-mid|진술 봉쇄 인과핵|mid",
+   "source": "assets/r104/bosses/murder04-mid-p4.webp",
+   "sourceRect": [
+    0,
+    0,
+    517,
+    471
+   ],
+   "sourceSha256": "17191a84953a5350ac5df6bc36270508bbf1e9c83ea5c89cbb27713c0a834314",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/murder04-mid-p4.webp",
+   "size": [
+    2512,
+    256
+   ],
+   "bytes": 144656,
+   "sha256": "7d511fb70feaf46fd4ae6bc5668c7a435f49f2a6e0b22d6695070969a4c1e9cc",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "blue-executor|파란불|boss",
+   "source": "assets/generated-story10-cycle-20261005/cyclic-murder/blue_executor_charge.png",
+   "sourceRect": [
+    160,
+    26,
+    1054,
+    1210
+   ],
+   "sourceSha256": "d72e716e0b12c8387a48ae8a2371df2138549e5f2998f246bfdb41fc911a4c6c",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/blue-executor-charge.webp",
+   "size": [
+    2000,
+    256
+   ],
+   "bytes": 179060,
+   "sha256": "f4387519a3669623797047340dfb76e92ce65622a07f7fc6a5312cc96376e456",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "mb-murder03|옥상 인과보관인|mid",
+   "source": "assets/r104/bosses/mb-murder03-p4.webp",
+   "sourceRect": [
+    0,
+    0,
+    443,
+    416
+   ],
+   "sourceSha256": "e3072b19e3be19e7fc3097a58c654143602d0838a0745abdd0fad05317617ceb",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/mb-murder03-p4.webp",
+   "size": [
+    2440,
+    256
+   ],
+   "bytes": 165918,
+   "sha256": "8fb191c7f2b131246bf7b68083432e5512779d9ac4b0dddbcc4704cb290f411f",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "c102-e2|합일 주파수 결정",
+   "source": "assets/cult-v3123/black_rose_crystal_guardian.webp",
+   "sourceRect": [
+    0,
+    0,
+    418,
+    418
+   ],
+   "sourceSha256": "965eb5003e4877e714012731e9adf59b51e9bbb87fb44bb6f4ea10a94bd88f37",
+   "kind": "hover",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/black-rose-crystal-guardian.webp",
+   "size": [
+    2296,
+    256
+   ],
+   "bytes": 139840,
+   "sha256": "556d07bdfe67b63400e480dfe9fd844effd70f03a696fc2981a91ad7f1036b51",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "c102-e2|기계화 제8단계 자비 교정관",
+   "source": "assets/generated-v31224/actors-normalized/8e86a4cadfc7_u2_mirror_priest.webp",
+   "sourceRect": [
+    0,
+    0,
+    672,
+    384
+   ],
+   "sourceSha256": "0b35d983820e4d90db80cd664b21084ebb509d81ef4bc7c8fd3e4ad5fc001734",
+   "kind": "ghost",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/8e86a4cadfc7-u2-mirror-priest.webp",
+   "size": [
+    4016,
+    256
+   ],
+   "bytes": 103874,
+   "sha256": "da11418102bfe98b48826e688572c4b4e96d5182a967be62eabf435dcb738944",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "c103-boss|이단의목사 백이온|boss",
+   "source": "assets/boss-actions-20261011/c103-boss-poses.png",
+   "sourceRect": [
+    230,
+    0,
+    375,
+    510
+   ],
+   "sourceSha256": "20ea14a5e601d6c30a7d01c13dedf1a8e102872aac8cca16936eac0965521ff5",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/c103-boss-poses.webp",
+   "size": [
+    1680,
+    256
+   ],
+   "bytes": 113384,
+   "sha256": "1fae471d51203c05ecb815f98ceca7f0958fd8f7a75868e504c088b82736ad3d",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "c104-mid|적그리스도 배양좌|mid",
+   "source": "assets/rc140/story-cycle-motions/c104-mid.png",
+   "sourceRect": [
+    0,
+    0,
+    721,
+    724
+   ],
+   "sourceSha256": "9dac22ed00c5c9a138c0ed39b4849b1877dabe5af03d5ac44513d2c3093b95d5",
+   "kind": "hover",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/c104-mid.webp",
+   "size": [
+    2280,
+    256
+   ],
+   "bytes": 90470,
+   "sha256": "dcea88561366b7da9406e048e2480842cb00ff644adf5db0412b65f1b93c294f",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "c104-boss|교만의 사이보그 교주|boss",
+   "source": "assets/r104/bosses/c104-boss-p4.webp",
+   "sourceRect": [
+    0,
+    0,
+    548,
+    504
+   ],
+   "sourceSha256": "6c676022f8777203a76927aefc9b1d12c7a75fb4103d6f7139ed66dfeb45c31a",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/c104-boss-p4.webp",
+   "size": [
+    2496,
+    256
+   ],
+   "bytes": 179658,
+   "sha256": "6ef021c5ad826a4b522c146b10c385320b8b73b4e783cb7afe5d3134173aebe2",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "사몽 · 세뇌당한 기억의 조각",
+   "source": "assets/r161/sculpture/memory-fragment.webp",
+   "sourceRect": [
+    99,
+    12,
+    292,
+    399
+   ],
+   "sourceSha256": "6b2f032e0ce0c85bb81b4c185925cc8f0f37a4d2affdd352d807044e93332f6d",
+   "kind": "hover",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/memory-fragment.webp",
+   "size": [
+    1680,
+    256
+   ],
+   "bytes": 130516,
+   "sha256": "6b8bf6fdc39dba11fe7d96b58af6741a97887360183787e3eb4828f190b8e404",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "사몽 · 종이 형상",
+   "source": "assets/r105/drive/mob-paper-figure.webp",
+   "sourceRect": [
+    8,
+    8,
+    271,
+    405
+   ],
+   "sourceSha256": "ce58e26f4f9548a99b5e67ee24a1acbb7a663371567eff58a2ea6384e06117c8",
+   "kind": "ghost",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1029/float/mob-paper-figure.webp",
+   "size": [
+    1536,
+    256
+   ],
+   "bytes": 131508,
+   "sha256": "9cad53774beca464327449946b0634f6c09a16322bc0479255d1414ccfd98bf0",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  }
+ ]
+}

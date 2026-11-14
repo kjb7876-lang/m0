@@ -1,0 +1,893 @@
+[
+{
+"who": "dist00-boss|뿌리의 문지기|boss",
+"path": "r104/bosses/dist00-boss-p4.webp",
+"rect": [
+0,
+0,
+421,
+463
+],
+"kind": "wing"
+},
+{
+"who": "mb-dist02|늪의 뿔악마 군주|mid",
+"path": "r104/bosses/mb-dist02-p4.webp",
+"rect": [
+0,
+0,
+386,
+405
+],
+"kind": "mist"
+},
+{
+"who": "mb-dist03|핏빛 수호로 추격자|mid",
+"path": "r104/bosses/mb-dist03-p4.webp",
+"rect": [
+0,
+0,
+438,
+495
+],
+"kind": "mist"
+},
+{
+"who": "dist04-c2|되살아난 수호기사",
+"path": "episode1b/generated-v31342-rc39/zombie_guardian_knight_bloodied.webp",
+"rect": [
+0,
+0,
+1024,
+1536
+],
+"kind": "mist"
+},
+{
+"who": "mb-dist05|숨이 끊긴 전령의 그림자|mid",
+"path": "r104/bosses/mb-dist05-p4.webp",
+"rect": [
+0,
+0,
+370,
+435
+],
+"kind": "ghost"
+},
+{
+"who": "dist06-boss|발록 · 지옥의 문지기|boss",
+"path": "r104/bosses/dist06-boss-p4.webp",
+"rect": [
+0,
+0,
+508,
+501
+],
+"kind": "mist"
+},
+{
+"who": "mb-ep1a10|오만의 폐허핵|mid",
+"path": "generated-story10-cycle-20261005/ep1a10/mb-ep1a10-pride-ruin-core-atlas.png",
+"rect": [
+96,
+0,
+600,
+724
+],
+"kind": "mist"
+},
+{
+"who": "a10-v1|중독의 폐허핵",
+"path": "episode1a/generated-v392/addiction_ruin_core.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"kind": "hover"
+},
+{
+"who": "a11-d1|초자아 잠식체",
+"path": "episode1a/generated-v392/ego_corrosion_vessel.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"kind": "wing"
+},
+{
+"who": "a11-boss|루시퍼 · 가면 벗은 초천사|boss",
+"path": "r104/bosses/a11-boss-p4.webp",
+"rect": [
+0,
+0,
+466,
+432
+],
+"kind": "wing"
+},
+{
+"who": "mb-ep1a11|초천사의 웃는 가면|mid",
+"path": "r104/bosses/mb-ep1a11-p4.webp",
+"rect": [
+0,
+0,
+408,
+420
+],
+"kind": "wing"
+},
+{
+"who": "b03-boss|호텔 부매니저 · 레비아탄|boss",
+"path": "generated-v31224/actors-normalized/1a8ca2c5759b_ep1b03_envy_sister_phase0.webp",
+"rect": [
+0,
+0,
+672,
+384
+],
+"kind": "mist"
+},
+{
+"who": "b04-boss|최고급 호텔의 총주방장 · 탐식의 귀 베엘제붑|boss",
+"path": "generated-v31224/actors-normalized/fbc0132dd447_ep1b04_glutton_head_chef_phase0.webp",
+"rect": [
+0,
+0,
+672,
+384
+],
+"kind": "mist"
+},
+{
+"who": "b05-boss|붉은 하이힐의 서윤|boss",
+"path": "generated-v31224/actors-normalized/6861c5126992_ep1b05_lust_seoyun_puppet_phase0.webp",
+"rect": [
+0,
+0,
+672,
+384
+],
+"kind": "mist"
+},
+{
+"who": "b07-s1|불길 속의 용",
+"path": "episode1b/generated-v394/wrath_satan.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"kind": "mist"
+},
+{
+"who": "b07-boss|불을 지른 청소부 · 분노의 귀|boss",
+"path": "r104/bosses/b07-boss-p4.webp",
+"rect": [
+0,
+0,
+411,
+473
+],
+"kind": "mist"
+},
+{
+"who": "b08-boss|백색 정장의 호텔 그룹 회장|boss",
+"path": "r104/bosses/b08-boss-p4.webp",
+"rect": [
+0,
+0,
+232,
+423
+],
+"kind": "mist"
+},
+{
+"who": "b09-boss|사이보그 회장 · 생체 부트로더|boss",
+"path": "generated-v31224/actors-normalized/99c6dd7d202b_ep1b09_biobootloader_chairman_phase0.webp",
+"rect": [
+0,
+0,
+672,
+384
+],
+"kind": "mist"
+},
+{
+"who": "l301-boss|타락천사 기사|boss",
+"path": "r104/bosses/l301-boss-p4.webp",
+"rect": [
+0,
+0,
+450,
+472
+],
+"kind": "wing"
+},
+{
+"who": "kair-guardian-05|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_05.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-guardian-02|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_02.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "ghost"
+},
+{
+"who": "kair-guardian-01|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_01.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-guardian-04|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_04.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "ghost"
+},
+{
+"who": "kair-guardian-06|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_06.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-elite-49|상위수문장",
+"path": "generated-v3125/kair-guardians/guardian_49.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-elite-50|상위수문장",
+"path": "generated-v3125/kair-guardians/guardian_50.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-guardian-07|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_07.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-guardian-08|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_08.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-guardian-10|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_10.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-guardian-11|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_11.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-guardian-09|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_09.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "ghost"
+},
+{
+"who": "kair-guardian-12|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_12.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-elite-51|상위수문장",
+"path": "generated-v3125/kair-guardians/guardian_51.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-guardian-15|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_15.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-guardian-17|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_17.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-guardian-16|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_16.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-guardian-13|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_13.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-guardian-14|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_14.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-great-04|대수문장|boss",
+"path": "actors/v31345/guardians/great-04-atlas.webp",
+"rect": [
+32,
+33,
+562,
+586
+],
+"kind": "ghost"
+},
+{
+"who": "kair-guardian-21|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_21.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "wing"
+},
+{
+"who": "kair-guardian-20|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_20.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-guardian-22|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_22.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-guardian-19|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_19.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-guardian-22|기계화 감옥 공명기사",
+"path": "u2/generated-v350/u2_suppression_knight.webp",
+"rect": [
+0,
+0,
+512,
+512
+],
+"kind": "mist"
+},
+{
+"who": "kair-guardian-24|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_24.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-elite-53|상위수문장",
+"path": "generated-v3125/kair-guardians/guardian_53.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "ghost"
+},
+{
+"who": "kair-elite-54|상위수문장",
+"path": "generated-v3125/kair-guardians/guardian_54.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "ghost"
+},
+{
+"who": "kair-guardian-29|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_29.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "ghost"
+},
+{
+"who": "kair-guardian-25|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_25.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-guardian-26|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_26.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-guardian-30|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_30.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-guardian-35|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_35.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-guardian-33|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_33.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "ghost"
+},
+{
+"who": "kair-guardian-32|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_32.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "ghost"
+},
+{
+"who": "kair-guardian-31|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_31.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "ghost"
+},
+{
+"who": "kair-elite-56|상위수문장",
+"path": "generated-v3125/kair-guardians/guardian_56.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "ghost"
+},
+{
+"who": "kair-elite-57|상위수문장",
+"path": "generated-v3125/kair-guardians/guardian_57.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "ghost"
+},
+{
+"who": "kair-guardian-38|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_38.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-guardian-37|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_37.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-guardian-41|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_41.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-guardian-42|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_42.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-guardian-43|시간수문장",
+"path": "generated-v3125/kair-guardians/guardian_43.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"kind": "mist"
+},
+{
+"who": "kair-academy-wave-2|시간핵의 명령 파동",
+"path": "kair/enemies/connector.png",
+"rect": [
+0,
+0,
+362,
+362
+],
+"kind": "ghost"
+},
+{
+"who": "kair-academy-wave-3|시간핵의 명령 파동",
+"path": "kair/enemies/resonance-slave.png",
+"rect": [
+0,
+0,
+362,
+362
+],
+"kind": "mist"
+},
+{
+"who": "h101-s2|의존 신호 포식자",
+"path": "hando-v3123/return_coordinate_devourer.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"kind": "ghost"
+},
+{
+"who": "h102-s2|코어 운반 집행자",
+"path": "hando-v3123/order_seal_officer.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"kind": "ghost"
+},
+{
+"who": "h103-s1|환수검 모조체",
+"path": "hando-v3123/phantom_reclaim_blade.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"kind": "ghost"
+},
+{
+"who": "h103-boss|EGO 강탈 악몽왕|boss",
+"path": "r104/bosses/h103-boss-p4.webp",
+"rect": [
+0,
+0,
+434,
+423
+],
+"kind": "wing"
+},
+{
+"who": "mb-hando03|환수검 모조체|mid",
+"path": "r104/bosses/mb-hando03-p4.webp",
+"rect": [
+0,
+0,
+391,
+430
+],
+"kind": "ghost"
+},
+{
+"who": "mb-murder01|파란불 역주행 목격자|mid",
+"path": "r104/bosses/mb-murder01-p4.webp",
+"rect": [
+0,
+0,
+367,
+418
+],
+"kind": "mist"
+},
+{
+"who": "mb-murder02|공실장부 당직감사|mid",
+"path": "r104/bosses/mb-murder02-p4.webp",
+"rect": [
+0,
+0,
+305,
+412
+],
+"kind": "mist"
+},
+{
+"who": "murder04-mid|진술 봉쇄 인과핵|mid",
+"path": "r104/bosses/murder04-mid-p4.webp",
+"rect": [
+0,
+0,
+517,
+471
+],
+"kind": "mist"
+},
+{
+"who": "blue-executor|파란불|boss",
+"path": "generated-story10-cycle-20261005/cyclic-murder/blue_executor_charge.png",
+"rect": [
+160,
+26,
+1054,
+1210
+],
+"kind": "mist"
+},
+{
+"who": "mb-murder03|옥상 인과보관인|mid",
+"path": "r104/bosses/mb-murder03-p4.webp",
+"rect": [
+0,
+0,
+443,
+416
+],
+"kind": "mist"
+},
+{
+"who": "c102-e2|합일 주파수 결정",
+"path": "cult-v3123/black_rose_crystal_guardian.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"kind": "hover"
+},
+{
+"who": "c102-e2|기계화 제8단계 자비 교정관",
+"path": "generated-v31224/actors-normalized/8e86a4cadfc7_u2_mirror_priest.webp",
+"rect": [
+0,
+0,
+672,
+384
+],
+"kind": "ghost"
+},
+{
+"who": "c103-boss|이단의목사 백이온|boss",
+"path": "boss-actions-20261011/c103-boss-poses.png",
+"rect": [
+230,
+0,
+375,
+510
+],
+"kind": "mist"
+},
+{
+"who": "c104-mid|적그리스도 배양좌|mid",
+"path": "rc140/story-cycle-motions/c104-mid.png",
+"rect": [
+0,
+0,
+721,
+724
+],
+"kind": "hover"
+},
+{
+"who": "c104-boss|교만의 사이보그 교주|boss",
+"path": "r104/bosses/c104-boss-p4.webp",
+"rect": [
+0,
+0,
+548,
+504
+],
+"kind": "mist"
+},
+{
+"who": "사몽 · 세뇌당한 기억의 조각",
+"path": "r161/sculpture/memory-fragment.webp",
+"rect": [
+99,
+12,
+292,
+399
+],
+"kind": "hover"
+},
+{
+"who": "사몽 · 종이 형상",
+"path": "r105/drive/mob-paper-figure.webp",
+"rect": [
+8,
+8,
+271,
+405
+],
+"kind": "ghost"
+}
+]
