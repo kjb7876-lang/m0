@@ -19,6 +19,8 @@ if(typeof window==='undefined'||window.__STORYWORLD_SEOHA_EPOCH_R949__)return;
 const REV='R949-epoch-1',KEY='storyworld.r949.epoch',HERO='seoha';
 const CHANCE=.05,CHANCE_MAX=.2,ROLL_GAP=.35,DUR=7,ICD=14,MAX_ACTS=2;
 const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
+const U1025=(h,a,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__,v=u&&u.mask(h,a,k);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},S1025=h=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.share(h);return Number.isFinite(v)?Math.max(0,Math.min(1,v)):1;}catch(_){return 1;}},W1025=(h,w)=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.weights(h,w);return v||w;}catch(_){return w;}},A1025=(h,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.unlocked(h,k)!==false:true;}catch(_){return true;}},O1025=id=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.summonOpen(id)!==false:true;}catch(_){return true;}};/* R1025 특수 패시브 레벨별 해금·소환 영웅 서사 확인(파일 없으면 원래 값) */
+const L1025=real=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u&&typeof u.summonList==='function'?u.summonList('seoha',['seoha',real&&real.hero]):null;}catch(_){return null;}};/* R1025: 소환 영웅 = 서사 순, 레벨마다 하나씩 최대 7명 */
 const WEIGHTS=[['collapse',.5],['heroes',.3],['arbelia',.2]];
 // ③ 시간 붕괴
 const COL_PULSES=14,COL_PULSE0=.15,COL_GAP=.48,COL_WIND=.35,COL_R=7.5,COL_SPOTS=3,COL_BOOM_R=1.3,COL_K=.45,COL_STUN=.25,COL_BOOM_T=.45,GH_GAP=.14,GH_LIFE=.45,GH_MAX=6,SPOT_GAP=.4,SPOT_LIFE=2.4,SPOT_MAX=7;
@@ -106,9 +108,9 @@ function blinkAt(x,y,k){blinks.push({x,y,t0:T(),k:k||1});if(blinks.length>10)bli
 function freeSpot(o,ang,r){for(const d of [0,.6,-.6,1.2,-1.2,2.2,-2.2,Math.PI]){for(const rr of [r,r*.6]){const x=o.x+Math.cos(ang+d)*rr,y=o.y+Math.sin(ang+d)*rr;if(!wallAt(x,y,.3))return {x,y};}}return {x:o.x,y:o.y};}
 
 // ── 발동 ──
-function others(){const real=P(),skip=new Set([HERO,real&&!real.r720Ally?real.hero:null]);return heroIds().filter(k=>!skip.has(k));}
+function others(){const real=P(),skip=new Set([HERO,real&&!real.r720Ally?real.hero:null]);return heroIds().filter(k=>!skip.has(k)&&O1025(k));}/* R1025: 스토리는 서사 지역에 들어선 영웅만 */
 function pickTrio(){const ids=others();for(let i=ids.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[ids[i],ids[j]]=[ids[j],ids[i]];}return ids.slice(0,HERO_N);}
-function preload(){try{ask([...Object.values(ARB_ART),ARB_ORB],'arb');if(!trio||!trio.length)trio=pickTrio();for(const id of trio)if(!heroReady(id))heroLoad(id);}catch(err){fail(err);}}
+function preload(){try{ask([...Object.values(ARB_ART),ARB_ORB],'arb');if(!trio||!trio.length)trio=pickTrio();for(const id of trio)if(!heroReady(id))heroLoad(id);const L=L1025(P());if(L)for(const id of L)if(!heroReady(id))heroLoad(id);}catch(err){fail(err);}}
 function realArbelia(){try{const r=curRoom();return !!(r&&Array.isArray(r.enemies)&&r.enemies.some(e=>e&&e.hp>0&&(e.nativeId===ARB_ID||String(e.id||'').endsWith(ARB_ID))));}catch(_){return false;}}
 function dirTo(o,tg){let ux=0,uy=0;if(tg){ux=tg.x-o.x;uy=tg.y-o.y;}const L=Math.hypot(ux,uy);if(!(L>1e-6)){const a=aim();return {ux:Math.cos(a),uy:Math.sin(a),a};}return {ux:ux/L,uy:uy/L,a:Math.atan2(uy,ux)};}
 function ap(){try{return typeof attackPower==='function'?Number(attackPower())||0:0;}catch(_){return 0;}}
@@ -117,19 +119,19 @@ function startArbelia(base,d){const o=base.owner;if(realArbelia())return null;if
  const p=freeSpot(o,d.a-Math.PI/2,ARB_OFF),ent={id:'r949:arbelia',name:ARB_NAME,x:p.x,y:p.y,flip:false,pose:'idle',poseUntil:-1e9};
  const x={...base,kind:'arbelia',ent,casts:[],next:0};x.props=[mkProp('arbelia',ent,0)];addProp(x,x.props[0]);blinkAt(ent.x,ent.y,1.7);return x;}
 function startHeroes(base,d){if(typeof basicAttack!=='function'||typeof drawHero!=='function')return null;const real=P();if(!real||real.r720Ally)return null;/* 조종 중인 서하만 영웅을 부른다(배치된 서하 몸은 시간 붕괴로) */
- if(!trio||!trio.length)trio=pickTrio();const pool=[...trio,...others().filter(k=>!trio.includes(k))],pickd=[];for(const id of pool){if(pickd.length>=HERO_N)break;if(heroReady(id))pickd.push(id);else heroLoad(id);}
+ const LS=L1025(real);let pool,cap;if(LS){pool=LS;cap=LS.length;}else{if(!trio||!trio.length)trio=pickTrio();pool=[...trio.filter(k=>O1025(k)),...others().filter(k=>!trio.includes(k))];cap=HERO_N;}const pickd=[];for(const id of pool){if(pickd.length>=cap)break;if(heroReady(id))pickd.push(id);else heroLoad(id);}
  if(!pickd.length)return null;const o=base.owner,x={...base,kind:'heroes',summons:[]};x.props=[];
- pickd.forEach((id,i)=>{const ang=d.a+Math.PI+(i-(pickd.length-1)/2)*2.0,ox=Math.cos(ang)*HERO_OFF,oy=Math.sin(ang)*HERO_OFF,p=freeSpot(o,ang,HERO_OFF),s={hero:id,x:p.x,y:p.y,ox,oy,beat:base.t0+.8+i*.35,body:null,idx:i};
+ pickd.forEach((id,i)=>{const ang=d.a+Math.PI+(i-(pickd.length-1)/2)*Math.min(2.0,2*Math.PI/pickd.length),ox=Math.cos(ang)*HERO_OFF,oy=Math.sin(ang)*HERO_OFF,p=freeSpot(o,ang,HERO_OFF),s={hero:id,x:p.x,y:p.y,ox,oy,beat:base.t0+.8+i*.35,body:null,idx:i};
   s.body=mkBody(id,s);if(!s.body)return;x.summons.push(s);const pr=mkProp('hero',s,i);x.props.push(pr);addProp(x,pr);blinkAt(s.x,s.y,1);});
  if(!x.summons.length){dropProps(x);return null;}trio=null;return x;}
 function fire(kind,o,tg){const t=T(),d=dirTo(o,tg),base={owner:o,t0:t,until:t+DUR,power:ap(),room:curRoom(),props:[],seed:(stats.procTotal*7919)%360};let x=null;
  try{if(kind==='arbelia')x=startArbelia(base,d);else if(kind==='heroes')x=startHeroes(base,d);}catch(err){fail(err);x=null;}
  if(!x){if(kind!=='collapse')stats.fallbacks++;kind='collapse';x=startCollapse(base);}
  stats.procTotal++;stats.procs[kind]++;acts.push(x);play('r546Sp_'+HERO);say(NAMES.passive+' · '+NAMES[kind]);return x;}
-function pick(){if(forced){const f=forced;forced=null;return f;}let r=rnd()*WEIGHTS.reduce((n,w)=>n+w[1],0);for(const [k,w] of WEIGHTS){if(r<w)return k;r-=w;}return 'collapse';}
+function pick(){if(forced){const f=forced;forced=null;return f;}const WS=W1025(HERO,WEIGHTS);let r=rnd()*WS.reduce((n,w)=>n+w[1],0);for(const [k,w] of WS){if(r<w)return k;r-=w;}return WS.length?WS[WS.length-1][0]:'collapse';}
 function roll(e){const o=P();if(!o||o.hero!==HERO||o.hp<=0||blockedNow()||!solo())return;const s=stateOf(o),t=T();if(t<s.readyAt||t-s.lastRoll<ROLL_GAP)return;s.lastRoll=t;stats.rolls++;preload();
  if(acts.length>=MAX_ACTS||acts.some(x=>x.owner===o))return;
- if(!forced&&!(rnd()<Math.min(CHANCE_MAX,surge('chance',G971(HERO,[CHANCE])[0]))))return;const kind=pick();s.readyAt=t+D971(HERO,ICD);lastRoom=curRoom();fire(kind,o,e&&fin(e.x)?{x:e.x,y:e.y}:null);}
+ if(!forced&&!(rnd()<Math.min(CHANCE_MAX,surge('chance',G971(HERO,[CHANCE])[0]))*S1025(HERO)))return;const kind=pick();s.readyAt=t+D971(HERO,ICD);lastRoom=curRoom();fire(kind,o,e&&fin(e.x)?{x:e.x,y:e.y}:null);}
 // 서하 본인 타격만(다른 영웅·협동 동료·적·이 패시브 자신의 피해·소환 영웅이 쏜 탄 제외).
 function mine(src){const o=P();if(!o||o.hero!==HERO||o.r949Summon)return false;if(src&&typeof src==='object'){if(src.r949||src.r949Summon||src.sourceHero&&src.sourceHero!==HERO)return false;if(src.coopIdR62||src.ally||src.owner==='ally'||src.owner==='enemy'||src.hostile)return false;}return true;}
 

@@ -80,8 +80,9 @@ function disarm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)){c
 function clearAll(){for(const s of states())wipe(s);vis.length=0;disarm();}
 // ---- 발동 ----------------------------------------------------------------------------------------------------
 const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
+const U1025=(h,a,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__,v=u&&u.mask(h,a,k);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},S1025=h=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.share(h);return Number.isFinite(v)?Math.max(0,Math.min(1,v)):1;}catch(_){return 1;}},W1025=(h,w)=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.weights(h,w);return v||w;}catch(_){return w;}},A1025=(h,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.unlocked(h,k)!==false:true;}catch(_){return true;}},O1025=id=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.summonOpen(id)!==false:true;}catch(_){return true;}};/* R1025 특수 패시브 레벨별 해금·소환 영웅 서사 확인(파일 없으면 원래 값) */
 function pick(s){if(s.force){const k=s.force;s.force=null;return k;}
- const r=Math.random(),[a,b,c]=G971(HERO,[CFG.needle.chance,CFG.swords.chance,CFG.lattice.chance]),k=r<a?'needle':r<a+b?'swords':r<a+b+c?'lattice':null;
+ const r=Math.random(),[a,b,c]=U1025(HERO,G971(HERO,[CFG.needle.chance,CFG.swords.chance,CFG.lattice.chance]),['needle','swords','lattice']),k=r<a?'needle':r<a+b?'swords':r<a+b+c?'lattice':null;
  return k&&T()>=s.ready[k]?k:null;}
 const nearOf=(p,r)=>{let b=null,bd=r;for(const e of foes()){if(!(e.hp>0)||!fin(e.x)||!fin(e.y))continue;const d=Math.hypot(e.x-p.x,e.y-p.y);if(d<=bd){bd=d;b=e;}}return b;};
 function onSwing(p,foe){const s=st(p);s.stats.swings++;if(!solo()){s.stats.coopSkipped++;return;}

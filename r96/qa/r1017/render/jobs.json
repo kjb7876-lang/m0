@@ -1,0 +1,6 @@
+[{"name":"gate","file":"large_iron_gate.glb","opt":{"exposure":1.5,"key":3.4,"rim":3.0,"amb":0.9}},
+{"name":"statue","file":"gothic_statue.glb","opt":{"exposure":1.25,"key":3.0,"rim":2.0}},
+{"name":"chest","file":"treasure_chest.glb","opt":{"exposure":1.2,"key":2.8,"rim":1.8}},
+{"name":"candles","file":"brass_candleholders.glb","opt":{"exposure":1.35,"key":3.0,"rim":2.2}},
+{"name":"bed","file":"old_bed_frame.glb","opt":{"exposure":1.3,"key":3.0,"rim":2.2,"amb":0.7}},
+{"name":"firepit","file":"stone_fire_pit.glb","opt":{"exposure":1.25,"key":2.8,"rim":1.6}}]
