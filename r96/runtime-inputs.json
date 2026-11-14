@@ -9865,6 +9865,18 @@
     "mobile-tier-r1023.js",
     "entry-video-r1036.js",
     "boot-lean-r1038.js",
+    "assets/r1027/barrier.webp",
+    "assets/r1027/heal.webp",
+    "assets/r1027/index.json",
+    "assets/r1027/mend.webp",
+    "assets/r1027/slash-hwando.webp",
+    "assets/r1027/slash-lauren.webp",
+    "assets/r1027/slash-neon.webp",
+    "assets/r1027/slash-slayer.webp",
+    "hero-harmony-r1030.js",
+    "hero-paint-r1027.js",
+    "narration-r1037.js",
+    "hwando-ink-trace-r1034.js",
     "boss-pattern-fx-r1040.js"
   ],
   "mediaPaths": [
@@ -10940,5 +10952,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "9cdc50e530ace7c8d3111aa5e8fd7cf8c05fd2ff610014eac0398a666c9c6cb9"
+  "runtimeManifestSHA256": "aaccafa4b5ca25430907d4396edeeb3b6afa8dc38eb350f5b7d8255cc1cf204b"
 }
