@@ -51758,6 +51758,11 @@
       "sha256": "b4c986bf71d04cdaea3b87f9a0681b53e3444a21199649fe24b510b137ea9a80"
     },
     {
+      "path": "gear-r1032.js",
+      "bytes": 25965,
+      "sha256": "eaf715bf8af2e9de404e57835a9c803bf1a97cfaec1118494d4cc69813fed344"
+    },
+    {
       "path": "ground-fringe-r452.js",
       "bytes": 18620,
       "sha256": "d10b540b0babe8d57bd372597bb90bb6a6df889957531919d55add65243b00ed"
@@ -51820,7 +51825,7 @@
     {
       "path": "hero-defense-r720.js",
       "bytes": 41810,
-      "sha256": "35d564adec0ae486ee4cfd48c626cf15765161c45b6dae957c8cfda65b87c373"
+      "sha256": "f22bba8c85d290468150dc5ff245e3575933f3ab691360a827016aff69f2a906"
     },
     {
       "path": "hero-facing-r336.js",
@@ -52019,8 +52024,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6578554,
-      "sha256": "332703f9f5e665c79d5d80cd60028c22792418d89030def693fde47b2293c279"
+      "bytes": 6578594,
+      "sha256": "af52f8ccabe126335b60413ee7da7cdf7260646a189ba9f3efaff4c3f0e3d13b"
     },
     {
       "path": "intro-r140.js",
@@ -53045,7 +53050,7 @@
     {
       "path": "ui-combat-r1021.js",
       "bytes": 15312,
-      "sha256": "719c093006029ce6b557a76bb328db895a192ac94ef049217daa186637bca782"
+      "sha256": "07d9d782e712b9afd6971f34a67b3bd666204dea9e46ddee57fac58f5546e0d1"
     },
     {
       "path": "ui-upgrades-r222.js",
@@ -53253,9 +53258,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10650,
-  "totalBytes": 1296995275,
-  "webHTMLSha256": "332703f9f5e665c79d5d80cd60028c22792418d89030def693fde47b2293c279",
+  "fileCount": 10651,
+  "totalBytes": 1297021280,
+  "webHTMLSha256": "af52f8ccabe126335b60413ee7da7cdf7260646a189ba9f3efaff4c3f0e3d13b",
   "largest": [
     {
       "path": "index.html",

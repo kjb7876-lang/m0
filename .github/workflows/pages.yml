@@ -658,6 +658,8 @@ jobs:
         run: node r96/qa/r1028/tentacle-cpu-check.cjs
       - name: R1031 Bulmyeongwi (R760) body sheets follow R444 facing, not the engine fake attack CPU check
         run: node r96/qa/r1031/r1031-cpu-check.cjs
+      - name: R1032 unique gear (J seal, rose seal, hero weapons) + dream-fragment n^2 upgrades + K passive / I gear+memory / B placement windows CPU check
+        run: node r96/qa/r1032/r1032-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
         run: node r96/qa/r430/r430-cpu-check.cjs
       - name: R431 boss-room center fights + theme boss skill 6s + touch status/DoT + black-flame prop throws CPU check
