@@ -52019,8 +52019,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6578554,
-      "sha256": "332703f9f5e665c79d5d80cd60028c22792418d89030def693fde47b2293c279"
+      "bytes": 6578601,
+      "sha256": "f054d3778e5bb8989ca9879f7d9dd800ffea32e1bff489f930767b92ff1c0a0a"
     },
     {
       "path": "intro-r140.js",
@@ -52069,8 +52069,8 @@
     },
     {
       "path": "light-atmos-r300.js",
-      "bytes": 20809,
-      "sha256": "734523b9383bf14938eb1e45ffbc63b1ca6f7ec5b6d790f3339ef0d6d53a9cc1"
+      "bytes": 21032,
+      "sha256": "d9af0fdffb2ecec7fc2cbafde4bd7ce4c6cd769881fffb18196c4547e36267e0"
     },
     {
       "path": "light-r182.js",
@@ -52294,8 +52294,8 @@
     },
     {
       "path": "mobile-memory-r980.js",
-      "bytes": 14802,
-      "sha256": "b3c046cf8e7745e4872b90f6570e14fb53a7479fb21781f0d8fe4038727f39da"
+      "bytes": 16601,
+      "sha256": "4c5f92f4128bec7990c120428c76a9b98d300ba88596225a52e3b6582b5d3768"
     },
     {
       "path": "mobile-perf-r298.js",
@@ -52306,6 +52306,11 @@
       "path": "mobile-settings-r142.js",
       "bytes": 5753,
       "sha256": "21d7741d09e40419bf1a0d710647269f21e4823b5f81e70c12f810308ff606d0"
+    },
+    {
+      "path": "mobile-tier-r1023.js",
+      "bytes": 14002,
+      "sha256": "553183cfb1328487b79d467e84027cb978038599d242ee5e251962a80f1ab73f"
     },
     {
       "path": "mobs-r109.js",
@@ -53179,8 +53184,8 @@
     },
     {
       "path": "weather-r450.js",
-      "bytes": 33570,
-      "sha256": "897e8b6308f58e7562013fc6d37dfa74004ccdd9aca2864af85e3f71f41dfb6e"
+      "bytes": 33793,
+      "sha256": "f84f1b7ca715fe141b26942d34f407b09b6edfe667d13bcf5c4ed2f72f5340ef"
     },
     {
       "path": "webgl-fallback-r221.js",
@@ -53253,9 +53258,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10650,
-  "totalBytes": 1296995275,
-  "webHTMLSha256": "332703f9f5e665c79d5d80cd60028c22792418d89030def693fde47b2293c279",
+  "fileCount": 10651,
+  "totalBytes": 1297011569,
+  "webHTMLSha256": "f054d3778e5bb8989ca9879f7d9dd800ffea32e1bff489f930767b92ff1c0a0a",
   "largest": [
     {
       "path": "index.html",
