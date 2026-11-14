@@ -1,0 +1,1062 @@
+[
+ {
+  "asset_id": "r248-m001",
+  "category": "mob",
+  "name": "뿌리에 묶인 근위의 기억",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "뿌리에 묶인 근위의 기억 — 본편 몹, 형태 plant, 무기 blade",
+  "prompt": "Sprite sheet of an enemy called \"뿌리에 묶인 근위의 기억\" (story world), a root-and-vine bound creature holding a sword. Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m001.webp"
+ },
+ {
+  "asset_id": "r248-m002",
+  "category": "mob",
+  "name": "재 나방",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "재 나방 — 본편 몹, 형태 winged",
+  "prompt": "Sprite sheet of an enemy called \"재 나방\" (story world), a winged creature . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m002.webp"
+ },
+ {
+  "asset_id": "r248-m003",
+  "category": "mob",
+  "name": "진흙등 거미",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "진흙등 거미 — 본편 몹, 형태 spider, 무기 lantern",
+  "prompt": "Sprite sheet of an enemy called \"진흙등 거미\" (story world), a giant spider carrying a lantern. Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m003.webp"
+ },
+ {
+  "asset_id": "r248-m004",
+  "category": "mob",
+  "name": "보라검 추격천사",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "보라검 추격천사 — 본편 몹, 형태 human, 무기 blade",
+  "prompt": "Sprite sheet of an enemy called \"보라검 추격천사\" (story world), a humanoid figure holding a sword. Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m004.webp"
+ },
+ {
+  "asset_id": "r248-m005",
+  "category": "mob",
+  "name": "기억 운반거미",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "기억 운반거미 — 본편 몹, 형태 spider",
+  "prompt": "Sprite sheet of an enemy called \"기억 운반거미\" (story world), a giant spider . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m005.webp"
+ },
+ {
+  "asset_id": "r248-m006",
+  "category": "mob",
+  "name": "되살아난 방패동료",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "되살아난 방패동료 — 본편 몹, 형태 human",
+  "prompt": "Sprite sheet of an enemy called \"되살아난 방패동료\" (story world), a humanoid figure . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m006.webp"
+ },
+ {
+  "asset_id": "r248-m007",
+  "category": "mob",
+  "name": "이름 잃은 전우",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "이름 잃은 전우 — 본편 몹, 형태 human",
+  "prompt": "Sprite sheet of an enemy called \"이름 잃은 전우\" (story world), a humanoid figure . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m007.webp"
+ },
+ {
+  "asset_id": "r248-m008",
+  "category": "mob",
+  "name": "보라검 부활자",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "보라검 부활자 — 본편 몹, 형태 human, 무기 blade",
+  "prompt": "Sprite sheet of an enemy called \"보라검 부활자\" (story world), a humanoid figure holding a sword. Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m008.webp"
+ },
+ {
+  "asset_id": "r248-m009",
+  "category": "mob",
+  "name": "검은기둥 주문사",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "검은기둥 주문사 — 본편 몹, 형태 human, 무기 blade",
+  "prompt": "Sprite sheet of an enemy called \"검은기둥 주문사\" (story world), a humanoid figure holding a sword. Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m009.webp"
+ },
+ {
+  "asset_id": "r248-m010",
+  "category": "mob",
+  "name": "마지막 길의 호위병",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "마지막 길의 호위병 — 본편 몹, 형태 human",
+  "prompt": "Sprite sheet of an enemy called \"마지막 길의 호위병\" (story world), a humanoid figure . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m010.webp"
+ },
+ {
+  "asset_id": "r248-m011",
+  "category": "mob",
+  "name": "지옥문 파수악마",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "지옥문 파수악마 — 본편 몹, 형태 human, 무기 claws",
+  "prompt": "Sprite sheet of an enemy called \"지옥문 파수악마\" (story world), a humanoid figure with long claws. Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m011.webp"
+ },
+ {
+  "asset_id": "r248-m012",
+  "category": "mob",
+  "name": "검은기둥 화염술사",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "검은기둥 화염술사 — 본편 몹, 형태 human, 무기 blade",
+  "prompt": "Sprite sheet of an enemy called \"검은기둥 화염술사\" (story world), a humanoid figure holding a sword. Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m012.webp"
+ },
+ {
+  "asset_id": "r248-m013",
+  "category": "mob",
+  "name": "소환진 타락천사",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "소환진 타락천사 — 본편 몹, 형태 human",
+  "prompt": "Sprite sheet of an enemy called \"소환진 타락천사\" (story world), a humanoid figure . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m013.webp"
+ },
+ {
+  "asset_id": "r248-m014",
+  "category": "mob",
+  "name": "격리실 감염 의료인",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "격리실 감염 의료인 — 본편 몹, 형태 human, 무기 needle",
+  "prompt": "Sprite sheet of an enemy called \"격리실 감염 의료인\" (story world), a humanoid figure holding a syringe/needle. Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m014.webp"
+ },
+ {
+  "asset_id": "r248-m015",
+  "category": "mob",
+  "name": "안정화 집행체",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "안정화 집행체 — 본편 몹, 형태 human, 무기 needle",
+  "prompt": "Sprite sheet of an enemy called \"안정화 집행체\" (story world), a humanoid figure holding a syringe/needle. Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m015.webp"
+ },
+ {
+  "asset_id": "r248-m016",
+  "category": "mob",
+  "name": "소독등 타락천사",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "소독등 타락천사 — 본편 몹, 형태 human, 무기 lantern",
+  "prompt": "Sprite sheet of an enemy called \"소독등 타락천사\" (story world), a humanoid figure carrying a lantern. Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m016.webp"
+ },
+ {
+  "asset_id": "r248-m017",
+  "category": "mob",
+  "name": "병원 심부의 집도의",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "병원 심부의 집도의 — 본편 몹, 형태 human",
+  "prompt": "Sprite sheet of an enemy called \"병원 심부의 집도의\" (story world), a humanoid figure . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m017.webp"
+ },
+ {
+  "asset_id": "r248-m018",
+  "category": "mob",
+  "name": "유리 망령",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "유리 망령 — 본편 몹, 형태 wraith",
+  "prompt": "Sprite sheet of an enemy called \"유리 망령\" (story world), a ghostly wraith . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m018.webp"
+ },
+ {
+  "asset_id": "r248-m019",
+  "category": "mob",
+  "name": "갈망의 도시짐승",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "갈망의 도시짐승 — 본편 몹, 형태 quad, 무기 claws",
+  "prompt": "Sprite sheet of an enemy called \"갈망의 도시짐승\" (story world), a four-legged beast with long claws. Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m019.webp"
+ },
+ {
+  "asset_id": "r248-m020",
+  "category": "mob",
+  "name": "거짓천국 근위천사",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "거짓천국 근위천사 — 본편 몹, 형태 human, 무기 blade",
+  "prompt": "Sprite sheet of an enemy called \"거짓천국 근위천사\" (story world), a humanoid figure holding a sword. Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m020.webp"
+ },
+ {
+  "asset_id": "r248-m021",
+  "category": "mob",
+  "name": "치료거부의 가면",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "치료거부의 가면 — 본편 몹, 형태 mask",
+  "prompt": "Sprite sheet of an enemy called \"치료거부의 가면\" (story world), a floating mask entity . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m021.webp"
+ },
+ {
+  "asset_id": "r248-m022",
+  "category": "mob",
+  "name": "미뤄 둔 시간의 형상",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "미뤄 둔 시간의 형상 — 본편 몹, 형태 wraith",
+  "prompt": "Sprite sheet of an enemy called \"미뤄 둔 시간의 형상\" (story world), a ghostly wraith . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m022.webp"
+ },
+ {
+  "asset_id": "r248-m023",
+  "category": "mob",
+  "name": "찢어진 사진의 망령",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "찢어진 사진의 망령 — 본편 몹, 형태 wraith",
+  "prompt": "Sprite sheet of an enemy called \"찢어진 사진의 망령\" (story world), a ghostly wraith . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m023.webp"
+ },
+ {
+  "asset_id": "r248-m024",
+  "category": "mob",
+  "name": "칼날과 유리 조각",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "칼날과 유리 조각 — 본편 몹, 형태 blade, 무기 blade",
+  "prompt": "Sprite sheet of an enemy called \"칼날과 유리 조각\" (story world), a living blade shards holding a sword. Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m024.webp"
+ },
+ {
+  "asset_id": "r248-m025",
+  "category": "mob",
+  "name": "끓어오르는 검은 소화액",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "끓어오르는 검은 소화액 — 본편 몹, 형태 slime, 무기 blade",
+  "prompt": "Sprite sheet of an enemy called \"끓어오르는 검은 소화액\" (story world), a slime creature holding a sword. Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m025.webp"
+ },
+ {
+  "asset_id": "r248-m026",
+  "category": "mob",
+  "name": "모든 면이 뒷면인 동전",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "모든 면이 뒷면인 동전 — 본편 몹, 형태 coin",
+  "prompt": "Sprite sheet of an enemy called \"모든 면이 뒷면인 동전\" (story world), a living coin/disc object . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m026.webp"
+ },
+ {
+  "asset_id": "r248-m027",
+  "category": "mob",
+  "name": "고슴도치 가시 사탕",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "고슴도치 가시 사탕 — 본편 몹, 형태 candy",
+  "prompt": "Sprite sheet of an enemy called \"고슴도치 가시 사탕\" (story world), a cursed candy creature . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m027.webp"
+ },
+ {
+  "asset_id": "r248-m028",
+  "category": "mob",
+  "name": "눈보라 속 여우 악마",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "눈보라 속 여우 악마 — 본편 몹, 형태 quad, 무기 claws",
+  "prompt": "Sprite sheet of an enemy called \"눈보라 속 여우 악마\" (story world), a four-legged beast with long claws. Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m028.webp"
+ },
+ {
+  "asset_id": "r248-m029",
+  "category": "mob",
+  "name": "낡은 장난감 요요",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "낡은 장난감 요요 — 본편 몹, 형태 coin",
+  "prompt": "Sprite sheet of an enemy called \"낡은 장난감 요요\" (story world), a living coin/disc object . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m029.webp"
+ },
+ {
+  "asset_id": "r248-m030",
+  "category": "mob",
+  "name": "불길 속의 곰",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "불길 속의 곰 — 본편 몹, 형태 quad",
+  "prompt": "Sprite sheet of an enemy called \"불길 속의 곰\" (story world), a four-legged beast . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m030.webp"
+ },
+ {
+  "asset_id": "r248-m031",
+  "category": "mob",
+  "name": "육망성의 흑마술 실험체",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "육망성의 흑마술 실험체 — 본편 몹, 형태 human",
+  "prompt": "Sprite sheet of an enemy called \"육망성의 흑마술 실험체\" (story world), a humanoid figure . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m031.webp"
+ },
+ {
+  "asset_id": "r248-m032",
+  "category": "mob",
+  "name": "인간의 뇌를 닮은 투명 연산 장치",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "인간의 뇌를 닮은 투명 연산 장치 — 본편 몹, 형태 mech",
+  "prompt": "Sprite sheet of an enemy called \"인간의 뇌를 닮은 투명 연산 장치\" (story world), a clockwork machine . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m032.webp"
+ },
+ {
+  "asset_id": "r248-m033",
+  "category": "mob",
+  "name": "태엽 수집자",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "태엽 수집자 — 본편 몹, 형태 mech",
+  "prompt": "Sprite sheet of an enemy called \"태엽 수집자\" (story world), a clockwork machine . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m033.webp"
+ },
+ {
+  "asset_id": "r248-m034",
+  "category": "mob",
+  "name": "학대기록 공허체",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "학대기록 공허체 — 본편 몹, 형태 wraith",
+  "prompt": "Sprite sheet of an enemy called \"학대기록 공허체\" (story world), a ghostly wraith . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m034.webp"
+ },
+ {
+  "asset_id": "r248-m035",
+  "category": "mob",
+  "name": "관리자 추적견",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "관리자 추적견 — 본편 몹, 형태 quad",
+  "prompt": "Sprite sheet of an enemy called \"관리자 추적견\" (story world), a four-legged beast . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m035.webp"
+ },
+ {
+  "asset_id": "r248-m036",
+  "category": "mob",
+  "name": "역전기록 수집가",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "역전기록 수집가 — 본편 몹, 형태 mech",
+  "prompt": "Sprite sheet of an enemy called \"역전기록 수집가\" (story world), a clockwork machine . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m036.webp"
+ },
+ {
+  "asset_id": "r248-m037",
+  "category": "mob",
+  "name": "기억이주 연결자",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "기억이주 연결자 — 본편 몹, 형태 mech",
+  "prompt": "Sprite sheet of an enemy called \"기억이주 연결자\" (story world), a clockwork machine . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m037.webp"
+ },
+ {
+  "asset_id": "r248-m038",
+  "category": "mob",
+  "name": "중앙이주 공명기사",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "중앙이주 공명기사 — 본편 몹, 형태 human, 무기 blade",
+  "prompt": "Sprite sheet of an enemy called \"중앙이주 공명기사\" (story world), a humanoid figure holding a sword. Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m038.webp"
+ },
+ {
+  "asset_id": "r248-m039",
+  "category": "mob",
+  "name": "입양기억 청람잔영",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "입양기억 청람잔영 — 본편 몹, 형태 wraith",
+  "prompt": "Sprite sheet of an enemy called \"입양기억 청람잔영\" (story world), a ghostly wraith . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m039.webp"
+ },
+ {
+  "asset_id": "r248-m040",
+  "category": "mob",
+  "name": "이동문 청람잔영",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "이동문 청람잔영 — 본편 몹, 형태 wraith",
+  "prompt": "Sprite sheet of an enemy called \"이동문 청람잔영\" (story world), a ghostly wraith . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m040.webp"
+ },
+ {
+  "asset_id": "r248-m041",
+  "category": "mob",
+  "name": "이동문 공허잔영",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "이동문 공허잔영 — 본편 몹, 형태 wraith",
+  "prompt": "Sprite sheet of an enemy called \"이동문 공허잔영\" (story world), a ghostly wraith . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m041.webp"
+ },
+ {
+  "asset_id": "r248-m042",
+  "category": "mob",
+  "name": "최종문 공명기사",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "최종문 공명기사 — 본편 몹, 형태 human, 무기 blade",
+  "prompt": "Sprite sheet of an enemy called \"최종문 공명기사\" (story world), a humanoid figure holding a sword. Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m042.webp"
+ },
+ {
+  "asset_id": "r248-m043",
+  "category": "mob",
+  "name": "장미이슬 슬라임",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "장미이슬 슬라임 — 본편 몹, 형태 slime",
+  "prompt": "Sprite sheet of an enemy called \"장미이슬 슬라임\" (story world), a slime creature . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m043.webp"
+ },
+ {
+  "asset_id": "r248-m044",
+  "category": "mob",
+  "name": "피리 고블린",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "피리 고블린 — 본편 몹, 형태 human",
+  "prompt": "Sprite sheet of an enemy called \"피리 고블린\" (story world), a humanoid figure . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m044.webp"
+ },
+ {
+  "asset_id": "r248-m045",
+  "category": "mob",
+  "name": "귀비탕 공명 안개핵",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "귀비탕 공명 안개핵 — 본편 몹, 형태 fog",
+  "prompt": "Sprite sheet of an enemy called \"귀비탕 공명 안개핵\" (story world), a black fog entity . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m045.webp"
+ },
+ {
+  "asset_id": "r248-m046",
+  "category": "mob",
+  "name": "주민에게서 떨어진 검은 안개",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "주민에게서 떨어진 검은 안개 — 본편 몹, 형태 fog, 무기 blade",
+  "prompt": "Sprite sheet of an enemy called \"주민에게서 떨어진 검은 안개\" (story world), a black fog entity holding a sword. Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m046.webp"
+ },
+ {
+  "asset_id": "r248-m047",
+  "category": "mob",
+  "name": "불면귀의 안개 잔영",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "불면귀의 안개 잔영 — 본편 몹, 형태 wraith",
+  "prompt": "Sprite sheet of an enemy called \"불면귀의 안개 잔영\" (story world), a ghostly wraith . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m047.webp"
+ },
+ {
+  "asset_id": "r248-m048",
+  "category": "mob",
+  "name": "아르벨리아를 묶은 변조 명령",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "아르벨리아를 묶은 변조 명령 — 본편 몹, 형태 human",
+  "prompt": "Sprite sheet of an enemy called \"아르벨리아를 묶은 변조 명령\" (story world), a humanoid figure . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m048.webp"
+ },
+ {
+  "asset_id": "r248-m049",
+  "category": "mob",
+  "name": "시간핵의 명령 잔류",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "시간핵의 명령 잔류 — 본편 몹, 형태 wraith",
+  "prompt": "Sprite sheet of an enemy called \"시간핵의 명령 잔류\" (story world), a ghostly wraith . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m049.webp"
+ },
+ {
+  "asset_id": "r248-m050",
+  "category": "mob",
+  "name": "지워진 CCTV 기록의 잔향",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "지워진 CCTV 기록의 잔향 — 본편 몹, 형태 wraith",
+  "prompt": "Sprite sheet of an enemy called \"지워진 CCTV 기록의 잔향\" (story world), a ghostly wraith . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m050.webp"
+ },
+ {
+  "asset_id": "r248-m051",
+  "category": "mob",
+  "name": "새빛호텔 화재 기록의 잔향",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "새빛호텔 화재 기록의 잔향 — 본편 몹, 형태 wraith",
+  "prompt": "Sprite sheet of an enemy called \"새빛호텔 화재 기록의 잔향\" (story world), a ghostly wraith . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m051.webp"
+ },
+ {
+  "asset_id": "r248-m052",
+  "category": "mob",
+  "name": "공실 표기 잔재",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "공실 표기 잔재 — 본편 몹, 형태 wraith",
+  "prompt": "Sprite sheet of an enemy called \"공실 표기 잔재\" (story world), a ghostly wraith . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m052.webp"
+ },
+ {
+  "asset_id": "r248-m053",
+  "category": "mob",
+  "name": "제출되지 못한 문장",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "제출되지 못한 문장 — 본편 몹, 형태 paper",
+  "prompt": "Sprite sheet of an enemy called \"제출되지 못한 문장\" (story world), a living paper figure . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m053.webp"
+ },
+ {
+  "asset_id": "r248-m054",
+  "category": "mob",
+  "name": "옥상으로 돌아온 기억 잔향",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "옥상으로 돌아온 기억 잔향 — 본편 몹, 형태 wraith",
+  "prompt": "Sprite sheet of an enemy called \"옥상으로 돌아온 기억 잔향\" (story world), a ghostly wraith . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m054.webp"
+ },
+ {
+  "asset_id": "r248-m055",
+  "category": "mob",
+  "name": "반복된 추락의 인과 잔향",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "반복된 추락의 인과 잔향 — 본편 몹, 형태 wraith",
+  "prompt": "Sprite sheet of an enemy called \"반복된 추락의 인과 잔향\" (story world), a ghostly wraith . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m055.webp"
+ },
+ {
+  "asset_id": "r248-m056",
+  "category": "mob",
+  "name": "ID 배양 점액체",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "ID 배양 점액체 — 본편 몹, 형태 slime",
+  "prompt": "Sprite sheet of an enemy called \"ID 배양 점액체\" (story world), a slime creature . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m056.webp"
+ },
+ {
+  "asset_id": "r248-m057",
+  "category": "mob",
+  "name": "본능 추출 결정",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "본능 추출 결정 — 본편 몹, 형태 crystal",
+  "prompt": "Sprite sheet of an enemy called \"본능 추출 결정\" (story world), a crystal entity . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m057.webp"
+ },
+ {
+  "asset_id": "r248-m058",
+  "category": "mob",
+  "name": "죄책감 압축결정",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "죄책감 압축결정 — 본편 몹, 형태 crystal",
+  "prompt": "Sprite sheet of an enemy called \"죄책감 압축결정\" (story world), a crystal entity . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m058.webp"
+ },
+ {
+  "asset_id": "r248-m059",
+  "category": "mob",
+  "name": "SUPER EGO 절개결정",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "SUPER EGO 절개결정 — 본편 몹, 형태 crystal",
+  "prompt": "Sprite sheet of an enemy called \"SUPER EGO 절개결정\" (story world), a crystal entity . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m059.webp"
+ },
+ {
+  "asset_id": "r248-m060",
+  "category": "mob",
+  "name": "ID 잔류 점액체",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "ID 잔류 점액체 — 본편 몹, 형태 slime",
+  "prompt": "Sprite sheet of an enemy called \"ID 잔류 점액체\" (story world), a slime creature . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m060.webp"
+ },
+ {
+  "asset_id": "r248-m061",
+  "category": "mob",
+  "name": "아마겟돈 계산결정",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "아마겟돈 계산결정 — 본편 몹, 형태 crystal",
+  "prompt": "Sprite sheet of an enemy called \"아마겟돈 계산결정\" (story world), a crystal entity . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m061.webp"
+ },
+ {
+  "asset_id": "r248-m062",
+  "category": "mob",
+  "name": "교만의 사이보그 교주",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "교만의 사이보그 교주 — 본편 몹, 형태 human",
+  "prompt": "Sprite sheet of an enemy called \"교만의 사이보그 교주\" (story world), a humanoid figure . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m062.webp"
+ },
+ {
+  "asset_id": "r248-m063",
+  "category": "mob",
+  "name": "뿌리에서 쏟아진 잔영",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "뿌리에서 쏟아진 잔영 — 사몽(꿈) 몹, 형태 wraith",
+  "prompt": "Sprite sheet of an enemy called \"뿌리에서 쏟아진 잔영\" (nightmare dream world), a ghostly wraith . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m063.webp"
+ },
+ {
+  "asset_id": "r248-m064",
+  "category": "mob",
+  "name": "코어 아래의 검은 뿌리",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "코어 아래의 검은 뿌리 — 사몽(꿈) 몹, 형태 plant, 무기 blade",
+  "prompt": "Sprite sheet of an enemy called \"코어 아래의 검은 뿌리\" (nightmare dream world), a root-and-vine bound creature holding a sword. Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m064.webp"
+ },
+ {
+  "asset_id": "r248-m065",
+  "category": "mob",
+  "name": "포구 검은 안개",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "포구 검은 안개 — 사몽(꿈) 몹, 형태 fog, 무기 blade",
+  "prompt": "Sprite sheet of an enemy called \"포구 검은 안개\" (nightmare dream world), a black fog entity holding a sword. Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m065.webp"
+ },
+ {
+  "asset_id": "r248-m066",
+  "category": "mob",
+  "name": "부정의 잔영",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "부정의 잔영 — 사몽(꿈) 몹, 형태 wraith",
+  "prompt": "Sprite sheet of an enemy called \"부정의 잔영\" (nightmare dream world), a ghostly wraith . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m066.webp"
+ },
+ {
+  "asset_id": "r248-m067",
+  "category": "mob",
+  "name": "꿰맨 아기 인형",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "꿰맨 아기 인형 — 사몽(꿈) 몹, 형태 puppet",
+  "prompt": "Sprite sheet of an enemy called \"꿰맨 아기 인형\" (nightmare dream world), a stitched puppet/mannequin . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m067.webp"
+ },
+ {
+  "asset_id": "r248-m068",
+  "category": "mob",
+  "name": "얼굴 없는 남자의 박수",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "얼굴 없는 남자의 박수 — 사몽(꿈) 몹, 형태 human",
+  "prompt": "Sprite sheet of an enemy called \"얼굴 없는 남자의 박수\" (nightmare dream world), a humanoid figure . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m068.webp"
+ },
+ {
+  "asset_id": "r248-m069",
+  "category": "mob",
+  "name": "다시 일으켜 세워진 도전자",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "다시 일으켜 세워진 도전자 — 사몽(꿈) 몹, 형태 human, 무기 blade",
+  "prompt": "Sprite sheet of an enemy called \"다시 일으켜 세워진 도전자\" (nightmare dream world), a humanoid figure holding a sword. Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m069.webp"
+ },
+ {
+  "asset_id": "r248-m070",
+  "category": "mob",
+  "name": "검은 고리",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "검은 고리 — 사몽(꿈) 몹, 형태 human, 무기 blade",
+  "prompt": "Sprite sheet of an enemy called \"검은 고리\" (nightmare dream world), a humanoid figure holding a sword. Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m070.webp"
+ },
+ {
+  "asset_id": "r248-m071",
+  "category": "mob",
+  "name": "불면병동 무안 환자",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "불면병동 무안 환자 — 사몽(꿈) 몹, 형태 human",
+  "prompt": "Sprite sheet of an enemy called \"불면병동 무안 환자\" (nightmare dream world), a humanoid figure . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m071.webp"
+ },
+ {
+  "asset_id": "r248-m072",
+  "category": "mob",
+  "name": "규칙을 어기지 않는 마네킹",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "규칙을 어기지 않는 마네킹 — 사몽(꿈) 몹, 형태 puppet",
+  "prompt": "Sprite sheet of an enemy called \"규칙을 어기지 않는 마네킹\" (nightmare dream world), a stitched puppet/mannequin . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m072.webp"
+ },
+ {
+  "asset_id": "r248-m073",
+  "category": "mob",
+  "name": "강재헌",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "강재헌 — 사몽(꿈) 몹, 형태 human",
+  "prompt": "Sprite sheet of an enemy called \"강재헌\" (nightmare dream world), a humanoid figure . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m073.webp"
+ },
+ {
+  "asset_id": "r248-m074",
+  "category": "mob",
+  "name": "호외 신문의 밀고자 잔영",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "호외 신문의 밀고자 잔영 — 사몽(꿈) 몹, 형태 wraith",
+  "prompt": "Sprite sheet of an enemy called \"호외 신문의 밀고자 잔영\" (nightmare dream world), a ghostly wraith . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m074.webp"
+ },
+ {
+  "asset_id": "r248-m075",
+  "category": "mob",
+  "name": "찢긴 호외의 잔향",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "찢긴 호외의 잔향 — 사몽(꿈) 몹, 형태 wraith",
+  "prompt": "Sprite sheet of an enemy called \"찢긴 호외의 잔향\" (nightmare dream world), a ghostly wraith . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m075.webp"
+ },
+ {
+  "asset_id": "r248-m076",
+  "category": "mob",
+  "name": "교주의 인장",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "교주의 인장 — 사몽(꿈) 몹, 형태 crystal",
+  "prompt": "Sprite sheet of an enemy called \"교주의 인장\" (nightmare dream world), a crystal entity . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m076.webp"
+ },
+ {
+  "asset_id": "r248-m077",
+  "category": "mob",
+  "name": "외계 침공군",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "외계 침공군 — 사몽(꿈) 몹, 형태 human",
+  "prompt": "Sprite sheet of an enemy called \"외계 침공군\" (nightmare dream world), a humanoid figure . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m077.webp"
+ },
+ {
+  "asset_id": "r248-m078",
+  "category": "mob",
+  "name": "폭격기억 사이보그 사냥개",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "폭격기억 사이보그 사냥개 — 사몽(꿈) 몹, 형태 quad",
+  "prompt": "Sprite sheet of an enemy called \"폭격기억 사이보그 사냥개\" (nightmare dream world), a four-legged beast . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m078.webp"
+ },
+ {
+  "asset_id": "r248-m079",
+  "category": "mob",
+  "name": "적 지휘 기체",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "적 지휘 기체 — 사몽(꿈) 몹, 형태 human",
+  "prompt": "Sprite sheet of an enemy called \"적 지휘 기체\" (nightmare dream world), a humanoid figure . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m079.webp"
+ },
+ {
+  "asset_id": "r248-m080",
+  "category": "mob",
+  "name": "검은 명령선",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "검은 명령선 — 사몽(꿈) 몹, 형태 wraith, 무기 blade",
+  "prompt": "Sprite sheet of an enemy called \"검은 명령선\" (nightmare dream world), a ghostly wraith holding a sword. Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m080.webp"
+ },
+ {
+  "asset_id": "r248-m081",
+  "category": "mob",
+  "name": "여섯 물건의 그림자",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "여섯 물건의 그림자 — 사몽(꿈) 몹, 형태 wraith",
+  "prompt": "Sprite sheet of an enemy called \"여섯 물건의 그림자\" (nightmare dream world), a ghostly wraith . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m081.webp"
+ },
+ {
+  "asset_id": "r248-m082",
+  "category": "mob",
+  "name": "백은 없는 그림자",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "백은 없는 그림자 — 사몽(꿈) 몹, 형태 wraith",
+  "prompt": "Sprite sheet of an enemy called \"백은 없는 그림자\" (nightmare dream world), a ghostly wraith . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m082.webp"
+ },
+ {
+  "asset_id": "r248-m083",
+  "category": "mob",
+  "name": "페르소나",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "페르소나 — 사몽(꿈) 몹, 형태 human",
+  "prompt": "Sprite sheet of an enemy called \"페르소나\" (nightmare dream world), a humanoid figure . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m083.webp"
+ },
+ {
+  "asset_id": "r248-m084",
+  "category": "mob",
+  "name": "붉은 교정 표시",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "붉은 교정 표시 — 사몽(꿈) 몹, 형태 paper",
+  "prompt": "Sprite sheet of an enemy called \"붉은 교정 표시\" (nightmare dream world), a living paper figure . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m084.webp"
+ },
+ {
+  "asset_id": "r248-m085",
+  "category": "mob",
+  "name": "정해진 시각에 도착하지 못한 발자국",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "정해진 시각에 도착하지 못한 발자국 — 사몽(꿈) 몹, 형태 wraith",
+  "prompt": "Sprite sheet of an enemy called \"정해진 시각에 도착하지 못한 발자국\" (nightmare dream world), a ghostly wraith . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m085.webp"
+ },
+ {
+  "asset_id": "r248-m086",
+  "category": "mob",
+  "name": "백색 손님",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "백색 손님 — 사몽(꿈) 몹, 형태 human",
+  "prompt": "Sprite sheet of an enemy called \"백색 손님\" (nightmare dream world), a humanoid figure . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m086.webp"
+ },
+ {
+  "asset_id": "r248-m087",
+  "category": "mob",
+  "name": "관람석의 시선",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "관람석의 시선 — 사몽(꿈) 몹, 형태 wraith",
+  "prompt": "Sprite sheet of an enemy called \"관람석의 시선\" (nightmare dream world), a ghostly wraith . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m087.webp"
+ },
+ {
+  "asset_id": "r248-m088",
+  "category": "mob",
+  "name": "찢어진 사진의 망령",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "찢어진 사진의 망령 — 사몽(꿈) 몹, 형태 wraith",
+  "prompt": "Sprite sheet of an enemy called \"찢어진 사진의 망령\" (nightmare dream world), a ghostly wraith . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m088.webp"
+ },
+ {
+  "asset_id": "r248-m089",
+  "category": "mob",
+  "name": "재판관",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "재판관 — 사몽(꿈) 몹, 형태 human",
+  "prompt": "Sprite sheet of an enemy called \"재판관\" (nightmare dream world), a humanoid figure . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m089.webp"
+ },
+ {
+  "asset_id": "r248-m090",
+  "category": "mob",
+  "name": "종이 왕",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "종이 왕 — 사몽(꿈) 몹, 형태 paper",
+  "prompt": "Sprite sheet of an enemy called \"종이 왕\" (nightmare dream world), a living paper figure . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m090.webp"
+ },
+ {
+  "asset_id": "r248-m091",
+  "category": "mob",
+  "name": "서로의 결말을 먹는 도시",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "서로의 결말을 먹는 도시 — 사몽(꿈) 몹, 형태 golem",
+  "prompt": "Sprite sheet of an enemy called \"서로의 결말을 먹는 도시\" (nightmare dream world), a massive city golem . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m091.webp"
+ },
+ {
+  "asset_id": "r248-m092",
+  "category": "mob",
+  "name": "다음 자리를 노리는 사격",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "다음 자리를 노리는 사격 — 사몽(꿈) 몹, 형태 human, 무기 gun",
+  "prompt": "Sprite sheet of an enemy called \"다음 자리를 노리는 사격\" (nightmare dream world), a humanoid figure holding a gun. Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m092.webp"
+ },
+ {
+  "asset_id": "r248-m093",
+  "category": "mob",
+  "name": "백색 사수",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "백색 사수 — 사몽(꿈) 몹, 형태 human, 무기 gun",
+  "prompt": "Sprite sheet of an enemy called \"백색 사수\" (nightmare dream world), a humanoid figure holding a gun. Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m093.webp"
+ },
+ {
+  "asset_id": "r248-m094",
+  "category": "mob",
+  "name": "스토리텔러",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "스토리텔러 — 사몽(꿈) 몹, 형태 human",
+  "prompt": "Sprite sheet of an enemy called \"스토리텔러\" (nightmare dream world), a humanoid figure . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m094.webp"
+ },
+ {
+  "asset_id": "r248-m095",
+  "category": "mob",
+  "name": "일곱 나팔의 빈 소매 잔영",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "일곱 나팔의 빈 소매 잔영 — 사몽(꿈) 몹, 형태 wraith",
+  "prompt": "Sprite sheet of an enemy called \"일곱 나팔의 빈 소매 잔영\" (nightmare dream world), a ghostly wraith . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m095.webp"
+ },
+ {
+  "asset_id": "r248-m096",
+  "category": "mob",
+  "name": "막힌 이름들",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "막힌 이름들 — 사몽(꿈) 몹, 형태 human",
+  "prompt": "Sprite sheet of an enemy called \"막힌 이름들\" (nightmare dream world), a humanoid figure . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m096.webp"
+ },
+ {
+  "asset_id": "r248-m097",
+  "category": "mob",
+  "name": "66 수문장",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "66 수문장 — 사몽(꿈) 몹, 형태 human",
+  "prompt": "Sprite sheet of an enemy called \"66 수문장\" (nightmare dream world), a humanoid figure . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m097.webp"
+ },
+ {
+  "asset_id": "r248-m098",
+  "category": "mob",
+  "name": "성벽과 시곗바늘의 잔해",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "성벽과 시곗바늘의 잔해 — 사몽(꿈) 몹, 형태 human",
+  "prompt": "Sprite sheet of an enemy called \"성벽과 시곗바늘의 잔해\" (nightmare dream world), a humanoid figure . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m098.webp"
+ },
+ {
+  "asset_id": "r248-m099",
+  "category": "mob",
+  "name": "거짓천국 근위천사",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "거짓천국 근위천사 — 사몽(꿈) 몹, 형태 human, 무기 blade",
+  "prompt": "Sprite sheet of an enemy called \"거짓천국 근위천사\" (nightmare dream world), a humanoid figure holding a sword. Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m099.webp"
+ },
+ {
+  "asset_id": "r248-m100",
+  "category": "mob",
+  "name": "미카엘라",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "미카엘라 — 사몽(꿈) 몹, 형태 human",
+  "prompt": "Sprite sheet of an enemy called \"미카엘라\" (nightmare dream world), a humanoid figure . Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 a looping walk cycle, frames 9-12 an attack. Feet on the same baseline (y=300) in every frame. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r248/mobs/m100.webp"
+ },
+ {
+  "asset_id": "r184-invader",
+  "category": "mob",
+  "name": "외계 침공군(DYS-01 원문 외형)",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "외계 침공군(DYS-01 원문 외형) — 사몽 S-06 디스토피아 구역 몹(원문 외형 그대로)",
+  "prompt": "Sprite sheet of a dystopian sci-fi enemy: 외계 침공군(DYS-01 원문 외형). Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 walk cycle, 9-12 attack. Feet on baseline y=300. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r184/s06/s06-invader-walk-right-8.webp"
+ },
+ {
+  "asset_id": "r184-rival",
+  "category": "mob",
+  "name": "상대 초인(DYS-03)",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "상대 초인(DYS-03) — 사몽 S-06 디스토피아 구역 몹(원문 외형 그대로)",
+  "prompt": "Sprite sheet of a dystopian sci-fi enemy: 상대 초인(DYS-03). Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 walk cycle, 9-12 attack. Feet on baseline y=300. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r184/s06/s06-rival-walk-right-8.webp"
+ },
+ {
+  "asset_id": "r184-commander",
+  "category": "mob",
+  "name": "적 지휘 개체·적 지휘 기체(DYS-02·DYS-10)",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px, 가로 4칸 × 세로 3줄 = 12칸: 1~8칸 걷기(한 바퀴), 9~12칸 공격. 발 기준점 (128,300) — 모든 칸에서 발이 같은 높이. 오른쪽을 보는 옆모습(왼쪽은 게임이 반전). 몸 키 칸 높이의 65~80%.",
+  "brief": "적 지휘 개체·적 지휘 기체(DYS-02·DYS-10) — 사몽 S-06 디스토피아 구역 몹(원문 외형 그대로)",
+  "prompt": "Sprite sheet of a dystopian sci-fi enemy: 적 지휘 개체·적 지휘 기체(DYS-02·DYS-10). Side view facing right, 12 frames on a 4x3 grid of 256x320 cells: frames 1-8 walk cycle, 9-12 attack. Feet on baseline y=300. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r184/s06/s06-commander-walk-right-8.webp"
+ },
+ {
+  "asset_id": "r251-circle",
+  "category": "prop",
+  "name": "발록의 소환진",
+  "spec": "PNG/WebP 투명 배경. 칸 384×256 px × 4칸 가로 한 줄(맥동 애니메이션), 기준점 (192,176). 바닥에 깔린 원형 마법진을 비스듬히 위에서 본 모습(납작한 타원).",
+  "brief": "스토리 발록이 남긴 소환진 — 처치하면 부술 수 있는 원거리 타워형 유닛의 바닥",
+  "prompt": "4-frame pulsing animation of a blood-red demonic summoning circle on the ground, seen from an isometric 3/4 top view (flattened ellipse), 384x256 cells in one row. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r251/circle.webp"
+ },
+ {
+  "asset_id": "r251-hands",
+  "category": "fx",
+  "name": "붉은 손",
+  "spec": "PNG/WebP 투명 배경. 칸 256×320 px × 8칸(가로 4 × 세로 2), 기준점 (128,288) = 손이 솟는 바닥 지점.",
+  "brief": "영웅 발밑에서 솟아오르는 기괴한 붉은 손(소환진의 공격)",
+  "prompt": "8-frame animation of grotesque blood-red hands erupting from the ground and grasping upward, then sinking back, 256x320 cells on a 4x2 grid. Dark gothic fantasy, hand-painted look (Diablo II / Dark Eden mood), muted colors with blood-red and black accents, soft painted shading, no outlines of cartoon style, no text, no watermark, no ground shadow, fully transparent background.",
+  "avoid": "글씨·워터마크·서명·바닥 그림자·배경·카툰체·밝은 원색·다른 게임 캐릭터 모방",
+  "replaces": "assets/r251/hands.webp"
+ },
+ {
+  "asset_id": "r186-flesh-void",
+  "category": "tile",
+  "name": "살덩이 빈 공간 타일",
+  "spec": "PNG/WebP 512×512 px, 상하좌우 이음매 없이 반복되는 타일(불투명).",
+  "brief": "사몽 구역 바닥 밖 검은 빈 공간을 채우는 뇌·내장 주름 살덩이",
+  "prompt": "Seamless tileable 512x512 texture of dark wet brain-like and intestine-like flesh folds, deep crimson and near-black, painted, horror, no text.",
+  "avoid": "이음매, 글씨, 밝은 색",
+  "replaces": "assets/r186/flesh-void.webp"
+ }
+]
