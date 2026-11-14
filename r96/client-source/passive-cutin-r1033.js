@@ -19,7 +19,7 @@
 //  렉: 조종 영웅의 그림만 미리 읽음(상반신 1장 + 시트 0~2장, 영웅이 바뀔 때만), DOM 노드 9개 이하, 그리기 루프 없음. 모션 줄이기 설정이면 미끄러짐 없이 나타났다 사라짐.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_PASSIVE_CUTIN_R1033__)return;
-const REV='R1033-passive-cutin-2',KEY='storyworld.r1033.cutin',MS=1250,GAP=Object.freeze({story:8,survival:20});
+const REV='R1033-passive-cutin-3',KEY='storyworld.r1033.cutin',MS=1250,GAP=Object.freeze({story:8,survival:20});
 const G=(f,d)=>{try{const v=f();return v===undefined?d:v;}catch(_){return d;}};
 const BUST=h=>'assets/r108/heroes/'+h+'.webp',KEY_P='storyworld.r1033.portrait';/* 영웅 선택 창 초상화(R108, 384×512) — 사용자 13:53Z "영웅 고르는 창에 나오는 간지나는 초상화 기준" */
 // 시트 한 칸(Dots 시트 재사용): cols×rows 칸, f = 보여 줄 칸, ar = 칸 가로/세로
@@ -39,6 +39,8 @@ const HEROES=Object.freeze({
  hunter:{kinds:['squad'],cast:x=>{const hs=Array.isArray(x?.heroes)?x.heroes:[];return hs.includes('slayer')?[['shade','hunter'],['ally','slayer'],['main'],['shade','hunter']]:[['shade','hunter'],['main'],['shade','hunter']];}},
  gunner:{kinds:['summon'],cast:x=>{const a=arts(x,3);return [...a.slice(0,1).map(p=>['boss',p]),['main'],...a.slice(1).map(p=>['boss',p])];}}});
 const SAFE=/^assets\/[\w\-./]+\.(?:webp|png)$/;
+/* R1033b: 본편처럼 urlFor 로 공개본 주소(assets/r99/clean/…·미디어 팩 blob)로 바꿔 넣는다. 없거나 실패하면 원래 경로. */
+const U=p=>{try{const u=typeof urlFor==='function'?urlFor(p):p;return typeof u==='string'&&u&&!/["\\]/.test(u)?u:p;}catch(_){return p;}};
 function arts(x,n){const a=Array.isArray(x?.art)?x.art:[];return a.filter(p=>typeof p==='string'&&SAFE.test(p)&&!p.includes('..')).slice(0,n);}
 const stats={shown:0,skipped:{off:0,hero:0,tier:0,body:0,scene:0,gap:0,dom:0},errors:0,warmed:0};let lastError=null,lastAt=-1e9,last=null,el=null,timer=0,nowFn=null;
 function fail(e){stats.errors++;lastError=String(e&&e.message||e).slice(0,200);}
@@ -90,9 +92,9 @@ function build(){if(el)return el;const d=G(()=>typeof document!=='undefined'?doc
  const e=d.createElement('div');e.id='r1033Cutin';e.setAttribute('aria-hidden','true');d.body.appendChild(e);el=e;return e;}
 function fig(d,kind,arg,i){const fx=kind==='deco'?SHEET[arg]:null;let n;
  if(fx){n=d.createElement('div');n.setAttribute('data-src',fx.path);n.setAttribute('data-sheet',arg);const c=fx.f%fx.cols,r=Math.floor(fx.f/fx.cols);
-  n.style.backgroundImage='url("'+fx.path+'")';n.style.backgroundSize=(fx.cols*100)+'% '+(fx.rows*100)+'%';
+  n.style.backgroundImage='url("'+U(fx.path)+'")';n.style.backgroundSize=(fx.cols*100)+'% '+(fx.rows*100)+'%';
   n.style.backgroundPosition=(fx.cols>1?c/(fx.cols-1)*100:0)+'% '+(fx.rows>1?r/(fx.rows-1)*100:0)+'%';n.style.aspectRatio=String(fx.ar);}
- else{n=d.createElement('img');const src=kind==='main'?BUST(hero0):kind==='ally'||kind==='shade'?BUST(arg):arg;n.setAttribute('src',src);n.setAttribute('alt','');G(()=>{n.decoding='async';});}
+ else{n=d.createElement('img');const src=kind==='main'?BUST(hero0):kind==='ally'||kind==='shade'?BUST(arg):arg;n.setAttribute('src',U(src));n.setAttribute('alt','');G(()=>{n.decoding='async';});}
  n.className='r1033f r1033'+kind;n.setAttribute('data-fig',kind);n.style.setProperty?.('--d',(i*.07).toFixed(2)+'s');return n;}
 let hero0='';
 function show(hero,cast){const e=build();if(!e)return false;const d=e.ownerDocument||G(()=>document,null)||e.doc;
@@ -114,7 +116,7 @@ function allow(hero){return on();}
 const warmed=new Set();
 function warm(){try{const h=G(()=>typeof player==='object'&&player&&!isBody(player)?player.hero:null,null);if(!h||!HEROES_ALL.includes(h)||warmed.has(h))return;warmed.add(h);
   const list=[BUST(h)];if(HEROES[h]&&on())for(const [k,a] of HEROES[h].cast({heroes:['slayer']}))if(k==='deco'&&SHEET[a])list.push(SHEET[a].path);else if(k==='ally'||k==='shade')list.push(BUST(a));
-  if(typeof Image==='function')for(const p of new Set(list)){const im=new Image();im.decoding='async';im.src=p;stats.warmed++;}build();}catch(e){fail(e);}}
+  if(typeof Image==='function')for(const p of new Set(list)){const im=new Image();im.decoding='async';im.src=U(p);stats.warmed++;}build();}catch(e){fail(e);}}
 // ---- 설정 창 한 줄 ----
 function row(){const d=G(()=>typeof document!=='undefined'?document:null,null);if(!d||!d.getElementById||d.getElementById('passiveCutinR1033'))return;
  const host=d.getElementById('combatScreenR1021')||d.getElementById('quickSettingsR114');if(!host)return;
