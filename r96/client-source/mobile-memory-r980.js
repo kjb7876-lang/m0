@@ -28,15 +28,20 @@
 //   명령의 image·sourceRect 는 손대지 않으므로 다른 오버레이의 '같은 그림' 비교도 그대로). 오프스크린 2D 그리기(지면·외곽선·물들이기)는
 //   drawImage 에서 원본 자리에 절반 사본을 넣고 잘라 쓸 칸만 절반으로 줄인다(그려지는 크기 그대로). 데스크톱은 원본 그대로.
 //   끄기: localStorage storyworld.r980.mobileMemory = {"half":false}
+//  R1023(사용자 2026-11-14 "모바일은 지금을 최저 사양으로, 좋은 환경이면 PC급까지"): mobile-tier-r1023.js 가 단계에 따라
+//   절반 사본 문턱(setHalfMin: 0단계 50만·1단계 200만 화소)과 절반 사본 끄기(setTierHalf(false): 2단계 PC급)를 바꾼다(저장하지 않는 실행 중 값).
+//   PC 에서도 사람이 그래픽 단계를 낮음·보통·높음으로 고르면 setTierHalf(true,true) 로 절반 사본을 쓴다(PC 기본은 그대로 원본).
+//   단계를 오가면 같은 그림이 절반·원본 두 텍스처로 동시에 쓰일 수 있어, 3D 장면 텍스처는 절반으로 내준 참조 수를 따로 세고
+//   release 때 그 수만큼 절반 쪽을 돌려준다(예전에는 원본이 텍스처 목록에 있으면 절반 참조가 영영 안 풀렸다).
 //  그림 원본 파일·전투·세이브는 바꾸지 않는다(표시 해상도·캐시만).
 (()=>{'use strict';
 if(window.__STORYWORLD_MOBILE_MEMORY_R980__)return;
-const REV='R1000-mobile-memory-5',KEY='storyworld.r980.mobileMemory';
+const REV='R1023-mobile-memory-6',KEY='storyworld.r980.mobileMemory';
 // 모바일 예산(픽셀 수, 1픽셀 = 4바이트)
 const MOBILE_PX={'r163-tint':12e6/* 약 48MB */,'r106-tint':6e6/* 약 24MB */,'r409-outline':3e6/* 약 12MB */};
 const AUDIO_MB=24,EVERY_MS=2000;
 let on=true,halfOn=true,lastError=null;try{const v=JSON.parse(localStorage.getItem(KEY)||'null');on=v?.on!==false;halfOn=v?.half!==false;}catch(_){}
-const stats={decodeSkipped:0,releaseSkipped:0,groundTrimmed:0,roomsCleared:0,checks:0,halfMade:0,halfPx:0,halfPeakPx:0,halfEvicted:0,halfDraws:0,halfTex:0,half2d:0,audioTrims:0,audioEvicted:0,audioEvictedMB:0,audioPeakMB:0,audioLastMB:0,errors:0};
+const stats={halfRefMismatch:0,halfRefOut:0,decodeSkipped:0,releaseSkipped:0,groundTrimmed:0,roomsCleared:0,checks:0,halfMade:0,halfPx:0,halfPeakPx:0,halfEvicted:0,halfDraws:0,halfTex:0,half2d:0,audioTrims:0,audioEvicted:0,audioEvictedMB:0,audioPeakMB:0,audioLastMB:0,errors:0};
 function fail(e){stats.errors++;lastError=String(e?.stack||e).slice(0,300);}
 function mobile(){
  try{const m=window.__STORYWORLD_MOBILE_R63__;if(typeof m?.isMobile==='function')return !!m.isMobile();}catch(_){}
@@ -81,12 +86,12 @@ wrapDecode();
 const HALF_MIN_PX=5e5,HALF_BUDGET_PX=12e6/* 약 48MB */,HALF_IDLE_MS=15000,NATIVE=typeof CanvasRenderingContext2D==='function'?CanvasRenderingContext2D.prototype.drawImage:null;
 // 사본 목록(오래 안 쓴 것부터 놓는다). 놓은 사본은 그것으로 만든 텍스처가 쥐고 있는 동안만 살고 그 뒤 GC 가 거둔다(픽셀을 지우지 않는다).
 const halves=new Map(),sceneHalves=new WeakMap(),nowMs=()=>{try{return performance.now();}catch(_){return Date.now();}};
-let live=false,sceneWrapped=false;const nativeWrapped=new WeakSet();
-const refreshLive=()=>{try{live=halfOn&&active();}catch(_){live=false;}return live;};
+let live=false,sceneWrapped=false,halfMin=HALF_MIN_PX,tierHalf=true,forceHalf=false;const nativeWrapped=new WeakSet();
+const refreshLive=()=>{try{live=halfOn&&tierHalf&&(active()||forceHalf);}catch(_){live=false;}return live;};
 function dropHalf(im,m){halves.delete(im);stats.halfPx-=m.px;stats.halfEvicted++;}
 function sweepHalves(force){if(!halves.size)return;const now=nowMs();for(const[im,m]of halves){if(stats.halfPx<=HALF_BUDGET_PX&&!(force&&now-m.at>HALF_IDLE_MS))break;if(now-m.at>HALF_IDLE_MS||stats.halfPx>HALF_BUDGET_PX)dropHalf(im,m);}}
 function halfOf(im){try{
- if(!(im instanceof HTMLImageElement)||!im.complete||!NATIVE)return null;const w=im.naturalWidth,h=im.naturalHeight;if(!(w*h>=HALF_MIN_PX))return null;
+ if(!(im instanceof HTMLImageElement)||!im.complete||!NATIVE)return null;const w=im.naturalWidth,h=im.naturalHeight;if(!(w*h>=halfMin))return null;
  const src=im.src;if(!src)return null;const m=halves.get(im);
  if(m){halves.delete(im);if(m.src===src){m.at=nowMs();halves.set(im,m);return m.c;}stats.halfPx-=m.px;}
  const c=document.createElement('canvas');c.width=Math.max(1,Math.round(w/2));c.height=Math.max(1,Math.round(h/2));const g=c.getContext('2d');if(!g)return null;
@@ -98,10 +103,14 @@ function halfArgs(a){const im=a[0],c=halfOf(im);if(!c)return null;const w=im.nat
  if(a.length===9)return [c,a[1]*kx,a[2]*ky,a[3]*kx,a[4]*ky,a[5],a[6],a[7],a[8]];return null;}
 function wrapNative(P){try{if(!P||nativeWrapped.has(P)||typeof P.drawImage!=='function')return;const o=P.drawImage;
  P.drawImage=function(im){if(live&&im instanceof HTMLImageElement){const a=halfArgs(arguments);if(a){stats.halfDraws++;stats.half2d++;return o.apply(this,a);}}return o.apply(this,arguments);};nativeWrapped.add(P);}catch(e){fail(e);}}
+// 3D 장면 텍스처: 장면마다 그림 → (절반 사본 → 내준 참조 수). release 는 내준 수만큼 절반 쪽을 돌려준다.
 function wrapScene(){try{if(sceneWrapped)return;const CS=window.StoryPhase1?.CommandScene?.prototype;if(!CS||typeof CS.texture!=='function'||typeof CS.release!=='function')return;const t=CS.texture,r=CS.release;
- CS.texture=function(image,mutable){if(live&&!mutable&&image instanceof HTMLImageElement){let map=sceneHalves.get(this);if(!map)sceneHalves.set(this,map=new Map());let c=map.get(image);
-  if(!(c&&this.textures?.has(c)&&c.src===image.src)){c=halfOf(image);if(c)map.set(image,c);}if(c){stats.halfDraws++;stats.halfTex++;return t.call(this,c,mutable);}}return t.apply(this,arguments);};
- CS.release=function(image){try{if(image instanceof HTMLImageElement&&!this.textures?.has(image)){const map=sceneHalves.get(this),c=map?.get(image);if(c){const out=r.call(this,c);if(!this.textures?.has(c))map.delete(image);return out;}}}catch(e){fail(e);}return r.apply(this,arguments);};
+ CS.texture=function(image,mutable){if(live&&!mutable&&image instanceof HTMLImageElement){let map=sceneHalves.get(this);if(!map)sceneHalves.set(this,map=new Map());let hs=map.get(image);
+  let c=null;if(hs)for(const k of hs.keys())if(this.textures?.has(k)&&k.src===image.src)c=k;
+  if(!c)c=halfOf(image);if(c){if(!hs)map.set(image,hs=new Map());hs.set(c,(hs.get(c)||0)+1);stats.halfRefOut++;stats.halfDraws++;stats.halfTex++;return t.call(this,c,mutable);}}return t.apply(this,arguments);};
+ CS.release=function(image){try{if(image instanceof HTMLImageElement){const map=sceneHalves.get(this),hs=map?.get(image),orig=this.textures?.get(image);
+  if(hs&&hs.size&&!(live&&orig&&orig.refs>0)){/* 지금 절반을 쓰는 중이면 남은 원본 참조(예전 단계)부터, 아니면 절반부터 돌려준다 */let c=null;for(const k of hs.keys())c=k;const n=hs.get(c)-1;if(n>0)hs.set(c,n);else hs.delete(c);if(!hs.size)map.delete(image);stats.halfRefOut--;return r.call(this,c);}
+  if(!orig)stats.halfRefMismatch++;}}catch(e){fail(e);}return r.apply(this,arguments);};
  sceneWrapped=true;}catch(e){fail(e);}}
 function wrapHalf(){if(!refreshLive())return;wrapNative(window.CanvasRenderingContext2D?.prototype);wrapNative(window.OffscreenCanvasRenderingContext2D?.prototype);wrapScene();}
 wrapHalf();
@@ -115,5 +124,7 @@ if(document.readyState==='complete')start();else window.addEventListener('load',
 window.__STORYWORLD_MOBILE_MEMORY_R980__=Object.freeze({revision:REV,mobile,active,px,audioBudgetMB,check,roomsCleared:()=>stats.roomsCleared,
  set:v=>{on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on,half:halfOn}));}catch(_){}refreshLive();return on;},
  setHalf:v=>{halfOn=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on,half:halfOn}));}catch(_){}wrapHalf();refreshLive();return halfOn;},
- inspect:()=>({revision:REV,on,half:halfOn,live,mobile:mobile(),wrapped,relWrapped,decWrapped,sceneWrapped,halfMB:Math.round(stats.halfPx*4/1e5)/10,halfPeakMB:Math.round(stats.halfPeakPx*4/1e5)/10,halfBudgetMB:HALF_BUDGET_PX*4/1e6,budgets:{...MOBILE_PX,audioMB:AUDIO_MB},stats:{...stats},lastError,presentationOnly:true,gameplayChanged:false,savesTouched:false})});
+ setHalfMin:v=>{const n=Number(v);if(Number.isFinite(n)&&n>=1e4&&n<=1e9)halfMin=n;return halfMin;},
+ setTierHalf:(v,force)=>{tierHalf=v!==false;forceHalf=!!force;/* force: PC 에서 사람이 낮은 그래픽 단계를 골랐을 때 */if(tierHalf)wrapHalf();refreshLive();return tierHalf;},
+ inspect:()=>({revision:REV,on,half:halfOn,tierHalf,forceHalf,halfMinPx:halfMin,live,mobile:mobile(),wrapped,relWrapped,decWrapped,sceneWrapped,halfMB:Math.round(stats.halfPx*4/1e5)/10,halfPeakMB:Math.round(stats.halfPeakPx*4/1e5)/10,halfBudgetMB:HALF_BUDGET_PX*4/1e6,budgets:{...MOBILE_PX,audioMB:AUDIO_MB},stats:{...stats},lastError,presentationOnly:true,gameplayChanged:false,savesTouched:false})});
 })();
