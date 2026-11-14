@@ -7068,6 +7068,46 @@
       "sha256": "85c7d51a0bf10170395b58d1230905276ce1e5b19847b61169768442485afb13"
     },
     {
+      "path": "assets/r1027/barrier.webp",
+      "bytes": 228578,
+      "sha256": "baab79949ce6abdb856a6e0494c64474f1ab26ff9c3124a2372472577d48d5b9"
+    },
+    {
+      "path": "assets/r1027/heal.webp",
+      "bytes": 172210,
+      "sha256": "992c00cd365c1c59f315ce4446a677f39db4489839a2e3d87e31cca9b3f47fb9"
+    },
+    {
+      "path": "assets/r1027/index.json",
+      "bytes": 8565,
+      "sha256": "61ea89aa54de064973b5f76342d11bbe05d1bf46e31e9fb7f468090a8e913f33"
+    },
+    {
+      "path": "assets/r1027/mend.webp",
+      "bytes": 119728,
+      "sha256": "3022e5758e52b68bf1f009545f260c46cc56eeccc82c6545ef08da830fc1c8fa"
+    },
+    {
+      "path": "assets/r1027/slash-hwando.webp",
+      "bytes": 25160,
+      "sha256": "e21f0e858fb781583d761ec479446664bb04d3cae858dfab050c2bd57934b0d2"
+    },
+    {
+      "path": "assets/r1027/slash-lauren.webp",
+      "bytes": 25972,
+      "sha256": "5dfa6b09c9dfc1fac358dda3dac99e9e84930fabf821e6936b0de48c3b78a572"
+    },
+    {
+      "path": "assets/r1027/slash-neon.webp",
+      "bytes": 25492,
+      "sha256": "4de459d82ad83f58297b5a7c0c6ba13a117b09d578eb4b17e2d837db581fdae6"
+    },
+    {
+      "path": "assets/r1027/slash-slayer.webp",
+      "bytes": 24650,
+      "sha256": "b6b7bf6cdeea53880f4fda078d80687ab869e1b804e48831d931d0cb78cc4148"
+    },
+    {
       "path": "assets/r1029/float/02b-ep1b09-biobootloader-chairman-phase0.webp",
       "bytes": 83170,
       "sha256": "330fcef69ce9083fb42e11886ad251b779b9c9cddbdfeb1505c59f8df663376d"
@@ -51853,6 +51893,11 @@
       "sha256": "632cebedada02c3349191d23d36a6c7caafb21261662d332a903a1acfb4b9531"
     },
     {
+      "path": "hero-paint-r1027.js",
+      "bytes": 16985,
+      "sha256": "ccc3ddc30046988872966b0e0b7dedb6ac3b11ecc30ae67f2f09a4f108c59b3a"
+    },
+    {
       "path": "hero-palette-r302.js",
       "bytes": 22378,
       "sha256": "52fb53e702345291aefd222092f342a02c3cbdedbe6720130ce0b51b97aa2e04"
@@ -52024,8 +52069,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6578641,
-      "sha256": "c0ba81c674524e1afee9803106af6f58280788e9fa0081a6a4ef8aa475f2020c"
+      "bytes": 6578687,
+      "sha256": "5614ea03092cf70d5007e943787703331e690c601693f727724c2a1eef122922"
     },
     {
       "path": "intro-r140.js",
@@ -53263,9 +53308,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10652,
-  "totalBytes": 1297038279,
-  "webHTMLSha256": "c0ba81c674524e1afee9803106af6f58280788e9fa0081a6a4ef8aa475f2020c",
+  "fileCount": 10661,
+  "totalBytes": 1297685665,
+  "webHTMLSha256": "5614ea03092cf70d5007e943787703331e690c601693f727724c2a1eef122922",
   "largest": [
     {
       "path": "index.html",
