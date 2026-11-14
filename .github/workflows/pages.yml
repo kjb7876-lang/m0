@@ -648,6 +648,10 @@ jobs:
         run: node r96/qa/r444/r444-cpu-check.cjs
       - name: R702 boss/mob facing does not flip on grid staircase walks (cinema-mode head shake) CPU check
         run: node r96/qa/r702/r702-cpu-check.cjs
+      - name: R1028 boss/mob facing ignores the engine's draw-only fake attack angle (boss left/right flicker) CPU check
+        run: node r96/qa/r1028/r1028-cpu-check.cjs
+      - name: R1028 enemy tentacles strike on the hit frame (painted sheet everywhere, impact burst on the hero) CPU check
+        run: node r96/qa/r1028/tentacle-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
         run: node r96/qa/r430/r430-cpu-check.cjs
       - name: R431 boss-room center fights + theme boss skill 6s + touch status/DoT + black-flame prop throws CPU check

@@ -51244,8 +51244,8 @@
     },
     {
       "path": "enemy-face-r444.js",
-      "bytes": 15856,
-      "sha256": "9e7729539f8ad9f58d3842ed5a9f5e7995400977acc7888c94a57015d77339ad"
+      "bytes": 16519,
+      "sha256": "e3a6e16946927fb3a80b272b8ff5b3ffe32cdbe88949562767d8fc54ef4cb085"
     },
     {
       "path": "enemy-hexagram-r341.js",
@@ -51614,8 +51614,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6578407,
-      "sha256": "02724a429ed56e9b7a400b046bdd8d89a2f05723bb8df3d3e069e06e373a7fb3"
+      "bytes": 6578458,
+      "sha256": "c4eb16f7cf3901cb7e41bd839ba7785ecdb3d289af377d50ed0186b393b7d35a"
     },
     {
       "path": "intro-r140.js",
@@ -52588,6 +52588,11 @@
       "sha256": "13c441e1847a4d0fcaa96a568ec686f33075b6f1efbde3f06ad1112fcf42d73d"
     },
     {
+      "path": "tentacle-strike-r1028.js",
+      "bytes": 9104,
+      "sha256": "55a062702f7dce1c7f81be421137bb16de84460bcca5890838e781cf1dd07668"
+    },
+    {
       "path": "terrain-readability-r323.js",
       "bytes": 5713,
       "sha256": "e64e34f0a20b9095ee7afeaef6dd7b6840be148d88bca4f81bcf3536de2aaa82"
@@ -52833,9 +52838,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10566,
-  "totalBytes": 1289607829,
-  "webHTMLSha256": "02724a429ed56e9b7a400b046bdd8d89a2f05723bb8df3d3e069e06e373a7fb3",
+  "fileCount": 10567,
+  "totalBytes": 1289617647,
+  "webHTMLSha256": "c4eb16f7cf3901cb7e41bd839ba7785ecdb3d289af377d50ed0186b393b7d35a",
   "largest": [
     {
       "path": "index.html",
