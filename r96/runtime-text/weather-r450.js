@@ -59,7 +59,7 @@ const SPEC=Object.freeze({
 // ---- 환경 ----------------------------------------------------------------------------------------------------
 function mobile(){try{const m=window.__STORYWORLD_MOBILE_R63__;if(typeof m?.isMobile==='function')return !!m.isMobile();}catch(_){}
  try{return typeof matchMedia==='function'&&matchMedia('(pointer:coarse)').matches;}catch(_){return false;}}
-const tier=()=>mobile()?'mobile':'pc';
+const tier=()=>{const T=window.__STORYWORLD_MOBILE_TIER_R1023__;return T?(T.pcGrade()?'pc':'mobile'):(mobile()?'mobile':'pc');};/* R1023: 그래픽 단계 PC급이면 PC 예산, 그 아래(휴대폰 기본·PC 에서 고른 낮은 단계)는 모바일 예산 */
 const lowFx=()=>!!(typeof settings!=='undefined'&&settings?.lowFx);
 const reduced=()=>!!(typeof settings!=='undefined'&&settings?.reducedMotion);
 function familyOf(r){try{const L=r?.exploration;return L?.surface?.art?.r81Environment||L?.worldWardR81?.environment?.family||window.__STORYWORLD_ENVIRONMENT_R81__?.specs?.[r?.id]?.family||(r?.id==='ep1a08'?'clinical':'regional');}catch(_){return 'regional';}}

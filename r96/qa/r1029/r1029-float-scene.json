@@ -1,0 +1,842 @@
+{
+ "a11-boss": {
+  "zone": "ep1a11",
+  "name": "루시퍼",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 26,
+    "settled": {
+     "float:wing": 13
+    },
+    "frames": "5",
+    "vis": []
+   },
+   "down": {
+    "n": 23,
+    "settled": {
+     "float:wing": 12
+    },
+    "frames": "04567",
+    "vis": []
+   },
+   "up": {
+    "n": 24,
+    "settled": {
+     "float:wing": 12
+    },
+    "frames": "1",
+    "vis": []
+   },
+   "right": {
+    "n": 22,
+    "settled": {
+     "float:wing": 11
+    },
+    "frames": "0123",
+    "vis": []
+   },
+   "left": {
+    "n": 24,
+    "settled": {
+     "float:wing": 12
+    },
+    "frames": "01234",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 0,
+    "swapped": 0,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "float": {
+    "on": true,
+    "arts": 79,
+    "draws": 55,
+    "swapped": 52,
+    "waiting": 3
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "dist00-boss": {
+  "zone": "dist00",
+  "name": "뿌리의 문지기",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 25,
+    "settled": {
+     "float:wing": 13
+    },
+    "frames": "7",
+    "vis": []
+   },
+   "down": {
+    "n": 25,
+    "settled": {
+     "float:wing": 13
+    },
+    "frames": "014567",
+    "vis": []
+   },
+   "up": {
+    "n": 25,
+    "settled": {
+     "float:wing": 13
+    },
+    "frames": "1",
+    "vis": []
+   },
+   "right": {
+    "n": 25,
+    "settled": {
+     "float:wing": 13
+    },
+    "frames": "1",
+    "vis": []
+   },
+   "left": {
+    "n": 25,
+    "settled": {
+     "float:wing": 13
+    },
+    "frames": "234567",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 0,
+    "swapped": 0,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "float": {
+    "on": true,
+    "arts": 79,
+    "draws": 47,
+    "swapped": 45,
+    "waiting": 2
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "mb-dist05": {
+  "zone": "dist05",
+  "name": "전령의 그림자",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 24,
+    "settled": {
+     "float:ghost": 12
+    },
+    "frames": "4",
+    "vis": []
+   },
+   "down": {
+    "n": 25,
+    "settled": {
+     "float:ghost": 13
+    },
+    "frames": "34567",
+    "vis": []
+   },
+   "up": {
+    "n": 25,
+    "settled": {
+     "float:ghost": 13
+    },
+    "frames": "01",
+    "vis": []
+   },
+   "right": {
+    "n": 23,
+    "settled": {
+     "float:ghost": 12
+    },
+    "frames": "01267",
+    "vis": []
+   },
+   "left": {
+    "n": 22,
+    "settled": {
+     "float:ghost": 11
+    },
+    "frames": "01237",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 99,
+    "swapped": 0,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "float": {
+    "on": true,
+    "arts": 79,
+    "draws": 71,
+    "swapped": 68,
+    "waiting": 3
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "b08-boss": {
+  "zone": "ep1b08",
+  "name": "호텔 그룹 회장",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 26,
+    "settled": {
+     "float:mist": 13
+    },
+    "frames": "2",
+    "vis": []
+   },
+   "down": {
+    "n": 27,
+    "settled": {
+     "float:mist": 14
+    },
+    "frames": "123456",
+    "vis": []
+   },
+   "up": {
+    "n": 24,
+    "settled": {
+     "float:mist": 12
+    },
+    "frames": "6",
+    "vis": []
+   },
+   "right": {
+    "n": 24,
+    "settled": {
+     "float:mist": 12
+    },
+    "frames": "01567",
+    "vis": []
+   },
+   "left": {
+    "n": 22,
+    "settled": {
+     "float:mist": 11
+    },
+    "frames": "01267",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 112,
+    "swapped": 0,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "float": {
+    "on": true,
+    "arts": 79,
+    "draws": 71,
+    "swapped": 68,
+    "waiting": 3
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "kair-guardian-05": {
+  "zone": "kair04",
+  "name": "시간수문장",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 25,
+    "settled": {
+     "float:mist": 13
+    },
+    "frames": "7",
+    "vis": []
+   },
+   "down": {
+    "n": 24,
+    "settled": {
+     "float:mist": 12
+    },
+    "frames": "34567",
+    "vis": []
+   },
+   "up": {
+    "n": 26,
+    "settled": {
+     "float:mist": 13
+    },
+    "frames": "012567",
+    "vis": []
+   },
+   "right": {
+    "n": 26,
+    "settled": {
+     "float:mist": 13
+    },
+    "frames": "012347",
+    "vis": []
+   },
+   "left": {
+    "n": 27,
+    "settled": {
+     "float:mist": 14
+    },
+    "frames": "234567",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 5,
+    "swapped": 0,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "float": {
+    "on": true,
+    "arts": 79,
+    "draws": 106,
+    "swapped": 100,
+    "waiting": 6
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "kair-guardian-25": {
+  "zone": "kair08",
+  "name": "시간수문장",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 26,
+    "settled": {
+     "float:mist": 13
+    },
+    "frames": "6",
+    "vis": []
+   },
+   "down": {
+    "n": 27,
+    "settled": {
+     "float:mist": 14
+    },
+    "frames": "234567",
+    "vis": []
+   },
+   "up": {
+    "n": 24,
+    "settled": {
+     "float:mist": 12
+    },
+    "frames": "07",
+    "vis": []
+   },
+   "right": {
+    "n": 22,
+    "settled": {
+     "float:mist": 11
+    },
+    "frames": "01567",
+    "vis": []
+   },
+   "left": {
+    "n": 25,
+    "settled": {
+     "float:mist": 13
+    },
+    "frames": "6",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 4,
+    "swapped": 0,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "float": {
+    "on": true,
+    "arts": 79,
+    "draws": 65,
+    "swapped": 62,
+    "waiting": 3
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "mb-murder01": {
+  "zone": "murder01",
+  "name": "역주행 목격자",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 25,
+    "settled": {
+     "float:mist": 13
+    },
+    "frames": "6",
+    "vis": []
+   },
+   "down": {
+    "n": 25,
+    "settled": {
+     "float:mist": 13
+    },
+    "frames": "234567",
+    "vis": []
+   },
+   "up": {
+    "n": 26,
+    "settled": {
+     "float:mist": 13
+    },
+    "frames": "17",
+    "vis": []
+   },
+   "right": {
+    "n": 24,
+    "settled": {
+     "float:mist": 12
+    },
+    "frames": "012367",
+    "vis": []
+   },
+   "left": {
+    "n": 26,
+    "settled": {
+     "float:mist": 13
+    },
+    "frames": "012345",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 165,
+    "swapped": 0,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "float": {
+    "on": true,
+    "arts": 79,
+    "draws": 77,
+    "swapped": 74,
+    "waiting": 3
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "h101-s2": {
+  "zone": "hando01",
+  "name": "의존 신호 포식자",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 25,
+    "settled": {
+     "float:ghost": 13
+    },
+    "frames": "6",
+    "vis": []
+   },
+   "down": {
+    "n": 28,
+    "settled": {
+     "float:ghost": 14
+    },
+    "frames": "234567",
+    "vis": []
+   },
+   "up": {
+    "n": 24,
+    "settled": {
+     "float:ghost": 12
+    },
+    "frames": "0567",
+    "vis": []
+   },
+   "right": {
+    "n": 23,
+    "settled": {
+     "float:ghost": 12
+    },
+    "frames": "01567",
+    "vis": []
+   },
+   "left": {
+    "n": 27,
+    "settled": {
+     "float:ghost": 14
+    },
+    "frames": "6",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 116,
+    "swapped": 0,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "float": {
+    "on": true,
+    "arts": 79,
+    "draws": 69,
+    "swapped": 66,
+    "waiting": 3
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "c103-boss": {
+  "zone": "cult03",
+  "name": "백이온",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 26,
+    "settled": {
+     "float:mist": 13
+    },
+    "frames": "2",
+    "vis": []
+   },
+   "down": {
+    "n": 22,
+    "settled": {
+     "float:mist": 11
+    },
+    "frames": "23456",
+    "vis": []
+   },
+   "up": {
+    "n": 23,
+    "settled": {
+     "float:mist": 12
+    },
+    "frames": "6",
+    "vis": []
+   },
+   "right": {
+    "n": 24,
+    "settled": {
+     "float:mist": 12
+    },
+    "frames": "6",
+    "vis": []
+   },
+   "left": {
+    "n": 23,
+    "settled": {
+     "float:mist": 12
+    },
+    "frames": "012567",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 36,
+    "swapped": 0,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "float": {
+    "on": true,
+    "arts": 79,
+    "draws": 39,
+    "swapped": 36,
+    "waiting": 3
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "l301-boss": {
+  "zone": "last301",
+  "name": "타락천사 기사",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 25,
+    "settled": {
+     "busy": 13
+    },
+    "frames": "",
+    "vis": []
+   },
+   "down": {
+    "n": 27,
+    "settled": {
+     "down": 14
+    },
+    "frames": "0123",
+    "vis": [
+     100,
+     101,
+     98,
+     96,
+     97,
+     99
+    ]
+   },
+   "up": {
+    "n": 26,
+    "settled": {
+     "busy": 10,
+     "other-art:l301-boss-p2.webp": 2,
+     "up": 1
+    },
+    "frames": "1",
+    "vis": [
+     99
+    ]
+   },
+   "right": {
+    "n": 23,
+    "settled": {
+     "float:wing": 12
+    },
+    "frames": "012367",
+    "vis": []
+   },
+   "left": {
+    "n": 22,
+    "settled": {
+     "float:wing": 11
+    },
+    "frames": "01237",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 130,
+    "swapped": 29,
+    "waiting": 0,
+    "otherArt": 2,
+    "dropped": 2,
+    "errors": 0
+   },
+   "float": {
+    "on": true,
+    "arts": 79,
+    "draws": 43,
+    "swapped": 40,
+    "waiting": 3
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "a10-v1": {
+  "zone": "ep1a10",
+  "name": "중독의 폐허핵",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 24,
+    "settled": {
+     "float:hover": 12
+    },
+    "frames": "5",
+    "vis": []
+   },
+   "down": {
+    "n": 695,
+    "settled": {
+     "none": 328,
+     "float:hover": 20
+    },
+    "frames": "01234567",
+    "vis": []
+   },
+   "up": {
+    "n": 25,
+    "settled": {
+     "float:hover": 13
+    },
+    "frames": "067",
+    "vis": []
+   },
+   "right": {
+    "n": 26,
+    "settled": {
+     "float:hover": 13
+    },
+    "frames": "012367",
+    "vis": []
+   },
+   "left": {
+    "n": 26,
+    "settled": {
+     "float:hover": 13
+    },
+    "frames": "5",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 170,
+    "swapped": 0,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "float": {
+    "on": true,
+    "arts": 79,
+    "draws": 63,
+    "swapped": 60,
+    "waiting": 3
+   },
+   "lastError": null
+  },
+  "errs": []
+ },
+ "mb-hando03": {
+  "zone": "hando03",
+  "name": "환수검 모조체",
+  "open": true,
+  "sum": {
+   "idle": {
+    "n": 29,
+    "settled": {
+     "float:ghost": 15
+    },
+    "frames": "7",
+    "vis": []
+   },
+   "down": {
+    "n": 26,
+    "settled": {
+     "float:ghost": 13
+    },
+    "frames": "01567",
+    "vis": []
+   },
+   "up": {
+    "n": 25,
+    "settled": {
+     "float:ghost": 13
+    },
+    "frames": "23",
+    "vis": []
+   },
+   "right": {
+    "n": 24,
+    "settled": {
+     "float:ghost": 12
+    },
+    "frames": "012345",
+    "vis": []
+   },
+   "left": {
+    "n": 25,
+    "settled": {
+     "float:ghost": 13
+    },
+    "frames": "234567",
+    "vis": []
+   }
+  },
+  "outer": true,
+  "wraps": 2,
+  "inspect": {
+   "rev": "R974-move-dir-1",
+   "stats": {
+    "draws": 0,
+    "swapped": 0,
+    "waiting": 0,
+    "otherArt": 0,
+    "dropped": 0,
+    "errors": 0
+   },
+   "float": {
+    "on": true,
+    "arts": 79,
+    "draws": 76,
+    "swapped": 74,
+    "waiting": 2
+   },
+   "lastError": null
+  },
+  "errs": []
+ }
+}
