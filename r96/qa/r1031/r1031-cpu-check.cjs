@@ -1,4 +1,4 @@
-// R1030 불면귀(R760) 몸 그림 좌우가 R444 방향 권위를 따르는지 — CPU 검사(가짜 전역, GPU 없음)
+// R1031 불면귀(R760) 몸 그림 좌우가 R444 방향 권위를 따르는지 — CPU 검사(가짜 전역, GPU 없음)
 // R1028 뒤 R444 는 엔진 자세 그림용 가짜 공격(storyWorldPose5, angle 0)을 무시하는데, R760 facing() 은 그 값을 믿어 몸 그림만 오른쪽으로 튀었다.
 const fs=require('fs'),path=require('path'),vm=require('vm');
 const src=fs.readFileSync(path.join(__dirname,'../../client-source/bulmyeongwi-r760.js'),'utf8');
@@ -25,7 +25,7 @@ ok('NaN positions never throw and give ±1',[1,-1].includes(mk(undefined,{x:NaN,
 //    원인: R702 계단 판정이 최근 1.2칸 자취만 봐서, 한 칸이 0.85칸이면 자취가 마지막 한두 칸뿐이라 '그쪽으로 걷는 중'이라고 믿었다.
 const F444=path.join(__dirname,'../../client-source/enemy-face-r444.js'),src444=fs.readFileSync(F444,'utf8');
 ok('R444 runtime copy matches client source',fs.readFileSync(path.join(__dirname,'../../runtime-text/enemy-face-r444.js'),'utf8')===src444);
-ok('pages.yml runs this check',/r96\/qa\/r1030\/r1030-cpu-check\.cjs/.test(fs.readFileSync(path.join(__dirname,'../../../.github/workflows/pages.yml'),'utf8')));
+ok('pages.yml runs this check',/r96\/qa\/r1031\/r1031-cpu-check\.cjs/.test(fs.readFileSync(path.join(__dirname,'../../../.github/workflows/pages.yml'),'utf8')));
 function env4(){const E={console,Math,JSON,Number,String,Object,WeakMap,Map,Set,Array,localStorage:{getItem:()=>null,setItem:()=>{}},time:0,player:{x:-60,y:60,hp:100},settings:{},read:[]};
  E.window=E;E.drawEnemy=function(e){E.read.push(e.direction);};E.shadow=function(){};vm.createContext(E);vm.runInContext(src444,E);return E;}
 const mob=o=>({id:1,name:'핏빛 수호로 추격자',x:16,y:12,hp:1e4,maxHp:1e4,speed:2.2,spawnState:'active',direction:'right',midboss:true,combatProfile:{aggro:7,attackShape:{range:1.6}},...o});
@@ -45,4 +45,4 @@ for(const [leg,sp] of [[.85,2.2],[.85,2.4],[1.0,2.2],[.6,1.7]]){const E=env4(),e
  frames(E,e,4*60,(e,i,t)=>{const ph=Math.floor(t/.15)%2;if(ph)e.x+=.3/60;else e.y+=.3/60;});const f=flipsIn(E.read);ok(`blocked crawl (0.3 cells/s on a 2.2 boss, x/y alternating): no side flips (got ${f})`,f===0);}
 // 회귀: 느린 몹(속도 0.8)이 제 속도로 돌아서면 따라간다
 {const E=env4(),e=mob({speed:.8});frames(E,e,1);frames(E,e,90,e=>{e.x+=.8/60;});frames(E,e,90,e=>{e.x-=.8/60;});const at=E.read.slice(-90).indexOf('left');ok(`regression: slow mob (0.8) real turn left followed within 0.5s (frame ${at})`,at>=0&&at<=30);}
-console.log(`\nR1030 CPU check: ${pass}/${total} passed`);process.exit(pass===total?0:1);
+console.log(`\nR1031 CPU check: ${pass}/${total} passed`);process.exit(pass===total?0:1);

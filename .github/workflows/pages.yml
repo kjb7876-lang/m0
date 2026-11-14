@@ -656,8 +656,8 @@ jobs:
         run: node r96/qa/r1028/r1028-cpu-check.cjs
       - name: R1028 enemy tentacles strike on the hit frame (painted sheet everywhere, impact burst on the hero) CPU check
         run: node r96/qa/r1028/tentacle-cpu-check.cjs
-      - name: R1030 Bulmyeongwi (R760) body sheets follow R444 facing, not the engine fake attack CPU check
-        run: node r96/qa/r1030/r1030-cpu-check.cjs
+      - name: R1031 Bulmyeongwi (R760) body sheets follow R444 facing, not the engine fake attack CPU check
+        run: node r96/qa/r1031/r1031-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
         run: node r96/qa/r430/r430-cpu-check.cjs
       - name: R431 boss-room center fights + theme boss skill 6s + touch status/DoT + black-flame prop throws CPU check

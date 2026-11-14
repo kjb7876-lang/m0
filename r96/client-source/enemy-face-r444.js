@@ -19,7 +19,7 @@
 //  끄기: localStorage storyworld.r444.face {"on":false}.
 (()=>{'use strict';
 if(window.__STORYWORLD_ENEMY_FACE_R444__)return;
-const REV='R444-face-8+R702+R1028+R1030',KEY='storyworld.r444.face';
+const REV='R444-face-8+R702+R1028+R1031',KEY='storyworld.r444.face';
 let prefs={on:true,debug:false,shadows:false};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={updates:0,spawns:0,jumps:0,turns:0,attackLocks:0,draws:0,owner:{},errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0;
@@ -80,12 +80,12 @@ function update(e){let s=S.get(e);const t=T();
 //  화면 가로(x−y)로는 칸마다 오른쪽·왼쪽이 번갈아 나와 0.35초마다 좌우가 뒤집혔다(영화 모드 길잡이가 멀리 가면 보스가 오래 쫓아 걸어 눈에 띔).
 //  → 걷기로 좌우를 바꿀 때 지난 걸음 묶음(길이 TRAIL칸)의 실제 진행 방향도 같은 쪽이어야 바꾼다. 계단은 묶음으로 보면 화면 세로라 마지막 좌우를 둔다.
 //  진짜로 돌아서면 묶음도 곧 그쪽을 가리키고(약 0.3초), 그래도 STAIR_MAX(0.65)초 넘게 같은 쪽을 원하면 바꾼다. 막 걷기 시작해 묶음이 짧을 땐 묻지 않는다.
-const TRAIL=3.5,TRAIL_MIN=.5,STAIR_MAX=.65;// R1030: 1.2 → 3.5 — 길 칸이 큰 계단(한 칸 0.85, 핏빛 수호로 추격자)도 자취에 계단 몇 단이 들어가 가로 성분이 상쇄되게. 진짜 돌아서기는 아래 '되돌아감'으로 바로 인정.
+const TRAIL=3.5,TRAIL_MIN=.5,STAIR_MAX=.65;// R1031: 1.2 → 3.5 — 길 칸이 큰 계단(한 칸 0.85, 핏빛 수호로 추격자)도 자취에 계단 몇 단이 들어가 가로 성분이 상쇄되게. 진짜 돌아서기는 아래 '되돌아감'으로 바로 인정.
 function trailAdd(s,x,y,d){if(!(d>1e-5))return;const T=s.trail||(s.trail={p:[[x-0,y-0]],len:0});const L=T.p[T.p.length-1];T.p.push([x,y]);T.len+=Math.hypot(x-L[0],y-L[1]);
  while(T.p.length>2){const a=T.p[0],b=T.p[1],seg=Math.hypot(b[0]-a[0],b[1]-a[1]);if(T.len-seg<TRAIL)break;T.p.shift();T.len-=seg;}if(T.p.length>240){T.p.splice(0,T.p.length-240);}}
 function trailAgrees(s,want){const T=s.trail;if(!T||T.len<TRAIL_MIN)return true;const a=T.p[0],b=T.p[T.p.length-1],dx=b[0]-a[0],dy=b[1]-a[1],X=sideX(dx,dy),Y=(dx+dy)/2,m=Math.hypot(X,Y);
  if(!(m>1e-4))return false;
- // R1030: 지금 걸음이 자취의 진행과 반대(내적<0)면 계단이 아니라 진짜 돌아선 것 — 자취가 길어져도 돌아서기는 늦추지 않는다
+ // R1031: 지금 걸음이 자취의 진행과 반대(내적<0)면 계단이 아니라 진짜 돌아선 것 — 자취가 길어져도 돌아서기는 늦추지 않는다
  if(s.vx*dx+s.vy*dy<0)return true;
  return Math.abs(X)/m>.5&&(X>0?'right':'left')===want;}
 // 4방향 시트(R375 dirs4 등): 가로가 뚜렷하면 지금 좌우, 세로가 뚜렷하면 앞/뒤, 그 사이면 이전 값(경계 떨림 방지).
