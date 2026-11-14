@@ -6828,6 +6828,31 @@
       "sha256": "8b398bb9c7e4c07943ad38cf5c498d6a0a2d67c5a82eb9d4cf50d3b97524ebeb"
     },
     {
+      "path": "assets/r1024/move/jealousy-wraith-down.webp",
+      "bytes": 80116,
+      "sha256": "8bb4438eeb523d4b289d942f07af5cd997b7c3ff306bddc9ac322ed8cab4606f"
+    },
+    {
+      "path": "assets/r1024/move/jealousy-wraith-up.webp",
+      "bytes": 79330,
+      "sha256": "3169ca5e7e3d0cca0bdebc2aa4f5eeccff4b60854ee167dcceeec3ff82a0ef57"
+    },
+    {
+      "path": "assets/r1024/move/m119-nameless-scar-down.webp",
+      "bytes": 72400,
+      "sha256": "46a6d86ad89cabd593b0f3372e544f2341969e3df22de948ebd3e83987916a0e"
+    },
+    {
+      "path": "assets/r1024/move/m119-nameless-scar-up.webp",
+      "bytes": 70098,
+      "sha256": "1d46b68fcbc3de85e21128a96e3a1c96ff5625ffa3806e3c9840efbe0b4575ff"
+    },
+    {
+      "path": "assets/r1024/move/superego-inquisitor-up.webp",
+      "bytes": 39728,
+      "sha256": "070f63b5c7f086154fd799533666e61dd136260074cd263e67ae3efb6e441e0a"
+    },
+    {
       "path": "assets/r103/chest-closed.svg",
       "bytes": 2508,
       "sha256": "d3e981852d7785f5749b633ca6f136c5ae378ef0efc7b3562059ceae43bd3e10"
@@ -51279,8 +51304,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6578218,
-      "sha256": "51e36763e64b89c2497e1bda92b35d076357bfb393c9d51a631771526ded1e27"
+      "bytes": 6578267,
+      "sha256": "a9b02008e6122dde503dbe1d2385b3ab198c427d1aa0afd4c3d5bbc5fa5e592d"
     },
     {
       "path": "intro-r140.js",
@@ -51596,6 +51621,11 @@
       "path": "move-dir-r1019-data.js",
       "bytes": 11566,
       "sha256": "b605e849cd1309b392adfb82e07cd9b7b562665b0cc70ce2c8c8d9cc31f9d221"
+    },
+    {
+      "path": "move-dir-r1024-data.js",
+      "bytes": 3927,
+      "sha256": "79a06fc813ac0017034c63638e4984a1e27b90fdd3a46e1924057a07d6cb5bc5"
     },
     {
       "path": "move-dir-r974-data.js",
@@ -52483,9 +52513,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10496,
-  "totalBytes": 1287914559,
-  "webHTMLSha256": "51e36763e64b89c2497e1bda92b35d076357bfb393c9d51a631771526ded1e27",
+  "fileCount": 10502,
+  "totalBytes": 1288260207,
+  "webHTMLSha256": "a9b02008e6122dde503dbe1d2385b3ab198c427d1aa0afd4c3d5bbc5fa5e592d",
   "largest": [
     {
       "path": "index.html",
