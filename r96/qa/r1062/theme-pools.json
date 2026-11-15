@@ -1,0 +1,566 @@
+{
+ "_comment": "R1062 지역별 소품 그림 허용 묶음. 엔진 자료(index.html) 지역 소품이 R220·R1062 거르기와 R1061 바꿔 그리기를 거친 뒤 남는 그림 이름. 새 그림을 넣을 때는 그 지역 주제에 맞는지 확인한 뒤 여기에 더한다. indoorThemes 지역에는 outdoorOnly 그림을 넣을 수 없다.",
+ "indoorThemes": [
+  "clinic",
+  "home",
+  "machine"
+ ],
+ "outdoorOnly": [
+  "ruined_market",
+  "broken_street_lamp",
+  "moss_boulders",
+  "dead_tree",
+  "broken_gate",
+  "village_well",
+  "collapsed_pillar",
+  "blank_memorial"
+ ],
+ "zones": {
+  "cult01": {
+   "theme": "machine",
+   "allow": [
+    "blood_altar",
+    "corrupted_shrine",
+    "infernal_oath_effigy",
+    "silver_seal_pillar"
+   ]
+  },
+  "cult02": {
+   "theme": "machine",
+   "allow": [
+    "infernal_oath_effigy",
+    "memory_archivist_statue",
+    "silver_seal_pillar"
+   ]
+  },
+  "cult03": {
+   "theme": "machine",
+   "allow": [
+    "blood_altar",
+    "corrupted_shrine",
+    "infernal_oath_effigy",
+    "seal-command-pillar"
+   ]
+  },
+  "cult04": {
+   "theme": "machine",
+   "allow": [
+    "blood_altar",
+    "neural-ego-vat",
+    "shattered_memory_core",
+    "silver_seal_pillar"
+   ]
+  },
+  "cult05": {
+   "theme": "urban",
+   "allow": [
+    "blood_altar",
+    "corrupted_shrine",
+    "infernal_oath_effigy",
+    "silver_seal_pillar"
+   ]
+  },
+  "cult06": {
+   "theme": "machine",
+   "allow": [
+    "blood_altar",
+    "silver_seal_pillar"
+   ]
+  },
+  "dist00": {
+   "theme": "field",
+   "allow": [
+    "collapsed_pillar",
+    "corrupted_shrine",
+    "dead_tree",
+    "moss_boulders"
+   ]
+  },
+  "dist01": {
+   "theme": "field",
+   "allow": [
+    "bone_heap",
+    "broken_gate",
+    "collapsed_pillar",
+    "moss_boulders"
+   ]
+  },
+  "dist02": {
+   "theme": "field",
+   "allow": [
+    "bone_heap",
+    "corrupted_shrine",
+    "dead_tree",
+    "moss_boulders"
+   ]
+  },
+  "dist03": {
+   "theme": "field",
+   "allow": [
+    "broken_gate",
+    "collapsed_pillar",
+    "collapsed_stairs",
+    "moss_boulders"
+   ]
+  },
+  "dist04": {
+   "theme": "field",
+   "allow": [
+    "blood_altar",
+    "bone_heap",
+    "broken_gate",
+    "corrupted_shrine"
+   ]
+  },
+  "dist05": {
+   "theme": "field",
+   "allow": [
+    "blood_altar",
+    "broken_gate",
+    "collapsed_pillar",
+    "corrupted_shrine",
+    "moss_boulders"
+   ]
+  },
+  "dist06": {
+   "theme": "field",
+   "allow": [
+    "blood_altar",
+    "bone_heap",
+    "broken_gate",
+    "corrupted_shrine"
+   ]
+  },
+  "dreamRest": {
+   "theme": "field",
+   "allow": [
+    "blank_memorial",
+    "collapsed_pillar",
+    "memory_archivist_statue",
+    "village_well"
+   ]
+  },
+  "ep1a07": {
+   "theme": "field",
+   "allow": [
+    "collapsed_pillar",
+    "collapsed_stairs",
+    "dead_tree",
+    "moss_boulders"
+   ]
+  },
+  "ep1a08": {
+   "theme": "clinic",
+   "allow": [
+    "memory_archivist_statue"
+   ]
+  },
+  "ep1a09": {
+   "theme": "clinic",
+   "allow": [
+    "medicine-cabinet"
+   ]
+  },
+  "ep1a09b": {
+   "theme": "urban",
+   "allow": [
+    "collapsed_pillar",
+    "collapsed_stairs"
+   ]
+  },
+  "ep1a10": {
+   "theme": "urban",
+   "allow": [
+    "blank_memorial",
+    "hotel_luggage_cart"
+   ]
+  },
+  "ep1a11": {
+   "theme": "clinic",
+   "allow": [
+    "corrupted_shrine",
+    "memory_archivist_statue"
+   ]
+  },
+  "ep1b01": {
+   "theme": "field",
+   "allow": [
+    "blood_altar",
+    "broken_gate",
+    "collapsed_pillar",
+    "corrupted_shrine"
+   ]
+  },
+  "ep1b02": {
+   "theme": "home",
+   "allow": [
+    "collapsed_stairs"
+   ]
+  },
+  "ep1b03": {
+   "theme": "home",
+   "allow": []
+  },
+  "ep1b04": {
+   "theme": "home",
+   "allow": [
+    "blood_altar"
+   ]
+  },
+  "ep1b05": {
+   "theme": "urban",
+   "allow": [
+    "blood_altar",
+    "corrupted_shrine"
+   ]
+  },
+  "ep1b06": {
+   "theme": "forge",
+   "allow": [
+    "blood_altar"
+   ]
+  },
+  "ep1b06b": {
+   "theme": "field",
+   "allow": [
+    "blank_memorial",
+    "broken_gate",
+    "dead_tree",
+    "moss_boulders"
+   ]
+  },
+  "ep1b07": {
+   "theme": "forge",
+   "allow": [
+    "blood_altar",
+    "corrupted_shrine"
+   ]
+  },
+  "ep1b08": {
+   "theme": "field",
+   "allow": [
+    "broken_gate",
+    "collapsed_pillar",
+    "corrupted_shrine",
+    "memory_archivist_statue"
+   ]
+  },
+  "ep1b09": {
+   "theme": "machine",
+   "allow": [
+    "bootloader-cable-junction",
+    "neural-ego-vat",
+    "silver_seal_pillar",
+    "surveillance_console"
+   ]
+  },
+  "hando01": {
+   "theme": "field",
+   "allow": [
+    "armored_wall",
+    "broken_gate",
+    "industrial_barricade",
+    "silver_seal_pillar"
+   ]
+  },
+  "hando02": {
+   "theme": "field",
+   "allow": [
+    "broken_gate",
+    "corrupted_shrine",
+    "moss_boulders",
+    "silver_seal_pillar"
+   ]
+  },
+  "hando03": {
+   "theme": "machine",
+   "allow": [
+    "corrupted_shrine",
+    "memory-time-anchor",
+    "seal-command-pillar",
+    "silver_seal_pillar"
+   ]
+  },
+  "hub": {
+   "theme": "field",
+   "allow": [
+    "collapsed_pillar",
+    "corrupted_shrine",
+    "dead_tree",
+    "memory_archivist_statue"
+   ]
+  },
+  "kair01": {
+   "theme": "field",
+   "allow": [
+    "memory-time-anchor",
+    "moss_boulders",
+    "silver_seal_pillar",
+    "time_obelisk"
+   ]
+  },
+  "kair02": {
+   "theme": "field",
+   "allow": [
+    "broken_gate",
+    "corrupted_shrine",
+    "moss_boulders",
+    "silver_seal_pillar"
+   ]
+  },
+  "kair03": {
+   "theme": "field",
+   "allow": [
+    "chrono_engine",
+    "memory-time-anchor",
+    "silver_seal_pillar",
+    "time_obelisk"
+   ]
+  },
+  "kair04": {
+   "theme": "field",
+   "allow": [
+    "broken_gate",
+    "moss_boulders",
+    "silver_seal_pillar",
+    "time_obelisk"
+   ]
+  },
+  "kair05": {
+   "theme": "field",
+   "allow": [
+    "dead_tree",
+    "moss_boulders",
+    "silver_seal_pillar",
+    "time_obelisk"
+   ]
+  },
+  "kair06": {
+   "theme": "field",
+   "allow": [
+    "broken_gate",
+    "collapsed_stairs",
+    "moss_boulders",
+    "silver_seal_pillar"
+   ]
+  },
+  "kair07": {
+   "theme": "field",
+   "allow": [
+    "chrono_engine",
+    "memory-time-anchor",
+    "seal-command-pillar",
+    "silver_seal_pillar",
+    "time_obelisk"
+   ]
+  },
+  "kair08": {
+   "theme": "field",
+   "allow": [
+    "armored_wall",
+    "ruined_portal",
+    "shattered_memory_core",
+    "silver_seal_pillar"
+   ]
+  },
+  "kair09": {
+   "theme": "field",
+   "allow": [
+    "bone_heap",
+    "corrupted_shrine",
+    "moss_boulders",
+    "silver_seal_pillar"
+   ]
+  },
+  "kair10": {
+   "theme": "field",
+   "allow": [
+    "broken_gate",
+    "chrono_engine",
+    "seal-command-pillar",
+    "silver_seal_pillar",
+    "time_obelisk"
+   ]
+  },
+  "last301": {
+   "theme": "field",
+   "allow": [
+    "broken_gate",
+    "corrupted_shrine",
+    "moss_boulders",
+    "silver_seal_pillar"
+   ]
+  },
+  "last302": {
+   "theme": "field",
+   "allow": [
+    "blank_memorial",
+    "dead_tree",
+    "moss_boulders",
+    "village_well"
+   ]
+  },
+  "last303": {
+   "theme": "field",
+   "allow": [
+    "blood_altar",
+    "corrupted_shrine",
+    "dead_tree",
+    "moss_boulders"
+   ]
+  },
+  "last304": {
+   "theme": "field",
+   "allow": [
+    "dead_tree",
+    "moss_boulders",
+    "ruined_market",
+    "village_well"
+   ]
+  },
+  "last305": {
+   "theme": "field",
+   "allow": [
+    "broken_gate",
+    "dead_tree",
+    "moss_boulders",
+    "ruined_market"
+   ]
+  },
+  "murder01": {
+   "theme": "urban",
+   "allow": [
+    "blank_memorial",
+    "collapsed_stairs"
+   ]
+  },
+  "murder02": {
+   "theme": "home",
+   "allow": [
+    "collapsed_stairs",
+    "hotel_luggage_cart"
+   ]
+  },
+  "murder03": {
+   "theme": "urban",
+   "allow": [
+    "blank_memorial",
+    "collapsed_stairs"
+   ]
+  },
+  "murder04": {
+   "theme": "home",
+   "allow": [
+    "evidence-loop-console"
+   ]
+  },
+  "restEp1b": {
+   "theme": "field",
+   "allow": [
+    "blank_memorial",
+    "broken_street_lamp",
+    "silver_seal_pillar",
+    "village_well"
+   ]
+  },
+  "restHando": {
+   "theme": "field",
+   "allow": [
+    "memory_archivist_statue",
+    "moss_boulders",
+    "silver_seal_pillar",
+    "village_well"
+   ]
+  },
+  "restKairo": {
+   "theme": "field",
+   "allow": [
+    "dead_tree",
+    "memory_archivist_statue",
+    "silver_seal_pillar",
+    "village_well"
+   ]
+  },
+  "restLast3": {
+   "theme": "field",
+   "allow": [
+    "dead_tree",
+    "memory_archivist_statue",
+    "silver_seal_pillar",
+    "village_well"
+   ]
+  },
+  "restU2": {
+   "theme": "field",
+   "allow": [
+    "hotel_luggage_cart",
+    "memory_archivist_statue",
+    "silver_seal_pillar",
+    "village_well"
+   ]
+  },
+  "u201": {
+   "theme": "machine",
+   "allow": [
+    "armored_wall",
+    "chrono_engine",
+    "rail_signal",
+    "surveillance_console"
+   ]
+  },
+  "u202": {
+   "theme": "machine",
+   "allow": [
+    "armored_wall",
+    "rail_signal",
+    "ruined_portal",
+    "surveillance_console"
+   ]
+  },
+  "u203": {
+   "theme": "machine",
+   "allow": [
+    "memory-time-anchor",
+    "rail_signal",
+    "silver_seal_pillar",
+    "surveillance_console"
+   ]
+  },
+  "u204": {
+   "theme": "machine",
+   "allow": [
+    "chrono_engine",
+    "industrial_barricade",
+    "silver_seal_pillar",
+    "surveillance_console"
+   ]
+  },
+  "u205": {
+   "theme": "machine",
+   "allow": [
+    "armored_wall",
+    "chrono_engine",
+    "rail_signal",
+    "surveillance_console"
+   ]
+  },
+  "u206": {
+   "theme": "machine",
+   "allow": [
+    "chrono_engine",
+    "ruined_portal",
+    "shattered_memory_core",
+    "silver_seal_pillar"
+   ]
+  },
+  "village": {
+   "theme": "field",
+   "allow": [
+    "blank_memorial",
+    "memory_archivist_statue",
+    "ruined_market",
+    "village_well"
+   ]
+  }
+ }
+}
