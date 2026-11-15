@@ -4,7 +4,7 @@ const src=fs.readFileSync(path.join(__dirname,'../../client-source/ego-motion-r1
 const win={};vm.runInNewContext(src,{window:win,Math,Number,Object});
 const M=win.__STORYWORLD_EGO_MOTION_R1048__;let ok=0,bad=0;
 const t=(name,c)=>{if(c){ok++;}else{bad++;console.log('FAIL',name);}};
-t('모듈',!!M&&M.revision==='R1048-ego-motion-1');
+t('모듈',!!M&&M.revision==='R1048-ego-motion-2');
 // 우선순위
 t('사망 최우선',M.pickState({dead:1,da:1,hu:1,at:1,mv:1})==='dead');
 t('대시>피격',M.pickState({da:.2,hu:.3,at:.5})==='dash');
@@ -41,6 +41,11 @@ for(let i=0;i<40;i++)r=P.step(1/60,{hu:.3});t('피격 끝 칸 유지',r.frame===
 r=P.step(NaN,{mv:1,speed:NaN,fx:NaN,fy:NaN});t('NaN 입력 안전',Number.isFinite(r.frame)&&r.frame>=0);
 r=P.step(99,{mv:1,speed:3});t('큰 dt 묶음',Number.isFinite(r.frame)&&r.frame<12);
 t('readyImage 캐시 줄에서 .image 를 꺼냄(갈색 네모 회귀)',/readyImage\(p\),im=row\?\.image/.test(src));
+// 검 궤적(CX-0110EG): 기본 공격만, 타격 첫 칸=가장 큰 3번 칸(색인 2), 예비·여운 끝은 없음
+t('궤적: 기본 공격 타격 칸에 3번',M.slashFrame('attack',5,true)===2&&M.slashFrame('attack',6,true)===2);
+t('궤적: 예비 앞·여운 끝·스킬·다른 동작엔 없음',M.slashFrame('attack',1,true)<0&&M.slashFrame('attack',13,true)<0&&M.slashFrame('attack',5,false)<0&&M.slashFrame('walk',5,true)<0);
+t('궤적: 칸 차례가 앞으로만',[3,4,5,6,7,8,9,10].map(f=>M.slashFrame('attack',f,true)).every((v,i,a)=>i===0||v>=a[i-1]));
+{const R=path.join(__dirname,'../..');t('궤적 그림 있음',fs.existsSync(path.join(R,'runtime-text',M.FX.slash.path)));}
 const E=M.createPlayer(null);r=E.step(1/60,{});t('시트 없음 안전',r.frame===0);
 // 시트 데이터·자산·태그 순서·0번째 칸
 {const R=path.join(__dirname,'../..'),w2={};vm.runInNewContext(fs.readFileSync(path.join(R,'client-source/ego-motion-r1048-sheets.js'),'utf8'),{window:w2,Object});

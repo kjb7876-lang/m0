@@ -9,7 +9,7 @@
 //  시트가 아직 없으면(Dots CX-0105E3 모델 대기) 아무것도 그리지 않는다 — 판단 함수만 열어 둔다. 숫자는 모두 유한값으로 묶는다.
 (()=>{'use strict';
 if(window.__STORYWORLD_EGO_MOTION_R1048__)return;
-const REV='R1048-ego-motion-1';
+const REV='R1048-ego-motion-2';
 const RULES=Object.freeze({fade:.1,fadeFast:.05,hitstop:.06,ghosts:3,ghostGap:.035,runSpeed:4.2,minRate:.55,maxRate:1.8,
  priority:Object.freeze(['dead','dash','hurt','discard','attack','move','idle'])});
 const DIR8=Object.freeze(['s','se','e','ne','n','nw','w','sw']);
@@ -64,7 +64,7 @@ function createPlayer(sheets){const A=sheets?.actions||{};
 //  모양: {base:'assets/r1048/ego/', ext:'webp', cell:192, bodyPx:146, foot:[96,169], dirs:[…], actions:{idle:{frames,fps,loop,phases?,strideSpeed?},…}}
 //  없으면(지금 — EGO 3D 모델 대기) 아무것도 바꾸지 않는다. 네트워크 요청도 하지 않는다.
 const BODY_ART=/hero_direction|hero-authored|assets\/heroes\/|r91\/walk\/|r93\/idle\/|r119\/heroes\/|r121\/(?:heroes|walk)\/|r128\/gunner\/|r130\/[a-z]+\/|r143\/attack\/|r242\/hwando\/|r283\/hwando\/|r271\/|awakening|r1048\/|^blob:/;
-const stats={frames:0,ghosts:0,fades:0,skipped:0,errors:0};let lastError=null,lastInp=null,lastSrc=null,movedAt=-9,on=true,player1=null,lastT=null,lastPos=null,atkMax=0,prevAt=0,speedS=0,face={x:1,y:1};
+const stats={frames:0,ghosts:0,fades:0,skipped:0,errors:0,slash:0};let lastError=null,lastInp=null,lastSrc=null,movedAt=-9,on=true,player1=null,lastT=null,lastPos=null,atkMax=0,prevAt=0,speedS=0,face={x:1,y:1};
 try{const v=JSON.parse(localStorage.getItem('storyworld.r1048.motion')||'{}');if(v&&v.on===false)on=false;}catch(_){}
 const sheets=()=>{const s=window.__STORYWORLD_EGO_MOTION_R1048_SHEETS__;return s&&s.actions&&fin(+s.cell)&&+s.cell>0?s:null;};
 const egoOn=()=>{try{const E=window.__STORYWORLD_EGO_SOVEREIGN_R1046__;return !!E&&(E.formActive?.()||E.inspect?.().rc151===true);}catch(_){return false;}};
@@ -79,8 +79,18 @@ function input(p,t,S){const dt=lastT==null?0:clamp(t-lastT,0,.25);lastT=t;
  const sk=+S.sk||0,ul=+S.ul||0,cast=Math.max(sk,ul);
  let discard=0;try{const I=window.__STORYWORLD_EGO_SOVEREIGN_R1046__?.inspect?.(),t0=+I?.cdUntil-16,len=(sheets()?.actions?.discard?.frames||16)/(sheets()?.actions?.discard?.fps||16);if(fin(t0)&&t-t0>=0&&t-t0<len)discard=1;}catch(_){}
  const attackP=at>0&&atkMax>0?1-at/atkMax:cast>0?.5:NaN;
- return{dt,inp:{dead:!(p.hp>0),da:S.da,hu:S.hu,at:at>0||cast>0?1:0,discard,mv:!!(S.mv||t-movedAt<.15),speed:speedS,fx:face.x,fy:face.y,attackP,x:pos.x,y:pos.y}};}
+ return{dt,inp:{dead:!(p.hp>0),da:S.da,hu:S.hu,at:at>0||cast>0?1:0,discard,mv:!!(S.mv||t-movedAt<.15),speed:speedS,fx:face.x,fy:face.y,attackP,basic:at>0,x:pos.x,y:pos.y}};}
 function pickBody(rec,st){let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!BODY_ART.test(String(c.sourcePath||c.image?.src||'')))continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}return best;}
+// 검 궤적 이펙트(Dots CX-0110EG ego_slash r1 → Claude 개선: 512칸 6장, 끝 칸 완전 투명, 백색 번짐 240 상한; 게임용 256칸 webp).
+//  기본 공격(at>0)일 때만. 몸 공격 칸(16칸: 예비 0~4·타격 5~10·여운 11~15) → 궤적 칸. 타격 첫 칸(히트스톱)에 가장 큰 3번 칸.
+//  그림은 오른쪽 위→왼쪽 아래 초승달 → 화면 오른쪽을 볼 때 좌우를 뒤집는다. 가산 합성('lighter')으로 몸 위에 겹친다.
+const FX=Object.freeze({slash:Object.freeze({path:'assets/r1048/fx/ego_slash.webp',cell:256,frames:6,size:2.1,lift:.55,ahead:.28,alpha:.95,
+ map:Object.freeze({3:0,4:1,5:2,6:2,7:3,8:3,9:4,10:4})})});
+function slashFrame(clip,frame,basic){if(clip!=='attack'||!basic)return -1;const k=FX.slash.map[frame|0];return Number.isInteger(k)?k:-1;}
+function placeFx(spec,frame,cx,cy,flip){const im=img(spec.path);if(!im)return null;const c=spec.cell,h=(typeof actorHeight==='function'?actorHeight():66)*spec.size;
+ if(!fin(cx)||!fin(cy)||!fin(h)||h<=0)return null;const L=cx-h/2,R=cx+h/2,T=cy-h/2,B=cy+h/2;
+ const pts=flip?[[R,T],[L,T],[L,B],[R,B]]:[[L,T],[R,T],[R,B],[L,B]];
+ return{image:im,sourcePath:spec.path,immutableTint:null,mutable:false,sourceRect:[clamp(frame,0,spec.frames-1)*c,0,c,c],imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],points:pts,r1048:'fx'};}
 function place(sh,clip,dir,frame,fx,fy){const p=(sh.base||'assets/r1048/ego/')+clip+'-'+dir+'.'+(sh.ext||'webp'),im=img(p);if(!im)return null;
  const cell=+sh.cell,want=(typeof actorHeight==='function'?actorHeight():66)*.98,k=clamp(want/Math.max(1,+sh.bodyPx||cell*.76),.05,4),[ax,ay]=Array.isArray(sh.foot)?sh.foot:[cell/2,cell*.88];
  const X=v=>fx+(v-ax)*k,Y=v=>fy+(v-ay)*k,pts=[[X(0),Y(0)],[X(cell),Y(0)],[X(cell),Y(cell)],[X(0),Y(cell)]];
@@ -97,10 +107,12 @@ function paint(rec,st){const sh=sheets(),p=typeof player==='object'?player:null;
  if(r.fade){const f=place(sh,r.fade.clip,r.fade.dir,r.fade.frame,fx,fy);if(f){extra.push({...best,...f,key:best.key+':r1048f',style:{...best.style,globalAlpha:alpha*r.fade.alpha}});stats.fades++;}}
  r.ghosts.forEach((g,i)=>{const gq=project(g.x,g.y),f=place(sh,g.clip,g.dir,g.frame,gq.x,gq.y-lift);if(f){extra.push({...best,...f,key:best.key+':r1048g'+i,style:{...best.style,globalAlpha:alpha*g.alpha,globalCompositeOperation:'lighter'}});stats.ghosts++;}});
  /* 잔상·섞는 옛 칸은 몸 뒤에 */if(extra.length){const at=Math.max(st,rec.commands.indexOf(best));rec.commands.splice(at,0,...extra);}
+ const sf=slashFrame(r.clip,r.frame,lastInp?.basic);if(sf>=0){const ah=(typeof actorHeight==='function'?actorHeight():66),sx=(+face.x||0)-(+face.y||0),sgn=sx>0?1:-1,f=placeFx(FX.slash,sf,fx+sgn*ah*FX.slash.ahead,fy-ah*FX.slash.lift,sx>0);
+  if(f){const at=rec.commands.indexOf(best);rec.commands.splice(at+1,0,{...best,...f,key:best.key+':r1048s',style:{...best.style,globalAlpha:alpha*FX.slash.alpha,globalCompositeOperation:'lighter'}});stats.slash++;}}
  stats.frames++;}
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
  try{if(on&&st>=0&&egoOn()&&sheets())paint(rec,st);}catch(e){stats.errors++;lastError=String(e?.message||e);}return r;};}
-window.__STORYWORLD_EGO_MOTION_R1048__=Object.freeze({revision:REV,RULES,DIR8,dir8,pickState,clipOf,attackFrame,strideRate,createPlayer,
+window.__STORYWORLD_EGO_MOTION_R1048__=Object.freeze({revision:REV,RULES,FX,slashFrame,DIR8,dir8,pickState,clipOf,attackFrame,strideRate,createPlayer,
  ready:()=>!!sheets(),set:v=>{on=v!==false;try{localStorage.setItem('storyworld.r1048.motion',JSON.stringify({on}));}catch(_){}return on;},
  inspect:()=>({revision:REV,on,ready:!!sheets(),ego:egoOn(),stats:{...stats},lastError,lastSrc,input:lastInp,state:player1?.state||null})});
 })();

@@ -32,6 +32,12 @@ await p.evaluate(()=>{window.__r1048walk=setInterval(()=>{player.x+=.06;},16);})
 const m2=await p.evaluate(()=>{clearInterval(window.__r1048walk);return window.__STORYWORLD_EGO_MOTION_R1048__.inspect();});
 ok(['walk','run'].includes(m2.state?.clip)||['walk','run'].includes(m2.state?.state),'움직이면 걷기·달리기 칸',{clip:m2.state?.clip,state:m2.state?.state,speed:m2.input?.speed});
 if(SH)await p.screenshot({path:SH+'/walk.jpg',quality:82});
+// 기본 공격 → 검 궤적(CX-0110EG) 칸이 가산 합성으로 겹침
+const s0=await p.evaluate(()=>window.__STORYWORLD_EGO_MOTION_R1048__.inspect().stats.slash);
+for(let i=0;i<5;i++){await p.keyboard.press('KeyA');await p.evaluate(()=>{if(!(player.attackAnim>0))player.attackAnim=.35;});/* 거점엔 적이 없어 공격이 안 나갈 수 있음 → 공격 진행값만 넣어 그림 사슬 확인 */await p.waitForTimeout(700);}
+const s1=await p.evaluate(()=>window.__STORYWORLD_EGO_MOTION_R1048__.inspect());
+ok(s1.stats.slash>s0&&s1.stats.errors===0,'기본 공격 때 검 궤적 그려짐',{slash:s1.stats.slash,s0,err:s1.lastError});
+if(SH)await p.screenshot({path:SH+'/attack.jpg',quality:82});
 // 끄기 설정
 await p.evaluate(()=>window.__STORYWORLD_EGO_MOTION_R1048__.set(false));const f0=await p.evaluate(()=>window.__STORYWORLD_EGO_MOTION_R1048__.inspect().stats.frames);await p.waitForTimeout(1500);
 const f1=await p.evaluate(()=>window.__STORYWORLD_EGO_MOTION_R1048__.inspect().stats.frames);ok(f1===f0,'끄면 옛 그림으로(시트 칸 안 그림)',{f0,f1});

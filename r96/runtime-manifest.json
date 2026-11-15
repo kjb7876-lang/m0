@@ -8748,6 +8748,11 @@
       "sha256": "eb3fa62ddb4be7f7da8ff4248ad95f7d55f4bb0b2d26238abcc1d60cf060225f"
     },
     {
+      "path": "assets/r1048/fx/ego_slash.webp",
+      "bytes": 38800,
+      "sha256": "cdfb1db8997ea52007333262a00b735b602ef3f25e1c7830549686a89485857c"
+    },
+    {
       "path": "assets/r1049/sfx/audio-rc133-processed-enemy-heavy-Dark_fantasy_demon_e__3-1790999939460_1-8510730a-L1.ogg",
       "bytes": 21576,
       "sha256": "08189069e6a8cd29546ccc3a13d283461a90baa464c4f40ed1bd7f6bb23d8cc1"
@@ -52439,8 +52444,8 @@
     },
     {
       "path": "ego-motion-r1048.js",
-      "bytes": 12224,
-      "sha256": "922929a47d246280734038b15c101fba7232cc75b9d810635dc915b0e57fdd3e"
+      "bytes": 14076,
+      "sha256": "b5a9ae3b4ee463fe6527bb17c0b0f6f313b8178bf74737e46e930f953546087e"
     },
     {
       "path": "ego-paint-r1039.js",
@@ -54143,8 +54148,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10828,
-  "totalBytes": 1311108776,
+  "fileCount": 10829,
+  "totalBytes": 1311149428,
   "webHTMLSha256": "835427af52515e62e4219ff6ed0fa9eda701f4927b9773b3452a8cbb25076382",
   "largest": [
     {
