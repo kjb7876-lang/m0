@@ -75,17 +75,9 @@ const FRAG='void main(){\n#include <map_fragment>\n#include <colorspace_fragment
  ok('inject: shader without anchor → untouched, no throw',!threw&&r===false&&s.fragmentShader==='void main(){gl_FragColor=vec4(1.);}');}
 ok('inject: null / broken shader object → false, no throw',[null,undefined,{},{fragmentShader:5}].every(s=>{try{return I.inject(s)===false;}catch(_){return false;}}));
 ok('GLSL clamps output and guards strength (no division without epsilon guard on luminance)',/clamp\(/.test(I.GLSL)&&/r1055K/.test(I.GLSL));
-// ---- 첫 메뉴 단추 ----
-{const b=boot({stored:'{"mode":"off"}'});const panel=el('panel'),box=el('box'),neu=el('campaignNew54');box.appendChild(neu);b.els.set('panel',panel);b.els.set('campaignNew54',neu);
- b.I.titleButton();const btn=box.children.find(c=>c.id==='inkTestR1055');
- ok('title: button added next to the start button',!!btn);
- if(btn)b.els.set('inkTestR1055',btn);
- b.I.titleButton();ok('title: not added twice',box.children.filter(c=>c.id==='inkTestR1055').length===1);
- ok('title: label says test and shows off',!!btn&&/수묵화풍/.test(btn.textContent)&&/테스트/.test(btn.textContent)&&/꺼짐/.test(btn.textContent),btn&&btn.textContent);
- if(btn){btn.onclick();ok('title: 1st press → eastern regions',b.I.prefs().mode==='east'&&/동양/.test(btn.textContent),btn.textContent);
-  btn.onclick();ok('title: 2nd press → all regions (test)',b.I.prefs().mode==='all'&&/모든/.test(btn.textContent),btn.textContent);
-  btn.onclick();ok('title: 3rd press → off again',b.I.prefs().mode==='off'&&/꺼짐/.test(btn.textContent),btn.textContent);}
- const c=boot();c.I.titleButton();ok('title: no panel / no start button → nothing, no error',c.I.inspect().stats.errors===0);}
+// ---- 첫 화면 단추 없음(R1055d: 설정 창으로 옮김 — R1015 '첫 화면 단추 ≤ 9') ----
+{const b=boot();const panel=el('panel'),box=el('box'),neu=el('campaignNew54');box.appendChild(neu);b.els.set('panel',panel);b.els.set('campaignNew54',neu);
+ ok('title: no ink buttons are added to the first screen',box.children.length===1&&!/inkTestR1055|inkStyleR1055|showTitle/.test(src)&&typeof b.I.titleButton==='undefined');}
 // ---- 화풍 5가지(사용자 2026-11-15 12:36Z "눈조금덜아프고 퀄리티높아보이게 여러 유명화풍참고") ----
 {const b=boot(),J=b.I,ids=['jg','dw','song','sumi','wc'];
  ok('styles: five named styles (진경산수·담채·송대 산수·스미에·수채)',JSON.stringify(Object.keys(J.styles||{}))===JSON.stringify(ids),Object.keys(J.styles||{}));
@@ -106,13 +98,7 @@ ok('GLSL clamps output and guards strength (no division without epsilon guard on
  J.set({style:'bogus'});ok('styles: set() ignores unknown style',J.prefs().style==='wc');
  ok('styles: garbage stored style → default jg, mode untouched',(()=>{const q=boot({stored:'{"mode":"east","style":9}'}).I.prefs();return q.style==='jg'&&q.mode==='east';})());
  const u=J.uniformsFor?.('wc');ok('styles: uniformsFor(style) gives finite numbers only',!!u&&Object.values(u).flat().every(Number.isFinite),u);
- // 첫 화면: 화풍 단추
- const c=boot(),panel=el('panel'),box=el('box'),neu=el('campaignNew54');box.appendChild(neu);c.els.set('panel',panel);c.els.set('campaignNew54',neu);c.I.titleButton();
- const sb=box.children.find(x=>x.id==='inkStyleR1055');ok('title: style button added next to the test button',!!sb&&/화풍/.test(sb.textContent||''),sb&&sb.textContent);
- if(sb){c.els.set('inkStyleR1055',sb);const seen=[c.I.prefs().style];for(let i=0;i<5;i++){sb.onclick();seen.push(c.I.prefs().style);}
-  ok('title: style button cycles all five and returns to the first',JSON.stringify(seen)===JSON.stringify(['jg','dw','song','sumi','wc','jg']),seen);
-  ok('title: style button label names the current style',sb.textContent.includes(c.I.styles.jg.label),sb.textContent);}
- ok('styles: no errors',J.inspect().stats.errors===0&&c.I.inspect().stats.errors===0);}
+ ok('styles: no errors',J.inspect().stats.errors===0);}
 // ---- 설정 창 줄(사용자 14:40Z "키고끌수있도록 설정에서") ----
 {const c=boot(),panel=el('panel'),quick=el('quickSettingsR114');c.els.set('panel',panel);c.els.set('quickSettingsR114',quick);
  ok('settings: stored nothing → on (all) with the default style',c.I.prefs().mode==='all'&&c.I.prefs().style===c.I.defaultStyle);

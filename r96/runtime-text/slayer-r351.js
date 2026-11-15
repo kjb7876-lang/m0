@@ -126,7 +126,7 @@ function choose(rec,st){const best=pickBody(rec,st);if(!best)return;const t=T();
  const atk=+player.attackAnim||0,hurt=+player.hurtAnim||0,busy=player.skillAnim>0||player.dashAnim>0||player.ultimateAnim>0,A=clip('attack'),Wk=clip('walk');
  if(!southCast&&atk>S.prevAtk+1e-6&&A){const d=aimSide(),SA=clip('attack',d)||A,off=contactStart(SA),rest=SA.ms.reduce((x,y)=>x+y,0)-off,cd=Math.max(.2,+player.attackCD||.69);S.swing={t0:t,dir:d,A:SA,off,scale:Math.max(.36,Math.min(1,cd*.95*1000/rest))};}
  S.prevAtk=atk;
- const M=window.__STORYWORLD_HERO_MOTION_R895__,moving=t-S.movedAt<.15&&!M?.attackOverTail?.()/* R895 규칙 5 */;
+ const M=window.__STORYWORLD_HERO_MOTION_R895__,moving=t-S.movedAt<.15&&!M?.attackOverTail?.()/* R895 규칙 5 */&&!(atk>0&&player.moving===false)/* R1050c: 공격 중 밀림은 걷기 아님(R1050b 환도와 같음) */,sw440=!!window.__STORYWORLD_SKILL_ATTACK_R440__?.swapping?.();
  const skillCut=!(player.dashAnim>0)&&!!M?.moveCancel?.('skill');/* R895 규칙 2 */
  if(busy&&!skillCut){stats.skill++;if(player.dashAnim>0){S.swing=null;/* R895 규칙 4: 대시가 공격을 끊고, 실제로 옮긴 쪽을 본다 */const dd=M?.dash?.()?.side,d=dd||(moving?S.h:aimSide());return draw(rec,st,best,'walk',d,3);}const d=aimSide(),BA=auxClip()||clip('attack',d)||A;stats.aux=(stats.aux||0)+1;return draw(rec,st,best,'attack',d,BA?.contact??3,undefined,BA);}
  if(southCast){const C=clip('attack','s'),pre=C.ms.slice(0,C.contact).reduce((a,b)=>a+b,0),tot=C.ms.reduce((a,b)=>a+b,0),el=southCast.phase==='prepare'?Math.min(pre-1,(t-southCast.t0)*1000):pre+(t-southCast.hitAt)*1000;
@@ -134,6 +134,7 @@ function choose(rec,st){const best=pickBody(rec,st);if(!best)return;const t=T();
  if(S.swing){const SA=S.swing.A||A,el=(t-S.swing.t0)*1000/S.swing.scale+S.swing.off,tot=SA.ms.reduce((x,y)=>x+y,0);
   /* R895 규칙 1 예외: 슬레이어는 피격 시트가 없고(옛 R143 피격 그림은 칼 없는 다른 화풍) 광전사라 기본 공격 중 피격에 밀리지 않는다(슈퍼아머) */
   if(el<tot&&!(moving&&(M?M.moveCancel('attack'):t-S.swing.t0>.35)))return draw(rec,st,best,'attack',S.swing.dir,frameAt(SA.ms,el,false),undefined,SA);if(el>=tot&&!moving&&window.__STORYWORLD_SKILL_ATTACK_R440__?.swapping?.()){stats.skillHold=(stats.skillHold||0)+1;return draw(rec,st,best,'attack',S.swing.dir,frameAt(SA.ms,tot-1,false),undefined,SA);}S.swing=null;/* R1050b: 스킬이 휘두르기보다 길면 마지막 공격 칸 유지 */}
+ if(sw440&&!moving){const d=aimSide(),SA=clip('attack',d)||A;if(SA){stats.skillHold=(stats.skillHold||0)+1;return draw(rec,st,best,'attack',d,frameAt(SA.ms,1e9,false),undefined,SA);}}/* R1050c: 휘두르기가 끝났거나 끊긴 뒤에도 R440 스킬 동안은 공격 마지막 칸 */
  if(moving){const d=S.walkDir==='s'&&southReady()&&!otherAction()?'s':S.walkDir==='n'&&northReady()&&!otherAction()?'n':S.h,W=(d==='n'?northClip():clip('walk',d))||Wk,k=want()/(W?.body||180),per=(W?.stride?.px_per_frame||18)*k;return draw(rec,st,best,'walk',d,Math.floor(S.dist/Math.max(1,per)),undefined,W);}
  if(hurt>0)stats.hurt++;
  const v=enemyVec();if(v)side(v[0],v[1]);

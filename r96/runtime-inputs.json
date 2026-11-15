@@ -10021,6 +10021,11 @@
     "assets/r1063/r439/hwando/attack-e.webp",
     "lineart-ink-r1081.js",
     "lineart-video-r1080.js",
+    "ui-ink-r1085.js",
+    "assets/r1045c/gunner/attack-e4.webp",
+    "assets/r1045c/gunner/walk-e2.webp",
+    "enemy-rules-r1053.js",
+    "assets/r1045d/gunner/walk-e3.webp",
     "mob-lunge-r1064.js"
   ],
   "mediaPaths": [
@@ -11096,5 +11101,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "559ed6c28b2de8f83256c0712809095c59dde2807a00482f47ad0487c835de61"
+  "runtimeManifestSHA256": "e7614951f4dde0ca54e6e47d155fb81139cfe03a3e8206cca18ef9ebb88e1f3a"
 }
