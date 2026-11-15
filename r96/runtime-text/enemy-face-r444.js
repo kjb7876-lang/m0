@@ -64,8 +64,9 @@ function update(e){let s=S.get(e);const t=T();
  const A=atkAngle(e);
  if(A)return lockAttack(s,A);
  s.aim=null;
- if(e.hitTimer>0||t-num(s.tele,-9)<.15){s.owner='hold';s.pend=null;return s;}
  const p=P(),tx=p?p.x-e.x:0,ty=p?p.y-.15-e.y:0,td=Math.hypot(tx,ty);
+ // R1053: 전투 중 영웅을 보는 적(enemy-rules ①)은 맞는 동안에도 영웅 쪽을 따른다(움찔마다 좌우가 굳어 영웅이 돌면 등을 보였음). 순간이동 직후 0.15초는 그대로 둔다.
+ if((e.hitTimer>0&&!(p&&p.hp>0&&majorFace(e,td)))||t-num(s.tele,-9)<.15){s.owner='hold';s.pend=null;return s;}
  const engaged=!!(p&&p.hp>0&&td<Math.max(6,num(e.combatProfile?.aggro,7)));
  const v=Math.hypot(s.vx,s.vy),moving=v>Math.max(.22,sp*.12);
  let vec=null,owner='hold',hold=.2;

@@ -55,6 +55,23 @@ const API=g=>g.__STORYWORLD_ENEMY_RULES_R1053__||{missing:true,faceHero:()=>null
 {// ② 회귀: 일반 hybrid 몹은 거리 두기 그대로
  const g=env();const M=mk({ai:'hybrid',cd:1.5,x:17.6,y:16});g.room.enemies.push(M);let sumD=0,n=0;run(g,8,{each:g=>{sumD+=Math.hypot(g.player.x-M.x,g.player.y-M.y);n++;}});
  ok('② ordinary hybrid mob keeps its distance (mean ≥ 2.3)',sumD/n>=2.3);}
+{// ② 일반 원거리 몹 거리 띠: 영웅 가만히 2.4칸 — 3칸까지 물러선 뒤 들락날락하지 않는다(사용자 11:12Z "몹들도 갈팡질팡안하게")
+ for(const ai of ['hybrid','ranged']){const g=env();const M=mk({ai,cd:1.5,x:17.6,y:16});g.room.enemies.push(M);let prev=null,dirPrev=0,rev=0,sumD=0,n=0;
+  run(g,12,{each:g=>{const d=Math.hypot(g.player.x-M.x,g.player.y-M.y);sumD+=d;n++;if(prev!=null&&!M.attack&&!(M.rangedWindup>0)){const dd=d-prev;const dir=dd>1e-4?1:dd<-1e-4?-1:0;if(dir&&dirPrev&&dir!==dirPrev)rev++;if(dir)dirPrev=dir;}prev=d;}});
+  ok('② ordinary '+ai+' mob: in/out reversals ≤ 2 in 12 s (got '+rev+')',rev<=2);
+  ok('② ordinary '+ai+' mob still keeps range (mean ≥ 2.8, got '+(sumD/n).toFixed(2)+')',sumD/n>=2.8);
+  ok('② ordinary '+ai+' mob still attacks (≥ 3 starts, got '+(M.attacks||0)+')',(M.attacks||0)>=3);}}
+{// ② 경계: 쿨다운 중 6칸 넘으면 다가가고, 3칸 띠 안에선 서 있는다
+ const g=env();const M=mk({ai:'hybrid',cd:5,x:26.5,y:16});g.room.enemies.push(M);const x0=M.x;run(g,.5);ok('② mob on cooldown at 6.5 tiles walks in',M.x<x0-.1);
+ const g2=env();const M2=mk({ai:'hybrid',cd:5,x:24,y:16});g2.room.enemies.push(M2);run(g2,.5);ok('② mob on cooldown at 4 tiles holds still',Math.abs(M2.x-24)<1e-9&&M2.y===16);}
+{// ① 일반 몹 시선: 영웅이 둘레를 돌 때 공격 밖 영웅 쪽
+ const g=env();const M=mk({ai:'melee',cd:1,x:17.6,y:16});g.room.enemies.push(M);let away=0,n=0;
+ run(g,20,{orbit:.5,hitEvery:.25,each:g=>{const s=g.__STORYWORLD_ENEMY_FACE_R444__.state(M);if(!s||M.attack)return;const hsx=(g.player.x-g.player.y)-(M.x-M.y);if(Math.abs(hsx)>.6){n++;if((hsx>0?'right':'left')!==s.side)away++;}}});
+ ok('① ordinary mob faces the hero outside attacks ≥ 95% (away '+(n?(100*away/n).toFixed(1):'-')+'%)',n>50&&away/n<=.05);}
+{// ① 맞는 동안에도: 0.1초 연타 속에서 돌 때도 보스가 영웅 쪽(움찔이 좌우를 굳히지 않음)
+ const g=env();const B=mk({boss:true,ai:'melee',cd:1,x:17.6,y:16});g.room.enemies.push(B);let away=0,n=0;
+ run(g,20,{orbit:.8,hitEvery:.1,each:g=>{const s=g.__STORYWORLD_ENEMY_FACE_R444__.state(B);if(!s||B.attack)return;const hsx=(g.player.x-g.player.y)-(B.x-B.y);if(Math.abs(hsx)>.6){n++;if((hsx>0?'right':'left')!==s.side)away++;}}});
+ ok('① boss under a 10/s barrage still faces the hero ≥ 95% (away '+(n?(100*away/n).toFixed(1):'-')+'%)',n>50&&away/n<=.05);}
 {// ② 경계: 원거리 보스(ranged)도 쿨다운 중 물러서지 않음 / 쿨다운 0 이면 원래 AI 로 원거리 공격 고름
  const g=env();const B=mk({boss:true,ai:'ranged',cd:0,x:24,y:16});g.room.enemies.push(B);run(g,1/60);
  ok('② ranged boss at 4 tiles with cd ready starts a ranged attack (ai untouched when ready)',B.rangedWindup>0&&B.ai==='ranged');}
@@ -64,10 +81,10 @@ const API=g=>g.__STORYWORLD_ENEMY_RULES_R1053__||{missing:true,faceHero:()=>null
  ok('① midboss faces the hero outside attacks ≥ 95% while the hero circles at fighting pace (away '+(n?(100*away/n).toFixed(1):'-')+'%)',n>50&&away/n<=.05);
  ok('① side flips only when the hero crosses over: ≤ 2 per lap + 2 (got '+flips+', laps '+(20*.5/(2*Math.PI)).toFixed(2)+')',flips<=Math.ceil(2*20*.5/(2*Math.PI))+2);}
 {// ① 회귀: 일반 몹이 떠나 걸을 땐 걷는 쪽(R444 그대로)
- const g=env();const M=mk({ai:'melee',x:20,y:12.5,speed:2});g.room.enemies.push(M);g.player.x=20;g.player.y=16;
+ const g=env();const M=mk({ai:'melee',x:20,y:10,speed:2});g.room.enemies.push(M);g.player.x=20;g.player.y=16;
  const F=g.__STORYWORLD_ENEMY_FACE_R444__;let s=null;for(let i=0;i<40;i++){g.time+=1/60;vm.runInContext('time='+g.time,g);M.x-=2/60;M.y+=2/60;s=F.state(M);}
- ok('① ordinary mob walking away keeps walking-side facing (R444 unchanged)',s&&s.owner==='move');
- ok('① faceHero false for ordinary mobs and beyond 6 tiles, true for a boss at 5.9, false at 6 (boundary)',!API(g).faceHero(M,2)&&API(g).faceHero({boss:true,hp:1},5.9)&&!API(g).faceHero({boss:true,hp:1},6)&&!API(g).faceHero({boss:true,hp:1},NaN));}
+ ok('① ordinary mob walking away beyond 4 tiles keeps walking-side facing (R444 unchanged)',s&&s.owner==='move');
+ ok('① faceHero: mob true at 3.9 / false at 4, boss true at 5.9 / false at 6, NaN false (boundaries)',API(g).faceHero(M,3.9)&&!API(g).faceHero(M,4)&&API(g).faceHero({boss:true,hp:1},5.9)&&!API(g).faceHero({boss:true,hp:1},6)&&!API(g).faceHero({boss:true,hp:1},NaN));}
 {// ③ 슈퍼아머: 0.1초마다 맞는 몹 — 공격 중 그려지는 순간에 피격 자세가 없다, 공격도 계속한다
  const g=env();const M=mk({ai:'melee',x:20.9,y:16});g.room.enemies.push(M);let atkDraw=0,atkHit=0,hitDraw=0,all=0;
  run(g,12,{hitEvery:.1,each:g=>{for(const d of g.drawn){all++;if(d.atk){atkDraw++;if(d.hit)atkHit++;}else if(d.hit)hitDraw++;}}});

@@ -9,9 +9,11 @@
 //   · 피격만 하는 몹: 엔진 hitEnemy 는 맞을 때마다 hitTimer=.14 를 다시 넣고, 그림 고르기는 hitTimer>0 이면 공격 중이어도 '피격' 자세를 먼저 고른다.
 //     영웅이 0.1초마다 때리면 공격 자세를 그려야 할 순간의 81%가 피격 자세로 덮였다(AI 는 실제로 공격하는데 화면엔 맞기만 하는 것처럼 보임).
 //  규칙(판정·피해·체력·쿨다운 수치·저장은 그대로):
-//   ① 시선: 보스·중간보스는 전투 중(영웅이 6칸 안) 걷는 동안에도 영웅 쪽을 본다(R444 가 이 파일의 faceHero 를 묻는다). 공격 중엔 R444 그대로 판정 각.
+//   ① 시선: 보스·중간보스는 전투 중(영웅이 6칸 안), 일반 몹은 4칸 안에서 걷는 동안에도 영웅 쪽을 본다(R444 가 이 파일의 faceHero 를 묻는다). 공격 중엔 R444 그대로 판정 각.
+//      (사용자 11:12Z "몹들도 갈팡질팡안하게")
 //   ② 접근: 보스·중간보스는 물러서지 않는다 — 쿨다운 중엔 그 틱 동안만 AI 를 'melee' 로 보고 엔진이 영웅 쪽으로 걷게 한다(근접 사거리×0.7 까지).
-//      쿨다운이 끝나면 원래 AI(hybrid·ranged)로 돌아가 엔진이 근접/원거리 공격을 고른다. 일반 원거리 몹의 거리 두기는 역할이라 그대로.
+//      쿨다운이 끝나면 원래 AI(hybrid·ranged)로 돌아가 엔진이 근접/원거리 공격을 고른다.
+//      일반 원거리 몹(hybrid·ranged)은 거리 두기는 남기되 3~6칸 띠에선 쿨다운 동안 제자리(3칸 경계 들락날락·맴돌기 없앰).
 //   ③ 슈퍼아머: 모든 적은 공격 준비·타격·후딜 중 맞아도 피격 자세로 끊기지 않는다(흰 번쩍임 flash 는 그대로 — 맞은 느낌은 남김).
 //   ④ 경직 상한: 일반 적은 피격 자세를 쌓아 0.45초까지 보이면 1.2초 '버팀'(피격 자세 없음)에 들어간다. 쌓인 값은 1.5초에 0.45초씩 빠진다.
 //      보스·중간보스는 0.6초에 한 번만 움찔(0.14초)한다.
@@ -21,10 +23,10 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_ENEMY_RULES_R1053__)return;
 const REV='R1053-rules-1',KEY='storyworld.r1053.rules';
-const RULE=Object.freeze({faceRange:6,hitCap:.45,hitWindow:1.5,braceFor:1.2,majorFlinchGap:.6});
+const RULE=Object.freeze({faceRange:6,mobFaceRange:4,keepNear:3,keepFar:6,hitCap:.45,hitWindow:1.5,braceFor:1.2,majorFlinchGap:.6});
 let prefs={on:true,face:true,approach:true,armor:true,cap:true};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object')for(const k of Object.keys(prefs))if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
-const stats={ticks:0,approachHeld:0,armor:0,capped:0,braces:0,majorFlinch:0,majorHeld:0,faceAsked:0,errors:0};let lastError=null;
+const stats={ticks:0,approachHeld:0,mobKept:0,armor:0,capped:0,braces:0,majorFlinch:0,majorHeld:0,faceAsked:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const fin=v=>typeof v==='number'&&Number.isFinite(v);
 const num=(v,d)=>fin(Number(v))?Number(v):d;
@@ -35,11 +37,11 @@ function structure(e){return !!(e.r170Tower||e.r446Pillar||e.r251Circle||e.tower
 function mammon(e){try{const id=String(R()?.id||'');return /mammon/i.test(id)||id==='ep1b06'||!!e.mammon||!!e.mammonR||/mammon/i.test(String(e.nativeId||''));}catch(_){return false;}}
 const enemy=e=>!!e&&typeof e==='object'&&!e.hero&&!e.persona&&!structure(e)&&!mammon(e);
 const major=e=>enemy(e)&&!!(e.boss||e.midboss);
-const alive=e=>num(e.hp,0)>0&&e.spawnState!=='dead';
+const alive=e=>num(e.hp,0)>0&&!['dead','hidden','inactive','disabled','despawned'].includes(e.spawnState);
 // 공격 중: 근접(e.attack, 엔진 그리기용 가짜 자세 storyWorldPose5 는 빼고)·원거리 준비·R61 동작
 function attacking(e){const a=e.attack;if(a&&typeof a==='object'&&!a.storyWorldPose5)return true;if(num(e.rangedWindup,0)>0)return true;const r=e.r61Action;return !!(r&&T()<num(r.endAt,-1));}
 // ① 시선
-function faceHero(e,td){if(!prefs.on||!prefs.face||!major(e)||!fin(td)||td<0||td>=RULE.faceRange)return false;stats.faceAsked++;return true;}
+function faceHero(e,td){if(!prefs.on||!prefs.face||!enemy(e)||!fin(td)||td<0||td>=(major(e)?RULE.faceRange:RULE.mobFaceRange))return false;stats.faceAsked++;return true;}
 // ③④ 피격 자세 거르기 — 맞은 순간(hitEnemy 뒤)과 매 틱 뒤에 hitTimer 를 정리한다(그림·방향·걸음 덧씌우기 모두 같은 값을 보게)
 const H=new WeakMap();
 function hs(e){let s=H.get(e);if(!s){s={acc:0,brace:-1e9,flinch:-1e9,hitAt:-1e9,last:T()};H.set(e,s);}return s;}
@@ -60,10 +62,14 @@ function settle(e,dt){if(!prefs.on||!enemy(e))return;const ht=num(e.hitTimer,0);
 // ② 접근 + 틱 뒤 정리
 let tickOn=false;
 function installTick(){if(tickOn)return true;if(typeof tickEnemies!=='function')return false;if(tickEnemies.__r1053)return tickOn=true;const base=tickEnemies;
- const w=function(...a){const held=[];
+ const w=function(...a){const held=[],kept=[];
   try{const r=R(),p=P();if(prefs.on&&prefs.approach&&r&&Array.isArray(r.enemies)&&p)for(const e of r.enemies){
-   if(!major(e)||!alive(e)||(e.ai!=='hybrid'&&e.ai!=='ranged')||attacking(e)||!(num(e.cd,0)>0))continue;held.push([e,e.ai]);e.ai='melee';stats.approachHeld++;}}catch(err){fail(err);}
-  let out;try{out=base.apply(this,a);}finally{for(const [e,ai] of held)if(e.ai==='melee')e.ai=ai;}
+   if(!enemy(e)||!alive(e)||(e.ai!=='hybrid'&&e.ai!=='ranged')||attacking(e)||!(num(e.cd,0)>0))continue;
+   if(major(e)){held.push([e,e.ai]);e.ai='melee';stats.approachHeld++;continue;}
+   // ② 일반 원거리 몹: 쿨다운 중 3~6칸이면 그 자리에 선다(엔진의 3칸 경계 들락날락·4~6칸 맴돌기 대신 거리 띠). 3칸 안이면 엔진대로 물러서고 6칸 밖이면 다가간다.
+   const d=Math.hypot(p.x-e.x,p.y-e.y);if(fin(d)&&d>=RULE.keepNear&&d<RULE.keepFar&&fin(e.x)&&fin(e.y))kept.push([e,e.x,e.y]);}}catch(err){fail(err);}
+  let out;try{out=base.apply(this,a);}finally{for(const [e,ai] of held)if(e.ai==='melee')e.ai=ai;
+   for(const [e,x,y] of kept){if(attacking(e)||!alive(e))continue;if(e.x!==x||e.y!==y){e.x=x;e.y=y;stats.mobKept++;}e.moving=false;e.moveDX=e.moveDY=0;}}
   try{stats.ticks++;const r=R();if(prefs.on&&r&&Array.isArray(r.enemies)){for(const e of r.enemies)settle(e,null);}}catch(err){fail(err);}
   return out;};
  for(const k of Object.keys(base))try{w[k]=base[k];}catch(_){}w.__r1053=true;try{tickEnemies=w;}catch(_){}return tickOn=true;}
