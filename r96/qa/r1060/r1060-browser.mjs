@@ -11,9 +11,12 @@ for(const z of zones){await go(p,z);await p.waitForTimeout(1500);
  const t0=Date.now();while(Date.now()-t0<120000&&await ph()!=='door'){await p.evaluate(()=>{room.enemies=room.enemies.filter(e=>e&&(e.boss||e.midboss));for(let i=0;i<40&&storyScene;i++)advanceScene();try{window.__STORYWORLD_WORLD_COMBAT_R78__.settle();}catch(_){}});await p.waitForTimeout(1000);}
  ok(await ph()==='door',z+' reached door phase');const q0=await Q();ok(q0.state==='new','clue not yet collected: '+q0.state);
  // 귀비탕(R790) 관문이 있으면 먼저 받아 둔 것으로(그 관문은 R790 검사 몫) → 문 E
- const r=await p.evaluate(()=>{const n=window.__STORYWORLD_NPC_R790__;const g=n?.inspect?.();if(g?.gate){const d=room.exploration.worldR74.doors.find(x=>x.id===room.exploration.bossDoorId);player.x=d.x+(d.axis==='y'?0:2);player.y=d.y+(d.axis==='y'?2:0);interact();if(modal){const btn=[...document.querySelectorAll('#panel button')].find(b=>!/npcWaitR790/.test(b.id)&&/Take|받|마신|take/i.test(b.id+b.textContent));btn?.click();}}
+ await p.evaluate(()=>{const n=window.__STORYWORLD_NPC_R790__;const g=n?.inspect?.();if(g?.gate){const d=room.exploration.worldR74.doors.find(x=>x.id===room.exploration.bossDoorId);player.x=d.x+(d.axis==='y'?0:2);player.y=d.y+(d.axis==='y'?2:0);interact();if(modal){const btn=[...document.querySelectorAll('#panel button')].find(b=>!/npcWaitR790/.test(b.id)&&/Take|받|마신|take/i.test(b.id+b.textContent));btn?.click();}}
   for(let i=0;i<40&&storyScene;i++)advanceScene();if(modal)closePanel(true);
   const d=room.exploration.worldR74.doors.find(x=>x.id===room.exploration.bossDoorId);player.x=d.x+(d.axis==='y'?0:2);player.y=d.y+(d.axis==='y'?2:0);window.__toasts.length=0;
+  return null;});
+ await p.waitForFunction(()=>{const t0=window.__r1060t0??=time;return time-t0>1.7;},null,{timeout:120000});await p.evaluate(()=>{window.__r1060t0=undefined;});
+ const r=await p.evaluate(()=>{const n=window.__STORYWORLD_NPC_R790__;/* 알림은 게임 시간 1.5초에 한 번 — 앞서 길잡이·정리 중 눌린 알림과 겹치지 않게 1.7초 기다린 뒤 */
   const res=interact();updateHUD();return {res,scene:!!storyScene,toasts:[...window.__toasts],hud:document.getElementById('questText')?.textContent||'',r790:n?.inspect?.()?.gate,gate:window.__STORYWORLD_CLUE_GATE_R1060__.inspect()};});
  console.log(JSON.stringify(r));
  ok(!r.r790,z+' R790 gate not pending');ok(await ph()==='door'&&!r.scene,z+' door E blocked before clue (phase stays door, no story)');
