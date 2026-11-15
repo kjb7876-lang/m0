@@ -22,7 +22,7 @@
 //  끄기: localStorage 'storyworld.r720.heroDefense'='0' (창·보상·배치가 모두 꺼진다).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_HERO_DEFENSE_R720__)return;
-const REV='R720-hero-defense-4',KEY='storyworld.r720.heroDefense';
+const REV='R720-hero-defense-5',KEY='storyworld.r720.heroDefense';
 let on=true;try{if(localStorage.getItem(KEY)==='0')on=false;}catch(_){}
 const stats={opens:0,buys:0,places:0,moves:0,upgrades:0,swaps:0,hits:0,rewards:0,clears:0,resets:0,draws:0,heroDraws:0,errors:0,casts:{basic:0,q:0,w:0,e:0,r:0}};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
@@ -33,6 +33,7 @@ const fin=Number.isFinite;
 // ── 순수 규칙(QA 가 CPU 에서 부른다) ──
 const PRICES=Object.freeze({hunter:50,slayer:65,hwando:95,gunner:110,seoha:150,neon:165,lauren:180,michaela:280}),PRICE_NEW=300,PACE0=1.5,BEAT=.35;
 const MAX=Object.freeze({slots:4,range:5,radius:5,level:10});
+const STICK=1.4,HYST=.8,FACE_DZ=.4,MIN_STEP=.05,SIDE_HOLD=.6;/* R1050: 표적 고정 칸·거리 히스테리시스 칸·좌우 무감대(화면 가로 칸, R1053 시선과 같은 0.4) */
 const RANGE_STEP=.6,RADIUS0=1.6,RADIUS_STEP=.8,CORE_GAP=1.2,SLOT_GAP=.9,SPEED=3.4,EDGE=.8;
 const heroes=H=>H||G(()=>HEROES,{});
 function order(H){return Object.keys(heroes(H));}
@@ -67,16 +68,37 @@ function doUpgrade(st,i,kind){const s=st&&st.slots[i];if(!s)return {ok:false,why
 function onHeroChange(st,next){if(!st||!next||next===st.main||indexOf(next)<0)return {swapped:false};const prev=st.main,i=st.slots.findIndex(s=>s.hero===next);
  st.main=next;st.owned[next]=true;if(prev)st.owned[prev]=true;if(i<0||!prev)return {swapped:false};st.slots[i].hero=prev;return {swapped:true,slot:i,prev};}
 function anchorOf(s,c,A){let x=c.x+s.ox,y=c.y+s.oy;if(A){x=clamp(x,A.x0+EDGE,A.x1-EDGE);y=clamp(y,A.y0+EDGE,A.y1-EDGE);}return {x,y};}
+// R1050(사용자 2026-11-15 09:56Z "무한생존모드에서 영웅배치시 배치된영웅 공격모션이 안나가는 문제"): 몸이 공격·스킬·궁극기 동작 중인가.
+//  배치 영웅이 공격하는 동안에도 think 가 움직이는 표적을 매 장면 조금씩 쫓아, 영웅 그리기 사슬(R119 걷기·R895 규칙)이 '걷는 중'으로 보고
+//  공격 그림 대신 걷기 그림을 그렸다(네온 공격 장면 0%·라우렌 20%). 조종 영웅은 멈춰 쏘면 공격 그림이 나오므로, 배치 영웅도 동작 동안 선다.
+const planted=b=>{if(!b)return false;for(const k of ['attackAnim','skillAnim','ultimateAnim']){const v=b[k];if(typeof v==='number'&&fin(v)&&v>0)return true;}return false;};
+// R1050 ① 대상 쪽 보기: 지금 방향 prev 에서 (dx,dy) 쪽으로 — 좌우는 화면 가로 차가 FACE_DZ 칸을 넘을 때만 바꾼다(경계에서 번갈아 뒤집힘 방지). NaN·Infinity 는 그대로.
+function faceToward(prev,dx,dy){const keep=prev||'front';if(!fin(dx)||!fin(dy))return keep;const sx=dx-dy,sy=(dx+dy)*.5;
+ const want=Math.abs(sx)>Math.abs(sy)*1.35?(sx>0?'right':'left'):sy>0?'front':'back';/* 엔진 facing() 과 같은 나눔 */
+ if((want==='left'||want==='right')&&(keep==='left'||keep==='right')&&want!==keep&&Math.abs(sx)<FACE_DZ)return keep;
+ if((keep==='left'||keep==='right')&&(want==='front'||want==='back')&&Math.abs(sx)>=FACE_DZ*.5&&Math.abs(sx)>Math.abs(sy)*.9)return keep;/* 비스듬한 경계에서 옆↔앞 번갈음도 막는다 */
+ return want;}
+// R1050 ① 화면 좌우(최종 그림 기준): 몸 시트 이름의 방향(-e·-ne·-se·-r = 오른쪽, -w·-nw·-sw·-l = 왼쪽) + 뒤집혀 그렸는가. 위·아래·모름은 null.
+function sideOf(src,mirrored){const m=/[-_](e|ne|se|r|w|nw|sw|l)\d*\.(?:webp|png)/i.exec(String(src||''));if(!m)return null;const r=/^(e|ne|se|r)$/i.test(m[1]);return (r!==!!mirrored)?'right':'left';}
+// 좌우 잠금(R444 적 좌우 바꿈 무감대와 같은 생각): 바꾼 지 SIDE_HOLD 초 안에 반대쪽이 오면 true(그 그림을 되뒤집어 그린다).
+function sideHold(s,side,t){if(!s||!side||!fin(t))return false;if(!s.side||s.side===side||t-s.at>=SIDE_HOLD){if(s.side!==side){s.side=side;s.at=t;}return false;}return true;}
 const alive=(e,engaged)=>!!e&&e.hp>0&&!e.deadRecorded&&e.spawnState!=='dead'&&(!e.boss||engaged!==false);
 // 한 걸음: 자리(anchor)의 이동 반경 안에서 표적에 맞춰 서고, 쉴 틈이 끝났고 사거리 안이면 맞힐 적을 돌려준다.
 function think(a,enemies,dt,st,anchor,env){const out={hits:[],target:null,moved:false};if(!a||!st||!anchor)return out;
  if(!fin(a.x)||!fin(a.y)){a.x=anchor.x;a.y=anchor.y;}a.cd=Math.max(0,(+a.cd||0)-dt);
  const eng=env?env.engaged:true,reach=st.radius+st.range;let tg=null,best=Infinity;const near=[];
- for(const e of enemies||[]){if(!alive(e,eng)||!fin(e.x)||!fin(e.y))continue;if(Math.hypot(e.x-anchor.x,e.y-anchor.y)>reach)continue;const d=Math.hypot(e.x-a.x,e.y-a.y);near.push([d,e]);if(d<best){best=d;tg=e;}}
- const step=SPEED*dt;let gx=anchor.x,gy=anchor.y,stop=0;
- if(tg){gx=tg.x;gy=tg.y;stop=st.melee?Math.min(st.range*.8,1.4):st.range*.95;}
+ let cur=null,curD=Infinity;
+ for(const e of enemies||[]){if(!alive(e,eng)||!fin(e.x)||!fin(e.y))continue;if(Math.hypot(e.x-anchor.x,e.y-anchor.y)>reach)continue;const d=Math.hypot(e.x-a.x,e.y-a.y);near.push([d,e]);if(d<best){best=d;tg=e;}if(e===a.tgt){cur=e;curD=d;}}
+ /* R1050 ② 표적 고정(사용자 2026-11-15 11:12Z "영웅들도", R1053 적 규칙과 같은 원칙): 지금 표적이 살아 닿으면 새 적이 STICK 칸 넘게 가깝지 않은 한 그대로 — 매 장면 가장 가까운 적으로 바꿔 몸이 좌우로 흔들리던 것 */
+ if(cur&&curD<=best+STICK){tg=cur;best=curD;}a.tgt=tg||null;
+ const step=SPEED*dt;let gx=anchor.x,gy=anchor.y,stop=0;const hold=!!(env&&env.hold);/* R1050: 공격·스킬 동작 중이면 제자리(표적은 그대로 고른다) */
+ if(tg){gx=tg.x;gy=tg.y;stop=st.melee?Math.min(st.range*.8,1.4):st.range*.95;/* ② 거리 히스테리시스: 붙어 선 뒤에는 HYST 칸 더 멀어질 때까지 다시 걷지 않는다(경계 들락날락 방지) */if(a.held&&a.heldTgt===tg)stop=Math.min(stop+HYST,Math.max(stop,st.range));}else a.held=false;
  const dx=gx-a.x,dy=gy-a.y,d=Math.hypot(dx,dy);
- if(d>stop+1e-6){const k=Math.min(step,d-stop)/d;a.x+=dx*k;a.y+=dy*k;out.moved=k*d>1e-4;}
+ if(tg){a.held=d<=stop+MIN_STEP;a.heldTgt=tg;}/* 남은 거리가 MIN_STEP 칸 안이면 닿은 것으로(다가오는 표적 앞에서 점점 작아지는 걸음 방지) */
+ if(!hold&&d>stop+(tg?MIN_STEP:1e-6)){const k=Math.min(step,d-stop)/d;let nx=a.x+dx*k,ny=a.y+dy*k;
+  {const lx=nx-anchor.x,ly=ny-anchor.y,l=Math.hypot(lx,ly);if(l>st.radius){nx=anchor.x+lx/l*st.radius;ny=anchor.y+ly/l*st.radius;}}
+  /* R1050 ② 꼼지락 방지: 반경 가장자리에 막혀 실제로 갈 거리가 MIN_STEP 칸 미만이면 걷지 않는다(가장자리에서 비비며 걷기 그림이 깜빡이던 것) */
+  const mv=Math.hypot(nx-a.x,ny-a.y);if(mv>=Math.min(MIN_STEP,d-stop-1e-9)&&mv>1e-4){a.x=nx;a.y=ny;out.moved=true;}}
  const lx=a.x-anchor.x,ly=a.y-anchor.y,l=Math.hypot(lx,ly);if(l>st.radius){a.x=anchor.x+lx/l*st.radius;a.y=anchor.y+ly/l*st.radius;}
  if(tg){out.target=tg;if(a.cd<=0){const inr=[];for(const[,e]of near){const dd=Math.hypot(e.x-a.x,e.y-a.y);if(dd<=st.range+1e-9)inr.push([dd,e]);}
    if(inr.length){inr.sort((p,q)=>p[0]-q[0]);out.hits=inr.slice(0,st.targets||1).map(p=>p[1]);a.cd=st.interval;}}}
@@ -148,10 +170,13 @@ function step(dt){const x=stage(),r=G(()=>room,null);if(!x||!r||!st.slots.length
  for(let i=0;i<st.slots.length;i++){const s=st.slots[i],a=allies[i],ss=slotStats(s);if(!a||!ss)continue;const an=anchorOf(s,x.centre,x.arena),px=a.x,py=a.y;
   if(!a.body||a.body.hero!==s.hero){a.body=mkBody(s.hero,a);a.beat=t+.6;}const b=a.body;if(!b)continue;
   if(fin(b.x)&&fin(b.y)&&Math.hypot(b.x-a.x,b.y-a.y)<6){a.x=b.x;a.y=b.y;}/* 돌진 스킬로 몸이 움직였으면 따라간다(think 가 이동 반경 안으로 다시 묶는다) */
-  const o=think(a,frozen?[]:r.enemies,dt,ss,an,{engaged:eng});a.cd=9;/* 자체 타격 규칙은 쓰지 않는다(엔진 공격을 부른다) */a.moving=o.moved;
+  const o=think(a,frozen?[]:r.enemies,dt,ss,an,{engaged:eng,hold:planted(b)});a.cd=9;/* 자체 타격 규칙은 쓰지 않는다(엔진 공격을 부른다) */a.moving=o.moved;
   b.x=a.x;b.y=a.y;b.moving=o.moved;{const mx=a.x-px,my=a.y-py,ml=Math.hypot(mx,my);b.moveVX150=o.moved&&ml>1e-6?mx/ml:0;b.moveVY150=o.moved&&ml>1e-6?my/ml:0;}/* 걷기 방향 그림은 입력 방향(moveVX150)을 먼저 본다 */for(const k of TIMERS)b[k]=Math.max(0,(+b[k]||0)-dt);
   if(o.moved&&!o.target&&!(b.attackAnim>0)&&!(b.skillAnim>0)&&typeof facing==='function')b.direction=G(()=>facing(a.x-px,a.y-py),b.direction);
-  if(o.target&&!frozen){try{as(a,()=>act(a,ss,t));}catch(err){fail(err);}}
+  else if(o.target&&!(b.attackAnim>0)&&!(b.skillAnim>0)&&fin(o.target.x)&&fin(o.target.y))b.direction=faceToward(b.direction,o.target.x-a.x,o.target.y-a.y);/* R1050 ①: 전투 중엔 걷거나 서 있어도 표적 쪽을 본다 */
+  if(o.target&&!frozen){const wasPlanted=planted(b);try{as(a,()=>act(a,ss,t));}catch(err){fail(err);}
+   /* R1050: 이 장면에 공격·스킬을 막 시작했으면 이 장면 걸음도 무른다(몸이 스킬로 직접 움직인 경우는 그대로) — 멈춘 뒤 시작한 공격(R895 규칙 5)으로 읽혀 걷기 꼬리가 공격 그림을 덮지 않는다 */
+   if(o.moved&&!wasPlanted&&planted(b)&&fin(px)&&fin(py)&&Math.hypot(b.x-a.x,b.y-a.y)<1e-6){a.x=px;a.y=py;b.x=px;b.y=py;o.moved=false;a.moving=false;b.moving=false;b.moveVX150=0;b.moveVY150=0;stats.plants=(stats.plants||0)+1;}}
   if(fin(b.x)&&fin(b.y)){const lx=b.x-an.x,ly=b.y-an.y,l=Math.hypot(lx,ly);if(l>ss.radius){b.x=an.x+lx/l*ss.radius;b.y=an.y+ly/l*ss.radius;}a.x=b.x;a.y=b.y;}else{b.x=a.x;b.y=a.y;}
   a.dir=b.direction;a.anim=b.attackAnim;a.prop.x=a.x;a.prop.y=a.y;}}
 
@@ -170,7 +195,13 @@ function drawAlly(p){const i=p.r720Slot,s=st.slots[i],a=allies[i];if(!s||!a||a.p
  // 몸 그리기: 엔진 영웅 그리기(drawHero)를 그 몸으로 부른다 → 자세·시트 이펙트·색 덧씌우기가 조종 영웅과 같다
  try{const b=a.body;if(!b){return;}const pose=G(()=>heroArt[s.hero].idle.front,null);
   if(!pose||!readyImage(pose)){if(!(a.loadAt>t-3)){a.loadAt=t;load(s.hero);}return;}
-  b.x=a.x;b.y=a.y;as(a,()=>drawHero());stats.draws++;stats.heroDraws++;
+  b.x=a.x;b.y=a.y;let rec=null,st0=-1;as(a,()=>{rec=G(()=>ctx,null);st0=Array.isArray(rec&&rec.commands)?rec.commands.length:-1;drawHero();if(st0>=0&&!(Array.isArray(rec.commands)&&rec.commands.length>=st0))st0=-1;sideFix();});stats.draws++;stats.heroDraws++;/* 기록 명령 목록은 drawHero 를 부르는 그 자리(몸 안)에서 읽는다 — 조형물 그리기 밖에서는 다른 목록이다 */
+  function sideFix(){
+  /* R1050 ①: 배치 영웅 좌우 잠금 — 상태마다 그림을 고르는 규칙(걷기=이동 방향·공격=가까운 적·서기=마지막 걸음)이 달라 0.6초 안에 좌우가 번갈아 뒤집히던 것.
+     몸 그림 좌우가 바뀐 지 SIDE_HOLD 초 안이면 이번 그리기의 영웅 그림들을 발 기준으로 되뒤집는다(판정·방향 값은 그대로). */
+  if(st0>=0)try{let best=null,bh=0;for(let i=st0;i<rec.commands.length;i++){const c=rec.commands[i];if(!c||c.kind!=='image'||c.owner?.kind!=='hero'||!Array.isArray(c.points)||c.points.length<4)continue;const sp=String(c.sourcePath||c.image?.src||'');if(/barrier|aura|glow|ring|fx\//i.test(sp))continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}
+   if(best){const side=sideOf(best.sourcePath||best.image?.src,best.points[1][0]<best.points[0][0]);a.face??={side:null,at:-9};
+    if(sideHold(a.face,side,t)&&fin(q.x)){for(let i=st0;i<rec.commands.length;i++){const c=rec.commands[i];if(c&&c.kind==='image'&&c.owner?.kind==='hero'&&Array.isArray(c.points))c.points=c.points.map(pt=>[2*q.x-pt[0],pt[1]]);}stats.sideHeld=(stats.sideHeld||0)+1;}}}catch(e){fail(e);}}
   // 레벨 눈금(머리 위 작은 점, 영웅 색)
   ctx.save();try{const n=ss.lv,w=3*ui,g=1.5*ui,tw=n*w+(n-1)*g;ctx.globalAlpha=.9;for(let k=0;k<n;k++){ctx.fillStyle='rgba(0,0,0,.7)';ctx.fillRect(q.x-tw/2+k*(w+g)-.5,q.y-h*1.06-.5,w+1,w+1);ctx.fillStyle=col;ctx.fillRect(q.x-tw/2+k*(w+g),q.y-h*1.06,w,w);}}finally{ctx.restore();}
  }catch(e){fail(e);}}
@@ -279,6 +310,6 @@ const copy=()=>({crystals:st.crystals,main:st.main||G(()=>player.hero,null),owne
 window.__STORYWORLD_HERO_DEFENSE_R720__=Object.freeze({revision:REV,enabled:()=>on,open,close,toggle,buy,placeHere,moveHere,upgrade,swapTo,qaGive:give,/* 그 영웅이 지금 이 판에 있는가(조종 영웅이거나 배치된 영웅) — 영웅별 덧씌우기가 '다른 몸을 그리는 차례'를 가릴 때 쓴다 */has:id=>{if(!here())return false;const m=cur.length?realP:P();return !!id&&((m&&m.hero===id)||st.slots.some(s=>s.hero===id));},/* R720-4: 영웅 전용 덧씌우기의 '다음 틱에 이어지는 기술'(회오리 날리기·폭발 예약 등)을 그 영웅의 몸으로 돌린다. 그 영웅이 배치 영웅이면 그 몸을 player 로 끼워 fn 을, 아니면(조종 영웅이거나 없음) 그대로 fn 을 부른다.
    배치 영웅은 조종 영웅과 같은 영웅일 수 없으므로(교대 규칙) 영웅 전용 파일의 상태는 한 몸 것뿐이다. */asHero:(id,fn)=>{if(typeof fn!=='function')return undefined;if(!on||cur.length||!here())return fn();const m=P();if(!m||m.r720Ally||m.hero===id)return fn();const i=st.slots.findIndex(s=>s&&s.hero===id),a=i>=0?allies[i]:null;if(a&&a.body&&validAlly(a)&&a.body.hero===id)return as(a,fn);return fn();},qaSkills,qaNudge,qaCast,qaFreeze:v=>{frozen=v===true;return frozen;},bodies:()=>allies.map(a=>a.body||null),
  state:()=>{if(here())ensure();return copy();},allies:()=>allies.map((a,i)=>({slot:i,x:a.x,y:a.y,cd:a.cd,dir:a.dir,anim:a.anim,moving:a.moving})),
- pure:Object.freeze({PRICES,MAX,order,price,tier,cost,slotStats,reward,clearBonus,fresh,doBuy,doPlace,doMove,doUpgrade,onHeroChange,anchorOf,think}),
+ pure:Object.freeze({PRICES,MAX,order,price,tier,cost,slotStats,reward,clearBonus,fresh,doBuy,doPlace,doMove,doUpgrade,onHeroChange,anchorOf,think,planted,faceToward,sideOf,sideHold}),
  inspect:()=>({revision:REV,on,mine,stats:{...stats},lastError})});
 })();

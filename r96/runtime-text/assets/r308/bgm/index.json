@@ -562,6 +562,222 @@
    "originalMd5": "aba5d8cf31bec1bf1130a15e559bab8e",
    "path": "assets/r308/bgm/pathetique-4.ogg",
    "origin": "R340"
+  },
+  "gugak-hwando": {
+   "title": "국악 메들리 · 환도의 의지 — 국악 BGM #64(비장한) + 국악 BGM #30(고독한) + 국악 BGM #129(고즈넉한)",
+   "composer": "주식회사 아이티앤",
+   "performer": "주식회사 아이티앤",
+   "license": "CC BY 4.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "source": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?wrtSn=13386804&menuNo=200020",
+   "licenseEvidence": "공유마당 글마다 \"주식회사 아이티앤 의 \"국악 BGM #N\" 은 CC BY 라이선스로 제공됩니다\"(창작 2025-10-10, 이용허락 CC BY 4.0, 상업 사용·변경 허용, 출처 표시). #64=wrtSn 13386804, #30=wrtSn 13386770, #129=wrtSn 13386869",
+   "parts": [
+    {
+     "title": "국악 BGM #64",
+     "wrtSn": "13386804",
+     "mood": "비장한",
+     "originalSha256": "f26d023306920af87eee11a622d51ef51bbb204d11e4329bb2ed021348aaa272",
+     "originalBytes": 2721856,
+     "source": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?wrtSn=13386804&menuNo=200020"
+    },
+    {
+     "title": "국악 BGM #30",
+     "wrtSn": "13386770",
+     "mood": "고독한",
+     "originalSha256": "5c378d3578cb2641f08594340a23539acbd1ac11a7abaa9ad58cd9430bf2d62d",
+     "originalBytes": 2520256,
+     "source": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?wrtSn=13386770&menuNo=200020"
+    },
+    {
+     "title": "국악 BGM #129",
+     "wrtSn": "13386869",
+     "mood": "고즈넉한",
+     "originalSha256": "b1c056c13946e0e865b8dbb0e2a9762d32e23e2644ad3f74af00a7f92a2fda5b",
+     "originalBytes": 2670016,
+     "source": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?wrtSn=13386869&menuNo=200020"
+    }
+   ],
+   "file": "gugak-hwando.ogg",
+   "bytes": 1581215,
+   "sha256": "c7809d5896d72065e7c9db225616cdd63aef5cb92f50b62003946f1c6c1b2457",
+   "durationSec": 189.5,
+   "lufs": -17.1,
+   "gain": 0.6,
+   "changes": "곡마다 음량 맞춤(-18 LUFS)·6kHz 위 -3dB 셸빙(어둡게), 3곡을 4초 교차 페이드로 이어 붙임, 전체 -18 LUFS·끝 2.5초 페이드, ogg vorbis 80kbps",
+   "originalSha256": "1ad21badef97cde93d624985632c4a044ca9ee3a6605ab1a018138e6f495024b",
+   "originalBytes": 7912128,
+   "path": "assets/r1056/bgm/gugak-hwando.ogg",
+   "origin": "R1056",
+   "why": "환도 자아의 탄생(restU2·last304·last305) 탐색 — 칼로 응축된 의지, 홀로 깨어나는 풀숲",
+   "koTitle": "국악 메들리 · 환도의 의지"
+  },
+  "gugak-hwando-climax": {
+   "title": "국악 메들리 · 성벽의 결전 — 국악 BGM #60(결전 직전의 상황) + 국악 BGM #244(배틀하는)",
+   "composer": "주식회사 아이티앤",
+   "performer": "주식회사 아이티앤",
+   "license": "CC BY 4.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "source": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?wrtSn=13386800&menuNo=200020",
+   "licenseEvidence": "공유마당 글마다 \"주식회사 아이티앤 의 \"국악 BGM #N\" 은 CC BY 라이선스로 제공됩니다\"(창작 2025-10-10, 이용허락 CC BY 4.0, 상업 사용·변경 허용, 출처 표시). #60=wrtSn 13386800, #244=wrtSn 13386984",
+   "parts": [
+    {
+     "title": "국악 BGM #60",
+     "wrtSn": "13386800",
+     "mood": "결전 직전의 상황",
+     "originalSha256": "76046cd09372b1c94417537824af9c40948e6fa2cde1fe29fd5e60b42df1608a",
+     "originalBytes": 2680576,
+     "source": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?wrtSn=13386800&menuNo=200020"
+    },
+    {
+     "title": "국악 BGM #244",
+     "wrtSn": "13386984",
+     "mood": "배틀하는",
+     "originalSha256": "55a3f890262f648cf1cb20878a2d835e8d4748fd6c91b340b6e05ee9ff1d5370",
+     "originalBytes": 2626816,
+     "source": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?wrtSn=13386984&menuNo=200020"
+    }
+   ],
+   "file": "gugak-hwando-climax.ogg",
+   "bytes": 1108546,
+   "sha256": "e3b3768d44a37e4d0d46056c51f864027695b844b62efc4d2b66b8192d6e17a3",
+   "durationSec": 128.48,
+   "lufs": -17.1,
+   "gain": 0.6,
+   "changes": "곡마다 음량 맞춤(-18 LUFS)·6kHz 위 -3dB 셸빙(어둡게), 2곡을 4초 교차 페이드로 이어 붙임, 전체 -18 LUFS·끝 2.5초 페이드, ogg vorbis 80kbps",
+   "originalSha256": "30f57270ba8705e2f03d1ec5b65ed6b06f983877b19b4946f5703c49d37002b1",
+   "originalBytes": 5307392,
+   "path": "assets/r1056/bgm/gugak-hwando-climax.ogg",
+   "origin": "R1056",
+   "why": "환도 절정(last301) — 고블린 두목·타락천사 기사, 성벽 밖으로 떨어짐",
+   "koTitle": "국악 메들리 · 성벽의 결전"
+  },
+  "gugak-village": {
+   "title": "국악 메들리 · 잠들지 못하는 마을 — 국악 BGM #25(음침한 섬뜩한) + 국악 BGM #226(숨어서 지켜보는) + 국악 BGM #233(무서운)",
+   "composer": "주식회사 아이티앤",
+   "performer": "주식회사 아이티앤",
+   "license": "CC BY 4.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "source": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?wrtSn=13386765&menuNo=200020",
+   "licenseEvidence": "공유마당 글마다 \"주식회사 아이티앤 의 \"국악 BGM #N\" 은 CC BY 라이선스로 제공됩니다\"(창작 2025-10-10, 이용허락 CC BY 4.0, 상업 사용·변경 허용, 출처 표시). #25=wrtSn 13386765, #226=wrtSn 13386966, #233=wrtSn 13386973",
+   "parts": [
+    {
+     "title": "국악 BGM #25",
+     "wrtSn": "13386765",
+     "mood": "음침한 섬뜩한",
+     "originalSha256": "af79b2979066d6a65103e4650b597c3e7c4268120f777504575f47d741bd9cc4",
+     "originalBytes": 2915776,
+     "source": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?wrtSn=13386765&menuNo=200020"
+    },
+    {
+     "title": "국악 BGM #226",
+     "wrtSn": "13386966",
+     "mood": "숨어서 지켜보는",
+     "originalSha256": "0d84551462dfc304fcaf3eb7f3f5d411f95a03e8ba0c3ab8382db1040fbfd12b",
+     "originalBytes": 2718976,
+     "source": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?wrtSn=13386966&menuNo=200020"
+    },
+    {
+     "title": "국악 BGM #233",
+     "wrtSn": "13386973",
+     "mood": "무서운",
+     "originalSha256": "484a92e0dd4518c2fa2454e69dd09b0c2fb3d096082e8defa7da3cb5cffbaeff",
+     "originalBytes": 2708416,
+     "source": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?wrtSn=13386973&menuNo=200020"
+    }
+   ],
+   "file": "gugak-village.ogg",
+   "bytes": 1717995,
+   "sha256": "e00ec0c3a1e129ede84c2bf0d95eac020f37ca725caebe0bb3fb8ba6a7ff75f1",
+   "durationSec": 200.27,
+   "lufs": -17.0,
+   "gain": 0.6,
+   "changes": "곡마다 음량 맞춤(-18 LUFS)·6kHz 위 -3dB 셸빙(어둡게), 3곡을 4초 교차 페이드로 이어 붙임, 전체 -18 LUFS·끝 2.5초 페이드, ogg vorbis 80kbps",
+   "originalSha256": "74a9ee073661303985cc3613f007d6935c1bb62470d101d604dccbf874a6daa6",
+   "originalBytes": 8343168,
+   "path": "assets/r1056/bgm/gugak-village.ogg",
+   "origin": "R1056",
+   "why": "잠들지 못하는 마을(last302) 탐색 — 해안에서 깨어 들어선 소복 차림 주민의 마을",
+   "koTitle": "국악 메들리 · 잠들지 못하는 마을"
+  },
+  "gugak-village-climax": {
+   "title": "국악 메들리 · 불면귀 — 국악 BGM #220(정신이 위태로운) + 국악 BGM #58(세상의 끝의 혼란)",
+   "composer": "주식회사 아이티앤",
+   "performer": "주식회사 아이티앤",
+   "license": "CC BY 4.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "source": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?wrtSn=13386960&menuNo=200020",
+   "licenseEvidence": "공유마당 글마다 \"주식회사 아이티앤 의 \"국악 BGM #N\" 은 CC BY 라이선스로 제공됩니다\"(창작 2025-10-10, 이용허락 CC BY 4.0, 상업 사용·변경 허용, 출처 표시). #220=wrtSn 13386960, #58=wrtSn 13386798",
+   "parts": [
+    {
+     "title": "국악 BGM #220",
+     "wrtSn": "13386960",
+     "mood": "정신이 위태로운",
+     "originalSha256": "077a4cb8910216a3508ae4516380cf0f032a6c4dbf94381b4f3d1b7f799c2aa5",
+     "originalBytes": 2752576,
+     "source": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?wrtSn=13386960&menuNo=200020"
+    },
+    {
+     "title": "국악 BGM #58",
+     "wrtSn": "13386798",
+     "mood": "세상의 끝의 혼란",
+     "originalSha256": "82bd0407a2c7df887bf4bcb27e02f5d685174a781cfbb4ccfa169ed7967af25c",
+     "originalBytes": 2818816,
+     "source": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?wrtSn=13386798&menuNo=200020"
+    }
+   ],
+   "file": "gugak-village-climax.ogg",
+   "bytes": 1173612,
+   "sha256": "94c34af55cfb0f0edc64387ade2a987a6034cf43f7d5a6c4079e70c24f849eb5",
+   "durationSec": 135.08,
+   "lufs": -17.0,
+   "gain": 0.6,
+   "changes": "곡마다 음량 맞춤(-18 LUFS)·6kHz 위 -3dB 셸빙(어둡게), 2곡을 4초 교차 페이드로 이어 붙임, 전체 -18 LUFS·끝 2.5초 페이드, ogg vorbis 80kbps",
+   "originalSha256": "9a7c907eb72cef5a4c607d5d7eef8f61134a19e4c060db28a29393a98468bbfe",
+   "originalBytes": 5571392,
+   "path": "assets/r1056/bgm/gugak-village-climax.ogg",
+   "origin": "R1056",
+   "why": "불면귀 절정(last303) — 잠들지 못하는 정신, 주민과 불면귀를 가려 물리침",
+   "koTitle": "국악 메들리 · 불면귀"
+  },
+  "gugak-gyeongseong-climax": {
+   "title": "국악 메들리 · 경성의 밤 대면 — 국악 BGM #154(긴장감을 높이는) + 국악 BGM #97(불길한 느낌)",
+   "composer": "주식회사 아이티앤",
+   "performer": "주식회사 아이티앤",
+   "license": "CC BY 4.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "source": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?wrtSn=13386894&menuNo=200020",
+   "licenseEvidence": "공유마당 글마다 \"주식회사 아이티앤 의 \"국악 BGM #N\" 은 CC BY 라이선스로 제공됩니다\"(창작 2025-10-10, 이용허락 CC BY 4.0, 상업 사용·변경 허용, 출처 표시). #154=wrtSn 13386894, #97=wrtSn 13386837",
+   "parts": [
+    {
+     "title": "국악 BGM #154",
+     "wrtSn": "13386894",
+     "mood": "긴장감을 높이는",
+     "originalSha256": "031660dbc8139c6b83d4f364793f0bc4affeb3a0cc5f0678bfb997e2bf79694a",
+     "originalBytes": 2528896,
+     "source": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?wrtSn=13386894&menuNo=200020"
+    },
+    {
+     "title": "국악 BGM #97",
+     "wrtSn": "13386837",
+     "mood": "불길한 느낌",
+     "originalSha256": "e4a4b5a170ce32b03dc04854a439ccfc7e21ff98276e16024f8d9209f464af4f",
+     "originalBytes": 2622016,
+     "source": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?wrtSn=13386837&menuNo=200020"
+    }
+   ],
+   "file": "gugak-gyeongseong-climax.ogg",
+   "bytes": 1074365,
+   "sha256": "ad2081552d28596df952e408c0ab350bbc7a42ca1b427ff169d457a276a5837a",
+   "durationSec": 124.57,
+   "lufs": -17.0,
+   "gain": 0.6,
+   "changes": "곡마다 음량 맞춤(-18 LUFS)·6kHz 위 -3dB 셸빙(어둡게), 2곡을 4초 교차 페이드로 이어 붙임, 전체 -18 LUFS·끝 2.5초 페이드, ogg vorbis 80kbps",
+   "originalSha256": "7d53618e73d0c7205de3d217788a113aed2d5915dca0338960257fa020095b97",
+   "originalBytes": 5150912,
+   "path": "assets/r1056/bgm/gugak-gyeongseong-climax.ogg",
+   "origin": "R1056",
+   "why": "사몽 S-05 경성의 밤 대면 구역(절정). 탐색은 녹턴 Op.48-1 그대로",
+   "koTitle": "국악 메들리 · 경성의 밤 대면"
   }
  },
  "episodes": [
@@ -671,9 +887,9 @@
     "last305",
     "last301"
    ],
-   "main": "winter",
+   "main": "gugak-hwando",
    "climax": {
-    "last301": "chopin-etude-cello"
+    "last301": "gugak-hwando-climax"
    }
   },
   {
@@ -684,9 +900,9 @@
     "last302",
     "last303"
    ],
-   "main": "chopin-nocturne-15-3",
+   "main": "gugak-village",
    "climax": {
-    "last303": "chopin-cello-largo"
+    "last303": "gugak-village-climax"
    }
   },
   {
@@ -935,32 +1151,32 @@
   "restU2": {
    "episode": "m6",
    "role": "main",
-   "track": "winter"
+   "track": "gugak-hwando"
   },
   "last304": {
    "episode": "m6",
    "role": "main",
-   "track": "winter"
+   "track": "gugak-hwando"
   },
   "last305": {
    "episode": "m6",
    "role": "main",
-   "track": "winter"
+   "track": "gugak-hwando"
   },
   "last301": {
    "episode": "m6",
    "role": "climax",
-   "track": "chopin-etude-cello"
+   "track": "gugak-hwando-climax"
   },
   "last302": {
    "episode": "m7",
    "role": "main",
-   "track": "chopin-nocturne-15-3"
+   "track": "gugak-village"
   },
   "last303": {
    "episode": "m7",
    "role": "climax",
-   "track": "chopin-cello-largo"
+   "track": "gugak-village-climax"
   },
   "restLast3": {
    "episode": "m8",
@@ -1132,7 +1348,7 @@
    "S-05": {
     "name": "S-05. 경성의 밤",
     "main": "nocturne-c-minor",
-    "climax": "mozart40"
+    "climax": "gugak-gyeongseong-climax"
    },
    "S-06": {
     "name": "S-06. 네오 서울 — 아직 오지 않은 종말",
@@ -1189,5 +1405,21 @@
    "main": "danse-macabre-1925"
   }
  },
- "fallbackTrack": "air"
+ "fallbackTrack": "air",
+ "r1056": {
+  "rule": "동양 테마 지역(환도 자아의 탄생·잠들지 못하는 마을·사몽 경성의 밤 대면)만 국악. 나머지 맵은 그대로.",
+  "was": {
+   "maps": {
+    "restU2": "winter",
+    "last304": "winter",
+    "last305": "winter",
+    "last301": "chopin-etude-cello",
+    "last302": "chopin-nocturne-15-3",
+    "last303": "chopin-cello-largo"
+   },
+   "samong": {
+    "S-05|climax": "mozart40"
+   }
+  }
+ }
 }

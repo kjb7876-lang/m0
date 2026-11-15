@@ -9966,6 +9966,29 @@
     "assets/r1049/sfx/step-2.ogg",
     "assets/r1049/sfx/step-3.ogg",
     "assets/r1049/sfx/step-4.ogg",
+    "ego-secret-r1057.js",
+    "age15-r1054.js",
+    "age15-text-r1054.js",
+    "assets/r381/voice/013a96781c12f039.mp3",
+    "assets/r381/voice/1ae86c7e2fda2f5a.mp3",
+    "assets/r381/voice/2c0fa0a59ea088db.mp3",
+    "assets/r381/voice/3ba78f518960fbbf.mp3",
+    "assets/r381/voice/6f395aafe5815570.mp3",
+    "assets/r381/voice/7e4fb0e544b3dfcb.mp3",
+    "assets/r381/voice/9a18d153a5594672.mp3",
+    "assets/r381/voice/9f675e3ec7b3c56d.mp3",
+    "assets/r381/voice/a3340b484d6ed34a.mp3",
+    "assets/r381/voice/bb94b9e85af7255b.mp3",
+    "assets/r381/voice/ce8d4077e8bbe28b.mp3",
+    "assets/r381/voice/e2199a879025ec8c.mp3",
+    "assets/r381/voice/e6d1225dbedcb640.mp3",
+    "assets/r381/voice/fd5a31cf22856c2d.mp3",
+    "assets/r1056/bgm/CREDITS.md",
+    "assets/r1056/bgm/gugak-gyeongseong-climax.ogg",
+    "assets/r1056/bgm/gugak-hwando-climax.ogg",
+    "assets/r1056/bgm/gugak-hwando.ogg",
+    "assets/r1056/bgm/gugak-village-climax.ogg",
+    "assets/r1056/bgm/gugak-village.ogg",
     "ink-wash-r1055.js"
   ],
   "mediaPaths": [
@@ -11041,5 +11064,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "a6ce6e0a65cf668852385b8c49ecc92ce2596b42e2b721a13c7ab2a1a17882d3"
+  "runtimeManifestSHA256": "f072540af298644c26e8b874b16371a7873ecd5634dbe8710b5a9e61f27a3baa"
 }
