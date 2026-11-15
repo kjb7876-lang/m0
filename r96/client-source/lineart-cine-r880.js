@@ -511,7 +511,7 @@ function css(){if(document.getElementById('r880Css'))return;const s=document.cre
  +'#r880.cinema .ttl{display:none}'
  +'#r880 .skip{position:absolute;right:max(16px,3vw);top:max(12px,2.4vh);padding:8px 16px;font:14px "Malgun Gothic",sans-serif;color:#efe9df;background:rgba(14,13,16,.66);border:1px solid #6a655c;border-radius:6px;cursor:pointer}'
  +'@media (prefers-reduced-motion: reduce){#r880,#r880 .cap{transition:none}#r880 .grain{animation:none}#r880 .ttl{animation-duration:.01s;animation-delay:0s;opacity:0}}';document.head.appendChild(s);}
-function buildScene(o){o.k=stageKit(o.svg,o.def,o.lite);o.draw=o.def.build(o.k,kit);o.simT=0;o.draw(0,1/60);o.k.applyCam(0);o.k.fade.setAttribute('opacity','1');}
+function buildScene(o){o.k=stageKit(o.svg,o.def,o.lite);o.draw=o.def.build(o.k,kit);o.simT=0;o.draw(0,1/60);o.k.applyCam(0);o.k.fade.setAttribute('opacity','1');try{window.__STORYWORLD_LINEART_INK_R1081__?.dress?.(o.svg,o.root);}catch(_){}}/* R1081: 수묵화풍(색만 옮김, 꺼져 있으면 아무 일 없음) */
 // t 초까지 장면을 진행한다(1/30초 걸음으로 적분 — 걷기·용수철이 프레임 속도와 무관하게 같게). 되감기는 처음부터 다시 그린다.
 // ── R888 자막 음성(사용자 2026-11-12 "모든영상 오디오음성도 나오게") ──
 // 자막은 정본 문장 그대로라 스토리 모드 녹음(R381)을 그대로 튼다(새 음성 파일 없음). 녹음이 자막 시간보다 길어서(평균 5.2초)
@@ -587,7 +587,7 @@ if(typeof tick==='function'){const base=tick;tick=function(...a){if(active){if(a
  const out=base.apply(this,a);try{poll();}catch(e){fail(e);}return out;};}
 function add(def){try{if(!def||typeof def.zone!=='string'||typeof def.build!=='function'||!Array.isArray(def.subs)||!(def.D>0))throw Error('bad scene '+def?.zone);SCENES.set(def.zone,Object.freeze({...def,subs:Object.freeze(def.subs.map(s=>Object.freeze([...s])))}));return true;}catch(e){fail(e);return false;}}
 function setPrefs(p){if(p&&typeof p.on==='boolean')prefs.on=p.on;if(p?.resetSeen)prefs.seen=[];save();return{on:prefs.on,seen:[...prefs.seen]};}
-window.__STORYWORLD_LINEART_R880__=Object.freeze({revision:REV,KEY,kit,add,zones:()=>[...SCENES.keys()],scene:z=>{const d=SCENES.get(z);return d?{zone:d.zone,D:d.D,subs:d.subs.map(s=>[...s])}:null;},
+window.__STORYWORLD_LINEART_R880__=Object.freeze({revision:REV,KEY,kit,stage:(svg,def,lite)=>stageKit(svg,def,!!lite),/* R1080: 영상 대신 그리는 장면이 같은 무대를 쓴다 */add,zones:()=>[...SCENES.keys()],scene:z=>{const d=SCENES.get(z);return d?{zone:d.zone,D:d.D,subs:d.subs.map(s=>[...s])}:null;},
  titleFor,eligible,play:(o={})=>play({force:true,...o}),skip:()=>{if(!active)return false;finish(active,'skip');return true;},
  seek:t=>{if(!active||!Number.isFinite(t))return false;active.at=clamp(t,0,active.def.D);return true;},set:setPrefs,
  inspect:()=>({revision:REV,prefs:{on:prefs.on,seen:[...prefs.seen]},active:!!active,zone:active?.zone||null,t:active?active.simT:null,lite:active?active.lite:null,cinema:active?active.root.classList.contains('cinema'):null,pending:!!pending,stats:{...stats},voice:{on:!!active?.plan,speaking:!!active?.speak,...vstats},lastError})});
