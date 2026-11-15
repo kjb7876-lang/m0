@@ -23,17 +23,23 @@ for(const z of zones){try{await go(p,z);}catch(e){res.push({zone:z,error:'enter 
     Object.defineProperty(B,'hitTimer',{configurable:true,enumerable:true,get(){const r=window.__CR;if(inDraw&&r&&r.phase==='orbit'&&atk()){r.atkReads++;if(v>0)r.atkHitReads++;}return v;},set(x){v=x;}});
     const base=drawEnemy;drawEnemy=function(e,...a){if(e!==window.__CB)return base.call(this,e,...a);inDraw=true;try{return base.call(this,e,...a);}finally{inDraw=false;}};}
    const F=window.__STORYWORLD_ENEMY_FACE_R444__;const atk=()=>!!(B.attack&&!B.attack.storyWorldPose5)||B.rangedWindup>0||!!(B.r61Action&&time<B.r61Action.endAt);
-   let px=player.x,py=player.y;const fx=player.x,fy=player.y;
-   const tick=()=>{const r=window.__CR;if(r.done)return;const t=time-r.t0;player.hp=player.maxHp;
-    if(r.phase==='still'){player.x=fx;player.y=fy;const d=Math.hypot(player.x-B.x,player.y-B.y);r.dsum+=d;r.dn++;
-     if(r.prevD!=null){if(d>r.prevD+1e-3&&!atk())r.outRun+=Math.max(0,Math.min(.1,time-(r.lt??time)));else if(d<r.prevD-1e-3){if(r.outRun>=.25)r.retreats++;r.outRun=0;}}if(r.prevD!=null&&!atk()){const dd=d-r.prevD,dir=dd>1e-3?1:dd<-1e-3?-1:0;if(dir&&r.dir0&&dir!==r.dir0)r.inOut=(r.inOut||0)+1;if(dir)r.dir0=dir;}r.prevD=d;r.lt=time;
-     if(t>=6){if(r.outRun>=.25)r.retreats++;r.phase='orbit';r.t1=time;r.last=null;}}
-    else{const u=time-r.t1;const a=.5*u;player.x=B.x+Math.cos(a)*2.4;player.y=B.y+Math.sin(a)*2.4;
+   const fx=player.x,fy=player.y;
+   // 영웅 위치는 게임 틱 안(tickEnemies 직전)에서 정한다 — 게임이 매 프레임 영웅 자리를 다시 잡는 지역(자동 이동 등)에서도 AI·그리기가 같은 자리를 보게
+   window.__CStep=()=>{const r=window.__CR;if(!r||r.done)return;const t=time-r.t0;player.hp=player.maxHp;
+    if(r.phase==='still'){player.x=fx;player.y=fy;if(t>=6){if(r.outRun>=.25)r.retreats++;r.phase='orbit';r.t1=time;r.last=null;}}
+    if(r.phase==='orbit'){const u=time-r.t1;const a=.5*u;player.x=B.x+Math.cos(a)*2.4;player.y=B.y+Math.sin(a)*2.4;
      if(time-r.hitT>=.25){r.hitT=time;B.hp=Math.max(B.hp,B.maxHp*.5);hitEnemy(B,1,{kind:'probe-r1053'});}
-     const k=B.attack&&!B.attack.storyWorldPose5?B.attack:B.rangedWindup>0?'rw':(B.r61Action&&time<B.r61Action.endAt?B.r61Action:null);if(k&&k!==r.lastKey)r.attacks++;r.lastKey=k;
-     const s=F?.state(B);if(s){if(r.last&&s.side!==r.last)r.flips++;r.last=s.side;if(!atk()){const h=(player.x-player.y)-(B.x-B.y);if(Math.abs(h)>.6){r.n++;if((h>0?'right':'left')!==s.side)r.away++;}}}
-     if(u>=8||!(B.hp>0))r.done=true;}
-    if(!r.done)requestAnimationFrame(tick);};requestAnimationFrame(tick);},{id,sw});
+     if(u>=8||!(B.hp>0))r.done=true;}};
+   // 측정은 그리는 순간(drawEnemy) — 화면에 나간 방향·거리
+   window.__CDraw=()=>{const r=window.__CR;if(!r||r.done)return;const d=Math.hypot(player.x-B.x,player.y-B.y);
+    if(r.phase==='still'){r.dsum+=d;r.dn++;
+     if(r.prevD!=null){if(d>r.prevD+1e-3&&!atk())r.outRun+=Math.max(0,Math.min(.1,time-(r.lt??time)));else if(d<r.prevD-1e-3){if(r.outRun>=.25)r.retreats++;r.outRun=0;}}
+     if(r.prevD!=null&&!atk()){const dd=d-r.prevD,dir=dd>.01?1:dd<-.01?-1:0;if(dir&&r.dir0&&dir!==r.dir0)r.inOut=(r.inOut||0)+1;if(dir)r.dir0=dir;}r.prevD=d;r.lt=time;}
+    else{const k=B.attack&&!B.attack.storyWorldPose5?B.attack:B.rangedWindup>0?'rw':(B.r61Action&&time<B.r61Action.endAt?B.r61Action:null);if(k&&k!==r.lastKey)r.attacks++;r.lastKey=k;
+     const s=F?.state(B);if(s){if(r.last&&s.side!==r.last)r.flips++;r.last=s.side;if(!atk()){const h=(player.x-player.y)-(B.x-B.y);if(Math.abs(h)>.6){r.n++;if((h>0?'right':'left')!==s.side)r.away++;}}}}};
+   if(!window.__CInst){window.__CInst=1;const tb=tickEnemies;tickEnemies=function(...a){try{window.__CStep?.();}catch(_){}return tb.apply(this,a);};
+    const db=drawEnemy;drawEnemy=function(e,...a){const out=db.call(this,e,...a);try{if(e===window.__CB)window.__CDraw?.();}catch(_){}return out;};}
+  },{id,sw});
   const r0=Date.now();while(!(await p.evaluate(()=>!!window.__CR.done))&&Date.now()-r0<150000){await skip(p);await p.waitForTimeout(400);}
   const r=await p.evaluate(()=>{const r=window.__CR,B=window.__CB;return{name:B.name,ai:B.ai,inOut:r.inOut||0,boss:!!B.boss,mid:!!B.midboss,done:!!r.done,meanD:r.dn?+(r.dsum/r.dn).toFixed(2):null,retreats:r.retreats,awayPct:r.n?+(100*r.away/r.n).toFixed(1):null,flips:r.flips,atkHitPct:r.atkReads?+(100*r.atkHitReads/r.atkReads).toFixed(1):null,attacks:r.attacks};});
   res.push({zone:z,id,sw,...r});console.log(((Date.now()-t0)/1000|0)+'s',JSON.stringify(res.at(-1)));fs.writeFileSync(out,JSON.stringify(res,null,1));}}}
