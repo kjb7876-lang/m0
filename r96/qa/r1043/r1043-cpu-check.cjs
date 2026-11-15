@@ -12,6 +12,7 @@ ok('runtime copy identical to client-source',RT('perf7-r1043.js')===src&&src.len
 const html=RT('index.html')||'';
 ok('script tag once, on its own line right after mobile-tier-r1023',html.includes('<script src="./mobile-tier-r1023.js"></script>\n<script src="./perf7-r1043.js"></script>\n')&&html.split('perf7-r1043.js').length===2);
 ok('in the public verify list and the CI workflow',/'perf7-r1043\.js'/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8'))&&/qa\/r1043\/r1043-cpu-check\.cjs/.test(fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8')));
+ok('R1043b: hospital test section hidden from settings (user 11-15 04:02Z 허락)',/DEV_HIDE=\[[^\]]*'#hospitalTestSettingsR84'/.test(src));
 ok('presentation only: no damage / hp / save writes',src.length>0&&!/hitEnemy|\.hp\s*=|saveGame\(|player\.\w+\s*=/.test(src));
 
 // ---- 샌드박스 ----
