@@ -105,4 +105,31 @@ ok('settings select has no gore option under age15',/age15|A15/.test(C('mob-deat
  ok('captions kept by lineart remain in patched canon (몸은 약을 원했고…)',/몸은 약을 원했고, 천사는 그 약액을 성수라고 믿게 했다\./.test(all)&&/뿔 끝마다 둥근 것이 매달려 흔들리고 있었다\./.test(all));
  const r881=C('lineart-scenes-r881.js');ok('cutscene captions/labels no longer name the drug or the heads',!/펜타닐/.test(r881)&&!/죽은 수호자들의 머리/.test(r881));
  const P2=has2?vm.runInContext('__STORYWORLD_AGE15_TEXT_R1054__.inspect()',H):{};ok('text patch reports 4 applied, 0 missed',P2.applied===4&&P2.missed===0,P2);}
+// ---- R1054-2 "자막이랑 모든것도 맞춰야해": 예전 판 데이터·음성까지 ----
+{const idx=RT('index.html');const grab=id=>{const m=new RegExp('<script[^>]*id="'+id+'"[^>]*>([\\s\\S]*?)</script>').exec(idx);return m?m[1]:'';};
+ const portable=grab('portable-data'),r54=grab('story-campaign-data-r54'),r75=grab('story-data-r75');
+ ok('found the three older story data blocks in index.html',portable.length>1000&&r54.length>1000&&r75.length>1000,[portable.length,r54.length,r75.length]);
+ const el={textContent:portable};const K={window:{},document:{getElementById:id=>id==='portable-data'?el:null},TextEncoder};K.window=K;vm.createContext(K);
+ vm.runInContext(r54,K);vm.runInContext(r75,K);vm.runInContext(C('story-canon-r106-data.js'),K);
+ const OLDRE=[/죽은 수호자들의 머리/,/주사기에 손을 대/,/펜타닐이라는 이름이 적혀/,/펜타닐이라고 적힌/,/고통이 멀어지고/,/이내 고통이 줄어들었다/,/자기 절단의 광경/,/자해의 흉터/];
+ ok('older data had the old wording before the patch (test is meaningful)',OLDRE.slice(0,3).every(re=>re.test(portable)&&re.test(JSON.stringify(K.__STORYWORLD_STORY_DATA_R75__))));
+ if(has('age15-text-r1054.js'))vm.runInContext(C('age15-text-r1054.js'),K);
+ vm.runInContext(C('samong-text-r103.js'),K);vm.runInContext(C('voice-r381-data.js'),K);
+ const blob=[el.textContent,JSON.stringify(K.__STORYWORLD_CAMPAIGN_DATA_R54__),JSON.stringify(K.__STORYWORLD_STORY_DATA_R75__),JSON.stringify(K.__STORYWORLD_STORY_CANON_R106__),JSON.stringify(K.__STORYWORLD_SAMONG_TEXT_R103__)].join('\n');
+ for(const re of OLDRE)ok('all data sources (portable·R54·R75·canon·samong) free of '+re.source,!re.test(blob));
+ ok('portable-data still valid JSON after the patch',(()=>{try{JSON.parse(el.textContent);return true;}catch(_){return false;}})());
+ ok('older versions carry the same softened wording',/쓰러진 수호자들이 남긴 흔적이 매달려/.test(blob)&&/끝내 그 유혹을 이기지 못했다/.test(blob));
+ const T=K.__STORYWORLD_AGE15_TEXT_R1054__,crypto=require('crypto'),sha=t=>crypto.createHash('sha1').update(t.trim()).digest('hex').slice(0,16);
+ ok('sha1 id matches voice-r381 idOf',!!T&&['기억이 거의 남아 있지 않았다.','그것들은 죽은 수호자들의 머리였다.','가나다 abc …'].every(s=>T.idOf(s)===sha(s)));
+ const ids=new Set(K.__STORYWORLD_VOICE_R381_DATA__.ids),D0={window:{}};D0.window=D0;vm.createContext(D0);vm.runInContext(C('voice-r381-data.js'),D0);const ids0=new Set(D0.__STORYWORLD_VOICE_R381_DATA__.ids);
+ const oldLines=['그것들은 죽은 수호자들의 머리였다.','서랍 깊은 곳에서 펜타닐이라고 적힌 약병을 찾았다.','이내 고통이 줄어들었다.','나는 그 참혹한 자기 절단의 광경을 제단 아래에서 피가 식는 기분으로 올려다보았다.'];
+ const recorded=oldLines.filter(s=>ids0.has(sha(s)));
+ ok('some old lines had recordings before (test is meaningful)',recorded.length>=2,recorded);
+ ok('old-wording recordings are removed from the voice list (never played)',recorded.every(s=>!ids.has(sha(s))),recorded.filter(s=>ids.has(sha(s))));
+ ok('unchanged lines keep their recordings',['손끝이 떨리고 혀가 말랐다.','몸은 약을 원했고, 천사는 그 약액을 성수라고 믿게 했다.'].every(s=>!ids0.has(sha(s))||ids.has(sha(s))));
+ const removed=[...ids0].filter(i=>!ids.has(i)).length;ok('only a handful of recordings blocked (1..30)',removed>=1&&removed<=30,removed);
+ // 서사 창 안전망
+ const Q={window:{},TextEncoder,seen:null};Q.window=Q;vm.createContext(Q);vm.runInContext('function playScenes(list){seen=list.map(s=>s.text);}',Q);if(has('age15-text-r1054.js'))vm.runInContext(C('age15-text-r1054.js'),Q);
+ vm.runInContext("playScenes([{text:'늪을 지배하는 악마의 뿔에는 죽은 수호자들의 머리가 매달려 있었다.'},{text:'평범한 문장.'}])",Q);
+ ok('scene window safety net rewrites old wording, leaves others',Array.isArray(Q.seen)&&!/죽은 수호자들의 머리/.test(Q.seen[0])&&Q.seen[1]==='평범한 문장.',Q.seen);}
 console.log(`\nR1054 age15: ${pass} passed, ${fail} failed`);process.exit(fail?1:0);
