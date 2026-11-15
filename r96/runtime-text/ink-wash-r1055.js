@@ -10,13 +10,12 @@
 //  판정·피해·AI·저장·서사·그림 원본은 바꾸지 않는다. ctx.filter 는 쓰지 않는다. 숫자는 모두 clamp(NaN·Infinity 가 그리기로 가지 않게).
 // R1055c(사용자 2026-11-15 14:40Z "색감좋네 저걸로 진행해 모든맵"·"무한생존모드도"·"고정은 하지말고 저화풍을 기본으로하고 키고끌수있도록 설정에서"):
 //  · 기본 = 켜짐(모든 지역, 모든 모드·층 — 이야기·사몽·무한생존). 저장된 값이 있으면 그 값이 이긴다(끈 사람은 꺼진 채).
-//  · 간이설정에 '맵 수묵화풍' 줄(켜기·끄기 + 화풍 고르기). 첫 화면 단추는 그대로 둔다(같은 저장값).
+//  · 간이설정에 '맵 수묵화풍' 줄(켜기·끄기 + 화풍 고르기). 첫 화면 단추는 R1055d 에서 없앴다.
 //  · 기본 켜짐이 낮은 사양을 느리게 하지 않게 성능 1·2단계(휴대폰 자동의 가장 낮은 단계 포함)는 아예 계산하지 않는다(K=0, 재질도 건드리지 않음). 3·4단계는 종이 결만, 5단계부터 전체.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_INK_WASH_R1055__)return;
-const REV='R1055-ink-wash-3',KEY='storyworld.r1055.inkWash';
+const REV='R1055-ink-wash-4',KEY='storyworld.r1055.inkWash';
 const MODES=Object.freeze(['off','east','all']),ZONES=Object.freeze(['last302','last303']);
-const LABEL=Object.freeze({off:'꺼짐',east:'동양 지역만',all:'모든 지역'});
 // 화풍(사용자 2026-11-15 12:36Z "눈조금덜아프고 퀄리티높아보이게 여러 유명화풍참고"): 낱알 그레인·끊기는 농담 단계·거친 먹선을 없애고 대비를 눌렀다.
 //  값은 '먹·중간·종이 3점 농담 + 원래 색 조금' 으로만 다르다(이름은 참고한 화풍의 느낌일 뿐, 특정 그림을 베끼지 않는다).
 //  어두운 곳을 많이 띄우면 바닥 잔무늬가 같이 커져 오히려 눈이 피로하다(헤드리스 실측) → 밝기 곡선은 완만하게(gamma .68~.76), 가장 밝은 값은 .74 아래로 눌렀다. 잔입자는 끔·켬을 번갈아 재서 끈 화면 수준임을 확인한다(qa/r1055 브라우저).
@@ -30,7 +29,7 @@ const STYLES=Object.freeze({
 const STYLE_IDS=Object.freeze(Object.keys(STYLES)),DEF_STYLE='jg';
 let prefs={mode:'all',style:DEF_STYLE};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object'&&!Array.isArray(s)){if(MODES.includes(s.mode))prefs.mode=s.mode;if(typeof s.style==='string'&&STYLE_IDS.includes(s.style))prefs.style=s.style;}}catch(_){}
-const stats={frames:0,patched:0,scans:0,onFrames:0,titleButtons:0,errors:0};let lastError=null,disposed=false;
+const stats={frames:0,patched:0,scans:0,onFrames:0,errors:0};let lastError=null,disposed=false;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),num=(v,d=0)=>Number.isFinite(v)?v:d,c01=v=>clamp(num(v),0,1);
 function save(){try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
@@ -129,18 +128,8 @@ function wrapOnce(t){if(!t||wrapped.has(t)||typeof t.render!=='function')return;
 function wrapAll(){if(disposed)return;try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three,proto=r?Object.getPrototypeOf(r):C;wrapOnce(proto);if(r&&Object.prototype.hasOwnProperty.call(r,'render'))wrapOnce(r);}catch(e){fail(e);}}
 const timer=typeof setInterval==='function'?setInterval(wrapAll,500):0;wrapAll();
 
-// ---- 첫 화면 단추 -----------------------------------------------------------------------------------------------
-const text=()=>'수묵화풍 테스트 · '+LABEL[prefs.mode],styleText=()=>'화풍 · '+STYLES[prefs.style].label;
-function label(){try{const b=document.getElementById('inkTestR1055');if(b){b.textContent=text();b.dataset.mode=prefs.mode;}const s=document.getElementById('inkStyleR1055');if(s){s.textContent=styleText();s.dataset.style=prefs.style;}const row=document.getElementById('inkRowR1055');if(row){if(row.r1055Check)row.r1055Check.checked=prefs.mode!=='off';if(row.r1055Select)row.r1055Select.value=prefs.style;}}catch(e){fail(e);}}
-function titleButton(){try{const panel=document.getElementById('panel'),normal=document.getElementById('campaignNew54')||document.getElementById('newBtn');
-  if(!panel||!normal||document.getElementById('inkTestR1055'))return;const host=normal.parentNode||panel;
-  const b=document.createElement('button');b.id='inkTestR1055';b.type='button';b.textContent=text();b.dataset.mode=prefs.mode;
-  b.title='테스트본: 맵을 수묵화풍으로 그립니다. 누를 때마다 꺼짐 → 동양 지역만(잠들지 못하는 마을·한약과 불면귀) → 모든 지역 → 꺼짐. 캐릭터·UI 는 그대로입니다.';
-  b.onclick=()=>{set({mode:MODES[(MODES.indexOf(prefs.mode)+1)%MODES.length]});b.textContent=text();b.dataset.mode=prefs.mode;};
-  const s=document.createElement('button');s.id='inkStyleR1055';s.type='button';s.textContent=styleText();s.dataset.style=prefs.style;
-  s.title='수묵화풍 테스트의 화풍을 바꿉니다: 진경산수풍 → 담채풍 → 송대 산수풍 → 스미에풍 → 수채 애니풍.';
-  s.onclick=()=>{set({style:STYLE_IDS[(STYLE_IDS.indexOf(prefs.style)+1)%STYLE_IDS.length]});s.textContent=styleText();s.dataset.style=prefs.style;};
-  host.appendChild(b);host.appendChild(s);stats.titleButtons++;}catch(e){fail(e);}}
+// R1055d(2026-11-15): 첫 화면 단추 두 개는 없앴다 — 켜고 끄기·화풍은 설정 창 줄에서 한다(첫 화면 단추 수 검사 R1015 ≤ 9 를 다시 지킨다).
+function label(){try{const row=document.getElementById('inkRowR1055');if(row){if(row.r1055Check)row.r1055Check.checked=prefs.mode!=='off';if(row.r1055Select)row.r1055Select.value=prefs.style;}}catch(e){fail(e);}}
 // ---- 설정 창 줄(간이설정) ----------------------------------------------------------------------------------------
 function settingsRow(){try{/* R1022 와 같은 자리: 설정 창 맨 위 '전투 화면' 구역(없으면 간이설정 끝). 간이설정 끝에 두면 R1015·R142 정리가 '더 보기' 안으로 접는다. */
   const host=document.getElementById('combatScreenR1021')||document.getElementById('quickSettingsR114');if(!host)return;let row=document.getElementById('inkRowR1055');
@@ -155,10 +144,8 @@ function settingsRow(){try{/* R1022 와 같은 자리: 설정 창 맨 위 '전�
   if(row.r1055Check)row.r1055Check.checked=prefs.mode!=='off';if(row.r1055Select)row.r1055Select.value=prefs.style;}catch(e){fail(e);}}
 function settingsLater(){settingsRow();try{queueMicrotask(settingsRow);}catch(_){}try{requestAnimationFrame(()=>{settingsRow();requestAnimationFrame(settingsRow);});}catch(_){}}
 try{if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const r=base.apply(this,a);try{settingsLater();}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
-try{if(typeof showTitle==='function'){const base=showTitle;showTitle=function(...a){const r=base.apply(this,a);titleButton();return r;};}}catch(e){fail(e);}
-titleButton();
 
 function dispose(){disposed=true;try{clearInterval(timer);}catch(_){}try{if(U)U.r1055K.value=0;}catch(_){}K=0;}
-window.__STORYWORLD_INK_WASH_R1055__=Object.freeze({revision:REV,storageKey:KEY,modes:MODES,zones:ZONES,styles:STYLES,GLSL,uniformsFor,prefs:()=>({...prefs}),defaultStyle:DEF_STYLE,set,wants,level,tone,inject,titleButton,settingsRow,
+window.__STORYWORLD_INK_WASH_R1055__=Object.freeze({revision:REV,storageKey:KEY,modes:MODES,zones:ZONES,styles:STYLES,GLSL,uniformsFor,prefs:()=>({...prefs}),defaultStyle:DEF_STYLE,set,wants,level,tone,inject,settingsRow,
  inspect:()=>({revision:REV,prefs:{...prefs},k:K,level:U?(U.r1055Lv.value>.5?'full':'paper'):null,stats:{...stats},lastError}),dispose});
 })();
