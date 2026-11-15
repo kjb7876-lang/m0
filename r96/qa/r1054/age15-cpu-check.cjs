@@ -87,4 +87,22 @@ ok('settings select has no gore option under age15',/age15|A15/.test(C('mob-deat
  const fx={type:'enemyBurnDeath',sourceId:'n1',x:2,y:2,age:NaN,life:.72};let threw=false;try{run(G,fx,[NaN,Infinity,-1]);}catch(err){threw=String(err);}
  const bad=G.calls.some(c=>['translate','scale'].includes(c.k)&&!(Number.isFinite(c.x)&&Number.isFinite(c.y))||c.k==='drawImage'&&c.a.some(v=>typeof v==='number'&&!Number.isFinite(v))||own(c)&&!Number.isFinite(+(c.opt.alpha??1)));
  ok('NaN/Infinity age: no throw, no non-finite draw args',!threw&&!bad,threw||G.calls.filter(c=>c.k==='translate').slice(0,3));}
+// ---- 서사 4곳 순화(사용자 2026-11-15 11:18Z "4곳 모두 순화 암시정도로") ----
+{const has2=has('age15-text-r1054.js');ok('text patch age15-text-r1054.js exists',has2);
+ for(const f of ['age15-text-r1054.js','lineart-scenes-r881.js'])ok('runtime copy matches source '+f,has(f)&&fs.existsSync(path.join(R,'runtime-text',f))&&C(f)===RT(f));
+ const idx=RT('index.html'),i0=idx.indexOf('story-canon-r106-data.js"'),i1=idx.indexOf('age15-text-r1054.js"'),i2=idx.indexOf('story-canon-r106.js"'),i3=idx.indexOf('samong-text-r103.js"');
+ ok('text patch loads after canon data, before story-canon-r106.js copies text and before samong text',i1>i0&&i1<i2&&i1<i3&&i0>0,[i0,i1,i2,i3]);
+ const G={window:{}};G.window=G;vm.createContext(G);for(const f of ['story-canon-r106-data.js','samong-text-r103.js'])vm.runInContext(C(f),G);
+ const flat=o=>{const out=[];const w=x=>{if(typeof x==='string')out.push(x);else if(x&&typeof x==='object')for(const k of Object.keys(x))w(x[k]);};w(o);return out;};
+ const before=flat(G.__STORYWORLD_STORY_CANON_R106__).concat(flat(G.__STORYWORLD_SAMONG_TEXT_R103__));
+ const H={window:{}};H.window=H;vm.createContext(H);vm.runInContext(C('story-canon-r106-data.js'),H);if(has2)vm.runInContext(C('age15-text-r1054.js'),H);vm.runInContext(C('samong-text-r103.js'),H);const G0=G;
+ ok('samong data still readable through the patch (same frozen object, sections intact)',!!H.__STORYWORLD_SAMONG_TEXT_R103__&&Object.isFrozen(H.__STORYWORLD_SAMONG_TEXT_R103__)&&Object.keys(H.__STORYWORLD_SAMONG_TEXT_R103__.sections).length===Object.keys(G0.__STORYWORLD_SAMONG_TEXT_R103__.sections).length);
+ const after=flat(H.__STORYWORLD_STORY_CANON_R106__).concat(flat(H.__STORYWORLD_SAMONG_TEXT_R103__)),all=after.join('\n');
+ const BANNED=[/죽은 수호자들의 머리/,/주사기에 손을 대/,/펜타닐이라고 적힌 약병/,/자기 절단의 광경/,/자해의 흉터/,/이름의 글자를 피가 나도록/,/뼈를 꺾어/];
+ for(const re of BANNED)ok('patched text no longer has '+re.source,!re.test(all));
+ const changed=after.filter((t,i)=>t!==before[i]).length;ok('only the 4 approved paragraphs change (3~6 strings)',changed>=3&&changed<=6,changed);
+ ok('patched paragraphs keep the story beat (약병·유혹·흉터·수호자·오열)',/작은 약병/.test(all)&&/유혹을 이기지 못했다/.test(all)&&/오래된 흉터/.test(all)&&/쓰러진 수호자들이 남긴/.test(all)&&/오열했다/.test(all));
+ ok('captions kept by lineart remain in patched canon (몸은 약을 원했고…)',/몸은 약을 원했고, 천사는 그 약액을 성수라고 믿게 했다\./.test(all)&&/뿔 끝마다 둥근 것이 매달려 흔들리고 있었다\./.test(all));
+ const r881=C('lineart-scenes-r881.js');ok('cutscene captions/labels no longer name the drug or the heads',!/펜타닐/.test(r881)&&!/죽은 수호자들의 머리/.test(r881));
+ const P2=has2?vm.runInContext('__STORYWORLD_AGE15_TEXT_R1054__.inspect()',H):{};ok('text patch reports 4 applied, 0 missed',P2.applied===4&&P2.missed===0,P2);}
 console.log(`\nR1054 age15: ${pass} passed, ${fail} failed`);process.exit(fail?1:0);
