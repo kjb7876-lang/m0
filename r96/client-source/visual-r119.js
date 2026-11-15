@@ -197,7 +197,8 @@ const perHeroR720=o=>{if(typeof Proxy!=='function'||typeof WeakMap!=='function')
    // R134: '이동 중' 표시만 켜지고 실제로는 막혀 제자리인 경우(적·벽에 막힘)에도 걷기 그림이 한 장면씩 끼어 공격 자세와 번갈아 깜빡였다(제자리 걸음).
    //  실제로 움직였을 때만 걷기로 본다(반자동 비켜서기처럼 표시 없이 움직인 경우는 그대로 걷기).
    const movingNow=((typeof time==='number'?time:0)-(walkState.movedAt??-9)<.15)&&!M720?.attackOverTail?.();/* R895 규칙 5: 멈춘 직후 시작한 공격이 걷기 꼬리를 이긴다 */
-   if(!movingNow){if(!busy&&typeof actorHeight==='function'){let sb=null,sbh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!BODY_ART.test(String(c.sourcePath||'')))continue;const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>sbh){sbh=h;sb=c;}}
+   const walkNow=movingNow&&walkTailR1050c(0,false,player.attackAnim,player.moving);/* R1050c: 공격 중 밀림은 걷기 아님 */
+   if(!walkNow){if(!busy&&typeof actorHeight==='function'){let sb=null,sbh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!BODY_ART.test(String(c.sourcePath||'')))continue;const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>sbh){sbh=h;sb=c;}}
      // 멈춘 직후에도 R91 걷기 칸(여백 포함 칸 전체)이 한두 장면 그려져 몸이 갑자기 커졌다(사용자: 네온 이동 후 멈춤이 이상) — 몸 테두리로 잘라 서 있기 키로 그린다.
      if(sb&&/r91\/walk\//.test(String(sb.sourcePath||''))&&!sb.r121Walk&&sb.sourceRect){const im=sb.image,b=tightBox(im,sb.sourceRect),P=sb.points,fx=(P[2][0]+P[3][0])/2,fy=Math.max(P[2][1],P[3][1]),f=P[1][0]<P[0][0]?-1:1,want=actorHeight()*(standRatio.v||.98),w=want*b[2]/b[3];
       Object.assign(sb,{sourceRect:b,points:[[fx-f*w/2,fy-want],[fx+f*w/2,fy-want],[fx+f*w/2,fy],[fx-f*w/2,fy]],r121Walk:true});stats.walkStops=(stats.walkStops||0)+1;return r;}
@@ -249,5 +250,8 @@ const perHeroR720=o=>{if(typeof Proxy!=='function'||typeof WeakMap!=='function')
   const btn=[...document.querySelectorAll('button.close')].reverse().find(b=>b.offsetParent!==null&&!b.disabled);if(!btn)return;
   ev.preventDefault();ev.stopImmediatePropagation();btn.click();stats.escCloses=(stats.escCloses||0)+1;}catch(_){}},true);
  function set(p={}){if(typeof p.gunnerSheet==='boolean')prefs.gunnerSheet=p.gunnerSheet;if(typeof p.gunnerHit==='boolean')prefs.gunnerHit=p.gunnerHit;if(typeof p.walkCycle==='boolean')prefs.walkCycle=p.walkCycle;if(typeof p.earlyGrace==='boolean')prefs.earlyGrace=p.earlyGrace;if(typeof p.heroBlood==='boolean')prefs.heroBlood=p.heroBlood;if(typeof p.heroFit==='boolean')prefs.heroFit=p.heroFit;if(typeof p.angelArt==='boolean')prefs.angelArt=p.angelArt;if(typeof p.heroArt==='boolean')prefs.heroArt=p.heroArt;if(typeof p.seeThrough==='boolean')prefs.seeThrough=p.seeThrough;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
+ // R1050c: 걷기 꼬리 0.15초. 공격 중인데 엔진이 '걷는 중 아님'이면 몹·동료에게 밀린 것 → 걷기 그림이 공격을 덮지 않는다(R1050b 환도와 같은 규칙).
+ //  공격이 없을 때의 표시 없는 이동(반자동 비켜서기, R134)은 그대로 걷기.
+ function walkTailR1050c(dt,over,atk,mv){if(!(dt<.15)||over)return false;if(+atk>0&&mv===false)return false;return true;}
  window.__STORYWORLD_VISUAL_R119__=Object.freeze({revision:'R119-visual-1',nativeMin:NATIVE_MIN,min:MIN,remap,prefs:()=>({...prefs}),set,swap:SWAP,swap128,ownWalk,sheetFor,inspect:()=>({prefs:{...prefs},stats:{...stats},swapState:Object.fromEntries(swapState),fitState:Object.fromEntries(fitState),lastError,collisionChanged:false})});
 })();
