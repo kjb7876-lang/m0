@@ -8488,6 +8488,16 @@
       "sha256": "69d47646ff681327933b3bed9e5064758f07b84ba347406e26c6110430b7f9fc"
     },
     {
+      "path": "assets/r1046/ego-cutin.webp",
+      "bytes": 400932,
+      "sha256": "298a778776592f604101da4328e796b4a02796aa72aca7d95c7436dc42e7d0b2"
+    },
+    {
+      "path": "assets/r1046/ego-portrait.webp",
+      "bytes": 92040,
+      "sha256": "d46712079844f356e1cf953403bf15783df72bbbf69e559cfeb3419ce5f9e9d1"
+    },
+    {
       "path": "assets/r105/drive/boss-hostess.webp",
       "bytes": 73194,
       "sha256": "e748e98f17da0ae4e7108720e57576ce71d404903309003de9d570dcc5e92ee9"
@@ -51763,6 +51773,16 @@
       "sha256": "ff8cbdd5af4146ffe677acf229d85897144d5f61061d981f02ecf4478d208b63"
     },
     {
+      "path": "ego-sovereign-r1046-data.js",
+      "bytes": 6016,
+      "sha256": "87db2c904db84d7c99db4527ca0b9f9b4b257a711bd43339e8e518d0bd5f0d80"
+    },
+    {
+      "path": "ego-sovereign-r1046.js",
+      "bytes": 17231,
+      "sha256": "8a33495e872b7de83f6db7116d14159e78dfcdc58e25029990148a5ca67e93fd"
+    },
+    {
       "path": "enemy-attack-tempo-r601.js",
       "bytes": 6063,
       "sha256": "2099abbff2065bda820391c9eb928e0ddb03b683b437e86eef116cc0a82cdbea"
@@ -52169,8 +52189,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6579254,
-      "sha256": "1d71a54f3517c648e636a03badf19dee9722abd33045654484a07f91d69749f5"
+      "bytes": 6579357,
+      "sha256": "8378788c1c23ed51a65dadb79d5b831d2508f1aca9b05625904b6c246835ec4f"
     },
     {
       "path": "intro-r140.js",
@@ -53433,9 +53453,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10686,
-  "totalBytes": 1299428513,
-  "webHTMLSha256": "1d71a54f3517c648e636a03badf19dee9722abd33045654484a07f91d69749f5",
+  "fileCount": 10690,
+  "totalBytes": 1299944835,
+  "webHTMLSha256": "8378788c1c23ed51a65dadb79d5b831d2508f1aca9b05625904b6c246835ec4f",
   "largest": [
     {
       "path": "index.html",
