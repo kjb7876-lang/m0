@@ -9989,7 +9989,9 @@
     "assets/r1056/bgm/gugak-hwando.ogg",
     "assets/r1056/bgm/gugak-village-climax.ogg",
     "assets/r1056/bgm/gugak-village.ogg",
-    "ink-wash-r1055.js"
+    "ink-wash-r1055.js",
+    "lineart-video-r1080.js",
+    "lineart-ink-r1081.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11064,5 +11066,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "ddf330df340e0dbb72001214f3b91bb123ccb236b4f90c5149bd32a3f73ae60d"
+  "runtimeManifestSHA256": "ec5d9a06a3eb996c1a93f7de2f21a429129b5c81d2d970cb31b18996cf80869b"
 }
