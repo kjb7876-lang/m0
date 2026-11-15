@@ -52769,8 +52769,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6579773,
-      "sha256": "71c11f781dbb4169dd751d79b39e26e0ddad55c25d19482e05024ec7881d746a"
+      "bytes": 6579818,
+      "sha256": "1d66462693e2c2a54c7556a9ca528d47942fe1bb5d20787a019ad4494891b784"
     },
     {
       "path": "ink-wash-r1055.js",
@@ -53013,9 +53013,14 @@
       "sha256": "ca592010f1a3ceadd6b4e7842b25fa774cc484bb2830fae452fdda97e04310ec"
     },
     {
+      "path": "mob-lunge-r1064.js",
+      "bytes": 7774,
+      "sha256": "fdfa870763605384e16cf1e4320eb96f89e76e8874967493c71ab5485dc7dbf2"
+    },
+    {
       "path": "mob-motion-r286.js",
-      "bytes": 17802,
-      "sha256": "4bace235f854e1798dbeb605073091ad7b23ac303c8b077cf115c3e7ac3fc16a"
+      "bytes": 18442,
+      "sha256": "94949e1c22d86088ff9f824c164cc94ccde6e5e960cca3aa314d6a25edbbd010"
     },
     {
       "path": "mob-moves-r385.js",
@@ -54053,9 +54058,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10810,
-  "totalBytes": 1314181685,
-  "webHTMLSha256": "71c11f781dbb4169dd751d79b39e26e0ddad55c25d19482e05024ec7881d746a",
+  "fileCount": 10811,
+  "totalBytes": 1314190144,
+  "webHTMLSha256": "1d66462693e2c2a54c7556a9ca528d47942fe1bb5d20787a019ad4494891b784",
   "largest": [
     {
       "path": "index.html",
