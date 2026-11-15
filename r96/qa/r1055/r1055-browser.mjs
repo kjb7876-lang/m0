@@ -8,9 +8,8 @@ const b=await chromium.launch();const ctx=await b.newContext({viewport:VP,device
 const skip=()=>p.evaluate(()=>{for(let i=0;i<160&&storyScene;i++)advanceScene();if(modal)closePanel(true);});
 const I=()=>p.evaluate(()=>window.__STORYWORLD_INK_WASH_R1055__.inspect());
 await p.goto(URL);await p.locator('#campaignNew54').waitFor({timeout:180000});
-const btn=p.locator('#inkTestR1055');ok('title: 수묵화풍 테스트 button visible',await btn.isVisible());
-ok('title: starts off',/꺼짐/.test(await btn.textContent()),await btn.textContent());await p.screenshot({path:`${out}/title.png`});
-await btn.click();ok('title: press → 동양 지역만',/동양/.test(await btn.textContent())&&(await I()).prefs.mode==='east');await p.screenshot({path:`${out}/title-on.png`});
+ok('title: no ink buttons on the first screen (R1055d — moved to settings)',await p.evaluate(()=>!document.getElementById('inkTestR1055')&&!document.getElementById('inkStyleR1055')));await p.screenshot({path:`${out}/title.png`});
+await p.evaluate(()=>window.__STORYWORLD_INK_WASH_R1055__.set({mode:'east'}));ok('east mode set through the API',(await I()).prefs.mode==='east');
 await p.locator('#campaignNew54').click();await p.locator('#slotConfirmR73').click();await p.waitForFunction(()=>started&&!loading,null,{timeout:240000});await skip();
 await p.evaluate(async()=>{await window.__STORYWORLD_CHEAT777__.activate('777');});await p.waitForFunction(()=>!loading,null,{timeout:90000});await skip();
 const go=async z=>{await p.evaluate(z=>{if(room?.id!==z)enterRegion(z,null,{layer:'STORY',restore:true});},z);await p.waitForFunction(z=>!loading&&room?.id===z,z,{timeout:150000});await skip();
