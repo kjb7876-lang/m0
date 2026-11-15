@@ -133,7 +133,7 @@ function choose(rec,st){const best=pickBody(rec,st);if(!best)return;const t=T();
   if(el<tot)return draw(rec,st,best,'attack','s',frameAt(C.ms,el,false));southCast=null;}
  if(S.swing){const SA=S.swing.A||A,el=(t-S.swing.t0)*1000/S.swing.scale+S.swing.off,tot=SA.ms.reduce((x,y)=>x+y,0);
   /* R895 규칙 1 예외: 슬레이어는 피격 시트가 없고(옛 R143 피격 그림은 칼 없는 다른 화풍) 광전사라 기본 공격 중 피격에 밀리지 않는다(슈퍼아머) */
-  if(el<tot&&!(moving&&(M?M.moveCancel('attack'):t-S.swing.t0>.35)))return draw(rec,st,best,'attack',S.swing.dir,frameAt(SA.ms,el,false),undefined,SA);S.swing=null;}
+  if(el<tot&&!(moving&&(M?M.moveCancel('attack'):t-S.swing.t0>.35)))return draw(rec,st,best,'attack',S.swing.dir,frameAt(SA.ms,el,false),undefined,SA);if(el>=tot&&!moving&&window.__STORYWORLD_SKILL_ATTACK_R440__?.swapping?.()){stats.skillHold=(stats.skillHold||0)+1;return draw(rec,st,best,'attack',S.swing.dir,frameAt(SA.ms,tot-1,false),undefined,SA);}S.swing=null;/* R1050b: 스킬이 휘두르기보다 길면 마지막 공격 칸 유지 */}
  if(moving){const d=S.walkDir==='s'&&southReady()&&!otherAction()?'s':S.walkDir==='n'&&northReady()&&!otherAction()?'n':S.h,W=(d==='n'?northClip():clip('walk',d))||Wk,k=want()/(W?.body||180),per=(W?.stride?.px_per_frame||18)*k;return draw(rec,st,best,'walk',d,Math.floor(S.dist/Math.max(1,per)),undefined,W);}
  if(hurt>0)stats.hurt++;
  const v=enemyVec();if(v)side(v[0],v[1]);

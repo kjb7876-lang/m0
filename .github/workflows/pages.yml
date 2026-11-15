@@ -520,6 +520,8 @@ jobs:
         run: node r96/qa/r720/r720-cpu-check.cjs
       - name: R1050 survival placed heroes plant during attack and skill so the attack motion plays (no chase drift, start frame step undone) CPU check
         run: node r96/qa/r1050/r1050-cpu-check.cjs
+      - name: R1050b heroes use attack art for attacks and skills (EGO buff swaps, hwando not walk when pushed, neon and lauren diagonals use side sheets, hit does not cover a skill) CPU check
+        run: node r96/qa/r1050/r1050b-cpu-check.cjs
       - name: R953 gunner veil passives (cloak cuts ultimate cooldown and cast delay by 77%, lock-on barrage, machine-boss allies for 7s kept out of the enemy list) CPU check
         run: node r96/qa/r953/r953-cpu-check.cjs
       - name: R991 gunner aim CPU check
@@ -704,6 +706,8 @@ jobs:
         run: node r96/qa/r1046/r1046-cpu-check.cjs
       - name: R1057 hero select secret 777 reveals only hidden hero EGO CPU check
         run: node r96/qa/r1057/r1057-cpu-check.cjs
+      - name: R1057b hero select title 7-tap mobile alternative CPU check
+        run: node r96/qa/r1057/r1057b-tap-cpu-check.cjs
       - name: R1048 hidden hero EGO 3D pre-rendered 8-direction motion sheets (player state, directions, hit-stop, fade, NaN) CPU check
         run: node r96/qa/r1048/r1048-cpu-check.cjs
       - name: R1040 boss pattern frame fx CPU check
