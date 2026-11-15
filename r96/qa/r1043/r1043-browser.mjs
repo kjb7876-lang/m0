@@ -20,7 +20,7 @@ const st=p=>p.evaluate(()=>({step:window.__STORYWORLD_PERF7_R1043__?.step(),dpr,
  const row=await p.evaluate(()=>{const r=document.getElementById('perf7RowR1043');return r?{n:r.querySelectorAll('[data-r1043-step]').length,auto:!!r.querySelector('[data-r1043-step="auto"]'),on:r.querySelector('[aria-pressed="true"]')?.dataset.r1043Step,first:r.parentElement?.id}:null;});
  ok('7-step row in 간이설정 (7 buttons, no auto on PC, 5 pressed)',!!row&&row.n===7&&!row.auto&&row.on==='5'&&row.first==='quickSettingsR114',row);
  ok('7-step row visible',await vis(p,'#perf7RowR1043'));
- for(const [s1,name] of [['[data-r114-preset="low"]','R114 그래픽 품질'],['[data-r150-lite="auto"]','R150 렉 줄이기 단추'],['#mobileTierRowR1023','R1023 그래픽 단계'],['[data-setting="lowFx"]','간소화 VFX'],['[data-r118="perf"]','R118 렉 줄이기'],['#hitboxToggle','판정 진단'],['#voicePreroll','음성 준비 비교'],['#r98c-facing','바라보기 낱칸'],['#r92-mobMotion','잡몹 동작 낱칸']])
+ for(const [s1,name] of [['[data-r114-preset="low"]','R114 그래픽 품질'],['[data-r150-lite="auto"]','R150 렉 줄이기 단추'],['#mobileTierRowR1023','R1023 그래픽 단계'],['[data-setting="lowFx"]','간소화 VFX'],['[data-r118="perf"]','R118 렉 줄이기'],['#hitboxToggle','판정 진단'],['#voicePreroll','음성 준비 비교'],['#hospitalTestSettingsR84','병원 테스트'],['#hospitalDirectStart','병원 바로 시작'],['#r98c-facing','바라보기 낱칸'],['#r92-mobMotion','잡몹 동작 낱칸']])
   ok('folded into the new rows / hidden: '+name,!(await vis(p,s1)));
  ok('FPS meter checkbox kept visible',await vis(p,'[data-r150-meter]'));
  ok('sound/music/narration/auto-move/subtitle rows kept',await p.evaluate(()=>['[data-setting="sound"]','[data-setting="music"]','[data-setting="narration"]','#autoMoveR1022Toggle','[data-r1021="subs"]','[data-r1037="story"]'].every(s=>document.querySelector(s))));

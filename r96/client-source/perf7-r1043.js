@@ -78,7 +78,8 @@ function hide(el){if(el&&el.classList)el.classList.add(HIDE);}
 // 같은 일을 하는 칸 여럿 → 한 칸. 묶음 칸을 바꾸면 숨긴 칸을 하나씩 같은 값으로 누른다(각 모듈의 원래 저장·적용 그대로).
 const GROUPS=[{id:'faceAllR1043',label:'전투 중 서로 바라보기(영웅·몹 마주봄, 공격 뒤 겨눈 적 바라보기)',sel:['#r98c-facing','#r100-facing','[data-r114-api="p113"][data-r114-key="facing"]','[data-r114-api="p111"][data-r114-key="facing"]','[data-r137="faceAlways"]']},
  {id:'mobMotionR1043',label:'잡몹 움직임(이동·공격·돌기·비행·피격 동작)',sel:['#r92-mobMotion','#r98c-mobMotion','#r101-motion']}];
-const DEV_HIDE=['#hitboxToggle','#voicePreroll','#r92-narrativeUnconfirmed'];
+// R1043b(사용자 11-15 04:02Z 허락): 병원 테스트(병원 바로 시작·검사 기록) 구역도 숨긴다 — 기능·저장은 그대로, 설정 창에서만 안 보임.
+const DEV_HIDE=['#hitboxToggle','#voicePreroll','#r92-narrativeUnconfirmed','#hospitalTestSettingsR84'];
 const GFX_SECTIONS=['#lightAtmosR300','#weatherR450','#localLightR451','#actorToneR453','#heroHarmonyR1030'];
 function build(){try{if(off)return;const panel=document.getElementById('panel');const quick=document.getElementById('quickSettingsR114');if(!panel||!quick)return;css();
  // ① 성능 7단계 줄
@@ -102,6 +103,8 @@ function build(){try{if(off)return;const panel=document.getElementById('panel');
   box.onchange=()=>{for(const e of g.sel.map(s=>panel.querySelector(s)).filter(Boolean))if(e.checked!==box.checked)e.click();};els.forEach(e=>hide(labelOf(e)));}
  // ⑤ 개발용 칸 숨기기
  for(const s of DEV_HIDE)hide(labelOf(panel.querySelector(s)));
+ // 숨긴 칸만 남은 세부설정 묶음(예: 협동·테스트)은 묶음째 숨긴다.
+ for(const g of panel.querySelectorAll('details.r114-group')){const live=[...g.querySelectorAll('input,select,button')].some(e=>!e.closest('.'+HIDE));if(!live)hide(g);}
  rowRefresh();}catch(e){fail(e);}}
 function later(){build();try{queueMicrotask(build);}catch(_){}try{requestAnimationFrame(()=>{build();requestAnimationFrame(build);});}catch(_){}}
 // 설정 창 감싸기는 스크립트를 읽을 때 바로 한다(휴대폰에서는 load 뒤에 감싼 것이 사라져 R1023 줄도 안 보였다 — 정리는 다음 틱에 하므로 순서는 상관없다).
