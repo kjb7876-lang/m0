@@ -27,7 +27,9 @@ const a=boot(),I=a.I;
 ok('module boots and exposes API',!!I&&!a.sb.__bootError,a.sb.__bootError);
 if(!I){console.log(`\nR1055 ink wash: ${n-bad}/${n} pass`);process.exit(1);}
 // ---- 기본 꺼짐·범위 ----
-ok('default mode is off (test build: nothing changes until the title button is pressed)',I.prefs().mode==='off');
+// 사용자 2026-11-15 14:40Z "저걸로 진행해 모든맵"·"무한생존모드도"·"고정은 하지말고 저화풍을 기본으로하고 키고끌수있도록 설정에서" → 기본 켜짐(모든 지역).
+ok('default mode is all (user 14:40Z: on by default on every map, switchable in settings)',I.prefs().mode==='all');
+I.set({mode:'off'});
 ok('off: wants() false even in the eastern village',I.wants('last302','STORY')===false&&I.wants('last303','STORY')===false);
 ok('zones are exactly the canon eastern dream (last302, last303) — no invented regions',JSON.stringify([...I.zones].sort())===JSON.stringify(['last302','last303']));
 I.set({mode:'east'});
@@ -36,17 +38,18 @@ ok('east: other regions off (hub, hospital, hando castle)',!I.wants('hub','STORY
 ok('east: DREAM layer / missing layer / missing zone off',!I.wants('last302','DREAM')&&!I.wants('last302')&&!I.wants(undefined,'STORY')&&!I.wants(null,'STORY'));
 ok('east: substring ids do not match (last3020, xlast302)',!I.wants('last3020','STORY')&&!I.wants('xlast302','STORY'));
 I.set({mode:'all'});
-ok('all (test): every STORY region on, still STORY only',I.wants('hub','STORY')&&I.wants('last302','STORY')&&!I.wants('hub','DREAM'));
+ok('all: every region on in every layer (story, samong DREAM, infinite survival) — only a missing zone is off',I.wants('hub','STORY')&&I.wants('last302','STORY')&&I.wants('hub','DREAM')&&I.wants('sz115-S03-1','DREAM')&&I.wants('hub','')&&I.wants('hub')&&!I.wants(null,'STORY')&&!I.wants('','STORY'));
 I.set({mode:'bogus'});ok('set() ignores unknown mode (stays all)',I.prefs().mode==='all');
 ok('mode persisted to localStorage',JSON.parse(a.store.get('storyworld.r1055.inkWash')).mode==='all');
 ok('stored mode restored on next boot',boot({stored:'{"mode":"east"}'}).I.prefs().mode==='east');
-ok('garbage storage → off',['{bad','null','{"mode":7}','{"mode":"ALL"}','[]',''].every(s=>boot({stored:s}).I.prefs().mode==='off'));
+ok('garbage storage → default (all)',['{bad','null','{"mode":7}','{"mode":"ALL"}','[]',''].every(s=>boot({stored:s}).I.prefs().mode==='all'));
 // ---- 성능 단계 ----
 ok('level: steps 5·6·7 full',[5,6,7].every(s=>I.level(s,false)==='full'));
-ok('level: steps 1~4 paper only',[1,2,3,4].every(s=>I.level(s,false)==='paper'));
+ok('level: steps 3·4 paper only',[3,4].every(s=>I.level(s,false)==='paper'));
+ok('level: steps 1·2 (lowest tiers, phone default) off — no added cost now that it is on by default',[1,2].every(s=>I.level(s,false)==='off'));
 ok('level: boundary 4 → paper, 5 → full',I.level(4,false)==='paper'&&I.level(5,false)==='full');
 ok('level: garbage step (NaN, undefined, null, "x", -1, 99) never throws; unknown → paper, above 7 → full',[NaN,undefined,null,'x',-1].every(s=>I.level(s,false)==='paper')&&I.level(99,false)==='full');
-ok('level: phone below step 5 → paper, phone at 5+ → full',I.level(2,true)==='paper'&&I.level(5,true)==='full');
+ok('level: phone below step 5 → paper, phone at 5+ → full',I.level(2,true)==='off'&&I.level(5,true)==='full');
 // ---- 색 계산(셰이더와 같은 식) ----
 const lum=c=>c[0]*.2126+c[1]*.7152+c[2]*.0722,sat=c=>{const mx=Math.max(...c),mn=Math.min(...c);return mx<=1e-6?0:(mx-mn)/mx;};
 const fin=c=>Array.isArray(c)&&c.length===3&&c.every(v=>Number.isFinite(v)&&v>=0&&v<=1);
@@ -73,7 +76,7 @@ const FRAG='void main(){\n#include <map_fragment>\n#include <colorspace_fragment
 ok('inject: null / broken shader object → false, no throw',[null,undefined,{},{fragmentShader:5}].every(s=>{try{return I.inject(s)===false;}catch(_){return false;}}));
 ok('GLSL clamps output and guards strength (no division without epsilon guard on luminance)',/clamp\(/.test(I.GLSL)&&/r1055K/.test(I.GLSL));
 // ---- 첫 메뉴 단추 ----
-{const b=boot();const panel=el('panel'),box=el('box'),neu=el('campaignNew54');box.appendChild(neu);b.els.set('panel',panel);b.els.set('campaignNew54',neu);
+{const b=boot({stored:'{"mode":"off"}'});const panel=el('panel'),box=el('box'),neu=el('campaignNew54');box.appendChild(neu);b.els.set('panel',panel);b.els.set('campaignNew54',neu);
  b.I.titleButton();const btn=box.children.find(c=>c.id==='inkTestR1055');
  ok('title: button added next to the start button',!!btn);
  if(btn)b.els.set('inkTestR1055',btn);
@@ -110,5 +113,19 @@ ok('GLSL clamps output and guards strength (no division without epsilon guard on
   ok('title: style button cycles all five and returns to the first',JSON.stringify(seen)===JSON.stringify(['jg','dw','song','sumi','wc','jg']),seen);
   ok('title: style button label names the current style',sb.textContent.includes(c.I.styles.jg.label),sb.textContent);}
  ok('styles: no errors',J.inspect().stats.errors===0&&c.I.inspect().stats.errors===0);}
+// ---- 설정 창 줄(사용자 14:40Z "키고끌수있도록 설정에서") ----
+{const c=boot(),panel=el('panel'),quick=el('quickSettingsR114');c.els.set('panel',panel);c.els.set('quickSettingsR114',quick);
+ ok('settings: stored nothing → on (all) with the default style',c.I.prefs().mode==='all'&&c.I.prefs().style===c.I.defaultStyle);
+ c.I.settingsRow();const row=quick.children.find(x=>x.id==='inkRowR1055');ok('settings: row added to quick settings',!!row);
+ if(row){c.els.set('inkRowR1055',row);c.I.settingsRow();ok('settings: not added twice',quick.children.filter(x=>x.id==='inkRowR1055').length===1);
+  const box=row.r1055Check,sel=row.r1055Select;ok('settings: checkbox is checked by default, select shows the style',!!box&&box.checked===true&&!!sel&&sel.value===c.I.prefs().style);
+  if(box&&sel){box.checked=false;box.onchange();ok('settings: unchecking turns it off and saves',c.I.prefs().mode==='off'&&/"mode":"off"/.test(c.store.get('storyworld.r1055.inkWash')||''));
+   ok('settings: off → wants() false everywhere',!c.I.wants('hub','STORY')&&!c.I.wants('last302','STORY'));
+   box.checked=true;box.onchange();ok('settings: checking turns it on for every region',c.I.prefs().mode==='all'&&c.I.wants('hub','STORY'));
+   sel.value='sumi';sel.onchange();ok('settings: choosing a style applies and saves',c.I.prefs().style==='sumi'&&/"style":"sumi"/.test(c.store.get('storyworld.r1055.inkWash')||''));
+   sel.value='nope';sel.onchange();ok('settings: unknown style ignored',c.I.prefs().style==='sumi');}}
+ const d=boot();d.I.settingsRow();ok('settings: no quick settings box → nothing, no error',d.I.inspect().stats.errors===0);
+ ok('settings: stored off stays off after reload (user choice wins over the default)',boot({stored:'{"mode":"off","style":"jg"}'}).I.prefs().mode==='off');
+ ok('settings: no errors',c.I.inspect().stats.errors===0,c.I.inspect().lastError);}
 ok('no errors recorded',I.inspect().stats.errors===0,I.inspect().lastError);
 console.log(`\nR1055 ink wash: ${n-bad}/${n} pass`);process.exit(bad?1:0);
