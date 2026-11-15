@@ -8508,6 +8508,11 @@
       "sha256": "03183e9733d8dc88e2fc865a0ccb727ae6948c06343f16ddfe4e40ffb6c23e45"
     },
     {
+      "path": "assets/r1045d/gunner/walk-e3.webp",
+      "bytes": 108074,
+      "sha256": "e7cb4f93b97e8b3e000fd4bd99d9f0864b002d4e170e0d2ceeaae62fe8ded3a5"
+    },
+    {
       "path": "assets/r1046/ego-cutin.webp",
       "bytes": 400932,
       "sha256": "298a778776592f604101da4328e796b4a02796aa72aca7d95c7436dc42e7d0b2"
@@ -52549,8 +52554,8 @@
     },
     {
       "path": "gunner-aim-r991.js",
-      "bytes": 18910,
-      "sha256": "46cd055a13126c64dd656ff3d91380f9e45b8d1d534341340f53a8904ae412a9"
+      "bytes": 20388,
+      "sha256": "0d095c42d87893f2d4c294533c1c85bffcea826b39b8d7f50ad2372ed6efb5ae"
     },
     {
       "path": "gunner-arms-r561.js",
@@ -54073,8 +54078,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10814,
-  "totalBytes": 1314451920,
+  "fileCount": 10815,
+  "totalBytes": 1314561472,
   "webHTMLSha256": "780e388421b56eb573d49ec934544db645a382d3b701fe01677bdc727df01115",
   "largest": [
     {

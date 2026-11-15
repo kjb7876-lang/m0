@@ -19,7 +19,7 @@ const D=Math.PI/180,ad=(a,b)=>Math.abs(Math.atan2(Math.sin(a-b),Math.cos(a-b)))/
 const A=load(null);ok(/R1045c/.test(A.revision)&&/R1045b/.test(A.revision)&&/R1003/.test(A.revision),'판 R1045c(+R1045b·R1003 유지)',{rev:A.revision});
 ok(A.inspect().sheets.e==='assets/r1045c/gunner/attack-e4.webp','동쪽 공격은 Dots r1',A.inspect().sheets);
 ok(A.inspect().sheets.n==='assets/r1045/gunner/attack-n3.webp','사용자가 고른 정 위 n3 는 그대로');
-ok(A.walks().e.path==='assets/r1045c/gunner/walk-e2.webp'&&A.walks().s2.path==='assets/r1045/gunner/walk-s2.webp','동쪽 걷기는 Dots r1, 아래 걷기 s2 그대로',A.walks());
+ok((A.walks().e.path==='assets/r1045c/gunner/walk-e2.webp'||/R1045d/.test(A.revision)&&A.walks().e.path==='assets/r1045d/gunner/walk-e3.webp')&&A.walks().s2.path==='assets/r1045/gunner/walk-s2.webp','동쪽 걷기는 Dots r1, 아래 걷기 s2 그대로',A.walks());
 for(let f=0;f<6;f++){const t=A.tip('e',f);ok(t[0]>=150&&t[0]<=162&&t[1]>=70&&t[1]<=84,'e '+f+'칸 총구 끝(잰 값 156·77)',t);}
 const wt=A.walks().e.tip;for(let f=0;f<8;f++)ok(wt[f][0]>=158&&wt[f][0]<=172&&wt[f][1]>=72&&wt[f][1]<=86,'walk-e '+f+'칸 총구 끝(잰 값 165~166·79)',wt[f]);
 for(const d of [0,180]){const p=A.pick(d*D);ok(p.sheet==='e'&&ad(d*D,A.gunAngle(p.sheet,p.mirror))<=5,'옆('+d+'°) 은 e 칸(서쪽 반전)',p);}
