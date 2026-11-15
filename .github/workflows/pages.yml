@@ -596,6 +596,8 @@ jobs:
         run: node r96/qa/r1055/r1055-cpu-check.cjs
       - name: R1085 ink-wash UI (ink panels, paper buttons, R1055 jg palette, settings toggle, no control hidden) CPU check
         run: node r96/qa/r1085/r1085-cpu-check.cjs
+      - name: R1090 character ink tint (hero and mob body images only, follows the map ink wash, settings toggle, effects and telegraphs untouched) CPU check
+        run: node r96/qa/r1090/r1090-cpu-check.cjs
       - name: R1022 auto-move toggle CPU check
         run: node r96/qa/r1022/r1022-cpu-check.cjs
       - name: R1007 samong confront statement markers never overlap (4-marker zones M-1 Michaela, S-04 16th floor were unpassable) CPU check
