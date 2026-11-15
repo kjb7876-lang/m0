@@ -30,13 +30,21 @@
 //  · 렉: 사체 조각을 몸 그림 한 장에서 clip 으로 잘라(사체 하나 9~12번) 매 프레임 그려 3D 기록기가 삼각형을 다시 자르고 지오메트리를 새로 만들었다
 //    (무한 생존 8마리씩 동시 처치: 헤드리스 프레임 중앙값 259ms ↔ 사체 끔 181ms). → 조각이 멈춘 사체 모습을 사체마다 캔버스 한 장에 한 번 굽고
 //    (정적 그림 표시 __storyworldStaticSource — 매 프레임 복사·업로드 없음) 이후엔 clip 없는 그림 한 장으로 그린다. 검사 qa/r690/r690-cpu-check.cjs.
+//  R1054(사용자 2026-11-15 11:00Z 15세 이용가 표 "몬스터 사망 — 어둠으로 소멸, 재가 되어 사라짐 / 인체가 찢기거나 장기가 노출됨은 청불 위험",
+//   "시체 — 천으로 덮거나 실루엣"): 15세 정책(age15-r1054.js 의 window.__STORYWORLD_AGE15_R1054__.on)이 켜져 있으면 기본 연출은 'ash'.
+//  · 찢김 조각·피 터짐 시트·피 웅덩이·몸 사체를 쓰지 않는다. 그 몹 자기 그림이 통째로(돌리거나 누르지 않음) 검은 실루엣으로 어두워지며
+//    살짝 떠오르듯 옅어지고, 그 자리에서 어두운 연기(R108 eden smoke 16칸 시트)와 재 조각(R976 ash-flakes 시트 회색 줄)이 피어올라 사라진다.
+//  · 사체 대신 옅은 재 자국(피 웅덩이 칸을 무채색 .12 밝기로) 6초 + 2초에 걸쳐 사라짐. 불 테마·불 스킬로 죽으면 화염벽 시트만 더한다(R777 규칙 그대로).
+//  · 설정 창의 '찢기고 터짐'·'쓰러져 눕기' 고르기는 15세 정책 아래에서 숨기고 예전에 저장된 값도 무시한다(정책이 기본값, 설정 토글 아님).
+//  · 정책 전역이 없으면(단독 검사·옛 빌드) 예전 그대로. 보스·중간보스는 원래 연출 그대로(자기 사망 프레임). 검사 qa/r1054/age15-cpu-check.cjs.
 //  R691(Codex #420 P2, 사용자 03:46Z "동시에 많은 사망 효과가 남을 때 렉"): 조각 모음이 공유 캐시(48칸)에만 있어 죽는 중인 몹이 48마리를 넘으면
 //   매 프레임 서로 밀어내 다시 만들었다 → 그 죽음(fx.r462)이 직접 들고, 사체는 같은 것을 써서 구운 뒤 놓는다. 검사 qa/r691/r691-cpu-check.cjs.
 (()=>{'use strict';
 if(window.__STORYWORLD_MOB_DEATH_R462__)return;
-const REV='R690-R691-R777-mobdeath-7',KEY='storyworld.r462.mobDeath';
+const REV='R690-R691-R777-R1054-mobdeath-8',KEY='storyworld.r462.mobDeath';
 let prefs={on:true,corpses:true,style:'gore',flame:'auto'};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={fireDeaths:0,fireHits:0,looks:0,fire:0,blood:0,noLook:0,corpses:0,corpseDraws:0,sheetDraws:0,cleared:0,errors:0};let lastError=null;
+const A15=()=>{try{return !!(typeof window!=='undefined'&&window.__STORYWORLD_AGE15_R1054__&&window.__STORYWORLD_AGE15_R1054__.on===true);}catch(_){return false;}},style=()=>A15()?'ash':prefs.style;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const T=()=>typeof time==='number'?time:0,low=()=>!!(typeof settings!=='undefined'&&settings?.lowFx),fin=v=>typeof v==='number'&&Number.isFinite(v);
 const recorder=()=>typeof ctx!=='undefined'&&!!ctx&&typeof ctx.scope==='function',FQ=.12,qAge=a=>Math.round(a/FQ)*FQ;
@@ -91,7 +99,10 @@ function wrapDraws(){
 // ---- 시트 ----------------------------------------------------------------------------------------------
 const SHEETS={fire:{p:'assets/r411/fx/boss-fire-wall.webp',cell:256,cols:6,frames:24,pivot:[128,175],vis:110},
  blood:{p:'assets/r411/fx/boss-corpse-explosion.webp',cell:256,cols:6,frames:24,pivot:[128,192],vis:150},
- pool:{p:'assets/r190/blood/blood-death.webp',cell:128,cols:4,frames:16,pivot:[64,64],vis:96}};
+ pool:{p:'assets/r190/blood/blood-death.webp',cell:128,cols:4,frames:16,pivot:[64,64],vis:96},
+ /* R1054 15세 '재로 소멸': 기존 프레임 시트만(코드 원·선 아님). 연기 4×4(마지막 칸 빔) · 재 조각 8×2(아래 줄 회색) */
+ smoke:{p:'assets/r108/eden/smoke.webp',cell:256,cols:4,frames:15,pivot:[128,228],vis:220},
+ flakes:{p:'assets/r976/ash-flakes.webp',cell:32,cols:8,frames:16,pivot:[16,16],vis:22}};
 const asked=new Map();
 function image(p){try{const row=typeof readyImage==='function'?readyImage(p):null;if(row?.image)return row.image;const t=Date.now();
  if(t-(asked.get(p)||0)>1500){asked.set(p,t);if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});}}catch(e){fail(e);}return null;}
@@ -171,7 +182,7 @@ function drawPieces(look,x,y,hPx,kind,age,o){const S=shards(o.seed,look.asp||.8,
 const LIFE={fire:1.7,blood:1.15};
 // ---- 설정으로 남긴 '눕히기' 죽음(R462 원래 연출, 사용자 2026-11-10 07:26Z "그림눕히는 효과는 연령나중에 통과위해서 설정으로 남겨둬") ----
 //  prefs.style='lay': 몸 그림을 기울여 주저앉히고(회전+납작) 눕힌 몸을 사체로 남긴다(찢김 조각 없음). 기본은 'gore'(찢김·터짐).
-const FALL={fire:[.3,.78],blood:[0,.24]},lay=()=>prefs.style==='lay';
+const FALL={fire:[.3,.78],blood:[0,.24]},lay=()=>style()==='lay';
 function bodyLay(look,x,y,hPx,o){const side=o.side||1,fall=ease(o.fall||0),ang=side*fall*.52,squash=1-fall*.5;
  ctx.save();try{ctx.translate(x-side*fall*hPx*.1,y);if(squash<1)ctx.scale(1,squash);
   own(look,0,0,hPx,{alpha:o.alpha,flip:look.flip,angle:ang,filter:o.filter});}finally{ctx.restore();}}
@@ -213,9 +224,26 @@ function wrapHit(){if(typeof hitEnemy!=='function'||hitEnemy.__r777)return typeo
 function adopt(fx){if(fx.r462!==undefined)return fx.r462;fx.r462=null;if(!prefs.on||fx.boss||fx.midboss)return null;
  const look=looks.get(fx.sourceId);if(!look){stats.noLook++;return null;}
  const flame=fireDeath(fx.sourceId,look.name);if(flame)stats.fireDeaths++;
- const kind=flame?'fire':kindOf(look),h=hash(fx.sourceId);fx.r462={kind,look,flame,side:(look.flip?-1:1)*((h>>>3)&1?1:-1),seed:h,lay:lay()};fx.life=Math.max(fx.life||0,LIFE[kind]);stats[kind]++;
+ const kind=flame?'fire':kindOf(look),h=hash(fx.sourceId),ash=A15();fx.r462={kind,look,flame,side:(look.flip?-1:1)*((h>>>3)&1?1:-1),seed:h,lay:!ash&&lay(),ash};
+ const L0=fin(+fx.life)?+fx.life:0;fx.life=Math.max(L0,ash?ASH_LIFE:LIFE[kind]);stats[kind]++;if(ash)stats.ash=(stats.ash||0)+1;
  if(prefs.corpses)addCorpse(fx);return fx.r462;}
-function drawDying(fx,base){if(fx.r462.lay){drawDyingLay(fx,base);return;}const R=fx.r462,look=R.look,q=project(fx.x,fx.y),z=typeof zoom==='number'&&zoom>0?zoom:1,hPx=Math.max(14,look.h*z),age=fx.age,fa=qAge(age);
+// ---- R1054 15세 '어둠·재로 소멸' ---------------------------------------------------------------------------------
+//  0~.06초 맞은 번쩍(통째) → .45초까지 검은 실루엣으로 어두워짐 → .3~1.05초 살짝 떠오르며 옅어져 사라짐.
+//  .12초부터 어두운 연기 시트(16칸)와 재 조각(회색 줄 8칸, 몸 위 5점에서 떠오름)이 피었다 흩어진다. 나이·좌표가 NaN 이면 그리지 않는다.
+const ASH_LIFE=1.25;
+function drawDyingAsh(fx,base){const R=fx.r462,look=R.look,age=+fx.age;if(!fin(age)||age<0)return;const q=project(fx.x,fx.y);if(!q||!fin(q.x)||!fin(q.y))return;
+ const z=typeof zoom==='number'&&zoom>0?zoom:1,hPx=Math.max(14,(fin(look.h)?look.h:60)*z),life=fin(+fx.life)&&fx.life>.2?+fx.life:ASH_LIFE,fa=qAge(age);
+ if(R.flame)embersOnly(base,fx);
+ const dark=clamp01(fa/.45),fade=1-ease(clamp01((fa-.3)/.75)),rise=ease(clamp01((fa-.3)/.75));
+ if(fade>.01){const b=(age<.06?1.5:1)*(1-dark)+.07*dark;
+  body(look,q.x,q.y-hPx*.05*rise,hPx,{alpha:fade,filter:`brightness(${b.toFixed(3)}) saturate(${(1-dark).toFixed(3)}) contrast(${(1+dark*.25).toFixed(3)})`});}
+ const t=clamp01((age-.12)/(life-.12));
+ if(age>.12&&t<1){sheet('smoke',Math.floor(t*15),q.x,q.y+hPx*.02,hPx*(.85+.35*t),.82*(t>.7?(1-t)/.3:1),{filter:'brightness(.14) saturate(0) contrast(1.1)',flip:R.side<0});
+  for(let i=0;i<5;i++){const r=((R.seed>>>(i*5))&31)/31,u=clamp01(t*1.25-i*.05);if(u<=0||u>=1)continue;
+   const fx2=q.x+(r-.5)*hPx*.5+Math.sin(u*5+i)*hPx*.06,fy=q.y-hPx*(.25+.5*((i*37%10)/10))-u*hPx*.55;
+   sheet('flakes',8+((i*3+Math.floor(u*8))%8),fx2,fy,hPx*.09,(1-u)*.9,{filter:'brightness(.32) saturate(0)'});}}
+ if(R.flame){const tf=clamp01((age-.06)/(life-.06));sheet('fire',Math.floor(Math.sqrt(tf)*24),q.x-R.side*hPx*.04,q.y-hPx*.05,hPx*(.42+.3*ease(clamp01(age/.45))),(age<.12?age/.12:1)*(tf>.8?(1-tf)/.2:1),{flip:R.side<0});}}
+function drawDying(fx,base){if(fx.r462.ash){drawDyingAsh(fx,base);return;}if(fx.r462.lay){drawDyingLay(fx,base);return;}const R=fx.r462,look=R.look,q=project(fx.x,fx.y),z=typeof zoom==='number'&&zoom>0?zoom:1,hPx=Math.max(14,look.h*z),age=fx.age,fa=qAge(age);
  if(R.kind==='fire'){
   // 엔진 불꽃·불티는 살리되 엔진 몸 그림(다른 몹일 수 있음)은 빼고 그린다
   // R775(사용자 11-12 07:11Z '죽을때 불붙는 연출 없애'): 기본(flame:false)은 엔진 불꽃·불티, 달아오름, 화염벽 시트 없이 금 간 몸이 어두워지며 부서져 내려앉기만.
@@ -248,10 +276,10 @@ let corpses=[],corpseRoom=null,corpseSerial=0;
 //  어두운 곳에선 바닥보다 밝게 뜬다. 주인 종류는 그대로 'scene' 이라 그리는 층·순서·화면 자리는 같다. 2D 캔버스는 그대로.
 const CORPSE_OWNER='r462:corpse:';
 function addCorpse(fx){if(typeof room==='undefined'||!room)return;if(corpseRoom!==room){corpses=[];corpseRoom=room;}const R=fx.r462,max=low()?10:24;
- const born=T()-(+fx.age||0);corpses.push({holder:R,flame:!!R.flame,x:fx.x,y:fx.y,kind:R.kind,look:R.look,side:R.side,seed:R.seed,lay:!!R.lay,uid:++corpseSerial,born,t0:born+(R.lay?FALL[R.kind][1]:(+fx.life||LIFE[R.kind]))});stats.corpses++;
+ const born=T()-(+fx.age||0);corpses.push({holder:R.ash?null:R,flame:!!R.flame,x:fx.x,y:fx.y,kind:R.kind,look:R.look,side:R.side,seed:R.seed,lay:!!R.lay,ash:!!R.ash,uid:++corpseSerial,born,t0:born+(R.ash?ASH_LIFE*.7:R.lay?FALL[R.kind][1]:(+fx.life||LIFE[R.kind]))});stats.corpses++;
  while(corpses.length>max)corpses.shift();}
 // R690 사체 굽기: 조각이 다 멈춘 모습(SETTLED 초)을 캔버스 한 장에 한 번 그린다. 발밑 = (ox,oy), 굽는 키 hb 픽셀.
-const SETTLED=30,CORPSE_FILTER={blood:'brightness(.82) saturate(.95) contrast(1.05)',fire:'brightness(.58) saturate(.6) contrast(1.12)'};
+const ASH_STAY=6,SETTLED=30,CORPSE_FILTER={blood:'brightness(.82) saturate(.95) contrast(1.05)',fire:'brightness(.58) saturate(.6) contrast(1.12)'};
 function bakeable(look){try{if(typeof document==='undefined'||typeof document?.createElement!=='function')return false;const row=typeof readyImage==='function'?readyImage(look.path):null;return !!row?.image;}catch(_){return false;}}
 // 경계: 조각마다 그 clip 다각형(그림은 이 안에서만 찍힘)을 멈춘 자리로 옮긴 꼭짓점들 → 잘림 없이 넉넉하다.
 function bakeCorpse(c,hPx){const look=c.look,S=shards(c.seed,look.asp||.8,low());
@@ -271,9 +299,11 @@ function baked(c,q,hPx,alpha){if(prefs.bake===false)return false;if(!c.bake&&!c.
  const k=hPx/B.hb;ctx.save();try{ctx.globalAlpha*=alpha;ctx.drawImage(B.cv,q.x-B.ox*k,q.y-B.oy*k,B.W*k,B.H*k);stats.bakeDraws=(stats.bakeDraws||0)+1;}finally{ctx.restore();}return true;}
 function drawCorpses(){if(!prefs.on||!prefs.corpses||!corpses.length)return;if(typeof room==='undefined'||room!==corpseRoom){corpses=[];stats.cleared++;return;}
  const now=T(),stay=low()?15:45,z=typeof zoom==='number'&&zoom>0?zoom:1;
- corpses=corpses.filter(c=>now-c.t0<stay+4);const scope=typeof ctx.scope==='function'?ctx.scope.bind(ctx):null;
- for(const c of corpses){const age=now-c.t0;if(age<0)continue;const q=project(c.x,c.y),hPx=Math.max(14,c.look.h*z),fade=age>stay?1-(age-stay)/4:1;if(fade<=0)continue;
+ corpses=corpses.filter(c=>now-c.t0<(c.ash?ASH_STAY+2:stay+4));const scope=typeof ctx.scope==='function'?ctx.scope.bind(ctx):null;
+ for(const c of corpses){const age=now-c.t0;if(age<0)continue;const q=project(c.x,c.y),hPx=Math.max(14,c.look.h*z),fade=c.ash?(age>ASH_STAY?1-(age-ASH_STAY)/2:clamp01(age/.4)):age>stay?1-(age-stay)/4:1;if(!(fade>0)||!q||!fin(q.x)||!fin(q.y))continue;
   const one=()=>{ctx.save();try{
+   /* R1054 15세: 몸 사체 없이 옅은 재 자국만 */
+   if(c.ash){sheet('pool',7,q.x-c.side*hPx*.06,q.y,hPx*.6,.42*fade,{squash:.38,flip:(c.seed&1)===1,filter:'brightness(.12) saturate(0)'});stats.corpseDraws++;return;}
    if(c.kind==='blood'){const grow=clamp01(age/.9);sheet('pool',Math.round(3+grow*4),q.x-c.side*hPx*.1,q.y,hPx*(.55+.35*grow),.78*fade,{squash:.42,flip:(c.seed&1)===1});
     if(c.lay)bodyLay(c.look,q.x,q.y,hPx,{side:c.side,fall:1,alpha:.95*fade,filter:'brightness(.68) saturate(1.2) contrast(1.06)'});
     else if(!baked(c,q,hPx,.97*fade))drawPieces(c.look,q.x,q.y,hPx,'blood',now-c.born,{holder:c.holder,seed:c.seed,alpha:.97*fade,filter:CORPSE_FILTER.blood});}
@@ -296,11 +326,13 @@ function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringif
 // 설정 창: '몹 죽음 연출' — 찢김·터짐(기본) / 쓰러져 눕기(R462 원래). 다음 죽음부터 바뀐다(이미 남은 사체는 그대로).
 try{if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const r=base.apply(this,a);try{const grid=document.querySelector('#panel .settings')||document.querySelector('.settings');
  if(grid&&!document.getElementById('r532DeathStyle')){const l=document.createElement('label'),s=document.createElement('select');s.id='r532DeathStyle';
-  for(const [v,t] of [['gore','찢기고 터짐'],['lay','쓰러져 눕기']]){const o=document.createElement('option');o.value=v;o.textContent=t;s.appendChild(o);}
-  s.value=prefs.style==='lay'?'lay':'gore';s.onchange=()=>set({style:s.value==='lay'?'lay':'gore'});l.appendChild(document.createTextNode('몹 죽음 연출 '));l.appendChild(s);grid.appendChild(l);}}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
+  /* R1054 15세 정책: 찢김·눕기 고르기 없이 '어둠·재로 소멸' 하나(정책이 기본값) */
+  const OPTS=A15()?[['ash','어둠·재로 소멸(15세)']]:[['gore','찢기고 터짐'],['lay','쓰러져 눕기']];
+  for(const [v,t] of OPTS){const o=document.createElement('option');o.value=v;o.textContent=t;s.appendChild(o);}
+  s.value=A15()?'ash':prefs.style==='lay'?'lay':'gore';s.onchange=()=>{if(!A15())set({style:s.value==='lay'?'lay':'gore'});};l.appendChild(document.createTextNode('몹 죽음 연출 '));l.appendChild(s);grid.appendChild(l);}}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
 // R690: 이 몹의 죽음을 R462 가 맡는가(그렇다면 R91 공용 잔해·파편, R165 연기는 겹치지 않게 건너뜀)
 function owns(e){try{return !!(prefs.on&&e&&typeof e==='object'&&!major(e)&&looks.has(e.id));}catch(_){return false;}}
 window.__STORYWORLD_MOB_DEATH_R462__=Object.freeze({revision:REV,set,kindOf,owns,corpseOwner:CORPSE_OWNER,shards,shardBox,pieceAt,
  fireZones:FIRE_ZONES,isFireSource:src=>fireWindow(src)>0,
- inspect:()=>({revision:REV,installed:ok,prefs:{...prefs},corpses:corpses.length,corpsesBurning:corpses.filter(c=>c.flame&&T()-c.t0>=0&&T()-c.t0<4.5).length,fireZones:[...FIRE_ZONES],fireTracked:fireHits.size,atlasCache:atlasCache.size,stats:{...stats},lastError})});
+ inspect:()=>({revision:REV,installed:ok,prefs:{...prefs},style:style(),age15:A15(),corpses:corpses.length,corpsesBurning:corpses.filter(c=>c.flame&&T()-c.t0>=0&&T()-c.t0<4.5).length,fireZones:[...FIRE_ZONES],fireTracked:fireHits.size,atlasCache:atlasCache.size,stats:{...stats},lastError})});
 })();

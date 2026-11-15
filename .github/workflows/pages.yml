@@ -706,6 +706,8 @@ jobs:
         run: node r96/qa/r1040/boss-pattern-fx-cpu-check.cjs
       - name: R1042 lust boss kiss lips attack (telegraph, 66 percent of current HP, frame sheets) CPU check
         run: node r96/qa/r1042/kiss-lips-cpu-check.cjs
+      - name: R1054 age-15 default presentation (mob death ash, reduced hit blood) CPU check
+        run: node r96/qa/r1054/age15-cpu-check.cjs
       - name: R1038 defer hidden boot self-tests until diagnostics open CPU check
         run: node r96/qa/r1038/r1038-cpu-check.cjs
       - name: R1037 narration always-off button (boss entry story window + memory fragment note) and settings rows CPU check
