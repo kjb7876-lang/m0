@@ -8423,6 +8423,56 @@
       "sha256": "2fc461777984b2c606728e37d74b70a532838f9895a66589059a2edc84ed47d5"
     },
     {
+      "path": "assets/r1041/fx-a5-slayer-flame.webp",
+      "bytes": 80520,
+      "sha256": "651ddba52e25f6eb4d364dc5764bf6574e5676da11cb0c47e14664b3d0ff81f2"
+    },
+    {
+      "path": "assets/r1041/fx-c2-hero-hurt.webp",
+      "bytes": 34530,
+      "sha256": "5d082e5a867b7dfdb5639dd2b663b9dc73c6096bd53809958a38cf0e6762c732"
+    },
+    {
+      "path": "assets/r1041/fx-c4-ground-ring.webp",
+      "bytes": 69478,
+      "sha256": "6ba1afa54e96e7eb174e222b9ece5784529587aeee0e1dfd8e355e73fbd79350"
+    },
+    {
+      "path": "assets/r1041/fx-h6-hwando-iai.webp",
+      "bytes": 36580,
+      "sha256": "afab6648c9d450288a4df82cf488065b49e2faac3883cd952147c069ccf573f8"
+    },
+    {
+      "path": "assets/r1041/fx-m1-michaela-halo.webp",
+      "bytes": 53048,
+      "sha256": "fcbbcd58722ab59ad4184f03af301ccc454459a3eb845abd6e7c1a4f64b99f8b"
+    },
+    {
+      "path": "assets/r1041/fx-m3-michaela-ego-loop.webp",
+      "bytes": 497712,
+      "sha256": "da7265487db82bd25cd7b9b95dee8b495ee8d105f3e0d5cf0c96b34e97ce4b4f"
+    },
+    {
+      "path": "assets/r1041/fx-m3-michaela-ego-on.webp",
+      "bytes": 219846,
+      "sha256": "c25f6c1e9003eb297041db47a10432c2b968c261e49f9d8598328ee38e9106aa"
+    },
+    {
+      "path": "assets/r1041/fx-m4-michaela-hit.webp",
+      "bytes": 105818,
+      "sha256": "1287c7e9646bd315998003bcb10caec83e6724079c01177f901b45548d61932b"
+    },
+    {
+      "path": "assets/r1041/fx-m5-michaela-ground-heart.webp",
+      "bytes": 66576,
+      "sha256": "a6e7f2350f3ec83efd5867f7c2f467a7693156518ff6805a0c70df3fe0e8ff03"
+    },
+    {
+      "path": "assets/r1041/fx-m7-michaela-sky-pillar.webp",
+      "bytes": 192038,
+      "sha256": "28b811db4905329a09df42f1a1615bbe29cdd7cdd14e52371ac7747192c84ba0"
+    },
+    {
       "path": "assets/r1045/gunner/attack-e3.webp",
       "bytes": 19020,
       "sha256": "ada4740292519db23864182d4d335af85620b1cb73e283d0f0c902e9a8ca0c37"
@@ -51898,6 +51948,11 @@
       "sha256": "f22bba8c85d290468150dc5ff245e3575933f3ab691360a827016aff69f2a906"
     },
     {
+      "path": "hero-dots-fx-r1041.js",
+      "bytes": 14692,
+      "sha256": "b65a8a83be39825b88603aaef27e05bc874cfc6996cb7904e63f581cbb3e482d"
+    },
+    {
       "path": "hero-facing-r336.js",
       "bytes": 2132,
       "sha256": "877f2b8f9988ab1c4b2eac31529a2e6c2b1d6dbb52f6bbd03f822d636f7cb8a9"
@@ -52109,8 +52164,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6579206,
-      "sha256": "13b8b1afa36844c295a5eeea64da1b5d3a8294a56c3379530c95dc17847f723d"
+      "bytes": 6579254,
+      "sha256": "1d71a54f3517c648e636a03badf19dee9722abd33045654484a07f91d69749f5"
     },
     {
       "path": "intro-r140.js",
@@ -53373,9 +53428,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10674,
-  "totalBytes": 1297932458,
-  "webHTMLSha256": "13b8b1afa36844c295a5eeea64da1b5d3a8294a56c3379530c95dc17847f723d",
+  "fileCount": 10685,
+  "totalBytes": 1299303344,
+  "webHTMLSha256": "1d71a54f3517c648e636a03badf19dee9722abd33045654484a07f91d69749f5",
   "largest": [
     {
       "path": "index.html",

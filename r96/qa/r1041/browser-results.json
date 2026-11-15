@@ -1,0 +1,91 @@
+{
+ "when": "2026-11-15T02:33:06.923Z",
+ "headless": true,
+ "GPUVerified": false,
+ "naturalPlayVerified": false,
+ "allOk": true,
+ "results": {
+  "michaela": {
+   "checks": [
+    {
+     "ok": true,
+     "m": "후광 R106 halo 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "M1 후광 칸 ≥6",
+     "d": 8
+    },
+    {
+     "ok": true,
+     "m": "EGO 범위 R1039 magenta 오라 0(M3 로 바뀜)",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "M3 발동 칸 ≥4·반복 칸 ≥8",
+     "d": [
+      4,
+      10
+     ]
+    },
+    {
+     "ok": true,
+     "m": "C4 발밑 고리 칸 ≥6",
+     "d": 8
+    },
+    {
+     "ok": true,
+     "m": "피격 C2 칸 ≥3",
+     "d": [
+      192,
+      576,
+      768,
+      0,
+      384
+     ]
+    },
+    {
+     "ok": true,
+     "m": "피격 선 줄기 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "그림 좌표 NaN 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "R1041 설치·내부 오류 0",
+     "d": {
+      "swapped": 1402,
+      "dropped": 422,
+      "hurts": 3,
+      "fallback": 9,
+      "kept": 1246,
+      "errors": 0,
+      "last": null
+     }
+    },
+    {
+     "ok": true,
+     "m": "페이지 오류 0",
+     "d": []
+    }
+   ],
+   "notes": [
+    {
+     "m": "헤드리스에서 미카엘라 스킬 적중이 안 나옴 — M4 미실행"
+    },
+    {
+     "m": "헤드리스에서 사랑의 처방이 안 나옴 — M5 미실행"
+    },
+    {
+     "m": "M7 하늘 빛기둥은 R(아직 배우지 않은 키)라 헤드리스 미실행 — CPU 검사로만 확인"
+    }
+   ]
+  }
+ }
+}

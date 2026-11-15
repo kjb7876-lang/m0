@@ -694,6 +694,8 @@ jobs:
         run: node r96/qa/r1038/r1038-cpu-check.cjs
       - name: R1037 narration always-off button (boss entry story window + memory fragment note) and settings rows CPU check
         run: node r96/qa/r1037/r1037-cpu-check.cjs
+      - name: R1041 Dots CX-0099FX hero effect frame sheets (halo, slayer flame, ground ring, iai, hurt) CPU check
+        run: node r96/qa/r1041/r1041-cpu-check.cjs
       - name: R1044 story-window recorded narration voice + remove unused voice buttons CPU check
         run: node r96/qa/r1044/r1044-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check

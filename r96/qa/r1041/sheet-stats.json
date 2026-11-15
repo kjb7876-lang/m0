@@ -1,0 +1,166 @@
+{
+ "assets/r1041/fx-m1-michaela-halo.webp": {
+  "width": 2048,
+  "height": 96,
+  "frames": 8,
+  "alpha": [
+   35.986,
+   39.874,
+   44.363,
+   46.234,
+   48.305,
+   49.133,
+   46.153,
+   38.547
+  ],
+  "distinct": 7
+ },
+ "assets/r1041/fx-a5-slayer-flame.webp": {
+  "width": 2048,
+  "height": 256,
+  "frames": 8,
+  "alpha": [
+   23.291,
+   27.532,
+   32.194,
+   34.649,
+   31.872,
+   30.708,
+   26.177,
+   23.444
+  ],
+  "distinct": 7
+ },
+ "assets/r1041/fx-c2-hero-hurt.webp": {
+  "width": 1152,
+  "height": 192,
+  "frames": 6,
+  "alpha": [
+   3.492,
+   17.28,
+   37.148,
+   4.87,
+   2.096,
+   0.814
+  ],
+  "distinct": 5
+ },
+ "assets/r1041/fx-c4-ground-ring.webp": {
+  "width": 2048,
+  "height": 128,
+  "frames": 8,
+  "alpha": [
+   28.623,
+   29.227,
+   29.25,
+   27.881,
+   29.194,
+   29.533,
+   28.232,
+   29.197
+  ],
+  "distinct": 7
+ },
+ "assets/r1041/fx-h6-hwando-iai.webp": {
+  "width": 4096,
+  "height": 128,
+  "frames": 8,
+  "alpha": [
+   1.836,
+   12.768,
+   21.335,
+   11.779,
+   6.474,
+   2.017,
+   0.487,
+   0.102
+  ],
+  "distinct": 7
+ },
+ "assets/r1041/fx-m3-michaela-ego-on.webp": {
+  "width": 2304,
+  "height": 384,
+  "frames": 6,
+  "alpha": [
+   6.869,
+   26.745,
+   72.434,
+   75.575,
+   79.7,
+   81.292
+  ],
+  "distinct": 5
+ },
+ "assets/r1041/fx-m3-michaela-ego-loop.webp": {
+  "width": 3840,
+  "height": 384,
+  "frames": 10,
+  "alpha": [
+   83.625,
+   85.064,
+   86.778,
+   88.589,
+   90.369,
+   89.22,
+   87.199,
+   85.271,
+   82.027,
+   81.763
+  ],
+  "distinct": 9
+ },
+ "assets/r1041/fx-m4-michaela-hit.webp": {
+  "width": 2048,
+  "height": 256,
+  "frames": 8,
+  "alpha": [
+   14.567,
+   43.383,
+   107.139,
+   78.539,
+   22.939,
+   16.147,
+   6.781,
+   2.507
+  ],
+  "distinct": 7
+ },
+ "assets/r1041/fx-m5-michaela-ground-heart.webp": {
+  "width": 2560,
+  "height": 128,
+  "frames": 10,
+  "alpha": [
+   12.436,
+   24.35,
+   35.099,
+   46.82,
+   64.125,
+   53.976,
+   35.474,
+   14.049,
+   5.127,
+   0.861
+  ],
+  "distinct": 9
+ },
+ "assets/r1041/fx-m7-michaela-sky-pillar.webp": {
+  "width": 3072,
+  "height": 512,
+  "frames": 12,
+  "alpha": [
+   1.198,
+   5.13,
+   22.296,
+   51.324,
+   75.616,
+   37.042,
+   24.389,
+   12.793,
+   9.238,
+   1.523,
+   1.027,
+   0.329
+  ],
+  "distinct": 11
+ }
+}

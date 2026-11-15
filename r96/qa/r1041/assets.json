@@ -1,0 +1,122 @@
+[
+ {
+  "name": "fx-m1-michaela-halo",
+  "source": "dots-results/cx0099fx/FX-M1/sheet.png",
+  "sourceSha256": "6e0cbdaa5c396b993f1b3a7145750cd9645e6f31b3eb948341efd49baf561a5d",
+  "sourceBytes": 150593,
+  "size": [
+   2048,
+   96
+  ],
+  "webpBytes": 53048,
+  "webpSha256": "fcbbcd58722ab59ad4184f03af301ccc454459a3eb845abd6e7c1a4f64b99f8b"
+ },
+ {
+  "name": "fx-a5-slayer-flame",
+  "source": "dots-results/cx0099fx/FX-A5/CX-0099FX_r1_slayer_FX-A5.png",
+  "sourceSha256": "f6e9ab7a387f136a7653d7cac82cb68900382d2bb461a8135a03136bc0762fa9",
+  "sourceBytes": 246718,
+  "size": [
+   2048,
+   256
+  ],
+  "webpBytes": 80520,
+  "webpSha256": "651ddba52e25f6eb4d364dc5764bf6574e5676da11cb0c47e14664b3d0ff81f2"
+ },
+ {
+  "name": "fx-c2-hero-hurt",
+  "source": "dots-results/cx0099fx/FX-C2/CX-0099FX_r1_common_FX-C2.png",
+  "sourceSha256": "781ce1a43745fb557a1b8b1b57655eb69b88cad6d63540b3f9eb5654c9523e06",
+  "sourceBytes": 77809,
+  "size": [
+   1152,
+   192
+  ],
+  "webpBytes": 34530,
+  "webpSha256": "5d082e5a867b7dfdb5639dd2b663b9dc73c6096bd53809958a38cf0e6762c732"
+ },
+ {
+  "name": "fx-c4-ground-ring",
+  "source": "dots-results/cx0099fx/FX-C4/CX-0099FX_r1_common_FX-C4.png",
+  "sourceSha256": "a0f50a3e362041c74cb38988ec16ce25d8f263c78755260651df8a7fc8584e42",
+  "sourceBytes": 152593,
+  "size": [
+   2048,
+   128
+  ],
+  "webpBytes": 69478,
+  "webpSha256": "6ba1afa54e96e7eb174e222b9ece5784529587aeee0e1dfd8e355e73fbd79350"
+ },
+ {
+  "name": "fx-h6-hwando-iai",
+  "source": "dots-results/cx0099fx/FX-H6/CX-0099FX_r1_hwando_FX-H6.png",
+  "sourceSha256": "40c9a1a9c86d4cd3fd7361ee3b9b3a8e9977d895ce2cc1ca84c7a3fae0a39b02",
+  "sourceBytes": 84090,
+  "size": [
+   4096,
+   128
+  ],
+  "webpBytes": 36580,
+  "webpSha256": "afab6648c9d450288a4df82cf488065b49e2faac3883cd952147c069ccf573f8"
+ },
+ {
+  "name": "fx-m3-michaela-ego-on",
+  "source": "dots-results/cx0099fx/FX-M3-r2/FX-M3_r2_activation6_384px_12fps_HOLD.png",
+  "sourceSha256": "3f642bc419caae13b7816c0dd090f07bb92c5f2ded87544c44a781d1a8eda9f5",
+  "sourceBytes": 665099,
+  "size": [
+   2304,
+   384
+  ],
+  "webpBytes": 219846,
+  "webpSha256": "c25f6c1e9003eb297041db47a10432c2b968c261e49f9d8598328ee38e9106aa"
+ },
+ {
+  "name": "fx-m3-michaela-ego-loop",
+  "source": "dots-results/cx0099fx/FX-M3-r2/FX-M3_r2_loop10_384px_12fps_HOLD.png",
+  "sourceSha256": "c3feaddede8cd340a82967ffdd6e1722c63dc18356c8ac888bdc6215dd6a9a06",
+  "sourceBytes": 1554837,
+  "size": [
+   3840,
+   384
+  ],
+  "webpBytes": 497712,
+  "webpSha256": "da7265487db82bd25cd7b9b95dee8b495ee8d105f3e0d5cf0c96b34e97ce4b4f"
+ },
+ {
+  "name": "fx-m4-michaela-hit",
+  "source": "dots-results/cx0099fx/FX-M4-r2/FX-M4_r2_8x256x256.png",
+  "sourceSha256": "eaabe8f7361a33ca32add399ff45ebd4a7864fd00369eb660a7f617a5d6ef025",
+  "sourceBytes": 315801,
+  "size": [
+   2048,
+   256
+  ],
+  "webpBytes": 105818,
+  "webpSha256": "1287c7e9646bd315998003bcb10caec83e6724079c01177f901b45548d61932b"
+ },
+ {
+  "name": "fx-m5-michaela-ground-heart",
+  "source": "dots-results/cx0099fx/FX-M5-r2/FX-M5_r2_10x256x128.png",
+  "sourceSha256": "7ba434ea81df0eb612d8c7c302e33cd4c3d95942d690516e355c2ff9c3db35dc",
+  "sourceBytes": 171255,
+  "size": [
+   2560,
+   128
+  ],
+  "webpBytes": 66576,
+  "webpSha256": "a6e7f2350f3ec83efd5867f7c2f467a7693156518ff6805a0c70df3fe0e8ff03"
+ },
+ {
+  "name": "fx-m7-michaela-sky-pillar",
+  "source": "dots-results/cx0099fx/FX-M7-r2/FX-M7_r2_12x256x512.png",
+  "sourceSha256": "6de888782f3f1e19295bf25ba1c68f4a8c78c4b55a2b5fdbd64f4623961ecd64",
+  "sourceBytes": 558690,
+  "size": [
+   3072,
+   512
+  ],
+  "webpBytes": 192038,
+  "webpSha256": "28b811db4905329a09df42f1a1615bbe29cdd7cdd14e52371ac7747192c84ba0"
+ }
+]
