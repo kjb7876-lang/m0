@@ -734,6 +734,8 @@ jobs:
         run: node r96/qa/r1053/blade-melee-cpu-check.cjs
       - name: R1054 age-15 default presentation (mob death ash, reduced hit blood) CPU check
         run: node r96/qa/r1054/age15-cpu-check.cjs
+      - name: R1091 eyes open on game entry, close on death (horizontal lid line) CPU check
+        run: node r96/qa/r1091/r1091-cpu-check.cjs
       - name: R1038 defer hidden boot self-tests until diagnostics open CPU check
         run: node r96/qa/r1038/r1038-cpu-check.cjs
       - name: R1037 narration always-off button (boss entry story window + memory fragment note) and settings rows CPU check
