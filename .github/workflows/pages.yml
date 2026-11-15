@@ -456,6 +456,8 @@ jobs:
         run: node r96/qa/r1026/r1026-cpu-check.cjs
       - name: R1049 SFX rules (full audit vs rules, 55 off-rule sounds re-edited free, footsteps/low-HP heartbeat/level-up from plinkfx CC0) CPU check
         run: node r96/qa/r1049/r1049-cpu-check.cjs
+      - name: R1056 east-region gugak BGM CPU check
+        run: node r96/qa/r1056/r1056-cpu-check.cjs
       - name: R1051 hero wings removed, halo only (R106 wing sprites skipped, R101 aura and R102 holy flash draw no wings) CPU check
         run: node r96/qa/r1051/r1051-cpu-check.cjs
       - name: R1027 hero dot (pixel atlas) skill FX and static buff sigils replaced by painted frame sheets CPU check
