@@ -53,6 +53,7 @@ t('버스트: 시작 전·끝 뒤·NaN 없음',M.burstFrame(10,9.9)<0&&M.burstFr
 // 광륜(CX-0110EG): 8fps 8칸 반복, 8→1 이어짐, NaN 안전
 t('광륜: 반복 칸',M.haloFrame(0)===0&&M.haloFrame(.5)===4&&M.haloFrame(.99)===7&&M.haloFrame(1)===0&&M.haloFrame(NaN)===0&&M.haloFrame(-.2)>=0);
 {const R=path.join(__dirname,'../..');t('광륜 그림 있음',fs.existsSync(path.join(R,'runtime-text',M.FX.halo.path)));}
+t('이펙트 명령은 몸 테두리·가림 측정에서 빠짐(흰 테두리 회귀)',(src.match(/owner:fxOwner\(best\.owner\)/g)||[]).length===3&&/r409:true,r350:true,r448:true/.test(src));
 const E=M.createPlayer(null);r=E.step(1/60,{});t('시트 없음 안전',r.frame===0);
 // 시트 데이터·자산·태그 순서·0번째 칸
 {const R=path.join(__dirname,'../..'),w2={};vm.runInNewContext(fs.readFileSync(path.join(R,'client-source/ego-motion-r1048-sheets.js'),'utf8'),{window:w2,Object});

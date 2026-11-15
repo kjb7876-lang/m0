@@ -90,7 +90,7 @@ const FX=Object.freeze({slash:Object.freeze({path:'assets/r1048/fx/ego_slash.web
  feathers:Object.freeze({path:'assets/r1048/fx/ego_feathers.webp',cell:256,frames:8,size:2.4,lift:.5,alpha:.9,fps:16}),
  // 등 뒤 광륜(CX-0110EG ego_halo gem_r3 → Claude 개선: 고리는 8칸 중심 맞춘 중간값, 빛살은 칸마다 3.75° 돌림·코사인 맥동 → 8→1 이음 없음). 늘 켜짐, 은은하게.
  //  등을 보일 때(n·ne·nw)는 광륜이 몸 앞(화면 쪽)에 오므로 몸 위에 더 옅게, 나머지는 몸 뒤에.
- halo:Object.freeze({path:'assets/r1048/fx/ego_halo.webp',cell:256,frames:8,size:.8,lift:.8,alpha:.62,alphaFront:.4,fps:8})});
+ halo:Object.freeze({path:'assets/r1048/fx/ego_halo.webp',cell:256,frames:8,size:.9,lift:.8,alpha:.85,alphaFront:.5,fps:8})});
 function haloFrame(t){const F=FX.halo;if(!fin(t))return 0;return ((Math.floor(t*F.fps)%F.frames)+F.frames)%F.frames;}
 // 깃 버스트 칸: 시작 시각 t0 에서 fps 로 8칸, 그 뒤엔 없음(-1)
 function burstFrame(t0,t){const F=FX.feathers;if(!fin(t0)||!fin(t)||t<t0)return -1;const k=Math.floor((t-t0)*F.fps);return k<F.frames?k:-1;}
@@ -100,6 +100,8 @@ function placeFx(spec,frame,cx,cy,flip){const im=img(spec.path);if(!im)return nu
  if(!fin(cx)||!fin(cy)||!fin(h)||h<=0)return null;const L=cx-h/2,R=cx+h/2,T=cy-h/2,B=cy+h/2;
  const pts=flip?[[R,T],[L,T],[L,B],[R,B]]:[[L,T],[R,T],[R,B],[L,B]];
  return{image:im,sourcePath:spec.path,immutableTint:null,mutable:false,sourceRect:[clamp(frame,0,spec.frames-1)*c,0,c,c],imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],points:pts,r1048:'fx'};}
+// 이펙트 칸은 몸이 아니다 → R409 테두리 굽기·R350/R448 몸 상자·가림 측정에서 빼도록 owner 에 표시(빼지 않으면 광륜·깃이 흰 테두리로 덮여 톱니처럼 보임)
+const fxOwner=o=>({...(o||{}),r409:true,r350:true,r448:true,r1048fx:true});
 function place(sh,clip,dir,frame,fx,fy){const p=(sh.base||'assets/r1048/ego/')+clip+'-'+dir+'.'+(sh.ext||'webp'),im=img(p);if(!im)return null;
  const cell=+sh.cell,want=(typeof actorHeight==='function'?actorHeight():66)*.98,k=clamp(want/Math.max(1,+sh.bodyPx||cell*.76),.05,4),[ax,ay]=Array.isArray(sh.foot)?sh.foot:[cell/2,cell*.88];
  const X=v=>fx+(v-ax)*k,Y=v=>fy+(v-ay)*k,pts=[[X(0),Y(0)],[X(cell),Y(0)],[X(cell),Y(cell)],[X(0),Y(cell)]];
@@ -117,12 +119,12 @@ function paint(rec,st){const sh=sheets(),p=typeof player==='object'?player:null;
  r.ghosts.forEach((g,i)=>{const gq=project(g.x,g.y),f=place(sh,g.clip,g.dir,g.frame,gq.x,gq.y-lift);if(f){extra.push({...best,...f,key:best.key+':r1048g'+i,style:{...best.style,globalAlpha:alpha*g.alpha,globalCompositeOperation:'lighter'}});stats.ghosts++;}});
  /* 잔상·섞는 옛 칸은 몸 뒤에 */if(extra.length){const at=Math.max(st,rec.commands.indexOf(best));rec.commands.splice(at,0,...extra);}
  const sf=slashFrame(r.clip,r.frame,lastInp?.basic);if(sf>=0){const ah=(typeof actorHeight==='function'?actorHeight():66),sx=(+face.x||0)-(+face.y||0),sgn=sx>0?1:-1,f=placeFx(FX.slash,sf,fx+sgn*ah*FX.slash.ahead,fy-ah*FX.slash.lift,sx>0);
-  if(f){const at=rec.commands.indexOf(best);rec.commands.splice(at+1,0,{...best,...f,key:best.key+':r1048s',style:{...best.style,globalAlpha:alpha*FX.slash.alpha,globalCompositeOperation:'lighter'}});stats.slash++;}}
+  if(f){const at=rec.commands.indexOf(best);rec.commands.splice(at+1,0,{...best,...f,owner:fxOwner(best.owner),key:best.key+':r1048s',style:{...best.style,globalAlpha:alpha*FX.slash.alpha,globalCompositeOperation:'lighter'}});stats.slash++;}}
  try{const t=now(),ah0=(typeof actorHeight==='function'?actorHeight():66),back=r.dir==='n'||r.dir==='ne'||r.dir==='nw',H=FX.halo,hf=placeFx(H,haloFrame(t),fx,fy-ah0*H.lift,false);
-  if(hf){const at=rec.commands.indexOf(best);rec.commands.splice(back?at+1:at,0,{...best,...hf,key:best.key+':r1048h',style:{...best.style,globalAlpha:alpha*(back?H.alphaFront:H.alpha),globalCompositeOperation:'lighter'}});stats.halo++;}
+  if(hf){const at=rec.commands.indexOf(best);rec.commands.splice(back?at+1:at,0,{...best,...hf,owner:fxOwner(best.owner),key:best.key+':r1048h',style:{...best.style,globalAlpha:alpha*(back?H.alphaFront:H.alpha),globalCompositeOperation:'lighter'}});stats.halo++;}
   if(r.clip==='discard'&&r.frame>=9&&!burstDiscard){burstDiscard=true;burstT0=t;stats.bursts++;}if(r.clip!=='discard')burstDiscard=false;
   const bf=burstFrame(burstT0,t);if(bf>=0){const ah=(typeof actorHeight==='function'?actorHeight():66),f=placeFx(FX.feathers,bf,fx,fy-ah*FX.feathers.lift,false);
-   if(f){const at=rec.commands.indexOf(best);rec.commands.splice(at+1,0,{...best,...f,key:best.key+':r1048b',style:{...best.style,globalAlpha:alpha*FX.feathers.alpha,globalCompositeOperation:'lighter'}});stats.feathers++;}}}catch(e){stats.errors++;lastError=String(e?.message||e);}
+   if(f){const at=rec.commands.indexOf(best);rec.commands.splice(at+1,0,{...best,...f,owner:fxOwner(best.owner),key:best.key+':r1048b',style:{...best.style,globalAlpha:alpha*FX.feathers.alpha,globalCompositeOperation:'lighter'}});stats.feathers++;}}}catch(e){stats.errors++;lastError=String(e?.message||e);}
  stats.frames++;}
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
  try{const eg=egoOn();if(eg&&!wasEgo){burstT0=now();stats.bursts++;}wasEgo=eg;if(on&&st>=0&&eg&&sheets())paint(rec,st);}catch(e){stats.errors++;lastError=String(e?.message||e);}return r;};}
