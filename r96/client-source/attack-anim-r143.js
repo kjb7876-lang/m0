@@ -50,7 +50,9 @@ function apply(rec,st){const h=player.hero;if(!HEROES.includes(h))return;
  if(!best)return;const fr=place(rec,st,best,h,swing.dir,a,swing.start,0);if(fr==null)return;
  stats.frames++;stats.lastDir=swing.dir;stats.lastFrame=fr;}
 // 시트 칸 하나를 몸 그림 자리에 그린다(발 기준점·걷기와 같은 키). idle 이면 첫 칸 + 숨쉬기.
-function place(rec,st,best,h,dir8,a,start,idle,act='attack',fixed=null){const[sd0,mir]=SHEET[dir8]||SHEET.s,sd=act==='hit'&&HIT_FALLBACK[h]?.[sd0]||sd0;
+// R1050b: 좌·우 공격 시트(R437)가 있는 영웅은 대각(se·ne, 반전으로 sw·nw) 공격도 그 좌·우 시트로 — 공격 모션 위주. 위·아래·대기·피격은 그대로
+function sideFirst(sd,act,idle,has){return act==='attack'&&!idle&&has&&(sd==='se'||sd==='ne')?'e':sd;}
+function place(rec,st,best,h,dir8,a,start,idle,act='attack',fixed=null){const[sd1,mir]=SHEET[dir8]||SHEET.s,sd0=sideFirst(sd1,act,idle,!!window.__STORYWORLD_NEON_LAUREN_R437__?.attackSheet?.(h,'e')),sd=act==='hit'&&HIT_FALLBACK[h]?.[sd0]||sd0;
  // R437: 네온·라우렌 새 좌·우 공격(넓은 칸·자기 발 자리·몸 180 고정) — 시트 표는 neon-lauren-r437.js. 끄면 예전 192 칸 시트.
  const alt0=act==='attack'&&!idle?window.__STORYWORLD_NEON_LAUREN_R437__?.attackSheet?.(h,sd):act==='hit'?window.__STORYWORLD_IDLE_HIT_R710__?.hitSheet?.(h,sd)/* R710 남쪽 피격 4칸 */:null,altIm=alt0?image(alt0.path):null,alt=altIm?alt0:null/* R437 시트가 아직 안 왔으면 예전 시트로 */,CW=alt?alt.cell[0]:192,FX=alt?alt.foot[0]:96,p=alt?alt.path:pathOf(h,sd,act),im=alt?altIm:image(p);if(!im)return null;
  const n=Math.max(1,Math.round((im.naturalWidth||im.width)/CW)),fr=fixed!=null?Math.min(n-1,fixed):idle?0:Math.min(n-1,Math.floor(Math.min(.999,Math.max(0,1-a/Math.max(.05,start)))*n));
@@ -104,17 +106,17 @@ if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){con
  if(player?.hero==='hwando'&&window.__STORYWORLD_HWANDO_R242__?.active?.())return r;/* R242: 환도는 새 선택 자산이 그린다 — 옛 시트를 그리거나 받지 않는다(텍스처 중복 방지) */
  try{if(st>=0&&rec&&prefs.on)swapWalk(rec,st);}catch(e){fail(e);}
  try{const now=Date.now();if(player&&(player.hero!==lastHero||(typeof room!=='undefined'&&room!==lastRoom)||now>=nextPre)){lastHero=player.hero;lastRoom=typeof room!=='undefined'?room:null;nextPre=now+(preload()?2000:15000);}
-  const busy=player.skillAnim>0||player.hurtAnim>0||player.dashAnim>0||player.ultimateAnim>0||player.guard;
+  const sw440=!!window.__STORYWORLD_SKILL_ATTACK_R440__?.swapping?.()/* R1050b: R440 이 스킬을 공격으로 보이는 중이면 피격 그림이 스킬을 덮지 않는다 */,busy=player.skillAnim>0||player.hurtAnim>0&&!sw440||player.dashAnim>0||player.ultimateAnim>0||player.guard;
   if(!(player?.attackAnim>0))swing.prev=0;if(!(player?.hurtAnim>0))hurt.prev=0;
   if(prefs.on&&st>=0&&solo()&&player?.hero==='gunner'&&player.dashAnim>0){gunnerDash(rec,st);return r;}
-  const hurtOnly=player?.hurtAnim>0&&!(player.skillAnim>0||player.dashAnim>0||player.ultimateAnim>0||player.guard);/* R194: 환도도 피격 시트가 생겨 맞을 땐 아래 applyHit 로 */
+  const hurtOnly=player?.hurtAnim>0&&!(player.skillAnim>0||player.dashAnim>0||player.ultimateAnim>0||player.guard||sw440);/* R194: 환도도 피격 시트가 생겨 맞을 땐 아래 applyHit 로 */
   if(prefs.on&&prefs.hwandoIdle&&st>=0&&solo()&&player?.hero==='hwando'&&!(player.attackAnim>0&&!busy)&&!hurtOnly){hwandoUnify(rec,st);return r;}
-  if(prefs.on&&st>=0&&solo()&&player?.hurtAnim>0&&!(player.skillAnim>0||player.dashAnim>0||player.ultimateAnim>0||player.guard)){applyHit(rec,st);return r;}
+  if(prefs.on&&st>=0&&solo()&&player?.hurtAnim>0&&!(player.skillAnim>0||player.dashAnim>0||player.ultimateAnim>0||player.guard||sw440)){applyHit(rec,st);return r;}
   if(prefs.on&&st>=0&&solo()&&player&&currentAct()){const ca=currentAct();/* R895 규칙 2: 스킬·궁극기 커밋 창 뒤 이동이면 전용 시트를 내려놓고 걷기(R119)에 맡긴다 */if(!((ca==='skill'||ca==='ultimate')&&window.__STORYWORLD_HERO_MOTION_R895__?.moveCancel?.('skill'))&&applyAct(rec,st))return r;}else cast.act=null;
   if(!prefs.on||st<0||!solo()||!player||!(player.attackAnim>0)||busy)return r;
   apply(rec,st);}catch(e){fail(e);}return r;};}
 function set(k,v){prefs[k]=!!v;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
 // R440: 지금 R201 전용 스킬·궁극기 시트(미카엘라·라우렌 s/e)를 그릴 차례인가 — 그때는 공격 모션으로 바꾸지 않는다.
 function actSheet(){try{const h=player?.hero,act=currentAct();if(!prefs.on||!solo()||!act||act==='dash'||act==='guard'||!SKILLSET[h]?.[act])return false;const d=cast.act===act&&cast.start>0?cast.dir:dirNow();return SKILLSET[h][act].includes((SHEET[d]||SHEET.s)[0]);}catch(_){return false;}}
-window.__STORYWORLD_ATTACK_ANIM_R143__=Object.freeze({revision:REV,set,FOOT,actSheet,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError,browser:false,GPU:false})});
+window.__STORYWORLD_ATTACK_ANIM_R143__=Object.freeze({revision:REV,pure:Object.freeze({sideFirst}),set,FOOT,actSheet,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError,browser:false,GPU:false})});
 })();

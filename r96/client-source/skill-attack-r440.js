@@ -10,7 +10,7 @@
 //  · 끄기: localStorage storyworld.r440.skillAttack = {"on":false}
 (()=>{'use strict';
 if(window.__STORYWORLD_SKILL_ATTACK_R440__)return;
-const REV='R440-skill-attack-1',KEY='storyworld.r440.skillAttack',SWING=.3,ULT=.42,HOLD=1e-3;
+const REV='R440-skill-attack-2',KEY='storyworld.r440.skillAttack',SWING=.3,ULT=.42,HOLD=1e-3;
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={swaps:0,casts:0,skipped:{dash:0,guard:0,form:0,sheet:0,coop:0,move:0},errors:0,lastHero:null,lastAct:null};let lastError=null;
 const now=()=>typeof time==='number'?time:performance.now()/1000;
@@ -27,7 +27,7 @@ function swap(){if(saved||!prefs.on)return;const p=typeof player==='object'?play
  if(!solo()){stats.skipped.coop++;return;}
  if(p.dashAnim>0){stats.skipped.dash++;return;}
  if(p.guard){stats.skipped.guard++;return;}
- if(p.ego>0||p.samong>0){stats.skipped.form++;return;}
+ if(p.samong>0){stats.skipped.form++;return;}/* R1050b(사용자 2026-11-15 10:09Z "스킬이나 공격할때 항상 공격모션"): EGO 는 몸 그림이 그대로인 버프라 공격 모션으로 바꾼다 — 반자동이 EGO 를 자주 켜 스킬의 41~100%가 옛 g- 자세로 남았다. 몸이 바뀌는 사몽 각성만 그대로 */
  try{if(window.__STORYWORLD_HERO_MOTION_R895__?.moveCancel?.('skill')){stats.skipped.move++;return;}}catch(_){}/* R895 규칙 2: 커밋 창(0.18초) 뒤 이동 입력이면 걷기로 캔슬 */
  try{if(window.__STORYWORLD_ATTACK_ANIM_R143__?.actSheet?.()){stats.skipped.sheet++;return;}}catch(_){}
  const D=cast.ult?ULT:SWING,el=Math.max(0,now()-cast.t0),real=+p.attackAnim||0;
@@ -37,5 +37,5 @@ function swap(){if(saved||!prefs.on)return;const p=typeof player==='object'?play
 function restore(){const s=saved;saved=null;if(!s)return;const p=s.p;p.skillAnim=s.skillAnim;p.ultimateAnim=s.ultimateAnim;p.attackAnim=s.attackAnim;p.attackCD=s.attackCD;}
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){try{return base.apply(this,a);}catch(e){stats.errors++;lastError=String(e?.message||e).slice(0,160);throw e;}finally{restore();}};}
 function set(k,v){prefs[k]=!!v;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
-window.__STORYWORLD_SKILL_ATTACK_R440__=Object.freeze({revision:REV,swap,restore,set,SWING,ULT,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats,skipped:{...stats.skipped}},cast:{...cast},lastError,browser:false,GPU:false})});
+window.__STORYWORLD_SKILL_ATTACK_R440__=Object.freeze({revision:REV,swap,restore,swapping:()=>!!saved/* R1050b: R143 피격 그림이 스킬 공격을 덮지 않게 */,set,SWING,ULT,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats,skipped:{...stats.skipped}},cast:{...cast},lastError,browser:false,GPU:false})});
 })();

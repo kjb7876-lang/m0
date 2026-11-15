@@ -4,6 +4,7 @@
  *  · 순서: 7·7·7 을 1.5초 간격 안에 연속으로. 간격이 넘거나 다른 키가 끼면 처음부터(수정 키 단독은 그대로).
  *  · 발동: S-07 해금 여부와 상관없이 R1046 EGO 를 해금(unlock 'secret-777', 저장됨)하고 #panel 에 r1057secret class → 다른 영웅 칸을 모두 숨기고 EGO 칸만 남겨 자동 선택.
  *    창이 닫히면 원래대로(다음에 열면 평소 줄; 해금은 남으므로 EGO 칸은 환도 옆에 계속 보인다).
+ *  · 모바일(R1057b): 영웅창 제목을 1.5초 간격 안에 7번 연속 탭해도 같다(다른 곳 탭이 끼면 처음부터).
  *  · EGO 칸 자리는 R1046 이 정한다(R1048 이 0번째로 옮겨도 [data-ego-r1046] 로 찾으므로 무관).
  */
 (()=>{'use strict';
@@ -31,13 +32,21 @@ function onKey(ev){try{if(!ev||ev.type!=='keydown')return;stats.keys++;if(editin
  const t=nowMs();if(!(Number.isFinite(t)&&Number.isFinite(lastAt)&&t>=lastAt&&t-lastAt<=GAP_MS)){if(count)stats.resets++;count=0;}
  count++;lastAt=Number.isFinite(t)?t:NaN;stats.counted++;
  if(count>=NEED){count=0;lastAt=NaN;if(!active)fire();}}catch(e){fail(e);}}
+// R1057b 모바일 대안(사용자 13:18Z 승인): 영웅창 제목(#panel h2)을 1.5초 간격 안에 7번 연속 탭. 다른 곳 탭이 끼면 처음부터.
+const TAPS=7;let tapCount=0,tapAt=NaN;
+function onTap(ev){try{if(!ev||ev.type!=='click')return;if(!heroPanelOpen()){tapCount=0;return;}
+ const onTitle=!!ev.target?.closest?.('#panel h2');if(!onTitle){if(tapCount){tapCount=0;stats.resets++;}return;}
+ const t=nowMs();if(!(Number.isFinite(t)&&Number.isFinite(tapAt)&&t>=tapAt&&t-tapAt<=GAP_MS))tapCount=0;
+ tapCount++;tapAt=Number.isFinite(t)?t:NaN;stats.taps=(stats.taps||0)+1;
+ if(tapCount>=TAPS){tapCount=0;tapAt=NaN;if(!active)fire();}}catch(e){fail(e);}}
 function poll(){try{if(!hasDoc())return;const p=document.getElementById('panel');
  if(!heroPanelOpen()){if(active||p?.classList?.contains(CLS)){active=false;picked=false;p?.classList?.remove(CLS);}return;}
  if(!active)return;css();p.classList.add(CLS);try{ego()?.refresh?.();}catch(e){fail(e);}
  const c=p.querySelector('[data-ego-r1046]');if(c&&!picked){picked=true;if(!c.classList?.contains('selected')){stats.picks++;c.click();}}}catch(e){fail(e);}}
 function wrapOpen(){try{if(typeof openPanel!=='function'||openPanel.__r1057)return;const base=openPanel;const w=function(...a){const r=base.apply(this,a);poll();return r;};w.__r1057=true;openPanel=w;}catch(e){fail(e);}}
 try{window.addEventListener('keydown',onKey,true);}catch(e){fail(e);}
+try{window.addEventListener('click',onTap,true);}catch(e){fail(e);}
 wrapOpen();try{if(typeof setInterval==='function')setInterval(()=>{wrapOpen();poll();},120);}catch(e){fail(e);}
 window.__STORYWORLD_EGO_SECRET_R1057__=Object.freeze({revision:REV,gapMs:GAP_MS,isSeven,heroPanelOpen,poll,
- inspect:()=>({revision:REV,count,active,picked,stats:{...stats},lastError})});
+ inspect:()=>({revision:REV,count,tapCount,active,picked,stats:{...stats},lastError})});
 })();
