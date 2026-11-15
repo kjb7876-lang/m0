@@ -10020,7 +10020,8 @@
     "assets/r1063/r283/hwando/r271/walk-w.webp",
     "assets/r1063/r439/hwando/attack-e.webp",
     "lineart-ink-r1081.js",
-    "lineart-video-r1080.js"
+    "lineart-video-r1080.js",
+    "ui-ink-r1085.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11095,5 +11096,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "5f96952a703f6385323e23c94e89071358bf9e462567edb6889815d9460f15dc"
+  "runtimeManifestSHA256": "262010be9baa959b9d37041fb7c5703d5d896edc343eaa3fe0552d8746fed77b"
 }
