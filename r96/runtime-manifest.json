@@ -52109,8 +52109,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6579114,
-      "sha256": "3a7510842bf941739c9a6c2b96040a672f3323a1c77f412e8144b3aebe38594b"
+      "bytes": 6579155,
+      "sha256": "a44c4e048124d56604b23207793e98fec76efebdc0a4b80a9f53539da3ee0a4c"
     },
     {
       "path": "intro-r140.js",
@@ -52598,6 +52598,11 @@
       "sha256": "9733951b134154f84eefad78c920eddbadc816b957e23360a7b120306186f80e"
     },
     {
+      "path": "perf7-r1043.js",
+      "bytes": 12730,
+      "sha256": "a8c04c47d81eef4f9f3a76c22f9cfb8a30f87f450f50fcf00dc31b86f51f222a"
+    },
+    {
       "path": "pixel-readable-r325.js",
       "bytes": 3622,
       "sha256": "494dc9c0e6eaa22f3a968bb0d845cbb16b1af4e5990bf5e2d3d3063c4a1725b1"
@@ -52729,8 +52734,8 @@
     },
     {
       "path": "reach-r225.js",
-      "bytes": 7865,
-      "sha256": "dbaa9a987f2cb916e0310aedc3770f2030ed9f3d58d6397ca999e012dae98e9b"
+      "bytes": 9397,
+      "sha256": "a16db5123b642bfedad2577469e2ba61551e3de518ff9317327f0aa1eb060975"
     },
     {
       "path": "readability-r434.js",
@@ -53363,9 +53368,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10672,
-  "totalBytes": 1297912452,
-  "webHTMLSha256": "3a7510842bf941739c9a6c2b96040a672f3323a1c77f412e8144b3aebe38594b",
+  "fileCount": 10673,
+  "totalBytes": 1297926755,
+  "webHTMLSha256": "a44c4e048124d56604b23207793e98fec76efebdc0a4b80a9f53539da3ee0a4c",
   "largest": [
     {
       "path": "index.html",
