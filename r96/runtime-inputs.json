@@ -9880,7 +9880,18 @@
     "ego-paint-r1039.js",
     "passive-cutin-r1033.js",
     "boss-pattern-fx-r1040.js",
-    "kiss-lips-r1042.js"
+    "kiss-lips-r1042.js",
+    "hero-dots-fx-r1041.js",
+    "assets/r1041/fx-m1-michaela-halo.webp",
+    "assets/r1041/fx-a5-slayer-flame.webp",
+    "assets/r1041/fx-c2-hero-hurt.webp",
+    "assets/r1041/fx-c4-ground-ring.webp",
+    "assets/r1041/fx-h6-hwando-iai.webp",
+    "assets/r1041/fx-m3-michaela-ego-on.webp",
+    "assets/r1041/fx-m3-michaela-ego-loop.webp",
+    "assets/r1041/fx-m4-michaela-hit.webp",
+    "assets/r1041/fx-m5-michaela-ground-heart.webp",
+    "assets/r1041/fx-m7-michaela-sky-pillar.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -10955,5 +10966,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "c9ac018c53ba298033086b6f0524d7578852247a6c1a97c20d227d37eff6938c"
+  "runtimeManifestSHA256": "5ec6edac84c436fff9de8b0d7c1a50cbaf125271d3742f7f82116b2e9f2d04a2"
 }
