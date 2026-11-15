@@ -9038,6 +9038,36 @@
       "sha256": "9418697b710b764bac87a48a79e6c1e78562221fb2ed1560d5b90f741b882e09"
     },
     {
+      "path": "assets/r1056/bgm/CREDITS.md",
+      "bytes": 2863,
+      "sha256": "333ba4c8055c6b933da1fdc1e2767cac6a38d133adde48a5fde830a8908eb5a1"
+    },
+    {
+      "path": "assets/r1056/bgm/gugak-gyeongseong-climax.ogg",
+      "bytes": 1074365,
+      "sha256": "ad2081552d28596df952e408c0ab350bbc7a42ca1b427ff169d457a276a5837a"
+    },
+    {
+      "path": "assets/r1056/bgm/gugak-hwando-climax.ogg",
+      "bytes": 1108546,
+      "sha256": "e3b3768d44a37e4d0d46056c51f864027695b844b62efc4d2b66b8192d6e17a3"
+    },
+    {
+      "path": "assets/r1056/bgm/gugak-hwando.ogg",
+      "bytes": 1581215,
+      "sha256": "c7809d5896d72065e7c9db225616cdd63aef5cb92f50b62003946f1c6c1b2457"
+    },
+    {
+      "path": "assets/r1056/bgm/gugak-village-climax.ogg",
+      "bytes": 1173612,
+      "sha256": "94c34af55cfb0f0edc64387ade2a987a6034cf43f7d5a6c4079e70c24f849eb5"
+    },
+    {
+      "path": "assets/r1056/bgm/gugak-village.ogg",
+      "bytes": 1717995,
+      "sha256": "e00ec0c3a1e129ede84c2bf0d95eac020f37ca725caebe0bb3fb8ba6a7ff75f1"
+    },
+    {
       "path": "assets/r106/drive/care-record.webp",
       "bytes": 26776,
       "sha256": "2ffc60222b424085f288abd543e83e3e7f26b23cb2c880e3a9dde1e47d50f667"
@@ -16159,8 +16189,8 @@
     },
     {
       "path": "assets/r308/bgm/index.json",
-      "bytes": 48690,
-      "sha256": "be91d4e8a9e1bb15418651773bcdcebccd6781f5bccb687fc781343f68179c43"
+      "bytes": 60549,
+      "sha256": "c2d782a70a5d409eccac604517ba79421ff2cf22587a483cba3f6f607ca40d79"
     },
     {
       "path": "assets/r308/bgm/mozart-k421.ogg",
@@ -51269,8 +51299,8 @@
     },
     {
       "path": "bgm-pick-r353.js",
-      "bytes": 13503,
-      "sha256": "ac9d4830ab58b165f1031e0086f02ed731416ec9fb78d40a4a0b47d4c8353c68"
+      "bytes": 14006,
+      "sha256": "bbed0e0c81a4c310efb2aad337b3d05455def8548c35f330d593c7d2f43fdd02"
     },
     {
       "path": "boot-lean-r1038.js",
@@ -53778,8 +53808,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10755,
-  "totalBytes": 1300525566,
+  "fileCount": 10761,
+  "totalBytes": 1307196524,
   "webHTMLSha256": "f3ed36631e32ba23bb5aeb1477d7b85c4a42f71d08e8fabf578dad311e475c72",
   "largest": [
     {

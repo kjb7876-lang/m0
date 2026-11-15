@@ -28,7 +28,11 @@ const TRACKS=[
  ['nocturne-c-minor','녹턴 Op.48-1','쇼팽'],['prelude-2','전주곡 Op.28-2','쇼팽'],['chopin-etude-lament','연습곡 Op.10-6','쇼팽'],
  ['chopin-nocturne-27-1','녹턴 Op.27-1','쇼팽'],['chopin-nocturne-55-1','녹턴 Op.55-1','쇼팽'],['chopin-prelude-45','전주곡 Op.45','쇼팽'],
  ['chopin-cello-largo','첼로 소나타 Op.65 · 3악장','쇼팽'],['chopin-etude-cello','연습곡 Op.25-7','쇼팽'],['chopin-funeral-72','장송행진곡 Op.72-2','쇼팽'],
- ['chopin-nocturne-15-3','녹턴 Op.15-3','쇼팽']];
+ ['chopin-nocturne-15-3','녹턴 Op.15-3','쇼팽'],
+ // R1056: 동양 지역 국악(공유마당 '국악 BGM', 주식회사 아이티앤, CC BY 4.0) 메들리
+ ['gugak-hwando','국악 메들리 · 환도의 의지','아이티앤'],['gugak-hwando-climax','국악 메들리 · 성벽의 결전','아이티앤'],
+ ['gugak-village','국악 메들리 · 잠들지 못하는 마을','아이티앤'],['gugak-village-climax','국악 메들리 · 불면귀','아이티앤'],
+ ['gugak-gyeongseong-climax','국악 메들리 · 경성의 밤 대면','아이티앤']];
 const IDS=TRACKS.map(t=>t[0]),LABEL=Object.fromEntries(TRACKS.map(([id,t,c])=>[id,{title:t,composer:c}]));
 // 자동 배정 손질: 맵 id → 곡, 사몽 'samong:<장>' + 역할 → 곡.
 const AUTO_FIX=Object.freeze({
