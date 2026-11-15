@@ -8498,6 +8498,21 @@
       "sha256": "69d47646ff681327933b3bed9e5064758f07b84ba347406e26c6110430b7f9fc"
     },
     {
+      "path": "assets/r1045c/gunner/attack-e4.webp",
+      "bytes": 99984,
+      "sha256": "9b03bf18b18cd5f667dc80b7b04b8985dd558b7403ab839ca466930e4685543e"
+    },
+    {
+      "path": "assets/r1045c/gunner/walk-e2.webp",
+      "bytes": 143138,
+      "sha256": "03183e9733d8dc88e2fc865a0ccb727ae6948c06343f16ddfe4e40ffb6c23e45"
+    },
+    {
+      "path": "assets/r1045d/gunner/walk-e3.webp",
+      "bytes": 108074,
+      "sha256": "e7cb4f93b97e8b3e000fd4bd99d9f0864b002d4e170e0d2ceeaae62fe8ded3a5"
+    },
+    {
       "path": "assets/r1046/ego-cutin.webp",
       "bytes": 400932,
       "sha256": "298a778776592f604101da4328e796b4a02796aa72aca7d95c7436dc42e7d0b2"
@@ -52369,8 +52384,8 @@
     },
     {
       "path": "enemy-face-r444.js",
-      "bytes": 16961,
-      "sha256": "0e01f6d14c374b1a80d99d0f4fedee7f15bc2103fdb45961d530df462ac06df4"
+      "bytes": 17643,
+      "sha256": "dc58e3472621d6ca51efed802e2a1a5ce00d17d3206defacade7302eb573754b"
     },
     {
       "path": "enemy-hexagram-r341.js",
@@ -52386,6 +52401,11 @@
       "path": "enemy-presentation-r86.js",
       "bytes": 6839,
       "sha256": "577694609c82a750b62b6a970443df726e58919768f7a9dfb2a2add66a1dd133"
+    },
+    {
+      "path": "enemy-rules-r1053.js",
+      "bytes": 10364,
+      "sha256": "409fc00564fddafd3b83eb2b5a60b6f790b6b29e06648374106e0fe8e698cb6d"
     },
     {
       "path": "enemy-skill-pose-r442.js",
@@ -52534,8 +52554,8 @@
     },
     {
       "path": "gunner-aim-r991.js",
-      "bytes": 18185,
-      "sha256": "1c1b8e2731fe4b4b95a12c62717e780758a97f9878a0c60e5b22bba3c2912c2e"
+      "bytes": 20388,
+      "sha256": "0d095c42d87893f2d4c294533c1c85bffcea826b39b8d7f50ad2372ed6efb5ae"
     },
     {
       "path": "gunner-arms-r561.js",
@@ -52749,8 +52769,8 @@
     },
     {
       "path": "hwando-r271.js",
-      "bytes": 16038,
-      "sha256": "6be3446c1cb2ba2b4f4c09f962c4fd1758d13c0542e3b8cd9865a93287ee3988"
+      "bytes": 16488,
+      "sha256": "3a9c44480a5cb3fdddf89959d753c793fa1cdd8d9f8114e4b02d7d33dc273eca"
     },
     {
       "path": "hwando-r277.js",
@@ -52769,8 +52789,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6579773,
-      "sha256": "71c11f781dbb4169dd751d79b39e26e0ddad55c25d19482e05024ec7881d746a"
+      "bytes": 6579907,
+      "sha256": "7b4126a7e005695fb7a64583bb5382025d5408a856421fbaa6ef1cf01c347d3d"
     },
     {
       "path": "ink-wash-r1055.js",
@@ -53013,9 +53033,14 @@
       "sha256": "ca592010f1a3ceadd6b4e7842b25fa774cc484bb2830fae452fdda97e04310ec"
     },
     {
+      "path": "mob-lunge-r1064.js",
+      "bytes": 8119,
+      "sha256": "9689536688227d763beda40e16c835d8bf51183fe626db7555f960e0e9ad2f30"
+    },
+    {
       "path": "mob-motion-r286.js",
-      "bytes": 17802,
-      "sha256": "4bace235f854e1798dbeb605073091ad7b23ac303c8b077cf115c3e7ac3fc16a"
+      "bytes": 18442,
+      "sha256": "94949e1c22d86088ff9f824c164cc94ccde6e5e960cca3aa314d6a25edbbd010"
     },
     {
       "path": "mob-moves-r385.js",
@@ -53699,8 +53724,8 @@
     },
     {
       "path": "slayer-r351.js",
-      "bytes": 21798,
-      "sha256": "57eaa917badb722a911887225a16ae0f95d3e12f52db712c57df3d0d452a4573"
+      "bytes": 22252,
+      "sha256": "5c6b1bbc1c1e04f1333031571f0b50098c3fe9e4969f793bafab4c16ef85921c"
     },
     {
       "path": "slayer-sheets-r585.js",
@@ -53848,6 +53873,11 @@
       "sha256": "70be5a0820106ecec97f2bbb427621368f814a75ce732260a2e72f75c773a450"
     },
     {
+      "path": "ui-ink-r1085.js",
+      "bytes": 16112,
+      "sha256": "cd65024ef96bda6449256ff50fd70317bb5212672e31393e342ea11f79d5b471"
+    },
+    {
       "path": "ui-upgrades-r222.js",
       "bytes": 8667,
       "sha256": "e4a29248249cedbeead2fd7760775904e5f5a609acdca33c70d89fb2d9607a2f"
@@ -53909,8 +53939,8 @@
     },
     {
       "path": "visual-r119.js",
-      "bytes": 46399,
-      "sha256": "e9f0bc8b92ed97df4233b87fab0965be221c83c63e36a629e7f83adc5ecaac5c"
+      "bytes": 46951,
+      "sha256": "4dbd46d708ed4afc974cb42399679a835aae7405b76e5ab4cb10bc4b5243c01c"
     },
     {
       "path": "visual-r90-world.js",
@@ -54053,9 +54083,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10810,
-  "totalBytes": 1314179852,
-  "webHTMLSha256": "71c11f781dbb4169dd751d79b39e26e0ddad55c25d19482e05024ec7881d746a",
+  "fileCount": 10816,
+  "totalBytes": 1314570758,
+  "webHTMLSha256": "7b4126a7e005695fb7a64583bb5382025d5408a856421fbaa6ef1cf01c347d3d",
   "largest": [
     {
       "path": "index.html",
