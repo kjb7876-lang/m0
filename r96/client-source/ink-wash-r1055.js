@@ -8,9 +8,13 @@
 //    등불처럼 따뜻하고 채도 높은 빛은 색을 남긴다(먹 위의 채색 한 점).
 //  · 성능 5단계(PC급) 이상은 전체 효과, 그 아래(휴대폰 기본 포함)는 종이 결과 옅은 가장자리만.
 //  판정·피해·AI·저장·서사·그림 원본은 바꾸지 않는다. ctx.filter 는 쓰지 않는다. 숫자는 모두 clamp(NaN·Infinity 가 그리기로 가지 않게).
+// R1055c(사용자 2026-11-15 14:40Z "색감좋네 저걸로 진행해 모든맵"·"무한생존모드도"·"고정은 하지말고 저화풍을 기본으로하고 키고끌수있도록 설정에서"):
+//  · 기본 = 켜짐(모든 지역, 모든 모드·층 — 이야기·사몽·무한생존). 저장된 값이 있으면 그 값이 이긴다(끈 사람은 꺼진 채).
+//  · 간이설정에 '맵 수묵화풍' 줄(켜기·끄기 + 화풍 고르기). 첫 화면 단추는 그대로 둔다(같은 저장값).
+//  · 기본 켜짐이 낮은 사양을 느리게 하지 않게 성능 1·2단계(휴대폰 자동의 가장 낮은 단계 포함)는 아예 계산하지 않는다(K=0, 재질도 건드리지 않음). 3·4단계는 종이 결만, 5단계부터 전체.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_INK_WASH_R1055__)return;
-const REV='R1055-ink-wash-2',KEY='storyworld.r1055.inkWash';
+const REV='R1055-ink-wash-3',KEY='storyworld.r1055.inkWash';
 const MODES=Object.freeze(['off','east','all']),ZONES=Object.freeze(['last302','last303']);
 const LABEL=Object.freeze({off:'꺼짐',east:'동양 지역만',all:'모든 지역'});
 // 화풍(사용자 2026-11-15 12:36Z "눈조금덜아프고 퀄리티높아보이게 여러 유명화풍참고"): 낱알 그레인·끊기는 농담 단계·거친 먹선을 없애고 대비를 눌렀다.
@@ -24,16 +28,18 @@ const STYLES=Object.freeze({
  sumi:Object.freeze({label:'스미에풍',ink:[.09,.09,.10],mid:[.46,.46,.46],pap:[.88,.87,.83],tint:[1,1,1],gamma:.72,keep:.04,floor:.08,ceil:.60,line:.28,grain:.02,haze:.10,border:.25,accent:.70,ref:.62}),
  wc:Object.freeze({label:'수채 애니풍',ink:[.08,.10,.17],mid:[.30,.38,.50],pap:[.86,.86,.80],tint:[.96,1,1.06],gamma:.76,keep:.62,floor:.08,ceil:.74,line:.14,grain:.02,haze:.06,border:.15,accent:1,ref:.62})});
 const STYLE_IDS=Object.freeze(Object.keys(STYLES)),DEF_STYLE='jg';
-let prefs={mode:'off',style:DEF_STYLE};
+let prefs={mode:'all',style:DEF_STYLE};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object'&&!Array.isArray(s)){if(MODES.includes(s.mode))prefs.mode=s.mode;if(typeof s.style==='string'&&STYLE_IDS.includes(s.style))prefs.style=s.style;}}catch(_){}
 const stats={frames:0,patched:0,scans:0,onFrames:0,titleButtons:0,errors:0};let lastError=null,disposed=false;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),num=(v,d=0)=>Number.isFinite(v)?v:d,c01=v=>clamp(num(v),0,1);
 function save(){try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
 function set(p){if(p&&typeof p==='object'){let ch=false;if(MODES.includes(p.mode)&&p.mode!==prefs.mode){prefs.mode=p.mode;ch=true;}if(typeof p.style==='string'&&STYLE_IDS.includes(p.style)&&p.style!==prefs.style){prefs.style=p.style;ch=true;}if(ch){save();scanSig=NaN;applyStyle();}}label();return {...prefs};}
-function wants(zoneId,layer){if(disposed||prefs.mode==='off'||layer!=='STORY'||typeof zoneId!=='string'||!zoneId)return false;return prefs.mode==='all'||ZONES.includes(zoneId);}
+function wants(zoneId,layer){if(disposed||prefs.mode==='off'||typeof zoneId!=='string'||!zoneId)return false;if(prefs.mode==='all')return true;return layer==='STORY'&&ZONES.includes(zoneId);}
 // 성능 단계(R1043 1~7, 휴대폰 기본은 'auto'): 5 이상만 전체, 나머지는 종이 결만.
-function level(step){const s=typeof step==='number'&&Number.isFinite(step)?step:0;return s>=5?'full':'paper';}
+function level(step){const s=typeof step==='number'&&Number.isFinite(step)?step:0;return s>=5?'full':s>=1&&s<=2?'off':'paper';}
+// 휴대폰 '자동' 은 R1023 이 지금 고른 단계(tier 0~3 → 2~5단계)로 읽는다.
+function stepNow(){let step=null;try{step=window.__STORYWORLD_PERF7_R1043__?.step?.();if(step==='auto'){const t=window.__STORYWORLD_MOBILE_TIER_R1023__?.inspect?.()?.tier;step=Number.isFinite(t)?t+2:2;}}catch(_){}return step;}
 
 // ---- 색 계산(아래 GLSL 과 같은 식 — CPU 검사가 이 식을 본다) -------------------------------------------------------
 const LR=.2126,LG=.7152,LB=.0722,PAPER_LO=.96,PAPER_HI=.08;
@@ -108,11 +114,10 @@ function patchScene(r){const rows=new WeakSet();for(const row of r.commands?.row
  r.scene.traverse(o=>{if(!(o.layers?.mask&4))return;const ms=eligible(o,rows);if(ms)for(const m of ms)patch(m,r.T);});}
 function sceneSig(r){let s=0;for(const L of [r?.spatialRoot?.children,r?.scene?.children,r?.__r204?.group?.children]){if(!L)continue;for(let i=0;i<L.length;i++)s=Math.imul(s,31)+L[i].id|0;s^=L.length<<8;}return s;}
 let scanSig=NaN,nextScan=0,K=0,lastT=0;
-function update(r,frame){const zone=typeof room!=='undefined'&&room?room.id:null,want=wants(zone,frame?.layer),u=uniforms(r.T),t=performance.now();
+function update(r,frame){const zone=typeof room!=='undefined'&&room?room.id:null,lv=level(stepNow()),want=lv!=='off'&&wants(zone,frame?.layer),u=uniforms(r.T),t=performance.now();
  const dt=clamp(num((t-lastT)/1000,0),0,.25);lastT=t;K=clamp(num(K+((want?1:0)-K)*clamp(dt*4,0,1)),0,1);if(!want&&K<.004)K=0;
  u.r1055K.value=K;if(K<=0)return;stats.onFrames++;
- let step=null;try{step=window.__STORYWORLD_PERF7_R1043__?.step?.();}catch(_){}
- u.r1055Lv.value=level(step)==='full'?1:0;
+ u.r1055Lv.value=lv==='full'?1:0;
  const cv=r.renderer?.domElement,w=num(cv?.width,1280),h=num(cv?.height,720);u.r1055Res.value.set(clamp(w,1,16384),clamp(h,1,16384));
  const ss=sceneSig(r);if(ss!==scanSig||t>=nextScan){scanSig=ss;nextScan=t+500;stats.scans++;patchScene(r);}}
 
@@ -126,7 +131,7 @@ const timer=typeof setInterval==='function'?setInterval(wrapAll,500):0;wrapAll()
 
 // ---- 첫 화면 단추 -----------------------------------------------------------------------------------------------
 const text=()=>'수묵화풍 테스트 · '+LABEL[prefs.mode],styleText=()=>'화풍 · '+STYLES[prefs.style].label;
-function label(){try{const b=document.getElementById('inkTestR1055');if(b){b.textContent=text();b.dataset.mode=prefs.mode;}const s=document.getElementById('inkStyleR1055');if(s){s.textContent=styleText();s.dataset.style=prefs.style;}}catch(e){fail(e);}}
+function label(){try{const b=document.getElementById('inkTestR1055');if(b){b.textContent=text();b.dataset.mode=prefs.mode;}const s=document.getElementById('inkStyleR1055');if(s){s.textContent=styleText();s.dataset.style=prefs.style;}const row=document.getElementById('inkRowR1055');if(row){if(row.r1055Check)row.r1055Check.checked=prefs.mode!=='off';if(row.r1055Select)row.r1055Select.value=prefs.style;}}catch(e){fail(e);}}
 function titleButton(){try{const panel=document.getElementById('panel'),normal=document.getElementById('campaignNew54')||document.getElementById('newBtn');
   if(!panel||!normal||document.getElementById('inkTestR1055'))return;const host=normal.parentNode||panel;
   const b=document.createElement('button');b.id='inkTestR1055';b.type='button';b.textContent=text();b.dataset.mode=prefs.mode;
@@ -136,10 +141,24 @@ function titleButton(){try{const panel=document.getElementById('panel'),normal=d
   s.title='수묵화풍 테스트의 화풍을 바꿉니다: 진경산수풍 → 담채풍 → 송대 산수풍 → 스미에풍 → 수채 애니풍.';
   s.onclick=()=>{set({style:STYLE_IDS[(STYLE_IDS.indexOf(prefs.style)+1)%STYLE_IDS.length]});s.textContent=styleText();s.dataset.style=prefs.style;};
   host.appendChild(b);host.appendChild(s);stats.titleButtons++;}catch(e){fail(e);}}
+// ---- 설정 창 줄(간이설정) ----------------------------------------------------------------------------------------
+function settingsRow(){try{/* R1022 와 같은 자리: 설정 창 맨 위 '전투 화면' 구역(없으면 간이설정 끝). 간이설정 끝에 두면 R1015·R142 정리가 '더 보기' 안으로 접는다. */
+  const host=document.getElementById('combatScreenR1021')||document.getElementById('quickSettingsR114');if(!host)return;let row=document.getElementById('inkRowR1055');
+  if(!row){row=document.createElement('div');row.id='inkRowR1055';row.className='r1021-row';
+   const lab=document.createElement('label'),box=document.createElement('input');box.type='checkbox';box.id='inkOnR1055';
+   const txt=document.createElement('span');txt.textContent=' 맵 수묵화풍 ';
+   const sel=document.createElement('select');sel.id='inkSelR1055';sel.title='화풍';
+   for(const k of STYLE_IDS){const o=document.createElement('option');o.value=k;o.textContent=STYLES[k].label;sel.appendChild(o);}
+   const note=document.createElement('p');note.className='small muted';note.textContent='맵(바닥·벽)을 수묵화풍으로 그립니다. 캐릭터·이펙트·UI 는 그대로입니다. 성능 1·2단계에서는 쉬어 갑니다.';
+   box.onchange=()=>{set({mode:box.checked?'all':'off'});};sel.onchange=()=>{set({style:sel.value});sel.value=prefs.style;};
+   lab.appendChild(box);lab.appendChild(txt);row.appendChild(lab);row.appendChild(sel);row.appendChild(note);row.r1055Check=box;row.r1055Select=sel;host.appendChild(row);stats.settingsRows=(stats.settingsRows||0)+1;}
+  if(row.r1055Check)row.r1055Check.checked=prefs.mode!=='off';if(row.r1055Select)row.r1055Select.value=prefs.style;}catch(e){fail(e);}}
+function settingsLater(){settingsRow();try{queueMicrotask(settingsRow);}catch(_){}try{requestAnimationFrame(()=>{settingsRow();requestAnimationFrame(settingsRow);});}catch(_){}}
+try{if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const r=base.apply(this,a);try{settingsLater();}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
 try{if(typeof showTitle==='function'){const base=showTitle;showTitle=function(...a){const r=base.apply(this,a);titleButton();return r;};}}catch(e){fail(e);}
 titleButton();
 
 function dispose(){disposed=true;try{clearInterval(timer);}catch(_){}try{if(U)U.r1055K.value=0;}catch(_){}K=0;}
-window.__STORYWORLD_INK_WASH_R1055__=Object.freeze({revision:REV,storageKey:KEY,modes:MODES,zones:ZONES,styles:STYLES,GLSL,uniformsFor,prefs:()=>({...prefs}),set,wants,level,tone,inject,titleButton,
+window.__STORYWORLD_INK_WASH_R1055__=Object.freeze({revision:REV,storageKey:KEY,modes:MODES,zones:ZONES,styles:STYLES,GLSL,uniformsFor,prefs:()=>({...prefs}),defaultStyle:DEF_STYLE,set,wants,level,tone,inject,titleButton,settingsRow,
  inspect:()=>({revision:REV,prefs:{...prefs},k:K,level:U?(U.r1055Lv.value>.5?'full':'paper'):null,stats:{...stats},lastError}),dispose});
 })();
