@@ -518,6 +518,8 @@ jobs:
         run: node r96/qa/r991/r991-cpu-check.cjs
       - name: R1003 gunner aim down art CPU check
         run: node r96/qa/r1003/r1003-cpu-check.cjs
+      - name: R1045 gunner north aim and no-recoil east art CPU check
+        run: node r96/qa/r1045/r1045-cpu-check.cjs
       - name: R945 hwando ink passives (piercing ink crescent, seven ink clones for 7 s, three-hero ink finale, per-body state) CPU check
         run: node r96/qa/r945/r945-cpu-check.cjs
       - name: R1034 hwando W seven-direction clones restored + ink clone action circles CPU check
@@ -566,6 +568,8 @@ jobs:
         run: node r96/qa/r1016/r1016-cpu-check.cjs
       - name: R1023 mobile graphics tier (starts at current public settings, steps up on smooth frames and known memory, steps down on slow frames or heap pressure, unclean exit caps the auto tier) CPU check
         run: node r96/qa/r1023/r1023-cpu-check.cjs
+      - name: R1043 performance 7 steps (1 lighter than the old lowest, 5 = PC default, 7 full options, phone stays auto) and reach-check wall cache CPU check
+        run: node r96/qa/r1043/r1043-cpu-check.cjs
       - name: R1022 auto-move toggle CPU check
         run: node r96/qa/r1022/r1022-cpu-check.cjs
       - name: R1007 samong confront statement markers never overlap (4-marker zones M-1 Michaela, S-04 16th floor were unpassable) CPU check
@@ -692,6 +696,8 @@ jobs:
         run: node r96/qa/r1037/r1037-cpu-check.cjs
       - name: R1041 Dots CX-0099FX hero effect frame sheets (halo, slayer flame, ground ring, iai, hurt) CPU check
         run: node r96/qa/r1041/r1041-cpu-check.cjs
+      - name: R1044 story-window recorded narration voice + remove unused voice buttons CPU check
+        run: node r96/qa/r1044/r1044-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
         run: node r96/qa/r430/r430-cpu-check.cjs
       - name: R431 boss-room center fights + theme boss skill 6s + touch status/DoT + black-flame prop throws CPU check

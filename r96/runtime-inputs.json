@@ -9880,15 +9880,19 @@
     "ego-paint-r1039.js",
     "passive-cutin-r1033.js",
     "boss-pattern-fx-r1040.js",
+    "perf7-r1043.js",
     "kiss-lips-r1042.js",
+    "narration-voice-r1044.js",
+    "assets/r1045/gunner/attack-e3.webp",
+    "assets/r1045/gunner/attack-n3.webp",
     "hero-dots-fx-r1041.js",
-    "assets/r1041/fx-m1-michaela-halo.webp",
     "assets/r1041/fx-a5-slayer-flame.webp",
     "assets/r1041/fx-c2-hero-hurt.webp",
     "assets/r1041/fx-c4-ground-ring.webp",
     "assets/r1041/fx-h6-hwando-iai.webp",
-    "assets/r1041/fx-m3-michaela-ego-on.webp",
+    "assets/r1041/fx-m1-michaela-halo.webp",
     "assets/r1041/fx-m3-michaela-ego-loop.webp",
+    "assets/r1041/fx-m3-michaela-ego-on.webp",
     "assets/r1041/fx-m4-michaela-hit.webp",
     "assets/r1041/fx-m5-michaela-ground-heart.webp",
     "assets/r1041/fx-m7-michaela-sky-pillar.webp"
@@ -10966,5 +10970,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "5ec6edac84c436fff9de8b0d7c1a50cbaf125271d3742f7f82116b2e9f2d04a2"
+  "runtimeManifestSHA256": "02e7038bfb7739882ceb95632cc36831adfd15524672779dfa0554f6a1adf287"
 }

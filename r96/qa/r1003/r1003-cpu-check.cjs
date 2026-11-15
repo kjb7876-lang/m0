@@ -21,6 +21,6 @@ ok(A.SHEETS.includes('s2')&&/R1003/.test(A.revision),'s2 칸 등록·판 R1003',
 const p90=A.pick(90*D);ok(p90.sheet==='s2'&&!p90.mirror&&ad(90*D,A.gunAngle('s2',false))<=5,'정 아래 조준 → s2, 총 각도 오차 ≤5° (R991 40°)',p90);
 for(let d=75;d<=105;d++){const p=A.pick(d*D);ok(p.sheet==='s2'&&!p.mirror,'정 아래 ±15° ('+d+'°) 는 반전 없는 s2',p);}
 let mir=0;for(let d=-180;d<180;d++){const p=A.pick(d*D);if(p.sheet==='s2'&&p.mirror)mir++;}ok(mir===0,'s2 는 반전해 쓰지 않음(대칭 앞모습)',{mir});
-const nErr=ad(-90*D,A.gunAngle(A.pick(-90*D).sheet,A.pick(-90*D).mirror));ok(nErr>30,'정 위는 그림이 없어 그대로(오차 '+nErr.toFixed(0)+'°) — 남은 Dots 과제',{nErr});
+const nErr=ad(-90*D,A.gunAngle(A.pick(-90*D).sheet,A.pick(-90*D).mirror));ok(nErr>30||/R1045/.test(A.revision)&&nErr<=12,'정 위는 그림이 없어 그대로(오차 '+nErr.toFixed(0)+'°) — 남은 Dots 과제(R1045 Dots attack-n3 뒤에는 ≤12°)',{nErr});
 for(let f=0;f<6;f++){const t=A.tip('s2',f);ok(t[0]>=85&&t[0]<=103&&t[1]>=120&&t[1]<=140,'s2 '+f+'칸 총구 끝이 몸 가운데 가슴 높이(정면 원근)',t);}
 console.log(JSON.stringify({passed:n}));
