@@ -518,6 +518,8 @@ jobs:
         run: node r96/qa/r991/r991-cpu-check.cjs
       - name: R1003 gunner aim down art CPU check
         run: node r96/qa/r1003/r1003-cpu-check.cjs
+      - name: R1045 gunner north aim and no-recoil east art CPU check
+        run: node r96/qa/r1045/r1045-cpu-check.cjs
       - name: R945 hwando ink passives (piercing ink crescent, seven ink clones for 7 s, three-hero ink finale, per-body state) CPU check
         run: node r96/qa/r945/r945-cpu-check.cjs
       - name: R1034 hwando W seven-direction clones restored + ink clone action circles CPU check
@@ -692,6 +694,8 @@ jobs:
         run: node r96/qa/r1038/r1038-cpu-check.cjs
       - name: R1037 narration always-off button (boss entry story window + memory fragment note) and settings rows CPU check
         run: node r96/qa/r1037/r1037-cpu-check.cjs
+      - name: R1044 story-window recorded narration voice + remove unused voice buttons CPU check
+        run: node r96/qa/r1044/r1044-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
         run: node r96/qa/r430/r430-cpu-check.cjs
       - name: R431 boss-room center fights + theme boss skill 6s + touch status/DoT + black-flame prop throws CPU check

@@ -8423,6 +8423,16 @@
       "sha256": "2fc461777984b2c606728e37d74b70a532838f9895a66589059a2edc84ed47d5"
     },
     {
+      "path": "assets/r1045/gunner/attack-e3.webp",
+      "bytes": 19020,
+      "sha256": "ada4740292519db23864182d4d335af85620b1cb73e283d0f0c902e9a8ca0c37"
+    },
+    {
+      "path": "assets/r1045/gunner/attack-n3.webp",
+      "bytes": 99044,
+      "sha256": "497a1eb85e91d0ed49da44e357af200cfbe50caf1242be1720d15a1667a7658f"
+    },
+    {
       "path": "assets/r105/drive/boss-hostess.webp",
       "bytes": 73194,
       "sha256": "e748e98f17da0ae4e7108720e57576ce71d404903309003de9d570dcc5e92ee9"
@@ -51869,8 +51879,8 @@
     },
     {
       "path": "gunner-aim-r991.js",
-      "bytes": 16503,
-      "sha256": "9a770e6c0ef0914b155e2145a6702904a3104f3f2a99b07f6924f4b6b796a368"
+      "bytes": 17580,
+      "sha256": "d771d88f79a6b0b28e70aa82bc06b97d9ac455427b79552f09c54b75cc9dd5b7"
     },
     {
       "path": "gunner-arms-r561.js",
@@ -52099,8 +52109,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6579155,
-      "sha256": "a44c4e048124d56604b23207793e98fec76efebdc0a4b80a9f53539da3ee0a4c"
+      "bytes": 6579206,
+      "sha256": "13b8b1afa36844c295a5eeea64da1b5d3a8294a56c3379530c95dc17847f723d"
     },
     {
       "path": "intro-r140.js",
@@ -52456,6 +52466,11 @@
       "path": "narration-r1037.js",
       "bytes": 10303,
       "sha256": "455eeed04852b0aa4bf9269c28da3a26ff927538bc02e12582182719f0a7493b"
+    },
+    {
+      "path": "narration-voice-r1044.js",
+      "bytes": 5182,
+      "sha256": "021fbae6f65bb6921e305f023f4e3db215caf4b8bbe59a3f1c138a2fc50534f3"
     },
     {
       "path": "nav-r176.js",
@@ -53358,9 +53373,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10671,
-  "totalBytes": 1297807614,
-  "webHTMLSha256": "a44c4e048124d56604b23207793e98fec76efebdc0a4b80a9f53539da3ee0a4c",
+  "fileCount": 10674,
+  "totalBytes": 1297931988,
+  "webHTMLSha256": "13b8b1afa36844c295a5eeea64da1b5d3a8294a56c3379530c95dc17847f723d",
   "largest": [
     {
       "path": "index.html",
