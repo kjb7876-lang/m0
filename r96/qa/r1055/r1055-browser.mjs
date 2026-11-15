@@ -30,6 +30,8 @@ const stat=async()=>{const buf=await p.screenshot();return p.evaluate(async b64=
 const styles=await p.evaluate(()=>Object.keys(window.__STORYWORLD_INK_WASH_R1055__.styles));const st={},offs=[];
 // 측정 방법(2026-11-15 원인 조사): 이 화면의 잔입자 값은 끈 채로도 프레임마다 10.1~12.9 로 흔들린다(등불 깜빡임·입자). 한 번씩 순서대로 재면 순서가 결과를 정한다
 //  → 화풍마다 끔·켬을 번갈아 여러 번 재서 평균을 견준다.
+// 2차(같은 날): 번갈아 재도 같은 화풍 값이 실행마다 10.7↔13.3 으로 흔들렸다(몹·입자가 움직여 장면이 달라짐) → 재는 동안 게임 시간을 멈춰 같은 순간을 견준다(qa/r444/scene4 방식).
+await p.evaluate(()=>{if(!window.__r1055Slow){window.__r1055Slow=1;window.__SLOW=1;const tb=tick;tick=function(dt,...a){return tb.call(this,dt*(window.__SLOW??1),...a);};}window.__SLOW=1e-4;});await p.waitForTimeout(600);
 const mode=m=>p.evaluate(m=>window.__STORYWORLD_INK_WASH_R1055__.set({mode:m}),m),avg=a=>a.reduce((x,y)=>x+y,0)/a.length,N=4;
 for(const k of styles){await p.evaluate(k=>window.__STORYWORLD_INK_WASH_R1055__.set({style:k}),k);const on=[],ct=[];
  for(let i=0;i<N;i++){await mode('off');await p.waitForTimeout(1800);offs.push((await stat()).grain);await mode('east');await p.waitForTimeout(1800);const q=await stat();on.push(q.grain);ct.push(q.contrast);}
@@ -37,6 +39,7 @@ for(const k of styles){await p.evaluate(k=>window.__STORYWORLD_INK_WASH_R1055__.
 await p.evaluate(()=>window.__STORYWORLD_INK_WASH_R1055__.set({style:'jg'}));await p.waitForTimeout(1500);
 await p.evaluate(()=>window.__STORYWORLD_INK_WASH_R1055__.set({mode:'off'}));await p.waitForTimeout(3000);const i2=await I(),sOff=await sat();await p.screenshot({path:`${out}/last302-off.png`});
 ok('last302: off → k back to 0',i2.k===0,i2.k);
+await p.evaluate(()=>{window.__SLOW=1;});
 const stOff={contrast:(await stat()).contrast,grain:+avg(offs).toFixed(2),min:Math.min(...offs),max:Math.max(...offs),n:offs.length};console.log('STYLE-STATS',JSON.stringify({off:stOff,...st}));
 ok('styles: pooled fine grain of all five styles is not above the unfiltered screen (alternating samples, +5%)',avg(styles.map(k=>st[k].grain))<=stOff.grain*1.05,{off:stOff,...st});
 ok('styles: no single style is more than 15% grainier than the unfiltered screen',styles.every(k=>st[k].grain<=stOff.grain*1.15),{off:stOff,...st});

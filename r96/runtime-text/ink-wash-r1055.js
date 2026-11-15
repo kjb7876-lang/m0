@@ -15,14 +15,14 @@ const MODES=Object.freeze(['off','east','all']),ZONES=Object.freeze(['last302','
 const LABEL=Object.freeze({off:'꺼짐',east:'동양 지역만',all:'모든 지역'});
 // 화풍(사용자 2026-11-15 12:36Z "눈조금덜아프고 퀄리티높아보이게 여러 유명화풍참고"): 낱알 그레인·끊기는 농담 단계·거친 먹선을 없애고 대비를 눌렀다.
 //  값은 '먹·중간·종이 3점 농담 + 원래 색 조금' 으로만 다르다(이름은 참고한 화풍의 느낌일 뿐, 특정 그림을 베끼지 않는다).
-//  어두운 곳을 많이 띄우면 바닥 잔무늬가 같이 커져 오히려 눈이 피로하다(헤드리스 실측) → 밝기 곡선을 완만하게(gamma .85·ref .7), 가장 밝은 값도 .7 아래로 눌렀다.
+//  어두운 곳을 많이 띄우면 바닥 잔무늬가 같이 커져 오히려 눈이 피로하다(헤드리스 실측) → 밝기 곡선은 완만하게(gamma .68~.76), 가장 밝은 값은 .74 아래로 눌렀다. 잔입자는 끔·켬을 번갈아 재서 끈 화면 수준임을 확인한다(qa/r1055 브라우저).
 //  gamma 밝기 곡선 · keep 원래 색 남기는 비율 · floor/ceil 가장 어두운·밝은 값(대비 누르기) · line 먹선 · grain 큰 얼룩 세기 · haze 안개 · border 가장자리 · accent 등불 색 · ref 밝기 기준
 const STYLES=Object.freeze({
- jg:Object.freeze({label:'진경산수풍',ink:[.07,.085,.11],mid:[.35,.37,.395],pap:[.80,.78,.70],tint:[.92,.98,1.06],gamma:.85,keep:.06,floor:.06,ceil:.66,line:.40,grain:.035,haze:.05,border:.45,accent:.85,ref:.7}),
- dw:Object.freeze({label:'담채풍',ink:[.13,.12,.11],mid:[.44,.42,.37],pap:[.86,.81,.68],tint:[1.04,1,.92],gamma:.85,keep:.38,floor:.10,ceil:.68,line:.30,grain:.03,haze:.08,border:.30,accent:.95,ref:.7}),
- song:Object.freeze({label:'송대 산수풍',ink:[.15,.13,.10],mid:[.40,.36,.29],pap:[.74,.68,.54],tint:[1.05,1,.9],gamma:.85,keep:.10,floor:.13,ceil:.62,line:.22,grain:.025,haze:.22,border:.35,accent:.75,ref:.7}),
- sumi:Object.freeze({label:'스미에풍',ink:[.09,.09,.10],mid:[.46,.46,.46],pap:[.88,.87,.83],tint:[1,1,1],gamma:.85,keep:.04,floor:.08,ceil:.70,line:.28,grain:.02,haze:.10,border:.25,accent:.70,ref:.7}),
- wc:Object.freeze({label:'수채 애니풍',ink:[.08,.10,.17],mid:[.30,.38,.50],pap:[.86,.86,.80],tint:[.96,1,1.06],gamma:.85,keep:.62,floor:.08,ceil:.68,line:.14,grain:.02,haze:.06,border:.15,accent:1,ref:.7})});
+ jg:Object.freeze({label:'진경산수풍',ink:[.07,.085,.11],mid:[.35,.37,.395],pap:[.80,.78,.70],tint:[.92,.98,1.06],gamma:.72,keep:.06,floor:.06,ceil:.72,line:.40,grain:.035,haze:.05,border:.45,accent:.85,ref:.62}),
+ dw:Object.freeze({label:'담채풍',ink:[.13,.12,.11],mid:[.44,.42,.37],pap:[.86,.81,.68],tint:[1.04,1,.92],gamma:.70,keep:.38,floor:.10,ceil:.74,line:.30,grain:.03,haze:.08,border:.30,accent:.95,ref:.62}),
+ song:Object.freeze({label:'송대 산수풍',ink:[.15,.13,.10],mid:[.40,.36,.29],pap:[.74,.68,.54],tint:[1.05,1,.9],gamma:.72,keep:.10,floor:.13,ceil:.66,line:.22,grain:.025,haze:.22,border:.35,accent:.75,ref:.62}),
+ sumi:Object.freeze({label:'스미에풍',ink:[.09,.09,.10],mid:[.46,.46,.46],pap:[.88,.87,.83],tint:[1,1,1],gamma:.72,keep:.04,floor:.08,ceil:.60,line:.28,grain:.02,haze:.10,border:.25,accent:.70,ref:.62}),
+ wc:Object.freeze({label:'수채 애니풍',ink:[.08,.10,.17],mid:[.30,.38,.50],pap:[.86,.86,.80],tint:[.96,1,1.06],gamma:.76,keep:.62,floor:.08,ceil:.74,line:.14,grain:.02,haze:.06,border:.15,accent:1,ref:.62})});
 const STYLE_IDS=Object.freeze(Object.keys(STYLES)),DEF_STYLE='jg';
 let prefs={mode:'off',style:DEF_STYLE};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object'&&!Array.isArray(s)){if(MODES.includes(s.mode))prefs.mode=s.mode;if(typeof s.style==='string'&&STYLE_IDS.includes(s.style))prefs.style=s.style;}}catch(_){}
