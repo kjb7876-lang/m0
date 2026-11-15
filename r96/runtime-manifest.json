@@ -52289,8 +52289,8 @@
     },
     {
       "path": "hero-defense-r720.js",
-      "bytes": 41810,
-      "sha256": "f22bba8c85d290468150dc5ff245e3575933f3ab691360a827016aff69f2a906"
+      "bytes": 43215,
+      "sha256": "e9996999694d3c1d403d752d3fbf4843f1401e9b79e7e0151986ea4165e65965"
     },
     {
       "path": "hero-dots-fx-r1041.js",
@@ -53779,7 +53779,7 @@
     }
   ],
   "fileCount": 10755,
-  "totalBytes": 1300523266,
+  "totalBytes": 1300524671,
   "webHTMLSha256": "f3ed36631e32ba23bb5aeb1477d7b85c4a42f71d08e8fabf578dad311e475c72",
   "largest": [
     {

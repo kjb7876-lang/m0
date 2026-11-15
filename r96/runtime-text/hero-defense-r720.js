@@ -22,7 +22,7 @@
 //  끄기: localStorage 'storyworld.r720.heroDefense'='0' (창·보상·배치가 모두 꺼진다).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_HERO_DEFENSE_R720__)return;
-const REV='R720-hero-defense-4',KEY='storyworld.r720.heroDefense';
+const REV='R720-hero-defense-5',KEY='storyworld.r720.heroDefense';
 let on=true;try{if(localStorage.getItem(KEY)==='0')on=false;}catch(_){}
 const stats={opens:0,buys:0,places:0,moves:0,upgrades:0,swaps:0,hits:0,rewards:0,clears:0,resets:0,draws:0,heroDraws:0,errors:0,casts:{basic:0,q:0,w:0,e:0,r:0}};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
@@ -67,16 +67,20 @@ function doUpgrade(st,i,kind){const s=st&&st.slots[i];if(!s)return {ok:false,why
 function onHeroChange(st,next){if(!st||!next||next===st.main||indexOf(next)<0)return {swapped:false};const prev=st.main,i=st.slots.findIndex(s=>s.hero===next);
  st.main=next;st.owned[next]=true;if(prev)st.owned[prev]=true;if(i<0||!prev)return {swapped:false};st.slots[i].hero=prev;return {swapped:true,slot:i,prev};}
 function anchorOf(s,c,A){let x=c.x+s.ox,y=c.y+s.oy;if(A){x=clamp(x,A.x0+EDGE,A.x1-EDGE);y=clamp(y,A.y0+EDGE,A.y1-EDGE);}return {x,y};}
+// R1050(사용자 2026-11-15 09:56Z "무한생존모드에서 영웅배치시 배치된영웅 공격모션이 안나가는 문제"): 몸이 공격·스킬·궁극기 동작 중인가.
+//  배치 영웅이 공격하는 동안에도 think 가 움직이는 표적을 매 장면 조금씩 쫓아, 영웅 그리기 사슬(R119 걷기·R895 규칙)이 '걷는 중'으로 보고
+//  공격 그림 대신 걷기 그림을 그렸다(네온 공격 장면 0%·라우렌 20%). 조종 영웅은 멈춰 쏘면 공격 그림이 나오므로, 배치 영웅도 동작 동안 선다.
+const planted=b=>{if(!b)return false;for(const k of ['attackAnim','skillAnim','ultimateAnim']){const v=b[k];if(typeof v==='number'&&fin(v)&&v>0)return true;}return false;};
 const alive=(e,engaged)=>!!e&&e.hp>0&&!e.deadRecorded&&e.spawnState!=='dead'&&(!e.boss||engaged!==false);
 // 한 걸음: 자리(anchor)의 이동 반경 안에서 표적에 맞춰 서고, 쉴 틈이 끝났고 사거리 안이면 맞힐 적을 돌려준다.
 function think(a,enemies,dt,st,anchor,env){const out={hits:[],target:null,moved:false};if(!a||!st||!anchor)return out;
  if(!fin(a.x)||!fin(a.y)){a.x=anchor.x;a.y=anchor.y;}a.cd=Math.max(0,(+a.cd||0)-dt);
  const eng=env?env.engaged:true,reach=st.radius+st.range;let tg=null,best=Infinity;const near=[];
  for(const e of enemies||[]){if(!alive(e,eng)||!fin(e.x)||!fin(e.y))continue;if(Math.hypot(e.x-anchor.x,e.y-anchor.y)>reach)continue;const d=Math.hypot(e.x-a.x,e.y-a.y);near.push([d,e]);if(d<best){best=d;tg=e;}}
- const step=SPEED*dt;let gx=anchor.x,gy=anchor.y,stop=0;
+ const step=SPEED*dt;let gx=anchor.x,gy=anchor.y,stop=0;const hold=!!(env&&env.hold);/* R1050: 공격·스킬 동작 중이면 제자리(표적은 그대로 고른다) */
  if(tg){gx=tg.x;gy=tg.y;stop=st.melee?Math.min(st.range*.8,1.4):st.range*.95;}
  const dx=gx-a.x,dy=gy-a.y,d=Math.hypot(dx,dy);
- if(d>stop+1e-6){const k=Math.min(step,d-stop)/d;a.x+=dx*k;a.y+=dy*k;out.moved=k*d>1e-4;}
+ if(!hold&&d>stop+1e-6){const k=Math.min(step,d-stop)/d;a.x+=dx*k;a.y+=dy*k;out.moved=k*d>1e-4;}
  const lx=a.x-anchor.x,ly=a.y-anchor.y,l=Math.hypot(lx,ly);if(l>st.radius){a.x=anchor.x+lx/l*st.radius;a.y=anchor.y+ly/l*st.radius;}
  if(tg){out.target=tg;if(a.cd<=0){const inr=[];for(const[,e]of near){const dd=Math.hypot(e.x-a.x,e.y-a.y);if(dd<=st.range+1e-9)inr.push([dd,e]);}
    if(inr.length){inr.sort((p,q)=>p[0]-q[0]);out.hits=inr.slice(0,st.targets||1).map(p=>p[1]);a.cd=st.interval;}}}
@@ -148,10 +152,12 @@ function step(dt){const x=stage(),r=G(()=>room,null);if(!x||!r||!st.slots.length
  for(let i=0;i<st.slots.length;i++){const s=st.slots[i],a=allies[i],ss=slotStats(s);if(!a||!ss)continue;const an=anchorOf(s,x.centre,x.arena),px=a.x,py=a.y;
   if(!a.body||a.body.hero!==s.hero){a.body=mkBody(s.hero,a);a.beat=t+.6;}const b=a.body;if(!b)continue;
   if(fin(b.x)&&fin(b.y)&&Math.hypot(b.x-a.x,b.y-a.y)<6){a.x=b.x;a.y=b.y;}/* 돌진 스킬로 몸이 움직였으면 따라간다(think 가 이동 반경 안으로 다시 묶는다) */
-  const o=think(a,frozen?[]:r.enemies,dt,ss,an,{engaged:eng});a.cd=9;/* 자체 타격 규칙은 쓰지 않는다(엔진 공격을 부른다) */a.moving=o.moved;
+  const o=think(a,frozen?[]:r.enemies,dt,ss,an,{engaged:eng,hold:planted(b)});a.cd=9;/* 자체 타격 규칙은 쓰지 않는다(엔진 공격을 부른다) */a.moving=o.moved;
   b.x=a.x;b.y=a.y;b.moving=o.moved;{const mx=a.x-px,my=a.y-py,ml=Math.hypot(mx,my);b.moveVX150=o.moved&&ml>1e-6?mx/ml:0;b.moveVY150=o.moved&&ml>1e-6?my/ml:0;}/* 걷기 방향 그림은 입력 방향(moveVX150)을 먼저 본다 */for(const k of TIMERS)b[k]=Math.max(0,(+b[k]||0)-dt);
   if(o.moved&&!o.target&&!(b.attackAnim>0)&&!(b.skillAnim>0)&&typeof facing==='function')b.direction=G(()=>facing(a.x-px,a.y-py),b.direction);
-  if(o.target&&!frozen){try{as(a,()=>act(a,ss,t));}catch(err){fail(err);}}
+  if(o.target&&!frozen){const wasPlanted=planted(b);try{as(a,()=>act(a,ss,t));}catch(err){fail(err);}
+   /* R1050: 이 장면에 공격·스킬을 막 시작했으면 이 장면 걸음도 무른다(몸이 스킬로 직접 움직인 경우는 그대로) — 멈춘 뒤 시작한 공격(R895 규칙 5)으로 읽혀 걷기 꼬리가 공격 그림을 덮지 않는다 */
+   if(o.moved&&!wasPlanted&&planted(b)&&fin(px)&&fin(py)&&Math.hypot(b.x-a.x,b.y-a.y)<1e-6){a.x=px;a.y=py;b.x=px;b.y=py;o.moved=false;a.moving=false;b.moving=false;b.moveVX150=0;b.moveVY150=0;stats.plants=(stats.plants||0)+1;}}
   if(fin(b.x)&&fin(b.y)){const lx=b.x-an.x,ly=b.y-an.y,l=Math.hypot(lx,ly);if(l>ss.radius){b.x=an.x+lx/l*ss.radius;b.y=an.y+ly/l*ss.radius;}a.x=b.x;a.y=b.y;}else{b.x=a.x;b.y=a.y;}
   a.dir=b.direction;a.anim=b.attackAnim;a.prop.x=a.x;a.prop.y=a.y;}}
 
@@ -279,6 +285,6 @@ const copy=()=>({crystals:st.crystals,main:st.main||G(()=>player.hero,null),owne
 window.__STORYWORLD_HERO_DEFENSE_R720__=Object.freeze({revision:REV,enabled:()=>on,open,close,toggle,buy,placeHere,moveHere,upgrade,swapTo,qaGive:give,/* 그 영웅이 지금 이 판에 있는가(조종 영웅이거나 배치된 영웅) — 영웅별 덧씌우기가 '다른 몸을 그리는 차례'를 가릴 때 쓴다 */has:id=>{if(!here())return false;const m=cur.length?realP:P();return !!id&&((m&&m.hero===id)||st.slots.some(s=>s.hero===id));},/* R720-4: 영웅 전용 덧씌우기의 '다음 틱에 이어지는 기술'(회오리 날리기·폭발 예약 등)을 그 영웅의 몸으로 돌린다. 그 영웅이 배치 영웅이면 그 몸을 player 로 끼워 fn 을, 아니면(조종 영웅이거나 없음) 그대로 fn 을 부른다.
    배치 영웅은 조종 영웅과 같은 영웅일 수 없으므로(교대 규칙) 영웅 전용 파일의 상태는 한 몸 것뿐이다. */asHero:(id,fn)=>{if(typeof fn!=='function')return undefined;if(!on||cur.length||!here())return fn();const m=P();if(!m||m.r720Ally||m.hero===id)return fn();const i=st.slots.findIndex(s=>s&&s.hero===id),a=i>=0?allies[i]:null;if(a&&a.body&&validAlly(a)&&a.body.hero===id)return as(a,fn);return fn();},qaSkills,qaNudge,qaCast,qaFreeze:v=>{frozen=v===true;return frozen;},bodies:()=>allies.map(a=>a.body||null),
  state:()=>{if(here())ensure();return copy();},allies:()=>allies.map((a,i)=>({slot:i,x:a.x,y:a.y,cd:a.cd,dir:a.dir,anim:a.anim,moving:a.moving})),
- pure:Object.freeze({PRICES,MAX,order,price,tier,cost,slotStats,reward,clearBonus,fresh,doBuy,doPlace,doMove,doUpgrade,onHeroChange,anchorOf,think}),
+ pure:Object.freeze({PRICES,MAX,order,price,tier,cost,slotStats,reward,clearBonus,fresh,doBuy,doPlace,doMove,doUpgrade,onHeroChange,anchorOf,think,planted}),
  inspect:()=>({revision:REV,on,mine,stats:{...stats},lastError})});
 })();
