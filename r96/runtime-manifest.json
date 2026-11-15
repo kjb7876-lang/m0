@@ -52624,8 +52624,13 @@
     },
     {
       "path": "index.html",
-      "bytes": 6579534,
-      "sha256": "9fb8bc066caa0c02f3092007f8b6cf8b75e5331fb6b21f3f207c9cdab240cf21"
+      "bytes": 6579578,
+      "sha256": "453866e8c0a3605a19320653779920d7f08d36f7f64bdfd4505d7f0191736ff3"
+    },
+    {
+      "path": "ink-wash-r1055.js",
+      "bytes": 17564,
+      "sha256": "28d83b88b029a568e6447ec62f60a6173af2f1d97b2e99e2de10adde1027224b"
     },
     {
       "path": "intro-r140.js",
@@ -53893,9 +53898,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10778,
-  "totalBytes": 1307896380,
-  "webHTMLSha256": "9fb8bc066caa0c02f3092007f8b6cf8b75e5331fb6b21f3f207c9cdab240cf21",
+  "fileCount": 10779,
+  "totalBytes": 1307913988,
+  "webHTMLSha256": "453866e8c0a3605a19320653779920d7f08d36f7f64bdfd4505d7f0191736ff3",
   "largest": [
     {
       "path": "index.html",
