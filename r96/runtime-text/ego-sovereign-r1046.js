@@ -2,7 +2,7 @@
  * 기존서사와 충돌되지 않게 잘녹여서", 지시서 1~8항은 참고).
  *  · 서사: S-07 원문에서 환도는 페르소나의 식탁에서 가면을 내려놓고 'EGO'로 각성한다. 그래서 EGO 는 환도의 계보 — 몸·검·스킬 키는 환도 것을 그대로 쓰고
  *    (스킬 키를 늘리지 않음), 그 위에 EGO 고유 능력 표(ego-sovereign-r1046-data.js)를 얹는다. 원문 문장은 바꾸지 않는다.
- *  · 해금: 사몽 S-07(페르소나)을 깨면(또는 unlock() — 페르소나 보스 등) 한 번 컷인이 뜨고, 영웅 선택창 환도 옆에 'EGO' 칸이 생긴다. 777 시험 중에도 보인다.
+ *  · 해금: 사몽 S-07(페르소나)을 깨면(또는 unlock() — 페르소나 보스 등) 한 번 컷인이 뜨고, 영웅 선택창 맨 앞(0번째, R1048)에 'EGO' 칸이 생긴다. 777 시험 중에도 보인다.
  *  · 형상: player.egoSovereignR1046(저장됨). 환도일 때만 켜지고, 다른 영웅으로 바꾸면 꺼진다.
  *  · 관측 폐기: 걷을 수 있는 해로운 상태가 생기면 0.7초(게임 시간) 뒤 걷는다. 16초 대기. 이미 받은 피해·죽음은 그대로(자기 자신은 구원하지 못한다).
  *  · 그림: 해금 컷인·선택창 초상은 사용자 EGO 원화(합일1). 전장 몸 그림은 Dots 시트가 오기 전까지 환도 몸 + 붉은 R100 손그림 오라(임시).
@@ -101,14 +101,14 @@ function inject(){const panel=document.getElementById('panel');if(!panel)return;
  const rows=[];const sr=panel.querySelector('#heroRowR101 .heroRowR101');if(sr)rows.push([sr,true]);const cs=panel.querySelector('.cards');if(cs&&cs.querySelector('[data-hero]'))rows.push([cs,false]);
  for(const[row,start]of rows){const h=row.querySelector('[data-hero="'+P.base+'"]');if(!h)continue;let c=row.querySelector('[data-ego-r1046]');
   if(!unlocked()){if(c)c.remove();continue;}
-  if(!c){c=card(h,start);h.insertAdjacentElement('afterend',c);}}
+  if(!c){c=card(h,start);/* R1048: 사용자 11-15 11:56Z — EGO 각성은 0번째 영웅(히든 해금 칸) → 영웅 줄 맨 앞 */const first=[...row.children].find(x=>x.matches?.('[data-hero]'))||h;first.insertAdjacentElement('beforebegin',c);}}
  mark();}
 function onClick(ev){try{const el=ev.target?.closest?.('#panel [data-hero],#chooseHero,#slotConfirmR73');if(!el)return;
  if(el.id==='chooseHero'||el.id==='slotConfirmR73'){const sel=document.querySelector('#panel [data-ego-r1046].selected');commit=!!(sel&&want);if(commit)stats.chosen=(stats.chosen||0)+1;return;}
  if(!synthetic&&!ev.target.closest('[data-ego-r1046]'))want=false;}catch(e){fail(e);}}
 function cutin(){if(!cutinQueued||!hasDoc())return;if(G(()=>loading||storyScene||modal,true))return;if(document.getElementById('r1046Cutin'))return;cutinQueued=false;stats.cutins++;css();
  const d=document.createElement('div');d.id='r1046Cutin';d.innerHTML='<b>'+P.title+'</b><img alt="EGO"><p></p>';d.querySelector('img').src=url(P.cutin.image);d.querySelector('p').textContent=P.cutin.caption;
- const close=()=>{try{d.remove();if(typeof toast==='function')toast('히든 영웅 해금 · '+P.title+' — 영웅 선택창의 환도 옆에서 고를 수 있습니다.',4);}catch(_){}};d.onclick=close;document.body.appendChild(d);setTimeout(close,P.cutin.seconds*1000);}
+ const close=()=>{try{d.remove();if(typeof toast==='function')toast('히든 영웅 해금 · '+P.title+' — 영웅 선택창 맨 앞(0번째) 칸에서 고를 수 있습니다.',4);}catch(_){}};d.onclick=close;document.body.appendChild(d);setTimeout(close,P.cutin.seconds*1000);}
 function ui(){if(!hasDoc())return;const t=Date.now();if(t<uiAt)return;uiAt=t+200;
  try{if(commit!=null&&!G(()=>loading,true)&&G(()=>started,false)){const p=pl();if(p){const on=commit&&p.hero===P.base;setForm(on);if(on){if(typeof toast==='function')toast(P.title+' · '+P.hint,4);}commit=null;want=false;}}}catch(e){fail(e);}
  try{if(document.getElementById('panel')?.querySelector('[data-hero]')){css();inject();}}catch(e){fail(e);}
