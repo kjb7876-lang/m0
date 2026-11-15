@@ -52799,8 +52799,8 @@
     },
     {
       "path": "reach-r225.js",
-      "bytes": 9397,
-      "sha256": "a16db5123b642bfedad2577469e2ba61551e3de518ff9317327f0aa1eb060975"
+      "bytes": 10077,
+      "sha256": "87d18eb657149af5f21968daaeecd30b021cdf715e1bbedd8492c83b6907dfa4"
     },
     {
       "path": "readability-r434.js",
@@ -53434,7 +53434,7 @@
     }
   ],
   "fileCount": 10686,
-  "totalBytes": 1299427833,
+  "totalBytes": 1299428513,
   "webHTMLSha256": "1d71a54f3517c648e636a03badf19dee9722abd33045654484a07f91d69749f5",
   "largest": [
     {
