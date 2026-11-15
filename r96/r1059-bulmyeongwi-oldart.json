@@ -1,0 +1,286 @@
+{
+ "revision": "R1059",
+ "note": "옛 회백 해골 불면귀·중간보스 그림 자리를 새 그림(Dots CX-0070BM) 한 칸으로 바꾼 사본. 원본 보존.",
+ "rows": [
+  {
+   "old": "assets/generated-v31224/actors-normalized/692e4ae01c29_bulmyeongwi_idle.webp",
+   "new": "assets/r1059/assets/generated-v31224/actors-normalized/692e4ae01c29_bulmyeongwi_idle.webp",
+   "size": [
+    672,
+    384
+   ],
+   "frames": [
+    {
+     "sheet": "assets/r760/boss/sheet-idle.webp",
+     "frame": 0
+    }
+   ],
+   "bytes": 40474,
+   "sha256": "36905f85682d98cb280bee4d2753d9bc1ed56de7b76cf5d0ed0f88822151c2f8"
+  },
+  {
+   "old": "assets/generated-v31224/actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp",
+   "new": "assets/r1059/assets/generated-v31224/actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp",
+   "size": [
+    672,
+    384
+   ],
+   "frames": [
+    {
+     "sheet": "assets/r760/boss/sheet-atkA.webp",
+     "frame": 3
+    }
+   ],
+   "bytes": 40086,
+   "sha256": "285ee7ab9f7754af24e8adb7c98400b487d7cdfe47b74bb80ec6ac25c241741c"
+  },
+  {
+   "old": "assets/generated-v31224/actors-normalized/35526bcfa1c2_bulmyeongwi_rain.webp",
+   "new": "assets/r1059/assets/generated-v31224/actors-normalized/35526bcfa1c2_bulmyeongwi_rain.webp",
+   "size": [
+    672,
+    384
+   ],
+   "frames": [
+    {
+     "sheet": "assets/r760/boss/sheet-cast.webp",
+     "frame": 5
+    }
+   ],
+   "bytes": 29496,
+   "sha256": "19c0e35255680678b3abd94bb68e8ce870996b206c6fdd666c69309ec78534b3"
+  },
+  {
+   "old": "assets/generated-v31224/actors-normalized/de4c1414da0d_bulmyeongwi_transition.webp",
+   "new": "assets/r1059/assets/generated-v31224/actors-normalized/de4c1414da0d_bulmyeongwi_transition.webp",
+   "size": [
+    672,
+    384
+   ],
+   "frames": [
+    {
+     "sheet": "assets/r760/boss/sheet-reveal.webp",
+     "frame": 5
+    }
+   ],
+   "bytes": 40126,
+   "sha256": "918bd753bfd36104300f2befd7ca6e0350ad4f858c32c71c346f19a303629270"
+  },
+  {
+   "old": "assets/r425/clean/assets/generated-v31224/actors-normalized/692e4ae01c29_bulmyeongwi_idle.webp",
+   "new": "assets/r1059/assets/r425/clean/assets/generated-v31224/actors-normalized/692e4ae01c29_bulmyeongwi_idle.webp",
+   "size": [
+    672,
+    384
+   ],
+   "frames": [
+    {
+     "sheet": "assets/r760/boss/sheet-idle.webp",
+     "frame": 0
+    }
+   ],
+   "bytes": 33782,
+   "sha256": "529be8d313859ebc25fc815fe416193226927a43d2b40e23794058043ce4c856"
+  },
+  {
+   "old": "assets/episode1b/generated-v394/bulmyeongwi_b.webp",
+   "new": "assets/r1059/assets/episode1b/generated-v394/bulmyeongwi_b.webp",
+   "size": [
+    418,
+    418
+   ],
+   "frames": [
+    {
+     "sheet": "assets/r760/mid/sheet-idle.webp",
+     "frame": 0
+    }
+   ],
+   "bytes": 40492,
+   "sha256": "4d000a4c9a58ea7757c4fcc5dcdbc4ead1764c3d87cf72e286c69f0632c85180"
+  },
+  {
+   "old": "assets/r104/bosses/mb-last302-v31231-p1.webp",
+   "new": "assets/r1059/assets/r104/bosses/mb-last302-v31231-p1.webp",
+   "size": [
+    393,
+    432
+   ],
+   "frames": [
+    {
+     "sheet": "assets/r760/mid/sheet-atk.webp",
+     "frame": 1
+    }
+   ],
+   "bytes": 60716,
+   "sha256": "950c5a4d2faf9b099d68358543234cf7c43791c96d797f530a797d6a94604099"
+  },
+  {
+   "old": "assets/r104/bosses/mb-last302-v31231-p2.webp",
+   "new": "assets/r1059/assets/r104/bosses/mb-last302-v31231-p2.webp",
+   "size": [
+    393,
+    432
+   ],
+   "frames": [
+    {
+     "sheet": "assets/r760/mid/sheet-atk.webp",
+     "frame": 3
+    }
+   ],
+   "bytes": 59500,
+   "sha256": "175c7d9c1ccaac6d5b817014b13e51fd39f97f361d736ca4e1418e70d71b6c99"
+  },
+  {
+   "old": "assets/r104/bosses/mb-last302-v31231-p3.webp",
+   "new": "assets/r1059/assets/r104/bosses/mb-last302-v31231-p3.webp",
+   "size": [
+    393,
+    432
+   ],
+   "frames": [
+    {
+     "sheet": "assets/r760/mid/sheet-atk.webp",
+     "frame": 5
+    }
+   ],
+   "bytes": 47328,
+   "sha256": "2fc78563e5f7bfdcc0316729175ee6ce7c6bba79df8ca406c77c6016676458ef"
+  },
+  {
+   "old": "assets/r104/bosses/mb-last302-v31231-p4.webp",
+   "new": "assets/r1059/assets/r104/bosses/mb-last302-v31231-p4.webp",
+   "size": [
+    393,
+    432
+   ],
+   "frames": [
+    {
+     "sheet": "assets/r760/mid/sheet-idle.webp",
+     "frame": 0
+    }
+   ],
+   "bytes": 64548,
+   "sha256": "7e0ed03efd7397f171d439b5d02dba95de898d8abca0300d6463745e0bac02e9"
+  },
+  {
+   "old": "assets/rc140/story-cycle-motions/mb-last302-v31231.png",
+   "new": "assets/r1059/assets/rc140/story-cycle-motions/mb-last302-v31231.png",
+   "size": [
+    2172,
+    724
+   ],
+   "frames": [
+    {
+     "sheet": "assets/r760/mid/sheet-idle.webp",
+     "frame": 0
+    },
+    {
+     "sheet": "assets/r760/mid/sheet-atk.webp",
+     "frame": 3
+    },
+    {
+     "sheet": "assets/r760/mid/sheet-atk.webp",
+     "frame": 5
+    }
+   ],
+   "bytes": 1253216,
+   "sha256": "11b41aa51da90241ad9905bc02ee56c272e82560abfa9c4751c521bcec52553e"
+  },
+  {
+   "old": "assets/r760/boss/bulmyeongwi-p1.webp",
+   "new": "assets/r1059/assets/r760/boss/bulmyeongwi-p1.webp",
+   "size": [
+    393,
+    432
+   ],
+   "frames": [
+    {
+     "sheet": "assets/r760/boss/sheet-atkA.webp",
+     "frame": 1
+    }
+   ],
+   "bytes": 59678,
+   "sha256": "214e5757a270efd30c0ec05291caee0374fe56f2f182bfa2a90c8f21c1e494c4"
+  },
+  {
+   "old": "assets/r760/boss/bulmyeongwi-p2.webp",
+   "new": "assets/r1059/assets/r760/boss/bulmyeongwi-p2.webp",
+   "size": [
+    393,
+    432
+   ],
+   "frames": [
+    {
+     "sheet": "assets/r760/boss/sheet-atkA.webp",
+     "frame": 3
+    }
+   ],
+   "bytes": 61560,
+   "sha256": "bbaa488914bf2b673a48e9a781dcc9307721c70d447e42b5b77082e65b7f9ae3"
+  },
+  {
+   "old": "assets/r760/boss/bulmyeongwi-p3.webp",
+   "new": "assets/r1059/assets/r760/boss/bulmyeongwi-p3.webp",
+   "size": [
+    393,
+    432
+   ],
+   "frames": [
+    {
+     "sheet": "assets/r760/boss/sheet-atkA.webp",
+     "frame": 5
+    }
+   ],
+   "bytes": 37138,
+   "sha256": "545bb4a181af0d1c52add35d14f13cddcb0bf81702b7f6591e10a1b7a6f32dee"
+  },
+  {
+   "old": "assets/r760/boss/bulmyeongwi-p4.webp",
+   "new": "assets/r1059/assets/r760/boss/bulmyeongwi-p4.webp",
+   "size": [
+    393,
+    432
+   ],
+   "frames": [
+    {
+     "sheet": "assets/r760/boss/sheet-idle.webp",
+     "frame": 0
+    }
+   ],
+   "bytes": 69592,
+   "sha256": "f5e3b28d54886ca9a68344bf218936e4aa2c4fce6b06f4068c093bac9e8e5098"
+  },
+  {
+   "old": "assets/r760/boss/bulmyeongwi-rain.webp",
+   "new": "assets/r1059/assets/r760/boss/bulmyeongwi-rain.webp",
+   "size": [
+    672,
+    384
+   ],
+   "frames": [
+    {
+     "sheet": "assets/r760/boss/sheet-cast.webp",
+     "frame": 5
+    }
+   ],
+   "bytes": 29496,
+   "sha256": "19c0e35255680678b3abd94bb68e8ce870996b206c6fdd666c69309ec78534b3"
+  },
+  {
+   "old": "assets/r760/boss/bulmyeongwi-transition.webp",
+   "new": "assets/r1059/assets/r760/boss/bulmyeongwi-transition.webp",
+   "size": [
+    672,
+    384
+   ],
+   "frames": [
+    {
+     "sheet": "assets/r760/boss/sheet-reveal.webp",
+     "frame": 5
+    }
+   ],
+   "bytes": 40126,
+   "sha256": "918bd753bfd36104300f2befd7ca6e0350ad4f858c32c71c346f19a303629270"
+  }
+ ]
+}
