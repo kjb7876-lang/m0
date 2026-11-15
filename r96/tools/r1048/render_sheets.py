@@ -146,7 +146,7 @@ def light(name, kind, energy, color, toward, angle=None):
 # 검수 2회차: 주광 +60%(3200K 쪽), 테두리빛 채도 -25%(#D8323A), 얼굴 전용 보조광(머리를 따라감)
 light('key', 'SUN', 4.8, (1.0, .82, .62), -CR * .75 + UPV * 1.0 + CT * .55, 8)
 light('rim', 'SUN', 1.8, (.69, .032, .042), -CT * 1.0 + UPV * .45 + CR * .25, 4)
-light('rim2', 'SUN', 1.8, (.55, .62, .8), -CT * 1.0 + UPV * .3 - CR * .45, 4)  # 6회차: 한쪽 테두리는 차가운 은청(붉은 발광 반으로)
+light('rim2', 'SUN', 4.5, (1., .84, .58), -CT * 1.0 + UPV * .3 - CR * .45, 4)  # 12회차(AD): 금·백 테두리광 — 어두운 바닥·발밑 붉은 고리와 명도·색 분리 (6회차: 은청)
 try:  # 검수 3회차: 흰 깃털·머리는 붉은 테두리빛을 받지 않게(빛 연결)
     _rc = bpy.data.collections.new('rim-receivers')
     for o_ in sc.objects:

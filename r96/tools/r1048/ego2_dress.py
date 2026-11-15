@@ -61,7 +61,7 @@ def leather_mat(name, dark, light, rough=(.3, .55), coat=.3, grain=420, bump=.35
 M = dict(
     skin=mat('skin', (.86, .7, .62), .45, sss=.25),
     cloth=mat('cloth', (.007, .0065, .007), .85, sheen=.35, bump=.15),
-    coat=mat('coat', (.011, .0098, .012), .85, sheen=.35, bump=.3),
+    coat=mat('coat', (.06, .052, .064), .8, sheen=.4, bump=.3),  # 12회차(AD 7.54): 70px 명도 분리 — 로브 중간톤 한 단계 위
     lining=mat('lining', (.254, .005, .008), .55, sheen=.4),
     leather=leather_mat('leather', (.024, .011, .009), (.075, .034, .024)),  # 11회차: 절차 가죽(검은 덩어리 → 닳은 소가죽)
     glove=leather_mat('glove', (.03, .009, .01), (.11, .025, .028), rough=(.25, .45), coat=.45, grain=650, bump=.25),  # 검붉은 광택 가죽 장갑
@@ -153,7 +153,7 @@ def coat_tex_copy(base, dims, tile=1.0):
     bp.inputs['Distance'].default_value = .004
     return m
 FEATHER_MATS = [tex_mat(f, emit=.12, tint=(.72, .72, .72), grad=True) for f in FEATHER_TEX]
-FEATHER_MATS_SH = [tex_mat(f, emit=.30, tint=(.72, .72, .72), tag='-sh', grad=True, g0=.85) for f in FEATHER_TEX]  # 10회차: 어깨 깃 밝게  # 8회차: 그늘 쪽 깃이 검은 줄로 보이지 않게 자기 색 .15
+FEATHER_MATS_SH = [tex_mat(f, emit=.45, tint=(.72, .72, .72), tag='-sh', grad=True, g0=.85) for f in FEATHER_TEX]  # 10회차: 어깨 깃 밝게  # 8회차: 그늘 쪽 깃이 검은 줄로 보이지 않게 자기 색 .15
 _wf = [f for f in FEATHER_TEX if 'white' in os.path.basename(f)] or FEATHER_TEX
 FEATHER_TINTS = [tex_mat(_wf[0], emit=.04, tint=(.42, .03, .05), tag='-crimson', grad=True), tex_mat(_wf[-1], .7, .3, tint=(.05, .04, .045), tag='-black')] if _wf else []
 HAIR_MATS = [tex_mat(f, .38, .5, .3 if FACE_TEX else .6) for f in HAIR_TEX]

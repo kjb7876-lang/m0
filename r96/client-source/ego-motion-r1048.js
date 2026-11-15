@@ -84,7 +84,7 @@ function pickBody(rec,st){let best=null,bh=0;for(let i=st;i<rec.commands.length;
 // 검 궤적 이펙트(Dots CX-0110EG ego_slash r1 → Claude 개선: 512칸 6장, 끝 칸 완전 투명, 백색 번짐 240 상한; 게임용 256칸 webp).
 //  기본 공격(at>0)일 때만. 몸 공격 칸(16칸: 예비 0~4·타격 5~10·여운 11~15) → 궤적 칸. 타격 첫 칸(히트스톱)에 가장 큰 3번 칸.
 //  그림은 오른쪽 위→왼쪽 아래 초승달 → 화면 오른쪽을 볼 때 좌우를 뒤집는다. 가산 합성('lighter')으로 몸 위에 겹친다.
-const FX=Object.freeze({slash:Object.freeze({path:'assets/r1048/fx/ego_slash.webp',cell:256,frames:6,size:2.1,lift:.55,ahead:.28,alpha:.95,
+const FX=Object.freeze({slash:Object.freeze({path:'assets/r1048/fx/ego_slash.webp',cell:256,frames:6,size:3.4,lift:.5,ahead:.36,alpha:1,core:.55,coreFrames:Object.freeze([2,3]),/* AD 7.54: 1.6배·몸 밖으로, 타격 칸 흰 심 한 겹 더 */
  map:Object.freeze({3:0,4:1,5:2,6:2,7:3,8:3,9:4,10:4})}),
  // 깃 버스트(CX-0110EG ego_feathers gem_r1 → Claude 개선: 검정 배경을 밝기 알파로, 512칸 8장, 끝 칸 완전 투명). 관측 폐기 '방출' 첫 칸과 EGO 형상이 켜질 때 한 번 터진다.
  feathers:Object.freeze({path:'assets/r1048/fx/ego_feathers.webp',cell:256,frames:8,size:2.4,lift:.5,alpha:.9,fps:16}),
@@ -119,7 +119,8 @@ function paint(rec,st){const sh=sheets(),p=typeof player==='object'?player:null;
  r.ghosts.forEach((g,i)=>{const gq=project(g.x,g.y),f=place(sh,g.clip,g.dir,g.frame,gq.x,gq.y-lift);if(f){extra.push({...best,...f,key:best.key+':r1048g'+i,style:{...best.style,globalAlpha:alpha*g.alpha,globalCompositeOperation:'lighter'}});stats.ghosts++;}});
  /* 잔상·섞는 옛 칸은 몸 뒤에 */if(extra.length){const at=Math.max(st,rec.commands.indexOf(best));rec.commands.splice(at,0,...extra);}
  const sf=slashFrame(r.clip,r.frame,lastInp?.basic);if(sf>=0){const ah=(typeof actorHeight==='function'?actorHeight():66),sx=(+face.x||0)-(+face.y||0),sgn=sx>0?1:-1,f=placeFx(FX.slash,sf,fx+sgn*ah*FX.slash.ahead,fy-ah*FX.slash.lift,sx>0);
-  if(f){const at=rec.commands.indexOf(best);rec.commands.splice(at+1,0,{...best,...f,owner:fxOwner(best.owner),key:best.key+':r1048s',style:{...best.style,globalAlpha:alpha*FX.slash.alpha,globalCompositeOperation:'lighter'}});stats.slash++;}}
+  if(f){const at=rec.commands.indexOf(best),S2=FX.slash,cmd=k=>({...best,...f,owner:fxOwner(best.owner),key:best.key+':r1048s'+k,style:{...best.style,globalAlpha:alpha*(k?S2.core:S2.alpha),globalCompositeOperation:'lighter'}});
+   rec.commands.splice(at+1,0,cmd(0),...(S2.coreFrames.includes(sf)?[cmd(1)]:[]));stats.slash++;}}
  try{const t=now(),ah0=(typeof actorHeight==='function'?actorHeight():66),back=r.dir==='n'||r.dir==='ne'||r.dir==='nw',H=FX.halo,hf=placeFx(H,haloFrame(t),fx,fy-ah0*H.lift,false);
   if(hf){const at=rec.commands.indexOf(best);rec.commands.splice(back?at+1:at,0,{...best,...hf,owner:fxOwner(best.owner),key:best.key+':r1048h',style:{...best.style,globalAlpha:alpha*(back?H.alphaFront:H.alpha),globalCompositeOperation:'lighter'}});stats.halo++;}
   if(r.clip==='discard'&&r.frame>=9&&!burstDiscard){burstDiscard=true;burstT0=t;stats.bursts++;}if(r.clip!=='discard')burstDiscard=false;
