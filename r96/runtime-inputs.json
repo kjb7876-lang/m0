@@ -9895,7 +9895,8 @@
     "assets/r1041/fx-m3-michaela-ego-on.webp",
     "assets/r1041/fx-m4-michaela-hit.webp",
     "assets/r1041/fx-m5-michaela-ground-heart.webp",
-    "assets/r1041/fx-m7-michaela-sky-pillar.webp"
+    "assets/r1041/fx-m7-michaela-sky-pillar.webp",
+    "assets/r1045/gunner/walk-s2.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -10970,5 +10971,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "517c89a06c72ffc12b3458a2017ab21b0d4014101345f5b76e43143f7a990e4e"
+  "runtimeManifestSHA256": "63bb8a85acc91a03772ce858bfb5119d8cefbae5d8d51f7e957222d41f14fb8e"
 }
