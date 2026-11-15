@@ -12,7 +12,7 @@
  *  설정 storyworld.r991.gunnerAim {"on":false} 로 끄면 예전 그대로. Canonical source; copied by scripts/sync-r99.py. */
 (()=>{'use strict';
 if(window.__STORYWORLD_GUNNER_AIM_R991__)return;
-const REV='R1045b-gunner-aim-4+R1045+R1003-s2',KEY='storyworld.r991.gunnerAim',HERO='gunner';
+const REV='R1045c-gunner-aim-5+R1045b+R1045+R1003-s2',KEY='storyworld.r991.gunnerAim',HERO='gunner';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={walk:0,idle:0,swings:0,replaced:0,shots:0,moved:0,blocked:0,waiting:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
@@ -33,6 +33,8 @@ const SHEET={e:{gun:-3,face:0,body:181,tip:[[159,75],[154,72],[172,83],[151,71],
 //  동쪽은 사용자가 Dots 에 부탁한 무반동 E r6(r3 1번 칸 6번 반복) — 위아래 흔들림·반동 없이 총구가 한 자리. {"n3":false}/{"e3":false} 로 R143 그대로.
 if(prefs.n3!==false)Object.assign(SHEET.n,{gun:-80,face:-90,body:182,path:'assets/r1045/gunner/attack-n3.webp',tip:[[126,62],[126,62],[126,60],[126,60],[126,62],[126,62]]});
 if(prefs.e3!==false)Object.assign(SHEET.e,{path:'assets/r1045/gunner/attack-e3.webp',tip:[0,1,2,3,4,5].map(()=>[156,74])});
+// R1045c (사용자 "괜춘한데 드라이브올려서 클로드 개선적용하라고해"): Dots gunner-ew-r1 동쪽 공격 6칸 — 공통 배율 .402·후드 위치를 e3 에 맞추고 발 y227, 알파 ≤16 잔티 0. {"e4":false} 면 e3.
+if(prefs.e3!==false&&prefs.e4!==false)Object.assign(SHEET.e,{path:'assets/r1045c/gunner/attack-e4.webp',tip:[0,1,2,3,4,5].map(()=>[156,77])});
 const SHEETS=Object.freeze(Object.keys(SHEET));
 // 걸으며 쏠 때: R128 걷기 시트(8칸 192×256, 발 96·226, walk-e 는 R144 v1 사본) — 같은 총 각도, 칸마다 총구 끝
 const WALK={e:{path:'assets/r144/walk/gunner/walk-e.webp',tip:[[165,81],[166,76],[166,76],[166,80],[165,80],[164,76],[163,76],[164,81]]},
@@ -44,6 +46,8 @@ WALK.s2=WALK.s; // 정 아래 걷기 사격 그림이 없거나 꺼졌을 때 �
 // R1045b: 사용자가 고른 Dots CX-0085GA r3 walk-s2(총구를 화면 앞으로 겨누며 걷는 8칸, 발 96·226). F3 한 칸만 좌우 반전해(x'=192−x)
 //  같은 다리가 F3·F7 두 번 앞으로 나오던 것을 왼발·오른발 번갈아로 고쳤다. tip 은 Dots 총구 구멍 중심(F3 은 반전값).
 if(prefs.walkS2!==false)WALK.s2={path:'assets/r1045/gunner/walk-s2.webp',tip:[[93,126],[94,133],[95,130],[98,128],[95,128],[94,131],[94,129],[95,128]]};
+// R1045c: Dots gunner-ew-r1 동쪽 걷기 8칸(겨눈 채 걷기) — 공통 배율 .583·후드 위치를 R144 walk-e 에 맞추고 발 y226. {"walkE2":false} 면 R144 walk-e.
+if(prefs.walkE2!==false)WALK.e={path:'assets/r1045c/gunner/walk-e2.webp',tip:[[165,79],[165,79],[165,79],[166,79],[166,79],[165,79],[165,79],[165,79]]};
 // R1003 쏜 뒤 정 아래 서 있기: Dots idle-s2 v4(4칸 192×256, 발 96·227, 몸 181) — 사용자 방향 확인("이건 맞음") + 7분야 심사 통과분
 const IDLE_S2={path:'assets/r1003/gunner/idle-s2.webp',cellW:192,cellH:256,footX:96,footY:227,refBody:181,frames:4};
 const WFY=226;

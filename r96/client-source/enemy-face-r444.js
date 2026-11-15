@@ -19,7 +19,7 @@
 //  끄기: localStorage storyworld.r444.face {"on":false}.
 (()=>{'use strict';
 if(window.__STORYWORLD_ENEMY_FACE_R444__)return;
-const REV='R444-face-8+R702+R1028+R1031',KEY='storyworld.r444.face';
+const REV='R444-face-8+R702+R1028+R1031+R1053',KEY='storyworld.r444.face';
 let prefs={on:true,debug:false,shadows:false};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={updates:0,spawns:0,jumps:0,turns:0,attackLocks:0,draws:0,owner:{},errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0;
@@ -48,6 +48,8 @@ function init(e){const p=P(),d=e.direction;const side=d==='left'||d==='right'?d:
 // 공격 판정 각도로 좌우를 묶는다(준비~후딜). 화면 세로에 가까운 각(|가로| ≤ .12)은 마지막 좌우를 둔다.
 function lockAttack(s,A){const X=sideX(Math.cos(A.g),Math.sin(A.g));if(s.aim===null)stats.attackLocks++;s.aim=A.g;s.owner='attack:'+A.k;s.pend=null;if(Math.abs(X)>.12)s.side=X>0?'right':'left';dir4(s,Math.cos(A.g),Math.sin(A.g),true);return s;}
 const live=e=>e.hp>0&&e.spawnState!=='dead';
+// R1053(사용자 2026-11-15 "보스들이 좌우를 번갈아서 보는 이유 … 전투중이니까 공격적으로 달려들어야지"): 보스·중간보스는 전투 중(6칸 안) 걸을 때도 영웅 쪽 — 규칙은 enemy-rules-r1053.js(docs/enemy-combat-rules.md ①)
+const majorFace=(e,td)=>{try{return !!window.__STORYWORLD_ENEMY_RULES_R1053__?.faceHero?.(e,td);}catch(_){return false;}};
 function update(e){let s=S.get(e);const t=T();
  if(fresh(e,s)){s=init(e);S.set(e,s);stats.spawns++;const A=live(e)?atkAngle(e):null;return A?lockAttack(s,A):s;}// 공격 중에 처음 보이면 바로 판정 쪽
  // 같은 순간(게임 시간 그대로)에 공격 각이 새로 정해지거나 바뀌면 바로 따른다 — 그림과 판정이 한 프레임도 갈리지 않게(엔진 enemy-facing 검사는 한 순간에 8방향을 찔러 본다)
@@ -62,13 +64,14 @@ function update(e){let s=S.get(e);const t=T();
  const A=atkAngle(e);
  if(A)return lockAttack(s,A);
  s.aim=null;
- if(e.hitTimer>0||t-num(s.tele,-9)<.15){s.owner='hold';s.pend=null;return s;}
  const p=P(),tx=p?p.x-e.x:0,ty=p?p.y-.15-e.y:0,td=Math.hypot(tx,ty);
+ // R1053: 전투 중 영웅을 보는 적(enemy-rules ①)은 맞는 동안에도 영웅 쪽을 따른다(움찔마다 좌우가 굳어 영웅이 돌면 등을 보였음). 순간이동 직후 0.15초는 그대로 둔다.
+ if((e.hitTimer>0&&!(p&&p.hp>0&&majorFace(e,td)))||t-num(s.tele,-9)<.15){s.owner='hold';s.pend=null;return s;}
  const engaged=!!(p&&p.hp>0&&td<Math.max(6,num(e.combatProfile?.aggro,7)));
  const v=Math.hypot(s.vx,s.vy),moving=v>Math.max(.22,sp*.12);
  let vec=null,owner='hold',hold=.2;
  if(moving){const range=num(e.combatProfile?.attackShape?.range,1.2),dot=engaged?(s.vx*tx+s.vy*ty)/(v*(td||1)):1;
-  if(engaged&&td<range+1.2&&dot<.35){vec=[tx,ty];owner='face';hold=.22;}else{vec=[s.vx,s.vy];owner='move';hold=.05;}}
+  if(engaged&&(td<range+1.2&&dot<.35||majorFace(e,td))){vec=[tx,ty];owner='face';hold=.22;}else{vec=[s.vx,s.vy];owner='move';hold=.05;}}
  else if(engaged&&td<6){vec=[tx,ty];owner='face';hold=.22;}
  s.owner=owner;
  if(vec){const X=sideX(vec[0],vec[1]),Y=(vec[0]+vec[1])/2,m=Math.hypot(X,Y)||1;
