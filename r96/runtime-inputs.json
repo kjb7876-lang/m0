@@ -10019,6 +10019,8 @@
     "assets/r1063/r283/hwando/r271/walk-n.webp",
     "assets/r1063/r283/hwando/r271/walk-w.webp",
     "assets/r1063/r439/hwando/attack-e.webp",
+    "lineart-ink-r1081.js",
+    "lineart-video-r1080.js",
     "ui-ink-r1085.js"
   ],
   "mediaPaths": [
@@ -11094,5 +11096,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "2bb08725464e5874531ed5260c61d54208729cb4e876464bd1b6baaa9b235f6c"
+  "runtimeManifestSHA256": "262010be9baa959b9d37041fb7c5703d5d896edc343eaa3fe0552d8746fed77b"
 }
