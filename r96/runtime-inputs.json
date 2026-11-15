@@ -9965,7 +9965,8 @@
     "assets/r1049/sfx/step-1.ogg",
     "assets/r1049/sfx/step-2.ogg",
     "assets/r1049/sfx/step-3.ogg",
-    "assets/r1049/sfx/step-4.ogg"
+    "assets/r1049/sfx/step-4.ogg",
+    "enemy-rules-r1053.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11040,5 +11041,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "a1a8f27539f0cb050ac6756b165555f7606173fe55d1911de7a2587028567cdc"
+  "runtimeManifestSHA256": "c43a0e947e9c180ccfb5ee9008a85a392ca16dc45ba8e6d4f2d3674cec7b252a"
 }
