@@ -9967,7 +9967,21 @@
     "assets/r1049/sfx/step-3.ogg",
     "assets/r1049/sfx/step-4.ogg",
     "age15-r1054.js",
-    "age15-text-r1054.js"
+    "age15-text-r1054.js",
+    "assets/r381/voice/013a96781c12f039.mp3",
+    "assets/r381/voice/1ae86c7e2fda2f5a.mp3",
+    "assets/r381/voice/2c0fa0a59ea088db.mp3",
+    "assets/r381/voice/3ba78f518960fbbf.mp3",
+    "assets/r381/voice/6f395aafe5815570.mp3",
+    "assets/r381/voice/7e4fb0e544b3dfcb.mp3",
+    "assets/r381/voice/9a18d153a5594672.mp3",
+    "assets/r381/voice/9f675e3ec7b3c56d.mp3",
+    "assets/r381/voice/a3340b484d6ed34a.mp3",
+    "assets/r381/voice/bb94b9e85af7255b.mp3",
+    "assets/r381/voice/ce8d4077e8bbe28b.mp3",
+    "assets/r381/voice/e2199a879025ec8c.mp3",
+    "assets/r381/voice/e6d1225dbedcb640.mp3",
+    "assets/r381/voice/fd5a31cf22856c2d.mp3"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11042,5 +11056,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "303f69feaa535ebe3a29ded351d865632e7e87471bf817cfe74c806c79340751"
+  "runtimeManifestSHA256": "962a88df268d74f8e43a415637b58c96d9186e9d54dac9e70bad07639b7e0089"
 }

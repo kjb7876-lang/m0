@@ -132,4 +132,14 @@ ok('settings select has no gore option under age15',/age15|A15/.test(C('mob-deat
  const Q={window:{},TextEncoder,seen:null};Q.window=Q;vm.createContext(Q);vm.runInContext('function playScenes(list){seen=list.map(s=>s.text);}',Q);if(has('age15-text-r1054.js'))vm.runInContext(C('age15-text-r1054.js'),Q);
  vm.runInContext("playScenes([{text:'늪을 지배하는 악마의 뿔에는 죽은 수호자들의 머리가 매달려 있었다.'},{text:'평범한 문장.'}])",Q);
  ok('scene window safety net rewrites old wording, leaves others',Array.isArray(Q.seen)&&!/죽은 수호자들의 머리/.test(Q.seen[0])&&Q.seen[1]==='평범한 문장.',Q.seen);}
+// ---- R1054-3 순화 문장 새 녹음(사용자 11:43Z "변경본으로 다시 녹음 및 생성해서 적용") ----
+{const lines=fs.readFileSync(path.join(__dirname,'voice-lines.tsv'),'utf8').trim().split('\n').slice(1).map(l=>l.split('\t'));
+ const crypto=require('crypto'),sha=t=>crypto.createHash('sha1').update(t.trim()).digest('hex').slice(0,16);
+ const D={window:{}};D.window=D;vm.createContext(D);vm.runInContext(C('voice-r381-data.js'),D);const ids=new Set(D.__STORYWORLD_VOICE_R381_DATA__.ids);
+ ok('14 softened lines listed with sha1 ids',lines.length===14&&lines.every(([i,t])=>sha(t)===i));
+ ok('every softened line now has a recording in the voice list',lines.every(([i])=>ids.has(i)),lines.filter(([i])=>!ids.has(i)).map(l=>l[1]));
+ ok('every recording file exists in runtime assets (mp3, 10~150KB)',lines.every(([i])=>{const f=path.join(R,'runtime-text','assets','r381','voice',i+'.mp3');return fs.existsSync(f)&&fs.statSync(f).size>10000&&fs.statSync(f).size<150000;}));
+ const K2={window:{},TextEncoder};K2.window=K2;vm.createContext(K2);vm.runInContext(C('story-canon-r106-data.js'),K2);vm.runInContext(C('age15-text-r1054.js'),K2);vm.runInContext(C('samong-text-r103.js'),K2);vm.runInContext(C('voice-r381-data.js'),K2);
+ const live=new Set(K2.__STORYWORLD_VOICE_R381_DATA__.ids);ok('new recordings survive the old-wording block (not removed)',lines.every(([i])=>live.has(i)));
+ ok('old-wording recordings still blocked',!live.has(sha('그것들은 죽은 수호자들의 머리였다.'))&&!live.has(sha('이내 고통이 줄어들었다.')));}
 console.log(`\nR1054 age15: ${pass} passed, ${fail} failed`);process.exit(fail?1:0);
