@@ -51,6 +51,10 @@ function fight(c,e,attacks,{dt=1/30}={}){const shifts=[];for(let a=0;a<attacks;a
  // 이상한 값(NaN·너무 큼)은 버린다
  const r286c=`window.__STORYWORLD_MOB_MOTION_R286__={kindOf:e=>'full',lungeOffset:(t,sh,a,side)=>[NaN,5]};`;
  const c2=world({r286:r286c}),e2=mob();fight(c2,e2,2);const s2=fight(c2,e2,1);ok(s2.every(Number.isFinite)&&Math.max(...s2)<=.6+1e-9,'NaN/huge offsets rejected or clamped');}
+{// ④b R1064b: R380 시트에 공격 칸이 여럿이면(같은 줄 시트라도) 진짜 공격 그림 → 손대지 않음
+ const r380=`window.__STORYWORLD_APPROVED_MOBS_R380__={assign:e=>e.__r380||null};`;
+ const c=world({r286:r380}),e=mob({__r380:{id:'purple-eggkeeper-v1',move:[0,1,2,3],attack:[4,5,6,7]}});const s=fight(c,e,3);ok(Math.max(...s)<1e-9&&L(c).verdict(e)===null,'R380 sheet with attack cells: not judged, not shifted');
+ const c2=world({r286:r380}),e2=mob({__r380:{id:'red-heel',move:[0,1,2],attack:[0]}});fight(c2,e2,2);ok(L(c2).verdict(e2)==='lunge','R380 sheet with 1 attack cell: still eligible');}
 {// ⑤ 끄기
  const c=world(),e=mob();fight(c,e,2);L(c).set(false);const s=fight(c,e,1);ok(Math.max(...s)<1e-9,'set(false): off');ok(c.localStorage.getItem('storyworld.r1064.moblunge')!==null,'pref saved');}
 {// ⑤b R286 분류가 R380 승인 시트 칸 수를 먼저 본다(알집지기 공격 4칸이 가려지던 것)
