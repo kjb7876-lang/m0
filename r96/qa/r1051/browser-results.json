@@ -1,0 +1,331 @@
+{
+ "when": "2026-11-15T10:14:55.751Z",
+ "headless": true,
+ "GPUVerified": false,
+ "naturalPlayVerified": false,
+ "allOk": true,
+ "results": {
+  "michaela": {
+   "tier": 5,
+   "idle": {
+    "wing": 0,
+    "wingNames": [],
+    "halo": 24,
+    "auraShape": 0,
+    "nan": 0,
+    "feather": 0,
+    "frames": 24
+   },
+   "walk": {
+    "wing": 0,
+    "wingNames": [],
+    "halo": 24,
+    "auraShape": 0,
+    "nan": 0,
+    "feather": 0,
+    "frames": 24
+   },
+   "ego": {
+    "wing": 0,
+    "wingNames": [],
+    "halo": 24,
+    "auraShape": 0,
+    "nan": 0,
+    "feather": 0,
+    "frames": 24
+   },
+   "samong": {
+    "wing": 0,
+    "wingNames": [],
+    "halo": 24,
+    "auraShape": 0,
+    "nan": 0,
+    "feather": 0,
+    "frames": 24
+   },
+   "skills": {
+    "wing": 0,
+    "wingNames": [],
+    "halo": 80,
+    "auraShape": 0,
+    "nan": 0,
+    "feather": 0,
+    "frames": 80
+   },
+   "checks": [
+    {
+     "ok": true,
+     "m": "날개 그림 0 (평소·걷기·EGO·사몽·스킬)",
+     "d": {
+      "idle": 0,
+      "walk": 0,
+      "ego": 0,
+      "samong": 0,
+      "skills": 0,
+      "names": []
+     }
+    },
+    {
+     "ok": true,
+     "m": "오라 범위 코드 도형(도형 날개 대체) 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "오라 날개에 딸린 깃털 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "평소에 천사링이 프레임마다 보임",
+     "d": [
+      24,
+      24
+     ]
+    },
+    {
+     "ok": true,
+     "m": "EGO·스킬 중에도 천사링",
+     "d": [
+      24,
+      24,
+      80,
+      80
+     ]
+    },
+    {
+     "ok": true,
+     "m": "사몽 각성 때 천사링",
+     "d": [
+      24,
+      24
+     ]
+    },
+    {
+     "ok": true,
+     "m": "그림 좌표 NaN 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "R106 날개 스위치 꺼짐",
+     "d": {
+      "w": false,
+      "e101": 0
+     }
+    },
+    {
+     "ok": true,
+     "m": "페이지 오류 0",
+     "d": []
+    }
+   ]
+  },
+  "hwando": {
+   "tier": 5,
+   "idle": {
+    "wing": 0,
+    "wingNames": [],
+    "halo": 0,
+    "auraShape": 0,
+    "nan": 0,
+    "feather": 0,
+    "frames": 24
+   },
+   "walk": {
+    "wing": 0,
+    "wingNames": [],
+    "halo": 0,
+    "auraShape": 0,
+    "nan": 0,
+    "feather": 0,
+    "frames": 24
+   },
+   "ego": {
+    "wing": 0,
+    "wingNames": [],
+    "halo": 0,
+    "auraShape": 0,
+    "nan": 0,
+    "feather": 0,
+    "frames": 24
+   },
+   "samong": {
+    "wing": 0,
+    "wingNames": [],
+    "halo": 24,
+    "auraShape": 0,
+    "nan": 0,
+    "feather": 0,
+    "frames": 24
+   },
+   "skills": {
+    "wing": 0,
+    "wingNames": [],
+    "halo": 0,
+    "auraShape": 0,
+    "nan": 0,
+    "feather": 0,
+    "frames": 80
+   },
+   "checks": [
+    {
+     "ok": true,
+     "m": "날개 그림 0 (평소·걷기·EGO·사몽·스킬)",
+     "d": {
+      "idle": 0,
+      "walk": 0,
+      "ego": 0,
+      "samong": 0,
+      "skills": 0,
+      "names": []
+     }
+    },
+    {
+     "ok": true,
+     "m": "오라 범위 코드 도형(도형 날개 대체) 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "오라 날개에 딸린 깃털 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "천사 형태가 아닌 영웅은 평소 천사링 없음(전과 같음)",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "사몽 각성 때 천사링",
+     "d": [
+      24,
+      24
+     ]
+    },
+    {
+     "ok": true,
+     "m": "그림 좌표 NaN 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "R106 날개 스위치 꺼짐",
+     "d": {
+      "w": false,
+      "e101": 0
+     }
+    },
+    {
+     "ok": true,
+     "m": "페이지 오류 0",
+     "d": []
+    }
+   ]
+  },
+  "slayer": {
+   "tier": 5,
+   "idle": {
+    "wing": 0,
+    "wingNames": [],
+    "halo": 0,
+    "auraShape": 0,
+    "nan": 0,
+    "feather": 0,
+    "frames": 24
+   },
+   "walk": {
+    "wing": 0,
+    "wingNames": [],
+    "halo": 0,
+    "auraShape": 0,
+    "nan": 0,
+    "feather": 0,
+    "frames": 24
+   },
+   "ego": {
+    "wing": 0,
+    "wingNames": [],
+    "halo": 0,
+    "auraShape": 0,
+    "nan": 0,
+    "feather": 0,
+    "frames": 24
+   },
+   "samong": {
+    "wing": 0,
+    "wingNames": [],
+    "halo": 24,
+    "auraShape": 0,
+    "nan": 0,
+    "feather": 0,
+    "frames": 24
+   },
+   "skills": {
+    "wing": 0,
+    "wingNames": [],
+    "halo": 0,
+    "auraShape": 0,
+    "nan": 0,
+    "feather": 0,
+    "frames": 80
+   },
+   "checks": [
+    {
+     "ok": true,
+     "m": "날개 그림 0 (평소·걷기·EGO·사몽·스킬)",
+     "d": {
+      "idle": 0,
+      "walk": 0,
+      "ego": 0,
+      "samong": 0,
+      "skills": 0,
+      "names": []
+     }
+    },
+    {
+     "ok": true,
+     "m": "오라 범위 코드 도형(도형 날개 대체) 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "오라 날개에 딸린 깃털 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "천사 형태가 아닌 영웅은 평소 천사링 없음(전과 같음)",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "사몽 각성 때 천사링",
+     "d": [
+      24,
+      24
+     ]
+    },
+    {
+     "ok": true,
+     "m": "그림 좌표 NaN 0",
+     "d": 0
+    },
+    {
+     "ok": true,
+     "m": "R106 날개 스위치 꺼짐",
+     "d": {
+      "w": false,
+      "e101": 0
+     }
+    },
+    {
+     "ok": true,
+     "m": "페이지 오류 0",
+     "d": []
+    }
+   ]
+  }
+ }
+}

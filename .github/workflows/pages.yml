@@ -454,6 +454,12 @@ jobs:
         run: node r96/qa/r993/r993-cpu-check.cjs
       - name: R1026 enemy hit/death SFX punch (own death/hit lanes, level lift, EQ, short death tail) CPU check
         run: node r96/qa/r1026/r1026-cpu-check.cjs
+      - name: R1049 SFX rules (full audit vs rules, 55 off-rule sounds re-edited free, footsteps/low-HP heartbeat/level-up from plinkfx CC0) CPU check
+        run: node r96/qa/r1049/r1049-cpu-check.cjs
+      - name: R1056 east-region gugak BGM CPU check
+        run: node r96/qa/r1056/r1056-cpu-check.cjs
+      - name: R1051 hero wings removed, halo only (R106 wing sprites skipped, R101 aura and R102 holy flash draw no wings) CPU check
+        run: node r96/qa/r1051/r1051-cpu-check.cjs
       - name: R1027 hero dot (pixel atlas) skill FX and static buff sigils replaced by painted frame sheets CPU check
         run: node r96/qa/r1027/r1027-cpu-check.cjs
       - name: R968 boss/midboss attack sounds also fire on route phases and rooms without an R78 phase (same rule as R966) CPU check
@@ -512,6 +518,8 @@ jobs:
         run: node r96/qa/r961/r961-cpu-check.cjs
       - name: R720 survival hero placement (I key, crystals, story-order prices, leash and range upgrades, swap rule) CPU check
         run: node r96/qa/r720/r720-cpu-check.cjs
+      - name: R1050 survival placed heroes plant during attack and skill so the attack motion plays (no chase drift, start frame step undone) CPU check
+        run: node r96/qa/r1050/r1050-cpu-check.cjs
       - name: R953 gunner veil passives (cloak cuts ultimate cooldown and cast delay by 77%, lock-on barrage, machine-boss allies for 7s kept out of the enemy list) CPU check
         run: node r96/qa/r953/r953-cpu-check.cjs
       - name: R991 gunner aim CPU check
@@ -522,6 +530,8 @@ jobs:
         run: node r96/qa/r1045/r1045-cpu-check.cjs
       - name: R1045b gunner walk-and-aim-down art CPU check
         run: node r96/qa/r1045b/r1045b-cpu-check.cjs
+      - name: R1047 reach bounds (minX,minY,maxX,maxY) keep hidden persona reachable CPU check
+        run: node r96/qa/r1047/reach-bounds-cpu-check.cjs
       - name: R945 hwando ink passives (piercing ink crescent, seven ink clones for 7 s, three-hero ink finale, per-body state) CPU check
         run: node r96/qa/r945/r945-cpu-check.cjs
       - name: R1034 hwando W seven-direction clones restored + ink clone action circles CPU check
@@ -572,6 +582,8 @@ jobs:
         run: node r96/qa/r1023/r1023-cpu-check.cjs
       - name: R1043 performance 7 steps (1 lighter than the old lowest, 5 = PC default, 7 full options, phone stays auto) and reach-check wall cache CPU check
         run: node r96/qa/r1043/r1043-cpu-check.cjs
+      - name: R1052 performance steps 6/7 pixel budget (canvas at most 4K pixels on big windows, never below step 5)
+        run: node r96/qa/r1052/r1052-cpu-check.cjs
       - name: R1022 auto-move toggle CPU check
         run: node r96/qa/r1022/r1022-cpu-check.cjs
       - name: R1007 samong confront statement markers never overlap (4-marker zones M-1 Michaela, S-04 16th floor were unpassable) CPU check
@@ -690,10 +702,14 @@ jobs:
         run: node r96/qa/r1039/r1039-cpu-check.cjs
       - name: R1046 hidden hero EGO (unlock after S-07, hwando lineage form, observe-discard dispel 0.7s) CPU check
         run: node r96/qa/r1046/r1046-cpu-check.cjs
+      - name: R1057 hero select secret 777 reveals only hidden hero EGO CPU check
+        run: node r96/qa/r1057/r1057-cpu-check.cjs
       - name: R1040 boss pattern frame fx CPU check
         run: node r96/qa/r1040/boss-pattern-fx-cpu-check.cjs
       - name: R1042 lust boss kiss lips attack (telegraph, 66 percent of current HP, frame sheets) CPU check
         run: node r96/qa/r1042/kiss-lips-cpu-check.cjs
+      - name: R1054 age-15 default presentation (mob death ash, reduced hit blood) CPU check
+        run: node r96/qa/r1054/age15-cpu-check.cjs
       - name: R1038 defer hidden boot self-tests until diagnostics open CPU check
         run: node r96/qa/r1038/r1038-cpu-check.cjs
       - name: R1037 narration always-off button (boss entry story window + memory fragment note) and settings rows CPU check

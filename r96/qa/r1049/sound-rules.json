@@ -1,0 +1,66 @@
+{
+ "revision": "R1049",
+ "doc": "docs/sound-rules.md",
+ "chain": "R545 150Hz 1극 고역통과 2단 → 쾌적 계층(45Hz 고역통과·역할 저역통과 1극 2단·6ms 시작·35ms 끝·역할 길이 상한, attack·enemyHit 는 늦은 본체 시작점 건너뜀)",
+ "major": {
+  "M1_clip": {
+   "ko": "원본 클리핑",
+   "clipSamplesMin": 20
+  },
+  "M2_bodyCut": {
+   "ko": "역할 길이 상한에 본체 잘림",
+   "energyAfterCapMin": 0.35
+  },
+  "M3_lateStart": {
+   "ko": "누르고 늦게 남(앞 무음)",
+   "leadMsMin": 150
+  },
+  "M4_latePing": {
+   "ko": "끝 '띡' 높은 재어택",
+   "detector": "R1026 late_ping(재어택 +9dB·최대보다 8~26dB 작음·중심 1.4kHz 이상·.15초 뒤)",
+   "categories": [
+    "일반몹",
+    "보스",
+    "적피격",
+    "투사체",
+    "UI·보상",
+    "영웅피격",
+    "타격"
+   ],
+   "note": "영웅 스킬(스킬 범주)의 끝 울림은 설계된 꼬리(예: 윤서하 시간 정지의 얼어붙는 차임)라 대상에서 뺀다. 11-14 사용자 지시도 적 피격·사망 대상."
+  },
+  "M5_harsh": {
+   "ko": "2~5kHz 귀 찌름(자주 나는 소리)",
+   "shareMax": 0.55,
+   "frequent": [
+    "일반몹",
+    "적피격",
+    "타격",
+    "투사체",
+    "발걸음"
+   ]
+  },
+  "M6_boom": {
+   "ko": "150Hz 아래 쿵",
+   "shareMax": 0.25
+  },
+  "M7_silent": {
+   "ko": "거의 안 들림",
+   "peakDbMin": -40
+  },
+  "M8_tone": {
+   "ko": "세계관 톤 이탈(만화·장난감 소리)",
+   "promptRe": "(?i)\\b(cute|boing|cartoon|toy|comic|goofy|funny|silly|whimsical|kazoo|8-bit|chiptune)\\b"
+  }
+ },
+ "target": {
+  "low150ShareMax": 0.08,
+  "harsh2to5ShareMaxFrequent": 0.35,
+  "riseMsMin": 10,
+  "peakDbRange": [
+   -14,
+   -9
+  ],
+  "variantsMin": 2
+ }
+}

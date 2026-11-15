@@ -36,7 +36,8 @@
   ['스킬','awake',/^(awake$|r546Awake$|rc141TimeAwakening5$)/,-36,.01,.5,10,'impact'],
   ['스킬','cast',/^(special$|r546Sp_|r787Sk_|sw(Dark|Energy|LightningSkill|HolySkill)$|blink$|dodge$|parry$|ego$|r546(Blink|Dodge|Parry|Ego)$|rc141(KairoTick5|ResonanceEnergy5)$)/,-37.5,.02,.8,6,'high'],
   ['패시브·회복','heal',/^swHeal$/,-42,.02,.5,5,'high'],
-  ['UI·보상','ui',/^(clear$|upgrade$|pickup$|r544Click$|r546(Clear|Upgrade|Open|Portal|Fall)$|r541Door$|r542Crush$)/,-40,.008,.3,6,'high'],
+  ['UI·보상','ui',/^(clear$|upgrade$|pickup$|r544Click$|r546(Clear|Upgrade|Open|Portal|Fall)$|r541Door$|r542Crush$|r1049LevelUp$)/,-40,.008,.3,6,'high'],
+  ['발걸음','step',/^r1049Step$/,-50,.06,1.5,0,'low'],['경고','heart',/^r1049Heart$/,-44,0,.3,2,'mid'], // R1049 빈칸 3종(발걸음은 붐비면 먼저 빠짐)
   ['환경','env',/^r543Thunder$/,-44,.04,1,1,'low']];
  const HERO_TAIL=.3,HERO_TAIL_PRIO=3,catCache=new Map();
  function category(kind){if(typeof kind!=='string'||!kind)return null;if(catCache.has(kind))return catCache.get(kind);let c=null;
