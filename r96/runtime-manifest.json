@@ -52769,8 +52769,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6579677,
-      "sha256": "d7f129753912a524fbd3c6399c6095d26f9efbd40c4c694543687180c66ed6aa"
+      "bytes": 6579773,
+      "sha256": "71c11f781dbb4169dd751d79b39e26e0ddad55c25d19482e05024ec7881d746a"
     },
     {
       "path": "ink-wash-r1055.js",
@@ -52839,8 +52839,13 @@
     },
     {
       "path": "lineart-cine-r880.js",
-      "bytes": 59353,
-      "sha256": "db872e8baf9ddf5fdc8dde468f43716497878f84935e2d4ed03249ab9e0d3769"
+      "bytes": 59624,
+      "sha256": "04a308d24e47520f2e446d1cf5f955c2efe38437f0e984c476da8d8c416e3a6c"
+    },
+    {
+      "path": "lineart-ink-r1081.js",
+      "bytes": 12493,
+      "sha256": "0976802b9a4f8708958d23d3b52791736f8a01f098fb1b41d7c0f444afe78e02"
     },
     {
       "path": "lineart-scenes-r881.js",
@@ -52876,6 +52881,11 @@
       "path": "lineart-scenes-r887.js",
       "bytes": 22840,
       "sha256": "371a28b666e1f2c2b405a03783139b834cdd5c4e45aa7ea3c21f63a85d654322"
+    },
+    {
+      "path": "lineart-video-r1080.js",
+      "bytes": 43065,
+      "sha256": "61c588c83db8183f8d9018d64d55afbee0c987df7c4e88e1c2fddc7d50e78102"
     },
     {
       "path": "lineart-voice-r888-data.js",
@@ -54043,9 +54053,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10808,
-  "totalBytes": 1314125760,
-  "webHTMLSha256": "d7f129753912a524fbd3c6399c6095d26f9efbd40c4c694543687180c66ed6aa",
+  "fileCount": 10810,
+  "totalBytes": 1314181685,
+  "webHTMLSha256": "71c11f781dbb4169dd751d79b39e26e0ddad55c25d19482e05024ec7881d746a",
   "largest": [
     {
       "path": "index.html",
