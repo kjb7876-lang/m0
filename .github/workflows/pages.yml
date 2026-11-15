@@ -801,6 +801,8 @@ jobs:
         run: node r96/qa/r437/r437-cpu-check.cjs
       - name: R439 Hwando attack blade-tip speck cleanup CPU check
         run: node r96/qa/r439/hwando-tip-cpu-check.cjs
+      - name: R1063 Hwando cloth texture unified to the down-walk reference CPU check
+        run: node r96/qa/r1063/r1063-cpu-check.cjs
       - name: R447 R74 ash moth flaps its wings while moving CPU check
         run: node r96/qa/r447/mob-flap-cpu-check.cjs
       - name: R440 heroes play their attack motion while casting skills CPU check
