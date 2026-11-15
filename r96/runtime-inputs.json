@@ -9880,6 +9880,8 @@
     "ego-paint-r1039.js",
     "passive-cutin-r1033.js",
     "boss-pattern-fx-r1040.js",
+    "perf7-r1043.js",
+    "kiss-lips-r1042.js",
     "narration-voice-r1044.js"
   ],
   "mediaPaths": [
@@ -10955,5 +10957,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "2b70d8d9bbdb7952e21923db2b6dcae4c9b4b1956317477f65d2fea7f996f213"
+  "runtimeManifestSHA256": "8f7332d23a3ea19b981f5c183c974add61cf376a6499e41f7c769d0e3668e37d"
 }

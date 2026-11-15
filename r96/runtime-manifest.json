@@ -52099,8 +52099,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6579120,
-      "sha256": "c24c0ca20b1b26fc41aa1292c6a9d60c51ad836873c70463f06229e5c4075531"
+      "bytes": 6579206,
+      "sha256": "13b8b1afa36844c295a5eeea64da1b5d3a8294a56c3379530c95dc17847f723d"
     },
     {
       "path": "intro-r140.js",
@@ -52131,6 +52131,11 @@
       "path": "keys-r291.js",
       "bytes": 7584,
       "sha256": "c0eb0b24c93c38d8ac1eeeaccb6ef88ce65fa25a8967aecaf884fa08ac447aa5"
+    },
+    {
+      "path": "kiss-lips-r1042.js",
+      "bytes": 9812,
+      "sha256": "7c60bd19a883daee4376eed21731bca6f8678d0a8939d94cc990fb8de2482c90"
     },
     {
       "path": "lag-r217.js",
@@ -52588,6 +52593,11 @@
       "sha256": "9733951b134154f84eefad78c920eddbadc816b957e23360a7b120306186f80e"
     },
     {
+      "path": "perf7-r1043.js",
+      "bytes": 12730,
+      "sha256": "a8c04c47d81eef4f9f3a76c22f9cfb8a30f87f450f50fcf00dc31b86f51f222a"
+    },
+    {
       "path": "pixel-readable-r325.js",
       "bytes": 3622,
       "sha256": "494dc9c0e6eaa22f3a968bb0d845cbb16b1af4e5990bf5e2d3d3063c4a1725b1"
@@ -52719,8 +52729,8 @@
     },
     {
       "path": "reach-r225.js",
-      "bytes": 7865,
-      "sha256": "dbaa9a987f2cb916e0310aedc3770f2030ed9f3d58d6397ca999e012dae98e9b"
+      "bytes": 9397,
+      "sha256": "a16db5123b642bfedad2577469e2ba61551e3de518ff9317327f0aa1eb060975"
     },
     {
       "path": "readability-r434.js",
@@ -53353,9 +53363,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10670,
-  "totalBytes": 1297788687,
-  "webHTMLSha256": "c24c0ca20b1b26fc41aa1292c6a9d60c51ad836873c70463f06229e5c4075531",
+  "fileCount": 10672,
+  "totalBytes": 1297812847,
+  "webHTMLSha256": "13b8b1afa36844c295a5eeea64da1b5d3a8294a56c3379530c95dc17847f723d",
   "largest": [
     {
       "path": "index.html",
