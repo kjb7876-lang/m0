@@ -4,7 +4,7 @@ const src=fs.readFileSync(path.join(__dirname,'../../client-source/ego-motion-r1
 const win={};vm.runInNewContext(src,{window:win,Math,Number,Object});
 const M=win.__STORYWORLD_EGO_MOTION_R1048__;let ok=0,bad=0;
 const t=(name,c)=>{if(c){ok++;}else{bad++;console.log('FAIL',name);}};
-t('모듈',!!M&&M.revision==='R1048-ego-motion-3');
+t('모듈',!!M&&M.revision==='R1048-ego-motion-4');
 // 우선순위
 t('사망 최우선',M.pickState({dead:1,da:1,hu:1,at:1,mv:1})==='dead');
 t('대시>피격',M.pickState({da:.2,hu:.3,at:.5})==='dash');
@@ -50,6 +50,9 @@ t('궤적: 칸 차례가 앞으로만',[3,4,5,6,7,8,9,10].map(f=>M.slashFrame('a
 t('버스트: 0.5초 동안 0~7칸',M.burstFrame(10,10)===0&&M.burstFrame(10,10.2)===3&&M.burstFrame(10,10.49)===7);
 t('버스트: 시작 전·끝 뒤·NaN 없음',M.burstFrame(10,9.9)<0&&M.burstFrame(10,10.5)<0&&M.burstFrame(NaN,1)<0&&M.burstFrame(1,NaN)<0);
 {const R=path.join(__dirname,'../..');t('버스트 그림 있음',fs.existsSync(path.join(R,'runtime-text',M.FX.feathers.path)));}
+// 광륜(CX-0110EG): 8fps 8칸 반복, 8→1 이어짐, NaN 안전
+t('광륜: 반복 칸',M.haloFrame(0)===0&&M.haloFrame(.5)===4&&M.haloFrame(.99)===7&&M.haloFrame(1)===0&&M.haloFrame(NaN)===0&&M.haloFrame(-.2)>=0);
+{const R=path.join(__dirname,'../..');t('광륜 그림 있음',fs.existsSync(path.join(R,'runtime-text',M.FX.halo.path)));}
 const E=M.createPlayer(null);r=E.step(1/60,{});t('시트 없음 안전',r.frame===0);
 // 시트 데이터·자산·태그 순서·0번째 칸
 {const R=path.join(__dirname,'../..'),w2={};vm.runInNewContext(fs.readFileSync(path.join(R,'client-source/ego-motion-r1048-sheets.js'),'utf8'),{window:w2,Object});

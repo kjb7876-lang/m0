@@ -40,13 +40,31 @@ def mat(name, rgb, rough=.5, metal=0., coat=0., sss=0., sheen=0., emit=None, bum
         bp = nt.nodes.new('ShaderNodeBump'); bp.inputs['Strength'].default_value = bump
         nt.links.new(tex.outputs['Fac'], bp.inputs['Height']); nt.links.new(bp.outputs['Normal'], p.inputs['Normal'])
     return m
+def leather_mat(name, dark, light, rough=(.3, .55), coat=.3, grain=420, bump=.35):
+    """11회차(장식 질감): 무료 절차 가죽 — 보로노이 오톨도톨 결 + 큰 주름 노이즈. 색은 어두운 쪽↔닳은 쪽 두 톤, 거칠기도 결 따라 바뀜(70px 에서 '검은 덩어리'가 아니라 가죽으로 읽히게)."""
+    m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; p = P(m); L = nt.links.new
+    tc = nt.nodes.new('ShaderNodeTexCoord')
+    vo = nt.nodes.new('ShaderNodeTexVoronoi'); vo.inputs['Scale'].default_value = grain; L(tc.outputs['Object'], vo.inputs['Vector'])
+    nz = nt.nodes.new('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 18; nz.inputs['Detail'].default_value = 8; L(tc.outputs['Object'], nz.inputs['Vector'])
+    wr = nt.nodes.new('ShaderNodeMapRange'); wr.clamp = True; L(nz.outputs['Fac'], wr.inputs['Value']); wr.inputs['From Min'].default_value = .42; wr.inputs['From Max'].default_value = .66
+    mx = nt.nodes.new('ShaderNodeMix'); mx.data_type = 'RGBA'; L(wr.outputs['Result'], mx.inputs['Factor'])
+    sk = lambda ss, i_: next(x for x in ss if x.identifier == i_)
+    sk(mx.inputs, 'A_Color').default_value = (*dark, 1); sk(mx.inputs, 'B_Color').default_value = (*light, 1)
+    L(sk(mx.outputs, 'Result_Color'), p.inputs['Base Color'])
+    rr = nt.nodes.new('ShaderNodeMapRange'); rr.clamp = True; L(vo.outputs['Distance'], rr.inputs['Value']); rr.inputs['From Max'].default_value = .6
+    rr.inputs['To Min'].default_value = rough[0]; rr.inputs['To Max'].default_value = rough[1]; L(rr.outputs['Result'], p.inputs['Roughness'])
+    if coat: p.inputs['Coat Weight'].default_value = coat
+    ad = nt.nodes.new('ShaderNodeMath'); ad.operation = 'MULTIPLY_ADD'; ad.inputs[1].default_value = .35; L(vo.outputs['Distance'], ad.inputs[0]); L(nz.outputs['Fac'], ad.inputs[2])
+    bp = nt.nodes.new('ShaderNodeBump'); bp.inputs['Strength'].default_value = bump; bp.inputs['Distance'].default_value = .0015
+    L(ad.outputs['Value'], bp.inputs['Height']); L(bp.outputs['Normal'], p.inputs['Normal'])
+    return m
 M = dict(
     skin=mat('skin', (.86, .7, .62), .45, sss=.25),
     cloth=mat('cloth', (.007, .0065, .007), .85, sheen=.35, bump=.15),
     coat=mat('coat', (.011, .0098, .012), .85, sheen=.35, bump=.3),
     lining=mat('lining', (.254, .005, .008), .55, sheen=.4),
-    leather=mat('leather', (.022, .012, .010), .35, coat=.3, bump=.2),
-    glove=mat('glove', (.02, .012, .01), .35, coat=.25, bump=.1),
+    leather=leather_mat('leather', (.024, .011, .009), (.075, .034, .024)),  # 11회차: 절차 가죽(검은 덩어리 → 닳은 소가죽)
+    glove=leather_mat('glove', (.03, .009, .01), (.11, .025, .028), rough=(.25, .45), coat=.45, grain=650, bump=.25),  # 검붉은 광택 가죽 장갑
     gold=mat('gold', (.78, .5, .12), .28, 1.),
     hood=mat('hood', (.009, .007, .009), .82, sheen=.45, bump=.08),
     hair=mat('hair', (.86, .84, .82), .38, sheen=.5, emit=((.86, .84, .82), .6)),  # #E8E4E0, 그늘에서도 읽히게
@@ -446,6 +464,20 @@ for side in ('Left', 'Right'):  # 장화 목(접힌 가죽 단)
     k0, a0 = J(side + 'Leg'), J(side + 'Foot'); c = k0.lerp(a0, .12)
     ring = [c + Vector((math.cos(a) * .067, math.sin(a) * .062, 0)) for a in [2 * math.pi * q / 20 for q in range(21)]]
     tube(f'EGO-bootcuff{side}', ring, .012, M['leather'], lambda t_, p, s_=side: {s_ + 'Leg': 1.}, sides=6)
+    c2 = k0.lerp(a0, .84); ring2 = [c2 + Vector((math.cos(a) * .058, math.sin(a) * .056, 0)) for a in [2 * math.pi * q / 24 for q in range(25)]]  # 발목(코트 밑으로 보이는 자리)
+    tube(f'EGO-bootgold{side}', ring2, .0065, GOLDT, lambda t_, p, s_=side: {s_ + 'Leg': 1.}, sides=6, uv='along')  # 11회차: 장화 목 금선
+    toe = J(side + 'ToeBase'); bpy.ops.mesh.primitive_uv_sphere_add(radius=.03, segments=12, ring_count=8, location=(toe.x, toe.y - .05, .026))
+    o = bpy.context.object; o.scale = (1., 1.25, .55); o.name = f'EGO-toecap{side}'; o.data.materials.append(M['gold']); rigid(o, side + 'ToeBase')  # 금 코받이
+# 11회차: 허리 금 사슬(앞 왼쪽 → 오른쪽 옆, 처짐) — 링 하나씩 엇갈려 꿴다
+_c0, _c1 = -math.pi / 2 - .75, -math.pi / 2 + 1.05; _NL = 26
+for k in range(_NL):
+    u = k / (_NL - 1); a = _c0 + (_c1 - _c0) * u
+    pt = Vector((math.cos(a) * (rx + .05), cy + math.sin(a) * (ry + .055), J('Hips').z - .03 - .07 * math.sin(math.pi * u)))
+    a2 = a + .01; pt2 = Vector((math.cos(a2) * (rx + .05), cy + math.sin(a2) * (ry + .055), J('Hips').z - .03 - .07 * math.sin(math.pi * (u + .01 / (_c1 - _c0)))))
+    tg = (pt2 - pt).normalized(); side_ = tg.cross(Vector((0, 0, 1))).normalized(); ax = side_ if k % 2 == 0 else tg.cross(side_).normalized()
+    bpy.ops.mesh.primitive_torus_add(major_radius=.011, minor_radius=.0028, major_segments=10, minor_segments=5, location=pt)
+    o = bpy.context.object; o.rotation_mode = 'QUATERNION'; o.rotation_quaternion = Vector((0, 0, 1)).rotation_difference(ax)
+    o.name = f'EGO-chain{k:02d}'; o.data.materials.append(M['gold']); rigid(o, 'Hips')
 # 목깃(선 깃) — 붉은 안감
 nk = J('Neck'); ring = []
 cpts = []
