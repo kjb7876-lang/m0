@@ -23,7 +23,10 @@ const major=e=>!!(e&&(e.boss||e.midboss||e.persona||e.wardChampionR81===true));
 const fixed=e=>!!(e&&(e.stationary||e.prop||e.object||e.r193Doll||e.r193Tower||e.r170Tower||e.r75Tower||e.r251Circle||e.samongDollR193));
 const R286=()=>{try{return window.__STORYWORLD_MOB_MOTION_R286__||null;}catch(_){return null;}};
 function eligible(e){if(!e||!(e.hp>0)||e.spawnState==='dead'||major(e)||fixed(e))return false;if(zoneId()==='ep1a08')return false;
- try{const k=R286()?.kindOf?.(e);if(k==='move-only'||k==='static'||k==='idle-only'||k==='major')return false;}catch(_){}return true;}
+ try{const k=R286()?.kindOf?.(e);if(k==='move-only'||k==='static'||k==='idle-only'||k==='major')return false;}catch(_){}
+ // R1064b: R380 승인 시트에 공격 칸이 2칸 넘게 있으면 진짜 공격 그림이 있다(같은 줄 시트라 열쇠로는 못 가름 — 보랏빛 알집지기) → 손대지 않음
+ try{const m=window.__STORYWORLD_APPROVED_MOBS_R380__?.assign?.(e);if(m&&Array.isArray(m.attack)&&new Set(m.attack).size>1)return false;}catch(_){}
+ return true;}
 const realAtk=e=>!!(e.attack&&!e.attack.r286Fake&&Number.isFinite(e.attack.elapsed));
 const calm=e=>!e.attack&&!(e.rangedWindup>0)&&!(e.hitTimer>0)&&!e.r286?.mode&&!e.charging&&!e.dashing;
 // ---- 판정 기록 ----

@@ -43,13 +43,21 @@ async function atkCells(zone,nid,secs=12){await p.evaluate(z=>enterRegion(z,null
   window.__R1064.cells={};window.__R1064.watch=e.id;window.__R1064.kind=window.__STORYWORLD_MOB_MOTION_R286__?.kindOf?.(e);
   const r=window.__STORYWORLD_PHASE1__.controller.state.three;if(!r.render.__r1064c){const f=r.render;r.render=function(fr){try{const w=room.enemies.find(x=>x.id===window.__R1064.watch);if(w&&w.attack){for(const c of fr.commands){if(c.kind==='image'&&c.owner?.kind==='enemy'&&String(c.owner.id||'').endsWith(w.id)&&c.sourceRect){const k=String(c.sourcePath||'').replace(/^.*assets\//,'')+'#'+Math.round(c.sourceRect[0])+','+Math.round(c.sourceRect[1]);window.__R1064.cells[k]=(window.__R1064.cells[k]||0)+1;}}}}catch(_){}return f.apply(this,arguments);};r.render.__r1064c=true;}
   return e.id;},nid);
- if(!id)return null;const t=await p.evaluate(()=>time);await p.waitForFunction(a=>{try{player.hp=player.maxHp;if(storyScene)advanceScene();}catch(_){}return time>=a;},t+secs,{timeout:600000,polling:400});
- return await p.evaluate(()=>({kind:window.__R1064.kind,cells:window.__R1064.cells}));}
+ if(!id)return null;const S0=await p.evaluate(()=>({a:{...window.__STORYWORLD_MOB_MOTION_R286__.inspect().stats},b:{...window.__STORYWORLD_MOB_LUNGE_R1064__.inspect().stats}}));const t=await p.evaluate(()=>time);await p.waitForFunction(a=>{try{player.hp=player.maxHp;if(storyScene)advanceScene();}catch(_){}return time>=a;},t+secs,{timeout:600000,polling:400});
+ const S1=await p.evaluate(()=>({a:{...window.__STORYWORLD_MOB_MOTION_R286__.inspect().stats},b:{...window.__STORYWORLD_MOB_LUNGE_R1064__.inspect().stats}}));
+ const d=(o,n,k)=>(+n[k]||0)-(+o[k]||0);
+ return await p.evaluate(x=>({kind:window.__R1064.kind,cells:window.__R1064.cells,...x}),{r286Lunges:d(S0.a,S1.a,'lunges'),r286Static:d(S0.a,S1.a,'staticLunges'),r1064Lunges:d(S0.b,S1.b,'lunges'),r1064Draws:d(S0.b,S1.b,'lungeDraws')});}
 const dragon=await atkCells('ep1b07','b07-s1',14);const DV=await p.evaluate(()=>{const e=room.enemies.find(x=>x.id===window.__R1064.watch);return {v:window.__STORYWORLD_MOB_LUNGE_R1064__.verdict(e),st:window.__STORYWORLD_MOB_LUNGE_R1064__.inspect().stats};});
 console.log('dragon',JSON.stringify(dragon),JSON.stringify(DV));
-ok(dragon&&((dragon.kind==='move-only'||dragon.kind==='static'||dragon.kind==='idle-only')!==(DV.v==='lunge')),'불길 속의 용: exactly one of R286/R1064 lunges ('+dragon?.kind+'/'+DV.v+')');
+// R1064b(QA 지적): '둘 중 하나가 맡는다'만 보면 둘 다 안 내딛어도 통과할 수 있었다 → 실제 발동 수를 센다.
+ok(dragon&&dragon.kind==='static'&&dragon.r286Static>=1&&DV.v!=='lunge','불길 속의 용: R286 static 내딛기가 실제로 발동 (staticLunges +'+dragon?.r286Static+', R1064 '+DV.v+')');
+// R1064 자체 경로: R286 이 full 로 보지만 공격 중에도 걷기 그림만 그리는 몹(u205 관리자 추적견) → R1064 lunge 가 실제로 발동해야 한다
+const hound=await atkCells('u205','u205-e2',14);const HV=await p.evaluate(()=>{const e=room.enemies.find(x=>x.id===window.__R1064.watch);return window.__STORYWORLD_MOB_LUNGE_R1064__.verdict(e);});
+console.log('hound',JSON.stringify({kind:hound?.kind,r1064Lunges:hound?.r1064Lunges,r1064Draws:hound?.r1064Draws,v:HV}));
+ok(hound&&hound.kind==='full'&&HV==='lunge'&&hound.r1064Lunges>=1&&hound.r1064Draws>=20,'관리자 추적견: R1064 lunge 실제 발동 (lunges +'+hound?.r1064Lunges+', draws +'+hound?.r1064Draws+', verdict '+HV+')');
 const egg=await atkCells('dist01','dist01-sp2');console.log('eggkeeper',JSON.stringify(egg));
 ok(egg&&egg.kind==='full','R286 sees eggkeeper as full ('+egg?.kind+')');
+ok(egg&&egg.r1064Lunges===0,'eggkeeper (real attack art): R1064 does not lunge on top ('+egg?.r1064Lunges+')');
 ok(egg&&Object.keys(egg.cells).some(k=>/purple-eggkeeper/.test(k)&&+k.split('#')[1].split(',')[0]>=1024),'eggkeeper attack draws sheet cells 4-7');
 if(SHOT){await p.waitForFunction(()=>room.enemies.some(e=>window.__R1064.grp.includes(e.id)&&e.attack&&e.attack.r1064&&e.attack.elapsed>.3),null,{timeout:300000,polling:50}).catch(()=>{});await p.screenshot({path:SHOT});}
 await b.close();console.log(fails?'R1064 browser FAILED '+fails:'R1064 browser passed');process.exit(fails?1:0);
