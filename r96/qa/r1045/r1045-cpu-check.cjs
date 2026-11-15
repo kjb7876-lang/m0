@@ -24,7 +24,7 @@ const up=A.pick(-90*D),nErr=ad(-90*D,A.gunAngle(up.sheet,up.mirror));
 ok(up.sheet==='n'&&nErr<=12,'정 위 조준 → n(N3 뒷모습), 총 각도 오차 ≤12° (R1003 33°)',{up,nErr});
 for(let d=-102;d<=-78;d++){const p=A.pick(d*D);ok(p.sheet==='n','정 위 ±12° ('+d+'°) 는 N3 뒷모습',p);}
 let worst=0;for(let d=-180;d<180;d++){const p=A.pick(d*D);worst=Math.max(worst,ad(d*D,A.gunAngle(p.sheet,p.mirror)));}ok(worst<=25+1e-6,'모든 각도 총 각도 오차 ≤25°(R1003 33°)',{worst});
-const insp=JSON.stringify(A.inspect());ok(insp.includes('r1045/gunner/attack-n3.webp')&&insp.includes('r1045/gunner/attack-e3.webp'),'inspect 에 쓰는 그림 경로',insp.slice(0,300));
+const insp=JSON.stringify(A.inspect());ok(insp.includes('r1045/gunner/attack-n3.webp')&&(insp.includes('r1045/gunner/attack-e3.webp')||/R1045c/.test(A.revision)&&insp.includes('r1045c/gunner/attack-e4.webp')),'inspect 에 쓰는 그림 경로',insp.slice(0,300));
 for(let f=0;f<6;f++){const t=A.tip('n',f);ok(t[0]>=118&&t[0]<=134&&t[1]>=52&&t[1]<=70,'n '+f+'칸 총구 끝이 오른 어깨 위(N3 측정 126·60~62)',t);}
 const e0=JSON.stringify(A.tip('e',0));for(let f=1;f<6;f++)ok(JSON.stringify(A.tip('e',f))===e0,'e '+f+'칸 총구 끝이 첫 칸과 같음(무반동)',A.tip('e',f));
 const B=load({n3:false,e3:false}),bn=B.pick(-90*D);
