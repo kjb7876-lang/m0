@@ -22,11 +22,11 @@
 //  끄기: localStorage['storyworld.r1053.rules']='{"on":false}' (부분: face / approach / armor / cap). 점검: window.__STORYWORLD_ENEMY_RULES_R1053__.inspect()
 (()=>{'use strict';
 if(window.__STORYWORLD_ENEMY_RULES_R1053__)return;
-const REV='R1053-rules-1+R1053b',KEY='storyworld.r1053.rules';
-const RULE=Object.freeze({faceRange:6,mobFaceRange:4,keepNear:3,keepFar:6,hitCap:.45,hitWindow:1.5,braceFor:1.2,majorFlinchGap:.6});
-let prefs={on:true,face:true,approach:true,armor:true,cap:true};
+const REV='R1053-rules-1+R1053b+R1053c',KEY='storyworld.r1053.rules';
+const RULE=Object.freeze({faceRange:6,mobFaceRange:4,keepNear:3,keepFar:6,hitCap:.45,hitWindow:1.5,braceFor:1.2,majorFlinchGap:.6,bladeNear:4});
+let prefs={on:true,face:true,approach:true,armor:true,cap:true,blade:true};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object')for(const k of Object.keys(prefs))if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
-const stats={ticks:0,approachHeld:0,mobKept:0,armor:0,capped:0,braces:0,majorFlinch:0,majorHeld:0,faceAsked:0,errors:0};let lastError=null;
+const stats={ticks:0,approachHeld:0,bladeHeld:0,mobKept:0,armor:0,capped:0,braces:0,majorFlinch:0,majorHeld:0,faceAsked:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const fin=v=>typeof v==='number'&&Number.isFinite(v);
 const num=(v,d)=>fin(Number(v))?Number(v):d;
@@ -64,7 +64,10 @@ let tickOn=false;
 function installTick(){if(tickOn)return true;if(typeof tickEnemies!=='function')return false;if(tickEnemies.__r1053)return tickOn=true;const base=tickEnemies;
  const w=function(...a){const held=[],kept=[];
   try{const r=R(),p=P();if(prefs.on&&prefs.approach&&r&&Array.isArray(r.enemies)&&p)for(const e of r.enemies){
-   if(!enemy(e)||!alive(e)||(e.ai!=='hybrid'&&e.ai!=='ranged')||attacking(e)||!(num(e.cd,0)>0))continue;
+   if(!enemy(e)||!alive(e)||(e.ai!=='hybrid'&&e.ai!=='ranged')||attacking(e))continue;
+   // ⑥ 칼(blade) 든 적은 근접 우선(R1053c): 영웅이 4칸 안이면 그 틱만 melee 로 봐 쏘지 않고 다가가 벤다. 4칸 밖에서는 엔진대로 쏘고, 쿨다운 중엔 거리 띠(②)에 서지 않고 다가온다.
+   if(prefs.blade&&e.weapon==='blade'&&e.ai==='hybrid'){const d=Math.hypot(p.x-e.x,p.y-e.y);if(fin(d)&&d<=RULE.bladeNear){held.push([e,e.ai]);e.ai='melee';stats.bladeHeld++;}continue;}
+   if(!(num(e.cd,0)>0))continue;
    if(major(e)){held.push([e,e.ai]);e.ai='melee';stats.approachHeld++;continue;}
    // ② 일반 원거리 몹: 쿨다운 중 3~6칸이면 그 자리에 선다(엔진의 3칸 경계 들락날락·4~6칸 맴돌기 대신 거리 띠). 3칸 안이면 엔진대로 물러서고 6칸 밖이면 다가간다.
    const d=Math.hypot(p.x-e.x,p.y-e.y);if(fin(d)&&d>=RULE.keepNear&&d<RULE.keepFar&&fin(e.x)&&fin(e.y))kept.push([e,e.x,e.y]);}}catch(err){fail(err);}

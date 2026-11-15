@@ -23,6 +23,7 @@
 | ④ 경직 상한 | 연타를 맞아도 피격 자세를 쌓아 0.45초 보이면 1.2초 버팀(피격 자세 없이 걷기·공격). 쌓인 값은 1.5초에 0.45초씩 빠짐 | 일반 적 | 한 번 맞음 = 0.14초 피격 자세 그대로 |
 | ④ 움찔 | 0.6초에 한 번만 움찔(0.14초) | 보스·중간보스 | |
 | ⑤ 쿨다운 | 피격은 공격 쿨다운을 늘리지 않는다. 영웅 스킬이 일부러 거는 기절(라우렌 반발 0.45초, 미카엘라 꽃 0.5초·매혹, 서하 정지 등)은 스킬 설계라 그대로 | 모든 적 | |
+| ⑥ 칼은 근접 우선 | 칼(weapon `blade`) 든 적은 영웅이 4칸 안이면 쏘지 않고 다가가 벤다. 4칸 밖에서는 엔진대로 원거리 탄을 쏘고, 쿨다운 중엔 거리 띠(②)에 서지 않고 다가온다(R1053c) | AI 가 hybrid 인 칼 든 적(일반 19·중간보스 5, 붉은 하이힐 칼날 등). 둔기(heavy)·주문(caster)은 그대로 | 사용자 11-15 22:22Z 요약 "붉은 하이힐 칼날의 근접 공격이 원거리로 바뀌는 문제" |
 
 판정·피해·체력·쿨다운 수치·저장은 바꾸지 않는다.
 
@@ -33,9 +34,9 @@
 
 ## 끄기·점검
 
-- 전체 끄기: `localStorage['storyworld.r1053.rules']='{"on":false}'`. 부분: `face`·`approach`·`armor`·`cap`.
+- 전체 끄기: `localStorage['storyworld.r1053.rules']='{"on":false}'`. 부분: `face`·`approach`·`armor`·`cap`·`blade`.
 - 점검: `window.__STORYWORLD_ENEMY_RULES_R1053__.inspect()`.
-- 검사: `node r96/qa/r1053/enemy-rules-cpu-check.cjs`(CPU), `r96/qa/r1053/combat-rules-probe.mjs`(헤드리스 전후 비교).
+- 검사: `node r96/qa/r1053/enemy-rules-cpu-check.cjs`·`r286-armor-cpu-check.cjs`·`blade-melee-cpu-check.cjs`(CPU), `r96/qa/r1053/combat-rules-probe.mjs`(헤드리스 전후 비교).
 
 ## 새 적·새 오버레이를 만들 때
 
