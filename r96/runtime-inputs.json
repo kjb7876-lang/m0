@@ -9880,7 +9880,8 @@
     "ego-paint-r1039.js",
     "passive-cutin-r1033.js",
     "boss-pattern-fx-r1040.js",
-    "perf7-r1043.js"
+    "perf7-r1043.js",
+    "kiss-lips-r1042.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -10955,5 +10956,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "8ca8ca8042f9876f8882509820651dee50716e5cb971ec2aa53d69a2795be426"
+  "runtimeManifestSHA256": "d91b49f93106cfa0cd59700a546e7a40b158ac90f271d141df04e2d3fbfc128e"
 }
