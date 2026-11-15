@@ -522,6 +522,8 @@ jobs:
         run: node r96/qa/r1045/r1045-cpu-check.cjs
       - name: R1045b gunner walk-and-aim-down art CPU check
         run: node r96/qa/r1045b/r1045b-cpu-check.cjs
+      - name: R1047 reach bounds (minX,minY,maxX,maxY) keep hidden persona reachable CPU check
+        run: node r96/qa/r1047/reach-bounds-cpu-check.cjs
       - name: R945 hwando ink passives (piercing ink crescent, seven ink clones for 7 s, three-hero ink finale, per-body state) CPU check
         run: node r96/qa/r945/r945-cpu-check.cjs
       - name: R1034 hwando W seven-direction clones restored + ink clone action circles CPU check
