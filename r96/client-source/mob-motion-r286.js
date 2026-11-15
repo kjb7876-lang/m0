@@ -35,6 +35,9 @@ function r248Sheet(e){try{const U=window.__STORYWORLD_MOB_UNIQUE_R248__;if(!U?.s
 function kindNow(e){if(!e)return null;if(major(e))return 'major';if(e.r193Doll||fixed(e))return 'static';if(e.r200Shade||e.r208Mob)return 'full';
  try{const S=window.__STORYWORLD_STORY_MOBS_R208__;if(S?.assign&&S.assign(e))return 'full';}catch(_){}
  if(r248Sheet(e))return 'full';
+ // R1064(2026-11-15 밤샘): R380 승인 시트가 그리는 몹은 그 시트의 칸 수로 가른다. R109 표로만 보면 '이동 칸만'으로 잡혀(보랏빛 알집지기 등)
+ //  공격 동안 e.attack 을 지우고 걷기 칸으로 그려, 시트에 있는 공격 4칸이 한 번도 안 보였다. 공격 칸이 1칸뿐인 시트는 그림 없음(move-only)으로 둔다.
+ try{const A=window.__STORYWORLD_APPROVED_MOBS_R380__,m=A?.assign?.(e);if(m){const a=Array.isArray(m.attack)&&new Set(m.attack).size>1,mv=Array.isArray(m.move)&&new Set(m.move).size>1;return a&&mv?'full':a?'attack-only':mv?'move-only':'static';}}catch(_){}
  let art=null;try{art=window.__STORYWORLD_DRIVE_ART_R105__?.artFor?.(e)||null;}catch(_){}
  if(art)return ART_MOVE.includes(String(art).replace(/^\.\//,''))?'move-only':'static';
  const M=window.__STORYWORLD_MOBS_R109__;if(!M?.trackFor)return null;let t=null;try{t=M.trackFor(e);}catch(_){return null;}
