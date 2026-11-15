@@ -66,18 +66,20 @@ function preload(){if(!IDX||preloaded===room)return;preloaded=room;for(const a o
  if(WS)image(WS_BASE+WS.file);/* R436 */
  /* R345: 공격·피격(새 팩 → R242 대체 포함)도 미리 받는다 — 처음 휘두르거나 맞는 순간 옛 그림이 튀던 원인 */for(const a of ['attack','hit'])for(const d of ['n','s','e','w']){const R=res(a,d);if(R?.A?.file)image((window.__STORYWORLD_HWANDO_R283__?.path?.(R.base,R.A.file))||R.base+R.A.file);}}
 const atkOf=d=>res('attack',d)?.A;
+// R1050b: 걷기 꼬리는 0.15초. 공격 중인데 엔진이 '걷는 중 아님'이면 몹·동료에게 밀린 것 → 걷기 그림으로 공격을 덮지 않는다
+function walkTail(dt,over,atk,mv){if(!(dt<.15)||over)return false;if(+atk>0&&mv===false)return false;return true;}
 function choose(rec,st){const best=pickBody(rec,st);if(!best)return;const t=T(),ms=1000;
  track();preload();
  const atk=+player.attackAnim||0,hurt=+player.hurtAnim||0,busy=player.skillAnim>0||player.dashAnim>0||player.ultimateAnim>0;
  if(atk>S.prevAtk+1e-6){const d=aimDir(),a=atkOf(d);if(a){const off=contactStart(a.ms),rest=a.ms.reduce((x,y)=>x+y,0)-off,cd=Math.max(.2,+player.attackCD||.48);S.swing={t0:t,dir:d,off,scale:Math.max(.36,Math.min(1,cd*.95*1000/rest))};}}
  S.prevAtk=atk;
  if(hurt>S.prevHurt+1e-6)S.hit={t0:t,dir:enemyDir()||S.dir};S.prevHurt=hurt;
- const M=window.__STORYWORLD_HERO_MOTION_R895__,moving=t-S.movedAt<.15&&!M?.attackOverTail?.()/* R895 규칙 5 */;
+ const M=window.__STORYWORLD_HERO_MOTION_R895__,moving=walkTail(t-S.movedAt,!!M?.attackOverTail?.(),atk,player.moving)/* R895 규칙 5 + R1050b */;
  if(M?.hurtFirst?.()&&S.hit&&S.swing){S.swing=null;stats.hurtCut=(stats.hurtCut||0)+1;}/* R895 규칙 1: 피격이 기본 공격을 끊는다 */
  const skillCut=!(player.dashAnim>0)&&!!M?.moveCancel?.('skill');/* R895 규칙 2: 스킬 커밋 창 뒤 이동이면 걷기로 */
  if(busy&&!skillCut){const dd=player.dashAnim>0?M?.dash?.()?.side:null/* R895 규칙 4: 대시는 실제로 옮긴 쪽 */,d=player.dashAnim>0?(dd||enemyDir()||S.dir):aimDir();S.dir=d;stats.skill++;if(player.dashAnim>0){S.swing=null;/* 대시가 공격을 끊는다 — 대시 뒤 옛 공격 칸 재등장 금지 */return draw(rec,st,best,'walk',d,3);}const a=atkOf(d);return a&&draw(rec,st,best,'attack',d,Math.floor(a.n*(player.ultimateAnim>0?.55:.45)));}
  if(S.swing){const a=atkOf(S.swing.dir),el=(t-S.swing.t0)*ms/S.swing.scale+S.swing.off,tot=a.ms.reduce((x,y)=>x+y,0);
-  if(el<tot&&!(moving&&(M?M.moveCancel('attack'):t-S.swing.t0>.35))){/* R895 규칙 2: 기본 공격 커밋 0.12초 뒤 이동 입력이면 캔슬 */S.dir=S.swing.dir;return draw(rec,st,best,'attack',S.swing.dir,frameAt(a.ms,el,false));}S.swing=null;}
+  if(el<tot&&!(moving&&(M?M.moveCancel('attack'):t-S.swing.t0>.35))){/* R895 규칙 2: 기본 공격 커밋 0.12초 뒤 이동 입력이면 캔슬 */S.dir=S.swing.dir;return draw(rec,st,best,'attack',S.swing.dir,frameAt(a.ms,el,false));}if(el>=tot&&!moving&&window.__STORYWORLD_SKILL_ATTACK_R440__?.swapping?.()){S.dir=S.swing.dir;stats.skillHold=(stats.skillHold||0)+1;return draw(rec,st,best,'attack',S.swing.dir,frameAt(a.ms,tot-1,false));}S.swing=null;/* R1050b: 스킬이 휘두르기보다 길면 마지막 공격 칸 유지 */}
  if(S.hit&&!S.hit.shown&&M&&!M.hurtFresh()){S.hit=null;stats.hurtLate=(stats.hurtLate||0)+1;}/* R895 규칙 6: 늦은 피격 금지 */
  if(S.hit&&M&&S.hit.shown&&!(hurt>0)&&t-(S.hit.lastHurt??S.hit.t0)>.05){S.hit=null;}/* R895 규칙 6: 피격 반응은 피격 시간이 끝나면 0.05초 안에 끝난다 */
  if(S.hit&&hurt>0)S.hit.lastHurt=t;
@@ -88,6 +90,6 @@ function choose(rec,st){const best=pickBody(rec,st);if(!best)return;const t=T(),
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
  try{if(on&&st>=0&&solo()&&player?.hero==='hwando'&&player.hp>0){loadIndex();if(P277()?.walkS?.())loadWalkS();if(IDX)choose(rec,st);}}catch(e){fail(e);}return r;};}
 loadIndex();
-window.__STORYWORLD_HWANDO_R271__=Object.freeze({revision:REV,active:()=>on&&!!IDX&&typeof player==='object'&&player?.hero==='hwando'&&solo(),index:()=>IDX,state:()=>({...S,swing:S.swing&&{...S.swing},hit:S.hit&&{...S.hit}}),
+window.__STORYWORLD_HWANDO_R271__=Object.freeze({revision:REV,pure:Object.freeze({walkTail}),active:()=>on&&!!IDX&&typeof player==='object'&&player?.hero==='hwando'&&solo(),index:()=>IDX,state:()=>({...S,swing:S.swing&&{...S.swing},hit:S.hit&&{...S.hit}}),
  inspect:()=>({revision:REV,on,ready:!!IDX,stats:{...stats},lastError}),set:v=>{on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}});
 })();
