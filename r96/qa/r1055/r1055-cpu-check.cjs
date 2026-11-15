@@ -110,6 +110,8 @@ ok('GLSL clamps output and guards strength (no division without epsilon guard on
    box.checked=true;box.onchange();ok('settings: checking turns it on for every region',c.I.prefs().mode==='all'&&c.I.wants('hub','STORY'));
    sel.value='sumi';sel.onchange();ok('settings: choosing a style applies and saves',c.I.prefs().style==='sumi'&&/"style":"sumi"/.test(c.store.get('storyworld.r1055.inkWash')||''));
    sel.value='nope';sel.onchange();ok('settings: unknown style ignored',c.I.prefs().style==='sumi');}}
+ // R1055e: R1090 이 캐릭터에도 담묵 필터를 입히므로 '캐릭터는 그대로' 라고 적지 않는다.
+ if(row){const note=(row.children.find(x=>/수묵화풍으로/.test(x.textContent||''))||{}).textContent||'';ok('settings: note explains the map filter and no longer says characters are untouched',/맵\(바닥·벽\)/.test(note)&&!/캐릭터/.test(note)&&/성능 1·2단계/.test(note),note);}
  const d=boot();d.I.settingsRow();ok('settings: no quick settings box → nothing, no error',d.I.inspect().stats.errors===0);
  ok('settings: stored off stays off after reload (user choice wins over the default)',boot({stored:'{"mode":"off","style":"jg"}'}).I.prefs().mode==='off');
  ok('settings: no errors',c.I.inspect().stats.errors===0,c.I.inspect().lastError);}
