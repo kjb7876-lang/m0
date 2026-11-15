@@ -724,6 +724,8 @@ jobs:
         run: node r96/qa/r1042/kiss-lips-cpu-check.cjs
       - name: R1053 enemy combat rules (bosses close in and face the hero, attack super armour, hit-stagger cap) CPU check
         run: node r96/qa/r1053/enemy-rules-cpu-check.cjs
+      - name: R1053b R286 charge/dash counts as an attack (super armour) CPU check
+        run: node r96/qa/r1053/r286-armor-cpu-check.cjs
       - name: R1054 age-15 default presentation (mob death ash, reduced hit blood) CPU check
         run: node r96/qa/r1054/age15-cpu-check.cjs
       - name: R1038 defer hidden boot self-tests until diagnostics open CPU check

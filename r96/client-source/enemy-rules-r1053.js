@@ -22,7 +22,7 @@
 //  끄기: localStorage['storyworld.r1053.rules']='{"on":false}' (부분: face / approach / armor / cap). 점검: window.__STORYWORLD_ENEMY_RULES_R1053__.inspect()
 (()=>{'use strict';
 if(window.__STORYWORLD_ENEMY_RULES_R1053__)return;
-const REV='R1053-rules-1',KEY='storyworld.r1053.rules';
+const REV='R1053-rules-1+R1053b',KEY='storyworld.r1053.rules';
 const RULE=Object.freeze({faceRange:6,mobFaceRange:4,keepNear:3,keepFar:6,hitCap:.45,hitWindow:1.5,braceFor:1.2,majorFlinchGap:.6});
 let prefs={on:true,face:true,approach:true,armor:true,cap:true};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object')for(const k of Object.keys(prefs))if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
@@ -39,7 +39,7 @@ const enemy=e=>!!e&&typeof e==='object'&&!e.hero&&!e.persona&&!structure(e)&&!ma
 const major=e=>enemy(e)&&!!(e.boss||e.midboss);
 const alive=e=>num(e.hp,0)>0&&!['dead','hidden','inactive','disabled','despawned'].includes(e.spawnState);
 // 공격 중: 근접(e.attack, 엔진 그리기용 가짜 자세 storyWorldPose5 는 빼고)·원거리 준비·R61 동작
-function attacking(e){const a=e.attack;if(a&&typeof a==='object'&&!a.storyWorldPose5)return true;if(num(e.rangedWindup,0)>0)return true;const r=e.r61Action;return !!(r&&T()<num(r.endAt,-1));}
+function attacking(e){const a=e.attack;if(a&&typeof a==='object'&&!a.storyWorldPose5)return true;if(num(e.rangedWindup,0)>0)return true;const r=e.r61Action;if(r&&T()<num(r.endAt,-1))return true;const m=e.r286&&e.r286.mode;return m==='charge'||m==='dash';}
 // ① 시선
 function faceHero(e,td){if(!prefs.on||!prefs.face||!enemy(e)||!fin(td)||td<0||td>=(major(e)?RULE.faceRange:RULE.mobFaceRange))return false;stats.faceAsked++;return true;}
 // ③④ 피격 자세 거르기 — 맞은 순간(hitEnemy 뒤)과 매 틱 뒤에 hitTimer 를 정리한다(그림·방향·걸음 덧씌우기 모두 같은 값을 보게)
