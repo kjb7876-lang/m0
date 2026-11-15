@@ -261,9 +261,11 @@ function clockRing(x,y,r,F,u,fade){const s=SPR(),a=fade*(1-u*.5);if(s&&s.draw('c
 function crossGlyph(x,y,s0,F,u,fade){const s=SPR(),v=smooth(u/.25),a=fade*(1-smooth((u-.4)/.6));if(a<=0)return;const H=2.52*s0*Math.max(.05,v);
  if(s&&s.draw('cross',F,x,y-s0*.32,H*256/384,H,{alpha:a})){s.draw('flare',F,x,y-s0*.32,s0*2.4,s0*2.4,{alpha:a*.8,angle:time*.4});return;}crossGlyph0(x,y,s0,F,u,fade);}
 function rays(x,y,len,F,u,fade,n){const s=SPR(),a=fade*(1-u*.7),spin=time*.6;if(s){let ok=true;for(let i=0;i<n&&ok;i++){const ang=spin+i*TAU/n,l=len*(.4+.6*smooth(u/.4));ok=s.along('spark',i%2?s.pal(F.b):F,x+Math.cos(ang)*len*.12,y+Math.sin(ang)*len*.07,x+Math.cos(ang)*l,y+Math.sin(ang)*l*.55,len*.09,{alpha:.75*a});}if(ok)return;}rays0(x,y,len,F,u,fade,n);}
+/* R1051(사용자 2026-11-15): 영웅 날개는 그리지 않는다 — 성광 적중은 깃털만 흩날린다(도형 날개 대체도 없음). */
+const HERO_WINGS=false;
 function wingFlash(x,y,s0,F,u,fade){const s=SPR(),a=fade*Math.sin(Math.PI*clamp(u*1.2,0,1)),spread=.5+.5*smooth(u/.35);if(a<=0)return;const W=s0*1.55*spread;
- if(s&&s.draw('wing',F,x+s0*.08,y,W,W,{alpha:.85*a})){s.draw('wing',F,x-s0*.08,y,W,W,{alpha:.85*a,flip:true});for(let i=0;i<4;i++){const fx=x+(rnd(7,i)-.5)*s0*2,fy=y-s0*.2+s0*1.2*smooth(u)*(.4+.6*rnd(8,i));s.draw('feather',F,fx,fy,s0*.12,s0*.36,{alpha:.7*a,angle:Math.sin(time*3+i)*.6});}return;}
- wingFlash0(x,y,s0,F,u,fade);}
+ if(s&&(!HERO_WINGS||s.draw('wing',F,x+s0*.08,y,W,W,{alpha:.85*a}))){if(HERO_WINGS)s.draw('wing',F,x-s0*.08,y,W,W,{alpha:.85*a,flip:true});for(let i=0;i<4;i++){const fx=x+(rnd(7,i)-.5)*s0*2,fy=y-s0*.2+s0*1.2*smooth(u)*(.4+.6*rnd(8,i));s.draw('feather',F,fx,fy,s0*.12,s0*.36,{alpha:.7*a,angle:Math.sin(time*3+i)*.6});}return;}
+ if(HERO_WINGS)wingFlash0(x,y,s0,F,u,fade);}
 function runeCircle(x,y,r,F,u,fade,t,seed){const s=SPR(),v=smooth(u/.25),a=fade*(1-smooth((u-.55)/.45)),R=r*v,spin=time*1.3+seed;if(a<=0||R<1)return;
  /* R337(사용자 "마법진=악마·적, 십자가=J·아군 구원자"): 영웅 쪽은 마법진·원형 고리 없이 십자가만 */if(s&&s.draw('cross',F,x,y,1.3*R,1.3*R,{squash:.5,angle:0,alpha:a})){if(t>=2)s.draw('cross',s.pal(F.b),x,y-R*.55,.55*R,.8*R,{alpha:.75*a});s.draw('glow',F,x,y-r*.05,r*.9,r*.9,{alpha:.6*a});return;}
  runeCircle0(x,y,r,F,u,fade,t,seed);}

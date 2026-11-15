@@ -161,6 +161,8 @@ function flames(x,fy,h,F,mode,k,seed){if(k<=0)return;const s=SPR(),w=h*(1.05+.4*
 // Two feathered wings from the shoulders, folded a little at rest and spread with heat; slow flap.
 // R107: wings follow the hero's facing. Facing the camera (s) → front view behind the body; facing away (n) →
 // back view drawn over the body; east/west → side view (art faces west, mirrored for east). Folded while idle.
+/* R1051(사용자 2026-11-15): 영웅 몸에 달리던 날개는 없애고 머리 위 천사링(후광)만 남긴다 — 아래 auraBack·auraFront 가 날개를 부르지 않는다. */
+const HERO_WINGS=false;
 const WING_FOUR={front:'s',back:'n',left:'w',right:'e'};
 function wingSector(p){let d=null;try{/* R354(사용자 2026-11-05 "환도영웅 날개달리는거 좌우방향맞게"): 환도는 R271 이 몸 그림 방향을 정하므로 그 방향(n·e·w)을 따른다 — 엔진 방향은 정면(s)에 머물렀다 */const H=window.__STORYWORLD_HWANDO_R271__;if(p&&p.hero==='hwando'&&H?.active?.()){let hd=H.state?.()?.dir;if(hd==='s'){const D=window.__STORYWORLD_HWANDO_R277__;if(D?.on?.()&&D.down)hd=D.down();}/* R349: 환도는 아래 그림이 없다 */if(hd==='n'||hd==='e'||hd==='w'||hd==='s')d=hd;}if(!d)d=window.__STORYWORLD_PHASE1_ART__?.hero?.()?.direction;}catch(_){}if(WING_FOUR[d])d=WING_FOUR[d];if(!d||d.length>2)d=p.currentVisualSector||WING_FOUR[p.direction]||'s';return d;}
 const wingHold=new WeakMap();
@@ -208,7 +210,7 @@ function auraBack(p){const F=heroOf(p),t=tierOf(p),k=heat(p,t),L=formLevel(p,t),
   if(L.on){ctx.globalAlpha*=L.alpha;
    if(F.form==='runes'&&(t>=4||awake))runeRing(q,h,F,Math.max(k,.5+.08*Math.max(0,t-3)));
    if(F.form==='flame'||F.form==='dark'||awake)flames(q.x,fy,h,F,F.form==='dark'?'dark':'bright',k*(F.form==='flame'||F.form==='dark'?1:.8),seed);
-   if(F.form==='angel'&&(t>=5||awake||skillPose(p))||p.samong>0)wings(q.x,fy,h,F,k,seed,p);
+   if(HERO_WINGS&&(F.form==='angel'&&(t>=5||awake||skillPose(p))||p.samong>0))wings(q.x,fy,h,F,k,seed,p);
    // R107: no idle orbiting crescent blades for 환도 (looked odd); the iai cast carries the sword light now.
    if(F.form==='blade'&&BLADE_ORBIT)blades(q.x,fy,h,F,k,seed,'back',4-L.cut);
    if(F.form==='arcs'){const S4=SPR();if(S4)S4.draw('circuit',F,q.x,q.y,h*(1+.06*t),h*(1+.06*t),{squash:.5,angle:time*.5,alpha:.18+.08*t+(awake?.2:0)});}
@@ -217,7 +219,7 @@ function auraBack(p){const F=heroOf(p),t=tierOf(p),k=heat(p,t),L=formLevel(p,t),
 function auraFront(p){const F=heroOf(p),t=tierOf(p),k=heat(p,t),L=formLevel(p,t),q=project(p.x,p.y),h=actorHeight(),lift=clamp(finite(p.visualLiftPx),0,h*.65),fy=q.y-lift,seed=hash(p.hero||'hwando')%628/100;
  if(!L.on)return;
  scope({id:'r101:aura-front:'+String(p.coopIdR62||p.id||'hero'),kind:'effect',x:p.x,y:p.y,groundAligned:false,r101:true},()=>{ctx.save();try{ctx.globalAlpha*=L.alpha;
-  if(F.form==='angel'&&(t>=5||p.ego>0||p.samong>0||skillPose(p))||p.samong>0)wingsView(p,'front',q.x,fy,h,F,k,seed);
+  if(HERO_WINGS&&(F.form==='angel'&&(t>=5||p.ego>0||p.samong>0||skillPose(p))||p.samong>0))wingsView(p,'front',q.x,fy,h,F,k,seed);
   if(F.form==='angel'||p.samong>0)halo(q.x,fy,h,F,k);
   // R111: 네온의 가는 번개 실선(실오라)은 뺐다. 대신 발밑 회로 문양이 단계에 따라 진해진다(뒤쪽 그리기).
   if(F.form==='petals')petals(p,q.x,fy,h,F,k,seed);
