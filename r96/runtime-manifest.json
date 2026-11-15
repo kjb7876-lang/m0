@@ -52204,8 +52204,8 @@
     },
     {
       "path": "ego-secret-r1057.js",
-      "bytes": 4583,
-      "sha256": "1b7b402f5c37cef02482c315fe378f9a910e3b720975c3e3b4f4daea2f52b763"
+      "bytes": 5465,
+      "sha256": "19f5c428fde199276e1b0ad240632a9f334b0f37405a40ab58d91e5eddeb850f"
     },
     {
       "path": "ego-sovereign-r1046-data.js",
@@ -53894,7 +53894,7 @@
     }
   ],
   "fileCount": 10778,
-  "totalBytes": 1307893600,
+  "totalBytes": 1307894482,
   "webHTMLSha256": "9fb8bc066caa0c02f3092007f8b6cf8b75e5331fb6b21f3f207c9cdab240cf21",
   "largest": [
     {
