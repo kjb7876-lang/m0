@@ -51174,8 +51174,8 @@
     },
     {
       "path": "attack-anim-r143.js",
-      "bytes": 20784,
-      "sha256": "6cb4913f1d60b069a1f0e3fb74f9cd39542a4b4e22e03374dc288f67f07e2a3a"
+      "bytes": 21399,
+      "sha256": "4fc3f643c2ee23e6f75559fb59ddbca6eed3f5b318881fcd88603aa4bcea593e"
     },
     {
       "path": "audio-r108.js",
@@ -52204,8 +52204,8 @@
     },
     {
       "path": "ego-secret-r1057.js",
-      "bytes": 4583,
-      "sha256": "1b7b402f5c37cef02482c315fe378f9a910e3b720975c3e3b4f4daea2f52b763"
+      "bytes": 5465,
+      "sha256": "19f5c428fde199276e1b0ad240632a9f334b0f37405a40ab58d91e5eddeb850f"
     },
     {
       "path": "ego-sovereign-r1046-data.js",
@@ -52604,8 +52604,8 @@
     },
     {
       "path": "hwando-r271.js",
-      "bytes": 14499,
-      "sha256": "40d1afa838fa08545dd98afe9fafb20500657a7e0100c163f30ed488ea297252"
+      "bytes": 15131,
+      "sha256": "8f3d9ae484a1a7681fa3f34ee84efef688fbe6e971d5f3eb156e14c4e55a1a02"
     },
     {
       "path": "hwando-r277.js",
@@ -53489,8 +53489,8 @@
     },
     {
       "path": "skill-attack-r440.js",
-      "bytes": 5238,
-      "sha256": "c1389189fdc98dc1cbb5cd47d85a874c34d97de1a7984b80875440f8ce7d1ec0"
+      "bytes": 5610,
+      "sha256": "c94704cb187fc822331b3111a1c7f7ea21dad5a73382bddbc1c74b9ad6caabfb"
     },
     {
       "path": "skill-fx-r292.js",
@@ -53544,8 +53544,8 @@
     },
     {
       "path": "slayer-r351.js",
-      "bytes": 21519,
-      "sha256": "54f8a59d7f3fc172850390e1ee9ac3c3f48ebb5f7f908acb1cdb3d2c2f25c360"
+      "bytes": 21798,
+      "sha256": "57eaa917badb722a911887225a16ae0f95d3e12f52db712c57df3d0d452a4573"
     },
     {
       "path": "slayer-sheets-r585.js",
@@ -53899,7 +53899,7 @@
     }
   ],
   "fileCount": 10779,
-  "totalBytes": 1307911208,
+  "totalBytes": 1307913988,
   "webHTMLSha256": "453866e8c0a3605a19320653779920d7f08d36f7f64bdfd4505d7f0191736ff3",
   "largest": [
     {

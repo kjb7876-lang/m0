@@ -21,7 +21,10 @@ function env(){const seen=[];const e={window:{},localStorage:{getItem:()=>null,s
 {const e=env();vm.runInContext('player.ultimateAnim=1.05;drawHero();',e);ok('ultimate: slower swing (ULT)',e.seen[0].ul===0&&Math.abs(e.seen[0].at-.42)<1e-9&&e.player.ultimateAnim===1.05);}
 {const e=env();vm.runInContext('player.skillAnim=.6;player.dashAnim=.2;drawHero();',e);ok('dash skills keep dash motion',e.seen[0].sk===.6);}
 {const e=env();vm.runInContext('player.skillAnim=.6;player.guard=true;drawHero();',e);ok('guard untouched',e.seen[0].sk===.6);}
-{const e=env();vm.runInContext('player.skillAnim=.6;player.ego=1;drawHero();',e);ok('EGO/samong forms untouched',e.seen[0].sk===.6);}
+/* R1050b(사용자 2026-11-15 10:09Z "영웅들 스킬이나 공격할때 항상 공격모션 사용"): EGO 는 몸 그림이 바뀌지 않는 버프라 스킬도 공격 모션으로. 사몽 각성(몸 그림이 바뀜)만 그대로 */
+{const e=env();vm.runInContext('player.skillAnim=.6;player.ego=1;drawHero();',e);ok('EGO buff: skill still swings the attack motion',e.seen[0].sk===0&&e.seen[0].at>0.2&&e.player.skillAnim===.6);}
+{const e=env();vm.runInContext('player.skillAnim=.6;player.samong=1;drawHero();',e);ok('samong form untouched',e.seen[0].sk===.6);}
+{const e=env();vm.runInContext('player.skillAnim=.6;player.ego=NaN;drawHero();',e);ok('EGO NaN: still swings',e.seen[0].sk===0);}
 {const e=env();e.window.__STORYWORLD_ATTACK_ANIM_R143__={actSheet:()=>true};vm.runInContext('player.skillAnim=.6;drawHero();',e);ok('R201 dedicated skill sheet direction kept',e.seen[0].sk===.6);}
 {const e=env();e.window.__STORYWORLD_COOP_SIM_R62__={mode:()=>'duo'};vm.runInContext('player.skillAnim=.6;drawHero();',e);ok('coop untouched',e.seen[0].sk===.6);}
 {const e=env();vm.runInContext('player.skillAnim=.6;player.attackAnim=.2;drawHero();',e);ok('real basic attack during skill keeps its own value',e.seen[0].at===.2&&e.player.attackAnim===.2);}
