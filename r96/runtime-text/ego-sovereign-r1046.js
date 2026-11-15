@@ -132,6 +132,8 @@ function install(){wrapSave();wrapTick();wrapHUD();try{wrapScope();}catch(e){fai
  if(typeof setInterval==='function')setInterval(()=>{try{wrapSave();wrapTick();wrapHUD();if(Date.now()>wrapAt){wrapAt=Date.now()+2000;wrapScope();}if(hasDoc()&&!G(()=>started,false))ui();}catch(e){fail(e);}},500);}
 install();
 window.__STORYWORLD_EGO_SOVEREIGN_R1046__=Object.freeze({revision:REV,data:D,field:FIELD,unlocked,unlock,active,formActive,setForm,present,discard,samongCleared,
+ refresh:()=>{try{if(hasDoc()&&document.getElementById('panel')?.querySelector('[data-hero]')){css();inject();}}catch(e){fail(e);}}, // R1057: 창을 다시 그린 즉시 EGO 칸을 다시 끼움(200ms 기다림 없이)
+
  lock(){saved={on:false,off:false};persist();},set(v){saved.off=v===false||v==='off';persist();return !saved.off;},
  inspect:()=>({revision:REV,unlocked:unlocked(),saved:{...saved},active:active(),form:formActive(),rc151:rcActive(),pending:pending?{...pending}:null,cdUntil,cutinQueued,want,commit,stats:{...stats},lastError})});
 })();

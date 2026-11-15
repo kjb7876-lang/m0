@@ -52093,14 +52093,19 @@
       "sha256": "ff8cbdd5af4146ffe677acf229d85897144d5f61061d981f02ecf4478d208b63"
     },
     {
+      "path": "ego-secret-r1057.js",
+      "bytes": 4583,
+      "sha256": "1b7b402f5c37cef02482c315fe378f9a910e3b720975c3e3b4f4daea2f52b763"
+    },
+    {
       "path": "ego-sovereign-r1046-data.js",
       "bytes": 6016,
       "sha256": "87db2c904db84d7c99db4527ca0b9f9b4b257a711bd43339e8e518d0bd5f0d80"
     },
     {
       "path": "ego-sovereign-r1046.js",
-      "bytes": 17231,
-      "sha256": "8a33495e872b7de83f6db7116d14159e78dfcdc58e25029990148a5ca67e93fd"
+      "bytes": 17452,
+      "sha256": "c9e82ec570d129056576c3867daa924cfdcdcb9c7cb17d419527c3f0699ef79d"
     },
     {
       "path": "enemy-attack-tempo-r601.js",
@@ -52509,8 +52514,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6579402,
-      "sha256": "f3ed36631e32ba23bb5aeb1477d7b85c4a42f71d08e8fabf578dad311e475c72"
+      "bytes": 6579448,
+      "sha256": "c6629ec8c2f936e8524e71750aedc135cc02be420c2da50ac661577aea30e382"
     },
     {
       "path": "intro-r140.js",
@@ -53778,9 +53783,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10755,
-  "totalBytes": 1300525566,
-  "webHTMLSha256": "f3ed36631e32ba23bb5aeb1477d7b85c4a42f71d08e8fabf578dad311e475c72",
+  "fileCount": 10756,
+  "totalBytes": 1300530416,
+  "webHTMLSha256": "c6629ec8c2f936e8524e71750aedc135cc02be420c2da50ac661577aea30e382",
   "largest": [
     {
       "path": "index.html",
