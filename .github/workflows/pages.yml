@@ -586,6 +586,8 @@ jobs:
         run: node r96/qa/r1043/r1043-cpu-check.cjs
       - name: R1052 performance steps 6/7 pixel budget (canvas at most 4K pixels on big windows, never below step 5)
         run: node r96/qa/r1052/r1052-cpu-check.cjs
+      - name: R1055 ink wash test build (off by default, title button cycles off / eastern regions / all, map materials only, paper grain below step 5) CPU check
+        run: node r96/qa/r1055/r1055-cpu-check.cjs
       - name: R1022 auto-move toggle CPU check
         run: node r96/qa/r1022/r1022-cpu-check.cjs
       - name: R1007 samong confront statement markers never overlap (4-marker zones M-1 Michaela, S-04 16th floor were unpassable) CPU check

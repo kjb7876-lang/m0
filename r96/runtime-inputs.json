@@ -9989,6 +9989,7 @@
     "assets/r1056/bgm/gugak-hwando.ogg",
     "assets/r1056/bgm/gugak-village-climax.ogg",
     "assets/r1056/bgm/gugak-village.ogg",
+    "ink-wash-r1055.js",
     "bulmyeongwi-oldart-r1059.js",
     "clue-gate-r1060.js",
     "assets/r1059/assets/episode1b/generated-v394/bulmyeongwi_b.webp",
@@ -11082,5 +11083,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "4a612f4e1dbfe08ada48b2014b7ab178186da950d4ff0c113329d21f920fd481"
+  "runtimeManifestSHA256": "364e4455b943c6c21d6678481b60fcb358f78d186f605698e99036526348fdf5"
 }
