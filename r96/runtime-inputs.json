@@ -10023,7 +10023,8 @@
     "lineart-video-r1080.js",
     "ui-ink-r1085.js",
     "assets/r1045c/gunner/attack-e4.webp",
-    "assets/r1045c/gunner/walk-e2.webp"
+    "assets/r1045c/gunner/walk-e2.webp",
+    "enemy-rules-r1053.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11098,5 +11099,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "fd15173f800e9d2479bcd2af17f14a6729b8a4e0bc19025cf3f0162e937d2a76"
+  "runtimeManifestSHA256": "4e627af95058d0644217be9f162b8eb01b7eec754e66a0218968f560b3132936"
 }

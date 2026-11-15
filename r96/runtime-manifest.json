@@ -52379,8 +52379,8 @@
     },
     {
       "path": "enemy-face-r444.js",
-      "bytes": 16961,
-      "sha256": "0e01f6d14c374b1a80d99d0f4fedee7f15bc2103fdb45961d530df462ac06df4"
+      "bytes": 17643,
+      "sha256": "dc58e3472621d6ca51efed802e2a1a5ce00d17d3206defacade7302eb573754b"
     },
     {
       "path": "enemy-hexagram-r341.js",
@@ -52396,6 +52396,11 @@
       "path": "enemy-presentation-r86.js",
       "bytes": 6839,
       "sha256": "577694609c82a750b62b6a970443df726e58919768f7a9dfb2a2add66a1dd133"
+    },
+    {
+      "path": "enemy-rules-r1053.js",
+      "bytes": 9811,
+      "sha256": "6588fc3519327827fc062bb71cf2dfd2325d4e5cafedfd5d8ecb70f63fa94162"
     },
     {
       "path": "enemy-skill-pose-r442.js",
@@ -52779,8 +52784,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6579815,
-      "sha256": "013b3a61e9190163c39ddf5c693041447e0ec8ab8df85bb07bcb4608309c884d"
+      "bytes": 6579862,
+      "sha256": "780e388421b56eb573d49ec934544db645a382d3b701fe01677bdc727df01115"
     },
     {
       "path": "ink-wash-r1055.js",
@@ -54068,9 +54073,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10813,
-  "totalBytes": 1314441686,
-  "webHTMLSha256": "013b3a61e9190163c39ddf5c693041447e0ec8ab8df85bb07bcb4608309c884d",
+  "fileCount": 10814,
+  "totalBytes": 1314452226,
+  "webHTMLSha256": "780e388421b56eb573d49ec934544db645a382d3b701fe01677bdc727df01115",
   "largest": [
     {
       "path": "index.html",
