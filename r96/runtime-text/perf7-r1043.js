@@ -16,7 +16,7 @@
 //  판정·피해·저장·그림 원본·세 모드 공통 코드는 그대로다. 끄기: localStorage['storyworld.r1043.perf7']='{"off":true}'(설정 정리·단계 모두 끔).
 (()=>{'use strict';
 if(window.__STORYWORLD_PERF7_R1043__)return;
-const REV='R1043-perf7-1',KEY='storyworld.r1043.perf7';
+const REV='R1043-perf7-2-R1052',KEY='storyworld.r1043.perf7';
 const NAMES=['','초저','낮음','보통','높음','PC급','고화질','풀옵션'];
 const TIER=['','low','low','mid','high','pc','pc','pc'],LITE=['','on','auto','auto','auto','auto','off','off'];
 const MODS={r300:'__STORYWORLD_LIGHT_ATMOS_R300__',r450:'__STORYWORLD_WEATHER_R450__',r451:'__STORYWORLD_LOCAL_LIGHT_R451__',r453:'__STORYWORLD_ACTOR_TONE_R453__'};
@@ -28,9 +28,15 @@ function norm(v){if(v==='auto')return 'auto';if(v==null||v==='')return null;cons
 function plan(step,o={}){const s=norm(step),mob=!!o.mobile,dev=Number.isFinite(o.dev)&&o.dev>0?o.dev:1;
  if(s==null||s==='auto')return {step:s==null?null:'auto',r1023:'auto',lite:'auto',dpr:null,lowFx:null,force:null};
  const cap=v=>mob?Math.min(Math.max(1,dev),v):v;
- const dpr=s===1?.75:s===6?cap(1.75):s===7?cap(2):null;
+ const want=s===1?.75:s===6?cap(1.75):s===7?cap(2):null;const dpr=s>=6?fit(want,o.W,o.H,mob,dev):want;
  const force=s===1?{r300:false,r450:false,r451:false,r453:false}:s===7?{r300:true,r450:true,r451:true,r453:true}:null;
- return {step:s,r1023:TIER[s],lite:LITE[s],dpr,lowFx:s>=6?false:null,force};}
+ return {step:s,r1023:TIER[s],lite:LITE[s],dpr,want,lowFx:s>=6?false:null,force};}
+// R1052(사용자 11-15 10:02Z "최고사양 버그없는지 확인… 7품질설정 디버깅개선 최적화"): 6·7단계 화소 예산.
+//  창이 크면(2560×1440 → 7단계 5120×2880, 1,470만 화소) 그리기·메모리만 늘고 보이는 이득이 없다 → 캔버스가 4K(829만 화소)를 넘지 않게 배율을 줄인다.
+//  다만 5단계(엔진 기본 배율 min(기기 배율, 1.5)·휴대폰 1.25)보다 낮아지면 null(= 엔진 배율 그대로)로 둔다. 창 크기를 모르면 원래 값.
+const PX_BUDGET=3840*2160;
+function fit(d,w,h,mob,dev){if(d==null)return d;w=+w;h=+h;if(!(Number.isFinite(w)&&Number.isFinite(h)&&w>0&&h>0))return d;
+ const lim=Math.sqrt(PX_BUDGET/(w*h));if(d<=lim)return d;const v=Math.floor(lim*100)/100,floor=Math.min(dev,mob?1.25:1.5);return v>floor?v:null;}
 let saved={};try{saved=JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(_){saved={};}
 if(typeof saved!=='object')saved={};
 const off=saved.off===true;
@@ -42,8 +48,9 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify({step:chosen,held}))
 function devRatio(){try{return Number.isFinite(devicePixelRatio)&&devicePixelRatio>0?devicePixelRatio:1;}catch(_){return 1;}}
 let cur=plan(null);
 // ---- 화면 배율: 엔진·R1023 resize 뒤에 단계 배율을 얹는다 ----
-function applyDpr(){try{if(!cur.dpr)return;if(typeof dpr==='undefined'||typeof canvas==='undefined'||!canvas)return;
- const d=Math.max(.5,Math.min(3,cur.dpr));const w=Math.round(W*d),h=Math.round(H*d);if(!Number.isFinite(w)||!Number.isFinite(h)||w<1||h<1)return;
+function applyDpr(){try{if(!cur.want)return;if(typeof dpr==='undefined'||typeof canvas==='undefined'||!canvas)return;
+ const f=cur.step>=6?fit(cur.want,W,H,mobile(),devRatio()):cur.want;cur.dpr=f;if(!f)return;/* R1052: 창 크기가 바뀔 때마다 화소 예산을 다시 본다 */
+ const d=Math.max(.5,Math.min(3,f));const w=Math.round(W*d),h=Math.round(H*d);if(!Number.isFinite(w)||!Number.isFinite(h)||w<1||h<1)return;
  if(dpr!==d||canvas.width!==w||canvas.height!==h){dpr=d;canvas.width=w;canvas.height=h;stats.resizes++;}}catch(e){fail(e);}}
 let resizeWrapped=false;
 function wrapResize(){if(resizeWrapped||typeof resize!=='function')return;const base=resize;
@@ -52,7 +59,7 @@ function api(k){try{return window[MODS[k]]||null;}catch(_){return null;}}
 function applyForce(){try{const f=cur.force;
  if(f){if(!held){held={};for(const k in MODS){const A=api(k);if(A?.prefs)held[k]=A.prefs().on!==false;}}for(const k in f){const A=api(k);if(A?.set)A.set({on:f[k]});}}
  else if(held){for(const k in held){const A=api(k);if(A?.set&&typeof held[k]==='boolean')A.set({on:held[k]});}held=null;}}catch(e){fail(e);}}
-function apply(){if(off)return;stats.applies++;cur=plan(step(),{mobile:mobile(),dev:devRatio()});
+function apply(){if(off)return;stats.applies++;cur=plan(step(),{mobile:mobile(),dev:devRatio(),W:typeof W!=='undefined'?W:null,H:typeof H!=='undefined'?H:null});
  try{const T=window.__STORYWORLD_MOBILE_TIER_R1023__;if(T?.setPref)T.setPref(cur.r1023);}catch(e){fail(e);}
  try{const P=window.__STORYWORLD_PERF_R150__;if(P?.set)P.set({lite:cur.lite});}catch(e){fail(e);}
  applyForce();
