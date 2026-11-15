@@ -74,6 +74,9 @@ function heroVeil(x,y,w,h,piv,o){if(!veilOn||!heroBox())return 1;
 // ---- drawing ------------------------------------------------------------------------------
 // Draws sprite `name` with its pivot at (x,y), size w×h px. o: angle (after squash), squash
 // (y scale applied before the rotation, for ground-plane art), flip, alpha, blend, frame, pivot.
+/* R1051(사용자 2026-11-15 "영웅들 날개 달리는거 … 없애고 그냥 위에 천사링만"): 영웅 날개 그림(wing·wingback·wingfront·wingside·접힌 -f)은 그리지 않는다. 후광(halo)·깃털은 그대로.
+   그림이 받아져 있으면 '처리함'(true), 아니면 전처럼 false — 날개 그림은 이제 미리 받지도 않는다(warm 에서 뺌). */
+const HERO_WINGS=false,isWing=n=>typeof n==='string'&&n.startsWith('wing');
 const FILT=[];const UPRIGHT=new Set(['cross','runecross']);
 function draw(name,F,x,y,w,h,o={}){if(!enabled||typeof ctx==='undefined'||!ctx)return false;
  if(!(Number.isFinite(x)&&Number.isFinite(y)&&Number.isFinite(w)&&Number.isFinite(h))||Math.abs(w)<.5||Math.abs(h)<.5)return true;
@@ -81,7 +84,9 @@ function draw(name,F,x,y,w,h,o={}){if(!enabled||typeof ctx==='undefined'||!ctx)r
  /* R269: 다른 오버레이가 특정 그림을 빼도록(미카엘라 스킬의 조잡한 'wing' 등) — 거르개가 false 면 그리지 않는다 */
  if(FILT.length)for(const f of FILT){try{if(f(name,o)===false){stats.filtered=(stats.filtered||0)+1;return true;}}catch(_){}}
  if(FB>0&&!o.overHero){const fb=crowd>25?Math.round(FB*.73):FB;if(frameDraws>=fb&&(alpha<.55||frameDraws>=fb*1.7)){stats.budgetSkips++;return true;}}
- const m=META[name];if(!m)return false;const P=pal(F),c=tinted(name,P);if(!c){stats.misses++;return false;}
+ const m=META[name];if(!m)return false;
+ if(!HERO_WINGS&&isWing(name)){let have=false;try{have=!!(typeof readyImage==='function'&&readyImage((R107.has(name)?'assets/r107/fx/':BASE)+name+'.webp')?.image);}catch(_){}if(have)stats.wingsOff=(stats.wingsOff||0)+1;return have;}
+ const P=pal(F),c=tinted(name,P);if(!c){stats.misses++;return false;}
  const n=m[3],fr=n>1?((Math.floor(o.frame||0)%n)+n)%n:0,rows=ROWS.has(name),fw=rows?c.width:c.width/n,fh=rows?c.height/n:c.height,sx=rows?0:fr*fw,sy=rows?fr*fh:0,piv=o.pivot||m[2];
  const veil=o.overHero?1:heroVeil(x,y,w,h,piv,o);
  ctx.save();try{ctx.translate(x,y);if(o.squash&&o.squash!==1)ctx.scale(1,o.squash);if(o.angle){if(UPRIGHT.has(name)){/* R425: 십자가는 늘 정방향(위 짧고 아래 긴) — 사용자 2026-11-08 "절대로 역이 되면 안 됨". 평면 회전 대신 세로축 회전(가로 폭만 cos) */const k=Math.cos(o.angle);ctx.scale((k<0?-1:1)*Math.max(.18,Math.abs(k)),1);stats.upright=(stats.upright||0)+1;}else ctx.rotate(o.angle);}if(o.flip)ctx.scale(-1,1);
@@ -101,11 +106,11 @@ function poly(F,pts,thick,o={}){if(!Array.isArray(pts)||pts.length<2)return true
 
 // ---- warm-up: tinted copies for a palette are made a few per frame ahead of use ---------------
 const queue=[];
-function warm(F,names=NAMES){const P=pal(F);for(const n of names)if(META[n]&&!ready(n,P)&&!queue.some(q=>q[0]===n&&q[1]===P))queue.push([n,P]);}
+function warm(F,names=NAMES){const P=pal(F);for(const n of names)if(META[n]&&(HERO_WINGS||!isWing(n))&&!ready(n,P)&&!queue.some(q=>q[0]===n&&q[1]===P))queue.push([n,P]);}
 function pump(){let n=lowFx()?1:2;while(queue.length&&n>0){const[name,P]=queue[0];if(ready(name,P)){queue.shift();continue;}const im=source(name);if(!im){queue.push(queue.shift());n--;continue;}
   if(tinted(name,P,true)){stats.warmed++;queue.shift();}else queue.push(queue.shift());n--;}}
 if(typeof tick==='function'){const tickBase=tick;tick=function(dt){const r=tickBase.call(this,dt);try{if(enabled&&queue.length&&!(typeof loading!=='undefined'&&loading))pump();}catch(e){fail(e);}return r;};}
 
-window.__STORYWORLD_FX_SPRITES_R106__=Object.freeze({addFilter:f=>{if(typeof f==='function'&&!FILT.includes(f))FILT.push(f);return FILT.length;},revision:'R106-fx-sprites-1',base:BASE,names:NAMES,meta:META,on:()=>enabled,setEnabled,pal,parseColour,draw,along,poly,warm,ready:(n,F)=>ready(n,pal(F)),setHeroVeil:on=>(veilOn=!!on),
+window.__STORYWORLD_FX_SPRITES_R106__=Object.freeze({heroWings:HERO_WINGS,addFilter:f=>{if(typeof f==='function'&&!FILT.includes(f))FILT.push(f);return FILT.length;},revision:'R106-fx-sprites-1',base:BASE,names:NAMES,meta:META,on:()=>enabled,setEnabled,pal,parseColour,draw,along,poly,warm,ready:(n,F)=>ready(n,pal(F)),setHeroVeil:on=>(veilOn=!!on),
  inspect:()=>({revision:'R106-fx-sprites-1',enabled,tints:tints.size,queue:queue.length,...stats,lastError,presentationOnly:true,gameplayChanged:false,savesTouched:false})});
 })();
