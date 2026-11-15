@@ -456,6 +456,8 @@ jobs:
         run: node r96/qa/r1026/r1026-cpu-check.cjs
       - name: R1049 SFX rules (full audit vs rules, 55 off-rule sounds re-edited free, footsteps/low-HP heartbeat/level-up from plinkfx CC0) CPU check
         run: node r96/qa/r1049/r1049-cpu-check.cjs
+      - name: R1056 east-region gugak BGM CPU check
+        run: node r96/qa/r1056/r1056-cpu-check.cjs
       - name: R1051 hero wings removed, halo only (R106 wing sprites skipped, R101 aura and R102 holy flash draw no wings) CPU check
         run: node r96/qa/r1051/r1051-cpu-check.cjs
       - name: R1027 hero dot (pixel atlas) skill FX and static buff sigils replaced by painted frame sheets CPU check
@@ -700,12 +702,16 @@ jobs:
         run: node r96/qa/r1039/r1039-cpu-check.cjs
       - name: R1046 hidden hero EGO (unlock after S-07, hwando lineage form, observe-discard dispel 0.7s) CPU check
         run: node r96/qa/r1046/r1046-cpu-check.cjs
+      - name: R1057 hero select secret 777 reveals only hidden hero EGO CPU check
+        run: node r96/qa/r1057/r1057-cpu-check.cjs
       - name: R1040 boss pattern frame fx CPU check
         run: node r96/qa/r1040/boss-pattern-fx-cpu-check.cjs
       - name: R1042 lust boss kiss lips attack (telegraph, 66 percent of current HP, frame sheets) CPU check
         run: node r96/qa/r1042/kiss-lips-cpu-check.cjs
       - name: R1053 enemy combat rules (bosses close in and face the hero, attack super armour, hit-stagger cap) CPU check
         run: node r96/qa/r1053/enemy-rules-cpu-check.cjs
+      - name: R1054 age-15 default presentation (mob death ash, reduced hit blood) CPU check
+        run: node r96/qa/r1054/age15-cpu-check.cjs
       - name: R1038 defer hidden boot self-tests until diagnostics open CPU check
         run: node r96/qa/r1038/r1038-cpu-check.cjs
       - name: R1037 narration always-off button (boss entry story window + memory fragment note) and settings rows CPU check
