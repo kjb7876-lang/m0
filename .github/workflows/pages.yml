@@ -710,6 +710,10 @@ jobs:
         run: node r96/qa/r1057/r1057-cpu-check.cjs
       - name: R1057b hero select title 7-tap mobile alternative CPU check
         run: node r96/qa/r1057/r1057b-tap-cpu-check.cjs
+      - name: R1059 old bulmyeongwi art redirected to new art CPU check
+        run: node r96/qa/r1059/r1059-cpu-check.cjs
+      - name: R1060 bulmyeongwi zone clues gate boss door CPU check
+        run: node r96/qa/r1060/r1060-cpu-check.cjs
       - name: R1040 boss pattern frame fx CPU check
         run: node r96/qa/r1040/boss-pattern-fx-cpu-check.cjs
       - name: R1042 lust boss kiss lips attack (telegraph, 66 percent of current HP, frame sheets) CPU check
@@ -803,6 +807,8 @@ jobs:
         run: node r96/qa/r437/r437-cpu-check.cjs
       - name: R439 Hwando attack blade-tip speck cleanup CPU check
         run: node r96/qa/r439/hwando-tip-cpu-check.cjs
+      - name: R1063 Hwando cloth texture unified to the down-walk reference CPU check
+        run: node r96/qa/r1063/r1063-cpu-check.cjs
       - name: R447 R74 ash moth flaps its wings while moving CPU check
         run: node r96/qa/r447/mob-flap-cpu-check.cjs
       - name: R440 heroes play their attack motion while casting skills CPU check
