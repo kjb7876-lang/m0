@@ -12,7 +12,7 @@
  *  설정 storyworld.r991.gunnerAim {"on":false} 로 끄면 예전 그대로. Canonical source; copied by scripts/sync-r99.py. */
 (()=>{'use strict';
 if(window.__STORYWORLD_GUNNER_AIM_R991__)return;
-const REV='R1003-gunner-aim-2',KEY='storyworld.r991.gunnerAim',HERO='gunner';
+const REV='R1045-gunner-aim-3+R1003-s2',KEY='storyworld.r991.gunnerAim',HERO='gunner';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={walk:0,idle:0,swings:0,replaced:0,shots:0,moved:0,blocked:0,waiting:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
@@ -28,6 +28,11 @@ const SHEET={e:{gun:-3,face:0,body:181,tip:[[159,75],[154,72],[172,83],[151,71],
  n:{gun:-57,face:-90,body:182,tip:[[134,44],[130,44],[145,47],[128,44],[135,45],[138,45]]},
  // R1003 Dots 정 아래 조준(앞모습, 총구가 화면 앞으로) — 드라이브 HERO-gunner-attack-s2 후보, 7분야 심사 통과분. 대칭 그림이라 반전하지 않는다. tip 은 Dots 수동 측정값.
  s2:{gun:87,face:90,body:181,noMirror:true,path:'assets/r1003/gunner/attack-s2.webp',tip:[[93,131],[94,131],[94,131],[94,128],[94,128],[94,128]]}};
+// R1045 (사용자 11-15 02:34Z "기억사수 모션개선적용 닷츠자산확인"): Dots CX-0085GA r2 attack-n3 — 사용자가 "이거좋아" 한 뒷모습 어깨 겨눔 6칸.
+//  총이 화면 안쪽(정 위)으로 짧게 줄어 보이는 그림이라 그려진 총열 토막(−35°)이 아니라 몸·두 팔이 겨눈 방향 −80° 로 둔다(반전 −100°). tip 은 칸마다 잰 값.
+//  동쪽은 사용자가 Dots 에 부탁한 무반동 E r6(r3 1번 칸 6번 반복) — 위아래 흔들림·반동 없이 총구가 한 자리. {"n3":false}/{"e3":false} 로 R143 그대로.
+if(prefs.n3!==false)Object.assign(SHEET.n,{gun:-80,face:-90,body:182,path:'assets/r1045/gunner/attack-n3.webp',tip:[[126,62],[126,62],[126,60],[126,60],[126,62],[126,62]]});
+if(prefs.e3!==false)Object.assign(SHEET.e,{path:'assets/r1045/gunner/attack-e3.webp',tip:[0,1,2,3,4,5].map(()=>[156,74])});
 const SHEETS=Object.freeze(Object.keys(SHEET));
 // 걸으며 쏠 때: R128 걷기 시트(8칸 192×256, 발 96·226, walk-e 는 R144 v1 사본) — 같은 총 각도, 칸마다 총구 끝
 const WALK={e:{path:'assets/r144/walk/gunner/walk-e.webp',tip:[[165,81],[166,76],[166,76],[166,80],[165,80],[164,76],[163,76],[164,81]]},
@@ -81,9 +86,9 @@ function wrapShot(){if(typeof makeShot!=='function'||makeShot.r991)return;const 
 // 몸 그림: R143 이 그린 공격 칸을 고른 칸(같은 프레임·같은 키·같은 발)으로 바꿔 놓는다
 function replace(rec,st){const sw=swingOf(player);if(!sw||!(player.attackAnim>0)||T()-sw.at>.6)return;
  for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||!c.r143Attack||!c.points||!c.sourceRect)continue;
-  const m=/(?:r143\/attack|r1003)\/gunner\/attack-([a-z0-9]+)\.webp/.exec(String(c.sourcePath||c.image?.src||''));if(!m)continue;
+  const src=String(c.sourcePath||c.image?.src||''),m=/(?:r143\/attack|r1003|r1045)\/gunner\/attack-([a-z0-9]+)\.webp/.exec(src);if(!m)continue;
   const P=c.points,oldMir=P[1][0]<P[0][0],fOld=oldMir?-1:1,k=Math.abs(P[1][0]-P[0][0])/CW,ky=(P[3][1]-P[0][1])/CH;if(!(k>0)||!Number.isFinite(ky))return;
-  if(m[1]===sw.sheet&&oldMir===sw.mirror)return;const p=pathOf(sw.sheet),im=image(p);if(!im)return;
+  if(m[1]===sw.sheet&&oldMir===sw.mirror&&src.includes(pathOf(sw.sheet)))return;/* R1045: 같은 칸 이름이어도 n·e 는 새 그림 경로로 바꿈 */const p=pathOf(sw.sheet),im=image(p);if(!im)return;
   const fx=P[0][0]+fOld*FX*k,fy=P[0][1]+FY*ky,f=sw.mirror?-1:1,X=v=>fx+f*(v-FX)*k,Y=v=>fy+(v-FY)*ky,sx=clamp(Math.round(fin(c.sourceRect[0])/CW),0,5)*CW;
   const pts=[[X(0),Y(0)],[X(CW),Y(0)],[X(CW),Y(CH)],[X(0),Y(CH)]];if(pts.flat().some(v=>!Number.isFinite(v)))return;
   Object.assign(c,{image:im,sourcePath:p,sourceRect:[sx,0,CW,CH],imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],points:pts,r991Aim:{sheet:sw.sheet,mirror:sw.mirror}});stats.replaced++;return;}}
@@ -120,5 +125,5 @@ function install(){try{wrapAttack();wrapShot();wrapDraw();}catch(e){fail(e);}}
 try{if(typeof document!=='undefined'&&document.readyState==='complete')install();else if(typeof window.addEventListener==='function')window.addEventListener('load',install);}catch(e){fail(e);}
 function set(k,v){prefs[k]=v;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
 window.__STORYWORLD_GUNNER_AIM_R991__=Object.freeze({revision:REV,SHEETS,pick,tip,gunAngle,faceAngle,screenToGround,set,install,
- inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError,swing:(()=>{try{const s=swingOf(player);return s?{sheet:s.sheet,mirror:s.mirror,a:s.a}:null;}catch(_){return null;}})(),browser:false,GPU:false})});
+ inspect:()=>({revision:REV,prefs:{...prefs},sheets:Object.fromEntries(SHEETS.map(k=>[k,pathOf(k)])),stats:{...stats},lastError,swing:(()=>{try{const s=swingOf(player);return s?{sheet:s.sheet,mirror:s.mirror,a:s.a}:null;}catch(_){return null;}})(),browser:false,GPU:false})});
 })();

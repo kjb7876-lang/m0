@@ -9882,7 +9882,9 @@
     "boss-pattern-fx-r1040.js",
     "perf7-r1043.js",
     "kiss-lips-r1042.js",
-    "narration-voice-r1044.js"
+    "narration-voice-r1044.js",
+    "assets/r1045/gunner/attack-e3.webp",
+    "assets/r1045/gunner/attack-n3.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -10957,5 +10959,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "8f7332d23a3ea19b981f5c183c974add61cf376a6499e41f7c769d0e3668e37d"
+  "runtimeManifestSHA256": "da2cbc9a656de33beca5713413051db3bb025720a6a93e6489432c7eac63b0ad"
 }
