@@ -9879,7 +9879,8 @@
     "hwando-ink-trace-r1034.js",
     "ego-paint-r1039.js",
     "passive-cutin-r1033.js",
-    "boss-pattern-fx-r1040.js"
+    "boss-pattern-fx-r1040.js",
+    "narration-voice-r1044.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -10954,5 +10955,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "61dc0161cc772ce77fb00ccc2f314615699a753739f4de3f0e326b2d38087a3b"
+  "runtimeManifestSHA256": "2b70d8d9bbdb7952e21923db2b6dcae4c9b4b1956317477f65d2fea7f996f213"
 }
