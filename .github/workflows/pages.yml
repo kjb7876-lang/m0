@@ -730,6 +730,8 @@ jobs:
         run: node r96/qa/r1053/enemy-rules-cpu-check.cjs
       - name: R1053b R286 charge/dash counts as an attack (super armour) CPU check
         run: node r96/qa/r1053/r286-armor-cpu-check.cjs
+      - name: R1053c blade-wielding enemies close in instead of shooting within 4 tiles CPU check
+        run: node r96/qa/r1053/blade-melee-cpu-check.cjs
       - name: R1054 age-15 default presentation (mob death ash, reduced hit blood) CPU check
         run: node r96/qa/r1054/age15-cpu-check.cjs
       - name: R1038 defer hidden boot self-tests until diagnostics open CPU check
