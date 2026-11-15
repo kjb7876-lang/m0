@@ -1,0 +1,31 @@
+{
+ "setup": {
+  "on": true,
+  "remappedRows": 54,
+  "paths": 63,
+  "decoded": 63,
+  "bad": [],
+  "gaps": [
+   4,
+   2,
+   2
+  ],
+  "cat": [
+   "low",
+   "mid",
+   "high"
+  ],
+  "alias": "dodge"
+ },
+ "walk": {
+  "remapped": 158,
+  "steps": 16,
+  "beats": 0,
+  "levelUps": 0,
+  "skippedNear": 0,
+  "skippedJump": 0,
+  "errors": 0
+ },
+ "errors": [],
+ "at": "2026-11-15T09:15:32.022Z"
+}
