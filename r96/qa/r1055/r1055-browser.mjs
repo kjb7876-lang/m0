@@ -23,8 +23,25 @@ ok('first region (not eastern): filter stays off in east mode',i0.k===0,{zone:st
 await go('last302');await p.waitForTimeout(2500);const i1=await I(),sOn=await sat();await p.screenshot({path:`${out}/last302-on.png`});
 ok('last302: filter on (k≈1), map materials patched, no errors',i1.k>.95&&i1.stats.patched>0&&i1.stats.errors===0,i1);
 ok('last302: full level at PC default step',i1.level==='full',i1.level);
+// 화풍 다섯 가지를 같은 자리에서 찍고 대비(밝기 98%-2%)와 잔입자를 잰다
+const stat=async()=>{const buf=await p.screenshot();return p.evaluate(async b64=>{const im=new Image();im.src='data:image/png;base64,'+b64;await im.decode();const c=document.createElement('canvas');c.width=im.width;c.height=im.height;const g=c.getContext('2d');g.drawImage(im,0,0);
+  const y0=Math.round(im.height*.1),hh=Math.round(im.height*.7),d=g.getImageData(0,y0,im.width,hh).data,L=[];let hf=0,k=0;for(let y=0;y<hh;y+=2)for(let x=0;x<im.width-1;x+=2){const i=(y*im.width+x)*4,l=(d[i]*.2126+d[i+1]*.7152+d[i+2]*.0722)/255,l2=(d[i+4]*.2126+d[i+5]*.7152+d[i+6]*.0722)/255;L.push(l);hf+=Math.abs(l-l2);k++;}
+  L.sort((a,b)=>a-b);return {contrast:+(L[Math.floor(L.length*.98)]-L[Math.floor(L.length*.02)]).toFixed(3),grain:+(hf/k*1000).toFixed(2)};},buf.toString('base64'));};
+const styles=await p.evaluate(()=>Object.keys(window.__STORYWORLD_INK_WASH_R1055__.styles));const st={},offs=[];
+// 측정 방법(2026-11-15 원인 조사): 이 화면의 잔입자 값은 끈 채로도 프레임마다 10.1~12.9 로 흔들린다(등불 깜빡임·입자). 한 번씩 순서대로 재면 순서가 결과를 정한다
+//  → 화풍마다 끔·켬을 번갈아 여러 번 재서 평균을 견준다.
+const mode=m=>p.evaluate(m=>window.__STORYWORLD_INK_WASH_R1055__.set({mode:m}),m),avg=a=>a.reduce((x,y)=>x+y,0)/a.length,N=4;
+for(const k of styles){await p.evaluate(k=>window.__STORYWORLD_INK_WASH_R1055__.set({style:k}),k);const on=[],ct=[];
+ for(let i=0;i<N;i++){await mode('off');await p.waitForTimeout(1800);offs.push((await stat()).grain);await mode('east');await p.waitForTimeout(1800);const q=await stat();on.push(q.grain);ct.push(q.contrast);}
+ st[k]={contrast:+avg(ct).toFixed(3),grain:+avg(on).toFixed(2)};await p.screenshot({path:`${out}/last302-${k}.png`});}
+await p.evaluate(()=>window.__STORYWORLD_INK_WASH_R1055__.set({style:'jg'}));await p.waitForTimeout(1500);
 await p.evaluate(()=>window.__STORYWORLD_INK_WASH_R1055__.set({mode:'off'}));await p.waitForTimeout(3000);const i2=await I(),sOff=await sat();await p.screenshot({path:`${out}/last302-off.png`});
 ok('last302: off → k back to 0',i2.k===0,i2.k);
+const stOff={contrast:(await stat()).contrast,grain:+avg(offs).toFixed(2),min:Math.min(...offs),max:Math.max(...offs),n:offs.length};console.log('STYLE-STATS',JSON.stringify({off:stOff,...st}));
+ok('styles: pooled fine grain of all five styles is not above the unfiltered screen (alternating samples, +5%)',avg(styles.map(k=>st[k].grain))<=stOff.grain*1.05,{off:stOff,...st});
+ok('styles: no single style is more than 15% grainier than the unfiltered screen',styles.every(k=>st[k].grain<=stOff.grain*1.15),{off:stOff,...st});
+ok('styles: contrast stays within +15% of the unfiltered screen in every style (eye comfort)',styles.every(k=>st[k].contrast<=stOff.contrast*1.15),{off:stOff,...st});
+ok('styles: no errors after switching all five',(await I()).stats.errors===0);
 ok('last302: screen saturation clearly lower with ink on',sOn.sat<sOff.sat*.75,{on:sOn,off:sOff});
 await p.evaluate(()=>window.__STORYWORLD_INK_WASH_R1055__.set({mode:'east'}));
 await go('last303');await p.waitForTimeout(2500);const i3=await I();await p.screenshot({path:`${out}/last303-on.png`});ok('last303: filter on',i3.k>.95,i3.k);
