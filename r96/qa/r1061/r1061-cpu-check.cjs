@@ -1,4 +1,4 @@
-// R1058 ep1a09 '갈망 약병장' 그림 바로잡기 — 정적·CPU 검사(화면 검증 아님).
+// R1061 ep1a09 '갈망 약병장' 그림 바로잡기 — 정적·CPU 검사(화면 검증 아님).
 //  ① rooms-r523.js 에 바꿔 그리기(cabOf)가 있고 원본·런타임 사본이 같다 ② 엔진 자료의 두 소품이 아직 폐허 시장 그림을 가리킨다(이 수정이 필요한 전제)
 //  ③ cabOf 규칙: ep1a09-cabinet-* + ruined_market 만 바꾸고, 원본 객체는 건드리지 않으며, 자리·이름은 그대로다.
 const fs=require('fs'),path=require('path'),R=path.join(__dirname,'..','..');let n=0,bad=0;const ok=(c,m,d)=>{n++;if(!c)bad++;console.log((c?'ok   ':'FAIL ')+m+(d!==undefined?': '+JSON.stringify(d).slice(0,200):''));};
@@ -18,4 +18,4 @@ if(m){const stats={},ART={medcab:{path:'assets/r521/medicine-cabinet.webp',h:86}
  const o1={id:'ep1a10-prop-3',path:'assets/props/v290/ruined_market.webp'},o2={id:ids[1],path:'assets/r521/medicine-cabinet.webp'};
  ok(cabOf(o1)===o1,'다른 지역 소품은 그대로');ok(cabOf(o2)===o2,'이미 다른 그림이면 그대로');ok(cabOf(null)===null,'빈 값 통과');}
 ok(fs.existsSync(path.join(R,'runtime-text','assets','r521','medicine-cabinet.webp')),'약장 그림 파일 있음');
-console.log('\nR1058 CPU: '+(n-bad)+'/'+n);process.exit(bad?1:0);
+console.log('\nR1061 CPU: '+(n-bad)+'/'+n);process.exit(bad?1:0);

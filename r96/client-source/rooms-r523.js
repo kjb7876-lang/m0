@@ -425,10 +425,10 @@ function sight(rows){if(typeof project!=='function'||typeof W!=='number'||typeof
 // 쉬게 할 것(이 그리기 동안만): 이 덧씌우기가 꾸미는 방 안의 R449·R224 가구(보스 전투실·중앙 전투실 제외, 방 사각형 변에 놓여 실제 벽과 떨어져 있었다)와, 정면 3/4 시점이라 바닥과 각도가 안 맞는 지역 장식 가구(R80·R81 장식과 R74 장식의 소파·장 그림)
 const OFF_ANGLE=/world-r80\/(?:refined-r85-)?r80-(?:024|027|051|144|148)\.webp$/;
 const skinOf=p=>String(p.path||(p.r81NativeSkin&&p.r81NativeSkin.path)||'');/* R74 장식은 path 없이 r81NativeSkin 그림으로 그려진다 */
-// R1058(사용자 2026-11-15 "오두막 같은 외부 조형물이 왜 저 맵에"): ep1a09 주사실 쪽 서사 소품 '갈망 약병장' 두 점은 엔진 자료에서 옛 기계 그림을 빼며 폐허 시장 좌판(v290 ruined_market) 그림으로 바뀌어 있었다.
+// R1061(사용자 2026-11-15 "오두막 같은 외부 조형물이 왜 저 맵에"): ep1a09 주사실 쪽 서사 소품 '갈망 약병장' 두 점은 엔진 자료에서 옛 기계 그림을 빼며 폐허 시장 좌판(v290 ruined_market) 그림으로 바뀌어 있었다.
 //  이름 붙은 소품이라 R204 야외 소품 거르기도 그대로 두었다 → 이 그리기 동안만 병원 약장(R521 medcab) 그림으로 그린다(자리·이름·판정은 그대로, 원본 소품은 건드리지 않음).
 const CAB_BAD=/props\/v290\/ruined_market\.webp$/,cabMemo=new WeakMap();
-function cabOf(p){if(!p||!CAB_BAD.test(String(p.path||''))||!/^ep1a09-cabinet-/.test(String(p.id||'')))return p;let c=cabMemo.get(p);if(!c||c.x!==p.x||c.y!==p.y||c.visible!==p.visible){c={...p,path:ART.medcab.path,height:ART.medcab.h,r1058Cabinet:true};cabMemo.set(p,c);stats.cabinets=(stats.cabinets||0)+1;}return c;}
+function cabOf(p){if(!p||!CAB_BAD.test(String(p.path||''))||!/^ep1a09-cabinet-/.test(String(p.id||'')))return p;let c=cabMemo.get(p);if(!c||c.x!==p.x||c.y!==p.y||c.visible!==p.visible){c={...p,path:ART.medcab.path,height:ART.medcab.h,r1061Cabinet:true};cabMemo.set(p,c);stats.cabinets=(stats.cabinets||0)+1;}return c;}
 const rests=(p,F,U)=>!!p&&fin(p.x+p.y)&&((FURN(p)&&inFight(U,p.x,p.y))||((p.r80Dressing===true||!!p.r74Prop)&&OFF_ANGLE.test(skinOf(p))))&&!inFight(F,p.x,p.y);
 try{if(typeof draw==='function'){const base=draw;draw=function(...a){let r=null,m=null,rows=null;try{r=typeof room!=='undefined'?room:null;m=r?state(r):null;if(m&&m.rows.length){prime(r,m.rows);rows=m.rows;stats.shown=sight(rows);}}catch(e){fail(e);m=null;}
  if(!m||!m.rows.length)return base.apply(this,a);
