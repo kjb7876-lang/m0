@@ -9989,7 +9989,36 @@
     "assets/r1056/bgm/gugak-hwando.ogg",
     "assets/r1056/bgm/gugak-village-climax.ogg",
     "assets/r1056/bgm/gugak-village.ogg",
-    "ink-wash-r1055.js"
+    "ink-wash-r1055.js",
+    "bulmyeongwi-oldart-r1059.js",
+    "clue-gate-r1060.js",
+    "assets/r1059/assets/episode1b/generated-v394/bulmyeongwi_b.webp",
+    "assets/r1059/assets/generated-v31224/actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp",
+    "assets/r1059/assets/generated-v31224/actors-normalized/35526bcfa1c2_bulmyeongwi_rain.webp",
+    "assets/r1059/assets/generated-v31224/actors-normalized/692e4ae01c29_bulmyeongwi_idle.webp",
+    "assets/r1059/assets/generated-v31224/actors-normalized/de4c1414da0d_bulmyeongwi_transition.webp",
+    "assets/r1059/assets/r104/bosses/mb-last302-v31231-p1.webp",
+    "assets/r1059/assets/r104/bosses/mb-last302-v31231-p2.webp",
+    "assets/r1059/assets/r104/bosses/mb-last302-v31231-p3.webp",
+    "assets/r1059/assets/r104/bosses/mb-last302-v31231-p4.webp",
+    "assets/r1059/assets/r425/clean/assets/generated-v31224/actors-normalized/692e4ae01c29_bulmyeongwi_idle.webp",
+    "assets/r1059/assets/r760/boss/bulmyeongwi-p1.webp",
+    "assets/r1059/assets/r760/boss/bulmyeongwi-p2.webp",
+    "assets/r1059/assets/r760/boss/bulmyeongwi-p3.webp",
+    "assets/r1059/assets/r760/boss/bulmyeongwi-p4.webp",
+    "assets/r1059/assets/r760/boss/bulmyeongwi-rain.webp",
+    "assets/r1059/assets/r760/boss/bulmyeongwi-transition.webp",
+    "assets/r1059/assets/rc140/story-cycle-motions/mb-last302-v31231.png",
+    "assets/r1063/hwando/index.json",
+    "assets/r1063/r283/hwando/r242/attack-n.webp",
+    "assets/r1063/r283/hwando/r242/attack-s.webp",
+    "assets/r1063/r283/hwando/r242/hit-e.webp",
+    "assets/r1063/r283/hwando/r242/hit-n.webp",
+    "assets/r1063/r283/hwando/r242/hit-s.webp",
+    "assets/r1063/r283/hwando/r271/walk-e.webp",
+    "assets/r1063/r283/hwando/r271/walk-n.webp",
+    "assets/r1063/r283/hwando/r271/walk-w.webp",
+    "assets/r1063/r439/hwando/attack-e.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11064,5 +11093,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "ddf330df340e0dbb72001214f3b91bb123ccb236b4f90c5149bd32a3f73ae60d"
+  "runtimeManifestSHA256": "7103b79f4121c24c8a307ebe1b1c92b02e5151924353968117b01435fefce0c9"
 }
