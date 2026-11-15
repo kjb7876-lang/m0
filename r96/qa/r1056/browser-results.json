@@ -1,0 +1,291 @@
+{
+ "decode": [
+  {
+   "id": "gugak-hwando",
+   "sec": 189.5,
+   "ch": 2
+  },
+  {
+   "id": "gugak-hwando-climax",
+   "sec": 128.5,
+   "ch": 2
+  },
+  {
+   "id": "gugak-village",
+   "sec": 200.3,
+   "ch": 2
+  },
+  {
+   "id": "gugak-village-climax",
+   "sec": 135.1,
+   "ch": 2
+  },
+  {
+   "id": "gugak-gyeongseong-climax",
+   "sec": 124.6,
+   "ch": 2
+  }
+ ],
+ "zones": {
+  "dist00": {
+   "active": {
+    "track": "danse-macabre",
+    "zone": "dist00",
+    "episode": "m1",
+    "role": "main",
+    "time": 3.091776,
+    "paused": false,
+    "volume": 0.3599658993312025
+   },
+   "decks": [
+    {
+     "id": "air",
+     "paused": true,
+     "volume": 0,
+     "readyState": 4,
+     "muted": false,
+     "ended": false
+    },
+    {
+     "id": "danse-macabre",
+     "paused": false,
+     "volume": 0.3599658993312025,
+     "readyState": 4,
+     "muted": false,
+     "ended": false
+    }
+   ],
+   "failed": [],
+   "stats": {
+    "ticks": 112,
+    "mapSwitches": 2,
+    "continued": 0,
+    "loops": 0,
+    "restarts": 0,
+    "resumes": 0,
+    "blocked": 0,
+    "errors": 0,
+    "delegated": 0,
+    "failed": 0
+   },
+   "src": 0
+  },
+  "restU2": {
+   "active": {
+    "track": "gugak-hwando",
+    "zone": "restU2",
+    "episode": "m6",
+    "role": "main",
+    "time": 3.067313,
+    "paused": false,
+    "volume": 0.3597991309889442
+   },
+   "decks": [
+    {
+     "id": "gugak-hwando",
+     "paused": false,
+     "volume": 0.3597991309889442,
+     "readyState": 4,
+     "muted": false,
+     "ended": false
+    },
+    {
+     "id": "danse-macabre",
+     "paused": true,
+     "volume": 0,
+     "readyState": 4,
+     "muted": false,
+     "ended": false
+    }
+   ],
+   "failed": [],
+   "stats": {
+    "ticks": 209,
+    "mapSwitches": 3,
+    "continued": 0,
+    "loops": 0,
+    "restarts": 0,
+    "resumes": 0,
+    "blocked": 0,
+    "errors": 0,
+    "delegated": 0,
+    "failed": 0
+   },
+   "src": 0
+  },
+  "last304": {
+   "active": {
+    "track": "gugak-hwando",
+    "zone": "last304",
+    "episode": "m6",
+    "role": "main",
+    "time": 11.444689,
+    "paused": false,
+    "volume": 0.3599429227862885
+   },
+   "decks": [
+    {
+     "id": "gugak-hwando",
+     "paused": false,
+     "volume": 0.3599429227862885,
+     "readyState": 4,
+     "muted": false,
+     "ended": false
+    },
+    {
+     "id": "danse-macabre",
+     "paused": true,
+     "volume": 0,
+     "readyState": 4,
+     "muted": false,
+     "ended": false
+    }
+   ],
+   "failed": [],
+   "stats": {
+    "ticks": 249,
+    "mapSwitches": 3,
+    "continued": 1,
+    "loops": 0,
+    "restarts": 0,
+    "resumes": 0,
+    "blocked": 0,
+    "errors": 0,
+    "delegated": 0,
+    "failed": 0
+   },
+   "src": 0
+  },
+  "last301": {
+   "active": {
+    "track": "gugak-hwando-climax",
+    "zone": "last301",
+    "episode": "m6",
+    "role": "climax",
+    "time": 3.1703,
+    "paused": false,
+    "volume": 0.3598709793416887
+   },
+   "decks": [
+    {
+     "id": "gugak-hwando",
+     "paused": true,
+     "volume": 0,
+     "readyState": 4,
+     "muted": false,
+     "ended": false
+    },
+    {
+     "id": "gugak-hwando-climax",
+     "paused": false,
+     "volume": 0.3598709793416887,
+     "readyState": 4,
+     "muted": false,
+     "ended": false
+    }
+   ],
+   "failed": [],
+   "stats": {
+    "ticks": 302,
+    "mapSwitches": 4,
+    "continued": 1,
+    "loops": 0,
+    "restarts": 0,
+    "resumes": 0,
+    "blocked": 0,
+    "errors": 0,
+    "delegated": 0,
+    "failed": 0
+   },
+   "src": 0
+  },
+  "last302": {
+   "active": {
+    "track": "gugak-village",
+    "zone": "last302",
+    "episode": "m7",
+    "role": "main",
+    "time": 3.071654,
+    "paused": false,
+    "volume": 0.18000071959977276
+   },
+   "decks": [
+    {
+     "id": "gugak-village",
+     "paused": false,
+     "volume": 0.18000071959977276,
+     "readyState": 4,
+     "muted": false,
+     "ended": false
+    },
+    {
+     "id": "gugak-hwando-climax",
+     "paused": true,
+     "volume": 0,
+     "readyState": 4,
+     "muted": false,
+     "ended": false
+    }
+   ],
+   "failed": [],
+   "stats": {
+    "ticks": 356,
+    "mapSwitches": 5,
+    "continued": 1,
+    "loops": 0,
+    "restarts": 0,
+    "resumes": 0,
+    "blocked": 0,
+    "errors": 0,
+    "delegated": 0,
+    "failed": 0
+   },
+   "src": 0
+  },
+  "last303": {
+   "active": {
+    "track": "gugak-village-climax",
+    "zone": "last303",
+    "episode": "m7",
+    "role": "climax",
+    "time": 3.069059,
+    "paused": false,
+    "volume": 0.3599423218288387
+   },
+   "decks": [
+    {
+     "id": "gugak-village",
+     "paused": true,
+     "volume": 0,
+     "readyState": 4,
+     "muted": false,
+     "ended": false
+    },
+    {
+     "id": "gugak-village-climax",
+     "paused": false,
+     "volume": 0.3599423218288387,
+     "readyState": 4,
+     "muted": false,
+     "ended": false
+    }
+   ],
+   "failed": [],
+   "stats": {
+    "ticks": 410,
+    "mapSwitches": 6,
+    "continued": 1,
+    "loops": 0,
+    "restarts": 0,
+    "resumes": 0,
+    "blocked": 0,
+    "errors": 0,
+    "delegated": 0,
+    "failed": 0
+   },
+   "src": 0
+  }
+ },
+ "errors": [],
+ "at": "2026-11-15T11:58:06.133Z"
+}
