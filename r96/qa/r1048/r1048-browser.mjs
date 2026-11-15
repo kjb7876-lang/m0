@@ -20,6 +20,8 @@ await p.locator('#panel [data-ego-r1046]').first().click();await p.waitForTimeou
 await p.locator('#slotConfirmR73').click();await p.waitForFunction(()=>started&&!loading,null,{timeout:240000});await p.waitForTimeout(1500);
 await p.evaluate(()=>{for(let i=0;i<200&&storyScene;i++)advanceScene();if(modal)closePanel(true);});await p.waitForTimeout(1500);
 const g=await p.evaluate(()=>({hero:player.hero,form:window.__STORYWORLD_EGO_SOVEREIGN_R1046__.formActive()}));ok(g.form===true,'시작 뒤 EGO 형상',g);
+await p.waitForFunction(()=>window.__STORYWORLD_EGO_MOTION_R1048__.inspect().stats.feathers>0,null,{timeout:60000}).catch(()=>{});
+{const b=await p.evaluate(()=>window.__STORYWORLD_EGO_MOTION_R1048__.inspect().stats);ok(b.bursts>=1&&b.feathers>0&&b.errors===0,'EGO 형상 켜질 때 깃 버스트 한 번',b);}
 // 그림이 늦게 읽혀도 되도록 게임 시간으로 기다림
 await p.waitForFunction(()=>window.__STORYWORLD_EGO_MOTION_R1048__.inspect().stats.frames>20,null,{timeout:120000}).catch(()=>{});
 const m1=await p.evaluate(()=>window.__STORYWORLD_EGO_MOTION_R1048__.inspect());

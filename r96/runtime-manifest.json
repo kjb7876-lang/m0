@@ -8748,6 +8748,11 @@
       "sha256": "eb3fa62ddb4be7f7da8ff4248ad95f7d55f4bb0b2d26238abcc1d60cf060225f"
     },
     {
+      "path": "assets/r1048/fx/ego_feathers.webp",
+      "bytes": 103900,
+      "sha256": "15f22ffee96fafa6bac9e7fb594b5208334a4f0e3efeb3c0baa9a294c87d53e7"
+    },
+    {
       "path": "assets/r1048/fx/ego_slash.webp",
       "bytes": 38800,
       "sha256": "cdfb1db8997ea52007333262a00b735b602ef3f25e1c7830549686a89485857c"
@@ -52444,8 +52449,8 @@
     },
     {
       "path": "ego-motion-r1048.js",
-      "bytes": 14076,
-      "sha256": "b5a9ae3b4ee463fe6527bb17c0b0f6f313b8178bf74737e46e930f953546087e"
+      "bytes": 15383,
+      "sha256": "8a4f2584a8a9ad8bc19001e73cea48a5c67b760a2a34ffd1b45281ea8b039b69"
     },
     {
       "path": "ego-paint-r1039.js",
@@ -54148,8 +54153,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10829,
-  "totalBytes": 1311149428,
+  "fileCount": 10830,
+  "totalBytes": 1311254635,
   "webHTMLSha256": "835427af52515e62e4219ff6ed0fa9eda701f4927b9773b3452a8cbb25076382",
   "largest": [
     {
