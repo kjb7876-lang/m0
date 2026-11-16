@@ -33,7 +33,7 @@ function world(stored,opt={}){
  const docEl=mk('html'),body=mk('body'),panel=mk('section');panel.id='panel';docEl.appendChild(body);body.appendChild(panel);
  const document={documentElement:docEl,body,readyState:'complete',createElement:mk,getElementById:id=>docEl._all().find(e=>e.id===id)||null,addEventListener(){}};
  const localStorage={getItem:k=>{if(opt.throws)throw Error('denied');return store.has(k)?store.get(k):null;},setItem:(k,v)=>{if(opt.throws)throw Error('denied');store.set(k,String(v));},removeItem:k=>{if(opt.throws)throw Error('denied');store.delete(k);}};
- const ink={mode:opt.inkMode??'all',k:opt.inkK??1};
+ const ink={mode:opt.inkMode??'all',k:opt.inkK??1},ego={on:opt.ego??true},roomObj={id:'cult04',enemies:opt.persona?[{id:'inner-evil-rc133',persona:true,hp:100}]:[{id:'mob',hp:10}]};
  const calls={base:0};function Renderer(){}Renderer.prototype.render=function(frame){calls.base++;calls.last=frame;if(opt.baseThrows)throw Error('base boom');return 'drawn';};
  const inst=new Renderer();if(opt.instOwn!==false)inst.render=Renderer.prototype.render;
  const timers=[],ivals=[];
@@ -42,8 +42,9 @@ function world(stored,opt={}){
   StoryPhase1:{ThreeRenderer:Renderer},__STORYWORLD_PHASE1__:{controller:{state:{three:opt.lateInst?null:inst}}},
   showSettings(){panel.children=[];const s=mk('section');s.id='combatScreenR1021';panel.appendChild(s);const r=mk('div');r.id='inkRowR1055';s.appendChild(r);if(opt.charsRow!==false){const r2=mk('div');r2.id='inkCharsRowR1090';s.appendChild(r2);}return 'base';}};
  if(opt.noInk!==true)w.__STORYWORLD_INK_WASH_R1055__={prefs:()=>({mode:ink.mode,style:'jg'}),inspect:()=>({k:ink.k,prefs:{mode:ink.mode}})};
+ if(opt.noEgo!==true)w.__STORYWORLD_EGO_SOVEREIGN_R1046__={active:()=>{if(opt.egoThrows)throw Error('ego boom');return ego.on;}};if(opt.noRoom!==true)w.room=roomObj;
  w.window=w;w.globalThis=w;const ctx=vm.createContext(w);let err=null;try{vm.runInContext(src,ctx,{filename:NAME});}catch(e){err=e;}
- return {w,ctx,docEl,panel,store,err,ink,calls,inst,Renderer,api:w.__STORYWORLD_INK_FX_R1095__,flush(){for(let i=0;i<50&&timers.length;i++)timers.shift()();},tick(){ivals.forEach(f=>f());}};}
+ return {w,ctx,docEl,panel,store,err,ink,ego,roomObj,calls,inst,Renderer,api:w.__STORYWORLD_INK_FX_R1095__,flush(){for(let i=0;i<50&&timers.length;i++)timers.shift()();},tick(){ivals.forEach(f=>f());}};}
 const STYLE=o=>({globalAlpha:1,globalCompositeOperation:'lighter',fillStyle:'#080e16',strokeStyle:'#080e16',filter:'none',lineWidth:1,...o});
 let seq=0;
 const cmd=(kind,ownerKind,o={})=>({kind,key:o.key??'k'+(++seq),owner:{id:o.id??ownerKind+':1',kind:ownerKind,groundAligned:false,...(o.owner||{})},order:1,sourcePath:o.path===undefined?'r106fx:glow:255.198.72:214.222.234':o.path,spatialRole:null,style:STYLE(o.style)});
@@ -78,6 +79,7 @@ A.tick();
   ok('연지·주홍 are red-vermilion hues with real chroma',RED(q('yeonji').h)&&RED(q('juhong').h)&&q('yeonji').c>.55&&q('juhong').c>.6,[q('yeonji'),q('juhong')]);
   ok('주홍 is brighter than 연지',q('juhong').l>q('yeonji').l);
   ok('먹 is dark and nearly neutral, 백 is bright paper white',q('ink').l<.12&&q('ink').c<.45&&q('white').l>.85&&q('white').c<.12,[q('ink'),q('white')]);}}
+ok('reds match the persona thread constants (R1096): 70,14,10 · 132,30,22 · 204,52,40 · 255,176,140',['deep','yeonji','juhong','pale'].map(k=>(parse(api.palette[k]||'')||[]).slice(0,3).join()).join(' ')==='70,14,10 132,30,22 204,52,40 255,176,140',api.palette);
 // ---- ③ tone() ----
 {const T=s=>api.tone(s),Q=s=>{const p=parse(T(s));return p?{...hsv(p[0],p[1],p[2]),l:lum(p[0],p[1],p[2]),a:p[3]}:null;};
  for(const [name,css] of [['gold','rgba(255,198,72,1)'],['blue','#3aa0ff'],['purple','#9a4dff'],['green','rgb(60,220,120)'],['cyan','rgba(80,230,255,0.5)'],['pink','#ff6fae']]){
@@ -157,14 +159,15 @@ const tinted=c=>c.r1095===true;
  {const o=applyFilter(pre.style.filter,[60,140,255]),q=hsv(...o);ok('blue orb with an existing filter still lands on vermilion',RED(q.h),[pre.style.filter,Math.round(q.h)]);}
  ok('sheet with unknown colour (no canvas here) still gets a valid mild filter',tinted(sheet)&&filterOk(sheet.style.filter)&&!/hue-rotate/.test(sheet.style.filter),sheet.style.filter);
  const same=(c,i)=>!tinted(c)&&JSON.stringify(c.style)===snap[i];
- const keep=[['hazard image(예고 표시)',haz],['hazard fill(예고 표시)',hazFill],['hazard stroke(예고 표시)',hazStroke],['projectile stroke(탄 궤적)',proj],['projectile image',projImg],['damage text',text],['prop shadow',shadow],['enemy rank ring',rank],['enemy hex mark',hex],['enemy-side pxf',enemySide],['enemy story vfx',enemyType],['hero body',hero],['mob body',mob],['hero after-image',after],['R350 ghost',ghost],['EGO halo',ego1],['EGO back aura',ego2],['EGO slash sheet',ego3],['prop',prop],['contact shadow',contact]];
+ const keep=[['hazard image(예고 표시)',haz],['hazard fill(예고 표시)',hazFill],['hazard stroke(예고 표시)',hazStroke],['projectile stroke(탄 궤적)',proj],['projectile image',projImg],['damage text',text],['prop shadow',shadow],['enemy rank ring',rank],['enemy hex mark',hex],['enemy-side pxf',enemySide],['enemy story vfx',enemyType],['hero body',hero],['mob body',mob],['hero after-image',after],['R350 ghost',ghost],['prop',prop],['contact shadow',contact]];
  for(const [name,c] of keep)ok('untouched: '+name,same(c,list.indexOf(c)),c.style);
  {const p=parse(fill.style.fillStyle),q=p&&hsv(p[0],p[1],p[2]);ok('effect fill colour is remapped to vermilion, alpha kept',tinted(fill)&&!!p&&RED(q.h)&&p[3]===.5,fill.style.fillStyle);}
  {const p=parse(stroke.style.strokeStyle),q=p&&hsv(p[0],p[1],p[2]);ok('effect stroke colour is remapped to vermilion',tinted(stroke)&&!!p&&RED(q.h),stroke.style.strokeStyle);}
  {const g=gfill.style.fillStyle,st=g&&g.stops;const qs=(st||[]).map(s=>{const p=parse(s.color);return p?{...hsv(p[0],p[1],p[2]),l:lum(p[0],p[1],p[2]),a:p[3]}:null;});
   ok('gradient: new object, original stops untouched, same offsets',g!==grad&&grad.stops[1].color==='rgba(80,160,255,.6)'&&!!st&&st.length===3&&st.every((s,i)=>s.offset===grad.stops[i].offset)&&g.kind==='radial'&&g.args===grad.args||JSON.stringify(g.args)===JSON.stringify(grad.args),g);
   ok('gradient stops: white core stays white, blue → vermilion, dark tail → ink, alphas kept',qs.every(Boolean)&&qs[0].l>.85&&RED(qs[1].h)&&qs[1].a===.6&&qs[2].l<.3&&qs[2].a===0,qs);}
- ok('process() returns how many it changed',n===6,n);
+ ok('EGO 형상: EGO 전용 이펙트(후광·등 뒤 기운·검 궤적 시트)도 같은 팔레트',tinted(ego1)&&tinted(ego2)&&tinted(ego3)&&[ego1,ego2,ego3].every(c=>filterOk(c.style.filter)),[ego1,ego2,ego3].map(c=>c.style.filter));
+ ok('process() returns how many it changed',n===9,n);
  const f1=fx.style.filter,s1=fill.style.fillStyle;const n2=P.process(list);
  ok('second pass over the same commands changes nothing (두 번 붙이지 않음)',n2===0&&fx.style.filter===f1&&fill.style.fillStyle===s1,n2);
  ok('not an array → 0, no throw',P.process(null)===0&&P.process({})===0&&P.process(undefined)===0);}
@@ -179,6 +182,57 @@ const tinted=c=>c.r1095===true;
  const body='assets/r9999/some-new-mob-sheet.webp',f1=[cmd('image','enemy',{path:body,style:{globalCompositeOperation:'source-over'}})];P.process(f1);
  const later=cmd('image','effect',{id:'fx:99',path:'http://x/m0/'+body,style:{globalCompositeOperation:'source-over'}});P.process([later]);
  ok('untouched: a sheet that was drawn as a body in an earlier frame (나중 프레임의 잔상)',!tinted(later)&&later.style.filter==='none');}
+// ---- ⑤-2 적용 대상(사용자 2026-11-16 정정: 기존 영웅은 바꾸지 않는다. 히든 영웅 EGO 와 페르소나 보스만) ----
+{const H=world(undefined,{ego:false});H.tick();const P=H.api;
+ const gold=cmd('image','effect'),blue=cmd('image','effect',{path:'r106fx:orb:120.206.255:226.232.242'}),sheet=cmd('image','effect',{path:'assets/r302/fx/hwando/basic.webp',style:{globalCompositeOperation:'screen'}}),line=cmd('stroke','effect',{style:{strokeStyle:'#3aa0ff'}}),fillc=cmd('fill','effect',{style:{fillStyle:'rgba(80,230,255,0.5)'}});
+ // 보통 영웅에게도 'EGO 진입' 스킬·패시브 후광이 있다 → 이름에 ego 가 있어도 히든 영웅 형상이 아니면 그대로
+ const egoSkill=cmd('image','effect',{path:'http://x/m0/assets/auras-r62/ego-halo.webp',owner:{id:'r62:passive-aura:hero:ego'}}),egoBack=cmd('image','effect',{owner:{id:'r111:ego-back'}});
+ const list=[gold,blue,sheet,line,fillc,egoSkill,egoBack],snap=list.map(c=>JSON.stringify(c.style));const n=P.process(list);
+ ok('ordinary hero (EGO 형상 아님): no effect is recoloured (기존 영웅은 원래 색)',n===0&&list.every((c,i)=>!tinted(c)&&JSON.stringify(c.style)===snap[i]),[n,list.filter(tinted).map(c=>c.sourcePath||c.owner.id)]);
+ ok('inspect() reports the scope (ego false, persona false)',P.inspect().ego===false&&P.inspect().persona===false,P.inspect());
+ H.ego.on=true;H.tick();const g2=cmd('image','effect');ok('entering the EGO form mid-game switches it on without reload',P.process([g2])===1&&tinted(g2)&&P.inspect().ego===true);
+ H.ego.on=false;H.tick();const g3=cmd('image','effect');ok('leaving the EGO form switches it off again',P.process([g3])===0&&!tinted(g3));
+ const N=world(undefined,{noEgo:true});N.tick();const g4=cmd('image','effect');ok('no EGO module at all → ordinary heroes untouched, no throw',!N.err&&N.api.process([g4])===0&&!tinted(g4));
+ const T=world(undefined,{egoThrows:true});T.tick();const g5=cmd('image','effect');ok('EGO module that throws → treated as not EGO, no throw',!T.err&&T.api.process([g5])===0&&!tinted(g5));
+ const NR=world(undefined,{ego:false,noRoom:true});NR.tick();ok('no room yet (첫 화면) → no throw, persona false',!NR.err&&NR.api.inspect().persona===false&&NR.api.inspect().errors===0,NR.api.inspect());}
+// 페르소나 보스: 그 보스의 기술 그림(assets/rc134/persona-skills, rc133)만, 영웅이 누구든
+{const W=world(undefined,{ego:false,persona:true});W.tick();const P=W.api;
+ const orb=cmd('image','effect',{path:'http://x/m0/assets/rc134/persona-skills/small-orb.png',owner:{id:'fx:31'},style:{globalCompositeOperation:'source-over'}});
+ const eye=cmd('image','projectile',{path:'assets/rc134/persona-skills/eye.png',owner:{id:'shot:7'},style:{globalCompositeOperation:'source-over'}});
+ const src=cmd('image','effect',{path:'assets/persona-skills-source/persona-skills-atlas-1.png',owner:{id:'fx:32'}});
+ const body=cmd('image','enemy',{path:'assets/rc133/art/base-s.png',owner:{id:'cult04:inner-evil-rc133',persona:true},style:{globalCompositeOperation:'source-over'}});
+ const haz=cmd('image','hazard',{path:'assets/rc134/persona-skills/clock.png',owner:{id:'r62:field:9'}}),hazFill=cmd('fill','hazard',{style:{fillStyle:'rgba(209,40,53,.4)'}});
+ const heroFx=cmd('image','effect'),heroLine=cmd('stroke','effect',{style:{strokeStyle:'#3aa0ff'}});
+ const list=[orb,eye,src,body,haz,hazFill,heroFx,heroLine],snap=list.map(c=>JSON.stringify(c.style));const n=P.process(list);
+ ok('persona boss skill sheets are recoloured (effect and projectile images under rc134/persona-skills)',tinted(orb)&&tinted(eye)&&tinted(src)&&[orb,eye,src].every(c=>filterOk(c.style.filter)),[orb,eye,src].map(c=>c.style.filter));
+ ok('persona: body·예고 표시(hazard)·영웅 이펙트 stay as they are',[body,haz,hazFill,heroFx,heroLine].every(c=>!tinted(c)&&JSON.stringify(c.style)===snap[list.indexOf(c)])&&n===3,n);
+ ok('inspect() reports persona true while the boss is alive',P.inspect().persona===true);
+ P.register(/small-orb/,'red',{hue:270,chroma:.8,lum:.4});const o2=cmd('image','effect',{path:'assets/rc134/persona-skills/small-orb.png',style:{globalCompositeOperation:'source-over'}});P.process([o2]);
+ ok('register() tells the palette a persona sheet\'s hue → vermilion family',tinted(o2)&&RED(hsv(...applyFilter(o2.style.filter,[140,60,230])).h),o2.style.filter);
+ // 보스가 없는 방에서도 그 그림이 쓰이면(히든 영웅이 페르소나 기술을 빌려 쓸 때) 같은 팔레트
+ const E=world(undefined,{ego:true});E.tick();const o3=cmd('image','effect',{path:'assets/rc134/persona-skills/diamond.png',style:{globalCompositeOperation:'source-over'}});E.api.process([o3]);ok('EGO 형상이 빌려 쓰는 페르소나 기술 그림도 같은 팔레트',tinted(o3));
+ const D=world(undefined,{ego:false});D.tick();const o4=cmd('image','effect',{path:'assets/rc134/persona-skills/diamond.png',style:{globalCompositeOperation:'source-over'}});D.api.process([o4]);ok('persona sheet path is enough on its own (보스 판정이 늦어도 색이 튀지 않게)',tinted(o4));}
+// 두 고유색(사용자 2026-11-16 02:36Z): 페르소나 보스·영웅 = 연지·주홍 단독, 히든 영웅 EGO = 연지·주홍 + 먹 + 백
+{const F=(r,g,b,mode,blend='source-over')=>{const q=hsv(r,g,b),f=api.filterFor({hue:q.h,chroma:q.c,lum:lum(r,g,b),blend,mode}),o=applyFilter(f,[r,g,b]);return {f,o:o.map(Math.round),...hsv(...o),l:lum(...o)};};
+ const cols=[[86,139,132],[129,144,131],[118,100,82],[150,90,220],[60,140,255],[255,198,72],[214,222,234],[100,27,37]];
+ const mono=cols.map(c=>F(...c,'mono')),mix3=cols.map(c=>F(...c,undefined));
+ ok("persona palette ('mono'): every coloured source, muddy or clean, lands on 연지·주홍 with real chroma (≥ .3)",mono.every(q=>filterOk(q.f)&&RED(q.h)&&q.c>=.3),mono.map(q=>[q.f,q.o]));
+ ok('persona palette never uses the ink-grey or white branches for coloured sources',mono.every(q=>!/grayscale/.test(q.f)&&q.f!=='saturate(.3)'));
+ ok('EGO palette (default) still mixes three: muddy → grey, dark smoke → ink, silver → white, gold → 주홍',mix3[0].c<.2&&mix3[2].c<.08&&mix3[6].c<.12&&RED(mix3[5].h)&&mix3[5].c>.5,mix3.map(q=>[q.f,q.o]));
+ const TM=s=>{const p=parse(api.tone(s,'mono'));return p?{...hsv(p[0],p[1],p[2]),l:lum(p[0],p[1],p[2]),a:p[3]}:null;};
+ const tm=['#568b84','#ffffff','#101010','#686c6c','rgba(214,222,234,.5)','#3aa0ff'].map(TM);
+ ok("tone(css,'mono'): grey·white·black·muddy all become 연지·주홍 shades (hue red, chroma ≥ .25), alpha kept",tm.every(q=>!!q&&RED(q.h)&&q.c>=.25)&&tm[4].a===.5,tm);
+ ok("tone(css,'mono') keeps the brightness order (black < grey < white)",tm[2].l<tm[3].l&&tm[3].l<tm[1].l,[tm[2].l,tm[3].l,tm[1].l]);
+ ok("tone(css) without a mode is unchanged by the mono cache (white stays white)",(()=>{const p=parse(api.tone('#ffffff'));return hsv(p[0],p[1],p[2]).c<.12;})());
+ ok("tone('transparent','mono') and junk come back unchanged",api.tone('transparent','mono')==='transparent'&&api.tone(null,'mono')===null);
+ // 실제 명령: 페르소나 그림은 mono, 같은 색의 EGO 형상 이펙트는 세 가지 색
+ const W=world(undefined,{ego:true,persona:true});W.tick();const P=W.api;P.register(/persona-skills\/teal/,'red',{hue:172,chroma:.38,lum:.5});
+ const pe=cmd('image','effect',{path:'assets/rc134/persona-skills/teal.png',style:{globalCompositeOperation:'source-over'}}),eg=cmd('image','effect',{path:'r106fx:orb:86.139.132:226.232.242'});
+ const pl=cmd('stroke','effect',{owner:{id:'rc134:persona:ring'},style:{strokeStyle:'#d6deea'}}),el=cmd('stroke','effect',{style:{strokeStyle:'#d6deea'}});P.process([pe,eg,pl,el]);
+ const qp=hsv(...applyFilter(pe.style.filter,[86,139,132])),qe=hsv(...applyFilter(eg.style.filter,[86,139,132]));
+ ok('same muddy teal: persona sheet → 연지·주홍, EGO effect → grey',RED(qp.h)&&qp.c>=.3&&qe.c<.2,[pe.style.filter,eg.style.filter]);
+ const lp=hsv(...parse(pl.style.strokeStyle)),le=hsv(...parse(el.style.strokeStyle));
+ ok('same silver line: persona-owned (id 에 persona) → 연지빛, EGO → 백',tinted(pl)&&RED(lp.h)&&lp.c>=.25&&le.c<.12,[pl.style.strokeStyle,el.style.strokeStyle]);}
 // ---- ⑥ 켜고 끄기 ----
 {const D=world();D.tick();ok('default: on and active when the map ink wash is live',D.api.enabled()===true&&D.api.active()===true,D.api.inspect());
  const off=world('0');off.tick();const c=cmd('image','effect');ok("stored '0': off, effect keeps its original colour",off.api.enabled()===false&&off.api.active()===false&&off.api.process([c])===0&&c.style.filter==='none'&&!tinted(c));

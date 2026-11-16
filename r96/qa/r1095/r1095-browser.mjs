@@ -1,4 +1,4 @@
-// R1095 헤드리스 확인: 이펙트 수묵 색이 실제 렌더러 명령과 화면 색에 닿는지, 끄면 원래 색으로 돌아오는지, 예고 표시·적 표식은 그대로인지.
+// R1095 헤드리스 확인: 히든 영웅 EGO 형상(777)의 이펙트 수묵 색이 실제 렌더러 명령과 화면 색에 닿는지, 보통 영웅은 그대로인지, 끄면 원래 색으로 돌아오는지, 예고 표시·적 표식은 그대로인지.
 // 실행: node r1095-browser.mjs <out dir>  (SW_URL 기본 http://127.0.0.1:4410/m0/, SW_ZONES 기본 dist02, SW_HERO 로 무한 생존 영웅 지정 가능). 헤드리스 소프트웨어 렌더링이라 GPU·실기기 확인이 아니다.
 import {chromium,boot,go,skip} from '../r444/lib.mjs';import fs from 'node:fs';
 const out=process.argv[2]||'.';fs.mkdirSync(out,{recursive:true});let n=0,bad=0;
@@ -20,7 +20,6 @@ const census=()=>p.evaluate(async()=>{const three=window.__STORYWORLD_PHASE1__.c
   if(c.kind==='text'){if(t)o.textT++;continue;}
   if(c.owner.r329Shadow){if(t)o.shadowT++;continue;}
   if(c.owner.enemy===true||c.owner.r434||/(?:^|[^a-z])(?:boss|hex|rank|nav)(?:[^a-z]|$)/i.test(id)){if(t)o.signalT++;continue;}
-  if(/(?:^|[^a-z])ego(?:[^a-z]|$)/i.test(id+' '+String(c.sourcePath||''))){if(t)o.egoT++;continue;}
   o.fx++;if(t){o.fxT++;if(c.kind==='image'){const f=String(c.style.filter);o.filters[f]=(o.filters[f]||0)+1;if(!known.test(f)&&o.bad.length<4)o.bad.push(f);}}}
  return o;});
 // 화면 화소: 두 장면에서 달라진 화소만 모아 켬 쪽의 색상을 잰다
@@ -38,6 +37,10 @@ for(const z of (process.env.SW_ZONES||'dist02').split(',')){
  if(hero){await p.evaluate(h=>window.__STORYWORLD_SURVIVAL_R600__.start(h),hero);await p.waitForFunction(()=>!loading,null,{timeout:150000});await skip(p);}else await go(p,z);
  const tag=hero?hero:z;
  ok(tag+': module active (맵 수묵화풍 켜짐을 따라감)',(await I()).active===true,await I());
+ // 히든 영웅 EGO 형상으로 바꾼다(777 은 환도 99레벨일 뿐 EGO 형상이 아니다). 그 전에는 환도라서 아무것도 안 바뀌어야 한다.
+ {const pre=await census();ok(tag+': before the EGO form (환도) nothing is recoloured',!!pre&&pre.fxT===0&&(await I()).ego===false,pre&&{fx:pre.fx,fxT:pre.fxT});}
+ const formed=await p.evaluate(()=>{const E=window.__STORYWORLD_EGO_SOVEREIGN_R1046__;try{E.unlock();}catch(_){}return {set:E.setForm(true),active:E.active()};});await p.waitForTimeout(1200);
+ ok(tag+': hidden hero EGO form is on → EGO scope on',formed.active===true&&(await I()).ego===true,formed);
  // 스킬을 눌러 이펙트가 여럿 떠 있는 순간을 잡는다
  let a=null;const keys=['q','w','e','r','a','s','d','f','Space'];
  for(let t=0;t<14;t++){await p.evaluate(()=>{window.__SLOW=1;});
@@ -47,7 +50,7 @@ for(const z of (process.env.SW_ZONES||'dist02').split(',')){
  ok(tag+': effect commands found and tinted',!!a&&a.fx>=10&&a.fxT>=10,a&&{fx:a.fx,fxT:a.fxT});
  ok(tag+': nearly every eligible effect command is tinted (재기 예산으로 한두 장 늦을 수 있음)',!!a&&a.fxT/Math.max(1,a.fx)>=.7,a&&{fx:a.fx,fxT:a.fxT});
  ok(tag+': only filter kinds the Three recorder knows',!!a&&a.bad.length===0,a&&a.bad);
- ok(tag+': hazards·projectiles·bodies·text·shadows·enemy signals·EGO untouched',!!a&&a.hazardT+a.projT+a.bodyT+a.textT+a.shadowT+a.signalT+a.egoT===0,a&&{hazard:a.hazard,hazardT:a.hazardT,projT:a.projT,bodyT:a.bodyT,textT:a.textT,shadowT:a.shadowT,signalT:a.signalT,egoT:a.egoT});
+ ok(tag+': hazards·projectiles·bodies·text·shadows·enemy signals untouched',!!a&&a.hazardT+a.projT+a.bodyT+a.textT+a.shadowT+a.signalT===0,a&&{hazard:a.hazard,hazardT:a.hazardT,projT:a.projT,bodyT:a.bodyT,textT:a.textT,shadowT:a.shadowT,signalT:a.signalT,egoT:a.egoT});
  console.log(tag,'filters',JSON.stringify(a&&a.filters));
  const on=await p.locator('#game').screenshot();await p.screenshot({path:`${out}/${tag}-on.png`});
  await p.evaluate(()=>window.__STORYWORLD_INK_FX_R1095__.set(false));await p.waitForTimeout(900);
@@ -64,5 +67,19 @@ for(const z of (process.env.SW_ZONES||'dist02').split(',')){
  await p.evaluate(()=>window.__STORYWORLD_INK_WASH_R1055__.set({mode:'all'}));await p.waitForTimeout(1300);
  ok(tag+': map ink wash back on → active again',(await I()).active===true);
  await p.evaluate(()=>{window.__SLOW=1;});}
+// 보통 영웅(777 없이 새 창): 이펙트가 하나도 바뀌지 않아야 한다(사용자 2026-11-16 정정)
+{const ctx2=await b.newContext({viewport:{width:960,height:540},deviceScaleFactor:1});await ctx2.addInitScript(()=>{localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false}));});
+ const q=await ctx2.newPage();q.on('pageerror',e=>errs.push(String(e).slice(0,200)));await q.goto(process.env.SW_URL||'http://127.0.0.1:4410/m0/');await q.locator('#campaignNew54').click({timeout:180000});await q.locator('#slotConfirmR73').click();
+ await q.waitForFunction(()=>started&&!loading,null,{timeout:240000});await q.evaluate(()=>{for(let i=0;i<160&&storyScene;i++)advanceScene();if(modal)closePanel(true);});
+ for(const h of (process.env.SW_PLAIN||'neon').split(',')){
+  await q.evaluate(h=>window.__STORYWORLD_SURVIVAL_R600__.start(h),h);await q.waitForTimeout(3000);await q.waitForFunction(()=>!loading,null,{timeout:150000});await q.evaluate(()=>{for(let i=0;i<160&&storyScene;i++)advanceScene();if(modal)closePanel(true);});
+  let seen=0,tint=0;const st=await q.evaluate(()=>window.__STORYWORLD_INK_FX_R1095__.inspect());
+  for(let t=0;t<8;t++){for(const k of ['a','s','d','q','f']){await q.keyboard.down(k);await q.waitForTimeout(140);await q.keyboard.up(k);}
+   const r=await q.evaluate(async()=>{const three=window.__STORYWORLD_PHASE1__.controller.state.three,base=three.render;let refs=null;three.render=function(f){if(!refs&&f?.commands?.length)refs=f.commands.slice();return base.apply(this,arguments);};for(let i=0;i<80&&!refs;i++)await new Promise(r=>setTimeout(r,100));three.render=base;let fx=0,t=0;for(const c of refs||[]){if(c.owner?.kind==='effect'&&c.kind==='image'&&!c.owner.r329Shadow)fx++;if(c.r1095)t++;}return {fx,t};});
+   seen=Math.max(seen,r.fx);tint+=r.t;if(seen>=12&&t>=3)break;}
+  ok(h+' (보통 영웅): module is live but the EGO scope is off',st.active===true&&st.ego===false,{active:st.active,ego:st.ego});
+  ok(h+' (보통 영웅): effects are on screen and none is recoloured',seen>=8&&tint===0,{seen,tint});
+  if(process.env.SW_SHOT)await q.screenshot({path:`${out}/${h}-plain.png`});}
+ await ctx2.close();}
 const fin=await I();ok('no module errors',fin.errors===0,fin);ok('no page errors',errs.length===0,errs.slice(0,3));
 console.log(JSON.stringify({total:n,failed:bad,method:'headless chromium, software rendering'}));await b.close();process.exit(bad?1:0);

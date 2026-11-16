@@ -52759,8 +52759,8 @@
     },
     {
       "path": "fx-ink-r1095.js",
-      "bytes": 19632,
-      "sha256": "ee5eb63c08f67d1901903d7c882fbb2a9062da7fa521dfa9b48c51e58d582111"
+      "bytes": 22420,
+      "sha256": "40b62e7392b977ffe2ba7f31213b7071143aaca5c0e38dc5fbc5228b61e14ce4"
     },
     {
       "path": "fx-more-r438.js",
@@ -54359,7 +54359,7 @@
     }
   ],
   "fileCount": 10871,
-  "totalBytes": 1318106958,
+  "totalBytes": 1318109746,
   "webHTMLSha256": "216ee8bb1ab321291bffcc85b8ac3e13acc6cb3df0d1c33697b7e4e7af6b7c74",
   "largest": [
     {
