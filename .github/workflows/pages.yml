@@ -544,6 +544,8 @@ jobs:
         run: node r96/qa/r1047/reach-bounds-cpu-check.cjs
       - name: R1096 hidden persona mirror-celestial patterns (telegraphed crimson push orb, abyss pull well, eclipse beam; probabilistic) CPU check
         run: node r96/qa/r1096/persona-gravity-cpu-check.cjs
+      - name: R1107 persona mirror-celestial Dots sheets (CX-0118PM PM-1 red star, PM-3 eclipse charge/bolt, no tint, fallback to temporary art) CPU check
+        run: node r96/qa/r1107/mirror-sheets-cpu-check.cjs
       - name: R945 hwando ink passives (piercing ink crescent, seven ink clones for 7 s, three-hero ink finale, per-body state) CPU check
         run: node r96/qa/r945/r945-cpu-check.cjs
       - name: R1034 hwando W seven-direction clones restored + ink clone action circles CPU check

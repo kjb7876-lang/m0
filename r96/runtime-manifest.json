@@ -10228,6 +10228,16 @@
       "sha256": "b11281f4436de3bd35e03642774148ef26d77966c7ac70dd50e045a14f9cc77d"
     },
     {
+      "path": "assets/r1107/persona-eclipse.webp",
+      "bytes": 236350,
+      "sha256": "d25b2a60d40c9baba919ee1710499bb8c9d29cf7476eef8158f1ad18bf4b5175"
+    },
+    {
+      "path": "assets/r1107/persona-red-star.webp",
+      "bytes": 213042,
+      "sha256": "9edd6546bf1054be5f3b0ceac6d63c60f2b86f4ead4dfe5baf18458b0e7439b2"
+    },
+    {
       "path": "assets/r116/mobs/M001-hit.png",
       "bytes": 141513,
       "sha256": "35cffa3fe6d6c22cdb75e06e1cca55a673f06c10afa28087d749082c40c77b71"
@@ -53919,8 +53929,8 @@
     },
     {
       "path": "persona-gravity-r1096.js",
-      "bytes": 22346,
-      "sha256": "55e0793241ed55f9ece5a10dedfea016956944e455484abfa3f93a5291136ae7"
+      "bytes": 24659,
+      "sha256": "61966ffc4b79b8d834da26b8cd425461c2583301ba8b25dbddad6c2e0d5654d1"
     },
     {
       "path": "persona-ink-r1097.js",
@@ -54723,8 +54733,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10944,
-  "totalBytes": 1321607000,
+  "fileCount": 10946,
+  "totalBytes": 1322058705,
   "webHTMLSha256": "b812dede6693a6c427521204ecb36635268d6db620eec39be1aa2733dc399a16",
   "largest": [
     {
