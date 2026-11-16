@@ -610,6 +610,8 @@ jobs:
         run: node r96/qa/r1097/r1097-cpu-check.cjs
       - name: R1104 persona boss temporary code stride (upper body + crossing legs, distance-phased steps, after R1097 ink) CPU check
         run: node r96/qa/r1104/persona-stride-cpu-check.cjs
+      - name: R1098 samong faces (Michaela final boss uses her own sheet, R161 puppet repainted as an ink-and-white-thread doll so it no longer looks like Hwando) CPU check
+        run: node r96/qa/r1098/r1098-cpu-check.cjs
       - name: R1090 character ink tint (hero and mob body images only, follows the map ink wash, settings toggle, effects and telegraphs untouched) CPU check
         run: node r96/qa/r1090/r1090-cpu-check.cjs
       - name: R1095 effect ink palette (skill effects recoloured to rouge-vermilion, ink and white through one shared function, follows the map ink wash, telegraphs and enemy signals untouched) CPU check
