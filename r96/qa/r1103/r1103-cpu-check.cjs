@@ -52,7 +52,7 @@ const f42=(i,extra={})=>({id:'final42-r88:1:2:F'+i,kind:'hazard',x:1,y:2,groundA
 ok(!/hurt\s*=|hitEnemy\s*=|footprint154\s*=|\.damage\s*=|tick\s*=/.test(src),'no gameplay hooks');
 // 빌드 연결
 const html=fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8'),t=f=>html.indexOf('<script src="./'+f+'"></script>');
-ok(t(NAME)>0&&/<script src="\.\/persona-ink-r1097\.js"><\/script>\n<script src="\.\/warning-shapes-r1103\.js"><\/script>\n<script src="\.\/boot-lean-r1038\.js"><\/script>\n<script src="\.\/story-reader-r122\.js">/.test(html),'index.html tag after persona-ink-r1097, before boot-lean-r1038');
+{const tg=['persona-ink-r1097','warning-shapes-r1103','boot-lean-r1038','story-reader-r122'].map(n=>html.indexOf('<script src="./'+n+'.js"></script>'));/* 묶음 #711(사용자 2026-11-16 08:41Z "추천대로"): 사이에 R1104·R1106 태그가 끼므로 붙어 있는지가 아니라 순서만 본다 */ok(t(NAME)>0&&tg.every(i=>i>0)&&tg[0]<tg[1]&&tg[1]<tg[2]&&tg[2]<tg[3],'index.html tag after persona-ink-r1097, before boot-lean-r1038');}
 const man=JSON.parse(fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8')),inp=JSON.parse(fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8'));
 ok(JSON.stringify(man).includes(NAME)&&JSON.stringify(inp).includes(NAME),'runtime manifest/inputs');
 ok(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8').includes("'"+NAME+"'"),'verify-r96-public expects file');
