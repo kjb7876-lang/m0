@@ -54074,8 +54074,8 @@
     },
     {
       "path": "persona-hero-r1113.js",
-      "bytes": 19164,
-      "sha256": "13cf8db72047eded935da8daa6b970055b5424b929f2e195e90759479019f797"
+      "bytes": 22522,
+      "sha256": "97fd7a57a9defadd1d315580b347d23cf087cd3cb4ef5f6a569cdcfee3e32254"
     },
     {
       "path": "persona-ink-r1097.js",
@@ -54884,7 +54884,7 @@
     }
   ],
   "fileCount": 10976,
-  "totalBytes": 1323727456,
+  "totalBytes": 1323730814,
   "webHTMLSha256": "efb2e1d7bb2237ba8718c0524be4273b62fd44f183d969d2dac7d433ad435d63",
   "largest": [
     {

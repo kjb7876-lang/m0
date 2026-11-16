@@ -9,7 +9,7 @@ if(!fs.existsSync(FILE)){ok(false,'persona-hero-r1113.js 가 있음');console.lo
 const SRC=fs.readFileSync(FILE,'utf8');
 function world(o={}){
  const store=o.store||{},images=[];let seen=null;const proto={render(frame){seen=frame.commands.map(c=>({...c,points:c.points&&c.points.map(p=>[...p]),style:c.style&&{...c.style}}));}};
- const document={createElement:t=>({tagName:t,width:0,height:0,getContext:()=>({drawImage(){}})}),baseURI:'http://x/m0/',getElementById:()=>null,querySelector:()=>null,querySelectorAll:()=>[],addEventListener(){},head:{appendChild(){}}};
+ const document={createElement:t=>({tagName:t,width:0,height:0,getContext:()=>({drawImage(){},fillRect(){},createRadialGradient:()=>({addColorStop(){}})})}),baseURI:'http://x/m0/',getElementById:()=>null,querySelector:()=>null,querySelectorAll:()=>[],addEventListener(){},head:{appendChild(){}}};
  class Img{constructor(){images.push(this);}set src(v){this._src=v;}get src(){return this._src;}}
  const player={hero:'lauren',x:10,y:10,hp:100,direction:'front',attackAnim:0,skillAnim:0,ultimateAnim:0};
  const C={Math,Number,JSON,Object,Array,Map,Set,WeakMap,WeakSet,String,Error,URL,console,Date,time:0,player,room:{id:'cult04',persona:{phase:'fight'}},loading:false,storyScene:null,modal:false,started:true,
@@ -20,7 +20,7 @@ function world(o={}){
  if(o.cheat)C.__STORYWORLD_CHEAT777__={active:()=>true};
  C.window=C;vm.createContext(C);vm.runInContext(SRC,C);
  const load=()=>{for(const im of images)if(im._src&&!im._done&&im.onload){im._done=true;im.naturalWidth=/walk/.test(im._src)?4096:344;im.naturalHeight=/walk/.test(im._src)?512:400;im.onload();}};
- const body=()=>({kind:'image',owner:{id:'hero:2',kind:'hero'},sourcePath:'r409:outline:hero:u:http://x/m0/assets/r130/lauren/directions-lauren-front.webp:181,55,150,421:20',sourceRect:[0,0,192,463],style:{filter:'saturate(.5) contrast(1.08)'},points:[[480,240],[506,240],[506,301],[480,301]]});
+ const body=()=>({kind:'image',key:'hero:2:0',order:5,owner:{id:'hero:2',kind:'hero'},sourcePath:'r409:outline:hero:u:http://x/m0/assets/r130/lauren/directions-lauren-front.webp:181,55,150,421:20',sourceRect:[0,0,192,463],style:{filter:'saturate(.5) contrast(1.08)'},points:[[480,240],[506,240],[506,301],[480,301]]});
  const fx=()=>({kind:'image',owner:{id:'r101:aura-back:hero',kind:'effect'},sourcePath:'r106fx:glow:164.98.255:226.232.242',sourceRect:[0,0,128,128],style:{filter:'none'},points:[[0,0],[9,0],[9,9],[0,9]]});
  const skillFx=()=>({kind:'image',owner:{id:'fx:77',kind:'effect',pxfSide:'hero'},sourcePath:'assets/r946/x.webp',sourceRect:[0,0,192,192],style:{},points:[[0,0],[9,0],[9,9],[0,9]]});
  const enemy=()=>({kind:'image',owner:{id:'enemy:3',kind:'enemy'},sourcePath:'assets/x/mob.png',sourceRect:[0,0,100,100],style:{filter:'none'},points:[[0,0],[50,0],[50,50],[0,50]]});
@@ -73,6 +73,20 @@ const at=(c,u,v)=>{const P=c.points,W=c.sourceRect[2],H=c.sourceRect[3],a=u/W,b=
 {const w=world({cheat:true});const a=w.api();a.setForm(true);const mk=(id,src)=>({kind:'image',owner:{id,kind:'effect'},sourcePath:src,sourceRect:[0,0,9,9],style:{},points:[[0,0],[9,0],[9,9],[0,9]]});
  const out=w.frame([w.body(),mk('r102:1','assets/r100/sig-gather-violet.webp'),mk('r106d2s:1','r106fx:cross:164.98.255:226.232.242'),mk('r106d2s:2','r106fx:cross:90.200.120:226.232.242')]);
  const f=id=>out.find(c=>c.owner.id===id).style?.filter||'';ok(f('r102:1').includes(a.tint),'⑮ R102 영웅 이펙트 언주색');ok(f('r106d2s:1').includes(a.tint),'⑮ 라우렌 보라 r106fx 언주색');ok(!/hue-rotate/.test(f('r106d2s:2')),'⑮ 다른 색 이펙트는 그대로');}
+// ⑯ 공격·스킬(사용자 11-16): 새 시트 대신 걷기 칸 + 빨간 구슬 빛(뒤 오라는 몸 뒤) — 방향별 시트, 구슬 자리, 칸 흐름, 끝나면 원래대로
+{const w=world({cheat:true});const a=w.api();a.setForm(true);w.frame();w.load();w.frame();w.load();
+ const idx=(out,id)=>out.findIndex(c=>c.owner?.id===id);
+ for(const [d,k,fl] of [['front','front',false],['left','side',false],['right','side',true],['back','rear',false]]){w.player.direction=d;w.player.attackAnim=.3;w.step();const out=w.frame(),b=bodyOf(out);
+  const m=new RegExp('persona-walk-'+k+'\\.webp').test(b?.sourcePath||'');ok(m&&((b.points[1][0]<b.points[0][0])===fl),'⑯ 공격 '+d+' → 걷기 '+k+(fl?' 뒤집기':'')+' ('+(b&&b.sourcePath)+')');
+  const bi=out.indexOf(b),oi=idx(out,'r1113:orb'),ai=idx(out,'r1113:aura');ok(oi>bi&&ai>=0&&ai<bi,'⑯ '+d+' 구슬 빛은 몸 앞, 오라는 몸 뒤('+ai+'<'+bi+'<'+oi+')');
+  const o=out[oi],au=out[ai];ok(o&&au&&o.key!==b.key&&au.key!==b.key&&o.key!==au.key&&o.order>b.order&&au.order<b.order,'⑯ '+d+' 빛 명령은 몸과 다른 key·앞뒤 order(같은 key 면 렌더러가 몸 메시를 빼앗아 몸이 사라짐)');
+  ok(o&&o.style.globalCompositeOperation==='lighter'&&o.style.globalAlpha>0&&o.style.globalAlpha<=1,'⑯ '+d+' 구슬 빛 더하기 섞기');
+  if(o&&k!=='rear'){const f=+/:(\d)$/.exec(b.sourcePath)[1],O=a.orb[k][f],want=at(b,O[0],O[1]),c=[(o.points[0][0]+o.points[2][0])/2,(o.points[0][1]+o.points[2][1])/2];ok(Math.hypot(c[0]-want[0],c[1]-want[1])<1,'⑯ '+d+' 구슬 빛이 손의 구슬 자리에('+c.map(v=>v.toFixed(1))+' vs '+want.map(v=>v.toFixed(1))+')');}}
+ w.player.direction='front';const seen=new Set();for(let i=0;i<30;i++){w.player.attackAnim=.3;w.step();const b=bodyOf(w.frame());seen.add(b.sourcePath);}ok(seen.size>=5,'⑯ 공격 동안 칸이 흐름('+seen.size+'칸)');
+ w.player.attackAnim=0;w.step();let out=w.frame();ok(/rc133\/art\/base-0/.test(bodyOf(out).sourcePath)&&idx(out,'r1113:orb')<0&&idx(out,'r1113:aura')<0,'⑯ 공격이 끝나면 정지 그림, 빛 없음');
+ w.player.skillAnim=.4;w.step();out=w.frame();ok(/persona-walk-front/.test(bodyOf(out).sourcePath)&&idx(out,'r1113:orb')>=0,'⑯ 스킬도 걷기 칸 + 구슬 빛');w.player.skillAnim=0;
+ w.player.ultimateAnim=.5;w.step();out=w.frame();ok(/awake-0/.test(bodyOf(out).sourcePath)&&idx(out,'r1113:aura')>=0,'⑯ 궁극기는 각성형 + 오라');w.player.ultimateAnim=0;
+ a.setForm(false);w.player.attackAnim=.3;w.step();out=w.frame();ok(idx(out,'r1113:orb')<0,'⑯ 형상이 아니면 빛 없음');}
 // ⑪
 {const w=world({cheat:true});const a=w.api();a.setForm(true);const d=w.C.serializeSave();ok(d.player.personaHeroR1113===true,'⑪ 저장에 형상 기록');
  w.player.personaHeroR1113=false;(async()=>{await w.C.restoreSave(d);ok(w.player.personaHeroR1113===true,'⑪ 불러오면 형상 복원');
