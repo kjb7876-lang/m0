@@ -738,6 +738,8 @@ jobs:
         run: node r96/qa/r1048/r1048-cpu-check.cjs
       - name: R1094 hidden hero EGO collab kit (hwando + persona skills) and observe-discard 7 tiers CPU check
         run: node r96/qa/r1094/r1094-cpu-check.cjs
+      - name: R1100 EGO hidden hero guard (no hwando body, afterimage or cut-in while EGO form) CPU check
+        run: node r96/qa/r1100/r1100-cpu-check.cjs
       - name: R1092 story panel scene art (vertical-version scene paintings, ink-wash aware) CPU check
         run: node r96/qa/r1092/r1092-cpu-check.cjs
       - name: R1040 boss pattern frame fx CPU check
@@ -1043,6 +1045,8 @@ jobs:
         run: node r96/qa/r950/finale-cpu-check.cjs
       - name: Verify R1002 final boss Dots sheets
         run: node r96/qa/r1002/finale-fx-cpu-check.cjs
+      - name: R1099 hidden hero EGO ink painting (runtime ink-wash conversion of the EGO 3D body sheets, rouge + ink + white, 1.5x sharpened bake on PC, follows the map ink wash, settings toggle) CPU check
+        run: node r96/qa/r1099/r1099-cpu-check.cjs
       - name: R946 Lauren passive celestial resonance (repulse burst, red push orb, blue pull orb, violet piercing fusion, prop meteors; per-hero instance)
         run: node r96/qa/r946/r946-cpu-check.cjs
       - name: R940 read-only state snapshot for QA (events, first-hit-after-entry, boss kill time; no game writes) CPU check
