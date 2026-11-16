@@ -10323,6 +10323,16 @@
       "sha256": "9254627f6d6c53b2fd67dd31ffdec6da76b51f06e6924ac74e5ccf439fb2e925"
     },
     {
+      "path": "assets/r1101c/gunner/attack-ne9.webp",
+      "bytes": 75312,
+      "sha256": "47fd0c40506a1c8028bbaa34f9fdcd3f71fe06b672ea965f0ef24152ba3747f2"
+    },
+    {
+      "path": "assets/r1101c/gunner/attack-se9.webp",
+      "bytes": 78486,
+      "sha256": "300773a2c09e01b3c2f33ca0e8d8b4afba0047f08a7060df71d75db5b45555cf"
+    },
+    {
       "path": "assets/r1107/persona-eclipse.webp",
       "bytes": 236350,
       "sha256": "d25b2a60d40c9baba919ee1710499bb8c9d29cf7476eef8158f1ad18bf4b5175"
@@ -53264,8 +53274,8 @@
     },
     {
       "path": "gunner-aim-r991.js",
-      "bytes": 24226,
-      "sha256": "bb6a34f26aece942c8262eef294b102b0eef289f1a6f56be608ce3683bf6d11e"
+      "bytes": 25949,
+      "sha256": "3b65b8b3ced33cbeb7e865f798cddba72f22696f8982037a804212f56cbabdd4"
     },
     {
       "path": "gunner-arms-r561.js",
@@ -54853,8 +54863,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10970,
-  "totalBytes": 1322993346,
+  "fileCount": 10972,
+  "totalBytes": 1323148867,
   "webHTMLSha256": "565a149d866fe0f756e64ada5f23eca9ee16e77c1964e761aff5f4eb250bfa80",
   "largest": [
     {

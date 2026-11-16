@@ -29,7 +29,7 @@ ok(A.SHEETS.includes('se2')&&A.SHEETS.includes('ne2'),'대각 겨눔 칸 se2·ne
 const p=(deg)=>A.pick(deg*D);
 ok(p(26).sheet==='se2'&&!p(26).mirror&&p(154).sheet==='se2'&&p(154).mirror,'+26°·154° 조준 → se2(왼쪽은 반전)',[p(26),p(154)]);
 ok(p(-29).sheet==='ne2'&&!p(-29).mirror&&p(-151).sheet==='ne2'&&p(-151).mirror,'−29°·−151° 조준 → ne2',[p(-29),p(-151)]);
-ok(p(45).sheet==='se'&&p(-45).sheet==='ne','±45° 는 총 각도가 가까운 R143 se·ne 그대로',[p(45),p(-45)]);
+ok(['se','se3'].includes(p(45).sheet)&&['ne','ne3'].includes(p(-45).sheet),'±45° 는 총 각도가 가까운 칸(R1101c 이후 se3·ne3, 그 전 R143 se·ne)',[p(45),p(-45)]);
 ok(JSON.stringify(A.tip('se2',7))==='[155,111]'&&JSON.stringify(A.tip('ne2',3))==='[151,55]','총구 끝(Dots 값 배율 반영)');
 {const C=load({diag2:false}).A;ok(!C.SHEETS.includes('se2')&&!C.SHEETS.includes('ne2'),'diag2:false 면 예전 칸만');}
 // ③ R143 6칸 번호 → 8칸
