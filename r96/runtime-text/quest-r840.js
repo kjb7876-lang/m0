@@ -260,13 +260,14 @@ function tryUse(){const r=here();if(!visible(r))return false;const st=stOf(r),d=
 // ── 길잡이 ──
 let walk=null,nextNav=0,nextHit=0;
 function guideLive(){try{return autoRun()&&started&&!modal&&!loading&&!(typeof storyScene!=='undefined'&&storyScene)&&player&&player.hp>0;}catch(_){return false;}}
-function enemyNear(){try{const r=here();if(dream(r)){/* 사몽 탐색 구역에는 움직이지 않는 조형물 몹(R170 '세뇌당한 기억의 조각')과 떠도는 몹이 늘 있다(헤드리스 실측: S05-3 에서 9칸 안에 늘 적이 있어 곁일을 못 받았다) → 조형물 몹은 빼고, 움직이는 몹이 5칸 안일 때만 전투에 넘긴다. */
-   return (r.enemies||[]).some(e=>e&&e.hp>0&&!e.r170Tower&&!e.r170&&e.spawnState!=='hidden'&&(!e.boss||r.engaged)&&dist(player,e)<=5);}
+function enemyNear(reach){try{const r=here();if(dream(r)){/* 사몽 탐색 구역에는 움직이지 않는 조형물 몹(R170 '세뇌당한 기억의 조각')과 떠도는 몹이 늘 있다(헤드리스 실측: S05-3 에서 9칸 안에 늘 적이 있어 곁일을 못 받았다) → 조형물 몹은 빼고, 움직이는 몹이 5칸 안일 때만 전투에 넘긴다. */
+   return (r.enemies||[]).some(e=>e&&e.hp>0&&!e.r170Tower&&!e.r170&&e.spawnState!=='hidden'&&(!e.boss||r.engaged)&&dist(player,e)<=(reach||5));}
   return typeof nearestEnemy==='function'&&!!nearestEnemy(9);}catch(_){return false;}}
 function pathTo(pt){try{const r=window.__STORYWORLD_POLISH_R100__?.navPath?.(player,pt);return Array.isArray(r)&&r.length>1?r:null;}catch(e){fail(e);return null;}}
 function guideStepR840(late){/* R1093: late 는 사몽 문이 열린 뒤·본편 맵(ep1a08) 안쪽에서도 곁일로 되돌아간다(퀘스트 관문). R1060: late = 단서를 모아야 보스 문이 열리는 지역(불면귀)에서 문 단계까지 곁일을 안 받았을 때 — 그때만 '들머리로 되돌아가지 않음'을 건너뛴다 */const r=here();if(!visible(r))return false;const st=stOf(r),d=defOf(r);if(st==='done')return false;if(st==='on'&&d.quest.type==='kill'&&!late)return false;
  const ph=phaseOf(r);if(ph==='boss'||ph==='doorStory'||r.engaged)return false;if(dream(r)){if(r.samongR103?.bossUp&&!(late&&r.samongR103?.portal))return false;/* 대면이 시작된 뒤에는 곁일로 되돌리지 않는다 */if(r.samongR103?.portal&&st==='new'&&!late){const e=r.exploration?.entry;if(!e||dist(player,e)>16)return false;}/* 다음 문이 열린 뒤: 받은 곁일은 마저 하고, 아직 안 받은 것은 들머리 가까이일 때만(미로 구역은 문이 처음부터 열려 있다 — R842) */}else if(d.free){const e=r.exploration?.entry;if(st==='new'&&!late&&e&&dist(player,e)>16)return false;/* 이미 안쪽까지 간 뒤 켠 길잡이는 들머리로 되돌아가지 않는다 */}else if(st==='new'&&ph!=='route'&&!late)return false;/* 뒤늦게 켠 길잡이는 들머리로 되돌아가지 않는다 */
- if(enemyNear()){walk=null;return false;}ensure(r);
+ /* R1093: 사몽 문이 열린 뒤(late)엔 문 길잡이(R103)가 CALM 밖 적을 두고 문으로 가 버려 곁일 걸음과 번갈아 멈췄다 → CALM 안 적만 전투에 넘기고, 정체 시계는 이어 잰다 */
+ if(enemyNear(late&&dream(r)&&r.samongR103?.portal?(window.__STORYWORLD_GUIDE_CLEAR_R426__?.CALM??2.5):0)){if(!late)walk=null;return false;}ensure(r);
  if(st==='on'&&d.quest.type==='kill'){/* R1093 late: 관문 앞에서 처치 곁일이 남았으면 남은 대상 쪽으로 걷는다(가까워지면 싸움은 원래 길잡이). 길이 없거나 정체면 손을 뗀다(R1093 안전판) */
   const es=matching(r).filter(aliveOf);if(!es.length)return false;const kt=es.reduce((a,b)=>dist(player,b)<dist(player,a)?b:a),kd=dist(player,kt);if(kd<=4){walk=null;return false;}
   if(!walk||walk.id!==kt.id)walk={id:kt.id,best:kd,bestAt:T(),tries:0};if(kd<walk.best-.3){walk.best=kd;walk.bestAt=T();}if(T()-walk.bestAt>STALL){walk=null;return false;}

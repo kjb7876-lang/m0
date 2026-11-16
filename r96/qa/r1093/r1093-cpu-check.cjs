@@ -23,6 +23,7 @@ ok(/portal&&st==='new'&&!late/.test(q840),'R840 late step: samong portal open + 
 ok(/d\.free\)\{const e=r\.exploration\?\.entry;if\(st==='new'&&!late&&/.test(q840),'R840 late step: free map (ep1a08) → still walks back');
 ok(/const visible=\(r=here\(\)\)=>applies\(r\)&&\(stOf\(r\)!=='new'\|\|!doneFor\(r\)\)/.test(q840)&&/if\(!dream\(r\)\)return zoneDone\(r\)/.test(q840),'R840: samong zone finished during this visit keeps an untaken quest visible (portal gate stays solvable); story zones unchanged');
 ok(/st==='on'&&d\.quest\.type==='kill'&&!late\)return false/.test(q840)&&/R1093 late: 관문 앞에서 처치 곁일이 남았으면/.test(q840),'R840 late step: kill quest on → walks toward remaining targets (guide not stuck at gate)');
+ok(/enemyNear\(late&&dream\(r\)&&r\.samongR103\?\.portal\?/.test(q840)&&/if\(!late\)walk=null;return false;/.test(q840),'R840 late step at open samong portal: hands to combat only for enemies within R426 CALM and keeps stall timer (no ping-pong with portal guide)');
 ok(read('runtime-text/quest-r840.js')===q840,'R840 runtime copy matches');
 
 // 모든 퀘스트 지역 정의가 깰 수 있는 모양인가(정적): 부탁 종류·단서·처치 조건
