@@ -9688,6 +9688,11 @@
       "sha256": "c77e4b7894d2b4690e78b1b5db9a6cb5801d4fba14d5d4af8a60f16ebe79a550"
     },
     {
+      "path": "assets/r1065/mobs/at-03-biomech-nightmare-attack.webp",
+      "bytes": 74548,
+      "sha256": "4b1c06d3810ab1f88124e54393f2e2db5618b8cfc141714eca35095a453a2cb2"
+    },
+    {
       "path": "assets/r1065/mobs/ma-02-red-heel-blade-attack.webp",
       "bytes": 85036,
       "sha256": "2e5b72b10db8469f917b41570f046d094808ada89089fb6754de507e5a160dd1"
@@ -9721,6 +9726,16 @@
       "path": "assets/r1065/mobs/ma-10-clockwork-collector-attack.webp",
       "bytes": 49820,
       "sha256": "cd04b492c5c1b4270245947e10032946ced2d9743f1443e1a18dac7da5a1bc75"
+    },
+    {
+      "path": "assets/r1065/mobs/ra-01-black-rose-blindfold-aim.webp",
+      "bytes": 51260,
+      "sha256": "16f1899c0de84ea80eff33b9eff749d19fa5b99457dc50c50aef3535c23eeed5"
+    },
+    {
+      "path": "assets/r1065/mobs/ra-03-cult-mech-legs-aim.webp",
+      "bytes": 42492,
+      "sha256": "1db75f497dc46a686ebab6d3f81912c951a6cba8cbe78c561d3ba87784e43300"
     },
     {
       "path": "assets/r107/fx/iai-burst.webp",
@@ -53574,8 +53589,8 @@
     },
     {
       "path": "mob-attack-dots-r1065.js",
-      "bytes": 8178,
-      "sha256": "849da18c6643f5492d8daba3cd6b89ed53566e27e6685c3044497d92d6b6dac0"
+      "bytes": 10574,
+      "sha256": "b0e7cb4a21b7d788e802893c42473223ec0c906e0bf6c3da8534d4fa8051424d"
     },
     {
       "path": "mob-death-r188.js",
@@ -53679,8 +53694,8 @@
     },
     {
       "path": "mob-unique-r248.js",
-      "bytes": 17833,
-      "sha256": "8da08db533e9e7915dffc7ec19651fe94e07adcca7666d6637de68cf821ac0a3"
+      "bytes": 18188,
+      "sha256": "1e7d7dff21aa7c73b46d06de8eaea1a110e833d19772a223b9061693b0c347cb"
     },
     {
       "path": "mobile-bonus-r286.js",
@@ -54708,8 +54723,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10941,
-  "totalBytes": 1321558035,
+  "fileCount": 10944,
+  "totalBytes": 1321729086,
   "webHTMLSha256": "1d753026f1018f0fa517461d37c048161d19d545a2c2dba87a0b88549f745194",
   "largest": [
     {

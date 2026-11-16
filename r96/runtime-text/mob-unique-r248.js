@@ -54,10 +54,11 @@ function drawOwn(e,s,im){const dead=e.hp<=0||e.spawnState==='dead',age=T()-(Numb
  if(Math.hypot(dx,dy)>.002){m.moving=T()+.25;const sx=dx-dy;if(hd<8){if(Math.abs(sdH)>.05)m.face=sdH<0?-1:1;}else if(Math.abs(sx)>.001)m.face=sx<0?-1:1;}else if(hd<1e9){if(Math.abs(sdH)>.05&&(T()>m.moving||hd<8))m.face=sdH<0?-1:1;}
  m.x=e.x;m.y=e.y;let fr=attackFrame(e);if(fr>=0&&Number.isFinite(e.attack?.angle)){const sd=Math.cos(e.attack.angle)-Math.sin(e.attack.angle);if(Math.abs(sd)>.05)m.face=sd<0?-1:1;}
  {const r444=window.__STORYWORLD_ENEMY_FACE_R444__?.left?.(e);if(typeof r444==='boolean')m.face=r444?-1:1;}/* R444: 좌우는 enemy-face-r444 한 곳에서(공격 판정 각·충돌 뒤 실제 걸음·영웅 쪽) — 꺼지면 위 R259 규칙 */
+ /* R1065c: 원거리 조준(rangedWindup) 동안 Dots 조준 시트(CX-0116RA)가 있으면 그 칸으로 */let A=null;if(fr<0&&e.rangedWindup>0&&!e.attack){try{A=window.__STORYWORLD_MOB_ATTACK_DOTS_R1065__?.aimR248?.(e,s.path)||null;}catch(_){A=null;}}
  if(fr<0)fr=T()<m.moving?Math.floor(T()*FPS+m.seed)%8:Math.floor(T()*2+m.seed)%2;
  const sx0=(fr%4)*CW,sy0=Math.floor(fr/4)*CH;
  ctx.save();try{ctx.globalAlpha*=dead?Math.max(0,1-age/.8):1;ctx.filter=e.flash>0?'brightness(1.8) saturate(.5)':'saturate(.78) brightness(.86) contrast(1.08)';/* 칠한 배경과 덜 튀게 */
-  ctx.translate(q.x,q.y-lift);ctx.scale(m.face*k,k);ctx.drawImage(im,sx0,sy0,CW,CH,-PX,-PY,CW,CH);}finally{ctx.restore();}stats.draws++;}
+  ctx.translate(q.x,q.y-lift);if(A){ctx.scale(m.face*k*A.r,k*A.r);ctx.drawImage(A.img,A.sx,A.sy,A.w,A.h,A.dx,A.dy,A.w,A.h);}else{ctx.scale(m.face*k,k);ctx.drawImage(im,sx0,sy0,CW,CH,-PX,-PY,CW,CH);}}finally{ctx.restore();}stats.draws++;}
 if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){let s=null,im=null;
  try{if(prefs.on&&solo()&&e&&!e.r170Tower&&!e.r251Circle&&e.visible!==false&&e.disabled!==true&&!['hidden','inactive','disabled','despawned'].includes(e.spawnState)){/* R346: 엔진 drawEnemy 처럼 아직 등장하지 않은 몹(2차 웨이브 등)은 그리지 않는다 — 깨어나기 전부터 서서 좌우만 뒤집히던 것 */s=sheetOf(e);if(s&&(window.__STORYWORLD_MOB_DOTS_R374__?.assign?.(e)||window.__STORYWORLD_MOB_DOTS_R375__?.assign?.(e)||window.__STORYWORLD_APPROVED_MOBS_R380__?.assign?.(e)))s=null;if(s&&window.__STORYWORLD_VILLAGERS_R763__?.kindFor?.(e))s=null;/* R763: 불면귀에 잠식된 주민도 frameFor 사슬로(공격 효과는 그대로) *//* R374: Dots 승인 그림을 받은 액터는 엔진 frameFor 사슬로 그린다 */if(s){im=image(s.path);if(!im)stats.waits++;}}}catch(err){fail(err);im=null;}
  if(!im)return base.apply(this,[e,...a]);
