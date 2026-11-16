@@ -738,6 +738,8 @@ jobs:
         run: node r96/qa/r1048/r1048-cpu-check.cjs
       - name: R1094 hidden hero EGO collab kit (hwando + persona skills) and observe-discard 7 tiers CPU check
         run: node r96/qa/r1094/r1094-cpu-check.cjs
+      - name: R1100 EGO hidden hero guard (no hwando body, afterimage or cut-in while EGO form) CPU check
+        run: node r96/qa/r1100/r1100-cpu-check.cjs
       - name: R1092 story panel scene art (vertical-version scene paintings, ink-wash aware) CPU check
         run: node r96/qa/r1092/r1092-cpu-check.cjs
       - name: R1040 boss pattern frame fx CPU check
