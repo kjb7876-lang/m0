@@ -45,8 +45,8 @@ const FF=c=>c.__STORYWORLD_STORY_COMBAT_R54__.frameFor;const API=c=>c.__STORYWOR
  c.__STORYWORLD_STORY_COMBAT_R54__=Object.freeze({...S,frameFor:(x,f)=>({...heel,r999:true})});ok(FF(c)(e,null).r999,'other wrapper outside');
  API(c).install();ok(/ma-02-/.test(FF(c)(e,null).path),'reinstall puts R1065 outermost again');}
 {// 7종 시트 파일·표
- const c=world({base:heel});const S=API(c).inspect().sheets;ok(Object.keys(S).sort().join()==='MA-02,MA-03,MA-04,MA-06,MA-07,MA-08,MA-10','7 sheets');
- for(const [k,s] of Object.entries(S)){const p=path.join(R,'runtime-text',s.path);ok(fs.existsSync(p)&&fs.statSync(p).size>1000,k+' sheet file');ok(s.cells===6&&s.cell.every(v=>v>0&&v<=400),k+' cell spec');}}
+ const c=world({base:heel});const S=API(c).inspect().sheets;ok(Object.keys(S).filter(k=>/^MA-/.test(k)).sort().join()==='MA-02,MA-03,MA-04,MA-06,MA-07,MA-08,MA-10','7 sheets');/* R1065c: AT·RA 시트는 r1065c-cpu-check 가 본다 */
+ for(const [k,s] of Object.entries(S).filter(([k])=>/^MA-/.test(k))){const p=path.join(R,'runtime-text',s.path);ok(fs.existsSync(p)&&fs.statSync(p).size>1000,k+' sheet file');ok(s.cells===6&&s.cell.every(v=>v>0&&v<=400),k+' cell spec');}}
 {// R286: 이 시트가 맡는 몹은 'full'(R286 내딛기를 겹치지 않음)
  const r286=fs.readFileSync(path.join(R,'client-source','mob-motion-r286.js'),'utf8');const i=r286.indexOf('function kindNow');ok(/__STORYWORLD_MOB_ATTACK_DOTS_R1065__\?\.covers\?\.\(e\)\)return 'full'/.test(r286.slice(i,i+600)),'R286 kindNow defers to R1065 covers');const j=r286.indexOf('function kindOf');ok(/__STORYWORLD_MOB_ATTACK_DOTS_R1065__\?\.covers\?\.\(e\)/.test(r286.slice(j,j+500)),'R286 kindOf cache also defers');}
 {const html=fs.readFileSync(path.join(R,'runtime-text/index.html'),'utf8');ok(html.split('"./mob-attack-dots-r1065.js"').length===2,'script tag once');
