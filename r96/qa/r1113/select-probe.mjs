@@ -1,3 +1,4 @@
+// R1113 합격 검사(헤드리스): node r96/qa/r1113/select-probe.mjs <사진 폴더>  (정적 서버 SW_URL, 기본 127.0.0.1:4410/m0/)
 // R1113 헤드리스 확인: 보스 처치 해금 → 영웅 창 9번째 칸 → 선택 확정 → 게임 안 몸 그림·걷기 시트·언주색
 import {chromium,boot,skip} from '../r444/lib.mjs';
 const OUT=process.argv[2]||'/tmp';const b=await chromium.launch();
@@ -20,3 +21,13 @@ await p.keyboard.press('KeyQ');await p.waitForTimeout(500);R.tintN=await p.evalu
 R.final=await p.evaluate(A=>window[A].inspect(),A);
 R.save=await p.evaluate(A=>{const d=serializeSave();return d?.player?.[window[A].field];},A);
 console.log(JSON.stringify(R,null,1));await b.close();
+// 합격 검사(QA 11-16): 해금 → 9번째 칸 → 확정 → 몸 그림·걷기 시트 4방향 → 저장. 하나라도 어긋나면 종료 코드 1.
+let bad=0;const must=(c,m)=>{console.log((c?'PASS ':'FAIL ')+m);if(!c)bad++;};
+must(R.lockSaved.before===false&&R.lockSaved.after===true,'보스 처치(room.persona.completed) → 해금');
+must(R.cards[R.cards.length-1]==='PERSONA'&&R.cards.length>=10,'영웅 창 마지막 칸 페르소나('+R.cards.length+'칸)');
+must(R.afterClick.stage==='페르소나','칸을 누르면 무대 페르소나');
+must(R.afterCommit.hero==='lauren'&&R.afterCommit.form===true&&/^페르소나/.test(R.afterCommit.name||''),'확정 → 형상·HUD 이름');
+must(/^side:\d:flip$/.test(R.walk_ArrowRight||'')&&/^front:\d$/.test(R.walk_ArrowDown||'')&&/^rear:\d$/.test(R.walk_ArrowUp||'')&&/^side:\d$/.test(R.walk_ArrowLeft||''),'걷기 시트 4방향(오른쪽 반전)');
+must(R.final.stats.walkSwaps>10&&R.final.stats.errors===0,'걷기 칸 교체 '+R.final.stats.walkSwaps+'번·오류 0');
+must(R.save===true,'저장에 형상 기록');
+console.log(bad?'R1113 accept FAILED '+bad:'R1113 accept PASSED');process.exit(bad?1:0);
