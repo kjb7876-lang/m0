@@ -7,6 +7,7 @@
 //  · 걸음: 위상은 '지나간 거리'(0.65칸에 한 걸음)로 정해 발이 미끄러지지 않는다. 다리 엇갈림(발끝 ±10% 폭), 드는 발만 키의 4.5% 들림,
 //    디딤 출렁임(키의 3%), 가는 쪽으로 상체 숙임(키의 3.5%). 멈추면 0.15초 안에 0 으로 돌아온다.
 //  · 걷는지 판단: 0.35초 동안의 순 이동이 초당 0.35칸 넘을 때만(제자리 떨림·밀림 왕복은 걷기 아님).
+//  · R1097d: 렌더러는 명령을 key(owner.id+':'+순번)로 메시 하나에 묶는다 → 조각마다 key 뒤에 ':r1104u|l|r' 를 붙인다(같은 key 면 상체만 남고 하체가 사라졌다).
 //  판정·피해·AI·저장·서사·이펙트·탄은 바꾸지 않는다(보스 몸 그림만). 끄기: localStorage['storyworld.r1104.personaStride']='0'.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_PERSONA_STRIDE_R1104__)return;
@@ -36,12 +37,12 @@ function split(cmds,i,s){const c=cmds[i],P=c.points,sr=c.sourceRect;
  const W=Math.hypot(P[1][0]-P[0][0],P[1][1]-P[0][1]),H=Math.hypot(P[3][0]-P[0][0],P[3][1]-P[0][1]);if(!(W>1)||!(H>1))return false;
  const w=s.w,sn=Math.sin(s.phase),lift=H*BOB*w*Math.abs(sn),lean=s.sdx*H*LEAN*w;
  const up=(p,dxk)=>[p[0]+dxk,p[1]-lift];
- const piece=(u0,u1,v0,v1,pts)=>({...c,sourceRect:[sr[0]+sr[2]*u0,sr[1]+sr[3]*v0,sr[2]*(u1-u0),sr[3]*(v1-v0)],points:pts,r1104:true});
- const upper=piece(0,1,0,HIP,[up(Q(0,0),lean),up(Q(1,0),lean),up(Q(1,HIP),0),up(Q(0,HIP),0)]);
- const leg=(u0,u1,sw)=>{const fl=H*FOOT_LIFT*w*Math.max(0,sw>0?Math.abs(sn):0),dxs=sw*W*SWING*w;
-  return piece(u0,u1,HIP,1,[up(Q(u0,HIP),0),up(Q(u1,HIP),0),[Q(u1,1)[0]+dxs,Q(u1,1)[1]-fl],[Q(u0,1)[0]+dxs,Q(u0,1)[1]-fl]]);};
+ const piece=(u0,u1,v0,v1,pts,tag)=>({...c,key:c.key!=null?String(c.key)+':r1104'+tag:c.key,sourceRect:[sr[0]+sr[2]*u0,sr[1]+sr[3]*v0,sr[2]*(u1-u0),sr[3]*(v1-v0)],points:pts,r1104:true});
+ const upper=piece(0,1,0,HIP,[up(Q(0,0),lean),up(Q(1,0),lean),up(Q(1,HIP),0),up(Q(0,HIP),0)],'u');
+ const leg=(u0,u1,sw,tag)=>{const fl=H*FOOT_LIFT*w*Math.max(0,sw>0?Math.abs(sn):0),dxs=sw*W*SWING*w;
+  return piece(u0,u1,HIP,1,[up(Q(u0,HIP),0),up(Q(u1,HIP),0),[Q(u1,1)[0]+dxs,Q(u1,1)[1]-fl],[Q(u0,1)[0]+dxs,Q(u0,1)[1]-fl]],tag);};
  // 앞으로 내딛는 다리(sw>0 쪽 위상)를 나중에 그려 겹침 가운데에서 위로 오게
- const L=leg(0,.5+OV,sn*s.sdx),R=leg(.5-OV,1,-sn*s.sdx);
+ const L=leg(0,.5+OV,sn*s.sdx,'l'),R=leg(.5-OV,1,-sn*s.sdx,'r');
  const all=[upper.points,L.points,R.points].flat();if(!all.every(okPt))return false;
  const order=sn*s.sdx>0?[R,L,upper]:[L,R,upper];cmds.splice(i,1,...order);return true;}
 function process(cmds){if(!on||!Array.isArray(cmds))return 0;const t=T(),e=persona();if(t==null||!e)return 0;const s=track(e,t);if(!(s.w>.02))return 0;
