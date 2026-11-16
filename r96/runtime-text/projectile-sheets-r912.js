@@ -19,7 +19,7 @@
   // size: 몸통 긴 변 ÷ 영웅 화면 키. hit: 적중 칸 한 변 ÷ 영웅 화면 키. upright: 안의 무늬(하트·십자가·해골)가 눕지 않게 좌우 거울상+작은 기울기만.
   const KINDS={
     pj01:{src:[HV+'seoha-a.webp'],size:.62,hit:1.15},
-    pj02:{src:[HV+'hunter-a.webp'],size:.80,hit:1.05},
+    pj02:{src:[HV+'hunter-a.webp'],size:.50,hit:1.05},/* R1102(사용자 2026-11-16 "헌터 기본화살이 너무크고"): 0.80 → 0.50(R911 최소 크기 = 영웅 키 절반) */
     pj03:{src:[HV+'michaela-a.webp'],size:.60,hit:1.10,upright:true},
     pj03x:{src:[HV+'michaela-a.webp'],size:.60,hit:1.10,upright:true},
     pj04:{src:[HV+'gunner-laser-bullet.webp'],size:.66,hit:1.10},
