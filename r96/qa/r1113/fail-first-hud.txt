@@ -1,0 +1,4 @@
+PASS ⑬ 형상 아니면 HUD 이름 그대로
+FAIL ⑬ 형상이면 HUD 이름 페르소나(라우렌 · Lv.9)
+PASS ⑬ 다른 HUD 칸은 그대로
+R1113 persona-hero FAILED 1

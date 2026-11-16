@@ -1,0 +1,2 @@
+FAIL persona-hero-r1113.js 가 있음
+R1113 persona-hero FAILED 1

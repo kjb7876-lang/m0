@@ -1,0 +1,5 @@
+FAIL ⑯ front 빛 명령은 몸과 다른 key·앞뒤 order(같은 key 면 렌더러가 몸 메시를 빼앗아 몸이 사라짐)
+FAIL ⑯ left 빛 명령은 몸과 다른 key·앞뒤 order(같은 key 면 렌더러가 몸 메시를 빼앗아 몸이 사라짐)
+FAIL ⑯ right 빛 명령은 몸과 다른 key·앞뒤 order(같은 key 면 렌더러가 몸 메시를 빼앗아 몸이 사라짐)
+FAIL ⑯ back 빛 명령은 몸과 다른 key·앞뒤 order(같은 key 면 렌더러가 몸 메시를 빼앗아 몸이 사라짐)
+R1113 persona-hero FAILED 4

@@ -1,0 +1,62 @@
+{
+ "front": {
+  "fx": [
+   "r1113:aura:lighter:0.24",
+   "r1113:orb:lighter:0.96"
+  ],
+  "last": "act:front:5"
+ },
+ "left": {
+  "fx": [
+   "r1113:aura:lighter:0.32",
+   "r1113:orb:lighter:0.75"
+  ],
+  "last": "act:side:1"
+ },
+ "right": {
+  "fx": [
+   "r1113:aura:lighter:0.36",
+   "r1113:orb:lighter:0.76"
+  ],
+  "last": "act:side:5:flip"
+ },
+ "back": {
+  "fx": [
+   "r1113:aura:lighter:0.25",
+   "r1113:orb:lighter:0.50"
+  ],
+  "last": "act:rear:1"
+ },
+ "skill": {
+  "fx": [
+   "r1113:aura:lighter:0.43",
+   "r1113:orb:lighter:0.52"
+  ],
+  "last": "act:rear:4"
+ },
+ "stats": {
+  "revision": "R1113-persona-hero-2-act-glow",
+  "unlocked": true,
+  "saved": {
+   "on": false,
+   "off": false
+  },
+  "form": true,
+  "walk": 0,
+  "want": false,
+  "commit": null,
+  "stats": {
+   "swaps": 2,
+   "walkSwaps": 5,
+   "tints": 832,
+   "unlocks": 0,
+   "cards": 0,
+   "errors": 0,
+   "dropped": 291,
+   "last": "act:rear:7",
+   "actSwaps": 34,
+   "glows": 68
+  },
+  "lastError": null
+ }
+}

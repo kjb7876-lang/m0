@@ -1,0 +1,18 @@
+FAIL ⑯ 공격 front → 걷기 front (r1113:assets/rc133/art/base-0.png)
+FAIL ⑯ front 구슬 빛은 몸 앞, 오라는 몸 뒤(-1<0<-1)
+FAIL ⑯ front 구슬 빛 더하기 섞기
+FAIL ⑯ 공격 left → 걷기 side (r1113:assets/rc133/art/base-2.png)
+FAIL ⑯ left 구슬 빛은 몸 앞, 오라는 몸 뒤(-1<0<-1)
+FAIL ⑯ left 구슬 빛 더하기 섞기
+FAIL ⑯ 공격 right → 걷기 side 뒤집기 (r1113:assets/rc133/art/base-6.png)
+FAIL ⑯ right 구슬 빛은 몸 앞, 오라는 몸 뒤(-1<0<-1)
+FAIL ⑯ right 구슬 빛 더하기 섞기
+FAIL ⑯ 공격 back → 걷기 rear (r1113:assets/rc133/art/base-4.png)
+FAIL ⑯ back 구슬 빛은 몸 앞, 오라는 몸 뒤(-1<0<-1)
+FAIL ⑯ back 구슬 빛 더하기 섞기
+FAIL ⑯ 공격 동안 칸이 흐름(1칸)
+PASS ⑯ 공격이 끝나면 정지 그림, 빛 없음
+FAIL ⑯ 스킬도 걷기 칸 + 구슬 빛
+FAIL ⑯ 궁극기는 각성형 + 오라
+PASS ⑯ 형상이 아니면 빛 없음
+R1113 persona-hero FAILED 15

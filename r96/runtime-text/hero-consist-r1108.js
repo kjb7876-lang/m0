@@ -15,7 +15,7 @@ const REV='R1108-hero-consist-1',KEY='storyworld.r1108.consist';
 const POSE=Object.freeze({neon:.82,lauren:.85});
 // 서하 걷기 시트 칸 안 발 가운데 x(발끝 8줄 불투명 가운데의 8칸 중앙값). 키는 셋 다 180.
 const SEOHA=Object.freeze({path:'assets/r130/seoha/walk-e.webp',foot:Object.freeze({e:101.7,se:99.1,ne:84.7}),cell:192,re:/assets\/r130\/seoha\/walk-(se|ne)\.webp/});
-let prefs={on:true,attack:true,seoha:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
+let prefs={on:true,attack:true,seoha:false};/* R1108b: 서하 대각→옆 걷기는 걸음이 없어 종이처럼 흔들려 기본 꺼짐(켜기: {"seoha":true}) */try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={attackSheets:0,seohaSwaps:0,seohaWaiting:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const fin=v=>Number.isFinite(v);
