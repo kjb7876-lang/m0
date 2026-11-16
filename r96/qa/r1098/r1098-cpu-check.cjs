@@ -88,4 +88,12 @@ function world(stored,{ready=true}={}){
  const after=W.readyImage(PUP);ok('after bake puppet path gives baked canvas',after&&after.image&&after.image.r1098===true);
  ok('other paths untouched',W.readyImage('assets/x.webp').image.src==='assets/x.webp');
  M.set({puppet:false});ok('puppet repaint off → original',W.readyImage(PUP).image.src===PUP);}
+// ---- ⑥ 구운 그림은 이미지(경로 있음)로 내준다 — 3D 기록기는 큰 캔버스를 '배우 스냅샷 예산 초과'로 거절한다(브라우저 실측 R161 오류 138건) ----
+{const {W}=world();const made=[];
+ W.document={createElement:t=>({width:0,height:0,getContext:()=>({drawImage(){},getImageData:(x,y,w,h)=>({data:new Uint8ClampedArray(w*h*4),width:w,height:h}),putImageData(){}}),toDataURL:()=>'data:image/png;base64,QUJD'})};
+ W.Image=function(){const o={complete:false,naturalWidth:0,naturalHeight:0,onload:null,set src(v){this._src=v;this.complete=true;this.naturalWidth=1024;this.naturalHeight=640;made.push(this);if(this.onload)this.onload();},get src(){return this._src;}};return o;};
+ const M=W.__STORYWORLD_SAMONG_FACE_R1098__;M._bakeNow({naturalWidth:1024,naturalHeight:640,width:1024,height:640});
+ const r=W.readyImage(PUP);ok('baked puppet is served as an image with a data/blob path, not a big canvas',r&&r.image&&/^(data|blob):/.test(String(r.image.src||''))&&typeof r.image.getContext!=='function',r&&r.image&&{src:String(r.image.src).slice(0,20)});}
+// ---- ⑦ R248 이름 시트(m100 '미카엘라' = 두건 쓴 아이 그림)가 미카엘라를 가로채지 않음 ----
+{const r248=rd(path.join(R,'client-source','mob-unique-r248.js'));ok('R248 skips covered Michaela (sheet goes to frameFor chain)',/__STORYWORLD_SAMONG_FACE_R1098__\?\.covers\?\.\(e\)/.test(r248));}
 done();

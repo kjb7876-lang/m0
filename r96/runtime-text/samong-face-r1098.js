@@ -54,9 +54,13 @@ function inkPuppet(src,W,H,cfg={}){
    const l=src[i]*.3+src[i+1]*.59+src[i+2]*.11,v=14+l*.42;out[i]=Math.round(v);out[i+1]=Math.round(v*.98);out[i+2]=Math.round(v*.95);}}
  return out;}
 let baked=null,baking=false;
-function bake(){if(baked||baking||!prefs.puppet)return;try{const r=baseReady?baseReady(PUPPET):null,im=r&&r.image;if(!im||!(im.naturalWidth||im.width)){want(PUPPET);return;}
-  baking=true;const W=im.naturalWidth||im.width,H=im.naturalHeight||im.height,c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,0,0);
-  const d=g.getImageData(0,0,W,H),o=inkPuppet(d.data,W,H,{cw:256,ch:320,pivotX:101.8});if(o){d.data.set(o);g.putImageData(d,0,0);c.r1098=true;baked=c;stats.bakes++;}}catch(err){fail(err);}finally{baking=false;}}
+// 구운 화소는 큰 캔버스 그대로 내주지 않고 이미지(data 경로)로 바꿔 내준다 — 3D 기록기가 1024×640 캔버스를 '배우 스냅샷 예산 초과'로 거절했다(R161 오류).
+function bakeNow(im){if(baked||baking||!im)return;const W=im.naturalWidth||im.width,H=im.naturalHeight||im.height;if(!(W>0&&H>0))return;
+ baking=true;try{const c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,0,0);
+  const d=g.getImageData(0,0,W,H),o=inkPuppet(d.data,W,H,{cw:256,ch:320,pivotX:101.8});if(!o){baking=false;return;}d.data.set(o);g.putImageData(d,0,0);
+  const url=c.toDataURL('image/png'),img=new Image();img.onload=()=>{baked=img;baking=false;stats.bakes++;};img.onerror=()=>{baking=false;fail('baked image load failed');};img.src=url;}
+ catch(err){baking=false;fail(err);}}
+function bake(){if(baked||baking||!prefs.puppet)return;try{const r=baseReady?baseReady(PUPPET):null,im=r&&r.image;if(!im||!(im.naturalWidth||im.width)){want(PUPPET);return;}bakeNow(im);}catch(err){fail(err);}}
 // 굽기는 그리기 호출 밖에서(다음 차례) 한 번 — 그 사이 프레임은 원본 시트.
 let queued=false;function later(){if(queued||baked)return;queued=true;try{setTimeout(()=>{queued=false;bake();},0);}catch(_){queued=false;}}
 function wrapReady(){if(typeof readyImage!=='function'||readyImage.__r1098)return;const base=readyImage;baseReady=base;
@@ -65,6 +69,6 @@ function wrapReady(){if(typeof readyImage!=='function'||readyImage.__r1098)retur
 wrapReady();install();try{setInterval(install,700);}catch(_){}
 function set(v){if(v&&typeof v==='object'){if(typeof v.michaela==='boolean')prefs.michaela=v.michaela;if(typeof v.puppet==='boolean')prefs.puppet=v.puppet;}try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return {...prefs};}
 window.__STORYWORLD_SAMONG_FACE_R1098__=Object.freeze({revision:REV,MICH,PUPPET,covers,frame,inkPuppet,install,set,
- _setBaked:c=>{baked=c||null;},
+ _setBaked:c=>{baked=c||null;},_bakeNow:bakeNow,
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},baked:!!baked,lastError,presentationOnly:true,gameplayChanged:false})});
 })();
