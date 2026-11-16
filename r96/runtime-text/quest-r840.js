@@ -124,7 +124,9 @@ const stOf=(r=here())=>r&&ledger[keyOf(r)]?.s||'new';
 const killsOf=r=>r&&ledger[keyOf(r)]?.k||0;
 function zoneDone(r){try{if(dream(r)){const S=window.__STORYWORLD_SAMONG_R103__?.state?.();return Array.isArray(S?.zoneDone)&&S.zoneDone.includes(zid(r));}return typeof completed==='function'&&completed(r.id,'STORY')===true;}catch(_){return false;}}
 // 보이는 조건: 받지 않은 채 이미 끝낸 지역에는 다시 세우지 않는다(옛 세이브·재방문에 새 일을 만들지 않음).
-const visible=(r=here())=>applies(r)&&(stOf(r)!=='new'||!zoneDone(r));
+/* R1093: 사몽 전투 구역은 목표를 이루는 순간(문이 열리기 전) zoneDone 에 들어간다 → 이번에 들어온 방은 들어올 때의 값으로 본다(안 받은 곁일이 문 앞에서 사라져 R1093 관문을 못 풀지 않게). 본편 지역은 그대로. */
+const entryDone=new WeakMap();const doneFor=r=>{if(!dream(r))return zoneDone(r);if(!entryDone.has(r))entryDone.set(r,zoneDone(r));return entryDone.get(r);};
+const visible=(r=here())=>applies(r)&&(stOf(r)!=='new'||!doneFor(r));
 function phaseOf(r){try{return R78()?.state?.(r)?.phase||null;}catch(e){fail(e);return null;}}
 const propsOf=(r=here())=>(r?.props||[]).filter(p=>p&&p.r840Prop);
 /* R1035: 조형물이 둘이면 영웅에게 가까운 쪽 */
@@ -262,9 +264,15 @@ function enemyNear(){try{const r=here();if(dream(r)){/* 사몽 탐색 구역에�
    return (r.enemies||[]).some(e=>e&&e.hp>0&&!e.r170Tower&&!e.r170&&e.spawnState!=='hidden'&&(!e.boss||r.engaged)&&dist(player,e)<=5);}
   return typeof nearestEnemy==='function'&&!!nearestEnemy(9);}catch(_){return false;}}
 function pathTo(pt){try{const r=window.__STORYWORLD_POLISH_R100__?.navPath?.(player,pt);return Array.isArray(r)&&r.length>1?r:null;}catch(e){fail(e);return null;}}
-function guideStepR840(late){/* R1060: late = 단서를 모아야 보스 문이 열리는 지역(불면귀)에서 문 단계까지 곁일을 안 받았을 때 — 그때만 '들머리로 되돌아가지 않음'을 건너뛴다 */const r=here();if(!visible(r))return false;const st=stOf(r),d=defOf(r);if(st==='done')return false;if(st==='on'&&d.quest.type==='kill')return false;
- const ph=phaseOf(r);if(ph==='boss'||ph==='doorStory'||r.engaged)return false;if(dream(r)){if(r.samongR103?.bossUp)return false;/* 대면이 시작된 뒤에는 곁일로 되돌리지 않는다 */if(r.samongR103?.portal&&st==='new'){const e=r.exploration?.entry;if(!e||dist(player,e)>16)return false;}/* 다음 문이 열린 뒤: 받은 곁일은 마저 하고, 아직 안 받은 것은 들머리 가까이일 때만(미로 구역은 문이 처음부터 열려 있다 — R842) */}else if(d.free){const e=r.exploration?.entry;if(st==='new'&&e&&dist(player,e)>16)return false;/* 이미 안쪽까지 간 뒤 켠 길잡이는 들머리로 되돌아가지 않는다 */}else if(st==='new'&&ph!=='route'&&!late)return false;/* 뒤늦게 켠 길잡이는 들머리로 되돌아가지 않는다 */
+function guideStepR840(late){/* R1093: late 는 사몽 문이 열린 뒤·본편 맵(ep1a08) 안쪽에서도 곁일로 되돌아간다(퀘스트 관문). R1060: late = 단서를 모아야 보스 문이 열리는 지역(불면귀)에서 문 단계까지 곁일을 안 받았을 때 — 그때만 '들머리로 되돌아가지 않음'을 건너뛴다 */const r=here();if(!visible(r))return false;const st=stOf(r),d=defOf(r);if(st==='done')return false;if(st==='on'&&d.quest.type==='kill'&&!late)return false;
+ const ph=phaseOf(r);if(ph==='boss'||ph==='doorStory'||r.engaged)return false;if(dream(r)){if(r.samongR103?.bossUp&&!(late&&r.samongR103?.portal))return false;/* 대면이 시작된 뒤에는 곁일로 되돌리지 않는다 */if(r.samongR103?.portal&&st==='new'&&!late){const e=r.exploration?.entry;if(!e||dist(player,e)>16)return false;}/* 다음 문이 열린 뒤: 받은 곁일은 마저 하고, 아직 안 받은 것은 들머리 가까이일 때만(미로 구역은 문이 처음부터 열려 있다 — R842) */}else if(d.free){const e=r.exploration?.entry;if(st==='new'&&!late&&e&&dist(player,e)>16)return false;/* 이미 안쪽까지 간 뒤 켠 길잡이는 들머리로 되돌아가지 않는다 */}else if(st==='new'&&ph!=='route'&&!late)return false;/* 뒤늦게 켠 길잡이는 들머리로 되돌아가지 않는다 */
  if(enemyNear()){walk=null;return false;}ensure(r);
+ if(st==='on'&&d.quest.type==='kill'){/* R1093 late: 관문 앞에서 처치 곁일이 남았으면 남은 대상 쪽으로 걷는다(가까워지면 싸움은 원래 길잡이). 길이 없거나 정체면 손을 뗀다(R1093 안전판) */
+  const es=matching(r).filter(aliveOf);if(!es.length)return false;const kt=es.reduce((a,b)=>dist(player,b)<dist(player,a)?b:a),kd=dist(player,kt);if(kd<=4){walk=null;return false;}
+  if(!walk||walk.id!==kt.id)walk={id:kt.id,best:kd,bestAt:T(),tries:0};if(kd<walk.best-.3){walk.best=kd;walk.bestAt=T();}if(T()-walk.bestAt>STALL){walk=null;return false;}
+  let mv=false;try{mv=typeof route!=='undefined'&&Array.isArray(route)&&route.length>0;}catch(_){}
+  if(!mv&&T()>=nextNav){nextNav=T()+.5;const p=pathTo({x:kt.x,y:kt.y});if(p){route=p.slice(1).map(v=>({x:v.x,y:v.y}));command=null;stats.walks++;}else if(++walk.tries>=3){walk=null;return false;}}
+  return true;}
  const tgt=st==='new'?npc(r):st==='on'?propOf(r):orbOf(r),reach=st==='new'?GUIDE_REACH:st==='on'?HIT_REACH-.2:.6;
  const act=fb=>{if(fb){stats.fallback++;note('fallback',{zone:zid(r),st});}walk=null;if(st==='new'){stats.offers++;stats.auto++;return take(r);}if(st==='on'){if(fb)return hit(r,true);if(T()>=nextHit){nextHit=T()+GUIDE_HIT;hit(r,false);}return true;}return finishNow(r);};
  if(!tgt)return act(true),true;const dd=dist(player,tgt);

@@ -724,6 +724,8 @@ jobs:
         run: node r96/qa/r1059/r1059-cpu-check.cjs
       - name: R1060 bulmyeongwi zone clues gate boss door CPU check
         run: node r96/qa/r1060/r1060-cpu-check.cjs
+      - name: R1093 quest gates boss room and next map in every quest zone CPU check
+        run: node r96/qa/r1093/r1093-cpu-check.cjs
       - name: R1040 boss pattern frame fx CPU check
         run: node r96/qa/r1040/boss-pattern-fx-cpu-check.cjs
       - name: R1042 lust boss kiss lips attack (telegraph, 66 percent of current HP, frame sheets) CPU check
