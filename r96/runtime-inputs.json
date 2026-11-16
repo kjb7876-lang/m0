@@ -10152,7 +10152,9 @@
     "fx-ink-r1095.js",
     "persona-ink-r1097.js",
     "quest-gate-r1093.js",
-    "samong-face-r1098.js"
+    "samong-face-r1098.js",
+    "ego-guard-r1100.js",
+    "ego-ink-r1099.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11227,5 +11229,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "ca916ad45d2f668fa616ac52994c78dccf7d141cc2da1493604e8ebb425eeef9"
+  "runtimeManifestSHA256": "e21a916732b84943c8fed3f4c1cc803dd5547f73ea0ff8cd3262e959086a372d"
 }
