@@ -52924,8 +52924,8 @@
     },
     {
       "path": "ego-ink-r1099.js",
-      "bytes": 29288,
-      "sha256": "1981de763e44b08b5b12690924b72fef37aafb0965396125bc31feb7854f6784"
+      "bytes": 39461,
+      "sha256": "32536456a44b1cd87f4b76fe9d7a8d15dcd5526cc49e2289c1f1653b2e89d20e"
     },
     {
       "path": "ego-kit-r1094.js",
@@ -54719,7 +54719,7 @@
     }
   ],
   "fileCount": 10943,
-  "totalBytes": 1321600062,
+  "totalBytes": 1321610235,
   "webHTMLSha256": "f1f0a76476636412618ad4448b610d4c8f41416b4e309a9db80994c3c8b4ce87",
   "largest": [
     {
