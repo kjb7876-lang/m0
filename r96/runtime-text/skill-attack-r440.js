@@ -28,7 +28,7 @@ function swap(){if(saved||!prefs.on)return;const p=typeof player==='object'?play
  if(p.dashAnim>0){stats.skipped.dash++;return;}
  if(p.guard){stats.skipped.guard++;return;}
  if(p.samong>0){stats.skipped.form++;return;}/* R1050b(사용자 2026-11-15 10:09Z "스킬이나 공격할때 항상 공격모션"): EGO 는 몸 그림이 그대로인 버프라 공격 모션으로 바꾼다 — 반자동이 EGO 를 자주 켜 스킬의 41~100%가 옛 g- 자세로 남았다. 몸이 바뀌는 사몽 각성만 그대로 */
- try{if(window.__STORYWORLD_HERO_MOTION_R895__?.moveCancel?.('skill')){stats.skipped.move++;return;}}catch(_){}/* R895 규칙 2: 커밋 창(0.18초) 뒤 이동 입력이면 걷기로 캔슬 */
+ try{if(p.hero!=='hunter'&&window.__STORYWORLD_HERO_MOTION_R895__?.moveCancel?.('skill')){stats.skipped.move++;return;}}catch(_){}/* R1102(사용자 2026-11-16 "헌터 … 스킬시전시 항상 공격모션"): 헌터는 걸어도 스킬 휘두르기를 끝까지 *//* R895 규칙 2: 커밋 창(0.18초) 뒤 이동 입력이면 걷기로 캔슬 */
  try{if(window.__STORYWORLD_ATTACK_ANIM_R143__?.actSheet?.()){stats.skipped.sheet++;return;}}catch(_){}
  const D=cast.ult?ULT:SWING,el=Math.max(0,now()-cast.t0),real=+p.attackAnim||0;
  saved={p,skillAnim:p.skillAnim,ultimateAnim:p.ultimateAnim,attackAnim:p.attackAnim,attackCD:p.attackCD};

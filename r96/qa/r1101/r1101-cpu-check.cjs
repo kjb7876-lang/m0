@@ -24,10 +24,11 @@ for(const mir of [false,true]){const k=.3,sr=[55,43,112,186],x0=500,y0=300,w=sr[
 {const c={kind:'image',owner:{kind:'hero'},sourcePath:'assets/r144/walk/gunner/walk-e.webp',image:{},sourceRect:[1400,42,111,186],points:[[0,0],[33.3,0],[33.3,55.8],[0,55.8]]};A.plainWalk({commands:[c]},0);ok(JSON.stringify(c.sourceRect)==='[1344,0,192,256]','7번 칸 잘린 사각형 → 7번 칸 전체',c.sourceRect);}
 // ② 옆 서 있기 R128 idle-e(얼굴이 총 반대) → attack-e4 겨눔 칸
 ok(typeof A.sideIdle==='function','옆 서 있기 바꾸기 함수');
+const A0=load({idle6:false}); // R1101b: 기본은 Dots 대기 6칸(r1101b-cpu-check) — R1101 attack-e4 경로는 idle6:false 로 확인
 for(const mir of [false,true]){const k=.3,sr=[192,0,192,256],x0=400,y0=200,w=192*k*(mir?-1:1);
  const c={kind:'image',owner:{kind:'hero'},sourcePath:'assets/r128/gunner/idle-e.webp',image:{},sourceRect:sr.slice(),points:[[x0,y0],[x0+w,y0],[x0+w,y0+256*k],[x0,y0+256*k]]};
- ok(A.sideIdle({commands:[c]},0)===1&&c.sourcePath==='assets/r1045c/gunner/attack-e4.webp'&&c.image.tag==='NEW','옆 서 있기'+(mir?'(반전)':'')+' → attack-e4',c.sourcePath);
+ ok(A0.sideIdle({commands:[c]},0)===1&&c.sourcePath==='assets/r1045c/gunner/attack-e4.webp'&&c.image.tag==='NEW','옆 서 있기'+(mir?'(반전)':'')+' → attack-e4',c.sourcePath);
  ok(c.sourceRect[0]%192===0&&c.sourceRect[2]===192&&c.sourceRect[3]===256&&near(c.points[0][0],x0)&&near(c.points[1][0],x0+w),'같은 자리·같은 좌우(반전 유지)',c);}
-{const c={kind:'image',owner:{kind:'hero'},sourcePath:'assets/r128/gunner/idle-se.webp',image:{},sourceRect:[0,0,192,256],points:[[0,0],[1,0],[1,1],[0,1]]};ok(A.sideIdle({commands:[c]},0)===0,'대각 서 있기는 그대로(새 그림 없음)');}
+{const c={kind:'image',owner:{kind:'hero'},sourcePath:'assets/r128/gunner/idle-se.webp',image:{},sourceRect:[0,0,192,256],points:[[0,0],[1,0],[1,1],[0,1]]};ok(A0.sideIdle({commands:[c]},0)===0,'대각 서 있기는 그대로(새 그림 없음)');}
 const B=load({sideIdle:false});{const c={kind:'image',owner:{kind:'hero'},sourcePath:'assets/r128/gunner/idle-e.webp',image:{},sourceRect:[0,0,192,256],points:[[0,0],[1,0],[1,1],[0,1]]};ok(B.sideIdle({commands:[c]},0)===0,'sideIdle 끄면 예전 그대로');}
 console.log(JSON.stringify({passed:n}));

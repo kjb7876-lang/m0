@@ -1,0 +1,7 @@
+// R1103 탐침: 3D 렌더러에 넘어가는 마지막 프레임 명령을 간추려 보관(읽기만).
+(()=>{if(window.__R1103F)return;let last=null;const R=window.StoryPhase1?.ThreeRenderer?.prototype;
+const sum=cs=>cs.map(c=>{const o=c.owner||{};let src='';try{src=String(c.image?.src||c.image?.currentSrc||c.source?.src||c.args?.[0]?.src||'').replace(/^.*\/m0\//,'');}catch(_){}
+ let b=null;try{const pts=[];if(c.points)pts.push(...c.points);for(const p of c.paths||[])pts.push(...(p.points||[]));if(pts.length){const xs=pts.map(p=>p[0]),ys=pts.map(p=>p[1]);b=[Math.min(...xs)|0,Math.min(...ys)|0,Math.max(...xs)|0,Math.max(...ys)|0];}}catch(_){}
+ return {k:c.kind,ok:o.kind,id:String(o.id||'').slice(0,60),src:src.slice(0,80),fs:typeof c.style?.fillStyle==='string'?c.style.fillStyle:undefined,ss:typeof c.style?.strokeStyle==='string'&&c.kind==='stroke'?c.style.strokeStyle:undefined,a:c.style?.globalAlpha,op:c.style?.globalCompositeOperation,b,keys:Object.keys(c).join(',')};});
+function wrap(t){if(!t||t.__r1103f)return;const rb=t.render;t.render=function(frame){try{if(Array.isArray(frame?.commands))last=frame.commands.slice();}catch(_){}return rb.apply(this,arguments);};t.__r1103f=true;}
+wrap(R);let rec=null;const DP=window.StoryPhase1?.DrawCommands?.prototype;if(DP&&!DP.__r1103r){const rs=DP.reset;DP.reset=function(){rec=this;return rs.apply(this,arguments);};DP.__r1103r=true;}window.__R1103F={grab(){const cs=last||rec?.commands;return cs?sum(cs):null;},wrapInst(i){wrap(i);}};})();
