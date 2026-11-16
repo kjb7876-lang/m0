@@ -33,8 +33,8 @@ for(const [k,base] of [['RA-01',{path:'assets/r363/mobs/L128.webp',assetFrame:{s
  e.attack={elapsed:.2};ok(A.aimR248(e,'assets/r363/mobs/L128.webp')===null,'aimR248: real attack null');}
 {const r248=fs.readFileSync(path.join(R,'client-source','mob-unique-r248.js'),'utf8');ok(/aimR248\?\.\(e,s\.path\)/.test(r248)&&/if\(A\)\{ctx\.scale\(m\.face\*k\*A\.r/.test(r248),'R248 draws aim cell via R1065');}
 // 죽음 시트(CX-0115MD 11종): R462 15세 재 소멸 동안 deathFrame 이 6칸을 준다
-{const S2=API(world({path:'x'})).inspect().sheets;const D=Object.entries(S2).filter(([k,v])=>v.kind==='death');ok(D.length===11,'11 death sheets ('+D.map(x=>x[0])+')');
- for(const [k,s] of D){const p=path.join(R,'runtime-text',s.path);ok(fs.existsSync(p)&&fs.statSync(p).size>1000,k+' death file');ok(s.cells===6,k+' 6 cells');
+{const S2=API(world({path:'x'})).inspect().sheets;const D=Object.entries(S2).filter(([k,v])=>v.kind==='death');ok(D.length>=11,'at least 11 death sheets (R1111 adds 5 more) ('+D.map(x=>x[0])+')');
+ for(const [k,s] of D){const p=path.join(R,'runtime-text',s.path);ok(fs.existsSync(p)&&fs.statSync(p).size>1000,k+' death file');ok(s.cells===(k==='MD-44'?4:6),k+' 6 cells (MD-44 존재하는 4칸)');
   for(const [bp,b] of Object.entries(s.bases)){const r=s.bodyH/b.bodyH;ok(r>.6&&r<1.4,k+' body ratio sane '+bp+' '+r.toFixed(2));}}
  const look={path:'assets/r380/mobs/legacy-m119-nameless-scar-v4-walk-d1.webp',flip:true,frame:{path:'assets/r380/mobs/legacy-m119-nameless-scar-v4-walk-d1.webp',assetFrame:{sourceRect:[192,0,192,256],pivot:[96,219],visibleHeight:190},flip:true}};
  const c=world({path:'x'}),A=API(c);ok(typeof A.deathFrame==='function','deathFrame API');const ks=[];

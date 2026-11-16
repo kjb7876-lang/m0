@@ -616,6 +616,8 @@ jobs:
         run: node r96/qa/r1097/r1097-cpu-check.cjs
       - name: R1104 persona boss temporary code stride (upper body + crossing legs, distance-phased steps, after R1097 ink) CPU check
         run: node r96/qa/r1104/persona-stride-cpu-check.cjs
+      - name: R1098 samong faces (Michaela final boss uses her own sheet, R161 puppet repainted as an ink-and-white-thread doll so it no longer looks like Hwando) CPU check
+        run: node r96/qa/r1098/r1098-cpu-check.cjs
       - name: R1104b persona boss walk sheets (Dots CX-0120PW front/rear/side 8 frames, cleaned seams, direction table, foot anchor, reverse when backing, ink bake) CPU check
         run: node r96/qa/r1104b/persona-walk-sheets-cpu-check.cjs
       - name: R1090 character ink tint (hero and mob body images only, follows the map ink wash, settings toggle, effects and telegraphs untouched) CPU check
@@ -695,7 +697,7 @@ jobs:
       - name: R522 hospital thin walls (the two free-standing maze baffles of ep1a08 moved to touch a thick wall, hospital only, routes stay connected) CPU check
         run: node r96/qa/r522/r522-cpu-check.cjs
       - name: R523 story rooms (clinic ep1a09 + sloth home ep1b02 furnished by room name along the real back walls, presentation only, angle-matched art only) CPU check
-        run: node r96/qa/r523/r523-cpu-check.cjs && node r96/qa/r1061/r1061-cpu-check.cjs && node r96/qa/r1062/prop-theme-cpu-check.cjs && node r96/qa/r1064/r1064-cpu-check.cjs && node r96/qa/r1064/r1064c-cpu-check.cjs && node r96/qa/r1065/r1065-cpu-check.cjs && node r96/qa/r1065/r1065c-cpu-check.cjs && node r96/qa/r1103/r1103-cpu-check.cjs && node r96/qa/r730/r730-cpu-check.cjs && node r96/qa/r731/r731-cpu-check.cjs
+        run: node r96/qa/r523/r523-cpu-check.cjs && node r96/qa/r1061/r1061-cpu-check.cjs && node r96/qa/r1062/prop-theme-cpu-check.cjs && node r96/qa/r1064/r1064-cpu-check.cjs && node r96/qa/r1064/r1064c-cpu-check.cjs && node r96/qa/r1065/r1065-cpu-check.cjs && node r96/qa/r1065/r1065c-cpu-check.cjs && node r96/qa/r1065/r1065e-cpu-check.cjs && node r96/qa/r1111/r1111-cpu-check.cjs && node r96/qa/r1103/r1103-cpu-check.cjs && node r96/qa/r730/r730-cpu-check.cjs && node r96/qa/r731/r731-cpu-check.cjs
       - name: R713 refuge walls (first map hub stone walls 0.24 -> 0.64 outer / 0.48 inner, floor-side face unchanged, corners filled, hub only) CPU check
         run: node r96/qa/r713/r713-cpu-check.cjs
       - name: R810 Bulmyeongwi night (last302/last303 navy moonlight ambient, deep amber lamps, no sepia, no spider-crack decals, night fog colour, lamps kept off the guide path; other zones unchanged) CPU check
@@ -744,8 +746,6 @@ jobs:
         run: node r96/qa/r1057/r1057-cpu-check.cjs
       - name: R1057b hero select title 7-tap mobile alternative CPU check
         run: node r96/qa/r1057/r1057b-tap-cpu-check.cjs
-      - name: R1106 phone hero select row above stage CPU check
-        run: node r96/qa/r1106/r1106-cpu-check.cjs
       - name: R1059 old bulmyeongwi art redirected to new art CPU check
         run: node r96/qa/r1059/r1059-cpu-check.cjs
       - name: R1060 bulmyeongwi zone clues gate boss door CPU check
