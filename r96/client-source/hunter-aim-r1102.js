@@ -18,7 +18,9 @@ const stats={swings:0,shots:0,moved:0,blocked:0,skipped:0,errors:0};let lastErro
 const fail=e=>{stats.errors++;lastError=String(e&&e.message||e).slice(0,160);};
 const fin=(v,d=0)=>Number.isFinite(v)?v:d,clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
 // R425 assets/r425/hunter/attack-{r,l}.webp 놓기(5번째) 칸에서 잰 활 손잡이(화살이 떠나는 곳)·발 기준점(index.json anchor)·몸 키(index.json body)
-const GRIP=Object.freeze({r:Object.freeze({x:145,y:79,ax:72,ay:235}),l:Object.freeze({x:46,y:79,ax:120,ay:235})}),BODY=201,DRAW_LIFT=18;
+// R1102b(사용자 11:07Z "왜 활시위에서 안나가고 윗쪽머리에서 나가냐"): 놓기 칸의 시위 줄(x=125, 왼쪽은 거울 67, 세로 중간 79)에서 내보낸다. 손잡이(145·46)보다 몸 쪽.
+// 화살 몸통은 탄 자리가 가운데(길이 = 영웅 키×0.50)라 절반(ARROW_HALF)만큼 겨눈 쪽으로 앞세워 꼬리(오늬)가 시위에 닿게 한다 — 위·대각으로 쏠 때 화살 꼬리가 머리 높이에 걸쳐 머리에서 나오는 듯 보이던 것을 막는다.
+const GRIP=Object.freeze({r:Object.freeze({x:125,y:79,ax:72,ay:235}),l:Object.freeze({x:67,y:79,ax:120,ay:235})}),BODY=201,DRAW_LIFT=18,ARROW_HALF=.25;
 function grip(side,k){const g=GRIP[side==='l'?'l':'r'];if(!(Number.isFinite(k)&&k>0))return{dx:0,dy:0};return{dx:(g.x-g.ax)*k,dy:(g.y-g.ay)*k};}
 // R425 huntSide 와 같은 규칙: 화면 가로 차가 2px 넘으면 그쪽, 아니면 보는 방향(좌·우), 그것도 아니면 지난 쪽(없으면 오른쪽)
 function sideOf(dx,dir,last){if(Number.isFinite(dx)&&Math.abs(dx)>2)return dx<0?'l':'r';return dir==='left'?'l':dir==='right'?'r':last==='l'?'l':'r';}
@@ -28,7 +30,8 @@ function screenToGround(o,rx,ry,TILE,zoom){const T=fin(TILE,64)*Math.max(.05,fin
 function launch(foot,geo,s,target){
  if(![foot&&foot.x,foot&&foot.y,s&&s.x,s&&s.y,s&&s.vx,s&&s.vy,target&&target.x,target&&target.y].every(Number.isFinite))return null;
  const sp=Math.hypot(s.vx,s.vy);if(!(sp>0))return null;const z=Math.max(.05,fin(geo.zoom,1)),o=grip(geo.side,geo.k);
- const g=screenToGround(foot,o.dx,o.dy-Math.max(0,fin(geo.lift))+DRAW_LIFT*z,geo.TILE,z);
+ let hx=0,hy=0;const half=fin(geo.half);if(half>0){const T0=fin(geo.TILE,64)*z,ddx=target.x-foot.x,ddy=target.y-foot.y,sx=(ddx-ddy)*T0,sy=(ddx+ddy)*T0*.5,sl=Math.hypot(sx,sy);if(sl>1e-9){hx=sx/sl*half;hy=sy/sl*half;}}
+ const g=screenToGround(foot,o.dx+hx,o.dy+hy-Math.max(0,fin(geo.lift))+DRAW_LIFT*z,geo.TILE,z);
  const old=Math.atan2(s.vy,s.vx),aimOld=Math.atan2(target.y-s.y,target.x-s.x),spread=Math.atan2(Math.sin(old-aimOld),Math.cos(old-aimOld)),
   na=Math.atan2(target.y-g.y,target.x-g.x)+spread,dOld=Math.hypot(target.x-s.x,target.y-s.y),dNew=Math.hypot(target.x-g.x,target.y-g.y);
  if(![g.x,g.y,na].every(Number.isFinite))return null;
@@ -50,7 +53,7 @@ function wrapAttack(){if(typeof basicAttack!=='function'||basicAttack.r1102)retu
 function wrapShot(){if(typeof makeShot!=='function'||makeShot.r1102)return;const base=makeShot;const w=function(...args){const s=base.apply(this,args);
   try{if(pending&&s&&s.friendly&&s.owner==='hero'&&s.r160Basic&&player===pending.body&&live()&&typeof project==='function'){stats.shots++;
     const want=(typeof actorHeight==='function'?fin(actorHeight(),0):0)*standRatio(),k=want/BODY,z=typeof zoom==='number'?zoom:1,lift=clamp(fin(player.visualLiftPx),0,want*.65);
-    const L=k>0?launch(player,{side:pending.side,k,lift,zoom:z,TILE:typeof TILE==='number'?TILE:64},s,pending.target):null;
+    const L=k>0?launch(player,{side:pending.side,k,lift,zoom:z,TILE:typeof TILE==='number'?TILE:64,half:want*ARROW_HALF},s,pending.target):null;
     if(!L)stats.skipped++;else if(typeof blocked==='function'&&blocked(L.x,L.y,s.radius||.14))stats.blocked++;
     else{s.x=s.px=L.x;s.y=s.py=L.y;s.vx=L.vx;s.vy=L.vy;if(Number.isFinite(L.life))s.life=L.life;s.r1102Bow=pending.side;stats.moved++;}}}catch(e){fail(e);}return s;};
  w.r1102=true;makeShot=w;}
@@ -59,6 +62,6 @@ function side(){try{const b=bodies.get(player);return b&&T()-b.at>=-1e-6&&T()-b.
 function install(){try{wrapAttack();wrapShot();}catch(e){fail(e);}}
 try{if(typeof document!=='undefined'&&document.readyState==='complete')install();else if(typeof window.addEventListener==='function')window.addEventListener('load',install);}catch(e){fail(e);}
 function set(k,v){prefs[k]=v;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
-window.__STORYWORLD_HUNTER_AIM_R1102__=Object.freeze({revision:REV,GRIP,grip,sideOf,screenToGround,launch,side,set,install,
+window.__STORYWORLD_HUNTER_AIM_R1102__=Object.freeze({revision:REV,GRIP,grip,sideOf,screenToGround,launch,side,set,install,ARROW_HALF,
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError,browser:false,GPU:false})});
 })();
