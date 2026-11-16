@@ -125,7 +125,11 @@ function wrapShot(){if(typeof makeShot!=='function'||makeShot.r991)return;const 
        s.currentPublicMuzzle={...(s.currentPublicMuzzle||{}),applied:true,r991:{sheet:pk.sheet,mirror:pk.mirror,tip:t}};stats.moved++;}}}}}catch(e){fail(e);}return s;};
  w.r991=true;makeShot=w;}
 // 몸 그림: R143 이 그린 공격 칸을 고른 칸(같은 프레임·같은 키·같은 발)으로 바꿔 놓는다
-function replace(rec,st){const sw=swingOf(player);if(!sw||!(player.attackAnim>0)||T()-sw.at>.6)return;
+// R1110: 쏘는 도중(attackAnim>0) 기록된 조준이 .6초 넘게 묵으면(표적이 사거리 밖으로 걸어 나가 새 기록이 안 생김) R143 이 걷는 쪽으로 반전해 그린 attack-e 칸이 끼어 반대쪽을 봤다
+//  → 묵었으면 지금 가장 가까운 적(넓은 사거리)으로 다시 고르고, 그것도 없으면 마지막 기록을 그대로 쓴다. 기록 자체(탄 출발점)는 건드리지 않는다.
+function liveSwing(){const sw=swingOf(player);if(sw&&T()-sw.at<=.6)return sw;if(!(player.attackAnim>0)||prefs.staleSwing===false)return null;
+ try{const a=aimNow(40);if(a){const pk=pick(a.a);return{...a,...pk,at:T()};}}catch(e){fail(e);}return sw&&T()-sw.at<=3?sw:null;}
+function replace(rec,st){const sw=liveSwing();if(!sw||!(player.attackAnim>0))return;
  for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||!c.r143Attack||!c.points||!c.sourceRect)continue;
   const src=String(c.sourcePath||c.image?.src||''),m=/(?:r143\/attack|r1003|r1045|r1101b)\/gunner\/attack-([a-z0-9]+)\.webp/.exec(src);if(!m)continue;
   const P=c.points,oldMir=P[1][0]<P[0][0],fOld=oldMir?-1:1,k=Math.abs(P[1][0]-P[0][0])/CW,ky=(P[3][1]-P[0][1])/CH;if(!(k>0)||!Number.isFinite(ky))return;
