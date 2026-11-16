@@ -52919,8 +52919,8 @@
     },
     {
       "path": "ego-guard-r1100.js",
-      "bytes": 6158,
-      "sha256": "8286bb2c9c3f4e1d42b8bf92793b3aeabb0d59c4d84e13f845a4700e49966108"
+      "bytes": 10667,
+      "sha256": "a30177493270b38426ecb70a4fa2e59a15ef1eb035abf2c98a4bed0c348edf4f"
     },
     {
       "path": "ego-kit-r1094.js",
@@ -54714,7 +54714,7 @@
     }
   ],
   "fileCount": 10942,
-  "totalBytes": 1321564238,
+  "totalBytes": 1321568747,
   "webHTMLSha256": "b5ae301938d4b563ac76934b9e381e37753ca4b1bec8ddb945a3cd79fd1a4af6",
   "largest": [
     {

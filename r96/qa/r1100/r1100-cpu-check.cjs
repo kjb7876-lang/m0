@@ -59,4 +59,21 @@ function sand(opt={}){const iv=[],listeners={};const store={};const sb={console,
  vm.runInContext('player.hero="lauren";ctx.commands.length=0;drawHero();',sb);C=vm.runInContext('ctx.commands',sb);ok(C[1].style.globalAlpha===1,'commit 이어도 환도가 아니면 그대로');vm.runInContext('player.hero="hwando";COMMIT=null;',sb);
  vm.runInContext('FORM=true;',sb);G.set(false);vm.runInContext('ctx.commands.length=0;drawHero();',sb);C=vm.runInContext('ctx.commands',sb);ok(C[1].style.globalAlpha===1,'끄기(storyworld.r1100.egoGuard off) → 그대로');}
 {const{sb,run,G}=sand({rc:true});run('ctx.commands.length=0;drawHero();ctx.commands.push(cmd("assets/heroes/hwando.png",80));');ok(G.inspect().form===false,'RC151 변신 중엔 가드 꺼짐(그쪽 그림표)');}
+// R1100b ⑤ 분신 EGO 몸 → 대기 칸·반투명, ⑥ 영웅 1칸 안 흰 연기 옅게
+{const{G}=sand();
+ ok(G.idlePath('assets/r1048/ego/run-se.webp')==='assets/r1048/ego/idle-se.webp'&&G.idlePath('assets/r1048/ego/attack-n.webp?v=2')==='assets/r1048/ego/idle-n.webp'&&G.idlePath('assets/r1048/fx/ego_halo.webp')===''&&G.idlePath('assets/heroes/hwando.png')==='','idlePath: EGO 몸 칸만 같은 방향 대기 시트로');
+ ok(G.idleFrame(0,12)===0&&G.idleFrame(1,12)===8&&G.idleFrame(2,12)===4&&G.idleFrame(NaN,12)===0&&G.idleFrame(-1,12)>=0,'idleFrame: 8fps 순환·NaN/음수 안전');
+ const mk=(src,flt,a,clone=true)=>({kind:'image',owner:{kind:'hero',...(clone?{r945Clone:true,r350:true}:{})},sourcePath:src,sourceRect:[480,0,160,160],points:[[0,0],[10,0],[10,80],[0,80]],style:{globalAlpha:a,filter:flt}});
+ const C=[mk('assets/r1048/ego/run-se.webp','grayscale(1) contrast(1.5) brightness(0.92)',.86),mk('assets/r1048/ego/run-se.webp','grayscale(1) brightness(0.1)',.65),mk('assets/r1048/ego/run-se.webp','none',1,false),mk('assets/r1048/fx/ego_halo.webp','none',.7)];
+ const n2=G.cloneIn(C,0,1);
+ ok(n2===2,'cloneIn: 분신 몫 EGO 몸 두 겹만(영웅 본체·광륜 제외)',n2);
+ ok(C[0].style.filter===G.CLONE.filter&&Math.abs(C[0].style.globalAlpha-.55)<1e-9&&!/grayscale/.test(C[0].style.filter),'분신 몸: 먹 회색 필터 대신 EGO 색 반투명 .55',C[0].style);
+ ok(C[1].style.globalAlpha<=.3&&/brightness\(0\.1\)/.test(C[1].style.filter),'분신 먹 그림자 겹은 .3 이하로 남김',C[1].style);
+ ok(C[2].style.globalAlpha===1&&C[2].style.filter==='none'&&C[3].style.globalAlpha===.7,'영웅 본체·광륜은 그대로');
+ ok(G.cloneIn(C,0,1)===0,'두 번 처리 안 함');
+ ok(Math.abs(G.smokeAlpha(0,40)-.35)<1e-9&&G.smokeAlpha(40,40)===1&&G.smokeAlpha(80,40)===1&&G.smokeAlpha(20,40)>.35&&G.smokeAlpha(20,40)<1&&G.smokeAlpha(NaN,40)===1&&G.smokeAlpha(5,0)===1,'smokeAlpha: 중심 .35 → 1칸에서 1, NaN·0칸 안전');
+ const S=[{kind:'image',sourcePath:'r108eden:smoke#214,222,234',points:[[-5,-5],[5,-5],[5,5],[-5,5]],style:{globalAlpha:.9}},{kind:'image',sourcePath:'assets/r945/hwando-ink-vapor.webp',points:[[95,0],[105,0],[105,10],[95,10]],style:{globalAlpha:.8}},{kind:'image',sourcePath:'assets/r590/hwando-iai-ring.webp',points:[[-5,-5],[5,-5],[5,5],[-5,5]],style:{globalAlpha:.8}}];
+ const k=G.softenSmoke(S,0,{x:0,y:0,tile:40});
+ ok(k===1&&Math.abs(S[0].style.globalAlpha-.9*.35)<1e-9&&S[1].style.globalAlpha===.8&&S[2].style.globalAlpha===.8,'softenSmoke: 1칸 안 연기만 옅게(먼 연기·연기 아닌 이펙트 그대로)',S.map(x=>x.style.globalAlpha));
+ ok(G.softenSmoke(S,0,{x:0,y:0,tile:40})===0&&G.softenSmoke(S,0,null)===0,'연기 두 번 처리 안 함·위치 모르면 안 건드림');}
 console.log(`\nR1100 CPU ${n-bad}/${n} 통과`);process.exitCode=bad?1:0;

@@ -10,10 +10,10 @@
 //  RC151 변신(엔진 '마지막 수호자 EGO')은 따로 그림표가 있으므로 건드리지 않는다. 판정·피해·저장은 그대로. 끄기: localStorage storyworld.r1100.egoGuard = {"on":false}.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_EGO_GUARD_R1100__)return;
-const REV='R1100-ego-guard-1',KEY='storyworld.r1100.egoGuard';
+const REV='R1100-ego-guard-2',KEY='storyworld.r1100.egoGuard';
 const MIN_H=1;// 크기와 상관없이 영웅 몫 환도 몸이면 숨긴다(삼협묵희 분신은 5px 까지 작게도 그려짐). 높이 0 인 퇴화 명령만 뺀다
 let on=true;try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(v&&v.on===false)on=false;}catch(_){}
-const stats={heroCalls:0,hidden:0,ghostsSkipped:0,cutinBlocked:0,errors:0};let lastError=null,lastHidden=null;
+const stats={heroCalls:0,hidden:0,ghostsSkipped:0,cutinBlocked:0,clones:0,smokeSoft:0,errors:0};let lastError=null,lastHidden=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const fin=Number.isFinite;
 // EGO 히든 형상일 때만(RC151 변신 중이면 아님)
@@ -27,19 +27,49 @@ const height=c=>{const p=c?.points;if(!Array.isArray(p)||p.length<4)return 0;con
 // 순수 계산: 기록 명령들(st 이후) 중 영웅 몫 환도 몸 그림을 투명하게. 바꾼 개수를 돌려준다.
 function hideIn(cmds,st){if(!Array.isArray(cmds))return 0;let n=0;for(let i=Math.max(0,st|0);i<cmds.length;i++){const c=cmds[i];if(!c||c.kind!=='image'||c.owner?.kind!=='hero')continue;
  const s=srcOf(c);if(!hwBody(s))continue;if(Array.isArray(c.points)&&!(height(c)>=MIN_H))continue;/* 점 없는 명령(3D 분신 일부)도 몸으로 본다 */const a=+(c.style?.globalAlpha??1);if(!(a>0))continue;c.style={...(c.style||{}),globalAlpha:0};c.egoGuardR1100=true;lastHidden=s.replace(/^.*?assets\//,'assets/');n++;}return n;}
+// ── R1100b(7분야 심사 7.77: 미술·VFX 7.6, 조명색채 7.7) ──
+// ⑤ 삼협묵희 분신: R945 가 분신마다 영웅 그리기를 다시 부르고 먹 필터(grayscale·brightness .1/.92)를 씌워 EGO 몸이 회색 얼룩이 되고 빈 연기 고리·광륜만 읽혔다
+//    → 분신 몫(owner.r945Clone) R1048 EGO 몸 칸을 같은 방향 '대기(idle)' 시트 칸으로 바꾸고, 먹 필터 대신 EGO 색을 살린 반투명(.55)으로. 먹 그림자 겹은 .3 이하로.
+const CLONE=Object.freeze({alpha:.55,min:.22,shadow:.3,fps:8,filter:'saturate(.9) contrast(1.06) brightness(.96)'});
+const idleImgs=new Map();
+function idleImg(path){let im=idleImgs.get(path);if(!im){try{im=new Image();im.decoding='async';im.src=path;}catch(_){im=null;}idleImgs.set(path,im);}return im&&im.complete&&(im.naturalWidth||im.width)>0?im:null;}
+// 순수 계산: EGO 몸 칸 경로 → 같은 방향 대기 시트 경로(아니면 '')
+function idlePath(path){const s=String(path||'');const m=/^(.*\/r1048\/ego\/)([a-z]+)-(n|ne|e|se|s|sw|w|nw)\.(webp|png)(\?.*)?$/.exec(s);return m?m[1]+'idle-'+m[3]+'.'+m[4]:'';}
+// 순수 계산: 대기 칸 번호(시각 t, 칸 수 n)
+function idleFrame(t,n){n=Math.max(1,n|0);if(!fin(t))return 0;return ((Math.floor(t*CLONE.fps)%n)+n)%n;}
+const isShadowPass=c=>/brightness\(0?\.1\)/.test(String(c?.style?.filter||''));
+// 기록 명령(st 이후) 중 분신 몫 EGO 몸 칸을 대기 칸·반투명으로. 바꾼 개수.
+function cloneIn(cmds,st,t){if(!Array.isArray(cmds))return 0;let n=0;for(let i=Math.max(0,st|0);i<cmds.length;i++){const c=cmds[i];if(!c||c.kind!=='image'||c.owner?.kind!=='hero'||!c.owner?.r945Clone||c.egoCloneR1100)continue;
+ const src=String(c.sourcePath||'');if(!/(?:^|\/)r1048\/ego\//.test(src))continue;const a0=+(c.style?.globalAlpha??1);if(!(a0>0))continue;
+ const ip=idlePath(src),im=ip?idleImg(ip):null;
+ if(im){const cell=Array.isArray(c.sourceRect)&&+c.sourceRect[2]>0?+c.sourceRect[2]:160,w=im.naturalWidth||im.width,h=im.naturalHeight||im.height,fr=idleFrame(t,Math.round(w/cell));
+  c.image=im;c.sourcePath=ip;c.sourceRect=[fr*cell,0,cell,cell];c.imageSize=[w,h];c.r1048='idle';}
+ const sh=isShadowPass(c),a=sh?Math.min(a0,CLONE.shadow):Math.max(CLONE.min,Math.min(CLONE.alpha,a0*CLONE.alpha/.86));
+ c.style={...(c.style||{}),globalAlpha:fin(a)?a:CLONE.alpha,...(sh?{}:{filter:CLONE.filter})};c.egoCloneR1100=true;n++;}return n;}
+// ⑥ 순간이동·분신 흰 연기(R108 eden smoke·R945 먹 증기·blink 잔상)가 3D 에서 EGO 몸을 덮었다 → 영웅 몸 중심 1칸 안의 연기 칸만 알파를 .35~1 로(가까울수록 옅게).
+const SMOKE=/smoke|vapor|mist|afterimage/i;
+function smokeAlpha(d,tile){if(!fin(d)||!fin(tile)||tile<=0)return 1;const k=Math.max(0,Math.min(1,d/tile));return .35+.65*k*k*(3-2*k);}
+function heroPin(){try{const p=typeof player==='object'?player:null;if(!p||typeof project!=='function')return null;const a=project(p.x,p.y),b=project(p.x+1,p.y),ah=typeof actorHeight==='function'?+actorHeight():66;
+ const tile=Math.hypot(b.x-a.x,b.y-a.y),lift=Math.max(0,Math.min(60,+p.visualLiftPx||0));const x=a.x,y=a.y-lift-(fin(ah)?ah:66)*.5;return fin(x)&&fin(y)&&fin(tile)&&tile>0?{x,y,tile}:null;}catch(_){return null;}}
+function softenSmoke(cmds,st,pin){if(!Array.isArray(cmds)||!pin)return 0;let n=0;for(let i=Math.max(0,st|0);i<cmds.length;i++){const c=cmds[i];if(!c||c.kind!=='image'||c.egoSmokeR1100)continue;
+ if(!SMOKE.test(String(c.sourcePath||c.image?.src||'')))continue;const P=c.points;if(!Array.isArray(P)||P.length<4)continue;const cx=(+P[0][0]+ +P[2][0])/2,cy=(+P[0][1]+ +P[2][1])/2;
+ const k=smokeAlpha(Math.hypot(cx-pin.x,cy-pin.y),pin.tile);if(!(k<1))continue;const a0=+(c.style?.globalAlpha??1);c.style={...(c.style||{}),globalAlpha:fin(a0)?a0*k:k};c.egoSmokeR1100=true;n++;}return n;}
+const now=()=>{try{return typeof time==='number'&&fin(time)?time:performance.now()/1000;}catch(_){return 0;}};
+let depth=0;
 const done={};
 function wrapHero(){if(done.hero||typeof drawHero!=='function')return;done.hero=true;const base=drawHero;
- drawHero=function(...a){let rec=null,st=-1;try{rec=typeof ctx==='object'?ctx:null;st=Array.isArray(rec?.commands)?rec.commands.length:-1;}catch(_){}const r=base.apply(this,a);
-  try{if(st>=0&&egoForm()){stats.heroCalls++;stats.hidden+=hideIn(rec.commands,st);}}catch(e){fail(e);}return r;};}
+ drawHero=function(...a){let rec=null,st=-1;try{rec=typeof ctx==='object'?ctx:null;st=Array.isArray(rec?.commands)?rec.commands.length:-1;}catch(_){}depth++;let r;try{r=base.apply(this,a);}finally{depth--;}
+  try{if(st>=0&&egoForm()){stats.heroCalls++;stats.hidden+=hideIn(rec.commands,st);/* 분신 표시는 R945 가 분신 그리기 뒤에 붙이므로 가장 바깥 호출에서 */if(depth===0){stats.clones+=cloneIn(rec.commands,st,now());stats.smokeSoft+=softenSmoke(rec.commands,st,heroPin());}}}catch(e){fail(e);}return r;};}
 function wrapEffect(){if(done.fx||typeof drawEffect!=='function')return;done.fx=true;const base=drawEffect;
- drawEffect=function(e,...a){try{if(e&&e.type==='ghost'&&hwBody(e.asset)&&egoForm()){stats.ghostsSkipped++;return;}}catch(err){fail(err);}return base.call(this,e,...a);};}
+ drawEffect=function(e,...a){let ego=false,rec=null,st=-1;try{ego=egoForm();if(e&&e.type==='ghost'&&hwBody(e.asset)&&ego){stats.ghostsSkipped++;return;}if(ego){rec=typeof ctx==='object'?ctx:null;st=Array.isArray(rec?.commands)?rec.commands.length:-1;}}catch(err){fail(err);}
+  const r=base.call(this,e,...a);try{if(ego&&st>=0)stats.smokeSoft+=softenSmoke(rec.commands,st,heroPin());}catch(err){fail(err);}return r;};}
 function wrapCutin(){if(done.cut)return;const R=window.__STORYWORLD_PASSIVE_CUTIN_R1033__;if(!R||typeof R.allow!=='function')return;done.cut=true;
  try{const allow0=R.allow;window.__STORYWORLD_PASSIVE_CUTIN_R1033__=Object.freeze({...R,allow(hero,...x){if(hero==='hwando'&&egoForm()){stats.cutinBlocked++;return false;}return allow0.call(R,hero,...x);}});}catch(e){fail(e);}}
 // 모든 스크립트가 실린 뒤 가장 바깥에서 감싸야 늦게 실린 환도 덧씌우기까지 덮는다 → 첫 설치는 load 뒤, 그 뒤 1초마다 빠진 것만
 function install(){try{wrapHero();wrapEffect();wrapCutin();}catch(e){fail(e);}}
 const start=()=>{install();try{setInterval(install,1000);}catch(_){}};
 try{if(document.readyState==='complete')setTimeout(start,0);else window.addEventListener('load',()=>setTimeout(start,0),{once:true});}catch(_){start();}
-window.__STORYWORLD_EGO_GUARD_R1100__=Object.freeze({revision:REV,hwBody,hideIn,egoForm,installed:()=>({...done}),
+window.__STORYWORLD_EGO_GUARD_R1100__=Object.freeze({revision:REV,hwBody,hideIn,egoForm,CLONE,idlePath,idleFrame,cloneIn,smokeAlpha,softenSmoke,installed:()=>({...done}),
  set(v){on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;},
  inspect:()=>({revision:REV,on,form:egoForm(),installed:{...done},stats:{...stats},lastHidden,lastError})});
 })();
