@@ -1,0 +1,36 @@
+neon rows 666 errors 0
+lauren rows 702 errors 0
+seoha rows 666 errors 0
+hwando rows 2632 errors 0
+PASS neon: 스킬 장면 85% 이상 공격·스킬 그림 {"n":116,"frac":1,"odd":[]}
+PASS neon: 기본 공격 장면 85% 이상 공격 그림 {"n":38,"frac":1,"odd":[]}
+FAIL neon: 공격 몸 키 = 서기의 ±6% {"ratio":0.825,"idle":66}
+FAIL neon: 스킬 몸 키 = 서기의 ±6% {"ratio":0.823,"idle":66}
+PASS neon: 피격 몸 키 = 서기의 ±6% {"ratio":1.001,"idle":66}
+PASS neon: 걷기 몸 키 = 서기의 ±6% {"n":65,"ratio":0.996}
+PASS neon: 기본 공격은 좌·우 시트 위주(대각 시트 0) {"n":38,"diag":0,"side":34}
+PASS neon: 그리기 값 유한 
+PASS lauren: 스킬 장면 85% 이상 공격·스킬 그림 {"n":118,"frac":1,"odd":[]}
+PASS lauren: 기본 공격 장면 85% 이상 공격 그림 {"n":16,"frac":1,"odd":[]}
+FAIL lauren: 공격 몸 키 = 서기의 ±6% {"ratio":0.885,"idle":65.7}
+PASS lauren: 스킬 몸 키 = 서기의 ±6% {"ratio":1.006,"idle":65.7}
+PASS lauren: 피격 몸 키 = 서기의 ±6% {"ratio":1.021,"idle":65.7}
+PASS lauren: 걷기 몸 키 = 서기의 ±6% {"n":102,"ratio":1.016}
+PASS lauren: 기본 공격은 좌·우 시트 위주(대각 시트 0) {"n":16,"diag":0,"side":11}
+PASS lauren: 그리기 값 유한 
+PASS seoha: 스킬 장면 85% 이상 공격·스킬 그림 {"n":69,"frac":1,"odd":[]}
+PASS seoha: 기본 공격 장면 85% 이상 공격 그림 {"n":98,"frac":1,"odd":[]}
+PASS seoha: 공격 몸 키 = 서기의 ±6% {"ratio":1.007,"idle":65.6}
+PASS seoha: 스킬 몸 키 = 서기의 ±6% {"ratio":1.008,"idle":65.6}
+PASS seoha: 피격 몸 키 = 서기의 ±6% {"ratio":1.002,"idle":65.6}
+PASS seoha: 걷기 몸 키 = 서기의 ±6% {"n":58,"ratio":1.007}
+PASS seoha: 그리기 값 유한 
+PASS hwando: 스킬 장면 85% 이상 공격·스킬 그림 {"n":149,"frac":1,"odd":[]}
+PASS hwando: 기본 공격 장면 85% 이상 공격 그림 {"n":5,"frac":1,"odd":[]}
+PASS hwando: 공격 몸 키 = 서기의 ±6% {"ratio":0.978,"idle":64.7}
+PASS hwando: 스킬 몸 키 = 서기의 ±6% {"ratio":1.016,"idle":64.7}
+PASS hwando: 피격 몸 키 = 서기의 ±6% {"ratio":1.006,"idle":64.7}
+PASS hwando: 걷기 몸 키 = 서기의 ±6% {"n":141,"ratio":1.006}
+PASS hwando: 그리기 값 유한 
+
+R1050b 실패 3
