@@ -544,10 +544,14 @@ jobs:
         run: node r96/qa/r1101/r1101-cpu-check.cjs
       - name: R1101b gunner diagonal and side idle gaze sheets CPU check
         run: node r96/qa/r1101b/r1101b-cpu-check.cjs
+      - name: R1108 neon/lauren attack body scale and seoha diagonal walk CPU check
+        run: node r96/qa/r1108/r1108-cpu-check.cjs
       - name: R1047 reach bounds (minX,minY,maxX,maxY) keep hidden persona reachable CPU check
         run: node r96/qa/r1047/reach-bounds-cpu-check.cjs
       - name: R1096 hidden persona mirror-celestial patterns (telegraphed crimson push orb, abyss pull well, eclipse beam; probabilistic) CPU check
         run: node r96/qa/r1096/persona-gravity-cpu-check.cjs
+      - name: R1107 persona mirror-celestial Dots sheets (CX-0118PM PM-1 red star, PM-3 eclipse charge/bolt, no tint, fallback to temporary art) CPU check
+        run: node r96/qa/r1107/mirror-sheets-cpu-check.cjs
       - name: R945 hwando ink passives (piercing ink crescent, seven ink clones for 7 s, three-hero ink finale, per-body state) CPU check
         run: node r96/qa/r945/r945-cpu-check.cjs
       - name: R1034 hwando W seven-direction clones restored + ink clone action circles CPU check
@@ -754,6 +758,8 @@ jobs:
         run: node r96/qa/r1100/r1100-cpu-check.cjs
       - name: R1105 EGO attack motion (no skipped strike frames, swing blend, direction hold, clone redraw) CPU check
         run: node r96/qa/r1105/r1105-cpu-check.cjs
+      - name: R1109 co-op relay build match (old R62 Render relay auto-fallback, default relay address) CPU check
+        run: node r96/qa/r1109/r1109-cpu-check.cjs
       - name: R1092 story panel scene art (vertical-version scene paintings, ink-wash aware) CPU check
         run: node r96/qa/r1092/r1092-cpu-check.cjs
       - name: R1040 boss pattern frame fx CPU check
