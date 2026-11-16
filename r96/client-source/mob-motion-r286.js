@@ -32,7 +32,10 @@ const hospital=()=>{try{return G('zone')==='ep1a08';}catch(_){return false;}};
 // ---- 분류(순수: QA 가 같은 함수를 쓴다) ----
 function classifyTrack(t){if(!t)return 'static';const m=!!t.move,a=!!t.attack;return m&&a?'full':a?'attack-only':m?'move-only':t.idle?'idle-only':'static';}
 function r248Sheet(e){try{const U=window.__STORYWORLD_MOB_UNIQUE_R248__;if(!U?.sheetFor||U.inspect?.().prefs?.on===false||!solo())return null;return U.sheetFor(e)||null;}catch(_){return null;}}
-function kindNow(e){if(!e)return null;if(major(e))return 'major';if(e.r193Doll||fixed(e))return 'static';if(e.r200Shade||e.r208Mob)return 'full';
+function kindNow(e){if(!e)return null;if(major(e))return 'major';
+ // R1065: Dots 공격 시트(CX-0112MA)가 맡는 몹은 진짜 공격 그림이 있다 → 내딛기·걷기 칸 대체를 하지 않는다.
+ try{if(window.__STORYWORLD_MOB_ATTACK_DOTS_R1065__?.covers?.(e))return 'full';}catch(_){}
+if(e.r193Doll||fixed(e))return 'static';if(e.r200Shade||e.r208Mob)return 'full';
  try{const S=window.__STORYWORLD_STORY_MOBS_R208__;if(S?.assign&&S.assign(e))return 'full';}catch(_){}
  if(r248Sheet(e))return 'full';
  // R1064(2026-11-15 밤샘): R380 승인 시트가 그리는 몹은 그 시트의 칸 수로 가른다. R109 표로만 보면 '이동 칸만'으로 잡혀(보랏빛 알집지기 등)
@@ -44,7 +47,7 @@ function kindNow(e){if(!e)return null;if(major(e))return 'major';if(e.r193Doll||
  if(!t){try{if(M.inspect?.().state!=='ready')return null;}catch(_){return null;}}
  return classifyTrack(t);}
 const kinds=new WeakMap();
-function kindOf(e){const c=kinds.get(e),now=T();if(c&&c.name===e.name&&now-c.at<3&&now>=c.at)return c.k;const k=kindNow(e);if(k){kinds.set(e,{k,name:e.name,at:now});}return k;}
+function kindOf(e){const c=kinds.get(e),now=T();if(c&&c.name===e.name&&now-c.at<3&&now>=c.at){/* R1065: 캐시된 '그림 없음'도 Dots 공격 시트가 맡게 되면 바로 full */if(c.k!=='full'&&c.k!=='major'){try{if(window.__STORYWORLD_MOB_ATTACK_DOTS_R1065__?.covers?.(e)){c.k='full';}}catch(_){}}return c.k;}const k=kindNow(e);if(k){kinds.set(e,{k,name:e.name,at:now});}return k;}
 // ---- 자리·연출 도우미 ----
 function free(x,y){try{if(typeof blocked==='function'&&blocked(x,y,RAD,room))return false;return true;}catch(_){return false;}}
 function sees(x,y){try{return typeof clearLine!=='function'||!!clearLine({x,y},player);}catch(_){return false;}}
