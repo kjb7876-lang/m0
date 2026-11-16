@@ -18,11 +18,11 @@
 //  판정·피해·AI·저장·서사·이펙트·탄·동작 선택은 바꾸지 않는다(EGO 몸 그림만).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_EGO_INK_R1099__)return;
-const REV='R1099-ego-ink-3',KEY='storyworld.r1099.egoInk';
+const REV='R1099-ego-ink-3+R1112',KEY='storyworld.r1099.egoInk';
 const HEX=Object.freeze({deep:'#460e0a',yeonji:'#841e16',juhong:'#cc3428',pale:'#ffb08c',ink:'#12161c',white:'#f3eee2'});
 const rgb=h=>[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];
 const PAL={ink:rgb(HEX.ink),paper:rgb(HEX.white),deep:rgb(HEX.deep),yeonji:rgb(HEX.yeonji),juhong:rgb(HEX.juhong),pale:rgb(HEX.pale)};
-const stats={faces:0,frames:0,swapped:0,baked:0,cells:0,failed:0,errors:0,rows:0,bakeMs:0,evicted:0};let lastError=null;
+const stats={pre:0,faces:0,frames:0,swapped:0,baked:0,cells:0,failed:0,errors:0,rows:0,bakeMs:0,evicted:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e&&e.message||e).slice(0,160);};
 const fin=(v,d)=>Number.isFinite(v)?v:d,clamp=(v,a,b)=>v<a?a:v>b?b:v;
 const sstep=(a,b,x)=>{const t=clamp((x-a)/(b-a||1e-6),0,1);return t*t*(3-2*t);};
@@ -170,7 +170,8 @@ function headOf(px,w,h,cxHint,sc){sc=clamp(fin(sc,1),.25,4);const lo=Math.max(0,
  const runAt=y=>{let best=0,bs=0,cur=0,cs=0;for(let x=lo;x<hi;x++){if(px[(y*w+x)*4+3]>110){if(!cur)cs=x;cur++;if(cur>best){best=cur;bs=cs;}}else cur=0;}return best>=wmin&&best<=wmax?bs+(best-1)/2:null;};
  for(let y=ys;y<ye-(ye-ys)*.4;y++){let sum=0,ok=true;for(let k=0;k<need;k++){const c=runAt(y+k);if(c===null){ok=false;break;}sum+=c;}if(ok)return {y:y,x:sum/need};}
  return null;}
-const FACE_DIR={s:0,sw:1,w:2,e:6,se:7},FACE_SHIFT={s:0,sw:-.2,se:.2,w:-.12,e:.12};
+// R1112(사용자 11-16 "윗부분 이미지도 짤리고 총체적난국"): 옆모습(e·w)에 붙인 얼굴이 머리 옆으로 튀어나온 흰 가면 덩어리로 보였다 → 얼굴은 앞쪽(s·se·sw)만.
+const FACE_DIR={s:0,sw:1,se:7},FACE_SHIFT={s:0,sw:-.2,se:.2};
 const faces={state:'idle',img:{},t0:0,cut:0};
 function loadFaces(){if(faces.state!=='idle')return;faces.state='loading';faces.t0=now();let left=0;
  for(const [d,k] of Object.entries(FACE_DIR)){left++;try{const img=new Image();img.crossOrigin='anonymous';img.decoding='async';
@@ -213,7 +214,7 @@ const capPx=()=>scaleMode>1?26e6:12e6;
 const makeCanvas=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c;};
 function absolute(u){try{if(/^[a-z][a-z0-9+.-]*:/i.test(u))return u;return new URL(u,document.baseURI||window.location?.href).href;}catch(_){return u;}}
 const now=()=>{try{return performance.now();}catch(_){return Date.now();}};
-function evict(keep){while(cachePx>capPx()&&cache.size>1){let k=null;for(const [u,r] of cache){if(u===keep||r.state!=='ready')continue;if(!k||r.used<cache.get(k).used)k=u;}if(!k)break;const r=cache.get(k);cachePx-=r.px||0;cache.delete(k);stats.evicted++;}}
+function evict(keep){while(cachePx>capPx()&&cache.size>1){let k=null;for(const [u,r] of cache){if(u===keep||r.state!=='ready'||r.pre)continue;if(!k||r.used<cache.get(k).used)k=u;}if(!k)break;const r=cache.get(k);cachePx-=r.px||0;cache.delete(k);stats.evicted++;}}
 // 한 장 굽기를 칸 단위로 나눈다: 읽기 → (칸마다) 확대·언샤프·수묵 → 다 되면 한 캔버스로
 function startJob(url,m){const row=cache.get(url);if(!row)return;const J=job={url,m,row,img:null,step:0,mode:row.mode}; /* 콜백은 자기 일(J)에만 — 모드가 바뀌어 새 일이 서면 옛 그림이 새 일에 끼지 않게 */
  try{const img=new Image();img.crossOrigin='anonymous';img.decoding='async';
@@ -248,8 +249,28 @@ function pump(){if(job||!queue.length)return;if(!modeNow())return;if(faceOn&&!fa
 function want(url,m,first){const key=url+'#'+lastMode;if(cache.has(key))return;cache.set(key,{state:'wait',used:now(),mode:lastMode,src:url});const it={url:key,m};if(first)queue.unshift(it);else queue.push(it);}
 // 하나를 보면 같은 방향의 모든 동작을 먼저, 그다음 같은 동작의 다른 방향을 예약한다(동작·방향을 바꿀 때 원본이 잠깐 비치지 않게)
 let lastMode=null;
-function request(url,m){const s=pcScale(),md=modeNow();if(scaleMode!==s){scaleMode=s;lastMode=md;cache.clear();queue.length=0;job=null;cachePx=0;}
- else if(lastMode!==md){lastMode=md;queue.length=0;for(const [k,r] of cache)if(r.state==='wait'&&!(job&&job.url===k))cache.delete(k);} /* 모드만 바뀌면 구운 시트(열쇠에 모드 포함)는 남기고 예약만 비운다 → 수묵 끔→켬 때 바로 다시 씀 */
+// ---------------- R1112 미리 구운 수묵 시트 ----------------
+// 사용자 11-16 "공격모션도 환도랑 섞이고 … 총체적난국": 실행 중 굽기는 시트 한 장에 PC 약 1초·48장이면 1분 가까이 걸려, 그동안 처음 보는 동작·방향마다
+//  원본 3D 칸(어두운 두건 코트)과 수묵 칸(붉은 머리·종이빛 여백)이 번갈아 나와 다른 인물처럼 보였다(헤드리스 실측: 시작 뒤 80프레임 동안 원본 108번).
+//  → 같은 굽기(수묵+얼굴+몸통 슬림, 1.5배)를 빌드 전에 한 번 돌려 assets/r1112/ego-ink/<동작>-<방향>.webp 48장으로 두고, EGO 형상이 켜지면 48장을 한꺼번에 받는다.
+//  얼굴을 끄거나 수묵만 끈 '얼굴만' 모드는 예전처럼 실행 중에 굽는다. 받기 실패면 그 장만 예전 굽기로. 끄기: localStorage 'storyworld.r1112.inkPre'='0'.
+const PRE=/*R1112-PRE*/{"base":"assets/r1112/ego-ink/","cell":160,"sheets":{"attack-e":[10,0,160,160,225,240,16],"attack-n":[22,0,135,160,170,240,16],"attack-ne":[16,0,153,160,206,240,16],"attack-nw":[0,13,144,160,216,221,16],"attack-s":[26,10,138,160,168,225,16],"attack-se":[16,0,160,157,216,236,16],"attack-sw":[7,25,144,160,206,203,16],"attack-w":[0,26,150,160,225,201,16],"discard-e":[20,31,148,160,192,194,20],"discard-n":[17,22,129,160,168,207,20],"discard-ne":[19,23,144,160,188,206,20],"discard-nw":[24,25,134,160,165,203,20],"discard-s":[30,34,143,155,170,182,20],"discard-se":[25,35,136,158,167,185,20],"discard-sw":[16,33,141,157,188,186,20],"discard-w":[12,33,140,159,192,189,20],"hit-e":[18,37,151,160,200,185,8],"hit-n":[36,35,127,160,137,188,8],"hit-ne":[20,35,153,160,200,188,8],"hit-nw":[40,35,133,160,140,188,8],"hit-s":[33,30,124,153,137,185,8],"hit-se":[27,34,119,158,138,186,8],"hit-sw":[6,31,140,158,201,191,8],"hit-w":[9,33,141,160,198,191,8],"idle-e":[23,37,146,160,185,185,12],"idle-n":[38,35,123,160,128,188,12],"idle-ne":[25,36,147,160,183,186,12],"idle-nw":[42,35,132,160,135,188,12],"idle-s":[37,32,122,155,128,185,12],"idle-se":[28,35,118,158,135,185,12],"idle-sw":[13,32,134,157,182,188,12],"idle-w":[14,34,137,159,185,188,12],"run-e":[28,35,160,156,198,182,10],"run-n":[33,27,133,160,150,200,10],"run-ne":[24,30,154,160,195,195,10],"run-nw":[30,28,134,160,156,198,10],"run-s":[28,38,127,160,149,183,10],"run-se":[26,38,130,160,156,183,10],"run-sw":[6,36,135,160,194,186,10],"run-w":[0,32,132,156,198,186,10],"walk-e":[25,35,156,157,197,183,12],"walk-n":[31,34,129,160,147,189,12],"walk-ne":[25,34,153,160,192,189,12],"walk-nw":[39,34,133,160,141,189,12],"walk-s":[32,32,128,160,144,192,12],"walk-se":[26,35,121,160,143,188,12],"walk-sw":[7,31,136,160,194,194,12],"walk-w":[4,32,135,155,197,185,12]}}/*R1112-PRE-END*/;
+const preOn=()=>{try{return localStorage.getItem('storyworld.r1112.inkPre')!=='0';}catch(_){return true;}};
+const preUsable=md=>md==='ink'&&faceOn&&!!PRE&&preOn();
+function preRequest(m){const k=m.clip+'-'+m.dir,key='pre:'+k;let r=cache.get(key);if(r)return r.state==='failed'?null:r;const e=PRE.sheets[k];if(!e)return null;
+ r={state:'wait',used:now(),mode:'ink',src:k,pre:true};cache.set(key,r);
+ try{const img=new Image();img.crossOrigin='anonymous';img.decoding='async';
+  /* 받은 그림 크기가 표와 다르거나 받기 실패면 그 장만 예전처럼 실행 중에 굽는다 */
+  const back=()=>{r.state='failed';stats.preFailed=(stats.preFailed||0)+1;try{request(absolute('assets/r1048/ego/'+k+'.webp'),m,true);}catch(e3){fail(e3);}};
+  img.onload=()=>{const W=img.naturalWidth||img.width,H=img.naturalHeight||img.height;if(W!==e[4]*e[6]||H!==e[5])return back();
+   const path='r1099:ink:'+k+':pre';try{img.__storyworldStaticSource={path};}catch(_){}
+   Object.assign(r,{state:'ready',canvas:img,cell:PRE.cell,box:e.slice(0,4),ow:e[4],oh:e[5],frames:e[6],path,px:0,used:now()});stats.pre++;};
+  img.onerror=back;img.src=absolute(PRE.base+k+'.webp');}catch(e2){r.state='failed';fail(e2);}
+ return r;}
+function preloadAll(){if(!PRE)return 0;let n=0;for(const c of CLIPS)for(const d of DIRS){if(preRequest({clip:c,dir:d}))n++;}return n;}
+function request(url,m,noPre){const s=pcScale(),md=modeNow();
+ if(!noPre&&preUsable(md)){preloadAll();const r=preRequest(m);if(r){r.used=now();return r;}}if(scaleMode!==s){scaleMode=s;lastMode=md;for(const [k,r] of cache)if(!r.pre)cache.delete(k);queue.length=0;job=null;cachePx=0;} /* R1112: 미리 구운 줄은 배율과 무관 — 남긴다 */
+ else if(lastMode!==md){lastMode=md;queue.length=0;for(const [k,r] of cache)if(r.state==='wait'&&!r.pre&&!(job&&job.url===k))cache.delete(k);} /* 모드만 바뀌면 구운 시트(열쇠에 모드 포함)는 남기고 예약만 비운다 → 수묵 끔→켬 때 바로 다시 씀 */
  if(!md)return null;if(faceOn)loadFaces();
  if(!cache.has(url+'#'+md)){want(url,m,true);const at=(c,d)=>url.replace(/(idle|walk|run|attack|hit|discard)-(s|se|e|ne|n|nw|w|sw)(?=\.(?:webp|png))/,c+'-'+d);
   for(const c of CLIPS)want(at(c,m.dir),{clip:c,dir:m.dir},false);for(const d of DIRS)want(at(m.clip,d),{clip:m.clip,dir:d},false);
@@ -270,6 +291,8 @@ function process(commands){const md=modeNow();if(!md||!Array.isArray(commands))r
   const op=s.globalCompositeOperation;if(op&&op!=='source-over'&&op!=='lighter')continue;
   const cell=+(meta?.cell)||fh;if(!(cell>0)||fw!==cell||fh!==cell||fy!==0||fx%cell!==0)continue;
   let row;try{row=request(absolute(src),m);}catch(e){fail(e);continue;}
+  /* R1112: 미리 구운 그림을 받는 짧은 동안(보통 로딩 화면 안)은 원본 3D 칸을 비추지 않는다 — 다른 인물처럼 보이는 섞임보다 한순간 빈 몸이 낫다 */
+  if(row&&row.pre&&row.state==='wait'&&op!=='lighter'){c.style={...s,globalAlpha:0};c.r1099=true;stats.preHidden=(stats.preHidden||0)+1;continue;}
   if(!row||row.state!=='ready'||row.cell!==cell)continue;const frame=fx/cell;if(!(frame>=0)||frame>=row.frames)continue;
   // 지금 명령의 네 귀퉁이 = 칸(cell×cell, R409 면 사방 pad 더) → 잘라 구운 영역(box)의 네 귀퉁이로
   const tot=cell+2*pad,a=P[0],b=P[1],d=P[3],ux=(b[0]-a[0])/tot,uy=(b[1]-a[1])/tot,vx=(d[0]-a[0])/tot,vy=(d[1]-a[1])/tot;
@@ -294,7 +317,7 @@ const wrapFn=fn=>{if(fn.__r1099)return fn;const w=function(frame){if(depth===0){
 try{const C=window.StoryPhase1?.ThreeRenderer?.prototype;if(C&&typeof C.render==='function')C.render=wrapFn(C.render);}catch(e){fail(e);}
 const wrapped=new WeakSet();
 function wrapInst(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(r&&Object.prototype.hasOwnProperty.call(r,'render')&&typeof r.render==='function'&&!wrapped.has(r)){wrapped.add(r);r.render=wrapFn(r.render);}}catch(e){fail(e);}}
-function tick(){wrapInst();refresh();if(queue.length&&!job)pump();}
+function tick(){wrapInst();refresh();try{if(preUsable(modeNow())&&window.__STORYWORLD_EGO_SOVEREIGN_R1046__?.formActive?.())preloadAll();}catch(e){fail(e);}if(queue.length&&!job)pump();}
 try{setInterval(tick,500);}catch(e){fail(e);}tick();
 // ---------------- 설정 창 줄: '전투 화면' 구역, 수묵 줄들 바로 뒤 ----------------
 function label(){try{const b=document.getElementById('egoInkOnR1099');if(b)b.checked=on;const f=document.getElementById('egoFaceOnR1099');if(f)f.checked=faceOn;}catch(e){fail(e);}}
@@ -314,7 +337,7 @@ function settingsRow(){try{const host=document.getElementById('combatScreenR1021
   label();}catch(e){fail(e);}}
 function settingsLater(){settingsRow();try{queueMicrotask(settingsRow);}catch(_){}try{requestAnimationFrame(()=>{settingsRow();requestAnimationFrame(settingsRow);});}catch(_){}}
 try{if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const r=base.apply(this,a);try{settingsLater();}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
-window.__STORYWORLD_EGO_INK_R1099__=Object.freeze({revision:REV,storageKey:KEY,palette:HEX,inkCell,inkSheet,levelsOf,usedBox,sharpen,feel,faceCut,headOf,slimTorso,match,process,active,mode:modeNow,refresh,enabled:()=>on,set,faceEnabled:()=>faceOn,setFace,settingsRow,
+window.__STORYWORLD_EGO_INK_R1099__=Object.freeze({revision:REV,storageKey:KEY,palette:HEX,inkCell,inkSheet,levelsOf,usedBox,sharpen,feel,faceCut,headOf,slimTorso,match,process,active,mode:modeNow,refresh,enabled:()=>on,set,faceEnabled:()=>faceOn,faceDirs:()=>Object.keys(FACE_DIR),preloadAll,pre:()=>PRE,bakedRows:()=>[...cache.values()].filter(r=>r.state==='ready'&&!r.pre&&r.mode==='ink').map(r=>({path:r.path,box:r.box,ow:r.ow,oh:r.oh,frames:r.frames,cell:r.cell,canvas:r.canvas})),setFace,settingsRow,
  inspect:()=>{let ready=0,failed=0;for(const r of cache.values()){if(r.state==='ready')ready++;else if(r.state==='failed')failed++;}
   return {revision:REV,on,inkLive,active:active(),mode:modeNow(),face:faceOn,faceState:faces.state,faceCuts:faces.cut,facesPut:stats.faces,scale:scaleMode,frames:stats.frames,swapped:stats.swapped,cached:cache.size,ready,failed,queued:queue.length,baking:job?job.url.split('/').pop():null,baked:stats.baked,cells:stats.cells,bakeMs:Math.round(stats.bakeMs),cachePx,evicted:stats.evicted,errors:stats.errors,rows:stats.rows,lastError};}});
 })();

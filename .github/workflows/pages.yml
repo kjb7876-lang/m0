@@ -760,6 +760,8 @@ jobs:
         run: node r96/qa/r1100/r1100-cpu-check.cjs
       - name: R1105 EGO attack motion (no skipped strike frames, swing blend, direction hold, clone redraw) CPU check
         run: node r96/qa/r1105/r1105-cpu-check.cjs
+      - name: R1112 EGO restore (samong cut-in EGO art, EGO aura color, prebaked ink sheets, front-only face, HIDDEN tag) CPU check
+        run: node r96/qa/r1112/r1112-cpu-check.cjs
       - name: R1109 co-op relay build match (old R62 Render relay auto-fallback, default relay address) CPU check
         run: node r96/qa/r1109/r1109-cpu-check.cjs
       - name: R1092 story panel scene art (vertical-version scene paintings, ink-wash aware) CPU check

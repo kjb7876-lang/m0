@@ -182,7 +182,7 @@ function persona(w=120,h=160){const px=new Uint8ClampedArray(w*h*4);const set=(x
 {// 게임 흐름: 페르소나 원화가 있으면 얼굴을 붙여 굽는다
  const PER=persona(120,160);const SHEETS=u=>/rc133\/art\/base-/.test(u)?{w:PER.w,h:PER.h,px:PER.px}:/assets\/r1048\/ego\//.test(u)?SH:null;
  const Fw=world(undefined,{sheets:SHEETS});Fw.tick();ok('face on by default',Fw.api.faceEnabled()===true&&Fw.api.mode()==='ink');
- Fw.api.process([body(0)]);Fw.flush();const I=Fw.api.inspect();ok('ink mode: persona faces cut (5 front/side dirs) and pasted while baking',I.faceCuts===5&&I.facesPut>0&&I.ready>=1&&I.errors===0,I);
+ Fw.api.process([body(0)]);Fw.flush();const I=Fw.api.inspect();/* R1112(사용자 11-16 이미지 전수 개선): 옆(e·w) 얼굴이 가면 덩어리로 보여 앞쪽 3방향만 — 기대값 5→3 */ok('ink mode: persona faces cut (3 front dirs) and pasted while baking',I.faceCuts===3&&I.facesPut>0&&I.ready>=1&&I.errors===0,I);
  // 뒤를 보는 방향(n)은 얼굴을 붙이지 않는다
  const before=Fw.api.inspect().facesPut;const cn=body(0,{path:'assets/r1048/ego/idle-n.webp'});Fw.api.process([cn]);Fw.flush();
  ok('back-facing sheet (n) gets no face',Fw.api.inspect().facesPut===before,[before,Fw.api.inspect().facesPut]);

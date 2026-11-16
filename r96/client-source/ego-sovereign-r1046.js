@@ -74,6 +74,19 @@ function step(){const p=pl(),t=now();if(!p||t==null)return;
  if(!active()||!(p.hp>0)){pending=null;return;}
  if(pending){if(t>=pending.at){pending=null;discard();}return;}
  /* 상태는 지난 프레임과 이번 프레임 사이에 걸렸다 — 지연은 그 프레임 시작부터 센다 */if(t>=cdUntil&&present().length){pending={at:Math.max(prev,cdUntil)+delaySec()};stats.scheduled++;}}
+// ---- R1112 사몽각성(死夢覺醒) 컷인 ----
+// 사용자 11-16 "히든영웅에고 사몽이 환도영웅걸로 나오는문제": 엔진 showAwakening 은 heroArt[player.hero].awakening·HEROES[hero].name 을 써서
+//  EGO 형상(몸은 환도 계보)인데도 왼쪽 위 컷인·가운데 큰 컷인(RC149 sw8)에 환도 초상과 '환도 · 11초' 가 떴다.
+//  → EGO 형상(RC151 변신 중이 아닐 때)이면 이 호출 동안만 각성 그림 경로를 EGO 컷인 원화로 바꿔 넘기고, 이름 줄을 EGO 로 고친다(R1033 초상 바꾸기는 EGO 때 쉼).
+const AWAKE_NAME='마지막 수호자 EGO'; // HUD·RC151 컷인과 같은 이름
+function wrapAwake(){if(typeof showAwakening!=='function'||showAwakening.__r1112)return;const base=showAwakening;
+ const w=function(...a){const ego=formActive()&&!rc()?.active;let art=null,old;
+  if(ego){try{art=heroArt[P.base];if(art&&typeof art==='object'){old=art.awakening;art.awakening=P.cutin.image;}else art=null;}catch(e){art=null;}}
+  try{return base.apply(this,a);}
+  finally{if(art)art.awakening=old;
+   if(ego&&hasDoc()){try{stats.awake=(stats.awake||0)+1;const im=document.getElementById('awakeImage');if(im){if(im.getAttribute('src')!==url(P.cutin.image))im.src=url(P.cutin.image);im.removeAttribute('data-r1033');}
+    const h=document.getElementById('awakeHero');if(h&&!h.textContent.startsWith(AWAKE_NAME))h.textContent=h.textContent.replace(/^[^·]*/,AWAKE_NAME+' ');}catch(e){fail(e);}}}};
+ w.__r1112=true;showAwakening=w;}
 // ---- 저장 ----
 function wrapSave(){
  if(typeof serializeSave==='function'&&!serializeSave.__r1046){const base=serializeSave;const w=function(...a){const d=base.apply(this,a);try{if(d&&d.player)d.player[FIELD]=formActive();}catch(e){fail(e);}return d;};w.__r1046=true;serializeSave=w;}
@@ -86,6 +99,8 @@ let want=false,commit=null,uiAt=0,synthetic=false;
 function css(){if(document.getElementById('r1046Css'))return;const s=document.createElement('style');s.id='r1046Css';s.textContent=[
  '.r1046card{position:relative}.r1046card img{filter:saturate(1.08) contrast(1.06)}',
  '.r1046card .r1046tag{position:absolute;top:4px;right:4px;font-size:9px;letter-spacing:.14em;padding:1px 5px;border:1px solid #c8323f;color:#f4d7da;background:#1a0608cc;border-radius:2px}',
+ /* R1112(사용자 11-16 "윗부분 쪽 이미지도 짤리고"): HIDDEN 표가 칸 그림 맨 위(머리·광륜)를 덮었다 → 그림 아래쪽 이름 바로 위로 */
+ '.r1046card .r1046tag{top:auto!important;bottom:22px!important;left:50%!important;right:auto!important;transform:translateX(-50%);font-size:9px!important;line-height:1.3!important;padding:0 5px!important;white-space:nowrap;z-index:2}',
  '.r1046card.selected{border-color:#c8323f!important;box-shadow:0 0 14px #c8323f80!important}',
  '#r263Stage.r1046 .row b{white-space:nowrap;flex:none;display:inline-block}#r263Stage.r1046 .row.rec{font-size:12.5px;color:#cdbfb1;line-height:1.75}#r263Stage.r1046 .row.seal{font-size:12px;color:#9a8f86;font-style:italic}',
  '#r1046Cutin{position:fixed;inset:0;z-index:60;display:grid;place-items:center;background:radial-gradient(ellipse at 50% 45%,#2a0508ee,#000f 70%);cursor:pointer;animation:r1046in .9s ease-out}',
@@ -142,7 +157,7 @@ function wrapScope(){const DC=window.StoryPhase1?.DrawCommands;if(!DC?.prototype
 function wrapHUD(){if(typeof updateHUD!=='function'||updateHUD.__r1046)return;const base=updateHUD;const w=function(...a){const r=base.apply(this,a);try{if(formActive()&&!rcActive()&&hasDoc()){const n=document.getElementById('heroName');if(n&&n.textContent!==P.title)n.textContent=P.title;const pt=document.getElementById('portrait'),u=url(P.portrait);if(pt&&pt.getAttribute('src')!==u)pt.src=u;}}catch(e){fail(e);}return r;};w.__r1046=true;updateHUD=w;}
 let wrapAt=0;
 function install(){wrapSave();wrapTick();wrapHUD();try{wrapScope();}catch(e){fail(e);}if(hasDoc()){try{document.addEventListener('click',onClick,true);}catch(e){fail(e);}}
- if(typeof setInterval==='function')setInterval(()=>{try{wrapSave();wrapTick();wrapHUD();addTierDef();if(Date.now()>wrapAt){wrapAt=Date.now()+2000;wrapScope();}if(hasDoc()&&!G(()=>started,false))ui();}catch(e){fail(e);}},500);}
+ if(typeof setInterval==='function')setInterval(()=>{try{wrapSave();wrapTick();wrapHUD();wrapAwake();addTierDef();if(Date.now()>wrapAt){wrapAt=Date.now()+2000;wrapScope();}if(hasDoc()&&!G(()=>started,false))ui();}catch(e){fail(e);}},500);}
 install();
 window.__STORYWORLD_EGO_SOVEREIGN_R1046__=Object.freeze({revision:REV,data:D,field:FIELD,unlocked,unlock,active,formActive,setForm,present,discard,samongCleared,
  refresh:()=>{try{if(hasDoc()&&document.getElementById('panel')?.querySelector('[data-hero]')){css();inject();}}catch(e){fail(e);}}, // R1057: 창을 다시 그린 즉시 EGO 칸을 다시 끼움(200ms 기다림 없이)
