@@ -10154,9 +10154,9 @@
     "quest-gate-r1093.js",
     "ego-guard-r1100.js",
     "ego-ink-r1099.js",
+    "hero-row-r1106.js",
+    "persona-stride-r1104.js",
     "assets/r1065/mobs/at-03-biomech-nightmare-attack.webp",
-    "assets/r1065/mobs/ra-01-black-rose-blindfold-aim.webp",
-    "assets/r1065/mobs/ra-03-cult-mech-legs-aim.webp",
     "assets/r1065/mobs/md-21-wrath-satan-float-death.webp",
     "assets/r1065/mobs/md-34-gate-void-afterimage-death.webp",
     "assets/r1065/mobs/md-37-nameless-scar-death.webp",
@@ -10168,6 +10168,8 @@
     "assets/r1065/mobs/md-66-repeated-fall-echo-death.webp",
     "assets/r1065/mobs/md-75-memory-carrier-spider-death.webp",
     "assets/r1065/mobs/md-85-sobok-death.webp",
+    "assets/r1065/mobs/ra-01-black-rose-blindfold-aim.webp",
+    "assets/r1065/mobs/ra-03-cult-mech-legs-aim.webp",
     "assets/r1065/mobs/at-07-polar-cyborg-hound-attack-r2.webp",
     "assets/r1065/mobs/ra-05-rooftop-memory-echo-aim-r2.webp",
     "assets/r1065/mobs/ra-07-gate-azure-afterimage-aim-r2.webp"
@@ -11245,5 +11247,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "27e1541014579780efb436563434ae6608106143c1d7a9b1d95ba4a5ad0c7b1d"
+  "runtimeManifestSHA256": "82333578e55f5ecaf20836e193a5a847916b66aba57dc55e8a4b48bfa0d164c7"
 }

@@ -18,11 +18,11 @@
 //  판정·피해·AI·저장·서사·이펙트·탄·동작 선택은 바꾸지 않는다(EGO 몸 그림만).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_EGO_INK_R1099__)return;
-const REV='R1099-ego-ink-1',KEY='storyworld.r1099.egoInk';
+const REV='R1099-ego-ink-3',KEY='storyworld.r1099.egoInk';
 const HEX=Object.freeze({deep:'#460e0a',yeonji:'#841e16',juhong:'#cc3428',pale:'#ffb08c',ink:'#12161c',white:'#f3eee2'});
 const rgb=h=>[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];
 const PAL={ink:rgb(HEX.ink),paper:rgb(HEX.white),deep:rgb(HEX.deep),yeonji:rgb(HEX.yeonji),juhong:rgb(HEX.juhong),pale:rgb(HEX.pale)};
-const stats={frames:0,swapped:0,baked:0,cells:0,failed:0,errors:0,rows:0,bakeMs:0,evicted:0};let lastError=null;
+const stats={faces:0,frames:0,swapped:0,baked:0,cells:0,failed:0,errors:0,rows:0,bakeMs:0,evicted:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e&&e.message||e).slice(0,160);};
 const fin=(v,d)=>Number.isFinite(v)?v:d,clamp=(v,a,b)=>v<a?a:v>b?b:v;
 const sstep=(a,b,x)=>{const t=clamp((x-a)/(b-a||1e-6),0,1);return t*t*(3-2*t);};
@@ -140,7 +140,65 @@ let on=true;try{if(localStorage.getItem(KEY)==='0')on=false;}catch(_){}
 let inkLive=false;
 function refresh(){let live=false;try{const M=window.__STORYWORLD_INK_WASH_R1055__;if(M&&typeof M.inspect==='function'){const i=M.inspect();live=!!i&&i.prefs?.mode!=='off'&&Number.isFinite(i.k)&&i.k>.5;}}catch(_){live=false;}inkLive=live;return live;}
 const active=()=>on&&inkLive;
+// 얼굴(사용자 2026-11-16 05:22Z "히든영웅 얼굴이 없는데 얼굴만 2d위에 3d를 옷입듯 입혀서 얼굴 살짝 드러나게" + "페르소나보스랑 얼굴 거의 똑같아서 그거 참고로").
+//  페르소나 보스 원화(assets/rc133/art/base-k.png)의 두건 속 얼굴(흰 머리칼·피부·눈)만 잘라, EGO 3D 칸의 두건 자리에 붙인 뒤 수묵으로 굽는다(3D 두건·옷은 그대로 둘레에 남는다).
+//  앞·옆을 볼 때만(s·se·sw·e·w), 등을 보일 때(n·ne·nw)는 붙이지 않는다. 눈빛은 EGO 고유색(언주)으로. 수묵 그림을 꺼도 얼굴만은 붙일 수 있다(따로 끄기: storyworld.r1099.egoFace='0').
+const FKEY='storyworld.r1099.egoFace';let faceOn=true;try{if(localStorage.getItem(FKEY)==='0')faceOn=false;}catch(_){}
+const modeNow=()=>active()?'ink':faceOn?'face':null;
 function set(v){if(typeof v!=='boolean')return on;on=v;try{if(on)localStorage.removeItem(KEY);else localStorage.setItem(KEY,'0');}catch(_){}label();return on;}
+function setFace(v){if(typeof v!=='boolean')return faceOn;faceOn=v;try{if(faceOn)localStorage.removeItem(FKEY);else localStorage.setItem(FKEY,'0');}catch(_){}label();return faceOn;}
+// 페르소나 원화(RGBA) → 얼굴 조각(두건 빼고 밝은 얼굴·머리칼을 감싼 타원 안만). 없으면 null
+function faceCut(src,w,h){if(!src||!(w>0)||!(h>0)||src.length<w*h*4)return null;
+ let top=-1;for(let y=0;y<h&&top<0;y++)for(let x=0;x<w;x++)if(src[(y*w+x)*4+3]>100){top=y;break;}if(top<0)return null;
+ const bandH=Math.max(4,Math.round(h*.075));let sx=0,n=0;for(let y=top;y<Math.min(h,top+bandH);y++)for(let x=0;x<w;x++)if(src[(y*w+x)*4+3]>100){sx+=x;n++;}const hx=n?sx/n:w/2;
+ const R=Math.round(h*.2),X0=Math.max(0,Math.round(hx-h*.11)),X1=Math.min(w,Math.round(hx+h*.11)),Y0=top,Y1=Math.min(h,top+R);
+ const XS=[],YS=[];
+ for(let y=Y0;y<Y1;y++)for(let x=X0;x<X1;x++){const i=(y*w+x)*4;if(src[i+3]<100)continue;const r=src[i]/255,g=src[i+1]/255,b=src[i+2]/255,L=.299*r+.587*g+.114*b;
+  if(L>.5&&Math.max(r,g,b)-Math.min(r,g,b)<.28){XS.push(x);YS.push(y);}} // 흰 머리칼·피부만(두건의 붉은 줄·어두운 천은 빠진다)
+ const cnt=XS.length;if(cnt<25)return null;XS.sort((p,q)=>p-q);YS.sort((p,q)=>p-q);const pc=(A,q)=>A[Math.min(A.length-1,Math.max(0,Math.round(q*(A.length-1))))];
+ // 두건 테의 흰 반사 같은 외톨이는 빼고(8~92%), 얼굴 둘레를 조금 넉넉히
+ let bx0=pc(XS,.08),bx1=pc(XS,.92),by0=pc(YS,.08),by1=pc(YS,.92);const ex=Math.round((bx1-bx0)*.08),ey=Math.round((by1-by0)*.08);
+ bx0=Math.max(0,bx0-ex);bx1=Math.min(w-1,bx1+ex);by0=Math.max(0,by0-ey);by1=Math.min(h-1,by1+ey);if(bx1<=bx0||by1<=by0)return null;
+ const fw=bx1-bx0+1,fh=by1-by0+1,out=new Uint8ClampedArray(fw*fh*4),cx=(fw-1)/2,cy=(fh-1)/2,rx=fw/2,ry=fh/2;
+ for(let y=0;y<fh;y++)for(let x=0;x<fw;x++){const s=((y+by0)*w+x+bx0)*4,d=(y*fw+x)*4,e=Math.hypot((x-cx)/rx,(y-cy)/ry),k=1-sstep(.78,1,e);if(!(k>0))continue;
+  let r=src[s],g=src[s+1],b=src[s+2];if(b>r+25&&b>100){if(b>200){r=150;g=44;b=34;}else{r=g=b=34;}} /* 푸른 눈 → 먹 눈동자, 가장 밝은 심만 작은 주홍 반짝(붉은 탈 번짐 방지) */
+  out[d]=r;out[d+1]=g;out[d+2]=b;out[d+3]=src[s+3]*k;}
+ return {data:out,width:fw,height:fh};}
+// EGO 칸(알파, 칸 좌표가 아니라 잘린 상자 좌표)에서 두건 꼭대기·머리 가운데: 위에서부터 가운데 근처 연속 화소 폭이 머리만 한 줄이 네 줄 이어지는 첫 자리
+function headOf(px,w,h,cxHint,sc){sc=clamp(fin(sc,1),.25,4);const lo=Math.max(0,Math.floor(cxHint-22*sc)),hi=Math.min(w,Math.ceil(cxHint+22*sc)),need=Math.max(2,Math.round(4*sc)),wmin=7*sc,wmax=24*sc;
+ let ys=-1,ye=-1;for(let y=0;y<h;y++){for(let x=0;x<w;x++)if(px[(y*w+x)*4+3]>110){if(ys<0)ys=y;ye=y;break;}}if(ys<0)return null;
+ const runAt=y=>{let best=0,bs=0,cur=0,cs=0;for(let x=lo;x<hi;x++){if(px[(y*w+x)*4+3]>110){if(!cur)cs=x;cur++;if(cur>best){best=cur;bs=cs;}}else cur=0;}return best>=wmin&&best<=wmax?bs+(best-1)/2:null;};
+ for(let y=ys;y<ye-(ye-ys)*.4;y++){let sum=0,ok=true;for(let k=0;k<need;k++){const c=runAt(y+k);if(c===null){ok=false;break;}sum+=c;}if(ok)return {y:y,x:sum/need};}
+ return null;}
+const FACE_DIR={s:0,sw:1,w:2,e:6,se:7},FACE_SHIFT={s:0,sw:-.2,se:.2,w:-.12,e:.12};
+const faces={state:'idle',img:{},t0:0,cut:0};
+function loadFaces(){if(faces.state!=='idle')return;faces.state='loading';faces.t0=now();let left=0;
+ for(const [d,k] of Object.entries(FACE_DIR)){left++;try{const img=new Image();img.crossOrigin='anonymous';img.decoding='async';
+  const done=()=>{if(--left<=0)faces.state='ready';};
+  img.onload=()=>{try{const W=img.naturalWidth||img.width,H=img.naturalHeight||img.height,t=makeCanvas(W,H),g=t.getContext('2d',{willReadFrequently:true});g.drawImage(img,0,0);
+    const r=faceCut(g.getImageData(0,0,W,H).data,W,H);t.width=t.height=0;if(r){const c=makeCanvas(r.width,r.height),cg=c.getContext('2d'),im=cg.createImageData(r.width,r.height);im.data.set(r.data);cg.putImageData(im,0,0);faces.img[d]=c;faces.cut++;}}catch(e){if(e?.name!=='SecurityError')fail(e);}done();};
+  img.onerror=done;img.src=absolute('assets/rc133/art/base-'+k+'.png');}catch(e){fail(e);if(--left<=0)faces.state='ready';}}}
+const facesSettled=()=>faces.state==='ready'||(faces.state==='loading'&&now()-faces.t0>8000);
+// only=true: 몸은 지우고 얼굴만 남긴다(수묵을 끈 '얼굴만' 모드 — 원래 몸·R409 테 위에 얼굴 조각만 따로 얹는다)
+// 몸통 슬림(사용자 11-16 "몸통만 15% 줄여 부피감·두께"): 몸통 띠(키의 20~58%)에서 검은 옷 덩어리 폭을 재고, 그 안은 가로 K 로 모으고 바깥 띠(×1.45)에서 원래 자리로 이어 붙인다 → 팔·머리칼·머리·다리는 그대로
+const SLIM_K=.85;
+function slimTorso(px,w,h,sc,cxHint){const n=w*h*4;if(!px||px.length<n||!(w>2)||!(h>2))return px;
+ let ys=-1,ye=-1;for(let y=0;y<h&&ys<0;y++)for(let x=0;x<w;x++)if(px[(y*w+x)*4+3]>110){ys=y;break;}
+ if(ys<0)return px;for(let y=h-1;y>=0&&ye<0;y--)for(let x=0;x<w;x++)if(px[(y*w+x)*4+3]>110){ye=y;break;}
+ const H=ye-ys+1;if(H<12)return px;const b0=ys+.20*H,b1=ys+.58*H,fe=Math.max(2,.06*H);
+ let gx=Number.isFinite(cxHint)?cxHint:NaN;if(!Number.isFinite(gx)){let sx=0,c=0;for(let y=Math.ceil(b0);y<b1;y+=2)for(let x=0;x<w;x++)if(px[(y*w+x)*4+3]>110){sx+=x;c++;}if(!c)return px;gx=sx/c;}
+ const dark=i=>px[i+3]>110&&(px[i]*.3+px[i+1]*.59+px[i+2]*.11)<100,cs=[],hs=[];
+ for(let y=Math.ceil(b0);y<b1;y++){let best=null;for(let x=0;x<w;){if(!dark((y*w+x)*4)){x++;continue;}let e=x;while(e+1<w&&dark((y*w+e+1)*4))e++;const dist=gx<x?x-gx:gx>e?gx-e:0;if(e-x>=2&&(!best||dist<best.d||(dist===best.d&&e-x>best.e-best.a)))best={a:x,e,d:dist};x=e+1;}
+  if(best&&best.d<.1*H){cs.push((best.a+best.e)/2);hs.push((best.e-best.a+1)/2);}}
+ if(cs.length<3)return px;const med=a=>a.slice().sort((p,q)=>p-q)[a.length>>1];const cx=med(cs),w1=clamp(med(hs),.05*H,.3*H),w2=w1*1.45,u1=w1*SLIM_K;
+ const out=new Uint8ClampedArray(px);
+ for(let y=Math.max(0,Math.floor(b0-fe));y<Math.min(h,Math.ceil(b1+fe));y++){const st=clamp(Math.min((y-(b0-fe))/fe,((b1+fe)-y)/fe),0,1);if(!(st>0))continue;
+  for(let x=0;x<w;x++){const d=x-cx,a=Math.abs(d);if(a>=w2)continue;const ds=a<=u1?a/SLIM_K:w1+(a-u1)*(w2-w1)/(w2-u1),sx=cx+Math.sign(d)*(a+st*(ds-a));
+   const xa=Math.floor(sx),t=sx-xa,o=(y*w+x)*4;for(let k=0;k<4;k++){const A=xa>=0&&xa<w?px[(y*w+xa)*4+k]:0,B=xa+1>=0&&xa+1<w?px[(y*w+xa+1)*4+k]:0;out[o+k]=A+(B-A)*t;}}}
+ return out;}
+function putFace(g,px,J,only){const d=J.m.dir,F=faces.img[d];if(!F)return only?null:px;const sc=J.sc,hd=headOf(px,J.ow,J.oh,(J.cell/2-J.box[0])*sc,sc);if(!hd)return only?null:px;
+ const fw=9*sc,fh=fw*F.height/F.width,cx=hd.x+FACE_SHIFT[d]*fw,cy=hd.y+7*sc;if(![fw,fh,cx,cy].every(Number.isFinite))return only?null:px;
+ if(only)g.clearRect(0,0,J.ow,J.oh);g.save();g.globalAlpha=.92;g.drawImage(F,cx-fw/2,cy-fh/2,fw,fh);g.restore();stats.faces++;return g.getImageData(0,0,J.ow,J.oh).data;}
 // ---------------- 시트 찾기 ----------------
 const CLIPS=['idle','walk','run','attack','hit','discard'],DIRS=['s','se','e','ne','n','nw','w','sw'];
 const RX=/(?:^|[\/:])assets\/r1048\/ego\/(idle|walk|run|attack|hit|discard)-(s|se|e|ne|n|nw|w|sw)\.(webp|png)(?:[?#][^:]*)?$/;
@@ -157,10 +215,10 @@ function absolute(u){try{if(/^[a-z][a-z0-9+.-]*:/i.test(u))return u;return new U
 const now=()=>{try{return performance.now();}catch(_){return Date.now();}};
 function evict(keep){while(cachePx>capPx()&&cache.size>1){let k=null;for(const [u,r] of cache){if(u===keep||r.state!=='ready')continue;if(!k||r.used<cache.get(k).used)k=u;}if(!k)break;const r=cache.get(k);cachePx-=r.px||0;cache.delete(k);stats.evicted++;}}
 // 한 장 굽기를 칸 단위로 나눈다: 읽기 → (칸마다) 확대·언샤프·수묵 → 다 되면 한 캔버스로
-function startJob(url,m){const row=cache.get(url);if(!row)return;job={url,m,row,img:null,step:0};
+function startJob(url,m){const row=cache.get(url);if(!row)return;const J=job={url,m,row,img:null,step:0,mode:row.mode}; /* 콜백은 자기 일(J)에만 — 모드가 바뀌어 새 일이 서면 옛 그림이 새 일에 끼지 않게 */
  try{const img=new Image();img.crossOrigin='anonymous';img.decoding='async';
-  img.onload=()=>{if(job&&job.url===url){job.img=img;later(work);}};
-  img.onerror=()=>{if(row.state==='wait'){row.state='failed';stats.failed++;}if(job&&job.url===url)job=null;later(pump);};img.src=url;}
+  img.onload=()=>{if(job===J){J.img=img;later(work);}};
+  img.onerror=()=>{if(row.state==='wait'){row.state='failed';stats.failed++;}if(job===J)job=null;later(pump);};img.src=row.src;}
  catch(e){row.state='failed';stats.failed++;fail(e);job=null;}}
 function prepare(J){const img=J.img,W=img.naturalWidth||img.width,H=img.naturalHeight||img.height,meta=sheetsMeta(),cell=+(meta?.cell)||H;if(!(W>0)||!(H>0)||!(cell>0))throw Error('empty image');
  const t=makeCanvas(W,H),g=t.getContext('2d',{willReadFrequently:true});g.drawImage(img,0,0);const src=g.getImageData(0,0,W,H).data;t.width=t.height=0;
@@ -169,33 +227,38 @@ function prepare(J){const img=J.img,W=img.naturalWidth||img.width,H=img.naturalH
 function bakeCell(J){const f=J.f,[x0,y0]=J.box,tmp=makeCanvas(J.ow,J.oh),g=tmp.getContext('2d',{willReadFrequently:true});
  try{g.imageSmoothingEnabled=true;g.imageSmoothingQuality='high';}catch(_){}
  g.drawImage(J.img,f*J.cell+x0,y0,J.bw,J.bh,0,0,J.ow,J.oh);let px=g.getImageData(0,0,J.ow,J.oh).data;
- if(J.sc>1)px=sharpen(px,J.ow,J.oh,.55,Math.round(J.sc));
- const r=inkCell(px,J.ow,J.oh,{seed:J.seed,unit:J.sc,levels:J.levels,noise:J.noise});
+ let r=null;
+ if(J.mode==='ink'){px=slimTorso(px,J.ow,J.oh,J.sc,(J.cell/2-J.box[0])*J.sc);if(faceOn){const im=g.createImageData(J.ow,J.oh);im.data.set(px);g.putImageData(im,0,0);px=putFace(g,px,J,false);} // 3D 칸 위에 2D 얼굴 → 그다음 수묵(얼굴도 같은 붓으로)
+  if(J.sc>1)px=sharpen(px,J.ow,J.oh,.55,Math.round(J.sc));r=inkCell(px,J.ow,J.oh,{seed:J.seed,unit:J.sc,levels:J.levels,noise:J.noise});}
+ else{const f=putFace(g,px,J,true);r=f?{data:f,solid:1}:null;}
  if(r&&r.solid){const im=g.createImageData(J.ow,J.oh);im.data.set(r.data);g.putImageData(im,0,0);J.out.getContext('2d').drawImage(tmp,f*J.ow,0);}
  tmp.width=tmp.height=0;stats.cells++;}
-function work(){const J=job;if(!J)return;const t0=now();
- try{if(!active()){J.row.state='wait';J.step=0;J.f=0;J.src=null;J.noise=null;queue.unshift({url:J.url,m:J.m});job=null;return;}
+function work(){const J=job;if(!J||!J.img)return;const t0=now();
+ try{if(modeNow()!==J.mode){J.row.state='wait';J.step=0;J.f=0;J.src=null;J.noise=null;queue.unshift({url:J.url,m:J.m});job=null;return;}
   if(J.step===0){prepare(J);J.step=1;}
   while(J.f<J.n&&now()-t0<6){bakeCell(J);J.f++;}
-  if(J.f>=J.n){const cv=J.out,path='r1099:ink:'+J.m.clip+'-'+J.m.dir+(J.sc>1?':x'+J.sc:'');cv.__storyworldStaticSource={path};
+  if(J.f>=J.n){const cv=J.out,path='r1099:'+J.mode+':'+J.m.clip+'-'+J.m.dir+(J.sc>1?':x'+J.sc:'');cv.__storyworldStaticSource={path};
    Object.assign(J.row,{state:'ready',canvas:cv,cell:J.cell,box:J.box,ow:J.ow,oh:J.oh,frames:J.n,path,px:cv.width*cv.height,used:now()});J.src=null;J.noise=null;
    cachePx+=J.row.px;stats.baked++;stats.bakeMs+=now()-t0;job=null;evict(J.url);later(pump);return;}}
  catch(e){J.row.state='failed';stats.failed++;if(e?.name!=='SecurityError')fail(e);job=null;later(pump);return;}
  stats.bakeMs+=now()-t0;later(work);}
 function later(f){try{setTimeout(f,16);}catch(_){}}
-function pump(){if(job||!queue.length)return;if(!active())return; /* 쉬는 동안은 예약을 그대로 두고 멈춘다(다시 켜지면 tick 이 이어 굽는다) */
+function pump(){if(job||!queue.length)return;if(!modeNow())return;if(faceOn&&!facesSettled()){loadFaces();return later(pump);} /* 쉬는 동안은 예약을 그대로 두고 멈춘다(다시 켜지면 tick 이 이어 굽는다) */
  const q=queue.shift();if(cache.get(q.url)?.state!=='wait')return later(pump);startJob(q.url,q.m);}
-function want(url,m,first){if(cache.has(url))return;cache.set(url,{state:'wait',used:now()});const it={url,m};if(first)queue.unshift(it);else queue.push(it);}
+function want(url,m,first){const key=url+'#'+lastMode;if(cache.has(key))return;cache.set(key,{state:'wait',used:now(),mode:lastMode,src:url});const it={url:key,m};if(first)queue.unshift(it);else queue.push(it);}
 // 하나를 보면 같은 방향의 모든 동작을 먼저, 그다음 같은 동작의 다른 방향을 예약한다(동작·방향을 바꿀 때 원본이 잠깐 비치지 않게)
-function request(url,m){const s=pcScale();if(scaleMode!==s){scaleMode=s;cache.clear();queue.length=0;job=null;cachePx=0;}
- if(!cache.has(url)){want(url,m,true);const at=(c,d)=>url.replace(/(idle|walk|run|attack|hit|discard)-(s|se|e|ne|n|nw|w|sw)(?=\.(?:webp|png))/,c+'-'+d);
+let lastMode=null;
+function request(url,m){const s=pcScale(),md=modeNow();if(scaleMode!==s){scaleMode=s;lastMode=md;cache.clear();queue.length=0;job=null;cachePx=0;}
+ else if(lastMode!==md){lastMode=md;queue.length=0;for(const [k,r] of cache)if(r.state==='wait'&&!(job&&job.url===k))cache.delete(k);} /* 모드만 바뀌면 구운 시트(열쇠에 모드 포함)는 남기고 예약만 비운다 → 수묵 끔→켬 때 바로 다시 씀 */
+ if(!md)return null;if(faceOn)loadFaces();
+ if(!cache.has(url+'#'+md)){want(url,m,true);const at=(c,d)=>url.replace(/(idle|walk|run|attack|hit|discard)-(s|se|e|ne|n|nw|w|sw)(?=\.(?:webp|png))/,c+'-'+d);
   for(const c of CLIPS)want(at(c,m.dir),{clip:c,dir:m.dir},false);for(const d of DIRS)want(at(m.clip,d),{clip:m.clip,dir:d},false);
   for(const c of CLIPS)for(const d of DIRS)want(at(c,d),{clip:c,dir:d},false);pump();}
- const r=cache.get(url);if(r)r.used=now();return r;}
+ const r=cache.get(url+'#'+md);if(r)r.used=now();return r;}
 // ---------------- 명령 고르기·바꿔 끼우기 ----------------
-const LIFT='brightness(1.32) contrast(1.22)';
+const LIFT='brightness(1.32) contrast(1.22)',FACE_LIFT='brightness(1.45) contrast(1.1)'; /* 얼굴만 덧그림: 어두운 바닥 조명에 묻히지 않게(Three 허용 필터만) */
 const okPt=p=>Array.isArray(p)&&Number.isFinite(p[0])&&Number.isFinite(p[1]);
-function process(commands){if(!active()||!Array.isArray(commands))return 0;let n=0;const meta=sheetsMeta();
+function process(commands){const md=modeNow();if(!md||!Array.isArray(commands))return 0;let n=0;const meta=sheetsMeta(),adds=[];
  for(let i=0;i<commands.length;i++){const c=commands[i];if(!c||typeof c!=='object'||c.kind!=='image'||c.r1099)continue;
   const o=c.owner;if(!o||o.kind!=='hero'||o.r1048fx||o.groundAligned===true)continue;
   const sp=c.sourcePath;if(typeof sp!=='string')continue;
@@ -211,13 +274,18 @@ function process(commands){if(!active()||!Array.isArray(commands))return 0;let n
   // 지금 명령의 네 귀퉁이 = 칸(cell×cell, R409 면 사방 pad 더) → 잘라 구운 영역(box)의 네 귀퉁이로
   const tot=cell+2*pad,a=P[0],b=P[1],d=P[3],ux=(b[0]-a[0])/tot,uy=(b[1]-a[1])/tot,vx=(d[0]-a[0])/tot,vy=(d[1]-a[1])/tot;
   const [x0,y0,x1,y1]=row.box,Q=(q,t)=>[a[0]+ux*(q+pad)+vx*(t+pad),a[1]+uy*(q+pad)+vy*(t+pad)],pts=[Q(x0,y0),Q(x1,y0),Q(x1,y1),Q(x0,y1)];if(!pts.every(okPt))continue;
-  const cv=row.canvas;c.image=cv;c.mutable=false;c.sourcePath=row.path;c.immutableTint=cv.__storyworldStaticSource;c.sourceRect=[frame*row.ow,0,row.ow,row.oh];c.imageSize=[cv.width,cv.height];c.points=pts;
-  let F='saturate(.5) contrast(1.08)';try{const v=window.__STORYWORLD_INK_CHARS_R1090__?.FILTER;if(typeof v==='string'&&v)F=v;}catch(_){}
+  const cv=row.canvas;
+  if(md==='face'){if(op==='lighter')continue;adds.push([c,{...c,image:cv,mutable:false,sourcePath:row.path,immutableTint:cv.__storyworldStaticSource,sourceRect:[frame*row.ow,0,row.ow,row.oh],imageSize:[cv.width,cv.height],points:pts,
+    style:{...s,filter:((s.filter&&s.filter!=='none')?s.filter+' ':'')+FACE_LIFT},owner:{...o,r409:true,r350:true,r448:true},key:String(c.key)+':r1099f',order:(Number.isFinite(c.order)?c.order:0)+.001,r1099:true}]);c.r1099=true;n++;continue;}
+  c.image=cv;c.mutable=false;c.sourcePath=row.path;c.immutableTint=cv.__storyworldStaticSource;c.sourceRect=[frame*row.ow,0,row.ow,row.oh];c.imageSize=[cv.width,cv.height];c.points=pts;
+  if(md==='ink'){let F='saturate(.5) contrast(1.08)';try{const v=window.__STORYWORLD_INK_CHARS_R1090__?.FILTER;if(typeof v==='string'&&v)F=v;}catch(_){}
   {let rest=typeof s.filter==='string'?s.filter.trim():'';if(rest==='none')rest='';if(rest.endsWith(F))rest=rest.slice(0,-F.length).trim();
    /* 결전장·밤 맵 조명이 곱해지면 종이 흰색도 바닥 밝기 근처로 눌린다 → 이 그림만 밝기·대비를 올려 먹은 검게, 종이는 희게 남긴다(렌더러가 받는 CSS 필터: brightness·contrast) */
    c.style={...s,filter:(rest?rest+' ':'')+LIFT};}
   if(!o.r409)c.owner={...o,r409:true}; // R409 가 아직이면 수묵 그림 위에 핏빛·은빛 테를 또 굽지 않게(종이빛 여백이 그 몫)
-  c.r1090=true;c.r1099=true;n++;}
+  c.r1090=true;}
+  c.r1099=true;n++;}
+ for(let i=adds.length-1;i>=0;i--){const [c,f]=adds[i],at=commands.indexOf(c);if(at>=0)commands.splice(at+1,0,f);} // 얼굴 조각은 몸 바로 뒤(위)에
  stats.swapped+=n;return n;}
 // ---------------- 렌더러 감싸기(프로토타입·인스턴스 둘 다, 한 render 에 한 번만) ----------------
 let depth=0;
@@ -229,22 +297,24 @@ function wrapInst(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?
 function tick(){wrapInst();refresh();if(queue.length&&!job)pump();}
 try{setInterval(tick,500);}catch(e){fail(e);}tick();
 // ---------------- 설정 창 줄: '전투 화면' 구역, 수묵 줄들 바로 뒤 ----------------
-function label(){try{const b=document.getElementById('egoInkOnR1099');if(b)b.checked=on;}catch(e){fail(e);}}
+function label(){try{const b=document.getElementById('egoInkOnR1099');if(b)b.checked=on;const f=document.getElementById('egoFaceOnR1099');if(f)f.checked=faceOn;}catch(e){fail(e);}}
 function settingsRow(){try{const host=document.getElementById('combatScreenR1021')||document.getElementById('quickSettingsR114');if(!host)return;
   let row=document.getElementById('egoInkRowR1099');
   if(!row){row=document.createElement('div');row.id='egoInkRowR1099';row.className='r1021-row';
    const lab=document.createElement('label'),box=document.createElement('input');box.type='checkbox';box.id='egoInkOnR1099';
    const txt=document.createElement('span');txt.textContent=' EGO 수묵 그림 ';
-   const note=document.createElement('p');note.className='small muted';note.textContent='히든 영웅 EGO 를 먹·언주색·흰빛의 수묵화로 또렷하게 보여 줍니다. 맵 수묵화풍이 켜져 있을 때만 작동합니다.';
+   const note=document.createElement('p');note.className='small muted';note.textContent='히든 영웅 EGO 를 먹·언주색·흰빛의 수묵화로 또렷하게 보여 줍니다(맵 수묵화풍이 켜져 있을 때). EGO 얼굴은 두건 속 얼굴을 살짝 드러냅니다.';
    box.onchange=()=>{set(!!box.checked);};
-   lab.appendChild(box);lab.appendChild(txt);row.appendChild(lab);row.appendChild(note);stats.rows++;}
+   const lab2=document.createElement('label'),box2=document.createElement('input');box2.type='checkbox';box2.id='egoFaceOnR1099';
+   const txt2=document.createElement('span');txt2.textContent=' EGO 얼굴 ';box2.onchange=()=>{setFace(!!box2.checked);};
+   lab.appendChild(box);lab.appendChild(txt);lab2.appendChild(box2);lab2.appendChild(txt2);row.appendChild(lab);row.appendChild(lab2);row.appendChild(note);stats.rows++;}
   let anchor=null;for(const id of ['inkRowR1055','inkCharsRowR1090','inkFxRowR1095','personaInkRowR1097']){const e=document.getElementById(id);if(e&&e.parentNode===host)anchor=e;}
   if(anchor){if(anchor.nextElementSibling!==row){const next=anchor.nextElementSibling;if(next&&next!==row)host.insertBefore(row,next);else host.appendChild(row);}}
   else if(row.parentNode!==host)host.appendChild(row);
   label();}catch(e){fail(e);}}
 function settingsLater(){settingsRow();try{queueMicrotask(settingsRow);}catch(_){}try{requestAnimationFrame(()=>{settingsRow();requestAnimationFrame(settingsRow);});}catch(_){}}
 try{if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const r=base.apply(this,a);try{settingsLater();}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
-window.__STORYWORLD_EGO_INK_R1099__=Object.freeze({revision:REV,storageKey:KEY,palette:HEX,inkCell,inkSheet,levelsOf,usedBox,sharpen,feel,match,process,active,refresh,enabled:()=>on,set,settingsRow,
+window.__STORYWORLD_EGO_INK_R1099__=Object.freeze({revision:REV,storageKey:KEY,palette:HEX,inkCell,inkSheet,levelsOf,usedBox,sharpen,feel,faceCut,headOf,slimTorso,match,process,active,mode:modeNow,refresh,enabled:()=>on,set,faceEnabled:()=>faceOn,setFace,settingsRow,
  inspect:()=>{let ready=0,failed=0;for(const r of cache.values()){if(r.state==='ready')ready++;else if(r.state==='failed')failed++;}
-  return {revision:REV,on,inkLive,active:active(),scale:scaleMode,frames:stats.frames,swapped:stats.swapped,cached:cache.size,ready,failed,queued:queue.length,baking:job?job.url.split('/').pop():null,baked:stats.baked,cells:stats.cells,bakeMs:Math.round(stats.bakeMs),cachePx,evicted:stats.evicted,errors:stats.errors,rows:stats.rows,lastError};}});
+  return {revision:REV,on,inkLive,active:active(),mode:modeNow(),face:faceOn,faceState:faces.state,faceCuts:faces.cut,facesPut:stats.faces,scale:scaleMode,frames:stats.frames,swapped:stats.swapped,cached:cache.size,ready,failed,queued:queue.length,baking:job?job.url.split('/').pop():null,baked:stats.baked,cells:stats.cells,bakeMs:Math.round(stats.bakeMs),cachePx,evicted:stats.evicted,errors:stats.errors,rows:stats.rows,lastError};}});
 })();
