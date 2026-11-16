@@ -26,7 +26,7 @@ const TUNE=Object.freeze({
  split:Object.freeze({count:2,perCast:6,mult:.15,pierce:1,speed:15,life:.42,reach:5,burnTotal:.3,burnTime:2.5,burnEvery:.5,maxBurning:12}),
  lance:Object.freeze({direct:.2,blast:.8,radius:2.2,petal:.45,petalOld:.9,speed:15,range:8,width:.34}),
  chain:Object.freeze({qFinal:2,petalBurn:.5,petalBeat:.08}),
- gate:Object.freeze({r:5,q:3,every:.1,maxVolleys:20,volleyLife:.2,close:.3,back:1.1,spread:.75}),
+ gate:Object.freeze({r:5,q:3,every:.1,maxVolleys:20,volleyLife:.2,close:.3,back:.75,spread:.75}),
  maxLive:24,maxFx:4,fullFlames:8});
 const stats={stormShots:0,shards:0,ignites:0,burnTicks:0,lances:0,blasts:0,petals:0,capSkips:0,maxLive:0,maxShake:0,lanceDraws:0,headDraws:0,sheetDraws:{lance:0,blast:0,burn:0,shard:0,pop:0,storm:0,gate:0,volley:0},gates:0,volleys:0,postMs:0,posts:0,drawMs:0,errors:0,lastError:null};
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
@@ -242,7 +242,7 @@ function drawPops(){if(!pops.length||!sheetImg('pop'))return;const t=T(),z=Z();f
 // 무기 문: 허공(영웅 키 1.6배 높이)에 눕힌 진홍 문양 원 — 바깥 금빛 테(왼쪽 위가 밝음), 안쪽 어두운 구멍, 바늘 문양 6개가 돈다
 function drawGates(){const t=T(),z=Z(),h=(typeof actorHeight==='function'?actorHeight():60);
  for(const g of gates){const open=Math.min(1,(t-g.t0)/.12),shut=g.closing?Math.max(0,(g.until-t)/TUNE.gate.close):1,a=open*shut;if(a<=0)continue;
-  for(const s of gateSlots(g)){const q=project(s.x,s.y),cx=q.x,cy=q.y-h*(g.kind==='r'?1.5:1.25)+Math.abs(s.k)*h*.18,r=(g.kind==='r'?18:12)*z*(0.6+.4*open),rot=t*2.2*(s.i%2?-1:1);
+  for(const s of gateSlots(g)){const q=project(s.x,s.y),cx=q.x,cy=q.y-h*(g.kind==='r'?.95:.85)+Math.abs(s.k)*h*.18,r=(g.kind==='r'?18:12)*z*(0.6+.4*open),rot=t*2.2*(s.i%2?-1:1);
    if(sheetImg('gate')){const el=t-g.t0,f=g.closing?20+Math.min(3.99,(1-shut)*4):el<.2?el*25:5+((el-.2)*12.5)%15;
     sc({id:'r535:gate:'+g.t0.toFixed(3)+':'+s.i,kind:'effect',x:s.x,y:s.y},()=>{ctx.save();try{glow('gate',f,cx,cy,r*2/90,1,.45);}finally{ctx.restore();}});continue;}
    sc({id:'r535:gate:'+g.t0.toFixed(3)+':'+s.i,kind:'effect',x:s.x,y:s.y},()=>{ctx.save();try{
@@ -254,7 +254,7 @@ function drawGates(){const t=T(),z=Z(),h=(typeof actorHeight==='function'?actorH
    }finally{ctx.restore();}});}}}
 // 불화살 줄기: 문에서 표적으로 0.2초 동안 내리꽂히는 불줄기(칼날 모양은 끝이 넓은 금빛 쐐기)
 function drawVolleys(){const t=T(),z=Z(),h=(typeof actorHeight==='function'?actorHeight():60);
- for(const v of volleys){const u=Math.min(1,(t-v.t0)/v.life),a=project(v.x0,v.y0),b=project(v.x1,v.y1),ay=a.y-h*1.4,by=b.y-lift(),hx=a.x+(b.x-a.x)*u,hy=ay+(by-ay)*u,tx=a.x+(b.x-a.x)*Math.max(0,u-.35),ty=ay+(by-ay)*Math.max(0,u-.35);
+ for(const v of volleys){const u=Math.min(1,(t-v.t0)/v.life),a=project(v.x0,v.y0),b=project(v.x1,v.y1),ay=a.y-h*.9,by=b.y-lift(),hx=a.x+(b.x-a.x)*u,hy=ay+(by-ay)*u,tx=a.x+(b.x-a.x)*Math.max(0,u-.35),ty=ay+(by-ay)*Math.max(0,u-.35);
   if(sheetImg('volley')){sc({id:'r535:volley:'+v.t0.toFixed(3)+':'+v.x0.toFixed(2),kind:'effect',x:v.x1,y:v.y1},()=>{ctx.save();try{ctx.translate(hx,hy);ctx.rotate(Math.atan2(by-ay,b.x-a.x));ctx.globalCompositeOperation='lighter';sheet('volley',(t-v.t0)*12.5+v.x0*7,0,0,.3*z,1-u*.45);}finally{ctx.restore();}});continue;}
   sc({id:'r535:volley:'+v.t0.toFixed(3)+':'+v.x0.toFixed(2),kind:'effect',x:v.x1,y:v.y1},()=>{ctx.save();try{ctx.globalCompositeOperation='lighter';ctx.lineCap='round';
    ctx.globalAlpha=.6*(1-u*.5);ctx.strokeStyle=EMBER;ctx.lineWidth=Math.max(1.5,3*z);ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(hx,hy);ctx.stroke();
