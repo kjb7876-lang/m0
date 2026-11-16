@@ -10081,6 +10081,8 @@
     "assets/r1048/fx/ego_feathers.webp",
     "assets/r1048/fx/ego_halo.webp",
     "assets/r1048/fx/ego_slash.webp",
+    "ui-hanji-r1086.js",
+    "eyelid-r1091.js",
     "fx-ink-r1095.js"
   ],
   "mediaPaths": [
@@ -11156,5 +11158,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "12b7e232b28c1783542e47aefd651a410985cb5f483cfdac611969e62c38d3ad"
+  "runtimeManifestSHA256": "0a697330b122e92d5ac2d25f7e407a42247352865c0f1e80447cca0c5f5ab894"
 }
