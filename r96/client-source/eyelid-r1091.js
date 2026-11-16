@@ -3,6 +3,7 @@
 //  · '가로 합일': 위·아래 눈꺼풀이 화면 가운데에서 가로 한 줄(一)로 합쳐진다. 감길 때는 그 줄이 마지막 빛으로 남았다가 가운데로 줄어 사라지고,
 //    뜰 때는 어둠 속에 한지빛 가는 줄이 먼저 가로로 번진 뒤 눈꺼풀이 갈라진다(한 번 깜빡인 뒤 활짝).
 //  · 눈꺼풀 모양은 아몬드형(가운데가 가장 넓게 열림), 가장자리는 먹 붓 자국처럼 거칠게 번진다. 수묵화풍(R1055)이 켜져 있으면 따뜻한 먹색, 꺼져 있으면 푸른 밤빛 검정.
+//  · 참고(사용자 2026-11-16 00:10Z 확인): 가로판 합일(hapil1 RC181 시작·RC182 엔딩의 위아래 눈꺼풀)과 세로 리부트의 먹 눈꺼풀 — 박자(약 1.25초)·먹 농담·속눈썹 먹선·남색만 맞추고 코드·자산은 베끼지 않음.
 //  · 언제: 새 게임·불러오기를 누르면 감은 채로 로딩 → 로딩·서사창이 닫혀 세계가 보이는 첫 순간 눈을 뜬다.
 //          영웅 체력이 0 이 되면 눈을 감고(R151 쓰러짐 1.5초와 같이), 감은 채 '기억은 남아 있습니다' 창 아래에 머문다 → 다시 살아나 세계가 보이면 눈을 뜬다.
 //          지역 이동·제목 화면에서는 하지 않는다.
@@ -19,10 +20,10 @@ const stats={opens:0,closes:0,arms:0,frames:0,skipped:0,errors:0};let lastError=
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const V={started:()=>typeof started!=='undefined'?started:undefined,player:()=>typeof player!=='undefined'?player:undefined,loading:()=>typeof loading!=='undefined'?loading:undefined,
  modal:()=>typeof modal!=='undefined'?modal:undefined,storyScene:()=>typeof storyScene!=='undefined'?storyScene:undefined,settings:()=>typeof settings!=='undefined'?settings:undefined,
- newGame:()=>typeof newGame!=='undefined'?newGame:undefined,restoreSave:()=>typeof restoreSave!=='undefined'?restoreSave:undefined};
+ newGame:()=>typeof newGame!=='undefined'?newGame:undefined,hurt:()=>typeof hurt!=='undefined'?hurt:undefined,restoreSave:()=>typeof restoreSave!=='undefined'?restoreSave:undefined};
 const g=name=>{try{return V[name]();}catch(_){return undefined;}};
 const reduced=()=>{try{return !!g('settings')?.reducedMotion;}catch(_){return false;}};
-function durations(){return reduced()?{open:.5,close:.45}:{open:1.8,close:1.4};}
+function durations(){return reduced()?{open:.5,close:.45}:{open:1.25,close:1.25};}
 const ease={out:u=>1-(1-u)*(1-u),outC:u=>1-Math.pow(1-u,3),io:u=>u*u*(3-2*u)};
 // 눈 뜨기: 0~16% 빛 줄만(0) → 42% 까지 0.32 → 55% 에 0.12 로 깜빡 → 끝까지 활짝(1). 눈 감기: 35% 까지 무겁게 0.45 → 50% 에 0.55 로 한 번 버팀 → 0.
 function openness(kind,t){const D=durations();
@@ -62,7 +63,7 @@ function lid(c,pts,top,W,H,off,alpha){c.globalAlpha=alpha;c.beginPath();const ed
 function drawNow(){const c=ensureCanvas();if(!c)return;try{
  const s=scale(),W=Math.max(64,Math.round(clamp(window.innerWidth,64,8192)*s)),H=Math.max(36,Math.round(clamp(window.innerHeight,36,8192)*s));
  if(c.width!==W)c.width=W;if(c.height!==H)c.height=H;cx=c.getContext('2d');const x=cx;if(!x)return;
- const o=clamp(cur,0,1),G=geometry(W,H,o),ink=inkOn(),body=ink?'#0d0b09':'#05070b';
+ const o=clamp(cur,0,1),G=geometry(W,H,o),ink=inkOn(),body=ink?'#0d0b09':'#03060d';
  x.setTransform(1,0,0,1,0,0);x.globalAlpha=1;x.clearRect(0,0,W,H);
  // 눈 안쪽 어둠(감길수록 가장자리부터 어두워짐)
  const v=clamp((1-o)*.6,0,.6);if(v>.01){const r=x.createRadialGradient(W/2,H/2,clamp(H*.15,1,1e5),W/2,H/2,clamp(Math.hypot(W,H)*.6,2,1e5));
@@ -70,7 +71,15 @@ function drawNow(){const c=ensureCanvas();if(!c)return;try{
  // 눈꺼풀: 번지는 먹 세 겹 + 속
  const fe=H*.018;x.fillStyle=ink?'rgba(38,28,20,1)':'rgba(10,14,22,1)';
  for(let i=3;i>=1;i--){lid(x,G.top,true,W,H,i*fe,.2);lid(x,G.bottom,false,W,H,i*fe,.2);}
- x.fillStyle=body;lid(x,G.top,true,W,H,0,1);lid(x,G.bottom,false,W,H,0,1);
+ // 몸: 바깥은 옅은 먹 → 가장자리로 갈수록 짙게(가로판 합일 눈꺼풀처럼 수묵 끔이면 짙은 남색 한 빛)
+ for(const up of [true,false]){const pts=up?G.top:G.bottom,m=pts[pts.length>>1][1],gy=clamp(m,-H,2*H),gr=x.createLinearGradient(0,up?0:H,0,gy===(up?0:H)?gy+(up?1:-1):gy);
+  if(ink){gr.addColorStop(0,'#3b352d');gr.addColorStop(.6,'#1d1915');gr.addColorStop(1,body);}else{gr.addColorStop(0,body);gr.addColorStop(1,body);}
+  x.fillStyle=gr;lid(x,pts,up,W,H,0,1);
+  // 속눈썹 먹선: 가장자리를 따라 진한 한 획, 가운데는 한 번 더 굵게
+  x.strokeStyle='#050403';x.lineJoin='round';x.lineCap='round';x.globalAlpha=.9;x.lineWidth=Math.max(1,H*.004);x.beginPath();
+  pts.forEach((p,i)=>{const X=clamp(p[0],-10,W+10),Y=clamp(p[1],-H,2*H);if(i)x.lineTo(X,Y);else x.moveTo(X,Y);});x.stroke();
+  const a=pts.length>>2,b=pts.length-a;x.globalAlpha=.75;x.lineWidth=Math.max(1.5,H*.008);x.beginPath();
+  for(let i=a;i<b;i++){const X=clamp(pts[i][0],-10,W+10),Y=clamp(pts[i][1],-H,2*H);if(i>a)x.lineTo(X,Y);else x.moveTo(X,Y);}x.stroke();x.globalAlpha=1;}
  // 가로 한 줄(一) 빛
  const L=lineAmount(phase==='opening'?'open':phase==='closing'?'close':'shut',now()-t0);
  if(L.a>.01&&L.w>.005){const w=W*clamp(L.w,0,1),lg=x.createLinearGradient(W/2-w/2,0,W/2+w/2,0),col=ink?'236,222,190':'206,220,236';
@@ -95,6 +104,8 @@ function arm(){if(!enabled(true))return;stats.arms++;phase='shut';kind=null;cur=
 for(const name of ['newGame','restoreSave']){const base=g(name);if(typeof base!=='function')continue;
  const wrap=function(...a){try{arm();}catch(e){fail(e);}return base.apply(this,a);};
  try{if(name==='newGame')newGame=wrap;else restoreSave=wrap;}catch(_){window[name]=wrap;}}
+// 쓰러지는 그 순간 바로 감기 시작(감시 타이머는 무거운 화면에서 늦을 수 있어 피격 뒤에도 한 번 본다). 결과·판정은 그대로 돌려준다.
+{const base=g('hurt');if(typeof base==='function'){const wrap=function(...a){const r=base.apply(this,a);try{const p=g('player');if(p&&!(fin(p.hp,1)>0)&&phase!=='closing'&&phase!=='shut')step();}catch(e){fail(e);}return r;};try{hurt=wrap;}catch(_){window.hurt=wrap;}}}
 ensureCanvas();if(!canvas&&typeof document.addEventListener==='function')document.addEventListener('DOMContentLoaded',ensureCanvas);
 setInterval(()=>{step();if(phase==='opening'||phase==='closing')loop();},100);
 function set(v){if(v&&typeof v==='object'&&'on' in v)prefs.on=!!v.on;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}if(!prefs.on)toIdle();}
