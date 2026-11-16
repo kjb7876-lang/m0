@@ -10154,7 +10154,9 @@
     "quest-gate-r1093.js",
     "ego-guard-r1100.js",
     "ego-ink-r1099.js",
-    "hunter-aim-r1102.js"
+    "hunter-aim-r1102.js",
+    "hero-row-r1106.js",
+    "persona-stride-r1104.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11229,5 +11231,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "a3123d6a28542dc3eda9a33b7588baf6a12d68d66fdf876894522ac0e5fd9ed8"
+  "runtimeManifestSHA256": "5d1cdaeb8d34575c10c36b6b13733509d0dc27bfd7f2dac60bb2dbf152857d07"
 }

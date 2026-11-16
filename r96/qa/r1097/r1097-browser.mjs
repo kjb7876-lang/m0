@@ -13,8 +13,11 @@ await p.evaluate(()=>{const e=room.enemies.find(e=>e.persona);summon3([e],'perso
 await p.waitForFunction(()=>room.encounterStage==='active',null,{timeout:120000});await skip(p);
 // 보스를 영웅 옆에 세워 두고 시간을 거의 멈춘다(같은 순간을 켬·끔으로 비교)
 await p.evaluate(()=>{window.__SLOW=1;const tb=tick;tick=function(dt,...a){return tb.call(this,dt*(window.__SLOW??1),...a);};});
-const hold=()=>p.evaluate(()=>{const e=room.enemies.find(e=>e.persona);e.speed=0;e.cd=1e6;e.hp=e.maxHp;player.hp=maxHP();player.invincible=1e6;projectiles.length=0;});
-await hold();await p.waitForFunction(()=>window.__STORYWORLD_PERSONA_INK_R1097__.inspect().ready>=8,null,{timeout:120000}).catch(()=>{});
+// 찍는 순간 고정: 보스를 영웅 바로 위(화면 뒤쪽) 3칸에 세워 늘 정면 그림(base-0·awake-0 — 영웅을 바라보는 방향)이 나오게 한다.
+//  방향마다 붉은 면적이 달라(뒷모습은 원본부터 붉은색이 적다) 방향이 그때그때 다르면 화소 비율이 흔들린다(공개본 QA 3회 1.24~2.08%).
+const hold=()=>p.evaluate(()=>{const e=room.enemies.find(e=>e.persona);e.speed=0;e.cd=1e6;e.hp=e.maxHp;e.x=player.x;e.y=player.y-3;e.homeX=e.x;e.homeY=e.y;e.vx=0;e.vy=0;player.hp=maxHP();player.invincible=1e6;projectiles.length=0;});
+// 수묵 그림이 실제로 그려질 때까지(굽기·받기가 느린 공개본에서도) 기다린다: 원하는 그림 묶음(base|awake)의 정면이 수묵 캔버스로 나오는 프레임
+const settle=async(kind,want=true)=>{for(let i=0;i<90;i++){await hold();const c=await census();if(c?.body&&!!c.body.ink===want&&(!want||new RegExp('^r1097:ink:'+kind+'-0').test(c.body.path)))return c;await p.waitForTimeout(1500);}return census();};
 // 한 프레임의 명령을 바깥에서 붙잡아 그린 뒤의 상태를 읽는다
 const census=()=>p.evaluate(async()=>{const three=window.__STORYWORLD_PHASE1__.controller.state.three,base=three.render;let refs=null;
  three.render=function(f){if(!refs&&f&&Array.isArray(f.commands)&&f.commands.length)refs=f.commands.slice();return base.apply(this,arguments);};
@@ -31,7 +34,8 @@ const pixels=async(box,ref)=>{const buf=await p.locator('#game').screenshot();re
   const x=Math.max(0,Math.floor(box[0]*sx)),y=Math.max(0,Math.floor(box[1]*sy)),w=Math.min(im.width-x,Math.ceil((box[2]-box[0])*sx)),h=Math.min(im.height-y,Math.ceil((box[3]-box[1])*sy));
   const d=g.getImageData(x,y,w,h).data;let pale=0,red=0,blue=0,l=0,N=d.length/4;for(let i=0;i<d.length;i+=4){const R=d[i],G=d[i+1],B=d[i+2],L=.299*R+.587*G+.114*B;l+=L;if(L>(ref||120)&&Math.max(R,G,B)-Math.min(R,G,B)<70)pale++;if(R-Math.max(G,B)>60)red++;if(B-R>40&&B>90)blue++;}
   return {pale:pale/N,red:red/N,blue:blue/N,lum:l/N,N};},[buf.toString('base64'),box,ref]);};
-await p.evaluate(()=>{window.__SLOW=1e-4;});await p.waitForTimeout(600);
+await hold();await p.waitForFunction(()=>window.__STORYWORLD_PERSONA_INK_R1097__.inspect().ready>=8,null,{timeout:180000}).catch(()=>{});await settle('base');
+await p.evaluate(()=>{window.__SLOW=1e-4;});await p.waitForTimeout(600);await hold();
 const i0=await I();ok('module on, map ink live, baked without errors',i0.on&&i0.inkLive&&i0.active&&i0.errors===0&&i0.failed===0&&i0.ready>=1,i0);
 const a=await census();
 ok('persona body command is drawn from the ink canvas (finite corners, source-over)',!!a?.body&&a.body.ink&&a.body.r1097&&a.body.canvas&&a.body.finite&&(a.body.op||'source-over')==='source-over',a?.body);
@@ -51,8 +55,8 @@ ok('the ink box is about the same place and size as the original (grown only by 
 await p.evaluate(()=>window.__STORYWORLD_PERSONA_INK_R1097__.set(true));await p.waitForTimeout(700);
 // 각성 그림
 await p.evaluate(()=>{window.__SLOW=1;const e=room.enemies.find(e=>e.persona);e.awakeUntil=time+1e5;});
-await p.waitForFunction(()=>window.__STORYWORLD_PERSONA_INK_R1097__.inspect().ready>=16,null,{timeout:180000}).catch(()=>{});await hold();
-await p.evaluate(()=>{window.__SLOW=1e-4;});await p.waitForTimeout(600);
+await p.waitForFunction(()=>window.__STORYWORLD_PERSONA_INK_R1097__.inspect().ready>=16,null,{timeout:180000}).catch(()=>{});await settle('awake');
+await p.evaluate(()=>{window.__SLOW=1e-4;});await p.waitForTimeout(600);await hold();
 const aw=await census();ok('awakened body is also the ink painting (awake art)',!!aw?.body&&aw.body.ink&&/awake/.test(aw.body.path),aw?.body);
 await p.screenshot({path:`${out}/persona-awake-on.png`});
 await p.evaluate(()=>window.__STORYWORLD_PERSONA_INK_R1097__.set(false));await p.waitForTimeout(900);await p.screenshot({path:`${out}/persona-awake-off.png`});
@@ -60,12 +64,12 @@ await p.evaluate(()=>window.__STORYWORLD_PERSONA_INK_R1097__.set(true));await p.
 // 피격 번쩍임이 남는지(필터가 앞에 그대로)
 // 맵 수묵화풍을 끄면 같이 쉼
 await p.evaluate(()=>{window.__SLOW=1;});
-await p.evaluate(()=>window.__STORYWORLD_INK_WASH_R1055__.set({mode:'off'}));await p.waitForTimeout(3500);const m0=await I(),c0=await census();
+await p.evaluate(()=>window.__STORYWORLD_INK_WASH_R1055__.set({mode:'off'}));await p.waitForFunction(()=>!window.__STORYWORLD_PERSONA_INK_R1097__.inspect().active,null,{timeout:60000}).catch(()=>{});const c0=await settle('',false),m0=await I();
 ok('map ink switched off → persona ink rests too (original art)',m0.on&&!m0.active&&!!c0?.body&&!c0.body.ink,{active:m0.active});
-await p.evaluate(()=>window.__STORYWORLD_INK_WASH_R1055__.set({mode:'all'}));await p.waitForTimeout(4500);const m1=await I(),c1=await census();
+await p.evaluate(()=>window.__STORYWORLD_INK_WASH_R1055__.set({mode:'all'}));await p.waitForFunction(()=>window.__STORYWORLD_PERSONA_INK_R1097__.inspect().active,null,{timeout:60000}).catch(()=>{});const c1=await settle('(base|awake)'),m1=await I();
 ok('map ink back on → ink painting returns',m1.active&&!!c1?.body&&c1.body.ink,{active:m1.active});
-await p.evaluate(()=>window.__STORYWORLD_PERF7_R1043__.setStep(2));await p.waitForTimeout(4500);const s2=await I(),c2=await census();ok('perf step 2 (map ink rests) → rests',!s2.active&&!!c2?.body&&!c2.body.ink,{active:s2.active});
-await p.evaluate(()=>window.__STORYWORLD_PERF7_R1043__.setStep(5));await p.waitForTimeout(6000);const c5=await census();ok('perf step 5 → ink painting again',(await I()).active&&!!c5?.body&&c5.body.ink,c5?.body);
+await p.evaluate(()=>window.__STORYWORLD_PERF7_R1043__.setStep(2));await p.waitForFunction(()=>!window.__STORYWORLD_PERSONA_INK_R1097__.inspect().active,null,{timeout:60000}).catch(()=>{});const c2=await settle('',false),s2=await I();ok('perf step 2 (map ink rests) → rests',!s2.active&&!!c2?.body&&!c2.body.ink,{active:s2.active});
+await p.evaluate(()=>window.__STORYWORLD_PERF7_R1043__.setStep(5));await p.waitForFunction(()=>window.__STORYWORLD_PERSONA_INK_R1097__.inspect().active,null,{timeout:60000}).catch(()=>{});const c5=await settle('(base|awake)');ok('perf step 5 → ink painting again',(await I()).active&&!!c5?.body&&c5.body.ink,c5?.body);
 // 설정 줄
 await p.evaluate(()=>showSettings());await p.waitForTimeout(1200);
 const row=await p.evaluate(()=>{const r=document.getElementById('personaInkRowR1097'),b=document.getElementById('personaInkOnR1097'),ch=document.getElementById('inkCharsRowR1090');return r&&{parent:r.parentNode?.id,checked:b.checked,vis:!!r.offsetParent,afterChars:ch?!!(ch.compareDocumentPosition(r)&4):null,count:document.querySelectorAll('#personaInkRowR1097').length,text:r.textContent.slice(0,30)};});

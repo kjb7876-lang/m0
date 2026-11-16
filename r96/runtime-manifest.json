@@ -53154,8 +53154,8 @@
     },
     {
       "path": "gunner-aim-r991.js",
-      "bytes": 20388,
-      "sha256": "0d095c42d87893f2d4c294533c1c85bffcea826b39b8d7f50ad2372ed6efb5ae"
+      "bytes": 22372,
+      "sha256": "4b085d38fa46efc85b7d465dc512cb3bcc9b9e1709b7f94533a9678046accb8c"
     },
     {
       "path": "gunner-arms-r561.js",
@@ -53221,6 +53221,11 @@
       "path": "hero-presentation-r83.js",
       "bytes": 24807,
       "sha256": "244a778f548c5d3d65a3291fa69b63f9fbda83a747a12adbc2563a76e3ab70de"
+    },
+    {
+      "path": "hero-row-r1106.js",
+      "bytes": 4911,
+      "sha256": "463cdb8526eae196c5f70362e7bb5f26c52b1aaa8df7c32a19fa701112b36a00"
     },
     {
       "path": "hero-select-r263.js",
@@ -53394,8 +53399,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6580596,
-      "sha256": "a45bfba21a1e58f1a34f0c2ab41ddfb53ac630408f4bb33f076cbadf64d8f61a"
+      "bytes": 6580690,
+      "sha256": "5c556a6880f4322e48f5176e4023a3bf1b99a886108c19ae3aec0974f48f5a60"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -53931,6 +53936,11 @@
       "path": "persona-ink-r1097.js",
       "bytes": 21842,
       "sha256": "d2eacfd27ecaee75d810d47d9b5c30e77b76450c6bb9defcd73e0a12fc2fbac4"
+    },
+    {
+      "path": "persona-stride-r1104.js",
+      "bytes": 6888,
+      "sha256": "986d034acb4952d26fc84332aa597e59fa5778d002a9cd6a209c7d076ae1fe6b"
     },
     {
       "path": "pixel-readable-r325.js",
@@ -54723,9 +54733,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10944,
-  "totalBytes": 1321608496,
-  "webHTMLSha256": "a45bfba21a1e58f1a34f0c2ab41ddfb53ac630408f4bb33f076cbadf64d8f61a",
+  "fileCount": 10946,
+  "totalBytes": 1321622373,
+  "webHTMLSha256": "5c556a6880f4322e48f5176e4023a3bf1b99a886108c19ae3aec0974f48f5a60",
   "largest": [
     {
       "path": "index.html",
