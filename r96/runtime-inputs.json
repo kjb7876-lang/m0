@@ -10152,6 +10152,8 @@
     "fx-ink-r1095.js",
     "persona-ink-r1097.js",
     "quest-gate-r1093.js",
+    "ego-guard-r1100.js",
+    "ego-ink-r1099.js",
     "assets/r1065/mobs/at-03-biomech-nightmare-attack.webp",
     "assets/r1065/mobs/ra-01-black-rose-blindfold-aim.webp",
     "assets/r1065/mobs/ra-03-cult-mech-legs-aim.webp"
@@ -11229,5 +11231,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "0bc6031dd0887c07912ba882ad0c62fb54d90187fc786b9650d23d9284a2a5dc"
+  "runtimeManifestSHA256": "e3141d2a7ef7dcd78249f18be556201fdb14ff94a42156270f136afe3f8fad07"
 }
