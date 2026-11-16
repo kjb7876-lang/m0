@@ -1,0 +1,18 @@
+neon rows 441 errors 0
+PASS neon: 페이지 오류 0 []
+PASS neon: 그리기 값 유한 
+lauren rows 443 errors 0
+PASS lauren: 페이지 오류 0 []
+PASS lauren: 그리기 값 유한 
+seoha rows 420 errors 0
+PASS seoha: 페이지 오류 0 []
+PASS seoha: 그리기 값 유한 
+PASS neon: 좌우 공격 몸 크기(부츠 밑창) = 옆 서기의 ±8% {"ratio":0.984,"idle":5.8,"atk":5.71,"n":[186,110]}
+PASS neon: 공격 자세 키는 서기보다 크지 않음(웅크림 반영, 0.72~1.0) {"ratio":0.824}
+PASS lauren: 좌우 공격 몸 크기(부츠 밑창) = 옆 서기의 ±8% {"ratio":1.059,"idle":6.24,"atk":6.61,"n":[199,33]}
+PASS lauren: 공격 자세 키는 서기보다 크지 않음(웅크림 반영, 0.72~1.0) {"ratio":0.769}
+PASS 서하: 대각 이동에 정면·뒷면 걷기 그림(walk-se·ne) 대신 옆 걷기 그림 90% 이상 {"n":111,"side":110,"flat":0}
+PASS 서하: 대각 걷기 키 = 곧은 걷기의 ±6% {"ratio":1}
+PASS 서하: 대각 걷기 발 자리가 영웅 발밑에(벗어남 5% 이하) {"n":111,"bad":1,"base":0.038,"max":0.1}
+
+R1108 모두 통과
