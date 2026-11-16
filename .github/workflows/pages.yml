@@ -732,6 +732,8 @@ jobs:
         run: node r96/qa/r1059/r1059-cpu-check.cjs
       - name: R1060 bulmyeongwi zone clues gate boss door CPU check
         run: node r96/qa/r1060/r1060-cpu-check.cjs
+      - name: R1093 quest gates boss room and next map in every quest zone CPU check
+        run: node r96/qa/r1093/r1093-cpu-check.cjs
       - name: R1048 hidden hero EGO 3D pre-rendered 8-direction motion sheets (player state, directions, hit-stop, fade, NaN) CPU check
         run: node r96/qa/r1048/r1048-cpu-check.cjs
       - name: R1094 hidden hero EGO collab kit (hwando + persona skills) and observe-discard 7 tiers CPU check
