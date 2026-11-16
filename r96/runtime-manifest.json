@@ -53284,8 +53284,8 @@
     },
     {
       "path": "mob-attack-dots-r1065.js",
-      "bytes": 7881,
-      "sha256": "0a4250d342c40f1f2fce8866cfdeb972c0a9536287c82c090fcebfa230377a15"
+      "bytes": 8178,
+      "sha256": "849da18c6643f5492d8daba3cd6b89ed53566e27e6685c3044497d92d6b6dac0"
     },
     {
       "path": "mob-death-r188.js",
@@ -53349,8 +53349,8 @@
     },
     {
       "path": "mob-motion-r286.js",
-      "bytes": 18677,
-      "sha256": "79e6ed5cede81cb28982e927317fb864fdc9e43ca98986d818fe23cb37f1865c"
+      "bytes": 18889,
+      "sha256": "411e396bdd8ec186e616a8852232cbc86a2aceb71e99d8083371d0367719ccdd"
     },
     {
       "path": "mob-moves-r385.js",
@@ -54394,7 +54394,7 @@
     }
   ],
   "fileCount": 10878,
-  "totalBytes": 1318832693,
+  "totalBytes": 1318833202,
   "webHTMLSha256": "bced89517085a1759fb553997f9ce7fe8d4b7c45875c5b4e1ed7ab4b060db14c",
   "largest": [
     {

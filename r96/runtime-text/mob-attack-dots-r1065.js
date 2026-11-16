@@ -39,8 +39,9 @@ function install(){const S=window.__STORYWORLD_STORY_COMBAT_R54__;if(!S||typeof 
  window.__STORYWORLD_STORY_COMBAT_R54__=Object.freeze({...S,__r1065:true,frameFor:mine});stats.installs++;return true;}
 install();try{setInterval(install,700);}catch(_){}
 // R286 kindOf 는 그리기(frameFor) 전에 불려 3초 캐시된다 → 처음 보는 몹은 여기서 바탕 프레임을 한 번 물어 본다(몹마다 한 번).
-const probed=new WeakSet();
-function covers(e){if(!prefs.on||!e)return false;if(covered.has(e))return true;if(!probed.has(e)){probed.add(e);try{const S=window.__STORYWORLD_STORY_COMBAT_R54__;if(S?.frameFor)S.frameFor(e,e.profile?.frames?.idle||null);}catch(err){fail(err);}}return covered.has(e);}
+// 지역을 막 만들 때(그림 공급자가 아직 목록을 못 읽음)는 바탕 경로가 달라 보일 수 있어 1초(게임 시간)마다 다시 물어 본다.
+const probed=new WeakMap();const now=()=>{try{return typeof time==='number'?time:0;}catch(_){return 0;}};
+function covers(e){if(!prefs.on||!e)return false;if(covered.has(e))return true;const t=probed.get(e);if(t===undefined||Math.abs(now()-t)>=1){probed.set(e,now());try{const S=window.__STORYWORLD_STORY_COMBAT_R54__;if(S?.frameFor)S.frameFor(e,e.profile?.frames?.idle||null);}catch(err){fail(err);}}return covered.has(e);}
 function set(v){prefs={...prefs,...(v&&typeof v==='object'?v:{on:v!==false})};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return {...prefs};}
 window.__STORYWORLD_MOB_ATTACK_DOTS_R1065__=Object.freeze({revision:REV,set,install,covers,
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},sheets:JSON.parse(JSON.stringify(SHEETS)),lastError})});

@@ -47,7 +47,7 @@ if(e.r193Doll||fixed(e))return 'static';if(e.r200Shade||e.r208Mob)return 'full';
  if(!t){try{if(M.inspect?.().state!=='ready')return null;}catch(_){return null;}}
  return classifyTrack(t);}
 const kinds=new WeakMap();
-function kindOf(e){const c=kinds.get(e),now=T();if(c&&c.name===e.name&&now-c.at<3&&now>=c.at)return c.k;const k=kindNow(e);if(k){kinds.set(e,{k,name:e.name,at:now});}return k;}
+function kindOf(e){const c=kinds.get(e),now=T();if(c&&c.name===e.name&&now-c.at<3&&now>=c.at){/* R1065: 캐시된 '그림 없음'도 Dots 공격 시트가 맡게 되면 바로 full */if(c.k!=='full'&&c.k!=='major'){try{if(window.__STORYWORLD_MOB_ATTACK_DOTS_R1065__?.covers?.(e)){c.k='full';}}catch(_){}}return c.k;}const k=kindNow(e);if(k){kinds.set(e,{k,name:e.name,at:now});}return k;}
 // ---- 자리·연출 도우미 ----
 function free(x,y){try{if(typeof blocked==='function'&&blocked(x,y,RAD,room))return false;return true;}catch(_){return false;}}
 function sees(x,y){try{return typeof clearLine!=='function'||!!clearLine({x,y},player);}catch(_){return false;}}

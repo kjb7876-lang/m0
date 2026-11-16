@@ -24,7 +24,9 @@ const FF=c=>c.__STORYWORLD_STORY_COMBAT_R54__.frameFor;const API=c=>c.__STORYWOR
  e.attack={elapsed:.1,r286Fake:true};ok(FF(c)(e,null).path===heel.path,'R286 fake attack: untouched');
  API(c).set(false);e.attack={elapsed:.5};ok(FF(c)(e,null).path===heel.path,'set(false): off');ok(c.localStorage.getItem('storyworld.r1065.mobatk')!==null,'pref saved');}
 {// 처음 보는 몹: covers() 가 바탕 프레임을 한 번 물어 본다(R286 이 그리기 전에 물어도 'full')
- const c=world({base:heel}),e=mob();ok(API(c).covers(e),'covers probes frameFor for unseen mob');}
+ const c=world({base:heel}),e=mob();ok(API(c).covers(e),'covers probes frameFor for unseen mob');
+ // 처음 물었을 때 바탕이 다른 그림이었다가(공급자 목록 읽기 전) 나중에 걷기 시트가 되면, 1초 뒤 다시 물어 covers
+ const c2=world({}),e2=mob({__base:{path:'assets/x/other.webp',assetFrame:{sourceRect:[0,0,10,10],pivot:[5,9],visibleHeight:9}}});ok(!API(c2).covers(e2),'first probe: other art');e2.__base=heel;ok(!API(c2).covers(e2),'no re-probe within 1s');c2.time=1.2;ok(API(c2).covers(e2),'re-probe after 1s game time');}
 {// 바탕 경로가 표에 없으면 그대로, m033 공격 줄(y640)을 이미 쓰는 공급자는 그대로
  const c=world({base:{path:'assets/r380/mobs/purple-eggkeeper-v1.webp',assetFrame:{sourceRect:[0,0,256,256],pivot:[128,250],visibleHeight:150}}}),e=mob({attack:{elapsed:.4}});ok(FF(c)(e,null).path.includes('eggkeeper'),'unknown base: untouched');ok(!API(c).covers(e),'not covered');
  const m=p=>({path:'assets/r410/mobs/m033.webp',assetFrame:{sourceRect:[0,p,256,320],pivot:[128,300],visibleHeight:180}});
@@ -46,7 +48,7 @@ const FF=c=>c.__STORYWORLD_STORY_COMBAT_R54__.frameFor;const API=c=>c.__STORYWOR
  const c=world({base:heel});const S=API(c).inspect().sheets;ok(Object.keys(S).sort().join()==='MA-02,MA-03,MA-04,MA-06,MA-07,MA-08,MA-10','7 sheets');
  for(const [k,s] of Object.entries(S)){const p=path.join(R,'runtime-text',s.path);ok(fs.existsSync(p)&&fs.statSync(p).size>1000,k+' sheet file');ok(s.cells===6&&s.cell.every(v=>v>0&&v<=400),k+' cell spec');}}
 {// R286: 이 시트가 맡는 몹은 'full'(R286 내딛기를 겹치지 않음)
- const r286=fs.readFileSync(path.join(R,'client-source','mob-motion-r286.js'),'utf8');const i=r286.indexOf('function kindNow');ok(/__STORYWORLD_MOB_ATTACK_DOTS_R1065__\?\.covers\?\.\(e\)\)return 'full'/.test(r286.slice(i,i+600)),'R286 kindNow defers to R1065 covers');}
+ const r286=fs.readFileSync(path.join(R,'client-source','mob-motion-r286.js'),'utf8');const i=r286.indexOf('function kindNow');ok(/__STORYWORLD_MOB_ATTACK_DOTS_R1065__\?\.covers\?\.\(e\)\)return 'full'/.test(r286.slice(i,i+600)),'R286 kindNow defers to R1065 covers');const j=r286.indexOf('function kindOf');ok(/__STORYWORLD_MOB_ATTACK_DOTS_R1065__\?\.covers\?\.\(e\)/.test(r286.slice(j,j+500)),'R286 kindOf cache also defers');}
 {const html=fs.readFileSync(path.join(R,'runtime-text/index.html'),'utf8');ok(html.split('"./mob-attack-dots-r1065.js"').length===2,'script tag once');
  ok(fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8').includes('mob-attack-dots-r1065.js'),'runtime-inputs');
  ok(fs.readFileSync(path.join(R,'../scripts/verify-r96-public.py'),'utf8').includes('mob-attack-dots-r1065.js'),'public verify list');
