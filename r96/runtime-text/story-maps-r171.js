@@ -279,7 +279,7 @@
   cache.set(id,L);while(cache.size>12)cache.delete(cache.keys().next().value);return L;}
  function installExploration(){const EX=window.__STORYWORLD_EXPLORATION__;if(!EX||EX.storyMapR171||typeof EX.layout!=='function')return!!EX?.storyMapR171;EX0=EX;
   const own={};for(const k of Object.keys(EX))own[k]=EX[k];
-  // R1115: 사몽 에피소드 방(r103-samong 지도)은 지역 id(dist04 등)·DREAM 층을 쓰므로, R1098b 가 DREAM 도 R171 지도로 바꾼 뒤 그림은 새 지도·충돌은 에피소드 지도로 어긋났다 → 지금 방이 그 에피소드 방이면 건드리지 않는다.
+  // R1117: 사몽 에피소드 방(r103-samong 지도)은 지역 id(dist04 등)·DREAM 층을 쓰므로, R1098b 가 DREAM 도 R171 지도로 바꾼 뒤 그림은 새 지도·충돌은 에피소드 지도로 어긋났다 → 지금 방이 그 에피소드 방이면 건드리지 않는다.
  const episodeRoom=id=>{try{const r=typeof room!=='undefined'?room:null;return!!(r&&r.id===id&&(r.samongR103||r.samongR115||r.exploration?.type==='r103-samong'||r.exploration?.samongR103));}catch(_){return false;}};
   own.layout=function(id,l=(typeof layer!=='undefined'?layer:'STORY'),...a){if(l==='DREAM'&&episodeRoom(id))return EX.layout.call(EX,id,l,...a);if(eligible(id,l)){const L=layoutFor(id);if(L){stats.used++;return L;}}return EX.layout.call(EX,id,l,...a);};own.storyMapR171=true;
   try{window.__STORYWORLD_EXPLORATION__=Object.freeze(own);}catch(e){fail(e);return false;}return true;}

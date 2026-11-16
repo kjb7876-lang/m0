@@ -21,9 +21,9 @@ ok(zones.length>=40,'에피소드 구역 목록',zones.length);
 const badZ=[];let tested=0;
 for(const [key,zid] of zones){
  try{await p.evaluate(async([key,zid])=>{const SM=__STORYWORLD_SAMONG_R103__,i=SM.episodes.findIndex(e=>e.key===key);await SM.go(i,null,{zone:zid});},[key,zid]);await p.waitForFunction(()=>!loading,null,{timeout:150000});await skip();
-  const r=await p.evaluate(()=>{const X=room.exploration,D=window.__STORYWORLD_EXPLORATION__.layout(zone,layer);return {zone,layer,same:X===D,cells:(X?.floorCells||[]).length,stuck:blocked(player.x,player.y,.29,room),fin:Number.isFinite(player.x+player.y),t:X?.type};});
-  tested++;if(!(r.same&&!r.stuck&&r.fin&&r.cells>0))badZ.push([zid,r]);}catch(e){badZ.push([zid,String(e).slice(0,100)]);}}
-ok(tested>=40&&badZ.length===0,'에피소드 전 구역: 그리는 지도 = 충돌 지도 · 벽 속 아님',{tested,bad:badZ.slice(0,5)});
+  const r=await p.evaluate(()=>{const X=room.exploration,D=window.__STORYWORLD_EXPLORATION__.layout(zone,layer);return {zone,layer,same:X===D,cells:(X?.floorCells||[]).length,stuck:blocked(player.x,player.y,.29,room),fin:Number.isFinite(player.x+player.y),t:X?.type,r171:!!X?.storyMapR171};});
+  tested++;if(!(r.same&&!r.stuck&&r.fin&&r.cells>0&&r.t==='r103-samong'&&!r.r171))badZ.push([zid,r]);}catch(e){badZ.push([zid,String(e).slice(0,100)]);}}
+ok(tested>=40&&badZ.length===0,'에피소드 전 구역: 그리는 지도 = 충돌 지도 = 예전 에피소드 지도(r103-samong, R171 아님) · 벽 속 아님',{tested,bad:badZ.slice(0,5)});
 const dr=await p.evaluate(async()=>{await enterRegion('dist01',null,{layer:'DREAM',restore:true});return 0;});await p.waitForFunction(()=>!loading,null,{timeout:150000});await skip();
 const g=await p.evaluate(()=>{const X=room.exploration,D=window.__STORYWORLD_EXPLORATION__.layout(zone,layer);return {same:X===D,r171:!!X?.storyMapR171,z:zone,l:layer};});
 ok(g.same&&g.r171&&g.z==='dist01'&&g.l==='DREAM','에피소드 밖 일반 DREAM 지역(dist01)은 여전히 R171 지도(그림=충돌)',g);
