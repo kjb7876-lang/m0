@@ -53078,6 +53078,11 @@
       "sha256": "4f2940c38775a060408c87b9debcf4fbf53e6d01a515be08c92e93f7e320d597"
     },
     {
+      "path": "fx-ink-r1095.js",
+      "bytes": 23446,
+      "sha256": "e061cea6e9121dbd3c29fb9afe699c51382cbe274a62e4692861f9c52f22763c"
+    },
+    {
       "path": "fx-more-r438.js",
       "bytes": 12890,
       "sha256": "caced1db7588774ad9b33b35366cce4b940ee8af29d743eba15df4c033e075d8"
@@ -53374,8 +53379,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6580327,
-      "sha256": "3709b0cb7f71b65c116926f50f03662a5f2d75a8cfc143097c2f691786c6be1a"
+      "bytes": 6580369,
+      "sha256": "2f754c56f2a274fe47d4f082d2144bf3e1c6227c1fea033150839ff10d0852b8"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -54693,9 +54698,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10938,
-  "totalBytes": 1321500011,
-  "webHTMLSha256": "3709b0cb7f71b65c116926f50f03662a5f2d75a8cfc143097c2f691786c6be1a",
+  "fileCount": 10939,
+  "totalBytes": 1321523499,
+  "webHTMLSha256": "2f754c56f2a274fe47d4f082d2144bf3e1c6227c1fea033150839ff10d0852b8",
   "largest": [
     {
       "path": "index.html",
