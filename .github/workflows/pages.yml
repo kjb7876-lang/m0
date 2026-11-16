@@ -596,6 +596,8 @@ jobs:
         run: node r96/qa/r1055/r1055-cpu-check.cjs
       - name: R1085 ink-wash UI (ink panels, paper buttons, R1055 jg palette, settings toggle, no control hidden) CPU check
         run: node r96/qa/r1085/r1085-cpu-check.cjs
+      - name: R1086 hanji panels (paper panels with ink text over the R1085 ink UI, HUD stays dark, contrast fixer, settings toggle, nothing hidden) CPU check
+        run: node r96/qa/r1086/r1086-cpu-check.cjs
       - name: R1090 character ink tint (hero and mob body images only, follows the map ink wash, settings toggle, effects and telegraphs untouched) CPU check
         run: node r96/qa/r1090/r1090-cpu-check.cjs
       - name: R1022 auto-move toggle CPU check
@@ -738,6 +740,8 @@ jobs:
         run: node r96/qa/r1053/blade-melee-cpu-check.cjs
       - name: R1054 age-15 default presentation (mob death ash, reduced hit blood) CPU check
         run: node r96/qa/r1054/age15-cpu-check.cjs
+      - name: R1091 eyes open on game entry, close on death (horizontal lid line) CPU check
+        run: node r96/qa/r1091/r1091-cpu-check.cjs
       - name: R1038 defer hidden boot self-tests until diagnostics open CPU check
         run: node r96/qa/r1038/r1038-cpu-check.cjs
       - name: R1037 narration always-off button (boss entry story window + memory fragment note) and settings rows CPU check
