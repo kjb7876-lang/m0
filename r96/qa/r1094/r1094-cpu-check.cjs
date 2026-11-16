@@ -24,6 +24,7 @@ function kit(opt={}){const iv=[];const sb={console,JSON,Object,Array,Number,Stri
   function attackPower(){return 10;} function rank(){return 0;} function nearestEnemy(){return {x:5,y:0};} function floatText(s){floats.push(s);}
   function basicAttack(){player.combo++;} function special(){if(player.specialCD>0)return;player.specialCD=10;} function ego(){if(player.ego>0)return;player.ego=3;}
   function tick(){time+=1/60;}
+  ${opt.pre||''}
   var FORM=${opt.form!==false},RC=${!!opt.rc};window.__STORYWORLD_EGO_SOVEREIGN_R1046__={formActive:()=>FORM,inspect:()=>({rc151:RC})};`,sb);
  vm.runInContext(SRC,sb,{filename:N});return{sb,iv,run:c=>vm.runInContext(c,sb),K:sb.__STORYWORLD_EGO_KIT_R1094__};}
 {const{K}=kit();ok(!!K&&/^R1094-ego-kit-/.test(K.revision),'모듈');
@@ -74,4 +75,28 @@ function sov(rank){const store={'storyworld.r1046.ego':'{"on":true}'};const call
  vm.runInContext(`var started=true,modal=false,loading=false,time=1;var player={hero:'hwando',x:1,y:1,hp:100};function tick(dt){time+=dt;}window.__STORYWORLD_PROGRESSION_R62__={defs:[],ranks:()=>0};`,sb);
  for(const f of ['ego-sovereign-r1046-data.js','ego-sovereign-r1046.js'])vm.runInContext(rd(path.join(R,'client-source',f)),sb,{filename:f});for(let i=0;i<100;i++)vm.runInContext('tick(.01)',sb);
  ok(sb.__STORYWORLD_PROGRESSION_R62__.defs.length===0,'잠긴 동안엔 카드 없음(EGO 를 모르는 사람에게 안 보임)');}
+// ③ R1094b 타격 섬광: EGO 형상일 때 환도 무채색(흰 덩어리) 대신 주홍·먹빛, 보통 합성, 알파 .65
+{const pre=`var imgs=[],heroSeen=[];function drawImage(p,x,y,w,h,o){imgs.push({p,o:o||{}});return true;}
+  function drawEffect(e){const hero=e.sourceHero||'hwando';heroSeen.push(hero);drawImage(e.asset,0,0,1,1,{blend:'screen',alpha:.8,...(hero==='hwando'?{filter:'grayscale(1)'}:{})});}`;
+ let{sb,run,K}=kit({pre});const o=K.hitOpt({alpha:.8,blend:'screen',filter:'grayscale(1)'});
+ ok(Math.abs(o.alpha-.52)<1e-9&&o.blend==='source-over'&&o.filter===K.HIT_FILTER&&!/grayscale|blur|drop-shadow|sepia/.test(K.HIT_FILTER)&&K.hitOpt({alpha:NaN}).alpha===.65&&K.hitOpt(null).alpha===.65,'hitOpt: 알파 ×.65·보통 합성·허용 필터만(NaN → .65)');
+ run("var b={type:'burst',asset:'assets/vfx/generated/v300/burst-impact.webp'};drawEffect(b);");
+ let last=run('imgs[imgs.length-1]');ok(last.o.filter===K.HIT_FILTER&&last.o.blend==='source-over'&&Math.abs(last.o.alpha-.52)<1e-9&&run('heroSeen[heroSeen.length-1]')==='ego-r1094','EGO 형상: 타격 섬광은 주홍·먹빛(무채색 규칙 비켜 감)');
+ ok(run("!Object.prototype.hasOwnProperty.call(b,'sourceHero')")&&K.inspect().stats.hitTint===1,'섬광 그린 뒤 sourceHero 원래대로(없던 값은 지움)·hitTint 1');
+ run("var b2={type:'burst',asset:'x',sourceHero:'hwando'};drawEffect(b2);");ok(run('b2.sourceHero')==='hwando','있던 sourceHero 는 되돌림');
+ run("drawEffect({type:'slash',asset:'s'});");last=run('imgs[imgs.length-1]');ok(last.o.filter==='grayscale(1)'&&last.o.blend==='screen','섬광 아닌 효과(베기 등)는 그대로');
+ run("drawImage('plain',0,0,1,1,{alpha:1});");ok(run('imgs[imgs.length-1]').o.alpha===1,'효과 밖 drawImage 는 그대로');
+ ({run,K}=kit({pre,form:false}));run("drawEffect({type:'burst',asset:'x'});");last=run('imgs[imgs.length-1]');ok(last.o.filter==='grayscale(1)'&&K.inspect().stats.hitTint===0,'EGO 형상이 아니면 환도 섬광 그대로');
+ {const k2=kit({pre});({run,K}=k2);run("var o4=drawEffect;drawEffect=function(){return o4.apply(this,arguments)};var o5=drawImage;drawImage=function(){return o5.apply(this,arguments)};");for(const f of k2.iv)f();}run("drawEffect({type:'burst',asset:'x'})");ok(K.inspect().stats.hitTint===1,'다른 오버레이가 겉을 감싸도 한 번만');}
+// ④ R1094b R101 타격 시트(sig-hit-pale, 3D 화면 큰 흰 별): EGO 형상이면 붉은 시트로 바꿔 언주·먹·흰, 알파 .65 — 그 한 번만
+{const pre=`var drew=[];function Ctx(){this.filter='none';this.globalAlpha=1;}Ctx.prototype.drawImage=function(im){drew.push({src:im.src,filter:this.filter,alpha:this.globalAlpha});};var ctx=new Ctx();
+  function readyImage(p){return {image:{src:p,naturalWidth:1920}};}
+  function drawEffect(e){if(e.type==='r101-air'){ctx.filter='grayscale(1) brightness(1.12)';ctx.globalAlpha=1;ctx.drawImage({src:'assets/r100/sig-hit-pale.webp'});ctx.filter='none';ctx.drawImage({src:'assets/r100/sig-slash-gold.webp'});}
+   if(e.type==='r945-hwando-ink'){ctx.globalCompositeOperation='lighter';ctx.globalAlpha=1;ctx.filter='none';ctx.drawImage({src:'assets/r945/hwando-ink-burst.webp'});ctx.globalCompositeOperation='source-over';ctx.drawImage({src:'assets/r945/hwando-ink-burst.webp'});ctx.globalCompositeOperation='lighter';ctx.drawImage({src:'assets/mobs/x.webp'});}}`;
+ let{run,K}=kit({pre});run("drawEffect({type:'r101-air'})");let d=run('drew');
+ ok(d[0].src==='assets/r100/sig-hit-red.webp'&&d[0].filter===K.SIG_FILTER&&Math.abs(d[0].alpha-.65)<1e-9&&!/grayscale|blur|drop-shadow/.test(K.SIG_FILTER),'EGO: 흰 타격 시트 → 붉은 시트·언주 필터·알파 .65',d);
+ ok(d[1].src==='assets/r100/sig-slash-gold.webp'&&d[1].filter==='none'&&run("!Object.prototype.hasOwnProperty.call(ctx,'drawImage')")&&run('ctx.filter')==='none'&&K.inspect().stats.sigTint===1,'다른 그림은 그대로·그린 뒤 ctx 원래대로',d);
+ run("drew.length=0;drawEffect({type:'r945-hwando-ink'})");d=run('drew');
+ ok(Math.abs(d[0].alpha-.7)<1e-9&&d[0].filter===K.SOFT_FILTER&&d[1].alpha===1&&d[1].filter==='none'&&d[2].alpha===1&&K.inspect().stats.softTint===1&&!/grayscale|blur|drop-shadow/.test(K.SOFT_FILTER),'EGO: 환도 수묵 이펙트 더하기 합성만 알파 .7·명도 눌러 날림 줄임(보통 합성·환도 아닌 그림은 그대로)',d);
+ ({run,K}=kit({pre,form:false}));run("drawEffect({type:'r101-air'})");d=run('drew');ok(d[0].src==='assets/r100/sig-hit-pale.webp'&&d[0].filter==='grayscale(1) brightness(1.12)','EGO 형상 아니면 환도 흰 시트 그대로');}
 console.log(`\nR1094 CPU ${n-bad}/${n} 통과`);process.exitCode=bad?1:0;

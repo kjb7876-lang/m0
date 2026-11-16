@@ -213,7 +213,11 @@ if(exists){
   ok('R1094: EGO 판엔 항성 반발·유성 궤도 없음',!kinds.includes('repulse')&&!kinds.includes('meteor'));
   ok('R1094: EGO 판은 라우렌 컷인을 띄우지 않음',cut===0);
   ok('R1094: EGO 발동 표시(egoProcs)·ego 표식 붙은 동작',A(g).inspect().stats.egoProcs>=3);
-  ok('R1094: EGO 판은 언주·묵 색 필터로(허용된 hue-rotate·saturate·contrast 만)',/EGO_FILTER='hue-rotate\(\d+deg\) saturate\([\d.]+\) contrast\([\d.]+\)'/.test(src)&&/else if\(x\.ego\)\{const f0=ctx\.filter;ctx\.filter=EGO_FILTER/.test(src));
+  ok('R1094: EGO 판은 언주·묵 색 필터로(허용된 saturate·hue-rotate·brightness·contrast 만, 채도 먼저)',/EGO_FILTER='saturate\([\d.]+\) hue-rotate\(\d+deg\) brightness\([\d.]+\) contrast\([\d.]+\)'/.test(src)&&/else if\(x\.ego\)\{egoPaint=true;/.test(src));
+  {const Z=A(g);ok('R1094b: 영웅 가까이 옅게 — egoAlpha(0)=.32, 1.2칸 이상 .8, NaN → .8',Math.abs(Z.egoAlpha(0)-.32)<1e-9&&Math.abs(Z.egoAlpha(1.2)-.8)<1e-9&&Math.abs(Z.egoAlpha(5)-.8)<1e-9&&Math.abs(Z.egoAlpha(NaN)-.8)<1e-9&&Z.egoAlpha(.6)>.32&&Z.egoAlpha(.6)<.8);
+   const c=vm.runInContext('ctx',g),seen=[];c.filter='none';c.globalAlpha=1;const d0=c.arc,e0=c.ellipse;c.arc=function(...a){seen.push({filter:c.filter,alpha:c.globalAlpha});return d0.apply(this,a);};c.ellipse=function(...a){seen.push({filter:c.filter,alpha:c.globalAlpha});return e0.apply(this,a);};
+   A(g).qaReset();g.time+=5.2;A(g).qaForce('red');heroHit(g,'a');step(g,3);
+   const eg=seen;ok('R1094b: EGO 판 그림은 그리는 순간 EGO 필터(장면 기록 안에서 다시 검)·알파 .8 이하('+eg.length+')',eg.length>0&&eg.every(x=>x.filter===Z.egoFilter&&x.alpha<=.8+1e-9)&&A(g).inspect().stats.egoDraws>0);c.arc=d0;c.ellipse=e0;}
   g=env('hwando');g.__STORYWORLD_EGO_KIT_R1094__={active:()=>true};A(g).qaRandom(()=>.5);g.room.enemies.push(mob('a',11,10));let rolls=0;for(let i=0;i<40;i++){heroHit(g,'a');step(g,1,.4);}
   ok('R1094: EGO 확률은 기본 10%(굴림 .5 → 발동 없음)',A(g).inspect().stats.procTotal===0&&A(g).inspect().stats.rolls>0);
   g=env('lauren');g.__STORYWORLD_EGO_KIT_R1094__={active:()=>true};A(g).qaRandom(()=>0);g.room.enemies.push(mob('a',11,10));heroHit(g,'a');ok('R1094: 라우렌 본인은 그대로(EGO 표시 안 붙음)',!(A(g).inspect().stats.egoProcs>0)&&A(g).inspect().stats.procTotal===1);}
