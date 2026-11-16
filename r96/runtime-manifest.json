@@ -10298,6 +10298,21 @@
       "sha256": "b11281f4436de3bd35e03642774148ef26d77966c7ac70dd50e045a14f9cc77d"
     },
     {
+      "path": "assets/r1104b/persona-walk-front.webp",
+      "bytes": 219282,
+      "sha256": "de20316b5b6e57413a33f82ed7523636afe5176a9c4b58b0eb674713313203e5"
+    },
+    {
+      "path": "assets/r1104b/persona-walk-rear.webp",
+      "bytes": 189276,
+      "sha256": "927cf327c50dca96dea82c5bcac4c0d4a5a4e518160a584a9b4dcc5bd9add5d6"
+    },
+    {
+      "path": "assets/r1104b/persona-walk-side.webp",
+      "bytes": 140820,
+      "sha256": "9d78c268bb60ba41375dbcb6d6577836d956f345b8ed1dea7fccad03bb78017b"
+    },
+    {
       "path": "assets/r116/mobs/M001-hit.png",
       "bytes": 141513,
       "sha256": "35cffa3fe6d6c22cdb75e06e1cca55a673f06c10afa28087d749082c40c77b71"
@@ -54004,8 +54019,8 @@
     },
     {
       "path": "persona-stride-r1104.js",
-      "bytes": 6888,
-      "sha256": "986d034acb4952d26fc84332aa597e59fa5778d002a9cd6a209c7d076ae1fe6b"
+      "bytes": 14190,
+      "sha256": "8e6093e1e309692adc95fc5d11a8590392340f3213d9d4d13cf37204eaf3dd54"
     },
     {
       "path": "pixel-readable-r325.js",
@@ -54798,8 +54813,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10959,
-  "totalBytes": 1322211866,
+  "fileCount": 10962,
+  "totalBytes": 1322768546,
   "webHTMLSha256": "265a03c99dd59916e1d606eae72f077eb6846adb49877bee250b8f6a7f2a1c75",
   "largest": [
     {
