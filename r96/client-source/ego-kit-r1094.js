@@ -10,7 +10,7 @@
 //  끄기: localStorage storyworld.r1094.egoKit = {"on":false}. 새 저장 필드·키 없음.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_EGO_KIT_R1094__)return;
-const REV='R1094-ego-kit-2',KEY='storyworld.r1094.egoKit',ART='assets/rc134/persona-skills/';
+const REV='R1094-ego-kit-3',KEY='storyworld.r1094.egoKit',ART='assets/rc134/persona-skills/';
 const fin=Number.isFinite,clamp=(v,a,b)=>fin(v)?Math.min(b,Math.max(a,v)):a;
 const F=Object.freeze;
 // 페르소나 보스 원본 기술(index.html personaSkills3 와 같은 이름·모양). factor = 공격력 대비 탄 하나의 피해.
@@ -33,7 +33,7 @@ const DECK=F({
  r:F({cycle:F(['clock','shield']),delay:.5,together:true}),
  ego:F({cycle:F(['eclipse']),delay:.2})});
 let on=true;try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(v&&v.on===false)on=false;}catch(_){}
-const stats={basic:0,special:0,w:0,e:0,r:0,ego:0,shots:0,blocked:0,errors:0,hitTint:0,sigTint:0,softTint:0};let lastError=null,lastSkill=null;const turn={special:0,w:0,e:0,r:0,ego:0};
+const stats={basic:0,special:0,w:0,e:0,r:0,ego:0,shots:0,blocked:0,errors:0,hitTint:0,sigTint:0,softTint:0,orchidSoft:0};let lastError=null,lastSkill=null;const turn={special:0,w:0,e:0,r:0,ego:0};
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const G=(f,d)=>{try{return f();}catch(_){return d;}};
 const pl=()=>G(()=>typeof player==='object'&&player?player:null,null);
@@ -82,10 +82,22 @@ function sigImage(){try{const r=typeof readyImage==='function'?readyImage(SIG_EG
 function srcOf(im){try{return String(im?.currentSrc||im?.src||'');}catch(_){return'';}}
 // 환도 계보 수묵·베기 이펙트(더하기·스크린 합성)는 EGO 형상에서 흰 덩어리로 날린다 → 그 그림들만 알파 .7·명도 .88·대비 1.12(흰 속은 남기고 날림만 누름).
 const SOFT_TYPES=F(['r101-air','r102-air','r106-d2s','r945-hwando-ink','r590-hwando-chain','r1034-hwando-ink-trace']),HW_PATH=/hwando|\/r100\/sig-|\/r1041\//,SOFT_ALPHA=.7,SOFT_FILTER='brightness(.88) contrast(1.12)';
+// R1094c(QA GVL478 11-16 03:17Z): 환도 난초 베기(r945, 보통 합성 흰 꽃잎)는 몹이 붙으면 영웅 둘레를 하얗게 덮는다(위치 버그 아님) →
+//  EGO 형상일 때 영웅에서 1.2칸 안의 난초만 옅게(영웅 위 .45배 → 1.2칸에서 1배). 난초 자리 = 그리기 직전 translate(몹 화면 좌표).
+const ORCHID_PATH=/hwando-orchid-slash\.webp(?:$|[?#])/,ORCHID_NEAR=1.2,ORCHID_MIN=.45;
+// 순수 계산: 영웅과 떨어진 칸 거리 d → 난초 알파 배율
+function orchidAlpha(d){d=fin(d)?Math.max(0,d):ORCHID_NEAR;return d>=ORCHID_NEAR?1:ORCHID_MIN+(1-ORCHID_MIN)*d/ORCHID_NEAR;}
+function orchidTiles(x,y){try{const p=pl();if(!p||typeof project!=='function'||!fin(x)||!fin(y))return NaN;const q=project(p.x,p.y),u=(typeof TILE==='number'?TILE:34)*(typeof zoom==='number'&&zoom>0?zoom:1);return fin(q?.x)&&fin(q?.y)&&u>0?Math.hypot(x-q.x,y-q.y)/u:NaN;}catch(_){return NaN;}}
 function paintSig(e,base,self,args){let C=null;try{C=typeof ctx!=='undefined'?ctx:null;}catch(_){}if(!C||typeof C.drawImage!=='function')return base.apply(self,args);
- const own=Object.prototype.hasOwnProperty.call(C,'drawImage'),d0=C.drawImage,red=sigImage();
- C.drawImage=function(im,...a){const src=srcOf(im);if(!SIG_PALE.test(src)){const op=C.globalCompositeOperation;if(!HW_PATH.test(src)||(op!=='lighter'&&op!=='screen'))return d0.call(this,im,...a);const f0=C.filter,a0=C.globalAlpha;stats.softTint++;try{C.filter=(f0&&f0!=='none'?f0+' ':'')+SOFT_FILTER;C.globalAlpha=clamp(a0*SOFT_ALPHA,0,1);return d0.call(this,im,...a);}finally{C.filter=f0;C.globalAlpha=a0;}}const f0=C.filter,a0=C.globalAlpha;stats.sigTint++;try{C.filter=SIG_FILTER;C.globalAlpha=clamp(a0*HIT_ALPHA,0,1);return d0.call(this,red||im,...a);}finally{C.filter=f0;C.globalAlpha=a0;}};
- try{return base.apply(self,args);}finally{if(own)C.drawImage=d0;else delete C.drawImage;}}
+ const own=Object.prototype.hasOwnProperty.call(C,'drawImage'),d0=C.drawImage,red=sigImage(),ink=e.type==='r945-hwando-ink'&&typeof C.translate==='function';
+ const ownT=ink&&Object.prototype.hasOwnProperty.call(C,'translate'),t0=ink?C.translate:null;let at=null;
+ if(ink)C.translate=function(x,y){at={x:+x,y:+y};return t0.apply(this,arguments);};
+ C.drawImage=function(im,...a){const src=srcOf(im),f0=C.filter,a0=C.globalAlpha;
+  if(SIG_PALE.test(src)){stats.sigTint++;try{C.filter=SIG_FILTER;C.globalAlpha=clamp(a0*HIT_ALPHA,0,1);return d0.call(this,red||im,...a);}finally{C.filter=f0;C.globalAlpha=a0;}}
+  if(ink&&ORCHID_PATH.test(src)){const k=orchidAlpha(at?orchidTiles(at.x,at.y):NaN);if(k<1){stats.orchidSoft++;try{C.globalAlpha=clamp(a0*k,0,1);return d0.call(this,im,...a);}finally{C.globalAlpha=a0;}}return d0.call(this,im,...a);}
+  const op=C.globalCompositeOperation;if(!HW_PATH.test(src)||(op!=='lighter'&&op!=='screen'))return d0.call(this,im,...a);
+  stats.softTint++;try{C.filter=(f0&&f0!=='none'?f0+' ':'')+SOFT_FILTER;C.globalAlpha=clamp(a0*SOFT_ALPHA,0,1);return d0.call(this,im,...a);}finally{C.filter=f0;C.globalAlpha=a0;}};
+ try{return base.apply(self,args);}finally{if(own)C.drawImage=d0;else delete C.drawImage;if(ink){if(ownT)C.translate=t0;else delete C.translate;}}}
 let inHit=false;
 // 순수 계산: EGO 섬광 그리기 옵션
 function hitOpt(opt){const o={...(opt&&typeof opt==='object'?opt:{})},a=+o.alpha;o.alpha=clamp((fin(a)?a:1)*HIT_ALPHA,0,1);o.filter=HIT_FILTER;o.blend='source-over';return o;}
@@ -103,7 +115,7 @@ function watchWER(){const p=pl(),t=now();if(!p||t==null)return;const R=p.storyWE
 function wrapTick(){if(typeof tick!=='function'||done.tick)return;done.tick=true;const base=tick;const w=function(...a){const r=base.apply(this,a);try{watchWER();}catch(e){fail(e);}return r;};w.__r1094=true;tick=w;}
 function install(){wrapAll();wrapTick();wrapHit();}
 install();try{setInterval(()=>{try{install();}catch(e){fail(e);}},1000);}catch(_){}
-window.__STORYWORLD_EGO_KIT_R1094__=Object.freeze({revision:REV,SKILL,DECK,basicPlan,cyclePick,angles,castJump,active,hitOpt,HIT_FILTER,SIG_FILTER,SOFT_FILTER,
+window.__STORYWORLD_EGO_KIT_R1094__=Object.freeze({revision:REV,SKILL,DECK,basicPlan,cyclePick,angles,castJump,active,hitOpt,HIT_FILTER,SIG_FILTER,SOFT_FILTER,orchidAlpha,
  set(v){on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;},
  inspect:()=>({revision:REV,on,active:active(),stats:{...stats},turn:{...turn},lastSkill,lastError})});
 })();

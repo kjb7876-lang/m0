@@ -1,0 +1,21 @@
+PASS module on, map ink live, baked without errors {"revision":"R1097-persona-ink-1","on":true,"inkLive":true,"active":true,"half":false,"frames":79,"swapped":10,"cached":8,"ready":8,"failed":0,"queued":0,"baked":8,"bakeMs":542,"errors":0,"rows":0,"lastError":null}
+PASS persona body command is drawn from the ink canvas (finite corners, source-over) {"ink":true,"r1097":true,"path":"r1097:ink:base-1","canvas":true,"size":[396,452],"box":[710.5243822238862,257.9944273425068,802.9638761996893,361.1575956359925],"filter":"saturate(.8)","op":"source-over","finite":true}
+PASS R1090 character tint is not stacked on the ink painting "saturate(.8)"
+PASS nothing else uses the ink canvas (hero, other images: 0 of 658)
+PASS switched off → original body art again {"ink":false,"r1097":false,"path":"r409:outline:enemy:u:http://127.0.0.1:4410/m0/assets/rc133/a","canvas":true,"size":[368,424],"box":[713.7899208426401,261.18966646541196,799.6983628654436,357.96228041576796],"filter":"saturate(.8) saturate(.5) contrast(1.08)","op":"source-over","finite":true}
+PIXELS {"on":{"pale":0.1556038047973532,"red":0.024400330851943756,"blue":0,"lum":54.88090363936754,"N":9672},"off":{"pale":0.03866832092638544,"red":0.01251033912324235,"blue":0,"lum":40.70030820926196,"N":9672}}
+PASS on screen (same frozen moment): paper-white area appears around/in the figure (≥ 6% of the box, at least 3× the original) {"on":0.1556038047973532,"off":0.03866832092638544}
+PASS on screen: the figure keeps its yeonji red (red share ≥ 60% of the original and ≥ 2% of the box) {"on":0.024400330851943756,"off":0.01251033912324235}
+PASS on screen: the box gets brighter, i.e. the dark figure no longer sinks into the dark floor (mean luminance +15% or more) {"on":54.88090363936754,"off":40.70030820926196}
+PASS the ink box is about the same place and size as the original (grown only by the paper margin: width within +5%..+45%) {"ink":[710.5243822238862,257.9944273425068,802.9638761996893,361.1575956359925],"orig":[713.7899208426401,261.18966646541196,799.6983628654436,357.96228041576796]}
+PASS awakened body is also the ink painting (awake art) {"ink":true,"r1097":true,"path":"r1097:ink:awake-1","canvas":true,"size":[396,452],"box":[710.4220692084294,253.36293740623012,803.8855683601561,361.53808749191785],"filter":"saturate(.8)","op":"source-over","finite":true}
+PASS map ink switched off → persona ink rests too (original art) {"active":false}
+PASS map ink back on → ink painting returns {"active":true}
+PASS perf step 2 (map ink rests) → rests {"active":false}
+PASS perf step 5 → ink painting again {"ink":true,"r1097":true,"path":"r1097:ink:awake-1","canvas":true,"size":[396,452],"box":[708.858764568303,253.9745591122304,804.850513462176,361.5487680838931],"filter":"saturate(.8)","op":"source-over","finite":true}
+PASS settings: '페르소나 수묵 그림' row in the combat screen section after the character tint row, visible, checked, single {"parent":"combatScreenR1021","checked":true,"vis":true,"afterChars":true,"count":1,"text":" 페르소나 수묵 그림 페르소나 보스를 먹과 언주색으로 "}
+PASS settings: unchecking saves "0" and turns it off
+PASS settings: checking again turns it on and clears the stored value
+PASS no module errors, no page errors {"errors":0,"lastError":null,"page":[]}
+INSPECT {"revision":"R1097-persona-ink-1","on":true,"inkLive":true,"active":true,"half":false,"frames":255,"swapped":111,"cached":8,"ready":8,"failed":0,"queued":0,"baked":25,"bakeMs":1370,"errors":0,"rows":1,"lastError":null}
+{"total":18,"failed":0,"method":"headless chromium (software rendering)"}

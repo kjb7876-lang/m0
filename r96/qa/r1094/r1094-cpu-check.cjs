@@ -99,4 +99,13 @@ function sov(rank){const store={'storyworld.r1046.ego':'{"on":true}'};const call
  run("drew.length=0;drawEffect({type:'r945-hwando-ink'})");d=run('drew');
  ok(Math.abs(d[0].alpha-.7)<1e-9&&d[0].filter===K.SOFT_FILTER&&d[1].alpha===1&&d[1].filter==='none'&&d[2].alpha===1&&K.inspect().stats.softTint===1&&!/grayscale|blur|drop-shadow/.test(K.SOFT_FILTER),'EGO: 환도 수묵 이펙트 더하기 합성만 알파 .7·명도 눌러 날림 줄임(보통 합성·환도 아닌 그림은 그대로)',d);
  ({run,K}=kit({pre,form:false}));run("drawEffect({type:'r101-air'})");d=run('drew');ok(d[0].src==='assets/r100/sig-hit-pale.webp'&&d[0].filter==='grayscale(1) brightness(1.12)','EGO 형상 아니면 환도 흰 시트 그대로');}
+// ⑤ R1094c 환도 난초(r945, 보통 합성 흰 꽃잎): EGO 형상이면 영웅 1.2칸 안만 옅게(영웅 위 .45 → 1.2칸 1)
+{const pre=`var drew=[],TILE=34,zoom=1;function Ctx(){this.filter='none';this.globalAlpha=1;this.globalCompositeOperation='source-over';}Ctx.prototype.drawImage=function(im){drew.push({src:im.src,alpha:this.globalAlpha});};Ctx.prototype.translate=function(){};var ctx=new Ctx();
+  function project(x,y){return {x:x*34,y:y*34};}function readyImage(p){return {image:{src:p,naturalWidth:1}};}
+  function drawEffect(e){if(e.type!=='r945-hwando-ink')return;for(const [x,y] of e.at){ctx.translate(x*34,y*34);ctx.drawImage({src:'assets/r945/hwando-orchid-slash.webp'});}ctx.drawImage({src:'assets/r945/hwando-ink-cloud.webp'});}`;
+ let{run,K}=kit({pre});const A=K.orchidAlpha;
+ ok(Math.abs(A(0)-.45)<1e-9&&A(1.2)===1&&A(3)===1&&A(NaN)===1&&A(.6)>.45&&A(.6)<1,'orchidAlpha: 영웅 위 .45, 1.2칸 이상 1, NaN → 1');
+ run("drawEffect({type:'r945-hwando-ink',at:[[0,0],[.6,0],[3,0]]})");let d=run('drew');
+ ok(Math.abs(d[0].alpha-.45)<1e-9&&Math.abs(d[1].alpha-A(.6))<1e-9&&d[2].alpha===1&&d[3].alpha===1&&K.inspect().stats.orchidSoft===2&&run("!Object.prototype.hasOwnProperty.call(ctx,'translate')&&!Object.prototype.hasOwnProperty.call(ctx,'drawImage')"),'EGO: 영웅 가까운 난초만 옅게·먼 난초·다른 그림 그대로·ctx 원래대로',d);
+ ({run,K}=kit({pre,form:false}));run("drawEffect({type:'r945-hwando-ink',at:[[0,0]]})");ok(run('drew')[0].alpha===1,'EGO 형상 아니면 난초 그대로');}
 console.log(`\nR1094 CPU ${n-bad}/${n} 통과`);process.exitCode=bad?1:0;
