@@ -1043,6 +1043,8 @@ jobs:
         run: node r96/qa/r950/finale-cpu-check.cjs
       - name: Verify R1002 final boss Dots sheets
         run: node r96/qa/r1002/finale-fx-cpu-check.cjs
+      - name: R1099 hidden hero EGO ink painting (runtime ink-wash conversion of the EGO 3D body sheets, rouge + ink + white, 1.5x sharpened bake on PC, follows the map ink wash, settings toggle) CPU check
+        run: node r96/qa/r1099/r1099-cpu-check.cjs
       - name: R946 Lauren passive celestial resonance (repulse burst, red push orb, blue pull orb, violet piercing fusion, prop meteors; per-hero instance)
         run: node r96/qa/r946/r946-cpu-check.cjs
       - name: R940 read-only state snapshot for QA (events, first-hit-after-entry, boss kill time; no game writes) CPU check

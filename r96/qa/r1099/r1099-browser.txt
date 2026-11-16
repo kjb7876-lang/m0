@@ -1,0 +1,23 @@
+PASS hidden EGO form on true
+PASS module on, map ink live, baked without errors {"revision":"R1099-ego-ink-1","on":true,"inkLive":true,"active":true,"scale":1.5,"frames":126,"swapped":89,"cached":48,"ready":6,"failed":0,"queued":41,"baking":"idle-se.webp","baked":6,"cells":78,"bakeMs":1096,"cachePx":2314966,"evicted":0,"errors":0,"rows":0,"lastError":null}
+PASS EGO body command is drawn from the ink canvas (finite corners) [{"ink":true,"path":"r1099:ink:idle-s:x1.5","canvas":true,"box":[616.4367166666667,291.89941333333337,663.0153,359.30136333333337],"filter":"brightness(1.32) contrast(1.22)","op":"source-over","a":1,"finite":true}]
+PASS R1090 character tint is not stacked on the ink painting "brightness(1.32) contrast(1.22)"
+PASS no hwando body drawn together with EGO (overlap bug stays fixed) 0
+PASS nothing else uses the EGO ink canvas 0
+PASS switched off → original EGO 3D art again {"ink":false,"path":"r409:outline:hero:u:http://127.0.0.1:4410/m0/assets/r1048/ego/idle-s.w","canvas":true,"box":[592.32545,270.52806333333336,687.67455,365.8771633333333],"filter":"saturate(.5) contrast(1.08)","op":"source-over","a":1,"finite":true}
+PIXELS {"on":{"pale":0.17991239048811014,"red":0.01877346683354193,"gold":0,"lum":100.44844086358168,"edge":10.800953324808205,"N":3196},"off":{"pale":0.026282853566958697,"red":0,"gold":0,"lum":83.13962546933533,"edge":8.390179028133012,"N":3196},"ref":130}
+PASS on screen: paper-white (lum>130, near-neutral) appears around/in the figure (≥4% of box, ≥2× original) {"on":0.17991239048811014,"off":0.026282853566958697}
+PASS on screen: yeonji red kept (≥1% of box) {"on":0.01877346683354193,"off":0}
+PASS on screen: gold trim gone (EGO = rouge + ink + white only; ≤ 40% of original gold) {"on":0,"off":0}
+PASS on screen: crisper figure — mean neighbour contrast +15% or more {"on":10.800953324808205,"off":8.390179028133012}
+PASS ink box sits on the original cell (centre within 3px) {"ink":[616.4367166666667,291.89941333333337,663.0153,359.30136333333337],"orig":[592.32545,270.52806333333336,687.67455,365.8771633333333]}
+PASS while moving the body is the ink painting of a walk/run sheet [{"ink":true,"path":"r1099:ink:walk-s:x1.5","canvas":true,"box":[613.6968000000003,292.5544864718161,666.3032000000002,362.6963531384828],"filter":"brightness(1.32) contrast(1.22)","op":"source-over","a":1,"finite":true}]
+PASS map ink off → EGO ink rests too {"active":false}
+PASS map ink back on → ink painting returns {"active":true}
+PASS EGO form off → no EGO ink body left (plain hwando) 0
+PASS settings: 'EGO 수묵 그림' row in the combat screen section after the character tint row, visible, checked, single {"parent":"combatScreenR1021","checked":true,"vis":true,"afterChars":true,"count":1,"text":" EGO 수묵 그림 히든 영웅 EGO 를 먹·언주색·흰"}
+PASS settings: unchecking saves "0" and turns it off
+PASS settings: checking again turns it on
+PASS no module errors, no page errors {"errors":0,"lastError":null,"page":[]}
+INSPECT {"revision":"R1099-ego-ink-1","on":true,"inkLive":true,"active":true,"scale":1.5,"frames":292,"swapped":217,"cached":48,"ready":13,"failed":0,"queued":34,"baking":"walk-se.webp","baked":13,"cells":186,"bakeMs":2470,"cachePx":4855102,"evicted":0,"errors":0,"rows":1,"lastError":null}
+{"total":20,"failed":0,"method":"headless chromium (software rendering)"}
