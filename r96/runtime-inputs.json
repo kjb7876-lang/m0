@@ -10027,6 +10027,7 @@
     "enemy-rules-r1053.js",
     "assets/r1045d/gunner/walk-e3.webp",
     "mob-lunge-r1064.js",
+    "ink-chars-r1090.js",
     "eyelid-r1091.js"
   ],
   "mediaPaths": [
@@ -11102,5 +11103,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "5ee3ab2046e5e3b201d9ab56bf17bc0e02a1b0610894cad41e8c6453d646d036"
+  "runtimeManifestSHA256": "878066d66798b37b73f3416bf86bc5b89dff237e77d622240aeb433b7c096868"
 }

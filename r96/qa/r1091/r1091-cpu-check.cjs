@@ -35,7 +35,8 @@ function boot(o={}){const store=new Map(o.stored?[['storyworld.r1091.eyelid',o.s
   document:{readyState:'complete',body,createElement:t=>el(t),getElementById:()=>null,addEventListener(){}},
   started:false,loading:false,modal:true,player:null,storyScene:null,settings:{reducedMotion:!!o.reduced,lowFx:!!o.lowFx},
   newGame:async function(){sb.started=true;sb.loading=true;sb.player={hp:100};return true;},
-  restoreSave:async function(){sb.started=true;sb.loading=true;sb.player={hp:100};return true;}};
+  restoreSave:async function(){sb.started=true;sb.loading=true;sb.player={hp:100};return true;},
+  hurt:function(d){if(sb.player)sb.player.hp=Math.max(0,sb.player.hp-d);return 'hit';}};
  if(o.coop)sb.__STORYWORLD_COOP_SIM_R62__={mode:()=>'local'};
  sb.window=sb;vm.createContext(sb);let err=null;if(src){try{vm.runInContext(src,sb);}catch(e){err=String(e);}}
  return {sb,store,body,err,I:sb.__STORYWORLD_EYELID_R1091__,at:ms=>{now=ms;},get now(){return now;}};}
@@ -45,7 +46,8 @@ if(!I){console.log(`\nR1091 eyelid: ${n-bad}/${n} pass`);process.exit(1);}
 const canvas=()=>A.body.children.find(c=>c.tagName==='canvas');
 // ---- 곡선 ----
 const D=I.durations();
-ok('durations: open ~1.4–2.2s, close ~1.0–1.8s (normal)',D.open>=1.4&&D.open<=2.2&&D.close>=1&&D.close<=1.8,D);
+// 사용자 2026-11-16 00:10Z '가로합일 참고' 확인 → 가로판 합일(hapil1 RC181·RC182, 눈꺼풀 0.7초)과 세로 리부트(뜨기 1.05초·감기 1.15초) 박자에 맞춤.
+ok('durations follow the 합일 reference pace: open and close each 1.0–1.4s (normal)',D.open>=1&&D.open<=1.4&&D.close>=1&&D.close<=1.4,D);
 ok('open curve: starts shut (0) and ends fully open (1)',I.openness('open',0)===0&&I.openness('open',D.open)===1);
 ok('close curve: starts open (1) and ends shut (0)',I.openness('close',0)===1&&I.openness('close',D.close)===0);
 const samples=k=>Array.from({length:201},(_,i)=>I.openness(k,D[k]*i/200));
@@ -79,7 +81,10 @@ A.at(600+D.open*1000+20);I.step();ok('after the open duration: idle, fully open,
 ok('stats.opens counts one',I.inspect().stats.opens===1);
 // 지역 이동
 A.sb.loading=true;A.at(4000);I.step();A.sb.loading=false;A.at(4300);I.step();ok('region travel (loading while open) does not close/reopen',I.state().phase==='idle'&&I.inspect().stats.opens===1&&I.inspect().stats.closes===0);
-// 사망
+// 사망 — 무거운 화면에서 감시 타이머가 늦어도 쓰러지는 그 순간 감기 시작(헤드리스 실측 0.25초 넘게 늦던 것)
+{const H=boot();H.sb.newGame();H.at(10);H.I.step();H.sb.loading=false;H.sb.modal=false;H.at(20);H.I.step();H.at(20+H.I.durations().open*1000+50);H.I.step();
+ const r=H.sb.hurt(5);ok('hurt wrapper returns the original result',r==='hit');ok('non-lethal hit: still idle',H.I.state().phase==='idle');
+ H.sb.hurt(1e6);ok('lethal hurt starts closing immediately (no watcher tick needed)',H.I.state().phase==='closing',H.I.state());}
 A.sb.player.hp=0;A.at(5000);I.step();ok('hp 0 → closing starts',I.state().phase==='closing'&&canvas().style.display!=='none');
 A.sb.modal=true;A.at(5000+D.close*1000+20);I.step();ok('after close duration: shut and held',I.state().phase==='shut'&&I.state().openness===0&&I.inspect().stats.closes===1);
 A.at(9000);I.step();ok('stays shut while dead and the death panel is up',I.state().phase==='shut');
@@ -91,6 +96,8 @@ A.sb.restoreSave();A.at(12000);I.step();ok('load save arms shut too',I.state().p
 // 그리기
 A.at(12100+D.open*400);I.step();I.drawNow();const g=canvas().g;
 ok('drawing issued fills, no NaN/Infinity args',g&&g.calls.includes('fill')&&g.bad.length===0,g&&g.bad.slice(0,5));
+ok('reference lid look: ink gradient body (lighter outside → dark edge) and a lash stroke along each lid edge',g&&g.calls.filter(c=>c==='lg').length>=2&&g.calls.filter(c=>c==='stroke').length>=2);
+ok('ink-wash off: deep navy lids like the 가로판 (#03060d)',/#03060d/.test(src));
 ok('canvas is pointer-events none and below the panel (z-index < 30)',canvas().style.pointerEvents==='none'&&Number(canvas().style.zIndex)<30&&Number(canvas().style.zIndex)>0);
 ok('canvas resolution capped (≤ 0.75 × screen, dpr ignored)',canvas().width<=1280*.75+1&&canvas().width>=200);
 // 해상도·움직임 줄이기

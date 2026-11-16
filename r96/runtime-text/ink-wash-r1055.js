@@ -138,7 +138,7 @@ function settingsRow(){try{/* R1022 와 같은 자리: 설정 창 맨 위 '전�
    const txt=document.createElement('span');txt.textContent=' 맵 수묵화풍 ';
    const sel=document.createElement('select');sel.id='inkSelR1055';sel.title='화풍';
    for(const k of STYLE_IDS){const o=document.createElement('option');o.value=k;o.textContent=STYLES[k].label;sel.appendChild(o);}
-   const note=document.createElement('p');note.className='small muted';note.textContent='맵(바닥·벽)을 수묵화풍으로 그립니다. 캐릭터·이펙트·UI 는 그대로입니다. 성능 1·2단계에서는 쉬어 갑니다.';
+   const note=document.createElement('p');note.className='small muted';note.textContent='맵(바닥·벽)을 수묵화풍으로 그립니다. 이펙트·UI 는 그대로입니다. 성능 1·2단계에서는 쉬어 갑니다.';
    box.onchange=()=>{set({mode:box.checked?'all':'off'});};sel.onchange=()=>{set({style:sel.value});sel.value=prefs.style;};
    lab.appendChild(box);lab.appendChild(txt);row.appendChild(lab);row.appendChild(sel);row.appendChild(note);row.r1055Check=box;row.r1055Select=sel;host.appendChild(row);stats.settingsRows=(stats.settingsRows||0)+1;}
   if(row.r1055Check)row.r1055Check.checked=prefs.mode!=='off';if(row.r1055Select)row.r1055Select.value=prefs.style;}catch(e){fail(e);}}
