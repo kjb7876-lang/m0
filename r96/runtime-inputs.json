@@ -10194,7 +10194,9 @@
     "assets/r1101c/gunner/attack-se9.webp",
     "assets/r1104b/persona-walk-front.webp",
     "assets/r1104b/persona-walk-rear.webp",
-    "assets/r1104b/persona-walk-side.webp"
+    "assets/r1104b/persona-walk-side.webp",
+    "hero-walk-r1108c.js",
+    "assets/r1108c/seoha/walk-e.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11269,5 +11271,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "c4aacfd8b83fe98866da6c31dd6b42b90a6b434e5886ff858d5bfd2bc8184022"
+  "runtimeManifestSHA256": "d0772721af66c4ba8729a59cf3b574bdb8ccd9e69e444dad58d953f89943b205"
 }

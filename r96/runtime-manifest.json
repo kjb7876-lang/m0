@@ -10373,6 +10373,11 @@
       "sha256": "9edd6546bf1054be5f3b0ceac6d63c60f2b86f4ead4dfe5baf18458b0e7439b2"
     },
     {
+      "path": "assets/r1108c/seoha/walk-e.webp",
+      "bytes": 50304,
+      "sha256": "5876585ed4334d50481023e923a71883f6ae29279fe531d7b8902ff006ab9428"
+    },
+    {
       "path": "assets/r1111/mobs/md-05-disinfection-lamp-fallen-angel-death.webp",
       "bytes": 40218,
       "sha256": "80df1e7202f9bc32d71edabb3e547acec6ccbdc42d1ef1754a40b3c57346df9e"
@@ -53428,6 +53433,11 @@
       "sha256": "cc2a43662ae52b990b26a0502deb165720cd2f924690a55355291805a51b3e4f"
     },
     {
+      "path": "hero-walk-r1108c.js",
+      "bytes": 3915,
+      "sha256": "9af93ee3510d5e18fc647d28e111242162eadd3f48d8b839be7b95a90fcb7bbf"
+    },
+    {
       "path": "heroes-r108.js",
       "bytes": 4386,
       "sha256": "6b0c95f7c5fbb17d1dad6e046437fbdf52a3c951c5d851bf76e52aa51a96933f"
@@ -53579,8 +53589,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6580881,
-      "sha256": "201d1e6305a72eb6627abd39726e2f9d241ba4be387fcfea03c332449562be4e"
+      "bytes": 6580927,
+      "sha256": "3a40459c426f48e94ad4a498e4386e419cebfa839075e4d3c6b491dc437fe71a"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -54923,9 +54933,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10984,
-  "totalBytes": 1324286086,
-  "webHTMLSha256": "201d1e6305a72eb6627abd39726e2f9d241ba4be387fcfea03c332449562be4e",
+  "fileCount": 10986,
+  "totalBytes": 1324340351,
+  "webHTMLSha256": "3a40459c426f48e94ad4a498e4386e419cebfa839075e4d3c6b491dc437fe71a",
   "largest": [
     {
       "path": "index.html",
