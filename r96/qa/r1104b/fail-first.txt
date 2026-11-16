@@ -1,0 +1,28 @@
+FAIL 0) API(sheets()·walkSheets 3방향)
+PASS ① 서 있으면 몸 그림 그대로
+FAIL ② 옆(base-2) 걸음 = 옆 시트 칸 한 장(assets/rc133/art/base-2.png, 몸 명령 3)
+FAIL ② 코드 걸음 조각 없음
+FAIL ④ 2초에 0칸, 앞으로 0번·뒤로 0번
+FAIL ⑤ 반대로 움직이면 칸이 거꾸로(뒤로 0번·앞으로 0번)
+FAIL ⑦ base-0 → front (받은: assets/rc133/art/base-0.png)
+FAIL ⑦ base-1 → front (받은: assets/rc133/art/base-1.png)
+FAIL ⑦ base-2 → side (받은: assets/rc133/art/base-2.png)
+FAIL ⑦ base-3 → rear (받은: assets/rc133/art/base-3.png)
+FAIL ⑦ base-4 → rear (받은: assets/rc133/art/base-4.png)
+FAIL ⑦ base-5 → rear 뒤집기 (받은: assets/rc133/art/base-5.png)
+FAIL ⑥ base-6 → side 뒤집기 (받은: assets/rc133/art/base-6.png)
+FAIL ⑦ base-7 → front 뒤집기 (받은: assets/rc133/art/base-7.png)
+PASS ⑧ 각성형은 코드 걸음 조각(3)
+PASS ⑨ 시트를 아직 못 읽으면 코드 걸음 조각(3)
+PASS ⑨ document·Image 없는 곳에서도 오류 없이 코드 걸음
+FAIL ⑩ 수묵 켜짐이면 수묵으로 구운 칸(r1097:ink:base-2)
+PASS ⑪ 끄면 바꾸지 않음
+FAIL ⑫ assets/r1104b/persona-walk-front.webp 있음·runtime-inputs 등록
+FAIL ⑫ 코드가 assets/r1104b/persona-walk-front.webp 를 씀
+FAIL ⑫ assets/r1104b/persona-walk-rear.webp 있음·runtime-inputs 등록
+FAIL ⑫ 코드가 assets/r1104b/persona-walk-rear.webp 를 씀
+FAIL ⑫ assets/r1104b/persona-walk-side.webp 있음·runtime-inputs 등록
+FAIL ⑫ 코드가 assets/r1104b/persona-walk-side.webp 를 씀
+PASS ⑫ 다듬기 스크립트 남김
+PASS ⑫ runtime-text 사본 같음
+R1104b persona-walk-sheets FAILED 20
