@@ -17,7 +17,7 @@ function world(o={}){
   localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}}};
  if(o.r1097)C.__STORYWORLD_PERSONA_INK_R1097__={process:cmds=>{for(const c of cmds)if(/rc133\/art\/base/.test(c.sourcePath)&&!c.r1097){c.r1097=true;c.sourcePath='blob:ink/'+c.sourcePath;c.sourceRect=[0,0,396,452];c.imageSize=[396,452];}}};
  C.window=C;vm.createContext(C);vm.runInContext(SRC,C);
- const body=(extra={})=>({kind:'image',owner:{kind:'enemy'},sourcePath:'assets/rc133/art/base-1.png',image:{},sourceRect:[0,0,344,400],imageSize:[344,400],style:{globalAlpha:1},
+ const body=(extra={})=>({kind:'image',key:'enemy:p1:7',owner:{kind:'enemy',id:'enemy:p1'},sourcePath:'assets/rc133/art/base-1.png',image:{},sourceRect:[0,0,344,400],imageSize:[344,400],style:{globalAlpha:1},
   points:[[500,150],[586,150],[586,250],[500,250]],...extra});
  const other=()=>({kind:'image',owner:{kind:'enemy'},sourcePath:'assets/x/mob.png',image:{},sourceRect:[0,0,100,100],points:[[0,0],[50,0],[50,50],[0,50]],style:{}});
  const frame=cmds=>{proto.render.call({}, {commands:cmds});return seen;};
@@ -53,6 +53,9 @@ const pieces=cmds=>cmds.filter(c=>/rc133\/art\/base|blob:ink/.test(String(c.sour
 {const w=world();w.api().set(false);const out=w.walk(1);ok(pieces(out).length===1,'⑦ 끄면 나누지 않음');}
 // ⑧ NaN
 {const w=world();let threw=null,out;try{for(let i=0;i<30;i++){w.C.time+=1/30;w.persona.x+=.08;out=w.frame([w.body({points:[[NaN,1],[2,1],[2,3],[1,3]]})]);}}catch(e){threw=e;}ok(!threw&&pieces(out).length===1,'⑧ NaN 점은 그대로·오류 없음');}
+// ⑩ 렌더러는 명령을 key(owner.id+':'+순번)로 한 메시에 묶는다 → 나눈 조각이 같은 key 면 마지막(상체)만 남고 하체가 사라진다(공개본 R1097 화면 검사·QA 실측)
+{const w=world();let out,got=null;for(let i=0;i<40;i++){w.C.time+=1/20;w.persona.x+=.06;out=w.frame([w.body()]);const ps=pieces(out);if(ps.length===3){got=ps;break;}}
+ ok(!!got,'⑩ 걷는 중 3조각으로 나뉨');const ks=(got||[]).map(c=>c.key);ok(got&&ks.every(k=>typeof k==='string'&&k.startsWith('enemy:p1:7'))&&new Set(ks).size===ks.length,'⑩ 조각마다 key 가 다름(원래 key 를 앞에 둠) '+JSON.stringify(ks));}
 // ⑨ 빌드 연결
 {const html=fs.readFileSync(path.join(ROOT,'runtime-text/index.html'),'utf8');const i=html.indexOf('<script src="./persona-stride-r1104.js"></script>'),j=html.indexOf('<script src="./persona-ink-r1097.js"></script>');
  ok(i>0&&j>0,'⑨ index.html 에 스크립트 태그(R1097 도 있음)');ok(fs.readFileSync(path.join(ROOT,'runtime-text/persona-stride-r1104.js'),'utf8')===SRC,'⑨ runtime-text 사본 같음');
