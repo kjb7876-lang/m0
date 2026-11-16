@@ -420,6 +420,8 @@ jobs:
         run: node r96/qa/r378/r378-cpu-check.cjs
       - name: R380 user-approved mobs (moth, eggkeeper, guardian, mech spider) CPU check
         run: node r96/qa/r380/r380-cpu-check.cjs
+      - name: R1115 dist00 patrol root stalker walk sheet CPU check
+        run: node r96/qa/r1115/flip-cpu-check.cjs
       - name: R531 purple-sword angel summons no oblivion spider CPU check
         run: node r96/qa/r531/r531-cpu-check.cjs
       - name: R541 soft synthesized pickup, mob death and door sounds CPU check
@@ -552,6 +554,8 @@ jobs:
         run: node r96/qa/r1108/r1108-cpu-check.cjs
       - name: R1108b seoha walk lean (no stride-less side swap) CPU check
         run: node r96/qa/r1108b/r1108b-cpu-check.cjs
+      - name: R1108c seoha left/right walk new sheet CPU check
+        run: node r96/qa/r1108c/r1108c-cpu-check.cjs
       - name: R1047 reach bounds (minX,minY,maxX,maxY) keep hidden persona reachable CPU check
         run: node r96/qa/r1047/reach-bounds-cpu-check.cjs
       - name: R1096 hidden persona mirror-celestial patterns (telegraphed crimson push orb, abyss pull well, eclipse beam; probabilistic) CPU check
@@ -766,6 +770,8 @@ jobs:
         run: node r96/qa/r1100/r1100-cpu-check.cjs
       - name: R1105 EGO attack motion (no skipped strike frames, swing blend, direction hold, clone redraw) CPU check
         run: node r96/qa/r1105/r1105-cpu-check.cjs
+      - name: R1112 EGO restore (samong cut-in EGO art, EGO aura color, prebaked ink sheets, front-only face, HIDDEN tag) CPU check
+        run: node r96/qa/r1112/r1112-cpu-check.cjs
       - name: R1109 co-op relay build match (old R62 Render relay auto-fallback, default relay address) CPU check
         run: node r96/qa/r1109/r1109-cpu-check.cjs
       - name: R1092 story panel scene art (vertical-version scene paintings, ink-wash aware) CPU check

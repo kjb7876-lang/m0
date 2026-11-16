@@ -44,8 +44,8 @@
     },
     {
       "path": "approved-mobs-r380.js",
-      "bytes": 24866,
-      "sha256": "15f4ab25f54cefbdb22dda0c3afbb196dd70e1c25dead74719f716a4237da234"
+      "bytes": 25392,
+      "sha256": "0701eaaed73a0ff75f64a25fd871205263ea85c1e25c0004a5c61164d8e9fee1"
     },
     {
       "path": "art-drive-r105.js",
@@ -10373,6 +10373,11 @@
       "sha256": "9edd6546bf1054be5f3b0ceac6d63c60f2b86f4ead4dfe5baf18458b0e7439b2"
     },
     {
+      "path": "assets/r1108c/seoha/walk-e.webp",
+      "bytes": 50304,
+      "sha256": "5876585ed4334d50481023e923a71883f6ae29279fe531d7b8902ff006ab9428"
+    },
+    {
       "path": "assets/r1111/gunner/idle-n6.webp",
       "bytes": 34406,
       "sha256": "8f08e2fb621b9a24cbd22533793e5ca1f7505f2c376ed90ddeb06b26e3086193"
@@ -10401,6 +10406,261 @@
       "path": "assets/r1111/mobs/md-72-ash-moth-death.webp",
       "bytes": 28544,
       "sha256": "a19b03efd2e05f9de75ffa7455fde3c26ed7dda775247d7f49ad2e051e4c45ed"
+    },
+    {
+      "path": "assets/r1112/ego-ink/attack-e.webp",
+      "bytes": 249660,
+      "sha256": "4346e0ca60777dbd4807eac8830f75fc9e00dbf2e66bb0c3b81893cbcead6247"
+    },
+    {
+      "path": "assets/r1112/ego-ink/attack-n.webp",
+      "bytes": 247450,
+      "sha256": "f967e843812a0e837e33db8d869c1bbd6a037d05c4093bd42fc5ea6ede872031"
+    },
+    {
+      "path": "assets/r1112/ego-ink/attack-ne.webp",
+      "bytes": 251446,
+      "sha256": "47794d14d45e83bdcf7b63d971cde8b4ab25f69d273a277b6bf1b520e5c3b1b3"
+    },
+    {
+      "path": "assets/r1112/ego-ink/attack-nw.webp",
+      "bytes": 253118,
+      "sha256": "c16de5dac19beef01bae743d2a19463d730ee0b883617ed37b6b8becaa46af4c"
+    },
+    {
+      "path": "assets/r1112/ego-ink/attack-s.webp",
+      "bytes": 212590,
+      "sha256": "e14a01158cb9bcc7a2993eeb2cb2ab9e4a56125ea2664a2bae6d119f06ff2115"
+    },
+    {
+      "path": "assets/r1112/ego-ink/attack-se.webp",
+      "bytes": 239926,
+      "sha256": "b77f3b8541f32948dadae0b9d4bd64560051df4b65ec9c361e68a6dd8de66492"
+    },
+    {
+      "path": "assets/r1112/ego-ink/attack-sw.webp",
+      "bytes": 217678,
+      "sha256": "8fb7980f72a03d8c5f1f2de87aa585db5ce72439f4fc0d414aa99253568e93d5"
+    },
+    {
+      "path": "assets/r1112/ego-ink/attack-w.webp",
+      "bytes": 244430,
+      "sha256": "3cbd34fae9ec363941846187823b98ab9b243145a8590946e16abc41ac41d0e6"
+    },
+    {
+      "path": "assets/r1112/ego-ink/discard-e.webp",
+      "bytes": 273140,
+      "sha256": "1c6acd0a2b37d3a8bfd9b4420f2a06d1e5eb6363709371371dd49bce9f4ac20c"
+    },
+    {
+      "path": "assets/r1112/ego-ink/discard-n.webp",
+      "bytes": 290026,
+      "sha256": "bc6341f3b3b23bab42691e1c90893354eca6c9c8e76a17a25bddc60f81c15c2c"
+    },
+    {
+      "path": "assets/r1112/ego-ink/discard-ne.webp",
+      "bytes": 310510,
+      "sha256": "cd4f67097d783c44084c82b1ca0ae2a984b76674c63b0c972614576a92a5882f"
+    },
+    {
+      "path": "assets/r1112/ego-ink/discard-nw.webp",
+      "bytes": 269992,
+      "sha256": "85c54d2b40a739b722a2b61c59807051b534d69f5c286e771c0f68e1645e2a77"
+    },
+    {
+      "path": "assets/r1112/ego-ink/discard-s.webp",
+      "bytes": 255276,
+      "sha256": "9ab671346350dacf0dbad830ff016bb19ee55efba3233638b0ae55b52f9085ec"
+    },
+    {
+      "path": "assets/r1112/ego-ink/discard-se.webp",
+      "bytes": 242636,
+      "sha256": "8d74069f29a9bab624fbe648a7487c74f3eca03d97382a3cbfed9b330bc0d441"
+    },
+    {
+      "path": "assets/r1112/ego-ink/discard-sw.webp",
+      "bytes": 259018,
+      "sha256": "cd3517e6fc0e665004a3546f6f817d97ecbb8efa2878c7ffdf7c9bb8ee66ec78"
+    },
+    {
+      "path": "assets/r1112/ego-ink/discard-w.webp",
+      "bytes": 268066,
+      "sha256": "632d3002c29374bec87898f46012d0327e9b2bc086dc290ef31e931dfe68470f"
+    },
+    {
+      "path": "assets/r1112/ego-ink/hit-e.webp",
+      "bytes": 111722,
+      "sha256": "b0681847e85c62d15c7a70d3e5ce2afe3597f554667e1677bd5da979b02bd28a"
+    },
+    {
+      "path": "assets/r1112/ego-ink/hit-n.webp",
+      "bytes": 112976,
+      "sha256": "4db8179c67e9c63c6281c45621c892d11ed1ef5ad5f9a00830134293849a8e1c"
+    },
+    {
+      "path": "assets/r1112/ego-ink/hit-ne.webp",
+      "bytes": 120312,
+      "sha256": "aea83968d7b948bf5d4ae7f0c871937a4c95532c6e8191e6d4f30cd410295a5e"
+    },
+    {
+      "path": "assets/r1112/ego-ink/hit-nw.webp",
+      "bytes": 108034,
+      "sha256": "9aec9675783c2f47a0c517490fa13ea86ab6c99500f36c8afbbd6a55bfb56b4c"
+    },
+    {
+      "path": "assets/r1112/ego-ink/hit-s.webp",
+      "bytes": 107938,
+      "sha256": "edb4afd984398ca3ec1ffb1ecd8592e66234f09b49174fb6e80e9eb1a7016421"
+    },
+    {
+      "path": "assets/r1112/ego-ink/hit-se.webp",
+      "bytes": 103996,
+      "sha256": "6ffdd4c720f91046c1faaec62287cd7e991579ccb92ecf29186a267e2ace0881"
+    },
+    {
+      "path": "assets/r1112/ego-ink/hit-sw.webp",
+      "bytes": 116442,
+      "sha256": "1dcb612e1a9b0c0e3f3f2e66b578d8e0836e1d5ddc689276eac0c1bffdf1a9f3"
+    },
+    {
+      "path": "assets/r1112/ego-ink/hit-w.webp",
+      "bytes": 114100,
+      "sha256": "4030a3783977911ff7e56a8ebab6dfb5558271aa7149f0ee6b97caff90995f79"
+    },
+    {
+      "path": "assets/r1112/ego-ink/idle-e.webp",
+      "bytes": 158870,
+      "sha256": "2f9d1397fa83f6c2fa3b9786c6f4d7fb4230c59eaf368a0c5babe9f8f3b2ee64"
+    },
+    {
+      "path": "assets/r1112/ego-ink/idle-n.webp",
+      "bytes": 164474,
+      "sha256": "f5d04263cec01c511ba9488209d51b727974efb09a126165cdc390e045a17835"
+    },
+    {
+      "path": "assets/r1112/ego-ink/idle-ne.webp",
+      "bytes": 181628,
+      "sha256": "88aa06cb23a9d659caab8fbf9bf27c7bc7b072a2f5107866d308670b3e68e2e7"
+    },
+    {
+      "path": "assets/r1112/ego-ink/idle-nw.webp",
+      "bytes": 151058,
+      "sha256": "a97637cc7b983b65a30a4bf3e70e8054b0c16137cccf77c579ac07c670ecafd6"
+    },
+    {
+      "path": "assets/r1112/ego-ink/idle-s.webp",
+      "bytes": 152502,
+      "sha256": "cba8e7dfc8efc780e60ad4b49c2c1b4c94bdcab52d964e924a5da4cb73e400ec"
+    },
+    {
+      "path": "assets/r1112/ego-ink/idle-se.webp",
+      "bytes": 146316,
+      "sha256": "9aee5a25e22db70a971b16332fc20cd4ceb930ed7b643ba186219370a20652de"
+    },
+    {
+      "path": "assets/r1112/ego-ink/idle-sw.webp",
+      "bytes": 163060,
+      "sha256": "d1efd4f68c65b5b54ee4b0cc282f2c32915a209d3318f50915a09ba38294385b"
+    },
+    {
+      "path": "assets/r1112/ego-ink/idle-w.webp",
+      "bytes": 157174,
+      "sha256": "04c8ea5a8b33fa30c71888f44a1bf3ac6ebc9bde485277849e99dd66a430e000"
+    },
+    {
+      "path": "assets/r1112/ego-ink/run-e.webp",
+      "bytes": 139894,
+      "sha256": "777ee63f6ffcb6e912c23d1b3b2d8f29d36285a65d4cebd76a2caf44e314b109"
+    },
+    {
+      "path": "assets/r1112/ego-ink/run-n.webp",
+      "bytes": 144948,
+      "sha256": "27bbf47fb4b7310650f11941c6ca765a99d1d7fdea4818337fb4c7192166471a"
+    },
+    {
+      "path": "assets/r1112/ego-ink/run-ne.webp",
+      "bytes": 150074,
+      "sha256": "0bce95f23886324bb6548446ecff7c5abc2a9904842a1bfdae2582ae51c99fd6"
+    },
+    {
+      "path": "assets/r1112/ego-ink/run-nw.webp",
+      "bytes": 132906,
+      "sha256": "47bd011f055e20839eb1b208b35b3bf720aad70ee6939d3f647b6b4ca4da8361"
+    },
+    {
+      "path": "assets/r1112/ego-ink/run-s.webp",
+      "bytes": 119098,
+      "sha256": "460fff14da7fc6342c29a37c5a4bded64007d18b0529aebb5434fd16470d6ffb"
+    },
+    {
+      "path": "assets/r1112/ego-ink/run-se.webp",
+      "bytes": 122952,
+      "sha256": "8fe37906afd3d1197aa62623fe6364efb3ea9e5a22800c5b6fa40f41f6c86672"
+    },
+    {
+      "path": "assets/r1112/ego-ink/run-sw.webp",
+      "bytes": 135562,
+      "sha256": "5a4e40e62c6d6cc3425a54bcc44b284fe25641033fab4f5322dca06575bde39b"
+    },
+    {
+      "path": "assets/r1112/ego-ink/run-w.webp",
+      "bytes": 133540,
+      "sha256": "bceca07d84948d0d4c3a9ff286447248ab85d9dbe48d0a30c53ddbed3849b9e3"
+    },
+    {
+      "path": "assets/r1112/ego-ink/walk-e.webp",
+      "bytes": 168336,
+      "sha256": "9ce7d392ddb8ddbe5fcdf01dc1c77f6dac715b8dd56b7b63d6dd518e3256ba76"
+    },
+    {
+      "path": "assets/r1112/ego-ink/walk-n.webp",
+      "bytes": 166714,
+      "sha256": "11ad7ffb195748b704ac56e73e5da8d74f9ab595cd12af937efe3d7c0ddc74b2"
+    },
+    {
+      "path": "assets/r1112/ego-ink/walk-ne.webp",
+      "bytes": 173876,
+      "sha256": "9d2e486f22bcfb0fe3c0201fdb673e4624184708ebcebba2cc8087e87c00d37a"
+    },
+    {
+      "path": "assets/r1112/ego-ink/walk-nw.webp",
+      "bytes": 157370,
+      "sha256": "41e53d97305d3b06f4e29b071913990921374fb7351e17145b3df65d9d177d93"
+    },
+    {
+      "path": "assets/r1112/ego-ink/walk-s.webp",
+      "bytes": 159772,
+      "sha256": "315ab67c6eea247ce831a14185cd5b29979ffd7e8f7856cd03034243042b3d83"
+    },
+    {
+      "path": "assets/r1112/ego-ink/walk-se.webp",
+      "bytes": 151256,
+      "sha256": "d6c9f992bee26f48f9856ce8d419a8e2e91d37789d870838a383b758a48f3b03"
+    },
+    {
+      "path": "assets/r1112/ego-ink/walk-sw.webp",
+      "bytes": 173912,
+      "sha256": "cba0c347d9c94b71b7ae19c769304a40846a99bd8d0525180474a71497e66e25"
+    },
+    {
+      "path": "assets/r1112/ego-ink/walk-w.webp",
+      "bytes": 164232,
+      "sha256": "8f428aaa32010d5faf321312efcc21b73d47b4672a61faf7a384ac8964cb9cd0"
+    },
+    {
+      "path": "assets/r1113d/persona-idle-n.png",
+      "bytes": 93551,
+      "sha256": "b412a04b5d2d02b139a18e4c3085c36f2bc2a5c725ca272aa7c1ce74995e2b4c"
+    },
+    {
+      "path": "assets/r1113d/persona-idle-s.png",
+      "bytes": 113287,
+      "sha256": "7be7a9a5cdd7ce6fe3bb8104f3233f048f6a5efbfde4166ae66e35a4d615b223"
+    },
+    {
+      "path": "assets/r1113d/persona-idle-side.png",
+      "bytes": 90560,
+      "sha256": "7aad9787c526d30b456ac025619d05ab0e804b1ed2373959e1e1023f01d33227"
     },
     {
       "path": "assets/r116/mobs/M001-hit.png",
@@ -53109,8 +53369,8 @@
     },
     {
       "path": "ego-ink-r1099.js",
-      "bytes": 39461,
-      "sha256": "32536456a44b1cd87f4b76fe9d7a8d15dcd5526cc49e2289c1f1653b2e89d20e"
+      "bytes": 44685,
+      "sha256": "65dfe7c86ab3e7faab2f9ff2f237973ac6118a0a81f8a8fc6cb84633f8868801"
     },
     {
       "path": "ego-kit-r1094.js",
@@ -53149,8 +53409,8 @@
     },
     {
       "path": "ego-sovereign-r1046.js",
-      "bytes": 19700,
-      "sha256": "bd8b3bba70edf053030ede0c0c8c5079870160946fc471a0ab755f70b7d2acec"
+      "bytes": 21633,
+      "sha256": "c774f5d379f24bcaddb1e63ce987018957cd0adf21abda9b2967e25b28777779"
     },
     {
       "path": "enemy-attack-tempo-r601.js",
@@ -53443,6 +53703,11 @@
       "sha256": "cc2a43662ae52b990b26a0502deb165720cd2f924690a55355291805a51b3e4f"
     },
     {
+      "path": "hero-walk-r1108c.js",
+      "bytes": 3915,
+      "sha256": "9af93ee3510d5e18fc647d28e111242162eadd3f48d8b839be7b95a90fcb7bbf"
+    },
+    {
       "path": "heroes-r108.js",
       "bytes": 4386,
       "sha256": "6b0c95f7c5fbb17d1dad6e046437fbdf52a3c951c5d851bf76e52aa51a96933f"
@@ -53524,13 +53789,13 @@
     },
     {
       "path": "hunter-aim-r1102.js",
-      "bytes": 7824,
-      "sha256": "ae6257d3800e1b75d1fe60efb5060153a5707bb3185135cf1d1b6612094d225e"
+      "bytes": 8607,
+      "sha256": "e88bca405b41db00f1c0e9087a12557682cf09075ede791a52369a4bfbc7073a"
     },
     {
       "path": "hunter-arrows-r535.js",
-      "bytes": 35213,
-      "sha256": "71359f9a09c328d11e4a601b9d256b4230bf64fd4ba19340fd816982c1031864"
+      "bytes": 35211,
+      "sha256": "cac713e2d1e9bbba7c8d1bd8980d82cbebd01dc5afbbc03c3e36e4d9379a2900"
     },
     {
       "path": "hunter-squad-r952.js",
@@ -53594,8 +53859,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6581019,
-      "sha256": "e547843768fb1c494a7fd9217955607cc0a27d433cbc7e9b60c47de18ac6827f"
+      "bytes": 6581065,
+      "sha256": "3f90f7bb84cdb2bb8768b55648fade30658def64a7d761a99aec54f1432c1531"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -54039,8 +54304,8 @@
     },
     {
       "path": "passive-cutin-r1033.js",
-      "bytes": 19211,
-      "sha256": "e59e9cd9b558c73be90a57f5a6be9b60d0076692401f96f50a7516d37c8f94b0"
+      "bytes": 19537,
+      "sha256": "a41f9ed07a387bbc1dcc135f38828036e063dca2a219d84bae78ba0b336d3b7d"
     },
     {
       "path": "passive-growth-r971.js",
@@ -54129,8 +54394,8 @@
     },
     {
       "path": "persona-hero-r1113.js",
-      "bytes": 22522,
-      "sha256": "97fd7a57a9defadd1d315580b347d23cf087cd3cb4ef5f6a569cdcfee3e32254"
+      "bytes": 24048,
+      "sha256": "969b284b8739a6b5bd4fec637e7f86bbed4130cd119ca9c30fd913c0f3415d11"
     },
     {
       "path": "persona-ink-r1097.js",
@@ -54384,8 +54649,8 @@
     },
     {
       "path": "samong-surge-r571.js",
-      "bytes": 15205,
-      "sha256": "692a667e8cd7a2fb872e58232db7ef7778ecd95ba948c4bf433db1cdbb9e444c"
+      "bytes": 15694,
+      "sha256": "a4ecc9695ed2733694e70863d1bd25f23d77d4377a158c9729e5c8acc5b7cdf4"
     },
     {
       "path": "samong-text-r103.js",
@@ -54943,9 +55208,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10988,
-  "totalBytes": 1324354986,
-  "webHTMLSha256": "e547843768fb1c494a7fd9217955607cc0a27d433cbc7e9b60c47de18ac6827f",
+  "fileCount": 11041,
+  "totalBytes": 1333367460,
+  "webHTMLSha256": "3f90f7bb84cdb2bb8768b55648fade30658def64a7d761a99aec54f1432c1531",
   "largest": [
     {
       "path": "index.html",

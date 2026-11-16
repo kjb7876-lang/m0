@@ -1,0 +1,24 @@
+'use strict';
+// R1115 — 첫 뿌리 맵(dist00) R74 순찰 '뿌리 추적자'도 걷기 시트(좌우는 R444 가 뒤집음)를 쓴다. 옛 R74 한 장 그림은 걷는 모션이 없었다.
+const fs=require('fs'),path=require('path'),vm=require('vm');
+const R=path.resolve(__dirname,'../..');let n=0,bad=0;const ok=(c,m)=>{n++;if(!c){bad++;console.log('FAIL',m);}};
+const src=fs.readFileSync(path.join(R,'client-source','approved-mobs-r380.js'),'utf8');
+const idx=JSON.parse(fs.readFileSync(path.join(R,'runtime-text/assets/r380/mobs/index.json'),'utf8'));
+const S0={frameFor:()=>({path:'base'})};
+const ctx={window:{__STORYWORLD_STORY_COMBAT_R54__:S0},localStorage:{getItem:()=>null,setItem(){}},performance:{now:()=>0},time:1,layer:'STORY',room:{id:'dist00'},player:{x:0,y:0},readyImage:()=>({image:{naturalWidth:10}}),setTimeout:()=>0};ctx.window.window=ctx.window;
+ctx.window.__STORYWORLD_SCALE_MELEE_R61__={normalize(){}};
+ctx.makeRoom=function(id){const mk=(name,nid,o={})=>({id:id+':'+name,name,nativeId:nid,spawnState:'active',x:1,y:1,homeX:1,homeY:1,hp:10,...o});
+ const pat=(i,name,nid,o={})=>mk('p'+i,nid,{id:id+':r74-patrol:'+i,name,r74Monster:'root',maxHp:50,r75Pack:0,combatProfile:{bodyBlock:{r:.4}},...o});
+ if(id==='dist02')return{enemies:[mk('수렁 주문사 1','dist02-h1'),pat(0,'뿌리 추적자 우두머리','dist02-h1',{maxHp:80,hp:80,damage:16}),pat(1,'뿌리 추적자','dist02-h1',{damage:10})]};
+ if(id==='dist00')return{exploration:{entry:{x:1.5,y:1.5},floorCells:Array.from({length:400},(_,k)=>[k%20,Math.floor(k/20)])},enemies:[mk('뿌리의 문지기','dist00-boss',{boss:true,x:3,y:3}),pat(0,'뿌리 추적자','a11-c1',{x:15,y:15}),pat(1,'뿌리 추적자 우두머리','a11-c1',{x:16,y:15})]};
+ return{enemies:[]};};
+vm.createContext(ctx);vm.runInContext('var window=this.window;'+src.replace("if(typeof fetch==='function')","window.__idx=(j)=>{idx=j};if(false)"),ctx);ctx.window.__idx(idx);
+const S=ctx.window.__STORYWORLD_STORY_COMBAT_R54__;
+const d00=ctx.makeRoom('dist00','STORY');const pats=d00.enemies.filter(e=>/:r74-patrol:/.test(e.id));
+ok(pats.length===2,'순찰 뿌리 추적자 2마리가 방에 남음(수·id 그대로)');
+ok(pats.every(e=>e.r74Monster===undefined),'dist00 순찰 뿌리 추적자는 R74 한 장 그림(r74Monster)을 지워 걷기 시트를 쓴다');
+ok(pats.map(e=>e.name).join()==='뿌리 추적자,뿌리 추적자 우두머리','이름은 그대로');
+ok(pats.every(e=>e.maxHp===50&&e.nativeId==='a11-c1'),'수치·nativeId 그대로');
+ctx.room={id:'dist00'};ok(pats.every(e=>S.frameFor(e,null)?.r380Mob==='root-stalker-r74-plain'),'순찰 뿌리 추적자도 걷기 시트(root-stalker-r74-plain)');
+ok(ctx.window.__STORYWORLD_APPROVED_MOBS_R380__!==undefined,'R380 로드');
+console.log(n-bad+'/'+n+' 통과');process.exit(bad?1:0);

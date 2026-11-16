@@ -87,7 +87,10 @@ wrapGlobal('tick',b=>function(...a){try{sync();}catch(e){fail(e);}const r=b.appl
 const GOLD=[255,198,72],SILVER=[226,232,242];
 const FALLBACK={hwando:{main:[214,222,234],sub:GOLD},seoha:{main:[120,206,255],sub:SILVER},neon:{main:[62,230,193],sub:SILVER},michaela:{main:[178,26,62],sub:SILVER},
  lauren:{main:[164,98,255],sub:SILVER},hunter:{main:[255,96,40],sub:SILVER},slayer:{main:[222,22,52],sub:SILVER},gunner:{main:[70,124,255],sub:SILVER}};
-function palette(hero){const P302=window.__STORYWORLD_HERO_PALETTE_R302__?.palette,c=P302?.[hero]||FALLBACK[hero]||FALLBACK.hwando;return{main:c.main,sub:c.sub};}
+// R1112(사용자 11-16 "에고 사몽이 환도영웅걸로"): 히든 EGO 형상은 hero 가 'hwando' 라 환도 은·금 불꽃(흰 덩어리)이 감싸 흰 환도처럼 보였다 → EGO 고유색(언주 바깥 + 흰빛 안쪽).
+const EGO_PAL=Object.freeze({main:[204,52,40],sub:[243,238,226]});
+const egoForm=()=>{try{return !!window.__STORYWORLD_EGO_SOVEREIGN_R1046__?.formActive?.();}catch(_){return false;}};
+function palette(hero){if(hero==='hwando'&&egoForm())return{main:EGO_PAL.main,sub:EGO_PAL.sub};const P302=window.__STORYWORLD_HERO_PALETTE_R302__?.palette,c=P302?.[hero]||FALLBACK[hero]||FALLBACK.hwando;return{main:c.main,sub:c.sub};}
 const rgba=(c,a)=>'rgba('+c[0]+','+c[1]+','+c[2]+','+Math.max(0,Math.min(1,a)).toFixed(3)+')';
 const rnd=(s,i)=>{const v=Math.sin(s*127.1+i*311.7)*43758.5453;return v-Math.floor(v);};
 const lowFx=()=>!!(typeof settings!=='undefined'&&settings?.lowFx);
