@@ -6,7 +6,7 @@ const F='refuge-walls-r713.js',src=rd('client-source/'+F);
 ok('runtime copy matches',rd('runtime-text/'+F)===src);
 try{new vm.Script(src);ok('syntax',true);}catch(e){ok('syntax '+e.message,false);}
 const html=rd('runtime-text/index.html');
-ok('script tag once, last in the page (after world-tiles-r118; no pinned neighbour check breaks)',html.split('"./'+F+'"').length===2&&/<script src="\.\/world-tiles-r118\.js"><\/script>\s*<script src="\.\/refuge-walls-r713\.js"><\/script>\s*$/.test(html.slice(html.indexOf('world-tiles-r118.js')-20)));
+ok('script tag once, last in the page (after world-tiles-r118; no pinned neighbour check breaks)',html.split('"./'+F+'"').length===2&&/<script src="\.\/world-tiles-r118\.js"><\/script>\s*<script src="\.\/refuge-walls-r713\.js"><\/script>\s*(?:<script src="\.\/cult-six-r1114\.js"><\/script>\s*)?$/.test(html.slice(html.indexOf('world-tiles-r118.js')-20)));
 ok('listed in verify-r96-public.py',/'refuge-walls-r713\.js'/.test(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8')));
 ok('pages.yml runs this check',/r96\/qa\/r713\/r713-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8')));
 ok('runtime manifest lists the file',rd('runtime-manifest.json').includes('"'+F+'"')&&rd('runtime-inputs.json').includes('"'+F+'"'));

@@ -1,0 +1,104 @@
+{
+ "lockSaved": {
+  "before": false,
+  "after": true
+ },
+ "cards": [
+  "EGO",
+  "hwando",
+  "seoha",
+  "neon",
+  "michaela",
+  "lauren",
+  "hunter",
+  "slayer",
+  "gunner",
+  "PERSONA"
+ ],
+ "afterClick": {
+  "sel": true,
+  "stage": "페르소나",
+  "want": true
+ },
+ "afterCommit": {
+  "hero": "lauren",
+  "form": true,
+  "name": "페르소나 · Lv.99",
+  "imgs": {
+   "assets/rc133/art/base-0.png": "ready",
+   "assets/rc133/art/awake-0.png": "ready",
+   "assets/rc133/art/base-2.png": "ready",
+   "assets/rc133/art/awake-2.png": "ready",
+   "assets/rc133/art/base-4.png": "ready",
+   "assets/rc133/art/awake-4.png": "ready",
+   "assets/rc133/art/base-6.png": "ready",
+   "assets/rc133/art/awake-6.png": "ready",
+   "assets/r1104b/persona-walk-front.webp": "ready",
+   "assets/r1104b/persona-walk-rear.webp": "ready",
+   "assets/r1104b/persona-walk-side.webp": "ready"
+  }
+ },
+ "idle": {
+  "hb": [
+   {
+    "path": "http://127.0.0.1:4410/m0/assets/r130/lauren/idle-s.webp",
+    "h": 67,
+    "r": false
+   }
+  ],
+  "insp": {
+   "revision": "R1113-persona-hero-1",
+   "unlocked": true,
+   "saved": {
+    "on": true,
+    "off": false
+   },
+   "form": true,
+   "walk": 0,
+   "want": false,
+   "commit": null,
+   "stats": {
+    "swaps": 5,
+    "walkSwaps": 0,
+    "tints": 67,
+    "unlocks": 1,
+    "cards": 2,
+    "errors": 0,
+    "unlockReason": "persona-defeated",
+    "dropped": 34,
+    "last": "assets/rc133/art/base-0.png"
+   },
+   "lastError": null
+  }
+ },
+ "walk_ArrowRight": "side:7:flip",
+ "walk_ArrowDown": "front:0",
+ "walk_ArrowUp": "rear:5",
+ "walk_ArrowLeft": "side:2",
+ "tintN": 0,
+ "final": {
+  "revision": "R1113-persona-hero-1",
+  "unlocked": true,
+  "saved": {
+   "on": true,
+   "off": false
+  },
+  "form": true,
+  "walk": 0.17,
+  "want": false,
+  "commit": null,
+  "stats": {
+   "swaps": 16,
+   "walkSwaps": 35,
+   "tints": 803,
+   "unlocks": 1,
+   "cards": 2,
+   "errors": 0,
+   "unlockReason": "persona-defeated",
+   "dropped": 355,
+   "last": "assets/rc133/art/base-2.png"
+  },
+  "lastError": null
+ },
+ "save": true
+}
