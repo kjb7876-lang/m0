@@ -1,10 +1,10 @@
 // R1048 EGO 동작 재생기(ego-motion-r1048.js) CPU 검사 — 상태 우선순위·8방향·공격 구간·타격 멈춤·발 맞춤·섞어 넘기기·잔상·NaN.
 const fs=require('fs'),path=require('path'),vm=require('vm');
-const src=fs.readFileSync(path.join(__dirname,'../../client-source/ego-motion-r1048.js'),'utf8');
+const src=fs.readFileSync(process.env.R1048_SRC||path.join(__dirname,'../../client-source/ego-motion-r1048.js'),'utf8');
 const win={};vm.runInNewContext(src,{window:win,Math,Number,Object});
 const M=win.__STORYWORLD_EGO_MOTION_R1048__;let ok=0,bad=0;
 const t=(name,c)=>{if(c){ok++;}else{bad++;console.log('FAIL',name);}};
-t('모듈',!!M&&M.revision==='R1048-ego-motion-4');
+t('모듈',!!M&&/^R1048-ego-motion-\d+$/.test(M.revision)&&+M.revision.split('-').pop()>=5);
 // 우선순위
 t('사망 최우선',M.pickState({dead:1,da:1,hu:1,at:1,mv:1})==='dead');
 t('대시>피격',M.pickState({da:.2,hu:.3,at:.5})==='dash');
@@ -54,6 +54,52 @@ t('버스트: 시작 전·끝 뒤·NaN 없음',M.burstFrame(10,9.9)<0&&M.burstFr
 t('광륜: 반복 칸',M.haloFrame(0)===0&&M.haloFrame(.5)===4&&M.haloFrame(.99)===7&&M.haloFrame(1)===0&&M.haloFrame(NaN)===0&&M.haloFrame(-.2)>=0);
 {const R=path.join(__dirname,'../..');t('광륜 그림 있음',fs.existsSync(path.join(R,'runtime-text',M.FX.halo.path)));}
 t('이펙트 명령은 몸 테두리·가림 측정에서 빠짐(흰 테두리 회귀)',(src.match(/owner:fxOwner\(best\.owner\)/g)||[]).length===3&&/r409:true,r350:true,r448:true/.test(src));
+
+// ---- 그리기 감싸기 실험(Codex #661 지적 4건) — drawHero 를 흉내 낸 기록기에 실제로 그려 본다 ----
+function rig(bodyPath){const R=path.join(__dirname,'../..'),w={},cmds=[];
+ vm.runInNewContext(fs.readFileSync(path.join(R,'client-source/ego-motion-r1048-sheets.js'),'utf8'),{window:w,Object});
+ const ctl={S:{},cancel:{attack:false,skill:false},calls:[]};
+ w.__STORYWORLD_EGO_SOVEREIGN_R1046__={formActive:()=>true,inspect:()=>({})};
+ w.__STORYWORLD_HERO_MOTION_R895__={sample:()=>({...ctl.S}),moveCancel:k=>{ctl.calls.push(k);return !!(ctl.S.mv&&ctl.cancel[k]);}};
+ const im={naturalWidth:4096,naturalHeight:256,width:4096,height:256};
+ const C={window:w,Math,Number,Object,String,Array,JSON,performance:{now:()=>0},localStorage:{getItem:()=>null,setItem(){}},
+  readyImage:()=>({image:im,ready:true}),addImage(){},actorHeight:()=>66,project:(x,y)=>({x:(x-y)*32,y:(x+y)*16}),room:{enemies:[]},
+  player:{x:5,y:5,hp:10},time:1,ctx:{commands:cmds}};
+ C.drawHero=function(){cmds.push({kind:'fill',owner:{kind:'scene'},order:cmds.length,key:'s:'+cmds.length,style:{}});
+  cmds.push({kind:'image',owner:{kind:'hero',id:'hero'},order:cmds.length,key:'hero:0',points:[[0,0],[40,0],[40,80],[0,80]],sourcePath:ctl.body||bodyPath,image:{},style:{globalAlpha:1}});};
+ vm.runInNewContext(src,C);const E=w.__STORYWORLD_EGO_MOTION_R1048__;
+ const frame=(dt=1/60)=>{cmds.length=0;C.time+=dt;C.drawHero();return cmds.slice();};
+ return{C,E,ctl,frame};}
+// 1) 환도 아래 걷기(R436)·칼끝 공격(R439)·피격(R196) 몸도 EGO 로 바뀐다
+for(const bp of ['assets/r436/hwando/walk-s.webp','assets/r439/hwando/attack-e.webp','assets/r196/hwando/hit-s.webp','assets/r283/hwando/r271/attack-e.webp','assets/r1063/r283/hwando/r271/walk-e.webp','assets/r1063/r439/hwando/attack-e.webp','assets/r1063/r283/hwando/r242/hit-s.webp']){
+ const{E,frame}=rig(bp);frame();frame();const I=E.inspect();t('몸 경로 인식 '+bp.slice(7),I.stats.frames===2&&I.stats.skipped===0&&/assets\/r1048\/ego\//.test(I.lastSrc||''));}
+{const{E,frame}=rig('assets/r1048/fx/ego_slash.webp');t('이펙트 그림은 몸이 아님',typeof E.bodyArt==='function'&&!E.bodyArt('assets/r600/dots/slash.webp')&&E.bodyArt('assets/r436/hwando/walk-s.webp'));}
+// 2) 스킬·궁극기(기본 공격 타이머 없음) 동안 공격 칸이 앞으로 진행한다(고정 .5 로 9번 칸에 멈추던 문제)
+{const{E,ctl,frame}=rig('assets/r271/hwando/idle-s.webp');const fr=[],ps=[];
+ for(let i=0;i<=30;i++){ctl.S={sk:.5*(1-i/30)};frame();const I=E.inspect();if(I.state?.clip==='attack'){fr.push(I.state.frame);ps.push(I.input.attackP);}}
+ t('스킬 진행도 0→1',ps.length>20&&ps[0]<.1&&ps[ps.length-1]>.9&&ps.every((v,i)=>i===0||v>=ps[i-1]-1e-9));
+ t('스킬 공격 칸이 여러 칸을 지남',new Set(fr).size>=6&&fr.every((f,i)=>i===0||f>=fr[i-1]));
+ for(let i=0;i<=20;i++){ctl.S={ul:.4*(1-i/20)};frame();}t('궁극기 진행도 끝까지',E.inspect().input.attackP>.9||E.inspect().state.clip!=='attack');}
+// 3) R895 이동 취소: 커밋 창 뒤 이동이면 공격 그림을 내려놓고 걷는다(미끄러지는 공격 자세 없음)
+{const{E,ctl,frame,C}=rig('assets/r271/hwando/idle-s.webp');
+ ctl.S={at:.3};frame();ctl.S={at:.28};frame();t('취소 없으면 공격',E.inspect().state.clip==='attack');
+ ctl.cancel.attack=true;for(let i=0;i<12;i++){ctl.S={at:.27-i*.01,mv:true};C.player.x+=.05;frame();}
+ const I=E.inspect();t('기본 공격 이동 취소 → 걷기',I.input.at===0&&I.input.basic===false&&I.state.clip!=='attack'&&ctl.calls.includes('attack'));
+ ctl.cancel.attack=false;ctl.cancel.skill=true;for(let i=0;i<12;i++){ctl.S={sk:.4-i*.01,mv:true};C.player.x+=.05;frame();}
+ t('스킬 이동 취소 → 걷기',E.inspect().input.at===0&&E.inspect().state.clip!=='attack'&&ctl.calls.includes('skill'));
+ ctl.cancel.skill=false;ctl.S={sk:.3,mv:true};C.player.x+=.05;frame();t('커밋 창 안이면 스킬 그림 유지',E.inspect().state.clip==='attack');}
+// 4) 끼운 명령(광륜·궤적·잔상)의 order 가 자리 순서와 같고 겹치지 않는다 → 광륜 앞/뒤가 Three renderOrder 에 닿는다
+{const{E,ctl,frame,C}=rig('assets/r271/hwando/idle-s.webp');
+ const ordOk=c=>c.every((x,i)=>x.order===i);
+ C.player.x=5;C.player.y=5;let c;for(let i=0;i<6;i++){C.player.x+=.03;C.player.y+=.03;c=frame();}/* 아래(s)로 걸음 */
+ let hi=c.findIndex(x=>/:r1048h$/.test(x.key)),bi=c.findIndex(x=>x.key==='hero:0');
+ t('order = 자리 순서(겹침 없음)',ordOk(c)&&new Set(c.map(x=>x.order)).size===c.length);
+ t('남쪽: 광륜 order < 몸 order',hi>=0&&bi>=0&&c[hi].order<c[bi].order);
+ for(let i=0;i<8;i++){C.player.x-=.03;C.player.y-=.03;c=frame();}/* 위(n)로 걸음 */
+ hi=c.findIndex(x=>/:r1048h$/.test(x.key));bi=c.findIndex(x=>x.key==='hero:0');
+ t('북쪽: 광륜 order > 몸 order',E.inspect().state.dir==='n'&&hi>=0&&bi>=0&&c[hi].order>c[bi].order&&ordOk(c));
+ ctl.S={at:.3};frame();ctl.S={at:.2};for(let i=0;i<10;i++){ctl.S={at:.2-i*.015};c=frame();if(c.some(x=>/:r1048s/.test(x.key)))break;}
+ t('궤적 명령도 order 정렬',c.some(x=>/:r1048s/.test(x.key))&&ordOk(c));}
 const E=M.createPlayer(null);r=E.step(1/60,{});t('시트 없음 안전',r.frame===0);
 // 시트 데이터·자산·태그 순서·0번째 칸
 {const R=path.join(__dirname,'../..'),w2={};vm.runInNewContext(fs.readFileSync(path.join(R,'client-source/ego-motion-r1048-sheets.js'),'utf8'),{window:w2,Object});
