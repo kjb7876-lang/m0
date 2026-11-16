@@ -9,7 +9,7 @@ if(!fs.existsSync(FILE)){ok(false,'persona-hero-r1113.js 가 있음');console.lo
 const SRC=fs.readFileSync(FILE,'utf8');
 function world(o={}){
  const store=o.store||{},images=[];let seen=null;const proto={render(frame){seen=frame.commands.map(c=>({...c,points:c.points&&c.points.map(p=>[...p]),style:c.style&&{...c.style}}));}};
- const document={createElement:t=>({tagName:t,width:0,height:0,getContext:()=>({drawImage(){},fillRect(){},createRadialGradient:()=>({addColorStop(){}})})}),baseURI:'http://x/m0/',getElementById:()=>null,querySelector:()=>null,querySelectorAll:()=>[],addEventListener(){},head:{appendChild(){}}};
+ const document={createElement:t=>({tagName:t,width:0,height:0,getContext:()=>({drawImage(){},fillRect(){},createRadialGradient:()=>({addColorStop(){}})})}),baseURI:'http://x/m0/',getElementById:id=>id==='panel'&&o.secret?{classList:{contains:c=>c==='r1057secret'}}:null,querySelector:()=>null,querySelectorAll:()=>[],addEventListener(){},head:{appendChild(){}}};
  class Img{constructor(){images.push(this);}set src(v){this._src=v;}get src(){return this._src;}}
  const player={hero:'lauren',x:10,y:10,hp:100,direction:'front',attackAnim:0,skillAnim:0,ultimateAnim:0};
  const C={Math,Number,JSON,Object,Array,Map,Set,WeakMap,WeakSet,String,Error,URL,console,Date,time:0,player,room:{id:'cult04',persona:{phase:'fight'}},loading:false,storyScene:null,modal:false,started:true,
@@ -87,6 +87,9 @@ const at=(c,u,v)=>{const P=c.points,W=c.sourceRect[2],H=c.sourceRect[3],a=u/W,b=
  w.player.skillAnim=.4;w.step();out=w.frame();ok(/persona-walk-front/.test(bodyOf(out).sourcePath)&&idx(out,'r1113:orb')>=0,'⑯ 스킬도 걷기 칸 + 구슬 빛');w.player.skillAnim=0;
  w.player.ultimateAnim=.5;w.step();out=w.frame();ok(/awake-0/.test(bodyOf(out).sourcePath)&&idx(out,'r1113:aura')>=0,'⑯ 궁극기는 각성형 + 오라');w.player.ultimateAnim=0;
  a.setForm(false);w.player.attackAnim=.3;w.step();out=w.frame();ok(idx(out,'r1113:orb')<0,'⑯ 형상이 아니면 빛 없음');}
+// ⑰ 영웅창 777(R1057 비밀 입력, 모바일 제목 7연타)이 발동하면 페르소나도 해금(사용자 11-16 12:08Z: EGO 까지 10명)
+{const w=world();const a=w.api();w.step();ok(!a.unlocked(),'⑰ 777 전에는 잠김');
+ const w2=world({secret:true});w2.step();ok(w2.api().unlocked()&&/"on":true/.test(w2.store['storyworld.r1113.personaHero']||'')&&w2.api().inspect().stats.unlockReason==='secret-777','⑰ 영웅창 777 발동하면 해금·저장('+w2.api().inspect().stats.unlockReason+')');}
 // ⑪
 {const w=world({cheat:true});const a=w.api();a.setForm(true);const d=w.C.serializeSave();ok(d.player.personaHeroR1113===true,'⑪ 저장에 형상 기록');
  w.player.personaHeroR1113=false;(async()=>{await w.C.restoreSave(d);ok(w.player.personaHeroR1113===true,'⑪ 불러오면 형상 복원');

@@ -10,7 +10,7 @@
  * 끄기: localStorage storyworld.r1113.personaHero = {"on":..., "off":true}. */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_PERSONA_HERO_R1113__)return;
-const REV='R1113-persona-hero-2-act-glow',KEY='storyworld.r1113.personaHero',FIELD='personaHeroR1113',BASE='lauren';
+const REV='R1113-persona-hero-3-secret777',KEY='storyworld.r1113.personaHero',FIELD='personaHeroR1113',BASE='lauren';
 const PROFILE=Object.freeze({name:'페르소나',title:'페르소나 · 순수악의',role:'HIDDEN · 9번째 영웅',color:'#cc3428',
  passive:'사몽 결전에서 쓰러뜨린 거울. 라우렌의 별 기술을 언주빛으로 되비춥니다.',special:'라우렌과 같은 기술·키',
  portrait:'assets/rc133/art/awake-0.png',tags:['히든','언주','라우렌 계보']});
@@ -38,6 +38,8 @@ function formActive(){const p=pl();return !!(p&&p[FIELD]===true&&p.hero===BASE&&
 function setForm(v){const p=pl();if(!p)return false;if(v&&(!unlocked()||p.hero!==BASE)){p[FIELD]=false;return false;}p[FIELD]=!!v;return !!v;}
 // ---- 해금 감시: 결전이 끝나면(엔진 room.persona.completed) ----
 function watch(){try{const r=G(()=>typeof room!=='undefined'?room:null,null);if(!saved.on&&r&&r.persona&&(r.persona.completed===true||r.persona.phase==='complete'))unlock('persona-defeated');
+ // 영웅창 777(R1057 비밀 입력·모바일 제목 7연타)이 발동하면 EGO 와 함께 페르소나도 해금(사용자 11-16: EGO 까지 10명)
+ if(!saved.on&&G(()=>!!document.getElementById('panel')?.classList?.contains('r1057secret'),false))unlock('secret-777');
  const p=pl();if(p&&p[FIELD]===true&&(p.hero!==BASE||!unlocked()))p[FIELD]=false;
  if(notice&&!G(()=>loading||storyScene||modal,true)){notice=false;try{if(typeof toast==='function')toast('히든 영웅 해금 · '+PROFILE.title+' — 영웅 선택창 9번째 칸에서 고를 수 있습니다.',5);}catch(e){fail(e);}}}catch(e){fail(e);}}
 // ---- 그림 읽기(캔버스로) ----
@@ -129,6 +131,7 @@ let want=false,commit=null,synthetic=false;
 function css(){if(document.getElementById('r1113Css'))return;const s=document.createElement('style');s.id='r1113Css';s.textContent=[
  '.r1113card{position:relative}.r1113card img{object-fit:cover;object-position:50% 14%}',
  '.r1113card .r1113tag{position:absolute;top:4px;right:4px;font-size:9px;letter-spacing:.14em;padding:1px 5px;border:1px solid #cc3428;color:#ffd8cc;background:#1a0604cc;border-radius:2px}',
+ '#panel .heroRowR101 .r1113card>span:not(.r1113tag){display:block;text-align:center}',
  '.r1113card.selected{border-color:#cc3428!important;box-shadow:0 0 14px #cc342880!important}',
  // 라우렌 칸은 엔진 선택값으로 .selected 를 그대로 두되(무대·확정이 그 값을 씀) 보이기만 고르지 않은 칸처럼
  'html #panel:not(#r1113x) [data-hero][data-hero].selected.r1113under{border-color:#53636b!important;background:#0c1822b0!important;box-shadow:none!important;outline:none!important;transform:none!important}',
