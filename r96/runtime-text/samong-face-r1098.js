@@ -40,25 +40,31 @@ function inkPuppet(src,W,H,cfg={}){
  const cw=Math.max(1,Math.min(W,Math.round(+cfg.cw||256))),ch=Math.max(1,Math.min(H,Math.round(+cfg.ch||320))),pvx=Number.isFinite(+cfg.pivotX)?+cfg.pivotX:cw*.4;
  const out=new Uint8ClampedArray(src);const A=16,cols=Math.floor(W/cw),rows=Math.floor(H/ch);
  const op=(x,y)=>out[(y*W+x)*4+3]>A;
- const wide=Math.max(3,Math.round(10*cw/256)),thin=Math.max(3,Math.round(ch*.05));
+ const wide=Math.max(3,Math.round(14*cw/256)),thin=Math.max(3,Math.round(ch*.05));
  for(let cy=0;cy<rows;cy++)for(let cx=0;cx<cols;cx++){const ox=cx*cw,oy=cy*ch;
-  // 머리 꼭대기: 위에서부터 처음으로 불투명 화소가 wide 개 이상인 줄(그 위는 실)
-  let top=ch;for(let y=0;y<ch;y++){let n=0;for(let x=0;x<cw;x++)if(op(ox+x,oy+y))n++;if(n>=wide){top=y;break;}}
+  // 머리 꼭대기: 위에서부터 처음으로 '이어진 불투명 화소'가 wide 개 이상인 줄(그 위는 가는 실 두 가닥뿐)
+  let top=ch;for(let y=0;y<ch;y++){let run=0,best=0;for(let x=0;x<cw;x++){if(op(ox+x,oy+y)){run++;if(run>best)best=run;}else run=0;}if(best>=wide){top=y;break;}}
   // 칼날: 발 오른쪽 기둥 중 머리 아래 불투명 화소가 thin 개 미만인 기둥을 비운다
   for(let x=Math.ceil(pvx);x<cw;x++){let n=0;for(let y=top;y<ch;y++)if(op(ox+x,oy+y))n++;if(n>0&&n<thin)for(let y=top;y<ch;y++)out[((oy+y)*W+ox+x)*4+3]=0;}
   // 칠: 실 → 흰 실, 몸 → 먹(바깥 한 줄은 종이빛 테)
   for(let y=0;y<ch;y++)for(let x=0;x<cw;x++){const X=ox+x,Y=oy+y,i=(Y*W+X)*4;if(out[i+3]<=A)continue;
    if(y<top){out[i]=232;out[i+1]=226;out[i+2]=212;continue;}
-   const edge=x===0||y===ch-1||x===cw-1||!op(X-1,Y)||!op(X+1,Y)||!op(X,Y-1)||!op(X,Y+1);
+   const hole=(a,b)=>a<0||b<0||a>=cw||b>=ch||!op(ox+a,oy+b);
+   const edge=hole(x-1,y)||hole(x+1,y)||hole(x,y-1)||hole(x,y+1);
    if(edge){out[i]=226;out[i+1]=220;out[i+2]=206;out[i+3]=Math.round(out[i+3]*.95);continue;}
-   const l=src[i]*.3+src[i+1]*.59+src[i+2]*.11,v=14+l*.42;out[i]=Math.round(v);out[i+1]=Math.round(v*.98);out[i+2]=Math.round(v*.95);}}
+   const l=src[i]*.3+src[i+1]*.59+src[i+2]*.11;let v=14+l*.42;
+   // 두 번째 줄은 먹과 종이빛을 반씩(테가 화면 ¼ 크기에서도 읽히게)
+   if(hole(x-2,y)||hole(x+2,y)||hole(x,y-2)||hole(x,y+2))v=(v+214)/2;
+   out[i]=Math.round(v);out[i+1]=Math.round(v*.98);out[i+2]=Math.round(v*.95);}}
  return out;}
 let baked=null,baking=false;
 // 구운 화소는 큰 캔버스 그대로 내주지 않고 이미지(data 경로)로 바꿔 내준다 — 3D 기록기가 1024×640 캔버스를 '배우 스냅샷 예산 초과'로 거절했다(R161 오류).
 function bakeNow(im){if(baked||baking||!im)return;const W=im.naturalWidth||im.width,H=im.naturalHeight||im.height;if(!(W>0&&H>0))return;
  baking=true;try{const c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,0,0);
   const d=g.getImageData(0,0,W,H),o=inkPuppet(d.data,W,H,{cw:256,ch:320,pivotX:101.8});if(!o){baking=false;return;}d.data.set(o);g.putImageData(d,0,0);
-  const url=c.toDataURL('image/png'),img=new Image();img.onload=()=>{baked=img;baking=false;stats.bakes++;};img.onerror=()=>{baking=false;fail('baked image load failed');};img.src=url;}
+  const load=url=>{const img=new Image();img.onload=()=>{baked=img;baking=false;stats.bakes++;};img.onerror=()=>{baking=false;fail('baked image load failed');};img.src=url;};
+  // blob 경로(짧은 이름)를 먼저 — data 경로는 R409 테두리 캐시 열쇠에 수십만 글자가 매 프레임 붙는다. toBlob 이 없으면 data 경로.
+  if(typeof c.toBlob==='function'&&typeof URL!=='undefined'&&typeof URL.createObjectURL==='function')c.toBlob(b=>{if(b)load(URL.createObjectURL(b));else load(c.toDataURL('image/png'));},'image/png');else load(c.toDataURL('image/png'));}
  catch(err){baking=false;fail(err);}}
 function bake(){if(baked||baking||!prefs.puppet)return;try{const r=baseReady?baseReady(PUPPET):null,im=r&&r.image;if(!im||!(im.naturalWidth||im.width)){want(PUPPET);return;}bakeNow(im);}catch(err){fail(err);}}
 // 굽기는 그리기 호출 밖에서(다음 차례) 한 번 — 그 사이 프레임은 원본 시트.
