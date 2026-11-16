@@ -1,0 +1,1275 @@
+{
+ "revision": "R1092",
+ "use": "서사 창(advanceScene) 왼쪽 그림 칸 배경",
+ "origin": "사용자 드라이브 세로판 장면 그림(사용자 업로드, 2026-11-14). 생성 도구 표식(오른쪽 아래 별 모양)은 잘라냄.",
+ "excluded": {
+  "ep1b06": "맘몬 지역은 Codex 작업 몫이라 손대지 않음"
+ },
+ "items": [
+  {
+   "region": "dist00",
+   "title": "악마화 나무의 정원",
+   "path": "assets/r1092/scene-dist00.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A01_장면01_악마화_나무의_정원.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2050182,
+   "sourceSha256": "501e3e8c0d2deb5a9309709b89e07746e6888bb2e048bc808dded018962dd3a8",
+   "bytes": 49990
+  },
+  {
+   "region": "dist01",
+   "title": "거미동굴",
+   "path": "assets/r1092/scene-dist01.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A02_장면02_거미동굴.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 1987089,
+   "sourceSha256": "082da6662c7221d05201947275acbe59930692cb74a68dee81427f7bc475af7c",
+   "bytes": 47192
+  },
+  {
+   "region": "dist02",
+   "title": "늪지대의 뿔악마",
+   "path": "assets/r1092/scene-dist02.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A03_장면03_늪지대의_뿔악마.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 1827011,
+   "sourceSha256": "49ed47182a6202e647feae17e7cfa474a8cd1e0920d463ff2d2c1be7fab7d77f",
+   "bytes": 36782
+  },
+  {
+   "region": "dist03",
+   "title": "무너진성",
+   "path": "assets/r1092/scene-dist03.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A04_장면04_무너진성.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 1983312,
+   "sourceSha256": "aa5c1f2f1485acd8950070d7c6efa39a2437ce4dac1188d9684b9b97dd22af86",
+   "bytes": 49628
+  },
+  {
+   "region": "dist04",
+   "title": "시체들이 되살아난 밤",
+   "path": "assets/r1092/scene-dist04.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A05_장면05_시체들이_되살아난_밤.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 1891270,
+   "sourceSha256": "e2c09734228641faf149c081db030870e73819fa22f92e59f718e541c4ac0139",
+   "bytes": 40010
+  },
+  {
+   "region": "dist05",
+   "title": "일곱 기둥",
+   "path": "assets/r1092/scene-dist05.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A06_장면06_일곱_기둥.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 1685208,
+   "sourceSha256": "df6a4da5c635cb04eef4da5cba1f478a5f8e829446afd39fbbbe08d98e08d437",
+   "bytes": 28604
+  },
+  {
+   "region": "dist06",
+   "title": "추락",
+   "path": "assets/r1092/scene-dist06.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A07_장면07_추락.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 1939912,
+   "sourceSha256": "ebe28e4717825a1109276a4cadebf725fd7e936640cd8fa5e4fbe8c16c407cf7",
+   "bytes": 46978
+  },
+  {
+   "region": "ep1a08",
+   "title": "피로 물든 병원",
+   "path": "assets/r1092/scene-ep1a08.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A08_장면08_피로_물든_병원.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2134089,
+   "sourceSha256": "d1499ece0cf11aa9b6c033325c977e0f4f456a11c342e7d349d4248fb16eaecb",
+   "bytes": 52566
+  },
+  {
+   "region": "ep1a09",
+   "title": "주사실",
+   "path": "assets/r1092/scene-ep1a09.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A09_장면09-1_주사실.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2255870,
+   "sourceSha256": "fc0537e39c144777ec434bf9d213cd6118fea33af539a3c0985c7f7c02f41e20",
+   "bytes": 52464
+  },
+  {
+   "region": "ep1a09b",
+   "title": "결전의 날",
+   "path": "assets/r1092/scene-ep1a09b.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A10_장면09-2_결전의_날.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 1847479,
+   "sourceSha256": "ed26a6a6c563bfb0125c9c6fa57c12310e3d59c27faf57cbec643677d8705aca",
+   "bytes": 33836
+  },
+  {
+   "region": "ep1a10",
+   "title": "환자와 중독의 도시",
+   "path": "assets/r1092/scene-ep1a10.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A11_장면10_환자와_중독의_도시.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2038210,
+   "sourceSha256": "b83c570edb400b40268ba3c8e5f477b39a9777cd4f5691c8a6d0319f74ade858",
+   "bytes": 46112
+  },
+  {
+   "region": "ep1a11",
+   "title": "천사의 가면과 의목사 후보생",
+   "path": "assets/r1092/scene-ep1a11.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A12_장면11_천사의_가면과_의목사_후보생.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 1922796,
+   "sourceSha256": "e545e92b77efb889095171f560c7547621ff7fe8cc5781858c2c1a205c547696",
+   "bytes": 49126
+  },
+  {
+   "region": "ep1b01",
+   "title": "솔로몬의 봉인식",
+   "path": "assets/r1092/scene-ep1b01.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A13_장면13_솔로몬의_봉인식.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 1837991,
+   "sourceSha256": "7898799c41eb7144bcf6411a49659f8b5c7b7bb1c689dd0116aaac30c67188bf",
+   "bytes": 35784
+  },
+  {
+   "region": "ep1b02",
+   "title": "나태의 집",
+   "path": "assets/r1092/scene-ep1b02.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A14_장면14_나태의_집.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 1915481,
+   "sourceSha256": "c2156be345bdb399045b16037ee4ed72cbf53236ff95a15d9601259fbee95bd7",
+   "bytes": 39798
+  },
+  {
+   "region": "ep1b03",
+   "title": "금이 간 안경",
+   "path": "assets/r1092/scene-ep1b03.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A15_장면15_금이_간_안경.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 1820787,
+   "sourceSha256": "9bf9847e3980ddd72eaa77851a96a55b6729fd537959deca17051081ee6677b4",
+   "bytes": 36000
+  },
+  {
+   "region": "ep1b04",
+   "title": "탐식의 주방",
+   "path": "assets/r1092/scene-ep1b04.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A16_장면16_탐식의_주방.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2008690,
+   "sourceSha256": "0c5e52bbb89e2f427c697ef44fa5f065073471c83727cbc874b5f5863953dab1",
+   "bytes": 49536
+  },
+  {
+   "region": "ep1b05",
+   "title": "붉은 하이힐",
+   "path": "assets/r1092/scene-ep1b05.webp",
+   "size": [
+    600,
+    538
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    688
+   ],
+   "source": "A17_장면17_붉은_하이힐.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 1809993,
+   "sourceSha256": "28fbe24480557bbb3e721396dd1d35a13ae54ed2ad041418dd1068a61560b382",
+   "bytes": 20448
+  },
+  {
+   "region": "ep1b06b",
+   "title": "눈보라 속의 소년",
+   "path": "assets/r1092/scene-ep1b06b.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A19_장면19_눈보라_속의_소년.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2115302,
+   "sourceSha256": "87550fc8ba102828e0cd97bd2ad115f841d6d195011783f3acba78897d6ccbae",
+   "bytes": 59370
+  },
+  {
+   "region": "ep1b07",
+   "title": "불을 지른 남자",
+   "path": "assets/r1092/scene-ep1b07.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A20_장면20_불을_지른_남자.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 1954126,
+   "sourceSha256": "2c83224cd0fdbf32eb265903f79ec487cea49ed91ea86741782e85193b29ce39",
+   "bytes": 36562
+  },
+  {
+   "region": "ep1b08",
+   "title": "하늘에 서려는 자",
+   "path": "assets/r1092/scene-ep1b08.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A21_장면21_하늘에_서려는_자.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2179790,
+   "sourceSha256": "399b5f9e14b5c3f46b1fbeefaf42e18b888d7dd98692526a7fe490a3de6bb047",
+   "bytes": 55924
+  },
+  {
+   "region": "ep1b09",
+   "title": "생체 부트로더",
+   "path": "assets/r1092/scene-ep1b09.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A22_장면22_생체_부트로더.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2211377,
+   "sourceSha256": "d1b71947d2c857d9e0a0f33b2f8f7472d25113f74a7084a9afe3676f4176f83f",
+   "bytes": 66774
+  },
+  {
+   "region": "u201",
+   "title": "방어의 군단",
+   "path": "assets/r1092/scene-u201.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A23_장면24_방어의_군단.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 1891172,
+   "sourceSha256": "59aa908ae8796cc0e7eec89a6ce9d45a8db818a46af5c081d549d822695b63f1",
+   "bytes": 44418
+  },
+  {
+   "region": "u202",
+   "title": "잔인한 구원",
+   "path": "assets/r1092/scene-u202.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A24_장면25_잔인한_구원.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 1967069,
+   "sourceSha256": "5a3df970bfd861eff138873b2d11098b189167c24a8e04327b8ec96f88e3a5eb",
+   "bytes": 44236
+  },
+  {
+   "region": "u204",
+   "title": "시스템의 거부권",
+   "path": "assets/r1092/scene-u204.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A25_장면26_시스템의_거부권.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2067236,
+   "sourceSha256": "771a7088c25dcfabdbaa5d10003c3512e74d38018a5145c81d16fbab10fc5b14",
+   "bytes": 39514
+  },
+  {
+   "region": "u205",
+   "title": "관리자 권한",
+   "path": "assets/r1092/scene-u205.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A26_장면27_관리자_권한.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2001269,
+   "sourceSha256": "fd1e7f86378b3180f6ff9b614cb51500faf3130935fdac11ad99d061fc82394a",
+   "bytes": 46328
+  },
+  {
+   "region": "u206",
+   "title": "중앙 코어 이주실",
+   "path": "assets/r1092/scene-u206.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A27_장면28_중앙_코어_이주실.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2202278,
+   "sourceSha256": "5255fa0f51206a51f0a5e962682023fc4ab34adba4670758477f1cc8fe9b0ed7",
+   "bytes": 63210
+  },
+  {
+   "region": "u203",
+   "title": "기억의 문",
+   "path": "assets/r1092/scene-u203.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A28_장면29_기억의_문.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2219096,
+   "sourceSha256": "eb2c49ad5a038861c31d832c7e7d6543fe3ac5012a4a4170805353b307c9233c",
+   "bytes": 64782
+  },
+  {
+   "region": "last304",
+   "title": "중립 지역의 재각성",
+   "path": "assets/r1092/scene-last304.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A29_장면31_중립_지역의_재각성.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2011659,
+   "sourceSha256": "3da567606400a07aeea52a52b3e7d23f29e16b236d5a0f9121c944fe4ba9acec",
+   "bytes": 46182
+  },
+  {
+   "region": "last305",
+   "title": "고블린 두목과 장미 인장",
+   "path": "assets/r1092/scene-last305.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A30_장면32_고블린_두목과_장미_인장.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2144820,
+   "sourceSha256": "0bf2f6d2667edef469aead8e54acc3cf43165adeb804f7d7c4d2c76ada5fa34b",
+   "bytes": 61040
+  },
+  {
+   "region": "last301",
+   "title": "타락천사 기사",
+   "path": "assets/r1092/scene-last301.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A31_장면33_타락천사_기사.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2283896,
+   "sourceSha256": "1598e4c602dd788e3ee3a81f89bdbae2cb66364168e028aeea53c4559d7ec015",
+   "bytes": 66280
+  },
+  {
+   "region": "last302",
+   "title": "잠들지 못하는 마을",
+   "path": "assets/r1092/scene-last302.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A32_장면34_잠들지_못하는_마을.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 1992257,
+   "sourceSha256": "4b02227d4d580a801bc13ce0b9a14a46b2252cf8b220472f8450c125a7164cb4",
+   "bytes": 47184
+  },
+  {
+   "region": "last303",
+   "title": "한약과 불면귀",
+   "path": "assets/r1092/scene-last303.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A33_장면35_한약과_불면귀.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2109560,
+   "sourceSha256": "81678c3bc9bd50ae5a43fcadff0a355006ad8f0bd583fe321e6b5e3d1e548f3b",
+   "bytes": 55878
+  },
+  {
+   "region": "kair01",
+   "title": "최초명령의 세계",
+   "path": "assets/r1092/scene-kair01.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A34_장면37_최초명령의_세계.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2022410,
+   "sourceSha256": "ff3394c5cd12cf70cdeee061c14bbd4d96d9cbc872e1d0fc8b2ae7fa6122f534",
+   "bytes": 44780
+  },
+  {
+   "region": "kair04",
+   "title": "예순여섯 수문장",
+   "path": "assets/r1092/scene-kair04.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A35_장면38_예순여섯_수문장.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 1799458,
+   "sourceSha256": "1d367098a64d6887f4095eb30716c15f89729242e9129c4b3dd2c4656fb5bb6c",
+   "bytes": 34036
+  },
+  {
+   "region": "kair05",
+   "title": "빼앗긴 시간",
+   "path": "assets/r1092/scene-kair05.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A36_장면39_빼앗긴_시간.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 1987706,
+   "sourceSha256": "bdfdf38a2fc6e594c0c4d4c5e6f40f9a5c28be0ececd528296ea78d834e94113",
+   "bytes": 47004
+  },
+  {
+   "region": "kair06",
+   "title": "닫힌 층의 명령",
+   "path": "assets/r1092/scene-kair06.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A37_장면40_닫힌_층의_명령.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2089212,
+   "sourceSha256": "2e867a2be1a1ad9465f61b56a7221ccd73dfa0797900609e756b4e8711e5ea0e",
+   "bytes": 42228
+  },
+  {
+   "region": "kair07",
+   "title": "검은 공방",
+   "path": "assets/r1092/scene-kair07.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A38_장면41_검은_공방.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2017022,
+   "sourceSha256": "4c731adfe7b4e90ee7c79bdf949bbb08ff4c8b22e994a762b722b7485cf6d22e",
+   "bytes": 47912
+  },
+  {
+   "region": "kair08",
+   "title": "뉴런 게이트 · 노이론 게이트",
+   "path": "assets/r1092/scene-kair08.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A39_장면42_뉴런_게이트.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2106356,
+   "sourceSha256": "605d4763dfcb15d761aff1937722eb93260bb07960e68d1b6fffc71f765e895b",
+   "bytes": 49910
+  },
+  {
+   "region": "kair09",
+   "title": "망각의 묘지",
+   "path": "assets/r1092/scene-kair09.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A40_장면43_망각의_묘지.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 1922640,
+   "sourceSha256": "cbd82171e401996ff514ea15d8995d7f25935dfa69361febfcd8deee76edaf6c",
+   "bytes": 44756
+  },
+  {
+   "region": "kair10",
+   "title": "붕괴 의식장",
+   "path": "assets/r1092/scene-kair10.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A41_장면44_붕괴_의식장.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2004075,
+   "sourceSha256": "5b4a584c4a2377f136af24997460e5f49c6f90a942901a2bb3ce8744a77006a8",
+   "bytes": 43216
+  },
+  {
+   "region": "kair02",
+   "title": "아르벨리아, 유예의 수문장",
+   "path": "assets/r1092/scene-kair02.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A42_장면45_아르벨리아_유예의_수문장.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2017076,
+   "sourceSha256": "b8a0cc9baa0a7b1b74df12fe5495e6a7935beb131c31757777f4fe3e9592b542",
+   "bytes": 42860
+  },
+  {
+   "region": "kair03",
+   "title": "세이렌 모르",
+   "path": "assets/r1092/scene-kair03.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A43_장면46_세이렌_모르.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2024916,
+   "sourceSha256": "1ff23847f4401c63a7c59cdae8e9fb4d6863455784e4736308974eb606d17241",
+   "bytes": 48832
+  },
+  {
+   "region": "hando01",
+   "title": "성 안에 소환된 의목사",
+   "path": "assets/r1092/scene-hando01.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A44_장면48_성_안에_소환된_의목사.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2033617,
+   "sourceSha256": "221f99d5e07f8ed42486ec2af6f40129144d68f6222959d588ccb0eb3d5711d0",
+   "bytes": 47086
+  },
+  {
+   "region": "hando02",
+   "title": "두 주인의 각성",
+   "path": "assets/r1092/scene-hando02.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A45_장면49_두_주인의_각성.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2345206,
+   "sourceSha256": "c1df917d7dc0afd2f600fed6f44e929f3d5465cf399059d5e25ecac484320b80",
+   "bytes": 70020
+  },
+  {
+   "region": "hando03",
+   "title": "함께 되찾은 코어",
+   "path": "assets/r1092/scene-hando03.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A46_장면50_함께_되찾은_코어.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2403885,
+   "sourceSha256": "0839313b3ee59bca3923f6f2441e0a16f2797a4daa213bd82fff4f8e9ad0255b",
+   "bytes": 82396
+  },
+  {
+   "region": "murder01",
+   "title": "윤하람",
+   "path": "assets/r1092/scene-murder01.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A47_장면52_윤하람.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2110237,
+   "sourceSha256": "5a91b2548478c4dd03e9036bcb21fbabdeb58dca4585f831cb4e83acec33a8a1",
+   "bytes": 45360
+  },
+  {
+   "region": "murder02",
+   "title": "장민재와 새빛호텔",
+   "path": "assets/r1092/scene-murder02.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A48_장면53_장민재와_새빛호텔.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2127430,
+   "sourceSha256": "1c7852acf851f77cb716bf4636a23157075e062d06203cab183b57fba3803793",
+   "bytes": 42742
+  },
+  {
+   "region": "murder04",
+   "title": "고서진과 청록빌라",
+   "path": "assets/r1092/scene-murder04.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A49_장면54_고서진과_청록빌라.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 1992459,
+   "sourceSha256": "beda07f6d7095a0eb39e4e0a0353b8fb389882125aa9cbae5a72cbfdd31d90f8",
+   "bytes": 33314
+  },
+  {
+   "region": "murder03",
+   "title": "옥상의 순환",
+   "path": "assets/r1092/scene-murder03.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A50_장면55_옥상의_순환.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2064696,
+   "sourceSha256": "d3d76353cc9e52f26bac9cb28ac6c94044ae2b91eb40ef3884cb0c47686fabe1",
+   "bytes": 47298
+  },
+  {
+   "region": "cult01",
+   "title": "하나로 묶인 악몽",
+   "path": "assets/r1092/scene-cult01.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A51_장면56_하나로_묶인_악몽.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2174895,
+   "sourceSha256": "be78e0585382b08be0f9a168b144c28efde6880bc55d9528dbfc0815b80fc39c",
+   "bytes": 57508
+  },
+  {
+   "region": "cult02",
+   "title": "교주가 기다리는 전쟁",
+   "path": "assets/r1092/scene-cult02.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A52_장면57_교주가_기다리는_전쟁.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 1873406,
+   "sourceSha256": "976e03401f08ca145153d36547a9c3cc9666805638533839f4196db96d3964d1",
+   "bytes": 36990
+  },
+  {
+   "region": "cult05",
+   "title": "돌아오는 현실의 기억",
+   "path": "assets/r1092/scene-cult05.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A53_장면58_돌아오는_현실의_기억.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 1906682,
+   "sourceSha256": "c95bb942dcb0088e4086c67703cb5bb756e9c717ddaaf287632ca24dba05d770",
+   "bytes": 39826
+  },
+  {
+   "region": "cult06",
+   "title": "처음 세웠던 목표",
+   "path": "assets/r1092/scene-cult06.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A54_장면59_처음_세웠던_목표.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 1716680,
+   "sourceSha256": "b765a5a1bd68abf80b05831c7b1313b8e326353980d2b479fb23f5b327e69ef4",
+   "bytes": 28480
+  },
+  {
+   "region": "cult03",
+   "title": "사몽의 문턱",
+   "path": "assets/r1092/scene-cult03.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A55_장면60_사몽의_문턱.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 2023094,
+   "sourceSha256": "2366dc51f233bc2f57bb9e2d0e67625d98135ecd23c1fadcab977dfdeeb4e8eb",
+   "bytes": 55680
+  },
+  {
+   "region": "cult04",
+   "title": "교주의 사몽",
+   "path": "assets/r1092/scene-cult04.webp",
+   "size": [
+    600,
+    950
+   ],
+   "crop": [
+    0,
+    0,
+    768,
+    1216
+   ],
+   "source": "A56_장면61_교주의_사몽.png",
+   "sourceSize": [
+    768,
+    1376
+   ],
+   "sourceBytes": 1912013,
+   "sourceSha256": "535929d6d9461d1e2e416410e3c6eb784c1036eeaaa03535496d95d8ecd53a7c",
+   "bytes": 42654
+  }
+ ]
+}
