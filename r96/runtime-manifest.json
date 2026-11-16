@@ -54634,8 +54634,8 @@
     },
     {
       "path": "warning-shapes-r1103.js",
-      "bytes": 3107,
-      "sha256": "b91daeddcef04cffe17578d501e07e7f32c4f27016f90b78bbe8cdc513a54081"
+      "bytes": 4438,
+      "sha256": "a0cef35118bfdbe1700d13e289aac9e4fd4efe604c5b47b5c6f040ef50a0edfd"
     },
     {
       "path": "wave-orphans-r352.js",
@@ -54724,7 +54724,7 @@
     }
   ],
   "fileCount": 10944,
-  "totalBytes": 1321601235,
+  "totalBytes": 1321602566,
   "webHTMLSha256": "e749d12ddb0b98d70ce30fed23374279aacfa6a212f27f0dd6cfbeedce8a8487",
   "largest": [
     {

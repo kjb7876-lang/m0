@@ -6,14 +6,21 @@ const NAME='warning-shapes-r1103.js',F=path.join(R,'client-source',NAME);ok(fs.e
 function world({pref=null,data=true}={}){const store={};if(pref!==null)store['storyworld.r1103.shapes']=pref;
  class DrawCommands{constructor(){this.commands=[];this.owner={id:'scene',kind:'scene'};this.globalAlpha=1;}push(kind,data){if(this.globalAlpha<=0)return;this.commands.push({kind,owner:{...this.owner},...data});}scope(o,fn){const p=this.owner;this.owner=o;try{return fn();}finally{this.owner=p;}}}
  const ctx={Math,String,Number,Array,Object,JSON,Map,WeakMap,Set,isFinite,console,localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}}};ctx.window=ctx;vm.createContext(ctx);
- ctx.StoryPhase1={DrawCommands};
+ class ThreeRenderer{render(frame){this.last=frame.commands.slice();return frame.commands.length;}}
+ ctx.StoryPhase1={DrawCommands,ThreeRenderer};const inst=new ThreeRenderer();const own=inst.render;inst.render=function(f){return own.call(this,f);};/* perf-r97 처럼 인스턴스에 render 복사 */
+ ctx.__STORYWORLD_PHASE1__={controller:{state:{three:inst}}};ctx.setInterval=fn=>{ctx.__tick=fn;return 1;};
  if(data)ctx.__STORYWORLD_FINAL42_DATA_R88__={effects:{F101:{id:'F101',sourceIndex:101,kind:'impact'},F251:{id:'F251',sourceIndex:251,kind:'warning'},F260:{id:'F260',sourceIndex:260,kind:'warning'},F250:{id:'F250',sourceIndex:250,kind:'status'}}};
- vm.runInContext(src,ctx);return {ctx,DC:DrawCommands};}
-const draw=(DC,owner,kind='image')=>{const r=new DC();if(owner)r.scope(owner,()=>r.push(kind,{}));else r.push(kind,{});return r.commands.length;};
+ vm.runInContext(src,ctx);W0=ctx;return {ctx,DC:DrawCommands};}
+// R1103c(병합 줄 CI): 기록은 남기고(FINAL42·R86 기존 검사가 기록을 본다) 3D 렌더러에 넘기는 단계에서만 뺀다.
+//  draw() = 기록 → 인스턴스 render(perf-r97 복사본)에 넘긴 뒤 화면에 간 명령 수. rec() = 기록된 명령 수.
+let W0=null;const draw=(DC,owner,kind='image')=>{const r=new DC();if(owner)r.scope(owner,()=>r.push(kind,{}));else r.push(kind,{});const three=W0.__STORYWORLD_PHASE1__.controller.state.three;W0.__tick?.();three.render({commands:r.commands});return three.last.length;};
+const rec=(DC,owner,kind='image')=>{const r=new DC();r.scope(owner,()=>r.push(kind,{}));return r.commands.length;};
 const f42=(i,extra={})=>({id:'final42-r88:1:2:F'+i,kind:'hazard',x:1,y:2,groundAligned:true,r88Final42:true,r88SourceIndex:i,r88EffectSource:i===251?'251-attack-warning-ring':i===260?'storyworld-260-charge-warning':'x',...extra});
 {const {ctx,DC}=world();const api=ctx.__STORYWORLD_WARNING_SHAPES_R1103__;ok(api&&typeof api.inspect==='function'&&typeof api.set==='function','API');
  // 지울 것: 공격 예고 고리(251)를 바닥 발자국 모양으로 자른 그림 — 직사각형 띠·부채꼴 띠로 보이던 것
  ok(draw(DC,f42(251))===0,'F251 attack-warning-ring (ground footprint clip) dropped');
+ ok(rec(DC,f42(251))===1&&rec(DC,{id:'r98:1:g',kind:'hazard',r98:true},'fill')===1&&rec(DC,{id:'r100:nav',kind:'hazard'},'fill')===1,'still recorded for native hook checks (dropped only on the way to the screen)');
+ {const C=ctx.StoryPhase1.ThreeRenderer,t=new C(),r=new DC();r.scope(f42(251),()=>r.push('image',{}));r.push('fill',{});t.render({commands:r.commands});ok(t.last.length===1,'prototype render also filtered');}
  ok(draw(DC,f42(251,{kind:'effect',groundAligned:false}))===0,'F251 also dropped when not ground hazard');
  ok(draw(DC,f42(260,{kind:'effect',groundAligned:false,r88Layer:'afterActor'}))===0,'F260 charge-warning dropped');
  // 지울 것: R98 바닥 도형(발자국 채우기·선)
