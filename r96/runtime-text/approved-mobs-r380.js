@@ -87,6 +87,8 @@ function balance(r,id,l){if(!Array.isArray(r.enemies))return;
  // R537(사용자 2026-11-10 "늪나오는 뿌리추적자 늪뿌리추적자로명명"): 늪 순찰은 이름을 '늪 뿌리 추적자'로(첫 뿌리 맵 dist00 은 그냥 뿌리 추적자). 공격 효과 키(r248Key)는 옛 이름.
  if(id===ROOT_HOME)for(const e of r.enemies)if(isPatrol(e)&&e.r74Monster==='root'){e.r383Atlas='root';delete e.r74Monster;const nm=String(e.name||'');
   if(/^뿌리 추적자/.test(nm)){e.r537From=nm;if(!e.r248Key)e.r248Key=ROOT_NAME;e.name=SWAMP_ROOT+nm.slice(ROOT_NAME.length);if(typeof e.r373Name==='string')e.r373Name=e.r373Name.replace(/^뿌리 추적자/,SWAMP_ROOT);stats.renamed++;}}
+ // R1115(사용자 2026-11-16 "뿌리추적자 같이 한쪽 방향 모션만 있으면 반대쪽은 좌우반전"): 첫 뿌리 맵(dist00)의 R74 순찰 뿌리 추적자 6마리는 옛 R74 한 장 그림(걷는 모션 없음)이었다 → 늪과 같이 r74Monster 를 지워 걷기 시트를 쓴다(이름·수치·id 그대로, 좌우는 R444 가 뒤집음).
+ if(id===ROOT_ADD)for(const e of r.enemies)if(isPatrol(e)&&e.r74Monster==='root'){e.r383Atlas='root';delete e.r74Monster;stats.rootSheets=(stats.rootSheets||0)+1;}
  if(id===SYR_ZONE&&l!=='DREAM')addSyringe(r,l);
  if(id===ROOT_ADD&&!r.enemies.some(e=>e?.r383Added)){const tpl=rootTemplate(l),L=r.exploration;if(!tpl||!L)return;
   const ent=L.entry||{x:0,y:0},boss=r.enemies.find(e=>e.boss),rad=tpl.combatProfile?.bodyBlock?.r||.4;
