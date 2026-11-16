@@ -34,7 +34,7 @@ console.log('PICK '+JSON.stringify(rows));
 ok(['e','w','se','sw','ne','nw'].every(k=>rows[k].err<=13),'옆·대각 6방향: 총 각도 오차 13° 이하',rows);
 ok(rows.n.err<=34&&rows.s.err<=41,'정 위·정 아래: 있는 그림 중 가장 가까운 것(위 ≤34°, 아래 ≤41° — 정면 조준 그림이 없어 Dots 요청)',rows);
 ok(rows.w.mirror&&rows.sw.mirror&&rows.nw.mirror&&!rows.e.mirror&&!rows.se.mirror&&!rows.ne.mirror,'왼쪽은 오른쪽 그림 반전, 오른쪽은 반전 없음',rows);
-ok(rows.se.sheet==='se'&&rows.sw.sheet==='se'&&rows.ne.sheet==='ne'&&rows.nw.sheet==='ne'&&rows.n.sheet==='n'&&rows.s.sheet===(A.SHEETS.includes('s2')?'s2':'s'),'대각선은 몸을 돌린 대각 그림, 정 위·아래는 뒷모습·앞모습(R1003 뒤 정 아래는 Dots s2)',rows);
+ok(/^se[3]?$/.test(rows.se.sheet)&&/^se[3]?$/.test(rows.sw.sheet)&&/^ne[3]?$/.test(rows.ne.sheet)&&/^ne[3]?$/.test(rows.nw.sheet)&&rows.n.sheet==='n'&&rows.s.sheet===(A.SHEETS.includes('s2')?'s2':'s'),'대각선은 몸을 돌린 대각 그림, 정 위·아래는 뒷모습·앞모습(R1003 뒤 정 아래는 Dots s2)',rows);
 // 360° 전부: 총 각도 오차가 가장 가까운 후보보다 10° 넘게 나쁘지 않음(몸 방향 가중이 총 방향을 해치지 않게)
 let worst=0,nonOpt=0;for(let d=-180;d<180;d+=1){const p=A.pick(d*D),e=angDiff(d*D,A.gunAngle(p.sheet,p.mirror));let best=1e9;for(const s of A.SHEETS)for(const m of [false,true])best=Math.min(best,angDiff(d*D,A.gunAngle(s,m)));if(e>best+10+1e-9)nonOpt++;worst=Math.max(worst,e);}
 ok(nonOpt===0,'360° 모든 각에서 총 각도 오차 ≤ 최적+10°',{nonOpt});

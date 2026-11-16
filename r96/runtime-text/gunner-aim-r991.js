@@ -12,7 +12,7 @@
  *  설정 storyworld.r991.gunnerAim {"on":false} 로 끄면 예전 그대로. Canonical source; copied by scripts/sync-r99.py. */
 (()=>{'use strict';
 if(window.__STORYWORLD_GUNNER_AIM_R991__)return;
-const REV='R1101b-gunner-diag+R1101-gunner-aim-7+R1045d+R1045c+R1045b+R1045+R1003-s2',KEY='storyworld.r991.gunnerAim',HERO='gunner';
+const REV='R1101c-gunner-diag2+R1101b-gunner-diag+R1101-gunner-aim-7+R1045d+R1045c+R1045b+R1045+R1003-s2',KEY='storyworld.r991.gunnerAim',HERO='gunner';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={walk:0,idle:0,swings:0,replaced:0,shots:0,moved:0,blocked:0,waiting:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
@@ -39,6 +39,10 @@ if(prefs.e3!==false&&prefs.e4!==false)Object.assign(SHEET.e,{path:'assets/r1045c
 //  R143 se·ne(시선 반대)를 바꾸지 않고 그 각에 맞는 칸(se2·ne2)으로 더한다. 몸 키 183·발 96·227 로 맞춘 사본, tip 은 Dots 총구 값을 같은 배율로 옮김. {"diag2":false} 로 끔.
 if(prefs.diag2!==false){SHEET.se2={gun:26,face:30,body:183,frames:8,path:'assets/r1101b/gunner/attack-se8.webp',tip:[0,1,2,3,4,5,6,7].map(()=>[155,111])};
  SHEET.ne2={gun:-29,face:-35,body:183,frames:8,path:'assets/r1101b/gunner/attack-ne8.webp',tip:[0,1,2,3,4,5,6,7].map(()=>[151,55])};}
+// R1101c: Dots CX-0119GD r2 공격 8칸(GD-1 se 총열 ≈44°·GD-2 ne ≈−37°, 발 96·227·몸 183 사본) — 정 대각 조준에 R143 se·ne(시선 반대) 대신. r1 se2·ne2 는 낮은 각(+26°·−29°)용으로 둠.
+//  tip 은 Dots spec 칸별 총구 좌표를 같은 배율·자리로 옮긴 값. se3 는 1~2칸 총구가 위로 5.6px 물러나는 반동(Dots 측정). {"diag3":false} 로 끔.
+if(prefs.diag2!==false&&prefs.diag3!==false){SHEET.se3={gun:44,face:45,body:183,frames:8,path:'assets/r1101c/gunner/attack-se9.webp',tip:[[148,129],[148,129],[148,131],[148,135],[148,136],[148,137],[148,137],[148,137]]};
+ SHEET.ne3={gun:-37,face:-45,body:183,frames:8,path:'assets/r1101c/gunner/attack-ne9.webp',tip:[0,1,2,3,4,5,6,7].map(()=>[150,63])};}
 const SHEETS=Object.freeze(Object.keys(SHEET));
 // 걸으며 쏠 때: R128 걷기 시트(8칸 192×256, 발 96·226, walk-e 는 R144 v1 사본) — 같은 총 각도, 칸마다 총구 끝
 const WALK={e:{path:'assets/r144/walk/gunner/walk-e.webp',tip:[[165,81],[166,76],[166,76],[166,80],[165,80],[164,76],[163,76],[164,81]]},
@@ -46,7 +50,7 @@ const WALK={e:{path:'assets/r144/walk/gunner/walk-e.webp',tip:[[165,81],[166,76]
  s:{path:'assets/r128/gunner/walk-s.webp',tip:[[127,149],[125,149],[124,149],[124,149],[123,149],[122,149],[124,149],[126,149]]},
  ne:{path:'assets/r128/gunner/walk-ne.webp',tip:[[164,39],[163,42],[162,41],[161,38],[160,39],[161,43],[162,41],[163,38]]},
  n:{path:'assets/r128/gunner/walk-n.webp',tip:[[142,45],[141,48],[140,47],[139,44],[138,45],[138,48],[140,47],[141,44]]}};
-WALK.s2=WALK.s;WALK.se2=WALK.se;WALK.ne2=WALK.ne; // R1101b 대각 겨눔 칸도 걷기 사격은 대각 걷기 그림 // 정 아래 걷기 사격 그림이 없거나 꺼졌을 때 → 앞모습 걷기 그대로
+WALK.s2=WALK.s;WALK.se2=WALK.se;WALK.ne2=WALK.ne;WALK.se3=WALK.se;WALK.ne3=WALK.ne; // R1101b 대각 겨눔 칸도 걷기 사격은 대각 걷기 그림 // 정 아래 걷기 사격 그림이 없거나 꺼졌을 때 → 앞모습 걷기 그대로
 // R1045b: 사용자가 고른 Dots CX-0085GA r3 walk-s2(총구를 화면 앞으로 겨누며 걷는 8칸, 발 96·226). F3 한 칸만 좌우 반전해(x'=192−x)
 //  같은 다리가 F3·F7 두 번 앞으로 나오던 것을 왼발·오른발 번갈아로 고쳤다. tip 은 Dots 총구 구멍 중심(F3 은 반전값).
 if(prefs.walkS2!==false)WALK.s2={path:'assets/r1045/gunner/walk-s2.webp',tip:[[93,126],[94,133],[95,130],[98,128],[95,128],[94,131],[94,129],[95,128]]};
@@ -127,7 +131,7 @@ function wrapShot(){if(typeof makeShot!=='function'||makeShot.r991)return;const 
 // 몸 그림: R143 이 그린 공격 칸을 고른 칸(같은 프레임·같은 키·같은 발)으로 바꿔 놓는다
 function replace(rec,st){const sw=swingOf(player);if(!sw||!(player.attackAnim>0)||T()-sw.at>.6)return;
  for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||!c.r143Attack||!c.points||!c.sourceRect)continue;
-  const src=String(c.sourcePath||c.image?.src||''),m=/(?:r143\/attack|r1003|r1045|r1101b)\/gunner\/attack-([a-z0-9]+)\.webp/.exec(src);if(!m)continue;
+  const src=String(c.sourcePath||c.image?.src||''),m=/(?:r143\/attack|r1003|r1045|r1101b|r1101c)\/gunner\/attack-([a-z0-9]+)\.webp/.exec(src);if(!m)continue;
   const P=c.points,oldMir=P[1][0]<P[0][0],fOld=oldMir?-1:1,k=Math.abs(P[1][0]-P[0][0])/CW,ky=(P[3][1]-P[0][1])/CH;if(!(k>0)||!Number.isFinite(ky))return;
   if(m[1]===sw.sheet&&oldMir===sw.mirror&&src.includes(pathOf(sw.sheet)))return;/* R1045: 같은 칸 이름이어도 n·e 는 새 그림 경로로 바꿈 */const p=pathOf(sw.sheet),im=image(p);if(!im)return;
   const fx=P[0][0]+fOld*FX*k,fy=P[0][1]+FY*ky,f=sw.mirror?-1:1,X=v=>fx+f*(v-FX)*k,Y=v=>fy+(v-FY)*ky,sx=Math.round(clamp(Math.round(fin(c.sourceRect[0])/CW),0,5)*(fin(SHEET[sw.sheet]?.frames,6)-1)/5)*CW;

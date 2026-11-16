@@ -10323,6 +10323,16 @@
       "sha256": "9254627f6d6c53b2fd67dd31ffdec6da76b51f06e6924ac74e5ccf439fb2e925"
     },
     {
+      "path": "assets/r1101c/gunner/attack-ne9.webp",
+      "bytes": 75312,
+      "sha256": "47fd0c40506a1c8028bbaa34f9fdcd3f71fe06b672ea965f0ef24152ba3747f2"
+    },
+    {
+      "path": "assets/r1101c/gunner/attack-se9.webp",
+      "bytes": 78486,
+      "sha256": "300773a2c09e01b3c2f33ca0e8d8b4afba0047f08a7060df71d75db5b45555cf"
+    },
+    {
       "path": "assets/r116/mobs/M001-hit.png",
       "bytes": 141513,
       "sha256": "35cffa3fe6d6c22cdb75e06e1cca55a673f06c10afa28087d749082c40c77b71"
@@ -53249,8 +53259,8 @@
     },
     {
       "path": "gunner-aim-r991.js",
-      "bytes": 24226,
-      "sha256": "bb6a34f26aece942c8262eef294b102b0eef289f1a6f56be608ce3683bf6d11e"
+      "bytes": 25053,
+      "sha256": "d810e67b5923c575ca6047c36afa6a7f32f48c74488bd93851314deef78b2b22"
     },
     {
       "path": "gunner-arms-r561.js",
@@ -54833,8 +54843,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10966,
-  "totalBytes": 1322524122,
+  "fileCount": 10968,
+  "totalBytes": 1322678747,
   "webHTMLSha256": "a8e58b03ba1a5a6dcd200fcad817c48281074609d6a1c4dbc756416d2f179ea3",
   "largest": [
     {
