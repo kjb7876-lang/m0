@@ -9728,6 +9728,61 @@
       "sha256": "cd04b492c5c1b4270245947e10032946ced2d9743f1443e1a18dac7da5a1bc75"
     },
     {
+      "path": "assets/r1065/mobs/md-21-wrath-satan-float-death.webp",
+      "bytes": 32964,
+      "sha256": "aa623e1c12a8db3b23b7d3f021dd9d5431206e4bbc33e7ed61013315e71785d6"
+    },
+    {
+      "path": "assets/r1065/mobs/md-34-gate-void-afterimage-death.webp",
+      "bytes": 46500,
+      "sha256": "a3e5a5115c5aee83dbb7d4ee1cddcb6893dffb5a26310d6a9e37eec0d545b2d2"
+    },
+    {
+      "path": "assets/r1065/mobs/md-37-nameless-scar-death.webp",
+      "bytes": 42298,
+      "sha256": "4c6c665bef283a3cb04c8aa18d7a3b0926867d399811e2210db2ffffea74dbce"
+    },
+    {
+      "path": "assets/r1065/mobs/md-41-signal-slime-death.webp",
+      "bytes": 20464,
+      "sha256": "b771f488ba9d24b2e6356f4c2a67c8f7d555d253309dfe70276738ceefc7e3ec"
+    },
+    {
+      "path": "assets/r1065/mobs/md-46-guardian-09-death.webp",
+      "bytes": 35744,
+      "sha256": "eb05351cd5c34ab34365d6958f069601cb5b0c4d7af557470b1d64878e991594"
+    },
+    {
+      "path": "assets/r1065/mobs/md-52-guardian-08-death.webp",
+      "bytes": 38824,
+      "sha256": "7ef5e85942cf36d840599509d76b5b06a8aaf36bb872a49854e567e84087e6e7"
+    },
+    {
+      "path": "assets/r1065/mobs/md-53-guardian-10-death.webp",
+      "bytes": 28800,
+      "sha256": "abd46e073658aaddf78c7e237c1ea31e159f31a00d0499d901b516467ba1c55d"
+    },
+    {
+      "path": "assets/r1065/mobs/md-57-guardian-28-death.webp",
+      "bytes": 59772,
+      "sha256": "5b28e9ad96bad9a7e86c3ab04f5271af9e35ead6278acf07c56c1550fbd4a8e4"
+    },
+    {
+      "path": "assets/r1065/mobs/md-66-repeated-fall-echo-death.webp",
+      "bytes": 23382,
+      "sha256": "583382b701e8e461cfadd59957f51df01abcb2ebd4746a7e52b94196cc7d1826"
+    },
+    {
+      "path": "assets/r1065/mobs/md-75-memory-carrier-spider-death.webp",
+      "bytes": 46822,
+      "sha256": "62a2b494d8db07227f70e70d5505a1ed88ecb8622cfea233edd9d5429793b2e8"
+    },
+    {
+      "path": "assets/r1065/mobs/md-85-sobok-death.webp",
+      "bytes": 32570,
+      "sha256": "9bda16e07882ae5df2f66cdcc2b66d1942ccc5bc14716a77298e882111c6250c"
+    },
+    {
       "path": "assets/r1065/mobs/ra-01-black-rose-blindfold-aim.webp",
       "bytes": 51260,
       "sha256": "16f1899c0de84ea80eff33b9eff749d19fa5b99457dc50c50aef3535c23eeed5"
@@ -53599,8 +53654,8 @@
     },
     {
       "path": "mob-attack-dots-r1065.js",
-      "bytes": 10574,
-      "sha256": "b0e7cb4a21b7d788e802893c42473223ec0c906e0bf6c3da8534d4fa8051424d"
+      "bytes": 16962,
+      "sha256": "6c33cfe9cbbfa8bf52493db4e3141a623f9d02e0eb9ae783f53b409f3976118b"
     },
     {
       "path": "mob-death-r188.js",
@@ -53609,8 +53664,8 @@
     },
     {
       "path": "mob-death-r462.js",
-      "bytes": 45061,
-      "sha256": "9f6cf47a252fafffbf93371135a20bbe48fe6717f42001db82b17f829082cd51"
+      "bytes": 45718,
+      "sha256": "fe21fdc8b92176bc32d6be9d9c2dab51207a3f0ebaf96c0a982691ce45ea1fc1"
     },
     {
       "path": "mob-dots-r374.js",
@@ -54733,8 +54788,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10946,
-  "totalBytes": 1321771113,
+  "fileCount": 10957,
+  "totalBytes": 1322186298,
   "webHTMLSha256": "f1f0a76476636412618ad4448b610d4c8f41416b4e309a9db80994c3c8b4ce87",
   "largest": [
     {
