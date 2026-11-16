@@ -47,7 +47,7 @@ function inkify(src,w,h,opt){opt=opt||{};
  for(let y=0;y<h;y++)for(let x=0;x<w;x++){const s=(y*w+x)*4,i=(y+pad)*W+x+pad,a=src[s+3]/255;if(!(a>0))continue;
   const r=src[s]/255,g=src[s+1]/255,b=src[s+2]/255,gb=Math.max(g,b);
   A[i]=a;L[i]=.299*r+.587*g+.114*b;V[i]=Math.max(r,gb);
-  R[i]=sstep(.16,.42,(r-gb)/(r+.02))*sstep(.16,.36,r);
+  R[i]=sstep(.16,.42,(r-gb)/(r+.02))*sstep(.10,.30,r);
   if(a>.4){solid++;if(y+pad<minY)minY=y+pad;if(y+pad>maxY)maxY=y+pad;}}
  const out=new Uint8ClampedArray(N*4);if(!solid)return {data:out,width:W,height:H,pad,solid:0};
  const mask=new Uint8Array(N),inv=new Uint8Array(N);for(let i=0;i<N;i++){mask[i]=A[i]>.4?1:0;inv[i]=mask[i]?0:1;}
@@ -86,7 +86,7 @@ function inkify(src,w,h,opt){opt=opt||{};
    // ⑤ 언주색 담채
    const rk=clamp(Math.max(R[i],bR[i]*1.4),0,1);
    if(rk>.02){const v=clamp(V[i]+(nMid-.5)*.12,0,1);let a,b,m;
-    if(v<.28){a=PAL.deep;b=PAL.yeonji;m=sstep(.10,.28,v);}else if(v<.72){a=PAL.yeonji;b=PAL.juhong;m=sstep(.28,.56,v);}else{a=PAL.juhong;b=PAL.pale;m=sstep(.80,1,v)*.75;}
+    if(v<.20){a=PAL.deep;b=PAL.yeonji;m=sstep(0,.16,v);}else if(v<.72){a=PAL.yeonji;b=PAL.juhong;m=sstep(.20,.46,v);}else{a=PAL.juhong;b=PAL.pale;m=sstep(.80,1,v)*.75;}
     const wash=1-.08*fib-.04*nFine;cr+=((a[0]+(b[0]-a[0])*m)*wash-cr)*rk;cg+=((a[1]+(b[1]-a[1])*m)*wash-cg)*rk;cb+=((a[2]+(b[2]-a[2])*m)*wash-cb)*rk;}
    ca=A[i];
    // ⑥ 윤곽 붓선
@@ -115,33 +115,40 @@ function set(v){if(typeof v!=='boolean')return on;on=v;try{if(on)localStorage.re
 const RX=/(?:^|[\/:])assets\/rc133\/art\/(base|awake)-([0-7])(\.png)(?:[?#][^:]*)?$/;
 function match(v){if(typeof v!=='string'||!v)return null;const m=RX.exec(v);return m?{kind:m[1],dir:+m[2]}:null;}
 const R409=/^r409:outline:[a-z]+:u:(.+):\d+,\d+,\d+,\d+:\d+:[a-z]+$/;
-const cache=new Map(),queue=[];let busy=false,halfMode=null; // url → {state:'wait'|'ready'|'failed',canvas,w,h,px,py,path}
+const cache=new Map(),queue=[];let busy=false,halfMode=null; // 'url|f'·'url|h' → {state:'wait'|'ready'|'failed',canvas,w,h,px,py,path} (큰 그림·반 크기 따로)
+const CACHE_MAX=32;
 // 모바일(PC급 아님)·성능 4단계 이하는 반 크기로 굽는다(화면에서는 원본의 1/4 쯤으로 보이므로 충분하다)
 function half(){try{const T=window.__STORYWORLD_MOBILE_TIER_R1023__;if(T&&typeof T.pcGrade==='function'&&T.pcGrade()===false)return true;}catch(_){}
  try{const P=window.__STORYWORLD_PERF7_R1043__;if(P&&typeof P.step==='function'){const s=P.step();if(Number.isFinite(s)&&s<5)return true;}}catch(_){}return false;}
 const makeCanvas=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c;};
 function absolute(u){try{if(/^[a-z][a-z0-9+.-]*:/i.test(u))return u;return new URL(u,document.baseURI||window.location?.href).href;}catch(_){return u;}}
-function bake(url,img,m){const row=cache.get(url);if(!row)return;const t0=Date.now();
+function bake(key,img,m,isHalf){const row=cache.get(key);if(!row)return;const t0=Date.now();
  try{const w=img.naturalWidth||img.width,h=img.naturalHeight||img.height;if(!(w>0)||!(h>0))throw Error('empty image');
-  const sc=halfMode?.5:1,cw=Math.max(1,Math.round(w*sc)),ch=Math.max(1,Math.round(h*sc)),pad=Math.max(8,Math.round(PAD*sc));
+  const sc=isHalf?.5:1,cw=Math.max(1,Math.round(w*sc)),ch=Math.max(1,Math.round(h*sc)),pad=Math.max(8,Math.round(PAD*sc));
   const tmp=makeCanvas(cw,ch),g=tmp.getContext('2d',{willReadFrequently:true});g.drawImage(img,0,0,cw,ch);
   const data=g.getImageData(0,0,cw,ch).data;tmp.width=tmp.height=0;
   const r=inkify(data,cw,ch,{pad,seed:(m.kind==='awake'?100:0)+m.dir*7+1,unit:sc});if(!r||!r.solid)throw Error('nothing to paint');
   const out=makeCanvas(r.width,r.height),og=out.getContext('2d'),im=og.createImageData(r.width,r.height);im.data.set(r.data);og.putImageData(im,0,0);
-  const path='r1097:ink:'+m.kind+'-'+m.dir+(halfMode?':h':'');out.__storyworldStaticSource={path};
+  const path='r1097:ink:'+m.kind+'-'+m.dir+(isHalf?':h':'');out.__storyworldStaticSource={path};
   Object.assign(row,{state:'ready',canvas:out,w,h,px:pad*w/cw,py:pad*h/ch,path});stats.baked++;stats.bakeMs+=Date.now()-t0;}
  catch(e){row.state='failed';stats.failed++;if(e?.name!=='SecurityError')fail(e);}}
 function pump(){if(busy||!queue.length)return;if(!active()){queue.length=0;for(const [u,r] of cache)if(r.state==='wait')cache.delete(u);return;}
- const {url,m}=queue.shift();busy=true;const next=()=>{busy=false;try{setTimeout(pump,40);}catch(_){}};
+ const {url,key,m,isHalf}=queue.shift();busy=true;const next=()=>{busy=false;try{setTimeout(pump,40);}catch(_){}};
  try{const img=new Image();img.crossOrigin='anonymous';img.decoding='async';
-  img.onload=()=>{try{bake(url,img,m);}catch(e){fail(e);}next();};
-  img.onerror=()=>{const r=cache.get(url);if(r&&r.state==='wait'){r.state='failed';stats.failed++;}next();};
-  img.src=url;}catch(e){const r=cache.get(url);if(r){r.state='failed';stats.failed++;}fail(e);next();}}
-function want(url,m,first){if(cache.has(url))return;cache.set(url,{state:'wait'});if(first)queue.unshift({url,m});else queue.push({url,m});}
+  img.onload=()=>{try{bake(key,img,m,isHalf);}catch(e){fail(e);}next();};
+  img.onerror=()=>{const r=cache.get(key);if(r&&r.state==='wait'){r.state='failed';stats.failed++;}next();};
+  img.src=url;}catch(e){const r=cache.get(key);if(r){r.state='failed';stats.failed++;}fail(e);next();}}
+function want(url,m,first,isHalf){const key=url+(isHalf?'|h':'|f');if(cache.has(key))return;
+ // 캐시가 차면 가장 오래된 다른 크기 그림부터 비운다(지금 크기 그림은 남긴다)
+ while(cache.size>=CACHE_MAX){let drop=null;for(const k of cache.keys()){if(k.endsWith(isHalf?'|f':'|h')){drop=k;break;}}if(!drop)drop=cache.keys().next().value;cache.delete(drop);}
+ cache.set(key,{state:'wait'});const job={url,key,m,isHalf};if(first)queue.unshift(job);else queue.push(job);}
 // 한 방향을 보면 같은 묶음(base 또는 awake)의 여덟 방향을 차례로 미리 굽는다(방향을 틀 때 원본이 잠깐 보이지 않게)
-function request(url,m){const h=half();if(halfMode!==h){halfMode=h;cache.clear();queue.length=0;}
- if(!cache.has(url)){want(url,m,true);for(let i=0;i<8;i++){if(i===m.dir)continue;want(url.replace(RX,(all)=>all.replace(/(base|awake)-[0-7](?=\.)/,m.kind+'-'+i)),{kind:m.kind,dir:i},false);}pump();}
- return cache.get(url);}
+// 성능 단계·모바일 판정이 바뀌어 크기가 달라지면 새 크기로 다시 굽되, 준비될 때까지는 이미 구운 다른 크기 그림을 쓴다(원본으로 깜박이지 않게)
+function request(url,m){const h=half();if(halfMode!==h){halfMode=h;queue.length=0;for(const [k,r] of cache)if(r.state==='wait')cache.delete(k);}
+ const key=url+(h?'|h':'|f');
+ if(!cache.has(key)){want(url,m,true,h);for(let i=0;i<8;i++){if(i===m.dir)continue;want(url.replace(RX,(all)=>all.replace(/(base|awake)-[0-7](?=\.)/,m.kind+'-'+i)),{kind:m.kind,dir:i},false,h);}pump();}
+ const row=cache.get(key);if(row&&row.state==='ready')return row;
+ const other=cache.get(url+(h?'|f':'|h'));return other&&other.state==='ready'?other:row;}
 // ---------------- 명령 고르기·바꿔 끼우기 ----------------
 const okPt=p=>Array.isArray(p)&&Number.isFinite(p[0])&&Number.isFinite(p[1]);
 function process(commands){if(!active()||!Array.isArray(commands))return 0;let n=0;
@@ -160,6 +167,8 @@ function process(commands){if(!active()||!Array.isArray(commands))return 0;let n
   // 수묵으로 그린 그림을 R1090 담묵 필터가 또 탈색하지 않게: 이미 붙었으면 그 조각만 떼고, 아직이면 표시해 건너뛰게 한다
   let F='saturate(.5) contrast(1.08)';try{const v=window.__STORYWORLD_INK_CHARS_R1090__?.FILTER;if(typeof v==='string'&&v)F=v;}catch(_){}
   if(typeof s.filter==='string'&&s.filter.endsWith(F)){const rest=s.filter.slice(0,-F.length).trim();c.style={...s,filter:rest||'none'};}
+  // R409 가 이 명령을 아직 안 봤으면(인스턴스 감싸기 순서에 따라 R409 가 뒤에 돈다) 수묵 그림 위에 핏빛 테를 또 굽지 않게 알린다 — 종이빛 여백이 그 몫
+  if(!o.r409)c.owner={...o,r409:true};
   c.r1090=true;c.r1097=true;n++;}
  stats.swapped+=n;return n;}
 // ---------------- 렌더러 감싸기(perf-r97 이 인스턴스에 render 를 복사해 두므로 프로토타입·인스턴스 둘 다, 한 render 에 한 번만) ----------------
