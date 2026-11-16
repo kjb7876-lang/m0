@@ -20,7 +20,7 @@ const profile=F({
   '그 뒤로 몽세는 그의 뜻에 따라 다시 짜인다. 그래도 그는 자기 자신을 구원하지는 못한다.'
  ]),
  passive:'관측 폐기 — 해로운 상태에 걸리면 0.7초 뒤, 그 일을 일어나지 않은 가능성으로 돌린다. 이미 입은 상처와 죽음은 폐기하지 못한다.',
- special:'정화 연참(환도의 검)',
+ special:'정화 연참(환도의 검) — 뒤이어 페르소나의 기술이 돌아가며 따라 나간다',
  sealed:'아직 이름 붙이지 않은 것들이 그의 안에서 기다린다. 그는 그것들을 서두르지 않는다.',
  // 해금 컷인 — 합일1 원문(사용자 자산, 바꾸지 않음).
  cutin:F({image:'assets/r1046/ego-cutin.webp',caption:'진정한 합일을 이루어 마침내 완성된 ego 몽세를 완전히 평정하기 위한 여행을 떠난다. 내면의 악의,욕망 또한 나의 일부분이었음을... 인간은 스스로를 구원할 수 없다...',seconds:5.5}),
@@ -33,13 +33,21 @@ const abilities=F([
   trigger:F({on:'debuff',requires:'dispellable'}),
   delay:.7,cooldown:16,
   effect:F({type:'dispel',table:'dispel',refundDamage:false,undoDeath:false}),
-  anim:'ego-discard',fx:F({sheet:'assets/r100/sig-gather-red.webp',size:192,frames:12,life:.9}),
+  anim:'ego-discard',tiers:F({id:'egoDiscardR1094',max:7,step:.07,cap:1.4,scales:F(['cooldown','delay'])}),fx:F({sheet:'assets/r100/sig-gather-red.webp',size:192,frames:12,life:.9}),
   lines:F(['그런 일이 있었던가.','그것은 지나간 일이 아니다. 애초에 도래하지 않은 가능성이었다.','나는 그것을 기억한다. 다만 현실이었다고 인정하지 않을 뿐.']),
   desc:'해로운 상태를 일어나지 않은 가능성으로 돌린다.'}),
  // 기존 RC151 '마지막 수호자 EGO'(페르소나 처치 뒤 변신) 능력 — 지우거나 바꾸지 않고, 같은 근원(심상세계의 현실 재구성)으로 표에만 적는다. 판정은 RC151 코드 그대로.
  F({id:'rc151-lance',name:'악의의 관통',kind:'existing',source:'RC151',key:'A',desc:'붉은 창탄. 세 번째·다섯 번째 공격에서 정화 장판과 갈래 탄으로 번진다.'}),
  F({id:'rc151-fusion',name:'융합 정화',kind:'existing',source:'RC151',key:'Q',desc:'아홉 갈래 창탄과 봉인 — 보호막과 회복.'}),
  F({id:'rc151-red-time',name:'적색 시간',kind:'existing',source:'RC151',key:'F',desc:'EGO 진입 뒤 시계가 붉게 멈추면, 받는 공격이 확률로 닿지 않은 일이 된다.'}),
+ // R1094 협주(사용자 11-16 01:52Z "페르소나보스 공격과스킬 환도영웅공격과스킬 콜라보"): 환도의 기술 뒤에 페르소나 보스의 기술이 따라 나간다. 판정·배분은 ego-kit-r1094.js. 키는 늘리지 않는다.
+ F({id:'collab-basic',name:'베기와 관통',kind:'collab',source:'R1094',key:'A',hwando:'기본 베기',persona:F(['악의의 관통','욕망의 씨앗']),desc:'세 번째 베기마다 붉은 창 셋, 다섯 번째마다 욕망의 씨앗 셋이 따라 나간다.'}),
+ F({id:'collab-special',name:'정화 연참 · 악의의 순환',kind:'collab',source:'R1094',key:'Q',hwando:'정화 연참',persona:F(['순수악의의 분기','내면의 소용돌이','악의 시선','욕망의 일식']),desc:'연참 뒤 페르소나의 기술 넷이 차례로 돌아가며 이어진다.'}),
+ F({id:'collab-w',name:'월섬 회천 · 감춘 충동',kind:'collab',source:'R1094',key:'W',hwando:'월섬 회천',persona:F(['감춘 충동']),desc:'회천 뒤 마름모 셋이 시차를 두고 뻗는다.'}),
+ F({id:'collab-e',name:'백은 유영보 · 악의 시선',kind:'collab',source:'R1094',key:'E',hwando:'백은 유영보',persona:F(['악의 시선']),desc:'내디딘 자리에서 눈 셋이 적을 겨눈다.'}),
+ F({id:'collab-r',name:'EGO 환수검 · 끝없는 갈망',kind:'collab',source:'R1094',key:'R',hwando:'EGO 환수검',persona:F(['끝없는 갈망','되비친 집착']),desc:'환수검 뒤 사방으로 시계 여섯이 퍼지고, 되비친 집착이 몸을 감싼다.'}),
+ F({id:'collab-f',name:'EGO 각성 · 욕망의 일식',kind:'collab',source:'R1094',key:'F',hwando:'EGO 각성',persona:F(['욕망의 일식']),desc:'각성하는 순간 느리고 무거운 일식 둘이 앞으로 굴러간다.'}),
+ F({id:'collab-celestial',name:'적·청·무라사키(라우렌의 천체 공명)',kind:'collab',source:'R1094',key:null,proc:F({chance:.1,crowdBonus:.04,max:.35,cooldown:5}),persona:F([]),lauren:F(['은빛 거성','심연 왜성','쌍성 소멸']),desc:'자기 타격에서 확률로 붉은 구와 먹빛 구가 번갈아 나가고, 둘이 다 나간 뒤엔 둘이 합쳐 꿰뚫는다. 빛은 주홍과 먹으로 물든다.'}),
  // 봉인된 칸: 이름도 효과도 아직 없다(같은 표에 채워 넣는다). 판정 코드는 이 칸을 건너뛴다.
  F({id:'sealed-1',name:'봉인된 개념',kind:'sealed',sealed:true}),
  F({id:'sealed-2',name:'봉인된 개념',kind:'sealed',sealed:true}),
