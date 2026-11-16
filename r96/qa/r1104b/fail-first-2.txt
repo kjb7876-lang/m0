@@ -1,0 +1,8 @@
+FAIL ⑤ 정면(base-0)을 봐도 왼쪽으로 걸으면 옆 시트로 앞으로 걷기(front, 앞 29·뒤 0)
+FAIL ⑤ 왼쪽(base-2)을 봐도 오른쪽으로 걸으면 옆 시트 뒤집어 앞으로 걷기(side, 앞 0·뒤 29)
+FAIL ⑦ base-4 화면 {"sy":1} → front (받은: rear)
+FAIL ⑦ base-2 화면 {"sy":1} → front (받은: side)
+FAIL ⑦ base-0 화면 {"sy":-1} → rear (받은: front)
+FAIL ⑦ base-6 화면 {"sy":-1} → rear (받은: side 뒤집기)
+FAIL ⑦ base-0 화면 {"sx":-1,"sy":0.4} → side (받은: front)
+FAIL ⑭ R620 출렁임(최대 3px)을 빼서 발 자리 높이 흔들림 2.93px < 0.5px

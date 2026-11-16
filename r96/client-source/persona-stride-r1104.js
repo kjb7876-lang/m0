@@ -10,8 +10,9 @@
 //  판정·피해·AI·저장·서사·이펙트·탄은 바꾸지 않는다(보스 몸 그림만). 끄기: localStorage['storyworld.r1104.personaStride']='0'.
 // R1104b — Dots CX-0120PW 걷기 3방향 8칸 시트(아래·위·옆, 사용자 2026-11-16 08:53Z "이거 적용함?"·08:54Z "몸통이랑 다리 자연스럽게 연결").
 //  · 시트는 qa/r1104b/build-walk-sheets.py 로 다듬은 webp(옆: 상체·다리 이음매 색 잇기·망토 그늘·틈 채우기, 아래·위: 칸마다 튀던 머리 높이 고르기).
-//  · 걷는 동안(걸음 세기 w>.5) 기본형(base) 몸 그림 한 장을 방향에 맞는 시트 칸으로 바꿔 끼운다. 방향 표: 0·1 아래, 7 아래 뒤집기, 2 옆, 6 옆 뒤집기, 3·4 위, 5 위 뒤집기.
-//  · 칸 = 지나간 거리 위상(0.65칸에 한 걸음, 8칸 = 두 걸음)이라 발이 미끄러지지 않는다. 바라보는 쪽과 반대로 움직이면 칸을 거꾸로 돌린다.
+//  · 걷는 동안(걸음 세기 w>.5) 기본형(base) 몸 그림 한 장을 방향에 맞는 시트 칸으로 바꿔 끼운다. 시트는 걷는 화면 방향으로 고른다(가로가 크면 옆, 오른쪽이면 뒤집기 / 아래로 가면 정면, 위로 가면 뒷모습). 방향을 아직 모를 때만 몸 그림 방향 표(0·1 아래, 7 아래 뒤집기, 2 옆, 6 옆 뒤집기, 3·4 위, 5 위 뒤집기).
+//  · 칸 = 지나간 거리 위상(0.65칸에 한 걸음, 옆은 디딤발이 칸마다 시트 20px 씩 뒤로 가는 것을 화면 축척으로 재어 0.70칸, 8칸 = 두 걸음)이라 발이 미끄러지지 않는다. 시트가 향한 쪽과 반대로 움직이는 경우(방향 표를 쓸 때)는 칸을 거꾸로 돌린다.
+//  · 보스 공통 R620 걸음 출렁임은 시트에서는 빼서(서 있을 때 잰 발 자리로 되돌림) 디딤발이 땅에서 뜨지 않게 한다.
 //  · R409 테두리판(r409:outline:…, 사방 같은 여백)도 원래 그림으로 알아본다(게임에서 몸 그림은 대개 이 판으로 온다).
 //  · 크기·자리: 시트 발선 가운데(ax, ground)를 원래 그림 발 자리(172, 385)에, 시트 키 424px 를 원래 키 357px 에 맞춘다.
 //  · 수묵(R1097)이 이 몸 그림을 바꿨으면 시트 칸도 R1097 inkify 로 한 번씩 구워 쓴다(굽기 전엔 코드 걸음). 각성형(awake)·시트를 못 읽었을 때는 R1104 코드 걸음 그대로.
@@ -30,7 +31,7 @@ function persona(){try{const rm=typeof room!=='undefined'?room:null;const list=r
 const CELL=512,FRAMES=8,ART={ax:172,ground:385,height:357,sheetH:424};ART.k=ART.height/ART.sheetH;
 const WALK=Object.freeze({front:Object.freeze({src:'assets/r1104b/persona-walk-front.webp',ax:256,ground:476,fwd:[0,1]}),
  rear:Object.freeze({src:'assets/r1104b/persona-walk-rear.webp',ax:256,ground:477,fwd:[0,-1]}),
- side:Object.freeze({src:'assets/r1104b/persona-walk-side.webp',ax:266,ground:476,fwd:[-1,0]})});
+ side:Object.freeze({src:'assets/r1104b/persona-walk-side.webp',ax:266,ground:476,fwd:[-1,0],step:.7})});
 const DIRS=[['front',1],['front',1],['side',1],['rear',1],['rear',1],['rear',-1],['side',-1],['front',-1]]; // [시트, 1=그대로 -1=좌우 뒤집기]
 const SS={};for(const k in WALK)SS[k]={state:'idle',raw:null,ink:null,inkState:'idle',inkHalf:null};
 const R409=/^r409:outline:[a-z]+:u:(.+):\d+,\d+,\d+,\d+:\d+:[a-z]+$/,artOf=v=>{v=String(v||'');const k=R409.exec(v);return RX.exec(k?k[1]:v);};
@@ -58,12 +59,17 @@ function pumpInk(){if(inkBusy||!inkQ.length)return;inkBusy=true;const [k,f,half]
  inkBusy=false;if(inkQ.length){try{setTimeout(pumpInk,30);}catch(_){}}}
 function prewarm(){for(const k in WALK)loadSheet(k);}
 // 시트 칸으로 바꿔 끼우기: 원래 그림 좌표(344×400) 사각형 P 위에 시트 칸을 발 자리·키 맞춰 올린다
-function swapSheet(c,q,s,ink){const [k,m]=DIRS[q.dir],S=SS[k],W=WALK[k];const set=ink?(S.inkState==='ready'?S.ink:null):(S.state==='ready'?S.raw:null);if(!set)return false;
+// 시트 고르기: 걷는 화면 방향(가로가 세로보다 크면 옆, 아래로 가면 정면, 위로 가면 뒷모습). 오른쪽이면 좌우 뒤집기. 아직 방향을 모르면 몸 그림 방향 표.
+function pick(q,s){const v=s.scr;if(v&&(v[0]||v[1])){if(Math.abs(v[0])>=Math.abs(v[1]))return ['side',v[0]>0?-1:1];return [v[1]>0?'front':'rear',v[0]>.45?-1:1];}return DIRS[q.dir];}
+function swapSheet(c,q,s,ink,e){const [k,m]=pick(q,s),S=SS[k],W=WALK[k];const set=ink?(S.inkState==='ready'?S.ink:null):(S.state==='ready'?S.raw:null);if(!set)return false;
  const P=q.P,sr=q.sr,cw=sr[2],ch=sr[3],px=(cw-344)/2,py=(ch-400)/2;
  const ux=[(P[1][0]-P[0][0])/cw,(P[1][1]-P[0][1])/cw],vy=[(P[3][0]-P[0][0])/ch,(P[3][1]-P[0][1])/ch];
- const A=(u,v)=>{const ax=ART.ax+m*(u-W.ax)*ART.k+px,ay=ART.ground+(v-W.ground)*ART.k+py;return [P[0][0]+ux[0]*ax+vy[0]*ay,P[0][1]+ux[1]*ax+vy[1]*ay];};
+ const A0=(u,v)=>{const ax=ART.ax+m*(u-W.ax)*ART.k+px,ay=ART.ground+(v-W.ground)*ART.k+py;return [P[0][0]+ux[0]*ax+vy[0]*ay,P[0][1]+ux[1]*ax+vy[1]*ay];};
+ // 보스 공통 R620 걸음 출렁임이 몸 그림 네 점을 들었다 놓는다 — 시트에는 이미 다리 디딤이 있으므로, 서 있을 때 잰 '발 자리 − 몸 위치'로 되돌려 발을 땅에 붙인다
+ let sh=[0,0];try{if(s.off0&&e&&typeof project==='function'){const g=project(e.x,e.y),f=A0(W.ax,W.ground);if(Number.isFinite(g?.x)&&Number.isFinite(g?.y)){const d=[g.x+s.off0[0]-f[0],g.y+s.off0[1]-f[1]];if(Math.hypot(d[0],d[1])<12)sh=d;}}}catch(_){}
+ const A=(u,v)=>{const p=A0(u,v);return [p[0]+sh[0],p[1]+sh[1]];};
  // 앞으로 걷는가: 시트가 향한 화면 방향(뒤집으면 좌우 반대)과 실제 움직임
- const fx=W.fwd[0]*m,fy=W.fwd[1],dot=fx*s.scr[0]+fy*s.scr[1];const f0=Math.floor(s.phase/(Math.PI/4))%FRAMES,f=dot<-.2?(FRAMES-f0)%FRAMES:f0;
+ const fx=W.fwd[0]*m,fy=W.fwd[1],dot=fx*s.scr[0]+fy*s.scr[1];const f0=Math.floor(s.phase*(STEP/(W.step||STEP))/(Math.PI/4))%FRAMES,f=dot<-.2?(FRAMES-f0)%FRAMES:f0;
  const fr=set[f];if(!fr)return false;const p=fr.pad,pts=[A(-p,-p),A(CELL+p,-p),A(CELL+p,CELL+p),A(-p,CELL+p)];if(!pts.every(okPt))return false;
  c.image=fr.canvas;c.mutable=false;c.sourcePath=fr.path;c.immutableTint=fr.canvas.__storyworldStaticSource;c.sourceRect=[0,0,fr.w,fr.h];c.imageSize=[fr.w,fr.h];c.points=pts;c.r1104b=true;c.r1104bPad=p;
  stats.sheetFrames++;stats.lastSheet=k+':'+f+(m<0?':flip':'')+(ink?':ink':'');return true;}
@@ -75,7 +81,7 @@ function track(e,t){let s=ST.get(e);if(!s){s={hist:[],w:0,phase:0,lastT:t,sdx:1,
  s.hist.push({t,x:e.x,y:e.y});while(s.hist.length>2&&t-s.hist[0].t>WIN)s.hist.shift();
  const a=s.hist[0],span=t-a.t,dx=e.x-a.x,dy=e.y-a.y,v=span>.12?Math.hypot(dx,dy)/span:0;
  const walking=v>WALK_V;s.w+=((walking?1:0)-s.w)*Math.min(1,dt*EASE);if(s.w<1e-3)s.w=0;
- if(walking){const sd=dx-dy,sv=dx+dy,sl=Math.hypot(sd,sv)||1;s.scr=[sd/sl,sv/sl];if(Math.abs(sd)>1e-4)s.sdx=sd>0?1:-1;s.phase+=v*dt/STEP*Math.PI;const half=Math.floor(s.phase/Math.PI);if(half>s.half){stats.steps+=half-s.half;}s.half=half;}
+ if(walking){const sd=dx-dy,sv=dx+dy,sl=Math.hypot(sd,sv)||1;{const X=sd,Y=sv*.5,L=Math.hypot(X,Y)||1;s.scr=[X/L,Y/L];}if(Math.abs(sd)>1e-4)s.sdx=sd>0?1:-1;s.phase+=v*dt/STEP*Math.PI;const half=Math.floor(s.phase/Math.PI);if(half>s.half){stats.steps+=half-s.half;}s.half=half;}
  return s;}
 const okPt=p=>Array.isArray(p)&&Number.isFinite(p[0])&&Number.isFinite(p[1]);
 const lerp=(a,b,k)=>[a[0]+(b[0]-a[0])*k,a[1]+(b[1]-a[1])*k];
@@ -92,16 +98,20 @@ function split(cmds,i,s){const c=cmds[i],P=c.points,sr=c.sourceRect;
  const L=leg(0,.5+OV,sn*s.sdx),R=leg(.5-OV,1,-sn*s.sdx);
  const all=[upper.points,L.points,R.points].flat();if(!all.every(okPt))return false;
  const order=sn*s.sdx>0?[R,L,upper]:[L,R,upper];cmds.splice(i,1,...order);return true;}
-function process(cmds){if(!on||!Array.isArray(cmds))return 0;const t=T(),e=persona();if(t==null||!e)return 0;prewarm();const s=track(e,t);if(!(s.w>.02))return 0;
+function process(cmds){if(!on||!Array.isArray(cmds))return 0;const t=T(),e=persona();if(t==null||!e)return 0;prewarm();const s=track(e,t);try{standFoot(cmds,e,s);}catch(err){fail(err);}if(!(s.w>.02))return 0;
  let best=-1,bh=0;for(let i=0;i<cmds.length;i++){const c=cmds[i];if(!c||c.kind!=='image'||c.r1104||c.r620Ghost)continue;const o=c.owner;if(!o||o.kind!=='enemy'||o.groundAligned===true)continue;
   const sp=String(c.sourcePath||'');if(!(BODY.test(sp)||c.r1097))continue;const P=c.points,sr=c.sourceRect;if(!Array.isArray(P)||P.length!==4||!P.every(okPt)||!Array.isArray(sr)||sr.length<4||!sr.every(Number.isFinite)||!(sr[2]>0)||!(sr[3]>0))continue;
   const h=Math.abs(P[3][1]-P[0][1]);if(h>bh){bh=h;best=i;}}
  if(best<0)return 0;
  const c=cmds[best];let q=RAWQ.get(c);if(!q){const m=artOf(c.sourcePath);if(m&&!c.r1097)q={P:c.points.map(p=>[...p]),sr:[...c.sourceRect],kind:m[1].toLowerCase(),dir:+m[2]};}
- if(q&&q.kind==='base'&&q.sr[0]===0&&q.sr[1]===0){const k=DIRS[q.dir][0],ink=!!c.r1097;if(ink)wantInk(k);
+ if(q&&q.kind==='base'&&q.sr[0]===0&&q.sr[1]===0){const k=pick(q,s)[0],ink=!!c.r1097;if(ink)for(const kk in WALK)wantInk(kk);
   const ready=ink?SS[k].inkState==='ready':SS[k].state==='ready';
-  if(ready){if(s.w>.5){try{if(swapSheet(c,q,s,ink))return 1;}catch(err){fail(err);}}else return 0;}}
+  if(ready){if(s.w>.5){try{if(swapSheet(c,q,s,ink,e))return 1;}catch(err){fail(err);}}else return 0;}}
  try{if(split(cmds,best,s)){stats.split++;return 1;}}catch(err){fail(err);}return 0;}
+// 서 있을 때(걸음 세기 .05 아래) 원래 그림 발 자리(172,385)가 몸 위치 project(e) 에서 얼마나 떨어져 있는지 잰다(천천히 따라감)
+function standFoot(cmds,e,s){if(s.w>=.05||typeof project!=='function')return;let best=null,bh=0;for(const c of cmds){const q=c&&RAWQ.get(c);if(!q||q.kind!=='base'||c.owner?.kind!=='enemy')continue;const h=Math.abs(q.P[3][1]-q.P[0][1]);if(h>bh){bh=h;best=q;}}
+ if(!best)return;const P=best.P,cw=best.sr[2],ch=best.sr[3],ax=ART.ax+(cw-344)/2,ay=ART.ground+(ch-400)/2,f=[P[0][0]+(P[1][0]-P[0][0])*ax/cw+(P[3][0]-P[0][0])*ay/ch,P[0][1]+(P[1][1]-P[0][1])*ax/cw+(P[3][1]-P[0][1])*ay/ch],g=project(e.x,e.y);
+ if(!f.every(Number.isFinite)||!Number.isFinite(g?.x)||!Number.isFinite(g?.y))return;const o=[f[0]-g.x,f[1]-g.y];s.off0=s.off0?[s.off0[0]+(o[0]-s.off0[0])*.3,s.off0[1]+(o[1]-s.off0[1])*.3]:o;}
 // 수묵 처리 전에 원래 몸 그림 사각형을 적어 둔다(수묵은 여백을 붙여 점을 바꾸므로)
 function remember(cmds){for(const c of cmds){if(!c||c.kind!=='image'||c.r1097)continue;const m=artOf(c.sourcePath);if(!m)continue;const P=c.points,sr=c.sourceRect;
  if(Array.isArray(P)&&P.length===4&&P.every(okPt)&&Array.isArray(sr)&&sr.length>=4&&sr.every(Number.isFinite))RAWQ.set(c,{P:P.map(p=>[...p]),sr:[...sr],kind:m[1].toLowerCase(),dir:+m[2]});}}

@@ -54049,8 +54049,8 @@
     },
     {
       "path": "persona-stride-r1104.js",
-      "bytes": 14464,
-      "sha256": "68b4b41f4ba15d1f56117cd068f4a312f8a21fbd1a5be726fd18f0f01ff9445e"
+      "bytes": 16887,
+      "sha256": "39125350145cf4aea165435f62887d1172e9246a0f24cb92a31d2555aed04785"
     },
     {
       "path": "pixel-readable-r325.js",
@@ -54849,7 +54849,7 @@
     }
   ],
   "fileCount": 10969,
-  "totalBytes": 1323081076,
+  "totalBytes": 1323083499,
   "webHTMLSha256": "a8e58b03ba1a5a6dcd200fcad817c48281074609d6a1c4dbc756416d2f179ea3",
   "largest": [
     {
