@@ -50,6 +50,7 @@ function run(o={}){
   addEventListener(t,f){this._l[t]=f;},removeEventListener(){},setAttribute(k,v){this[k]=v;},getAttribute(k){return this[k];},
   appendChild(c){c.parentNode=this;this.children.push(c);return c;},insertBefore(c,ref){c.parentNode=this;const i=this.children.indexOf(ref);this.children.splice(i<0?this.children.length:i,0,c);return c;},
   remove(){const p=this.parentNode;if(p){p.children.splice(p.children.indexOf(this),1);this.parentNode=null;}},
+  querySelectorAll(q){const out=[];const walk=n=>{for(const c of n.children){if(q.startsWith('.')&&String(c.className).split(' ').includes(q.slice(1)))out.push(c);walk(c);}};walk(this);return out;},
   querySelector(q){const walk=n=>{for(const c of n.children){if(q==='img'&&c.tagName==='img')return c;if(q.startsWith('.')&&String(c.className).split(' ').includes(q.slice(1)))return c;const r=walk(c);if(r)return r;}return null;};return walk(this);}};
   if(tag==='img')imgs.push(e);return e;};
  let bg=null,actor=null,root=null,panel=null,text=null;const head=mkEl('head');

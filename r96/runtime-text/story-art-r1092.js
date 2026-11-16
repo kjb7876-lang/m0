@@ -26,7 +26,7 @@ const CSS='.r1092Pin{display:none;position:relative;height:clamp(72px,16vh,132px
  +'#panel.r255-doc .r1092Pin{display:block}#panel.r255-doc.r1092-pin .storyText{max-height:calc(52vh - clamp(72px,16vh,132px))}'
  +'@media (max-height:560px){.r1092Pin{display:none!important}}';
 function css(){try{if(document.getElementById('r1092Css'))return;const st=document.createElement('style');st.id='r1092Css';st.textContent=CSS;document.head.appendChild(st);}catch(_){}}
-function clearPin(pn){try{let o;while(pn&&(o=pn.querySelector('.r1092Pin')))o.remove();pn?.classList?.remove('r1092-pin');}catch(_){}}
+function clearPin(pn){try{for(const o of Array.from(pn?.querySelectorAll?.('.r1092Pin')||[]))o?.remove?.();pn?.classList?.remove('r1092-pin');}catch(_){}}
 function pin(pn,s,src,ink){const txt=pn&&pn.querySelector('.storyText');if(!txt||!txt.parentNode)return;css();
  const box=document.createElement('div');box.className='r1092Pin';box.dataset.r1092=s.id;const im=document.createElement('img');
  let title='';try{title=(typeof regionById!=='undefined'&&regionById[s.id]?.title)||'';}catch(_){}
