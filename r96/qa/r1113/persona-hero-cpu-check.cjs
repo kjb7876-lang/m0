@@ -19,7 +19,7 @@ function world(o={}){
  C.hud={};C.setHudTextR63R2=(id,v)=>{C.hud[id]=String(v);};C.tick=function(){};C.serializeSave=()=>({player:{hero:player.hero}});C.restoreSave=async raw=>{player.hero=raw.player.hero;};
  if(o.cheat)C.__STORYWORLD_CHEAT777__={active:()=>true};
  C.window=C;vm.createContext(C);vm.runInContext(SRC,C);
- const load=()=>{for(const im of images)if(im._src&&!im._done&&im.onload){im._done=true;im.naturalWidth=/walk/.test(im._src)?4096:344;im.naturalHeight=/walk/.test(im._src)?512:400;im.onload();}};
+ const load=()=>{for(const im of images)if(im._src&&!im._done&&im.onload){if(o.noIdle&&/persona-idle/.test(im._src))continue;im._done=true;const idle=/persona-idle/.test(im._src);im.naturalWidth=/walk/.test(im._src)?4096:idle?1152:344;im.naturalHeight=/walk/.test(im._src)?512:idle?256:400;im.onload();}};
  const body=()=>({kind:'image',key:'hero:2:0',order:5,owner:{id:'hero:2',kind:'hero'},sourcePath:'r409:outline:hero:u:http://x/m0/assets/r130/lauren/directions-lauren-front.webp:181,55,150,421:20',sourceRect:[0,0,192,463],style:{filter:'saturate(.5) contrast(1.08)'},points:[[480,240],[506,240],[506,301],[480,301]]});
  const fx=()=>({kind:'image',owner:{id:'r101:aura-back:hero',kind:'effect'},sourcePath:'r106fx:glow:164.98.255:226.232.242',sourceRect:[0,0,128,128],style:{filter:'none'},points:[[0,0],[9,0],[9,9],[0,9]]});
  const skillFx=()=>({kind:'image',owner:{id:'fx:77',kind:'effect',pxfSide:'hero'},sourcePath:'assets/r946/x.webp',sourceRect:[0,0,192,192],style:{},points:[[0,0],[9,0],[9,9],[0,9]]});
@@ -40,8 +40,8 @@ const at=(c,u,v)=>{const P=c.points,W=c.sourceRect[2],H=c.sourceRect[3],a=u/W,b=
 // ④
 {const w=world({cheat:true});const a=w.api();ok(a.setForm(true)===true&&a.formActive(),'④ 라우렌이면 형상 켜짐');w.player.hero='hwando';w.step();ok(!a.formActive()&&w.player.personaHeroR1113===false,'④ 다른 영웅으로 바꾸면 꺼짐');
  const w2=world();ok(w2.api().setForm(true)===false,'④ 잠겨 있으면 못 켬');}
-// ⑤⑥⑦
-{const w=world({cheat:true});const a=w.api();a.setForm(true);w.frame();w.load();
+// ⑤⑥⑦ (대기 시트가 아직 안 읽혔을 때의 정지 그림 — R1113d 부터 대기 시트가 읽히면 ⑱)
+{const w=world({cheat:true,noIdle:true});const a=w.api();a.setForm(true);w.frame();w.load();
  for(const [d,i] of [['front',0],['left',2],['back',4],['right',6]]){w.player.direction=d;w.step();const b=bodyOf(w.frame());ok(b&&new RegExp('rc133/art/base-'+i+'\\.png').test(b.sourcePath),'⑤ '+d+' → base-'+i+' ('+(b&&b.sourcePath)+')');}
  w.player.direction='front';w.step();const b=bodyOf(w.frame()),A=a.art;const foot=at(b,A.ax,A.ground),g=w.C.project(10,10),top=at(b,A.ax,A.ground-A.height);
  ok(Math.hypot(foot[0]-g.x,foot[1]-g.y)<.5,'⑥ 발이 몸 위치에('+foot.map(v=>v.toFixed(1))+' vs '+g.x+','+g.y+')');ok(Math.abs((foot[1]-top[1])-66*a.scale)<.5,'⑥ 키 = 영웅 키×'+a.scale+' ('+(foot[1]-top[1]).toFixed(1)+')');
@@ -83,13 +83,22 @@ const at=(c,u,v)=>{const P=c.points,W=c.sourceRect[2],H=c.sourceRect[3],a=u/W,b=
   ok(o&&o.style.globalCompositeOperation==='lighter'&&o.style.globalAlpha>0&&o.style.globalAlpha<=1,'⑯ '+d+' 구슬 빛 더하기 섞기');
   if(o&&k!=='rear'){const f=+/:(\d)$/.exec(b.sourcePath)[1],O=a.orb[k][f],want=at(b,O[0],O[1]),c=[(o.points[0][0]+o.points[2][0])/2,(o.points[0][1]+o.points[2][1])/2];ok(Math.hypot(c[0]-want[0],c[1]-want[1])<1,'⑯ '+d+' 구슬 빛이 손의 구슬 자리에('+c.map(v=>v.toFixed(1))+' vs '+want.map(v=>v.toFixed(1))+')');}}
  w.player.direction='front';const seen=new Set();for(let i=0;i<30;i++){w.player.attackAnim=.3;w.step();const b=bodyOf(w.frame());seen.add(b.sourcePath);}ok(seen.size>=5,'⑯ 공격 동안 칸이 흐름('+seen.size+'칸)');
- w.player.attackAnim=0;w.step();let out=w.frame();ok(/rc133\/art\/base-0/.test(bodyOf(out).sourcePath)&&idx(out,'r1113:orb')<0&&idx(out,'r1113:aura')<0,'⑯ 공격이 끝나면 정지 그림, 빛 없음');
+ w.player.attackAnim=0;w.step();let out=w.frame();ok(/rc133\/art\/base-0|persona-idle-s\.png/.test(bodyOf(out).sourcePath)&&idx(out,'r1113:orb')<0&&idx(out,'r1113:aura')<0,'⑯ 공격이 끝나면 서 있기(정지 그림·R1113d 대기 칸), 빛 없음');
  w.player.skillAnim=.4;w.step();out=w.frame();ok(/persona-walk-front/.test(bodyOf(out).sourcePath)&&idx(out,'r1113:orb')>=0,'⑯ 스킬도 걷기 칸 + 구슬 빛');w.player.skillAnim=0;
  w.player.ultimateAnim=.5;w.step();out=w.frame();ok(/awake-0/.test(bodyOf(out).sourcePath)&&idx(out,'r1113:aura')>=0,'⑯ 궁극기는 각성형 + 오라');w.player.ultimateAnim=0;
  a.setForm(false);w.player.attackAnim=.3;w.step();out=w.frame();ok(idx(out,'r1113:orb')<0,'⑯ 형상이 아니면 빛 없음');}
 // ⑰ 영웅창 777(R1057 비밀 입력, 모바일 제목 7연타)이 발동하면 페르소나도 해금(사용자 11-16 12:08Z: EGO 까지 10명)
 {const w=world();const a=w.api();w.step();ok(!a.unlocked(),'⑰ 777 전에는 잠김');
  const w2=world({secret:true});w2.step();ok(w2.api().unlocked()&&/"on":true/.test(w2.store['storyworld.r1113.personaHero']||'')&&w2.api().inspect().stats.unlockReason==='secret-777','⑰ 영웅창 777 발동하면 해금·저장('+w2.api().inspect().stats.unlockReason+')');}
+// ⑱ 대기 6칸(Dots CX-0122PH, 사용자 11-16 21:46 KST): 서 있을 때 아래·위·옆(왼쪽은 반전) 대기 시트, 130ms 한 칸, 발·키는 정지 그림과 같게
+{const w=world({cheat:true});const a=w.api();a.setForm(true);w.frame();w.load();w.frame();w.load();const I=a.idleSheets;
+ for(const [d,k,fl] of [['front','s',false],['back','n',false],['right','side',false],['left','side',true]]){w.player.direction=d;w.step();const b=bodyOf(w.frame());
+  ok(b&&new RegExp('persona-idle-'+k+'\\.png:\\d$').test(b.sourcePath)&&((b.points[1][0]<b.points[0][0])===fl),'⑱ 서 있기 '+d+' → 대기 '+k+(fl?' 반전':'')+' ('+(b&&b.sourcePath)+')');
+  const S=I[k],foot=at(b,S.ax,S.ground),top=at(b,S.ax,S.ground-S.h),g=w.C.project(10,10);ok(Math.hypot(foot[0]-g.x,foot[1]-g.y)<.5&&Math.abs((foot[1]-top[1])-66*a.scale)<.5,'⑱ '+d+' 발·키가 정지 그림과 같음(발 '+foot.map(v=>v.toFixed(1))+', 키 '+(foot[1]-top[1]).toFixed(1)+')');}
+ w.player.direction='front';const fr=[];for(let i=0;i<40;i++){w.C.time+=.05;w.C.tick();const b=bodyOf(w.frame());fr.push(+/:(\d)$/.exec(b.sourcePath)[1]);}
+ const ch=fr.filter((v,i)=>i&&v!==fr[i-1]).length;ok(new Set(fr).size===6&&ch>=12&&ch<=17,'⑱ 2초 동안 6칸이 약 130ms 마다 넘어감('+ch+'번)');
+ w.player.ultimateAnim=.5;w.step();ok(/awake-0/.test(bodyOf(w.frame()).sourcePath),'⑱ 궁극기는 그대로 각성형');w.player.ultimateAnim=0;
+ w.player.attackAnim=.3;w.step();ok(/persona-walk-front/.test(bodyOf(w.frame()).sourcePath),'⑱ 공격은 그대로 걷기 칸');w.player.attackAnim=0;}
 // ⑪
 {const w=world({cheat:true});const a=w.api();a.setForm(true);const d=w.C.serializeSave();ok(d.player.personaHeroR1113===true,'⑪ 저장에 형상 기록');
  w.player.personaHeroR1113=false;(async()=>{await w.C.restoreSave(d);ok(w.player.personaHeroR1113===true,'⑪ 불러오면 형상 복원');

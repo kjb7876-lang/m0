@@ -1,0 +1,5 @@
+PASS ⑤ front → base-0 (r1113:assets/rc133/art/base-0.png)
+PASS ⑤ left → base-2 (r1113:assets/rc133/art/base-2.png)
+PASS ⑤ back → base-4 (r1113:assets/rc133/art/base-4.png)
+PASS ⑤ right → base-6 (r1113:assets/rc133/art/base-6.png)
+FAIL ⑱ 서 있기 front → 대기 s (r1113:assets/rc133/art/base-0.png)

@@ -10,7 +10,7 @@
  * 끄기: localStorage storyworld.r1113.personaHero = {"on":..., "off":true}. */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_PERSONA_HERO_R1113__)return;
-const REV='R1113-persona-hero-3-secret777',KEY='storyworld.r1113.personaHero',FIELD='personaHeroR1113',BASE='lauren';
+const REV='R1113-persona-hero-4-idle6',KEY='storyworld.r1113.personaHero',FIELD='personaHeroR1113',BASE='lauren';
 const PROFILE=Object.freeze({name:'페르소나',title:'페르소나 · 순수악의',role:'HIDDEN · 9번째 영웅',color:'#cc3428',
  passive:'사몽 결전에서 쓰러뜨린 거울. 라우렌의 별 기술을 언주빛으로 되비춥니다.',special:'라우렌과 같은 기술·키',
  portrait:'assets/rc133/art/awake-0.png',tags:['히든','언주','라우렌 계보']});
@@ -21,6 +21,12 @@ const CELL=512,FRAMES=8;
 const WALK=Object.freeze({front:Object.freeze({src:'assets/r1104b/persona-walk-front.webp',ax:256,ground:476,h:424,step:.65}),
  rear:Object.freeze({src:'assets/r1104b/persona-walk-rear.webp',ax:256,ground:477,h:424,step:.65}),
  side:Object.freeze({src:'assets/r1104b/persona-walk-side.webp',ax:266,ground:476,h:424,step:.7})});
+// 대기 6칸(Dots CX-0122PH r1, 사용자 11-16 21:46 KST "대기모션좋네, 클로드 개선적용"): 칸 192×256, 발 (96,226), 몸 키 157, 130ms/칸. 옆은 오른쪽 보기 → 왼쪽은 반전.
+// 걷기(512×512)와 따로 읽는다. 시트가 아직 안 읽혔으면 rc133 정지 그림.
+const IDLE=Object.freeze({s:Object.freeze({src:'assets/r1113d/persona-idle-s.png',ax:96,ground:226,h:157,n:6,cell:[192,256]}),
+ n:Object.freeze({src:'assets/r1113d/persona-idle-n.png',ax:96,ground:226,h:157,n:6,cell:[192,256]}),
+ side:Object.freeze({src:'assets/r1113d/persona-idle-side.png',ax:96,ground:226,h:157,n:6,cell:[192,256]})});
+const IDLE_MS=130,IDLE_DIR={front:['s',1],back:['n',1],right:['side',1],left:['side',-1]};
 const SCALE=1.08; // 영웅 키(actorHeight) 대비 페르소나 몸 키 — 망토·두건 때문에 조금 크게
 const stats={swaps:0,walkSwaps:0,tints:0,unlocks:0,cards:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
@@ -47,13 +53,13 @@ const hasDom=()=>G(()=>typeof document!=='undefined'&&!!document&&typeof documen
 const canvas=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c;};
 const abs=u=>G(()=>new URL(u,document.baseURI||window.location?.href).href,u);
 const IM=new Map(); // path → {state, frames:[{canvas,w,h,path}]}
-function load(path,cells){let r=IM.get(path);if(r)return r;r={state:'wait',frames:null};IM.set(path,r);if(!hasDom()){r.state='failed';return r;}
+function load(path,cells,cell){let r=IM.get(path);if(r)return r;r={state:'wait',frames:null};IM.set(path,r);if(!hasDom()){r.state='failed';return r;}
  try{const img=new Image();img.crossOrigin='anonymous';img.decoding='async';
-  img.onload=()=>{try{const W=img.naturalWidth||img.width,H=img.naturalHeight||img.height,n=cells||1,cw=cells?CELL:W,ch=cells?CELL:H,out=[];
+  img.onload=()=>{try{const W=img.naturalWidth||img.width,H=img.naturalHeight||img.height,n=cells||1,cw=cells?(cell?.[0]||CELL):W,ch=cells?(cell?.[1]||CELL):H,out=[];
     for(let f=0;f<n;f++){const cv=canvas(cw,ch);cv.getContext('2d').drawImage(img,f*cw,0,cw,ch,0,0,cw,ch);const id='r1113:'+path+(cells?':'+f:'');cv.__storyworldStaticSource={path:id};out.push({canvas:cv,w:cw,h:ch,path:id});}
     r.frames=out;r.state='ready';}catch(e){r.state='failed';fail(e);}};
   img.onerror=()=>{r.state='failed';};img.src=abs(path);}catch(e){r.state='failed';fail(e);}return r;}
-function prewarm(){for(const i of [0,2,4,6]){load(ART.base(i));load(ART.awake(i));}for(const k in WALK)load(WALK[k].src,FRAMES);}
+function prewarm(){for(const i of [0,2,4,6]){load(ART.base(i));load(ART.awake(i));}for(const k in WALK)load(WALK[k].src,FRAMES);for(const k in IDLE)load(IDLE[k].src,IDLE[k].n,IDLE[k].cell);}
 // ---- 걸음(지나간 거리) ----
 const walk={x:null,y:null,t:null,phase:0,w:0,scr:[0,1],hist:[]};
 function track(p,t){if(walk.t==null||t<walk.t||t-walk.t>1){walk.hist.length=0;walk.w=0;}
@@ -92,6 +98,7 @@ function swapBody(cmds){const i=heroBody(cmds);if(i<0)return null;const c=cmds[i
  const dir=String(p.poseDirections5?.[ult?'ultimate':p.skillAnim>0?'skill':p.attackAnim>0?'attack':'']||p.direction||'front');
  if(act){const [k,m]=SIDE[dir]||SIDE.front,W=WALK[k],r=IM.get(W.src);if(r?.state==='ready'){const f=Math.floor(t*ACT_FPS)%FRAMES;if(place(c,r.frames[f],W,m,foot,H)){stats.actSwaps=(stats.actSwaps||0)+1;stats.last='act:'+k+':'+f+(m<0?':flip':'');
    return {i,c,mode:'act',k,f,m,W,foot,H,t,skill:p.skillAnim>0};}}}
+ if(!ult){const [k,m]=IDLE_DIR[dir]||IDLE_DIR.front,S=IDLE[k],r=IM.get(S.src);if(r?.state==='ready'&&r.frames?.length){const f=Math.floor(t*1000/IDLE_MS)%r.frames.length;if(place(c,r.frames[f],S,m,foot,H)){stats.idleSwaps=(stats.idleSwaps||0)+1;stats.last='idle:'+k+':'+f+(m<0?':flip':'');return {i,c,mode:'idle',foot,H,t};}}}
  const idx=DIRI[dir]??0,path=(ult?ART.awake:ART.base)(idx),r=IM.get(path);if(r?.state!=='ready')return null;
  if(place(c,r.frames[0],{ax:ART.ax,ground:ART.ground,h:ART.height},1,foot,H)){stats.swaps++;stats.last=path;return {i,c,mode:ult?'ult':'still',foot,H,t};}return null;}
 function addGlow(cmds,sw){if(!sw||(sw.mode!=='act'&&sw.mode!=='ult')||!glows())return 0;const body=sw.c,t=sw.t,pulse=.5+.5*Math.sin(t*17);let n=0;
@@ -169,7 +176,7 @@ function ui(){if(!hasDoc())return;const t=Date.now();if(t<uiAt)return;uiAt=t+200
 function install(){wrapSave();wrapTick();wrapInst();wrapHud();if(hasDoc()){try{document.addEventListener('click',onClick,true);}catch(e){fail(e);}}
  try{setInterval(()=>{try{wrapSave();wrapTick();wrapInst();wrapHud();watch();ui();}catch(e){fail(e);}},250);}catch(e){fail(e);}}
 install();
-window.__STORYWORLD_PERSONA_HERO_R1113__=Object.freeze({revision:REV,profile:PROFILE,field:FIELD,base:BASE,tint:TINT,art:ART,walkSheets:WALK,scale:SCALE,orb:ORB,
+window.__STORYWORLD_PERSONA_HERO_R1113__=Object.freeze({revision:REV,profile:PROFILE,field:FIELD,base:BASE,tint:TINT,art:ART,walkSheets:WALK,idleSheets:IDLE,scale:SCALE,orb:ORB,
  unlocked,unlock,formActive,setForm,process,watch,refresh:()=>{try{if(hasDoc()){css();inject();}}catch(e){fail(e);}},
  lock(){saved={on:false,off:false};persist();},set(v){saved.off=v===false||v==='off';persist();return !saved.off;},
  images:()=>Object.fromEntries([...IM].map(([k,v])=>[k,v.state])),

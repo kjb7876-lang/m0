@@ -10198,7 +10198,10 @@
     "assets/r1111/gunner/idle-n6.webp",
     "cult-six-r1114.js",
     "hero-sway-r1108b.js",
-    "persona-hero-r1113.js"
+    "persona-hero-r1113.js",
+    "assets/r1113d/persona-idle-s.png",
+    "assets/r1113d/persona-idle-n.png",
+    "assets/r1113d/persona-idle-side.png"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11273,5 +11276,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "519387ae96146c15ef507b9082ac91e5664631c432ccf7efbe083d24b0500f2c"
+  "runtimeManifestSHA256": "82a61623a927e51a41a00b33811dccb78a8707b55a59aa3c615d863b0c06a645"
 }

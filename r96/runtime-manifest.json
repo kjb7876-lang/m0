@@ -10403,6 +10403,21 @@
       "sha256": "a19b03efd2e05f9de75ffa7455fde3c26ed7dda775247d7f49ad2e051e4c45ed"
     },
     {
+      "path": "assets/r1113d/persona-idle-n.png",
+      "bytes": 93551,
+      "sha256": "b412a04b5d2d02b139a18e4c3085c36f2bc2a5c725ca272aa7c1ce74995e2b4c"
+    },
+    {
+      "path": "assets/r1113d/persona-idle-s.png",
+      "bytes": 113287,
+      "sha256": "7be7a9a5cdd7ce6fe3bb8104f3233f048f6a5efbfde4166ae66e35a4d615b223"
+    },
+    {
+      "path": "assets/r1113d/persona-idle-side.png",
+      "bytes": 90560,
+      "sha256": "7aad9787c526d30b456ac025619d05ab0e804b1ed2373959e1e1023f01d33227"
+    },
+    {
       "path": "assets/r116/mobs/M001-hit.png",
       "bytes": 141513,
       "sha256": "35cffa3fe6d6c22cdb75e06e1cca55a673f06c10afa28087d749082c40c77b71"
@@ -54129,8 +54144,8 @@
     },
     {
       "path": "persona-hero-r1113.js",
-      "bytes": 22886,
-      "sha256": "c844906770da1a2e7ed4197e207bb5941c36deae837adba8d42f7def3fbfad74"
+      "bytes": 24048,
+      "sha256": "969b284b8739a6b5bd4fec637e7f86bbed4130cd119ca9c30fd913c0f3415d11"
     },
     {
       "path": "persona-ink-r1097.js",
@@ -54943,8 +54958,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10988,
-  "totalBytes": 1324355350,
+  "fileCount": 10991,
+  "totalBytes": 1324653910,
   "webHTMLSha256": "e547843768fb1c494a7fd9217955607cc0a27d433cbc7e9b60c47de18ac6827f",
   "largest": [
     {
