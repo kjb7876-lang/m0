@@ -29,29 +29,30 @@ const near=(a,b,e=1e-6)=>Math.abs(a-b)<e;
 {const {win}=load({on:false});ok(win.__STORYWORLD_NEON_LAUREN_R437__.attackSheet('lauren','e').body===205,'on 끄면 예전 body');}
 // ② 서하 대각 걷기
 const cmd=(p,frame,mir,x0=400,y0=200,k=.25)=>{const w=192*k*(mir?-1:1);return {kind:'image',owner:{kind:'hero'},r121Walk:true,sourcePath:p,image:{tag:'OLD'},sourceRect:[frame*192,0,192,256],points:[[x0,y0],[x0+w,y0],[x0+w,y0+256*k],[x0,y0+256*k]]};};
-const swap=(o,c)=>o.api.test.swapSeoha(c);
-for(const [d,fx] of [['se',99.1],['ne',84.7]])for(const mir of [false,true])for(const fr of [0,7]){const o=load(null),c=cmd(`assets/r130/seoha/walk-${d}.webp`,fr,mir),k=.25,f=mir?-1:1,before=400+f*fx*k;
+const ON={seoha:true},swap=(o,c)=>o.api.test.swapSeoha(c);/* R1109: 서하 옆 걷기 대체는 기본 꺼짐 — 켠 상태({seoha:true})로 동작 검사 */
+for(const [d,fx] of [['se',99.1],['ne',84.7]])for(const mir of [false,true])for(const fr of [0,7]){const o=load(ON),c=cmd(`assets/r130/seoha/walk-${d}.webp`,fr,mir),k=.25,f=mir?-1:1,before=400+f*fx*k;
  ok(swap(o,c)===true&&c.sourcePath==='assets/r130/seoha/walk-e.webp'&&c.image.tag==='NEW','서하 walk-'+d+(mir?'(반전)':'')+' 칸'+fr+' → walk-e');
  ok(c.sourceRect[0]===fr*192&&c.sourceRect[2]===192&&c.sourceRect[3]===256,'같은 칸 번호',c.sourceRect);
  const P=c.points,after=P[0][0]+(P[1][0]-P[0][0])*101.7/192;ok(near(after,before,1e-6)&&near(P[3][1]-P[0][1],256*k)&&near(Math.abs(P[1][0]-P[0][0]),192*k),'발 가운데 그대로·크기 그대로',{before,after});
  ok((P[1][0]<P[0][0])===mir,'반전 유지');}
 // R119 실제 경로: 칸 그림 상자만 그림(예 [1009,47,87,184] = 5번 칸) → 칸 전체로 넓혀 같은 배율·발 가운데 그대로
-for(const mir of [false,true]){const o=load(null),k=.24,sr=[5*192+49,47,87,184],x0=300,y0=150,f=mir?-1:1,w=sr[2]*k*f,h=sr[3]*k;
+for(const mir of [false,true]){const o=load(ON),k=.24,sr=[5*192+49,47,87,184],x0=300,y0=150,f=mir?-1:1,w=sr[2]*k*f,h=sr[3]*k;
  const c={kind:'image',owner:{kind:'hero'},sourcePath:'http://127.0.0.1:4410/m0/assets/r130/seoha/walk-se.webp',image:{},sourceRect:sr.slice(),points:[[x0,y0],[x0+w,y0],[x0+w,y0+h],[x0,y0+h]]};
  const X=v=>x0+f*(v-(sr[0]-5*192))*k,Y=v=>y0+(v-sr[1])*k,before=X(99.1);
  ok(swap(o,c)===true&&JSON.stringify(c.sourceRect)==='[960,0,192,256]','상자 그림(전체 주소)'+(mir?'(반전)':'')+' → 5번 칸 전체',c.sourceRect);
  const P=c.points,after=P[0][0]+(P[1][0]-P[0][0])*101.7/192;ok(near(after,before,1e-6)&&near(P[0][1],Y(0))&&near(P[3][1],Y(256))&&near(Math.abs(P[1][0]-P[0][0]),192*k),'상자 배율 그대로(키 같음)·발 가운데 그대로',{before,after,top:P[0][1],want:Y(0)});
  ok((P[1][0]<P[0][0])===mir,'상자 경로도 반전 유지');}
-{const o=load(null);for(const p of ['assets/r130/seoha/walk-s.webp','assets/r130/seoha/walk-e.webp','assets/r130/seoha/walk-n.webp','assets/r130/seoha/idle-se.webp','assets/r130/neon/walk-se.webp','assets/r143/attack/seoha/attack-se.webp']){const c=cmd(p,2,false),j=JSON.stringify(c);ok(swap(o,c)===false&&JSON.stringify(c)===j,'그대로: '+p);}}
-{const o=load(null,{noImage:true}),c=cmd('assets/r130/seoha/walk-se.webp',1,false),j=JSON.stringify(c);ok(swap(o,c)===false&&JSON.stringify(c)===j&&o.api.inspect().seohaWaiting===1,'walk-e 그림 준비 전이면 옛 그림 그대로(빈 화면 없음)');}
-{const o=load(null),c=cmd('assets/r130/seoha/walk-se.webp',1,false);c.points[1][0]=NaN;const j=JSON.stringify(c);ok(swap(o,c)===false&&JSON.stringify(c)===j,'NaN 좌표는 손대지 않음');}
+{const o=load(ON);for(const p of ['assets/r130/seoha/walk-s.webp','assets/r130/seoha/walk-e.webp','assets/r130/seoha/walk-n.webp','assets/r130/seoha/idle-se.webp','assets/r130/neon/walk-se.webp','assets/r143/attack/seoha/attack-se.webp']){const c=cmd(p,2,false),j=JSON.stringify(c);ok(swap(o,c)===false&&JSON.stringify(c)===j,'그대로: '+p);}}
+{const o=load(ON,{noImage:true}),c=cmd('assets/r130/seoha/walk-se.webp',1,false),j=JSON.stringify(c);ok(swap(o,c)===false&&JSON.stringify(c)===j&&o.api.inspect().seohaWaiting===1,'walk-e 그림 준비 전이면 옛 그림 그대로(빈 화면 없음)');}
+{const o=load(ON),c=cmd('assets/r130/seoha/walk-se.webp',1,false);c.points[1][0]=NaN;const j=JSON.stringify(c);ok(swap(o,c)===false&&JSON.stringify(c)===j,'NaN 좌표는 손대지 않음');}
 // drawHero 감싸기: 서하일 때만, 끄면 안 함
 {// 감싸기 실제 동작: base 를 명령을 넣는 함수로 둔 채 불러오기
  const mk=(hero,pref)=>{const win={};const c=cmd('assets/r130/seoha/walk-se.webp',3,true);const sb={window:win,localStorage:{getItem:()=>pref?JSON.stringify(pref):null,setItem(){}},Math,Number,JSON,Object,Array,Set,Map,WeakMap,String,isFinite,console,Date,Promise,setInterval:()=>0,
    readyImage:q=>({image:{naturalWidth:1536,naturalHeight:256,src:q,tag:'NEW'}}),addImage(){},player:{hero},ctx:{commands:[{kind:'image',owner:{kind:'hero'},sourcePath:'assets/r130/seoha/walk-ne.webp',sourceRect:[0,0,192,256],points:[[0,0],[1,0],[1,1],[0,1]]}]}};
   sb.drawHero=function(){sb.ctx.commands.push(c);return 'R';};win.addEventListener=(t,f)=>{if(t==='load')win.__load=f;};vm.createContext(sb);vm.runInContext(src,sb);win.__load();const r=sb.drawHero();return {c,r,old:sb.ctx.commands[0]};};
- let x=mk('seoha',null);ok(x.r==='R'&&x.c.sourcePath==='assets/r130/seoha/walk-e.webp','감싼 drawHero: 서하 걷기 그림 바뀜, 돌려준 값 그대로');
+ let x=mk('seoha',ON);ok(x.r==='R'&&x.c.sourcePath==='assets/r130/seoha/walk-e.webp','감싼 drawHero: 서하 걷기 그림 바뀜, 돌려준 값 그대로');
  ok(x.old.sourcePath==='assets/r130/seoha/walk-ne.webp','감싸기 전에 있던 명령은 손대지 않음');
- for(const [h,p] of [['neon',null],['seoha',{seoha:false}],['seoha',{on:false}]]){x=mk(h,p);ok(x.c.sourcePath==='assets/r130/seoha/walk-se.webp','그대로: '+h+' '+JSON.stringify(p));}}
+ for(const [h,p] of [['neon',ON],['seoha',null],['seoha',{seoha:false}],['seoha',{on:false}]]){x=mk(h,p);ok(x.c.sourcePath==='assets/r130/seoha/walk-se.webp','그대로: '+h+' '+JSON.stringify(p));}}
 {const o=load(null);const s=JSON.stringify(o.api.inspect());ok(/presentationOnly":true/.test(s)&&/gameplayChanged":false/.test(s),'판정·세이브 안 바꿈 표시');}
+ok(load(null).api.inspect().prefs.seoha===false,'R1109: 서하 대각→옆 걷기 대체는 기본 꺼짐(걸음이 없어 종이처럼 흔들림)');
 console.log(JSON.stringify({passed:n}));
