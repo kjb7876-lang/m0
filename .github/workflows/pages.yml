@@ -754,6 +754,8 @@ jobs:
         run: node r96/qa/r1100/r1100-cpu-check.cjs
       - name: R1105 EGO attack motion (no skipped strike frames, swing blend, direction hold, clone redraw) CPU check
         run: node r96/qa/r1105/r1105-cpu-check.cjs
+      - name: R1109 co-op relay build match (old R62 Render relay auto-fallback, default relay address) CPU check
+        run: node r96/qa/r1109/r1109-cpu-check.cjs
       - name: R1092 story panel scene art (vertical-version scene paintings, ink-wash aware) CPU check
         run: node r96/qa/r1092/r1092-cpu-check.cjs
       - name: R1040 boss pattern frame fx CPU check
