@@ -264,7 +264,10 @@
  const profiles=()=>(typeof StoryWorldProfilesR74!=='undefined'?StoryWorldProfilesR74:window.StoryWorldProfilesR74)?.profiles||{};
  const region=id=>typeof regionById!=='undefined'?regionById[id]:null;
  const awakening=id=>(region(id)?.records||[]).some(v=>v.firstPost&&v.awakenPre);
- function eligible(id,l){if(!prefs.on||l!=='STORY'||window.__STORYWORLD_R81_EGO_BUILD__||coop()!=='off')return false;if(!id||SAFE.has(id)||NATIVE.has(id)||id==='ep1a08')return false;
+ // R1098b(사용자 2026-11-16 07:55Z "사몽세계 맵은 … 모든맵이 구조랑 길이 엉망진창 (사몽에피소드는 잘됨)"): DREAM 층은 R78 이 모든 지역에 같은 예전 V4 틀
+ //  (바닥 3,684칸, 회전·뒤집기만 다름)을 줬다 → DREAM 층도 그 지역의 STORY 서사 지도를 쓴다. cult04(페르소나 결전장)·NATIVE 는 그대로. 끄기: localStorage storyworld.r1098b.dreamMaps='0'.
+ const dreamMaps=(()=>{try{return localStorage.getItem('storyworld.r1098b.dreamMaps')!=='0';}catch(_){return true;}})();
+ function eligible(id,l){if(!prefs.on||!(l==='STORY'||l==='DREAM'&&dreamMaps)||window.__STORYWORLD_R81_EGO_BUILD__||coop()!=='off')return false;if(!id||SAFE.has(id)||NATIVE.has(id)||id==='ep1a08')return false;
   const d=region(id);return!!d&&!d.safe&&!!d.theme&&!!profiles()[id]&&!awakening(id);}
  const cache=new Map(),stats={built:0,used:0,fallback:0,rooms:0};let EX0=null;
  function layoutFor(id){if(cache.has(id))return cache.get(id);const base=EX0?.layout?.(id,'STORY');
