@@ -10169,7 +10169,12 @@
     "assets/r1065/mobs/md-75-memory-carrier-spider-death.webp",
     "assets/r1065/mobs/md-85-sobok-death.webp",
     "assets/r1065/mobs/ra-01-black-rose-blindfold-aim.webp",
-    "assets/r1065/mobs/ra-03-cult-mech-legs-aim.webp"
+    "assets/r1065/mobs/ra-03-cult-mech-legs-aim.webp",
+    "assets/r1111/mobs/md-05-disinfection-lamp-fallen-angel-death.webp",
+    "assets/r1111/mobs/md-27-steel-jaw-hound-death.webp",
+    "assets/r1111/mobs/md-29-polar-cyborg-hound-death.webp",
+    "assets/r1111/mobs/md-44-resonance-slave-death.webp",
+    "assets/r1111/mobs/md-72-ash-moth-death.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11244,5 +11249,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "f0f5cf84c1a7ffd459998546efb68165570872a1d336986efe5ddfbabf726330"
+  "runtimeManifestSHA256": "f4f6493e186234fb266408310f78b5d2291ee36ddab7f473dd11ddea9b154313"
 }
