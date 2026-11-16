@@ -53223,6 +53223,11 @@
       "sha256": "244a778f548c5d3d65a3291fa69b63f9fbda83a747a12adbc2563a76e3ab70de"
     },
     {
+      "path": "hero-row-r1106.js",
+      "bytes": 4911,
+      "sha256": "463cdb8526eae196c5f70362e7bb5f26c52b1aaa8df7c32a19fa701112b36a00"
+    },
+    {
       "path": "hero-select-r263.js",
       "bytes": 14228,
       "sha256": "936ae3da9316707c082d729d41d1715c399cefc62c0ea2c43710280b6ecded80"
@@ -53389,8 +53394,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6580550,
-      "sha256": "f1f0a76476636412618ad4448b610d4c8f41416b4e309a9db80994c3c8b4ce87"
+      "bytes": 6580644,
+      "sha256": "265a03c99dd59916e1d606eae72f077eb6846adb49877bee250b8f6a7f2a1c75"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -53926,6 +53931,11 @@
       "path": "persona-ink-r1097.js",
       "bytes": 21842,
       "sha256": "d2eacfd27ecaee75d810d47d9b5c30e77b76450c6bb9defcd73e0a12fc2fbac4"
+    },
+    {
+      "path": "persona-stride-r1104.js",
+      "bytes": 6888,
+      "sha256": "986d034acb4952d26fc84332aa597e59fa5778d002a9cd6a209c7d076ae1fe6b"
     },
     {
       "path": "pixel-readable-r325.js",
@@ -54718,9 +54728,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10943,
-  "totalBytes": 1321600062,
-  "webHTMLSha256": "f1f0a76476636412618ad4448b610d4c8f41416b4e309a9db80994c3c8b4ce87",
+  "fileCount": 10945,
+  "totalBytes": 1321611955,
+  "webHTMLSha256": "265a03c99dd59916e1d606eae72f077eb6846adb49877bee250b8f6a7f2a1c75",
   "largest": [
     {
       "path": "index.html",

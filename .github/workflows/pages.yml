@@ -604,6 +604,8 @@ jobs:
         run: node r96/qa/r1086/r1086-cpu-check.cjs
       - name: R1097 persona boss ink painting (runtime ink-wash conversion of the boss body art, yeonji red only, cached, follows the map ink wash, settings toggle) CPU check
         run: node r96/qa/r1097/r1097-cpu-check.cjs
+      - name: R1104 persona boss temporary code stride (upper body + crossing legs, distance-phased steps, after R1097 ink) CPU check
+        run: node r96/qa/r1104/persona-stride-cpu-check.cjs
       - name: R1090 character ink tint (hero and mob body images only, follows the map ink wash, settings toggle, effects and telegraphs untouched) CPU check
         run: node r96/qa/r1090/r1090-cpu-check.cjs
       - name: R1095 effect ink palette (skill effects recoloured to rouge-vermilion, ink and white through one shared function, follows the map ink wash, telegraphs and enemy signals untouched) CPU check
@@ -730,6 +732,8 @@ jobs:
         run: node r96/qa/r1057/r1057-cpu-check.cjs
       - name: R1057b hero select title 7-tap mobile alternative CPU check
         run: node r96/qa/r1057/r1057b-tap-cpu-check.cjs
+      - name: R1106 phone hero select row above stage CPU check
+        run: node r96/qa/r1106/r1106-cpu-check.cjs
       - name: R1059 old bulmyeongwi art redirected to new art CPU check
         run: node r96/qa/r1059/r1059-cpu-check.cjs
       - name: R1060 bulmyeongwi zone clues gate boss door CPU check
