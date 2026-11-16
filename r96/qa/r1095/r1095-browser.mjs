@@ -78,13 +78,13 @@ for(const z of (process.env.SW_ZONES||'dist02').split(',')){
  const q=await ctx2.newPage();q.on('pageerror',e=>errs.push(String(e).slice(0,200)));await q.goto(process.env.SW_URL||'http://127.0.0.1:4410/m0/');await q.locator('#campaignNew54').click({timeout:180000});await q.locator('#slotConfirmR73').click();
  await q.waitForFunction(()=>started&&!loading,null,{timeout:240000});await q.evaluate(()=>{for(let i=0;i<160&&storyScene;i++)advanceScene();if(modal)closePanel(true);});
  for(const h of (process.env.SW_PLAIN||'neon').split(',')){
-  await q.evaluate(h=>window.__STORYWORLD_SURVIVAL_R600__.start(h),h);await q.waitForTimeout(3000);await q.waitForFunction(()=>!loading,null,{timeout:150000});await q.evaluate(()=>{for(let i=0;i<160&&storyScene;i++)advanceScene();if(modal)closePanel(true);});
-  let seen=0,tint=0;const st=await q.evaluate(()=>window.__STORYWORLD_INK_FX_R1095__.inspect());
+  /* 무한 생존 시작은 느린 헤드리스에서 가끔 false 로 끝난다(영웅이 안 바뀜) → 세 번까지 다시 */let sw=false;for(let i=0;i<3&&!sw;i++){const r=await q.evaluate(h=>window.__STORYWORLD_SURVIVAL_R600__.start(h),h);await q.waitForTimeout(3000);sw=await q.waitForFunction(h=>!loading&&player.hero===h,h,{timeout:60000}).then(()=>true,()=>false);if(!sw)console.log('retry start',h,r);}ok(h+' (보통 영웅): hero switched',sw,{});if(!sw)continue;await q.evaluate(()=>{for(let i=0;i<160&&storyScene;i++)advanceScene();if(modal)closePanel(true);});await q.waitForFunction(()=>window.__STORYWORLD_INK_FX_R1095__.inspect().hwando===false,null,{timeout:30000});
+  let seen=0,tint=0;const why={};const st=await q.evaluate(()=>window.__STORYWORLD_INK_FX_R1095__.inspect());
   for(let t=0;t<8;t++){for(const k of ['a','s','d','q','f']){await q.keyboard.down(k);await q.waitForTimeout(140);await q.keyboard.up(k);}
-   const r=await q.evaluate(async()=>{const three=window.__STORYWORLD_PHASE1__.controller.state.three,base=three.render;let refs=null;three.render=function(f){if(!refs&&f?.commands?.length)refs=f.commands.slice();return base.apply(this,arguments);};for(let i=0;i<80&&!refs;i++)await new Promise(r=>setTimeout(r,100));three.render=base;let fx=0,t=0;for(const c of refs||[]){if(c.owner?.kind==='effect'&&c.kind==='image'&&!c.owner.r329Shadow)fx++;if(c.r1095)t++;}return {fx,t};});
-   seen=Math.max(seen,r.fx);tint+=r.t;if(seen>=12&&t>=3)break;}
+   const r=await q.evaluate(async()=>{const three=window.__STORYWORLD_PHASE1__.controller.state.three,base=three.render;let refs=null;three.render=function(f){if(!refs&&f?.commands?.length)refs=f.commands.slice();return base.apply(this,arguments);};for(let i=0;i<80&&!refs;i++)await new Promise(r=>setTimeout(r,100));three.render=base;let fx=0,t=0;const w={};for(const c of refs||[]){if(c.owner?.kind==='effect'&&c.kind==='image'&&!c.owner.r329Shadow)fx++;if(c.r1095){t++;const k=(c.sourcePath||c.kind)+'|'+(c.owner?.kind||'')+'|'+(c.owner?.id||'');w[k]=(w[k]||0)+1;}}return {fx,t,w,hero:player.hero};});
+   seen=Math.max(seen,r.fx);tint+=r.t;Object.assign(why,r.w,{hero:r.hero});if(seen>=12&&t>=3)break;}
   ok(h+' (보통 영웅): module is live but the EGO scope is off',st.active===true&&st.ego===false,{active:st.active,ego:st.ego});
-  ok(h+' (보통 영웅): effects are on screen and none is recoloured',seen>=8&&tint===0,{seen,tint});
+  ok(h+' (보통 영웅): effects are on screen and none is recoloured',seen>=8&&tint===0,{seen,tint,why});
   if(process.env.SW_SHOT)await q.screenshot({path:`${out}/${h}-plain.png`});}
  await ctx2.close();}
 const fin=await I();ok('no module errors',fin.errors===0,fin);ok('no page errors',errs.length===0,errs.slice(0,3));
