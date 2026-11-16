@@ -600,6 +600,8 @@ jobs:
         run: node r96/qa/r1085/r1085-cpu-check.cjs
       - name: R1086 hanji panels (paper panels with ink text over the R1085 ink UI, HUD stays dark, contrast fixer, settings toggle, nothing hidden) CPU check
         run: node r96/qa/r1086/r1086-cpu-check.cjs
+      - name: R1097 persona boss ink painting (runtime ink-wash conversion of the boss body art, yeonji red only, cached, follows the map ink wash, settings toggle) CPU check
+        run: node r96/qa/r1097/r1097-cpu-check.cjs
       - name: R1090 character ink tint (hero and mob body images only, follows the map ink wash, settings toggle, effects and telegraphs untouched) CPU check
         run: node r96/qa/r1090/r1090-cpu-check.cjs
       - name: R1022 auto-move toggle CPU check
