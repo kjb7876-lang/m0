@@ -59,8 +59,16 @@ function world(stored,opt={}){
  if(opt.noInk!==true)w.__STORYWORLD_INK_WASH_R1055__={inspect:()=>({k:ink.k,prefs:{mode:ink.mode}})};
  if(opt.perfStep!==undefined)w.__STORYWORLD_PERF7_R1043__={step:()=>opt.perfStep};
  if(opt.mobile)w.__STORYWORLD_MOBILE_TIER_R1023__={pcGrade:()=>false};
- w.window=w;w.globalThis=w;const ctx=vm.createContext(w);let err=null;try{vm.runInContext(src,ctx,{filename:NAME});}catch(e){err=e;}
- return {w,ctx,docEl,panel,store,err,ink,calls,inst,Renderer,images,canvases,api:w.__STORYWORLD_PERSONA_INK_R1097__,flush(){for(let i=0;i<400&&timers.length;i++)timers.shift()();},tick(){ivals.forEach(f=>f());}};}
+ w.window=w;w.globalThis=w;
+ // R409 흉내: 살아 있는 몹 몸 그림(owner.r409 가 아니고 mutable 아님)을 '같은 그림 + 사방 12 여백' 테두리판으로 바꾼다(원래 R409 와 같은 열쇠·좌표 넓히기)
+ const r409={outlined:0,persona:0};const r409Wrap=fn=>{const wr=function(frame){try{for(const c of (frame&&frame.commands)||[]){if(!c||c.kind!=='image'||c.mutable||!c.owner||c.owner.r409||c.owner.groundAligned===true||c.owner.kind!=='enemy'||c.spatialRole!=='body')continue;
+   const [sx,sy,sw,sh]=c.sourceRect,src=String(c.sourcePath),url=/^https?:/.test(src)||/^r1097:/.test(src)?src:'http://game.test/m0/'+src,cv={width:sw+24,height:sh+24,tagName:'CANVAS'};
+   const [a,b,,d]=c.points,ux=(b[0]-a[0])/sw,uy=(b[1]-a[1])/sw,vx=(d[0]-a[0])/sh,vy=(d[1]-a[1])/sh,P=(q,t)=>[a[0]+ux*q+vx*t,a[1]+uy*q+vy*t];
+   c.image=cv;c.sourcePath='r409:outline:enemy:u:'+url+':'+sx+','+sy+','+sw+','+sh+':11:enemy';c.sourceRect=[0,0,sw+24,sh+24];c.imageSize=[sw+24,sh+24];c.points=[P(-12,-12),P(sw+12,-12),P(sw+12,sh+12),P(-12,sh+12)];c.r409Outlined='enemy';r409.outlined++;if(/rc133|r1097/.test(url))r409.persona++;}}catch(_){}return fn.apply(this,arguments);};for(const k of Object.keys(fn))try{wr[k]=fn[k];}catch(_){}wr.__r409=true;return wr;};
+ if(opt.r409==='inner'){inst.render=r409Wrap(inst.render);w.__STORYWORLD_COMBAT_READ_R409__={revision:'fake'};}
+ const ctx=vm.createContext(w);let err=null;try{vm.runInContext(src,ctx,{filename:NAME});}catch(e){err=e;}
+ if(opt.r409==='outer'){inst.render=r409Wrap(inst.render);w.__STORYWORLD_COMBAT_READ_R409__={revision:'fake'};}
+ return {w,ctx,docEl,panel,store,err,ink,calls,inst,Renderer,images,canvases,r409,api:w.__STORYWORLD_PERSONA_INK_R1097__,flush(){for(let i=0;i<400&&timers.length;i++)timers.shift()();},tick(){ivals.forEach(f=>f());}};}
 // 시험용 그림: 투명 바탕 위 어두운 몸(40×80 가운데 20..59 × 10..89), 붉은 띠, 밝은 얼굴
 function sprite(w=80,h=100){const px=new Uint8ClampedArray(w*h*4);
  for(let y=10;y<90;y++)for(let x=20;x<60;x++){const i=(y*w+x)*4;let c=[30+((x*7+y*3)%9),26+((x+y)%7),32+((x*3)%5)];
@@ -203,6 +211,24 @@ for(const [name,o] of [['맵 수묵화풍 off',{inkMode:'off'}],['쉬는 성능 
  B.tick();B.tick();const f3={commands:[body()]};B.inst.render(f3);ok('여러 번 확인해도 한 겹만 감싼다(한 프레임에 한 번 처리)',B.api.inspect().frames===B.api.inspect().frames&&f3.commands[0].r1097===true&&B.calls.base===6,B.calls.base);
  const C=world(undefined,{sprites:()=>SP,baseThrows:true});let threw=false;try{C.inst.render({commands:[]});}catch(e){threw=/base boom/.test(e.message);}ok('원래 render 가 던지면 그대로 전달(삼키지 않음)',threw);
  const D=world(undefined,{sprites:()=>SP,lateInst:true});D.w.__STORYWORLD_PHASE1__.controller.state.three=D.inst;D.tick();D.api.process([body()]);D.flush();const f4={commands:[body()]};D.inst.render(f4);ok('렌더러가 늦게 생겨도 감싼다',f4.commands[0].r1097===true);}
+// ---- ⑧ R409 테두리와의 순서(공개본 QA: R409 가 수묵 그림을 다시 테두리로 감싸 420×476 로 잡힌 일) ----
+//  인스턴스 render 를 누가 먼저 감싸느냐는 두 모듈의 0.5초 확인 순서에 달려 있다 → 어느 쪽이든 결과가 같아야 한다.
+for(const order of ['inner','outer']){
+ const B=world(undefined,{sprites:()=>SP,r409:order});B.api.process([body({r409:false})]);B.flush();B.tick();
+ const f={commands:[body({r409:false}),body({r409:false,bodyPath:'assets/r763/villagers/fisher-walk.webp'})]};B.inst.render(f);const c=f.commands[0],o=f.commands[1],last=B.calls.last.commands[0];
+ const label=order==='inner'?'R409 가 안쪽(수묵 모듈이 먼저 돎)':'R409 가 바깥(R409 가 먼저 돎)';
+ ok(label+': 렌더러가 받는 페르소나 몸은 수묵 캔버스(R409 테두리판 아님)',last===c&&/^r1097:ink:base-1$/.test(String(c.sourcePath))&&c.image?.tagName==='CANVAS'&&!/^r409:/.test(String(c.sourcePath)),c.sourcePath);
+ ok(label+': 수묵 그림 위에 R409 테두리를 또 굽지 않는다',B.r409.persona===(order==='outer'?1:0)&&!(order==='inner'&&c.r409Outlined),B.r409);
+ ok(label+': 크기·좌표는 순서와 상관없이 같다(수묵판 크기, 원본에서 사방 여백만큼)',(()=>{const W=c.image.width,H=c.image.height,pad=(W-SP.w)/2;return JSON.stringify(c.points)===JSON.stringify(quad(100-pad,200-pad,W,H));})(),c.points);
+ ok(label+': 다른 몹은 R409 테두리 그대로',/^r409:outline:/.test(String(o.sourcePath))&&!o.r1097);
+ ok(label+': R409 에 페르소나를 이미 처리했다고 알린다(owner.r409), 원래 owner 객체는 안 바꿈',c.owner?.r409===true&&c.owner.id==='enemy:cult04:inner-evil-rc133');}
+// ---- ⑨ 성능 단계·모바일 전환: 다시 굽는 동안 원본으로 돌아가지 않는다 ----
+{const B=world(undefined,{sprites:()=>SP,perfStep:5});const P={s:5};B.w.__STORYWORLD_PERF7_R1043__={step:()=>P.s};B.api.process([body()]);B.flush();
+ const a=body();B.api.process([a]);const fullW=a.image?.width;P.s=4;const b=body();B.api.process([b]);
+ ok('성능 단계가 바뀌어 반 크기로 다시 구울 때도, 준비될 때까지 이미 구운 그림을 쓴다(원본으로 깜박이지 않음)',a.r1097===true&&b.r1097===true&&b.image?.width===fullW,[a.r1097,b.r1097,b.image?.width,fullW]);
+ B.flush();const c=body();B.api.process([c]);ok('반 크기가 준비되면 반 크기로 바뀐다',c.r1097===true&&c.image.width<fullW,[c.image?.width,fullW]);
+ P.s=5;const d=body();B.api.process([d]);ok('다시 올리면 전에 구운 큰 그림을 바로 쓴다(큰 그림 한 번·반 크기 한 번, 세 번째로 받지 않음)',d.r1097===true&&d.image.width===fullW&&B.images.filter(i=>/base-1\.png$/.test(i.src)).length===2,[d.image?.width,B.images.filter(i=>/base-1\.png$/.test(i.src)).length]);
+ ok('두 크기를 다 들고 있어도 캐시는 32장을 넘지 않는다',B.api.inspect().cached<=32,B.api.inspect().cached);}
 // ---- ⑦ 건드리지 않는 것 ----
 ok('ctx.filter·drop-shadow·blur( 를 쓰지 않는다(Three 기록기 Legacy 방지)',!/\.filter\s*=\s*['"`]/.test(src.replace(/style=\{[^}]*\}/g,''))&&!/drop-shadow|blur\(/.test(src));
 ok('키 입력·판정·피해·저장 게임에 손대지 않는다',!/addEventListener\(\s*['"]key|\.hp\s*[-+*]?=|saveGame|\.damage\s*=|room\.enemies\s*=/.test(src));

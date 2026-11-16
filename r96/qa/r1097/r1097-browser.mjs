@@ -13,9 +13,11 @@ await p.evaluate(()=>{const e=room.enemies.find(e=>e.persona);summon3([e],'perso
 await p.waitForFunction(()=>room.encounterStage==='active',null,{timeout:120000});await skip(p);
 // 보스를 영웅 옆에 세워 두고 시간을 거의 멈춘다(같은 순간을 켬·끔으로 비교)
 await p.evaluate(()=>{window.__SLOW=1;const tb=tick;tick=function(dt,...a){return tb.call(this,dt*(window.__SLOW??1),...a);};});
-// 찍는 순간 고정: 보스를 영웅 바로 위(화면 뒤쪽) 3칸에 세워 늘 정면 그림(base-0·awake-0 — 영웅을 바라보는 방향)이 나오게 한다.
+// 찍는 순간 고정: 보스를 영웅 바로 위(화면 뒤쪽) 3칸에 세워 늘 정면 그림(base-0·awake-0 — 영웅을 바라보는 방향)이 나오게 하고, 영웅 공격을 멈추고 겹친 이펙트를 비운다.
 //  방향마다 붉은 면적이 달라(뒷모습은 원본부터 붉은색이 적다) 방향이 그때그때 다르면 화소 비율이 흔들린다(공개본 QA 3회 1.24~2.08%).
-const hold=()=>p.evaluate(()=>{const e=room.enemies.find(e=>e.persona);e.speed=0;e.cd=1e6;e.hp=e.maxHp;e.x=player.x;e.y=player.y-3;e.homeX=e.x;e.homeY=e.y;e.vx=0;e.vy=0;player.hp=maxHP();player.invincible=1e6;projectiles.length=0;});
+const hold=()=>p.evaluate(()=>{const e=room.enemies.find(e=>e.persona);e.speed=0;e.cd=1e6;e.hp=e.maxHp;e.x=player.x;e.y=player.y-3;e.homeX=e.x;e.homeY=e.y;e.vx=0;e.vy=0;player.hp=maxHP();player.invincible=1e6;player.attackCD=Math.max(player.attackCD||0,1e6);projectiles.length=0;
+ // 재는 순간 보스 위에 겹친 기술·타격 그림을 비운다(공개본 QA 에서 영웅 기술 문양이 보스를 덮어 붉은 화소가 흔들렸다)
+ if(typeof effects!=='undefined'&&Array.isArray(effects))effects.length=0;if(typeof hazards!=='undefined'&&Array.isArray(hazards))hazards.length=0;if(typeof delayed!=='undefined'&&Array.isArray(delayed))delayed.length=0;});
 // 수묵 그림이 실제로 그려질 때까지(굽기·받기가 느린 공개본에서도) 기다린다: 원하는 그림 묶음(base|awake)의 정면이 수묵 캔버스로 나오는 프레임
 const settle=async(kind,want=true)=>{for(let i=0;i<90;i++){await hold();const c=await census();if(c?.body&&!!c.body.ink===want&&(!want||new RegExp('^r1097:ink:'+kind+'-0').test(c.body.path)))return c;await p.waitForTimeout(1500);}return census();};
 // 한 프레임의 명령을 바깥에서 붙잡아 그린 뒤의 상태를 읽는다

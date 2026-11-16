@@ -9,14 +9,15 @@
  *     0.9초 동안 페르소나 앞에서 두 별이 합쳐지며 겨눈 줄(고정)을 예고 → 11칸 관통탄 2.4배, 한 번만 맞힘. 벽에서 멈춤.
  * 굴림: 페르소나 결전(room.activeEncounter==='persona') 중 페르소나가 보이고(spawnState active) 영웅이 14칸 안·시야 안일 때 게임 시간 3.2~4.5초마다 한 번,
  *  보통 22%, 깨어남(awakeUntil) 중 32%. 성공하면 6초 동안 굴리지 않는다. 붉은 시간 시전(redTimeCastUntil9) 중·장면·창·읽기 중엔 굴리지 않는다.
- * 그림: Dots CX-0087LC 라우렌 시트(assets/r946)를 허용된 필터(hue-rotate·brightness·saturate·contrast)로 언주색으로 바꿔 임시로 쓴다.
+ * 그림(R1107): 붉은 거울별·자아 월식은 Dots CX-0118PM r1 페르소나판 시트(assets/r1107, 언주색, 필터 없음). 검은 우물별은 PM-2 r2 대기라 아직 임시 —
+ *  Dots CX-0087LC 라우렌 시트(assets/r946)를 허용된 필터(hue-rotate·brightness·saturate·contrast)로 언주색으로 바꿔 임시로 쓴다.
  *  최종 그림은 Dots 에 페르소나판(언주색) 시트를 요청한다 — 이 임시 색입힘을 최종 아트라고 보고하지 않는다. 시트가 아직 안 읽혔으면 코드 그림으로 그린다.
  *  예고는 흰 원·빨간 고리가 아니라 검붉은 채움(차오르는 진행)으로 그린다.
  * 끄기: localStorage['storyworld.r1096.personaGravity']='{"on":false}'
  */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_PERSONA_GRAVITY_R1096__)return;
-const REV='R1096-persona-gravity-2-eonju',KEY='storyworld.r1096.personaGravity';
+const REV='R1096-persona-gravity-3-dots-r1107',KEY='storyworld.r1096.personaGravity';
 const CHANCE=.22,AWAKE_CHANCE=.32,ROLL_MIN=3.2,ROLL_SPREAD=1.3,ICD=6,COMBO_WINDOW=40,ECL_CHANCE=.6,RANGE=14,HERO_R=.27;
 const CR_WARN=.75,CR_V=6.5,CR_RANGE=9,CR_R=.55,CR_K=1.2,CR_PUSH=1.6,CR_PUSH_T=.2;
 const AB_WARN=.8,AB_LIFE=1.4,AB_R=2.6,AB_CORE=1,AB_V=2.3,AB_TICK=.35,AB_TICKS=4,AB_K=.3;
@@ -94,10 +95,18 @@ const TINT={red:'hue-rotate(100deg) saturate(3) brightness(.8) contrast(1.35)',b
  fuse:'hue-rotate(100deg) saturate(1.8) contrast(1.2)',violet:'hue-rotate(100deg) saturate(1.9) brightness(.8) contrast(1.3)'};
 const SPATH=k=>SDIR+SHEETS[k].n+'.webp';let sheetsOn=true,askAt=-1e9;
 function simg(k){try{const r=typeof readyImage==='function'?readyImage(SPATH(k)):null,im=r&&r.image;if(!im)return null;const w=im.naturalWidth||im.width||0,h=im.naturalHeight||im.height||0,rows=Math.ceil(SHEETS[k].frames/SCOLS);return w===SCOLS*SCELL&&h===rows*SCELL?im:null;}catch(_){return null;}}
-function askSheets(){if(!sheetsOn)return;const t=T();if(t-askAt<2&&t>=askAt)return;const miss=Object.keys(SHEETS).filter(k=>!simg(k));if(!miss.length)return;askAt=t;try{if(typeof ensureImages==='function'){const r=ensureImages(miss.map(SPATH));if(r&&typeof r.catch==='function')r.catch(()=>{});}}catch(e){fail(e);}}
+function askSheets(){if(!sheetsOn)return;const t=T();if(t-askAt<2&&t>=askAt)return;const miss=Object.keys(SHEETS).filter(k=>!simg(k)).map(SPATH).concat(Object.keys(DSHEETS).filter(k=>!dimg(k)).map(k=>DSHEETS[k].p));if(!miss.length)return;askAt=t;try{if(typeof ensureImages==='function'){const r=ensureImages(miss);if(r&&typeof r.catch==='function')r.catch(()=>{});}}catch(e){fail(e);}}
 function sframe(k,age){const m=SHEETS[k];let f=Math.floor(Math.max(0,age)*m.fps+1e-6);if(m.loop)f%=m.frames;else if(f>=m.frames)f=m.frames-1;return f;}
 function sheet(k,age,x,y,d,o={}){if(!sheetsOn||!Number.isFinite(x)||!Number.isFinite(y)||!(d>0)||!Number.isFinite(d))return false;const im=simg(k);if(!im)return false;const m=SHEETS[k],f=sframe(k,age),sx=(f%SCOLS)*SCELL,sy=Math.floor(f/SCOLS)*SCELL,w=d*256/m.body,h=w*(o.squash||1),c=m.crop||[0,0,256,256],K=SCELL/256;
  ctx.save();try{ctx.globalAlpha*=Math.max(0,Math.min(1,o.alpha??1));if('filter' in ctx)ctx.filter=TINT[k]||'none';ctx.translate(x,y);if(o.flip)ctx.scale(-1,1);if(o.angle)ctx.rotate(o.angle);ctx.drawImage(im,sx+c[0]*K,sy+c[1]*K,(c[2]-c[0])*K,(c[3]-c[1])*K,(c[0]-m.piv[0])/256*w,(c[1]-m.piv[1])/256*h,(c[2]-c[0])/256*w,(c[3]-c[1])/256*h);stats.sheetDraws++;}finally{ctx.restore();}return true;}
+// R1107 Dots CX-0118PM r1 페르소나판 시트(언주색, 오른쪽 진행): PM-1 붉은 거울별 24칸 루프 12.5fps, PM-3 자아 월식 앞 12칸 충전·뒤 12칸 관통탄.
+//  6열×192칸, 피벗 (96,96), body = 칸 속 구 지름(192 기준, 실측). 색 필터 없이 그대로 그린다. 안 읽혔으면 위 라우렌 임시 그림으로.
+//  PM-2 검은 우물별은 r2(구·원반 분리, 짙은 언주) 대기 — 그때까지 끌림 구·원반은 임시 그림.
+const DSHEETS={star:{p:'assets/r1107/persona-red-star.webp',piv:[96,96],body:106},eclipse:{p:'assets/r1107/persona-eclipse.webp',piv:[96,96],body:100}};
+function dimg(k){try{const r=typeof readyImage==='function'?readyImage(DSHEETS[k].p):null,im=r&&r.image;if(!im)return null;const w=im.naturalWidth||im.width||0,h=im.naturalHeight||im.height||0;return w===1152&&h===768?im:null;}catch(_){return null;}}
+function dsheet(k,f,x,y,d,o={}){if(!sheetsOn||!Number.isFinite(x)||!Number.isFinite(y)||!(d>0)||!Number.isFinite(d))return false;const im=dimg(k);if(!im)return false;const m=DSHEETS[k];f=Math.max(0,Math.min(23,Math.floor(f)||0));
+ const sx=(f%6)*192,sy=Math.floor(f/6)*192,w=d*192/m.body;
+ ctx.save();try{ctx.globalAlpha*=Math.max(0,Math.min(1,o.alpha??1));if('filter' in ctx)ctx.filter='none';ctx.translate(x,y);if(o.flip)ctx.scale(-1,1);if(o.angle)ctx.rotate(o.angle);ctx.drawImage(im,sx,sy,192,192,-m.piv[0]/192*w,-m.piv[1]/192*w,w,w);stats.sheetDraws++;stats.dotsDraws=(stats.dotsDraws||0)+1;}finally{ctx.restore();}return true;}
 function sc(o,f){if(typeof ctx!=='undefined'&&ctx&&typeof ctx.scope==='function')ctx.scope(o,f);else f();}
 function scale(){const z=typeof zoom==='number'&&zoom>0?zoom:1,TL=typeof TILE==='number'?TILE:34;return {z,T1:TL*z*Math.SQRT2,AH:typeof actorHeight==='function'?finite(actorHeight(),66*z):66*z};}
 function heading(x){const a=project(x.sx??x.x,x.sy??x.y),b=project((x.sx??x.x)+x.ux,(x.sy??x.y)+x.uy),dx=b.x-a.x,dy=b.y-a.y;return {flip:dx<0,angle:Math.max(-.6,Math.min(.6,Math.atan2(dy,Math.abs(dx)||1e-6)))};}
@@ -123,9 +132,9 @@ function disk(q,Rx,f,alpha){if(!(Rx>0)||!Number.isFinite(q.x)||!Number.isFinite(
  ctx.strokeStyle=`rgba(${BLOOD_HOT},.85)`;ctx.lineWidth=2.5;ctx.beginPath();ctx.ellipse(q.x,q.y,Rx,Rx*.5,0,0,Math.PI*2);ctx.stroke();}finally{ctx.restore();}}
 function drawCrimson(x,t){const {AH,T1}=scale(),lift=AH*.55,r=AH*.26,id='r1096:crimson:'+x.t0.toFixed(2);
  if(x.phase==='warn'){const f=Math.min(1,(t-x.t0)/x.warn);lane(x,CR_RANGE,x.radius+HERO_R,f,id+':warn');const q=project(x.sx+x.ux*.8,x.sy+x.uy*.8);
-  sc({id:id+':grow',kind:'effect',pxfSide:'enemy',x:x.sx,y:x.sy},()=>{if(!sheet('red',t-x.t0,q.x,q.y-lift,r*2*(.4+.6*f),{alpha:.6+.4*f,flip:!heading(x).flip}))orb(q.x,q.y-lift,r*(.4+.6*f),BONE,BLOOD,.6+.4*f);});return;}
+  sc({id:id+':grow',kind:'effect',pxfSide:'enemy',x:x.sx,y:x.sy},()=>{if(dsheet('star',(t-x.t0)*12.5%24,q.x,q.y-lift,r*2*(.4+.6*f),{alpha:.6+.4*f,flip:heading(x).flip}))return;if(!sheet('red',t-x.t0,q.x,q.y-lift,r*2*(.4+.6*f),{alpha:.6+.4*f,flip:!heading(x).flip}))orb(q.x,q.y-lift,r*(.4+.6*f),BONE,BLOOD,.6+.4*f);});return;}
  const fade=x.end==null?1:Math.max(0,1-(t-x.end)/.3),q=project(x.x,x.y);
- sc({id:id+':orb',kind:'effect',pxfSide:'enemy',x:x.x,y:x.y},()=>{for(let i=0;i<x.trail.length;i++){const p=project(x.trail[i].x,x.trail[i].y),k=(i+1)/(x.trail.length+1);orb(p.x,p.y-lift,r*(.3+.4*k),BLOOD_HOT,BLOOD,.25*k*fade);}
+ sc({id:id+':orb',kind:'effect',pxfSide:'enemy',x:x.x,y:x.y},()=>{if(dsheet('star',(t-x.t0)*12.5%24,q.x,q.y-lift,r*2,{alpha:fade,flip:heading(x).flip}))return;for(let i=0;i<x.trail.length;i++){const p=project(x.trail[i].x,x.trail[i].y),k=(i+1)/(x.trail.length+1);orb(p.x,p.y-lift,r*(.3+.4*k),BLOOD_HOT,BLOOD,.25*k*fade);}
   orb(q.x,q.y-lift,r*1.05,BLOOD_HOT,BLOOD,fade*.75);sheet('red',t-x.t0,q.x,q.y-lift,r*2,{alpha:fade,flip:!heading(x).flip});});}
 function drawAbyss(x,t){const {T1,AH}=scale(),q=project(x.x,x.y),u=t-x.t0,Rx=x.radius*T1,id='r1096:abyss:'+x.t0.toFixed(2);
  if(x.phase==='warn'){const f=Math.min(1,u/x.warn);sc({id:id+':warn',kind:'effect',pxfSide:'enemy',x:x.x,y:x.y,groundAligned:true},()=>disk(q,Rx,f,.85));return;}
@@ -135,12 +144,12 @@ function drawAbyss(x,t){const {T1,AH}=scale(),q=project(x.x,x.y),u=t-x.t0,Rx=x.r
  sc({id:id+':orb',kind:'effect',pxfSide:'enemy',x:x.x,y:x.y},()=>{const r=AH*.24,cy=q.y-AH*.6;if(!sheet('blue',v,q.x,cy,r*2,{alpha:fade}))orb(q.x,cy,r,BLOOD_HOT,INK,fade);});}
 function drawEclipse(x,t){const {AH}=scale(),lift=AH*.55,id='r1096:eclipse:'+x.t0.toFixed(2);
  if(x.phase==='warn'){const f=Math.min(1,(t-x.t0)/x.warn);lane(x,EC_RANGE,x.radius*.6,f,id+':warn');const m=project(x.sx+x.ux*.7,x.sy+x.uy*.7);
-  sc({id:id+':charge',kind:'effect',pxfSide:'enemy',x:x.sx,y:x.sy},()=>{if(sheet('fuse',(t-x.t0)*(.5/x.warn),m.x,m.y-lift,AH*.8))return;const px=-x.uy,py=x.ux,sep=1.2*(1-f*f),a=project(x.sx+x.ux*.7+px*sep,x.sy+x.uy*.7+py*sep),b=project(x.sx+x.ux*.7-px*sep,x.sy+x.uy*.7-py*sep);
+  sc({id:id+':charge',kind:'effect',pxfSide:'enemy',x:x.sx,y:x.sy},()=>{if(dsheet('eclipse',Math.min(11,(t-x.t0)/x.warn*12),m.x,m.y-lift,AH*.55,{flip:heading(x).flip}))return;if(sheet('fuse',(t-x.t0)*(.5/x.warn),m.x,m.y-lift,AH*.8))return;const px=-x.uy,py=x.ux,sep=1.2*(1-f*f),a=project(x.sx+x.ux*.7+px*sep,x.sy+x.uy*.7+py*sep),b=project(x.sx+x.ux*.7-px*sep,x.sy+x.uy*.7-py*sep);
    orb(a.x,a.y-lift,AH*.18,BONE,BLOOD,1);orb(b.x,b.y-lift,AH*.18,BLOOD_HOT,INK,1);});return;}
  const fade=x.end==null?1:Math.max(0,1-(t-x.end)/.35),q=project(x.x,x.y),s=project(x.sx,x.sy);
  sc({id:id+':scar',kind:'effect',pxfSide:'enemy',x:(x.sx+x.x)/2,y:(x.sy+x.y)/2,groundAligned:true},()=>{if(![s.x,s.y,q.x,q.y].every(Number.isFinite))return;ctx.save();try{ctx.globalAlpha*=fade*.85;ctx.strokeStyle=`rgba(${INK},.85)`;ctx.lineWidth=Math.max(3,AH*.12);ctx.beginPath();ctx.moveTo(s.x,s.y-lift);ctx.lineTo(q.x,q.y-lift);ctx.stroke();
   ctx.strokeStyle=`rgba(${BLOOD_HOT},.85)`;ctx.lineWidth=Math.max(1.5,AH*.03);ctx.beginPath();ctx.moveTo(s.x,s.y-lift);ctx.lineTo(q.x,q.y-lift);ctx.stroke();}finally{ctx.restore();}});
- if(x.end==null||t-x.end<.15)sc({id:id+':orb',kind:'effect',pxfSide:'enemy',x:x.x,y:x.y},()=>{const h=heading(x);if(!sheet('violet',t-x.tl,q.x,q.y-lift,AH*.5,{flip:!h.flip,angle:-h.angle}))orb(q.x,q.y-lift,AH*.25,BONE,BLOOD,1);});}
+ if(x.end==null||t-x.end<.15)sc({id:id+':orb',kind:'effect',pxfSide:'enemy',x:x.x,y:x.y},()=>{const h=heading(x);if(dsheet('eclipse',12+((t-x.tl)*12.5)%12,q.x,q.y-lift,AH*.5,{flip:h.flip,angle:h.flip?-h.angle:h.angle}))return;if(!sheet('violet',t-x.tl,q.x,q.y-lift,AH*.5,{flip:!h.flip,angle:-h.angle}))orb(q.x,q.y-lift,AH*.25,BONE,BLOOD,1);});}
 function draw(){if(typeof project!=='function'||typeof ctx==='undefined'||!ctx)return;const t=T();askSheets();
  for(const x of acts){try{if(x.kind==='crimson')drawCrimson(x,t);else if(x.kind==='abyss')drawAbyss(x,t);else if(x.kind==='eclipse')drawEclipse(x,t);}catch(err){fail(err);}}stats.draws++;}
 const SENT={type:'r1096-persona-gravity',x:0,y:0,age:0,life:Infinity,r1096Sentinel:true};
@@ -155,7 +164,7 @@ window.__STORYWORLD_PERSONA_GRAVITY_R1096__=Object.freeze({revision:REV,set,on:(
  names:Object.freeze({set:'거울 천체',crimson:'붉은 거울별',abyss:'검은 우물별',eclipse:'자아 월식'}),
  qaForce:k=>{const e=persona();if(!e||!KINDS.includes(k))return null;const t=T(),s=stateOf(e);if(k==='eclipse'&&!(comboOf(s,t)||forcedCombo))return null;forcedCombo=false;if(lastT==null)lastT=t;return cast(e,k);},
  qaCombo:v=>{forcedCombo=!!v;return forcedCombo;},qaRandom:f=>{rng=typeof f==='function'?f:null;return !!rng;},qaSheets:v=>{sheetsOn=v!==false;return sheetsOn;},
- sheets:()=>Object.fromEntries(Object.keys(SHEETS).map(k=>[k,{path:SPATH(k),ready:!!simg(k),tint:TINT[k]}])),
+ sheets:()=>({...Object.fromEntries(Object.keys(SHEETS).map(k=>[k,{path:SPATH(k),ready:!!simg(k),tint:TINT[k]}])),...Object.fromEntries(Object.keys(DSHEETS).map(k=>['dots-'+k,{path:DSHEETS[k].p,ready:!!dimg(k),tint:'none'}]))}),
  inspect:()=>{const e=persona(),s=e?states.get(e):null,t=T();return {revision:REV,on:prefOn,persona:!!e,comboReady:!!(s&&comboOf(s,t)),
   acts:acts.map(x=>({kind:x.kind,phase:x.phase,warn:x.warn,t0:x.t0,x:x.x,y:x.y,radius:x.radius,dmg:x.dmg})),
   tuning:{CHANCE,AWAKE_CHANCE,ROLL_MIN,ROLL_SPREAD,ICD,COMBO_WINDOW,ECL_CHANCE,RANGE,CR_WARN,CR_V,CR_RANGE,CR_K,CR_PUSH,AB_WARN,AB_LIFE,AB_R,AB_CORE,AB_V,AB_K,AB_TICKS,EC_WARN,EC_V,EC_RANGE,EC_K},
