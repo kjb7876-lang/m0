@@ -38,7 +38,12 @@ for(const z of (process.env.SW_ZONES||'dist02').split(',')){
  const tag=hero?hero:z;
  ok(tag+': module active (맵 수묵화풍 켜짐을 따라감)',(await I()).active===true,await I());
  // 히든 영웅 EGO 형상으로 바꾼다(777 은 환도 99레벨일 뿐 EGO 형상이 아니다). 그 전에는 환도라서 아무것도 안 바뀌어야 한다.
- {const pre=await census();ok(tag+': before the EGO form (환도) nothing is recoloured',!!pre&&pre.fxT===0&&(await I()).ego===false,pre&&{fx:pre.fx,fxT:pre.fxT});}
+ // EGO 형상 전에는 환도다 → 먹·백(sumi)으로 바뀌고 붉은 색상 돌리기는 없어야 한다
+ {let pre=null;for(let t=0;t<8;t++){for(const k of ['a','s','d','q','f']){await p.keyboard.down(k);await p.waitForTimeout(140);await p.keyboard.up(k);}pre=await census();if(pre&&pre.fxT>=10)break;}
+  const fs=Object.keys(pre?.filters||{});
+  ok(tag+': 환도 (EGO 형상 전) effects are recoloured to 먹·백, no hue-rotate',!!pre&&pre.fxT>=10&&fs.length>0&&fs.every(f=>!/hue-rotate/.test(f))&&(await I()).hwando===true&&(await I()).ego===false,pre&&{fx:pre.fx,fxT:pre.fxT,filters:pre.filters});
+  ok(tag+': 환도: hazards·bodies·text·shadows·enemy signals untouched',!!pre&&pre.hazardT+pre.projT+pre.bodyT+pre.textT+pre.shadowT+pre.signalT===0);
+  if(process.env.SW_SHOT){await p.evaluate(()=>{window.__SLOW=1e-4;});await p.waitForTimeout(500);await p.screenshot({path:`${out}/hwando-on.png`});await p.evaluate(()=>window.__STORYWORLD_INK_FX_R1095__.set(false));await p.waitForTimeout(900);await p.screenshot({path:`${out}/hwando-off.png`});await p.evaluate(()=>{window.__STORYWORLD_INK_FX_R1095__.set(true);window.__SLOW=1;});await p.waitForTimeout(700);}}
  const formed=await p.evaluate(()=>{const E=window.__STORYWORLD_EGO_SOVEREIGN_R1046__;try{E.unlock();}catch(_){}return {set:E.setForm(true),active:E.active()};});await p.waitForTimeout(1200);
  ok(tag+': hidden hero EGO form is on → EGO scope on',formed.active===true&&(await I()).ego===true,formed);
  // 스킬을 눌러 이펙트가 여럿 떠 있는 순간을 잡는다
@@ -46,7 +51,7 @@ for(const z of (process.env.SW_ZONES||'dist02').split(',')){
  for(let t=0;t<14;t++){await p.evaluate(()=>{window.__SLOW=1;});
   for(const k of keys.slice(0,3+(t%6))){await p.keyboard.down(k==='Space'?'Space':k);await p.waitForTimeout(140);await p.keyboard.up(k==='Space'?'Space':k);}
   await p.waitForTimeout(350+t*120);await p.evaluate(()=>{window.__SLOW=1e-4;});await p.waitForTimeout(500);
-  a=await census();if(a&&a.fxT>=10)break;}
+  a=await census();const rot=Object.entries(a?.filters||{}).filter(([f])=>/hue-rotate/.test(f)).reduce((n,[,v])=>n+v,0);if(a&&a.fxT>=10&&rot>=45)break;}/* 붉게 도는 이펙트가 넉넉히 떠 있는 순간을 잡는다(화소 비율이 장면에 덜 흔들리게) */
  ok(tag+': effect commands found and tinted',!!a&&a.fx>=10&&a.fxT>=10,a&&{fx:a.fx,fxT:a.fxT});
  ok(tag+': nearly every eligible effect command is tinted (재기 예산으로 한두 장 늦을 수 있음)',!!a&&a.fxT/Math.max(1,a.fx)>=.7,a&&{fx:a.fx,fxT:a.fxT});
  ok(tag+': only filter kinds the Three recorder knows',!!a&&a.bad.length===0,a&&a.bad);
@@ -58,7 +63,8 @@ for(const z of (process.env.SW_ZONES||'dist02').split(',')){
  const off=await p.locator('#game').screenshot();await p.screenshot({path:`${out}/${tag}-off.png`});
  const d=await diff(on,off);console.log(tag,'pixels',JSON.stringify(d));
  ok(tag+': the picture really changes (달라진 화소 300개 이상)',d.changed>=300,d.changed);
- ok(tag+': changed coloured pixels are mostly vermilion when on (60% 이상), and more than when off',d.share!==null&&d.share>=.6&&(d.offShare===null||d.share>d.offShare),d);
+ // EGO 형상은 끈 화면에서도 몸 둘레 빛이 붉어 '끈 화면보다 더 붉다'는 비교는 뜻이 없다(1차 구현의 환도 기준 조건이었음) → 켠 화면의 비율만 본다
+ ok(tag+': changed coloured pixels are mostly vermilion when on (60% 이상)',d.share!==null&&d.share>=.6,d);
  await p.evaluate(()=>window.__STORYWORLD_INK_FX_R1095__.set(true));await p.waitForTimeout(900);
  const a3=await census();ok(tag+': set(true) → tinted again without reload',!!a3&&a3.fxT>=Math.min(10,a.fxT),a3&&{fx:a3.fx,fxT:a3.fxT});
  // 맵 수묵화풍을 끄면 같이 쉰다

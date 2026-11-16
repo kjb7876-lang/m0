@@ -42,6 +42,7 @@ function world(stored,opt={}){
   StoryPhase1:{ThreeRenderer:Renderer},__STORYWORLD_PHASE1__:{controller:{state:{three:opt.lateInst?null:inst}}},
   showSettings(){panel.children=[];const s=mk('section');s.id='combatScreenR1021';panel.appendChild(s);const r=mk('div');r.id='inkRowR1055';s.appendChild(r);if(opt.charsRow!==false){const r2=mk('div');r2.id='inkCharsRowR1090';s.appendChild(r2);}return 'base';}};
  if(opt.noInk!==true)w.__STORYWORLD_INK_WASH_R1055__={prefs:()=>({mode:ink.mode,style:'jg'}),inspect:()=>({k:ink.k,prefs:{mode:ink.mode}})};
+ if(opt.noPlayer!==true)w.player={hero:opt.hero??'neon'};
  if(opt.noEgo!==true)w.__STORYWORLD_EGO_SOVEREIGN_R1046__={active:()=>{if(opt.egoThrows)throw Error('ego boom');return ego.on;}};if(opt.noRoom!==true)w.room=roomObj;
  w.window=w;w.globalThis=w;const ctx=vm.createContext(w);let err=null;try{vm.runInContext(src,ctx,{filename:NAME});}catch(e){err=e;}
  return {w,ctx,docEl,panel,store,err,ink,ego,roomObj,calls,inst,Renderer,api:w.__STORYWORLD_INK_FX_R1095__,flush(){for(let i=0;i<50&&timers.length;i++)timers.shift()();},tick(){ivals.forEach(f=>f());}};}
@@ -233,6 +234,28 @@ const tinted=c=>c.r1095===true;
  ok('same muddy teal: persona sheet → 연지·주홍, EGO effect → grey',RED(qp.h)&&qp.c>=.3&&qe.c<.2,[pe.style.filter,eg.style.filter]);
  const lp=hsv(...parse(pl.style.strokeStyle)),le=hsv(...parse(el.style.strokeStyle));
  ok('same silver line: persona-owned (id 에 persona) → 연지빛, EGO → 백',tinted(pl)&&RED(lp.h)&&lp.c>=.25&&le.c<.12,[pl.style.strokeStyle,el.style.strokeStyle]);}
+// 환도 영웅(사용자 2026-11-16 02:55Z "수묵이펙트 환도영웅은 적용해"): 환도의 이펙트는 먹 + 백('sumi'). 붉은색은 EGO·페르소나의 고유색이라 쓰지 않는다.
+{const F=(r,g,b,blend)=>{const q=hsv(r,g,b),f=api.filterFor({hue:q.h,chroma:q.c,lum:lum(r,g,b),blend,mode:'sumi'}),o=applyFilter(f,[r,g,b]);return {f,o:o.map(Math.round),...hsv(...o),l:lum(...o)};};
+ const gold=F(255,198,72,'lighter'),silver=F(214,222,234,'lighter'),dust=F(118,100,82,'source-over'),blue=F(60,140,255,'screen');
+ ok("sumi filter: gold·silver·blue light → 백 (chroma < .12, no hue-rotate), brightness kept (≥ 90%)",[gold,silver,blue].every(q=>filterOk(q.f)&&q.c<.12&&!/hue-rotate/.test(q.f))&&gold.l>=.9*lum(255,198,72)&&silver.l>=.9*lum(214,222,234),[gold,silver,blue].map(q=>[q.f,q.o]));
+ ok('sumi filter: dark source-over smoke·dust → 먹',dust.c<.08&&dust.l<.45,[dust.f,dust.o]);
+ const TS=s=>{const p=parse(api.tone(s,'sumi'));return p?{...hsv(p[0],p[1],p[2]),l:lum(p[0],p[1],p[2]),a:p[3]}:null;};
+ const ts=['#ffc648','#3aa0ff','#d12835','#101010','rgba(255,255,255,.4)'].map(TS);
+ ok("tone(css,'sumi'): every colour becomes an ink-to-white grey (chroma < .12, 가장 어두운 쪽은 먹색 그대로), order kept, alpha kept",ts.every(q=>!!q&&(q.c<.12||q.l<.2))&&ts[3].l<ts[1].l&&ts[1].l<ts[4].l&&ts[4].a===.4,ts);
+ const W=world(undefined,{ego:false,hero:'hwando'});W.tick();const P=W.api;
+ const g=cmd('image','effect'),sl=cmd('image','effect',{path:'assets/r302/fx/hwando/basic.webp',style:{globalCompositeOperation:'screen'}}),ln=cmd('stroke','effect',{style:{strokeStyle:'#ffc648'}}),hz=cmd('fill','hazard',{style:{fillStyle:'rgba(255,214,140,0.3)'}}),en=cmd('image','effect',{owner:{enemy:true}}),af=cmd('image','effect',{path:'http://x/m0/assets/hero-authored-v314rc5/hwando-walk-atlas.png',style:{globalCompositeOperation:'source-over'}});
+ const n=P.process([g,sl,ln,hz,en,af]);
+ const qg=hsv(...applyFilter(g.style.filter,[255,198,72])),ql=hsv(...parse(ln.style.strokeStyle));
+ ok('환도: effect images and lines are recoloured to 먹·백 (no red)',n===3&&tinted(g)&&tinted(sl)&&tinted(ln)&&qg.c<.12&&ql.c<.12&&!/hue-rotate/.test(g.style.filter+sl.style.filter),[n,g.style.filter,sl.style.filter,ln.style.strokeStyle]);
+ ok('환도: 예고 표시·적 표식·잔상 stay as they are',!tinted(hz)&&!tinted(en)&&!tinted(af));
+ ok('inspect() reports scope hwando',P.inspect().hwando===true&&P.inspect().ego===false,P.inspect());
+ for(const h of ['neon','seoha','michaela','slayer','gunner','lauren']){const o=world(undefined,{ego:false,hero:h});o.tick();const c=cmd('image','effect');ok('other hero '+h+': still untouched',o.api.process([c])===0&&!tinted(c)&&o.api.inspect().hwando===false);}
+ const E=world(undefined,{ego:true,hero:'hwando'});E.tick();const ge=cmd('image','effect');E.api.process([ge]);
+ ok('환도 base + EGO 형상 → EGO palette wins (언주색, not sumi)',tinted(ge)&&RED(hsv(...applyFilter(ge.style.filter,[255,198,72])).h)&&E.api.inspect().hwando===false,ge.style.filter);
+ const PR=world(undefined,{ego:false,hero:'hwando',persona:true});PR.tick();const po=cmd('image','effect',{path:'assets/rc134/persona-skills/small-orb.png',style:{globalCompositeOperation:'source-over'}});PR.api.register(/small-orb/,'red',{hue:270,chroma:.8,lum:.4});PR.api.process([po]);
+ ok('환도 fighting the persona: persona sheets stay 언주색 단독',tinted(po)&&RED(hsv(...applyFilter(po.style.filter,[140,60,230])).h),po.style.filter);
+ const NP=world(undefined,{ego:false,noPlayer:true});NP.tick();ok('no player yet → no throw, hwando false',!NP.err&&NP.api.inspect().hwando===false&&NP.api.inspect().errors===0);
+ W.w.player.hero='seoha';W.tick();const c2=cmd('image','effect');ok('switching 환도 → 서하 mid-game switches it off',P.process([c2])===0&&!tinted(c2));}
 // ---- ⑥ 켜고 끄기 ----
 {const D=world();D.tick();ok('default: on and active when the map ink wash is live',D.api.enabled()===true&&D.api.active()===true,D.api.inspect());
  const off=world('0');off.tick();const c=cmd('image','effect');ok("stored '0': off, effect keeps its original colour",off.api.enabled()===false&&off.api.active()===false&&off.api.process([c])===0&&c.style.filter==='none'&&!tinted(c));

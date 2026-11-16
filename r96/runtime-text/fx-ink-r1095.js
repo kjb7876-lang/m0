@@ -7,6 +7,7 @@
 //  · 적용 대상(사용자 2026-11-16 정정 "기존영웅 바꾸라는게아니라 페르소나보스랑 히든영웅에고만", "페르소나 보스 및 영웅 -연지색 이 고유색/히든영웅에고 연지색+먹+흰색 이 고유색"):
 //      히든 영웅 EGO 형상(R1046 active())일 때 그 영웅의 이펙트 → 연지·주홍 + 먹 + 백 세 가지 색('mix').
 //      페르소나의 기술 그림(assets/rc134/persona-skills, rc133)과 페르소나 소유 이펙트 → 연지·주홍 단독('mono').
+//      환도 영웅(사용자 02:55Z "수묵이펙트 환도영웅은 적용해")의 이펙트 → 먹 + 백('sumi'). 붉은색은 EGO·페르소나의 고유색이라 환도에는 쓰지 않는다.
 //      그 밖의 기존 영웅 이펙트는 손대지 않는다(원래 색).
 //  · 공통 함수라 EGO·페르소나에 새로 추가되는 스킬도 따로 손대지 않아도 같은 팔레트를 따른다. 예외는 register(정규식,'keep'|'white'|'ink'|'red',{hue,chroma,lum}) 로 등록한다.
 //  · 건드리지 않는 것: 기존 영웅의 이펙트·예고 표시(hazard)·적 표식·보스 패턴·피해 숫자·그림자·영웅/몹 몸과 잔상·소품·UI. 전투 신호 색은 그대로다.
@@ -14,7 +15,7 @@
 //  판정·피해·AI·저장·서사는 바꾸지 않는다(색만).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_INK_FX_R1095__)return;
-const REV='R1095-fx-ink-2',KEY='storyworld.r1095.inkFx';
+const REV='R1095-fx-ink-3',KEY='storyworld.r1095.inkFx';
 // 붉은 값은 페르소나 스레드 R1096 의 상수와 같다: 짙은 70,14,10 / 테 132,30,22 / 으뜸 204,52,40 / 밝은 255,176,140
 const PALETTE=Object.freeze({deep:'#460e0a',yeonji:'#841e16',juhong:'#cc3428',pale:'#ffb08c',ink:'#12161c',white:'#f3eee2'});
 const hex3=h=>{const n=parseInt(h.slice(1),16);return [n>>16,(n>>8)&255,n&255];};
@@ -26,9 +27,10 @@ const num=(v,d)=>fin(v)?v:d;
 let on=true;try{if(localStorage.getItem(KEY)==='0')on=false;}catch(_){}
 // 맵 수묵화풍이 실제로 켜져 있는가(R1055 의 지금 세기 k). 0.5초에 한 번 본다.
 let inkLive=false;
-let egoLive=false,personaLive=false;
+let egoLive=false,personaLive=false,hwandoLive=false;const SUMI_HERO='hwando';
 function refresh(){let live=false;
  try{const E=window.__STORYWORLD_EGO_SOVEREIGN_R1046__;egoLive=!!(E&&typeof E.active==='function'&&E.active()===true);}catch(_){egoLive=false;}
+ try{const pl=typeof player!=='undefined'?player:null;hwandoLive=!egoLive&&!!pl&&pl.hero===SUMI_HERO;}catch(_){hwandoLive=false;}
  try{const r=typeof room!=='undefined'?room:null,es=r&&Array.isArray(r.enemies)?r.enemies:null;let p=false;if(es)for(let i=0;i<es.length;i++){const e=es[i];if(e&&e.persona===true&&!(e.hp<=0)){p=true;break;}}personaLive=p;}catch(_){personaLive=false;}
  try{const A=window.__STORYWORLD_INK_WASH_R1055__;if(A&&typeof A.inspect==='function'){const i=A.inspect();live=!!i&&i.prefs?.mode!=='off'&&fin(i.k)&&i.k>.5;}}catch(_){live=false;}inkLive=live;return live;}
 const active=()=>on&&inkLive;
@@ -44,6 +46,7 @@ const DEEP=hex3(PALETTE.deep),PALE=hex3(PALETTE.pale);
 // 연지·주홍 단독('mono'): 밝기만 남기고 모두 붉은 농담으로 — 짙은 연지 … 연지 … 주홍 … 옅은 주홍
 function monoRamp(L){if(L<.30)return mix(DEEP,YEONJI,L/.30);if(L<.58)return mix(YEONJI,JUHONG,(L-.30)/.28);return mix(JUHONG,PALE,(L-.58)/.42);}
 function toneRGB(r,g,b,mode){if(!fin(r)||!fin(g)||!fin(b))return null;r=clamp(r,0,255);g=clamp(g,0,255);b=clamp(b,0,255);
+ if(mode==='sumi'){const m=mix(INK,WHITE,LUM(r,g,b));return [Math.round(clamp(m[0],0,255)),Math.round(clamp(m[1],0,255)),Math.round(clamp(m[2],0,255))];}
  if(mode==='mono'){const m=monoRamp(LUM(r,g,b));return [Math.round(clamp(m[0],0,255)),Math.round(clamp(m[1],0,255)),Math.round(clamp(m[2],0,255))];}
  const L=LUM(r,g,b),c=hsv(r,g,b).c,grey=mix(INK,WHITE,L);
  const w=clamp((c-.45)/.08,0,1),o=w<=0?grey:mix(grey,redRamp(L),w);
@@ -55,8 +58,8 @@ function parseCss(s){let m=/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(s);
  m=RGBA.exec(s);if(!m)return null;const a=m[4]===undefined?1:+m[4],v=[+m[1],+m[2],+m[3],a];return v.every(fin)?v:null;}
 const toneCache=new Map();
 // 공통 색 함수(CSS 문자열): #rgb·#rrggbb·rgb()·rgba() 를 팔레트 색으로, 알파는 그대로. 모르는 값은 손대지 않고 돌려준다.
-function tone(css,mode){if(typeof css!=='string')return css;const mono=mode==='mono',ck=mono?'m|'+css:css;const hit=toneCache.get(ck);if(hit!==undefined)return hit;
- let out=css;try{const p=parseCss(css.trim());if(p){const o=toneRGB(p[0],p[1],p[2],mono?'mono':undefined);if(o)out='rgba('+o[0]+','+o[1]+','+o[2]+','+(+clamp(p[3],0,1).toFixed(4))+')';}}catch(e){fail(e);out=css;}
+function tone(css,mode){if(typeof css!=='string')return css;const mono=mode==='mono',sumi=mode==='sumi',ck=mono?'m|'+css:sumi?'s|'+css:css;const hit=toneCache.get(ck);if(hit!==undefined)return hit;
+ let out=css;try{const p=parseCss(css.trim());if(p){const o=toneRGB(p[0],p[1],p[2],mono?'mono':sumi?'sumi':undefined);if(o)out='rgba('+o[0]+','+o[1]+','+o[2]+','+(+clamp(p[3],0,1).toFixed(4))+')';}}catch(e){fail(e);out=css;}
  if(toneCache.size>600)toneCache.clear();toneCache.set(ck,out);return out;}
 // phase1 filterMatrix 의 hue-rotate 와 같은 식(색상 돌리기 결과를 미리 계산해 알맞은 각을 고른다)
 function rot(deg,v){const t=deg*Math.PI/180,c=Math.cos(t),s=Math.sin(t);
@@ -65,6 +68,7 @@ const clip=v=>[clamp(v[0],0,1),clamp(v[1],0,1),clamp(v[2],0,1)];
 const hueDist=(a,b)=>{const d=Math.abs(a-b)%360;return d>180?360-d:d;};
 function rep(h,c){const x=1-Math.abs((h/60)%2-1),t=[[1,x,0],[x,1,0],[0,1,x],[0,x,1],[x,0,1],[1,0,x]][Math.floor(h/60)%6];return [1-c+c*t[0],1-c+c*t[1],1-c+c*t[2]];}
 const F_UNKNOWN='saturate(.45)',F_WHITE='saturate(.3)',F_WHITE_FORCED='saturate(.12) brightness(1.06)',F_INK='grayscale(1) brightness(.62) contrast(1.1)';
+const F_SUMI='saturate(.06) brightness(1.04)';
 const filterCache=new Map();
 // 그림용 필터: 시트의 대표 색상(hue 0~360)·채도(chroma 0~1)·밝기(lum 0~1)·혼합 방식 → 필터 문자열. role 로 강제할 수 있다.
 function filterFor(info){const i=info&&typeof info==='object'?info:{};const role=i.role;
@@ -72,6 +76,8 @@ function filterFor(info){const i=info&&typeof info==='object'?info:{};const role
  if(!fin(i.hue)||!fin(i.chroma))return F_UNKNOWN;
  const hue=((i.hue%360)+360)%360,chroma=clamp(i.chroma,0,1),lum=clamp(num(i.lum,.6),0,1),over=!i.blend||i.blend==='source-over',mono=i.mode==='mono';
  // 맑은 색만 붉게 옮긴다. 탁한 색(채도 .48 아래 — 적의 부패·병색 계열)은 채도를 빼 먹빛·백으로 둔다(art-style 10절: 적과 영웅을 색으로 가른다)
+ // 먹 + 백('sumi'): 색을 거의 다 빼 흰 빛으로, 덮어 그리는 어두운 것은 먹으로
+ if(i.mode==='sumi')return over&&lum<.5?F_INK:F_SUMI;
  if(role!=='red'&&!mono){if(over&&lum<.5&&chroma<.45)return F_INK;if(chroma<.48)return F_WHITE;}
  const key=Math.round(hue/5)+'|'+Math.round(chroma*20)+'|'+Math.round(lum*4)+(mono?'|m':'');const hit=filterCache.get(key);if(hit)return hit;
  // 가는 곳: 밝고 맑은 색(영웅의 빛) → 따뜻한 주홍(약 16도), 어두운 핏빛(적의 위협) → 차가운 연지(약 354도)
@@ -124,7 +130,7 @@ const bodySeen=new Set();
 const GHOST=/^r(?:350|448):ghost:/;
 const assetKey=p=>{const i=p.indexOf('assets/');return i>=0?p.slice(i):p;};
 const PERSONA=/(?:^|[^a-z])(?:persona[a-z-]*|rc13[34])(?:[^a-z0-9]|$)/i;
-// 돌려주는 값: 'mono'(페르소나 — 연지·주홍 단독), 'mix'(히든 영웅 EGO — 연지·주홍 + 먹 + 백), null(손대지 않음)
+// 돌려주는 값: 'mono'(페르소나 — 연지·주홍 단독), 'mix'(히든 영웅 EGO — 연지·주홍 + 먹 + 백), 'sumi'(환도 — 먹 + 백), null(손대지 않음)
 function scopeOf(c){const o=c.owner;if(!o)return null;const k=o.kind;
  if(k==='hero'||k==='enemy'||k==='hazard'||k==='prop'||k==='contact')return null;
  if(o.r329Shadow||o.r350||o.r434)return null;if(typeof c.key==='string'&&GHOST.test(c.key))return null;
@@ -133,10 +139,10 @@ function scopeOf(c){const o=c.owner;if(!o)return null;const k=o.kind;
  // 페르소나: 기술 그림 경로(이펙트·탄 그림) 또는 페르소나 소유 이펙트
  if(!body&&((c.kind==='image'&&(k==='effect'||k==='projectile')&&(PERSONA.test(path)||PERSONA.test(op)))||(k==='effect'&&id&&PERSONA.test(id))))return 'mono';
  // 히든 영웅 EGO 형상: 그 영웅의 이펙트(적·보스 쪽 신호는 뺀다). 보통 영웅은 손대지 않는다.
- if(!egoLive||k!=='effect'||body)return null;
+ if((!egoLive&&!hwandoLive)||k!=='effect'||body)return null;
  if(o.enemy===true||o.ownerType==='enemy'||o.pxfSide==='enemy'||o.r105Pattern||o.r105Meteor||o.r105Field||o.r431)return null;
  if(id&&(SIGNAL_ID.test(id)||SIGNAL_PREFIX.test(id)))return null;
- return 'mix';}
+ return egoLive?'mix':'sumi';}
 function toneGradient(g,mode){if(!g||typeof g!=='object'||!Array.isArray(g.stops))return g;let changed=false;
  const stops=g.stops.map(s=>{if(!s||typeof s!=='object'||typeof s.color!=='string')return s;const t=tone(s.color,mode);if(t===s.color)return s;changed=true;return {...s,color:t};});
  return changed?{...g,stops}:g;}
@@ -147,11 +153,12 @@ function process(commands){if(!active()||!Array.isArray(commands))return 0;let n
  for(let i=0;i<commands.length;i++){const c=commands[i];if(!c||typeof c!=='object'||c.r1095)continue;
   const kind=c.kind;if(kind!=='image'&&kind!=='fill'&&kind!=='stroke')continue;
   const s=c.style;if(!s||typeof s!=='object')continue;
-  const scope=scopeOf(c);if(!scope)continue;const mode=scope==='mono'?'mono':undefined;
+  const scope=scopeOf(c);if(!scope)continue;const mode=scope==='mix'?undefined:scope;
   const path=typeof c.sourcePath==='string'?c.sourcePath:'',rule=rules.length?ruleFor(path,typeof c.owner.id==='string'?c.owner.id:''):null;
   if(rule&&rule.role==='keep')continue;
   if(kind==='image'){const blend=s.globalCompositeOperation||'source-over';let f;
    if(rule&&(rule.role==='white'||rule.role==='ink'))f=filterFor({role:rule.role});
+   else if(mode==='sumi')f=filterFor({hue:0,chroma:0,lum:blend==='source-over'?num((infoOf(c,path)||{}).lum,.6):.6,blend,mode});
    else{const info=rule&&rule.info&&fin(rule.info.hue)?rule.info:infoOf(c,path);if(info===undefined)continue;
     f=filterFor(info?{hue:info.hue,chroma:num(info.chroma,.8),lum:num(info.lum,.6),blend,mode,role:rule&&!mode?rule.role:undefined}:null);}
    const prev=typeof s.filter==='string'&&s.filter&&s.filter!=='none'?s.filter+' ':'';
@@ -177,7 +184,7 @@ function settingsRow(){try{const host=document.getElementById('combatScreenR1021
   if(!row){row=document.createElement('div');row.id='inkFxRowR1095';row.className='r1021-row';
    const lab=document.createElement('label'),box=document.createElement('input');box.type='checkbox';box.id='inkFxOnR1095';
    const txt=document.createElement('span');txt.textContent=' 이펙트 수묵 색 ';
-   const note=document.createElement('p');note.className='small muted';note.textContent='히든 영웅 EGO 의 이펙트를 연지·주홍과 먹, 백색으로, 페르소나의 기술을 연지·주홍으로 그립니다. 맵 수묵화풍이 켜져 있을 때만 작동하고, 다른 영웅과 예고 표시 색은 그대로입니다.';
+   const note=document.createElement('p');note.className='small muted';note.textContent='환도의 이펙트를 먹과 백색으로, 히든 영웅 EGO 의 이펙트를 연지·주홍과 먹, 백색으로, 페르소나의 기술을 연지·주홍으로 그립니다. 맵 수묵화풍이 켜져 있을 때만 작동하고, 다른 영웅과 예고 표시 색은 그대로입니다.';
    box.onchange=()=>{set(!!box.checked);};
    lab.appendChild(box);lab.appendChild(txt);row.appendChild(lab);row.appendChild(note);stats.rows++;}
   const kids=host.children,chars=document.getElementById('inkCharsRowR1090'),ink=document.getElementById('inkRowR1055');
@@ -191,5 +198,5 @@ function settingsRow(){try{const host=document.getElementById('combatScreenR1021
 function settingsLater(){settingsRow();try{queueMicrotask(settingsRow);}catch(_){}try{requestAnimationFrame(()=>{settingsRow();requestAnimationFrame(settingsRow);});}catch(_){}}
 try{if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const r=base.apply(this,a);try{settingsLater();}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
 window.__STORYWORLD_INK_FX_R1095__=Object.freeze({revision:REV,storageKey:KEY,palette:PALETTE,tone,toneRGB,filterFor,register,process,active,refresh,enabled:()=>on,set,settingsRow,
- inspect:()=>({revision:REV,on,inkLive,active:active(),ego:egoLive,persona:personaLive,frames:stats.frames,tinted:stats.tinted,errors:stats.errors,rows:stats.rows,sampled:stats.sampled,deferred:stats.deferred,rules:rules.length,sheets:infoByPath.size,lastError})});
+ inspect:()=>({revision:REV,on,inkLive,active:active(),ego:egoLive,persona:personaLive,hwando:hwandoLive,frames:stats.frames,tinted:stats.tinted,errors:stats.errors,rows:stats.rows,sampled:stats.sampled,deferred:stats.deferred,rules:rules.length,sheets:infoByPath.size,lastError})});
 })();
