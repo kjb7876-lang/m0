@@ -10195,6 +10195,8 @@
     "assets/r1104b/persona-walk-front.webp",
     "assets/r1104b/persona-walk-rear.webp",
     "assets/r1104b/persona-walk-side.webp",
+    "assets/r1111/gunner/idle-n6.webp",
+    "cult-six-r1114.js",
     "hero-sway-r1108b.js",
     "persona-hero-r1113.js"
   ],
@@ -11271,5 +11273,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "8edea01dc46598bd04c77da62661a169e33963261252c3ba251fc691f7f0e49c"
+  "runtimeManifestSHA256": "929988359cadc8754bc8009147192c062868d32bbdc9e8e5d6c44ef3503a48a1"
 }

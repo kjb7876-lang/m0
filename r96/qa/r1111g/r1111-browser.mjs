@@ -1,6 +1,6 @@
 // R1111 헤드리스 검사(Playwright, 소프트웨어 렌더): 기억사수 대각(+26°·−26°, 왼쪽 반전 포함) 공격과 쏜 뒤 서 있기·옆 서 있기에서 실제 그려진 칸을 모아
 //  정확히 화면 ±45°·±135° 조준에 Dots r2 se3·ne3(attack-se9·ne9)가 칸 전체로, 왼쪽은 반전으로 그려지는지 본다. (GPU·실기기 미검증)
-//   STORYWORLD_URL=http://127.0.0.1:4396/m0/ OUT=out/r1111 node r96/qa/r1111/r1111-browser.mjs   (GPU·실기기·자연 플레이는 미검증)
+//   STORYWORLD_URL=http://127.0.0.1:4396/m0/ OUT=out/r1111 node r96/qa/r1111g/r1111-browser.mjs   (GPU·실기기·자연 플레이는 미검증)
 import {createRequire} from 'node:module';import fs from 'node:fs';
 const req=createRequire(import.meta.url);let chromium;for(const p of ['playwright','/opt/node22/lib/node_modules/playwright']){try{({chromium}=req(p));break;}catch(_){}}
 const URL=process.env.STORYWORLD_URL||'http://127.0.0.1:4396/m0/',OUT=process.env.OUT||'out/r1111';let fails=0;const check=(n,ok,info)=>{if(!ok)fails++;console.log((ok?'PASS ':'FAIL ')+n+(info===undefined?'':' '+JSON.stringify(info).slice(0,700)));};const ALL={};fs.mkdirSync(OUT,{recursive:true});

@@ -546,8 +546,8 @@ jobs:
         run: node r96/qa/r1101b/r1101b-cpu-check.cjs
       - name: R1101c gunner exact-diagonal aim sheets CPU check
         run: node r96/qa/r1101c/r1101c-cpu-check.cjs
-      - name: R1111 gunner aim-up idle CPU check
-        run: node r96/qa/r1111/r1111-cpu-check.cjs
+      - name: R1111g gunner aim-up idle CPU check
+        run: node r96/qa/r1111g/r1111-cpu-check.cjs
       - name: R1108 neon/lauren attack body scale and seoha diagonal walk CPU check
         run: node r96/qa/r1108/r1108-cpu-check.cjs
       - name: R1108b seoha walk lean (no stride-less side swap) CPU check
