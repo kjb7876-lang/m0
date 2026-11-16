@@ -34,11 +34,13 @@ function world(stored,opt={}){
   insertBefore(c,ref){if(c.parentNode)c.parentNode.children=c.parentNode.children.filter(x=>x!==c);c.parentNode=this;const i=this.children.indexOf(ref);if(i<0)this.children.push(c);else this.children.splice(i,0,c);return c;},
   get nextElementSibling(){const p=this.parentNode;if(!p)return null;return p.children[p.children.indexOf(this)+1]||null;},
   _all(){const o=[];const w=x=>x.children.forEach(c=>{o.push(c);w(c);});w(this);return o;}};
-  if(e.tagName==='CANVAS'){e.getContext=()=>e._g||(e._g={imageSmoothingEnabled:true,imageSmoothingQuality:'low',
-   drawImage(img,...a){let sx=0,sy=0,sw=img.width,sh=img.height,dx,dy,dw,dh;if(a.length>=8)[sx,sy,sw,sh,dx,dy,dw,dh]=a;else if(a.length>=4)[dx,dy,dw,dh]=a;else{dx=a[0]||0;dy=a[1]||0;dw=sw;dh=sh;}
+  if(e.tagName==='CANVAS'){e.getContext=()=>e._g||(e._g={imageSmoothingEnabled:true,imageSmoothingQuality:'low',globalAlpha:1,_st:[],
+   save(){this._st.push(this.globalAlpha);},restore(){if(this._st.length)this.globalAlpha=this._st.pop();},
+   clearRect(x,y,w,h){if(e._px)for(let j=Math.max(0,y|0);j<Math.min(e.height,y+h);j++)for(let i=Math.max(0,x|0);i<Math.min(e.width,x+w);i++)for(let k=0;k<4;k++)e._px[(j*e.width+i)*4+k]=0;},
+   drawImage(img,...a){let sx=0,sy=0,sw=img.width,sh=img.height,dx,dy,dw,dh;if(a.length>=8)[sx,sy,sw,sh,dx,dy,dw,dh]=a;else if(a.length>=4)[dx,dy,dw,dh]=a;else{dx=a[0]||0;dy=a[1]||0;dw=sw;dh=sh;}dx=Math.round(dx);dy=Math.round(dy);dw=Math.round(dw);dh=Math.round(dh);const GA=this.globalAlpha;
     const W=e.width,H=e.height;if(!e._px||e._px.length!==W*H*4)e._px=new Uint8ClampedArray(W*H*4);if(opt.taint)e._taint=true;const sp=img._px||img.__px;if(!sp)return;
     for(let y=0;y<dh;y++)for(let x=0;x<dw;x++){const X=x+dx,Y=y+dy;if(X<0||Y<0||X>=W||Y>=H)continue;const ix=Math.min(img.width-1,Math.floor(sx+x*sw/dw)),iy=Math.min(img.height-1,Math.floor(sy+y*sh/dh));
-     const si=(iy*img.width+ix)*4,di=(Y*W+X)*4,a2=sp[si+3]/255;if(!(a2>0))continue;for(let k=0;k<3;k++)e._px[di+k]=sp[si+k]*a2+e._px[di+k]*(1-a2);e._px[di+3]=Math.min(255,sp[si+3]+e._px[di+3]*(1-a2));}},
+     const si=(iy*img.width+ix)*4,di=(Y*W+X)*4,a2=sp[si+3]/255*GA;if(!(a2>0))continue;for(let k=0;k<3;k++)e._px[di+k]=sp[si+k]*a2+e._px[di+k]*(1-a2);e._px[di+3]=Math.min(255,a2*255+e._px[di+3]*(1-a2));}},
    getImageData(x,y,w,h){if(e._taint){const er=Error('tainted');er.name='SecurityError';throw er;}const d=new Uint8ClampedArray(w*h*4);if(e._px)for(let j=0;j<h;j++)for(let i=0;i<w;i++)for(let k=0;k<4;k++)d[(j*w+i)*4+k]=e._px[((j+y)*e.width+i+x)*4+k];return {data:d,width:w,height:h};},
    createImageData(w,h){return {data:new Uint8ClampedArray(w*h*4),width:w,height:h};},
    putImageData(im){e._px=new Uint8ClampedArray(im.data);}});}
@@ -157,6 +159,60 @@ ok('process tolerates junk',api.process(null)===0&&api.process([null,1,'x',{}])=
 {const W=world(undefined,{sheets:()=>SH});W.tick();const f={commands:[body(0)]};const r=W.inst.render(f);ok('instance render wrapped: base runs once, returns its value',r==='drawn'&&W.calls.base===1&&W.api.inspect().frames===1);
  const p=W.Renderer.prototype.render.call({},{commands:[]});ok('prototype render wrapped too',p==='drawn'&&W.calls.base===2);
  const T=world(undefined,{sheets:()=>SH,baseThrows:true});T.tick();let thrown=false;try{T.inst.render({commands:[]});}catch(e){thrown=/base boom/.test(e.message);}ok('base renderer error propagates (not swallowed)',thrown);}
+
+// ---- ⑧ 얼굴(2D 페르소나 얼굴을 3D 두건 속에) ----
+// 시험용 페르소나 원화: 투명 바탕, 어두운 두건(가운데 위), 두건 안 밝은 얼굴 타원 + 푸른 눈, 아래 어두운 몸
+function persona(w=120,h=160){const px=new Uint8ClampedArray(w*h*4);const set=(x,y,c)=>{const i=(y*w+x)*4;px[i]=c[0];px[i+1]=c[1];px[i+2]=c[2];px[i+3]=255;};
+ for(let y=10;y<150;y++)for(let x=30;x<90;x++)set(x,y,[30,24,28]);
+ for(let y=22;y<40;y++)for(let x=48;x<72;x++){if(((x-60)/12)**2+((y-31)/9)**2<=1)set(x,y,[236,226,222]);}
+ for(let x=52;x<56;x++)set(x,30,[60,120,230]);return {w,h,px};}
+{const P=persona(),f=api.faceCut(P.px,P.w,P.h);
+ ok('faceCut: returns only the face (bright part inside the hood), not the hood',!!f&&f.width>=20&&f.width<=28&&f.height>=15&&f.height<=22,f&&[f.width,f.height]);
+ let blue=0,red=0;if(f)for(let i=0;i<f.data.length;i+=4){if(f.data[i+3]<40)continue;const r=f.data[i],g=f.data[i+1],b=f.data[i+2];if(b>r+25)blue++;if(r>g+60&&r>b+40)red++;}
+ ok('faceCut: blue eye turned to 언주 red (EGO colour)',!!f&&blue===0&&red>=2,{blue,red});
+ ok('faceCut: corners transparent (oval cut)',!!f&&f.data[3]===0&&f.data[(f.width-1)*4+3]===0);
+ ok('faceCut: dark-only / empty / bad → null',api.faceCut(new Uint8ClampedArray(40*40*4),40,40)===null&&api.faceCut(null,4,4)===null&&api.faceCut(P.px,0,0)===null&&(()=>{const d=new Uint8ClampedArray(40*40*4);for(let i=0;i<d.length;i+=4){d[i]=20;d[i+1]=20;d[i+2]=20;d[i+3]=255;}return api.faceCut(d,40,40)===null;})());}
+{// 머리 찾기: 칸 160·배율 1, 몸 가운데 x 80, 두건(폭 12) 꼭대기 y 40, 아래 몸, 위로 가는 칼(폭 2)
+ const W=160,H=160,px=new Uint8ClampedArray(W*H*4),put=(x,y)=>{px[(y*W+x)*4+3]=255;};
+ for(let y=10;y<40;y++){put(95,y);put(96,y);}           // 칼(가늘다 — 머리가 아니다)
+ for(let y=40;y<56;y++)for(let x=74;x<86;x++)put(x,y);    // 두건
+ for(let y=56;y<140;y++)for(let x=62;x<98;x++)put(x,y);   // 몸
+ const hd=api.headOf(px,W,H,80,1);ok('headOf: hood top found, thin sword above ignored',!!hd&&hd.y===40&&Math.abs(hd.x-79.5)<1,hd);
+ ok('headOf: empty → null, NaN scale tolerated',api.headOf(new Uint8ClampedArray(W*H*4),W,H,80,1)===null&&(()=>{const r=api.headOf(px,W,H,80,NaN);return r===null||Number.isFinite(r.y);})());}
+{// 게임 흐름: 페르소나 원화가 있으면 얼굴을 붙여 굽는다
+ const PER=persona(120,160);const SHEETS=u=>/rc133\/art\/base-/.test(u)?{w:PER.w,h:PER.h,px:PER.px}:/assets\/r1048\/ego\//.test(u)?SH:null;
+ const Fw=world(undefined,{sheets:SHEETS});Fw.tick();ok('face on by default',Fw.api.faceEnabled()===true&&Fw.api.mode()==='ink');
+ Fw.api.process([body(0)]);Fw.flush();const I=Fw.api.inspect();ok('ink mode: persona faces cut (5 front/side dirs) and pasted while baking',I.faceCuts===5&&I.facesPut>0&&I.ready>=1&&I.errors===0,I);
+ // 뒤를 보는 방향(n)은 얼굴을 붙이지 않는다
+ const before=Fw.api.inspect().facesPut;const cn=body(0,{path:'assets/r1048/ego/idle-n.webp'});Fw.api.process([cn]);Fw.flush();
+ ok('back-facing sheet (n) gets no face',Fw.api.inspect().facesPut===before,[before,Fw.api.inspect().facesPut]);
+ // 수묵 끔 + 얼굴 켬 → 얼굴만 따로 얹는 모드: 몸은 원본 그대로, 바로 뒤에 얼굴 조각 명령
+ const G=world(undefined,{sheets:SHEETS,inkMode:'off'});G.tick();ok("ink off + face on → mode 'face'",G.api.mode()==='face'&&G.api.active()===false);
+ G.api.process([body(0)]);G.flush();const b0=body(0),list=[b0,{kind:'image',owner:{kind:'enemy'},sourcePath:'x',points:[[0,0],[1,0],[1,1],[0,1]],sourceRect:[0,0,1,1],style:{}}];const n=G.api.process(list);
+ ok('face mode: body untouched, face piece inserted right after it',n===1&&list.length===3&&list[0]===b0&&b0.sourcePath==='assets/r1048/ego/idle-s.webp'&&/^r1099:face:idle-s/.test(list[1].sourcePath)&&list[1].r1099===true,list.map(c=>c.sourcePath));
+ const fp=list[1];ok('face piece: own key·order just above body·marked not-a-body for R409/R350/R448·finite corners·밝기 보정 필터(Three 허용분만)',fp.key==='k:r1099f'&&fp.owner.r409&&fp.owner.r350&&fp.owner.r448&&fp.points.flat().every(Number.isFinite)&&/brightness\(1\.45\) contrast\(1\.1\)$/.test(fp.style.filter)&&!/blur|drop-shadow/.test(fp.style.filter),[fp.key,fp.style.filter]);
+ ok('face mode: second pass adds nothing',G.api.process(list)===0&&list.length===3);
+ const gl=body(0,{style:{globalCompositeOperation:'lighter'}});const l2=[gl];G.api.process(l2);ok('face mode: afterimages (lighter) get no face piece',l2.length===1);
+ G.api.setFace(false);ok("setFace(false) stores '0'; ink off + face off → nothing",G.store.get('storyworld.r1099.egoFace')==='0'&&G.api.mode()===null&&G.api.process([body(0)])===0);
+ G.api.setFace(true);ok('setFace(true) clears key',!G.store.has('storyworld.r1099.egoFace')&&G.api.mode()==='face');
+ // 맵 수묵 끔→켬(그 사이 얼굴 모드) 뒤에도 이미 구운 수묵 시트를 바로 다시 쓴다(다시 굽느라 원본이 오래 비치지 않게), 굽다 만 예약도 막히지 않는다
+ const RB=world(undefined,{sheets:SHEETS});RB.tick();RB.api.process([body(0)]);RB.flush();const bakedA=RB.api.inspect().baked;
+ RB.ink.mode='off';RB.tick();RB.api.process([body(0)]);RB.ink.mode='all';RB.tick();const rb=body(0);const rn=RB.api.process([rb]);
+ ok('ink off→on: baked ink sheet reused at once (no rebake before showing)',rn===1&&/^r1099:ink:idle-s/.test(rb.sourcePath),[rn,rb.sourcePath]);
+ RB.flush();const rb2=body(0,{path:'assets/r1048/ego/walk-e.webp'});RB.api.process([rb2]);RB.flush();const rb3=body(0,{path:'assets/r1048/ego/walk-e.webp'});RB.api.process([rb3]);
+ ok('ink off→on: half-queued sheets still bake afterwards',/^r1099:ink:walk-e/.test(rb3.sourcePath)&&RB.api.inspect().errors===0,[rb3.sourcePath,bakedA,RB.api.inspect().baked]);
+ // 몸통 슬림(사용자 11-16 "몸통만 15% 줄여 부피감·두께"): 몸통 띠만 가로 85%, 머리·다리·바깥(팔·머리칼)은 그대로
+ {const W=120,H=200,px=new Uint8ClampedArray(W*H*4),put=(x0,x1,y0,y1,v)=>{for(let y=y0;y<y1;y++)for(let x=x0;x<x1;x++){const i=(y*W+x)*4;px[i]=px[i+1]=px[i+2]=v;px[i+3]=255;}};
+  put(52,68,10,30,220);put(30,90,30,120,40);put(6,14,50,90,200);put(40,80,120,190,60); // 머리·검은 몸통·떨어진 팔·다리
+  const run=(q,y,dark)=>{let a=-1,b=-1;for(let x=0;x<W;x++){const i=(y*W+x)*4;if(q[i+3]>110&&(!dark||q[i]<100)&&x>20){if(a<0)a=x;b=x;}}return b-a+1;};
+  const o=api.slimTorso(px,W,H,1);const w80=run(o,80,true);
+  ok('slimTorso: torso band ~85% wide',Math.abs(w80-51)<=2,w80);
+  ok('slimTorso: head, legs, detached arm untouched',run(o,20)===16&&run(o,170)===40&&o[(70*W+8)*4+3]===255&&o[(70*W+8)*4]===200,[run(o,20),run(o,170)]);
+  ok('slimTorso: empty / NaN safe',api.slimTorso(new Uint8ClampedArray(W*H*4),W,H,NaN).length===W*H*4&&[...o].every(Number.isFinite));}
+ const S=world(undefined,{sheets:SHEETS});S.w.showSettings();S.flush();const fb=S.docEl._all().find(e=>e.id==='egoFaceOnR1099');
+ ok("settings: 'EGO 얼굴' checkbox in the same row, toggles",!!fb&&fb.checked===true&&(fb.checked=false,fb.onchange(),S.api.faceEnabled()===false)&&S.docEl._all().find(e=>e.id==='egoInkRowR1099').children.includes(fb.parentNode));
+ const NF=world(undefined,{sheets:u=>/assets\/r1048\/ego\//.test(u)?SH:null});NF.tick();NF.api.process([body(0)]);NF.flush();const c=body(0);NF.api.process([c]);
+ ok('persona art missing → still bakes the ink body (no face, no error)',c.r1099===true&&/^r1099:ink:/.test(c.sourcePath)&&NF.api.inspect().errors===0);}
 // ---- ⑦ 바꾸지 않는 것 ----
 ok('no ctx.filter, no game state writes, no new keys',!/ctx\.filter\s*=/.test(src)&&!/\bplayer\.[a-zA-Z]+\s*=[^=]/.test(src)&&!/\broom\.[a-zA-Z]+\s*=[^=]/.test(src)&&!/addEventListener\(\s*['"]key/.test(src));
 done();

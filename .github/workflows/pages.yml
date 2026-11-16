@@ -528,6 +528,8 @@ jobs:
         run: node r96/qa/r953/r953-cpu-check.cjs
       - name: R991 gunner aim CPU check
         run: node r96/qa/r991/r991-cpu-check.cjs
+      - name: R1102 hunter basic arrow size, bow-grip launch and always-attack motion CPU check
+        run: node r96/qa/r1102/r1102-cpu-check.cjs
       - name: R1003 gunner aim down art CPU check
         run: node r96/qa/r1003/r1003-cpu-check.cjs
       - name: R1045 gunner north aim and no-recoil east art CPU check
@@ -540,6 +542,8 @@ jobs:
         run: node r96/qa/r1045d/r1045d-cpu-check.cjs
       - name: R1101 gunner side walk crop and side idle gaze CPU check
         run: node r96/qa/r1101/r1101-cpu-check.cjs
+      - name: R1101b gunner diagonal and side idle gaze sheets CPU check
+        run: node r96/qa/r1101b/r1101b-cpu-check.cjs
       - name: R1047 reach bounds (minX,minY,maxX,maxY) keep hidden persona reachable CPU check
         run: node r96/qa/r1047/reach-bounds-cpu-check.cjs
       - name: R1096 hidden persona mirror-celestial patterns (telegraphed crimson push orb, abyss pull well, eclipse beam; probabilistic) CPU check
@@ -685,7 +689,7 @@ jobs:
       - name: R522 hospital thin walls (the two free-standing maze baffles of ep1a08 moved to touch a thick wall, hospital only, routes stay connected) CPU check
         run: node r96/qa/r522/r522-cpu-check.cjs
       - name: R523 story rooms (clinic ep1a09 + sloth home ep1b02 furnished by room name along the real back walls, presentation only, angle-matched art only) CPU check
-        run: node r96/qa/r523/r523-cpu-check.cjs && node r96/qa/r1061/r1061-cpu-check.cjs && node r96/qa/r1062/prop-theme-cpu-check.cjs && node r96/qa/r1064/r1064-cpu-check.cjs && node r96/qa/r1064/r1064c-cpu-check.cjs && node r96/qa/r1065/r1065-cpu-check.cjs && node r96/qa/r730/r730-cpu-check.cjs && node r96/qa/r731/r731-cpu-check.cjs
+        run: node r96/qa/r523/r523-cpu-check.cjs && node r96/qa/r1061/r1061-cpu-check.cjs && node r96/qa/r1062/prop-theme-cpu-check.cjs && node r96/qa/r1064/r1064-cpu-check.cjs && node r96/qa/r1064/r1064c-cpu-check.cjs && node r96/qa/r1065/r1065-cpu-check.cjs && node r96/qa/r1065/r1065c-cpu-check.cjs && node r96/qa/r1103/r1103-cpu-check.cjs && node r96/qa/r730/r730-cpu-check.cjs && node r96/qa/r731/r731-cpu-check.cjs
       - name: R713 refuge walls (first map hub stone walls 0.24 -> 0.64 outer / 0.48 inner, floor-side face unchanged, corners filled, hub only) CPU check
         run: node r96/qa/r713/r713-cpu-check.cjs
       - name: R810 Bulmyeongwi night (last302/last303 navy moonlight ambient, deep amber lamps, no sepia, no spider-crack decals, night fog colour, lamps kept off the guide path; other zones unchanged) CPU check
@@ -748,6 +752,8 @@ jobs:
         run: node r96/qa/r1094/r1094-cpu-check.cjs
       - name: R1100 EGO hidden hero guard (no hwando body, afterimage or cut-in while EGO form) CPU check
         run: node r96/qa/r1100/r1100-cpu-check.cjs
+      - name: R1105 EGO attack motion (no skipped strike frames, swing blend, direction hold, clone redraw) CPU check
+        run: node r96/qa/r1105/r1105-cpu-check.cjs
       - name: R1092 story panel scene art (vertical-version scene paintings, ink-wash aware) CPU check
         run: node r96/qa/r1092/r1092-cpu-check.cjs
       - name: R1040 boss pattern frame fx CPU check

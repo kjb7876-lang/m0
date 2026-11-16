@@ -235,10 +235,14 @@ function drawDyingAsh(fx,base){const R=fx.r462,look=R.look,age=+fx.age;if(!fin(a
  const z=typeof zoom==='number'&&zoom>0?zoom:1,hPx=Math.max(14,(fin(look.h)?look.h:60)*z),life=fin(+fx.life)&&fx.life>.2?+fx.life:ASH_LIFE,fa=qAge(age);
  if(R.flame)embersOnly(base,fx);
  const dark=clamp01(fa/.45),fade=1-ease(clamp01((fa-.3)/.75)),rise=ease(clamp01((fa-.3)/.75));
- if(fade>.01){const b=(age<.06?1.5:1)*(1-dark)+.07*dark;
+ /* R1065c: Dots 죽음 시트(CX-0115MD)가 있는 몹은 검은 실루엣 대신 자기 그림 6칸으로 휘청 → 무너짐 → 재·빛 조각으로 흩어짐(피·시체 없음, 15세). 연기·재 조각은 그대로 위에. */
+ let DF=null;try{DF=window.__STORYWORLD_MOB_ATTACK_DOTS_R1065__?.deathFrame?.(look,age)||null;}catch(_){DF=null;}
+ if(DF){const b=(age<.06?1.45:1)*(1-.35*dark),fadeD=1-clamp01((age-.95)/.25);if(fadeD>.01){R.dots=DF.id;stats.dotsDeath=(stats.dotsDeath||0)+1;
+   body({...look,path:DF.path,frame:DF.frame},q.x,q.y,hPx,{alpha:fadeD,filter:`brightness(${b.toFixed(3)}) saturate(${(1-.3*dark).toFixed(3)})`});}}
+ else if(fade>.01){const b=(age<.06?1.5:1)*(1-dark)+.07*dark;
   body(look,q.x,q.y-hPx*.05*rise,hPx,{alpha:fade,filter:`brightness(${b.toFixed(3)}) saturate(${(1-dark).toFixed(3)}) contrast(${(1+dark*.25).toFixed(3)})`});}
  const t=clamp01((age-.12)/(life-.12));
- if(age>.12&&t<1){sheet('smoke',Math.floor(t*15),q.x,q.y+hPx*.02,hPx*(.85+.35*t),.82*(t>.7?(1-t)/.3:1),{filter:'brightness(.14) saturate(0) contrast(1.1)',flip:R.side<0});
+ if(age>.12&&t<1){sheet('smoke',Math.floor(t*15),q.x,q.y+hPx*.02,hPx*(.85+.35*t),(DF?.45:.82)*(t>.7?(1-t)/.3:1),{filter:'brightness(.14) saturate(0) contrast(1.1)',flip:R.side<0});
   for(let i=0;i<5;i++){const r=((R.seed>>>(i*5))&31)/31,u=clamp01(t*1.25-i*.05);if(u<=0||u>=1)continue;
    const fx2=q.x+(r-.5)*hPx*.5+Math.sin(u*5+i)*hPx*.06,fy=q.y-hPx*(.25+.5*((i*37%10)/10))-u*hPx*.55;
    sheet('flakes',8+((i*3+Math.floor(u*8))%8),fx2,fy,hPx*.09,(1-u)*.9,{filter:'brightness(.32) saturate(0)'});}}
