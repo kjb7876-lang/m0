@@ -23,6 +23,8 @@ const FF=c=>c.__STORYWORLD_STORY_COMBAT_R54__.frameFor;const API=c=>c.__STORYWOR
  e.attack=null;e.rangedWindup=.4;ok(FF(c)(e,null).assetFrame.sourceRect[0]===M.cell[0],'aim (rangedWindup): windup cell 2');e.rangedWindup=0;
  e.attack={elapsed:.1,r286Fake:true};ok(FF(c)(e,null).path===heel.path,'R286 fake attack: untouched');
  API(c).set(false);e.attack={elapsed:.5};ok(FF(c)(e,null).path===heel.path,'set(false): off');ok(c.localStorage.getItem('storyworld.r1065.mobatk')!==null,'pref saved');}
+{// 처음 보는 몹: covers() 가 바탕 프레임을 한 번 물어 본다(R286 이 그리기 전에 물어도 'full')
+ const c=world({base:heel}),e=mob();ok(API(c).covers(e),'covers probes frameFor for unseen mob');}
 {// 바탕 경로가 표에 없으면 그대로, m033 공격 줄(y640)을 이미 쓰는 공급자는 그대로
  const c=world({base:{path:'assets/r380/mobs/purple-eggkeeper-v1.webp',assetFrame:{sourceRect:[0,0,256,256],pivot:[128,250],visibleHeight:150}}}),e=mob({attack:{elapsed:.4}});ok(FF(c)(e,null).path.includes('eggkeeper'),'unknown base: untouched');ok(!API(c).covers(e),'not covered');
  const m=p=>({path:'assets/r410/mobs/m033.webp',assetFrame:{sourceRect:[0,p,256,320],pivot:[128,300],visibleHeight:180}});

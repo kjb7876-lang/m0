@@ -21,7 +21,7 @@ const realAtk=e=>!!(e&&e.attack&&!e.attack.r286Fake&&Number.isFinite(e.attack.el
 function progress(e){const sh=e.attack.shape154||e.combatProfile?.attackShape||{},tot=Math.max(.2,(e.attack.castWindup150??sh.windup??.45)+(sh.active??.15)+(sh.recovery??.35));return Math.min(.999,Math.max(0,e.attack.elapsed/tot));}
 function pick(e,base){const af=base&&base.assetFrame;if(!af)return null;const hit=BASE.get(norm(base.path));if(!hit)return null;
  const sr=af.sourceRect;if(hit.b.rows&&Array.isArray(sr)&&!hit.b.rows.includes(Math.round(+sr[1]||0)))return null;return hit;}
-function frame(e,base){const hit=pick(e,base);if(!hit)return base;covered.set(e,hit.id);if(!prefs.on||!(e.hp>0))return base;
+function frame(e,base){const hit=pick(e,base);if(!hit)return base;if(!covered.has(e)){covered.set(e,hit.id);if(!ready(hit.s.path))want(hit.s.path);}/* 처음 볼 때 미리 읽기 — 첫 공격이 옛 걷기 칸으로 나가지 않게 */if(!prefs.on||!(e.hp>0))return base;
  let k=-1;if(realAtk(e)){k=Math.floor(progress(e)*hit.s.cells);stats.attackFrames++;}else if(e.rangedWindup>0&&!e.attack){k=1;stats.aimFrames++;}if(k<0)return base;
  const af=base.assetFrame,bp=af.pivot,vh=+af.visibleHeight;if(!Array.isArray(bp)||!Number.isFinite(+bp[0])||!Number.isFinite(+bp[1])||!(vh>0))return base;
  if(!ready(hit.s.path)){want(hit.s.path);stats.waiting++;return base;}
@@ -38,7 +38,10 @@ function install(){const S=window.__STORYWORLD_STORY_COMBAT_R54__;if(!S||typeof 
  const inner=S.frameFor;mine=function(e,f){let b;b=inner.call(this,e,f);try{return frame(e,b);}catch(err){fail(err);return b;}};
  window.__STORYWORLD_STORY_COMBAT_R54__=Object.freeze({...S,__r1065:true,frameFor:mine});stats.installs++;return true;}
 install();try{setInterval(install,700);}catch(_){}
+// R286 kindOf 는 그리기(frameFor) 전에 불려 3초 캐시된다 → 처음 보는 몹은 여기서 바탕 프레임을 한 번 물어 본다(몹마다 한 번).
+const probed=new WeakSet();
+function covers(e){if(!prefs.on||!e)return false;if(covered.has(e))return true;if(!probed.has(e)){probed.add(e);try{const S=window.__STORYWORLD_STORY_COMBAT_R54__;if(S?.frameFor)S.frameFor(e,e.profile?.frames?.idle||null);}catch(err){fail(err);}}return covered.has(e);}
 function set(v){prefs={...prefs,...(v&&typeof v==='object'?v:{on:v!==false})};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return {...prefs};}
-window.__STORYWORLD_MOB_ATTACK_DOTS_R1065__=Object.freeze({revision:REV,set,install,covers:e=>!!(prefs.on&&e&&covered.has(e)),
+window.__STORYWORLD_MOB_ATTACK_DOTS_R1065__=Object.freeze({revision:REV,set,install,covers,
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},sheets:JSON.parse(JSON.stringify(SHEETS)),lastError})});
 })();
