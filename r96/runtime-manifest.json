@@ -9693,6 +9693,11 @@
       "sha256": "4b1c06d3810ab1f88124e54393f2e2db5618b8cfc141714eca35095a453a2cb2"
     },
     {
+      "path": "assets/r1065/mobs/at-07-polar-cyborg-hound-attack-r2.webp",
+      "bytes": 168864,
+      "sha256": "8bf5c5bffb0a2ea8097845f2c5564d772af3ceb4855baaff563ddc3423900ff0"
+    },
+    {
       "path": "assets/r1065/mobs/ma-02-red-heel-blade-attack.webp",
       "bytes": 85036,
       "sha256": "2e5b72b10db8469f917b41570f046d094808ada89089fb6754de507e5a160dd1"
@@ -9791,6 +9796,16 @@
       "path": "assets/r1065/mobs/ra-03-cult-mech-legs-aim.webp",
       "bytes": 42492,
       "sha256": "1db75f497dc46a686ebab6d3f81912c951a6cba8cbe78c561d3ba87784e43300"
+    },
+    {
+      "path": "assets/r1065/mobs/ra-05-rooftop-memory-echo-aim-r2.webp",
+      "bytes": 29144,
+      "sha256": "f3271ab7685bd5aae1d6409c4e584dccac9d6db88988eab035a39b08ec22f6a4"
+    },
+    {
+      "path": "assets/r1065/mobs/ra-07-gate-azure-afterimage-aim-r2.webp",
+      "bytes": 34194,
+      "sha256": "bad6f32643883b6a12611e5821cab2b46c358d181e672dab932e8cc3c3ab4603"
     },
     {
       "path": "assets/r107/fx/iai-burst.webp",
@@ -10356,6 +10371,31 @@
       "path": "assets/r1107/persona-red-star.webp",
       "bytes": 213042,
       "sha256": "9edd6546bf1054be5f3b0ceac6d63c60f2b86f4ead4dfe5baf18458b0e7439b2"
+    },
+    {
+      "path": "assets/r1111/mobs/md-05-disinfection-lamp-fallen-angel-death.webp",
+      "bytes": 40218,
+      "sha256": "80df1e7202f9bc32d71edabb3e547acec6ccbdc42d1ef1754a40b3c57346df9e"
+    },
+    {
+      "path": "assets/r1111/mobs/md-27-steel-jaw-hound-death.webp",
+      "bytes": 70718,
+      "sha256": "e766b63cfd0851e1de8bf500a617400be2f6aebfb42b350e63ba79b7d5861087"
+    },
+    {
+      "path": "assets/r1111/mobs/md-29-polar-cyborg-hound-death.webp",
+      "bytes": 105366,
+      "sha256": "173221f3be76c66a0b39f431ad869dd83c044358a53e4ca8288f3f6a14dabef4"
+    },
+    {
+      "path": "assets/r1111/mobs/md-44-resonance-slave-death.webp",
+      "bytes": 87792,
+      "sha256": "7db9ca74aece467fb89cab73cb83fe341a7c7b66d36863220c3b937c4fc5118d"
+    },
+    {
+      "path": "assets/r1111/mobs/md-72-ash-moth-death.webp",
+      "bytes": 28544,
+      "sha256": "a19b03efd2e05f9de75ffa7455fde3c26ed7dda775247d7f49ad2e051e4c45ed"
     },
     {
       "path": "assets/r116/mobs/M001-hit.png",
@@ -53304,8 +53344,8 @@
     },
     {
       "path": "hero-consist-r1108.js",
-      "bytes": 7150,
-      "sha256": "50eefd8cad7627fea5af798a0aea6196035949da29bc9f350627ecc401762125"
+      "bytes": 7272,
+      "sha256": "49adea20090c61c438361269ad1281cd823ecb898a59532e4e430d7e1c44189a"
     },
     {
       "path": "hero-defense-r720.js",
@@ -53376,6 +53416,11 @@
       "path": "hero-skills-r269.js",
       "bytes": 8371,
       "sha256": "94737bcf72686e17be53286fc10834921e899eb4c49a5bfba20b7ce137d0129b"
+    },
+    {
+      "path": "hero-sway-r1108b.js",
+      "bytes": 4367,
+      "sha256": "e619978f0a8906863f841feed198524f2aad421888a33e03b4cd8964ad4afcb7"
     },
     {
       "path": "hero-threads-r174.js",
@@ -53539,8 +53584,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6580882,
-      "sha256": "efb2e1d7bb2237ba8718c0524be4273b62fd44f183d969d2dac7d433ad435d63"
+      "bytes": 6580975,
+      "sha256": "ae66ecb9207d47517873888a13da0d1704188cda46ede186b4584246b3a697aa"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -53734,8 +53779,8 @@
     },
     {
       "path": "mob-attack-dots-r1065.js",
-      "bytes": 16962,
-      "sha256": "6c33cfe9cbbfa8bf52493db4e3141a623f9d02e0eb9ae783f53b409f3976118b"
+      "bytes": 19941,
+      "sha256": "d4877b853d6cfc61cfe06854a6f928efae16f5a07d3effb0280cbeb41b5dce7b"
     },
     {
       "path": "mob-death-r188.js",
@@ -53839,8 +53884,8 @@
     },
     {
       "path": "mob-unique-r248.js",
-      "bytes": 18188,
-      "sha256": "1e7d7dff21aa7c73b46d06de8eaea1a110e833d19772a223b9061693b0c347cb"
+      "bytes": 18389,
+      "sha256": "acfdf5cdf217564141dae7efe37dcff78f39f71ddc912d4cd6b7bd3e64eee12c"
     },
     {
       "path": "mobile-bonus-r286.js",
@@ -54084,8 +54129,8 @@
     },
     {
       "path": "persona-stride-r1104.js",
-      "bytes": 16887,
-      "sha256": "39125350145cf4aea165435f62887d1172e9246a0f24cb92a31d2555aed04785"
+      "bytes": 17166,
+      "sha256": "13d07255252b9bc48148b951a6c7863e6a96555ef1a57665941a55f6bbe3fe8e"
     },
     {
       "path": "pixel-readable-r325.js",
@@ -54273,6 +54318,11 @@
       "sha256": "f95159652479955e866e4181922ae204f13649277af41622ee5b0d00643da3ec"
     },
     {
+      "path": "samong-face-r1098.js",
+      "bytes": 8922,
+      "sha256": "034f036ff1ede80edab0013f588d330a26fa582ffefd225c86aecdec16a62681"
+    },
+    {
       "path": "samong-gate-r338.js",
       "bytes": 6645,
       "sha256": "30a5c9353c40cc0d52ac7ec50ac99d3c8057d2253517292b20c83f80c0ac5a8e"
@@ -54309,8 +54359,8 @@
     },
     {
       "path": "samong-r161.js",
-      "bytes": 19464,
-      "sha256": "2a8b76ec21820df299570de65dd75f167b53b4c339efa440c2ff5500955d05a6"
+      "bytes": 19737,
+      "sha256": "0b15b20af730950ef15479b6f050619836b30ad5345dfb2fa583ee2a99e1fa99"
     },
     {
       "path": "samong-rooms-r511.js",
@@ -54554,8 +54604,8 @@
     },
     {
       "path": "story-maps-r171.js",
-      "bytes": 40778,
-      "sha256": "e259a886c26ca970666ac13fd1eeafc55abf41495cf49737b7431e8e84272173"
+      "bytes": 41358,
+      "sha256": "35becb844d1292bcc52b68b6ed988d82e92d17ac067294bf35fa807877d899d0"
     },
     {
       "path": "story-mobs-r208.js",
@@ -54883,9 +54933,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10976,
-  "totalBytes": 1323730814,
-  "webHTMLSha256": "efb2e1d7bb2237ba8718c0524be4273b62fd44f183d969d2dac7d433ad435d63",
+  "fileCount": 10986,
+  "totalBytes": 1324313470,
+  "webHTMLSha256": "ae66ecb9207d47517873888a13da0d1704188cda46ede186b4584246b3a697aa",
   "largest": [
     {
       "path": "index.html",
