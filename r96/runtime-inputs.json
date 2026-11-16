@@ -10154,6 +10154,7 @@
     "quest-gate-r1093.js",
     "ego-guard-r1100.js",
     "ego-ink-r1099.js",
+    "hero-row-r1106.js",
     "persona-stride-r1104.js",
     "assets/r1107/persona-red-star.webp",
     "assets/r1107/persona-eclipse.webp"
@@ -11231,5 +11232,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "607ff98a5f22959b710057be59cf205721ebc2648ed44065e8c6cf906d8afe50"
+  "runtimeManifestSHA256": "dff24f76e2fbe31051268ce8ca5a5fd8d69639de785992abf40ba3d958c3b43b"
 }
