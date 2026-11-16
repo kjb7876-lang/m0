@@ -9,8 +9,8 @@
 //  시트가 아직 없으면(Dots CX-0105E3 모델 대기) 아무것도 그리지 않는다 — 판단 함수만 열어 둔다. 숫자는 모두 유한값으로 묶는다.
 (()=>{'use strict';
 if(window.__STORYWORLD_EGO_MOTION_R1048__)return;
-const REV='R1048-ego-motion-6';
-const RULES=Object.freeze({fade:.1,fadeFast:.05,hitstop:.06,ghosts:3,ghostGap:.035,runSpeed:4.2,minRate:.55,maxRate:1.8,
+const REV='R1048-ego-motion-7';
+const RULES=Object.freeze({fade:.1,fadeFast:.05,hitstop:.06,hitstopShare:.15,ghosts:3,ghostGap:.035,turnHold:.15,swingFade:.06,runSpeed:4.2,minRate:.55,maxRate:1.8,
  priority:Object.freeze(['dead','dash','hurt','discard','attack','move','idle'])});
 const DIR8=Object.freeze(['s','se','e','ne','n','nw','w','sw']);
 const fin=v=>Number.isFinite(v);
@@ -35,18 +35,33 @@ function strideRate(clip,speed,meta){const ref=fin(+meta?.strideSpeed)&&+meta.st
  return clamp(clamp(+speed,0,99)/ref,RULES.minRate,RULES.maxRate);}
 // 재생기 하나 = 영웅 하나. step(dt, input) 이 이번 화면의 {clip,dir,frame,fade:{clip,dir,frame,alpha}|null,ghosts:[…],hold} 를 돌려준다.
 function createPlayer(sheets){const A=sheets?.actions||{};
- const st={state:'idle',clip:'idle',dir:'s',phase:0,frame:0,since:0,prev:null,fadeLeft:0,fadeDur:RULES.fade,hold:0,struck:false,trail:[],trailT:0,t:0};
+ const st={state:'idle',clip:'idle',dir:'s',phase:0,frame:0,since:0,prev:null,fadeLeft:0,fadeDur:RULES.fade,hold:0,struck:false,trail:[],trailT:0,t:0,
+  lastP:NaN,lastBasic:null,p0:NaN,p1:NaN,cand:null,candT:0};
  function meta(c){return A[c]||{frames:1,fps:8,loop:true};}
  function step(dt,inp){dt=clamp(+dt,0,.25);inp=inp||{};st.t+=dt;
-  const state=pickState(inp),clip=clipOf(state,inp.speed),dir=dir8(inp.fx,inp.fy,st.dir),m=meta(clip),n=Math.max(1,m.frames|0);
+  const state=pickState(inp),clip=clipOf(state,inp.speed),m=meta(clip),n=Math.max(1,m.frames|0);let dir=dir8(inp.fx,inp.fy,st.dir);
+  const ap=+inp.attackP;
+  // R1105(사용자 11-16 06:38Z "히든영웅에고 공격모션 어색한부분"): 공격이 이어질 때(새 휘두름·기본↔스킬 진행도 바뀜) 같은 'attack' 이라 섞기 없이 15→0·6→0 으로 튀었다 → 새 휘두름도 짧게 섞고 타격·방향을 새로 잡는다
+  const swing=clip==='attack'&&st.clip==='attack'&&state===st.state&&fin(ap)&&((fin(st.lastP)&&ap<st.lastP-.15)||(st.lastBasic!==null&&!!inp.basic!==st.lastBasic));
+  if(swing){st.prev={clip:st.clip,dir:st.dir,frame:st.frame};st.fadeDur=RULES.swingFade;st.fadeLeft=st.fadeDur;st.struck=false;st.hold=0;st.since=0;st.p0=NaN;st.p1=NaN;st.cand=null;st.candT=0;}
   if(clip!==st.clip||state!==st.state){
    st.prev={clip:st.clip,dir:st.dir,frame:st.frame};st.fadeDur=(state==='hurt'||state==='dead'||state==='dash')?RULES.fadeFast:RULES.fade;st.fadeLeft=st.fadeDur;
    const keepPhase=(clip==='walk'||clip==='run')&&(st.clip==='walk'||st.clip==='run');/* 걷기↔달리기는 발 위상을 이어 간다 */
-   if(!keepPhase)st.phase=0;st.clip=clip;st.state=state;st.since=0;st.struck=false;st.hold=0;}
-  st.since+=dt;st.dir=dir;
-  if(st.hold>0){st.hold=Math.max(0,st.hold-dt);}
-  else if(clip==='attack'&&fin(+inp.attackP)){st.frame=attackFrame(+inp.attackP,m);
-   const s0=m.phases?.strike?.[0];if(!st.struck&&fin(s0)&&st.frame>=s0){st.struck=true;st.hold=RULES.hitstop;}}
+   if(!keepPhase)st.phase=0;st.clip=clip;st.state=state;st.since=0;st.struck=false;st.hold=0;st.p0=NaN;st.p1=NaN;st.cand=null;st.candT=0;
+   if(clip==='attack')st.dir=dir;/* 휘두름 시작 방향 */}
+  st.since+=dt;
+  // R1105: 공격 중엔 시작 방향을 지킨다(휘두르는 도중 se→e 처럼 몸이 돌던 것). 다른 방향이 RULES.turnHold 초 이어지고 히트스톱 중이 아닐 때만 돈다(이동하며 쓰는 스킬)
+  if(clip==='attack'&&!swing&&st.since>0){if(dir===st.dir){st.cand=null;st.candT=0;}else{if(st.cand!==dir){st.cand=dir;st.candT=0;}st.candT+=dt;if(st.candT>=RULES.turnHold&&!(st.hold>0)){st.dir=dir;st.cand=null;st.candT=0;}}}
+  else st.dir=dir;
+  if(clip==='attack'&&fin(ap)){st.lastP=ap;st.lastBasic=!!inp.basic;}else{st.lastP=NaN;st.lastBasic=null;}
+  if(st.hold>0){if(clip==='attack'&&fin(ap))st.p1=ap;st.hold=Math.max(0,st.hold-dt);/* 멈춘 동안 흐른 진행도 = 눌러 담을 시작점 */}
+  if(st.hold>0){}
+  else if(clip==='attack'&&fin(ap)){
+   // R1105: 히트스톱 동안에도 공격 진행도는 흘러 멈춘 뒤 타격 칸(6~11)을 통째로 건너뛰었다 → 멈춘 뒤 남은 진행도를 타격 첫 칸부터 끝까지 눌러 담아 재생(끝나는 시각은 그대로)
+   let pe=ap;if(fin(st.p0)){if(!fin(st.p1))st.p1=ap;const u=clamp((ap-st.p1)/Math.max(1e-3,1-st.p1),0,1);/* 남은 시간의 절반은 타격 칸(.35~.55), 절반은 여운 */pe=u<.5?st.p0+(.55-st.p0)*(u/.5):.55+.45*((u-.5)/.5);pe=clamp(pe,st.p0,1);}
+   st.frame=attackFrame(pe,m);if(st.struck)st.frame=Math.max(st.frame,m.phases?.strike?.[0]|0);/* 멈춘 뒤 예비 칸으로 되돌아가지 않게 */
+   const s0=m.phases?.strike?.[0],s1=m.phases?.strike?.[1];if(!st.struck&&fin(s0)&&st.frame>=s0&&!(fin(s1)&&st.frame>s1)){st.struck=true;const dur=+inp.attackDur;st.hold=fin(dur)&&dur>0?clamp(dur*RULES.hitstopShare,.02,RULES.hitstop):RULES.hitstop;/* R1105: 짧은 기본 공격(.23초)엔 짧게 — .06초면 휘두름의 4분의 1이 멈춤 */st.frame=clamp(s0,0,n-1)|0;st.p0=.3501;/* 타격 첫 칸에서 멈춘다(attackFrame 의 타격 구간 시작) */}
+   else if(!st.struck&&fin(s1)&&st.frame>s1)st.struck=true;/* 이미 타격을 지난 진행도로 들어오면(기본→스킬 진행도) 멈추지도 되감지도 않는다 */}
   else{const rate=(clip==='walk'||clip==='run')?strideRate(clip,inp.speed,m):1;st.phase+=dt*clamp(+m.fps,1,60)*rate;
    st.frame=m.loop?Math.floor(st.phase)%n:Math.min(n-1,Math.floor(st.phase));}
   st.frame=clamp(st.frame|0,0,n-1)|0;
@@ -54,17 +69,17 @@ function createPlayer(sheets){const A=sheets?.actions||{};
   const fade=st.prev&&st.fadeLeft>0?{...st.prev,alpha:clamp(st.fadeLeft/st.fadeDur,0,1)}:null;
   // 잔상: 타격 구간·대시 동안만 쌓는다
   const ghostOn=state==='dash'||(clip==='attack'&&st.struck&&st.since<.5);st.trailT+=dt;
-  if(ghostOn&&st.trailT>=RULES.ghostGap){st.trailT=0;st.trail.unshift({clip,dir,frame:st.frame,x:+inp.x||0,y:+inp.y||0});st.trail.length=Math.min(st.trail.length,RULES.ghosts);}
+  if(ghostOn&&st.trailT>=RULES.ghostGap){st.trailT=0;st.trail.unshift({clip,dir:st.dir,frame:st.frame,x:+inp.x||0,y:+inp.y||0});st.trail.length=Math.min(st.trail.length,RULES.ghosts);}
   if(!ghostOn&&st.trail.length&&st.trailT>=RULES.ghostGap){st.trailT=0;st.trail.pop();}
   const ghosts=st.trail.map((g,i)=>({...g,alpha:clamp(.38*(1-i/RULES.ghosts),0,1)}));
-  return{state,clip,dir,frame:st.frame,fade,ghosts,hold:st.hold>0};}
+  return{state,clip,dir:st.dir,frame:st.frame,fade,ghosts,hold:st.hold>0};}
  return{step,get state(){return{...st,trail:st.trail.slice()};}};}
 // ---- 게임에 그리기 ----
 // 시트 목록은 데이터 파일(ego-motion-r1048-sheets.js → window.__STORYWORLD_EGO_MOTION_R1048_SHEETS__)이 있을 때만 켠다.
 //  모양: {base:'assets/r1048/ego/', ext:'webp', cell:192, bodyPx:146, foot:[96,169], dirs:[…], actions:{idle:{frames,fps,loop,phases?,strideSpeed?},…}}
 //  없으면(지금 — EGO 3D 모델 대기) 아무것도 바꾸지 않는다. 네트워크 요청도 하지 않는다.
 const BODY_ART=/hero_direction|hero-authored|assets\/heroes\/|r91\/walk\/|r93\/idle\/|r119\/heroes\/|r121\/(?:heroes|walk)\/|r128\/gunner\/|r130\/[a-z]+\/|r143\/attack\/|r242\/hwando\/|r283\/hwando\/|r271\/|r196\/hwando\/|r436\/hwando\/|r439\/hwando\/|awakening|r1048\/|^blob:/;
-const stats={frames:0,ghosts:0,fades:0,skipped:0,errors:0,slash:0,feathers:0,bursts:0,halo:0,fallback:0,hidden:0};let egoSince=null;let lastError=null,lastInp=null,lastSrc=null,movedAt=-9,on=true,player1=null,lastT=null,lastPos=null,atkMax=0,prevAt=0,castMax=0,prevCast=0,speedS=0,face={x:1,y:1};
+const stats={frames:0,ghosts:0,fades:0,skipped:0,errors:0,slash:0,feathers:0,bursts:0,halo:0,fallback:0,hidden:0,nested:0};let depth=0,lastR=null;let egoSince=null;let lastError=null,lastInp=null,lastSrc=null,movedAt=-9,on=true,player1=null,lastT=null,lastPos=null,atkMax=0,prevAt=0,castMax=0,prevCast=0,speedS=0,face={x:1,y:1};
 try{const v=JSON.parse(localStorage.getItem('storyworld.r1048.motion')||'{}');if(v&&v.on===false)on=false;}catch(_){}
 const sheets=()=>{const s=window.__STORYWORLD_EGO_MOTION_R1048_SHEETS__;return s&&s.actions&&fin(+s.cell)&&+s.cell>0?s:null;};
 const egoOn=()=>{try{const E=window.__STORYWORLD_EGO_SOVEREIGN_R1046__;return !!E&&(E.formActive?.()||E.inspect?.().rc151===true);}catch(_){return false;}};
@@ -93,8 +108,8 @@ function input(p,t,S,M){const dt=lastT==null?0:clamp(t-lastT,0,.25);lastT=t;
  const cut=(at>0||cast>0)&&!(+S.da>0)&&!!G(()=>M?.moveCancel?.(at>0?'attack':'skill'));
  let discard=0;try{const I=window.__STORYWORLD_EGO_SOVEREIGN_R1046__?.inspect?.(),t0=fin(+I?.discardAt)?+I.discardAt:+I?.cdUntil-16,/* R1094: 강화 단계로 대기가 16초가 아닐 수 있어 폐기 시각을 직접 읽음 */len=(sheets()?.actions?.discard?.frames||16)/(sheets()?.actions?.discard?.fps||16);if(fin(t0)&&t-t0>=0&&t-t0<len)discard=1;}catch(_){}
  const attackP=at>0&&atkMax>0?clamp(1-at/atkMax,0,1):cast>0&&castMax>0?clamp(1-cast/castMax,0,1):NaN;
- return{dt,inp:{dead:!(p.hp>0),da:S.da,hu:S.hu,at:!cut&&(at>0||cast>0)?1:0,discard,mv:!!(S.mv||t-movedAt<.15),speed:speedS,fx:face.x,fy:face.y,attackP,basic:!cut&&at>0,cut,x:pos.x,y:pos.y}};}
-function pickBody(rec,st){let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!bodyArt(c.sourcePath||c.image?.src))continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}return best;}
+ return{dt,inp:{attackDur:at>0?atkMax:cast>0?castMax:NaN,dead:!(p.hp>0),da:S.da,hu:S.hu,at:!cut&&(at>0||cast>0)?1:0,discard,mv:!!(S.mv||t-movedAt<.15),speed:speedS,fx:face.x,fy:face.y,attackP,basic:!cut&&at>0,cut,x:pos.x,y:pos.y}};}
+function pickBody(rec,st){let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||c.r1048||!bodyArt(c.sourcePath||c.image?.src))continue;/* R1105: 이미 EGO 로 바꾼 칸(분신 몫)은 고르지 않는다 */const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}return best;}
 // 검 궤적 이펙트(Dots CX-0110EG ego_slash r1 → Claude 개선: 512칸 6장, 끝 칸 완전 투명, 백색 번짐 240 상한; 게임용 256칸 webp).
 //  기본 공격(at>0)일 때만. 몸 공격 칸(16칸: 예비 0~4·타격 5~10·여운 11~15) → 궤적 칸. 타격 첫 칸(히트스톱)에 가장 큰 3번 칸.
 //  그림은 오른쪽 위→왼쪽 아래 초승달 → 화면 오른쪽을 볼 때 좌우를 뒤집는다. 가산 합성('lighter')으로 몸 위에 겹친다.
@@ -123,7 +138,12 @@ function place(sh,clip,dir,frame,fx,fy){const p=(sh.base||'assets/r1048/ego/')+c
  return{image:im,sourcePath:p,immutableTint:null,mutable:false,sourceRect:[frame*cell,0,cell,cell],imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],points:pts,r1048:clip};}
 function paint(rec,st){const sh=sheets(),p=typeof player==='object'?player:null;if(!sh||!p){stats.skipped++;return;}
  preload(sh);const best=pickBody(rec,st);if(!best){stats.skipped++;return;}
- if(!player1)player1=createPlayer(sh);const M=window.__STORYWORLD_HERO_MOTION_R895__,S=M?.sample?.()||{};const t=now(),{dt,inp}=input(p,t,S,M),r=player1.step(dt,inp);lastInp={dt,...inp};
+ if(!player1)player1=createPlayer(sh);
+ // R1105: 분신·환영(R945 삼협묵희·정화 연참 환영)은 영웅 자리를 옮겨 영웅 그리기를 다시 부른다 → 그때마다 재생기를 돌리면 자리 차이가 속도로 읽혀(30칸/초) 서 있는데 달리기·방향 깜빡임이 났다.
+ //  안쪽(겹친) 호출은 재생기·속도·방향을 건드리지 않고 마지막 결과를 그 자리에 그린다(잔상·깃 버스트는 영웅 몫만).
+ const nested=depth>1&&lastR;
+ let r;if(nested){r={...lastR,ghosts:[]};stats.nested++;}
+ else{const M=window.__STORYWORLD_HERO_MOTION_R895__,S=M?.sample?.()||{};const t=now(),o=input(p,t,S,M);r=player1.step(o.dt,o.inp);lastInp={dt:o.dt,...o.inp};lastR=r;}
  const q=project(p.x,p.y),lift=clamp(+p.visualLiftPx||0,0,60),fx=q.x,fy=q.y-lift;
  let main=place(sh,r.clip,r.dir,r.frame,fx,fy);
  if(!main){/* 시트를 아직 못 받음 → 같은 방향 대기 → 받아 둔 아무 EGO 칸(환도 몸을 남기지 않는다) */main=place(sh,'idle',r.dir,0,fx,fy);
@@ -132,7 +152,7 @@ function paint(rec,st){const sh=sheets(),p=typeof player==='object'?player:null;
  if(!main){const t0=now();if(egoSince==null)egoSince=t0;if(t0-egoSince<HIDE_MAX&&t0>=egoSince){best.style={...(best.style||{}),globalAlpha:0};stats.hidden++;}stats.skipped++;return;}
  lastSrc=main.sourcePath+'#'+r.frame;
  const before=best.image,alpha=+best.style?.globalAlpha||1;Object.assign(best,main);
- for(let i=rec.commands.length-1;i>=st;i--){const c=rec.commands[i];if(c!==best&&c.kind==='image'&&c.owner?.kind==='hero'&&c.image===before)rec.commands.splice(i,1);}
+ for(let i=rec.commands.length-1;i>=st;i--){const c=rec.commands[i];if(c!==best&&c.kind==='image'&&c.owner?.kind==='hero'&&!c.r1048&&c.image===before)rec.commands.splice(i,1);}
  const extra=[];
  if(r.fade){const f=place(sh,r.fade.clip,r.fade.dir,r.fade.frame,fx,fy);if(f){extra.push({...best,...f,key:best.key+':r1048f',style:{...best.style,globalAlpha:alpha*r.fade.alpha}});stats.fades++;}}
  r.ghosts.forEach((g,i)=>{const gq=project(g.x,g.y),f=place(sh,g.clip,g.dir,g.frame,gq.x,gq.y-lift);if(f){extra.push({...best,...f,key:best.key+':r1048g'+i,style:{...best.style,globalAlpha:alpha*g.alpha,globalCompositeOperation:'lighter'}});stats.ghosts++;}});
@@ -142,8 +162,8 @@ function paint(rec,st){const sh=sheets(),p=typeof player==='object'?player:null;
    rec.commands.splice(at+1,0,cmd(0),...(S2.coreFrames.includes(sf)?[cmd(1)]:[]));stats.slash++;}}
  try{const t=now(),ah0=(typeof actorHeight==='function'?actorHeight():66),back=r.dir==='n'||r.dir==='ne'||r.dir==='nw',H=FX.halo,hf=placeFx(H,haloFrame(t),fx,fy-ah0*H.lift,false);
   if(hf){const at=rec.commands.indexOf(best);rec.commands.splice(back?at+1:at,0,{...best,...hf,owner:fxOwner(best.owner),key:best.key+':r1048h',style:{...best.style,globalAlpha:alpha*(back?H.alphaFront:H.alpha),globalCompositeOperation:'lighter'}});stats.halo++;}
-  if(r.clip==='discard'&&r.frame>=9&&!burstDiscard){burstDiscard=true;burstT0=t;stats.bursts++;}if(r.clip!=='discard')burstDiscard=false;
-  const bf=burstFrame(burstT0,t);if(bf>=0){const ah=(typeof actorHeight==='function'?actorHeight():66),f=placeFx(FX.feathers,bf,fx,fy-ah*FX.feathers.lift,false);
+  if(!nested){if(r.clip==='discard'&&r.frame>=9&&!burstDiscard){burstDiscard=true;burstT0=t;stats.bursts++;}if(r.clip!=='discard')burstDiscard=false;}
+  const bf=nested?-1:burstFrame(burstT0,t);if(bf>=0){const ah=(typeof actorHeight==='function'?actorHeight():66),f=placeFx(FX.feathers,bf,fx,fy-ah*FX.feathers.lift,false);
    if(f){const at=rec.commands.indexOf(best);rec.commands.splice(at+1,0,{...best,...f,owner:fxOwner(best.owner),key:best.key+':r1048b',style:{...best.style,globalAlpha:alpha*FX.feathers.alpha,globalCompositeOperation:'lighter'}});stats.feathers++;}}}catch(e){stats.errors++;lastError=String(e?.message||e);}
  /* Three 렌더러는 rec.commands 의 자리 순서가 아니라 c.order 로 renderOrder 를 정한다(phase1 applySpatialPolicy·update).
     끼운 명령은 best 의 order 를 복사해 같은 값이 되므로 광륜 앞/뒤·잔상·궤적 순서가 정해지지 않는다(Codex #661) → 이 영웅 몫(st 뒤)을 자리 순서대로 다시 매긴다.
@@ -151,8 +171,8 @@ function paint(rec,st){const sh=sheets(),p=typeof player==='object'?player:null;
  renumber(rec,st);
  stats.frames++;}
 function renumber(rec,st){const C=rec.commands;for(let i=Math.max(0,st);i<C.length;i++){const c=C[i];if(c&&typeof c==='object')c.order=i;}}
-if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
- try{const eg=egoOn();if(eg&&!wasEgo){burstT0=now();stats.bursts++;egoSince=now();}if(!eg)egoSince=null;wasEgo=eg;if(on&&st>=0&&eg&&sheets())paint(rec,st);}catch(e){stats.errors++;lastError=String(e?.message||e);}return r;};}
+if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;depth++;let r;try{r=base.apply(this,a);}finally{depth--;}
+ depth++;try{const eg=egoOn();if(eg&&!wasEgo){burstT0=now();stats.bursts++;egoSince=now();}if(!eg)egoSince=null;wasEgo=eg;if(on&&st>=0&&eg&&sheets())paint(rec,st);}catch(e){stats.errors++;lastError=String(e?.message||e);}finally{depth--;}return r;};}
 window.__STORYWORLD_EGO_MOTION_R1048__=Object.freeze({revision:REV,RULES,FX,bodyArt,slashFrame,burstFrame,haloFrame,DIR8,dir8,pickState,clipOf,attackFrame,strideRate,createPlayer,
  ready:()=>!!sheets(),set:v=>{on=v!==false;try{localStorage.setItem('storyworld.r1048.motion',JSON.stringify({on}));}catch(_){}return on;},
  inspect:()=>({revision:REV,on,ready:!!sheets(),ego:egoOn(),stats:{...stats},lastError,lastSrc,input:lastInp,state:player1?.state||null})});
