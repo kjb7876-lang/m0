@@ -42,8 +42,9 @@ if(prefs.diag2!==false){SHEET.se2={gun:26,face:30,body:183,frames:8,path:'assets
 // R1101c: Dots CX-0119GD r2 공격 8칸(GD-1 se 총열 ≈44°·GD-2 ne ≈−37°, 발 96·227·몸 183 사본) — 정 대각 조준에 R143 se·ne(시선 반대) 대신. r1 se2·ne2 는 낮은 각(+26°·−29°)용으로 둠.
 //  tip 은 Dots spec 칸별 총구 좌표를 같은 배율·자리로 옮긴 값. se3 는 1~2칸 총구가 위로 5.6px 물러나는 반동(Dots 측정). {"diag3":false} 로 끔.
 if(prefs.diag2!==false&&prefs.diag3!==false){SHEET.se3={gun:44,face:45,body:183,frames:8,path:'assets/r1101c/gunner/attack-se9.webp',tip:[[148,129],[148,129],[148,131],[148,135],[148,136],[148,137],[148,137],[148,137]]};
- SHEET.ne3={gun:-37,face:-45,body:183,frames:8,path:'assets/r1101c/gunner/attack-ne9.webp',tip:[0,1,2,3,4,5,6,7].map(()=>[150,63])};}
-const SHEETS=Object.freeze(Object.keys(SHEET));
+ SHEET.ne3={gun:-37,face:-45,body:183,frames:8,path:'assets/r1101c/gunner/attack-ne9.webp',tip:[0,1,2,3,4,5,6,7].map(()=>[150,63])};
+ SHEET.se.retired=SHEET.ne.retired=true;} // 대각 조준 후보에서 R143 se·ne(시선 반대)는 뺌 — 그림은 엔진이 그대로 그리니 SHEET 항목은 남김
+const SHEETS=Object.freeze(Object.keys(SHEET).filter(k=>!SHEET[k].retired));
 // 걸으며 쏠 때: R128 걷기 시트(8칸 192×256, 발 96·226, walk-e 는 R144 v1 사본) — 같은 총 각도, 칸마다 총구 끝
 const WALK={e:{path:'assets/r144/walk/gunner/walk-e.webp',tip:[[165,81],[166,76],[166,76],[166,80],[165,80],[164,76],[163,76],[164,81]]},
  se:{path:'assets/r128/gunner/walk-se.webp',tip:[[162,136],[161,140],[160,139],[159,135],[158,136],[159,140],[160,139],[161,136]]},
