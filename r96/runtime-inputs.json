@@ -10191,7 +10191,10 @@
     "coop-relay-r1109.js",
     "hero-consist-r1108.js",
     "assets/r1101c/gunner/attack-ne9.webp",
-    "assets/r1101c/gunner/attack-se9.webp"
+    "assets/r1101c/gunner/attack-se9.webp",
+    "assets/r1104b/persona-walk-front.webp",
+    "assets/r1104b/persona-walk-rear.webp",
+    "assets/r1104b/persona-walk-side.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11266,5 +11269,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "68585ff97813c16d5499ae8af86c5a99e34a5ffc925705164c4801e146b4afcf"
+  "runtimeManifestSHA256": "c4aacfd8b83fe98866da6c31dd6b42b90a6b434e5886ff858d5bfd2bc8184022"
 }
