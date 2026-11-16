@@ -279,7 +279,9 @@
   cache.set(id,L);while(cache.size>12)cache.delete(cache.keys().next().value);return L;}
  function installExploration(){const EX=window.__STORYWORLD_EXPLORATION__;if(!EX||EX.storyMapR171||typeof EX.layout!=='function')return!!EX?.storyMapR171;EX0=EX;
   const own={};for(const k of Object.keys(EX))own[k]=EX[k];
-  own.layout=function(id,l=(typeof layer!=='undefined'?layer:'STORY'),...a){if(eligible(id,l)){const L=layoutFor(id);if(L){stats.used++;return L;}}return EX.layout.call(EX,id,l,...a);};own.storyMapR171=true;
+  // R1115: 사몽 에피소드 방(r103-samong 지도)은 지역 id(dist04 등)·DREAM 층을 쓰므로, R1098b 가 DREAM 도 R171 지도로 바꾼 뒤 그림은 새 지도·충돌은 에피소드 지도로 어긋났다 → 지금 방이 그 에피소드 방이면 건드리지 않는다.
+ const episodeRoom=id=>{try{const r=typeof room!=='undefined'?room:null;return!!(r&&r.id===id&&(r.samongR103||r.samongR115||r.exploration?.type==='r103-samong'||r.exploration?.samongR103));}catch(_){return false;}};
+  own.layout=function(id,l=(typeof layer!=='undefined'?layer:'STORY'),...a){if(l==='DREAM'&&episodeRoom(id))return EX.layout.call(EX,id,l,...a);if(eligible(id,l)){const L=layoutFor(id);if(L){stats.used++;return L;}}return EX.layout.call(EX,id,l,...a);};own.storyMapR171=true;
   try{window.__STORYWORLD_EXPLORATION__=Object.freeze(own);}catch(e){fail(e);return false;}return true;}
  // makeRoom 을 병동 미로 붙이기(phase1-original-adapter) 보다 먼저 감싼다: 방이 처음부터 이 지도를 가지면 그 붙이기는 건너뛴다.
  if(typeof makeRoom==='function'){const base=makeRoom;makeRoom=function(id,l,...a){const r=base.call(this,id,l,...a);try{if(r&&!r.exploration&&eligible(r.id,r.layer||l)){installExploration();const L0=layoutFor(r.id),L=(L0&&window.__STORYWORLD_LAYOUT_HOOK_R204__?.(r.id,L0))||L0;/* R204: 지역별 지형 손질(통로 넓히기)은 꾸미기(R80·R81) 전에 */if(L){r.exploration=L;stats.rooms++;}}}catch(e){fail(e);}return r;};}
