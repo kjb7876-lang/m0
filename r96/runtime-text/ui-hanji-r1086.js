@@ -9,7 +9,7 @@
 //  · 설정 → 화면 꾸밈 → '한지 창' 체크로 끄고 켠다(기본 켜짐). 저장 localStorage['storyworld.r1086.hanji']='0' 이면 꺼짐(그 밖의 값은 켜짐).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_UI_HANJI_R1086__)return;
-const REV='R1086-ui-hanji-1',KEY='storyworld.r1086.hanji',CLS='r1086Hanji',BASE='r1085Ink',ATTR='data-r1086fix';
+const REV='R1086-ui-hanji-2',KEY='storyworld.r1086.hanji',CLS='r1086Hanji',BASE='r1085Ink',ATTR='data-r1086fix';
 // paper 한지 · paper2 한지 위 칸(단추·카드) · paper3 눌린 칸 · ink 먹 · muted 옅은 먹 · seal 낙관 인주 · line 마른 붓 선
 const TOKENS=Object.freeze({paper:'#e4dac2',paper2:'#dacdb0',paper3:'#cbbc9c',ink:'#1e1a18',muted:'#5a5048',seal:'#a83224',line:'#8a7c68'});
 const T=TOKENS,LIGHT='#efe6d0',KICK='#8c2f26',INK2='#3a322c';
@@ -74,6 +74,10 @@ const rules=[
  [`${P} .loader i`,`background:${T.ink}!important`],
  [`${P} .storyFoot,${P} .heroPickActions`,`background:${T.paper}!important;border-color:${T.line}!important`],
  [`${P} ::-webkit-scrollbar-thumb`,`background:${T.line}`],
+ // R1118: 영웅 선택 무대(#r263Stage)는 한지 창 안의 어두운 칸 → 이름·패시브·Q 줄은 대비 검사(scan)를 기다리지 않고 처음부터 밝은 글씨(외부 리뷰 '어두운 카드 위 검은 글씨')
+ [`${P} #r263Stage .nm,${P} #r263Stage .row,${P} #r263Stage p`,`color:${LIGHT}!important`],
+ // R1118: 설정 맨 위 '지금 적용 중인 기술'(R1021)의 민트 이름표도 한지 위에서는 처음부터 먹 글씨
+ [`${P} #r1021Skills .k,${P} #r1021Skills .v,${P} #r1021Skills .who span,${P} #r1021Skills .up`,`color:${T.ink}!important`],
  // 대비 바로잡기(scan 이 붙인 표시) — 맨 뒤·가장 높은 우선순위
  [`${P} [${ATTR}="ink"]:not(#r1086y)`,`color:${T.ink}!important;-webkit-text-fill-color:${T.ink}!important`],
  [`${P} [${ATTR}="paper"]:not(#r1086y)`,`color:${LIGHT}!important;-webkit-text-fill-color:${LIGHT}!important`],

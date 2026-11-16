@@ -10,7 +10,7 @@
 //  설정 저장 localStorage['storyworld.r1021.combat']={subs,buttons,autoSkills}, 모듈 끄기 {"on":false}.
 (()=>{'use strict';
 if(window.__STORYWORLD_UI_COMBAT_R1021__)return;
-const REV='R1021-combat-1',KEY='storyworld.r1021.combat';
+const REV='R1021-combat-2',KEY='storyworld.r1021.combat';
 const DEF=Object.freeze({subs:true,buttons:true,autoSkills:true});
 const stats={applied:0,tagged:0,heroBtn:0,heroOpen:0,placeOpen:0,heroBlocked:0,autoSpecial:0,autoEgo:0,skills:0,section:0,toggles:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
@@ -84,17 +84,26 @@ function autoTick(){try{if(!on||!P.autoSkills||!mobile()||cinema()||!playing())r
  return n;}catch(e){fail(e);return 0;}}
 // ⑤ 설정 맨 위 스킬창 --------------------------------------------------------------------------
 const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;};
+// 엔진 반자동(Space) 값 — rows() 안에는 같은 이름의 지역 변수가 있어 밖에서 읽는다
+const engineAuto=()=>{try{return typeof auto==='undefined'?null:auto===true;}catch(_){return null;}};
 function rows(){const id=heroId(),H=G(()=>HEROES[id],null)||{},mob=mobile(),auto=on&&P.autoSkills&&mob;
- const semi=G(()=>!!window.__STORYWORLD_SEMI_AUTO_R705__?.enabled?.(),false);
+ const r705=G(()=>!!window.__STORYWORLD_SEMI_AUTO_R705__?.enabled?.(),false);
+ // R1118: 반자동이 켜졌는지는 엔진 auto(Space) 로 본다(R705 는 '반자동에서 스스로 걷지 않기' 설정). 엔진 값이 없을 때만 예전처럼 R705 로 본다.
+ const engAuto=engineAuto(),guideOn=G(()=>typeof guide!=='undefined'&&guide===true,false);
+ const semi=engAuto===null?r705:engAuto;
+ const M=G(()=>window.__STORYWORLD_MANUAL_R274__,null),bonusOn=!!G(()=>M&&M.enabled(),false);
+ const pct=bonusOn?(semi?0:77)+(guideOn?0:77):0;
+ const bonus=!bonusOn?['손플레이 보너스','꺼짐','—',false]:['손플레이 보너스',pct?'전투 중 피해 +'+pct+'%'+(pct>=154?' · EGO·회피·공명방어 추가 강화':' · 반자동·길잡이를 모두 끄면 더 큼'):'반자동·길잡이를 끄면 전투 중 피해 +77%씩',pct?'적용':'없음',pct>0];
  const cd=k=>{const v=G(()=>+player[k],0);return Number.isFinite(v)&&v>0?'재사용 '+v.toFixed(1)+'초':'준비됨';};
  const res=Math.max(0,Math.floor(G(()=>+player.resonance,0)||0));
  return [
+  ['이동',guideOn?'길잡이가 현재 기억으로 걸어감':(semi&&!r705?'반자동이 장판을 피해 걸음':'방향키·클릭·이동 패드'),guideOn||(semi&&!r705)?'자동':'직접',guideOn||(semi&&!r705)],
   ['기본 공격',((+H.range||0)>4?'원거리':'근거리')+(Number.isFinite(+H.range)&&+H.range>0?' · 사거리 '+(+H.range).toFixed(1)+'칸':'')+' · 가까운 적부터',semi?'자동':'직접',semi],
   ['Q 기술',(H.special||'특수기')+' · '+cd('specialCD'),auto?'자동':(mob?'단추':'Q 키'),auto],
   ['W·E·R','숙련 기술',semi?'자동':'직접',semi],
   ['F EGO','EGO 각성 · 공명 '+res+'/30 · '+cd('egoCD'),auto?'자동':(mob?'단추':'F 키'),auto],
   ['회피','블링크 · '+cd('blinkCD'),mob?'단추':'S 키',false],
-  ['패시브',H.passive||'—','항상',true]].concat(survival()?[['영웅 배치','정화 결정으로 영웅을 사서 구슬 곁에 세움',mob?'단추':'B 키',false]]:[]);}
+  ['패시브',H.passive||'—','항상',true],bonus].concat(survival()?[['영웅 배치','정화 결정으로 영웅을 사서 구슬 곁에 세움',mob?'단추':'B 키',false]]:[]);}
 function upgrades(){try{const U=G(()=>UPGRADES,[])||[],have=G(()=>player.upgrades,{})||{};const key=u=>{try{return typeof upgradeKey==='function'?upgradeKey(u):u.id;}catch(_){return u.id;}};
  return U.map(u=>({name:u.name,lv:+(have[key(u)]||0),max:u.max})).filter(x=>x.lv>0);}catch(e){fail(e);return [];}}
 function skills(){try{let s=$('r1021Skills');if(!s){s=el('section');s.id='r1021Skills';}

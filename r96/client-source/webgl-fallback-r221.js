@@ -6,7 +6,7 @@
 // dist/phase1.js 바로 뒤에 읽혀 phase1-original-adapter 의 createController 를 감싼다(알림 문구만 바꿈).
 (()=>{'use strict';
 if(window.__STORYWORLD_WEBGL_FALLBACK_R221__)return;
-const REV='R221-webgl-2';
+const REV='R221-webgl-3';
 const stats={probed:false,webgl2:null,wrapped:false,shown:0,reason:null};
 function probe(){if(stats.probed)return stats.webgl2;stats.probed=true;let ok=false;
  try{const c=document.createElement('canvas');const g=c.getContext('webgl2');ok=!!g;try{g?.getExtension('WEBGL_lose_context')?.loseContext();}catch(_){}}catch(_){ok=false;}
@@ -32,5 +32,29 @@ if(api&&typeof api.createController==='function'){
  const create=api.createController;
  const next=Object.freeze({...api,createController(hooks,opts){return create.call(api,wrapHooks(hooks),opts);}});
  try{window.StoryPhase1=next;stats.wrapped=window.StoryPhase1===next;}catch(_){stats.wrapped=false;}}
-window.__STORYWORLD_WEBGL_FALLBACK_R221__=Object.freeze({revision:REV,message:LINE,inspect:()=>({revision:REV,...stats}),probe});
+// R1118 외부 리뷰: "WebGL 실행 불가 안내가 타이틀 뒤에 가려지고 새 게임 시작도 가능" → 시작 전에 확인한다.
+//  WebGL2 가 없으면 ① 타이틀 창 맨 위에 이유·해결 방법 칸을 넣고 ② 새 게임·이어하기·생존·영화 단추를 비활성으로 두고 ③ newGame·restoreSave 를 불러도 막고 쪽지를 띄운다.
+//  WebGL2 가 있으면 아무것도 하지 않는다(확인은 첫 화면이 뜬 뒤 한 번).
+const START_IDS=['campaignNew54','campaignContinue54','survivalStartR600','cinemaStartR461'];
+const BLOCK='WebGL2(3D 그래픽)를 쓸 수 없어 시작할 수 없습니다. 하드웨어 가속을 켜거나 다른 브라우저로 열어 주세요.';
+stats.gated=0;stats.blocked=0;
+function titleNotice(){try{const panel=document.getElementById('panel');if(!panel||!panel.querySelector)return;
+ const hasStart=START_IDS.some(id=>panel.querySelector('#'+id));if(!hasStart)return;
+ for(const id of START_IDS){const b=panel.querySelector('#'+id);if(b&&!b.disabled){b.disabled=true;b.setAttribute('aria-disabled','true');b.setAttribute('title',BLOCK);}}
+ if(panel.querySelector('#webglTitleNoticeR1118'))return;
+ const d=document.createElement('div');d.id='webglTitleNoticeR1118';d.setAttribute('role','alert');
+ Object.assign(d.style,{margin:'0 0 12px',padding:'10px 14px',background:'#2a1512',border:'1px solid #a83224',borderRadius:'4px',color:'#f2e6d2',font:'13px/1.6 system-ui,sans-serif'});
+ const h=document.createElement('b');h.textContent='3D 화면을 시작할 수 없습니다';Object.assign(h.style,{display:'block',color:'#f6d2b8',fontSize:'15px'});
+ const p=document.createElement('div');p.textContent=LINE;
+ const ul=document.createElement('ul');Object.assign(ul.style,{margin:'4px 0 0',paddingLeft:'18px'});for(const t of HELP){const li=document.createElement('li');li.textContent=t;ul.appendChild(li);}
+ d.append(h,p,ul);panel.insertBefore(d,panel.firstChild||null);stats.shown++;}catch(_){}}
+function gate(){try{if(stats.gated||probe())return;stats.gated=1;stats.reason=stats.reason||'WebGL2 context unavailable (start check)';
+ const say=()=>{stats.blocked++;try{if(typeof toast==='function')toast(BLOCK);}catch(_){}titleNotice();return false;};
+ try{if(typeof newGame==='function'){newGame=async function(){return say();};}}catch(_){}
+ try{if(typeof restoreSave==='function'){restoreSave=async function(){return say();};}}catch(_){}
+ titleNotice();
+ if(typeof MutationObserver==='function'){const arm=()=>{const panel=document.getElementById('panel');if(!panel)return false;new MutationObserver(titleNotice).observe(panel,{childList:true,subtree:true});return true;};
+  if(!arm()&&document.addEventListener)document.addEventListener('DOMContentLoaded',()=>{arm();titleNotice();});}}catch(_){}}
+if(typeof setTimeout==='function')setTimeout(gate,0);
+window.__STORYWORLD_WEBGL_FALLBACK_R221__=Object.freeze({revision:REV,message:LINE,inspect:()=>({revision:REV,...stats}),probe,gate});
 })();
