@@ -728,6 +728,8 @@ jobs:
         run: node r96/qa/r1057/r1057-cpu-check.cjs
       - name: R1057b hero select title 7-tap mobile alternative CPU check
         run: node r96/qa/r1057/r1057b-tap-cpu-check.cjs
+      - name: R1106 phone hero select row above stage CPU check
+        run: node r96/qa/r1106/r1106-cpu-check.cjs
       - name: R1059 old bulmyeongwi art redirected to new art CPU check
         run: node r96/qa/r1059/r1059-cpu-check.cjs
       - name: R1060 bulmyeongwi zone clues gate boss door CPU check
