@@ -37,7 +37,7 @@ ok(I.stats.errors===0,'overlay errors 0 '+(I.lastError||''));
 ok(errs.length===0,'page errors 0 '+JSON.stringify(errs.slice(0,3)));
 // ② R286 이 R380 공격 칸 있는 몹을 move-only 로 봐 공격 그림을 가리던 것: 보랏빛 알집지기(dist01) 공격 중 시트 4~7칸(x>=1024)이 그려져야 한다.
 async function atkCells(zone,nid,secs=12){await p.evaluate(z=>enterRegion(z,null,{layer:'STORY',restore:true}),zone);await p.waitForFunction(z=>!loading&&room?.id===z,zone,{timeout:150000});await skip(p);
- const id=await p.evaluate(nid=>{const e=room.enemies.find(x=>x.nativeId===nid&&x.hp>0&&!x.boss&&!x.midboss&&!/우두머리|중간보스/.test(x.name));if(!e)return null;
+ const id=await p.evaluate(nid=>{const [nn,nm]=nid.split('|');const e=room.enemies.find(x=>x.nativeId===nn&&(!nm||x.name===nm)&&x.hp>0&&!x.boss&&!x.midboss&&!/우두머리|중간보스/.test(x.name));if(!e)return null;
   for(const o of room.enemies){if(o!==e&&o.hp>0&&Math.hypot(o.x-player.x,o.y-player.y)<9){o.x=player.x+14;o.y=player.y+3;o.homeX=o.x;o.homeY=o.y;}}
   e.x=player.x+1.2;e.y=player.y;e.homeX=player.x;e.homeY=player.y;e.cd=0;e.graceUntil=0;const mh=e.maxHp;Object.defineProperty(e,'hp',{configurable:true,enumerable:true,get(){return mh;},set(v){}});
   window.__R1064.cells={};window.__R1064.watch=e.id;window.__R1064.kind=window.__STORYWORLD_MOB_MOTION_R286__?.kindOf?.(e);
@@ -51,10 +51,16 @@ const dragon=await atkCells('ep1b07','b07-s1',14);const DV=await p.evaluate(()=>
 console.log('dragon',JSON.stringify(dragon),JSON.stringify(DV));
 // R1064b(QA 지적): '둘 중 하나가 맡는다'만 보면 둘 다 안 내딛어도 통과할 수 있었다 → 실제 발동 수를 센다.
 ok(dragon&&dragon.kind==='static'&&dragon.r286Static>=1&&DV.v!=='lunge','불길 속의 용: R286 static 내딛기가 실제로 발동 (staticLunges +'+dragon?.r286Static+', R1064 '+DV.v+')');
-// R1064 자체 경로: R286 이 full 로 보지만 공격 중에도 걷기 그림만 그리는 몹(u205 관리자 추적견) → R1064 lunge 가 실제로 발동해야 한다
-const hound=await atkCells('u205','u205-e2',14);const HV=await p.evaluate(()=>{const e=room.enemies.find(x=>x.id===window.__R1064.watch);return window.__STORYWORLD_MOB_LUNGE_R1064__.verdict(e);});
-console.log('hound',JSON.stringify({kind:hound?.kind,r1064Lunges:hound?.r1064Lunges,r1064Draws:hound?.r1064Draws,v:HV}));
-ok(hound&&hound.kind==='full'&&HV==='lunge'&&hound.r1064Lunges>=1&&hound.r1064Draws>=20,'관리자 추적견: R1064 lunge 실제 발동 (lunges +'+hound?.r1064Lunges+', draws +'+hound?.r1064Draws+', verdict '+HV+')');
+// R1064c(11-15 23:4xZ 밤샘 실측으로 바꿈, 알림 대상): 관리자 추적견은 r374 한 줄 시트에 공격 칸(2048~2816)이 따로 있어 lunge 가 겹치던 것 → 이제 art, 내딛기 0.
+//  R1064 자체 경로는 공격 중에도 평소 칸만 다시 쓰는 유리 망령(r410 m018)으로 본다.
+const hound=await atkCells('u205','u205-e2|관리자 추적견',14);const HV=await p.evaluate(()=>{const e=room.enemies.find(x=>x.id===window.__R1064.watch);return window.__STORYWORLD_MOB_LUNGE_R1064__.verdict(e);});
+console.log('hound',JSON.stringify({kind:hound?.kind,r1064Lunges:hound?.r1064Lunges,v:HV,cells:hound?.cells}));
+ok(hound&&HV==='art'&&hound.r1064Lunges===0&&Object.keys(hound.cells).some(k=>/u205-e2-new/.test(k)&&+k.split('#')[1].split(',')[0]>=2048),'관리자 추적견(공격 칸 있음): art, R1064 내딛기 0 (lunges +'+hound?.r1064Lunges+', verdict '+HV+')');
+const ghost=await atkCells('ep1b02','b02-b1|유리 망령',14);const GV=await p.evaluate(()=>{const e=room.enemies.find(x=>x.id===window.__R1064.watch);return window.__STORYWORLD_MOB_LUNGE_R1064__.verdict(e);});
+console.log('ghost',JSON.stringify({kind:ghost?.kind,r1064Lunges:ghost?.r1064Lunges,r1064Draws:ghost?.r1064Draws,v:GV}));
+// 유리 망령은 대부분 원거리(조준)라 14초 안에 근접 공격이 0~2번 → R1064 판정이 안 날 수 있다. 판정이 났다면 lunge 여야 하고(공격 때 평소 칸만 씀) 실제로 내딛어야 한다. 'art' 면 칸 판정이 틀린 것.
+//  (R1064c 뒤 ep1b02·murder01·ep1b09·kair08 실측: 공격 그림 없는 몹 대부분은 R286 move-only/static 이 맡고 R1064 자체 lunge 는 드묾 — 실발동은 CPU 검사 ①·r1064c ③ 이 본다)
+ok(ghost&&GV!=='art'&&(GV!=='lunge'||ghost.r1064Lunges>=1),'유리 망령: art 로 잘못 굳지 않음, lunge 면 실제 발동 (lunges +'+ghost?.r1064Lunges+', verdict '+GV+')');
 const egg=await atkCells('dist01','dist01-sp2');console.log('eggkeeper',JSON.stringify(egg));
 ok(egg&&egg.kind==='full','R286 sees eggkeeper as full ('+egg?.kind+')');
 ok(egg&&egg.r1064Lunges===0,'eggkeeper (real attack art): R1064 does not lunge on top ('+egg?.r1064Lunges+')');
