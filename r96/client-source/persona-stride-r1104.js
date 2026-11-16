@@ -12,6 +12,7 @@
 //  · 시트는 qa/r1104b/build-walk-sheets.py 로 다듬은 webp(옆: 상체·다리 이음매 색 잇기·망토 그늘·틈 채우기, 아래·위: 칸마다 튀던 머리 높이 고르기).
 //  · 걷는 동안(걸음 세기 w>.5) 기본형(base) 몸 그림 한 장을 방향에 맞는 시트 칸으로 바꿔 끼운다. 방향 표: 0·1 아래, 7 아래 뒤집기, 2 옆, 6 옆 뒤집기, 3·4 위, 5 위 뒤집기.
 //  · 칸 = 지나간 거리 위상(0.65칸에 한 걸음, 8칸 = 두 걸음)이라 발이 미끄러지지 않는다. 바라보는 쪽과 반대로 움직이면 칸을 거꾸로 돌린다.
+//  · R409 테두리판(r409:outline:…, 사방 같은 여백)도 원래 그림으로 알아본다(게임에서 몸 그림은 대개 이 판으로 온다).
 //  · 크기·자리: 시트 발선 가운데(ax, ground)를 원래 그림 발 자리(172, 385)에, 시트 키 424px 를 원래 키 357px 에 맞춘다.
 //  · 수묵(R1097)이 이 몸 그림을 바꿨으면 시트 칸도 R1097 inkify 로 한 번씩 구워 쓴다(굽기 전엔 코드 걸음). 각성형(awake)·시트를 못 읽었을 때는 R1104 코드 걸음 그대로.
 (()=>{'use strict';
@@ -32,6 +33,7 @@ const WALK=Object.freeze({front:Object.freeze({src:'assets/r1104b/persona-walk-f
  side:Object.freeze({src:'assets/r1104b/persona-walk-side.webp',ax:266,ground:476,fwd:[-1,0]})});
 const DIRS=[['front',1],['front',1],['side',1],['rear',1],['rear',1],['rear',-1],['side',-1],['front',-1]]; // [시트, 1=그대로 -1=좌우 뒤집기]
 const SS={};for(const k in WALK)SS[k]={state:'idle',raw:null,ink:null,inkState:'idle',inkHalf:null};
+const R409=/^r409:outline:[a-z]+:u:(.+):\d+,\d+,\d+,\d+:\d+:[a-z]+$/,artOf=v=>{v=String(v||'');const k=R409.exec(v);return RX.exec(k?k[1]:v);};
 const RAWQ=new WeakMap(),RX=/(?:^|[\/:])assets\/rc133\/art\/(base|awake)-([0-7])\.(?:png|webp)(?:[?#].*)?$/i;
 const hasDom=()=>{try{return typeof document!=='undefined'&&document&&typeof document.createElement==='function'&&typeof Image==='function';}catch(_){return false;}};
 const canvas=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c;};
@@ -95,13 +97,13 @@ function process(cmds){if(!on||!Array.isArray(cmds))return 0;const t=T(),e=perso
   const sp=String(c.sourcePath||'');if(!(BODY.test(sp)||c.r1097))continue;const P=c.points,sr=c.sourceRect;if(!Array.isArray(P)||P.length!==4||!P.every(okPt)||!Array.isArray(sr)||sr.length<4||!sr.every(Number.isFinite)||!(sr[2]>0)||!(sr[3]>0))continue;
   const h=Math.abs(P[3][1]-P[0][1]);if(h>bh){bh=h;best=i;}}
  if(best<0)return 0;
- const c=cmds[best];let q=RAWQ.get(c);if(!q){const m=RX.exec(String(c.sourcePath||''));if(m&&!c.r1097)q={P:c.points.map(p=>[...p]),sr:[...c.sourceRect],kind:m[1].toLowerCase(),dir:+m[2]};}
+ const c=cmds[best];let q=RAWQ.get(c);if(!q){const m=artOf(c.sourcePath);if(m&&!c.r1097)q={P:c.points.map(p=>[...p]),sr:[...c.sourceRect],kind:m[1].toLowerCase(),dir:+m[2]};}
  if(q&&q.kind==='base'&&q.sr[0]===0&&q.sr[1]===0){const k=DIRS[q.dir][0],ink=!!c.r1097;if(ink)wantInk(k);
   const ready=ink?SS[k].inkState==='ready':SS[k].state==='ready';
   if(ready){if(s.w>.5){try{if(swapSheet(c,q,s,ink))return 1;}catch(err){fail(err);}}else return 0;}}
  try{if(split(cmds,best,s)){stats.split++;return 1;}}catch(err){fail(err);}return 0;}
 // 수묵 처리 전에 원래 몸 그림 사각형을 적어 둔다(수묵은 여백을 붙여 점을 바꾸므로)
-function remember(cmds){for(const c of cmds){if(!c||c.kind!=='image'||c.r1097)continue;const m=RX.exec(String(c.sourcePath||''));if(!m)continue;const P=c.points,sr=c.sourceRect;
+function remember(cmds){for(const c of cmds){if(!c||c.kind!=='image'||c.r1097)continue;const m=artOf(c.sourcePath);if(!m)continue;const P=c.points,sr=c.sourceRect;
  if(Array.isArray(P)&&P.length===4&&P.every(okPt)&&Array.isArray(sr)&&sr.length>=4&&sr.every(Number.isFinite))RAWQ.set(c,{P:P.map(p=>[...p]),sr:[...sr],kind:m[1].toLowerCase(),dir:+m[2]});}}
 // 렌더러 감싸기(perf-r97 이 인스턴스에 render 를 복사해 두므로 프로토타입·인스턴스 둘 다, 한 render 에 한 번만)
 let depth=0;

@@ -66,6 +66,13 @@ const at=(c,u,v)=>{const P=c.points,W=c.sourceRect[2],H=c.sourceRect[3],a=u/W,b=
  ok(b.length===1&&s&&s.kind==='ink'&&b[0].r1097===true,'⑩ 수묵 켜짐이면 수묵으로 구운 칸('+(b[0]&&b[0].sourcePath)+')');
  if(s){const a=w.api(),ws=a.walkSheets.side,pad=b[0].r1104bPad,foot=at(b[0],ws.ax+pad,ws.ground+pad),P=w.body().points,want=[P[0][0]+(P[1][0]-P[0][0])*a.art.ax/344,P[0][1]+(P[3][1]-P[0][1])*a.art.ground/400];
   ok(Number.isFinite(pad)&&pad>0&&Math.hypot(foot[0]-want[0],foot[1]-want[1])<.75,'⑩ 수묵 칸도 발 자리 같음(여백 '+pad+')');}}
+// ⑬ R409 테두리판(게임에서 실제로 오는 몸 그림 경로)
+{const w=world();const r=6,mk=()=>w.body(2,'base',{sourcePath:'r409:outline:enemy:u:http://x/m0/assets/rc133/art/base-2.png:0,0,344,400:'+r+':enemy',sourceRect:[0,0,344+2*r,400+2*r],imageSize:[344+2*r,400+2*r]});
+ const walk=(sec,each)=>{let out;for(let t=0;t<sec;t+=1/30){w.C.time+=1/30;w.persona.x-=2.4/30*Math.SQRT1_2;w.persona.y+=2.4/30*Math.SQRT1_2;out=w.frame([mk()]);}return out;};
+ walk(.2);w.load();const out=walk(.5),b=out.filter(c=>/r409|r1104b/.test(String(c.sourcePath))),s=b[0]&&sheetOf(b[0]);
+ ok(b.length===1&&s&&s.sheet==='side','⑬ R409 테두리판 몸 그림도 옆 시트로('+(b[0]&&b[0].sourcePath)+', '+b.length+')');
+ if(s){const a=w.api(),ws=a.walkSheets.side,foot=at(b[0],ws.ax,ws.ground),P=mk().points,cw=344+2*r,ch=400+2*r,want=[P[0][0]+(P[1][0]-P[0][0])*(a.art.ax+r)/cw,P[0][1]+(P[3][1]-P[0][1])*(a.art.ground+r)/ch];
+  ok(Math.hypot(foot[0]-want[0],foot[1]-want[1])<.75,'⑬ 테두리 여백을 빼고 발 자리 맞춤');}}
 // ⑪ 끄기
 {const w=world();w.api().set(false);w.walk(.2,2,{sx:-1});w.load();const b=bodies(w.walk(.6,2,{sx:-1}));ok(b.length===1&&b[0].sourcePath==='assets/rc133/art/base-2.png','⑪ 끄면 바꾸지 않음');}
 // ⑫ 빌드 연결

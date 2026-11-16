@@ -12,7 +12,7 @@
  *  설정 storyworld.r991.gunnerAim {"on":false} 로 끄면 예전 그대로. Canonical source; copied by scripts/sync-r99.py. */
 (()=>{'use strict';
 if(window.__STORYWORLD_GUNNER_AIM_R991__)return;
-const REV='R1101-gunner-aim-7+R1045d+R1045c+R1045b+R1045+R1003-s2',KEY='storyworld.r991.gunnerAim',HERO='gunner';
+const REV='R1101b-gunner-diag+R1101-gunner-aim-7+R1045d+R1045c+R1045b+R1045+R1003-s2',KEY='storyworld.r991.gunnerAim',HERO='gunner';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={walk:0,idle:0,swings:0,replaced:0,shots:0,moved:0,blocked:0,waiting:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
@@ -35,6 +35,10 @@ if(prefs.n3!==false)Object.assign(SHEET.n,{gun:-80,face:-90,body:182,path:'asset
 if(prefs.e3!==false)Object.assign(SHEET.e,{path:'assets/r1045/gunner/attack-e3.webp',tip:[0,1,2,3,4,5].map(()=>[156,74])});
 // R1045c (사용자 "괜춘한데 드라이브올려서 클로드 개선적용하라고해"): Dots gunner-ew-r1 동쪽 공격 6칸 — 공통 배율 .402·후드 위치를 e3 에 맞추고 발 y227, 알파 ≤16 잔티 0. {"e4":false} 면 e3.
 if(prefs.e3!==false&&prefs.e4!==false)Object.assign(SHEET.e,{path:'assets/r1045c/gunner/attack-e4.webp',tip:[0,1,2,3,4,5].map(()=>[156,77])});
+// R1101b: Dots CX-0119GD r1 대각 공격 8칸(GD-1 se·GD-2 ne) — 얼굴·몸·총구가 같은 쪽. 그림 총 각도가 화면 대각(±45°)보다 낮은 +26°·−29° 라
+//  R143 se·ne(시선 반대)를 바꾸지 않고 그 각에 맞는 칸(se2·ne2)으로 더한다. 몸 키 183·발 96·227 로 맞춘 사본, tip 은 Dots 총구 값을 같은 배율로 옮김. {"diag2":false} 로 끔.
+if(prefs.diag2!==false){SHEET.se2={gun:26,face:30,body:183,frames:8,path:'assets/r1101b/gunner/attack-se8.webp',tip:[0,1,2,3,4,5,6,7].map(()=>[155,111])};
+ SHEET.ne2={gun:-29,face:-35,body:183,frames:8,path:'assets/r1101b/gunner/attack-ne8.webp',tip:[0,1,2,3,4,5,6,7].map(()=>[151,55])};}
 const SHEETS=Object.freeze(Object.keys(SHEET));
 // 걸으며 쏠 때: R128 걷기 시트(8칸 192×256, 발 96·226, walk-e 는 R144 v1 사본) — 같은 총 각도, 칸마다 총구 끝
 const WALK={e:{path:'assets/r144/walk/gunner/walk-e.webp',tip:[[165,81],[166,76],[166,76],[166,80],[165,80],[164,76],[163,76],[164,81]]},
@@ -42,7 +46,7 @@ const WALK={e:{path:'assets/r144/walk/gunner/walk-e.webp',tip:[[165,81],[166,76]
  s:{path:'assets/r128/gunner/walk-s.webp',tip:[[127,149],[125,149],[124,149],[124,149],[123,149],[122,149],[124,149],[126,149]]},
  ne:{path:'assets/r128/gunner/walk-ne.webp',tip:[[164,39],[163,42],[162,41],[161,38],[160,39],[161,43],[162,41],[163,38]]},
  n:{path:'assets/r128/gunner/walk-n.webp',tip:[[142,45],[141,48],[140,47],[139,44],[138,45],[138,48],[140,47],[141,44]]}};
-WALK.s2=WALK.s; // 정 아래 걷기 사격 그림이 없거나 꺼졌을 때 → 앞모습 걷기 그대로
+WALK.s2=WALK.s;WALK.se2=WALK.se;WALK.ne2=WALK.ne; // R1101b 대각 겨눔 칸도 걷기 사격은 대각 걷기 그림 // 정 아래 걷기 사격 그림이 없거나 꺼졌을 때 → 앞모습 걷기 그대로
 // R1045b: 사용자가 고른 Dots CX-0085GA r3 walk-s2(총구를 화면 앞으로 겨누며 걷는 8칸, 발 96·226). F3 한 칸만 좌우 반전해(x'=192−x)
 //  같은 다리가 F3·F7 두 번 앞으로 나오던 것을 왼발·오른발 번갈아로 고쳤다. tip 은 Dots 총구 구멍 중심(F3 은 반전값).
 if(prefs.walkS2!==false)WALK.s2={path:'assets/r1045/gunner/walk-s2.webp',tip:[[93,126],[94,133],[95,130],[98,128],[95,128],[94,131],[94,129],[95,128]]};
@@ -67,10 +71,16 @@ function plainWalk(rec,st){if(prefs.plainWalk===false||!/r1045/.test(WALK.e.path
   if(toFullCell(c,row.image,WALK.e.path))n++;}
  stats.plain=(stats.plain||0)+n;return n;}
 // R1101: 옆 서 있기 R128 idle-e 는 얼굴이 왼쪽(총 반대)을 본다 → 시선·총이 같은 쪽인 Dots r1 겨눔(attack-e4, 발 96·227 같음). 4칸 숨쉬기 → e4 칸(6칸 거의 같은 자세)
-function sideIdle(rec,st){if(prefs.sideIdle===false||!/r1045c\/gunner\/attack-e4/.test(SHEET.e.path))return 0;let n=0;
+// R1101b: Dots CX-0119GD r1 대기 6칸(GD-5 se·GD-6 ne·GD-7 e, 시선·총구 같은 쪽, 왼쪽 w·sw·nw 는 거울) — 몸 키 183·발 96·227 로 맞춘 사본. 6칸을 .15초씩(게임 시간).
+//  {"idle6":false} 면 R1101(e 만 attack-e4), {"sideIdle":false} 면 모두 예전 R128.
+const IDLE6={e:'assets/r1101b/gunner/idle-e6.webp',se:'assets/r1101b/gunner/idle-se6.webp',ne:'assets/r1101b/gunner/idle-ne6.webp'},IDLE_D=/^assets\/r128\/gunner\/idle-(e|se|ne|w|sw|nw)\.webp$/,LEFT6={w:'e',sw:'se',nw:'ne'},IDLE_STEP6=.15;
+function sideIdle(rec,st){if(prefs.sideIdle===false)return 0;const six=prefs.idle6!==false;if(!six&&!/r1045c\/gunner\/attack-e4/.test(SHEET.e.path))return 0;let n=0;
  for(let i=Math.max(0,st|0);i<(rec?.commands?.length||0);i++){const c=rec.commands[i];if(c?.kind!=='image'||!c.points||!c.sourceRect)continue;
-  if(!IDLE_E.test(srcOf(c)))continue;const row=typeof readyImage==='function'?readyImage(SHEET.e.path):null;if(!row?.image){image(SHEET.e.path);continue;}
-  if(toFullCell(c,row.image,SHEET.e.path)){c.sourceRect[0]=c.sourceRect[0]%(CW*6);c.r1101Idle=true;n++;}}
+  const m=IDLE_D.exec(srcOf(c));if(!m||(!six&&m[1]!=='e'))continue;const lf=LEFT6[m[1]],path=six?IDLE6[lf||m[1]]:SHEET.e.path;
+  const row=typeof readyImage==='function'?readyImage(path):null;if(!row?.image){image(path);continue;}
+  if(toFullCell(c,row.image,path)){c.sourceRect[0]=six?(Math.floor(Math.max(0,fin(T()))/IDLE_STEP6)%6)*CW:c.sourceRect[0]%(CW*6);c.r1101Idle=six?m[1]:true;
+   if(lf){const P=c.points,mid=(P[0][0]+P[1][0])/2;c.points=P.map(([x,y])=>[2*mid-x,y]);} /* R128 왼쪽 그림(w·sw·nw)은 오른쪽 그림의 거울 → 새 오른쪽 그림을 발 중심으로 뒤집어 그림 */
+   n++;}}
  stats.sideIdle=(stats.sideIdle||0)+n;return n;}
 // R1003 쏜 뒤 정 아래 서 있기: Dots idle-s2 v4(4칸 192×256, 발 96·227, 몸 181) — 사용자 방향 확인("이건 맞음") + 7분야 심사 통과분
 const IDLE_S2={path:'assets/r1003/gunner/idle-s2.webp',cellW:192,cellH:256,footX:96,footY:227,refBody:181,frames:4};
@@ -117,10 +127,10 @@ function wrapShot(){if(typeof makeShot!=='function'||makeShot.r991)return;const 
 // 몸 그림: R143 이 그린 공격 칸을 고른 칸(같은 프레임·같은 키·같은 발)으로 바꿔 놓는다
 function replace(rec,st){const sw=swingOf(player);if(!sw||!(player.attackAnim>0)||T()-sw.at>.6)return;
  for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||!c.r143Attack||!c.points||!c.sourceRect)continue;
-  const src=String(c.sourcePath||c.image?.src||''),m=/(?:r143\/attack|r1003|r1045)\/gunner\/attack-([a-z0-9]+)\.webp/.exec(src);if(!m)continue;
+  const src=String(c.sourcePath||c.image?.src||''),m=/(?:r143\/attack|r1003|r1045|r1101b)\/gunner\/attack-([a-z0-9]+)\.webp/.exec(src);if(!m)continue;
   const P=c.points,oldMir=P[1][0]<P[0][0],fOld=oldMir?-1:1,k=Math.abs(P[1][0]-P[0][0])/CW,ky=(P[3][1]-P[0][1])/CH;if(!(k>0)||!Number.isFinite(ky))return;
   if(m[1]===sw.sheet&&oldMir===sw.mirror&&src.includes(pathOf(sw.sheet)))return;/* R1045: 같은 칸 이름이어도 n·e 는 새 그림 경로로 바꿈 */const p=pathOf(sw.sheet),im=image(p);if(!im)return;
-  const fx=P[0][0]+fOld*FX*k,fy=P[0][1]+FY*ky,f=sw.mirror?-1:1,X=v=>fx+f*(v-FX)*k,Y=v=>fy+(v-FY)*ky,sx=clamp(Math.round(fin(c.sourceRect[0])/CW),0,5)*CW;
+  const fx=P[0][0]+fOld*FX*k,fy=P[0][1]+FY*ky,f=sw.mirror?-1:1,X=v=>fx+f*(v-FX)*k,Y=v=>fy+(v-FY)*ky,sx=Math.round(clamp(Math.round(fin(c.sourceRect[0])/CW),0,5)*(fin(SHEET[sw.sheet]?.frames,6)-1)/5)*CW;
   const pts=[[X(0),Y(0)],[X(CW),Y(0)],[X(CW),Y(CH)],[X(0),Y(CH)]];if(pts.flat().some(v=>!Number.isFinite(v)))return;
   Object.assign(c,{image:im,sourcePath:p,sourceRect:[sx,0,CW,CH],imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],points:pts,r991Aim:{sheet:sw.sheet,mirror:sw.mirror}});stats.replaced++;return;}}
 // 쏘고 난 뒤 서 있기: R93 서 있기는 4방향(player.direction)이라 대각선 표적을 두고 총이 수평으로 섰다.
@@ -149,7 +159,7 @@ function replaceWalk(rec,st){const sw=swingOf(player);
   const pts=[[X(idx*CW),Y(0)],[X(idx*CW+CW),Y(0)],[X(idx*CW+CW),Y(CH)],[X(idx*CW),Y(CH)]];if(pts.flat().some(v=>!Number.isFinite(v)))return;
   Object.assign(c,{image:im,sourcePath:W.path,sourceRect:[idx*CW,0,CW,CH],imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],points:pts,r991Walk:{sheet:sw.sheet,mirror:sw.mirror}});stats.walk=(stats.walk||0)+1;return;}}
 // 처음 쓰는 순간 그림이 없어 예전 그림이 한 번 보이지 않게 기억사수일 때 미리 받는다(지역을 옮기면 게임이 그림 기억을 비우므로 2초마다 확인)
-let preAt=0;function preload(){const t=Date.now();if(t-preAt<2000)return;preAt=t;try{for(const p of [...SHEETS.map(pathOf),...Object.values(WALK).map(w=>w.path),IDLE_S2.path])if(!(typeof readyImage==='function'&&readyImage(p)))image(p);}catch(e){fail(e);}}
+let preAt=0;function preload(){const t=Date.now();if(t-preAt<2000)return;preAt=t;try{for(const p of [...SHEETS.map(pathOf),...Object.values(WALK).map(w=>w.path),IDLE_S2.path,...(prefs.idle6!==false?Object.values(IDLE6):[])])if(!(typeof readyImage==='function'&&readyImage(p)))image(p);}catch(e){fail(e);}}
 function wrapDraw(){if(typeof drawHero!=='function'||drawHero.r991)return;const base=drawHero;const w=function(...a){if(on())preload();const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
   try{if(st>=0&&on()){for(let i=st;i<rec.commands.length;i++)if(rec.commands[i]?.r121Walk){walkAt=T();break;}if(solo()){replace(rec,st);if(T()-walkAt<.05)replaceWalk(rec,st);if(!(player.attackAnim>0)&&prefs.idle!==false)replaceIdle(rec,st);if(!(player.attackAnim>0))sideIdle(rec,st);}}}catch(e){fail(e);}return r;};w.r991=true;drawHero=w;}
 function install(){try{wrapAttack();wrapShot();wrapDraw();}catch(e){fail(e);}}
