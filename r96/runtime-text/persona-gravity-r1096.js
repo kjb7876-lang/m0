@@ -1,7 +1,7 @@
 /* R1096 히든 페르소나 '거울 천체'(사용자 2026-11-16 02:13Z "라우렌 스킬중 아카아오 허식 무라사키 오마쥬한 스킬… 히든영웅이랑 페르소나보스가
  *  그들 방식대로 개선적용해서 확률론적사용하도록"). 이 파일은 페르소나 보스 몫이다(EGO 몫은 EGO 스레드가 따로 한다).
  * 라우렌 R946 '천체 공명'의 밀어내는 구·끌어당기는 구·융합 관통탄을 '동작 원리'만 가져와, 페르소나(순수악의 · 거울에 비친 안쪽의 악)에 맞게 뒤집었다:
- *  라우렌은 적을 향해 쓰지만 페르소나는 영웅을 겨누고, 연보라·실버 대신 붉은 시간의 핏빛·흑색으로 칠한다. 이름·모양은 새로 지었다.
+ *  라우렌은 적을 향해 쓰지만 페르소나는 영웅을 겨누고, 연보라·실버 대신 페르소나 고유색 언주색(연지·주홍) 한 색의 명암으로 칠한다. 이름·모양은 새로 지었다.
  *  ① 붉은 거울별(밀어냄): 0.75초 동안 영웅 쪽 길에 붉은 띠 예고 → 붉은 구가 9칸 날아가며 닿으면 페르소나 탄 1.2배 + 진행 방향으로 1.6칸 밀어냄. 벽에서 멈춤.
  *  ② 검은 우물별(끌어당김): 시전 순간 영웅 자리에 0.8초 동안 검붉은 원반 예고 → 1.4초 동안 2.6칸 안 영웅을 핵 쪽으로 끌고, 핵 1칸 안에 0.35초마다 0.3배(최대 4번).
  *     회피(구르기) 무적 중엔 끌지 않는다.
@@ -9,14 +9,14 @@
  *     0.9초 동안 페르소나 앞에서 두 별이 합쳐지며 겨눈 줄(고정)을 예고 → 11칸 관통탄 2.4배, 한 번만 맞힘. 벽에서 멈춤.
  * 굴림: 페르소나 결전(room.activeEncounter==='persona') 중 페르소나가 보이고(spawnState active) 영웅이 14칸 안·시야 안일 때 게임 시간 3.2~4.5초마다 한 번,
  *  보통 22%, 깨어남(awakeUntil) 중 32%. 성공하면 6초 동안 굴리지 않는다. 붉은 시간 시전(redTimeCastUntil9) 중·장면·창·읽기 중엔 굴리지 않는다.
- * 그림: Dots CX-0087LC 라우렌 시트(assets/r946)를 허용된 필터(hue-rotate·brightness·saturate·contrast)로 핏빛·흑색으로 바꿔 임시로 쓴다.
- *  최종 그림은 Dots 에 페르소나판(핏빛·흑색) 시트를 요청한다 — 이 임시 색입힘을 최종 아트라고 보고하지 않는다. 시트가 아직 안 읽혔으면 코드 그림으로 그린다.
+ * 그림: Dots CX-0087LC 라우렌 시트(assets/r946)를 허용된 필터(hue-rotate·brightness·saturate·contrast)로 언주색으로 바꿔 임시로 쓴다.
+ *  최종 그림은 Dots 에 페르소나판(언주색) 시트를 요청한다 — 이 임시 색입힘을 최종 아트라고 보고하지 않는다. 시트가 아직 안 읽혔으면 코드 그림으로 그린다.
  *  예고는 흰 원·빨간 고리가 아니라 검붉은 채움(차오르는 진행)으로 그린다.
  * 끄기: localStorage['storyworld.r1096.personaGravity']='{"on":false}'
  */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_PERSONA_GRAVITY_R1096__)return;
-const REV='R1096-persona-gravity-1',KEY='storyworld.r1096.personaGravity';
+const REV='R1096-persona-gravity-2-eonju',KEY='storyworld.r1096.personaGravity';
 const CHANCE=.22,AWAKE_CHANCE=.32,ROLL_MIN=3.2,ROLL_SPREAD=1.3,ICD=6,COMBO_WINDOW=40,ECL_CHANCE=.6,RANGE=14,HERO_R=.27;
 const CR_WARN=.75,CR_V=6.5,CR_RANGE=9,CR_R=.55,CR_K=1.2,CR_PUSH=1.6,CR_PUSH_T=.2;
 const AB_WARN=.8,AB_LIFE=1.4,AB_R=2.6,AB_CORE=1,AB_V=2.3,AB_TICK=.35,AB_TICKS=4,AB_K=.3;
@@ -82,13 +82,14 @@ function step(){const t=T(),dt=lastT==null?0:Math.max(0,Math.min(.1,t-lastT));la
  else acts=acts.filter(x=>x.owner&&x.owner.hp>0&&x.owner.spawnState==='active');}
 if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{step();}catch(err){fail(err);acts=[];}sentinel(acts.length>0);return r;};}
 // ---- 그리기 ---------------------------------------------------------------------------------------------
-// 색: 핏빛(붉은 시간) · 흑색 · 뼈빛 테. 예고는 검붉은 채움이 차오르는 꼴(흰 원+빨간 고리 금지).
-const BLOOD='176,18,32',BLOOD_HOT='255,92,86',BONE='238,222,210',INK='14,4,8',EMBER='120,8,20';
+// 색(사용자 2026-11-16 02:36Z "페르소나 보스 및 영웅 - 언주색이 고유색"): 언주색(연지·주홍) 한 색의 명암만 쓴다 — 짙은 언주(채움·그림자) · 언주 · 밝은 언주(빛).
+//  먹·흰색은 EGO 고유색(언주+먹+흰)이라 페르소나에는 쓰지 않는다. 예고는 짙은 언주 채움이 차오르는 꼴(흰 원+빨간 고리 금지).
+const BLOOD='204,52,40',BLOOD_HOT='250,128,96',BONE='255,176,140',INK='70,14,10',EMBER='132,30,22';
 const SDIR='assets/r946/',SCELL=192,SCOLS=6;
 const SHEETS={red:{n:'lauren-red',frames:24,fps:12.5,loop:true,piv:[141,137],body:145},blue:{n:'lauren-blue',frames:24,fps:12.5,loop:true,piv:[128,126],body:127},
  disk:{n:'lauren-blue-disk',frames:24,fps:12.5,loop:true,piv:[127,134],body:192},fuse:{n:'lauren-fuse',frames:12,fps:24,loop:false,piv:[128,128],body:107,crop:[60,60,196,200]},
  violet:{n:'lauren-violet',frames:24,fps:12.5,loop:true,piv:[144,128],body:150}};
-// 라우렌 시트(연보라 약 265°)를 핏빛·흑색으로: 허용 필터만 쓴다(Three.js 기록기)
+// 라우렌 시트(연보라 약 265°)를 언주색(약 5°)으로: 허용 필터만 쓴다(Three.js 기록기). 끌림 구·원반은 짙은 언주(어둡게)
 const TINT={red:'hue-rotate(100deg) saturate(3) brightness(.8) contrast(1.35)',blue:'hue-rotate(100deg) saturate(1.6) brightness(.55) contrast(1.35)',disk:'hue-rotate(100deg) saturate(1.5) brightness(.5) contrast(1.4)',
  fuse:'hue-rotate(100deg) saturate(1.8) contrast(1.2)',violet:'hue-rotate(100deg) saturate(1.9) brightness(.8) contrast(1.3)'};
 const SPATH=k=>SDIR+SHEETS[k].n+'.webp';let sheetsOn=true,askAt=-1e9;

@@ -80,4 +80,9 @@ for(const kind of ['crimson','abyss','eclipse']){
  W2.api.qaRandom(()=>.99);W2.api.qaForce('abyss');W2.step(.3);const sent=W2.effects.find(e=>e&&e.r1096Sentinel);calls.length=0;
  W2.C.drawEffect(sent);const want=2.6*34*Math.SQRT2;const big=calls.reduce((m,c)=>c.rx>m.rx?c:m,{rx:0});
  ok(Math.abs(big.rx-want)/want<.03&&Math.abs(big.ry-want/2)/want<.03,'⑧ 검은 우물별 예고 원 가로 '+big.rx.toFixed(1)+'px ≈ 실제 범위 '+want.toFixed(1)+'px (오류 '+W2.api.inspect().stats.lastError+')');}
+// ⑨ 고유색(사용자 2026-11-16 02:36Z): 페르소나는 언주색 한 색의 명암만 — 먹(검정에 가까운 무채)·흰색 없음, 모든 색이 붉은 주홍 계열(색상 0~25°)
+{const m=SRC.match(/const BLOOD='([^']+)',BLOOD_HOT='([^']+)',BONE='([^']+)',INK='([^']+)',EMBER='([^']+)'/);const cols=m?m.slice(1).map(c=>c.split(',').map(Number)):[];
+ const hue=([r,g,b])=>{const mx=Math.max(r,g,b),mn=Math.min(r,g,b);if(mx===mn)return -1;let h=mx===r?((g-b)/(mx-mn))%6:mx===g?(b-r)/(mx-mn)+2:(r-g)/(mx-mn)+4;return (h*60+360)%360;};
+ const bad=cols.filter(c=>{const h=hue(c),mx=Math.max(...c),mn=Math.min(...c);return !(h>=0&&h<=25)||mx<60||(mx-mn)/mx<.35||(c[1]>215&&c[2]>200);});
+ ok(cols.length===5&&bad.length===0,'⑨ 언주색 명암만(먹·흰 없음): '+JSON.stringify(cols)+(bad.length?' 어긋남 '+JSON.stringify(bad):''));}
 console.log(fails?'R1096 persona-gravity FAILED '+fails:'R1096 persona-gravity PASSED');process.exit(fails?1:0);
