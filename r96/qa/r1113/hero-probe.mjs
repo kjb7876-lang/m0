@@ -1,3 +1,4 @@
+// 주의(11-16 QA): 이 탐색 스크립트의 walk 값은 라우렌 heroArt.lauren.walk(엔진 영웅 그림 표)이다 — 페르소나 걷기 시트가 아니다(대개 null). 페르소나 걷기 연결은 select-probe.mjs 의 walk_* 와 inspect().stats.walkSwaps 로 본다.
 import {chromium,boot,skip} from '../r444/lib.mjs';
 const b=await chromium.launch();const {p}=await boot(b,{vp:{width:960,height:540}});
 await p.evaluate(async()=>{await ensureImages(heroPaths('lauren'));player.hero='lauren';player.direction='front';refreshIcons();});
