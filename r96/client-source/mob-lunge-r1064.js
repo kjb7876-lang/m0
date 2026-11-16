@@ -13,10 +13,12 @@
 //  끄기: localStorage['storyworld.r1064.moblunge']='{"on":false}'. 점검: window.__STORYWORLD_MOB_LUNGE_R1064__.inspect()
 (()=>{'use strict';
 if(window.__STORYWORLD_MOB_LUNGE_R1064__)return;
-const REV='R1064-mob-lunge-1',KEY='storyworld.r1064.moblunge',NEED=2,MIN_ATK=4,MIN_CALM=6,MAX_OFF=.6;
+const REV='R1064-mob-lunge-2',KEY='storyworld.r1064.moblunge',NEED=2,MIN_ATK=4,MIN_CALM=6,MAX_OFF=.6,ART_CALM=30;// ART_CALM: 평소 그림을 이만큼 본 뒤에야 '새 그림' 판정(걷기 칸을 다 보기 전 공격에 섣불리 art 로 굳지 않게)
 let prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s.on==='boolean')prefs.on=s.on;}catch(_){}
 const stats={draws:0,lunges:0,lungeDraws:0,decided:0,rejected:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
+// R1064c: 이름이 걷기·이동 시트(walk·move)면 가로 칸은 모두 걷기 그림 → 줄(y·높이)로 묶고, 그 밖의 한 줄 시트(r374 기계병·관리자 추적견, r275 향로 사제 등 걷기 8칸+공격 4칸)는 칸마다 따로 본다.
+const WALK=/walk|move/i;
 const FX=/r251\/atlas|pixelfx|\/fx\/|effect|vfx|ring|circle|sigil|shadow|aura|hexagram|blood|flame-fx|death|dissol|burn|original-actor-canvas/i;
 const zoneId=()=>{try{return String((typeof room==='object'&&room?.id)||'');}catch(_){return '';}};
 const major=e=>!!(e&&(e.boss||e.midboss||e.persona||e.wardChampionR81===true));
@@ -33,13 +35,13 @@ const calm=e=>!e.attack&&!(e.rangedWindup>0)&&!(e.hitTimer>0)&&!e.r286?.mode&&!e
 const S=new WeakMap();
 function rec(e){let r=S.get(e);if(!r)S.set(e,r={calm:new Map(),calmN:0,cur:null,none:0,art:0,verdict:null});return r;}
 function close(r){const c=r.cur;r.cur=null;if(!c||c.n<MIN_ATK||r.verdict==='art')return;
- if(c.keys.size&&[...c.keys].some(k=>!r.calm.has(k))){r.art++;if(r.verdict!=='art'){r.verdict='art';stats.decided++;}return;}
+ if(c.keys.size&&[...c.keys].some(k=>!r.calm.has(k))){if(r.calmN<ART_CALM)return;r.art++;if(r.verdict!=='art'){r.verdict='art';stats.decided++;}return;}
  if(r.calmN>=MIN_CALM){r.none++;if(!r.verdict&&r.none>=NEED){r.verdict='lunge';stats.decided++;}}}
 function sample(e,r,key){if(!key)return;if(realAtk(e)){const id=e.attack.id??e.attack;if(!r.cur||r.cur.id!==id){close(r);r.cur={id,keys:new Set(),n:0};}r.cur.keys.add(key);r.cur.n++;}
  else{if(r.cur)close(r);if(calm(e)){r.calm.set(key,(r.calm.get(key)||0)+1);r.calmN++;}}}
 function bodyKey(C,st){if(!Array.isArray(C)||!(st>=0))return null;let best=null;for(let i=st;i<C.length;i++){const k=C[i];if(k?.kind!=='image'||!Array.isArray(k.points)||k.points.length<4)continue;
  const src=String(k.sourcePath||k.image?.src||'').replace(/^.*\/m0\//,'');if(!src||FX.test(src))continue;const P=k.points;
- const ar=Math.abs((P[1][0]-P[0][0])*(P[3][1]-P[0][1])-(P[1][1]-P[0][1])*(P[3][0]-P[0][0]));if(!best||ar>best.ar){const SR=Array.isArray(k.sourceRect)?k.sourceRect:null;best={ar,key:src+'|'+(SR?Math.round(+SR[1]||0)+','+Math.round(+SR[3]||0):'')};}}return best?best.key:null;}
+ const ar=Math.abs((P[1][0]-P[0][0])*(P[3][1]-P[0][1])-(P[1][1]-P[0][1])*(P[3][0]-P[0][0]));if(!best||ar>best.ar){const SR=Array.isArray(k.sourceRect)?k.sourceRect:null;best={ar,key:src+'|'+(SR?(WALK.test(src.split('/').pop())?'':Math.round(+SR[0]||0)+','+Math.round(+SR[2]||0)+'@')+Math.round(+SR[1]||0)+','+Math.round(+SR[3]||0):'')};}}return best?best.key:null;}
 // ---- 내딛기 모양: R286 과 같은 함수(없으면 같은 모양의 사본) ----
 function ownLunge(t,sh,a,side){const SIDE=.3,REACH=.42,ease=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
  const w=Math.max(.05,Number(sh.windup)||.3),act=Math.max(.05,Number(sh.active)||.15),rec=Math.max(.1,Number(sh.recovery)||.35);
