@@ -1,0 +1,4 @@
+FAIL ⑮ R102 영웅 이펙트 언주색
+FAIL ⑮ 라우렌 보라 r106fx 언주색
+PASS ⑮ 다른 색 이펙트는 그대로
+R1113 persona-hero FAILED 2

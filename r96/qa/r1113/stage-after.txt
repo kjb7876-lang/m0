@@ -1,0 +1,5 @@
+open {"sel":["hwando"],"stage":"hwando","nm":"환도","cls":"","want":false,"cards":1,"player":"hwando"}
+t0 {"sel":["lauren"],"stage":"lauren","nm":"라우렌","cls":"swap","want":true,"cards":1,"player":"hwando"}
+t100 {"sel":["lauren","1"],"stage":"lauren","nm":"페르소나","cls":"swap r1113","want":true,"cards":2,"player":"hwando"}
+t300 {"sel":["lauren","1"],"stage":"lauren","nm":"페르소나","cls":"swap r1113","want":true,"cards":2,"player":"hwando"}
+t600 {"sel":["lauren","1"],"stage":"lauren","nm":"페르소나","cls":"swap r1113","want":true,"cards":2,"player":"hwando"}

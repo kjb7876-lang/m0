@@ -1,0 +1,7 @@
+# 고치기 전(R1113 초안): 페르소나 칸을 누르면 0.1초 뒤 무대가 페르소나로 바뀌었다가 0.3초 뒤 환도로 되돌아감
+# 원인: mark() 가 라우렌 칸의 selected 를 지워 R263 무대 감시가 첫 칸(환도)으로 다시 그림
+open {"sel":["hwando"],"stage":"hwando","nm":"환도","cls":"","want":false,"cards":1,"player":"hwando"}
+t0 {"sel":["lauren"],"stage":"lauren","nm":"라우렌","cls":"swap","want":true,"cards":1,"player":"hwando"}
+t100 {"sel":["lauren"],"stage":"lauren","nm":"페르소나","cls":"swap r1113","want":true,"cards":1,"player":"hwando"}
+t300 {"sel":["1"],"stage":"hwando","nm":"환도","cls":"r1113 swap","want":true,"cards":2,"player":"hwando"}
+t600 {"sel":["1"],"stage":"hwando","nm":"환도","cls":"r1113 swap","want":true,"cards":2,"player":"hwando"}

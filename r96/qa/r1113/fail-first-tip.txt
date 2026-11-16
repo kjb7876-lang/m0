@@ -1,0 +1,4 @@
+PASS ⑭ 형상 아니면 창끝 빛 그대로
+FAIL ⑭ 형상이면 창끝 빛 뺌
+FAIL ⑭ 접지 그림자는 색 돌리기 없음
+R1113 persona-hero FAILED 2
