@@ -1,0 +1,96 @@
+{
+ "ink": true,
+ "dirs": {
+  "left": {
+   "samples": 31,
+   "sheet": 24,
+   "paths": [
+    "r1104b:walk:side:N:ink"
+   ],
+   "distinctFrames": 8,
+   "fw": 11,
+   "bw": 0,
+   "footOffMinMax": [
+    -0.03,
+    -0.03,
+    -0.04,
+    -0.04
+   ],
+   "scalePxPerCell": 0.1900900727386049,
+   "tilePx": 32.05550741379011,
+   "errors": 0,
+   "cmdCount": [
+    1,
+    3
+   ]
+  },
+  "right": {
+   "samples": 33,
+   "sheet": 32,
+   "paths": [
+    "r1104b:walk:side:N:ink"
+   ],
+   "distinctFrames": 8,
+   "fw": 21,
+   "bw": 0,
+   "footOffMinMax": [
+    0,
+    0,
+    -0.87,
+    -0.87
+   ],
+   "scalePxPerCell": 0.1988311687580292,
+   "tilePx": 32.05550741379011,
+   "errors": 0,
+   "cmdCount": [
+    1
+   ]
+  },
+  "down": {
+   "samples": 34,
+   "sheet": 33,
+   "paths": [
+    "r1104b:walk:front:N:ink"
+   ],
+   "distinctFrames": 8,
+   "fw": 25,
+   "bw": 0,
+   "footOffMinMax": [
+    0,
+    0,
+    -0.87,
+    -0.87
+   ],
+   "scalePxPerCell": 0.19854418089074097,
+   "tilePx": 16.027753706895083,
+   "errors": 0,
+   "cmdCount": [
+    1,
+    2
+   ]
+  },
+  "up": {
+   "samples": 26,
+   "sheet": 25,
+   "paths": [
+    "r1104b:walk:rear:N:ink"
+   ],
+   "distinctFrames": 8,
+   "fw": 22,
+   "bw": 0,
+   "footOffMinMax": [
+    0.01,
+    0.01,
+    -0.52,
+    -0.52
+   ],
+   "scalePxPerCell": 0.19075539977526054,
+   "tilePx": 16.027753706895083,
+   "errors": 0,
+   "cmdCount": [
+    1,
+    2
+   ]
+  }
+ }
+}
