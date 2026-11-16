@@ -52939,8 +52939,8 @@
     },
     {
       "path": "ego-motion-r1048.js",
-      "bytes": 20467,
-      "sha256": "83259bd1da62886efaac2e1214d4055aee1dfda945eee78a8d127b9d08d097ee"
+      "bytes": 23969,
+      "sha256": "39bb3e7653f31b894819591642024816ed15d5f155aa0acdd0838a44c1c7af56"
     },
     {
       "path": "ego-paint-r1039.js",
@@ -54719,7 +54719,7 @@
     }
   ],
   "fileCount": 10943,
-  "totalBytes": 1321600062,
+  "totalBytes": 1321603564,
   "webHTMLSha256": "f1f0a76476636412618ad4448b610d4c8f41416b4e309a9db80994c3c8b4ce87",
   "largest": [
     {
