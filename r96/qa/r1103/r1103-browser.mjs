@@ -15,16 +15,16 @@ for(const mode of ['off','on']){
  await p.goto(URL);await p.locator('#campaignNew54').click({timeout:180000});await p.locator(`.heroRowR101 button[data-hero="${hero}"]`).click({timeout:20000});await p.locator('#slotConfirmR73').click();
  await p.waitForFunction(()=>started&&!loading&&(!modal||!!storyScene),null,{timeout:240000});await p.waitForTimeout(600);await skip(p);
  await p.evaluate(async()=>{await window.__STORYWORLD_CHEAT777__.activate('777');});await p.waitForFunction(()=>!loading,null,{timeout:90000});await skip(p);
- await p.evaluate(()=>{const P=StoryPhase1.DrawCommands.prototype,base=P.push;const c={f42warn:0,r98ground:0,all:0};window.__R1103B=c;
-  P.push=function(kind){const n0=this.commands?.length??0;const r=base.apply(this,arguments);if((this.commands?.length??0)>n0){/* 실제로 기록된 명령만 센다(이 탐침은 R1103 바깥에 감기므로) */const o=this.owner||{};const i=+o.r88SourceIndex;c.all++;if(o.r88Final42&&(i===251||i===260))c.f42warn++;if(o.r98&&o.kind==='hazard'&&(kind==='fill'||kind==='stroke'))c.r98ground++;}return r;};});
+ await p.evaluate(()=>{const P=StoryPhase1.DrawCommands.prototype,base=P.push;const c={f42warn:0,r98ground:0,nav:0,all:0};window.__R1103B=c;
+  P.push=function(kind){const n0=this.commands?.length??0;const r=base.apply(this,arguments);if((this.commands?.length??0)>n0){/* 실제로 기록된 명령만 센다(이 탐침은 R1103 바깥에 감기므로) */const o=this.owner||{};const i=+o.r88SourceIndex;c.all++;if(o.r88Final42&&(i===251||i===260))c.f42warn++;if(o.r98&&o.kind==='hazard'&&(kind==='fill'||kind==='stroke'))c.r98ground++;if(o.id==='r100:nav')c.nav++;}return r;};});
  for(const z of ZONES){await p.evaluate(async z=>{if(zone!==z)await enterRegion(z,null,{layer:'STORY',restore:true});},z);await p.waitForFunction(z=>!loading&&zone===z,z,{timeout:150000});await skip(p);
   await p.evaluate(()=>{for(const k in __R1103B)__R1103B[k]=0;window.__R1103hurt=0;const es=(room.enemies||[]).filter(e=>e.hp>0);es.sort((a,b)=>Math.hypot(a.x-player.x,a.y-player.y)-Math.hypot(b.x-player.x,b.y-player.y));player.x=es[0].x+1.4;player.y=es[0].y+.2;});
   for(let i=0;i<40;i++){await p.evaluate(()=>{const h0=player.hp;for(let j=0;j<12;j++){if(modal||loading)break;try{tick(1/60);}catch(_){}}if(player.hp<h0)window.__R1103hurt++;player.hp=Math.max(player.hp,maxHP()*.9);try{draw();}catch(_){}});
    if(i%10===5)await p.screenshot({path:path.join(OUT,`${mode}-${z}-${i}.png`)});}
   const r=await p.evaluate(()=>({c:{...__R1103B},hurt:__R1103hurt,api:window.__STORYWORLD_WARNING_SHAPES_R1103__?.inspect()}));console.log(mode,z,JSON.stringify(r));
   ok(r.c.all>1000,`${mode} ${z}: frames recorded`);ok(r.hurt>0,`${mode} ${z}: enemy attacks still hurt the hero`);
-  if(mode==='on'){ok(r.api?.installed&&r.api.on,'on: installed');ok(r.c.f42warn===0,`on ${z}: no FINAL42 warning-ring/charge commands recorded`);ok(r.c.r98ground===0,`on ${z}: no R98 ground shape commands`);ok(r.api.stats.dropped>0,`on ${z}: overlay actually dropped something`);}
-  else ok(r.c.f42warn+r.c.r98ground>0,`off ${z}: originals present (test meaningful)`);}
+  if(mode==='on'){ok(r.api?.installed&&r.api.on,'on: installed');ok(r.c.f42warn===0,`on ${z}: no FINAL42 warning-ring/charge commands recorded`);ok(r.c.r98ground===0,`on ${z}: no R98 ground shape commands`);ok(r.c.nav===0,`on ${z}: no ground nav chevrons`);ok(r.api.stats.dropped>0,`on ${z}: overlay actually dropped something`);}
+  else{ok(r.c.f42warn+r.c.r98ground>0,`off ${z}: originals present (test meaningful)`);ok(r.c.nav>0,`off ${z}: nav chevrons present (test meaningful)`);}}
  ok(!errs.some(e=>/r1103|warning-shapes/i.test(e)),mode+': no page errors from R1103');if(errs.length)console.log('pageerrors',errs.slice(0,3));
  await ctx.close();}
 await b.close();console.log(`R1103 browser: pass ${pass}, fail ${fail}`);process.exit(fail?1:0);

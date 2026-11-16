@@ -26,12 +26,14 @@ const f42=(i,extra={})=>({id:'final42-r88:1:2:F'+i,kind:'hazard',x:1,y:2,groundA
  ok(draw(DC,f42(101,{kind:'effect'}))===1,'F101 impact kept');ok(draw(DC,f42(250,{kind:'effect'}))===1,'F250 status kept');
  ok(draw(DC,{id:'r98:3:a',kind:'effect',r98:true},'image')===1,'R98 air sheet kept');
  ok(draw(DC,{id:'r98:3:g',kind:'hazard',r98:true,groundAligned:true},'image')===1,'R98 ground sheet image kept (not a code shape)');
- ok(draw(DC,{id:'r100:nav',kind:'hazard',groundAligned:true,r100:true},'fill')===1,'R100 navigation chevrons kept');
+ // R1103b(사용자 07:08 "지워"): 몹 근처에 보이던 작은 주황 삼각형 = R100 길잡이 바닥 화살표(쉐브론) — 지운다(나침반 HUD 는 그대로)
+ ok(draw(DC,{id:'r100:nav',kind:'hazard',groundAligned:true,r100:true},'fill')===0,'R100 ground nav chevrons dropped');
+ ok(draw(DC,{id:'r100:other',kind:'hazard',groundAligned:true,r100:true},'fill')===1,'other R100 ground draws kept');
  ok(draw(DC,{id:'enemy:1',kind:'enemy'},'fill')===1&&draw(DC,{id:'hero:1',kind:'hero'},'image')===1,'enemy/hero kept');
  ok(draw(DC,null,'fill')===1,'default scene owner kept');
  ok(draw(DC,{id:'odd',kind:'hazard',r88Final42:true,r88SourceIndex:'251'})===0,'string source index boundary');
  ok(draw(DC,{id:'odd',kind:'hazard',r88Final42:true,r88SourceIndex:NaN})===1,'NaN source index kept');
- const s=api.inspect();ok(s.stats.dropped>=8&&s.on===true&&s.warningIndices.includes(251)&&s.warningIndices.includes(260)&&!s.warningIndices.includes(250),'stats/warning set from data');
+ const s=api.inspect();ok(s.stats.dropped>=9&&s.stats.navTrail>=1&&s.on===true&&s.warningIndices.includes(251)&&s.warningIndices.includes(260)&&!s.warningIndices.includes(250),'stats/warning set from data');
  // 다시 불러도 두 번 감싸지 않는다
  vm.runInContext(src,ctx);ok(draw(DC,f42(101,{kind:'effect'}))===1&&draw(DC,f42(251))===0,'idempotent load');
  // 끄기
