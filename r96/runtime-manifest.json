@@ -10663,6 +10663,246 @@
       "sha256": "7aad9787c526d30b456ac025619d05ab0e804b1ed2373959e1e1023f01d33227"
     },
     {
+      "path": "assets/r1116/ego-ink/attack-e.webp",
+      "bytes": 240796,
+      "sha256": "37791fc8a3eb08bcf19149af733ba5012658b7a5a5e5b8bd093141767cc3e208"
+    },
+    {
+      "path": "assets/r1116/ego-ink/attack-n.webp",
+      "bytes": 240088,
+      "sha256": "13e9796ab9c6742ea0eea1888e6077f07cbe7cddf16a98be3599a807adabb1a5"
+    },
+    {
+      "path": "assets/r1116/ego-ink/attack-ne.webp",
+      "bytes": 243860,
+      "sha256": "6557bdaf6e484d514a32095d698f4be2ec7008c91809f815b3c2708ea07270d5"
+    },
+    {
+      "path": "assets/r1116/ego-ink/attack-nw.webp",
+      "bytes": 248024,
+      "sha256": "295ca7514f7ae44b8bfdfa1700951e00b6f93fcf3d386e6cfd6d82ee0a6ce377"
+    },
+    {
+      "path": "assets/r1116/ego-ink/attack-s.webp",
+      "bytes": 208712,
+      "sha256": "ffd088e3f2434f5e915b6b57d2dc4f61413946e8204995a91bbd1325cd121460"
+    },
+    {
+      "path": "assets/r1116/ego-ink/attack-se.webp",
+      "bytes": 232560,
+      "sha256": "179a9bd99cba1b7cdbd7f707cec80632b1992f91e1335d71c18f65876c5d78c9"
+    },
+    {
+      "path": "assets/r1116/ego-ink/attack-sw.webp",
+      "bytes": 212778,
+      "sha256": "f4ac4bed26d2704c086dd8d0b61a253057b64fe8735959ce6653a0082f8fbc09"
+    },
+    {
+      "path": "assets/r1116/ego-ink/attack-w.webp",
+      "bytes": 238304,
+      "sha256": "bedd3e940a0e48cdde1243334efe6235cd611844a271d8c52cc7fdc686e40ff5"
+    },
+    {
+      "path": "assets/r1116/ego-ink/discard-e.webp",
+      "bytes": 264044,
+      "sha256": "92b8075aa667626cc2c5bbddccbe6766f514cb985f72254912cba9d30e73f99c"
+    },
+    {
+      "path": "assets/r1116/ego-ink/discard-n.webp",
+      "bytes": 284422,
+      "sha256": "497fccc0d160e4486aa44a6fa435df112811a173b929ed3747be4a3ed8fe372f"
+    },
+    {
+      "path": "assets/r1116/ego-ink/discard-ne.webp",
+      "bytes": 298710,
+      "sha256": "e61ca12ff5451ccd8f4747b21a3209be0b58a1eab2e86cd3a8061a2ef980b3a5"
+    },
+    {
+      "path": "assets/r1116/ego-ink/discard-nw.webp",
+      "bytes": 259654,
+      "sha256": "1888b6221a5c05cc499a898773ec9777ce6522c65ca7c6ba86a4cec3642a144f"
+    },
+    {
+      "path": "assets/r1116/ego-ink/discard-s.webp",
+      "bytes": 250676,
+      "sha256": "e65eef19525f4bcf100939c4640c425fa480f65696ea2307524393dc4284a65e"
+    },
+    {
+      "path": "assets/r1116/ego-ink/discard-se.webp",
+      "bytes": 235672,
+      "sha256": "01a3085cc09b80b1a4460226adf57e7c893c1e213bfee37db4ebbae9047ed10f"
+    },
+    {
+      "path": "assets/r1116/ego-ink/discard-sw.webp",
+      "bytes": 255260,
+      "sha256": "e40bc812f8ba85c9592ad07a9cfc73d51fa149fd924f9df90c4ea6c581efa5eb"
+    },
+    {
+      "path": "assets/r1116/ego-ink/discard-w.webp",
+      "bytes": 260598,
+      "sha256": "617750f6d742c6aa41e34ca556381c30e6b7491554bd8354f3fd9605cadd5000"
+    },
+    {
+      "path": "assets/r1116/ego-ink/hit-e.webp",
+      "bytes": 106742,
+      "sha256": "89b5a6dbfe35851a2a3c7a441848f5a62d8c64c98646a39d0fd437dfb8ecdcba"
+    },
+    {
+      "path": "assets/r1116/ego-ink/hit-n.webp",
+      "bytes": 110922,
+      "sha256": "00cd66165db26ba18c8c9ee5cad274031078196d5da5ff14317e63731f333e5f"
+    },
+    {
+      "path": "assets/r1116/ego-ink/hit-ne.webp",
+      "bytes": 115306,
+      "sha256": "e18669a7e1e335aa586f9314aeb406d11ca5e6a36ba18a0d8558d4fef52cf08e"
+    },
+    {
+      "path": "assets/r1116/ego-ink/hit-nw.webp",
+      "bytes": 105880,
+      "sha256": "2e8c89d6fef01ade3c2937c112a867ca031bef5bdb59cbb2a31e0e7ce2bba238"
+    },
+    {
+      "path": "assets/r1116/ego-ink/hit-s.webp",
+      "bytes": 106122,
+      "sha256": "268d62b31de6b00d4cd1ff744488c0ef5ab22cb687b5b349db21e95a5837d589"
+    },
+    {
+      "path": "assets/r1116/ego-ink/hit-se.webp",
+      "bytes": 102150,
+      "sha256": "3ec38afead355af6fd4a096804f9b6f308c9a9960ca4271171aa295d500bea8f"
+    },
+    {
+      "path": "assets/r1116/ego-ink/hit-sw.webp",
+      "bytes": 112498,
+      "sha256": "fcad07a9993917e7fad047d2ae0fd4916c0e4ae6845dc69944f94ae9dbac9b66"
+    },
+    {
+      "path": "assets/r1116/ego-ink/hit-w.webp",
+      "bytes": 110822,
+      "sha256": "ce248fd54b98f57acab36361aa6bdc64ab70606f695aada0c981143300d1c5fe"
+    },
+    {
+      "path": "assets/r1116/ego-ink/idle-e.webp",
+      "bytes": 150944,
+      "sha256": "2396c9ecb5e8d6807b32c1b7a1d0403a8c9a211bcae31caec837adb7ace5d928"
+    },
+    {
+      "path": "assets/r1116/ego-ink/idle-n.webp",
+      "bytes": 161092,
+      "sha256": "2f6aa3178699708bad83150add71d0e66ba2d76295085b36cac72a23dcee45e9"
+    },
+    {
+      "path": "assets/r1116/ego-ink/idle-ne.webp",
+      "bytes": 173124,
+      "sha256": "414caab873f23315d342dc1151b390aed92648622d783bfbce87e1d92748320f"
+    },
+    {
+      "path": "assets/r1116/ego-ink/idle-nw.webp",
+      "bytes": 149302,
+      "sha256": "97f35eff8880e9ef8772caa457b9a0435f3aef518eb37cc4c19abed8509b09c7"
+    },
+    {
+      "path": "assets/r1116/ego-ink/idle-s.webp",
+      "bytes": 148606,
+      "sha256": "34083d9aab1c4ca675d51c461ade2ad3eb00d7adcf72f49ba3cb1e8e086b7925"
+    },
+    {
+      "path": "assets/r1116/ego-ink/idle-se.webp",
+      "bytes": 143064,
+      "sha256": "16ef2915e6a9a8e623e9dfd743d5924789468d1c11cecf877686d56fd2ef59fb"
+    },
+    {
+      "path": "assets/r1116/ego-ink/idle-sw.webp",
+      "bytes": 158536,
+      "sha256": "d6ee0c0b056f81d506d1af3bb5e3590b2d8ab97cfdac29c5030d8c72c35cb508"
+    },
+    {
+      "path": "assets/r1116/ego-ink/idle-w.webp",
+      "bytes": 152248,
+      "sha256": "7e42fb31669649e116a9bb54fa38eee3b6ae2dee8c65ec5f621dbece8bcaf9dd"
+    },
+    {
+      "path": "assets/r1116/ego-ink/run-e.webp",
+      "bytes": 132648,
+      "sha256": "3cfe4b36e84ba3c66db281f0fc2d66f9401947f01d395c66f1908cbd41e038a4"
+    },
+    {
+      "path": "assets/r1116/ego-ink/run-n.webp",
+      "bytes": 142692,
+      "sha256": "7a84a0eba38ffb8a10bedfd600cf5d9320ba8e2e4ad2772f7cdf30641a5c4e66"
+    },
+    {
+      "path": "assets/r1116/ego-ink/run-ne.webp",
+      "bytes": 144600,
+      "sha256": "75aaa7b9f7f94895a7bf72a62e7dc9b1921f5010f194aeecf945a142ee9ce0d8"
+    },
+    {
+      "path": "assets/r1116/ego-ink/run-nw.webp",
+      "bytes": 130452,
+      "sha256": "886faa9e0e5e09b35e62c75eb43d4e656a7069f8c34116ecd3010142235b1e35"
+    },
+    {
+      "path": "assets/r1116/ego-ink/run-s.webp",
+      "bytes": 117030,
+      "sha256": "a14e1104d01457d028d00e455b1a68e045f7de87107ad444a26b9d3b30fbf6b3"
+    },
+    {
+      "path": "assets/r1116/ego-ink/run-se.webp",
+      "bytes": 120776,
+      "sha256": "d06c4abfc6ca212cf2ba219d5fd7abd71c629d94f42dafab6dd576fc4987531f"
+    },
+    {
+      "path": "assets/r1116/ego-ink/run-sw.webp",
+      "bytes": 132566,
+      "sha256": "cb3ef627c7bc01b31500b886fa779177fe488f3e80902debc58b8dd1ae831b96"
+    },
+    {
+      "path": "assets/r1116/ego-ink/run-w.webp",
+      "bytes": 128358,
+      "sha256": "41d0e504d75bd6951ae4c33bdb70ff0d58f62e1b11240bb8cb7cbb284c70ba85"
+    },
+    {
+      "path": "assets/r1116/ego-ink/walk-e.webp",
+      "bytes": 162390,
+      "sha256": "64fefa37e75ca79ac4db55a705235d7173c4779521c4086c96a774a483e21f2b"
+    },
+    {
+      "path": "assets/r1116/ego-ink/walk-n.webp",
+      "bytes": 165244,
+      "sha256": "2708df834e5dfaa649091bd610f6cfd390b8e74058668ba18b12ccf96699c5f1"
+    },
+    {
+      "path": "assets/r1116/ego-ink/walk-ne.webp",
+      "bytes": 166248,
+      "sha256": "61f3ec7d8d1284232758473d32aedfcf2f8c8492ea90d8ffd8849396d8f51795"
+    },
+    {
+      "path": "assets/r1116/ego-ink/walk-nw.webp",
+      "bytes": 153286,
+      "sha256": "b4a759bd0406ea2ba408b034ebc0a371bebe7ae4a33b1bfe70f034fc94932ebd"
+    },
+    {
+      "path": "assets/r1116/ego-ink/walk-s.webp",
+      "bytes": 156432,
+      "sha256": "17dcdf51764c26cf709296bca2b80f3e428071852bb82a6631f1b412b68f6432"
+    },
+    {
+      "path": "assets/r1116/ego-ink/walk-se.webp",
+      "bytes": 147266,
+      "sha256": "17785bb5bc2d998cf9812f376630f8ed4e0419827fb093cb573ceee178834668"
+    },
+    {
+      "path": "assets/r1116/ego-ink/walk-sw.webp",
+      "bytes": 168042,
+      "sha256": "75d8b33261d2806d23c30f6044d096b52a209d9368484ada2090c72a0e795afa"
+    },
+    {
+      "path": "assets/r1116/ego-ink/walk-w.webp",
+      "bytes": 159402,
+      "sha256": "69b56f4db06beb90b0de1636b25ed6731279f416f24baa32caae1e8fac8f3dfb"
+    },
+    {
       "path": "assets/r116/mobs/M001-hit.png",
       "bytes": 141513,
       "sha256": "35cffa3fe6d6c22cdb75e06e1cca55a673f06c10afa28087d749082c40c77b71"
@@ -53369,8 +53609,8 @@
     },
     {
       "path": "ego-ink-r1099.js",
-      "bytes": 44685,
-      "sha256": "65dfe7c86ab3e7faab2f9ff2f237973ac6118a0a81f8a8fc6cb84633f8868801"
+      "bytes": 44953,
+      "sha256": "3bfc094a2c3a3cc44976b71161defa83c80688e6cbac3e92f8fed2e98c96cd67"
     },
     {
       "path": "ego-kit-r1094.js",
@@ -55208,8 +55448,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11041,
-  "totalBytes": 1333367460,
+  "fileCount": 11089,
+  "totalBytes": 1341776676,
   "webHTMLSha256": "3f90f7bb84cdb2bb8768b55648fade30658def64a7d761a99aec54f1432c1531",
   "largest": [
     {
