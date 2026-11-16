@@ -772,6 +772,8 @@ jobs:
         run: node r96/qa/r1105/r1105-cpu-check.cjs
       - name: R1112 EGO restore (samong cut-in EGO art, EGO aura color, prebaked ink sheets, front-only face, HIDDEN tag) CPU check
         run: node r96/qa/r1112/r1112-cpu-check.cjs
+      - name: R1116 EGO straight blade (48 pre-baked ink sheets with the bent blade erased and redrawn straight in ink, white core and vermilion edge, originals kept) CPU check
+        run: node r96/qa/r1116/r1116-cpu-check.cjs
       - name: R1109 co-op relay build match (old R62 Render relay auto-fallback, default relay address) CPU check
         run: node r96/qa/r1109/r1109-cpu-check.cjs
       - name: R1092 story panel scene art (vertical-version scene paintings, ink-wash aware) CPU check

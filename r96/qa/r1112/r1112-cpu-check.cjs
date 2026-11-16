@@ -6,7 +6,7 @@ const src=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8');
 const ink=src('ego-ink-r1099.js');for(const f of ['ego-ink-r1099.js','ego-sovereign-r1046.js','passive-cutin-r1033.js','samong-surge-r571.js'])new vm.Script(src(f),{filename:f});ok(true,'문법');
 // ①
 const m=/\/\*R1112-PRE\*\/(.*?)\/\*R1112-PRE-END\*\//s.exec(ink);let PRE=null;try{PRE=JSON.parse(m[1]);}catch(_){}
-ok(PRE&&PRE.cell===160&&PRE.base==='assets/r1112/ego-ink/','PRE 표(칸 160, 경로)',PRE&&{cell:PRE.cell,base:PRE.base});
+ok(PRE&&PRE.cell===160&&/^assets\/r11(12|16)\/ego-ink\/$/.test(PRE.base),'PRE 표(칸 160, 경로 r1112 또는 R1116 곧은 칼 판)',PRE&&{cell:PRE.cell,base:PRE.base});
 const CL=['idle','walk','run','attack','hit','discard'],DI=['s','se','e','ne','n','nw','w','sw'];const keys=CL.flatMap(c=>DI.map(d=>c+'-'+d));
 ok(PRE&&keys.every(k=>Array.isArray(PRE.sheets[k])&&PRE.sheets[k].length===7),'48장 모두 표에 있음',PRE&&Object.keys(PRE.sheets).length);
 let size=0,badDim=[];if(PRE)for(const k of keys){const e=PRE.sheets[k],f=path.join(R,'runtime-text',PRE.base,k+'.webp');if(!fs.existsSync(f)){badDim.push(k+':없음');continue;}size+=fs.statSync(f).size;
