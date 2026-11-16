@@ -10,7 +10,7 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_EGO_SOVEREIGN_R1046__)return;
 const D=window.__STORYWORLD_EGO_SOVEREIGN_R1046_DATA__;if(!D)return;
-const REV='R1046-ego-sovereign-1',KEY='storyworld.r1046.ego',FIELD='egoSovereignR1046';
+const REV='R1046-ego-sovereign-2',KEY='storyworld.r1046.ego',FIELD='egoSovereignR1046';
 const fin=Number.isFinite,clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
 const P=D.profile,OD=D.abilities.find(a=>a.id==='observe-discard');
 const stats={discards:0,scheduled:0,cutins:0,cards:0,stagePatched:0,auraDraws:0,errors:0};let lastError=null;
@@ -49,18 +49,31 @@ const CLEAR={
  bleed71:p=>window.__STORYWORLD_HEALTH_R71__?.clearBleeding?.(p,'r1046-observe-discard'),
  healblock9:p=>{const t=now();if(fin(p.heroHealingBlockedUntil)&&p.heroHealingBlockedUntil>t)p.heroHealingBlockedUntil=t;}};
 let pending=null,cdUntil=-1,lastT=null,lineAt=0,fxAt=-99,unlockPoll=0;
+// R1094(사용자 11-16 "상태이상자동으로없애는거 그것도 7단계나눠서 강화가능하도록"): 관측 폐기 강화 0~7단계 — R62 패시브 포인트 카드(R971 특수 패시브와 같은 방식, 비용 = 다음 단계).
+//  단계마다 효율 ×(1+0.07·단계), 상한 ×1.40(사용자 패시브 규칙 '7단계 7%·40% 상한'). 재발동 대기 16초·발동 지연 0.7초를 그 배율로 나눈다(7단계: 11.4초·0.5초).
+//  걷어내는 상태 종류·'상처와 죽음은 폐기하지 못한다' 규칙은 그대로. 카드는 EGO 를 해금한 뒤에만 P 창에 보인다.
+const TIER_ID='egoDiscardR1094',TIER_MAX=7,TIER_STEP=.07,TIER_CAP=1.4;
+const tierMult=r=>Math.min(TIER_CAP,1+TIER_STEP*clamp(Math.floor(+r)||0,0,TIER_MAX));
+function tier(){const p=pl();if(!p)return 0;return clamp(Math.floor(+G(()=>window.__STORYWORLD_PROGRESSION_R62__.ranks(TIER_ID,p),0))||0,0,TIER_MAX);}
+const cdSec=()=>OD.cooldown/tierMult(tier()),delaySec=()=>OD.delay/tierMult(tier());
+function addTierDef(){const A=G(()=>window.__STORYWORLD_PROGRESSION_R62__,null);if(!A||!Array.isArray(A.defs)||!unlocked())return false;if(A.defs.some(d=>d&&d.id===TIER_ID))return true;
+ A.defs.push({id:TIER_ID,icon:'ego',maxRank:TIER_MAX,name:'EGO 패시브 · 관측 폐기',
+  get cost(){return Math.min(TIER_MAX,tier()+1);},
+  get text(){const r=tier(),nx=Math.min(TIER_MAX,r+1),f=v=>(OD.cooldown/tierMult(v)).toFixed(1)+'초 · 지연 '+(OD.delay/tierMult(v)).toFixed(2)+'초';
+   return '재발동 대기 '+f(r)+(r<TIER_MAX?' → '+f(nx):' (최대)')+'. EGO 형상에서 해로운 상태를 자동으로 걷어내는 관측 폐기를 강화합니다. 단계마다 효율 +7%(상한 +40%). 이미 입은 상처와 죽음은 폐기하지 못합니다. 비용 = 다음 단계(1~7점).';}});
+ stats.tierCard=(stats.tierCard||0)+1;return true;}
 function discard(){const p=pl(),t=now();if(!p||t==null||!(p.hp>0))return 0;const ids=present();let n=0;
  for(const id of ids){try{CLEAR[id]?.(p);n++;}catch(e){fail(e);}}
- if(!n)return 0;stats.discards++;stats.last=ids.slice();cdUntil=t+OD.cooldown;fxAt=t;
+ if(!n)return 0;stats.discards++;stats.last=ids.slice();cdUntil=t+cdSec();fxAt=t;
  try{const line=OD.lines[lineAt++%OD.lines.length];if(typeof floatText==='function')floatText(line,p.x,p.y,'#f2c3c8');}catch(e){fail(e);}
  return n;}
 function step(){const p=pl(),t=now();if(!p||t==null)return;
  if(lastT!=null&&t<lastT){pending=null;cdUntil=-1;fxAt=-99;lastT=null;}const prev=lastT!=null&&t-lastT<.25?lastT:t;lastT=t;
- if(t>=unlockPoll){unlockPoll=t+.5;if(!saved.on&&rc()?.unlocked===true)unlock('rc151');else if(!saved.on&&samongCleared())unlock('samong-S-07');}
+ if(t>=unlockPoll){unlockPoll=t+.5;try{addTierDef();}catch(e){fail(e);}if(!saved.on&&rc()?.unlocked===true)unlock('rc151');else if(!saved.on&&samongCleared())unlock('samong-S-07');}
  if(p[FIELD]===true&&(p.hero!==P.base||!unlocked())){p[FIELD]=false;pending=null;}
  if(!active()||!(p.hp>0)){pending=null;return;}
  if(pending){if(t>=pending.at){pending=null;discard();}return;}
- /* 상태는 지난 프레임과 이번 프레임 사이에 걸렸다 — 지연은 그 프레임 시작부터 센다 */if(t>=cdUntil&&present().length){pending={at:Math.max(prev,cdUntil)+OD.delay};stats.scheduled++;}}
+ /* 상태는 지난 프레임과 이번 프레임 사이에 걸렸다 — 지연은 그 프레임 시작부터 센다 */if(t>=cdUntil&&present().length){pending={at:Math.max(prev,cdUntil)+delaySec()};stats.scheduled++;}}
 // ---- 저장 ----
 function wrapSave(){
  if(typeof serializeSave==='function'&&!serializeSave.__r1046){const base=serializeSave;const w=function(...a){const d=base.apply(this,a);try{if(d&&d.player)d.player[FIELD]=formActive();}catch(e){fail(e);}return d;};w.__r1046=true;serializeSave=w;}
@@ -129,11 +142,12 @@ function wrapScope(){const DC=window.StoryPhase1?.DrawCommands;if(!DC?.prototype
 function wrapHUD(){if(typeof updateHUD!=='function'||updateHUD.__r1046)return;const base=updateHUD;const w=function(...a){const r=base.apply(this,a);try{if(formActive()&&!rcActive()&&hasDoc()){const n=document.getElementById('heroName');if(n&&n.textContent!==P.title)n.textContent=P.title;const pt=document.getElementById('portrait'),u=url(P.portrait);if(pt&&pt.getAttribute('src')!==u)pt.src=u;}}catch(e){fail(e);}return r;};w.__r1046=true;updateHUD=w;}
 let wrapAt=0;
 function install(){wrapSave();wrapTick();wrapHUD();try{wrapScope();}catch(e){fail(e);}if(hasDoc()){try{document.addEventListener('click',onClick,true);}catch(e){fail(e);}}
- if(typeof setInterval==='function')setInterval(()=>{try{wrapSave();wrapTick();wrapHUD();if(Date.now()>wrapAt){wrapAt=Date.now()+2000;wrapScope();}if(hasDoc()&&!G(()=>started,false))ui();}catch(e){fail(e);}},500);}
+ if(typeof setInterval==='function')setInterval(()=>{try{wrapSave();wrapTick();wrapHUD();addTierDef();if(Date.now()>wrapAt){wrapAt=Date.now()+2000;wrapScope();}if(hasDoc()&&!G(()=>started,false))ui();}catch(e){fail(e);}},500);}
 install();
 window.__STORYWORLD_EGO_SOVEREIGN_R1046__=Object.freeze({revision:REV,data:D,field:FIELD,unlocked,unlock,active,formActive,setForm,present,discard,samongCleared,
  refresh:()=>{try{if(hasDoc()&&document.getElementById('panel')?.querySelector('[data-hero]')){css();inject();}}catch(e){fail(e);}}, // R1057: 창을 다시 그린 즉시 EGO 칸을 다시 끼움(200ms 기다림 없이)
 
  lock(){saved={on:false,off:false};persist();},set(v){saved.off=v===false||v==='off';persist();return !saved.off;},
- inspect:()=>({revision:REV,unlocked:unlocked(),saved:{...saved},active:active(),form:formActive(),rc151:rcActive(),pending:pending?{...pending}:null,cdUntil,cutinQueued,want,commit,stats:{...stats},lastError})});
+ tier:()=>({rank:tier(),max:TIER_MAX,mult:tierMult(tier()),cooldown:cdSec(),delay:delaySec(),id:TIER_ID}),tierMult,
+ inspect:()=>({revision:REV,discardAt:fxAt,tier:tier(),unlocked:unlocked(),saved:{...saved},active:active(),form:formActive(),rc151:rcActive(),pending:pending?{...pending}:null,cdUntil,cutinQueued,want,commit,stats:{...stats},lastError})});
 })();

@@ -10080,7 +10080,8 @@
     "assets/r1048/ego/walk-w.webp",
     "assets/r1048/fx/ego_feathers.webp",
     "assets/r1048/fx/ego_halo.webp",
-    "assets/r1048/fx/ego_slash.webp"
+    "assets/r1048/fx/ego_slash.webp",
+    "ego-kit-r1094.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11155,5 +11156,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "5f3291d5043bf7753ffe005f9851828c8a8653c5aa615c41ff015e736dd49a54"
+  "runtimeManifestSHA256": "ef049380ff19efc943bd781a6a092d36b7b8ad390052e91be6c48ea17d86b783"
 }

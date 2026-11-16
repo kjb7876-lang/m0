@@ -726,6 +726,8 @@ jobs:
         run: node r96/qa/r1060/r1060-cpu-check.cjs
       - name: R1048 hidden hero EGO 3D pre-rendered 8-direction motion sheets (player state, directions, hit-stop, fade, NaN) CPU check
         run: node r96/qa/r1048/r1048-cpu-check.cjs
+      - name: R1094 hidden hero EGO collab kit (hwando + persona skills) and observe-discard 7 tiers CPU check
+        run: node r96/qa/r1094/r1094-cpu-check.cjs
       - name: R1040 boss pattern frame fx CPU check
         run: node r96/qa/r1040/boss-pattern-fx-cpu-check.cjs
       - name: R1042 lust boss kiss lips attack (telegraph, 66 percent of current HP, frame sheets) CPU check

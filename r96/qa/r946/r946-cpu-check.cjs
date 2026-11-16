@@ -204,5 +204,18 @@ if(exists){
  const t0=process.hrtime.bigint();for(const k of ['meteor','violet','blue','red','repulse']){A(g).qaForce(k);heroHit(g,'m1');A(g).qaReset();g.time+=5.1;step(g,6);}step(g,24);const ms=Number(process.hrtime.bigint()-t0)/1e6;
  console.log('  60 mobs, 5 procs, ~54 ticks incl. draw: '+ms.toFixed(1)+' ms');ok('60 mobs stays cheap (< 150 ms in vm)',ms<150);
  ok('errors stay 0',A(g).inspect().stats.errors===0);
+
+ // ---- R1094: EGO 히든 영웅(환도 몸)도 은빛 거성(적)·심연 왜성(청)·쌍성 소멸(무라사키)을 확률로 — 언주·묵 색, 라우렌 컷인 없음 ----
+ {let g=env('hwando');A(g).qaRandom(()=>0);g.room.enemies.push(mob('a',11,10));for(let i=0;i<10;i++){heroHit(g,'a');step(g,1,.4);}ok('R1094: EGO 아닌 환도 → 발동 0',A(g).inspect().stats.procTotal===0);
+  g=env('hwando');let cut=0;g.__STORYWORLD_PASSIVE_CUTIN_R1033__={fire(){cut++;}};g.__STORYWORLD_EGO_KIT_R1094__={active:()=>true};A(g).qaRandom(()=>0);g.room.enemies.push(mob('a',13,10,{hp:1e9,maxHp:1e9}));
+  const kinds=[];for(let i=0;i<4;i++){const before={...A(g).inspect().stats.procs};heroHit(g,'a');const after=A(g).inspect().stats.procs;for(const k in after)if(after[k]>(before[k]||0))kinds.push(k);A(g).qaReset();g.time+=5.2;step(g,4);}
+  ok('R1094: EGO 는 적·청을 번갈아, 둘 다 나간 뒤 무라사키('+kinds.join(',')+')',kinds.length===4&&new Set(kinds.slice(0,2)).size===2&&kinds.slice(0,2).every(k=>k==='red'||k==='blue')&&kinds[2]==='violet');
+  ok('R1094: EGO 판엔 항성 반발·유성 궤도 없음',!kinds.includes('repulse')&&!kinds.includes('meteor'));
+  ok('R1094: EGO 판은 라우렌 컷인을 띄우지 않음',cut===0);
+  ok('R1094: EGO 발동 표시(egoProcs)·ego 표식 붙은 동작',A(g).inspect().stats.egoProcs>=3);
+  ok('R1094: EGO 판은 언주·묵 색 필터로(허용된 hue-rotate·saturate·contrast 만)',/EGO_FILTER='hue-rotate\(\d+deg\) saturate\([\d.]+\) contrast\([\d.]+\)'/.test(src)&&/else if\(x\.ego\)\{const f0=ctx\.filter;ctx\.filter=EGO_FILTER/.test(src));
+  g=env('hwando');g.__STORYWORLD_EGO_KIT_R1094__={active:()=>true};A(g).qaRandom(()=>.5);g.room.enemies.push(mob('a',11,10));let rolls=0;for(let i=0;i<40;i++){heroHit(g,'a');step(g,1,.4);}
+  ok('R1094: EGO 확률은 기본 10%(굴림 .5 → 발동 없음)',A(g).inspect().stats.procTotal===0&&A(g).inspect().stats.rolls>0);
+  g=env('lauren');g.__STORYWORLD_EGO_KIT_R1094__={active:()=>true};A(g).qaRandom(()=>0);g.room.enemies.push(mob('a',11,10));heroHit(g,'a');ok('R1094: 라우렌 본인은 그대로(EGO 표시 안 붙음)',!(A(g).inspect().stats.egoProcs>0)&&A(g).inspect().stats.procTotal===1);}
 }
 console.log(`R946 lauren-celestial cpu check: ${pass} pass, ${fail} fail`);process.exit(fail?1:0);

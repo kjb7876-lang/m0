@@ -58,12 +58,12 @@ t('이펙트 명령은 몸 테두리·가림 측정에서 빠짐(흰 테두리 �
 // ---- 그리기 감싸기 실험(Codex #661 지적 4건) — drawHero 를 흉내 낸 기록기에 실제로 그려 본다 ----
 function rig(bodyPath){const R=path.join(__dirname,'../..'),w={},cmds=[];
  vm.runInNewContext(fs.readFileSync(path.join(R,'client-source/ego-motion-r1048-sheets.js'),'utf8'),{window:w,Object});
- const ctl={S:{},cancel:{attack:false,skill:false},calls:[]};
+ const ctl={S:{},cancel:{attack:false,skill:false},calls:[],ready:()=>true,asked:[]};
  w.__STORYWORLD_EGO_SOVEREIGN_R1046__={formActive:()=>true,inspect:()=>({})};
  w.__STORYWORLD_HERO_MOTION_R895__={sample:()=>({...ctl.S}),moveCancel:k=>{ctl.calls.push(k);return !!(ctl.S.mv&&ctl.cancel[k]);}};
  const im={naturalWidth:4096,naturalHeight:256,width:4096,height:256};
  const C={window:w,Math,Number,Object,String,Array,JSON,performance:{now:()=>0},localStorage:{getItem:()=>null,setItem(){}},
-  readyImage:()=>({image:im,ready:true}),addImage(){},actorHeight:()=>66,project:(x,y)=>({x:(x-y)*32,y:(x+y)*16}),room:{enemies:[]},
+  readyImage:q=>ctl.ready(q)?({image:im,ready:true}):null,addImage(q){ctl.asked.push(q);},actorHeight:()=>66,project:(x,y)=>({x:(x-y)*32,y:(x+y)*16}),room:{enemies:[]},
   player:{x:5,y:5,hp:10},time:1,ctx:{commands:cmds}};
  C.drawHero=function(){cmds.push({kind:'fill',owner:{kind:'scene'},order:cmds.length,key:'s:'+cmds.length,style:{}});
   cmds.push({kind:'image',owner:{kind:'hero',id:'hero'},order:cmds.length,key:'hero:0',points:[[0,0],[40,0],[40,80],[0,80]],sourcePath:ctl.body||bodyPath,image:{},style:{globalAlpha:1}});};
@@ -100,6 +100,18 @@ for(const bp of ['assets/r436/hwando/walk-s.webp','assets/r439/hwando/attack-e.w
  t('북쪽: 광륜 order > 몸 order',E.inspect().state.dir==='n'&&hi>=0&&bi>=0&&c[hi].order>c[bi].order&&ordOk(c));
  ctl.S={at:.3};frame();ctl.S={at:.2};for(let i=0;i<10;i++){ctl.S={at:.2-i*.015};c=frame();if(c.some(x=>/:r1048s/.test(x.key)))break;}
  t('궤적 명령도 order 정렬',c.some(x=>/:r1048s/.test(x.key))&&ordOk(c));}
+
+// 5) R1094 겹침(사용자 11-16 "ego히든영웅에 환도영웅 이미지가 겹치는문제"): 처음 쓰는 동작·방향 시트를 받는 동안 환도 몸이 그대로 남던 것
+{const{E,ctl,frame,C}=rig('assets/r1063/r439/hwando/attack-e.webp');const isEgo=c=>c.some(x=>x.key==='hero:0'&&/assets\/r1048\/ego\//.test(x.sourcePath||''));
+ ctl.ready=q=>/idle-s\.webp$/.test(q);/* 대기-남쪽만 받아 둔 상태 */
+ frame();frame();const asked=new Set(ctl.asked.filter(q=>/assets\/r1048\/ego\//.test(q)));
+ t('EGO 형상이면 받지 않은 시트 47장을 한꺼번에 요청(받아 둔 idle-s 제외)',asked.size===47&&!asked.has('assets/r1048/ego/idle-s.webp'));
+ ctl.S={at:.3};frame();ctl.S={at:.25};let c=frame();t('공격 시트 아직 없음 → 환도 대신 받아 둔 EGO 칸',isEgo(c)&&E.inspect().stats.fallback>0);
+ ctl.ready=()=>true;ctl.S={};for(let i=0;i<4;i++)frame();
+ ctl.ready=()=>false;/* 지역 이동 뒤 엔진 캐시 비움(releaseImageMemory) */ctl.S={};c=frame();t('캐시가 비워져도 쥐고 있던 EGO 그림으로',isEgo(c));
+ const{E:E2,ctl:c2,frame:f2}=rig('assets/r271/hwando/idle-s.webp');c2.ready=()=>false;let cc=f2();const body=cc.find(x=>x.key==='hero:0');
+ t('아무 시트도 없을 땐(처음 3초) 환도 몸을 숨김',!!body&&+body.style.globalAlpha===0&&E2.inspect().stats.hidden>0);
+ for(let i=0;i<200;i++)cc=f2(1/50);t('3초 넘게 못 받으면 환도 몸을 다시 보임(투명 영웅 방지)',+cc.find(x=>x.key==='hero:0').style.globalAlpha>0);}
 const E=M.createPlayer(null);r=E.step(1/60,{});t('시트 없음 안전',r.frame===0);
 // 시트 데이터·자산·태그 순서·0번째 칸
 {const R=path.join(__dirname,'../..'),w2={};vm.runInNewContext(fs.readFileSync(path.join(R,'client-source/ego-motion-r1048-sheets.js'),'utf8'),{window:w2,Object});

@@ -52608,14 +52608,19 @@
       "sha256": "c924228f95ce8b22109b1b5a43c6fbeb9a8f6aaff057bd8c374593c00ec8d90f"
     },
     {
+      "path": "ego-kit-r1094.js",
+      "bytes": 9503,
+      "sha256": "64a8adbaf3e43f2cc4d7138823401a428464544ffcd08bbd748451bf35b88a5e"
+    },
+    {
       "path": "ego-motion-r1048-sheets.js",
       "bytes": 822,
       "sha256": "ee6c9089f8465aa6dd0f01c7135de3d7a404f758f9a8c5bf0ad215d1622413e9"
     },
     {
       "path": "ego-motion-r1048.js",
-      "bytes": 18469,
-      "sha256": "a6e6fa3b6053f340498db33d2a0724312c30ec85a6b8bc5e9329f025190546b2"
+      "bytes": 20467,
+      "sha256": "83259bd1da62886efaac2e1214d4055aee1dfda945eee78a8d127b9d08d097ee"
     },
     {
       "path": "ego-paint-r1039.js",
@@ -52634,13 +52639,13 @@
     },
     {
       "path": "ego-sovereign-r1046-data.js",
-      "bytes": 6016,
-      "sha256": "87db2c904db84d7c99db4527ca0b9f9b4b257a711bd43339e8e518d0bd5f0d80"
+      "bytes": 8368,
+      "sha256": "72e5a2d32e0771ee77453cd329b1c581c1aba112cf7156da9944bb1a2c5fe2ac"
     },
     {
       "path": "ego-sovereign-r1046.js",
-      "bytes": 17658,
-      "sha256": "48a39cf053292ce825c9c79088da85d5a48994ce2df2575001eb09aa6201b8e6"
+      "bytes": 19700,
+      "sha256": "bd8b3bba70edf053030ede0c0c8c5079870160946fc471a0ab755f70b7d2acec"
     },
     {
       "path": "enemy-attack-tempo-r601.js",
@@ -53054,8 +53059,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6580051,
-      "sha256": "4234d5a2ed6597131aa0d3a628c6ff6893276e05f5e5a7ae8bcdcbd819ac65f0"
+      "bytes": 6580094,
+      "sha256": "240a1669e7b7f1a94832d5b858a8b1bf9d7307ba868df425a0c8f8b43668bae5"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -53109,8 +53114,8 @@
     },
     {
       "path": "lauren-celestial-r946.js",
-      "bytes": 38599,
-      "sha256": "d1c0ff9a385d0182e4dfc1cc0f18a4bb92e8bbcdc60fba28ef597e81247eea68"
+      "bytes": 40528,
+      "sha256": "e7777f31a5a2b325e54442198a88a82775d5095ce6ce30646a777b78676b6027"
     },
     {
       "path": "lauren-gravity-r561.js",
@@ -54353,9 +54358,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10870,
-  "totalBytes": 1318087284,
-  "webHTMLSha256": "4234d5a2ed6597131aa0d3a628c6ff6893276e05f5e5a7ae8bcdcbd819ac65f0",
+  "fileCount": 10871,
+  "totalBytes": 1318105151,
+  "webHTMLSha256": "240a1669e7b7f1a94832d5b858a8b1bf9d7307ba868df425a0c8f8b43668bae5",
   "largest": [
     {
       "path": "index.html",
