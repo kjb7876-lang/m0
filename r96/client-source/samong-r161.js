@@ -36,7 +36,9 @@ function hasSamongArt(e){try{return !!window.__STORYWORLD_DRIVE_ART_R105__?.artF
 // R177: 사몽 그림이 없는 보스·대면 상대(예: 교주의 인장)도 스토리 모드 그림을 다시 쓰지 않고 꼭두각시 자아로(보스는 더 크고 짙게).
 // R389: R380 승인 시트가 정해진 몹(사몽 S-07 '페르소나' 보스 = 지금 영웅의 페르소나)은 꼭두각시로 덮지 않음.
 function hasApproved(e){try{return !!window.__STORYWORLD_APPROVED_MOBS_R380__?.assign?.(e);}catch(_){return false;}}
-const puppetOf=e=>prefs.puppet&&solo()&&samongRoom()&&!!e?.samongR103&&!e.r170Tower&&!hasSamongArt(e)&&!e.r200Shade&&!hasApproved(e)/* R200: 잔영 그림이 정해진 몹은 꼭두각시로 덮지 않음 */;
+const puppetOf=e=>prefs.puppet&&solo()&&samongRoom()&&!!e?.samongR103&&!e.r170Tower&&!hasSamongArt(e)&&!e.r200Shade&&!hasApproved(e)/* R200: 잔영 그림이 정해진 몹은 꼭두각시로 덮지 않음 */&&!faceR1098(e);
+// R1098: 사몽 최종 보스 미카엘라는 미카엘라 본인 시트(samong-face-r1098.js)로 그린다 — 꼭두각시로 덮지 않음.
+function faceR1098(e){try{return !!window.__STORYWORLD_SAMONG_FACE_R1098__?.covers?.(e);}catch(_){return false;}}
 
 // ---- 꼭두각시 자아 -------------------------------------------------------------------------
 let hiding=null;
