@@ -6,7 +6,7 @@ const URL=process.env.SW_URL||'http://127.0.0.1:4410/m0/';const SHOT=process.env
 const res=[];const check=(n,ok,d='')=>{res.push(!!ok);console.log((ok?'PASS ':'FAIL ')+n+(d!==''?' :: '+d:''));};
 const b=await chromium.launch();const errors=[];
 async function open(vp,touch,off){const ctx=await b.newContext({viewport:vp,deviceScaleFactor:1,hasTouch:!!touch,isMobile:!!touch});
- await ctx.addInitScript(([off])=>{localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false}));if(off)localStorage.setItem('storyworld.r1085.inkUi','0');},[off]);
+ await ctx.addInitScript(([off])=>{localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false}));localStorage.setItem('storyworld.r1086.hanji','0');/* R1086 한지 창을 꺼서 R1085 먹빛 창만 잰다(한지는 r1086-browser 가 잰다) */if(off)localStorage.setItem('storyworld.r1085.inkUi','0');},[off]);
  const p=await ctx.newPage();p.on('pageerror',e=>errors.push(String(e).slice(0,200)));await p.goto(URL);await p.locator('#campaignNew54').waitFor({timeout:180000});await p.waitForTimeout(1200);return {ctx,p};}
 // 보이는 조작(단추·입력·접는 줄)의 이름표 목록 — 끔/켬 대조용
 const controls=(p,root)=>p.evaluate(root=>[...document.querySelectorAll(root+' button,'+root+' input,'+root+' select,'+root+' summary')].filter(e=>{if(e.closest('#inkUiR1085'))return false;if(e.checkVisibility&&!e.checkVisibility({contentVisibilityAuto:true,visibilityProperty:true,opacityProperty:true}))return false;if(!e.offsetParent)return false;const r=e.getBoundingClientRect();return r.width>0&&r.height>0;}).map(e=>(e.id||e.name||e.textContent.trim().slice(0,14))),root);
