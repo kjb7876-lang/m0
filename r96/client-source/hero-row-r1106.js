@@ -25,7 +25,7 @@ function css(){if(document.getElementById('r1106Css'))return;const s=document.cr
  '@media (max-width:420px){#panel.r263 .cards>*,#panel.r263start .heroRowR101>*{flex-basis:56px!important;width:56px!important;padding:3px!important}#panel.r263 .cards>* img,#panel.r263 .cards>* .pf,#panel.r263start .heroRowR101>* img{height:60px!important;max-height:60px!important}#panel.r263 .cards,#panel.r263start .heroRowR101{gap:4px!important}}'].join('\n');document.head.appendChild(s);}
 function rowOf(p){const start=p.querySelector('#heroRowR101');if(start&&start.querySelector('[data-hero]'))return start;const c=p.querySelector('.cards');return c&&c.querySelector('[data-hero]')?c:null;}
 function keep(row){try{const strip=row.querySelector('.heroRowR101')||row,sel=strip.querySelector('.selected');strip.scrollLeft=0;if(sel){const a=strip.getBoundingClientRect(),b=sel.getBoundingClientRect();if(b.right>a.right)strip.scrollLeft+=b.right-a.right+8;}}catch(e){fail(e);}}
-function apply(){try{const p=document.getElementById('panel');if(!p)return;const st=p.querySelector('#r263Stage'),row=rowOf(p);if(!st||!row||st.parentNode!==row.parentNode)return;css();
+function apply(){try{const p=document.getElementById('panel');if(!p)return;const st=p.querySelector('#r263Stage'),row=rowOf(p);if(row&&!st){/* R263 무대는 showHeroes 감싸기가 openPanel 뒤에 만든다(이 파일이 R263 보다 먼저 실림) → 같은 턴 끝에 한 번 더 */setTimeout(apply,0);return;}if(!st||!row||st.parentNode!==row.parentNode)return;css();
  const rowFirst=!!(st.compareDocumentPosition(row)&Node.DOCUMENT_POSITION_PRECEDING);
  if(small()){if(!rowFirst){row.after(st);stats.moved++;keep(row);}}
  else if(rowFirst){row.before(st);stats.restored++;}}catch(e){fail(e);}}

@@ -9,7 +9,7 @@ const html=rd(path.join(R,'runtime-text/index.html')),man=rd(path.join(R,'runtim
 ok(src.length>0,N+' 존재');ok(src.length>0&&rd(path.join(R,'runtime-text',N))===src,N+' runtime-text 사본 = client-source');
 ok(rd(path.join(ROOT,'scripts/verify-r96-public.py')).includes("'"+N+"'"),N+' verify-r96-public.py 기대 목록');ok(man.includes(N)&&inp.includes(N),N+' runtime-manifest·inputs');
 const t=x=>html.indexOf('<script src="./'+x+'"></script>');
-ok(t(N)>t('hero-select-r263.js')&&t('hero-select-r263.js')>0&&t(N)>t('ego-secret-r1057.js')&&t(N)<t('combat-r118.js'),'index.html: hero-select-r263·ego-secret-r1057 뒤, combat-r118 앞');
+ok(t(N)>t('ego-secret-r1057.js')&&t('ego-secret-r1057.js')>0&&t(N)<t('boot-lean-r1038.js')&&t(N)<t('nav-r176.js'),'index.html: ego-secret-r1057 뒤, boot-lean-r1038·nav-r176 앞(R176 순서 검사: nav 뒤에는 정해진 파일만)');
 ok(rd(path.join(ROOT,'.github/workflows/pages.yml')).includes('node r96/qa/r1106/r1106-cpu-check.cjs'),'pages.yml CPU 검사 줄');
 // 규칙
 ok(/\(max-height:620px\),\(max-width:700px\)/.test(src),'작은 화면 조건: 높이 620px 이하 또는 폭 700px 이하');

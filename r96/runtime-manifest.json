@@ -53224,8 +53224,8 @@
     },
     {
       "path": "hero-row-r1106.js",
-      "bytes": 4724,
-      "sha256": "c8f19e224d97c6956823624e7009d62af796ade2a6daf859dc4825610cac5455"
+      "bytes": 4911,
+      "sha256": "463cdb8526eae196c5f70362e7bb5f26c52b1aaa8df7c32a19fa701112b36a00"
     },
     {
       "path": "hero-select-r263.js",
@@ -53395,7 +53395,7 @@
     {
       "path": "index.html",
       "bytes": 6580644,
-      "sha256": "6d8002c28e8a1cd8a1de53a5085f8576b3e7265254da29cc8399de58fddb4f57"
+      "sha256": "265a03c99dd59916e1d606eae72f077eb6846adb49877bee250b8f6a7f2a1c75"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -54729,8 +54729,8 @@
     }
   ],
   "fileCount": 10945,
-  "totalBytes": 1321611768,
-  "webHTMLSha256": "6d8002c28e8a1cd8a1de53a5085f8576b3e7265254da29cc8399de58fddb4f57",
+  "totalBytes": 1321611955,
+  "webHTMLSha256": "265a03c99dd59916e1d606eae72f077eb6846adb49877bee250b8f6a7f2a1c75",
   "largest": [
     {
       "path": "index.html",
