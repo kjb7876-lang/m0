@@ -60,4 +60,10 @@ ok(/always/.test(hu),'R425 헌터: 휘두르는 동안은 맞거나 걸어도 �
 // ---- R440: 헌터 스킬은 이동 입력이 있어도 공격 모션 ----
 const r440=strip(rd('client-source','skill-attack-r440.js'));
 ok(/p\.hero!=='hunter'&&window\.__STORYWORLD_HERO_MOTION_R895__\?\.moveCancel/.test(r440),'R440: 헌터 스킬은 걷기로 캔슬하지 않음');
+// ---- R1102b: 헌터 Q·R 화살 문은 머리 높이 뒤가 아니라 활 높이(사용자 11-16 "헌터영웅머리뒤에서 나오던데", 카드 '문을 활 높이로 낮추기') ----
+const r535=strip(rd('client-source','hunter-arrows-r535.js'));
+{const g=/h\*\(g\.kind==='r'\?([\d.]+):([\d.]+)\)/.exec(r535),v=/ay=a\.y-h\*([\d.]+)/.exec(r535),b=/gate:Object\.freeze\(\{r:\d+,q:\d+,every:[\d.]+,maxVolleys:\d+,volleyLife:[\d.]+,close:[\d.]+,back:([\d.]+)/.exec(r535);
+ ok(g&&+g[1]<=1.0&&+g[2]<=.95,'R535 문 중심 높이 ≤ 영웅 키 1.0배(이전 1.5·1.25 = 머리 위)',g&&[g[1],g[2]]);
+ ok(v&&+v[1]<=.95,'R535 문에서 나가는 화살 시작 높이 ≤ 영웅 키 0.95배(이전 1.4)',v&&v[1]);
+ ok(b&&+b[1]<=.8,'R535 문이 영웅 뒤 0.8칸 이내(이전 1.1)',b&&b[1]);}
 console.log(`\nR1102 CPU 검사 ${n}개 통과`);
