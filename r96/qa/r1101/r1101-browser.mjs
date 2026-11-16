@@ -43,7 +43,7 @@ await scen('idleAfterR',new Function(`const e=${enemyAt(2.3,-2.3)};player.attack
 const bad=[];for(const [nm,log] of Object.entries(ALL))for(const r of log)for(const c of r.L)if(/r1045[cd]\/gunner/.test(c.s)&&c.sr&&(c.sr[0]%192||c.sr[1]||c.sr[2]!==192||c.sr[3]!==256))bad.push([nm,c.s.split('/').pop(),c.sr]);
 check('새 옆 그림은 잘린 사각형 없이 칸 전체(192×256)로 그려짐',bad.length===0,bad.slice(0,6));
 const idleE=[];for(const nm of ['idleAfterR'])for(const r of ALL[nm]||[])for(const c of r.L)if(/r128\/gunner\/idle-e\.webp/.test(c.s))idleE.push(r.t);
-const e4idle=(ALL.idleAfterR||[]).filter(r=>r.anim===0&&r.L.some(c=>/attack-e4/.test(c.s))).length;
+const e4idle=(ALL.idleAfterR||[]).filter(r=>r.anim===0&&r.L.some(c=>/attack-e4|r1101b\/gunner\/idle-e6/.test(c.s))).length;
 check('옆으로 쏜 뒤 서 있기: 시선이 총 반대인 R128 idle-e 대신 attack-e4',idleE.length===0&&e4idle>0,{idleE:idleE.length,e4idle});
 const side=(nm,want)=>{const L=(ALL[nm]||[]).filter(r=>r.anim>0).flatMap(r=>r.L.filter(c=>/attack-e4|walk-e3/.test(c.s)).map(c=>c.mir));return{n:L.length,ok:L.length>0&&L.every(m=>m===want)};};
 const R=side('atkR',false),W=side('walkL_atkR',false);check('오른쪽 표적: 옆 공격 그림이 반전 없이(오른쪽 봄)',R.ok&&W.ok,{R,W});

@@ -10343,6 +10343,11 @@
       "sha256": "9edd6546bf1054be5f3b0ceac6d63c60f2b86f4ead4dfe5baf18458b0e7439b2"
     },
     {
+      "path": "assets/r1111/gunner/idle-n6.webp",
+      "bytes": 34406,
+      "sha256": "8f08e2fb621b9a24cbd22533793e5ca1f7505f2c376ed90ddeb06b26e3086193"
+    },
+    {
       "path": "assets/r116/mobs/M001-hit.png",
       "bytes": 141513,
       "sha256": "35cffa3fe6d6c22cdb75e06e1cca55a673f06c10afa28087d749082c40c77b71"
@@ -53274,8 +53279,8 @@
     },
     {
       "path": "gunner-aim-r991.js",
-      "bytes": 25949,
-      "sha256": "3b65b8b3ced33cbeb7e865f798cddba72f22696f8982037a804212f56cbabdd4"
+      "bytes": 27877,
+      "sha256": "80c04e121427e9641b452295055a2530e54754b609112e828a8311e3f6e16877"
     },
     {
       "path": "gunner-arms-r561.js",
@@ -54863,8 +54868,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10972,
-  "totalBytes": 1323148867,
+  "fileCount": 10973,
+  "totalBytes": 1323185201,
   "webHTMLSha256": "565a149d866fe0f756e64ada5f23eca9ee16e77c1964e761aff5f4eb250bfa80",
   "largest": [
     {
