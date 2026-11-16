@@ -48,7 +48,8 @@ for(const z of zones){const dream=/^sz115-/.test(z);console.log('== '+z);const r
  while(Date.now()-t1<LIMIT&&!(await passed())){await p.evaluate(()=>{player.hp=player.maxHp=1e9;if(!guide)guide=true;});await tidy();await p.waitForTimeout(1500);
   const s=(await Q()).state;if(s!==st){order.push(s);console.log('   '+((Date.now()-t1)/1000|0)+'s quest='+s);st=s;}}
  const done=await passed();const g=await G();rec.secs=(Date.now()-t1)/1000|0;rec.order=order.join('>');rec.stats=g.stats;
- ok(done,z+' guide passed the point ('+rec.secs+'s)');ok(order.includes('done')||st==='done'||(dream&&order.length===0&&st==='new'&&false),z+' quest finished before passing: '+order.join('>'));
+ ok(done,z+' guide passed the point ('+rec.secs+'s)');const led=(await Q()).ledger?.[(dream?'DREAM:':'STORY:')+z]?.s||null;/* 표본 사이(1.5초)에 done→다음 구역이 지나갈 수 있어 세이브 장부로 본다 */
+ok(led==='done',z+' quest finished before passing (ledger='+led+', seen: '+order.join('>')+')');
  if(!(order.includes('done')||st==='done'))rec.questAtPass=st;
  ok((g.stats.released|0)-rel0===0,z+' no safety release needed (released in zone='+((g.stats.released|0)-rel0)+')');
  await p.evaluate(()=>{guide=false;});}catch(e){fail++;console.log('FAIL',z,'error',String(e).slice(0,200));rec.error=String(e).slice(0,200);}
