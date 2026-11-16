@@ -9433,6 +9433,41 @@
       "sha256": "c77e4b7894d2b4690e78b1b5db9a6cb5801d4fba14d5d4af8a60f16ebe79a550"
     },
     {
+      "path": "assets/r1065/mobs/ma-02-red-heel-blade-attack.webp",
+      "bytes": 85036,
+      "sha256": "2e5b72b10db8469f917b41570f046d094808ada89089fb6754de507e5a160dd1"
+    },
+    {
+      "path": "assets/r1065/mobs/ma-03-lipstick-bullet-attack.webp",
+      "bytes": 59978,
+      "sha256": "bc95b4a3d563a8c8baca792bb70852b1ab6b93d021f41782da3c840679c0d17d"
+    },
+    {
+      "path": "assets/r1065/mobs/ma-04-wrath-dragon-attack.webp",
+      "bytes": 126902,
+      "sha256": "d8f3837526c756b574d58dbee1febcd3580546006222844c1051d70734603d23"
+    },
+    {
+      "path": "assets/r1065/mobs/ma-06-steel-jaw-hound-attack.webp",
+      "bytes": 178880,
+      "sha256": "4c8aab909d78c667606c33dfdeae31f5703759c62ca72c66e2af5a073046a6fe"
+    },
+    {
+      "path": "assets/r1065/mobs/ma-07-time-guardian-28-attack.webp",
+      "bytes": 72024,
+      "sha256": "14875c6627afc3ac5b234777be3b29c95bb0da2794686263442a09cfc1a3a663"
+    },
+    {
+      "path": "assets/r1065/mobs/ma-08-rooftop-echo-attack.webp",
+      "bytes": 164602,
+      "sha256": "a91a466b1d833c6d8f424053598169c7caba8350cd90916037202d0041019177"
+    },
+    {
+      "path": "assets/r1065/mobs/ma-10-clockwork-collector-attack.webp",
+      "bytes": 49820,
+      "sha256": "cd04b492c5c1b4270245947e10032946ced2d9743f1443e1a18dac7da5a1bc75"
+    },
+    {
       "path": "assets/r107/fx/iai-burst.webp",
       "bytes": 24408,
       "sha256": "89e81f475a5ce5cd84dce21c6e3cf387e7b6e02175e7244ebe7fa60c08038fc0"
@@ -52789,8 +52824,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6579907,
-      "sha256": "7b4126a7e005695fb7a64583bb5382025d5408a856421fbaa6ef1cf01c347d3d"
+      "bytes": 6579958,
+      "sha256": "377ef83a0dcd2bcbd6eec6c10b4a396a7f0f41a574933859e3b1a5e605f03d25"
     },
     {
       "path": "ink-wash-r1055.js",
@@ -52978,6 +53013,11 @@
       "sha256": "f4074eaa84e359d11be5c6da1abafc076bd3f2795fb3215d7892516907ee7300"
     },
     {
+      "path": "mob-attack-dots-r1065.js",
+      "bytes": 7300,
+      "sha256": "28406b3a883f907f560b2759edea0a48a4bc9933392245d1d76816123121406c"
+    },
+    {
       "path": "mob-death-r188.js",
       "bytes": 2682,
       "sha256": "ce115235c43f83ec19d6ea993f11dd8b33bf0867df08adf98206cd785f437d95"
@@ -53039,8 +53079,8 @@
     },
     {
       "path": "mob-motion-r286.js",
-      "bytes": 18442,
-      "sha256": "94949e1c22d86088ff9f824c164cc94ccde6e5e960cca3aa314d6a25edbbd010"
+      "bytes": 18677,
+      "sha256": "79e6ed5cede81cb28982e927317fb864fdc9e43ca98986d818fe23cb37f1865c"
     },
     {
       "path": "mob-moves-r385.js",
@@ -54083,9 +54123,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10816,
-  "totalBytes": 1314570758,
-  "webHTMLSha256": "7b4126a7e005695fb7a64583bb5382025d5408a856421fbaa6ef1cf01c347d3d",
+  "fileCount": 10824,
+  "totalBytes": 1315315586,
+  "webHTMLSha256": "377ef83a0dcd2bcbd6eec6c10b4a396a7f0f41a574933859e3b1a5e605f03d25",
   "largest": [
     {
       "path": "index.html",

@@ -10026,7 +10026,15 @@
     "assets/r1045c/gunner/walk-e2.webp",
     "enemy-rules-r1053.js",
     "assets/r1045d/gunner/walk-e3.webp",
-    "mob-lunge-r1064.js"
+    "mob-lunge-r1064.js",
+    "mob-attack-dots-r1065.js",
+    "assets/r1065/mobs/ma-02-red-heel-blade-attack.webp",
+    "assets/r1065/mobs/ma-03-lipstick-bullet-attack.webp",
+    "assets/r1065/mobs/ma-04-wrath-dragon-attack.webp",
+    "assets/r1065/mobs/ma-06-steel-jaw-hound-attack.webp",
+    "assets/r1065/mobs/ma-07-time-guardian-28-attack.webp",
+    "assets/r1065/mobs/ma-08-rooftop-echo-attack.webp",
+    "assets/r1065/mobs/ma-10-clockwork-collector-attack.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11101,5 +11109,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "7d7c6ae988b6365bcbd42870afb9d6f8c1a27310ecd9ee9b66c20ae7b04143a5"
+  "runtimeManifestSHA256": "975bfcacef72fb0e537a45e017c652bf036325be3060c65df44dd7fc930a1c9b"
 }
