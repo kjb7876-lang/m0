@@ -1,0 +1,3 @@
+PASS ⑰ 777 전에는 잠김
+FAIL ⑰ 영웅창 777 발동하면 해금·저장(undefined)
+R1113 persona-hero FAILED 1
