@@ -9693,6 +9693,11 @@
       "sha256": "4b1c06d3810ab1f88124e54393f2e2db5618b8cfc141714eca35095a453a2cb2"
     },
     {
+      "path": "assets/r1065/mobs/at-07-polar-cyborg-hound-attack-r2.webp",
+      "bytes": 168864,
+      "sha256": "8bf5c5bffb0a2ea8097845f2c5564d772af3ceb4855baaff563ddc3423900ff0"
+    },
+    {
       "path": "assets/r1065/mobs/ma-02-red-heel-blade-attack.webp",
       "bytes": 85036,
       "sha256": "2e5b72b10db8469f917b41570f046d094808ada89089fb6754de507e5a160dd1"
@@ -9791,6 +9796,16 @@
       "path": "assets/r1065/mobs/ra-03-cult-mech-legs-aim.webp",
       "bytes": 42492,
       "sha256": "1db75f497dc46a686ebab6d3f81912c951a6cba8cbe78c561d3ba87784e43300"
+    },
+    {
+      "path": "assets/r1065/mobs/ra-05-rooftop-memory-echo-aim-r2.webp",
+      "bytes": 29144,
+      "sha256": "f3271ab7685bd5aae1d6409c4e584dccac9d6db88988eab035a39b08ec22f6a4"
+    },
+    {
+      "path": "assets/r1065/mobs/ra-07-gate-azure-afterimage-aim-r2.webp",
+      "bytes": 34194,
+      "sha256": "bad6f32643883b6a12611e5821cab2b46c358d181e672dab932e8cc3c3ab4603"
     },
     {
       "path": "assets/r107/fx/iai-burst.webp",
@@ -53654,8 +53669,8 @@
     },
     {
       "path": "mob-attack-dots-r1065.js",
-      "bytes": 16962,
-      "sha256": "6c33cfe9cbbfa8bf52493db4e3141a623f9d02e0eb9ae783f53b409f3976118b"
+      "bytes": 18129,
+      "sha256": "fc94181a868d479c86dd6675f3c40c08e1e83899599bd8783859a4a79c1e38b0"
     },
     {
       "path": "mob-death-r188.js",
@@ -54788,8 +54803,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10957,
-  "totalBytes": 1322186298,
+  "fileCount": 10960,
+  "totalBytes": 1322419667,
   "webHTMLSha256": "f1f0a76476636412618ad4448b610d4c8f41416b4e309a9db80994c3c8b4ce87",
   "largest": [
     {
