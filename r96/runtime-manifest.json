@@ -52768,6 +52768,11 @@
       "sha256": "7721215586134646c06dbc8168c8b36a30a1f27b44f452c6aad406a4e76a8a6e"
     },
     {
+      "path": "coop-relay-r1109.js",
+      "bytes": 9175,
+      "sha256": "2c01d7403ba8e76a212f5e0adc189f3d053bdf53e4c44304d189adeeaefec0dd"
+    },
+    {
       "path": "crates-r108.js",
       "bytes": 6746,
       "sha256": "1d8820f1f4884a00ff32ededbdd6d2cbcdffe831e18d9062cafb688acdcd868f"
@@ -53389,8 +53394,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6580550,
-      "sha256": "f1f0a76476636412618ad4448b610d4c8f41416b4e309a9db80994c3c8b4ce87"
+      "bytes": 6580596,
+      "sha256": "eefe50039f513fd56285a8cfc9951934c3f9a3016e1b59e7bcac9eaf85e4a408"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -54718,9 +54723,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 10943,
-  "totalBytes": 1321600062,
-  "webHTMLSha256": "f1f0a76476636412618ad4448b610d4c8f41416b4e309a9db80994c3c8b4ce87",
+  "fileCount": 10944,
+  "totalBytes": 1321609283,
+  "webHTMLSha256": "eefe50039f513fd56285a8cfc9951934c3f9a3016e1b59e7bcac9eaf85e4a408",
   "largest": [
     {
       "path": "index.html",
