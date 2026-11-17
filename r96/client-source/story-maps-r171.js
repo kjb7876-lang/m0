@@ -267,8 +267,13 @@
  // R1098b(사용자 2026-11-16 07:55Z "사몽세계 맵은 … 모든맵이 구조랑 길이 엉망진창 (사몽에피소드는 잘됨)"): DREAM 층은 R78 이 모든 지역에 같은 예전 V4 틀
  //  (바닥 3,684칸, 회전·뒤집기만 다름)을 줬다 → DREAM 층도 그 지역의 STORY 서사 지도를 쓴다. cult04(페르소나 결전장)·NATIVE 는 그대로. 끄기: localStorage storyworld.r1098b.dreamMaps='0'.
  const dreamMaps=(()=>{try{return localStorage.getItem('storyworld.r1098b.dreamMaps')!=='0';}catch(_){return true;}})();
- function eligible(id,l){if(!prefs.on||!(l==='STORY'||l==='DREAM'&&dreamMaps)||window.__STORYWORLD_R81_EGO_BUILD__||coop()!=='off')return false;if(!id||SAFE.has(id)||NATIVE.has(id)||id==='ep1a08')return false;
-  const d=region(id);return!!d&&!d.safe&&!!d.theme&&!!profiles()[id]&&!awakening(id);}
+ const nativeDreamOn=(()=>{try{return localStorage.getItem('storyworld.r1122.nativeDream')!=='0';}catch(_){return true;}})();
+ function eligible(id,l){if(!prefs.on||!(l==='STORY'||l==='DREAM'&&dreamMaps)||window.__STORYWORLD_R81_EGO_BUILD__||coop()!=='off')return false;if(!id||SAFE.has(id)||id==='ep1a08')return false;
+  // R1122(사용자 2026-11-16 14:05Z "교주의사몽 DREAM은 여전한데", 11-17 09:23Z "교주의사몽dream맵도이상한데?", 10:12Z "문제 다 고쳐"): NATIVE 7지역의 DREAM 층은
+  //  NATIVE·각성 예외에서 빼 예전 V4 틀(45도 대각 복도·시작점이 몹 무리 한가운데) 대신 R171 서사 지도를 준다. 시련·페르소나·보스·기억의 표식 자리(엔진 좌표 15,9~13 둘레)는
+  //  이 지도의 보스 전투실 안이다(이 지역들은 R78 SPECIAL 이라 문 잠금이 없어 영웅이 C 로 연다). STORY 층(병동 미로·특별 흐름)은 그대로. 끄기: localStorage storyworld.r1122.nativeDream='0'.
+  const nativeDream=NATIVE.has(id)&&l==='DREAM'&&nativeDreamOn;if(NATIVE.has(id)&&!nativeDream)return false;
+  const d=region(id);return!!d&&!d.safe&&!!d.theme&&!!profiles()[id]&&(nativeDream||!awakening(id));}
  const cache=new Map(),stats={built:0,used:0,fallback:0,rooms:0};let EX0=null;
  function layoutFor(id){if(cache.has(id))return cache.get(id);const base=EX0?.layout?.(id,'STORY');
   // 병동 미로(R81)가 아닌 경로(예전 R74 배치 등)로 만들어진 지역은 건드리지 않는다.
