@@ -3,7 +3,7 @@
 // 이미 내린 이동/공격 명령을 먼저 수행하고, 명령이 끝나면 주변 적을 찾아 싸운다.
 (()=>{'use strict';
 if(window.__STORYWORLD_SURVIVAL_COMMAND_R1124__)return;
-const REV='R1124-survival-command-1';
+const REV='R1124-survival-command-2';
 const G=(f,d=null)=>{try{return f();}catch(_){return d;}};
 const SV=()=>window.__STORYWORLD_SURVIVAL_R600__;
 const DEF=()=>window.__STORYWORLD_HERO_DEFENSE_R720__;
@@ -53,10 +53,15 @@ function selectPoint(p){if(!baseView||!live())return false;const q=point(p),c=R(
  selected=q;stats.selections++;updateUI();return true;}
 function updateUI(){try{
  const doc=typeof document!=='undefined'?document:null;if(!doc)return;
- let style=doc.getElementById('r1124Style');if(!style){style=doc.createElement('style');style.id='r1124Style';style.textContent='#r1124CommandBar{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);z-index:8;max-width:94%;padding:8px 12px;border:1px solid #9ba994;border-radius:5px;background:rgba(13,23,25,.94);color:#ece3cd;text-align:center;font:12px/1.5 "Malgun Gothic",sans-serif;box-shadow:0 2px 12px #0008}#r1124CommandBar[hidden]{display:none}#r1124CommandBar small{display:block;color:#bed7cd}#r1124CommandBar button{padding:5px 9px;margin:4px 3px 0;font-size:12px;min-height:32px}#r1124HomeBtn[aria-pressed="true"]{border-color:#b7d5bb;color:#d9f4db}@media(max-width:640px){#r1124CommandBar{bottom:7px;padding:6px 8px;font-size:11px}#r1124CommandBar small{font-size:10px}#r1124HomeBtn{padding:5px;font-size:11px}}';doc.head.appendChild(style);}
+ let style=doc.getElementById('r1124Style');if(!style){style=doc.createElement('style');style.id='r1124Style';style.textContent='#r1124CommandBar{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);z-index:8;max-width:94%;padding:8px 12px;border:1px solid #9ba994;border-radius:5px;background:rgba(13,23,25,.94);color:#ece3cd;text-align:center;font:12px/1.5 "Malgun Gothic",sans-serif;box-shadow:0 2px 12px #0008}#r1124CommandBar[hidden]{display:none}#r1124CommandBar small{display:block;color:#bed7cd}#r1124CommandBar button{padding:5px 9px;margin:4px 3px 0;font-size:12px;min-height:32px}#r1124HomeBtn[aria-pressed="true"]{border-color:#b7d5bb;color:#d9f4db}@media(max-width:640px){#r1124CommandBar{bottom:7px;padding:6px 8px;font-size:11px}#r1124CommandBar small{font-size:10px}#r1124HomeBtn{padding:5px;font-size:11px}}#r1124TouchHomeBtn{display:none}#r1124TouchHomeBtn[hidden]{display:none!important}@media(pointer:coarse){#r1124TouchHomeBtn{display:block;position:absolute;right:calc(8px + env(safe-area-inset-right,0px));bottom:calc(64px + env(safe-area-inset-bottom,0px));z-index:24;min-width:70px;min-height:44px;padding:6px 10px;font-size:12px;touch-action:manipulation}#r1124CommandBar{bottom:calc(64px + env(safe-area-inset-bottom,0px));z-index:24}#r1124CommandBar button{min-height:44px;touch-action:manipulation}}';doc.head.appendChild(style);}
  const nav=doc.querySelector('nav.topnav');let b=doc.getElementById('r1124HomeBtn');if(!b&&nav){b=doc.createElement('button');b.id='r1124HomeBtn';b.type='button';b.onclick=()=>toggle();nav.insertBefore(b,nav.firstChild);}
- if(b){b.style.display=here()?'':'none';b.disabled=!live()||G(()=>modal||storyScene,false);b.textContent=baseView?'H 영웅 복귀':'H 본진';b.title='정화구슬 본진 지휘 / 본영웅 조작 전환 (H)';b.setAttribute('aria-pressed',String(baseView));}
- let bar=doc.getElementById('r1124CommandBar');const stage=doc.getElementById('stage');if(!bar&&stage){bar=doc.createElement('div');bar.id='r1124CommandBar';bar.innerHTML='<b>정화구슬 · 본진 지휘</b><small id="r1124Status"></small><button type="button" id="r1124Deploy">영웅 배치 · I</button><button type="button" id="r1124Return">영웅 복귀 · H</button>';stage.appendChild(bar);doc.getElementById('r1124Deploy').onclick=()=>DEF()?.open();doc.getElementById('r1124Return').onclick=()=>setBase(false);}
+ if(b){b.style.display=here()?'':'none';b.disabled=!live()||!!G(()=>modal||storyScene,false);b.textContent=baseView?'H 영웅 복귀':'H 본진';b.title='정화구슬 본진 지휘 / 본영웅 조작 전환 (H)';b.setAttribute('aria-pressed',String(baseView));}
+ // coarse 모바일은 header 전체를 숨기므로, 본진 최초 진입은 stage에도 둔다.
+ // 본진에서는 지휘 바의 복귀 버튼을 사용해 두 조작면이 겹치지 않게 한다.
+ const stage=doc.getElementById('stage');let touch=doc.getElementById('r1124TouchHomeBtn');
+ if(!touch&&stage){touch=doc.createElement('button');touch.id='r1124TouchHomeBtn';touch.type='button';touch.textContent='H 본진';touch.title='정화구슬 본진 지휘로 전환';touch.onclick=()=>setBase(true);stage.appendChild(touch);}
+ if(touch){touch.hidden=!here()||baseView;touch.disabled=!live()||!!G(()=>modal||storyScene,false);touch.setAttribute('aria-pressed',String(baseView));}
+ let bar=doc.getElementById('r1124CommandBar');if(!bar&&stage){bar=doc.createElement('div');bar.id='r1124CommandBar';bar.innerHTML='<b>정화구슬 · 본진 지휘</b><small id="r1124Status"></small><button type="button" id="r1124Deploy">영웅 배치 · B</button><button type="button" id="r1124Return">영웅 복귀 · H</button>';stage.appendChild(bar);doc.getElementById('r1124Deploy').onclick=()=>DEF()?.open();doc.getElementById('r1124Return').onclick=()=>setBase(false);}
  if(bar){bar.hidden=!baseView;const s=doc.getElementById('r1124Status');s.textContent=selected?'배치 위치 선택됨 · 본영웅은 기존 명령 수행 후 자동 전투':'땅 클릭 → 배치 위치 선택 · 본영웅은 기존 명령 수행 후 자동 전투';}
  }catch(e){fail(e);}}
 function keydown(ev){try{

@@ -7,15 +7,15 @@ const URL=process.env.SW_URL||'http://127.0.0.1:4396/';
 const SHOTS=process.env.SHOTS||path.join(__dirname,'browser-evidence');
 const PC={width:960,height:640},MOBILE={width:390,height:844};
 fs.mkdirSync(SHOTS,{recursive:true});
-const checks=[],screens=[],pageErrors=[];
+const checks=[],screens=[],pageErrors=[];let lastPage=null;
 function check(name,pass,detail){checks.push({name,pass:!!pass,detail});console.log(pass?'PASS':'FAIL',name,detail===undefined?'':JSON.stringify(detail));}
 const state=p=>p.evaluate(()=>({view:window.__STORYWORLD_SURVIVAL_COMMAND_R1124__?.state(),defense:window.__STORYWORLD_HERO_DEFENSE_R720__.state(),hero:{x:player.x,y:player.y,hero:player.hero},cam:{...cam},auto,command,route:route.map(q=>({...q})),modal,time}));
 async function waitGame(p,seconds){const t=await p.evaluate(()=>time);await p.waitForFunction(t=>time>=t,t+seconds,{timeout:90000});}
 async function shot(p,name){await p.screenshot({path:path.join(SHOTS,name+'.png')});screens.push(name+'.png');}
-async function boot(browser,url,label){
- const context=await browser.newContext({viewport:PC});
+async function boot(browser,url,label,options={}){
+ const context=await browser.newContext({viewport:PC,...options});
  await context.addInitScript(()=>localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false})));
- const p=await context.newPage();p.setDefaultTimeout(30000);p.on('pageerror',e=>pageErrors.push({label,error:String(e)}));
+ const p=await context.newPage();lastPage=p;p.setDefaultTimeout(30000);p.on('pageerror',e=>pageErrors.push({label,error:String(e)}));
  await p.goto(url,{timeout:180000,waitUntil:'domcontentloaded'});
  await p.locator('#survivalStartR600').waitFor({timeout:180000});
  await p.keyboard.press('h');
@@ -25,7 +25,7 @@ async function boot(browser,url,label){
  await p.evaluate(()=>{auto=false;guide=false;window.__STORYWORLD_SURVIVAL_R600__.skipNarration();player.invincible=99999;player.attackCD=999;player.specialCD=999;player.egoCD=999;const d=window.__STORYWORLD_HERO_DEFENSE_R720__;d.qaGive(5000);d.qaSkills(true);d.qaFreeze(true);});
  for(const [hero,dx,dy] of [['gunner',3,0],['neon',-3,0]]){
   await p.evaluate(([dx,dy])=>{const c=room.survivalR600.centre;player.x=c.x+dx;player.y=c.y+dy;route=[];command=null;target=null;},[dx,dy]);
-  await p.keyboard.press('i');await p.locator('[data-r720buy="'+hero+'"]').click();await p.locator('#r720Close').click();
+  await p.keyboard.press('b');await p.locator('[data-r720buy="'+hero+'"]').click();await p.locator('#r720Close').click();
  }
  await p.evaluate(()=>{const c=room.survivalR600.centre;player.x=c.x;player.y=c.y+6;cam.x=c.x;cam.y=c.y;route=[];command=null;});
  await waitGame(p,.08);
@@ -33,7 +33,7 @@ async function boot(browser,url,label){
 }
 async function comparison(p,prefix){
  await p.setViewportSize(PC);await p.evaluate(()=>{const c=room.survivalR600.centre;cam.x=c.x;cam.y=c.y;});await shot(p,prefix+'-pc-game');
- await p.keyboard.press('i');await p.locator('#r720Panel').waitFor();await shot(p,prefix+'-pc-placement');
+ await p.keyboard.press('b');await p.locator('#r720Panel').waitFor();await shot(p,prefix+'-pc-placement');
  await p.setViewportSize(MOBILE);await shot(p,prefix+'-mobile-placement');await p.locator('#r720Close').click();
  await p.evaluate(()=>{const c=room.survivalR600.centre;cam.x=c.x;cam.y=c.y;});await shot(p,prefix+'-mobile-game');
  await p.setViewportSize(PC);
@@ -53,6 +53,7 @@ async function comparison(p,prefix){
   await waitGame(p,.35);let s=await state(p);
   check('본진 시점에서도 먼저 내린 이동 명령 수행',Math.hypot(s.hero.x-boundary.before.x,s.hero.y-boundary.before.y)>.05,s.hero);
   check('본진 카메라는 정화구슬에 고정',Math.hypot(s.cam.x-boundary.core.x,s.cam.y-boundary.core.y)<.001,s.cam);
+  await shot(p,'after-pc-base');
   await p.keyboard.press('h');s=await state(p);check('H로 영웅 복귀하며 반자동 원래 값 복원',!s.view.baseView&&s.auto===false,s.view);
   check('영웅 복귀 카메라는 본영웅으로 돌아온다',Math.hypot(s.cam.x-s.hero.x,s.cam.y-s.hero.y)<.7,{cam:s.cam,hero:s.hero});
   // 반복 누름에 대한 토글은 브라우저 실제 keydown 경로를 통한다.
@@ -66,7 +67,7 @@ async function comparison(p,prefix){
   check('배치창을 열어도 본영웅 명령 목적지 유지',s.command===click.command&&(!s.route.length||Math.hypot(s.route.at(-1).x-click.goal.x,s.route.at(-1).y-click.goal.y)<1.2),{command:s.command,route:s.route});
   await p.locator('#r720Close').click();
   await p.evaluate(()=>{const d=window.__STORYWORLD_HERO_DEFENSE_R720__,c=room.survivalR600.centre;d.buy('hunter');d.placeHere('hunter',{x:c.x,y:c.y-3});d.buy('slayer');d.placeHere('slayer',{x:c.x,y:c.y+3});d.buy('lauren');route=[];command=null;});
-  await p.keyboard.press('i');s=await state(p);check('최대 4자리에서도 다른 영웅을 보유할 수 있다',s.defense.slots.length===4&&s.defense.owned.lauren,s.defense);
+  await p.keyboard.press('b');s=await state(p);check('최대 4자리에서도 다른 영웅을 보유할 수 있다',s.defense.slots.length===4&&s.defense.owned.lauren,s.defense);
   // 실제 활성 선택 입력칸의 H는 단축키로 소비하지 않는다.
   await p.locator('[data-r720replacement="0"]').focus();await p.keyboard.press('h');check('선택 입력칸에서 H는 시점 전환을 하지 않는다',(await state(p)).view.baseView);
   await p.locator('[data-r720up="0:level"]').click();await p.locator('[data-r720up="0:range"]').click();const prior=(await state(p)).defense;
@@ -81,7 +82,7 @@ async function comparison(p,prefix){
   check('레이저 owner와 원점은 배치 기억사수',beam.fx.filter(f=>f.kind==='q').every(f=>f.ally&&f.hero==='gunner'&&f.origin&&Math.hypot(f.origin.x-beam.ally.x,f.origin.y-beam.ally.y)<.01),beam.fx);
   await waitGame(p,.2);await p.evaluate(()=>{const c=room.survivalR600.centre;cam.x=c.x;cam.y=c.y;});await shot(p,'after-ally-beam');
   const fired=await p.evaluate(()=>window.__STORYWORLD_GUNNER_ARMS_R561__.inspect());check('배치 레이저가 실제 그리기 경로를 통과',fired.stats.drawn>0,fired.stats);
-  await p.keyboard.press('i');const refundBefore=(await state(p)).defense.crystals;await p.locator('[data-r720remove="0"]').click();s=await state(p);
+  await p.keyboard.press('b');const refundBefore=(await state(p)).defense.crystals;await p.locator('[data-r720remove="0"]').click();s=await state(p);
   check('배치 해제는 영입 보유를 유지하고 강화 결정만 반환',s.defense.slots.length===3&&s.defense.owned.gunner&&s.defense.crystals===refundBefore+55,s.defense);
   await p.locator('#r720Close').click();await waitGame(p,.08);
   const removed=await p.evaluate(()=>({fx:window.__STORYWORLD_GUNNER_ARMS_R561__.inspect().effects,slots:window.__STORYWORLD_HERO_DEFENSE_R720__.state().slots,props:room.props.filter(p=>p.r720AllyProp).map(p=>p.r720Slot)}));
@@ -94,7 +95,18 @@ async function comparison(p,prefix){
   s=await state(p);check('새 판은 본영웅 시점/빈 배치/선택위치 없음',!s.view.baseView&&s.view.selected===null&&s.defense.slots.length===0,s);
   const health=await p.evaluate(()=>({command:window.__STORYWORLD_SURVIVAL_COMMAND_R1124__.state(),defense:window.__STORYWORLD_HERO_DEFENSE_R720__.inspect(),gunner:window.__STORYWORLD_GUNNER_ARMS_R561__.inspect()}));
   check('신규/배치/기억사수 모듈 오류 없음',health.command.stats.errors===0&&health.defense.stats.errors===0&&!health.gunner.lastError,health);
+  await b.context.close();
+  const mobile=await boot(browser,URL,'mobile',{viewport:MOBILE,isMobile:true,hasTouch:true,deviceScaleFactor:3});p=mobile.p;
+  check('모바일 검사는 실제 coarse 포인터 조건 사용',await p.evaluate(()=>matchMedia('(pointer:coarse)').matches));
+  await p.locator('#r1124TouchHomeBtn').waitFor({state:'visible'});
+  const rect=await p.locator('#r1124TouchHomeBtn').boundingBox();
+  check('모바일 H 버튼은 화면 안 44px 터치 영역',rect&&rect.height>=44&&rect.x>=0&&rect.y>=0&&rect.x+rect.width<=MOBILE.width&&rect.y+rect.height<=MOBILE.height,rect);
+  await shot(p,'after-touch-hero');await p.locator('#r1124TouchHomeBtn').tap();
+  check('모바일 터치로 본진 진입',(await state(p)).view.baseView);
+  await waitGame(p,.08);await shot(p,'after-touch-base');
+  await p.locator('#r1124Return').tap();check('모바일 터치로 영웅 복귀',!(await state(p)).view.baseView);
+  await p.locator('#r1124TouchHomeBtn').waitFor({state:'visible'});
   check('페이지 JavaScript 오류 없음',pageErrors.length===0,pageErrors);
- }catch(e){check('browser smoke completes',false,String(e.stack||e));if(p)try{await shot(p,'failure');}catch(_){} }
+ }catch(e){check('browser smoke completes',false,String(e.stack||e));const failedPage=p&&!p.isClosed()?p:lastPage;if(failedPage&&!failedPage.isClosed())try{await shot(failedPage,'failure');console.log('FAILURE_STATE',JSON.stringify(await failedPage.evaluate(()=>({modal:typeof modal!=='undefined'&&modal,storyScene:typeof storyScene!=='undefined'&&!!storyScene,started:typeof started!=='undefined'&&started,focus:document.activeElement?.outerHTML?.slice(0,300),panel:document.getElementById('panel')?.innerText?.slice(0,1600)}))));}catch(_){} }
  finally{const failed=checks.filter(x=>!x.pass).length;fs.writeFileSync(path.join(SHOTS,'results.json'),JSON.stringify({mode:'headless-software',baselineCaptured:!!process.env.SW_BASELINE_URL,url:URL,checks,screens,pageErrors,failed},null,2));await browser.close();console.log(JSON.stringify({checks:checks.length,failed}));process.exitCode=failed?1:0;}
 })().catch(e=>{console.error(e);process.exitCode=1;});

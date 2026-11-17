@@ -91,6 +91,19 @@ check('survival room change clears placement and pins the new core',()=>{
 check('title resets state and UI exposes a separate base and hero action',()=>{
  const {c,api,nodes,timers}=engine();timers.forEach(fn=>fn());assert.equal(nodes.get('r1124HomeBtn').attrs['aria-pressed'],'false');api.setBase(true);assert.equal(nodes.get('r1124CommandBar').hidden,false);assert.equal(nodes.get('r1124HomeBtn').attrs['aria-pressed'],'true');assert.equal(c.showTitle(),'title-return');assert.equal(api.state().baseView,false);assert.equal(nodes.get('r1124CommandBar').hidden,true);assert.equal(api.state().stats.errors,0);
 });
+check('touch entry is attached to the stage and restores control through the return button',()=>{
+ const {c,api,nodes,timers}=engine({auto:false});timers.forEach(fn=>fn());
+ const touch=nodes.get('r1124TouchHomeBtn');assert.ok(touch,'mobile base entry is missing');
+ assert.ok(nodes.get('stage').children.includes(touch),'mobile entry must remain outside the hidden header');
+ assert.equal(touch.hidden,false);assert.equal(touch.disabled,false);assert.equal(touch.attrs['aria-pressed'],'false');
+ c.keys.add('ArrowRight');c.joystickVector={x:1,y:0};const r=c.route=[{x:35,y:25}];
+ touch.onclick();assert.equal(api.state().baseView,true);assert.equal(touch.hidden,true);assert.equal(c.auto,true);assert.equal(c.route,r);assert.equal(c.keys.size,0);assert.deepEqual(clone(c.joystickVector),{x:0,y:0});
+ nodes.get('r1124Return').onclick();assert.equal(api.state().baseView,false);assert.equal(c.auto,false);assert.equal(c.route,r);assert.equal(touch.hidden,false);
+});
+check('touch entry is disabled during modal/loading and hidden after survival ends',()=>{
+ const {c,sv,nodes,timers}=engine();const refresh=()=>timers.forEach(fn=>fn());refresh();const touch=nodes.get('r1124TouchHomeBtn');assert.ok(touch);
+ c.modal=true;refresh();assert.equal(touch.disabled,true);c.modal=false;c.loading=true;refresh();assert.equal(touch.disabled,true);c.loading=false;sv.here=false;refresh();assert.equal(touch.hidden,true);
+});
 check('non-survival, dead, loading, and modal states reject entry',()=>{
  for(const mutate of [({sv})=>{sv.here=false;},({c})=>{c.player.hp=0;},({c})=>{c.loading=true;},({c})=>{c.modal=true;},({c})=>{c.storyScene={};},({c})=>{c.started=false;}]){const e=engine();mutate(e);assert.equal(e.api.setBase(true),false);assert.equal(e.api.state().baseView,false);}
 });

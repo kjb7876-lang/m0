@@ -7,6 +7,8 @@ on:
       - 'r96/client-source/hero-defense-r720.js'
       - 'r96/client-source/gunner-arms-r561.js'
       - 'r96/client-source/hero-paint-r1027.js'
+      - 'r96/client-source/seoha-chrono-r564.js'
+      - 'r96/client-source/light-r182.js'
       - 'r96/qa/r1124/**'
       - '.github/workflows/survival-command-r1124.yml'
   workflow_dispatch:
@@ -54,7 +56,7 @@ jobs:
           baseline.mkdir()
           for p in site.iterdir():
               (baseline/p.name).symlink_to(p, target_is_directory=p.is_dir())
-          for name in ['index.html','hero-defense-r720.js','hero-paint-r1027.js','gunner-arms-r561.js','light-r182.js']:
+          for name in ['index.html','hero-defense-r720.js','hero-paint-r1027.js','gunner-arms-r561.js','light-r182.js','seoha-chrono-r564.js']:
               data=subprocess.check_output(['git','show',os.environ['BASE_SHA']+':r96/runtime-text/'+name])
               dest=baseline/name
               dest.unlink()

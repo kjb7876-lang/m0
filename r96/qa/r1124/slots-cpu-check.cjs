@@ -56,4 +56,31 @@ check('deployment panel exposes separate replacement, removal/refund, and main h
 check('other modes reject new actions and new runs reset recruitment and removed-slot refunds',()=>{
  const {A,c,sv}=engine();A.qaGive(10000);A.buy('gunner');A.placeHere('gunner',spots[0]);sv.here=false;assert.equal(A.remove(0).ok,false);assert.equal(A.replace(0,'neon').ok,false);sv.here=true;sv.starts++;c.tick(.01);assert.equal(A.state().slots.length,0);assert.equal(A.state().crystals,0);assert.equal(A.state().owned.gunner,undefined);
 });
+// R564 keeps its follow-ups in a private queue rather than the engine delay().
+// Exercise the real overlay so removing/redeploying while the panel pauses time
+// cannot move an old Q onto a newly created body with the same hero id.
+function chronoEngine(){const f=engine(),c=f.c;Object.assign(c,{zoom:1,TILE:34,effects:[],projectiles:[],shots:[],
+ liveEnemies:()=>c.room.enemies,nearestEnemy:()=>null,rank:()=>0,attackPower:()=>10,storyAim22:()=>0,fx(){},
+ special(){if(!(c.player.specialCD>0)){c.player.specialCD=10;c.player.skillAnim=.6;}},
+ makeShot(x,y,a,sp,dmg,opt){const shot={x,y,...opt};c.shots.push(shot);return shot;}});
+ vm.runInContext(fs.readFileSync(path.resolve(__dirname,'../../client-source/seoha-chrono-r564.js'),'utf8'),c);return f;}
+check('remove then immediately redeploy Seoha cancels the old private Q queue and permits a new cast',()=>{
+ const {A,c}=chronoEngine();A.qaGive(10000);A.buy('seoha');assert.equal(A.placeHere('seoha',spots[0]).ok,true);c.tick(.01);
+ const old=A.bodies()[0];assert.equal(A.qaCast(0,'q'),true);assert.equal(c.__STORYWORLD_SEOHA_CHRONO_R564__.inspect().jobs,3);
+ assert.equal(A.remove(0).ok,true);assert.equal(A.placeHere('seoha',spots[1]).ok,true);c.tick(.4);
+ assert.equal(old.r720Retired,true);assert.notEqual(A.bodies()[0],old);assert.equal(c.shots.length,0);assert.equal(c.__STORYWORLD_SEOHA_CHRONO_R564__.inspect().jobs,0);
+ assert.equal(A.qaCast(0,'q'),true);c.tick(.4);assert.equal(c.shots.length,2);assert(c.shots.every(s=>s.x===spots[1].x&&s.y===spots[1].y));assert.equal(c.player.hero,'hwando');
+});
+check('removing a different hero leaves Seoha private Q follow-ups on their original body',()=>{
+ const {A,c}=chronoEngine();A.qaGive(10000);A.buy('gunner');A.buy('seoha');A.placeHere('gunner',spots[0]);A.placeHere('seoha',spots[1]);c.tick(.01);
+ const seoha=A.bodies()[1];assert.equal(A.qaCast(1,'q'),true);A.remove(0);c.tick(.4);
+ assert.equal(A.bodies()[0],seoha);assert.equal(c.shots.length,2);assert(c.shots.every(s=>s.x===seoha.x&&s.y===seoha.y));assert.equal(c.player.hero,'hwando');
+});
+check('redeploy cancels Seoha pending R and releases projectiles held by the retired body',()=>{
+ const {A,c}=chronoEngine(),chrono=c.__STORYWORLD_SEOHA_CHRONO_R564__;A.qaGive(10000);A.buy('seoha');A.placeHere('seoha',spots[0]);c.tick(.01);
+ const cast=()=>A.asHero('seoha',()=>c.fx('storySourceSkill',c.player.x,c.player.y,{storyWER:true,stage:'warning',sourceHero:'seoha',sourceSlot:'r',castId:'r:'+c.time}));
+ cast();A.remove(0);A.placeHere('seoha',spots[0]);c.tick(.2);assert.equal(chrono.inspect().stop,null);assert.equal(chrono.inspect().stats.stops,0);
+ const shot={x:52,y:51,vx:2,vy:-1,life:3,owner:'enemy'};c.projectiles.push(shot);cast();c.tick(.2);assert(chrono.inspect().stop);assert.equal(shot.vx,0);assert.equal(shot.vy,0);
+ A.remove(0);A.placeHere('seoha',spots[1]);c.tick(.01);assert.equal(chrono.inspect().stop,null);assert.equal(shot.vx,2);assert.equal(shot.vy,-1);assert.equal(chrono.inspect().heldShots,0);
+});
 console.log('R1124 slots:',checks,'checks passed');
