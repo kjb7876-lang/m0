@@ -22,14 +22,17 @@ async function boot(browser,url,label,options={}){
  if(label==='after')check('타이틀에서 H는 본진을 켜지 않는다',await p.evaluate(()=>!window.__STORYWORLD_SURVIVAL_COMMAND_R1124__.state().baseView));
  await p.locator('#survivalStartR600').click();await p.locator('[data-r600diff="normal"]').click();await p.locator('[data-r600hero="hwando"]').click();await p.locator('#r600Go').click();
  await p.waitForFunction(()=>window.__STORYWORLD_SURVIVAL_R600__.here()&&!loading&&window.__STORYWORLD_SURVIVAL_R600__.state().ready,null,{timeout:180000});
- await p.evaluate(()=>{auto=false;guide=false;window.__STORYWORLD_SURVIVAL_R600__.skipNarration();player.invincible=99999;player.attackCD=999;player.specialCD=999;player.egoCD=999;const d=window.__STORYWORLD_HERO_DEFENSE_R720__;d.qaGive(5000);d.qaSkills(true);d.qaFreeze(true);});
+ await p.evaluate(()=>{auto=false;guide=false;window.__STORYWORLD_SURVIVAL_R600__.skipNarration();player.invincible=99999;player.attackCD=999;player.specialCD=999;player.egoCD=999;const d=window.__STORYWORLD_HERO_DEFENSE_R720__;d.qaGive(5000);d.qaSkills(true);d.qaFreeze(true);player.storyWER??={ready:{},buffs:{}};for(const k of ['w','e','r'])player.storyWER.ready[player.hero+':'+k]=time+999;});
+ // 게임 시작 직후 이미 발동한 실검무가 끝나야 직접 좌표 fixture와 R706 본체 기억이 어긋나지 않는다.
+ // modal은 엔진 시간을 멈추지만 R706의 마지막 본체 복원까지 멈추지는 않는다.
+ await p.waitForFunction(()=>{const s=window.__STORYWORLD_DANCE_FREE_R706__?.state?.();return !s||(!s.body&&!s.dancing);},null,{timeout:120000});
  for(const [hero,dx,dy] of [['gunner',3,0],['neon',-3,0]]){
-  // 위치 fixture는 배치창이 전투를 멈춘 뒤 설정한다. 진입 직후 남은 자동 대시/복귀가 위치를 덮지 않게 한다.
+  // UI 영입/배치는 그대로 실행하고 준비 위치만 전투 정지 뒤 설정한다.
   await p.keyboard.press('b');await p.locator('#r720Panel').waitFor();
   await p.evaluate(([dx,dy])=>{const c=room.survivalR600.centre;player.x=c.x+dx;player.y=c.y+dy;route=[];command=null;target=null;},[dx,dy]);
   await p.locator('[data-r720buy="'+hero+'"]').click();
-  const placed=await p.evaluate(hero=>window.__STORYWORLD_HERO_DEFENSE_R720__.state().slots.some(s=>s.hero===hero),hero);
-  check(label+' fixture '+hero+'가 실제 배치됨',placed);
+  const placed=await p.evaluate(hero=>({slot:window.__STORYWORLD_HERO_DEFENSE_R720__.state().slots.find(s=>s.hero===hero),dance:window.__STORYWORLD_DANCE_FREE_R706__?.state?.()}),hero);
+  check(label+' fixture '+hero+'가 지정 위치에 실제 배치됨',placed.slot&&Math.hypot(placed.slot.ox-dx,placed.slot.oy-dy)<.05,placed);
   await p.locator('#r720Close').click();
  }
  await p.evaluate(()=>{const c=room.survivalR600.centre;player.x=c.x;player.y=c.y+6;cam.x=c.x;cam.y=c.y;route=[];command=null;});
@@ -60,6 +63,7 @@ async function comparison(p,prefix){
   check('본진 카메라는 정화구슬에 고정',Math.hypot(s.cam.x-boundary.core.x,s.cam.y-boundary.core.y)<.001,s.cam);
   await shot(p,'after-pc-base');
   check('PC 본진 지휘 버튼이 HUD에 가리지 않는다',await p.locator('#r1124Return').evaluate(el=>{const r=el.getBoundingClientRect(),top=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return el===top||el.contains(top);}));
+  check('PC 본진 지휘 바와 알림 문구가 겹치지 않는다',await p.locator('#r1124CommandBar').evaluate(el=>{const r=el.getBoundingClientRect(),t=document.getElementById('toast');if(!t)return false;const q=t.getBoundingClientRect();return Math.min(r.right,q.right)<=Math.max(r.left,q.left)||Math.min(r.bottom,q.bottom)<=Math.max(r.top,q.top);}));
   await p.keyboard.press('h');s=await state(p);check('H로 영웅 복귀하며 반자동 원래 값 복원',!s.view.baseView&&s.auto===false,s.view);
   check('영웅 복귀 카메라는 본영웅으로 돌아온다',Math.hypot(s.cam.x-s.hero.x,s.cam.y-s.hero.y)<.7,{cam:s.cam,hero:s.hero});
   // 반복 누름에 대한 토글은 브라우저 실제 keydown 경로를 통한다.
