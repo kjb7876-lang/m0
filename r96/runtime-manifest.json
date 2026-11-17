@@ -53684,8 +53684,8 @@
     },
     {
       "path": "death-r151.js",
-      "bytes": 7956,
-      "sha256": "52bc0f38d0b463ab7e4cabe8cf86b4ff2da3978ff1777557ee672466b3cfb062"
+      "bytes": 7996,
+      "sha256": "23286bf2dbf163b44469fd3415abce2e598254ee315abc10917334ae612d2851"
     },
     {
       "path": "delivery/additional-audio13-20261005/processed/sfx-candidate/Resonance_energy_gai__2-1791000424116-211cce07.ogg",
@@ -55649,7 +55649,7 @@
     }
   ],
   "fileCount": 11129,
-  "totalBytes": 1344724656,
+  "totalBytes": 1344724696,
   "webHTMLSha256": "169b04465eedf6594e7d2c70fc0bca5ed3dd5c26239acf4fe501790444d5a993",
   "largest": [
     {
