@@ -4,7 +4,7 @@
 //  실행: SW_URL=http://127.0.0.1:4396/m0/ node r96/qa/r1098/r1098b-dream-maps.mjs
 //  ① R171 서사 지도를 받는 지역은 DREAM 층에서도 STORY 와 같은 지도(바닥 칸 수·벽 수)
 //  ② 실제로 DREAM 지역에 들어가면 방 지도가 STORY 와 같은 R171 지도·같은 입구이고, 영웅이 벽 속이 아니며 적이 있음
-//  ③ cult04(페르소나 결전장)는 바꾸지 않음  ④ 페이지 오류 0
+//  ③ cult04(페르소나 결전장)도 R1122 부터 R171 지도(사용자 허락 11-17 10:12Z)  ④ 페이지 오류 0
 import {createRequire} from 'node:module';
 let chromium;try{({chromium}=createRequire(import.meta.url)('playwright'));}catch(_){({chromium}=createRequire('/opt/node22/lib/node_modules/')('playwright'));}
 const URL=process.env.SW_URL||'http://127.0.0.1:4396/m0/';
@@ -33,6 +33,7 @@ for(const id of ['dist01','ep1b03','u202','kair06','cult05']){const S=await ente
 
 // ③
 const c4=await p.evaluate(()=>{const L=window.__STORYWORLD_EXPLORATION__.layout('cult04','DREAM');return {r171:!!L?.storyMapR171,n:(L?.floorCells||[]).length};});
-ok(!c4.r171,'cult04 DREAM(페르소나 결전장) 지도는 그대로',c4);
+// R1122(사용자 2026-11-17 10:12Z "문제 다 고쳐" 로 이 줄 변경 허락): cult04 DREAM 도 R171 서사 지도(시련·페르소나 도달은 qa/r1122 가 검사).
+ok(c4.r171&&c4.n>3684,'cult04 DREAM(페르소나 결전장)도 R171 서사 지도(R1122)',c4);
 ok(errs.length===0,'페이지 오류 0',errs.slice(0,5));
 console.log(`\n${n-bad}/${n} 통과`);await b.close();process.exit(bad?1:0);
