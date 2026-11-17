@@ -10,7 +10,7 @@
  * 끄기: localStorage storyworld.r1113.personaHero = {"on":..., "off":true}. */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_PERSONA_HERO_R1113__)return;
-const REV='R1113-persona-hero-4-idle6',KEY='storyworld.r1113.personaHero',FIELD='personaHeroR1113',BASE='lauren';
+const REV='R1113-persona-hero-5-own-moves-r1120',KEY='storyworld.r1113.personaHero',FIELD='personaHeroR1113',BASE='lauren';
 const PROFILE=Object.freeze({name:'페르소나',title:'페르소나 · 순수악의',role:'HIDDEN · 9번째 영웅',color:'#cc3428',
  passive:'사몽 결전에서 쓰러뜨린 거울. 라우렌의 별 기술을 언주빛으로 되비춥니다.',special:'라우렌과 같은 기술·키',
  portrait:'assets/rc133/art/awake-0.png',tags:['히든','언주','라우렌 계보']});
@@ -26,6 +26,8 @@ const WALK=Object.freeze({front:Object.freeze({src:'assets/r1104b/persona-walk-f
 const IDLE=Object.freeze({s:Object.freeze({src:'assets/r1113d/persona-idle-s.png',ax:96,ground:226,h:157,n:6,cell:[192,256]}),
  n:Object.freeze({src:'assets/r1113d/persona-idle-n.png',ax:96,ground:226,h:157,n:6,cell:[192,256]}),
  side:Object.freeze({src:'assets/r1113d/persona-idle-side.png',ax:96,ground:226,h:157,n:6,cell:[192,256]})});
+// R1120(사용자 11-17 "걷기 모션이 너무 빠름"): 칸 넘김을 엔진 영웅 걷기(visual-r119 WALK_RATE_R148 = 거리 1당 3.2칸)와 같게. 예전 4/step(약 6칸)은 1.8배 빨랐다.
+const WALK_RATE=3.2;
 const IDLE_MS=130,IDLE_DIR={front:['s',1],back:['n',1],right:['side',1],left:['side',-1]};
 const SCALE=1.08; // 영웅 키(actorHeight) 대비 페르소나 몸 키 — 망토·두건 때문에 조금 크게
 const stats={swaps:0,walkSwaps:0,tints:0,unlocks:0,cards:0,errors:0};let lastError=null;
@@ -59,7 +61,7 @@ function load(path,cells,cell){let r=IM.get(path);if(r)return r;r={state:'wait',
     for(let f=0;f<n;f++){const cv=canvas(cw,ch);cv.getContext('2d').drawImage(img,f*cw,0,cw,ch,0,0,cw,ch);const id='r1113:'+path+(cells?':'+f:'');cv.__storyworldStaticSource={path:id};out.push({canvas:cv,w:cw,h:ch,path:id});}
     r.frames=out;r.state='ready';}catch(e){r.state='failed';fail(e);}};
   img.onerror=()=>{r.state='failed';};img.src=abs(path);}catch(e){r.state='failed';fail(e);}return r;}
-function prewarm(){for(const i of [0,2,4,6]){load(ART.base(i));load(ART.awake(i));}for(const k in WALK)load(WALK[k].src,FRAMES);for(const k in IDLE)load(IDLE[k].src,IDLE[k].n,IDLE[k].cell);}
+function prewarm(){for(const i of [0,2,4,6]){load(ART.base(i));load(ART.awake(i));}for(const k in WALK)load(WALK[k].src,FRAMES);for(const k in IDLE)load(IDLE[k].src,IDLE[k].n,IDLE[k].cell);for(const k of ['vortex','eclipse']){const q=SK_SRC(k);load(q.flight);load(q.contact);}}
 // ---- 걸음(지나간 거리) ----
 const walk={x:null,y:null,t:null,phase:0,w:0,scr:[0,1],hist:[]};
 function track(p,t){if(walk.t==null||t<walk.t||t-walk.t>1){walk.hist.length=0;walk.w=0;}
@@ -71,8 +73,11 @@ function track(p,t){if(walk.t==null||t<walk.t||t-walk.t>1){walk.hist.length=0;wa
 function pickWalk(){const v=walk.scr;if(Math.abs(v[0])>=Math.abs(v[1]))return ['side',v[0]>0?-1:1];return [v[1]>0?'front':'rear',1];}
 // ---- 몸 그림 바꿔 끼우기 ----
 const okPt=q=>Array.isArray(q)&&fin(q[0])&&fin(q[1]);
-function heroBody(cmds){let best=-1,bh=0;for(let i=0;i<cmds.length;i++){const c=cmds[i];if(!c||c.kind!=='image'||c.r1113)continue;const o=c.owner;if(!o||o.kind!=='hero')continue;
-  const P=c.points;if(!Array.isArray(P)||P.length!==4||!P.every(okPt))continue;const h=Math.abs(P[3][1]-P[0][1]);if(h>bh){bh=h;best=i;}}return best;}
+// R1120: 라우렌 몸 그림(…/lauren/… — 라우렌 스킬 그림 lauren/lauren-*, fx/lauren/* 은 빼고). 막기 때 더 큰 방벽(barrier.webp)을 몸으로 고르던 것을 막는다.
+const LAUREN_BODY=/\/lauren\/(?!lauren-)/,LAUREN_NOT_BODY=/\/fx\/lauren\//;
+const isLaurenBody=c=>{const s=String(c?.sourcePath||'');return LAUREN_BODY.test(s)&&!LAUREN_NOT_BODY.test(s);};
+function heroBody(cmds){let best=-1,bh=0,bestL=-1,bl=0;for(let i=0;i<cmds.length;i++){const c=cmds[i];if(!c||c.kind!=='image'||c.r1113)continue;const o=c.owner;if(!o||o.kind!=='hero')continue;
+  const P=c.points;if(!Array.isArray(P)||P.length!==4||!P.every(okPt))continue;const h=Math.abs(P[3][1]-P[0][1]);if(h>bh){bh=h;best=i;}if(isLaurenBody(c)&&h>bl){bl=h;bestL=i;}}return bestL>=0?bestL:best;}
 function place(c,fr,anchor,m,foot,H){ // fr 의 (anchor.ax, anchor.ground) 를 foot 에, anchor.h 를 H 에 맞춰 화면에 바로 선 사각형으로
  const k=H/anchor.h,X=u=>foot[0]+m*(u-anchor.ax)*k,Y=v=>foot[1]+(v-anchor.ground)*k,W=fr.w,Hh=fr.h;
  const pts=[[X(0),Y(0)],[X(W),Y(0)],[X(W),Y(Hh)],[X(0),Y(Hh)]];if(!pts.every(okPt))return false;
@@ -91,16 +96,16 @@ function fxCmd(body,id,cv,cx,cy,rx,ry,alpha){const pts=[[cx-rx,cy-ry],[cx+rx,cy-
  const ord=fin(body.order)?body.order+(id==='r1113:aura'?-.5:.5):body.order;
  return {...body,key:id+':0',order:ord,kind:'image',owner:{id,kind:'effect'},image:cv,mutable:false,sourcePath:cv.__storyworldStaticSource.path,immutableTint:cv.__storyworldStaticSource,sourceRect:[0,0,64,64],imageSize:[64,64],points:pts,
   style:{...(body.style&&typeof body.style==='object'?body.style:{}),filter:'none',globalAlpha:Math.min(1,alpha),globalCompositeOperation:'lighter'},r1113:true,r1113tint:true};}
-function swapBody(cmds){const i=heroBody(cmds);if(i<0)return null;const c=cmds[i],p=pl(),t=now();if(!p||t==null||typeof project!=='function')return null;
+function swapBody(cmds){const i=heroBody(cmds);if(i<0)return null;const c=cmds[i],p=pl(),t=now(),P0=c.points.map(q=>[q[0],q[1]]);if(!p||t==null||typeof project!=='function')return null;
  const g=project(p.x,p.y);if(!fin(g?.x)||!fin(g?.y))return null;const lift=Math.max(0,Math.min(200,+p.visualLiftPx||0)),foot=[g.x,g.y-lift],H=G(()=>actorHeight(),66)*SCALE;if(!(H>0))return null;
  const s=track(p,t),ult=p.ultimateAnim>0,act=!ult&&(p.attackAnim>0||p.skillAnim>0);
- if(s.w>.5&&!act&&!ult){const [k,m]=pickWalk(),W=WALK[k],r=IM.get(W.src);if(r?.state==='ready'){const f=Math.floor(s.phase/W.step*4)%FRAMES;if(place(c,r.frames[f],W,m,foot,H)){stats.walkSwaps++;stats.last=k+':'+f+(m<0?':flip':'');return {i,c,mode:'walk'};}}}
+ if(s.w>.5&&!act&&!ult){const [k,m]=pickWalk(),W=WALK[k],r=IM.get(W.src);if(r?.state==='ready'){const f=Math.floor(s.phase*WALK_RATE)%FRAMES;if(place(c,r.frames[f],W,m,foot,H)){stats.walkSwaps++;stats.last=k+':'+f+(m<0?':flip':'');return {i,c,mode:'walk',P0};}}}
  const dir=String(p.poseDirections5?.[ult?'ultimate':p.skillAnim>0?'skill':p.attackAnim>0?'attack':'']||p.direction||'front');
  if(act){const [k,m]=SIDE[dir]||SIDE.front,W=WALK[k],r=IM.get(W.src);if(r?.state==='ready'){const f=Math.floor(t*ACT_FPS)%FRAMES;if(place(c,r.frames[f],W,m,foot,H)){stats.actSwaps=(stats.actSwaps||0)+1;stats.last='act:'+k+':'+f+(m<0?':flip':'');
-   return {i,c,mode:'act',k,f,m,W,foot,H,t,skill:p.skillAnim>0};}}}
- if(!ult){const [k,m]=IDLE_DIR[dir]||IDLE_DIR.front,S=IDLE[k],r=IM.get(S.src);if(r?.state==='ready'&&r.frames?.length){const f=Math.floor(t*1000/IDLE_MS)%r.frames.length;if(place(c,r.frames[f],S,m,foot,H)){stats.idleSwaps=(stats.idleSwaps||0)+1;stats.last='idle:'+k+':'+f+(m<0?':flip':'');return {i,c,mode:'idle',foot,H,t};}}}
+   return {i,c,mode:'act',k,f,m,W,foot,H,t,skill:p.skillAnim>0,P0};}}}
+ if(!ult){const [k,m]=IDLE_DIR[dir]||IDLE_DIR.front,S=IDLE[k],r=IM.get(S.src);if(r?.state==='ready'&&r.frames?.length){const f=Math.floor(t*1000/IDLE_MS)%r.frames.length;if(place(c,r.frames[f],S,m,foot,H)){stats.idleSwaps=(stats.idleSwaps||0)+1;stats.last='idle:'+k+':'+f+(m<0?':flip':'');return {i,c,mode:'idle',foot,H,t,P0};}}}
  const idx=DIRI[dir]??0,path=(ult?ART.awake:ART.base)(idx),r=IM.get(path);if(r?.state!=='ready')return null;
- if(place(c,r.frames[0],{ax:ART.ax,ground:ART.ground,h:ART.height},1,foot,H)){stats.swaps++;stats.last=path;return {i,c,mode:ult?'ult':'still',foot,H,t};}return null;}
+ if(place(c,r.frames[0],{ax:ART.ax,ground:ART.ground,h:ART.height},1,foot,H)){stats.swaps++;stats.last=path;return {i,c,mode:ult?'ult':'still',foot,H,t,P0};}return null;}
 function addGlow(cmds,sw){if(!sw||(sw.mode!=='act'&&sw.mode!=='ult')||!glows())return 0;const body=sw.c,t=sw.t,pulse=.5+.5*Math.sin(t*17);let n=0;
  // 몸 뒤 오라: 몸 가운데, 몸 키의 약 0.55·0.9 타원
  const k=sw.H/(sw.W?.h||ART.height),bodyH=sw.H,cx=sw.foot[0],cy=sw.foot[1]-bodyH*.48;
@@ -112,14 +117,55 @@ function addGlow(cmds,sw){if(!sw||(sw.mode!=='act'&&sw.mode!=='ult')||!glows())r
 // ---- 언주색: 영웅 쪽 이펙트 ----
 // 라우렌 고유 보라(164,98,255 · 120,50,200 · 214,170,255)로 구운 r106fx 는 꼬리표가 없어도 영웅 것
 const LAUREN_FX=/^r106fx:[a-z]+:(164\.98\.255|120\.50\.200|214\.170\.255):/;
+// R1120: 라우렌 보라로 물든 에덴 불(r108eden:<시트>#164,98,255|…), 라우렌 스킬 그림 폴더(lauren/lauren-*, fx/lauren/*), EGO 오라(r111:ego-*·라우렌 팔레트), 순간이동 빛(…:lauren:…)
+const LAUREN_EDEN=/^r108eden:[a-z.]+#(\d+),(\d+),(\d+)\|/,LAUREN_ART=/\/lauren\/lauren-|\/fx\/lauren\//,EGO_AURA=/^r111:ego-(back|front)$/,LAUREN_ID=/:lauren:/;
 function heroFx(o,c){if(!o||o.kind==='hero'||o.kind==='enemy'||o.kind==='contact'||o.kind==='shadow')return false;if(o.pxfSide==='hero'||o.side==='hero')return true;if(o.pxfSide==='enemy'||o.side==='enemy')return false;const id=String(o.id||'');
- if(/(^|:)hero(:|$)/.test(id)||/^r102:/.test(id))return true;return o.kind==='effect'&&LAUREN_FX.test(String(c?.sourcePath||''));}
+ if(/(^|:)hero(:|$)/.test(id)||/^r102:/.test(id)||EGO_AURA.test(id)||LAUREN_ID.test(id))return true;const sp=String(c?.sourcePath||'');
+ const e=LAUREN_EDEN.exec(sp),ev=e&&violet(+e[1],+e[2],+e[3]);
+ return o.kind==='effect'&&(LAUREN_FX.test(sp)||!!ev||LAUREN_ART.test(sp));}
+// 보라 계열(파랑이 빨강·초록보다 큰 색) — 라우렌 팔레트 164,98,255 · 150,70,255 · 74,26,120 · 240,216,255 등
+function violet(r,g,b){return b>r&&b>g&&b-Math.min(r,g)>=30;} // 은빛(226,232,242) 같은 거의 무채색은 그대로
+// R1120: 선·채우기 명령(중력 우물 코어·원반 등 r561 벡터)은 그림 필터 대신 색 문자열을 언주 명암으로 바꾼다(밝기 따라 먹→언주→살구, 알파 유지)
+const RAMP=[[0,[6,1,1]],[.22,EONJU[0]],[.5,EONJU[1]],[.82,EONJU[2]],[1,[255,236,224]]];
+function eonju(r,g,b){const L=Math.max(0,Math.min(1,(.3*r+.59*g+.11*b)/255+.08*(b/255)));let j=1;while(j<RAMP.length-1&&L>RAMP[j][0])j++;const [a0,c0]=RAMP[j-1],[a1,c1]=RAMP[j],k=Math.max(0,Math.min(1,(L-a0)/Math.max(1e-6,a1-a0)));return c0.map((v,i)=>Math.round(v+(c1[i]-v)*k));}
+const RGBA=/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d.]+)\s*)?\)/g;
+function recolorStr(v){if(typeof v!=='string')return v;return v.replace(RGBA,(m,r,g,b,a)=>{if(!violet(+r,+g,+b))return m;const c=eonju(+r,+g,+b);return a==null?'rgb('+c.join(',')+')':'rgba('+c.join(',')+','+a+')';});}
+function recolorPaint(v){if(typeof v==='string')return recolorStr(v);if(v&&typeof v==='object'&&Array.isArray(v.stops))return {...v,stops:v.stops.map(st=>st&&typeof st==='object'?{...st,color:recolorStr(st.color)}:st)};return v;}
+const VEC_ID=/^r561:/;
+// R1120: 픽셀 이펙트(R163) — 라우렌 특수기(R178 pvfx-warm-explosion 등)는 영웅 팔레트(보라)를 색조로 넘겨 구운 캔버스라 그림 필터가 안 닿는다 → play 로 넘기는 색조를 언주로.
+//  frameAt 은 R102 영웅 이펙트 안에서 그려져 그 명령째 언주 색 돌리기(tint)를 받으므로 그대로 둔다(둘 다 하면 빨강→초록).
+const eonjuArr=c=>Array.isArray(c)&&c.length>=3&&violet(c[0],c[1],c[2])?eonju(c[0],c[1],c[2]):c;
+function pfxTint(o){if(!o||typeof o!=='object'||!o.tint||typeof o.tint!=='object'||!formActive())return o;const t=o.tint,a=eonjuArr(t.a),b=eonjuArr(t.b);if(a===t.a&&b===t.b)return o;return {...o,tint:{...t,a,b}};}
+function wrapPfx(){const X=G(()=>window.__STORYWORLD_PIXELFX_R163__,null);if(!X||X.__r1120||typeof X.play!=='function')return;
+ const w={...X,__r1120:true,play:(n,x,y,o)=>{let q=o;try{q=pfxTint(o);}catch(e){fail(e);}return X.play(n,x,y,q);}};
+ try{window.__STORYWORLD_PIXELFX_R163__=Object.freeze(w);}catch(e){fail(e);}}
+function vectors(cmds){let n=0;for(const c of cmds){if(!c||(c.kind!=='fill'&&c.kind!=='stroke')||c.r1113tint)continue;const o=c.owner;if(!o||!(VEC_ID.test(String(o.id||''))||heroFx(o,c)))continue;const s=c.style;if(!s||typeof s!=='object')continue;
+  c.style={...s,fillStyle:recolorPaint(s.fillStyle),strokeStyle:recolorPaint(s.strokeStyle)};c.r1113tint=true;n++;}stats.vecTints=(stats.vecTints||0)+n;return n;}
 function tint(cmds){let n=0;for(const c of cmds){if(!c||c.kind!=='image'||c.r1113tint)continue;if(!heroFx(c.owner,c))continue;const s=c.style&&typeof c.style==='object'?c.style:{};
   const f=typeof s.filter==='string'&&s.filter!=='none'?s.filter+' ':'';c.style={...s,filter:f+TINT};c.r1113tint=true;n++;}stats.tints+=n;return n;}
 // 페르소나는 창이 없다 → 라우렌 창끝 빛(R425)은 형상일 때 뺀다
 const DROP=/^r425:spear-tip$/;
 function drop(cmds){let j=0;for(let i=0;i<cmds.length;i++){const c=cmds[i];if(c&&c.owner&&DROP.test(String(c.owner.id||'')))continue;cmds[j++]=c;}const n=cmds.length-j;cmds.length=j;stats.dropped=(stats.dropped||0)+n;return n;}
-function process(cmds){if(!Array.isArray(cmds))return 0;if(!formActive())return 0;prewarm();let n=0;try{drop(cmds);}catch(e){fail(e);}try{const sw=swapBody(cmds);if(sw){n++;n+=addGlow(cmds,sw);}}catch(e){fail(e);}try{n+=tint(cmds);}catch(e){fail(e);}return n;}
+// R1120 몸 복제: 몸을 바꾼 뒤에도 남는 라우렌 몸 그림(가림 유령·R409 테두리 복제·잔상·대시 몸 시트) → 바꾼 페르소나 칸을 몸과의 발 차이만큼 옮겨 쓴다(투명도·순서·열쇠는 그대로).
+const foot0=P=>[(P[2][0]+P[3][0])/2,(P[2][1]+P[3][1])/2];
+function echoes(cmds,sw){if(!sw||!sw.P0)return 0;const B=sw.c,f0=foot0(sw.P0);let n=0;
+ for(const c of cmds){if(!c||c===B||c.kind!=='image'||c.r1113||!isLaurenBody(c))continue;const o=c.owner;if(o&&(o.kind==='enemy'||o.kind==='shadow'||o.kind==='contact'))continue;
+  const P=c.points;if(!Array.isArray(P)||P.length!==4||!P.every(okPt))continue;const f=foot0(P),dx=f[0]-f0[0],dy=f[1]-f0[1];
+  c.image=B.image;c.mutable=false;c.sourcePath=B.sourcePath;c.immutableTint=B.immutableTint;c.sourceRect=[...B.sourceRect];c.imageSize=[...B.imageSize];c.points=B.points.map(q=>[q[0]+dx,q[1]+dy]);c.r1113=true;n++;}
+ stats.echoes=(stats.echoes||0)+n;return n;}
+// R1120 스킬 그림: 라우렌 r561 스킬 시트(256칸 6×4)를 같은 자리에서 페르소나 Dots 탄 시트(R1119, 256칸 가로 8·6, 이미 언주색)로 — 판정·피해는 그대로.
+//  중력 우물 뒤·분쇄 소용돌이 → 내면의 소용돌이 비행 8칸 루프, 붕괴 24칸 → 욕망의 일식(앞 16칸 비행 루프, 뒤 8칸 → 소멸 6칸). 우물 앞 고리는 그림 그대로 언주 색.
+const SKILL=Object.freeze({'lauren-gravity-well-back':{sheet:'vortex'},'lauren-crush-vortex':{sheet:'vortex'},'lauren-collapse':{sheet:'eclipse',split:16}});
+const SKILL_RX=/\/r561\/lauren\/(lauren-gravity-well-back|lauren-crush-vortex|lauren-collapse)\.webp/;
+const SK_SRC=k=>({flight:'assets/r1119/fx-'+k+'-flight.webp',contact:'assets/r1119/fx-'+k+'-contact.webp'});
+function skills(cmds){let n=0;for(const c of cmds){if(!c||c.kind!=='image'||c.r1113)continue;const m=SKILL_RX.exec(String(c.sourcePath||''));if(!m)continue;const S=SKILL[m[1]],src=SK_SRC(S.sheet);
+  const sr=Array.isArray(c.sourceRect)&&c.sourceRect.length>=2&&c.sourceRect.every(fin)?c.sourceRect:null;const idx=sr?Math.floor((sr[1]+.5)/256)*6+Math.floor((sr[0]+.5)/256):Math.floor((now()||0)*12)%24;
+  let path=src.flight,f=idx%8;if(S.split&&idx>=S.split){path=src.contact;f=Math.min(5,Math.floor((idx-S.split)*6/(24-S.split)));}
+  const r=load(path);if(r.state!=='ready'||!r.frames?.[0])continue;const fr=r.frames[0];
+  c.image=fr.canvas;c.mutable=false;c.sourcePath='r1113:'+path.replace(/^assets\//,'')+':'+f;c.immutableTint=fr.canvas.__storyworldStaticSource;c.sourceRect=[f*256,0,256,256];c.imageSize=[fr.w,fr.h];c.r1113=true;c.r1113tint=true;
+  if(c.style&&typeof c.style==='object'&&typeof c.style.filter==='string'&&/hue-rotate/.test(c.style.filter))c.style={...c.style,filter:'none'};n++;}
+ stats.skillSwaps=(stats.skillSwaps||0)+n;return n;}
+function process(cmds){if(!Array.isArray(cmds))return 0;if(!formActive())return 0;prewarm();let n=0;try{drop(cmds);}catch(e){fail(e);}try{const sw=swapBody(cmds);if(sw){n++;n+=echoes(cmds,sw);n+=addGlow(cmds,sw);}}catch(e){fail(e);}try{n+=skills(cmds);}catch(e){fail(e);}try{n+=tint(cmds);}catch(e){fail(e);}try{n+=vectors(cmds);}catch(e){fail(e);}return n;}
 // ---- 렌더러 감싸기(prototype·인스턴스, 한 render 에 한 번) ----
 let depth=0;
 const wrapFn=fn=>{if(fn.__r1113)return fn;const w=function(frame){if(depth===0){try{if(frame&&Array.isArray(frame.commands))process(frame.commands);}catch(e){fail(e);}}depth++;try{return fn.apply(this,arguments);}finally{depth--;}};w.__r1113=true;return w;};
@@ -173,8 +219,8 @@ function ui(){if(!hasDoc())return;const t=Date.now();if(t<uiAt)return;uiAt=t+200
  try{if(commit!=null&&!G(()=>loading,true)&&G(()=>started,false)){const p=pl();if(p){const on=commit&&p.hero===BASE;setForm(on);if(on&&typeof toast==='function')toast(PROFILE.title+' · 라우렌의 기술을 언주빛으로 씁니다.',4);}commit=null;want=false;}}catch(e){fail(e);}
  try{if(document.getElementById('panel')?.querySelector('[data-hero]')){css();inject();}}catch(e){fail(e);}
  try{if(formActive()){hudName();const pt=document.getElementById('portrait'),u=url(PROFILE.portrait);if(pt&&pt.getAttribute('src')!==u)pt.src=u;}}catch(e){fail(e);}}
-function install(){wrapSave();wrapTick();wrapInst();wrapHud();if(hasDoc()){try{document.addEventListener('click',onClick,true);}catch(e){fail(e);}}
- try{setInterval(()=>{try{wrapSave();wrapTick();wrapInst();wrapHud();watch();ui();}catch(e){fail(e);}},250);}catch(e){fail(e);}}
+function install(){wrapSave();wrapTick();wrapInst();wrapHud();wrapPfx();if(hasDoc()){try{document.addEventListener('click',onClick,true);}catch(e){fail(e);}}
+ try{setInterval(()=>{try{wrapSave();wrapTick();wrapInst();wrapHud();wrapPfx();watch();ui();}catch(e){fail(e);}},250);}catch(e){fail(e);}}
 install();
 window.__STORYWORLD_PERSONA_HERO_R1113__=Object.freeze({revision:REV,profile:PROFILE,field:FIELD,base:BASE,tint:TINT,art:ART,walkSheets:WALK,idleSheets:IDLE,scale:SCALE,orb:ORB,
  unlocked,unlock,formActive,setForm,process,watch,refresh:()=>{try{if(hasDoc()){css();inject();}}catch(e){fail(e);}},

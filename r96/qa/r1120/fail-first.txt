@@ -1,0 +1,20 @@
+FAIL ① 걷기 칸 넘김 거리 1당 5.56칸 (엔진 영웅 3.2)
+FAIL ② 빠르게(6/초) 걸어도 렌더마다 최대 2칸
+FAIL ③ 막기: 방벽 그대로(idle-s.png:0), 라우렌 막기 몸 → assets/r130/guard/lauren/guard-s.webp
+PASS ④ 몸 바뀜
+FAIL ④ 같은 자리 라우렌 몸 복제 → 페르소나 같은 칸(투명도·순서 유지) r409:outline:hero:u:http://x/m0/assets/r130/lauren/directions-lauren-front.webp:181,55,150,421:20
+FAIL ⑤ 떨어진 잔상 → 페르소나 칸을 (20,10) 옮겨서 http://x/m0/assets/r130/lauren/walk-e.webp
+FAIL ⑥ 대시 몸 시트 → 페르소나 http://x/m0/assets/r130/lauren/actions-v3126-lauren-move-front.webp
+FAIL ⑦ 순간이동 빛은 그림 그대로 + 언주 색
+FAIL ⑧ 중력 우물 뒤 9칸 → 소용돌이 비행 1칸(http://x/m0/assets/r561/lauren/lauren-gravity-well-back.webp 768,256,256,256)
+FAIL ⑧ 붕괴 3칸 → 일식 비행 3칸(http://x/m0/assets/r561/lauren/lauren-collapse.webp)
+FAIL ⑧ 붕괴 20칸 → 일식 소멸 3칸(http://x/m0/assets/r561/lauren/lauren-collapse.webp 512,768,256,256)
+FAIL ⑧ 분쇄 소용돌이 14칸 → 소용돌이 6칸
+PASS ⑧ 자리·크기 그대로
+FAIL ⑧ 우물 앞 고리는 그림 그대로 언주 색
+FAIL ⑨ EGO 오라 → 언주
+FAIL ⑨ 라우렌 보라 에덴 불만 언주, 다른 색은 그대로
+PASS ⑩ 그림 준비 전엔 몸·복제 모두 원래대로
+PASS ⑪ 라우렌(형상 아님)이면 아무것도 안 바꿈
+FAIL ⑫ CI(pages.yml)에 이 검사 줄
+R1120 persona-hero-own FAILED 15
