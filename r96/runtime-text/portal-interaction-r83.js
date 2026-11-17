@@ -29,9 +29,17 @@
  // exit: the ward handler opens door-2 and the generic handler closes it again
  // before the R72 portal gets the event. Only an already-admitted portal gets
  // priority; locked boss/story doors continue through their existing chain.
+ // 2026-11-18 (스토리 사몽 실플레이 dist03): 옛 R61 포탈 층은 제단 근처(중심 2.8~7.7칸)에 자기 포탈 자리를 두고, 그 2.1칸 안에서 C 를 누르면
+ //  travel 만 부르고 끝낸다. R72 서사 포탈이 그 이동을 거절하면('보스 처치와 기억 복원이 필요합니다.') 제단 상호작용이 아예 안 불려
+ //  제단 1칸 옆에 선 길잡이가 멈췄다. R72 가 연 포탈이 가까이 없고 제단이 손 닿는 거리면, 이번 C 동안만 옛 층이 출구를 못 보게 한다.
+ function altarFirst(){try{if(!room?.objective||!['field','fieldReady','bossReady'].includes(room.encounterStage))return false;
+  if(Math.hypot(player.x-room.objective.x,player.y-room.objective.y)>2.45)return false;const R=window.__STORYWORLD_ROUTES_R72__;if(!R?.status)return false;
+  const def=regionById?.[zone];if(!def?.exits)return false;for(const d of Object.keys(def.exits)){const s=R.status(d);if(s?.open&&s.point&&distance(player,s.point)<2.1)return false;}return true;}catch(_){return false;}}
  const interactBase=interact;interact=function(...args){
   const portal=nearby();
   if(portal)return guideDepth>0?waitForKey(portal.direction):travel(portal.direction);
+  if(altarFirst()){const def=regionById[zone],exits=def.exits;events.push({kind:'altar-first',zone,at:time});if(events.length>40)events.shift();
+   def.exits={};try{return interactBase.apply(this,args);}finally{def.exits=exits;}}
   return interactBase.apply(this,args);
  };
  const guideBase=guideStep;guideStep=function(...args){
