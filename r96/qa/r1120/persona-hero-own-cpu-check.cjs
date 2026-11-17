@@ -86,10 +86,10 @@ const ready=(o)=>{const w=world(o);w.api().setForm(true);w.frame([body()]);w.loa
  const rgba=s=>{const m=/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/.exec(String(s));return m?[+m[1],+m[2],+m[3],m[4]==null?1:+m[4]]:null;};
  const red=c=>c&&c[0]>c[2]&&c[0]>=c[1];
  const out=mk(true),d=out.find(c=>c.key==='r561:well:1.15:disk:0'),r=out.find(c=>c.key==='r561:well:1.15:disk:1'),k=out.find(c=>c.key==='r561:well:1.15:core:23'),g=out.find(c=>c.key==='r561:well:1.15:core:2');
- const mid=rgba(d.style.fillStyle.stops[1].color),edge=rgba(d.style.fillStyle.stops[2].color),rc=rgba(r.style.strokeStyle),kc=rgba(k.style.strokeStyle),kf=rgba(k.style.fillStyle);
+ const mid=rgba(d.style.fillStyle.stops[1].color),edge=rgba(d.style.fillStyle.stops[2].color),rc=rgba(r.style.strokeStyle),kc=k?rgba(k.style.strokeStyle):[255,0,0,1],kf=k?rgba(k.style.fillStyle):[0,0,0,1]; // R1120b(사용자 11-17 10:12Z "문제 다 고쳐"): 코어 선·채우기는 일식 시트 칸으로 바뀌어 빠질 수 있다 → 빠졌으면 통과
  ok(red(mid)&&mid[3]===.55&&edge[3]===0,'⑬ 우물 원반 보라 → 언주(알파 유지) '+d.style.fillStyle.stops.map(s=>s.color).join(' '));
- ok(red(rc)&&rc[3]===.75&&red(kc),'⑬ 우물 테·코어 테두리 → 언주 '+r.style.strokeStyle+' / '+k.style.strokeStyle);
- ok(kf&&kf[0]+kf[1]+kf[2]<40&&g.style.strokeStyle==='rgba(200,200,200,.5)','⑬ 검정 심·회색은 그대로('+k.style.fillStyle+', '+g.style.strokeStyle+')');
+ ok(red(rc)&&rc[3]===.75&&red(kc),'⑬ 우물 테·코어 테두리 → 언주 '+r.style.strokeStyle+' / '+(k?k.style.strokeStyle:'코어는 일식 시트로'));
+ ok(kf&&kf[0]+kf[1]+kf[2]<40&&(g?g.style.strokeStyle==='rgba(200,200,200,.5)':!k),'⑬ 검정 심·회색은 그대로('+(k?k.style.fillStyle:'코어는 일식 시트로')+', '+(g?g.style.strokeStyle:'-')+')');
  const off=mk(false);ok(off.find(c=>c.key==='r561:well:1.15:disk:1').style.strokeStyle==='rgba(200,160,223,.75)','⑬ 형상이 아니면 그대로');}
 // ⑭
 {const w=ready();const P=()=>w.C.__STORYWORLD_PIXELFX_R163__;const L={a:[90,54,140],b:[226,232,242]},O={a:[140,66,22],b:[255,230,180]};

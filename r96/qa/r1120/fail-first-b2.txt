@@ -1,0 +1,2 @@
+FAIL ② 엔진이 매 프레임 쓰는 Q 이름(setHudTextR63R2)도 → 내면의 소용돌이 (잔향 결계)
+R1120b persona-hero-hud-well FAILED 1

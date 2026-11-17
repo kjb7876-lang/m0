@@ -1,0 +1,17 @@
+PASS ④ 시트 준비 전엔 아이콘 그대로
+FAIL ① 하단 아이콘 5개 → 페르소나 시트 아이콘 ./assets/vfx/generated ./assets/vfx/blink-aft ./assets/x/barrier-sig ./assets/vfx/ultimate- ./assets/x/time-ring.w
+FAIL ① 본편 W·E 아이콘 → 페르소나
+PASS ① 아이콘이 서로 다름(시트별)
+FAIL ② Q 이름 → 내면의 소용돌이 (잔향 결계)
+FAIL ② 본편 E 제목 → 욕망의 일식
+FAIL ② 초상 테 색 → 언주 #c8a0df
+PASS ③ 형상 끄면 아이콘 원래대로
+PASS ③ 이름·테 색 원래대로
+FAIL ⑤ 코드로 그린 코어 선·채우기 빠짐(남은 3)
+FAIL ⑤ 일식 시트 칸 하나(열쇠 undefined, 순서 undefined)
+FAIL ⑤ 코어 자리·크기에 맞춤(가운데 0.0,0.0 폭 0.0)
+FAIL ⑤ 256칸 한 칸, 언주 색 돌리기 안 함
+PASS ⑥ 바닥 원반은 언주 색으로 남음 rgba(78,16,12,.55)
+PASS ⑦ 형상이 아니면 코어 그대로
+FAIL ⑧ CI(pages.yml)에 이 검사 줄
+R1120b persona-hero-hud-well FAILED 10
