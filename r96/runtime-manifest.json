@@ -54769,8 +54769,8 @@
     },
     {
       "path": "perf7-r1043.js",
-      "bytes": 14300,
-      "sha256": "584ef5a3d2e9eb3118a4859985d0ba09455a697099a9d065f27ba8b118cabd53"
+      "bytes": 14719,
+      "sha256": "598cd5f32b1af786c019b6bf2b218bef1141f49c0b2d3c54bd3345f7af3dbef9"
     },
     {
       "path": "persona-gravity-r1096.js",
@@ -55604,7 +55604,7 @@
     }
   ],
   "fileCount": 11120,
-  "totalBytes": 1344287119,
+  "totalBytes": 1344287538,
   "webHTMLSha256": "169b04465eedf6594e7d2c70fc0bca5ed3dd5c26239acf4fe501790444d5a993",
   "largest": [
     {
