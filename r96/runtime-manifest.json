@@ -10903,6 +10903,116 @@
       "sha256": "69b56f4db06beb90b0de1636b25ed6731279f416f24baa32caae1e8fac8f3dfb"
     },
     {
+      "path": "assets/r1119/fx-clock-contact.webp",
+      "bytes": 43356,
+      "sha256": "a9393c85f372dcc29e4d3a762bd21e229afd177528e12074f17706594bf0f75c"
+    },
+    {
+      "path": "assets/r1119/fx-clock-flight.webp",
+      "bytes": 65742,
+      "sha256": "8a84491408cd51a6141ad0c51990e0a575398eba7d62690380757856e57a289e"
+    },
+    {
+      "path": "assets/r1119/fx-diamond-contact.webp",
+      "bytes": 28144,
+      "sha256": "a13486bdd9678ab5574cb05925d59a428f2e45275175017afdff7788f56778b4"
+    },
+    {
+      "path": "assets/r1119/fx-diamond-flight.webp",
+      "bytes": 42988,
+      "sha256": "d303fb71ae29054d57f9e1642be9e27b26c6fe6b1fba7ef2df86cb5d5c9441c4"
+    },
+    {
+      "path": "assets/r1119/fx-lance-contact.webp",
+      "bytes": 58224,
+      "sha256": "3fcdc42e9c69ab6926b9f728f8efd6a626cf07e6fa18af9612086c6efdf6ae42"
+    },
+    {
+      "path": "assets/r1119/fx-lance-flight.webp",
+      "bytes": 83328,
+      "sha256": "bbd8fe2fa5bceeb12ce76c9d4cf0e1d795275498776e09eee16994e777f7903f"
+    },
+    {
+      "path": "assets/r1119/fx-shield-contact.webp",
+      "bytes": 78632,
+      "sha256": "4425b1b775632c86f809a5e399b8d2c2ba370700dcb52f11cce22362d5cecb3e"
+    },
+    {
+      "path": "assets/r1119/fx-shield-flight.webp",
+      "bytes": 98554,
+      "sha256": "09754caaef395bf3cde4de3fdfaba6966a1c921c59e71e0cfc19d2390833b305"
+    },
+    {
+      "path": "assets/r1119/fx-star-contact.webp",
+      "bytes": 24344,
+      "sha256": "048696058aa59c0b349a72a08b60116842dd73190275b8e773c56e1e61774645"
+    },
+    {
+      "path": "assets/r1119/fx-star-flight.webp",
+      "bytes": 46590,
+      "sha256": "c903f36888cedf98708d4127c1d3338a6c15228f03989b7e9110c2d97162d521"
+    },
+    {
+      "path": "assets/r1119/fx-vortex-contact.webp",
+      "bytes": 50046,
+      "sha256": "3bd62c273f1f744b1649d790a31f5567b76d464fe72b1c6eb8ceda05ddf7b052"
+    },
+    {
+      "path": "assets/r1119/fx-vortex-flight.webp",
+      "bytes": 104022,
+      "sha256": "b21d6e55f6b71a70d4d371b0539bb8ee1bef903d8d35b36ade5e30f0a0373b3c"
+    },
+    {
+      "path": "assets/r1119/persona-death-awake.webp",
+      "bytes": 176424,
+      "sha256": "7905154a9fe8867bed8a340441037f743b436cc5daf4307c2aec3853d0c20d82"
+    },
+    {
+      "path": "assets/r1119/persona-death-base.webp",
+      "bytes": 140742,
+      "sha256": "cc686ecffb357cc9b62f2d6bcb7022e97141dadd76e92f5dbba0da8ae44f0089"
+    },
+    {
+      "path": "assets/r1119/persona-hit-awake-front.webp",
+      "bytes": 137064,
+      "sha256": "d81da47ffabe2110a058f12b5259a0098cccbae774a7993a515dca8186d4ee8b"
+    },
+    {
+      "path": "assets/r1119/persona-hit-awake-rear.webp",
+      "bytes": 140886,
+      "sha256": "918eb08e4921c6a12d6a8dae2627ca65ae9049caaa07af40eba8a36bf0333f33"
+    },
+    {
+      "path": "assets/r1119/persona-hit-awake-side.webp",
+      "bytes": 175862,
+      "sha256": "e68341831dfe366339397c685d4d13f45563b62a8871ab3b5bfae5ee5b1b7423"
+    },
+    {
+      "path": "assets/r1119/persona-hit-base-front.webp",
+      "bytes": 105436,
+      "sha256": "7c538abdf184cf706562521caa645a58fa7afc8c5df13a739dce815813c81382"
+    },
+    {
+      "path": "assets/r1119/persona-hit-base-rear.webp",
+      "bytes": 102638,
+      "sha256": "88a9a3e69ad8acdbc1b0cd170fb4236b578dac540a8c86ce517db28c4e7d6770"
+    },
+    {
+      "path": "assets/r1119/persona-hit-base-side.webp",
+      "bytes": 145668,
+      "sha256": "ec6b612ccc691f67327fad56da93f2f76fa18fadac469280ed9bd48a74dca7cd"
+    },
+    {
+      "path": "assets/r1119/well-floor.webp",
+      "bytes": 162320,
+      "sha256": "1df956e22b859ff474dd3202da813c0abaf71f91e6903a545a9b8ee5555a66ae"
+    },
+    {
+      "path": "assets/r1119/well-orb.webp",
+      "bytes": 66246,
+      "sha256": "f4db20a425563003ac73210f9a3c20cc5c987fb5cf3497477203a038a1e24507"
+    },
+    {
       "path": "assets/r116/mobs/M001-hit.png",
       "bytes": 141513,
       "sha256": "35cffa3fe6d6c22cdb75e06e1cca55a673f06c10afa28087d749082c40c77b71"
@@ -54099,8 +54209,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6581108,
-      "sha256": "033cacf0e2c87dc6cb9802790456cc65e34aa78db76b0e90a9fcd8862ee2784c"
+      "bytes": 6581160,
+      "sha256": "d39197930fac875a698d522553f523549661fa69e1b2c57dda4ad39de68256de"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -54629,8 +54739,8 @@
     },
     {
       "path": "persona-gravity-r1096.js",
-      "bytes": 24659,
-      "sha256": "61966ffc4b79b8d834da26b8cd425461c2583301ba8b25dbddad6c2e0d5654d1"
+      "bytes": 24996,
+      "sha256": "b2e8691f23c3970b7f9a53019010ab32f2c2e695674411474a2da9b104e5b7af"
     },
     {
       "path": "persona-hero-r1113.js",
@@ -54643,9 +54753,14 @@
       "sha256": "33433c510fad3ce19f63dd661a3f6cf381af8b26ddbc6594f886fc94f88aee45"
     },
     {
+      "path": "persona-skill-fx-r1119.js",
+      "bytes": 6825,
+      "sha256": "dcf9fab62d5287e6a0a109a184f9de75058c0e1fc9f5ebb5281bbab1abbcd9ba"
+    },
+    {
       "path": "persona-stride-r1104.js",
-      "bytes": 17166,
-      "sha256": "13d07255252b9bc48148b951a6c7863e6a96555ef1a57665941a55f6bbe3fe8e"
+      "bytes": 28489,
+      "sha256": "bb46655c39342dc84abf4961e53b7676ab3be59b3e999939a842a7c9a1172d7a"
     },
     {
       "path": "pixel-readable-r325.js",
@@ -55448,9 +55563,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11089,
-  "totalBytes": 1341781951,
-  "webHTMLSha256": "033cacf0e2c87dc6cb9802790456cc65e34aa78db76b0e90a9fcd8862ee2784c",
+  "fileCount": 11112,
+  "totalBytes": 1343877744,
+  "webHTMLSha256": "d39197930fac875a698d522553f523549661fa69e1b2c57dda4ad39de68256de",
   "largest": [
     {
       "path": "index.html",

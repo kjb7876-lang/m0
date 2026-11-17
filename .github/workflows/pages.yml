@@ -628,6 +628,8 @@ jobs:
         run: node r96/qa/r1104/persona-stride-cpu-check.cjs
       - name: R1104b persona boss walk sheets (Dots CX-0120PW front/rear/side 8 frames, cleaned seams, direction table, foot anchor, reverse when backing, ink bake) CPU check
         run: node r96/qa/r1104b/persona-walk-sheets-cpu-check.cjs
+      - name: R1119 persona boss Drive review art (awake walk uses base sheets + local orb/cape glow, directional hit 4 frames, cast orb glow, light-dissolve death, 6 skill projectile sheets, PM-2 well) CPU check
+        run: node r96/qa/r1119/persona-boss-r1119-cpu-check.cjs
       - name: R1113 persona hero unlock (beat the persona boss -> 9th hero card, lauren-based form with persona art, walk sheets, Eonju tint, save) CPU check
         run: node r96/qa/r1113/persona-hero-cpu-check.cjs
       - name: R1098 samong faces (Michaela final boss uses her own sheet, R161 puppet repainted as an ink-and-white-thread doll so it no longer looks like Hwando) CPU check

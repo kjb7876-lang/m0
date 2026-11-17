@@ -1,0 +1,155 @@
+{
+ "hit": [
+  "r1119:hit:base-front:0:ink",
+  "r1119:hit:base-front:0:ink",
+  "r1119:hit:base-front:1:ink",
+  "r1119:hit:base-front:2:ink",
+  "r1097:ink:base-1",
+  "r1097:ink:base-1",
+  "r1097:ink:base-1",
+  "r1097:ink:base-1",
+  "r1097:ink:base-1",
+  "r1097:ink:base-1",
+  "r1097:ink:base-1",
+  "r1097:ink:base-1"
+ ],
+ "cast": [
+  [
+   "r1119:glow:cast",
+   "lighter"
+  ]
+ ],
+ "fx": {
+  "diamond": [
+   "r1119:fx:diamond-flight"
+  ],
+  "clock": [
+   "r1119:fx:clock-flight",
+   "r1119:fx:diamond-flight"
+  ],
+  "star": [
+   "r1119:fx:star-flight",
+   "r1119:fx:diamond-flight",
+   "r1119:fx:clock-flight",
+   "r1119:fx:clock-contact"
+  ],
+  "lance": [
+   "r1119:fx:lance-flight",
+   "r1119:fx:clock-flight",
+   "r1119:fx:star-flight"
+  ],
+  "shield": [
+   "r1119:fx:shield-flight",
+   "r1119:fx:clock-flight",
+   "r1119:fx:lance-flight",
+   "r1119:fx:star-contact",
+   "r1119:fx:clock-contact"
+  ],
+  "vortex": [
+   "r1119:fx:vortex-flight",
+   "r1119:fx:shield-flight"
+  ]
+ },
+ "fxInspect": {
+  "revision": "R1119-persona-skill-fx-1",
+  "on": true,
+  "tracked": 8,
+  "contacts": 3,
+  "images": {
+   "assets/r1119/fx-clock-flight.webp": "ready",
+   "assets/r1119/fx-clock-contact.webp": "ready",
+   "assets/r1119/fx-diamond-flight.webp": "ready",
+   "assets/r1119/fx-diamond-contact.webp": "ready",
+   "assets/r1119/fx-star-flight.webp": "ready",
+   "assets/r1119/fx-star-contact.webp": "ready",
+   "assets/r1119/fx-lance-flight.webp": "ready",
+   "assets/r1119/fx-lance-contact.webp": "ready",
+   "assets/r1119/fx-shield-flight.webp": "ready",
+   "assets/r1119/fx-shield-contact.webp": "ready",
+   "assets/r1119/fx-vortex-flight.webp": "ready",
+   "assets/r1119/fx-vortex-contact.webp": "ready"
+  },
+  "stats": {
+   "frames": 383,
+   "swaps": 2388,
+   "contacts": 49,
+   "errors": 0
+  },
+  "lastError": null
+ },
+ "awakeWalk": [
+  [
+   "r1104b:walk:side:N:ink",
+   "source-over"
+  ],
+  [
+   "r1119:glow:cape",
+   "lighter"
+  ],
+  [
+   "r1119:glow:orb",
+   "lighter"
+  ],
+  [
+   "r1119:fx:shield-flight:3",
+   "source-over"
+  ],
+  [
+   "r1119:fx:vortex-flight:0",
+   "source-over"
+  ],
+  [
+   "r1119:fx:vortex-flight:0",
+   "source-over"
+  ],
+  [
+   "r1119:fx:vortex-flight:0",
+   "source-over"
+  ],
+  [
+   "r1119:fx:vortex-flight:0",
+   "source-over"
+  ],
+  [
+   "r1119:fx:vortex-flight:0",
+   "source-over"
+  ],
+  [
+   "r1119:fx:shield-contact:4",
+   "source-over"
+  ]
+ ],
+ "death": [
+  "r1119:death:awake:0:raw",
+  "r1119:death:awake:1:raw",
+  "r1119:death:awake:2:raw",
+  "r1119:death:awake:3:raw",
+  "r1119:death:awake:4:raw",
+  "r1119:death:awake:5:raw",
+  "r1119:death:awake:6:raw",
+  "r1119:death:awake:7:raw",
+  "r1119:death:awake:8:raw",
+  "r1119:death:awake:12:raw",
+  "r1119:death:awake:13:raw",
+  "r1119:death:awake:14:raw",
+  "r1119:death:awake:15:raw",
+  "-"
+ ],
+ "stride": {
+  "frames": 460,
+  "split": 0,
+  "steps": 17,
+  "errors": 0,
+  "sheets": 11,
+  "baked": 74,
+  "sheetFrames": 28,
+  "lastSheet": "side:2:ink",
+  "hits": 1,
+  "hitFrames": 8,
+  "casts": 11,
+  "glows": 67,
+  "deaths": 1,
+  "deathFrames": 17
+ },
+ "personaCompleted": false
+}
