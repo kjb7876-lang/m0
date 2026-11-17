@@ -4,6 +4,12 @@ const R=path.resolve(__dirname,'../..'),read=n=>fs.readFileSync(path.join(R,'cli
 let passed=0;function test(name,fn){fn();passed++;console.log('PASS '+name);}
 // Use the real legacy E568 hit router, not a reimplementation of its behaviour.
 const html=fs.readFileSync(path.join(R,'runtime-text/index.html'),'utf8');
+test('registered final overlays load once in the exact wrapper order',()=>{
+ const scripts=[...html.matchAll(/<script\s+src="\.\/([^"]+)"\s*><\/script>/g)].map(m=>m[1]);
+ const tail=['combat-r118.js','world-tiles-r118.js','refuge-walls-r713.js','cult-six-r1114.js','combat-ownership-r1124.js','survival-command-r1124.js'];
+ assert.deepEqual(scripts.slice(-tail.length),tail);
+ for(const name of tail)assert.equal(scripts.filter(s=>s===name).length,1,name);
+});
 const router=html.slice(html.indexOf('const e568HitEnemyBase=hitEnemy;'),html.indexOf('const e568AwakenBase=awaken;'));
 assert(router.includes('const heroId='));
 function hitFixture(patched=true){const heroes=['hwando','gunner','seoha','neon','lauren','michaela','hunter','slayer','persona'],s={console,time:4,player:{hero:'hwando',x:1,y:1},effects:[],e568HeroActionContext:null,
