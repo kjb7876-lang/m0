@@ -1,0 +1,215 @@
+{
+ "round": "R1125",
+ "request": "CX-0127MV·CX-0135",
+ "files": [
+  {
+   "dots": "week/m033pair/CX-0127MV_r1_m033_walk-down.png",
+   "enemies": [
+    "b09-c1",
+    "b09-h1",
+    "b09-o1",
+    "c104-e1",
+    "c104-e2",
+    "c106-e1",
+    "c106-e2",
+    "c106-e3",
+    "kair-guardian-25",
+    "kair-guardian-26",
+    "kair-guardian-27",
+    "kair-guardian-28",
+    "kair-guardian-43",
+    "kair-guardian-44",
+    "kair-guardian-46",
+    "u201-e1",
+    "u201-e2",
+    "u201-e3",
+    "u202-e1",
+    "u202-e2",
+    "u202-e3",
+    "u203-e1",
+    "u203-e2",
+    "u203-e3",
+    "u204-e1",
+    "u204-e2",
+    "u204-e3",
+    "u205-e1",
+    "u205-e2",
+    "u205-e3",
+    "u206-e1",
+    "u206-e2",
+    "u206-e3"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0127MV_r1_m033_walk-down.png",
+   "sourceSha256": "90612291aa3abb9fd2866472933cfd897de06a567162a213a91c4a2fd405259a",
+   "toneGain": [
+    0.971,
+    1.012,
+    1.019
+   ],
+   "path": "assets/r1125/move/m033-down.webp",
+   "size": [
+    1280,
+    320
+   ],
+   "bytes": 27256,
+   "sha256": "c3be6c7328d05d2fa30d4bd5748766906a13c56098574c7809411255c508e81b",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "week/m033pair/CX-0127MV_r1_m033_walk-up.png",
+   "enemies": [
+    "b09-c1",
+    "b09-h1",
+    "b09-o1",
+    "c104-e1",
+    "c104-e2",
+    "c106-e1",
+    "c106-e2",
+    "c106-e3",
+    "kair-guardian-25",
+    "kair-guardian-26",
+    "kair-guardian-27",
+    "kair-guardian-28",
+    "kair-guardian-43",
+    "kair-guardian-44",
+    "kair-guardian-46",
+    "u201-e1",
+    "u201-e2",
+    "u201-e3",
+    "u202-e1",
+    "u202-e2",
+    "u202-e3",
+    "u203-e1",
+    "u203-e2",
+    "u203-e3",
+    "u204-e1",
+    "u204-e2",
+    "u204-e3",
+    "u205-e1",
+    "u205-e2",
+    "u205-e3",
+    "u206-e1",
+    "u206-e2",
+    "u206-e3"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0127MV_r1_m033_walk-up.png",
+   "sourceSha256": "f8cd8f82691549d2618b0956814c053204b25c45c28fd00d8ae1489f9eee1e2f",
+   "toneGain": [
+    0.971,
+    1.012,
+    1.019
+   ],
+   "path": "assets/r1125/move/m033-up.webp",
+   "size": [
+    1280,
+    320
+   ],
+   "bytes": 26390,
+   "sha256": "8f58bd70dfc68ee1f95b0dbb701317f2f0b8c54a7386fbf38247ecbb657f8b72",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "cx0135/r4/cx0135-B4-u203e3/CX-0135_B4_u203-e3_down4_r1.png",
+   "enemies": [
+    "c103-e1",
+    "c103-e3",
+    "h103-c1",
+    "h103-s1",
+    "h103-t1",
+    "u203-e3"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0135_B4_u203-e3_down4_r1.png",
+   "sourceSha256": "564ccb9a0ab13aca03f5b6d0ebfa694b264863e9811cd18a8152531b8fc34651",
+   "toneGain": [
+    0.959,
+    0.977,
+    0.996
+   ],
+   "path": "assets/r1125/move/u203-e3-mech-down.webp",
+   "size": [
+    1024,
+    256
+   ],
+   "bytes": 33604,
+   "sha256": "c22ad60d813e528afaef559060fff15ac9454c238eb404d0815f2bea6dd6a6e3",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "cx0135/r4/cx0135-B4-u203e3-up/CX-0135_B4_u203-e3_up4_r1.png",
+   "enemies": [
+    "c103-e1",
+    "c103-e3",
+    "h103-c1",
+    "h103-s1",
+    "h103-t1",
+    "u203-e3"
+   ],
+   "dir": "up",
+   "source": "Dots CX-0135_B4_u203-e3_up4_r1.png",
+   "sourceSha256": "3442b1823a208a9b490c531c18f446075cf8690f481e26520cceed0c04875168",
+   "toneGain": [
+    0.959,
+    0.977,
+    0.996
+   ],
+   "path": "assets/r1125/move/u203-e3-mech-up.webp",
+   "size": [
+    1024,
+    256
+   ],
+   "bytes": 34714,
+   "sha256": "f7021386740a57b91f124f3253b0c21834dcd8f419f502c9f0c5e8f4209f98e5",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "cx0135/r4/cx0135-B7-fisher/CX-0135_B7_fisher_south4_r1.png",
+   "enemies": [
+    "l302-e3"
+   ],
+   "dir": "down",
+   "source": "Dots CX-0135_B7_fisher_south4_r1.png",
+   "sourceSha256": "bad07cb5cdb93b02c65d2f4e58d35f8bf6b7dc639494817c3189f96cb53d6664",
+   "toneGain": [
+    1.015,
+    1.012,
+    1.014
+   ],
+   "path": "assets/r1125/move/fisher-down.webp",
+   "size": [
+    1024,
+    256
+   ],
+   "bytes": 35422,
+   "sha256": "ac85fb353f884ca267e22de3bc79562fb0025bdedf712deb1a44230531c74dfe",
+   "use": "일반몹 위·아래 이동",
+   "applied": true
+  },
+  {
+   "dots": "CX-0135 B6 cult-mech-legs south4",
+   "applied": false,
+   "why": "Dots ROUTING 메모 \"검토 전용, 실제 접지 확인 전 자동 적용 금지\" + 사용자 결정 전"
+  },
+  {
+   "dots": "CX-0135 B7 fisher north(위)",
+   "applied": false,
+   "why": "Dots 시트 없음 → 위로 걸을 때 엔진 옆 그림 그대로"
+  },
+  {
+   "dots": "wrath-hound·swamp-root 위·아래",
+   "applied": false,
+   "why": "CX-0135 r5 는 피격 4칸(hit4)뿐, 위·아래 걷기 시트 없음"
+  },
+  {
+   "dots": "CX-0127MV u203-e3 위·아래 r1",
+   "applied": false,
+   "why": "Dots HOLD(걸음 높이·무기 손) → CX-0135 B4 로 대체"
+  }
+ ]
+}

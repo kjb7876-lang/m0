@@ -1,0 +1,27 @@
+{
+ "u201|u201-e1|태엽": {
+  "r410/mobs/m033.webp|256,0,256,320": 7,
+  "r410/mobs/m033.webp|256,320,256,320": 12,
+  "r410/mobs/m033.webp|512,320,256,320": 16,
+  "r410/mobs/m033.webp|768,320,256,320": 10,
+  "r410/mobs/m033.webp|0,0,256,320": 11,
+  "r410/mobs/m033.webp|512,0,256,320": 9,
+  "r410/mobs/m033.webp|768,0,256,320": 6,
+  "r410/mobs/m033.webp|0,320,256,320": 11,
+  "final42-r88/effects/251/atlas.png|0,0,320,320": 26
+ },
+ "hando03|h103-c1|공명기사": {
+  "r374/mobs/u203-e3-mech.webp|256,0,256,256": 44,
+  "r374/mobs/u203-e3-mech.webp|0,0,256,256": 31,
+  "r374/mobs/u203-e3-mech.webp|1280,0,256,256": 2,
+  "final42-r88/effects/251/atlas.png|0,0,320,320": 30
+ },
+ "last302|l302-e3|어부": {
+  "r763/villagers/fisher-idle.webp|768,0,256,256": 18,
+  "r763/villagers/fisher-idle.webp|1024,0,256,256": 20,
+  "r763/villagers/fisher-idle.webp|1280,0,256,256": 20,
+  "r763/villagers/fisher-idle.webp|0,0,256,256": 19,
+  "r763/villagers/fisher-idle.webp|256,0,256,256": 18,
+  "r763/villagers/fisher-idle.webp|512,0,256,256": 17
+ }
+}

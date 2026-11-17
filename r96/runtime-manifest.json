@@ -11083,6 +11083,31 @@
       "sha256": "f4db20a425563003ac73210f9a3c20cc5c987fb5cf3497477203a038a1e24507"
     },
     {
+      "path": "assets/r1125/move/fisher-down.webp",
+      "bytes": 35422,
+      "sha256": "ac85fb353f884ca267e22de3bc79562fb0025bdedf712deb1a44230531c74dfe"
+    },
+    {
+      "path": "assets/r1125/move/m033-down.webp",
+      "bytes": 27256,
+      "sha256": "c3be6c7328d05d2fa30d4bd5748766906a13c56098574c7809411255c508e81b"
+    },
+    {
+      "path": "assets/r1125/move/m033-up.webp",
+      "bytes": 26390,
+      "sha256": "8f58bd70dfc68ee1f95b0dbb701317f2f0b8c54a7386fbf38247ecbb657f8b72"
+    },
+    {
+      "path": "assets/r1125/move/u203-e3-mech-down.webp",
+      "bytes": 33604,
+      "sha256": "c22ad60d813e528afaef559060fff15ac9454c238eb404d0815f2bea6dd6a6e3"
+    },
+    {
+      "path": "assets/r1125/move/u203-e3-mech-up.webp",
+      "bytes": 34714,
+      "sha256": "f7021386740a57b91f124f3253b0c21834dcd8f419f502c9f0c5e8f4209f98e5"
+    },
+    {
       "path": "assets/r116/mobs/M001-hit.png",
       "bytes": 141513,
       "sha256": "35cffa3fe6d6c22cdb75e06e1cca55a673f06c10afa28087d749082c40c77b71"
@@ -54289,8 +54314,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6581264,
-      "sha256": "169b04465eedf6594e7d2c70fc0bca5ed3dd5c26239acf4fe501790444d5a993"
+      "bytes": 6581313,
+      "sha256": "f502a4baac7668b43886fac546238296071b389dd171b5147b935a5fb9a61d30"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -54653,14 +54678,19 @@
       "sha256": "79a06fc813ac0017034c63638e4984a1e27b90fdd3a46e1924057a07d6cb5bc5"
     },
     {
+      "path": "move-dir-r1125-data.js",
+      "bytes": 44370,
+      "sha256": "494d60fa266c022a62a839e724d4d8dde3590ac67c707c6a912fa9efe080fd3e"
+    },
+    {
       "path": "move-dir-r974-data.js",
       "bytes": 12620,
       "sha256": "1964909c541f39cb91539077081f36fd091fa0846b9cb15820bf1f5a2c0ce999"
     },
     {
       "path": "move-dir-r974.js",
-      "bytes": 11579,
-      "sha256": "11bdc17a03b6b2674fedbc64c51634b7c3ed5279d47bd56cb1ff6f782cc98bee"
+      "bytes": 12037,
+      "sha256": "aae7b01b588e4814c8d80b74b1cd9775aa935bd93500da81df7705acfb198cce"
     },
     {
       "path": "move-float-r1029-data.js",
@@ -55648,9 +55678,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11129,
-  "totalBytes": 1344725115,
-  "webHTMLSha256": "169b04465eedf6594e7d2c70fc0bca5ed3dd5c26239acf4fe501790444d5a993",
+  "fileCount": 11135,
+  "totalBytes": 1344927378,
+  "webHTMLSha256": "f502a4baac7668b43886fac546238296071b389dd171b5147b935a5fb9a61d30",
   "largest": [
     {
       "path": "index.html",

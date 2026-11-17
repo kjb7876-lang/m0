@@ -609,6 +609,8 @@ jobs:
         run: node r96/qa/r1024/mob-move-cpu-check.cjs
       - name: R1029 float movement for mobs and bosses that slide on one image (wing flap, ghost hem, dark flame mist; looked up by art, direction sheets win) CPU check
         run: node r96/qa/r1029/move-float-cpu-check.cjs
+      - name: R1125 regular-mob up/down walk sheets (Dots CX-0127MV m033, CX-0135 B4 resonance knight, B7 fisher down; same id with other art attached as alt) CPU check
+        run: node r96/qa/r1125/mob-move-cpu-check.cjs
       - name: R996 bulmyeongwi fog summon still fires in the boss phase after every field mob is gone CPU check
         run: node r96/qa/r996/r996-cpu-check.cjs
       - name: R1008 cinema mode finishes (hero stands up instead of the sanctuary trip, ending windows move on 20 s after the subtitles, normal records unchanged) CPU check

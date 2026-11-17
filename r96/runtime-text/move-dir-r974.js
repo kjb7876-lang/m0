@@ -38,9 +38,11 @@ function track(e,s){const t=T(),dt=s.lastT<0?0:Math.max(0,Math.min(.1,t-s.lastT)
  s.wx=e.x;s.wy=e.y;}
 const busy=e=>!!e.attack||e.state==='attack'||e.state==='cast'||e.state==='windup'||e.hitTimer>0||e.stunned>0||e.frozen>0;
 function setImg(c,im,path,w,h){c.image=im;c.sourcePath=path;const iw=im.naturalWidth||im.width||w,ih=im.naturalHeight||im.height||h;c.imageSize=[iw,ih];}
-function swap(e,D,cmds,st0){stats.draws++;const s=stOf(e);track(e,s);if(busy(e)||!(s.move>.5)){last={id:e.nativeId,why:busy(e)?'busy':'still'};return;}
- const S=D.dirs[s.dir];if(!S){last={id:e.nativeId,why:'no-'+s.dir};return;}
- const c=bodyCmd(cmds,st0);if(!c)return;const I=idleOf(D,c);if(!I){stats.otherArt++;last={id:e.nativeId,why:'other-art',src:srcOf(c).split('/').pop()};return;}
+// R1125: 같은 번호가 지역·이름에 따라 다른 그림으로 나오면 표 항목에 alt(다른 그림의 항목)가 붙는다 → 지금 그린 대기 그림에 맞는 항목을 고른다(본 항목 먼저).
+function pick(D,c){const I=idleOf(D,c);if(I)return [D,I];if(Array.isArray(D.alt))for(const A of D.alt){const J=A&&A.idle?idleOf(A,c):null;if(J)return [A,J];}return null;}
+function swap(e,D0,cmds,st0){stats.draws++;const s=stOf(e);track(e,s);if(busy(e)||!(s.move>.5)){last={id:e.nativeId,why:busy(e)?'busy':'still'};return;}
+ const c=bodyCmd(cmds,st0);if(!c)return;const m=pick(D0,c);if(!m){stats.otherArt++;last={id:e.nativeId,why:'other-art',src:srcOf(c).split('/').pop()};return;}
+ const [D,I]=m,S=D.dirs[s.dir];if(!S){last={id:e.nativeId,why:'no-'+s.dir};return;}
  const im=img(S.path);if(!im){stats.waiting++;last={id:e.nativeId,why:'loading'};return;}
  // 엔진이 그린 대기 그림의 화면 사각형 → 보이는 키·발 줄·가운데
  const P=c.points,W=P[1][0]-P[0][0],top=Math.min(P[0][1],P[3][1]),H=Hq(c),rw=I.rect[2],rh=I.rect[3],B=I.bbox;
@@ -72,7 +74,7 @@ const asked=new WeakSet();
 let mine=null,wraps=0,depth=0;
 function wrap(){if(typeof drawEnemy!=='function'||drawEnemy===mine||wraps>=6)return !!mine;const base=drawEnemy;
  const w=function(e,...a){const D=prefs.on?entry(e):null,F=fprefs.on?fIndex():null;if(!D&&!F)return base.call(this,e,...a);
-  if(D&&!asked.has(e)){asked.add(e);for(const k of Object.keys(D.dirs))img(D.dirs[k].path);}
+  if(D&&!asked.has(e)){asked.add(e);for(const V of [D,...(Array.isArray(D.alt)?D.alt:[])])for(const k of Object.keys(V?.dirs||{}))img(V.dirs[k].path);}
   const cm=(typeof ctx!=='undefined'&&Array.isArray(ctx?.commands))?ctx.commands:null,st0=cm?cm.length:-1;depth++;let r;try{r=base.call(this,e,...a);}finally{depth--;}
   if(depth===0){if(cm&&st0>=0)try{if(D)swap(e,D,cm,st0);if(F)floatSwap(e,cm,st0);}catch(err){fail(err);}try{if(drawEnemy!==mine)wrap();}catch(err){fail(err);}}return r;};
  for(const k of Object.keys(base))try{w[k]=base[k];}catch(_){}w.__r974=true;try{drawEnemy=w;}catch(_){return !!mine;}mine=w;wraps++;return true;}
