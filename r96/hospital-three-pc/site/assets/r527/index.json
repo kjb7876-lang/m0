@@ -1,0 +1,86 @@
+{
+ "round": "R527",
+ "note": "넷째 묶음(관리자 권한·중앙 코어 이주실·사몽의 문턱) 방 꾸미기용. 기존 게임 그림의 바닥 각도만 바로잡은 사본이며 새로 그린 그림이 아니다. 원본 r80 그림은 그대로 두고 다른 곳에서 계속 쓴다. 한 방향 그림이라 반대쪽 벽에서는 좌우 거울로 쓴다.",
+ "reused": [
+  "assets/world-r80/r80-001.webp",
+  "assets/world-r80/r80-054.webp",
+  "assets/world-r80/r80-058.webp",
+  "assets/world-r80/r80-061.webp",
+  "assets/world-r80/r80-065.webp",
+  "assets/world-r80/r80-151.webp",
+  "assets/r406/props/server-cooler.webp"
+ ],
+ "notUsed": [
+  {
+   "name": "assets/world-r80/r80-062.webp(팔각 관)",
+   "why": "바닥 모서리가 한 선으로 재어지지 않아 바로잡으면 그림이 뭉개짐"
+  }
+ ],
+ "files": [
+  {
+   "file": "assets/r527/body-rig.webp",
+   "bytes": 20056,
+   "sha256": "ebbb50100bff8c60b9a505bbfaae3ced9357291491dd00871ebf702e2b4e2602",
+   "size": [
+    256,
+    212
+   ],
+   "source": "기존 게임 그림 assets/world-r80/r80-002.webp -> 바닥 모서리를 2:1 로 바로잡음(tools/shear.py, 세로줄 그대로, 늘이기 c=0.857·밀기 k=0.048), 여백 잘라 내고 크기 줄임",
+   "kind": "기계 육체 거치대(한 방향 그림)",
+   "use": "중앙 코어 이주실 기계 육체실, 닫힌 구획",
+   "applied": true
+  },
+  {
+   "file": "assets/r527/gothic-tank.webp",
+   "bytes": 24394,
+   "sha256": "797ccec65df48d913a6135379a771d491cc2674ff091716dab74e6cb6c70b80a",
+   "size": [
+    256,
+    231
+   ],
+   "source": "기존 게임 그림 assets/world-r80/r80-075.webp -> 바닥 모서리를 2:1 로 바로잡음(tools/shear.py, 세로줄 그대로, 늘이기 c=0.881·밀기 k=0.147), 여백 잘라 내고 크기 줄임",
+   "kind": "고딕 기계 수조(한 방향 그림)",
+   "use": "기억의 방·중앙 이주실·수확실",
+   "applied": true
+  },
+  {
+   "file": "assets/r527/lantern-steps.webp",
+   "bytes": 22920,
+   "sha256": "8f7907e54966ff1909913736f8fa264dd05cff0884db7f22b739e37617985e41",
+   "size": [
+    223,
+    256
+   ],
+   "source": "기존 게임 그림 assets/world-r80/r80-064.webp -> 바닥 모서리를 2:1 로 바로잡음(tools/shear.py, 세로줄 그대로, 늘이기 c=1.016·밀기 k=-0.110), 여백 잘라 내고 크기 줄임",
+   "kind": "등불 계단(한 방향 그림)",
+   "use": "사몽의 문턱 수확실·방벽 구획·코어 전실·입구",
+   "applied": true
+  },
+  {
+   "file": "assets/r527/pod.webp",
+   "bytes": 22226,
+   "sha256": "fb1edcf8b85a07ec9b2034f961de55eeb68a935e863e99f6696df20684f54414",
+   "size": [
+    256,
+    162
+   ],
+   "source": "기존 게임 그림 assets/world-r80/r80-152.webp -> 바닥 모서리를 2:1 로 바로잡음(tools/shear.py, 세로줄 그대로, 늘이기 c=0.873·밀기 k=-0.064), 여백 잘라 내고 크기 줄임",
+   "kind": "캡슐(한 방향 그림)",
+   "use": "기억의 방·중앙 이주실·보호 구획",
+   "applied": true
+  },
+  {
+   "file": "assets/r527/stone-barrier.webp",
+   "bytes": 26038,
+   "sha256": "882a0c56068ce15b4f70436caad2370e63aaf5e8e0f2769414aeeb047edf8d0e",
+   "size": [
+    240,
+    256
+   ],
+   "source": "기존 게임 그림 assets/world-r80/r80-069.webp -> 바닥 모서리를 2:1 로 바로잡음(tools/shear.py, 세로줄 그대로, 늘이기 c=0.953·밀기 k=0.095), 여백 잘라 내고 크기 줄임",
+   "kind": "돌 방벽(한 방향 그림)",
+   "use": "사몽의 문턱 방벽 구획",
+   "applied": true
+  }
+ ]
+}

@@ -1,0 +1,284 @@
+{
+  "status": "PASS",
+  "verification": "Node CPU tests only; no browser visual verification",
+  "version": "1.0.0",
+  "motifCount": 16,
+  "originalSpriteCases": 64,
+  "catalogEffectsTested": 80,
+  "sampledFrames": 17881,
+  "primitiveLimit": 96,
+  "observedMaximum": 67,
+  "canvas2DCallsValidated": 56626,
+  "unchangedSpriteDraws": 2,
+  "checks": [
+    "finite primitives",
+    "deterministic replay",
+    "different seeds",
+    "duration boundaries",
+    "negative/nonfinite time",
+    "all 16 distinct motifs",
+    "all 4 roles",
+    "source preservation",
+    "layer filtering",
+    "CommonJS export",
+    "global export",
+    "balanced Canvas2D state",
+    "aspect-preserving original sprites",
+    "real catalog coverage",
+    "stationary wall deployment/hold",
+    "regenerative inward stitching"
+  ],
+  "runtimeSha256": "93a4cb033521323b780edf4a94a96fd73b924b6bf97001101664ff9e8be22f7f",
+  "motifs": [
+    {
+      "motif": "gold-thread",
+      "peakPrimitives": 67,
+      "types": [
+        "arc",
+        "line",
+        "particle",
+        "ring"
+      ],
+      "layers": [
+        "contact",
+        "fade",
+        "spawn",
+        "travel"
+      ]
+    },
+    {
+      "motif": "silver-thread",
+      "peakPrimitives": 67,
+      "types": [
+        "arc",
+        "line",
+        "particle",
+        "ring"
+      ],
+      "layers": [
+        "contact",
+        "fade",
+        "spawn",
+        "travel"
+      ]
+    },
+    {
+      "motif": "scalpel",
+      "peakPrimitives": 37,
+      "types": [
+        "arc",
+        "line",
+        "particle",
+        "ring"
+      ],
+      "layers": [
+        "contact",
+        "fade",
+        "spawn",
+        "travel"
+      ]
+    },
+    {
+      "motif": "poison-syringe",
+      "peakPrimitives": 39,
+      "types": [
+        "line",
+        "particle",
+        "ring"
+      ],
+      "layers": [
+        "contact",
+        "fade",
+        "spawn",
+        "travel"
+      ]
+    },
+    {
+      "motif": "poison",
+      "peakPrimitives": 37,
+      "types": [
+        "line",
+        "particle",
+        "ring"
+      ],
+      "layers": [
+        "contact",
+        "fade",
+        "spawn",
+        "travel"
+      ]
+    },
+    {
+      "motif": "bleed",
+      "peakPrimitives": 37,
+      "types": [
+        "arc",
+        "line",
+        "particle",
+        "ring"
+      ],
+      "layers": [
+        "contact",
+        "fade",
+        "spawn",
+        "travel"
+      ]
+    },
+    {
+      "motif": "shock",
+      "peakPrimitives": 44,
+      "types": [
+        "line",
+        "particle",
+        "ring"
+      ],
+      "layers": [
+        "contact",
+        "fade",
+        "spawn",
+        "travel"
+      ]
+    },
+    {
+      "motif": "freeze",
+      "peakPrimitives": 51,
+      "types": [
+        "line",
+        "particle",
+        "ring"
+      ],
+      "layers": [
+        "contact",
+        "fade",
+        "spawn",
+        "travel"
+      ]
+    },
+    {
+      "motif": "burn",
+      "peakPrimitives": 35,
+      "types": [
+        "arc",
+        "line",
+        "particle",
+        "ring"
+      ],
+      "layers": [
+        "contact",
+        "fade",
+        "spawn",
+        "travel"
+      ]
+    },
+    {
+      "motif": "charm",
+      "peakPrimitives": 37,
+      "types": [
+        "arc",
+        "line",
+        "particle",
+        "ring"
+      ],
+      "layers": [
+        "contact",
+        "fade",
+        "spawn",
+        "travel"
+      ]
+    },
+    {
+      "motif": "weakness",
+      "peakPrimitives": 41,
+      "types": [
+        "line",
+        "particle",
+        "ring"
+      ],
+      "layers": [
+        "contact",
+        "fade",
+        "spawn",
+        "travel"
+      ]
+    },
+    {
+      "motif": "corruption",
+      "peakPrimitives": 42,
+      "types": [
+        "arc",
+        "line",
+        "particle",
+        "ring"
+      ],
+      "layers": [
+        "contact",
+        "fade",
+        "spawn",
+        "travel"
+      ]
+    },
+    {
+      "motif": "binding",
+      "peakPrimitives": 40,
+      "types": [
+        "arc",
+        "line",
+        "particle",
+        "ring"
+      ],
+      "layers": [
+        "contact",
+        "fade",
+        "spawn",
+        "travel"
+      ]
+    },
+    {
+      "motif": "harvest",
+      "peakPrimitives": 35,
+      "types": [
+        "arc",
+        "line",
+        "particle",
+        "ring"
+      ],
+      "layers": [
+        "contact",
+        "fade",
+        "spawn",
+        "travel"
+      ]
+    },
+    {
+      "motif": "disease",
+      "peakPrimitives": 48,
+      "types": [
+        "line",
+        "particle",
+        "ring"
+      ],
+      "layers": [
+        "contact",
+        "fade",
+        "spawn",
+        "travel"
+      ]
+    },
+    {
+      "motif": "portal",
+      "peakPrimitives": 39,
+      "types": [
+        "arc",
+        "line",
+        "particle",
+        "ring"
+      ],
+      "layers": [
+        "contact",
+        "fade",
+        "spawn",
+        "travel"
+      ]
+    }
+  ]
+}

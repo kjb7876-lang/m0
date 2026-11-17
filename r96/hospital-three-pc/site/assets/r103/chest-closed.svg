@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="176" viewBox="0 0 200 176">
+<defs>
+<linearGradient id="w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a4a2a"/><stop offset=".55" stop-color="#5a341d"/><stop offset="1" stop-color="#3a2112"/></linearGradient>
+<linearGradient id="l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8d5732"/><stop offset="1" stop-color="#5e371f"/></linearGradient>
+<linearGradient id="s" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3c2414"/><stop offset="1" stop-color="#2a180c"/></linearGradient>
+<linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0b0"/><stop offset=".35" stop-color="#e2b54c"/><stop offset="1" stop-color="#8a6420"/></linearGradient>
+</defs>
+<!-- side face -->
+<path d="M150 78 L176 64 L176 140 L150 160 Z" fill="url(#s)"/>
+<path d="M150 78 Q163 36 176 64" fill="#4a2b17"/>
+<!-- front body -->
+<rect x="22" y="78" width="128" height="82" rx="4" fill="url(#w)"/>
+<g stroke="#2b170b" stroke-width="2" opacity=".55"><line x1="22" y1="104" x2="150" y2="104"/><line x1="22" y1="130" x2="150" y2="130"/></g>
+<!-- lid -->
+<path d="M18 80 Q18 28 86 26 Q154 28 154 80 Z" fill="url(#l)"/>
+<path d="M154 80 Q154 30 92 26 L118 14 Q178 18 180 66 Z" fill="#4e2e19"/>
+<g stroke="#3a2112" stroke-width="2" opacity=".5" fill="none"><path d="M22 64 Q86 52 150 64"/><path d="M30 46 Q86 34 142 46"/></g>
+<!-- gold bands -->
+<g fill="url(#g)" stroke="#5a3c10" stroke-width="1.5">
+<path d="M14 76 L158 76 L158 86 L14 86 Z"/>
+<path d="M40 30 Q38 50 38 78 L52 78 Q52 48 54 27 Z"/>
+<path d="M118 27 Q120 48 120 78 L134 78 Q134 50 132 30 Z"/>
+<rect x="38" y="86" width="14" height="74"/>
+<rect x="120" y="86" width="14" height="74"/>
+<rect x="18" y="152" width="136" height="9" rx="2"/>
+<path d="M150 80 L178 66 L178 74 L150 88 Z"/>
+<path d="M150 152 L178 132 L178 140 L150 161 Z"/>
+</g>
+<!-- lock -->
+<rect x="72" y="72" width="28" height="36" rx="5" fill="url(#g)" stroke="#5a3c10" stroke-width="2"/>
+<circle cx="86" cy="86" r="5" fill="#2a1a08"/><path d="M83 89 L89 89 L87 100 L85 100 Z" fill="#2a1a08"/>
+<!-- studs -->
+<g fill="#ffe9a0" stroke="#6a4a14" stroke-width="1"><circle cx="45" cy="96" r="2.6"/><circle cx="45" cy="122" r="2.6"/><circle cx="45" cy="146" r="2.6"/><circle cx="127" cy="96" r="2.6"/><circle cx="127" cy="122" r="2.6"/><circle cx="127" cy="146" r="2.6"/></g>
+<!-- rim light -->
+<path d="M24 62 Q30 34 80 30" stroke="#ffd79a" stroke-width="3" fill="none" opacity=".45"/>
+</svg>

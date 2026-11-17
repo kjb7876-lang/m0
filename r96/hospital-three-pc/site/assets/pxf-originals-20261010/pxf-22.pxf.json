@@ -1,0 +1,1328 @@
+{
+  "name": "네크로맨서 · 강령 의식",
+  "settings": {
+    "size": 64,
+    "frames": 20,
+    "fps": 20,
+    "loop": false
+  },
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "Shape",
+      "params": {
+        "shape": "circle",
+        "x": 0.5,
+        "y": 0.79,
+        "size": 23,
+        "size2": 0.4,
+        "points": 5,
+        "rot": 0,
+        "aspect": 0.24,
+        "stroke": 0,
+        "falloff": 1,
+        "intensity": {
+          "k": [
+            [
+              0,
+              0,
+              "smooth"
+            ],
+            [
+              3,
+              0.48,
+              "smooth"
+            ],
+            [
+              10,
+              0.32,
+              "smooth"
+            ],
+            [
+              19,
+              0,
+              "smooth"
+            ]
+          ]
+        }
+      },
+      "x": 40,
+      "y": 40
+    },
+    {
+      "id": "n2",
+      "type": "Palette",
+      "params": {
+        "colors": [
+          "#361958",
+          "#7545c7",
+          "#ad83ef",
+          "#d9c6ff",
+          "#f9efff"
+        ],
+        "cutoff": 0.008,
+        "shift": 0,
+        "mode": "smooth",
+        "key": "alpha",
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 40
+    },
+    {
+      "id": "n3",
+      "type": "Mask",
+      "params": {
+        "mode": "multiply",
+        "strength": 1
+      },
+      "x": 460,
+      "y": 40
+    },
+    {
+      "id": "n4",
+      "type": "Shape",
+      "params": {
+        "shape": "ring",
+        "x": 0.5,
+        "y": 0.77,
+        "size": {
+          "k": [
+            [
+              0,
+              4,
+              "smooth"
+            ],
+            [
+              3,
+              20,
+              "smooth"
+            ],
+            [
+              13,
+              22,
+              "smooth"
+            ],
+            [
+              19,
+              24,
+              "smooth"
+            ]
+          ]
+        },
+        "size2": 0.045,
+        "points": 5,
+        "rot": 0,
+        "aspect": 0.25,
+        "stroke": 0,
+        "falloff": 0,
+        "intensity": 0.6
+      },
+      "x": 40,
+      "y": 190
+    },
+    {
+      "id": "n5",
+      "type": "Arc",
+      "params": {
+        "x": 0.5,
+        "y": 0.77,
+        "radius": 17,
+        "thick": 1,
+        "start": {
+          "k": [
+            [
+              0,
+              0,
+              "smooth"
+            ],
+            [
+              19,
+              95,
+              "smooth"
+            ]
+          ]
+        },
+        "sweep": 78,
+        "head": 1,
+        "tail": 0.6,
+        "taper": 0.2,
+        "aspect": 0.25,
+        "rot": 0,
+        "intensity": 0.9
+      },
+      "x": 40,
+      "y": 340
+    },
+    {
+      "id": "n6",
+      "type": "Arc",
+      "params": {
+        "x": 0.5,
+        "y": 0.77,
+        "radius": 17,
+        "thick": 1,
+        "start": {
+          "k": [
+            [
+              0,
+              120,
+              "smooth"
+            ],
+            [
+              19,
+              215,
+              "smooth"
+            ]
+          ]
+        },
+        "sweep": 78,
+        "head": 1,
+        "tail": 0.6,
+        "taper": 0.2,
+        "aspect": 0.25,
+        "rot": 0,
+        "intensity": 0.9
+      },
+      "x": 40,
+      "y": 490
+    },
+    {
+      "id": "n7",
+      "type": "Arc",
+      "params": {
+        "x": 0.5,
+        "y": 0.77,
+        "radius": 17,
+        "thick": 1,
+        "start": {
+          "k": [
+            [
+              0,
+              240,
+              "smooth"
+            ],
+            [
+              19,
+              335,
+              "smooth"
+            ]
+          ]
+        },
+        "sweep": 78,
+        "head": 1,
+        "tail": 0.6,
+        "taper": 0.2,
+        "aspect": 0.25,
+        "rot": 0,
+        "intensity": 0.9
+      },
+      "x": 40,
+      "y": 640
+    },
+    {
+      "id": "n8",
+      "type": "Shape",
+      "params": {
+        "shape": "polygon",
+        "x": 0.5,
+        "y": 0.77,
+        "size": 13,
+        "size2": 0.4,
+        "points": 3,
+        "rot": 180,
+        "aspect": 0.25,
+        "stroke": 0.65,
+        "falloff": 0,
+        "intensity": 0.48
+      },
+      "x": 40,
+      "y": 790
+    },
+    {
+      "id": "n9",
+      "type": "Shape",
+      "params": {
+        "shape": "diamond",
+        "x": 0.78,
+        "y": 0.77,
+        "size": 1.5,
+        "size2": 0.4,
+        "points": 5,
+        "rot": 0,
+        "aspect": 1.35,
+        "stroke": 0,
+        "falloff": 0,
+        "intensity": 0.9
+      },
+      "x": 40,
+      "y": 940
+    },
+    {
+      "id": "n10",
+      "type": "Shape",
+      "params": {
+        "shape": "diamond",
+        "x": 0.64,
+        "y": 0.8306217782649107,
+        "size": 1.5,
+        "size2": 0.4,
+        "points": 5,
+        "rot": 60,
+        "aspect": 1.35,
+        "stroke": 0,
+        "falloff": 0,
+        "intensity": 0.9
+      },
+      "x": 40,
+      "y": 1090
+    },
+    {
+      "id": "n11",
+      "type": "Shape",
+      "params": {
+        "shape": "diamond",
+        "x": 0.36000000000000004,
+        "y": 0.8306217782649107,
+        "size": 1.5,
+        "size2": 0.4,
+        "points": 5,
+        "rot": 120,
+        "aspect": 1.35,
+        "stroke": 0,
+        "falloff": 0,
+        "intensity": 0.9
+      },
+      "x": 40,
+      "y": 1240
+    },
+    {
+      "id": "n12",
+      "type": "Shape",
+      "params": {
+        "shape": "diamond",
+        "x": 0.21999999999999997,
+        "y": 0.77,
+        "size": 1.5,
+        "size2": 0.4,
+        "points": 5,
+        "rot": 180,
+        "aspect": 1.35,
+        "stroke": 0,
+        "falloff": 0,
+        "intensity": 0.9
+      },
+      "x": 40,
+      "y": 1390
+    },
+    {
+      "id": "n13",
+      "type": "Shape",
+      "params": {
+        "shape": "diamond",
+        "x": 0.3599999999999999,
+        "y": 0.7093782217350894,
+        "size": 1.5,
+        "size2": 0.4,
+        "points": 5,
+        "rot": 240,
+        "aspect": 1.35,
+        "stroke": 0,
+        "falloff": 0,
+        "intensity": 0.9
+      },
+      "x": 40,
+      "y": 1540
+    },
+    {
+      "id": "n14",
+      "type": "Shape",
+      "params": {
+        "shape": "diamond",
+        "x": 0.64,
+        "y": 0.7093782217350894,
+        "size": 1.5,
+        "size2": 0.4,
+        "points": 5,
+        "rot": 300,
+        "aspect": 1.35,
+        "stroke": 0,
+        "falloff": 0,
+        "intensity": 0.9
+      },
+      "x": 40,
+      "y": 1690
+    },
+    {
+      "id": "n15",
+      "type": "Blend",
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 190
+    },
+    {
+      "id": "n16",
+      "type": "Blend",
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      },
+      "x": 460,
+      "y": 190
+    },
+    {
+      "id": "n17",
+      "type": "Blend",
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      },
+      "x": 670,
+      "y": 40
+    },
+    {
+      "id": "n18",
+      "type": "Blend",
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      },
+      "x": 880,
+      "y": 40
+    },
+    {
+      "id": "n19",
+      "type": "Blend",
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      },
+      "x": 1090,
+      "y": 40
+    },
+    {
+      "id": "n20",
+      "type": "Blend",
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      },
+      "x": 1300,
+      "y": 40
+    },
+    {
+      "id": "n21",
+      "type": "Blend",
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      },
+      "x": 1510,
+      "y": 40
+    },
+    {
+      "id": "n22",
+      "type": "Blend",
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      },
+      "x": 1720,
+      "y": 40
+    },
+    {
+      "id": "n23",
+      "type": "Blend",
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      },
+      "x": 1930,
+      "y": 40
+    },
+    {
+      "id": "n24",
+      "type": "Blend",
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      },
+      "x": 2140,
+      "y": 40
+    },
+    {
+      "id": "n25",
+      "type": "Palette",
+      "params": {
+        "colors": [
+          "#361958",
+          "#7545c7",
+          "#ad83ef",
+          "#d9c6ff",
+          "#f9efff"
+        ],
+        "cutoff": 0.008,
+        "shift": 0,
+        "mode": "smooth",
+        "key": "alpha",
+        "opacity": 1
+      },
+      "x": 2350,
+      "y": 40
+    },
+    {
+      "id": "n26",
+      "type": "Mask",
+      "params": {
+        "mode": "multiply",
+        "strength": 1
+      },
+      "x": 2560,
+      "y": 40
+    },
+    {
+      "id": "n27",
+      "type": "Glow",
+      "params": {
+        "radius": 2,
+        "strength": 1.1
+      },
+      "x": 2770,
+      "y": 40
+    },
+    {
+      "id": "n28",
+      "type": "Stroke",
+      "params": {
+        "x0": 0.26,
+        "y0": 0.77,
+        "x1": 0.66,
+        "y1": 0.64,
+        "x2": {
+          "k": [
+            [
+              0,
+              0.4,
+              "smooth"
+            ],
+            [
+              10,
+              0.18,
+              "smooth"
+            ],
+            [
+              19,
+              0.4,
+              "smooth"
+            ]
+          ]
+        },
+        "y2": 0.43,
+        "x3": 0.46499999999999997,
+        "y3": 0.44,
+        "width": 2.5,
+        "taper": 1,
+        "from": {
+          "k": [
+            [
+              0,
+              0,
+              "smooth"
+            ],
+            [
+              10,
+              0,
+              "smooth"
+            ],
+            [
+              19,
+              1,
+              "smooth"
+            ]
+          ]
+        },
+        "to": {
+          "k": [
+            [
+              0,
+              0.08,
+              "smooth"
+            ],
+            [
+              5,
+              0.62,
+              "smooth"
+            ],
+            [
+              10,
+              1,
+              "smooth"
+            ],
+            [
+              19,
+              1,
+              "smooth"
+            ]
+          ]
+        },
+        "span": true,
+        "vA": 0.15,
+        "vM": 0.76,
+        "vB": 0.1,
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 1840
+    },
+    {
+      "id": "n29",
+      "type": "Stroke",
+      "params": {
+        "x0": 0.35,
+        "y0": 0.78,
+        "x1": 0.2,
+        "y1": 0.55,
+        "x2": 0.56,
+        "y2": 0.43,
+        "x3": 0.38,
+        "y3": 0.35,
+        "width": 1.05,
+        "taper": 1,
+        "from": {
+          "k": [
+            [
+              0,
+              0,
+              "smooth"
+            ],
+            [
+              11,
+              0,
+              "smooth"
+            ],
+            [
+              19,
+              1,
+              "smooth"
+            ]
+          ]
+        },
+        "to": {
+          "k": [
+            [
+              0,
+              0,
+              "smooth"
+            ],
+            [
+              6,
+              0.7,
+              "smooth"
+            ],
+            [
+              10,
+              1,
+              "smooth"
+            ],
+            [
+              19,
+              1,
+              "smooth"
+            ]
+          ]
+        },
+        "span": true,
+        "vA": 0.1,
+        "vM": 1,
+        "vB": 0.15,
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 1990
+    },
+    {
+      "id": "n30",
+      "type": "Stroke",
+      "params": {
+        "x0": 0.74,
+        "y0": 0.77,
+        "x1": 0.33999999999999997,
+        "y1": 0.64,
+        "x2": {
+          "k": [
+            [
+              0,
+              0.6,
+              "smooth"
+            ],
+            [
+              10,
+              0.8200000000000001,
+              "smooth"
+            ],
+            [
+              19,
+              0.6,
+              "smooth"
+            ]
+          ]
+        },
+        "y2": 0.43,
+        "x3": 0.535,
+        "y3": 0.44,
+        "width": 2.5,
+        "taper": 1,
+        "from": {
+          "k": [
+            [
+              0,
+              0,
+              "smooth"
+            ],
+            [
+              10,
+              0,
+              "smooth"
+            ],
+            [
+              19,
+              1,
+              "smooth"
+            ]
+          ]
+        },
+        "to": {
+          "k": [
+            [
+              0,
+              0.08,
+              "smooth"
+            ],
+            [
+              5,
+              0.62,
+              "smooth"
+            ],
+            [
+              10,
+              1,
+              "smooth"
+            ],
+            [
+              19,
+              1,
+              "smooth"
+            ]
+          ]
+        },
+        "span": true,
+        "vA": 0.15,
+        "vM": 0.76,
+        "vB": 0.1,
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 2140
+    },
+    {
+      "id": "n31",
+      "type": "Stroke",
+      "params": {
+        "x0": 0.65,
+        "y0": 0.78,
+        "x1": 0.8,
+        "y1": 0.55,
+        "x2": 0.44,
+        "y2": 0.43,
+        "x3": 0.62,
+        "y3": 0.35,
+        "width": 1.05,
+        "taper": 1,
+        "from": {
+          "k": [
+            [
+              0,
+              0,
+              "smooth"
+            ],
+            [
+              11,
+              0,
+              "smooth"
+            ],
+            [
+              19,
+              1,
+              "smooth"
+            ]
+          ]
+        },
+        "to": {
+          "k": [
+            [
+              0,
+              0,
+              "smooth"
+            ],
+            [
+              6,
+              0.7,
+              "smooth"
+            ],
+            [
+              10,
+              1,
+              "smooth"
+            ],
+            [
+              19,
+              1,
+              "smooth"
+            ]
+          ]
+        },
+        "span": true,
+        "vA": 0.1,
+        "vM": 1,
+        "vB": 0.15,
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 2290
+    },
+    {
+      "id": "n32",
+      "type": "Blend",
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 340
+    },
+    {
+      "id": "n33",
+      "type": "Blend",
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      },
+      "x": 460,
+      "y": 340
+    },
+    {
+      "id": "n34",
+      "type": "Blend",
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      },
+      "x": 670,
+      "y": 190
+    },
+    {
+      "id": "n35",
+      "type": "Palette",
+      "params": {
+        "colors": [
+          "#361958",
+          "#7545c7",
+          "#ad83ef",
+          "#d9c6ff",
+          "#f9efff"
+        ],
+        "cutoff": 0.008,
+        "shift": 0,
+        "mode": "smooth",
+        "key": "alpha",
+        "opacity": 1
+      },
+      "x": 880,
+      "y": 190
+    },
+    {
+      "id": "n36",
+      "type": "Mask",
+      "params": {
+        "mode": "multiply",
+        "strength": 1
+      },
+      "x": 1090,
+      "y": 190
+    },
+    {
+      "id": "n37",
+      "type": "Glow",
+      "params": {
+        "radius": 2,
+        "strength": 1.2
+      },
+      "x": 1300,
+      "y": 190
+    },
+    {
+      "id": "n38",
+      "type": "Particles",
+      "params": {
+        "count": 14,
+        "seed": 92731,
+        "emit": "stream",
+        "start": 0,
+        "span": 0.45,
+        "life": 0.45,
+        "lifeVar": 0.15,
+        "area": "box",
+        "x": 0.5,
+        "y": 0.7,
+        "aw": 30,
+        "ah": 4,
+        "dirMode": "fixed",
+        "angle": -90,
+        "spread": 16,
+        "speed": 0.95,
+        "speedVar": 0.3,
+        "gravity": 0,
+        "drag": 0.015,
+        "turb": 0.22,
+        "sizeA": 0.85,
+        "sizeB": 0,
+        "pshape": "diamond",
+        "stretch": 1,
+        "fade": "inout",
+        "bright": 0.9,
+        "loop": false,
+        "ground": 0,
+        "bounce": 0.35,
+        "brightVar": 0
+      },
+      "x": 40,
+      "y": 2440
+    },
+    {
+      "id": "n39",
+      "type": "Palette",
+      "params": {
+        "colors": [
+          "#361958",
+          "#7545c7",
+          "#ad83ef",
+          "#d9c6ff",
+          "#f9efff"
+        ],
+        "cutoff": 0.008,
+        "shift": 0,
+        "mode": "smooth",
+        "key": "alpha",
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 490
+    },
+    {
+      "id": "n40",
+      "type": "Mask",
+      "params": {
+        "mode": "multiply",
+        "strength": 1
+      },
+      "x": 460,
+      "y": 490
+    },
+    {
+      "id": "n41",
+      "type": "Glow",
+      "params": {
+        "radius": 2,
+        "strength": 0.9
+      },
+      "x": 670,
+      "y": 340
+    },
+    {
+      "id": "n42",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 2980,
+      "y": 40
+    },
+    {
+      "id": "n43",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 3190,
+      "y": 40
+    },
+    {
+      "id": "n44",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 3400,
+      "y": 40
+    },
+    {
+      "id": "n45",
+      "type": "Tint",
+      "params": {
+        "color": "#ffffff",
+        "amount": 0,
+        "bright": 1,
+        "opacity": {
+          "k": [
+            [
+              0,
+              0,
+              "smooth"
+            ],
+            [
+              3,
+              0.75,
+              "smooth"
+            ],
+            [
+              11,
+              1,
+              "smooth"
+            ],
+            [
+              16,
+              0.85,
+              "smooth"
+            ],
+            [
+              19,
+              0,
+              "smooth"
+            ]
+          ]
+        }
+      },
+      "x": 3610,
+      "y": 40
+    },
+    {
+      "id": "n46",
+      "type": "Output",
+      "params": {
+        "alpha": "soft",
+        "threshold": 0.5
+      },
+      "x": 3820,
+      "y": 40
+    }
+  ],
+  "links": [
+    {
+      "f": "n1",
+      "t": "n2",
+      "p": 0
+    },
+    {
+      "f": "n2",
+      "t": "n3",
+      "p": 0
+    },
+    {
+      "f": "n1",
+      "t": "n3",
+      "p": 1
+    },
+    {
+      "f": "n4",
+      "t": "n15",
+      "p": 0
+    },
+    {
+      "f": "n5",
+      "t": "n15",
+      "p": 1
+    },
+    {
+      "f": "n15",
+      "t": "n16",
+      "p": 0
+    },
+    {
+      "f": "n6",
+      "t": "n16",
+      "p": 1
+    },
+    {
+      "f": "n16",
+      "t": "n17",
+      "p": 0
+    },
+    {
+      "f": "n7",
+      "t": "n17",
+      "p": 1
+    },
+    {
+      "f": "n17",
+      "t": "n18",
+      "p": 0
+    },
+    {
+      "f": "n8",
+      "t": "n18",
+      "p": 1
+    },
+    {
+      "f": "n18",
+      "t": "n19",
+      "p": 0
+    },
+    {
+      "f": "n9",
+      "t": "n19",
+      "p": 1
+    },
+    {
+      "f": "n19",
+      "t": "n20",
+      "p": 0
+    },
+    {
+      "f": "n10",
+      "t": "n20",
+      "p": 1
+    },
+    {
+      "f": "n20",
+      "t": "n21",
+      "p": 0
+    },
+    {
+      "f": "n11",
+      "t": "n21",
+      "p": 1
+    },
+    {
+      "f": "n21",
+      "t": "n22",
+      "p": 0
+    },
+    {
+      "f": "n12",
+      "t": "n22",
+      "p": 1
+    },
+    {
+      "f": "n22",
+      "t": "n23",
+      "p": 0
+    },
+    {
+      "f": "n13",
+      "t": "n23",
+      "p": 1
+    },
+    {
+      "f": "n23",
+      "t": "n24",
+      "p": 0
+    },
+    {
+      "f": "n14",
+      "t": "n24",
+      "p": 1
+    },
+    {
+      "f": "n24",
+      "t": "n25",
+      "p": 0
+    },
+    {
+      "f": "n25",
+      "t": "n26",
+      "p": 0
+    },
+    {
+      "f": "n24",
+      "t": "n26",
+      "p": 1
+    },
+    {
+      "f": "n26",
+      "t": "n27",
+      "p": 0
+    },
+    {
+      "f": "n28",
+      "t": "n32",
+      "p": 0
+    },
+    {
+      "f": "n29",
+      "t": "n32",
+      "p": 1
+    },
+    {
+      "f": "n32",
+      "t": "n33",
+      "p": 0
+    },
+    {
+      "f": "n30",
+      "t": "n33",
+      "p": 1
+    },
+    {
+      "f": "n33",
+      "t": "n34",
+      "p": 0
+    },
+    {
+      "f": "n31",
+      "t": "n34",
+      "p": 1
+    },
+    {
+      "f": "n34",
+      "t": "n35",
+      "p": 0
+    },
+    {
+      "f": "n35",
+      "t": "n36",
+      "p": 0
+    },
+    {
+      "f": "n34",
+      "t": "n36",
+      "p": 1
+    },
+    {
+      "f": "n36",
+      "t": "n37",
+      "p": 0
+    },
+    {
+      "f": "n38",
+      "t": "n39",
+      "p": 0
+    },
+    {
+      "f": "n39",
+      "t": "n40",
+      "p": 0
+    },
+    {
+      "f": "n38",
+      "t": "n40",
+      "p": 1
+    },
+    {
+      "f": "n40",
+      "t": "n41",
+      "p": 0
+    },
+    {
+      "f": "n3",
+      "t": "n42",
+      "p": 0
+    },
+    {
+      "f": "n27",
+      "t": "n42",
+      "p": 1
+    },
+    {
+      "f": "n42",
+      "t": "n43",
+      "p": 0
+    },
+    {
+      "f": "n37",
+      "t": "n43",
+      "p": 1
+    },
+    {
+      "f": "n43",
+      "t": "n44",
+      "p": 0
+    },
+    {
+      "f": "n41",
+      "t": "n44",
+      "p": 1
+    },
+    {
+      "f": "n44",
+      "t": "n45",
+      "p": 0
+    },
+    {
+      "f": "n45",
+      "t": "n46",
+      "p": 0
+    }
+  ],
+  "game": {
+    "style": "hero-pixel-v1",
+    "pivot": [
+      0.5,
+      0.8
+    ],
+    "logicalSize": 124,
+    "blend": "add",
+    "impactFrame": 3,
+    "durationMs": 1000,
+    "role": "cast",
+    "referenceCell": 62
+  },
+  "sourceKey": "[\"souls\",\"styx\",[\"#f9efff\",\"#d9c6ff\",\"#ad83ef\",\"#7545c7\",\"#361958\"],92731,12,80,0.7,360,-0.02,3,0,55,150,1,0,0.8,false]",
+  "sourceRecipe": {
+    "id": "necromancer-cast",
+    "label": "네크로맨서 · 강령 의식",
+    "effect": "souls",
+    "palette": "styx",
+    "pxfId": "hero-necromancer-cast",
+    "colors": [
+      "#f9efff",
+      "#d9c6ff",
+      "#ad83ef",
+      "#7545c7",
+      "#361958"
+    ],
+    "params": {
+      "count": 12,
+      "life": 80,
+      "speed": 0.7,
+      "spread": 360,
+      "gravity": -0.02,
+      "size": 3,
+      "angle": 0,
+      "pitch": 55,
+      "arc": 150,
+      "dir": 1,
+      "alt": false,
+      "ghosts": 0,
+      "glow": 0.8,
+      "ring": false,
+      "flash": 0,
+      "hitstop": 0,
+      "shake": 0,
+      "slowmo": 1,
+      "loop": false,
+      "interval": 1
+    },
+    "seed": 92731
+  },
+  "provenance": {
+    "author": "Hero Inc",
+    "purpose": "네크로맨서 · 강령 의식",
+    "revision": "spectral-ribbons-v2"
+  }
+}

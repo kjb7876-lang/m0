@@ -1,0 +1,582 @@
+{
+ "revision": "R271-hwando-1",
+ "source": [
+  {
+   "zip": "Hwando-Unified-attack-E-v2-polish.zip",
+   "drive_id": "1U2vgjdl-Oq32B7Yh2D6lULvSwRrOcYfK",
+   "zip_sha256": "b13822d6eb7d343c5d21119ce1ae449d3512cf731ce80f35ab8e912a49296d2e",
+   "zip_bytes": 1889996,
+   "sheet_sha256": "f17facfc5c630fd6f0fcecdf750e96536e31b9f33880d65ac365819a613c377b",
+   "sheet_sha256_listed": "f17facfc5c630fd6f0fcecdf750e96536e31b9f33880d65ac365819a613c377b",
+   "clip": "attack-E",
+   "mirror_in_source": false,
+   "purpose": "환도 attack E",
+   "applied": true,
+   "derived": "attack-e.webp"
+  },
+  {
+   "zip": "Hwando-Unified-idle-E-v2-polish.zip",
+   "drive_id": "17ioNMP11wTAQSFORh8KtHJfmobhAarDP",
+   "zip_sha256": "8585469f90b2e6ef30889d6a691c43f91c9d8fc47c736ec4b6089194a1f0adaf",
+   "zip_bytes": 1669041,
+   "sheet_sha256": "fd5c170d88719decc90bf928cb1be1ed88af366ce7580bce976a18d12ae2ffa9",
+   "sheet_sha256_listed": "fd5c170d88719decc90bf928cb1be1ed88af366ce7580bce976a18d12ae2ffa9",
+   "clip": "idle-E",
+   "mirror_in_source": false,
+   "purpose": "환도 idle E",
+   "applied": true,
+   "derived": "idle-e.webp"
+  },
+  {
+   "zip": "Hwando-Unified-idle-N-v2-polish.zip",
+   "drive_id": "1qz3ehPAd2bn2RRrmxgJKMTVb8TPh6hOs",
+   "zip_sha256": "c29e5a028e3884f4ecb61c883281b8157d6dca84a785e692707da92513d957bb",
+   "zip_bytes": 1996791,
+   "sheet_sha256": "a1d82c928cb8e714299fb6d4e111447a39ab2ae9d5e7936eb7b3cfa7094ae7d5",
+   "sheet_sha256_listed": "a1d82c928cb8e714299fb6d4e111447a39ab2ae9d5e7936eb7b3cfa7094ae7d5",
+   "clip": "idle-N",
+   "mirror_in_source": false,
+   "purpose": "환도 idle N",
+   "applied": true,
+   "derived": "idle-n.webp"
+  },
+  {
+   "zip": "Hwando-Unified-idle-S-v2-polish.zip",
+   "drive_id": "1lgeNp68ySp6hwPTJMW0hRCeA_KTO40u6",
+   "zip_sha256": "e88488a441cea10c2414365dfd60dbe7c4206a15e5b1de9d747a2f99cda38f20",
+   "zip_bytes": 2221595,
+   "sheet_sha256": "26d7efa85216d9e0187fc446129cac3bfc15bfc0fba4fa6134c4b888799b15fe",
+   "sheet_sha256_listed": "26d7efa85216d9e0187fc446129cac3bfc15bfc0fba4fa6134c4b888799b15fe",
+   "clip": "idle-S",
+   "mirror_in_source": false,
+   "purpose": "환도 idle S",
+   "applied": true,
+   "derived": "idle-s.webp"
+  },
+  {
+   "zip": "Hwando-Unified-idle-W-v2-polish.zip",
+   "drive_id": "10rcHGhso9nsVEK5XJnBjXQaFhU2cHbBS",
+   "zip_sha256": "e16729f7d8b1a47f5e4bf6003135e4197831b9630b2f9c24d78c357a524818a9",
+   "zip_bytes": 1676503,
+   "sheet_sha256": "2b8cc8359ef94b4d2c3d261284365b11bfc5a885656fb597b1f0b9e4f9025395",
+   "sheet_sha256_listed": "2b8cc8359ef94b4d2c3d261284365b11bfc5a885656fb597b1f0b9e4f9025395",
+   "clip": "idle-W",
+   "mirror_in_source": true,
+   "purpose": "환도 idle W",
+   "applied": true,
+   "derived": "idle-w.webp"
+  },
+  {
+   "zip": "Hwando-Unified-walk-E-v2-polish.zip",
+   "drive_id": "1LnDWLyuA6STdevJQLW6ykR-907vHWPDF",
+   "zip_sha256": "6c74a5a193c15d83b164f607abb98d5f5025600ec5f3491eaea74c4043404b00",
+   "zip_bytes": 1259139,
+   "sheet_sha256": "a130084e6d2d592339b12f194495114d3ea15769c46f8b7c58dce09e760171bd",
+   "sheet_sha256_listed": "a130084e6d2d592339b12f194495114d3ea15769c46f8b7c58dce09e760171bd",
+   "clip": "walk-E",
+   "mirror_in_source": false,
+   "purpose": "환도 walk E",
+   "applied": true,
+   "derived": "walk-e.webp"
+  },
+  {
+   "zip": "Hwando-Unified-walk-N-v2-polish.zip",
+   "drive_id": "1cZFR-XARnFs0QO3bfnEOWgozCgdyyKnp",
+   "zip_sha256": "f6a2a964a63a15376d6589afc03c96ed0336085b1e9a70d1a6a2ebea4c1b0a00",
+   "zip_bytes": 1468689,
+   "sheet_sha256": "9954a4f5b3c80a4dd535331f7ac14239b898095d34762a05e366e16e6837ce9e",
+   "sheet_sha256_listed": "9954a4f5b3c80a4dd535331f7ac14239b898095d34762a05e366e16e6837ce9e",
+   "clip": "walk-N",
+   "mirror_in_source": false,
+   "purpose": "환도 walk N",
+   "applied": true,
+   "derived": "walk-n.webp"
+  },
+  {
+   "zip": "Hwando-Unified-walk-S-v1.zip",
+   "drive_id": "1CYgpBAmTwGGwXDMda-5wNaQT6733j0T1",
+   "zip_sha256": "505b5430503040b113e6ab97584b4a86a3aa6fd540bb0584d82cd7f28b790789",
+   "zip_bytes": 1234305,
+   "sheet_sha256": "cc2ecc3620d6e9140045554a18bae0f524f41b8f31f176738c8f289d0bf628e5",
+   "sheet_sha256_listed": "cc2ecc3620d6e9140045554a18bae0f524f41b8f31f176738c8f289d0bf628e5",
+   "clip": "walk-S",
+   "mirror_in_source": false,
+   "purpose": "환도 walk S",
+   "applied": true,
+   "derived": "walk-s.webp"
+  },
+  {
+   "zip": "Hwando-Unified-walk-W-v2-polish.zip",
+   "drive_id": "1cKbVjkYcyr5oMRTPoNnKHThRGY2DkVdB",
+   "zip_sha256": "67343abfeda5ff27c46205a00eaa106c9e274c5c82157d62d13ab87de7dfbcf6",
+   "zip_bytes": 1332758,
+   "sheet_sha256": "0b9c250ea15af6b19ec9f84dc55f70dce202f9ed110e40e002ffca2cc8479b76",
+   "sheet_sha256_listed": "0b9c250ea15af6b19ec9f84dc55f70dce202f9ed110e40e002ffca2cc8479b76",
+   "clip": "walk-W",
+   "mirror_in_source": false,
+   "purpose": "환도 walk W",
+   "applied": true,
+   "derived": "walk-w.webp"
+  }
+ ],
+ "body": 180.0,
+ "anims": {
+  "attack": {
+   "e": {
+    "file": "attack-e.webp",
+    "n": 12,
+    "cols": 12,
+    "cell": [
+     288,
+     214
+    ],
+    "atlas": [
+     3456,
+     214
+    ],
+    "ms": [
+     160,
+     110,
+     100,
+     90,
+     70,
+     40,
+     50,
+     80,
+     100,
+     110,
+     130,
+     250
+    ],
+    "anchor": [
+     140.8,
+     204.5
+    ],
+    "body": 185.0,
+    "loop": false,
+    "bytes": 355176,
+    "sha256": "9e57a6503379022d86d020749f6ac6b7ec42837eda435fa93fd72bb03bccb7ca",
+    "measured": {
+     "src_body_px": 229.5,
+     "scale": 0.7843,
+     "src_foot_px": [
+      389,
+      397,
+      404
+     ],
+     "foot_jitter_px": 12.0,
+     "body_px": [
+      177,
+      195
+     ]
+    }
+   }
+  },
+  "idle": {
+   "e": {
+    "file": "idle-e.webp",
+    "n": 13,
+    "cols": 13,
+    "cell": [
+     158,
+     187
+    ],
+    "atlas": [
+     2054,
+     187
+    ],
+    "ms": [
+     240,
+     180,
+     180,
+     200,
+     220,
+     220,
+     240,
+     240,
+     240,
+     220,
+     200,
+     180,
+     240
+    ],
+    "anchor": [
+     98.3,
+     184.0
+    ],
+    "body": 180.0,
+    "loop": true,
+    "bytes": 354682,
+    "sha256": "c72e72816fe7b69c0138cc2f96e550f9856bdb5104410855f8bc1f6002c53d94",
+    "measured": {
+     "src_body_px": 230.0,
+     "scale": 0.7826,
+     "src_foot_px": [
+      398,
+      398,
+      398
+     ],
+     "foot_jitter_px": 0.0,
+     "body_px": [
+      179,
+      181
+     ]
+    }
+   },
+   "n": {
+    "file": "idle-n.webp",
+    "n": 13,
+    "cols": 13,
+    "cell": [
+     147,
+     187
+    ],
+    "atlas": [
+     1911,
+     187
+    ],
+    "ms": [
+     240,
+     180,
+     180,
+     200,
+     220,
+     220,
+     240,
+     240,
+     240,
+     220,
+     200,
+     180,
+     240
+    ],
+    "anchor": [
+     66.4,
+     183.0
+    ],
+    "body": 179.0,
+    "loop": true,
+    "bytes": 371336,
+    "sha256": "b5ac2121f89a92b6131b8d358deb480538b5a776433511067e6b17ada88469b8",
+    "measured": {
+     "src_body_px": 242.0,
+     "scale": 0.7438,
+     "src_foot_px": [
+      401,
+      401,
+      401
+     ],
+     "foot_jitter_px": 0.0,
+     "body_px": [
+      179,
+      180
+     ]
+    }
+   },
+   "s": {
+    "file": "idle-s.webp",
+    "n": 13,
+    "cols": 13,
+    "cell": [
+     160,
+     187
+    ],
+    "atlas": [
+     2080,
+     187
+    ],
+    "ms": [
+     240,
+     180,
+     180,
+     200,
+     220,
+     220,
+     240,
+     240,
+     240,
+     220,
+     200,
+     180,
+     240
+    ],
+    "anchor": [
+     70.4,
+     184.0
+    ],
+    "body": 181.0,
+    "loop": true,
+    "bytes": 383766,
+    "sha256": "b65575741a5adadaad0a756d1dc1399010053eb376dfa029614db506df30f7e1",
+    "measured": {
+     "src_body_px": 237.0,
+     "scale": 0.7595,
+     "src_foot_px": [
+      397,
+      397,
+      397
+     ],
+     "foot_jitter_px": 0.0,
+     "body_px": [
+      180,
+      181
+     ]
+    }
+   },
+   "w": {
+    "file": "idle-w.webp",
+    "n": 13,
+    "cols": 13,
+    "cell": [
+     158,
+     187
+    ],
+    "atlas": [
+     2054,
+     187
+    ],
+    "ms": [
+     240,
+     180,
+     180,
+     200,
+     220,
+     220,
+     240,
+     240,
+     240,
+     220,
+     200,
+     180,
+     240
+    ],
+    "anchor": [
+     59.3,
+     184.0
+    ],
+    "body": 180.0,
+    "loop": true,
+    "bytes": 355156,
+    "sha256": "77167a89123a7057b84b60cec93cf388c79545c7f87931493799f7d840b1556c",
+    "measured": {
+     "src_body_px": 230.0,
+     "scale": 0.7826,
+     "src_foot_px": [
+      398,
+      398,
+      398
+     ],
+     "foot_jitter_px": 0.0,
+     "body_px": [
+      179,
+      181
+     ]
+    }
+   }
+  },
+  "walk": {
+   "stride": {
+    "step_px": 77.0,
+    "frames_per_stride": 12,
+    "px_per_frame": 12.83,
+    "note": "E 발 띠 폭 최대−최소 = 한 걸음, 12칸 = 두 걸음"
+   },
+   "e": {
+    "file": "walk-e.webp",
+    "n": 12,
+    "cols": 12,
+    "cell": [
+     148,
+     188
+    ],
+    "atlas": [
+     1776,
+     188
+    ],
+    "ms": [
+     80,
+     80,
+     80,
+     80,
+     80,
+     80,
+     80,
+     80,
+     80,
+     80,
+     80,
+     80
+    ],
+    "anchor": [
+     67.4,
+     184.0
+    ],
+    "body": 180.0,
+    "loop": true,
+    "bytes": 251024,
+    "sha256": "801c884fcbe1213bb2b697bdc6719492a4abafeab86b854bc3c94421b24e9a70",
+    "measured": {
+     "src_body_px": 217.0,
+     "scale": 0.8295,
+     "src_foot_px": [
+      398,
+      400,
+      401
+     ],
+     "foot_jitter_px": 2.0,
+     "body_px": [
+      179,
+      181
+     ]
+    }
+   },
+   "n": {
+    "file": "walk-n.webp",
+    "n": 12,
+    "cols": 12,
+    "cell": [
+     149,
+     194
+    ],
+    "atlas": [
+     1788,
+     194
+    ],
+    "ms": [
+     80,
+     80,
+     80,
+     80,
+     80,
+     80,
+     80,
+     80,
+     80,
+     80,
+     80,
+     80
+    ],
+    "anchor": [
+     68.2,
+     186.0
+    ],
+    "body": 179.0,
+    "loop": true,
+    "bytes": 270588,
+    "sha256": "8ffb0fda10a00398e12566b048c048a1a00a7911dd5afe44a8d0e4ddd428a273",
+    "measured": {
+     "src_body_px": 229.0,
+     "scale": 0.786,
+     "src_foot_px": [
+      391,
+      396,
+      402
+     ],
+     "foot_jitter_px": 8.0,
+     "body_px": [
+      174,
+      183
+     ]
+    }
+   },
+   "s": {
+    "file": "walk-s.webp",
+    "n": 8,
+    "cols": 8,
+    "cell": [
+     157,
+     193
+    ],
+    "atlas": [
+     1256,
+     193
+    ],
+    "ms": [
+     100,
+     100,
+     100,
+     100,
+     100,
+     100,
+     100,
+     100
+    ],
+    "anchor": [
+     67.3,
+     184.5
+    ],
+    "body": 180.5,
+    "loop": true,
+    "bytes": 223652,
+    "sha256": "304cf92d9ee6726d855f44f3907532a78874ec269686b9699d3bb8c6b79c3e1b",
+    "measured": {
+     "src_body_px": 233.5,
+     "scale": 0.7709,
+     "src_foot_px": [
+      386,
+      389,
+      397
+     ],
+     "foot_jitter_px": 8.0,
+     "body_px": [
+      177,
+      184
+     ]
+    }
+   },
+   "w": {
+    "file": "walk-w.webp",
+    "n": 12,
+    "cols": 12,
+    "cell": [
+     163,
+     190
+    ],
+    "atlas": [
+     1956,
+     190
+    ],
+    "ms": [
+     80,
+     80,
+     80,
+     80,
+     80,
+     80,
+     80,
+     80,
+     80,
+     80,
+     80,
+     80
+    ],
+    "anchor": [
+     90.3,
+     185.0
+    ],
+    "body": 180.5,
+    "loop": true,
+    "bytes": 280810,
+    "sha256": "3c77345c48c79300d489d67c3b8ccbd07c430ae7e180dee0830d7afc4a081c14",
+    "measured": {
+     "src_body_px": 213.0,
+     "scale": 0.8451,
+     "src_foot_px": [
+      398,
+      399,
+      402
+     ],
+     "foot_jitter_px": 3.0,
+     "body_px": [
+      180,
+      182
+     ]
+    }
+   }
+  }
+ },
+ "notes": [
+  "W 대기는 원천에서도 E 표시 미러(장비손 반전). 공격은 E 한 종류뿐 — W 는 E 를 좌우로 뒤집어 그리고, N/S 공격·피격은 R242 그림을 쓴다(원천에 없음).",
+  "공격 6→7 큰 방향 전환·끝 자세에서 대기 복귀 동작 부재는 원천의 알려진 제약 그대로."
+ ]
+}

@@ -1,0 +1,239 @@
+{
+ "round": "R523",
+ "note": "방 꾸미기 첫 묶음(의원 ep1a09 · 나태의 집 ep1b02)에서 새로 만든 그림. 기존 시트의 칸을 잘라 낸 것과 드라이브 최근 3일 자산을 손본 것이며, 원본은 그대로 둔다. 바닥 각도가 2:1 격자와 9.5° 안으로 맞는 것만 넣었다. 드라이브 파일 ID 는 적지 않는다.",
+ "reused": [
+  "assets/hospital-maze/bed.png",
+  "assets/hospital-maze/stretcher.png",
+  "assets/hospital-maze/chair.png",
+  "assets/hospital-maze/monitor.png",
+  "assets/hospital-maze/iv.png",
+  "assets/hospital-maze/stool.png",
+  "assets/r521/overbed-table.webp",
+  "assets/r521/medicine-cabinet.webp",
+  "assets/r521/surgical-cart.webp",
+  "assets/r521/exam-lamp.webp",
+  "assets/r521/crutches.webp",
+  "assets/world-r80/r80-145.webp",
+  "assets/world-r80/r80-146.webp",
+  "assets/world-r80/r80-025.webp"
+ ],
+ "reviewedNotApplied": [
+  {
+   "name": "FURNITURE-range (두 방향)",
+   "why": "각도 통과. 폭식의 주방(ep1b04) 묶음에서 쓸 예정"
+  },
+  {
+   "name": "SW-env14-overturned-hospital-bed-v2-REVIEW-HOLD",
+   "why": "만든 쪽이 HOLD 로 표시해 둔 것이라 대기"
+  },
+  {
+   "name": "S02_midnight_school_desk · S07_black_cloth_table (3D 모델)",
+   "why": "등각 렌더는 뽑아 봄. 사몽 학교·교단 지역 묶음 후보"
+  },
+  {
+   "name": "STORY-PROP two-views 22종 · BOSS-PROP 5종",
+   "why": "아직 내려받지 않음(야외·보스 구역 묶음에서 검토)"
+  },
+  {
+   "name": "CX-0057 · CX-0058M",
+   "why": "사용자 \"일단대기\""
+  }
+ ],
+ "files": [
+  {
+   "file": "assets/r523/chair-back-n.webp",
+   "bytes": 7358,
+   "sha256": "6e143d82395e7fa0a8bdf864713fd5a585d916c0cbcb660f5a1aa9a276dec326",
+   "size": [
+    110,
+    160
+   ],
+   "source": "같은 glb 모델, 방위 180°",
+   "kind": "3D 모델(묶음 이름에 REVIEW 표시)",
+   "use": "식탁 앞 의자 뒷모습(북쪽 벽 식탁용)",
+   "applied": true
+  },
+  {
+   "file": "assets/r523/chair-back-w.webp",
+   "bytes": 7278,
+   "sha256": "d7419d7f901319b3552f998672007913b6cbe66276ec0d4f78f63778f4dabfb7",
+   "size": [
+    110,
+    160
+   ],
+   "source": "같은 glb 모델, 방위 270°",
+   "kind": "3D 모델(묶음 이름에 REVIEW 표시)",
+   "use": "식탁 앞 의자 뒷모습(서쪽 벽 식탁용)",
+   "applied": true
+  },
+  {
+   "file": "assets/r523/chair-n.webp",
+   "bytes": 7034,
+   "sha256": "a08291f1c81d0e2c4f40b703f8e210246ea29c0b6ab58aeb023a899b1e25c33c",
+   "size": [
+    93,
+    160
+   ],
+   "source": "드라이브(최근 3일) R14_personal_chair_v2_OPTIMIZATION_REVIEW.zip 의 glb 모델 → 등각 정사영 렌더(고도 30°, 방위 0°) + 색 보정",
+   "kind": "3D 모델(묶음 이름에 REVIEW 표시)",
+   "use": "나무 의자 앞모습(북쪽 벽용)",
+   "applied": true
+  },
+  {
+   "file": "assets/r523/chair-w.webp",
+   "bytes": 7072,
+   "sha256": "de97d8a2b49c311abbc947c3c62bbd502812f6e2429698df0a00d79bee92546f",
+   "size": [
+    93,
+    160
+   ],
+   "source": "같은 glb 모델, 방위 90°",
+   "kind": "3D 모델(묶음 이름에 REVIEW 표시)",
+   "use": "나무 의자 앞모습(서쪽 벽용)",
+   "applied": true
+  },
+  {
+   "file": "assets/r523/curtain.webp",
+   "bytes": 18284,
+   "sha256": "26492409131df813a65072f565fc056e04c50ea2c6486498dbf013f9f7963ce4",
+   "size": [
+    184,
+    256
+   ],
+   "source": "assets/visual-test/hospital-prop-atlas-oriented.png 의 칸 [807,545,310,425]",
+   "kind": "기존 게임 시트(R521 병원 가림막과 같은 칸)",
+   "use": "의원 관찰실 침대 가림막",
+   "applied": true
+  },
+  {
+   "file": "assets/r523/sloth-bed.webp",
+   "bytes": 25754,
+   "sha256": "57f9e7030af11b91567858abc9e12452959178a17d7940ce546ad51a65cf3583",
+   "size": [
+    288,
+    254
+   ],
+   "source": "assets/sin-rooms/sloth-home.png 의 칸 [677,624,621,549]",
+   "kind": "기존 칠죄 방 시트(나태의 집)",
+   "use": "나태의 집 작은 방·앞방(남는 침실) 침대",
+   "applied": true
+  },
+  {
+   "file": "assets/r523/sloth-fridge.webp",
+   "bytes": 15938,
+   "sha256": "d5b564186e8ccd624c637ac90859dd5d0e147984faaf3514429ce01d95f48524",
+   "size": [
+    147,
+    256
+   ],
+   "source": "assets/sin-rooms/sloth-home.png 의 칸 [843,32,322,553]",
+   "kind": "기존 칠죄 방 시트(나태의 집)",
+   "use": "나태의 집 물품 보관실 냉장고",
+   "applied": true
+  },
+  {
+   "file": "assets/r523/sloth-sofa.webp",
+   "bytes": 24940,
+   "sha256": "96f254efb3f982d74f7a51503b38cbb44e3c74ceebc804b8b407539c5d637568",
+   "size": [
+    288,
+    234
+   ],
+   "source": "assets/sin-rooms/sloth-home.png 의 칸 [15,65,621,506]",
+   "kind": "기존 칠죄 방 시트(나태의 집)",
+   "use": "나태의 집 거실·앞방 소파",
+   "applied": true
+  },
+  {
+   "file": "assets/r523/sloth-tv.webp",
+   "bytes": 24388,
+   "sha256": "98151db5a632213e7c3ca4d07fd49428adbb2bd8026e4c5e9430b0d166bc7749",
+   "size": [
+    256,
+    252
+   ],
+   "source": "assets/sin-rooms/sloth-home.png 의 칸 [43,654,526,518]",
+   "kind": "기존 칠죄 방 시트(나태의 집)",
+   "use": "나태의 집 거실·앞방 TV",
+   "applied": true
+  },
+  {
+   "file": "assets/r523/suitcase-n.webp",
+   "bytes": 14114,
+   "sha256": "9f50d487c067e06920487fe713f28191c25a1891eec46bdea3f04c13b6513d1c",
+   "size": [
+    178,
+    192
+   ],
+   "source": "드라이브(최근 3일) STORYPROP-suitcase-westwall-sw-v1-20261109.png",
+   "kind": "Dots 두 방향 소품",
+   "use": "여행가방(북쪽 벽용) — 그림 이름의 westwall-sw 는 Dots 좌표, 게임에서는 북쪽 벽",
+   "applied": true
+  },
+  {
+   "file": "assets/r523/suitcase-w.webp",
+   "bytes": 15062,
+   "sha256": "1d2dd036a92c68ee14ee07d005faf934ef72cd3405e338084a519f2696d8c463",
+   "size": [
+    189,
+    192
+   ],
+   "source": "드라이브(최근 3일) STORYPROP-suitcase-northwall-se-v2-20261109.png",
+   "kind": "Dots 두 방향 소품",
+   "use": "여행가방(서쪽 벽용)",
+   "applied": true
+  },
+  {
+   "file": "assets/r523/table-n.webp",
+   "bytes": 11492,
+   "sha256": "d2f80d78c7c790ff60c2c2f1eaed57505f57ed962474342b05e0edc4c37a2423",
+   "size": [
+    238,
+    200
+   ],
+   "source": "assets/sin-rooms/envy-lounge.webp 의 칸 [348,451,238,200]",
+   "kind": "기존 칠죄 방 시트(Dots 두 방향 가구)",
+   "use": "식탁(북쪽 벽용)",
+   "applied": true
+  },
+  {
+   "file": "assets/r523/table-w.webp",
+   "bytes": 14192,
+   "sha256": "7fd23e6a9b736b654f796053df7cd23c4faac1461530e40c1acb37b682a83375",
+   "size": [
+    256,
+    197
+   ],
+   "source": "assets/sin-rooms/envy-lounge.webp 의 칸 [590,451,258,199]",
+   "kind": "기존 칠죄 방 시트(Dots 두 방향 가구)",
+   "use": "식탁(서쪽 벽용)",
+   "applied": true
+  },
+  {
+   "file": "assets/r523/wardrobe-n.webp",
+   "bytes": 11114,
+   "sha256": "3863a1420f98e72822f3cda3d7690a7df5467710bd1b8e4e627ec09e0d01ac15",
+   "size": [
+    116,
+    256
+   ],
+   "source": "assets/sin-rooms/envy-lounge.webp 의 칸 [2,2,202,445]",
+   "kind": "기존 칠죄 방 시트(Dots 두 방향 가구)",
+   "use": "옷장(북쪽 벽용)",
+   "applied": true
+  },
+  {
+   "file": "assets/r523/wardrobe-w.webp",
+   "bytes": 11140,
+   "sha256": "c5fe9b7dc705e2d569d2bbeb8388b4fd0c1ffe03216b633493de67fe24455c1d",
+   "size": [
+    125,
+    256
+   ],
+   "source": "assets/sin-rooms/envy-lounge.webp 의 칸 [208,2,204,417]",
+   "kind": "기존 칠죄 방 시트(Dots 두 방향 가구)",
+   "use": "옷장(서쪽 벽용)",
+   "applied": true
+  }
+ ]
+}

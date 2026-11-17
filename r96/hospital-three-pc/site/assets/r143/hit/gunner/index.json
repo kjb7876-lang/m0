@@ -1,0 +1,113 @@
+{
+ "hero": "gunner",
+ "action": "hit",
+ "order": "피격 충격 → 뒤로 젖힘 (README)",
+ "mirroredInGame": {
+  "w": "e",
+  "sw": "se",
+  "nw": "ne"
+ },
+ "applied": "맞았을 때 프레임 애니메이션 — client-source/attack-anim-r143.js",
+ "directions": {
+  "s": {
+   "path": "assets/r143/hit/gunner/hit-s.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    227
+   ],
+   "source": {
+    "driveId": "13-unzqWeeD2_9N7q2KInxcXm29JTI3JR",
+    "file": "HERO-gunner-hit-s.png",
+    "sha256": "b229addee954b8a20f87a0997f15a3d01028589457fd294e85d75fef36d6a613",
+    "bytes": 51010
+   },
+   "sha256": "dbeb1165633a90258d0f896d57edd82b512330ecc510cdab90a4e203ed891bf5",
+   "bytes": 14368
+  },
+  "se": {
+   "path": "assets/r143/hit/gunner/hit-se.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    227
+   ],
+   "source": {
+    "driveId": "13-unzqWeeD2_9N7q2KInxcXm29JTI3JR",
+    "file": "HERO-gunner-hit-se.png",
+    "sha256": "5492c91a3b27f6edb454dba64e714dcf5b27aaa474dc0150efe9368c5b0841b3",
+    "bytes": 48103
+   },
+   "sha256": "2dfa2bdeef4c6598850306b30302f79a3c9aea97bf77c049fbe3d9b90d047e59",
+   "bytes": 13462
+  },
+  "e": {
+   "path": "assets/r143/hit/gunner/hit-e.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    227
+   ],
+   "source": {
+    "driveId": "13-unzqWeeD2_9N7q2KInxcXm29JTI3JR",
+    "file": "HERO-gunner-hit-e.png",
+    "sha256": "212507ddf7e5ab99f9382a159e6113d09db8aafea580ba4771f8da8733ddc990",
+    "bytes": 48946
+   },
+   "sha256": "176f1e5952636c88f0eba93a7e23e1cfcfa272b2da3a14648a110e9e462d7600",
+   "bytes": 13874
+  },
+  "ne": {
+   "path": "assets/r143/hit/gunner/hit-ne.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    227
+   ],
+   "source": {
+    "driveId": "13-unzqWeeD2_9N7q2KInxcXm29JTI3JR",
+    "file": "HERO-gunner-hit-ne.png",
+    "sha256": "21edf91296d08ecd91efd1fcff910e9be934e11c0066186812ac5fcc770979cf",
+    "bytes": 49290
+   },
+   "sha256": "1beeaee7beaaf3e8ccb313cad902e3b30c036631d304619ba6a572b481a64f5d",
+   "bytes": 14728
+  },
+  "n": {
+   "path": "assets/r143/hit/gunner/hit-n.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    227
+   ],
+   "source": {
+    "driveId": "13-unzqWeeD2_9N7q2KInxcXm29JTI3JR",
+    "file": "HERO-gunner-hit-n.png",
+    "sha256": "f7e75994fc20cbb0a125746011c0b13166f6270a6288b6632c3ec24fbcd7f2c5",
+    "bytes": 48227
+   },
+   "sha256": "72af2bba5cd8916b451009ae5add9b182ca6760e35bdff67db36f3c08e564a7f",
+   "bytes": 13642
+  }
+ }
+}

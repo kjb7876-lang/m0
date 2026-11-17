@@ -38,7 +38,7 @@ for(const k of Object.keys(NEW)){const p=path.join(R,'runtime-text',S[k].path);c
  const v=fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8');for(const k of Object.keys(NEW))ok(v.includes(S[k].path),k+' in runtime-manifest');
  ok(fs.readFileSync(path.join(R,'runtime-text','mob-attack-dots-r1065.js'),'utf8')===src,'runtime copy matches');}
 // A8 페르소나 영웅 쓰러짐(옆 6칸): R151 쓰러짐이 라우렌 형상 켜짐(personaHeroR1117)일 때 persona 시트(오른쪽 한 방향, 왼쪽은 반전)를 쓴다
-{const d=fs.readFileSync(path.join(R,'client-source','death-r151.js'),'utf8');ok(/HEROES=\[[^\]]*'persona'/.test(d),'death-r151 HEROES has persona');ok(/ONLY_E=new Set\(\['persona'\]\)/.test(d),'persona is east-only (west mirrors)');ok(/personaHeroR1113===true/.test(d),'persona form switch');
+{const d=fs.readFileSync(path.join(R,'client-source','death-r151.js'),'utf8');ok(/HEROES=\[[^\]]*'persona'/.test(d),'death-r151 HEROES has persona');ok(/E_ONLY=new Set\(\['persona'\]\)/.test(d),'persona is east-only (west mirrors)');ok(/personaHeroR1113===true/.test(d),'persona form switch');
  ok(!/HEROES\.includes\(player\.hero\)|sheetOf\(player\.hero|pathOf\(player\.hero/.test(d),'no raw player.hero lookups left');
  const f=path.join(R,'runtime-text/assets/r151/death/persona/death-e.webp');ok(fs.existsSync(f),'persona death sheet');
  const dim=cp.execFileSync('python3',['-I','-c','from PIL import Image;import sys;print(*Image.open(sys.argv[1]).size)',f]).toString().trim().split(' ').map(Number);ok(dim[0]===1152&&dim[1]===256,'persona death 6 cells 192x256 '+dim);

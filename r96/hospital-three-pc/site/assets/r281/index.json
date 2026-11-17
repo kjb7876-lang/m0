@@ -1,0 +1,152 @@
+{
+ "revision": "R281-drive-1",
+ "note": "조건부·최종 아님(드라이브 Limited-Candidate/CONDITIONAL). 원본은 드라이브 읽기 전용, 여기는 파생본.",
+ "bosses": {
+  "dist00-boss": {
+   "name": "뿌리의 문지기",
+   "driveSheetId": "1_BLoOLH2ouTWv9ilqEauIbqi_uHq2Q_R",
+   "sourceSha256": "2cc0217be5781bdd1fafd429332077f0a435efa67ed62104af8696cda88b6de5",
+   "sourceBytes": 2527518,
+   "path": "assets/r281/bosses/dist00-boss-walk6.webp",
+   "bytes": 347142,
+   "sha256": "5e0824e9d2ad61bab8f537f412acfa13b55a522a5ee54c30d991e5a5484cd61d",
+   "cell": [
+    338,
+    356
+   ],
+   "frames": 6,
+   "facing": "right",
+   "frameMs": 130,
+   "pivotX": 208.5,
+   "pivotY": [
+    350.2,
+    350.2,
+    351.8,
+    351.8,
+    351.0,
+    350.2
+   ],
+   "footRows": [
+    467,
+    467,
+    469,
+    469,
+    468,
+    467
+   ],
+   "visibleHeight": 347.2,
+   "scaleFromSource": 0.75,
+   "use": "보스 이동(걷기·부유) 6칸, 기존 공격4·피격·사망 그림은 그대로",
+   "applied": true,
+   "status": "조건부·최종 아님",
+   "crop": [
+    32,
+    4,
+    483,
+    479
+   ]
+  },
+  "mb-ep1a07": {
+   "name": "무의 기억포식자",
+   "driveSheetId": "13T2t1XhEzvJ7TQ8xQKnA_g2OLlX-yAET",
+   "sourceSha256": "0852c2c06d4854822a38305220f29f416994d252079ec86fd1b2646d4aeefee3",
+   "sourceBytes": 2995426,
+   "path": "assets/r281/bosses/mb-ep1a07-walk6.webp",
+   "bytes": 433628,
+   "sha256": "298ae0b34f0893f64fec03b31d2fdd470ee280a76039253c6064feb8a6ab76ce",
+   "cell": [
+    376,
+    349
+   ],
+   "frames": 6,
+   "facing": "right",
+   "frameMs": 140,
+   "pivotX": 196.5,
+   "pivotY": [
+    323.2,
+    323.2,
+    323.2,
+    323.2,
+    323.2,
+    323.2
+   ],
+   "footRows": [
+    437,
+    460,
+    456,
+    442,
+    450,
+    442
+   ],
+   "visibleHeight": 338.2,
+   "scaleFromSource": 0.75,
+   "use": "보스 이동(걷기·부유) 6칸, 기존 공격4·피격·사망 그림은 그대로",
+   "applied": true,
+   "status": "조건부·최종 아님",
+   "crop": [
+    8,
+    4,
+    510,
+    469
+   ]
+  },
+  "mb-dist02": {
+   "name": "늪의 뿔악마 군주",
+   "driveSheetId": "1ftH3yyLm63L-RJ2bIUcqhr4vZL2K5TmG",
+   "sourceSha256": "f2a475e176599d66bb2c6a5e2cb7404f4d0f9721b17a1fb8a2eafdb67cfa513f",
+   "sourceBytes": 2846604,
+   "path": "assets/r281/bosses/mb-dist02-walk6.webp",
+   "bytes": 404860,
+   "sha256": "8395ef1513e428e036deb466cde855d57d2e636f83f0a7b5be9440228f391ce2",
+   "cell": [
+    352,
+    356
+   ],
+   "frames": 6,
+   "facing": "right",
+   "frameMs": 160,
+   "pivotX": 192.0,
+   "pivotY": [
+    352.5,
+    351.0,
+    340.5,
+    351.0,
+    347.2,
+    340.5
+   ],
+   "footRows": [
+    470,
+    468,
+    454,
+    468,
+    463,
+    454
+   ],
+   "visibleHeight": 349.5,
+   "scaleFromSource": 0.75,
+   "use": "보스 이동(걷기·부유) 6칸, 기존 공격4·피격·사망 그림은 그대로",
+   "applied": true,
+   "status": "조건부·최종 아님",
+   "crop": [
+    29,
+    13,
+    498,
+    488
+   ]
+  }
+ },
+ "patches": {
+  "garden-soil-fringe-outer-01": {
+   "driveId": "1yNz_aXUA9HsgFpFj43NEZJidGR_l3RlV",
+   "sourceSha256": "f8eff9f51a8545b003b9082fdf5597f15aa79331948da9fbf4adea3f58b6f5fe",
+   "sourceBytes": 1981553,
+   "originalPngSha256": "c0cfb3ad4b219f9e0936a6ed743959f37a9b99b8e4a086b8328a62de76d6fe76",
+   "path": "assets/r281/garden/garden-soil-fringe-outer-01.png",
+   "bytes": 125225,
+   "sha256": "da4e291555cfd5153d42443dadd0e77e4060df0209a922729d2792b3382d18e3",
+   "use": "dist00(악마화 나무의 정원) 바닥 데칼 — 기존 garden_soil_paving_transition_01 옆 배치 변형",
+   "applied": true,
+   "status": "조건부·최종 아님"
+  }
+ }
+}

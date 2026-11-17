@@ -8,7 +8,7 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_DEATH_R151__)return;
 const REV='R151-death-1',KEY='storyworld.r151.death',FRAME_MS=170,HOLD_MS=1500,FOOT_Y=227;
-const HEROES=['lauren','hwando','seoha','neon','michaela','hunter','slayer','gunner','persona'],ONLY_E=new Set(['persona']);/* R1117d: 페르소나 영웅(라우렌 형상 켜짐)은 Dots 옆 쓰러짐 한 방향만 — 왼쪽은 반전 *//* R194: 환도도 5방향(드라이브 Hwando 49/276 묶음 death s·se·e·ne·n → assets/r194/death/hwando) */
+const HEROES=['lauren','hwando','seoha','neon','michaela','hunter','slayer','gunner','persona'],ONLY_E=new Set([]),E_ONLY=new Set(['persona']);/* R1117d: E_ONLY = 페르소나 영웅(라우렌 형상 켜짐)은 Dots 옆 쓰러짐 한 방향만, 왼쪽은 반전 *//* R194: 환도도 5방향(드라이브 Hwando 49/276 묶음 death s·se·e·ne·n → assets/r194/death/hwando) */
 const DIR8=['e','se','s','sw','w','nw','n','ne'],SHEET={s:['s',0],se:['se',0],e:['e',0],ne:['ne',0],n:['n',0],sw:['se',1],w:['e',1],nw:['ne',1]},FOUR={front:'s',back:'n',left:'w',right:'e'};
 const BODY_ART=/hero_direction|hero-authored|assets\/heroes\/|r91\/walk\/|r93\/idle\/|r119\/heroes\/|r121\/(?:heroes|walk)\/|r128\/gunner\/|r130\/[a-z]+\/|r143\/(?:attack|hit)\/|r144\/walk\/|r710\/|awakening|^blob:/;
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
@@ -17,7 +17,7 @@ const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const hk=()=>player&&player.personaHeroR1113===true&&player.hero==='lauren'?'persona':(player&&player.hero);
 const solo=()=>{const m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();return !m||m==='off';};
 const pathOf=(h,d)=>h==='hwando'?'assets/r196/hwando/death-'+d+'.webp'/* R196: r194 드라이브 쓰러짐을 걷기·공격 색감에 맞춘 파생본 */:'assets/r151/death/'+h+'/death-'+d+'.webp';
-const sheetOf=(h,d8)=>ONLY_E.has(h)?(['w','nw','sw'].includes(d8)?['e',1]:['e',0]):(SHEET[d8]||SHEET.s);
+const sheetOf=(h,d8)=>ONLY_E.has(h)||E_ONLY.has(h)?(['w','nw','sw'].includes(d8)?['e',1]:['e',0]):(SHEET[d8]||SHEET.s);
 const asked=new Map();
 function image(p){try{const row=typeof readyImage==='function'?readyImage(p):null;if(row?.image)return row.image;const t=Date.now();if(t-(asked.get(p)||0)>1000){asked.set(p,t);if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});}}catch(e){fail(e);}return null;}
 function facing(){try{const w=window.__STORYWORLD_VISUAL_R119__?.inspect?.()?.stats?.walkDir;if(DIR8.includes(w))return w;}catch(_){}return FOUR[player?.direction]||'s';}

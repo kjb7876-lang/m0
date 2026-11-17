@@ -1,0 +1,536 @@
+{
+  "schema": "storyworld.asset-manifest/v1",
+  "revision": "sin-room-art-v1",
+  "expected_count": 7,
+  "assets": [
+    {
+      "theme": "sloth",
+      "path": "assets/sin-rooms/sloth-home.png",
+      "bytes": 1820594,
+      "sha256": "b812bb488698152ed6482aca40bf8d8af5813abeb6c646777f40e64878b2cda0",
+      "origin": "New artwork generated for this user request; generated PNG copied unchanged.",
+      "license": "Generated for this project; no third-party game assets.",
+      "format": {
+        "width": 1312,
+        "height": 1199,
+        "alpha": true
+      },
+      "cells": {
+        "sofa": {
+          "sourceRect": [
+            15,
+            65,
+            621,
+            506
+          ],
+          "pivot": [
+            310.5,
+            503
+          ],
+          "visibleHeight": 500
+        },
+        "fridge": {
+          "sourceRect": [
+            843,
+            32,
+            322,
+            553
+          ],
+          "pivot": [
+            161.0,
+            550
+          ],
+          "visibleHeight": 547
+        },
+        "tv": {
+          "sourceRect": [
+            43,
+            654,
+            526,
+            518
+          ],
+          "pivot": [
+            263.0,
+            515
+          ],
+          "visibleHeight": 512
+        },
+        "bed": {
+          "sourceRect": [
+            677,
+            624,
+            621,
+            549
+          ],
+          "pivot": [
+            310.5,
+            546
+          ],
+          "visibleHeight": 543
+        }
+      },
+      "applied": true
+    },
+    {
+      "theme": "envy",
+      "path": "assets/sin-rooms/envy-home.png",
+      "bytes": 1324355,
+      "sha256": "cdf8e6f68869de641ba7df9238e46fbbe8cd072dcd760b638b5746f69e193011",
+      "origin": "New artwork generated for this user request; generated PNG copied unchanged.",
+      "license": "Generated for this project; no third-party game assets.",
+      "format": {
+        "width": 1254,
+        "height": 1254,
+        "alpha": true
+      },
+      "cells": {
+        "settee": {
+          "sourceRect": [
+            78,
+            93,
+            506,
+            436
+          ],
+          "pivot": [
+            253.0,
+            433
+          ],
+          "visibleHeight": 430
+        },
+        "mirror": {
+          "sourceRect": [
+            775,
+            63,
+            297,
+            476
+          ],
+          "pivot": [
+            148.5,
+            473
+          ],
+          "visibleHeight": 470
+        },
+        "console": {
+          "sourceRect": [
+            117,
+            668,
+            429,
+            464
+          ],
+          "pivot": [
+            214.5,
+            461
+          ],
+          "visibleHeight": 458
+        },
+        "cabinet": {
+          "sourceRect": [
+            764,
+            639,
+            324,
+            509
+          ],
+          "pivot": [
+            162.0,
+            506
+          ],
+          "visibleHeight": 503
+        }
+      },
+      "applied": true
+    },
+    {
+      "theme": "glutton",
+      "path": "assets/sin-rooms/glutton-kitchen.png",
+      "bytes": 1509149,
+      "sha256": "b75bac00de20dabd0e5b57835392eda05fe03e41f11a42d58b1204420de62a8d",
+      "origin": "New artwork generated for this user request; generated PNG copied unchanged.",
+      "license": "Generated for this project; no third-party game assets.",
+      "format": {
+        "width": 1254,
+        "height": 1254,
+        "alpha": true
+      },
+      "cells": {
+        "prep": {
+          "sourceRect": [
+            76,
+            105,
+            512,
+            436
+          ],
+          "pivot": [
+            256.0,
+            433
+          ],
+          "visibleHeight": 430
+        },
+        "range": {
+          "sourceRect": [
+            720,
+            81,
+            438,
+            485
+          ],
+          "pivot": [
+            219.0,
+            482
+          ],
+          "visibleHeight": 479
+        },
+        "fridge": {
+          "sourceRect": [
+            155,
+            663,
+            327,
+            488
+          ],
+          "pivot": [
+            163.5,
+            485
+          ],
+          "visibleHeight": 482
+        },
+        "trolley": {
+          "sourceRect": [
+            725,
+            683,
+            420,
+            453
+          ],
+          "pivot": [
+            210.0,
+            450
+          ],
+          "visibleHeight": 447
+        }
+      },
+      "applied": true
+    },
+    {
+      "theme": "lust",
+      "path": "assets/sin-rooms/lust-bar.png",
+      "bytes": 2066656,
+      "sha256": "d9c54651760de1872959e9d9eaee1ec6f6958eca87e301b5035c7570d08db98d",
+      "origin": "New artwork generated for this user request; generated PNG copied unchanged.",
+      "license": "Generated for this project; no third-party game assets.",
+      "format": {
+        "width": 1312,
+        "height": 1199,
+        "alpha": true
+      },
+      "cells": {
+        "bar": {
+          "sourceRect": [
+            48,
+            3,
+            636,
+            580
+          ],
+          "pivot": [
+            318.0,
+            577
+          ],
+          "visibleHeight": 574
+        },
+        "backbar": {
+          "sourceRect": [
+            805,
+            1,
+            397,
+            602
+          ],
+          "pivot": [
+            198.5,
+            599
+          ],
+          "visibleHeight": 596
+        },
+        "booth": {
+          "sourceRect": [
+            47,
+            623,
+            579,
+            548
+          ],
+          "pivot": [
+            289.5,
+            545
+          ],
+          "visibleHeight": 542
+        },
+        "trolley": {
+          "sourceRect": [
+            787,
+            603,
+            434,
+            549
+          ],
+          "pivot": [
+            217.0,
+            546
+          ],
+          "visibleHeight": 543
+        }
+      },
+      "applied": true
+    },
+    {
+      "theme": "mammon",
+      "path": "assets/sin-rooms/mammon-office.png",
+      "bytes": 1964765,
+      "sha256": "e750d4c70e8f60dc8c6d63e1c298007001a77fb64e9576d4e846d2276cf462c0",
+      "origin": "New artwork generated for this user request; generated PNG copied unchanged.",
+      "license": "Generated for this project; no third-party game assets.",
+      "format": {
+        "width": 1312,
+        "height": 1199,
+        "alpha": true
+      },
+      "cells": {
+        "desk": {
+          "sourceRect": [
+            52,
+            56,
+            737,
+            582
+          ],
+          "pivot": [
+            368.5,
+            579
+          ],
+          "visibleHeight": 576
+        },
+        "chair": {
+          "sourceRect": [
+            876,
+            15,
+            355,
+            582
+          ],
+          "pivot": [
+            177.5,
+            579
+          ],
+          "visibleHeight": 576
+        },
+        "drawers": {
+          "sourceRect": [
+            57,
+            666,
+            667,
+            511
+          ],
+          "pivot": [
+            333.5,
+            508
+          ],
+          "visibleHeight": 505
+        },
+        "trolley": {
+          "sourceRect": [
+            819,
+            633,
+            438,
+            538
+          ],
+          "pivot": [
+            219.0,
+            535
+          ],
+          "visibleHeight": 532
+        }
+      },
+      "applied": true
+    },
+    {
+      "theme": "wrath",
+      "path": "assets/sin-rooms/wrath-restaurant.png",
+      "bytes": 2161724,
+      "sha256": "057eb9ce63835ceae1e8b8ad807b0bbe929cac56b588caa7eef6615efcf5a286",
+      "origin": "New artwork generated for this user request; generated PNG copied unchanged.",
+      "license": "Generated for this project; no third-party game assets.",
+      "format": {
+        "width": 1312,
+        "height": 1199,
+        "alpha": true
+      },
+      "cells": {
+        "table": {
+          "sourceRect": [
+            17,
+            12,
+            618,
+            558
+          ],
+          "pivot": [
+            309.0,
+            555
+          ],
+          "visibleHeight": 552
+        },
+        "buffet": {
+          "sourceRect": [
+            695,
+            33,
+            602,
+            519
+          ],
+          "pivot": [
+            301.0,
+            516
+          ],
+          "visibleHeight": 513
+        },
+        "chairs": {
+          "sourceRect": [
+            36,
+            600,
+            587,
+            558
+          ],
+          "pivot": [
+            293.5,
+            555
+          ],
+          "visibleHeight": 552
+        },
+        "booth": {
+          "sourceRect": [
+            677,
+            606,
+            613,
+            555
+          ],
+          "pivot": [
+            306.5,
+            552
+          ],
+          "visibleHeight": 549
+        }
+      },
+      "applied": true
+    },
+    {
+      "theme": "envyLounge",
+      "path": "assets/sin-rooms/envy-lounge.webp",
+      "bytes": 110630,
+      "sha256": "36d7cac0fba5c5f2d76c8b12ed836635d32db7bd311edeb7ccb511d7dade568f",
+      "origin": "R443: six Dots two-direction furniture PNGs (2026-11-09 Drive delivery, REVIEW_CANDIDATES_ONLY) — alpha<=16 cleared, cropped, downscaled and packed; source pixels otherwise unchanged. Dots \"northwall-se\" files face SE = game west wall (W cells); \"westwall-sw\" files face SW = game north wall (N cells).",
+      "sources": {
+        "sofaN": {
+          "dots": "SW-FURNITURE-SOFA-westwall-sw",
+          "sha256Prefix": "4cdcab75"
+        },
+        "sofaW": {
+          "dots": "SW-FURNITURE-SOFA-northwall-se",
+          "sha256Prefix": "a03addfe"
+        },
+        "tableN": {
+          "dots": "SW-FURNITURE-table-westwall-sw",
+          "sha256Prefix": "f9417fc0"
+        },
+        "tableW": {
+          "dots": "SW-FURNITURE-table-northwall-se",
+          "sha256Prefix": "b081da6b"
+        },
+        "wardrobeN": {
+          "dots": "SW-FURNITURE-wardrobe-westwall-sw",
+          "sha256Prefix": "2a22e0c2"
+        },
+        "wardrobeW": {
+          "dots": "SW-FURNITURE-wardrobe-northwall-se",
+          "sha256Prefix": "c9f3e4f5"
+        }
+      },
+      "license": "Generated for this project by the Dots collaborator; no third-party game assets.",
+      "format": {
+        "width": 1024,
+        "height": 695,
+        "alpha": true
+      },
+      "applied": true,
+      "cells": {
+        "wardrobeN": {
+          "sourceRect": [
+            2,
+            2,
+            202,
+            445
+          ],
+          "pivot": [
+            101.0,
+            445
+          ],
+          "visibleHeight": 445
+        },
+        "wardrobeW": {
+          "sourceRect": [
+            208,
+            2,
+            204,
+            417
+          ],
+          "pivot": [
+            102.0,
+            417
+          ],
+          "visibleHeight": 417
+        },
+        "sofaW": {
+          "sourceRect": [
+            416,
+            2,
+            339,
+            283
+          ],
+          "pivot": [
+            169.5,
+            283
+          ],
+          "visibleHeight": 283
+        },
+        "sofaN": {
+          "sourceRect": [
+            2,
+            451,
+            342,
+            242
+          ],
+          "pivot": [
+            171.0,
+            242
+          ],
+          "visibleHeight": 242
+        },
+        "tableN": {
+          "sourceRect": [
+            348,
+            451,
+            238,
+            200
+          ],
+          "pivot": [
+            119.0,
+            200
+          ],
+          "visibleHeight": 200
+        },
+        "tableW": {
+          "sourceRect": [
+            590,
+            451,
+            258,
+            199
+          ],
+          "pivot": [
+            129.0,
+            199
+          ],
+          "visibleHeight": 199
+        }
+      }
+    }
+  ],
+  "boundsMethod": "Per-cell alpha >16 visible bounds with 3px padding; original pixels unchanged. Near-transparent generation fringe outside bounds is excluded by sourceRect."
+}

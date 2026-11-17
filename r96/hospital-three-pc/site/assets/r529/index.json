@@ -1,0 +1,29 @@
+{
+ "round": "R529",
+ "note": "질투의 집 소파 곁에 서 있는 전등. 그림만 놓는다(빛을 따로 그리지 않음). 원본은 그대로 둔다. 드라이브 파일 ID 는 적지 않는다.",
+ "reused": [
+  "assets/r524/sofa-n.webp",
+  "assets/r524/sofa-w.webp"
+ ],
+ "stillMissing": [
+  {
+   "name": "서재 책상·찬장·조리대·식재료 선반·개수대·벽등",
+   "why": "Dots CX-0066RM 추가1 요청(r2) 대기"
+  }
+ ],
+ "files": [
+  {
+   "file": "assets/r529/floor-lamp.webp",
+   "bytes": 5824,
+   "sha256": "2f1d9efcd8df6ba9f3f1fc79f1c32d0cfec6af64a19e57ffb5580bc334292508",
+   "size": [
+    74,
+    256
+   ],
+   "source": "Dots CX-0066RM r1 서 있는 전등(RM-07) 한 장 -> 여백 잘라 내고 크기 줄임(덧칠·각도 보정 없음)",
+   "kind": "Dots 가구 그림(방향 없는 서 있는 물건)",
+   "use": "질투의 집 응접실·읽는 서재의 소파 곁 전등",
+   "applied": true
+  }
+ ]
+}

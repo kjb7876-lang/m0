@@ -1,0 +1,16 @@
+// R325 픽셀 모드 어두운 몹 가독성 — 사용자 2026-11-05 "픽셀모드는 너가 스킬써서 검수개선해봐".
+//  검수(create-game-assets 래스터 QA + 7분야 심사): 픽셀 몹 시트 221장 중 평균 밝기 45 미만 25장(중앙값 64)은 어두운 바닥에서 몸이 묻힌다.
+//  → scripts/r325-pixel-readable.py 로 만든 파생본(어두운 값 감마 0.72 + 자기 색을 밝힌 1px 테두리, 원본은 그대로)을 픽셀 모드일 때만 쓴다.
+//  R306 표(DATA.rows[].pixel.path)를 그 자리에서 바꾼다(칸·피벗·몸 키는 같음). 칠한 판·판정·저장 불변.
+//  끄기: localStorage['storyworld.r325.pixelReadable']='{"on":false}'
+(()=>{'use strict';
+if(window.__STORYWORLD_PIXEL_READABLE_R325__)return;
+const REV='R325-pixel-readable-1',KEY='storyworld.r325.pixelReadable';
+const MAP=Object.freeze({"assets/r248/mobs/m001.webp":"assets/r325/pixel-readable/m001.webp","assets/r248/mobs/m009.webp":"assets/r325/pixel-readable/m009.webp","assets/r248/mobs/m012.webp":"assets/r325/pixel-readable/m012.webp","assets/r248/mobs/m013.webp":"assets/r325/pixel-readable/m013.webp","assets/r248/mobs/m031.webp":"assets/r325/pixel-readable/m031.webp","assets/r248/mobs/m034.webp":"assets/r325/pixel-readable/m034.webp","assets/r248/mobs/m041.webp":"assets/r325/pixel-readable/m041.webp","assets/r248/mobs/m046.webp":"assets/r325/pixel-readable/m046.webp","assets/r248/mobs/m064.webp":"assets/r325/pixel-readable/m064.webp","assets/r248/mobs/m065.webp":"assets/r325/pixel-readable/m065.webp","assets/r248/mobs/m080.webp":"assets/r325/pixel-readable/m080.webp","assets/r306/pixel/p02efba5d54cc.webp":"assets/r325/pixel-readable/p02efba5d54cc.webp","assets/r306/pixel/p10447845ef69.webp":"assets/r325/pixel-readable/p10447845ef69.webp","assets/r306/pixel/p1ff2b3e04217.webp":"assets/r325/pixel-readable/p1ff2b3e04217.webp","assets/r306/pixel/p2349b042c2e6.webp":"assets/r325/pixel-readable/p2349b042c2e6.webp","assets/r306/pixel/p2453efe589b5.webp":"assets/r325/pixel-readable/p2453efe589b5.webp","assets/r306/pixel/p3faccbe08f7a.webp":"assets/r325/pixel-readable/p3faccbe08f7a.webp","assets/r306/pixel/p40d825f5a223.webp":"assets/r325/pixel-readable/p40d825f5a223.webp","assets/r306/pixel/p47d009168139.webp":"assets/r325/pixel-readable/p47d009168139.webp","assets/r306/pixel/pa832fc0f4661.webp":"assets/r325/pixel-readable/pa832fc0f4661.webp","assets/r306/pixel/pdbbaba4482c0.webp":"assets/r325/pixel-readable/pdbbaba4482c0.webp","assets/r306/pixel/pdbf321a1a081.webp":"assets/r325/pixel-readable/pdbf321a1a081.webp","assets/r306/pixel/pe7abcfa8661e.webp":"assets/r325/pixel-readable/pe7abcfa8661e.webp","assets/r306/pixel/pe99278e2986f.webp":"assets/r325/pixel-readable/pe99278e2986f.webp","assets/r306/pixel/pf0ad5f9f7a51.webp":"assets/r325/pixel-readable/pf0ad5f9f7a51.webp"});
+let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
+const D=window.__STORYWORLD_MOB_ART_VARIANTS_R306_DATA__;let swapped=0;const orig=new Map();
+function apply(v){if(!D||!D.rows)return 0;let n=0;for(const r of Object.values(D.rows)){const px=r&&r.pixel;if(!px)continue;if(!orig.has(px))orig.set(px,px.path);const base=orig.get(px),alt=MAP[base];const want=v&&alt?alt:base;if(px.path!==want){px.path=want;n++;}}return n;}
+try{swapped=apply(on);}catch(_){}
+function set(v){on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}apply(on);return on;}
+window.__STORYWORLD_PIXEL_READABLE_R325__=Object.freeze({revision:REV,set,map:MAP,inspect:()=>({revision:REV,on,swapped,sheets:Object.keys(MAP).length})});
+})();

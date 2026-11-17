@@ -1,0 +1,30 @@
+{
+ "revision": "R273",
+ "method": "alpha bbox (alpha>=16) + pad 6, long side <=512, WebP q92 alpha 100",
+ "items": {
+  "monolith-side": {
+   "path": "assets/r273/props/monolith-side.webp",
+   "driveZip": "StoryWorld-Data-Monument-side-rear-v1.zip",
+   "driveId": "1omEx9XdYChybHcSGftV6xLtAPkZky6HQ",
+   "zipSHA256": "ce9b10360cd0c5944c041df5f37691bc129061ed9878f4a6bdcf6d567d2655b6",
+   "originalSHA256": "8fc9c802efb4a9a3fbff22c7cc9788c6079f3f02d3d99a0809e9152e6cc3e957",
+   "originalSize": [
+    1312,
+    1199
+   ],
+   "derivedSHA256": "76285df61fde0b4b2d314771d7676d5b89254eae3198339e1fc165e3cdcd2d6e",
+   "derivedBytes": 42960,
+   "derivedSize": [
+    317,
+    512
+   ],
+   "status": "CONDITIONAL_DATA_MONUMENT_SIDE_REAR_OBSERVATION",
+   "region": "existing_data_world_scenery",
+   "canonLines": [],
+   "baseInGame": "r129 monolith",
+   "use": "NS 데이터 세계 비석(samong-mood-r123 data deco 3개)의 측후면 — 같은 방 두 번째 비석에 써서 세 개가 같은 각도로 반복되지 않게(조건부·최종 아님)",
+   "applied": true,
+   "note": "조건부·최종 아님(CONDITIONAL 각도 변형, R257 방식)"
+  }
+ }
+}

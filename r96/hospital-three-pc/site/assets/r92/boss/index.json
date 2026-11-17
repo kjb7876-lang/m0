@@ -1,0 +1,202 @@
+{
+ "schema": "storyworld.r92.boss-death/v1",
+ "source": "derived-boss-death (seven v2 dissolution sheets, review candidates), processed copy",
+ "processing": [
+  "low-alpha (<160) edge colour bleed",
+  "premultiplied 2x box downscale (384x512 cells -> 192x256)",
+  "8 cells cropped to their union alpha>8 box, 2 px pad"
+ ],
+ "notes": {
+  "sequence": "l305-boss and mb-kair09-v31231 skip frames 5-6 (source QA: body reads as rising again)",
+  "defaultOff": "c103-mid / c103-boss (source QA: narrative death not confirmed)"
+ },
+ "bosses": {
+  "dist00-boss": {
+   "name": "뿌리의 문지기",
+   "path": "assets/r92/boss/dist00-boss-death.png",
+   "cell": [
+    147,
+    154
+   ],
+   "frames": 8,
+   "sequence": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "defaultOn": true,
+   "visibleHeight": 147,
+   "pivot": [
+    66,
+    150
+   ],
+   "bytes": 317913,
+   "sha256": "fc7be5c5dd88d31fb0c0ad755ed4bf464153768b5af197a77f30692c3c61e279"
+  },
+  "mb-ep1a07": {
+   "name": "무의 기억포식자",
+   "path": "assets/r92/boss/mb-ep1a07-death.png",
+   "cell": [
+    151,
+    136
+   ],
+   "frames": 8,
+   "sequence": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "defaultOn": true,
+   "visibleHeight": 129,
+   "pivot": [
+    67,
+    133
+   ],
+   "bytes": 269946,
+   "sha256": "db7f6a6f3ff5ab8b6a5d10f9be0084084d5166c1e465f6f1019b4a510285992f"
+  },
+  "l305-boss": {
+   "name": "고블린 추장",
+   "path": "assets/r92/boss/l305-boss-death.png",
+   "cell": [
+    149,
+    136
+   ],
+   "frames": 8,
+   "sequence": [
+    0,
+    1,
+    2,
+    3,
+    6,
+    7
+   ],
+   "defaultOn": true,
+   "visibleHeight": 128,
+   "pivot": [
+    75,
+    134
+   ],
+   "bytes": 263732,
+   "sha256": "52f6c07b608c7974e6331889c0cbb13aa4437a9008701efcfb4639f221b002d7"
+  },
+  "mb-kair09-v31231": {
+   "name": "망각 묘지기 · 삭제된 선택",
+   "path": "assets/r92/boss/mb-kair09-v31231-death.png",
+   "cell": [
+    152,
+    158
+   ],
+   "frames": 8,
+   "sequence": [
+    0,
+    1,
+    2,
+    3,
+    6,
+    7
+   ],
+   "defaultOn": true,
+   "visibleHeight": 148,
+   "pivot": [
+    65,
+    156
+   ],
+   "bytes": 289738,
+   "sha256": "0b8a36a202879da421502f5cc6d7c5923e9af0cdf8539bb5a804228e9093c566"
+  },
+  "c102-boss": {
+   "name": "네트워크 합창체",
+   "path": "assets/r92/boss/c102-boss-death.png",
+   "cell": [
+    138,
+    157
+   ],
+   "frames": 8,
+   "sequence": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "defaultOn": true,
+   "visibleHeight": 153,
+   "pivot": [
+    66,
+    155
+   ],
+   "bytes": 278381,
+   "sha256": "8131fafeaf9ddee4f145500b991ade26d847b196c860a71ce507515761af76cc"
+  },
+  "c103-mid": {
+   "name": "이단의목사 한리안",
+   "path": "assets/r92/boss/c103-mid-death.png",
+   "cell": [
+    150,
+    181
+   ],
+   "frames": 8,
+   "sequence": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "defaultOn": false,
+   "visibleHeight": 146,
+   "pivot": [
+    69,
+    167
+   ],
+   "bytes": 330364,
+   "sha256": "cb0966c1b9c15dfd71f1fa5c4ce3d87821438985ab82b57c326f1802114690ba"
+  },
+  "c103-boss": {
+   "name": "이단의목사 백이온",
+   "path": "assets/r92/boss/c103-boss-death.png",
+   "cell": [
+    138,
+    150
+   ],
+   "frames": 8,
+   "sequence": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "defaultOn": false,
+   "visibleHeight": 134,
+   "pivot": [
+    61,
+    141
+   ],
+   "bytes": 269844,
+   "sha256": "cc121cebd9273f367bb627352f32142983ba048c23e1e5644195aa2beb70c086"
+  }
+ },
+ "fringeTexelsRecoloured": 908064,
+ "originalsModified": false
+}

@@ -1,0 +1,11 @@
+{
+ "source": "ChatGPT image generation 2026-10-27 (garden hedge wall, top ~20% = trimmed cap seen from above)",
+ "sprites": {
+  "hedge": {
+   "w": 1024,
+   "h": 1024,
+   "bytes": 330396,
+   "sha256": "2bfcfb10c363e91f687f93c9095921f61f481b5b7f6bf4ddaec8096f6009fcda"
+  }
+ }
+}

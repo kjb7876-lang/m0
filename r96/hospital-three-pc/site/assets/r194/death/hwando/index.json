@@ -1,0 +1,123 @@
+{
+ "hero": "hwando",
+ "action": "death",
+ "order": "휘청 2 → 무릎 1 → 눕기 3 (README)",
+ "mirroredInGame": {
+  "w": "e",
+  "sw": "se",
+  "nw": "ne"
+ },
+ "applied": "쓰러질 때(R151 death-r151.js) 프레임 애니메이션 — client-source/attack-anim-r143.js",
+ "directions": {
+  "s": {
+   "path": "assets/r143/death/hwando/death-s.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    223
+   ],
+   "source": {
+    "driveId": "1_JwldFLHXxxenftJY00MyOzBE25fv7Mi",
+    "file": "HERO-hwando-death-s.png",
+    "sha256": "21f3f431ca63f08f5881974a006d8b2838ae05cc1979d2d36174037d567f1dba",
+    "bytes": 209108
+   },
+   "sha256": "23da10faec43c7546856b47662b65a45b174241f8665f224d78fc20012b5d560",
+   "bytes": 73214
+  },
+  "se": {
+   "path": "assets/r143/death/hwando/death-se.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    225
+   ],
+   "source": {
+    "driveId": "1_JwldFLHXxxenftJY00MyOzBE25fv7Mi",
+    "file": "HERO-hwando-death-se.png",
+    "sha256": "634a72b54df9b3ff88066d8f8d4cdca682733ea7ad50bf9195b4a767783b431a",
+    "bytes": 187848
+   },
+   "sha256": "abf9c6d6e29291fa592eeb6fafbd06fdf0d749abee9d72c02a641ca47f1e6cf3",
+   "bytes": 69406
+  },
+  "e": {
+   "path": "assets/r143/death/hwando/death-e.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    228
+   ],
+   "source": {
+    "driveId": "1_JwldFLHXxxenftJY00MyOzBE25fv7Mi",
+    "file": "HERO-hwando-death-e.png",
+    "sha256": "31dc3c4e254e729a96c7db99061033ce4b3d400b457e4ed6466daa98ca746618",
+    "bytes": 215261
+   },
+   "sha256": "d91ce7768453fb4b4fcd409e31ca7328afbefb626e69ffec6fbc4d52fed99213",
+   "bytes": 68518
+  },
+  "ne": {
+   "path": "assets/r143/death/hwando/death-ne.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    225
+   ],
+   "source": {
+    "driveId": "1_JwldFLHXxxenftJY00MyOzBE25fv7Mi",
+    "file": "HERO-hwando-death-ne.png",
+    "sha256": "b538697f5c086f321fb93f8ef53d0be9da23bf8d97d59fbcdff040ed74757e3c",
+    "bytes": 175582
+   },
+   "sha256": "8f73b18fbe97645c14e471886a7ab5f2424acc2d1c514b4317cda64c4f108a49",
+   "bytes": 59608
+  },
+  "n": {
+   "path": "assets/r143/death/hwando/death-n.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    225
+   ],
+   "source": {
+    "driveId": "1_JwldFLHXxxenftJY00MyOzBE25fv7Mi",
+    "file": "HERO-hwando-death-n.png",
+    "sha256": "fbeaf2ed5045eaec302ffeae485138df93507def7ffc9c5a9dee0f9b187457c9",
+    "bytes": 194443
+   },
+   "sha256": "143a79c338de7d498fc206405e35a0bf51605e3b9fdd654e4449bd254f8726ab",
+   "bytes": 65170
+  }
+ },
+ "drive": "StoryWorld-Hwando-INCOMPLETE-assets-part01~05.zip (review 49of50-276of280)",
+ "driveIds": [
+  "17x2Odx4khIZwooL43VqhIZniiZHqoxHk",
+  "1TEUSW8NLx80quSVLVgU5D2v9TOn0jKYD",
+  "1IJTS2ofV7atjPmHyAeZ_Gyoyp6NaZW9w",
+  "1fLgYk-7ZJMdGZFwE_BEQ-PQ-NXbst3S2",
+  "1_JwldFLHXxxenftJY00MyOzBE25fv7Mi"
+ ],
+ "status": "드라이브 묶음 표기: 불완전 검토 자료(49/50, guard-SE 없음). 비교 WIP — 실제 게임 재생·접지 미인증(묶음 KNOWN-ISSUES). 원본 SHA256SUMS.txt 대조 통과.",
+ "decision": "R194(사용자 2026-11-01 \"구글드라이브 자산들 적용\"): 묶음 KNOWN-ISSUES 의 품질 보류(hit-NE 칼 하나 더, dash-E 칼 겹침, run-E 보행, ultimate-E 축척)는 쓰지 않음. 환도 쓰러짐은 기존 동쪽 하나 → 5방향, 피격은 처음 추가(북동은 북 시트). 달리기는 run-E 보류·나머지 C 등급이라 이번엔 미적용. 기존 r151/death/hwando 는 덮어쓰지 않음."
+}

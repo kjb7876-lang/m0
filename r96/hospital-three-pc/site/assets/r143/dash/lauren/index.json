@@ -1,0 +1,53 @@
+{
+ "revision": "R201",
+ "hero": "lauren",
+ "action": "dash",
+ "directions": {
+  "s": {
+   "path": "assets/r143/dash/lauren/dash-s.webp",
+   "frames": 4,
+   "cell": [
+    192,
+    256
+   ],
+   "footY": 225,
+   "feet": [
+    225,
+    228,
+    222,
+    225
+   ],
+   "tops": [
+    21,
+    25,
+    17,
+    17
+   ],
+   "sha256": "0785267661a2dfc8b9640d07a3ec434dca550936e774a5a75771146ecc2d2060",
+   "bytes": 43580,
+   "status": "STATIC_ASSET_PASS",
+   "source": {
+    "files": [
+     {
+      "path": "assets/dash/HERO-lauren-dash-s-F0.png",
+      "sha256": "1a986fa9fa4e1cebd4e20fd4e72025ba68d2a5445df1890681c6af64c31e19f8"
+     },
+     {
+      "path": "assets/dash/HERO-lauren-dash-s-F1.png",
+      "sha256": "7d29b0b2a3c49fded9aef18a7090a79494aeb9a84ecc7bf15fbde69deab78db0"
+     },
+     {
+      "path": "assets/dash/HERO-lauren-dash-s-F2.png",
+      "sha256": "e2e6b8083c53ca3d2b7f4f44107659a6feb1260384bb5905882539742c1efd3d"
+     },
+     {
+      "path": "assets/dash/HERO-lauren-dash-s-F3.png",
+      "sha256": "72abb3492a86d174834ef00ee550de366fbb95aa2ec41362cd662e0a5bb460cb"
+     }
+    ],
+    "manifest": "로렌 정적 검수 선별 자산팩"
+   }
+  }
+ },
+ "note": "기본팩(scoped static default) 추가 동작. 없는 방향은 기존 그림 유지, W/SW/NW 는 E/SE/NE 반전(기존 매핑). 최소 12칸 미충족(팩 README). 실게임 재생·VFX 연동은 팩 기준 미검증."
+}

@@ -1,0 +1,414 @@
+{
+  "format": "pxf.graph@1",
+  "name": "파란 필살기 오라",
+  "settings": {
+    "size": 64,
+    "frames": 24,
+    "fps": 24,
+    "loop": false
+  },
+  "nodes": [
+    {
+      "id": "noise",
+      "type": "Noise",
+      "x": 40,
+      "y": 40,
+      "params": {
+        "type": "fbm",
+        "scaleX": 4,
+        "scaleY": 9,
+        "octaves": 3,
+        "seed": 4242,
+        "scrollX": 0,
+        "scrollY": -4,
+        "contrast": 1.8,
+        "bias": 0.2
+      }
+    },
+    {
+      "id": "body",
+      "type": "Shape",
+      "x": 40,
+      "y": 180,
+      "params": {
+        "shape": "circle",
+        "x": 0.5,
+        "y": 0.55,
+        "size": {
+          "k": [
+            [
+              0,
+              10,
+              "out3"
+            ],
+            [
+              8,
+              30,
+              "out"
+            ],
+            [
+              23,
+              34,
+              "linear"
+            ]
+          ]
+        },
+        "size2": 0.4,
+        "points": 5,
+        "rot": 0,
+        "aspect": 2.2,
+        "stroke": 0,
+        "falloff": 0.7,
+        "intensity": 1
+      }
+    },
+    {
+      "id": "core",
+      "type": "Shape",
+      "x": 40,
+      "y": 320,
+      "params": {
+        "shape": "circle",
+        "x": 0.5,
+        "y": 0.58,
+        "size": {
+          "k": [
+            [
+              0,
+              6,
+              "out3"
+            ],
+            [
+              8,
+              13,
+              "linear"
+            ],
+            [
+              23,
+              9,
+              "linear"
+            ]
+          ]
+        },
+        "size2": 0.4,
+        "points": 5,
+        "rot": 0,
+        "aspect": 2,
+        "stroke": 0,
+        "falloff": 0.5,
+        "intensity": 1
+      }
+    },
+    {
+      "id": "ring",
+      "type": "Shape",
+      "x": 40,
+      "y": 460,
+      "params": {
+        "shape": "ring",
+        "x": 0.5,
+        "y": 0.85,
+        "size": {
+          "k": [
+            [
+              0,
+              6,
+              "out3"
+            ],
+            [
+              10,
+              36,
+              "out"
+            ],
+            [
+              23,
+              44,
+              "linear"
+            ]
+          ]
+        },
+        "size2": 0.12,
+        "points": 5,
+        "rot": 0,
+        "aspect": 0.3,
+        "stroke": 0,
+        "falloff": 0.3,
+        "intensity": 0.9
+      }
+    },
+    {
+      "id": "flash",
+      "type": "Shape",
+      "x": 40,
+      "y": 600,
+      "params": {
+        "shape": "circle",
+        "x": 0.5,
+        "y": 0.6,
+        "size": {
+          "k": [
+            [
+              0,
+              4,
+              "out3"
+            ],
+            [
+              3,
+              20,
+              "out"
+            ],
+            [
+              8,
+              6,
+              "linear"
+            ],
+            [
+              10,
+              0,
+              "linear"
+            ]
+          ]
+        },
+        "size2": 0.4,
+        "points": 5,
+        "rot": 0,
+        "aspect": 1,
+        "stroke": 0,
+        "falloff": 0.5,
+        "intensity": 1
+      }
+    },
+    {
+      "id": "sparks",
+      "type": "Particles",
+      "x": 40,
+      "y": 740,
+      "params": {
+        "count": 24,
+        "seed": 3131,
+        "emit": "stream",
+        "start": 0.05,
+        "span": 0.6,
+        "life": 0.5,
+        "lifeVar": 0.3,
+        "area": "line",
+        "x": 0.5,
+        "y": 0.85,
+        "aw": 26,
+        "ah": 0,
+        "dirMode": "fixed",
+        "angle": -90,
+        "spread": 25,
+        "speed": 0.9,
+        "speedVar": 0.5,
+        "gravity": 0,
+        "drag": 0.02,
+        "turb": 0.6,
+        "sizeA": 1.5,
+        "sizeB": 0,
+        "pshape": "streak",
+        "stretch": 3,
+        "fade": "out",
+        "bright": 0.9,
+        "loop": false,
+        "ground": 0,
+        "bounce": 0.35,
+        "brightVar": 0
+      }
+    },
+    {
+      "id": "aura",
+      "type": "Mask",
+      "x": 270,
+      "y": 110,
+      "params": {
+        "mode": "multiply",
+        "strength": 1
+      }
+    },
+    {
+      "id": "a1",
+      "type": "Blend",
+      "x": 500,
+      "y": 200,
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "a2",
+      "type": "Blend",
+      "x": 730,
+      "y": 300,
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "a3",
+      "type": "Blend",
+      "x": 960,
+      "y": 400,
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "a4",
+      "type": "Blend",
+      "x": 1190,
+      "y": 500,
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "color",
+      "type": "Palette",
+      "x": 1420,
+      "y": 500,
+      "params": {
+        "colors": [
+          "#0a1a5c",
+          "#1b4fd1",
+          "#3a9bff",
+          "#9fe0ff",
+          "#e6faff"
+        ],
+        "cutoff": 0.12,
+        "shift": 0,
+        "mode": "bands",
+        "key": "alpha",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "fade",
+      "type": "Tint",
+      "x": 1650,
+      "y": 500,
+      "params": {
+        "color": "#ffffff",
+        "amount": 0,
+        "bright": 1,
+        "opacity": {
+          "k": [
+            [
+              0,
+              0,
+              "linear"
+            ],
+            [
+              2,
+              1,
+              "linear"
+            ],
+            [
+              15,
+              1,
+              "in"
+            ],
+            [
+              23,
+              0,
+              "linear"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "out",
+      "type": "Output",
+      "x": 1880,
+      "y": 500,
+      "params": {
+        "alpha": "soft",
+        "threshold": 0.1
+      }
+    }
+  ],
+  "links": [
+    {
+      "f": "noise",
+      "t": "aura",
+      "p": 0
+    },
+    {
+      "f": "body",
+      "t": "aura",
+      "p": 1
+    },
+    {
+      "f": "aura",
+      "t": "a1",
+      "p": 0
+    },
+    {
+      "f": "core",
+      "t": "a1",
+      "p": 1
+    },
+    {
+      "f": "a1",
+      "t": "a2",
+      "p": 0
+    },
+    {
+      "f": "ring",
+      "t": "a2",
+      "p": 1
+    },
+    {
+      "f": "a2",
+      "t": "a3",
+      "p": 0
+    },
+    {
+      "f": "sparks",
+      "t": "a3",
+      "p": 1
+    },
+    {
+      "f": "a3",
+      "t": "a4",
+      "p": 0
+    },
+    {
+      "f": "flash",
+      "t": "a4",
+      "p": 1
+    },
+    {
+      "f": "a4",
+      "t": "color",
+      "p": 0
+    },
+    {
+      "f": "color",
+      "t": "fade",
+      "p": 0
+    },
+    {
+      "f": "fade",
+      "t": "out",
+      "p": 0
+    }
+  ],
+  "game": {
+    "style": "hero-pixel-v1",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "logicalSize": 64,
+    "blend": "add",
+    "referenceCell": 62,
+    "durationMs": 1000,
+    "impactFrame": 3
+  }
+}

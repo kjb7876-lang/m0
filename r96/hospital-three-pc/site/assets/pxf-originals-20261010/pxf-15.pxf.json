@@ -1,0 +1,886 @@
+{
+  "name": "처형 본능 · 붉은 처형 인장",
+  "settings": {
+    "size": 64,
+    "frames": 32,
+    "fps": 24,
+    "loop": true
+  },
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "Shape",
+      "params": {
+        "shape": "circle",
+        "x": 0.5,
+        "y": 0.5,
+        "size": 26,
+        "size2": 0.4,
+        "points": 5,
+        "rot": 0,
+        "aspect": 1,
+        "stroke": 0,
+        "falloff": 1,
+        "intensity": {
+          "k": [
+            [
+              0,
+              0.4
+            ],
+            [
+              8,
+              0.65
+            ],
+            [
+              16,
+              0.4
+            ],
+            [
+              24,
+              0.65
+            ],
+            [
+              31,
+              0.4
+            ]
+          ]
+        }
+      },
+      "x": 40,
+      "y": 40
+    },
+    {
+      "id": "n2",
+      "type": "Tint",
+      "params": {
+        "color": "#d70c35",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 0.6
+      },
+      "x": 250,
+      "y": 40
+    },
+    {
+      "id": "n3",
+      "type": "Shape",
+      "params": {
+        "shape": "circle",
+        "x": 0.5,
+        "y": 0.5,
+        "size": 18,
+        "size2": 0.4,
+        "points": 5,
+        "rot": 0,
+        "aspect": 1,
+        "stroke": 0,
+        "falloff": 0.25,
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 190
+    },
+    {
+      "id": "n4",
+      "type": "Tint",
+      "params": {
+        "color": "#1a081b",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 0.75
+      },
+      "x": 250,
+      "y": 190
+    },
+    {
+      "id": "n5",
+      "type": "Arc",
+      "params": {
+        "x": 0.5,
+        "y": 0.5,
+        "radius": 22,
+        "thick": 2,
+        "start": 45,
+        "sweep": 58,
+        "head": 1,
+        "tail": 0.6,
+        "taper": 0.3,
+        "aspect": 1,
+        "rot": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              31,
+              90
+            ]
+          ]
+        },
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 340
+    },
+    {
+      "id": "n6",
+      "type": "Arc",
+      "params": {
+        "x": 0.5,
+        "y": 0.5,
+        "radius": 22,
+        "thick": 2,
+        "start": 135,
+        "sweep": 58,
+        "head": 1,
+        "tail": 0.6,
+        "taper": 0.3,
+        "aspect": 1,
+        "rot": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              31,
+              90
+            ]
+          ]
+        },
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 490
+    },
+    {
+      "id": "n7",
+      "type": "Arc",
+      "params": {
+        "x": 0.5,
+        "y": 0.5,
+        "radius": 22,
+        "thick": 2,
+        "start": 225,
+        "sweep": 58,
+        "head": 1,
+        "tail": 0.6,
+        "taper": 0.3,
+        "aspect": 1,
+        "rot": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              31,
+              90
+            ]
+          ]
+        },
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 640
+    },
+    {
+      "id": "n8",
+      "type": "Arc",
+      "params": {
+        "x": 0.5,
+        "y": 0.5,
+        "radius": 22,
+        "thick": 2,
+        "start": 315,
+        "sweep": 58,
+        "head": 1,
+        "tail": 0.6,
+        "taper": 0.3,
+        "aspect": 1,
+        "rot": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              31,
+              90
+            ]
+          ]
+        },
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 790
+    },
+    {
+      "id": "n9",
+      "type": "Blend",
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 340
+    },
+    {
+      "id": "n10",
+      "type": "Blend",
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      },
+      "x": 460,
+      "y": 40
+    },
+    {
+      "id": "n11",
+      "type": "Blend",
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      },
+      "x": 670,
+      "y": 40
+    },
+    {
+      "id": "n12",
+      "type": "Tint",
+      "params": {
+        "color": "#ff304f",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 1
+      },
+      "x": 880,
+      "y": 40
+    },
+    {
+      "id": "n13",
+      "type": "Outline",
+      "params": {
+        "color": "#190d20",
+        "threshold": 0.5,
+        "width": 1,
+        "corners": true,
+        "mode": "outer"
+      },
+      "x": 1090,
+      "y": 40
+    },
+    {
+      "id": "n14",
+      "type": "Glow",
+      "params": {
+        "radius": 1,
+        "strength": 0.9
+      },
+      "x": 1300,
+      "y": 40
+    },
+    {
+      "id": "n15",
+      "type": "Shape",
+      "params": {
+        "shape": "diamond",
+        "x": 0.5,
+        "y": 0.5,
+        "size": 15,
+        "size2": 0.4,
+        "points": 5,
+        "rot": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              8,
+              3
+            ],
+            [
+              16,
+              0
+            ],
+            [
+              24,
+              -3
+            ],
+            [
+              31,
+              0
+            ]
+          ]
+        },
+        "aspect": 1.12,
+        "stroke": 1.5,
+        "falloff": 0,
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 940
+    },
+    {
+      "id": "n16",
+      "type": "Tint",
+      "params": {
+        "color": "#ff394c",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 490
+    },
+    {
+      "id": "n17",
+      "type": "Outline",
+      "params": {
+        "color": "#190d20",
+        "threshold": 0.5,
+        "width": 1,
+        "corners": true,
+        "mode": "outer"
+      },
+      "x": 460,
+      "y": 190
+    },
+    {
+      "id": "n18",
+      "type": "Glow",
+      "params": {
+        "radius": 1,
+        "strength": 0.7
+      },
+      "x": 670,
+      "y": 190
+    },
+    {
+      "id": "n19",
+      "type": "Spike",
+      "params": {
+        "x0": 0.375,
+        "y0": 0.31,
+        "x1": 0.64,
+        "y1": 0.68,
+        "width": 4.3,
+        "taper": 1,
+        "grow": 1,
+        "base": 0.75,
+        "tip": 1,
+        "facet": 0.35,
+        "ridge": 0.75,
+        "shine": 0.2,
+        "shineW": 0.1,
+        "intensity": 1,
+        "taperPow": 1,
+        "shineAmp": 0.6
+      },
+      "x": 40,
+      "y": 1090
+    },
+    {
+      "id": "n20",
+      "type": "Spike",
+      "params": {
+        "x0": 0.625,
+        "y0": 0.31,
+        "x1": 0.36,
+        "y1": 0.68,
+        "width": 4.3,
+        "taper": 1,
+        "grow": 1,
+        "base": 0.75,
+        "tip": 1,
+        "facet": 0.35,
+        "ridge": 0.75,
+        "shine": 0.2,
+        "shineW": 0.1,
+        "intensity": 1,
+        "taperPow": 1,
+        "shineAmp": 0.6
+      },
+      "x": 40,
+      "y": 1240
+    },
+    {
+      "id": "n21",
+      "type": "Shape",
+      "params": {
+        "shape": "diamond",
+        "x": 0.5,
+        "y": 0.17,
+        "size": 3.5,
+        "size2": 0.4,
+        "points": 5,
+        "rot": 0,
+        "aspect": 1.25,
+        "stroke": 0,
+        "falloff": 0,
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 1390
+    },
+    {
+      "id": "n22",
+      "type": "Spike",
+      "params": {
+        "x0": 0.5,
+        "y0": 0.72,
+        "x1": 0.5,
+        "y1": 0.85,
+        "width": 4.5,
+        "taper": 1,
+        "grow": 1,
+        "base": 1,
+        "tip": 1,
+        "facet": 0.35,
+        "ridge": 0.75,
+        "shine": 0.2,
+        "shineW": 0.1,
+        "intensity": 1,
+        "taperPow": 1,
+        "shineAmp": 0.6
+      },
+      "x": 40,
+      "y": 1540
+    },
+    {
+      "id": "n23",
+      "type": "Blend",
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 640
+    },
+    {
+      "id": "n24",
+      "type": "Blend",
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      },
+      "x": 460,
+      "y": 340
+    },
+    {
+      "id": "n25",
+      "type": "Blend",
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      },
+      "x": 670,
+      "y": 340
+    },
+    {
+      "id": "n26",
+      "type": "Palette",
+      "params": {
+        "colors": [
+          "#180d23",
+          "#571124",
+          "#aa1028",
+          "#ee2841",
+          "#ff755e",
+          "#ffc49c"
+        ],
+        "cutoff": 0.015,
+        "shift": 0,
+        "mode": "smooth",
+        "key": "alpha",
+        "opacity": 1
+      },
+      "x": 880,
+      "y": 190
+    },
+    {
+      "id": "n27",
+      "type": "Outline",
+      "params": {
+        "color": "#190d20",
+        "threshold": 0.5,
+        "width": 1,
+        "corners": true,
+        "mode": "outer"
+      },
+      "x": 1090,
+      "y": 190
+    },
+    {
+      "id": "n28",
+      "type": "Glow",
+      "params": {
+        "radius": 1,
+        "strength": 0.6
+      },
+      "x": 1300,
+      "y": 190
+    },
+    {
+      "id": "n29",
+      "type": "Shape",
+      "params": {
+        "shape": "diamond",
+        "x": 0.5,
+        "y": 0.49,
+        "size": {
+          "k": [
+            [
+              0,
+              2
+            ],
+            [
+              8,
+              3.2
+            ],
+            [
+              16,
+              2
+            ],
+            [
+              24,
+              3.2
+            ],
+            [
+              31,
+              2
+            ]
+          ]
+        },
+        "size2": 0.4,
+        "points": 5,
+        "rot": 0,
+        "aspect": 1.15,
+        "stroke": 0,
+        "falloff": 0,
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 1690
+    },
+    {
+      "id": "n30",
+      "type": "Tint",
+      "params": {
+        "color": "#ffe3be",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 790
+    },
+    {
+      "id": "n31",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 460,
+      "y": 490
+    },
+    {
+      "id": "n32",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 1510,
+      "y": 40
+    },
+    {
+      "id": "n33",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 1720,
+      "y": 40
+    },
+    {
+      "id": "n34",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 1930,
+      "y": 40
+    },
+    {
+      "id": "n35",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 2140,
+      "y": 40
+    },
+    {
+      "id": "n36",
+      "type": "Transform",
+      "params": {
+        "tx": 0,
+        "ty": 0,
+        "sx": 0.88,
+        "sy": 0.88,
+        "rot": 0,
+        "px": 0.5,
+        "py": 0.5
+      },
+      "x": 2350,
+      "y": 40
+    },
+    {
+      "id": "n37",
+      "type": "Output",
+      "params": {
+        "alpha": "soft",
+        "threshold": 0.5
+      },
+      "x": 2560,
+      "y": 40
+    }
+  ],
+  "links": [
+    {
+      "f": "n1",
+      "t": "n2",
+      "p": 0
+    },
+    {
+      "f": "n3",
+      "t": "n4",
+      "p": 0
+    },
+    {
+      "f": "n5",
+      "t": "n9",
+      "p": 0
+    },
+    {
+      "f": "n6",
+      "t": "n9",
+      "p": 1
+    },
+    {
+      "f": "n9",
+      "t": "n10",
+      "p": 0
+    },
+    {
+      "f": "n7",
+      "t": "n10",
+      "p": 1
+    },
+    {
+      "f": "n10",
+      "t": "n11",
+      "p": 0
+    },
+    {
+      "f": "n8",
+      "t": "n11",
+      "p": 1
+    },
+    {
+      "f": "n11",
+      "t": "n12",
+      "p": 0
+    },
+    {
+      "f": "n12",
+      "t": "n13",
+      "p": 0
+    },
+    {
+      "f": "n13",
+      "t": "n14",
+      "p": 0
+    },
+    {
+      "f": "n15",
+      "t": "n16",
+      "p": 0
+    },
+    {
+      "f": "n16",
+      "t": "n17",
+      "p": 0
+    },
+    {
+      "f": "n17",
+      "t": "n18",
+      "p": 0
+    },
+    {
+      "f": "n19",
+      "t": "n23",
+      "p": 0
+    },
+    {
+      "f": "n20",
+      "t": "n23",
+      "p": 1
+    },
+    {
+      "f": "n23",
+      "t": "n24",
+      "p": 0
+    },
+    {
+      "f": "n21",
+      "t": "n24",
+      "p": 1
+    },
+    {
+      "f": "n24",
+      "t": "n25",
+      "p": 0
+    },
+    {
+      "f": "n22",
+      "t": "n25",
+      "p": 1
+    },
+    {
+      "f": "n25",
+      "t": "n26",
+      "p": 0
+    },
+    {
+      "f": "n26",
+      "t": "n27",
+      "p": 0
+    },
+    {
+      "f": "n27",
+      "t": "n28",
+      "p": 0
+    },
+    {
+      "f": "n29",
+      "t": "n30",
+      "p": 0
+    },
+    {
+      "f": "n2",
+      "t": "n31",
+      "p": 0
+    },
+    {
+      "f": "n4",
+      "t": "n31",
+      "p": 1
+    },
+    {
+      "f": "n31",
+      "t": "n32",
+      "p": 0
+    },
+    {
+      "f": "n14",
+      "t": "n32",
+      "p": 1
+    },
+    {
+      "f": "n32",
+      "t": "n33",
+      "p": 0
+    },
+    {
+      "f": "n18",
+      "t": "n33",
+      "p": 1
+    },
+    {
+      "f": "n33",
+      "t": "n34",
+      "p": 0
+    },
+    {
+      "f": "n28",
+      "t": "n34",
+      "p": 1
+    },
+    {
+      "f": "n34",
+      "t": "n35",
+      "p": 0
+    },
+    {
+      "f": "n30",
+      "t": "n35",
+      "p": 1
+    },
+    {
+      "f": "n35",
+      "t": "n36",
+      "p": 0
+    },
+    {
+      "f": "n36",
+      "t": "n37",
+      "p": 0
+    }
+  ],
+  "game": {
+    "style": "hero-pixel-v1",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "logicalSize": 94,
+    "blend": "normal",
+    "durationMs": 1333.3333333333333,
+    "role": "buff",
+    "referenceCell": 62
+  },
+  "sourceKey": "[\"buff\",\"gold\",null,92831,30,80,1,360,0,2,0,55,150,1,0,0,false]",
+  "sourceRecipe": {
+    "id": "ability-execution-mark",
+    "label": "처형 본능 · 붉은 처형 인장",
+    "effect": "buff",
+    "palette": "gold",
+    "pxfId": "hero-ability-execution-mark",
+    "params": {
+      "count": 30,
+      "life": 80,
+      "speed": 1,
+      "spread": 360,
+      "gravity": 0,
+      "size": 2,
+      "angle": 0,
+      "pitch": 55,
+      "arc": 150,
+      "dir": 1,
+      "alt": false,
+      "ghosts": 0,
+      "glow": 0,
+      "ring": false,
+      "flash": 0,
+      "hitstop": 0,
+      "shake": 0,
+      "slowmo": 1,
+      "loop": true,
+      "interval": 1.1
+    },
+    "seed": 92831
+  },
+  "provenance": {
+    "author": "Hero Inc procedural VFX",
+    "purpose": "처형 본능 · 붉은 처형 인장",
+    "direction": "V2: rotating blood seal with crossed blades; contracting brand; pressure disk, decisive ivory/crimson cross-cut and eroding seal fragments. Dedicated foreground plane above ordinary impact sparks."
+  }
+}

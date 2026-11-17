@@ -1,0 +1,349 @@
+{
+ "revision": "R411",
+ "generator": "scripts/r411-fx-sheets.py",
+ "cell": 256,
+ "cols": 6,
+ "rows": 4,
+ "frames": 24,
+ "fps": 12.5,
+ "source": "Google Drive core24 이펙트 시트(QA_HOLD, 읽기 전용 재사용)",
+ "approval": "사용자 2026-11-08 \"구글드라이브 업로드된 이펙트 스킬 및적중 검토개선해서 보스와 영웅들에 차별점있게 적용\"",
+ "fx": {
+  "boss-meteor": {
+   "file": "boss-meteor.webp",
+   "side": "boss",
+   "effect": "meteor",
+   "nameKo": "운석 낙하",
+   "version": "v001",
+   "status": "QA_HOLD",
+   "pivot": [
+    128,
+    192
+   ],
+   "placement": "ground",
+   "direction": "common",
+   "loop": false,
+   "fps": 12.5,
+   "sheetSha256": "7827090a2855d5d259d86bd33eec9c3376ae62c9eedb181ced0b1c5a6653f86d",
+   "zipSha256": "39129858737a72737a3fc4765a807c5f2ff76458736b80652d43a49afd8ad7f6",
+   "outSha256": "abb71df094c271b8dc440e923c62835a0a79be1f0861f1db8916d2638d41c543",
+   "bytes": 305554,
+   "cleaned": {
+    "edgePixels": 0,
+    "faintPixels": 0
+   }
+  },
+  "boss-fire-wall": {
+   "file": "boss-fire-wall.webp",
+   "side": "boss",
+   "effect": "fire_wall",
+   "nameKo": "화염벽",
+   "version": "v001",
+   "status": "QA_HOLD",
+   "pivot": [
+    128,
+    175
+   ],
+   "placement": "ground",
+   "direction": "common",
+   "loop": false,
+   "fps": 12.5,
+   "sheetSha256": "722b0bed7ca83db1dcb3a53d5b1530e6f0bec601ab5a769e557001859816f75c",
+   "zipSha256": "27a9265ac55d97eaded32a7b4b713ae804ec0d413dcd850e8cb4665b903b73ce",
+   "outSha256": "950bddf0b1fe236ce629e7dca877bcaa7bad68e9c92dec779fd679bc64b3f397",
+   "bytes": 291248,
+   "cleaned": {
+    "edgePixels": 0,
+    "faintPixels": 0
+   }
+  },
+  "boss-corpse-explosion": {
+   "file": "boss-corpse-explosion.webp",
+   "side": "boss",
+   "effect": "corpse_explosion",
+   "nameKo": "시체 폭발",
+   "version": "v001",
+   "status": "QA_HOLD",
+   "pivot": [
+    128,
+    192
+   ],
+   "placement": "ground",
+   "direction": "common",
+   "loop": false,
+   "fps": 12.5,
+   "sheetSha256": "55de3c8efdcd26ede0c40e34db28e912c21ba70e182c32afca1230a622d05466",
+   "zipSha256": "6642749735cfcce4f360fb95d926a27a7aeb1cbbc4f0c5d9589cc7d596b5b608",
+   "outSha256": "f4fa4318d814f63e2435a2469ceb799b7827772254608ef73aaa4ebb0bb4571b",
+   "bytes": 399768,
+   "cleaned": {
+    "edgePixels": 0,
+    "faintPixels": 0
+   }
+  },
+  "boss-tentacle-bind": {
+   "file": "boss-tentacle-bind.webp",
+   "side": "boss",
+   "effect": "tentacle_bind",
+   "nameKo": "촉수 속박",
+   "version": "v002",
+   "status": "QA_HOLD",
+   "pivot": [
+    128,
+    208
+   ],
+   "placement": "ground",
+   "direction": "common",
+   "loop": false,
+   "fps": 12.5,
+   "sheetSha256": "2b6e93be5ccf7ba23760e31ba608ab2d9e5a26f1b3009e8093ddc156f2dd3fa7",
+   "zipSha256": "a36986bb6384c8003822ca5957aaeffe494544a4b46a1b8a821cd51673c0577d",
+   "outSha256": "b0bc0a4ad472b4b580c1cdbe1c73cc755981d4a45b998a9179f1fb45c3b5e745",
+   "bytes": 356824,
+   "cleaned": {
+    "edgePixels": 0,
+    "faintPixels": 0
+   }
+  },
+  "boss-gravity-well": {
+   "file": "boss-gravity-well.webp",
+   "side": "boss",
+   "effect": "gravity_well",
+   "nameKo": "중력 우물",
+   "version": "v001",
+   "status": "QA_HOLD",
+   "pivot": [
+    128,
+    150
+   ],
+   "placement": "ground",
+   "direction": "common",
+   "loop": false,
+   "fps": 12.5,
+   "sheetSha256": "9260413d9016a2dae9bfd1bb6dc3fe4a7e97960f1159e7cdb82a857506109604",
+   "zipSha256": "b205221895d098558c5c476c7d334e685ab5e02c80c913eeb1bd8295645f9e89",
+   "outSha256": "6799ff6c61d65c274063a1cbd1a064330d2e2801df59b05a4eb473cde7ac6560",
+   "bytes": 253890,
+   "cleaned": {
+    "edgePixels": 0,
+    "faintPixels": 0
+   }
+  },
+  "boss-bone-spikes": {
+   "file": "boss-bone-spikes.webp",
+   "side": "boss",
+   "effect": "bone_spikes",
+   "nameKo": "뼈가시",
+   "version": "v001",
+   "status": "QA_HOLD",
+   "pivot": [
+    128,
+    192
+   ],
+   "placement": "ground",
+   "direction": "common",
+   "loop": false,
+   "fps": 12.5,
+   "sheetSha256": "c5c9abf9ace2f7bbf8a36c276753df005714eeaa776399d127f438c75e9dd00d",
+   "zipSha256": "53734c328b6f106a2154cc85c4da2bdfe622d3bdebf15b3d7bd5ca0cac289510",
+   "outSha256": "6f80b5e89faaa8d5acaabc89f8cd49bff7fcea96938f91673e6354b7d2b7fb46",
+   "bytes": 273176,
+   "cleaned": {
+    "edgePixels": 0,
+    "faintPixels": 0
+   }
+  },
+  "boss-infection-mark": {
+   "file": "boss-infection-mark.webp",
+   "side": "boss",
+   "effect": "infection_mark",
+   "nameKo": "감염 표식",
+   "version": "v001",
+   "status": "QA_HOLD",
+   "pivot": [
+    128,
+    128
+   ],
+   "placement": "body",
+   "direction": "common",
+   "loop": false,
+   "fps": 12.5,
+   "sheetSha256": "71e75bee0c235492225bbc52daed3c71973f0092b93e37d16e8eabce86e53693",
+   "zipSha256": "ba1b922020d18a7e577295074a7476c59ff26394a3b5a1bff3fe56edb07882c2",
+   "outSha256": "65b7083cc9aa6c01767da88d030c9b94c822350b51df0fed4a9efa0f13a59d0a",
+   "bytes": 288280,
+   "cleaned": {
+    "edgePixels": 0,
+    "faintPixels": 0
+   }
+  },
+  "boss-lightning-strike": {
+   "file": "boss-lightning-strike.webp",
+   "side": "boss",
+   "effect": "lightning_strike",
+   "nameKo": "낙뢰",
+   "version": "v002",
+   "status": "QA_HOLD",
+   "pivot": [
+    128,
+    208
+   ],
+   "placement": "ground_hit_anchor",
+   "direction": "common",
+   "loop": false,
+   "fps": 12.5,
+   "sheetSha256": "21b0e4fe843aef15195dad9ec0903f1be9bc593eeba98cd49586537b6a161373",
+   "zipSha256": "5acfbcd34f6e82be61d9ded46ed301d5e091d9371e5712d7ca0cafe90170ebcb",
+   "outSha256": "e8ed76536e604a1e1a7e55adace856c82da15ed3b83ba2c0956a84e7d0388e49",
+   "bytes": 330682,
+   "cleaned": {
+    "edgePixels": 0,
+    "faintPixels": 0
+   }
+  },
+  "boss-ground-fissure": {
+   "file": "boss-ground-fissure.webp",
+   "side": "boss",
+   "effect": "ground_fissure",
+   "nameKo": "지면 균열",
+   "version": "v001",
+   "status": "QA_HOLD",
+   "pivot": [
+    128,
+    160
+   ],
+   "placement": "ground",
+   "direction": "common",
+   "loop": false,
+   "fps": 12.5,
+   "sheetSha256": "0abbca41ff3b328d9bcdc3212f5c8447341bf4558f01a171a76e332da2454135",
+   "zipSha256": "996bcf43e6d99fc048310dca9536e98f4fa515885d436ff109e46b9d1b50260c",
+   "outSha256": "1ad8261c12dacd9b3920bb8d5f440b52600d7d2388e9eae2f7bcfffd79c9df7b",
+   "bytes": 488526,
+   "cleaned": {
+    "edgePixels": 0,
+    "faintPixels": 0
+   }
+  },
+  "hit-explosion": {
+   "file": "hit-explosion.webp",
+   "side": "hero",
+   "effect": "explosion_hit",
+   "nameKo": "폭발 적중",
+   "version": "v001",
+   "status": "QA_HOLD",
+   "pivot": [
+    128,
+    202
+   ],
+   "placement": "ground",
+   "direction": "common",
+   "loop": false,
+   "fps": 12.5,
+   "sheetSha256": "9ea22c798b862e7d085b9b33554784ff8de0f5a42af98e57c0e6e3e04668f05c",
+   "zipSha256": "8c768862d59934ff5d45e0a61b7c66b4c208f92ed06f5d8f6c0b65e1005aacfd",
+   "outSha256": "9b2fc08aac2d7f1704ca2dd3299f41d0185820bfaeb693cd5d2fa9e52152f01f",
+   "bytes": 277230,
+   "cleaned": {
+    "edgePixels": 0,
+    "faintPixels": 0
+   }
+  },
+  "hit-fire": {
+   "file": "hit-fire.webp",
+   "side": "hero",
+   "effect": "fire_hit",
+   "nameKo": "화염 적중",
+   "version": "v001",
+   "status": "QA_HOLD",
+   "pivot": [
+    128,
+    202
+   ],
+   "placement": "ground",
+   "direction": "common",
+   "loop": false,
+   "fps": 12.5,
+   "sheetSha256": "85cbb89406d5ffbbefd507c207322f5b9cd9b035c6d24ec21897832ca9df7209",
+   "zipSha256": "4316a47287c65b6f3588fff3057a1cb92f50f7004aa456b20c55a0c84b72f108",
+   "outSha256": "a8148691c7b3093d8f9f88977988535d43c40cd150c30fc914421dbf03a3653b",
+   "bytes": 312698,
+   "cleaned": {
+    "edgePixels": 0,
+    "faintPixels": 0
+   }
+  },
+  "hit-ice-spikes": {
+   "file": "hit-ice-spikes.webp",
+   "side": "hero",
+   "effect": "ice_spikes",
+   "nameKo": "얼음가시",
+   "version": "v001",
+   "status": "QA_HOLD",
+   "pivot": [
+    128,
+    208
+   ],
+   "placement": "ground",
+   "direction": "common",
+   "loop": false,
+   "fps": 12.5,
+   "sheetSha256": "00cf48e64b571c5782bf1557fa15f764c1e4bc95dce80a1f37d5c84ac8358110",
+   "zipSha256": "c94ea1700556b9d09f48c10d0f87eb3858460b3cea407c3050b0379770aa6c68",
+   "outSha256": "52c8dbdb26eb565fcbc3ba51fc6b3431cdaa8d78db71fc4b58a0c53106bdc6cd",
+   "bytes": 406992,
+   "cleaned": {
+    "edgePixels": 0,
+    "faintPixels": 0
+   }
+  },
+  "hit-chain-lightning": {
+   "file": "hit-chain-lightning.webp",
+   "side": "hero",
+   "effect": "chain_lightning",
+   "nameKo": "연쇄번개",
+   "version": "v001",
+   "status": "QA_HOLD",
+   "pivot": [
+    80,
+    160
+   ],
+   "placement": "air",
+   "direction": "fixed_three_node_quarter_view",
+   "loop": false,
+   "fps": 12.5,
+   "sheetSha256": "b2eb6c5823f6b2992af29d2c054d15cc84226c83449020a14e400a460504cb2d",
+   "zipSha256": "8eaeb98923e944a4185fe2cdaaa7d466d98277b977a0e9e40fa74639d2887651",
+   "outSha256": "704c0dd294e1ce5f3ed09c2bd2d068e52fd961be8d51432c7690691ff7607e10",
+   "bytes": 234370,
+   "cleaned": {
+    "edgePixels": 0,
+    "faintPixels": 0
+   }
+  },
+  "hit-teleport": {
+   "file": "hit-teleport.webp",
+   "side": "hero",
+   "effect": "teleport",
+   "nameKo": "순간이동",
+   "version": "v001",
+   "status": "QA_HOLD",
+   "pivot": [
+    128,
+    192
+   ],
+   "placement": "body_from_ground",
+   "direction": "common",
+   "loop": false,
+   "fps": 12.5,
+   "sheetSha256": "2b49025bd702db5e0155469892456f2405d842aaf0aa839195a99a175c57ad1e",
+   "zipSha256": "7b51b4360ea24df9ffd63954d30c4ec4682eeebe7bb2f0e620d70b5b7c31f558",
+   "outSha256": "6386db3e30ef6b0e82542c60d46a16d9956f41d5382b4b0000e51f98ae7c8761",
+   "bytes": 203076,
+   "cleaned": {
+    "edgePixels": 0,
+    "faintPixels": 0
+   }
+  }
+ }
+}

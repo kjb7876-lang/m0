@@ -1,0 +1,18 @@
+{
+ "round": "R730",
+ "note": "불면귀 구역(잠들지 못하는 마을·한약과 불면귀) 2차용. 기존 게임 기와집 그림의 창호에 호박색 불빛을 넣은 파생본이며 새로 그린 그림이 아니다(최종 아트 아님, Dots CX-0071BV 의 집 변주가 오면 바꾼다). 원본은 그대로 두고 계속 쓴다.",
+ "assets": [
+  {
+   "path": "assets/r730/tiled-house-lit.webp",
+   "source": "assets/world-r80/r80-010.webp",
+   "source_sha256": "62935cec22f047ca92a07d3006298428f6168657b3c1d78346fadba33d583b6b",
+   "sha256": "c093db27053e4402d646633b44317315d403b9afcc06bbe33a7931da5a554f15",
+   "bytes": 59490,
+   "size": "512x367",
+   "use": "언덕 위 기와집 가운데 불 켜진 집(rooms-r523.js R730)",
+   "made_by": "r96/qa/r730/make-lit-house.py",
+   "applied": true,
+   "final": false
+  }
+ ]
+}

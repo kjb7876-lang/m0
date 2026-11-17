@@ -1,0 +1,113 @@
+{
+ "hero": "gunner",
+ "action": "attack",
+ "order": "예비 2 · 타격 2 · 회수 2 (README)",
+ "mirroredInGame": {
+  "w": "e",
+  "sw": "se",
+  "nw": "ne"
+ },
+ "applied": "기본 공격(멈춰 서서) 프레임 애니메이션 — client-source/attack-anim-r143.js",
+ "directions": {
+  "s": {
+   "path": "assets/r143/attack/gunner/attack-s.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    227
+   ],
+   "source": {
+    "driveId": "13-unzqWeeD2_9N7q2KInxcXm29JTI3JR",
+    "file": "HERO-gunner-attack-s.png",
+    "sha256": "9d5345394739c493811377eac00de3226d80197b505dc381fd17fcd99e7babb3",
+    "bytes": 153643
+   },
+   "sha256": "8afdd6dcaa0a28618e6b201a092e0b3c8c5886d8b15c557e157035e92886e838",
+   "bytes": 43338
+  },
+  "se": {
+   "path": "assets/r143/attack/gunner/attack-se.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    227
+   ],
+   "source": {
+    "driveId": "13-unzqWeeD2_9N7q2KInxcXm29JTI3JR",
+    "file": "HERO-gunner-attack-se.png",
+    "sha256": "765eb40d1fc231e85bdf3e9a8ddeab063c38baa8d148c719428d5a656a58798b",
+    "bytes": 137746
+   },
+   "sha256": "bb7669988e127ea189941c2ab2a48b5be2bf02425a51680ae82d29158fc480f8",
+   "bytes": 38328
+  },
+  "e": {
+   "path": "assets/r143/attack/gunner/attack-e.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    227
+   ],
+   "source": {
+    "driveId": "13-unzqWeeD2_9N7q2KInxcXm29JTI3JR",
+    "file": "HERO-gunner-attack-e.png",
+    "sha256": "47edc14c89bbfb3aa4738e137e7a9de6dd52b8529685902a5410ba3aedad07b0",
+    "bytes": 140395
+   },
+   "sha256": "320dfbeb5d1b504968bed450cdb598eb07dfc1a8d6f2218181864718eb839f6d",
+   "bytes": 40678
+  },
+  "ne": {
+   "path": "assets/r143/attack/gunner/attack-ne.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    227
+   ],
+   "source": {
+    "driveId": "13-unzqWeeD2_9N7q2KInxcXm29JTI3JR",
+    "file": "HERO-gunner-attack-ne.png",
+    "sha256": "d5b6d00556a13128346119d8c9634aeca082b155305fa6382697e747ec94b698",
+    "bytes": 143762
+   },
+   "sha256": "d3c747c975398663dbaa99c9d4a6eca46170e8faaf7abc3057f3399c91cd1ac5",
+   "bytes": 43438
+  },
+  "n": {
+   "path": "assets/r143/attack/gunner/attack-n.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    227
+   ],
+   "source": {
+    "driveId": "13-unzqWeeD2_9N7q2KInxcXm29JTI3JR",
+    "file": "HERO-gunner-attack-n.png",
+    "sha256": "6a30ed35e007f992440da5712761607e5da9106d82025b1bba89e1bb00083377",
+    "bytes": 138851
+   },
+   "sha256": "7b7a5f06854bac02a4a6f21fda90f1c129e15734dd14ee682bca3e3d45b9be68",
+   "bytes": 40778
+  }
+ }
+}

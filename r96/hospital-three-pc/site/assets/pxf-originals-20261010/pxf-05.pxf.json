@@ -1,0 +1,267 @@
+{
+  "name": "견습전사 · 찌르기",
+  "settings": {
+    "size": 64,
+    "frames": 8,
+    "fps": 36.9231,
+    "loop": false
+  },
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "Shape",
+      "params": {
+        "shape": "diamond",
+        "x": {
+          "a": 0.53,
+          "b": 0.65,
+          "e": "out",
+          "t0": 0,
+          "t1": 0.25
+        },
+        "y": 0.5,
+        "size": {
+          "k": [
+            [
+              0,
+              3
+            ],
+            [
+              2,
+              18,
+              "out"
+            ],
+            [
+              7,
+              0
+            ]
+          ]
+        },
+        "size2": 0.4,
+        "points": 5,
+        "rot": 0,
+        "aspect": 0.16,
+        "stroke": 0,
+        "falloff": 0.65,
+        "intensity": {
+          "k": [
+            [
+              0,
+              0.55
+            ],
+            [
+              1,
+              1,
+              "out"
+            ],
+            [
+              7,
+              0
+            ]
+          ]
+        }
+      },
+      "x": 40,
+      "y": 40
+    },
+    {
+      "id": "n2",
+      "type": "Particles",
+      "params": {
+        "count": 7,
+        "seed": 173,
+        "emit": "burst",
+        "start": 0,
+        "span": 1,
+        "life": 0.6,
+        "lifeVar": 0.35,
+        "area": "point",
+        "x": 0.55,
+        "y": 0.5,
+        "aw": 8,
+        "ah": 8,
+        "dirMode": "fixed",
+        "angle": 180,
+        "spread": 12,
+        "speed": 0.9,
+        "speedVar": 0.55,
+        "gravity": 0,
+        "drag": 0.12,
+        "turb": 0,
+        "sizeA": 1.5,
+        "sizeB": 0.5,
+        "pshape": "streak",
+        "stretch": 0.8,
+        "fade": "out",
+        "bright": 1,
+        "loop": false,
+        "ground": 0,
+        "bounce": 0.35,
+        "brightVar": 0.3
+      },
+      "x": 40,
+      "y": 190
+    },
+    {
+      "id": "n3",
+      "type": "Blend",
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 40
+    },
+    {
+      "id": "n4",
+      "type": "Palette",
+      "params": {
+        "colors": [
+          "#43596c",
+          "#748c9f",
+          "#afc6d7",
+          "#e5eff6",
+          "#fffef4"
+        ],
+        "cutoff": 0.13,
+        "shift": 0,
+        "mode": "bands",
+        "key": "alpha",
+        "opacity": 1
+      },
+      "x": 460,
+      "y": 40
+    },
+    {
+      "id": "n5",
+      "type": "Outline",
+      "params": {
+        "color": "#43596c",
+        "threshold": 0.5,
+        "width": 1,
+        "corners": false,
+        "mode": "outer"
+      },
+      "x": 670,
+      "y": 40
+    },
+    {
+      "id": "n6",
+      "type": "Tint",
+      "params": {
+        "color": "#ffffff",
+        "amount": 0,
+        "bright": 1,
+        "opacity": {
+          "k": [
+            [
+              0,
+              1
+            ],
+            [
+              6,
+              1
+            ],
+            [
+              7,
+              0
+            ]
+          ]
+        }
+      },
+      "x": 880,
+      "y": 40
+    },
+    {
+      "id": "n7",
+      "type": "Output",
+      "params": {
+        "alpha": "hard",
+        "threshold": 0.5
+      },
+      "x": 1090,
+      "y": 40
+    }
+  ],
+  "links": [
+    {
+      "f": "n1",
+      "t": "n3",
+      "p": 0
+    },
+    {
+      "f": "n2",
+      "t": "n3",
+      "p": 1
+    },
+    {
+      "f": "n3",
+      "t": "n4",
+      "p": 0
+    },
+    {
+      "f": "n4",
+      "t": "n5",
+      "p": 0
+    },
+    {
+      "f": "n5",
+      "t": "n6",
+      "p": 0
+    },
+    {
+      "f": "n6",
+      "t": "n7",
+      "p": 0
+    }
+  ],
+  "game": {
+    "style": "hero-pixel-v1",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "logicalSize": 145,
+    "blend": "normal",
+    "impactFrame": 0,
+    "durationMs": 216.66666666666669,
+    "role": "thrust",
+    "referenceCell": 62
+  },
+  "sourceKey": "[\"thrust\",\"ice\",[\"#fffef4\",\"#e5eff6\",\"#afc6d7\",\"#748c9f\",\"#43596c\"],null,22,13,2.4,12,0,2,0,15,60,1,2,0.4,false]",
+  "sourceRecipe": {
+    "id": "squire-thrust-v3",
+    "label": "견습전사 · 찌르기",
+    "effect": "thrust",
+    "palette": "ice",
+    "colors": [
+      "#fffef4",
+      "#e5eff6",
+      "#afc6d7",
+      "#748c9f",
+      "#43596c"
+    ],
+    "params": {
+      "count": 22,
+      "life": 13,
+      "speed": 2.4,
+      "spread": 12,
+      "gravity": 0,
+      "size": 2,
+      "angle": 0,
+      "pitch": 15,
+      "arc": 60,
+      "dir": 1,
+      "alt": false,
+      "ghosts": 2,
+      "glow": 0.4,
+      "ring": false,
+      "flash": 0,
+      "hitstop": 0,
+      "shake": 0,
+      "slowmo": 1,
+      "loop": false,
+      "interval": 1.1
+    }
+  }
+}

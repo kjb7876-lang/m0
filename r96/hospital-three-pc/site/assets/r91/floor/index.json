@@ -1,0 +1,758 @@
+{
+ "schema": "storyworld.r91.floor/v1",
+ "source": "R91-layout-derived remains/stain (geometry_candidate_needs_review), processed copy",
+ "families": [
+  "human-cultist",
+  "undead",
+  "demon-beast",
+  "machine-cyborg",
+  "specter-echo",
+  "slime-rot",
+  "insect-spider",
+  "crystal-core"
+ ],
+ "familyRules": [
+  [
+   "insect-spider",
+   "spider"
+  ],
+  [
+   "slime-rot",
+   "slime|moldling|mold|contamination|rot\\b|sludge"
+  ],
+  [
+   "crystal-core",
+   "crystal|glass|shard|_core|-core|core\\b|orb\\b|_orb|vial|vortex|calculation"
+  ],
+  [
+   "machine-cyborg",
+   "cyborg|drone|mdrone|sentinel|machine|mech|robot|reactor|collector|bootloader|ledger|watcher|supervisor|polar_"
+  ],
+  [
+   "undead",
+   "zombie|ghoul|skeleton|bone|undead|corpse|revenant|되살아난|해골|좀비"
+  ],
+  [
+   "specter-echo",
+   "echo|specter|spectre|wraith|shadow|phantom|ghost|silverless|trace|scream|denial|witness|memory_|signal|seal_residual|connector|잔향|그림자|유령"
+  ],
+  [
+   "demon-beast",
+   "demon|gargoyle|goat|horned|hound|wolf|beast|fox|balrog|satan|asmod|beelzebub|leviathan|mammon|belphegor|devourer|악마|짐승"
+  ],
+  [
+   "human-cultist",
+   "."
+  ]
+ ],
+ "items": [
+  {
+   "kind": "remains",
+   "family": "human-cultist",
+   "variant": 0,
+   "path": "assets/r91/floor/remains-human-cultist-0.png",
+   "w": 196,
+   "h": 104,
+   "bytes": 36305,
+   "sha256": "70a44c1c754206f69bc5d01297c3dbeb577bb33c87876f50f2764cc42181416e"
+  },
+  {
+   "kind": "remains",
+   "family": "human-cultist",
+   "variant": 1,
+   "path": "assets/r91/floor/remains-human-cultist-1.png",
+   "w": 195,
+   "h": 110,
+   "bytes": 35161,
+   "sha256": "f87bb80f1d0cadfcbbaa2569d990c9f85c8657150f2a5e83a568d9e777f21eea"
+  },
+  {
+   "kind": "remains",
+   "family": "human-cultist",
+   "variant": 2,
+   "path": "assets/r91/floor/remains-human-cultist-2.png",
+   "w": 198,
+   "h": 106,
+   "bytes": 39160,
+   "sha256": "35f7c80b7ffde4aadc64290a530bf829afb31cc47ddceaecf1f33e83967ebeb5"
+  },
+  {
+   "kind": "remains",
+   "family": "human-cultist",
+   "variant": 3,
+   "path": "assets/r91/floor/remains-human-cultist-3.png",
+   "w": 190,
+   "h": 108,
+   "bytes": 35916,
+   "sha256": "0bef2c0070c90f555fa682e9d5c01891bbff48a4b9d6d456ffa3c72dc4e47432"
+  },
+  {
+   "kind": "remains",
+   "family": "undead",
+   "variant": 0,
+   "path": "assets/r91/floor/remains-undead-0.png",
+   "w": 212,
+   "h": 97,
+   "bytes": 44062,
+   "sha256": "5532bb2c35a91d960fd3a494a36ae29f4547f9140eaf164edd9f303af00c1069"
+  },
+  {
+   "kind": "remains",
+   "family": "undead",
+   "variant": 1,
+   "path": "assets/r91/floor/remains-undead-1.png",
+   "w": 205,
+   "h": 106,
+   "bytes": 44959,
+   "sha256": "9218d1115d431a52aadfbd2678be1d5e7bea949f8fd3df68e901e9804445532b"
+  },
+  {
+   "kind": "remains",
+   "family": "undead",
+   "variant": 2,
+   "path": "assets/r91/floor/remains-undead-2.png",
+   "w": 208,
+   "h": 101,
+   "bytes": 45122,
+   "sha256": "3cc3d5ae823a0d6831e8e0f55d56bdbb4a0e9a28a14a2f1a1e0b8b83c965c94d"
+  },
+  {
+   "kind": "remains",
+   "family": "undead",
+   "variant": 3,
+   "path": "assets/r91/floor/remains-undead-3.png",
+   "w": 201,
+   "h": 106,
+   "bytes": 45274,
+   "sha256": "1d78029b3e24e10712f6287341f64a24ab5d20b594c7d308a86541a8fbb94d88"
+  },
+  {
+   "kind": "remains",
+   "family": "demon-beast",
+   "variant": 0,
+   "path": "assets/r91/floor/remains-demon-beast-0.png",
+   "w": 203,
+   "h": 114,
+   "bytes": 37495,
+   "sha256": "4188e220d075c116a3621d5eb7e4885cb8e661ac82ec640cbba6334700ead199"
+  },
+  {
+   "kind": "remains",
+   "family": "demon-beast",
+   "variant": 1,
+   "path": "assets/r91/floor/remains-demon-beast-1.png",
+   "w": 209,
+   "h": 114,
+   "bytes": 39773,
+   "sha256": "b22a4bc25419e59555b898cbfa321425571025346ffb123e7be719337978e503"
+  },
+  {
+   "kind": "remains",
+   "family": "demon-beast",
+   "variant": 2,
+   "path": "assets/r91/floor/remains-demon-beast-2.png",
+   "w": 205,
+   "h": 93,
+   "bytes": 33592,
+   "sha256": "6fe1c86ab9c2401d29f9e0df7aeb8febc07cd3fde365c0c7208678c9a162070d"
+  },
+  {
+   "kind": "remains",
+   "family": "demon-beast",
+   "variant": 3,
+   "path": "assets/r91/floor/remains-demon-beast-3.png",
+   "w": 200,
+   "h": 91,
+   "bytes": 32757,
+   "sha256": "b96bd7da717f3eb39ca07c0032d4042637a5e9971fb561d8c4a3585d9f61355f"
+  },
+  {
+   "kind": "remains",
+   "family": "machine-cyborg",
+   "variant": 0,
+   "path": "assets/r91/floor/remains-machine-cyborg-0.png",
+   "w": 216,
+   "h": 108,
+   "bytes": 42507,
+   "sha256": "dab4d77e0cec074f483896aca70d70fd589d89c725062532592d8d7db8213de6"
+  },
+  {
+   "kind": "remains",
+   "family": "machine-cyborg",
+   "variant": 1,
+   "path": "assets/r91/floor/remains-machine-cyborg-1.png",
+   "w": 217,
+   "h": 105,
+   "bytes": 41755,
+   "sha256": "a6b23d62826a70d132480f71f180e16f774b963dde5dfc1cdb0f3ce2994fa21f"
+  },
+  {
+   "kind": "remains",
+   "family": "machine-cyborg",
+   "variant": 2,
+   "path": "assets/r91/floor/remains-machine-cyborg-2.png",
+   "w": 211,
+   "h": 109,
+   "bytes": 40480,
+   "sha256": "79a79fe3434889570dc9d6ac092ca606aa7ea92ca0ff00da96d72b89ba8df1b6"
+  },
+  {
+   "kind": "remains",
+   "family": "machine-cyborg",
+   "variant": 3,
+   "path": "assets/r91/floor/remains-machine-cyborg-3.png",
+   "w": 209,
+   "h": 112,
+   "bytes": 44202,
+   "sha256": "a7c26c721d87090e3c430d7af55f7af521d9a3362b8d9601819dda6f703de171"
+  },
+  {
+   "kind": "remains",
+   "family": "specter-echo",
+   "variant": 0,
+   "path": "assets/r91/floor/remains-specter-echo-0.png",
+   "w": 214,
+   "h": 84,
+   "bytes": 34228,
+   "sha256": "0e3c26c4743b98aead93d0e96f7890612eb2cdb06ae0a28d6cc081230156826e"
+  },
+  {
+   "kind": "remains",
+   "family": "specter-echo",
+   "variant": 1,
+   "path": "assets/r91/floor/remains-specter-echo-1.png",
+   "w": 211,
+   "h": 79,
+   "bytes": 36735,
+   "sha256": "a59fda433894f7b2ea351d0195194f1eb5f4dcca59735d94496d85cc5f5e2b85"
+  },
+  {
+   "kind": "remains",
+   "family": "specter-echo",
+   "variant": 2,
+   "path": "assets/r91/floor/remains-specter-echo-2.png",
+   "w": 211,
+   "h": 82,
+   "bytes": 37776,
+   "sha256": "fd85849f8ca098400131a61f519bd1606420091bd4b57b206dd76a6087505235"
+  },
+  {
+   "kind": "remains",
+   "family": "specter-echo",
+   "variant": 3,
+   "path": "assets/r91/floor/remains-specter-echo-3.png",
+   "w": 214,
+   "h": 90,
+   "bytes": 37762,
+   "sha256": "a5990c0f2a0bfbcd9542cff8ff51bd52c4f30c796f589606e5d5e2d24cbc052e"
+  },
+  {
+   "kind": "remains",
+   "family": "slime-rot",
+   "variant": 0,
+   "path": "assets/r91/floor/remains-slime-rot-0.png",
+   "w": 206,
+   "h": 106,
+   "bytes": 39880,
+   "sha256": "606b79a7e027f673b3b0a5626b72d8d48998ff1f102698c176704532fd652f1c"
+  },
+  {
+   "kind": "remains",
+   "family": "slime-rot",
+   "variant": 1,
+   "path": "assets/r91/floor/remains-slime-rot-1.png",
+   "w": 204,
+   "h": 92,
+   "bytes": 36707,
+   "sha256": "d6a95c0c323c40f64118d9aed6728a0ea0ed80f0c1d2588e8c86cbfe19aea718"
+  },
+  {
+   "kind": "remains",
+   "family": "slime-rot",
+   "variant": 2,
+   "path": "assets/r91/floor/remains-slime-rot-2.png",
+   "w": 204,
+   "h": 100,
+   "bytes": 40458,
+   "sha256": "5ff89b7cf41d967cae16b4bc92b836b567e0c7775de554abe970e08f67fc3f21"
+  },
+  {
+   "kind": "remains",
+   "family": "slime-rot",
+   "variant": 3,
+   "path": "assets/r91/floor/remains-slime-rot-3.png",
+   "w": 208,
+   "h": 92,
+   "bytes": 37403,
+   "sha256": "a1ab25a6ce41871811bc603526e01c7a5de73bb34af2a29bd61b1fc15573ebf4"
+  },
+  {
+   "kind": "remains",
+   "family": "insect-spider",
+   "variant": 0,
+   "path": "assets/r91/floor/remains-insect-spider-0.png",
+   "w": 194,
+   "h": 125,
+   "bytes": 43434,
+   "sha256": "7b820bb31660f7bbcfb204d058cbad1afee3e456350b2566cacd87c787373bb4"
+  },
+  {
+   "kind": "remains",
+   "family": "insect-spider",
+   "variant": 1,
+   "path": "assets/r91/floor/remains-insect-spider-1.png",
+   "w": 186,
+   "h": 121,
+   "bytes": 39175,
+   "sha256": "cbb73bdf0d5a8d65e4b7de9929f1cfce94129c35d1f517f2cad0d9fe4dcf8669"
+  },
+  {
+   "kind": "remains",
+   "family": "insect-spider",
+   "variant": 2,
+   "path": "assets/r91/floor/remains-insect-spider-2.png",
+   "w": 204,
+   "h": 101,
+   "bytes": 35942,
+   "sha256": "99e6142419d847779fd68ea0c4ebcf20c7b1c21da3ab7d216f4c4d029bcd725d"
+  },
+  {
+   "kind": "remains",
+   "family": "insect-spider",
+   "variant": 3,
+   "path": "assets/r91/floor/remains-insect-spider-3.png",
+   "w": 181,
+   "h": 116,
+   "bytes": 37849,
+   "sha256": "94e90d4feb2185c33f861e5ea09849e565d4fc3d8af7c9586cc13caf7c431cd8"
+  },
+  {
+   "kind": "remains",
+   "family": "crystal-core",
+   "variant": 0,
+   "path": "assets/r91/floor/remains-crystal-core-0.png",
+   "w": 215,
+   "h": 108,
+   "bytes": 43539,
+   "sha256": "3b89f621f253a544f46e4b177c26e71ea8c5b0268d5963d82430bc345d2a51e7"
+  },
+  {
+   "kind": "remains",
+   "family": "crystal-core",
+   "variant": 1,
+   "path": "assets/r91/floor/remains-crystal-core-1.png",
+   "w": 207,
+   "h": 118,
+   "bytes": 45076,
+   "sha256": "554a003547731005c0612cac6e4865434ece795011ac9964d36030019a847fa7"
+  },
+  {
+   "kind": "remains",
+   "family": "crystal-core",
+   "variant": 2,
+   "path": "assets/r91/floor/remains-crystal-core-2.png",
+   "w": 214,
+   "h": 118,
+   "bytes": 44393,
+   "sha256": "a9cbba9269adb0e189f79e185f8fa944cf7dafffadcc707d63e9cfb24abd1c8a"
+  },
+  {
+   "kind": "remains",
+   "family": "crystal-core",
+   "variant": 3,
+   "path": "assets/r91/floor/remains-crystal-core-3.png",
+   "w": 205,
+   "h": 104,
+   "bytes": 43035,
+   "sha256": "2f28e3102d15c140921732a3270f00d6ec235592c90ea46c52cd63f0685791c6"
+  },
+  {
+   "kind": "stain",
+   "family": "human-cultist",
+   "variant": 0,
+   "path": "assets/r91/floor/stain-human-cultist-0.png",
+   "w": 169,
+   "h": 125,
+   "bytes": 33334,
+   "sha256": "c8428dd25303def8c94526f24bd0d076140c62d9f9d97b85c3f2e038c569e9a3"
+  },
+  {
+   "kind": "stain",
+   "family": "human-cultist",
+   "variant": 1,
+   "path": "assets/r91/floor/stain-human-cultist-1.png",
+   "w": 172,
+   "h": 132,
+   "bytes": 32714,
+   "sha256": "f60aea60994f96bc0b575e5379ccce2c9b13144504838d8f6dddc727512fd045"
+  },
+  {
+   "kind": "stain",
+   "family": "human-cultist",
+   "variant": 2,
+   "path": "assets/r91/floor/stain-human-cultist-2.png",
+   "w": 165,
+   "h": 119,
+   "bytes": 35394,
+   "sha256": "227c74c9e84462dd4d20ef29305962b1a2639aa834f08d784a97f2aab78a8201"
+  },
+  {
+   "kind": "stain",
+   "family": "human-cultist",
+   "variant": 3,
+   "path": "assets/r91/floor/stain-human-cultist-3.png",
+   "w": 183,
+   "h": 161,
+   "bytes": 28917,
+   "sha256": "1ae07021605d76dae1066e30007a565aba4e8d0aa7da60c05aea4756ea1c451d"
+  },
+  {
+   "kind": "stain",
+   "family": "undead",
+   "variant": 0,
+   "path": "assets/r91/floor/stain-undead-0.png",
+   "w": 210,
+   "h": 140,
+   "bytes": 59662,
+   "sha256": "ad23717b4012bff35b1c0cdad29b86f0b4b32294e8877856ae4c5667cc0ab6ce"
+  },
+  {
+   "kind": "stain",
+   "family": "undead",
+   "variant": 1,
+   "path": "assets/r91/floor/stain-undead-1.png",
+   "w": 206,
+   "h": 144,
+   "bytes": 58000,
+   "sha256": "d7c85e375f8bc489ee48f463642189eb4a4857fde5ef06d6a6250e3b5980d947"
+  },
+  {
+   "kind": "stain",
+   "family": "undead",
+   "variant": 2,
+   "path": "assets/r91/floor/stain-undead-2.png",
+   "w": 209,
+   "h": 154,
+   "bytes": 69131,
+   "sha256": "ad9f25a2988f27664999224d61fd8a5e46e189aec806302b12e89c4caac2ddec"
+  },
+  {
+   "kind": "stain",
+   "family": "undead",
+   "variant": 3,
+   "path": "assets/r91/floor/stain-undead-3.png",
+   "w": 207,
+   "h": 143,
+   "bytes": 52710,
+   "sha256": "f466e9c16b285c56f422a23851a1d0f5bda0951cf45b2f07e7539a8d579ee810"
+  },
+  {
+   "kind": "stain",
+   "family": "demon-beast",
+   "variant": 0,
+   "path": "assets/r91/floor/stain-demon-beast-0.png",
+   "w": 191,
+   "h": 147,
+   "bytes": 45790,
+   "sha256": "a3b9b87cc96ceea0b0bd5fddd9ad15886d08e68e90e9f790bff2e538904644fa"
+  },
+  {
+   "kind": "stain",
+   "family": "demon-beast",
+   "variant": 1,
+   "path": "assets/r91/floor/stain-demon-beast-1.png",
+   "w": 180,
+   "h": 136,
+   "bytes": 44726,
+   "sha256": "af4e3e431253632239d5c44b04fbb1eaefbee9ba36789611b84acbb3895cde2c"
+  },
+  {
+   "kind": "stain",
+   "family": "demon-beast",
+   "variant": 2,
+   "path": "assets/r91/floor/stain-demon-beast-2.png",
+   "w": 191,
+   "h": 142,
+   "bytes": 42739,
+   "sha256": "8b29a569eb90bf9d94f668abbde7615f112d6dbdfc67b8085900e550599830f6"
+  },
+  {
+   "kind": "stain",
+   "family": "demon-beast",
+   "variant": 3,
+   "path": "assets/r91/floor/stain-demon-beast-3.png",
+   "w": 184,
+   "h": 157,
+   "bytes": 44521,
+   "sha256": "30cc563345fc7ab65aff316d3453aa8d1a6f5e040a4f19974f3c75b29f8b3010"
+  },
+  {
+   "kind": "stain",
+   "family": "machine-cyborg",
+   "variant": 0,
+   "path": "assets/r91/floor/stain-machine-cyborg-0.png",
+   "w": 188,
+   "h": 123,
+   "bytes": 44383,
+   "sha256": "ed59be0719386aa20604861a872ada7685e873f28f32a36ddad6f0aa9c6d940f"
+  },
+  {
+   "kind": "stain",
+   "family": "machine-cyborg",
+   "variant": 1,
+   "path": "assets/r91/floor/stain-machine-cyborg-1.png",
+   "w": 194,
+   "h": 123,
+   "bytes": 43914,
+   "sha256": "d528a64c1789dea16105a47dad553ba3fcff019f3d83e2275f80ba240fc218f7"
+  },
+  {
+   "kind": "stain",
+   "family": "machine-cyborg",
+   "variant": 2,
+   "path": "assets/r91/floor/stain-machine-cyborg-2.png",
+   "w": 180,
+   "h": 117,
+   "bytes": 43698,
+   "sha256": "125ca7571399e2ef160e014b578dc18b71c0477de2a970aba2399694239af6d1"
+  },
+  {
+   "kind": "stain",
+   "family": "machine-cyborg",
+   "variant": 3,
+   "path": "assets/r91/floor/stain-machine-cyborg-3.png",
+   "w": 191,
+   "h": 110,
+   "bytes": 37095,
+   "sha256": "44baa3ea7d80bc9463c4610b9b97df393aada13d0c798cb904e5ae8bb130e450"
+  },
+  {
+   "kind": "stain",
+   "family": "specter-echo",
+   "variant": 0,
+   "path": "assets/r91/floor/stain-specter-echo-0.png",
+   "w": 218,
+   "h": 114,
+   "bytes": 41357,
+   "sha256": "2b4c1dd43659dd172f5112830aef1001093015e776c352ed67f12239074dd4d9"
+  },
+  {
+   "kind": "stain",
+   "family": "specter-echo",
+   "variant": 1,
+   "path": "assets/r91/floor/stain-specter-echo-1.png",
+   "w": 220,
+   "h": 122,
+   "bytes": 44840,
+   "sha256": "b23ad0f3d3ab2b931480131b5f0909959e27b69482e4ffab4ee581675529de8b"
+  },
+  {
+   "kind": "stain",
+   "family": "specter-echo",
+   "variant": 2,
+   "path": "assets/r91/floor/stain-specter-echo-2.png",
+   "w": 217,
+   "h": 121,
+   "bytes": 45180,
+   "sha256": "5660080574fae9241a894f41af30f9a6f701332068f993b27f86deb26d156bd0"
+  },
+  {
+   "kind": "stain",
+   "family": "specter-echo",
+   "variant": 3,
+   "path": "assets/r91/floor/stain-specter-echo-3.png",
+   "w": 211,
+   "h": 112,
+   "bytes": 43473,
+   "sha256": "755217852f63fac76bbe43f9dc9284e3d69813ffbc645341f757cd1a01d9a145"
+  },
+  {
+   "kind": "stain",
+   "family": "slime-rot",
+   "variant": 0,
+   "path": "assets/r91/floor/stain-slime-rot-0.png",
+   "w": 201,
+   "h": 104,
+   "bytes": 36413,
+   "sha256": "29342ad89a3a1660057b011ffb24e87216a1bd16c19a10dd04ed62870fe96843"
+  },
+  {
+   "kind": "stain",
+   "family": "slime-rot",
+   "variant": 1,
+   "path": "assets/r91/floor/stain-slime-rot-1.png",
+   "w": 197,
+   "h": 108,
+   "bytes": 38686,
+   "sha256": "3a4016df346e34480587eaf603fe79fb82cb0141229929ec71289e600bd7cdc2"
+  },
+  {
+   "kind": "stain",
+   "family": "slime-rot",
+   "variant": 2,
+   "path": "assets/r91/floor/stain-slime-rot-2.png",
+   "w": 204,
+   "h": 102,
+   "bytes": 39683,
+   "sha256": "08adef9afb1533bff92a8965bacdb1fd5649846c9ab777f03075fdb031570778"
+  },
+  {
+   "kind": "stain",
+   "family": "slime-rot",
+   "variant": 3,
+   "path": "assets/r91/floor/stain-slime-rot-3.png",
+   "w": 202,
+   "h": 104,
+   "bytes": 39116,
+   "sha256": "597709462c33905152011ff9a3ee3c925cb8af2b90bcc233c2218196b10daa41"
+  },
+  {
+   "kind": "stain",
+   "family": "insect-spider",
+   "variant": 0,
+   "path": "assets/r91/floor/stain-insect-spider-0.png",
+   "w": 202,
+   "h": 152,
+   "bytes": 43142,
+   "sha256": "ab8fc92d1ae820d06a96b28ff20794a29520ceabc53b7df4a927c8de63267086"
+  },
+  {
+   "kind": "stain",
+   "family": "insect-spider",
+   "variant": 1,
+   "path": "assets/r91/floor/stain-insect-spider-1.png",
+   "w": 204,
+   "h": 109,
+   "bytes": 33767,
+   "sha256": "122459bbb7c8d3e73b1c5900cdc997779693e72dfd02c7966727ecc7ce6afd83"
+  },
+  {
+   "kind": "stain",
+   "family": "insect-spider",
+   "variant": 2,
+   "path": "assets/r91/floor/stain-insect-spider-2.png",
+   "w": 198,
+   "h": 133,
+   "bytes": 43069,
+   "sha256": "7d990d08502467993412f5a69c86266b6560437fc7a9dfcb350880025fa981ad"
+  },
+  {
+   "kind": "stain",
+   "family": "insect-spider",
+   "variant": 3,
+   "path": "assets/r91/floor/stain-insect-spider-3.png",
+   "w": 194,
+   "h": 170,
+   "bytes": 46504,
+   "sha256": "9c8f420b8c61b03ad47126b6ca272b219d59cd4da96e65102f549eeea631efa0"
+  },
+  {
+   "kind": "stain",
+   "family": "crystal-core",
+   "variant": 0,
+   "path": "assets/r91/floor/stain-crystal-core-0.png",
+   "w": 184,
+   "h": 124,
+   "bytes": 57570,
+   "sha256": "5d34f577ea8ac738473fdd81f2716bb8ecb18d9d396998bef3b83daf22b964e7"
+  },
+  {
+   "kind": "stain",
+   "family": "crystal-core",
+   "variant": 1,
+   "path": "assets/r91/floor/stain-crystal-core-1.png",
+   "w": 177,
+   "h": 113,
+   "bytes": 49784,
+   "sha256": "776a39aaec7f395a9facbe3dd5874dd4746c289d4f4e9eab62f00f32ddc4b377"
+  },
+  {
+   "kind": "stain",
+   "family": "crystal-core",
+   "variant": 2,
+   "path": "assets/r91/floor/stain-crystal-core-2.png",
+   "w": 184,
+   "h": 149,
+   "bytes": 63720,
+   "sha256": "4b31158d211dd36f86acce1f140c34f39b9bf7ee996be16ce7b4aa4ba45982bb"
+  },
+  {
+   "kind": "stain",
+   "family": "crystal-core",
+   "variant": 3,
+   "path": "assets/r91/floor/stain-crystal-core-3.png",
+   "w": 171,
+   "h": 131,
+   "bytes": 57522,
+   "sha256": "6e9d17244845674b3d6285f839e109db894c055943255ebc440cab2bdf37121a"
+  }
+ ],
+ "sources": [
+  {
+   "file": "remains/remains_human-cultist.png",
+   "sha256": "3ffa1f1b3bb5d07ef0e391ef0c173b9febc6055afd460d5f2a53fd86b2065bea"
+  },
+  {
+   "file": "remains/remains_undead.png",
+   "sha256": "3d899de2e74aac387beafb6972efaec7cd9a4fcbc3d7678c0d91eebc93afb64e"
+  },
+  {
+   "file": "remains/remains_demon-beast.png",
+   "sha256": "b8f393a013c5f08ed08159f4410aba07d52e514bc9855b140d59584305ee90fb"
+  },
+  {
+   "file": "remains/remains_machine-cyborg.png",
+   "sha256": "cad08219b706da48ca765858df39c1aa156414e76ee0adb84a7040a7069a4b3a"
+  },
+  {
+   "file": "remains/remains_specter-echo.png",
+   "sha256": "9b1881cc61450901881a360013595be4004573d8a996d60c8f633dd5ba5a6e2c"
+  },
+  {
+   "file": "remains/remains_slime-rot.png",
+   "sha256": "010e9eb9f0e0ca7fd6c12af20083215a5997c6c7a87cc9e86ed80d58781f4d15"
+  },
+  {
+   "file": "remains/remains_insect-spider.png",
+   "sha256": "298c6c8f4055cf24f69f6f0b7dbe9c9f59f458eeb4c5873553bf6e509029c162"
+  },
+  {
+   "file": "remains/remains_crystal-core.png",
+   "sha256": "ea64a7a4f5328fe090b225bc7845bee8bb2532bba4e0e3c79a2d51ce929e777b"
+  },
+  {
+   "file": "stain/stain_human-cultist.png",
+   "sha256": "daa39acecb9ec0549b35892608ba8e78a7e0da2a3d948b37ef0b0b4bf4f0d1fe"
+  },
+  {
+   "file": "stain/stain_undead.png",
+   "sha256": "595fecb38234743192c634761b21b8c91b7ef4407deb57fc2a0612272fb5e3fe"
+  },
+  {
+   "file": "stain/stain_demon-beast.png",
+   "sha256": "b9c7bc457f56c46ff6d5b717157972eef6d05f92906b0f2ed167611f9bec51a6"
+  },
+  {
+   "file": "stain/stain_machine-cyborg.png",
+   "sha256": "748ebce1736a5f2bffc93ae5e31d11cefd1eeeefb36d278b4c4c999260c414da"
+  },
+  {
+   "file": "stain/stain_specter-echo.png",
+   "sha256": "9e0bdc740e740dc64b6c9ba55bcc555a6120834db2ee123ea685d34557a7d427"
+  },
+  {
+   "file": "stain/stain_slime-rot.png",
+   "sha256": "665c5a0942be7e30c0014830350de55dc916e586d4ff115b989c1487613e8f4d"
+  },
+  {
+   "file": "stain/stain_insect-spider.png",
+   "sha256": "b5ab69c0e1f5ab40a5707a715005f2d2ec8dd2156b2f32959424f832440cfc54"
+  },
+  {
+   "file": "stain/stain_crystal-core.png",
+   "sha256": "1229508af7bf0f9746f893111d92ab7f7606dcf4609feb4641e5e412c6415e44"
+  }
+ ],
+ "fringeTexelsRecoloured": 1211860,
+ "originalsModified": false
+}

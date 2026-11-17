@@ -1,0 +1,76 @@
+{
+ "revision": "R976",
+ "generator": "scripts/r976-samong-p-art.py",
+ "files": {
+  "tendrils-blood": {
+   "file": "tendrils-blood.webp",
+   "bytes": 304266,
+   "sha256": "9897cc20dd60cf2a49292cae5136fae0257459b485cc3b36a852af61e128c639",
+   "size": [
+    1536,
+    1024
+   ],
+   "source": "assets/r411/fx/boss-tentacle-bind.webp",
+   "frame": [
+    256,
+    256
+   ],
+   "columns": 6,
+   "frames": 24,
+   "pivot": [
+    128,
+    200
+   ]
+  },
+  "portal-teal": {
+   "file": "portal-teal.webp",
+   "bytes": 105680,
+   "sha256": "9957aa369a551ae89bddb25075c6040c648ce5ee320c70e2c97e8ad60b9c201a",
+   "size": [
+    1792,
+    256
+   ],
+   "source": "assets/r411/fx/boss-gravity-well.webp 6-12",
+   "frame": [
+    256,
+    256
+   ],
+   "columns": 7,
+   "frames": 7,
+   "pivot": [
+    128,
+    150
+   ]
+  },
+  "root-tendril": {
+   "file": "root-tendril.webp",
+   "bytes": 6314,
+   "sha256": "98ec3b04b84252e2163d5d5fcde6a8fbb3345f51cfbc7ba4c2841710e665a695",
+   "size": [
+    146,
+    122
+   ],
+   "source": "assets/r430/tendril.webp cell 5"
+  },
+  "ash-flakes": {
+   "file": "ash-flakes.webp",
+   "bytes": 5016,
+   "sha256": "95f57db293bd3697a29da26a9eff2465615f24731224fd2db66c726ba5ccbed9",
+   "size": [
+    256,
+    64
+   ],
+   "source": "assets/r411/fx/boss-meteor.webp 12-17",
+   "frame": [
+    32,
+    32
+   ],
+   "columns": 8,
+   "frames": 16,
+   "rows": {
+    "ember": 0,
+    "ash": 1
+   }
+  }
+ }
+}

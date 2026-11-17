@@ -1,0 +1,203 @@
+{
+  "source_zip": "StoryWorld_Isometric_84Assets_20261022.zip",
+  "source_originals_unchanged": true,
+  "transform": "Engine derivative: alpha>=8 bounding box +10 px margin, proportional Lanczos resize to max384; no repaint/generation",
+  "assets": [
+    {
+      "key": "bed",
+      "file": "assets/hospital-maze/bed.png",
+      "source": "assets/hospital_core/hospital-bed-isometric.png",
+      "source_sha256": "5c2a302f4700570b0ae14b0155e9a35c68b58f702bd73f1737ef67b49995a395",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "crop_xyxy": [
+        212,
+        16,
+        1350,
+        983
+      ],
+      "output_size": [
+        384,
+        326
+      ],
+      "pivot_pixels": [
+        187.6133567662566,
+        229.35296794208895
+      ],
+      "pivot_basis": "catalog provisional; crop and resize translated, engine visual alignment pending",
+      "sha256": "f9888c775f165ff767aee301800740cb2e81a15c96e70711f938c90bf37b0516",
+      "base_rgba8_bytes": 500736
+    },
+    {
+      "key": "monitor",
+      "file": "assets/hospital-maze/monitor.png",
+      "source": "assets/hospital_core/patient-monitor-isometric.png",
+      "source_sha256": "9b22ba36d22173eae523590d46d9f8c4511ffd48a64e30fc33f1de8fd7e0e42f",
+      "source_size": [
+        1774,
+        887
+      ],
+      "crop_xyxy": [
+        681,
+        0,
+        1094,
+        885
+      ],
+      "output_size": [
+        179,
+        384
+      ],
+      "pivot_pixels": [
+        89.28329297820824,
+        330.98630508474577
+      ],
+      "pivot_basis": "catalog provisional; crop and resize translated, engine visual alignment pending",
+      "sha256": "f1bbd25cb206b497da68c49b6bac983787c57cc8cef0f44582f4d43c42b3b749",
+      "base_rgba8_bytes": 274944
+    },
+    {
+      "key": "iv",
+      "file": "assets/hospital-maze/iv.png",
+      "source": "assets/hospital_additions/hospital_iv_pole.png",
+      "source_sha256": "780a9ec769b7ee24a3aaec649894c2f834ddbe7f724240366917dedada41e5b3",
+      "source_size": [
+        1774,
+        887
+      ],
+      "crop_xyxy": [
+        713,
+        17,
+        1072,
+        871
+      ],
+      "output_size": [
+        161,
+        384
+      ],
+      "pivot_pixels": [
+        80.49973091922007,
+        378.5910857142857
+      ],
+      "pivot_basis": "catalog provisional; crop and resize translated, engine visual alignment pending",
+      "sha256": "6a483898b3b6b7b8358f6d057c1f2e96135e35198b28df0e5e56cce51e645152",
+      "base_rgba8_bytes": 247296
+    },
+    {
+      "key": "cabinet",
+      "file": "assets/hospital-maze/cabinet.png",
+      "source": "assets/hospital_props/hospital_medicine_cabinet.png",
+      "source_sha256": "073b2ac2fa6161b31efeca39c4f16eda2be62d7ab524a62acbd13d43412182f2",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "crop_xyxy": [
+        249,
+        35,
+        1291,
+        966
+      ],
+      "output_size": [
+        384,
+        343
+      ],
+      "pivot_pixels": [
+        191.99882072936657,
+        339.3181473684211
+      ],
+      "pivot_basis": "catalog provisional; crop and resize translated, engine visual alignment pending",
+      "sha256": "fd40e3ded005cec2bf08777d7dddbc26edd595f5bedebae7c610101fc49e655f",
+      "base_rgba8_bytes": 526848
+    },
+    {
+      "key": "chair",
+      "file": "assets/hospital-maze/chair.png",
+      "source": "assets/hospital_props/hospital_wheelchair.png",
+      "source_sha256": "ed0eba9c7f686352e2307230d90bfe85ef02aced1c20962e86b11e9fc473fcee",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "crop_xyxy": [
+        378,
+        0,
+        1231,
+        981
+      ],
+      "output_size": [
+        334,
+        384
+      ],
+      "pivot_pixels": [
+        167.20267104337634,
+        379.70796819571865
+      ],
+      "pivot_basis": "catalog provisional; crop and resize translated, engine visual alignment pending",
+      "sha256": "ff7d711f6294ecab95e9732178a1de801c725fb4f8d759e4c5e3f1f7f27d49e4",
+      "base_rgba8_bytes": 513024
+    },
+    {
+      "key": "stretcher",
+      "file": "assets/hospital-maze/stretcher.png",
+      "source": "assets/hospital_details/hospital_stretcher.png",
+      "source_sha256": "e6b16ec38d9b1389ae1fa54bf08ff20e3e3224d37ea98164e325a6300e555368",
+      "source_size": [
+        1774,
+        887
+      ],
+      "crop_xyxy": [
+        280,
+        6,
+        1537,
+        878
+      ],
+      "output_size": [
+        384,
+        266
+      ],
+      "pivot_pixels": [
+        191.98943007159906,
+        262.65745986238534
+      ],
+      "pivot_basis": "catalog provisional; crop and resize translated, engine visual alignment pending",
+      "sha256": "903602c766408635e3113e71f1b4b1e1590f33c725dce39ade427150ba139b25",
+      "base_rgba8_bytes": 408576
+    },
+    {
+      "key": "stool",
+      "file": "assets/hospital-maze/stool.png",
+      "source": "assets/hospital_additions/hospital_examination_stool.png",
+      "source_sha256": "590ad7b2517d44de71f20aaed320b3990ac95a18b6368ae70d4d8a85034622ec",
+      "source_size": [
+        1774,
+        887
+      ],
+      "crop_xyxy": [
+        601,
+        94,
+        1172,
+        807
+      ],
+      "output_size": [
+        308,
+        384
+      ],
+      "pivot_pixels": [
+        153.98263117338004,
+        378.07239719495084
+      ],
+      "pivot_basis": "catalog provisional; crop and resize translated, engine visual alignment pending",
+      "sha256": "edf11e6ff6aa539b8bd8c41102543bd0abfcfa505f9c90cdd835c4dc071fe7d2",
+      "base_rgba8_bytes": 473088
+    }
+  ],
+  "selected_count": 7,
+  "base_rgba8_bytes": 2944512,
+  "not_gpu_measurement": true,
+  "not_selected": {
+    "boss-arena-floor.png": "Baked isometric perspective; cannot apply directly to native horizontal3D plane without double projection; preserve native textured floor and A5 projected geometric markings",
+    "wall_door_images": "Baked perspective, open/closed pairs are not registered; preserve native3D wall/door/frame geometry"
+  }
+}

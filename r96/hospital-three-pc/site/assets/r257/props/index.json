@@ -1,0 +1,153 @@
+{
+ "revision": "R257",
+ "method": "alpha bbox (alpha>=16) + pad 6, long side <=512, WebP q92 alpha 100",
+ "items": {
+  "chain-end": {
+   "path": "assets/r257/props/chain-end.webp",
+   "driveZip": "StoryWorld-Ash-Chain-end-oblique-v1.zip",
+   "driveId": "1nyd5zfcdytZouD_JRAe9dNnhl8mYz4mU",
+   "zipSHA256": "3c4cd1436a68e8f981b8b286df79eb06009d690d2ecc16f25860dd5e022a3298",
+   "originalSHA256": "25d347d02b76f8e9b5d8661cb2d2e0af4fe8d312ab3a4141a46a57372f13960d",
+   "originalSize": [
+    1774,
+    887
+   ],
+   "derivedSHA256": "5934369679c909bb4744ddbf3d7f63605a05f5094b74a8d550072e167e0bea5b",
+   "derivedBytes": 37846,
+   "derivedSize": [
+    512,
+    204
+   ],
+   "status": "CONDITIONAL_STRONG_PERSPECTIVE_ASH_CHAIN_END_OBSERVATION",
+   "region": "dist03",
+   "canonLines": [
+    59
+   ],
+   "baseInGame": "r138 chain",
+   "use": "dist03 재에 묻힌 사슬의 끝 쪽 비스듬한 각도 — 같은 방의 두 번째 사슬에 써서 두 개가 같은 각도로 반복되지 않게"
+  },
+  "weed-opp": {
+   "path": "assets/r257/props/weed-opp.webp",
+   "driveZip": "StoryWorld-Plain-Waterweed-opposite-placement-v1.zip",
+   "driveId": "1NIpEXEONefhczbxmc7QJl4atoJfEicIc",
+   "zipSHA256": "7f4bc067a4859e83f2a8e241c5634980ee27c61fa81b95e3c4ff806aceaa0409",
+   "originalSHA256": "3822064116c8c6d074e71ec0c86b0c20a7d1a963797ceef9b6ac038f52debb38",
+   "originalSize": [
+    1536,
+    1024
+   ],
+   "derivedSHA256": "512743d4edf643821220bb435ec6c4e1f2ae6e1cad0ee90410d1e0df1f19e0ee",
+   "derivedBytes": 57892,
+   "derivedSize": [
+    512,
+    259
+   ],
+   "status": "SELECTABLE_PLAIN_WATERWEED_PLACEMENT_VARIANT",
+   "region": "dist02-swamp",
+   "canonLines": [
+    45
+   ],
+   "baseInGame": "r138 weed",
+   "use": "dist02 늪 수초의 반대 방향 배치 — 두 번째 수초"
+  },
+  "cwindow-obl": {
+   "path": "assets/r257/props/cwindow-obl.webp",
+   "driveZip": "StoryWorld-Cabin-Window-opposite-oblique-v1.zip",
+   "driveId": "16tlkGy_F9pHjrfWaOvKzgKQk8n4XoDuv",
+   "zipSHA256": "c9503bf5171a28a99911239c3c1a1cca122da6f425e5c645cc46b3f0ea1ed9de",
+   "originalSHA256": "c730d725f56cabd6cb27d101e190ae0772dfb6d2afd7e01b795dcadbe92f5c12",
+   "originalSize": [
+    1536,
+    1024
+   ],
+   "derivedSHA256": "3e60f425f2de4043e3eb488628f0d6667ebdce8e98cfb86ed9388c2de0f64f07",
+   "derivedBytes": 74286,
+   "derivedSize": [
+    512,
+    364
+   ],
+   "status": "CONDITIONAL_CABIN_WINDOW_OPPOSITE_OBLIQUE_OBSERVATION",
+   "region": "ep1b06b",
+   "canonLines": [
+    263,
+    267
+   ],
+   "baseInGame": "r138 cwindow",
+   "use": "ep1b06b 오두막 창문의 반대 사선 — 왼쪽(-x) 벽에 붙을 때(뒷벽 -y 은 원래 정면 그림)"
+  },
+  "armor": {
+   "path": "assets/r257/props/armor.webp",
+   "driveZip": "StoryWorld-Anonymous-Armor-low-placement-v1.zip",
+   "driveId": "15aUThDm9OZmYEiMvSqX62vmyd38JRf3d",
+   "zipSHA256": "f288ae87634df2e4a56e7b4c0fe2fdfa8b0d6452bc046a6277c7b790aee46e78",
+   "originalSHA256": "dcada60e2109bcd89a9392d5523dce297e149318f9faf297ebf0a2c523b5f81c",
+   "originalSize": [
+    1254,
+    1254
+   ],
+   "derivedSHA256": "3a3df126e2e07915b06cd71a465e8739136a8422df05293a27fc09264dc243cd",
+   "derivedBytes": 63298,
+   "derivedSize": [
+    512,
+    294
+   ],
+   "status": "SELECTABLE_ANONYMOUS_ARMOR_SCATTER_PLACEMENT_VARIANT",
+   "region": "dist04",
+   "canonLines": [
+    69,
+    71,
+    75
+   ],
+   "baseInGame": null,
+   "use": "dist04 재에 묻힌 이름 없는 부서진 갑옷(바닥 비충돌 장식)"
+  },
+  "kitchen": {
+   "path": "assets/r257/props/kitchen.webp",
+   "driveZip": "StoryWorld-Organic-Kitchen-low-placement-v1.zip",
+   "driveId": "1hGbjkOpmeNz9F1P4Jj6oMpBnuh81xZ1-",
+   "zipSHA256": "73155c15d3cfe7072331b595ae5b2e265313a68d6ccbe91cbb2005c510610346",
+   "originalSHA256": "f752a9eca7d4a234ec667d531ad851a9c8102aa592c54b8f86adf47897053166",
+   "originalSize": [
+    1774,
+    887
+   ],
+   "derivedSHA256": "58e13eff9b73ad6d6b842c40cefd47819cb4f399e8ad340e0b8b3353b4856f2b",
+   "derivedBytes": 31806,
+   "derivedSize": [
+    512,
+    170
+   ],
+   "status": "SELECTABLE_ORGANIC_KITCHEN_LOW_PLACEMENT_VARIANT",
+   "region": "ep1b04",
+   "canonLines": [
+    228
+   ],
+   "baseInGame": null,
+   "use": "ep1b04 탐식의 주방 유기질 바닥 전이(바닥 비충돌 장식)"
+  },
+  "cable": {
+   "path": "assets/r257/props/cable.webp",
+   "driveZip": "StoryWorld-Snow-Cable-end-placement-v1.zip",
+   "driveId": "1zUDa5ff5JJsbDXyHGsWKm4Hi_OSwDne7",
+   "zipSHA256": "bc101ca89663bda58cfcc758b12fbcc4650ea849f3f38bb2b97fcc880b43a24a",
+   "originalSHA256": "0ff0f6aef04f342bf6270c72c7301db7973d97b65abc4cdfec6f6dbd4a44f604",
+   "originalSize": [
+    1774,
+    887
+   ],
+   "derivedSHA256": "2bcedac6397a3778f2935fe092296d89f376f4e81b42e3c9385aafdbfa67153f",
+   "derivedBytes": 59538,
+   "derivedSize": [
+    512,
+    238
+   ],
+   "status": "SELECTABLE_SNOW_CABLE_PLACEMENT_VARIANT",
+   "region": "ep1b09",
+   "canonLines": [
+    301
+   ],
+   "baseInGame": null,
+   "use": "ep1b09 눈 속 검은 케이블 이음(바닥 비충돌 장식)"
+  }
+ }
+}

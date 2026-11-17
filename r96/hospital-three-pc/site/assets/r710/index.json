@@ -1,0 +1,271 @@
+{
+ "revision": "R710-idle-hit-1",
+ "note": "남쪽 대기 6칸·피격 4칸(드라이브 HOLD 초안을 발·크기·투명도만 다듬음, 그림은 초안 그대로). 다른 방향은 R119/R143 그대로. 환도·슬레이어·네온은 보류.",
+ "raw": false,
+ "heroes": {
+  "hunter": {
+   "idle": {
+    "path": "assets/r710/hunter/idle-s.webp",
+    "frames": 6,
+    "cell": [
+     192,
+     256
+    ],
+    "foot": [
+     96,
+     226
+    ],
+    "sha256": "c48c7a7ef9458edad9b22bdde857ea6d088f7ba1dfb4607e5c2dc93fa9f943d1",
+    "bytes": 41786,
+    "source": {
+     "file": "hunter-idle6-s.png",
+     "sha256": "fde5e83b567680f8aa125a361d594a6c398d27f0d373b6781af22b8fed21cd2b",
+     "drive": "HERO-Hunter-idle6-hit4-r1-HOLD"
+    }
+   },
+   "hit": {
+    "path": "assets/r710/hunter/hit-s.webp",
+    "frames": 4,
+    "cell": [
+     192,
+     256
+    ],
+    "foot": [
+     96,
+     226
+    ],
+    "sha256": "bf55fb8e8440a78696999663e35c0db1c665a5ed125eb0738ce09041bcdc2c9e",
+    "bytes": 28968,
+    "source": {
+     "file": "hunter-hit4-s.png",
+     "sha256": "a2aaedcb3f938e7832dff34033ea4f8653e1f87c0932b670c759373b35ab581c",
+     "drive": "HERO-Hunter-idle6-hit4-r1-HOLD"
+    }
+   },
+   "scale": 0.8498,
+   "hitScale": 0.8498,
+   "hitBody": 182.0,
+   "refBody": 183.0
+  },
+  "lauren": {
+   "idle": {
+    "path": "assets/r710/lauren/idle-s.webp",
+    "frames": 6,
+    "cell": [
+     192,
+     256
+    ],
+    "foot": [
+     96,
+     226
+    ],
+    "sha256": "75a68fd05aef26e44c1d3d3ead31cfb9546d530dd79eb5d6471f43c62b5eca71",
+    "bytes": 54444,
+    "source": {
+     "file": "lauren-idle6-s.png",
+     "sha256": "2c07b89c0bf44dd33e7632e0e38d6ce797aa25a1f3abb2c465b1f3ec1ba527ed",
+     "drive": "HERO-Lauren-idle6-hit4-r1-HOLD"
+    }
+   },
+   "hit": {
+    "path": "assets/r710/lauren/hit-s.webp",
+    "frames": 4,
+    "cell": [
+     192,
+     256
+    ],
+    "foot": [
+     96,
+     225
+    ],
+    "sha256": "ec315d8f1d0c13740286b16e0954696c5467e11b1fecfdddb422ed1783987f28",
+    "bytes": 38618,
+    "source": {
+     "file": "lauren-hit4-s.png",
+     "sha256": "851260eb6529b91742112aaa5d22bff1b984c38b8aaf5c151d0d287d30ef3d4d",
+     "drive": "HERO-Lauren-idle6-hit4-r1-HOLD"
+    }
+   },
+   "scale": 0.9189,
+   "hitScale": 0.9668,
+   "hitBody": 206.0,
+   "refBody": 205.0
+  },
+  "michaela": {
+   "idle": {
+    "path": "assets/r710/michaela/idle-s.webp",
+    "frames": 6,
+    "cell": [
+     192,
+     256
+    ],
+    "foot": [
+     96,
+     226
+    ],
+    "sha256": "e5f873b54affb5bf0ca69715b34492007bdb4ff68bc2cda933abc88ae2e08d01",
+    "bytes": 46632,
+    "source": {
+     "file": "michaela-idle6-s.png",
+     "sha256": "feb6d712ddf56599a37c95f43e9f8b375b7804d528daf57b6d05e58806a3c2db",
+     "drive": "HERO-Michaela-idle6-hit4-r1-HOLD"
+    }
+   },
+   "hit": {
+    "path": "assets/r710/michaela/hit-s.webp",
+    "frames": 4,
+    "cell": [
+     192,
+     256
+    ],
+    "foot": [
+     96,
+     226
+    ],
+    "sha256": "3078d2032c58fff5f608f22be3a6aa278f5ae9b054b97e659fe1ac92dc6b5bbb",
+    "bytes": 32316,
+    "source": {
+     "file": "michaela-hit4-s.png",
+     "sha256": "72ecf6f80feea2e19ceacbaba83edae7b5255d896d133d4718fa90f5d131d45b",
+     "drive": "HERO-Michaela-idle6-hit4-r1-HOLD"
+    }
+   },
+   "scale": 0.819,
+   "hitScale": 0.838,
+   "hitBody": 182.0,
+   "refBody": 183.0
+  },
+  "seoha": {
+   "idle": {
+    "path": "assets/r710/seoha/idle-s.webp",
+    "frames": 6,
+    "cell": [
+     192,
+     256
+    ],
+    "foot": [
+     96,
+     226
+    ],
+    "sha256": "2c46cd0a53e80d44ba794f61e1e61982dfa8a84f9c48f09c250284b2cebb5e87",
+    "bytes": 57414,
+    "source": {
+     "file": "seoha-idle6-s.png",
+     "sha256": "450d2796d22f1b384ac791cf5ad2a0f32ae282251be91ebcb3ca7d8dd6addb36",
+     "drive": "HERO-Seoha-idle6-hit4-r1-HOLD"
+    }
+   },
+   "hit": {
+    "path": "assets/r710/seoha/hit-s.webp",
+    "frames": 4,
+    "cell": [
+     192,
+     256
+    ],
+    "foot": [
+     96,
+     226
+    ],
+    "sha256": "f8ec98965c1f4b29215805a2132b0fefffe35c143155082d56ff9f2acb59f356",
+    "bytes": 37400,
+    "source": {
+     "file": "seoha-hit4-s.png",
+     "sha256": "9cdcdce711665dea24ee3be00bb0a046e5266e22750ca3ae9667be16c1d18c8a",
+     "drive": "HERO-Seoha-idle6-hit4-r1-HOLD"
+    }
+   },
+   "scale": 0.8009,
+   "hitScale": 0.819,
+   "hitBody": 182.0,
+   "refBody": 182.0
+  },
+  "gunner": {
+   "idle": {
+    "path": "assets/r710/gunner/idle-s.webp",
+    "frames": 6,
+    "cell": [
+     192,
+     256
+    ],
+    "foot": [
+     96,
+     226
+    ],
+    "sha256": "daa46374cff78a89e265edc51e8e33423f96ae10b4d0156a876e58af0518dc41",
+    "bytes": 44326,
+    "source": {
+     "file": "gunner-idle6-s.png",
+     "sha256": "60abc1bdaad8e5cdf5b10f120f3ce53c415a17b970a83d4a6b1c4881cf85c042",
+     "drive": "HERO-Gunner-tall-idle6-hit4-r2-HOLD"
+    }
+   },
+   "hit": {
+    "path": "assets/r710/gunner/hit-s.webp",
+    "frames": 4,
+    "cell": [
+     192,
+     256
+    ],
+    "foot": [
+     96,
+     227
+    ],
+    "sha256": "57342f72328d6d0110961b153e43d1ed160a5b2e9152a1df95c5bd4824d9cb52",
+    "bytes": 29756,
+    "source": {
+     "file": "gunner-hit4-s.png",
+     "sha256": "ca5588f1bc53d13cf5ee8cc68a08460aa32c3f6a0a25761f92ca1ea976883123",
+     "drive": "HERO-Gunner-tall-idle6-hit4-r2-HOLD"
+    }
+   },
+   "scale": 0.8117,
+   "hitScale": 0.8341,
+   "hitBody": 183.0,
+   "refBody": 182.5
+  },
+  "neon": {
+   "idle": {
+    "path": "assets/r710/neon/idle-s.webp",
+    "frames": 6,
+    "cell": [
+     192,
+     256
+    ],
+    "foot": [
+     96,
+     226
+    ],
+    "sha256": "9fa0a0b3e0854971b91736c5c843a1f4daf837d38bb535e5f67c5be3922984d2",
+    "bytes": 46148,
+    "source": {
+     "file": "neon-idle6-s.png",
+     "sha256": "d5371f178c8714b722706436d8885a2086978ef9bebf3cde08c7c2d833b6f8f9",
+     "drive": "HERO-Neon-idleonly-r4-HOLD-512cell(대기, 사용자 06:19Z 선택) + HERO-Neon-idle6-hit4-r2-HOLD(피격, 사용자 06:19Z 선택)"
+    }
+   },
+   "hit": {
+    "path": "assets/r710/neon/hit-s.webp",
+    "frames": 4,
+    "cell": [
+     192,
+     256
+    ],
+    "foot": [
+     96,
+     225
+    ],
+    "sha256": "8041c972a8fc56e2e300f3b609bf18b522484318fa2300657abcab3ce8668486",
+    "bytes": 29682,
+    "source": {
+     "file": "neon-hit4-s.png",
+     "sha256": "98d1e4af35e8aa6cefcd3e49e55994c9f43788fe9131597536ce73408f6af85d",
+     "drive": "HERO-Neon-idleonly-r4-HOLD-512cell(대기, 사용자 06:19Z 선택) + HERO-Neon-idle6-hit4-r2-HOLD(피격, 사용자 06:19Z 선택)"
+    }
+   },
+   "scale": 0.4013,
+   "hitScale": 0.7802,
+   "hitBody": 182.0,
+   "refBody": 181.0
+  }
+ }
+}
