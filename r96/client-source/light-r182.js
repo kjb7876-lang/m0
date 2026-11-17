@@ -21,7 +21,9 @@ function inMaze(){try{if(typeof room==='undefined'||!room)return false;const x=r
 const MODERN_STYLE=/clinical|domestic|urban|school|hospital|hotel|office|modern|city|subway|station/i;
 function mazeLight(){try{const era=window.__STORYWORLD_ERA_R191__?.eraOf?.(room);if(era==='tech'||era==='modern')return 'flashlight';const x=room?.samongR103,z=x&&window.__STORYWORLD_SAMONG_ZONES_R115__?.zone?.(x.zone);
   if(MODERN_STYLE.test(String(z?.style||''))||MODERN_STYLE.test(String(room?.exploration?.worldR74?.style||room?.exploration?.backgroundTheme||'')))return 'flashlight';}catch(_){}return 'torch';}
-const mode=()=>prefs.mode==='auto'?(inMaze()?mazeLight():'full'):prefs.mode;
+// R1124: 본진을 볼 때는 코어의 빛을 사용한다. 저장한 시야 선택은 바꾸지 않는다.
+const commandFocus=()=>window.__STORYWORLD_SURVIVAL_COMMAND_R1124__?.focus?.()||null;
+const mode=()=>commandFocus()?(prefs.mode==='full'?'full':'glow'):prefs.mode==='auto'?(inMaze()?mazeLight():'full'):prefs.mode;
 function apply(){try{if(typeof settings==='undefined'||!settings)return;const want=mode()!=='full'&&mode()!=='glow';/* R185: 사몽 안에서 '전체'→횃불/손전등으로 바꿔도 바로 R24 시야를 켠다(예전에는 다음 구역까지 기다림 — Codex 리뷰) */
   if((settings.flashlight58!==false)!==want){settings.flashlight58=want;window.__STORYWORLD_SIGHT24__?.refresh?.();}document.getElementById('stage')?.classList.toggle('flashlight-black-r58',want);}catch(e){fail(e);}}
 function set(p){if(MODES.includes(p?.mode))prefs.mode=p.mode;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}apply();return{...prefs};}
@@ -62,7 +64,7 @@ function frame(){try{if(!want()){hide();return;}const c=canvas();if(!c)return;c.
   g.globalCompositeOperation='source-over';g.fillStyle='rgba(255,226,170,.05)';g.beginPath();g.moveTo(o.x,o.y);for(const p of pts)g.lineTo(p.x,p.y);g.closePath();g.fill();stats.coneFrames++;}catch(e){fail(e);}}
 // R335 은은한 원형: 시야 제한 없이 영웅 둘레만 밝고 멀수록 어둡게(벽에 막히지 않는 부드러운 비네트). 가장자리 어둠 GLOW_EDGE, 완전히 밝은 반경 GLOW_IN 칸, 다 어두워지는 반경 GLOW_OUT 칸.
 const GLOW_IN=4.5,GLOW_OUT=13,GLOW_EDGE=.6;
-function glow(g,b){const o=project(player.x,player.y),U=(typeof TILE==='number'?TILE:34)*(typeof zoom==='number'?zoom:1),rx=GLOW_OUT*U*Math.SQRT2,cy=o.y-12*(typeof zoom==='number'?zoom:1);
+function glow(g,b){const p=commandFocus()||player,o=project(p.x,p.y),U=(typeof TILE==='number'?TILE:34)*(typeof zoom==='number'?zoom:1),rx=GLOW_OUT*U*Math.SQRT2,cy=o.y-12*(typeof zoom==='number'?zoom:1);
  let edge=GLOW_EDGE;try{edge=window.__STORYWORLD_LOCAL_LIGHT_R451__?.glowEdge?.(GLOW_EDGE)??GLOW_EDGE;}catch(e){fail(e);}/* R451: 국지 조명이 빛을 맡으면 가장자리 어둠을 가볍게(모양은 그대로) */
  g.fillStyle='rgba(2,2,7,'+edge+')';g.fillRect(0,0,b.width,b.height);g.globalCompositeOperation='destination-out';
  const gr=g.createRadialGradient(o.x,cy,0,o.x,cy,rx),k=GLOW_IN/GLOW_OUT;gr.addColorStop(0,'rgba(0,0,0,1)');gr.addColorStop(k,'rgba(0,0,0,1)');gr.addColorStop(k+(1-k)*.45,'rgba(0,0,0,.55)');gr.addColorStop(1,'rgba(0,0,0,0)');

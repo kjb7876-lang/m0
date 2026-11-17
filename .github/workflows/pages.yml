@@ -31,6 +31,11 @@ jobs:
           python scripts/build-r96.py
           python scripts/prepare-r96-ci.py
           python r96/scripts/prepare-handoff-baselines.py
+      - name: Survival caster ownership, placement lifecycle and H command regression
+        run: |
+          node r96/qa/r1124/combat-ownership-cpu.cjs
+          node r96/qa/r1124/slots-cpu-check.cjs
+          node r96/qa/r1124/command-cpu-check.cjs
       - name: Execute all 58 inherited regression groups against this artifact
         env:
           STORYWORLD_QA_LABEL: ci-current

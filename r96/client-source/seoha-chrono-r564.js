@@ -12,11 +12,11 @@
  */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_SEOHA_CHRONO_R564__)return;
-const REV='R564-chrono-6',KEY='storyworld.r564.chrono',HERO='seoha';
+const REV='R564-chrono-7',KEY='storyworld.r564.chrono',HERO='seoha';
 const TRAIL_GAP=.1,TRAIL_LIFE=.36,TRAIL_MAX=4,CLONE_AT=.15,CLONE_SHOT=.3,CLONE_END=.75,CLONE_OFF=1.5,CLONE_K=.25,CLONE_RANGE=13,
  STOP_AT=.14,STOP_R=6,STOP_T=1.6,STOP_MOB_MAX=20,STOP_SHOT_MAX=40,SHATTER_T=.45;
 const stats={hasteTrails:0,qCasts:0,cloneShots:0,stops:0,frozenMobs:0,frozenShots:0,blockedHurts:0,draws:0,errors:0,lastError:null};
-let blinks=[],jobs=[],clones=[],stop=null,shatter=null,frozen=new Map(),heldShots=new Map(),lastTrail=-1e9,trails=0,lastRoom=null,prefAt=-1e9,prefOn=true,seenR=new Set();
+let blinks=[],jobs=[],clones=[],stop=null,shatter=null,frozen=new Map(),heldShots=new Map(),lastTrail=-1e9,trails=0,lastRoom=null,prefAt=-1e9,prefOn=true,seenR=new Set(),castOwner=null;
 const T=()=>{try{return typeof time==='number'?time:0;}catch(_){return 0;}};
 const fail=e=>{stats.errors++;stats.lastError=String(e&&e.message||e).slice(0,200);};
 function readOn(){try{const v=JSON.parse(localStorage.getItem(KEY)||'null');return !(v&&v.on===false);}catch(_){return true;}}
@@ -41,7 +41,7 @@ function trailStep(t){if(!hasteOn()||!player.moving){return;}if(t-lastTrail<TRAI
  lastTrail=t;if(ghost(player.x,player.y,'dash',player.direction||'front',TRAIL_LIFE))stats.hasteTrails++;}
 // ---- Q: 평행세계 분신 ------------------------------------------------------------------------
 function nearestFrom(p,r,skip){let b=null,bd=r;for(const e of enemiesNow()){if(!alive(e)||e===skip)continue;const d=dist(e,p);if(d<bd){bd=d;b=e;}}return b;}
-function onQ(){const t=T(),o={x:player.x,y:player.y},power=qPower(),tg=typeof nearestEnemy==='function'?nearestEnemy(12):null;
+function onQ(){bindCaster();const t=T(),o={x:player.x,y:player.y},power=qPower(),tg=typeof nearestEnemy==='function'?nearestEnemy(12):null;
  const a=tg?Math.atan2(tg.y-o.y,tg.x-o.x):(typeof storyAim22==='function'?storyAim22():0),nx=-Math.sin(a),ny=Math.cos(a);stats.qCasts++;lastRoom=curRoom();
  const pair=[1,-1].map(s=>({x:o.x+nx*CLONE_OFF*s,y:o.y+ny*CLONE_OFF*s,a,side:s}));
  jobs.push({at:t+CLONE_AT,run:()=>{clones=pair.map(c=>({...c,t0:T()}));for(const c of clones){if(blinks.length>=BLINK_MAX)blinks.shift();blinks.push({x:c.x,y:c.y,t0:c.t0});}for(const c of clones)ghost(c.x,c.y,'attack',face(Math.cos(a),Math.sin(a)),CLONE_END-CLONE_AT);}});
@@ -62,14 +62,17 @@ function endStop(){for(const [b,v] of heldShots){try{if(!b.dead){b.vx=v.vx;b.vy=
 function pin(t){for(const [e,f] of frozen){if(!alive(e)){frozen.delete(e);continue;}e.x=f.x;e.y=f.y;if(Number.isFinite(e.cd))e.cd=Math.max(e.cd,f.until-t+.15);if(f.tell!=null&&Number.isFinite(e.tell))e.tell=f.tell;}
  for(const [b] of heldShots){if(b.dead){heldShots.delete(b);continue;}b.vx=0;b.vy=0;}}
 function frozenSource(s){if(!stop||!s)return false;if(frozen.has(s)||heldShots.has(s))return true;const id=s.owner;if(id==null)return false;for(const [e] of frozen)if(e.id===id)return true;return false;}
-function cancel(){if(stop||heldShots.size)endStop();jobs=[];clones=[];blinks=[];shatter=null;seenR.clear();}
+function cancel(){if(stop||heldShots.size)endStop();jobs=[];clones=[];blinks=[];shatter=null;seenR.clear();castOwner=null;}
+// R1124: 배치 창에서 해제하고 같은 영웅을 곧바로 다시 놓아도 새 몸에 옛 Q/R 예약을 넘기지 않는다.
+// 다른 자리의 해제는 몸 객체가 그대로이므로 진행 중인 이 영웅의 기술을 취소하지 않는다.
+function bindCaster(){if(castOwner&&castOwner!==player){cancel();lastTrail=-1e9;}castOwner=player;}
 function step(){const rm=curRoom();if(rm!==lastRoom){if(lastRoom!==null)cancel();lastRoom=rm;}
- if(!on()||heroNow()!==HERO||!player||player.hp<=0||blockedNow()){cancel();return;}const t=T();
+ if(!on()||heroNow()!==HERO||!player||player.hp<=0||player.disabled||blockedNow()){cancel();return;}bindCaster();const t=T();
  const due=jobs.filter(j=>t>=j.at);jobs=jobs.filter(j=>t<j.at);for(const j of due){try{j.run();}catch(err){fail(err);}}
  if(stop){if(t>=stop.until)endStop();else pin(t);}if(shatter&&t-shatter.t0>SHATTER_KEEP)shatter=null;trailStep(t);}
 // ---- 감지·연결 -------------------------------------------------------------------------------
 if(typeof fx==='function'){const base=fx;fxBase=(...a)=>base.apply(null,a);fx=function(type,x,y,opt){const r=base.apply(this,arguments);
- try{const o=opt||{};if(type==='storySourceSkill'&&o.storyWER&&o.stage==='warning'&&o.sourceHero===HERO&&o.sourceSlot==='r'&&on()&&heroNow()===HERO){const id=o.castId||('r:'+T());
+ try{const o=opt||{};if(type==='storySourceSkill'&&o.storyWER&&o.stage==='warning'&&o.sourceHero===HERO&&o.sourceSlot==='r'&&on()&&heroNow()===HERO){bindCaster();const id=o.castId||('r:'+T());
   if(!seenR.has(id)){seenR.add(id);if(seenR.size>16)seenR.delete(seenR.values().next().value);const c={x:player.x,y:player.y};lastRoom=curRoom();jobs.push({at:T()+STOP_AT,run:()=>startStop(c)});}}}catch(err){fail(err);}return r;};}
 if(typeof special==='function'){const base=special;special=function(...a){let before=null;try{if(on()&&heroNow()===HERO&&player)before=player.specialCD;}catch(err){fail(err);}
  const r=base.apply(this,a);try{if(before!=null&&heroNow()===HERO&&player.specialCD>0&&!(before>0))onQ();}catch(err){fail(err);}return r;};}
