@@ -57,8 +57,8 @@ const at=(c,u,v)=>{const P=c.points,W=c.sourceRect[2],H=c.sourceRect[3],a=u/W,b=
 {const want=[[6,{sx:1},'side',1],[2,{sx:-1},'side',0],[4,{sy:1},'front',0],[2,{sy:1},'front',0],[0,{sy:-1},'rear',0],[6,{sy:-1},'rear',0],[0,{sx:-1,sy:.4},'side',0],[0,{sx:.2,sy:1},'front',0]];
  for(const [d,mv,sh,mir] of want){const w=world();w.walk(.2,d,mv);w.load();const b=bodies(w.walk(.3,d,mv))[0],s=b&&sheetOf(b);const flipped=b&&b.points[1][0]<b.points[0][0];
   ok(s&&s.sheet===sh&&flipped===!!mir,(d===6&&mv.sx?'⑥':'⑦')+' base-'+d+' 화면 '+JSON.stringify(mv)+' → '+sh+(mir?' 뒤집기':'')+' (받은: '+(s?s.sheet:b&&b.sourcePath)+(flipped?' 뒤집기':'')+')');}}
-// ⑧ 각성형
-{const w=world();w.walk(.2,2,{sx:-1,kind:'awake'});w.load();const out=w.walk(.6,2,{sx:-1,kind:'awake'});const b=bodies(out);ok(b.length>=3&&b.every(c=>!sheetOf(c)),'⑧ 각성형은 코드 걸음 조각('+b.length+')');}
+// ⑧ 각성형 — R1119 사용자 지시(2026-11-17, 드라이브 '01_먼저읽기': 각성 중 걷기도 기본형 걷기 시트 + 국소 발광, 사용자 04:53Z 검사 수정 허락)로 기대값 변경: 코드 걸음 조각 → 기본형 옆 시트 칸 한 장
+{const w=world();w.walk(.2,2,{sx:-1,kind:'awake'});w.load();const out=w.walk(.6,2,{sx:-1,kind:'awake'});const b=bodies(out),s=b[0]&&sheetOf(b[0]);ok(b.length===1&&s&&s.sheet==='side','⑧ 각성형도 기본형 걷기 시트 칸('+b.length+', '+(b[0]&&b[0].sourcePath)+')');}
 // ⑨ 못 읽음
 {const w=world();const out=w.walk(.8,2,{sx:-1});const b=bodies(out);ok(b.length>=3&&b.every(c=>!sheetOf(c)),'⑨ 시트를 아직 못 읽으면 코드 걸음 조각('+b.length+')');
  const w2=world({noDom:true});const b2=bodies(w2.walk(.8,2,{sx:-1}));ok(b2.length>=3,'⑨ document·Image 없는 곳에서도 오류 없이 코드 걸음');}

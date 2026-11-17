@@ -17,7 +17,7 @@
  */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_PERSONA_GRAVITY_R1096__)return;
-const REV='R1096-persona-gravity-3-dots-r1107',KEY='storyworld.r1096.personaGravity';
+const REV='R1096-persona-gravity-4-r1119-pm2',KEY='storyworld.r1096.personaGravity';
 const CHANCE=.22,AWAKE_CHANCE=.32,ROLL_MIN=3.2,ROLL_SPREAD=1.3,ICD=6,COMBO_WINDOW=40,ECL_CHANCE=.6,RANGE=14,HERO_R=.27;
 const CR_WARN=.75,CR_V=6.5,CR_RANGE=9,CR_R=.55,CR_K=1.2,CR_PUSH=1.6,CR_PUSH_T=.2;
 const AB_WARN=.8,AB_LIFE=1.4,AB_R=2.6,AB_CORE=1,AB_V=2.3,AB_TICK=.35,AB_TICKS=4,AB_K=.3;
@@ -101,8 +101,9 @@ function sheet(k,age,x,y,d,o={}){if(!sheetsOn||!Number.isFinite(x)||!Number.isFi
  ctx.save();try{ctx.globalAlpha*=Math.max(0,Math.min(1,o.alpha??1));if('filter' in ctx)ctx.filter=TINT[k]||'none';ctx.translate(x,y);if(o.flip)ctx.scale(-1,1);if(o.angle)ctx.rotate(o.angle);ctx.drawImage(im,sx+c[0]*K,sy+c[1]*K,(c[2]-c[0])*K,(c[3]-c[1])*K,(c[0]-m.piv[0])/256*w,(c[1]-m.piv[1])/256*h,(c[2]-c[0])/256*w,(c[3]-c[1])/256*h);stats.sheetDraws++;}finally{ctx.restore();}return true;}
 // R1107 Dots CX-0118PM r1 페르소나판 시트(언주색, 오른쪽 진행): PM-1 붉은 거울별 24칸 루프 12.5fps, PM-3 자아 월식 앞 12칸 충전·뒤 12칸 관통탄.
 //  6열×192칸, 피벗 (96,96), body = 칸 속 구 지름(192 기준, 실측). 색 필터 없이 그대로 그린다. 안 읽혔으면 위 라우렌 임시 그림으로.
-//  PM-2 검은 우물별은 r2(구·원반 분리, 짙은 언주) 대기 — 그때까지 끌림 구·원반은 임시 그림.
-const DSHEETS={star:{p:'assets/r1107/persona-red-star.webp',piv:[96,96],body:106},eclipse:{p:'assets/r1107/persona-eclipse.webp',piv:[96,96],body:100}};
+//  R1119: PM-2 검은 우물별 r2(구·바닥 원반 분리, 언주 명암, 같은 칸 번호 80ms) — 바닥 원반은 끌림 범위 지름에(원반 보이는 폭 188/192), 구는 원래 높이에(구 지름 75/192).
+const DSHEETS={star:{p:'assets/r1107/persona-red-star.webp',piv:[96,96],body:106},eclipse:{p:'assets/r1107/persona-eclipse.webp',piv:[96,96],body:100},
+ well:{p:'assets/r1119/well-orb.webp',piv:[96,96],body:75},wellFloor:{p:'assets/r1119/well-floor.webp',piv:[96,96],body:188}};
 function dimg(k){try{const r=typeof readyImage==='function'?readyImage(DSHEETS[k].p):null,im=r&&r.image;if(!im)return null;const w=im.naturalWidth||im.width||0,h=im.naturalHeight||im.height||0;return w===1152&&h===768?im:null;}catch(_){return null;}}
 function dsheet(k,f,x,y,d,o={}){if(!sheetsOn||!Number.isFinite(x)||!Number.isFinite(y)||!(d>0)||!Number.isFinite(d))return false;const im=dimg(k);if(!im)return false;const m=DSHEETS[k];f=Math.max(0,Math.min(23,Math.floor(f)||0));
  const sx=(f%6)*192,sy=Math.floor(f/6)*192,w=d*192/m.body;
@@ -139,9 +140,9 @@ function drawCrimson(x,t){const {AH,T1}=scale(),lift=AH*.55,r=AH*.26,id='r1096:c
 function drawAbyss(x,t){const {T1,AH}=scale(),q=project(x.x,x.y),u=t-x.t0,Rx=x.radius*T1,id='r1096:abyss:'+x.t0.toFixed(2);
  if(x.phase==='warn'){const f=Math.min(1,u/x.warn);sc({id:id+':warn',kind:'effect',pxfSide:'enemy',x:x.x,y:x.y,groundAligned:true},()=>disk(q,Rx,f,.85));return;}
  const v=t-x.tl,fade=v>AB_LIFE?Math.max(0,1-(v-AB_LIFE)/.3):1;
- sc({id:id+':disk',kind:'effect',pxfSide:'enemy',x:x.x,y:x.y,groundAligned:true},()=>{disk(q,Rx,1,fade*.55);sheet('disk',v,q.x,q.y,Rx*2,{alpha:fade*.9});
+ sc({id:id+':disk',kind:'effect',pxfSide:'enemy',x:x.x,y:x.y,groundAligned:true},()=>{disk(q,Rx,1,fade*.55);if(!dsheet('wellFloor',(v*12.5)%24,q.x,q.y,Rx*2,{alpha:fade*.9}))sheet('disk',v,q.x,q.y,Rx*2,{alpha:fade*.9});
   const cr=AB_CORE*T1;ctx.save();try{ctx.globalAlpha*=fade;ctx.strokeStyle=`rgba(${BLOOD_HOT},.8)`;ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(q.x,q.y,cr,cr*.5,0,0,Math.PI*2);ctx.stroke();}finally{ctx.restore();}});
- sc({id:id+':orb',kind:'effect',pxfSide:'enemy',x:x.x,y:x.y},()=>{const r=AH*.24,cy=q.y-AH*.6;if(!sheet('blue',v,q.x,cy,r*2,{alpha:fade}))orb(q.x,cy,r,BLOOD_HOT,INK,fade);});}
+ sc({id:id+':orb',kind:'effect',pxfSide:'enemy',x:x.x,y:x.y},()=>{const r=AH*.24,cy=q.y-AH*.6;if(!dsheet('well',(v*12.5)%24,q.x,cy,r*2,{alpha:fade})&&!sheet('blue',v,q.x,cy,r*2,{alpha:fade}))orb(q.x,cy,r,BLOOD_HOT,INK,fade);});}
 function drawEclipse(x,t){const {AH}=scale(),lift=AH*.55,id='r1096:eclipse:'+x.t0.toFixed(2);
  if(x.phase==='warn'){const f=Math.min(1,(t-x.t0)/x.warn);lane(x,EC_RANGE,x.radius*.6,f,id+':warn');const m=project(x.sx+x.ux*.7,x.sy+x.uy*.7);
   sc({id:id+':charge',kind:'effect',pxfSide:'enemy',x:x.sx,y:x.sy},()=>{if(dsheet('eclipse',Math.min(11,(t-x.t0)/x.warn*12),m.x,m.y-lift,AH*.55,{flip:heading(x).flip}))return;if(sheet('fuse',(t-x.t0)*(.5/x.warn),m.x,m.y-lift,AH*.8))return;const px=-x.uy,py=x.ux,sep=1.2*(1-f*f),a=project(x.sx+x.ux*.7+px*sep,x.sy+x.uy*.7+py*sep),b=project(x.sx+x.ux*.7-px*sep,x.sy+x.uy*.7-py*sep);

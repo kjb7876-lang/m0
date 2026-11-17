@@ -1,0 +1,226 @@
+[
+ {
+  "out": "persona-hit-base-front.webp",
+  "src": "hit-front/base-front-hit4.png",
+  "srcSha256": "660682108dd99ddbe30ac29102367f1377d812d6ec8ac65cdb5bcff20f0c5522",
+  "size": 105436,
+  "w": 2048,
+  "h": 512
+ },
+ {
+  "out": "persona-hit-base-side.webp",
+  "src": "side6/base-side-backstep-hit6.png",
+  "srcSha256": "98b420eaff514e91bf05cf80fe210a052e2f4bd6b63173a93b7e9dd1daf63439",
+  "size": 145668,
+  "w": 3072,
+  "h": 512
+ },
+ {
+  "out": "persona-hit-base-rear.webp",
+  "src": "hit-rear/base-rear-hit4.png",
+  "srcSha256": "a50dfa228b3715f3c3582701ee142c29e4ca3f9f1fc322832854f9740e4cea14",
+  "size": 102638,
+  "w": 2048,
+  "h": 512
+ },
+ {
+  "out": "persona-death-base.webp",
+  "src": "orbcast/base-light-death.png",
+  "srcSha256": "8c79429d610dc6cf7b8b849fc06248aa5c953e1a128a2e4630b1b343a8353c4b",
+  "size": 140742,
+  "w": 3072,
+  "h": 256
+ },
+ {
+  "out": "persona-hit-awake-front.webp",
+  "src": "hit-front/awake-front-hit4.png",
+  "srcSha256": "689afb6faa30a7d8b93d64f31114e6fc8eb35dd8c552c60f0e92c8df99993147",
+  "size": 137064,
+  "w": 2048,
+  "h": 512
+ },
+ {
+  "out": "persona-hit-awake-side.webp",
+  "src": "side6/awake-side-backstep-hit6.png",
+  "srcSha256": "6c711cce848e5ea3abdd8b6edd16b5bfa215a742539df2d96ee52dbc21a888e5",
+  "size": 175862,
+  "w": 3072,
+  "h": 512
+ },
+ {
+  "out": "persona-hit-awake-rear.webp",
+  "src": "hit-rear/awake-rear-hit4.png",
+  "srcSha256": "116e456c457cb391d8fc1ca043269e91a730c111fd508758aa3a18fae810fef8",
+  "size": 140886,
+  "w": 2048,
+  "h": 512
+ },
+ {
+  "out": "persona-death-awake.webp",
+  "src": "orbcast/awake-light-death.png",
+  "srcSha256": "e3b9f727b608990579ff8c93e7e0d7c8eac785c6697e777f06c9dbe75e550805",
+  "size": 176424,
+  "w": 3072,
+  "h": 256
+ },
+ {
+  "out": "fx-clock-flight.webp",
+  "src": "clock/clock_flight8_sheet.png",
+  "srcSha256": "be1f3e0a1aa6010395a6cff14cb3dc2c634d3df4b01b352e6919223bb233c70f",
+  "size": 65742,
+  "w": 2048,
+  "h": 256
+ },
+ {
+  "out": "fx-clock-contact.webp",
+  "src": "clock/clock_contact6_sheet.png",
+  "srcSha256": "fe7a172e7df7ec025f5c892147033631e13a70a71435e24ce089614c70d85067",
+  "size": 43356,
+  "w": 1536,
+  "h": 256
+ },
+ {
+  "out": "fx-diamond-flight.webp",
+  "src": "diamond/diamond_flight8_sheet.png",
+  "srcSha256": "f7748ee45ab87b2ee777085c085eabfaedb4ff58d17355cc29e994e9426b9a6a",
+  "size": 42988,
+  "w": 2048,
+  "h": 256
+ },
+ {
+  "out": "fx-diamond-contact.webp",
+  "src": "diamond/diamond_contact6_sheet.png",
+  "srcSha256": "fe50fb36552652d6a8a798d002df6fa732f8aa0f86df72110a941f7243f8e225",
+  "size": 28144,
+  "w": 1536,
+  "h": 256
+ },
+ {
+  "out": "fx-vortex-flight.webp",
+  "src": "vortex/PersonaBoss_vortex_loop8.png",
+  "srcSha256": "5f0030a3c1daaaf1852411bb179ef3b922fc55d1c65dd5138c08fe2633509c92",
+  "size": 104022,
+  "w": 2048,
+  "h": 256
+ },
+ {
+  "out": "fx-vortex-contact.webp",
+  "src": "vortex/PersonaBoss_vortex_dissipate6.png",
+  "srcSha256": "b435b69b6970f8d1848e8edef45117d24eda7d1b9f474007fea3b4bb0d3c64a9",
+  "size": 50046,
+  "w": 1536,
+  "h": 256
+ },
+ {
+  "out": "fx-shield-flight.webp",
+  "src": "shield/shield_loop8_sheet.png",
+  "srcSha256": "795e242e60976746cc47bd3ac856e7d48578e0f606f1d65471edad2a73b8c062",
+  "size": 98554,
+  "w": 2048,
+  "h": 256
+ },
+ {
+  "out": "fx-shield-contact.webp",
+  "src": "shield/shield_contact6_sheet.png",
+  "srcSha256": "32099c83474d5f9d58ff7315054ffb8244eb6540fb9d42e554361ae8417107ab",
+  "size": 78632,
+  "w": 1536,
+  "h": 256
+ },
+ {
+  "out": "fx-lance-flight.webp",
+  "src": "lance/CX-0106PB_lance_charge8_REVIEW.png",
+  "srcSha256": "452380faf7ca99f5b36c6f716189e413d0c5504a56a28c5804a7f3f423553191",
+  "size": 83328,
+  "w": 3072,
+  "h": 384
+ },
+ {
+  "out": "fx-lance-contact.webp",
+  "src": "lance/CX-0106PB_lance_release_fade6_REVIEW.png",
+  "srcSha256": "0570eb73222ec1a38a7574cf96e0f196fa3bb96a6fd9a6cdbd55b8b14ad1ad11",
+  "size": 58224,
+  "w": 2304,
+  "h": 384
+ },
+ {
+  "out": "fx-star-flight.webp",
+  "src": "branch/flight_sheet.png",
+  "srcSha256": "6d3a788855f45db1699fd39667a44e73e2cf8b3827a1e62a76158be4442b58d7",
+  "size": 46590,
+  "w": 2048,
+  "h": 256
+ },
+ {
+  "out": "fx-star-contact.webp",
+  "src": "branch/contact_sheet.png",
+  "srcSha256": "43b98722a2ef1b3eeb3cb4ea68c03b9c38ce101876dab20419387344c835c458",
+  "size": 24344,
+  "w": 1536,
+  "h": 256
+ },
+ {
+  "out": "fx-small-orb-flight.webp",
+  "src": "fx3/seed/CX-0106PB_01_seed_r1_flight8.png",
+  "srcSha256": "76602fd5458abe38a06fb0ebe978b4705b5aaa2f691bb9a36183b7072c938395",
+  "size": 65572,
+  "w": 2048,
+  "h": 256
+ },
+ {
+  "out": "fx-small-orb-contact.webp",
+  "src": "fx3/seed/CX-0106PB_01_seed_r1_impact6.png",
+  "srcSha256": "92eb275dfe2a344f221ccb561574e3ded23d51d2f9993e1621f92a4bf038455d",
+  "size": 58482,
+  "w": 1536,
+  "h": 256
+ },
+ {
+  "out": "fx-eye-flight.webp",
+  "src": "fx3/eye/CX-0106PB_02_eye_r1_flight8.png",
+  "srcSha256": "a856ab879777132151265ee33f2774b4962173271326f1647cbea119380841e8",
+  "size": 65712,
+  "w": 2048,
+  "h": 256
+ },
+ {
+  "out": "fx-eye-contact.webp",
+  "src": "fx3/eye/CX-0106PB_02_eye_r1_impact6.png",
+  "srcSha256": "0e589c44541985430196602ff2c405056613ba5cf73a36acfa9b940b1bd66962",
+  "size": 51094,
+  "w": 1536,
+  "h": 256
+ },
+ {
+  "out": "fx-eclipse-flight.webp",
+  "src": "fx3/eclipse/CX-0106PB_06_eclipse_r1_flight8.png",
+  "srcSha256": "f57937264746e18effc69744d93762801322fdfee8bce929f888694e2be5d98b",
+  "size": 86122,
+  "w": 2048,
+  "h": 256
+ },
+ {
+  "out": "fx-eclipse-contact.webp",
+  "src": "fx3/eclipse/CX-0106PB_06_eclipse_r1_impact6.png",
+  "srcSha256": "bbef55233c075cbd6f6f2e902c30326f4d3656145b1e085ffc6a0033c03e10c8",
+  "size": 44412,
+  "w": 1536,
+  "h": 256
+ },
+ {
+  "out": "well-orb.webp",
+  "src": "pm2/ORB/CX-0118PM_r2_PM-2_orb.png",
+  "srcSha256": "bccd660b1fa45527b537481edc1915073e619458345e3e39e17bbf01feeea878",
+  "size": 66246,
+  "w": 1152,
+  "h": 768
+ },
+ {
+  "out": "well-floor.webp",
+  "src": "pm2/FLOOR/CX-0118PM_r2_PM-2_floor-disc.png",
+  "srcSha256": "028df0536dc4423090064d03f09267cbf07ab27c1f0bb77e41a2afa6207eb669",
+  "size": 162320,
+  "w": 1152,
+  "h": 768
+ }
+]

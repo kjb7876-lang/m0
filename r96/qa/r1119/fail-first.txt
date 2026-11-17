@@ -1,0 +1,55 @@
+FAIL ① 각성형 옆 걸음도 기본형 걷기 시트 칸 한 장(assets/rc133/art/awake-2.png, 몸 명령 3)
+FAIL ② 각성 걷기: 망토 가장자리·구슬 발광 명령()
+FAIL ② 발광은 lighter·몸과 다른 key·이펙트 소유
+PASS ② 몸 그림에 전신 필터 없음
+PASS ② 기본형 걷기엔 발광 없음
+PASS ② 각성 서 있기(시전 아님)엔 걷기 발광 없음
+FAIL ③ base-0 피격 → base-front 4칸 차례(, 0장)
+PASS ③ 0.375초 뒤 원래 그림("assets/rc133/art/base-0.png")
+FAIL ③ awake-2 피격 → awake-side 4칸 차례(, 0장)
+PASS ③ 0.375초 뒤 원래 그림("assets/rc133/art/awake-2.png")
+FAIL ③ base-4 피격 → base-rear 4칸 차례(, 0장)
+PASS ③ 0.375초 뒤 원래 그림("assets/rc133/art/base-4.png")
+FAIL ③ awake-6 피격 → awake-side 4칸 차례(, 0장)
+PASS ③ 0.375초 뒤 원래 그림("assets/rc133/art/awake-6.png")
+FAIL ③ 오른쪽(6)은 옆 피격 시트 좌우 뒤집기
+PASS ④ 0.6초 안 연타는 다시 시작 안 함(0.42초째 assets/rc133/art/base-0.png)
+PASS ⑤ 시전 중 피격은 피격 그림 안 씀
+PASS ⑥ 평소엔 구슬 발광 없음
+FAIL ⑥ 시전 중 구슬 발광 한 개()
+FAIL ⑥ tell 예고 중에도
+FAIL ⑥ 각성 걷기 + 시전이 겹쳐도 구슬 빛은 한 개
+FAIL ⑦ 빛 소멸 16칸 차례(0칸, undefined→undefined)
+PASS ⑦ 끝나면 아무것도 없음
+FAIL ⑦ 각성형이었으면 각성 소멸 그림
+PASS ⑦ 결전 아닌데 페르소나가 사라지면(지역 이동) 소멸 안 그림
+FAIL ⑧ clock 비행 칸이 넘어감(-1)
+FAIL ⑧ clock 사라지면 접촉·소멸 6칸 뒤 끝()
+FAIL ⑧ diamond 비행 칸이 넘어감(-1)
+FAIL ⑧ diamond 사라지면 접촉·소멸 6칸 뒤 끝()
+FAIL ⑧ star 비행 칸이 넘어감(-1)
+FAIL ⑧ star 사라지면 접촉·소멸 6칸 뒤 끝()
+FAIL ⑧ lance 비행 칸이 넘어감(-1)
+FAIL ⑧ lance 사라지면 접촉·소멸 6칸 뒤 끝()
+FAIL ⑧ shield 비행 칸이 넘어감(-1)
+FAIL ⑧ shield 사라지면 접촉·소멸 6칸 뒤 끝()
+FAIL ⑧ vortex 비행 칸이 넘어감(-1)
+FAIL ⑧ vortex 사라지면 접촉·소멸 6칸 뒤 끝()
+PASS ⑨ 회전한 탄 사각형의 축을 따름
+PASS ⑧ small-orb 는 그대로(새 시트 없음)
+PASS ⑧ eye 는 그대로(새 시트 없음)
+PASS ⑧ eclipse 는 그대로(새 시트 없음)
+FAIL ⑧ R409 테두리판 탄 경로도 알아봄(r409:outline:effect:u:http://x/m0/assets/rc134/persona-skills/clock.png:0,0,256,256:6:effect)
+FAIL ⑩ 탄 그림 끄면 그대로
+PASS ⑩ 몸 그림 끄면 피격 그림도 안 씀
+FAIL ⑪ 자산 22장 있음·runtime-inputs 등록(빠짐 22: assets/r1119/persona-hit-base-front.webp,assets/r1119/persona-hit-base-side.webp,assets/r1119/persona-hit-base-rear.webp)
+FAIL ⑪ 코드가 자산을 모두 씀(안 씀 assets/r1119/persona-hit-base-front.webp,assets/r1119/persona-hit-base-side.webp,assets/r1119/persona-hit-base-rear.webp,assets/r1119/persona-hit-awake-front.webp,assets/r1119/persona-hit-awake-side.webp,assets/r1119/persona-hit-awake-rear.webp,assets/r1119/persona-death-base.webp,assets/r1119/persona-death-awake.webp,assets/r1119/fx-clock-flight.webp,assets/r1119/fx-clock-contact.webp,assets/r1119/fx-diamond-flight.webp,assets/r1119/fx-diamond-contact.webp,assets/r1119/fx-star-flight.webp,assets/r1119/fx-star-contact.webp,assets/r1119/fx-lance-flight.webp,assets/r1119/fx-lance-contact.webp,assets/r1119/fx-shield-flight.webp,assets/r1119/fx-shield-contact.webp,assets/r1119/fx-vortex-flight.webp,assets/r1119/fx-vortex-contact.webp,assets/r1119/well-orb.webp,assets/r1119/well-floor.webp)
+FAIL ⑪ index 스크립트 태그(stride 바로 뒤)
+FAIL ⑪ 공개 검사 기대 목록
+FAIL ⑪ pages.yml CPU 검사 줄
+PASS ⑪ runtime-text 사본 같음 persona-stride-r1104.js
+FAIL ⑪ runtime-text 사본 같음 persona-skill-fx-r1119.js
+PASS ⑪ runtime-text 사본 같음 persona-gravity-r1096.js
+FAIL ⑫ DSHEETS 에 PM-2 구·바닥 원반
+FAIL ⑫ drawAbyss 가 PM-2 시트를 먼저 그림(임시 라우렌 그림은 못 읽었을 때만)
+R1119 persona-boss FAILED 35
