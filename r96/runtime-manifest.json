@@ -10388,6 +10388,31 @@
       "sha256": "80df1e7202f9bc32d71edabb3e547acec6ccbdc42d1ef1754a40b3c57346df9e"
     },
     {
+      "path": "assets/r1111/mobs/md-07-denial-specter-death.webp",
+      "bytes": 31732,
+      "sha256": "12d30547cf2dbc017da1c2d5d935772a597b7cbe582ff1f3d47b46f3bcac67a3"
+    },
+    {
+      "path": "assets/r1111/mobs/md-12-mold-refuse-bag-death.webp",
+      "bytes": 60340,
+      "sha256": "9f54876684f0f5fd5b6f2c43899be11cc4c7a02d083ad02abc8f7cbbfbd98916"
+    },
+    {
+      "path": "assets/r1111/mobs/md-16-red-heel-blade-death.webp",
+      "bytes": 45258,
+      "sha256": "1524889fcb48aa49503b15acd4a14349f4e26e32a2226bd7dd8211ae032ebbe7"
+    },
+    {
+      "path": "assets/r1111/mobs/md-22-wrath-hound-death.webp",
+      "bytes": 37480,
+      "sha256": "c48408e47e035216454a9af14fab4ad6c49da51c0cd8642a61680beaa6f00a18"
+    },
+    {
+      "path": "assets/r1111/mobs/md-26-small-walking-robot-death.webp",
+      "bytes": 29460,
+      "sha256": "4e2123cc58f3f84750ab5ce28f98a00d7489d97076bad7fcec1345799bf0224d"
+    },
+    {
       "path": "assets/r1111/mobs/md-27-steel-jaw-hound-death.webp",
       "bytes": 70718,
       "sha256": "e766b63cfd0851e1de8bf500a617400be2f6aebfb42b350e63ba79b7d5861087"
@@ -10398,6 +10423,16 @@
       "sha256": "173221f3be76c66a0b39f431ad869dd83c044358a53e4ca8288f3f6a14dabef4"
     },
     {
+      "path": "assets/r1111/mobs/md-30-ash-mason-death.webp",
+      "bytes": 18348,
+      "sha256": "127a9fe91196d1f70cbedd4117c2549a7b176493ce99bdce1f92af0e816510e6"
+    },
+    {
+      "path": "assets/r1111/mobs/md-43-connector-death.webp",
+      "bytes": 120724,
+      "sha256": "66dc435599d67c61e75feeb84f5be93bd0a242cff79c79711e128a6345e1a21e"
+    },
+    {
       "path": "assets/r1111/mobs/md-44-resonance-slave-death.webp",
       "bytes": 87792,
       "sha256": "7db9ca74aece467fb89cab73cb83fe341a7c7b66d36863220c3b937c4fc5118d"
@@ -10406,6 +10441,11 @@
       "path": "assets/r1111/mobs/md-72-ash-moth-death.webp",
       "bytes": 28544,
       "sha256": "a19b03efd2e05f9de75ffa7455fde3c26ed7dda775247d7f49ad2e051e4c45ed"
+    },
+    {
+      "path": "assets/r1111/mobs/md-79-black-pillar-caster-death.webp",
+      "bytes": 56688,
+      "sha256": "739f7294ccb29712d4d04e57b1c675e4c94d77f5dc51d0dd6522d0971ff59a9b"
     },
     {
       "path": "assets/r1112/ego-ink/attack-e.webp",
@@ -14816,6 +14856,11 @@
       "path": "assets/r151/death/neon/index.json",
       "bytes": 2606,
       "sha256": "0fffd9ac6919020a6b59975a6565e5b93563dfba8fc6c7489d82257e72f22bf7"
+    },
+    {
+      "path": "assets/r151/death/persona/death-e.webp",
+      "bytes": 35268,
+      "sha256": "78b62ccba3a11339f2662a6cf36ce51983a73f754f5b555166572b22602f1299"
     },
     {
       "path": "assets/r151/death/seoha/death-e.webp",
@@ -53639,8 +53684,8 @@
     },
     {
       "path": "death-r151.js",
-      "bytes": 7755,
-      "sha256": "1259a3a104d5e40feb02eeeb13423b23149e1c379503d05799d8a15535b27698"
+      "bytes": 7996,
+      "sha256": "23286bf2dbf163b44469fd3415abce2e598254ee315abc10917334ae612d2851"
     },
     {
       "path": "delivery/additional-audio13-20261005/processed/sfx-candidate/Resonance_energy_gai__2-1791000424116-211cce07.ogg",
@@ -54439,8 +54484,8 @@
     },
     {
       "path": "mob-attack-dots-r1065.js",
-      "bytes": 19941,
-      "sha256": "d4877b853d6cfc61cfe06854a6f928efae16f5a07d3effb0280cbeb41b5dce7b"
+      "bytes": 21979,
+      "sha256": "0c8b81b6f2c1e66710e4ff16ee4488d167d7b33ea6dcb6ad2f13f2b54572d186"
     },
     {
       "path": "mob-death-r188.js",
@@ -55603,8 +55648,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11120,
-  "totalBytes": 1344287538,
+  "fileCount": 11129,
+  "totalBytes": 1344725115,
   "webHTMLSha256": "169b04465eedf6594e7d2c70fc0bca5ed3dd5c26239acf4fe501790444d5a993",
   "largest": [
     {
