@@ -171,9 +171,12 @@ if(typeof window.spawnCosmic3==='function'){const base=window.spawnCosmic3;windo
 //    지배 연결(cosmic) 도중 남은 잡몹이 죽으면 단계가 'field' 가 되고, 다음 제단 상호작용이 남은 연결·최종 결전을 건너뛰고 마지막 서사로 지역을 끝냈다.
 //    교주의 사몽(스토리 층)에서 보스 단계가 진행 중(activeEncounter 가 있음)일 때만 그 덮어쓰기를 되돌린다. 웨이브 번호·잡몹 처치 기록은 그대로 둔다.
 const HOLD=new Set(['bossReady','midbossReady','trialReady','cosmicReady','personaReady','summoning','active','complete']);
-if(typeof killEnemy==='function'){const base=killEnemy;killEnemy=function(enemy,...a){let keep=null;try{if(active()&&room.activeEncounter&&HOLD.has(room.encounterStage))keep={room,stage:room.encounterStage};}catch(e){fail(e);}
+// ⑤ (2026-11-18 스토리 사몽 실플레이, R1127b) 모든 지역: 중간보스·보스를 먼저 잡아 단계가 bossReady/complete 가 된 뒤 남은 필드 잡몹을 잡으면
+//    advanceFieldWave6 이 단계를 fieldReady 로 되돌려 길잡이가 출구 대신 제단으로 돌아가 멈췄다(dist02 DREAM 재현). 그 두 단계도 지킨다. 끄기: localStorage storyworld.stageKeep='0'.
+const KEEP_ALL=new Set(['bossReady','complete']);let keepAll=true;try{keepAll=localStorage.getItem('storyworld.stageKeep')!=='0';}catch(_){}
+if(typeof killEnemy==='function'){const base=killEnemy;killEnemy=function(enemy,...a){let keep=null;try{if(active()&&room.activeEncounter&&HOLD.has(room.encounterStage))keep={room,stage:room.encounterStage};else if(keepAll&&room&&KEEP_ALL.has(room.encounterStage)&&!(enemy&&(enemy.boss||enemy.midboss)))keep={room,stage:room.encounterStage,all:true};}catch(e){fail(e);}
  const r=base.call(this,enemy,...a);
- try{if(keep&&room===keep.room&&(room.encounterStage==='field'||room.encounterStage==='fieldReady')&&room.encounterStage!==keep.stage){room.encounterStage=keep.stage;stats.stageKept++;}}catch(e){fail(e);}return r;};}
+ try{if(keep&&room===keep.room&&(room.encounterStage==='field'||room.encounterStage==='fieldReady')&&room.encounterStage!==keep.stage){room.encounterStage=keep.stage;stats.stageKept++;if(keep.all)stats.stageKeptAll=(stats.stageKeptAll||0)+1;}}catch(e){fail(e);}return r;};}
 if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e===SENT||e?.type==='r950-finale'){try{if(active())drawAll();}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};}
 let lastRoom=null;
 if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);
