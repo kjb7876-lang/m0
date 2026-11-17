@@ -53513,6 +53513,11 @@
       "sha256": "cbc69469a39efb04e81f1c8432e9054f539513c4b947bc3c78bb2dac8d7bf9bb"
     },
     {
+      "path": "combat-ownership-r1124.js",
+      "bytes": 3018,
+      "sha256": "06022947caec03d4613ff16f2c04f521257361df265963a78c86a296099899e6"
+    },
+    {
       "path": "combat-r114.js",
       "bytes": 38848,
       "sha256": "cc07d064b460195150ea5987695cb01882a950b4e77145a88be6a91649ed2158"
@@ -53984,8 +53989,8 @@
     },
     {
       "path": "gunner-arms-r561.js",
-      "bytes": 46466,
-      "sha256": "e3f472f438acf971d9fac3d7c0d1238fdd8db81e6d70afc0e88228a0cda06098"
+      "bytes": 47328,
+      "sha256": "6205de5df6918fcc9ae493eccf9a03b42dc1fd41b094f6bddebfc33296ece046"
     },
     {
       "path": "gunner-veil-r953.js",
@@ -53999,8 +54004,8 @@
     },
     {
       "path": "hero-defense-r720.js",
-      "bytes": 47993,
-      "sha256": "f5a5531323d5826046fb01379c0e2319e6e7b45b583c2646bb771493fbf6b426"
+      "bytes": 52018,
+      "sha256": "2b1dbe64e0523f3bc2c10cff28fbd615c341bf0a4a01ae7223872f69be860341"
     },
     {
       "path": "hero-dots-fx-r1041.js",
@@ -54039,8 +54044,8 @@
     },
     {
       "path": "hero-paint-r1027.js",
-      "bytes": 16985,
-      "sha256": "ccc3ddc30046988872966b0e0b7dedb6ac3b11ecc30ae67f2f09a4f108c59b3a"
+      "bytes": 17550,
+      "sha256": "8d784933962d6f5ad9ffa91bcd82a494cbef0ef9a8bb6be0bda5097f36a2b653"
     },
     {
       "path": "hero-palette-r302.js",
@@ -54239,8 +54244,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6581160,
-      "sha256": "d39197930fac875a698d522553f523549661fa69e1b2c57dda4ad39de68256de"
+      "bytes": 6581264,
+      "sha256": "169b04465eedf6594e7d2c70fc0bca5ed3dd5c26239acf4fe501790444d5a993"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -54309,8 +54314,8 @@
     },
     {
       "path": "light-r182.js",
-      "bytes": 16656,
-      "sha256": "78d1d09e3d6e640274cba3a5a1a1f360d572760e3b97701d195ceebb2adcfaee"
+      "bytes": 16918,
+      "sha256": "46b6475b546b8fe7e836d7a9966750f1caafcf1110b945dc3e0d405f61bbc712"
     },
     {
       "path": "lineart-cine-r880.js",
@@ -55298,6 +55303,11 @@
       "sha256": "d8f8aae6834324a74f511e8296540889e8143696f339761963250a67ec2849af"
     },
     {
+      "path": "survival-command-r1124.js",
+      "bytes": 9700,
+      "sha256": "1a7bb0bf6b182728a6b1e27082935f8bf3def9e9f262ade2d0135a36a1019b13"
+    },
+    {
       "path": "survival-michaela-ending-r1010.js",
       "bytes": 19698,
       "sha256": "b65ce2e75596cd11509511389949dabb778f2dfc4b3726ad11c64a2d593df1ce"
@@ -55593,9 +55603,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11118,
-  "totalBytes": 1344266812,
-  "webHTMLSha256": "d39197930fac875a698d522553f523549661fa69e1b2c57dda4ad39de68256de",
+  "fileCount": 11120,
+  "totalBytes": 1344285348,
+  "webHTMLSha256": "169b04465eedf6594e7d2c70fc0bca5ed3dd5c26239acf4fe501790444d5a993",
   "largest": [
     {
       "path": "index.html",

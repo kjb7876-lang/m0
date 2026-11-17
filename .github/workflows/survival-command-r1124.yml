@@ -1,0 +1,78 @@
+name: Survival command regression
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'r96/client-source/*r1124.js'
+      - 'r96/client-source/hero-defense-r720.js'
+      - 'r96/client-source/gunner-arms-r561.js'
+      - 'r96/client-source/hero-paint-r1027.js'
+      - 'r96/qa/r1124/**'
+      - '.github/workflows/survival-command-r1124.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: survival-command-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  browser:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+          show-progress: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Build and check changed runtime
+        run: |
+          python scripts/build-r96.py
+          node r96/qa/r1124/combat-ownership-cpu.cjs
+          node r96/qa/r1124/slots-cpu-check.cjs
+          node r96/qa/r1124/command-cpu-check.cjs
+      - name: Install pinned test browser
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.0
+          npx playwright install --with-deps chromium
+      - name: Prepare baseline with original runtime scripts
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          python - <<'PY'
+          import os, subprocess
+          from pathlib import Path
+          site=Path('r96/hospital-three-pc/site').resolve()
+          baseline=site.parent/'baseline'
+          baseline.mkdir()
+          for p in site.iterdir():
+              (baseline/p.name).symlink_to(p, target_is_directory=p.is_dir())
+          for name in ['index.html','hero-defense-r720.js','hero-paint-r1027.js','gunner-arms-r561.js','light-r182.js']:
+              data=subprocess.check_output(['git','show',os.environ['BASE_SHA']+':r96/runtime-text/'+name])
+              dest=baseline/name
+              dest.unlink()
+              dest.write_bytes(data)
+          PY
+      - name: Exercise real keyboard, canvas and placement controls
+        env:
+          SW_URL: http://127.0.0.1:4396/site/
+          SW_BASELINE_URL: ${{ github.event_name == 'pull_request' && 'http://127.0.0.1:4396/baseline/' || '' }}
+          SHOTS: r96/qa/r1124/browser-evidence
+        run: |
+          mkdir -p "$SHOTS"
+          python -m http.server 4396 --bind 127.0.0.1 --directory r96/hospital-three-pc > /tmp/survival-http.log 2>&1 &
+          node r96/qa/r1124/survival-command-browser.cjs
+      - name: Preserve assertions and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: survival-command-evidence
+          path: r96/qa/r1124/browser-evidence
+          if-no-files-found: warn

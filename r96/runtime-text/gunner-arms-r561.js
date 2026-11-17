@@ -21,7 +21,7 @@
 // 끄기(엔진 원래 스킬로 되돌림): localStorage['storyworld.r561.gunner']='{"on":false}' · 연계만 끄기 '{"chain":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_GUNNER_ARMS_R561__)return;
-const REV='R561-gunner-arms-1',KEY='storyworld.r561.gunner',HERO='gunner';
+const REV='R561-gunner-arms-2',KEY='storyworld.r561.gunner',HERO='gunner';
 let on=true,chainOn=true,arcsOn=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;if(s&&s.chain===false)chainOn=false;if(s&&s.arcs===false)arcsOn=false;}catch(_){}
 const stats={q:0,w:0,e:0,r:0,hits:0,drawn:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0,SPR=()=>window.__STORYWORLD_FX_SPRITES_R106__;
@@ -103,32 +103,32 @@ function sectorOf(dx,dy){const a=Math.atan2((dx+dy)*.5,dx-dy);let sel='s',best=I
 // R128 교체 그림 g-*.webp(512칸) 8방향의 총구 끝 픽셀 — 그림을 열어 보며 잰 값(qa/r561/g128-muzzle.jpg)
 const G128={e:[362,190],se:[355,316],s:[352,336],sw:[154,314],w:[170,189],nw:[169,118],n:[330,165],ne:[353,124]};
 // 영웅이 지금 실제로 그리는 그림(PHASE1_ART.hero().frame)의 총구 칸을 화면 좌표로 — drawNativeHeroFrame5 와 같은 식(R83 보정·들림 포함)
-let heroM=null,heroMt=-9,bpFn=null;
+const bodyPoses=new WeakMap();let bpFn=null;
 function muzzleScreen(){try{const A=window.__STORYWORLD_PHASE1_ART__;let fr=A?.hero?.()?.frame,hs=1;if(!fr||typeof project!=='function'||typeof actorHeight!=='function')return null;
   const P=window.StoryHeroPresentationR83?.present?.(fr);if(P&&P.frame){fr=P.frame;hs=Number(P.heightScale)||1;}
   const a=fr.assetFrame,n=fr.nativeHero5;if(!a?.muzzle||!a.sourceRect||!a.pivot||!(a.visibleHeight>0))return null;
   /* 실제로 그려지는 그림이 R128(Gemini) 교체본(r128 폴더 gunner/g-*.webp)이면 엔진 표(옛 그림 기준)는 안 맞는다 — 그 그림의 총구 끝으로 */let mzp=a.muzzle;
   try{const sec=/gunner\/([a-z]+)\.webp$/.exec(String(fr.path||''))?.[1],im=typeof readyImage==='function'?readyImage(fr.path)?.image:null;if(sec&&G128[sec]&&/\/r128\/gunner\/g-/.test(String(im?.src||'')))mzp=G128[sec];}catch(_){}
   const q=project(player.x,player.y),h=actorHeight()*hs,k=h/a.visibleHeight,lift=Math.max(0,Math.min(h*.65,Number(player.visualLiftPx)||0));
-  const lx=(mzp[0]-a.sourceRect[0]-a.pivot[0])*k*(n?.flip?-1:1),ly=(mzp[1]-a.sourceRect[1]-a.pivot[1])*k,M=heroM&&T()-heroMt<.5?heroM:null,
+  const lx=(mzp[0]-a.sourceRect[0]-a.pivot[0])*k*(n?.flip?-1:1),ly=(mzp[1]-a.sourceRect[1]-a.pivot[1])*k,bp=bodyPoses.get(player),M=bp&&T()-bp.at<.5?bp.matrix:null,
    x=q.x+(M?M[0]*lx+M[2]*ly+M[4]:lx),y=q.y-lift+(M?M[1]*lx+M[3]*ly+M[5]:ly);return Number.isFinite(x)&&Number.isFinite(y)?{x,y}:null;}catch(e){fail(e);return null;}}
 // 시전 순간 굳힌 자세 방향: R561 이 엔진 special 을 건너뛰어 엔진이 방향을 새로 굳히지 않으므로(옛 값에 머묾) 여기서 겨눈 방향의 칸을 직접 고른다
 let poseLock=null;
-function commitPose(a,life){try{const t=T();poseLock={start:t,sector:sectorOf(Math.cos(a),Math.sin(a)),until:t+life};(player.poseStarted5??=Object.create(null)).skill=t;(player.poseDuration5??=Object.create(null)).skill=life;player.skillAnim=Math.max(player.skillAnim||0,life);}catch(e){fail(e);}}
+function commitPose(a,life){try{const t=T();poseLock={owner:player,start:t,sector:sectorOf(Math.cos(a),Math.sin(a)),until:t+life};(player.poseStarted5??=Object.create(null)).skill=t;(player.poseDuration5??=Object.create(null)).skill=life;player.skillAnim=Math.max(player.skillAnim||0,life);}catch(e){fail(e);}}
 /* combat-r118(전투 중 foe 쪽 방향, 0.3초 늦춤)가 나중에 이 함수를 또 감싸 안쪽 값을 무시하므로 — 맨 바깥이 내 것이 아니면 다시 감싼다(arm 재시도가 15초간 확인) */
-let poseDir=null;function installPose(){const C=window.__STORYWORLD_CURRENT_HERO__;if(!C)return false;if(poseDir&&C.direction===poseDir)return true;try{const base=C.direction;poseDir=function(p,state,fb){if(state==='skill'&&poseLock&&p===player&&p?.hero===HERO&&p.poseStarted5?.skill===poseLock.start&&T()<=poseLock.until&&mine())return poseLock.sector;return base.call(this,p,state,fb);};window.__STORYWORLD_CURRENT_HERO__=Object.freeze({...C,direction:poseDir});}catch(e){fail(e);}return true;}
+let poseDir=null;function installPose(){const C=window.__STORYWORLD_CURRENT_HERO__;if(!C)return false;if(poseDir&&C.direction===poseDir)return true;try{const base=C.direction;poseDir=function(p,state,fb){if(state==='skill'&&poseLock&&poseLock.owner===p&&p===player&&p?.hero===HERO&&p.poseStarted5?.skill===poseLock.start&&T()<=poseLock.until&&mine())return poseLock.sector;return base.call(this,p,state,fb);};window.__STORYWORLD_CURRENT_HERO__=Object.freeze({...C,direction:poseDir});}catch(e){fail(e);}return true;}
 // 영웅 몸 기울임(엔진 applyBodyPose: 발 기준 shear·scaleY, 피격 밀림)은 그릴 때 걸리므로 — 진짜 영웅 그리기가 거는 변형을 그대로 받아 적어 총구 점에도 같이 건다
 function installBodyPose(){const R=window.__STORYWORLD_COMBAT_SYNC_R48__;if(!R||typeof R.applyBodyPose!=='function')return false;if(bpFn&&R.applyBodyPose===bpFn)return true;
  try{const base=R.applyBodyPose;bpFn=function(c,hero=false){if(!hero||!c)return base.apply(this,arguments);const m=[1,0,0,1,0,0],mul=(a,b,cc,d,e,f)=>{const A=m[0],B=m[1],C=m[2],D=m[3],E=m[4],F=m[5];m[0]=A*a+C*b;m[1]=B*a+D*b;m[2]=A*cc+C*d;m[3]=B*cc+D*d;m[4]=A*e+C*f+E;m[5]=B*e+D*f+F;};
   const hooks={transform:mul,translate:(x,y)=>mul(1,0,0,1,x,y),scale:(x,y)=>mul(x,0,0,y,0,0),rotate:a=>mul(Math.cos(a),Math.sin(a),-Math.sin(a),Math.cos(a),0,0)},saved={};
   for(const k in hooks){const orig=c[k];if(typeof orig!=='function')continue;saved[k]=[Object.prototype.hasOwnProperty.call(c,k),orig];try{c[k]=function(...a){try{hooks[k](...a);}catch(_){}return orig.apply(this,a);};}catch(_){delete saved[k];}}
   let r;try{r=base.apply(this,arguments);}finally{for(const k in saved){const [had,orig]=saved[k];try{if(had)c[k]=orig;else delete c[k];}catch(_){}}}
-  heroM=m;heroMt=T();return r;};
+  if(player&&typeof player==='object')bodyPoses.set(player,{matrix:m,at:T()});return r;};
   window.__STORYWORLD_COMBAT_SYNC_R48__=Object.freeze({...R,applyBodyPose:bpFn});}catch(e){fail(e);}return true;}
 // ---- Q 회상 광선포 ----
-function castQ(){let rk=0;try{rk=typeof rank==='function'?Number(rank('special'))||0:0;}catch(_){}
+function castQ(){own();let rk=0;try{rk=typeof rank==='function'?Number(rank('special'))||0:0;}catch(_){}
  player.specialCD=10*(1-.05*rk)*rhythm()*auraCd();player.skillAnim=.6;const SP=power()*(2.4+.36*rk),e=nearest(rg(12)),a=aimAt(e),o={x:player.x,y:player.y},L=reach(o,a,rg(BEAM.len));face(a);snd('special');
- const life=BEAM.charge+BEAM.every*(BEAM.ticks-1)+BEAM.tail;fx.push({k:'q',t0:T(),life,o,a,L,dmg:SP*BEAM.per,done:0,arcs:[],seed:Math.random()*6});commitPose(a,life);armSent();stats.q++;return true;}
+ const life=BEAM.charge+BEAM.every*(BEAM.ticks-1)+BEAM.tail;fx.push({owner:player,room:typeof room!=='undefined'?room:null,k:'q',t0:T(),life,o,a,L,dmg:SP*BEAM.per,done:0,arcs:[],seed:Math.random()*6});commitPose(a,life);armSent();stats.q++;return true;}
 // 연쇄: 줄 위 첫 적과 마지막 적(뿌리)에서 아직 안 맞은 가장 가까운 적으로 이어 튄다. 벽 뒤는 건너뛰고, 한 파동에 같은 적을 두 번 잇지 않는다.
 function planChain(f,rows,t){if(!rows.length||arcsOn===false)return;const taken=new Set(rows),pool=live().filter(e=>!taken.has(e)),R=rg(ARC.range),roots=[rows[0]];if(ARC.roots>1&&rows.length>1)roots.push(rows[rows.length-1]);
  for(let ri=0;ri<roots.length;ri++){let cur=roots[ri];for(let i=0;i<ARC.max;i++){let cand=null;const bad=new Set();
@@ -136,20 +136,20 @@ function planChain(f,rows,t){if(!rows.length||arcsOn===false)return;const taken=
   if(!cand)break;taken.add(cand);f.arcs.push({a:cur,b:cand,ax:cur.x,ay:cur.y,bx:cand.x,by:cand.y,at:t+i*ARC.gap,dmg:f.dmg*ARC.mult*Math.pow(ARC.fall,i),done:false,z:ri*7+i});cur=cand;stats.arcs=(stats.arcs||0)+1;}}}
 // ---- W 망각 저격 ----
 function snipeTarget(){const rows=live().filter(e=>dist(e,player)<=rgs('w',RANGE.w)&&los(player,e));const big=rows.filter(e=>e.boss||e.elite).sort((a,b)=>dist(a,player)-dist(b,player))[0];return big||rows.sort((a,b)=>dist(a,player)-dist(b,player))[0]||null;}
-function castW(){const tg=snipeTarget(),a=aimAt(tg);face(a);fx.push({k:'w',t0:T(),life:SNIPE.aim+1.3,tg,a,o:{x:player.x,y:player.y},fired:false,end:null,dmg:power()*SNIPE.dmg*grow('w')*GR663('w').power,seed:Math.random()*6});armSent();stats.w++;return true;}
+function castW(){const tg=snipeTarget(),a=aimAt(tg);face(a);fx.push({owner:player,room:typeof room!=='undefined'?room:null,k:'w',t0:T(),life:SNIPE.aim+1.3,tg,a,o:{x:player.x,y:player.y},fired:false,end:null,dmg:power()*SNIPE.dmg*grow('w')*GR663('w').power,seed:Math.random()*6});armSent();stats.w++;return true;}
 function fireW(f){f.fired=true;const o={x:player.x,y:player.y};f.o=o;/* 총구 방향 고정 — 목표로 꺾지 않음 */const L=reach(o,f.a,rgs('w',RANGE.w)),rows=onLine(o,f.a,L,SNIPE.half);
  let endL=L;if(rows[0]){hit(rows[0],f.dmg,'gunnerSnipeR561');try{if(typeof moveActor==='function')moveActor(rows[0],Math.cos(f.a)*SNIPE.push,Math.sin(f.a)*SNIPE.push,rows[0].radius||.3);}catch(_){}endL=dist(rows[0],o);}
  if(rows[1]){hit(rows[1],f.dmg*SNIPE.pierce,'gunnerSnipeR561');endL=dist(rows[1],o);}
  f.L=Math.max(L*.999,endL);f.hitL=endL;f.tf=T();quake(.45);snd('special');face(f.a);player.skillAnim=Math.max(player.skillAnim||0,.35);}
 // ---- E 잔향 연사 ----
-function castE(){const e=nearest(rgs('e',RANGE.e)),a=aimAt(e);face(a);fx.push({k:'e',t0:T(),life:RIFLE.every*(RIFLE.n-1)+(gsOn('casing')?1.1:.5),a,done:0,rounds:[],dmg:power()*RIFLE.dmg*grow('e')*GR663('e').power});armSent();stats.e++;return true;}
+function castE(){const e=nearest(rgs('e',RANGE.e)),a=aimAt(e);face(a);fx.push({owner:player,room:typeof room!=='undefined'?room:null,k:'e',t0:T(),life:RIFLE.every*(RIFLE.n-1)+(gsOn('casing')?1.1:.5),a,done:0,rounds:[],dmg:power()*RIFLE.dmg*grow('e')*GR663('e').power});armSent();stats.e++;return true;}
 function shotE(f,i){const o={x:player.x,y:player.y};if(f.a0==null)f.a0=f.a;const a=f.a0+(i%2?1:-1)*.035*((i%3)/2);f.a=a;const L=reach(o,a,rgs('e',RANGE.e)),first=onLine(o,a,L,RIFLE.half)[0];let endL=L;
  if(first){hit(first,f.dmg,'gunnerRifleR561');endL=dist(first,o);}f.rounds.push({t:T(),o,a,L:endL,hit:!!first});face(a);player.skillAnim=Math.max(player.skillAnim||0,.2);if(i%3===0)snd('attack');}
 // ---- R 기억 소거 폭격 ----
 function strikePoint(minCount=1){const rows=live().filter(e=>dist(e,player)<=rgs('r',RANGE.r));let best=null,bn=0;for(const e of rows){const n=rows.filter(v=>dist(v,e)<=rgs('r',STRIKE.R)*.75).length+(e.boss?2:0);if(n>bn||(n===bn&&best&&dist(e,player)<dist(best,player))){bn=n;best=e;}}
  if(!best||bn<minCount)return null;const grp=rows.filter(v=>dist(v,best)<=rgs('r',STRIKE.R)*.75);return {x:grp.reduce((s,v)=>s+v.x,0)/grp.length,y:grp.reduce((s,v)=>s+v.y,0)/grp.length,n:bn};}
 function castR(pt){const c=pt||strikePoint()||(()=>{const a=aimAt(null);return {x:player.x+Math.cos(a)*4,y:player.y+Math.sin(a)*4};})();face(Math.atan2(c.y-player.y,c.x-player.x));snd('special');
- const dl=STRIKE.delay*ultR953().delay;fx.push({k:'r',t0:T(),delay:dl,life:dl+2.3,c:{x:c.x,y:c.y},boom:false,dmg:power()*STRIKE.dmg*grow('r')*GR663('r').power,seed:Math.random()*6});armSent();stats.r++;return true;}
+ const dl=STRIKE.delay*ultR953().delay;fx.push({owner:player,room:typeof room!=='undefined'?room:null,k:'r',t0:T(),delay:dl,life:dl+2.3,c:{x:c.x,y:c.y},boom:false,dmg:power()*STRIKE.dmg*grow('r')*GR663('r').power,seed:Math.random()*6});armSent();stats.r++;return true;}
 function boomR(f){f.boom=true;for(const e of live()){const d=dist(e,f.c);if(d>rgs('r',STRIKE.R)+(e.radius||.3))continue;if(!los(f.c,e))continue;const k=d<=rgs('r',STRIKE.inner)?1:1-(1-STRIKE.edge)*Math.min(1,(d-rgs('r',STRIKE.inner))/(rgs('r',STRIKE.R)-rgs('r',STRIKE.inner)));hit(e,f.dmg*k,'gunnerStrikeR561');}quake(1.4);snd('special');}
 // ---- 연계 ----
 const LINK=sl=>sl==='q'?BEAM.charge+BEAM.every*(BEAM.ticks-1)+.25:sl==='w'?SNIPE.aim+.25:sl==='e'?RIFLE.every*(RIFLE.n-1)+.3:.35;
@@ -159,14 +159,14 @@ function tryLink(sl){if(fx.length>=CAP)return false;if(sl==='q'){if(player.speci
 function stepChain(){if(!chain.queue.length)return;if(!mine()||busy()){chain.queue.length=0;return;}const t=T();if(t<chain.at)return;
  while(chain.queue.length){const sl=chain.queue.shift();if(tryLink(sl)){const gap=t-chain.lastAt;if(gap<LINK(chain.prev)-1e-6)chain.overlap++;chain.minGap=Math.min(chain.minGap,gap);chain.links++;chain.prev=sl;chain.lastAt=t;chain.at=t+LINK(sl);break;}}}
 // ---- 시간 진행 ----
-function step(){const t=T();for(const f of fx){const el=t-f.t0;
+function step(){const t=T();for(const f of fx){if(!validCast(f))continue;const el=t-f.t0;
   if(f.k==='q'){if(player?.hp>0)f.o={x:player.x,y:player.y};/* 광선은 영웅(총구)을 따라간다 */if(el<f.life&&mine()&&poseLock)player.skillAnim=Math.max(player.skillAnim||0,f.life-el);
    while(f.done<BEAM.ticks&&el>=BEAM.charge+f.done*BEAM.every-1e-9){const wave=ARC.waves.includes(f.done);f.done++;const rows=onLine(f.o,f.a,f.L,BEAM.half);for(const e of rows)hit(e,f.dmg,'gunnerBeamR561');if(wave)planChain(f,rows,t);}
    for(const ar of f.arcs)if(!ar.done&&t>=ar.at-1e-9){ar.done=true;if(ar.b.hp>0)hit(ar.b,ar.dmg,'gunnerBeamChainR561');}}
   else if(f.k==='w'){if(!f.fired&&el>=SNIPE.aim-1e-9)fireW(f);}
   else if(f.k==='e'){while(f.done<RIFLE.n&&el>=f.done*RIFLE.every-1e-9){shotE(f,f.done);f.done++;}}
   else if(f.k==='r'){if(!f.boom&&el>=DL(f)-1e-9)boomR(f);}}
- for(let i=fx.length-1;i>=0;i--)if(t-fx[i].t0>fx[i].life||t<fx[i].t0-1)fx.splice(i,1);}
+ for(let i=fx.length-1;i>=0;i--)if(!validCast(fx[i])||t-fx[i].t0>fx[i].life||t<fx[i].t0-1)fx.splice(i,1);}
 // ---- 그림(임시 코드 이펙트) ----
 function ellW(c,R){try{const k=R/Math.SQRT2,p1=project(c.x+k,c.y-k),p2=project(c.x-k,c.y+k),w=Math.abs(p1.x-p2.x);if(w>4)return w;const p3=project(c.x+R,c.y),p0=project(c.x,c.y);return Math.max(8,Math.abs(p3.x-p0.x)*2);}catch(_){return 80;}}
 // 연쇄 레이저(임시 코드 그림 — Dots 시트가 오면 교체): 두 적 사이를 가는 코발트 광선 둘레 + 흰 심, 중간 한 번 꺾임, 닿는 적에 작은 섬광. 한 줄 4번×뿌리 2 × 파동 3이 상한이라 그림도 한 프레임 약 40개 이하.
@@ -180,7 +180,7 @@ function drawArcs(S,H,t,f){if(!f.arcs||!f.arcs.length)return;const M=H*.45;
    /* 닿는 자리에 Dots 적중 시트(Q 끝점)의 앞 4장을 작게 — 코드 섬광만이던 연쇄에 그린 그림 맛을 */if(d>=.05&&d<.05+4/15&&gsOn('impact'))gsDraw('impact',Math.min(3,Math.floor((d-.05)*15)),bx,by,H*.55/GS.impact.vis,Math.atan2(by-ay,bx-ax),fade,.5,f.t0.toFixed(3)+':a'+ar.z);}}
 function draw(){const S0=SPR();if(!S0||typeof project!=='function')return;const S={draw:(n,F,x,y,w,h,o={})=>S0.draw(n,F,x,y,w,h,{overHero:true,...o}),along:(n,F,x0,y0,x1,y1,w,o={})=>S0.along?.(n,F,x0,y0,x1,y1,w,{overHero:true,...o})};
  const H=typeof actorHeight==='function'?actorHeight():60,t=T(),M=H*.45;
- for(const f of fx){const el=t-f.t0;if(el<0||el>f.life)continue;stats.drawn++;
+ for(const f of fx){if(!validCast(f))continue;const el=t-f.t0;if(el<0||el>f.life)continue;stats.drawn++;
   if(f.k==='q'){drawArcs(S,H,t,f);const q=project(player.x,player.y),e=project(player.x+Math.cos(f.a)*f.L,player.y+Math.sin(f.a)*f.L),mz=muzzleScreen(),
     /* R561c: 시작점은 영웅이 실제로 그린 총구(없으면 몸 가운데) — 끝은 같은 화면 벡터만큼 */x0=mz?mz.x:q.x,y0=mz?mz.y:q.y-M,x1=x0+(e.x-q.x),y1=y0+(e.y-q.y),ang=Math.atan2(y1-y0,x1-x0);
    if(gsOn('beam')&&gsOn('muzzle')&&gsOn('impact')){const id=f.t0.toFixed(3),mS=H*.5/GS.muzzle.vis;
@@ -244,11 +244,12 @@ const readyAt={w:0,e:0,r:0};
 function remain(sl){return Math.max(0,(readyAt[sl]||0)-T());}
 function egoOn(){try{return !!window.__STORYWORLD_EGO151__?.inspect?.().state?.active;}catch(_){return false;}}
 // 방·영웅이 바뀌거나 쓰러지면 기다리던 사격·연계를 버린다(엔진 WER valid/cancel 과 같은 뜻) — 옛 좌표로 새 방 적을 때리지 않게
-let ownRoom=null,ownPlayer=null,ownSeen=false;function own(){let rm=null;try{rm=typeof room!=='undefined'?room:null;}catch(_){}const p=typeof player==='object'?player:null;if(!ownSeen){ownSeen=true;ownRoom=rm;ownPlayer=p;}if(p!==ownPlayer){for(const sl of SLOTS)readyAt[sl]=0;nextAuto=0;}
+const validCast=f=>!!f&&f.owner===player&&player?.hero===HERO&&player.hp>0&&!player.disabled&&f.room===(typeof room!=='undefined'?room:null);
+let ownRoom=null,ownPlayer=null,ownHero=null,ownSeen=false;function own(){let rm=null;try{rm=typeof room!=='undefined'?room:null;}catch(_){}const p=typeof player==='object'?player:null;if(!ownSeen){ownSeen=true;ownRoom=rm;ownPlayer=p;ownHero=p?.hero;}if(p!==ownPlayer||p?.hero!==ownHero){for(const sl of SLOTS)readyAt[sl]=0;nextAuto=0;}
  const t=T();for(const sl of SLOTS)readyAt[sl]=Math.min(readyAt[sl],t+CD[sl]*rhythm()*GR663(sl).cool);nextAuto=Math.min(nextAuto,t+.35);
- if(rm!==ownRoom||p!==ownPlayer||!(p?.hp>0)){if(fx.length||chain.queue.length){fx.length=0;if(chain.queue.length){chain.queue.length=0;chain.cancelled++;}}ownRoom=rm;ownPlayer=p;}}
+ if(rm!==ownRoom||p!==ownPlayer||p?.hero!==ownHero||!(p?.hp>0)||p?.disabled){if(fx.length||chain.queue.length){fx.length=0;if(chain.queue.length){chain.queue.length=0;chain.cancelled++;}}ownRoom=rm;ownPlayer=p;ownHero=p?.hero;poseLock=null;}}
 function busy(){try{return (typeof started!=='undefined'&&!started)||(typeof modal!=='undefined'&&!!modal)||(typeof loading!=='undefined'&&loading)||(typeof storyScene!=='undefined'&&!!storyScene)||!(player?.hp>0)||!!window.__STORYWORLD_EGO151__?.inspect?.().state?.active;}catch(_){return true;}}
-function fire(sl,automatic){if(!mine()||!SLOTS.includes(sl)||busy())return false;if(readyAt[sl]>T())return false;if(GR663(sl).locked)return false;if(fx.length>=CAP)return false;
+function fire(sl,automatic){if(!mine()||!SLOTS.includes(sl)||busy())return false;own();if(readyAt[sl]>T())return false;if(GR663(sl).locked)return false;if(fx.length>=CAP)return false;
  let pt=null;if(automatic){if(sl==='r'){pt=strikePoint(2);if(!pt)return false;}else if(!(sl==='w'?snipeTarget():nearest(rgs(sl,RANGE[sl]))))return false;}
  const ok=sl==='w'?castW():sl==='e'?castE():castR(pt);if(ok){readyAt[sl]=T()+surgeCd(CD[sl]*rhythm()*auraCd()*GR663(sl).cool)*(sl==='r'?ultR953().cd:1);player.skillAnim=Math.max(player.skillAnim||0,.5);try{if(typeof updateHUD==='function')updateHUD();}catch(_){}}return ok;}
 // 엔진 원래 R(시간 지연포) 막기 — W·E 는 R209 owned 가 막는다(여기서도 함께, R209 가 없을 때 대비)
@@ -264,12 +265,12 @@ let nextAuto=0;
 function autoOn(){try{const mob=window.__STORYWORLD_MOBILE_R63__?.isMobile?.();return (mob?settings.autoSkill===true:(typeof auto!=='undefined'&&auto))||(typeof guide!=='undefined'&&guide);}catch(_){return false;}}
 function tickAuto(){if(!mine()||busy()||!autoOn())return;const t=T();if(t<nextAuto)return;nextAuto=t+.35;fire('r',true)||fire('w',true)||fire('e',true);}
 const asHeroR720=(id,fn)=>{const D=window.__STORYWORLD_HERO_DEFENSE_R720__;return D&&typeof D.asHero==='function'?D.asHero(id,fn):fn();};/* R720-4: 다음 틱에 이어지는 기술을 그 영웅 몸(생존 배치 영웅이면 그 몸)으로 돌린다 */
-if(typeof tick==='function'){const b=tick;tick=function(...a){try{own();}catch(e){fail(e);}gate();const r=b.apply(this,a);try{warm();asHeroR720(HERO,()=>{if(fx.length)step();stepChain();});tickAuto();}catch(e){fail(e);}return r;};}
-if(typeof drawEffect==='function'){const b=drawEffect;drawEffect=function(e,...a){if(e&&e.type==='r561-fx'){try{draw();}catch(err){fail(err);}return;}return b.apply(this,[e,...a]);};}
+if(typeof tick==='function'){const b=tick;tick=function(...a){try{asHeroR720(HERO,()=>{own();gate();});}catch(e){fail(e);}const r=b.apply(this,a);try{asHeroR720(HERO,()=>{warm();if(fx.length)step();stepChain();});tickAuto();}catch(e){fail(e);}return r;};}
+if(typeof drawEffect==='function'){const b=drawEffect;drawEffect=function(e,...a){if(e&&e.type==='r561-fx'){try{asHeroR720(HERO,draw);}catch(err){fail(err);}return;}return b.apply(this,[e,...a]);};}
 if(typeof serializeSave==='function'){const b=serializeSave;serializeSave=function(...a){const d=b.apply(this,a);try{const r=d?.storyWER?.remaining;if(r&&mine())for(const sl of SLOTS){const m=remain(sl);if(m>0)r[HERO+':'+sl]=+m.toFixed(2);else delete r[HERO+':'+sl];}}catch(e){fail(e);}return d;};}
 // 불러오기: 엔진 restoreSave 는 남은 대기를 옛 기억사수 스킬 한도(6/3.8/13×박자)로 자른다 → 저장 원본에서 새 스킬 한도로 되살린다(저장 형식은 그대로)
 if(typeof restoreSave==='function'){const b=restoreSave;restoreSave=function(raw,...a){let keep=null;try{const r=(typeof raw==='string'?JSON.parse(raw):raw)?.storyWER?.remaining;if(r)keep=Object.fromEntries(SLOTS.map(sl=>[sl,Number(r[HERO+':'+sl])||0]));}catch(_){}
- const out=b.apply(this,[raw,...a]);const after=()=>{try{if(!keep||!mine())return;ownSeen=true;ownPlayer=player;try{ownRoom=typeof room!=='undefined'?room:null;}catch(_){}const t=T();for(const sl of SLOTS)readyAt[sl]=keep[sl]>0?t+Math.min(keep[sl],CD[sl]*rhythm()*GR663(sl).cool):0;}catch(e){fail(e);}};
+ const out=b.apply(this,[raw,...a]);const after=()=>{try{if(!keep||!mine())return;ownSeen=true;ownPlayer=player;ownHero=player?.hero;try{ownRoom=typeof room!=='undefined'?room:null;}catch(_){}const t=T();for(const sl of SLOTS)readyAt[sl]=keep[sl]>0?t+Math.min(keep[sl],CD[sl]*rhythm()*GR663(sl).cool):0;}catch(e){fail(e);}};
  if(out&&typeof out.then==='function')return out.then(v=>{after();return v;});after();return out;};}
 if(typeof updateHUD==='function'){const b=updateHUD;updateHUD=function(...a){const r=b.apply(this,a);try{if(mine()&&typeof document!=='undefined')for(const sl of SLOTS){const el=document.getElementById('story-wer-'+sl);if(!el)continue;const cd=el.querySelector('.cd'),m=remain(sl);if(cd)cd.textContent=m>0?String(Math.ceil(m)):'';el.title=NAME[sl];el.setAttribute('aria-label',NAME[sl]+' · '+(typeof KR291!=='undefined'&&KR291?KR291[sl]:sl.toUpperCase()));const lb=el.querySelector('.label');if(lb&&lb.textContent!==SHORT[sl])lb.textContent=SHORT[sl];}}catch(e){fail(e);}return r;};}
 const KEYS={z:'w',x:'e',c:'r'};
@@ -279,7 +280,7 @@ if(typeof addEventListener==='function'){addEventListener('keydown',ev=>{try{if(
 let tries=0;(function arm(){try{install();installPose();installBodyPose();}catch(e){fail(e);}if(++tries<60&&typeof setTimeout==='function')setTimeout(arm,250);})();
 window.__STORYWORLD_GUNNER_ARMS_R561__=Object.freeze({revision:REV,on:()=>on&&solo(),names:NAME,cooldowns:CD,fire,remain,level,
  /* R953: 남은 재사용 대기를 k 배로(0<k<=1) — 은신 순간 궁극기 대기 77% 감소에 쓴다 */scaleRemain:(sl,k)=>{if(!SLOTS.includes(sl)||!(k>0&&k<=1))return false;const m=remain(sl);if(m>0)readyAt[sl]=T()+m*k;return m>0;},
- inspect:()=>({revision:REV,on,chainOn,stats:{...stats},arcsOn,fx:fx.length,peakFx,cap:CAP,chain:{queue:chain.queue.slice(),links:chain.links,minGap:chain.minGap,overlap:chain.overlap,cancelled:chain.cancelled},remain:{w:remain('w'),e:remain('e'),r:remain('r')},lastError}),
+ inspect:()=>({revision:REV,on,chainOn,stats:{...stats},arcsOn,fx:fx.length,peakFx,cap:CAP,effects:fx.map(f=>({kind:f.k,hero:f.owner?.hero,ally:!!f.owner?.r720Ally,x:f.owner?.x,y:f.owner?.y,origin:f.o?{...f.o}:null})),chain:{queue:chain.queue.slice(),links:chain.links,minGap:chain.minGap,overlap:chain.overlap,cancelled:chain.cancelled},remain:{w:remain('w'),e:remain('e'),r:remain('r')},lastError}),
  muzzle:()=>muzzleScreen(),sector:sectorOf,
  set:v=>{if(v&&typeof v==='object'){if('on' in v)on=v.on!==false;if('chain' in v)chainOn=v.chain!==false;if('arcs' in v)arcsOn=v.arcs!==false;}else on=v!==false;if(!chainOn)chain.queue.length=0;try{localStorage.setItem(KEY,JSON.stringify({on,chain:chainOn,arcs:arcsOn}));}catch(_){}names();gate();return on;}});
 })();

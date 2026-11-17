@@ -13,7 +13,7 @@
 //  그리기는 원래 호출의 변환(이동·회전) 안에서 ctx.drawImage 로(Three 기록기에 그대로 잡힘), ctx.filter 는 'none' 만, 좌표는 유한값만. 끄기: localStorage storyworld.r1027.paint = off(또는 {"on":false}).
 (()=>{'use strict';
 if(window.__STORYWORLD_HERO_PAINT_R1027__)return;
-const REV='R1027-hero-paint-1',KEY='storyworld.r1027.paint';
+const REV='R1027-hero-paint-2',KEY='storyworld.r1027.paint';
 let prefs={on:true};
 try{const raw=localStorage.getItem(KEY);if(raw!=null){if(raw==='off'||raw==='0'||raw==='false')prefs.on=false;else{const v=JSON.parse(raw);if(v&&typeof v==='object')prefs={...prefs,...v};else prefs.on=v!==false;}}}catch(_){}
 const stats={replaced:{},hidden:0,drawn:0,fallback:0,lifeStretched:0,r163Dropped:{},r163Swapped:{},errors:0};let lastError=null;
@@ -39,9 +39,12 @@ const R411_HIT={gunner:'hit-explosion',slayer:'hit-fire',seoha:'hit-ice-spikes',
 const PROJECTILE_DECOR=new Set(['pxf-18','pxf-05','pxf-16','pxf-10','pxf-08']);
 const GUARD=new Set(['shield','blocked','parry','guard','ego-shield']);
 const hero=()=>{try{return typeof player==='object'&&player?String(player.hero||''):'';}catch(_){return'';}};
+const actionHero=()=>{try{return typeof e568HeroActionContext==='object'&&e568HeroActionContext?String(e568HeroActionContext.heroId||''):'';}catch(_){return'';}};
+// Queued attacks keep their caster even after a main-hero swap or an ally draw pass.
+const effectHero=e=>String(e?.sourceHero||e?.heroIdE568||e?.pxfHero||e?.nativeVfxHeroOct11||e?.r102Hero||e?.r302||actionHero()||hero());
 const imgPath=im=>{try{return String(im?.__storyworldStaticTint?.path||im?.__storyworldStaticSource?.path||im?.currentSrc||im?.src||'');}catch(_){return'';}};
 function classify(e){
- if(!prefs.on||!e||typeof e!=='object'||!fin(e.x)||!fin(e.y))return null;const h=hero();
+ if(!prefs.on||!e||typeof e!=='object'||!fin(e.x)||!fin(e.y))return null;const h=effectHero(e);
  if(e.type==='pxfSprite'){
   if(e.pxfSide==='enemy')return null;const st=String(e.pxfStage||''),k=String(e.pxfKey||'');
   if(st==='hit'||st==='cold-hit'){const own=OWN_HIT[h];return own?{sheet:own,kind:'hit'}:HIDE;}
@@ -124,10 +127,12 @@ function drawOwn(){if(!own.length||typeof project!=='function')return;let target
   try{if(typeof target.scope==='function')target.scope({id:'r1027:'+o.sheet+':'+o.t0.toFixed(3),kind:'effect',x:o.x,y:o.y,r1027:true},run);else run();stats.drawn++;stats.replaced[o.sheet]=(stats.replaced[o.sheet]||0)+1;}catch(err){fail(err);}}}
 let r163Done=false;
 function swapR163(){if(r163Done)return;const P=window.__STORYWORLD_PIXELFX_R163__;if(!P||typeof P.play!=='function')return;r163Done=true;
- const base=P.play;const play=function(name,x,y,o){try{if(prefs.on&&!(o&&o.tint)){const h=hero();
+ const base=P.play;const play=function(name,x,y,o){try{if(prefs.on&&!(o&&o.tint)){const h=effectHero(o);
    if(name==='heal-aoe'||name==='level-up'){stats.r163Dropped[name]=(stats.r163Dropped[name]||0)+1;return null;}
    if(name==='crit-hit'){const r411=window.__STORYWORLD_SKILL_SHEETS_R411__;
-    if(R411_HIT[h]&&r411?.play){r411.play(R411_HIT[h],x,y,{size:1.3});}else spawn(OWN_HIT[h]||'slash-hwando',x,y,{size:OWN_HIT[h]?1.25:1.1,life:OWN_HIT[h]?.48:.42,angle:Math.random()*Math.PI*2});
+    if(R411_HIT[h]&&r411?.play){r411.play(R411_HIT[h],x,y,{size:1.3});}
+    else if(OWN_HIT[h]||h==='hwando')spawn(OWN_HIT[h]||'slash-hwando',x,y,{size:OWN_HIT[h]?1.25:1.1,life:OWN_HIT[h]?.48:.42,angle:Math.random()*Math.PI*2});
+    else return base.apply(this,arguments); // Unknown heroes / unavailable sheets retain their original hit, never Hwando's slash.
     stats.r163Swapped[name]=(stats.r163Swapped[name]||0)+1;return null;}}}catch(err){fail(err);}return base.apply(this,arguments);};
  try{window.__STORYWORLD_PIXELFX_R163__=Object.freeze({...P,play,r1027Wrapped:true});}catch(err){fail(err);}}
 function wrapTick(){if(typeof tick!=='function'||tick.__r1027)return;const base=tick;let next=0;
