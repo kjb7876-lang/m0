@@ -71,14 +71,13 @@ function draw(){const im=sheet();if(!im||typeof project!=='function')return;cons
  lastSegs=segs;}
 // ---- 설치 ----
 // 기본 공격 성공 = attackCD 가 0 에서 올라감(R945 와 같은 감지). 엔진 안쪽 hitEnemy 는 전역 감싸기를 안 타므로(헤드리스 실측) 맞은 적은
-//  조준 대상(target)이 손닿는 곳(3.4칸)이면 그것, 아니면 가장 가까운 3.4칸 안 적으로 본다.
-const REACH=3.4;
-function victim(p){const ok=e=>e&&e.hp>0&&fin(e.x)&&fin(e.y)&&Math.hypot(e.x-p.x,e.y-p.y)<=REACH+(e.radius||0);
- try{if(typeof target!=='undefined'&&ok(target))return target;}catch(_){}
- let b=null,bd=1e9;try{for(const e of (typeof liveEnemies==='function'?liveEnemies():[])){if(!ok(e))continue;const d=Math.hypot(e.x-p.x,e.y-p.y);if(d<bd){bd=d;b=e;}}}catch(e){fail(e);}return b;}
+//  엔진이 실제로 벤 적(engineFoe)으로 본다. R1123: 예전엔 target(적 id)을 객체로 읽어 늘 '3.4칸 안 가장 가까운 적'이 되어, 조준한 적 대신 뒤의 적·벽 너머 적 위에 검흔이 났다.
+const engineFoe=p=>{try{if(!p||!Number.isFinite(p.x)||!Number.isFinite(p.y)||typeof liveEnemies!=='function')return null;let R=3.15;try{const h=typeof HEROES!=='undefined'?HEROES[p.hero]:null;if(h&&Number.isFinite(h.range))R=h.range;}catch(_){}let tid=null;try{tid=typeof target!=='undefined'?target:null;}catch(_){}
+ /* R1123: 엔진 basicAttack 과 같은 규칙 — 사거리 안·벽 너머 아님, 조준 대상(target=적 id) 먼저, 없으면 가장 가까운 적. 휘두르기 전에 골라 둔다(맞고 죽으면 목록에서 빠지므로). */
+ const c=liveEnemies().filter(v=>v&&v.hp>0&&Number.isFinite(v.x)&&Number.isFinite(v.y)&&Math.hypot(v.x-p.x,v.y-p.y)<=R&&(typeof clearLine!=='function'||clearLine(p,v)));return (tid!=null&&c.find(v=>v.id===tid))||c.sort((a,b)=>Math.hypot(a.x-p.x,a.y-p.y)-Math.hypot(b.x-p.x,b.y-p.y))[0]||null;}catch(_){return null;}};
 try{
- if(typeof basicAttack==='function'){const base=basicAttack;basicAttack=function(...a){const p=P();if(!on||!isHw(p))return base.apply(this,a);const cd0=p.attackCD,r=base.apply(this,a);
-   try{if(!(cd0>0)&&p.attackCD>0&&P()===p){const e=victim(p);if(e)addAttack(p,e);}}catch(e){fail(e);}return r;};}
+ if(typeof basicAttack==='function'){const base=basicAttack;basicAttack=function(...a){const p=P();if(!on||!isHw(p))return base.apply(this,a);const cd0=p.attackCD,pre=engineFoe(p),r=base.apply(this,a);
+   try{if(!(cd0>0)&&p.attackCD>0&&P()===p&&pre)addAttack(p,pre);}catch(e){fail(e);}return r;};}
  if(typeof fx==='function'){const base=fx;fx=function(type,x,y,opt){const r=base.apply(this,arguments);
   try{const o=opt||{};if(on&&type==='storySourceSkill'&&o.storyWER&&o.stage==='release'&&o.sourceHero==='hwando'&&String(o.sourceSlot)==='w'&&o.castId!=null&&fin(x)&&fin(y)&&isHw(P()))addW(x,y,o.castId);}catch(e){fail(e);}return r;};}
  if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e===SENT){try{if(on&&marks.length)draw();}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};}
@@ -89,5 +88,5 @@ try{
 }catch(e){fail(e);}
 function set(v){on=v!==false;if(!on){marks.length=0;disarm();}try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}
 window.__STORYWORLD_HWANDO_INK_TRACE_R1034__=Object.freeze({revision:REV,config:CFG,sheet:SWEEP,on:()=>on,set,
- inspect:()=>({revision:REV,on,live:marks.length,stats:{...stats},errors,lastError,lastSegs:lastSegs.map(s=>({...s})),marks:marks.map(m=>({k:m.k,age:+(T()-m.t0).toFixed(3)}))})});
+ inspect:()=>({revision:REV,on,live:marks.length,stats:{...stats},errors,lastError,lastSegs:lastSegs.map(s=>({...s})),marks:marks.map(m=>({k:m.k,x:m.x,y:m.y,age:+(T()-m.t0).toFixed(3)}))})});
 })();

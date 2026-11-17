@@ -68,7 +68,11 @@ const isHw=()=>typeof player!=='undefined'&&!!player&&player.hero==='hwando'&&pl
 const open=(x,y,r=.2)=>typeof blocked!=='function'||!blocked(x,y,r,room);
 const line=(a,b)=>typeof clearLine!=='function'||clearLine(a,b,room);
 const foes=()=>{try{return typeof liveEnemies==='function'?liveEnemies():[];}catch(_){return [];}};
+const engineFoe=p=>{try{if(!p||!Number.isFinite(p.x)||!Number.isFinite(p.y)||typeof liveEnemies!=='function')return null;let R=3.15;try{const h=typeof HEROES!=='undefined'?HEROES[p.hero]:null;if(h&&Number.isFinite(h.range))R=h.range;}catch(_){}let tid=null;try{tid=typeof target!=='undefined'?target:null;}catch(_){}
+ /* R1123: 엔진 basicAttack 과 같은 규칙 — 사거리 안·벽 너머 아님, 조준 대상(target=적 id) 먼저, 없으면 가장 가까운 적. 휘두르기 전에 골라 둔다(맞고 죽으면 목록에서 빠지므로). */
+ const c=liveEnemies().filter(v=>v&&v.hp>0&&Number.isFinite(v.x)&&Number.isFinite(v.y)&&Math.hypot(v.x-p.x,v.y-p.y)<=R&&(typeof clearLine!=='function'||clearLine(p,v)));return (tid!=null&&c.find(v=>v.id===tid))||c.sort((a,b)=>Math.hypot(a.x-p.x,a.y-p.y)-Math.hypot(b.x-p.x,b.y-p.y))[0]||null;}catch(_){return null;}};
 const nearest=r=>{try{return typeof nearestEnemy==='function'?nearestEnemy(r):null;}catch(_){return null;}};
+let lastDraw=null;
 const aim=()=>{try{return typeof storyAim22==='function'?storyAim22():0;}catch(_){return 0;}};
 /* R765: 쏘는 각 = 영웅 그림 8방향 칸 중심(적은 어느 칸인지만 정함) — 적에게 정확히 꺾지 않는다. 화면각 S → 월드: dx=(cosS+2sinS)/2, dy=(2sinS-cosS)/2 */
 const wSEC={e:0,se:Math.PI/4,s:Math.PI/2,sw:Math.PI*.75,w:Math.PI,nw:-Math.PI*.75,n:-Math.PI/2,ne:-Math.PI/4};
@@ -96,10 +100,10 @@ function disarm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)){c
 function clearAll(){jobs.length=0;blades.length=0;vis.length=0;waves.clear();disarm();}
 // ---- A 납도 발검 ---------------------------------------------------------------------------------------------
 function onBasic(base,self,args){
- const can=on&&isHw()&&!egoOn()&&solo(),cd0=player?.attackCD,sheathed=can&&T()-lastSwing>=CFG.sheathIdle&&!(cd0>0);
+ const can=on&&isHw()&&!egoOn()&&solo(),cd0=player?.attackCD,pre=can?engineFoe(player):null,sheathed=can&&T()-lastSwing>=CFG.sheathIdle&&!(cd0>0);
  const prior=boost;if(sheathed)boost=CFG.drawMult;let r;
  try{r=base.apply(self,args);}finally{boost=prior;}
- try{if(isHw()&&!(cd0>0)&&player.attackCD>0){if(sheathed){stats.draws++;const e=nearest(4),a=e?Math.atan2(e.y-player.y,e.x-player.x):aim();addVis({k:'draw',x:player.x,y:player.y,a,life:ready('cut')?19/18.75:.32});addVis({k:'ring',x:player.x,y:player.y,life:FRAMES/FPS*.55,size:1});}lastSwing=T();}}catch(e){fail(e);}
+ try{if(isHw()&&!(cd0>0)&&player.attackCD>0){if(sheathed){stats.draws++;const e=pre||nearest(4),a=e?Math.atan2(e.y-player.y,e.x-player.x):aim();lastDraw={a,foe:e?.id??null};addVis({k:'draw',x:player.x,y:player.y,a,life:ready('cut')?19/18.75:.32});addVis({k:'ring',x:player.x,y:player.y,life:FRAMES/FPS*.55,size:1});}lastSwing=T();}}catch(e){fail(e);}
  return r;}
 // ---- Q → 은빛 검풍 -------------------------------------------------------------------------------------------
 function onSpecial(base,self,args){const cd0=player?.specialCD,r=base.apply(self,args);
@@ -202,6 +206,6 @@ try{
 }catch(e){fail(e);}
 function set(v){on=v!==false;if(!on)clearAll();try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}
 window.__STORYWORLD_HWANDO_CHAIN_R590__=Object.freeze({revision:REV,config:CFG,on:()=>on,set,
- inspect:()=>({revision:REV,on,stats:{...stats},lastError,jobs:jobs.length,vis:vis.length,lastFinale:lastFinale&&{...lastFinale},
+ inspect:()=>({revision:REV,on,stats:{...stats},lastDraw:lastDraw&&{...lastDraw},lastError,jobs:jobs.length,vis:vis.length,lastFinale:lastFinale&&{...lastFinale},
   blades:blades.map(b=>({id:b.id,x:+b.x.toFixed(2),y:+b.y.toFixed(2),travel:+b.travel.toFixed(2),hit:[...b.hit]})),sheathed:T()-lastSwing>=CFG.sheathIdle})});
 })();

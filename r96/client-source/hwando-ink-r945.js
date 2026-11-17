@@ -76,13 +76,16 @@ const U1025=(h,a,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__,v=u
 function pick(s){const t=T();if(s.force){const k=s.force;s.force=null;return k;}
  const r=Math.random(),[m,c,q]=U1025('hwando',G971('hwando',[CFG.moon.chance,CFG.clones.chance,CFG.trio.chance]),['moon','clones','trio']),k=r<m?'moon':r<m+c?'clones':r<m+c+q?'trio':null;
  return k&&t>=s.ready[k]?k:null;}
-function onSwing(p){const s=st(p);s.stats.swings++;mimic(s,p,'a');if(!solo()){s.stats.coopSkipped++;return;}
+function onSwing(p,pre){const s=st(p);s.stats.swings++;mimic(s,p,'a');if(!solo()){s.stats.coopSkipped++;return;}
  const k=pick(s);if(!k)return;const t=T();
  // 둘레에 대상이 없어 기술이 안 나가면 대기 시간을 쓰지 않는다(빈 휘두름이 칠묵영 7초·삼협묵희 20초를 헛되이 태우던 것).
- const ok=k==='moon'?castMoon(s,p):k==='clones'?castClones(s,p):castTrio(s,p);if(ok!==false)s.ready[k]=t+D971('hwando',CFG[k].icd);else s.stats.noTarget=(s.stats.noTarget||0)+1;}
+ const ok=k==='moon'?castMoon(s,p,pre):k==='clones'?castClones(s,p):castTrio(s,p);if(ok!==false)s.ready[k]=t+D971('hwando',CFG[k].icd);else s.stats.noTarget=(s.stats.noTarget||0)+1;}
+const engineFoe=p=>{try{if(!p||!Number.isFinite(p.x)||!Number.isFinite(p.y)||typeof liveEnemies!=='function')return null;let R=3.15;try{const h=typeof HEROES!=='undefined'?HEROES[p.hero]:null;if(h&&Number.isFinite(h.range))R=h.range;}catch(_){}let tid=null;try{tid=typeof target!=='undefined'?target:null;}catch(_){}
+ /* R1123: 엔진 basicAttack 과 같은 규칙 — 사거리 안·벽 너머 아님, 조준 대상(target=적 id) 먼저, 없으면 가장 가까운 적. 휘두르기 전에 골라 둔다(맞고 죽으면 목록에서 빠지므로). */
+ const c=liveEnemies().filter(v=>v&&v.hp>0&&Number.isFinite(v.x)&&Number.isFinite(v.y)&&Math.hypot(v.x-p.x,v.y-p.y)<=R&&(typeof clearLine!=='function'||clearLine(p,v)));return (tid!=null&&c.find(v=>v.id===tid))||c.sort((a,b)=>Math.hypot(a.x-p.x,a.y-p.y)-Math.hypot(b.x-p.x,b.y-p.y))[0]||null;}catch(_){return null;}};
 const nearOf=(p,r)=>{let b=null,bd=r;for(const e of foes()){if(!(e.hp>0)||!fin(e.x)||!fin(e.y))continue;const d=Math.hypot(e.x-p.x,e.y-p.y);if(d<=bd){bd=d;b=e;}}return b;};
 // ① 묵월
-function castMoon(s,p){const e=nearOf(p,4.5),a=e?Math.atan2(e.y-p.y,e.x-p.x):aim(),ux=Math.cos(a),uy=Math.sin(a),id='m'+(++serial);s.stats.moons++;
+function castMoon(s,p,pre){const e=pre||nearOf(p,4.5),/* R1123: 방금 벤 적(엔진과 같은 고르기) 쪽으로 */a=e?Math.atan2(e.y-p.y,e.x-p.x):aim(),ux=Math.cos(a),uy=Math.sin(a),id='m'+(++serial);s.stats.moons++;
  s.blades.push({id,ox:p.x,oy:p.y,x:p.x+ux*.6,y:p.y+uy*.6,ux,uy,a,pw:power(),travel:.6,hit:new Set(),room,t0:T()});while(s.blades.length>CFG.moon.max)s.blades.shift();
  addVis({k:'splash',x:p.x+ux*.7,y:p.y+uy*.7,life:.4,size:1.3});say('묵월',p.x,p.y-.4);sfx('special');arm();}
 function stepBlades(s,dt){const M=CFG.moon;for(let i=s.blades.length-1;i>=0;i--){const b=s.blades[i];if(b.room!==room){s.blades.splice(i,1);continue;}
@@ -285,8 +288,8 @@ function drawClones(self){const p=P();if(cloneBusy||!on||!p)return;const s=st(p,
 // ---- 설치 ----------------------------------------------------------------------------------------------------
 let lastT=null;
 try{
- if(typeof basicAttack==='function'){const base=basicAttack;basicAttack=function(...a){const p=P();if(!on||!isHw(p))return base.apply(this,a);const cd0=p.attackCD,r=base.apply(this,a);
-   try{if(!(cd0>0)&&p.attackCD>0&&P()===p)onSwing(p);}catch(e){fail(e);}return r;};}
+ if(typeof basicAttack==='function'){const base=basicAttack;basicAttack=function(...a){const p=P();if(!on||!isHw(p))return base.apply(this,a);const cd0=p.attackCD,pre=engineFoe(p),r=base.apply(this,a);
+   try{if(!(cd0>0)&&p.attackCD>0&&P()===p)onSwing(p,pre);}catch(e){fail(e);}return r;};}
  if(typeof special==='function'){const base=special;special=function(...a){const p=P();if(!on||!isHw(p))return base.apply(this,a);const cd0=p.specialCD,r=base.apply(this,a);
    try{if(!(cd0>0)&&p.specialCD>0)mimic(st(p,false),p,'q');}catch(e){fail(e);}return r;};}
  if(typeof fx==='function'){const base=fx;fx=function(type,x,y,opt){const r=base.apply(this,arguments);
