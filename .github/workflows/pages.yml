@@ -780,6 +780,8 @@ jobs:
         run: node r96/qa/r1112/r1112-cpu-check.cjs
       - name: R1116 EGO straight blade (48 pre-baked ink sheets with the bent blade erased and redrawn straight in ink, white core and vermilion edge, originals kept) CPU check
         run: node r96/qa/r1116/r1116-cpu-check.cjs
+      - name: R1121 EGO hidden hero persona shots keep their own persona art (not the hwando A slash) and never fire in safe hub (frozen at the hero's feet) CPU check
+        run: node r96/qa/r1121/r1121-cpu-check.cjs
       - name: R1109 co-op relay build match (old R62 Render relay auto-fallback, default relay address) CPU check
         run: node r96/qa/r1109/r1109-cpu-check.cjs
       - name: R1092 story panel scene art (vertical-version scene paintings, ink-wash aware) CPU check

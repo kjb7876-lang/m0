@@ -10,7 +10,7 @@
 //  끄기: localStorage storyworld.r1094.egoKit = {"on":false}. 새 저장 필드·키 없음.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_EGO_KIT_R1094__)return;
-const REV='R1094-ego-kit-3',KEY='storyworld.r1094.egoKit',ART='assets/rc134/persona-skills/';
+const REV='R1094-ego-kit-4-R1121',KEY='storyworld.r1094.egoKit',ART='assets/rc134/persona-skills/';
 const fin=Number.isFinite,clamp=(v,a,b)=>fin(v)?Math.min(b,Math.max(a,v)):a;
 const F=Object.freeze;
 // 페르소나 보스 원본 기술(index.html personaSkills3 와 같은 이름·모양). factor = 공격력 대비 탄 하나의 피해.
@@ -52,10 +52,14 @@ function angles(spec,a){const n=Math.max(1,spec.count|0),out=[];if(!fin(a))a=0;
 function aim(){const p=pl();let e=null;try{e=typeof nearestEnemy==='function'?nearestEnemy(12):null;}catch(_){}
  if(e&&p)return Math.atan2(e.y-p.y,e.x-p.x);try{if(typeof storyAim22==='function')return storyAim22();}catch(_){}return 0;}
 function power(kind){const base=G(()=>attackPower(),0);if(kind==='special')return base*(2.4+.36*G(()=>rank('special'),0))/2.4;return base;}
-function fire(id,kind){const spec=SKILL[id];const p=pl();if(!spec||!p||typeof makeShot!=='function')return 0;const a=aim(),pw=power(kind)*spec.factor;if(!fin(pw)||pw<=0)return 0;
+// R1121(사용자 11-17 "에고각성 … 스킬이펙트랑 아직 이미지 짤리는버그"·"그냥 상태에서도"): ① 엔진 makeShot 감싸기가 sourceProjectile5 없는 아군 탄을 영웅 'A' 그림(hwando-a 은빛 초승달)으로 덮어써
+//  페르소나 탄 9종이 모두 환도 칼바람 조각으로 보였다 → 만든 뒤 원본 그림·출처를 다시 박는다. ② 거점(safeRegion)에선 엔진이 탄을 움직이지 않아 영웅 발밑에 멈춘 채 몸을 덮었다 → 거점에선 쏘지 않는다.
+const safe=()=>G(()=>typeof safeRegion==='function'&&!!safeRegion(),false);
+function ownArt(s,spec,path){if(!s||typeof s!=='object')return s;s.asset=path;s.sourceProjectile5={path,sourceRect:null,owner:'ego-kit-r1094',name:spec.key};s.storyWorldKey5='ego-kit-r1094:'+spec.key;return s;}
+function fire(id,kind){const spec=SKILL[id];const p=pl();if(!spec||!p||typeof makeShot!=='function')return 0;if(safe()){stats.safe=(stats.safe||0)+1;return 0;}const a=aim(),pw=power(kind)*spec.factor;if(!fin(pw)||pw<=0)return 0;
  const path=ART+spec.key+'.png';try{if(typeof readyImage==='function'&&!readyImage(path)&&typeof addImage==='function')addImage(path,'R1094 EGO');}catch(_){}
  const list=angles(spec,a);let n=0;lastSkill=spec.name;
- list.forEach((ang,i)=>{const go=()=>{const q=pl();if(!q||!(q.hp>0)||!active())return;const s=makeShot(q.x,q.y,ang,spec.speed,pw,{friendly:true,owner:'hero',asset:path,scale:spec.scale,pierce:spec.pierce,life:spec.life,radius:spec.key==='eclipse'?.3:.2,egoKitR1094:spec.key});if(s){stats.shots++;}else stats.blocked++;};
+ list.forEach((ang,i)=>{const go=()=>{const q=pl();if(!q||!(q.hp>0)||!active()||safe())return;const s=makeShot(q.x,q.y,ang,spec.speed,pw,{friendly:true,owner:'hero',asset:path,scale:spec.scale,pierce:spec.pierce,life:spec.life,radius:spec.key==='eclipse'?.3:.2,egoKitR1094:spec.key});if(s){ownArt(s,spec,path);stats.shots++;}else stats.blocked++;};
   if(spec.stagger&&i&&typeof delay==='function')delay(i*spec.stagger,go,'hero');else go();n++;});
  if(spec.shield)p.shield=Math.min(50,(+p.shield||0)+spec.shield);
  try{if(typeof floatText==='function')floatText(spec.name,p.x,p.y-.2,'#e8b7c0');}catch(_){}
