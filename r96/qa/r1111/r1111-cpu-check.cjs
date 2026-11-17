@@ -9,7 +9,7 @@ function world(){const store={};const ctx={Math,String,Number,Array,Object,JSON,
 const API=c=>c.__STORYWORLD_MOB_ATTACK_DOTS_R1065__;
 const C=world(),A=API(C),S=A.inspect().sheets;
 const NEW={'MD-05':{cells:6,cell:[256,320],re:/md-05-/},'MD-27':{cells:6,cell:[320,320],re:/md-27-/},'MD-29':{cells:6,cell:[418,418],re:/md-29-/},'MD-44':{cells:4,cell:[362,362],re:/md-44-/},'MD-72':{cells:6,cell:[192,240],re:/md-72-/}};
-const D=Object.entries(S).filter(([k,v])=>v.kind==='death');ok(D.length===16,'16 death sheets (11 + 5 new): '+D.map(x=>x[0]));
+const D=Object.entries(S).filter(([k,v])=>v.kind==='death');ok(D.length>=16,'>=16 death sheets (11 + 5 new, R1117d adds more): '+D.map(x=>x[0]));
 for(const [k,e] of Object.entries(NEW)){const s=S[k];ok(s&&s.kind==='death','death sheet '+k);ok(s.cells===e.cells&&s.cell[0]===e.cell[0]&&s.cell[1]===e.cell[1],k+' cells/cell size');
  const p=path.join(R,'runtime-text',s.path);ok(fs.existsSync(p)&&fs.statSync(p).size>1000,k+' sheet file');
  const dim=require('child_process').execFileSync('python3',['-I','-c','from PIL import Image;import sys;print(*Image.open(sys.argv[1]).size)',p]).toString().trim().split(' ').map(Number);
