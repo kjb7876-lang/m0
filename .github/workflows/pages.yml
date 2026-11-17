@@ -632,6 +632,8 @@ jobs:
         run: node r96/qa/r1119/persona-boss-r1119-cpu-check.cjs
       - name: R1113 persona hero unlock (beat the persona boss -> 9th hero card, lauren-based form with persona art, walk sheets, Eonju tint, save) CPU check
         run: node r96/qa/r1113/persona-hero-cpu-check.cjs
+      - name: R1120 persona hero own moves (lauren body echoes/ghosts/dash sheet/guard body reskinned, lauren r561 skill sheets -> persona vortex/eclipse sheets, EGO aura/eden fire Eonju, walk frame rate = engine 3.2/unit) CPU check
+        run: node r96/qa/r1120/persona-hero-own-cpu-check.cjs
       - name: R1098 samong faces (Michaela final boss uses her own sheet, R161 puppet repainted as an ink-and-white-thread doll so it no longer looks like Hwando) CPU check
         run: node r96/qa/r1098/r1098-cpu-check.cjs
       - name: R1090 character ink tint (hero and mob body images only, follows the map ink wash, settings toggle, effects and telegraphs untouched) CPU check
