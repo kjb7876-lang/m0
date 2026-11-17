@@ -10,6 +10,10 @@ if(window.__STORYWORLD_CULT_SIX_R1114__)return;
 const REV='R1114-cult-six-1',KEY='storyworld.r1114.cultSix';
 // 보스방(약 x 1~28, y 1~22)의 위쪽 두 줄. 영웅 시작 (15,19)에서 9칸 넘게 떨어지고 서로 4칸 이상.
 const SPOTS=Object.freeze([[8,5.5],[15,5.5],[22,5.5],[9,10],[15,10],[21,10]]);
+// R1122: cult04 DREAM 이 R171 서사 지도가 되면 보스 전투실이 x 6~26·y 6~20 이라 위 y 5.5 줄은 벽 → 셋이 아래로 밀려 2.5칸까지 붙었다.
+//  그 지도에서는 전투실 안에서 기억의 표식(15,13)을 둘러싼 두 줄(서로 4칸 이상·표식 둘레 영웅 자리에서 4칸 이상)로 편다.
+const SPOTS_R171=Object.freeze([[9,9],[15,8.5],[21,9],[9,16],[15,19],[21,16]]);
+const spots=()=>{try{return room?.exploration?.storyMapR171?SPOTS_R171:SPOTS;}catch(_){return SPOTS;}};
 let on=true;try{on=localStorage.getItem(KEY)!=='0';}catch(_){}
 const stats={sixSummons:0,spawned:0,finishes:0,nudged:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const live=()=>{try{return typeof room!=='undefined'&&!!room&&typeof zone!=='undefined'&&zone==='cult04'&&typeof layer!=='undefined'&&layer==='DREAM';}catch(_){return false;}};
@@ -31,10 +35,10 @@ function six(base,args,self){
  if(!ok||uniq.length<=1){// 만들기 실패나 1마리뿐이면 예전 방식으로(이미 만든 것은 버리고 한 번 더 기본 호출)
   R.enemies=keep;R.trialIndex=start;return base.apply(self,args);}
  R.enemies=[...keep,...uniq];
- uniq.forEach((e,i)=>{place(e,SPOTS[i%SPOTS.length]);e.trial=true;});
+ uniq.forEach((e,i)=>{{const P=spots();place(e,P[i%P.length]);};e.trial=true;});
  R.r1114Six=true;stats.sixSummons++;stats.spawned+=uniq.length;
  const r=orig.call(self,uniq,'trial');// 안쪽 구도 보정(RC150 등)이 보스를 영웅 곁으로 옮기므로 소환 뒤에 다시 펼친다
- if(r!==false)uniq.forEach((e,i)=>{place(e,SPOTS[i%SPOTS.length]);e.nav=[];});
+ if(r!==false)uniq.forEach((e,i)=>{{const P=spots();place(e,P[i%P.length]);};e.nav=[];});
  return r;}
 function install(){
  try{const base=window.spawnTrial3;if(typeof base==='function'&&!base.__r1114){const w=function(...a){try{if(on&&live()&&room.trialIndex<6)return six(base,a,this);}catch(e){fail(e);}return base.apply(this,a);};w.__r1114=true;window.spawnTrial3=w;}}catch(e){fail(e);}
@@ -42,6 +46,6 @@ function install(){
  return !!(window.spawnTrial3?.__r1114);}
 install();try{if(!window.spawnTrial3?.__r1114)setTimeout(install,300);}catch(_){}
 function set(v){if(v&&typeof v==='object'&&typeof v.on==='boolean')on=v.on;try{localStorage.setItem(KEY,on?'1':'0');}catch(_){}return {on};}
-window.__STORYWORLD_CULT_SIX_R1114__=Object.freeze({revision:REV,SPOTS,install,set,six:()=>!!room?.r1114Six,
+window.__STORYWORLD_CULT_SIX_R1114__=Object.freeze({revision:REV,SPOTS,SPOTS_R171,install,set,six:()=>!!room?.r1114Six,
  inspect:()=>({revision:REV,on,installed:!!window.spawnTrial3?.__r1114,stats:{...stats},lastError,presentationOnly:false,gameplayChanged:true})});
 })();
