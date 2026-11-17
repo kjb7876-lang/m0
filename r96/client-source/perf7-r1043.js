@@ -83,10 +83,12 @@ const byKey=(q,s)=>[...q.querySelectorAll(s)];
 function labelOf(el){return el?.closest?.('label')||el;}
 function hide(el){if(el&&el.classList)el.classList.add(HIDE);}
 // 같은 일을 하는 칸 여럿 → 한 칸. 묶음 칸을 바꾸면 숨긴 칸을 하나씩 같은 값으로 누른다(각 모듈의 원래 저장·적용 그대로).
-const GROUPS=[{id:'faceAllR1043',label:'전투 중 서로 바라보기(영웅·몹 마주봄, 공격 뒤 겨눈 적 바라보기)',sel:['#r98c-facing','#r100-facing','[data-r114-api="p113"][data-r114-key="facing"]','[data-r114-api="p111"][data-r114-key="facing"]','[data-r137="faceAlways"]']},
+const GROUPS=[{id:'faceAllR1043',label:'전투 중 서로 바라보기(영웅·몹 마주봄, 공격 뒤 겨눈 적 바라보기)',sel:['#r98c-facing','#r100-facing','[data-r114-api="p113"][data-r114-key="facing"]','[data-r114-api="p111"][data-r114-key="facing"]','#r111-facing','[data-r137="faceAlways"]']},
  {id:'mobMotionR1043',label:'잡몹 움직임(이동·공격·돌기·비행·피격 동작)',sel:['#r92-mobMotion','#r98c-mobMotion','#r101-motion']}];
 // R1043b(사용자 11-15 04:02Z 허락): 병원 테스트(병원 바로 시작·검사 기록) 구역도 숨긴다 — 기능·저장은 그대로, 설정 창에서만 안 보임.
 const DEV_HIDE=['#hitboxToggle','#voicePreroll','#r92-narrativeUnconfirmed','#hospitalTestSettingsR84'];
+// R1124: R111 구역(#r111-키)과 R114 '전투·연출' 묶음이 같은 설정(play-r111 prefs)을 두 번 보여 줬다 → R111 구역이 있을 때만 R114 사본을 숨긴다(저장·기본값 그대로).
+const dupR111=panel=>{for(const el of panel.querySelectorAll('[data-r114-api="p111"][data-r114-key]'))if(panel.querySelector('#r111-'+el.dataset.r114Key))hide(labelOf(el));};
 const GFX_SECTIONS=['#lightAtmosR300','#weatherR450','#localLightR451','#actorToneR453','#heroHarmonyR1030'];
 function build(){try{if(off)return;const panel=document.getElementById('panel');const quick=document.getElementById('quickSettingsR114');if(!panel||!quick)return;css();
  // ① 성능 7단계 줄
@@ -108,6 +110,7 @@ function build(){try{if(off)return;const panel=document.getElementById('panel');
   const first=labelOf(els[0]);const lab=document.createElement('label');lab.innerHTML='<input type="checkbox" id="'+g.id+'"> '+g.label;first.before(lab);
   const box=lab.querySelector('input');box.checked=els.every(e=>e.checked);box.indeterminate=!box.checked&&els.some(e=>e.checked);
   box.onchange=()=>{for(const e of g.sel.map(s=>panel.querySelector(s)).filter(Boolean))if(e.checked!==box.checked)e.click();};els.forEach(e=>hide(labelOf(e)));}
+ dupR111(panel);
  // ⑤ 개발용 칸 숨기기
  for(const s of DEV_HIDE)hide(labelOf(panel.querySelector(s)));
  // 숨긴 칸만 남은 세부설정 묶음(예: 협동·테스트)은 묶음째 숨긴다.
