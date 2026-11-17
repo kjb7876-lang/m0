@@ -619,6 +619,8 @@ jobs:
         run: node r96/qa/r1023/r1023-cpu-check.cjs
       - name: R1043 performance 7 steps (1 lighter than the old lowest, 5 = PC default, 7 full options, phone stays auto) and reach-check wall cache CPU check
         run: node r96/qa/r1043/r1043-cpu-check.cjs
+      - name: R1124 settings duplicate rows hidden (display only, saved keys unchanged) CPU check
+        run: node r96/qa/r1124/settings-dedupe-check.cjs
       - name: R1052 performance steps 6/7 pixel budget (canvas at most 4K pixels on big windows, never below step 5)
         run: node r96/qa/r1052/r1052-cpu-check.cjs
       - name: R1055 ink wash test build (off by default, title button cycles off / eastern regions / all, map materials only, paper grain below step 5) CPU check
