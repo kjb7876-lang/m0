@@ -10923,6 +10923,26 @@
       "sha256": "d303fb71ae29054d57f9e1642be9e27b26c6fe6b1fba7ef2df86cb5d5c9441c4"
     },
     {
+      "path": "assets/r1119/fx-eclipse-contact.webp",
+      "bytes": 44412,
+      "sha256": "ee06842795f719eab3be9be2721d47974c406f969a2d0317da38c5c28c6e72e3"
+    },
+    {
+      "path": "assets/r1119/fx-eclipse-flight.webp",
+      "bytes": 86122,
+      "sha256": "b6bb5bcc48bd5867fd4d897ddd1edafb8d34578888cc62021563cfea5274e323"
+    },
+    {
+      "path": "assets/r1119/fx-eye-contact.webp",
+      "bytes": 51094,
+      "sha256": "e86a68757597d4367f06982f3cf62a20d875842de71315ccdade87b12d21d517"
+    },
+    {
+      "path": "assets/r1119/fx-eye-flight.webp",
+      "bytes": 65712,
+      "sha256": "d2b72efeb1c9e04ee1e01021634312490c18e38868442296aa46997decdefab4"
+    },
+    {
       "path": "assets/r1119/fx-lance-contact.webp",
       "bytes": 58224,
       "sha256": "3fcdc42e9c69ab6926b9f728f8efd6a626cf07e6fa18af9612086c6efdf6ae42"
@@ -10941,6 +10961,16 @@
       "path": "assets/r1119/fx-shield-flight.webp",
       "bytes": 98554,
       "sha256": "09754caaef395bf3cde4de3fdfaba6966a1c921c59e71e0cfc19d2390833b305"
+    },
+    {
+      "path": "assets/r1119/fx-small-orb-contact.webp",
+      "bytes": 58482,
+      "sha256": "fa1c7dfa89f85c5062963ebb10c625fd6f94a8bf685922ecab6e26a8a69e2604"
+    },
+    {
+      "path": "assets/r1119/fx-small-orb-flight.webp",
+      "bytes": 65572,
+      "sha256": "3496d59dd3f6a038eeedab796062be89d539774c74510baaeafb2d917f0ce9ba"
     },
     {
       "path": "assets/r1119/fx-star-contact.webp",
@@ -54754,8 +54784,8 @@
     },
     {
       "path": "persona-skill-fx-r1119.js",
-      "bytes": 6825,
-      "sha256": "dcf9fab62d5287e6a0a109a184f9de75058c0e1fc9f5ebb5281bbab1abbcd9ba"
+      "bytes": 7352,
+      "sha256": "cc36295d28dfe72e1395d55c09aa93696c3e2e28512a6c05fae43a056191b505"
     },
     {
       "path": "persona-stride-r1104.js",
@@ -55563,8 +55593,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11112,
-  "totalBytes": 1343877744,
+  "fileCount": 11118,
+  "totalBytes": 1344249665,
   "webHTMLSha256": "d39197930fac875a698d522553f523549661fa69e1b2c57dda4ad39de68256de",
   "largest": [
     {

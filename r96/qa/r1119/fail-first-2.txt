@@ -1,0 +1,4 @@
+FAIL ⑧ small-orb 비행 칸이 넘어감(-1)
+FAIL ⑪ 자산 28장 있음·runtime-inputs 등록(빠짐 6: assets/r1119/fx-small-orb-flight.webp,assets/r1119/fx-small-orb-contact.webp,assets/r1119/fx-eye-flight.webp)
+FAIL ⑪ runtime-text 사본 같음 persona-skill-fx-r1119.js
+R1119 persona-boss FAILED 3

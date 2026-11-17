@@ -80,17 +80,17 @@ const hitOf=c=>{const m=/^r1119:hit:(base|awake)-(front|side|rear):(\d+):(raw|in
  const w2=world();w2.load();w2.stand(.3,0,'base');w2.C.room={id:'cult03',enemies:[],persona:{}};let any=false;for(let i=0;i<30;i++){w2.C.time+=1/30;if(w2.frame([]).some(c=>/r1119:death/.test(String(c.sourcePath))))any=true;}ok(!any,'⑦ 결전 아닌데 페르소나가 사라지면(지역 이동) 소멸 안 그림');}
 // ⑧ ⑨ 탄
 {const shot=(key,id='p1',pts=[[300,300],[340,300],[340,340],[300,340]])=>({kind:'image',key:'proj:'+id,order:3,owner:{kind:'effect',id:'proj:'+id},sourcePath:'assets/rc134/persona-skills/'+key+'.png',image:{},sourceRect:[0,0,256,256],imageSize:[256,256],points:pts,style:{}});
- for(const key of ['clock','diamond','star','lance','shield','vortex']){const w=world();w.load();const fs_=[];let last=null;
-  for(let i=0;i<20;i++){w.C.time+=1/30;const o=w.frame([shot(key)]),c=o.find(c=>c.key==='proj:p1');last=c;const m=/^r1119:fx:(\w+)-flight:(\d+)$/.exec(String(c&&c.sourcePath));fs_.push(m&&m[1]===key?+m[2]:-1);}
-  w.load();for(let i=0;i<10;i++){w.C.time+=1/30;const o=w.frame([shot(key)]),c=o.find(c=>c.key==='proj:p1'),m=/^r1119:fx:(\w+)-flight:(\d+)$/.exec(String(c&&c.sourcePath));fs_.push(m?+m[2]:-1);last=c;}
+ for(const key of ['clock','diamond','star','lance','shield','vortex','small-orb','eye','eclipse']){const w=world();w.load();const fs_=[];let last=null;
+  for(let i=0;i<20;i++){w.C.time+=1/30;const o=w.frame([shot(key)]),c=o.find(c=>c.key==='proj:p1');last=c;const m=/^r1119:fx:([\w-]+)-flight:(\d+)$/.exec(String(c&&c.sourcePath));fs_.push(m&&m[1]===key?+m[2]:-1);}
+  w.load();for(let i=0;i<10;i++){w.C.time+=1/30;const o=w.frame([shot(key)]),c=o.find(c=>c.key==='proj:p1'),m=/^r1119:fx:([\w-]+)-flight:(\d+)$/.exec(String(c&&c.sourcePath));fs_.push(m?+m[2]:-1);last=c;}
   const got=fs_.slice(-10);ok(got.every(f=>f>=0)&&new Set(got).size>=3,'⑧ '+key+' 비행 칸이 넘어감('+[...new Set(got)]+')');
   if(last&&/r1119/.test(last.sourcePath)){const cx=(last.points[0][0]+last.points[2][0])/2,cy=(last.points[0][1]+last.points[2][1])/2,wd=Math.hypot(last.points[1][0]-last.points[0][0],last.points[1][1]-last.points[0][1]);
    const want=key==='lance'?60:40;ok(Math.abs(wd-want)<.6&&Math.hypot(cx-320,cy-320)<(key==='star'?5:.6),'⑨ '+key+' 크기 '+wd.toFixed(1)+'(원하는 '+want+')·가운데 맞춤');}
-  const tail=[];for(let i=0;i<20;i++){w.C.time+=1/30;const o=w.frame([]),c=o.find(c=>/^r1119:fx:\w+-contact:/.test(String(c.sourcePath)));tail.push(c?+/:(\d+)$/.exec(c.sourcePath)[1]:-1);}
+  const tail=[];for(let i=0;i<20;i++){w.C.time+=1/30;const o=w.frame([]),c=o.find(c=>/^r1119:fx:[\w-]+-contact:/.test(String(c.sourcePath)));tail.push(c?+/:(\d+)$/.exec(c.sourcePath)[1]:-1);}
   const cf=[...new Set(tail.filter(f=>f>=0))];ok(cf.length>=5&&cf[0]===0&&cf.at(-1)===5&&tail.at(-1)===-1,'⑧ '+key+' 사라지면 접촉·소멸 6칸 뒤 끝('+cf+')');}
  {const w=world();w.load();const rot=[[300,300],[328.28,328.28],[300,356.57],[271.72,328.28]];let c;for(let i=0;i<10;i++){w.C.time+=1/30;c=w.frame([shot('lance','r',rot)]).find(c=>c.key==='proj:r');}
   const ux=[c.points[1][0]-c.points[0][0],c.points[1][1]-c.points[0][1]];ok(Math.abs(Math.atan2(ux[1],ux[0])-Math.PI/4)<.01,'⑨ 회전한 탄 사각형의 축을 따름');}
- for(const key of ['small-orb','eye','eclipse']){const w=world();w.load();let c;for(let i=0;i<10;i++){w.C.time+=1/30;c=w.frame([shot(key)]).find(c=>c.key==='proj:p1');}ok(c&&c.sourcePath==='assets/rc134/persona-skills/'+key+'.png','⑧ '+key+' 는 그대로(새 시트 없음)');}
+ {const w=world();w.load();let c;const o=shot('clock');o.sourcePath='assets/rc134/persona-skills/other.png';for(let i=0;i<10;i++){w.C.time+=1/30;c=w.frame([{...o}]).find(c=>c.key==='proj:p1');}ok(c&&c.sourcePath==='assets/rc134/persona-skills/other.png','⑧ 표에 없는 탄 그림은 그대로');}
  {const w=world();w.load();let c;const s=shot('clock');s.sourcePath='r409:outline:effect:u:http://x/m0/assets/rc134/persona-skills/clock.png:0,0,256,256:6:effect';s.sourceRect=[0,0,268,268];
   for(let i=0;i<10;i++){w.C.time+=1/30;c=w.frame([{...s}]).find(c=>c.key==='proj:p1');}ok(c&&/^r1119:fx:clock-flight/.test(c.sourcePath),'⑧ R409 테두리판 탄 경로도 알아봄('+(c&&c.sourcePath)+')');}}
 // ⑩ 끄기
@@ -100,7 +100,7 @@ const hitOf=c=>{const m=/^r1119:hit:(base|awake)-(front|side|rear):(\d+):(raw|in
 // ⑪ 빌드 연결
 {const inputs=fs.readFileSync(path.join(ROOT,'runtime-inputs.json'),'utf8'),idx=fs.readFileSync(path.join(ROOT,'runtime-text/index.html'),'utf8');
  const want=['persona-hit-base-front','persona-hit-base-side','persona-hit-base-rear','persona-hit-awake-front','persona-hit-awake-side','persona-hit-awake-rear','persona-death-base','persona-death-awake',
-  ...['clock','diamond','star','lance','shield','vortex'].flatMap(k=>['fx-'+k+'-flight','fx-'+k+'-contact']),'well-orb','well-floor'].map(n=>'assets/r1119/'+n+'.webp');
+  ...['clock','diamond','star','lance','shield','vortex','small-orb','eye','eclipse'].flatMap(k=>['fx-'+k+'-flight','fx-'+k+'-contact']),'well-orb','well-floor'].map(n=>'assets/r1119/'+n+'.webp');
  const miss=want.filter(p=>{const f=path.join(ROOT,'runtime-text',p);return !(fs.existsSync(f)&&fs.statSync(f).size>10000&&inputs.includes(p));});ok(!miss.length,'⑪ 자산 '+want.length+'장 있음·runtime-inputs 등록(빠짐 '+miss.length+(miss.length?': '+miss.slice(0,3):'')+')');
  const all=SRC+FXSRC+fs.readFileSync(path.join(ROOT,'client-source/persona-gravity-r1096.js'),'utf8');const unused=want.filter(p=>!all.includes(p.replace(/\.webp$/,''))&&!all.includes(p.split('/').pop().replace(/\.webp$/,'')));ok(!unused.length,'⑪ 코드가 자산을 모두 씀(안 씀 '+unused+')');
  ok(/<script src="\.\/persona-stride-r1104\.js"><\/script>\n<script src="\.\/persona-skill-fx-r1119\.js"><\/script>/.test(idx),'⑪ index 스크립트 태그(stride 바로 뒤)');

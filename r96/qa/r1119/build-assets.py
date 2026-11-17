@@ -25,7 +25,11 @@ FX=[('clock-flight','clock/clock_flight8_sheet.png',256,256,8),('clock-contact',
     ('vortex-flight','vortex/PersonaBoss_vortex_loop8.png',256,256,8),('vortex-contact','vortex/PersonaBoss_vortex_dissipate6.png',256,256,6),
     ('shield-flight','shield/shield_loop8_sheet.png',256,256,8),('shield-contact','shield/shield_contact6_sheet.png',256,256,6),
     ('lance-flight','lance/CX-0106PB_lance_charge8_REVIEW.png',384,384,8),('lance-contact','lance/CX-0106PB_lance_release_fade6_REVIEW.png',384,384,6),
-    ('star-flight','branch/flight_sheet.png',256,256,8),('star-contact','branch/contact_sheet.png',256,256,6)]
+    ('star-flight','branch/flight_sheet.png',256,256,8),('star-contact','branch/contact_sheet.png',256,256,6),
+    # 11-17 05:26Z 추가(사용자 05:27Z '욕망의 씨앗 → 악의의 시선 → 욕망의 일식 … 개선적용'): CX-0106PB_PersonaBoss_FX_01-02-06
+    ('small-orb-flight','fx3/seed/CX-0106PB_01_seed_r1_flight8.png',256,256,8),('small-orb-contact','fx3/seed/CX-0106PB_01_seed_r1_impact6.png',256,256,6),
+    ('eye-flight','fx3/eye/CX-0106PB_02_eye_r1_flight8.png',256,256,8),('eye-contact','fx3/eye/CX-0106PB_02_eye_r1_impact6.png',256,256,6),
+    ('eclipse-flight','fx3/eclipse/CX-0106PB_06_eclipse_r1_flight8.png',256,256,8),('eclipse-contact','fx3/eclipse/CX-0106PB_06_eclipse_r1_impact6.png',256,256,6)]
 for n,p,cw,ch,k in FX: save(f'fx-{n}.webp',strip(O(p),cw,ch,k),p)
 save('well-orb.webp',O('pm2/ORB/CX-0118PM_r2_PM-2_orb.png'),'pm2/ORB/CX-0118PM_r2_PM-2_orb.png')
 save('well-floor.webp',O('pm2/FLOOR/CX-0118PM_r2_PM-2_floor-disc.png'),'pm2/FLOOR/CX-0118PM_r2_PM-2_floor-disc.png')

@@ -160,6 +160,54 @@
   "h": 256
  },
  {
+  "out": "fx-small-orb-flight.webp",
+  "src": "fx3/seed/CX-0106PB_01_seed_r1_flight8.png",
+  "srcSha256": "76602fd5458abe38a06fb0ebe978b4705b5aaa2f691bb9a36183b7072c938395",
+  "size": 65572,
+  "w": 2048,
+  "h": 256
+ },
+ {
+  "out": "fx-small-orb-contact.webp",
+  "src": "fx3/seed/CX-0106PB_01_seed_r1_impact6.png",
+  "srcSha256": "92eb275dfe2a344f221ccb561574e3ded23d51d2f9993e1621f92a4bf038455d",
+  "size": 58482,
+  "w": 1536,
+  "h": 256
+ },
+ {
+  "out": "fx-eye-flight.webp",
+  "src": "fx3/eye/CX-0106PB_02_eye_r1_flight8.png",
+  "srcSha256": "a856ab879777132151265ee33f2774b4962173271326f1647cbea119380841e8",
+  "size": 65712,
+  "w": 2048,
+  "h": 256
+ },
+ {
+  "out": "fx-eye-contact.webp",
+  "src": "fx3/eye/CX-0106PB_02_eye_r1_impact6.png",
+  "srcSha256": "0e589c44541985430196602ff2c405056613ba5cf73a36acfa9b940b1bd66962",
+  "size": 51094,
+  "w": 1536,
+  "h": 256
+ },
+ {
+  "out": "fx-eclipse-flight.webp",
+  "src": "fx3/eclipse/CX-0106PB_06_eclipse_r1_flight8.png",
+  "srcSha256": "f57937264746e18effc69744d93762801322fdfee8bce929f888694e2be5d98b",
+  "size": 86122,
+  "w": 2048,
+  "h": 256
+ },
+ {
+  "out": "fx-eclipse-contact.webp",
+  "src": "fx3/eclipse/CX-0106PB_06_eclipse_r1_impact6.png",
+  "srcSha256": "bbef55233c075cbd6f6f2e902c30326f4d3656145b1e085ffc6a0033c03e10c8",
+  "size": 44412,
+  "w": 1536,
+  "h": 256
+ },
+ {
   "out": "well-orb.webp",
   "src": "pm2/ORB/CX-0118PM_r2_PM-2_orb.png",
   "srcSha256": "bccd660b1fa45527b537481edc1915073e619458345e3e39e17bbf01feeea878",

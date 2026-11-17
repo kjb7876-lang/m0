@@ -2,21 +2,25 @@
 //  엔진은 탄을 정지 그림 assets/rc134/persona-skills/<key>.png 한 장으로 그린다(ranged3 → enemyShot). 렌더러가 받는 그 탄 명령의 그림만 Dots 시트 칸으로 바꾼다.
 //  · 끝없는 갈망 clock · 감춘 충동 diamond · 순수악의의 분기 star(공식 5번째 중심광 + 비대칭 분기) · 악의의 관통 lance · 되비친 집착 shield · 내면의 소용돌이 vortex:
 //    날아가는 동안 비행·루프 8칸, 탄이 사라지면(적중·수명 끝) 마지막 자리에 접촉·소멸 6칸(마지막 칸 완전 투명) 한 번.
-//  · 욕망의 씨앗 small-orb · 악의 시선 eye · 욕망의 일식 eclipse 는 드라이브에 쓸 수 있는 시트가 없어 그대로(작은 구체·시선·일식은 원본 미확보로 보류 — 드라이브 메모).
+//  · 욕망의 씨앗 small-orb · 악의 시선 eye · 욕망의 일식 eclipse: 11-17 05:26Z 드라이브 CX-0106PB 01·02·06 시트(비행 8 + 적중 6)로 — 9종 모두.
 //  · 칸 크기·회전은 원래 탄 사각형의 축을 따른다(256 칸 = 원래 그림 256, lance 는 384 칸이라 1.5배, 피벗은 시트 spec 값).
 //  판정·피해·속도·수명·탄 수는 바꾸지 않는다(그림만). R1104 렌더 감싸기가 매 render 에 process 를 부른다. 끄기: localStorage['storyworld.r1119.personaSkillFx']='0'.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_PERSONA_SKILL_FX_R1119__)return;
-const REV='R1119-persona-skill-fx-1',KEY='storyworld.r1119.personaSkillFx';
+const REV='R1119-persona-skill-fx-2-all9',KEY='storyworld.r1119.personaSkillFx';
 const FX={
  clock:{flight:'assets/r1119/fx-clock-flight.webp',contact:'assets/r1119/fx-clock-contact.webp',cw:256,ch:256,piv:[128,128],ms:80,cms:80},
  diamond:{flight:'assets/r1119/fx-diamond-flight.webp',contact:'assets/r1119/fx-diamond-contact.webp',cw:256,ch:256,piv:[128,128],ms:80,cms:80},
  star:{flight:'assets/r1119/fx-star-flight.webp',contact:'assets/r1119/fx-star-contact.webp',cw:256,ch:256,piv:[146,128],ms:90,cms:90},
  lance:{flight:'assets/r1119/fx-lance-flight.webp',contact:'assets/r1119/fx-lance-contact.webp',cw:384,ch:384,piv:[192,192],ms:80,cms:80,pingpong:[3,7]},
  shield:{flight:'assets/r1119/fx-shield-flight.webp',contact:'assets/r1119/fx-shield-contact.webp',cw:256,ch:256,piv:[128,130],ms:90,cms:90},
- vortex:{flight:'assets/r1119/fx-vortex-flight.webp',contact:'assets/r1119/fx-vortex-contact.webp',cw:256,ch:256,piv:[128,128],ms:100,cms:100}};
+ vortex:{flight:'assets/r1119/fx-vortex-flight.webp',contact:'assets/r1119/fx-vortex-contact.webp',cw:256,ch:256,piv:[128,128],ms:100,cms:100},
+ // 11-17 05:26Z 추가 CX-0106PB 01·02·06(욕망의 씨앗·악의 시선·욕망의 일식): 12fps, 피벗 가운데
+ 'small-orb':{flight:'assets/r1119/fx-small-orb-flight.webp',contact:'assets/r1119/fx-small-orb-contact.webp',cw:256,ch:256,piv:[128,128],ms:83,cms:83},
+ eye:{flight:'assets/r1119/fx-eye-flight.webp',contact:'assets/r1119/fx-eye-contact.webp',cw:256,ch:256,piv:[128,128],ms:83,cms:83},
+ eclipse:{flight:'assets/r1119/fx-eclipse-flight.webp',contact:'assets/r1119/fx-eclipse-contact.webp',cw:256,ch:256,piv:[128,128],ms:83,cms:83}};
 const FLIGHT_N=8,CONTACT_N=6,MAX_TRACK=64,MAX_CONTACT=24;
-const RX=/assets\/rc134\/persona-skills\/(clock|diamond|star|lance|shield|vortex)\.png/;
+const RX=/assets\/rc134\/persona-skills\/(clock|diamond|star|lance|shield|vortex|small-orb|eye|eclipse)\.png/;
 const stats={frames:0,swaps:0,contacts:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e&&e.message||e).slice(0,160);};
 let on=true;try{on=localStorage.getItem(KEY)!=='0';}catch(_){}
 function set(v){on=v!==false;try{localStorage.setItem(KEY,on?'1':'0');}catch(_){}if(!on){track.clear();contacts.length=0;}return on;}

@@ -10322,7 +10322,13 @@
     "assets/r1119/persona-hit-base-rear.webp",
     "assets/r1119/persona-hit-base-side.webp",
     "assets/r1119/well-floor.webp",
-    "assets/r1119/well-orb.webp"
+    "assets/r1119/well-orb.webp",
+    "assets/r1119/fx-eclipse-contact.webp",
+    "assets/r1119/fx-eclipse-flight.webp",
+    "assets/r1119/fx-eye-contact.webp",
+    "assets/r1119/fx-eye-flight.webp",
+    "assets/r1119/fx-small-orb-contact.webp",
+    "assets/r1119/fx-small-orb-flight.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11397,5 +11403,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "1b7af16605d81f5e373175ca5e65a686401e6afc82ade24b2292c740eebd172a"
+  "runtimeManifestSHA256": "b10e07dcda8f6841c299d002ceb698beccceaab5f6e576dbdc7b3f42d1140687"
 }
