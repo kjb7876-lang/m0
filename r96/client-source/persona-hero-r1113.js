@@ -10,7 +10,7 @@
  * 끄기: localStorage storyworld.r1113.personaHero = {"on":..., "off":true}. */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_PERSONA_HERO_R1113__)return;
-const REV='R1113-persona-hero-5-own-moves-r1120',KEY='storyworld.r1113.personaHero',FIELD='personaHeroR1113',BASE='lauren';
+const REV='R1113-persona-hero-6-hud-well-r1120b',KEY='storyworld.r1113.personaHero',FIELD='personaHeroR1113',BASE='lauren';
 const PROFILE=Object.freeze({name:'페르소나',title:'페르소나 · 순수악의',role:'HIDDEN · 9번째 영웅',color:'#cc3428',
  passive:'사몽 결전에서 쓰러뜨린 거울. 라우렌의 별 기술을 언주빛으로 되비춥니다.',special:'라우렌과 같은 기술·키',
  portrait:'assets/rc133/art/awake-0.png',tags:['히든','언주','라우렌 계보']});
@@ -165,7 +165,20 @@ function skills(cmds){let n=0;for(const c of cmds){if(!c||c.kind!=='image'||c.r1
   c.image=fr.canvas;c.mutable=false;c.sourcePath='r1113:'+path.replace(/^assets\//,'')+':'+f;c.immutableTint=fr.canvas.__storyworldStaticSource;c.sourceRect=[f*256,0,256,256];c.imageSize=[fr.w,fr.h];c.r1113=true;c.r1113tint=true;
   if(c.style&&typeof c.style==='object'&&typeof c.style.filter==='string'&&/hue-rotate/.test(c.style.filter))c.style={...c.style,filter:'none'};n++;}
  stats.skillSwaps=(stats.skillSwaps||0)+n;return n;}
-function process(cmds){if(!Array.isArray(cmds))return 0;if(!formActive())return 0;prewarm();let n=0;try{drop(cmds);}catch(e){fail(e);}try{const sw=swapBody(cmds);if(sw){n++;n+=echoes(cmds,sw);n+=addGlow(cmds,sw);}}catch(e){fail(e);}try{n+=skills(cmds);}catch(e){fail(e);}try{n+=tint(cmds);}catch(e){fail(e);}try{n+=vectors(cmds);}catch(e){fail(e);}return n;}
+// R1120b 우물 코어: 엔진이 선·채우기로 그린 보라 구(r561:well:<t>:core:n) → 빼고, 그 자리에 욕망의 일식 비행 시트 칸 하나(Dots 그림, 이미 언주색)
+const CORE_ID=/^r561:well:[^:]+:core$/;
+function wellCore(cmds){let n=0;const groups=new Map();
+ for(let i=0;i<cmds.length;i++){const c=cmds[i];if(!c||(c.kind!=='fill'&&c.kind!=='stroke'))continue;const id=String(c.owner?.id||'');if(!CORE_ID.test(id))continue;let g=groups.get(id);if(!g){g={first:c,box:[Infinity,Infinity,-Infinity,-Infinity],fill:null};groups.set(id,g);}
+  if(c.kind==='fill'&&Array.isArray(c.paths)){for(const pa of c.paths)for(const q of (Array.isArray(pa?.points)?pa.points:[]))if(okPt(q)){g.box[0]=Math.min(g.box[0],q[0]);g.box[1]=Math.min(g.box[1],q[1]);g.box[2]=Math.max(g.box[2],q[0]);g.box[3]=Math.max(g.box[3],q[1]);}g.fill=g.fill||c;}}
+ if(!groups.size)return 0;const r=load(SK_SRC('eclipse').flight);if(r.state!=='ready'||!r.frames?.[0])return 0;const fr=r.frames[0],f=Math.floor((now()||0)*1000/83)%8;
+ const add=[];for(const [id,g] of groups){const b=g.box;if(!(b[2]>b[0])||!(b[3]>b[1]))continue;const cx=(b[0]+b[2])/2,cy=(b[1]+b[3])/2,R=Math.max(b[2]-b[0],b[3]-b[1])*1.25;// 시트 칸 안 일식 원반 지름 ≈ 칸의 0.42 → 칸 폭 = 코어 지름/0.42 쯤이지만 테두리 불꽃까지 보이게 1.25배로 잘라 둔다
+  const base=g.first,pts=[[cx-R,cy-R],[cx+R,cy-R],[cx+R,cy+R],[cx-R,cy+R]];if(!pts.every(okPt))continue;
+  const cmd={...base,kind:'image',key:id+':r1120core',order:base.order,owner:{...base.owner},image:fr.canvas,mutable:false,sourcePath:'r1113:r1119/fx-eclipse-flight.webp:'+f,immutableTint:fr.canvas.__storyworldStaticSource,
+   sourceRect:[f*256,0,256,256],imageSize:[fr.w,fr.h],points:pts,style:{...(base.style&&typeof base.style==='object'?base.style:{}),filter:'none',globalCompositeOperation:'source-over'},r1113:true,r1113tint:true};
+  delete cmd.paths;delete cmd.rule;delete cmd.lineWidth;add.push([base,cmd]);}
+ let j=0;for(let i=0;i<cmds.length;i++){const c=cmds[i];if(c&&(c.kind==='fill'||c.kind==='stroke')&&CORE_ID.test(String(c.owner?.id||''))){const a=add.find(x=>x[0]===c);if(a){cmds[j++]=a[1];n++;}continue;}cmds[j++]=c;}cmds.length=j;
+ stats.cores=(stats.cores||0)+n;return n;}
+function process(cmds){if(!Array.isArray(cmds))return 0;if(!formActive())return 0;prewarm();let n=0;try{drop(cmds);}catch(e){fail(e);}try{const sw=swapBody(cmds);if(sw){n++;n+=echoes(cmds,sw);n+=addGlow(cmds,sw);}}catch(e){fail(e);}try{n+=skills(cmds);}catch(e){fail(e);}try{n+=wellCore(cmds);}catch(e){fail(e);}try{n+=tint(cmds);}catch(e){fail(e);}try{n+=vectors(cmds);}catch(e){fail(e);}return n;}
 // ---- 렌더러 감싸기(prototype·인스턴스, 한 render 에 한 번) ----
 let depth=0;
 const wrapFn=fn=>{if(fn.__r1113)return fn;const w=function(frame){if(depth===0){try{if(frame&&Array.isArray(frame.commands))process(frame.commands);}catch(e){fail(e);}}depth++;try{return fn.apply(this,arguments);}finally{depth--;}};w.__r1113=true;return w;};
@@ -212,18 +225,34 @@ function onClick(ev){try{const el=ev.target?.closest?.('#panel [data-hero],#choo
  if(el.id==='chooseHero'||el.id==='slotConfirmR73'){const sel=document.querySelector('#panel [data-persona-r1113].selected');commit=!!(sel&&want);return;}
  if(!synthetic&&!ev.target.closest('[data-persona-r1113]'))want=false;}catch(e){fail(e);}}
 function hudName(){const n=G(()=>document.getElementById('heroName'),null);if(!n)return;const t=String(n.textContent||''),b=G(()=>HEROES[BASE].name,'라우렌');if(t.includes(b))n.textContent=t.split(b).join(PROFILE.name);else if(!t)n.textContent=PROFILE.name;}
-function nameFix(id,v){if(id!=='heroName'||!formActive())return v;const t=String(v??''),b=G(()=>HEROES[BASE].name,'라우렌');return t.includes(b)?t.split(b).join(PROFILE.name):t;}
+function nameFix(id,v){if(!formActive())return v;if(Object.prototype.hasOwnProperty.call(HUD_TEXT,id))return HUD_TEXT[id];if(id!=='heroName')return v;const t=String(v??''),b=G(()=>HEROES[BASE].name,'라우렌');return t.includes(b)?t.split(b).join(PROFILE.name):t;}
 function wrapHud(){for(const k of ['setHudTextR63R2','setHudText']){const f=G(()=>typeof window[k]==='function'?window[k]:null,null);if(!f||f.__r1113)continue;const w=function(id,v,...a){let x=v;try{x=nameFix(id,v);}catch(e){fail(e);}return f.call(this,id,x,...a);};w.__r1113=true;try{window[k]=w;}catch(e){fail(e);}}}
+// R1120b 하단 스킬 칸: 형상일 때 아이콘을 페르소나 Dots 탄 시트(R1119) 칸으로, Q·본편 E 이름을 그 그림의 기술 이름으로, 초상 테 색을 언주로. 끄면 원래대로(dataset 에 기억).
+const HUD_ICON=Object.freeze({attackIcon:'small-orb',blinkIcon:'diamond',guardIcon:'shield',specialIcon:'vortex',egoIcon:'eye'}),HUD_DOCK=Object.freeze({'#story-wer-w img':'star','#story-wer-e img':'eclipse'});
+const HUD_TEXT=Object.freeze({specialLabel:'내면의 소용돌이'}),HUD_TITLE=Object.freeze({'story-wer-e':'욕망의 일식'});
+const iconUrl=new Map();
+function icon(k){if(iconUrl.has(k))return iconUrl.get(k);const r=load('assets/r1119/fx-'+k+'-flight.webp');if(r.state!=='ready'||!r.frames?.[0])return null;
+ try{const cv=canvas(96,96);cv.__id=k;const g=cv.getContext('2d');g.drawImage(r.frames[0].canvas,2*256+24,24,208,208,0,0,96,96);const u=cv.toDataURL('image/png');iconUrl.set(k,u);return u;}catch(e){fail(e);iconUrl.set(k,null);return null;}}
+function hudIcon(el,k,on){if(!el)return;const d=el.dataset||{};if(on){const u=icon(k);if(!u)return;if(d.r1120src==null)d.r1120src=el.getAttribute('src')||'';if(el.getAttribute('src')!==u)el.src=u;}
+ else if(d.r1120src!=null){el.src=d.r1120src;delete d.r1120src;}}
+function hudSkin(on){if(!hasDoc())return;
+ for(const id in HUD_ICON)hudIcon(document.getElementById(id),HUD_ICON[id],on);for(const q in HUD_DOCK)hudIcon(G(()=>document.querySelector(q),null),HUD_DOCK[q],on);
+ for(const id in HUD_TEXT){const el=document.getElementById(id);if(!el)continue;const d=el.dataset;if(on){if(el.textContent!==HUD_TEXT[id]){if(d.r1120txt==null)d.r1120txt=el.textContent;el.textContent=HUD_TEXT[id];}}else if(d.r1120txt!=null){el.textContent=d.r1120txt;delete d.r1120txt;}}
+ for(const id in HUD_TITLE){const el=document.getElementById(id);if(!el)continue;const d=el.dataset,t=HUD_TITLE[id];if(on){if(el.title!==t){if(d.r1120title==null){d.r1120title=el.title||'';d.r1120aria=el.getAttribute('aria-label')||'';}el.title=t;el.setAttribute('aria-label',t+' · '+String(d.r1120aria).split(' · ').slice(1).join(' · '));}}
+  else if(d.r1120title!=null){el.title=d.r1120title;el.setAttribute('aria-label',d.r1120aria);delete d.r1120title;delete d.r1120aria;}}
+ const pf=document.getElementById('r376Pf');if(pf&&pf.style){const d=pf.dataset,cur=pf.style.getPropertyValue('--hc');if(on){if(cur!==PROFILE.color){if(d.r1120hc==null)d.r1120hc=cur;pf.style.setProperty('--hc',PROFILE.color);}}else if(d.r1120hc!=null){pf.style.setProperty('--hc',d.r1120hc);delete d.r1120hc;}}}
+let hudOn=false;function hud(){const on=formActive();if(on){prewarm();hudSkin(true);hudOn=true;}else if(hudOn){hudSkin(false);hudOn=false;}}
 let uiAt=0;
 function ui(){if(!hasDoc())return;const t=Date.now();if(t<uiAt)return;uiAt=t+200;
  try{if(commit!=null&&!G(()=>loading,true)&&G(()=>started,false)){const p=pl();if(p){const on=commit&&p.hero===BASE;setForm(on);if(on&&typeof toast==='function')toast(PROFILE.title+' · 라우렌의 기술을 언주빛으로 씁니다.',4);}commit=null;want=false;}}catch(e){fail(e);}
  try{if(document.getElementById('panel')?.querySelector('[data-hero]')){css();inject();}}catch(e){fail(e);}
+ try{hud();}catch(e){fail(e);}
  try{if(formActive()){hudName();const pt=document.getElementById('portrait'),u=url(PROFILE.portrait);if(pt&&pt.getAttribute('src')!==u)pt.src=u;}}catch(e){fail(e);}}
 function install(){wrapSave();wrapTick();wrapInst();wrapHud();wrapPfx();if(hasDoc()){try{document.addEventListener('click',onClick,true);}catch(e){fail(e);}}
  try{setInterval(()=>{try{wrapSave();wrapTick();wrapInst();wrapHud();wrapPfx();watch();ui();}catch(e){fail(e);}},250);}catch(e){fail(e);}}
 install();
 window.__STORYWORLD_PERSONA_HERO_R1113__=Object.freeze({revision:REV,profile:PROFILE,field:FIELD,base:BASE,tint:TINT,art:ART,walkSheets:WALK,idleSheets:IDLE,scale:SCALE,orb:ORB,
- unlocked,unlock,formActive,setForm,process,watch,refresh:()=>{try{if(hasDoc()){css();inject();}}catch(e){fail(e);}},
+ unlocked,unlock,formActive,setForm,process,watch,refresh:()=>{try{if(hasDoc()){css();inject();}}catch(e){fail(e);}try{hud();}catch(e){fail(e);}},
  lock(){saved={on:false,off:false};persist();},set(v){saved.off=v===false||v==='off';persist();return !saved.off;},
  images:()=>Object.fromEntries([...IM].map(([k,v])=>[k,v.state])),
  inspect:()=>({revision:REV,unlocked:unlocked(),saved:{...saved},form:formActive(),walk:+walk.w.toFixed(2),want,commit,stats:{...stats},lastError})});
