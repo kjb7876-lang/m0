@@ -24,8 +24,13 @@ async function boot(browser,url,label,options={}){
  await p.waitForFunction(()=>window.__STORYWORLD_SURVIVAL_R600__.here()&&!loading&&window.__STORYWORLD_SURVIVAL_R600__.state().ready,null,{timeout:180000});
  await p.evaluate(()=>{auto=false;guide=false;window.__STORYWORLD_SURVIVAL_R600__.skipNarration();player.invincible=99999;player.attackCD=999;player.specialCD=999;player.egoCD=999;const d=window.__STORYWORLD_HERO_DEFENSE_R720__;d.qaGive(5000);d.qaSkills(true);d.qaFreeze(true);});
  for(const [hero,dx,dy] of [['gunner',3,0],['neon',-3,0]]){
+  // 위치 fixture는 배치창이 전투를 멈춘 뒤 설정한다. 진입 직후 남은 자동 대시/복귀가 위치를 덮지 않게 한다.
+  await p.keyboard.press('b');await p.locator('#r720Panel').waitFor();
   await p.evaluate(([dx,dy])=>{const c=room.survivalR600.centre;player.x=c.x+dx;player.y=c.y+dy;route=[];command=null;target=null;},[dx,dy]);
-  await p.keyboard.press('b');await p.locator('[data-r720buy="'+hero+'"]').click();await p.locator('#r720Close').click();
+  await p.locator('[data-r720buy="'+hero+'"]').click();
+  const placed=await p.evaluate(hero=>window.__STORYWORLD_HERO_DEFENSE_R720__.state().slots.some(s=>s.hero===hero),hero);
+  check(label+' fixture '+hero+'가 실제 배치됨',placed);
+  await p.locator('#r720Close').click();
  }
  await p.evaluate(()=>{const c=room.survivalR600.centre;player.x=c.x;player.y=c.y+6;cam.x=c.x;cam.y=c.y;route=[];command=null;});
  await waitGame(p,.08);
@@ -54,6 +59,7 @@ async function comparison(p,prefix){
   check('본진 시점에서도 먼저 내린 이동 명령 수행',Math.hypot(s.hero.x-boundary.before.x,s.hero.y-boundary.before.y)>.05,s.hero);
   check('본진 카메라는 정화구슬에 고정',Math.hypot(s.cam.x-boundary.core.x,s.cam.y-boundary.core.y)<.001,s.cam);
   await shot(p,'after-pc-base');
+  check('PC 본진 지휘 버튼이 HUD에 가리지 않는다',await p.locator('#r1124Return').evaluate(el=>{const r=el.getBoundingClientRect(),top=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return el===top||el.contains(top);}));
   await p.keyboard.press('h');s=await state(p);check('H로 영웅 복귀하며 반자동 원래 값 복원',!s.view.baseView&&s.auto===false,s.view);
   check('영웅 복귀 카메라는 본영웅으로 돌아온다',Math.hypot(s.cam.x-s.hero.x,s.cam.y-s.hero.y)<.7,{cam:s.cam,hero:s.hero});
   // 반복 누름에 대한 토글은 브라우저 실제 keydown 경로를 통한다.
@@ -101,9 +107,13 @@ async function comparison(p,prefix){
   await p.locator('#r1124TouchHomeBtn').waitFor({state:'visible'});
   const rect=await p.locator('#r1124TouchHomeBtn').boundingBox();
   check('모바일 H 버튼은 화면 안 44px 터치 영역',rect&&rect.height>=44&&rect.x>=0&&rect.y>=0&&rect.x+rect.width<=MOBILE.width&&rect.y+rect.height<=MOBILE.height,rect);
+  const overlaps=await p.locator('#r1124TouchHomeBtn').evaluate(el=>{const r=el.getBoundingClientRect();return [...document.querySelectorAll('#touchActionsR100 button[data-r1021="blink"],#r1021Hero')].map(b=>{const q=b.getBoundingClientRect();return {label:b.textContent.trim(),overlap:q.width>0&&q.height>0&&Math.min(r.right,q.right)>Math.max(r.left,q.left)&&Math.min(r.bottom,q.bottom)>Math.max(r.top,q.top)};});});
+  check('모바일 H 버튼은 기존 회피/배치 버튼과 겹치지 않는다',overlaps.length>=2&&overlaps.every(x=>!x.overlap),overlaps);
   await shot(p,'after-touch-hero');await p.locator('#r1124TouchHomeBtn').tap();
   check('모바일 터치로 본진 진입',(await state(p)).view.baseView);
   await waitGame(p,.08);await shot(p,'after-touch-base');
+  const barOverlaps=await p.locator('#r1124CommandBar').evaluate(el=>{const r=el.getBoundingClientRect();return [...document.querySelectorAll('#heroCard,#touchActionsR100 button')].map(b=>{const q=b.getBoundingClientRect();return {id:b.id||b.getAttribute('aria-label'),overlap:q.width>0&&q.height>0&&Math.min(r.right,q.right)>Math.max(r.left,q.left)&&Math.min(r.bottom,q.bottom)>Math.max(r.top,q.top)};});});
+  check('모바일 지휘 바는 체력/원형 조작 버튼과 겹치지 않는다',barOverlaps.length>0&&barOverlaps.every(x=>!x.overlap),barOverlaps);
   await p.locator('#r1124Return').tap();check('모바일 터치로 영웅 복귀',!(await state(p)).view.baseView);
   await p.locator('#r1124TouchHomeBtn').waitFor({state:'visible'});
   check('페이지 JavaScript 오류 없음',pageErrors.length===0,pageErrors);
