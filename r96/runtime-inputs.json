@@ -10403,7 +10403,8 @@
     "assets/r1153/slayer-brand.webp",
     "assets/r1153/status-icons.webp",
     "assets/r1153/status-overlay.webp",
-    "dots-status-r1153.js"
+    "dots-status-r1153.js",
+    "assets/r1147/bosses/dist06-hit4.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11478,5 +11479,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "26b06a6e18c11a760369d139d3444588c8dd50b49f9bccb181df470e81b60539"
+  "runtimeManifestSHA256": "315b7d372e399717ccb6beea7b41d678f8f83a1cc0d2ee092b8f6aee139f5b66"
 }

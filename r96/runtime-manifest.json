@@ -11178,6 +11178,11 @@
       "sha256": "50f55da506eccc02238cb62c175ba5facd2d1f2f844858727d1106c0a5bae56d"
     },
     {
+      "path": "assets/r1147/bosses/dist06-hit4.webp",
+      "bytes": 262440,
+      "sha256": "ee7d48250280cfd379112c6d5b830f0241ea995fd8520a15262eb8586adeb2a3"
+    },
+    {
       "path": "assets/r1147/bosses/dist06-idle6.webp",
       "bytes": 382598,
       "sha256": "e5fcb2884523e4e8bb71c4a1c837f49a0fc1e7e783cdee2c86da25f7988a05f5"
@@ -53249,8 +53254,8 @@
     },
     {
       "path": "boss-motion-r620.js",
-      "bytes": 10697,
-      "sha256": "199dfdb44b78e77e092cc595c60b5f823b9d319ab726bab07dd274e323654918"
+      "bytes": 10852,
+      "sha256": "8f8146ce1a912127f5d81832547f597fac1e28c4516ebcad2818e0b68c44bc43"
     },
     {
       "path": "boss-pattern-fx-r1040.js",
@@ -55968,8 +55973,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11193,
-  "totalBytes": 1351139188,
+  "fileCount": 11194,
+  "totalBytes": 1351401783,
   "webHTMLSha256": "1a6c70e3cf985d26d063f0323cf1ab7296beb46b3414693797ee8c0f9b31a4be",
   "largest": [
     {
