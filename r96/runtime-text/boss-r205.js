@@ -7,10 +7,13 @@
  *  ③ 보스 환영이 풀리면 보스가 환영이 날아간 자리(준비 때 겨눈 지점) 쪽으로 이동한다(최대 7칸, 영웅 1칸 앞에서, 벽에 막히면 멈춤, 0.5초).
  *  ④ 광폭화: 보스 체력이 30% 이하가 되면 한 번 — 그림 크기 2배, 그 보스가 새로 만드는 장판·투사체·패턴 범위 2배, 공격력 6% 증가. 붉은 기운과 알림.
  *  협동 중에는 판정 부분(②③④)을 쓰지 않는다. storyworld.r205.boss {midHalf,echoBossOnly,echoMove,enrage} 로 끈다.
+ *  R1150(사용자 2026-11-18 07:37Z "모든 모드 보스광폭화 커지는거 원크기의 6프로정도만 조금 커지게하고 모든스펙 66프로 올려줘 초당 체력재생도 0.6프로"):
+ *   광폭화 그림 2배 → 1.06배(판정 반지름은 원래부터 그대로). 공격력 ×1.66(전 1.06)·이동 속도 ×1.66·공격 속도(쿨다운 e.cd 가 1.66배 빨리 줄어듦)·방어(받는 피해 ÷1.66).
+ *   광폭화 중 초당 최대 체력 0.6% 재생(최대 체력까지, 죽은 보스 제외, R384 서사 붙잡기 중엔 멈춤). 스킬 범위 2배는 그대로. 협동 중엔 예전처럼 광폭화 없음.
  * Canonical source; copied to runtime-text by scripts/sync-r99.py. */
 (()=>{'use strict';
 if(window.__STORYWORLD_BOSS_R205__)return;
-const REV='R221-boss-4',KEY='storyworld.r205.boss';
+const REV='R221-boss-5',KEY='storyworld.r205.boss';
 const DEFAULTS={midHalf:true,echoBossOnly:true,echoMove:true,enrage:true,minSize:true,enrageLite:true};
 const prefs={...DEFAULTS};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(DEFAULTS))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={midDraws:0,echoStopped:0,echoCancelled:0,echoGaps:0,moves:0,moveDist:0,enraged:0,scaledHazards:0,enragedDraws:0,errors:0};let lastError=null;
@@ -22,7 +25,7 @@ const F=()=>window.__STORYWORLD_FIELDS_R61__;
 const bossClass=e=>!!(e&&(e.boss||e.persona||e.cosmic||e.trial));
 const R137=()=>window.__STORYWORLD_COMBAT_R137__;
 const midClass=e=>!!e&&!e.boss&&(e.midboss===true||e.wardChampionR81===true||!!R137()?.midClass?.(e));
-const ENRAGE_AT=.3,ENRAGE_DMG=1.06,ENRAGE_SIZE=2,ENRAGE_RANGE=2,ECHO_GAP=26,MOVE_MAX=7;
+const ENRAGE_AT=.3,ENRAGE_STAT=1.66,ENRAGE_DMG=ENRAGE_STAT,ENRAGE_SIZE=1.06,ENRAGE_REGEN=.006,ENRAGE_RANGE=2,ECHO_GAP=26,MOVE_MAX=7;
 // R217(사용자 2026-11-02 "뿌리보스 분신사용쿨타임 증가 현재의 66프로이상너프", "보스들 크기 플레이어 최소1.6배이상은되도록 보라검천사보스 지금 너무 작게나옴"):
 //  · 뿌리의 문지기(dist00 보스) 환영 간격 ×3(26초 → 78초) — 사용 빈도 약 67% 줄임.  · 보스·중간보스는 그림 키가 영웅의 1.6배 아래로 내려가지 않게(중간보스 절반 규칙 뒤에 적용).
 const ROOT_GAP_MUL=3,MIN_BOSS_H=1.6;
@@ -55,8 +58,9 @@ function stepMoves(dt){const t=T();for(const m of [...moving]){const e=m.e;if(!e
 // ---- ④ 광폭화 ------------------------------------------------------------------------------------
 const RANGE_KEYS=['radius','r','range','width','length','size','reach','spread','outer','inner'];
 function scaleRanges(o,k){if(!o||typeof o!=='object')return 0;let n=0;for(const key of RANGE_KEYS)if(typeof o[key]==='number'&&Number.isFinite(o[key])&&o[key]>0){o[key]*=k;n++;}return n;}
-function enrage(e){if(e.r205Enraged)return;e.r205Enraged={at:T(),dmgBefore:e.damage};
+function enrage(e){if(e.r205Enraged)return;e.r205Enraged={at:T(),dmgBefore:e.damage,speedBefore:e.speed};
  if(Number.isFinite(e.damage))e.damage*=ENRAGE_DMG;
+ if(Number.isFinite(e.speed)&&e.speed>0)e.speed*=ENRAGE_STAT;/* R1150 이동 속도 */
  const sh=e.combatProfile?.attackShape;if(sh&&!sh.r205)scaleRanges(sh,ENRAGE_RANGE)&&(sh.r205=true);
  stats.enraged++;try{if(typeof toast==='function')toast((e.name||'보스')+' — 광폭화',2.2);}catch(_){}}
 function enrageTick(){const list=typeof hazards!=='undefined'&&Array.isArray(hazards)?hazards:null;
@@ -70,10 +74,19 @@ function enrageTick(){const list=typeof hazards!=='undefined'&&Array.isArray(haz
   const R0=+h.radius;if(prefs.enrageLite!==false&&h.type==='field'&&Number.isFinite(R0)&&list.some(o=>o!==h&&o.r205Big&&(o.owner??o.ownerId??o.r61Owner)===owner&&o.type==='field'&&Number.isFinite(+o.radius)&&Math.hypot(o.x-h.x,o.y-h.y)<+o.radius)){stats.liteFields=(stats.liteFields||0)+1;}
   else if(scaleRanges(h,ENRAGE_RANGE)){stats.scaledHazards++;if(h.type==='field')h.r205Big=true;}}}}
 
+// R1150: 광폭화 중 공격 속도(쿨다운 1.66배 빨리)·초당 최대 체력 0.6% 재생. 재생은 R384 서사 붙잡기(hold) 동안 멈춘다(붙잡힌 보스가 음성 동안 차오르지 않게).
+const holdNow=()=>{try{return window.__STORYWORLD_CINEMA_SYNC_R384__?.inspect?.()?.bossMode==='hold';}catch(_){return false;}};
+function enrageAfter(dt){if(!(dt>0)||!Number.isFinite(dt))return;let hold=null;
+ for(const e of room.enemies||[]){if(!e||!e.r205Enraged||!(e.hp>0)||!bossClass(e))continue;
+  if(Number.isFinite(e.cd)&&e.cd>0)e.cd=Math.max(0,e.cd-dt*(ENRAGE_STAT-1));
+  if(Number.isFinite(e.maxHp)&&e.maxHp>0&&e.hp<e.maxHp){if(hold===null)hold=holdNow();if(!hold){e.hp=Math.min(e.maxHp,e.hp+e.maxHp*ENRAGE_REGEN*dt);stats.regen=(stats.regen||0)+1;}}}}
+// R1150: 방어 — 광폭화 보스가 받는 피해 ÷1.66.
+if(typeof hitEnemy==='function'){const base=hitEnemy;hitEnemy=function(e,value,...a){try{if(prefs.enrage&&e&&e.r205Enraged&&e.hp>0&&bossClass(e)&&solo()&&Number.isFinite(value)&&value>0){value/=ENRAGE_STAT;stats.guarded=(stats.guarded||0)+1;}}catch(err){fail(err);}return base.call(this,e,value,...a);};}
 // ---- 연결 ----------------------------------------------------------------------------------------
 if(typeof tick==='function'){const base=tick;tick=function(dt,...a){
  try{if(solo()&&live()){if(prefs.echoBossOnly)gateEcho();if(prefs.echoMove)watchEcho();if(prefs.enrage)enrageTick();}}catch(e){fail(e);}
- const r=base.call(this,dt,...a);try{if(moving.size&&live())stepMoves(Number.isFinite(dt)?dt:1/60);}catch(e){fail(e);}return r;};}
+ const r=base.call(this,dt,...a);try{if(moving.size&&live())stepMoves(Number.isFinite(dt)?dt:1/60);}catch(e){fail(e);}
+ try{if(prefs.enrage&&solo()&&live())enrageAfter(dt);}catch(e){fail(e);}return r;};}
 // R217: 보스·중간보스의 "그려진 몸"(기록기 그림 명령 높이 × 불투명 세로 비율)이 영웅 몸(actorHeight × .98, R114 맞춤 기준)의 1.6배보다 작으면 발밑 기준으로 키운다.
 //  그림마다 투명 여백·가로로 넓은 날개 때문에 정해진 배율(defScale)만으로는 실제 크기가 영웅과 비슷하게 나왔다(보라검천사 ≈1.07배 실측).
 const HERO_BODY=.98,MAX_FIT=3;const recOK=()=>typeof ctx==='object'&&!!ctx&&Array.isArray(ctx.commands)&&typeof actorHeight==='function';
@@ -96,6 +109,6 @@ if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a
  const big=prefs.minSize&&recOK()&&e.hp>0&&(bossClass(e)||midClass(e)||e.midboss),st=big?ctx.commands.length:0;
  try{return base.apply(this,arguments);}finally{if(k!==1)e.defScale=ds;if(big)try{fitMin(st);}catch(err){fail(err);}}};}
 function set(p={}){for(const k of Object.keys(DEFAULTS))if(typeof p[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
-window.__STORYWORLD_BOSS_R205__=Object.freeze({revision:REV,set,bossClass,midClass,enrage,scaleRanges,constants:{ENRAGE_AT,ENRAGE_DMG,ENRAGE_SIZE,ENRAGE_RANGE,ECHO_GAP,MOVE_MAX,ROOT_GAP_MUL,MIN_BOSS_H},rootBoss,gapOf,
+window.__STORYWORLD_BOSS_R205__=Object.freeze({revision:REV,set,bossClass,midClass,enrage,scaleRanges,constants:{ENRAGE_AT,ENRAGE_DMG,ENRAGE_STAT,ENRAGE_REGEN,ENRAGE_SIZE,ENRAGE_RANGE,ECHO_GAP,MOVE_MAX,ROOT_GAP_MUL,MIN_BOSS_H},rootBoss,gapOf,
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},moving:moving.size,lastError})});
 })();
