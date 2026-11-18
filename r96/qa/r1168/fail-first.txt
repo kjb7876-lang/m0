@@ -1,0 +1,17 @@
+FAIL ① 맞은 순간 cult05 피격 0칸 (assets/r380/mobs/cult-mech-legs-walk-d1.webp)
+PASS ① 피벗·보이는 키·좌우(오른쪽) 그대로
+FAIL ② 4칸 차례 뒤 원래 그림 (b,b,b,b,b,b,b,b,b,b,b,b,b,b)
+FAIL ① 맞은 순간 cult05 피격 0칸 (assets/r380/mobs/cult-mech-legs-walk-d1.webp)
+PASS ① 피벗·보이는 키·좌우(왼쪽) 그대로
+PASS ③ 공격 중엔 원래 그림
+PASS ③ 죽으면 원래 그림
+PASS ④ R1156 u203-e3-mech 그대로
+PASS ④ R1156 u203-e2-mech 그대로
+PASS ⑤ 자산 assets/r1168/mob-hit/cult05-hit4.webp 1280×320
+PASS ⑤ 출처표(원본·게임 sha·파생 sha 일치)
+PASS ⑤ 몸 키 게임에 맞춤 (290×0.7552 → 219)
+FAIL ⑤ manifest·inputs 등록
+FAIL ⑤ verify-r96-public.py 접두
+FAIL ⑤ pages.yml CPU 검사 줄
+PASS ⑤ runtime-text 사본 = client-source
+FAILED 6

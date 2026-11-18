@@ -1,0 +1,52 @@
+{
+ "count": 6,
+ "before": [
+  "assets/r380/mobs/cult-mech-legs-walk-d1.webp",
+  "assets/r380/mobs/cult-mech-legs-walk-d1.webp",
+  "assets/r380/mobs/cult-mech-legs-walk-d1.webp"
+ ],
+ "after": [
+  [
+   "assets/r1168/mob-hit/cult05-hit4.webp",
+   [
+    0,
+    0,
+    320,
+    320
+   ],
+   0
+  ],
+  [
+   "assets/r1168/mob-hit/cult05-hit4.webp",
+   [
+    0,
+    0,
+    320,
+    320
+   ],
+   0
+  ],
+  [
+   "assets/r1168/mob-hit/cult05-hit4.webp",
+   [
+    0,
+    0,
+    320,
+    320
+   ],
+   0
+  ]
+ ],
+ "stats": {
+  "revision": "R1156b-mob-hit-2",
+  "on": true,
+  "stats": {
+   "hits": 9,
+   "frames": 3,
+   "waiting": 12,
+   "rewraps": 2,
+   "errors": 0
+  },
+  "lastError": null
+ }
+}
