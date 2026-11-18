@@ -13,7 +13,7 @@
  * 상태는 영웅 몸(player 객체)마다 따로 둔다: 생존 모드 배치 영웅(R720)이 player 를 몸으로 바꿔 끼워 공격할 때도 그 몸의 공격력·자리·대기를 쓴다.
  * 그림: R946-2(2026-11-13) Dots CX-0087LC 추가1 실버·보라판 시트를 씀(assets/r946, index.json) — 은빛 거성 LC-01, 심연 왜성 LC-02 구 + LC-03 바닥 원반,
  *  쌍성 소멸 충전 LC-04 + 소멸탄 LC-05, 유성 궤도 조형물 고리 LC-07. 시트가 아직 안 읽혔거나 크기가 다르면 예전 코드 그림으로 그린다.
- *  Dots 가 보류한 LC-05b 꼬리 띠·LC-06 항성 반발·LC-08 중력 폭발과 결과가 없는 LC-09 돌 파편은 코드 그림을 그대로 쓴다. 소리는 기존 R546 라우렌 공격·고유기 소리를 다시 씀.
+ *  LC-08 중력 폭발은 R1151 이 Dots r2 시트(assets/r1151/lauren-boom.webp)로 붙였다. Dots 가 보류한 LC-05b 꼬리 띠·LC-06 항성 반발과 결과가 없는 LC-09 돌 파편은 코드 그림을 그대로 쓴다. 소리는 기존 R546 라우렌 공격·고유기 소리를 다시 씀.
  * 끄기: localStorage['storyworld.r946.celestial']='{"on":false}'
  */
 (()=>{'use strict';
@@ -165,7 +165,7 @@ function step(){const t=T(),rm=curRoom();if(rm!==lastRoom){if(lastRoom!==null)ca
  if(!on()||blockedNow()){cancel();return;}
  {const o=P();if(o&&(o.hero===HERO||egoOwner(o)))askSheets();}
  acts=acts.filter(x=>{try{if(x.kind!=='meteor'&&x.kind!=='repulse'&&!ownerOk(x.owner)&&x.kind!=='red'){return false;}const keep=stepAct(x,t,dt);if(!keep)restoreAct(x);return keep;}catch(err){fail(err);restoreAct(x);return false;}});
- runPushers(dt);pullers=pullers.filter(p=>{if(t>p.until)return false;pull(p.c,p.r,MET_PULL_V,.4,dt);return true;});booms=booms.filter(b=>t-b.t0<.75);}
+ runPushers(dt);pullers=pullers.filter(p=>{if(t>p.until)return false;pull(p.c,p.r,MET_PULL_V,.4,dt);return true;});booms=booms.filter(b=>t-b.t0<Math.max(.75,BOOM_LIFE));}
 if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);
  try{if(typeof started==='undefined'||started)step();}catch(err){fail(err);cancel();}sentinel(acts.length>0||booms.length>0);return r;};}
 // ---- 그리기(효과 표지 하나, 3D 기록기에는 ctx.scope 로 자리 주인을 붙인다) -----------------------------------------
@@ -176,8 +176,11 @@ const RED=PALE,RED_HOT=SILVER,BLUE=DEEP,BLUE_HOT=DEEP_HOT;
 const SDIR='assets/r946/',SCELL=192,SCOLS=6;
 const SHEETS={red:{n:'lauren-red',frames:24,fps:12.5,loop:true,piv:[141,137],body:145},blue:{n:'lauren-blue',frames:24,fps:12.5,loop:true,piv:[128,126],body:127},
  disk:{n:'lauren-blue-disk',frames:24,fps:12.5,loop:true,piv:[127,134],body:192},fuse:{n:'lauren-fuse',frames:12,fps:24,loop:false,piv:[128,128],body:107,crop:[60,60,196,200]},
- violet:{n:'lauren-violet',frames:24,fps:12.5,loop:true,piv:[144,128],body:150},aura:{n:'lauren-aura',frames:24,fps:12.5,loop:true,piv:[128,124],body:194}};
-const SPATH=k=>SDIR+SHEETS[k].n+'.webp';let sheetsOn=true,askAt=-1e9;
+ violet:{n:'lauren-violet',frames:24,fps:12.5,loop:true,piv:[144,128],body:150},aura:{n:'lauren-aura',frames:24,fps:12.5,loop:true,piv:[128,124],body:194},
+ // R1151 Dots CX-0141CE LC-08 중력 폭발 r2(흡입 1~10칸 → 바깥으로 터짐 11~16칸 → 먹 잔광 17~24칸). 충돌 순간을 11번째 칸(0.8초)에 맞춰 그 뒤만 한 번 재생.
+ boom:{n:'lauren-boom',dir:'assets/r1151/',frames:24,fps:12.5,loop:false,piv:[128,128],body:186}};
+const BOOM_AT=.8,BOOM_LIFE=(24/12.5)-BOOM_AT;
+const SPATH=k=>(SHEETS[k].dir||SDIR)+SHEETS[k].n+'.webp';let sheetsOn=true,askAt=-1e9;
 // 크기가 시트 규격(6열×192)과 다르면 쓰지 않는다(엉뚱한 그림·덜 읽힌 그림 방지)
 function simg(k){try{const r=typeof readyImage==='function'?readyImage(SPATH(k)):null,im=r&&r.image;if(!im)return null;const w=im.naturalWidth||im.width||0,h=im.naturalHeight||im.height||0,rows=Math.ceil(SHEETS[k].frames/SCOLS);return w===SCOLS*SCELL&&h===rows*SCELL?im:null;}catch(_){return null;}}
 // 엔진 그림 저장소는 지역 이동 때 비워질 수 있다 → 안 읽힌 시트만 게임 시간 2초마다 다시 부탁
@@ -251,10 +254,12 @@ function drawMeteor(x,t){const {z,AH}=scale(),o=x.owner&&ownerOk(x.owner)?x.owne
      if(typeof sprite==='function')sprite(r.path,q.x+wob,cy,h,{alpha:1});else{const w=h*b.w/b.h;if(b.x!=null)ctx.drawImage(row.image,b.x,b.y,b.w,b.h,q.x-w/2+wob,cy-h,w,h);else ctx.drawImage(row.image,q.x-w/2+wob,cy-h,w,h);}stats.draws++;return;}}
    const s=Math.max(AH*.62,h);rockFaces(q.x+wob,cy-s*.4,s,r.shape||i,z);stats.draws++;
   }finally{ctx.restore();}});});}
-function drawBoom(b,t){const {z,T1,AH}=scale(),v=Math.min(1,(t-b.t0)/.75),q=project(b.x,b.y),R=MET_R*b.k*T1*.5*(.3+.8*Math.sqrt(v)),a=1-v,id='r946:meteor:boom:'+b.t0.toFixed(2)+':'+b.x.toFixed(1);
+function drawBoom(b,t){const {z,T1,AH}=scale(),u0=t-b.t0,v=Math.min(1,u0/.75),q=project(b.x,b.y),R=MET_R*b.k*T1*.5*(.3+.8*Math.sqrt(v)),a=1-v,id='r946:meteor:boom:'+b.t0.toFixed(2)+':'+b.x.toFixed(1);
  sc({id:id,kind:'effect',pxfSide:'hero',x:b.x,y:b.y,groundAligned:true},()=>{ring(q,R,VIO_HOT,Math.max(2,8*z*a),a,.18*a);ring(q,R*.6,VIO,Math.max(1,3*z),a,0);
   ctx.save();try{ctx.globalAlpha*=a;ctx.fillStyle=`rgba(${VOID},.55)`;ctx.beginPath();ctx.ellipse(q.x,q.y,R*.35,R*.17,0,0,Math.PI*2);ctx.fill();}finally{ctx.restore();}});
- if(v<.35)sc({id:id+':flash',kind:'effect',pxfSide:'hero',x:b.x,y:b.y+.01},()=>glowOrb(q.x,q.y-AH*.3,AH*.45*(1-v/.35)+AH*.1,VIO_HOT,VIO,1-v/.35));}
+ // R1151: LC-08 시트가 있으면 섬광 구 대신 시트(충돌 = 11번째 칸). 바닥 고리(범위 표시)는 그대로 둔다.
+ let sh=false;if(u0<BOOM_LIFE)sc({id:id+':sheet',kind:'effect',pxfSide:'hero',x:b.x,y:b.y+.01},()=>{sh=sheet('boom',BOOM_AT+u0,q.x,q.y-AH*.3,MET_R*b.k*T1*1.05);});
+ if(!sh&&v<.35)sc({id:id+':flash',kind:'effect',pxfSide:'hero',x:b.x,y:b.y+.01},()=>glowOrb(q.x,q.y-AH*.3,AH*.45*(1-v/.35)+AH*.1,VIO_HOT,VIO,1-v/.35));}
 function draw(){if(typeof project!=='function'||typeof ctx==='undefined'||!ctx)return;const t=T();
  for(const x of acts){try{if(x.kind==='repulse'){if(x.ego&&x.egoTint==='wr'){egoPaint=true;egoFilterNow=egoFilterOf(x);try{drawRepulse(x,t);}finally{egoPaint=false;egoFilterNow=EGO_FILTER;}}else drawRepulse(x,t);}else if(x.ego){egoPaint=true;egoFilterNow=egoFilterOf(x);try{if(x.kind==='red')drawRed(x,t);else if(x.kind==='blue')drawBlue(x,t);else if(x.kind==='violet')drawViolet(x,t);}finally{egoPaint=false;egoFilterNow=EGO_FILTER;}}else if(x.kind==='red')drawRed(x,t);else if(x.kind==='blue')drawBlue(x,t);else if(x.kind==='violet')drawViolet(x,t);else if(x.kind==='meteor')drawMeteor(x,t);}catch(err){fail(err);}}
  for(const b of booms){try{drawBoom(b,t);}catch(err){fail(err);}}stats.draws++;}

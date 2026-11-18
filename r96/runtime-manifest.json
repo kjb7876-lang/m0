@@ -11148,6 +11148,11 @@
       "sha256": "9e77abcb2e57ef95bc269e8924c450bfcdcdf3fc2f7099536545bf7047379c42"
     },
     {
+      "path": "assets/r1151/lauren-boom.webp",
+      "bytes": 143384,
+      "sha256": "736705eaef5d1fe05d894b680c4d820bdd4d01f6e097f274c5bf88c21f850c26"
+    },
+    {
       "path": "assets/r116/mobs/M001-hit.png",
       "bytes": 141513,
       "sha256": "35cffa3fe6d6c22cdb75e06e1cca55a673f06c10afa28087d749082c40c77b71"
@@ -54439,8 +54444,8 @@
     },
     {
       "path": "lauren-celestial-r946.js",
-      "bytes": 44172,
-      "sha256": "000847cc4ef8a6d60708a6c9bf5b1dd4300edc8eb2f40fa463a55964886af9ea"
+      "bytes": 44931,
+      "sha256": "c2e3da06f9341cddeb1bf5efd645787dc69ea93bd47dedfbc79e2a4a662792bc"
     },
     {
       "path": "lauren-gravity-r561.js",
@@ -55763,8 +55768,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11152,
-  "totalBytes": 1345955982,
+  "fileCount": 11153,
+  "totalBytes": 1346100125,
   "webHTMLSha256": "51cefc6de1046aa2b5f0e6c8c8c6ad74e0a227c26b5c8c5be757432a838108f4",
   "largest": [
     {
