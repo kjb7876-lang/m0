@@ -585,6 +585,8 @@ jobs:
         run: node r96/qa/r962/r962-cpu-check.cjs
       - name: R970 777 developer test mode level input (level-based skill points, same rule as normal play, 1..99) CPU check
         run: node r96/qa/r970/r970-cpu-check.cjs
+      - name: R1141 narrative text in the bottom-right corner box (phone/PC placement avoids orbs, buttons, hotbar; settings top toggle shares the R1021 subtitle setting) CPU check
+        run: node r96/qa/r1141/narr-corner-cpu-check.cjs
       - name: R1126 777 developer test mode passive point input (sets remaining points exactly, 0..999999, empty/non-number rejected) CPU check
         run: node r96/qa/r1126/cheat-points-cpu-check.cjs
       - name: R1138 region transition curtain (heavy first draws finish behind a loading-look cover; engine order, results and state untouched; always lifted) CPU check
