@@ -517,6 +517,8 @@ jobs:
         run: node r96/qa/r976/r976-cpu-check.cjs
       - name: R1177 samong episode pixel leftovers (S-06 pixel mobs, pixelfx sheets) to painted art CPU check
         run: node r96/qa/r1177/r1177-cpu-check.cjs
+      - name: R1177b S-06 상대 초인·지휘 개체 Dots 걷기·공격·피격·사망 시트 연결
+        run: node r96/qa/r1177/r1177b-cpu-check.cjs
       - name: R701 survival 77s choice window, difficulty, hero picker CPU check
         run: node r96/qa/r701/r701-cpu-check.cjs
       - name: R850 survival play-test fixes (arena terrain lock, hospital maze skip, next-stage prefetch, moving HUD) CPU check
