@@ -1,0 +1,11 @@
+FAIL 모듈 파일 없음: client-source/mob-hit-r1156.js
+FAIL ⑥ runtime-text 사본 = client-source
+FAIL ⑥ 스크립트 태그
+FAIL ⑥ verify-r96-public.py 기대 목록
+FAIL ⑥ manifest·inputs
+FAIL ⑥ pages.yml CPU 검사 줄
+FAIL ⑥ 자산 assets/r1156/mob-hit/u203-e3-hit4.webp 1024×256 등록
+FAIL ⑥ 자산 assets/r1156/mob-hit/u203-e2-hit4.webp 1024×256 등록
+FAIL ⑥ 자산 assets/r1156/mob-hit/swamp-root-hit4.webp 1492×320 등록
+PASS ⑥ 출처 표 3장
+FAILED 9

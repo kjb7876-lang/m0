@@ -1,0 +1,31 @@
+PASS ① 시트 아홉 장, 크기 맞음
+PASS ① 낮은 알파(1~16) 정리 (dmark:0 dchain:50 dhit:0 dorb:0 dtail:0 dember:0 lbody:57 lstart:146 lend:35)
+PASS ① 레이저 시작(HOLD 불투명 배경) → 배경·격자 빠짐 (모서리 알파 0)
+PASS ① 몸통·번개(HOLD 이음매) → 칸 양 끝이 투명으로 줄어듦 (lbody:0/0 dchain:0/0)
+PASS ① 출처 표(index.json, sha256)
+FAIL ② 시트 표에 Dots 아홉 장
+PASS ② 매니페스트에 새 자산
+FAIL ② runtime-text 사본 = client-source
+PASS ② pages.yml CPU 검사 줄
+PASS ② 기록기가 못 받는 필터 없음
+FAIL ③ 표식 걸린 적 머리 위 표식 눈 (0)
+FAIL ③ 번개 = 먹 번개 시트(네온 시트 안 씀)
+FAIL ③ 맞은 적에 적중 섬광
+PASS ③ 번개 칸 256×128
+PASS ③ 표식이 끝나면 눈도 사라짐
+PASS ③ 연쇄 피해는 그대로 (4)
+FAIL ④ 구슬 = 붉은 눈 구슬(은빛 거성 구 안 씀)
+FAIL ④ 도는 구슬·날아가는 구슬 뒤 꼬리
+FAIL ④ 화상 = 화상 불씨(헌터 시트 안 씀)
+PASS ④ 구슬 칸 256
+PASS ④ 오류 0·save 짝 (null)
+PASS ⑤ 레이저 발동 (1)
+FAIL ⑤ 시작 구·몸통·끝 터짐 모두 Dots (0/0/0)
+PASS ⑤ 주인 id 그대로(r946:violet:laser)
+FAIL ⑤ 시트가 있으면 임시 코드 선 안 그림
+PASS ⑤ 판정 그대로(일반 몹 즉사)
+PASS ⑥ Dots 시트 전엔 예전 시트
+FAIL ⑥ 안 읽힌 Dots 시트를 부탁함
+FAIL ⑦ persona-hero 에 Dots 예외·판 이름
+PASS ⑧ W·레이저 수치 그대로
+FAILED 12

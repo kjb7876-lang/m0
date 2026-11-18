@@ -193,7 +193,8 @@ if(exists){
   s=sheetEnv();s.room.enemies.push(mob('a',13,10));for(let i=0;i<3;i++)s.room.props.push(prop('p'+i,10+i,11));A(s).qaForce('meteor');heroHit(s,'a');step(s,10);
   ok('유성 궤도 wraps rocks with LC-07 aura sheet',used(s,'lauren-aura').length>0);
   s=sheetEnv();s.room.enemies.push(mob('a',13,10));A(s).qaForce('repulse');heroHit(s,'a');step(s,4);
-  ok('항성 반발 keeps code drawing (LC-06 on hold)',vm.runInContext('drawn',s).every(d=>!/assets\/r946\//.test(d.src)));
+  // R1151(사용자 2026-11-18 'HOLD 도 고쳐 적용'): LC-06 을 고쳐 붙였으므로 항성 반발은 LC-06 시트만 쓴다(다른 시트는 안 섞임).
+  ok('항성 반발 draws only the R1151 LC-06 sheet',vm.runInContext('drawn',s).some(d=>d.src==='assets/r946/lauren-repulse.webp')&&vm.runInContext('drawn',s).filter(d=>/assets\/r946\//.test(d.src)).every(d=>d.src==='assets/r946/lauren-repulse.webp'));
   s=sheetEnv(false);s.room.enemies.push(mob('a',14,10));A(s).qaForce('red');heroHit(s,'a');step(s,6);
   ok('missing sheet → code orb fallback and the sheet is requested',vm.runInContext('arcs',s).some(r=>r>=16.5)&&vm.runInContext('asked',s).some(p=>p==='assets/r946/lauren-red.webp'));
   s=sheetEnv();A(s).qaSheets(false);s.room.enemies.push(mob('a',14,10));A(s).qaForce('red');heroHit(s,'a');step(s,6);

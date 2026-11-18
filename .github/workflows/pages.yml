@@ -667,6 +667,12 @@ jobs:
         run: node r96/qa/r1144/persona-wer-cpu-check.cjs
       - name: R1145 persona hero basic attack without Lauren traces (R411 hit-teleport and R302 Lauren-violet bolt/impact copies baked to eonju in persona form only) CPU check
         run: node r96/qa/r1145/persona-basic-cpu-check.cjs
+      - name: R1152 persona W/E/R and (jin) laser use the Dots sheets (CX-0143PL/0144PW/0145PR; HOLD seams feathered, opaque background keyed out; colours kept, hit logic unchanged) CPU check
+        run: node r96/qa/r1152/persona-dots-cpu-check.cjs
+      - name: R1156 persona boss base rear hit = Dots CX-0136 A5 r2 (support foot aligned, 4 of 6 frames, R1119 sheet as load fallback) CPU check
+        run: node r96/qa/r1156/persona-rear-hit-cpu-check.cjs
+      - name: R1156b mob hit4 = Dots CX-0136 A4 r2 HOLD fixed (u203-e3 knight, u203-e2 void, swamp root stalker; recoil sheared to ~10%, colour matched; art only) CPU check
+        run: node r96/qa/r1156/mob-hit-cpu-check.cjs
       - name: R1153 Dots status effects 9 kinds (per-actor icons + body overlays in every mode), samong sigils for Lauren/Hunter/Slayer/Gunner, Seoha clockwork, Slayer brand 1-5, Gunner R reticle + chain beam, deploy ring tinted by hero colour CPU check
         run: node r96/qa/r1153/dots-status-cpu-check.cjs
       - name: R1098 samong faces (Michaela final boss uses her own sheet, R161 puppet repainted as an ink-and-white-thread doll so it no longer looks like Hwando) CPU check
@@ -721,6 +727,8 @@ jobs:
         run: node r96/qa/r1014/r1014-cpu-check.cjs
       - name: R1135 survival boss count per difficulty (easy 1, normal 2, hard 3, nightmare 6), per-boss balance with the 66x floor, spread spawn spots CPU check
         run: node r96/qa/r1135/r1135-cpu-check.cjs
+      - name: R1150 boss enrage (all modes) 1.06x body, all stats +66% (damage, move, attack speed, defense), 0.6% max HP regen per second CPU check
+        run: node r96/qa/r1150/r1150-cpu-check.cjs
       - name: R537 spider cave mud-back spider and memory-carrier spider, swamp root stalker renamed CPU check
         run: node r96/qa/r537/r537-cpu-check.cjs
       - name: R450 zone weather (63 story zones indoor/outdoor/cave/void, dust instead of rain indoors, canon weather, double-sided streaks) CPU check
@@ -791,6 +799,8 @@ jobs:
         run: node r96/qa/r1036/r1036-dirflip-cpu-check.cjs
       - name: R1032 unique gear (J seal, rose seal, hero weapons) + dream-fragment n^2 upgrades + K passive / I gear+memory / B placement windows CPU check
         run: node r96/qa/r1032/r1032-cpu-check.cjs
+      - name: R1154 EGO and Persona keep their own unique weapon level, name and art (separate from Hwando and Lauren) CPU check
+        run: node r96/qa/r1154/r1154-gear-cpu-check.cjs
       - name: R1039 hero EGO aura and hit/hurt code sprites replaced by painted R100 frame sheets CPU check
         run: node r96/qa/r1039/r1039-cpu-check.cjs
       - name: R1046 hidden hero EGO (unlock after S-07, hwando lineage form, observe-discard dispel 0.7s) CPU check
@@ -1136,6 +1146,8 @@ jobs:
         run: node r96/qa/r1099/r1099-cpu-check.cjs
       - name: R946 Lauren passive celestial resonance (repulse burst, red push orb, blue pull orb, violet piercing fusion, prop meteors; per-hero instance)
         run: node r96/qa/r946/r946-cpu-check.cjs
+      - name: R1151 Dots LC-08 gravity explosion sheet on Lauren meteor impact CPU check
+        run: node r96/qa/r1151/r1151-cpu-check.cjs
       - name: R940 read-only state snapshot for QA (events, first-hit-after-entry, boss kill time; no game writes) CPU check
         run: node r96/qa/r940/r940-cpu-check.cjs
       - name: Install pinned sandboxed Chromium
