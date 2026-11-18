@@ -137,11 +137,15 @@ async function run(browser, mode) {
       const warm = () => ++frames >= 12 ? resolve() : requestAnimationFrame(warm);
       requestAnimationFrame(warm);
     }));
+    // A new DREAM room can render terrain for several callbacks before the first wave spawns.
+    const entryTime = await page.evaluate(() => time);
+    await page.waitForFunction(start => !loading && time > start && room.enemies.some(e => e.hp > 0),
+      entryTime, { timeout });
     const samples = [];
     for (const direction of [1, -1, 1]) samples.push(await tapAndMeasure(page, direction));
     env.canvasPointer = await page.evaluate(() => window.__qaCanvasPointer);
     assert.equal(env.canvasPointer, 'touch');
-    assert.ok(samples.every(s => s.gameSeconds > 0 && s.peakEnemies > 0), 'combat simulation progresses');
+    assert.ok(samples.every(s => s.gameSeconds > 0 && s.peakEnemies > 0), 'combat simulation progresses: ' + JSON.stringify(samples));
     assert.ok(samples.some(s => s.distance > 0.1), 'hero moves in response to touch');
     assert.deepEqual(errors, []);
     if (process.env.SHOTS) {
