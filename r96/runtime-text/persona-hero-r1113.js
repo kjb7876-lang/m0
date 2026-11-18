@@ -20,14 +20,16 @@ const DIRI=Object.freeze({front:0,left:2,back:4,right:6});
 const CELL=512,FRAMES=8;
 const WALK=Object.freeze({front:Object.freeze({src:'assets/r1104b/persona-walk-front.webp',ax:256,ground:476,h:424,step:.65}),
  rear:Object.freeze({src:'assets/r1104b/persona-walk-rear.webp',ax:256,ground:477,h:424,step:.65}),
- side:Object.freeze({src:'assets/r1104b/persona-walk-side.webp',ax:266,ground:476,h:424,step:.7})});
+ side:Object.freeze({src:'assets/r1173/persona-walk-side.webp',ax:266,ground:476,h:424,step:.7})}); // R1173: 영웅 옆만 골반 오르내림·허리 이음매 다듬은 시트(보스는 r1104b 그대로)
 // 대기 6칸(Dots CX-0122PH r1, 사용자 11-16 21:46 KST "대기모션좋네, 클로드 개선적용"): 칸 192×256, 발 (96,226), 몸 키 157, 130ms/칸. 옆은 오른쪽 보기 → 왼쪽은 반전.
 // 걷기(512×512)와 따로 읽는다. 시트가 아직 안 읽혔으면 rc133 정지 그림.
 const IDLE=Object.freeze({s:Object.freeze({src:'assets/r1113d/persona-idle-s.png',ax:96,ground:226,h:157,n:6,cell:[192,256]}),
  n:Object.freeze({src:'assets/r1113d/persona-idle-n.png',ax:96,ground:226,h:157,n:6,cell:[192,256]}),
  side:Object.freeze({src:'assets/r1113d/persona-idle-side.png',ax:96,ground:226,h:157,n:6,cell:[192,256]})});
 // R1120(사용자 11-17 "걷기 모션이 너무 빠름"): 칸 넘김을 엔진 영웅 걷기(visual-r119 WALK_RATE_R148 = 거리 1당 3.2칸)와 같게. 예전 4/step(약 6칸)은 1.8배 빨랐다.
-const WALK_RATE=3.2;
+// R1173(사용자 11-18 "위랑 좌우움직일때 다리가 너무빠름"): 3.2 는 기본 속도 4.75 에서 초당 15칸 = 한 주기 0.53초(달리기 박자). 옆 1.8(한 주기 0.94초, 777 등 속도 5.8 에선 0.77초).
+// 위·아래는 화면에서 옆의 절반만 움직이므로(project 세로 = TILE/2) 같은 박자면 다리가 2배 빨라 보인다 → 1.3(한 주기 1.3초, 화면 거리 대비 옆의 1.44배).
+const WALK_RATE=Object.freeze({side:1.8,vertical:1.3});
 const IDLE_MS=130,IDLE_DIR={front:['s',1],back:['n',1],right:['side',1],left:['side',-1]};
 const SCALE=1.08; // 영웅 키(actorHeight) 대비 페르소나 몸 키 — 망토·두건 때문에 조금 크게
 const stats={swaps:0,walkSwaps:0,tints:0,unlocks:0,cards:0,errors:0};let lastError=null;
@@ -68,7 +70,7 @@ function track(p,t){if(walk.t==null||t<walk.t||t-walk.t>1){walk.hist.length=0;wa
  const dt=walk.t==null?0:t-walk.t;walk.t=t;walk.hist.push({t,x:p.x,y:p.y});while(walk.hist.length>2&&t-walk.hist[0].t>.25)walk.hist.shift();
  const a=walk.hist[0],span=t-a.t,dx=p.x-a.x,dy=p.y-a.y,v=span>.08?Math.hypot(dx,dy)/span:0,moving=v>.4;
  walk.w+=((moving?1:0)-walk.w)*Math.min(1,dt*9);
- if(moving){const X=dx-dy,Y=(dx+dy)*.5,L=Math.hypot(X,Y)||1;walk.scr=[X/L,Y/L];walk.phase+=v*dt;}
+ if(moving){const X=dx-dy,Y=(dx+dy)*.5,L=Math.hypot(X,Y)||1;walk.scr=[X/L,Y/L];walk.phase+=v*dt*(Math.abs(X)>=Math.abs(Y)?WALK_RATE.side:WALK_RATE.vertical);}
  return walk;}
 function pickWalk(){const v=walk.scr;if(Math.abs(v[0])>=Math.abs(v[1]))return ['side',v[0]>0?-1:1];return [v[1]>0?'front':'rear',1];}
 // ---- 몸 그림 바꿔 끼우기 ----
@@ -83,8 +85,9 @@ function place(c,fr,anchor,m,foot,H){ // fr 의 (anchor.ax, anchor.ground) 를 f
  const pts=[[X(0),Y(0)],[X(W),Y(0)],[X(W),Y(Hh)],[X(0),Y(Hh)]];if(!pts.every(okPt))return false;
  c.image=fr.canvas;c.mutable=false;c.sourcePath=fr.path;c.immutableTint=fr.canvas.__storyworldStaticSource;c.sourceRect=[0,0,W,Hh];c.imageSize=[W,Hh];c.points=pts;c.r1113=true;return true;}
 // 공격·스킬(사용자 11-16): 새 시트 대신 걷기 칸을 얼굴 방향으로 돌리고, 손의 빨간 구슬 빛 + 몸 뒤 약한 오라(언주 명암)
+// R1173: 옆 시트는 골반 오르내림(0·4칸 +4, 2·6칸 -4px)만큼 구슬 y 도 옮김.
 // 구슬 자리: 시트 칸마다 빨간 구슬 둘레 상자 가운데(build: 언주 빨강 픽셀). 뒷모습은 몸에 가려 같은 손 반대편(330,196) 뒤쪽 빛만.
-const ORB=Object.freeze({front:[[182,196],[182,195],[182,194],[182,196],[182,196],[184,194],[181,209],[183,196]],side:[[201,188],[201,188],[200,188],[200,188],[200,188],[200,188],[200,188],[200,188]],rear:Array.from({length:8},()=>[330,196])});
+const ORB=Object.freeze({front:[[182,196],[182,195],[182,194],[182,196],[182,196],[184,194],[181,209],[183,196]],side:[[201,192],[201,188],[200,184],[200,188],[200,192],[200,188],[200,184],[200,188]],rear:Array.from({length:8},()=>[330,196])});
 const ORB_R=34,ACT_FPS=10,EONJU=[[70,14,10],[204,52,40],[255,176,140]];
 const SIDE={front:['front',1],back:['rear',1],left:['side',1],right:['side',-1]};
 let glowCv=null,auraCv=null;
@@ -99,7 +102,7 @@ function fxCmd(body,id,cv,cx,cy,rx,ry,alpha){const pts=[[cx-rx,cy-ry],[cx+rx,cy-
 function swapBody(cmds){const i=heroBody(cmds);if(i<0)return null;const c=cmds[i],p=pl(),t=now(),P0=c.points.map(q=>[q[0],q[1]]);if(!p||t==null||typeof project!=='function')return null;
  const g=project(p.x,p.y);if(!fin(g?.x)||!fin(g?.y))return null;const lift=Math.max(0,Math.min(200,+p.visualLiftPx||0)),foot=[g.x,g.y-lift],H=G(()=>actorHeight(),66)*SCALE;if(!(H>0))return null;
  const s=track(p,t),ult=p.ultimateAnim>0,act=!ult&&(p.attackAnim>0||p.skillAnim>0);
- if(s.w>.5&&!act&&!ult){const [k,m]=pickWalk(),W=WALK[k],r=IM.get(W.src);if(r?.state==='ready'){const f=Math.floor(s.phase*WALK_RATE)%FRAMES;if(place(c,r.frames[f],W,m,foot,H)){stats.walkSwaps++;stats.last=k+':'+f+(m<0?':flip':'');return {i,c,mode:'walk',P0};}}}
+ if(s.w>.5&&!act&&!ult){const [k,m]=pickWalk(),W=WALK[k],r=IM.get(W.src);if(r?.state==='ready'){const f=Math.floor(s.phase)%FRAMES;if(place(c,r.frames[f],W,m,foot,H)){stats.walkSwaps++;stats.last=k+':'+f+(m<0?':flip':'');return {i,c,mode:'walk',P0};}}}
  const dir=String(p.poseDirections5?.[ult?'ultimate':p.skillAnim>0?'skill':p.attackAnim>0?'attack':'']||p.direction||'front');
  if(act){const [k,m]=SIDE[dir]||SIDE.front,W=WALK[k],r=IM.get(W.src);if(r?.state==='ready'){const f=Math.floor(t*ACT_FPS)%FRAMES;if(place(c,r.frames[f],W,m,foot,H)){stats.actSwaps=(stats.actSwaps||0)+1;stats.last='act:'+k+':'+f+(m<0?':flip':'');
    return {i,c,mode:'act',k,f,m,W,foot,H,t,skill:p.skillAnim>0,P0};}}}
@@ -257,7 +260,7 @@ function ui(){if(!hasDoc())return;const t=Date.now();if(t<uiAt)return;uiAt=t+200
 function install(){registerGameHooks();wrapInst();wrapHud();wrapPfx();if(hasDoc()){try{document.addEventListener('click',onClick,true);}catch(e){fail(e);}}
  try{setInterval(()=>{try{wrapInst();wrapHud();wrapPfx();watch();ui();}catch(e){fail(e);}},250);}catch(e){fail(e);}}
 install();
-window.__STORYWORLD_PERSONA_HERO_R1113__=Object.freeze({revision:REV,profile:PROFILE,field:FIELD,base:BASE,tint:TINT,art:ART,walkSheets:WALK,idleSheets:IDLE,scale:SCALE,orb:ORB,
+window.__STORYWORLD_PERSONA_HERO_R1113__=Object.freeze({revision:REV,profile:PROFILE,field:FIELD,base:BASE,tint:TINT,art:ART,walkSheets:WALK,walkRate:WALK_RATE,idleSheets:IDLE,scale:SCALE,orb:ORB,
  unlocked,unlock,formActive,setForm,process,watch,refresh:()=>{try{if(hasDoc()){css();inject();}}catch(e){fail(e);}try{hud();}catch(e){fail(e);}},
  lock(){saved={on:false,off:false};persist();},set(v){saved.off=v===false||v==='off';persist();return !saved.off;},
  images:()=>Object.fromEntries([...IM].map(([k,v])=>[k,v.state])),
