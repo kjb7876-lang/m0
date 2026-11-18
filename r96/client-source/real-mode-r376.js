@@ -31,11 +31,28 @@ function boost(e){if(!e||!(e.hp>0)||e.deadRecorded)return false;const f=Number(e
  const mx=Number(e.maxHp);if(!Number.isFinite(mx)||mx<=0)return false;const frac=Math.max(0,Math.min(1,e.hp/mx));
  const nf=f*HP_MUL;e.difficultyFactorR63=nf;e.maxHp=Math.max(1,mx*HP_MUL);e.hp=Math.max(.0001,e.maxHp*frac);e.realR376F=nf;stats.boosted++;return true;}
 function ensure(r=G(()=>room,null)){if(!realRoom(r))return 0;let n=0;for(const e of r.enemies||[])if(boost(e))n++;return n;}
-// ── 적 피해 절반 ──
+// 777 시험 진행은 선택한 지역의 장에 맞춰 적의 타격만 강화한다. 레벨·포인트·저장에는 배율을 기록하지 않는다.
+const TEST_CHAPTER_DAMAGE=Object.freeze([1,1.08,1.16,1.24,1.36,1.48,1.60,1.72]);
+function testDamage(r,source){
+ if(!r||r.survivalR600||source?.friendly===true||source?.forcedStory||source?.kind==='awakening-shock'||
+    !window.__STORYWORLD_CHEAT777__?.active?.()||!solo())return 1;
+ const def=typeof regionById==='undefined'?null:regionById[r.id];
+ if(!def||def.safe||!Number.isInteger(def.chapterIndex)||def.chapterIndex<0)return 1;
+ return TEST_CHAPTER_DAMAGE[Math.min(def.chapterIndex,TEST_CHAPTER_DAMAGE.length-1)];
+}
 function enemySource(source){const r=G(()=>room,null),enemies=r?.enemies||[];if(!source)return false;
  const owner=source.owner??source.attacker??source.enemy,ownerId=typeof owner==='string'?owner:owner?.id??source.ownerId??source.enemyId;
  return enemies.includes(source)||typeof source.id==='string'&&enemies.some(e=>e?.id===source.id)||!!owner&&(enemies.includes(owner)||typeof ownerId==='string'&&enemies.some(e=>e?.id===ownerId));}
-try{if(typeof hurt==='function'){const base=hurt;hurt=function(value,source,...a){try{if(Number.isFinite(value)&&value>0&&realRoom()&&enemySource(source)){stats.softened++;value=value*DMG_MUL;}}catch(e){fail(e);}return base.call(this,value,source,...a);};}}catch(e){fail(e);}
+try{if(typeof hurt==='function'){const base=hurt;hurt=function(value,source,...a){
+ try{if(Number.isFinite(value)&&value>0){
+  const r=G(()=>room,null),real=realRoom(r),test=testDamage(r,source);
+  if((real||test!==1)&&enemySource(source)){
+   if(real){stats.softened++;value*=DMG_MUL;}
+   value*=test;
+  }
+ }}catch(e){fail(e);}
+ return base.call(this,value,source,...a);
+};}}catch(e){fail(e);}
 // ── 길잡이가 고르기 ──
 function wrapGuide(){const R=window.__STORYWORLD_GUIDE_R77__;if(!R||typeof R.takeNextNormal!=='function')return false;if(R.__r376)return true;
  // R189 가 먼저 감싸야 한다(R189 는 R77 원본을 감싼 새 객체로 바꿔 끼운다). R189 가 아직이면 기다린다.

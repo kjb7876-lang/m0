@@ -25,8 +25,21 @@ const TAIL=6.5,CLEAR_WAIT=2.2,RING=[10,15],GEM_PULL=2.8,GEM_TAKE=.75,GEM_CAP=220
 const ORB='assets/r163/pixelfx/core-orb-teal.webp',GEM='assets/r106/fx/shard.webp';
 /* Dots CX-0065V r1 시트(11-10 채택) — 코어 4상태(평상·피격·위급·파괴, 칸 256×320, 받침 바닥 (128,300)), 빛줄기(512×48, 왼쪽 끝 (0,24)), 시작·명중 섬광(64×64), 경험 조각(32×48, (16,45))·흡수 꼬리. 모두 12.5fps. 고리 3종은 r2 대기라 아직 코드 점선 고리 */
 const DOT='assets/r600/dots/',SH={idle:{p:DOT+'sv-core-01.webp',n:24,w:256,h:320,loop:1},hit:{p:DOT+'sv-core-02.webp',n:8,w:256,h:320},crit:{p:DOT+'sv-core-03.webp',n:24,w:256,h:320,loop:1},die:{p:DOT+'sv-core-04.webp',n:12,w:256,h:320},beam:{p:DOT+'sv-beam-01.webp',n:24,w:512,h:48,loop:1},bstart:{p:DOT+'sv-beam-start.webp',n:8,w:64,h:64},bhit:{p:DOT+'sv-beam-hit.webp',n:8,w:64,h:64},gem:{p:DOT+'sv-gem-01.webp',n:12,w:32,h:48,loop:1},tail:{p:DOT+'sv-gem-tail.webp',n:8,w:32,h:48}},FPS=12.5;
-const sheetImg=k=>{const im=G(()=>readyImage(SH[k].p),null)?.image;return im&&(im.naturalWidth||im.width)>0?im:null;};
+const imageAt=path=>{const im=G(()=>readyImage(path),null)?.image;return im&&(im.naturalWidth||im.width)>0?im:null;};
+const sheetImg=k=>imageAt(SH[k].p);
 const sheetFrame=(k,age,fps=FPS)=>{const d=SH[k],f=Math.floor(Math.max(0,age)*fps);return d.loop?f%d.n:Math.min(d.n-1,f);};
+// Each lossless beam page holds 4 × 3 original cells and fits the WebGL2 minimum texture limit.
+const BEAM_PAGES=['assets/sw0011/beam-0.webp','assets/sw0011/beam-1.webp'];
+const BEAM_PAGE_COLUMNS=4,BEAM_PAGE_CELLS=12;
+const beamCells=Array.from({length:SH.beam.n},(_,i)=>{
+ const cell=i%BEAM_PAGE_CELLS;
+ return {path:BEAM_PAGES[Math.floor(i/BEAM_PAGE_CELLS)],x:(cell%BEAM_PAGE_COLUMNS)*SH.beam.w,y:Math.floor(cell/BEAM_PAGE_COLUMNS)*SH.beam.h};
+});
+function survivalSheets(maxTextureSize){
+ const pagedBeam=!(maxTextureSize>=SH.beam.w*SH.beam.n);
+ const paths=Object.values(SH).flatMap(sheet=>sheet===SH.beam&&pagedBeam?BEAM_PAGES:[sheet.p]);
+ return {pagedBeam,paths};
+}
 // R890 서사 두 트랙(사용자 11-12 06:59Z): '스토리 음미' = 녹음 음성+자막(기본), '전투 집중' = 음성 없이 짧은 자막. 서사 글·순서·웨이브 길이(narrMinEnd, 문장 길이 기준)는 그대로.
 const TRACKS=Object.freeze({story:Object.freeze({name:'스토리 음미',voice:true,compact:false}),combat:Object.freeze({name:'전투 집중',voice:false,compact:true})});
 function trackOf(s){if(s&&Object.prototype.hasOwnProperty.call(TRACKS,s.track))return s.track;if(s&&s.track===undefined&&s.voice===false)return 'combat';return 'story';}
@@ -60,11 +73,18 @@ function cap(sec,idx,low,diff){const top=low?30:48;return Math.round(clamp((16+s
 function hpMul(idx,loop,diff){return (1+idx*.045)*(1+.6*loop)*diffOf(diff).hp;}
 // R850 밸런스: 보스·중간보스 체력은 원래 체력과 상관없이 영웅 공격력 기준(보스 ×100, 중간보스 ×50)에 지역·회차·난이도 배율을 곱한다.
 //  실측(헤드리스, 환도, 보통): 예전엔 원래 체력(약 1,100)에 묶여 대부분 1~2초에 죽고 원래 체력이 큰 집도의만 13초 → 보스 약 15~30초·중간보스 약 5~18초(영웅 셋, 봇이 붙어 때릴 때).
-//  피해는 일반몹처럼 지역(+1.5%/지역)·회차(+25%)로 오른다. 일반몹 피해도 너무 약해(첫 지역 한 대 약 4/777) 기본 ×.55→×.7(정예 ×.85→×1).
+//  일반몹의 기본 피해는 ×.7, 정예는 ×1. 보스와 같은 단계 곡선을 적용한다.
 const BOSS_HP=Object.freeze({boss:100,mid:50});
 // R962: 코어 빛줄기 타격 출처 — 영웅 타격이 아니다(friendly:false·sourceHero). 출처가 없으면 조종 영웅의 타격 확률 패시브(라우렌·미카엘라·네온)와 영웅 광역(R118)이 코어 타격으로 발동했다.
 const coreSrc=()=>({kind:'r600-core-beam',friendly:false,owner:'core',sourceHero:'r600-core',r600Core:true});/* 타격마다 새 객체: 다른 덧씌우기가 출처에 표식을 적는다 */
-const stageDmg=(idx,loop,diff)=>(1+.015*Math.max(0,idx||0))*(1+.25*Math.max(0,loop||0))*diffOf(diff).dmg;
+// 첫 다섯 지역은 기존 난이도. 이후 한 지역마다 4%, 후반에는 2.5%씩 기본 피해를 더한다.
+// 다음 회차는 이전 회차의 후반 강도로 시작한다. 적 수와 보스 체력·초당 피해 한도는 별개다.
+function stageDmg(idx,loop,diff){
+ const stage=Math.max(0,idx||0);
+ const gain=.015*Math.min(stage,4)+.04*clamp(stage-4,0,16)+.025*clamp(stage-20,0,40);
+ const fullLapGain=.015*4+.04*16+.025*40;
+ return Math.min(3.5,1+gain+Math.max(0,loop||0)*fullLapGain)*diffOf(diff).dmg;
+}
 // 보스 체력 기준 공격력은 지역 동안의 이동 평균(약 20초) — 순간 강화(버프)가 켜진 때 보스가 나오면 체력이 튀던 것(실측 서하 141↔96)을 누른다.
 function smoothAtk(avg,a,dt){if(!(a>0))return avg;if(!(avg>0))return a;return avg+(a-avg)*Math.min(1,Math.max(0,dt)/20);}
 // R960 보스 체력 하한(사용자 11-12 '보스몹 체력 최소 그맵의 일반몹 66배'): 보스·중간보스 체력 >= 66 × 같은 지역·회차·난이도의 일반몹 체력.
@@ -217,7 +237,10 @@ async function go(i){if(!S||entering)return false;const sid=S.ids[i],X=extOf(sid
  const prev=stageRoom;stageRoom=buildRoom(id,X);
  if(id==='last301')Object.defineProperty(stageRoom,'r75Falling',{configurable:true,enumerable:false,get:()=>!inHitR600,set(){}});/* R75 마지막 결투의 '정해진 쓰러짐'(보스를 살려 두고 장면으로 넘김)은 스토리 전용 — fall() 은 이미 쓰러지는 중이면 그냥 돌아가므로 생존 방에서는 그렇게 답해 끈다.
   지역을 완료로 표시하면 R75 decorate 가 적을 모두 숨기므로 쓰지 않는다. 같은 값을 보는 R75 hitEnemy(쓰러지는 중 영웅 체력 20% 고정)는 생존 hitEnemy 안에서 false 를 보게 한다. 저장·복제 대상이 아니게 열거하지 않는다. */
-const c=stageRoom.survivalR600.centre,extra=[...rosterPaths(stageRoom.survivalR600.roster),ORB,GEM,...Object.values(SH).map(d=>d.p)],old=def.paths;def.paths=[...new Set([...(old||[]),...extra])];
+ const textureLimit=window.__STORYWORLD_PHASE1__?.controller?.state?.three?.renderer?.capabilities?.maxTextureSize;
+ const sheets=survivalSheets(textureLimit);
+ stageRoom.survivalR600.pagedBeam=sheets.pagedBeam;
+ const c=stageRoom.survivalR600.centre,extra=[...rosterPaths(stageRoom.survivalR600.roster),ORB,GEM,...sheets.paths],old=def.paths;def.paths=[...new Set([...(old||[]),...extra])];
  // 스토리에서 아직 열리지 않은 지역도 생존 모드에서는 들어간다: 잠긴 지역 되돌림(R63 isUnlocked4 → 최근 쉼터)을 이 진입 동안만 통과시킨다
  //  (엔진의 협동 '권한 있는 지역 불러오기' 질문에 이 지역만 예라고 답함 — QA 가 잠긴 지역에 들어갈 때 쓰는 것과 같은 길). 진행·해금 기록은 바꾸지 않는다.
  const CO=window.__STORYWORLD_COOP_SIM_R62__,lift=!!CO;if(lift){try{window.__STORYWORLD_COOP_SIM_R62__={...CO,authoritativeRegionLoad:(rid,l)=>(rid===id&&l==='STORY')||!!CO.authoritativeRegionLoad?.(rid,l)};}catch(e){fail(e);}}
@@ -363,9 +386,11 @@ function drawCore(){if(!here())return;const c=room.survivalR600.centre,q=project
   else{const row=G(()=>readyImage(ORB),null),o=row?.image;if(o&&(o.naturalWidth||o.width)>0){const kk=D/44,fr=Math.floor(t*10)%36;ctx.drawImage(o,fr%6*136,Math.floor(fr/6)*112,136,112,q.x-68*kk,oy-48*kk,136*kk,112*kk);}else{ctx.fillStyle='#7fd6c8';ctx.beginPath();ctx.arc(q.x,oy,D*.5,0,Math.PI*2);ctx.fill();}}
   const top=q.y+ah*.3;
   // 정화 빛줄기(구슬 → 적): 빛줄기 시트를 길이에 맞춰 늘리고, 시작·명중 섬광을 양 끝에
-  const bi=sheetImg('beam'),si=sheetImg('bstart'),hi=sheetImg('bhit'),bh=Math.max(10,ah*.2);
+  const beamFrame=sheetFrame('beam',t),cell=room.survivalR600.pagedBeam?beamCells[beamFrame]:null;
+  const bi=cell?imageAt(cell.path):sheetImg('beam'),sx=cell?cell.x:beamFrame*SH.beam.w,sy=cell?cell.y:0;
+  const si=sheetImg('bstart'),hi=sheetImg('bhit'),bh=Math.max(10,ah*.2);
   for(const b of beams){const p=project(b.x,b.y),ag=t-b.at,a=clamp(1-ag/BEAM_LIFE,0,1),tx=p.x,ty=p.y-ah*.3,len=Math.hypot(tx-q.x,ty-oy),an=Math.atan2(ty-oy,tx-q.x);const ff=8/BEAM_LIFE;
-   if(bi&&len>1){ctx.save();ctx.globalAlpha=.35+.65*a;ctx.translate(q.x,oy);ctx.rotate(an);ctx.drawImage(bi,sheetFrame('beam',t)*512,0,512,48,0,-bh/2,len,bh);ctx.restore();}
+   if(bi&&len>1){ctx.save();ctx.globalAlpha=.35+.65*a;ctx.translate(q.x,oy);ctx.rotate(an);ctx.drawImage(bi,sx,sy,SH.beam.w,SH.beam.h,0,-bh/2,len,bh);ctx.restore();}
    else{ctx.globalAlpha=a*.9;ctx.strokeStyle='#c8fff4';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(q.x,oy);ctx.lineTo(tx,ty);ctx.stroke();}
    ctx.globalAlpha=1;const fs=bh*2.6;
    if(si)ctx.drawImage(si,sheetFrame('bstart',ag,ff)*64,0,64,64,q.x-fs/2,oy-fs/2,fs,fs);

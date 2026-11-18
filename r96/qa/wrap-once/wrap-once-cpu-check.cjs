@@ -32,7 +32,7 @@ function stage(){
 }
 (async()=>{
  // ① ②
- {const S=stage();ok(S.intervals.length>=2,'두 덧씌우기의 주기 감싸기가 걸림',S.intervals.length);
+ {const S=stage();ok(S.intervals.length>=2,'두 영웅의 UI·렌더러 유지보수 타이머가 걸림',S.intervals.length);
   S.pump(4);const d0=await S.depth();S.pump(400);const d1=await S.depth();
   ok(d1.tick<=d0.tick,'① tick 감싸기 깊이가 주기 감싸기 400번 뒤에도 그대로',{before:d0.tick,after:d1.tick});
   ok(d1.save<=d0.save,'① serializeSave 감싸기 깊이 그대로',{before:d0.save,after:d1.save});

@@ -1,3 +1,78 @@
+// Game functions are defined by the preceding classic engine script. This first hero overlay
+// owns the shared post-hooks so later overlays can subscribe once in script order.
+(() => {
+  'use strict';
+  if (window.__STORYWORLD_POST_HOOKS__) return;
+  const names = ['tick', 'serializeSave', 'restoreSave'];
+  const registered = new Set();
+  const dispatchers = new Map();
+  const pending = [];
+  let retryTimer = null;
+
+  function attach(entry) {
+    const {name, mark} = entry;
+    const base = window[name];
+    if (typeof base !== 'function') return false;
+    let group = dispatchers.get(name);
+    // A legacy wrapper inserted between registrations must retain its position and may
+    // short-circuit its base. Only subscribers adjacent in the call chain share a wrapper.
+    if (!group || group.dispatch !== base) {
+      const listeners = [];
+      function notify(value) {
+        for (const listener of listeners) {
+          try { listener.run(value); }
+          catch (error) { listener.fail(error); }
+        }
+      }
+      const dispatch = name === 'restoreSave'
+        ? async function(raw) {
+            const result = await base.apply(this, arguments);
+            notify(raw);
+            return result;
+          }
+        : function(arg) {
+            const result = base.apply(this, arguments);
+            notify(name === 'serializeSave' ? result : arg);
+            return result;
+          };
+      for (const key of Object.keys(base)) {
+        if (/^__r\d/.test(key)) dispatch[key] = base[key];
+      }
+      group = {dispatch, listeners};
+      dispatchers.set(name, group);
+      window[name] = dispatch;
+    }
+    group.listeners.push(entry);
+    group.dispatch[mark] = true;
+    return true;
+  }
+
+  function retryPending() {
+    for (let i = 0; i < pending.length;) {
+      if (attach(pending[i])) pending.splice(i, 1);
+      else i++;
+    }
+    if (!pending.length && retryTimer !== null) {
+      clearInterval(retryTimer);
+      retryTimer = null;
+    }
+  }
+
+  function register(mark, handlers, fail) {
+    if (registered.has(mark)) return;
+    registered.add(mark);
+    if (pending.length) retryPending();
+    for (const name of names) {
+      if (typeof handlers[name] !== 'function') continue;
+      const entry = {name, mark, run: handlers[name], fail};
+      if (!attach(entry)) pending.push(entry);
+    }
+    // Needed only if a host has not defined an entry point yet. Never poll an installed hook.
+    if (pending.length && retryTimer === null) retryTimer = setInterval(retryPending, 250);
+  }
+  window.__STORYWORLD_POST_HOOKS__ = Object.freeze({register});
+})();
+
 /* R1046 히든 영웅 '마지막 수호자 EGO'(사용자 2026-11-15 06:53Z "이 자산으로 … 히든영웅 넣어줘 … ego각성영웅도 스스로를 구원하지는 못해 …
  * 기존서사와 충돌되지 않게 잘녹여서", 지시서 1~8항은 참고).
  *  · 서사: S-07 원문에서 환도는 페르소나의 식탁에서 가면을 내려놓고 'EGO'로 각성한다. 그래서 EGO 는 환도의 계보 — 몸·검·스킬 키는 환도 것을 그대로 쓰고
@@ -87,14 +162,21 @@ function wrapAwake(){if(typeof showAwakening!=='function'||showAwakening.__r1112
    if(ego&&hasDoc()){try{stats.awake=(stats.awake||0)+1;const im=document.getElementById('awakeImage');if(im){if(im.getAttribute('src')!==url(P.cutin.image))im.src=url(P.cutin.image);im.removeAttribute('data-r1033');}
     const h=document.getElementById('awakeHero');if(h&&!h.textContent.startsWith(AWAKE_NAME))h.textContent=h.textContent.replace(/^[^·]*/,AWAKE_NAME+' ');}catch(e){fail(e);}}}};
  w.__r1112=true;showAwakening=w;}
-// ---- 저장 ----
-// 감싸기 핑퐁 막기(2026-11-18): 바깥 함수의 표식(__rNNNN)을 새 감싸기로 옮긴다 — 안 옮기면 EGO(R1046)·페르소나(R1113)의 주기 감싸기가
-//  서로의 표식을 가려 tick·저장 함수를 끝없이 다시 감쌌다(초당 약 4단, 약 1시간 뒤 스택 넘침으로 게임 정지).
-function carryMarks(w,base){try{for(const k of Object.keys(base))if(/^__r\d/.test(k))w[k]=base[k];}catch(_){}}
-function wrapSave(){
- if(typeof serializeSave==='function'&&!serializeSave.__r1046){const base=serializeSave;const w=function(...a){const d=base.apply(this,a);try{if(d&&d.player)d.player[FIELD]=formActive();}catch(e){fail(e);}return d;};carryMarks(w,base);w.__r1046=true;serializeSave=w;}
- if(typeof restoreSave==='function'&&!restoreSave.__r1046){const base=restoreSave;const w=async function(raw,...a){const r=await base.call(this,raw,...a);try{const p=pl();if(p){p[FIELD]=raw?.player?.[FIELD]===true&&p.hero===P.base&&unlocked();pending=null;cdUntil=-1;lastT=null;}}catch(e){fail(e);}return r;};carryMarks(w,base);w.__r1046=true;restoreSave=w;}}
-function wrapTick(){if(typeof tick!=='function'||tick.__r1046)return;const base=tick;const w=function(...a){const r=base.apply(this,a);try{step();ui();}catch(e){fail(e);}return r;};carryMarks(w,base);w.__r1046=true;tick=w;}
+function registerGameHooks() {
+ window.__STORYWORLD_POST_HOOKS__.register('__r1046', {
+  tick() { step(); ui(); },
+  serializeSave(data) { if (data?.player) data.player[FIELD] = formActive(); },
+  restoreSave(raw) {
+   const p = pl();
+   if (!p) return;
+   p[FIELD] = raw?.player?.[FIELD] === true && p.hero === P.base && unlocked();
+   pending = null;
+   cdUntil = -1;
+   lastT = null;
+  }
+ }, fail);
+}
+
 // ---- 화면(문서가 있을 때만) ----
 const hasDoc=()=>typeof document!=='undefined'&&!!document&&typeof document.createElement==='function'&&typeof document.querySelector==='function';
 const url=p=>G(()=>urlFor(p),p);
@@ -159,8 +241,8 @@ function wrapScope(){const DC=window.StoryPhase1?.DrawCommands;if(!DC?.prototype
 // 선택창 형상일 때 HUD 이름·초상(RC151 변신 중에는 RC151 이 정한 그대로)
 function wrapHUD(){if(typeof updateHUD!=='function'||updateHUD.__r1046)return;const base=updateHUD;const w=function(...a){const r=base.apply(this,a);try{if(formActive()&&!rcActive()&&hasDoc()){const n=document.getElementById('heroName');if(n&&n.textContent!==P.title)n.textContent=P.title;const pt=document.getElementById('portrait'),u=url(P.portrait);if(pt&&pt.getAttribute('src')!==u)pt.src=u;}}catch(e){fail(e);}return r;};w.__r1046=true;updateHUD=w;}
 let wrapAt=0;
-function install(){wrapSave();wrapTick();wrapHUD();try{wrapScope();}catch(e){fail(e);}if(hasDoc()){try{document.addEventListener('click',onClick,true);}catch(e){fail(e);}}
- if(typeof setInterval==='function')setInterval(()=>{try{wrapSave();wrapTick();wrapHUD();wrapAwake();addTierDef();if(Date.now()>wrapAt){wrapAt=Date.now()+2000;wrapScope();}if(hasDoc()&&!G(()=>started,false))ui();}catch(e){fail(e);}},500);}
+function install(){registerGameHooks();wrapHUD();try{wrapScope();}catch(e){fail(e);}if(hasDoc()){try{document.addEventListener('click',onClick,true);}catch(e){fail(e);}}
+ if(typeof setInterval==='function')setInterval(()=>{try{wrapHUD();wrapAwake();addTierDef();if(Date.now()>wrapAt){wrapAt=Date.now()+2000;wrapScope();}if(hasDoc()&&!G(()=>started,false))ui();}catch(e){fail(e);}},500);}
 install();
 window.__STORYWORLD_EGO_SOVEREIGN_R1046__=Object.freeze({revision:REV,data:D,field:FIELD,unlocked,unlock,active,formActive,setForm,present,discard,samongCleared,
  refresh:()=>{try{if(hasDoc()&&document.getElementById('panel')?.querySelector('[data-hero]')){css();inject();}}catch(e){fail(e);}}, // R1057: 창을 다시 그린 즉시 EGO 칸을 다시 끼움(200ms 기다림 없이)

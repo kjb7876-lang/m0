@@ -26,6 +26,7 @@ function kit(opt={}){const iv=[];const sb={console,JSON,Object,Array,Number,Stri
   ${opt.noSafeFn?'':'function safeRegion(){return SAFE;}'}
   function basicAttack(){player.combo++;} function special(){if(player.specialCD>0)return;player.specialCD=10;} function ego(){if(player.ego>0)return;player.ego=3;}
   window.__STORYWORLD_EGO_SOVEREIGN_R1046__={formActive:()=>true,inspect:()=>({rc151:false})};`,sb);
+ vm.runInContext(rd(path.join(R,'client-source/ego-sovereign-r1046.js')),sb);
  vm.runInContext(SRC,sb,{filename:N});return{sb,iv,run:c=>vm.runInContext(c,sb)};}
 const persona=s=>/assets\/rc134\/persona-skills\/[a-z-]+\.png$/.test(s.asset)&&s.sourceProjectile5?.path===s.asset&&!/hwando/.test(String(s.storyWorldKey5||'')+s.sourceProjectile5?.owner);
 // ① 전투 지역: 탄은 나가고 그림은 페르소나 원본
