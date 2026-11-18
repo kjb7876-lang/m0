@@ -1,0 +1,63 @@
+name: Long-session gameplay regression
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'r96/client-source/ego-sovereign-r1046.js'
+      - 'r96/client-source/ego-kit-r1094.js'
+      - 'r96/client-source/persona-hero-r1113.js'
+      - 'r96/client-source/real-mode-r376.js'
+      - 'r96/client-source/survival-r600.js'
+      - 'r96/runtime-text/assets/sw0011/**'
+      - 'r96/runtime-text/assets/r600/dots/sv-beam-01.webp'
+      - 'r96/qa/sw0011/**'
+      - '.github/workflows/sw0011-runtime.yml'
+permissions:
+  contents: read
+concurrency:
+  group: long-session-gameplay-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  regression:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          show-progress: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check hooks, difficulty curves and sprite frames
+        run: |
+          python -m pip install Pillow==11.3.0
+          node r96/qa/sw0011/hooks-cpu-check.cjs
+          node r96/qa/sw0011/balance.cjs
+          node r96/qa/sw0011/texture-frames.cjs
+          python r96/qa/sw0011/texture-pixels.py
+      - name: Build the game and install the test browser
+        run: |
+          python scripts/build-r96.py
+          npm install --no-save --ignore-scripts playwright@1.56.0
+          npx playwright install --with-deps chromium
+      - name: Exercise the built game in Chromium
+        env:
+          SW_URL: http://127.0.0.1:4396/
+          SHOTS: ${{ runner.temp }}/gameplay-evidence
+        run: |
+          python -m http.server 4396 --bind 127.0.0.1 --directory r96/hospital-three-pc/site > "$RUNNER_TEMP/storyworld-http.log" 2>&1 &
+          server=$!
+          trap 'kill "$server"' EXIT
+          curl --fail --retry 10 --retry-connrefused --retry-delay 1 --silent --output /dev/null "$SW_URL"
+          node r96/qa/sw0011/integration-browser.cjs
+      - name: Keep the rendered scene and combat measurements
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: long-session-gameplay-evidence
+          path: ${{ runner.temp }}/gameplay-evidence
+          if-no-files-found: ignore
