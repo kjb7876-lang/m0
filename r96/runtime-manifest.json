@@ -11953,6 +11953,16 @@
       "sha256": "cde037ec4f008956234e05081f662c8e7957eef8d0d14d3e6fedd025aed641a7"
     },
     {
+      "path": "assets/r1167/move/m040-down.webp",
+      "bytes": 26142,
+      "sha256": "985bf5c4c22e94e6279d6187a31473c236a64cb373dfbde199767262ee08b18a"
+    },
+    {
+      "path": "assets/r1167/move/m040-up.webp",
+      "bytes": 26436,
+      "sha256": "c48280e8bddf5999241fa0b32abdd6da494d821085b0080c9e20ce97e3944314"
+    },
+    {
       "path": "assets/r117/scene/ep-cup-k1.png",
       "bytes": 2264,
       "sha256": "a39b05d84a4613cb40d72e213a26b9bccbc254b82e4cd9888f0b47e085a209e2"
@@ -54979,8 +54989,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6582034,
-      "sha256": "7da654eb0661b9fadf84c1904200465ffcd70a351064dee1415962b2b8526ff9"
+      "bytes": 6582083,
+      "sha256": "cde720966fded9ed043fb42420170512c97d5d2afb2a9ecfcc81a7edab707cfc"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -55361,6 +55371,11 @@
       "path": "move-dir-r1162-data.js",
       "bytes": 1737,
       "sha256": "ec4c05626a4a57bd6bfc5c077dabc3f1d7b8e59ccb4ea659af4b3e33cdb62ca6"
+    },
+    {
+      "path": "move-dir-r1167-data.js",
+      "bytes": 6439,
+      "sha256": "6fa4ff124921c91178fd4f8b1c1d7a0bccb1ad555b669f1ec435497ef1e9f44d"
     },
     {
       "path": "move-dir-r974-data.js",
@@ -56383,9 +56398,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11276,
-  "totalBytes": 1356119079,
-  "webHTMLSha256": "7da654eb0661b9fadf84c1904200465ffcd70a351064dee1415962b2b8526ff9",
+  "fileCount": 11279,
+  "totalBytes": 1356178145,
+  "webHTMLSha256": "cde720966fded9ed043fb42420170512c97d5d2afb2a9ecfcc81a7edab707cfc",
   "largest": [
     {
       "path": "index.html",
