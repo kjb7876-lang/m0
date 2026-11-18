@@ -52,7 +52,9 @@ function pool(o){return heroIds().filter(id=>id!==o.hero&&id!==BASE&&!present(id
 function ready(p){return !!G(()=>readyImage(p),null);}
 const asked={};function ask(paths,key){const t=Date.now();if(t-(asked[key]||-1e9)<1500)return;asked[key]=t;try{if(typeof ensureImages==='function')Promise.resolve(ensureImages(paths)).catch(()=>{});}catch(e){fail(e);}}
 function img(p){const g=G(()=>readyImage(p),null);if(g&&g.image)return g.image;ask([p],p);return null;}
-function preload(o){for(const id of pool(o))if(!ready(G(()=>heroArt[id].idle.front,'')))ask(G(()=>heroPaths(id),[]),'hero:'+id);ask([SH.ring.path,SH.gate.path],'sheets');}
+// 엔진 W·E·R cast 는 그 칸의 시전 그림(heroActions)이 받아져 있어야 나간다 → 후보 영웅 몸 그림과 함께 미리 받는다
+const actPaths=id=>{const a=G(()=>window.StoryPhase1.CURRENT_PUBLIC_HERO_DATA.heroActions[id],null);return a?['w','e','r'].map(k=>a[k]).filter(x=>typeof x==='string'&&x):[];};
+function preload(o){for(const id of pool(o)){if(!ready(G(()=>heroArt[id].idle.front,'')))ask(G(()=>heroPaths(id),[]),'hero:'+id);const ap=actPaths(id).filter(x=>!ready(x));if(ap.length)ask(ap,'act:'+id);}ask([SH.ring.path,SH.gate.path],'sheets');}
 
 // ── 몸 ──
 function mkBody(o,id,x,y){const b={};
@@ -61,8 +63,11 @@ function mkBody(o,id,x,y){const b={};
  Object.defineProperty(b,'r720Ally',{value:true,enumerable:false});Object.defineProperty(b,'r1157Summon',{value:true,enumerable:false});
  b.id='r1157:'+id+':'+(++serial);b.hero=id;b.x=x;b.y=y;b.direction='front';b.combo=0;for(const k of TIMERS)b[k]=0;b.attackCD=.3;
  b.resonance=0;b.shield=0;b.guard=false;b.pending=false;b.pendingInputR62=null;b.moving=false;b.visible=true;b.disabled=false;b.visualLiftPx=0;b.storyWER={ready:{},buffs:{}};
- b.hp=Math.max(1,+o.maxHp||+o.hp||100);return b;}
-function refresh(b,o){for(const k of SHARED)b[k]=o[k];b.level=o.level;b.hp=Math.max(1,+b.hp||1);b.ego=0;b.samong=0;b.pending=false;}
+ b.hp=Math.max(1,+o.maxHp||+o.hp||100);refresh(b,o);return b;}
+// 레벨·강화는 주인 것. 다만 소환 동안은 배우지 않은 Q·W·E·R 도 쓴다(R663 잠금은 몸 사본에서만 1단계로 — 주인 저장 값은 그대로).
+const SKILL_IDS=['Q','W','E','R'].map(k=>'skill'+k+'R663');
+function prog(o){const v=o&&o.progressionR62;if(!v||typeof v!=='object')return v;const ranks={...(v.ranks||{})};for(const id of SKILL_IDS)ranks[id]=Math.max(1,Math.floor(+ranks[id]||0));return {...v,ranks};}
+function refresh(b,o){b.upgrades=o.upgrades;b.progressionR62=prog(o);b.level=o.level;b.hp=Math.max(1,+b.hp||1);b.ego=0;b.samong=0;b.pending=false;}
 const validS=s=>!!s&&!!s.body&&live.includes(s);
 // 몸을 player 자리에 끼우고 fn 을 돈다. 끝나면(오류여도) 앞의 player 로 되돌린다. 겨눔·이동 명령도 몸마다 따로.
 function as(s,fn){const b=s&&s.body;if(!b)return undefined;const prev=P();
@@ -78,7 +83,7 @@ function clampCD(b,t){if(!b)return;for(const k of ['specialCD','blinkCD'])if(fin
 function spot(o,ang){for(const d of [0,.7,-.7,1.4,-1.4,Math.PI]){for(const r of [OFF,OFF*.6]){const x=o.x+Math.cos(ang+d)*r,y=o.y+Math.sin(ang+d)*r;if(!G(()=>wallAt(x,y,.3),false))return {x,y};}}return {x:o.x,y:o.y};}
 function summon(o){const t=T();if(live.length>=MAX_LIVE){stats.refused++;return null;}const ids=pool(o);if(!ids.length){stats.refused++;return null;}
  const id=ids[Math.floor(rnd()*ids.length)%ids.length],ang=Math.PI*.75+live.length*1.4+(rnd()-.5)*.8,p=spot(o,ang);
- const s={owner:o,hero:id,x:p.x,y:p.y,ox:p.x-o.x,oy:p.y-o.y,t0:t,until:t+DUR,ext:0,links:[],room:room0(),body:null,prop:null,next:t+.25,idx:serial};
+ const s={owner:o,hero:id,x:p.x,y:p.y,ox:p.x-o.x,oy:p.y-o.y,t0:t,until:t+DUR,ext:0,links:[],room:room0(),body:null,prop:null,next:t+.25,idx:serial,cd:{},rot:0};
  s.body=mkBody(o,id,p.x,p.y);s.prop={id:'r1157:'+s.body.id,r1157Prop:true,x:p.x,y:p.y,solid:false,visible:true,autoTargetEligible6:false,label:'소환 영웅',height:66};
  Object.defineProperty(s.prop,'r1157Ref',{value:s,enumerable:false});
  try{const r=s.room;if(r&&Array.isArray(r.props))r.props.push(s.prop);}catch(e){fail(e);}
@@ -103,8 +108,10 @@ function foes(){return G(()=>liveEnemies(),G(()=>room.enemies,[])).filter(e=>e&&
 function tryQ(b){if(b.specialCD>0||!R49()?.autoSpecial)return false;const cd=b.specialCD;R49().autoSpecial();return b.specialCD>cd;}
 function trySlot(b,k){if(!WER())return false;if(G(()=>WER().cast(k,true),false)===true)return true;
  const M=window.__STORYWORLD_MICHAELA_R247__;if((k==='w'||k==='e')&&b.hero==='michaela'&&G(()=>M.on(),false))return G(()=>M.fire(k,true),false)===true;return false;}
+// 칸마다 몸 자신의 대기(s.cd)를 따로 센다: 엔진 칸 대기를 안 남기는 스킬(기억사수 R561·미카엘라 R247 등)도 0.7초보다 자주 나가지 않고,
+// 한 박자에 한 칸만, 다음 박자는 다음 칸부터 돌아가며 시도해 한 칸이 다른 칸을 굶기지 않는다.
 function act(s,t){const b=player;const cd=b.attackCD;if(!(cd>0)&&typeof basicAttack==='function'){basicAttack();if(b.attackCD>cd)stats.casts.basic++;}
- if(t>=s.next){for(const k of SLOTS){const ok=k==='q'?tryQ(b):trySlot(b,k);if(ok){stats.casts[k]++;s.next=t+SKILL_GAP;break;}}}
+ if(t>=s.next){for(let i=0;i<SLOTS.length;i++){const k=SLOTS[(s.rot+i)%SLOTS.length];if(t<(s.cd[k]||0))continue;const ok=k==='q'?tryQ(b):trySlot(b,k);if(ok){stats.casts[k]++;s.cd[k]=t+CD;s.next=t+SKILL_GAP;s.rot=(s.rot+i+1)%SLOTS.length;break;}}}
  clampCD(b,t);}
 function walk(a,dx,dy){try{if(typeof moveActor==='function')moveActor(a,dx,dy,.27);else{a.x+=dx;a.y+=dy;}}catch(e){fail(e);}}
 function stepOne(s,t,dt){const o=s.owner,b=s.body;if(!b)return;
@@ -141,7 +148,7 @@ if(typeof attackPower==='function'){const base=attackPower;attackPower=function(
 if(typeof delay==='function'){const base=delay;delay=function(sec,fn,...r){const s=top();if(s&&typeof fn==='function'){const b=s.body,f=fn;fn=function(...x){if(!validS(s)||s.body!==b)return;return as(s,()=>f.apply(this,x));};}return base.call(this,sec,fn,...r);};}
 if(typeof makeShot==='function'){const base=makeShot;makeShot=function(x,y,a,spd,dmg,opt,...r){const s=top();if(s)opt={...(opt||{}),r1157Summon:true,sourceHero:(opt&&opt.sourceHero)||s.hero};return base.call(this,x,y,a,spd,dmg,opt,...r);};}
 if(typeof gainXP==='function'){const base=gainXP;gainXP=function(...a){const s=top();if(s&&s.owner&&player===s.body){const b=player;player=s.owner;try{return base.apply(this,a);}finally{player=b;}}return base.apply(this,a);};}
-if(typeof hitEnemy==='function'){const base=hitEnemy;hitEnemy=function(e,v,src,...a){const r=base.call(this,e,v,src,...a);if(top()&&r!==false)stats.hits++;return r;};}
+if(typeof hitEnemy==='function'){const base=hitEnemy;hitEnemy=function(e,v,src,...a){const r=base.call(this,e,v,src,...a);if(r!==false&&(top()||src&&typeof src==='object'&&src.r1157Summon))stats.hits++;return r;};}
 
 // ── 그리기: 방 소품 자리(깊이 정렬)에서 발밑 고리 → 몸(엔진 drawHero) → 등장·퇴장 소용돌이 ──
 function cell(sh,fr,cx,cy,W,comp,alpha){const im=img(sh.path);if(!im||!(W>0)||!fin(cx)||!fin(cy))return false;fr=((fr%sh.n)+sh.n)%sh.n;
@@ -154,6 +161,11 @@ function drawSummon(p){const s=p.r1157Ref;if(!s||!s.body||typeof project!=='func
  const pose=G(()=>heroArt[s.hero].idle.front,null);
  if(pose&&ready(pose)){s.body.x=s.x;s.body.y=s.y;ctx.save();try{ctx.globalAlpha*=clamp(.25+.75*fade,0,1);as(s,()=>drawHero());}finally{ctx.restore();}}
  else ask(G(()=>heroPaths(s.hero),[]),'hero:'+s.hero);
+ // 아군 표시(UX): 머리 위 영웅 이름 + 남은 시간 막대(흰→언주 붉은빛). 적 체력 막대와 헷갈리지 않게 가늘고 이름과 붙여 둔다.
+ sc({id:'r1157:tag:'+s.body.id,kind:'effect',pxfSide:'hero',x:s.x,y:s.y+.02},()=>{ctx.save();try{const y=q.y-AH*1.18,w=AH*.62,k=clamp(left/Math.max(.01,s.until-s.t0),0,1);ctx.globalAlpha=fade;ctx.globalCompositeOperation='source-over';
+  ctx.font='600 '+Math.round(clamp(11*z,9,14))+'px sans-serif';ctx.textAlign='center';ctx.lineWidth=3;ctx.strokeStyle='rgba(18,12,14,.85)';const name='환수 · '+G(()=>HEROES[s.hero].name,s.hero);
+  if(typeof ctx.strokeText==='function')ctx.strokeText(name,q.x,y);ctx.fillStyle='rgba(255,236,232,.95)';ctx.fillText(name,q.x,y);
+  ctx.fillStyle='rgba(18,12,14,.75)';ctx.fillRect(q.x-w/2-1,y+4,w+2,4);ctx.fillStyle=k>.3?'rgba(255,226,220,.95)':'rgba(214,64,72,.95)';ctx.fillRect(q.x-w/2,y+5,w*k,2);}finally{ctx.restore();}});
  const gk=age<SH.gate.dur?age/SH.gate.dur:left<SH.gate.dur?1-left/SH.gate.dur:-1;
  if(gk>=0)sc({id:'r1157:gate:'+s.body.id,kind:'effect',pxfSide:'hero',x:s.x,y:s.y+.01},()=>cell(SH.gate,Math.min(SH.gate.n-1,Math.floor(gk*SH.gate.n)),q.x,q.y-AH*.45,AH*1.5,'lighter',.85));
  stats.draws++;}
