@@ -89,6 +89,24 @@ if(!MOD){ok(false,'모듈 파일 없음: client-source/'+N);console.log('FAILED 
  const g2=env({sheets:false});g2.room.enemies.push(mob('a',11.5,10),mob('b',13,10));step(g2,2);cast(g2,'w');step(g2,2);mark(g2,['a','b']);step(g2,4);cast(g2,'r',21);step(g2,8);
  const s2=vm.runInContext('seen',g2);ok(s2.length>0&&s2.every(x=>x.op!=='image')&&Z(g2).inspect().stats.tempDraws>0&&Z(g2).inspect().stats.errors===0,'⑨ 시트가 안 읽혔으면 임시 코드 그림');
  ok(vm.runInContext('asked',g2).includes('assets/r562/dots/neon-chain.webp'),'⑨ 안 읽힌 시트를 부탁함');}
+// ⑪ (진) 쌍성 소멸 부채꼴 레이저 (사용자 06:23Z "가는곳에 저렇게 흑적색 레이져가 펴지면서 (맵끝까지) 일반몹즉사 보스몹 최대체력7프로 추가데미지")
+{const fake=(g)=>{vm.runInContext(`var N=64;var VIO={procs:0,acts:[]};window.__STORYWORLD_LAUREN_CELESTIAL_R946__={inspect:()=>({acts:VIO.acts.map(a=>({...a})),stats:{procs:{violet:VIO.procs}}})};
+  function fireViolet(ux,uy){VIO.procs++;VIO.acts.push({kind:'violet',x:player.x+ux*.9,y:player.y+uy*.9,t0:time});}`,g);};
+ let g=env();fake(g);g.room.enemies.push(mob('n1',14,10),mob('n2',30,10.6),mob('n3',20,14.2),mob('n4',20,11.3),mob('boss',24,10,{boss:true,hp:5000,maxHp:5000}),mob('side',10,20),mob('behind',6,10));step(g,2);
+ vm.runInContext('fireViolet(1,0)',g);step(g,4);ok(H(g,'laser').length===0,'⑪ 쌍성 충전(0.5초) 동안은 레이저 없음');step(g,16);
+ const L=H(g,'laser'),id=k=>L.filter(h=>h.id===k);
+ ok(['n1','n2','n3','n4'].every(k=>id(k).length===1&&g.room.enemies.find(e=>e.id===k).hp<=0),'⑪ 부채꼴 안 일반 몹은 즉사(맵 끝 30칸 거리까지) ('+L.map(h=>h.id).join(',')+')');
+ const b=id('boss');ok(b.length===1&&Math.abs(b[0].v-350)<1e-6&&g.room.enemies.find(e=>e.id==='boss').hp>0,'⑪ 보스는 최대 체력 7%(=350) 추가 피해, 즉사 아님 ('+(b[0]&&b[0].v)+')');
+ ok(!id('side').length&&!id('behind').length,'⑪ 부채꼴 밖·뒤쪽 적은 안 맞음');
+ ok(L.every(h=>h.src.friendly===true&&h.src.r946===true&&h.src.sourceHero==='lauren'),'⑪ 영웅 피해, 천체 공명을 다시 굴리지 않게 r946 표식');
+ ok(JSON.stringify(Z(g).tune.laser.rays)==='[-0.42,-0.28,-0.14,0,0.14,0.28,0.42]','⑪ 레이저 일곱 줄(사용자 06:42Z), ±24도');
+ step(g,40);ok(H(g,'laser').length===L.length,'⑪ 한 번만');
+ const s=vm.runInContext('seen',g).filter(x=>x.o&&/^r946:violet:laser:/.test(String(x.o.id)));ok(s.length>0&&s.every(x=>x.o.kind==='effect'&&x.o.pxfSide==='hero'),'⑪ 그림 주인 r946:violet:laser:* (페르소나 검빨 굽기 대상) ('+s.length+')');
+ ok(s.filter(x=>x.op==='image').every(x=>x.src==='assets/r562/dots/neon-chain.webp'),'⑪ 레이저 결 = 기존 네온 번개 시트 재사용');
+ g=env({form:false});fake(g);g.room.enemies.push(mob('n1',14,10));step(g,2);vm.runInContext('fireViolet(1,0)',g);step(g,30);ok(H(g,'laser').length===0,'⑪ 라우렌 본인(형상 아님) → 레이저 없음');
+ g=env();fake(g);g.room.enemies.push(mob('n1',14,10));step(g,2);vm.runInContext("VIO.acts.push({kind:'red',x:11,y:10,t0:time})",g);step(g,30);ok(H(g,'laser').length===0,'⑪ 다른 갈래 → 없음');
+ g=env();fake(g);vm.runInContext('player.x=88;player.y=60;room.exploration={expanded:true,bounds:[0,0,120,120]}',g);g.room.enemies.push(mob('x1',100,60),mob('x2',118,60.3));step(g,2);vm.runInContext('fireViolet(1,0)',g);step(g,30);ok(H(g,'laser').filter(h=>/^x/.test(h.id)).length===2,'⑪ 넓힌 탐험 맵(경계 120)에서는 그 끝까지 ('+H(g,'laser').map(h=>h.id)+')');
+ g=env();fake(g);g.room.enemies.push(mob('n1',14,10),mob('far',70,10));step(g,2);vm.runInContext('fireViolet(1,0)',g);step(g,30);ok(H(g,'laser').some(h=>h.id==='n1')&&!H(g,'laser').some(h=>h.id==='far'),'⑪ 맵(N=64) 밖까지는 안 감');}
 // ⑩ 페르소나 굽기 연동(persona-hero-r1113): 다른 영웅 시트도 언주로, personaTone 흑, 굽지 못하면 주인이 준 색 돌리기
 function el(id,attrs={},text=''){const a={...attrs};return {id,dataset:{},textContent:text,style:{_p:{},setProperty(k,v){this._p[k]=v;},getPropertyValue(k){return this._p[k]||'';}},
  getAttribute:k=>a[k]??null,setAttribute:(k,v)=>{a[k]=String(v);},get src(){return a.src;},set src(v){a.src=String(v);},get title(){return a.title;},set title(v){a.title=String(v);},_a:a};}
@@ -133,6 +151,8 @@ const on=w=>{A(w).unlock('silent');A(w).setForm(true);w.frame([body()]);w.load()
  ok(/^r1140:eonju:/.test(s[1].sourcePath)&&s[1].image._pixels[0]>s[1].image._pixels[2]*2,'⑩ 네온 번개(민트) → 언주 굽기 ('+s[1].sourcePath+' '+[...s[1].image._pixels.slice(0,3)]+')');
  ok(s[2].image===C&&s[2].style.filter==='brightness(0)','⑩ 밑그림(영웅 쪽 표식 없음)은 페르소나 굽기가 건드리지 않음 → 검은 그림자 그대로');
  ok(/^r1140:eonju:/.test(s[3].sourcePath),'⑩ 헌터 화상 → 언주 굽기');}
+{const w=world();on(w);const C=img(8,8,[80,230,190,255]);let s;for(let i=0;i<6;i++)s=w.frame([body(),fx('r946:violet:laser:3:1','http://x/m0/assets/r562/dots/neon-chain.webp',C,{owner:{pxfSide:'hero'}})]);
+ ok(/^r1140:darkred:/.test(s[1].sourcePath),'⑩ (진) 쌍성 소멸 레이저 결(네온 번개 시트) → 검빨 굽기 ('+s[1].sourcePath+')');}
 {const w=world({pixels:false});on(w);const C=img(8,8,[80,230,190,255]);let s;for(let i=0;i<4;i++)s=w.frame([body(),fx('r1144:chain:1','http://x/m0/assets/r562/dots/neon-chain.webp',C,{owner:{pxfSide:'hero',personaFallback:'hue-rotate(200deg) saturate(1.6) brightness(.85)'}})]);
  ok(s[1].image===C&&s[1].style.filter==='hue-rotate(200deg) saturate(1.6) brightness(.85)','⑩ 굽지 못하면 주인이 준 색 돌리기(민트 → 붉은 쪽) ('+s[1].style.filter+')');
  const s3=w.frame([body(),fx('r1144:x','http://x/m0/a.webp',img(8,8,[1,2,3,255]),{owner:{pxfSide:'hero',personaFallback:'blur(3px)'}})]);ok(!/blur/.test(s3[1].style.filter),'⑩ 기록기가 못 받는 필터는 받지 않음 ('+s3[1].style.filter+')');}

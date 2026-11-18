@@ -1,0 +1,74 @@
+684 image | effect | r#:shadow:r#:furn:murder#:#:# | m0/assets/world-r#/r#-#.webp | brightness(0) |  | 
+348 image | effect | r#:shadow:r#:scene:murder#:# | m0/assets/world-r#/r#-#.webp | brightness(0) |  | 
+232 image | effect | r#:aura-back:hero | r#:eonju:2:r#fx:glow:#.#.#:#.#.# | none |  | 
+232 image | effect | r#:aura-back:hero | r#:eonju:3:r#fx:cross:#.#.#:#.#.# | none |  | 
+150 image | effect | r#:dust | r#fx:smoke:#.#.#:#.#.# | none |  | 
+116 image | effect | r#:aura-back:hero | r#:eonju:5:assets/r#/fx-c4-ground-ring.webp | none |  | 
+116 image | effect | r#:passive-aura:hero:resonance | r#:eonju:4:m0/assets/auras-r#/resonance-petals.webp | saturate(.65) brightness(.93) |  | 
+116 image | effect | r#:aura-front:hero | r#:eonju:3:r#fx:cross:#.#.#:#.#.# | none |  | 
+116 image | effect | r#:aura-front:hero | r#:eonju:2:r#fx:glow:#.#.#:#.#.# | none |  | 
+34 image | effect | r#:# | m0/assets/r#/sig-slash-violet.webp | hue-rotate(100deg) saturate(1.5) brightness(.78) contrast(1.15) |  | 
+30 image | effect | r#:# | r#:eonju:9:r#fx:spark:#.#.#:#.#.# | none |  | 
+24 image | effect | final#-r#:r#:r#:#:F# | m0/assets/final#-r#/effects/#/atlas.png | saturate(.22) brightness(1.06) |  | 
+24 image | effect | r#:# | r#:eonju:#:m0/assets/r#/sig-hit-violet.webp | none |  | 
+22 image | effect | r#:# | m0/assets/r#/sig-hit-violet.webp | hue-rotate(100deg) saturate(1.5) brightness(.78) contrast(1.15) |  | 
+20 image | effect | r#:# | r#fx:spark:#.#.#:#.#.# | hue-rotate(100deg) saturate(1.5) brightness(.78) contrast(1.15) |  | 
+18 image | effect | r#:# | m0/assets/r#/sig-hit-pale.webp | grayscale(1) brightness(1.12) hue-rotate(100deg) saturate(1.5) brightness(.78) contrast(1.15) |  | 
+18 image | effect | r#:# | r#:eonju:#:m0/assets/r#/sig-hit-pale.webp | brightness(1.12) |  | 
+14 image | effect | r#:hero-hit:hit-teleport:#.# | r#:eonju:#:m0/assets/r#/fx/hit-teleport.webp | none |  | 
+12 image | effect | r#:# | r#:eonju:#:m0/assets/r#/sig-slash-violet.webp | none |  | 
+11 image | effect | fx:# |  | hue-rotate(100deg) saturate(1.5) brightness(.78) contrast(1.15) |  | 
+6 image | effect | r#:# | r#:eonju:#:r#fx:flare:#.#.#:#.#.# | none |  | 
+5 image | effect | fx:# | r#:eonju:6:cv | none |  | 
+4 image | effect | r#:aura | r#:glow:aura | none |  | 
+4 image | effect | r#:orb | r#:glow:orb | none |  | 
+4 image | effect | r#:# | r#fx:slashline:#.#.#:#.#.# | hue-rotate(100deg) saturate(1.5) brightness(.78) contrast(1.15) |  | 
+4 image | effect | fx:# | m0/assets/vfx/generated/v#/burst-impact.webp | none |  | 
+4 image | effect | r#:# | r#:eonju:8:r#fx:slashline:#.#.#:#.#.# | none |  | 
+4 image | effect | r#:# | r#fx:flare:#.#.#:#.#.# | hue-rotate(100deg) saturate(1.5) brightness(.78) contrast(1.15) |  | 
+3 image | effect | fx:# | r#:eonju:7:cv | none |  | 
+2 image | effect | r#:hero-hit:hit-teleport:#.# | m0/assets/r#/fx/hit-teleport.webp | hue-rotate(100deg) saturate(1.5) brightness(.78) contrast(1.15) |  | 
+2 image | effect | r#:blood-splash:#.# | m0/assets/r#/blood/blood-splash.webp | saturate(.45) brightness(.55) contrast(1.05) |  | 
+2 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(1.45) saturate(1.3) |  | 
+2 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(1.32) saturate(1.3) |  | 
+2 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(1.25) saturate(1.3) |  | 
+2 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(1.12) saturate(1.3) |  | 
+2 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(1.05) saturate(1.3) |  | 
+2 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(0.92) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(1.85) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:burst:# | m0/assets/r#/blood/blood-burst.webp | brightness(1.49) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(1.52) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:stain:# | m0/assets/r#/blood/blood-death.webp | brightness(1.65) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(1.78) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:burst:# | m0/assets/r#/blood/blood-burst.webp | brightness(1.35) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:stain:# | m0/assets/r#/blood/blood-death.webp | brightness(1.58) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(1.72) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:burst:# | m0/assets/r#/blood/blood-burst.webp | brightness(1.21) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:stain:# | m0/assets/r#/blood/blood-death.webp | brightness(1.52) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(1.65) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:burst:# | m0/assets/r#/blood/blood-burst.webp | brightness(1.14) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:stain:# | m0/assets/r#/blood/blood-death.webp | brightness(1.45) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(1.58) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:burst:# | m0/assets/r#/blood/blood-burst.webp | brightness(0.99) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:stain:# | m0/assets/r#/blood/blood-death.webp | brightness(1.38) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:burst:# | m0/assets/r#/blood/blood-burst.webp | brightness(0.92) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:stain:# | m0/assets/r#/blood/blood-death.webp | brightness(1.32) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(1.38) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:stain:# | m0/assets/r#/blood/blood-death.webp | brightness(1.25) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:stain:# | m0/assets/r#/blood/blood-death.webp | brightness(1.18) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:stain:# | m0/assets/r#/blood/blood-death.webp | brightness(1.12) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(1.18) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:stain:# | m0/assets/r#/blood/blood-death.webp | brightness(1.05) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:stain:# | m0/assets/r#/blood/blood-death.webp | brightness(0.98) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:stain:# | m0/assets/r#/blood/blood-death.webp | brightness(0.92) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(0.98) saturate(1.3) |  | 
+FXD
+id,kind,x,y,bodyPath,alive,renderHeight,terrainWall,visualHospitalFrame,lightShadowApproved,groundAligned :: type=undefined name=undefined hero=undefined pxfHero=undefined pxfEvent=undefined pxfStage=undefined pxfSide=undefined img=363x363  filter=none
+id,kind,x,y,bodyPath,alive,renderHeight,terrainWall,visualHospitalFrame,lightShadowApproved,groundAligned :: type=undefined name=undefined hero=undefined pxfHero=undefined pxfEvent=undefined pxfStage=undefined pxfSide=undefined img=512x512  filter=hue-rotate(100deg) saturate(1.5) brightness(.78) contrast(1.15)
+id,kind,x,y,bodyPath,alive,renderHeight,terrainWall,visualHospitalFrame,lightShadowApproved,groundAligned :: type=undefined name=undefined hero=undefined pxfHero=undefined pxfEvent=undefined pxfStage=undefined pxfSide=undefined img=512x512 27.0.0.1:4410/m0/assets/vfx/generated/v300/burst-impact.webp filter=none
+id,kind,x,y,bodyPath,alive,renderHeight,terrainWall,visualHospitalFrame,lightShadowApproved,groundAligned :: type=undefined name=undefined hero=undefined pxfHero=undefined pxfEvent=undefined pxfStage=undefined pxfSide=undefined img=363x363  filter=none
+id,kind,x,y,bodyPath,alive,renderHeight,terrainWall,visualHospitalFrame,lightShadowApproved,groundAligned :: type=undefined name=undefined hero=undefined pxfHero=undefined pxfEvent=undefined pxfStage=undefined pxfSide=undefined img=512x512  filter=none
+id,kind,x,y,bodyPath,alive,renderHeight,terrainWall,visualHospitalFrame,lightShadowApproved,groundAligned :: type=undefined name=undefined hero=undefined pxfHero=undefined pxfEvent=undefined pxfStage=undefined pxfSide=undefined img=512x512 27.0.0.1:4410/m0/assets/vfx/generated/v300/burst-impact.webp filter=none
+id,kind,x,y,bodyPath,alive,renderHeight,terrainWall,visualHospitalFrame,lightShadowApproved,groundAligned :: type=undefined name=undefined hero=undefined pxfHero=undefined pxfEvent=undefined pxfStage=undefined pxfSide=undefined img=363x363  filter=none
+id,kind,x,y,bodyPath,alive,renderHeight,terrainWall,visualHospitalFrame,lightShadowApproved,groundAligned :: type=undefined name=undefined hero=undefined pxfHero=undefined pxfEvent=undefined pxfStage=undefined pxfSide=undefined img=512x512  filter=none
+FIN ["final42-r88:r99:r98:1:F246 [0,320,320,320]","final42-r88:r99:r98:2:F246 [0,320,320,320]","final42-r88:r99:r98:1:F246 [960,320,320,320]","final42-r88:r99:r98:2:F246 [960,320,320,320]","final42-r88:r99:r98:1:F246 [320,640,320,320]","final42-r88:r99:r98:2:F246 [320,640,320,320]","final42-r88:r99:r98:3:F246 [0,0,320,320]","final42-r88:r99:r98:4:F246 [0,0,320,320]","final42-r88:r99:r98:1:F246 [960,640,320,320]","final42-r88:r99:r98:2:F246 [960,640,320,320]","final42-r88:r99:r98:3:F246 [960,0,320,320]","final42-r88:r99:r98:4:F246 [960,0,320,320]"]

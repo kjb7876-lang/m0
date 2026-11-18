@@ -10,7 +10,7 @@
  * 끄기: localStorage storyworld.r1113.personaHero = {"on":..., "off":true}. */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_PERSONA_HERO_R1113__)return;
-const REV='R1113-persona-hero-9-celestial-r1143-wer-r1144',KEY='storyworld.r1113.personaHero',FIELD='personaHeroR1113',BASE='lauren';
+const REV='R1113-persona-hero-10-celestial-r1143-wer-r1144-basic-r1145',KEY='storyworld.r1113.personaHero',FIELD='personaHeroR1113',BASE='lauren';
 const PROFILE=Object.freeze({name:'페르소나',title:'페르소나 · 순수악의',role:'HIDDEN · 9번째 영웅',color:'#cc3428',
  passive:'사몽 결전에서 쓰러뜨린 거울. 별의 기술을 언주빛으로 되비춥니다.',special:'내면의 소용돌이',
  portrait:'assets/rc133/art/awake-0.png',tags:['히든','언주','거울']});
@@ -125,6 +125,7 @@ const GUARD_ART=/\/r1027\/barrier\.webp/,BLINK_ART=/\/vfx\/blink-afterimage\.web
 function heroFx(o,c){if(!o||o.kind==='enemy'||o.kind==='contact'||o.kind==='shadow')return false;if(o.kind==='hero')return GUARD_ART.test(String(c?.sourcePath||''));
  if(o.pxfSide!=='enemy'&&o.side!=='enemy'){if(GUARD_ID.test(String(o.id||'')))return true;const s0=String(c?.sourcePath||'');if(GUARD_ART.test(s0)||BLINK_ART.test(s0))return true;}if(o.pxfSide==='hero'||o.side==='hero')return true;if(o.pxfSide==='enemy'||o.side==='enemy')return false;const id=String(o.id||'');
  if(o.r101===true&&HIT_ID.test(id)&&HIT_ART.test(String(c?.sourcePath||'')))return true;/* R1143: 영웅 타격 불꽃(R101, 라우렌 보라·옅은 색) */
+ if(o.r411===true&&o.enemy!==true&&HIT411.test(id))return true;if(o.kind==='effect'&&R302_MARK(c))return true;/* R1145: 기본 공격의 라우렌 흔적 — R411 영웅 적중 그림(hit-teleport 보랏빛 균열)·R302 가 라우렌 바이올렛으로 칠한 엔진 탄·착탄 사본 */
  if(/(^|:)hero(:|$)/.test(id)||/^r102:/.test(id)||EGO_AURA.test(id)||LAUREN_ID.test(id))return true;const sp=String(c?.sourcePath||'');
  const e=LAUREN_EDEN.exec(sp),ev=e&&violet(+e[1],+e[2],+e[3]);
  return o.kind==='effect'&&(LAUREN_FX.test(sp)||!!ev||LAUREN_ART.test(sp));}
@@ -137,6 +138,7 @@ const RGBA=/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d.eE+-]+)\s*)?\)
 function recolorStr(v){if(typeof v!=='string')return v;return v.replace(RGBA,(m,r,g,b,a)=>{if(!violet(+r,+g,+b))return m;const c=eonju(+r,+g,+b);return a==null?'rgb('+c.join(',')+')':'rgba('+c.join(',')+','+a+')';});}
 function recolorPaint(v){if(typeof v==='string')return recolorStr(v);if(v&&typeof v==='object'&&Array.isArray(v.stops))return {...v,stops:v.stops.map(st=>st&&typeof st==='object'?{...st,color:recolorStr(st.color)}:st)};return v;}
 const VEC_ID=/^r561:/;
+const HIT411=/^r411:hero-hit:/,R302_MARK=c=>c?.image?.__r302Path==='r302-tint';
 const HIT_ID=/^r101:\d+$/,HIT_ART=/\/r100\/sig-(hit|slash)-(violet|pale)\.webp/;
 // R1120: 픽셀 이펙트(R163) — 라우렌 특수기(R178 pvfx-warm-explosion 등)는 영웅 팔레트(보라)를 색조로 넘겨 구운 캔버스라 그림 필터가 안 닿는다 → play 로 넘기는 색조를 언주로.
 //  frameAt 은 R102 영웅 이펙트 안에서 그려져 그 명령째 언주 색 돌리기(tint)를 받으므로 그대로 둔다(둘 다 하면 빨강→초록).
@@ -171,7 +173,7 @@ function toneStr(v,tone){if(typeof v!=='string')return v;const t=TONES[tone].lut
 function tonePaint(v,tone){if(typeof v==='string')return toneStr(v,tone);if(v&&typeof v==='object'&&Array.isArray(v.stops))return {...v,stops:v.stops.map(st=>st&&typeof st==='object'?{...st,color:toneStr(st.color,tone)}:st)};return v;}
 function rampPixels(d,lut=LUT_DEEP){let n=0;if(!d||!(d.length>=4))return 0;for(let i=0;i+3<d.length;i+=4){if(d[i+3]===0)continue;const j=lum(d[i],d[i+1],d[i+2])*3;d[i]=lut[j];d[i+1]=lut[j+1];d[i+2]=lut[j+2];n++;}return n;}
 const BAKE_MAX_PX=2048*2048,BAKE_MAX_N=200,BAKE_MAX_TOTAL=12e6;const baked=new WeakMap(),bakedTone={};let bakeSerial=0,bakeBudget=0,bakeCount=0,bakePx=0; // 합계 1200만 화소(약 48MB)까지만 굽는다
-function bake(c,tone='eonju'){const im=c.image;if(!im||typeof im!=='object'||c.mutable===true||!hasDom())return null;const store=tone==='eonju'?baked:(bakedTone[tone]||(bakedTone[tone]=new WeakMap()));let r=store.get(im);if(r!==undefined)return r;
+function bake(c,tone='eonju'){const im=c.image;if(!im||typeof im!=='object'||(c.mutable===true&&!R302_MARK(c))||!hasDom())return null;/* R1145: R302 사본은 한 번 칠하고 안 바뀌는 캔버스 */const store=tone==='eonju'?baked:(bakedTone[tone]||(bakedTone[tone]=new WeakMap()));let r=store.get(im);if(r!==undefined)return r;
  const w=Math.floor(+im.naturalWidth||+im.videoWidth||+im.width||0),h=Math.floor(+im.naturalHeight||+im.videoHeight||+im.height||0);
  if(!(w>0&&h>0)||w*h>BAKE_MAX_PX||bakeCount>=BAKE_MAX_N||bakePx+w*h>BAKE_MAX_TOTAL){store.set(im,null);return null;}
  if(bakeBudget<=0)return null;bakeBudget--;
@@ -180,7 +182,7 @@ function bake(c,tone='eonju'){const im=c.image;if(!im||typeof im!=='object'||c.m
   r={canvas:cv,path:id};bakeCount++;bakePx+=w*h;stats.bakedPx=bakePx;stats.baked=(stats.baked||0)+1;}catch(_){r=null;stats.bakeSkips=(stats.bakeSkips||0)+1;}
  store.set(im,r);return r;}
 function tint(cmds){let n=0;for(const c of cmds){if(!c||c.kind!=='image'||c.r1113tint)continue;if(!heroFx(c.owner,c))continue;const s=c.style&&typeof c.style==='object'?c.style:{};
-  const ct=celToneOf(c.owner);if(ct&&!CEL_ART.test(String(c.sourcePath||''))){c.r1113tint=true;continue;}/* R1143: 유성 궤도가 던지는 조형물 그림은 물들이지 않음 */const tone=ct||'eonju';if(ct)stats.celTints=(stats.celTints||0)+1;
+  const ct=celToneOf(c.owner);if(ct&&/^r946:meteor:/.test(String(c.owner?.id||''))&&!CEL_ART.test(String(c.sourcePath||''))){c.r1113tint=true;continue;}/* R1143: 유성 궤도가 던지는 조형물 그림은 물들이지 않음 */const tone=ct||'eonju';if(ct)stats.celTints=(stats.celTints||0)+1;
   let b=null;try{b=bake(c,tone);}catch(e){fail(e);}
   if(b){if(typeof s.filter==='string'&&/grayscale\(/.test(s.filter)){const k=s.filter.replace(/grayscale\([^)]*\)\s*/g,'').trim();c.style={...s,filter:k||'none'};}/* R1143: 무채색 필터가 구운 색을 다시 지우지 않게 */c.image=b.canvas;c.mutable=false;c.sourcePath=b.path;c.immutableTint=b.canvas.__storyworldStaticSource;c.r1113tint=true;stats.bakedDraws=(stats.bakedDraws||0)+1;n++;continue;}
   const f=typeof s.filter==='string'&&s.filter!=='none'?s.filter+' ':'';c.style={...s,filter:f+(TONES[tone].filter||(tone==='darkred'?TINT+' brightness(.55)':ownerFallback(c.owner)||TINT))};c.r1113tint=true;n++;}stats.tints+=n;return n;}

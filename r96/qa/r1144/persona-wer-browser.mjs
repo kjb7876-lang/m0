@@ -32,6 +32,9 @@ const cnt=(a,k)=>a.filter(x=>x.k===k).length;
  const per={};for(const h of o)per[h.id]=(per[h.id]||0)+1;ok(Object.values(per).every(n=>n<=6),'ⓓ 적마다 3초에 6번 이하 ('+JSON.stringify(Object.values(per))+')');
  ok(r.hits.some(h=>h.k==='burn'),'ⓓ 닿은 적은 화상 도트');ok((await st()).orbit===false,'ⓓ 3초 뒤 구슬이 사라짐');
  const of=r.fx.filter(x=>x.k==='orbit');ok(of.length>0&&of.filter(x=>/^r1140:eonju:.*lauren-red/.test(x.img)).length/of.length>=.8,'ⓓ 도는 구슬 = 언주 ('+of.length+'개)');}
+{await calm();await p.evaluate(()=>{window.__hits.length=0;const live=room.enemies.filter(e=>e.hp>0).sort((a,b)=>Math.hypot(a.x-player.x,a.y-player.y)-Math.hypot(b.x-player.x,b.y-player.y));live.slice(0,4).forEach((e,i)=>{e.x=player.x+2.4+1.2*i;e.y=player.y+(i%2?.2:-.2);});
+  const Z=window.__STORYWORLD_LAUREN_CELESTIAL_R946__;Z.qaReset();Z.qaForce('violet');hitEnemy(live[0],1,{kind:'basic',sourceHero:'lauren'});});await waitT(.9);await p.screenshot({path:`${OUT}/persona-laser.png`,clip:{x:230,y:90,width:520,height:330}});await waitT(.8);
+ const L=await p.evaluate(()=>window.__hits.filter(h=>h.k==='laser')),S=(await st()).stats;ok(S.lasers>=1&&L.length>=1&&(S.laserKills||0)>=1,'ⓗ (진) 쌍성 소멸 레이저: 부채꼴 안 일반 몹 즉사 ('+(S.laserKills||0)+'마리, 보스 '+(S.laserBoss||0)+')');}
 const s1=await st();ok(s1.stats.errors===0&&!(await p.evaluate(A=>window[A].inspect().lastError,A)),'ⓔ 오류 0 ('+s1.stats.lastError+'), 시트 그림 '+s1.stats.sheetDraws+'번·임시 그림 '+s1.stats.tempDraws+'번');
 // 라우렌 본인
 await p.evaluate(A=>{window[A].setForm(false);},A);await p.waitForTimeout(400);const before=(await st()).stats;

@@ -54,9 +54,22 @@ PASS ⑨ 끝나면 표지 치움·save 짝 맞음
 PASS ⑨ 오류 0 (null)
 PASS ⑨ 시트가 안 읽혔으면 임시 코드 그림
 PASS ⑨ 안 읽힌 시트를 부탁함
+PASS ⑪ 쌍성 충전(0.5초) 동안은 레이저 없음
+PASS ⑪ 부채꼴 안 일반 몹은 즉사(맵 끝 30칸 거리까지) (n1,n2,n3,boss)
+PASS ⑪ 보스는 최대 체력 7%(=350) 추가 피해, 즉사 아님 (350)
+PASS ⑪ 부채꼴 밖·뒤쪽 적은 안 맞음
+PASS ⑪ 영웅 피해, 천체 공명을 다시 굴리지 않게 r946 표식
+PASS ⑪ 한 번만
+PASS ⑪ 그림 주인 r946:violet:laser:* (페르소나 검빨 굽기 대상) (848)
+PASS ⑪ 레이저 결 = 기존 네온 번개 시트 재사용
+PASS ⑪ 라우렌 본인(형상 아님) → 레이저 없음
+PASS ⑪ 다른 갈래 → 없음
+PASS ⑪ 넓힌 탐험 맵(경계 120)에서는 그 끝까지 (x1,x2)
+PASS ⑪ 맵(N=64) 밖까지는 안 감
 PASS ⑩ 네온 번개(민트) → 언주 굽기 (r1140:eonju:1:m0/assets/r562/dots/neon-chain.webp 213,73,57)
 PASS ⑩ 밑그림(영웅 쪽 표식 없음)은 페르소나 굽기가 건드리지 않음 → 검은 그림자 그대로
 PASS ⑩ 헌터 화상 → 언주 굽기
+PASS ⑩ (진) 쌍성 소멸 레이저 결(네온 번개 시트) → 검빨 굽기 (r1140:darkred:1:m0/assets/r562/dots/neon-chain.webp)
 PASS ⑩ 굽지 못하면 주인이 준 색 돌리기(민트 → 붉은 쪽) (hue-rotate(200deg) saturate(1.6) brightness(.85))
 PASS ⑩ 기록기가 못 받는 필터는 받지 않음 (hue-rotate(100deg) saturate(1.5) brightness(.78) contrast(1.15))
 ALL PASS
