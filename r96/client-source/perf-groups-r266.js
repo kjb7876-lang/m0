@@ -40,5 +40,6 @@ const drawPropNow=q=>{passing=true;try{drawProp(q);}catch(e){fail(e);}finally{pa
 if(typeof drawProp==='function'){const baseProp=drawProp;
  drawProp=function(q,...a){if(!passing&&preFrame&&q&&pre.has(q)){pre.delete(q);return;}for(const paint of propRenderers)if(paint(q,...a)===true)return;return baseProp.apply(this,[q,...a]);};}
 function set(v){on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}
-window.__STORYWORLD_PERF_GROUPS_R266__=Object.freeze({revision:REV,set,scan,registerPropRenderer,actorsOnTop:v=>{actorsOnTop=v!==false;try{localStorage.setItem('storyworld.r266.actorsOnTop',JSON.stringify({on:actorsOnTop}));}catch(_){}return actorsOnTop;},inspect:()=>({revision:REV,on,stats:{...stats},lastError})});
+/* R1181: 지금 '배우 먼저' 미리 그리기 중인지 — 이 파일 뒤에 drawProp 을 감싸 직접 그리고 돌아가는 오버레이(R600 정화 구슬)가 두 번 그리지 않게 */
+window.__STORYWORLD_PERF_GROUPS_R266__=Object.freeze({revision:REV,set,scan,registerPropRenderer,prePassing:()=>passing,actorsOnTop:v=>{actorsOnTop=v!==false;try{localStorage.setItem('storyworld.r266.actorsOnTop',JSON.stringify({on:actorsOnTop}));}catch(_){}return actorsOnTop;},inspect:()=>({revision:REV,on,stats:{...stats},lastError})});
 })();
