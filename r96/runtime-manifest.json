@@ -11223,6 +11223,21 @@
       "sha256": "868f6628fdc71cd76a03544dbac390a5249a99f1cf7378eaff76a0c403da8630"
     },
     {
+      "path": "assets/r1158/index.json",
+      "bytes": 879,
+      "sha256": "6b87dda6a2459c302e3bf773647cc6be3f15df77eb77aa72bdd198a89cf6341e"
+    },
+    {
+      "path": "assets/r1158/mobs/md-08-blackmarket-suspect-death.webp",
+      "bytes": 134818,
+      "sha256": "8772e6f22d52c46db4e7ba9ffcc4d97158562d90051ffe6560f6dc895e88f57c"
+    },
+    {
+      "path": "assets/r1158/mobs/md-09-drug-craver-death.webp",
+      "bytes": 120128,
+      "sha256": "8a71d713f376e516a42d6cd282f4e03db657c1434b416c43a2d3cf6e484bce0a"
+    },
+    {
       "path": "assets/r116/mobs/M001-hit.png",
       "bytes": 141513,
       "sha256": "35cffa3fe6d6c22cdb75e06e1cca55a673f06c10afa28087d749082c40c77b71"
@@ -54669,8 +54684,8 @@
     },
     {
       "path": "mob-attack-dots-r1065.js",
-      "bytes": 21979,
-      "sha256": "0c8b81b6f2c1e66710e4ff16ee4488d167d7b33ea6dcb6ad2f13f2b54572d186"
+      "bytes": 22721,
+      "sha256": "df6160467f10467bb2a36e5099bc4d0dbad907a86afc606bb5b2a8e628501ae3"
     },
     {
       "path": "mob-death-r188.js",
@@ -55858,8 +55873,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11171,
-  "totalBytes": 1347081242,
+  "fileCount": 11174,
+  "totalBytes": 1347337809,
   "webHTMLSha256": "58f93098a06bd5997166133004cf1911f85c31a15d19f6a4ddbf300cdfc0f8ff",
   "largest": [
     {

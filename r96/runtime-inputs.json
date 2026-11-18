@@ -10381,7 +10381,10 @@
     "mob-hit-r1156.js",
     "assets/r1156/mob-hit/swamp-root-hit4.webp",
     "assets/r1156/mob-hit/u203-e2-hit4.webp",
-    "assets/r1156/mob-hit/u203-e3-hit4.webp"
+    "assets/r1156/mob-hit/u203-e3-hit4.webp",
+    "assets/r1158/mobs/md-08-blackmarket-suspect-death.webp",
+    "assets/r1158/mobs/md-09-drug-craver-death.webp",
+    "assets/r1158/index.json"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11456,5 +11459,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "b996ef6000ff249a9b2c9c76b776924d6c63aa6e748dfbdf4913569f28d483ce"
+  "runtimeManifestSHA256": "0d0a77c66d67282dfb41cb98e9349dd77f2ed43666b8e6b97977c8ef6a8bbde7"
 }
