@@ -932,6 +932,8 @@ jobs:
         run: node r96/qa/r281/r281-cpu-check.cjs
       - name: R259 hit effects at enemy art centre CPU check
         run: node r96/qa/r259/r259-cpu-check.cjs
+      - name: R1172 shared enemy alpha box (tint copies pooled, no canvas read-back) CPU check
+        run: node r96/qa/r1172/r1172-cpu-check.cjs
       - name: R260 mob art preload and cave line flicker CPU check
         run: node r96/qa/r260/r260-cpu-check.cjs
       - name: R275 mob/boss audit — off-screen mobs skipped outermost, fixed R208/R223 mob strips CPU check

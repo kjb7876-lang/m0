@@ -34,13 +34,27 @@ const H=()=>typeof actorHeight==='function'?actorHeight():66;
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 // ---- ① 적 그림의 실제 중심 ------------------------------------------------------------------------
-const VC=new WeakMap(),BOX=new WeakMap();let scanBudget=6,scanCanvas=null;
-function opaqueBox(img,sx,sy,sw,sh){let m=BOX.get(img);if(!m){m=new Map();BOX.set(img,m);}const k=Math.round(sx)+','+Math.round(sy)+','+Math.round(sw)+','+Math.round(sh);if(m.has(k))return m.get(k);
- if(scanBudget<=0)return null;scanBudget--;let b={x0:0,y0:0,x1:1,y1:1};
- try{const N=40;scanCanvas??=document.createElement('canvas');scanCanvas.width=N;scanCanvas.height=N;const g=scanCanvas.getContext('2d',{willReadFrequently:true});g.clearRect(0,0,N,N);g.drawImage(img,sx,sy,sw,sh,0,0,N,N);
-  const d=g.getImageData(0,0,N,N).data;let x0=N,y0=N,x1=-1,y1=-1;for(let y=0;y<N;y++)for(let x=0;x<N;x++)if(d[(y*N+x)*4+3]>40){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y;}
-  if(x1>=0)b={x0:x0/N,y0:y0/N,x1:(x1+1)/N,y1:(y1+1)/N};stats.scans++;}catch(e){}
- if(m.size>2000)m.clear();m.set(k,b);return b;}// R147: 48칸이면 적 동작 칸이 많아 계속 지우고 다시 쟀다(그림 픽셀 읽기)
+const VC=new WeakMap();let scanBudget=6;
+/*R1172{*/const AB=window.__STORYWORLD_ALPHA_BOX_R1172__||(window.__STORYWORLD_ALPHA_BOX_R1172__=(()=>{
+ // R1172(사용자 2026-11-18 "사몽 적의 피격 위치를 찾을 때 발생하는 픽셀 판독 지연"): 적 그림 불투명 사각형을 R115·R259 가 한 캐시로 같이 쓴다.
+ //  알파를 안 바꾸는 필터의 색 사본(spriteTintCache3 등, 32칸이라 밀려나면 새 캔버스)은 경로·크기로 묶고, 잴 때는 사본 대신 원본 그림을 읽어 캔버스 되읽기를 피한다.
+ const SAFE=/^\s*(?:none|(?:(?:brightness|contrast|saturate|grayscale|hue-rotate|sepia|invert)\([^()]*\)\s*)+)?\s*$/i,N=40;
+ const OBJ=new WeakMap(),PATH=new Map(),st={hits:0,scans:0,fromBase:0};let cv=null;
+ const isCanvas=im=>typeof im?.getContext==='function';
+ const baseOf=p=>{try{const b=typeof readyImage==='function'?readyImage(p)?.image:null;return b&&!isCanvas(b)&&b.complete!==false&&(b.naturalWidth||b.width)?b:null;}catch(_){return null;}};
+ function slot(im){let p='',base=null;try{const t=im?.__storyworldStaticTint;
+   if(t&&t.path&&SAFE.test(String(t.filter??'none'))){base=baseOf(String(t.path));if(base&&(base.naturalWidth||base.width)===im.width&&(base.naturalHeight||base.height)===im.height)p=String(t.path)+'|'+im.width+'x'+im.height;else base=null;}
+   else if(im&&!isCanvas(im)){const s=String(im.__path||im.src||'');if(s)p=s+'|'+(im.naturalWidth||im.width)+'x'+(im.naturalHeight||im.height);}}catch(_){}
+  if(p){let m=PATH.get(p);if(!m){if(PATH.size>600)PATH.clear();m=new Map();PATH.set(p,m);}return{m,src:base||im};}
+  let m=OBJ.get(im);if(!m){m=new Map();OBJ.set(im,m);}return{m,src:im};}
+ function box(im,sx,sy,sw,sh,take){const{m,src}=slot(im),k=Math.round(sx)+','+Math.round(sy)+','+Math.round(sw)+','+Math.round(sh);if(m.has(k)){st.hits++;return m.get(k);}
+  if(typeof document==='undefined'||!take())return null;let b={x0:0,y0:0,x1:1,y1:1};
+  try{cv??=document.createElement('canvas');cv.width=N;cv.height=N;const g=cv.getContext('2d',{willReadFrequently:true});g.clearRect(0,0,N,N);g.drawImage(src,sx,sy,sw,sh,0,0,N,N);
+   const d=g.getImageData(0,0,N,N).data;let x0=N,y0=N,x1=-1,y1=-1;for(let y=0;y<N;y++)for(let x=0;x<N;x++)if(d[(y*N+x)*4+3]>40){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y;}
+   if(x1>=0)b={x0:x0/N,y0:y0/N,x1:(x1+1)/N,y1:(y1+1)/N};st.scans++;if(src!==im)st.fromBase++;}catch(_){}
+  if(m.size>2000)m.clear();m.set(k,b);return b;}
+ return Object.freeze({box,inspect:()=>({...st,paths:PATH.size})});})());/*}R1172*/
+function opaqueBox(img,sx,sy,sw,sh){return AB.box(img,sx,sy,sw,sh,()=>{if(scanBudget<=0)return false;scanBudget--;stats.scans++;return true;});}// R147: 칸 캐시 2000(동작 칸이 많음). R1172: R259 와 한 캐시
 function record(e,best,T0){const{img,sx,sy,sw,sh,dx,dy,dw,dh,T}=best;const b=opaqueBox(img,sx,sy,sw,sh);if(!b)return;
  const DM=m=>m instanceof DOMMatrix?m:new DOMMatrix([finite(m.a,1),finite(m.b),finite(m.c),finite(m.d,1),finite(m.e),finite(m.f)]),M=DM(T0).inverse().multiply(DM(T)),pts=[[b.x0,b.y0],[b.x1,b.y0],[b.x0,b.y1],[b.x1,b.y1]].map(([u,v])=>M.transformPoint(new DOMPoint(dx+dw*u,dy+dh*v)));
  let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;for(const p of pts){x0=Math.min(x0,p.x);x1=Math.max(x1,p.x);y0=Math.min(y0,p.y);y1=Math.max(y1,p.y);}
