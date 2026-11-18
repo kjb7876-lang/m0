@@ -659,6 +659,8 @@ jobs:
         run: node r96/qa/r1120/persona-hero-hud-well-cpu-check.cjs
       - name: R1140 persona hero audit (W/E/R dock icons+names survive engine HUD rewrite, panel labels, eonju luminance bake, guard/blink tint) CPU check
         run: node r96/qa/r1140/persona-hero-audit-cpu-check.cjs
+      - name: R1143 persona hero (jin) celestial resonance (name prefix only in persona form, repulse=eonju / pull=black / fused=dark red tint over the existing R946 art, hit logic unchanged) CPU check
+        run: node r96/qa/r1143/persona-celestial-cpu-check.cjs
       - name: R1098 samong faces (Michaela final boss uses her own sheet, R161 puppet repainted as an ink-and-white-thread doll so it no longer looks like Hwando) CPU check
         run: node r96/qa/r1098/r1098-cpu-check.cjs
       - name: R1090 character ink tint (hero and mob body images only, follows the map ink wash, settings toggle, effects and telegraphs untouched) CPU check
