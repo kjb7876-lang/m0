@@ -25,6 +25,93 @@
    ],
    "supportBottom": 473,
    "note": "REVIEW·발 HOLD → 지지발 아랫단 원래 자세와 같게, 4칸 골라 지금 피격 시간에 맞춤"
+  },
+  {
+   "file": "assets/r1156/mob-hit/u203-e3-hit4.webp",
+   "source": "P3_A4_u203e3/CX-P3_A4_u203-e3_hit4_r2_HOLD.png",
+   "sourceSha256": "936e76eca4852cb0d77c93549bd0951123ee52134e5ce0132dacf22f65d54ace",
+   "sha256": "75bcbd301b1db8d85c93c9cb26dd150270967e3ea9f219bd11af59e7bcc6cbf8",
+   "bytes": 43620,
+   "size": [
+    1024,
+    256
+   ],
+   "note": "HOLD 반동 15.8% → 발 고정 전단 0.62배",
+   "cell": [
+    256,
+    256
+   ],
+   "pivot": [
+    128,
+    235
+   ],
+   "frames": 4,
+   "headXBefore": [
+    87.9,
+    74.1,
+    92.8,
+    105.1
+   ],
+   "headXAfter": [
+    94.0,
+    85.2,
+    97.2,
+    105.1
+   ]
+  },
+  {
+   "file": "assets/r1156/mob-hit/u203-e2-hit4.webp",
+   "source": "P3_A4_u203e2/u203-e2_hit4_r2_HOLD.png",
+   "sourceSha256": "b9fe7c02da95ee5e2afc4c0e3708525d73301a54e2a5eaf7eec21f6863caaa3b",
+   "sha256": "6be9a0210eaebdd1f9255222ccfbb0e70b10aa4d4ee8ac572051e894ac706b95",
+   "bytes": 49610,
+   "size": [
+    1024,
+    256
+   ],
+   "note": "HOLD 머리 이동 45px → 전단 0.45배, 4칸 = 게임 그림 r374 이동 0칸",
+   "cell": [
+    256,
+    256
+   ],
+   "pivot": [
+    128,
+    235
+   ],
+   "frames": 4,
+   "headXBefore": [
+    140.9,
+    98.0,
+    122.5,
+    135.7
+   ],
+   "headXAfter": [
+    139.4,
+    118.3,
+    130.4,
+    138.0
+   ]
+  },
+  {
+   "file": "assets/r1156/mob-hit/swamp-root-hit4.webp",
+   "source": "P3_A4_swamp/A4_swamp_hit4_r2_HOLD.png",
+   "sourceSha256": "f88ebd46092c316831f318f3dd4c12a8c1993c1691109be6a809c0bd9383fc34",
+   "sha256": "7b77ff29063275ae76910721b3ac3c58117fae7cfaacd60b87191a728535a475",
+   "bytes": 58410,
+   "size": [
+    1492,
+    320
+   ],
+   "note": "HOLD 색·아래 뿌리 → 색 평균·분산을 원래 그림에 맞춤, 발 줄 위 36px 아래는 원래 뿌리",
+   "cell": [
+    373,
+    320
+   ],
+   "pivot": [
+    203.36,
+    271.01
+   ],
+   "frames": 4
   }
  ]
 }
