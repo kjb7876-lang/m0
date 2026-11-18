@@ -1,0 +1,179 @@
+{
+ "round": "R1163",
+ "request": "CX-0152 r1 ROUGH",
+ "files": [
+  {
+   "boss": "b02",
+   "sheet": "idle6",
+   "source": "Dots CX-0152-1_b02_idle6_r1_ROUGH.png",
+   "sourceSha256": "ab34458a3878566211d82ab1ccaffc44d896ddea0502911260caef427dfd575b",
+   "engineArt": "assets/r380/mobs/sloth-burden-man-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "n": 6,
+   "shift": [
+    0,
+    0
+   ],
+   "fitErr": 87.6,
+   "gain": [
+    0.846,
+    0.841,
+    0.818
+   ],
+   "path": "assets/r1163/bosses/b02-idle6.webp",
+   "bytes": 90926,
+   "sha256": "df0c82dddf400131f8a9f927b84ec60677a6995e10d66407e777a75d1d971aa6",
+   "use": "보스 대기 8fps",
+   "applied": true,
+   "finalArt": false
+  },
+  {
+   "boss": "b02",
+   "sheet": "hit4",
+   "source": "Dots CX-0152-1_b02_hit4_r1_ROUGH.png",
+   "sourceSha256": "e19ce585074bbe3c745dafe9dc392b4510479a2ab411999b3274e77ef63383f8",
+   "engineArt": "assets/r380/mobs/sloth-burden-man-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "n": 4,
+   "shift": [
+    0,
+    0
+   ],
+   "fitErr": 87.6,
+   "gain": [
+    0.844,
+    0.838,
+    0.798
+   ],
+   "path": "assets/r1163/bosses/b02-hit4.webp",
+   "bytes": 60984,
+   "sha256": "ecd15eb22fdbb664267821bef5a13db52025828df9037afd2b33d3ac4464a5ca",
+   "use": "보스 피격 16fps",
+   "applied": true,
+   "finalArt": false
+  },
+  {
+   "boss": "u204",
+   "sheet": "idle6",
+   "source": "Dots CX-0152-3_u204_idle6_r1_ROUGH.png",
+   "sourceSha256": "c2bab487d80998cad88623f8d45f515dcbd0b10c7302507afcb8d018ad760695",
+   "engineArt": "assets/r380/mobs/u204-mech-04-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "n": 6,
+   "shift": [
+    1,
+    0
+   ],
+   "fitErr": 104.5,
+   "gain": [
+    0.899,
+    0.933,
+    0.988
+   ],
+   "path": "assets/r1163/bosses/u204-idle6.webp",
+   "bytes": 72430,
+   "sha256": "b24e96b30430e0bb8a2a0d998e05a4920b1e4cd46b480a9f2c6df84a92168a79",
+   "use": "보스 대기 8fps",
+   "applied": true,
+   "finalArt": false
+  },
+  {
+   "boss": "u204",
+   "sheet": "hit4",
+   "source": "Dots CX-0152-3_u204_hit4_r1_ROUGH.png",
+   "sourceSha256": "2158a36396afbc9fc978717673346c81325d59b1093478752dbdc418c6eb7a68",
+   "engineArt": "assets/r380/mobs/u204-mech-04-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "n": 4,
+   "shift": [
+    1,
+    0
+   ],
+   "fitErr": 104.5,
+   "gain": [
+    0.951,
+    0.963,
+    0.998
+   ],
+   "path": "assets/r1163/bosses/u204-hit4.webp",
+   "bytes": 51510,
+   "sha256": "aa4e8023f5bccb8b5a5ad4141857863e8efc2bfa8354c0c9518da4e0863854b5",
+   "use": "보스 피격 16fps",
+   "applied": true,
+   "finalArt": false
+  },
+  {
+   "boss": "u205",
+   "sheet": "idle6",
+   "source": "Dots CX-0152-4_u205_idle6_r1_ROUGH.png",
+   "sourceSha256": "963112b3f8da1a1e9db4bda88ec00656cbf4e0d9667918f562376c74e8683d03",
+   "engineArt": "assets/r374/mobs/u205-mid-new.webp",
+   "cell": [
+    256,
+    320
+   ],
+   "n": 6,
+   "shift": [
+    -6,
+    0
+   ],
+   "fitErr": 54.3,
+   "gain": [
+    1.013,
+    1.025,
+    1.025
+   ],
+   "path": "assets/r1163/bosses/u205-idle6.webp",
+   "bytes": 76050,
+   "sha256": "4fc6d27dcee5c5b3f192289988626effe711f6e7dab5be9da40092bf8ef5268e",
+   "use": "보스 대기 8fps",
+   "applied": true,
+   "finalArt": false
+  },
+  {
+   "boss": "u205",
+   "sheet": "hit4",
+   "source": "Dots CX-0152-4_u205_hit4_r1_ROUGH.png",
+   "sourceSha256": "1cda0bcc4a115029732072ecee2159f7bc2e119cd9354e8138ad18cf6e776e05",
+   "engineArt": "assets/r374/mobs/u205-mid-new.webp",
+   "cell": [
+    256,
+    320
+   ],
+   "n": 4,
+   "shift": [
+    -6,
+    0
+   ],
+   "fitErr": 54.3,
+   "gain": [
+    1.029,
+    1.04,
+    1.046
+   ],
+   "path": "assets/r1163/bosses/u205-hit4.webp",
+   "bytes": 46886,
+   "sha256": "a1f4d90c8f6b01fc798ac69317dd71e0eb3de80497b125d2ba3cb8fdf8c90c6b",
+   "use": "보스 피격 16fps",
+   "applied": true,
+   "finalArt": false
+  },
+  {
+   "boss": "b04",
+   "applied": false,
+   "why": "Dots 가 실제 그리는 원본(phase0)을 못 찾아 건너뜀 — 다음 판 재요청"
+  }
+ ]
+}

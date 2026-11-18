@@ -515,6 +515,8 @@ jobs:
         run: node r96/qa/r600/r600-cpu-check.cjs
       - name: R976 samong first region pixel art to painted assets CPU check
         run: node r96/qa/r976/r976-cpu-check.cjs
+      - name: R1177 samong episode pixel leftovers (S-06 pixel mobs, pixelfx sheets) to painted art CPU check
+        run: node r96/qa/r1177/r1177-cpu-check.cjs
       - name: R701 survival 77s choice window, difficulty, hero picker CPU check
         run: node r96/qa/r701/r701-cpu-check.cjs
       - name: R850 survival play-test fixes (arena terrain lock, hospital maze skip, next-stage prefetch, moving HUD) CPU check
@@ -675,6 +677,8 @@ jobs:
         run: node r96/qa/r1145/persona-basic-cpu-check.cjs
       - name: R1153 Dots status effects 9 kinds (per-actor icons + body overlays in every mode), samong sigils for Lauren/Hunter/Slayer/Gunner, Seoha clockwork, Slayer brand 1-5, Gunner R reticle + chain beam, deploy ring tinted by hero colour CPU check
         run: node r96/qa/r1153/dots-status-cpu-check.cjs
+      - name: R1179 survival samong leftover R248 pixel mob sheets -> Drive hand-painted candidates (m077 alien invader; R410 sheet format, art only) CPU check
+        run: node r96/qa/r1179/r1179-cpu-check.cjs
       - name: R1152 persona W/E/R and (jin) laser use the Dots sheets (CX-0143PL/0144PW/0145PR; HOLD seams feathered, opaque background keyed out; colours kept, hit logic unchanged) CPU check
         run: node r96/qa/r1152/persona-dots-cpu-check.cjs
       - name: R1156 persona boss base rear hit = Dots CX-0136 A5 r2 (support foot aligned, 4 of 6 frames, R1119 sheet as load fallback) CPU check
@@ -1023,7 +1027,7 @@ jobs:
       - name: R620 boss motion CPU check
         run: node r96/qa/r620/r620-cpu-check.cjs
       - name: R1147 Dots boss idle sheets CPU check
-        run: node r96/qa/r1147/r1147-cpu-check.cjs && node r96/qa/r1160/r1160-cpu-check.cjs && node r96/qa/r1161/r1161-cpu-check.cjs && node r96/qa/r1162/r1162-cpu-check.cjs
+        run: node r96/qa/r1147/r1147-cpu-check.cjs && node r96/qa/r1160/r1160-cpu-check.cjs && node r96/qa/r1161/r1161-cpu-check.cjs && node r96/qa/r1162/r1162-cpu-check.cjs && node r96/qa/r1163/r1163-cpu-check.cjs
       - name: R700 seven-sins boss art audit (size-lock heights match real art, no light matte fringe on drawn art, clean copies keep the body, originals kept) check
         run: python r96/qa/r700/boss-art-check.py
       - name: R710 hero south idle 6 / hit 4 sheets (feet on the 226 line, stand height ±3%, no alpha residue, flicker ≤2× current, holds not applied) check
