@@ -11148,6 +11148,26 @@
       "sha256": "9e77abcb2e57ef95bc269e8924c450bfcdcdf3fc2f7099536545bf7047379c42"
     },
     {
+      "path": "assets/r1147/bosses/a11-idle6.webp",
+      "bytes": 431888,
+      "sha256": "66644de346d975a69a86b488cdb25d1ce85af695d827e3171d33d10e74e7af5a"
+    },
+    {
+      "path": "assets/r1147/bosses/b07-idle6.webp",
+      "bytes": 124208,
+      "sha256": "1e514c49e0536f5b0b6a3633fb03abbaad00ea3bc9864735f86b4af2cc4c1261"
+    },
+    {
+      "path": "assets/r1147/bosses/dist06-idle6.webp",
+      "bytes": 382598,
+      "sha256": "e5fcb2884523e4e8bb71c4a1c837f49a0fc1e7e783cdee2c86da25f7988a05f5"
+    },
+    {
+      "path": "assets/r1147/bosses/u202-idle6.webp",
+      "bytes": 351682,
+      "sha256": "15be54411197ddf83bb41ab9df53b86cc3eab8e811311c9b785dc0ab02649cf0"
+    },
+    {
       "path": "assets/r116/mobs/M001-hit.png",
       "bytes": 141513,
       "sha256": "35cffa3fe6d6c22cdb75e06e1cca55a673f06c10afa28087d749082c40c77b71"
@@ -53059,8 +53079,8 @@
     },
     {
       "path": "boss-motion-r620.js",
-      "bytes": 9552,
-      "sha256": "12c7848ba1890ccb1cc5e4f522fc683115909aee099f2b28ea688eb49367f5fe"
+      "bytes": 10403,
+      "sha256": "73d1918aba752a1766e9fc5aab34e6fc60c7e0f43a491b81e7fd936c350d4b7e"
     },
     {
       "path": "boss-pattern-fx-r1040.js",
@@ -55758,8 +55778,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11151,
-  "totalBytes": 1345927007,
+  "fileCount": 11155,
+  "totalBytes": 1347218234,
   "webHTMLSha256": "fb5efe1e3da99473d8bae594a7c90ad3401b598cc7e34a87510535df15249a3b",
   "largest": [
     {
