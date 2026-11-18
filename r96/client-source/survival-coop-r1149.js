@@ -11,7 +11,7 @@
 //      ② 방장 스냅샷의 room 칸에 생존 상태(sv1149: 코어·레벨·조각·빛줄기·판 끝·각자 강화 대기 수)를 실어 보낸다.
 //      ③ 손님의 강화 고르기는 기존 '패시브 강화 명령'(passiveId) 칸에 'sv1149-u-강화이름'으로 보낸다. 방장이 대기 수와 최대 단계를 확인하고 그 손님 영웅에만 적용한다.
 //  · 인원: 규칙 상한은 7명이지만 지금 서버는 방당 4석이라 실제 입장은 4명까지다(서버를 바꾸면 pure.SEATS 만 올리면 된다).
-//  · 적 체력: 인원수만큼 몹을 복제하던 협동 규칙 대신, 생존에서는 몹·보스 체력에 인원수를 곱한다(혼자는 ×1 = 예전 그대로).
+//  · 적 체력: 인원수만큼 몹을 복제하던 협동 규칙 대신, 스토리 협동과 생존 모두 몹·보스 체력에 인원수를 곱한다(혼자는 ×1 = 예전 그대로).
 //  · 정화 구슬(코어): 멀티에서는 레벨 하나에 강화 하나씩 알아서 오른다(덜 오른 것부터 고르게). 강화 선택지에는 각자 자기 영웅 것만 나온다.
 //  · 영웅 배치(R720) 규칙: 2~4명은 각자 1명, 5명부터 없음, 혼자는 예전 그대로(pure.deployLimit). 이번 단계에서는 멀티 중 배치 창을 닫아 둔다
 //    (배치 영웅의 몸을 손님 화면에 맞추는 일은 다음 단계 — 한도 계산은 이미 들어 있다).
@@ -42,7 +42,13 @@ function decodeRegion(s){if(typeof s!=='string')return null;const m=/^sv1149-(ea
 function pickCommand(uid){return typeof uid==='string'&&/^[A-Za-z0-9]{1,40}$/.test(uid)?'sv1149-u-'+uid:null;}
 function parseCommand(s){if(typeof s!=='string')return null;const m=/^sv1149-u-([A-Za-z0-9]{1,40})$/.exec(s);return m?m[1]:null;}
 const multiAllowed=mode=>mode==='story'||mode==='survival';
-const pure=Object.freeze({RULE_MAX,SEATS,DIFFS:Object.freeze([...DIFFS]),joinCap,deployLimit,hpScale,scaleHp,heroCards,autoCore,encodeRegion,decodeRegion,pickCommand,parseCommand,multiAllowed});
+// 스토리 협동: 인원수가 바뀌면 이미 곱해 둔 배수(applied)에서 새 배수(k)로 체력을 다시 맞춘다. 죽은 몹(0)은 그대로, 살아 있으면 최소 1.
+function rescale(hp,maxHp,applied,k){const a=Number(applied)>0?Number(applied):1,n=hpScale(k),m=Number(maxHp),h=Number(hp);if(!Number.isFinite(m)||m<=0||!Number.isFinite(h))return {hp,maxHp};const f=n/a;
+ return {hp:h<=0?h:Math.max(1,Math.round(h*f)),maxHp:Math.max(1,Math.round(m*f))};}
+// 스토리 협동: 인원수만큼 복제된 몹을 걷어내고, 그 이름을 방의 '처치한 복제' 목록에 적어 협동이 다시 만들지 않게 한다.
+function stripReplicas(r){if(!r||!Array.isArray(r.enemies))return 0;const gone=r.enemies.filter(e=>e&&e.coopReplicaR62);if(!gone.length)return 0;if(!Array.isArray(r.coopDefeatedR62))r.coopDefeatedR62=[];
+ for(const e of gone)if(typeof e.id==='string'&&!r.coopDefeatedR62.includes(e.id))r.coopDefeatedR62.push(e.id);r.enemies=r.enemies.filter(e=>!(e&&e.coopReplicaR62));return gone.length;}
+const pure=Object.freeze({RULE_MAX,SEATS,DIFFS:Object.freeze([...DIFFS]),joinCap,deployLimit,hpScale,scaleHp,heroCards,autoCore,encodeRegion,decodeRegion,pickCommand,parseCommand,multiAllowed,rescale,stripReplicas});
 
 // ── 실행 상태 ──
 const M={on:false,role:null,diff:'normal',pend:{},pendSelf:0,cmdSeq:0,busy:false,pickHold:0,choiceOpen:false};
@@ -70,9 +76,20 @@ async function startHost(diff){if(M.busy||!rawClient||!rawSim)return false;const
   if(!ok){endSession();say('무한 생존을 시작하지 못했습니다. 다시 눌러 주세요.');try{rawClient.showLobby();}catch(_){}return false;}badge();return true;}finally{M.busy=false;}}
 function leave(){try{endSession();}catch(e){fail(e);}try{rawClient.disconnect();}catch(e){fail(e);}}
 
+// ── 스토리 협동(방장): 몹 복제 대신 적 체력 × 인원수 ──
+//  협동(R62)은 인원수만큼 몹을 복제한다. 사용자 2026-11-18 "멀티모드시 플레이어 숫자에 비례해서 적체력 배수" → 복제 몹은 걷어내고 원본 몹의 체력에 인원수를 곱한다.
+//  인원이 바뀌면(참가·나감) 지금 체력 비율을 지킨 채 다시 맞춘다. 혼자(1명)면 아무것도 바꾸지 않는다. 생존 무대는 생존 본체가 따로 곱한다.
+function storyScale(){if(!rawSim||G(()=>rawSim.mode(),'off')!=='host')return 0;const r=G(()=>room,null);if(!r||!Array.isArray(r.enemies)||r.survivalR600)return 0;
+ const k=count();let n=stripReplicas(r);if(n)stats.replicasStripped=(stats.replicasStripped||0)+n;
+ for(const e of r.enemies){if(!e||e.coopReplicaR62)continue;const a=e.r1149K>0?e.r1149K:1;if(a===k)continue;const v=rescale(e.hp,e.maxHp,a,k);e.hp=v.hp;e.maxHp=v.maxHp;e.r1149K=k;n++;stats.storyScaled=(stats.storyScaled||0)+1;}return n;}
+
 // ── 전송 가로채기(방장): 지역 이름에 생존 표시, 스냅샷에 생존 상태 ──
 function outgoing(type,payload){
  if(type==='command'&&payload&&typeof payload==='object')return [type,{...payload,seq:++M.cmdSeq}];/* 패시브 명령과 강화 고르기 명령이 한 순번을 쓴다(서버는 순번이 늘어야 받는다) */
+ if(type==='snapshot'&&!M.on&&payload&&payload.state&&typeof payload.state==='object'){/* 스토리 협동: 보내기 직전에 복제 몹을 걷어내고 체력 배수를 맞춘다 */
+  if(storyScale()>0){const st=payload.state,rows=G(()=>room.enemies,[]),by=new Map(rows.map(e=>[e.id,e]));
+   return [type,{...payload,state:{...st,enemies:(Array.isArray(st.enemies)?st.enemies:[]).filter(e=>e&&!e.coopReplicaR62&&by.has(e.id)).map(e=>{const live=by.get(e.id);return {...e,hp:live.hp,maxHp:live.maxHp,r1149K:live.r1149K};}),room:{...(st.room||{}),coopDefeatedR62:[...(G(()=>room.coopDefeatedR62,[])||[])]}}}];}
+  return [type,payload];}
  if(!M.on||M.role!=='host'||!payload||typeof payload!=='object')return [type,payload];
  if(type==='transition'){const s=G(()=>SV().state(),null),enc=s?encodeRegion(payload.regionId,{i:s.i,loop:s.loop,diff:s.diff}):null;if(!enc)return [type,payload];stats.transitions++;
   if(cstate()?.phase==='lobby')return ['start',{regionId:enc,layer:payload.layer||'STORY'}];/* 대기실에서의 첫 진입은 서버의 '시작'으로 */
@@ -152,5 +169,5 @@ const api={revision:REV,pure,active:()=>M.on,role:()=>M.role,count:()=>M.on?coun
 window.__STORYWORLD_SURVIVAL_COOP_R1149__=Object.freeze(api);
 try{wrapClient();wrapSim();}catch(e){fail(e);}
 try{if(typeof document!=='undefined'&&document.addEventListener){document.addEventListener('click',guardClicks,true);document.addEventListener('keydown',deployNote,true);if(!watchPanel())document.addEventListener('DOMContentLoaded',watchPanel,{once:true});}}catch(e){fail(e);}
-try{const iv=setInterval(()=>{try{lobbyButton();if(M.on&&!inRoom())endSession();}catch(e){fail(e);}},500);iv?.unref?.();}catch(_){}
+try{const iv=setInterval(()=>{try{lobbyButton();if(M.on&&!inRoom())endSession();if(!M.on&&inRoom())storyScale();}catch(e){fail(e);}},500);iv?.unref?.();}catch(_){}
 })();

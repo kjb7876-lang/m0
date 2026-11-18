@@ -47,6 +47,15 @@ check('멀티가 되는 모드: 스토리·무한생존만, 영화 서사 모드
  assert.equal(P.multiAllowed('story'),true);assert.equal(P.multiAllowed('survival'),true);assert.equal(P.multiAllowed('cinema'),false);assert.equal(P.multiAllowed('other'),false);assert.equal(P.multiAllowed(undefined),false);});
 check('혼자일 때는 꺼져 있음(회귀): active false, 배수 1',()=>{need();assert.equal(api.active(),false);assert.equal(api.hpScale(),1);assert.equal(api.deployLimit(),null);});
 
+// ── 스토리 협동: 몹 복제 대신 체력 × 인원수(사용자 07:39Z '멀티모드시 플레이어 숫자에 비례해서 적체력 배수') ──
+check('스토리 체력 다시 맞추기: 1명→2명 두 배, 2명→3명 1.5배, 같은 인원은 그대로',()=>{need();
+ same(P.rescale(100,100,1,2),{hp:200,maxHp:200});same(P.rescale(60,100,1,2),{hp:120,maxHp:200});same(P.rescale(120,200,2,3),{hp:180,maxHp:300});same(P.rescale(77,130,2,2),{hp:77,maxHp:130});});
+check('스토리 체력 다시 맞추기 경계: 인원이 줄면 되돌림, 죽은 몹은 0 그대로, 살아 있으면 최소 1, 깨진 값은 건드리지 않음',()=>{need();
+ same(P.rescale(180,300,3,1),{hp:60,maxHp:100});same(P.rescale(0,200,1,2),{hp:0,maxHp:400});same(P.rescale(1,3,3,1),{hp:1,maxHp:1});
+ same(P.rescale(NaN,100,1,2),{hp:NaN,maxHp:100});same(P.rescale(50,0,1,2),{hp:50,maxHp:0});same(P.rescale(50,100,0,2),{hp:100,maxHp:200},'적용 배수가 없으면 1로 봄');same(P.rescale(50,100,1,99),{hp:350,maxHp:700},'7명 상한');});
+check('스토리 복제 몹 가려내기: 복제는 빼고 그 이름은 처치 목록에(다시 생기지 않게), 원본은 그대로',()=>{need();
+ const r={enemies:[{id:'a',hp:5},{id:'a:coop:1',coopReplicaR62:true,hp:5},{id:'b',hp:0},{id:'b:coop:1',coopReplicaR62:true,hp:3}],coopDefeatedR62:['x']};const n=P.stripReplicas(r);
+ assert.equal(n,2);same(r.enemies.map(e=>e.id),['a','b']);same(r.coopDefeatedR62,['x','a:coop:1','b:coop:1']);assert.equal(P.stripReplicas(r),0,'두 번째는 할 일 없음');assert.equal(P.stripReplicas(null),0);assert.equal(P.stripReplicas({}),0);});
 // ── 연결 지점 ──
 check('빌드 연결: index.html 스크립트 태그 한 번, 협동 인라인 스크립트(coop-client-r62) 뒤 · 맨 끝 등록 오버레이 줄(R118·R713·R1124) 앞',()=>{const h=read('r96/runtime-text/index.html');const a=h.indexOf('<script src="./survival-coop-r1149.js"></script>');assert.ok(a>0,'태그 없음');assert.equal(h.split('./survival-coop-r1149.js').length,2,'한 번만');assert.ok(a>h.indexOf('<script id="coop-client-r62">'),'협동 클라이언트 뒤');assert.ok(a<h.indexOf('./combat-r118.js'),'맨 끝 줄 앞');});
 check('빌드 연결: 공개 확인 목록·Pages CPU 검사 줄',()=>{assert.ok(read('scripts/verify-r96-public.py').includes('survival-coop-r1149.js'));assert.ok(read('.github/workflows/pages.yml').includes('r96/qa/r1149/r1149-cpu-check.cjs'));});

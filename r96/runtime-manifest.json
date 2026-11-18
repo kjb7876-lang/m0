@@ -55464,8 +55464,8 @@
     },
     {
       "path": "survival-coop-r1149.js",
-      "bytes": 20382,
-      "sha256": "64f39b6b657fd461143c91f9c27e54754de15785ac0d11af6317ca6b6eab217b"
+      "bytes": 23129,
+      "sha256": "527571f66a50325204c7a9d9303f302ce174a608167c78801303ddecca39b414"
     },
     {
       "path": "survival-michaela-ending-r1010.js",
@@ -55769,7 +55769,7 @@
     }
   ],
   "fileCount": 11153,
-  "totalBytes": 1345986231,
+  "totalBytes": 1345988978,
   "webHTMLSha256": "6e09bc693d1922009bbb87dd5c8ea5fc76c09a9f08daeb96337768c8be44cdff",
   "largest": [
     {

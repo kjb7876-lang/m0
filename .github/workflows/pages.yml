@@ -719,7 +719,7 @@ jobs:
         run: node r96/qa/r1014/r1014-cpu-check.cjs
       - name: R1135 survival boss count per difficulty (easy 1, normal 2, hard 3, nightmare 6), per-boss balance with the 66x floor, spread spawn spots CPU check
         run: node r96/qa/r1135/r1135-cpu-check.cjs
-      - name: R1149 survival multiplayer rules (seats, per-player deploy limit, enemy HP by player count, auto core level-up, hero-only cards, cinema solo) CPU check
+      - name: R1149 multiplayer rules (seats, per-player deploy limit, enemy HP by player count in story and survival, auto core level-up, hero-only cards, cinema solo) CPU check
         run: node r96/qa/r1149/r1149-cpu-check.cjs
       - name: R537 spider cave mud-back spider and memory-carrier spider, swamp root stalker renamed CPU check
         run: node r96/qa/r537/r537-cpu-check.cjs
