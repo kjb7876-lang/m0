@@ -5,14 +5,14 @@
 //  고침: 한 영웅(판정·수치·저장·해금 777 공유)에 '모습'만 둘. 저장은 모습 열쇠 하나(storyworld.r1176.egoLook = '2d'|'3d').
 //   · 3D EGO = 대기·걷기·달리기·공격·피격·관측 폐기 전부 R1048 3D 렌더 시트 한 인물(수묵 굽기 R1099·Dots 가로 베기 교체 R1139b 는 표식으로 건너뜀).
 //   · 2D EGO = 대기·걷기·달리기·피격·스킬 시전·관측 폐기 전부 Dots 붓 그림 전신 세트(CX-0155EG r1, assets/r1176/ego2d, 256칸·발 128,220) + 기본 공격은 R1139b 가로 베기 시트 — 한 인물.
-//     그림이 아직 안 받아졌으면 그 칸만 예전 길(수묵 몸)로 그린다. 관측 폐기는 앞 그림 하나를 모든 방향에 쓴다.
+//     그림이 아직 안 받아졌으면 그 칸만 예전 길(수묵 몸)로 그린다. 관측 폐기도 방향별 그림(R1176b: Dots CX-0155EG-6 오른쪽·뒤 추가).
 //   · 두 모습 공통: 공격 잔상 몸을 뺀다, 분신(겹쳐 부른 영웅 그리기) 몫 궤적·광륜을 뺀다. 2D 는 다른 인물끼리 섞어 넘기기를 뺀다.
 //   · 스킬·적중 이펙트: 이 모듈은 이펙트 명령의 주소·칸·자리·알파를 모습에 따라 바꾸지 않는다(R1139b 가로 붓 궤적·먹 튐·보호막 고리·아이콘, R1094 협주탄, R1145 천체 공명 모두 그대로).
 //  영웅창: 영웅 선택창·무한 생존 고르기 창의 EGO 칸을 '2D EGO'·'3D EGO' 두 칸으로, 배치 창(B)과 설정 창 '전투 화면' 구역에는 모습 단추 줄(게임 도중 전환). 어느 쪽을 눌러도 같은 EGO, 모습만 바뀐다.
 //  그림만 바꾼다 — 판정·피해·시간·쿨다운·키·저장 필드는 그대로. 손질 전체를 잠깐 쉬게 하려면 API enable(false)(저장하지 않음).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_EGO_FORM_R1176__)return;
-const REV='R1176-ego-form-2',KEY='storyworld.r1176.egoLook';
+const REV='R1176-ego-form-3',KEY='storyworld.r1176.egoLook';
 const LOOKS=Object.freeze({'2d':Object.freeze({name:'2D EGO',hint:'붓 그림 몸'}),'3d':Object.freeze({name:'3D EGO',hint:'입체 렌더 몸'})});
 const LIFT='brightness(1.22) contrast(1.1)',THUMB='assets/r1176/ego3d-portrait.webp'/* R1048 대기 시트 첫 칸 윗몸을 키운 작은 초상(자산 표는 PR 본문) */;
 const fin=Number.isFinite,G=(f,d)=>{try{return f();}catch(_){return d;}};
@@ -30,11 +30,11 @@ const GHOST=/:r1048g\d+$/,FADE=/:r1048f$/;
 // 2D 몸 시트: R1048 동작(칸 수) → Dots 시트(칸 수). 방향 8 → 앞·오른쪽·뒤(+좌우 뒤집기, R1139b 와 같은 표)
 const D2=Object.freeze({base:'assets/r1176/ego2d/',slash:'assets/r1139/ego/slash-',cell:256,foot:Object.freeze([128,220]),bodyPx:150,size:1.1,lift:'brightness(1.32) contrast(1.22)',
  old:Object.freeze({cell:160,foot:Object.freeze([80,140.8]),bodyPx:96}),
- clips:Object.freeze({idle:Object.freeze({to:'idle',from:12,n:8}),walk:Object.freeze({to:'walk',from:12,n:8}),run:Object.freeze({to:'run',from:10,n:8}),hit:Object.freeze({to:'hit',from:8,n:4}),discard:Object.freeze({to:'discard',from:20,n:12,only:'front'}),attack:Object.freeze({to:'cast',from:16,n:8})}),
+ clips:Object.freeze({idle:Object.freeze({to:'idle',from:12,n:8}),walk:Object.freeze({to:'walk',from:12,n:8}),run:Object.freeze({to:'run',from:10,n:8}),hit:Object.freeze({to:'hit',from:8,n:4}),discard:Object.freeze({to:'discard',from:20,n:12}),attack:Object.freeze({to:'cast',from:16,n:8})}),
  dirs:Object.freeze({s:['front',false],n:['rear',false],e:['right',false],se:['right',false],ne:['rear',false],w:['right',true],sw:['right',true],nw:['rear',true]}),
  slashMap:Object.freeze([0,0,1,1,2,3,3,4,4,4,5,5,6,6,7,7])});
 const SRC2=/assets\/r1048\/ego\/([a-z]+)-([a-z]{1,2})\.webp/;
-const D2_ALL=Object.freeze(['idle','walk','run','hit','cast'].flatMap(k=>['front','right','rear'].map(d=>D2.base+k+'-'+d+'.webp')).concat([D2.base+'discard-front.webp'],['front','right','rear'].map(d=>D2.slash+d+'.webp')));
+const D2_ALL=Object.freeze(['idle','walk','run','hit','cast','discard'].flatMap(k=>['front','right','rear'].map(d=>D2.base+k+'-'+d+'.webp')).concat(['front','right','rear'].map(d=>D2.slash+d+'.webp')));
 // 순수: 옛 몸 명령 → 2D 시트 주소·칸·뒤집기
 function target2d(c,basic){const m=SRC2.exec(String(c?.sourcePath||''));if(!m)return null;const K=Object.prototype.hasOwnProperty.call(D2.clips,m[1])?D2.clips[m[1]]:null,d=Object.prototype.hasOwnProperty.call(D2.dirs,m[2])?D2.dirs[m[2]]:null;if(!K||!d)return null;
  const w=+c.sourceRect?.[2],f0=w>0?Math.round(+c.sourceRect[0]/w):NaN;if(!fin(f0)||f0<0)return null;
