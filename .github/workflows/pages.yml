@@ -729,6 +729,8 @@ jobs:
         run: node r96/qa/r441/r441-cpu-check.cjs
       - name: R1012 samong plaza hwando 777 lag (R302 palette caller lookup remembered per palette object, verified every 16th draw) CPU check
         run: node r96/qa/r1012/r1012-cpu-check.cjs
+      - name: R1178 samong episode lag (R302 palette memo re-checks mature keys 1 in 64) CPU check
+        run: node r96/qa/r1178/r1178-cpu-check.cjs
       - name: R1014 survival mid-boss no longer sticks at the 70% phase gate under the 6%/s damage cap CPU check
         run: node r96/qa/r1014/r1014-cpu-check.cjs
       - name: R1135 survival boss count per difficulty (easy 1, normal 2, hard 3, nightmare 6), per-boss balance with the 66x floor, spread spawn spots CPU check
@@ -1036,6 +1038,8 @@ jobs:
         run: node r96/qa/r860/boss-keypose-cover-cpu-check.cjs
       - name: R800 floor edge mask reused for identical input (no double build on region entry) CPU check
         run: node r96/qa/r800/edges-cache-cpu-check.cjs
+      - name: R1180 floor edge mask blurs walls once (one blurred draw of all walls instead of one per wall; same blur radius, same readbacks) CPU check
+        run: node r96/qa/r1180/edge-wall-blur-cpu-check.cjs
       - name: R801 samong guide calm (kill quota met / explore / maze / door open → guide fights only enemies within 2.5 tiles and walks to clues and the door; quota left, B/D/G/H/F, hold, lead, outside samong unchanged) CPU check
         run: node r96/qa/r801/samong-guide-calm-cpu-check.cjs
       - name: R802 samong S-02 plaza freeze (R615 student walk tint canvas marked static so 26 students stay under the Three recorder snapshot budget) CPU check
