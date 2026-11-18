@@ -1,0 +1,165 @@
+{
+ "schema": "storyworld.r1152.persona-dots/v1",
+ "from": "Dots CX-0143PL·CX-0144PW·CX-0145PR (사용자 드라이브, 2026-11-18)",
+ "assets": [
+  {
+   "file": "assets/r1152/laser-body.webp",
+   "source": "0143PL/0143PL/CX-0143PL_A_BODY_HOLD_SEAM.png",
+   "sourceSha256": "0af92f2fedcd7ac8f9bc67226cf0d6273b5748ff7a50746fcbe12c7f0349cc4b",
+   "sha256": "d36719a49af607f90aa620cce4f7d6267e316be20c086a5f1e8c1f4fb8ce0ce5",
+   "bytes": 45142,
+   "size": [
+    2048,
+    128
+   ],
+   "note": "HOLD 이음매 → 양 끝 24px 코사인 페이드, 게임에서 24px 겹쳐 이음",
+   "cell": [
+    256,
+    128
+   ],
+   "frames": 8,
+   "coreY": 66,
+   "edge": 24
+  },
+  {
+   "file": "assets/r1152/laser-start.webp",
+   "source": "0143PL/0143PL/CX-0143PL_B_HOLD.png",
+   "sourceSha256": "9e63acd9aeb65e20a3156fc7f5719787b77709eae8e8dd75eaa97b8242d8ff96",
+   "sha256": "0686f566a9c9f42faa0707f980e9194243e8a24a45dd3d6e5a2500a75ac14ba4",
+   "bytes": 80408,
+   "size": [
+    2048,
+    256
+   ],
+   "note": "HOLD 불투명 배경 → 색→알파로 배경 제거, 격자 지움, 오른쪽 끝 페이드",
+   "cell": [
+    256,
+    256
+   ],
+   "frames": 8,
+   "coreY": 128
+  },
+  {
+   "file": "assets/r1152/laser-end.webp",
+   "source": "0143PL/0143PL/CX-0143PL_C_HOLD.png",
+   "sourceSha256": "8d70a00e23c69ece2e8f0ed1845bfeb3abe4a2e6eaa8733d6c91ab2dbd8113d8",
+   "sha256": "570951301a478414e953809e0d9bc23829ef6e1a2002de0ebc0bf019fda75395",
+   "bytes": 88312,
+   "size": [
+    2048,
+    256
+   ],
+   "note": "HOLD 접합 틈 → 이어 붙이지 않는 착탄 그림, 들어오는 줄 왼쪽 60px 페이드",
+   "cell": [
+    256,
+    256
+   ],
+   "frames": 8,
+   "coreY": 127
+  },
+  {
+   "file": "assets/r1152/w-chain.webp",
+   "source": "0144PW-0145PR/0144PW/CX-0144PW_B-chain_r1.png",
+   "sourceSha256": "c6e08a6b6ef5887eae6e5cd49d10e261cc6e7f9e97718e3cb8d3168fe3d256df",
+   "sha256": "f0cca1cb39ecd296dd9e4d85ac21ae0f02f05b3f1244817a44cb42338088bcab",
+   "bytes": 51722,
+   "size": [
+    2048,
+    128
+   ],
+   "note": "HOLD 이음매 → 양 끝 24px 코사인 페이드(마디 하나에 한 칸을 늘려 씀)",
+   "cell": [
+    256,
+    128
+   ],
+   "frames": 8,
+   "coreY": 66,
+   "edge": 24
+  },
+  {
+   "file": "assets/r1152/w-mark.webp",
+   "source": "0144PW-0145PR/0144PW/CX-0144PW_A-mark_r1.png",
+   "sourceSha256": "d720473f451c37e82cbe67380420cdf7b5ee6a12b755a222bfd7c3f64d9a2b55",
+   "sha256": "4052e2e81bf9741c0ab032f478286af80263668f1701ba05405422221f79da50",
+   "bytes": 44992,
+   "size": [
+    2048,
+    256
+   ],
+   "note": "REVIEW 후보 그대로(낮은 알파 정리)",
+   "cell": [
+    256,
+    256
+   ],
+   "frames": 8
+  },
+  {
+   "file": "assets/r1152/w-hit.webp",
+   "source": "0144PW-0145PR/0144PW/CX-0144PW_C-hit_r1.png",
+   "sourceSha256": "354edef9208203a5995c04cfda976a4deac592a1016ab522fcfd4fde4228b0ba",
+   "sha256": "c193aba243c1689ecfad0cae07ef77093a438ece08a73c9ecc2043f1c0b2bea9",
+   "bytes": 26686,
+   "size": [
+    1536,
+    256
+   ],
+   "note": "REVIEW 후보 그대로",
+   "cell": [
+    256,
+    256
+   ],
+   "frames": 6
+  },
+  {
+   "file": "assets/r1152/r-orb.webp",
+   "source": "0144PW-0145PR/0145PR/A-orb/CX-0145PR_A-orb_r1_REVIEW.png",
+   "sourceSha256": "0296319815264681b06970e77513c910f7351bff2c3f7ba34d55741fcd046e74",
+   "sha256": "65cb3e9eb19a1869b95ae2e253d88fb8e73f452d15238832854f71eb20509f8d",
+   "bytes": 132766,
+   "size": [
+    1536,
+    1024
+   ],
+   "note": "REVIEW 후보 그대로",
+   "cell": [
+    256,
+    256
+   ],
+   "frames": 24
+  },
+  {
+   "file": "assets/r1152/r-tail.webp",
+   "source": "0144PW-0145PR/0145PR/B-tail/CX-0145PR_B-tail_r1_REVIEW.png",
+   "sourceSha256": "d11c2bdea2a5ebce5d3de60bd27b2c06ba538c43bcbae51962688a12fa149e0b",
+   "sha256": "ad3c15858125300d930734bb16bc482f342655e044ce3a6d05cd4d329fd92263",
+   "bytes": 33510,
+   "size": [
+    2048,
+    256
+   ],
+   "note": "REVIEW 후보 그대로",
+   "cell": [
+    256,
+    256
+   ],
+   "frames": 8
+  },
+  {
+   "file": "assets/r1152/e-ember.webp",
+   "source": "0144PW-0145PR/0145PR/C-ember/CX-0145PR_C-ember_r1_REVIEW.png",
+   "sourceSha256": "3fc0668f1e45e15ea67df0597e06f2bfdf724f6157cb64c45902c5f5b53ecce6",
+   "sha256": "c012a717bbd51657f03b6b37f2805d63e6f3c48fa3912254927f593f7a107798",
+   "bytes": 20024,
+   "size": [
+    1536,
+    256
+   ],
+   "note": "REVIEW 후보 그대로",
+   "cell": [
+    256,
+    256
+   ],
+   "frames": 6
+  }
+ ]
+}
