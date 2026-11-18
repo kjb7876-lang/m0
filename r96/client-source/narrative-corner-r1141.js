@@ -88,7 +88,8 @@ function box(){try{if(boxEl&&boxEl.isConnected)return boxEl;const d=doc();if(!d|
  scEl.appendChild(tEl);w.appendChild(nEl);w.appendChild(scEl);boxEl.appendChild(w);d.body.appendChild(boxEl);return boxEl;}catch(e){fail(e);return null;}}
 const started_=()=>G(()=>!!started&&!loading,false);
 const panelOpen=()=>{const p=$('panel');return !!(p&&vis(p));};
-const blocked=()=>G(()=>!!modal,false)||!!doc()?.body?.classList?.contains('r600Modal')||panelOpen();
+// R1138 지역 전환 가림막('지형을 준비하는 중입니다')이 덮여 있는 동안에도 상자를 내린다(가림막 글과 겹치지 않게)
+const blocked=()=>G(()=>!!modal,false)||!!doc()?.body?.classList?.contains('r600Modal')||panelOpen()||!!vis($('r1138Curtain'));
 // 지금 보여 줄 글: 영화 자막 > 생존 자막 > 곡 소개 쪽지
 function source(){const b=doc()?.body;const cine=!!b?.classList?.contains('r376cine');
  const rd=(id)=>{const e=$(id);if(!e||!e.classList.contains('on')||e.classList.contains('away'))return null;const t=(e.querySelector('.t')?.textContent||'').trim();if(!t)return null;return {n:(e.querySelector('.n')?.textContent||'').trim(),t,kind:'subs'};};

@@ -55,6 +55,7 @@ ok('설정 단추는 BUTTON 이고 설정 제목 바로 위에 붙음(R1021 스�
 ok('원래 자막·곡 소개 칸의 글을 바꾸지 않음',!/(r600Subs|r370Subs|r331BgmNote)[^;\n]*\.(textContent|innerHTML|innerText)\s*=[^=]/.test(src));
 ok('원래 칸은 display 가 아니라 visibility 로 감춤(R1021·R1037 끄기 검사 유지)',/visibility:hidden/.test(src)&&!/#r600Subs[^{}]*\{[^}]*display:none/.test(src));
 ok('전체 영화 화면(R376)에서는 원래 자막 그대로',/r376cine/.test(src));
+ok('지역 전환 가림막(R1138 #r1138Curtain)이 덮인 동안 상자를 내림(가림막 글과 안 겹침)',/blocked=[^\n]*r1138Curtain/.test(src));
 // ⑧ 연결 다섯 곳
 const rt=path.join(R,'runtime-text',F);ok('런타임 사본이 같음',fs.existsSync(rt)&&fs.readFileSync(rt,'utf8')===src);
 const html=fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8');

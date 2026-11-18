@@ -53863,6 +53863,11 @@
       "sha256": "abf73915c9990c95b9552e971310311876c2c78c8b629276afe846e4bc13cd96"
     },
     {
+      "path": "ego-polish-r1139.js",
+      "bytes": 9116,
+      "sha256": "1a32fe73f6f8945cd04ab7e79a21e2367486b207a17f49b25c213924ad149946"
+    },
+    {
       "path": "ego-restore-health-r79.js",
       "bytes": 1215,
       "sha256": "ff8cbdd5af4146ffe677acf229d85897144d5f61061d981f02ecf4478d208b63"
@@ -54329,8 +54334,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6581413,
-      "sha256": "21a6db36e74f9b1d942d8accd978a2f13b5d497c4c18d238f027d8c2b9c6a7a0"
+      "bytes": 6581513,
+      "sha256": "c634238cbaddeb54f4d4f165a47af6259831ce83a0060e740fa6708dd3a9610c"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -54729,8 +54734,8 @@
     },
     {
       "path": "narrative-corner-r1141.js",
-      "bytes": 13983,
-      "sha256": "c34bc3ca0a68f2c961c13dadc9f75d7caa3652c61ca91f9c3e4babd50d90256b"
+      "bytes": 14166,
+      "sha256": "89abd1bd945eed998723ca8ef8ad26b3fbc2993b797e448cd966025bbbefdd68"
     },
     {
       "path": "nav-r176.js",
@@ -55468,6 +55473,11 @@
       "sha256": "7b0ce5acc60119a10cbad07af7110a2d0036fe1f8deb521139fd12506d55f1cc"
     },
     {
+      "path": "transition-curtain-r1138.js",
+      "bytes": 8491,
+      "sha256": "d32d7757e26ac8f87fe9da2988cda19661a131363ff3d9a315de0f956119d5af"
+    },
+    {
       "path": "ui-clean-r1015.js",
       "bytes": 19337,
       "sha256": "f54beb3daf65f78fcf2850099419505267fabd3357847d4180c35927f584daec"
@@ -55698,9 +55708,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11139,
-  "totalBytes": 1345400759,
-  "webHTMLSha256": "21a6db36e74f9b1d942d8accd978a2f13b5d497c4c18d238f027d8c2b9c6a7a0",
+  "fileCount": 11141,
+  "totalBytes": 1345418649,
+  "webHTMLSha256": "c634238cbaddeb54f4d4f165a47af6259831ce83a0060e740fa6708dd3a9610c",
   "largest": [
     {
       "path": "index.html",
