@@ -11863,6 +11863,16 @@
       "sha256": "0c1587c35af25dbd7a2c9c4a09318c47af48412a127b05ad1e98a98298391df7"
     },
     {
+      "path": "assets/r1160/bosses/b08-hit4.webp",
+      "bytes": 74880,
+      "sha256": "b46f3636f2d7765dac44d9a8bb6289a33458cf53c841c27365619a171f6829a3"
+    },
+    {
+      "path": "assets/r1160/bosses/b08-idle6.webp",
+      "bytes": 114488,
+      "sha256": "07b7c817f9f7df18f5fdf5968599ef18a2b9b39e2b4b0cce05727653ea3c742c"
+    },
+    {
       "path": "assets/r117/scene/ep-cup-k1.png",
       "bytes": 2264,
       "sha256": "a39b05d84a4613cb40d72e213a26b9bccbc254b82e4cd9888f0b47e085a209e2"
@@ -53489,8 +53499,8 @@
     },
     {
       "path": "boss-motion-r620.js",
-      "bytes": 10852,
-      "sha256": "8f8146ce1a912127f5d81832547f597fac1e28c4516ebcad2818e0b68c44bc43"
+      "bytes": 11208,
+      "sha256": "83b7e8e59fcbccf844b90f7cccee1c52335e839aac70ad0b460cf9430046493a"
     },
     {
       "path": "boss-pattern-fx-r1040.js",
@@ -56218,8 +56228,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11243,
-  "totalBytes": 1352061670,
+  "fileCount": 11245,
+  "totalBytes": 1352251394,
   "webHTMLSha256": "1fc3552b5542bb54d913d4fb6b50b5000e49db8b047e70bf7c2e0321af857cfd",
   "largest": [
     {
