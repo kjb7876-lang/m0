@@ -1,0 +1,1 @@
+R1162 u205-mid down CPU check OK (125 assertions)

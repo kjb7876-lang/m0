@@ -10458,7 +10458,9 @@
     "assets/r1160/bosses/b08-hit4.webp",
     "assets/r1160/bosses/b08-idle6.webp",
     "assets/r1161/bosses/b09-hit4.webp",
-    "assets/r1161/bosses/b09-idle6.webp"
+    "assets/r1161/bosses/b09-idle6.webp",
+    "move-dir-r1162-data.js",
+    "assets/r1162/move/u205-mid-down.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11533,5 +11535,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "0b3bd7079dedc20da96a557a6d33fb5b870a2b545f426b0e91c2fb37c1e785fb"
+  "runtimeManifestSHA256": "fe5d66e07f5bfb565f98b1a87dd377e5f5fad680ae7f6a9e9e70b29cf99811bc"
 }
