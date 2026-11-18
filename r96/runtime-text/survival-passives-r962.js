@@ -17,12 +17,12 @@ const G=(f,d)=>{try{const v=f();return v===undefined?d:v;}catch(_){return d;}};
 // 몸이 아직 판에 있는가(R720 배치 몸 또는 R952 분대 몸)
 function present(b){if(!b||b.hp<=0)return false;
  const R7=window.__STORYWORLD_HERO_DEFENSE_R720__,H=window.__STORYWORLD_HUNTER_SQUAD_R952__;
- if(G(()=>R7.bodies(),[]).includes(b))return true;if(G(()=>H.bodies(),[]).includes(b))return true;return false;}
+ if(G(()=>R7.bodies(),[]).includes(b))return true;if(G(()=>H.bodies(),[]).includes(b))return true;if(G(()=>window.__STORYWORLD_EGO_SUMMON_R1157__.bodies(),[]).includes(b))return true;return false;}
 // 쏜 몸 찾기: ① 몸 차례에 만든 투사체 ② 출처의 sourceHero 가 조종 영웅이 아닌, 판에 있는 몸의 영웅(패시브가 자기 틱에서 몸 대신 낸 타격 — 예: 배치 환도의 수묵 초승달)
 function bodyFor(source){if(!source||typeof source!=='object')return null;const s=shotBody.get(source);if(s)return s;
  const h=source.sourceHero;if(typeof h!=='string'||!h||h===G(()=>player.hero,null))return null;
  const R7=window.__STORYWORLD_HERO_DEFENSE_R720__,H=window.__STORYWORLD_HUNTER_SQUAD_R952__;
- return G(()=>R7.bodies(),[]).find(b=>b&&b.hero===h&&b.hp>0)||G(()=>H.bodies(),[]).find(b=>b&&b.hero===h&&b.hp>0)||null;}
+ return G(()=>R7.bodies(),[]).find(b=>b&&b.hero===h&&b.hp>0)||G(()=>H.bodies(),[]).find(b=>b&&b.hero===h&&b.hp>0)||G(()=>window.__STORYWORLD_EGO_SUMMON_R1157__.bodies(),[]).find(b=>b&&b.hero===h&&b.hp>0)||null;}
 let installed=false;
 // 모든 스크립트(맨 끝의 R118 영웅 광역 포함)가 hitEnemy 를 감싼 뒤 가장 바깥에 선다 → 명중이 부른 광역·연쇄도 쏜 몸 차례에 돈다.
 function install(){if(installed)return;installed=true;

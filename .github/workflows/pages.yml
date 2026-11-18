@@ -841,6 +841,8 @@ jobs:
         run: node r96/qa/r1139b/r1139b-cpu-check.cjs
       - name: R1145 EGO hidden hero celestial follow-ups (R casts silver giant + abyss dwarf, ink moon triggers stellar repulse, white-red tint, EGO only) CPU check
         run: node r96/qa/r1145/r1145-cpu-check.cjs
+      - name: R1157 EGO R summons a random hero for 7s (0.7s skill cooldowns, own chance passives, chained summons extend together) CPU check
+        run: node r96/qa/r1157/r1157-cpu-check.cjs
       - name: R1155 EGO and persona own sound effects (numpy-synthesised; basic, Q/W/E/R, ink passives, celestial branches and ticks remapped only in hidden-hero form) CPU check
         run: node r96/qa/r1155/r1155-cpu-check.cjs
       - name: R1109 co-op relay build match (old R62 Render relay auto-fallback, default relay address) CPU check
@@ -992,6 +994,8 @@ jobs:
         run: node r96/qa/r705/semi-auto-cpu-check.cjs
       - name: R706 thread dance keeps the hero under player control (clone at strike spot, no snap back to start) CPU check
         run: node r96/qa/r706/dance-free-cpu-check.cjs
+      - name: R1148c dance memory follows a hero moved while game time is paused (placement panel open); running ticks unchanged CPU check
+        run: node r96/qa/r1148c/dance-modal-move-cpu-check.cjs
       - name: R663 QWER locked until learned with passive points, skill level widens range (+8 percent per level), auto-level buys QWER and silk dances CPU check
         run: node r96/qa/r663/skill-growth-cpu-check.cjs
       - name: R561 Lauren gravity chain (Q → gravity well pull → collapse burst, R → crush vortices; no new keys, bosses not pulled, walls respected) CPU check
