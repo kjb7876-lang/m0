@@ -10,7 +10,7 @@
 //  끄기: localStorage 'storyworld.r706.danceFree'='0' 또는 __STORYWORLD_DANCE_FREE_R706__.set(false).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_DANCE_FREE_R706__)return;
-const REV='R706-dance-free-3',KEY='storyworld.r706.danceFree',GHOST_GAP=.12,GHOST_LIFE=.28,MIN_SHIFT=.35,DASH=1;
+const REV='R706-dance-free-4-r1148c',KEY='storyworld.r706.danceFree',GHOST_GAP=.12,GHOST_LIFE=.28,MIN_SHIFT=.35,DASH=1;
 let on=true;try{if(localStorage.getItem(KEY)==='0')on=false;}catch(_){}
 const stats={ticks:0,restores:0,ghosts:0,blinks:0,resets:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const g=f=>{try{return f();}catch(_){return undefined;}};
@@ -19,9 +19,9 @@ const T=()=>g(()=>typeof time==='number'?time:0)||0;
 const solo=()=>{const m=g(()=>window.__STORYWORLD_COOP_SIM_R62__?.mode?.());return !m||m==='off';};
 const dancing=p=>g(()=>window.__STORYWORLD_DANCES_R74__?.moving?.(p))===true;
 const curRoom=()=>g(()=>typeof room!=='undefined'?room:null);
-let body=null,bodyRoom=null,start=null,inTick=0,lastGhost=-1e9,fxBase=null;
+let body=null,bodyRoom=null,start=null,inTick=0,lastGhost=-1e9,fxBase=null,rest=null,tickT0=null;
 const active=()=>on&&solo();
-function reset(){if(body)stats.resets++;body=null;bodyRoom=null;}
+function reset(){if(body)stats.resets++;body=null;bodyRoom=null;rest=null;}
 function ghost(x,y){const t=T();if(t<lastGhost)lastGhost=-1e9;if(t-lastGhost<GHOST_GAP)return;const p=P();if(!p||!fxBase)return;
  const art=g(()=>heroArt[p.hero]),dir=p.direction||'front',asset=art&&((art.attack&&(art.attack[dir]||art.attack.front))||(art.idle&&(art.idle[dir]||art.idle.front)));if(!asset)return;
  try{fxBase('ghost',x,y,{asset,life:GHOST_LIFE,size:1,r706:true});lastGhost=t;stats.ghosts++;}catch(e){fail(e);}}
@@ -40,23 +40,27 @@ if(typeof blink==='function'){const base=blink;blink=function(...a){const p=P(),
  try{if(body&&p&&(p.x!==bx||p.y!==by)){body.x=p.x;body.y=p.y;stats.blinks++;}}catch(e){fail(e);}return r;};}
 // 영웅을 본체 자리로 되돌리고 타격 자리에 분신을 남긴다. end=tick 끝(춤이 끝났으면 기억을 버림).
 //  settle(): 엔진·춤이 끝난 직후 안쪽 오버레이(play-r115)가 불러, 그 뒤의 자동 시전(R115 보조·R597·R705)이 분신 자리가 아니라 본체 자리에서 나가게 한다.
-function finish(p,end){if(bodyRoom&&bodyRoom!==curRoom()){reset();return;}
+// R1148c: paused=이번 tick 동안 게임 시간이 흐르지 않음(배치 창 같은 modal). 그동안 영웅이 마지막으로 되돌린 자리에서 옮겨졌다면
+//  춤 타격이 아니라 UI·스크립트가 옮긴 것이므로 그 자리를 새 본체 자리로 삼는다(되돌리지 않음).
+function finish(p,end,paused){if(bodyRoom&&bodyRoom!==curRoom()){reset();return;}
  const d=dancing(p);if(!d&&!body)return;if(end)stats.ticks++;
+ if(paused&&body&&rest&&(p.x!==rest.x||p.y!==rest.y)&&Number.isFinite(p.x)&&Number.isFinite(p.y)){body.x=p.x;body.y=p.y;stats.moved=(stats.moved||0)+1;}
  if(!body){if(!start)return;body={x:start.x,y:start.y};bodyRoom=curRoom();}
  if(!(p.hp>0)){reset();return;}
  const shift=Math.hypot(p.x-body.x,p.y-body.y);
  if(shift>1e-9){if(d&&shift>=MIN_SHIFT)ghost(p.x,p.y);p.x=body.x;p.y=body.y;stats.restores++;}
- if(end&&!d){body=null;bodyRoom=null;}}
-function settle(){try{const p=P();if(inTick===1&&p&&active())finish(p,false);}catch(e){fail(e);}}
+ rest={x:p.x,y:p.y};
+ if(end&&!d){body=null;bodyRoom=null;rest=null;}}
+function settle(){try{const p=P();if(inTick===1&&p&&active())finish(p,false,T()===tickT0);}catch(e){fail(e);}}
 // 저장: 엔진(R74)은 춤 중 시작 자리를 저장한다 → 지금 본체 자리로 바꾼다(춤이 끝나도 시작 자리로 돌아가지 않으므로).
 if(typeof serializeSave==='function'){const base=serializeSave;serializeSave=function(...a){const raw=base.apply(this,a);
  try{if(body&&active()&&bodyRoom===curRoom()&&raw&&raw.player){raw.player.x=body.x;raw.player.y=body.y;}}catch(e){fail(e);}return raw;};}
 if(typeof tick==='function'){const base=tick;tick=function(dt,...a){const p=P();
  if(!active()||!p){if(body)reset();return base.call(this,dt,...a);}
  if(body&&bodyRoom!==curRoom())reset();
- start=inTick?start:{x:p.x,y:p.y};inTick++;let r;try{r=base.call(this,dt,...a);}finally{inTick--;}
+ const t0=T();if(!inTick)tickT0=t0;start=inTick?start:{x:p.x,y:p.y};inTick++;let r;try{r=base.call(this,dt,...a);}finally{inTick--;}
  if(inTick)return r;
- try{if(P()!==p){reset();return r;}finish(p,true);}catch(e){fail(e);}return r;};}
+ try{if(P()!==p){reset();return r;}finish(p,true,T()===t0);}catch(e){fail(e);}return r;};}
 if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=function(...a){reset();return base.apply(this,a);};}
 function set(v){on=v!==false;try{localStorage.setItem(KEY,on?'1':'0');}catch(_){}if(!on)reset();return on;}
 // rebase(x,y): R1022(자동 순간이동 끔)가 본체를 제자리로 되돌릴 때 춤 중 기억한 본체 자리도 같이 맞춘다.

@@ -990,6 +990,8 @@ jobs:
         run: node r96/qa/r705/semi-auto-cpu-check.cjs
       - name: R706 thread dance keeps the hero under player control (clone at strike spot, no snap back to start) CPU check
         run: node r96/qa/r706/dance-free-cpu-check.cjs
+      - name: R1148c dance memory follows a hero moved while game time is paused (placement panel open); running ticks unchanged CPU check
+        run: node r96/qa/r1148c/dance-modal-move-cpu-check.cjs
       - name: R663 QWER locked until learned with passive points, skill level widens range (+8 percent per level), auto-level buys QWER and silk dances CPU check
         run: node r96/qa/r663/skill-growth-cpu-check.cjs
       - name: R561 Lauren gravity chain (Q → gravity well pull → collapse burst, R → crush vortices; no new keys, bosses not pulled, walls respected) CPU check
