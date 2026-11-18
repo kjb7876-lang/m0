@@ -1,0 +1,3 @@
+PASS persona-cutin-r1174.js 있음
+FAIL 공개 객체 __STORYWORLD_PERSONA_CUTIN_R1174__
+{"total":2,"failed":1,"method":"node vm + tiny fake DOM; real game run by r1174-browser.mjs (headless)"}
