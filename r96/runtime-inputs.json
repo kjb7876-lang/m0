@@ -10458,7 +10458,26 @@
     "assets/r1160/bosses/b08-idle6.webp",
     "assets/r1161/bosses/b09-hit4.webp",
     "assets/r1161/bosses/b09-idle6.webp",
+    "mob-art-r1179.js",
+    "assets/r1179/mobs/m077.webp",
+    "assets/r1179/mobs/index.json",
+    "assets/r1179/mobs/m081.webp",
+    "samong-pixel-art-r1177.js",
     "move-dir-r1162-data.js",
+    "assets/r1177/void-implosion-blood.webp",
+    "assets/r1177/hands-blood.webp",
+    "assets/r1177/s06-commander-walk-right-8.webp",
+    "assets/r1177/rift-blood.webp",
+    "assets/r1177/s06-rival-walk-right-8.webp",
+    "assets/r1177/s06-invader-walk-right-8.webp",
+    "assets/r1177/choir-moths-blood.webp",
+    "assets/r1177/index.json",
+    "assets/r1163/bosses/u205-idle6.webp",
+    "assets/r1163/bosses/b02-idle6.webp",
+    "assets/r1163/bosses/u204-idle6.webp",
+    "assets/r1163/bosses/b02-hit4.webp",
+    "assets/r1163/bosses/u204-hit4.webp",
+    "assets/r1163/bosses/u205-hit4.webp",
     "assets/r1162/move/u205-mid-down.webp",
     "assets/r1173/persona-walk-side.webp"
   ],
@@ -11535,5 +11554,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "e7f8b9852f530b6d2a3c67b197e232bd0bb5f8404cdb22354c1903edb273b7b5"
+  "runtimeManifestSHA256": "846b23ec5fe40f487f961b14b349150ff7b381c7a0ba6e4154f226e6789a10ff"
 }

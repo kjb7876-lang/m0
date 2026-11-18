@@ -18,7 +18,8 @@ if(window.__STORYWORLD_SAMONG_R161__)return;
 const REV='R161-samong-1',KEY='storyworld.r161.samong';
 const PUPPET='assets/r161/puppet/puppet-ego-walk-right-8.webp',SCULPT='assets/r161/sculpture/memory-fragment.webp';
 /* R184: S-06 디스토피아는 원문 외형대로 그린 임시 픽셀 시트(같은 칸 규격 256×320, 4×2 걷기 8프레임)를 꼭두각시 대신 쓴다 — 좋은 자산이 오면 이 표만 바꾼다 */
-const S06='assets/r184/s06/',S06ART={invader:S06+'s06-invader-walk-right-8.webp',rival:S06+'s06-rival-walk-right-8.webp',commander:S06+'s06-commander-walk-right-8.webp'},SHEETS=new Set([PUPPET,...Object.values(S06ART)]);
+/* R1177: 임시 픽셀 시트(assets/r184/s06, 보존) 대신 Dots 디스토피아 칠한 그림을 같은 칸 규격으로 옮긴 시트(scripts/r1177-samong-pixel-art.py) */
+const S06='assets/r1177/',S06ART={invader:S06+'s06-invader-walk-right-8.webp',rival:S06+'s06-rival-walk-right-8.webp',commander:S06+'s06-commander-walk-right-8.webp'},SHEETS=new Set([PUPPET,...Object.values(S06ART)]);
 function sheetFor(e){try{const x=typeof room==='object'?room?.samongR103:null;if(!x||!(x.key==='S-06'||/^sz115-S06-/.test(String(x.zone||''))))return PUPPET;const n=String(e?.name||'');
  if(/상대 초인/.test(n))return S06ART.rival;if(/지휘 (개체|기체)/.test(n))return S06ART.commander;if(/검은 명령선/.test(n))return PUPPET;return S06ART.invader;}catch(_){return PUPPET;}}
 // 시트 1024×640, 4열×2행, 칸 256×320. 발 기준점(칸 안) 101.8,299.5, 몸 키 214.5px(실 제외, 원본 429px의 절반).
