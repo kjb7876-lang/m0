@@ -11148,6 +11148,11 @@
       "sha256": "9e77abcb2e57ef95bc269e8924c450bfcdcdf3fc2f7099536545bf7047379c42"
     },
     {
+      "path": "assets/r1156/persona-hit-base-rear-r2.webp",
+      "bytes": 112370,
+      "sha256": "868f6628fdc71cd76a03544dbac390a5249a99f1cf7378eaff76a0c403da8630"
+    },
+    {
       "path": "assets/r116/mobs/M001-hit.png",
       "bytes": 141513,
       "sha256": "35cffa3fe6d6c22cdb75e06e1cca55a673f06c10afa28087d749082c40c77b71"
@@ -54944,8 +54949,8 @@
     },
     {
       "path": "persona-stride-r1104.js",
-      "bytes": 28489,
-      "sha256": "bb46655c39342dc84abf4961e53b7676ab3be59b3e999939a842a7c9a1172d7a"
+      "bytes": 29142,
+      "sha256": "69b74fd38d1c1739eb0f41a83e7b471b5a08055a2cd4da29fe2fa63cd0052ac4"
     },
     {
       "path": "persona-wer-r1144.js",
@@ -55763,8 +55768,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11152,
-  "totalBytes": 1345955982,
+  "fileCount": 11153,
+  "totalBytes": 1346069005,
   "webHTMLSha256": "51cefc6de1046aa2b5f0e6c8c8c6ad74e0a227c26b5c8c5be757432a838108f4",
   "largest": [
     {
