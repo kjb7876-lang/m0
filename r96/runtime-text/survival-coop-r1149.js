@@ -129,7 +129,7 @@ function badge(){try{const show=M.on&&M.role==='guest'&&M.pendSelf>0&&!M.choiceO
 
 // ── 대기실: 방장의 '무한 생존 함께 시작' ──
 function lobbyButton(){try{const base=document.getElementById('coopStart62');if(!base){return;}let b=document.getElementById('svCoop1149Start');
-  if(!b){const sel=document.createElement('select');sel.id='svCoop1149Diff';sel.setAttribute('aria-label','무한 생존 난이도');sel.innerHTML=DIFFS.map(d=>'<option value="'+d+'"'+(d===M.diff?' selected':'')+'>'+DIFF_NAME[d]+'</option>').join('');sel.onchange=()=>{if(DIFFS.includes(sel.value))M.diff=sel.value;};
+  if(!b){const sel=document.createElement('select');sel.id='svCoop1149Diff';sel.setAttribute('aria-label','무한 생존 난이도');sel.style.cssText='font:inherit;color:inherit;padding:9px 10px;border-radius:10px;border:1px solid rgba(70,58,44,.5);background:rgba(255,255,255,.18);min-height:40px';sel.innerHTML=DIFFS.map(d=>'<option value="'+d+'"'+(d===M.diff?' selected':'')+'>'+DIFF_NAME[d]+'</option>').join('');sel.onchange=()=>{if(DIFFS.includes(sel.value))M.diff=sel.value;};
    b=document.createElement('button');b.id='svCoop1149Start';b.type='button';b.textContent='무한 생존 함께 시작';b.title='모두 같은 정화 구슬을 지킵니다. 지금은 '+joinCap()+'명까지 · 적 체력은 인원수만큼 늘어납니다';
    b.onclick=()=>{startHost(document.getElementById('svCoop1149Diff')?.value||M.diff).catch(fail);};base.parentNode.insertBefore(b,base.nextSibling);base.parentNode.insertBefore(sel,b.nextSibling);}
   const off=base.disabled===true||M.busy;if(b.disabled!==off)b.disabled=off;}catch(e){fail(e);}}

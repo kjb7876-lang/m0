@@ -32,7 +32,7 @@ async function run(kind){
   ok(await guest.evaluate(()=>!document.getElementById('svCoop1149Start')),`[${kind}] 손님 대기실에는 시작 단추 없음`);
   ok(await host.evaluate(()=>document.getElementById('svCoop1149Start')?.disabled===true),`[${kind}] 손님 준비 전에는 시작 단추 잠김`);
   await guest.waitForSelector('#coopReady62:not([disabled])',{timeout:60000});await guest.click('#coopReady62');
-  await host.waitForSelector('#svCoop1149Start:not([disabled])',{timeout:60000});await host.selectOption('#svCoop1149Diff','easy');await host.click('#svCoop1149Start');
+  await host.waitForSelector('#svCoop1149Start:not([disabled])',{timeout:60000});await host.screenshot({path:path.join(OUT,`${kind}-lobby.png`)}).catch(()=>{});await host.selectOption('#svCoop1149Diff','easy');await host.click('#svCoop1149Start');
   const playH=await until(host,()=>window.__STORYWORLD_COOP_CLIENT_R62__.inspect().phase==='playing'&&window.__STORYWORLD_SURVIVAL_R600__.here()===true,null,240000,'host playing');
   const playG=await until(guest,()=>window.__STORYWORLD_COOP_CLIENT_R62__.inspect().phase==='playing'&&window.__STORYWORLD_SURVIVAL_R600__.here()===true,null,240000,'guest playing');
   const h0=await insp(host),g0=await insp(guest);ok(playH&&playG,`[${kind}] 함께 시작 → 둘 다 생존 무대에 섬`,[h0,g0]);if(!(playH&&playG))return;
@@ -62,6 +62,7 @@ async function run(kind){
   // 손님 선택지: 자기 영웅 것만(구슬 강화 없음), 고르면 방장 쪽 손님 몸의 강화가 오름
   const offer=await guest.evaluate(()=>{const M=window.__STORYWORLD_SURVIVAL_COOP_R1149__;M.openChoice();return [...document.querySelectorAll('.r1149Card')].map(b=>({id:b.dataset.pick,kind:b.dataset.kind,text:b.textContent}));});
   ok(offer.length>=1&&offer.length<=3&&offer.every(o=>o.kind!=='core'&&!/정화 코어/.test(o.text)),`[${kind}] 손님 선택지에 구슬 강화 없음(영웅 것 ${offer.length}개)`,offer);
+  await guest.screenshot({path:path.join(OUT,`${kind}-guest-cards.png`)}).catch(()=>{});
   const gid=await guest.evaluate(()=>window.__STORYWORLD_COOP_CLIENT_R62__.inspect().selfId);
   const upSum=()=>host.evaluate(id=>{const a=window.__STORYWORLD_COOP_SIM_R62__.players().find(p=>p.coopIdR62===id);return{hero:a.hero,sum:Object.values(a.upgrades||{}).reduce((x,y)=>x+(+y||0),0),keys:Object.keys(a.upgrades||{})};},gid);
   const before=await upSum();await guest.click('.r1149Card');
@@ -96,6 +97,7 @@ async function run(kind){
   // 한 사람이 쓰러져도 동료가 살아 있으면 판이 이어지고, 모두 쓰러지면 끝난다
   await host.evaluate(()=>{try{closePanel(true);}catch(_){}const C=window.__STORYWORLD_COOP_SIM_R62__,p=C.localPlayer();C.withPlayer(p,()=>{player.hp=0;showDeath();});});
   await host.waitForTimeout(1500);const mid=await host.evaluate(()=>({over:window.__STORYWORLD_SURVIVAL_R600__.state().over,hp:window.__STORYWORLD_COOP_SIM_R62__.localPlayer().hp,alive:window.__STORYWORLD_SURVIVAL_COOP_R1149__.alive().length}));
+  await guest.evaluate(()=>{try{closePanel(true);}catch(_){}});await guest.waitForTimeout(800);await guest.screenshot({path:path.join(OUT,`${kind}-guest-play.png`)}).catch(()=>{});await host.screenshot({path:path.join(OUT,`${kind}-host-play.png`)}).catch(()=>{});
   ok(mid.over===false&&mid.alive===1,`[${kind}] 방장이 쓰러져도 손님이 살아 있으면 판이 이어짐`,mid);
   await host.evaluate(id=>{const C=window.__STORYWORLD_COOP_SIM_R62__,p=C.players().find(a=>a.coopIdR62===id);C.withPlayer(p,()=>{player.hp=0;});},gid);
   ok(await until(host,()=>window.__STORYWORLD_SURVIVAL_R600__.state().over===true,null,60000,'all down'),`[${kind}] 모두 쓰러지면 판 끝`,await insp(host));
