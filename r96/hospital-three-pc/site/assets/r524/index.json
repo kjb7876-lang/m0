@@ -1,0 +1,77 @@
+{
+ "round": "R524",
+ "note": "방 꾸미기 둘째 묶음(질투의 집 ep1b03 · 폭식의 주방 ep1b04)에서 새로 만든 그림. 원본은 그대로 둔다. 바닥 각도가 2:1 격자와 맞는 것만 넣었다. 드라이브 파일 ID 는 적지 않는다.",
+ "reused": [
+  "assets/world-r80/r80-026.webp",
+  "assets/world-r80/r80-025.webp",
+  "assets/r523/wardrobe-n.webp",
+  "assets/r523/wardrobe-w.webp",
+  "assets/r523/table-n.webp",
+  "assets/r523/table-w.webp",
+  "assets/r523/chair-n.webp",
+  "assets/r523/chair-w.webp",
+  "assets/r523/chair-back-n.webp",
+  "assets/r523/chair-back-w.webp",
+  "assets/r523/sloth-fridge.webp"
+ ],
+ "stillMissing": [
+  {
+   "name": "책장·책상·조리대·식재료 선반",
+   "why": "각도 맞는 두 방향 그림이 아직 없음 → Dots 요청서로 보냄. 그때까지 서재는 옷장·책상(탁자+의자)·소파, 보관실은 냉장고·옷장으로 채움"
+  }
+ ],
+ "files": [
+  {
+   "file": "assets/r524/range-n.webp",
+   "bytes": 14628,
+   "sha256": "4b0b8315c029aabf142b1ece69649ac664a499d65a986d773e5f00cb9d877b9b",
+   "size": [
+    174,
+    224
+   ],
+   "source": "드라이브(최근 3일) FURNITURE-range-westwall-sw-v1-20261109.png → 여백 잘라 내고 크기 줄임, 밝기 0.9배(냉장고 그림과 밝기 맞춤)",
+   "kind": "Dots 두 방향 가구 그림",
+   "use": "폭식의 주방 화구 구획·준비대의 가스 화구(북쪽 벽용)",
+   "applied": true
+  },
+  {
+   "file": "assets/r524/range-w.webp",
+   "bytes": 15948,
+   "sha256": "d37671b9e267ee5b1f1ea75e58133b02eeb8fcc461814b4089253fee5df72942",
+   "size": [
+    191,
+    224
+   ],
+   "source": "드라이브(최근 3일) FURNITURE-range-northwall-se-v1-20261109.png → 여백 잘라 내고 크기 줄임, 밝기 0.9배(냉장고 그림과 밝기 맞춤)",
+   "kind": "Dots 두 방향 가구 그림",
+   "use": "폭식의 주방 화구 구획·준비대의 가스 화구(서쪽 벽용)",
+   "applied": true
+  },
+  {
+   "file": "assets/r524/sofa-n.webp",
+   "bytes": 13648,
+   "sha256": "d409b4f26957f3cebe536002aaba47732bacf8572fa1875390ed95b51be8bff2",
+   "size": [
+    288,
+    204
+   ],
+   "source": "기존 시트 assets/sin-rooms/envy-lounge.webp 의 소파 칸(왼쪽 아래 보는 쪽)을 잘라 냄",
+   "kind": "기존 게임 자산 재사용(잘라 내기)",
+   "use": "질투의 집 거실·서재·거울 회랑의 긴 소파(북쪽 벽용)",
+   "applied": true
+  },
+  {
+   "file": "assets/r524/sofa-w.webp",
+   "bytes": 13468,
+   "sha256": "8bf10ff5c67732f690edf60e016a5e97dbf938e7ac13cc175564b8d88992512e",
+   "size": [
+    288,
+    240
+   ],
+   "source": "기존 시트 assets/sin-rooms/envy-lounge.webp 의 소파 칸(오른쪽 아래 보는 쪽)을 잘라 냄",
+   "kind": "기존 게임 자산 재사용(잘라 내기)",
+   "use": "질투의 집 거실·서재·거울 회랑의 긴 소파(서쪽 벽용)",
+   "applied": true
+  }
+ ]
+}

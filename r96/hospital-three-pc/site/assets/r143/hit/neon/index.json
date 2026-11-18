@@ -1,0 +1,113 @@
+{
+ "hero": "neon",
+ "action": "hit",
+ "order": "피격 충격 → 뒤로 젖힘 (README)",
+ "mirroredInGame": {
+  "w": "e",
+  "sw": "se",
+  "nw": "ne"
+ },
+ "applied": "맞았을 때 프레임 애니메이션 — client-source/attack-anim-r143.js",
+ "directions": {
+  "s": {
+   "path": "assets/r143/hit/neon/hit-s.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    225
+   ],
+   "source": {
+    "driveId": "1jJ9yBuKSSvV7bsW_JtXPP8IBfWCP8MkF",
+    "file": "HERO-neon-hit-s.png",
+    "sha256": "64f57c61572702f5e1c8b5df62786f809c7291f1197a4b08e7215757ee90f501",
+    "bytes": 52945
+   },
+   "sha256": "912d2f362c9b7a4375296d6d24a452778a6f0ff931b37cbb447b9ff8af549891",
+   "bytes": 15782
+  },
+  "se": {
+   "path": "assets/r143/hit/neon/hit-se.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    225
+   ],
+   "source": {
+    "driveId": "1jJ9yBuKSSvV7bsW_JtXPP8IBfWCP8MkF",
+    "file": "HERO-neon-hit-se.png",
+    "sha256": "57251fb8bf810f3826cc8bdd6ede9a3d4cd2681cd14c66f16013a3a49ef9fa47",
+    "bytes": 47047
+   },
+   "sha256": "50707428e7f3d8c884a884da5b0ef0ba444756dbd4e65ed7c02aa7a2c0f03930",
+   "bytes": 13922
+  },
+  "e": {
+   "path": "assets/r143/hit/neon/hit-e.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1jJ9yBuKSSvV7bsW_JtXPP8IBfWCP8MkF",
+    "file": "HERO-neon-hit-e.png",
+    "sha256": "23dcca20e8ba3819b2c19b6dddb57287e2872b9db9f5c8a54330aa3be3b53f8f",
+    "bytes": 31578
+   },
+   "sha256": "9c7dedbe7a5872ba352ebac81f0481167382d15b78969d15cefe55b1e844cf74",
+   "bytes": 10756
+  },
+  "ne": {
+   "path": "assets/r143/hit/neon/hit-ne.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1jJ9yBuKSSvV7bsW_JtXPP8IBfWCP8MkF",
+    "file": "HERO-neon-hit-ne.png",
+    "sha256": "c18add1c4c1a2432fddfe3532cdc213c5c2d0dd0524979182ccaf19804a364bf",
+    "bytes": 45317
+   },
+   "sha256": "775ad774b3f077978aaa1d804138bdc2c21f2d3f7a1f77608b79bd897cd30c16",
+   "bytes": 13494
+  },
+  "n": {
+   "path": "assets/r143/hit/neon/hit-n.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1jJ9yBuKSSvV7bsW_JtXPP8IBfWCP8MkF",
+    "file": "HERO-neon-hit-n.png",
+    "sha256": "6099cf769388d7a22e23852bd461f323498be5ba72c811c054a58c1cf1ae4dc8",
+    "bytes": 51124
+   },
+   "sha256": "b44a395d35313199ad917b7a8022d5aa31cfa9163708d2b61f364e198d5edb02",
+   "bytes": 15038
+  }
+ }
+}

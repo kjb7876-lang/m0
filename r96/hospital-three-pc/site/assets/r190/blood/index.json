@@ -1,0 +1,84 @@
+{
+ "source": "https://opengameart.org/content/animated-particle-effects-2",
+ "author": "para",
+ "license": "CC0 (page license field: \"License(s): CC0\")",
+ "download": "https://opengameart.org/sites/default/files/para_CC0_particlefx-2.zip",
+ "zip_sha256": "469676f3fc08509e4ec824147d179a51a9a71c380a3d0fd142cf8e30355f50f8",
+ "zip_bytes": 5927098,
+ "conversion": "PNG 512x512(4x4, 128px) -> WEBP q92, 크기·칸 그대로",
+ "use": "R190 몹 피격 피 튐(blood-splash/burst)·쓰러짐(blood-death) — 적대 효과 핏빛",
+ "effects": {
+  "blood-splash": {
+   "file": "blood-splash.webp",
+   "frame": [
+    128,
+    128
+   ],
+   "columns": 4,
+   "frames": 15,
+   "pivot": [
+    64,
+    64
+   ],
+   "sha256": "2eb64e13d104c528077b02485ff927d400155faa12039982d9d9782f76b21e86",
+   "bytes": 42724,
+   "source_file": "blood_hit_01.png",
+   "source_sha256": "0947f82ef68ef7d338291961f66ff89710bdbea439d12ec4430dd707f4f8b434",
+   "source_bytes": 109054,
+   "source_size": [
+    512,
+    512
+   ]
+  },
+  "blood-burst": {
+   "file": "blood-burst.webp",
+   "frame": [
+    128,
+    128
+   ],
+   "columns": 4,
+   "frames": 14,
+   "pivot": [
+    64,
+    64
+   ],
+   "sha256": "3543bf9d3a9ec9a8c9363968c42f813e986eb02d37e351e653f3092ced82a442",
+   "bytes": 46902,
+   "source_file": "blood_hit_04.png",
+   "source_sha256": "472d743c2ce0a4e5e2eca293f50c2430c550e1271768dbca44bac25ef6603f12",
+   "source_bytes": 91450,
+   "source_size": [
+    512,
+    512
+   ]
+  },
+  "blood-death": {
+   "file": "blood-death.webp",
+   "frame": [
+    128,
+    128
+   ],
+   "columns": 4,
+   "frames": 15,
+   "pivot": [
+    64,
+    64
+   ],
+   "sha256": "ac0d315d9d3780ffa648907863fd502d147f20ee8e5f19b05a8bb46b7c7b85dd",
+   "bytes": 50398,
+   "source_file": "blood_hit_08.png",
+   "source_sha256": "9640627d9e405c9fb3b1126c9363e5e4844cc57557ff5aefce0b8cae1a406cd0",
+   "source_bytes": 115643,
+   "source_size": [
+    512,
+    512
+   ]
+  }
+ },
+ "excluded": {
+  "fire_*": "만화풍 밝은 주황 불꽃 — 그림체 불일치",
+  "teleporter_*": "청백 픽셀 느낌 — 불일치",
+  "air_bubbles_*": "쓸 곳 없음",
+  "blood_hit_02/03/05/06": "같은 역할 중복"
+ }
+}

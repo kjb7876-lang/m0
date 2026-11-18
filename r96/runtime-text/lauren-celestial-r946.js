@@ -77,7 +77,7 @@ function restoreAct(x){if(x.kind!=='meteor'||x.restored)return;x.restored=true;f
 function cancel(){for(const x of acts)restoreAct(x);acts=[];pushers=[];pullers=[];booms=[];}
 // ---- 다섯 가지 발동 ---------------------------------------------------------------------------------
 function dirTo(o,tg){let ux,uy;if(tg){ux=tg.x-o.x;uy=tg.y-o.y;}const L=Math.hypot(ux||0,uy||0);if(!(L>1e-6)){const a=aim();return {ux:Math.cos(a),uy:Math.sin(a)};}return {ux:ux/L,uy:uy/L};}
-function fire(kind,o,tg){const t=T(),power=ap(),k=Math.min(2,Math.max(1,surge('range',1))),{ux,uy}=dirTo(o,tg),base={kind,owner:o,t0:t,power,k,ux,uy,seed:(stats.procTotal*7919)%360,ego:egoOwner(o)};
+function fire(kind,o,tg,extra){const t=T(),power=ap()*(extra&&Number.isFinite(extra.powerScale)&&extra.powerScale>0?extra.powerScale:1),k=Math.min(2,Math.max(1,surge('range',1))),{ux,uy}=dirTo(o,tg),base={kind,owner:o,t0:t,power,k,ux,uy,seed:(stats.procTotal*7919)%360,ego:egoOwner(o),...(extra&&extra.egoTint?{egoTint:extra.egoTint}:{})};
  if(base.ego){stats.procTotal+=1;stats.procs[kind]+=1;}/* R1094: EGO 판은 라우렌 컷인을 띄우지 않음 */else{stats.procTotal++;stats.procs[kind]++;C1033(HERO,kind,o);}
  if(kind==='repulse'){const c={x:o.x,y:o.y};stats.repulseCentres.push(c.x+','+c.y);if(stats.repulseCentres.length>20)stats.repulseCentres.shift();
   for(const e of enemiesNow()){if(hiddenActor(e))continue;const d=dist(e,c);if(d>REP_R*k||!lineOk(c,e))continue;deal(e,power*REP_K,'repulse');
@@ -101,7 +101,19 @@ function pick(s,t){if(forced){const f=forced;forced=null;return f;}if(comboOf(s,
 //   회전·명도를 낮춘다(시트 대조: 은빛 구 → 언주, 청 → 주홍, 무라사키 → 먹 테 주홍). 필터는 장면 기록(ctx.scope) 안에서 다시 건다(밖에서 건 값은 기록 칸이 지움).
 //   영웅 몸 가까이(1.2칸 안)에서는 옅게(가장 가까이 .4배), 전체 알파 .8배.
 const EGO_KINDS=['red','blue'],EGO_FILTER='saturate(6) hue-rotate(110deg) brightness(.72) contrast(1.3)',EGO_ALPHA=.8,EGO_NEAR=1.2,EGO_NEAR_MIN=.4;
-let egoPaint=false;
+// R1145(사용자 11-18 05:55Z "r 사용시 은빛거성 동시 사용하도록 심연왜성(백+빨강 색섞어서) … 묵월발동시 항성 반발도 백적색으로"): EGO 가 R·묵월에 이어 내는 판은 흰색이 섞인 붉은빛.
+//  같은 색상 회전에 채도는 덜 올리고 명도를 올린다(언주·먹 판보다 밝고 희다). 라우렌 본인 그림에는 걸지 않는다.
+const EGO_WR_FILTER='hue-rotate(76deg) saturate(1.2) brightness(1.25)';
+// R1145: 이펙트 수묵 색(R1095)이 켜져 있으면 그쪽이 렌더 단계에서 이 그림들을 이미 붉은 쪽으로 돌린다(실측: 뒤에 hue-rotate(76deg) saturate(1.46) 이 붙음).
+//  여기서도 색상을 돌리면 두 번 돌아 심연 왜성이 초록으로 나왔다(R1095 가 들어온 뒤부터의 기존 버그, 확률 발동 판도 같음) → R1095 가 켜져 있으면 색상은 돌리지 않고 명도만 맞춘다.
+const EGO_INK_FILTER='brightness(.8) contrast(1.25)',EGO_WR_INK_FILTER='saturate(.75) brightness(1.3)';
+const inkFxLive=()=>{try{return !!window.__STORYWORLD_INK_FX_R1095__?.active?.();}catch(_){return false;}};
+const egoFilterOf=x=>{const ink=inkFxLive();return x&&x.egoTint==='wr'?(ink?EGO_WR_INK_FILTER:EGO_WR_FILTER):(ink?EGO_INK_FILTER:EGO_FILTER);};
+let egoPaint=false,egoFilterNow=EGO_FILTER;
+// EGO 가 직접 내는 길(확률 굴림·대기와 따로): 은빛 거성·심연 왜성·항성 반발만. 라우렌·환도 본인은 거부. 쌍성 소멸 조건(redAt·blueAt)은 건드리지 않는다.
+function egoCast(kind,tg,opt){try{const o=P();if(!on()||!o||!egoOwner(o)||!(o.hp>0)||blockedNow()||!['red','blue','repulse'].includes(kind))return false;
+  const sc0=opt&&Number.isFinite(opt.scale)?Math.min(1,Math.max(.1,opt.scale)):1;lastRoom=curRoom();stats.egoCasts=(stats.egoCasts||0)+1;
+  fire(kind,o,tg&&Number.isFinite(tg.x)&&Number.isFinite(tg.y)?{x:tg.x,y:tg.y}:null,{egoTint:'wr',powerScale:sc0});return true;}catch(err){fail(err);return false;}}
 // 순수 계산: EGO 판 그림 알파(영웅과 떨어진 칸 거리 d)
 function egoAlpha(d){d=Number.isFinite(d)?Math.max(0,d):EGO_NEAR;return EGO_ALPHA*(d>=EGO_NEAR?1:EGO_NEAR_MIN+(1-EGO_NEAR_MIN)*d/EGO_NEAR);}
 function egoOwner(o){try{if(!o||o.hero===HERO)return false;const K=window.__STORYWORLD_EGO_KIT_R1094__;return !!(K&&K.active&&K.active());}catch(_){return false;}}
@@ -176,7 +188,7 @@ function sheet(k,age,x,y,d,o={}){if(!sheetsOn)return false;const im=simg(k);if(!
  ctx.save();try{ctx.globalAlpha*=Math.max(0,Math.min(1,o.alpha??1));ctx.translate(x,y);if(o.flip)ctx.scale(-1,1);if(o.angle)ctx.rotate(o.angle);ctx.drawImage(im,sx+c[0]*K,sy+c[1]*K,(c[2]-c[0])*K,(c[3]-c[1])*K,(c[0]-m.piv[0])/256*w,(c[1]-m.piv[1])/256*h,(c[2]-c[0])/256*w,(c[3]-c[1])/256*h);stats.sheetDraws++;}finally{ctx.restore();}return true;}
 // 진행 방향(화면) → 오른쪽 그림을 뒤집을지·기울일지(광원 왼쪽 위가 크게 돌지 않게 ±0.6 rad 까지)
 function heading(x){const a=project(x.x,x.y),b=project(x.x+(x.ux||1),x.y+(x.uy||0)),dx=b.x-a.x,dy=b.y-a.y;return {flip:dx<0,angle:Math.max(-.6,Math.min(.6,Math.atan2(dy,Math.abs(dx)||1e-6)))};}
-function sc(o,f){if(egoPaint){const g=f,pl=P(),d=pl&&o&&Number.isFinite(o.x)&&Number.isFinite(o.y)?Math.hypot(o.x-pl.x,o.y-pl.y):NaN,a=egoAlpha(d);f=()=>{ctx.save();try{ctx.filter=EGO_FILTER;ctx.globalAlpha*=a;stats.egoDraws=(stats.egoDraws||0)+1;return g();}finally{ctx.restore();}};}
+function sc(o,f){if(egoPaint){const g=f,pl=P(),d=pl&&o&&Number.isFinite(o.x)&&Number.isFinite(o.y)?Math.hypot(o.x-pl.x,o.y-pl.y):NaN,a=egoAlpha(d);f=()=>{ctx.save();try{ctx.filter=egoFilterNow;ctx.globalAlpha*=a;stats.egoDraws=(stats.egoDraws||0)+1;return g();}finally{ctx.restore();}};}
  if(typeof ctx!=='undefined'&&ctx&&typeof ctx.scope==='function')ctx.scope(o,f);else f();}
 function scale(){const z=typeof zoom==='number'&&zoom>0?zoom:1,TL=typeof TILE==='number'?TILE:34;return {z,T1:TL*z*Math.SQRT2,AH:typeof actorHeight==='function'?actorHeight():66*z};}
 function glowOrb(x,y,r,core,mid,alpha){ctx.save();try{ctx.globalAlpha*=alpha;const prev=ctx.globalCompositeOperation;ctx.globalCompositeOperation='lighter';
@@ -244,7 +256,7 @@ function drawBoom(b,t){const {z,T1,AH}=scale(),v=Math.min(1,(t-b.t0)/.75),q=proj
   ctx.save();try{ctx.globalAlpha*=a;ctx.fillStyle=`rgba(${VOID},.55)`;ctx.beginPath();ctx.ellipse(q.x,q.y,R*.35,R*.17,0,0,Math.PI*2);ctx.fill();}finally{ctx.restore();}});
  if(v<.35)sc({id:id+':flash',kind:'effect',pxfSide:'hero',x:b.x,y:b.y+.01},()=>glowOrb(q.x,q.y-AH*.3,AH*.45*(1-v/.35)+AH*.1,VIO_HOT,VIO,1-v/.35));}
 function draw(){if(typeof project!=='function'||typeof ctx==='undefined'||!ctx)return;const t=T();
- for(const x of acts){try{if(x.kind==='repulse')drawRepulse(x,t);else if(x.ego){egoPaint=true;try{if(x.kind==='red')drawRed(x,t);else if(x.kind==='blue')drawBlue(x,t);else if(x.kind==='violet')drawViolet(x,t);}finally{egoPaint=false;}}else if(x.kind==='red')drawRed(x,t);else if(x.kind==='blue')drawBlue(x,t);else if(x.kind==='violet')drawViolet(x,t);else if(x.kind==='meteor')drawMeteor(x,t);}catch(err){fail(err);}}
+ for(const x of acts){try{if(x.kind==='repulse'){if(x.ego&&x.egoTint==='wr'){egoPaint=true;egoFilterNow=egoFilterOf(x);try{drawRepulse(x,t);}finally{egoPaint=false;egoFilterNow=EGO_FILTER;}}else drawRepulse(x,t);}else if(x.ego){egoPaint=true;egoFilterNow=egoFilterOf(x);try{if(x.kind==='red')drawRed(x,t);else if(x.kind==='blue')drawBlue(x,t);else if(x.kind==='violet')drawViolet(x,t);}finally{egoPaint=false;egoFilterNow=EGO_FILTER;}}else if(x.kind==='red')drawRed(x,t);else if(x.kind==='blue')drawBlue(x,t);else if(x.kind==='violet')drawViolet(x,t);else if(x.kind==='meteor')drawMeteor(x,t);}catch(err){fail(err);}}
  for(const b of booms){try{drawBoom(b,t);}catch(err){fail(err);}}stats.draws++;}
 const SENT={type:'r946-celestial',x:0,y:0,age:0,life:Infinity,r946Sentinel:true};
 function sentinel(want){try{if(typeof effects==='undefined'||!Array.isArray(effects))return;const i=effects.indexOf(SENT);if(want&&i<0)effects.push(SENT);else if(!want&&i>=0)effects.splice(i,1);SENT.age=0;
@@ -259,7 +271,7 @@ window.__STORYWORLD_LAUREN_CELESTIAL_R946__=Object.freeze({revision:REV,set,on:(
  qaForce:k=>{forced=KINDS.includes(k)?k:null;return forced;},qaRandom:f=>{rng=typeof f==='function'?f:null;return !!rng;},
  qaProps:()=>{const rm=curRoom();return (rm&&Array.isArray(rm.props)?rm.props:[]).filter(eligible).map(a=>({id:a.id,x:a.x,y:a.y,height:a.height,path:a.path}));},
  qaSheets:v=>{sheetsOn=v!==false;return sheetsOn;},sheets:()=>Object.fromEntries(Object.keys(SHEETS).map(k=>[k,{path:SPATH(k),ready:!!simg(k)}])),
- egoAlpha,egoFilter:EGO_FILTER,
+ egoAlpha,egoFilter:EGO_FILTER,egoWrFilter:EGO_WR_FILTER,egoInkFilter:EGO_INK_FILTER,egoWrInkFilter:EGO_WR_INK_FILTER,egoCast,
  qaReset:()=>{const o=P();if(o){const s=stateOf(o);s.readyAt=-1e9;s.lastRoll=-1e9;}return true;},
  inspect:()=>{const o=P(),s=o?owners.get(o):null;return {revision:REV,on:prefOn,owners:ownerCount,comboReady:!!(s&&comboOf(s,T())),
   acts:acts.map(x=>({kind:x.kind,x:x.x,y:x.y,t0:x.t0,rocks:x.rocks?x.rocks.map(r=>({propId:r.propId,state:r.state})):undefined})),

@@ -1,0 +1,113 @@
+{
+ "hero": "seoha",
+ "action": "death",
+ "order": "휘청 2 → 무릎 1 → 눕기 3 (README)",
+ "mirroredInGame": {
+  "w": "e",
+  "sw": "se",
+  "nw": "ne"
+ },
+ "applied": "쓰러질 때(R151 death-r151.js) 프레임 애니메이션 — client-source/attack-anim-r143.js",
+ "directions": {
+  "s": {
+   "path": "assets/r143/death/seoha/death-s.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    228
+   ],
+   "source": {
+    "driveId": "1blSlpYROBJC3mOQ8f-WzCRxDsqnVtHVZ",
+    "file": "HERO-seoha-death-s.png",
+    "sha256": "3a5b187620833d4cea790ae06ba8c9aca9341e1219ba9360c8db79aecb2e3f1a",
+    "bytes": 118880
+   },
+   "sha256": "6642238ba21060c0c0f01477898d7935d671e8922f0767bc0788f2fee87fe495",
+   "bytes": 40916
+  },
+  "se": {
+   "path": "assets/r143/death/seoha/death-se.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    228
+   ],
+   "source": {
+    "driveId": "1blSlpYROBJC3mOQ8f-WzCRxDsqnVtHVZ",
+    "file": "HERO-seoha-death-se.png",
+    "sha256": "abbe1b4bded7ada6970257c4f64c2c22816f6e520f7efa31cbd9c76ad8218d63",
+    "bytes": 102976
+   },
+   "sha256": "1fb504c83d201a01670d85152e1d66e254bd900c9efd0d7f38c29f18a4ef614f",
+   "bytes": 36534
+  },
+  "e": {
+   "path": "assets/r143/death/seoha/death-e.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    228
+   ],
+   "source": {
+    "driveId": "1blSlpYROBJC3mOQ8f-WzCRxDsqnVtHVZ",
+    "file": "HERO-seoha-death-e.png",
+    "sha256": "53adcbb626529c16a251c186ee8c5f54f7e28e787e48112f35c6e4554b9be69a",
+    "bytes": 86897
+   },
+   "sha256": "81804e8a01779a6002cccb694a767859513d276787778a87b5b62c01230834a7",
+   "bytes": 30950
+  },
+  "ne": {
+   "path": "assets/r143/death/seoha/death-ne.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    227
+   ],
+   "source": {
+    "driveId": "1blSlpYROBJC3mOQ8f-WzCRxDsqnVtHVZ",
+    "file": "HERO-seoha-death-ne.png",
+    "sha256": "92b3ee1c0469712212631958c7d66bd9bf94527468805a00a579ff31609d0321",
+    "bytes": 93156
+   },
+   "sha256": "57b28656de7a0da2a5827102b94c6d1f074e3f831f9885562fb0361c43fc8900",
+   "bytes": 33286
+  },
+  "n": {
+   "path": "assets/r143/death/seoha/death-n.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1blSlpYROBJC3mOQ8f-WzCRxDsqnVtHVZ",
+    "file": "HERO-seoha-death-n.png",
+    "sha256": "f8b2c488989126d96afd2658489587bfc6c0f1c7d16bf943bcfe47818e8f22c5",
+    "bytes": 109151
+   },
+   "sha256": "15994cdb5bdf8e4296ec27a7111dfb8a6347ef6b418b3259f89d581b68a5f404",
+   "bytes": 37524
+  }
+ }
+}

@@ -10352,6 +10352,16 @@
     "narrative-corner-r1141.js",
     "transition-curtain-r1138.js",
     "ego-polish-r1139.js",
+    "ego-dots-r1139b.js",
+    "assets/r1139/ego/icons.webp",
+    "assets/r1139/ego/impact.webp",
+    "assets/r1139/ego/index.json",
+    "assets/r1139/ego/shield.webp",
+    "assets/r1139/ego/slash-front.webp",
+    "assets/r1139/ego/slash-rear.webp",
+    "assets/r1139/ego/slash-right.webp",
+    "assets/r1139/ego/trail-horizontal.webp",
+    "ego-celestial-r1145.js",
     "persona-wer-r1144.js"
   ],
   "mediaPaths": [
@@ -11427,5 +11437,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "5a9dd4b62b791f42320b40c1267dc68304ec4d8453e747bcb2c3b71703b8fa12"
+  "runtimeManifestSHA256": "eec4d0d38913642c540e5138658b9192c78faca5ecc81da41df432215d005e30"
 }

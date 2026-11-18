@@ -1,0 +1,113 @@
+{
+ "hero": "gunner",
+ "action": "death",
+ "order": "휘청 2 → 무릎 1 → 눕기 3 (README)",
+ "mirroredInGame": {
+  "w": "e",
+  "sw": "se",
+  "nw": "ne"
+ },
+ "applied": "쓰러질 때(R151 death-r151.js) 프레임 애니메이션 — client-source/attack-anim-r143.js",
+ "directions": {
+  "s": {
+   "path": "assets/r143/death/gunner/death-s.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    228
+   ],
+   "source": {
+    "driveId": "13-unzqWeeD2_9N7q2KInxcXm29JTI3JR",
+    "file": "HERO-gunner-death-s.png",
+    "sha256": "b5ada8bdf5871ad6f9661e34b943ac1bcfde4a95905cbc68e898a75ff5f65866",
+    "bytes": 105206
+   },
+   "sha256": "c756627f008baa08cb355924a0ec6bd32439bf3ed07029eb700c1844c4b31fe8",
+   "bytes": 28170
+  },
+  "se": {
+   "path": "assets/r143/death/gunner/death-se.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    227
+   ],
+   "source": {
+    "driveId": "13-unzqWeeD2_9N7q2KInxcXm29JTI3JR",
+    "file": "HERO-gunner-death-se.png",
+    "sha256": "56bcab37613dc07f15f85d0dd377cde01dfdeb4623d9a5f3bfbf84f5f9292f7a",
+    "bytes": 100025
+   },
+   "sha256": "c5a6e53e6c56c2d1322e5cc736d64f59fa84174e60076946bb52a06e19674d19",
+   "bytes": 27404
+  },
+  "e": {
+   "path": "assets/r143/death/gunner/death-e.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    228
+   ],
+   "source": {
+    "driveId": "13-unzqWeeD2_9N7q2KInxcXm29JTI3JR",
+    "file": "HERO-gunner-death-e.png",
+    "sha256": "7d66d836ed8dd4301a8ab17c93b4c76910097c1b68481e3c9c1bb61236e9838f",
+    "bytes": 103996
+   },
+   "sha256": "71ab8118c52c8d03893ec7cead5e64e922ad034062d81ba612e63c2c92c0b554",
+   "bytes": 28338
+  },
+  "ne": {
+   "path": "assets/r143/death/gunner/death-ne.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    227
+   ],
+   "source": {
+    "driveId": "13-unzqWeeD2_9N7q2KInxcXm29JTI3JR",
+    "file": "HERO-gunner-death-ne.png",
+    "sha256": "4508a6240ba7c0563c50c20f4cddcc95d0718c6502f467c719c6833a8160455c",
+    "bytes": 107321
+   },
+   "sha256": "c1e8e1c2bc23d4ca00472f131ef76a0826b68926f166c7c84a575b52036d8fbb",
+   "bytes": 30848
+  },
+  "n": {
+   "path": "assets/r143/death/gunner/death-n.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    227
+   ],
+   "source": {
+    "driveId": "13-unzqWeeD2_9N7q2KInxcXm29JTI3JR",
+    "file": "HERO-gunner-death-n.png",
+    "sha256": "d399ce5a899dd6e9aee88f7d782652bb25f2c32de432bcebd7900899439eba9f",
+    "bytes": 104537
+   },
+   "sha256": "e7b8f08fc96a15694346272c0e8a57a88a52d51162a60b6872a72839a76670e6",
+   "bytes": 28414
+  }
+ }
+}

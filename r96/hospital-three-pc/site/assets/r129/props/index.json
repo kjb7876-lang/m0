@@ -1,0 +1,154 @@
+{
+ "revision": "R129",
+ "props": {
+  "tree": {
+   "path": "assets/r129/props/tree.webp",
+   "size": [
+    499,
+    512
+   ],
+   "bytes": 140698,
+   "sha256": "01d210c65ec0822446493003499bbd6da56258c0d6b2929165ce68c8bf4170ab",
+   "use": "NS 빛의 숲·R-17 정원 거대 나무",
+   "source": {
+    "drive": "StoryWorld-giant-forest-tree-20261030.zip",
+    "driveId": "18Gx-rzSnNB8U0us25GV_wPklRQg0JNbf",
+    "file": "giant-forest-tree-original.png",
+    "sha256": "3f22bc53665dbd8d2479500cf3be89627240e451654eb9f0d160e31ab1c7f8ff",
+    "bytes": 2386356
+   }
+  },
+  "monolith": {
+   "path": "assets/r129/props/monolith.webp",
+   "size": [
+    441,
+    512
+   ],
+   "bytes": 33934,
+   "sha256": "777ce3480405ac82dd303f0eb4124ee006ff29bc850efd80404d21cdbe4b78ce",
+   "use": "NS 데이터 세계 비석",
+   "source": {
+    "drive": "StoryWorld-data-monument-v2-20261030.zip",
+    "driveId": "1yvTbouSc67l7Xrp9ite5zMOEUtR7-QcD",
+    "file": "data-monument-v2-original.png",
+    "sha256": "86b1c97be0f9df8fd04d791029bff094b6aa4ea3c3cbb24336b5c8912dfc3583",
+    "bytes": 716252
+   }
+  },
+  "pylon": {
+   "path": "assets/r129/props/pylon.webp",
+   "size": [
+    206,
+    512
+   ],
+   "bytes": 43966,
+   "sha256": "2da2cc60728b8224481ad91982be4e00e9c76f2b256700e5108a2df1e1f9c93d",
+   "use": "NS 기계 폐허 철탑",
+   "source": {
+    "drive": "StoryWorld-machine-steel-tower-20261030.zip",
+    "driveId": "1snMzcYhT1y9Jeau8I9oR7sFNttH64brI",
+    "file": "machine-steel-tower-original.png",
+    "sha256": "a6174bc1010f1af2407fe27f3b0083dfdabe49ac8798c62f7305d477d27968ee",
+    "bytes": 1816560
+   }
+  },
+  "brush": {
+   "path": "assets/r129/props/brush.webp",
+   "size": [
+    512,
+    317
+   ],
+   "bytes": 22368,
+   "sha256": "e69e741996f4757349fc181bda259ae67967e3ed1dae94308df4aa252297041e",
+   "use": "R-07 모네 구역 목재 붓(원문 L42)",
+   "source": {
+    "drive": "StoryWorld-monet-wooden-brush-20261030.zip",
+    "driveId": "1uf4KpfIfl4m-U0YAvygvqTzgfO8hP-4c",
+    "file": "monet-wooden-brush-original.png",
+    "sha256": "6060c2221cc8936345abc226f2f645c11992d13733e2560322b970655694c50c",
+    "bytes": 1326680
+   }
+  },
+  "tweezers": {
+   "path": "assets/r129/props/tweezers.webp",
+   "size": [
+    512,
+    354
+   ],
+   "bytes": 28084,
+   "sha256": "aa24baa369cd5d80843f44a9fbbf51c9788a0e3563cef7971b62f78fbe9c8863",
+   "use": "R-06 클림트 구역 금박 핀셋(원문 L602·604)",
+   "source": {
+    "drive": "StoryWorld-klimt-goldleaf-tweezers-v2-20261030.zip",
+    "driveId": "12p6t6MMH5-bD-gcSHbwHnNI1zJ8lry9-",
+    "file": "klimt-goldleaf-tweezers-v2-original.png",
+    "sha256": "34850eb4c471cf666f3900bbf26c1531992b80716dcb9f4ba4105d10736b9339",
+    "bytes": 1400742
+   }
+  },
+  "vase": {
+   "path": "assets/r129/props/vase.webp",
+   "size": [
+    467,
+    512
+   ],
+   "bytes": 106578,
+   "sha256": "d142eefc624d8a2e85daa3fd0a95e5732a1ae6241a01b5cd13d726ea073209f5",
+   "use": "R-04 마네 구역 라일락 유리 화병(원문 L468·472)",
+   "source": {
+    "drive": "StoryWorld-manet-lilac-vase-20261030.zip",
+    "driveId": "1wgnMiIdwxmPqK6kC_TvvKi3l5IW63ktl",
+    "file": "manet-lilac-vase-original.png",
+    "sha256": "b6617c9809bb7ea9ada71bc2face670baac5c27f140413eb45c3cc5369b8e18a",
+    "bytes": 1590424
+   }
+  }
+ },
+ "clock": {
+  "frames": [
+   {
+    "path": "assets/r129/props/clock-k1.webp",
+    "sha256": "a160f17bf02115b7bd0ac822a5f5fd5790aaf82f782299696209c7ed576650f9",
+    "bytes": 45186,
+    "source": "K1.png",
+    "sourceSha256": "20d051bbf1c4bade8709fafbc221050dd5ec9c672b81a48edf67e1f6248a6d33"
+   },
+   {
+    "path": "assets/r129/props/clock-k2.webp",
+    "sha256": "78bb37b5d2ed9a94b45a93e1379377eb42fe3a7d9d63f9f2fff876f8c4a5c76a",
+    "bytes": 44154,
+    "source": "K2.png",
+    "sourceSha256": "65027a9a421c706830e11003133adc9e5db044d2105d3351164df3609d13d599"
+   },
+   {
+    "path": "assets/r129/props/clock-k3.webp",
+    "sha256": "9eedc815b618d316973bb7a30e04d6fe82f208f298fb71e9b6f2d58274892230",
+    "bytes": 45960,
+    "source": "K3.png",
+    "sourceSha256": "10df8c3e08f2a594ef2506dd4c398d8c574d6f335444322e9c2c9d062bc81bcc"
+   },
+   {
+    "path": "assets/r129/props/clock-k4.webp",
+    "sha256": "2f66505753de6ceb4fb4328687e21a7ec2206ab7d65abb724f323fe8ff10ad2f",
+    "bytes": 42076,
+    "source": "K4.png",
+    "sourceSha256": "9f8584bb7be0768966fbd76e2bc83aa94df3a9a37edcd3b66f4f0e1dbbcff5c4"
+   }
+  ],
+  "size": [
+   315,
+   384
+  ],
+  "use": "R-03·R-13 달리 구역 녹는 시계(가까이 가면 K1→K4 한 번, K4 유지)",
+  "source": {
+   "drive": [
+    "StoryWorld-melting-clock4-PART01-20261030.zip",
+    "StoryWorld-melting-clock4-PART02-20261030.zip"
+   ],
+   "driveId": [
+    "1kuRnfcTU9S-arcK_FAEk1GV69PEzdJyj",
+    "1e0E-kbDXczfsBC1kH132rkz1roc2XMeG"
+   ]
+  }
+ }
+}

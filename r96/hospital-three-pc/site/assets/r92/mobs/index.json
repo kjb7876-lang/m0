@@ -1,0 +1,2939 @@
+{
+ "schema": "storyworld.r93.mobs/v1",
+ "source": "r3 frozen review selection (FINAL-MOB-SELECTION-137x2.json), processed copy",
+ "selection": {
+  "tracks": 122,
+  "frames": 515,
+  "build": "FROZEN_REVIEW_R3"
+ },
+ "processing": [
+  "low-alpha edge colour bleed",
+  "premultiplied area resample to ~150 px median visible height",
+  "strip of N cells cropped to the union alpha box"
+ ],
+ "groups": {
+  "M001": {
+   "ids": [
+    "dist01-s1",
+    "dist03-s1",
+    "dist04-s1",
+    "dist05-s1"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M001-move.png",
+     "frames": 8,
+     "cell": [
+      128,
+      155
+     ],
+     "pivot": [
+      58.07,
+      151.69
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "alpha-derived",
+     "finalStatus": "STATIC_RIG_CANDIDATE",
+     "bytes": 124672,
+     "sha256": "9ad669746cf8d9dc7cc6164177cba17f9ed9228cb5a6cc948c74d02e86a9bc05"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M001-attack.png",
+     "frames": 4,
+     "cell": [
+      181,
+      159
+     ],
+     "pivot": [
+      94.34,
+      156.85
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "alpha-derived",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 141525,
+     "sha256": "87b02b10e23a3d4fc234b6214786d4ab8064063fc830cdbf539554a95514692f"
+    }
+   }
+  },
+  "M003": {
+   "ids": [
+    "dist02-m1",
+    "dist05-m1",
+    "dist06-m1"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M003-attack.png",
+     "frames": 4,
+     "cell": [
+      161,
+      155
+     ],
+     "pivot": [
+      65.87,
+      147.17
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 158312,
+     "sha256": "8ebf2b5fd9f543f5ff875c2f486b06d6bd7665164ce41096cdc8a450cf6a2f94"
+    }
+   }
+  },
+  "M004": {
+   "ids": [
+    "dist02-g1",
+    "dist03-c1",
+    "dist04-c1",
+    "dist04-c2",
+    "dist06-c1",
+    "a07-c1",
+    "a08-c1",
+    "a09-c1",
+    "a11-c1"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M004-attack.png",
+     "frames": 4,
+     "cell": [
+      166,
+      179
+     ],
+     "pivot": [
+      88.6,
+      174.68
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 188891,
+     "sha256": "99d13e669309e7b9996aabe3a9045d6cef40239e74d78615d921370800dfd0af"
+    }
+   }
+  },
+  "M005": {
+   "ids": [
+    "dist02-h1"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M005-attack.png",
+     "frames": 4,
+     "cell": [
+      127,
+      163
+     ],
+     "pivot": [
+      27.18,
+      160.19
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "alpha-derived",
+     "finalStatus": "STATIC_REPAIR_CANDIDATE",
+     "bytes": 134802,
+     "sha256": "d096f6f1271fd59639d45971cc6912c29036a2ce36a4285e40385210e8e97fe9"
+    }
+   }
+  },
+  "M006": {
+   "ids": [
+    "dist03-g1",
+    "dist04-g1"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M006-move.png",
+     "frames": 8,
+     "cell": [
+      125,
+      154
+     ],
+     "pivot": [
+      29.36,
+      151.76
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "alpha-derived",
+     "finalStatus": "STATIC_RIG_CANDIDATE",
+     "bytes": 102891,
+     "sha256": "8cb7d0f0aeab73e078727cbe8a7c523ac55c3ee13e89fafb902f4e8828c6ec93"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M006-attack.png",
+     "frames": 4,
+     "cell": [
+      158,
+      173
+     ],
+     "pivot": [
+      66.41,
+      168.3
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 140259,
+     "sha256": "5ec0642cb155233e2c2cbc9e17542dd5e9acbf07373d0230e11c9a385e77de2a"
+    }
+   }
+  },
+  "M007": {
+   "ids": [
+    "dist05-c1"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M007-attack.png",
+     "frames": 4,
+     "cell": [
+      204,
+      167
+     ],
+     "pivot": [
+      110.43,
+      163.68
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 194523,
+     "sha256": "b1b4325cb80851bef91048b702f94d66c9a42d7f8e3ee16a71a9b1e9746685ec"
+    }
+   }
+  },
+  "M008": {
+   "ids": [
+    "dist05-h1",
+    "dist06-h1",
+    "a10-h1"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M008-attack.png",
+     "frames": 4,
+     "cell": [
+      142,
+      173
+     ],
+     "pivot": [
+      72.52,
+      166.87
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 157819,
+     "sha256": "5b8e71ef6be5510f68004196be9a607e3edde959cf2d1267fc45b27cfd93710a"
+    }
+   }
+  },
+  "M009": {
+   "ids": [
+    "a07-s1"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M009-move.png",
+     "frames": 4,
+     "cell": [
+      143,
+      167
+     ],
+     "pivot": [
+      76.03,
+      164.04
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 162465,
+     "sha256": "c02646ae8ed3a9d8f7745c672d0cea2d0d8641bedbadc58ce648d40238d927a2"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M009-attack.png",
+     "frames": 4,
+     "cell": [
+      182,
+      170
+     ],
+     "pivot": [
+      85.06,
+      164.88
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 195350,
+     "sha256": "ec15304d4c9f5861ee11dea7596a2bc2a39c417ed444b9459184ac9c30ac14b2"
+    }
+   }
+  },
+  "M010": {
+   "ids": [
+    "a07-v1"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M010-move.png",
+     "frames": 4,
+     "cell": [
+      140,
+      158
+     ],
+     "pivot": [
+      67.72,
+      154.45
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 183226,
+     "sha256": "d27bd7683c6b453abae3ccba8c651000bb482944c98bf43a3617961f78adb8ce"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M010-attack.png",
+     "frames": 4,
+     "cell": [
+      147,
+      158
+     ],
+     "pivot": [
+      69.97,
+      154.57
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "LIMITED_PULSE_CANDIDATE",
+     "bytes": 181260,
+     "sha256": "d9b6f215dd3ab534eacaa7be0a34d111385edc0d74fffec2308beb778471f916"
+    }
+   }
+  },
+  "M011": {
+   "ids": [
+    "a08-s1"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M011-move.png",
+     "frames": 4,
+     "cell": [
+      129,
+      155
+     ],
+     "pivot": [
+      58.29,
+      152.26
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 162372,
+     "sha256": "8db66a48d1c53d63b194791b6402ac814b0339f8f95c8fb295ba57862a421c0f"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M011-attack.png",
+     "frames": 4,
+     "cell": [
+      148,
+      155
+     ],
+     "pivot": [
+      62.63,
+      151.32
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 169305,
+     "sha256": "bf1365b66118c74bb5cd237768cc7ea8f5dcdd5fa807f8f68cb5a0c831f84c44"
+    }
+   }
+  },
+  "M012": {
+   "ids": [
+    "a08-o1",
+    "a08-o2",
+    "a09-o1",
+    "a10-o1",
+    "a11-o1"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M012-move.png",
+     "frames": 8,
+     "cell": [
+      89,
+      154
+     ],
+     "pivot": [
+      63.2,
+      152.2
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "alpha-derived",
+     "finalStatus": "STATIC_RIG_CANDIDATE",
+     "bytes": 86700,
+     "sha256": "67b17ed34932ac3f00edd2ea88a04485321f21dc156daa0998c45b6dd0d5bcd5"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M012-attack.png",
+     "frames": 4,
+     "cell": [
+      159,
+      160
+     ],
+     "pivot": [
+      88.24,
+      157
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "alpha-derived",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 135733,
+     "sha256": "ad2b6378a0203a0d815d208238e7080faef1a7bba60e4c153f04596468cb9cf2"
+    }
+   }
+  },
+  "M013": {
+   "ids": [
+    "a09-v1"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M013-move.png",
+     "frames": 4,
+     "cell": [
+      138,
+      175
+     ],
+     "pivot": [
+      65.52,
+      166.3
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 167032,
+     "sha256": "784f28275e38925682520a63e35c932590b74ca5892efd99e45915d96fed8657"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M013-attack.png",
+     "frames": 4,
+     "cell": [
+      135,
+      156
+     ],
+     "pivot": [
+      68.78,
+      152.4
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 177826,
+     "sha256": "d0a842c8a5d0d5d20852b7afa0c140c5092998359911e50a14d03182c9450e87"
+    }
+   }
+  },
+  "M014": {
+   "ids": [
+    "a09-d1"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M014-attack.png",
+     "frames": 4,
+     "cell": [
+      134,
+      157
+     ],
+     "pivot": [
+      59.76,
+      152.45
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 158270,
+     "sha256": "738ba820bfcabfc67b4826b91a3dc9a7e68318579af86f7caa006b4593122957"
+    }
+   }
+  },
+  "M015": {
+   "ids": [
+    "a10-v1"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M015-move.png",
+     "frames": 4,
+     "cell": [
+      131,
+      156
+     ],
+     "pivot": [
+      64.01,
+      153.46
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 186787,
+     "sha256": "dee833b7e75b4aca59875ae96dcc9f24b2c61595d96dc527fe3c4d3803af0c11"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M015-attack.png",
+     "frames": 4,
+     "cell": [
+      136,
+      158
+     ],
+     "pivot": [
+      67.97,
+      154.6
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 204905,
+     "sha256": "6d8a867487dc5ab55303c7f99abccedd7135cd430685fefb1975859c9a6b825d"
+    }
+   }
+  },
+  "M016": {
+   "ids": [
+    "a10-s1"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M016-move.png",
+     "frames": 4,
+     "cell": [
+      141,
+      172
+     ],
+     "pivot": [
+      71.81,
+      167.64
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 182407,
+     "sha256": "5c5a233500f8ebf4313b39bdc03492aa438f1b6ae5af1d96fddaec4306aa835a"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M016-attack.png",
+     "frames": 4,
+     "cell": [
+      167,
+      163
+     ],
+     "pivot": [
+      83.2,
+      158.22
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 185406,
+     "sha256": "b0923204fbc61593d74e2870e587a0bb18b7788c88b8ea085c34f37390f7773a"
+    }
+   }
+  },
+  "M017": {
+   "ids": [
+    "a11-d1"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M017-attack.png",
+     "frames": 4,
+     "cell": [
+      205,
+      196
+     ],
+     "pivot": [
+      79.81,
+      190.69
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 210619,
+     "sha256": "181b6debbfcac339b80b937bd39cea8fd6b1b924bcc65fdd5731aad93e9b7377"
+    }
+   }
+  },
+  "M018": {
+   "ids": [
+    "b01-s1",
+    "b03-g1",
+    "b03-g2"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M018-move.png",
+     "frames": 4,
+     "cell": [
+      130,
+      159
+     ],
+     "pivot": [
+      66.23,
+      156.18
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 155799,
+     "sha256": "2eaf77b988a3527c431dcb0aaa3f8f05a715d60450692b25197dd0b38cba5dee"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M018-attack.png",
+     "frames": 4,
+     "cell": [
+      152,
+      171
+     ],
+     "pivot": [
+      73.27,
+      167.09
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "LIMITED_PULSE_CANDIDATE",
+     "bytes": 195174,
+     "sha256": "22c93891d06e8928bf92e8b2c02e3a8b8c4e07dc7505a2c0eb688f6a6b9674af"
+    }
+   }
+  },
+  "M020": {
+   "ids": [
+    "b01-r1",
+    "b02-o1",
+    "b06b-v1",
+    "b08-v1",
+    "b09-o1"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M020-attack.png",
+     "frames": 4,
+     "cell": [
+      217,
+      164
+     ],
+     "pivot": [
+      111,
+      153.67
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 243296,
+     "sha256": "0c558796936534bae3267d6fe1fce4423b79bb157279ac513dc66701983f604a"
+    }
+   }
+  },
+  "M021": {
+   "ids": [
+    "b02-b1"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M021-move.png",
+     "frames": 4,
+     "cell": [
+      162,
+      163
+     ],
+     "pivot": [
+      80.9,
+      155.13
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 200893,
+     "sha256": "39c43008516b71f484341ebab9f535bef6cea63d1560c27dceebcf9cd30991b7"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M021-attack.png",
+     "frames": 4,
+     "cell": [
+      165,
+      184
+     ],
+     "pivot": [
+      82.74,
+      180.43
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 214281,
+     "sha256": "4f6daa224ec387ce7b2c9fa4c798925969184858e3addba645b832232f784664"
+    }
+   }
+  },
+  "M022": {
+   "ids": [
+    "b02-m1"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M022-attack.png",
+     "frames": 4,
+     "cell": [
+      269,
+      159
+     ],
+     "pivot": [
+      128.12,
+      155.16
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 276035,
+     "sha256": "aea1e6bb4b8d3e2de457e441c217d154d49d6e4fa1181b03b4f72a125ef61feb"
+    }
+   }
+  },
+  "M023": {
+   "ids": [
+    "b03-c1"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M023-move.png",
+     "frames": 4,
+     "cell": [
+      158,
+      168
+     ],
+     "pivot": [
+      114.82,
+      164.78
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "alpha-derived",
+     "finalStatus": "STATIC_R2_DERIVATIVE_CANDIDATE",
+     "bytes": 207631,
+     "sha256": "7bf3c3272d420b70c1e9037fc17fbffbaa0152dc6a9ced2677c6e5021db04159"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M023-attack.png",
+     "frames": 4,
+     "cell": [
+      214,
+      158
+     ],
+     "pivot": [
+      144.74,
+      155.68
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "alpha-derived",
+     "finalStatus": "STATIC_R2_DERIVATIVE_CANDIDATE",
+     "bytes": 219206,
+     "sha256": "22b9c14f9c275edcf2139b55a729dd220781a28fb922c25cda5fbaf0b9f8cc0b"
+    }
+   }
+  },
+  "M024": {
+   "ids": [
+    "b04-b1"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M024-attack.png",
+     "frames": 4,
+     "cell": [
+      247,
+      216
+     ],
+     "pivot": [
+      103.8,
+      208.75
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 238475,
+     "sha256": "58085bee078f5d8e4e41dd348a152b6ddd87cc454989870776e904fe65d9a3c1"
+    }
+   }
+  },
+  "M025": {
+   "ids": [
+    "b04-g1",
+    "b04-s1"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M025-move.png",
+     "frames": 4,
+     "cell": [
+      191,
+      225
+     ],
+     "pivot": [
+      92.41,
+      209.47
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 263073,
+     "sha256": "f5149af709e661a2b7a6831f471666b6d81b923527bc7a021995ffb5381a1b9e"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M025-attack.png",
+     "frames": 4,
+     "cell": [
+      220,
+      158
+     ],
+     "pivot": [
+      107.58,
+      156.63
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 236035,
+     "sha256": "ddf42d5130136484ecb6c6a904a5b240f6bc0b7a8a02e641deddfffb4ee9d7ca"
+    }
+   }
+  },
+  "M026": {
+   "ids": [
+    "b05-a1"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M026-attack.png",
+     "frames": 4,
+     "cell": [
+      157,
+      158
+     ],
+     "pivot": [
+      68.31,
+      154.14
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 191800,
+     "sha256": "1bfae3434601a0cffcb4398897a04c7ba7f1d2ebdba7246e16603b0b406827be"
+    }
+   }
+  },
+  "M027": {
+   "ids": [
+    "b05-p1",
+    "b05-p2"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M027-move.png",
+     "frames": 6,
+     "cell": [
+      186,
+      158
+     ],
+     "pivot": [
+      90.66,
+      154.94
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "alpha-derived",
+     "finalStatus": "STATIC_R2_DERIVATIVE_CANDIDATE",
+     "bytes": 149083,
+     "sha256": "71821d720c7c08ff011c01f0977eb0725a394060a773a50d4ae24fbca92cc00e"
+    }
+   }
+  },
+  "M028": {
+   "ids": [
+    "b06-f1",
+    "b06-f2",
+    "b06b-f1"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M028-attack.png",
+     "frames": 4,
+     "cell": [
+      246,
+      160
+     ],
+     "pivot": [
+      126.64,
+      152.97
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "alpha-derived",
+     "finalStatus": "STATIC_R2_DERIVATIVE_CANDIDATE",
+     "bytes": 286084,
+     "sha256": "23caffd685ba3d79c2979336ab78372099f5f5fe92e15bc43e0fa5c731d61b65"
+    }
+   }
+  },
+  "M030": {
+   "ids": [
+    "b07-f1",
+    "b07-f2"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M030-attack.png",
+     "frames": 4,
+     "cell": [
+      210,
+      164
+     ],
+     "pivot": [
+      103.03,
+      164
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 244723,
+     "sha256": "37b480c686adbd66c84770d7e2b17da0296d9aa03d1c4a378ebf370a510ec36c"
+    }
+   }
+  },
+  "M032": {
+   "ids": [
+    "b08-h1"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M032-attack.png",
+     "frames": 4,
+     "cell": [
+      164,
+      157
+     ],
+     "pivot": [
+      67.92,
+      150.23
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 181723,
+     "sha256": "e7bd74411228b4d9f7a869a16902b81db6b760e5ac3dfd9e643575bb976cde23"
+    }
+   }
+  },
+  "M033": {
+   "ids": [
+    "b08-c1"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M033-attack.png",
+     "frames": 4,
+     "cell": [
+      155,
+      171
+     ],
+     "pivot": [
+      65.63,
+      165.47
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 145738,
+     "sha256": "8d723e809b5e7835f1265886879976f2638f547f60abf69bd1e40389795aa742"
+    }
+   }
+  },
+  "M034": {
+   "ids": [
+    "b09-c1"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M034-attack.png",
+     "frames": 4,
+     "cell": [
+      159,
+      173
+     ],
+     "pivot": [
+      79.9,
+      168.39
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 150678,
+     "sha256": "a7e3b71ad344994482daca5c94706c10eb573c23dac2181edf337adb07dea720"
+    }
+   }
+  },
+  "M037": {
+   "ids": [
+    "u201-e3",
+    "u203-e3",
+    "u206-e2"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M037-attack.png",
+     "frames": 4,
+     "cell": [
+      165,
+      157
+     ],
+     "pivot": [
+      62.39,
+      155.74
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 180295,
+     "sha256": "36b6f1eb072a12a20b6efa3b86ad80672581f964a4eb45bb095451c32545105e"
+    }
+   }
+  },
+  "M038": {
+   "ids": [
+    "u201-e1"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M038-move.png",
+     "frames": 4,
+     "cell": [
+      211,
+      156
+     ],
+     "pivot": [
+      104.49,
+      152.83
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 184509,
+     "sha256": "163f5a711a4c418ead6784826874fabcfe6f2004c0444349afe9a66f7eb1bb66"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M038-attack.png",
+     "frames": 4,
+     "cell": [
+      230,
+      154
+     ],
+     "pivot": [
+      111.18,
+      152.24
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 215257,
+     "sha256": "dc04755edc732f27a4dd812c31c05a9096e7e1192940d3c32a0c2aa82e9e64f1"
+    }
+   }
+  },
+  "M039": {
+   "ids": [
+    "u202-e2",
+    "u206-e1"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M039-move.png",
+     "frames": 4,
+     "cell": [
+      135,
+      164
+     ],
+     "pivot": [
+      67.68,
+      161.73
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 154920,
+     "sha256": "9cd3543caef7fa3d5a23912191652707baa8f07b530a42148a464305a78d493a"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M039-attack.png",
+     "frames": 4,
+     "cell": [
+      164,
+      158
+     ],
+     "pivot": [
+      80,
+      155.5
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 191500,
+     "sha256": "233d867467dd5ac4ebf751c03e4e38dfc548b42e32b316e951e7d81dd8879377"
+    }
+   }
+  },
+  "M041": {
+   "ids": [
+    "u202-e3"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M041-attack.png",
+     "frames": 4,
+     "cell": [
+      181,
+      183
+     ],
+     "pivot": [
+      90.97,
+      187.6
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 151998,
+     "sha256": "05c0cfa4d494bd9d53ee804f796554d8fc242a84e43d13c1c02faffaf8dc4ced"
+    }
+   }
+  },
+  "M042": {
+   "ids": [
+    "u203-e1",
+    "u204-e1",
+    "u206-e3"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M042-move.png",
+     "frames": 4,
+     "cell": [
+      141,
+      157
+     ],
+     "pivot": [
+      69.6,
+      154.17
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 179029,
+     "sha256": "d13c7178e087b060a6081e011a75c54989b436f9ebb3bb304337a1b46e82412d"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M042-attack.png",
+     "frames": 4,
+     "cell": [
+      147,
+      159
+     ],
+     "pivot": [
+      70.32,
+      156.23
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 194069,
+     "sha256": "f51d0ffe3cbf91e180d4d0a1c7d348acd6cada7b5c50479122cf9d58ef46b9ca"
+    }
+   }
+  },
+  "M043": {
+   "ids": [
+    "u204-e3"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M043-move.png",
+     "frames": 4,
+     "cell": [
+      174,
+      181
+     ],
+     "pivot": [
+      88.86,
+      177.54
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 227408,
+     "sha256": "ea7236113863ff5296e354f84c5760d88e786cdb94b08fae81b8371eccbcad53"
+    }
+   }
+  },
+  "M045": {
+   "ids": [
+    "l302-e3",
+    "l304-e1",
+    "l304-e3"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M045-move.png",
+     "frames": 4,
+     "cell": [
+      238,
+      183
+     ],
+     "pivot": [
+      115.87,
+      173.77
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 276689,
+     "sha256": "a7fbe3175cd4aa9b1b4b60a8c493fb2b206778fe5c502100939fc3a08306e644"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M045-attack.png",
+     "frames": 4,
+     "cell": [
+      220,
+      188
+     ],
+     "pivot": [
+      100.75,
+      185.77
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "alpha-derived",
+     "finalStatus": "STATIC_R2_DERIVATIVE_CANDIDATE",
+     "bytes": 222392,
+     "sha256": "43095ce8fd045ed57d4b6b899314a128095a9ec1ca55a270e4f2c4a745b3cfb3"
+    }
+   }
+  },
+  "M046": {
+   "ids": [
+    "l302-e2",
+    "l304-e2"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M046-attack.png",
+     "frames": 4,
+     "cell": [
+      140,
+      159
+     ],
+     "pivot": [
+      64.96,
+      152.85
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 142271,
+     "sha256": "99b3615622ab9f30d87b8f8609adf5c963b0fdd93700c936a1126ee9c89d7953"
+    }
+   }
+  },
+  "M047": {
+   "ids": [
+    "l305-e1",
+    "l305-e2"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M047-attack.png",
+     "frames": 4,
+     "cell": [
+      183,
+      186
+     ],
+     "pivot": [
+      88.67,
+      191.22
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 208531,
+     "sha256": "33993e37ec21a8101b9fa99cf37af694211627204cef0fe2830607a3318be3df"
+    }
+   }
+  },
+  "M049": {
+   "ids": [
+    "l301-clone5"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M049-move.png",
+     "frames": 5,
+     "cell": [
+      179,
+      180
+     ],
+     "pivot": [
+      94.71,
+      174.52
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "alpha-derived",
+     "finalStatus": "STATIC_R2_DERIVATIVE_CANDIDATE",
+     "bytes": 230384,
+     "sha256": "d4cf8033daf9782e6259bd76cfcb006777eff88d2328a4ae83e87600108fe53a"
+    }
+   }
+  },
+  "M051": {
+   "ids": [
+    "l302-e1"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M051-move.png",
+     "frames": 4,
+     "cell": [
+      117,
+      157
+     ],
+     "pivot": [
+      59.21,
+      154.02
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 125241,
+     "sha256": "b1b48c62eb4b38461597dea93c88057ef60608682f922225d4234973ddb6ba72"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M051-attack.png",
+     "frames": 4,
+     "cell": [
+      124,
+      157
+     ],
+     "pivot": [
+      56.96,
+      153.35
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 119794,
+     "sha256": "2394e40932ea054012213c6592dbfa3a7b81c9b8c3f96a43280db90df6ab1143"
+    }
+   }
+  },
+  "M052": {
+   "ids": [
+    "kair-academy-wave-2",
+    "kair-academy-wave-5"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M052-attack.png",
+     "frames": 4,
+     "cell": [
+      167,
+      156
+     ],
+     "pivot": [
+      75.13,
+      159.06
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 220550,
+     "sha256": "60a086350dc9a04d01315f4f74151b6b1b644cd90c26be4c0b8b21cf8e223b8f"
+    }
+   }
+  },
+  "M053": {
+   "ids": [
+    "kair-academy-wave-3",
+    "kair-academy-wave-6"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M053-attack.png",
+     "frames": 4,
+     "cell": [
+      180,
+      175
+     ],
+     "pivot": [
+      81.5,
+      171.56
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 225283,
+     "sha256": "2ec86ad600732c749ad83b3cf3b992716ab5a852a105a289a0551e86e1748a41"
+    }
+   }
+  },
+  "M054": {
+   "ids": [
+    "kair-academy-wave-1",
+    "kair-academy-wave-4"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M054-attack.png",
+     "frames": 4,
+     "cell": [
+      238,
+      197
+     ],
+     "pivot": [
+      82.61,
+      195.22
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "alpha-derived",
+     "finalStatus": "STATIC_R2_DERIVATIVE_CANDIDATE",
+     "bytes": 199119,
+     "sha256": "e8517028b0933ae1bacdecd3fa15b1b7e5d1d8b932c83021f7f336faf3b462c4"
+    }
+   }
+  },
+  "M055": {
+   "ids": [
+    "kair-guardian-01"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M055-attack.png",
+     "frames": 4,
+     "cell": [
+      196,
+      173
+     ],
+     "pivot": [
+      97.74,
+      173.07
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 197316,
+     "sha256": "e6d9b87068f887f991d18a98df04e3eaa228027361fcf4293908a53f998841bf"
+    }
+   }
+  },
+  "M057": {
+   "ids": [
+    "kair-guardian-03"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M057-attack.png",
+     "frames": 4,
+     "cell": [
+      249,
+      184
+     ],
+     "pivot": [
+      123.69,
+      178.08
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 265228,
+     "sha256": "ac1abb703e5d07718bd889c55bcd065dbaaa0cfed29099fc7c38d2bae8338d44"
+    }
+   }
+  },
+  "M058": {
+   "ids": [
+    "kair-guardian-04"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M058-attack.png",
+     "frames": 4,
+     "cell": [
+      224,
+      185
+     ],
+     "pivot": [
+      109.11,
+      186.77
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 267499,
+     "sha256": "7f7548eeef189d3b580a42029e1d1f472de8fbb0d8a0b151aacacacf6fde8fa4"
+    }
+   }
+  },
+  "M060": {
+   "ids": [
+    "kair-guardian-06"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M060-attack.png",
+     "frames": 4,
+     "cell": [
+      194,
+      156
+     ],
+     "pivot": [
+      96.34,
+      155.26
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 193742,
+     "sha256": "1d08a9c3af2141206ed8bbf6cf1e8c810787bcda77a23cec7f0cf706a4503dfc"
+    }
+   }
+  },
+  "M062": {
+   "ids": [
+    "kair-elite-50"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M062-attack.png",
+     "frames": 4,
+     "cell": [
+      211,
+      171
+     ],
+     "pivot": [
+      95.76,
+      167.28
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "alpha-derived",
+     "finalStatus": "LIMITED_STATIC_R2_CANDIDATE",
+     "bytes": 246818,
+     "sha256": "eae705263b4c16a14bba40d7141b1a5b60215297ebb54a67fd626891935c8396"
+    }
+   }
+  },
+  "M063": {
+   "ids": [
+    "kair-guardian-07"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M063-attack.png",
+     "frames": 4,
+     "cell": [
+      204,
+      164
+     ],
+     "pivot": [
+      100.03,
+      166
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 242872,
+     "sha256": "550e15f59493c8cd51ce77920f80ab8fbce489c8019f07e0db7b68436f9a263b"
+    }
+   }
+  },
+  "M064": {
+   "ids": [
+    "kair-guardian-08"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M064-attack.png",
+     "frames": 4,
+     "cell": [
+      207,
+      157
+     ],
+     "pivot": [
+      109.91,
+      159.82
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 237253,
+     "sha256": "9db486704548d6a9ecd3d243b60dc69ce77b34607ca76e684945a9aaa3fd3885"
+    }
+   }
+  },
+  "M065": {
+   "ids": [
+    "kair-guardian-09"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M065-attack.png",
+     "frames": 4,
+     "cell": [
+      167,
+      156
+     ],
+     "pivot": [
+      78.11,
+      157.39
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 210442,
+     "sha256": "cdca71550190c25b58f469c2212f6eee870cecfceea481274e567e6edfe1d777"
+    }
+   }
+  },
+  "M066": {
+   "ids": [
+    "kair-guardian-10"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M066-attack.png",
+     "frames": 4,
+     "cell": [
+      200,
+      154
+     ],
+     "pivot": [
+      91.68,
+      168.49
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 216777,
+     "sha256": "e1380ff3e63cd0a697b30a0a20e3532a1cdc95d349e30a7f6fa62227aa1c63c1"
+    }
+   }
+  },
+  "M067": {
+   "ids": [
+    "kair-guardian-11"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M067-attack.png",
+     "frames": 4,
+     "cell": [
+      207,
+      169
+     ],
+     "pivot": [
+      104.5,
+      170.78
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 236484,
+     "sha256": "e778e0499b8d00d079147884640bd7dd8c693faf03d196a0c02e3826f8c77259"
+    }
+   }
+  },
+  "M068": {
+   "ids": [
+    "kair-guardian-12"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M068-attack.png",
+     "frames": 4,
+     "cell": [
+      222,
+      160
+     ],
+     "pivot": [
+      111,
+      164.67
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 260237,
+     "sha256": "8e9faa3df2ed4903913d6f143d8ca90a997f4e0007b084c9a85499653fbd1302"
+    }
+   }
+  },
+  "M069": {
+   "ids": [
+    "kair-elite-51"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M069-attack.png",
+     "frames": 4,
+     "cell": [
+      163,
+      161
+     ],
+     "pivot": [
+      75.77,
+      173.18
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 231192,
+     "sha256": "61995ed8a6608423b49fb5bad5560c6b6671705dc20b2e2295755a066fa9b61c"
+    }
+   }
+  },
+  "M072": {
+   "ids": [
+    "kair-guardian-15"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M072-attack.png",
+     "frames": 4,
+     "cell": [
+      153,
+      184
+     ],
+     "pivot": [
+      79.74,
+      180.89
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 215465,
+     "sha256": "230da18945dd7782c1346a04a2318b0563216fd4b02db15b5029a476fc0d1c2b"
+    }
+   }
+  },
+  "M073": {
+   "ids": [
+    "kair-guardian-16"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M073-attack.png",
+     "frames": 4,
+     "cell": [
+      147,
+      155
+     ],
+     "pivot": [
+      67.81,
+      151.62
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 193439,
+     "sha256": "178515a31172457e795c8e38146b119d80a63cb3a5a34e185b6c87bb5ff8eaf5"
+    }
+   }
+  },
+  "M074": {
+   "ids": [
+    "kair-guardian-17"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M074-attack.png",
+     "frames": 4,
+     "cell": [
+      151,
+      155
+     ],
+     "pivot": [
+      68.36,
+      152.44
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 174444,
+     "sha256": "6ae7e9a5b2d1c342ebba108e54e621f9b8f74a47b6306b2b6bdb79e2c9b65758"
+    }
+   }
+  },
+  "M075": {
+   "ids": [
+    "kair-guardian-18"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M075-move.png",
+     "frames": 4,
+     "cell": [
+      144,
+      156
+     ],
+     "pivot": [
+      73.6,
+      152.65
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 195325,
+     "sha256": "cf11bf8923daf984f492d5f433d0a260baf9dc2745cdff65c5157267e2f57ab2"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M075-attack.png",
+     "frames": 4,
+     "cell": [
+      154,
+      154
+     ],
+     "pivot": [
+      81.05,
+      151.66
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 199250,
+     "sha256": "e7ef1443917fe29fa693684b4c854b1880b83f1c7d9b149ed0e8d6817477ec79"
+    }
+   }
+  },
+  "M076": {
+   "ids": [
+    "kair-elite-52"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M076-move.png",
+     "frames": 4,
+     "cell": [
+      133,
+      155
+     ],
+     "pivot": [
+      66.2,
+      151.99
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 180518,
+     "sha256": "9f872529d5acc113dd83d4f3cb2b99e016dfd8228633d2a4a7c3f65729447883"
+    }
+   }
+  },
+  "M078": {
+   "ids": [
+    "kair-guardian-20"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M078-attack.png",
+     "frames": 4,
+     "cell": [
+      176,
+      158
+     ],
+     "pivot": [
+      76.77,
+      155.31
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 219039,
+     "sha256": "d167fff0e4f2da6720dbf4ceceb806a0858068e61e6eaf0ba1c36f279e353347"
+    }
+   }
+  },
+  "M081": {
+   "ids": [
+    "kair-guardian-23"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M081-move.png",
+     "frames": 4,
+     "cell": [
+      138,
+      156
+     ],
+     "pivot": [
+      71.05,
+      153.82
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 177235,
+     "sha256": "3d211a7284f69a4628bc5d8b81385c8b6b0127d94a3923298f499d53b0cb1695"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M081-attack.png",
+     "frames": 4,
+     "cell": [
+      158,
+      156
+     ],
+     "pivot": [
+      71.68,
+      153.29
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 193822,
+     "sha256": "29e90c65b50c28fe08909c0f65248590e712121bb6f5e0751891160e3ebb3471"
+    }
+   }
+  },
+  "M083": {
+   "ids": [
+    "kair-elite-53"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M083-attack.png",
+     "frames": 4,
+     "cell": [
+      215,
+      161
+     ],
+     "pivot": [
+      97.14,
+      157.14
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 233947,
+     "sha256": "7a5d9542e6aba54f557b8474b4b42470efb3d4f473a50c8de7428e54fbfddcbc"
+    }
+   }
+  },
+  "M085": {
+   "ids": [
+    "kair-guardian-25"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M085-attack.png",
+     "frames": 4,
+     "cell": [
+      224,
+      166
+     ],
+     "pivot": [
+      108.73,
+      161.92
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 227535,
+     "sha256": "21dd61d737b339a19c3c447f7f0503341db2fe9ebace3e0c2b0bc90a5e400d6a"
+    }
+   }
+  },
+  "M086": {
+   "ids": [
+    "kair-guardian-26"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M086-attack.png",
+     "frames": 4,
+     "cell": [
+      254,
+      182
+     ],
+     "pivot": [
+      114.23,
+      179.11
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "alpha-derived",
+     "finalStatus": "STATIC_REPAIR_CANDIDATE",
+     "bytes": 247622,
+     "sha256": "e900c338cfee26d556b9a2d910f44a36c5f477f8ac9b9fc8cf994e75480b07d3"
+    }
+   }
+  },
+  "M087": {
+   "ids": [
+    "kair-guardian-27"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M087-move.png",
+     "frames": 4,
+     "cell": [
+      162,
+      156
+     ],
+     "pivot": [
+      86.66,
+      153.34
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 199811,
+     "sha256": "f5240f08bb0a270069f38731415b8bfc5d5f88167325edea091271992ef7fe99"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M087-attack.png",
+     "frames": 4,
+     "cell": [
+      204,
+      181
+     ],
+     "pivot": [
+      93.32,
+      177.53
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 234279,
+     "sha256": "d8c5e11fcfd62e8dfac479736248526f424f2d38c4b71c7b33edd78f6bba38d4"
+    }
+   }
+  },
+  "M088": {
+   "ids": [
+    "kair-guardian-28"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M088-move.png",
+     "frames": 4,
+     "cell": [
+      173,
+      164
+     ],
+     "pivot": [
+      88.65,
+      159.98
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 224723,
+     "sha256": "12e9f8908c03dc1d2b77d1f070956f0ae62bd07b8f00ec27e6a440bc9ffa06e6"
+    }
+   }
+  },
+  "M089": {
+   "ids": [
+    "kair-guardian-29"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M089-attack.png",
+     "frames": 4,
+     "cell": [
+      196,
+      159
+     ],
+     "pivot": [
+      81,
+      155.67
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 211392,
+     "sha256": "df50e753b9d4ab281f79f2fd7a2a99c420fc0ce31d8b5becdae408cd4b31ef9b"
+    }
+   }
+  },
+  "M090": {
+   "ids": [
+    "kair-guardian-30"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M090-attack.png",
+     "frames": 4,
+     "cell": [
+      227,
+      168
+     ],
+     "pivot": [
+      90.84,
+      164.65
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 207565,
+     "sha256": "2401c0476a137e629d584425260240570911ab1100501e361cd537c4ecdc1cb2"
+    }
+   }
+  },
+  "M091": {
+   "ids": [
+    "kair-elite-55"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M091-move.png",
+     "frames": 4,
+     "cell": [
+      134,
+      158
+     ],
+     "pivot": [
+      64.82,
+      154.63
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 191725,
+     "sha256": "ec66702e06b6cc6a3f21e4f2ba2b2ee89c3ffeaa9e2ae385b01c577bc851236d"
+    }
+   }
+  },
+  "M095": {
+   "ids": [
+    "kair-guardian-34"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M095-move.png",
+     "frames": 4,
+     "cell": [
+      192,
+      157
+     ],
+     "pivot": [
+      96.27,
+      153.17
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 184934,
+     "sha256": "3184d2afc6222c7bd40fe85a25a17044a981d39095b3f1aab6612cd74be04b6d"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M095-attack.png",
+     "frames": 4,
+     "cell": [
+      192,
+      160
+     ],
+     "pivot": [
+      90.32,
+      155.36
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 229854,
+     "sha256": "b851d0e50ea513cd222dcda11b2853fa50717f4f4ff21ed3e5beb854c5211510"
+    }
+   }
+  },
+  "M096": {
+   "ids": [
+    "kair-guardian-35"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M096-attack.png",
+     "frames": 4,
+     "cell": [
+      154,
+      159
+     ],
+     "pivot": [
+      77.23,
+      155.98
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 148130,
+     "sha256": "855091e57f45c9b8642a688a6fafe1006fa67a3d4d41f3bbf6a59300ec180eed"
+    }
+   }
+  },
+  "M097": {
+   "ids": [
+    "kair-guardian-36"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M097-move.png",
+     "frames": 4,
+     "cell": [
+      142,
+      155
+     ],
+     "pivot": [
+      68.76,
+      151.45
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 169478,
+     "sha256": "6490fe6ed894f142295fd57b0605f43091447e8fe112e4de7e6164b4c1ada34b"
+    }
+   }
+  },
+  "M099": {
+   "ids": [
+    "kair-elite-57"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M099-attack.png",
+     "frames": 4,
+     "cell": [
+      170,
+      170
+     ],
+     "pivot": [
+      89.86,
+      166.86
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 199663,
+     "sha256": "4f3e1dd87dc36759d61c7007c807f65a9a0a3f9571695fc083104ab964015fc2"
+    }
+   }
+  },
+  "M102": {
+   "ids": [
+    "kair-guardian-39"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M102-attack.png",
+     "frames": 4,
+     "cell": [
+      189,
+      185
+     ],
+     "pivot": [
+      88,
+      170
+     ],
+     "visibleHeight": 149,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 263612,
+     "sha256": "a1c83121c3b9962e972b323f8549dc93c23496d460ee4c72e13901a34754498b"
+    }
+   }
+  },
+  "M103": {
+   "ids": [
+    "kair-guardian-40"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M103-attack.png",
+     "frames": 4,
+     "cell": [
+      177,
+      184
+     ],
+     "pivot": [
+      85,
+      169
+     ],
+     "visibleHeight": 128,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 203455,
+     "sha256": "8b61ec4042f3e44c72cbbe9d4faaca4d003746721700bbfccc526371a9e899e1"
+    }
+   }
+  },
+  "M106": {
+   "ids": [
+    "kair-elite-58"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M106-move.png",
+     "frames": 4,
+     "cell": [
+      145,
+      155
+     ],
+     "pivot": [
+      67.39,
+      152.76
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 190836,
+     "sha256": "294d533fbe083549253bc48fb046f493da2df7a4c49fbbabf1ec039a5a36ad6d"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M106-attack.png",
+     "frames": 4,
+     "cell": [
+      192,
+      177
+     ],
+     "pivot": [
+      93.13,
+      171.24
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 269338,
+     "sha256": "4c8e81c360c5c2d89426353295655390dd74c763e0c79f06fdfc9b016dcf0b32"
+    }
+   }
+  },
+  "M107": {
+   "ids": [
+    "kair-guardian-43"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M107-attack.png",
+     "frames": 4,
+     "cell": [
+      247,
+      168
+     ],
+     "pivot": [
+      101.41,
+      161.71
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 285925,
+     "sha256": "1a51e6949934289b7fa5313055ff730286b4a5ad92842a830d016081ad629320"
+    }
+   }
+  },
+  "M108": {
+   "ids": [
+    "kair-guardian-44"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M108-attack.png",
+     "frames": 4,
+     "cell": [
+      161,
+      194
+     ],
+     "pivot": [
+      79.2,
+      185
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 201415,
+     "sha256": "0d4b9d9c99bafbb3d1fe69c22ace57db1f876968751b410e3b06d94fd9e04cb6"
+    }
+   }
+  },
+  "M109": {
+   "ids": [
+    "kair-guardian-45"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M109-attack.png",
+     "frames": 4,
+     "cell": [
+      175,
+      157
+     ],
+     "pivot": [
+      80.87,
+      150.04
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 182343,
+     "sha256": "39e44a1defdaab8734dd5c619a7342551c9b9fda47a9072824f83c0c11c19d0e"
+    }
+   }
+  },
+  "M112": {
+   "ids": [
+    "kair-guardian-48"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M112-attack.png",
+     "frames": 4,
+     "cell": [
+      181,
+      157
+     ],
+     "pivot": [
+      85.2,
+      151.2
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 170484,
+     "sha256": "f88d94c71c5970ad03a9d231fe63192259ae8d7540f835eac158dc81bfd23851"
+    }
+   }
+  },
+  "M113": {
+   "ids": [
+    "kair-elite-59"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M113-move.png",
+     "frames": 4,
+     "cell": [
+      144,
+      159
+     ],
+     "pivot": [
+      71.19,
+      154.06
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 202219,
+     "sha256": "743fd55ac3c4136b8e8f16f39eaddbe1cdc9c75f754939a5c66aacda0ab43bee"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M113-attack.png",
+     "frames": 4,
+     "cell": [
+      238,
+      157
+     ],
+     "pivot": [
+      111.19,
+      151.25
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 260796,
+     "sha256": "a3b9ce094961f33030dddebfb12ca7d1fa5a82c18e3603bf4ae1e32a2a510fa4"
+    }
+   }
+  },
+  "M114": {
+   "ids": [
+    "kair-elite-60"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M114-move.png",
+     "frames": 4,
+     "cell": [
+      135,
+      156
+     ],
+     "pivot": [
+      70.76,
+      152.79
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest-x+alpha-bottom",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 166897,
+     "sha256": "614c3acee3a22ec40a5cb1c35dbdac02cb4096bf7d808296269812045f52a403"
+    }
+   }
+  },
+  "M117": {
+   "ids": [
+    "h101-t1"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M117-attack.png",
+     "frames": 4,
+     "cell": [
+      157,
+      164
+     ],
+     "pivot": [
+      68.7,
+      156.5
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 208363,
+     "sha256": "b5915704d814f24b9a77b3ccf231d58f775374cba8b67a6106b447ff3532fa08"
+    }
+   }
+  },
+  "M121": {
+   "ids": [
+    "h102-s1"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M121-attack.png",
+     "frames": 4,
+     "cell": [
+      168,
+      158
+     ],
+     "pivot": [
+      88.67,
+      151.11
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 182632,
+     "sha256": "88fd017b40c416afceda694741ee3571736621469f306d616f7a996d4789e487"
+    }
+   }
+  },
+  "M122": {
+   "ids": [
+    "h103-c1"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M122-move.png",
+     "frames": 4,
+     "cell": [
+      163,
+      153
+     ],
+     "pivot": [
+      81.9,
+      151.11
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "alpha-derived",
+     "finalStatus": "STATIC_EFFECT_DERIVATIVE_CANDIDATE",
+     "bytes": 136954,
+     "sha256": "5c2b4fd962f7bc10a55fa399b13cfa2fa12a12372eebddb123595956a98a8431"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M122-attack.png",
+     "frames": 4,
+     "cell": [
+      219,
+      164
+     ],
+     "pivot": [
+      84.05,
+      158.19
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "alpha-derived",
+     "finalStatus": "LIMITED_STATIC_R2_CANDIDATE",
+     "bytes": 244700,
+     "sha256": "919add4d728180c809e8bd73a52f127afacb55e52edf9e041e460f8302197cca"
+    }
+   }
+  },
+  "M127": {
+   "ids": [
+    "murder04-e1"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M127-move.png",
+     "frames": 8,
+     "cell": [
+      114,
+      155
+     ],
+     "pivot": [
+      73.33,
+      152
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "alpha-derived",
+     "finalStatus": "STATIC_RIG_CANDIDATE",
+     "bytes": 83270,
+     "sha256": "e0c7f99da999c455470826ce4accf10df59212609793023630661e8be3799d27"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M127-attack.png",
+     "frames": 4,
+     "cell": [
+      135,
+      157
+     ],
+     "pivot": [
+      80.57,
+      149.7
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 132721,
+     "sha256": "409f311d759729d16da4c5594c03b57ba4d33b0f211f90823bf0d2964df832ef"
+    }
+   }
+  },
+  "M128": {
+   "ids": [
+    "c101-e1"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M128-move.png",
+     "frames": 8,
+     "cell": [
+      93,
+      155
+     ],
+     "pivot": [
+      24.79,
+      152.2
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "alpha-derived",
+     "finalStatus": "STATIC_RIG_CANDIDATE",
+     "bytes": 74561,
+     "sha256": "e959433618c0eea5174b44e7fb4852299c323d2d30d414b324bd16abf076f295"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M128-attack.png",
+     "frames": 4,
+     "cell": [
+      141,
+      155
+     ],
+     "pivot": [
+      68.72,
+      149.94
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 165237,
+     "sha256": "88cfd422ef2722fab31781ec634b02a426174ea59351a9851cb6ad0922e02c9c"
+    }
+   }
+  },
+  "M129": {
+   "ids": [
+    "c101-e2"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M129-move.png",
+     "frames": 8,
+     "cell": [
+      73,
+      155
+     ],
+     "pivot": [
+      19.98,
+      152.48
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "alpha-derived",
+     "finalStatus": "STATIC_RIG_CANDIDATE",
+     "bytes": 75094,
+     "sha256": "e9787f1b792df13f24166a1e7abc63bfb8fe3e806b684763a6d62575958e7396"
+    }
+   }
+  },
+  "M130": {
+   "ids": [
+    "c101-e3",
+    "c105-e1"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M130-move.png",
+     "frames": 4,
+     "cell": [
+      218,
+      237
+     ],
+     "pivot": [
+      121.87,
+      229.29
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 247713,
+     "sha256": "8e8b50883a0253ecada46eff3c2c963f93e16c1e84d419f177299430c30841be"
+    },
+    "attack": {
+     "path": "assets/r92/mobs/M130-attack.png",
+     "frames": 4,
+     "cell": [
+      178,
+      160
+     ],
+     "pivot": [
+      91.6,
+      152.43
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 202686,
+     "sha256": "8a06c93a1b8a54333f97528275aad715ead5d086e6f7968282e66bc5af310792"
+    }
+   }
+  },
+  "M131": {
+   "ids": [
+    "c102-e3",
+    "c103-e3"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M131-move.png",
+     "frames": 4,
+     "cell": [
+      354,
+      181
+     ],
+     "pivot": [
+      179.11,
+      178.23
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "alpha-derived",
+     "finalStatus": "STATIC_EFFECT_DERIVATIVE_CANDIDATE",
+     "bytes": 391936,
+     "sha256": "dc06bb112cf63d2bed36227bcd93da7e6f1977042f50a10c8d5d6b8ad9eab261"
+    }
+   }
+  },
+  "M132": {
+   "ids": [
+    "c102-e1",
+    "c106-e2"
+   ],
+   "tracks": {
+    "attack": {
+     "path": "assets/r92/mobs/M132-attack.png",
+     "frames": 4,
+     "cell": [
+      183,
+      157
+     ],
+     "pivot": [
+      87.46,
+      151.06
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "manifest",
+     "finalStatus": "STATIC_REUSE_CANDIDATE",
+     "bytes": 169583,
+     "sha256": "47045ab359f9d08f87a3ae9102e0097358cb915a80564f62cca34940fd3e492c"
+    }
+   }
+  },
+  "M135": {
+   "ids": [
+    "c106-e1"
+   ],
+   "tracks": {
+    "move": {
+     "path": "assets/r92/mobs/M135-move.png",
+     "frames": 4,
+     "cell": [
+      136,
+      156
+     ],
+     "pivot": [
+      61.38,
+      151.53
+     ],
+     "visibleHeight": 150,
+     "pivotSource": "alpha-derived",
+     "finalStatus": "STATIC_EFFECT_DERIVATIVE_CANDIDATE",
+     "bytes": 137662,
+     "sha256": "651b31a5a851908f225018c96350526a46b0d48dffdb00ad735e65adc84f6e0b"
+    }
+   }
+  }
+ },
+ "byId": {
+  "dist01-s1": "M001",
+  "dist03-s1": "M001",
+  "dist04-s1": "M001",
+  "dist05-s1": "M001",
+  "dist02-m1": "M003",
+  "dist05-m1": "M003",
+  "dist06-m1": "M003",
+  "dist02-g1": "M004",
+  "dist03-c1": "M004",
+  "dist04-c1": "M004",
+  "dist04-c2": "M004",
+  "dist06-c1": "M004",
+  "a07-c1": "M004",
+  "a08-c1": "M004",
+  "a09-c1": "M004",
+  "a11-c1": "M004",
+  "dist02-h1": "M005",
+  "dist03-g1": "M006",
+  "dist04-g1": "M006",
+  "dist05-c1": "M007",
+  "dist05-h1": "M008",
+  "dist06-h1": "M008",
+  "a10-h1": "M008",
+  "a07-s1": "M009",
+  "a07-v1": "M010",
+  "a08-s1": "M011",
+  "a08-o1": "M012",
+  "a08-o2": "M012",
+  "a09-o1": "M012",
+  "a10-o1": "M012",
+  "a11-o1": "M012",
+  "a09-v1": "M013",
+  "a09-d1": "M014",
+  "a10-v1": "M015",
+  "a10-s1": "M016",
+  "a11-d1": "M017",
+  "b01-s1": "M018",
+  "b03-g1": "M018",
+  "b03-g2": "M018",
+  "b01-r1": "M020",
+  "b02-o1": "M020",
+  "b06b-v1": "M020",
+  "b08-v1": "M020",
+  "b09-o1": "M020",
+  "b02-b1": "M021",
+  "b02-m1": "M022",
+  "b03-c1": "M023",
+  "b04-b1": "M024",
+  "b04-g1": "M025",
+  "b04-s1": "M025",
+  "b05-a1": "M026",
+  "b05-p1": "M027",
+  "b05-p2": "M027",
+  "b06-f1": "M028",
+  "b06-f2": "M028",
+  "b06b-f1": "M028",
+  "b07-f1": "M030",
+  "b07-f2": "M030",
+  "b08-h1": "M032",
+  "b08-c1": "M033",
+  "b09-c1": "M034",
+  "u201-e3": "M037",
+  "u203-e3": "M037",
+  "u206-e2": "M037",
+  "u201-e1": "M038",
+  "u202-e2": "M039",
+  "u206-e1": "M039",
+  "u202-e3": "M041",
+  "u203-e1": "M042",
+  "u204-e1": "M042",
+  "u206-e3": "M042",
+  "u204-e3": "M043",
+  "l302-e3": "M045",
+  "l304-e1": "M045",
+  "l304-e3": "M045",
+  "l302-e2": "M046",
+  "l304-e2": "M046",
+  "l305-e1": "M047",
+  "l305-e2": "M047",
+  "l301-clone5": "M049",
+  "l302-e1": "M051",
+  "kair-academy-wave-2": "M052",
+  "kair-academy-wave-5": "M052",
+  "kair-academy-wave-3": "M053",
+  "kair-academy-wave-6": "M053",
+  "kair-academy-wave-1": "M054",
+  "kair-academy-wave-4": "M054",
+  "kair-guardian-01": "M055",
+  "kair-guardian-03": "M057",
+  "kair-guardian-04": "M058",
+  "kair-guardian-06": "M060",
+  "kair-elite-50": "M062",
+  "kair-guardian-07": "M063",
+  "kair-guardian-08": "M064",
+  "kair-guardian-09": "M065",
+  "kair-guardian-10": "M066",
+  "kair-guardian-11": "M067",
+  "kair-guardian-12": "M068",
+  "kair-elite-51": "M069",
+  "kair-guardian-15": "M072",
+  "kair-guardian-16": "M073",
+  "kair-guardian-17": "M074",
+  "kair-guardian-18": "M075",
+  "kair-elite-52": "M076",
+  "kair-guardian-20": "M078",
+  "kair-guardian-23": "M081",
+  "kair-elite-53": "M083",
+  "kair-guardian-25": "M085",
+  "kair-guardian-26": "M086",
+  "kair-guardian-27": "M087",
+  "kair-guardian-28": "M088",
+  "kair-guardian-29": "M089",
+  "kair-guardian-30": "M090",
+  "kair-elite-55": "M091",
+  "kair-guardian-34": "M095",
+  "kair-guardian-35": "M096",
+  "kair-guardian-36": "M097",
+  "kair-elite-57": "M099",
+  "kair-guardian-39": "M102",
+  "kair-guardian-40": "M103",
+  "kair-elite-58": "M106",
+  "kair-guardian-43": "M107",
+  "kair-guardian-44": "M108",
+  "kair-guardian-45": "M109",
+  "kair-guardian-48": "M112",
+  "kair-elite-59": "M113",
+  "kair-elite-60": "M114",
+  "h101-t1": "M117",
+  "h102-s1": "M121",
+  "h103-c1": "M122",
+  "murder04-e1": "M127",
+  "c101-e1": "M128",
+  "c101-e2": "M129",
+  "c101-e3": "M130",
+  "c105-e1": "M130",
+  "c102-e3": "M131",
+  "c103-e3": "M131",
+  "c102-e1": "M132",
+  "c106-e2": "M132",
+  "c106-e1": "M135"
+ },
+ "conflicts": [],
+ "fringeTexelsRecoloured": 8112857,
+ "originalsModified": false
+}

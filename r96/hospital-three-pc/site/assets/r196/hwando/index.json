@@ -1,0 +1,268 @@
+{
+ "revision": "R196-hwando-color-1",
+ "method": "CIELAB a/b mean+std match, L mean shift x0.7, alpha unchanged",
+ "note": "원본(r143/hit/hwando, r194/death/hwando)은 그대로 두고 파생본만 여기에 쓴다",
+ "files": [
+  {
+   "file": "hit-s.webp",
+   "source": "r143/hit/hwando/hit-s.webp",
+   "sourceSha256": "5b764dfb9bf5cb8bc2cc9f6c9a3b1a19e46532bae641afee43986a5a18c5a415",
+   "sha256": "99c6719bc48c5cabbc68ffc6a115dec94e41e2e8597b1438b46e0d4f0902b8d0",
+   "bytes": 32902,
+   "reference": [
+    "r130/hwando/walk-s.webp",
+    "r143/attack/hwando/attack-s.webp"
+   ],
+   "before": {
+    "L": 57.53,
+    "a": 3.68,
+    "b": 10.68,
+    "chroma": 11.44
+   },
+   "after": {
+    "L": 57.51,
+    "a": 0.75,
+    "b": 7.55,
+    "chroma": 8.0
+   },
+   "referenceStats": {
+    "L": 57.4,
+    "a": 0.88,
+    "b": 7.49,
+    "chroma": 7.73
+   }
+  },
+  {
+   "file": "hit-se.webp",
+   "source": "r143/hit/hwando/hit-se.webp",
+   "sourceSha256": "df74e4924a0f39c0d35b4a2937451e5e4f30a12ccccca349ef78504dac77f825",
+   "sha256": "1e79e0862aba73b48c10a81c67f3ab5b082ba19cdfb75a1311ad119a7082d415",
+   "bytes": 34392,
+   "reference": [
+    "r130/hwando/walk-se.webp",
+    "r143/attack/hwando/attack-se.webp"
+   ],
+   "before": {
+    "L": 59.9,
+    "a": 2.58,
+    "b": 8.63,
+    "chroma": 9.18
+   },
+   "after": {
+    "L": 57.73,
+    "a": 0.81,
+    "b": 7.58,
+    "chroma": 7.81
+   },
+   "referenceStats": {
+    "L": 56.71,
+    "a": 0.9,
+    "b": 7.46,
+    "chroma": 7.7
+   }
+  },
+  {
+   "file": "hit-e.webp",
+   "source": "r143/hit/hwando/hit-e.webp",
+   "sourceSha256": "4862be081f0ea56888fc4e082490c093135f996c4c99466caad4643b024e3635",
+   "sha256": "b141c5f8ea9ec346f2abb63e4ba48992aa3ce5bbfc5d7a2aca6e5e3a55d6d84c",
+   "bytes": 25716,
+   "reference": [
+    "r144/walk/hwando/walk-e.webp",
+    "r143/attack/hwando/attack-e.webp"
+   ],
+   "before": {
+    "L": 62.25,
+    "a": 2.59,
+    "b": 13.83,
+    "chroma": 14.18
+   },
+   "after": {
+    "L": 66.43,
+    "a": 1.36,
+    "b": 10.5,
+    "chroma": 10.71
+   },
+   "referenceStats": {
+    "L": 68.22,
+    "a": 1.69,
+    "b": 10.52,
+    "chroma": 10.76
+   }
+  },
+  {
+   "file": "hit-n.webp",
+   "source": "r143/hit/hwando/hit-n.webp",
+   "sourceSha256": "4d0ec01228ec5b4f86445a1defcfda0181c1a47e421a9bbab04be9081aebde4c",
+   "sha256": "d6f5ff7598d320509c61df6da7654e3aeecc517adc549d47591b99b1bf272d42",
+   "bytes": 26308,
+   "reference": [
+    "r130/hwando/walk-n.webp",
+    "r143/attack/hwando/attack-n.webp"
+   ],
+   "before": {
+    "L": 61.66,
+    "a": 1.9,
+    "b": 10.72,
+    "chroma": 11.0
+   },
+   "after": {
+    "L": 63.9,
+    "a": 0.66,
+    "b": 7.45,
+    "chroma": 7.7
+   },
+   "referenceStats": {
+    "L": 64.83,
+    "a": 0.79,
+    "b": 7.32,
+    "chroma": 7.51
+   }
+  },
+  {
+   "file": "death-s.webp",
+   "source": "r194/death/hwando/death-s.webp",
+   "sourceSha256": "23da10faec43c7546856b47662b65a45b174241f8665f224d78fc20012b5d560",
+   "sha256": "ac6a37b8552d27e9668809bab437414d6998a32e7a8d5606016a49bc2399e0fb",
+   "bytes": 69098,
+   "reference": [
+    "r130/hwando/walk-s.webp",
+    "r143/attack/hwando/attack-s.webp"
+   ],
+   "before": {
+    "L": 60.55,
+    "a": 2.87,
+    "b": 9.05,
+    "chroma": 9.67
+   },
+   "after": {
+    "L": 58.39,
+    "a": 0.77,
+    "b": 7.58,
+    "chroma": 7.8
+   },
+   "referenceStats": {
+    "L": 57.4,
+    "a": 0.88,
+    "b": 7.49,
+    "chroma": 7.73
+   }
+  },
+  {
+   "file": "death-se.webp",
+   "source": "r194/death/hwando/death-se.webp",
+   "sourceSha256": "abf9c6d6e29291fa592eeb6fafbd06fdf0d749abee9d72c02a641ca47f1e6cf3",
+   "sha256": "82affca16a8766f26e0d4a451c9b1502aea878f0fea8067b5412a390f1be729d",
+   "bytes": 65602,
+   "reference": [
+    "r130/hwando/walk-se.webp",
+    "r143/attack/hwando/attack-se.webp"
+   ],
+   "before": {
+    "L": 58.41,
+    "a": 2.66,
+    "b": 10.64,
+    "chroma": 11.15
+   },
+   "after": {
+    "L": 57.22,
+    "a": 0.84,
+    "b": 7.49,
+    "chroma": 7.81
+   },
+   "referenceStats": {
+    "L": 56.71,
+    "a": 0.9,
+    "b": 7.46,
+    "chroma": 7.7
+   }
+  },
+  {
+   "file": "death-e.webp",
+   "source": "r194/death/hwando/death-e.webp",
+   "sourceSha256": "d91ce7768453fb4b4fcd409e31ca7328afbefb626e69ffec6fbc4d52fed99213",
+   "sha256": "dcaa90be164b9e7b62f626182c98c1b5b48c4087b72e232c2b71ad3347ffff42",
+   "bytes": 65104,
+   "reference": [
+    "r144/walk/hwando/walk-e.webp",
+    "r143/attack/hwando/attack-e.webp"
+   ],
+   "before": {
+    "L": 63.86,
+    "a": 3.84,
+    "b": 13.25,
+    "chroma": 14.03
+   },
+   "after": {
+    "L": 66.93,
+    "a": 1.41,
+    "b": 10.56,
+    "chroma": 10.8
+   },
+   "referenceStats": {
+    "L": 68.22,
+    "a": 1.69,
+    "b": 10.52,
+    "chroma": 10.76
+   }
+  },
+  {
+   "file": "death-ne.webp",
+   "source": "r194/death/hwando/death-ne.webp",
+   "sourceSha256": "8f73b18fbe97645c14e471886a7ab5f2424acc2d1c514b4317cda64c4f108a49",
+   "sha256": "a52f0a1406b90fc2bc76be3f03712fe6a339a850ae4295e9f8288b7790f97050",
+   "bytes": 57194,
+   "reference": [
+    "r130/hwando/walk-ne.webp",
+    "r143/attack/hwando/attack-ne.webp"
+   ],
+   "before": {
+    "L": 61.91,
+    "a": 2.39,
+    "b": 9.45,
+    "chroma": 9.85
+   },
+   "after": {
+    "L": 63.99,
+    "a": 0.62,
+    "b": 7.46,
+    "chroma": 7.74
+   },
+   "referenceStats": {
+    "L": 64.8,
+    "a": 0.75,
+    "b": 7.38,
+    "chroma": 7.56
+   }
+  },
+  {
+   "file": "death-n.webp",
+   "source": "r194/death/hwando/death-n.webp",
+   "sourceSha256": "143a79c338de7d498fc206405e35a0bf51605e3b9fdd654e4449bd254f8726ab",
+   "sha256": "1b2513e62c2b4627edcee5a99a817639eaff7b30a9bd77bbaea83d3da1325140",
+   "bytes": 62396,
+   "reference": [
+    "r130/hwando/walk-n.webp",
+    "r143/attack/hwando/attack-n.webp"
+   ],
+   "before": {
+    "L": 59.32,
+    "a": 2.01,
+    "b": 9.09,
+    "chroma": 9.43
+   },
+   "after": {
+    "L": 63.24,
+    "a": 0.65,
+    "b": 7.39,
+    "chroma": 7.68
+   },
+   "referenceStats": {
+    "L": 64.83,
+    "a": 0.79,
+    "b": 7.32,
+    "chroma": 7.51
+   }
+  }
+ ]
+}

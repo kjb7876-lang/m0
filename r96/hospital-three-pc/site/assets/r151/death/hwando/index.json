@@ -1,0 +1,33 @@
+{
+ "hero": "hwando",
+ "action": "death",
+ "order": "휘청 2 → 무릎 1 → 눕기 3 (README)",
+ "mirroredInGame": {
+  "w": "e",
+  "sw": "se",
+  "nw": "ne"
+ },
+ "applied": "쓰러질 때(R151 death-r151.js) 프레임 애니메이션 — client-source/attack-anim-r143.js",
+ "directions": {
+  "e": {
+   "path": "assets/r143/death/hwando/death-e.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    228
+   ],
+   "source": {
+    "driveId": "1Y6o5EimDB25-fvQncyf4LKIQ8WmiP407",
+    "file": "HERO-hwando-death-e.png",
+    "sha256": "31dc3c4e254e729a96c7db99061033ce4b3d400b457e4ed6466daa98ca746618",
+    "bytes": 215261
+   },
+   "sha256": "d91ce7768453fb4b4fcd409e31ca7328afbefb626e69ffec6fbc4d52fed99213",
+   "bytes": 68518
+  }
+ }
+}

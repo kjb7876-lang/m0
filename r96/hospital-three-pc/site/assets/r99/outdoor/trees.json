@@ -1,0 +1,18 @@
+{
+ "tree-living": {
+  "frames": 12,
+  "seconds": 0.1,
+  "size": [
+   444,
+   440
+  ]
+ },
+ "tree-dead": {
+  "frames": 12,
+  "seconds": 0.1,
+  "size": [
+   413,
+   440
+  ]
+ }
+}

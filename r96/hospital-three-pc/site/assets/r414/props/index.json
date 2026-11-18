@@ -1,0 +1,75 @@
+{
+ "revision": "R414",
+ "method": "alpha 72..230 -> 0..255, 1px erode, edge RGB from opaque neighbours, crop+4, long side <= 384, WebP q90",
+ "props": {
+  "fallen-rafters": {
+   "zone": "sz115-RD-1",
+   "mode": "inner",
+   "axis": null,
+   "height": 52,
+   "path": "assets/r414/props/fallen-rafters.webp",
+   "png": "R07-fallen-ceiling-rafters.png",
+   "dotsId": "R07-fallen-ceiling-rafters",
+   "dotsStatus": "REVIEW_FALLEN_STRUCTURE_STATIC_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    2674
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "904a5384c5b75bee9f259f380cee00c2ff151334aacfc025e61b280bf38517e3",
+   "part": null,
+   "size": [
+    384,
+    256
+   ],
+   "bytes": 26952,
+   "sha256": "508dcb3ec132f1edfeef89a04cdad33a1c53f873feaeca1ce379eac613fc2012"
+  },
+  "residence-lamppost": {
+   "zone": "sz115-S05-4",
+   "mode": "inner",
+   "axis": null,
+   "height": 140,
+   "path": "assets/r414/props/residence-lamppost.webp",
+   "png": "S05-residence-streetlamp-unlit.png",
+   "dotsId": "S05-residence-streetlamp-unlit",
+   "dotsStatus": "REVIEW_UNLIT_BASE_PROP_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    1262,
+    1264
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "336d34bfc584ae7156617abef136d7ca0b08171fa95120600f02bad935ff3471",
+   "part": null,
+   "size": [
+    119,
+    384
+   ],
+   "bytes": 8172,
+   "sha256": "617e5a6bb05ea19bcd733016673aafffdda032f6b01d55c4cb07d2fcdd090908"
+  },
+  "departure-bag": {
+   "zone": "sz115-S05-4",
+   "mode": "inner",
+   "axis": null,
+   "height": 24,
+   "path": "assets/r414/props/departure-bag.webp",
+   "png": "S05-packed-departure-bag.png",
+   "dotsId": "S05-packed-departure-bag",
+   "dotsStatus": "REVIEW_STATIC_PROP_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    1260,
+    1262,
+    1268
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "0cec4e82d52243cd9ea9a7955f84fbd0661e3f95fb890ecd7fad1f181ff9753b",
+   "part": null,
+   "size": [
+    384,
+    302
+   ],
+   "bytes": 33532,
+   "sha256": "77677cbe80ac03a3e6c8d414aaecb0665da60f0afc9c8eea1ad8b5d3ef004906"
+  }
+ }
+}

@@ -1,0 +1,113 @@
+{
+ "hero": "lauren",
+ "action": "death",
+ "order": "휘청 2 → 무릎 1 → 눕기 3 (README)",
+ "mirroredInGame": {
+  "w": "e",
+  "sw": "se",
+  "nw": "ne"
+ },
+ "applied": "쓰러질 때(R151 death-r151.js) 프레임 애니메이션 — client-source/attack-anim-r143.js",
+ "directions": {
+  "s": {
+   "path": "assets/r143/death/lauren/death-s.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    227
+   ],
+   "source": {
+    "driveId": "1nk0xW0f8tobHGGAL4e-yYGJ5t4SVi6kL",
+    "file": "HERO-lauren-death-s.png",
+    "sha256": "07f05b872fcb0d40ea74cdcba02cb3fdf1dae5f41534defd86d5034cb3758b3f",
+    "bytes": 104748
+   },
+   "sha256": "d10b40c76f333d768313a98fd81f7a50aa005a7adfcf61c1b2981d2598767a2d",
+   "bytes": 32616
+  },
+  "se": {
+   "path": "assets/r143/death/lauren/death-se.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    229
+   ],
+   "source": {
+    "driveId": "1nk0xW0f8tobHGGAL4e-yYGJ5t4SVi6kL",
+    "file": "HERO-lauren-death-se.png",
+    "sha256": "c9f8bce38f0b0d602e3154d01f2eba7086d11e3508580e0d7a96e9c22d2061dc",
+    "bytes": 100770
+   },
+   "sha256": "d0ab473f7ebe3beea36048c43cc097842ad95ba346afe6572d5156e33f64b16e",
+   "bytes": 32504
+  },
+  "e": {
+   "path": "assets/r143/death/lauren/death-e.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    228
+   ],
+   "source": {
+    "driveId": "1nk0xW0f8tobHGGAL4e-yYGJ5t4SVi6kL",
+    "file": "HERO-lauren-death-e.png",
+    "sha256": "ba5bc82a8e6e236267eaa2388d002fee4cfe592ee08caa369780ae91b0d176ed",
+    "bytes": 75112
+   },
+   "sha256": "da4ee5a82d90882cf013c2006f3092cc26ac4834b9d6c75970780f4318f727b8",
+   "bytes": 26606
+  },
+  "ne": {
+   "path": "assets/r143/death/lauren/death-ne.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    229
+   ],
+   "source": {
+    "driveId": "1nk0xW0f8tobHGGAL4e-yYGJ5t4SVi6kL",
+    "file": "HERO-lauren-death-ne.png",
+    "sha256": "6427842932b83022a0b7f152897933e07b54951ce2ced43ca4820bee15422709",
+    "bytes": 90721
+   },
+   "sha256": "bd0de16b4e0a849f67f0a05a05f2025ab09fba4ba5076d54060802906b4eb4cc",
+   "bytes": 30242
+  },
+  "n": {
+   "path": "assets/r143/death/lauren/death-n.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    227
+   ],
+   "source": {
+    "driveId": "1nk0xW0f8tobHGGAL4e-yYGJ5t4SVi6kL",
+    "file": "HERO-lauren-death-n.png",
+    "sha256": "822b5b3eb4c25f8ccfdcb10b9e48ede0058ccd567b6cb23c094f263211575fe3",
+    "bytes": 98250
+   },
+   "sha256": "65e19e5812b80e17f66d4105281d27085c48d637aac7ab971c10c237be9aaa29",
+   "bytes": 31348
+  }
+ }
+}

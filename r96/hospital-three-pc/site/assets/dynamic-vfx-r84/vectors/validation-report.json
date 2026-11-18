@@ -1,0 +1,25 @@
+{
+  "pass": true,
+  "validated_assets": 16,
+  "validation": "CPU XML parsing, viewBox, animation counts, forbidden elements, no external references, file size",
+  "total_animation_elements": 252,
+  "per_asset_animation_counts": {
+    "gold-thread.svg": 20,
+    "silver-thread.svg": 23,
+    "scalpel.svg": 10,
+    "poison-syringe.svg": 18,
+    "poison.svg": 12,
+    "bleed.svg": 10,
+    "shock.svg": 10,
+    "freeze.svg": 18,
+    "burn.svg": 14,
+    "charm.svg": 11,
+    "weakness.svg": 19,
+    "corruption.svg": 16,
+    "binding.svg": 9,
+    "harvest.svg": 10,
+    "disease.svg": 17,
+    "portal.svg": 35
+  },
+  "errors": []
+}

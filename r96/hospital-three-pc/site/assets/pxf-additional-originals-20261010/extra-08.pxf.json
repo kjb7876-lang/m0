@@ -1,0 +1,381 @@
+{
+  "format": "pxf.graph@1",
+  "name": "파이어볼",
+  "settings": {
+    "size": 64,
+    "frames": 24,
+    "fps": 24,
+    "loop": false
+  },
+  "nodes": [
+    {
+      "id": "core",
+      "type": "Shape",
+      "x": 40,
+      "y": 40,
+      "params": {
+        "shape": "circle",
+        "x": 0.5,
+        "y": 0.5,
+        "size": {
+          "k": [
+            [
+              0,
+              4,
+              "out3"
+            ],
+            [
+              6,
+              20,
+              "out"
+            ],
+            [
+              14,
+              24,
+              "linear"
+            ],
+            [
+              23,
+              14,
+              "linear"
+            ]
+          ]
+        },
+        "size2": 0.4,
+        "points": 5,
+        "rot": 0,
+        "aspect": 1,
+        "stroke": 0,
+        "falloff": 0.55,
+        "intensity": {
+          "k": [
+            [
+              0,
+              1,
+              "linear"
+            ],
+            [
+              14,
+              0.9,
+              "linear"
+            ],
+            [
+              23,
+              0.3,
+              "linear"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "hot",
+      "type": "Shape",
+      "x": 40,
+      "y": 180,
+      "params": {
+        "shape": "circle",
+        "x": 0.5,
+        "y": 0.5,
+        "size": {
+          "k": [
+            [
+              0,
+              2,
+              "out3"
+            ],
+            [
+              6,
+              10,
+              "out"
+            ],
+            [
+              14,
+              12,
+              "linear"
+            ],
+            [
+              23,
+              4,
+              "linear"
+            ]
+          ]
+        },
+        "size2": 0.4,
+        "points": 5,
+        "rot": 0,
+        "aspect": 1,
+        "stroke": 0,
+        "falloff": 0.4,
+        "intensity": {
+          "k": [
+            [
+              0,
+              1,
+              "linear"
+            ],
+            [
+              14,
+              1,
+              "linear"
+            ],
+            [
+              20,
+              0.4,
+              "linear"
+            ],
+            [
+              23,
+              0,
+              "linear"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "noise",
+      "type": "Noise",
+      "x": 40,
+      "y": 320,
+      "params": {
+        "type": "fbm",
+        "scaleX": 5,
+        "scaleY": 5,
+        "octaves": 3,
+        "seed": 8128,
+        "scrollX": 0,
+        "scrollY": -2,
+        "contrast": 1.6,
+        "bias": 0.1
+      }
+    },
+    {
+      "id": "flame",
+      "type": "Mask",
+      "x": 270,
+      "y": 250,
+      "params": {
+        "mode": "multiply",
+        "strength": 1
+      }
+    },
+    {
+      "id": "sparks",
+      "type": "Particles",
+      "x": 40,
+      "y": 460,
+      "params": {
+        "count": 40,
+        "seed": 555,
+        "emit": "burst",
+        "start": 0.1,
+        "span": 0.3,
+        "life": 0.5,
+        "lifeVar": 0.4,
+        "area": "circle",
+        "x": 0.5,
+        "y": 0.5,
+        "aw": 10,
+        "ah": 10,
+        "dirMode": "outward",
+        "angle": -90,
+        "spread": 360,
+        "speed": 0.9,
+        "speedVar": 0.6,
+        "gravity": -0.03,
+        "drag": 0.04,
+        "turb": 1,
+        "sizeA": 2,
+        "sizeB": 0,
+        "pshape": "square",
+        "stretch": 1,
+        "fade": "out",
+        "bright": 0.9,
+        "loop": false,
+        "ground": 0,
+        "bounce": 0.35,
+        "brightVar": 0
+      }
+    },
+    {
+      "id": "mixA",
+      "type": "Blend",
+      "x": 500,
+      "y": 140,
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "mixB",
+      "type": "Blend",
+      "x": 730,
+      "y": 220,
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "mixC",
+      "type": "Blend",
+      "x": 960,
+      "y": 300,
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "glow",
+      "type": "Glow",
+      "x": 1190,
+      "y": 300,
+      "params": {
+        "radius": 2,
+        "strength": 1
+      }
+    },
+    {
+      "id": "color",
+      "type": "Palette",
+      "x": 1420,
+      "y": 300,
+      "params": {
+        "colors": [
+          "#3a0a0a",
+          "#a3231b",
+          "#e8591c",
+          "#ffb030",
+          "#fff1b8"
+        ],
+        "cutoff": 0.1,
+        "shift": 0,
+        "mode": "bands",
+        "key": "alpha",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "fade",
+      "type": "Tint",
+      "x": 1650,
+      "y": 300,
+      "params": {
+        "color": "#ffffff",
+        "amount": 0,
+        "bright": 1,
+        "opacity": {
+          "k": [
+            [
+              0,
+              0,
+              "linear"
+            ],
+            [
+              2,
+              1,
+              "linear"
+            ],
+            [
+              16,
+              1,
+              "linear"
+            ],
+            [
+              23,
+              0,
+              "linear"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "out",
+      "type": "Output",
+      "x": 1880,
+      "y": 300,
+      "params": {
+        "alpha": "soft",
+        "threshold": 0.1
+      }
+    }
+  ],
+  "links": [
+    {
+      "f": "core",
+      "t": "flame",
+      "p": 0
+    },
+    {
+      "f": "noise",
+      "t": "flame",
+      "p": 1
+    },
+    {
+      "f": "flame",
+      "t": "mixA",
+      "p": 0
+    },
+    {
+      "f": "hot",
+      "t": "mixA",
+      "p": 1
+    },
+    {
+      "f": "mixA",
+      "t": "mixB",
+      "p": 0
+    },
+    {
+      "f": "sparks",
+      "t": "mixB",
+      "p": 1
+    },
+    {
+      "f": "mixB",
+      "t": "mixC",
+      "p": 0
+    },
+    {
+      "f": "hot",
+      "t": "mixC",
+      "p": 1
+    },
+    {
+      "f": "mixC",
+      "t": "glow",
+      "p": 0
+    },
+    {
+      "f": "glow",
+      "t": "color",
+      "p": 0
+    },
+    {
+      "f": "color",
+      "t": "fade",
+      "p": 0
+    },
+    {
+      "f": "fade",
+      "t": "out",
+      "p": 0
+    }
+  ],
+  "game": {
+    "style": "hero-pixel-v1",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "logicalSize": 64,
+    "blend": "add",
+    "referenceCell": 62,
+    "durationMs": 1000,
+    "impactFrame": 6
+  }
+}

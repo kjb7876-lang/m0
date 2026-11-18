@@ -1,0 +1,242 @@
+{
+  "format": "pxf.graph@1",
+  "name": "보랏빛 갈래 번개",
+  "settings": {
+    "size": 64,
+    "frames": 20,
+    "fps": 24,
+    "loop": false
+  },
+  "nodes": [
+    {
+      "id": "bolt",
+      "type": "Lightning",
+      "x": 40,
+      "y": 40,
+      "params": {
+        "x0": 0.5,
+        "y0": 0.06,
+        "x1": 0.5,
+        "y1": 0.94,
+        "detail": 6,
+        "jag": 0.4,
+        "branch": 0.5,
+        "branchLen": 0.4,
+        "seed": 2718,
+        "rate": 2,
+        "thick": 1,
+        "grow": {
+          "k": [
+            [
+              0,
+              0,
+              "out3"
+            ],
+            [
+              4,
+              1,
+              "linear"
+            ]
+          ]
+        },
+        "intensity": {
+          "k": [
+            [
+              0,
+              0.7,
+              "linear"
+            ],
+            [
+              4,
+              1,
+              "linear"
+            ],
+            [
+              8,
+              0.85,
+              "linear"
+            ],
+            [
+              12,
+              1,
+              "linear"
+            ],
+            [
+              19,
+              0.5,
+              "linear"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "core",
+      "type": "Lightning",
+      "x": 40,
+      "y": 200,
+      "params": {
+        "x0": 0.5,
+        "y0": 0.06,
+        "x1": 0.5,
+        "y1": 0.94,
+        "detail": 6,
+        "jag": 0.4,
+        "branch": 0,
+        "branchLen": 0.35,
+        "seed": 2718,
+        "rate": 2,
+        "thick": 1,
+        "grow": {
+          "k": [
+            [
+              0,
+              0,
+              "out3"
+            ],
+            [
+              4,
+              1,
+              "linear"
+            ]
+          ]
+        },
+        "intensity": 1
+      }
+    },
+    {
+      "id": "glow",
+      "type": "Glow",
+      "x": 270,
+      "y": 40,
+      "params": {
+        "radius": 3,
+        "strength": 1.4
+      }
+    },
+    {
+      "id": "merge",
+      "type": "Blend",
+      "x": 500,
+      "y": 120,
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "color",
+      "type": "Palette",
+      "x": 730,
+      "y": 120,
+      "params": {
+        "colors": [
+          "#2a0b52",
+          "#6a2fc4",
+          "#a66bff",
+          "#d9b8ff",
+          "#fbf3ff"
+        ],
+        "cutoff": 0.08,
+        "shift": 0,
+        "mode": "bands",
+        "key": "alpha",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "fade",
+      "type": "Tint",
+      "x": 960,
+      "y": 120,
+      "params": {
+        "color": "#ffffff",
+        "amount": 0,
+        "bright": 1,
+        "opacity": {
+          "k": [
+            [
+              0,
+              0,
+              "linear"
+            ],
+            [
+              2,
+              1,
+              "linear"
+            ],
+            [
+              12,
+              1,
+              "linear"
+            ],
+            [
+              16,
+              0.5,
+              "in"
+            ],
+            [
+              19,
+              0,
+              "linear"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "out",
+      "type": "Output",
+      "x": 1190,
+      "y": 120,
+      "params": {
+        "alpha": "soft",
+        "threshold": 0.1
+      }
+    }
+  ],
+  "links": [
+    {
+      "f": "bolt",
+      "t": "glow",
+      "p": 0
+    },
+    {
+      "f": "glow",
+      "t": "merge",
+      "p": 0
+    },
+    {
+      "f": "core",
+      "t": "merge",
+      "p": 1
+    },
+    {
+      "f": "merge",
+      "t": "color",
+      "p": 0
+    },
+    {
+      "f": "color",
+      "t": "fade",
+      "p": 0
+    },
+    {
+      "f": "fade",
+      "t": "out",
+      "p": 0
+    }
+  ],
+  "game": {
+    "style": "hero-pixel-v1",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "logicalSize": 64,
+    "blend": "add",
+    "referenceCell": 62,
+    "durationMs": 833.3333333333334,
+    "impactFrame": 4
+  }
+}

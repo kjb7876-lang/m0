@@ -1,0 +1,30 @@
+{
+ "revision": "R276",
+ "method": "alpha bbox (alpha>=16) + pad 6, long side <=512, WebP q92 alpha 100",
+ "items": {
+  "noticeboard-side": {
+   "path": "assets/r276/props/noticeboard-side.webp",
+   "driveZip": "StoryWorld-School-Noticeboard-side-oblique-v1.zip",
+   "driveId": "1cBwKxx6hqaIK5p-1I_eIxbdQ1MYq_TFu",
+   "zipSHA256": "1733423cfbf76e41b56abc99c2a021714311c1d4d0661dc08a1a408063d607a2",
+   "originalSHA256": "a96d445c6cc28dc0ba3d259ecdb15d779b35ffc5b3ea396256ad3c40dc1ebf90",
+   "originalSize": [
+    1536,
+    1024
+   ],
+   "derivedSHA256": "5ee69d08d1b5a015edb8f5b0754d50fd7316967e7bf85b87bab5eb3e4b23ca93",
+   "derivedBytes": 105864,
+   "derivedSize": [
+    512,
+    477
+   ],
+   "status": "CONDITIONAL_BLANK_NOTICEBOARD_SIDE_OBLIQUE_OBSERVATION",
+   "region": "existing_school_decoration",
+   "canonLines": [],
+   "baseInGame": "r126 noticeboard",
+   "use": "S-02 밤의 학교 게시판(samong-mood-r123 school deco, 벽 2개)의 얕은 사선 — 옆벽(face y)에 붙은 게시판에만 써서 벽 방향과 맞춘다(조건부·최종 아님)",
+   "applied": true,
+   "note": "조건부·최종 아님(CONDITIONAL 각도 변형, R257 방식)"
+  }
+ }
+}

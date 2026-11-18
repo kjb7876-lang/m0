@@ -1,0 +1,1172 @@
+{
+  "settings": {
+    "size": 96,
+    "frames": 12,
+    "fps": 40,
+    "loop": false
+  },
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "Lightning",
+      "params": {
+        "x0": 0.5,
+        "y0": 0.5,
+        "x1": 0.9,
+        "y1": 0.27,
+        "detail": 4,
+        "jag": 0.5,
+        "branch": 0.8,
+        "branchLen": 0.42,
+        "seed": 811,
+        "rate": 2,
+        "thick": 2,
+        "grow": {
+          "k": [
+            [
+              0,
+              0.25,
+              "smooth"
+            ],
+            [
+              1,
+              1,
+              "smooth"
+            ],
+            [
+              7,
+              1,
+              "smooth"
+            ],
+            [
+              11,
+              0,
+              "smooth"
+            ]
+          ]
+        },
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 40
+    },
+    {
+      "id": "n2",
+      "type": "Tint",
+      "params": {
+        "color": "#527dff",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 40
+    },
+    {
+      "id": "n3",
+      "type": "Glow",
+      "params": {
+        "radius": 2,
+        "strength": 0.6
+      },
+      "x": 460,
+      "y": 40
+    },
+    {
+      "id": "n4",
+      "type": "Lightning",
+      "params": {
+        "x0": 0.5,
+        "y0": 0.5,
+        "x1": 0.9,
+        "y1": 0.27,
+        "detail": 4,
+        "jag": 0.5,
+        "branch": 0.8,
+        "branchLen": 0.42,
+        "seed": 811,
+        "rate": 2,
+        "thick": 1,
+        "grow": {
+          "k": [
+            [
+              0,
+              0.25,
+              "smooth"
+            ],
+            [
+              1,
+              1,
+              "smooth"
+            ],
+            [
+              7,
+              1,
+              "smooth"
+            ],
+            [
+              11,
+              0,
+              "smooth"
+            ]
+          ]
+        },
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 190
+    },
+    {
+      "id": "n5",
+      "type": "Tint",
+      "params": {
+        "color": "#f5f4ff",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 190
+    },
+    {
+      "id": "n6",
+      "type": "Lightning",
+      "params": {
+        "x0": 0.5,
+        "y0": 0.5,
+        "x1": 0.68,
+        "y1": 0.08,
+        "detail": 4,
+        "jag": 0.5,
+        "branch": 0.8,
+        "branchLen": 0.42,
+        "seed": 842,
+        "rate": 2,
+        "thick": 2,
+        "grow": {
+          "k": [
+            [
+              0,
+              0.25,
+              "smooth"
+            ],
+            [
+              1,
+              1,
+              "smooth"
+            ],
+            [
+              7,
+              1,
+              "smooth"
+            ],
+            [
+              11,
+              0,
+              "smooth"
+            ]
+          ]
+        },
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 340
+    },
+    {
+      "id": "n7",
+      "type": "Tint",
+      "params": {
+        "color": "#527dff",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 340
+    },
+    {
+      "id": "n8",
+      "type": "Glow",
+      "params": {
+        "radius": 2,
+        "strength": 0.6
+      },
+      "x": 460,
+      "y": 190
+    },
+    {
+      "id": "n9",
+      "type": "Lightning",
+      "params": {
+        "x0": 0.5,
+        "y0": 0.5,
+        "x1": 0.68,
+        "y1": 0.08,
+        "detail": 4,
+        "jag": 0.5,
+        "branch": 0.8,
+        "branchLen": 0.42,
+        "seed": 842,
+        "rate": 2,
+        "thick": 1,
+        "grow": {
+          "k": [
+            [
+              0,
+              0.25,
+              "smooth"
+            ],
+            [
+              1,
+              1,
+              "smooth"
+            ],
+            [
+              7,
+              1,
+              "smooth"
+            ],
+            [
+              11,
+              0,
+              "smooth"
+            ]
+          ]
+        },
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 490
+    },
+    {
+      "id": "n10",
+      "type": "Tint",
+      "params": {
+        "color": "#f5f4ff",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 490
+    },
+    {
+      "id": "n11",
+      "type": "Lightning",
+      "params": {
+        "x0": 0.5,
+        "y0": 0.5,
+        "x1": 0.25,
+        "y1": 0.14,
+        "detail": 4,
+        "jag": 0.5,
+        "branch": 0.8,
+        "branchLen": 0.42,
+        "seed": 873,
+        "rate": 2,
+        "thick": 2,
+        "grow": {
+          "k": [
+            [
+              0,
+              0.25,
+              "smooth"
+            ],
+            [
+              1,
+              1,
+              "smooth"
+            ],
+            [
+              7,
+              1,
+              "smooth"
+            ],
+            [
+              11,
+              0,
+              "smooth"
+            ]
+          ]
+        },
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 640
+    },
+    {
+      "id": "n12",
+      "type": "Tint",
+      "params": {
+        "color": "#527dff",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 640
+    },
+    {
+      "id": "n13",
+      "type": "Glow",
+      "params": {
+        "radius": 2,
+        "strength": 0.6
+      },
+      "x": 460,
+      "y": 340
+    },
+    {
+      "id": "n14",
+      "type": "Lightning",
+      "params": {
+        "x0": 0.5,
+        "y0": 0.5,
+        "x1": 0.25,
+        "y1": 0.14,
+        "detail": 4,
+        "jag": 0.5,
+        "branch": 0.8,
+        "branchLen": 0.42,
+        "seed": 873,
+        "rate": 2,
+        "thick": 1,
+        "grow": {
+          "k": [
+            [
+              0,
+              0.25,
+              "smooth"
+            ],
+            [
+              1,
+              1,
+              "smooth"
+            ],
+            [
+              7,
+              1,
+              "smooth"
+            ],
+            [
+              11,
+              0,
+              "smooth"
+            ]
+          ]
+        },
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 790
+    },
+    {
+      "id": "n15",
+      "type": "Tint",
+      "params": {
+        "color": "#f5f4ff",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 790
+    },
+    {
+      "id": "n16",
+      "type": "Lightning",
+      "params": {
+        "x0": 0.5,
+        "y0": 0.5,
+        "x1": 0.09,
+        "y1": 0.65,
+        "detail": 4,
+        "jag": 0.5,
+        "branch": 0.8,
+        "branchLen": 0.42,
+        "seed": 904,
+        "rate": 2,
+        "thick": 2,
+        "grow": {
+          "k": [
+            [
+              0,
+              0.25,
+              "smooth"
+            ],
+            [
+              1,
+              1,
+              "smooth"
+            ],
+            [
+              7,
+              1,
+              "smooth"
+            ],
+            [
+              11,
+              0,
+              "smooth"
+            ]
+          ]
+        },
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 940
+    },
+    {
+      "id": "n17",
+      "type": "Tint",
+      "params": {
+        "color": "#527dff",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 940
+    },
+    {
+      "id": "n18",
+      "type": "Glow",
+      "params": {
+        "radius": 2,
+        "strength": 0.6
+      },
+      "x": 460,
+      "y": 490
+    },
+    {
+      "id": "n19",
+      "type": "Lightning",
+      "params": {
+        "x0": 0.5,
+        "y0": 0.5,
+        "x1": 0.09,
+        "y1": 0.65,
+        "detail": 4,
+        "jag": 0.5,
+        "branch": 0.8,
+        "branchLen": 0.42,
+        "seed": 904,
+        "rate": 2,
+        "thick": 1,
+        "grow": {
+          "k": [
+            [
+              0,
+              0.25,
+              "smooth"
+            ],
+            [
+              1,
+              1,
+              "smooth"
+            ],
+            [
+              7,
+              1,
+              "smooth"
+            ],
+            [
+              11,
+              0,
+              "smooth"
+            ]
+          ]
+        },
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 1090
+    },
+    {
+      "id": "n20",
+      "type": "Tint",
+      "params": {
+        "color": "#f5f4ff",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 1090
+    },
+    {
+      "id": "n21",
+      "type": "Lightning",
+      "params": {
+        "x0": 0.5,
+        "y0": 0.5,
+        "x1": 0.69,
+        "y1": 0.9,
+        "detail": 4,
+        "jag": 0.5,
+        "branch": 0.8,
+        "branchLen": 0.42,
+        "seed": 935,
+        "rate": 2,
+        "thick": 2,
+        "grow": {
+          "k": [
+            [
+              0,
+              0.25,
+              "smooth"
+            ],
+            [
+              1,
+              1,
+              "smooth"
+            ],
+            [
+              7,
+              1,
+              "smooth"
+            ],
+            [
+              11,
+              0,
+              "smooth"
+            ]
+          ]
+        },
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 1240
+    },
+    {
+      "id": "n22",
+      "type": "Tint",
+      "params": {
+        "color": "#527dff",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 1240
+    },
+    {
+      "id": "n23",
+      "type": "Glow",
+      "params": {
+        "radius": 2,
+        "strength": 0.6
+      },
+      "x": 460,
+      "y": 640
+    },
+    {
+      "id": "n24",
+      "type": "Lightning",
+      "params": {
+        "x0": 0.5,
+        "y0": 0.5,
+        "x1": 0.69,
+        "y1": 0.9,
+        "detail": 4,
+        "jag": 0.5,
+        "branch": 0.8,
+        "branchLen": 0.42,
+        "seed": 935,
+        "rate": 2,
+        "thick": 1,
+        "grow": {
+          "k": [
+            [
+              0,
+              0.25,
+              "smooth"
+            ],
+            [
+              1,
+              1,
+              "smooth"
+            ],
+            [
+              7,
+              1,
+              "smooth"
+            ],
+            [
+              11,
+              0,
+              "smooth"
+            ]
+          ]
+        },
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 1390
+    },
+    {
+      "id": "n25",
+      "type": "Tint",
+      "params": {
+        "color": "#f5f4ff",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 1390
+    },
+    {
+      "id": "n26",
+      "type": "Shape",
+      "params": {
+        "shape": "star",
+        "x": 0.5,
+        "y": 0.5,
+        "size": {
+          "k": [
+            [
+              0,
+              3,
+              "smooth"
+            ],
+            [
+              1,
+              11,
+              "smooth"
+            ],
+            [
+              3,
+              6,
+              "smooth"
+            ],
+            [
+              5,
+              0,
+              "smooth"
+            ],
+            [
+              11,
+              0,
+              "smooth"
+            ]
+          ]
+        },
+        "size2": 0.13,
+        "points": 4,
+        "rot": 0,
+        "aspect": 1,
+        "stroke": 0,
+        "falloff": 0,
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 1540
+    },
+    {
+      "id": "n27",
+      "type": "Tint",
+      "params": {
+        "color": "#f5f4ff",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 1540
+    },
+    {
+      "id": "n28",
+      "type": "Particles",
+      "params": {
+        "count": 14,
+        "seed": 881,
+        "emit": "burst",
+        "start": 0,
+        "span": 1,
+        "life": 0.85,
+        "lifeVar": 0.25,
+        "area": "circle",
+        "x": 0.5,
+        "y": 0.5,
+        "aw": 7,
+        "ah": 5,
+        "dirMode": "outward",
+        "angle": -85,
+        "spread": 360,
+        "speed": 2.2,
+        "speedVar": 0.3,
+        "gravity": 0.11,
+        "drag": 0.025,
+        "turb": 0,
+        "sizeA": 2.1,
+        "sizeB": 0.3,
+        "pshape": "streak",
+        "stretch": 1.4,
+        "fade": "out",
+        "bright": 1,
+        "loop": false,
+        "ground": 0,
+        "bounce": 0.35,
+        "brightVar": 0
+      },
+      "x": 40,
+      "y": 1690
+    },
+    {
+      "id": "n29",
+      "type": "Tint",
+      "params": {
+        "color": "#f5f4ff",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 1690
+    },
+    {
+      "id": "n30",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 670,
+      "y": 40
+    },
+    {
+      "id": "n31",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 880,
+      "y": 40
+    },
+    {
+      "id": "n32",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 1090,
+      "y": 40
+    },
+    {
+      "id": "n33",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 1300,
+      "y": 40
+    },
+    {
+      "id": "n34",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 1510,
+      "y": 40
+    },
+    {
+      "id": "n35",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 1720,
+      "y": 40
+    },
+    {
+      "id": "n36",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 1930,
+      "y": 40
+    },
+    {
+      "id": "n37",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 2140,
+      "y": 40
+    },
+    {
+      "id": "n38",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 2350,
+      "y": 40
+    },
+    {
+      "id": "n39",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 2560,
+      "y": 40
+    },
+    {
+      "id": "n40",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 2770,
+      "y": 40
+    },
+    {
+      "id": "n41",
+      "type": "Tint",
+      "params": {
+        "color": "#ffffff",
+        "amount": 0,
+        "bright": 1,
+        "opacity": {
+          "k": [
+            [
+              0,
+              0.9,
+              "smooth"
+            ],
+            [
+              1,
+              1,
+              "smooth"
+            ],
+            [
+              4,
+              0.95,
+              "smooth"
+            ],
+            [
+              8,
+              0.4,
+              "smooth"
+            ],
+            [
+              11,
+              0,
+              "smooth"
+            ]
+          ]
+        }
+      },
+      "x": 2980,
+      "y": 40
+    },
+    {
+      "id": "n42",
+      "type": "Transform",
+      "params": {
+        "tx": 0,
+        "ty": 0,
+        "sx": 0.86,
+        "sy": 0.86,
+        "rot": 0,
+        "px": 0.5,
+        "py": 0.5
+      },
+      "x": 3190,
+      "y": 40
+    },
+    {
+      "id": "n43",
+      "type": "Output",
+      "params": {
+        "alpha": "soft",
+        "threshold": 0.5
+      },
+      "x": 3400,
+      "y": 40
+    }
+  ],
+  "links": [
+    {
+      "f": "n1",
+      "t": "n2",
+      "p": 0
+    },
+    {
+      "f": "n2",
+      "t": "n3",
+      "p": 0
+    },
+    {
+      "f": "n4",
+      "t": "n5",
+      "p": 0
+    },
+    {
+      "f": "n6",
+      "t": "n7",
+      "p": 0
+    },
+    {
+      "f": "n7",
+      "t": "n8",
+      "p": 0
+    },
+    {
+      "f": "n9",
+      "t": "n10",
+      "p": 0
+    },
+    {
+      "f": "n11",
+      "t": "n12",
+      "p": 0
+    },
+    {
+      "f": "n12",
+      "t": "n13",
+      "p": 0
+    },
+    {
+      "f": "n14",
+      "t": "n15",
+      "p": 0
+    },
+    {
+      "f": "n16",
+      "t": "n17",
+      "p": 0
+    },
+    {
+      "f": "n17",
+      "t": "n18",
+      "p": 0
+    },
+    {
+      "f": "n19",
+      "t": "n20",
+      "p": 0
+    },
+    {
+      "f": "n21",
+      "t": "n22",
+      "p": 0
+    },
+    {
+      "f": "n22",
+      "t": "n23",
+      "p": 0
+    },
+    {
+      "f": "n24",
+      "t": "n25",
+      "p": 0
+    },
+    {
+      "f": "n26",
+      "t": "n27",
+      "p": 0
+    },
+    {
+      "f": "n28",
+      "t": "n29",
+      "p": 0
+    },
+    {
+      "f": "n3",
+      "t": "n30",
+      "p": 0
+    },
+    {
+      "f": "n5",
+      "t": "n30",
+      "p": 1
+    },
+    {
+      "f": "n30",
+      "t": "n31",
+      "p": 0
+    },
+    {
+      "f": "n8",
+      "t": "n31",
+      "p": 1
+    },
+    {
+      "f": "n31",
+      "t": "n32",
+      "p": 0
+    },
+    {
+      "f": "n10",
+      "t": "n32",
+      "p": 1
+    },
+    {
+      "f": "n32",
+      "t": "n33",
+      "p": 0
+    },
+    {
+      "f": "n13",
+      "t": "n33",
+      "p": 1
+    },
+    {
+      "f": "n33",
+      "t": "n34",
+      "p": 0
+    },
+    {
+      "f": "n15",
+      "t": "n34",
+      "p": 1
+    },
+    {
+      "f": "n34",
+      "t": "n35",
+      "p": 0
+    },
+    {
+      "f": "n18",
+      "t": "n35",
+      "p": 1
+    },
+    {
+      "f": "n35",
+      "t": "n36",
+      "p": 0
+    },
+    {
+      "f": "n20",
+      "t": "n36",
+      "p": 1
+    },
+    {
+      "f": "n36",
+      "t": "n37",
+      "p": 0
+    },
+    {
+      "f": "n23",
+      "t": "n37",
+      "p": 1
+    },
+    {
+      "f": "n37",
+      "t": "n38",
+      "p": 0
+    },
+    {
+      "f": "n25",
+      "t": "n38",
+      "p": 1
+    },
+    {
+      "f": "n38",
+      "t": "n39",
+      "p": 0
+    },
+    {
+      "f": "n27",
+      "t": "n39",
+      "p": 1
+    },
+    {
+      "f": "n39",
+      "t": "n40",
+      "p": 0
+    },
+    {
+      "f": "n29",
+      "t": "n40",
+      "p": 1
+    },
+    {
+      "f": "n40",
+      "t": "n41",
+      "p": 0
+    },
+    {
+      "f": "n41",
+      "t": "n42",
+      "p": 0
+    },
+    {
+      "f": "n42",
+      "t": "n43",
+      "p": 0
+    }
+  ],
+  "game": {
+    "style": "hero-pixel-v1",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "logicalSize": 116,
+    "blend": "normal",
+    "durationMs": 300,
+    "role": "impact",
+    "referenceCell": 62
+  },
+  "name": "뇌전 무장 · 명중",
+  "sourceKey": "[\"slash\",\"gold\",[\"#f5f4ff\",\"#f5f4ff\",\"#527dff\",\"#5141a8\",\"#5141a8\"],98112,26,26,3.4,70,0.05,2,0,55,150,1,5,0,false]",
+  "sourceRecipe": {
+    "id": "breath-lightning-contact",
+    "label": "뇌전 무장 · 명중",
+    "effect": "slash",
+    "palette": "gold",
+    "pxfId": "hero-breath-lightning-contact",
+    "colors": [
+      "#f5f4ff",
+      "#f5f4ff",
+      "#527dff",
+      "#5141a8",
+      "#5141a8"
+    ],
+    "params": {
+      "count": 26,
+      "life": 26,
+      "speed": 3.4,
+      "spread": 70,
+      "gravity": 0.05,
+      "size": 2,
+      "angle": 0,
+      "pitch": 55,
+      "arc": 150,
+      "dir": 1,
+      "alt": false,
+      "ghosts": 5,
+      "glow": 0,
+      "ring": false,
+      "flash": 0,
+      "hitstop": 0,
+      "shake": 0,
+      "slowmo": 1,
+      "loop": false,
+      "interval": 1.1
+    },
+    "seed": 98112
+  },
+  "provenance": {
+    "author": "Hero Inc",
+    "purpose": "Shared elemental weapon impact / editor preview. No character-specific elemental assets.",
+    "runtime": "Existing melee contact clock"
+  }
+}

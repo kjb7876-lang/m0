@@ -1,0 +1,625 @@
+{
+  "format": "pxf.graph@1",
+  "name": "에너지 빔",
+  "settings": {
+    "size": 64,
+    "frames": 24,
+    "fps": 24,
+    "loop": false
+  },
+  "nodes": [
+    {
+      "id": "core",
+      "type": "Stroke",
+      "x": 40,
+      "y": 40,
+      "params": {
+        "x0": 0.06,
+        "y0": 0.5,
+        "x1": 0.35,
+        "y1": 0.5,
+        "x2": 0.65,
+        "y2": 0.5,
+        "x3": 0.94,
+        "y3": 0.5,
+        "width": {
+          "k": [
+            [
+              0,
+              0,
+              "linear"
+            ],
+            [
+              3,
+              9,
+              "out3"
+            ],
+            [
+              16,
+              8,
+              "linear"
+            ],
+            [
+              23,
+              0,
+              "in"
+            ]
+          ]
+        },
+        "taper": 0.3,
+        "from": {
+          "k": [
+            [
+              0,
+              0,
+              "linear"
+            ],
+            [
+              16,
+              0,
+              "linear"
+            ],
+            [
+              23,
+              0.8,
+              "in"
+            ]
+          ]
+        },
+        "to": {
+          "k": [
+            [
+              0,
+              0.1,
+              "linear"
+            ],
+            [
+              5,
+              1,
+              "out"
+            ],
+            [
+              23,
+              1,
+              "linear"
+            ]
+          ]
+        },
+        "span": false,
+        "vA": 0.9,
+        "vM": 1,
+        "vB": 0.9,
+        "intensity": 1
+      }
+    },
+    {
+      "id": "outer",
+      "type": "Stroke",
+      "x": 40,
+      "y": 160,
+      "params": {
+        "x0": 0.06,
+        "y0": 0.5,
+        "x1": 0.35,
+        "y1": 0.5,
+        "x2": 0.65,
+        "y2": 0.5,
+        "x3": 0.94,
+        "y3": 0.5,
+        "width": {
+          "k": [
+            [
+              0,
+              0,
+              "linear"
+            ],
+            [
+              3,
+              16,
+              "out3"
+            ],
+            [
+              16,
+              14,
+              "linear"
+            ],
+            [
+              23,
+              0,
+              "in"
+            ]
+          ]
+        },
+        "taper": 0.5,
+        "from": {
+          "k": [
+            [
+              0,
+              0,
+              "linear"
+            ],
+            [
+              16,
+              0,
+              "linear"
+            ],
+            [
+              23,
+              0.8,
+              "in"
+            ]
+          ]
+        },
+        "to": {
+          "k": [
+            [
+              0,
+              0.1,
+              "linear"
+            ],
+            [
+              5,
+              1,
+              "out"
+            ],
+            [
+              23,
+              1,
+              "linear"
+            ]
+          ]
+        },
+        "span": false,
+        "vA": 0.5,
+        "vM": 0.7,
+        "vB": 0.5,
+        "intensity": 0.8
+      }
+    },
+    {
+      "id": "noise",
+      "type": "Noise",
+      "x": 40,
+      "y": 280,
+      "params": {
+        "type": "fbm",
+        "scaleX": 12,
+        "scaleY": 3,
+        "octaves": 2,
+        "seed": 5,
+        "scrollX": 4,
+        "scrollY": 0,
+        "contrast": 1.5,
+        "bias": 0.1
+      }
+    },
+    {
+      "id": "mask",
+      "type": "Mask",
+      "x": 270,
+      "y": 220,
+      "params": {
+        "mode": "multiply",
+        "strength": 1
+      }
+    },
+    {
+      "id": "levels",
+      "type": "Levels",
+      "x": 500,
+      "y": 220,
+      "params": {
+        "lo": 0.2,
+        "hi": 0.8,
+        "gamma": 1,
+        "steps": 4
+      }
+    },
+    {
+      "id": "lightning",
+      "type": "Lightning",
+      "x": 40,
+      "y": 400,
+      "params": {
+        "x0": 0.06,
+        "y0": 0.5,
+        "x1": 0.94,
+        "y1": 0.5,
+        "detail": 5,
+        "jag": 0.2,
+        "branch": 0.3,
+        "branchLen": 0.3,
+        "seed": 9,
+        "rate": 2,
+        "thick": 1,
+        "grow": {
+          "k": [
+            [
+              0,
+              0,
+              "linear"
+            ],
+            [
+              5,
+              1,
+              "linear"
+            ],
+            [
+              23,
+              1,
+              "linear"
+            ]
+          ]
+        },
+        "intensity": {
+          "k": [
+            [
+              0,
+              0,
+              "linear"
+            ],
+            [
+              4,
+              0.9,
+              "linear"
+            ],
+            [
+              16,
+              0.9,
+              "linear"
+            ],
+            [
+              22,
+              0,
+              "linear"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "muzzle",
+      "type": "Shape",
+      "x": 40,
+      "y": 520,
+      "params": {
+        "shape": "circle",
+        "x": 0.08,
+        "y": 0.5,
+        "size": {
+          "k": [
+            [
+              0,
+              4,
+              "linear"
+            ],
+            [
+              4,
+              12,
+              "out3"
+            ],
+            [
+              16,
+              10,
+              "linear"
+            ],
+            [
+              23,
+              0,
+              "linear"
+            ]
+          ]
+        },
+        "size2": 0.4,
+        "points": 5,
+        "rot": 0,
+        "aspect": 1,
+        "stroke": 0,
+        "falloff": 0.3,
+        "intensity": 1
+      }
+    },
+    {
+      "id": "impact",
+      "type": "Shape",
+      "x": 40,
+      "y": 640,
+      "params": {
+        "shape": "star",
+        "x": 0.94,
+        "y": 0.5,
+        "size": {
+          "k": [
+            [
+              0,
+              0,
+              "linear"
+            ],
+            [
+              4,
+              14,
+              "out3"
+            ],
+            [
+              10,
+              8,
+              "linear"
+            ],
+            [
+              18,
+              0,
+              "linear"
+            ]
+          ]
+        },
+        "size2": 0.4,
+        "points": 4,
+        "rot": {
+          "k": [
+            [
+              0,
+              0,
+              "linear"
+            ],
+            [
+              18,
+              90,
+              "linear"
+            ]
+          ]
+        },
+        "aspect": 1,
+        "stroke": 0,
+        "falloff": 0,
+        "intensity": 1
+      }
+    },
+    {
+      "id": "sparks",
+      "type": "Particles",
+      "x": 40,
+      "y": 760,
+      "params": {
+        "count": 24,
+        "seed": 31,
+        "emit": "burst",
+        "start": 0.15,
+        "span": 0.5,
+        "life": 0.3,
+        "lifeVar": 0.3,
+        "area": "point",
+        "x": 0.94,
+        "y": 0.5,
+        "aw": 8,
+        "ah": 8,
+        "dirMode": "fixed",
+        "angle": 180,
+        "spread": 120,
+        "speed": 1,
+        "speedVar": 0.5,
+        "gravity": 0,
+        "drag": 0.03,
+        "turb": 0.2,
+        "sizeA": 2,
+        "sizeB": 1,
+        "pshape": "square",
+        "stretch": 1,
+        "fade": "out",
+        "bright": 1,
+        "loop": false,
+        "ground": 0,
+        "bounce": 0.35,
+        "brightVar": 0
+      }
+    },
+    {
+      "id": "bA",
+      "type": "Blend",
+      "x": 730,
+      "y": 100,
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "bB",
+      "type": "Blend",
+      "x": 960,
+      "y": 200,
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "bC",
+      "type": "Blend",
+      "x": 1190,
+      "y": 300,
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "bD",
+      "type": "Blend",
+      "x": 1420,
+      "y": 400,
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "bE",
+      "type": "Blend",
+      "x": 1650,
+      "y": 500,
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "pal",
+      "type": "Palette",
+      "x": 1880,
+      "y": 500,
+      "params": {
+        "colors": [
+          "#2a1470",
+          "#5b3ad6",
+          "#38c8ff",
+          "#bff4ff",
+          "#ffffff"
+        ],
+        "cutoff": 0.1,
+        "shift": 0,
+        "mode": "bands",
+        "key": "alpha",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "fade",
+      "type": "Tint",
+      "x": 2110,
+      "y": 500,
+      "params": {
+        "color": "#ffffff",
+        "amount": 0,
+        "bright": 1,
+        "opacity": {
+          "k": [
+            [
+              0,
+              0,
+              "linear"
+            ],
+            [
+              1,
+              1,
+              "linear"
+            ],
+            [
+              17,
+              1,
+              "linear"
+            ],
+            [
+              23,
+              0,
+              "linear"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "out",
+      "type": "Output",
+      "x": 2340,
+      "y": 500,
+      "params": {
+        "alpha": "soft",
+        "threshold": 0.1
+      }
+    }
+  ],
+  "links": [
+    {
+      "f": "noise",
+      "t": "mask",
+      "p": 0
+    },
+    {
+      "f": "outer",
+      "t": "mask",
+      "p": 1
+    },
+    {
+      "f": "mask",
+      "t": "levels",
+      "p": 0
+    },
+    {
+      "f": "core",
+      "t": "bA",
+      "p": 0
+    },
+    {
+      "f": "levels",
+      "t": "bA",
+      "p": 1
+    },
+    {
+      "f": "bA",
+      "t": "bB",
+      "p": 0
+    },
+    {
+      "f": "lightning",
+      "t": "bB",
+      "p": 1
+    },
+    {
+      "f": "bB",
+      "t": "bC",
+      "p": 0
+    },
+    {
+      "f": "muzzle",
+      "t": "bC",
+      "p": 1
+    },
+    {
+      "f": "bC",
+      "t": "bD",
+      "p": 0
+    },
+    {
+      "f": "impact",
+      "t": "bD",
+      "p": 1
+    },
+    {
+      "f": "bD",
+      "t": "bE",
+      "p": 0
+    },
+    {
+      "f": "sparks",
+      "t": "bE",
+      "p": 1
+    },
+    {
+      "f": "bE",
+      "t": "pal",
+      "p": 0
+    },
+    {
+      "f": "pal",
+      "t": "fade",
+      "p": 0
+    },
+    {
+      "f": "fade",
+      "t": "out",
+      "p": 0
+    }
+  ],
+  "game": {
+    "style": "hero-pixel-v1",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "logicalSize": 64,
+    "blend": "add",
+    "referenceCell": 62,
+    "durationMs": 1000,
+    "impactFrame": 4
+  }
+}

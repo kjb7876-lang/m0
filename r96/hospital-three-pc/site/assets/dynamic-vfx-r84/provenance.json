@@ -1,0 +1,3163 @@
+{
+  "schema": "storyworld.dynamic-vfx-provenance/v1",
+  "created_date": "2026-10-23",
+  "catalog_count": 80,
+  "reused_static_texture_count": 64,
+  "new_procedural_effect_count": 16,
+  "source_package": "storyworld-boss-vfx-quality-20261023",
+  "original_narrative_mapping_package": "storyworld-boss-vfx-20261023",
+  "copy_method": "shutil.copy2, followed by SHA-256 comparison against selected source file and selected-quality-64 manifest",
+  "raster_transformation": "none",
+  "all_source_pngs_byte_identical": true,
+  "catalog_sha256": "98182455a30cd406c8f971e7dc1d41c1c3ab59593fd1dfab4485b89cf637f7df",
+  "catalog_js_sha256": "e0478de59498f6de157f888ed590977144cba997d057c66e08277f397da2e58a",
+  "source_role_normalization": {
+    "ground_warning": "warning",
+    "ground warning": "warning",
+    "warning": "warning",
+    "projectile": "projectile",
+    "projectile_or_panel": "projectile",
+    "impact": "impact",
+    "remnant": "residue",
+    "ground remnant": "residue",
+    "residue_or_resurrection": "residue"
+  },
+  "role_counts": {
+    "projectile": 18,
+    "residue": 23,
+    "impact": 20,
+    "warning": 19
+  },
+  "design_defaults": {
+    "duration_unit": "seconds",
+    "duration_status": "new authored timeline proposal; not source combat timings",
+    "color_status": "authored accent hex chosen from documented motif palettes, not a sampled dominant pixel or canon color value",
+    "canonical_scene_boss_policy": "Copied verbatim only where the supplied manifests provide an identifier or label. No canonical scene or boss is assigned to the 16 new reusable motifs.",
+    "source_motion_policy": "The runtime may transform, pulse, move, reveal and fade each unchanged static component. These are code-driven timelines, not newly drawn frame animation.",
+    "special_cases": [
+      "10_knight_parry_counter is an impact according to original_metadata.role, even though it is the second effect in that group.",
+      "10-cult03-golden-order-wall uses the projectile bucket but is a deployed stationary panel, not a flying weapon.",
+      "16-cult04-resurrection-stitch-arc uses the residue bucket but is regenerative inward stitching, not destructive decay."
+    ],
+    "procedural_variant_policy": "Canvas runtime and animated SVG are separately authored alternate expressions of the same proposed reusable motif, not identical frames. Catalog descriptions describe Canvas silhouettes without promising exact primitive counts."
+  },
+  "evidence_documents": [
+    {
+      "document": "quality-source/review/selected-quality-64.json",
+      "sha256": "d0ddb0810b47c7ae5df9237da15aa12a7803c919e07dbedaf59d200033f54153",
+      "bytes": 82884
+    },
+    {
+      "document": "quality-source/review/independent-review.txt",
+      "sha256": "5caf450ee2ae13591e20ffe9b80eeba47308b480d30609f58e3a1bcdc6bb1785",
+      "bytes": 5611
+    },
+    {
+      "document": "original-source/delivery/all64-mapping.json",
+      "sha256": "c8da5a874c63fd368940c34fe98738e1c7ca35bb2b1d8dd7fb0b608f6689f7d8",
+      "bytes": 184537
+    },
+    {
+      "document": "quality-source/batch01/manifest.json",
+      "sha256": "3f0f27ae09cb0f5f9d53d7a9b636cdd0bd4f8d27f9ac85be720960babdc8d450",
+      "bytes": 47034
+    },
+    {
+      "document": "quality-source/batch02/inputs.json",
+      "sha256": "935b462a241e0625283ca208c5ba792667152834608e59661d7af290de923db6",
+      "bytes": 48786
+    },
+    {
+      "document": "quality-source/batch03/source-inputs.json",
+      "sha256": "295389f57b549ea7877b1ad9ae8b8b86f9dac611ed0fa2793afb711f8769261e",
+      "bytes": 51582
+    },
+    {
+      "document": "original-source/batch04/manifest.json",
+      "sha256": "8a20ef1fe0bba1dcf4cf7bc595cbd11c7570065b832301f0d2a892aabd688447",
+      "bytes": 38564
+    }
+  ],
+  "source64": [
+    {
+      "id": "dist01_bone_filament_bolt",
+      "source": "selected/batch01/dist01_bone_filament_bolt.png",
+      "output": "assets/batch01/dist01_bone_filament_bolt.png",
+      "source_sha256": "502deb953207d37441164c919e00cd3ac660bbeb5a1602fc2e6eddef73748ea3",
+      "output_sha256": "502deb953207d37441164c919e00cd3ac660bbeb5a1602fc2e6eddef73748ea3",
+      "bytes": 1269920,
+      "byte_identical": true,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "685d36c6846451d35e04517efb6814b9f3cb425c169cdae54055ae2c05a0084b",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/0",
+        "concept_key": "batch01/dist01_bone_filament_bolt",
+        "sha256": "502deb953207d37441164c919e00cd3ac660bbeb5a1602fc2e6eddef73748ea3",
+        "decision": "upgrade",
+        "comparison": "Sharper projectile core and two tails",
+        "caveats": [
+          "Glow needs engine blending review.",
+          "Static image only; no game, GPU, animation, performance, or real-play verification."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch01/manifest.json",
+        "record_index": 1,
+        "id": "dist01_bone_filament_bolt",
+        "role": "projectile",
+        "prompt_or_description": "A single diagonal slender ivory bone-filament dart, braided silk tail and violet needle-like leading tip. Distinct long narrow projectile silhouette.",
+        "normalized_role": "projectile",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/0",
+        "asset_id": "dist01_bone_filament_bolt",
+        "scene_id": "02",
+        "scene_title": "거미동굴",
+        "zone_id": "dist01",
+        "boss_label": "보라검 천사",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "87618ce6038f157f7128cd52da4052b1dc75873869feac48a4a223975dffff4e"
+      }
+    },
+    {
+      "id": "dist01_snapped_silk_remnant",
+      "source": "selected/batch01/dist01_snapped_silk_remnant.png",
+      "output": "assets/batch01/dist01_snapped_silk_remnant.png",
+      "source_sha256": "c82413c123c1cdee34371cd4290e5cff0d6eb08cc1233bd8ecc70523c3f82090",
+      "output_sha256": "c82413c123c1cdee34371cd4290e5cff0d6eb08cc1233bd8ecc70523c3f82090",
+      "bytes": 1472341,
+      "byte_identical": true,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "e3ceb8d3c456051449aa59b247314105d239136cc2d2565b53b8bc11a6786db3",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/1",
+        "concept_key": "batch01/dist01_snapped_silk_remnant",
+        "sha256": "c82413c123c1cdee34371cd4290e5cff0d6eb08cc1233bd8ecc70523c3f82090",
+        "decision": "upgrade",
+        "comparison": "Larger web holes and distinct broken ends",
+        "caveats": [
+          "Still broad web silhouette, not narrow strip.",
+          "Static image only; no game, GPU, animation, performance, or real-play verification."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch01/manifest.json",
+        "record_index": 3,
+        "id": "dist01_snapped_silk_remnant",
+        "role": "remnant",
+        "prompt_or_description": "A broken angular strip of sticky ivory silk, three snapped filament ends curling away with faint violet residue. Asymmetric narrow ground remnant, not a web disk.",
+        "normalized_role": "residue",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/1",
+        "asset_id": "dist01_snapped_silk_remnant",
+        "scene_id": "02",
+        "scene_title": "거미동굴",
+        "zone_id": "dist01",
+        "boss_label": "보라검 천사",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "87618ce6038f157f7128cd52da4052b1dc75873869feac48a4a223975dffff4e"
+      }
+    },
+    {
+      "id": "dist01_violet_claw_contact",
+      "source": "selected/batch01/dist01_violet_claw_contact.png",
+      "output": "assets/batch01/dist01_violet_claw_contact.png",
+      "source_sha256": "254efd50e90721bedac103343c64bcbbf918c4490ba855207e68388e9df6083f",
+      "output_sha256": "254efd50e90721bedac103343c64bcbbf918c4490ba855207e68388e9df6083f",
+      "bytes": 1707811,
+      "byte_identical": true,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "620c8e18ac5988d3ca8ba4a9c217c2cef83ad16e6920c40937f1afd092222943",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/2",
+        "concept_key": "batch01/dist01_violet_claw_contact",
+        "sha256": "254efd50e90721bedac103343c64bcbbf918c4490ba855207e68388e9df6083f",
+        "decision": "upgrade",
+        "comparison": "Three clean tapered claw streaks; rubble removed",
+        "caveats": [
+          "Low-opacity pixels approach edge.",
+          "Static image only; no game, GPU, animation, performance, or real-play verification."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch01/manifest.json",
+        "record_index": 2,
+        "id": "dist01_violet_claw_contact",
+        "role": "impact",
+        "prompt_or_description": "Three short serrated violet claw-contact slash streaks crossing an ivory spark knot, staggered parallel hooked arcs, no hand or weapon. Compact hit flash.",
+        "normalized_role": "impact",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/2",
+        "asset_id": "dist01_violet_claw_contact",
+        "scene_id": "02",
+        "scene_title": "거미동굴",
+        "zone_id": "dist01",
+        "boss_label": "보라검 천사",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "87618ce6038f157f7128cd52da4052b1dc75873869feac48a4a223975dffff4e"
+      }
+    },
+    {
+      "id": "dist01_web_lane_warning_v2",
+      "source": "selected/batch01/dist01_web_lane_warning_v2.png",
+      "output": "assets/batch01/dist01_web_lane_warning_v2.png",
+      "source_sha256": "6748fa6e5cdf720369f2d2e24f0f67aa5de9d850373123a84c73e6195700b143",
+      "output_sha256": "6748fa6e5cdf720369f2d2e24f0f67aa5de9d850373123a84c73e6195700b143",
+      "bytes": 966857,
+      "byte_identical": true,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "0980931431bdf707406addf274bcf19c9d62e7e05e4f63cb425ebde84d9073fb",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/3",
+        "concept_key": "batch01/dist01_web_lane_warning",
+        "sha256": "6748fa6e5cdf720369f2d2e24f0f67aa5de9d850373123a84c73e6195700b143",
+        "decision": "upgrade",
+        "comparison": "Narrower eight-spoke warning silhouette",
+        "caveats": [
+          "Fine edge noise remains.",
+          "Static image only; no game, GPU, animation, performance, or real-play verification."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch01/manifest.json",
+        "record_index": 0,
+        "id": "dist01_web_lane_warning_v2",
+        "role": "ground_warning",
+        "prompt_or_description": "Eight-spoke bone-silk warning",
+        "normalized_role": "warning",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/3",
+        "asset_id": "dist01_web_lane_warning_v2",
+        "scene_id": "02",
+        "scene_title": "거미동굴",
+        "zone_id": "dist01",
+        "boss_label": "보라검 천사",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "87618ce6038f157f7128cd52da4052b1dc75873869feac48a4a223975dffff4e"
+      }
+    },
+    {
+      "id": "dist02_drag_groove_remnant",
+      "source": "selected/batch01/dist02_drag_groove_remnant.png",
+      "output": "assets/batch01/dist02_drag_groove_remnant.png",
+      "source_sha256": "e6ae24fad57ccf5a63bcfec73806f91ac004d0ae08ba74a4921f5d9874b17234",
+      "output_sha256": "e6ae24fad57ccf5a63bcfec73806f91ac004d0ae08ba74a4921f5d9874b17234",
+      "bytes": 2041194,
+      "byte_identical": true,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "fa787dd69653573267f3d9b62150ca7eff7766e62d78fe22576284225990dbc7",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/4",
+        "concept_key": "batch01/dist02_drag_groove_remnant",
+        "sha256": "e6ae24fad57ccf5a63bcfec73806f91ac004d0ae08ba74a4921f5d9874b17234",
+        "decision": "upgrade",
+        "comparison": "Standing reeds removed; three flat-readable grooves",
+        "caveats": [
+          "Shaded rim depth remains; strict orthographic projection not certified.",
+          "Static image only; no game, GPU, animation, performance, or real-play verification."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch01/manifest.json",
+        "record_index": 7,
+        "id": "dist02_drag_groove_remnant",
+        "role": "remnant",
+        "prompt_or_description": "Three short parallel muddy drag grooves with ragged black-green slurry edges and a few bent reeds, transparent gaps, isolated ground decal not a terrain tile.",
+        "normalized_role": "residue",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/4",
+        "asset_id": "dist02_drag_groove_remnant",
+        "scene_id": "03",
+        "scene_title": "늪지대의 뿔악마",
+        "zone_id": "dist02",
+        "boss_label": "뿔악마",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "e9823735e899825c17475b28711a9984a4296be2b9f8d63c64662da38561a146"
+      }
+    },
+    {
+      "id": "dist02_horn_charge_warning",
+      "source": "selected/batch01/dist02_horn_charge_warning.png",
+      "output": "assets/batch01/dist02_horn_charge_warning.png",
+      "source_sha256": "5120445ef7e78969dbad8865a2685249cf17373a35fe83cf11add15dbfdfb6ee",
+      "output_sha256": "5120445ef7e78969dbad8865a2685249cf17373a35fe83cf11add15dbfdfb6ee",
+      "bytes": 1597430,
+      "byte_identical": true,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "e451a1f31f49bc8fdd65d7eda29f8e5522469e878954ae3518b034cc8877526d",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/5",
+        "concept_key": "batch01/dist02_horn_charge_warning",
+        "sha256": "5120445ef7e78969dbad8865a2685249cf17373a35fe83cf11add15dbfdfb6ee",
+        "decision": "upgrade",
+        "comparison": "Sharper horn boundaries and contrast",
+        "caveats": [
+          "Glowing tips near edge.",
+          "Static image only; no game, GPU, animation, performance, or real-play verification."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch01/manifest.json",
+        "record_index": 4,
+        "id": "dist02_horn_charge_warning",
+        "role": "ground_warning",
+        "prompt_or_description": "Two parallel tapering forked horn-shaped warning lanes in muted ochre rim and black-green swamp energy. Open U-like pronged silhouette, wide transparent gap between lanes. No animal or horns as objects.",
+        "normalized_role": "warning",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/5",
+        "asset_id": "dist02_horn_charge_warning",
+        "scene_id": "03",
+        "scene_title": "늪지대의 뿔악마",
+        "zone_id": "dist02",
+        "boss_label": "뿔악마",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "e9823735e899825c17475b28711a9984a4296be2b9f8d63c64662da38561a146"
+      }
+    },
+    {
+      "id": "dist02_horn_splash_impact",
+      "source": "selected/batch01/dist02_horn_splash_impact.png",
+      "output": "assets/batch01/dist02_horn_splash_impact.png",
+      "source_sha256": "1314a6504969817a64b3f383d47aebcc77158c733d4b411026deb2a5bd687e8a",
+      "output_sha256": "1314a6504969817a64b3f383d47aebcc77158c733d4b411026deb2a5bd687e8a",
+      "bytes": 1121167,
+      "byte_identical": true,
+      "dimensions": [
+        1402,
+        1122
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "0cea64cfb37a4ff3616637f021f7967295270caf8efdb31771f52a1dd31f63d4",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/6",
+        "concept_key": "batch01/dist02_horn_splash_impact",
+        "sha256": "1314a6504969817a64b3f383d47aebcc77158c733d4b411026deb2a5bd687e8a",
+        "decision": "upgrade",
+        "comparison": "Clearer two-lobe horn splash",
+        "caveats": [
+          "Droplet count greater than requested.",
+          "Static image only; no game, GPU, animation, performance, or real-play verification."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch01/manifest.json",
+        "record_index": 6,
+        "id": "dist02_horn_splash_impact",
+        "role": "impact",
+        "prompt_or_description": "An upward twin-pronged horn-shaped splash of dark swamp liquid with ochre glints, few suspended muddy droplets. Sharp rising V silhouette, no demon or detached real horns.",
+        "normalized_role": "impact",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/6",
+        "asset_id": "dist02_horn_splash_impact",
+        "scene_id": "03",
+        "scene_title": "늪지대의 뿔악마",
+        "zone_id": "dist02",
+        "boss_label": "뿔악마",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "e9823735e899825c17475b28711a9984a4296be2b9f8d63c64662da38561a146"
+      }
+    },
+    {
+      "id": "dist02_reed_hand_projectile",
+      "source": "selected/batch01/dist02_reed_hand_projectile.png",
+      "output": "assets/batch01/dist02_reed_hand_projectile.png",
+      "source_sha256": "326bc61e02a00e13e139fb7de75c70759cc0306475c18c977544572092c23f8c",
+      "output_sha256": "326bc61e02a00e13e139fb7de75c70759cc0306475c18c977544572092c23f8c",
+      "bytes": 2034788,
+      "byte_identical": true,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "9029aa4a88570b9684b813d6a68deaf25291f2eefa5586042398c61df311dc5e",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/7",
+        "concept_key": "batch01/dist02_reed_hand_projectile",
+        "sha256": "326bc61e02a00e13e139fb7de75c70759cc0306475c18c977544572092c23f8c",
+        "decision": "upgrade",
+        "comparison": "Simplified five-finger reed projectile",
+        "caveats": [
+          "Not engine tested.",
+          "Static image only; no game, GPU, animation, performance, or real-play verification."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch01/manifest.json",
+        "record_index": 5,
+        "id": "dist02_reed_hand_projectile",
+        "role": "projectile",
+        "prompt_or_description": "One spectral grasping hand made entirely of black swamp reeds and teal muddy vapor, five tapered reed fingers reaching forward, trailing compact droplet stream. No body, no flesh.",
+        "normalized_role": "projectile",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/7",
+        "asset_id": "dist02_reed_hand_projectile",
+        "scene_id": "03",
+        "scene_title": "늪지대의 뿔악마",
+        "zone_id": "dist02",
+        "boss_label": "뿔악마",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "e9823735e899825c17475b28711a9984a4296be2b9f8d63c64662da38561a146"
+      }
+    },
+    {
+      "id": "dist05_cooling_whip_scorch",
+      "source": "selected/batch01/dist05_cooling_whip_scorch.png",
+      "output": "assets/batch01/dist05_cooling_whip_scorch.png",
+      "source_sha256": "026df4c61ac41bb57e51215d420ff4cea7ec9eafd8d0b2327cc6b35090e0e1e6",
+      "output_sha256": "026df4c61ac41bb57e51215d420ff4cea7ec9eafd8d0b2327cc6b35090e0e1e6",
+      "bytes": 1183217,
+      "byte_identical": true,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "b5f4ff4a7681b2e6225e8a5dc734cc819c335c20e5402c4c7a652b563fb6a7f4",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/8",
+        "concept_key": "batch01/dist05_cooling_whip_scorch",
+        "sha256": "026df4c61ac41bb57e51215d420ff4cea7ec9eafd8d0b2327cc6b35090e0e1e6",
+        "decision": "upgrade",
+        "comparison": "More visible charcoal/remnant contrast",
+        "caveats": [
+          "Loose pebbles and microdetail remain.",
+          "Static image only; no game, GPU, animation, performance, or real-play verification."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch01/manifest.json",
+        "record_index": 11,
+        "id": "dist05_cooling_whip_scorch",
+        "role": "remnant",
+        "prompt_or_description": "A thin asymmetric S-curved cooling whip scorch, charcoal crust broken by scattered dull red ember pockets. Transparent surrounding ground, no whole floor or ring.",
+        "normalized_role": "residue",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/8",
+        "asset_id": "dist05_cooling_whip_scorch",
+        "scene_id": "06",
+        "scene_title": "일곱 기둥",
+        "zone_id": "dist05",
+        "boss_label": "일곱 기둥",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "9a6afd9592c07da30028af39489e32994d67dcc8026c8f091a63c7e2ea030e6d"
+      }
+    },
+    {
+      "id": "dist05_ember_whip",
+      "source": "selected/batch01/dist05_ember_whip.png",
+      "output": "assets/batch01/dist05_ember_whip.png",
+      "source_sha256": "de9f5014de5489f0454269adef6fa32a51fdaec256e2e7240f7e6bf41cf7deab",
+      "output_sha256": "de9f5014de5489f0454269adef6fa32a51fdaec256e2e7240f7e6bf41cf7deab",
+      "bytes": 1412180,
+      "byte_identical": true,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "28cdcb4231ca45453af5c37b04cd21b11a55c8a5fecfd6bea0e9a5ad37369140",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/9",
+        "concept_key": "batch01/dist05_ember_whip",
+        "sha256": "de9f5014de5489f0454269adef6fa32a51fdaec256e2e7240f7e6bf41cf7deab",
+        "decision": "upgrade",
+        "comparison": "Cleaner continuous S whip core, loose rubble removed",
+        "caveats": [
+          "Broad glow and lower tip need integration review.",
+          "Static image only; no game, GPU, animation, performance, or real-play verification."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch01/manifest.json",
+        "record_index": 9,
+        "id": "dist05_ember_whip",
+        "role": "projectile",
+        "prompt_or_description": "One isolated curved S-shaped ember-whip stroke, bright thin orange spine and irregular charred edges, tapered tip and brief spark tail, no handle or wielder.",
+        "normalized_role": "projectile",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/9",
+        "asset_id": "dist05_ember_whip",
+        "scene_id": "06",
+        "scene_title": "일곱 기둥",
+        "zone_id": "dist05",
+        "boss_label": "일곱 기둥",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "9a6afd9592c07da30028af39489e32994d67dcc8026c8f091a63c7e2ea030e6d"
+      }
+    },
+    {
+      "id": "dist05_seven_heat_warning",
+      "source": "selected/batch01/dist05_seven_heat_warning.png",
+      "output": "assets/batch01/dist05_seven_heat_warning.png",
+      "source_sha256": "c802a09c1d88adb1ff19fabd7b78fae27dd60354ccbce5f89fdfd3c04cb228ba",
+      "output_sha256": "c802a09c1d88adb1ff19fabd7b78fae27dd60354ccbce5f89fdfd3c04cb228ba",
+      "bytes": 1252483,
+      "byte_identical": true,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "bf45cf9faac0701bbbce42b104cb4c893fbf7aa4331227fdf8efc758da2bd611",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/10",
+        "concept_key": "batch01/dist05_seven_heat_warning",
+        "sha256": "c802a09c1d88adb1ff19fabd7b78fae27dd60354ccbce5f89fdfd3c04cb228ba",
+        "decision": "upgrade",
+        "comparison": "Seven disconnected nodes, connecting lightning removed",
+        "caveats": [
+          "Cracks remain detailed; glow needs blending review.",
+          "Static image only; no game, GPU, animation, performance, or real-play verification."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch01/manifest.json",
+        "record_index": 8,
+        "id": "dist05_seven_heat_warning",
+        "role": "ground_warning",
+        "prompt_or_description": "Exactly seven separated angular ember nodes aligned on a broken zigzag heat lane, dim orange coal cores and crisp amber boundaries. No connecting circle, no pillars, no chain.",
+        "normalized_role": "warning",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/10",
+        "asset_id": "dist05_seven_heat_warning",
+        "scene_id": "06",
+        "scene_title": "일곱 기둥",
+        "zone_id": "dist05",
+        "boss_label": "일곱 기둥",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "9a6afd9592c07da30028af39489e32994d67dcc8026c8f091a63c7e2ea030e6d"
+      }
+    },
+    {
+      "id": "dist05_split_stone_impact",
+      "source": "selected/batch01/dist05_split_stone_impact.png",
+      "output": "assets/batch01/dist05_split_stone_impact.png",
+      "source_sha256": "ab057d3698da806594bf565ede061a5b3e735c51c30d95997a0745e9e025d381",
+      "output_sha256": "ab057d3698da806594bf565ede061a5b3e735c51c30d95997a0745e9e025d381",
+      "bytes": 1905454,
+      "byte_identical": true,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "4e4c2dac48ba2e2632b139ab989cb3e2e87418b32ab54bd9846d4d660d5606d1",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/11",
+        "concept_key": "batch01/dist05_split_stone_impact",
+        "sha256": "ab057d3698da806594bf565ede061a5b3e735c51c30d95997a0745e9e025d381",
+        "decision": "upgrade",
+        "comparison": "Three major stone fragments and five total pieces",
+        "caveats": [
+          "Large effect, not as compact as requested.",
+          "Static image only; no game, GPU, animation, performance, or real-play verification."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch01/manifest.json",
+        "record_index": 10,
+        "id": "dist05_split_stone_impact",
+        "role": "impact",
+        "prompt_or_description": "One compact diagonal whip strike bursting through a few floating angular charcoal stone chips, orange slit of heat and two short sparks. No ground plane or wall.",
+        "normalized_role": "impact",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/11",
+        "asset_id": "dist05_split_stone_impact",
+        "scene_id": "06",
+        "scene_title": "일곱 기둥",
+        "zone_id": "dist05",
+        "boss_label": "일곱 기둥",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "9a6afd9592c07da30028af39489e32994d67dcc8026c8f091a63c7e2ea030e6d"
+      }
+    },
+    {
+      "id": "dist06_fireball_landing_crown",
+      "source": "selected/batch01/dist06_fireball_landing_crown.png",
+      "output": "assets/batch01/dist06_fireball_landing_crown.png",
+      "source_sha256": "0f1986cb85efd1b5b01ec46dc2fdb54b94ddaf81b30f7f109ee328dfc1df48e2",
+      "output_sha256": "0f1986cb85efd1b5b01ec46dc2fdb54b94ddaf81b30f7f109ee328dfc1df48e2",
+      "bytes": 1833043,
+      "byte_identical": true,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "d97ad071f645bcde47d6f805de37412b4eb5038e7f5f30539987867c6a4348b6",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/12",
+        "concept_key": "batch01/dist06_fireball_landing_crown",
+        "sha256": "0f1986cb85efd1b5b01ec46dc2fdb54b94ddaf81b30f7f109ee328dfc1df48e2",
+        "decision": "upgrade",
+        "comparison": "Simplified crown and fewer large droplets",
+        "caveats": [
+          "Six flame tongues not reliably countable; not animation.",
+          "Static image only; no game, GPU, animation, performance, or real-play verification."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch01/manifest.json",
+        "record_index": 14,
+        "id": "dist06_fireball_landing_crown",
+        "role": "impact",
+        "prompt_or_description": "A compact fireball impact crown with six unequal upward tongues of orange-white flame, dark molten droplets at base, open transparent center, no meteor or ground plane.",
+        "normalized_role": "impact",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/12",
+        "asset_id": "dist06_fireball_landing_crown",
+        "scene_id": "07",
+        "scene_title": "추락",
+        "zone_id": "dist06",
+        "boss_label": "발록",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "ae138b5da7963881ff11c8867aee3791e22609774da0ba46afd3032259af8c0c"
+      }
+    },
+    {
+      "id": "dist06_molten_cleave_scar",
+      "source": "selected/batch01/dist06_molten_cleave_scar.png",
+      "output": "assets/batch01/dist06_molten_cleave_scar.png",
+      "source_sha256": "4611a5a712aaabc51c8156b19b06adba91336adb734c982a25fe448b6e4e4bb5",
+      "output_sha256": "4611a5a712aaabc51c8156b19b06adba91336adb734c982a25fe448b6e4e4bb5",
+      "bytes": 420967,
+      "byte_identical": true,
+      "dimensions": [
+        1774,
+        887
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "440b4728a0b9765cc98908d83fd7ddde3b8f9b74119bf339ef344d87ed6b9595",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/13",
+        "concept_key": "batch01/dist06_molten_cleave_scar",
+        "sha256": "4611a5a712aaabc51c8156b19b06adba91336adb734c982a25fe448b6e4e4bb5",
+        "decision": "upgrade",
+        "comparison": "Five disconnected crust islands; thorns/debris removed",
+        "caveats": [
+          "Surface remains finely textured.",
+          "Static image only; no game, GPU, animation, performance, or real-play verification."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch01/manifest.json",
+        "record_index": 15,
+        "id": "dist06_molten_cleave_scar",
+        "role": "remnant",
+        "prompt_or_description": "A long narrow segmented molten cleave scar, five irregular separated black crust islands with red-orange seams along a slightly bent line, transparent gaps and surroundings, no floor tile.",
+        "normalized_role": "residue",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/13",
+        "asset_id": "dist06_molten_cleave_scar",
+        "scene_id": "07",
+        "scene_title": "추락",
+        "zone_id": "dist06",
+        "boss_label": "발록",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "ae138b5da7963881ff11c8867aee3791e22609774da0ba46afd3032259af8c0c"
+      }
+    },
+    {
+      "id": "dist06_spatial_cleave_warning",
+      "source": "selected/batch01/dist06_spatial_cleave_warning.png",
+      "output": "assets/batch01/dist06_spatial_cleave_warning.png",
+      "source_sha256": "10c3b6acc6a68cdd8dba3b8c1349065063bc6169aea264fc7749e9dc0e51a5ab",
+      "output_sha256": "10c3b6acc6a68cdd8dba3b8c1349065063bc6169aea264fc7749e9dc0e51a5ab",
+      "bytes": 1598388,
+      "byte_identical": true,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "5a79571798401d5bcbc3d107ebaa1da7215096ea4d7cea69f048a7f34b4fa4df",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/14",
+        "concept_key": "batch01/dist06_spatial_cleave_warning",
+        "sha256": "10c3b6acc6a68cdd8dba3b8c1349065063bc6169aea264fc7749e9dc0e51a5ab",
+        "decision": "upgrade",
+        "comparison": "Open rear wedge and simplified center",
+        "caveats": [
+          "Broad glow needs blending review.",
+          "Static image only; no game, GPU, animation, performance, or real-play verification."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch01/manifest.json",
+        "record_index": 12,
+        "id": "dist06_spatial_cleave_warning",
+        "role": "ground_warning",
+        "prompt_or_description": "A sharply tapered triangular wedge attack-warning composed of two separated jagged red-orange boundary strokes and a central narrow black-violet spatial crack. Interior mostly transparent, no filled disk or ring.",
+        "normalized_role": "warning",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/14",
+        "asset_id": "dist06_spatial_cleave_warning",
+        "scene_id": "07",
+        "scene_title": "추락",
+        "zone_id": "dist06",
+        "boss_label": "발록",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "ae138b5da7963881ff11c8867aee3791e22609774da0ba46afd3032259af8c0c"
+      }
+    },
+    {
+      "id": "dist06_sword_space_fissure",
+      "source": "selected/batch01/dist06_sword_space_fissure.png",
+      "output": "assets/batch01/dist06_sword_space_fissure.png",
+      "source_sha256": "d0af96fa959b1489eddab16c84c1b5c709191024e8612e000d2bf0c271efaf29",
+      "output_sha256": "d0af96fa959b1489eddab16c84c1b5c709191024e8612e000d2bf0c271efaf29",
+      "bytes": 1645699,
+      "byte_identical": true,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "d6428be9f676d3edc53fbbca05146fda6c7735b21dcc0c57a3a373496d81e26d",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/15",
+        "concept_key": "batch01/dist06_sword_space_fissure",
+        "sha256": "d0af96fa959b1489eddab16c84c1b5c709191024e8612e000d2bf0c271efaf29",
+        "decision": "upgrade",
+        "comparison": "Two separated slits; debris reduced to four large shards",
+        "caveats": [
+          "Some fine cracks remain.",
+          "Static image only; no game, GPU, animation, performance, or real-play verification."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch01/manifest.json",
+        "record_index": 13,
+        "id": "dist06_sword_space_fissure",
+        "role": "projectile",
+        "prompt_or_description": "Two parallel diagonal razor-thin spatial fissures, black-violet cores bounded by incandescent orange-white cut edges; a few angular glasslike void fragments. No sword, no wielder, no scene.",
+        "normalized_role": "projectile",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/15",
+        "asset_id": "dist06_sword_space_fissure",
+        "scene_id": "07",
+        "scene_title": "추락",
+        "zone_id": "dist06",
+        "boss_label": "발록",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "ae138b5da7963881ff11c8867aee3791e22609774da0ba46afd3032259af8c0c"
+      }
+    },
+    {
+      "id": "ep1b03_leviathan_impact",
+      "source": "selected/batch02/ep1b03_leviathan_impact.png",
+      "output": "assets/batch02/ep1b03_leviathan_impact.png",
+      "source_sha256": "cf368d19c6485846c63900b7d77f6daca38ae1ba7811c3b29d5bccaf26478dea",
+      "output_sha256": "cf368d19c6485846c63900b7d77f6daca38ae1ba7811c3b29d5bccaf26478dea",
+      "bytes": 1807704,
+      "byte_identical": true,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "239677ec2e38f4090572853bdee67ccd179c1c649b12ef7331e4b8af0feaf38a",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/16",
+        "concept_key": "batch02/ep1b03_leviathan_impact",
+        "sha256": "cf368d19c6485846c63900b7d77f6daca38ae1ba7811c3b29d5bccaf26478dea",
+        "decision": "upgrade",
+        "comparison": "Sharper dominant X and larger clear glass planes; output aspect changed to3:2; billboard, not ground.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "quality-source/batch02/inputs.json",
+        "record_index": 0,
+        "id": "ep1b03_leviathan_impact",
+        "role": "impact",
+        "prompt_or_description": "One isolated dark-fantasy hand-painted action-RPG static VFX asset inspired by envy boss Leviathan in a mirror house. Crossed lens-cut impact: two unequal diagonal razor-glass cuts crossing at an off-center luminous jade point, four large broken lens shards, not a fan. 2:1 isometric billboard effect viewed obliquely. Transparent background with actual alpha. Entire effect including all glow fits central60%of canvas leaving20%fully empty margins all sides. No text, UI, characters, landscape, rectangular background, watermark. Restrained glow, clear silhouette, not an icon or sheet.",
+        "normalized_role": "impact",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/16",
+        "asset_id": "ep1b03_leviathan_impact",
+        "scene_id": "15",
+        "scene_title": "금이 간 안경",
+        "zone_id": "ep1b03",
+        "boss_label": "leviathan",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "debeda777f96589a04799036bfb5744244420f23f3c850178b79f73d03da56c6"
+      }
+    },
+    {
+      "id": "ep1b03_leviathan_projectile",
+      "source": "selected/batch02/ep1b03_leviathan_projectile.png",
+      "output": "assets/batch02/ep1b03_leviathan_projectile.png",
+      "source_sha256": "635c9dadfbac472a29a38c8ef60aba2234c38bd5428e2c082e9be71210d23f57",
+      "output_sha256": "635c9dadfbac472a29a38c8ef60aba2234c38bd5428e2c082e9be71210d23f57",
+      "bytes": 772161,
+      "byte_identical": true,
+      "dimensions": [
+        1774,
+        887
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "1e05df333babd1a2c60370e83f3ce9f23c8b116c0ba220f211188e468d8e5d31",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/17",
+        "concept_key": "batch02/ep1b03_leviathan_projectile",
+        "sha256": "635c9dadfbac472a29a38c8ef60aba2234c38bd5428e2c082e9be71210d23f57",
+        "decision": "upgrade",
+        "comparison": "Stronger tip and clearer coherent facets; ornamental coil retained; thin tail margins remain.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "quality-source/batch02/inputs.json",
+        "record_index": 1,
+        "id": "ep1b03_leviathan_projectile",
+        "role": "projectile",
+        "prompt_or_description": "One isolated dark-fantasy hand-painted action-RPG static VFX asset inspired by envy boss Leviathan in a mirror house. Single snake-glass lance projectile: elongated jade glass spear with a restrained twisting serpent contour through its shaft, tiny silver knife facets, concise trailing streak. No snake character. 2:1 isometric billboard effect viewed obliquely. Transparent background with actual alpha. Entire effect including all glow fits central60%of canvas leaving20%fully empty margins all sides. No text, UI, characters, landscape, rectangular background, watermark. Restrained glow, clear silhouette, not an icon or sheet.",
+        "normalized_role": "projectile",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/17",
+        "asset_id": "ep1b03_leviathan_projectile",
+        "scene_id": "15",
+        "scene_title": "금이 간 안경",
+        "zone_id": "ep1b03",
+        "boss_label": "leviathan",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "debeda777f96589a04799036bfb5744244420f23f3c850178b79f73d03da56c6"
+      }
+    },
+    {
+      "id": "ep1b03_leviathan_remnant",
+      "source": "selected/batch02/ep1b03_leviathan_remnant.png",
+      "output": "assets/batch02/ep1b03_leviathan_remnant.png",
+      "source_sha256": "99eb2fad4da8233dec7cd965d14b29c21c2ebb0522a65b53c8cdc85c30e16e25",
+      "output_sha256": "99eb2fad4da8233dec7cd965d14b29c21c2ebb0522a65b53c8cdc85c30e16e25",
+      "bytes": 1748124,
+      "byte_identical": true,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "f5759b7f73fdba8afba71581a9c733b49f4303d39dfa2bd0dc71bca6df81788b",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/18",
+        "concept_key": "batch02/ep1b03_leviathan_remnant",
+        "sha256": "99eb2fad4da8233dec7cd965d14b29c21c2ebb0522a65b53c8cdc85c30e16e25",
+        "decision": "upgrade",
+        "comparison": "Fewer tiny shards and more legible two-cluster structure; top alpha64 margin remains38px, not strict safe-padding pass.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "quality-source/batch02/inputs.json",
+        "record_index": 2,
+        "id": "ep1b03_leviathan_remnant",
+        "role": "remnant",
+        "prompt_or_description": "One isolated dark-fantasy hand-painted action-RPG static VFX asset inspired by envy boss Leviathan in a mirror house. Two DISCONNECTED cracked spectacle lens-shard patches, cold jade silver, angular fragments with large transparent gap between patches, subdued residual glow. True orthographic overhead ground decal. No floor. Transparent background with actual alpha. Entire effect including all glow fits central60%of canvas leaving20%fully empty margins all sides. No text, UI, characters, landscape, rectangular background, watermark. Restrained glow, clear silhouette, not an icon or sheet.",
+        "normalized_role": "residue",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/18",
+        "asset_id": "ep1b03_leviathan_remnant",
+        "scene_id": "15",
+        "scene_title": "금이 간 안경",
+        "zone_id": "ep1b03",
+        "boss_label": "leviathan",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "debeda777f96589a04799036bfb5744244420f23f3c850178b79f73d03da56c6"
+      }
+    },
+    {
+      "id": "ep1b03_leviathan_warning_v2",
+      "source": "selected/batch02/ep1b03_leviathan_warning_v2.png",
+      "output": "assets/batch02/ep1b03_leviathan_warning_v2.png",
+      "source_sha256": "c24c90ab153aec5bed7d5a73c7980a66a6fde8e1c694225d4aa993ef93811adb",
+      "output_sha256": "c24c90ab153aec5bed7d5a73c7980a66a6fde8e1c694225d4aa993ef93811adb",
+      "bytes": 1582696,
+      "byte_identical": true,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "selection": "retained_original",
+      "prior_original_sha256": "c24c90ab153aec5bed7d5a73c7980a66a6fde8e1c694225d4aa993ef93811adb",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/19",
+        "concept_key": "batch02/ep1b03_leviathan_warning",
+        "sha256": "c24c90ab153aec5bed7d5a73c7980a66a6fde8e1c694225d4aa993ef93811adb",
+        "decision": "retained_original",
+        "comparison": "Edited rings become cleaner but less broken and wider/tighter; no unambiguous net gameplay improvement.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "quality-source/batch02/inputs.json",
+        "record_index": 3,
+        "id": "ep1b03_leviathan_warning_v2",
+        "role": "warning",
+        "prompt_or_description": "Create one transparent static dark fantasy action RPG ground warning sprite: two fractured jade glass spectacle lens outlines joined by a subtle serpentine bridge, silver glass spikes. True orthographic overhead, not tilted. The ENTIRE combined effect must fit within the central 65 percent of the canvas width AND height, leaving at least 17 percent absolutely empty transparent margin on EACH side. Compact paired circles, clear transparent interiors, restrained luminous jade rim, no surrounding particles. High detail painted glass, clean readable silhouette. No text, UI, floor, characters, background, watermark. This is an isolated visual effects art asset, not an item icon.",
+        "normalized_role": "warning",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/19",
+        "asset_id": "ep1b03_leviathan_warning_v2",
+        "scene_id": "15",
+        "scene_title": "금이 간 안경",
+        "zone_id": "ep1b03",
+        "boss_label": "leviathan",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "debeda777f96589a04799036bfb5744244420f23f3c850178b79f73d03da56c6"
+      }
+    },
+    {
+      "id": "ep1b04_beelzebub_impact",
+      "source": "selected/batch02/ep1b04_beelzebub_impact.png",
+      "output": "assets/batch02/ep1b04_beelzebub_impact.png",
+      "source_sha256": "ea0b6f79a5ea3435ddd76a15b053e16be235c413fc8630f5b18f94b734872012",
+      "output_sha256": "ea0b6f79a5ea3435ddd76a15b053e16be235c413fc8630f5b18f94b734872012",
+      "bytes": 1059505,
+      "byte_identical": true,
+      "dimensions": [
+        1774,
+        887
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "db01060e030181d9187e4a41bdc0f3de76893105b45493e503571cacc7c63fd7",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/20",
+        "concept_key": "batch02/ep1b04_beelzebub_impact",
+        "sha256": "ea0b6f79a5ea3435ddd76a15b053e16be235c413fc8630f5b18f94b734872012",
+        "decision": "upgrade",
+        "comparison": "More organized contact center and coherent wedge forms with contained visible bounds; oblique billboard, not overhead.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "quality-source/batch02/inputs.json",
+        "record_index": 4,
+        "id": "ep1b04_beelzebub_impact",
+        "role": "impact",
+        "prompt_or_description": "Generate ONE transparent static dark fantasy RPG VFX sprite inspired by Beelzebub's hotel kitchen dream. Pan-concussion impact: flattened concave metallic shock flash with offset pan rim and blunt pressure crescents in amber and sickly yellow, not a fire explosion. 2:1 isometric billboard. Single compact effect placed in the central HALF of canvas, huge empty transparent border on every side, no diffuse halo outside shape, no background pixels. Painted material, strong small-scale silhouette. No characters, text, UI, floor, scene, watermark. Actual alpha transparency.",
+        "normalized_role": "impact",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/20",
+        "asset_id": "ep1b04_beelzebub_impact",
+        "scene_id": "16",
+        "scene_title": "탐식의 주방",
+        "zone_id": "ep1b04",
+        "boss_label": "beelzebub",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "ada06257f4511b42dbc3cca58b916cecf616027fa584b722e9cb7e8b21b20988"
+      }
+    },
+    {
+      "id": "ep1b04_beelzebub_projectile",
+      "source": "selected/batch02/ep1b04_beelzebub_projectile.png",
+      "output": "assets/batch02/ep1b04_beelzebub_projectile.png",
+      "source_sha256": "b818cbd615fbbc3255ddde779517844b30a0497a06a4adb0d5f16ff76c95b387",
+      "output_sha256": "b818cbd615fbbc3255ddde779517844b30a0497a06a4adb0d5f16ff76c95b387",
+      "bytes": 738102,
+      "byte_identical": true,
+      "dimensions": [
+        1774,
+        887
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "c9af30b39c4980ee688c8b201c74894458630be5c13f3c20ae4c9a1100d4f7b2",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/21",
+        "concept_key": "batch02/ep1b04_beelzebub_projectile",
+        "sha256": "b818cbd615fbbc3255ddde779517844b30a0497a06a4adb0d5f16ff76c95b387",
+        "decision": "upgrade",
+        "comparison": "Broad legible cleaver face and concise edge arc; substantial clear padding; tiny texture remains.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "quality-source/batch02/inputs.json",
+        "record_index": 5,
+        "id": "ep1b04_beelzebub_projectile",
+        "role": "projectile",
+        "prompt_or_description": "Generate ONE transparent static dark fantasy RPG VFX sprite inspired by Beelzebub's hotel kitchen dream. One spectral kitchen cleaver flying diagonally, weathered steel blade with translucent yellow-green edge and short dark-amber streak. No hands. 2:1 isometric billboard. Single compact effect placed in the central HALF of canvas, huge empty transparent border on every side, no diffuse halo outside shape, no background pixels. Painted material, strong small-scale silhouette. No characters, text, UI, floor, scene, watermark. Actual alpha transparency.",
+        "normalized_role": "projectile",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/21",
+        "asset_id": "ep1b04_beelzebub_projectile",
+        "scene_id": "16",
+        "scene_title": "탐식의 주방",
+        "zone_id": "ep1b04",
+        "boss_label": "beelzebub",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "ada06257f4511b42dbc3cca58b916cecf616027fa584b722e9cb7e8b21b20988"
+      }
+    },
+    {
+      "id": "ep1b04_beelzebub_remnant",
+      "source": "selected/batch02/ep1b04_beelzebub_remnant.png",
+      "output": "assets/batch02/ep1b04_beelzebub_remnant.png",
+      "source_sha256": "bd0bb3dc587fef895f48013c517f33d7f1827c9fbae359c22f639a952689b153",
+      "output_sha256": "bd0bb3dc587fef895f48013c517f33d7f1827c9fbae359c22f639a952689b153",
+      "bytes": 1394459,
+      "byte_identical": true,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "selection": "retained_original",
+      "prior_original_sha256": "bd0bb3dc587fef895f48013c517f33d7f1827c9fbae359c22f639a952689b153",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/22",
+        "concept_key": "batch02/ep1b04_beelzebub_remnant",
+        "sha256": "bd0bb3dc587fef895f48013c517f33d7f1827c9fbae359c22f639a952689b153",
+        "decision": "retained_original",
+        "comparison": "Edit retains foamy microstructure and low bottom margin; no sufficient net readability gain established.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "quality-source/batch02/inputs.json",
+        "record_index": 6,
+        "id": "ep1b04_beelzebub_remnant",
+        "role": "remnant",
+        "prompt_or_description": "Generate ONE transparent static dark fantasy RPG VFX sprite inspired by Beelzebub's hotel kitchen dream. Three clearly separated caustic spatter islands of yellow-green toxic droplets, mottled acid texture, no mist plume, no floor. True overhead ground decal. Single compact effect placed in the central HALF of canvas, huge empty transparent border on every side, no diffuse halo outside shape, no background pixels. Painted material, strong small-scale silhouette. No characters, text, UI, floor, scene, watermark. Actual alpha transparency.",
+        "normalized_role": "residue",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/22",
+        "asset_id": "ep1b04_beelzebub_remnant",
+        "scene_id": "16",
+        "scene_title": "탐식의 주방",
+        "zone_id": "ep1b04",
+        "boss_label": "beelzebub",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "ada06257f4511b42dbc3cca58b916cecf616027fa584b722e9cb7e8b21b20988"
+      }
+    },
+    {
+      "id": "ep1b04_beelzebub_warning",
+      "source": "selected/batch02/ep1b04_beelzebub_warning.png",
+      "output": "assets/batch02/ep1b04_beelzebub_warning.png",
+      "source_sha256": "1339efdfc97be1177101d34a49fc26774551b847335821a6d0fcb4d09f0cd3a3",
+      "output_sha256": "1339efdfc97be1177101d34a49fc26774551b847335821a6d0fcb4d09f0cd3a3",
+      "bytes": 536218,
+      "byte_identical": true,
+      "dimensions": [
+        1774,
+        887
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "ceb38d634ac9c284a00fd6505eca7e2e46c0feb286f876720bfc4176e9a40e43",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/23",
+        "concept_key": "batch02/ep1b04_beelzebub_warning",
+        "sha256": "1339efdfc97be1177101d34a49fc26774551b847335821a6d0fcb4d09f0cd3a3",
+        "decision": "upgrade",
+        "comparison": "Hollow cleaver endpoint better separates warning from solid projectile; two clearly separated rails and good core padding; acid decoration remains.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "quality-source/batch02/inputs.json",
+        "record_index": 7,
+        "id": "ep1b04_beelzebub_warning",
+        "role": "warning",
+        "prompt_or_description": "Generate ONE transparent static dark fantasy RPG VFX sprite inspired by Beelzebub's hotel kitchen dream. Narrow cleaver-lane warning, two parallel broken amber lines and a compact ghost cleaver-head silhouette indicating the terminating cut; stained yellow-green sparse droplets. True overhead ground decal. Single compact effect placed in the central HALF of canvas, huge empty transparent border on every side, no diffuse halo outside shape, no background pixels. Painted material, strong small-scale silhouette. No characters, text, UI, floor, scene, watermark. Actual alpha transparency.",
+        "normalized_role": "warning",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/23",
+        "asset_id": "ep1b04_beelzebub_warning",
+        "scene_id": "16",
+        "scene_title": "탐식의 주방",
+        "zone_id": "ep1b04",
+        "boss_label": "beelzebub",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "ada06257f4511b42dbc3cca58b916cecf616027fa584b722e9cb7e8b21b20988"
+      }
+    },
+    {
+      "id": "ep1b05_asmodeus_impact",
+      "source": "selected/batch02/ep1b05_asmodeus_impact.png",
+      "output": "assets/batch02/ep1b05_asmodeus_impact.png",
+      "source_sha256": "8fd470b70769db462cca1adea203eb1d59a388c07ef462e647613b947e5de925",
+      "output_sha256": "8fd470b70769db462cca1adea203eb1d59a388c07ef462e647613b947e5de925",
+      "bytes": 1581574,
+      "byte_identical": true,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "e74f43015e0cb2245f4a3c62da48e73a7a5b042b4029d1ba23c0dca9122ce8b4",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/24",
+        "concept_key": "batch02/ep1b05_asmodeus_impact",
+        "sha256": "8fd470b70769db462cca1adea203eb1d59a388c07ef462e647613b947e5de925",
+        "decision": "upgrade",
+        "comparison": "Cleaner barbed loop and dominant diagonal impact; improved vertical core padding, but side tips still tight. Aspect changed3:2.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "quality-source/batch02/inputs.json",
+        "record_index": 8,
+        "id": "ep1b05_asmodeus_impact",
+        "role": "impact",
+        "prompt_or_description": "One isolated static dark fantasy action RPG skill effect art, Asmodeus red stage dream theme. Pink-white coercion flash impact, sharp asymmetric flash with ONE barbed red filament winding around its edge, no heart symbols, no victim; oblique2:1isometric billboard. Transparent actual alpha background. All shapes and glow occupy central50%of canvas with generous fully empty border on all four sides. Subtle crisp edge glow only, no diffuse fog. Hand-painted premium game VFX, readable silhouette, no text, UI, scene, floor, people, watermark. Single asset, not a sheet.",
+        "normalized_role": "impact",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/24",
+        "asset_id": "ep1b05_asmodeus_impact",
+        "scene_id": "17",
+        "scene_title": "붉은 하이힐",
+        "zone_id": "ep1b05",
+        "boss_label": "asmodeus",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "b45b46e228857fee87d6b186ee669c169b81d0ed2b80ebba1e674b3035c85af7"
+      }
+    },
+    {
+      "id": "ep1b05_asmodeus_projectile",
+      "source": "selected/batch02/ep1b05_asmodeus_projectile.png",
+      "output": "assets/batch02/ep1b05_asmodeus_projectile.png",
+      "source_sha256": "352d2e0df09c19e31170e8081d8e8448892cc6299f3781da13c076be17d19da7",
+      "output_sha256": "352d2e0df09c19e31170e8081d8e8448892cc6299f3781da13c076be17d19da7",
+      "bytes": 1666365,
+      "byte_identical": true,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "ce31428e2431772fdb7c3e228642673bf72af70588ee758fe92afb489e3d36c1",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/25",
+        "concept_key": "batch02/ep1b05_asmodeus_projectile",
+        "sha256": "352d2e0df09c19e31170e8081d8e8448892cc6299f3781da13c076be17d19da7",
+        "decision": "upgrade",
+        "comparison": "Larger coherent facets and readable heel/toe; aspect changed3:2; ornamental silhouette remains.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "quality-source/batch02/inputs.json",
+        "record_index": 9,
+        "id": "ep1b05_asmodeus_projectile",
+        "role": "projectile",
+        "prompt_or_description": "One isolated static dark fantasy action RPG skill effect art, Asmodeus red stage dream theme. ONE red heel-shaped blade bolt: an abstract crimson glass high-heel profile stretched into a blade, no foot or wearer, one short pink streak; oblique2:1isometric billboard. Transparent actual alpha background. All shapes and glow occupy central50%of canvas with generous fully empty border on all four sides. Subtle crisp edge glow only, no diffuse fog. Hand-painted premium game VFX, readable silhouette, no text, UI, scene, floor, people, watermark. Single asset, not a sheet.",
+        "normalized_role": "projectile",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/25",
+        "asset_id": "ep1b05_asmodeus_projectile",
+        "scene_id": "17",
+        "scene_title": "붉은 하이힐",
+        "zone_id": "ep1b05",
+        "boss_label": "asmodeus",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "b45b46e228857fee87d6b186ee669c169b81d0ed2b80ebba1e674b3035c85af7"
+      }
+    },
+    {
+      "id": "ep1b05_asmodeus_remnant",
+      "source": "selected/batch02/ep1b05_asmodeus_remnant.png",
+      "output": "assets/batch02/ep1b05_asmodeus_remnant.png",
+      "source_sha256": "679ecbaa48a5955bae35d048f326659c6a967a1595dc2f65be018962ff44c69e",
+      "output_sha256": "679ecbaa48a5955bae35d048f326659c6a967a1595dc2f65be018962ff44c69e",
+      "bytes": 1896529,
+      "byte_identical": true,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "1e74aa5ef2a4b1c116b2b223cb828746454ce0145c14876e8b090a199350a83c",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/26",
+        "concept_key": "batch02/ep1b05_asmodeus_remnant",
+        "sha256": "679ecbaa48a5955bae35d048f326659c6a967a1595dc2f65be018962ff44c69e",
+        "decision": "upgrade",
+        "comparison": "Removed hanging jewelry beads; damaged thorn loops better convey dangerous remnants; roses remain and core top margin47px.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "quality-source/batch02/inputs.json",
+        "record_index": 10,
+        "id": "ep1b05_asmodeus_remnant",
+        "role": "remnant",
+        "prompt_or_description": "One isolated static dark fantasy action RPG skill effect art, Asmodeus red stage dream theme. Slack puppet-thread residue: three collapsed loose translucent rose threads and small red glass knots, inert tangled curves rather than cut action, true overhead ground decal. No puppet or body. Transparent actual alpha background. All shapes and glow occupy central50%of canvas with generous fully empty border on all four sides. Subtle crisp edge glow only, no diffuse fog. Hand-painted premium game VFX, readable silhouette, no text, UI, scene, floor, people, watermark. Single asset, not a sheet.",
+        "normalized_role": "residue",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/26",
+        "asset_id": "ep1b05_asmodeus_remnant",
+        "scene_id": "17",
+        "scene_title": "붉은 하이힐",
+        "zone_id": "ep1b05",
+        "boss_label": "asmodeus",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "b45b46e228857fee87d6b186ee669c169b81d0ed2b80ebba1e674b3035c85af7"
+      }
+    },
+    {
+      "id": "ep1b05_asmodeus_warning",
+      "source": "selected/batch02/ep1b05_asmodeus_warning.png",
+      "output": "assets/batch02/ep1b05_asmodeus_warning.png",
+      "source_sha256": "1f40afd97b67d468c6abac86d3c125c435c374a9ed6b86dfc382f65a5a09a581",
+      "output_sha256": "1f40afd97b67d468c6abac86d3c125c435c374a9ed6b86dfc382f65a5a09a581",
+      "bytes": 1714539,
+      "byte_identical": true,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "selection": "retained_original",
+      "prior_original_sha256": "1f40afd97b67d468c6abac86d3c125c435c374a9ed6b86dfc382f65a5a09a581",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/27",
+        "concept_key": "batch02/ep1b05_asmodeus_warning",
+        "sha256": "1f40afd97b67d468c6abac86d3c125c435c374a9ed6b86dfc382f65a5a09a581",
+        "decision": "retained_original",
+        "comparison": "Edit looks cleaner but enlarges fan too far toward right and bottom; no clear net padding/readability gain.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "quality-source/batch02/inputs.json",
+        "record_index": 11,
+        "id": "ep1b05_asmodeus_warning",
+        "role": "warning",
+        "prompt_or_description": "One isolated static dark fantasy action RPG skill effect art, Asmodeus red stage dream theme. Heel-blade fan warning: three slim red pointed heel-shaped ray lanes spread from one origin, broken pink outlines and empty transparent center; flat true overhead ground decal. Transparent actual alpha background. All shapes and glow occupy central50%of canvas with generous fully empty border on all four sides. Subtle crisp edge glow only, no diffuse fog. Hand-painted premium game VFX, readable silhouette, no text, UI, scene, floor, people, watermark. Single asset, not a sheet.",
+        "normalized_role": "warning",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/27",
+        "asset_id": "ep1b05_asmodeus_warning",
+        "scene_id": "17",
+        "scene_title": "붉은 하이힐",
+        "zone_id": "ep1b05",
+        "boss_label": "asmodeus",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "b45b46e228857fee87d6b186ee669c169b81d0ed2b80ebba1e674b3035c85af7"
+      }
+    },
+    {
+      "id": "ep1b08_chairman_impact",
+      "source": "selected/batch02/ep1b08_chairman_impact.png",
+      "output": "assets/batch02/ep1b08_chairman_impact.png",
+      "source_sha256": "1b95f5fa7b1e9db60352e504d9c3b7e99a2bc7f516948e58305d72a2edf70b2f",
+      "output_sha256": "1b95f5fa7b1e9db60352e504d9c3b7e99a2bc7f516948e58305d72a2edf70b2f",
+      "bytes": 530340,
+      "byte_identical": true,
+      "dimensions": [
+        1774,
+        887
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "a691a3297e0c3990939611c99d8c988b37665fbc08376030937351e15d1cbcb8",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/28",
+        "concept_key": "batch02/ep1b08_chairman_impact",
+        "sha256": "1b95f5fa7b1e9db60352e504d9c3b7e99a2bc7f516948e58305d72a2edf70b2f",
+        "decision": "upgrade",
+        "comparison": "Asymmetric broken jaw now visible and original top/bottom crowding reduced; physical clamp aesthetic remains.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "quality-source/batch02/inputs.json",
+        "record_index": 12,
+        "id": "ep1b08_chairman_impact",
+        "role": "impact",
+        "prompt_or_description": "One standalone transparent static dark fantasy technological boss VFX inspired by a controlling chairman in an electrode cathedral. Asymmetric abstract eye-and-body clamp impact: one small closed almond clamp above two larger disconnected black angular brackets and a white-violet electrical snap linking them; NO actual eyes, bodies, or persons. 2:1 isometric billboard. Compact hand-painted sprite in central50%of canvas; wide clean transparent margins, actual alpha, crisp edge highlights and NO surrounding fog or broad halo. Readable black silhouette with cool violet-white glints. No background, floor, UI, text, characters, victims, watermark. Not a sheet.",
+        "normalized_role": "impact",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/28",
+        "asset_id": "ep1b08_chairman_impact",
+        "scene_id": "21",
+        "scene_title": "하늘에 서려는 자",
+        "zone_id": "ep1b08",
+        "boss_label": "chairman",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "e69133cd541d6ab7172fde476f6a864884a5f1dee14b4731fe3fa1768de385db"
+      }
+    },
+    {
+      "id": "ep1b08_chairman_projectile",
+      "source": "selected/batch02/ep1b08_chairman_projectile.png",
+      "output": "assets/batch02/ep1b08_chairman_projectile.png",
+      "source_sha256": "32ae00ae972f8cee02d19a926a15010d50188182982f702e7de6dd27ab1e6e29",
+      "output_sha256": "32ae00ae972f8cee02d19a926a15010d50188182982f702e7de6dd27ab1e6e29",
+      "bytes": 722762,
+      "byte_identical": true,
+      "dimensions": [
+        1774,
+        887
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "89ecc5b32710262a74693258c3253315c9fc11e6132ad73d548aa0ba912653d2",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/29",
+        "concept_key": "batch02/ep1b08_chairman_projectile",
+        "sha256": "32ae00ae972f8cee02d19a926a15010d50188182982f702e7de6dd27ab1e6e29",
+        "decision": "upgrade",
+        "comparison": "Rear arc no longer near left canvas edge and three sections clearer; right tip padding remains modest.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "quality-source/batch02/inputs.json",
+        "record_index": 13,
+        "id": "ep1b08_chairman_projectile",
+        "role": "projectile",
+        "prompt_or_description": "One standalone transparent static dark fantasy technological boss VFX inspired by a controlling chairman in an electrode cathedral. Single electrode-command dart: black needle spear with small violet electrical fork at rear, concise white-violet electric edge. 2:1 isometric billboard oblique. Compact hand-painted sprite in central50%of canvas; wide clean transparent margins, actual alpha, crisp edge highlights and NO surrounding fog or broad halo. Readable black silhouette with cool violet-white glints. No background, floor, UI, text, characters, victims, watermark. Not a sheet.",
+        "normalized_role": "projectile",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/29",
+        "asset_id": "ep1b08_chairman_projectile",
+        "scene_id": "21",
+        "scene_title": "하늘에 서려는 자",
+        "zone_id": "ep1b08",
+        "boss_label": "chairman",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "e69133cd541d6ab7172fde476f6a864884a5f1dee14b4731fe3fa1768de385db"
+      }
+    },
+    {
+      "id": "ep1b08_chairman_remnant",
+      "source": "selected/batch02/ep1b08_chairman_remnant.png",
+      "output": "assets/batch02/ep1b08_chairman_remnant.png",
+      "source_sha256": "b91f9a86ce81bb125fd1c7670b54c6f54207a88de519cf48bc20700c9ba86ae6",
+      "output_sha256": "b91f9a86ce81bb125fd1c7670b54c6f54207a88de519cf48bc20700c9ba86ae6",
+      "bytes": 1057332,
+      "byte_identical": true,
+      "dimensions": [
+        1330,
+        1182
+      ],
+      "selection": "retained_original",
+      "prior_original_sha256": "b91f9a86ce81bb125fd1c7670b54c6f54207a88de519cf48bc20700c9ba86ae6",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/30",
+        "concept_key": "batch02/ep1b08_chairman_remnant",
+        "sha256": "b91f9a86ce81bb125fd1c7670b54c6f54207a88de519cf48bc20700c9ba86ae6",
+        "decision": "retained_original",
+        "comparison": "Candidate retains upright relief despite flat-ground instruction; spacing alone does not establish material role improvement.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "quality-source/batch02/inputs.json",
+        "record_index": 14,
+        "id": "ep1b08_chairman_remnant",
+        "role": "remnant",
+        "prompt_or_description": "One standalone transparent static dark fantasy technological boss VFX inspired by a controlling chairman in an electrode cathedral. Spent black command brackets: four fractured charcoal angular bracket fragments and small fading violet electrode sparks, widely separated, no text or digits, no circle. True overhead ground decal. Compact hand-painted sprite in central50%of canvas; wide clean transparent margins, actual alpha, crisp edge highlights and NO surrounding fog or broad halo. Readable black silhouette with cool violet-white glints. No background, floor, UI, text, characters, victims, watermark. Not a sheet.",
+        "normalized_role": "residue",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/30",
+        "asset_id": "ep1b08_chairman_remnant",
+        "scene_id": "21",
+        "scene_title": "하늘에 서려는 자",
+        "zone_id": "ep1b08",
+        "boss_label": "chairman",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "e69133cd541d6ab7172fde476f6a864884a5f1dee14b4731fe3fa1768de385db"
+      }
+    },
+    {
+      "id": "ep1b08_chairman_warning",
+      "source": "selected/batch02/ep1b08_chairman_warning.png",
+      "output": "assets/batch02/ep1b08_chairman_warning.png",
+      "source_sha256": "e96c95b500b57eada8da69ec72d9ce676ba73fe76c0fafe36072ddca4b86419b",
+      "output_sha256": "e96c95b500b57eada8da69ec72d9ce676ba73fe76c0fafe36072ddca4b86419b",
+      "bytes": 1079134,
+      "byte_identical": true,
+      "dimensions": [
+        1402,
+        1122
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "9f4b0b3065542bf0ee72dda614877fc14e7e7270044337bd85fe59d593a45527",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/31",
+        "concept_key": "batch02/ep1b08_chairman_warning",
+        "sha256": "e96c95b500b57eada8da69ec72d9ce676ba73fe76c0fafe36072ddca4b86419b",
+        "decision": "upgrade",
+        "comparison": "Second revision removes heavy physical hardware, preserves seven distinct command lanes and improves top/bottom padding. Still zigzag rather than straight. Ground plane placement must be tested.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "quality-source/batch02/inputs.json",
+        "record_index": 15,
+        "id": "ep1b08_chairman_warning",
+        "role": "warning",
+        "prompt_or_description": "One standalone transparent static dark fantasy technological boss VFX inspired by a controlling chairman in an electrode cathedral. Seven-prong signal targeting comb, exactly seven narrow uneven violet-white electrode paths aligned like comb teeth from a dark backbone, broken ends, no lettering. True overhead ground warning decal. Compact hand-painted sprite in central50%of canvas; wide clean transparent margins, actual alpha, crisp edge highlights and NO surrounding fog or broad halo. Readable black silhouette with cool violet-white glints. No background, floor, UI, text, characters, victims, watermark. Not a sheet.",
+        "normalized_role": "warning",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/31",
+        "asset_id": "ep1b08_chairman_warning",
+        "scene_id": "21",
+        "scene_title": "하늘에 서려는 자",
+        "zone_id": "ep1b08",
+        "boss_label": "chairman",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "e69133cd541d6ab7172fde476f6a864884a5f1dee14b4731fe3fa1768de385db"
+      }
+    },
+    {
+      "id": "01_bootloader_strike_lanes_v2",
+      "source": "selected/batch03/01_bootloader_strike_lanes_v2.png",
+      "output": "assets/batch03/01_bootloader_strike_lanes_v2.png",
+      "source_sha256": "ad28d4dc526197595098a1eae879ba7246dfb0a854a9b2065eb57f05a3d9d874",
+      "output_sha256": "ad28d4dc526197595098a1eae879ba7246dfb0a854a9b2065eb57f05a3d9d874",
+      "bytes": 1566142,
+      "byte_identical": true,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "selection": "retained_original",
+      "prior_original_sha256": "ad28d4dc526197595098a1eae879ba7246dfb0a854a9b2065eb57f05a3d9d874",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/32",
+        "concept_key": "batch03/01_bootloader_strike_lanes",
+        "sha256": "ad28d4dc526197595098a1eae879ba7246dfb0a854a9b2065eb57f05a3d9d874",
+        "decision": "retained_original",
+        "comparison": "Candidate thicker and larger than selected original; no clear geometry/readability improvement.",
+        "caveats": [
+          "Not engine applied or browser/GPU/mobile validated.",
+          "128px readability is qualitative design assessment, not runtime capture.",
+          "No resizing or raster processing performed."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch03/source-inputs.json",
+        "record_index": 0,
+        "id": "01_bootloader_strike_lanes_v2",
+        "role": "ground warning",
+        "prompt_or_description": "One original dark fantasy game ground-warning VFX texture. Four parallel short narrow amber-white cracked energy lanes, violet circuit notches. Each lane occupies only the MIDDLE HALF of canvas height. No diffuse light whatsoever; crisp contained emissive strokes only. Mechanical leg strike warning, no actual legs. TRUE OVERHEAD orthographic flat decal, no perspective. Keep all marks in central 60% of canvas width and height with broad empty margin. Entire image genuine transparent background including all spaces between strokes, no background color. No text, no symbols, no UI, no characters, no environment. Static art only.",
+        "normalized_role": "warning",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/32",
+        "asset_id": "01_bootloader_strike_lanes_v2",
+        "scene_id": "22",
+        "scene_title": "생체 부트로더",
+        "zone_id": "ep1b09",
+        "boss_label": "ep1b09",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "e07d129844f77b5b80b43e12b4a7d847ff7972943c068785431b5415943f2987"
+      }
+    },
+    {
+      "id": "02_bootloader_neural_spike",
+      "source": "selected/batch03/02_bootloader_neural_spike.png",
+      "output": "assets/batch03/02_bootloader_neural_spike.png",
+      "source_sha256": "0e3ee83e7490be81b7a92b1ebb20181f1b1784541c5ff0cb80c9dd90ecb6ea1c",
+      "output_sha256": "0e3ee83e7490be81b7a92b1ebb20181f1b1784541c5ff0cb80c9dd90ecb6ea1c",
+      "bytes": 551296,
+      "byte_identical": true,
+      "dimensions": [
+        1774,
+        887
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "7622d4d6c14322a52ac7fe3ed7365e62e48710c32d8837be01cdaab887afd195",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/33",
+        "concept_key": "batch03/02_bootloader_neural_spike",
+        "sha256": "0e3ee83e7490be81b7a92b1ebb20181f1b1784541c5ff0cb80c9dd90ecb6ea1c",
+        "decision": "upgrade",
+        "comparison": "Cleaner articulated three-joint silhouette and point; less particulate noise. Direction and identity preserved.",
+        "caveats": [
+          "Not engine applied or browser/GPU/mobile validated.",
+          "128px readability is qualitative design assessment, not runtime capture.",
+          "No resizing or raster processing performed."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch03/source-inputs.json",
+        "record_index": 1,
+        "id": "02_bootloader_neural_spike",
+        "role": "projectile",
+        "prompt_or_description": "Original dark-fantasy StoryWorld static VFX texture. One jointed neural spike projectile: sharp gunmetal needle linked by three small articulated segments, violet neural filaments wrapping the joints, a short pale cyan tapering tail, angled diagonally. Not a whole limb or character. Projection: 2:1 isometric billboard. Single isolated projectile. Crisp painterly game art with readable silhouette. Entire asset including glow inside central 70 percent, at least 15 percent clear transparent margin on every side. Genuine transparent background. No text, UI, characters, environment, frame, sheet, symbols resembling letters. Original story-inspired art proposal, not animation.",
+        "normalized_role": "projectile",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/33",
+        "asset_id": "02_bootloader_neural_spike",
+        "scene_id": "22",
+        "scene_title": "생체 부트로더",
+        "zone_id": "ep1b09",
+        "boss_label": "ep1b09",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "e07d129844f77b5b80b43e12b4a7d847ff7972943c068785431b5415943f2987"
+      }
+    },
+    {
+      "id": "03_bootloader_copy_interference",
+      "source": "selected/batch03/03_bootloader_copy_interference.png",
+      "output": "assets/batch03/03_bootloader_copy_interference.png",
+      "source_sha256": "f793c270d070f9899033fa69dc1e89a65b2be734662a57ac8287fbb2d9bb0e8f",
+      "output_sha256": "f793c270d070f9899033fa69dc1e89a65b2be734662a57ac8287fbb2d9bb0e8f",
+      "bytes": 980578,
+      "byte_identical": true,
+      "dimensions": [
+        1774,
+        887
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "643651a44a73bb2f3846dbf43963774f5541888c5429fa478b346673790f3a13",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/34",
+        "concept_key": "batch03/03_bootloader_copy_interference",
+        "sha256": "f793c270d070f9899033fa69dc1e89a65b2be734662a57ac8287fbb2d9bb0e8f",
+        "decision": "upgrade",
+        "comparison": "Clearer principal cut and subordinate crossing cut; reduced small shards and cleaner negative spaces.",
+        "caveats": [
+          "Not engine applied or browser/GPU/mobile validated.",
+          "128px readability is qualitative design assessment, not runtime capture.",
+          "No resizing or raster processing performed."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch03/source-inputs.json",
+        "record_index": 2,
+        "id": "03_bootloader_copy_interference",
+        "role": "impact",
+        "prompt_or_description": "Original dark-fantasy StoryWorld static VFX texture. One copied-sword-pattern interference impact: two offset angular silver slash fragments colliding with violet broken circuit echoes, compact asymmetric interference burst, not a circular explosion. Projection: 2:1 isometric billboard. Single isolated impact. Crisp painterly game art with readable silhouette. Entire asset including glow inside central 70 percent, at least 15 percent clear transparent margin on every side. Genuine transparent background. No text, UI, characters, environment, frame, sheet, symbols resembling letters. Original story-inspired art proposal, not animation.",
+        "normalized_role": "impact",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/34",
+        "asset_id": "03_bootloader_copy_interference",
+        "scene_id": "22",
+        "scene_title": "생체 부트로더",
+        "zone_id": "ep1b09",
+        "boss_label": "ep1b09",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "e07d129844f77b5b80b43e12b4a7d847ff7972943c068785431b5415943f2987"
+      }
+    },
+    {
+      "id": "04_bootloader_drained_circuit",
+      "source": "selected/batch03/04_bootloader_drained_circuit.png",
+      "output": "assets/batch03/04_bootloader_drained_circuit.png",
+      "source_sha256": "bfdcd4a9a775b2ccd8239a0445b55b92338ef2caceb41bc2c42098bcd2dbe94d",
+      "output_sha256": "bfdcd4a9a775b2ccd8239a0445b55b92338ef2caceb41bc2c42098bcd2dbe94d",
+      "bytes": 1607213,
+      "byte_identical": true,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "selection": "retained_original",
+      "prior_original_sha256": "bfdcd4a9a775b2ccd8239a0445b55b92338ef2caceb41bc2c42098bcd2dbe94d",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/35",
+        "concept_key": "batch03/04_bootloader_drained_circuit",
+        "sha256": "bfdcd4a9a775b2ccd8239a0445b55b92338ef2caceb41bc2c42098bcd2dbe94d",
+        "decision": "retained_original",
+        "comparison": "Cleaner branches but candidate alpha reaches bottom edge; retain original.",
+        "caveats": [
+          "Not engine applied or browser/GPU/mobile validated.",
+          "128px readability is qualitative design assessment, not runtime capture.",
+          "No resizing or raster processing performed."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch03/source-inputs.json",
+        "record_index": 3,
+        "id": "04_bootloader_drained_circuit",
+        "role": "ground remnant",
+        "prompt_or_description": "Original dark-fantasy StoryWorld static VFX texture. One drained adaptive-circuit residue: irregular broken branching neural traces in dark violet and dim cyan, with large transparent gaps and burnt angular endpoints, flattened overhead decal, no ring, no ground slab. Projection: true overhead. Single isolated ground remnant. Crisp painterly game art with readable silhouette. Entire asset including glow inside central 70 percent, at least 15 percent clear transparent margin on every side. Genuine transparent background. No text, UI, characters, environment, frame, sheet, symbols resembling letters. Original story-inspired art proposal, not animation.",
+        "normalized_role": "residue",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/35",
+        "asset_id": "04_bootloader_drained_circuit",
+        "scene_id": "22",
+        "scene_title": "생체 부트로더",
+        "zone_id": "ep1b09",
+        "boss_label": "ep1b09",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "e07d129844f77b5b80b43e12b4a7d847ff7972943c068785431b5415943f2987"
+      }
+    },
+    {
+      "id": "05_controller_bombardment_grid_v3",
+      "source": "selected/batch03/05_controller_bombardment_grid_v3.png",
+      "output": "assets/batch03/05_controller_bombardment_grid_v3.png",
+      "source_sha256": "7dacf4028b560a71e46f11ca7fdc3f783e54924222a9dec66c162e6ce997639d",
+      "output_sha256": "7dacf4028b560a71e46f11ca7fdc3f783e54924222a9dec66c162e6ce997639d",
+      "bytes": 1271002,
+      "byte_identical": true,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "selection": "retained_original",
+      "prior_original_sha256": "7dacf4028b560a71e46f11ca7fdc3f783e54924222a9dec66c162e6ce997639d",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/36",
+        "concept_key": "batch03/05_controller_bombardment_grid",
+        "sha256": "7dacf4028b560a71e46f11ca7fdc3f783e54924222a9dec66c162e6ce997639d",
+        "decision": "retained_original",
+        "comparison": "REJECT: candidate changed required six targeting cells into four; original six-cell geometry retained.",
+        "caveats": [
+          "Not engine applied or browser/GPU/mobile validated.",
+          "128px readability is qualitative design assessment, not runtime capture.",
+          "No resizing or raster processing performed."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch03/source-inputs.json",
+        "record_index": 4,
+        "id": "05_controller_bombardment_grid_v3",
+        "role": "ground warning",
+        "prompt_or_description": "Generate a transparent PNG game effect, STRICT LINEWORK ONLY. Six empty rectangular target outlines arranged in 2 columns and 3 rows, each rectangle made of four isolated short L-shaped corner bars, warm ivory and muted amber chipped painted metal line texture. Flat orthographic overhead. Empty interiors MUST have alpha zero. All gaps alpha zero. No glow, no bloom, no fog, no smoke, no orange wash, no gradients, no shadows, no filled shapes, no background, no backdrop. Not a UI panel, no text, no numerals. Compact marks occupy middle 60% of image with broad fully transparent margin. StoryWorld Controller bombardment-loop warning texture, single static art proposal.",
+        "normalized_role": "warning",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/36",
+        "asset_id": "05_controller_bombardment_grid_v3",
+        "scene_id": "24",
+        "scene_title": "방어의 군단",
+        "zone_id": "u201",
+        "boss_label": "u201",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "5db34939bfed5ee9f6cdfbd3e512bc61be99e889a2db4b080b742905b1e137f1"
+      }
+    },
+    {
+      "id": "06_controller_shell_contrail",
+      "source": "selected/batch03/06_controller_shell_contrail.png",
+      "output": "assets/batch03/06_controller_shell_contrail.png",
+      "source_sha256": "74e1a56056862ebce682089d28beff5f92ccfaabd2062350b6466d47d4340c95",
+      "output_sha256": "74e1a56056862ebce682089d28beff5f92ccfaabd2062350b6466d47d4340c95",
+      "bytes": 580880,
+      "byte_identical": true,
+      "dimensions": [
+        1774,
+        887
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "0d6baed0beccb8901baf03b9b0c1a5d5b289a73f2304d96900fd5c6c11d75a63",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/37",
+        "concept_key": "batch03/06_controller_shell_contrail",
+        "sha256": "74e1a56056862ebce682089d28beff5f92ccfaabd2062350b6466d47d4340c95",
+        "decision": "upgrade",
+        "comparison": "Narrower coherent smoke taper with separated billows and clearer shell metal. Smoke opacity still requires runtime blending check.",
+        "caveats": [
+          "Not engine applied or browser/GPU/mobile validated.",
+          "128px readability is qualitative design assessment, not runtime capture.",
+          "No resizing or raster processing performed."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch03/source-inputs.json",
+        "record_index": 5,
+        "id": "06_controller_shell_contrail",
+        "role": "projectile",
+        "prompt_or_description": "Original dark-fantasy StoryWorld static VFX texture. A single descending steel shell with a narrow tapering white-gray smoke contrail and a tiny amber-hot nose, angled down-left. One shell only, no explosion. Projection: 2:1 isometric billboard. Single isolated projectile. Crisp painterly game art, readable at small scale. Keep complete effect INCLUDING glow inside central 65 percent of canvas, minimum 15 percent transparent margin every edge. Genuine transparent background. No text, UI, environment, characters, frame, sheet. Original story-inspired art proposal, not animation.",
+        "normalized_role": "projectile",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/37",
+        "asset_id": "06_controller_shell_contrail",
+        "scene_id": "24",
+        "scene_title": "방어의 군단",
+        "zone_id": "u201",
+        "boss_label": "u201",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "5db34939bfed5ee9f6cdfbd3e512bc61be99e889a2db4b080b742905b1e137f1"
+      }
+    },
+    {
+      "id": "07_controller_steel_impact",
+      "source": "selected/batch03/07_controller_steel_impact.png",
+      "output": "assets/batch03/07_controller_steel_impact.png",
+      "source_sha256": "782341fad811666faffe8dae1d9bb83e73ee0b66edc02abc598f73b9f63ac994",
+      "output_sha256": "782341fad811666faffe8dae1d9bb83e73ee0b66edc02abc598f73b9f63ac994",
+      "bytes": 1237330,
+      "byte_identical": true,
+      "dimensions": [
+        1774,
+        887
+      ],
+      "selection": "retained_original",
+      "prior_original_sha256": "782341fad811666faffe8dae1d9bb83e73ee0b66edc02abc598f73b9f63ac994",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/38",
+        "concept_key": "batch03/07_controller_steel_impact",
+        "sha256": "782341fad811666faffe8dae1d9bb83e73ee0b66edc02abc598f73b9f63ac994",
+        "decision": "retained_original",
+        "comparison": "Candidate increases brightness and alpha reaches bottom edge; no proven improvement.",
+        "caveats": [
+          "Not engine applied or browser/GPU/mobile validated.",
+          "128px readability is qualitative design assessment, not runtime capture.",
+          "No resizing or raster processing performed."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch03/source-inputs.json",
+        "record_index": 6,
+        "id": "07_controller_steel_impact",
+        "role": "impact",
+        "prompt_or_description": "Original dark-fantasy StoryWorld static VFX texture. Directional steel-fragment impact: compact amber white contact flash at left with a wedge of five tumbling dark gunmetal shards and short sparks driven to the right, asymmetric narrow cone rather than radial explosion. Projection: 2:1 isometric billboard. Single isolated impact. Crisp painterly game art, readable at small scale. Keep complete effect INCLUDING glow inside central 65 percent of canvas, minimum 15 percent transparent margin every edge. Genuine transparent background. No text, UI, environment, characters, frame, sheet. Original story-inspired art proposal, not animation.",
+        "normalized_role": "impact",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/38",
+        "asset_id": "07_controller_steel_impact",
+        "scene_id": "24",
+        "scene_title": "방어의 군단",
+        "zone_id": "u201",
+        "boss_label": "u201",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "5db34939bfed5ee9f6cdfbd3e512bc61be99e889a2db4b080b742905b1e137f1"
+      }
+    },
+    {
+      "id": "08_controller_shell_furrow",
+      "source": "selected/batch03/08_controller_shell_furrow.png",
+      "output": "assets/batch03/08_controller_shell_furrow.png",
+      "source_sha256": "3355303ca6238f760dd36b706595e67f71162b0b00826eca407630af3925a68a",
+      "output_sha256": "3355303ca6238f760dd36b706595e67f71162b0b00826eca407630af3925a68a",
+      "bytes": 1855847,
+      "byte_identical": true,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "selection": "retained_original",
+      "prior_original_sha256": "3355303ca6238f760dd36b706595e67f71162b0b00826eca407630af3925a68a",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/39",
+        "concept_key": "batch03/08_controller_shell_furrow",
+        "sha256": "3355303ca6238f760dd36b706595e67f71162b0b00826eca407630af3925a68a",
+        "decision": "retained_original",
+        "comparison": "q3 removes upright splinters and smoke but alpha still touches left border; not select as general upgrade.",
+        "caveats": [
+          "Not engine applied or browser/GPU/mobile validated.",
+          "128px readability is qualitative design assessment, not runtime capture.",
+          "No resizing or raster processing performed."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch03/source-inputs.json",
+        "record_index": 7,
+        "id": "08_controller_shell_furrow",
+        "role": "ground remnant",
+        "prompt_or_description": "Original dark-fantasy StoryWorld static VFX texture. One smoking shell furrow: slender irregular dark gouge with short broken steel splinters and wisps of gray smoke closely hugging it, faint spent amber points, no earth tile or surrounding ground. Projection: true overhead. Single isolated ground remnant. Crisp painterly game art, readable at small scale. Keep complete effect INCLUDING glow inside central 65 percent of canvas, minimum 15 percent transparent margin every edge. Genuine transparent background. No text, UI, environment, characters, frame, sheet. Original story-inspired art proposal, not animation.",
+        "normalized_role": "residue",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/39",
+        "asset_id": "08_controller_shell_furrow",
+        "scene_id": "24",
+        "scene_title": "방어의 군단",
+        "zone_id": "u201",
+        "boss_label": "u201",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "5db34939bfed5ee9f6cdfbd3e512bc61be99e889a2db4b080b742905b1e137f1"
+      }
+    },
+    {
+      "id": "09_knight_six_lane_warning",
+      "source": "selected/batch03/09_knight_six_lane_warning.png",
+      "output": "assets/batch03/09_knight_six_lane_warning.png",
+      "source_sha256": "f95058af17abc196a72d59bf7d621e473644f67ad4cdf04a769774ab764f3bdd",
+      "output_sha256": "f95058af17abc196a72d59bf7d621e473644f67ad4cdf04a769774ab764f3bdd",
+      "bytes": 1287181,
+      "byte_identical": true,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "selection": "retained_original",
+      "prior_original_sha256": "f95058af17abc196a72d59bf7d621e473644f67ad4cdf04a769774ab764f3bdd",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/40",
+        "concept_key": "batch03/09_knight_six_lane_warning",
+        "sha256": "f95058af17abc196a72d59bf7d621e473644f67ad4cdf04a769774ab764f3bdd",
+        "decision": "retained_original",
+        "comparison": "Candidate thicker/brighter and alpha reaches left edge; original safer geometry retained.",
+        "caveats": [
+          "Not engine applied or browser/GPU/mobile validated.",
+          "128px readability is qualitative design assessment, not runtime capture.",
+          "No resizing or raster processing performed."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch03/source-inputs.json",
+        "record_index": 8,
+        "id": "09_knight_six_lane_warning",
+        "role": "ground warning",
+        "prompt_or_description": "Original dark-fantasy StoryWorld static VFX texture. Exactly SIX separated straight narrow silver-blue sword-lane warnings aimed toward one empty center from six distinct evenly spaced directions. Each lane is interrupted midway and sharply tapered, no enclosing circle or hexagon, no actual swords. Storm castle fallen knight theme. Projection: true overhead. Single isolated ground warning. Crisp painterly game art, readable at small scale. Keep complete effect INCLUDING glow inside central 65 percent of canvas, minimum 15 percent transparent margin every edge. Genuine transparent background. No text, UI, environment, characters, frame, sheet. Original story-inspired art proposal, not animation.",
+        "normalized_role": "warning",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/40",
+        "asset_id": "09_knight_six_lane_warning",
+        "scene_id": "33",
+        "scene_title": "타락천사 기사",
+        "zone_id": "last301",
+        "boss_label": "last301",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "de87e563b08c107af7c092ef62297ac5cbe6e7e56a5c1c9b96c4dc99660f6c19"
+      }
+    },
+    {
+      "id": "10_knight_parry_counter",
+      "source": "selected/batch03/10_knight_parry_counter.png",
+      "output": "assets/batch03/10_knight_parry_counter.png",
+      "source_sha256": "075aae75d52fcd2cff42afb4f95a267b7f19b8cfe86862e976470e662bf76e2f",
+      "output_sha256": "075aae75d52fcd2cff42afb4f95a267b7f19b8cfe86862e976470e662bf76e2f",
+      "bytes": 599343,
+      "byte_identical": true,
+      "dimensions": [
+        1774,
+        887
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "d07bdde1234ac2d8fa16bb166c28011c00e9c523562115e52c7ee6d4417c494a",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/41",
+        "concept_key": "batch03/10_knight_parry_counter",
+        "sha256": "075aae75d52fcd2cff42afb4f95a267b7f19b8cfe86862e976470e662bf76e2f",
+        "decision": "upgrade",
+        "comparison": "Removed loose metal debris, clearer chevron and three counter sparks. Blue glow remains substantial.",
+        "caveats": [
+          "Not engine applied or browser/GPU/mobile validated.",
+          "128px readability is qualitative design assessment, not runtime capture.",
+          "No resizing or raster processing performed."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch03/source-inputs.json",
+        "record_index": 9,
+        "id": "10_knight_parry_counter",
+        "role": "impact",
+        "prompt_or_description": "Original dark-fantasy StoryWorld static VFX texture. One angular parry-counter spark: sharply bent cold silver-white chevron contact flash and three short cobalt sparks, tiny black metallic flecks, compact asymmetrical point collision, no sword, no circular aura. Projection: 2:1 isometric billboard. Single isolated impact. Crisp painterly game art, readable at small scale. Keep complete effect INCLUDING glow inside central 65 percent of canvas, minimum 15 percent transparent margin every edge. Genuine transparent background. No text, UI, environment, characters, frame, sheet. Original story-inspired art proposal, not animation.",
+        "normalized_role": "impact",
+        "normalization_note": "Manifest explicitly identifies a compact point-collision impact, not a flying projectile."
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/41",
+        "asset_id": "10_knight_parry_counter",
+        "scene_id": "33",
+        "scene_title": "타락천사 기사",
+        "zone_id": "last301",
+        "boss_label": "last301",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "de87e563b08c107af7c092ef62297ac5cbe6e7e56a5c1c9b96c4dc99660f6c19"
+      }
+    },
+    {
+      "id": "11_knight_six_contact_cuts",
+      "source": "selected/batch03/11_knight_six_contact_cuts.png",
+      "output": "assets/batch03/11_knight_six_contact_cuts.png",
+      "source_sha256": "aac61cd2b231e66eb5dbd446275d557666a722d490ebd5305dcb87ceef1d3a5e",
+      "output_sha256": "aac61cd2b231e66eb5dbd446275d557666a722d490ebd5305dcb87ceef1d3a5e",
+      "bytes": 1060372,
+      "byte_identical": true,
+      "dimensions": [
+        1774,
+        887
+      ],
+      "selection": "retained_original",
+      "prior_original_sha256": "aac61cd2b231e66eb5dbd446275d557666a722d490ebd5305dcb87ceef1d3a5e",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/42",
+        "concept_key": "batch03/11_knight_six_contact_cuts",
+        "sha256": "aac61cd2b231e66eb5dbd446275d557666a722d490ebd5305dcb87ceef1d3a5e",
+        "decision": "retained_original",
+        "comparison": "Candidate tips reach top and bottom edges; retain original despite cleaner gaps.",
+        "caveats": [
+          "Not engine applied or browser/GPU/mobile validated.",
+          "128px readability is qualitative design assessment, not runtime capture.",
+          "No resizing or raster processing performed."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch03/source-inputs.json",
+        "record_index": 10,
+        "id": "11_knight_six_contact_cuts",
+        "role": "impact",
+        "prompt_or_description": "Original dark-fantasy StoryWorld static VFX texture. Exactly SIX thin blade-contact energy cuts converging from six directions into one small bright center. Six clearly separated silver-white sharp tapered streaks with storm-blue edges, black wind wisps between them, no actual swords or ring. Projection: 2:1 isometric billboard. Single isolated impact. Crisp painterly game art, readable at small scale. Keep complete effect INCLUDING glow inside central 65 percent of canvas, minimum 15 percent transparent margin every edge. Genuine transparent background. No text, UI, environment, characters, frame, sheet. Original story-inspired art proposal, not animation.",
+        "normalized_role": "impact",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/42",
+        "asset_id": "11_knight_six_contact_cuts",
+        "scene_id": "33",
+        "scene_title": "타락천사 기사",
+        "zone_id": "last301",
+        "boss_label": "last301",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "de87e563b08c107af7c092ef62297ac5cbe6e7e56a5c1c9b96c4dc99660f6c19"
+      }
+    },
+    {
+      "id": "12_knight_six_ground_scars",
+      "source": "selected/batch03/12_knight_six_ground_scars.png",
+      "output": "assets/batch03/12_knight_six_ground_scars.png",
+      "source_sha256": "2414e843585687853b0b3039d8b632fab3d4067559959d78a37195f800a71bed",
+      "output_sha256": "2414e843585687853b0b3039d8b632fab3d4067559959d78a37195f800a71bed",
+      "bytes": 682223,
+      "byte_identical": true,
+      "dimensions": [
+        1341,
+        1173
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "bab94c24b09e47c171590147999a58ce17ba461200766b9ad5ed644fb061b0fd",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/43",
+        "concept_key": "batch03/12_knight_six_ground_scars",
+        "sha256": "2414e843585687853b0b3039d8b632fab3d4067559959d78a37195f800a71bed",
+        "decision": "upgrade",
+        "comparison": "Sharper six ground scars with less diffuse skirt and flatter embedded fragments. Geometry clearly separated.",
+        "caveats": [
+          "Not engine applied or browser/GPU/mobile validated.",
+          "128px readability is qualitative design assessment, not runtime capture.",
+          "No resizing or raster processing performed."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch03/source-inputs.json",
+        "record_index": 11,
+        "id": "12_knight_six_ground_scars",
+        "role": "ground remnant",
+        "prompt_or_description": "Original dark-fantasy StoryWorld static VFX texture. Exactly SIX distinct storm-black narrow ground slash scars extending from a small empty center in six directions, separated at center, with thin dim blue rims and sparse chipped stone dust. Flat decal only, no stone slab or ground background. Projection: true overhead. Single isolated ground remnant. Crisp painterly game art, readable at small scale. Keep complete effect INCLUDING glow inside central 65 percent of canvas, minimum 15 percent transparent margin every edge. Genuine transparent background. No text, UI, environment, characters, frame, sheet. Original story-inspired art proposal, not animation.",
+        "normalized_role": "residue",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/43",
+        "asset_id": "12_knight_six_ground_scars",
+        "scene_id": "33",
+        "scene_title": "타락천사 기사",
+        "zone_id": "last301",
+        "boss_label": "last301",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "de87e563b08c107af7c092ef62297ac5cbe6e7e56a5c1c9b96c4dc99660f6c19"
+      }
+    },
+    {
+      "id": "13_insomnia_gaze_warning",
+      "source": "selected/batch03/13_insomnia_gaze_warning.png",
+      "output": "assets/batch03/13_insomnia_gaze_warning.png",
+      "source_sha256": "543ae18a7a00a56271f04b7fd86f37c17e566077c4f3c2297a3b89c2283bfe0d",
+      "output_sha256": "543ae18a7a00a56271f04b7fd86f37c17e566077c4f3c2297a3b89c2283bfe0d",
+      "bytes": 1563464,
+      "byte_identical": true,
+      "dimensions": [
+        1774,
+        887
+      ],
+      "selection": "retained_original",
+      "prior_original_sha256": "543ae18a7a00a56271f04b7fd86f37c17e566077c4f3c2297a3b89c2283bfe0d",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/44",
+        "concept_key": "batch03/13_insomnia_gaze_warning",
+        "sha256": "543ae18a7a00a56271f04b7fd86f37c17e566077c4f3c2297a3b89c2283bfe0d",
+        "decision": "retained_original",
+        "comparison": "Candidate opens center but stray alpha reaches canvas edges; retain original pending tighter framing.",
+        "caveats": [
+          "Not engine applied or browser/GPU/mobile validated.",
+          "128px readability is qualitative design assessment, not runtime capture.",
+          "No resizing or raster processing performed."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch03/source-inputs.json",
+        "record_index": 12,
+        "id": "13_insomnia_gaze_warning",
+        "role": "ground warning",
+        "prompt_or_description": "Original dark-fantasy StoryWorld static VFX texture. One narrow eyelid-shaped gaze warning made of two interrupted smoky violet curves, pointed ends, long transparent central slit, subtle cold silver pinpricks. Fog-village insomnia demon theme. Abstract eye-shaped danger silhouette, no literal eyeball or face, no circular ring. Projection: true overhead. Single isolated ground warning. Crisp painterly game art, readable at small scale. Keep complete effect INCLUDING glow inside central 65 percent of canvas, minimum 15 percent transparent margin every edge. Genuine transparent background. No text, UI, environment, characters, frame, sheet. Original story-inspired art proposal, not animation.",
+        "normalized_role": "warning",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/44",
+        "asset_id": "13_insomnia_gaze_warning",
+        "scene_id": "35",
+        "scene_title": "한약과 불면귀",
+        "zone_id": "last303",
+        "boss_label": "last303",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "a67597e105bbc9f97bc06d8b1b9c1020fd756957464c8e348b604221e8dbff68"
+      }
+    },
+    {
+      "id": "14_insomnia_split_gaze_ray",
+      "source": "selected/batch03/14_insomnia_split_gaze_ray.png",
+      "output": "assets/batch03/14_insomnia_split_gaze_ray.png",
+      "source_sha256": "69a3c1146c8900113d45a65af3ddf37e168628ebb65a9eeaa05461cf29a83055",
+      "output_sha256": "69a3c1146c8900113d45a65af3ddf37e168628ebb65a9eeaa05461cf29a83055",
+      "bytes": 983083,
+      "byte_identical": true,
+      "dimensions": [
+        1774,
+        887
+      ],
+      "selection": "retained_original",
+      "prior_original_sha256": "69a3c1146c8900113d45a65af3ddf37e168628ebb65a9eeaa05461cf29a83055",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/45",
+        "concept_key": "batch03/14_insomnia_split_gaze_ray",
+        "sha256": "69a3c1146c8900113d45a65af3ddf37e168628ebb65a9eeaa05461cf29a83055",
+        "decision": "retained_original",
+        "comparison": "Twin tips sharper but lower alpha edge contact and stronger glow; retain original.",
+        "caveats": [
+          "Not engine applied or browser/GPU/mobile validated.",
+          "128px readability is qualitative design assessment, not runtime capture.",
+          "No resizing or raster processing performed."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch03/source-inputs.json",
+        "record_index": 13,
+        "id": "14_insomnia_split_gaze_ray",
+        "role": "projectile",
+        "prompt_or_description": "Original dark-fantasy StoryWorld static VFX texture. One split black gaze-ray projectile: a narrow smoky dark lance bifurcating into two sharp violet-edged tips, pale silver spine and faint stretched trailing fog, flying diagonally. Fog-village insomnia demon, no eye, character or environment. Projection: 2:1 isometric billboard. Single isolated projectile. Crisp painterly game art, readable at small scale. Keep complete effect INCLUDING glow inside central 65 percent of canvas, minimum 15 percent transparent margin every edge. Genuine transparent background. No text, UI, environment, characters, frame, sheet. Original story-inspired art proposal, not animation.",
+        "normalized_role": "projectile",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/45",
+        "asset_id": "14_insomnia_split_gaze_ray",
+        "scene_id": "35",
+        "scene_title": "한약과 불면귀",
+        "zone_id": "last303",
+        "boss_label": "last303",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "a67597e105bbc9f97bc06d8b1b9c1020fd756957464c8e348b604221e8dbff68"
+      }
+    },
+    {
+      "id": "15_insomnia_layered_afterimage",
+      "source": "selected/batch03/15_insomnia_layered_afterimage.png",
+      "output": "assets/batch03/15_insomnia_layered_afterimage.png",
+      "source_sha256": "152ca6f1eeba86c30b7b794d0e7383015120d7a6b91d567356dacfbd51f04b3a",
+      "output_sha256": "152ca6f1eeba86c30b7b794d0e7383015120d7a6b91d567356dacfbd51f04b3a",
+      "bytes": 1623955,
+      "byte_identical": true,
+      "dimensions": [
+        1774,
+        887
+      ],
+      "selection": "retained_original",
+      "prior_original_sha256": "152ca6f1eeba86c30b7b794d0e7383015120d7a6b91d567356dacfbd51f04b3a",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/46",
+        "concept_key": "batch03/15_insomnia_layered_afterimage",
+        "sha256": "152ca6f1eeba86c30b7b794d0e7383015120d7a6b91d567356dacfbd51f04b3a",
+        "decision": "retained_original",
+        "comparison": "Cleaner separated echoes but leading tip reaches right edge; reject cropped-margin candidate.",
+        "caveats": [
+          "Not engine applied or browser/GPU/mobile validated.",
+          "128px readability is qualitative design assessment, not runtime capture.",
+          "No resizing or raster processing performed."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch03/source-inputs.json",
+        "record_index": 14,
+        "id": "15_insomnia_layered_afterimage",
+        "role": "impact",
+        "prompt_or_description": "Original dark-fantasy StoryWorld static VFX texture. One layered sleepless-afterimage impact: four progressively offset torn fog-blade impressions behind a single sharp violet-white contact nick, cold silver edges, deep charcoal transparent wisps. No humanoid silhouettes, no faces, no characters. Fog-village insomnia demon. Projection: 2:1 isometric billboard. Single isolated impact. Crisp painterly game art, readable at small scale. Keep complete effect INCLUDING glow inside central 65 percent of canvas, minimum 15 percent transparent margin every edge. Genuine transparent background. No text, UI, environment, characters, frame, sheet. Original story-inspired art proposal, not animation.",
+        "normalized_role": "impact",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/46",
+        "asset_id": "15_insomnia_layered_afterimage",
+        "scene_id": "35",
+        "scene_title": "한약과 불면귀",
+        "zone_id": "last303",
+        "boss_label": "last303",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "a67597e105bbc9f97bc06d8b1b9c1020fd756957464c8e348b604221e8dbff68"
+      }
+    },
+    {
+      "id": "16_insomnia_withdrawn_claw_lines",
+      "source": "selected/batch03/16_insomnia_withdrawn_claw_lines.png",
+      "output": "assets/batch03/16_insomnia_withdrawn_claw_lines.png",
+      "source_sha256": "8acbb3a54e583a7c31ce3c284df98f88eb20b8b2866cbbabfc88767bc01fe80d",
+      "output_sha256": "8acbb3a54e583a7c31ce3c284df98f88eb20b8b2866cbbabfc88767bc01fe80d",
+      "bytes": 1856597,
+      "byte_identical": true,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "b1c458f7a54237476dd5860157ba749ebc4604136cc291f49b35160d234c1287",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/47",
+        "concept_key": "batch03/16_insomnia_withdrawn_claw_lines",
+        "sha256": "8acbb3a54e583a7c31ce3c284df98f88eb20b8b2866cbbabfc88767bc01fe80d",
+        "decision": "upgrade",
+        "comparison": "Three traces more distinct and cleaner taper with less detached rubble. Narrow mist remains; contrast testing required.",
+        "caveats": [
+          "Not engine applied or browser/GPU/mobile validated.",
+          "128px readability is qualitative design assessment, not runtime capture.",
+          "No resizing or raster processing performed."
+        ]
+      },
+      "role_evidence": {
+        "document": "quality-source/batch03/source-inputs.json",
+        "record_index": 15,
+        "id": "16_insomnia_withdrawn_claw_lines",
+        "role": "ground remnant",
+        "prompt_or_description": "Original dark-fantasy StoryWorld static VFX texture. One withdrawn fog claw-line residue: three uneven smoky charcoal rake strokes fading into separated gray-violet wisps, dim silver edging, tapered ragged ends with extensive negative space. Fog-village insomnia demon. No claws or hand, no ground surface, no ring. Projection: true overhead. Single isolated ground remnant. Crisp painterly game art, readable at small scale. Keep complete effect INCLUDING glow inside central 65 percent of canvas, minimum 15 percent transparent margin every edge. Genuine transparent background. No text, UI, environment, characters, frame, sheet. Original story-inspired art proposal, not animation.",
+        "normalized_role": "residue",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/47",
+        "asset_id": "16_insomnia_withdrawn_claw_lines",
+        "scene_id": "35",
+        "scene_title": "한약과 불면귀",
+        "zone_id": "last303",
+        "boss_label": "last303",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "a67597e105bbc9f97bc06d8b1b9c1020fd756957464c8e348b604221e8dbff68"
+      }
+    },
+    {
+      "id": "01-kair03-clock-hand-lane-warning-v2",
+      "source": "selected/batch04/01-kair03-clock-hand-lane-warning-v2.png",
+      "output": "assets/batch04/01-kair03-clock-hand-lane-warning-v2.png",
+      "source_sha256": "01860b7ee709aa0f7d2dd4f1bbdbbfca388f191db798f7e22086517151ea1fc9",
+      "output_sha256": "01860b7ee709aa0f7d2dd4f1bbdbbfca388f191db798f7e22086517151ea1fc9",
+      "bytes": 585056,
+      "byte_identical": true,
+      "dimensions": [
+        1774,
+        887
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "191051dd9c2b0ad6ad43cef5601b2dad823e9442b8887c28b864d0c623abae9d",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/48",
+        "concept_key": "batch04/01-kair03-clock-hand-lane-warning",
+        "sha256": "01860b7ee709aa0f7d2dd4f1bbdbbfca388f191db798f7e22086517151ea1fc9",
+        "decision": "upgrade",
+        "comparison": "Thicker readable gold cores, preserved open lane gaps; tighter margins remain.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "original-source/batch04/manifest.json",
+        "record_index": 0,
+        "id": "01-kair03-clock-hand-lane-warning-v2",
+        "role": "warning",
+        "prompt_or_description": "Use case: stylized-concept. Original static StoryWorld VFX sprite. Seiren Mor time harvest: two thin offset straight brass clock-hand warning lanes with sparse black sand teeth, asymmetric open safe gap. Flat overhead orthographic ground decal. No clock face, no rings. Only narrow hard-edged ivory highlights, ABSOLUTELY no broad glow or haze. Entire paired shape tiny centered within middle 50 percent of canvas. Wide blank margins. Dark fantasy painterly material, legible in combat. Background must be genuine transparent alpha, all outer 20 percent on every side fully empty. No background color, text, UI, scenery, characters, watermark, core destruction or memory destruction. One static component, no animation sheet.",
+        "normalized_role": "warning",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/48",
+        "asset_id": "01-kair03-clock-hand-lane-warning-v2",
+        "scene_id": "46",
+        "scene_title": "세이렌 모르",
+        "zone_id": "kair03",
+        "boss_label": "Seiren Mor",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "0b2e48396ea47457f4baeece431bf57d790097e4d1b643b97428dbff0ecb1d68"
+      }
+    },
+    {
+      "id": "02-kair03-black-sand-needle",
+      "source": "selected/batch04/02-kair03-black-sand-needle.png",
+      "output": "assets/batch04/02-kair03-black-sand-needle.png",
+      "source_sha256": "c57cf051b7429661ece7fd5bb7ade57b8c66bb638c41ae28746db9fd3bc4ff80",
+      "output_sha256": "c57cf051b7429661ece7fd5bb7ade57b8c66bb638c41ae28746db9fd3bc4ff80",
+      "bytes": 714995,
+      "byte_identical": true,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "fbfc40aa18524d4b2ac83e506e6be99406fe834d1a41d005e46451952f80f627",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/49",
+        "concept_key": "batch04/02-kair03-black-sand-needle",
+        "sha256": "c57cf051b7429661ece7fd5bb7ade57b8c66bb638c41ae28746db9fd3bc4ff80",
+        "decision": "upgrade",
+        "comparison": "More cohesive black needle and stronger ivory edges; granular wake remains.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "original-source/batch04/manifest.json",
+        "record_index": 2,
+        "id": "02-kair03-black-sand-needle",
+        "role": "projectile_or_panel",
+        "prompt_or_description": "Use case: stylized-concept. Single original static StoryWorld game VFX component, Seiren Mor time harvest in the time-core workshop. Detached black-sand needle projectile, one narrow obsidian needle composed of compressed dark sand with ivory glint and short tapering granular wake. No clock face, no ring. Projection: isometric airborne billboard. Compact hand-painted dark fantasy combat effect. Entire effect including faint glow must fit inside central 65 percent of square canvas, at least 15 percent FULLY TRANSPARENT clear margin all sides. Genuine alpha transparent background, NO opaque black backdrop, no scenery, floor, text, numbers, UI, characters, borders, core or memory destruction. One component only, not animation frames or sprite sheet.",
+        "normalized_role": "projectile",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/49",
+        "asset_id": "02-kair03-black-sand-needle",
+        "scene_id": "46",
+        "scene_title": "세이렌 모르",
+        "zone_id": "kair03",
+        "boss_label": "Seiren Mor",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "0b2e48396ea47457f4baeece431bf57d790097e4d1b643b97428dbff0ecb1d68"
+      }
+    },
+    {
+      "id": "03-kair03-cable-hand-shear-impact",
+      "source": "selected/batch04/03-kair03-cable-hand-shear-impact.png",
+      "output": "assets/batch04/03-kair03-cable-hand-shear-impact.png",
+      "source_sha256": "1bae1c47f6f5b8e2b5a1e00152d1e9291e49e00fa7feddb0a5d187c6be25d9b2",
+      "output_sha256": "1bae1c47f6f5b8e2b5a1e00152d1e9291e49e00fa7feddb0a5d187c6be25d9b2",
+      "bytes": 1068913,
+      "byte_identical": true,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "e8166e8a6438722fd33acc4471af491c578db6aa0bfb500aa8169245f72a140c",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/50",
+        "concept_key": "batch04/03-kair03-cable-hand-shear-impact",
+        "sha256": "1bae1c47f6f5b8e2b5a1e00152d1e9291e49e00fa7feddb0a5d187c6be25d9b2",
+        "decision": "upgrade",
+        "comparison": "Cleaner bundled cable and arc with fewer loose particles; broad slash remains.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "original-source/batch04/manifest.json",
+        "record_index": 3,
+        "id": "03-kair03-cable-hand-shear-impact",
+        "role": "impact",
+        "prompt_or_description": "Use case: stylized-concept. Single original static StoryWorld game VFX component, Seiren Mor time harvest in the time-core workshop. Cable-and-clock-hand shear impact: two snapped black neural cables crossed by a sharp brass clock-hand fragment, small ivory slash burst and sparse sand debris. No character or clock face. Projection: isometric airborne impact billboard. Compact hand-painted dark fantasy combat effect. Entire effect including faint glow must fit inside central 65 percent of square canvas, at least 15 percent FULLY TRANSPARENT clear margin all sides. Genuine alpha transparent background, NO opaque black backdrop, no scenery, floor, text, numbers, UI, characters, borders, core or memory destruction. One component only, not animation frames or sprite sheet.",
+        "normalized_role": "impact",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/50",
+        "asset_id": "03-kair03-cable-hand-shear-impact",
+        "scene_id": "46",
+        "scene_title": "세이렌 모르",
+        "zone_id": "kair03",
+        "boss_label": "Seiren Mor",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "0b2e48396ea47457f4baeece431bf57d790097e4d1b643b97428dbff0ecb1d68"
+      }
+    },
+    {
+      "id": "04-kair03-exhausted-sand-tracks",
+      "source": "selected/batch04/04-kair03-exhausted-sand-tracks.png",
+      "output": "assets/batch04/04-kair03-exhausted-sand-tracks.png",
+      "source_sha256": "aa87d3b75d74233c52a5de879de8d22d14e685787bf1003feb45c49e6b0440d2",
+      "output_sha256": "aa87d3b75d74233c52a5de879de8d22d14e685787bf1003feb45c49e6b0440d2",
+      "bytes": 774081,
+      "byte_identical": true,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "selection": "retained_original",
+      "prior_original_sha256": "aa87d3b75d74233c52a5de879de8d22d14e685787bf1003feb45c49e6b0440d2",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/51",
+        "concept_key": "batch04/04-kair03-exhausted-sand-tracks",
+        "sha256": "aa87d3b75d74233c52a5de879de8d22d14e685787bf1003feb45c49e6b0440d2",
+        "decision": "retained_original",
+        "comparison": "Contrast increased but oblique geometry and microclutter not materially improved; preserve original.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "original-source/batch04/manifest.json",
+        "record_index": 4,
+        "id": "04-kair03-exhausted-sand-tracks",
+        "role": "residue_or_resurrection",
+        "prompt_or_description": "Use case: stylized-concept. Single original static StoryWorld game VFX component, Seiren Mor time harvest in the time-core workshop. Exhausted nonlooping black sand tracks: three short staggered broken trails of spent charcoal grains with tiny dull brass clock-hand fragments, no circular paths, no ring, no active explosion. Projection: true overhead orthographic flat ground decal. Compact hand-painted dark fantasy combat effect. Entire effect including faint glow must fit inside central 65 percent of square canvas, at least 15 percent FULLY TRANSPARENT clear margin all sides. Genuine alpha transparent background, NO opaque black backdrop, no scenery, floor, text, numbers, UI, characters, borders, core or memory destruction. One component only, not animation frames or sprite sheet.",
+        "normalized_role": "residue",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/51",
+        "asset_id": "04-kair03-exhausted-sand-tracks",
+        "scene_id": "46",
+        "scene_title": "세이렌 모르",
+        "zone_id": "kair03",
+        "boss_label": "Seiren Mor",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "0b2e48396ea47457f4baeece431bf57d790097e4d1b643b97428dbff0ecb1d68"
+      }
+    },
+    {
+      "id": "05-murder03-three-stop-bars",
+      "source": "selected/batch04/05-murder03-three-stop-bars.png",
+      "output": "assets/batch04/05-murder03-three-stop-bars.png",
+      "source_sha256": "57d1507fcd3ca612d52dbe912658da68e5769acaba8d2a7481d6d01fb9a7d835",
+      "output_sha256": "57d1507fcd3ca612d52dbe912658da68e5769acaba8d2a7481d6d01fb9a7d835",
+      "bytes": 884977,
+      "byte_identical": true,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "3b61493c921ef36448cefa8939868cbeb6b495eb84767c0ac8a2873211099aac",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/52",
+        "concept_key": "batch04/05-murder03-three-stop-bars",
+        "sha256": "57d1507fcd3ca612d52dbe912658da68e5769acaba8d2a7481d6d01fb9a7d835",
+        "decision": "upgrade",
+        "comparison": "Narrower separated cyan stop bars with fewer extruding crystals.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "original-source/batch04/manifest.json",
+        "record_index": 5,
+        "id": "05-murder03-three-stop-bars",
+        "role": "warning",
+        "prompt_or_description": "Use case: stylized-concept. Single original static StoryWorld game VFX component for blue-light executor in rooftop/crosswalk causal-loop story. Subject: three separated parallel cyan stop-bars warning, each interrupted at a different point with tiny blue rain-light flecks; three stages of a causal binding, not a road scene. Projection: true overhead orthographic flat ground decal. Painterly dark fantasy readable VFX silhouette, NOT sci-fi UI. Entire effect and glow within central 65 percent of square canvas; 15 percent fully alpha-zero margins. Transparent background native alpha. No text, numbers, UI, characters, vehicles, death, building, floor, scenery, borders or ring. No memory destruction. One static component not animation or sprite sheet.",
+        "normalized_role": "warning",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/52",
+        "asset_id": "05-murder03-three-stop-bars",
+        "scene_id": "55",
+        "scene_title": "옥상의 순환",
+        "zone_id": "murder03",
+        "boss_label": "Blue-light executor",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "01b521b400f020e4b2858051a07088d2dd61f392dcb0c00d40a88081fccd08ce"
+      }
+    },
+    {
+      "id": "06-murder03-bent-rain-shard",
+      "source": "selected/batch04/06-murder03-bent-rain-shard.png",
+      "output": "assets/batch04/06-murder03-bent-rain-shard.png",
+      "source_sha256": "03b47d567718eb5af3de955084c1d4215530cd6d78e3f7645a663717014aa500",
+      "output_sha256": "03b47d567718eb5af3de955084c1d4215530cd6d78e3f7645a663717014aa500",
+      "bytes": 497084,
+      "byte_identical": true,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "a632bec9502c0cfc744f1577ced38c13d3aabead5e0b8595cedfd6e0993bb4b2",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/53",
+        "concept_key": "batch04/06-murder03-bent-rain-shard",
+        "sha256": "03b47d567718eb5af3de955084c1d4215530cd6d78e3f7645a663717014aa500",
+        "decision": "upgrade",
+        "comparison": "Clean directional shard silhouette and reduced surrounding cloud, three deliberate droplets.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "original-source/batch04/manifest.json",
+        "record_index": 6,
+        "id": "06-murder03-bent-rain-shard",
+        "role": "projectile_or_panel",
+        "prompt_or_description": "Use case: stylized-concept. Single original static StoryWorld game VFX component for blue-light executor in rooftop/crosswalk causal-loop story. Subject: one bent rain-light shard, sharp translucent blue-cyan sliver bent at one angle, sparse trailing short rain streaks frozen along its path. Projection: isometric airborne billboard. Painterly dark fantasy readable VFX silhouette, NOT sci-fi UI. Entire effect and glow within central 65 percent of square canvas; 15 percent fully alpha-zero margins. Transparent background native alpha. No text, numbers, UI, characters, vehicles, death, building, floor, scenery, borders or ring. No memory destruction. One static component not animation or sprite sheet.",
+        "normalized_role": "projectile",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/53",
+        "asset_id": "06-murder03-bent-rain-shard",
+        "scene_id": "55",
+        "scene_title": "옥상의 순환",
+        "zone_id": "murder03",
+        "boss_label": "Blue-light executor",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "01b521b400f020e4b2858051a07088d2dd61f392dcb0c00d40a88081fccd08ce"
+      }
+    },
+    {
+      "id": "07-murder03-coordinate-impact",
+      "source": "selected/batch04/07-murder03-coordinate-impact.png",
+      "output": "assets/batch04/07-murder03-coordinate-impact.png",
+      "source_sha256": "0af22ddaf5bb2403c4131d7a860ac3f206c15be8b744e5359601e328b0efcdbf",
+      "output_sha256": "0af22ddaf5bb2403c4131d7a860ac3f206c15be8b744e5359601e328b0efcdbf",
+      "bytes": 667314,
+      "byte_identical": true,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "b7c75f1e6693dab809f6f20dd4bb2da8536ae693c34c9356b33e60e7187093fe",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/54",
+        "concept_key": "batch04/07-murder03-coordinate-impact",
+        "sha256": "0af22ddaf5bb2403c4131d7a860ac3f206c15be8b744e5359601e328b0efcdbf",
+        "decision": "upgrade",
+        "comparison": "Three clearer rays and reduced fragment clutter; upper tip padding remains tight.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "original-source/batch04/manifest.json",
+        "record_index": 7,
+        "id": "07-murder03-coordinate-impact",
+        "role": "impact",
+        "prompt_or_description": "Use case: stylized-concept. Single original static StoryWorld game VFX component for blue-light executor in rooftop/crosswalk causal-loop story. Subject: broken-coordinate impact, three interrupted cyan angular axes colliding into a compact blue-white fracture burst, a few glassy shards, no grid background. Projection: isometric airborne impact billboard. Painterly dark fantasy readable VFX silhouette, NOT sci-fi UI. Entire effect and glow within central 65 percent of square canvas; 15 percent fully alpha-zero margins. Transparent background native alpha. No text, numbers, UI, characters, vehicles, death, building, floor, scenery, borders or ring. No memory destruction. One static component not animation or sprite sheet.",
+        "normalized_role": "impact",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/54",
+        "asset_id": "07-murder03-coordinate-impact",
+        "scene_id": "55",
+        "scene_title": "옥상의 순환",
+        "zone_id": "murder03",
+        "boss_label": "Blue-light executor",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "01b521b400f020e4b2858051a07088d2dd61f392dcb0c00d40a88081fccd08ce"
+      }
+    },
+    {
+      "id": "08-murder03-roadlight-residue",
+      "source": "selected/batch04/08-murder03-roadlight-residue.png",
+      "output": "assets/batch04/08-murder03-roadlight-residue.png",
+      "source_sha256": "42c5c88abd870de30f19d04879722f92a62ab4873c33f56b7a088b180182379c",
+      "output_sha256": "42c5c88abd870de30f19d04879722f92a62ab4873c33f56b7a088b180182379c",
+      "bytes": 717759,
+      "byte_identical": true,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "e89e4b14a13c7e1fb875c75a4950e6fc709be4aa6e9725212e9dd816f4d9d07f",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/55",
+        "concept_key": "batch04/08-murder03-roadlight-residue",
+        "sha256": "42c5c88abd870de30f19d04879722f92a62ab4873c33f56b7a088b180182379c",
+        "decision": "upgrade",
+        "comparison": "Three separated flat aftermath streaks; removed vertical drips and excess aura.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "original-source/batch04/manifest.json",
+        "record_index": 8,
+        "id": "08-murder03-roadlight-residue",
+        "role": "residue_or_resurrection",
+        "prompt_or_description": "Use case: stylized-concept. Single original static StoryWorld game VFX component for blue-light executor in rooftop/crosswalk causal-loop story. Subject: interrupted three-segment roadlight residue, three short separated fading cyan light strokes with worn edges and isolated rainy specks, no asphalt, no actual road. Projection: true overhead orthographic flat ground decal. Painterly dark fantasy readable VFX silhouette, NOT sci-fi UI. Entire effect and glow within central 65 percent of square canvas; 15 percent fully alpha-zero margins. Transparent background native alpha. No text, numbers, UI, characters, vehicles, death, building, floor, scenery, borders or ring. No memory destruction. One static component not animation or sprite sheet.",
+        "normalized_role": "residue",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/55",
+        "asset_id": "08-murder03-roadlight-residue",
+        "scene_id": "55",
+        "scene_title": "옥상의 순환",
+        "zone_id": "murder03",
+        "boss_label": "Blue-light executor",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "01b521b400f020e4b2858051a07088d2dd61f392dcb0c00d40a88081fccd08ce"
+      }
+    },
+    {
+      "id": "09-cult03-interlocking-wall-warning-v2",
+      "source": "selected/batch04/09-cult03-interlocking-wall-warning-v2.png",
+      "output": "assets/batch04/09-cult03-interlocking-wall-warning-v2.png",
+      "source_sha256": "97d99ec7863830a6ffadc8a16badab4462a44f6fb321b7bfea29c6dbbacd9193",
+      "output_sha256": "97d99ec7863830a6ffadc8a16badab4462a44f6fb321b7bfea29c6dbbacd9193",
+      "bytes": 1173314,
+      "byte_identical": true,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "fe6964e5c45d2b7855eb1538d423b4532067ccb7ef48b3b9879c2abc274497ee",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/56",
+        "concept_key": "batch04/09-cult03-interlocking-wall-warning",
+        "sha256": "97d99ec7863830a6ffadc8a16badab4462a44f6fb321b7bfea29c6dbbacd9193",
+        "decision": "upgrade",
+        "comparison": "Clearer thicker interlocking rails; tighter top margin remains.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "original-source/batch04/manifest.json",
+        "record_index": 9,
+        "id": "09-cult03-interlocking-wall-warning-v2",
+        "role": "warning",
+        "prompt_or_description": "Use case: stylized-concept. Original static StoryWorld VFX sprite. Han Rian and Baek Ion jointly: TWO straight angular L-shaped gold order-wall warning lanes, interlocked like offset stair-step brackets, clear gap between, only horizontal and vertical straight segments. Flat overhead orthographic ground decal. NO circles, curves, oval, rings or crosses. Thin gold energy lines, tightly contained highlights. Small compact shape inside middle 50 percent canvas, wide blank margins. Dark fantasy painterly material, legible in combat. Background must be genuine transparent alpha, all outer 20 percent on every side fully empty. No background color, text, UI, scenery, characters, watermark, core destruction or memory destruction. One static component, no animation sheet.",
+        "normalized_role": "warning",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/56",
+        "asset_id": "09-cult03-interlocking-wall-warning-v2",
+        "scene_id": "60",
+        "scene_title": "사몽의 문턱",
+        "zone_id": "cult03",
+        "boss_label": "Han Rian and Baek Ion jointly",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "19c9cf6caa3af10cb931dbe9ed153202185df5d40b2f945425cf346f660537d5"
+      }
+    },
+    {
+      "id": "10-cult03-golden-order-wall",
+      "source": "selected/batch04/10-cult03-golden-order-wall.png",
+      "output": "assets/batch04/10-cult03-golden-order-wall.png",
+      "source_sha256": "5b5ee969a0aec0f75c7957a83079365e830a0434d7065898a481c20505d3626f",
+      "output_sha256": "5b5ee969a0aec0f75c7957a83079365e830a0434d7065898a481c20505d3626f",
+      "bytes": 926164,
+      "byte_identical": true,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "f2753193f07aa93d22bbd15be56703c0698344334828b26b85b260f9149e2769",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/57",
+        "concept_key": "batch04/10-cult03-golden-order-wall",
+        "sha256": "5b5ee969a0aec0f75c7957a83079365e830a0434d7065898a481c20505d3626f",
+        "decision": "upgrade",
+        "comparison": "Cleaner translucent wall interior and less fine noise; intact wall silhouette.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "original-source/batch04/manifest.json",
+        "record_index": 12,
+        "id": "10-cult03-golden-order-wall",
+        "role": "projectile_or_panel",
+        "prompt_or_description": "Use case: stylized-concept. Single original static StoryWorld combat VFX for BOTH Han Rian and Baek Ion jointly, triune-ego harvest chamber, golden order-wall theme. Subject: isolated golden order-wall panel: one tall translucent amber shield slab, architectural angular authority brackets along two edges, warm gold highlights, no cross shape. Projection: isometric airborne billboard showing a vertical panel. Dark fantasy painterly polished combat asset. Compact entire effect including glow inside central 60 percent of square canvas, at least 18 percent FULLY clear margins. Genuine transparent alpha background. No inverted cross or cross projectile, no text, UI, runes, characters, scenery, floor, border, core or memory destruction. One isolated static component not animation frames.",
+        "normalized_role": "projectile",
+        "normalization_note": "The source says projectile_or_panel and describes a vertical shield wall. Keep this panel stationary after deployment; projectile is only the four-role catalog bucket."
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/57",
+        "asset_id": "10-cult03-golden-order-wall",
+        "scene_id": "60",
+        "scene_title": "사몽의 문턱",
+        "zone_id": "cult03",
+        "boss_label": "Han Rian and Baek Ion jointly",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "19c9cf6caa3af10cb931dbe9ed153202185df5d40b2f945425cf346f660537d5"
+      }
+    },
+    {
+      "id": "11-cult03-wall-hit-deflection",
+      "source": "selected/batch04/11-cult03-wall-hit-deflection.png",
+      "output": "assets/batch04/11-cult03-wall-hit-deflection.png",
+      "source_sha256": "e247e615bf7772506d1f650ba0d785d7a8d8f9bf70bc47d30bb78b57a11fe26c",
+      "output_sha256": "e247e615bf7772506d1f650ba0d785d7a8d8f9bf70bc47d30bb78b57a11fe26c",
+      "bytes": 826792,
+      "byte_identical": true,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "8e02ea81acc32cccf729f257d1bfdff99d1ad1fcb3387ebe66b7fd9f9860404f",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/58",
+        "concept_key": "batch04/11-cult03-wall-hit-deflection",
+        "sha256": "e247e615bf7772506d1f650ba0d785d7a8d8f9bf70bc47d30bb78b57a11fe26c",
+        "decision": "upgrade",
+        "comparison": "Fewer larger shards and clearer wall deflection direction.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "original-source/batch04/manifest.json",
+        "record_index": 13,
+        "id": "11-cult03-wall-hit-deflection",
+        "role": "impact",
+        "prompt_or_description": "Use case: stylized-concept. Single original static StoryWorld combat VFX for BOTH Han Rian and Baek Ion jointly, triune-ego harvest chamber, golden order-wall theme. Subject: order-wall hit deflection: compact glancing pale gold energy impact bending off a short amber planar shield edge, sharp sideways sparks and small angular chips, no cross. Projection: isometric airborne impact billboard. Dark fantasy painterly polished combat asset. Compact entire effect including glow inside central 60 percent of square canvas, at least 18 percent FULLY clear margins. Genuine transparent alpha background. No inverted cross or cross projectile, no text, UI, runes, characters, scenery, floor, border, core or memory destruction. One isolated static component not animation frames.",
+        "normalized_role": "impact",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/58",
+        "asset_id": "11-cult03-wall-hit-deflection",
+        "scene_id": "60",
+        "scene_title": "사몽의 문턱",
+        "zone_id": "cult03",
+        "boss_label": "Han Rian and Baek Ion jointly",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "19c9cf6caa3af10cb931dbe9ed153202185df5d40b2f945425cf346f660537d5"
+      }
+    },
+    {
+      "id": "12-cult03-authority-fragments",
+      "source": "selected/batch04/12-cult03-authority-fragments.png",
+      "output": "assets/batch04/12-cult03-authority-fragments.png",
+      "source_sha256": "6094d7ec88580d75bc75c532ba03a439739d2c02cd176404092bcf4ea527169b",
+      "output_sha256": "6094d7ec88580d75bc75c532ba03a439739d2c02cd176404092bcf4ea527169b",
+      "bytes": 831452,
+      "byte_identical": true,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "ce2c2ef6ec0e8c9d9dffdf128707d12b61c86db91e6b1dff4f199db1e07b01ff",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/59",
+        "concept_key": "batch04/12-cult03-authority-fragments",
+        "sha256": "6094d7ec88580d75bc75c532ba03a439739d2c02cd176404092bcf4ea527169b",
+        "decision": "upgrade",
+        "comparison": "Four isolated authority brackets with readable open center instead of cluttered carpet; ground projection remains stylized.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "original-source/batch04/manifest.json",
+        "record_index": 14,
+        "id": "12-cult03-authority-fragments",
+        "role": "residue_or_resurrection",
+        "prompt_or_description": "Use case: stylized-concept. Single original static StoryWorld combat VFX for BOTH Han Rian and Baek Ion jointly, triune-ego harvest chamber, golden order-wall theme. Subject: collapsed authority-bracket fragments: several dull gold broken right-angle brackets scattered flat and separated, fading amber dust, inert aftermath, no crosses or ring. Projection: true overhead orthographic flat ground decal. Dark fantasy painterly polished combat asset. Compact entire effect including glow inside central 60 percent of square canvas, at least 18 percent FULLY clear margins. Genuine transparent alpha background. No inverted cross or cross projectile, no text, UI, runes, characters, scenery, floor, border, core or memory destruction. One isolated static component not animation frames.",
+        "normalized_role": "residue",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/59",
+        "asset_id": "12-cult03-authority-fragments",
+        "scene_id": "60",
+        "scene_title": "사몽의 문턱",
+        "zone_id": "cult03",
+        "boss_label": "Han Rian and Baek Ion jointly",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "19c9cf6caa3af10cb931dbe9ed153202185df5d40b2f945425cf346f660537d5"
+      }
+    },
+    {
+      "id": "13-cult04-spatial-fold-warning",
+      "source": "selected/batch04/13-cult04-spatial-fold-warning.png",
+      "output": "assets/batch04/13-cult04-spatial-fold-warning.png",
+      "source_sha256": "2b444bdbcd9398c1cda39be97107225cd0c089ceea3091fe788d966a347d3c9b",
+      "output_sha256": "2b444bdbcd9398c1cda39be97107225cd0c089ceea3091fe788d966a347d3c9b",
+      "bytes": 561743,
+      "byte_identical": true,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "selection": "retained_original",
+      "prior_original_sha256": "2b444bdbcd9398c1cda39be97107225cd0c089ceea3091fe788d966a347d3c9b",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/60",
+        "concept_key": "batch04/13-cult04-spatial-fold-warning",
+        "sha256": "2b444bdbcd9398c1cda39be97107225cd0c089ceea3091fe788d966a347d3c9b",
+        "decision": "retained_original",
+        "comparison": "Cleaner gap but tighter extreme tips; improvement not sufficient to replace original.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "original-source/batch04/manifest.json",
+        "record_index": 15,
+        "id": "13-cult04-spatial-fold-warning",
+        "role": "warning",
+        "prompt_or_description": "Use case: stylized-concept. Single original static StoryWorld combat VFX for cyborg cult leader, dream-core boss who folds space, stops time and is resurrected by black neural stitches. Subject: asymmetrical spatial-fold targeting slit: a short narrow diagonal void slit bracketed by two unequal flat violet-silver folded light wedges, discontinuous angular targeting edges, no portal or ring. Projection: true overhead orthographic flat ground decal. Dark fantasy painterly readable effect. Small centered subject occupying only middle 55 percent of square image, completely empty transparent wide outer margins. All glows tightly contained, no full-canvas haze. Genuine native alpha transparent background. No text, UI, characters, bodies, scenery, floor, border, inverted cross, destruction of core or memories. One static component, not animation or spritesheet.",
+        "normalized_role": "warning",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/60",
+        "asset_id": "13-cult04-spatial-fold-warning",
+        "scene_id": "61",
+        "scene_title": "교주의 사몽",
+        "zone_id": "cult04",
+        "boss_label": "Cyborg cult leader",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "f1080ae06aec22e576d6107fcdc8a731267675f191edd3107dcd3fdc299dc6fe"
+      }
+    },
+    {
+      "id": "14-cult04-neural-command-spear",
+      "source": "selected/batch04/14-cult04-neural-command-spear.png",
+      "output": "assets/batch04/14-cult04-neural-command-spear.png",
+      "source_sha256": "da5bf691eb325b4995655c3671f37a96da289d32543f0baaab90f2cfa9b5b8a5",
+      "output_sha256": "da5bf691eb325b4995655c3671f37a96da289d32543f0baaab90f2cfa9b5b8a5",
+      "bytes": 489967,
+      "byte_identical": true,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "edb48189a9c8df14f67480b7e0dedb45c4ddbad5901d43c68d6772e48def2733",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/61",
+        "concept_key": "batch04/14-cult04-neural-command-spear",
+        "sha256": "da5bf691eb325b4995655c3671f37a96da289d32543f0baaab90f2cfa9b5b8a5",
+        "decision": "upgrade",
+        "comparison": "Ordered three-node neural spine with fewer tangled loops and clearer directional tip.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "original-source/batch04/manifest.json",
+        "record_index": 16,
+        "id": "14-cult04-neural-command-spear",
+        "role": "projectile_or_panel",
+        "prompt_or_description": "Use case: stylized-concept. Single original static StoryWorld combat VFX for cyborg cult leader, dream-core boss who folds space, stops time and is resurrected by black neural stitches. Subject: one suspended stitched-neural command spear, dark obsidian needle made of intertwined black neural cords stitched with sparse violet-white energy knots, compact tapering energy tail. Projection: isometric airborne billboard. Dark fantasy painterly readable effect. Small centered subject occupying only middle 55 percent of square image, completely empty transparent wide outer margins. All glows tightly contained, no full-canvas haze. Genuine native alpha transparent background. No text, UI, characters, bodies, scenery, floor, border, inverted cross, destruction of core or memories. One static component, not animation or spritesheet.",
+        "normalized_role": "projectile",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/61",
+        "asset_id": "14-cult04-neural-command-spear",
+        "scene_id": "61",
+        "scene_title": "교주의 사몽",
+        "zone_id": "cult04",
+        "boss_label": "Cyborg cult leader",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "f1080ae06aec22e576d6107fcdc8a731267675f191edd3107dcd3fdc299dc6fe"
+      }
+    },
+    {
+      "id": "15-cult04-time-stopped-collision",
+      "source": "selected/batch04/15-cult04-time-stopped-collision.png",
+      "output": "assets/batch04/15-cult04-time-stopped-collision.png",
+      "source_sha256": "92e96bd401fe359227583bc85b3218855bcdaba63439a9eaad117d4b9c66cdca",
+      "output_sha256": "92e96bd401fe359227583bc85b3218855bcdaba63439a9eaad117d4b9c66cdca",
+      "bytes": 1030518,
+      "byte_identical": true,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "0e509dbde0cd34618e6047313187cbc2f84729301d34b28ad19e3c3de10623a5",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/62",
+        "concept_key": "batch04/15-cult04-time-stopped-collision",
+        "sha256": "92e96bd401fe359227583bc85b3218855bcdaba63439a9eaad117d4b9c66cdca",
+        "decision": "upgrade",
+        "comparison": "Five distinct suspended shards with open gaps and less debris; fills more canvas.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "original-source/batch04/manifest.json",
+        "record_index": 17,
+        "id": "15-cult04-time-stopped-collision",
+        "role": "impact",
+        "prompt_or_description": "Use case: stylized-concept. Single original static StoryWorld combat VFX for cyborg cult leader, dream-core boss who folds space, stops time and is resurrected by black neural stitches. Subject: time-stopped shard collision: a compact cluster of angular silver-violet glass shards suspended at an interrupted collision, sharp fractured flash, each shard separated by clear air, no sphere or portal. Projection: isometric airborne impact billboard. Dark fantasy painterly readable effect. Small centered subject occupying only middle 55 percent of square image, completely empty transparent wide outer margins. All glows tightly contained, no full-canvas haze. Genuine native alpha transparent background. No text, UI, characters, bodies, scenery, floor, border, inverted cross, destruction of core or memories. One static component, not animation or spritesheet.",
+        "normalized_role": "impact",
+        "normalization_note": null
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/62",
+        "asset_id": "15-cult04-time-stopped-collision",
+        "scene_id": "61",
+        "scene_title": "교주의 사몽",
+        "zone_id": "cult04",
+        "boss_label": "Cyborg cult leader",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "f1080ae06aec22e576d6107fcdc8a731267675f191edd3107dcd3fdc299dc6fe"
+      }
+    },
+    {
+      "id": "16-cult04-resurrection-stitch-arc",
+      "source": "selected/batch04/16-cult04-resurrection-stitch-arc.png",
+      "output": "assets/batch04/16-cult04-resurrection-stitch-arc.png",
+      "source_sha256": "3755ba039a9695265f6425f09da129675358c04d4b151ad4c9665e5493c359f9",
+      "output_sha256": "3755ba039a9695265f6425f09da129675358c04d4b151ad4c9665e5493c359f9",
+      "bytes": 661103,
+      "byte_identical": true,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "selection": "upgrade",
+      "prior_original_sha256": "b25043e478cda596ac85cd3722fe8e8b6853155fbeb6fea7cd8206774b61dbf0",
+      "selected_manifest_evidence": {
+        "document": "quality-source/review/selected-quality-64.json",
+        "json_pointer": "/selected/63",
+        "concept_key": "batch04/16-cult04-resurrection-stitch-arc",
+        "sha256": "3755ba039a9695265f6425f09da129675358c04d4b151ad4c9665e5493c359f9",
+        "decision": "upgrade",
+        "comparison": "Readable stitch rhythm, less broad haze and no floating pebbles.",
+        "caveats": []
+      },
+      "role_evidence": {
+        "document": "original-source/batch04/manifest.json",
+        "record_index": 18,
+        "id": "16-cult04-resurrection-stitch-arc",
+        "role": "residue_or_resurrection",
+        "prompt_or_description": "Use case: stylized-concept. Single original static StoryWorld combat VFX for cyborg cult leader, dream-core boss who folds space, stops time and is resurrected by black neural stitches. Subject: boss-resurrection stitch arc: one incomplete upward arc of black neural lines with violet energy stitches joining disconnected strands, regenerative stitching inward, no body shown, no core shown, NOT destruction. Projection: isometric airborne billboard. Dark fantasy painterly readable effect. Small centered subject occupying only middle 55 percent of square image, completely empty transparent wide outer margins. All glows tightly contained, no full-canvas haze. Genuine native alpha transparent background. No text, UI, characters, bodies, scenery, floor, border, inverted cross, destruction of core or memories. One static component, not animation or spritesheet.",
+        "normalized_role": "residue",
+        "normalization_note": "The source says residue_or_resurrection and describes inward regenerative stitching. This is resurrection, not damage or core/memory destruction; residue is only the four-role catalog bucket."
+      },
+      "narrative_evidence": {
+        "document": "original-source/delivery/all64-mapping.json",
+        "json_pointer": "/63",
+        "asset_id": "16-cult04-resurrection-stitch-arc",
+        "scene_id": "61",
+        "scene_title": "교주의 사몽",
+        "zone_id": "cult04",
+        "boss_label": "Cyborg cult leader",
+        "story_catalog": "story-source/catalog-r75.json",
+        "story_body_sha256": "f1080ae06aec22e576d6107fcdc8a731267675f191edd3107dcd3fdc299dc6fe"
+      }
+    }
+  ],
+  "new_procedural16": [
+    {
+      "id": "procedural-gold-thread",
+      "motif": "gold-thread",
+      "source": null,
+      "origin": "new-procedural",
+      "canonical_status": "proposed-reusable-effect; not a verified story skill",
+      "description": "Intertwined gold strands travel forward, with moving knot-like glints and a brief curved accent.",
+      "variant_note": "The Canvas runtime and animated SVG are alternate expressions of this proposed motif, not identical animation frames."
+    },
+    {
+      "id": "procedural-silver-thread",
+      "motif": "silver-thread",
+      "source": null,
+      "origin": "new-procedural",
+      "canonical_status": "proposed-reusable-effect; not a verified story skill",
+      "description": "Intertwined silver strands travel forward with cold moving glints and a brief curved accent.",
+      "variant_note": "The Canvas runtime and animated SVG are alternate expressions of this proposed motif, not identical animation frames."
+    },
+    {
+      "id": "procedural-scalpel",
+      "motif": "scalpel",
+      "source": null,
+      "origin": "new-procedural",
+      "canonical_status": "proposed-reusable-effect; not a verified story skill",
+      "description": "An outlined scalpel blade and handle are accompanied by a curved cutting sweep and a tip sparkle; no gore or injury is depicted.",
+      "variant_note": "The Canvas runtime and animated SVG are alternate expressions of this proposed motif, not identical animation frames."
+    },
+    {
+      "id": "procedural-poison-syringe",
+      "motif": "poison-syringe",
+      "source": null,
+      "origin": "new-procedural",
+      "canonical_status": "proposed-reusable-effect; not a verified story skill",
+      "description": "A stylized diagonal syringe with a visible plunger, barrel, graduations and needle travels with green fluid and a droplet accent. Fictional combat VFX only.",
+      "variant_note": "The Canvas runtime and animated SVG are alternate expressions of this proposed motif, not identical animation frames."
+    },
+    {
+      "id": "procedural-poison",
+      "motif": "poison",
+      "source": null,
+      "origin": "new-procedural",
+      "canonical_status": "proposed-reusable-effect; not a verified story skill",
+      "description": "A skull-like poison marker is surrounded by drifting bubble outlines and fading particles.",
+      "variant_note": "The Canvas runtime and animated SVG are alternate expressions of this proposed motif, not identical animation frames."
+    },
+    {
+      "id": "procedural-bleed",
+      "motif": "bleed",
+      "source": null,
+      "origin": "new-procedural",
+      "canonical_status": "proposed-reusable-effect; not a verified story skill",
+      "description": "Stylized crimson droplets descend with short trailing streaks and a faint base arc; no injury depiction.",
+      "variant_note": "The Canvas runtime and animated SVG are alternate expressions of this proposed motif, not identical animation frames."
+    },
+    {
+      "id": "procedural-shock",
+      "motif": "shock",
+      "source": null,
+      "origin": "new-procedural",
+      "canonical_status": "proposed-reusable-effect; not a verified story skill",
+      "description": "A central jagged lightning bolt flashes with branching peripheral sparks and a short contact ripple.",
+      "variant_note": "The Canvas runtime and animated SVG are alternate expressions of this proposed motif, not identical animation frames."
+    },
+    {
+      "id": "procedural-freeze",
+      "motif": "freeze",
+      "source": null,
+      "origin": "new-procedural",
+      "canonical_status": "proposed-reusable-effect; not a verified story skill",
+      "description": "A branched snowflake silhouette with crystalline tips drifts in subtle rotation and fades.",
+      "variant_note": "The Canvas runtime and animated SVG are alternate expressions of this proposed motif, not identical animation frames."
+    },
+    {
+      "id": "procedural-burn",
+      "motif": "burn",
+      "source": null,
+      "origin": "new-procedural",
+      "canonical_status": "proposed-reusable-effect; not a verified story skill",
+      "description": "Warm flame-shaped particles rise from a curved glowing base and fade as they climb.",
+      "variant_note": "The Canvas runtime and animated SVG are alternate expressions of this proposed motif, not identical animation frames."
+    },
+    {
+      "id": "procedural-charm",
+      "motif": "charm",
+      "source": null,
+      "origin": "new-procedural",
+      "canonical_status": "proposed-reusable-effect; not a verified story skill",
+      "description": "A rose-colored heart outline pulses with radiating glints as a proposed readable status-warning design.",
+      "variant_note": "The Canvas runtime and animated SVG are alternate expressions of this proposed motif, not identical animation frames."
+    },
+    {
+      "id": "procedural-weakness",
+      "motif": "weakness",
+      "source": null,
+      "origin": "new-procedural",
+      "canonical_status": "proposed-reusable-effect; not a verified story skill",
+      "description": "A cracked shield outline is flanked by downward arrows and fading particles.",
+      "variant_note": "The Canvas runtime and animated SVG are alternate expressions of this proposed motif, not identical animation frames."
+    },
+    {
+      "id": "procedural-corruption",
+      "motif": "corruption",
+      "source": null,
+      "origin": "new-procedural",
+      "canonical_status": "proposed-reusable-effect; not a verified story skill",
+      "description": "Counter-rotating violet arcs, jagged radial cracks and a central glint form a restless corruption marker.",
+      "variant_note": "The Canvas runtime and animated SVG are alternate expressions of this proposed motif, not identical animation frames."
+    },
+    {
+      "id": "procedural-binding",
+      "motif": "binding",
+      "source": null,
+      "origin": "new-procedural",
+      "canonical_status": "proposed-reusable-effect; not a verified story skill",
+      "description": "Interlinked chain outlines slowly rotate around a central padlock, with warning pulses and glints.",
+      "variant_note": "The Canvas runtime and animated SVG are alternate expressions of this proposed motif, not identical animation frames."
+    },
+    {
+      "id": "procedural-harvest",
+      "motif": "harvest",
+      "source": null,
+      "origin": "new-procedural",
+      "canonical_status": "proposed-reusable-effect; not a verified story skill",
+      "description": "An outlined scythe is accompanied by inward-moving motes and a fading impact ripple; it does not depict core or memory destruction.",
+      "variant_note": "The Canvas runtime and animated SVG are alternate expressions of this proposed motif, not identical animation frames."
+    },
+    {
+      "id": "procedural-disease",
+      "motif": "disease",
+      "source": null,
+      "origin": "new-procedural",
+      "canonical_status": "proposed-reusable-effect; not a verified story skill",
+      "description": "A stylized spiked germ marker slowly rotates amid drifting spore-like particles.",
+      "variant_note": "The Canvas runtime and animated SVG are alternate expressions of this proposed motif, not identical animation frames."
+    },
+    {
+      "id": "procedural-portal",
+      "motif": "portal",
+      "source": null,
+      "origin": "new-procedural",
+      "canonical_status": "proposed-reusable-effect; not a verified story skill",
+      "description": "Layered counter-rotating violet arcs, orbiting diamond glints and an open central motif pulse then fade. A general reusable portal proposal, not assigned to any source boss.",
+      "variant_note": "The Canvas runtime and animated SVG are alternate expressions of this proposed motif, not identical animation frames."
+    }
+  ],
+  "limitations": [
+    "The 64 PNGs remain single static components. Copying them does not create 64 new raster assets or a frame-by-frame animation set.",
+    "The supplied source review reports static inspection only and notes unresolved blending, padding, projection and 128px readability limits.",
+    "Catalog creation verifies bytes and metadata only. Preview rendering, actual engine integration, gameplay semantics, hitboxes, frame rate, GPU and mobile performance require separate validation.",
+    "Procedural motifs are reusable design proposals. Their presence does not establish that they are canonical skills or implemented status effects in the game."
+  ]
+}

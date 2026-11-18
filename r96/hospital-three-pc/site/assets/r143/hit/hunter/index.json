@@ -1,0 +1,113 @@
+{
+ "hero": "hunter",
+ "action": "hit",
+ "order": "피격 충격 → 뒤로 젖힘 (README)",
+ "mirroredInGame": {
+  "w": "e",
+  "sw": "se",
+  "nw": "ne"
+ },
+ "applied": "맞았을 때 프레임 애니메이션 — client-source/attack-anim-r143.js",
+ "directions": {
+  "s": {
+   "path": "assets/r143/hit/hunter/hit-s.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "15wwTg5v3Tij6oJvxgfyoBwIMbRcYppYD",
+    "file": "HERO-hunter-hit-s.png",
+    "sha256": "e01171eada695043007eaebc8cf12f4aaf84a1fe1bcc157dbc08cd5eb9e03c6f",
+    "bytes": 41249
+   },
+   "sha256": "6be98597f2c517ebd8c518cf9f0b437e657142c386906381fbc10afbf3c76a2b",
+   "bytes": 13998
+  },
+  "se": {
+   "path": "assets/r143/hit/hunter/hit-se.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "15wwTg5v3Tij6oJvxgfyoBwIMbRcYppYD",
+    "file": "HERO-hunter-hit-se.png",
+    "sha256": "6eadbb30ef12e0fe3bf215d17fe56cd76d3510aa50979beabdec459187ab305f",
+    "bytes": 35858
+   },
+   "sha256": "4b475723f7fb310889430991ac44d099d4a8e0e73379e62a535657c5ed4c627d",
+   "bytes": 12584
+  },
+  "e": {
+   "path": "assets/r143/hit/hunter/hit-e.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "15wwTg5v3Tij6oJvxgfyoBwIMbRcYppYD",
+    "file": "HERO-hunter-hit-e.png",
+    "sha256": "82f107407de90fa4e68f04823f70aa3ca7898c7cc10fbcf2bbafd6ddb7dbd413",
+    "bytes": 28287
+   },
+   "sha256": "61f215e79af44dbb9ac1c0a94359c0d409212e16ea2921c981d12ada2359dcc3",
+   "bytes": 10218
+  },
+  "ne": {
+   "path": "assets/r143/hit/hunter/hit-ne.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "15wwTg5v3Tij6oJvxgfyoBwIMbRcYppYD",
+    "file": "HERO-hunter-hit-ne.png",
+    "sha256": "b9416192105e6d210794200036b7ade2b65a9a55d7367ac01f75dc96a7594ebc",
+    "bytes": 38558
+   },
+   "sha256": "b83a810a3f4a02b7f6ed763ca384fe49c1a766d0d3915152c0a208904e3373aa",
+   "bytes": 13116
+  },
+  "n": {
+   "path": "assets/r143/hit/hunter/hit-n.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "15wwTg5v3Tij6oJvxgfyoBwIMbRcYppYD",
+    "file": "HERO-hunter-hit-n.png",
+    "sha256": "da886775f15f8e915159a5e8d5e4a3de8b10955dd53608977c5f3a91676e5453",
+    "bytes": 42701
+   },
+   "sha256": "f0fd2539a23db282834a2d04cf862942942ec724b8eddc121fc058ded84f93a3",
+   "bytes": 14224
+  }
+ }
+}

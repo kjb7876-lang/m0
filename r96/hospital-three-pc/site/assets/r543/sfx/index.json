@@ -1,0 +1,154 @@
+{
+ "revision": "R543",
+ "generator": "scripts/build-sfx-r543.py",
+ "origin": "사용자 제공 효과음(2026-11-10 프로젝트 업로드), 자르기·음높이 변형·필터·음량을 손봄",
+ "files": {
+  "growl-1": {
+   "path": "assets/r543/sfx/growl-1.ogg",
+   "role": "r543Growl",
+   "gain": 0.5,
+   "use": "짐승형 적(도시짐승·추적견·사냥개) 공격",
+   "source": "wolf_growl_3.mp3",
+   "sourceSha256": "86a949f73104a9242373fccfbbbe969428e45d9494b15722a9b0264b7ce8a2de",
+   "sourceBytes": 31191,
+   "trim": [
+    0,
+    0.55
+   ],
+   "pitch": 1.0,
+   "bytes": 7429,
+   "sha256": "309e5610954dc58a91ee56cdb0459cfe13aaf768af269c5f3ef1aa6c63f7ee50",
+   "duration": 0.596,
+   "peakDb": -9.8,
+   "rmsDb": -22.4,
+   "hfShare5k": 2e-05,
+   "tailDb": -107.2
+  },
+  "growl-2": {
+   "path": "assets/r543/sfx/growl-2.ogg",
+   "role": "r543GrowlLow",
+   "gain": 0.5,
+   "use": "큰 짐승(곰) 공격 — 음높이 20% 내림",
+   "source": "wolf_growl_3.mp3",
+   "sourceSha256": "86a949f73104a9242373fccfbbbe969428e45d9494b15722a9b0264b7ce8a2de",
+   "sourceBytes": 31191,
+   "trim": [
+    0,
+    0.55
+   ],
+   "pitch": 0.8,
+   "bytes": 7747,
+   "sha256": "32f4f613f1783dbfdb76e0a00d0dce62ce103ceffdd161fe5851ec42b63c168e",
+   "duration": 0.745,
+   "peakDb": -9.55,
+   "rmsDb": -22.46,
+   "hfShare5k": 1e-05,
+   "tailDb": -180.0
+  },
+  "growl-3": {
+   "path": "assets/r543/sfx/growl-3.ogg",
+   "role": "r543GrowlHigh",
+   "gain": 0.45,
+   "use": "작은 짐승(여우 악마) 공격 — 음높이 14% 올림",
+   "source": "wolf_growl_3.mp3",
+   "sourceSha256": "86a949f73104a9242373fccfbbbe969428e45d9494b15722a9b0264b7ce8a2de",
+   "sourceBytes": 31191,
+   "trim": [
+    0,
+    0.55
+   ],
+   "pitch": 1.14,
+   "bytes": 7042,
+   "sha256": "d8baf0f27fcde1cbc07fbae07a0ab478f1f0c059d306c39c64166e5e4eaa02f3",
+   "duration": 0.522,
+   "peakDb": -10.49,
+   "rmsDb": -23.59,
+   "hfShare5k": 4e-05,
+   "tailDb": -103.5
+  },
+  "goblin-1": {
+   "path": "assets/r543/sfx/goblin-1.ogg",
+   "role": "r543Goblin",
+   "gain": 0.45,
+   "use": "피리 고블린 공격 — 음높이 12% 내림",
+   "source": "goblin_vocalizations_1.mp3",
+   "sourceSha256": "2eaef44515d7e3e84ebd466d5b20cd8d96bf7eb8fb32786ca32af400cf39d60e",
+   "sourceBytes": 55383,
+   "trim": [
+    0.36,
+    0.46
+   ],
+   "pitch": 0.88,
+   "bytes": 7215,
+   "sha256": "9599916d0ca6090ba380a43a3d10b330895ce4d33b51f14a6d9a568c3760dcec",
+   "duration": 0.566,
+   "peakDb": -11.17,
+   "rmsDb": -27.54,
+   "hfShare5k": 0.00036,
+   "tailDb": -72.8
+  },
+  "goblin-2": {
+   "path": "assets/r543/sfx/goblin-2.ogg",
+   "role": "r543Goblin",
+   "gain": 0.45,
+   "use": "피리 고블린 공격 변주 — 음높이 6% 내림",
+   "source": "goblin_vocalizations_1.mp3",
+   "sourceSha256": "2eaef44515d7e3e84ebd466d5b20cd8d96bf7eb8fb32786ca32af400cf39d60e",
+   "sourceBytes": 55383,
+   "trim": [
+    1.02,
+    0.5
+   ],
+   "pitch": 0.94,
+   "bytes": 7294,
+   "sha256": "481a149e1cfdd2971bf6248bf179392d39d06cb0ff58f96f94d8270aae320b50",
+   "duration": 0.576,
+   "peakDb": -11.0,
+   "rmsDb": -25.87,
+   "hfShare5k": 0.00043,
+   "tailDb": -85.1
+  },
+  "thunder-1": {
+   "path": "assets/r543/sfx/thunder-1.ogg",
+   "role": "r543Thunder",
+   "gain": 0.5,
+   "use": "비 구역 먼 천둥",
+   "source": "thunder_and_raining_1.mp3",
+   "sourceSha256": "14d6a4f918b840e4ba00a631fc7264770dcd727e92d43c15cf054ecda340d3c1",
+   "sourceBytes": 55383,
+   "trim": [
+    0.15,
+    1.1
+   ],
+   "pitch": 1.0,
+   "bytes": 10080,
+   "sha256": "d0d4e1ec7cd9fd39c2762f4096ce5f1e314e6b7dd4c3c8d07ac810aabd190546",
+   "duration": 1.197,
+   "peakDb": -11.63,
+   "rmsDb": -24.6,
+   "hfShare5k": 0.0,
+   "tailDb": -180.0
+  },
+  "thunder-2": {
+   "path": "assets/r543/sfx/thunder-2.ogg",
+   "role": "r543Thunder",
+   "gain": 0.5,
+   "use": "비 구역 먼 천둥 변주 — 음높이 14% 내림",
+   "source": "thunder_and_raining_1.mp3",
+   "sourceSha256": "14d6a4f918b840e4ba00a631fc7264770dcd727e92d43c15cf054ecda340d3c1",
+   "sourceBytes": 55383,
+   "trim": [
+    0.15,
+    0.93
+   ],
+   "pitch": 0.86,
+   "bytes": 9426,
+   "sha256": "62b93dd76359e9c11a1108c5d4390f0aaa4856cb843af7711280f9fbd2f16acc",
+   "duration": 1.177,
+   "peakDb": -10.98,
+   "rmsDb": -24.06,
+   "hfShare5k": 0.0,
+   "tailDb": -180.0
+  }
+ }
+}

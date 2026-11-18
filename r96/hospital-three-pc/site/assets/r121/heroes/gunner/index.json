@@ -1,0 +1,165 @@
+{
+ "schema": "storyworld.r121.gunner-clean/v1",
+ "frames": {
+  "aim_back": {
+   "source": "assets/heroes/normalized/gunner/aim_back.webp",
+   "sourceSha256": "d48ffcc179420fedc14aa1fa01caeb86280cd799694c22007004d20e53dafcc7",
+   "file": "aim_back.webp",
+   "sha256": "152c241d7a45672f52c13cf31bd51eea8c5e0154f2c1d835feb1fc38bff179ab",
+   "haloPixelsRemoved": 2022,
+   "outlinePixelsRemoved": 0
+  },
+  "aim_front": {
+   "source": "assets/heroes/normalized/gunner/aim_front.webp",
+   "sourceSha256": "339f2d3d7534ddb44292170747c912bd4af98fde97282c93be81b05c7fd40328",
+   "file": "aim_front.webp",
+   "sha256": "eb0f6a951421cdf67979791860c4d64796a5ebf32b55c156d5e2bb21eb624959",
+   "haloPixelsRemoved": 1460,
+   "outlinePixelsRemoved": 0
+  },
+  "attack_left": {
+   "source": "assets/heroes/normalized/gunner/attack_left.webp",
+   "sourceSha256": "ef39ff8374466da29d79641ed54bd29b1d4137861458ff9c97f690b2ff0fff84",
+   "file": "attack_left.webp",
+   "sha256": "69960f7769ac5c018142dd4d15f7d5b7a0899ccabf214b1704a9e49c320240dd",
+   "haloPixelsRemoved": 2890,
+   "outlinePixelsRemoved": 0
+  },
+  "attack_right": {
+   "source": "assets/heroes/normalized/gunner/attack_right.webp",
+   "sourceSha256": "60c41c59fb78b1b777621a4cd11a6a42dbe432d8065f7702fca5d25f5ec81307",
+   "file": "attack_right.webp",
+   "sha256": "050bd8c84b4a1625a98a3bc1aed8d45fdb76584775d9fae2e7cd4cb6bfaf415e",
+   "haloPixelsRemoved": 2890,
+   "outlinePixelsRemoved": 0
+  },
+  "guard_left": {
+   "source": "assets/heroes/normalized/gunner/guard_left.webp",
+   "sourceSha256": "5eecd85a8529ed7adf746594c49bf65a5d0bbc42dd8db25734027d6a63918296",
+   "file": "guard_left.webp",
+   "sha256": "0238e28f8ab01a4a4bc72a77c5ead6f3ea0cd0fa77de8997b6afe0e93a32619a",
+   "haloPixelsRemoved": 2171,
+   "outlinePixelsRemoved": 0
+  },
+  "guard_right": {
+   "source": "assets/heroes/normalized/gunner/guard_right.webp",
+   "sourceSha256": "aafe9c8f49f90cbab7810a842badf77e0b8077b6d2bb8843365ab78e8e401d14",
+   "file": "guard_right.webp",
+   "sha256": "cd26d88940a0346b92dea410603ff42aea8238698e137007d4b62ffbc1455021",
+   "haloPixelsRemoved": 2171,
+   "outlinePixelsRemoved": 0
+  },
+  "player_aim": {
+   "source": "assets/heroes/normalized/gunner/player_aim.webp",
+   "sourceSha256": "aee80f934b70185233fd5c8a99efe00f7f5dc28c8e00869ae668894f3aa6fd8f",
+   "file": "player_aim.webp",
+   "sha256": "af6965ce9a1fb6fe68ba6a3897cb0cd321e55c453e647e8d5d778f1e76ee507e",
+   "haloPixelsRemoved": 2890,
+   "outlinePixelsRemoved": 0
+  },
+  "player_aimup": {
+   "source": "assets/heroes/normalized/gunner/player_aimup.webp",
+   "sourceSha256": "5d768bf0e72df987ad8433d613eb9f549e11db366b490bd549f7e475e02d4ef6",
+   "file": "player_aimup.webp",
+   "sha256": "86db409de02a87f869ef203756ac04afe8708bdbc098585a03cf449377a7efda",
+   "haloPixelsRemoved": 2232,
+   "outlinePixelsRemoved": 0
+  },
+  "player_crouch": {
+   "source": "assets/heroes/normalized/gunner/player_crouch.webp",
+   "sourceSha256": "4dc67a4a0f8d7264884992c92c09f0487700084be9e4ccbaf308cfa9647384e9",
+   "file": "player_crouch.webp",
+   "sha256": "f865c203c23f4c380f9590668f452581a1db136b691a90cda87bd5080f9473d8",
+   "haloPixelsRemoved": 2171,
+   "outlinePixelsRemoved": 0
+  },
+  "player_idle": {
+   "source": "assets/heroes/normalized/gunner/player_idle.webp",
+   "sourceSha256": "35b02b2fe172f31f2ac90a20c85c908c53053cda3e84bb12e15f204cf7745767",
+   "file": "player_idle.webp",
+   "sha256": "560e59e7bc157bc9afdbdd492757f26615ce6665211a08662d6a541ff46a04be",
+   "haloPixelsRemoved": 2372,
+   "outlinePixelsRemoved": 0
+  },
+  "player_run1": {
+   "source": "assets/heroes/normalized/gunner/player_run1.webp",
+   "sourceSha256": "c6058de4bfc982f6f582346754ae762dce8eb25dd7dc599237f4c7b24f6e6666",
+   "file": "player_run1.webp",
+   "sha256": "5bdf79d0a77e9b13e23247c5f4f13723b584e73651e266276479d7cef1ce9a05",
+   "haloPixelsRemoved": 2517,
+   "outlinePixelsRemoved": 0
+  },
+  "player_run2": {
+   "source": "assets/heroes/normalized/gunner/player_run2.webp",
+   "sourceSha256": "59b406b6c6fa6a4d1fc1483abe6a3a7c070a9b51a5feb34eb55a8adb7b39f179",
+   "file": "player_run2.webp",
+   "sha256": "8589a52597fe52c7cb33ba5db3af4ec05646a1a8e4419896eea4ad23f11d28a9",
+   "haloPixelsRemoved": 11038,
+   "outlinePixelsRemoved": 7092
+  },
+  "run_back_a": {
+   "source": "assets/heroes/normalized/gunner/run_back_a.webp",
+   "sourceSha256": "62ccbe7e4f87c06be87283bedd2449beed97af7cf11119eae05315c2c2cbf5b0",
+   "file": "run_back_a.webp",
+   "sha256": "6b63e10bbc479ed415ee3915876f55ca182273c843c5d04868424255c644a421",
+   "haloPixelsRemoved": 1742,
+   "outlinePixelsRemoved": 0
+  },
+  "run_back_b": {
+   "source": "assets/heroes/normalized/gunner/run_back_b.webp",
+   "sourceSha256": "89aa2d0f244f4d7a43ed4a57fdbb30b1102afbf77477237af1629045c206eb2d",
+   "file": "run_back_b.webp",
+   "sha256": "d90e6c2bb36055236b970d715278382b8c09993848f2cd385cab078f09a1aea2",
+   "haloPixelsRemoved": 1933,
+   "outlinePixelsRemoved": 0
+  },
+  "run_front_a": {
+   "source": "assets/heroes/normalized/gunner/run_front_a.webp",
+   "sourceSha256": "85552eb45ddb8da2c8729368a61b1d5f682906a1eeba095d4abf8235b7f7b337",
+   "file": "run_front_a.webp",
+   "sha256": "f5fd6c2299110cfb8f8c2e6eb09ffa25d95f3172741f8a7e27be310ab1a1a25f",
+   "haloPixelsRemoved": 1700,
+   "outlinePixelsRemoved": 0
+  },
+  "run_front_b": {
+   "source": "assets/heroes/normalized/gunner/run_front_b.webp",
+   "sourceSha256": "78610d46060eab4d7fce230163c5500ef29a48b6f3887175bd1e3c73a67eb3a4",
+   "file": "run_front_b.webp",
+   "sha256": "69b4c3759e7f9e062908c412ad975faccd7555c594685aae09a81b01699b3085",
+   "haloPixelsRemoved": 1566,
+   "outlinePixelsRemoved": 0
+  },
+  "run_left_a": {
+   "source": "assets/heroes/normalized/gunner/run_left_a.webp",
+   "sourceSha256": "7bc73d3cedf82a4694bfa5ec15205409d65052e660a6b34eb7dda014487122ae",
+   "file": "run_left_a.webp",
+   "sha256": "1bf1b992d69a94cb6536d5181ef9868e9326a8b485b600ba870feb3981235e81",
+   "haloPixelsRemoved": 2517,
+   "outlinePixelsRemoved": 0
+  },
+  "run_left_b": {
+   "source": "assets/heroes/normalized/gunner/run_left_b.webp",
+   "sourceSha256": "2989c42549681cce36bfc9548891d002f3f3ab321c0041106989d591610c3aa2",
+   "file": "run_left_b.webp",
+   "sha256": "9288740f28d3ec8b3ddfb3d4e6314da90af3c4d381c40f256ca538f9dc982e83",
+   "haloPixelsRemoved": 11038,
+   "outlinePixelsRemoved": 7092
+  },
+  "run_right_a": {
+   "source": "assets/heroes/normalized/gunner/run_right_a.webp",
+   "sourceSha256": "04f247b7543fb68ec52f58e5f83851459063157b5be0b83fa9fc836fe45d2c2a",
+   "file": "run_right_a.webp",
+   "sha256": "5cb83a940fabbc3e4cf1becf40f8dfa9afb32e2c0de767a395bd9771c7ddf6cb",
+   "haloPixelsRemoved": 2517,
+   "outlinePixelsRemoved": 0
+  },
+  "run_right_b": {
+   "source": "assets/heroes/normalized/gunner/run_right_b.webp",
+   "sourceSha256": "69a785ebd7870185ea73701515155431552d37554242dcb9500c1ae7887d1c73",
+   "file": "run_right_b.webp",
+   "sha256": "21f623c27c45d0e5c2d42afbc2c01dd347890fd0cbefc0e95fa8504f73fea0e2",
+   "haloPixelsRemoved": 11038,
+   "outlinePixelsRemoved": 7092
+  }
+ }
+}

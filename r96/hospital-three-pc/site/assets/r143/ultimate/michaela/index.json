@@ -1,0 +1,90 @@
+{
+ "revision": "R201",
+ "hero": "michaela",
+ "action": "ultimate",
+ "directions": {
+  "s": {
+   "path": "assets/r143/ultimate/michaela/ultimate-s.webp",
+   "frames": 8,
+   "cell": [
+    192,
+    256
+   ],
+   "footY": 226,
+   "feet": [
+    226,
+    226,
+    226,
+    227,
+    226,
+    226,
+    226,
+    226
+   ],
+   "tops": [
+    45,
+    45,
+    45,
+    45,
+    43,
+    44,
+    44,
+    44
+   ],
+   "sha256": "70c5f0a8c1546a03d4814249eafb2335fa3a9c0fd70c9ee335a354662e3eb668",
+   "bytes": 79968,
+   "status": "STATIC_ASSET_PASS",
+   "source": {
+    "files": [
+     {
+      "path": "assets/ultimate/HERO-michaela-ultimate-s.png",
+      "sha256": "40d943f7191f8f6a99bf33f521374982a7ba2f7225abdbbc07e21db8df982748"
+     }
+    ],
+    "manifest": "미카엘라 — 어려운 동작 제외 · 정적 검수 선별 자산팩"
+   }
+  },
+  "e": {
+   "path": "assets/r143/ultimate/michaela/ultimate-e.webp",
+   "frames": 8,
+   "cell": [
+    192,
+    256
+   ],
+   "footY": 231,
+   "feet": [
+    231,
+    232,
+    231,
+    231,
+    231,
+    231,
+    231,
+    231
+   ],
+   "tops": [
+    45,
+    45,
+    45,
+    45,
+    46,
+    46,
+    46,
+    47
+   ],
+   "sha256": "8cfe10e9a9579c4f9ec8caf9273135cb9067411e83b23945f4b4f7c203f745d2",
+   "bytes": 84962,
+   "status": "STATIC_ASSET_PASS",
+   "source": {
+    "files": [
+     {
+      "path": "assets/ultimate/HERO-michaela-ultimate-e.png",
+      "sha256": "b2abbacb1c97a7883848dbe887d388a384634e9ef4efc72e7ce6250ad30ba73f"
+     }
+    ],
+    "manifest": "미카엘라 — 어려운 동작 제외 · 정적 검수 선별 자산팩"
+   }
+  }
+ },
+ "note": "기본팩(scoped static default) 추가 동작. 없는 방향은 기존 그림 유지, W/SW/NW 는 E/SE/NE 반전(기존 매핑). 최소 12칸 미충족(팩 README). 실게임 재생·VFX 연동은 팩 기준 미검증."
+}
