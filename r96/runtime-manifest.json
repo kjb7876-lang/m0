@@ -11873,6 +11873,16 @@
       "sha256": "07b7c817f9f7df18f5fdf5968599ef18a2b9b39e2b4b0cce05727653ea3c742c"
     },
     {
+      "path": "assets/r1161/bosses/b09-hit4.webp",
+      "bytes": 265064,
+      "sha256": "8ff8039263743a12338b2ed00fe6590ca18399216428fd8151b38fa338e36885"
+    },
+    {
+      "path": "assets/r1161/bosses/b09-idle6.webp",
+      "bytes": 377780,
+      "sha256": "51082727cb9c57966c79d90a98957b3373025e086fe1c5d5da23da0254eddad4"
+    },
+    {
       "path": "assets/r117/scene/ep-cup-k1.png",
       "bytes": 2264,
       "sha256": "a39b05d84a4613cb40d72e213a26b9bccbc254b82e4cd9888f0b47e085a209e2"
@@ -53499,8 +53509,8 @@
     },
     {
       "path": "boss-motion-r620.js",
-      "bytes": 11208,
-      "sha256": "83b7e8e59fcbccf844b90f7cccee1c52335e839aac70ad0b460cf9430046493a"
+      "bytes": 11487,
+      "sha256": "714585353628fe2b5d4f7e058679964ca2403ea393ee77b16dc4bd74b7a74597"
     },
     {
       "path": "boss-pattern-fx-r1040.js",
@@ -55939,8 +55949,8 @@
     },
     {
       "path": "survival-r600.js",
-      "bytes": 90435,
-      "sha256": "b9a171024d78813fd13375845f7835fecb7706d12642f54ed785bf9384c27ba9"
+      "bytes": 94722,
+      "sha256": "d1372156cde18b55c8c83c506c7052f04fb6abb8ac82c115997de109cf918a4a"
     },
     {
       "path": "survival-samong-r1006.js",
@@ -56228,8 +56238,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11245,
-  "totalBytes": 1352255081,
+  "fileCount": 11247,
+  "totalBytes": 1352902491,
   "webHTMLSha256": "1fc3552b5542bb54d913d4fb6b50b5000e49db8b047e70bf7c2e0321af857cfd",
   "largest": [
     {
