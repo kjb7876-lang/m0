@@ -190,12 +190,14 @@ function step(dt){const x=stage(),r=G(()=>room,null);if(!x||!r||!st.slots.length
 
 // ── 그리기(엔진 조형물 그리기 순서 안 — R600 코어와 같은 길) ──
 const RING_SECS=4;
+const X1153=()=>{try{return window.__STORYWORLD_DOTS_STATUS_R1153__||null;}catch(_){return null;}};
 function drawAlly(p){const i=p.r720Slot,s=st.slots[i],a=allies[i];if(!s||!a||a.prop!==p)return;const ss=slotStats(s);if(!ss)return;
  const x=stage();if(!x)return;const t=now(),ui=G(()=>zoom,1),tile=G(()=>TILE,64),h=actorHeight(),q=project(a.x,a.y),an=anchorOf(s,x.centre,x.arena),qa=project(an.x,an.y),col=G(()=>HEROES[s.hero].color,'#c9b88c');
  ctx.save();try{
   // 발밑 빛 웅덩이(영웅 색 — 조종 영웅에서 멀어 어두운 곳에서도 보이게)·자리 표식 테두리 + 놓거나 고친 직후 잠깐 보이는 이동 반경 고리 — 임시 코드 그림
   ctx.globalAlpha=.2+.05*Math.sin(t*2.4+i);ctx.fillStyle=col;ctx.beginPath();ctx.ellipse?.(q.x,q.y,tile*ui*.95,tile*ui*.46,0,0,Math.PI*2);ctx.fill();
   ctx.globalAlpha=.78;ctx.strokeStyle=col;ctx.lineWidth=2;ctx.beginPath();ctx.ellipse?.(q.x,q.y,tile*ui*.56,tile*ui*.28,0,0,Math.PI*2);ctx.stroke();/* 발밑 고리: 배치 영웅 표시(적의 붉은 테두리·조종 영웅의 흰 테두리와 구분) */
+  /* R1153: Dots CX-0150MX F 배치 발밑 고리 — 영웅색 고리 위에 흰 테두리 빛(밝은 점이 고리를 돈다) */X1153()?.deploy?.(q.x,q.y,tile*ui,col,t,i);
   if(Math.hypot(a.x-an.x,a.y-an.y)>.35){ctx.globalAlpha=.4;ctx.lineWidth=1.2;ctx.setLineDash?.([3,4]);ctx.beginPath();ctx.ellipse?.(qa.x,qa.y,tile*ui*.4,tile*ui*.2,0,0,Math.PI*2);ctx.stroke();ctx.setLineDash?.([]);}/* 자리를 비웠을 때만 자리 표식 */
   const ra=RING_SECS-(t-a.ringAt);if(ra>0){ctx.globalAlpha=.34*clamp(ra,0,1);ctx.strokeStyle=col;ctx.lineWidth=1.5;ctx.setLineDash?.([4,6]);ctx.beginPath();ctx.ellipse?.(qa.x,qa.y,ss.radius*tile*ui,ss.radius*tile*ui*.5,0,0,Math.PI*2);ctx.stroke();ctx.setLineDash?.([]);}
   ctx.globalAlpha=1;
