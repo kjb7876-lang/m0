@@ -20,7 +20,11 @@ let off=false;try{off=localStorage.getItem('storyworld.r1032.off')==='1';}catch(
 const stats={kills:0,frags:0,quests:0,crits:0,echoes:0,echoDropped:0,heal:0,saves:0,opens:{i:0,k:0},errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const HERO_IDS=['hwando','seoha','neon','michaela','lauren','hunter','slayer','gunner'];
+const HERO_IDS=['hwando','seoha','neon','michaela','lauren','hunter','slayer','gunner','ego','persona'];
+// R1154(사용자 2026-11-18 07:59Z·08:00Z "같은 몸 … 모든모드에서 구분되게 각각 독립적이게", 08:12Z '상태만 따로'): 히든 영웅 EGO(환도 기술 틀)·페르소나(라우렌 기술 틀)는
+//  고유무기 단계·이름·그림을 따로 갖는다. 형상이 켜져 있으면(각 모듈 formActive) 그 영웅 id 로 읽고 쓴다. 패시브 표·기술은 원래 영웅 틀을 그대로 쓴다.
+const FORM_IDS=Object.freeze([['ego','__STORYWORLD_EGO_SOVEREIGN_R1046__'],['persona','__STORYWORLD_PERSONA_HERO_R1113__']]);
+const FORM_NAME=Object.freeze({ego:'EGO',persona:'페르소나'});
 const N='assets/heroes/normalized/';
 // 무기: 이름 · 모양 · 근거 · 그림(그 영웅 정면 그림에서 무기 부분 자르기, 512 기준 [x,y,w,h])
 const WEAPONS=Object.freeze({
@@ -31,6 +35,8 @@ const WEAPONS=Object.freeze({
  lauren:{name:'쌍둥이 기사창',shape:'보랏빛 긴 창',from:'정본 "창기사·창술사 형상 … 라우렌 쌍둥이 기사"',img:N+'directions/lauren-front.webp',box:[176,48,90,190]},
  hunter:{name:'표적 추적 장궁',shape:'붉은 장궁',from:'게임 영웅 자료(자원 표적·특수기 추적 일제사격) — 정본에 이름 없음',img:N+'directions/hunter-front.webp',box:[260,250,110,130]},
  slayer:{name:'처형 대검',shape:'붉은 날의 대검',from:'게임 영웅 자료(자원 처형 의지·특수기 종결 강타) — 정본에 이름 없음',img:N+'actions-consistent/slayer-guard-front.webp',box:[95,250,190,230]},
+ ego:{name:'EGO의 붉은 칼',shape:'붉은 빛이 흐르는 외날 칼',from:'게임 영웅 그림(EGO 초상의 칼) — 정본에 이름 없음',img:'assets/r1046/ego-portrait.webp',box:[56,318,220,190]},
+ persona:{name:'언주빛 구슬',shape:'손에 띄운 언주빛 구슬',from:'게임 영웅 자료(페르소나 공격 = 언주색 구슬 빛) — 정본에 이름 없음',img:'assets/rc133/art/awake-0.png',box:[52,128,108,108]},
  gunner:{name:'기억탄 소총',shape:'청록 기억탄을 쏘는 소총',from:'정본 "내 소총의 기억탄은 청록색이었다"',img:'assets/hero_direction337/gunner/s.webp',box:[200,170,140,320]}});
 const ITEMS=Object.freeze({
  seal:{name:'J의 인장',story:'ep1a11',storyName:'천사의 가면과 의목사 후보생',svLv:2,from:'정본 ep1a11 "손바닥에는 선을 향한 J의 인장이 떠올랐고"'},
@@ -71,11 +77,13 @@ const SV=()=>window.__STORYWORLD_SURVIVAL_R600__;
 const survival=()=>G(()=>!!SV()?.here?.(),false);
 const P=()=>G(()=>player,null);
 const isBody=p=>!!(p&&(p.r720Ally||p.r952Ally||p.bodyOf||p.r949Ally));
-const heroId=()=>{const h=G(()=>player.hero,'hwando');return HERO_IDS.includes(h)?h:'hwando';};
+const heroId=()=>{const h=G(()=>player.hero,'hwando');return HERO_IDS.includes(h)&&!FORM_NAME[h]?h:'hwando';};
+/* R1154: 고유무기 주인 — 형상(EGO·페르소나)이 켜져 있으면 그 영웅, 아니면 원래 영웅 */
+const weaponId=()=>{for(const [id,k] of FORM_IDS)if(G(()=>window[k].formActive()===true,false))return id;return heroId();};
 const T=()=>{const t=G(()=>time,0);return Number.isFinite(t)?t:0;};
 function ctx(){if(survival())return {mode:'survival',lv:G(()=>SV().state().lv,1)};return {mode:'story',done:['ep1a11','last305'].filter(z=>G(()=>completed(z,'STORY'),false)===true)};}
 const has=item=>!off&&owned(item,ctx());
-function levelsNow(){return {seal:has('seal')?st.seal:0,rose:has('rose')?st.rose:0,weapon:st.weapon[heroId()]||0};}
+function levelsNow(){return {seal:has('seal')?st.seal:0,rose:has('rose')?st.rose:0,weapon:st.weapon[weaponId()]||0};}
 const cur=()=>effects(levelsNow());
 const active=()=>{const p=P();return !off&&!!p&&!isBody(p);};
 // ── 꿈의 조각 ──
@@ -90,7 +98,7 @@ function questTick(){
  if(G(()=>completed(z,'DREAM'),false)===true&&!st.cleared.includes(k)){st.cleared.push(k);if(st.cleared.length>400)st.cleared.shift();give(gain({layer:'DREAM',kind:'quest',diff:G(()=>room.difficultyR63,'normal'),index:G(()=>regionById[z].index,0)}));stats.quests++;dirty=true;}}
 // ── 강화 ──
 function upgrade(item,hero){try{if(off)return {ok:false,why:'off'};if(!ITEMS[item])return {ok:false,why:'item'};if(!has(item))return {ok:false,why:'locked'};
- const h=HERO_IDS.includes(hero)?hero:heroId(),now=item==='weapon'?st.weapon[h]:st[item],c=cost(now+1);if(!Number.isFinite(c))return {ok:false,why:'max'};if(st.frags+1e-9<c)return {ok:false,why:'frags',need:c};
+ const h=HERO_IDS.includes(hero)?hero:weaponId(),now=item==='weapon'?st.weapon[h]:st[item],c=cost(now+1);if(!Number.isFinite(c))return {ok:false,why:'max'};if(st.frags+1e-9<c)return {ok:false,why:'frags',need:c};
  st.frags-=c;if(item==='weapon')st.weapon[h]=now+1;else st[item]=now+1;save();return {ok:true,item,hero:item==='weapon'?h:null,level:now+1,cost:c};}catch(e){fail(e);return {ok:false,why:'error'};}}
 // ── 치명 재발동 ──
 let rnd=Math.random,echoing=false,echoBudget=ECHO_MAX,lsBudget=null,critTextAt=-9;const queue=[];
@@ -119,9 +127,9 @@ function effText(item,l){const e=effects(item==='seal'?{seal:l}:item==='rose'?{r
  if(item==='seal')return '흡혈 '+pct(e.lifesteal)+' · 받는 피해 −'+pct(e.defense)+' · EGO 지속 +'+pct(e.ego);
  if(item==='rose')return '치명 확률 '+pct(e.critChance)+' · 치명 피해 ×'+e.critMult.toFixed(1)+' · 치명 시 한 번 더(치명 피해의 '+pct(e.echo)+')';
  return '모든 피해 +'+pct(e.damage)+' · 스킬 쿨 −'+pct(e.cdr);}
-function card(item){const h=heroId(),W=WEAPONS[h],own=has(item),lv=item==='weapon'?st.weapon[h]:st[item],c=cost(lv+1),it=ITEMS[item];
+function card(item){const h=weaponId(),W=WEAPONS[h],own=has(item),lv=item==='weapon'?st.weapon[h]:st[item],c=cost(lv+1),it=ITEMS[item];
  const icon=item==='seal'?sealSvg():item==='rose'?roseSvg():'<canvas class="r1032w" width="72" height="72" data-r1032w="'+h+'" aria-label="'+esc(W.shape)+'"></canvas>';
- const name=item==='weapon'?W.name+' <small>('+esc(G(()=>HEROES[h].name,h))+' 고유무기)</small>':esc(it.name);
+ const name=item==='weapon'?W.name+' <small>('+esc(FORM_NAME[h]||G(()=>HEROES[h].name,h))+' 고유무기)</small>':esc(it.name);
  const how=item==='weapon'?esc(W.shape)+' · '+esc(W.from):own?esc(it.from):'아직 없음 — 스토리 「'+esc(it.storyName)+'」에서 얻음 · 무한생존은 생존 레벨 '+it.svLv;
  const can=own&&Number.isFinite(c)&&st.frags+1e-9>=c;
  return '<div class="r1032card'+(own?'':' locked')+'"><div class="ic">'+icon+'</div><div class="tx"><b>'+name+'</b> <span class="lv">'+lv+' / '+MAX+'단계</span><div class="small">'+how+'</div>'

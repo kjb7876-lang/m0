@@ -789,6 +789,8 @@ jobs:
         run: node r96/qa/r1036/r1036-dirflip-cpu-check.cjs
       - name: R1032 unique gear (J seal, rose seal, hero weapons) + dream-fragment n^2 upgrades + K passive / I gear+memory / B placement windows CPU check
         run: node r96/qa/r1032/r1032-cpu-check.cjs
+      - name: R1154 EGO and Persona keep their own unique weapon level, name and art (separate from Hwando and Lauren) CPU check
+        run: node r96/qa/r1154/r1154-gear-cpu-check.cjs
       - name: R1039 hero EGO aura and hit/hurt code sprites replaced by painted R100 frame sheets CPU check
         run: node r96/qa/r1039/r1039-cpu-check.cjs
       - name: R1046 hidden hero EGO (unlock after S-07, hwando lineage form, observe-discard dispel 0.7s) CPU check
