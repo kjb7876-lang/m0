@@ -140,6 +140,10 @@
   let line=[{x:from.x,y:from.y},...cells];for(let pass2=0;pass2<2&&line.length>2;pass2++){const out=[line[0]];for(let i=0;i<line.length-1;i++){const a=line[i],b=line[i+1];out.push({x:a.x*.75+b.x*.25,y:a.y*.75+b.y*.25},{x:a.x*.25+b.x*.75,y:a.y*.25+b.y*.75});}out.push(line[line.length-1]);line=out;}
   return line;}
  const nav={goal:null,path:null,at:-9,from:null,goalKey:'',angle:0,meters:0,visible:false};
+ // R1132 (2026-11-18 스토리 실플레이 한도성 3 이어 하기 3/3 재현): nav.goal 은 그리기(draw→updateNav) 때만 새로 계산된다. 나침반을 끄거나
+ //  그리기가 드물면 지난 단계 목표('중앙 전투실' 집결점)가 남아, 이 값을 쓰는 길잡이(R101 extendGuide)가 보스 준비 뒤에도 제단 대신 집결점과
+ //  다른 곳 사이를 왕복했다. 바깥에 주는 goal() 은 그때그때 계산한다(화면 나침반 그리기는 그대로).
+ function liveGoal(){try{if(live()&&!modal&&(layer==='STORY'||layer==='DREAM')){const g=goal();return g?{...g}:null;}}catch(err){fail(err);}return nav.goal?{...nav.goal}:null;}
  function updateNav(){nav.visible=false;if(!prefs.nav||!live()||modal||player.hp<=0||layer!=='STORY'&&layer!=='DREAM')return;
   const g=goal();nav.goal=g;if(!g)return;const key=Math.floor(g.x)+':'+Math.floor(g.y)+':'+g.kind,moved=!nav.from||Math.hypot(player.x-nav.from.x,player.y-nav.from.y)>.9;
   if(key!==nav.goalKey||(moved&&time-nav.at>.35)||time-nav.at>2.5||time<nav.at){nav.goalKey=key;nav.at=time;nav.from={x:player.x,y:player.y};nav.path=navPath(player,g)||[{x:player.x,y:player.y},{x:g.x,y:g.y}];stats.navPaths++;}
@@ -299,6 +303,6 @@
  if(typeof showSettings==='function'){const sb=showSettings;showSettings=function(...args){const result=sb.apply(this,args);try{settingsSection();}catch(e){fail(e);}return result;};}
 
  window.__STORYWORLD_POLISH_R100__=Object.freeze({resetNav:()=>{grid=null;}/* R208: 지형 판정이 바뀌면(R204 동굴 거리장) 길안내 격자를 다시 잰다 */,prefs:()=>({...prefs}),set,colourOf,artOf:e=>{const r=artOf(e);return r?{...r}:null;},rooted:()=>root.on,
-  sig:D.sig,sigColours:D.sigColours,capMesh:()=>capRenderer?.r100Cap||null,goal:()=>nav.goal?{...nav.goal}:null,path:()=>nav.path?nav.path.map(p=>({...p})):null,navPath,
+  sig:D.sig,sigColours:D.sigColours,capMesh:()=>capRenderer?.r100Cap||null,goal:liveGoal,path:()=>nav.path?nav.path.map(p=>({...p})):null,navPath,
   inspect:()=>({revision:'R100-polish',prefs:{...prefs},stats:{...stats},nav:{visible:nav.visible,goal:nav.goal,meters:nav.meters,points:nav.path?.length||0},cap:capInfo(),root:{on:root.on,off:root.off},lastError,presentationOnly:true,gameplayChanged:false,savesTouched:false})});
 })();
