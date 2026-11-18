@@ -10517,6 +10517,10 @@
     "assets/r1177/s06-rival-dots-hit-4.webp",
     "assets/r1177/s06-rival-dots-walk-right-8.webp",
     "move-dir-r1167-data.js",
+    "assets/r1174/persona-awake.webp",
+    "assets/r1174/persona-bust.webp",
+    "assets/r1174/persona-orbs8.webp",
+    "assets/r1174/persona-sigil12.webp",
     "assets/r1176/ego2d/discard-right.webp",
     "assets/r1176/ego2d/discard-rear.webp"
   ],
@@ -11593,5 +11597,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "1baa76e9d2546b838fcfca400f2f8729eae56d80b9cac9dbc493f15b59e51ded"
+  "runtimeManifestSHA256": "f627796cf7002c145bec626487ad558dd9db29aee28ff437dde08ee3f2d285c6"
 }
