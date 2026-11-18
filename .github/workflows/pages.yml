@@ -701,6 +701,8 @@ jobs:
         run: node r96/qa/r1012/r1012-cpu-check.cjs
       - name: R1014 survival mid-boss no longer sticks at the 70% phase gate under the 6%/s damage cap CPU check
         run: node r96/qa/r1014/r1014-cpu-check.cjs
+      - name: R1135 survival boss count per difficulty (easy 1, normal 2, hard 3, nightmare 6), per-boss balance with the 66x floor, spread spawn spots CPU check
+        run: node r96/qa/r1135/r1135-cpu-check.cjs
       - name: R537 spider cave mud-back spider and memory-carrier spider, swamp root stalker renamed CPU check
         run: node r96/qa/r537/r537-cpu-check.cjs
       - name: R450 zone weather (63 story zones indoor/outdoor/cave/void, dust instead of rain indoors, canon weather, double-sided streaks) CPU check
