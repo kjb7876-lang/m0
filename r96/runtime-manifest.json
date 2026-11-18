@@ -12098,6 +12098,11 @@
       "sha256": "8aa7194697512b1fd43d594840c24af3d24aefac2c36120969d743e28560cb11"
     },
     {
+      "path": "assets/r1173/persona-walk-side.webp",
+      "bytes": 400832,
+      "sha256": "88ebb09daf98f3d998c55fa3ad4d7478abc4a8eb505435d4e86062eb4f645cd1"
+    },
+    {
       "path": "assets/r118/clean/assets/visual-test/hospital-boss-motion-r53.png",
       "bytes": 1049216,
       "sha256": "73575940823b274dbd5d0d8425fa899b316294d0493fed5fd3a54a2937d1f320"
@@ -55409,8 +55414,8 @@
     },
     {
       "path": "persona-hero-r1113.js",
-      "bytes": 49186,
-      "sha256": "b416d9af879a761ebc5f622e0e2f0d87b82d99cec2e1ffe1539deef8eae57def"
+      "bytes": 52827,
+      "sha256": "08ef641dd3f988976cd997b0611e106290e5518104191d9d34b1819f5dc8da96"
     },
     {
       "path": "persona-ink-r1097.js",
@@ -56248,8 +56253,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11249,
-  "totalBytes": 1352949037,
+  "fileCount": 11250,
+  "totalBytes": 1353353510,
   "webHTMLSha256": "6ea55cf8f75652a64973714645b0399beebeab504ff6260339685d103c375191",
   "largest": [
     {

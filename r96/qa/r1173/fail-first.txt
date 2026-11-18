@@ -1,0 +1,15 @@
+FAIL G1 left 옆 걷기 거리 1당 3.25·3.20칸 (1.6~2.2, 예전 3.2) 시트 side
+FAIL G1 right 옆 걷기 거리 1당 3.25·3.20칸 (1.6~2.2, 예전 3.2) 시트 side
+FAIL G2 up 걷기 거리 1당 3.25·3.20칸 (1.2~1.7) 시트 rear
+FAIL G2 down 걷기 거리 1당 3.25·3.20칸 (1.2~1.7) 시트 front
+FAIL G3 기본 속도 4.75 옆 한 주기 0.53초 (0.8~1.3, 예전 0.53)
+FAIL G3 기본 속도 4.75 위 한 주기 0.53초 (1.0~1.6)
+FAIL G4 화면 거리 대비 위 박자/옆 박자 = 2.00 ≤ 1.6 (예전 2.0)
+PASS G5 빠르게(6/초) 걸어도 렌더마다 최대 1칸
+FAIL G6 API walkRate undefined
+FAIL G7 새 시트가 runtime-manifest·runtime-inputs 에 있음
+R1173 persona-walk-gait FAILED 9
+FAIL I0 영웅 옆 걷기 시트 assets/r1173/persona-walk-side.webp 가 있음
+FAIL I7 영웅 옆 걷기 = r1173 시트
+PASS I7 앞·뒤 = r1104b
+R1173 persona-walk-side-sheet FAILED 2
