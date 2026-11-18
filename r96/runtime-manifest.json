@@ -12374,8 +12374,8 @@
     },
     {
       "path": "assets/r1177/mob-snow-dots-12.webp",
-      "bytes": 46102,
-      "sha256": "c3587abe07b66bdebbb60ff12e9b256f64121ad53a5c164aac9ccae1bf024c6e"
+      "bytes": 42820,
+      "sha256": "7c9a3a102d9514367a21ecf5f9ae17fa66d34c647ac36c040d629795005ab682"
     },
     {
       "path": "assets/r1177/mob-stone-dots-12.webp",
@@ -56644,7 +56644,7 @@
     }
   ],
   "fileCount": 11328,
-  "totalBytes": 1360460618,
+  "totalBytes": 1360457336,
   "webHTMLSha256": "d7ab4417ea6e532e3533c1394e33a40a10e4e4e468c40c2eb0edb853ded2991e",
   "largest": [
     {

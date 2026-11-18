@@ -23,6 +23,8 @@ def union(a,fw,fh,cols,n):
     ys,xs=np.nonzero(U);return xs.min(),ys.min(),xs.max()+1,ys.max()+1
 # 사방으로 퍼지는 칸(얼음 깨짐·신경 전류)은 Dots 그림 한가운데가 맞은 자리 — 원래 도트 칸은 오른쪽으로 뻗는 그림이라 기준점이 왼쪽이었다
 CENTER={'mob-snow':None,'mob-neural':.5}
+# R1177e: Dots 인계 메모 '눈가루가 서리 장판처럼 보임 → 연무 투명도 낮춤' — 반투명(알파<230) 연무만 옅게, 단단한 얼음 조각(불투명)은 그대로
+HAZE={'mob-snow':.5}
 rows=[]
 for key,src,n in JOBS:
     m=META[key];fw,fh=m['frame'];px,py=m['pivot']
@@ -41,6 +43,7 @@ for key,src,n in JOBS:
     yy,xx=np.mgrid[0:CELL,0:CELL];fe=np.clip(np.minimum(np.minimum(xx,CELL-1-xx),np.minimum(yy,CELL-1-yy))/4,0,1)
     for i in range(n):
         r,c=divmod(i,COLS);cell=d[r*CELL:(r+1)*CELL,c*CELL:(c+1)*CELL].astype(np.float32).copy();cell[...,3]*=fe
+        if key in HAZE:al=cell[...,3];t=np.clip((al-150)/80,0,1);cell[...,3]=al*(HAZE[key]+(1-HAZE[key])*t*t*(3-2*t))
         big=np.zeros((H,W,4),np.float32)# 칸 좌표 (X0,Y0) 기준으로 옮김(넘치는 곳은 투명)
         sx0,sy0=max(0,X0),max(0,Y0);sx1,sy1=min(CELL,X0+W),min(CELL,Y0+H)
         big[sy0-Y0:sy1-Y0,sx0-X0:sx1-X0]=cell[sy0:sy1,sx0:sx1]
