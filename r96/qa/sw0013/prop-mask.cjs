@@ -28,9 +28,10 @@ function canvas() {
   };
   return {getContext() {return ctx;}};
 }
-function createGame(memory={usesHalfSource: () => half}){
+function createGame(memory={usesHalfSource: () => half},webkit=true){
 const state = {
-  HTMLImageElement: GameImage, window: {__STORYWORLD_MOBILE_MEMORY_R980__:memory},
+  HTMLImageElement: GameImage, window: {WebKitPoint:webkit?class {}:undefined,__STORYWORLD_MOBILE_MEMORY_R980__:memory},
+  CSS:{supports:(key,value)=>webkit&&key==='-webkit-nbsp-mode'&&value==='space'},
   BASE: base, document: {createElement:canvas}, atob, setTimeout(){}, localStorage: {getItem(){return null;}},
   TILE: 32, zoom: 1, cam:{x:0,y:0}, ctx:{}, project:()=>({x:50, y:70}),
   drawProp(prop) {
@@ -77,36 +78,46 @@ assert.equal(rejected.stats().maskProfile,'native','unrecognized native signatur
 probe(rejected,fractional,4);
 assert.equal(rejected.stats().maskBaked,0);
 const conflict=createGame();
-probe(conflict,full,4);
-probe(conflict,fractional,5);
+probe(conflict,full,5);
+probe(conflict,fractional,4);
 assert.equal(conflict.stats().maskProfile,'native','contradictory signatures');
-let game;
-for(const [column,profile] of [[4,'chromium'],[5,'webkit']]) {
-  game=createGame();
-  probe(game,full,column);
-  assert.equal(game.stats().maskProfile,'pending');
-  probe(game,full,column);
-  assert.equal(game.stats().maskProfile,'pending','repeated calibration from one asset is insufficient');
-  probe(game,fractional,column);
-  assert.equal(game.stats().maskProfile,profile);
-  for(const {asset,w,h,row,rect} of sheets) {
-    const image = new GameImage(asset,w,h);
-    const bytes = Buffer.from(row[column], 'base64');
-    assert.equal(bytes.length,70,asset);
-    const cells=expectedCells(bytes);
-    setAlpha(cells);
-    const start=nativeReads;
-    const normal=game.sample(image,rect), mirror=game.sample(image,rect,true);
-    assert.equal(nativeReads,start,asset);
-    assert.equal(normal.length,cells.length);
-    const foreign = new GameImage(asset,w,h);
-    foreign.src=foreign.currentSrc='https://foreign.example/'+asset;
-    assert.deepEqual(game.sample(foreign,rect),normal,asset+' projected coordinates');
-    assert.deepEqual(game.sample(foreign,rect,true),mirror,asset+' mirror coordinates');
-    assert.equal(nativeReads,start+1);
-  }
-  assert.equal(game.stats().maskBaked,sheets.length);
+// A Chromium game image can differ from a fresh equally sized copy after its
+// decoder has displayed it. Even two WebKit-looking samples cannot enable reuse.
+const chromium=createGame(undefined,false);
+probe(chromium,full,5);
+probe(chromium,fractional,5);
+assert.equal(chromium.stats().maskProfile,'native');
+for(const sheet of sheets){
+  const pts=probe(chromium,sheet,4);
+  assert.equal(pts.length,expectedCells(Buffer.from(sheet.row[4],'base64')).length);
 }
+assert.equal(chromium.stats().maskBaked,0);
+assert.equal(chromium.stats().maskProbes,0);
+const game=createGame();
+const column=5;
+probe(game,full,column);
+assert.equal(game.stats().maskProfile,'pending');
+probe(game,full,column);
+assert.equal(game.stats().maskProfile,'pending','repeated calibration from one asset is insufficient');
+probe(game,fractional,column);
+assert.equal(game.stats().maskProfile,'webkit');
+for(const {asset,w,h,row,rect} of sheets) {
+  const image = new GameImage(asset,w,h);
+  const bytes = Buffer.from(row[column], 'base64');
+  assert.equal(bytes.length,70,asset);
+  const cells=expectedCells(bytes);
+  setAlpha(cells);
+  const start=nativeReads;
+  const normal=game.sample(image,rect), mirror=game.sample(image,rect,true);
+  assert.equal(nativeReads,start,asset);
+  assert.equal(normal.length,cells.length);
+  const foreign = new GameImage(asset,w,h);
+  foreign.src=foreign.currentSrc='https://foreign.example/'+asset;
+  assert.deepEqual(game.sample(foreign,rect),normal,asset+' projected coordinates');
+  assert.deepEqual(game.sample(foreign,rect,true),mirror,asset+' mirror coordinates');
+  assert.equal(nativeReads,start+1);
+}
+assert.equal(game.stats().maskBaked,sheets.length);
 const sample=game.sample;
 const [asset,[w,h,[row]]]=rows[0];
 const rect=row.slice(0,4), im=new GameImage(asset,w,h);
@@ -142,4 +153,4 @@ assert.equal(sample(tagged,rect).length,1);
 tagged.width++;
 setAlpha([7,8]);assert.equal(sample(tagged,rect).length,2);
 assert.equal(nativeReads,before+3,'changed static revision and dimensions invalidate');
-console.log('PASS R412',sheets.length,'× 2 calibrated backends','exact packaged masks bypass native reads; mirrors, fractional crops, image changes, half sources, mutable sources and alpha 79/80 verified');
+console.log('PASS R412',sheets.length,'WebKit baked / Chromium native','exact packaged masks bypass native reads; mirrors, fractional crops, image changes, half sources, mutable sources and alpha 79/80 verified');

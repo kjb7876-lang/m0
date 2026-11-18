@@ -10,6 +10,8 @@ const {chromium, webkit, devices} = require('playwright');
 const cases = [
   {role:'hwando', file:'r1063/r283/hwando/r242/attack-n.webp', cell:[195,240], frame:7, height:90},
   {role:'swamp-boss', file:'r281/bosses/mb-dist02-walk6.webp', cell:[352,356], frame:2, height:116},
+  // RC135's three poses have different widths. Its first (idle) crop starts at (0,0).
+  {role:'story-midboss', file:'rc135/midboss-motions/sheets/mb-dist02.png', cell:[790,724], frame:0, height:116},
   {role:'enemy-warning', file:'r1107/persona-red-star.webp', cell:[192,192], frame:10, height:64},
   {role:'persona', file:'r1104b/persona-walk-front.webp', cell:[512,512], frame:2, height:88},
   {role:'boss-attack', file:'r760/boss/sheet-atkA.webp', cell:[512,512], frame:3, height:120}

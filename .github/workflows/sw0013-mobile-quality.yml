@@ -6,6 +6,7 @@ on:
       - 'r96/client-source/render-lod-r287.js'
       - 'r96/client-source/mobile-memory-r980.js'
       - 'r96/client-source/props-tidy-r412.js'
+      - 'r96/client-source/grove-r481.js'
       - 'scripts/build-sw0013-prop-masks.*'
       - 'r96/qa/sw0013/**'
       - '.github/workflows/sw0013-mobile-quality.yml'
@@ -31,12 +32,13 @@ jobs:
           node r96/qa/sw0013/lod.cjs
           node r96/qa/sw0013/prop-mask.cjs
           node r96/qa/sw0013/priority.cjs
+          node r96/qa/sw0013/grove.cjs
       - name: Reconstruct the game and install Chromium
         run: |
           python3 scripts/build-r96.py
           npm install --no-save --ignore-scripts playwright@1.56.0
           npx playwright install --with-deps chromium
-      - name: Check medium-preset combat and image detail
+      - name: Check low and medium combat and image detail
         env:
           SW_URL: http://127.0.0.1:4396/
           SHOTS: ${{ runner.temp }}/mobile-quality-evidence
@@ -45,7 +47,8 @@ jobs:
           server=$!
           trap 'kill "$server"' EXIT
           curl --fail --retry 10 --retry-connrefused --retry-delay 1 --silent --output /dev/null "$SW_URL"
-          node r96/qa/sw0013/mobile-quality-browser.cjs
+          SW_PRESET=2 node r96/qa/sw0013/mobile-quality-browser.cjs
+          SW_PRESET=3 node r96/qa/sw0013/mobile-quality-browser.cjs
           node r96/qa/sw0013/quality-pixels.cjs
       - uses: actions/upload-artifact@v4
         if: always()

@@ -4,6 +4,7 @@ const source=fs.readFileSync(path.join(__dirname,'../../client-source/mobile-mem
 const hwando='assets/r1063/r283/hwando/r242/attack-n.webp';
 const persona='assets/r1104b/persona-walk-front.webp';
 const boss='assets/r760/boss/sheet-atkA.webp';
+const storyBoss='assets/rc135/midboss-motions/sheets/mb-dist02.png';
 const tell='assets/r1107/persona-red-star.webp';
 function boot({step=2,controller=true,cap=8192,mobile=true}={}){
  let tick=0;
@@ -44,6 +45,21 @@ function boot({step=2,controller=true,cap=8192,mobile=true}={}){
  g.scene.release(ordinary);
  for(const img of [hero,foe,signal])g.scene.release(img);
  assert.equal(g.scene.textures.size,0);
+}
+{
+ const g=boot(),img=g.im(storyBoss+'?v=150',2172,724);
+ const other=g.im(storyBoss.replace('dist02','dist03'),2172,724);
+ assert.notEqual(g.draw(other)[0],other,'preloaded off-zone boss stays half');
+ g.three.metrics.samples=Array.from({length:12},()=>({milliseconds:40}));g.api.check();
+ const half=g.scene.texture(img,false).image;
+ assert.deepEqual([half.width,half.height],[1086,362],'active story midboss under pressure');
+ g.three.metrics.samples=[];g.api.check();
+ assert.equal(g.draw(img)[0],half,'an existing boss mesh keeps its source as headroom returns');
+ g.scene.release(img);g.advance(16000);
+ assert.equal(g.scene.texture(img,false).image,img,'select the full 2172×724 story midboss at headroom');
+ assert.equal(g.draw(img)[0],img);assert.equal(g.api.inspect().priority.used.boss,2172*724);
+ g.scene.release(img);g.en.room.id='dist03';g.api.check();
+ assert.equal(g.draw(other)[0],other,'zone switch admits the newly active boss');
 }
 {
  const g=boot({step:3}),img=g.im(persona,4096,512),other=g.im('assets/r1104b/persona-walk-side.webp',4096,512);

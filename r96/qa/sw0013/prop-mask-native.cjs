@@ -44,9 +44,11 @@ module.exports=async function verifyNativeGeometry(page,overlay,table,engine) {
     return {tested:rows.length, profile:stats.maskProfile, reads:stats.maskReadbacks-base.maskReadbacks,
       baked:stats.maskBaked-base.maskBaked, errors:stats.errors};
   },table);
-  assert.equal(result.profile,engine);
-  assert.equal(result.baked,result.tested);
-  assert.equal(result.reads,result.tested);
+  const calibrated=engine==='webkit';
+  assert.equal(result.profile,calibrated?'webkit':'native');
+  assert.equal(result.baked,calibrated?result.tested:0);
+  assert.equal(result.reads,result.tested*(calibrated?1:2));
   assert.equal(result.errors,0);
-  console.log('Real R412 native and baked projected points match, including mirrors:',engine,result.tested);
+  console.log('R412 projected points match native pixels, including mirrors:',engine,result.tested,
+    calibrated?'calibrated masks':'native fallback');
 };
