@@ -1,0 +1,68 @@
+FAIL hidden-hero-sfx-r1155.js 있음 
+FAIL hidden-hero-sfx-r1155.js runtime-text 사본 = client-source 
+FAIL 태그: R541·R1145·R1144 뒤, combat-r118 앞 {"n":-1}
+FAIL pages.yml CPU 검사 줄 
+FAIL 공개 확인 목록 
+FAIL runtime-inputs 에 새 파일 
+ok   tick 은 직접 감싸지 않음
+ok   새 키 없음
+ok   코드에 유료 생성 호출 없음
+FAIL 전용 종류 28개 이상 null
+FAIL 모든 소리 파일 있음 []
+ok   파일마다 60KB 이하
+ok   전용 폴더(assets/r1155/sfx)만 씀 — 환도·라우렌 파일 재사용 없음
+FAIL 필요한 종류 모두 표에 있음 ["r546Atk_ego","r546Atk_persona","r546Sp_ego_q","r546Sp_ego_w","r546Sp_ego_e","r546Sp_ego_r","r546Sp_persona_q","r546Sp_persona_w","r546Sp_persona_e","r546Sp_persona_r","r546Sp_ego_moon","r546Sp_ego_clones","r546Sp_ego_trio","r546Sp_ego_trioHit","r546Sp_ego_star","r546Sp_ego_abyss","r546Sp_ego_repulse","r546Sp_persona_repulse","r546Sp_persona_star","r546Sp_persona_abyss","r546Sp_persona_violetChar
+FAIL 자주 나는 소리(기본 공격·연타)는 변주 2개 이상 
+FAIL API __STORYWORLD_HIDDEN_HERO_SFX_R1155__ 
+FAIL EGO 기본 공격 → r546Atk_ego ["attack"]
+FAIL 프로필 등록(전용 경로) 
+FAIL 쾌적 계층 역할 별칭(공격·스킬) {}
+FAIL EGO 때 이미 환도 평타로 바뀐 종류도 EGO 것으로 
+ok   관계없는 종류(피격·구르기)는 그대로
+ok   EGO 형상을 끄면(환도 본인) 예전 그대로
+FAIL 페르소나 기본 공격 → r546Atk_persona 
+ok   라우렌 본인은 그대로
+ok   형상 없는 환도는 그대로
+ok   다른 영웅은 그대로(형상 판정은 몸 영웅까지 확인)
+FAIL Q: specialCD 가 막 걸림 → ego_q 
+ok   쿨다운 변화 없는 special(소환·적 탄 등) → 그대로
+FAIL W: ready 가 막 걸림 → ego_w 
+FAIL E: ready 가 막 걸림 → ego_e 
+FAIL R: ready 가 막 걸림 → ego_r 
+ok   잠긴 칸(time+1e6 밀어 올림)은 시전으로 안 봄
+ok   한 시전은 한 번만 바꿈(같은 프레임 두 번째 special 은 그대로)
+FAIL 페르소나 Q 
+FAIL 페르소나 R 
+FAIL POST_HOOKS 없어도 소리 호출마다 기준값을 새로 잡아 Q 판별 
+FAIL 묵월 → ego_moon 
+FAIL 칠묵영 → ego_clones 
+FAIL 삼협묵희 → ego_trio 
+FAIL 삼협묵희 1.2초 뒤 일격 special → ego_trioHit 
+ok   일격 시간이 지나면 그대로
+ok   이름 글자와 소리가 다른 차례(작업)면 묶지 않음
+ok   환도 본인의 묵월은 예전 소리
+FAIL EGO 은빛 거성 → ego_star 
+FAIL EGO 심연 왜성 → ego_abyss 
+FAIL EGO 항성 반발 → ego_repulse 
+FAIL act 를 못 읽으면 EGO 천체 기본값(은빛 거성) — 라우렌 소리는 안 남 
+FAIL (진) 항성 반발 
+FAIL (진) 은빛 거성 
+FAIL (진) 심연 왜성 
+FAIL (진) 쌍성 소멸 시작 → 충전 
+FAIL (진) 쌍성 소멸 발사(레이저 7줄) → 발사 
+FAIL (진) 유성 궤도 
+ok   라우렌 본인 천체 공명은 예전 소리
+FAIL EGO 연참 틱 
+FAIL EGO 일섬 7연(1~6 / 7타) 
+FAIL 페르소나 중력 틱 
+ok   환도 본인 틱 그대로
+FAIL 블록 실행 오류 "TypeError: Cannot read properties of undefined (reading 'inspect')"
+ok   프로필이 없으면(파일 못 받음 등) 원래 종류로
+ok   soundProfiles 없는 상태에서도 오류 없음
+FAIL 블록 실행 오류 "TypeError: Cannot read properties of undefined (reading 'inspect')"
+
+20/62 — 실패 42
+FAIL r546Atk_persona 비교 대상 있음 
+FAIL r546Sp_persona_q 비교 대상 있음 
+
+1/7 — 실패 6

@@ -1,0 +1,29 @@
+PASS ① 켜짐 (가장 바깥 감싸기 여부 false — 바깥 오버레이가 바꾼 종류는 안쪽 감싸기가 봄) {"outer":false,"on":true,"profiles":43,"errors":0}
+PASS ② 프로필 경로 43개 등록 (43)
+PASS ② 43개 파일 받기·해독(길이 .1~1.25초) 
+EGO {"attack":["assets/r1155/sfx/ego-atk-1.ogg","assets/r1155/sfx/ego-hit-1.ogg","assets/r546/sfx/ego-1.ogg","assets/r1155/sfx/ego-atk-2.ogg","assets/r1155/sfx/ego-hit-2.ogg","assets/r1155/sfx/ego-hit-3.ogg","assets/r1155/sfx/ego-atk-1.ogg","assets/r1155/sfx/ego-hit-4.ogg","assets/r1155/sfx/ego-q-1.ogg","assets/r1155/sfx/ego-hitbig-1.ogg","assets/r1155/sfx/ego-hit-2.ogg","assets/r1155/sfx/ego-hit-3.ogg","assets/r1155/sfx/ego-atk-2.ogg","assets/r1155/sfx/ego-hitbig-2.ogg","assets/r1155/sfx/ego-hitbig-1.ogg","assets/r1155/sfx/ego-hit-2.ogg","assets/r1155/sfx/ego-hitbig-1.ogg","assets/r1155/sfx/ego-atk-1.ogg","assets/r1155/sfx/ego-hit-4.ogg","assets/r1155/sfx/ego-r-1.ogg","assets/r1155/sfx/ego-hitbig-1.ogg","assets/r787/sfx/sk-hwando-r-3.ogg","assets/r1155/sfx/ego-hitbig-2.ogg","assets/r1155/sfx/ego-hit-3.ogg","assets/r1155/sfx/ego-hitbig-2.ogg","assets/r1155/sfx/ego-atk-2.ogg","assets/r1155/sf
+PASS ③ EGO 기본 공격 → ego-atk (환도 평타 소리 없음)
+PASS ③ EGO W 시전 → ego-w
+PASS ③ EGO E 시전 → ego-e
+PASS ③ EGO R 시전 → ego-r
+EGO q ["assets/r1155/sfx/ego-q-1.ogg","assets/r1155/sfx/ego-hit-2.ogg","assets/r1155/sfx/ego-hit-3.ogg","assets/r1155/sfx/ego-abyss-1.ogg","assets/r1155/sfx/ego-hit-4.ogg","assets/r1155/sfx/ego-hit-1.ogg","assets/r1155/sfx/ego-hit-2.ogg","assets/r1155/sfx/ego-hit-3.ogg","assets/r1155/sfx/ego-hitbig-2.ogg","assets/r1155/sfx/ego-hitbig-1.ogg","assets/r1155/sfx/ego-hit-2.ogg","assets/r1155/sfx/ego-hit-3.ogg","assets/r1155/sfx/ego-hit-4.ogg","assets/r1155/sfx/ego-hit-1.ogg"]
+PASS ③ EGO 적중음 → ego-hit (환도 적중음 없음)
+PASS ③ EGO Q(special()) → ego-q
+PASS ③ EGO 은빛 거성·심연 왜성 → ego-star·ego-abyss (라우렌 소리 없음)
+PERSONA {"attack":["assets/r1155/sfx/per-atk-1.ogg","assets/r1155/sfx/per-hit-4.ogg","assets/r546/sfx/ego-1.ogg","assets/r1155/sfx/per-atk-2.ogg","assets/r1155/sfx/per-hit-1.ogg","assets/r1155/sfx/per-atk-1.ogg","assets/r1155/sfx/per-hit-2.ogg","assets/r1155/sfx/per-r-1.ogg","assets/r787/sfx/sk-lauren-r-3.ogg","assets/r1155/sfx/per-hit-3.ogg","assets/r1155/sfx/per-atk-2.ogg","assets/r1155/sfx/per-hit-4.ogg","assets/r1155/sfx/per-hit-1.ogg","assets/r1155/sfx/per-hit-2.ogg","assets/r1155/sfx/per-hit-3.ogg","assets/r1155/sfx/per-atk-1.ogg","assets/r1155/sfx/per-hit-4.ogg","assets/r1155/sfx/per-q-1.ogg","assets/r1155/sfx/per-hit-1.ogg","assets/r1155/sfx/per-hit-2.ogg","assets/r1155/sfx/per-hitbig-1.ogg","assets/r1155/sfx/per-atk-2.ogg","assets/r1155/sfx/per-hit-4.ogg","assets/r1155/sfx/per-hit-1.ogg","assets/r1155/sfx/per-hit-2.ogg","assets/r1155/sfx/per-hitbig-1.ogg","assets/r1155/sfx/per-hitbig-2.
+PASS ③ 페르소나 기본 공격 → per-atk (라우렌 평타 소리 없음)
+PASS ③ 페르소나 W 시전 → per-w
+PASS ③ 페르소나 E 시전 → per-e
+PASS ③ 페르소나 R 시전 → per-r
+PER q ["assets/r1155/sfx/per-hit-1.ogg","assets/r1155/sfx/per-q-1.ogg","assets/r1155/sfx/per-hit-2.ogg","assets/r1155/sfx/per-hit-3.ogg","assets/r1155/sfx/per-hitbig-2.ogg","assets/r1155/sfx/per-star-1.ogg","assets/r1155/sfx/per-hit-1.ogg","assets/r1155/sfx/per-hitbig-2.ogg","assets/r1155/sfx/per-hit-3.ogg","assets/r1155/sfx/per-hit-4.ogg","assets/r1155/sfx/per-hit-1.ogg","assets/r1155/sfx/per-hit-2.ogg","assets/r1155/sfx/per-hit-3.ogg","assets/r1155/sfx/per-hit-4.ogg"]
+PASS ③ 페르소나 Q(special()) → per-q
+PASS ③ 페르소나 적중음 → per-hit (라우렌 적중음 없음)
+PASS ③ 페르소나 (진) 항성 반발·은빛 거성·심연 왜성·유성 궤도
+PASS ③ 페르소나 (진) 쌍성 소멸 → 충전/발사 ["assets/r1155/sfx/per-hit-4.ogg","assets/r1155/sfx/per-violet-charge-1.ogg","assets/r1155/sfx/per-violet-fire-1.ogg","assets/r1155/sfx/per-hit-1.ogg"]
+PASS ③ 페르소나 동안 라우렌 r546 소리 0
+PASS ④ 라우렌 본인 → 전용 소리 0
+PASS ④ 환도 본인 기본 공격 → 전용 소리 0
+stats {"mapped":46,"attack":12,"hits":0,"hitSwaps":416,"warmed":2,"q":4,"wer":8,"passive":0,"celestial":16,"ticks":6,"fallback":0,"applied":3,"errors":0} 
+PASS ⑤ 오버레이 오류 0
+PASS ⑤ 페이지 오류 0 
+ALL PASS (헤드리스)

@@ -1,0 +1,288 @@
+ok   표 종류 31개 이상
+ok   assets/r1155/sfx/ego-atk-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/ego-atk-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/ego-atk-1.ogg: 2~5kHz 0.028 ≤ 0.35(자주 나는 소리)
+ok   assets/r1155/sfx/ego-atk-1.ogg: 파일 피크 -10.4dB 가 −9~−14dB
+ok   assets/r1155/sfx/ego-atk-1.ogg: 시작 10ms 넘게 올림(33.9ms)
+ok   assets/r1155/sfx/ego-atk-1.ogg: 누르고 바로 남(앞 20ms < 60)
+ok   assets/r1155/sfx/ego-atk-1.ogg: 길이 0.417초 ≤ 역할 상한
+ok   assets/r1155/sfx/ego-atk-2.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/ego-atk-2.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/ego-atk-2.ogg: 2~5kHz 0.032 ≤ 0.35(자주 나는 소리)
+ok   assets/r1155/sfx/ego-atk-2.ogg: 파일 피크 -10.4dB 가 −9~−14dB
+ok   assets/r1155/sfx/ego-atk-2.ogg: 시작 10ms 넘게 올림(34.0ms)
+ok   assets/r1155/sfx/ego-atk-2.ogg: 누르고 바로 남(앞 21ms < 60)
+ok   assets/r1155/sfx/ego-atk-2.ogg: 길이 0.417초 ≤ 역할 상한
+ok   assets/r1155/sfx/ego-q-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/ego-q-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/ego-q-1.ogg: 파일 피크 -11.1dB 가 −9~−14dB
+ok   assets/r1155/sfx/ego-q-1.ogg: 시작 10ms 넘게 올림(55.3ms)
+ok   assets/r1155/sfx/ego-q-1.ogg: 누르고 바로 남(앞 51ms < 60)
+ok   assets/r1155/sfx/ego-q-1.ogg: 길이 0.997초 ≤ 역할 상한
+ok   assets/r1155/sfx/ego-w-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/ego-w-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/ego-w-1.ogg: 파일 피크 -11.0dB 가 −9~−14dB
+ok   assets/r1155/sfx/ego-w-1.ogg: 시작 10ms 넘게 올림(193.5ms)
+ok   assets/r1155/sfx/ego-w-1.ogg: 누르고 바로 남(앞 19ms < 60)
+ok   assets/r1155/sfx/ego-w-1.ogg: 길이 0.747초 ≤ 역할 상한
+ok   assets/r1155/sfx/ego-e-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/ego-e-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/ego-e-1.ogg: 파일 피크 -11.0dB 가 −9~−14dB
+ok   assets/r1155/sfx/ego-e-1.ogg: 시작 10ms 넘게 올림(243.5ms)
+ok   assets/r1155/sfx/ego-e-1.ogg: 누르고 바로 남(앞 9ms < 60)
+ok   assets/r1155/sfx/ego-e-1.ogg: 길이 0.971초 ≤ 역할 상한
+ok   assets/r1155/sfx/ego-r-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/ego-r-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/ego-r-1.ogg: 파일 피크 -9.9dB 가 −9~−14dB
+ok   assets/r1155/sfx/ego-r-1.ogg: 시작 10ms 넘게 올림(85.8ms)
+ok   assets/r1155/sfx/ego-r-1.ogg: 누르고 바로 남(앞 17ms < 60)
+ok   assets/r1155/sfx/ego-r-1.ogg: 길이 1.15초 ≤ 역할 상한
+ok   assets/r1155/sfx/ego-moon-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/ego-moon-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/ego-moon-1.ogg: 파일 피크 -10.9dB 가 −9~−14dB
+ok   assets/r1155/sfx/ego-moon-1.ogg: 시작 10ms 넘게 올림(14.6ms)
+ok   assets/r1155/sfx/ego-moon-1.ogg: 누르고 바로 남(앞 6ms < 60)
+ok   assets/r1155/sfx/ego-moon-1.ogg: 길이 0.847초 ≤ 역할 상한
+ok   assets/r1155/sfx/ego-violet-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/ego-violet-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/ego-violet-1.ogg: 파일 피크 -10.1dB 가 −9~−14dB
+ok   assets/r1155/sfx/ego-violet-1.ogg: 시작 10ms 넘게 올림(403.7ms)
+ok   assets/r1155/sfx/ego-violet-1.ogg: 누르고 바로 남(앞 13ms < 60)
+ok   assets/r1155/sfx/ego-violet-1.ogg: 길이 1.1초 ≤ 역할 상한
+ok   assets/r1155/sfx/ego-clones-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/ego-clones-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/ego-clones-1.ogg: 파일 피크 -10.8dB 가 −9~−14dB
+ok   assets/r1155/sfx/ego-clones-1.ogg: 시작 10ms 넘게 올림(225.2ms)
+ok   assets/r1155/sfx/ego-clones-1.ogg: 누르고 바로 남(앞 14ms < 60)
+ok   assets/r1155/sfx/ego-clones-1.ogg: 길이 0.647초 ≤ 역할 상한
+ok   assets/r1155/sfx/ego-trio-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/ego-trio-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/ego-trio-1.ogg: 파일 피크 -11.0dB 가 −9~−14dB
+ok   assets/r1155/sfx/ego-trio-1.ogg: 시작 10ms 넘게 올림(16.5ms)
+ok   assets/r1155/sfx/ego-trio-1.ogg: 누르고 바로 남(앞 7ms < 60)
+ok   assets/r1155/sfx/ego-trio-1.ogg: 길이 0.971초 ≤ 역할 상한
+ok   assets/r1155/sfx/ego-triohit-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/ego-triohit-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/ego-triohit-1.ogg: 파일 피크 -10.9dB 가 −9~−14dB
+ok   assets/r1155/sfx/ego-triohit-1.ogg: 시작 10ms 넘게 올림(123.9ms)
+ok   assets/r1155/sfx/ego-triohit-1.ogg: 누르고 바로 남(앞 22ms < 60)
+ok   assets/r1155/sfx/ego-triohit-1.ogg: 길이 0.847초 ≤ 역할 상한
+ok   assets/r1155/sfx/ego-star-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/ego-star-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/ego-star-1.ogg: 파일 피크 -10.9dB 가 −9~−14dB
+ok   assets/r1155/sfx/ego-star-1.ogg: 시작 10ms 넘게 올림(322.4ms)
+ok   assets/r1155/sfx/ego-star-1.ogg: 누르고 바로 남(앞 18ms < 60)
+ok   assets/r1155/sfx/ego-star-1.ogg: 길이 0.847초 ≤ 역할 상한
+ok   assets/r1155/sfx/ego-abyss-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/ego-abyss-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/ego-abyss-1.ogg: 파일 피크 -11.0dB 가 −9~−14dB
+ok   assets/r1155/sfx/ego-abyss-1.ogg: 시작 10ms 넘게 올림(208.0ms)
+ok   assets/r1155/sfx/ego-abyss-1.ogg: 누르고 바로 남(앞 8ms < 60)
+ok   assets/r1155/sfx/ego-abyss-1.ogg: 길이 0.997초 ≤ 역할 상한
+ok   assets/r1155/sfx/ego-repulse-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/ego-repulse-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/ego-repulse-1.ogg: 파일 피크 -10.7dB 가 −9~−14dB
+ok   assets/r1155/sfx/ego-repulse-1.ogg: 시작 10ms 넘게 올림(16.2ms)
+ok   assets/r1155/sfx/ego-repulse-1.ogg: 누르고 바로 남(앞 7ms < 60)
+ok   assets/r1155/sfx/ego-repulse-1.ogg: 길이 0.747초 ≤ 역할 상한
+ok   assets/r1155/sfx/ego-slash-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/ego-slash-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/ego-slash-1.ogg: 2~5kHz 0.072 ≤ 0.35(자주 나는 소리)
+ok   assets/r1155/sfx/ego-slash-1.ogg: 파일 피크 -11.6dB 가 −9~−14dB
+ok   assets/r1155/sfx/ego-slash-1.ogg: 시작 10ms 넘게 올림(23.8ms)
+ok   assets/r1155/sfx/ego-slash-1.ogg: 누르고 바로 남(앞 14ms < 60)
+ok   assets/r1155/sfx/ego-slash-1.ogg: 길이 0.197초 ≤ 역할 상한
+ok   assets/r1155/sfx/ego-slash-2.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/ego-slash-2.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/ego-slash-2.ogg: 2~5kHz 0.077 ≤ 0.35(자주 나는 소리)
+ok   assets/r1155/sfx/ego-slash-2.ogg: 파일 피크 -11.5dB 가 −9~−14dB
+ok   assets/r1155/sfx/ego-slash-2.ogg: 시작 10ms 넘게 올림(23.6ms)
+ok   assets/r1155/sfx/ego-slash-2.ogg: 누르고 바로 남(앞 13ms < 60)
+ok   assets/r1155/sfx/ego-slash-2.ogg: 길이 0.197초 ≤ 역할 상한
+ok   assets/r1155/sfx/ego-slashend-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/ego-slashend-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/ego-slashend-1.ogg: 2~5kHz 0.027 ≤ 0.35(자주 나는 소리)
+ok   assets/r1155/sfx/ego-slashend-1.ogg: 파일 피크 -10.2dB 가 −9~−14dB
+ok   assets/r1155/sfx/ego-slashend-1.ogg: 시작 10ms 넘게 올림(64.2ms)
+ok   assets/r1155/sfx/ego-slashend-1.ogg: 누르고 바로 남(앞 42ms < 60)
+ok   assets/r1155/sfx/ego-slashend-1.ogg: 길이 0.547초 ≤ 역할 상한
+ok   assets/r1155/sfx/per-atk-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/per-atk-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/per-atk-1.ogg: 2~5kHz 0.0 ≤ 0.35(자주 나는 소리)
+ok   assets/r1155/sfx/per-atk-1.ogg: 파일 피크 -10.6dB 가 −9~−14dB
+ok   assets/r1155/sfx/per-atk-1.ogg: 시작 10ms 넘게 올림(14.9ms)
+ok   assets/r1155/sfx/per-atk-1.ogg: 누르고 바로 남(앞 8ms < 60)
+ok   assets/r1155/sfx/per-atk-1.ogg: 길이 0.447초 ≤ 역할 상한
+ok   assets/r1155/sfx/per-atk-2.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/per-atk-2.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/per-atk-2.ogg: 2~5kHz 0.0 ≤ 0.35(자주 나는 소리)
+ok   assets/r1155/sfx/per-atk-2.ogg: 파일 피크 -10.8dB 가 −9~−14dB
+ok   assets/r1155/sfx/per-atk-2.ogg: 시작 10ms 넘게 올림(12.5ms)
+ok   assets/r1155/sfx/per-atk-2.ogg: 누르고 바로 남(앞 9ms < 60)
+ok   assets/r1155/sfx/per-atk-2.ogg: 길이 0.447초 ≤ 역할 상한
+ok   assets/r1155/sfx/per-q-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/per-q-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/per-q-1.ogg: 파일 피크 -10.9dB 가 −9~−14dB
+ok   assets/r1155/sfx/per-q-1.ogg: 시작 10ms 넘게 올림(306.1ms)
+ok   assets/r1155/sfx/per-q-1.ogg: 누르고 바로 남(앞 10ms < 60)
+ok   assets/r1155/sfx/per-q-1.ogg: 길이 1.05초 ≤ 역할 상한
+ok   assets/r1155/sfx/per-w-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/per-w-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/per-w-1.ogg: 파일 피크 -11.3dB 가 −9~−14dB
+ok   assets/r1155/sfx/per-w-1.ogg: 시작 10ms 넘게 올림(16.5ms)
+ok   assets/r1155/sfx/per-w-1.ogg: 누르고 바로 남(앞 8ms < 60)
+ok   assets/r1155/sfx/per-w-1.ogg: 길이 0.847초 ≤ 역할 상한
+ok   assets/r1155/sfx/per-e-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/per-e-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/per-e-1.ogg: 파일 피크 -11.0dB 가 −9~−14dB
+ok   assets/r1155/sfx/per-e-1.ogg: 시작 10ms 넘게 올림(354.2ms)
+ok   assets/r1155/sfx/per-e-1.ogg: 누르고 바로 남(앞 39ms < 60)
+ok   assets/r1155/sfx/per-e-1.ogg: 길이 0.997초 ≤ 역할 상한
+ok   assets/r1155/sfx/per-r-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/per-r-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/per-r-1.ogg: 파일 피크 -10.9dB 가 −9~−14dB
+ok   assets/r1155/sfx/per-r-1.ogg: 시작 10ms 넘게 올림(40.8ms)
+ok   assets/r1155/sfx/per-r-1.ogg: 누르고 바로 남(앞 19ms < 60)
+ok   assets/r1155/sfx/per-r-1.ogg: 길이 1.15초 ≤ 역할 상한
+ok   assets/r1155/sfx/per-repulse-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/per-repulse-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/per-repulse-1.ogg: 파일 피크 -10.7dB 가 −9~−14dB
+ok   assets/r1155/sfx/per-repulse-1.ogg: 시작 10ms 넘게 올림(28.3ms)
+ok   assets/r1155/sfx/per-repulse-1.ogg: 누르고 바로 남(앞 10ms < 60)
+ok   assets/r1155/sfx/per-repulse-1.ogg: 길이 0.747초 ≤ 역할 상한
+ok   assets/r1155/sfx/per-star-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/per-star-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/per-star-1.ogg: 파일 피크 -10.9dB 가 −9~−14dB
+ok   assets/r1155/sfx/per-star-1.ogg: 시작 10ms 넘게 올림(305.4ms)
+ok   assets/r1155/sfx/per-star-1.ogg: 누르고 바로 남(앞 9ms < 60)
+ok   assets/r1155/sfx/per-star-1.ogg: 길이 0.872초 ≤ 역할 상한
+ok   assets/r1155/sfx/per-abyss-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/per-abyss-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/per-abyss-1.ogg: 파일 피크 -11.3dB 가 −9~−14dB
+ok   assets/r1155/sfx/per-abyss-1.ogg: 시작 10ms 넘게 올림(20.5ms)
+ok   assets/r1155/sfx/per-abyss-1.ogg: 누르고 바로 남(앞 7ms < 60)
+ok   assets/r1155/sfx/per-abyss-1.ogg: 길이 0.997초 ≤ 역할 상한
+ok   assets/r1155/sfx/per-violet-charge-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/per-violet-charge-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/per-violet-charge-1.ogg: 파일 피크 -11.0dB 가 −9~−14dB
+ok   assets/r1155/sfx/per-violet-charge-1.ogg: 시작 10ms 넘게 올림(282.3ms)
+ok   assets/r1155/sfx/per-violet-charge-1.ogg: 누르고 바로 남(앞 21ms < 60)
+ok   assets/r1155/sfx/per-violet-charge-1.ogg: 길이 0.697초 ≤ 역할 상한
+ok   assets/r1155/sfx/per-violet-fire-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/per-violet-fire-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/per-violet-fire-1.ogg: 파일 피크 -10.1dB 가 −9~−14dB
+ok   assets/r1155/sfx/per-violet-fire-1.ogg: 시작 10ms 넘게 올림(30.0ms)
+ok   assets/r1155/sfx/per-violet-fire-1.ogg: 누르고 바로 남(앞 9ms < 60)
+ok   assets/r1155/sfx/per-violet-fire-1.ogg: 길이 1.15초 ≤ 역할 상한
+ok   assets/r1155/sfx/per-meteor-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/per-meteor-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/per-meteor-1.ogg: 파일 피크 -10.6dB 가 −9~−14dB
+ok   assets/r1155/sfx/per-meteor-1.ogg: 시작 10ms 넘게 올림(557.3ms)
+ok   assets/r1155/sfx/per-meteor-1.ogg: 누르고 바로 남(앞 46ms < 60)
+ok   assets/r1155/sfx/per-meteor-1.ogg: 길이 0.997초 ≤ 역할 상한
+ok   assets/r1155/sfx/per-gravity-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/per-gravity-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/per-gravity-1.ogg: 2~5kHz 0.0 ≤ 0.35(자주 나는 소리)
+ok   assets/r1155/sfx/per-gravity-1.ogg: 파일 피크 -10.9dB 가 −9~−14dB
+ok   assets/r1155/sfx/per-gravity-1.ogg: 시작 10ms 넘게 올림(11.0ms)
+ok   assets/r1155/sfx/per-gravity-1.ogg: 누르고 바로 남(앞 7ms < 60)
+ok   assets/r1155/sfx/per-gravity-1.ogg: 길이 0.217초 ≤ 역할 상한
+ok   assets/r1155/sfx/per-gravity-2.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/per-gravity-2.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/per-gravity-2.ogg: 2~5kHz 0.0 ≤ 0.35(자주 나는 소리)
+ok   assets/r1155/sfx/per-gravity-2.ogg: 파일 피크 -11.0dB 가 −9~−14dB
+ok   assets/r1155/sfx/per-gravity-2.ogg: 시작 10ms 넘게 올림(11.6ms)
+ok   assets/r1155/sfx/per-gravity-2.ogg: 누르고 바로 남(앞 7ms < 60)
+ok   assets/r1155/sfx/per-gravity-2.ogg: 길이 0.217초 ≤ 역할 상한
+ok   assets/r1155/sfx/ego-hit-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/ego-hit-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/ego-hit-1.ogg: 2~5kHz 0.014 ≤ 0.35(자주 나는 소리)
+ok   assets/r1155/sfx/ego-hit-1.ogg: 파일 피크 -10.4dB 가 −9~−14dB
+ok   assets/r1155/sfx/ego-hit-1.ogg: 시작 10ms 넘게 올림(10.4ms)
+ok   assets/r1155/sfx/ego-hit-1.ogg: 누르고 바로 남(앞 7ms < 60)
+ok   assets/r1155/sfx/ego-hit-1.ogg: 길이 0.3초 ≤ 역할 상한
+ok   assets/r1155/sfx/ego-hit-2.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/ego-hit-2.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/ego-hit-2.ogg: 2~5kHz 0.019 ≤ 0.35(자주 나는 소리)
+ok   assets/r1155/sfx/ego-hit-2.ogg: 파일 피크 -11.0dB 가 −9~−14dB
+ok   assets/r1155/sfx/ego-hit-2.ogg: 시작 10ms 넘게 올림(11.1ms)
+ok   assets/r1155/sfx/ego-hit-2.ogg: 누르고 바로 남(앞 5ms < 60)
+ok   assets/r1155/sfx/ego-hit-2.ogg: 길이 0.277초 ≤ 역할 상한
+ok   assets/r1155/sfx/ego-hit-3.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/ego-hit-3.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/ego-hit-3.ogg: 2~5kHz 0.022 ≤ 0.35(자주 나는 소리)
+ok   assets/r1155/sfx/ego-hit-3.ogg: 파일 피크 -11.2dB 가 −9~−14dB
+ok   assets/r1155/sfx/ego-hit-3.ogg: 시작 10ms 넘게 올림(12.9ms)
+ok   assets/r1155/sfx/ego-hit-3.ogg: 누르고 바로 남(앞 6ms < 60)
+ok   assets/r1155/sfx/ego-hit-3.ogg: 길이 0.3초 ≤ 역할 상한
+ok   assets/r1155/sfx/ego-hit-4.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/ego-hit-4.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/ego-hit-4.ogg: 2~5kHz 0.026 ≤ 0.35(자주 나는 소리)
+ok   assets/r1155/sfx/ego-hit-4.ogg: 파일 피크 -11.8dB 가 −9~−14dB
+ok   assets/r1155/sfx/ego-hit-4.ogg: 시작 10ms 넘게 올림(12.9ms)
+ok   assets/r1155/sfx/ego-hit-4.ogg: 누르고 바로 남(앞 5ms < 60)
+ok   assets/r1155/sfx/ego-hit-4.ogg: 길이 0.277초 ≤ 역할 상한
+ok   assets/r1155/sfx/ego-hitbig-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/ego-hitbig-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/ego-hitbig-1.ogg: 2~5kHz 0.007 ≤ 0.35(자주 나는 소리)
+ok   assets/r1155/sfx/ego-hitbig-1.ogg: 파일 피크 -10.5dB 가 −9~−14dB
+ok   assets/r1155/sfx/ego-hitbig-1.ogg: 시작 10ms 넘게 올림(12.6ms)
+ok   assets/r1155/sfx/ego-hitbig-1.ogg: 누르고 바로 남(앞 7ms < 60)
+ok   assets/r1155/sfx/ego-hitbig-1.ogg: 길이 0.397초 ≤ 역할 상한
+ok   assets/r1155/sfx/ego-hitbig-2.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/ego-hitbig-2.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/ego-hitbig-2.ogg: 2~5kHz 0.008 ≤ 0.35(자주 나는 소리)
+ok   assets/r1155/sfx/ego-hitbig-2.ogg: 파일 피크 -10.6dB 가 −9~−14dB
+ok   assets/r1155/sfx/ego-hitbig-2.ogg: 시작 10ms 넘게 올림(12.0ms)
+ok   assets/r1155/sfx/ego-hitbig-2.ogg: 누르고 바로 남(앞 7ms < 60)
+ok   assets/r1155/sfx/ego-hitbig-2.ogg: 길이 0.397초 ≤ 역할 상한
+ok   assets/r1155/sfx/per-hit-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/per-hit-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/per-hit-1.ogg: 2~5kHz 0.001 ≤ 0.35(자주 나는 소리)
+ok   assets/r1155/sfx/per-hit-1.ogg: 파일 피크 -10.4dB 가 −9~−14dB
+ok   assets/r1155/sfx/per-hit-1.ogg: 시작 10ms 넘게 올림(11.9ms)
+ok   assets/r1155/sfx/per-hit-1.ogg: 누르고 바로 남(앞 6ms < 60)
+ok   assets/r1155/sfx/per-hit-1.ogg: 길이 0.297초 ≤ 역할 상한
+ok   assets/r1155/sfx/per-hit-2.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/per-hit-2.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/per-hit-2.ogg: 2~5kHz 0.001 ≤ 0.35(자주 나는 소리)
+ok   assets/r1155/sfx/per-hit-2.ogg: 파일 피크 -10.3dB 가 −9~−14dB
+ok   assets/r1155/sfx/per-hit-2.ogg: 시작 10ms 넘게 올림(12.4ms)
+ok   assets/r1155/sfx/per-hit-2.ogg: 누르고 바로 남(앞 7ms < 60)
+ok   assets/r1155/sfx/per-hit-2.ogg: 길이 0.297초 ≤ 역할 상한
+ok   assets/r1155/sfx/per-hit-3.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/per-hit-3.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/per-hit-3.ogg: 2~5kHz 0.001 ≤ 0.35(자주 나는 소리)
+ok   assets/r1155/sfx/per-hit-3.ogg: 파일 피크 -10.5dB 가 −9~−14dB
+ok   assets/r1155/sfx/per-hit-3.ogg: 시작 10ms 넘게 올림(13.7ms)
+ok   assets/r1155/sfx/per-hit-3.ogg: 누르고 바로 남(앞 7ms < 60)
+ok   assets/r1155/sfx/per-hit-3.ogg: 길이 0.321초 ≤ 역할 상한
+ok   assets/r1155/sfx/per-hit-4.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/per-hit-4.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/per-hit-4.ogg: 2~5kHz 0.001 ≤ 0.35(자주 나는 소리)
+ok   assets/r1155/sfx/per-hit-4.ogg: 파일 피크 -10.6dB 가 −9~−14dB
+ok   assets/r1155/sfx/per-hit-4.ogg: 시작 10ms 넘게 올림(17.3ms)
+ok   assets/r1155/sfx/per-hit-4.ogg: 누르고 바로 남(앞 7ms < 60)
+ok   assets/r1155/sfx/per-hit-4.ogg: 길이 0.321초 ≤ 역할 상한
+ok   assets/r1155/sfx/per-hitbig-1.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/per-hitbig-1.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/per-hitbig-1.ogg: 2~5kHz 0.0 ≤ 0.35(자주 나는 소리)
+ok   assets/r1155/sfx/per-hitbig-1.ogg: 파일 피크 -10.5dB 가 −9~−14dB
+ok   assets/r1155/sfx/per-hitbig-1.ogg: 시작 10ms 넘게 올림(21.3ms)
+ok   assets/r1155/sfx/per-hitbig-1.ogg: 누르고 바로 남(앞 6ms < 60)
+ok   assets/r1155/sfx/per-hitbig-1.ogg: 길이 0.417초 ≤ 역할 상한
+ok   assets/r1155/sfx/per-hitbig-2.ogg: 큰 위반 없음(M1~M8)
+ok   assets/r1155/sfx/per-hitbig-2.ogg: 150Hz 아래 0.0 ≤ 0.08
+ok   assets/r1155/sfx/per-hitbig-2.ogg: 2~5kHz 0.0 ≤ 0.35(자주 나는 소리)
+ok   assets/r1155/sfx/per-hitbig-2.ogg: 파일 피크 -10.3dB 가 −9~−14dB
+ok   assets/r1155/sfx/per-hitbig-2.ogg: 시작 10ms 넘게 올림(14.7ms)
+ok   assets/r1155/sfx/per-hitbig-2.ogg: 누르고 바로 남(앞 6ms < 60)
+ok   assets/r1155/sfx/per-hitbig-2.ogg: 길이 0.417초 ≤ 역할 상한
+ok   EGO 가 페르소나보다 밝음(중심 주파수 중앙값 1260Hz > 440Hz×1.25)
+ok   종류끼리 겉모습(스펙트럼)이 거의 같은 쌍 없음(상관 ≤ .985)
+ok   r546Atk_ego 가 원래 영웅 소리(assets/r546/sfx/atk-hwando-1.ogg)와 다름(상관 0.732 < .95)
+ok   r546Sp_ego_q 가 원래 영웅 소리(assets/r546/sfx/sp-hwando-1.ogg)와 다름(상관 0.841 < .95)
+ok   r546Atk_persona 가 원래 영웅 소리(assets/r546/sfx/atk-lauren-1.ogg)와 다름(상관 0.683 < .95)
+ok   r546Sp_persona_q 가 원래 영웅 소리(assets/r546/sfx/sp-lauren-1.ogg)와 다름(상관 0.928 < .95)
+
+286/286 — 모두 통과
