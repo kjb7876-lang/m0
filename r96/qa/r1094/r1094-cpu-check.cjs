@@ -26,6 +26,7 @@ function kit(opt={}){const iv=[];const sb={console,JSON,Object,Array,Number,Stri
   function tick(){time+=1/60;}
   ${opt.pre||''}
   var FORM=${opt.form!==false},RC=${!!opt.rc};window.__STORYWORLD_EGO_SOVEREIGN_R1046__={formActive:()=>FORM,inspect:()=>({rc151:RC})};`,sb);
+ vm.runInContext(rd(path.join(R,'client-source/ego-sovereign-r1046.js')),sb);
  vm.runInContext(SRC,sb,{filename:N});return{sb,iv,run:c=>vm.runInContext(c,sb),K:sb.__STORYWORLD_EGO_KIT_R1094__};}
 {const{K}=kit();ok(!!K&&/^R1094-ego-kit-/.test(K.revision),'모듈');
  ok(JSON.stringify(K.basicPlan(3))==='["lance"]'&&JSON.stringify(K.basicPlan(5))==='["orb"]'&&JSON.stringify(K.basicPlan(15))==='["lance","orb"]'&&K.basicPlan(1).length===0&&K.basicPlan(NaN).length===0,'기본 공격 배분: 3타 관통·5타 씨앗·15타 둘 다');

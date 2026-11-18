@@ -7,6 +7,7 @@ const ROOT=path.join(__dirname,'../..'),FILE=path.join(ROOT,'client-source/perso
 let fails=0;const ok=(c,m)=>{console.log((c?'PASS ':'FAIL ')+m);if(!c)fails++;};
 if(!fs.existsSync(FILE)){ok(false,'persona-hero-r1113.js 가 있음');console.log('R1113 persona-hero FAILED '+fails);process.exit(1);}
 const SRC=fs.readFileSync(FILE,'utf8');
+const hooks=fs.readFileSync(path.join(ROOT,'client-source/ego-sovereign-r1046.js'),'utf8');
 function world(o={}){
  const store=o.store||{},images=[];let seen=null;const proto={render(frame){seen=frame.commands.map(c=>({...c,points:c.points&&c.points.map(p=>[...p]),style:c.style&&{...c.style}}));}};
  const document={createElement:t=>({tagName:t,width:0,height:0,getContext:()=>({drawImage(){},fillRect(){},createRadialGradient:()=>({addColorStop(){}})})}),baseURI:'http://x/m0/',getElementById:id=>id==='panel'&&o.secret?{classList:{contains:c=>c==='r1057secret'}}:null,querySelector:()=>null,querySelectorAll:()=>[],addEventListener(){},head:{appendChild(){}}};
@@ -18,7 +19,7 @@ function world(o={}){
   localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}}};
  C.hud={};C.setHudTextR63R2=(id,v)=>{C.hud[id]=String(v);};C.tick=function(){};C.serializeSave=()=>({player:{hero:player.hero}});C.restoreSave=async raw=>{player.hero=raw.player.hero;};
  if(o.cheat)C.__STORYWORLD_CHEAT777__={active:()=>true};
- C.window=C;vm.createContext(C);vm.runInContext(SRC,C);
+ C.window=C;vm.createContext(C);vm.runInContext(hooks,C);vm.runInContext(SRC,C);
  const load=()=>{for(const im of images)if(im._src&&!im._done&&im.onload){if(o.noIdle&&/persona-idle/.test(im._src))continue;im._done=true;const idle=/persona-idle/.test(im._src);im.naturalWidth=/walk/.test(im._src)?4096:idle?1152:344;im.naturalHeight=/walk/.test(im._src)?512:idle?256:400;im.onload();}};
  const body=()=>({kind:'image',key:'hero:2:0',order:5,owner:{id:'hero:2',kind:'hero'},sourcePath:'r409:outline:hero:u:http://x/m0/assets/r130/lauren/directions-lauren-front.webp:181,55,150,421:20',sourceRect:[0,0,192,463],style:{filter:'saturate(.5) contrast(1.08)'},points:[[480,240],[506,240],[506,301],[480,301]]});
  const fx=()=>({kind:'image',owner:{id:'r101:aura-back:hero',kind:'effect'},sourcePath:'r106fx:glow:164.98.255:226.232.242',sourceRect:[0,0,128,128],style:{filter:'none'},points:[[0,0],[9,0],[9,9],[0,9]]});

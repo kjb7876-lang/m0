@@ -116,8 +116,8 @@ function castJump(prevRem,rem){return fin(rem)&&rem>.5&&rem<60&&(!fin(prevRem)||
 function watchWER(){const p=pl(),t=now();if(!p||t==null)return;const R=p.storyWER?.ready||{};
  for(const k of ['w','e','r']){const v=+R[p.hero+':'+k],rem=fin(v)?v-t:NaN,had=k in seen,prev=seen[k];seen[k]=rem;
   if(had&&castJump(prev,rem)&&active()){stats[k]++;follow(k,cyclePick(k,turn[k]++),DECK[k].delay);}}}
-function wrapTick(){if(typeof tick!=='function'||done.tick)return;done.tick=true;const base=tick;const w=function(...a){const r=base.apply(this,a);try{watchWER();}catch(e){fail(e);}return r;};w.__r1094=true;tick=w;}
-function install(){wrapAll();wrapTick();wrapHit();}
+window.__STORYWORLD_POST_HOOKS__.register('__r1094', {tick: watchWER}, fail);
+function install(){wrapAll();wrapHit();}
 install();try{setInterval(()=>{try{install();}catch(e){fail(e);}},1000);}catch(_){}
 window.__STORYWORLD_EGO_KIT_R1094__=Object.freeze({revision:REV,SKILL,DECK,basicPlan,cyclePick,angles,castJump,active,hitOpt,HIT_FILTER,SIG_FILTER,SOFT_FILTER,orchidAlpha,
  set(v){on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;},

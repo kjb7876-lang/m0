@@ -49958,6 +49958,16 @@
       "sha256": "b8f1c2e9e6883c008b07bc5186f4edb1d2ca8eb7612f29af292d6920150935cc"
     },
     {
+      "path": "assets/sw0011/beam-0.webp",
+      "bytes": 214366,
+      "sha256": "2c0f528033ef632729cd6553925ce05db16341648021df41882f2ccabaf060a4"
+    },
+    {
+      "path": "assets/sw0011/beam-1.webp",
+      "bytes": 213398,
+      "sha256": "f1e5476b2e84851a0cf059b9f42d0d1aafa6c637e62d0f1b5e1dd96cfd38b50b"
+    },
+    {
       "path": "assets/u2/drone_laser.png",
       "bytes": 152874,
       "sha256": "4eee900ae6c356f8814c3108016949922003fafc36378621926d387d8ac6e120"
@@ -53834,8 +53844,8 @@
     },
     {
       "path": "ego-kit-r1094.js",
-      "bytes": 15795,
-      "sha256": "12f798318144f013ab6bbcc005758ffee7db30c330286da24b8ee88fed38a5b5"
+      "bytes": 15646,
+      "sha256": "cd99618ae62a1207e22e534cc8f31fb188855a3fad35b81be84429f25cdc7699"
     },
     {
       "path": "ego-motion-r1048-sheets.js",
@@ -53869,8 +53879,8 @@
     },
     {
       "path": "ego-sovereign-r1046.js",
-      "bytes": 22127,
-      "sha256": "e3d970f6f60ae7aca16a6a09190fe1c66ceeaf9aa1beee5a5cb195888b8a9ecc"
+      "bytes": 23789,
+      "sha256": "de2b23e3df76d13bf862ae999fb005b229de999455ea07c24cacc99c6edcc93a"
     },
     {
       "path": "enemy-attack-tempo-r601.js",
@@ -54859,8 +54869,8 @@
     },
     {
       "path": "persona-hero-r1113.js",
-      "bytes": 36764,
-      "sha256": "e8d607d9fa105bec3f1606aaca24b03a8b943175f2b69541172000b3e28d5ef3"
+      "bytes": 35791,
+      "sha256": "d38d936fee0501039981103ed8060a21eb32efb4271c0966843a2e5586d11578"
     },
     {
       "path": "persona-ink-r1097.js",
@@ -55024,8 +55034,8 @@
     },
     {
       "path": "real-mode-r376.js",
-      "bytes": 10008,
-      "sha256": "9d610dabd860ebc64538418a13ff932ac6f8c708d632f8f4d76d119d9f730094"
+      "bytes": 10771,
+      "sha256": "37286f2d8acfc24391a453d647e3b0aa24427051d7c25da866c18fd01e514500"
     },
     {
       "path": "refuge-walls-r713.js",
@@ -55399,8 +55409,8 @@
     },
     {
       "path": "survival-r600.js",
-      "bytes": 75917,
-      "sha256": "7770ccfaa91c57c9222a627a2922e8c3f02259c3f11dc004152591db076ce3b9"
+      "bytes": 77336,
+      "sha256": "97c01d4e6388752b5a0fae6d48c83374442c65b3b22df7fdfe6f1f288d1e2f0f"
     },
     {
       "path": "survival-samong-r1006.js",
@@ -55683,8 +55693,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11136,
-  "totalBytes": 1344935995,
+  "fileCount": 11138,
+  "totalBytes": 1345366481,
   "webHTMLSha256": "3f025cfa0377352ea7d069bb32cfbc3efb0ce0ea4c533a1df854050bda4ca58e",
   "largest": [
     {
