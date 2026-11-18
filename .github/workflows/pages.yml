@@ -823,6 +823,8 @@ jobs:
         run: node r96/qa/r1139b/r1139b-cpu-check.cjs
       - name: R1145 EGO hidden hero celestial follow-ups (R casts silver giant + abyss dwarf, ink moon triggers stellar repulse, white-red tint, EGO only) CPU check
         run: node r96/qa/r1145/r1145-cpu-check.cjs
+      - name: R1155 EGO and persona own sound effects (numpy-synthesised; basic, Q/W/E/R, ink passives, celestial branches and ticks remapped only in hidden-hero form) CPU check
+        run: node r96/qa/r1155/r1155-cpu-check.cjs
       - name: R1109 co-op relay build match (old R62 Render relay auto-fallback, default relay address) CPU check
         run: node r96/qa/r1109/r1109-cpu-check.cjs
       - name: R1092 story panel scene art (vertical-version scene paintings, ink-wash aware) CPU check
