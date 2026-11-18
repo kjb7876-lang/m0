@@ -54144,8 +54144,8 @@
     },
     {
       "path": "hero-defense-r720.js",
-      "bytes": 52018,
-      "sha256": "2b1dbe64e0523f3bc2c10cff28fbd615c341bf0a4a01ae7223872f69be860341"
+      "bytes": 52199,
+      "sha256": "78c2ed0d91741c27128a2d7222d6fc5cc90405d720f078493514f21153ade45a"
     },
     {
       "path": "hero-dots-fx-r1041.js",
@@ -54384,8 +54384,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6581607,
-      "sha256": "fb5efe1e3da99473d8bae594a7c90ad3401b598cc7e34a87510535df15249a3b"
+      "bytes": 6581656,
+      "sha256": "2b5a60c55ca369b899748cd0008345e62f08ccc13709b40ea995d449baa411e9"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -55458,6 +55458,11 @@
       "sha256": "bca6b4206cf21a8f6a6620abb6594813f90a53aec2017d77129ae0934d88653b"
     },
     {
+      "path": "survival-coop-r1149.js",
+      "bytes": 20215,
+      "sha256": "9d342dea650548b0af91841979293e72a2f8f28d8af234bf9c94b6bf998fb9a8"
+    },
+    {
       "path": "survival-michaela-ending-r1010.js",
       "bytes": 19698,
       "sha256": "b65ce2e75596cd11509511389949dabb778f2dfc4b3726ad11c64a2d593df1ce"
@@ -55469,8 +55474,8 @@
     },
     {
       "path": "survival-r600.js",
-      "bytes": 80798,
-      "sha256": "eff89c9ace4b2ff855ecd89828dea97cdd3e7e18070040d32d5b1180868f61b0"
+      "bytes": 90435,
+      "sha256": "b9a171024d78813fd13375845f7835fecb7706d12642f54ed785bf9384c27ba9"
     },
     {
       "path": "survival-samong-r1006.js",
@@ -55758,9 +55763,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11151,
-  "totalBytes": 1345927007,
-  "webHTMLSha256": "fb5efe1e3da99473d8bae594a7c90ad3401b598cc7e34a87510535df15249a3b",
+  "fileCount": 11152,
+  "totalBytes": 1345957089,
+  "webHTMLSha256": "2b5a60c55ca369b899748cd0008345e62f08ccc13709b40ea995d449baa411e9",
   "largest": [
     {
       "path": "index.html",

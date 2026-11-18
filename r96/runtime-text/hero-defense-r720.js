@@ -115,7 +115,7 @@ function think(a,enemies,dt,st,anchor,env){const out={hits:[],target:null,moved:
 // ── 상태 ──
 let st=fresh(null),allies=[],runKey=null,lastRoom=null,clearKey=null,mine=false;const used=new Map();/* 영웅 → 배치 몸이 읽은 그림 주소 */
 const SV=()=>window.__STORYWORLD_SURVIVAL_R600__;
-const here=()=>on&&G(()=>SV().here()===true,false);
+const here=()=>on&&!G(()=>window.__STORYWORLD_SURVIVAL_COOP_R1149__.active()===true,false)/* R1149: 함께 하기(멀티) 중에는 배치를 닫아 둔다 — 각자 1명 규칙은 다음 단계 */&&G(()=>SV().here()===true,false);
 const sv=()=>G(()=>SV().state(),null);
 const now=()=>G(()=>time,0);
 const P=()=>G(()=>player,null);
