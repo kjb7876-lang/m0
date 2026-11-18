@@ -249,10 +249,10 @@ function drawCollapse(x,t){const {z,T1,AH}=scale(),o=x.owner,u=t-x.t0,fade=Math.
  // 서하 발밑: 빠르게 도는 가속 시계 판 + 맞물린 톱니 둘
  const q=project(o.x,o.y),hd=sheet('haste');
  sc({id:id+':base',kind:'effect',pxfSide:'hero',x:o.x,y:o.y,groundAligned:true},()=>{if(hd)cell(hd,'haste',Math.floor(t*25),q.x,q.y,AH*2.6/SH.haste.span,'source-over',.9*fade);else dial(q.x,q.y,AH*.9,t,.7*fade,z,[[7,.6],[1.4,.85]]);
-  gear(q.x-AH*1.5,q.y+AH*.16,AH*.5,t*2.6,10,.9*fade,z);gear(q.x+AH*1.45,q.y-AH*.26,AH*.4,-t*3.4,8,.9*fade,z);});
+  /* R1153: Dots CX-0149SE B 톱니바퀴·초침 시트(없으면 코드 톱니) */if(!X1153()?.gears?.(q.x-AH*1.5,q.y+AH*.16,AH*.5,t,.9*fade,1,o.x-1.2,o.y+.6)){gear(q.x-AH*1.5,q.y+AH*.16,AH*.5,t*2.6,10,.9*fade,z);}if(!X1153()?.gears?.(q.x+AH*1.45,q.y-AH*.26,AH*.4,t+.4,.9*fade,-1,o.x+.6,o.y-1.2)){gear(q.x+AH*1.45,q.y-AH*.26,AH*.4,-t*3.4,8,.9*fade,z);}});
  // 곳곳의 시계·톱니바퀴
  const ck=sheet('clock');x.spots.forEach((s,i)=>{const v=(t-s.t0)/SPOT_LIFE,a=Math.min(1,v/.12)*Math.min(1,(1-v)/.25)*fade,p=project(s.x,s.y),R=s.size*T1*.5;if(!(a>0))return;
-  sc({id:id+':spot:'+s.t0.toFixed(2),kind:'effect',pxfSide:'hero',x:s.x,y:s.y,groundAligned:true},()=>{if(s.gear){gear(p.x,p.y,R,t*3*s.dir,10,.85*a,z);gear(p.x+R*1.45,p.y+R*.2,R*.55,-t*5.4*s.dir+.3,6,.8*a,z);}
+  sc({id:id+':spot:'+s.t0.toFixed(2),kind:'effect',pxfSide:'hero',x:s.x,y:s.y,groundAligned:true},()=>{if(s.gear){if(!X1153()?.gears?.(p.x+R*.4,p.y,R,t+s.t0,.85*a,s.dir,s.x,s.y)){gear(p.x,p.y,R,t*3*s.dir,10,.85*a,z);gear(p.x+R*1.45,p.y+R*.2,R*.55,-t*5.4*s.dir+.3,6,.8*a,z);}}
    else if(ck)cell(ck,'clock',Math.floor((t-s.t0)*30)*s.dir,p.x,p.y,R*2/SH.clock.span,'source-over',.9*a);else dial(p.x,p.y,R,t*s.dir,.85*a,z,[[6,.55],[1,.8]]);});});
  // 적 자리: 감기는 시계 → 시간 폭발(깨지는 시계 판 + 시공 틈 섬광)
  const sh=sheet('shatter'),rf=sheet('riftF');for(const m of x.marks){const p=project(m.x,m.y),R=COL_BOOM_R*T1*.5,mid=id+':mark:'+m.t0.toFixed(2)+':'+m.x.toFixed(1)+':'+m.y.toFixed(1);
@@ -289,6 +289,7 @@ function drawArbFx(x,t){const {z,T1,AH}=scale(),id='r949:arb:'+x.t0.toFixed(2);
   else{const p=project(c.x,c.y),Rs=ARB_ROOM.safe*T1*.5,hd=sheet('haste');
    sc({id:cid,kind:'effect',pxfSide:'hero',x:c.x,y:c.y,groundAligned:true},()=>{if(hd)cell(hd,'haste',Math.floor(t*12.5),p.x,p.y,Rs*2/SH.haste.span,'source-over',.5+.4*w);ring(p,Rs,PALE,Math.max(2,3*z),.6+.4*w,.06);
     if(hv!=null){const R=Rs+(ARB_ROOM.r*T1*.5-Rs)*Math.sqrt(hv),f=1-hv;if(!(X995()&&X995().wave&&X995().wave(p,R,ARB_ROOM.r*T1*.5,f,cid,c,sc))&&!(X986()&&X986().room&&X986().room(p,R,f,cid,c,sc))){ring(p,R,VIO,Math.max(2,9*z*f),f,0);ring(p,R*.86,PALE,Math.max(1,3*z),f*.8,0);}}});}}}
+const X1153=()=>{try{return window.__STORYWORLD_DOTS_STATUS_R1153__||null;}catch(_){return null;}};
 const X986=()=>{try{return window.__STORYWORLD_SEOHA_FX_R986__||null;}catch(_){return null;}};
 const X995=()=>{try{return window.__STORYWORLD_SEOHA_FX_R995__||null;}catch(_){return null;}};
 const X1005=()=>{try{return window.__STORYWORLD_SEOHA_FX_R1005__||null;}catch(_){return null;}};

@@ -99,7 +99,9 @@ function drawChain(f){const p=project(f.x,f.y),fade=Math.max(0,Math.min(1,(f.lif
    ctx.beginPath();ctx.moveTo(sx,sy);ctx.quadraticCurveTo((sx+ex)/2,(sy+ey)/2+10,ex,ey);ctx.strokeStyle='#6a0412';ctx.stroke();
    ctx.beginPath();ctx.moveTo(sx,sy-1);ctx.quadraticCurveTo((sx+ex)/2,(sy+ey)/2+9,ex,ey-1);ctx.lineWidth=1.6;ctx.strokeStyle='#ec3c30';ctx.stroke();ctx.lineWidth=4.5;});
  }finally{ctx.restore();}});}
+const X1153=()=>{try{return window.__STORYWORLD_DOTS_STATUS_R1153__||null;}catch(_){return null;}};
 function drawMark(e){const n=markOf(e);if(!n)return;const q=project(e.x,e.y),h=H(),cy=q.y-h*1.25,t=T();stats.marks++;
+ /* R1153: Dots CX-0150MX B 낙인 방울(1~5 칸) — 시트가 그리면 옛 방울 생략 */if(X1153()?.brand?.(e,n,q.x,cy,t))return;
  /* R587 보류: SL14 낙인 시트도 같은 이유(방울이 작고 흐려 5개 다 찬 표시가 옛 방울보다 안 보임) → 옛 방울 유지 */
  scoped('mark',()=>{ctx.save();try{for(let i=0;i<n;i++){const a=-Math.PI+Math.PI*(i+.5)/RULE.stackMax+(n>=RULE.stackMax?t*.8:0),x=q.x+Math.cos(a)*14,y=cy+Math.sin(a)*7;
    ctx.beginPath();ctx.arc(x,y,3.6,0,Math.PI*2);ctx.fillStyle='#8a0618';ctx.fill();ctx.beginPath();ctx.arc(x-1.1,y-1.1,1.4,0,Math.PI*2);ctx.fillStyle='#ec3c30';ctx.fill();}
