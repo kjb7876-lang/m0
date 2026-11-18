@@ -669,6 +669,8 @@ jobs:
         run: node r96/qa/r1145/persona-basic-cpu-check.cjs
       - name: R1156 persona boss base rear hit = Dots CX-0136 A5 r2 (support foot aligned, 4 of 6 frames, R1119 sheet as load fallback) CPU check
         run: node r96/qa/r1156/persona-rear-hit-cpu-check.cjs
+      - name: R1156b mob hit4 = Dots CX-0136 A4 r2 HOLD fixed (u203-e3 knight, u203-e2 void, swamp root stalker; recoil sheared to ~10%, colour matched; art only) CPU check
+        run: node r96/qa/r1156/mob-hit-cpu-check.cjs
       - name: R1098 samong faces (Michaela final boss uses her own sheet, R161 puppet repainted as an ink-and-white-thread doll so it no longer looks like Hwando) CPU check
         run: node r96/qa/r1098/r1098-cpu-check.cjs
       - name: R1090 character ink tint (hero and mob body images only, follows the map ink wash, settings toggle, effects and telegraphs untouched) CPU check
