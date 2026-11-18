@@ -1,0 +1,55 @@
+name: Mobile rendering quality
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'r96/client-source/render-lod-r287.js'
+      - 'r96/client-source/mobile-memory-r980.js'
+      - 'r96/client-source/props-tidy-r412.js'
+      - 'scripts/build-sw0013-prop-masks.*'
+      - 'r96/qa/sw0013/**'
+      - '.github/workflows/sw0013-mobile-quality.yml'
+permissions:
+  contents: read
+concurrency:
+  group: mobile-render-quality-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  quality:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          show-progress: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Verify terrain, prop silhouettes and texture lifetimes
+        run: |
+          node r96/qa/sw0013/lod.cjs
+          node r96/qa/sw0013/prop-mask.cjs
+          node r96/qa/sw0013/priority.cjs
+      - name: Reconstruct the game and install Chromium
+        run: |
+          python3 scripts/build-r96.py
+          npm install --no-save --ignore-scripts playwright@1.56.0
+          npx playwright install --with-deps chromium
+      - name: Check medium-preset combat and image detail
+        env:
+          SW_URL: http://127.0.0.1:4396/
+          SHOTS: ${{ runner.temp }}/mobile-quality-evidence
+        run: |
+          python3 -m http.server 4396 --bind 127.0.0.1 --directory r96/hospital-three-pc/site > "$RUNNER_TEMP/mobile-quality-http.log" 2>&1 &
+          server=$!
+          trap 'kill "$server"' EXIT
+          curl --fail --retry 10 --retry-connrefused --retry-delay 1 --silent --output /dev/null "$SW_URL"
+          node r96/qa/sw0013/mobile-quality-browser.cjs
+          node r96/qa/sw0013/quality-pixels.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mobile-quality-evidence
+          path: ${{ runner.temp }}/mobile-quality-evidence
+          if-no-files-found: ignore

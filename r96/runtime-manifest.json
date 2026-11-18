@@ -54694,8 +54694,8 @@
     },
     {
       "path": "mobile-memory-r980.js",
-      "bytes": 16788,
-      "sha256": "b78d9c77ca19e2fa6d89b714d8016459470c1b57aeba6f402b695459bbdcd87c"
+      "bytes": 23085,
+      "sha256": "54aa77dd72675d51790ed23f3db75222d1adf11a57f3f80cb47b43b339994333"
     },
     {
       "path": "mobile-perf-r298.js",
@@ -55059,8 +55059,8 @@
     },
     {
       "path": "props-tidy-r412.js",
-      "bytes": 42214,
-      "sha256": "9b6ef492d4d6a21d75cbb61c42560976c98af65c7e8dca354466f1985065209f"
+      "bytes": 65033,
+      "sha256": "9ea3da21fc7d05c1ac81c575a774c5c161fd20f0697b4d3117bfd95bc94aa1f3"
     },
     {
       "path": "props-variety-r140.js",
@@ -55114,8 +55114,8 @@
     },
     {
       "path": "render-lod-r287.js",
-      "bytes": 20689,
-      "sha256": "a58c698c54f0a342f9486599de19ba43937af3023eab4f2fb2d20a98df34d3ff"
+      "bytes": 21229,
+      "sha256": "98c44a22a9920aa09fee2306dff9409a018b85bfd5d7990013fd8c819460d4cc"
     },
     {
       "path": "roof-height-r267.js",
@@ -55764,7 +55764,7 @@
     }
   ],
   "fileCount": 11152,
-  "totalBytes": 1345955982,
+  "totalBytes": 1345985638,
   "webHTMLSha256": "51cefc6de1046aa2b5f0e6c8c8c6ad74e0a227c26b5c8c5be757432a838108f4",
   "largest": [
     {
