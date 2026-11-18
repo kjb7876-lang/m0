@@ -11943,6 +11943,16 @@
       "sha256": "d676123d9a0a5b200840948bd11feed2d2565cca28a9acbe4669d5a9f7a6cbbc"
     },
     {
+      "path": "assets/r1166/mobs/md-01-ghost-patient-death.webp",
+      "bytes": 225942,
+      "sha256": "9f885b7f4452c466bb12d7004e9efad5a4764a1b80f09697c7174a3892e1f8f9"
+    },
+    {
+      "path": "assets/r1166/mobs/md-03-masked-orderly-death.webp",
+      "bytes": 243128,
+      "sha256": "cde037ec4f008956234e05081f662c8e7957eef8d0d14d3e6fedd025aed641a7"
+    },
+    {
       "path": "assets/r117/scene/ep-cup-k1.png",
       "bytes": 2264,
       "sha256": "a39b05d84a4613cb40d72e213a26b9bccbc254b82e4cd9888f0b47e085a209e2"
@@ -55169,8 +55179,8 @@
     },
     {
       "path": "mob-attack-dots-r1065.js",
-      "bytes": 23746,
-      "sha256": "b3d0f1d4aa78c4c86a5c85f63cfe178b4d2e232564a85f59f0f2a98e8f27e1ff"
+      "bytes": 25127,
+      "sha256": "af51d14be4334b36fdbebefdbc7c5b12b15f0acdf4e400788a31dddce389ce36"
     },
     {
       "path": "mob-death-r188.js",
@@ -56373,8 +56383,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11274,
-  "totalBytes": 1355648628,
+  "fileCount": 11276,
+  "totalBytes": 1356119079,
   "webHTMLSha256": "7da654eb0661b9fadf84c1904200465ffcd70a351064dee1415962b2b8526ff9",
   "largest": [
     {
