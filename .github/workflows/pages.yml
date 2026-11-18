@@ -587,6 +587,8 @@ jobs:
         run: node r96/qa/r970/r970-cpu-check.cjs
       - name: R1126 777 developer test mode passive point input (sets remaining points exactly, 0..999999, empty/non-number rejected) CPU check
         run: node r96/qa/r1126/cheat-points-cpu-check.cjs
+      - name: R1138 region transition curtain (heavy first draws finish behind a loading-look cover; engine order, results and state untouched; always lifted) CPU check
+        run: node r96/qa/r1138/curtain-cpu-check.cjs
       - name: R1011 hero level cap 777 shared by story/samong/survival/777 code (777 code reaches Lv.777, stats finite at Lv.777) CPU check
         run: node r96/qa/r1011/r1011-cpu-check.cjs
       - name: R972 skill DoT / multi-hit split (total damage kept, lethal hits not split, own tick sounds rate-limited) CPU check
@@ -807,6 +809,8 @@ jobs:
         run: node r96/qa/r1116/r1116-cpu-check.cjs
       - name: R1121 EGO hidden hero persona shots keep their own persona art (not the hwando A slash) and never fire in safe hub (frozen at the hero's feet) CPU check
         run: node r96/qa/r1121/r1121-cpu-check.cjs
+      - name: R1139 EGO hidden hero audit (persona shots drawn large enough to read, no aura discs under ink clones, hwando silver-gold FX recolored to vermilion-white, skill name texts stacked) CPU check
+        run: node r96/qa/r1139/r1139-cpu-check.cjs
       - name: R1109 co-op relay build match (old R62 Render relay auto-fallback, default relay address) CPU check
         run: node r96/qa/r1109/r1109-cpu-check.cjs
       - name: R1092 story panel scene art (vertical-version scene paintings, ink-wash aware) CPU check
