@@ -10465,7 +10465,23 @@
     "assets/r1163/bosses/u205-idle6.webp",
     "assets/r1163/bosses/u205-hit4.webp",
     "assets/r1164/bosses/b04-idle6.webp",
-    "assets/r1164/bosses/b04-hit4.webp"
+    "assets/r1164/bosses/b04-hit4.webp",
+    "mob-art-r1179.js",
+    "assets/r1179/mobs/m077.webp",
+    "assets/r1179/mobs/index.json",
+    "assets/r1179/mobs/m081.webp",
+    "samong-pixel-art-r1177.js",
+    "move-dir-r1162-data.js",
+    "assets/r1177/void-implosion-blood.webp",
+    "assets/r1177/hands-blood.webp",
+    "assets/r1177/s06-commander-walk-right-8.webp",
+    "assets/r1177/rift-blood.webp",
+    "assets/r1177/s06-rival-walk-right-8.webp",
+    "assets/r1177/s06-invader-walk-right-8.webp",
+    "assets/r1177/choir-moths-blood.webp",
+    "assets/r1177/index.json",
+    "assets/r1162/move/u205-mid-down.webp",
+    "assets/r1173/persona-walk-side.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11540,5 +11556,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "750049b24cbfaef46e46589979f86fb83088dfa56985b22edd6167e80232d730"
+  "runtimeManifestSHA256": "971282a93875c67aa4aff77492671943235b28d940825d04b1f39baed90dedc7"
 }

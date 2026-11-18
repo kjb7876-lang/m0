@@ -5,7 +5,7 @@
 //  그리기 1번(판 하나), 구역 바뀔 때 한 번 계산. storyworld.r188.edges {on:false} 로 끈다.
 (()=>{'use strict';
 if(window.__STORYWORLD_EDGES_R188__)return;
-const REV='R188-edges-2',KEY='storyworld.r188.edges',PX=4,PAD=4;
+const REV='R188-edges-3',KEY='storyworld.r188.edges',PX=4,PAD=4;
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={built:0,ms:0,errors:0,reused:0,cached:0,cachedPx:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const solo=()=>{const m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();return !m||m==='off';};
@@ -22,7 +22,10 @@ function buildMask(L){const t0=performance.now(),b=L.bounds,x0=b[0]-PAD,y0=b[1]-
  for(const r of [...(L.floorRects||[]),...(L.backdropRects||[]),...(L.connectorFloorRects||[])])if(r&&r.width>0&&r.depth>0)ag.fillRect((r.x-x0)*PX,(r.y-y0)*PX,r.width*PX,r.depth*PX);
  const soft=mk(),sg=soft.getContext('2d',{willReadFrequently:true});sg.filter=`blur(${PX*2.2}px)`;sg.drawImage(area,0,0);
  const wall=mk(),wg=wall.getContext('2d',{willReadFrequently:true});wg.fillStyle='#000';wg.fillRect(0,0,W,H);wg.filter=`blur(${PX*.9}px)`;wg.fillStyle='#fff';
- for(const w of L.walls||[]){if(!w||!(w.width>0)||!(w.depth>0))continue;const ww=Math.max(w.width,1.6),dd=Math.max(w.depth,1.6);wg.fillRect((w.x-ww/2-x0)*PX,(w.y-dd/2-y0)*PX,ww*PX,dd*PX);}
+ /* R1180 렉: 흐림 필터를 켠 채 벽을 하나씩 칠하면 그리기마다 흐림을 따로 계산해 벽 많은 지역에서 0.4~0.9초 멈췄다(헤드리스 64지역 합 16.9초).
+    벽을 흐림 없는 CPU 판 하나에 모아 칠한 뒤 그 판을 같은 흐림으로 한 번만 그린다. 겹치는 벽 이음매가 덜 어두워지는 것 말고는 같다. */
+ let st=null;for(const w of L.walls||[]){if(!w||!(w.width>0)||!(w.depth>0))continue;if(!st){const sc=mk();st=sc.getContext('2d',{willReadFrequently:true});st.fillStyle='#fff';}const ww=Math.max(w.width,1.6),dd=Math.max(w.depth,1.6);st.fillRect((w.x-ww/2-x0)*PX,(w.y-dd/2-y0)*PX,ww*PX,dd*PX);}
+ if(st)wg.drawImage(st.canvas,0,0);
  const A=ag.getImageData(0,0,W,H).data,S=sg.getImageData(0,0,W,H).data,Wl=wg.getImageData(0,0,W,H).data,out=ag.createImageData(W,H),O=out.data;let any=0;
  for(let j=0;j<H;j++){const wy=y0+(j+.5)/PX;for(let i=0;i<W;i++){const k=(j*W+i)*4,inside=A[k]>127,s=S[k]/255;let a=0;
    // 멀리 빈 곳과 벽에 완전히 가려진 화소는 잡음을 계산해도 알파가 0이다.

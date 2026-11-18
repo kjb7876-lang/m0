@@ -1,0 +1,22 @@
+FAIL A R102 라우렌 적중 그림(stigma-puncture) → 언주 (r102:lauren|0|assets/vfx/generated/v31307/hero-impacts/lauren-stigma-puncture.webp / none)
+FAIL A R102 라우렌 터짐 그림(burst-impact) → 언주 (r102:lauren|0|assets/vfx/generated/v300/burst-impact.webp)
+PASS A 섞기·투명도 그대로
+FAIL B 장면 소유 라우렌 보라 r106fx → 언주 (r106fx:cross:164.98.255:226.232.242)
+FAIL B 장면 소유 R302 라우렌 바이올렛 칠 캔버스 → 언주
+PASS B 회귀: 환도에서도 보이는 장면 고리(51.70.84)는 그대로
+FAIL C R409 테두리 복제의 영웅 픽셀 이펙트(pxf 아틀라스) → 언주 (r409:outline:hero:u:http://x/m0/assets/pxf-additional-baked-20261010/extra-08-atlas.png:78,10,48,48:6:hero:lauren)
+PASS C 상태이상 테두리(불)는 판정 대상 아님(바뀌어도 무방)
+FAIL D 안전망: 새 라우렌 경로 이펙트 → 언주 (http://x/m0/assets/r999/fx-lauren-orb.webp)
+FAIL D 안전망: 라우렌 경로 탄(projectile) → 언주 (assets/vfx/heroes/lauren-w.webp)
+FAIL D 회귀: 적 쪽(side enemy·kind enemy)은 그대로
+PASS 회귀: 적 팔레트(R114) 상태 이펙트는 그대로
+PASS 회귀: 형상 끄면(라우렌 본인) 모두 그대로
+PASS 회귀: 몸은 페르소나 그림 (r1113:assets/r1113d/persona-idle-s.png:0)
+FAIL E 배치 페르소나: 라우렌 적중·중력 우물·라우렌 보라 조각 → 언주 (r102:lauren|0|assets/vfx/generated/v3130 | http://x/m0/assets/r561/lauren/lauren-gr | r106fx:cross:164.98.255:226.232.242)
+PASS E 회귀: 조종 영웅(환도) 이펙트·R302 칠은 그대로
+PASS E 회귀: 적 쪽은 그대로
+PASS E 회귀: 배치 페르소나가 없으면 아무것도 안 바꿈
+PASS E 회귀: 조종 영웅이 라우렌 본인이면 라우렌 그림은 그대로
+PASS CI: pages.yml 검사 줄
+FAIL runtime-text 사본 = client-source
+FAILED 10
