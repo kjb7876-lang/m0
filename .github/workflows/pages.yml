@@ -647,6 +647,8 @@ jobs:
         run: node r96/qa/r1113/persona-hero-cpu-check.cjs
       - name: 감싸기 핑퐁 막기(EGO·페르소나 tick·저장) CPU 검사
         run: node r96/qa/wrap-once/wrap-once-cpu-check.cjs
+      - name: R1131 길잡이 포탈 자동 통과 CPU 검사(+R83 끄기 설정 대기)
+        run: node r96/qa/r1131/guide-portal-auto-cpu-check.cjs && node r96/qa/r83/portal-check.cjs
       - name: R1120 persona hero own moves (lauren body echoes/ghosts/dash sheet/guard body reskinned, lauren r561 skill sheets -> persona vortex/eclipse sheets, EGO aura/eden fire Eonju, walk frame rate = engine 3.2/unit) CPU check
         run: node r96/qa/r1120/persona-hero-own-cpu-check.cjs
       - name: R1120b persona hero HUD icons/names from persona sheets, gravity-well core drawn as eclipse sheet cell CPU check
