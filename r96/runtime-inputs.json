@@ -10348,7 +10348,8 @@
     "assets/r1125/move/fisher-down.webp",
     "cheat-points-r1126.js",
     "assets/sw0011/beam-0.webp",
-    "assets/sw0011/beam-1.webp"
+    "assets/sw0011/beam-1.webp",
+    "narrative-corner-r1141.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11423,5 +11424,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "3b1e25532c789409d5ba939b850773de0d87100f4e47668fb18c07db1a4a1e81"
+  "runtimeManifestSHA256": "6f728ae3cd453512f6f1740f0949d8e5a1413aa5e34bf7fb80201a7dc5113351"
 }
