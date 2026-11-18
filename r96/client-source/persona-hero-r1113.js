@@ -124,6 +124,7 @@ const LAUREN_EDEN=/^r108eden:[a-z.]+#(\d+),(\d+),(\d+)\|/,LAUREN_ART=/\/lauren\/
 const GUARD_ART=/\/r1027\/barrier\.webp/,BLINK_ART=/\/vfx\/blink-afterimage\.webp/,GUARD_ID=/^r111:guard-(back|front)$/;
 function heroFx(o,c){if(!o||o.kind==='enemy'||o.kind==='contact'||o.kind==='shadow')return false;if(o.kind==='hero')return GUARD_ART.test(String(c?.sourcePath||''));
  if(o.pxfSide!=='enemy'&&o.side!=='enemy'){if(GUARD_ID.test(String(o.id||'')))return true;const s0=String(c?.sourcePath||'');if(GUARD_ART.test(s0)||BLINK_ART.test(s0))return true;}if(o.pxfSide==='hero'||o.side==='hero')return true;if(o.pxfSide==='enemy'||o.side==='enemy')return false;const id=String(o.id||'');
+ if(o.r101===true&&HIT_ID.test(id)&&HIT_ART.test(String(c?.sourcePath||'')))return true;/* R1143: 영웅 타격 불꽃(R101, 라우렌 보라·옅은 색) */
  if(/(^|:)hero(:|$)/.test(id)||/^r102:/.test(id)||EGO_AURA.test(id)||LAUREN_ID.test(id))return true;const sp=String(c?.sourcePath||'');
  const e=LAUREN_EDEN.exec(sp),ev=e&&violet(+e[1],+e[2],+e[3]);
  return o.kind==='effect'&&(LAUREN_FX.test(sp)||!!ev||LAUREN_ART.test(sp));}
@@ -136,6 +137,7 @@ const RGBA=/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d.eE+-]+)\s*)?\)
 function recolorStr(v){if(typeof v!=='string')return v;return v.replace(RGBA,(m,r,g,b,a)=>{if(!violet(+r,+g,+b))return m;const c=eonju(+r,+g,+b);return a==null?'rgb('+c.join(',')+')':'rgba('+c.join(',')+','+a+')';});}
 function recolorPaint(v){if(typeof v==='string')return recolorStr(v);if(v&&typeof v==='object'&&Array.isArray(v.stops))return {...v,stops:v.stops.map(st=>st&&typeof st==='object'?{...st,color:recolorStr(st.color)}:st)};return v;}
 const VEC_ID=/^r561:/;
+const HIT_ID=/^r101:\d+$/,HIT_ART=/\/r100\/sig-(hit|slash)-(violet|pale)\.webp/;
 // R1120: 픽셀 이펙트(R163) — 라우렌 특수기(R178 pvfx-warm-explosion 등)는 영웅 팔레트(보라)를 색조로 넘겨 구운 캔버스라 그림 필터가 안 닿는다 → play 로 넘기는 색조를 언주로.
 //  frameAt 은 R102 영웅 이펙트 안에서 그려져 그 명령째 언주 색 돌리기(tint)를 받으므로 그대로 둔다(둘 다 하면 빨강→초록).
 const eonjuArr=c=>Array.isArray(c)&&c.length>=3&&violet(c[0],c[1],c[2])?eonju(c[0],c[1],c[2]):c;
@@ -177,7 +179,7 @@ function bake(c,tone='eonju'){const im=c.image;if(!im||typeof im!=='object'||c.m
 function tint(cmds){let n=0;for(const c of cmds){if(!c||c.kind!=='image'||c.r1113tint)continue;if(!heroFx(c.owner,c))continue;const s=c.style&&typeof c.style==='object'?c.style:{};
   const ct=celToneOf(c.owner);if(ct&&!CEL_ART.test(String(c.sourcePath||''))){c.r1113tint=true;continue;}/* R1143: 유성 궤도가 던지는 조형물 그림은 물들이지 않음 */const tone=ct||'eonju';if(ct)stats.celTints=(stats.celTints||0)+1;
   let b=null;try{b=bake(c,tone);}catch(e){fail(e);}
-  if(b){c.image=b.canvas;c.mutable=false;c.sourcePath=b.path;c.immutableTint=b.canvas.__storyworldStaticSource;c.r1113tint=true;stats.bakedDraws=(stats.bakedDraws||0)+1;n++;continue;}
+  if(b){if(typeof s.filter==='string'&&/grayscale\(/.test(s.filter)){const k=s.filter.replace(/grayscale\([^)]*\)\s*/g,'').trim();c.style={...s,filter:k||'none'};}/* R1143: 무채색 필터가 구운 색을 다시 지우지 않게 */c.image=b.canvas;c.mutable=false;c.sourcePath=b.path;c.immutableTint=b.canvas.__storyworldStaticSource;c.r1113tint=true;stats.bakedDraws=(stats.bakedDraws||0)+1;n++;continue;}
   const f=typeof s.filter==='string'&&s.filter!=='none'?s.filter+' ':'';c.style={...s,filter:f+(TONES[tone].filter||(tone==='darkred'?TINT+' brightness(.55)':TINT))};c.r1113tint=true;n++;}stats.tints+=n;return n;}
 // 페르소나는 창이 없다 → 라우렌 창끝 빛(R425)은 형상일 때 뺀다
 const DROP=/^r425:spear-tip$/;

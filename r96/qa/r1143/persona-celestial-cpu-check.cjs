@@ -101,6 +101,14 @@ const frames=(w,mk,n=6)=>{let r;for(let i=0;i<n;i++)r=w.frame(mk());return r;};
  ok(!A(w).inspect().stats.lastError,'④ 오류 없음 ('+A(w).inspect().stats.lastError+')');
  // 라우렌 본인
  A(w).setForm(false);const L=w.frame(mk());ok(L[2].image===I.blue&&L[4].image===I.violet&&L[8].style.fillStyle==='rgba(190,150,240,.9)'&&L[9].style.fillStyle==='rgba(150,84,220,.8)','④ 형상 끄면(라우렌 본인) 그림·색 그대로');}
+// ④-2 타격 불꽃(R101 영웅 타격 그림 — 천체 공명이 맞을 때마다 연보라로 튀던 것)도 언주
+{const w=world();on(w);const V=img(8,8,[170,110,230,255]),Pl=img(8,8,[230,230,240,255]),Cr=img(8,8,[200,40,40,255]);
+ const mk=()=>[body(),fx('r101:12','http://x/m0/assets/r100/sig-hit-violet.webp',V,{owner:{r101:true}}),fx('r101:13','http://x/m0/assets/r100/sig-slash-violet.webp',V,{owner:{r101:true}}),fx('r101:14','http://x/m0/assets/r100/sig-hit-pale.webp',Pl,{owner:{r101:true},style:{filter:'grayscale(1) brightness(1.12)'}}),
+  fx('r101:15','http://x/m0/assets/r100/sig-hit-crimson.webp',Cr,{owner:{r101:true}}),fx('r98:3','http://x/m0/assets/r100/sig-hit-violet.webp',V,{owner:{}})];
+ const s=frames(w,mk,8);ok(/^r1140:eonju:/.test(s[1].sourcePath)&&/^r1140:eonju:/.test(s[2].sourcePath)&&/^r1140:eonju:/.test(s[3].sourcePath),'④-2 영웅 타격 불꽃(보라·옅은 색) → 언주 굽기 ('+s[1].sourcePath+')');
+ ok(!/grayscale/.test(s[3].style.filter||''),'④-2 구운 뒤에는 무채색 필터가 색을 다시 지우지 않음 ('+s[3].style.filter+')');
+ ok(s[4].image===Cr&&s[5].image===V,'④-2 다른 색 타격 그림·적 쪽(R98) 그림은 그대로');
+ A(w).setForm(false);const L=w.frame(mk());ok(L[1].image===V&&L[3].image===Pl,'④-2 형상 끄면 그대로');}
 // ⑥ 굽지 못할 때(화소 읽기 막힘) → 필터로
 {const w=world({pixels:false});on(w);const B=img(8,8,[120,60,200,255]),V=img(8,8,[170,110,230,255]),Rr=img(8,8,[200,200,210,255]);
  const s=frames(w,()=>[body(),cel('r946:blue:1.00:orb','http://x/m0/assets/r946/lauren-blue.webp',B),cel('r946:violet:1.00:orb','http://x/m0/assets/r946/lauren-violet.webp',V),cel('r946:red:1.00:orb','http://x/m0/assets/r946/lauren-red.webp',Rr)],6);
