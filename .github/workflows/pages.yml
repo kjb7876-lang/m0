@@ -667,6 +667,8 @@ jobs:
         run: node r96/qa/r1144/persona-wer-cpu-check.cjs
       - name: R1145 persona hero basic attack without Lauren traces (R411 hit-teleport and R302 Lauren-violet bolt/impact copies baked to eonju in persona form only) CPU check
         run: node r96/qa/r1145/persona-basic-cpu-check.cjs
+      - name: R1153 Dots status effects 9 kinds (per-actor icons + body overlays in every mode), samong sigils for Lauren/Hunter/Slayer/Gunner, Seoha clockwork, Slayer brand 1-5, Gunner R reticle + chain beam, deploy ring tinted by hero colour CPU check
+        run: node r96/qa/r1153/dots-status-cpu-check.cjs
       - name: R1098 samong faces (Michaela final boss uses her own sheet, R161 puppet repainted as an ink-and-white-thread doll so it no longer looks like Hwando) CPU check
         run: node r96/qa/r1098/r1098-cpu-check.cjs
       - name: R1090 character ink tint (hero and mob body images only, follows the map ink wash, settings toggle, effects and telegraphs untouched) CPU check

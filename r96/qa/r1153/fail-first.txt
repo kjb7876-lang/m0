@@ -1,0 +1,36 @@
+FAIL ① dots-status-r1153.js runtime-text 사본 = client-source
+FAIL ① 스크립트 태그(persona-wer-r1144 뒤, combat-r118 앞)
+FAIL ① verify-r96-public.py 기대 목록
+FAIL ① runtime-manifest·inputs
+FAIL ① pages.yml CPU 검사 줄
+FAIL ① 매니페스트에 새 시트: status-icons
+FAIL ① 매니페스트에 새 시트: status-overlay
+FAIL ① 매니페스트에 새 시트: sigil-lauren
+FAIL ① 매니페스트에 새 시트: sigil-hunter
+FAIL ① 매니페스트에 새 시트: sigil-slayer
+FAIL ① 매니페스트에 새 시트: sigil-gunner
+FAIL ① 매니페스트에 새 시트: seoha-clockwork
+FAIL ① 매니페스트에 새 시트: slayer-brand
+FAIL ① 매니페스트에 새 시트: gunner-reticle
+FAIL ① 매니페스트에 새 시트: gunner-chain
+FAIL ① 매니페스트에 새 시트: deploy-ring
+PASS ① 키를 새로 듣지 않음
+PASS ① 기록기가 못 받는 필터 없음
+PASS ② index.json(원본·해시·손질 기록) 있음
+PASS ② status-icons.webp 해시·크기 [1152,128] · 원본 0146ST/icons/CX-0146ST_icons_r1.png
+PASS ② status-overlay.webp 해시·크기 [1536,2304] · 원본 0146ST/overlay/CX-0146ST_B_overlays_all9_6f.png
+PASS ② sigil-lauren.webp 해시·크기 [1152,896] · 원본 0148SG_A-B/A-lauren/CX-0148SG_A-lauren_REVIEW.png
+PASS ② sigil-hunter.webp 해시·크기 [1152,896] · 원본 0148SG_A-B/B-hunter/CX-0148SG_B-hunter_r1.png
+PASS ② sigil-slayer.webp 해시·크기 [1152,896] · 원본 0148SG_C-D/C-slayer/CX-0148SG_C-slayer_r1_REVIEW.png
+PASS ② sigil-gunner.webp 해시·크기 [1152,896] · 원본 0148SG_C-D/D-gunner/CX-0148SG_D-gunner_r1.png
+PASS ② seoha-clockwork.webp 해시·크기 [1536,256] · 원본 0149SE/B-clockwork/CX-0149SE_B-clockwork6_r1.png
+PASS ② slayer-brand.webp 해시·크기 [1536,256] · 원본 0150MX/B-mark/CX-0150MX_B-mark_r1_REVIEW_HOLD.png
+PASS ② gunner-reticle.webp 해시·크기 [2048,256] · 원본 0150MX/C-reticle/CX-0150MX_C-reticle_r1_DIAGNOSTIC.png
+PASS ② gunner-chain.webp 해시·크기 [2048,128] · 원본 0150MX/D-chain/CX-0150MX_D-chain_r1_HOLD.png
+PASS ② deploy-ring.webp 해시·크기 [2048,256] · 원본 0150MX/F-deploy/CX-0150MX_F-deploy8_r1.png
+PASS ② 사몽 문양 lauren 칸·발 피벗 {"cell":[192,224],"pivot":[96,163.5],"stretch":1.42}
+PASS ② 사몽 문양 hunter 칸·발 피벗 {"cell":[192,224],"pivot":[96,165.1],"stretch":1.36}
+PASS ② 사몽 문양 slayer 칸·발 피벗 {"cell":[192,224],"pivot":[96,163.7],"stretch":1.38}
+PASS ② 사몽 문양 gunner 칸·발 피벗 {"cell":[192,224],"pivot":[96,166],"stretch":1}
+FAIL 모듈 파일 없음: client-source/dots-status-r1153.js
+FAILED 17

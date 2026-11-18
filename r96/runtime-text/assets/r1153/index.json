@@ -1,0 +1,183 @@
+{
+ "round": "R1153",
+ "sigils": {
+  "lauren": {
+   "cell": [
+    192,
+    224
+   ],
+   "pivot": [
+    96,
+    163.5
+   ],
+   "stretch": 1.42
+  },
+  "hunter": {
+   "cell": [
+    192,
+    224
+   ],
+   "pivot": [
+    96,
+    165.1
+   ],
+   "stretch": 1.36
+  },
+  "slayer": {
+   "cell": [
+    192,
+    224
+   ],
+   "pivot": [
+    96,
+    163.7
+   ],
+   "stretch": 1.38
+  },
+  "gunner": {
+   "cell": [
+    192,
+    224
+   ],
+   "pivot": [
+    96,
+    166.0
+   ],
+   "stretch": 1.0
+  }
+ },
+ "files": [
+  {
+   "file": "status-icons.webp",
+   "source": "0146ST/icons/CX-0146ST_icons_r1.png",
+   "sourceSha256": "3bcf8bc5007a1ed596cb85f8f6ebc84aea25fe41b39508966bff600df952f6a9",
+   "size": [
+    1152,
+    128
+   ],
+   "bytes": 50386,
+   "sha256": "a710a1059389ba06d78315487cdb44f4bfc646c37d849bafed1cccf06f56757f",
+   "fix": "9개 공통 상아빛 테(2px, 알파 .78) — 타락 검은 눈물·속박 먹 촉수가 어두운 바닥에서도 읽히게(HOLD 해소)"
+  },
+  {
+   "file": "status-overlay.webp",
+   "source": "0146ST/overlay/CX-0146ST_B_overlays_all9_6f.png",
+   "sourceSha256": "77e0417daa779c2427d6f904c1d7492cbc3cc93939cc8d4bccf3fcc15d20ab89",
+   "size": [
+    1536,
+    2304
+   ],
+   "bytes": 311598,
+   "sha256": "7f6b94174b5c5e692f04bc11c4a0c067e34f2e35601f3a1c75f40032f9c8a1ae",
+   "fix": "속박·타락 줄에 보라·검붉은 밑빛(3px)과 밝기 +25~35% — 나머지 7줄은 원본 그대로"
+  },
+  {
+   "file": "sigil-lauren.webp",
+   "source": "0148SG_A-B/A-lauren/CX-0148SG_A-lauren_REVIEW.png",
+   "sourceSha256": "b7736092e61341ff316da8422a81ee211bf80ec6e5e18e40da18ca6f3a9ec6d8",
+   "size": [
+    1152,
+    896
+   ],
+   "bytes": 285414,
+   "sha256": "07db3cf6e88f2332d35dbb12666901098024ea5adb7e90ab02ef71ec7aee4140",
+   "fix": "고리 띠 세로 1.42배(위 무늬는 모양 그대로 옮김), 칸 192×224, 발 피벗 (96,163.5)"
+  },
+  {
+   "file": "sigil-hunter.webp",
+   "source": "0148SG_A-B/B-hunter/CX-0148SG_B-hunter_r1.png",
+   "sourceSha256": "d19157e64644b28483893219a8a04fe51a6c5110b9985f94cf6aea6f2c7cc58f",
+   "size": [
+    1152,
+    896
+   ],
+   "bytes": 300532,
+   "sha256": "2dba31e011ac1f0948c738bf303c43cc37d7eceaaa4d794ad964a3c31bc5b7fa",
+   "fix": "고리 띠 세로 1.36배(위 무늬는 모양 그대로 옮김), 칸 192×224, 발 피벗 (96,165.1), 윗변 6줄 부드럽게 지움"
+  },
+  {
+   "file": "sigil-slayer.webp",
+   "source": "0148SG_C-D/C-slayer/CX-0148SG_C-slayer_r1_REVIEW.png",
+   "sourceSha256": "cdec4ffd88cf30f667a496c6e09563c2799f52431ed53973856fec48cbc067a0",
+   "size": [
+    1152,
+    896
+   ],
+   "bytes": 271174,
+   "sha256": "34ac7315a6074c322268c0b240243c73371660674874b5f9999135001bab422d",
+   "fix": "고리 띠 세로 1.38배(위 무늬는 모양 그대로 옮김), 칸 192×224, 발 피벗 (96,163.7)"
+  },
+  {
+   "file": "sigil-gunner.webp",
+   "source": "0148SG_C-D/D-gunner/CX-0148SG_D-gunner_r1.png",
+   "sourceSha256": "4f0f1153791f544f681cac3ffbaa10144a18bcc3f1ac615c825a30ee7f6e5e69",
+   "size": [
+    1152,
+    896
+   ],
+   "bytes": 217968,
+   "sha256": "e3d949710842384876ec4aa1997e14c12d5b276fec5c2e89652be29876242bed",
+   "fix": "고리 띠 세로 1.0배(위 무늬는 모양 그대로 옮김), 칸 192×224, 발 피벗 (96,166.0)"
+  },
+  {
+   "file": "seoha-clockwork.webp",
+   "source": "0149SE/B-clockwork/CX-0149SE_B-clockwork6_r1.png",
+   "sourceSha256": "304f2aff9ccd19d411fbdb4b0be6b803ac8fa0aea52508dcd8f8f5a48736e822",
+   "size": [
+    1536,
+    256
+   ],
+   "bytes": 110990,
+   "sha256": "84aca6232579522bab77c4445bf8c8387988158828625f26f64b04ad2c4a334c",
+   "fix": "손질 없음(낮은 알파 정리만)"
+  },
+  {
+   "file": "slayer-brand.webp",
+   "source": "0150MX/B-mark/CX-0150MX_B-mark_r1_REVIEW_HOLD.png",
+   "sourceSha256": "8d3d8d34df72fd8e43e49acfe0be6640fabdc8b8c5b252f061620082953d5adb",
+   "size": [
+    1536,
+    256
+   ],
+   "bytes": 8752,
+   "sha256": "fdba02f9dc110b4d9db930b2838c8320a6eb5586c40c41efccafeda1b12aff30",
+   "fix": "칸 = 낙인 1·2·3·4·5·5(맥박). 4개 칸은 5개 칸에서 x<=98 방울 하나를 지움(새로 그린 화소 없음)"
+  },
+  {
+   "file": "gunner-reticle.webp",
+   "source": "0150MX/C-reticle/CX-0150MX_C-reticle_r1_DIAGNOSTIC.png",
+   "sourceSha256": "0d086b06bc1d090d6689c7c5d26d9eaca4d26f17c2fec86ecac7f1057afc4cd4",
+   "size": [
+    2048,
+    256
+   ],
+   "bytes": 55154,
+   "sha256": "b05bc91c61056c188a5dddb1e2fa82a421749c4457e0b1da9df424af4a3dce3e",
+   "fix": "알파 재매핑 (a-60)/195 — 사각 막 제거. 1→8칸 좁혀짐은 R 폭격 대기(1.6초) 한 번에 맞춰 한 번만 재생(루프 이음매 문제 없음)"
+  },
+  {
+   "file": "gunner-chain.webp",
+   "source": "0150MX/D-chain/CX-0150MX_D-chain_r1_HOLD.png",
+   "sourceSha256": "6abe9415c67ff19750ad5097b07461ddff9a703f58561433ddd41c25f6300a9a",
+   "size": [
+    2048,
+    128
+   ],
+   "bytes": 33954,
+   "sha256": "aa54cb77da9a464a09367e40c1e5f987086edf1a1297e0467f1403a19b50e47e",
+   "fix": "각 칸 양끝 24px 를 좌우 끝 평균 단면으로 섞어 이음매 맞춤"
+  },
+  {
+   "file": "deploy-ring.webp",
+   "source": "0150MX/F-deploy/CX-0150MX_F-deploy8_r1.png",
+   "sourceSha256": "349c620252573cc197f56e658e4e4acbb90aff53e2754f851da8a10fa43c7ce6",
+   "size": [
+    2048,
+    256
+   ],
+   "bytes": 40052,
+   "sha256": "348b1bde01f49e87caf740f1dc19b3f8092644efde14ae246a963cad67dbecef",
+   "fix": "손질 없음 — 영웅색 고리(R720 코드) 위에 lighter 로 얹음(캔버스 굽기는 Three 기록기가 못 받아 뺌)"
+  }
+ ]
+}

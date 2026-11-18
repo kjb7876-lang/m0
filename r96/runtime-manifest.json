@@ -11148,6 +11148,66 @@
       "sha256": "9e77abcb2e57ef95bc269e8924c450bfcdcdf3fc2f7099536545bf7047379c42"
     },
     {
+      "path": "assets/r1153/deploy-ring.webp",
+      "bytes": 40052,
+      "sha256": "348b1bde01f49e87caf740f1dc19b3f8092644efde14ae246a963cad67dbecef"
+    },
+    {
+      "path": "assets/r1153/gunner-chain.webp",
+      "bytes": 33954,
+      "sha256": "aa54cb77da9a464a09367e40c1e5f987086edf1a1297e0467f1403a19b50e47e"
+    },
+    {
+      "path": "assets/r1153/gunner-reticle.webp",
+      "bytes": 55154,
+      "sha256": "b05bc91c61056c188a5dddb1e2fa82a421749c4457e0b1da9df424af4a3dce3e"
+    },
+    {
+      "path": "assets/r1153/index.json",
+      "bytes": 5481,
+      "sha256": "f68add10d15ba047e2244ac903164c809596e9d916bb1b424c83cc4439f981ab"
+    },
+    {
+      "path": "assets/r1153/seoha-clockwork.webp",
+      "bytes": 110990,
+      "sha256": "84aca6232579522bab77c4445bf8c8387988158828625f26f64b04ad2c4a334c"
+    },
+    {
+      "path": "assets/r1153/sigil-gunner.webp",
+      "bytes": 217968,
+      "sha256": "e3d949710842384876ec4aa1997e14c12d5b276fec5c2e89652be29876242bed"
+    },
+    {
+      "path": "assets/r1153/sigil-hunter.webp",
+      "bytes": 300532,
+      "sha256": "2dba31e011ac1f0948c738bf303c43cc37d7eceaaa4d794ad964a3c31bc5b7fa"
+    },
+    {
+      "path": "assets/r1153/sigil-lauren.webp",
+      "bytes": 285414,
+      "sha256": "07db3cf6e88f2332d35dbb12666901098024ea5adb7e90ab02ef71ec7aee4140"
+    },
+    {
+      "path": "assets/r1153/sigil-slayer.webp",
+      "bytes": 271174,
+      "sha256": "34ac7315a6074c322268c0b240243c73371660674874b5f9999135001bab422d"
+    },
+    {
+      "path": "assets/r1153/slayer-brand.webp",
+      "bytes": 8752,
+      "sha256": "fdba02f9dc110b4d9db930b2838c8320a6eb5586c40c41efccafeda1b12aff30"
+    },
+    {
+      "path": "assets/r1153/status-icons.webp",
+      "bytes": 50386,
+      "sha256": "a710a1059389ba06d78315487cdb44f4bfc646c37d849bafed1cccf06f56757f"
+    },
+    {
+      "path": "assets/r1153/status-overlay.webp",
+      "bytes": 311598,
+      "sha256": "7f6b94174b5c5e692f04bc11c4a0c067e34f2e35601f3a1c75f40032f9c8a1ae"
+    },
+    {
       "path": "assets/r116/mobs/M001-hit.png",
       "bytes": 141513,
       "sha256": "35cffa3fe6d6c22cdb75e06e1cca55a673f06c10afa28087d749082c40c77b71"
@@ -53833,6 +53893,11 @@
       "sha256": "61b973fc29b004c869475a12ea13f9d0de07f2efa521710c065ca9ae1092e536"
     },
     {
+      "path": "dots-status-r1153.js",
+      "bytes": 17211,
+      "sha256": "9737bedaa6821688cdde163d61bc38a925272033be414098912e62d596f61dc5"
+    },
+    {
       "path": "drive-buildings-r414.js",
       "bytes": 9554,
       "sha256": "3953e753725747314f0918aef50ac95d26ac7bd1d7f3c85ebc45df970a3f155b"
@@ -54129,8 +54194,8 @@
     },
     {
       "path": "gunner-arms-r561.js",
-      "bytes": 47328,
-      "sha256": "6205de5df6918fcc9ae493eccf9a03b42dc1fd41b094f6bddebfc33296ece046"
+      "bytes": 47831,
+      "sha256": "33369ca1f15f5eae19ca5361879706a5a3949aa9f73c15f763d21cd9082d17e8"
     },
     {
       "path": "gunner-veil-r953.js",
@@ -54144,8 +54209,8 @@
     },
     {
       "path": "hero-defense-r720.js",
-      "bytes": 52018,
-      "sha256": "2b1dbe64e0523f3bc2c10cff28fbd615c341bf0a4a01ae7223872f69be860341"
+      "bytes": 52292,
+      "sha256": "7c2f4658348f3e1b38b760c04561dc31f5e64a9ab0051e033a4322b2c9e4e931"
     },
     {
       "path": "hero-dots-fx-r1041.js",
@@ -54384,8 +54449,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6581654,
-      "sha256": "51cefc6de1046aa2b5f0e6c8c8c6ad74e0a227c26b5c8c5be757432a838108f4"
+      "bytes": 6581701,
+      "sha256": "a1af7bcd2042d69c5322ea2e567a442bb1582283f5c164969808acf329f0aefc"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -55279,8 +55344,8 @@
     },
     {
       "path": "seoha-epoch-r949.js",
-      "bytes": 47078,
-      "sha256": "0eafce91586376430f722081ddbb2a2212ad6d93a548d2eb6c8b1e4a4067a2a1"
+      "bytes": 47489,
+      "sha256": "e6192dc54699c3439c0be70e30fdc0e6b947193d11edba76d75e37675d6390c3"
     },
     {
       "path": "seven-sins-bossrooms.js",
@@ -55359,8 +55424,8 @@
     },
     {
       "path": "slayer-berserk-r586.js",
-      "bytes": 13322,
-      "sha256": "f90a1d67212fb7f6d2b2b48f4423a8223b3a44b2a4c4e86c92e1c0e6c5d34a71"
+      "bytes": 13559,
+      "sha256": "51974ab5975d3a7586f1599dd4d9c0a4a93a5cce01ead6a348ffd4a27d5ae131"
     },
     {
       "path": "slayer-blood-passive-r947.js",
@@ -55499,8 +55564,8 @@
     },
     {
       "path": "theme-fx-r430.js",
-      "bytes": 27224,
-      "sha256": "b129bd0b8144aced4316c42149acbfcd8dec40b973f5077d6b9f9333eb601b23"
+      "bytes": 27496,
+      "sha256": "ca3cd63025183a46383313f3511796934b3ddc273c2f25827e99168037c3ea93"
     },
     {
       "path": "thread-custom-r1016.js",
@@ -55763,9 +55828,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11152,
-  "totalBytes": 1345955982,
-  "webHTMLSha256": "51cefc6de1046aa2b5f0e6c8c8c6ad74e0a227c26b5c8c5be757432a838108f4",
+  "fileCount": 11165,
+  "totalBytes": 1347666392,
+  "webHTMLSha256": "a1af7bcd2042d69c5322ea2e567a442bb1582283f5c164969808acf329f0aefc",
   "largest": [
     {
       "path": "index.html",
