@@ -43,6 +43,8 @@ const CFG=Object.freeze({chance:.09,gap:.35,icd:21,life:7,fade:.45,
 const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
 const U1025=(h,a,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__,v=u&&u.mask(h,a,k);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},S1025=h=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.share(h);return Number.isFinite(v)?Math.max(0,Math.min(1,v)):1;}catch(_){return 1;}},W1025=(h,w)=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.weights(h,w);return v||w;}catch(_){return w;}},A1025=(h,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.unlocked(h,k)!==false:true;}catch(_){return true;}},O1025=id=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.summonOpen(id)!==false:true;}catch(_){return true;}};/* R1025 특수 패시브 레벨별 해금·소환 영웅 서사 확인(파일 없으면 원래 값) */
 const C1033=(h,k,o,x)=>{try{window.__STORYWORLD_PASSIVE_CUTIN_R1033__?.fire(h,k,o,x);}catch(_){}};/* R1033 세 번째 특수 패시브 컷인(1·2단·몸·끔은 그쪽에서 거름) */
+const K1157=(o,x,k)=>{try{const E=window.__STORYWORLD_EGO_SUMMON_R1157__;if(E&&o&&o.r1157Summon)E.chain(o,x,k);}catch(_){}};/* R1157: EGO 가 부른 영웅이 또 소환하면 둘 다 7초 연장·같이 끝 */
+const B1157=p=>{try{const E=window.__STORYWORLD_EGO_SUMMON_R1157__;return !!E&&E.bodies().includes(p);}catch(_){return false;}};/* R1157 소환 몸도 주인 */
 const NAMES={call:'혈맹 호출',shade:'혈영 강습',squad:'기러기진 섬멸'},BEAT=.42;
 let errors=0,lastError=null;const fail=e=>{errors++;lastError=String(e?.stack||e).slice(0,300);};
 const G=(f,d)=>{try{const v=f();return v===undefined?d:v;}catch(_){return d;}};
@@ -109,7 +111,7 @@ function start(s,p,tier){const t=T(),rm=G(()=>room,null);if(!rm||!NAMES[tier])re
  if(tier==='squad'){for(let i=0;i<CFG.squad.count;i++)sq.units.push(mkUnit(sq,HERO,i,p.x,p.y,CFG.squad.mul));
   sq.form={id:'r952:form:'+(++serial),r952Prop:true,r952Form:true,x:p.x,y:p.y,solid:false,visible:true,autoTargetEligible6:false,label:'',height:1};Object.defineProperty(sq.form,'r952Squad',{value:sq,enumerable:false});}
  formation(sq,foes);for(const u of sq.units)u.body=mkBody(p,u);
- s.squad=sq;s.readyAt=t+D971(HERO,CFG.icd);s.stats.procs[tier]++;C1033(HERO,tier,p,{heroes:sq.units.map(u=>u.kind)});live.push(sq);syncProps(sq);
+ s.squad=sq;s.readyAt=t+D971(HERO,CFG.icd);s.stats.procs[tier]++;C1033(HERO,tier,p,{heroes:sq.units.map(u=>u.kind)});live.push(sq);K1157(p,sq,'end');syncProps(sq);
  try{floatText(NAMES[tier],p.x,p.y,tier==='squad'?'#f1d9a0':'#e08a92');}catch(_){}
  try{window.__STORYWORLD_BLOOD_R190__?.play?.('blood-burst',sp.x,sp.y,{k:1.1,z:0});}catch(_){}
  return true;}
@@ -122,7 +124,7 @@ function onSwing(p){const s=st(p),t=T();s.stats.swings++;warm();if(!solo()){s.st
  else{if(t<s.rollAt||t<s.readyAt)return;s.rollAt=t+CFG.gap;s.stats.rolls++;if(!(Math.random()<G971(HERO,[CFG.chance])[0]*S1025(HERO)))return;tier=pickTier1025(Math.random());if(!tier)return;}
  start(s,p,tier);}
 function valid(sq){const p=sq.owner;if(!on||!solo()||!p||!(p.hp>0)||p.hero!==HERO||sq.room!==G(()=>room,null))return false;
- if(p.r720Ally===true){const bs=G(()=>window.__STORYWORLD_HERO_DEFENSE_R720__.bodies(),null);return !Array.isArray(bs)||bs.length===0||bs.includes(p);}
+ if(p.r720Ally===true){if(B1157(p))return true;const bs=G(()=>window.__STORYWORLD_HERO_DEFENSE_R720__.bodies(),null);return !Array.isArray(bs)||bs.length===0||bs.includes(p);}
  return p===P();}
 function syncProps(sq){const r=sq.room;if(!r||!Array.isArray(r.props))return;for(const u of sq.units)if(!r.props.includes(u.prop))r.props.push(u.prop);
  if(sq.form){let m=sq.owner.x+sq.owner.y;for(const u of sq.units)m=Math.min(m,u.x+u.y);for(const s of sq.slots)m=Math.min(m,s.x+s.y);sq.form.x=sq.form.y=(m-.8)/2;/* 모든 분대원보다 먼저(바닥에) 그려지게 */if(!r.props.includes(sq.form))r.props.push(sq.form);}

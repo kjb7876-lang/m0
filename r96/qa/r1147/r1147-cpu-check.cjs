@@ -8,7 +8,7 @@
 const R=path.join(__dirname,'../..');let n=0;const ok=(c,m)=>{assert.ok(c,m);n++;};
 const F=path.join(R,'client-source','boss-motion-r620.js');const src=fs.readFileSync(F,'utf8');
 const BOSSES={b07:[411,473],dist00:[421,463],a11:[466,432],dist06:[508,501],u202:[509,525]};
-const HIT=new Set(['b07','a11','dist00']);
+const HIT=new Set(['b07','a11','dist00','dist06']);/* R1159: 발록 피격 r2 HOLD 를 Claude 가 손질해 적용(사용자 11-18 08:41Z 보류 자산 직접 개선 지시) */
 const P4=id=>'assets/r104/bosses/'+id+(id==='u202'?'-mid':'-boss')+'-p4.webp';
 function world(p4,W,H,{ready=true}={}){const ctx={Math,String,Number,Array,Object,JSON,Map,WeakMap,Set,Symbol,isFinite,performance:{now:()=>0},localStorage:{getItem:()=>null,setItem(){}}};ctx.window=ctx;vm.createContext(ctx);
  vm.runInContext(`var time=0,room={id:'z'},player={x:0,y:0},ctx={commands:[]};var __ready=${ready},__added=[];function addImage(p){__added.push(p);}
