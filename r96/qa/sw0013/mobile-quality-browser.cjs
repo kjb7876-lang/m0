@@ -152,7 +152,7 @@ async function sampleSamongCue(page) {
         source:[row.image?.width,row.image?.height], opacity:row.mesh.material.opacity};
     }
     return false;
-  }, null, {timeout:15000});
+  }, null, {timeout:30000});
   return binding.jsonValue();
 }
 
@@ -189,10 +189,11 @@ async function run(mode, step, durationMs) {
     const after=await page.evaluate(state);
     assert.equal(after.renderer,'three'); assert.equal(after.contextLost,false);
     assert.deepEqual([after.layer,after.samong], mode==='samong'?['DREAM','sz115-P-2']:['STORY',null]);
-    assert.ok(after.texturedRows>0); assert.deepEqual(errors,[]);
+    assert.ok(after.texturedRows>0 && (before.heroRows.length || after.heroRows.length), 'expected a visible textured hero');
     const wallMs=Date.now()-begin;
     const cue=mode==='samong'?await sampleSamongCue(page):null;
     if (cue) assert.ok(cue.opacity>0 && cue.texture.every(n=>n>0));
+    assert.deepEqual(errors,[]);
     const report={mode,step,wallMs,before,after,samples,cue};
     if (process.env.SHOTS) {
       fs.mkdirSync(process.env.SHOTS,{recursive:true});

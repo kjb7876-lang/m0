@@ -57,19 +57,19 @@ async function capture(page, preset, asset) {
     const selected=three.commands.texture(im,false).image;
     const [cw,ch]=asset.cell, cols=Math.floor(w/cw), sx=asset.frame%cols*cw, sy=Math.floor(asset.frame/cols)*ch;
     const dw=Math.round(cw*asset.height/ch),dh=asset.height;
-    function paint(src){
+    function paint(src,width=dw,height=dh){
       const kx=(src.naturalWidth||src.width)/w, ky=(src.naturalHeight||src.height)/h;
-      const g=canvas2d(dw,dh);
-      originalDraw.call(g,src,sx*kx,sy*ky,cw*kx,ch*ky,0,0,dw,dh);
+      const g=canvas2d(width,height);
+      originalDraw.call(g,src,sx*kx,sy*ky,cw*kx,ch*ky,0,0,width,height);
       return g;
     }
-    const pictures=[old,selected,im].map(paint);
+    const pictures=[old,selected,im].map(src=>paint(src));
     const data=pictures.map(g=>g.getImageData(0,0,dw,dh).data);
-    function diff(pixels){
+    function diff(pixels,reference=data[2]){
       let sum=0,changed=0;
       for(let i=0;i<pixels.length;i+=4){
         let delta=0;
-        for(let j=0;j<4;j++) delta+=Math.abs(pixels[i+j]-data[2][i+j]);
+        for(let j=0;j<4;j++) delta+=Math.abs(pixels[i+j]-reference[i+j]);
         sum+=delta;
         if(delta)changed++;
       }
@@ -79,7 +79,12 @@ async function capture(page, preset, asset) {
     sheet.fillStyle='#343035';sheet.fillRect(0,0,dw*3,dh);
     pictures.forEach((g,i)=>originalDraw.call(sheet,g.canvas,i*dw,0));
     const dimensions=s=>[s.naturalWidth||s.width,s.naturalHeight||s.height];
-    const result={role:asset.role,preset,original:[w,h],previous:dimensions(old),selected:dimensions(selected),
+    // A small on-screen sprite can resolve identically even when its source gained detail.
+    // Check art presence and also compare one atlas frame at 1:1, independently of display size.
+    const detail=[old,selected,im].map(src=>paint(src,cw,ch).getImageData(0,0,cw,ch).data);
+    let visible=0;
+    for(let i=3;i<data[2].length;i+=4)if(data[2][i]>32)visible++;
+    const result={visible,detailBefore:diff(detail[0],detail[2]),detailAfter:diff(detail[1],detail[2]),role:asset.role,preset,original:[w,h],previous:dimensions(old),selected:dimensions(selected),
       display:[dw,dh],before:diff(data[0]),after:diff(data[1]),diagnostic:api.inspect(),
       png:sheet.canvas.toDataURL().split(',')[1]};
     three.commands.release(im);
@@ -102,7 +107,9 @@ async function capture(page, preset, asset) {
       console.log(JSON.stringify(r));
       assert.deepEqual(r.selected,r.original,asset.role+' must have native pixels when there is headroom: '+JSON.stringify(diagnostic));
       assert.equal(r.after.changed,0);
-      if(r.previous[0]!==r.original[0])assert.ok(r.before.changed>0,'fixture must have visible source detail');
+      assert.ok(r.visible>0,'frame must include visible art');
+      assert.equal(r.detailAfter.changed,0);
+      if(r.previous[0]!==r.original[0])assert.ok(r.detailBefore.changed>0,'source frame must contain fine detail');
       reports.push(r);
       if(process.env.SHOTS){
         fs.mkdirSync(process.env.SHOTS,{recursive:true});
