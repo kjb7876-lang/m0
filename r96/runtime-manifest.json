@@ -53814,8 +53814,8 @@
     },
     {
       "path": "edges-r188.js",
-      "bytes": 9092,
-      "sha256": "ca73e64be1665474406e3cb42e62dd484db4d9ed95b118dea144191099e967d6"
+      "bytes": 9112,
+      "sha256": "49619e04c5af78d3ed54861956242aa5367a16ef5354b847bd8cdfb02cb8e8d4"
     },
     {
       "path": "effect-presentation-r83.js",
@@ -54134,8 +54134,8 @@
     },
     {
       "path": "hero-palette-r302.js",
-      "bytes": 22378,
-      "sha256": "52fb53e702345291aefd222092f342a02c3cbdedbe6720130ce0b51b97aa2e04"
+      "bytes": 22554,
+      "sha256": "91080f067842e1f6018cdba174120bbb8b007f06e413ad70eb2109c0e577c1b1"
     },
     {
       "path": "hero-presentation-r83.js",
@@ -54534,8 +54534,8 @@
     },
     {
       "path": "mob-death-r462.js",
-      "bytes": 45718,
-      "sha256": "fe21fdc8b92176bc32d6be9d9c2dab51207a3f0ebaf96c0a982691ce45ea1fc1"
+      "bytes": 45988,
+      "sha256": "846532bb9ebc253afb766a67996edcd56a0ca3ad8e334464b5069ace82980642"
     },
     {
       "path": "mob-dots-r374.js",
@@ -54639,8 +54639,8 @@
     },
     {
       "path": "mobile-memory-r980.js",
-      "bytes": 16601,
-      "sha256": "4c5f92f4128bec7990c120428c76a9b98d300ba88596225a52e3b6582b5d3768"
+      "bytes": 16788,
+      "sha256": "b78d9c77ca19e2fa6d89b714d8016459470c1b57aeba6f402b695459bbdcd87c"
     },
     {
       "path": "mobile-perf-r298.js",
@@ -55024,8 +55024,8 @@
     },
     {
       "path": "reach-r225.js",
-      "bytes": 10077,
-      "sha256": "87d18eb657149af5f21968daaeecd30b021cdf715e1bbedd8492c83b6907dfa4"
+      "bytes": 11061,
+      "sha256": "4767b0013b72c569310822482756d30f9266f39556625c2c07e7dd984a44628d"
     },
     {
       "path": "readability-r434.js",
@@ -55049,8 +55049,8 @@
     },
     {
       "path": "render-lod-r287.js",
-      "bytes": 20338,
-      "sha256": "c457c01dba77d4859bfa1952e66c51bdf969c5e2182cdaedd0868060939178e4"
+      "bytes": 20689,
+      "sha256": "a58c698c54f0a342f9486599de19ba43937af3023eab4f2fb2d20a98df34d3ff"
     },
     {
       "path": "roof-height-r267.js",
@@ -55694,7 +55694,7 @@
     }
   ],
   "fileCount": 11138,
-  "totalBytes": 1345374039,
+  "totalBytes": 1345376027,
   "webHTMLSha256": "3f025cfa0377352ea7d069bb32cfbc3efb0ce0ea4c533a1df854050bda4ca58e",
   "largest": [
     {

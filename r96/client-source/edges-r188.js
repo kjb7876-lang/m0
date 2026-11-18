@@ -25,8 +25,9 @@ function buildMask(L){const t0=performance.now(),b=L.bounds,x0=b[0]-PAD,y0=b[1]-
  for(const w of L.walls||[]){if(!w||!(w.width>0)||!(w.depth>0))continue;const ww=Math.max(w.width,1.6),dd=Math.max(w.depth,1.6);wg.fillRect((w.x-ww/2-x0)*PX,(w.y-dd/2-y0)*PX,ww*PX,dd*PX);}
  const A=ag.getImageData(0,0,W,H).data,S=sg.getImageData(0,0,W,H).data,Wl=wg.getImageData(0,0,W,H).data,out=ag.createImageData(W,H),O=out.data;let any=0;
  for(let j=0;j<H;j++){const wy=y0+(j+.5)/PX;for(let i=0;i<W;i++){const k=(j*W+i)*4,inside=A[k]>127,s=S[k]/255;let a=0;
-   if(s>.01&&s<.998||!inside){const n=fbm(x0+(i+.5)/PX,wy)-.5,v=s+n*1.05,keep=v<=.38?0:v>=.62?1:sm((v-.38)/.24);a=1-keep;if(!inside)a=Math.max(a,.0);a*=1-Math.min(1,Wl[k]/255*1.4);}
-   if(!inside&&s<.01)a=0;/* 멀리 빈 곳은 원래 그림(R186 판·빈 색)이 그대로 */
+   // 멀리 빈 곳과 벽에 완전히 가려진 화소는 잡음을 계산해도 알파가 0이다.
+   const edge=inside?s>.01&&s<.998:s>=.01;
+   if(edge&&Wl[k]<255/1.4){const n=fbm(x0+(i+.5)/PX,wy)-.5,v=s+n*1.05,keep=v<=.38?0:v>=.62?1:sm((v-.38)/.24);a=1-keep;a*=1-Math.min(1,Wl[k]/255*1.4);}
    const g=Math.round(a*255);O[k]=O[k+1]=O[k+2]=g;O[k+3]=255;if(g>8)any++;}}
  const c=mk();c.getContext('2d').putImageData(out,0,0);stats.ms=Math.round(performance.now()-t0);return any?{canvas:c,x0,y0,W:W/PX,H:H/PX}:null;}
 // R800 렉: 같은 입력이면 가림판 그림을 다시 쓴다. 헤드리스 실측에서 지역에 들어갈 때 엔진이 장면을 두 번 비워(clearScene)
