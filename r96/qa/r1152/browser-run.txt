@@ -1,0 +1,11 @@
+PASS ⓐ W 번개 = Dots 먹 번개, 굽지 않음 (154)
+PASS ⓐ W 표식 눈
+PASS ⓐ W 적중 섬광
+PASS ⓑ E 구슬·꼬리 = Dots
+PASS ⓑ E 화상 불씨 = Dots
+PASS ⓒ R 도는 구슬·꼬리 = Dots
+PASS ⓓ (진) 레이저 시작·몸통·끝 = Dots, 굽지 않음 (m0/assets/r1152/laser-start.webp,m0/assets/r1152/laser-body.webp,m0/assets/r1152/laser-end.webp)
+PASS ⓓ 일반 몹 즉사 그대로
+PASS ⓔ 오류 0, Dots 시트 아홉 장 모두 읽힘 ({"dmark":true,"dchain":true,"dhit":true,"dorb":true,"dtail":true,"dember":true,"lbody":true,"lstart":true,"lend":true})
+PASS ⓕ 페이지 오류 0 ()
+ALL PASS (헤드리스)
