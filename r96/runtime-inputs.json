@@ -10454,10 +10454,10 @@
     "assets/r1158/mobs/md-08-blackmarket-suspect-death.webp",
     "assets/r1158/mobs/md-09-drug-craver-death.webp",
     "hidden-hero-sfx-r1155.js",
-    "assets/r1161/bosses/b09-idle6.webp",
-    "assets/r1161/bosses/b09-hit4.webp",
+    "assets/r1160/bosses/b08-hit4.webp",
     "assets/r1160/bosses/b08-idle6.webp",
-    "assets/r1160/bosses/b08-hit4.webp"
+    "assets/r1161/bosses/b09-hit4.webp",
+    "assets/r1161/bosses/b09-idle6.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11532,5 +11532,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "6fde5bd890f6f8be12ccc7c0101e243abdcc9c9d133d974a77becb394954b4ce"
+  "runtimeManifestSHA256": "ab241e57f1003fe336e98108660911c2e96fab333ad1837609e084e352573b1d"
 }

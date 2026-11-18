@@ -464,23 +464,45 @@ function difficultyPicker(){ensureCss();const esc=t=>String(t).replace(/[&<>"]/g
   '<div class="r600Diffs">'+Object.keys(DIFFS).map(id=>{const d=DIFFS[id];return '<button type="button" class="r600Diff'+(id===pickedDiff?' sel':'')+'" data-r600diff="'+id+'"><b>'+esc(d.name)+'</b><span>'+esc(d.text)+'</span><em>몹 체력 '+pct(d.hp)+' · 몹 수 '+pct(d.cap)+' · 받는 피해 '+pct(d.dmg)+' · 경험치 '+pct(d.xp)+' · 보스 '+bossPlan(id).n+'마리</em></button>';}).join('')+'</div><div class="actions"><button id="r600Back">뒤로</button></div>');
  for(const b of document.querySelectorAll('[data-r600diff]'))b.onclick=()=>{pickedDiff=b.getAttribute('data-r600diff');heroPicker();};
  const back=document.getElementById('r600Back');if(back)back.onclick=()=>{pending=false;try{showTitle();}catch(e){fail(e);}};}
+// R1171(사용자 2026-11-18 12:20Z "모바일에서 생존모드로 페르소나및 히든에고영웅 플래이가안됨"): 영웅 고르기 창이 HEROES 8명만 보여 줘
+//  EGO(환도 위 형상 R1046)·페르소나(라우렌 위 형상 R1113)를 고를 길이 없었다(배치 창 777 → 영입 → 교대로만). 해금됐으면 칸을 맨 뒤에 두고,
+//  창이 열린 동안 7·7·7(키, code 로 읽음)이나 제목 7연타(모바일)로 해금한다(R1057·R1148 과 같은 저장 unlock('secret-777')).
+//  시작은 원래 영웅으로 새 게임을 연 뒤 그 형상 표식만 켠다(배치 창 R720 이 idOf 로 주인을 'ego'/'persona' 로 따라간다). 멀티 입장은 그대로(서버가 형상을 모름).
+const FORMS_R1171=Object.freeze({ego:Object.freeze({base:'hwando',field:'egoSovereignR1046',api:'__STORYWORLD_EGO_SOVEREIGN_R1046__'}),persona:Object.freeze({base:'lauren',field:'personaHeroR1113',api:'__STORYWORLD_PERSONA_HERO_R1113__'})});
+const isFormR1171=id=>typeof id==='string'&&Object.prototype.hasOwnProperty.call(FORMS_R1171,id);
+const baseHero=id=>isFormR1171(id)?FORMS_R1171[id].base:id;
+function pickIds(H,on){const ids=Object.keys(H||{});for(const k in FORMS_R1171){let u=false;try{u=on(k)===true;}catch(_){u=false;}if(u&&ids.includes(FORMS_R1171[k].base))ids.push(k);}return ids;}
+function secretStep(s,t,need){if(!Number.isFinite(t))return {s:{n:0,at:NaN},fire:false};const at=+s?.at,c=Number.isFinite(at)&&t-at>=0&&t-at<=1500?(+s.n||0)+1:1;if(c>=need)return {s:{n:0,at:NaN},fire:true};return {s:{n:c,at:t},fire:false};}
+const formApiR1171=id=>isFormR1171(id)?G(()=>window[FORMS_R1171[id].api],null):null;
+const formUnlockedR1171=id=>G(()=>formApiR1171(id).unlocked()===true,false);
+function unlockFormsR1171(){let any=false;for(const k in FORMS_R1171){try{const a=formApiR1171(k);if(a&&typeof a.unlock==='function'){a.unlock('secret-777');any=true;}}catch(e){fail(e);}}if(any)stats.formUnlocks=(stats.formUnlocks||0)+1;return any;}
+function applyFormR1171(id){try{const p=G(()=>player,null);if(!p)return false;for(const k in FORMS_R1171)if(p.hero===FORMS_R1171[k].base&&k!==id){p[FORMS_R1171[k].field]=false;try{formApiR1171(k)?.setForm?.(false);}catch(e){fail(e);}}
+ if(!isFormR1171(id))return false;const f=FORMS_R1171[id];if(p.hero!==f.base)return false;const a=formApiR1171(id);let on=false;try{on=a&&typeof a.setForm==='function'?a.setForm(true)===true:false;}catch(e){fail(e);}if(!on&&formUnlockedR1171(id))p[f.field]=true;
+ if(p[f.field]===true){stats.formStarts=(stats.formStarts||0)+1;return true;}return false;}catch(e){fail(e);return false;}}
+let pickerSecret={key:{n:0,at:NaN},tap:{n:0,at:NaN}},pickerOpen=null;
+const pickerOn=()=>{try{return !!pickerOpen&&G(()=>modal,false)&&!!document.querySelector('#panel [data-r600hero]');}catch(_){return false;}};
+const nowMs=()=>G(()=>performance.now(),Date.now());
+function pickerSecretFire(){if(unlockFormsR1171()&&pickerOpen)try{pickerOpen();}catch(e){fail(e);}}
+try{window.addEventListener('keydown',ev=>{try{if(!pickerOn())return;if(ev.code!=='Digit7'&&ev.code!=='Numpad7'){pickerSecret.key={n:0,at:NaN};return;}if(ev.repeat)return;const r=secretStep(pickerSecret.key,nowMs(),3);pickerSecret.key=r.s;if(r.fire)pickerSecretFire();}catch(e){fail(e);}},true);
+ window.addEventListener('click',ev=>{try{if(!pickerOn())return;if(!ev.target?.closest?.('#panel h2')){pickerSecret.tap={n:0,at:NaN};return;}const r=secretStep(pickerSecret.tap,nowMs(),7);pickerSecret.tap=r.s;if(r.fire)pickerSecretFire();}catch(e){fail(e);}},true);}catch(e){fail(e);}
 // 영웅 고르기: 스토리 모드 영웅 고르기처럼 초상화·역할·패시브·Q 설명을 보여 주고, 영웅을 눌러 바꿔 본 뒤 '이 영웅으로 시작'.
-function heroPicker(){ensureCss();const H=G(()=>HEROES,{}),ids=Object.keys(H);const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
- const art=id=>G(()=>urlFor(window.__STORYWORLD_HEROES_R108__.portraitPath(id)),'assets/r108/heroes/'+id+'.webp'),face=id=>G(()=>urlFor(heroArt[id].idle.front),art(id));
- const role=id=>G(()=>window.__STORYWORLD_HEROES_R108__.roles[id],'')||'';
- let sel=G(()=>window.__STORYWORLD_POLISH_R101__?.pickedHero?.(),null);if(!H[sel])sel=H.hwando?'hwando':ids[0];
- const detail=id=>{const h=H[id]||{},ranged=!h.melee&&Number(h.range)>4;return '<div class="pt"><img alt="'+esc(h.name||id)+'" src="'+esc(art(id))+'" onerror="this.onerror=null;this.src=\''+esc(face(id))+'\'"></div><div class="info"><div class="role">'+esc(role(id))+'</div><div class="nm">'+esc(h.name||id)+'</div><div class="tags"><span>'+(ranged?'원거리':'근거리')+'</span>'+(h.resource?'<span>'+esc(h.resource)+'</span>':'')+'</div><p><b>패시브</b> '+esc(h.passive||'')+'</p><p><b>Q</b> '+esc(h.special||'')+'</p></div>';};
+function heroPicker(keep){ensureCss();const H=G(()=>HEROES,{}),ids=pickIds(H,formUnlockedR1171);pickerSecret={key:{n:0,at:NaN},tap:{n:0,at:NaN}};const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+ const prof=id=>isFormR1171(id)?G(()=>formApiR1171(id).profile||formApiR1171(id).data.profile,null)||{}:null;const art=id=>(isFormR1171(id)?G(()=>urlFor(prof(id).portrait),''):'')||G(()=>urlFor(window.__STORYWORLD_HEROES_R108__.portraitPath(baseHero(id))),'assets/r108/heroes/'+baseHero(id)+'.webp'),face=id=>G(()=>urlFor(heroArt[baseHero(id)].idle.front),art(id));const nameOf=id=>(isFormR1171(id)&&prof(id).name)||H[baseHero(id)]?.name||id;
+ const role=id=>isFormR1171(id)?('HIDDEN · '+(prof(id).title||prof(id).role||nameOf(id))):(G(()=>window.__STORYWORLD_HEROES_R108__.roles[id],'')||'');
+ let sel=keep&&ids.includes(keep)?keep:G(()=>window.__STORYWORLD_POLISH_R101__?.pickedHero?.(),null);if(!ids.includes(sel))sel=H.hwando?'hwando':ids[0];
+ const detail=id=>{const h=H[baseHero(id)]||{},ranged=!h.melee&&Number(h.range)>4;return '<div class="pt"><img alt="'+esc(nameOf(id))+'" src="'+esc(art(id))+'" onerror="this.onerror=null;this.src=\''+esc(face(id))+'\'"></div><div class="info"><div class="role">'+esc(role(id))+'</div><div class="nm">'+esc(nameOf(id))+'</div><div class="tags"><span>'+(ranged?'원거리':'근거리')+'</span>'+(h.resource?'<span>'+esc(h.resource)+'</span>':'')+'</div><p><b>패시브</b> '+esc(h.passive||'')+'</p><p><b>Q</b> '+esc(h.special||'')+'</p></div>';};
  openPanel('<div class="eyebrow">무한 생존 · 영웅 고르기 · 난이도 '+esc(diffOf(pickedDiff).name)+'</div><h2>누구의 기억으로 버틸까요</h2><p class="small">정화 코어를 지키며 몰려오는 적을 버팁니다. 이 모드는 저장하지 않습니다.</p>'+
-  '<div class="r600Heroes">'+ids.map(id=>'<button type="button" data-r600hero="'+esc(id)+'" class="'+(id===sel?'sel':'')+'"><img alt="" src="'+esc(face(id))+'"><span>'+esc(H[id]?.name||id)+'</span></button>').join('')+'</div><div class="r600Stage" id="r600Stage">'+detail(sel)+'</div><div class="actions"><button id="r600Go">이 영웅으로 시작</button><button id="r600Back">난이도로</button></div>');
+  '<div class="r600Heroes">'+ids.map(id=>'<button type="button" data-r600hero="'+esc(id)+'" class="'+(id===sel?'sel':'')+'"><img alt="" src="'+esc(face(id))+'"><span>'+esc(nameOf(id))+'</span></button>').join('')+'</div><div class="r600Stage" id="r600Stage">'+detail(sel)+'</div><div class="actions"><button id="r600Go">이 영웅으로 시작</button><button id="r600Back">난이도로</button></div>');
  for(const b of document.querySelectorAll('[data-r600hero]'))b.onclick=()=>{sel=b.getAttribute('data-r600hero');for(const x of document.querySelectorAll('[data-r600hero]'))x.classList.toggle('sel',x===b);const st=document.getElementById('r600Stage');if(st)st.innerHTML=detail(sel);};
- const go=document.getElementById('r600Go');if(go)go.onclick=()=>start(sel,pickedDiff);
- const back=document.getElementById('r600Back');if(back)back.onclick=()=>{difficultyPicker();};}
+ pickerOpen=()=>heroPicker(sel);const go=document.getElementById('r600Go');if(go)go.onclick=()=>{pickerOpen=null;start(sel,pickedDiff);};
+ const back=document.getElementById('r600Back');if(back)back.onclick=()=>{pickerOpen=null;difficultyPicker();};}
 async function start(hero,diff){try{pending=false;stats.starts++;deactivate();if(diff)pickedDiff=diff;S=fresh(hero||'hwando',pickedDiff);choiceQ=0;spawnAt0=0;tainted=true;
  /* 스토리 세이브가 있으면 엔진 newGame 이 '새 여정 확인'을 요구하며 막는다(덮어쓰기 보호). 생존은 저장을 아예 쓰지 않으므로 이 한 번만
     'R73 새 여정 확인됨'으로 답해 통과시킨다 — 덮어쓰기 대기(pendingOverwrite5)는 켜지 않으므로 기존 세이브를 지우는 길도 타지 않는다. */
  const SL=window.__STORYWORLD_SAVE_SLOTS_R73__,liftSlots=!!SL;if(liftSlots){try{window.__STORYWORLD_SAVE_SLOTS_R73__=Object.freeze({...SL,confirmedNew:()=>true});}catch(e){fail(e);}}
- alignR101Hero(S.hero);entering++;let ok;try{ok=await newGame(S.hero);}finally{entering--;if(liftSlots)try{window.__STORYWORLD_SAVE_SLOTS_R73__=SL;}catch(e){fail(e);}}try{window.__STORYWORLD_INTRO_VIDEO_R309__?.skip?.();}catch(_){}/* 생존은 스토리 오프닝 영상 없이 바로 */if(ok===false||!S?.active){deactivate();return false;}
+ alignR101Hero(baseHero(S.hero));entering++;let ok;try{ok=await newGame(baseHero(S.hero));}finally{entering--;if(liftSlots)try{window.__STORYWORLD_SAVE_SLOTS_R73__=SL;}catch(e){fail(e);}}try{window.__STORYWORLD_INTRO_VIDEO_R309__?.skip?.();}catch(_){}/* 생존은 스토리 오프닝 영상 없이 바로 */if(ok===false||!S?.active){deactivate();return false;}
  for(let i=0;i<100&&G(()=>loading,false);i++)await new Promise(r=>setTimeout(r,100));
+ applyFormR1171(S.hero);/* R1171: EGO·페르소나 = 원래 영웅 + 형상 표식(고른 게 보통 영웅이면 남은 표식을 끈다) */
  try{storyQueue=[];storyScene=null;storyDone=null;if(G(()=>modal,false))closePanel(true);}catch(_){}
  if(!S.ids.length){deactivate();return false;}return await go(0);}catch(e){fail(e);deactivate();return false;}}
 function titleButton(){const panel=document.getElementById('panel'),normal=document.getElementById('campaignNew54')||document.getElementById('newBtn');if(!panel||!normal||document.getElementById('survivalStartR600'))return;
@@ -558,6 +580,6 @@ window.__STORYWORLD_SURVIVAL_R600__=Object.freeze({revision:REV,start,qaCredit:v
  state:()=>S?{tainted,diff:S.diff,playT:S.playT,choiceIdx:S.choiceIdx,pickRem,narrMinEnd:S.narrMinEnd||0,ready:!!S.ready,startPos:S.startPos||null,i:S.i,loop:S.loop,id:S.ids[S.i],phase:S.phase,narrating:S.narrating,narrEndAt:S.narrEndAt,bossUp:S.bossUp,kills:S.kills,core:{...S.core,stats:CS()},choiceQ,gems:gems.length,over:S.over,ids:S.ids.length,lv:S.lv,hero:S.hero,secs:Math.round(((S.over&&S.overSecs)||(Date.now()-S.startWall)/1000))}:null,
   finaleWave:()=>{try{if(!here()||!S||S.over||!S.ready)return 0;return tickSpawn(true)||0;}catch(e){fail(e);return 0;}},/* R1010 결전 물결 */
  track:()=>prefs.track,setTrack,narr:()=>({playing:narrPlaying(),queued:N.q.length,cur:N.cur?.text||null,list:[N.cur?.text,...N.q.map(x=>x.text)].filter(Boolean)}),narrate:(scenes,opt)=>{try{return here()?narrPlay(scenes,opt):0;}catch(e){fail(e);return 0;}},/* R1010: 결전 대면 서사를 생존 자막으로 */skipNarration:()=>{N.q.length=0;if(S){S.narrMinEnd=0;/* 서사가 벽시계로 이미 끝났어도 남은 최소 웨이브 길이를 지금으로 당긴다 */if(!S.narrating&&S.narrEndAt>G(()=>time,0))S.narrEndAt=G(()=>time,0);}/* 일부러 건너뛰면 최소 웨이브 길이도 함께 끝낸다 */if(N.cur){N.gen++;N.cur=null;narrNext();}},
- pure:Object.freeze({BOSS_PLAN,bossPlan,bossShare,bossSpots,BOSS_GAP,DIFFS,diffOf,CHOICE_EVERY,WINDOW_MAX,choiceDue,windowPicks,xpNeed,levelUps,stageIds,arena,spawning,nextPhase,advance,cap,hpMul,mobHp,BOSS_MIN_MULT,BOSS_DPS_CAP,guardBossHp,trackOf,TRACKS,healCue,SFX,bossStats,mobDamage,smoothAtk,BOSS_HP,coreStats,pickThree,sentences,TAIL,CORE0,CORE_UPS}),
+ pure:Object.freeze({FORMS_R1171,pickIds,baseHero,secretStep,BOSS_PLAN,bossPlan,bossShare,bossSpots,BOSS_GAP,DIFFS,diffOf,CHOICE_EVERY,WINDOW_MAX,choiceDue,windowPicks,xpNeed,levelUps,stageIds,arena,spawning,nextPhase,advance,cap,hpMul,mobHp,BOSS_MIN_MULT,BOSS_DPS_CAP,guardBossHp,trackOf,TRACKS,healCue,SFX,bossStats,mobDamage,smoothAtk,BOSS_HP,coreStats,pickThree,sentences,TAIL,CORE0,CORE_UPS}),
  inspect:()=>({revision:REV,stats:{...stats},lastError,coreLabelText,active:!!S?.active,here:here(),pending})});
 })();

@@ -529,6 +529,8 @@ jobs:
         run: node r96/qa/r720/r720-cpu-check.cjs
       - name: R1148 survival placement 777 unlocks hidden EGO and Persona (form heroes, same-body rule, swap) CPU check
         run: node r96/qa/r1148/r1148-cpu-check.cjs
+      - name: R1171 survival hero picker offers hidden EGO and Persona (777 key or title 7 taps on mobile, starts as base hero plus form) CPU check
+        run: node r96/qa/r1171/r1171-cpu-check.cjs
       - name: R1050 survival placed heroes plant during attack and skill so the attack motion plays (no chase drift, start frame step undone) CPU check
         run: node r96/qa/r1050/r1050-cpu-check.cjs
       - name: R1050b heroes use attack art for attacks and skills (EGO buff swaps, hwando not walk when pushed, neon and lauren diagonals use side sheets, hit does not cover a skill) CPU check
@@ -932,6 +934,8 @@ jobs:
         run: node r96/qa/r281/r281-cpu-check.cjs
       - name: R259 hit effects at enemy art centre CPU check
         run: node r96/qa/r259/r259-cpu-check.cjs
+      - name: R1172 shared enemy alpha box (tint copies pooled, no canvas read-back) CPU check
+        run: node r96/qa/r1172/r1172-cpu-check.cjs
       - name: R260 mob art preload and cave line flicker CPU check
         run: node r96/qa/r260/r260-cpu-check.cjs
       - name: R275 mob/boss audit — off-screen mobs skipped outermost, fixed R208/R223 mob strips CPU check

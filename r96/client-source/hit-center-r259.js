@@ -6,6 +6,7 @@
 //    R115 centreOf 를 이 값으로 먼저 답하게 바꿔 끼운다 → 이미 centreOf 를 쓰는 polish-r101 적중·vfx-r98 불꽃·visual-r119 도 R248 몹에서 맞는다.
 //  · 엔진 fx() 로 적 발밑에 생긴 적중 그림(burst·slash)은 그 적 그림 가운데로, 숫자(text)는 머리 위로 옮겨 그린다.
 //  · hero-fx-r102 기술의 끝점은 aim() 으로 그 적 그림 가운데를 겨눈다.
+//  R1172: 판독은 R115 와 같이 쓰는 한 캐시(아래 R1172 블록)로 — 색 사본은 경로로 묶고 원본 그림을 읽는다.
 //  끄기: localStorage['storyworld.r259.hitCenter']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_HIT_CENTER_R259__)return;
@@ -15,14 +16,28 @@ let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on
 const stats={measured:0,scans:0,moved:0,aimed:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const now=()=>typeof performance!=='undefined'?performance.now()/1000:0;
 const SKIP=/shadow|ring|glow|hp|bar|effects\/|vfx|fx|halo|aura|mark/i;// 몸이 아닌 그림
-const VC=new WeakMap(),BOX=new WeakMap();let budget=6,scanCanvas=null,frameT=-1;
+const VC=new WeakMap();let budget=6,frameT=-1;
 const srcOf=im=>{try{return String(im?.__path||im?.src||'');}catch(_){return '';}};
-function opaqueBox(img,sx,sy,sw,sh){let m=BOX.get(img);if(!m){m=new Map();BOX.set(img,m);}const k=Math.round(sx)+','+Math.round(sy)+','+Math.round(sw)+','+Math.round(sh);if(m.has(k))return m.get(k);
- if(budget<=0||typeof document==='undefined')return null;budget--;let b={x0:0,y0:0,x1:1,y1:1};
- try{const N=40;scanCanvas??=document.createElement('canvas');scanCanvas.width=N;scanCanvas.height=N;const g=scanCanvas.getContext('2d',{willReadFrequently:true});g.clearRect(0,0,N,N);g.drawImage(img,sx,sy,sw,sh,0,0,N,N);
-  const d=g.getImageData(0,0,N,N).data;let x0=N,y0=N,x1=-1,y1=-1;for(let y=0;y<N;y++)for(let x=0;x<N;x++)if(d[(y*N+x)*4+3]>40){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y;}
-  if(x1>=0)b={x0:x0/N,y0:y0/N,x1:(x1+1)/N,y1:(y1+1)/N};stats.scans++;}catch(_){}
- if(m.size>2000)m.clear();m.set(k,b);return b;}
+/*R1172{*/const AB=window.__STORYWORLD_ALPHA_BOX_R1172__||(window.__STORYWORLD_ALPHA_BOX_R1172__=(()=>{
+ // R1172(사용자 2026-11-18 "사몽 적의 피격 위치를 찾을 때 발생하는 픽셀 판독 지연"): 적 그림 불투명 사각형을 R115·R259 가 한 캐시로 같이 쓴다.
+ //  알파를 안 바꾸는 필터의 색 사본(spriteTintCache3 등, 32칸이라 밀려나면 새 캔버스)은 경로·크기로 묶고, 잴 때는 사본 대신 원본 그림을 읽어 캔버스 되읽기를 피한다.
+ const SAFE=/^\s*(?:none|(?:(?:brightness|contrast|saturate|grayscale|hue-rotate|sepia|invert)\([^()]*\)\s*)+)?\s*$/i,N=40;
+ const OBJ=new WeakMap(),PATH=new Map(),st={hits:0,scans:0,fromBase:0};let cv=null;
+ const isCanvas=im=>typeof im?.getContext==='function';
+ const baseOf=p=>{try{const b=typeof readyImage==='function'?readyImage(p)?.image:null;return b&&!isCanvas(b)&&b.complete!==false&&(b.naturalWidth||b.width)?b:null;}catch(_){return null;}};
+ function slot(im){let p='',base=null;try{const t=im?.__storyworldStaticTint;
+   if(t&&t.path&&SAFE.test(String(t.filter??'none'))){base=baseOf(String(t.path));if(base&&(base.naturalWidth||base.width)===im.width&&(base.naturalHeight||base.height)===im.height)p=String(t.path)+'|'+im.width+'x'+im.height;else base=null;}
+   else if(im&&!isCanvas(im)){const s=String(im.__path||im.src||'');if(s)p=s+'|'+(im.naturalWidth||im.width)+'x'+(im.naturalHeight||im.height);}}catch(_){}
+  if(p){let m=PATH.get(p);if(!m){if(PATH.size>600)PATH.clear();m=new Map();PATH.set(p,m);}return{m,src:base||im};}
+  let m=OBJ.get(im);if(!m){m=new Map();OBJ.set(im,m);}return{m,src:im};}
+ function box(im,sx,sy,sw,sh,take){const{m,src}=slot(im),k=Math.round(sx)+','+Math.round(sy)+','+Math.round(sw)+','+Math.round(sh);if(m.has(k)){st.hits++;return m.get(k);}
+  if(typeof document==='undefined'||!take())return null;let b={x0:0,y0:0,x1:1,y1:1};
+  try{cv??=document.createElement('canvas');cv.width=N;cv.height=N;const g=cv.getContext('2d',{willReadFrequently:true});g.clearRect(0,0,N,N);g.drawImage(src,sx,sy,sw,sh,0,0,N,N);
+   const d=g.getImageData(0,0,N,N).data;let x0=N,y0=N,x1=-1,y1=-1;for(let y=0;y<N;y++)for(let x=0;x<N;x++)if(d[(y*N+x)*4+3]>40){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y;}
+   if(x1>=0)b={x0:x0/N,y0:y0/N,x1:(x1+1)/N,y1:(y1+1)/N};st.scans++;if(src!==im)st.fromBase++;}catch(_){}
+  if(m.size>2000)m.clear();m.set(k,b);return b;}
+ return Object.freeze({box,inspect:()=>({...st,paths:PATH.size})});})());/*}R1172*/
+function opaqueBox(img,sx,sy,sw,sh){return AB.box(img,sx,sy,sw,sh,()=>{if(budget<=0)return false;budget--;stats.scans++;return true;});}
 function record(e,best){const{img,sx,sy,sw,sh,dx,dy,dw,dh,T}=best;const b=opaqueBox(img,sx,sy,sw,sh);if(!b)return;
  const tp=(u,v)=>{const x=dx+dw*u,y=dy+dh*v;return{x:T.a*x+T.c*y+T.e,y:T.b*x+T.d*y+T.f};};
  let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;for(const [u,v] of [[b.x0,b.y0],[b.x1,b.y0],[b.x0,b.y1],[b.x1,b.y1]]){const p=tp(u,v);x0=Math.min(x0,p.x);x1=Math.max(x1,p.x);y0=Math.min(y0,p.y);y1=Math.max(y1,p.y);}
