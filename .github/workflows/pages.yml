@@ -669,6 +669,8 @@ jobs:
         run: node r96/qa/r1144/persona-wer-cpu-check.cjs
       - name: R1145 persona hero basic attack without Lauren traces (R411 hit-teleport and R302 Lauren-violet bolt/impact copies baked to eonju in persona form only) CPU check
         run: node r96/qa/r1145/persona-basic-cpu-check.cjs
+      - name: R1153 Dots status effects 9 kinds (per-actor icons + body overlays in every mode), samong sigils for Lauren/Hunter/Slayer/Gunner, Seoha clockwork, Slayer brand 1-5, Gunner R reticle + chain beam, deploy ring tinted by hero colour CPU check
+        run: node r96/qa/r1153/dots-status-cpu-check.cjs
       - name: R1152 persona W/E/R and (jin) laser use the Dots sheets (CX-0143PL/0144PW/0145PR; HOLD seams feathered, opaque background keyed out; colours kept, hit logic unchanged) CPU check
         run: node r96/qa/r1152/persona-dots-cpu-check.cjs
       - name: R1156 persona boss base rear hit = Dots CX-0136 A5 r2 (support foot aligned, 4 of 6 frames, R1119 sheet as load fallback) CPU check
@@ -1000,6 +1002,8 @@ jobs:
         run: node r96/qa/r615/student-cpu-check.cjs
       - name: R620 boss motion CPU check
         run: node r96/qa/r620/r620-cpu-check.cjs
+      - name: R1147 Dots boss idle sheets CPU check
+        run: node r96/qa/r1147/r1147-cpu-check.cjs
       - name: R700 seven-sins boss art audit (size-lock heights match real art, no light matte fringe on drawn art, clean copies keep the body, originals kept) check
         run: python r96/qa/r700/boss-art-check.py
       - name: R710 hero south idle 6 / hit 4 sheets (feet on the 226 line, stand height ±3%, no alpha residue, flicker ≤2× current, holds not applied) check

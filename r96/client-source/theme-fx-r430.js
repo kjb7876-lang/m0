@@ -209,6 +209,7 @@ function set(o){if(o&&typeof o.on==='boolean')on=o.on;if(o&&typeof o.skill==='bo
 // QA: 가끔 터지는 자리를 지금 바로 시작(헤드리스 화면 확인용)
 function preview(){const t=T();for(const s of spots)if(s.start>=0){s.start=t;s.live=false;}return spots.length;}
 window.__STORYWORLD_THEME_FX_R430__=Object.freeze({revision:REV,ZONES,KIND,SHEET,candidates,plan,topQuality,set,preview,ST,STATUS_OF,SKILL_KIND,afflict,clearStatus,slowMul,statusRows,skillKind,
+ /* R1153: 영웅(협동 동료 포함)마다 지금 상태 — Dots 상태이상 표시(dots-status-r1153)가 읽음 */statusFor:a=>{const m=a&&statusOf.get(a);if(!m)return[];const t=T();return Object.keys(m).filter(k=>m[k].until>t).map(k=>({key:k,until:m[k].until}));},
  cast:(e,tg)=>{const k=skillKind(room?.id);if(!k||!e)return 0;castSkill(e,k,tg||player);return casts.length;},casts:()=>casts.map(c=>({kind:c.kind||'sigil',x:c.x,y:c.y,start:c.start,end:c.end})),
  status:()=>{const m=typeof player==='object'&&player?statusOf.get(player):null,t=T();return m?Object.fromEntries(Object.keys(m).map(k=>[k,{name:ST[k].name,left:+Math.max(0,m[k].until-t).toFixed(2)}])):{};},
  inspect:()=>({revision:REV,on,top:topQuality(),stats:{...stats},spots:spots.map(s=>({kind:s.kind,x:s.x,y:s.y,size:s.size})),last,lastError,browserVerified:false,GPUVerified:false})});

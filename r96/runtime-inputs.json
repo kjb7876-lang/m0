@@ -10363,6 +10363,19 @@
     "assets/r1139/ego/trail-horizontal.webp",
     "ego-celestial-r1145.js",
     "persona-wer-r1144.js",
+    "dots-status-r1153.js",
+    "assets/r1153/index.json",
+    "assets/r1153/deploy-ring.webp",
+    "assets/r1153/gunner-chain.webp",
+    "assets/r1153/gunner-reticle.webp",
+    "assets/r1153/seoha-clockwork.webp",
+    "assets/r1153/sigil-gunner.webp",
+    "assets/r1153/sigil-hunter.webp",
+    "assets/r1153/sigil-lauren.webp",
+    "assets/r1153/sigil-slayer.webp",
+    "assets/r1153/slayer-brand.webp",
+    "assets/r1153/status-icons.webp",
+    "assets/r1153/status-overlay.webp",
     "assets/r1152/e-ember.webp",
     "assets/r1152/index.json",
     "assets/r1152/laser-body.webp",
@@ -10382,6 +10395,14 @@
     "assets/r1156/mob-hit/swamp-root-hit4.webp",
     "assets/r1156/mob-hit/u203-e2-hit4.webp",
     "assets/r1156/mob-hit/u203-e3-hit4.webp",
+    "assets/r1147/bosses/b07-idle6.webp",
+    "assets/r1147/bosses/a11-idle6.webp",
+    "assets/r1147/bosses/dist06-idle6.webp",
+    "assets/r1147/bosses/u202-idle6.webp",
+    "assets/r1147/bosses/b07-hit4.webp",
+    "assets/r1147/bosses/a11-hit4.webp",
+    "assets/r1147/bosses/dist00-idle6.webp",
+    "assets/r1147/bosses/dist00-hit4.webp",
     "survival-coop-r1149.js"
   ],
   "mediaPaths": [
@@ -11457,5 +11478,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "809210e10f7dde61786a30347a87e413e16b20a9eb13cda5315c7961dfcbed8e"
+  "runtimeManifestSHA256": "0ccb639330516bf9a85d16fb3de3afe1eddb3720c18c57ca2deb0b8618ecafce"
 }
