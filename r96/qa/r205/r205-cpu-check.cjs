@@ -37,9 +37,9 @@ ok('boss: echo step skipped during the 26 s gap, field step kept',skipped&&st.st
 const st2=states.get(boss);st2.step=1;vm.runInContext('time=40;tick(1/60)',sb);ok('after the gap the echo step is allowed again',st2.step===1);
 // ④ 광폭화
 boss.hp=290;vm.runInContext('tick(1/60)',sb);
-ok('enrage at ≤30% HP once: damage ×1.06, attack shape ranges ×2, notice shown',boss.r205Enraged&&Math.abs(boss.damage-53)<1e-9&&boss.combatProfile.attackShape.range===6&&boss.combatProfile.attackShape.radius===3&&sb.toasts.length===1);
-vm.runInContext('tick(1/60)',sb);ok('enrage does not stack',Math.abs(boss.damage-53)<1e-9&&sb.toasts.length===1);
-drawn.length=0;vm.runInContext('drawEnemy(room.enemies[1])',sb);ok('enraged boss drawn at 2× size, restored after',drawn[0][1]===4&&boss.defScale===2);
+/* R1150 사용자 지시(2026-11-18 07:37Z)로 광폭화 공격력 ×1.06 → ×1.66, 크기 2배 → 1.06배 */ok('enrage at ≤30% HP once: damage ×1.66, attack shape ranges ×2, notice shown',boss.r205Enraged&&Math.abs(boss.damage-83)<1e-9&&boss.combatProfile.attackShape.range===6&&boss.combatProfile.attackShape.radius===3&&sb.toasts.length===1);
+vm.runInContext('tick(1/60)',sb);ok('enrage does not stack',Math.abs(boss.damage-83)<1e-9&&sb.toasts.length===1);
+drawn.length=0;vm.runInContext('drawEnemy(room.enemies[1])',sb);ok('enraged boss drawn at 1.06× size, restored after',Math.abs(drawn[0][1]-2.12)<1e-9&&boss.defScale===2);
 const h={owner:'boss',radius:2,width:1,age:0};sb.hazards.push(h);vm.runInContext('hazards.push(__h);tick(1/60)',Object.assign(sb,{__h:h}));
 ok('new hazards of the enraged boss get 2× range',h.radius===4&&h.width===2);
 const h2={owner:'mob',radius:2,age:0};vm.runInContext('hazards.push(__h2);tick(1/60)',Object.assign(sb,{__h2:h2}));ok('other owners untouched',h2.radius===2);
