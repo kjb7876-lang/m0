@@ -11148,6 +11148,51 @@
       "sha256": "9e77abcb2e57ef95bc269e8924c450bfcdcdf3fc2f7099536545bf7047379c42"
     },
     {
+      "path": "assets/r1152/e-ember.webp",
+      "bytes": 20024,
+      "sha256": "c012a717bbd51657f03b6b37f2805d63e6f3c48fa3912254927f593f7a107798"
+    },
+    {
+      "path": "assets/r1152/laser-body.webp",
+      "bytes": 45142,
+      "sha256": "d36719a49af607f90aa620cce4f7d6267e316be20c086a5f1e8c1f4fb8ce0ce5"
+    },
+    {
+      "path": "assets/r1152/laser-end.webp",
+      "bytes": 88312,
+      "sha256": "570951301a478414e953809e0d9bc23829ef6e1a2002de0ebc0bf019fda75395"
+    },
+    {
+      "path": "assets/r1152/laser-start.webp",
+      "bytes": 80408,
+      "sha256": "0686f566a9c9f42faa0707f980e9194243e8a24a45dd3d6e5a2500a75ac14ba4"
+    },
+    {
+      "path": "assets/r1152/r-orb.webp",
+      "bytes": 132766,
+      "sha256": "65cb3e9eb19a1869b95ae2e253d88fb8e73f452d15238832854f71eb20509f8d"
+    },
+    {
+      "path": "assets/r1152/r-tail.webp",
+      "bytes": 33510,
+      "sha256": "ad3c15858125300d930734bb16bc482f342655e044ce3a6d05cd4d329fd92263"
+    },
+    {
+      "path": "assets/r1152/w-chain.webp",
+      "bytes": 51722,
+      "sha256": "f0cca1cb39ecd296dd9e4d85ac21ae0f02f05b3f1244817a44cb42338088bcab"
+    },
+    {
+      "path": "assets/r1152/w-hit.webp",
+      "bytes": 26686,
+      "sha256": "c193aba243c1689ecfad0cae07ef77093a438ece08a73c9ecc2043f1c0b2bea9"
+    },
+    {
+      "path": "assets/r1152/w-mark.webp",
+      "bytes": 44992,
+      "sha256": "4052e2e81bf9741c0ab032f478286af80263668f1701ba05405422221f79da50"
+    },
+    {
       "path": "assets/r116/mobs/M001-hit.png",
       "bytes": 141513,
       "sha256": "35cffa3fe6d6c22cdb75e06e1cca55a673f06c10afa28087d749082c40c77b71"
@@ -54929,8 +54974,8 @@
     },
     {
       "path": "persona-hero-r1113.js",
-      "bytes": 48955,
-      "sha256": "fdcd9c8ceada49946517b5e6c64373ba4e97ebecef4fcb8b27fa760c4752b83a"
+      "bytes": 49186,
+      "sha256": "b416d9af879a761ebc5f622e0e2f0d87b82d99cec2e1ffe1539deef8eae57def"
     },
     {
       "path": "persona-ink-r1097.js",
@@ -54949,8 +54994,8 @@
     },
     {
       "path": "persona-wer-r1144.js",
-      "bytes": 23078,
-      "sha256": "e5755c6689a645ede9811e02762571a6e502e79a7d6191abb8d2d3e4ceaa48a8"
+      "bytes": 31477,
+      "sha256": "098233757cc6444d4ab628f21d53461213b519f7eac56252066ee4e34471f4df"
     },
     {
       "path": "pixel-readable-r325.js",
@@ -55763,8 +55808,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11152,
-  "totalBytes": 1345955982,
+  "fileCount": 11161,
+  "totalBytes": 1346488174,
   "webHTMLSha256": "51cefc6de1046aa2b5f0e6c8c8c6ad74e0a227c26b5c8c5be757432a838108f4",
   "largest": [
     {
