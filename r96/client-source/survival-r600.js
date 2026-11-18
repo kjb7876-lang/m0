@@ -103,12 +103,12 @@ function guardBossHp(e,nowFn){let v=+e.hp;const cap=BOSS_DPS_CAP*(e.maxHp>0?e.ma
 function bossStats(idx,loop,diff,atk,major,dmg,mobAtk){const a=Math.max(8,+atk||0),base=Math.round(a*(major?BOSS_HP.boss:BOSS_HP.mid)*hpMul(idx,loop,diff)),floor=BOSS_MIN_MULT*mobHp(idx,loop,diff,Math.max(a,+mobAtk||0),false);return {hp:Math.max(1,base,floor),floor,dmg:(+dmg>0?+dmg:8)*stageDmg(idx,loop,diff)};}
 // R1135 동시 보스 수(사용자 2026-11-18 01:24Z "생존모드 이지 노멀 하드 헬 고르는거 보스들 1,2,3,6마리 나오게 해줘" + "그에 맞게 밸런스도 조절해주고").
 //  보스·중간보스가 나오는 때·종류는 그대로, 같은 보스를 난이도별 마릿수만큼 한꺼번에 낸다(쉬움1·보통2·어려움3·악몽6).
-//  한 마리 체력(hp)·피해(dmg) 배율을 낮춰 합계가 마릿수만큼 뛰지 않게 한다. 다만 R960 '보스 체력 ≥ 그 지역 일반몹 66배' 하한은 한 마리마다 지킨다.
+//  한 마리 체력(hp)·피해(dmg) 배율을 낮춰 합계가 마릿수만큼 뛰지 않게 한다(체력 합계 = 1마리의 1·1.7·2.1·3배). 여러 마리일 때 R960 '일반몹 66배' 하한은 적용하지 않는다(사용자 11-18 02:12Z 허락). 1마리 값은 bossStats 그대로(하한 포함).
 //  보스 처치 코어 회복(1마리 15배)은 마릿수로 나눠 합계를 유지한다. 쉬움(1마리)은 예전 값 그대로.
 const BOSS_PLAN=Object.freeze({easy:Object.freeze({n:1,hp:1,dmg:1}),normal:Object.freeze({n:2,hp:.85,dmg:.8}),hard:Object.freeze({n:3,hp:.7,dmg:.68}),nightmare:Object.freeze({n:6,hp:.5,dmg:.5})});
 function bossPlan(d){const p=Object.prototype.hasOwnProperty.call(BOSS_PLAN,d)?BOSS_PLAN[d]:BOSS_PLAN.normal;return {n:p.n,hp:p.hp,dmg:p.dmg,heal:15/p.n};}
-function bossShare(B,d,floor){const p=bossPlan(d);if(p.n<=1)return {hp:B.hp,dmg:B.dmg};const fl=Math.ceil(Math.max(0,+floor||0));
- return {hp:Math.max(1,Math.min(B.hp,Math.max(Math.round(B.hp*p.hp),fl))),dmg:B.dmg*p.dmg};}
+function bossShare(B,d,floor){const p=bossPlan(d);if(p.n<=1)return {hp:B.hp,dmg:B.dmg};/* floor 는 받기만 하고 쓰지 않는다(사용자 11-18 02:12Z '일반몹의 66배 이상 이거 깨도 됨') */
+ return {hp:Math.max(1,Math.round(B.hp*p.hp)),dmg:B.dmg*p.dmg};}
 // 보스 자리: 영웅 둘레 고리(min~max)에 마릿수만큼 고르게 나눠, 서로 2.5칸 이상 떨어지게(화면 겹침 방지). ok(q) 가 거르는 칸(막힘·영웅 바로 옆)은 피하고,
 //  끝내 못 찾으면 경기장 격자에서 가까운 빈 곳 → 그래도 없으면 막힘을 무시하고 떨어진 곳.
 const BOSS_GAP=2.5;
