@@ -1,0 +1,32 @@
+# 고치기 전(main 4086e9a) 헤드리스 실측: 페르소나 형상에서 실제 기본공격 → R946 3단 발동 시 R1033 이 라우렌 컷인(silver·abyss·lauren 초상)을 띄움
+ "cut": {
+  "revision": "R1033-passive-cutin-3",
+  "on": true,
+  "shown": 2,
+  "skipped": {
+   "off": 0,
+   "hero": 0,
+   "tier": 4,
+   "body": 0,
+   "scene": 0,
+   "gap": 0,
+   "dom": 0
+  },
+  "errors": 0,
+  "lastError": null,
+  "warmed": 4,
+  "lastAt": 269.02019999999993,
+  "gap": 8,
+  "last": {
+   "hero": "lauren",
+   "kind": "meteor",
+   "cast": [
+    "deco:silver",
+    "main",
+    "deco:abyss"
+   ]
+  },
+  "visible": false,
+  "hero": "lauren"
+ },
+ "unlock": {

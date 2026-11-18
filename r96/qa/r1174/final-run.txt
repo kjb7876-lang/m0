@@ -1,0 +1,46 @@
+PASS persona-cutin-r1174.js 있음
+PASS 공개 객체 __STORYWORLD_PERSONA_CUTIN_R1174__
+PASS ① violet: 페르소나 전용 컷인 뜸(#r1174Cutin on, data-kind=violet)
+PASS ① violet: 라우렌 컷인(#r1033Cutin)은 안 뜸
+PASS ① violet: 주인공 그림 = 페르소나(rc133/Dots CX-0153PC), 라우렌 그림·시트 0
+PASS ① violet: 이름 줄 '(진) 쌍성 소멸'
+PASS ① violet: R1033 기록 last.hero=persona
+PASS ① violet: 1.3초 안에 내려감
+PASS ① meteor: 페르소나 전용 컷인 뜸(#r1174Cutin on, data-kind=meteor)
+PASS ① meteor: 라우렌 컷인(#r1033Cutin)은 안 뜸
+PASS ① meteor: 주인공 그림 = 페르소나(rc133/Dots CX-0153PC), 라우렌 그림·시트 0
+PASS ① meteor: 이름 줄 '(진) 유성 궤도'
+PASS ① meteor: R1033 기록 last.hero=persona
+PASS ① meteor: 1.3초 안에 내려감
+PASS ② 1·2단(항성 반발·은빛 거성·심연 왜성)은 컷인 없음
+PASS ② 배치 몸(R720)은 안 띄움
+PASS ② 컷인 끔(R1033 설정)을 따름
+PASS ② 대화창 중엔 안 띄움
+PASS ② 빈도 = R1033 한 시계(스토리 8초): 3초 뒤 거름, 8초 넘으면 다시
+PASS ② 무한생존 20초 한 번
+PASS ③ 라우렌 본인: 원래 R1033 컷인(라우렌 초상) 그대로, 페르소나 컷인 없음
+PASS ③ 형상 표식이 남아도 다른 영웅이면 그 영웅 컷인
+PASS ④ [normal] 왼쪽 위 각성 그림 = 페르소나
+PASS ④ [normal] 이름 줄 '페르소나 · 11초'
+PASS ④ [normal] 가운데 큰 컷인(sw8) 경로도 페르소나
+PASS ④ [normal] 전용 각성 막(#r1174Awake) on, 언주 고리
+PASS ④ [normal] 끝나면 heroArt.lauren.awakening 되돌림
+PASS ④ [normal] 각성 막 2초 안에 내려감
+PASS ④ [reverse] 왼쪽 위 각성 그림 = 페르소나
+PASS ④ [reverse] 이름 줄 '페르소나 · 11초'
+PASS ④ [reverse] 가운데 큰 컷인(sw8) 경로도 페르소나
+PASS ④ [reverse] 전용 각성 막(#r1174Awake) on, 언주 고리
+PASS ④ [reverse] 끝나면 heroArt.lauren.awakening 되돌림
+PASS ④ [reverse] 각성 막 2초 안에 내려감
+PASS ⑤ 라우렌 본인 사몽: R1033 초상(라우렌) 그대로, 페르소나 막 없음
+PASS ⑥ 문서 없음·모르는 갈래에도 안 멈춤
+PASS ⑥ NaN 시각에도 안 멈춤
+PASS ⑦ 띠·고리 = 언주(#cc3428 계열)·흑·검빨, 보라·은빛 없음
+PASS ⑦ 십자 그림 없음(정십자 규칙 — 이 컷인은 십자를 쓰지 않음)
+PASS ⑧ index.html 태그(R1033·페르소나 영웅 뒤)
+PASS ⑧ runtime-text 사본 = client-source
+PASS ⑧ runtime-text R1033 사본 = client-source
+PASS ⑧ runtime-inputs·manifest
+PASS ⑧ 공개 확인 목록
+PASS ⑧ CI 줄
+{"total":45,"failed":0,"method":"node vm + tiny fake DOM; real game run by r1174-browser.mjs (headless)"}
