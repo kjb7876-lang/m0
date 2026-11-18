@@ -527,6 +527,8 @@ jobs:
         run: node r96/qa/r961/r961-cpu-check.cjs
       - name: R720 survival hero placement (I key, crystals, story-order prices, leash and range upgrades, swap rule) CPU check
         run: node r96/qa/r720/r720-cpu-check.cjs
+      - name: R1148 survival placement 777 unlocks hidden EGO and Persona (form heroes, same-body rule, swap) CPU check
+        run: node r96/qa/r1148/r1148-cpu-check.cjs
       - name: R1050 survival placed heroes plant during attack and skill so the attack motion plays (no chase drift, start frame step undone) CPU check
         run: node r96/qa/r1050/r1050-cpu-check.cjs
       - name: R1050b heroes use attack art for attacks and skills (EGO buff swaps, hwando not walk when pushed, neon and lauren diagonals use side sheets, hit does not cover a skill) CPU check
@@ -727,6 +729,10 @@ jobs:
         run: node r96/qa/r1014/r1014-cpu-check.cjs
       - name: R1135 survival boss count per difficulty (easy 1, normal 2, hard 3, nightmare 6), per-boss balance with the 66x floor, spread spawn spots CPU check
         run: node r96/qa/r1135/r1135-cpu-check.cjs
+      - name: R1149 multiplayer rules (seats, per-player deploy limit, enemy HP by player count in story and survival, auto core level-up, hero-only cards, cinema solo) CPU check
+        run: node r96/qa/r1149/r1149-cpu-check.cjs
+      - name: R1149b multiplayer hero placement (one hero each for 2-4 players, none from 5, per-player wallet, guest command text, leaver cleanup) CPU check
+        run: node r96/qa/r1149/r1149b-deploy-cpu-check.cjs
       - name: R1150 boss enrage (all modes) 1.06x body, all stats +66% (damage, move, attack speed, defense), 0.6% max HP regen per second CPU check
         run: node r96/qa/r1150/r1150-cpu-check.cjs
       - name: R537 spider cave mud-back spider and memory-carrier spider, swamp root stalker renamed CPU check
