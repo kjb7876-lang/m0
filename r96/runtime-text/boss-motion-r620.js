@@ -34,7 +34,9 @@ const SHEETS={'assets/generated-v31224/actors-normalized/1a8ca2c5759b_ep1b03_env
  // R1163 Dots CX-0152 r1(게임이 실제로 그리는 칸 시트 기준): b02 나태(R380)·u204 기억 검열기(R380)·u205 역전 관리자(R374). 칸 시트라 대기 때 엔진이 그리는 칸(cells: 0·1번)일 때만 바꾼다(scripts/r1163-cx0152-boss.py).
  'assets/r380/mobs/sloth-burden-man-v1.webp':{w:256,h:256,cells:[0,1],idle:{path:'assets/r1163/bosses/b02-idle6.webp',n:6,fps:8},hit:{path:'assets/r1163/bosses/b02-hit4.webp',n:4,fps:16}},
  'assets/r380/mobs/u204-mech-04-v1.webp':{w:256,h:256,cells:[0,1],idle:{path:'assets/r1163/bosses/u204-idle6.webp',n:6,fps:8},hit:{path:'assets/r1163/bosses/u204-hit4.webp',n:4,fps:16}},
- 'assets/r374/mobs/u205-mid-new.webp':{w:256,h:320,cells:[0,1],idle:{path:'assets/r1163/bosses/u205-idle6.webp',n:6,fps:8},hit:{path:'assets/r1163/bosses/u205-hit4.webp',n:4,fps:16}}};
+ 'assets/r374/mobs/u205-mid-new.webp':{w:256,h:320,cells:[0,1],idle:{path:'assets/r1163/bosses/u205-idle6.webp',n:6,fps:8},hit:{path:'assets/r1163/bosses/u205-hit4.webp',n:4,fps:16}},
+// R1164 Dots CX-0152-2 r1: b04 탐식 인간 총주방장(현행 phase0 한 장 그림) 대기 6칸·피격 4칸. 다른 폼·공격 그림은 그대로(scripts/r1164-b04-boss.py).
+'assets/generated-v31224/actors-normalized/fbc0132dd447_ep1b04_glutton_head_chef_phase0.webp':{w:672,h:384,idle:{path:'assets/r1164/bosses/b04-idle6.webp',n:6,fps:8},hit:{path:'assets/r1164/bosses/b04-hit4.webp',n:4,fps:16}}};
 const asked=new Set();function sheetImg(p){try{const r=typeof readyImage==='function'?readyImage(p):null;if(r?.image)return r.image;if(!asked.has(p)&&typeof addImage==='function'){asked.add(p);addImage(p,'R620 Dots boss sheet');}}catch(_){}return null;}
 const ST=new WeakMap();
 const stOf=e=>{let s=ST.get(e);if(!s)ST.set(e,s={sx:1,sy:1,sh:0,ox:0,oy:0,at:-1,fx:NaN,fy:NaN,vx:0,move:0,hitAt:-9,hitT:0,prev:null,xAt:-9,lastPath:'',stepPh:Math.random()*6.28,seed:Math.random()*6.28,lastT:-1});return s;};

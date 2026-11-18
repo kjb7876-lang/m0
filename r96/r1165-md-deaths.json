@@ -1,0 +1,45 @@
+{
+ "round": "R1165",
+ "request": "CX-0115MD r1 ROUGH",
+ "files": [
+  {
+   "id": "MD-15",
+   "source": "Dots CX-0115MD_MD-15_death6_r1_ROUGH.png",
+   "sourceSha256": "d80366a8f7f388b6aa86843e5bad8e23b0cb9383342e85bd7c8adc250e922410",
+   "liveArt": "assets/r275/mobs/curtain-mannequin.webp",
+   "path": "assets/r1165/mobs/md-15-curtain-mannequin-death.webp",
+   "bytes": 33614,
+   "sha256": "8147ec5769d94d093a627733d9299f44200b41d126f401bc1299ce4a23c542db",
+   "use": "몹 사망 6칸(R1065 사망 표)",
+   "fix": "알파 16 이하 0",
+   "applied": true,
+   "finalArt": false
+  },
+  {
+   "id": "MD-17",
+   "source": "Dots CX-0115MD_MD-17_death6_r1_ROUGH.png",
+   "sourceSha256": "8fc893580777cdd14152569e5fd9d4622e7db99338843533da2a85f71790cf6c",
+   "liveArt": "assets/r92/mobs/M027-move.png",
+   "path": "assets/r1165/mobs/md-17-red-wing-figure-death.webp",
+   "bytes": 108390,
+   "sha256": "bbc5fdd7ae8873eff6fac83e87c8c27799749359e547c917b22437d79da7a25a",
+   "use": "몹 사망 6칸(R1065 사망 표)",
+   "fix": "알파 16 이하 0",
+   "applied": true,
+   "finalArt": false
+  },
+  {
+   "id": "MD-25",
+   "source": "Dots CX-0115MD_MD-25_death6_r1_ROUGH.png",
+   "sourceSha256": "a9ed03a747f39001f27428ff6644cdf4d01842198d56c743958b4117766698e7",
+   "liveArt": "assets/r410/mobs/m033.webp",
+   "path": "assets/r1165/mobs/md-25-clockwork-collector-death.webp",
+   "bytes": 84718,
+   "sha256": "d676123d9a0a5b200840948bd11feed2d2565cca28a9acbe4669d5a9f7a6cbbc",
+   "use": "몹 사망 6칸(R1065 사망 표)",
+   "fix": "알파 16 이하 0, 마지막 칸 알파 0.5배",
+   "applied": true,
+   "finalArt": false
+  }
+ ]
+}

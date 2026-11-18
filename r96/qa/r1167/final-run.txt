@@ -1,0 +1,1 @@
+R1167 m040 move CPU check OK (214 assertions)

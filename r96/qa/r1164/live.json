@@ -1,0 +1,41 @@
+{
+ "ep1b04": {
+  "info": {
+   "name": "최고급 호텔의 총주방장 · 탐식의 귀 베엘제붑",
+   "nativeId": "b04-boss",
+   "boss": true,
+   "midboss": false,
+   "r380": null,
+   "r374": null
+  },
+  "C": {
+   "idle|generated-v31224/actors-normalized/fbc0132dd447_ep1b04_glutton_head_chef_phase0.webp|0,0,672,384": 3,
+   "idle|r1164/bosses/b04-idle6.webp|2016,0,672,384": 5,
+   "idle|r1164/bosses/b04-idle6.webp|2688,0,672,384": 4,
+   "idle|r1164/bosses/b04-idle6.webp|3360,0,672,384": 6,
+   "idle|r1164/bosses/b04-idle6.webp|0,0,672,384": 4,
+   "idle|r1164/bosses/b04-idle6.webp|672,0,672,384": 6,
+   "idle|r1164/bosses/b04-idle6.webp|1344,0,672,384": 2,
+   "hit|generated-v31224/actors-normalized/fbc0132dd447_ep1b04_glutton_head_chef_phase0.webp|0,0,672,384": 3,
+   "hit|r1164/bosses/b04-hit4.webp|1344,0,672,384": 1,
+   "hit|r1164/bosses/b04-hit4.webp|2016,0,672,384": 2,
+   "hit|r1164/bosses/b04-idle6.webp|2688,0,672,384": 1,
+   "hit|r1164/bosses/b04-idle6.webp|3360,0,672,384": 3,
+   "after|r1164/bosses/b04-idle6.webp|0,0,672,384": 3,
+   "after|r1164/bosses/b04-idle6.webp|672,0,672,384": 3,
+   "after|r1164/bosses/b04-idle6.webp|1344,0,672,384": 2,
+   "after|r1164/bosses/b04-idle6.webp|2016,0,672,384": 3,
+   "after|r1164/bosses/b04-idle6.webp|2688,0,672,384": 2,
+   "after|r1164/bosses/b04-idle6.webp|3360,0,672,384": 3
+  },
+  "r620": {
+   "draws": 76,
+   "shaped": 56,
+   "xfades": 0,
+   "walkHeld": 0,
+   "hits": 1,
+   "errors": 0,
+   "sheet": 50
+  }
+ }
+}

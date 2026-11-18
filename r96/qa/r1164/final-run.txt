@@ -1,0 +1,1 @@
+R1164 CX-0152-2 b04 idle/hit CPU check: 82 ok

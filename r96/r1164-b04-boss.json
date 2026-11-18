@@ -1,0 +1,62 @@
+{
+ "round": "R1164",
+ "request": "CX-0152-2 r1 ROUGH",
+ "files": [
+  {
+   "boss": "b04",
+   "sheet": "idle6",
+   "source": "Dots CX-0152-2_b04_idle6_r1_ROUGH.png",
+   "sourceSha256": "b8dd642091b04f881cb279c6c1185a94608915a1a7ac8d490b0329bc2dd679f7",
+   "engineArt": "assets/generated-v31224/actors-normalized/fbc0132dd447_ep1b04_glutton_head_chef_phase0.webp",
+   "cell": [
+    672,
+    384
+   ],
+   "n": 6,
+   "shift": [
+    -12,
+    0
+   ],
+   "fitErr": 98.0,
+   "gain": [
+    0.744,
+    0.728,
+    0.676
+   ],
+   "path": "assets/r1164/bosses/b04-idle6.webp",
+   "bytes": 129556,
+   "sha256": "a5a37e4d658dc56447c5a71be77bbc954fe79807670593d0f3f9f7cc9ddc4c39",
+   "use": "보스 대기 8fps",
+   "applied": true,
+   "finalArt": false
+  },
+  {
+   "boss": "b04",
+   "sheet": "hit4",
+   "source": "Dots CX-0152-2_b04_hit4_r1_ROUGH.png",
+   "sourceSha256": "5c9d0932fb1eb0b7ecbda54bede280aede810916882a32c82c2a7f06b2dc89fd",
+   "engineArt": "assets/generated-v31224/actors-normalized/fbc0132dd447_ep1b04_glutton_head_chef_phase0.webp",
+   "cell": [
+    672,
+    384
+   ],
+   "n": 4,
+   "shift": [
+    -12,
+    0
+   ],
+   "fitErr": 98.0,
+   "gain": [
+    0.744,
+    0.728,
+    0.676
+   ],
+   "path": "assets/r1164/bosses/b04-hit4.webp",
+   "bytes": 100622,
+   "sha256": "077cc370829424f1dbaecdbb21323df3a40ede470ab8cedad5f797c67c3b4108",
+   "use": "보스 피격 16fps",
+   "applied": true,
+   "finalArt": false
+  }
+ ]
+}

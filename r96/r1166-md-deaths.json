@@ -1,0 +1,32 @@
+{
+ "round": "R1166",
+ "request": "CX-0115MD r1 ROUGH",
+ "files": [
+  {
+   "id": "MD-01",
+   "source": "Dots CX-0115MD_MD-01_death6_r1_ROUGH.png",
+   "sourceSha256": "7dc65ce253a81f691113d5957e26f99c7995080dda822c559b46d59c576f405e",
+   "liveArt": "assets/visual-test/hospital-ranged-motion-r52.png",
+   "path": "assets/r1166/mobs/md-01-ghost-patient-death.webp",
+   "bytes": 225942,
+   "sha256": "9f885b7f4452c466bb12d7004e9efad5a4764a1b80f09697c7174a3892e1f8f9",
+   "use": "몹 사망 6칸(R1065 사망 표)",
+   "fix": "알파 16 이하 0, 5칸째 알파 48 미만 0",
+   "applied": true,
+   "finalArt": false
+  },
+  {
+   "id": "MD-03",
+   "source": "Dots CX-0115MD_MD-03_death6_r1_ROUGH.png",
+   "sourceSha256": "c41bec279aefe75d11b659f9b0adfa6259ebadb88f715ddcb2583d97711732ef",
+   "liveArt": "assets/visual-test/hospital-orderly-motion-r51-v2.png",
+   "path": "assets/r1166/mobs/md-03-masked-orderly-death.webp",
+   "bytes": 243128,
+   "sha256": "cde037ec4f008956234e05081f662c8e7957eef8d0d14d3e6fedd025aed641a7",
+   "use": "몹 사망 6칸(R1065 사망 표)",
+   "fix": "알파 16 이하 0, 5칸째 알파 48 미만 0",
+   "applied": true,
+   "finalArt": false
+  }
+ ]
+}

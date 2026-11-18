@@ -10500,6 +10500,23 @@
     "samong-pixel-art-r1177.js",
     "assets/r1177/index.json",
     "assets/r1179/mobs/index.json",
+    "assets/r1164/bosses/b04-hit4.webp",
+    "assets/r1164/bosses/b04-idle6.webp",
+    "assets/r1165/mobs/md-15-curtain-mannequin-death.webp",
+    "assets/r1165/mobs/md-17-red-wing-figure-death.webp",
+    "assets/r1165/mobs/md-25-clockwork-collector-death.webp",
+    "assets/r1166/mobs/md-01-ghost-patient-death.webp",
+    "assets/r1166/mobs/md-03-masked-orderly-death.webp",
+    "assets/r1167/move/m040-down.webp",
+    "assets/r1167/move/m040-up.webp",
+    "assets/r1177/s06-commander-dots-attack-8.webp",
+    "assets/r1177/s06-commander-dots-hit-4.webp",
+    "assets/r1177/s06-commander-dots-walk-right-8.webp",
+    "assets/r1177/s06-rival-dots-attack-8.webp",
+    "assets/r1177/s06-rival-dots-death-8.webp",
+    "assets/r1177/s06-rival-dots-hit-4.webp",
+    "assets/r1177/s06-rival-dots-walk-right-8.webp",
+    "move-dir-r1167-data.js",
     "assets/r1174/persona-awake.webp",
     "assets/r1174/persona-bust.webp",
     "assets/r1174/persona-orbs8.webp",
@@ -11578,5 +11595,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "8bc07e137cddf0ff45cf04dd473fa75687efc3531fc1eb87160dd3ff96e770fc"
+  "runtimeManifestSHA256": "1672ec63258350416e841c9179fdf72b42cc9c79ac6dd7ce2a71fecac9caf54d"
 }

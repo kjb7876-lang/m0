@@ -1,0 +1,2 @@
+AssertionError [ERR_ASSERTION]: b04 cell 0: idle uses R1164 idle6 sheet
+    at ok (/home/user/m0/r96/qa/r1164/r1164-cpu-check.cjs:6:70)

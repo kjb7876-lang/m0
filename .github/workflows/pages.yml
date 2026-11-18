@@ -517,6 +517,8 @@ jobs:
         run: node r96/qa/r976/r976-cpu-check.cjs
       - name: R1177 samong episode pixel leftovers (S-06 pixel mobs, pixelfx sheets) to painted art CPU check
         run: node r96/qa/r1177/r1177-cpu-check.cjs
+      - name: R1177b S-06 상대 초인·지휘 개체 Dots 걷기·공격·피격·사망 시트 연결
+        run: node r96/qa/r1177/r1177b-cpu-check.cjs
       - name: R701 survival 77s choice window, difficulty, hero picker CPU check
         run: node r96/qa/r701/r701-cpu-check.cjs
       - name: R850 survival play-test fixes (arena terrain lock, hospital maze skip, next-stage prefetch, moving HUD) CPU check
@@ -624,7 +626,7 @@ jobs:
       - name: R1029 float movement for mobs and bosses that slide on one image (wing flap, ghost hem, dark flame mist; looked up by art, direction sheets win) CPU check
         run: node r96/qa/r1029/move-float-cpu-check.cjs
       - name: R1125 regular-mob up/down walk sheets (Dots CX-0127MV m033, CX-0135 B4 resonance knight, B7 fisher down; same id with other art attached as alt) CPU check
-        run: node r96/qa/r1125/mob-move-cpu-check.cjs
+        run: node r96/qa/r1125/mob-move-cpu-check.cjs && node r96/qa/r1167/r1167-cpu-check.cjs
       - name: R996 bulmyeongwi fog summon still fires in the boss phase after every field mob is gone CPU check
         run: node r96/qa/r996/r996-cpu-check.cjs
       - name: R1008 cinema mode finishes (hero stands up instead of the sanctuary trip, ending windows move on 20 s after the subtitles, normal records unchanged) CPU check
@@ -774,7 +776,7 @@ jobs:
       - name: R522 hospital thin walls (the two free-standing maze baffles of ep1a08 moved to touch a thick wall, hospital only, routes stay connected) CPU check
         run: node r96/qa/r522/r522-cpu-check.cjs
       - name: R523 story rooms (clinic ep1a09 + sloth home ep1b02 furnished by room name along the real back walls, presentation only, angle-matched art only) CPU check
-        run: node r96/qa/r523/r523-cpu-check.cjs && node r96/qa/r1061/r1061-cpu-check.cjs && node r96/qa/r1062/prop-theme-cpu-check.cjs && node r96/qa/r1064/r1064-cpu-check.cjs && node r96/qa/r1064/r1064c-cpu-check.cjs && node r96/qa/r1065/r1065-cpu-check.cjs && node r96/qa/r1065/r1065c-cpu-check.cjs && node r96/qa/r1065/r1065e-cpu-check.cjs && node r96/qa/r1111/r1111-cpu-check.cjs && node r96/qa/r1158/r1158-cpu-check.cjs && node r96/qa/r1117d/r1117d-cpu-check.cjs && node r96/qa/r1103/r1103-cpu-check.cjs && node r96/qa/r730/r730-cpu-check.cjs && node r96/qa/r731/r731-cpu-check.cjs && node r96/qa/r1114/r1114-cpu-check.cjs && node r96/qa/r1117/r1117-cpu-check.cjs && node r96/qa/r1122/r1122-cpu-check.cjs
+        run: node r96/qa/r523/r523-cpu-check.cjs && node r96/qa/r1061/r1061-cpu-check.cjs && node r96/qa/r1062/prop-theme-cpu-check.cjs && node r96/qa/r1064/r1064-cpu-check.cjs && node r96/qa/r1064/r1064c-cpu-check.cjs && node r96/qa/r1065/r1065-cpu-check.cjs && node r96/qa/r1065/r1065c-cpu-check.cjs && node r96/qa/r1065/r1065e-cpu-check.cjs && node r96/qa/r1111/r1111-cpu-check.cjs && node r96/qa/r1158/r1158-cpu-check.cjs && node r96/qa/r1165/r1165-cpu-check.cjs && node r96/qa/r1166/r1166-cpu-check.cjs && node r96/qa/r1117d/r1117d-cpu-check.cjs && node r96/qa/r1103/r1103-cpu-check.cjs && node r96/qa/r730/r730-cpu-check.cjs && node r96/qa/r731/r731-cpu-check.cjs && node r96/qa/r1114/r1114-cpu-check.cjs && node r96/qa/r1117/r1117-cpu-check.cjs && node r96/qa/r1122/r1122-cpu-check.cjs
       - name: R713 refuge walls (first map hub stone walls 0.24 -> 0.64 outer / 0.48 inner, floor-side face unchanged, corners filled, hub only) CPU check
         run: node r96/qa/r713/r713-cpu-check.cjs
       - name: R810 Bulmyeongwi night (last302/last303 navy moonlight ambient, deep amber lamps, no sepia, no spider-crack decals, night fog colour, lamps kept off the guide path; other zones unchanged) CPU check
@@ -1029,7 +1031,7 @@ jobs:
       - name: R620 boss motion CPU check
         run: node r96/qa/r620/r620-cpu-check.cjs
       - name: R1147 Dots boss idle sheets CPU check
-        run: node r96/qa/r1147/r1147-cpu-check.cjs && node r96/qa/r1160/r1160-cpu-check.cjs && node r96/qa/r1161/r1161-cpu-check.cjs && node r96/qa/r1162/r1162-cpu-check.cjs && node r96/qa/r1163/r1163-cpu-check.cjs
+        run: node r96/qa/r1147/r1147-cpu-check.cjs && node r96/qa/r1160/r1160-cpu-check.cjs && node r96/qa/r1161/r1161-cpu-check.cjs && node r96/qa/r1162/r1162-cpu-check.cjs && node r96/qa/r1163/r1163-cpu-check.cjs && node r96/qa/r1164/r1164-cpu-check.cjs
       - name: R700 seven-sins boss art audit (size-lock heights match real art, no light matte fringe on drawn art, clean copies keep the body, originals kept) check
         run: python r96/qa/r700/boss-art-check.py
       - name: R710 hero south idle 6 / hit 4 sheets (feet on the 226 line, stand height ±3%, no alpha residue, flicker ≤2× current, holds not applied) check
