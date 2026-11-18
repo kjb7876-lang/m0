@@ -11923,6 +11923,21 @@
       "sha256": "a5a37e4d658dc56447c5a71be77bbc954fe79807670593d0f3f9f7cc9ddc4c39"
     },
     {
+      "path": "assets/r1165/mobs/md-15-curtain-mannequin-death.webp",
+      "bytes": 33614,
+      "sha256": "8147ec5769d94d093a627733d9299f44200b41d126f401bc1299ce4a23c542db"
+    },
+    {
+      "path": "assets/r1165/mobs/md-17-red-wing-figure-death.webp",
+      "bytes": 108390,
+      "sha256": "bbc5fdd7ae8873eff6fac83e87c8c27799749359e547c917b22437d79da7a25a"
+    },
+    {
+      "path": "assets/r1165/mobs/md-25-clockwork-collector-death.webp",
+      "bytes": 84718,
+      "sha256": "d676123d9a0a5b200840948bd11feed2d2565cca28a9acbe4669d5a9f7a6cbbc"
+    },
+    {
       "path": "assets/r117/scene/ep-cup-k1.png",
       "bytes": 2264,
       "sha256": "a39b05d84a4613cb40d72e213a26b9bccbc254b82e4cd9888f0b47e085a209e2"
@@ -55084,8 +55099,8 @@
     },
     {
       "path": "mob-attack-dots-r1065.js",
-      "bytes": 22721,
-      "sha256": "df6160467f10467bb2a36e5099bc4d0dbad907a86afc606bb5b2a8e628501ae3"
+      "bytes": 23746,
+      "sha256": "b3d0f1d4aa78c4c86a5c85f63cfe178b4d2e232564a85f59f0f2a98e8f27e1ff"
     },
     {
       "path": "mob-death-r188.js",
@@ -56278,8 +56293,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11255,
-  "totalBytes": 1353532962,
+  "fileCount": 11258,
+  "totalBytes": 1353760709,
   "webHTMLSha256": "1fc3552b5542bb54d913d4fb6b50b5000e49db8b047e70bf7c2e0321af857cfd",
   "largest": [
     {
