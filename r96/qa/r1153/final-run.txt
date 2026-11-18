@@ -1,0 +1,97 @@
+PASS ① dots-status-r1153.js runtime-text 사본 = client-source
+PASS ① 스크립트 태그(persona-wer-r1144 뒤, combat-r118 앞)
+PASS ① verify-r96-public.py 기대 목록
+PASS ① runtime-manifest·inputs
+PASS ① pages.yml CPU 검사 줄
+PASS ① 매니페스트에 새 시트: status-icons
+PASS ① 매니페스트에 새 시트: status-overlay
+PASS ① 매니페스트에 새 시트: sigil-lauren
+PASS ① 매니페스트에 새 시트: sigil-hunter
+PASS ① 매니페스트에 새 시트: sigil-slayer
+PASS ① 매니페스트에 새 시트: sigil-gunner
+PASS ① 매니페스트에 새 시트: seoha-clockwork
+PASS ① 매니페스트에 새 시트: slayer-brand
+PASS ① 매니페스트에 새 시트: gunner-reticle
+PASS ① 매니페스트에 새 시트: gunner-chain
+PASS ① 매니페스트에 새 시트: deploy-ring
+PASS ① 키를 새로 듣지 않음
+PASS ① 기록기가 못 받는 필터 없음
+PASS ② index.json(원본·해시·손질 기록) 있음
+PASS ② status-icons.webp 해시·크기 [1152,128] · 원본 0146ST/icons/CX-0146ST_icons_r1.png
+PASS ② status-overlay.webp 해시·크기 [1536,2304] · 원본 0146ST/overlay/CX-0146ST_B_overlays_all9_6f.png
+PASS ② sigil-lauren.webp 해시·크기 [1152,896] · 원본 0148SG_A-B/A-lauren/CX-0148SG_A-lauren_REVIEW.png
+PASS ② sigil-hunter.webp 해시·크기 [1152,896] · 원본 0148SG_A-B/B-hunter/CX-0148SG_B-hunter_r1.png
+PASS ② sigil-slayer.webp 해시·크기 [1152,896] · 원본 0148SG_C-D/C-slayer/CX-0148SG_C-slayer_r1_REVIEW.png
+PASS ② sigil-gunner.webp 해시·크기 [1152,896] · 원본 0148SG_C-D/D-gunner/CX-0148SG_D-gunner_r1.png
+PASS ② seoha-clockwork.webp 해시·크기 [1536,256] · 원본 0149SE/B-clockwork/CX-0149SE_B-clockwork6_r1.png
+PASS ② slayer-brand.webp 해시·크기 [1536,256] · 원본 0150MX/B-mark/CX-0150MX_B-mark_r1_REVIEW_HOLD.png
+PASS ② gunner-reticle.webp 해시·크기 [2048,256] · 원본 0150MX/C-reticle/CX-0150MX_C-reticle_r1_DIAGNOSTIC.png
+PASS ② gunner-chain.webp 해시·크기 [2048,128] · 원본 0150MX/D-chain/CX-0150MX_D-chain_r1_HOLD.png
+PASS ② deploy-ring.webp 해시·크기 [2048,256] · 원본 0150MX/F-deploy/CX-0150MX_F-deploy8_r1.png
+PASS ② 사몽 문양 lauren 칸·발 피벗 {"cell":[192,224],"pivot":[96,163.5],"stretch":1.42}
+PASS ② 사몽 문양 hunter 칸·발 피벗 {"cell":[192,224],"pivot":[96,165.1],"stretch":1.36}
+PASS ② 사몽 문양 slayer 칸·발 피벗 {"cell":[192,224],"pivot":[96,163.7],"stretch":1.38}
+PASS ② 사몽 문양 gunner 칸·발 피벗 {"cell":[192,224],"pivot":[96,166],"stretch":1}
+PASS ③ API 있음
+PASS ③ "r431-burn" → burn (실제 burn)
+PASS ③ "r431-hellfire" → hellfire (실제 hellfire)
+PASS ③ "poison" → poison (실제 poison)
+PASS ③ "중독" → poison (실제 poison)
+PASS ③ "질병" → disease (실제 disease)
+PASS ③ "빙결 · 둔화" → chill (실제 chill)
+PASS ③ "냉상" → chill (실제 chill)
+PASS ③ "root" → bind (실제 bind)
+PASS ③ "속박" → bind (실제 bind)
+PASS ③ "감전 · 공격 지연" → shock (실제 shock)
+PASS ③ "시간 왜곡 · 둔화" → warp (실제 warp)
+PASS ③ "r431-warp" → warp (실제 warp)
+PASS ③ "타락" → curse (실제 curse)
+PASS ③ "흑염 화상" → hellfire (실제 hellfire)
+PASS ③ "화상" → burn (실제 burn)
+PASS ③ "출혈" → null (실제 null)
+PASS ③ "" → null (실제 null)
+PASS ③ undefined → null (실제 null)
+PASS ③ 9종 순서 = 아이콘 시트 칸 순서
+PASS ④ 조종 영웅: 화상·시간 왜곡 따로, 9종 순서로 (burn,warp)
+PASS ④ 협동 동료: 중독만 — 만료 시각 = 지금(10) 인 타락은 뺌 (poison)
+PASS ④ 적마다 따로: e1 burn,shock · e2 bind
+PASS ④ 적 속박 0.5초 뒤 사라짐
+PASS ④ 쓰러진 적은 표시 안 함
+PASS ④ 잘못된 입력은 거절
+PASS ⑤ 상태가 있으면 그리기 표식(sentinel)을 effects 에 넣음
+PASS ⑤ 몸 위 오버레이: 화상 줄(y0)·중독 줄(y256) 각각 (0,256)
+PASS ⑤ 머리 위 아이콘(화면 HUD 캔버스 — 어두운 지역·수묵화풍에 색이 안 바램): 화상 칸(0)·중독 칸(128) 각각
+PASS ⑤ 오버레이 그리기 주인(scope) = r1153 effect·좌표 있음, 아이콘은 월드에 안 그림
+PASS ⑤ 오버레이 칸 0~5 (5,4)
+PASS ⑤ 저사양(lowFx): 아이콘만, 오버레이 없음
+PASS ⑤ 좌표 NaN: 던지지 않고 안 그림
+PASS ⑤ 시트 덜 읽힘: 안 그리고 불러오기 요청
+PASS ⑤ 설정으로 끄면 안 그림
+PASS ⑤ 상태가 없으면 표식 없음
+PASS ⑥ 낙인 1·2·3·4 → 칸 0·1·2·3 (4개 칸은 손질로 만든 칸)
+PASS ⑥ 낙인 5개 = 칸 4·5 맥박 (4,5)
+PASS ⑥ 월드(게임 캔버스)에는 낙인을 그리지 않음
+PASS ⑥ 한 번 그린 낙인은 비움(다음 그리기에서 R586 이 다시 알림)
+PASS ⑥ 0개·NaN 은 false(옛 방울로)
+PASS ⑦ 조준 고리: 대기 0→1 동안 칸 0→7 (좁혀짐 한 번)
+PASS ⑦ 연쇄 레이저: 두 토막(꺾임) 각각 시트 타일로 이어 붙임 (8장)
+PASS ⑦ NaN 이면 false(코드 그림으로)
+PASS ⑧ 서하 톱니·초침 시트로 그림
+PASS ⑧ NaN 이면 false
+PASS ⑨ 배치 고리 그림
+PASS ⑨ Dots 테두리 시트 그대로(캔버스 굽기 없음 — Three 기록기가 못 받음)
+PASS ⑨ NaN 이면 false
+PASS ⑩ lauren: 뒤층 한 장 + 앞층(발 앞 고리) 한 장, 코드 문양 안 그림
+PASS ⑩ hunter: 뒤층 한 장 + 앞층(발 앞 고리) 한 장, 코드 문양 안 그림
+PASS ⑩ slayer: 뒤층 한 장 + 앞층(발 앞 고리) 한 장, 코드 문양 안 그림
+PASS ⑩ gunner: 뒤층 한 장 + 앞층(발 앞 고리) 한 장, 코드 문양 안 그림
+PASS ⑩ hwando 는 손대지 않음
+PASS ⑩ seoha 는 손대지 않음
+PASS ⑩ 시트 덜 읽힘 → 원래 코드 문양
+PASS ⑩ 문양 끄면 원래 코드 문양
+PASS ⑪ R586 낙인: Dots 시트가 그리면 옛 방울 생략
+PASS ⑪ R561 조준 고리·연쇄 레이저 훅
+PASS ⑪ R949 톱니 훅
+PASS ⑪ R720 배치 고리 훅(영웅색 코드 고리는 그대로 두고 그 위에)
+PASS ⑪ R430 이 영웅별 상태(statusFor)를 내보냄
+ALL PASS
