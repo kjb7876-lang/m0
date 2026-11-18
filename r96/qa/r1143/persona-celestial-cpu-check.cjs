@@ -94,6 +94,7 @@ const frames=(w,mk,n=6)=>{let r;for(let i=0;i<n;i++)r=w.frame(mk());return r;};
  ok(c8.length===3&&Math.max(...c8)-Math.min(...c8)<=12&&Math.max(...c8)<=150,'④ 심연 왜성 선·채우기 → 흑 ('+c8+')');
  ok(c9[0]>c9[1]*2&&c9[0]>c9[2]*2&&c9[0]<=140&&c10[0]>c10[1]*2&&c10[0]<=210,'④ 쌍성 소멸 꼬리·유성 폭발 고리 → 검빨 ('+c9+' / '+c10+')');
  ok(c7[0]>c7[2],'④ 항성 반발 고리 → 언주 계열(붉은 쪽) ('+c7+')');
+ {const t=w.frame([body(),vec('r946:repulse:1.00:ring','rgba(232,226,244,1.2e-7)')])[1].style.fillStyle,c=rgb(t);ok(c[0]>c[2]&&/,1\.2e-7\)$/.test(t),'④ 알파가 지수 꼴이어도 색을 바꿈 ('+t+')');}
  ok(/,\.9\)$/.test(s[8].style.fillStyle)&&/,\.8\)$/.test(s[9].style.fillStyle),'④ 알파 그대로');
  // 캐시: 같은 그림을 다시 굽지 않음
  const g0=w.stat.get;frames(w,mk,4);ok(w.stat.get===g0,'④ 한 번 구운 그림은 다시 굽지 않음');

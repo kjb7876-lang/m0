@@ -132,7 +132,7 @@ function violet(r,g,b){return b>r&&b>g&&b-Math.min(r,g)>=30;} // 은빛(226,232,
 // R1120: 선·채우기 명령(중력 우물 코어·원반 등 r561 벡터)은 그림 필터 대신 색 문자열을 언주 명암으로 바꾼다(밝기 따라 먹→언주→살구, 알파 유지)
 const RAMP=[[0,[6,1,1]],[.22,EONJU[0]],[.5,EONJU[1]],[.82,EONJU[2]],[1,[255,236,224]]];
 function eonju(r,g,b){const L=Math.max(0,Math.min(1,(.3*r+.59*g+.11*b)/255+.08*(b/255)));let j=1;while(j<RAMP.length-1&&L>RAMP[j][0])j++;const [a0,c0]=RAMP[j-1],[a1,c1]=RAMP[j],k=Math.max(0,Math.min(1,(L-a0)/Math.max(1e-6,a1-a0)));return c0.map((v,i)=>Math.round(v+(c1[i]-v)*k));}
-const RGBA=/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d.]+)\s*)?\)/g;
+const RGBA=/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d.eE+-]+)\s*)?\)/g; // 알파가 1.2e-7 꼴로 적혀도 잡는다(R1143: 옅어지는 고리 끝이 보라로 남던 것)
 function recolorStr(v){if(typeof v!=='string')return v;return v.replace(RGBA,(m,r,g,b,a)=>{if(!violet(+r,+g,+b))return m;const c=eonju(+r,+g,+b);return a==null?'rgb('+c.join(',')+')':'rgba('+c.join(',')+','+a+')';});}
 function recolorPaint(v){if(typeof v==='string')return recolorStr(v);if(v&&typeof v==='object'&&Array.isArray(v.stops))return {...v,stops:v.stops.map(st=>st&&typeof st==='object'?{...st,color:recolorStr(st.color)}:st)};return v;}
 const VEC_ID=/^r561:/;
