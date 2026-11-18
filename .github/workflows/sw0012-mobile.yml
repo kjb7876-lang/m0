@@ -1,0 +1,59 @@
+name: Mobile story and Samong regression
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'r96/client-source/edges-r188.js'
+      - 'r96/client-source/reach-r225.js'
+      - 'r96/client-source/render-lod-r287.js'
+      - 'r96/client-source/hero-palette-r302.js'
+      - 'r96/client-source/mob-death-r462.js'
+      - 'r96/client-source/mobile-memory-r980.js'
+      - 'r96/qa/sw0012/**'
+      - '.github/workflows/sw0012-mobile.yml'
+permissions:
+  contents: read
+concurrency:
+  group: mobile-story-samong-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  regression:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          show-progress: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Check collisions, visible terrain, smoke and texture sharing
+        run: |
+          node r96/qa/sw0012/edges.cjs
+          node r96/qa/sw0012/reach.cjs
+          node r96/qa/sw0012/lod.cjs
+          node r96/qa/sw0012/death-palette.cjs
+          node r96/qa/sw0012/half-source.cjs
+      - name: Reconstruct the game and install Chromium
+        run: |
+          python3 scripts/build-r96.py
+          npm install --no-save --ignore-scripts playwright@1.56.0
+          npx playwright install --with-deps chromium
+      - name: Play story and Samong with touch input
+        env:
+          SW_URL: http://127.0.0.1:4396/
+          SHOTS: ${{ runner.temp }}/mobile-evidence
+        run: |
+          python3 -m http.server 4396 --bind 127.0.0.1 --directory r96/hospital-three-pc/site > "$RUNNER_TEMP/storyworld-http.log" 2>&1 &
+          server=$!
+          trap 'kill "$server"' EXIT
+          curl --fail --retry 10 --retry-connrefused --retry-delay 1 --silent --output /dev/null "$SW_URL"
+          node r96/qa/sw0012/mobile-browser.cjs
+      - name: Retain scenes and frame timings
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mobile-story-samong-evidence
+          path: ${{ runner.temp }}/mobile-evidence
+          if-no-files-found: ignore

@@ -107,8 +107,11 @@ const asked=new Map();
 function image(p){try{const row=typeof readyImage==='function'?readyImage(p):null;if(row?.image)return row.image;const t=Date.now();
  if(t-(asked.get(p)||0)>1500){asked.set(p,t);if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});}}catch(e){fail(e);}return null;}
 function sheet(name,fr,x,y,heightPx,alpha,o={}){const S=SHEETS[name],im=image(S.p);if(!im||alpha<=.01)return false;fr=Math.max(0,Math.min(S.frames-1,fr|0));
+ const neutralSmoke=name==='smoke',previousSmoke=neutralSmoke&&ctx.r462DeathSmoke;
  const s=heightPx/S.vis;ctx.save();try{ctx.globalAlpha*=clamp01(alpha);if(o.filter)ctx.filter=o.filter;ctx.translate(x,y);if(o.squash)ctx.scale(1,o.squash);ctx.scale(o.flip?-s:s,s);
-  ctx.drawImage(im,(fr%S.cols)*S.cell,Math.floor(fr/S.cols)*S.cell,S.cell,S.cell,-S.pivot[0],-S.pivot[1],S.cell,S.cell);stats.sheetDraws++;}finally{ctx.restore();}return true;}
+  // The same decoded sheet also serves hero skills. Mark this one call on this drawing context.
+  if(neutralSmoke)ctx.r462DeathSmoke=im;
+  ctx.drawImage(im,(fr%S.cols)*S.cell,Math.floor(fr/S.cols)*S.cell,S.cell,S.cell,-S.pivot[0],-S.pivot[1],S.cell,S.cell);stats.sheetDraws++;}finally{if(neutralSmoke)ctx.r462DeathSmoke=previousSmoke;ctx.restore();}return true;}
 // 그 몹 자기 그림을 발밑(x,y) 기준으로 그린다(돌리거나 누르지 않음).
 function body(look,x,y,hPx,o){ctx.save();try{ctx.translate(x,y);const opt={alpha:o.alpha,flip:look.flip,filter:o.filter};
   own(look,0,0,hPx,opt);}finally{ctx.restore();}}
