@@ -91,7 +91,11 @@ function segHits(a,b,radius,mult,base,tag,slot,id){const dx=b.x-a.x,dy=b.y-a.y,L
 // 원점에서 각도 쪽으로 벽·맵 끝 앞까지(0.1칸 걸음)
 function rayEnd(o,ang,range){const ux=Math.cos(ang),uy=Math.sin(ang);let x=o.x,y=o.y;for(let d=.1;d<=range+1e-9;d+=.1){const nx=o.x+ux*d,ny=o.y+uy*d;if(!open(nx,ny)){stats.wallStops++;break;}x=nx;y=ny;}return {x,y};}
 // ---- 일정·그림 목록 ------------------------------------------------------------------------------------------
-const jobs=[],blades=[],vis=[];let lastSwing=-Infinity,boost=1,lastT=null,lastFinale=null;const seenE=new Set(),waves=new Map();
+const jobs=[],blades=[],vis=[];let boost=1,lastT=null,lastFinale=null;const seenE=new Set(),waves=new Map();
+// R1148b: 납도 시각(마지막 휘두름)은 몸마다 따로 — 환도·EGO 를 함께 두어도 서로의 발검 판정을 바꾸지 않는다
+const swingAt=new WeakMap();const lastSwingOf=()=>{let p=null;try{p=player;}catch(_){}return p&&swingAt.has(p)?swingAt.get(p):-Infinity;};const markSwing=()=>{try{if(player)swingAt.set(player,T());}catch(_){}};
+const asOwnerR1148=(o,fn)=>{const D=window.__STORYWORLD_HERO_DEFENSE_R720__;if(D&&typeof D.asOwner==='function')return D.asOwner(o,fn);let p=null;try{p=player;}catch(_){}return o&&o===p?fn():undefined;};/* R1148b: 이어지는 기술은 쓴 몸(owner)으로만 돌린다(환도·EGO 등 같은 기술 코드를 쓰는 몸끼리 섞이지 않게). R720 이 없으면 조종 영웅일 때만 */
+const aliveR1148=o=>{const D=window.__STORYWORLD_HERO_DEFENSE_R720__;if(D&&typeof D.alive==='function')return D.alive(o);let p=null;try{p=player;}catch(_){}return !!o&&o===p;};
 const later=(sec,j,fn)=>{jobs.push({at:T()+sec,j,fn});arm();};
 const addVis=v=>{vis.push({t0:T(),...v});while(vis.length>CFG.maxVis)vis.shift();arm();};
 const SENT={type:'r590-hwando-chain',x:0,y:0,age:0,life:Infinity,r590Sentinel:true};
@@ -100,36 +104,37 @@ function disarm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)){c
 function clearAll(){jobs.length=0;blades.length=0;vis.length=0;waves.clear();disarm();}
 // ---- A 납도 발검 ---------------------------------------------------------------------------------------------
 function onBasic(base,self,args){
- const can=on&&isHw()&&!egoOn()&&solo(),cd0=player?.attackCD,pre=can?engineFoe(player):null,sheathed=can&&T()-lastSwing>=CFG.sheathIdle&&!(cd0>0);
+ const can=on&&isHw()&&!egoOn()&&solo(),cd0=player?.attackCD,pre=can?engineFoe(player):null,sheathed=can&&T()-lastSwingOf()>=CFG.sheathIdle&&!(cd0>0);
  const prior=boost;if(sheathed)boost=CFG.drawMult;let r;
  try{r=base.apply(self,args);}finally{boost=prior;}
- try{if(isHw()&&!(cd0>0)&&player.attackCD>0){if(sheathed){stats.draws++;const e=pre||nearest(4),a=e?Math.atan2(e.y-player.y,e.x-player.x):aim();lastDraw={a,foe:e?.id??null};addVis({k:'draw',x:player.x,y:player.y,a,life:ready('cut')?19/18.75:.32});addVis({k:'ring',x:player.x,y:player.y,life:FRAMES/FPS*.55,size:1});}lastSwing=T();}}catch(e){fail(e);}
+ try{if(isHw()&&!(cd0>0)&&player.attackCD>0){if(sheathed){stats.draws++;const e=pre||nearest(4),a=e?Math.atan2(e.y-player.y,e.x-player.x):aim();lastDraw={a,foe:e?.id??null};addVis({k:'draw',x:player.x,y:player.y,a,life:ready('cut')?19/18.75:.32});addVis({k:'ring',x:player.x,y:player.y,life:FRAMES/FPS*.55,size:1});}markSwing();}}catch(e){fail(e);}
  return r;}
 // ---- Q → 은빛 검풍 -------------------------------------------------------------------------------------------
 function onSpecial(base,self,args){const cd0=player?.specialCD,r=base.apply(self,args);
- try{if(on&&isHw()&&!egoOn()&&!(cd0>0)&&player.specialCD>0){lastSwing=T();const j=snapshot(),e=nearest(12),a=weaponAngle(e?Math.atan2(e.y-player.y,e.x-player.x):aim()),pw=power(),id='q'+(++stats.winds);
+ try{if(on&&isHw()&&!egoOn()&&!(cd0>0)&&player.specialCD>0){markSwing();const j=snapshot(),e=nearest(12),a=weaponAngle(e?Math.atan2(e.y-player.y,e.x-player.x):aim()),pw=power(),id='q'+(++stats.winds);
   for(let i=0;i<CFG.windCount;i++){const off=CFG.windCount>1?(i/(CFG.windCount-1)-.5)*2*CFG.windSpread:0;
    later(CFG.windDelay+i*CFG.windGap,j,()=>launch(player.x,player.y,a+off,pw,id+':'+i,j));}}}catch(e){fail(e);}
  return r;}
 function launch(x,y,a,pw,id,j){const ux=Math.cos(a),uy=Math.sin(a),sx=x+ux*.8,sy=y+uy*.8;if(!open(sx,sy)){stats.wallStops++;return;}
  blades.push({id,x:sx,y:sy,ux,uy,a,pw,range:rng(CFG.windRange),radius:rng(CFG.windRadius),travel:0,hit:new Set(),j,t0:T()});stats.blades++;while(blades.length>CFG.maxBlades)blades.shift();arm();}
-function stepBlades(dt){for(let i=blades.length-1;i>=0;i--){const b=blades[i];if(!valid(b.j)){blades.splice(i,1);continue;}
+function stepBlades(dt){for(let i=blades.length-1;i>=0;i--){const b=blades[i];if(asOwnerR1148(b.j.player,()=>valid(b.j)&&stepBlade(b,dt))!==true)blades.splice(i,1);}}
+function stepBlade(b,dt){
  let move=CFG.windSpeed*dt,dead=false;while(move>1e-9&&!dead){const s=Math.min(.2,move);move-=s;const nx=b.x+b.ux*s,ny=b.y+b.uy*s;
   if(!open(nx,ny)){stats.wallStops++;dead=true;break;}b.x=nx;b.y=ny;b.travel+=s;
   for(const e of foes()){if(!(e.hp>0)||b.hit.has(e.id))continue;if(Math.hypot(e.x-b.x,e.y-b.y)<b.radius+(e.radius||0)&&line(b,e)){b.hit.add(e.id);strike(e,CFG.windMult,b.pw,'wind','q',b.id);}}
   if(b.travel>=b.range)dead=true;}
- if(dead)blades.splice(i,1);}}
+ return !dead;}
 // ---- E → 유영 일섬 -------------------------------------------------------------------------------------------
 function onFlight(x,y,o){if(seenE.has(o.castId))return;seenE.add(o.castId);if(seenE.size>64)seenE.delete(seenE.values().next().value);
  if(!fin(x)||!fin(y)||!fin(o.tx)||!fin(o.ty))return;const a={x,y},b={x:o.tx,y:o.ty};if(Math.hypot(b.x-a.x,b.y-a.y)<.05)return;
- lastSwing=T();const j=snapshot(),pw=power(),id='e:'+o.castId;addVis({k:'trail',a,b,life:CFG.flashDelay});if(ready('flash'))stats.sheetE=(stats.sheetE||0)+1;
+ markSwing();const j=snapshot(),pw=power(),id='e:'+o.castId;addVis({k:'trail',a,b,life:CFG.flashDelay});if(ready('flash'))stats.sheetE=(stats.sheetE||0)+1;
  later(CFG.flashDelay,j,()=>{stats.flashes++;addVis({k:'flash',a,b,life:ready('flash')?17/16:.34});
   // R975: 보스 우선·좌우 7연 다단히트가 켜져 있으면 이 한 방 피해(×0.6)를 넘겨받아 7타로 나눈다(돌진 자체는 그대로). 없거나 꺼져 있으면 원래대로.
   let took=false;try{const M=window.__STORYWORLD_HWANDO_ILSEOM_R975__;took=!!(M&&typeof M.take==='function'&&M.take({a,b,pw,id,mult:CFG.flashMult,radius:rng(CFG.flashRadius)}));}catch(e){fail(e);}
   if(!took)segHits(a,b,rng(CFG.flashRadius),CFG.flashMult,pw,'flash','e',id);});}
 // ---- R 칠연 환수검 → 종섬 ------------------------------------------------------------------------------------
 function onWave(x,y,o){let w=waves.get(o.castId);if(!w){w={n:0,done:false,a:fin(o.visualWorldAngle35)?o.visualWorldAngle35:aim()};waves.set(o.castId,w);if(waves.size>16)waves.delete(waves.keys().next().value);}
- if(w.done)return;w.n++;stats.waves++;lastSwing=T();
+ if(w.done)return;w.n++;stats.waves++;markSwing();
  // 파마다 방향이 바뀌는 베기 한 줄(황금비 각도로 돌아 겹치지 않게) — 7연격이 눈으로 셀 수 있게
  addVis({k:'wave',x,y,a:w.a+w.n*2.39996,r:fin(o.size)?o.size:3.3,n:w.n,life:.24});
  if(w.n>=CFG.waves){w.done=true;const j=snapshot(),pw=power(),id='r:'+o.castId,fa=w.a;
@@ -196,8 +201,8 @@ try{
  if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e===SENT){try{if(on)drawAll();}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};}
  const asHeroR720=(id,fn)=>{const D=window.__STORYWORLD_HERO_DEFENSE_R720__;return D&&typeof D.asHero==='function'?D.asHero(id,fn):fn();};/* R720-4: 다음 틱에 이어지는 기술을 그 영웅 몸(생존 배치 영웅이면 그 몸)으로 돌린다 */
  if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{if(!themePatched)patchTheme();const t=T(),dt=lastT==null?0:clamp(t-lastT,0,.1);lastT=t;
-   asHeroR720('hwando',()=>{for(let i=0;i<jobs.length;){const q=jobs[i];if(t>=q.at){jobs.splice(i,1);if(valid(q.j))q.fn();}else if(!valid(q.j))jobs.splice(i,1);else i++;}
-   if(dt>0)stepBlades(dt);});
+   for(let i=0;i<jobs.length;){const q=jobs[i],o=q.j.player;if(t>=q.at){jobs.splice(i,1);asOwnerR1148(o,()=>{if(valid(q.j))q.fn();});}else if(!aliveR1148(o)||asOwnerR1148(o,()=>valid(q.j))!==true)jobs.splice(i,1);else i++;}
+   if(dt>0)stepBlades(dt);
    for(let i=vis.length-1;i>=0;i--)if(t-vis[i].t0>=vis[i].life||t<vis[i].t0-1)vis.splice(i,1);
    if(jobs.length||blades.length||vis.length)arm();else disarm();}catch(e){fail(e);}return r;};}
  if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){clearAll();const r=await base.apply(this,a);preload();return r;};}
@@ -207,5 +212,5 @@ try{
 function set(v){on=v!==false;if(!on)clearAll();try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}
 window.__STORYWORLD_HWANDO_CHAIN_R590__=Object.freeze({revision:REV,config:CFG,on:()=>on,set,
  inspect:()=>({revision:REV,on,stats:{...stats},lastDraw:lastDraw&&{...lastDraw},lastError,jobs:jobs.length,vis:vis.length,lastFinale:lastFinale&&{...lastFinale},
-  blades:blades.map(b=>({id:b.id,x:+b.x.toFixed(2),y:+b.y.toFixed(2),travel:+b.travel.toFixed(2),hit:[...b.hit]})),sheathed:T()-lastSwing>=CFG.sheathIdle})});
+  blades:blades.map(b=>({id:b.id,x:+b.x.toFixed(2),y:+b.y.toFixed(2),travel:+b.travel.toFixed(2),hit:[...b.hit]})),sheathed:T()-lastSwingOf()>=CFG.sheathIdle})});
 })();

@@ -527,6 +527,8 @@ jobs:
         run: node r96/qa/r961/r961-cpu-check.cjs
       - name: R720 survival hero placement (I key, crystals, story-order prices, leash and range upgrades, swap rule) CPU check
         run: node r96/qa/r720/r720-cpu-check.cjs
+      - name: R1148 survival placement 777 unlocks hidden EGO and Persona (form heroes, same-body rule, swap) CPU check
+        run: node r96/qa/r1148/r1148-cpu-check.cjs
       - name: R1050 survival placed heroes plant during attack and skill so the attack motion plays (no chase drift, start frame step undone) CPU check
         run: node r96/qa/r1050/r1050-cpu-check.cjs
       - name: R1050b heroes use attack art for attacks and skills (EGO buff swaps, hwando not walk when pushed, neon and lauren diagonals use side sheets, hit does not cover a skill) CPU check

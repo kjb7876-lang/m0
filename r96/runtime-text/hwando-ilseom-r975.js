@@ -52,6 +52,8 @@ const SENT={type:'r975-hwando-ilseom',x:0,y:0,age:0,life:Infinity,r975Sentinel:t
 function arm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)){const i=effects.indexOf(SENT);if(i===effects.length-1&&i>=0)return;if(i>=0)effects.splice(i,1);SENT.age=0;effects.push(SENT);}}catch(_){}}
 function disarm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)){const i=effects.indexOf(SENT);if(i>=0)effects.splice(i,1);}}catch(_){}}
 function clearAll(){if(seqs.length)stats.cancelled+=seqs.length;seqs.length=0;vis.length=0;disarm();}
+const asOwnerR1148=(o,fn)=>{const D=window.__STORYWORLD_HERO_DEFENSE_R720__;if(D&&typeof D.asOwner==='function')return D.asOwner(o,fn);let p=null;try{p=player;}catch(_){}return o&&o===p?fn():undefined;};/* R1148b: 이어지는 기술은 쓴 몸(owner)으로만 돌린다(환도·EGO 등 같은 기술 코드를 쓰는 몸끼리 섞이지 않게). R720 이 없으면 조종 영웅일 때만 */
+const aliveR1148=o=>{const D=window.__STORYWORLD_HERO_DEFENSE_R720__;if(D&&typeof D.alive==='function')return D.alive(o);let p=null;try{p=player;}catch(_){}return !!o&&o===p;};
 const snap=()=>({room:typeof room!=='undefined'?room:null,player:typeof player!=='undefined'?player:null,zone:typeof zone!=='undefined'?zone:null});
 const valid=j=>on&&isHw()&&(typeof room==='undefined'||j.room===room)&&j.player===player&&(typeof zone==='undefined'||zone===j.zone);
 function strike(e,dmg,q,i){if(typeof hitEnemy!=='function'||!(dmg>0)||!fin(dmg))return false;if(typeof damageable3==='function'&&!damageable3(e))return false;
@@ -74,9 +76,10 @@ function take(o){try{if(!on||!isHw()||!solo())return false;if(!o||!o.a||!o.b||![
   // 사용자 02:17Z: 7번 베기는 보스·중간보스한테만. 범위 안에 보스가 없으면 넘겨받지 않는다 → R590 원래 한 방 일섬.
   const radius=fin(o.radius)&&o.radius>0?o.radius:.6,{list,boss}=pickTargets(o.a,o.b,radius);if(!boss){stats.normalPassed++;return false;}stats.casts++;stats.bossFirst++;
   const q={id:String(o.id||stats.casts),a:{x:o.a.x,y:o.a.y},b:{x:o.b.x,y:o.b.y},pw:o.pw,mult:o.mult,list,n:0,done:false,t0:T(),j:snap(),cuts:[]};lastCuts=q.cuts;
-  asHero('hwando',()=>step(q));if(!q.done){seqs.push(q);while(seqs.length>4)seqs.shift();}arm();return true;}catch(e){fail(e);return false;}}
-function tickSeqs(){const t=T();for(let k=seqs.length-1;k>=0;k--){const q=seqs[k];if(!valid(q.j)){seqs.splice(k,1);stats.cancelled++;continue;}
-  let guard=0;while(!q.done&&t>=q.t0+q.n*CFG.gap-1e-9&&guard++<CFG.hits)asHero('hwando',()=>step(q));if(q.done)seqs.splice(k,1);}}
+  asOwnerR1148(q.j.player,()=>step(q));if(!q.done){seqs.push(q);while(seqs.length>4)seqs.shift();}arm();return true;}catch(e){fail(e);return false;}}
+function tickSeqs(){const t=T();for(let k=seqs.length-1;k>=0;k--){const q=seqs[k];
+  if(asOwnerR1148(q.j.player,()=>{if(!valid(q.j))return false;let guard=0;while(!q.done&&t>=q.t0+q.n*CFG.gap-1e-9&&guard++<CFG.hits)step(q);return true;})!==true){seqs.splice(k,1);stats.cancelled++;continue;}
+  if(q.done)seqs.splice(k,1);}}
 // ---- 그리기 --------------------------------------------------------------------------------------------------
 function sheet(){try{const got=typeof readyImage==='function'?readyImage(SHEET.path):null;return got?.image||null;}catch(e){fail(e);return null;}}
 let budget=0;
