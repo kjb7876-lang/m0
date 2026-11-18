@@ -11883,6 +11883,36 @@
       "sha256": "51082727cb9c57966c79d90a98957b3373025e086fe1c5d5da23da0254eddad4"
     },
     {
+      "path": "assets/r1163/bosses/b02-hit4.webp",
+      "bytes": 60984,
+      "sha256": "ecd15eb22fdbb664267821bef5a13db52025828df9037afd2b33d3ac4464a5ca"
+    },
+    {
+      "path": "assets/r1163/bosses/b02-idle6.webp",
+      "bytes": 90926,
+      "sha256": "df0c82dddf400131f8a9f927b84ec60677a6995e10d66407e777a75d1d971aa6"
+    },
+    {
+      "path": "assets/r1163/bosses/u204-hit4.webp",
+      "bytes": 51510,
+      "sha256": "aa4e8023f5bccb8b5a5ad4141857863e8efc2bfa8354c0c9518da4e0863854b5"
+    },
+    {
+      "path": "assets/r1163/bosses/u204-idle6.webp",
+      "bytes": 72430,
+      "sha256": "b24e96b30430e0bb8a2a0d998e05a4920b1e4cd46b480a9f2c6df84a92168a79"
+    },
+    {
+      "path": "assets/r1163/bosses/u205-hit4.webp",
+      "bytes": 46886,
+      "sha256": "a1f4d90c8f6b01fc798ac69317dd71e0eb3de80497b125d2ba3cb8fdf8c90c6b"
+    },
+    {
+      "path": "assets/r1163/bosses/u205-idle6.webp",
+      "bytes": 76050,
+      "sha256": "4fc6d27dcee5c5b3f192289988626effe711f6e7dab5be9da40092bf8ef5268e"
+    },
+    {
       "path": "assets/r117/scene/ep-cup-k1.png",
       "bytes": 2264,
       "sha256": "a39b05d84a4613cb40d72e213a26b9bccbc254b82e4cd9888f0b47e085a209e2"
@@ -53509,8 +53539,8 @@
     },
     {
       "path": "boss-motion-r620.js",
-      "bytes": 11487,
-      "sha256": "714585353628fe2b5d4f7e058679964ca2403ea393ee77b16dc4bd74b7a74597"
+      "bytes": 12586,
+      "sha256": "9d096eab442eee70adc3e070a410c7c2a67e90f666f418af3e336223dd66ba9e"
     },
     {
       "path": "boss-pattern-fx-r1040.js",
@@ -56238,8 +56268,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11247,
-  "totalBytes": 1352902491,
+  "fileCount": 11253,
+  "totalBytes": 1353302376,
   "webHTMLSha256": "1fc3552b5542bb54d913d4fb6b50b5000e49db8b047e70bf7c2e0321af857cfd",
   "largest": [
     {

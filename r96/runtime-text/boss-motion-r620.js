@@ -30,7 +30,11 @@ const SHEETS={'assets/generated-v31224/actors-normalized/1a8ca2c5759b_ep1b03_env
  'assets/r104/bosses/b09-boss-p4.webp':{w:464,h:461,idle:{path:'assets/r1161/bosses/b09-idle6.webp',n:6,fps:8},hit:{path:'assets/r1161/bosses/b09-hit4.webp',n:4,fps:16}},/* R1161: b09 Dots r2 HOLD — 기계 다리는 원래 p4, 사람·핵만 Dots(scripts/r1161-b09-boss.py) */
  'assets/r104/bosses/u202-mid-p4.webp':{w:509,h:525,idle:{path:'assets/r1147/bosses/u202-idle6.webp',n:6,fps:8}},
  // R1160: b08 Dots CX-0142BI r2 대기·피격 HOLD 를 Claude 가 손질(qa/r1147/fitsheet.py 로 p4 발 자리·색, 피격 4칸째 = 대기 1칸으로 원래 그림체 튐 없앰).
- 'assets/r104/bosses/b08-boss-p4.webp':{w:232,h:423,idle:{path:'assets/r1160/bosses/b08-idle6.webp',n:6,fps:8},hit:{path:'assets/r1160/bosses/b08-hit4.webp',n:4,fps:16}}};
+ 'assets/r104/bosses/b08-boss-p4.webp':{w:232,h:423,idle:{path:'assets/r1160/bosses/b08-idle6.webp',n:6,fps:8},hit:{path:'assets/r1160/bosses/b08-hit4.webp',n:4,fps:16}},
+ // R1163 Dots CX-0152 r1(게임이 실제로 그리는 칸 시트 기준): b02 나태(R380)·u204 기억 검열기(R380)·u205 역전 관리자(R374). 칸 시트라 대기 때 엔진이 그리는 칸(cells: 0·1번)일 때만 바꾼다(scripts/r1163-cx0152-boss.py).
+ 'assets/r380/mobs/sloth-burden-man-v1.webp':{w:256,h:256,cells:[0,1],idle:{path:'assets/r1163/bosses/b02-idle6.webp',n:6,fps:8},hit:{path:'assets/r1163/bosses/b02-hit4.webp',n:4,fps:16}},
+ 'assets/r380/mobs/u204-mech-04-v1.webp':{w:256,h:256,cells:[0,1],idle:{path:'assets/r1163/bosses/u204-idle6.webp',n:6,fps:8},hit:{path:'assets/r1163/bosses/u204-hit4.webp',n:4,fps:16}},
+ 'assets/r374/mobs/u205-mid-new.webp':{w:256,h:320,cells:[0,1],idle:{path:'assets/r1163/bosses/u205-idle6.webp',n:6,fps:8},hit:{path:'assets/r1163/bosses/u205-hit4.webp',n:4,fps:16}}};
 const asked=new Set();function sheetImg(p){try{const r=typeof readyImage==='function'?readyImage(p):null;if(r?.image)return r.image;if(!asked.has(p)&&typeof addImage==='function'){asked.add(p);addImage(p,'R620 Dots boss sheet');}}catch(_){}return null;}
 const ST=new WeakMap();
 const stOf=e=>{let s=ST.get(e);if(!s)ST.set(e,s={sx:1,sy:1,sh:0,ox:0,oy:0,at:-1,fx:NaN,fy:NaN,vx:0,move:0,hitAt:-9,hitT:0,prev:null,xAt:-9,lastPath:'',stepPh:Math.random()*6.28,seed:Math.random()*6.28,lastT:-1});return s;};
@@ -59,7 +63,9 @@ function process(e,cmds,st0){
  // 걷는 중(공격 아님)에 R104 공격 자세(p1~p3)가 끼어들면 회수 자세(p4)로 둔다 — 걸으며 칼을 휘두르는 것처럼 보이던 깜빡임.
  if(prefs.walkHold&&pn&&pn!==4&&!e.attack&&!(e.hitTimer>0)&&s.move>.5){const p4=path.replace(/-p[1-3]\./i,'-p4.');try{if(typeof readyImage==='function'){const im=readyImage(p4)?.image;if(im){c.image=im;c.sourcePath=p4;stats.walkHeld++;}}}catch(_){}}
  // R1147: 드로우 기록의 sourcePath 는 절대 주소(http://…/m0/assets/…)라 'assets/' 앞을 떼고 찾는다(전엔 b03 시트도 게임에서 안 걸렸다).
- let sheet=null;const ai=path.indexOf('assets/'),SD=SHEETS[ai>0?path.slice(ai):path];
+ let sheet=null;const ai=path.indexOf('assets/'),SD0=SHEETS[ai>0?path.slice(ai):path],SR=c.sourceRect;
+ // R1163: 칸 시트 열쇠(cells)는 엔진이 그 칸(대기 칸)을 그릴 때만
+ const SD=SD0&&SD0.cells?(Array.isArray(SR)&&SR.length>=4&&Math.abs(SR[2]-SD0.w)<1.5&&SD0.cells.includes(Math.round(SR[0]/SD0.w))&&Math.round(SR[1])===0?SD0:null):SD0;
  if(SD&&!e.attack){const hitAge=t-s.hitAt,hitting=e.hitTimer>0||(SD.hit?hitAge>=0&&hitAge<SD.hit.n/SD.hit.fps:hitAge>=0&&hitAge<.24);const use=hitting?(SD.hit||null):(s.move<=.5?SD.idle:null);
   if(use){const im=sheetImg(use.path);if(im){const i=use===SD.hit?Math.min(use.n-1,Math.max(0,Math.floor((e.hitTimer>0&&!(hitAge>=0&&hitAge<1)?0:hitAge)*use.fps))):Math.floor((t+s.seed)*use.fps)%use.n;c.image=im;c.sourcePath=use.path;c.sourceRect=[i*SD.w,0,SD.w,SD.h];sheet=use===SD.hit?'hit':'idle';stats.sheet=(stats.sheet||0)+1;}}}
  const G=target(e,s,c,t,dt),k=dt>0?Math.min(1,dt*16):1;

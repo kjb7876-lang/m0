@@ -40,7 +40,8 @@ for(const [id,[W,H]] of Object.entries(BOSSES)){
  for(const [p,W,H,want] of [['http://127.0.0.1:4410/m0/assets/r104/bosses/dist06-boss-p4.webp',508,501,'r1147/bosses/dist06-idle6'],['https://kjb7876-lang.github.io/m0/assets/generated-v31224/actors-normalized/1a8ca2c5759b_ep1b03_envy_sister_phase0.webp',672,384,'r620/bosses/b03-idle6']]){
   const c=world(p,W,H),L=frames(c,boss(),1);ok(L.every(f=>f.src.includes(want)),'absolute URL sourcePath still finds sheet: '+want);}}
 {// 경계값·회귀: 다른 보스 그림·b03 기존 시트는 그대로
- for(const [p,W,H] of [['assets/r380/mobs/sloth-burden-man-v1.webp',256,256],['assets/generated-v31224/actors-normalized/fbc0132dd447_ep1b04_glutton_head_chef_phase0.webp',672,384],['assets/r104/bosses/b07-boss-p1.webp',411,473]]){
+ // R1163(사용자 11-18 Dots 자산 적용 지시): b02 R380 칸 시트 대기 칸은 이제 R1163 시트로 바뀐다 → 여기 '그대로' 목록에서 뺐다(qa/r1163 가 검사).
+ for(const [p,W,H] of [['assets/generated-v31224/actors-normalized/fbc0132dd447_ep1b04_glutton_head_chef_phase0.webp',672,384],['assets/r104/bosses/b07-boss-p1.webp',411,473]]){
   const c=world(p,W,H),L=frames(c,boss(),1);ok(L.every(f=>f.src===p),'untouched: '+p.split('/').pop());}
  const P3='assets/generated-v31224/actors-normalized/1a8ca2c5759b_ep1b03_envy_sister_phase0.webp';const c=world(P3,672,384),e=boss();const L=frames(c,e,1);ok(L.every(f=>/r620\/bosses\/b03-idle6/.test(f.src)),'b03 idle sheet still used');
  e.hitTimer=.14;const Lh=frames(c,e,.2,{step:e=>{e.hitTimer=Math.max(0,e.hitTimer-1/30);}});ok(/b03-hit4/.test(Lh[0].src),'b03 hit sheet still used');
