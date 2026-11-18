@@ -663,6 +663,8 @@ jobs:
         run: node r96/qa/r1120/persona-hero-own-cpu-check.cjs
       - name: R1120b persona hero HUD icons/names from persona sheets, gravity-well core drawn as eclipse sheet cell CPU check
         run: node r96/qa/r1120/persona-hero-hud-well-cpu-check.cjs
+      - name: R1173 persona hero walk gait (side 1.8 / vertical 1.3 frames per unit, side sheet pelvis bob and waist seam cleanup) CPU check
+        run: node r96/qa/r1173/persona-walk-gait-cpu-check.cjs
       - name: R1140 persona hero audit (W/E/R dock icons+names survive engine HUD rewrite, panel labels, eonju luminance bake, guard/blink tint) CPU check
         run: node r96/qa/r1140/persona-hero-audit-cpu-check.cjs
       - name: R1143 persona hero (jin) celestial resonance (name prefix only in persona form, repulse=eonju / pull=black / fused=dark red tint over the existing R946 art, hit logic unchanged) CPU check
@@ -843,6 +845,8 @@ jobs:
         run: node r96/qa/r1139b/r1139b-cpu-check.cjs
       - name: R1145 EGO hidden hero celestial follow-ups (R casts silver giant + abyss dwarf, ink moon triggers stellar repulse, white-red tint, EGO only) CPU check
         run: node r96/qa/r1145/r1145-cpu-check.cjs
+      - name: R1175 persona hidden hero sweeps every Lauren trace (R102 hit art, scene-owned violet, R409 outlined pixel FX, any Lauren art path) into vermilion CPU check
+        run: node r96/qa/r1175/r1175-cpu-check.cjs
       - name: R1157 EGO R summons a random hero for 7s (0.7s skill cooldowns, own chance passives, chained summons extend together) CPU check
         run: node r96/qa/r1157/r1157-cpu-check.cjs
       - name: R1174 persona own chance-passive cut-in and samong awakening cut-in (no Lauren portrait) CPU check
@@ -1015,7 +1019,7 @@ jobs:
       - name: R620 boss motion CPU check
         run: node r96/qa/r620/r620-cpu-check.cjs
       - name: R1147 Dots boss idle sheets CPU check
-        run: node r96/qa/r1147/r1147-cpu-check.cjs && node r96/qa/r1160/r1160-cpu-check.cjs && node r96/qa/r1161/r1161-cpu-check.cjs
+        run: node r96/qa/r1147/r1147-cpu-check.cjs && node r96/qa/r1160/r1160-cpu-check.cjs && node r96/qa/r1161/r1161-cpu-check.cjs && node r96/qa/r1162/r1162-cpu-check.cjs
       - name: R700 seven-sins boss art audit (size-lock heights match real art, no light matte fringe on drawn art, clean copies keep the body, originals kept) check
         run: python r96/qa/r700/boss-art-check.py
       - name: R710 hero south idle 6 / hit 4 sheets (feet on the 226 line, stand height ±3%, no alpha residue, flicker ≤2× current, holds not applied) check

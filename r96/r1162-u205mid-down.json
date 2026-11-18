@@ -1,0 +1,35 @@
+{
+ "round": "R1162",
+ "request": "CX-P3 B1 u205-mid down4 r2 HOLD",
+ "files": [
+  {
+   "dots": "CX-P3_B1_u205-mid_down4_r2_HOLD.png",
+   "enemies": [
+    "u205-mid"
+   ],
+   "dir": "down",
+   "source": "Dots CX-P3_B1_u205-mid_down4_r2_HOLD.png (4번 칸 왼다리를 2번 칸 좌우 반전으로 손질)",
+   "sourceSha256": "40fc1d7d927e287d0bd60b62ddc2f714904c03ad166de72bfb16bc5256c5149f",
+   "toneGain": [
+    1.026,
+    1.061,
+    1.08
+   ],
+   "path": "assets/r1162/move/u205-mid-down.webp",
+   "size": [
+    1280,
+    320
+   ],
+   "bytes": 44760,
+   "sha256": "03ba2b02b20f5ec1e94e0e457f0551b02df609402b13b110c3ae7677d15cc139",
+   "use": "중간보스 아래 이동",
+   "applied": true,
+   "finalArt": false
+  },
+  {
+   "dots": "u205-mid 위·옆 걷기",
+   "applied": false,
+   "why": "Dots 시트 없음 → 엔진 그림 그대로"
+  }
+ ]
+}
