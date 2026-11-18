@@ -55409,8 +55409,8 @@
     },
     {
       "path": "survival-r600.js",
-      "bytes": 80640,
-      "sha256": "24a6e144b5bbf477693b79f1df1fe1249396358fd3a8cf7866f56758fdefddc2"
+      "bytes": 80798,
+      "sha256": "eff89c9ace4b2ff855ecd89828dea97cdd3e7e18070040d32d5b1180868f61b0"
     },
     {
       "path": "survival-samong-r1006.js",
@@ -55694,7 +55694,7 @@
     }
   ],
   "fileCount": 11138,
-  "totalBytes": 1345373678,
+  "totalBytes": 1345373836,
   "webHTMLSha256": "3f025cfa0377352ea7d069bb32cfbc3efb0ce0ea4c533a1df854050bda4ca58e",
   "largest": [
     {
