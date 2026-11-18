@@ -1,0 +1,16 @@
+PASS ① 기본형 뒤 피격 시트 = 새 r2 그림(assets/r1104b/persona-walk-rear.webp,assets/r1156/persona-hit-base-rear-r2.webp,assets/r1119/persona-hit-awake-rear.webp)
+PASS ① 새 그림이 있으면 예전 R1119 뒤 피격은 안 받음
+PASS ① 각성형 뒤·기본형 정면·옆은 그대로 R1119
+PASS ② 새 그림 실패 → 같은 시트를 예전 R1119 그림으로 다시 읽어 준비됨(assets/r1156/persona-hit-base-rear-r2.webp → assets/r1119/persona-hit-base-rear.webp, ready)
+PASS ③ 뒤 피격 → base-rear 4칸 차례(0,1,2,3, 12장)
+PASS ③ 끝나면 원래 그림
+PASS ③ 실제 좌표·넉백 없음
+PASS ③ 새 시트 준비됨
+PASS ④ 새 그림 2048×512 webp (2048×512)
+PASS ④ runtime-inputs 등록
+PASS ④ 출처 표(원본·해시) 맞음
+PASS ④ 예전 R1119 그림 경로는 대체용으로 남음
+PASS ⑤ runtime-text 사본 같음
+PASS ⑤ pages.yml CPU 검사 줄
+PASS ⑤ 공개 검사가 assets/r1156/ 를 봄
+ALL PASS

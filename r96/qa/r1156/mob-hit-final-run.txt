@@ -1,0 +1,29 @@
+PASS ① u203-e3-mech 맞은 순간 피격 시트 0칸 (assets/r1156/mob-hit/u203-e3-hit4.webp 0,0,256,256)
+PASS ① 피벗·보이는 키·좌우(왼쪽 보기)·몹 id 그대로
+PASS ② 70·110·100·100ms 4칸 차례 뒤 원래 그림 (0,0,1,1,1,2,2,2,2,3,3,3,b,b / 기대 0,0,1,1,1,2,2,2,2,3,3,3,b,b)
+PASS ① u203-e2-mech 맞은 순간 피격 시트 0칸 (assets/r1156/mob-hit/u203-e2-hit4.webp 0,0,256,256)
+PASS ① 피벗·보이는 키·좌우(왼쪽 보기)·몹 id 그대로
+PASS ② 70·110·100·100ms 4칸 차례 뒤 원래 그림 (0,0,1,1,1,2,2,2,2,3,3,3,b,b / 기대 0,0,1,1,1,2,2,2,2,3,3,3,b,b)
+PASS ① swamp-root-stalker-darkgreen-v2 맞은 순간 피격 시트 0칸 (assets/r1156/mob-hit/swamp-root-hit4.webp 0,0,373,320)
+PASS ① 피벗·보이는 키·좌우(왼쪽 보기)·몹 id 그대로
+PASS ② 70·110·100·100ms 4칸 차례 뒤 원래 그림 (0,0,1,1,1,2,2,2,2,3,3,3,b,b / 기대 0,0,1,1,1,2,2,2,2,3,3,3,b,b)
+PASS ③ 공격 중엔 원래 그림
+PASS ③ 죽으면 원래 그림
+PASS ③ 다른 몹은 그대로
+PASS ③ 피격 시트를 못 읽었으면 원래 그림 + 읽기 요청
+PASS ③ 0.25초 안 연타는 처음부터 다시 안 함
+PASS ④ 안쪽을 부르는 덧씌우기 안에 남음, 다시 감싸지 않음 (rewraps 1)
+PASS ④ 안쪽을 안 부르는 덧씌우기에 밀리면 다시 바깥으로
+PASS ④ 자기 몹만 가로채는 덧씌우기(__r374)가 나중에 감싸도 다시 바깥으로, 한 번만 (rewraps 2)
+PASS ④ 같은 프레임이 두 번 거쳐도 좌우가 뒤집히지 않음
+PASS ⑤ 끄기 설정 → 원래 그림
+PASS ⑥ runtime-text 사본 = client-source
+PASS ⑥ 스크립트 태그
+PASS ⑥ verify-r96-public.py 기대 목록
+PASS ⑥ manifest·inputs
+PASS ⑥ pages.yml CPU 검사 줄
+PASS ⑥ 자산 assets/r1156/mob-hit/u203-e3-hit4.webp 1024×256 등록
+PASS ⑥ 자산 assets/r1156/mob-hit/u203-e2-hit4.webp 1024×256 등록
+PASS ⑥ 자산 assets/r1156/mob-hit/swamp-root-hit4.webp 1492×320 등록
+PASS ⑥ 출처 표 3장
+ALL PASS
