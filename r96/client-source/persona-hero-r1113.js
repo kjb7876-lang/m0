@@ -10,7 +10,7 @@
  * 끄기: localStorage storyworld.r1113.personaHero = {"on":..., "off":true}. */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_PERSONA_HERO_R1113__)return;
-const REV='R1113-persona-hero-10-celestial-r1143-wer-r1144-basic-r1145',KEY='storyworld.r1113.personaHero',FIELD='personaHeroR1113',BASE='lauren';
+const REV='R1113-persona-hero-11-celestial-r1143-wer-r1144-basic-r1145-dots-r1152',KEY='storyworld.r1113.personaHero',FIELD='personaHeroR1113',BASE='lauren';
 const PROFILE=Object.freeze({name:'페르소나',title:'페르소나 · 순수악의',role:'HIDDEN · 9번째 영웅',color:'#cc3428',
  passive:'사몽 결전에서 쓰러뜨린 거울. 별의 기술을 언주빛으로 되비춥니다.',special:'내면의 소용돌이',
  portrait:'assets/rc133/art/awake-0.png',tags:['히든','언주','거울']});
@@ -138,6 +138,7 @@ const RGBA=/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d.eE+-]+)\s*)?\)
 function recolorStr(v){if(typeof v!=='string')return v;return v.replace(RGBA,(m,r,g,b,a)=>{if(!violet(+r,+g,+b))return m;const c=eonju(+r,+g,+b);return a==null?'rgb('+c.join(',')+')':'rgba('+c.join(',')+','+a+')';});}
 function recolorPaint(v){if(typeof v==='string')return recolorStr(v);if(v&&typeof v==='object'&&Array.isArray(v.stops))return {...v,stops:v.stops.map(st=>st&&typeof st==='object'?{...st,color:recolorStr(st.color)}:st)};return v;}
 const VEC_ID=/^r561:/;
+const DOTS_ART=/(^|\/)assets\/r1152\//;
 const HIT411=/^r411:hero-hit:/,R302_MARK=c=>c?.image?.__r302Path==='r302-tint';
 const HIT_ID=/^r101:\d+$/,HIT_ART=/\/r100\/sig-(hit|slash)-(violet|pale)\.webp/;
 // R1120: 픽셀 이펙트(R163) — 라우렌 특수기(R178 pvfx-warm-explosion 등)는 영웅 팔레트(보라)를 색조로 넘겨 구운 캔버스라 그림 필터가 안 닿는다 → play 로 넘기는 색조를 언주로.
@@ -181,7 +182,7 @@ function bake(c,tone='eonju'){const im=c.image;if(!im||typeof im!=='object'||(c.
   const id='r1140:'+tone+':'+(++bakeSerial)+':'+String(c.sourcePath||c.immutableTint?.path||im.__storyworldStaticTint?.path||'cv').replace(/^https?:\/\/[^/]+\//,'').slice(0,90);cv.__storyworldStaticSource={path:id};
   r={canvas:cv,path:id};bakeCount++;bakePx+=w*h;stats.bakedPx=bakePx;stats.baked=(stats.baked||0)+1;}catch(_){r=null;stats.bakeSkips=(stats.bakeSkips||0)+1;}
  store.set(im,r);return r;}
-function tint(cmds){let n=0;for(const c of cmds){if(!c||c.kind!=='image'||c.r1113tint)continue;if(!heroFx(c.owner,c))continue;const s=c.style&&typeof c.style==='object'?c.style:{};
+function tint(cmds){let n=0;for(const c of cmds){if(!c||c.kind!=='image'||c.r1113tint)continue;if(DOTS_ART.test(String(c.sourcePath||''))){c.r1113tint=true;continue;}/* R1152: 페르소나 전용 Dots 그림(언주·먹·흑적으로 그려 옴)은 다시 굽지 않는다 */if(!heroFx(c.owner,c))continue;const s=c.style&&typeof c.style==='object'?c.style:{};
   const ct=celToneOf(c.owner);if(ct&&/^r946:meteor:/.test(String(c.owner?.id||''))&&!CEL_ART.test(String(c.sourcePath||''))){c.r1113tint=true;continue;}/* R1143: 유성 궤도가 던지는 조형물 그림은 물들이지 않음 */const tone=ct||'eonju';if(ct)stats.celTints=(stats.celTints||0)+1;
   let b=null;try{b=bake(c,tone);}catch(e){fail(e);}
   if(b){if(typeof s.filter==='string'&&/grayscale\(/.test(s.filter)){const k=s.filter.replace(/grayscale\([^)]*\)\s*/g,'').trim();c.style={...s,filter:k||'none'};}/* R1143: 무채색 필터가 구운 색을 다시 지우지 않게 */c.image=b.canvas;c.mutable=false;c.sourcePath=b.path;c.immutableTint=b.canvas.__storyworldStaticSource;c.r1113tint=true;stats.bakedDraws=(stats.bakedDraws||0)+1;n++;continue;}
