@@ -843,6 +843,8 @@ jobs:
         run: node r96/qa/r1139b/r1139b-cpu-check.cjs
       - name: R1145 EGO hidden hero celestial follow-ups (R casts silver giant + abyss dwarf, ink moon triggers stellar repulse, white-red tint, EGO only) CPU check
         run: node r96/qa/r1145/r1145-cpu-check.cjs
+      - name: R1175 persona hidden hero sweeps every Lauren trace (R102 hit art, scene-owned violet, R409 outlined pixel FX, any Lauren art path) into vermilion CPU check
+        run: node r96/qa/r1175/r1175-cpu-check.cjs
       - name: R1157 EGO R summons a random hero for 7s (0.7s skill cooldowns, own chance passives, chained summons extend together) CPU check
         run: node r96/qa/r1157/r1157-cpu-check.cjs
       - name: R1155 EGO and persona own sound effects (numpy-synthesised; basic, Q/W/E/R, ink passives, celestial branches and ticks remapped only in hidden-hero form) CPU check

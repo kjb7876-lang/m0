@@ -10,7 +10,7 @@
  * 끄기: localStorage storyworld.r1113.personaHero = {"on":..., "off":true}. */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_PERSONA_HERO_R1113__)return;
-const REV='R1113-persona-hero-11-celestial-r1143-wer-r1144-basic-r1145-dots-r1152',KEY='storyworld.r1113.personaHero',FIELD='personaHeroR1113',BASE='lauren';
+const REV='R1113-persona-hero-11-celestial-r1143-wer-r1144-basic-r1145-dots-r1152-sweep-r1175',KEY='storyworld.r1113.personaHero',FIELD='personaHeroR1113',BASE='lauren';
 const PROFILE=Object.freeze({name:'페르소나',title:'페르소나 · 순수악의',role:'HIDDEN · 9번째 영웅',color:'#cc3428',
  passive:'사몽 결전에서 쓰러뜨린 거울. 별의 기술을 언주빛으로 되비춥니다.',special:'내면의 소용돌이',
  portrait:'assets/rc133/art/awake-0.png',tags:['히든','언주','거울']});
@@ -122,7 +122,15 @@ const LAUREN_FX=/^r106fx:[a-z]+:(164\.98\.255|120\.50\.200|214\.170\.255):/;
 const LAUREN_EDEN=/^r108eden:[a-z.]+#(\d+),(\d+),(\d+)\|/,LAUREN_ART=/\/lauren\/lauren-|\/fx\/lauren\//,EGO_AURA=/^r111:ego-(back|front)$/,LAUREN_ID=/:lauren:/;
 // R1140: 막기 방벽(r1027/barrier.webp — 은청색, 영웅 소유 테두리 복제 포함)·막기 빛(r111:guard-*, 금빛)·블링크 잔광(vfx/blink-afterimage.webp)도 형상일 때 언주로
 const GUARD_ART=/\/r1027\/barrier\.webp/,BLINK_ART=/\/vfx\/blink-afterimage\.webp/,GUARD_ID=/^r111:guard-(back|front)$/;
-function heroFx(o,c){if(!o||o.kind==='enemy'||o.kind==='contact'||o.kind==='shadow')return false;if(o.kind==='hero')return GUARD_ART.test(String(c?.sourcePath||''));
+// R1175 전수 조사(qa/r1175/audit.mjs, 환도 기준선과 비교): R102 영웅 적중 그림(r102:lauren|…)·장면 소유 라우렌 보라·R409 테두리가 영웅 소유로 다시 그린 픽셀 이펙트(pxf 아틀라스)가 색 그대로 남았다.
+//  안전망: 적·바닥이 아닌 명령이 라우렌 그림 경로(…lauren…, 영웅 꼬리표 ':hero:lauren' 은 빼고)를 그리면 형상일 때 늘 언주로 굽는다(새 라우렌 그림이 생겨도 새지 않게).
+const R102_LAUREN=/^r102:lauren\|/,PXF_OUTLINE=/^r409:outline:.*\/assets\/pxf-[^/]*\//,LAUREN_ANY=/lauren/i,OWN_TAG=/(^|:)hero:lauren(?=:|$)/g,DONE_PATH=/^r11\d\d:/;
+const srcOf=c=>String(c?.sourcePath||c?.immutableTint?.path||'');
+function laurenArt(c){const s=srcOf(c);return !DONE_PATH.test(s)&&LAUREN_ANY.test(s.replace(OWN_TAG,''));}
+function heroFx(o,c){if(!o||o.kind==='enemy'||o.kind==='contact'||o.kind==='shadow')return false;if(o.pxfSide==='enemy'||o.side==='enemy'||o.enemy===true)return false;
+ if(o.kind==='hero'){const s=srcOf(c);return GUARD_ART.test(s)||PXF_OUTLINE.test(s)||(laurenArt(c)&&!isLaurenBody(c));}/* 몸 그림은 바꿔 끼우기(swapBody·echoes)가 맡는다 — 색만 돌리지 않음 */
+ if(R102_LAUREN.test(srcOf(c))||laurenArt(c))return true;
+ if(o.kind==='scene'){const s=srcOf(c);return LAUREN_FX.test(s)||R302_MARK(c);}
  if(o.pxfSide!=='enemy'&&o.side!=='enemy'){if(GUARD_ID.test(String(o.id||'')))return true;const s0=String(c?.sourcePath||'');if(GUARD_ART.test(s0)||BLINK_ART.test(s0))return true;}if(o.pxfSide==='hero'||o.side==='hero')return true;if(o.pxfSide==='enemy'||o.side==='enemy')return false;const id=String(o.id||'');
  if(o.r101===true&&HIT_ID.test(id)&&HIT_ART.test(String(c?.sourcePath||'')))return true;/* R1143: 영웅 타격 불꽃(R101, 라우렌 보라·옅은 색) */
  if(o.r411===true&&o.enemy!==true&&HIT411.test(id))return true;if(o.kind==='effect'&&R302_MARK(c))return true;/* R1145: 기본 공격의 라우렌 흔적 — R411 영웅 적중 그림(hit-teleport 보랏빛 균열)·R302 가 라우렌 바이올렛으로 칠한 엔진 탄·착탄 사본 */
@@ -148,7 +156,7 @@ function pfxTint(o){if(!o||typeof o!=='object'||!o.tint||typeof o.tint!=='object
 function wrapPfx(){const X=G(()=>window.__STORYWORLD_PIXELFX_R163__,null);if(!X||X.__r1120||typeof X.play!=='function')return;
  const w={...X,__r1120:true,play:(n,x,y,o)=>{let q=o;try{q=pfxTint(o);}catch(e){fail(e);}return X.play(n,x,y,q);}};
  try{window.__STORYWORLD_PIXELFX_R163__=Object.freeze(w);}catch(e){fail(e);}}
-function vectors(cmds){let n=0;for(const c of cmds){if(!c||(c.kind!=='fill'&&c.kind!=='stroke')||c.r1113tint)continue;const o=c.owner;if(!o||!(VEC_ID.test(String(o.id||''))||heroFx(o,c)))continue;const s=c.style;if(!s||typeof s!=='object')continue;
+function vectors(cmds){let n=0;for(const c of cmds){if(!c||(c.kind!=='fill'&&c.kind!=='stroke')||c.r1113tint)continue;const o=c.owner;if(!o||!(VEC_ID.test(String(o.id||''))||(allyPass?allyMark(c):heroFx(o,c))))continue;const s=c.style;if(!s||typeof s!=='object')continue;
   const ct=celToneOf(o);if(ct){c.style={...s,fillStyle:tonePaint(s.fillStyle,ct),strokeStyle:tonePaint(s.strokeStyle,ct)};c.r1113tint=true;stats.celTints=(stats.celTints||0)+1;n++;continue;}
   c.style={...s,fillStyle:recolorPaint(s.fillStyle),strokeStyle:recolorPaint(s.strokeStyle)};c.r1113tint=true;n++;}stats.vecTints=(stats.vecTints||0)+n;return n;}
 // R1140 언주 명암 굽기: 색 돌리기(hue-rotate)는 밝은 심을 흰·분홍으로 남긴다(브라우저 기록기는 brightness·contrast·saturate·grayscale·hue-rotate 만 됨) →
@@ -182,7 +190,7 @@ function bake(c,tone='eonju'){const im=c.image;if(!im||typeof im!=='object'||(c.
   const id='r1140:'+tone+':'+(++bakeSerial)+':'+String(c.sourcePath||c.immutableTint?.path||im.__storyworldStaticTint?.path||'cv').replace(/^https?:\/\/[^/]+\//,'').slice(0,90);cv.__storyworldStaticSource={path:id};
   r={canvas:cv,path:id};bakeCount++;bakePx+=w*h;stats.bakedPx=bakePx;stats.baked=(stats.baked||0)+1;}catch(_){r=null;stats.bakeSkips=(stats.bakeSkips||0)+1;}
  store.set(im,r);return r;}
-function tint(cmds){let n=0;for(const c of cmds){if(!c||c.kind!=='image'||c.r1113tint)continue;if(DOTS_ART.test(String(c.sourcePath||''))){c.r1113tint=true;continue;}/* R1152: 페르소나 전용 Dots 그림(언주·먹·흑적으로 그려 옴)은 다시 굽지 않는다 */if(!heroFx(c.owner,c))continue;const s=c.style&&typeof c.style==='object'?c.style:{};
+function tint(cmds){let n=0;for(const c of cmds){if(!c||c.kind!=='image'||c.r1113tint)continue;if(DOTS_ART.test(String(c.sourcePath||''))){c.r1113tint=true;continue;}/* R1152: 페르소나 전용 Dots 그림(언주·먹·흑적으로 그려 옴)은 다시 굽지 않는다 */if(!(allyPass?allyMark(c):heroFx(c.owner,c)))continue;const s=c.style&&typeof c.style==='object'?c.style:{};
   const ct=celToneOf(c.owner);if(ct&&/^r946:meteor:/.test(String(c.owner?.id||''))&&!CEL_ART.test(String(c.sourcePath||''))){c.r1113tint=true;continue;}/* R1143: 유성 궤도가 던지는 조형물 그림은 물들이지 않음 */const tone=ct||'eonju';if(ct)stats.celTints=(stats.celTints||0)+1;
   let b=null;try{b=bake(c,tone);}catch(e){fail(e);}
   if(b){if(typeof s.filter==='string'&&/grayscale\(/.test(s.filter)){const k=s.filter.replace(/grayscale\([^)]*\)\s*/g,'').trim();c.style={...s,filter:k||'none'};}/* R1143: 무채색 필터가 구운 색을 다시 지우지 않게 */c.image=b.canvas;c.mutable=false;c.sourcePath=b.path;c.immutableTint=b.canvas.__storyworldStaticSource;c.r1113tint=true;stats.bakedDraws=(stats.bakedDraws||0)+1;n++;continue;}
@@ -193,7 +201,7 @@ function drop(cmds){let j=0;for(let i=0;i<cmds.length;i++){const c=cmds[i];if(c&
 // R1120 몸 복제: 몸을 바꾼 뒤에도 남는 라우렌 몸 그림(가림 유령·R409 테두리 복제·잔상·대시 몸 시트) → 바꾼 페르소나 칸을 몸과의 발 차이만큼 옮겨 쓴다(투명도·순서·열쇠는 그대로).
 const foot0=P=>[(P[2][0]+P[3][0])/2,(P[2][1]+P[3][1])/2];
 function echoes(cmds,sw){if(!sw||!sw.P0)return 0;const B=sw.c,f0=foot0(sw.P0);let n=0;
- for(const c of cmds){if(!c||c===B||c.kind!=='image'||c.r1113||!isLaurenBody(c))continue;const o=c.owner;if(o&&(o.kind==='enemy'||o.kind==='shadow'||o.kind==='contact'))continue;
+ for(const c of cmds){if(!c||c===B||c.kind!=='image'||c.r1113||!isLaurenBody(c))continue;const o=c.owner;if(o&&(o.kind==='enemy'||o.kind==='shadow'||o.kind==='contact'||o.side==='enemy'||o.pxfSide==='enemy'||o.enemy===true))continue;
   const P=c.points;if(!Array.isArray(P)||P.length!==4||!P.every(okPt))continue;const f=foot0(P),dx=f[0]-f0[0],dy=f[1]-f0[1];
   c.image=B.image;c.mutable=false;c.sourcePath=B.sourcePath;c.immutableTint=B.immutableTint;c.sourceRect=[...B.sourceRect];c.imageSize=[...B.imageSize];c.points=B.points.map(q=>[q[0]+dx,q[1]+dy]);c.r1113=true;n++;}
  stats.echoes=(stats.echoes||0)+n;return n;}
@@ -222,7 +230,15 @@ function wellCore(cmds){let n=0;const groups=new Map();
   delete cmd.paths;delete cmd.rule;delete cmd.lineWidth;add.push([base,cmd]);}
  let j=0;for(let i=0;i<cmds.length;i++){const c=cmds[i];if(c&&(c.kind==='fill'||c.kind==='stroke')&&CORE_ID.test(String(c.owner?.id||''))){const a=add.find(x=>x[0]===c);if(a){cmds[j++]=a[1];n++;}continue;}cmds[j++]=c;}cmds.length=j;
  stats.cores=(stats.cores||0)+n;return n;}
-function process(cmds){if(!Array.isArray(cmds))return 0;if(!formActive())return 0;prewarm();bakeBudget=1;let n=0;try{drop(cmds);}catch(e){fail(e);}try{const sw=swapBody(cmds);if(sw){n++;n+=echoes(cmds,sw);n+=addGlow(cmds,sw);}}catch(e){fail(e);}try{n+=skills(cmds);}catch(e){fail(e);}try{n+=wellCore(cmds);}catch(e){fail(e);}try{n+=tint(cmds);}catch(e){fail(e);}try{n+=vectors(cmds);}catch(e){fail(e);}return n;}
+// R1175 배치 페르소나(무한생존 R720, 조종 영웅은 라우렌이 아님): 배치 몸은 R1148 formFx 가 바꾸지만, 그 몸이 남긴 탄·적중·스킬 그림은 프레임 전체에서 그려져 라우렌 색 그대로였다.
+//  그때는 라우렌 것이 분명한 명령(라우렌 그림 경로·r102:lauren·라우렌 보라 r106fx·r561 중력·r946 천체)만 언주로 바꾼다(조종 영웅 것은 건드리지 않음).
+const HD=()=>G(()=>window.__STORYWORLD_HERO_DEFENSE_R720__,null);
+function allyOnly(){const p=pl();if(!p||p.hero===BASE)return false;return G(()=>HD()?.has?.('persona')===true,false);}
+const ALLY_ID=/^r561:|^r946:|^r102:|(^|:)lauren(:|$)/;
+function allyMark(c){if(!c)return false;const o=c.owner||{};if(o.kind==='enemy'||o.side==='enemy'||o.pxfSide==='enemy'||o.enemy===true)return false;const s=srcOf(c);return R102_LAUREN.test(s)||laurenArt(c)||LAUREN_FX.test(s)||ALLY_ID.test(String(o.id||''));}
+let allyPass=false;
+function processAlly(cmds){const part=cmds.filter(allyMark);if(!part.length)return 0;allyPass=true;let n=0;try{prewarm();bakeBudget=1;try{n+=skills(part);}catch(e){fail(e);}try{n+=tint(part);}catch(e){fail(e);}try{n+=vectors(part);}catch(e){fail(e);}}finally{allyPass=false;}stats.allyFx=(stats.allyFx||0)+n;return n;}
+function process(cmds){if(!Array.isArray(cmds))return 0;if(!formActive())return allyOnly()?processAlly(cmds):0;prewarm();bakeBudget=1;let n=0;try{drop(cmds);}catch(e){fail(e);}try{const sw=swapBody(cmds);if(sw){n++;n+=echoes(cmds,sw);n+=addGlow(cmds,sw);}}catch(e){fail(e);}try{n+=skills(cmds);}catch(e){fail(e);}try{n+=wellCore(cmds);}catch(e){fail(e);}try{n+=tint(cmds);}catch(e){fail(e);}try{n+=vectors(cmds);}catch(e){fail(e);}return n;}
 // ---- 렌더러 감싸기(prototype·인스턴스, 한 render 에 한 번) ----
 let depth=0;
 const wrapFn=fn=>{if(fn.__r1113)return fn;const w=function(frame){if(depth===0){try{if(frame&&Array.isArray(frame.commands))process(frame.commands);}catch(e){fail(e);}}depth++;try{return fn.apply(this,arguments);}finally{depth--;}};w.__r1113=true;return w;};
@@ -231,7 +247,7 @@ const wrapped=new WeakSet();
 function wrapInst(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(r&&Object.prototype.hasOwnProperty.call(r,'render')&&typeof r.render==='function'&&!wrapped.has(r)){wrapped.add(r);r.render=wrapFn(r.render);}}catch(e){fail(e);}}
 function registerGameHooks() {
  window.__STORYWORLD_POST_HOOKS__.register('__r1113', {
-  tick() { watch(); if (formActive() && hasDoc()) hudName(); },
+  tick() { watch(); if (formActive() && hasDoc()) hudName(); if (unlocked() && pl()?.hero === BASE) prewarm(); /* R1175: 라우렌 몸(형상 바탕)일 때 미리 읽어 둔다 — 형상을 켠 첫 순간 그림이 없어 라우렌 몸이 비치던 것 */ },
   serializeSave(data) { if (data?.player) data.player[FIELD] = formActive(); },
   restoreSave(raw) {
    const p = pl();
@@ -312,7 +328,7 @@ function relabel(v){if(typeof v!=='string'||!v)return v;let t=v;if(LABEL_RX.test
  if(CEL_TEST.test(t))t=t.replace(CEL_RX,(m,p,n)=>CEL_PREFIX+n);return t;}
 // 해금 알림(R1025 '특수 패시브 해금 · …') 같은 화면 알림 글도 형상일 때만 같은 이름으로. 한 번만 감싼다.
 let toastWrapped=false;function wrapToast(){if(toastWrapped)return;const f=G(()=>typeof toast==='function'?toast:null,null);if(!f)return;toastWrapped=true;
- const w=function(text,...a){let t=text;try{if(typeof t==='string'&&CEL_TEST.test(t)&&formActive())t=relabel(t);}catch(e){fail(e);}return f.call(this,t,...a);};w.__r1143=true;try{toast=w;}catch(e){fail(e);}}
+ const w=function(text,...a){let t=text;try{if(typeof t==='string'&&(CEL_TEST.test(t)||LABEL_RX.test(t))&&formActive())t=relabel(t);/* R1175: 스킬 습득 알림(R663) 등의 라우렌 기술 이름도 */}catch(e){fail(e);}return f.call(this,t,...a);};w.__r1143=true;try{toast=w;}catch(e){fail(e);}}
 function relabelIn(root){const rt=root?String(root.textContent||''):'';if(!root||!(LABEL_RX.test(rt)||CEL_TEST.test(rt))||typeof document.createTreeWalker!=='function')return 0;let n=0;
  const tw=document.createTreeWalker(root,4);for(let x=tw.nextNode();x;x=tw.nextNode()){const v=x.nodeValue,t=relabel(v);if(t!==v){x.nodeValue=t;n++;}}stats.relabels=(stats.relabels||0)+n;return n;}
 // P 창 등(영웅 선택창은 라우렌 칸이 따로 있으므로 무대만 mark 에서 바꾼다)
