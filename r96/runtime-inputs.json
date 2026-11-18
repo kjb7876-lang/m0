@@ -10521,6 +10521,8 @@
     "assets/r1174/persona-bust.webp",
     "assets/r1174/persona-orbs8.webp",
     "assets/r1174/persona-sigil12.webp",
+    "assets/r1176/ego2d/discard-right.webp",
+    "assets/r1176/ego2d/discard-rear.webp",
     "assets/r1168/index.json",
     "assets/r1168/mob-hit/cult05-hit4.webp",
     "assets/r1177/ash-crimson-moths-16.webp",
@@ -11611,5 +11613,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "2418210aa446647430d0dff20173eaca27763a62a38f9f9f038fd68728aec0b5"
+  "runtimeManifestSHA256": "7ec041df60739101ae9c5da9f161a3c77f4fb024edf53ee21b5b9b6f4046dfc0"
 }
