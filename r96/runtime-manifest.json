@@ -54849,8 +54849,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6581890,
-      "sha256": "1fc3552b5542bb54d913d4fb6b50b5000e49db8b047e70bf7c2e0321af857cfd"
+      "bytes": 6581939,
+      "sha256": "6336c0a0838fc210e44719473f2a8cf3c3ab40395960ede7a23e176543be802b"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -55309,8 +55309,8 @@
     },
     {
       "path": "passive-cutin-r1033.js",
-      "bytes": 19537,
-      "sha256": "a41f9ed07a387bbc1dcc135f38828036e063dca2a219d84bae78ba0b336d3b7d"
+      "bytes": 20327,
+      "sha256": "c0daf9382aa050ebf2ffbebc0295f7ed47535dfde51675dc418f5de048f374fc"
     },
     {
       "path": "passive-growth-r971.js",
@@ -55391,6 +55391,11 @@
       "path": "perf7-r1043.js",
       "bytes": 14719,
       "sha256": "598cd5f32b1af786c019b6bf2b218bef1141f49c0b2d3c54bd3345f7af3dbef9"
+    },
+    {
+      "path": "persona-cutin-r1174.js",
+      "bytes": 15478,
+      "sha256": "973867093b1811b06af807f01ef24e7d127d2dd9b23f8be302183003277c045f"
     },
     {
       "path": "persona-gravity-r1096.js",
@@ -56238,9 +56243,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11247,
-  "totalBytes": 1352902491,
-  "webHTMLSha256": "1fc3552b5542bb54d913d4fb6b50b5000e49db8b047e70bf7c2e0321af857cfd",
+  "fileCount": 11248,
+  "totalBytes": 1352918808,
+  "webHTMLSha256": "6336c0a0838fc210e44719473f2a8cf3c3ab40395960ede7a23e176543be802b",
   "largest": [
     {
       "path": "index.html",

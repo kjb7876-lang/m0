@@ -19,7 +19,7 @@
 //  렉: 조종 영웅의 그림만 미리 읽음(상반신 1장 + 시트 0~2장, 영웅이 바뀔 때만), DOM 노드 9개 이하, 그리기 루프 없음. 모션 줄이기 설정이면 미끄러짐 없이 나타났다 사라짐.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_PASSIVE_CUTIN_R1033__)return;
-const REV='R1033-passive-cutin-3',KEY='storyworld.r1033.cutin',MS=1250,GAP=Object.freeze({story:8,survival:20});
+const REV='R1033-passive-cutin-3-r1174',KEY='storyworld.r1033.cutin',MS=1250,GAP=Object.freeze({story:8,survival:20});
 const G=(f,d)=>{try{const v=f();return v===undefined?d:v;}catch(_){return d;}};
 const BUST=h=>'assets/r108/heroes/'+h+'.webp',KEY_P='storyworld.r1033.portrait';/* 영웅 선택 창 초상화(R108, 384×512) — 사용자 13:53Z "영웅 고르는 창에 나오는 간지나는 초상화 기준" */
 // 시트 한 칸(Dots 시트 재사용): cols×rows 칸, f = 보여 줄 칸, ar = 칸 가로/세로
@@ -108,13 +108,16 @@ function fire(hero,kind,owner,extra){try{
   if(isBody(owner)){stats.skipped.body++;return false;}
   if(scene()){stats.skipped.scene++;return false;}
   const t=now();if(Number.isFinite(t)&&t-lastAt<gap()){stats.skipped.gap++;return false;}
+  /* R1174: 페르소나 형상(라우렌 몸)이면 라우렌 초상·보라 띠 대신 페르소나 전용 컷인으로 넘긴다(거름·빈도 시계는 여기 것 그대로). */
+  const PC=hero==='lauren'?G(()=>window.__STORYWORLD_PERSONA_CUTIN_R1174__,null):null;
+  if(PC&&G(()=>PC.persona(owner),false)){if(!PC.show(kind)){stats.skipped.dom++;return false;}if(Number.isFinite(t))lastAt=t;stats.shown++;last={hero:'persona',kind,cast:['persona']};return true;}
   const cast=H.cast(extra||null);if(!show(hero,cast)){stats.skipped.dom++;return false;}
   if(Number.isFinite(t))lastAt=t;stats.shown++;last={hero,kind,cast:cast.map(c=>c.join(':'))};return true;
  }catch(e){fail(e);return false;}}
 function allow(hero){return on();}
 // ---- 조종 영웅 그림만 미리 읽기(영웅이 바뀔 때만) ----
 const warmed=new Set();
-function warm(){try{const h=G(()=>typeof player==='object'&&player&&!isBody(player)?player.hero:null,null);if(!h||!HEROES_ALL.includes(h)||warmed.has(h))return;warmed.add(h);
+function warm(){try{const h=G(()=>typeof player==='object'&&player&&!isBody(player)?player.hero:null,null);if(!h||!HEROES_ALL.includes(h)||warmed.has(h)||(h==='lauren'&&personaForm()))return;warmed.add(h);
   const list=[BUST(h)];if(HEROES[h]&&on())for(const [k,a] of HEROES[h].cast({heroes:['slayer']}))if(k==='deco'&&SHEET[a])list.push(SHEET[a].path);else if(k==='ally'||k==='shade')list.push(BUST(a));
   if(typeof Image==='function')for(const p of new Set(list)){const im=new Image();im.decoding='async';im.src=U(p);stats.warmed++;}build();}catch(e){fail(e);}}
 // ---- 설정 창 한 줄 ----
@@ -128,11 +131,13 @@ function row(){const d=G(()=>typeof document!=='undefined'?document:null,null);i
 const portraitOn=()=>G(()=>localStorage.getItem(KEY_P),null)!=='0';
 // 사몽 각성: 도는 동안만 각성 그림 경로를 초상화로 바꿔 넘기고(#cutin·sw8 둘 다 이 경로를 읽음) 끝나면 되돌린다
 function wrapAwake(){try{if(typeof showAwakening!=='function'||showAwakening.r1033)return;const base=showAwakening;
-  const w=function(...a){let art=null,old;try{const h=G(()=>player.hero,null);art=G(()=>heroArt[h],null);if(art&&HEROES_ALL.includes(h)&&portraitOn()&&!egoForm()){old=art.awakening;art.awakening=BUST(h);}else art=null;}catch(e){fail(e);art=null;}
+  const w=function(...a){let art=null,old;try{const h=G(()=>player.hero,null);art=G(()=>heroArt[h],null);if(art&&HEROES_ALL.includes(h)&&portraitOn()&&!egoForm()&&!personaForm()){old=art.awakening;art.awakening=BUST(h);}else art=null;}catch(e){fail(e);art=null;}
    try{return base.apply(this,a);}finally{if(art){art.awakening=old;try{mark(G(()=>player.hero,''));}catch(e){fail(e);}}}};
   w.r1033=true;showAwakening=w;}catch(e){fail(e);}}
 // R1112: 히든 EGO 형상(몸은 환도)일 때는 환도 초상으로 바꾸지 않는다 — EGO 컷인 원화는 R1046 이 넣는다(RC151 변신 중은 그쪽 컷인).
 const egoForm=()=>G(()=>!!window.__STORYWORLD_EGO_SOVEREIGN_R1046__?.formActive?.()&&!(typeof ego151!=='undefined'&&ego151?.active),false);
+// R1174: 페르소나 형상(라우렌 몸)일 때도 라우렌 초상으로 바꾸지 않는다 — 페르소나 각성 그림은 persona-cutin-r1174 가 넣는다.
+const personaForm=()=>G(()=>!!(player&&player.hero==='lauren'&&player.personaHeroR1113===true),false);
 const HEROES_ALL=['seoha','hunter','slayer','michaela','gunner','lauren','neon','hwando'];
 // 마스크 표식: #awakeImage 는 지금 그림이 초상화일 때만(EGO 컷인 그림 등은 그대로). 가운데 sw8 그림은 영웅 쪽(data-side=hero)일 때만 CSS 가 먹고,
 //  영웅 쪽은 언제나 각성 그림 경로(= 이 동안 초상화)를 쓰므로 표식을 붙여 둔다(줄 서 있다가 나중에 뜨는 경우도 같은 그림).
