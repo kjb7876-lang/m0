@@ -1,0 +1,39 @@
+FAIL ① celestialTone 함수 있음
+FAIL ② 천체 공명 → (진) 천체 공명 (천체 공명)
+FAIL ② 항성 반발 → (진) 항성 반발 (항성 반발)
+FAIL ② 은빛 거성 → (진) 은빛 거성 (은빛 거성)
+FAIL ② 심연 왜성 → (진) 심연 왜성 (심연 왜성)
+FAIL ② 쌍성 소멸 → (진) 쌍성 소멸 (쌍성 소멸)
+FAIL ② 유성 궤도 → (진) 유성 궤도 (유성 궤도)
+FAIL ② 되풀이해도 (진) 한 번만 (천체 공명 1/7)
+FAIL ② 한 줄에 여럿
+PASS ② 다른 영웅 패시브 이름은 그대로
+FAIL ② celestialNames 표
+PASS ③ 라우렌 본인 알림은 그대로
+FAIL ③ 형상이면 알림에 (진) (특수 패시브 해금 · 항성 반발 (Lv.5))
+PASS ③ 무관한 알림 그대로
+PASS ④ 은빛 거성 시트 → 언주 굽기 (r1140:eonju:1:m0/assets/r946/lauren-red.webp)
+FAIL ④ 심연 왜성 구·원반 시트 → 흑 굽기 (r1140:eonju:2:m0/assets/r946/lauren-blue.webp)
+FAIL ④ 흑 굽기 화소: 무채색·어둡다·알파 그대로 (95,21,16,255)
+FAIL ④ 쌍성 소멸·유성 궤도 고리 시트 → 검빨 굽기 (r1140:eonju:4:m0/assets/r946/lauren-violet.webp)
+FAIL ④ 검빨 굽기 화소: 붉고 어둡다 (167,41,32)
+PASS ④ 구운 그림에는 색 필터를 겹치지 않음
+PASS ④ 자리·크기·시트 칸은 그대로(모양 그대로, 색만)
+FAIL ⑤ 유성 궤도가 던지는 조형물 그림은 물들이지 않음
+FAIL ④ 심연 왜성 선·채우기 → 흑 (244,149,118)
+FAIL ④ 쌍성 소멸 꼬리·유성 폭발 고리 → 검빨 (210,65,51 / 232,226,244)
+FAIL ④ 항성 반발 고리 → 언주 계열(붉은 쪽) (232,226,244)
+PASS ④ 알파 그대로
+PASS ④ 한 번 구운 그림은 다시 굽지 않음
+PASS ④ 오류 없음 (undefined)
+PASS ④ 형상 끄면(라우렌 본인) 그림·색 그대로
+FAIL ⑥ 굽지 못하면 흑은 무채색 필터 (hue-rotate(100deg) saturate(1.5) brightness(.78) contrast(1.15))
+FAIL ⑥ 검빨은 언주 색 돌리기에 어둡게를 더함 (hue-rotate(100deg) saturate(1.5) brightness(.78) contrast(1.15))
+PASS ⑥ 기록기가 받는 필터 함수만
+PASS ⑦ lauren-celestial-r946.js 는 그대로(판·수치)
+PASS ⑦ 라우렌 쪽 이름 표 그대로
+PASS ⑧ persona-hero-r1113.js runtime-text 사본 = client-source
+PASS ⑧ lauren-celestial-r946.js runtime-text 사본 = client-source
+PASS ⑧ pages.yml CPU 검사 줄
+FAIL ⑧ 판 이름
+FAILED 22
