@@ -48,6 +48,9 @@ const HIT_ASSETS=['assets/r1119/persona-hit-base-front.webp','assets/r1119/perso
 const DEATH_ASSETS=['assets/r1119/persona-death-base.webp','assets/r1119/persona-death-awake.webp'];
 // 옆 = 사용자 확정(11-17 04:56Z) 한 발 후퇴 6컷: 몸 전체가 뒤(왼쪽 보기 기준 화면 오른쪽)로 약 8px 밀린 채 끝남 → 끝난 뒤 0.15초 동안 원래 그림을 그 자리에서 0 으로 되돌림(그림만, 실제 좌표·넉백 없음)
 for(const src of HIT_ASSETS){const m=/persona-hit-(\w+)-(\w+)\.webp$/.exec(src),side=m[2]==='side';SH['hit-'+m[1]+'-'+m[2]]={src,ax:256,ground:477,cw:512,ch:512,frames:side?6:4,k:1,ms:side?SIDE_MS:HIT_MS,settle:side?8:0};}
+// R1156 Dots CX-0136 A5 r2(사용자 2026-11-18 08:22Z "닷츠랑 상호작용해서 필요한 자산생성및 개선적용"): 기본형 뒤 피격 = 어깨·후드·망토 반동을 키운 새 그림(원본 6칸 중 2·3·5·6칸, 지지발 아랫단 맞춤 손질, scripts/r1156-persona-rear-hit.py).
+// 칸 수·시간·피벗은 그대로. 새 그림을 못 읽으면 예전 R1119 그림(fallback)으로 다시 읽는다.
+{const D=SH['hit-base-rear'];if(D){D.fallback=D.src;D.src='assets/r1156/persona-hit-base-rear-r2.webp';}}
 for(const src of DEATH_ASSETS){const m=/persona-death-(\w+)\.webp$/.exec(src);SH['death-'+m[1]]={src,ax:96,ground:218.5,cw:192,ch:256,frames:DEATH_N,k:2};}
 const HITDIR=[['front',1],['front',1],['side',1],['rear',1],['rear',1],['rear',-1],['side',-1],['front',-1]];
 // 구슬 자리(원래 그림 344×400, 실측: 붉은 구슬 밀집 창): 0 정면·2 왼쪽·4 뒤(몸에 가림 — 손 쪽 뒤로 옅게)·6 오른쪽(=왼쪽 뒤집기)
@@ -68,7 +71,7 @@ function loadSheet(k){const S=SS[k];if(S.state!=='idle'||!hasDom())return;S.stat
   img.onload=()=>{try{const D=SH[k],raw=[];for(let f=0;f<D.frames;f++){const cv=canvas(D.cw,D.ch),g=cv.getContext('2d');g.drawImage(img,f*D.cw,0,D.cw,D.ch,0,0,D.cw,D.ch);
      const path=pathOf(k,f,'raw');cv.__storyworldStaticSource={path};raw.push({canvas:cv,w:D.cw,h:D.ch,pad:0,path});}
     S.raw=raw;S.state='ready';stats.sheets++;}catch(e){S.state='failed';fail(e);}};
-  img.onerror=()=>{S.state='failed';};img.src=abs(SH[k].src);}catch(e){S.state='failed';fail(e);}}
+  img.onerror=()=>{const F=SH[k].fallback;if(F&&!S.fellBack){S.fellBack=true;stats.fallbacks=(stats.fallbacks||0)+1;img.src=abs(F);return;}S.state='failed';};img.src=abs(SH[k].src);}catch(e){S.state='failed';fail(e);}}
 // 수묵: R1097 inkify 로 칸마다 한 번 굽기(0.03초 간격으로 하나씩)
 const inkQ=[];let inkBusy=false;
 function inkMod(){try{const m=window.__STORYWORLD_PERSONA_INK_R1097__;return m&&typeof m.inkify==='function'?m:null;}catch(_){return null;}}
