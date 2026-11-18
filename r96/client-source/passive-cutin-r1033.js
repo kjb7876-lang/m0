@@ -131,7 +131,7 @@ function row(){const d=G(()=>typeof document!=='undefined'?document:null,null);i
 const portraitOn=()=>G(()=>localStorage.getItem(KEY_P),null)!=='0';
 // 사몽 각성: 도는 동안만 각성 그림 경로를 초상화로 바꿔 넘기고(#cutin·sw8 둘 다 이 경로를 읽음) 끝나면 되돌린다
 function wrapAwake(){try{if(typeof showAwakening!=='function'||showAwakening.r1033)return;const base=showAwakening;
-  const w=function(...a){let art=null,old;try{const h=G(()=>player.hero,null);art=G(()=>heroArt[h],null);if(art&&HEROES_ALL.includes(h)&&portraitOn()&&!egoForm()&&!personaForm()){old=art.awakening;art.awakening=BUST(h);}else art=null;}catch(e){fail(e);art=null;}
+  const w=function(...a){let art=null,old;try{const h=G(()=>player.hero,null);art=G(()=>heroArt[h],null);if(art&&HEROES_ALL.includes(h)&&!personaForm()&&portraitOn()&&!egoForm()){old=art.awakening;art.awakening=BUST(h);}else art=null;}catch(e){fail(e);art=null;}
    try{return base.apply(this,a);}finally{if(art){art.awakening=old;try{mark(G(()=>player.hero,''));}catch(e){fail(e);}}}};
   w.r1033=true;showAwakening=w;}catch(e){fail(e);}}
 // R1112: 히든 EGO 형상(몸은 환도)일 때는 환도 초상으로 바꾸지 않는다 — EGO 컷인 원화는 R1046 이 넣는다(RC151 변신 중은 그쪽 컷인).
