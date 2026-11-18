@@ -12093,6 +12093,21 @@
       "sha256": "8aa7194697512b1fd43d594840c24af3d24aefac2c36120969d743e28560cb11"
     },
     {
+      "path": "assets/r1179/mobs/index.json",
+      "bytes": 1586,
+      "sha256": "c39785329cabd8be9e36fe8847503c067eb7d6c104a55a8a89e1f45fd04b3b13"
+    },
+    {
+      "path": "assets/r1179/mobs/m077.webp",
+      "bytes": 232898,
+      "sha256": "47765b26db4ebd6c153b688d36cfdd7f68ba208be19c40963eb67e2dcb44da66"
+    },
+    {
+      "path": "assets/r1179/mobs/m081.webp",
+      "bytes": 266684,
+      "sha256": "2dccd110b916014840668d4500daeb8e93f35a60a025c41715283e56ecf5fb45"
+    },
+    {
       "path": "assets/r118/clean/assets/visual-test/hospital-boss-motion-r53.png",
       "bytes": 1049216,
       "sha256": "73575940823b274dbd5d0d8425fa899b316294d0493fed5fd3a54a2937d1f320"
@@ -54849,8 +54864,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6581890,
-      "sha256": "1fc3552b5542bb54d913d4fb6b50b5000e49db8b047e70bf7c2e0321af857cfd"
+      "bytes": 6581933,
+      "sha256": "6cae5aadda60ea48378bf25ee8acaf68ecae545df6acafb3a81d6f8a6955bfb0"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -55021,6 +55036,11 @@
       "path": "midboss-puppet-r981.js",
       "bytes": 10677,
       "sha256": "be18dc7734aa236a945be7137f0fc4cb33c00d3d03b44a4f32c5098e42a38966"
+    },
+    {
+      "path": "mob-art-r1179.js",
+      "bytes": 3410,
+      "sha256": "1a6c7eae0efc806fd2977f863522a74d652be4c824d6e88868ab0557da9ef96b"
     },
     {
       "path": "mob-art-r290.js",
@@ -56238,9 +56258,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11247,
-  "totalBytes": 1352902491,
-  "webHTMLSha256": "1fc3552b5542bb54d913d4fb6b50b5000e49db8b047e70bf7c2e0321af857cfd",
+  "fileCount": 11251,
+  "totalBytes": 1353407112,
+  "webHTMLSha256": "6cae5aadda60ea48378bf25ee8acaf68ecae545df6acafb3a81d6f8a6955bfb0",
   "largest": [
     {
       "path": "index.html",
