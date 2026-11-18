@@ -10375,7 +10375,34 @@
     "assets/r1153/sigil-slayer.webp",
     "assets/r1153/slayer-brand.webp",
     "assets/r1153/status-icons.webp",
-    "assets/r1153/status-overlay.webp"
+    "assets/r1153/status-overlay.webp",
+    "assets/r1147/bosses/b07-idle6.webp",
+    "assets/r1147/bosses/a11-idle6.webp",
+    "assets/r1147/bosses/dist06-idle6.webp",
+    "assets/r1147/bosses/u202-idle6.webp",
+    "assets/r1147/bosses/dist00-idle6.webp",
+    "assets/r1147/bosses/b07-hit4.webp",
+    "assets/r1147/bosses/a11-hit4.webp",
+    "assets/r1147/bosses/dist00-hit4.webp",
+    "mob-hit-r1156.js",
+    "assets/r1156/persona-hit-base-rear-r2.webp",
+    "assets/r1156/mob-hit/u203-e2-hit4.webp",
+    "assets/r1156/mob-hit/swamp-root-hit4.webp",
+    "assets/r1156/mob-hit/u203-e3-hit4.webp",
+    "assets/r1156/index.json",
+    "assets/r1152/e-ember.webp",
+    "assets/r1152/index.json",
+    "assets/r1152/laser-body.webp",
+    "assets/r1152/laser-end.webp",
+    "assets/r1152/laser-start.webp",
+    "assets/r1152/r-orb.webp",
+    "assets/r1152/r-tail.webp",
+    "assets/r1152/w-chain.webp",
+    "assets/r1152/w-hit.webp",
+    "assets/r1152/w-mark.webp",
+    "assets/r946/lauren-boom.webp",
+    "assets/r946/lauren-repulse.webp",
+    "assets/r946/lauren-tail.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11450,5 +11477,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "1997bfe39b1477e20bb04e1a261204fe4ced031e74be0b2c7c84ce8ae94957b4"
+  "runtimeManifestSHA256": "744f4d1e33c37d89435677224ba57039a6e6b1364fc5532fe8d44b22c49debfa"
 }
