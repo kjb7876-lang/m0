@@ -420,7 +420,7 @@ function extendGuide(){if(player.moving||(typeof route!=='undefined'&&route?.len
  const d=Math.hypot(g.x-player.x,g.y-player.y);
  if(g.kind==='enemy'||g.kind==='boss'){const e=(room.enemies||[]).find(v=>v.hp>0&&Math.abs(v.x-g.x)<.01&&Math.abs(v.y-g.y)<.01);if(e&&d<8&&typeof clearLine==='function'&&clearLine(player,e)){command=e.id;target=e.id;stats.guideActs++;return;}}
  if(chasePackGoal(g))return;
- if(d<=1.1){if(g.kind==='objective'&&typeof interact==='function')interact();else if(g.kind==='exit'&&typeof travel==='function'){const dir=window.__STORYWORLD_REGION_ROUTES__?.activeDirection?.();if(dir)guideTravel(dir);}stats.guideActs++;return;}
+ if(d<=1.1){if(g.kind==='objective'&&typeof interact==='function')interact();else if(g.kind==='exit'&&typeof travel==='function'&&!window.__STORYWORLD_PORTAL_INTERACTION_R83__){const dir=window.__STORYWORLD_REGION_ROUTES__?.activeDirection?.();if(dir)guideTravel(dir);}stats.guideActs++;return;}// R1132: 포탈 건너기는 R83(사람 C, R1131 자동 통과)이 정한다 — 이 바깥 감싸기에서 travel 을 부르면 R83 대기를 건너뛴다
  const p=POL()?.navPath?.(player,g);if(p?.length>1){route=p.slice(1).map(q=>({x:q.x,y:q.y}));command=null;stats.guideNav++;}}
 // World-ward rooms (R78 phases: route → rally → door → boss → exit) are outside the R75
 // guide's view, so there the compass goal drives the step instead.
