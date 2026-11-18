@@ -22,7 +22,7 @@
 //  끄기: localStorage 'storyworld.r720.heroDefense'='0' (창·보상·배치가 모두 꺼진다).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_HERO_DEFENSE_R720__)return;
-const REV='R720-hero-defense-6',KEY='storyworld.r720.heroDefense';
+const REV='R720-hero-defense-7-r1148',KEY='storyworld.r720.heroDefense';
 let on=true;try{if(localStorage.getItem(KEY)==='0')on=false;}catch(_){}
 const stats={opens:0,buys:0,places:0,moves:0,upgrades:0,swaps:0,hits:0,rewards:0,clears:0,resets:0,draws:0,heroDraws:0,errors:0,casts:{basic:0,q:0,w:0,e:0,r:0}};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
@@ -36,7 +36,22 @@ const MAX=Object.freeze({slots:4,range:5,radius:5,level:10});
 const STICK=1.4,HYST=.8,FACE_DZ=.4,MIN_STEP=.05,SIDE_HOLD=.6;/* R1050: 표적 고정 칸·거리 히스테리시스 칸·좌우 무감대(화면 가로 칸, R1053 시선과 같은 0.4) */
 const RANGE_STEP=.6,RADIUS0=1.6,RADIUS_STEP=.8,CORE_GAP=1.2,SLOT_GAP=.9,SPEED=3.4,EDGE=.8;
 const heroes=H=>H||G(()=>HEROES,{});
-function order(H){return Object.keys(heroes(H));}
+// R1148(사용자 2026-11-18 07:35Z "무한생존모드에서 영웅배치 칸에서 777그냥 누르면 히든영웅에고 랑 페르소나영웅 추가되고 배치및 전환 가능하게 버그없이 서사순서상관없이"):
+//  히든 영웅 EGO(환도 위 형상 R1046)·페르소나(라우렌 위 형상 R1113)를 배치 목록의 '형상 영웅'으로 둔다. 배치 id 는 'ego'·'persona', 몸은 원래 영웅(hero)+형상 표식(field).
+//  해금은 각 형상 모듈의 unlocked() 를 그대로 따른다(배치 창 777·영웅창 777·페르소나 격파 모두 같은 저장). 같은 몸(환도↔EGO, 라우렌↔페르소나)은 조종·배치에 동시에 두지 않는다
+//  — 영웅별 덧씌우기의 전역 상태가 한 몸 것이기 때문(R720-4). 교대·엔진 영웅 창 전환은 같은 몸 자리와 맞바꾼다.
+const FORMS=Object.freeze({ego:Object.freeze({base:'hwando',field:'egoSovereignR1046',api:'__STORYWORLD_EGO_SOVEREIGN_R1046__',name:'EGO',color:'#c8323f'}),
+ persona:Object.freeze({base:'lauren',field:'personaHeroR1113',api:'__STORYWORLD_PERSONA_HERO_R1113__',name:'페르소나',color:'#cc3428'})});
+const isForm=id=>typeof id==='string'&&Object.prototype.hasOwnProperty.call(FORMS,id);
+const formApi=id=>isForm(id)?G(()=>window[FORMS[id].api],null):null;
+const formOn=id=>isForm(id)&&G(()=>formApi(id).unlocked()===true,false);
+const baseOf=id=>isForm(id)?FORMS[id].base:id;
+function idOf(p){if(!p)return null;for(const k in FORMS){const f=FORMS[k];if(p[f.field]===true&&p.hero===f.base)return k;}return p.hero||null;}
+function info(id,H){const h=heroes(H);if(!isForm(id))return h[id];const f=FORMS[id],b=h[f.base];if(!b)return undefined;const pr=G(()=>formApi(id).profile||formApi(id).data.profile,null);
+ return {...b,name:pr&&pr.name||f.name,color:pr&&pr.color||f.color};}
+function order(H){const ids=Object.keys(heroes(H));for(const k in FORMS)if(ids.includes(FORMS[k].base)&&!ids.includes(k)&&formOn(k))ids.push(k);return ids;}
+// 같은 몸 겹침: id 의 원래 영웅이 조종 영웅이거나 다른 자리(skip 제외)에 이미 있는가
+function twin(st,id,skip){const b=baseOf(id);if(st.main&&st.main!==id&&baseOf(st.main)===b)return true;return st.slots.some((s,i)=>i!==skip&&s.hero!==id&&baseOf(s.hero)===b);}
 function indexOf(id,H){return order(H).indexOf(id);}
 function price(id,H){const i=indexOf(id,H);if(i<0)return Infinity;return PRICES[id]||PRICE_NEW;}
 // 위력 배수: 싼 영웅 1.00 부터 가격 순으로 +0.04 씩
@@ -46,7 +61,7 @@ function cost(kind,lv){const l=Math.floor(+lv);if(!(l>=0))return Infinity;
  if(kind==='radius')return l<MAX.radius?Math.round(20*Math.pow(1.5,l)):Infinity;
  if(kind==='level')return l>=1&&l<MAX.level?Math.round(30*Math.pow(1.35,l-1)):Infinity;
  return Infinity;}
-function slotStats(s,H){const h=s&&heroes(H)[s.hero];if(!h)return null;const lv=clamp(Math.floor(+s.lv||1),1,MAX.level),rl=clamp(Math.floor(+s.rangeLv||0),0,MAX.range),ml=clamp(Math.floor(+s.radiusLv||0),0,MAX.radius);
+function slotStats(s,H){const h=s&&info(s.hero,H);if(!h)return null;const lv=clamp(Math.floor(+s.lv||1),1,MAX.level),rl=clamp(Math.floor(+s.rangeLv||0),0,MAX.range),ml=clamp(Math.floor(+s.radiusLv||0),0,MAX.radius);
  const melee=!!(h.melee||h.type==='blade'||h.type==='heavy');
  return {range:(+h.range||3)+RANGE_STEP*rl,radius:RADIUS0+RADIUS_STEP*ml,pace:PACE0*(1-.035*(lv-1)),interval:(+h.interval||.5)*PACE0*(1-.035*(lv-1)),dmgMul:.5*tier(s.hero,H)*(1+.14*(lv-1)),melee,lv};}
 function reward(e){if(!e)return 0;if(e.r600Boss)return e.boss?25:12;if(e.r600Elite)return 3;return 1;}
@@ -59,6 +74,7 @@ function spot(st,pos,env,skip){if(!pos||!fin(pos.x)||!fin(pos.y)||!env||!env.cen
  for(let i=0;i<st.slots.length;i++){if(i===skip)continue;const s=st.slots[i];if(Math.hypot(s.ox-ox,s.oy-oy)<SLOT_GAP)return {ok:false,why:'crowded'};}
  return {ok:true,ox,oy};}
 function doPlace(st,id,pos,env){if(!st||!st.owned[id])return {ok:false,why:'unowned'};if(st.main===id)return {ok:false,why:'main'};if(st.slots.some(s=>s.hero===id))return {ok:false,why:'placed'};
+ if(twin(st,id,-1))return {ok:false,why:'twin'};
  if(st.slots.length>=MAX.slots)return {ok:false,why:'full'};const r=spot(st,pos,env,-1);if(!r.ok)return r;
  st.slots.push({hero:id,ox:r.ox,oy:r.oy,lv:1,rangeLv:0,radiusLv:0});return {ok:true,slot:st.slots.length-1};}
 function doMove(st,i,pos,env){const s=st&&st.slots[i];if(!s)return {ok:false,why:'none'};const r=spot(st,pos,env,i);if(!r.ok)return r;s.ox=r.ox;s.oy=r.oy;return {ok:true,slot:i};}
@@ -71,9 +87,11 @@ function doRemove(st,i){const s=st&&Number.isInteger(i)&&st.slots[i];if(!s)retur
  const refund=upgradeRefund(s);st.slots.splice(i,1);st.crystals+=refund;return {ok:true,slot:i,hero:s.hero,refund};}
 function doReplace(st,i,id,H){const s=st&&Number.isInteger(i)&&st.slots[i];if(!s)return {ok:false,why:'none'};
  if(indexOf(id,H)<0)return {ok:false,why:'unknown'};if(!st.owned[id])return {ok:false,why:'unowned'};if(st.main===id)return {ok:false,why:'main'};
- if(st.slots.some(v=>v.hero===id))return {ok:false,why:'placed'};const prev=s.hero;s.hero=id;return {ok:true,slot:i,hero:id,prev};}
+ if(st.slots.some(v=>v.hero===id))return {ok:false,why:'placed'};if(twin(st,id,i))return {ok:false,why:'twin'};const prev=s.hero;s.hero=id;return {ok:true,slot:i,hero:id,prev};}
 // 조종 영웅이 바뀌었다: 새 영웅이 자리에 있었으면 예전 조종 영웅이 그 자리에 들어간다(자리 강화·위치는 그대로).
-function onHeroChange(st,next){if(!st||!next||next===st.main||indexOf(next)<0)return {swapped:false};const prev=st.main,i=st.slots.findIndex(s=>s.hero===next);
+function onHeroChange(st,next){if(!st||!next||next===st.main||indexOf(next)<0)return {swapped:false};const prev=st.main;let i=st.slots.findIndex(s=>s.hero===next);
+ if(i<0)i=st.slots.findIndex(s=>baseOf(s.hero)===baseOf(next));/* R1148: 같은 몸(환도↔EGO 등)이 자리에 있으면 그 자리와 맞바꾼다 */
+ if(i>=0&&prev&&baseOf(prev)===baseOf(next))i=-1;/* 형상만 바꿈(EGO↔환도): 자리는 그대로 */
  st.main=next;st.owned[next]=true;if(prev)st.owned[prev]=true;if(i<0||!prev)return {swapped:false};st.slots[i].hero=prev;return {swapped:true,slot:i,prev};}
 function anchorOf(s,c,A){let x=c.x+s.ox,y=c.y+s.oy;if(A){x=clamp(x,A.x0+EDGE,A.x1-EDGE);y=clamp(y,A.y0+EDGE,A.y1-EDGE);}return {x,y};}
 // R1050(사용자 2026-11-15 09:56Z "무한생존모드에서 영웅배치시 배치된영웅 공격모션이 안나가는 문제"): 몸이 공격·스킬·궁극기 동작 중인가.
@@ -121,11 +139,11 @@ const now=()=>G(()=>time,0);
 const P=()=>G(()=>player,null);
 const stage=()=>G(()=>room.survivalR600,null);
 const env=()=>{const x=stage(),s=sv();return x&&s?{centre:x.centre,range:+s.core?.stats?.range||5.5}:null;};
-const hname=id=>G(()=>HEROES[id].name,id);
+const hname=id=>G(()=>info(id).name,id);
 function ensure(){const k=G(()=>SV().inspect().stats.starts,0),h=G(()=>player.hero,null);
- if(runKey!==k||!st.main){if(runKey!==null&&runKey!==k)stats.resets++;runKey=k;dropProps();st=fresh(h);allies=[];clearKey=null;lastRoom=null;}
+ if(runKey!==k||!st.main){if(runKey!==null&&runKey!==k)stats.resets++;runKey=k;dropProps();st=fresh(h&&idOf(G(()=>player,null)));allies=[];clearKey=null;lastRoom=null;}
  return st;}
-function load(id){try{const p=ensureImages(heroPaths(id));if(p&&p.catch)p.catch(fail);return p;}catch(e){fail(e);return null;}}
+function load(id){try{const p=ensureImages(heroPaths(baseOf(id)));if(p&&p.catch)p.catch(fail);return p;}catch(e){fail(e);return null;}}
 // ── 배치 영웅의 몸: 조종 영웅(player)과 같은 모양의 사본. 엔진 함수를 부르는 동안만 player 자리에 끼운다 ──
 const SHARED=['upgrades','progressionR62'],TIMERS=['attackCD','attackAnim','skillAnim','blinkCD','specialCD','invincible','parry','ego','egoCD','samong','samongCD','grazeGuard','counter'];
 const cur=[];let realP=null;
@@ -133,7 +151,7 @@ const curAlly=()=>cur.length?cur[cur.length-1]:null;
 function mkBody(id,a){const p=realP||P();if(!p||p.r720Ally)return null;const b={};
  for(const k of Object.keys(p)){const v=p[k];if(v&&typeof v==='object'&&!SHARED.includes(k)){try{b[k]=structuredClone(v);}catch(_){b[k]=Array.isArray(v)?[]:{};}}else b[k]=v;}
  Object.defineProperty(b,'r720Ally',{value:true,enumerable:false});
- b.hero=id;b.x=a.x;b.y=a.y;b.direction='front';b.combo=0;for(const k of TIMERS)b[k]=0;b.attackCD=.4;b.resonance=0;b.shield=0;b.guard=false;b.pending=false;b.moving=false;b.visible=true;b.disabled=false;b.visualLiftPx=0;b.storyWER={ready:{},buffs:{}};
+ b.hero=baseOf(id);for(const k in FORMS)b[FORMS[k].field]=k===id;/* R1148: 형상 표식은 이 몸의 것만(조종 영웅 표식이 사본으로 새지 않게) */b.x=a.x;b.y=a.y;b.direction='front';b.combo=0;for(const k of TIMERS)b[k]=0;b.attackCD=.4;b.resonance=0;b.shield=0;b.guard=false;b.pending=false;b.moving=false;b.visible=true;b.disabled=false;b.visualLiftPx=0;b.storyWER={ready:{},buffs:{}};
  return b;}
 function refresh(b,p){for(const k of SHARED)b[k]=p[k];b.level=p.level;b.hp=Math.max(1,+p.maxHp||0,+b.hp||0,100);b.ego=0;b.samong=0;b.resonance=0;b.pending=false;}
 // 몸 a.body 를 player 로 끼우고 fn 을 돈다. 끝나면(오류여도) 반드시 조종 영웅으로 되돌린다.
@@ -171,12 +189,12 @@ function syncProps(){const r=G(()=>room,null),x=stage();if(!r||!x||!Array.isArra
 
 // ── 한 프레임 ──
 function sync(){ensure();const p=P();if(!p)return;
- if(p.hero!==st.main){const prev=st.main,r=onHeroChange(st,p.hero);if(r.swapped){stats.swaps++;load(prev);const a=allies[r.slot];if(a){a.cd=.5;a.anim=0;a.body=null;a.ringAt=now();}try{toast(hname(p.hero)+' 교대 · '+hname(prev)+'이(가) 그 자리를 지킵니다',2.6);}catch(_){}}}
+ const pid=idOf(p);if(pid!==st.main){const prev=st.main,r=onHeroChange(st,pid);if(r.swapped){stats.swaps++;load(prev);const a=allies[r.slot];if(a){a.cd=.5;a.anim=0;a.body=null;a.ringAt=now();}try{toast(hname(pid)+' 교대 · '+hname(prev)+'이(가) 그 자리를 지킵니다',2.6);}catch(_){}}}
  const s=sv();if(s&&s.phase==='clear'){const k=(s.loop||0)+':'+s.i;if(clearKey!==k){clearKey=k;st.crystals+=clearBonus(s.i);stats.clears++;}}
  syncProps();}
 function step(dt){const x=stage(),r=G(()=>room,null);if(!x||!r||!st.slots.length)return;const t=now(),eng=!!r.engaged;
  for(let i=0;i<st.slots.length;i++){const s=st.slots[i],a=allies[i],ss=slotStats(s);if(!a||!ss)continue;const an=anchorOf(s,x.centre,x.arena),px=a.x,py=a.y;
-  if(!a.body||a.body.hero!==s.hero){a.body=mkBody(s.hero,a);a.beat=t+.6;}const b=a.body;if(!b)continue;
+  if(!a.body||a.bodyFor!==s.hero){a.body=mkBody(s.hero,a);a.bodyFor=s.hero;a.beat=t+.6;}const b=a.body;if(!b)continue;
   if(fin(b.x)&&fin(b.y)&&Math.hypot(b.x-a.x,b.y-a.y)<6){a.x=b.x;a.y=b.y;}/* 돌진 스킬로 몸이 움직였으면 따라간다(think 가 이동 반경 안으로 다시 묶는다) */
   const o=think(a,frozen?[]:r.enemies,dt,ss,an,{engaged:eng,hold:planted(b)});a.cd=9;/* 자체 타격 규칙은 쓰지 않는다(엔진 공격을 부른다) */a.moving=o.moved;
   b.x=a.x;b.y=a.y;b.moving=o.moved;{const mx=a.x-px,my=a.y-py,ml=Math.hypot(mx,my);b.moveVX150=o.moved&&ml>1e-6?mx/ml:0;b.moveVY150=o.moved&&ml>1e-6?my/ml:0;}/* 걷기 방향 그림은 입력 방향(moveVX150)을 먼저 본다 */for(const k of TIMERS)b[k]=Math.max(0,(+b[k]||0)-dt);
@@ -191,7 +209,7 @@ function step(dt){const x=stage(),r=G(()=>room,null);if(!x||!r||!st.slots.length
 // ── 그리기(엔진 조형물 그리기 순서 안 — R600 코어와 같은 길) ──
 const RING_SECS=4;
 function drawAlly(p){const i=p.r720Slot,s=st.slots[i],a=allies[i];if(!s||!a||a.prop!==p)return;const ss=slotStats(s);if(!ss)return;
- const x=stage();if(!x)return;const t=now(),ui=G(()=>zoom,1),tile=G(()=>TILE,64),h=actorHeight(),q=project(a.x,a.y),an=anchorOf(s,x.centre,x.arena),qa=project(an.x,an.y),col=G(()=>HEROES[s.hero].color,'#c9b88c');
+ const x=stage();if(!x)return;const t=now(),ui=G(()=>zoom,1),tile=G(()=>TILE,64),h=actorHeight(),q=project(a.x,a.y),an=anchorOf(s,x.centre,x.arena),qa=project(an.x,an.y),col=G(()=>info(s.hero).color,'#c9b88c');
  ctx.save();try{
   // 발밑 빛 웅덩이(영웅 색 — 조종 영웅에서 멀어 어두운 곳에서도 보이게)·자리 표식 테두리 + 놓거나 고친 직후 잠깐 보이는 이동 반경 고리 — 임시 코드 그림
   ctx.globalAlpha=.2+.05*Math.sin(t*2.4+i);ctx.fillStyle=col;ctx.beginPath();ctx.ellipse?.(q.x,q.y,tile*ui*.95,tile*ui*.46,0,0,Math.PI*2);ctx.fill();
@@ -201,9 +219,9 @@ function drawAlly(p){const i=p.r720Slot,s=st.slots[i],a=allies[i];if(!s||!a||a.p
   ctx.globalAlpha=1;
  }catch(e){fail(e);}finally{ctx.restore();}
  // 몸 그리기: 엔진 영웅 그리기(drawHero)를 그 몸으로 부른다 → 자세·시트 이펙트·색 덧씌우기가 조종 영웅과 같다
- try{const b=a.body;if(!b){return;}const pose=G(()=>heroArt[s.hero].idle.front,null);
+ try{const b=a.body;if(!b){return;}const pose=G(()=>heroArt[baseOf(s.hero)].idle.front,null);
   if(!pose||!readyImage(pose)){if(!(a.loadAt>t-3)){a.loadAt=t;load(s.hero);}return;}
-  b.x=a.x;b.y=a.y;let rec=null,st0=-1;as(a,()=>{rec=G(()=>ctx,null);st0=Array.isArray(rec&&rec.commands)?rec.commands.length:-1;drawHero();if(st0>=0&&!(Array.isArray(rec.commands)&&rec.commands.length>=st0))st0=-1;sideFix();});stats.draws++;stats.heroDraws++;/* 기록 명령 목록은 drawHero 를 부르는 그 자리(몸 안)에서 읽는다 — 조형물 그리기 밖에서는 다른 목록이다 */
+  b.x=a.x;b.y=a.y;let rec=null,st0=-1;as(a,()=>{rec=G(()=>ctx,null);st0=Array.isArray(rec&&rec.commands)?rec.commands.length:-1;drawHero();if(st0>=0&&!(Array.isArray(rec.commands)&&rec.commands.length>=st0))st0=-1;formFx(s.hero,rec,st0);sideFix();});stats.draws++;stats.heroDraws++;/* 기록 명령 목록은 drawHero 를 부르는 그 자리(몸 안)에서 읽는다 — 조형물 그리기 밖에서는 다른 목록이다 */
   function sideFix(){
   /* R1050 ①: 배치 영웅 좌우 잠금 — 상태마다 그림을 고르는 규칙(걷기=이동 방향·공격=가까운 적·서기=마지막 걸음)이 달라 0.6초 안에 좌우가 번갈아 뒤집히던 것.
      몸 그림 좌우가 바뀐 지 SIDE_HOLD 초 안이면 이번 그리기의 영웅 그림들을 발 기준으로 되뒤집는다(판정·방향 값은 그대로). */
@@ -214,6 +232,12 @@ function drawAlly(p){const i=p.r720Slot,s=st.slots[i],a=allies[i];if(!s||!a||a.p
   ctx.save();try{const n=ss.lv,w=3*ui,g=1.5*ui,tw=n*w+(n-1)*g;ctx.globalAlpha=.9;for(let k=0;k<n;k++){ctx.fillStyle='rgba(0,0,0,.7)';ctx.fillRect(q.x-tw/2+k*(w+g)-.5,q.y-h*1.06-.5,w+1,w+1);ctx.fillStyle=col;ctx.fillRect(q.x-tw/2+k*(w+g),q.y-h*1.06,w,w);}}finally{ctx.restore();}
  }catch(e){fail(e);}}
 
+// R1148: 형상 영웅(EGO·페르소나)의 몸 그림 바꾸기 중 일부는 drawHero 안이 아니라 렌더러 render 감싸기에서 '조종 영웅이 그 형상일 때' 프레임 전체에 돈다.
+//  배치 몸은 그 순간 조종 영웅이 아니므로, 몸을 player 로 끼운 채(형상 판정이 참) 이 몸이 방금 쌓은 그리기 명령에만 같은 처리기를 같은 순서(바깥 감싸기 먼저)로 한 번 돌린다.
+const FORM_FX=Object.freeze({ego:['__STORYWORLD_EGO_DOTS_R1139B__','__STORYWORLD_EGO_POLISH_R1139__','__STORYWORLD_EGO_INK_R1099__'],persona:['__STORYWORLD_PERSONA_HERO_R1113__']});
+function formFx(id,rec,st0){if(!isForm(id)||!(st0>=0)||!rec||!Array.isArray(rec.commands)||rec.commands.length<=st0)return 0;let n=0;const part=rec.commands.slice(st0);
+ for(const k of FORM_FX[id]){const f=G(()=>window[k].process,null);if(typeof f!=='function')continue;try{n+=+f(part)||0;}catch(e){fail(e);}}
+ rec.commands.splice(st0,rec.commands.length-st0,...part);stats.formFx=(stats.formFx||0)+1;return n;}
 // ── 행동(창·검사 공용) ──
 function give(n){if(!here())return false;ensure();st.crystals=Math.max(0,st.crystals+(+n||0));return true;}
 const placementPoint=pos=>pos||G(()=>window.__STORYWORLD_SURVIVAL_COMMAND_R1124__?.placementPoint?.(),null)||P();
@@ -228,11 +252,13 @@ function remove(i){if(!here())return {ok:false,why:'off'};ensure();const r=doRem
 function replace(i,id){if(!here())return {ok:false,why:'off'};ensure();const r=doReplace(st,i,id);if(!r.ok)return r;
  retire(allies[i]);allies[i]={x:NaN,y:NaN,cd:.4,dir:'front',anim:0,moving:false,ringAt:now(),prop:null,body:null,beat:0};
  load(id);syncProps();stats.replaces=(stats.replaces||0)+1;return r;}
+// R1148: 조종 영웅을 배치 id 로(형상이면 원래 영웅 + 그 표식만 켬, 아니면 형상 표식을 모두 끔)
+function setHero(p,id){p.hero=baseOf(id);for(const k in FORMS)p[FORMS[k].field]=false;if(isForm(id)){p[FORMS[id].field]=true;try{formApi(id)?.setForm?.(true);}catch(e){fail(e);}}}
 // 교대: 엔진 영웅 변경(showHeroes '이 영웅으로 변경')과 같은 일을 한다 — 그림 읽기 → 영웅 교체 → 아이콘. 저장은 하지 않는다.
 async function swapTo(i){if(!here())return {ok:false,why:'off'};ensure();const s=st.slots[i],p=P();if(!s||!p||!(p.hp>0))return {ok:false,why:'none'};const id=s.hero,prev=p.hero;
- try{await ensureImages(heroPaths(id));}catch(e){fail(e);return {ok:false,why:'load'};}
+ try{await ensureImages(heroPaths(baseOf(id)));}catch(e){fail(e);return {ok:false,why:'load'};}
  if(!here()||st.slots[i]!==s||s.hero!==id||P()!==p)return {ok:false,why:'changed'};
- p.hero=id;p.combo=0;p.ego=0;p.samong=0;p.shield=0;p.direction='front';const r=onHeroChange(st,id);if(r.swapped){stats.swaps++;load(prev);if(allies[i]){allies[i].cd=.5;allies[i].anim=0;allies[i].body=null;allies[i].ringAt=now();}}
+ setHero(p,id);p.combo=0;p.ego=0;p.samong=0;p.shield=0;p.direction='front';const r=onHeroChange(st,id);if(r.swapped){stats.swaps++;load(prev);if(allies[i]){allies[i].cd=.5;allies[i].anim=0;allies[i].body=null;allies[i].ringAt=now();}}
  try{refreshIcons?.();}catch(_){}return {ok:true,slot:i,hero:id,prev};}
 
 // 검사 훅: 자리를 조금 옮겨 배치 영웅이 걸어가게 한다 / 배치 영웅에게 기본 공격·고유기를 바로 쓰게 한다(적이 없어도 조종 영웅의 빈 공격과 같은 길)
@@ -244,7 +270,7 @@ let qaKeep=null;function qaSkills(v){if(!here())return false;const p=realP&&!cur
  const ids=['Q','W','E','R'].map(k=>'skill'+k+'R663');if(v){if(!qaKeep){qaKeep={};for(const k of ids){qaKeep[k]=rk[k];rk[k]=Math.max(1,+rk[k]||0);}}}else if(qaKeep){for(const k of ids){if(qaKeep[k]===undefined)delete rk[k];else rk[k]=qaKeep[k];}qaKeep=null;}return true;}
 
 // ── 창 ──
-const WHY={far:'정화 코어 사거리 밖입니다. 바닥 고리 안쪽을 고르세요.',core:'정화 코어 바로 곁에는 놓을 수 없습니다.',crowded:'다른 배치 영웅과 너무 가깝습니다.',full:'자리가 가득 찼습니다(최대 '+MAX.slots+').',poor:'정화 결정이 모자랍니다.',max:'이미 최대 단계입니다.',placed:'이미 배치된 영웅입니다.',main:'지금 조종 중인 영웅입니다.',unowned:'아직 영입하지 않은 영웅입니다.',none:'이 배치 자리는 이미 해제되었습니다.',unknown:'변경할 영웅을 선택하세요.'};
+const WHY={twin:'같은 몸의 영웅(환도·EGO, 라우렌·페르소나)은 함께 둘 수 없습니다. 교대를 쓰세요.',far:'정화 코어 사거리 밖입니다. 바닥 고리 안쪽을 고르세요.',core:'정화 코어 바로 곁에는 놓을 수 없습니다.',crowded:'다른 배치 영웅과 너무 가깝습니다.',full:'자리가 가득 찼습니다(최대 '+MAX.slots+').',poor:'정화 결정이 모자랍니다.',max:'이미 최대 단계입니다.',placed:'이미 배치된 영웅입니다.',main:'지금 조종 중인 영웅입니다.',unowned:'아직 영입하지 않은 영웅입니다.',none:'이 배치 자리는 이미 해제되었습니다.',unknown:'변경할 영웅을 선택하세요.'};
 const CSS='#r720Panel .r720Top{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin:6px 0 10px;font-size:13px}#r720Panel .r720Cry{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:14px;border:1px solid rgba(143,212,200,.5);background:rgba(18,34,34,.8);color:#bff3ea;font-weight:700;font-size:15px}'+
  '#r720Panel .r720Cry i{display:inline-block;width:9px;height:9px;transform:rotate(45deg);background:linear-gradient(135deg,#d8fff7,#4fb8aa);box-shadow:0 0 6px #7fe6d6}#r720Panel .r720Spot{color:#c9b88c}#r720Panel .r720Spot.bad{color:#f0a48c}'+
  '#r720Panel h3{margin:14px 0 6px;font-size:13px;letter-spacing:.1em;color:#c9b88c}#r720Panel .r720Slots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}@media (max-width:720px){#r720Panel .r720Slots{grid-template-columns:1fr}}'+
@@ -261,19 +287,19 @@ const CSS='#r720Panel .r720Top{display:flex;flex-wrap:wrap;gap:8px 14px;align-it
  '@media (pointer:coarse){#r720Panel .r720Btns button,#r720Panel .r720Hero button,#r720Panel .r720Replace select{min-height:44px;padding:6px 12px}}body:has(#modal:not(.hidden) #r720Panel) #r600Hud{visibility:hidden}#r720Msg{min-height:18px;margin-top:8px;font-size:12px;color:#f0c48c}#r720NavBtn{border-color:#5fb8aa}';
 function css(){try{if(!document.getElementById('r720Style')){const s=document.createElement('style');s.id='r720Style';s.textContent=CSS;document.head.appendChild(s);}}catch(e){fail(e);}}
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const face=id=>G(()=>urlFor(heroArt[id].idle.front),''),art=id=>G(()=>urlFor(window.__STORYWORLD_HEROES_R108__.portraitPath(id)),'')||face(id);
+const face=id=>G(()=>urlFor(heroArt[baseOf(id)].idle.front),''),art=id=>(isForm(id)?G(()=>urlFor(formApi(id).profile?.portrait||formApi(id).data.profile.portrait),''):G(()=>urlFor(window.__STORYWORLD_HEROES_R108__.portraitPath(id)),''))||face(id);
 const pic=(id,cls)=>'<span class="pf '+cls+'"><img alt="" src="'+esc(art(id))+'" onerror="this.onerror=null;this.className=\'sp\';this.src=\''+esc(face(id))+'\'"></span>';
 const f1=v=>(Math.round(v*10)/10).toFixed(1);
-function render(msg){const p=placementPoint(),e=env(),ids=order(),H=heroes();const sp=p&&e?spot(st,{x:p.x,y:p.y},e,-1):{ok:false,why:'far'};
+function render(msg){const p=placementPoint(),e=env(),ids=order();const sp=p&&e?spot(st,{x:p.x,y:p.y},e,-1):{ok:false,why:'far'};
  const free=st.slots.length<MAX.slots,slotOf=id=>st.slots.findIndex(s=>s.hero===id);
- const available=ids.filter(id=>st.owned[id]&&st.main!==id&&slotOf(id)<0),pointName=G(()=>window.__STORYWORLD_SURVIVAL_COMMAND_R1124__?.placementPoint?.(),null)?'선택한 곳':'지금 선 곳';
- const slotCard=(s,i)=>{const ss=slotStats(s),h=H[s.hero]||{},mv=p&&e?spot(st,{x:p.x,y:p.y},e,i):{ok:false},up=(k,lv,label)=>{const c=cost(k,lv),mx=!fin(c);return '<button type="button" data-r720up="'+i+':'+k+'"'+(mx||st.crystals<c?' disabled':'')+'>'+label+(mx?' 최대':' ↑ '+c)+'</button>';};
+ const availFor=i=>ids.filter(id=>st.owned[id]&&st.main!==id&&slotOf(id)<0&&!twin(st,id,i)),pointName=G(()=>window.__STORYWORLD_SURVIVAL_COMMAND_R1124__?.placementPoint?.(),null)?'선택한 곳':'지금 선 곳';
+ const slotCard=(s,i)=>{const ss=slotStats(s),h=info(s.hero)||{},available=availFor(i),mv=p&&e?spot(st,{x:p.x,y:p.y},e,i):{ok:false},up=(k,lv,label)=>{const c=cost(k,lv),mx=!fin(c);return '<button type="button" data-r720up="'+i+':'+k+'"'+(mx||st.crystals<c?' disabled':'')+'>'+label+(mx?' 최대':' ↑ '+c)+'</button>';};
   return '<div class="r720Slot" style="--c:'+esc(h.color||'#c9b88c')+'">'+pic(s.hero,'s')+'<div><b>'+esc(h.name||s.hero)+'<em>자리 '+(i+1)+' · 레벨 '+ss.lv+'</em></b><p>사거리 '+f1(ss.range)+'칸 · 이동 반경 '+f1(ss.radius)+'칸 · '+(ss.melee?'근거리':'원거리')+' · 스킬·이펙트는 원래 영웅 그대로</p><div class="r720Btns">'+
    up('level',s.lv,'레벨')+up('range',s.rangeLv,'사거리')+up('radius',s.radiusLv,'이동 반경')+'<button type="button" data-r720move="'+i+'"'+(mv.ok?'':' disabled')+'>'+pointName+'으로 옮기기</button><button type="button" class="sw" data-r720swap="'+i+'">직접 조종 영웅으로 교대</button></div>'+
    '<div class="r720Btns r720Replace"><select data-r720replacement="'+i+'" aria-label="자리 '+(i+1)+'의 새 배치 영웅"'+(available.length?'':' disabled')+'>'+(available.length?available.map(id=>'<option value="'+esc(id)+'">'+esc(hname(id))+'</option>').join(''):'<option value="">대기 중인 보유 영웅 없음</option>')+'</select><button type="button" data-r720replace="'+i+'"'+(available.length?'':' disabled')+'>배치 영웅 변경</button><button type="button" data-r720remove="'+i+'">배치 해제'+(upgradeRefund(s)?' · 강화 '+upgradeRefund(s)+' 반환':'')+'</button></div></div></div>';};
- const heroCard=id=>{const h=H[id]||{},pr=price(id),si=slotOf(id),isMain=st.main===id,own=!!st.owned[id];let state,btn='';
+ const heroCard=id=>{const h=info(id)||{},pr=price(id),si=slotOf(id),isMain=st.main===id,own=!!st.owned[id],tw=twin(st,id,-1);let state,btn='';
   if(isMain)state='<span class="st">조종 중</span>';else if(si>=0)state='<span class="st">자리 '+(si+1)+' 배치됨</span>';
-  else if(own){state='<span>보유 · 대기 중</span>';btn='<button type="button" data-r720place="'+esc(id)+'"'+(free&&sp.ok?'':' disabled')+'>'+pointName+'에 배치</button>';}
+  else if(own){state='<span>'+(tw?'같은 몸('+esc(hname(baseOf(id)===baseOf(st.main)?st.main:(st.slots.find(s=>baseOf(s.hero)===baseOf(id))||{}).hero||id))+') 사용 중':'보유 · 대기 중')+'</span>';btn='<button type="button" data-r720place="'+esc(id)+'"'+(free&&sp.ok&&!tw?'':' disabled')+'>'+pointName+'에 배치</button>';}
   else{state='<span>'+(slotStats({hero:id,lv:1,rangeLv:0,radiusLv:0}).melee?'근거리':'원거리')+' · 사거리 '+f1(+h.range||0)+'칸</span>';btn='<button type="button" data-r720buy="'+esc(id)+'"'+(st.crystals>=pr?'':' disabled')+'>영입 '+pr+'</button>';}
   return '<div class="r720Hero'+(isMain?' main':si>=0?' placed':'')+'" style="--c:'+esc(h.color||'#c9b88c')+'">'+pic(id,'h')+'<b>'+esc(h.name||id)+'</b>'+state+btn+'</div>';};
  const left=MAX.slots-st.slots.length,empties=left>0?['<div class="r720Slot empty">빈 자리 '+left+'개 — 영웅을 영입하면 '+pointName+'에 놓입니다</div>']:[];
@@ -312,7 +338,7 @@ function install(){
  //  (배치 영웅은 대기 정면 한 장만 남아 몸이 안 그려짐). 배치 영웅 몸이 실제로 읽은 그림 주소를 영웅별로 모아 두고, 지울 때 그 줄을 다시 넣는다(다시 받지 않음).
  if(typeof readyImage==='function'){const base=readyImage;readyImage=function(path,...r){const v=base.apply(this,[path,...r]);if(cur.length&&v&&typeof path==='string'){try{const h=G(()=>player.hero,null);if(h){const u=used.get(h)||(used.set(h,new Set()),used.get(h));if(u.size<600)u.add(path);}}catch(_){}}return v;};}
  if(typeof releaseImageMemory==='function'){const base=releaseImageMemory;releaseImageMemory=function(...a){let keep=null;try{if(here()&&st.slots.length&&typeof imageCache!=='undefined'){keep=new Map();const main=G(()=>player.hero,null);
-    for(const s of st.slots){if(!s||s.hero===main)continue;const paths=[...(used.get(s.hero)||[]),...G(()=>heroPaths(s.hero),[])];for(const q of paths){const k=G(()=>cleanPath(q),q),row=imageCache.get(k);if(row&&row.ready)keep.set(k,row);}}}}catch(e){fail(e);}
+    for(const s of st.slots){if(!s||baseOf(s.hero)===main)continue;const paths=[...(used.get(baseOf(s.hero))||[]),...G(()=>heroPaths(baseOf(s.hero)),[])];for(const q of paths){const k=G(()=>cleanPath(q),q),row=imageCache.get(k);if(row&&row.ready)keep.set(k,row);}}}}catch(e){fail(e);}
    const r=base.apply(this,a);if(keep&&keep.size){try{let n=0;for(const [k,row] of keep)if(!imageCache.has(k)){imageCache.set(k,row);n++;}stats.keptImages=(stats.keptImages||0)+n;}catch(e){fail(e);}}return r;};}
  if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){if(p&&p.r720AllyProp){try{if(here())drawAlly(p);}catch(e){fail(e);}return;}return base.apply(this,[p,...a]);};}
  if(typeof openPanel==='function'){const base=openPanel;openPanel=function(...a){mine=false;return base.apply(this,a);};}
@@ -326,10 +352,24 @@ function install(){
    const show=here();b.style.display=show?'':'none';if(show){const tx='배치 ◆'+Math.floor(st.crystals);if(b.textContent!==tx)b.textContent=tx;}}catch(e){fail(e);}};
  if(typeof setInterval==='function'){const iv=setInterval(nav,400);iv?.unref?.();}}
 try{install();}catch(e){fail(e);}
+// R1148: 배치 창 비밀 입력 777 — 창이 열린 동안 숫자 7(숫자열·텐키, code 로 읽음: R291 이 key 를 바꿈) 세 번을 1.5초 간격 안에, 모바일은 창 제목 7연타.
+//  EGO·페르소나 모듈의 unlock('secret-777')(영웅창 R1057 777 과 같은 저장)을 부르고 창을 다시 그린다. 서사 진행 조건은 보지 않는다. 창이 닫혀 있으면(전투 중 7 = 스킬 키) 세지 않는다.
+const S7={GAP:1500,n:0,at:NaN,taps:0,tapAt:NaN};const ms=()=>G(()=>Number(performance.now()),Date.now());
+const panelOn=()=>mine&&!!G(()=>modal,false);
+function within(at,t){return Number.isFinite(t)&&Number.isFinite(at)&&t>=at&&t-at<=S7.GAP;}
+function secret(){let any=false;for(const k in FORMS){const a=formApi(k);try{if(a&&typeof a.unlock==='function'){a.unlock('secret-777');any=true;}}catch(e){fail(e);}}
+ stats.secret777=(stats.secret777||0)+1;if(any&&panelOn())render('히든 영웅 EGO·페르소나 해금 — 영웅 목록 끝에서 영입·배치·교대할 수 있습니다.');return any;}
+try{window.addEventListener('keydown',ev=>{try{if(!on||!ev)return;const k=String(ev.key||'');if(['Shift','Control','Alt','Meta','AltGraph','CapsLock','NumLock','OS','Fn'].includes(k))return;
+  if(!panelOn()){S7.n=0;return;}const tg=ev.target;if(tg&&(['INPUT','TEXTAREA','SELECT'].includes(tg.tagName)||tg.isContentEditable))return;
+  const c=String(ev.code||''),seven=!ev.shiftKey&&!ev.ctrlKey&&!ev.altKey&&!ev.metaKey&&(c?(c==='Digit7'||c==='Numpad7'):k==='7');
+  if(!seven){S7.n=0;return;}ev.preventDefault?.();if(ev.repeat)return;const t=ms();if(!within(S7.at,t))S7.n=0;S7.n++;S7.at=t;
+  if(S7.n>=3){S7.n=0;S7.at=NaN;secret();}}catch(e){fail(e);}},true);}catch(e){fail(e);}
+try{window.addEventListener('click',ev=>{try{if(!on||!ev||!panelOn())return;if(!ev.target?.closest?.('#r720Panel h2')){S7.taps=0;return;}
+  const t=ms();if(!within(S7.tapAt,t))S7.taps=0;S7.taps++;S7.tapAt=t;if(S7.taps>=7){S7.taps=0;S7.tapAt=NaN;secret();}}catch(e){fail(e);}},true);}catch(e){fail(e);}
 const copy=()=>({crystals:st.crystals,main:st.main||G(()=>player.hero,null),owned:{...(st.main?st.owned:{[G(()=>player.hero,'')]:true})},slots:st.slots.map(s=>({...s}))});
-window.__STORYWORLD_HERO_DEFENSE_R720__=Object.freeze({revision:REV,enabled:()=>on,open,close,toggle,buy,placeHere,moveHere,upgrade,remove,replace,swapTo,qaGive:give,/* 그 영웅이 지금 이 판에 있는가(조종 영웅이거나 배치된 영웅) — 영웅별 덧씌우기가 '다른 몸을 그리는 차례'를 가릴 때 쓴다 */has:id=>{if(!here())return false;const m=cur.length?realP:P();return !!id&&((m&&m.hero===id)||st.slots.some(s=>s.hero===id));},/* R720-4: 영웅 전용 덧씌우기의 '다음 틱에 이어지는 기술'(회오리 날리기·폭발 예약 등)을 그 영웅의 몸으로 돌린다. 그 영웅이 배치 영웅이면 그 몸을 player 로 끼워 fn 을, 아니면(조종 영웅이거나 없음) 그대로 fn 을 부른다.
-   배치 영웅은 조종 영웅과 같은 영웅일 수 없으므로(교대 규칙) 영웅 전용 파일의 상태는 한 몸 것뿐이다. */asHero:(id,fn)=>{if(typeof fn!=='function')return undefined;if(!on||cur.length||!here())return fn();const m=P();if(!m||m.r720Ally||m.hero===id)return fn();const i=st.slots.findIndex(s=>s&&s.hero===id),a=i>=0?allies[i]:null;if(a&&a.body&&validAlly(a)&&a.body.hero===id)return as(a,fn);return fn();},qaSkills,qaNudge,qaCast,qaFreeze:v=>{frozen=v===true;return frozen;},bodies:()=>allies.map(a=>a.body||null),
+window.__STORYWORLD_HERO_DEFENSE_R720__=Object.freeze({revision:REV,enabled:()=>on,open,close,toggle,buy,placeHere,moveHere,upgrade,remove,replace,swapTo,qaGive:give,/* 그 영웅이 지금 이 판에 있는가(조종 영웅이거나 배치된 영웅) — 영웅별 덧씌우기가 '다른 몸을 그리는 차례'를 가릴 때 쓴다 */has:id=>{if(!here())return false;const m=cur.length?realP:P();return !!id&&((m&&(m.hero===id||idOf(m)===id))||st.slots.some(s=>s.hero===id||baseOf(s.hero)===id));},/* R720-4: 영웅 전용 덧씌우기의 '다음 틱에 이어지는 기술'(회오리 날리기·폭발 예약 등)을 그 영웅의 몸으로 돌린다. 그 영웅이 배치 영웅이면 그 몸을 player 로 끼워 fn 을, 아니면(조종 영웅이거나 없음) 그대로 fn 을 부른다.
+   배치 영웅은 조종 영웅과 같은 영웅일 수 없으므로(교대 규칙) 영웅 전용 파일의 상태는 한 몸 것뿐이다. */asHero:(id,fn)=>{if(typeof fn!=='function')return undefined;if(!on||cur.length||!here())return fn();const m=P();if(!m||m.r720Ally||m.hero===id)return fn();const i=st.slots.findIndex(s=>s&&baseOf(s.hero)===id),a=i>=0?allies[i]:null;if(a&&a.body&&validAlly(a)&&a.body.hero===id)return as(a,fn);return fn();},qaSkills,qaNudge,qaCast,qaFreeze:v=>{frozen=v===true;return frozen;},bodies:()=>allies.map(a=>a.body||null),
  state:()=>{if(here())ensure();return copy();},allies:()=>allies.map((a,i)=>({slot:i,x:a.x,y:a.y,cd:a.cd,dir:a.dir,anim:a.anim,moving:a.moving})),
- pure:Object.freeze({PRICES,MAX,order,price,tier,cost,slotStats,reward,clearBonus,fresh,doBuy,doPlace,doMove,doUpgrade,upgradeRefund,doRemove,doReplace,onHeroChange,anchorOf,think,planted,faceToward,sideOf,sideHold}),
+ pure:Object.freeze({PRICES,MAX,FORMS,baseOf,idOf,info,twin,order,price,tier,cost,slotStats,reward,clearBonus,fresh,doBuy,doPlace,doMove,doUpgrade,upgradeRefund,doRemove,doReplace,onHeroChange,anchorOf,think,planted,faceToward,sideOf,sideHold}),
  inspect:()=>({revision:REV,on,mine,stats:{...stats},lastError})});
 })();
