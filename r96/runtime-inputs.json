@@ -10377,7 +10377,11 @@
     "assets/r1156/persona-hit-base-rear-r2.webp",
     "assets/r946/lauren-boom.webp",
     "assets/r946/lauren-repulse.webp",
-    "assets/r946/lauren-tail.webp"
+    "assets/r946/lauren-tail.webp",
+    "mob-hit-r1156.js",
+    "assets/r1156/mob-hit/swamp-root-hit4.webp",
+    "assets/r1156/mob-hit/u203-e2-hit4.webp",
+    "assets/r1156/mob-hit/u203-e3-hit4.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11452,5 +11456,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "20eeaa8cf3f2d673884e8a805cee17a4698385790731c523384aeeface7f1123"
+  "runtimeManifestSHA256": "b996ef6000ff249a9b2c9c76b776924d6c63aa6e748dfbdf4913569f28d483ce"
 }
