@@ -44,7 +44,7 @@ PASS ⑦ 훅 모음이 없어도 tick 감싸기로 돈다
 PASS ⑧ 본편 W·E·R 정의·키 그대로
 PASS ⑧ 대기·공격력을 건드리지 않음
 PASS ⑧ 수치 표
-PASS ⑨ 번개·구슬·회전 구슬·화상 모두 그림 (chain:18 orb:53 orbit:45 burn:8)
+PASS ⑨ 번개·구슬·회전 구슬·화상 모두 그림 (chain:33 orb:53 orbit:45 burn:8)
 PASS ⑨ 모두 이펙트 주인(ctx.scope), 밑그림 말고는 영웅 쪽 — 페르소나 굽기가 언주로 바꿈
 PASS ⑨ 기존 영웅 시트 재사용(네온 번개·헌터 화상·은빛 거성 구)
 PASS ⑨ 번개: 흑 밑그림(brightness(0), 보통 겹치기) + 언주 번개(빛 더하기)

@@ -17,7 +17,7 @@
 if(typeof window==='undefined'||window.__STORYWORLD_PERSONA_WER_R1144__)return;
 const REV='R1144-persona-wer-1',KEY='storyworld.r1144.personaWer',HERO='lauren',SLOTS=['w','e','r'];
 const TUNE=Object.freeze({
- chain:Object.freeze({delay:.2,again:1.2,pulses:2,k:.6,reach:9,link:7,max:8,stagger:.06,life:.45}),
+ chain:Object.freeze({delay:.2,again:1.2,pulses:2,k:.6,reach:9,link:7,max:8,stagger:.06,life:.55}),
  volley:Object.freeze({delay:.2,k:.6,reach:4.5,max:4,speed:14}),
  orbit:Object.freeze({delay:.14,time:3,n:3,radius:1.5,period:1,hitR:.55,k:.35,gap:.6}),
  burn:Object.freeze({total:.3,time:2.5,every:.5,max:12})});
@@ -98,10 +98,10 @@ function cell(k,f){const S=SHEETS[k];return [(f%S.cols)*S.cell,Math.floor(f/S.co
 const own=(id,x,y,extra)=>({id,kind:'effect',pxfSide:'hero',x,y,...extra});
 function drawArc(a,t){const age=t-a.t0;if(age<0)return;const C=TUNE.chain,S=SHEETS.chain,{z,AH}=scale(),p0=project(a.x0,a.y0),p1=project(a.x1,a.y1),h=AH*.5,L=Math.hypot(p1.x-p0.x,p1.y-p0.y)||1,ang=Math.atan2(p1.y-p0.y,p1.x-p0.x);
  const im=simg('chain'),mx=(a.x0+a.x1)/2,my=(a.y0+a.y1)/2,id='r1144:chain:'+a.seed;
- if(im){const fr=Math.min(S.n-1,Math.floor(age/C.life*S.n)),k=L/(S.x1-S.x0),ky=Math.max(.55,Math.min(1.2,k)),[sx,sy,sw,sh]=cell('chain',fr);
+ if(im){const fr=Math.min(S.n-1,Math.floor(age/C.life*S.n)),k=L/(S.x1-S.x0),ky=Math.max(.95,Math.min(1.5,k*1.3)),/* 짧은 마디도 굵게 읽히게 */[sx,sy,sw,sh]=cell('chain',fr);
   // 밑그림(흑): 밝은 바닥에서도 번개가 읽히게 굵은 그림자를 먼저 깐다. 굽지 않고 brightness(0) 으로 검게(영웅 쪽 표식을 안 달아 페르소나 굽기가 건드리지 않음)
   sc({id:id+':shade',kind:'effect',x:mx,y:my},()=>{ctx.save();try{ctx.filter='brightness(0)';ctx.globalAlpha*=.6;ctx.translate(p0.x,p0.y-h);ctx.rotate(ang);ctx.scale(k,ky*1.7);ctx.drawImage(im,sx,sy,sw,sh,-S.x0,-S.y,S.cell,S.cell);}finally{ctx.restore();}});
-  sc(own(id,mx,my+.01,{personaFallback:S.fallback}),()=>{ctx.save();try{ctx.globalCompositeOperation='lighter';ctx.translate(p0.x,p0.y-h);ctx.rotate(ang);ctx.scale(k,ky);ctx.drawImage(im,sx,sy,sw,sh,-S.x0,-S.y,S.cell,S.cell);}finally{ctx.restore();}});stats.sheetDraws++;return;}
+  sc(own(id,mx,my+.01,{personaFallback:S.fallback}),()=>{ctx.save();try{ctx.globalCompositeOperation='lighter';ctx.translate(p0.x,p0.y-h);ctx.rotate(ang);ctx.scale(k,ky);ctx.drawImage(im,sx,sy,sw,sh,-S.x0,-S.y,S.cell,S.cell);ctx.globalAlpha*=.6;ctx.drawImage(im,sx,sy,sw,sh,-S.x0,-S.y,S.cell,S.cell);}finally{ctx.restore();}});stats.sheetDraws++;return;}
  // 임시 코드 그림(시트가 읽히기 전): 꺾은선
  sc(own(id,mx,my),()=>{ctx.save();try{const f=1-age/C.life;ctx.translate(p0.x,p0.y-h);ctx.rotate(ang);for(const [col,w,al] of [[INK,6*z,.6],[EONJU,3*z,.9],[EONJU_HOT,1.2*z,.9]]){ctx.globalAlpha=f*al;ctx.strokeStyle='rgba('+col+',1)';ctx.lineWidth=Math.max(1,w);ctx.beginPath();ctx.moveTo(0,0);
    for(let i=1;i<=6;i++)ctx.lineTo(L*i/6,i===6?0:Math.sin(a.seed*12.9+i*4.1)*7*z);ctx.stroke();}}finally{ctx.restore();}});stats.tempDraws++;}
