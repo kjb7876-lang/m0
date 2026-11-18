@@ -1,0 +1,122 @@
+{
+ "revision": "R1177",
+ "generator": "scripts/r1177-samong-pixel-art.py",
+ "files": {
+  "s06-invader": {
+   "file": "s06-invader-walk-right-8.webp",
+   "bytes": 93230,
+   "sha256": "c1bd4255d859184c71ce3822c7fc823c78a7495dabec88cb02ea9dbbc6b42b0f",
+   "size": [
+    1024,
+    640
+   ],
+   "source": "assets/r380/mobs/dys-pulse-raider-v2-walk-d1.webp 4-11 (Dots CX-0067MV)",
+   "clip": 0,
+   "use": "외계 침공군(DYS-01) — R161 꼭두각시 자리 S-06"
+  },
+  "s06-rival": {
+   "file": "s06-rival-walk-right-8.webp",
+   "bytes": 106006,
+   "sha256": "1c948210926829ac68fae4d7fcbbbc22d399570a31d5d1547425815573cd9556",
+   "size": [
+    1024,
+    640
+   ],
+   "source": "assets/r380/mobs/dys-cleaver-v4.webp 0-3 (Dots) 먹빛 강철 + 붉은 코어",
+   "clip": 0.012,
+   "use": "상대 초인(DYS-03 보스)"
+  },
+  "s06-commander": {
+   "file": "s06-commander-walk-right-8.webp",
+   "bytes": 162354,
+   "sha256": "1d6ead7e4c44b1d714cb31e3becded61c3a3f872c0c881dda1f67212024bb801",
+   "size": [
+    1024,
+    640
+   ],
+   "source": "assets/r380/mobs/dys-behemoth-v1.webp 0-3 (Dots) 검붉게",
+   "clip": 0.02,
+   "use": "상급 지휘 개체/지휘 기체(DYS-06·DYS-10)"
+  },
+  "void-implosion-blood": {
+   "file": "void-implosion-blood.webp",
+   "bytes": 80406,
+   "sha256": "f29d04cbd015fa99029c09ea60d8178237e3378a930f7068e82ddc344132e3df",
+   "size": [
+    3328,
+    256
+   ],
+   "source": "assets/r411/fx/boss-gravity-well.webp 11-23",
+   "frame": [
+    256,
+    256
+   ],
+   "columns": 13,
+   "frames": 13,
+   "pivot": [
+    128,
+    150
+   ]
+  },
+  "rift-blood": {
+   "file": "rift-blood.webp",
+   "bytes": 95258,
+   "sha256": "a9496b2f07487f0ed0e198d1ca6631fbcc81f7a69e4d366ca150d5191d410d6a",
+   "size": [
+    1792,
+    256
+   ],
+   "source": "assets/r411/fx/boss-gravity-well.webp 6-12",
+   "frame": [
+    256,
+    256
+   ],
+   "columns": 7,
+   "frames": 7,
+   "pivot": [
+    128,
+    150
+   ]
+  },
+  "choir-moths-blood": {
+   "file": "choir-moths-blood.webp",
+   "bytes": 162620,
+   "sha256": "561eac0a8a73a07557e904871e5ba1a66d5af659d30ff73bbf065aba43f5fc85",
+   "size": [
+    5120,
+    256
+   ],
+   "source": "assets/r380/mobs/ash-moth-v2.webp (Dots) 날갯짓 8칸",
+   "frame": [
+    256,
+    256
+   ],
+   "columns": 20,
+   "frames": 20,
+   "pivot": [
+    128,
+    150
+   ]
+  },
+  "hands-blood": {
+   "file": "hands-blood.webp",
+   "bytes": 221910,
+   "sha256": "23b6f1cf5d80f78641380a7814956117fab952476c62b04c54d5c490490e14d6",
+   "size": [
+    1536,
+    768
+   ],
+   "source": "assets/r411/fx/boss-tentacle-bind.webp 0-17",
+   "frame": [
+    256,
+    256
+   ],
+   "columns": 6,
+   "frames": 18,
+   "pivot": [
+    128,
+    200
+   ]
+  }
+ }
+}
