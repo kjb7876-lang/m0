@@ -10517,11 +10517,15 @@
     "assets/r1177/s06-rival-dots-hit-4.webp",
     "assets/r1177/s06-rival-dots-walk-right-8.webp",
     "move-dir-r1167-data.js",
-    "assets/r1177/s06-commander-dots-death-8.webp",
-    "assets/r1177/memory-tower-implode-14.webp",
-    "assets/r1177/crimson-fissure-12.webp",
+    "assets/r1174/persona-awake.webp",
+    "assets/r1174/persona-bust.webp",
+    "assets/r1174/persona-orbs8.webp",
+    "assets/r1174/persona-sigil12.webp",
+    "assets/r1168/index.json",
+    "assets/r1168/mob-hit/cult05-hit4.webp",
     "assets/r1177/ash-crimson-moths-16.webp",
-    "assets/r1177/spectral-hands-20.webp",
+    "assets/r1177/crimson-fissure-12.webp",
+    "assets/r1177/memory-tower-implode-14.webp",
     "assets/r1177/mob-clinical-dots-8.webp",
     "assets/r1177/mob-coast-dots-12.webp",
     "assets/r1177/mob-domestic-dots-12.webp",
@@ -10530,7 +10534,9 @@
     "assets/r1177/mob-neural-dots-12.webp",
     "assets/r1177/mob-regional-dots-8.webp",
     "assets/r1177/mob-snow-dots-12.webp",
-    "assets/r1177/mob-stone-dots-12.webp"
+    "assets/r1177/mob-stone-dots-12.webp",
+    "assets/r1177/s06-commander-dots-death-8.webp",
+    "assets/r1177/spectral-hands-20.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11605,5 +11611,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "6b7fafd6b1b962f2216676fb46029c319c35425ab289a6e3561c0b0126dc9ebf"
+  "runtimeManifestSHA256": "2418210aa446647430d0dff20173eaca27763a62a38f9f9f038fd68728aec0b5"
 }

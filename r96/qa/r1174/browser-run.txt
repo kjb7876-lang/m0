@@ -1,16 +1,16 @@
-자연 굴림 {"gt":30,"rolls":32,"procs":3,"kinds":{"repulse":1,"red":1,"blue":0,"violet":0,"meteor":1},"hits":40,"errors":0,"last":null,"persona":true,"pc":{"revision":"R1174-persona-cutin-1","shown":1,"awake":0,"skipped":0,"errors":0,"lastError":null,"warmed":4,"last":{"kind":"meteor","at":10.100000000000081},"visible":false,"awakeVisible":false,"bust":"assets/rc133/art/awake-0.png","awakeArt":"assets/rc133/art/awake-0.png"},"c33":{"revision":"R1033-passive-cutin-3-r1174","on":true,"shown":1,"skipped":{"off":0,"hero":0,"tier":2,"body":0,"scene":0,"gap":0,"dom":0},"errors":0,"lastError":null,"warmed":1,"lastAt":110.95219999999995,"gap":8,"last":{"hero":"persona","kind":"meteor","cast":["persona"]},"visible":false,"hero":null}}
-PASS ① 페르소나 실제 기본공격으로 (진) 천체 공명 굴림 32번 · 발동 3번 · 패시브 피해 40번 (게임 30초)
+자연 굴림 {"gt":30.1,"rolls":24,"procs":4,"kinds":{"repulse":0,"red":1,"blue":1,"violet":0,"meteor":2},"hits":99,"errors":0,"last":null,"persona":true,"pc":{"revision":"R1174-persona-cutin-2-dots","shown":2,"awake":0,"skipped":0,"errors":0,"lastError":null,"warmed":5,"last":{"kind":"meteor","at":17.10000000000031},"visible":false,"awakeVisible":false,"bust":"assets/r1174/persona-bust.webp","awakeArt":"assets/r1174/persona-awake.webp"},"c33":{"revision":"R1033-passive-cutin-3-r1174","on":true,"shown":2,"skipped":{"off":0,"hero":0,"tier":2,"body":0,"scene":0,"gap":0,"dom":0},"errors":0,"lastError":null,"warmed":1,"lastAt":165.35240000000002,"gap":8,"last":{"hero":"persona","kind":"meteor","cast":["persona"]},"visible":false,"hero":null}}
+PASS ① 페르소나 실제 기본공격으로 (진) 천체 공명 굴림 24번 · 발동 4번 · 패시브 피해 99번 (게임 30.1초)
 PASS ① R946 오류 0
 PASS ① 3단이 자연 발동했다면 컷인은 페르소나 것({"hero":"persona","kind":"meteor","cast":["persona"]})
-PASS ② violet: 페르소나 컷인((진) 쌍성 소멸, ./assets/rc133/art/awake-0.png), 라우렌 컷인 안 뜸
-PASS ② meteor: 페르소나 컷인((진) 유성 궤도, ./assets/rc133/art/awake-0.png), 라우렌 컷인 안 뜸
-각성 {"img":"./assets/rc133/art/awake-0.png","name":"페르소나 · 7초","sw":"./assets/rc133/art/awake-0.png","ov":true,"art":"assets/rc91/awakening/lauren.png"}
-PASS ③ 왼쪽 위 각성 그림 = 페르소나 (./assets/rc133/art/awake-0.png)
+PASS ② violet: 페르소나 컷인((진) 쌍성 소멸, ./assets/r1174/persona-bust.webp), 라우렌 컷인 안 뜸
+PASS ② meteor: 페르소나 컷인((진) 유성 궤도, ./assets/r1174/persona-bust.webp), 라우렌 컷인 안 뜸
+각성 {"img":"./assets/r1174/persona-awake.webp","name":"페르소나 · 7초","sw":"./assets/r1174/persona-awake.webp","ov":true,"art":"assets/rc91/awakening/lauren.png"}
+PASS ③ 왼쪽 위 각성 그림 = 페르소나 (./assets/r1174/persona-awake.webp)
 PASS ③ 이름 줄 = 페르소나 · 7초
-PASS ③ 가운데 큰 컷인 = 페르소나 (./assets/rc133/art/awake-0.png)
+PASS ③ 가운데 큰 컷인 = 페르소나 (./assets/r1174/persona-awake.webp)
 PASS ③ 각성 막 on, heroArt 되돌림(assets/rc91/awakening/lauren.png)
 PASS ④ 라우렌 본인: 원래 라우렌 컷인 그대로 (./assets/r108/heroes/lauren.webp), 페르소나 컷인 안 뜸
 PASS ④ 라우렌 본인 사몽 그대로 (./assets/r108/heroes/lauren.webp, 라우렌 · 7초)
-PASS ⑤ R1174 오류 0 ({"revision":"R1174-persona-cutin-1","shown":3,"awake":2,"skipped":0,"errors":0,"lastError":null,"warmed":4,"last":{"kind":"meteor","at":32.0500249999995},"visible":false,"awakeVisible":false,"bust":"assets/rc133/art/awake-0.png","awakeArt":"assets/rc133/art/awake-0.png"})
+PASS ⑤ R1174 오류 0 ({"revision":"R1174-persona-cutin-2-dots","shown":4,"awake":2,"skipped":0,"errors":0,"lastError":null,"warmed":5,"last":{"kind":"meteor","at":31.85002999999946},"visible":false,"awakeVisible":false,"bust":"assets/r1174/persona-bust.webp","awakeArt":"assets/r1174/persona-awake.webp"})
 PASS ⑤ 페이지 오류 0 ()
 ALL PASS (헤드리스)

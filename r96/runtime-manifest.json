@@ -11963,6 +11963,16 @@
       "sha256": "c48280e8bddf5999241fa0b32abdd6da494d821085b0080c9e20ce97e3944314"
     },
     {
+      "path": "assets/r1168/index.json",
+      "bytes": 1494,
+      "sha256": "d1d487a8dd63fcc48e77fa32f97d3fbdae54ed785bfa438de48fb928f46e3620"
+    },
+    {
+      "path": "assets/r1168/mob-hit/cult05-hit4.webp",
+      "bytes": 36646,
+      "sha256": "4d762863b914cea41037b380964680b4e9cc7f3b81a88861e68fa17a99289170"
+    },
+    {
       "path": "assets/r117/scene/ep-cup-k1.png",
       "bytes": 2264,
       "sha256": "a39b05d84a4613cb40d72e213a26b9bccbc254b82e4cd9888f0b47e085a209e2"
@@ -12176,6 +12186,26 @@
       "path": "assets/r1173/persona-walk-side.webp",
       "bytes": 400832,
       "sha256": "88ebb09daf98f3d998c55fa3ad4d7478abc4a8eb505435d4e86062eb4f645cd1"
+    },
+    {
+      "path": "assets/r1174/persona-awake.webp",
+      "bytes": 162808,
+      "sha256": "9b83d98505b57a37412dad97c3c0515fbd68308f8893e0787431097993efec0a"
+    },
+    {
+      "path": "assets/r1174/persona-bust.webp",
+      "bytes": 82336,
+      "sha256": "0211913d786687c6801b4afd09f86ed3c2abf6b2c05ac757219b481c09cb0b15"
+    },
+    {
+      "path": "assets/r1174/persona-orbs8.webp",
+      "bytes": 36722,
+      "sha256": "d5fa162c7e82c7cb31570d8d824d5f58a0d883998ebc87b27fd81b4a456db902"
+    },
+    {
+      "path": "assets/r1174/persona-sigil12.webp",
+      "bytes": 716760,
+      "sha256": "ffbce5d14ef48e4f115786f71b739d05304e71ef3229327de5b8177401b2940d"
     },
     {
       "path": "assets/r1176/ego2d/cast-front.webp",
@@ -55444,8 +55474,8 @@
     },
     {
       "path": "mob-hit-r1156.js",
-      "bytes": 5240,
-      "sha256": "598eea0666f4ff6a94e1ef31ea9a808795bf2a135ad0238bcc63d7c1b2fdbb3d"
+      "bytes": 5608,
+      "sha256": "55b1724f7b826d59a53bb37c074e69f17567f086252b2e84e49ff52beeb3e432"
     },
     {
       "path": "mob-legacy-r363.js",
@@ -55749,8 +55779,8 @@
     },
     {
       "path": "persona-cutin-r1174.js",
-      "bytes": 15478,
-      "sha256": "973867093b1811b06af807f01ef24e7d127d2dd9b23f8be302183003277c045f"
+      "bytes": 16718,
+      "sha256": "e4e2f842343339d8b5609c51827dd6f0976c783b0668f620ec4da432c8c59cdf"
     },
     {
       "path": "persona-gravity-r1096.js",
@@ -56603,8 +56633,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11320,
-  "totalBytes": 1359176031,
+  "fileCount": 11326,
+  "totalBytes": 1360214405,
   "webHTMLSha256": "d7ab4417ea6e532e3533c1394e33a40a10e4e4e468c40c2eb0edb853ded2991e",
   "largest": [
     {
