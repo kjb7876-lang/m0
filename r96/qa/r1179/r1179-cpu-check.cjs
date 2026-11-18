@@ -23,13 +23,15 @@ const L={};const w={localStorage:{getItem:()=>null,setItem(){}},document:{readyS
 const order=before?[F,'mob-unique-r248-data.js','mob-art-r290.js','mob-art-r410.js']:['mob-unique-r248-data.js','mob-art-r290.js','mob-art-r410.js',F];
 for(const f of order){try{vm.runInContext(rd('client-source',f),ctx,{filename:f});}catch(e){ok('③ '+f+' 실행 오류 없음',false,String(e).slice(0,160));}}
 w.document.readyState='interactive';for(const f of (L.DOMContentLoaded||[]))f();
+let idx=null;try{idx=JSON.parse(rd('runtime-text',DIR+'index.json'));}catch(_){}
 const D=w.__STORYWORLD_MOB_UNIQUE_R248_DATA__,A=w.__STORYWORLD_MOB_ART_R1179__;
 ok('③ API __STORYWORLD_MOB_ART_R1179__ 있음',!!A&&typeof A.inspect==='function');
-let idx=null;try{idx=JSON.parse(rd('runtime-text',DIR+'index.json'));}catch(_){}
 ok('④ 시트 index.json 있음(출처·해시)',!!idx&&idx.mobs);
+ok('④ m081 은 Dots CX-0157PX r2(HOLD r1 손·밑단 고친 판)',!!idx&&/CX-0157PX/.test(JSON.stringify(idx.mobs.m081?.source||{})));
 for(const [id,name] of Object.entries(TARGETS)){
  const s=D&&D.sheets[id];ok('③ '+id+' '+name+' → '+DIR+id+'.webp',!!s&&s.name===name&&s.path===DIR+id+'.webp',s&&s.path);
  ok('③ '+id+' 몸 높이(body) 150~280',!!s&&s.body>=150&&s.body<=280,s&&s.body);
+ ok('③ '+id+' 몸 높이 = 시트 index.json 의 body(시트를 바꾸면 같이 바뀌어야 화면 키가 맞음)',!!s&&!!idx&&!!idx.mobs[id]&&s.body===idx.mobs[id].body,[s&&s.body,idx&&idx.mobs[id]&&idx.mobs[id].body]);
  let buf=null;try{buf=fs.readFileSync(path.join(R,'runtime-text',DIR+id+'.webp'));}catch(_){}
  const m=idx&&idx.mobs[id];
  ok('④ '+id+' 시트 파일 있음, sha256 = index',!!buf&&!!m&&crypto.createHash('sha256').update(buf).digest('hex')===m.sha256);
