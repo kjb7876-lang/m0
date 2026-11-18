@@ -11,7 +11,9 @@ const REV='R1156b-mob-hit-2',KEY='storyworld.r1156.mobHit',MS=[70,110,100,100],T
 const SHEETS=Object.freeze({
  'u203-e3-mech':Object.freeze({path:'assets/r1156/mob-hit/u203-e3-hit4.webp',cell:[256,256],own:'assets/r374/mobs/u203-e3-mech.webp'}),
  'u203-e2-mech':Object.freeze({path:'assets/r1156/mob-hit/u203-e2-hit4.webp',cell:[256,256],own:'assets/r374/mobs/u203-e2-mech.webp'}),
- 'swamp-root-stalker-darkgreen-v2':Object.freeze({path:'assets/r1156/mob-hit/swamp-root-hit4.webp',cell:[373,320],own:'assets/r380/mobs/swamp-root-stalker-darkgreen-v2-walk-d1.webp'})});
+ 'swamp-root-stalker-darkgreen-v2':Object.freeze({path:'assets/r1156/mob-hit/swamp-root-hit4.webp',cell:[373,320],own:'assets/r380/mobs/swamp-root-stalker-darkgreen-v2-walk-d1.webp'}),
+ /* R1168: cult05 '설원 아래의 기계 다리' — Dots CX-0136 A4 cult05 r2 DIAGNOSTIC_HOLD 손질(scripts/r1168-cult05-hit.py: 배경·격자 제거, 0.755배, 발 고정, 4칸 게임 그림, 색 맞춤) */
+ 'cult-mech-legs-walk-d1':Object.freeze({path:'assets/r1168/mob-hit/cult05-hit4.webp',cell:[320,320],own:'assets/r380/mobs/cult-mech-legs-walk-d1.webp'})});
 const stats={hits:0,frames:0,waiting:0,rewraps:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e&&e.message||e).slice(0,160);};
 let on=true;try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(v&&v.on===false)on=false;}catch(_){}
 const T=()=>{try{return typeof time==='number'?time:0;}catch(_){return 0;}};

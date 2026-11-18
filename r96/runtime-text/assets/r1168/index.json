@@ -1,0 +1,76 @@
+{
+ "schema": "storyworld.r1168.dots/v1",
+ "assets": [
+  {
+   "file": "assets/r1168/mob-hit/cult05-hit4.webp",
+   "source": "Dots CX-0136 A4 CX-0136_A4_cult05_hit4_r2_DIAGNOSTIC_HOLD.png (드라이브 CX_P3_A4_HIT_R2_QA, 2026-11-18)",
+   "sourceSha256": "916aa894bf2d224093594f044869bdff244ef367c9b797017b1c30dd44f7b33e",
+   "bgcutSha256": "0e7139a083cef524d1c48d4d99d88bd9816432ba6c39213078f5e83f31c9fe03",
+   "gameSha256": "0f4bf7b3396f5c32f6bcfae117456ea9379481896fc9eba9eeb66a0cb30d369f",
+   "sha256": "4d762863b914cea41037b380964680b4e9cc7f3b81a88861e68fa17a99289170",
+   "bytes": 36646,
+   "size": [
+    1280,
+    320
+   ],
+   "cell": [
+    320,
+    320
+   ],
+   "pivot": [
+    159.23,
+    319.23
+   ],
+   "frames": 4,
+   "gameBodyH": 219,
+   "srcBodyH": 290,
+   "gameFootX": 160.46,
+   "perFrame": [
+    {
+     "frame": 0,
+     "scale": 0.7552,
+     "offset": [
+      113,
+      101
+     ],
+     "gain": [
+      0.904,
+      0.876,
+      0.8
+     ]
+    },
+    {
+     "frame": 1,
+     "scale": 0.7552,
+     "offset": [
+      115,
+      105
+     ],
+     "gain": [
+      0.89,
+      0.864,
+      0.8
+     ]
+    },
+    {
+     "frame": 2,
+     "scale": 0.7552,
+     "offset": [
+      114,
+      103
+     ],
+     "gain": [
+      0.894,
+      0.866,
+      0.8
+     ]
+    },
+    {
+     "frame": 3,
+     "note": "게임 이동 0칸 그림(서기 자세 복귀)"
+    }
+   ],
+   "note": "DIAGNOSTIC_HOLD → 배경·격자 제거, 0.75배 맞춤, 발 고정, 4칸 게임 그림, 색 맞춤"
+  }
+ ]
+}

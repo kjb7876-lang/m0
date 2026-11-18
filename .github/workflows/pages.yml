@@ -519,6 +519,10 @@ jobs:
         run: node r96/qa/r1177/r1177-cpu-check.cjs
       - name: R1177b S-06 상대 초인·지휘 개체 Dots 걷기·공격·피격·사망 시트 연결
         run: node r96/qa/r1177/r1177b-cpu-check.cjs
+      - name: R1177c 사몽 에피소드 이펙트 Dots C1~C4 + pixelfx 물들인 시트 캐시 열쇠
+        run: node r96/qa/r1177/r1177c-cpu-check.cjs
+      - name: R1177d 지역 몹 타격 pixelfx 9종 Dots D 칠한 시트(모든 모드)
+        run: node r96/qa/r1177/r1177d-cpu-check.cjs
       - name: R701 survival 77s choice window, difficulty, hero picker CPU check
         run: node r96/qa/r701/r701-cpu-check.cjs
       - name: R850 survival play-test fixes (arena terrain lock, hospital maze skip, next-stage prefetch, moving HUD) CPU check
@@ -687,6 +691,8 @@ jobs:
         run: node r96/qa/r1156/persona-rear-hit-cpu-check.cjs
       - name: R1156b mob hit4 = Dots CX-0136 A4 r2 HOLD fixed (u203-e3 knight, u203-e2 void, swamp root stalker; recoil sheared to ~10%, colour matched; art only) CPU check
         run: node r96/qa/r1156/mob-hit-cpu-check.cjs
+      - name: R1168 cult05 mech-legs hit4 = Dots CX-0136 A4 cult05 r2 DIAGNOSTIC_HOLD fixed (bg cut, scaled to body 218, foot fixed, frame 4 = game art; art only) CPU check
+        run: node r96/qa/r1168/cult05-hit-cpu-check.cjs
       - name: R1098 samong faces (Michaela final boss uses her own sheet, R161 puppet repainted as an ink-and-white-thread doll so it no longer looks like Hwando) CPU check
         run: node r96/qa/r1098/r1098-cpu-check.cjs
       - name: R1090 character ink tint (hero and mob body images only, follows the map ink wash, settings toggle, effects and telegraphs untouched) CPU check

@@ -21,7 +21,7 @@ const PUPPET='assets/r161/puppet/puppet-ego-walk-right-8.webp',SCULPT='assets/r1
 /* R1177: 임시 픽셀 시트(assets/r184/s06, 보존) 대신 Dots 디스토피아 칠한 그림을 같은 칸 규격으로 옮긴 시트(scripts/r1177-samong-pixel-art.py) */
 const S06='assets/r1177/',S06ART={invader:S06+'s06-invader-walk-right-8.webp',rival:S06+'s06-rival-dots-walk-right-8.webp',commander:S06+'s06-commander-dots-walk-right-8.webp'},
  S06MOT={[S06+'s06-rival-dots-walk-right-8.webp']:{attack:S06+'s06-rival-dots-attack-8.webp',hit:S06+'s06-rival-dots-hit-4.webp',death:S06+'s06-rival-dots-death-8.webp'},
-  [S06+'s06-commander-dots-walk-right-8.webp']:{attack:S06+'s06-commander-dots-attack-8.webp',hit:S06+'s06-commander-dots-hit-4.webp'}},
+  [S06+'s06-commander-dots-walk-right-8.webp']:{attack:S06+'s06-commander-dots-attack-8.webp',hit:S06+'s06-commander-dots-hit-4.webp',death:S06+'s06-commander-dots-death-8.webp'}},
  SHEETS=new Set([PUPPET,...Object.values(S06ART),...Object.values(S06MOT).flatMap(v=>Object.values(v))]);
 // R1177b: 상대 초인(DYS-03)·지휘 개체/기체(DYS-06·DYS-10 공용)는 Dots CX-0156SP(ROUGH r1, scripts/r1177b-dys-sheets.py 로 칸 규격·불투명·채도 손질) 걷기 + 공격·피격(·사망) 시트.
 //  공격은 예고~회복 동안 공격 칸을 차례로, 피격은 번쩍임이 켜진 순간부터 0.32초 피격 칸, 사망 시트가 있으면 0.8초 동안 무너짐→잿빛 연기(15세: 피 없음). 시트가 아직 안 읽혔으면 예전처럼 걷기 칸.
