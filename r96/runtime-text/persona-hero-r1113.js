@@ -10,7 +10,7 @@
  * 끄기: localStorage storyworld.r1113.personaHero = {"on":..., "off":true}. */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_PERSONA_HERO_R1113__)return;
-const REV='R1113-persona-hero-8-celestial-r1143',KEY='storyworld.r1113.personaHero',FIELD='personaHeroR1113',BASE='lauren';
+const REV='R1113-persona-hero-9-celestial-r1143-wer-r1144',KEY='storyworld.r1113.personaHero',FIELD='personaHeroR1113',BASE='lauren';
 const PROFILE=Object.freeze({name:'페르소나',title:'페르소나 · 순수악의',role:'HIDDEN · 9번째 영웅',color:'#cc3428',
  passive:'사몽 결전에서 쓰러뜨린 거울. 별의 기술을 언주빛으로 되비춥니다.',special:'내면의 소용돌이',
  portrait:'assets/rc133/art/awake-0.png',tags:['히든','언주','거울']});
@@ -164,6 +164,9 @@ const TONES=Object.freeze({eonju:{lut:LUT_DEEP,filter:null},black:{lut:mkLut(BLA
 const CEL_TONE=Object.freeze({repulse:'eonju',red:'eonju',blue:'black',violet:'darkred',meteor:'darkred'}),CEL_ID=/^r946:(repulse|red|blue|violet|meteor)(?::|$)/,CEL_ART=/(^|\/)assets\/r946\//;
 function celestialTone(kind){return formActive()&&typeof kind==='string'&&Object.prototype.hasOwnProperty.call(CEL_TONE,kind)?CEL_TONE[kind]:null;}
 function celToneOf(o){const m=o&&CEL_ID.exec(String(o.id||''));return m?CEL_TONE[m[1]]:null;}
+// R1144: 다른 영웅 시트(민트 번개 등)는 보라 기준 색 돌리기(TINT)가 안 맞는다 → 굽지 못할 때 쓸 색 돌리기를 이펙트 주인이 준다(기록기가 받는 함수만)
+const SAFE_FILTER=/^(?:(?:saturate|hue-rotate|brightness|contrast|grayscale)\([\d.]+(?:deg)?\)\s*)+$/;
+function ownerFallback(o){const v=o&&o.personaFallback;return typeof v==='string'&&SAFE_FILTER.test(v)?v:null;}
 function toneStr(v,tone){if(typeof v!=='string')return v;const t=TONES[tone].lut;return v.replace(RGBA,(m,r,g,b,a)=>{const i=lum(r,g,b)*3,c=[t[i],t[i+1],t[i+2]];return a==null?'rgb('+c.join(',')+')':'rgba('+c.join(',')+','+a+')';});}
 function tonePaint(v,tone){if(typeof v==='string')return toneStr(v,tone);if(v&&typeof v==='object'&&Array.isArray(v.stops))return {...v,stops:v.stops.map(st=>st&&typeof st==='object'?{...st,color:toneStr(st.color,tone)}:st)};return v;}
 function rampPixels(d,lut=LUT_DEEP){let n=0;if(!d||!(d.length>=4))return 0;for(let i=0;i+3<d.length;i+=4){if(d[i+3]===0)continue;const j=lum(d[i],d[i+1],d[i+2])*3;d[i]=lut[j];d[i+1]=lut[j+1];d[i+2]=lut[j+2];n++;}return n;}
@@ -180,7 +183,7 @@ function tint(cmds){let n=0;for(const c of cmds){if(!c||c.kind!=='image'||c.r111
   const ct=celToneOf(c.owner);if(ct&&!CEL_ART.test(String(c.sourcePath||''))){c.r1113tint=true;continue;}/* R1143: 유성 궤도가 던지는 조형물 그림은 물들이지 않음 */const tone=ct||'eonju';if(ct)stats.celTints=(stats.celTints||0)+1;
   let b=null;try{b=bake(c,tone);}catch(e){fail(e);}
   if(b){if(typeof s.filter==='string'&&/grayscale\(/.test(s.filter)){const k=s.filter.replace(/grayscale\([^)]*\)\s*/g,'').trim();c.style={...s,filter:k||'none'};}/* R1143: 무채색 필터가 구운 색을 다시 지우지 않게 */c.image=b.canvas;c.mutable=false;c.sourcePath=b.path;c.immutableTint=b.canvas.__storyworldStaticSource;c.r1113tint=true;stats.bakedDraws=(stats.bakedDraws||0)+1;n++;continue;}
-  const f=typeof s.filter==='string'&&s.filter!=='none'?s.filter+' ':'';c.style={...s,filter:f+(TONES[tone].filter||(tone==='darkred'?TINT+' brightness(.55)':TINT))};c.r1113tint=true;n++;}stats.tints+=n;return n;}
+  const f=typeof s.filter==='string'&&s.filter!=='none'?s.filter+' ':'';c.style={...s,filter:f+(TONES[tone].filter||(tone==='darkred'?TINT+' brightness(.55)':ownerFallback(c.owner)||TINT))};c.r1113tint=true;n++;}stats.tints+=n;return n;}
 // 페르소나는 창이 없다 → 라우렌 창끝 빛(R425)은 형상일 때 뺀다
 const DROP=/^r425:spear-tip$/;
 function drop(cmds){let j=0;for(let i=0;i<cmds.length;i++){const c=cmds[i];if(c&&c.owner&&DROP.test(String(c.owner.id||'')))continue;cmds[j++]=c;}const n=cmds.length-j;cmds.length=j;stats.dropped=(stats.dropped||0)+n;return n;}
