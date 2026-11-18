@@ -813,6 +813,10 @@ jobs:
         run: node r96/qa/r1121/r1121-cpu-check.cjs
       - name: R1139 EGO hidden hero audit (persona shots drawn large enough to read, no aura discs under ink clones, hwando silver-gold FX recolored to vermilion-white, skill name texts stacked) CPU check
         run: node r96/qa/r1139/r1139-cpu-check.cjs
+      - name: R1139b EGO hidden hero Dots final art (slash motion, trail, impact, shield, icons) CPU check
+        run: node r96/qa/r1139b/r1139b-cpu-check.cjs
+      - name: R1145 EGO hidden hero celestial follow-ups (R casts silver giant + abyss dwarf, ink moon triggers stellar repulse, white-red tint, EGO only) CPU check
+        run: node r96/qa/r1145/r1145-cpu-check.cjs
       - name: R1109 co-op relay build match (old R62 Render relay auto-fallback, default relay address) CPU check
         run: node r96/qa/r1109/r1109-cpu-check.cjs
       - name: R1092 story panel scene art (vertical-version scene paintings, ink-wash aware) CPU check
