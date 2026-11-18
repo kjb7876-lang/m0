@@ -54084,8 +54084,8 @@
     },
     {
       "path": "grove-r481.js",
-      "bytes": 10174,
-      "sha256": "87fd0bd490c899dbf7068d5176df4aca6a1e3ca58bd06e20923a46c26afc7ab8"
+      "bytes": 11646,
+      "sha256": "54675080225e029bdd15292c9d8babd0cb717f57e5868886ebb951ebeccd5274"
     },
     {
       "path": "growth-r103.js",
@@ -54694,8 +54694,8 @@
     },
     {
       "path": "mobile-memory-r980.js",
-      "bytes": 23085,
-      "sha256": "54aa77dd72675d51790ed23f3db75222d1adf11a57f3f80cb47b43b339994333"
+      "bytes": 23208,
+      "sha256": "068ff077ba5e91f16e686ea474b6c78d65808670c01f9733477a58b065cd98c7"
     },
     {
       "path": "mobile-perf-r298.js",
@@ -55059,8 +55059,8 @@
     },
     {
       "path": "props-tidy-r412.js",
-      "bytes": 65033,
-      "sha256": "9ea3da21fc7d05c1ac81c575a774c5c161fd20f0697b4d3117bfd95bc94aa1f3"
+      "bytes": 65323,
+      "sha256": "f4715530e07f5182dccff6a69acb74ddd228c54a1464c4ef16c051b8351c2d6f"
     },
     {
       "path": "props-variety-r140.js",
@@ -55764,7 +55764,7 @@
     }
   ],
   "fileCount": 11152,
-  "totalBytes": 1345987665,
+  "totalBytes": 1345989550,
   "webHTMLSha256": "51cefc6de1046aa2b5f0e6c8c8c6ad74e0a227c26b5c8c5be757432a838108f4",
   "largest": [
     {

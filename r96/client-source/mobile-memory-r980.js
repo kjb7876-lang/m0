@@ -103,6 +103,8 @@ function classify(src){
  if(match)return {role:'hero',hero:match[1]};
  if(/^(?:r1063\/)?(?:r283\/hwando\/r(?:242|271)|r(?:242|271|436|439)\/hwando)\/(?:walk|hit|attack)-[ensw]+\.webp$/.test(name)||
     /^hero-authored-v314rc5\/hwando-(?:walk|action)-atlas\.png$/.test(name))return {role:'hero',hero:'hwando'};
+ match=name.match(/^rc135\/midboss-motions\/sheets\/mb-(dist0[1-6])\.png$/);
+ if(match)return {role:'boss',zone:match[1]};
  match=name.match(/^(?:r281\/bosses\/mb-([a-z0-9]+)-walk6|r1029\/float\/mb-([a-z0-9]+)-p4)\.webp$/);
  if(match)return {role:'boss',zone:match[1]||match[2]};
  if(/^r620\/bosses\/b03-(?:idle6|hit4)\.webp$/.test(name))return {role:'boss',zone:'ep1b03'};

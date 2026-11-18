@@ -145,8 +145,13 @@ const maskSmoothing=mg?.imageSmoothingQuality;
 // Browser image resamplers differ at alpha edges. Learn the actual backend with
 // two independently measured shipped images, including a full and a fractional
 // crop at different scales. Unknown or conflicting results keep native sampling.
+// Chromium may change the decoder's downsampling for an individual image after
+// it has been rendered. Fresh and previously displayed copies of identical bytes
+// produced different masks in the same game tab. Keep native sampling on that path.
+const webkitMask=typeof window.WebKitPoint==='function'&&typeof CSS!=='undefined'&&
+ CSS.supports?.('-webkit-nbsp-mode','space');
 const probes=[];
-let expectedColumn=0,maskColumn=0;
+stats.maskProfile=webkitMask?'pending':'native';
 function sameMask(bits,encoded){
  const bytes=atob(encoded);
  return bytes.length===bits.length&&bits.every((b,i)=>b===bytes.charCodeAt(i));
@@ -155,31 +160,29 @@ function observeMask(bits,row,img,path){
  stats.maskProbes++;
  const chrome=sameMask(bits,row[4]),webkit=sameMask(bits,row[5]);
  if(chrome&&webkit)return;
- const column=chrome?4:webkit?5:0;
- if(!column||(expectedColumn&&expectedColumn!==column)){
-  maskColumn=-1;stats.maskProfile='native';probes.length=0;return;
+ if(!webkit){
+  stats.maskProfile='native';probes.length=0;return;
  }
- expectedColumn=column;
  const full=row[0]===0&&row[1]===0&&row[2]===img.naturalWidth&&row[3]===img.naturalHeight;
  if(!full&&row.slice(0,4).every(Number.isInteger))return;
  if(probes.some(p=>p.full!==full&&p.path!==path&&(p.width!==row[2]||p.height!==row[3]))){
-  maskColumn=column;stats.maskProfile=column===4?'chromium':'webkit';probes.length=0;
+  stats.maskProfile='webkit';probes.length=0;
  }else if(!probes.some(p=>p.row===row)){
   probes.push({row,path,full,width:row[2],height:row[3]});
  }
 }
 function bakedOrNative(img,url,sx,sy,sw,sh){
- if(maskColumn<0||!assetRoot||!url.startsWith(assetRoot+'assets/'))return;
+ if(stats.maskProfile==='native'||!assetRoot||!url.startsWith(assetRoot+'assets/'))return;
  const path=url.slice(assetRoot.length),entry=bakedPropMasks[path];
  if(!entry||entry[0]!==img.naturalWidth||entry[1]!==img.naturalHeight)return;
  for(const row of entry[2]){
   if(row[0]!==sx||row[1]!==sy||row[2]!==sw||row[3]!==sh)continue;
-  if(!maskColumn){
+  if(stats.maskProfile==='pending'){
    const bits=readMask(img,sx,sy,sw,sh);
    if(bits)observeMask(bits,row,img,path);
    return bits;
   }
-  const bytes=atob(row[maskColumn]),bits=new Uint8Array(bytes.length);
+  const bytes=atob(row[5]),bits=new Uint8Array(bytes.length);
   for(let i=0;i<bits.length;i++)bits[i]=bytes.charCodeAt(i);
   stats.maskBaked++;
   return bits;
@@ -220,7 +223,7 @@ function mask(img,sx,sy,sw,sh){
  }
  const M=cached.rects,key=sx+','+sy+','+sw+','+sh;
  if(M.has(key))return M.get(key);
- const canBake=image&&!half&&mg?.imageSmoothingEnabled&&mg.imageSmoothingQuality===maskSmoothing;
+ const canBake=stats.maskProfile!=='native'&&image&&!half&&mg?.imageSmoothingEnabled&&mg.imageSmoothingQuality===maskSmoothing;
  let m;
  if(canBake)m=bakedOrNative(img,url,sx,sy,sw,sh);
  if(m===undefined)m=readMask(img,sx,sy,sw,sh);
