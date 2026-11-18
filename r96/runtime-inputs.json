@@ -10349,6 +10349,7 @@
     "cheat-points-r1126.js",
     "assets/sw0011/beam-0.webp",
     "assets/sw0011/beam-1.webp",
+    "narrative-corner-r1141.js",
     "transition-curtain-r1138.js",
     "ego-polish-r1139.js",
     "persona-wer-r1144.js"
@@ -11426,5 +11427,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "357b1e4373c2617f4779ea94fd2c6527281366ec7374cee3eaa34e5bd87a71da"
+  "runtimeManifestSHA256": "b37c87bf35c71dc4b93d6b005a55bf41695a76b9d3b93c9a197d4e93f404249c"
 }
