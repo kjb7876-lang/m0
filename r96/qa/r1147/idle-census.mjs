@@ -8,7 +8,7 @@ for(const [z,id] of JOBS){
  try{await go(p,z);await skip(p);}catch(e){res[z+'|'+id]={error:String(e).slice(0,120)};continue;}
  const ok=await p.evaluate(id=>{const B=room.enemies.find(e=>String(e.nativeId)===id&&e.hp>0);if(!B)return room.enemies.map(e=>e.nativeId).join(',');
   for(const e of room.enemies)if(e!==B)e.hp=0;B.spawnState='active';B.hidden=false;B.hp=B.maxHp=1e8;player.hp=player.maxHp=1e9;player.invincible=1e9;
-  player.x=B.x+6;player.y=B.y+6;window.__B=B;window.__C={};
+  const PO=2.2;player.x=B.x+PO;player.y=B.y+PO;window.__B=B;window.__C={};
   const hold=()=>{const B=window.__B;if(B){B.attack=null;B.speed=0;B.attackCooldown=99;B.cooldown=99;}requestAnimationFrame(hold);};requestAnimationFrame(hold);
   const base=drawEnemy;drawEnemy=function(e,...a){const cm=(typeof ctx!=='undefined'&&Array.isArray(ctx?.commands))?ctx.commands:null,st=cm?cm.length:0;const r=base.call(this,e,...a);
    if(cm&&e===window.__B){let best=null,bh=0;for(let i=st;i<cm.length;i++){const k=cm[i];if(k?.kind!=='image'||!Array.isArray(k.points))continue;const h=Math.abs(k.points[3][1]-k.points[0][1]);if(h>bh){bh=h;best=k;}}
