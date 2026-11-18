@@ -11,13 +11,15 @@ const stats={hit:0,miss:0,skipped:0,failed:0,fast:0,checked:0,mismatch:0};const 
 const copy=v=>v&&typeof v==='object'?{...v}:v;
 // R1137 — 스토리 지역에 들어갈 때 그림이 한꺼번에 들어오면서 imageCrop 이 한 장면에 수십 번 몰렸다(아이폰 13 미니 가로 재현,
 //  dist02→dist01 전환 직후 imageCrop 합계 약 0.55초). 그중 픽셀 반복(최대 384×384 모든 점, 점마다 Math.min/max 4번)이 약 1/4.
-//  같은 상자를 빠르게: 위→아래로 첫 보이는 줄, 아래→위로 마지막 줄을 찾고, 그 사이 줄만 왼쪽·오른쪽 끝을 좁혀 간다(먼저 찾은 끝보다 안쪽은 보지 않음).
+//  같은 상자를 빠르게: 위→아래로 첫 보이는 줄, 아래→위로 마지막 줄을 찾고, 그 사이에서 왼쪽·오른쪽 끝 세로줄을 찾는다(상자 안쪽은 거의 읽지 않음).
 //  그리기(drawImage)·읽기(getImageData)·문턱(알파 > 18)·상자 셈은 본편과 한 글자도 다르지 않다 → 결과가 같다.
 //  처음 8번은 본편 결과와 대조해 다르면 빠른 길을 영영 끈다(본편이 바뀌었을 때를 대비). storyworld.r154.perf {fastScan:false} 로 끈다.
 function scan(d,w,h){const row=w*4;let y0=-1,y1=-1;
  for(let y=0;y<h&&y0<0;y++){let i=y*row+3;for(let x=0;x<w;x++,i+=4)if(d[i]>18){y0=y;break;}}if(y0<0)return null;
  for(let y=h-1;y>=y0&&y1<0;y--){let i=y*row+3;for(let x=0;x<w;x++,i+=4)if(d[i]>18){y1=y;break;}}
- let x0=w,x1=-1;for(let y=y0;y<=y1;y++){const r=y*row+3;for(let x=0;x<x0;x++)if(d[r+x*4]>18){x0=x;break;}for(let x=w-1;x>x1;x--)if(d[r+x*4]>18){x1=x;break;}}
+ // 왼쪽·오른쪽 끝은 세로줄로 찾는다(위 줄부터 좁혀 가면 처음 몇 줄이 상자 안쪽을 많이 읽음) — 상자 밖과 끝 한 점씩만 읽는다.
+ let x0=-1,x1=-1;for(let x=0;x<w&&x0<0;x++){let i=y0*row+x*4+3;for(let y=y0;y<=y1;y++,i+=row)if(d[i]>18){x0=x;break;}}
+ for(let x=w-1;x>=x0&&x1<0;x--){let i=y0*row+x*4+3;for(let y=y0;y<=y1;y++,i+=row)if(d[i]>18){x1=x;break;}}
  return[x0,y0,x1,y1];}
 function fast(im){try{const limit=384,k=Math.min(1,limit/Math.max(im.naturalWidth,im.naturalHeight)),c=document.createElement('canvas');c.width=Math.max(1,Math.ceil(im.naturalWidth*k));c.height=Math.max(1,Math.ceil(im.naturalHeight*k));const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,0,0,c.width,c.height);const d=g.getImageData(0,0,c.width,c.height).data;
  const b=scan(d,c.width,c.height);if(!b)return null;const [x0,y0,x1,y1]=b;return{x:Math.max(0,(x0-1)/k),y:Math.max(0,(y0-1)/k),w:Math.min(im.naturalWidth,(x1-x0+3)/k),h:Math.min(im.naturalHeight,(y1-y0+3)/k)}}catch(_){return null}}

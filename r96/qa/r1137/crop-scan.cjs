@@ -20,11 +20,14 @@ const cases=[['빈 그림',7,5,[]],['문턱 18 은 투명',4,4,[[1,1,18]]],['문
 for(const [n,w,h,p] of cases)check('같은 상자: '+n,()=>{const d=img(w,h,p);assert.deepEqual(JSON.stringify(api.scan(d,w,h)),JSON.stringify(ref(d,w,h)));});
 check('같은 상자: 무작위 400장',()=>{let s=12345;const r=()=>(s=(Math.imul(s,1103515245)+12345)>>>0)/4294967296;
  for(let t=0;t<400;t++){const w=1+(r()*40|0),h=1+(r()*40|0),k=r()*r()*.2,p=[];for(let y=0;y<h;y++)for(let x=0;x<w;x++)if(r()<k)p.push([x,y,r()*256|0]);const d=img(w,h,p);assert.equal(JSON.stringify(api.scan(d,w,h)),JSON.stringify(ref(d,w,h)),'case '+t);}});
+// 빠르기는 벽시계 대신 '알파를 읽은 횟수'로 잰다(CI 기계마다 시간이 흔들림). 시간은 참고로만 찍는다.
+const reads=(fn,d,w,h)=>{let n=0;const P=new Proxy(d,{get(t,k){if(typeof k==='string'&&/^\d+$/.test(k))n++;const v=t[k];return typeof v==='function'?v.bind(t):v;}});fn(P,w,h);return n;};
 const bench=(d,w,h)=>{const t=f=>{f();const a=performance.now();for(let i=0;i<40;i++)f();return performance.now()-a;};return [t(()=>ref(d,w,h)),t(()=>api.scan(d,w,h))];};
-check('384×384 보통 그림(가운데 타원 몸통)에서 3배 넘게 빠름',()=>{const w=384,h=384,p=[];for(let y=0;y<h;y++)for(let x=0;x<w;x++)if(((x-190)/120)**2+((y-200)/160)**2<1)p.push([x,y,255]);const d=img(w,h,p);
- assert.equal(JSON.stringify(api.scan(d,w,h)),JSON.stringify(ref(d,w,h)));const [tr,tf]=bench(d,w,h);console.log('   ref',tr.toFixed(1),'ms / fast',tf.toFixed(1),'ms (40회)');assert.ok(tf*3<tr,'fast '+tf.toFixed(1)+' ref '+tr.toFixed(1));});
-check('384×384 가장 나쁜 경우(성긴 점 3개)에도 1.5배보다 느리지 않음',()=>{const w=384,h=384,d=img(w,h,[[150,40,255],[230,300,255],[190,170,255]]);const [tr,tf]=bench(d,w,h);
- console.log('   ref',tr.toFixed(1),'ms / fast',tf.toFixed(1),'ms (40회)');assert.ok(tf<tr*1.5,'fast '+tf.toFixed(1)+' ref '+tr.toFixed(1));});
+check('384×384 보통 그림(가운데 타원 몸통): 상자 안쪽은 거의 읽지 않음(상자 밖 + 줄마다 2점 + 위·아래 줄 이내)',()=>{const w=384,h=384,p=[];for(let y=0;y<h;y++)for(let x=0;x<w;x++)if(((x-190)/120)**2+((y-200)/160)**2<1)p.push([x,y,255]);const d=img(w,h,p);
+ assert.equal(JSON.stringify(api.scan(d,w,h)),JSON.stringify(ref(d,w,h)));const rr=reads(ref,d,w,h),rf=reads(api.scan,d,w,h),[tr,tf]=bench(d,w,h);
+ console.log('   읽기 ref',rr,'/ fast',rf,'· 시간(참고) ref',tr.toFixed(1),'ms / fast',tf.toFixed(1),'ms (40회)');const [x0,y0,x1,y1]=ref(d,w,h),bound=w*h-(x1-x0+1)*(y1-y0+1)+2*w+2*(y1-y0+1);assert.ok(rf<=bound&&rf<rr*.6,'fast '+rf+' bound '+bound+' ref '+rr);});
+check('384×384 가장 나쁜 경우(성긴 점 3개): 읽는 픽셀이 본편보다 많지 않음',()=>{const w=384,h=384,d=img(w,h,[[150,40,255],[230,300,255],[190,170,255]]);const rr=reads(ref,d,w,h),rf=reads(api.scan,d,w,h),[tr,tf]=bench(d,w,h);
+ console.log('   읽기 ref',rr,'/ fast',rf,'· 시간(참고) ref',tr.toFixed(1),'ms / fast',tf.toFixed(1),'ms (40회)');assert.ok(rf<=rr,'fast '+rf+' ref '+rr);});
 async function browser(){const url=process.env.SW_URL;if(!url){console.log('SKIP 브라우저(SW_URL 없음)');return;}
  const {chromium,devices}=require('playwright');const b=await chromium.launch({args:['--disable-dev-shm-usage','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
  try{for(const [name,opt] of [['PC',{viewport:{width:1280,height:720}}],['iPhone 13 mini 가로',{...devices['iPhone 13 Mini landscape'],viewport:{width:812,height:375},screen:{width:812,height:375},deviceScaleFactor:3}]]){

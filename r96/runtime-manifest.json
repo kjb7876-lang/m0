@@ -54814,8 +54814,8 @@
     },
     {
       "path": "perf-r154.js",
-      "bytes": 4377,
-      "sha256": "9d358eeb393012bad38e99e4e249bf92ebbab615d966f6069c585b69fce4e880"
+      "bytes": 4617,
+      "sha256": "2f8f64462f1e3703f534fa7287d2cdd330caf115cb541dcecd89e5c7fbb9293b"
     },
     {
       "path": "perf-r180.js",
@@ -55694,7 +55694,7 @@
     }
   ],
   "fileCount": 11138,
-  "totalBytes": 1345370705,
+  "totalBytes": 1345370945,
   "webHTMLSha256": "3f025cfa0377352ea7d069bb32cfbc3efb0ce0ea4c533a1df854050bda4ca58e",
   "largest": [
     {
