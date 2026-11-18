@@ -13,7 +13,7 @@ if(window.__STORYWORLD_MOB_ART_R1179__)return;
 const REV='R1179-mob-art-1',KEY='storyworld.r1179.mobArt',DIR='assets/r1179/mobs/';
 const ART=Object.freeze({
  m077:Object.freeze({file:'m077.webp',body:211,name:"외계 침공군"}),
- m081:Object.freeze({file:'m081.webp',body:219,name:"여섯 물건의 그림자"}),
+ m081:Object.freeze({file:'m081.webp',body:221,name:"여섯 물건의 그림자"}),/* Dots CX-0157PX r2(11-18, r1 HOLD 손·밑단·팔 고친 판) */
 });
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const orig={},applied=[];let lastError=null,late=false;const data=()=>window.__STORYWORLD_MOB_UNIQUE_R248_DATA__||null;

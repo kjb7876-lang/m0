@@ -1,0 +1,1 @@
+AssertionError [ERR_ASSERTION]: tag right before move-dir-r1125-data.js (연결 전; 표·시트 동작 검사는 통과)

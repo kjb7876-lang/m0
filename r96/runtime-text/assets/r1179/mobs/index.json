@@ -46,25 +46,25 @@
   },
   "m081": {
    "file": "m081.webp",
-   "sha256": "2dccd110b916014840668d4500daeb8e93f35a60a025c41715283e56ecf5fb45",
-   "bytes": 266684,
+   "sha256": "e0f6b1ec048e8ee2cd2efc33e010ff851e2728720acc78ba7a95a7384b796191",
+   "bytes": 283920,
    "size": [
     1024,
     960
    ],
-   "body": 219,
+   "body": 221,
    "foot": [
-    276,
-    303
+    297,
+    298
    ],
    "source": {
     "kind": "sheet",
-    "zip": "SW-boss16-m081-candidate-v1.zip",
+    "zip": "CX-0157PX_m081_r2_ROUGH.png",
     "file": "sheet.png",
-    "sha256": "d4ae5eab44388bc7daae16c32f58ad7677b21623068848987dbbf0cf5d6d046d",
-    "bytes": 374515
+    "sha256": "0561d2a3ea2b3ca3416b13cca8a77973200dbd7976e8c6bbeb6b675a840b179a",
+    "bytes": 427759
    },
-   "processing": "soften: premultiplied gaussian r=.6 (edge staircase only)",
+   "processing": "none (pixels as-is)",
    "replaces": "assets/r248/mobs/m081.webp"
   }
  }

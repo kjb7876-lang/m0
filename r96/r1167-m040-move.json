@@ -1,0 +1,60 @@
+{
+ "round": "R1167",
+ "request": "CX-0082MV v6 B1 m040",
+ "files": [
+  {
+   "dots": "m040-down4.png",
+   "enemies": [
+    "c103-e1",
+    "h101-s1",
+    "h101-s2",
+    "h101-t1",
+    "u203-e1"
+   ],
+   "dir": "down",
+   "source": "Dots m040-down4.png",
+   "sourceSha256": "541e0877b09965890435c7f7f90a81c4fdfefad35fa573bfa34ffabf253fcad8",
+   "toneGain": [
+    0.939,
+    1.039,
+    1.079
+   ],
+   "path": "assets/r1167/move/m040-down.webp",
+   "size": [
+    1280,
+    320
+   ],
+   "bytes": 26142,
+   "sha256": "985bf5c4c22e94e6279d6187a31473c236a64cb373dfbde199767262ee08b18a",
+   "use": "일반몹 위·아래 떠다님",
+   "applied": true
+  },
+  {
+   "dots": "m040-up4.png",
+   "enemies": [
+    "c103-e1",
+    "h101-s1",
+    "h101-s2",
+    "h101-t1",
+    "u203-e1"
+   ],
+   "dir": "up",
+   "source": "Dots m040-up4.png",
+   "sourceSha256": "1e87fbc3848806888dd9c1b787a4bd885037eb77237745d147ac21c845b4f4b6",
+   "toneGain": [
+    0.939,
+    1.039,
+    1.079
+   ],
+   "path": "assets/r1167/move/m040-up.webp",
+   "size": [
+    1280,
+    320
+   ],
+   "bytes": 26436,
+   "sha256": "c48280e8bddf5999241fa0b32abdd6da494d821085b0080c9e20ce97e3944314",
+   "use": "일반몹 위·아래 떠다님",
+   "applied": true
+  }
+ ]
+}
