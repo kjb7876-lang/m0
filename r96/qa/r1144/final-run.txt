@@ -1,0 +1,75 @@
+PASS ① persona-wer-r1144.js runtime-text 사본 = client-source
+PASS ① 스크립트 태그: persona-hero-r1113 뒤
+PASS ① verify-r96-public.py 기대 목록
+PASS ① runtime-manifest·inputs
+PASS ① pages.yml CPU 검사 줄
+PASS ① 재사용 시트가 매니페스트에 있음(새 자산 없음): assets/r562/dots/neon-chain.webp
+PASS ① 재사용 시트가 매니페스트에 있음(새 자산 없음): assets/r535/dots/hunter-burn.webp
+PASS ① 재사용 시트가 매니페스트에 있음(새 자산 없음): assets/r946/lauren-red.webp
+PASS ① 키를 새로 듣지 않음(스킬 키 그대로)
+PASS ① 기록기가 못 받는 필터 없음
+PASS ② 라우렌 본인(형상 아님) → 덧효과 0
+PASS ② 끄기 설정 → 0
+PASS ② 다른 영웅 → 0
+PASS ③ 표식 붙은 셋이 한 번씩 0.6배(=6) (a:6,b:6,c:6)
+PASS ③ 표식 없는 적·9칸 밖 적은 안 맞음
+PASS ③ 가까운 순으로 이어짐
+PASS ③ 적끼리 잇는 번개 2줄 (2)
+PASS ③ 1.2초 뒤 한 번 더(표식이 남아 있으면) (6)
+PASS ③ 두 번으로 끝
+PASS ③ 피해 출처 = 영웅(아군 판정)
+PASS ③ 표식 적이 하나면 영웅에게서 한 줄
+PASS ③ 표식이 끝난 적은 두 번째에 안 맞음
+PASS ③ 한 번에 최대 8마리 (8)
+PASS ③ 마디가 7칸 넘게 떨어지면 끊김
+PASS ④ 4.5칸 안 가까운 넷에게 구슬 0.6배 (a,b,c,d)
+PASS ④ 맞은 적은 불탄다 (4)
+PASS ④ 화상: 다섯 번에 걸쳐 합계 0.3배(=3) (5번, 합 3.000)
+PASS ④ 0.5초마다, 2.5초 안에 끝
+PASS ④ 다 타면 사라짐
+PASS ⑤ 발동 직전엔 구슬 없음
+PASS ⑤ 0.14초 뒤 구슬이 돈다
+PASS ⑤ 궤도 위 적: 0.35배(=3.5)씩 3~5번 (5)
+PASS ⑤ 적마다 0.6초에 한 번
+PASS ⑤ 궤도 밖 적은 안 맞음
+PASS ⑤ 3초 뒤 끝
+PASS ⑤ 닿은 적은 불탄다
+PASS ⑥ 한 번에 12마리까지 (12)
+PASS ⑥ 다시 걸려도 겹치지 않고 시간만 새로(틱 0.06배씩 9번, 4.60초)
+PASS ⑦ 불러오기(대기만 채워짐, 시전 자세 없음) → 덧효과 없음
+PASS ⑦ 방이 바뀌면 모두 거둠
+PASS ⑦ 쓰러지면 멈춤
+PASS ⑦ 형상을 끄면 멈춤
+PASS ⑦ 훅 모음이 없어도 tick 감싸기로 돈다
+PASS ⑧ 본편 W·E·R 정의·키 그대로
+PASS ⑧ 대기·공격력을 건드리지 않음
+PASS ⑧ 수치 표
+PASS ⑨ 번개·구슬·회전 구슬·화상 모두 그림 (chain:33 orb:53 orbit:45 burn:8)
+PASS ⑨ 모두 이펙트 주인(ctx.scope), 밑그림 말고는 영웅 쪽 — 페르소나 굽기가 언주로 바꿈
+PASS ⑨ 기존 영웅 시트 재사용(네온 번개·헌터 화상·은빛 거성 구)
+PASS ⑨ 번개: 흑 밑그림(brightness(0), 보통 겹치기) + 언주 번개(빛 더하기)
+PASS ⑨ 시트 칸 크기대로 자름
+PASS ⑨ 표지 하나
+PASS ⑨ 끝나면 표지 치움·save 짝 맞음
+PASS ⑨ 오류 0 (null)
+PASS ⑨ 시트가 안 읽혔으면 임시 코드 그림
+PASS ⑨ 안 읽힌 시트를 부탁함
+PASS ⑪ 쌍성 충전(0.5초) 동안은 레이저 없음
+PASS ⑪ 부채꼴 안 일반 몹은 즉사(맵 끝 30칸 거리까지) (n1,n2,n3,boss)
+PASS ⑪ 보스는 최대 체력 7%(=350) 추가 피해, 즉사 아님 (350)
+PASS ⑪ 부채꼴 밖·뒤쪽 적은 안 맞음
+PASS ⑪ 영웅 피해, 천체 공명을 다시 굴리지 않게 r946 표식
+PASS ⑪ 한 번만
+PASS ⑪ 그림 주인 r946:violet:laser:* (페르소나 검빨 굽기 대상) (848)
+PASS ⑪ 레이저 결 = 기존 네온 번개 시트 재사용
+PASS ⑪ 라우렌 본인(형상 아님) → 레이저 없음
+PASS ⑪ 다른 갈래 → 없음
+PASS ⑪ 넓힌 탐험 맵(경계 120)에서는 그 끝까지 (x1,x2)
+PASS ⑪ 맵(N=64) 밖까지는 안 감
+PASS ⑩ 네온 번개(민트) → 언주 굽기 (r1140:eonju:1:m0/assets/r562/dots/neon-chain.webp 213,73,57)
+PASS ⑩ 밑그림(영웅 쪽 표식 없음)은 페르소나 굽기가 건드리지 않음 → 검은 그림자 그대로
+PASS ⑩ 헌터 화상 → 언주 굽기
+PASS ⑩ (진) 쌍성 소멸 레이저 결(네온 번개 시트) → 검빨 굽기 (r1140:darkred:1:m0/assets/r562/dots/neon-chain.webp)
+PASS ⑩ 굽지 못하면 주인이 준 색 돌리기(민트 → 붉은 쪽) (hue-rotate(200deg) saturate(1.6) brightness(.85))
+PASS ⑩ 기록기가 못 받는 필터는 받지 않음 (hue-rotate(100deg) saturate(1.5) brightness(.78) contrast(1.15))
+ALL PASS

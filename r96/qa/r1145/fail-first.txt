@@ -1,0 +1,10 @@
+FAIL ① R411 영웅 적중 그림(라우렌 보랏빛 균열) → 언주 굽기 (http://x/m0/assets/r411/fx/hit-teleport.webp)
+PASS ① 보스 쪽 R411 그림은 그대로
+PASS ① 형상 끄면(라우렌 본인) 그대로
+FAIL ② R302 라우렌 2색 탄·착탄 사본 → 언주 굽기 ()
+PASS ② 표시 없는 엔진 그림은 그대로
+PASS ② 형상 끄면(라우렌 본인) 그대로
+PASS ③ runtime-text 사본 = client-source
+FAIL ③ pages.yml CPU 검사 줄
+FAIL ③ 판 이름
+FAILED 4
