@@ -12153,6 +12153,21 @@
       "sha256": "a9496b2f07487f0ed0e198d1ca6631fbcc81f7a69e4d366ca150d5191d410d6a"
     },
     {
+      "path": "assets/r1177/s06-commander-dots-attack-8.webp",
+      "bytes": 130802,
+      "sha256": "6e7d202bbcb3551a8855f09456fd72e264c7c39d8700df7adbb017adb4f191e4"
+    },
+    {
+      "path": "assets/r1177/s06-commander-dots-hit-4.webp",
+      "bytes": 61044,
+      "sha256": "0e7d08d814bf7d5118c872aca61c435f71d66ebf10bb0784e4aaac4f4d59f459"
+    },
+    {
+      "path": "assets/r1177/s06-commander-dots-walk-right-8.webp",
+      "bytes": 110432,
+      "sha256": "42b64177f0f31d426d848be3edb07a407dd6f3542ce1a052ade600b9e4f6bea5"
+    },
+    {
       "path": "assets/r1177/s06-commander-walk-right-8.webp",
       "bytes": 162354,
       "sha256": "1d6ead7e4c44b1d714cb31e3becded61c3a3f872c0c881dda1f67212024bb801"
@@ -12161,6 +12176,26 @@
       "path": "assets/r1177/s06-invader-walk-right-8.webp",
       "bytes": 93230,
       "sha256": "c1bd4255d859184c71ce3822c7fc823c78a7495dabec88cb02ea9dbbc6b42b0f"
+    },
+    {
+      "path": "assets/r1177/s06-rival-dots-attack-8.webp",
+      "bytes": 139964,
+      "sha256": "f1aed701145bff14bc384c02525bf238ae04397506c890d6b927764e38b21803"
+    },
+    {
+      "path": "assets/r1177/s06-rival-dots-death-8.webp",
+      "bytes": 75074,
+      "sha256": "9815461eaf01ba36aacb392f75ffba59b9d547188506f7514de6e04a9644e9a7"
+    },
+    {
+      "path": "assets/r1177/s06-rival-dots-hit-4.webp",
+      "bytes": 70786,
+      "sha256": "b3640aa8610b11944d2549ed13f2829624acc268fb685de6ce688b1c4d7708a5"
+    },
+    {
+      "path": "assets/r1177/s06-rival-dots-walk-right-8.webp",
+      "bytes": 121620,
+      "sha256": "95fc216e2dfeef8ade6a30a5b7354f19a179911946449b21b1e762bcb9f98f44"
     },
     {
       "path": "assets/r1177/s06-rival-walk-right-8.webp",
@@ -55759,8 +55794,8 @@
     },
     {
       "path": "samong-r161.js",
-      "bytes": 19911,
-      "sha256": "49d520992be6bf72bca248c7713bd8c150a995d650d4aac9558d1dc636ecb9c6"
+      "bytes": 21929,
+      "sha256": "9cff5c3dac061c663b5a07b2f4697c455e4359a581a55fec0b9371ef8702304c"
     },
     {
       "path": "samong-rooms-r511.js",
@@ -56348,8 +56383,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11269,
-  "totalBytes": 1355190295,
+  "fileCount": 11276,
+  "totalBytes": 1355902035,
   "webHTMLSha256": "7da654eb0661b9fadf84c1904200465ffcd70a351064dee1415962b2b8526ff9",
   "largest": [
     {

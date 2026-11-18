@@ -10479,7 +10479,14 @@
     "assets/r1163/bosses/u204-hit4.webp",
     "assets/r1163/bosses/u205-hit4.webp",
     "assets/r1162/move/u205-mid-down.webp",
-    "assets/r1173/persona-walk-side.webp"
+    "assets/r1173/persona-walk-side.webp",
+    "assets/r1177/s06-rival-dots-walk-right-8.webp",
+    "assets/r1177/s06-rival-dots-attack-8.webp",
+    "assets/r1177/s06-rival-dots-hit-4.webp",
+    "assets/r1177/s06-rival-dots-death-8.webp",
+    "assets/r1177/s06-commander-dots-walk-right-8.webp",
+    "assets/r1177/s06-commander-dots-attack-8.webp",
+    "assets/r1177/s06-commander-dots-hit-4.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11554,5 +11561,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "846b23ec5fe40f487f961b14b349150ff7b381c7a0ba6e4154f226e6789a10ff"
+  "runtimeManifestSHA256": "3f1bc9ffe24346f29bcded5e3ffafd75d294d22e65e97bb3271c81c9b8b8fe93"
 }
