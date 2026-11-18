@@ -1142,6 +1142,8 @@ jobs:
         run: node r96/qa/r1099/r1099-cpu-check.cjs
       - name: R946 Lauren passive celestial resonance (repulse burst, red push orb, blue pull orb, violet piercing fusion, prop meteors; per-hero instance)
         run: node r96/qa/r946/r946-cpu-check.cjs
+      - name: R1151 Dots LC-08 gravity explosion sheet on Lauren meteor impact CPU check
+        run: node r96/qa/r1151/r1151-cpu-check.cjs
       - name: R940 read-only state snapshot for QA (events, first-hit-after-entry, boss kill time; no game writes) CPU check
         run: node r96/qa/r940/r940-cpu-check.cjs
       - name: Install pinned sandboxed Chromium
