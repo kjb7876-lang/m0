@@ -10,10 +10,10 @@
  * 끄기: localStorage storyworld.r1113.personaHero = {"on":..., "off":true}. */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_PERSONA_HERO_R1113__)return;
-const REV='R1113-persona-hero-6-hud-well-r1120b',KEY='storyworld.r1113.personaHero',FIELD='personaHeroR1113',BASE='lauren';
+const REV='R1113-persona-hero-7-audit-r1140',KEY='storyworld.r1113.personaHero',FIELD='personaHeroR1113',BASE='lauren';
 const PROFILE=Object.freeze({name:'페르소나',title:'페르소나 · 순수악의',role:'HIDDEN · 9번째 영웅',color:'#cc3428',
- passive:'사몽 결전에서 쓰러뜨린 거울. 라우렌의 별 기술을 언주빛으로 되비춥니다.',special:'라우렌과 같은 기술·키',
- portrait:'assets/rc133/art/awake-0.png',tags:['히든','언주','라우렌 계보']});
+ passive:'사몽 결전에서 쓰러뜨린 거울. 별의 기술을 언주빛으로 되비춥니다.',special:'내면의 소용돌이',
+ portrait:'assets/rc133/art/awake-0.png',tags:['히든','언주','거울']});
 const TINT='hue-rotate(100deg) saturate(1.5) brightness(.78) contrast(1.15)'; // R1096 라우렌→언주 색 돌리기와 같은 방향(보라 164,98,255 → 붉은 언주)
 const ART=Object.freeze({base:i=>'assets/rc133/art/base-'+i+'.png',awake:i=>'assets/rc133/art/awake-'+i+'.png',w:344,h:400,ax:172,ground:385,height:357});
 const DIRI=Object.freeze({front:0,left:2,back:4,right:6});
@@ -76,7 +76,7 @@ const okPt=q=>Array.isArray(q)&&fin(q[0])&&fin(q[1]);
 // R1120: 라우렌 몸 그림(…/lauren/… — 라우렌 스킬 그림 lauren/lauren-*, fx/lauren/* 은 빼고). 막기 때 더 큰 방벽(barrier.webp)을 몸으로 고르던 것을 막는다.
 const LAUREN_BODY=/\/lauren\/(?!lauren-)/,LAUREN_NOT_BODY=/\/fx\/lauren\//;
 const isLaurenBody=c=>{const s=String(c?.sourcePath||'');return LAUREN_BODY.test(s)&&!LAUREN_NOT_BODY.test(s);};
-function heroBody(cmds){let best=-1,bh=0,bestL=-1,bl=0;for(let i=0;i<cmds.length;i++){const c=cmds[i];if(!c||c.kind!=='image'||c.r1113)continue;const o=c.owner;if(!o||o.kind!=='hero')continue;
+function heroBody(cmds){let best=-1,bh=0,bestL=-1,bl=0;for(let i=0;i<cmds.length;i++){const c=cmds[i];if(!c||c.kind!=='image'||c.r1113||c.r151Death)continue;const o=c.owner;if(!o||o.kind!=='hero'||/:r151$/.test(String(o.id||'')))continue; // R1140: R151 쓰러짐 칸(이미 페르소나 쓰러짐 시트)은 몸으로 고르지 않는다
   const P=c.points;if(!Array.isArray(P)||P.length!==4||!P.every(okPt))continue;const h=Math.abs(P[3][1]-P[0][1]);if(h>bh){bh=h;best=i;}if(isLaurenBody(c)&&h>bl){bl=h;bestL=i;}}return bestL>=0?bestL:best;}
 function place(c,fr,anchor,m,foot,H){ // fr 의 (anchor.ax, anchor.ground) 를 foot 에, anchor.h 를 H 에 맞춰 화면에 바로 선 사각형으로
  const k=H/anchor.h,X=u=>foot[0]+m*(u-anchor.ax)*k,Y=v=>foot[1]+(v-anchor.ground)*k,W=fr.w,Hh=fr.h;
@@ -96,7 +96,8 @@ function fxCmd(body,id,cv,cx,cy,rx,ry,alpha){const pts=[[cx-rx,cy-ry],[cx+rx,cy-
  const ord=fin(body.order)?body.order+(id==='r1113:aura'?-.5:.5):body.order;
  return {...body,key:id+':0',order:ord,kind:'image',owner:{id,kind:'effect'},image:cv,mutable:false,sourcePath:cv.__storyworldStaticSource.path,immutableTint:cv.__storyworldStaticSource,sourceRect:[0,0,64,64],imageSize:[64,64],points:pts,
   style:{...(body.style&&typeof body.style==='object'?body.style:{}),filter:'none',globalAlpha:Math.min(1,alpha),globalCompositeOperation:'lighter'},r1113:true,r1113tint:true};}
-function swapBody(cmds){const i=heroBody(cmds);if(i<0)return null;const c=cmds[i],p=pl(),t=now(),P0=c.points.map(q=>[q[0],q[1]]);if(!p||t==null||typeof project!=='function')return null;
+function swapBody(cmds){if(!(pl()?.hp>0))return null; // R1140: 쓰러진 뒤엔 몸을 바꿔 끼우지 않는다(쓰러짐 칸이 대기 그림으로 덮이던 것)
+ const i=heroBody(cmds);if(i<0)return null;const c=cmds[i],p=pl(),t=now(),P0=c.points.map(q=>[q[0],q[1]]);if(!p||t==null||typeof project!=='function')return null;
  const g=project(p.x,p.y);if(!fin(g?.x)||!fin(g?.y))return null;const lift=Math.max(0,Math.min(200,+p.visualLiftPx||0)),foot=[g.x,g.y-lift],H=G(()=>actorHeight(),66)*SCALE;if(!(H>0))return null;
  const s=track(p,t),ult=p.ultimateAnim>0,act=!ult&&(p.attackAnim>0||p.skillAnim>0);
  if(s.w>.5&&!act&&!ult){const [k,m]=pickWalk(),W=WALK[k],r=IM.get(W.src);if(r?.state==='ready'){const f=Math.floor(s.phase*WALK_RATE)%FRAMES;if(place(c,r.frames[f],W,m,foot,H)){stats.walkSwaps++;stats.last=k+':'+f+(m<0?':flip':'');return {i,c,mode:'walk',P0};}}}
@@ -119,7 +120,10 @@ function addGlow(cmds,sw){if(!sw||(sw.mode!=='act'&&sw.mode!=='ult')||!glows())r
 const LAUREN_FX=/^r106fx:[a-z]+:(164\.98\.255|120\.50\.200|214\.170\.255):/;
 // R1120: 라우렌 보라로 물든 에덴 불(r108eden:<시트>#164,98,255|…), 라우렌 스킬 그림 폴더(lauren/lauren-*, fx/lauren/*), EGO 오라(r111:ego-*·라우렌 팔레트), 순간이동 빛(…:lauren:…)
 const LAUREN_EDEN=/^r108eden:[a-z.]+#(\d+),(\d+),(\d+)\|/,LAUREN_ART=/\/lauren\/lauren-|\/fx\/lauren\//,EGO_AURA=/^r111:ego-(back|front)$/,LAUREN_ID=/:lauren:/;
-function heroFx(o,c){if(!o||o.kind==='hero'||o.kind==='enemy'||o.kind==='contact'||o.kind==='shadow')return false;if(o.pxfSide==='hero'||o.side==='hero')return true;if(o.pxfSide==='enemy'||o.side==='enemy')return false;const id=String(o.id||'');
+// R1140: 막기 방벽(r1027/barrier.webp — 은청색, 영웅 소유 테두리 복제 포함)·막기 빛(r111:guard-*, 금빛)·블링크 잔광(vfx/blink-afterimage.webp)도 형상일 때 언주로
+const GUARD_ART=/\/r1027\/barrier\.webp/,BLINK_ART=/\/vfx\/blink-afterimage\.webp/,GUARD_ID=/^r111:guard-(back|front)$/;
+function heroFx(o,c){if(!o||o.kind==='enemy'||o.kind==='contact'||o.kind==='shadow')return false;if(o.kind==='hero')return GUARD_ART.test(String(c?.sourcePath||''));
+ if(o.pxfSide!=='enemy'&&o.side!=='enemy'){if(GUARD_ID.test(String(o.id||'')))return true;const s0=String(c?.sourcePath||'');if(GUARD_ART.test(s0)||BLINK_ART.test(s0))return true;}if(o.pxfSide==='hero'||o.side==='hero')return true;if(o.pxfSide==='enemy'||o.side==='enemy')return false;const id=String(o.id||'');
  if(/(^|:)hero(:|$)/.test(id)||/^r102:/.test(id)||EGO_AURA.test(id)||LAUREN_ID.test(id))return true;const sp=String(c?.sourcePath||'');
  const e=LAUREN_EDEN.exec(sp),ev=e&&violet(+e[1],+e[2],+e[3]);
  return o.kind==='effect'&&(LAUREN_FX.test(sp)||!!ev||LAUREN_ART.test(sp));}
@@ -141,7 +145,28 @@ function wrapPfx(){const X=G(()=>window.__STORYWORLD_PIXELFX_R163__,null);if(!X|
  try{window.__STORYWORLD_PIXELFX_R163__=Object.freeze(w);}catch(e){fail(e);}}
 function vectors(cmds){let n=0;for(const c of cmds){if(!c||(c.kind!=='fill'&&c.kind!=='stroke')||c.r1113tint)continue;const o=c.owner;if(!o||!(VEC_ID.test(String(o.id||''))||heroFx(o,c)))continue;const s=c.style;if(!s||typeof s!=='object')continue;
   c.style={...s,fillStyle:recolorPaint(s.fillStyle),strokeStyle:recolorPaint(s.strokeStyle)};c.r1113tint=true;n++;}stats.vecTints=(stats.vecTints||0)+n;return n;}
+// R1140 언주 명암 굽기: 색 돌리기(hue-rotate)는 밝은 심을 흰·분홍으로 남긴다(브라우저 기록기는 brightness·contrast·saturate·grayscale·hue-rotate 만 됨) →
+//  정지 그림 이펙트는 그림을 한 번 읽어 밝기 따라 먹→언주 어두움(70,14,10)→언주(204,52,40)→살구(255,176,140)→살구빛 흰색으로 구운 캔버스로 바꿔 끼운다(알파 그대로).
+//  한 프레임에 한 장만 굽고(끊김 막기), 바뀌는 캔버스·너무 큰 그림·읽기 막힌 그림·굽기 전 프레임은 예전 색 돌리기 필터 그대로.
+const LUT=(()=>{const t=new Uint8ClampedArray(768);for(let v=0;v<256;v++){const L=v/255;let j=1;while(j<RAMP.length-1&&L>RAMP[j][0])j++;const [a0,c0]=RAMP[j-1],[a1,c1]=RAMP[j],k=Math.max(0,Math.min(1,(L-a0)/Math.max(1e-6,a1-a0)));for(let i=0;i<3;i++)t[v*3+i]=Math.round(c0[i]+(c1[i]-c0[i])*k);}return t;})();
+const lum=(r,g,b)=>{const v=Math.round(.3*(+r||0)+.59*(+g||0)+.11*(+b||0));return v<0?0:v>255?255:v;};
+function ramp(r,g,b){const i=lum(r,g,b)*3;return [LUT[i],LUT[i+1],LUT[i+2]];}
+// 굽는 그림은 대부분 빛 더하기(lighter)로 겹쳐 그려져 밝은 쪽이 금방 흰·분홍으로 뜬다 → 굽기용 표는 흰 꼬리 없이 사용자 세 색만(먹 → 70,14,10 → 204,52,40 → 255,176,140)
+const DEEP=[[0,[0,0,0]],[.3,EONJU[0]],[.65,EONJU[1]],[1,EONJU[2]]];
+const LUT_DEEP=(()=>{const t=new Uint8ClampedArray(768);for(let v=0;v<256;v++){const L=v/255;let j=1;while(j<DEEP.length-1&&L>DEEP[j][0])j++;const [a0,c0]=DEEP[j-1],[a1,c1]=DEEP[j],k=Math.max(0,Math.min(1,(L-a0)/Math.max(1e-6,a1-a0)));for(let i=0;i<3;i++)t[v*3+i]=Math.round(c0[i]+(c1[i]-c0[i])*k);}return t;})();
+function rampPixels(d){let n=0;if(!d||!(d.length>=4))return 0;for(let i=0;i+3<d.length;i+=4){if(d[i+3]===0)continue;const j=lum(d[i],d[i+1],d[i+2])*3;d[i]=LUT_DEEP[j];d[i+1]=LUT_DEEP[j+1];d[i+2]=LUT_DEEP[j+2];n++;}return n;}
+const BAKE_MAX_PX=2048*2048,BAKE_MAX_N=200,BAKE_MAX_TOTAL=12e6;const baked=new WeakMap();let bakeSerial=0,bakeBudget=0,bakeCount=0,bakePx=0; // 합계 1200만 화소(약 48MB)까지만 굽는다
+function bake(c){const im=c.image;if(!im||typeof im!=='object'||c.mutable===true||!hasDom())return null;let r=baked.get(im);if(r!==undefined)return r;
+ const w=Math.floor(+im.naturalWidth||+im.videoWidth||+im.width||0),h=Math.floor(+im.naturalHeight||+im.videoHeight||+im.height||0);
+ if(!(w>0&&h>0)||w*h>BAKE_MAX_PX||bakeCount>=BAKE_MAX_N||bakePx+w*h>BAKE_MAX_TOTAL){baked.set(im,null);return null;}
+ if(bakeBudget<=0)return null;bakeBudget--;
+ try{const cv=canvas(w,h),g=cv.getContext('2d');g.drawImage(im,0,0,w,h);const d=g.getImageData(0,0,w,h);rampPixels(d.data);g.putImageData(d,0,0);
+  const id='r1140:eonju:'+(++bakeSerial)+':'+String(c.sourcePath||c.immutableTint?.path||im.__storyworldStaticTint?.path||'cv').replace(/^https?:\/\/[^/]+\//,'').slice(0,90);cv.__storyworldStaticSource={path:id};
+  r={canvas:cv,path:id};bakeCount++;bakePx+=w*h;stats.bakedPx=bakePx;stats.baked=(stats.baked||0)+1;}catch(_){r=null;stats.bakeSkips=(stats.bakeSkips||0)+1;}
+ baked.set(im,r);return r;}
 function tint(cmds){let n=0;for(const c of cmds){if(!c||c.kind!=='image'||c.r1113tint)continue;if(!heroFx(c.owner,c))continue;const s=c.style&&typeof c.style==='object'?c.style:{};
+  let b=null;try{b=bake(c);}catch(e){fail(e);}
+  if(b){c.image=b.canvas;c.mutable=false;c.sourcePath=b.path;c.immutableTint=b.canvas.__storyworldStaticSource;c.r1113tint=true;stats.bakedDraws=(stats.bakedDraws||0)+1;n++;continue;}
   const f=typeof s.filter==='string'&&s.filter!=='none'?s.filter+' ':'';c.style={...s,filter:f+TINT};c.r1113tint=true;n++;}stats.tints+=n;return n;}
 // 페르소나는 창이 없다 → 라우렌 창끝 빛(R425)은 형상일 때 뺀다
 const DROP=/^r425:spear-tip$/;
@@ -178,7 +203,7 @@ function wellCore(cmds){let n=0;const groups=new Map();
   delete cmd.paths;delete cmd.rule;delete cmd.lineWidth;add.push([base,cmd]);}
  let j=0;for(let i=0;i<cmds.length;i++){const c=cmds[i];if(c&&(c.kind==='fill'||c.kind==='stroke')&&CORE_ID.test(String(c.owner?.id||''))){const a=add.find(x=>x[0]===c);if(a){cmds[j++]=a[1];n++;}continue;}cmds[j++]=c;}cmds.length=j;
  stats.cores=(stats.cores||0)+n;return n;}
-function process(cmds){if(!Array.isArray(cmds))return 0;if(!formActive())return 0;prewarm();let n=0;try{drop(cmds);}catch(e){fail(e);}try{const sw=swapBody(cmds);if(sw){n++;n+=echoes(cmds,sw);n+=addGlow(cmds,sw);}}catch(e){fail(e);}try{n+=skills(cmds);}catch(e){fail(e);}try{n+=wellCore(cmds);}catch(e){fail(e);}try{n+=tint(cmds);}catch(e){fail(e);}try{n+=vectors(cmds);}catch(e){fail(e);}return n;}
+function process(cmds){if(!Array.isArray(cmds))return 0;if(!formActive())return 0;prewarm();bakeBudget=1;let n=0;try{drop(cmds);}catch(e){fail(e);}try{const sw=swapBody(cmds);if(sw){n++;n+=echoes(cmds,sw);n+=addGlow(cmds,sw);}}catch(e){fail(e);}try{n+=skills(cmds);}catch(e){fail(e);}try{n+=wellCore(cmds);}catch(e){fail(e);}try{n+=tint(cmds);}catch(e){fail(e);}try{n+=vectors(cmds);}catch(e){fail(e);}return n;}
 // ---- 렌더러 감싸기(prototype·인스턴스, 한 render 에 한 번) ----
 let depth=0;
 const wrapFn=fn=>{if(fn.__r1113)return fn;const w=function(frame){if(depth===0){try{if(frame&&Array.isArray(frame.commands))process(frame.commands);}catch(e){fail(e);}}depth++;try{return fn.apply(this,arguments);}finally{depth--;}};w.__r1113=true;return w;};
@@ -220,6 +245,7 @@ function mark(){if(!hasDoc())return;for(const c of document.querySelectorAll('#p
  if(want&&st.dataset.hero===BASE&&nm&&nm.textContent!==PROFILE.name){st.classList.add('r1113');st.style.setProperty('--c',PROFILE.color);const role=st.querySelector('.role'),img=st.querySelector('.pt img'),info=st.querySelector('.info');
   nm.textContent=PROFILE.name;if(role)role.textContent=PROFILE.role;if(img){img.onerror=null;img.src=url(PROFILE.portrait);img.alt=PROFILE.name;}
   if(info){const tags=info.querySelector('.tags');if(tags)tags.innerHTML=PROFILE.tags.map(x=>'<span>'+x+'</span>').join('');}}
+ if(want&&st.dataset.hero===BASE)try{relabelIn(st);}catch(e){fail(e);}
  else if(!want&&st.classList.contains('r1113'))st.classList.remove('r1113');}
 function inject(){const panel=document.getElementById('panel');if(!panel)return;const rows=[];const sr=panel.querySelector('#heroRowR101 .heroRowR101');if(sr)rows.push([sr,true]);const cs=panel.querySelector('.cards');if(cs&&cs.querySelector('[data-hero]'))rows.push([cs,false]);
  for(const [row,start] of rows){const h=row.querySelector('[data-hero="'+BASE+'"]');let c=row.querySelector('[data-persona-r1113]');if(!h){continue;}
@@ -234,30 +260,49 @@ function hudName(){const n=G(()=>document.getElementById('heroName'),null);if(!n
 function nameFix(id,v){if(!formActive())return v;if(Object.prototype.hasOwnProperty.call(HUD_TEXT,id))return HUD_TEXT[id];if(id!=='heroName')return v;const t=String(v??''),b=G(()=>HEROES[BASE].name,'라우렌');return t.includes(b)?t.split(b).join(PROFILE.name):t;}
 function wrapHud(){for(const k of ['setHudTextR63R2','setHudText']){const f=G(()=>typeof window[k]==='function'?window[k]:null,null);if(!f||f.__r1113)continue;const w=function(id,v,...a){let x=v;try{x=nameFix(id,v);}catch(e){fail(e);}return f.call(this,id,x,...a);};w.__r1113=true;try{window[k]=w;}catch(e){fail(e);}}}
 // R1120b 하단 스킬 칸: 형상일 때 아이콘을 페르소나 Dots 탄 시트(R1119) 칸으로, Q·본편 E 이름을 그 그림의 기술 이름으로, 초상 테 색을 언주로. 끄면 원래대로(dataset 에 기억).
-const HUD_ICON=Object.freeze({attackIcon:'small-orb',blinkIcon:'diamond',guardIcon:'shield',specialIcon:'vortex',egoIcon:'eye'}),HUD_DOCK=Object.freeze({'#story-wer-w img':'star','#story-wer-e img':'eclipse'});
-const HUD_TEXT=Object.freeze({specialLabel:'내면의 소용돌이'}),HUD_TITLE=Object.freeze({'story-wer-e':'욕망의 일식'});
+const HUD_ICON=Object.freeze({attackIcon:'small-orb',blinkIcon:'diamond',guardIcon:'shield',specialIcon:'vortex',egoIcon:'eye'}),HUD_DOCK=Object.freeze({'#story-wer-w img':'star','#story-wer-e img':'eclipse','#story-wer-r img':'lance'});
+const HUD_TEXT=Object.freeze({specialLabel:'내면의 소용돌이'}),HUD_TITLE=Object.freeze({'story-wer-w':'순수악의의 분기','story-wer-e':'욕망의 일식','story-wer-r':'악의의 관통'});
+// R1140: 본편 W·E·R 칸 — 엔진 updateHUD 가 매 프레임 라우렌 아이콘·제목을 다시 쓰므로 그 직후에 다시 입힌다(아래 wrapHudDock)
+const DOCK=Object.freeze({w:Object.freeze({icon:'star',name:'순수악의의 분기'}),e:Object.freeze({icon:'eclipse',name:'욕망의 일식'}),r:Object.freeze({icon:'lance',name:'악의의 관통'})});
 const iconUrl=new Map();
 function icon(k){if(iconUrl.has(k))return iconUrl.get(k);const r=load('assets/r1119/fx-'+k+'-flight.webp');if(r.state!=='ready'||!r.frames?.[0])return null;
- try{const cv=canvas(96,96);cv.__id=k;const g=cv.getContext('2d');g.drawImage(r.frames[0].canvas,2*256+24,24,208,208,0,0,96,96);const u=cv.toDataURL('image/png');iconUrl.set(k,u);return u;}catch(e){fail(e);iconUrl.set(k,null);return null;}}
+ try{const cv=canvas(96,96);cv.__id=k;const g=cv.getContext('2d'),S=r.frames[0].h||256,m=Math.round(S*24/256);g.drawImage(r.frames[0].canvas,2*S+m,m,S-2*m,S-2*m,0,0,96,96);const u=cv.toDataURL('image/png');iconUrl.set(k,u);return u;}catch(e){fail(e);iconUrl.set(k,null);return null;}}
 function hudIcon(el,k,on){if(!el)return;const d=el.dataset||{};if(on){const u=icon(k);if(!u)return;if(d.r1120src==null)d.r1120src=el.getAttribute('src')||'';if(el.getAttribute('src')!==u)el.src=u;}
  else if(d.r1120src!=null){el.src=d.r1120src;delete d.r1120src;}}
+function hudTitles(on){for(const id in HUD_TITLE){const el=document.getElementById(id);if(!el)continue;const d=el.dataset,t=HUD_TITLE[id];
+  if(on){if(el.title!==t){if(d.r1120title==null){d.r1120title=el.title||'';d.r1120aria=el.getAttribute('aria-label')||'';}el.title=t;el.setAttribute('aria-label',t+' · '+String(d.r1120aria).split(' · ').slice(1).join(' · '));}}
+  else if(d.r1120title!=null){el.title=d.r1120title;el.setAttribute('aria-label',d.r1120aria);delete d.r1120title;delete d.r1120aria;}}}
+function dockSkin(on){for(const q in HUD_DOCK)hudIcon(G(()=>document.querySelector(q),null),HUD_DOCK[q],on);hudTitles(on);}
+let dockWrapped=false; // 한 번만 감싼다(다른 오버레이가 위에 또 감싸도 다시 감싸지 않음 — #754 핑퐁 방지)
+function wrapHudDock(){if(dockWrapped)return;const f=G(()=>typeof updateHUD==='function'?updateHUD:null,null);if(!f)return;dockWrapped=true;
+ const w=function(){const r=f.apply(this,arguments);try{if(formActive()&&hasDoc())dockSkin(true);}catch(e){fail(e);}return r;};w.__r1140=true;try{updateHUD=w;}catch(e){fail(e);}}
 function hudSkin(on){if(!hasDoc())return;
  for(const id in HUD_ICON)hudIcon(document.getElementById(id),HUD_ICON[id],on);for(const q in HUD_DOCK)hudIcon(G(()=>document.querySelector(q),null),HUD_DOCK[q],on);
  for(const id in HUD_TEXT){const el=document.getElementById(id);if(!el)continue;const d=el.dataset;if(on){if(el.textContent!==HUD_TEXT[id]){if(d.r1120txt==null)d.r1120txt=el.textContent;el.textContent=HUD_TEXT[id];}}else if(d.r1120txt!=null){el.textContent=d.r1120txt;delete d.r1120txt;}}
- for(const id in HUD_TITLE){const el=document.getElementById(id);if(!el)continue;const d=el.dataset,t=HUD_TITLE[id];if(on){if(el.title!==t){if(d.r1120title==null){d.r1120title=el.title||'';d.r1120aria=el.getAttribute('aria-label')||'';}el.title=t;el.setAttribute('aria-label',t+' · '+String(d.r1120aria).split(' · ').slice(1).join(' · '));}}
-  else if(d.r1120title!=null){el.title=d.r1120title;el.setAttribute('aria-label',d.r1120aria);delete d.r1120title;delete d.r1120aria;}}
+ hudTitles(on);
  const pf=document.getElementById('r376Pf');if(pf&&pf.style){const d=pf.dataset,cur=pf.style.getPropertyValue('--hc');if(on){if(cur!==PROFILE.color){if(d.r1120hc==null)d.r1120hc=cur;pf.style.setProperty('--hc',PROFILE.color);}}else if(d.r1120hc!=null){pf.style.setProperty('--hc',d.r1120hc);delete d.r1120hc;}}}
+// R1140 글 바꾸기: 형상일 때 P 창·영웅 선택 무대에 남는 라우렌 이름·기술 이름·패시브 문장 → 페르소나 것(화면 글만, 저장·판정·키는 그대로)
+const LABELS=Object.freeze([['세 번째 공격에 잔향 마력진이 남는다.',PROFILE.passive],['잔향의 마법사','순수악의'],['잔향 결계','내면의 소용돌이'],['거짓 분리','순수악의의 분기'],['심문자의 전이','욕망의 일식'],['진명 심판','악의의 관통'],['라우렌',PROFILE.name]]);
+const LABEL_RX=/라우렌|잔향의 마법사|잔향 결계|잔향 마력진|거짓 분리|심문자의 전이|진명 심판/;
+function relabel(v){if(typeof v!=='string'||!v||!LABEL_RX.test(v))return v;let t=v;for(const [a,b] of LABELS)if(t.includes(a))t=t.split(a).join(b);return t;}
+function relabelIn(root){if(!root||!LABEL_RX.test(String(root.textContent||''))||typeof document.createTreeWalker!=='function')return 0;let n=0;
+ const tw=document.createTreeWalker(root,4);for(let x=tw.nextNode();x;x=tw.nextNode()){const v=x.nodeValue,t=relabel(v);if(t!==v){x.nodeValue=t;n++;}}stats.relabels=(stats.relabels||0)+n;return n;}
+// P 창 등(영웅 선택창은 라우렌 칸이 따로 있으므로 무대만 mark 에서 바꾼다)
+function relabelPanel(){if(!hasDoc()||!formActive())return;const panel=document.getElementById('panel');if(!panel||typeof panel.querySelector!=='function'||panel.querySelector('[data-hero]'))return;relabelIn(panel);}
+let panelObs=null;function watchPanel(){if(panelObs||!hasDoc()||typeof MutationObserver!=='function')return;const panel=document.getElementById('panel');if(!panel)return;
+ try{panelObs=new MutationObserver(()=>{try{relabelPanel();}catch(e){fail(e);}});panelObs.observe(panel,{childList:true,subtree:true,characterData:true});}catch(e){fail(e);}}
 let hudOn=false;function hud(){const on=formActive();if(on){prewarm();hudSkin(true);hudOn=true;}else if(hudOn){hudSkin(false);hudOn=false;}}
 let uiAt=0;
 function ui(){if(!hasDoc())return;const t=Date.now();if(t<uiAt)return;uiAt=t+200;
- try{if(commit!=null&&!G(()=>loading,true)&&G(()=>started,false)){const p=pl();if(p){const on=commit&&p.hero===BASE;setForm(on);if(on&&typeof toast==='function')toast(PROFILE.title+' · 라우렌의 기술을 언주빛으로 씁니다.',4);}commit=null;want=false;}}catch(e){fail(e);}
+ try{if(commit!=null&&!G(()=>loading,true)&&G(()=>started,false)){const p=pl();if(p){const on=commit&&p.hero===BASE;setForm(on);if(on&&typeof toast==='function')toast(PROFILE.title+' · 거울의 기술을 언주빛으로 씁니다.',4);}commit=null;want=false;}}catch(e){fail(e);}
  try{if(document.getElementById('panel')?.querySelector('[data-hero]')){css();inject();}}catch(e){fail(e);}
  try{hud();}catch(e){fail(e);}
+ try{watchPanel();relabelPanel();}catch(e){fail(e);}
  try{if(formActive()){hudName();const pt=document.getElementById('portrait'),u=url(PROFILE.portrait);if(pt&&pt.getAttribute('src')!==u)pt.src=u;}}catch(e){fail(e);}}
-function install(){registerGameHooks();wrapInst();wrapHud();wrapPfx();if(hasDoc()){try{document.addEventListener('click',onClick,true);}catch(e){fail(e);}}
- try{setInterval(()=>{try{wrapInst();wrapHud();wrapPfx();watch();ui();}catch(e){fail(e);}},250);}catch(e){fail(e);}}
+function install(){registerGameHooks();wrapInst();wrapHud();wrapPfx();wrapHudDock();if(hasDoc()){try{document.addEventListener('click',onClick,true);}catch(e){fail(e);}}
+ try{setInterval(()=>{try{wrapInst();wrapHud();wrapPfx();wrapHudDock();watch();ui();}catch(e){fail(e);}},250);}catch(e){fail(e);}}
 install();
-window.__STORYWORLD_PERSONA_HERO_R1113__=Object.freeze({revision:REV,profile:PROFILE,field:FIELD,base:BASE,tint:TINT,art:ART,walkSheets:WALK,idleSheets:IDLE,scale:SCALE,orb:ORB,
+window.__STORYWORLD_PERSONA_HERO_R1113__=Object.freeze({revision:REV,profile:PROFILE,field:FIELD,base:BASE,tint:TINT,art:ART,walkSheets:WALK,idleSheets:IDLE,scale:SCALE,orb:ORB,dock:DOCK,ramp,rampPixels,relabel,
  unlocked,unlock,formActive,setForm,process,watch,refresh:()=>{try{if(hasDoc()){css();inject();}}catch(e){fail(e);}try{hud();}catch(e){fail(e);}},
  lock(){saved={on:false,off:false};persist();},set(v){saved.off=v===false||v==='off';persist();return !saved.off;},
  images:()=>Object.fromEntries([...IM].map(([k,v])=>[k,v.state])),
