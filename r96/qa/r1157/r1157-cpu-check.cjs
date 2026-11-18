@@ -38,7 +38,7 @@ function env(opt={}){
  var log={basic:[],wer:[],q:[],hits:[],xp:[],draws:[],imgs:[],sounds:[],shots:[]};
  var heroArt={};for(const k in HEROES)heroArt[k]={idle:{front:'art/'+k+'.webp'}};
  function heroPaths(k){return ['art/'+k+'.webp'];}
- function readyImage(p){return {image:{src:p,naturalWidth:2304,naturalHeight:192}};}function ensureImages(){return Promise.resolve();}
+ function readyImage(p){if(String(p).startsWith("act/")&&!(window.asked||[]).includes(p))return null;return {image:{src:p,naturalWidth:2304,naturalHeight:192}};}function ensureImages(){return Promise.resolve();}
  function wallAt(){return false;}function moveActor(a,dx,dy){a.x+=dx;a.y+=dy;}function facing(x,y){return x>0?'right':'left';}
  function liveEnemies(){return room.enemies.filter(e=>e.hp>0);}
  function attackPower(){return player.ap;}
@@ -52,9 +52,10 @@ function env(opt={}){
  function drawHero(){log.draws.push({hero:player.hero,body:!!player.r1157Summon,x:player.x,y:player.y});}
  function drawProp(p){log.draws.push({prop:p&&p.id});}
  function sprite(){}
- var ctx={globalAlpha:1,globalCompositeOperation:'source-over',filter:'none',save(){},restore(){},beginPath(){},ellipse(){},fill(){},stroke(){},
+ var ctx={globalAlpha:1,globalCompositeOperation:'source-over',filter:'none',save(){},restore(){},beginPath(){},ellipse(){},fill(){},stroke(){},font:'',textAlign:'',fillStyle:'',strokeStyle:'',lineWidth:1,fillText(t,x,y){log.texts=(log.texts||[]);log.texts.push(t);if(!Number.isFinite(x)||!Number.isFinite(y))log.nan=(log.nan||0)+1;},strokeText(){},fillRect(x,y,w,h){if([x,y,w,h].some(v=>!Number.isFinite(v)))log.nan=(log.nan||0)+1;log.rects=(log.rects||0)+1;},
   drawImage(im,...a){log.imgs.push({src:im.src,a});if(a.some(v=>!Number.isFinite(v)))log.nan=(log.nan||0)+1;},scope(o,f){f();}};
- window.__STORYWORLD_WER__={cast(slot,auto){const k=player.hero+':'+slot,s=player.storyWER||(player.storyWER={ready:{},buffs:{}});if(Number.isFinite(s.ready[k])&&s.ready[k]>time)return false;if(!liveEnemies().length)return false;s.ready[k]=time+13;player.skillAnim=.6;log.wer.push({hero:player.hero,slot,t:time,body:!!player.r1157Summon});return true;}};
+ var asked=[];ensureImages=function(ps){asked.push(...ps);return Promise.resolve();};window.StoryPhase1={CURRENT_PUBLIC_HERO_DATA:{heroActions:Object.fromEntries(Object.keys(HEROES).map(k=>[k,{w:'act/'+k+'-w.webp',e:'act/'+k+'-e.webp',r:'act/'+k+'-r.webp'}]))}};
+ window.__STORYWORLD_WER__={cast(slot,auto){if(window.__opt.loose){if(!liveEnemies().length)return false;player.skillAnim=.6;log.wer.push({hero:player.hero,slot,t:time,body:!!player.r1157Summon});return true;}const k=player.hero+':'+slot,s=player.storyWER||(player.storyWER={ready:{},buffs:{}});if(Number.isFinite(s.ready[k])&&s.ready[k]>time)return false;if(!liveEnemies().length)return false;s.ready[k]=time+13;player.skillAnim=.6;log.wer.push({hero:player.hero,slot,t:time,body:!!player.r1157Summon});return true;}};
  window.__STORYWORLD_HANDO_FINAL_R49__={autoSpecial(){if(player.specialCD>0)return;player.specialCD=9;log.q.push({hero:player.hero,t:time,body:!!player.r1157Summon});},autoTarget(){return liveEnemies()[0]||null;}};
  window.__STORYWORLD_EGO_KIT_R1094__={active:()=>window.__opt.ego!==false&&player===me&&player.egoSovereignR1046===true};
  var r720has=new Set(window.__opt.present||[]);window.__STORYWORLD_HERO_DEFENSE_R720__={has:id=>r720has.has(id),bodies:()=>[]};
@@ -133,6 +134,8 @@ for(const [name,code] of [['지역 이동','room={id:"z9",enemies:[],props:[]}']
  ok(h.player===h.me,'⑪ 그린 뒤 조종 영웅으로 되돌아옴');
  ok(h.log.imgs.some(i=>/sig-aura-red\.webp$/.test(i.src)),'⑪ 발밑 백적 고리 = 기존 시트 r100 sig-aura-red');
  ok(h.log.imgs.some(i=>/sig-gather-red\.webp$/.test(i.src)),'⑪ 등장 소용돌이 = 기존 시트 r100 sig-gather-red');
+ ok((h.log.texts||[]).some(t=>t.includes(h.HEROES[A(h).bodies()[0].hero].name)),'⑪ 아군 표시: 머리 위 영웅 이름',h.log.texts);
+ ok((h.log.rects||0)>=2,'⑪ 남은 시간 막대',h.log.rects);
  ok(!h.log.nan,'⑪ 그리기 좌표 NaN 없음');
  run(h,'drawProp({id:"x"})');ok(h.log.draws.some(d=>d.prop==='x'),'⑪ 다른 소품은 원래 drawProp');}
 // ⑫ 모든 모드: 협동 손님 화면은 직접 소환하지 않음(방장이 돌림), 방장은 손님 EGO 의 R 도 소환
@@ -143,6 +146,19 @@ for(const [name,code] of [['지역 이동','room={id:"z9",enemies:[],props:[]}']
  ok(h.player===h.me,'⑫ 방장 player 그대로');}
 {const h=env({coop:{mode:'host'}});h.room.enemies.push(mob('a',13,10));run(h,`window.__guests=[{id:'g2',hero:'neon',x:12,y:12,hp:100,storyWER:{ready:{},buffs:{}}}]`);step(h,2);castR(h);step(h,2);
  ok(A(h).bodies().length===1&&A(h).bodies()[0].hero!=='neon','⑫ 협동: 다른 사람이 쓰는 영웅(네온)과 겹치지 않음',A(h).bodies().map(b=>b.hero));}
+// ⑭ 배우지 않은 스킬도 소환 동안 쓴다(R663 잠금: 몸만 Q·W·E·R 1단계 이상), 주인의 배움 상태는 그대로
+{const h=env();run(h,"player.progressionR62={version:1,ranks:{skillQR663:0,skillWR663:2,endlessPower:3},points:0}");h.room.enemies.push(mob('a',13,10));step(h,2);castR(h);step(h,2);const b=A(h).bodies()[0];
+ const rk=A(h).qaAs(b,()=>run(h,'({...player.progressionR62.ranks})'));
+ ok(rk&&rk.skillQR663>=1&&rk.skillWR663===2&&rk.skillER663>=1&&rk.skillRR663>=1&&rk.endlessPower===3,'⑭ 몸: Q·W·E·R 최소 1단계, 나머지 강화는 주인 값',rk);
+ ok(h.me.progressionR62.ranks.skillQR663===0&&!('skillER663' in h.me.progressionR62.ranks),'⑭ 주인 EGO 의 배움 상태는 안 바뀜',h.me.progressionR62.ranks);}
+// ⑮ 엔진 칸 대기를 안 쓰는 스킬(기억사수 R561 처럼 다른 겹이 맡음)도 0.7초보다 자주 나가지 않음 — 몸마다 칸별 대기를 따로 센다
+{const h=env({loose:true});h.room.enemies.push(mob('a',13,10));step(h,2);castR(h);step(h,100);
+ for(const k of ['w','e','r']){const c=h.log.wer.filter(x=>x.body&&x.slot===k),gaps=c.slice(1).map((x,i)=>+(x.t-c[i].t).toFixed(3));
+  ok(c.length>=4&&gaps.every(d=>d>=.69),'⑮ 대기를 안 남기는 '+k.toUpperCase()+' 도 0.7초 간격',{n:c.length,gaps:gaps.slice(0,5)});}}
+// ⑯ EGO 일 때 소환 후보 영웅의 몸 그림·W·E·R 시전 그림을 미리 받는다(그림이 없으면 엔진 cast 가 거절)
+{const h=env({present:['neon']});h.room.enemies.push(mob('a',13,10));step(h,3);const as=h.asked;
+ ok(['seoha','lauren','hunter','slayer','gunner','michaela'].every(k=>as.includes('act/'+k+'-w.webp')&&as.includes('act/'+k+'-r.webp')),'⑯ 후보 영웅 W·E·R 시전 그림 미리 받기',as.filter(x=>/^act/.test(x)).length);
+ ok(!as.includes('act/neon-w.webp')&&!as.includes('act/hwando-w.webp'),'⑯ 후보 아닌 영웅(판에 있는 네온·환도)은 안 받음');}
 // ⑬ 오류 없음
 ok(A(g).inspect().stats.errors===0,'⑬ 오류 0',A(g).inspect().lastError);
 console.log(`\nR1157 CPU: ${n-bad}/${n} 통과`);process.exit(bad?1:0);
