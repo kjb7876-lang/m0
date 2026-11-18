@@ -27,6 +27,7 @@ const SHEETS={'assets/generated-v31224/actors-normalized/1a8ca2c5759b_ep1b03_env
  'assets/r104/bosses/dist00-boss-p4.webp':{w:421,h:463,idle:{path:'assets/r1147/bosses/dist00-idle6.webp',n:6,fps:8},hit:{path:'assets/r1147/bosses/dist00-hit4.webp',n:4,fps:16}},'assets/r104/bosses/b07-boss-p4.webp':{w:411,h:473,idle:{path:'assets/r1147/bosses/b07-idle6.webp',n:6,fps:8},hit:{path:'assets/r1147/bosses/b07-hit4.webp',n:4,fps:16}},
  'assets/r104/bosses/a11-boss-p4.webp':{w:466,h:432,idle:{path:'assets/r1147/bosses/a11-idle6.webp',n:6,fps:8},hit:{path:'assets/r1147/bosses/a11-hit4.webp',n:4,fps:16}},
  'assets/r104/bosses/dist06-boss-p4.webp':{w:508,h:501,idle:{path:'assets/r1147/bosses/dist06-idle6.webp',n:6,fps:8},hit:{path:'assets/r1147/bosses/dist06-hit4.webp',n:4,fps:16}},/* R1159: Dots r2 HOLD 피격을 Claude 가 크기·색 손질(scripts/r1159-balrog-hit.py) */
+ 'assets/r104/bosses/b09-boss-p4.webp':{w:464,h:461,idle:{path:'assets/r1161/bosses/b09-idle6.webp',n:6,fps:8},hit:{path:'assets/r1161/bosses/b09-hit4.webp',n:4,fps:16}},/* R1161: b09 Dots r2 HOLD — 기계 다리는 원래 p4, 사람·핵만 Dots(scripts/r1161-b09-boss.py) */
  'assets/r104/bosses/u202-mid-p4.webp':{w:509,h:525,idle:{path:'assets/r1147/bosses/u202-idle6.webp',n:6,fps:8}}};
 const asked=new Set();function sheetImg(p){try{const r=typeof readyImage==='function'?readyImage(p):null;if(r?.image)return r.image;if(!asked.has(p)&&typeof addImage==='function'){asked.add(p);addImage(p,'R620 Dots boss sheet');}}catch(_){}return null;}
 const ST=new WeakMap();
