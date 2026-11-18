@@ -24,8 +24,8 @@ const poseNo=s=>{const m=/-p([1-4])\.(?:webp|png)/i.exec(s);return m?+m[1]:0;};
 // Dots CX-0068SM 시트: 보스가 지금 그리는 대기 원본 경로 → 같은 칸 크기·발 줄로 맞춘 가로 한 줄 시트(qa/r620/sheets.md 에 원본·해시·검수값).
 const SHEETS={'assets/generated-v31224/actors-normalized/1a8ca2c5759b_ep1b03_envy_sister_phase0.webp':{w:672,h:384,idle:{path:'assets/r620/bosses/b03-idle6.webp',n:6,fps:8},hit:{path:'assets/r620/bosses/b03-hit4.webp',n:4,fps:16}},
  // R1147 Dots CX-0142BI 1차(b07·a11·dist06)·CX-0147BI 2차(u202): 대기 6칸만(피격 4칸은 Dots HOLD). 열쇠 = 대기 때 실제로 그려진 R104 p4(qa/r1147/idle-census.mjs), 자리·색 맞춤 qa/r1147/fitsheet.py.
- 'assets/r104/bosses/b07-boss-p4.webp':{w:411,h:473,idle:{path:'assets/r1147/bosses/b07-idle6.webp',n:6,fps:8}},
- 'assets/r104/bosses/a11-boss-p4.webp':{w:466,h:432,idle:{path:'assets/r1147/bosses/a11-idle6.webp',n:6,fps:8}},
+ 'assets/r104/bosses/dist00-boss-p4.webp':{w:421,h:463,idle:{path:'assets/r1147/bosses/dist00-idle6.webp',n:6,fps:8},hit:{path:'assets/r1147/bosses/dist00-hit4.webp',n:4,fps:16}},'assets/r104/bosses/b07-boss-p4.webp':{w:411,h:473,idle:{path:'assets/r1147/bosses/b07-idle6.webp',n:6,fps:8},hit:{path:'assets/r1147/bosses/b07-hit4.webp',n:4,fps:16}},
+ 'assets/r104/bosses/a11-boss-p4.webp':{w:466,h:432,idle:{path:'assets/r1147/bosses/a11-idle6.webp',n:6,fps:8},hit:{path:'assets/r1147/bosses/a11-hit4.webp',n:4,fps:16}},
  'assets/r104/bosses/dist06-boss-p4.webp':{w:508,h:501,idle:{path:'assets/r1147/bosses/dist06-idle6.webp',n:6,fps:8}},
  'assets/r104/bosses/u202-mid-p4.webp':{w:509,h:525,idle:{path:'assets/r1147/bosses/u202-idle6.webp',n:6,fps:8}}};
 const asked=new Set();function sheetImg(p){try{const r=typeof readyImage==='function'?readyImage(p):null;if(r?.image)return r.image;if(!asked.has(p)&&typeof addImage==='function'){asked.add(p);addImage(p,'R620 Dots boss sheet');}}catch(_){}return null;}

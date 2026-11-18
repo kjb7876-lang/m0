@@ -1,13 +1,14 @@
-// R1147 CPU 검사: Dots CX-0142BI 보스 대기 6칸 시트(분노 b07 · 루시퍼 a11 · 발록 dist06) + CX-0147BI 2차 자비 교정관 u202를 R620 보스 움직임에 붙인다.
+// R1147 CPU 검사: Dots CX-0142BI 보스 대기 6칸 시트(분노 b07 · 루시퍼 a11 · 발록 dist06 · 뿌리 문지기 dist00) + CX-0147BI 2차 자비 교정관 u202, Dots 통합 r2 피격 4칸(b07·a11·dist00)을 R620 보스 움직임에 붙인다.
 //  · 게임이 대기 때 실제로 그리는 그림(헤드리스 조사 qa/r1147/idle-census.mjs: r104 p4 한 장)이면 대기 6칸 시트 칸으로 바꾼다.
-//  · 피격 시트는 아직 HOLD 라 없다 → 맞을 때는 원래 그림(코드 밀림)으로, 오류 없이.
+//  · 피격: Dots r2 피격 4칸(b07·a11, 16fps 한 번)이 있으면 그 시트, 없는 보스(dist06 HOLD·u202)는 원래 그림(코드 밀림)으로, 오류 없이.
 //  · 걷기·공격 중에는 시트를 쓰지 않는다. 다른 그림(b02 R380 시트·b04 사람 형태 phase0)은 건드리지 않는다.
 //  · 시트 파일: 칸 크기 = 원본 p4 크기, 6칸 가로 한 줄, 칸마다 발 줄·키(±5%)·원본과 겹침(IoU≥0.65)·색(평균 차 ≤6)이 원본과 맞고, 알파 1~16 잔티 0.
 //  · 레비아탄(b03) 기존 대기·피격 시트는 그대로.
 'use strict';const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('assert'),cp=require('child_process');
 const R=path.join(__dirname,'../..');let n=0;const ok=(c,m)=>{assert.ok(c,m);n++;};
 const F=path.join(R,'client-source','boss-motion-r620.js');const src=fs.readFileSync(F,'utf8');
-const BOSSES={b07:[411,473],a11:[466,432],dist06:[508,501],u202:[509,525]};
+const BOSSES={b07:[411,473],dist00:[421,463],a11:[466,432],dist06:[508,501],u202:[509,525]};
+const HIT=new Set(['b07','a11','dist00']);
 const P4=id=>'assets/r104/bosses/'+id+(id==='u202'?'-mid':'-boss')+'-p4.webp';
 function world(p4,W,H,{ready=true}={}){const ctx={Math,String,Number,Array,Object,JSON,Map,WeakMap,Set,Symbol,isFinite,performance:{now:()=>0},localStorage:{getItem:()=>null,setItem(){}}};ctx.window=ctx;vm.createContext(ctx);
  vm.runInContext(`var time=0,room={id:'z'},player={x:0,y:0},ctx={commands:[]};var __ready=${ready},__added=[];function addImage(p){__added.push(p);}
@@ -26,7 +27,8 @@ for(const [id,[W,H]] of Object.entries(BOSSES)){
   ok(L.every(f=>f.pts.flat().every(Number.isFinite)),id+': finite points');
   // 피격: 시트가 없으니 원래 그림 + 오류 0, 끝나면 다시 대기 시트
   e.hitTimer=.14;const Lh=frames(c,e,.6,{step:e=>{e.hitTimer=Math.max(0,e.hitTimer-1/30);}});
-  ok(Lh.slice(0,3).every(f=>f.src===p4),id+': hit (no hit sheet yet) keeps original art');ok(Lh[Lh.length-1].src.includes('r1147'),id+': back to idle sheet after hit');
+  if(HIT.has(id)){ok(Lh.slice(0,3).every(f=>f.src==='assets/r1147/bosses/'+id+'-hit4.webp'),id+': hit uses R1147 hit4 sheet');const hc=Lh.filter(f=>f.src.includes('-hit4')).map(f=>f.rect[0]);ok(new Set(hc).size===4&&hc.every(x=>x%W===0&&x<=W*3),id+': hit plays 4 cells once ('+new Set(hc).size+')');}
+  else ok(Lh.slice(0,3).every(f=>f.src===p4),id+': hit (no hit sheet) keeps original art');ok(Lh[Lh.length-1].src.includes('r1147'),id+': back to idle sheet after hit');
   ok(c.__STORYWORLD_BOSS_MOTION_R620__.inspect().stats.errors===0,id+': no errors through hit');
   // 걷기: 시트 안 씀
   const Lw=frames(c,e,1,{step:e=>{e.x+=.05;}});ok(Lw.slice(15).every(f=>!f.src.includes('r1147')),id+': walking keeps engine art');
@@ -63,12 +65,20 @@ for k,(W,H) in json.loads(sys.argv[1]).items():
   for i,f in enumerate(fr):
     fa=list(A(sh.crop((i*W,0,(i+1)*W,H))).point(lambda v:255 if v>16 else 0).getdata());f['iou']=sum(1 for a,b in zip(sa,fa) if a and b)/max(1,sum(1 for a,b in zip(sa,fa) if a or b))
   out[k]={'size':list(sh.size),'src':s,'fr':fr}
+  if k in json.loads(sys.argv[2]):
+    hs=Image.open(f'${R}/runtime-text/assets/r1147/bosses/{k}-hit4.webp').convert('RGBA');hf=[info(hs.crop((i*W,0,(i+1)*W,H))) for i in range(4)]
+    for i,f in enumerate(hf):
+      fa=list(A(hs.crop((i*W,0,(i+1)*W,H))).point(lambda v:255 if v>16 else 0).getdata());f['iou']=sum(1 for a,b in zip(sa,fa) if a and b)/max(1,sum(1 for a,b in zip(sa,fa) if a or b))
+    out[k]['hit']={'size':list(hs.size),'fr':hf}
 print(json.dumps(out))`;
- let M=null;try{M=JSON.parse(cp.execFileSync('python3',['-I','-c',py,JSON.stringify(BOSSES)],{encoding:'utf8',maxBuffer:1<<24}));}catch(err){ok(false,'sheet files measurable: '+String(err.message).slice(0,200));}
+ let M=null;try{M=JSON.parse(cp.execFileSync('python3',['-I','-c',py,JSON.stringify(BOSSES),JSON.stringify([...HIT])],{encoding:'utf8',maxBuffer:1<<24}));}catch(err){ok(false,'sheet files measurable: '+String(err.message).slice(0,200));}
  for(const [id,[W,H]] of Object.entries(BOSSES)){const m=M[id];ok(m.size[0]===W*6&&m.size[1]===H,id+': sheet '+W*6+'x'+H+' ('+m.size+')');const s=m.src,vh=s.bb[3]-s.bb[1];
   for(const [i,f] of m.fr.entries()){const fvh=f.bb[3]-f.bb[1];ok(Math.abs(f.bb[3]-s.bb[3])<=0,id+' f'+i+': foot line '+f.bb[3]+' = '+s.bb[3]);ok(Math.abs(fvh-vh)/vh<=.05,id+' f'+i+': height within 5%');ok(f.iou>=.65,id+' f'+i+': silhouette overlap with p4 '+f.iou.toFixed(3)+' >= 0.65');
-   const dc=f.rgb.reduce((a,v,j)=>a+Math.abs(v-s.rgb[j]),0)/3;ok(dc<=6,id+' f'+i+': colour mean diff '+dc.toFixed(1)+' <= 6');ok(f.low===0,id+' f'+i+': no alpha 1..16 fringe');ok(f.bb[0]>=1&&f.bb[1]>=1&&f.bb[2]<=W-1,id+' f'+i+': not touching cell edge');}}}
+   const dc=f.rgb.reduce((a,v,j)=>a+Math.abs(v-s.rgb[j]),0)/3;ok(dc<=6,id+' f'+i+': colour mean diff '+dc.toFixed(1)+' <= 6');ok(f.low===0,id+' f'+i+': no alpha 1..16 fringe');ok(f.bb[0]>=1&&f.bb[1]>=1&&f.bb[2]<=W-1,id+' f'+i+': not touching cell edge');}
+  if(HIT.has(id)){const h=m.hit;ok(!!h&&h.size[0]===W*4&&h.size[1]===H,id+': hit sheet '+W*4+'x'+H);
+   for(const [i,f] of (h?h.fr:[]).entries()){const fvh=f.bb[3]-f.bb[1];ok(Math.abs(f.bb[3]-s.bb[3])<=2,id+' hit f'+i+': foot line '+f.bb[3]+' ≈ '+s.bb[3]+' (±2 recoil)');ok(Math.abs(fvh-vh)/vh<=.08,id+' hit f'+i+': height within 8% (recoil)');ok(f.iou>=.6,id+' hit f'+i+': overlap with p4 '+f.iou.toFixed(3)+' >= 0.6');
+    const dc=f.rgb.reduce((a,v,j)=>a+Math.abs(v-s.rgb[j]),0)/3;ok(dc<=8,id+' hit f'+i+': colour mean diff '+dc.toFixed(1)+' <= 8');ok(f.low===0,id+' hit f'+i+': no alpha 1..16 fringe');ok(f.bb[0]>=1&&f.bb[1]>=1&&f.bb[2]<=W-1,id+' hit f'+i+': not touching cell edge');}}}}
 {// 연결: 새 자산이 runtime-inputs 에 있고 Pages 가 이 검사를 돈다
- const ri=fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8');for(const id of Object.keys(BOSSES))ok(ri.includes('assets/r1147/bosses/'+id+'-idle6.webp'),'runtime-inputs lists '+id+' sheet');
+ const ri=fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8');for(const id of Object.keys(BOSSES))ok(ri.includes('assets/r1147/bosses/'+id+'-idle6.webp'),'runtime-inputs lists '+id+' sheet');for(const id of HIT)ok(ri.includes('assets/r1147/bosses/'+id+'-hit4.webp'),'runtime-inputs lists '+id+' hit sheet');
  ok(fs.readFileSync(path.join(R,'../.github/workflows/pages.yml'),'utf8').includes('qa/r1147/r1147-cpu-check.cjs'),'pages.yml runs this check');}
 console.log('R1147 boss idle sheets CPU check: '+n+' ok');

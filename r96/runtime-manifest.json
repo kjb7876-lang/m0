@@ -11148,14 +11148,34 @@
       "sha256": "9e77abcb2e57ef95bc269e8924c450bfcdcdf3fc2f7099536545bf7047379c42"
     },
     {
+      "path": "assets/r1147/bosses/a11-hit4.webp",
+      "bytes": 258002,
+      "sha256": "f21bb27d9354bd9813a75c9cea8f894e1bd8e2fa36096e21d0f31b08069c2125"
+    },
+    {
       "path": "assets/r1147/bosses/a11-idle6.webp",
       "bytes": 431888,
       "sha256": "66644de346d975a69a86b488cdb25d1ce85af695d827e3171d33d10e74e7af5a"
     },
     {
+      "path": "assets/r1147/bosses/b07-hit4.webp",
+      "bytes": 80110,
+      "sha256": "240fa0c37352e9a5a458bbf634c62f7077b0546436c03c36e7d1eba844b9e562"
+    },
+    {
       "path": "assets/r1147/bosses/b07-idle6.webp",
       "bytes": 124208,
       "sha256": "1e514c49e0536f5b0b6a3633fb03abbaad00ea3bc9864735f86b4af2cc4c1261"
+    },
+    {
+      "path": "assets/r1147/bosses/dist00-hit4.webp",
+      "bytes": 274810,
+      "sha256": "dbee255146b02648d3d021a5ff48f5bc999e926d18c04149197de093032357b4"
+    },
+    {
+      "path": "assets/r1147/bosses/dist00-idle6.webp",
+      "bytes": 421792,
+      "sha256": "50f55da506eccc02238cb62c175ba5facd2d1f2f844858727d1106c0a5bae56d"
     },
     {
       "path": "assets/r1147/bosses/dist06-idle6.webp",
@@ -53079,8 +53099,8 @@
     },
     {
       "path": "boss-motion-r620.js",
-      "bytes": 10403,
-      "sha256": "73d1918aba752a1766e9fc5aab34e6fc60c7e0f43a491b81e7fd936c350d4b7e"
+      "bytes": 10697,
+      "sha256": "199dfdb44b78e77e092cc595c60b5f823b9d319ab726bab07dd274e323654918"
     },
     {
       "path": "boss-pattern-fx-r1040.js",
@@ -55783,8 +55803,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11156,
-  "totalBytes": 1347247209,
+  "fileCount": 11160,
+  "totalBytes": 1348282217,
   "webHTMLSha256": "51cefc6de1046aa2b5f0e6c8c8c6ad74e0a227c26b5c8c5be757432a838108f4",
   "largest": [
     {
