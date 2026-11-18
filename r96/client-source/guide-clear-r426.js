@@ -39,13 +39,20 @@ function calm(){const x=G(()=>room?.samongR103,null);if(!x||!x.zone)return false
  return G(()=>window.__STORYWORLD_SAMONG_R103__?.state?.()?.kills,0)>=g.kills;}
 function goal(e){const x=G(()=>room?.samongR103,null);if(!e||!x||!x.zone||x.portal)return false;if(x.leadId&&e.id===x.leadId)return true;
  if(!e.r170Tower)return false;const z=G(()=>window.__STORYWORLD_SAMONG_ZONES_R115__?.zone?.(x.zone),null);return z?.mode==='F';}
+// R1132d(2026-11-18 이어 하기 재검증 cult04 3/4판): 닫힌 문(door-2) 너머에서 영웅을 본(R390 engaged) 몹이 셋 넘으면, 시야 없는 'engaged' 몹을
+//  8초 쫓다 15초 쉬게 해도 셋이 번갈아 뽑혀(8×3>15) 영웅이 문 앞에 서서 끝없이 멈췄다(제단 준비·bossReady 인데 보스를 못 부름).
+//  시야가 없는 'engaged' 몹은 길(findPath)이 닿을 때만 고른다. 길 검사는 몹마다 2초에 한 번(실패 길찾기 비용). 시야가 트인 몹·원래 규칙은 그대로.
+const reachAt=new Map();
+function reach(e){const t=now(),c=reachAt.get(e.id);if(c&&t-c.at>=0&&t-c.at<2)return c.ok;let ok=true;
+ try{ok=distance(player,e)<1.2||typeof findPath!=='function'||!!findPath(player,e,room,.31)?.length;}catch(_){ok=true;}
+ if(!ok)stats.unreachable=(stats.unreachable||0)+1;reachAt.set(e.id,{at:t,ok});return ok;}
 let setAt=-1e9,focus=null,focusSince=0,bestD=Infinity,bestHp=Infinity,nextAt=0,lastRoom=null;const banned=new Map();
 const now=()=>G(()=>time,0);
 function bannedSet(t){for(const [id,until] of banned)if(until<=t)banned.delete(id);return new Set(banned.keys());}
-function choose(){const t=now();if(G(()=>room,null)!==lastRoom){lastRoom=G(()=>room,null);focus=null;banned.clear();}
+function choose(){const t=now();if(G(()=>room,null)!==lastRoom){lastRoom=G(()=>room,null);focus=null;banned.clear();reachAt.clear();}
  const rows=G(()=>liveEnemies(),[])||[],chase=window.__STORYWORLD_AGGRO_CHASE_R390__;
  const max=calm()?CALM:Infinity;stats.calm=max<Infinity;
- const bs=bannedSet(t);let r=pick(rows,player,{max,focusId:focus?.id,banned:bs,dist:(a,b)=>distance(a,b),los:e=>G(()=>clearLine(player,e),false),engaged:e=>G(()=>chase?.engaged?.(e)===true,false)});
+ const bs=bannedSet(t);let r=pick(rows,player,{max,focusId:focus?.id,banned:bs,dist:(a,b)=>distance(a,b),los:e=>G(()=>clearLine(player,e),false),engaged:e=>G(()=>chase?.engaged?.(e)===true,false)&&reach(e)});
  if(!r&&stats.calm){let bd=Infinity;for(const e of rows)if(visible(e)&&!bs.has(e.id)&&goal(e)){const d=distance(player,e);if(d<bd){bd=d;r={enemy:e,why:'goal'};}}if(r)stats.goals=(stats.goals||0)+1;}
  if(!r){focus=null;return null;}
  const e=r.enemy,d=distance(player,e);

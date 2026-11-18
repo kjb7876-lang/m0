@@ -230,6 +230,8 @@ jobs:
         run: node r96/qa/r152/perf-small-cpu-check.cjs
       - name: R154 image crop memory across zone reloads
         run: node r96/qa/r154/crop-memo-cpu-check.cjs
+      - name: R1137 image crop fast scan equals the engine box
+        run: node r96/qa/r1137/crop-scan.cjs
       - name: R155 decal/lamp nearest-wall grid equals the all-walls answer
         run: node r96/qa/r155/decal-grid-cpu-check.cjs
       - name: R156 R90 floor-mark nearest-wall grid equals the all-walls answer
@@ -486,7 +488,7 @@ jobs:
       - name: R390 cinema full narration + midboss hold + enemies keep chasing CPU check
         run: node r96/qa/r390/r390-cpu-check.cjs
       - name: R426 guide clears visible enemies before moving + 결전의 날 narration dedupe + betrayal cinematic per run CPU check
-        run: node r96/qa/r426/r426-cpu-check.cjs
+        run: node r96/qa/r426/r426-cpu-check.cjs && node r96/qa/r1132/r426-door-cpu-check.cjs
       - name: R406 prop placement (seats inward, wall art flush, indoor bulbs) + Drive StoryProps in boss zones CPU check
         run: node r96/qa/r406/r406-cpu-check.cjs
       - name: R409 combat readability (enemy/hero outlines, cast sigil behind caster, big hero FX veiled over enemies) CPU check
@@ -655,6 +657,8 @@ jobs:
         run: node r96/qa/r1120/persona-hero-own-cpu-check.cjs
       - name: R1120b persona hero HUD icons/names from persona sheets, gravity-well core drawn as eclipse sheet cell CPU check
         run: node r96/qa/r1120/persona-hero-hud-well-cpu-check.cjs
+      - name: R1140 persona hero audit (W/E/R dock icons+names survive engine HUD rewrite, panel labels, eonju luminance bake, guard/blink tint) CPU check
+        run: node r96/qa/r1140/persona-hero-audit-cpu-check.cjs
       - name: R1098 samong faces (Michaela final boss uses her own sheet, R161 puppet repainted as an ink-and-white-thread doll so it no longer looks like Hwando) CPU check
         run: node r96/qa/r1098/r1098-cpu-check.cjs
       - name: R1090 character ink tint (hero and mob body images only, follows the map ink wash, settings toggle, effects and telegraphs untouched) CPU check

@@ -1,0 +1,4 @@
+FAIL ⑪ 체력 0: 쓰러짐 시트 칸 그대로 (r1113:assets/r1113d/persona-idle-s.png:0)
+FAIL ⑪ 체력이 음수여도 그대로
+
+FAILED 2
