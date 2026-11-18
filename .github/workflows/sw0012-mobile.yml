@@ -50,6 +50,7 @@ jobs:
           trap 'kill "$server"' EXIT
           curl --fail --retry 10 --retry-connrefused --retry-delay 1 --silent --output /dev/null "$SW_URL"
           node r96/qa/sw0012/mobile-browser.cjs
+          node r96/qa/sw0012/smoke-visual.cjs
       - name: Retain scenes and frame timings
         if: always()
         uses: actions/upload-artifact@v4
