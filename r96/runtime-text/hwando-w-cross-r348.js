@@ -34,7 +34,10 @@ const low=()=>!!(typeof settings!=='undefined'&&settings?.lowFx)||!!window.__STO
 const owns=(hero,slot)=>on&&hero==='hwando'&&String(slot)==='w';
 const clamp=(v,a,b)=>Math.min(b,Math.max(a,v)),smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
 // ---- 영웅 몸 그림 붙잡기(분신용): drawHero 가 기록한 가장 큰 영웅 그림 명령 ---------------------------------
-let body=null;
+let body=null;const bodyOf=new WeakMap();/* R1148b: 분신 모습은 쓴 몸의 그림으로 — 몸마다 따로 기억 */
+const asOwnerR1148=(o,fn)=>{const D=window.__STORYWORLD_HERO_DEFENSE_R720__;if(D&&typeof D.asOwner==='function')return D.asOwner(o,fn);let p=null;try{p=player;}catch(_){}return o&&o===p?fn():undefined;};/* R1148b: 이어지는 기술은 쓴 몸(owner)으로만 돌린다(환도·EGO 등 같은 기술 코드를 쓰는 몸끼리 섞이지 않게). R720 이 없으면 조종 영웅일 때만 */
+const aliveR1148=o=>{const D=window.__STORYWORLD_HERO_DEFENSE_R720__;if(D&&typeof D.alive==='function')return D.alive(o);let p=null;try{p=player;}catch(_){}return !!o&&o===p;};
+
 //  몸 그림만: R271 이 고른 몸(c.r271) 먼저, 없으면 영웅 몸 그림 경로(R271·R119 의 BODY_ART 와 같은 목록). 오라·각성 문양 같은 다른 영웅 그림은 고르지 않는다.
 const BODY_ART=/hero_direction|hero-authored|assets\/heroes\/|r91\/walk\/|r93\/idle\/|r119\/heroes\/|r121\/(?:heroes|walk)\/|r143\/attack\/|r242\/hwando\/|r271\/hwando\/|r283\/hwando\/|^blob:/;
 function snap(rec,st){if(!Array.isArray(rec?.commands)||!player)return;let best=null,bh=0;
@@ -42,7 +45,7 @@ function snap(rec,st){if(!Array.isArray(rec?.commands)||!player)return;let best=
   const r271=!!c.r271;if(!r271&&!BODY_ART.test(String(c.sourcePath||c.image?.src||'')))continue;const hh=Math.abs(c.points[3][1]-c.points[0][1])+(r271?1e4:0);if(hh>bh){bh=hh;best=c;}}
  if(best)bh=Math.abs(best.points[3][1]-best.points[0][1]);
  if(!best||!(bh>4))return;const q=project(player.x,player.y),sr=best.sourceRect||[0,0,best.image.naturalWidth||best.image.width,best.image.naturalHeight||best.image.height];
- body={image:best.image,src:String(best.sourcePath||best.image?.src||'').slice(-60),sr:[...sr],dx:best.points[0][0]-q.x,dy:best.points[0][1]-q.y,w:best.points[1][0]-best.points[0][0],h:best.points[3][1]-best.points[0][1],at:T(),hero:player.hero};stats.snapshots++;}
+ body={image:best.image,src:String(best.sourcePath||best.image?.src||'').slice(-60),sr:[...sr],dx:best.points[0][0]-q.x,dy:best.points[0][1]-q.y,w:best.points[1][0]-best.points[0][0],h:best.points[3][1]-best.points[0][1],at:T(),hero:player.hero};bodyOf.set(player,body);stats.snapshots++;}
 function heroSide(){const d=window.__STORYWORLD_HWANDO_R271__?.state?.()?.dir||String(player?.direction||'');return /e$|^e|right/.test(d)?1:/w$|^w|left/.test(d)?-1:0;}
 // ---- 분신 자리 고르기 --------------------------------------------------------------------------------------
 function screenBasis(x,y){const q=project(x,y),a=project(x+1,y),b=project(x,y+1);return {q,m:[a.x-q.x,b.x-q.x,a.y-q.y,b.y-q.y]};}
@@ -71,7 +74,7 @@ function pickSpots(o,fill=CFG.fill){const B=screenBasis(o.x,o.y),ringPx=CFG.ring
 // ---- 시전 ----------------------------------------------------------------------------------------------------
 const casts=[];const seen=new Set();
 function begin(x,y,o){if(seen.has(o.castId))return;seen.add(o.castId);if(seen.size>64)seen.delete(seen.values().next().value);
- const c={id:o.castId,x,y,t0:T(),room,zone:typeof zone!=='undefined'?zone:null,player,power:typeof attackPower==='function'?attackPower():0,body:body&&T()-body.at<.5&&body.hero==='hwando'?{...body}:null,side:heroSide(),clones:[]};
+ const mine=bodyOf.get(player)||null;const c={id:o.castId,x,y,t0:T(),room,zone:typeof zone!=='undefined'?zone:null,player,power:typeof attackPower==='function'?attackPower():0,body:mine&&T()-mine.at<.5&&mine.hero==='hwando'?{...mine}:null,side:heroSide(),clones:[]};
  if(solo()){c.clones=pickSpots(c).map((s,i)=>({...s,i,hit:false}));stats.clones+=c.clones.length;}else stats.coopSkipped++;
  casts.push(c);if(casts.length>3)casts.shift();stats.casts++;arm();}
 function valid(c){return c.room===room&&player===c.player&&player?.hp>0&&player.hero==='hwando'&&(typeof zone==='undefined'||zone===c.zone);}
@@ -108,11 +111,11 @@ try{
   try{const o=opt||{};if(on&&type==='storySourceSkill'&&o.storyWER&&o.stage==='release'&&owns(o.sourceHero,o.sourceSlot)&&player?.hero==='hwando'&&fin(x)&&fin(y)&&o.castId!=null)begin(x,y,o);}catch(e){fail(e);}return r;};}
  if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
   try{if(on&&st>=0&&player?.hero==='hwando'&&player.hp>0)snap(rec,st);}catch(e){fail(e);}return r;};}
- if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e===SENT){try{if(on)for(const c of casts)if(valid(c))drawCast(c);}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};}
+ if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e===SENT){try{if(on)for(const c of casts)asOwnerR1148(c.player,()=>{if(valid(c))drawCast(c);});}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};}
  const asHeroR720=(id,fn)=>{const D=window.__STORYWORLD_HERO_DEFENSE_R720__;return D&&typeof D.asHero==='function'?D.asHero(id,fn):fn();};/* R720-4: 다음 틱에 이어지는 기술을 그 영웅 몸(생존 배치 영웅이면 그 몸)으로 돌린다 */
  if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{const t=T();
-   asHeroR720('hwando',()=>{for(let i=casts.length-1;i>=0;i--){const c=casts[i];if(!valid(c)||t-c.t0>total()||t<c.t0-1){casts.splice(i,1);continue;}
-    for(const s of c.clones)if(!s.hit&&t-c.t0>=CFG.cloneIn+CFG.hold+.06)strike(c,s);}});
+   for(let i=casts.length-1;i>=0;i--){const c=casts[i];if(asOwnerR1148(c.player,()=>{if(!valid(c)||t-c.t0>total()||t<c.t0-1)return false;
+    for(const s of c.clones)if(!s.hit&&t-c.t0>=CFG.cloneIn+CFG.hold+.06)strike(c,s);return true;})!==true)casts.splice(i,1);}
    if(casts.length)arm();else if(typeof effects!=='undefined'&&Array.isArray(effects)){const i=effects.indexOf(SENT);if(i>=0)effects.splice(i,1);}}catch(e){fail(e);}return r;};}
  if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){casts.length=0;return base.apply(this,a);};}
  try{SP()?.warm?.(PAL,['iai-cut','slashline','cross','glow']);SP()?.warm?.(GOLD,['flare']);}catch(_){}
