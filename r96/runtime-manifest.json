@@ -53863,6 +53863,11 @@
       "sha256": "abf73915c9990c95b9552e971310311876c2c78c8b629276afe846e4bc13cd96"
     },
     {
+      "path": "ego-polish-r1139.js",
+      "bytes": 9116,
+      "sha256": "1a32fe73f6f8945cd04ab7e79a21e2367486b207a17f49b25c213924ad149946"
+    },
+    {
       "path": "ego-restore-health-r79.js",
       "bytes": 1215,
       "sha256": "ff8cbdd5af4146ffe677acf229d85897144d5f61061d981f02ecf4478d208b63"
@@ -54329,8 +54334,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6581415,
-      "sha256": "63e2b72f40d89fccdaedc0ea1c925047babd83cb6d6d2de1dd00c910e402ee63"
+      "bytes": 6581461,
+      "sha256": "512edf2009b0cf2c36995f4b7b44981a656e471a6dd6c189cbf03a723065addb"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -55698,9 +55703,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11139,
-  "totalBytes": 1345395269,
-  "webHTMLSha256": "63e2b72f40d89fccdaedc0ea1c925047babd83cb6d6d2de1dd00c910e402ee63",
+  "fileCount": 11140,
+  "totalBytes": 1345404431,
+  "webHTMLSha256": "512edf2009b0cf2c36995f4b7b44981a656e471a6dd6c189cbf03a723065addb",
   "largest": [
     {
       "path": "index.html",
