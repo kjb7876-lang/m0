@@ -270,7 +270,41 @@
     128,
     220
    ],
-   "use": "관측 폐기 · 앞(다른 방향도 이 그림)",
+   "use": "관측 폐기 · 앞",
+   "fix": ""
+  },
+  {
+   "source": "CX-0155EG-6_discard_right12_r1_ROUGH.png",
+   "sourceSha256": "59438348f27bb72c2144ea61766a7b16c533222dec4f533c9be20b7770bf9d5e",
+   "sourceBytes": 1086872,
+   "sourceCell": 512,
+   "file": "discard-right.webp",
+   "sha256": "5f22cb8ab24dae1af4316fbf01501f64fd0c55f70153a4bb4ca7058001d8e6f2",
+   "bytes": 116772,
+   "cell": 256,
+   "frames": 12,
+   "foot": [
+    128,
+    220
+   ],
+   "use": "관측 폐기 · 오른쪽(왼쪽은 좌우 뒤집기)",
+   "fix": ""
+  },
+  {
+   "source": "CX-0155EG-6_discard_rear12_r1_ROUGH.png",
+   "sourceSha256": "27fe2125aede1dfdf3e823119780b057426a9f7d9d7e0d20d1132b48c9066422",
+   "sourceBytes": 1221630,
+   "sourceCell": 512,
+   "file": "discard-rear.webp",
+   "sha256": "1901f8704bd37077f06df5a1964a240048a75b02703822ffddcc149473a47fd2",
+   "bytes": 128548,
+   "cell": 256,
+   "frames": 12,
+   "foot": [
+    128,
+    220
+   ],
+   "use": "관측 폐기 · 뒤",
    "fix": ""
   }
  ]

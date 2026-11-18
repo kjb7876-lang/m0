@@ -12218,6 +12218,16 @@
       "sha256": "8658fabf881ed4011d3c0df7b5259327c6532d809cb049ce7e194980e5eb09f6"
     },
     {
+      "path": "assets/r1176/ego2d/discard-rear.webp",
+      "bytes": 128548,
+      "sha256": "1901f8704bd37077f06df5a1964a240048a75b02703822ffddcc149473a47fd2"
+    },
+    {
+      "path": "assets/r1176/ego2d/discard-right.webp",
+      "bytes": 116772,
+      "sha256": "5f22cb8ab24dae1af4316fbf01501f64fd0c55f70153a4bb4ca7058001d8e6f2"
+    },
+    {
       "path": "assets/r1176/ego2d/hit-front.webp",
       "bytes": 44978,
       "sha256": "1afa03ebd0f312be70b07da598d6e3d09236410656105ac3e70180e80aeaf543"
@@ -12249,8 +12259,8 @@
     },
     {
       "path": "assets/r1176/ego2d/index.json",
-      "bytes": 7331,
-      "sha256": "111aa5d98c866b43589ea1bb7a58237bb79dac976ef3f2581b5c7356bc851772"
+      "bytes": 8238,
+      "sha256": "f10701bd99a7e6d37bc0c3154a26b41f05d1d6d1e59bae8949f87f2f5516bdc5"
     },
     {
       "path": "assets/r1176/ego2d/run-front.webp",
@@ -54624,8 +54634,8 @@
     },
     {
       "path": "ego-form-r1176.js",
-      "bytes": 16390,
-      "sha256": "6170b1b484fc32b291421e0b9ce51a609ff99a2d2953ebb6904757cc92b5c762"
+      "bytes": 16376,
+      "sha256": "eacf58513c8b03aa9f6f882bbd49730ab302625415ce3481556a6651a526f625"
     },
     {
       "path": "ego-guard-r1100.js",
@@ -56553,8 +56563,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11310,
-  "totalBytes": 1359271520,
+  "fileCount": 11312,
+  "totalBytes": 1359517733,
   "webHTMLSha256": "d7ab4417ea6e532e3533c1394e33a40a10e4e4e468c40c2eb0edb853ded2991e",
   "largest": [
     {

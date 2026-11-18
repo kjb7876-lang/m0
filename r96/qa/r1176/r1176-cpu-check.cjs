@@ -70,7 +70,7 @@ ok(A.shape(null,0,{look:'3d'}).ghosts===0&&A.shape([],5,{look:'3d'}).ghosts===0&
  ok(T('idle','s',0).path==='assets/r1176/ego2d/idle-front.webp'&&T('walk','e',0).path==='assets/r1176/ego2d/walk-right.webp'&&T('run','n',0).path==='assets/r1176/ego2d/run-rear.webp'&&T('hit','se',0).path==='assets/r1176/ego2d/hit-right.webp','동작·방향 → 시트 주소');
  ok(T('walk','w',0).flip===true&&T('walk','sw',0).flip===true&&T('walk','nw',0).flip===true&&T('walk','nw',0).path.endsWith('walk-rear.webp')&&T('walk','e',0).flip===false,'왼쪽 세 방향은 좌우 뒤집기');
  ok(T('attack','e',6,true).path==='assets/r1139/ego/slash-right.webp'&&T('attack','e',6,true).frame===3&&T('attack','e',6,false).path==='assets/r1176/ego2d/cast-right.webp'&&T('attack','e',6,false).frame===3,'기본 공격 = 가로 베기 시트 · 스킬 = 시전 시트');
- ok(['n','e','w','s'].every(d=>T('discard',d,10).path==='assets/r1176/ego2d/discard-front.webp'&&T('discard',d,10).flip===false)&&T('discard','s',19).frame===11&&T('discard','s',0).frame===0,'관측 폐기는 앞 그림 하나(20칸 → 12칸)');
+ ok(T('discard','s',10).path==='assets/r1176/ego2d/discard-front.webp'&&T('discard','e',10).path==='assets/r1176/ego2d/discard-right.webp'&&T('discard','n',10).path==='assets/r1176/ego2d/discard-rear.webp'&&T('discard','w',10).path==='assets/r1176/ego2d/discard-right.webp'&&T('discard','w',10).flip===true&&T('discard','e',10).flip===false&&T('discard','s',19).frame===11&&T('discard','s',0).frame===0,'관측 폐기도 방향별 그림(앞·오른쪽·뒤, 왼쪽은 뒤집기 · 20칸 → 12칸) — Dots CX-0155EG-6 오른쪽·뒤 추가(R1176b)');
  const all=[];for(const [k,N,M] of [['idle',12,8],['walk',12,8],['run',10,8],['hit',8,4],['attack',16,8],['discard',20,12]])for(let f=0;f<N+3;f++){const t=T(k,'s',f,false);all.push(t.frame>=0&&t.frame<M&&Number.isInteger(t.frame));}
  ok(all.every(Boolean)&&T('idle','s',11).frame===7&&T('hit','s',7).frame===3,'칸 번호는 늘 시트 안(넘치는 칸도 마지막 칸으로)');
  ok(A.target2d({sourcePath:'assets/hero/hwando.webp',sourceRect:[0,0,160,160]},false)===null&&A.target2d(body('idle','xx',0,'hero'),false)===null&&A.target2d(body('dance','s',0,'hero'),false)===null&&A.target2d({sourcePath:'assets/r1048/ego/idle-s.webp'},false)===null&&A.target2d(null,false)===null,'모르는 그림·방향·동작·칸 없는 명령은 건드리지 않음');
@@ -92,7 +92,7 @@ ok(A.shape(null,0,{look:'3d'}).ghosts===0&&A.shape([],5,{look:'3d'}).ghosts===0&
  {const c=swing();A.shape(c,1,{look:'2d',nested:false,basicNow:false,basicWas:false,img});const f=c.find(x=>x.key==='hero'),p0=JSON.stringify(f.points),s0=f.style.filter;A.shape(c,1,{look:'2d',nested:false,basicNow:false,basicWas:false,img});
   ok(JSON.stringify(f.points)===p0&&f.style.filter===s0&&f.sourcePath==='assets/r1176/ego2d/cast-right.webp','두 번 불러도 자리·필터가 다시 바뀌지 않음(스킬 = 시전 시트)',f.sourcePath);}
  {const c=swing();A.shape(c,1,{look:'2d',nested:true,basicNow:false,basicWas:false,img});ok(c.filter(isBody).every(x=>/r1176\/ego2d\//.test(x.sourcePath)),'분신 몸도 같은 Dots 인물');}
- ok(Array.isArray(A.D2_ALL)&&A.D2_ALL.length===19&&A.D2_ALL.every(x=>fs.existsSync(path.join(ROOT,'r96/runtime-text',x))),'2D 시트 19장이 저장소에 있음',A.D2_ALL.filter(x=>!fs.existsSync(path.join(ROOT,'r96/runtime-text',x))));}
+ ok(Array.isArray(A.D2_ALL)&&A.D2_ALL.length===21&&A.D2_ALL.every(x=>fs.existsSync(path.join(ROOT,'r96/runtime-text',x))),'2D 시트 21장이 저장소에 있음',A.D2_ALL.filter(x=>!fs.existsSync(path.join(ROOT,'r96/runtime-text',x))));}
 // 칸 UI 순수 계산
 ok(A.cellLabel('EGO','2d')==='2D EGO'&&A.cellLabel('EGO','3d')==='3D EGO'&&A.cellLabel('2D EGO','3d')==='3D EGO'&&A.cellLabel('','3d')==='3D EGO','칸 이름 붙이기(되풀이해도 한 번만)');
 console.log(`\nR1176 cpu: ${n-bad}/${n} 통과`);process.exit(bad?1:0);
