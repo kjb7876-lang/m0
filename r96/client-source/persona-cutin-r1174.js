@@ -9,20 +9,22 @@
  *   · (진) 유성 궤도: 언주 별(척력) — 페르소나 — 흑 별(인력), 띠에 언주 궤도선 / (진) 쌍성 소멸: 언주 별 — 페르소나 — 검빨 월식(두 별이 합쳐진 칸), 띠에 흑적 광선 7줄.
  *   · 이름 줄 '(진) 유성 궤도' 등(이미 게임 P 창에 있는 이름, 서사 불변). 라우렌 그림·보라·은빛은 쓰지 않는다.
  *   · 사몽 각성: 가운데 큰 컷인 뒤에 언주 고리·흑 월식 막(#r1174Awake)이 1.6초 퍼지고 '페르소나 · 순수악의' 이름.
- *  그림: Dots CX-0153PC(상반신·각성 일러스트·구 8칸·고리 12칸)가 오기 전 임시 = 게임 속 rc133 페르소나 그림(awake-0)과 R1107 페르소나 Dots 시트(붉은 거울별·자아 월식).
+ *  그림: Dots CX-0153PC r1(상반신·각성 전신·구 8칸·일식 고리 12칸)을 손질해 적용(R1174b). 상반신이 안 읽히면 rc133 페르소나 그림으로 물러남. (진) 유성 궤도의 두 별은 R1107 페르소나 Dots 시트(붉은 거울별).
  *   ART 의 dots 경로가 runtime 목록에 들어오면(파일을 sync 로 넣으면) 그쪽을 쓴다 — 지금은 null.
  *  판정·확률·피해·키는 건드리지 않는다(R946 그대로). 렉: DOM 노드 6개, 그리기 루프 없음, 형상일 때만 그림 3장 미리 읽음. */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_PERSONA_CUTIN_R1174__)return;
-const REV='R1174-persona-cutin-1',FIELD='personaHeroR1113',BASE='lauren',MS=1250,AWAKE_MS=1650;
+const REV='R1174-persona-cutin-2-dots',FIELD='personaHeroR1113',BASE='lauren',MS=1250,AWAKE_MS=1650;
 const G=(f,d)=>{try{const v=f();return v===undefined?d:v;}catch(_){return d;}};
 // Dots CX-0153PC 가 오면 dots 경로를 채운다(그림만 교체). 임시: rc133 페르소나 각성 그림(344×400 투명) + R1107 페르소나 시트(6×4, 192칸).
-const ART=Object.freeze({bust:Object.freeze({temp:'assets/rc133/art/awake-0.png',dots:null}),awake:Object.freeze({temp:'assets/rc133/art/awake-0.png',dots:null}),
+const ART=Object.freeze({bust:Object.freeze({temp:'assets/rc133/art/awake-0.png',dots:'assets/r1174/persona-bust.webp'}),awake:Object.freeze({temp:'assets/rc133/art/awake-0.png',dots:'assets/r1174/persona-awake.webp'}),
+ /* Dots CX-0153PC r1(11-18 14:46Z) 손질 사본 — scripts/r1174-persona-dots.py: 구 8칸(회색 연무 검붉게·끝 칸 감쇠), 일식 고리 12칸(순 빨강 잔티 언주로) */
+ orbs:Object.freeze({path:'assets/r1174/persona-orbs8.webp',cols:8,rows:1,f:0}),sigil:Object.freeze({path:'assets/r1174/persona-sigil12.webp',cols:6,rows:2}),
  star:Object.freeze({path:'assets/r1107/persona-red-star.webp',cols:6,rows:4,f:0}),eclipse:Object.freeze({path:'assets/r1107/persona-eclipse.webp',cols:6,rows:4,f:6})});
 const pick=a=>a.dots||a.temp;
 const LOOK=Object.freeze({meteor:'orbit',violet:'twin'}); // CSS 이름표(궤도·쌍성)
 const NAMES=Object.freeze({meteor:'(진) 유성 궤도',violet:'(진) 쌍성 소멸'});
-const CAST=Object.freeze({meteor:Object.freeze([['star','eonju'],['main'],['star','black']]),violet:Object.freeze([['star','eonju'],['main'],['eclipse','darkred']])});
+const CAST=Object.freeze({meteor:Object.freeze([['star','eonju'],['main'],['star','black']]),violet:Object.freeze([['star','eonju'],['main'],['orbs','merge']])});
 const U=p=>{try{const u=typeof urlFor==='function'?urlFor(p):p;return typeof u==='string'&&u&&!/["\\]/.test(u)?u:p;}catch(_){return p;}};
 const stats={shown:0,awake:0,skipped:0,errors:0,warmed:0};let lastError=null,last=null,el=null,ov=null,timer=0,timer2=0;
 const fail=e=>{stats.errors++;lastError=String(e&&e.message||e).slice(0,200);};
@@ -38,7 +40,7 @@ const CSS=[
  '#r1174Cutin[data-look="orbit"]::after{background:radial-gradient(ellipse 46% 34% at 50% 58%,transparent 0 92%,rgba(204,52,40,.75) 93% 95%,transparent 96%),radial-gradient(ellipse 30% 22% at 50% 58%,transparent 0 90%,rgba(204,52,40,.45) 91% 94%,transparent 95%),radial-gradient(ellipse at 50% 62%,rgba(90,12,18,.6),transparent 64%)}',
  '#r1174Cutin[data-look="twin"]::after{opacity:.6;background:repeating-linear-gradient(177deg,transparent 0 12px,rgba(90,12,18,.85) 12px 13px,rgba(204,52,40,.8) 13px 14px,rgba(90,12,18,.85) 14px 15px,transparent 15px 19px),radial-gradient(ellipse at 50% 62%,rgba(90,12,18,.7),transparent 66%)}',
  '#r1174Cutin .r1174f{position:relative;flex:none;height:100%;width:auto;margin:0 -2.2%;opacity:0;transform:translateX(18vw);z-index:3}',
- '#r1174Cutin img.r1174main{height:170%;align-self:flex-start;aspect-ratio:.86;object-fit:cover;object-position:50% 0;margin:-2% -1% 0;filter:brightness(1.1) contrast(1.08);-webkit-mask-image:radial-gradient(ellipse 50% 38% at 50% 26%,#000 64%,transparent 100%);mask-image:radial-gradient(ellipse 50% 38% at 50% 26%,#000 64%,transparent 100%)}',
+ '#r1174Cutin img.r1174main{height:150%;align-self:flex-start;aspect-ratio:.75;object-fit:cover;object-position:50% 0;margin:-3% -1% 0;filter:brightness(1.08) contrast(1.06);-webkit-mask-image:radial-gradient(ellipse 52% 46% at 50% 36%,#000 66%,transparent 100%);mask-image:radial-gradient(ellipse 52% 46% at 50% 36%,#000 66%,transparent 100%)}',
  '#r1174Cutin .r1174orb{height:58%;align-self:center;aspect-ratio:1;margin:0 3%;background-repeat:no-repeat;z-index:4}',
  '#r1174Cutin .r1174orb[data-tone="black"]{filter:grayscale(1) brightness(.42) contrast(1.7) drop-shadow(0 0 3px rgba(204,52,40,.95)) drop-shadow(0 0 9px rgba(204,52,40,.6))}',
  '#r1174Cutin .r1174orb[data-tone="darkred"]{height:70%;filter:saturate(1.3) brightness(.3) contrast(1.8) drop-shadow(0 0 2px #cc3428) drop-shadow(0 0 12px rgba(204,52,40,.7))}',
@@ -47,6 +49,8 @@ const CSS=[
  '#r1174Cutin.on .r1174f{animation:r1174In 1.05s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:var(--d,0s)}',
  '#r1174Cutin.on .r1174orb{animation:r1174Pop 1.05s cubic-bezier(.2,.8,.2,1) forwards,r1174Sheet .6s steps(6,jump-none) infinite;animation-delay:var(--d,0s),0s}',
  '@keyframes r1174Sheet{0%{background-position-x:0%}100%{background-position-x:100%}}',
+ '#r1174Cutin .r1174orb[data-tone="merge"]{height:84%;filter:drop-shadow(0 0 6px rgba(204,52,40,.55))}',
+ '#r1174Cutin.on .r1174orb[data-tone="merge"]{animation:r1174Pop 1.05s cubic-bezier(.2,.8,.2,1) forwards,r1174Sheet .95s steps(8,jump-none) forwards;animation-delay:var(--d,0s),var(--d,0s)}',
  '#r1174Cutin.on .r1174name{animation:r1174Name 1.1s ease-out forwards}',
  '@keyframes r1174Band{0%{opacity:0}10%{opacity:1}70%{opacity:1}96%{opacity:0}100%{opacity:0}}',
  '@keyframes r1174In{0%{opacity:0;transform:translateX(18vw)}22%{opacity:1;transform:translateX(0)}74%{opacity:1;transform:translateX(-1.5vw)}100%{opacity:0;transform:translateX(-6vw)}}',
@@ -56,25 +60,26 @@ const CSS=[
  '@media (prefers-reduced-motion:reduce){#r1174Cutin.on .r1174f,#r1174Cutin.on .r1174name{animation-name:r1174Fade}}',
  // 사몽 각성 막: 가운데 큰 컷인(z 12) 바로 뒤
  '#r1174Awake{position:absolute;inset:0;z-index:11;pointer-events:none;display:none;place-items:center;overflow:hidden}',
- '#r1174Awake.on{display:grid;animation:r1174AwBg 1.6s ease-out forwards;background:radial-gradient(ellipse at 50% 50%,rgba(90,12,18,.5),rgba(11,6,6,.6) 72%)}',
- '#r1174Awake .r1174ring{grid-area:1/1;width:min(64vh,62vw);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(11,6,6,.92) 0 38%,rgba(90,12,18,.85) 40%,transparent 43%,transparent 60%,rgba(204,52,40,.8) 61% 62.5%,transparent 63.5%,transparent 70%,rgba(204,52,40,.45) 71% 72%,transparent 73%);opacity:0}',
- '#r1174Awake.on .r1174ring{animation:r1174Ring 1.6s cubic-bezier(.2,.8,.2,1) forwards}',
+ '#r1174Awake.on{display:grid;animation:r1174AwBg 1.6s ease-out forwards;background:radial-gradient(ellipse 46% 60% at 50% 52%,rgba(90,12,18,.5),rgba(11,6,6,.55) 62%,transparent 100%)}',
+ '#r1174Awake .r1174ring{grid-area:1/1;width:min(64vh,62vw);aspect-ratio:1;background:url("__SIGIL__") 0 0/600% 200% no-repeat;opacity:0}',
+ '#r1174Awake.on .r1174ring{animation:r1174Ring 1.6s cubic-bezier(.2,.8,.2,1) forwards,r1174Sigil 1.6s steps(1,end) forwards}',
+ '@keyframes r1174Sigil{0.00%{background-position:0% 0%}8.33%{background-position:20% 0%}16.67%{background-position:40% 0%}25.00%{background-position:60% 0%}33.33%{background-position:80% 0%}41.67%{background-position:100% 0%}50.00%{background-position:0% 100%}58.33%{background-position:20% 100%}66.67%{background-position:40% 100%}75.00%{background-position:60% 100%}83.33%{background-position:80% 100%}91.67%{background-position:100% 100%}100%{background-position:100% 100%}}',
  '#r1174Awake .r1174title{grid-area:1/1;align-self:start;margin-top:13vh;padding:.15em 1em;background:linear-gradient(90deg,transparent,rgba(11,6,6,.8) 18%,rgba(11,6,6,.8) 82%,transparent);z-index:2;font:700 clamp(15px,2.6vw,28px)/1.1 serif;letter-spacing:.2em;color:#f2d6cf;text-shadow:0 0 8px #cc3428,0 2px 0 #0b0606;opacity:0}',
  '#r1174Awake.on .r1174title{animation:r1174Name 1.6s ease-out forwards}',
  '@keyframes r1174AwBg{0%{opacity:0}12%{opacity:1}72%{opacity:1}100%{opacity:0}}',
- '@keyframes r1174Ring{0%{opacity:0;transform:scale(.4) rotate(-30deg)}18%{opacity:1;transform:scale(1) rotate(0)}70%{opacity:.85;transform:scale(1.06) rotate(12deg)}100%{opacity:0;transform:scale(1.25) rotate(20deg)}}',
+ '@keyframes r1174Ring{0%{opacity:0;transform:scale(.9)}10%{opacity:.85;transform:scale(1)}80%{opacity:.8;transform:scale(1.04)}100%{opacity:0;transform:scale(1.08)}}',
  '@media (prefers-reduced-motion:reduce){#r1174Awake.on .r1174ring{animation-name:r1174Fade}}',
  '#awakeImage[data-r1174]{object-fit:cover!important;object-position:50% 6%;-webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 46%,#000 62%,transparent 100%);mask-image:radial-gradient(ellipse 50% 50% at 50% 46%,#000 62%,transparent 100%);filter:drop-shadow(0 0 14px rgba(204,52,40,.75))}',
  '#sw8Awakening[data-side="hero"] img[data-r1174]{filter:drop-shadow(0 0 20px rgba(204,52,40,.6))}'
 ].join('\n');
-function style(d){if(d.getElementById&&d.getElementById('r1174Style'))return;const st=d.createElement('style');st.id='r1174Style';st.textContent=CSS;(d.head||d.body).appendChild(st);}
+function style(d){if(d.getElementById&&d.getElementById('r1174Style'))return;const st=d.createElement('style');st.id='r1174Style';st.textContent=CSS.replace('__SIGIL__',U(ART.sigil.path));(d.head||d.body).appendChild(st);}
 function build(){if(el)return el;const d=doc();if(!d)return null;style(d);const e=d.createElement('div');e.id='r1174Cutin';e.setAttribute('aria-hidden','true');d.body.appendChild(e);el=e;return e;}
 function orb(d,kind,tone,i){const s=ART[kind];const n=d.createElement('div');n.className='r1174f r1174orb';n.setAttribute('data-fig',kind);n.setAttribute('data-tone',tone);n.setAttribute('data-src',s.path);
  const c=s.f%s.cols,r=Math.floor(s.f/s.cols);n.style.backgroundImage='url("'+U(s.path)+'")';n.style.backgroundSize=(s.cols*100)+'% '+(s.rows*100)+'%';
- n.style.backgroundPosition=(c/(s.cols-1)*100)+'% '+(r/(s.rows-1)*100)+'%';n.style.setProperty('--d',(i*.07).toFixed(2)+'s');return n;}
+ n.style.backgroundPosition=(s.cols>1?c/(s.cols-1)*100:0)+'% '+(s.rows>1?r/(s.rows-1)*100:0)+'%';n.style.setProperty('--d',(i*.07).toFixed(2)+'s');return n;}
 function show(kind){try{const cast=CAST[kind];if(!cast){stats.skipped++;return false;}const e=build();if(!e){stats.skipped++;return false;}const d=e.ownerDocument||doc()||e.doc;
   while(e.firstChild)e.removeChild(e.firstChild);e.setAttribute('data-kind',kind);e.setAttribute('data-look',LOOK[kind]);e.setAttribute('data-hero','persona');
-  cast.forEach(([k,tone],i)=>{if(k==='main'){const n=d.createElement('img');n.className='r1174f r1174main';n.setAttribute('data-fig','main');n.setAttribute('alt','');n.setAttribute('src',U(pick(ART.bust)));G(()=>{n.decoding='async';});n.style.setProperty('--d',(i*.07).toFixed(2)+'s');e.appendChild(n);}else e.appendChild(orb(d,k,tone,i));});
+  cast.forEach(([k,tone],i)=>{if(k==='main'){const n=d.createElement('img');n.className='r1174f r1174main';n.setAttribute('data-fig','main');n.setAttribute('alt','');n.setAttribute('src',U(pick(ART.bust)));n.onerror=()=>{n.onerror=null;n.setAttribute('src',U(ART.bust.temp));stats.fallback=(stats.fallback||0)+1;};G(()=>{n.decoding='async';});n.style.setProperty('--d',(i*.07).toFixed(2)+'s');e.appendChild(n);}else e.appendChild(orb(d,k,tone,i));});
   const nm=d.createElement('div');nm.className='r1174name';nm.textContent=NAMES[kind];e.appendChild(nm);
   e.classList.remove('on');void e.offsetWidth;e.classList.add('on');clearTimeout(timer);timer=setTimeout(()=>{try{e.classList.remove('on');}catch(_){}},MS);
   stats.shown++;last={kind,at:G(()=>time,null)};return true;}catch(err){fail(err);return false;}}
@@ -93,7 +98,7 @@ function wrapAwake(){try{if(typeof showAwakening!=='function'||showAwakening.__r
   w.__r1174=true;showAwakening=w;}catch(e){fail(e);}}
 // ---- 형상일 때만 그림 미리 읽기 ----
 let warmedOnce=false;
-function warm(){try{if(warmedOnce||!persona(pl())||typeof Image!=='function')return;warmedOnce=true;for(const p of [pick(ART.bust),pick(ART.awake),ART.star.path,ART.eclipse.path]){const im=new Image();im.decoding='async';im.src=U(p);stats.warmed++;}build();}catch(e){fail(e);}}
+function warm(){try{if(warmedOnce||!persona(pl())||typeof Image!=='function')return;warmedOnce=true;for(const p of [pick(ART.bust),pick(ART.awake),ART.star.path,ART.orbs.path,ART.sigil.path]){const im=new Image();im.decoding='async';im.src=U(p);stats.warmed++;}build();}catch(e){fail(e);}}
 function install(){wrapAwake();G(()=>setInterval(warm,2000));warm();}
 if(G(()=>document.readyState==='complete',false))install();else G(()=>window.addEventListener('load',install));
 window.__STORYWORLD_PERSONA_CUTIN_R1174__=Object.freeze({revision:REV,persona,show,kinds:Object.freeze(Object.keys(CAST)),names:NAMES,art:ART,install,warm,
