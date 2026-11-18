@@ -1,0 +1,369 @@
+{
+ "revision": "R1155",
+ "source": "scripts/build-sfx-r1155.py (numpy 합성, 시드 1155, 외부 음원·유료 생성 없음)",
+ "kinds": {
+  "r546Atk_ego": [
+   {
+    "path": "assets/r1155/sfx/ego-atk-1.ogg",
+    "gain": 0.7,
+    "design": "먹 붓질 바람 + 작은 흰 종 + 먹 탁",
+    "bytes": 6187,
+    "sha256": "9153c85f5b812ffffa84029db918173ae4a1924503c6e2f42515ad56113c59ce"
+   },
+   {
+    "path": "assets/r1155/sfx/ego-atk-2.ogg",
+    "gain": 0.7,
+    "design": "같은 결 높은 변주",
+    "bytes": 6180,
+    "sha256": "d30dd2c3a199b0cef4bc3a36124f6e042b1ef56a9e714e84f9acfc4206703e8d"
+   }
+  ],
+  "r546Sp_ego_q": [
+   {
+    "path": "assets/r1155/sfx/ego-q-1.ogg",
+    "gain": 0.72,
+    "design": "큰 붓질 + 흰 종 화음 + 수묵 번짐 꼬리 + 별빛",
+    "bytes": 11093,
+    "sha256": "5e8c4a38a06fce5b97aacd64a99f9b8c8383fe1e9d5b82aedc9a4b8abec5b37f"
+   }
+  ],
+  "r546Sp_ego_w": [
+   {
+    "path": "assets/r1155/sfx/ego-w-1.ogg",
+    "gain": 0.72,
+    "design": "세 번 붓질 + 유리 종",
+    "bytes": 8085,
+    "sha256": "9e83d6df84b138e31b6a1be1256dbd26077c2f2d5910f50ae143ef9114dc377f"
+   }
+  ],
+  "r546Sp_ego_e": [
+   {
+    "path": "assets/r1155/sfx/ego-e-1.ogg",
+    "gain": 0.72,
+    "design": "거꾸로 빨려든 바람 → 흰 종 + 별빛(시선)",
+    "bytes": 9716,
+    "sha256": "6db3012bc35fd1cd501e0e9d26e17a274b9794c8e4c3f3d88d6d194e5d6b4310"
+   }
+  ],
+  "r546Sp_ego_r": [
+   {
+    "path": "assets/r1155/sfx/ego-r-1.ogg",
+    "gain": 0.75,
+    "design": "환수검: 큰 붓질 + 칼 울림 + 별빛 꼬리",
+    "bytes": 10472,
+    "sha256": "3e6828f3c914ccc206f45808491f9e6a5811a82d78a443c75667ba1f4fb935c1"
+   }
+  ],
+  "r546Sp_ego_moon": [
+   {
+    "path": "assets/r1155/sfx/ego-moon-1.ogg",
+    "gain": 0.72,
+    "design": "묵월: 먹방울 퉁 + 흰 종 + 달빛 떨림",
+    "bytes": 8356,
+    "sha256": "343239d73ef4f16ce480a5acc0476840b154ff68b13c045f98d5d907d955e05e"
+   }
+  ],
+  "r546Sp_ego_violet": [
+   {
+    "path": "assets/r1155/sfx/ego-violet-1.ogg",
+    "gain": 0.75,
+    "design": "쌍성 소멸(EGO 백적): 합쳐지며 솟는 바람 → 흰 종 관통 + 별빛",
+    "bytes": 12478,
+    "sha256": "23341507a4e078873671e9c1540048157cd81eda10784bece048ec6fa88f61d2"
+   }
+  ],
+  "r546Sp_ego_clones": [
+   {
+    "path": "assets/r1155/sfx/ego-clones-1.ogg",
+    "gain": 0.72,
+    "design": "칠묵영: 일곱 짧은 붓질 + 끝 종",
+    "bytes": 7886,
+    "sha256": "a14cd4113ecbc6e3abf88f46e462087a5877b5fb21f238f5426bf55000f5ba4c"
+   }
+  ],
+  "r546Sp_ego_trio": [
+   {
+    "path": "assets/r1155/sfx/ego-trio-1.ogg",
+    "gain": 0.75,
+    "design": "삼협묵희: 올라가는 흰 종 셋 + 별빛",
+    "bytes": 9836,
+    "sha256": "22b349aae67a37652a59e4c19b4ae77b241232f354631158fb1bbe200ffac5b9"
+   }
+  ],
+  "r546Sp_ego_trioHit": [
+   {
+    "path": "assets/r1155/sfx/ego-triohit-1.ogg",
+    "gain": 0.75,
+    "design": "삼협묵희 일격: 세 겹 베기 + 번짐 + 종",
+    "bytes": 9270,
+    "sha256": "43099279ace880eb313651ce7c3b62eb928e57285f1d239122e2fe8fb5ad2592"
+   }
+  ],
+  "r546Sp_ego_star": [
+   {
+    "path": "assets/r1155/sfx/ego-star-1.ogg",
+    "gain": 0.72,
+    "design": "은빛 거성(백적): 밝게 솟는 바람 + 별 종",
+    "bytes": 9484,
+    "sha256": "006af733bcd701a7bfa59ab697d2522bbaf957cac90edbae112c54d847cab18c"
+   }
+  ],
+  "r546Sp_ego_abyss": [
+   {
+    "path": "assets/r1155/sfx/ego-abyss-1.ogg",
+    "gain": 0.72,
+    "design": "심연 왜성(백적): 끌려드는 하강 → 고리 울림",
+    "bytes": 9449,
+    "sha256": "5a1b7d3b76098fa8d5229c2399d227e9abf5b36f6e8a60a1e1d9b49b0fe0eeb8"
+   }
+  ],
+  "r546Sp_ego_repulse": [
+   {
+    "path": "assets/r1155/sfx/ego-repulse-1.ogg",
+    "gain": 0.72,
+    "design": "항성 반발(백적): 터짐 + 퍼지는 종 + 바깥 바람",
+    "bytes": 9496,
+    "sha256": "cff6ab4d26a2275fdbdf153273238f96d0eedcd9a851bf4aa7d40d4e63127a0e"
+   }
+  ],
+  "r972_egoSlash": [
+   {
+    "path": "assets/r1155/sfx/ego-slash-1.ogg",
+    "gain": 0.42,
+    "design": "연참·일섬 한 타: 짧은 붓질 + 작은 종",
+    "bytes": 5068,
+    "sha256": "70117746024063512953ba8dcd5df152072bb34f20fef068b91b7fd15883ef5e"
+   },
+   {
+    "path": "assets/r1155/sfx/ego-slash-2.ogg",
+    "gain": 0.42,
+    "design": "높은 변주",
+    "bytes": 5030,
+    "sha256": "2b4c1016f70df2184ff4a8598acb2d1ad36358788ede7c5f4d0d0b688ff8ad40"
+   }
+  ],
+  "r972_egoSlashEnd": [
+   {
+    "path": "assets/r1155/sfx/ego-slashend-1.ogg",
+    "gain": 0.55,
+    "design": "일섬 마무리: 큰 붓질 + 종 둘",
+    "bytes": 7341,
+    "sha256": "bbf70d10f69a847f09c20274bd2e59075d3e46b2ee40c12b5f08c7c24a618be7"
+   }
+  ],
+  "r546Atk_persona": [
+   {
+    "path": "assets/r1155/sfx/per-atk-1.ogg",
+    "gain": 0.7,
+    "design": "언주 구슬 박동: 단2도 어긋난 낮은 화음 + 으르렁 + 속삭임",
+    "bytes": 5932,
+    "sha256": "47812d6ecd522f1e665dc775f54e2b37f018d3eab473c31ee4dda579baa54cb4"
+   },
+   {
+    "path": "assets/r1155/sfx/per-atk-2.ogg",
+    "gain": 0.7,
+    "design": "낮은 변주",
+    "bytes": 5958,
+    "sha256": "834e48568d65160f0e0140a27222055ba3bad94d2dce3e9356341cde4d118087"
+   }
+  ],
+  "r546Sp_persona_q": [
+   {
+    "path": "assets/r1155/sfx/per-q-1.ogg",
+    "gain": 0.72,
+    "design": "거꾸로 부풂 → 어긋난 화음 하강 + 속삭임",
+    "bytes": 9930,
+    "sha256": "3b296d9851a13e2ade8967cb67df5399c049b08c318ba318cf3df034c16b2679"
+   }
+  ],
+  "r546Sp_persona_w": [
+   {
+    "path": "assets/r1155/sfx/per-w-1.ogg",
+    "gain": 0.72,
+    "design": "순수악의의 분기: 검은 지직 연쇄 + 하강 웅",
+    "bytes": 10032,
+    "sha256": "f1ca9f26041ea37f1acff36eaf97b801c4046e43691613ddc9cf695b7e8f0c65"
+   }
+  ],
+  "r546Sp_persona_e": [
+   {
+    "path": "assets/r1155/sfx/per-e-1.ogg",
+    "gain": 0.72,
+    "design": "욕망의 일식: 부풂 → 어두운 고리 + 둔탁 터짐",
+    "bytes": 9393,
+    "sha256": "a17589fcde89e97e248cbd2af1e9f025d597ef3d453eaaa6c6a15c4d6189616a"
+   }
+  ],
+  "r546Sp_persona_r": [
+   {
+    "path": "assets/r1155/sfx/per-r-1.ogg",
+    "gain": 0.72,
+    "design": "악의의 관통: 둘레를 도는 어긋난 웅 + 속삭임",
+    "bytes": 9731,
+    "sha256": "1fb85cfcacdf0e79bed934cb1e1fcdb35ad3d72cb0fa378435b192bc5c835f1d"
+   }
+  ],
+  "r546Sp_persona_repulse": [
+   {
+    "path": "assets/r1155/sfx/per-repulse-1.ogg",
+    "gain": 0.72,
+    "design": "(진) 항성 반발: 어두운 터짐 + 으르렁",
+    "bytes": 7720,
+    "sha256": "c90459d540732c64c866221c9a83116dd17393c42b5d1917a186301e5fe2bc96"
+   }
+  ],
+  "r546Sp_persona_star": [
+   {
+    "path": "assets/r1155/sfx/per-star-1.ogg",
+    "gain": 0.72,
+    "design": "(진) 은빛 거성(언주): 낮게 쓸리는 바람 + 하강 화음",
+    "bytes": 8776,
+    "sha256": "8373e01c60e0f18e16254ac108500ac07de6798e2c52eda104e504a1f712a354"
+   }
+  ],
+  "r546Sp_persona_abyss": [
+   {
+    "path": "assets/r1155/sfx/per-abyss-1.ogg",
+    "gain": 0.72,
+    "design": "(진) 심연 왜성(흑): 거꾸로 빨림 → 깊은 으르렁",
+    "bytes": 8612,
+    "sha256": "6ad65326828b759ff39e2d72a3f32c01ac1235ace1b5466ab1d2df98547a47dc"
+   }
+  ],
+  "r546Sp_persona_violetCharge": [
+   {
+    "path": "assets/r1155/sfx/per-violet-charge-1.ogg",
+    "gain": 0.72,
+    "design": "(진) 쌍성 소멸 충전: 조여 오르는 떨림 화음",
+    "bytes": 7158,
+    "sha256": "e9babbc77a9cdc1aa1e8b62a439836d9265e44e8c8194bf3a5c02f39902f2f9f"
+   }
+  ],
+  "r546Sp_persona_violetFire": [
+   {
+    "path": "assets/r1155/sfx/per-violet-fire-1.ogg",
+    "gain": 0.78,
+    "design": "(진) 쌍성 소멸 발사: 흑적 레이저 빔 + 으르렁 + 꿰뚫음",
+    "bytes": 10056,
+    "sha256": "dfb2935cf3c8306fa57c1a619e78f614fcbb0ed8b5498180de7827a17aff3902"
+   }
+  ],
+  "r546Sp_persona_meteor": [
+   {
+    "path": "assets/r1155/sfx/per-meteor-1.ogg",
+    "gain": 0.72,
+    "design": "(진) 유성 궤도: 낮게 몰려오는 바람 → 둔탁 충돌",
+    "bytes": 10197,
+    "sha256": "3169ca281c9e0f7bdf1260bba4b2dd2e58b7e16d3035aa65980767665c80c4e3"
+   }
+  ],
+  "r972_perGravity": [
+   {
+    "path": "assets/r1155/sfx/per-gravity-1.ogg",
+    "gain": 0.42,
+    "design": "중력 틱: 짧은 어두운 박동",
+    "bytes": 4717,
+    "sha256": "ef9236a6cadd6bc3a419331b462f1e7ee75cdefc97044c2b6017d93199c28d95"
+   },
+   {
+    "path": "assets/r1155/sfx/per-gravity-2.ogg",
+    "gain": 0.42,
+    "design": "낮은 변주",
+    "bytes": 4724,
+    "sha256": "6769007827ddce9f12a9379f13824a47545e0778085de97c00af5e63c4554a13"
+   }
+  ],
+  "r785Hit_ego": [
+   {
+    "path": "assets/r1155/sfx/ego-hit-1.ogg",
+    "gain": 0.85,
+    "design": "적중: 먹 칼날 마른 착 + 흰 쇳결",
+    "bytes": 5096,
+    "sha256": "45baa530e882b11b415bcaacc7aa3aaa336ef02748e81b335515d3aad21855f8"
+   },
+   {
+    "path": "assets/r1155/sfx/ego-hit-2.ogg",
+    "gain": 0.85,
+    "design": "음높이 변주",
+    "bytes": 5053,
+    "sha256": "ecc4d3d85f0f99a4c797770ca0d9395692a9f3fc9169ffaab542943cacf9b4d7"
+   },
+   {
+    "path": "assets/r1155/sfx/ego-hit-3.ogg",
+    "gain": 0.85,
+    "design": "음높이 변주",
+    "bytes": 5140,
+    "sha256": "fb9cbd1d686164d093193decdb1d35f795b5c67c08ca9e5a0cf3d4a410835a10"
+   },
+   {
+    "path": "assets/r1155/sfx/ego-hit-4.ogg",
+    "gain": 0.85,
+    "design": "음높이 변주",
+    "bytes": 5055,
+    "sha256": "3bc60941c1f3aad47aa088f64591f2104d81b3b56c267dfa0fa73bfe94d4f32a"
+   }
+  ],
+  "r785HitBig_ego": [
+   {
+    "path": "assets/r1155/sfx/ego-hitbig-1.ogg",
+    "gain": 1.0,
+    "design": "스킬 적중: 낮은 착 + 종 + 번짐",
+    "bytes": 6047,
+    "sha256": "e91ff7b60b7ed2e7cbd9c90c4677cf223ebe27b19f3d8878b371ba2d3fa91b71"
+   },
+   {
+    "path": "assets/r1155/sfx/ego-hitbig-2.ogg",
+    "gain": 1.0,
+    "design": "변주",
+    "bytes": 6019,
+    "sha256": "f67a139b366008ad11040b9a6a8e8478d0369e6392e61e5e6dea951e05c0b810"
+   }
+  ],
+  "r785Hit_persona": [
+   {
+    "path": "assets/r1155/sfx/per-hit-1.ogg",
+    "gain": 0.85,
+    "design": "적중: 언주 구슬 퍽 + 어긋난 짧은 화음",
+    "bytes": 5365,
+    "sha256": "954de418e7925c4a0f6c2dfc1ed251df69f415302e1e89af72ac175c33f38add"
+   },
+   {
+    "path": "assets/r1155/sfx/per-hit-2.ogg",
+    "gain": 0.85,
+    "design": "음높이 변주",
+    "bytes": 5325,
+    "sha256": "673b6f67de08fa7709132fb2d03c11ac42a5c15ae08c3a00de91677e4afd4781"
+   },
+   {
+    "path": "assets/r1155/sfx/per-hit-3.ogg",
+    "gain": 0.85,
+    "design": "음높이 변주",
+    "bytes": 5424,
+    "sha256": "fd085bf9fbb50760f4c4ff0ef22526e063c27519eb99e6eda2f26c938ebe3ffd"
+   },
+   {
+    "path": "assets/r1155/sfx/per-hit-4.ogg",
+    "gain": 0.85,
+    "design": "음높이 변주",
+    "bytes": 5451,
+    "sha256": "bcd3e311aeb1b4d04dff6cf140f4b78221d39c28de9ff356b0a9e82d259121cc"
+   }
+  ],
+  "r785HitBig_persona": [
+   {
+    "path": "assets/r1155/sfx/per-hitbig-1.ogg",
+    "gain": 1.0,
+    "design": "스킬 적중: 낮고 긴 퍽 + 으르렁",
+    "bytes": 5070,
+    "sha256": "1d05743e258c497acac0aff9c89841d55f96ae3673c231119f305f99cd911e4f"
+   },
+   {
+    "path": "assets/r1155/sfx/per-hitbig-2.ogg",
+    "gain": 1.0,
+    "design": "변주",
+    "bytes": 5166,
+    "sha256": "6986bf54db658c2e089114fe79000550b675e1fd2aa5c10437f5179da0487733"
+   }
+  ]
+ }
+}
