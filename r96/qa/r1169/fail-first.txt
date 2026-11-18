@@ -1,0 +1,53 @@
+FAIL ① dys-scythe-v1 피격 0칸·좌우·보이는 키 (assets/r380/mobs/dys-scythe-v1.webp)
+FAIL ① dys-sacshell-v1 피격 0칸·좌우·보이는 키 (assets/r380/mobs/dys-sacshell-v1.webp)
+FAIL ① dys-membrane-v1 피격 0칸·좌우·보이는 키 (assets/r380/mobs/dys-membrane-v1.webp)
+FAIL ① dys-bulwark-v2 피격 0칸·좌우·보이는 키 (assets/r380/mobs/dys-bulwark-v2.webp)
+FAIL ① dys-disc-v2 피격 0칸·좌우·보이는 키 (assets/r380/mobs/dys-disc-v2.webp)
+FAIL ① dys-engineer-v2 피격 0칸·좌우·보이는 키 (assets/r380/mobs/dys-engineer-v2.webp)
+FAIL ① dys-pulse-raider-v2 피격 0칸·좌우·보이는 키 (assets/r380/mobs/dys-pulse-raider-v2-walk-d1.webp)
+FAIL ① dys-prism-stalker-v2 피격 0칸·좌우·보이는 키 (assets/r380/mobs/dys-prism-stalker-v2-walk-d1.webp)
+FAIL ① dys-siege-gunner-v2 피격 0칸·좌우·보이는 키 (assets/r380/mobs/dys-siege-gunner-v2-walk-d1.webp)
+PASS ③ 다른 몹 피격 표 그대로
+FAIL ② DY-01 dys-scythe-v1 사망 6칸 표(240×224, 살아 있는 그림 r380/mobs/dys-scythe-v1.webp)
+FAIL ② DY-01 발 자리·발 아래 여백
+FAIL ② DY-02 dys-sacshell-v1 사망 6칸 표(240×224, 살아 있는 그림 r380/mobs/dys-sacshell-v1.webp)
+FAIL ② DY-02 발 자리·발 아래 여백
+FAIL ② DY-03 dys-membrane-v1 사망 6칸 표(240×224, 살아 있는 그림 r380/mobs/dys-membrane-v1.webp)
+FAIL ② DY-03 발 자리·발 아래 여백
+FAIL ② DY-04 dys-bulwark-v2 사망 6칸 표(256×320, 살아 있는 그림 r380/mobs/dys-bulwark-v2.webp)
+FAIL ② DY-04 발 자리·발 아래 여백
+FAIL ② DY-05 dys-disc-v2 사망 6칸 표(256×320, 살아 있는 그림 r380/mobs/dys-disc-v2.webp)
+FAIL ② DY-05 발 자리·발 아래 여백
+FAIL ② DY-06 dys-engineer-v2 사망 6칸 표(256×320, 살아 있는 그림 r380/mobs/dys-engineer-v2.webp)
+FAIL ② DY-06 발 자리·발 아래 여백
+FAIL ② DY-07 dys-pulse-raider-v2 사망 6칸 표(256×320, 살아 있는 그림 r380/mobs/dys-pulse-raider-v2-walk-d1.webp)
+FAIL ② DY-07 발 자리·발 아래 여백
+FAIL ② DY-08 dys-prism-stalker-v2 사망 6칸 표(256×320, 살아 있는 그림 r380/mobs/dys-prism-stalker-v2-walk-d1.webp)
+FAIL ② DY-08 발 자리·발 아래 여백
+FAIL ② DY-09 dys-siege-gunner-v2 사망 6칸 표(256×320, 살아 있는 그림 r380/mobs/dys-siege-gunner-v2-walk-d1.webp)
+FAIL ② DY-09 발 자리·발 아래 여백
+PASS ③ MD-25 그대로
+PASS ④ 출처표 18장
+FAIL ④ assets/r1169/dys-scythe-hit4.webp sha·등록
+FAIL ④ assets/r1169/dys-scythe-death6.webp sha·등록
+FAIL ④ assets/r1169/dys-sacshell-hit4.webp sha·등록
+FAIL ④ assets/r1169/dys-sacshell-death6.webp sha·등록
+FAIL ④ assets/r1169/dys-membrane-hit4.webp sha·등록
+FAIL ④ assets/r1169/dys-membrane-death6.webp sha·등록
+FAIL ④ assets/r1169/dys-bulwark-hit4.webp sha·등록
+FAIL ④ assets/r1169/dys-bulwark-death6.webp sha·등록
+FAIL ④ assets/r1169/dys-disc-hit4.webp sha·등록
+FAIL ④ assets/r1169/dys-disc-death6.webp sha·등록
+FAIL ④ assets/r1169/dys-engineer-hit4.webp sha·등록
+FAIL ④ assets/r1169/dys-engineer-death6.webp sha·등록
+FAIL ④ assets/r1169/dys-pulse-raider-hit4.webp sha·등록
+FAIL ④ assets/r1169/dys-pulse-raider-death6.webp sha·등록
+FAIL ④ assets/r1169/dys-prism-stalker-hit4.webp sha·등록
+FAIL ④ assets/r1169/dys-prism-stalker-death6.webp sha·등록
+FAIL ④ assets/r1169/dys-siege-gunner-hit4.webp sha·등록
+FAIL ④ assets/r1169/dys-siege-gunner-death6.webp sha·등록
+FAIL ④ verify 접두
+FAIL ④ pages.yml
+PASS ④ runtime-text 사본 mob-hit-r1156.js
+PASS ④ runtime-text 사본 mob-attack-dots-r1065.js
+FAILED 47

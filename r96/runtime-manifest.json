@@ -11973,6 +11973,101 @@
       "sha256": "4d762863b914cea41037b380964680b4e9cc7f3b81a88861e68fa17a99289170"
     },
     {
+      "path": "assets/r1169/dys-bulwark-death6.webp",
+      "bytes": 135774,
+      "sha256": "46bcca97f9bacf0bb71da5c052922a82c475f13ffdead64c3009330322c49179"
+    },
+    {
+      "path": "assets/r1169/dys-bulwark-hit4.webp",
+      "bytes": 124034,
+      "sha256": "91b32753f13eb26b445564312c98741b5d8305d5f4bd4dfe56ecad0d1db85218"
+    },
+    {
+      "path": "assets/r1169/dys-disc-death6.webp",
+      "bytes": 144134,
+      "sha256": "5a4f2afec021a515bcd1e68efcfa178acfea5f09eb24b4a10f936824470f61f6"
+    },
+    {
+      "path": "assets/r1169/dys-disc-hit4.webp",
+      "bytes": 127152,
+      "sha256": "5d832c936fb2da054114dc818dcca43938c53482b4d4d72517666c2e6aec2ec0"
+    },
+    {
+      "path": "assets/r1169/dys-engineer-death6.webp",
+      "bytes": 114042,
+      "sha256": "9203a975d74aaab6a09d7872388897e41b559355fec8d336460c32729ff046a7"
+    },
+    {
+      "path": "assets/r1169/dys-engineer-hit4.webp",
+      "bytes": 149070,
+      "sha256": "93560047c47347194a94973eda15efda09a0fd1fbe1f282c2a49e766c6b0883f"
+    },
+    {
+      "path": "assets/r1169/dys-membrane-death6.webp",
+      "bytes": 121398,
+      "sha256": "879c3f4ed7508b6b4d3cb7ec5eaf9e459c977aec821b70f19741d47c6ff5b50a"
+    },
+    {
+      "path": "assets/r1169/dys-membrane-hit4.webp",
+      "bytes": 116888,
+      "sha256": "2a4950e9b756a2326ee443190161be6ab41bf4da2fac0b8f09fd84731e5dfb4b"
+    },
+    {
+      "path": "assets/r1169/dys-prism-stalker-death6.webp",
+      "bytes": 122536,
+      "sha256": "be74f5aac7627299136742dcfa7bbbb864555bd548d6758595dc4bad456fae01"
+    },
+    {
+      "path": "assets/r1169/dys-prism-stalker-hit4.webp",
+      "bytes": 119072,
+      "sha256": "c109b07371251826c57075a97c0d9830c0287829788b93b932da2de6a4e4a3fa"
+    },
+    {
+      "path": "assets/r1169/dys-pulse-raider-death6.webp",
+      "bytes": 166686,
+      "sha256": "9c4c481bfb8df35c59c815c6023d4656c452ee8598f9ceb1bf5da7471ec8a693"
+    },
+    {
+      "path": "assets/r1169/dys-pulse-raider-hit4.webp",
+      "bytes": 142740,
+      "sha256": "cb55bdeeaa75274d77cb2c73f1b60ecd64f5946d43e67c439827f20686af2653"
+    },
+    {
+      "path": "assets/r1169/dys-sacshell-death6.webp",
+      "bytes": 165260,
+      "sha256": "58cde51100c8750dfb59b9e81b63061db999f80bf6f5ce86ad403572a8fce677"
+    },
+    {
+      "path": "assets/r1169/dys-sacshell-hit4.webp",
+      "bytes": 147654,
+      "sha256": "3e00c5aa3cf13b1ef8aa477f4f9976070bb39d5f794d7836949e154b2a5b6a42"
+    },
+    {
+      "path": "assets/r1169/dys-scythe-death6.webp",
+      "bytes": 101020,
+      "sha256": "146aca0556cbedd10f44a6900fd0727c8aef18c5e47b6cb3db3a98904d1eb326"
+    },
+    {
+      "path": "assets/r1169/dys-scythe-hit4.webp",
+      "bytes": 121996,
+      "sha256": "ceb4eff0f8bf71ccbdd08524086ee19fed2a95cf60408545a6d1f080c553c493"
+    },
+    {
+      "path": "assets/r1169/dys-siege-gunner-death6.webp",
+      "bytes": 135874,
+      "sha256": "910ded71ba11a35c2c832f6f9876457d731517253dbbef8bb932b3e4e41f1958"
+    },
+    {
+      "path": "assets/r1169/dys-siege-gunner-hit4.webp",
+      "bytes": 177286,
+      "sha256": "28cc34b4a568bd423fa8010bb39770358c51505fd1be548e1c2ee04ed4bcc69c"
+    },
+    {
+      "path": "assets/r1169/index.json",
+      "bytes": 6848,
+      "sha256": "fe7823627b27ac265641edab8a972eb94e4f2a5a41b4ee2a0204ad23c52463cf"
+    },
+    {
       "path": "assets/r117/scene/ep-cup-k1.png",
       "bytes": 2264,
       "sha256": "a39b05d84a4613cb40d72e213a26b9bccbc254b82e4cd9888f0b47e085a209e2"
@@ -55429,8 +55524,8 @@
     },
     {
       "path": "mob-attack-dots-r1065.js",
-      "bytes": 25127,
-      "sha256": "af51d14be4334b36fdbebefdbc7c5b12b15f0acdf4e400788a31dddce389ce36"
+      "bytes": 27335,
+      "sha256": "03822b3c9fb86bbf7777051f9d8b4e6715f374e6cfc2a97a5bcb339b51bad3b3"
     },
     {
       "path": "mob-death-r188.js",
@@ -55484,8 +55579,8 @@
     },
     {
       "path": "mob-hit-r1156.js",
-      "bytes": 5608,
-      "sha256": "55b1724f7b826d59a53bb37c074e69f17567f086252b2e84e49ff52beeb3e432"
+      "bytes": 7055,
+      "sha256": "33be782d7c00b9ce44342913c6f7d59eb07f07a21ea3949462566ab0a3848a05"
     },
     {
       "path": "mob-legacy-r363.js",
@@ -56643,8 +56738,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11328,
-  "totalBytes": 1360459894,
+  "fileCount": 11347,
+  "totalBytes": 1362903013,
   "webHTMLSha256": "d7ab4417ea6e532e3533c1394e33a40a10e4e4e468c40c2eb0edb853ded2991e",
   "largest": [
     {
