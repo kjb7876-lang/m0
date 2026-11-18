@@ -173,7 +173,9 @@ if(typeof window.spawnCosmic3==='function'){const base=window.spawnCosmic3;windo
 const HOLD=new Set(['bossReady','midbossReady','trialReady','cosmicReady','personaReady','summoning','active','complete']);
 // ⑤ (2026-11-18 스토리 사몽 실플레이, R1127b) 모든 지역: 중간보스·보스를 먼저 잡아 단계가 bossReady/complete 가 된 뒤 남은 필드 잡몹을 잡으면
 //    advanceFieldWave6 이 단계를 fieldReady 로 되돌려 길잡이가 출구 대신 제단으로 돌아가 멈췄다(dist02 DREAM 재현). 그 두 단계도 지킨다. 끄기: localStorage storyworld.stageKeep='0'.
-const KEEP_ALL=new Set(['bossReady','complete']);let keepAll=true;try{keepAll=localStorage.getItem('storyworld.stageKeep')!=='0';}catch(_){}
+// ⑥ (R1133, 2026-11-18 스토리 사몽 ep1b05 재현) 보스 소환(summoning)·결전(active) 중에 남은 잡몹이 죽어도 단계가 field 로 덮여
+//    소환 완료 처리가 안 돌아 보스가 'summoning' 에 갇혔다(길잡이 '소환의 실체화 기다리기'에서 멈춤). 그 두 단계도 지킨다(보스·중간보스 처치는 제외).
+const KEEP_ALL=new Set(['bossReady','complete','summoning','active']);let keepAll=true;try{keepAll=localStorage.getItem('storyworld.stageKeep')!=='0';}catch(_){}
 if(typeof killEnemy==='function'){const base=killEnemy;killEnemy=function(enemy,...a){let keep=null;try{if(active()&&room.activeEncounter&&HOLD.has(room.encounterStage))keep={room,stage:room.encounterStage};else if(keepAll&&room&&KEEP_ALL.has(room.encounterStage)&&!(enemy&&(enemy.boss||enemy.midboss)))keep={room,stage:room.encounterStage,all:true};}catch(e){fail(e);}
  const r=base.call(this,enemy,...a);
  try{if(keep&&room===keep.room&&(room.encounterStage==='field'||room.encounterStage==='fieldReady')&&room.encounterStage!==keep.stage){room.encounterStage=keep.stage;stats.stageKept++;if(keep.all)stats.stageKeptAll=(stats.stageKeptAll||0)+1;}}catch(e){fail(e);}return r;};}
