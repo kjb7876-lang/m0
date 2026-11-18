@@ -12298,6 +12298,51 @@
       "sha256": "13e2ed70e103d7292fa6019722e6d03897eff22875bdfbb6f8cd0365917d5d12"
     },
     {
+      "path": "assets/r1177/mob-clinical-dots-8.webp",
+      "bytes": 5498,
+      "sha256": "46773f69159393a2f98c68936ec02340e35f72d38b86353a844d50e8bdf709db"
+    },
+    {
+      "path": "assets/r1177/mob-coast-dots-12.webp",
+      "bytes": 33956,
+      "sha256": "c9e4da8936a0ce0365aad730a64e1656123dba01491c47e4ba15a067b8ae87d7"
+    },
+    {
+      "path": "assets/r1177/mob-domestic-dots-12.webp",
+      "bytes": 40992,
+      "sha256": "ff952828a44830025849b6c7875e9b54e1e99050ca5b194ff2b807176d4e8263"
+    },
+    {
+      "path": "assets/r1177/mob-forge-dots-12.webp",
+      "bytes": 26550,
+      "sha256": "ff943031b92472a93689e8706e5bcdb7b4d04dfa38b50574481622f3840e06f6"
+    },
+    {
+      "path": "assets/r1177/mob-garden-dots-12.webp",
+      "bytes": 28450,
+      "sha256": "dd5e5634be6428436718a8d1d79a20e26c1f95d9b18a7c93943085eb1a4e9451"
+    },
+    {
+      "path": "assets/r1177/mob-neural-dots-12.webp",
+      "bytes": 52148,
+      "sha256": "3b358d39ae2ac88b414d7304bf67c5eb7d669715d999be945e8fad23421769c8"
+    },
+    {
+      "path": "assets/r1177/mob-regional-dots-8.webp",
+      "bytes": 12776,
+      "sha256": "2dee86a759a3dcd6f4cbd7fe1a0f3de41f57cfaa06b93126e921e5da8e78280e"
+    },
+    {
+      "path": "assets/r1177/mob-snow-dots-12.webp",
+      "bytes": 46102,
+      "sha256": "c3587abe07b66bdebbb60ff12e9b256f64121ad53a5c164aac9ccae1bf024c6e"
+    },
+    {
+      "path": "assets/r1177/mob-stone-dots-12.webp",
+      "bytes": 41270,
+      "sha256": "47348c895cc6cac77f6abd9a84c930923d8d0f06ac2a6536790cb242d83d0e07"
+    },
+    {
       "path": "assets/r1177/rift-blood.webp",
       "bytes": 95258,
       "sha256": "a9496b2f07487f0ed0e198d1ca6631fbcc81f7a69e4d366ca150d5191d410d6a"
@@ -55954,8 +55999,8 @@
     },
     {
       "path": "samong-pixel-art-r1177.js",
-      "bytes": 8454,
-      "sha256": "4e5982fb735c0ed54c86e51e050c40ff34c35e816c488cb0b28186589ae10623"
+      "bytes": 11130,
+      "sha256": "4b636ac79003ea355527edc740bfd23b54a35b0962e28fadd15285925145acd6"
     },
     {
       "path": "samong-play-r162.js",
@@ -56558,8 +56603,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11311,
-  "totalBytes": 1358885613,
+  "fileCount": 11320,
+  "totalBytes": 1359176031,
   "webHTMLSha256": "d7ab4417ea6e532e3533c1394e33a40a10e4e4e468c40c2eb0edb853ded2991e",
   "largest": [
     {
