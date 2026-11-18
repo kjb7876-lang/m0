@@ -43,15 +43,41 @@ async function enterField(page, samong) {
   await page.evaluate(() => { auto = false; guide = false; });
 }
 
+async function waitForRenderer(page) {
+  const details = () => page.evaluate(() => {
+    const state = __STORYWORLD_PHASE1__.controller.state;
+    const renderer = state.three?.renderer;
+    return { active: state.active, requested: state.requested, failed: state.failed, reason: state.reason,
+      limit: renderer?.capabilities.maxTextureSize, contextLost: renderer?.getContext().isContextLost(),
+      room: room?.id, layer, loading };
+  });
+  try {
+    await page.waitForFunction(() => {
+      const state = __STORYWORLD_PHASE1__.controller.state;
+      return state.active === 'three' || state.failed;
+    }, null, {timeout});
+  } catch (error) {
+    throw new Error('WebGL scene did not render: ' + JSON.stringify(await details()), {cause: error});
+  }
+  const info = await details();
+  assert.equal(info.active, 'three', JSON.stringify(info));
+  assert.equal(info.contextLost, false, JSON.stringify(info));
+}
+
 async function tapAndMeasure(page, direction) {
   const point = await page.evaluate(direction => {
-    const point = project(player.x + 2 * direction, player.y - direction);
     const bounds = canvas.getBoundingClientRect();
-    const x = Math.round(bounds.left + point.x * bounds.width / W);
-    const y = Math.round(bounds.top + point.y * bounds.height / H);
-    return { x, y, interactive: document.elementFromPoint(x, y) === canvas };
+    // A live narration subtitle can cover one ground tile without pausing combat.
+    // Pick another in the same movement direction that a player can actually tap.
+    for (const [dx, dy] of [[2,-1],[2,1],[2,2],[1,-2],[2,-2],[1,0]]) {
+      const screen = project(player.x + dx * direction, player.y + dy * direction);
+      const x = Math.round(bounds.left + screen.x * bounds.width / W);
+      const y = Math.round(bounds.top + screen.y * bounds.height / H);
+      if (document.elementFromPoint(x, y) === canvas) return {x, y};
+    }
+    return null;
   }, direction);
-  assert.ok(point.interactive, 'movement tap must reach the game canvas');
+  assert.ok(point, 'a movement tap must reach the game canvas');
   await page.touchscreen.tap(point.x, point.y);
   return await page.evaluate(() => new Promise(resolve => {
     const intervals = [];
@@ -87,7 +113,13 @@ async function run(browser, mode) {
     page.setDefaultTimeout(timeout);
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(process.env.SW_URL || 'http://127.0.0.1:4396/', { waitUntil: 'domcontentloaded', timeout });
+    await page.evaluate(() => {
+      document.addEventListener('pointerdown', e => {
+        if (e.isTrusted && e.target === canvas) window.__qaCanvasPointer = e.pointerType;
+      }, true);
+    });
     await enterField(page, samong);
+    await waitForRenderer(page);
     const env = await page.evaluate(() => ({
       renderer: __STORYWORLD_PHASE1__.controller.state.active, coarse: matchMedia('(pointer:coarse)').matches,
       devicePixelRatio, deviceMemory: typeof navigator.deviceMemory, layer, room: room.id,
@@ -95,9 +127,10 @@ async function run(browser, mode) {
       touch: navigator.maxTouchPoints, rendererDpr: dpr, canvas: [canvas.width, canvas.height]
     }));
     assert.equal(env.renderer, 'three');
-    assert.ok(env.coarse && env.touch > 0 && env.devicePixelRatio === 3);
+    assert.ok(env.coarse && env.devicePixelRatio === 3);
     assert.equal(env.deviceMemory, 'undefined');
     assert.equal(env.cheat, false);
+    assert.deepEqual([env.layer, env.samong], samong ? ['DREAM','sz115-P-2'] : ['STORY',null]);
     // Let camera/viewport and the first shader uploads settle before sampling movement.
     await page.evaluate(() => new Promise(resolve => {
       let frames = 0;
@@ -106,6 +139,8 @@ async function run(browser, mode) {
     }));
     const samples = [];
     for (const direction of [1, -1, 1]) samples.push(await tapAndMeasure(page, direction));
+    env.canvasPointer = await page.evaluate(() => window.__qaCanvasPointer);
+    assert.equal(env.canvasPointer, 'touch');
     assert.ok(samples.every(s => s.gameSeconds > 0 && s.peakEnemies > 0), 'combat simulation progresses');
     assert.ok(samples.some(s => s.distance > 0.1), 'hero moves in response to touch');
     assert.deepEqual(errors, []);
@@ -120,11 +155,11 @@ async function run(browser, mode) {
 
 async function main() {
   const useWebKit = !!process.env.WEBKIT_EXECUTABLE_PATH;
-  const browser = useWebKit ? await webkit.launch({executablePath: process.env.WEBKIT_EXECUTABLE_PATH})
-    : await chromium.launch({executablePath: process.env.CHROMIUM_EXECUTABLE_PATH || process.env.CHROMIUM_PATH,
-      args: ['--disable-dev-shm-usage','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
-  try {
-    for (const mode of ['story','samong']) await run(browser, mode);
-  } finally { await browser.close(); }
+  for (const mode of ['story','samong']) {
+    const browser = useWebKit ? await webkit.launch({executablePath: process.env.WEBKIT_EXECUTABLE_PATH})
+      : await chromium.launch({executablePath: process.env.CHROMIUM_EXECUTABLE_PATH || process.env.CHROMIUM_PATH,
+        args: ['--disable-dev-shm-usage','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+    try { await run(browser, mode); } finally { await browser.close(); }
+  }
 }
 main().catch(error => { console.error(error); process.exitCode=1; });
