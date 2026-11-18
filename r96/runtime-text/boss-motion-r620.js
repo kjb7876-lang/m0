@@ -28,7 +28,9 @@ const SHEETS={'assets/generated-v31224/actors-normalized/1a8ca2c5759b_ep1b03_env
  'assets/r104/bosses/a11-boss-p4.webp':{w:466,h:432,idle:{path:'assets/r1147/bosses/a11-idle6.webp',n:6,fps:8},hit:{path:'assets/r1147/bosses/a11-hit4.webp',n:4,fps:16}},
  'assets/r104/bosses/dist06-boss-p4.webp':{w:508,h:501,idle:{path:'assets/r1147/bosses/dist06-idle6.webp',n:6,fps:8},hit:{path:'assets/r1147/bosses/dist06-hit4.webp',n:4,fps:16}},/* R1159: Dots r2 HOLD 피격을 Claude 가 크기·색 손질(scripts/r1159-balrog-hit.py) */
  'assets/r104/bosses/b09-boss-p4.webp':{w:464,h:461,idle:{path:'assets/r1161/bosses/b09-idle6.webp',n:6,fps:8},hit:{path:'assets/r1161/bosses/b09-hit4.webp',n:4,fps:16}},/* R1161: b09 Dots r2 HOLD — 기계 다리는 원래 p4, 사람·핵만 Dots(scripts/r1161-b09-boss.py) */
- 'assets/r104/bosses/u202-mid-p4.webp':{w:509,h:525,idle:{path:'assets/r1147/bosses/u202-idle6.webp',n:6,fps:8}}};
+ 'assets/r104/bosses/u202-mid-p4.webp':{w:509,h:525,idle:{path:'assets/r1147/bosses/u202-idle6.webp',n:6,fps:8}},
+ // R1160: b08 Dots CX-0142BI r2 대기·피격 HOLD 를 Claude 가 손질(qa/r1147/fitsheet.py 로 p4 발 자리·색, 피격 4칸째 = 대기 1칸으로 원래 그림체 튐 없앰).
+ 'assets/r104/bosses/b08-boss-p4.webp':{w:232,h:423,idle:{path:'assets/r1160/bosses/b08-idle6.webp',n:6,fps:8},hit:{path:'assets/r1160/bosses/b08-hit4.webp',n:4,fps:16}}};
 const asked=new Set();function sheetImg(p){try{const r=typeof readyImage==='function'?readyImage(p):null;if(r?.image)return r.image;if(!asked.has(p)&&typeof addImage==='function'){asked.add(p);addImage(p,'R620 Dots boss sheet');}}catch(_){}return null;}
 const ST=new WeakMap();
 const stOf=e=>{let s=ST.get(e);if(!s)ST.set(e,s={sx:1,sy:1,sh:0,ox:0,oy:0,at:-1,fx:NaN,fy:NaN,vx:0,move:0,hitAt:-9,hitT:0,prev:null,xAt:-9,lastPath:'',stepPh:Math.random()*6.28,seed:Math.random()*6.28,lastT:-1});return s;};
