@@ -11883,6 +11883,41 @@
       "sha256": "51082727cb9c57966c79d90a98957b3373025e086fe1c5d5da23da0254eddad4"
     },
     {
+      "path": "assets/r1162/move/u205-mid-down.webp",
+      "bytes": 44760,
+      "sha256": "03ba2b02b20f5ec1e94e0e457f0551b02df609402b13b110c3ae7677d15cc139"
+    },
+    {
+      "path": "assets/r1163/bosses/b02-hit4.webp",
+      "bytes": 60984,
+      "sha256": "ecd15eb22fdbb664267821bef5a13db52025828df9037afd2b33d3ac4464a5ca"
+    },
+    {
+      "path": "assets/r1163/bosses/b02-idle6.webp",
+      "bytes": 90926,
+      "sha256": "df0c82dddf400131f8a9f927b84ec60677a6995e10d66407e777a75d1d971aa6"
+    },
+    {
+      "path": "assets/r1163/bosses/u204-hit4.webp",
+      "bytes": 51510,
+      "sha256": "aa4e8023f5bccb8b5a5ad4141857863e8efc2bfa8354c0c9518da4e0863854b5"
+    },
+    {
+      "path": "assets/r1163/bosses/u204-idle6.webp",
+      "bytes": 72430,
+      "sha256": "b24e96b30430e0bb8a2a0d998e05a4920b1e4cd46b480a9f2c6df84a92168a79"
+    },
+    {
+      "path": "assets/r1163/bosses/u205-hit4.webp",
+      "bytes": 46886,
+      "sha256": "a1f4d90c8f6b01fc798ac69317dd71e0eb3de80497b125d2ba3cb8fdf8c90c6b"
+    },
+    {
+      "path": "assets/r1163/bosses/u205-idle6.webp",
+      "bytes": 76050,
+      "sha256": "4fc6d27dcee5c5b3f192289988626effe711f6e7dab5be9da40092bf8ef5268e"
+    },
+    {
       "path": "assets/r117/scene/ep-cup-k1.png",
       "bytes": 2264,
       "sha256": "a39b05d84a4613cb40d72e213a26b9bccbc254b82e4cd9888f0b47e085a209e2"
@@ -12091,6 +12126,51 @@
       "path": "assets/r117/scene/s03-ring-k4.png",
       "bytes": 15735,
       "sha256": "8aa7194697512b1fd43d594840c24af3d24aefac2c36120969d743e28560cb11"
+    },
+    {
+      "path": "assets/r1173/persona-walk-side.webp",
+      "bytes": 400832,
+      "sha256": "88ebb09daf98f3d998c55fa3ad4d7478abc4a8eb505435d4e86062eb4f645cd1"
+    },
+    {
+      "path": "assets/r1177/choir-moths-blood.webp",
+      "bytes": 162620,
+      "sha256": "561eac0a8a73a07557e904871e5ba1a66d5af659d30ff73bbf065aba43f5fc85"
+    },
+    {
+      "path": "assets/r1177/hands-blood.webp",
+      "bytes": 221910,
+      "sha256": "23b6f1cf5d80f78641380a7814956117fab952476c62b04c54d5c490490e14d6"
+    },
+    {
+      "path": "assets/r1177/index.json",
+      "bytes": 2667,
+      "sha256": "5c0cf6152a0551808c87740adb9632becebd7046eaf7aca829a2366a136dba9f"
+    },
+    {
+      "path": "assets/r1177/rift-blood.webp",
+      "bytes": 95258,
+      "sha256": "a9496b2f07487f0ed0e198d1ca6631fbcc81f7a69e4d366ca150d5191d410d6a"
+    },
+    {
+      "path": "assets/r1177/s06-commander-walk-right-8.webp",
+      "bytes": 162354,
+      "sha256": "1d6ead7e4c44b1d714cb31e3becded61c3a3f872c0c881dda1f67212024bb801"
+    },
+    {
+      "path": "assets/r1177/s06-invader-walk-right-8.webp",
+      "bytes": 93230,
+      "sha256": "c1bd4255d859184c71ce3822c7fc823c78a7495dabec88cb02ea9dbbc6b42b0f"
+    },
+    {
+      "path": "assets/r1177/s06-rival-walk-right-8.webp",
+      "bytes": 106006,
+      "sha256": "1c948210926829ac68fae4d7fcbbbc22d399570a31d5d1547425815573cd9556"
+    },
+    {
+      "path": "assets/r1177/void-implosion-blood.webp",
+      "bytes": 80406,
+      "sha256": "f29d04cbd015fa99029c09ea60d8178237e3378a930f7068e82ddc344132e3df"
     },
     {
       "path": "assets/r1179/mobs/index.json",
@@ -53524,8 +53604,8 @@
     },
     {
       "path": "boss-motion-r620.js",
-      "bytes": 11487,
-      "sha256": "714585353628fe2b5d4f7e058679964ca2403ea393ee77b16dc4bd74b7a74597"
+      "bytes": 12586,
+      "sha256": "9d096eab442eee70adc3e070a410c7c2a67e90f666f418af3e336223dd66ba9e"
     },
     {
       "path": "boss-pattern-fx-r1040.js",
@@ -54864,8 +54944,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6581933,
-      "sha256": "6cae5aadda60ea48378bf25ee8acaf68ecae545df6acafb3a81d6f8a6955bfb0"
+      "bytes": 6582034,
+      "sha256": "7da654eb0661b9fadf84c1904200465ffcd70a351064dee1415962b2b8526ff9"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -55243,6 +55323,11 @@
       "sha256": "494d60fa266c022a62a839e724d4d8dde3590ac67c707c6a912fa9efe080fd3e"
     },
     {
+      "path": "move-dir-r1162-data.js",
+      "bytes": 1737,
+      "sha256": "ec4c05626a4a57bd6bfc5c077dabc3f1d7b8e59ccb4ea659af4b3e33cdb62ca6"
+    },
+    {
       "path": "move-dir-r974-data.js",
       "bytes": 12620,
       "sha256": "1964909c541f39cb91539077081f36fd091fa0846b9cb15820bf1f5a2c0ce999"
@@ -55419,8 +55504,8 @@
     },
     {
       "path": "persona-hero-r1113.js",
-      "bytes": 49186,
-      "sha256": "b416d9af879a761ebc5f622e0e2f0d87b82d99cec2e1ffe1539deef8eae57def"
+      "bytes": 52827,
+      "sha256": "08ef641dd3f988976cd997b0611e106290e5518104191d9d34b1819f5dc8da96"
     },
     {
       "path": "persona-ink-r1097.js",
@@ -55658,6 +55743,11 @@
       "sha256": "1c1a96be256cc80ba8a8bcf1c32e9f7cf4aef3602f2a40b438ae6914c1ed6ad3"
     },
     {
+      "path": "samong-pixel-art-r1177.js",
+      "bytes": 6464,
+      "sha256": "3cf2b84909fabb1500c95af24919ff4eaf06e0346a9a3b2e01b312142a816886"
+    },
+    {
       "path": "samong-play-r162.js",
       "bytes": 18983,
       "sha256": "78913442e364256dcf534c8e0b936e40c5b3ee3e316fde953e37834bd213a2ea"
@@ -55669,8 +55759,8 @@
     },
     {
       "path": "samong-r161.js",
-      "bytes": 19737,
-      "sha256": "0b15b20af730950ef15479b6f050619836b30ad5345dfb2fa583ee2a99e1fa99"
+      "bytes": 19911,
+      "sha256": "49d520992be6bf72bca248c7713bd8c150a995d650d4aac9558d1dc636ecb9c6"
     },
     {
       "path": "samong-rooms-r511.js",
@@ -56258,9 +56348,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11251,
-  "totalBytes": 1353407112,
-  "webHTMLSha256": "6cae5aadda60ea48378bf25ee8acaf68ecae545df6acafb3a81d6f8a6955bfb0",
+  "fileCount": 11269,
+  "totalBytes": 1355189157,
+  "webHTMLSha256": "7da654eb0661b9fadf84c1904200465ffcd70a351064dee1415962b2b8526ff9",
   "largest": [
     {
       "path": "index.html",
