@@ -75,9 +75,10 @@ async function run(kind){
   const hostOffer=await host.evaluate(()=>{const M=window.__STORYWORLD_SURVIVAL_COOP_R1149__;M.openChoice();return [...document.querySelectorAll('.r600Card,.r1149Card')].map(b=>b.className+'|'+b.textContent);});
   ok(hostOffer.length>=1&&hostOffer.every(t=>!/core|정화 코어/.test(t)),`[${kind}] 방장 선택지에도 구슬 강화 없음`,hostOffer);
   await host.evaluate(()=>{document.querySelector('.r600Card,.r1149Card')?.click();try{closePanel(true);}catch(_){}});
-  // 영웅 배치: 이번 단계에서는 멀티에서 닫혀 있음(각자 1명 규칙은 다음 단계에서 열림) — 열리지 않고 안내만
-  const dep=await host.evaluate(()=>{const D=window.__STORYWORLD_HERO_DEFENSE_R720__;const r=D.open();return{opened:r,panel:!!document.getElementById('r720Panel')};});
-  ok(dep.opened!==true&&!dep.panel,`[${kind}] 멀티 중 영웅 배치 창은 닫혀 있음(이번 단계)`,dep);
+  // 영웅 배치(R1149b): 2~4명은 각자 1명 규칙으로 열림 — 자세한 검사는 r1149b-deploy-browser.mjs
+  const depOpen=await until(host,()=>{const D=window.__STORYWORLD_HERO_DEFENSE_R720__;if(D.inspect().mine)return true;try{if(modal)closePanel(true);}catch(_){}return D.open()===true;},null,20000,'deploy open');/* 남은 강화 고르기 창이 닫힌 뒤 연다 */
+  const dep=await host.evaluate(o=>{const D=window.__STORYWORLD_HERO_DEFENSE_R720__;const panel=!!document.getElementById('r720Panel'),head=document.querySelector('#r720Panel h3')?.textContent||'';D.close();return{opened:o,panel,head};},depOpen);
+  ok(dep.opened===true&&dep.panel&&/1$/.test(dep.head.trim()),`[${kind}] 멀티 중 영웅 배치 창이 열리고 한도는 각자 1`,dep);
   // 영화 서사 모드는 혼자만
   ok(await host.evaluate(()=>window.__STORYWORLD_SURVIVAL_COOP_R1149__.inspect().cinemaBlocked===true),`[${kind}] 멀티 중에는 영화 서사 모드 시작이 막힘`);
   // 판 끝 맞춤

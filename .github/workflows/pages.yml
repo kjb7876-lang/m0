@@ -723,6 +723,8 @@ jobs:
         run: node r96/qa/r1135/r1135-cpu-check.cjs
       - name: R1149 multiplayer rules (seats, per-player deploy limit, enemy HP by player count in story and survival, auto core level-up, hero-only cards, cinema solo) CPU check
         run: node r96/qa/r1149/r1149-cpu-check.cjs
+      - name: R1149b multiplayer hero placement (one hero each for 2-4 players, none from 5, per-player wallet, guest command text, leaver cleanup) CPU check
+        run: node r96/qa/r1149/r1149b-deploy-cpu-check.cjs
       - name: R1150 boss enrage (all modes) 1.06x body, all stats +66% (damage, move, attack speed, defense), 0.6% max HP regen per second CPU check
         run: node r96/qa/r1150/r1150-cpu-check.cjs
       - name: R537 spider cave mud-back spider and memory-carrier spider, swamp root stalker renamed CPU check

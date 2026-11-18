@@ -13,8 +13,8 @@
 //  · 인원: 규칙 상한은 7명이지만 지금 서버는 방당 4석이라 실제 입장은 4명까지다(서버를 바꾸면 pure.SEATS 만 올리면 된다).
 //  · 적 체력: 인원수만큼 몹을 복제하던 협동 규칙 대신, 스토리 협동과 생존 모두 몹·보스 체력에 인원수를 곱한다(혼자는 ×1 = 예전 그대로).
 //  · 정화 구슬(코어): 멀티에서는 레벨 하나에 강화 하나씩 알아서 오른다(덜 오른 것부터 고르게). 강화 선택지에는 각자 자기 영웅 것만 나온다.
-//  · 영웅 배치(R720) 규칙: 2~4명은 각자 1명, 5명부터 없음, 혼자는 예전 그대로(pure.deployLimit). 이번 단계에서는 멀티 중 배치 창을 닫아 둔다
-//    (배치 영웅의 몸을 손님 화면에 맞추는 일은 다음 단계 — 한도 계산은 이미 들어 있다).
+//  · 영웅 배치(R720) 규칙: 2~4명은 각자 1명, 5명부터 없음, 혼자는 예전 그대로(pure.deployLimit). R1149b: 방장이 모든 배치 영웅을 돌리고
+//    손님은 배치 명령을 패시브 칸 글('sv1149-d-…')로 보내며, 지갑·자리·자세는 스냅샷 sv1149.def 로 받는다(규칙은 hero-defense-r720.js mp*).
 //  · 영화 서사 모드는 혼자만: 방에 들어가 있는 동안 '영화 모드로 시작'을 막고, 영화 기록을 연 채로는 방 만들기·참가를 막는다.
 //  · 혼자일 때는 아무것도 바꾸지 않는다(전송 가로채기는 그대로 통과).
 (()=>{'use strict';
@@ -41,6 +41,9 @@ function encodeRegion(id,info){if(typeof id!=='string'||!ID.test(id)||!info||!DI
 function decodeRegion(s){if(typeof s!=='string')return null;const m=/^sv1149-(easy|normal|hard|nightmare)-(\d{1,4})-(\d{1,4})--([A-Za-z0-9_-]+)$/.exec(s);return m?{id:m[4],i:+m[3],loop:+m[2],diff:m[1]}:null;}
 function pickCommand(uid){return typeof uid==='string'&&/^[A-Za-z0-9]{1,40}$/.test(uid)?'sv1149-u-'+uid:null;}
 function parseCommand(s){if(typeof s!=='string')return null;const m=/^sv1149-u-([A-Za-z0-9]{1,40})$/.exec(s);return m?m[1]:null;}
+// R1149b 배치 명령: 배치 오버레이(R720)가 만든 글을 같은 패시브 칸에 'sv1149-d-' 접두로 싣는다(64자 안).
+function deployCommand(t){return typeof t==='string'&&/^[A-Za-z0-9-]{1,50}$/.test(t)?'sv1149-d-'+t:null;}
+function parseDeploy(s){if(typeof s!=='string')return null;const m=/^sv1149-d-([A-Za-z0-9-]{1,50})$/.exec(s);return m?m[1]:null;}
 const multiAllowed=mode=>mode==='story'||mode==='survival';
 // 스토리 협동: 인원수가 바뀌면 이미 곱해 둔 배수(applied)에서 새 배수(k)로 체력을 다시 맞춘다. 죽은 몹(0)은 그대로, 살아 있으면 최소 1.
 function rescale(hp,maxHp,applied,k){const a=Number(applied)>0?Number(applied):1,n=hpScale(k),m=Number(maxHp),h=Number(hp);if(!Number.isFinite(m)||m<=0||!Number.isFinite(h))return {hp,maxHp};const f=n/a;
@@ -48,12 +51,12 @@ function rescale(hp,maxHp,applied,k){const a=Number(applied)>0?Number(applied):1
 // 스토리 협동: 인원수만큼 복제된 몹을 걷어내고, 그 이름을 방의 '처치한 복제' 목록에 적어 협동이 다시 만들지 않게 한다.
 function stripReplicas(r){if(!r||!Array.isArray(r.enemies))return 0;const gone=r.enemies.filter(e=>e&&e.coopReplicaR62);if(!gone.length)return 0;if(!Array.isArray(r.coopDefeatedR62))r.coopDefeatedR62=[];
  for(const e of gone)if(typeof e.id==='string'&&!r.coopDefeatedR62.includes(e.id))r.coopDefeatedR62.push(e.id);r.enemies=r.enemies.filter(e=>!(e&&e.coopReplicaR62));return gone.length;}
-const pure=Object.freeze({RULE_MAX,SEATS,DIFFS:Object.freeze([...DIFFS]),joinCap,deployLimit,hpScale,scaleHp,heroCards,autoCore,encodeRegion,decodeRegion,pickCommand,parseCommand,multiAllowed,rescale,stripReplicas});
+const pure=Object.freeze({RULE_MAX,SEATS,DIFFS:Object.freeze([...DIFFS]),joinCap,deployLimit,hpScale,scaleHp,heroCards,autoCore,encodeRegion,decodeRegion,pickCommand,parseCommand,deployCommand,parseDeploy,multiAllowed,rescale,stripReplicas});
 
 // ── 실행 상태 ──
 const M={on:false,role:null,diff:'normal',pend:{},pendSelf:0,cmdSeq:0,busy:false,pickHold:0,choiceOpen:false};
 let rawClient=null,rawSim=null;
-const SV=()=>window.__STORYWORLD_SURVIVAL_R600__;
+const SV=()=>window.__STORYWORLD_SURVIVAL_R600__,DEF=()=>window.__STORYWORLD_HERO_DEFENSE_R720__;
 const say=(t,s=2.6)=>{try{if(typeof toast==='function')toast(t,s);}catch(_){}};
 const cstate=()=>G(()=>rawClient.inspect(),null);
 const inRoom=()=>!!G(()=>rawClient.active(),false);
@@ -96,14 +99,14 @@ function outgoing(type,payload){
   return [type,{...payload,regionId:enc}];}
  if(type==='snapshot'&&payload.state&&typeof payload.state==='object'){const st=G(()=>SV().coop.publicState(),null);if(!st)return [type,payload];stats.snapshots++;
   const host=G(()=>rawSim.inspect().selfId,''),pend={...M.pend};if(host)pend[host]=st.hostPend|0;
-  return [type,{...payload,state:{...payload.state,room:{...(payload.state.room||{}),sv1149:{...st,pend,n:count()}}}}];}
+  return [type,{...payload,state:{...payload.state,room:{...(payload.state.room||{}),sv1149:{...st,pend,n:count(),def:G(()=>DEF().mpPublic(),null)}}}}];}
  return [type,payload];}
 function wrapClient(){const C=window.__STORYWORLD_COOP_CLIENT_R62__;if(!C||C.r1149||typeof C.send!=='function')return false;rawClient=C;
  const send=(type,payload={})=>{let out=[type,payload];try{out=outgoing(type,payload);}catch(e){fail(e);}return C.send(out[0],out[1]);};
  try{window.__STORYWORLD_COOP_CLIENT_R62__=Object.freeze({...C,send,r1149:true});}catch(e){fail(e);return false;}
  try{C.on('snapshot',m=>{try{guestState(m?.state?.room?.sv1149);}catch(e){fail(e);}});C.on('status',()=>{try{if(!inRoom()&&M.on)endSession();}catch(e){fail(e);}});}catch(e){fail(e);}return true;}
 // ── 받기 가로채기: 지역 이름 풀기(손님은 무대 준비), 강화 고르기 명령(방장), 처음 본 몹(손님) ──
-function guestState(st){if(!M.on||M.role!=='guest'||!st||typeof st!=='object')return;stats.syncs++;SV().coop.guestSync(st);
+function guestState(st){if(!M.on||M.role!=='guest'||!st||typeof st!=='object')return;stats.syncs++;SV().coop.guestSync(st);try{if(st.def)DEF().mpSync(st.def);}catch(e){fail(e);}
  const me=G(()=>cstate().selfId,''),n=Math.max(0,whole(st.pend&&st.pend[me]));M.pend=st.pend&&typeof st.pend==='object'?{...st.pend}:{};
  if(performance.now()<M.pickHold)M.pendSelf=Math.min(M.pendSelf,n);else{const rose=n>M.pendSelf;M.pendSelf=n;if(rose&&!M.choiceOpen&&!G(()=>modal,false))openChoice();}
  if(st.over===true&&M.choiceOpen){M.choiceOpen=false;try{closePanel(true);}catch(_){}}badge();}
@@ -114,7 +117,8 @@ async function incoming(CO,message){
     let r=false;try{r=await CO.receive(plain);}finally{try{SV().coop.guestReady(ready&&r===true);}catch(e){fail(e);}badge();}return r;}
    return CO.receive(plain);}
   if(M.on&&mode==='guest')endSession();/* 방장이 스토리 지역으로 넘어감 */}
- else if(message&&message.type==='command'&&CO.mode()==='host'){const uid=parseCommand(message.command?.passiveId);if(uid){hostPick(String(message.playerId||''),uid);return true;}}
+ else if(message&&message.type==='command'&&CO.mode()==='host'){const uid=parseCommand(message.command?.passiveId);if(uid){hostPick(String(message.playerId||''),uid);return true;}
+  const dep=parseDeploy(message.command?.passiveId);if(dep){if(M.on){stats.deploys=(stats.deploys||0)+1;try{DEF().mpCommand(String(message.playerId||''),dep);rawSim.sendSnapshot();}catch(e){fail(e);}}return true;}}
  else if(message&&message.type==='snapshot'&&M.on&&M.role==='guest'&&!G(()=>loading,false)&&message.state&&message.state.zone===G(()=>zone,null)){
   const rows=message.state.enemies;if(Array.isArray(rows)){const have=new Set(G(()=>room.enemies.map(e=>e.id),[]));for(const row of rows.slice(0,128))if(row&&!have.has(row.id))SV().coop.guestMob(row);}}
  return CO.receive(message);}
@@ -158,13 +162,15 @@ const cinemaRun=()=>G(()=>window.__STORYWORLD_CINEMA_RUN_R461__.active()===true,
 function guardClicks(ev){try{const id=ev?.target?.id;if(!id)return;
   if(id==='cinemaStartR461'&&inRoom()){stats.cinemaBlocked++;ev.preventDefault?.();ev.stopImmediatePropagation?.();say('영화 서사 모드는 혼자서만 할 수 있습니다. 함께 하기는 스토리 모드와 무한 생존에서 됩니다.',3.4);}
   else if((id==='coopCreate62'||id==='coopJoin62')&&cinemaRun()&&G(()=>started,false)){stats.cinemaBlocked++;ev.preventDefault?.();ev.stopImmediatePropagation?.();say('영화 서사 모드 기록에서는 함께 하기를 열 수 없습니다. 스토리 기록을 이어하거나 새로 시작한 뒤 열어 주세요.',3.8);}}catch(e){fail(e);}}
-// 멀티 중 영웅 배치 창은 R720 이 스스로 닫는다(hero-defense-r720.js here()). 여기서는 I 키를 눌렀을 때 까닭만 알려 준다.
-function deployNote(ev){try{if(!M.on||ev.repeat||!(ev.key==='i'||ev.key==='I'||ev.key==='ㅑ'))return;if(G(()=>modal,false)||G(()=>SV().here(),false)!==true)return;const t=ev.target;if(t&&(['INPUT','TEXTAREA','SELECT'].includes(t.tagName)||t.isContentEditable))return;
-  stats.deployBlocked++;say('함께 하기에서는 영웅 배치가 아직 닫혀 있습니다. 2~4명은 각자 1명 규칙으로 다음 판에 열립니다.',3.2);}catch(e){fail(e);}}
+// 영웅 배치는 한도가 0(5명부터)일 때만 R720 이 스스로 닫는다(hero-defense-r720.js here()). 여기서는 그때 I 키를 눌렀을 때 까닭만 알려 준다.
+function sendDeploy(t){const cmd=deployCommand(t);if(!cmd||!M.on||M.role!=='guest')return false;return G(()=>window.__STORYWORLD_COOP_CLIENT_R62__.send('command',{seq:0,epoch:rawSim.inspect().epoch,command:{kind:'upgrade',passiveId:cmd}}),false)===true;}
+function deployNote(ev){try{if(!M.on||ev.repeat||!(ev.key==='i'||ev.key==='I'||ev.key==='ㅑ'))return;if(G(()=>modal,false)||G(()=>SV().here(),false)!==true||api.deployLimit()!==0)return;const t=ev.target;if(t&&(['INPUT','TEXTAREA','SELECT'].includes(t.tagName)||t.isContentEditable))return;
+  stats.deployBlocked++;say('5명부터는 영웅 배치 없이 각자 조종하는 영웅으로만 싸웁니다.',3.2);}catch(e){fail(e);}}
 
 function inspect(){const me=G(()=>cstate().selfId,'');return{revision:REV,on:M.on,role:M.role,diff:M.diff,count:M.on?count():1,scale:api.hpScale(),deployLimit:api.deployLimit(),joinCap:joinCap(),pend:M.role==='host'?{...M.pend,[me]:G(()=>SV().coop.publicState().hostPend,0)|0}:{...M.pend},pendSelf:M.role==='host'?G(()=>SV().coop.publicState().hostPend,0)|0:M.pendSelf,
  cinemaBlocked:inRoom(),wrapped:{client:!!rawClient,sim:!!rawSim},stats:{...stats},errors:stats.errors,lastError};}
 const api={revision:REV,pure,active:()=>M.on,role:()=>M.role,count:()=>M.on?count():1,hpScale:()=>M.on&&M.role==='host'?hpScale(count()):1,deployLimit:()=>M.on?deployLimit(count()):null,
+ selfId:()=>G(()=>cstate().selfId,'')||G(()=>rawSim.inspect().selfId,'')||'',roster:()=>actors().filter(p=>p.coopIdR62).map(p=>({id:p.coopIdR62,hero:p.hero,connected:p.connectedR62!==false})),sendDeploy,
  alive,eachActor,onLevel,startHost,leave,openChoice,inspect};
 window.__STORYWORLD_SURVIVAL_COOP_R1149__=Object.freeze(api);
 try{wrapClient();wrapSim();}catch(e){fail(e);}

@@ -54144,8 +54144,8 @@
     },
     {
       "path": "hero-defense-r720.js",
-      "bytes": 58878,
-      "sha256": "b99025a645e19a8388b1aa060e1ed59360e3978773b61018683593cebeaabddb"
+      "bytes": 71309,
+      "sha256": "9420b8dffa4ea8741ae36e3871028ed9a3b18f4a1ed8dd913e89c788e4add8b0"
     },
     {
       "path": "hero-dots-fx-r1041.js",
@@ -55464,8 +55464,8 @@
     },
     {
       "path": "survival-coop-r1149.js",
-      "bytes": 23129,
-      "sha256": "527571f66a50325204c7a9d9303f302ce174a608167c78801303ddecca39b414"
+      "bytes": 24384,
+      "sha256": "dde07645974431d934b4fd66beedcd25fb85c22db51c758bb16c3076acad05bb"
     },
     {
       "path": "survival-michaela-ending-r1010.js",
@@ -55769,7 +55769,7 @@
     }
   ],
   "fileCount": 11153,
-  "totalBytes": 1346000937,
+  "totalBytes": 1346014623,
   "webHTMLSha256": "6e09bc693d1922009bbb87dd5c8ea5fc76c09a9f08daeb96337768c8be44cdff",
   "largest": [
     {
