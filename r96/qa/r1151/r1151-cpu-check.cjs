@@ -1,5 +1,5 @@
 // R1151 CPU 검사: Dots CX-0141CE LC-08 중력 폭발 r2 시트를 라우렌 '유성 궤도' 충돌 폭발 그림에 붙인다(그림만).
-//  · 시트 assets/r1151/lauren-boom.webp: 6열×4행, 칸 192(원본 256 → 0.75배), 24칸, 알파 1~16 잔티 0, 칸 테두리 2px 비움.
+//  · 시트 assets/r946/lauren-boom.webp: 6열×4행, 칸 192(원본 256 → 0.75배), 24칸, 알파 1~16 잔티 0, 칸 테두리 2px 비움.
 //  · 충돌 순간 = Dots 바깥으로 터지는 칸 F11(0부터 10번). 충돌 뒤 10→23번 칸을 80ms 마다(1.12초) 한 번 재생, 반복 안 함.
 //  · 판정·피해·반경·끌어당김·소리·조형물 숨김/복원·발동 확률은 그대로(같은 상황에서 hits 기록이 시트 있든 없든 같음).
 //  · 시트가 안 읽혔으면 예전 코드 그림(고리) + 시트 요청. 다른 천체 공명 기술(은빛 거성 등)·EGO 판은 그대로.
@@ -23,7 +23,9 @@ const A=g=>g.__STORYWORLD_LAUREN_CELESTIAL_R946__;
 const step=(g,n=1,dt=.05)=>{for(let i=0;i<n;i++){g.time=+(g.time+dt).toFixed(4);vm.runInContext('time='+g.time+';tick();for(const e of effects.slice())drawEffect(e)',g);}};
 const mob=(id,x,y)=>({id,x,y,hp:1e6,maxHp:1e6,radius:.3,spawnState:'active'});
 function meteor(opt){const g=env(opt);g.room.enemies.push(mob('a',13,10));A(g).qaRandom(()=>.5);A(g).qaForce('meteor');vm.runInContext("hitEnemy(room.enemies[0],1,{kind:'basic',sourceHero:player.hero})",g);step(g,80);return g;}
-const BOOM='assets/r1151/lauren-boom.webp';
+const BOOM='assets/r946/lauren-boom.webp';
+// 페르소나 형상(R1113)은 r946:meteor 효과 중 assets/r946/ 그림만 검빨로 굽고 나머지는 '던진 조형물'로 보고 그대로 둔다 → 시트는 assets/r946/ 아래여야 고유색이 지켜진다.
+{const ps=fs.readFileSync(path.join(R,'client-source','persona-hero-r1113.js'),'utf8');const m=/CEL_ART=\/(.*?)\/;/.exec(ps);ok('persona tints the boom sheet (path matches R1113 CEL_ART)',!!m&&new RegExp(m[1]).test(BOOM));}
 {const g=meteor();const d=vm.runInContext('drawn',g).filter(x=>x.src===BOOM);const mh=g.hits.filter(h=>h.k==='r946-meteor');
  ok('meteor explosions draw LC-08 boom sheet',d.length>0&&mh.length>0);
  const first=mh[0].t;const cells=d.map(x=>({f:Math.round(x.a[1]/192)*6+Math.round(x.a[0]/192),t:x.t}));
@@ -43,14 +45,14 @@ const BOOM='assets/r1151/lauren-boom.webp';
  const py=`
 import json
 from PIL import Image
-im=Image.open('${R}/runtime-text/assets/r1151/lauren-boom.webp').convert('RGBA');a=im.getchannel('A')
+im=Image.open('${R}/runtime-text/assets/r946/lauren-boom.webp').convert('RGBA');a=im.getchannel('A')
 low=sum(a.histogram()[1:17]);border=0
 for i in range(24):
   x0,y0=(i%6)*192,(i//6)*192;c=a.crop((x0,y0,x0+192,y0+192));px=c.load()
   for y in range(192):
     for x in range(192):
       if (x<2 or y<2 or x>189 or y>189) and px[x,y]>0:border+=1
-print(json.dumps({'size':im.size,'low':low,'border':border,'bytes':__import__('os').path.getsize('${R}/runtime-text/assets/r1151/lauren-boom.webp')}))`;
+print(json.dumps({'size':im.size,'low':low,'border':border,'bytes':__import__('os').path.getsize('${R}/runtime-text/assets/r946/lauren-boom.webp')}))`;
  let m=null;try{m=JSON.parse(cp.execFileSync('python3',['-I','-c',py],{encoding:'utf8'}));}catch(e){ok('boom sheet measurable',false);}
  if(m){ok('sheet 1152x768',m.size[0]===1152&&m.size[1]===768);ok('no alpha 1..16',m.low===0);ok('2px cell border empty',m.border===0);ok('sheet ≤ 600 KB',m.bytes<=600e3);}
  ok('runtime-inputs lists boom sheet',fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8').includes(BOOM));

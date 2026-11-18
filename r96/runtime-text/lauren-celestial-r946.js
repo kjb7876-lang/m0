@@ -13,7 +13,7 @@
  * 상태는 영웅 몸(player 객체)마다 따로 둔다: 생존 모드 배치 영웅(R720)이 player 를 몸으로 바꿔 끼워 공격할 때도 그 몸의 공격력·자리·대기를 쓴다.
  * 그림: R946-2(2026-11-13) Dots CX-0087LC 추가1 실버·보라판 시트를 씀(assets/r946, index.json) — 은빛 거성 LC-01, 심연 왜성 LC-02 구 + LC-03 바닥 원반,
  *  쌍성 소멸 충전 LC-04 + 소멸탄 LC-05, 유성 궤도 조형물 고리 LC-07. 시트가 아직 안 읽혔거나 크기가 다르면 예전 코드 그림으로 그린다.
- *  LC-08 중력 폭발은 R1151 이 Dots r2 시트(assets/r1151/lauren-boom.webp)로 붙였다. Dots 가 보류한 LC-05b 꼬리 띠·LC-06 항성 반발과 결과가 없는 LC-09 돌 파편은 코드 그림을 그대로 쓴다. 소리는 기존 R546 라우렌 공격·고유기 소리를 다시 씀.
+ *  LC-08 중력 폭발은 R1151 이 Dots r2 시트(assets/r946/lauren-boom.webp, 페르소나 형상은 R1113 이 검빨로 구움)로 붙였다. Dots 가 보류한 LC-05b 꼬리 띠·LC-06 항성 반발과 결과가 없는 LC-09 돌 파편은 코드 그림을 그대로 쓴다. 소리는 기존 R546 라우렌 공격·고유기 소리를 다시 씀.
  * 끄기: localStorage['storyworld.r946.celestial']='{"on":false}'
  */
 (()=>{'use strict';
@@ -178,7 +178,7 @@ const SHEETS={red:{n:'lauren-red',frames:24,fps:12.5,loop:true,piv:[141,137],bod
  disk:{n:'lauren-blue-disk',frames:24,fps:12.5,loop:true,piv:[127,134],body:192},fuse:{n:'lauren-fuse',frames:12,fps:24,loop:false,piv:[128,128],body:107,crop:[60,60,196,200]},
  violet:{n:'lauren-violet',frames:24,fps:12.5,loop:true,piv:[144,128],body:150},aura:{n:'lauren-aura',frames:24,fps:12.5,loop:true,piv:[128,124],body:194},
  // R1151 Dots CX-0141CE LC-08 중력 폭발 r2(흡입 1~10칸 → 바깥으로 터짐 11~16칸 → 먹 잔광 17~24칸). 충돌 순간을 11번째 칸(0.8초)에 맞춰 그 뒤만 한 번 재생.
- boom:{n:'lauren-boom',dir:'assets/r1151/',frames:24,fps:12.5,loop:false,piv:[128,128],body:186}};
+ boom:{n:'lauren-boom',frames:24,fps:12.5,loop:false,piv:[128,128],body:186}};
 const BOOM_AT=.8,BOOM_LIFE=(24/12.5)-BOOM_AT;
 const SPATH=k=>(SHEETS[k].dir||SDIR)+SHEETS[k].n+'.webp';let sheetsOn=true,askAt=-1e9;
 // 크기가 시트 규격(6열×192)과 다르면 쓰지 않는다(엉뚱한 그림·덜 읽힌 그림 방지)

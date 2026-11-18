@@ -10363,7 +10363,7 @@
     "assets/r1139/ego/trail-horizontal.webp",
     "ego-celestial-r1145.js",
     "persona-wer-r1144.js",
-    "assets/r1151/lauren-boom.webp"
+    "assets/r946/lauren-boom.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11438,5 +11438,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "525ee7ca7ad843d9303cd6cd52bd8ac8569de3232646a1ebee49d8eb2a6c0e8e"
+  "runtimeManifestSHA256": "d5391d9a6b35b7d3c2e7fc9fdb5859f2c8156db24248a82a4be7a7459f04b85d"
 }
