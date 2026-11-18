@@ -55719,8 +55719,8 @@
     },
     {
       "path": "perf-groups-r266.js",
-      "bytes": 5626,
-      "sha256": "4d099a1b9108571b16d47cd2a8a3e07ec632b3c90095e96ed19ed2d0c3081616"
+      "bytes": 5845,
+      "sha256": "57d6d534bbb9295843fe96861804ffa401bd1f46955c2f551f4aaa0e4f959152"
     },
     {
       "path": "perf-r119.js",
@@ -56354,8 +56354,8 @@
     },
     {
       "path": "survival-r600.js",
-      "bytes": 94722,
-      "sha256": "d1372156cde18b55c8c83c506c7052f04fb6abb8ac82c115997de109cf918a4a"
+      "bytes": 97061,
+      "sha256": "e9fe763e833d859c410710444e76e2042b4e2b00522940c17fe693fe08087d3a"
     },
     {
       "path": "survival-samong-r1006.js",
@@ -56644,7 +56644,7 @@
     }
   ],
   "fileCount": 11328,
-  "totalBytes": 1360457336,
+  "totalBytes": 1360459894,
   "webHTMLSha256": "d7ab4417ea6e532e3533c1394e33a40a10e4e4e468c40c2eb0edb853ded2991e",
   "largest": [
     {

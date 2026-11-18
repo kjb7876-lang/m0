@@ -513,6 +513,8 @@ jobs:
         run: node r96/qa/r461/r461-cpu-check.cjs
       - name: R600 survival mode (pixel entry replaced, arena, narration-timed spawns, core, 3-choice upgrades, endless maps) CPU check
         run: node r96/qa/r600/r600-cpu-check.cjs
+      - name: R1181 mobile survival gem draw thinning CPU check
+        run: node r96/qa/r1181/r1181-gem-thin-cpu-check.cjs
       - name: R976 samong first region pixel art to painted assets CPU check
         run: node r96/qa/r976/r976-cpu-check.cjs
       - name: R1177 samong episode pixel leftovers (S-06 pixel mobs, pixelfx sheets) to painted art CPU check

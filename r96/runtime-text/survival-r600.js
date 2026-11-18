@@ -22,6 +22,18 @@
 if(window.__STORYWORLD_SURVIVAL_R600__)return;
 const REV='R600-survival-1',KEY='storyworld.r600.survival';
 const TAIL=6.5,CLEAR_WAIT=2.2,RING=[10,15],GEM_PULL=2.8,GEM_TAKE=.75,GEM_CAP=220,CPS=6.8,GAP=.55,NO_TEXT_SECS=35;
+// R1181(사용자 2026-11-18 "렉개선및 모바일최적화는?"): 조각 한 장 = 메시 하나 = 그리기 호출 한 번이라, 바닥에 쌓인 조각(최대 220)이 휴대폰 그리기 호출의 절반 가까이였다
+//  (헤드리스 844×390 무한생존: 프레임당 약 400번 중 186번). 저사양(휴대폰·lowFx)에서 화면 안 조각이 GEM_THIN_MIN 을 넘으면 화면 칸(조각 폭의 절반)마다 첫 조각만 그린다.
+//  거의 겹친 조각만 빠져 무더기 모양은 그대로, 줍기·경험치·저장은 그대로(그리기만). pts=[{x,y}] 화면 좌표 → 그릴 번호(오름차순).
+const GEM_THIN_MIN=40;
+// R1181: R266 '배우 먼저'는 조형물을 drawObjective 뒤에 먼저 그리고 깊이순 차례는 건너뛰는데, 이 파일의 drawProp 감싸기가 그 바깥이라
+//  정화 구슬(구슬·빛줄기·체력 막대·조각·꼬리)을 한 프레임에 두 번 그렸다(조각 메시 2배). 미리 그리기 차례는 건너뛰고 깊이순 한 번만 그린다(보이는 위층과 같음).
+const prePass=()=>{try{return !!window.__STORYWORLD_PERF_GROUPS_R266__?.prePassing?.();}catch(_){return false;}};
+//  끄기: localStorage storyworld.r1181.gemThin = "off" (휴대폰에서도 조각을 모두 그림).
+const gemThinOn=()=>{try{return localStorage.getItem('storyworld.r1181.gemThin')!=='off';}catch(_){return true;}};
+function gemThin(pts,cell){if(!Array.isArray(pts))return [];const ok=[];for(let i=0;i<pts.length;i++){const p=pts[i];if(p&&Number.isFinite(p.x)&&Number.isFinite(p.y))ok.push(i);}
+ if(ok.length<=GEM_THIN_MIN)return ok;const c=Number.isFinite(cell)&&cell>0?cell:4,seen=new Set(),out=[];
+ for(const i of ok){const k=Math.floor(pts[i].x/c)*65536+Math.floor(pts[i].y/c);if(seen.has(k))continue;seen.add(k);out.push(i);}return out;}
 const ORB='assets/r163/pixelfx/core-orb-teal.webp',GEM='assets/r106/fx/shard.webp';
 /* Dots CX-0065V r1 시트(11-10 채택) — 코어 4상태(평상·피격·위급·파괴, 칸 256×320, 받침 바닥 (128,300)), 빛줄기(512×48, 왼쪽 끝 (0,24)), 시작·명중 섬광(64×64), 경험 조각(32×48, (16,45))·흡수 꼬리. 모두 12.5fps. 고리 3종은 r2 대기라 아직 코드 점선 고리 */
 const DOT='assets/r600/dots/',SH={idle:{p:DOT+'sv-core-01.webp',n:24,w:256,h:320,loop:1},hit:{p:DOT+'sv-core-02.webp',n:8,w:256,h:320},crit:{p:DOT+'sv-core-03.webp',n:24,w:256,h:320,loop:1},die:{p:DOT+'sv-core-04.webp',n:12,w:256,h:320},beam:{p:DOT+'sv-beam-01.webp',n:24,w:512,h:48,loop:1},bstart:{p:DOT+'sv-beam-start.webp',n:8,w:64,h:64},bhit:{p:DOT+'sv-beam-hit.webp',n:8,w:64,h:64},gem:{p:DOT+'sv-gem-01.webp',n:12,w:32,h:48,loop:1},tail:{p:DOT+'sv-gem-tail.webp',n:8,w:32,h:48}},FPS=12.5;
@@ -440,7 +452,9 @@ function drawCore(){if(!here())return;const c=room.survivalR600.centre,q=project
    ctx.font='bold 12px "Malgun Gothic",sans-serif';ctx.textAlign='center';ctx.textBaseline='bottom';ctx.fillStyle='rgba(0,0,0,.85)';ctx.fillText(coreLabelText,q.x+1,top-cbh-3);ctx.fillStyle=hp>.35?'#dffaf4':'#ffd2c4';ctx.fillText(coreLabelText,q.x,top-cbh-4);stats.coreLabel=(stats.coreLabel||0)+1;}
   // 경험치 조각
   const gs=sheetImg('gem'),g0=gs?null:G(()=>readyImage(GEM),null)?.image,gk=Math.max(.32,ah*.0055);// 조각 높이 ≈ 영웅 키의 1/4
-  for(const g of gems){const p=project(g.x,g.y);if(p.x<-20||p.y<-20||p.x>W+20||p.y>H+20)continue;
+  const gv=[],gp=[];for(const g of gems){const p=project(g.x,g.y);if(p.x<-20||p.y<-20||p.x>W+20||p.y>H+20)continue;gv.push(g);gp.push(p);}
+  const gi=low()&&gemThinOn()?gemThin(gp,16*gk):null;stats.gemDrawn=gi?gi.length:gp.length;stats.gemOnScreen=gp.length;
+  for(let n=0,N=gi?gi.length:gp.length;n<N;n++){const j=gi?gi[n]:n,g=gv[j],p=gp[j];
    if(gs){const f=(sheetFrame('gem',t)+((g.x*7+g.y*13)|0))%SH.gem.n;ctx.drawImage(gs,f*32,0,32,48,p.x-16*gk,p.y-45*gk,32*gk,48*gk);}
    else if(g0&&(g0.naturalWidth||g0.width)>0)ctx.drawImage(g0,p.x-4,p.y-14,8,16);else{ctx.fillStyle='#d8b86a';ctx.fillRect(p.x-2,p.y-8,4,8);}}
   const ts=sheetImg('tail');if(ts){tails=tails.filter(x=>t-x.at<SH.tail.n/16);for(const x of tails){const p=project(x.x,x.y);ctx.drawImage(ts,sheetFrame('tail',t-x.at,16)*32,0,32,48,p.x-16*gk*1.4,p.y-24*gk*1.4-ah*.25,32*gk*1.4,48*gk*1.4);}}
@@ -562,7 +576,7 @@ function install(){makeNative=makeRoom;
  // 코어·빛줄기·조각은 엔진 그리기 순서 안(지형 위, 배우 그리기 전 — 출구 표식 자리)에서 그린다. draw 뒤에 그리면 프레임 명령이 이미 넘어가 화면에 닿지 않는다.
  if(typeof drawExits==='function'){const base=drawExits;drawExits=function(...a){if(here())return;return base.apply(this,a);};}
  if(typeof updateHUD==='function'){const base=updateHUD;let plain='';updateHUD=function(...a){const r=base.apply(this,a);try{const el=document.getElementById('hint');if(el){const tx=el.textContent||'';if(!/포탈|표식|제단|기록/.test(tx))plain=tx;else if(here()&&plain)el.textContent=plain;}}catch(e){fail(e);}return r;};}
- if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){if(p&&p.r600CoreProp){if(here()){try{drawCore();stats.coreDraws=(stats.coreDraws||0)+1;}catch(e){fail(e);}}return;}return base.apply(this,[p,...a]);};}
+ if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){if(p&&p.r600CoreProp){if(prePass())return;if(here()){try{drawCore();stats.coreDraws=(stats.coreDraws||0)+1;}catch(e){fail(e);}}return;}return base.apply(this,[p,...a]);};}
  if(typeof travel==='function'){const base=travel;travel=function(...a){if(here())return false;return base.apply(this,a);};}
  if(typeof interact==='function'){const base=interact;interact=function(...a){if(here())return false;return base.apply(this,a);};}
  if(typeof enterNarrative==='function'){const base=enterNarrative;enterNarrative=function(...a){if(S?.active)return;return base.apply(this,a);};}
@@ -575,11 +589,11 @@ try{install();}catch(e){fail(e);}
 // 창(강화 고르기·결과·메뉴)이 열려 있으면 자막을 감춘다(카드를 가리지 않게).
 try{const iv=setInterval(trackBtn,400);iv?.unref?.();}catch(_){}
 try{const iv=setInterval(()=>{try{document.body.classList.toggle('r600Modal',!!(S?.active&&G(()=>modal,false)));}catch(_){}},200);iv?.unref?.();}catch(_){}
-window.__STORYWORLD_SURVIVAL_R600__=Object.freeze({revision:REV,start,qaCredit:v=>{if(!S?.active)return false;credit(+v||0);return true;},qaPlayT:v=>{if(!S?.active)return false;S.playT=Math.max(0,+v||0);return true;},qaGo:i=>S?.active?go(i):false,qaCoreHp:v=>{if(!S?.active)return false;S.core.hp=Math.max(0,+v||0);S.core.hitAt=G(()=>time,0);if(S.core.hp<=0&&!S.over){stats.coreLost++;over('core');}return true;},/* 검사·스크린샷용: 코어 체력을 바로 정한다(0 이면 다음 단계에서 파괴) */stageIds:()=>S?[...S.ids]:[],active:()=>!!S?.active,here,
+window.__STORYWORLD_SURVIVAL_R600__=Object.freeze({revision:REV,start,qaCredit:v=>{if(!S?.active)return false;credit(+v||0);return true;},qaGems:(n,x,y,r)=>{if(!S?.active)return false;n=Math.max(0,Math.min(GEM_CAP,Math.floor(+n)||0));r=Number.isFinite(+r)?+r:.2;for(let i=0;i<n;i++)gems.push({x:+x+(Math.random()-.5)*2*r,y:+y+(Math.random()-.5)*2*r,v:0});return gems.length;},qaPlayT:v=>{if(!S?.active)return false;S.playT=Math.max(0,+v||0);return true;},qaGo:i=>S?.active?go(i):false,qaCoreHp:v=>{if(!S?.active)return false;S.core.hp=Math.max(0,+v||0);S.core.hitAt=G(()=>time,0);if(S.core.hp<=0&&!S.over){stats.coreLost++;over('core');}return true;},/* 검사·스크린샷용: 코어 체력을 바로 정한다(0 이면 다음 단계에서 파괴) */stageIds:()=>S?[...S.ids]:[],active:()=>!!S?.active,here,
  /* R1149 멀티플레이 연결(survival-coop-r1149.js 가 부른다) */coop:Object.freeze({startHost,guestEnter,guestReady,guestSync,guestMob,publicState,pick:coopPick,guest:()=>!!S?.guest,multi:()=>!!S?.multi,forceChoice:()=>{if(!S?.active||S.guest||S.over||!(choiceQ>0))return false;S.forceChoice=true;showChoice();return choosing;},leave:()=>{if(S?.active&&S.multi)deactivate();}}),
  state:()=>S?{tainted,diff:S.diff,playT:S.playT,choiceIdx:S.choiceIdx,pickRem,narrMinEnd:S.narrMinEnd||0,ready:!!S.ready,startPos:S.startPos||null,i:S.i,loop:S.loop,id:S.ids[S.i],phase:S.phase,narrating:S.narrating,narrEndAt:S.narrEndAt,bossUp:S.bossUp,kills:S.kills,core:{...S.core,stats:CS()},choiceQ,gems:gems.length,over:S.over,ids:S.ids.length,lv:S.lv,hero:S.hero,secs:Math.round(((S.over&&S.overSecs)||(Date.now()-S.startWall)/1000))}:null,
   finaleWave:()=>{try{if(!here()||!S||S.over||!S.ready)return 0;return tickSpawn(true)||0;}catch(e){fail(e);return 0;}},/* R1010 결전 물결 */
  track:()=>prefs.track,setTrack,narr:()=>({playing:narrPlaying(),queued:N.q.length,cur:N.cur?.text||null,list:[N.cur?.text,...N.q.map(x=>x.text)].filter(Boolean)}),narrate:(scenes,opt)=>{try{return here()?narrPlay(scenes,opt):0;}catch(e){fail(e);return 0;}},/* R1010: 결전 대면 서사를 생존 자막으로 */skipNarration:()=>{N.q.length=0;if(S){S.narrMinEnd=0;/* 서사가 벽시계로 이미 끝났어도 남은 최소 웨이브 길이를 지금으로 당긴다 */if(!S.narrating&&S.narrEndAt>G(()=>time,0))S.narrEndAt=G(()=>time,0);}/* 일부러 건너뛰면 최소 웨이브 길이도 함께 끝낸다 */if(N.cur){N.gen++;N.cur=null;narrNext();}},
- pure:Object.freeze({FORMS_R1171,pickIds,baseHero,secretStep,BOSS_PLAN,bossPlan,bossShare,bossSpots,BOSS_GAP,DIFFS,diffOf,CHOICE_EVERY,WINDOW_MAX,choiceDue,windowPicks,xpNeed,levelUps,stageIds,arena,spawning,nextPhase,advance,cap,hpMul,mobHp,BOSS_MIN_MULT,BOSS_DPS_CAP,guardBossHp,trackOf,TRACKS,healCue,SFX,bossStats,mobDamage,smoothAtk,BOSS_HP,coreStats,pickThree,sentences,TAIL,CORE0,CORE_UPS}),
+ pure:Object.freeze({GEM_THIN_MIN,gemThin,FORMS_R1171,pickIds,baseHero,secretStep,BOSS_PLAN,bossPlan,bossShare,bossSpots,BOSS_GAP,DIFFS,diffOf,CHOICE_EVERY,WINDOW_MAX,choiceDue,windowPicks,xpNeed,levelUps,stageIds,arena,spawning,nextPhase,advance,cap,hpMul,mobHp,BOSS_MIN_MULT,BOSS_DPS_CAP,guardBossHp,trackOf,TRACKS,healCue,SFX,bossStats,mobDamage,smoothAtk,BOSS_HP,coreStats,pickThree,sentences,TAIL,CORE0,CORE_UPS}),
  inspect:()=>({revision:REV,stats:{...stats},lastError,coreLabelText,active:!!S?.active,here:here(),pending})});
 })();
