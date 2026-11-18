@@ -185,14 +185,17 @@ const wrapFn=fn=>{if(fn.__r1113)return fn;const w=function(frame){if(depth===0){
 try{const C=window.StoryPhase1?.ThreeRenderer?.prototype;if(C&&typeof C.render==='function')C.render=wrapFn(C.render);}catch(e){fail(e);}
 const wrapped=new WeakSet();
 function wrapInst(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(r&&Object.prototype.hasOwnProperty.call(r,'render')&&typeof r.render==='function'&&!wrapped.has(r)){wrapped.add(r);r.render=wrapFn(r.render);}}catch(e){fail(e);}}
-// ---- 저장 ----
-// 감싸기 핑퐁 막기(2026-11-18): 바깥 함수의 표식(__rNNNN)을 새 감싸기로 옮긴다 — 안 옮기면 EGO(R1046)·페르소나(R1113)의 주기 감싸기가
-//  서로의 표식을 가려 tick·저장 함수를 끝없이 다시 감쌌다(초당 약 4단, 약 1시간 뒤 스택 넘침으로 게임 정지).
-function carryMarks(w,base){try{for(const k of Object.keys(base))if(/^__r\d/.test(k))w[k]=base[k];}catch(_){}}
-function wrapSave(){
- if(typeof serializeSave==='function'&&!serializeSave.__r1113){const base=serializeSave;const w=function(...a){const d=base.apply(this,a);try{if(d&&d.player)d.player[FIELD]=formActive();}catch(e){fail(e);}return d;};carryMarks(w,base);w.__r1113=true;serializeSave=w;}
- if(typeof restoreSave==='function'&&!restoreSave.__r1113){const base=restoreSave;const w=async function(raw,...a){const r=await base.call(this,raw,...a);try{const p=pl();if(p)p[FIELD]=raw?.player?.[FIELD]===true&&p.hero===BASE&&unlocked();}catch(e){fail(e);}return r;};carryMarks(w,base);w.__r1113=true;restoreSave=w;}}
-function wrapTick(){if(typeof tick!=='function'||tick.__r1113)return;const base=tick;const w=function(...a){const r=base.apply(this,a);try{watch();if(formActive()&&hasDoc())hudName();}catch(e){fail(e);}return r;};carryMarks(w,base);w.__r1113=true;tick=w;}
+function registerGameHooks() {
+ window.__STORYWORLD_POST_HOOKS__.register('__r1113', {
+  tick() { watch(); if (formActive() && hasDoc()) hudName(); },
+  serializeSave(data) { if (data?.player) data.player[FIELD] = formActive(); },
+  restoreSave(raw) {
+   const p = pl();
+   if (p) p[FIELD] = raw?.player?.[FIELD] === true && p.hero === BASE && unlocked();
+  }
+ }, fail);
+}
+
 // ---- 영웅 선택창: 9번째 칸 ----
 const hasDoc=()=>G(()=>typeof document!=='undefined'&&!!document&&typeof document.querySelector==='function',false);
 const url=p=>G(()=>urlFor(p),p);
@@ -251,8 +254,8 @@ function ui(){if(!hasDoc())return;const t=Date.now();if(t<uiAt)return;uiAt=t+200
  try{if(document.getElementById('panel')?.querySelector('[data-hero]')){css();inject();}}catch(e){fail(e);}
  try{hud();}catch(e){fail(e);}
  try{if(formActive()){hudName();const pt=document.getElementById('portrait'),u=url(PROFILE.portrait);if(pt&&pt.getAttribute('src')!==u)pt.src=u;}}catch(e){fail(e);}}
-function install(){wrapSave();wrapTick();wrapInst();wrapHud();wrapPfx();if(hasDoc()){try{document.addEventListener('click',onClick,true);}catch(e){fail(e);}}
- try{setInterval(()=>{try{wrapSave();wrapTick();wrapInst();wrapHud();wrapPfx();watch();ui();}catch(e){fail(e);}},250);}catch(e){fail(e);}}
+function install(){registerGameHooks();wrapInst();wrapHud();wrapPfx();if(hasDoc()){try{document.addEventListener('click',onClick,true);}catch(e){fail(e);}}
+ try{setInterval(()=>{try{wrapInst();wrapHud();wrapPfx();watch();ui();}catch(e){fail(e);}},250);}catch(e){fail(e);}}
 install();
 window.__STORYWORLD_PERSONA_HERO_R1113__=Object.freeze({revision:REV,profile:PROFILE,field:FIELD,base:BASE,tint:TINT,art:ART,walkSheets:WALK,idleSheets:IDLE,scale:SCALE,orb:ORB,
  unlocked,unlock,formActive,setForm,process,watch,refresh:()=>{try{if(hasDoc()){css();inject();}}catch(e){fail(e);}try{hud();}catch(e){fail(e);}},

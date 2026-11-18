@@ -8,6 +8,7 @@ const fs=require('fs'),path=require('path'),vm=require('vm');
 const ROOT=path.join(__dirname,'../..'),FILE=path.join(ROOT,'client-source/persona-hero-r1113.js');
 let fails=0;const ok=(c,m)=>{console.log((c?'PASS ':'FAIL ')+m);if(!c)fails++;};
 const SRC=fs.readFileSync(FILE,'utf8');
+const hooks=fs.readFileSync(path.join(ROOT,'client-source/ego-sovereign-r1046.js'),'utf8');
 function el(id,attrs={},text=''){const a={...attrs};return {id,dataset:{},textContent:text,style:{_p:{},setProperty(k,v){this._p[k]=v;},getPropertyValue(k){return this._p[k]||'';}},
  getAttribute:k=>a[k]??null,setAttribute:(k,v)=>{a[k]=String(v);},get src(){return a.src;},set src(v){a.src=String(v);},get title(){return a.title;},set title(v){a.title=String(v);},_a:a};}
 function world(){
@@ -25,7 +26,7 @@ function world(){
   zoom:1,actorHeight:()=>66,project:(x,y)=>({x:500+(x-y)*16,y:300+(x+y)*8}),toast:()=>{},HEROES:{lauren:{name:'라우렌'}},
   setInterval:()=>0,setTimeout:()=>0,StoryPhase1:{ThreeRenderer:{prototype:proto}},document,Image:Img,localStorage:{getItem:()=>null,setItem(){}}};
  C.hudW={};C.setHudTextR63R2=(id,v)=>{C.hudW[id]=String(v);};C.tick=function(){};C.serializeSave=()=>({player:{}});C.restoreSave=async()=>{};C.__STORYWORLD_CHEAT777__={active:()=>true};
- C.window=C;vm.createContext(C);vm.runInContext(SRC,C);
+ C.window=C;vm.createContext(C);vm.runInContext(hooks,C);vm.runInContext(SRC,C);
  const load=()=>{for(const im of images)if(im._src&&!im._done&&im.onload){im._done=true;const s=im._src;im.naturalWidth=/walk/.test(s)?4096:/persona-idle/.test(s)?1152:/flight/.test(s)?2048:/contact/.test(s)?1536:344;im.naturalHeight=/walk/.test(s)?512:/r1119|persona-idle/.test(s)?256:400;im.onload();}};
  const frame=cmds=>{proto.render.call({}, {commands:cmds});return seen;};
  return {C,E,wImg,eImg,player,frame,load,api:()=>C.__STORYWORLD_PERSONA_HERO_R1113__};}

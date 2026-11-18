@@ -13,6 +13,7 @@ const fs=require('fs'),path=require('path'),vm=require('vm');
 const ROOT=path.join(__dirname,'../..'),FILE=path.join(ROOT,'client-source/persona-hero-r1113.js');
 let fails=0;const ok=(c,m)=>{console.log((c?'PASS ':'FAIL ')+m);if(!c)fails++;};
 const SRC=fs.readFileSync(FILE,'utf8');
+const hooks=fs.readFileSync(path.join(ROOT,'client-source/ego-sovereign-r1046.js'),'utf8');
 function world(o={}){
  const store=o.store||{},images=[];let seen=null;const proto={render(frame){seen=frame.commands.map(c=>({...c,points:c.points&&c.points.map(p=>[...p]),style:c.style&&{...c.style}}));}};
  const document={createElement:t=>({tagName:t,width:0,height:0,getContext:()=>({drawImage(){},fillRect(){},createRadialGradient:()=>({addColorStop(){}})})}),baseURI:'http://x/m0/',getElementById:()=>null,querySelector:()=>null,querySelectorAll:()=>[],addEventListener(){},head:{appendChild(){}}};
@@ -24,7 +25,7 @@ function world(o={}){
   localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}}};
  C.setHudTextR63R2=()=>{};C.tick=function(){};C.serializeSave=()=>({player:{}});C.restoreSave=async()=>{};C.__STORYWORLD_CHEAT777__={active:()=>true};
  C.pfx=[];C.__STORYWORLD_PIXELFX_R163__=Object.freeze({has:()=>true,play:(n,x,y,o)=>{C.pfx.push(o);return 1;},frameAt:(n,u,x,y,o)=>{C.pfxF.push(o);return 1;}});C.pfxF=[];
- C.window=C;vm.createContext(C);vm.runInContext(SRC,C);
+ C.window=C;vm.createContext(C);vm.runInContext(hooks,C);vm.runInContext(SRC,C);
  const load=()=>{for(const im of images)if(im._src&&!im._done&&im.onload){im._done=true;const s=im._src;im.naturalWidth=/walk/.test(s)?4096:/persona-idle/.test(s)?1152:/r1119\/fx-[a-z-]+-flight/.test(s)?2048:/r1119\/fx-[a-z-]+-contact/.test(s)?1536:344;im.naturalHeight=/walk/.test(s)?512:/r1119|persona-idle/.test(s)?256:400;im.onload();}};
  const frame=cmds=>{proto.render.call({}, {commands:cmds});return seen;};
  const step=(dt=1/30)=>{C.time+=dt;C.tick();};
