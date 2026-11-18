@@ -100,7 +100,26 @@ function guardBossHp(e,nowFn){let v=+e.hp;const cap=BOSS_DPS_CAP*(e.maxHp>0?e.ma
   const want=v-n;/* R1014: 아주 작은 감소(<=1e-6)는 예산과 상관없이 그대로 — 엔진 중간보스 단계 문턱이 '문턱까지만' 깎으라고 넘긴 7e-12 같은 값을 버리면 체력이 문턱 위에 영영 걸렸다 */
   if(want<=1e-6){v=n;return;}
   const d=Math.min(want,Math.max(0,cap-used));if(d>1e-9){hits.push({t:now,d});v=want-d<1e-6?n:v-d;/* R1014: 예산이 요청보다 소수 오차만큼만 모자라면 요청값 그대로(6% 다섯 번 = 70% 문턱에 소수 찌꺼기가 남던 것) */}}});}
-function bossStats(idx,loop,diff,atk,major,dmg,mobAtk){const a=Math.max(8,+atk||0),base=Math.round(a*(major?BOSS_HP.boss:BOSS_HP.mid)*hpMul(idx,loop,diff)),floor=BOSS_MIN_MULT*mobHp(idx,loop,diff,Math.max(a,+mobAtk||0),false);return {hp:Math.max(1,base,floor),dmg:(+dmg>0?+dmg:8)*stageDmg(idx,loop,diff)};}
+function bossStats(idx,loop,diff,atk,major,dmg,mobAtk){const a=Math.max(8,+atk||0),base=Math.round(a*(major?BOSS_HP.boss:BOSS_HP.mid)*hpMul(idx,loop,diff)),floor=BOSS_MIN_MULT*mobHp(idx,loop,diff,Math.max(a,+mobAtk||0),false);return {hp:Math.max(1,base,floor),floor,dmg:(+dmg>0?+dmg:8)*stageDmg(idx,loop,diff)};}
+// R1135 동시 보스 수(사용자 2026-11-18 01:24Z "생존모드 이지 노멀 하드 헬 고르는거 보스들 1,2,3,6마리 나오게 해줘" + "그에 맞게 밸런스도 조절해주고").
+//  보스·중간보스가 나오는 때·종류는 그대로, 같은 보스를 난이도별 마릿수만큼 한꺼번에 낸다(쉬움1·보통2·어려움3·악몽6).
+//  한 마리 체력(hp)·피해(dmg) 배율을 낮춰 합계가 마릿수만큼 뛰지 않게 한다. 다만 R960 '보스 체력 ≥ 그 지역 일반몹 66배' 하한은 한 마리마다 지킨다.
+//  보스 처치 코어 회복(1마리 15배)은 마릿수로 나눠 합계를 유지한다. 쉬움(1마리)은 예전 값 그대로.
+const BOSS_PLAN=Object.freeze({easy:Object.freeze({n:1,hp:1,dmg:1}),normal:Object.freeze({n:2,hp:.85,dmg:.8}),hard:Object.freeze({n:3,hp:.7,dmg:.68}),nightmare:Object.freeze({n:6,hp:.5,dmg:.5})});
+function bossPlan(d){const p=Object.prototype.hasOwnProperty.call(BOSS_PLAN,d)?BOSS_PLAN[d]:BOSS_PLAN.normal;return {n:p.n,hp:p.hp,dmg:p.dmg,heal:15/p.n};}
+function bossShare(B,d,floor){const p=bossPlan(d);if(p.n<=1)return {hp:B.hp,dmg:B.dmg};const fl=Math.ceil(Math.max(0,+floor||0));
+ return {hp:Math.max(1,Math.min(B.hp,Math.max(Math.round(B.hp*p.hp),fl))),dmg:B.dmg*p.dmg};}
+// 보스 자리: 영웅 둘레 고리(min~max)에 마릿수만큼 고르게 나눠, 서로 2.5칸 이상 떨어지게(화면 겹침 방지). ok(q) 가 거르는 칸(막힘·영웅 바로 옆)은 피하고,
+//  끝내 못 찾으면 경기장 격자에서 가까운 빈 곳 → 그래도 없으면 막힘을 무시하고 떨어진 곳.
+const BOSS_GAP=2.5;
+function bossSpots(c,n,A,min,max,ok,rng=Math.random){const out=[],far=q=>out.every(o=>Math.hypot(o.x-q.x,o.y-q.y)>=BOSS_GAP),cl=(x,y)=>({x:clamp(x,A.x0+.8,A.x1-.8),y:clamp(y,A.y0+.8,A.y1-.8)}),good=q=>{try{return !!ok(q);}catch(_){return false;}};
+ const a0=rng()*Math.PI*2;let grid=null;
+ for(let k=0;k<n;k++){let got=null;
+  for(let t=0;t<40&&!got;t++){const a=t<10?a0+(k+(t?(rng()-.5)*.8:0))*Math.PI*2/n:rng()*Math.PI*2,d=(t<20?min+rng()*(max-min):min*.6+rng()*(max*1.6-min*.6)),q=cl(c.x+Math.cos(a)*d,c.y+Math.sin(a)*d);if(far(q)&&good(q))got=q;}
+  if(!got){if(!grid){grid=[];for(let y=A.y0+.8;y<=A.y1-.8;y+=BOSS_GAP+.1)for(let x=A.x0+.8;x<=A.x1-.8;x+=BOSS_GAP+.1)grid.push({x,y});grid.sort((p,q)=>Math.abs(Math.hypot(p.x-c.x,p.y-c.y)-min)-Math.abs(Math.hypot(q.x-c.x,q.y-c.y)-min));}
+   got=grid.find(q=>far(q)&&good(q))||grid.find(far)||cl(c.x+k*BOSS_GAP,c.y);}
+  out.push(got);}
+ return out;}
 function mobDamage(dmg,elite,idx,loop,diff){return (+dmg>0?+dmg:8)*(elite?1:.7)*stageDmg(idx,loop,diff);}
 // R701 난이도: 몹 체력(hp)·동시 몹 수(cap)·몹이 주는 피해(dmg)·경험치(xp) 배율. 보통=1. 어려울수록 경험치는 조금 덜 준다.
 const DIFFS=Object.freeze({easy:Object.freeze({name:'쉬움',text:'몹이 약하고 적게 나옵니다. 이야기를 따라가며 버티는 데 맞춰져 있습니다.',hp:.75,cap:.8,dmg:.7,xp:1.2}),
@@ -273,10 +292,15 @@ let spawnAt0=0;
 function tickSpawn(force){const x=room.survivalR600,R=x.roster,t=G(()=>time,0);if(!R.normal.length||!force&&!spawning(S,t))return 0;/* R1010: 미카엘라 결전은 서사가 끝난 뒤에도 같은 규칙으로 물결을 낸다(force) */
  const alive=room.enemies.filter(living).length,c=cap(t-S.stageAt,S.i,low(),S.diff);if(t<spawnAt0||alive>=c)return 0;spawnAt0=t+.35;let made=0;
  const n=Math.min(4,c-alive);for(let k=0;k<n;k++){const q=ringPoint(player,RING[0],RING[1],x.arena);if(!q)break;const src=R.normal[S.serial%R.normal.length],e=spawnAt(src,q);if(e){swarm(e,(S.serial%13)===12);made++;}}return made;}
-function bossIn(){const x=room.survivalR600,R=x.roster,src=R.boss||R.mid;if(!src)return null;const q=ringPoint(player,7,9,x.arena)||{x:x.centre.x,y:x.arena.y0+3};
- const e=spawnAt(src,q,{major:true,mid:!R.boss});if(!e)return null;
- const B=bossStats(S.i,S.loop,S.diff,S.atkAvg>0?S.atkAvg:baseAtk(),!!R.boss,e.damage,baseAtk());e.damage=B.dmg;e.maxHp=e.hp=B.hp;e.r600Boss=true;guardBossHp(e,()=>G(()=>time,0));if(R.boss){room.engaged=true;e.phaseStage='active';e.phaseAge=0;e.rest=1.2;e.cd=1.5;}
- stats.bosses++;S.bossUp=true;try{toast((R.boss?'보스 등장 · ':'중간보스 등장 · ')+e.name,3.4);sound?.('boss');}catch(_){}return e;}
+function bossIn(){const x=room.survivalR600,R=x.roster,src=R.boss||R.mid;if(!src)return null;
+ /* R1135: 난이도별 마릿수(bossPlan(S.diff).n)만큼 같은 보스를 고르게 떨어진 자리에 한꺼번에 낸다 */const plan=bossPlan(S.diff),spots=bossSpots(player,plan.n,x.arena,7,9,q=>Math.hypot(q.x-player.x,q.y-player.y)>=5.25&&!G(()=>blocked(q.x,q.y,.45,room),false));let first=null;
+ for(let k=0;k<plan.n;k++){const q=spots[k]||{x:x.centre.x,y:x.arena.y0+3};
+  const e=spawnAt(src,q,{major:true,mid:!R.boss});if(!e)continue;
+  const B=bossStats(S.i,S.loop,S.diff,S.atkAvg>0?S.atkAvg:baseAtk(),!!R.boss,e.damage,baseAtk());const Sh=bossShare(B,S.diff,B.floor);e.damage=Sh.dmg;e.maxHp=e.hp=Sh.hp;e.r600Boss=true;e.r1135Of=plan.n;e.r1135Heal=plan.heal;guardBossHp(e,()=>G(()=>time,0));
+  if(R.boss){room.engaged=true;e.phaseStage='active';e.phaseAge=0;e.rest=1.2+.3*k;e.cd=1.5+.45*k;/* 여럿이 같은 박자로 패턴을 쏘지 않게 엇갈림 */}else e.cd=Math.max(e.cd||0,.6+.45*k);
+  stats.bosses++;if(!first)first=e;}
+ if(!first)return null;S.bossUp=true;stats.bossWaves=(stats.bossWaves||0)+1;stats.lastBossCount=plan.n;
+ try{toast((R.boss?'보스 등장 · ':'중간보스 등장 · ')+first.name+(plan.n>1?' ×'+plan.n:''),3.4);sound?.('boss');}catch(_){}return first;}
 function attackTokens(){let busy=0;const ready=[];for(const e of room.enemies){if(!living(e)||!e.survivalR600||e.r600Boss)continue;if((e.attack&&!e.attack.committed)||e.rangedWindup>0)busy++;else if((e.cd||0)<=.2)ready.push(e);}
  ready.sort((a,b)=>Math.hypot(a.x-player.x,a.y-player.y)-Math.hypot(b.x-player.x,b.y-player.y));for(const e of ready.slice(Math.max(0,7-busy)))e.cd=Math.max(e.cd||0,.12+Math.random()*.2);}
 
@@ -423,7 +447,7 @@ function hud(on){try{if(!hudEl||!hudEl.isConnected){subs(null);hudEl=document.cr
 function difficultyPicker(){ensureCss();const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
  const pct=v=>(v>=1?'+':'')+Math.round((v-1)*100)+'%';
  openPanel('<div class="eyebrow">무한 생존 · 난이도</div><h2>얼마나 깊이 버틸까요</h2><p class="small">정화 코어를 지키며 몰려오는 적을 버팁니다. 난이도는 몹 체력·동시 등장 수·몹이 주는 피해·경험치에 반영됩니다. 강화 창은 난이도와 관계없이 77초마다 한 번, 쌓인 강화를 한꺼번에 고릅니다.</p>'+
-  '<div class="r600Diffs">'+Object.keys(DIFFS).map(id=>{const d=DIFFS[id];return '<button type="button" class="r600Diff'+(id===pickedDiff?' sel':'')+'" data-r600diff="'+id+'"><b>'+esc(d.name)+'</b><span>'+esc(d.text)+'</span><em>몹 체력 '+pct(d.hp)+' · 몹 수 '+pct(d.cap)+' · 받는 피해 '+pct(d.dmg)+' · 경험치 '+pct(d.xp)+'</em></button>';}).join('')+'</div><div class="actions"><button id="r600Back">뒤로</button></div>');
+  '<div class="r600Diffs">'+Object.keys(DIFFS).map(id=>{const d=DIFFS[id];return '<button type="button" class="r600Diff'+(id===pickedDiff?' sel':'')+'" data-r600diff="'+id+'"><b>'+esc(d.name)+'</b><span>'+esc(d.text)+'</span><em>몹 체력 '+pct(d.hp)+' · 몹 수 '+pct(d.cap)+' · 받는 피해 '+pct(d.dmg)+' · 경험치 '+pct(d.xp)+' · 보스 '+bossPlan(id).n+'마리</em></button>';}).join('')+'</div><div class="actions"><button id="r600Back">뒤로</button></div>');
  for(const b of document.querySelectorAll('[data-r600diff]'))b.onclick=()=>{pickedDiff=b.getAttribute('data-r600diff');heroPicker();};
  const back=document.getElementById('r600Back');if(back)back.onclick=()=>{pending=false;try{showTitle();}catch(e){fail(e);}};}
 // 영웅 고르기: 스토리 모드 영웅 고르기처럼 초상화·역할·패시브·Q 설명을 보여 주고, 영웅을 눌러 바꿔 본 뒤 '이 영웅으로 시작'.
@@ -459,7 +483,7 @@ function install(){makeNative=makeRoom;
    if(gems.length>GEM_CAP){const a0=gems.shift(),b0=gems[0];b0.v+=a0.v;}}return;}return rawGainXP.call(this,v,...a);};
  const hitBaseR600=hitEnemy;hitEnemy=function(...a){if(!here())return hitBaseR600.apply(this,a);inHitR600++;try{return hitBaseR600.apply(this,a);}finally{inHitR600--;}};
  const killBase=killEnemy;killEnemy=function(e,...a){const first=!!e&&!e.deadRecorded;if(!here()||!first)return killBase.apply(this,[e,...a]);inKill={e};let r;const hideBoss=!!(e.boss&&['last301','hando01'].includes(G(()=>zone,'')));/* R75 마지막 결투·두 주인의 성(hando01) 처치 가로채기(보스를 10%로 살려 두는 스토리 연출)는 e.boss 로 고른다 — 생존에서는 이 한 번 동안만 보스 표시를 내린다 */if(hideBoss)e.boss=false;try{r=killBase.apply(this,[e,...a]);}finally{inKill=false;if(hideBoss)e.boss=true;stripPointDrops();}
-  try{if(e.deadRecorded){S.kills++;S.stageKills++;stats.kills++;const st=CS();S.core.hp=Math.min(st.max,S.core.hp+st.heal*(e.r600Boss?15:1));}}catch(err){fail(err);}return r;};
+  try{if(e.deadRecorded){S.kills++;S.stageKills++;stats.kills++;const st=CS();S.core.hp=Math.min(st.max,S.core.hp+st.heal*(e.r600Boss?(e.r1135Heal>0?e.r1135Heal:15):1));}}catch(err){fail(err);}return r;};
  if(typeof finishEncounter==='function'){const base=finishEncounter;finishEncounter=function(...a){if(here())return;return base.apply(this,a);};}
  if(typeof saveGame==='function'){const base=saveGame;saveGame=function(...a){if(S?.active){stats.saveBlocked++;return true;/* 생존은 쓸 것이 없음 — 쓰지 않고 '저장됨'으로 답해 메뉴 '처음 화면'이 막히지 않게 */}if(tainted){stats.saveBlocked++;return false;}return base.apply(this,a);};}
  if(typeof guideStep==='function'){const base=guideStep;guideStep=function(...a){if(here()){try{guide=false;}catch(_){}return;}return base.apply(this,a);};}
@@ -483,6 +507,6 @@ window.__STORYWORLD_SURVIVAL_R600__=Object.freeze({revision:REV,start,qaCredit:v
  state:()=>S?{tainted,diff:S.diff,playT:S.playT,choiceIdx:S.choiceIdx,pickRem,narrMinEnd:S.narrMinEnd||0,ready:!!S.ready,startPos:S.startPos||null,i:S.i,loop:S.loop,id:S.ids[S.i],phase:S.phase,narrating:S.narrating,narrEndAt:S.narrEndAt,bossUp:S.bossUp,kills:S.kills,core:{...S.core,stats:CS()},choiceQ,gems:gems.length,over:S.over,ids:S.ids.length,lv:S.lv,hero:S.hero,secs:Math.round(((S.over&&S.overSecs)||(Date.now()-S.startWall)/1000))}:null,
   finaleWave:()=>{try{if(!here()||!S||S.over||!S.ready)return 0;return tickSpawn(true)||0;}catch(e){fail(e);return 0;}},/* R1010 결전 물결 */
  track:()=>prefs.track,setTrack,narr:()=>({playing:narrPlaying(),queued:N.q.length,cur:N.cur?.text||null,list:[N.cur?.text,...N.q.map(x=>x.text)].filter(Boolean)}),narrate:(scenes,opt)=>{try{return here()?narrPlay(scenes,opt):0;}catch(e){fail(e);return 0;}},/* R1010: 결전 대면 서사를 생존 자막으로 */skipNarration:()=>{N.q.length=0;if(S){S.narrMinEnd=0;/* 서사가 벽시계로 이미 끝났어도 남은 최소 웨이브 길이를 지금으로 당긴다 */if(!S.narrating&&S.narrEndAt>G(()=>time,0))S.narrEndAt=G(()=>time,0);}/* 일부러 건너뛰면 최소 웨이브 길이도 함께 끝낸다 */if(N.cur){N.gen++;N.cur=null;narrNext();}},
- pure:Object.freeze({DIFFS,diffOf,CHOICE_EVERY,WINDOW_MAX,choiceDue,windowPicks,xpNeed,levelUps,stageIds,arena,spawning,nextPhase,advance,cap,hpMul,mobHp,BOSS_MIN_MULT,BOSS_DPS_CAP,guardBossHp,trackOf,TRACKS,healCue,SFX,bossStats,mobDamage,smoothAtk,BOSS_HP,coreStats,pickThree,sentences,TAIL,CORE0,CORE_UPS}),
+ pure:Object.freeze({BOSS_PLAN,bossPlan,bossShare,bossSpots,BOSS_GAP,DIFFS,diffOf,CHOICE_EVERY,WINDOW_MAX,choiceDue,windowPicks,xpNeed,levelUps,stageIds,arena,spawning,nextPhase,advance,cap,hpMul,mobHp,BOSS_MIN_MULT,BOSS_DPS_CAP,guardBossHp,trackOf,TRACKS,healCue,SFX,bossStats,mobDamage,smoothAtk,BOSS_HP,coreStats,pickThree,sentences,TAIL,CORE0,CORE_UPS}),
  inspect:()=>({revision:REV,stats:{...stats},lastError,coreLabelText,active:!!S?.active,here:here(),pending})});
 })();
