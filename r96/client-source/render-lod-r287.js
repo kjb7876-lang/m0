@@ -21,7 +21,7 @@ const REV='R287-lod-1',KEY='storyworld.r287.lod';
 const CFG=Object.freeze({ring:4,prefetch:0,cap:400,capLow:120,propEvery:20,warmFrames:3,warmTimeout:900,propMarginFrac:.3,propMarginPx:160,texCap:320,texMaxPx:4096*4096,cacheBytes:24*1024*1024,cacheBytesLow:6*1024*1024,cacheCount:1024});
 const prefs={on:true,warm:true,resident:false,cache:true,hide3d:true,props:true};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object')for(const k in prefs)if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
-const stats={zones:0,warms:0,warmMs:0,warmMeshes:0,chunksResident:0,chunksAll:0,overCap:0,leases:0,texHeld:0,hidden:0,shown:0,propsNear:0,propsFar:0,propsFarDrawn:0,frames:0,errors:0};
+const stats={zones:0,warms:0,viewportStarts:0,warmMs:0,warmMeshes:0,chunksResident:0,chunksAll:0,overCap:0,leases:0,texHeld:0,hidden:0,shown:0,propsNear:0,propsFar:0,propsFarDrawn:0,frames:0,errors:0};
 let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const on=k=>prefs.on&&prefs[k];
 
@@ -73,7 +73,15 @@ let lastArgs=null,R=null,zoneKey=null,warmState='idle',warmPromise=null,leases=[
 let coarse=null;const capFor=r=>{if(coarse===null){try{coarse=!!matchMedia('(pointer:coarse)').matches;}catch(_){coarse=false;}}return((r?.lastViewportWidth||innerWidth)<960||coarse)?CFG.capLow:CFG.cap;};
 function releaseZone(){for(const l of leases){try{l.release();}catch(e){fail(e);}}leases=[];
  if(heldOwner){for(const img of held){try{heldOwner.release(img);}catch(e){fail(e);}}}held=[];heldSet=new WeakSet();heldOwner=null;stats.leases=0;stats.texHeld=0;}
-let zoneAt=0,warmGen=0;function newZone(zone){warmGen++;releaseZone();coarse=null;zoneKey=zone;warmState='loading';zoneAt=frameNo;stats.zones++;}
+let zoneAt=0,warmGen=0;
+function newZone(zone){
+ warmGen++;releaseZone();coarse=null;zoneKey=zone;zoneAt=frameNo;stats.zones++;
+ // 휴대폰 낮음: 엔진이 시야와 영웅 둘레 3×3을 바로 불러온다. 이동 중에는 6MB 지형 캐시를 재사용한다.
+ const tier=window.__STORYWORLD_MOBILE_TIER_R1023__;
+ const viewportOnly=!prefs.resident&&tier?.tier?.()===0&&tier.active?.();
+ warmState=viewportOnly?'done':'loading';
+ if(viewportOnly)stats.viewportStarts++;
+}
 function wrapChunks(r){const C=r?.chunks;if(!C||typeof C.update!=='function'||C.__r287)return;const base=C.update;
  const w=function(x,y,zone,grid={}){lastArgs={x,y,grid};if(!prefs.on)return base.call(this,x,y,zone,grid);
   let vb=grid?.visibleBounds;try{const g=chunkGrid(grid),cap=capFor(r),size=this.size||10;stats.chunksAll=g.count;

@@ -411,11 +411,16 @@ try{for(const ev of ['pointerdown','keydown','touchstart'])document.addEventList
 setInterval(()=>{try{const btn=document.getElementById('r71DifficultyConfirm'),on=typeof guide!=='undefined'&&!!guide&&prefs.guide;
  if(!btn||!btn.offsetParent){diffWatch.openAt=0;diffWatch.touched=false;return;}if(!diffWatch.openAt){diffWatch.openAt=Date.now();return;}
  if(on&&!diffWatch.touched&&diffWatch.input<diffWatch.openAt&&Date.now()-diffWatch.openAt>3000){diffWatch.openAt=Date.now()+60000;stats.guideDifficulty=(stats.guideDifficulty||0)+1;btn.click();}}catch(e){fail(e);}},300);
+// R1132: 나침반 goal() 을 그때그때 계산하자, 보스 준비(bossReady) 중 아직 안 열린 포탈의 '봉인 해제 · 적 처치' 목표가 닫힌 문 너머 몹을 가리킬 때
+//  길잡이가 그 몹을 공격 명령으로 잡고 문 앞에 서서 멈췄다(cult04 이어 하기 재검증). 목표 몹·지점에 길이 없고 제단이 준비됐으면 제단으로 간다.
+function reachableGoal(g){try{return typeof findPath!=='function'||!!findPath(player,g,room,.31)?.length||Math.hypot(g.x-player.x,g.y-player.y)<1.1;}catch(_){return true;}}
 function extendGuide(){if(player.moving||(typeof route!=='undefined'&&route?.length)||(typeof command!=='undefined'&&command)){idleSince=time;return;}
- if(time-idleSince<1||time-lastAct<.6)return;lastAct=time;const g=POL()?.goal?.();if(!g)return;const d=Math.hypot(g.x-player.x,g.y-player.y);
+ if(time-idleSince<1||time-lastAct<.6)return;lastAct=time;let g=POL()?.goal?.();if(!g)return;
+ try{const o=room?.objective;if((g.kind==='enemy'||g.kind==='objective')&&o&&typeof storyReady==='function'&&storyReady(regionById?.[zone])&&!completed(zone)&&Math.hypot(g.x-o.x,g.y-o.y)>2&&!reachableGoal(g)){g={x:o.x,y:o.y,kind:'objective',label:g.label};stats.guideAltarUnreachable=(stats.guideAltarUnreachable||0)+1;}}catch(e){fail(e);}
+ const d=Math.hypot(g.x-player.x,g.y-player.y);
  if(g.kind==='enemy'||g.kind==='boss'){const e=(room.enemies||[]).find(v=>v.hp>0&&Math.abs(v.x-g.x)<.01&&Math.abs(v.y-g.y)<.01);if(e&&d<8&&typeof clearLine==='function'&&clearLine(player,e)){command=e.id;target=e.id;stats.guideActs++;return;}}
  if(chasePackGoal(g))return;
- if(d<=1.1){if(g.kind==='objective'&&typeof interact==='function')interact();else if(g.kind==='exit'&&typeof travel==='function'){const dir=window.__STORYWORLD_REGION_ROUTES__?.activeDirection?.();if(dir)guideTravel(dir);}stats.guideActs++;return;}
+ if(d<=1.1){if(g.kind==='objective'&&typeof interact==='function')interact();else if(g.kind==='exit'&&typeof travel==='function'&&!window.__STORYWORLD_PORTAL_INTERACTION_R83__){const dir=window.__STORYWORLD_REGION_ROUTES__?.activeDirection?.();if(dir)guideTravel(dir);}stats.guideActs++;return;}// R1132: 포탈 건너기는 R83(사람 C, R1131 자동 통과)이 정한다 — 이 바깥 감싸기에서 travel 을 부르면 R83 대기를 건너뛴다
  const p=POL()?.navPath?.(player,g);if(p?.length>1){route=p.slice(1).map(q=>({x:q.x,y:q.y}));command=null;stats.guideNav++;}}
 // World-ward rooms (R78 phases: route → rally → door → boss → exit) are outside the R75
 // guide's view, so there the compass goal drives the step instead.

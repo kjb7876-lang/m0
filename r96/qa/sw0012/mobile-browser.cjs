@@ -1,0 +1,169 @@
+'use strict';
+
+// Run against a built site (SW_URL). SHOTS optionally retains state, timings and screenshots.
+// The browser emulates the display and touch input. Its timings depend on the host and GPU.
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const { chromium, webkit, devices } = require('playwright');
+const timeout = 180000;
+
+async function dismissScene(page) {
+  await page.evaluate(() => {
+    for (let i = 0; i < 200 && storyScene; i++) advanceScene();
+    if (modal) closePanel(true);
+  });
+}
+
+async function enterField(page, samong) {
+  await page.locator('#campaignNew54').tap({ timeout });
+  await page.locator('#slotConfirmR73').tap();
+  await page.waitForFunction(() => started && !loading, null, { timeout });
+  await dismissScene(page);
+  // Supply a progressed normal save so both areas are reachable without enabling 777.
+  const restored = await page.evaluate(async samong => {
+    const save = serializeSave();
+    for (const region of Object.values(regionById)) {
+      if (samong || region.index < regionById.dist02.index) save.progress.STORY[region.id] = true;
+      if (samong) save.progress.DREAM[region.id] = true;
+    }
+    if (samong) save.ending.STORY = true;
+    return await restoreSave(save);
+  }, samong);
+  assert.notEqual(restored, false);
+  await dismissScene(page);
+  const entered = await page.evaluate(async samong => samong
+    ? await __STORYWORLD_SAMONG_R103__.goZone('sz115-P-2')
+    : await enterRegion('dist02', null, { layer: 'STORY', restore: true, noStory: true }), samong);
+  assert.ok(entered);
+  await page.waitForFunction(samong => !loading && (samong
+    ? layer === 'DREAM' && __STORYWORLD_SAMONG_R103__.here() && room.samongR103?.zone === 'sz115-P-2'
+    : layer === 'STORY' && room.id === 'dist02' && !__STORYWORLD_SAMONG_R103__.here()), samong, { timeout });
+  await dismissScene(page);
+  await page.evaluate(() => { auto = false; guide = false; });
+}
+
+async function waitForRenderer(page) {
+  const details = () => page.evaluate(() => {
+    const state = __STORYWORLD_PHASE1__.controller.state;
+    const renderer = state.three?.renderer;
+    return { active: state.active, requested: state.requested, failed: state.failed, reason: state.reason,
+      limit: renderer?.capabilities.maxTextureSize, contextLost: renderer?.getContext().isContextLost(),
+      room: room?.id, layer, loading };
+  });
+  try {
+    await page.waitForFunction(() => {
+      const state = __STORYWORLD_PHASE1__.controller.state;
+      return state.active === 'three' || state.failed;
+    }, null, {timeout});
+  } catch (error) {
+    throw new Error('WebGL scene did not render: ' + JSON.stringify(await details()), {cause: error});
+  }
+  const info = await details();
+  assert.equal(info.active, 'three', JSON.stringify(info));
+  assert.equal(info.contextLost, false, JSON.stringify(info));
+}
+
+async function tapAndMeasure(page, direction) {
+  const point = await page.evaluate(direction => {
+    const bounds = canvas.getBoundingClientRect();
+    // A live narration subtitle can cover one ground tile without pausing combat.
+    // Pick another in the same movement direction that a player can actually tap.
+    for (const [dx, dy] of [[2,-1],[2,1],[2,2],[1,-2],[2,-2],[1,0]]) {
+      const screen = project(player.x + dx * direction, player.y + dy * direction);
+      const x = Math.round(bounds.left + screen.x * bounds.width / W);
+      const y = Math.round(bounds.top + screen.y * bounds.height / H);
+      if (document.elementFromPoint(x, y) === canvas) return {x, y};
+    }
+    return null;
+  }, direction);
+  assert.ok(point, 'a movement tap must reach the game canvas');
+  await page.touchscreen.tap(point.x, point.y);
+  return await page.evaluate(() => new Promise(resolve => {
+    const intervals = [];
+    const start = time;
+    let lastStamp, lastX = player.x, lastY = player.y, distance = 0, peakEnemies = 0;
+    function sample(stamp) {
+      if (lastStamp !== undefined) intervals.push(stamp - lastStamp);
+      distance += Math.hypot(player.x - lastX, player.y - lastY);
+      lastStamp = stamp;
+      lastX = player.x;
+      lastY = player.y;
+      peakEnemies = Math.max(peakEnemies, room.enemies.filter(e => e.hp > 0).length);
+      if (intervals.length < 36) return requestAnimationFrame(sample);
+      intervals.sort((a,b) => a-b);
+      resolve({ gameSeconds: time - start, distance, peakEnemies, health: player.hp,
+        frameMedianMs: intervals[17], frameP95Ms: intervals[34] });
+    }
+    requestAnimationFrame(sample);
+  }));
+}
+
+async function run(browser, mode) {
+  const samong = mode === 'samong';
+  const context = await browser.newContext({ ...devices['iPhone 13 Mini landscape'],
+    viewport: {width:812, height:375}, screen: {width:812, height:375}, deviceScaleFactor:3 });
+  try {
+    await context.addInitScript(() => {
+      Object.defineProperty(navigator, 'deviceMemory', { get: () => undefined, configurable: true });
+      let seed = 1807711;
+      Math.random = () => ((seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0) / 4294967296);
+    });
+    const page = await context.newPage(), errors = [];
+    page.setDefaultTimeout(timeout);
+    page.on('pageerror', error => errors.push(error.message));
+    await page.goto(process.env.SW_URL || 'http://127.0.0.1:4396/', { waitUntil: 'domcontentloaded', timeout });
+    await page.evaluate(() => {
+      document.addEventListener('pointerdown', e => {
+        if (e.isTrusted && e.target === canvas) window.__qaCanvasPointer = e.pointerType;
+      }, true);
+    });
+    await enterField(page, samong);
+    await waitForRenderer(page);
+    const env = await page.evaluate(() => ({
+      renderer: __STORYWORLD_PHASE1__.controller.state.active, coarse: matchMedia('(pointer:coarse)').matches,
+      devicePixelRatio, deviceMemory: typeof navigator.deviceMemory, layer, room: room.id,
+      samong: room.samongR103?.zone || null, cheat: __STORYWORLD_CHEAT777__.active(),
+      touch: navigator.maxTouchPoints, rendererDpr: dpr, canvas: [canvas.width, canvas.height]
+    }));
+    assert.equal(env.renderer, 'three');
+    assert.ok(env.coarse && env.devicePixelRatio === 3);
+    assert.equal(env.deviceMemory, 'undefined');
+    assert.equal(env.cheat, false);
+    assert.deepEqual([env.layer, env.samong], samong ? ['DREAM','sz115-P-2'] : ['STORY',null]);
+    // Let camera/viewport and the first shader uploads settle before sampling movement.
+    await page.evaluate(() => new Promise(resolve => {
+      let frames = 0;
+      const warm = () => ++frames >= 12 ? resolve() : requestAnimationFrame(warm);
+      requestAnimationFrame(warm);
+    }));
+    // A new DREAM room can render terrain for several callbacks before the first wave spawns.
+    const entryTime = await page.evaluate(() => time);
+    await page.waitForFunction(start => !loading && time > start && room.enemies.some(e => e.hp > 0),
+      entryTime, { timeout });
+    const samples = [];
+    for (const direction of [1, -1, 1]) samples.push(await tapAndMeasure(page, direction));
+    env.canvasPointer = await page.evaluate(() => window.__qaCanvasPointer);
+    assert.equal(env.canvasPointer, 'touch');
+    assert.ok(samples.every(s => s.gameSeconds > 0 && s.peakEnemies > 0), 'combat simulation progresses: ' + JSON.stringify(samples));
+    assert.ok(samples.some(s => s.distance > 0.1), 'hero moves in response to touch');
+    assert.deepEqual(errors, []);
+    if (process.env.SHOTS) {
+      fs.mkdirSync(process.env.SHOTS, { recursive: true });
+      await page.screenshot({ path: path.join(process.env.SHOTS, mode+'.png') });
+      fs.writeFileSync(path.join(process.env.SHOTS, mode+'.json'), JSON.stringify({env, samples}, null, 2)+'\n');
+    }
+    console.log('PASS', mode, JSON.stringify({env, samples}));
+  } finally { await context.close(); }
+}
+
+async function main() {
+  const useWebKit = !!process.env.WEBKIT_EXECUTABLE_PATH;
+  for (const mode of ['story','samong']) {
+    const browser = useWebKit ? await webkit.launch({executablePath: process.env.WEBKIT_EXECUTABLE_PATH})
+      : await chromium.launch({executablePath: process.env.CHROMIUM_EXECUTABLE_PATH || process.env.CHROMIUM_PATH,
+        args: ['--disable-dev-shm-usage','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+    try { await run(browser, mode); } finally { await browser.close(); }
+  }
+}
+main().catch(error => { console.error(error); process.exitCode=1; });
