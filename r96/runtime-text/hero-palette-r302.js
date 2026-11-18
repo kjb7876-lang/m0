@@ -157,7 +157,10 @@ let heroDraw=0;
 function imgPath(im){return im&&(im.__r302Path||(typeof im.src==='string'?im.src:''))||'';}
 const patched=new WeakSet();
 function patchCtx(c){if(!c||patched.has(c)||typeof c.drawImage!=='function')return;patched.add(c);const base=c.drawImage;
- c.drawImage=function(im,...a){const h=on?hero():null;if(h&&im&&(heroDraw>0||HERO_ASSET.test(imgPath(im)))&&!/assets\/r30[2-9]\/|r302-tint/.test(imgPath(im))){const t=tintedImage(im,h)||im;if(t!==im)stats.filtered++;
+ c.drawImage=function(im,...a){
+  // R462 borrows the Eden smoke sheet for neutral enemy ash. Only this draw keeps its source colors.
+  if(im && im===this.r462DeathSmoke)return base.apply(this,arguments);
+  const h=on?hero():null;if(h&&im&&(heroDraw>0||HERO_ASSET.test(imgPath(im)))&&!/assets\/r30[2-9]\/|r302-tint/.test(imgPath(im))){const t=tintedImage(im,h)||im;if(t!==im)stats.filtered++;
    // 영웅 띠가 도는 동안 영웅 전용 그림(R106 d2s·R108 eden 'lighter' 겹침 등)은 알파 .35 — 환도 Q 에서 eden slash 6장이 더하기 합성으로 하얗게 날아가 띠를 덮던 것
    if(HERO_ASSET.test(imgPath(im))&&stripOn(h)){const ga=this.globalAlpha;this.globalAlpha=ga*.35;stats.stripDim=(stats.stripDim||0)+1;try{return base.call(this,t,...a);}finally{this.globalAlpha=ga;}}
    return base.call(this,t,...a);}return base.call(this,im,...a);};}

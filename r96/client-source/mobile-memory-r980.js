@@ -36,7 +36,7 @@
 //  그림 원본 파일·전투·세이브는 바꾸지 않는다(표시 해상도·캐시만).
 (()=>{'use strict';
 if(window.__STORYWORLD_MOBILE_MEMORY_R980__)return;
-const REV='R1023-mobile-memory-6',KEY='storyworld.r980.mobileMemory';
+const REV='R1023-mobile-memory-7',KEY='storyworld.r980.mobileMemory';
 // 모바일 예산(픽셀 수, 1픽셀 = 4바이트)
 const MOBILE_PX={'r163-tint':12e6/* 약 48MB */,'r106-tint':6e6/* 약 24MB */,'r409-outline':3e6/* 약 12MB */};
 const AUDIO_MB=24,EVERY_MS=2000;
@@ -94,7 +94,9 @@ function halfOf(im){try{
  if(!(im instanceof HTMLImageElement)||!im.complete||!NATIVE)return null;const w=im.naturalWidth,h=im.naturalHeight;if(!(w*h>=halfMin))return null;
  const src=im.src;if(!src)return null;const m=halves.get(im);
  if(m){halves.delete(im);if(m.src===src){m.at=nowMs();halves.set(im,m);return m.c;}stats.halfPx-=m.px;}
- const c=document.createElement('canvas');c.width=Math.max(1,Math.round(w/2));c.height=Math.max(1,Math.round(h/2));const g=c.getContext('2d');if(!g)return null;
+ const c=document.createElement('canvas');c.width=Math.max(1,Math.round(w/2));c.height=Math.max(1,Math.round(h/2));
+ // 모바일의 크롭·윤곽 검사가 이 사본을 자주 읽는다. PC 수동 저사양은 기존 그리기 경로를 쓴다.
+ const g=c.getContext('2d',live&&!forceHalf?{willReadFrequently:true}:undefined);if(!g)return null;
  g.imageSmoothingEnabled=true;if('imageSmoothingQuality'in g)g.imageSmoothingQuality='high';NATIVE.call(g,im,0,0,w,h,0,0,c.width,c.height);
  Object.defineProperty(c,'src',{value:src});if(im.__path)c.__path=im.__path;c.__storyworldStaticSource=Object.freeze({path:src,immutable:true,r1000Half:true});c.r1000Full=[w,h];
  const px=c.width*c.height;halves.set(im,{src,c,px,at:nowMs()});stats.halfMade++;stats.halfPx+=px;stats.halfPeakPx=Math.max(stats.halfPeakPx,stats.halfPx);if(stats.halfPx>HALF_BUDGET_PX)sweepHalves(false);return c;}catch(e){fail(e);return null;}}
