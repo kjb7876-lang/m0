@@ -1,0 +1,87 @@
+DOM [
+ "portable-data.:{\"version\":5,\"revision\":\"FULL-WORLD-CURRENT-PUBLIC-MAIN-INTE (hidden)",
+ ".:\n'use strict';\n/* HAPIL StoryWorld 02. Standalone local engi (hidden)",
+ "phase1-original-adapter.:\n/* Current public source selects eight-sector poses for six (hidden)",
+ "story-campaign-data-r54.:\n/* Current published canonical narrative; pinned source, no (hidden)",
+ "story-data-r75.:window.__STORYWORLD_STORY_DATA_R75__={\"schema\":\"storyworld.c (hidden)",
+ "hero-npc-r75.:\n/* Reuse the exact native hero routes and authored foot piv (hidden)",
+ "objectives-r75.:\n/* Narrative outcomes are not interchangeable kill objectiv (hidden)",
+ "IMG  http://127.0.0.1:4410/m0/assets/r108/heroes/lauren.webp (hidden)"
+]
+984 image | ground | r#:floor:murder#:# | m0/assets/r#/floor/floor_regional_B_#.png | brightness(.86) saturate(.85) |  | 
+861 image | ground | r#:floor:murder#:# | m0/assets/r#/floor/floor_regional_A_#.png | brightness(.86) saturate(.85) |  | 
+726 image | effect | r#:shadow:r#:furn:murder#:#:# | m0/assets/world-r#/r#-#.webp | brightness(0) |  | 
+490 image | effect | r#:# | r#:eonju:7:r#fx:spark:#.#.#:#.#.# | none |  | 
+369 image | ground | r#:floor:murder#:# | m0/assets/rc#/impacts/player-blood.webp | saturate(.45) brightness(.68) |  | 
+369 image | effect | r#:shadow:r#:scene:murder#:# | m0/assets/world-r#/r#-#.webp | brightness(0) |  | 
+246 image | effect | r#:aura-back:hero | r#:eonju:2:r#fx:glow:#.#.#:#.#.# | none |  | 
+246 image | effect | r#:aura-back:hero | r#:eonju:3:r#fx:cross:#.#.#:#.#.# | none |  | 
+246 image | contact | hero:# |  | none |  | 
+246 image | effect | r#:dust | r#fx:smoke:#.#.#:#.#.# | none |  | 
+161 image | effect | r#:hero-hit:hit-teleport:#.# | m0/assets/r#/fx/hit-teleport.webp | none |  | 
+123 image | objective | objective:# | m0/assets/props/v#/shattered_memory_core.webp | none |  | 
+123 image | objective | objective:# | m0/assets/r#/clean/assets/vfx/generated/v#/time-ring.webp | none |  | 
+123 image | effect | r#:aura-back:hero | r#:eonju:5:assets/r#/fx-c4-ground-ring.webp | none |  | 
+123 image | effect | r#:passive-aura:hero:resonance | r#:eonju:4:m0/assets/auras-r#/resonance-petals.webp | saturate(.65) brightness(.93) |  | 
+123 image | effect | r#:aura-front:hero | r#:eonju:3:r#fx:cross:#.#.#:#.#.# | none |  | 
+123 image | effect | r#:aura-front:hero | r#:eonju:2:r#fx:glow:#.#.#:#.#.# | none |  | 
+110 image | effect | r#:# | r#:eonju:9:r#fx:ring:#.#.#:#.#.# | none |  | 
+109 image | effect | fx:# |  | none |  | 
+88 image | effect | final#-r#:r#:r#:#:F# | m0/assets/final#-r#/effects/#/atlas.png | saturate(.22) brightness(1.06) |  | 
+83 image | effect | r#:# | r#:eonju:8:r#fx:flare:#.#.#:#.#.# | none |  | 
+56 image | effect | r#:# | r#:eonju:6:r#fx:slashline:#.#.#:#.#.# | none |  | 
+36 image | effect | r#:aura | r#:glow:aura | none |  | 
+36 image | effect | r#:orb | r#:glow:orb | none |  | 
+26 image | effect | r#:blood-splash:#.# | m0/assets/r#/blood/blood-splash.webp | saturate(.45) brightness(.55) contrast(1.05) |  | 
+17 image | hero | hero:# | r#:assets/r#d/persona-idle-side.png:1 | saturate(.5) contrast(1.08) |  | 
+16 image | hero | hero:# | r#:assets/r#d/persona-idle-side.png:2 | saturate(.5) contrast(1.08) |  | 
+15 image | hero | hero:# | r#:assets/r#d/persona-idle-side.png:0 | saturate(.5) contrast(1.08) |  | 
+14 image | hero | hero:# | r#:assets/r#d/persona-idle-side.png:3 | saturate(.5) contrast(1.08) |  | 
+12 image | hero | hero:# | r#:assets/r#d/persona-idle-side.png:5 | saturate(.5) contrast(1.08) |  | 
+12 image | hero | hero:# | r#:assets/r#d/persona-idle-side.png:4 | saturate(.5) contrast(1.08) |  | 
+8 image | hero | hero:# | r#:assets/r#b/persona-walk-side.webp:6 | saturate(.5) contrast(1.08) |  | 
+7 image | hero | hero:# | r#:assets/r#b/persona-walk-side.webp:5 | saturate(.5) contrast(1.08) |  | 
+4 image | effect | fx:# | m0/assets/vfx/generated/v#/burst-impact.webp | none |  | 
+4 image | hero | hero:# | r#:assets/r#b/persona-walk-side.webp:7 | saturate(.5) contrast(1.08) |  | 
+4 image | hero | hero:# | r#:assets/r#b/persona-walk-side.webp:4 | saturate(.5) contrast(1.08) |  | 
+4 image | hero | hero:# | r#:assets/r#b/persona-walk-side.webp:1 | saturate(.5) contrast(1.08) |  | 
+4 image | hero | hero:# | r#:assets/r#b/persona-walk-side.webp:2 | saturate(.5) contrast(1.08) |  | 
+3 image | hero | hero:# | r#:assets/r#b/persona-walk-side.webp:3 | saturate(.5) contrast(1.08) |  | 
+2 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(1.45) saturate(1.3) |  | 
+2 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(1.32) saturate(1.3) |  | 
+2 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(1.25) saturate(1.3) |  | 
+2 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(1.12) saturate(1.3) |  | 
+2 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(1.05) saturate(1.3) |  | 
+2 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(0.92) saturate(1.3) |  | 
+2 image | hero | hero:# | r#:assets/r#b/persona-walk-side.webp:0 | saturate(.5) contrast(1.08) |  | 
+1 image | hero | hero:# | r#:assets/r#b/persona-walk-front.webp:1 | saturate(.5) contrast(1.08) |  | 
+1 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(1.85) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:burst:# | m0/assets/r#/blood/blood-burst.webp | brightness(1.49) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(1.52) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:stain:# | m0/assets/r#/blood/blood-death.webp | brightness(1.65) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(1.78) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:burst:# | m0/assets/r#/blood/blood-burst.webp | brightness(1.35) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:stain:# | m0/assets/r#/blood/blood-death.webp | brightness(1.58) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(1.72) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:burst:# | m0/assets/r#/blood/blood-burst.webp | brightness(1.21) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:stain:# | m0/assets/r#/blood/blood-death.webp | brightness(1.52) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(1.65) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:burst:# | m0/assets/r#/blood/blood-burst.webp | brightness(1.14) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:stain:# | m0/assets/r#/blood/blood-death.webp | brightness(1.45) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(1.58) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:burst:# | m0/assets/r#/blood/blood-burst.webp | brightness(0.99) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:stain:# | m0/assets/r#/blood/blood-death.webp | brightness(1.38) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:burst:# | m0/assets/r#/blood/blood-burst.webp | brightness(0.92) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:stain:# | m0/assets/r#/blood/blood-death.webp | brightness(1.32) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(1.38) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:stain:# | m0/assets/r#/blood/blood-death.webp | brightness(1.25) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:stain:# | m0/assets/r#/blood/blood-death.webp | brightness(1.18) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:stain:# | m0/assets/r#/blood/blood-death.webp | brightness(1.12) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(1.18) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:stain:# | m0/assets/r#/blood/blood-death.webp | brightness(1.05) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:stain:# | m0/assets/r#/blood/blood-death.webp | brightness(0.98) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:stain:# | m0/assets/r#/blood/blood-death.webp | brightness(0.92) saturate(1.3) |  | 
+1 image | effect | r#:blood:#:splash:# | m0/assets/r#/blood/blood-splash.webp | brightness(0.98) saturate(1.3) |  | 
+FXD 
+AUDIO ["tp://127.0.0.1:4410/m0/assets/r308/bgm/chopin-funeral-72.ogg"]
+attackFn undefined,function,undefined

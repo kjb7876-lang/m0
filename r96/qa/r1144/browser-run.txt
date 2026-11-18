@@ -1,0 +1,21 @@
+PASS ⓐ 형상일 때 켜짐
+PASS ⓑ W: 표식 적 4마리에게 연쇄 번개 피해 (8번, 배율 0.6)
+PASS ⓑ 번개 그림 = 네온 연쇄 번개 시트를 언주로 (66개, 예 r1140:eonju:18:m0/assets/r562/dots/neon-chain.webp / none)
+PASS ⓑ 번개 밑그림 = 흑(brightness(0)) (33개, 예 m0/assets/r562/dots/neon-chain.webp / brightness(0))
+PASS ⓒ E: 주변 적에게 구슬 (3발, 배율 0.6)
+PASS ⓒ 맞은 적은 화상 도트 (15틱, 틱당 0.06)
+PASS ⓒ 화상 그림 = 헌터 화상 시트를 언주로 (149개, 예 r1140:eonju:24:m0/assets/r535/dots/hunter-burn.webp)
+PASS ⓒ 구슬 그림 = 은빛 거성 구 시트 (13개, 예 r1140:eonju:23:m0/assets/r946/lauren-red.webp)
+PASS ⓓ R: 도는 구슬에 닿은 적 피해 (15번, 배율 0.35)
+PASS ⓓ 적마다 3초에 6번 이하 ([5,3,5,2])
+PASS ⓓ 닿은 적은 화상 도트
+PASS ⓓ 3초 뒤 구슬이 사라짐
+PASS ⓓ 도는 구슬 = 언주 (540개)
+PASS ⓗ (진) 쌍성 소멸 레이저: 부채꼴 안 일반 몹 즉사 (1마리, 보스 0)
+PASS ⓔ 오류 0 (null), 시트 그림 1160번·임시 그림 113번
+PASS ⓕ 라우렌 본인 W: 덧효과 없음
+PASS ⓕ 라우렌 본인 E: 덧효과 없음
+PASS ⓕ 라우렌 본인 R: 덧효과 없음
+PASS ⓕ 라우렌일 때는 세지도 않음
+PASS ⓖ 페이지 오류 0 ()
+ALL PASS (헤드리스)

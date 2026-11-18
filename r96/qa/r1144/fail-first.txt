@@ -1,0 +1,12 @@
+FAIL ① persona-wer-r1144.js runtime-text 사본 = client-source
+FAIL ① 스크립트 태그: persona-hero-r1113 뒤
+FAIL ① verify-r96-public.py 기대 목록
+FAIL ① runtime-manifest·inputs
+FAIL ① pages.yml CPU 검사 줄
+PASS ① 재사용 시트가 매니페스트에 있음(새 자산 없음): assets/r562/dots/neon-chain.webp
+PASS ① 재사용 시트가 매니페스트에 있음(새 자산 없음): assets/r535/dots/hunter-burn.webp
+PASS ① 재사용 시트가 매니페스트에 있음(새 자산 없음): assets/r946/lauren-red.webp
+PASS ① 키를 새로 듣지 않음(스킬 키 그대로)
+PASS ① 기록기가 못 받는 필터 없음
+FAIL 모듈 파일 없음: client-source/persona-wer-r1144.js
+FAILED 6
