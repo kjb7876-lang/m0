@@ -3,11 +3,11 @@
  상대 초인(DYS-03, 칸 256x320 발 128,300) → R161 꼭두각시 칸(256x320, 발 101.8,299.5)으로 옮김:
    walk8·attack8·hit4·death8. 크기는 걷기 키(포구 고리 포함) 239 → 232(R1177 임시본과 같은 크기), 공격은 몸이 조금 작게 왔으므로 225 → 232.
  지휘 개체·지휘 기체(DYS-06·DYS-10 공용, 칸 320x320 발 160,300) → 칸·발 그대로(samong-r161 GEO 표가 칸 규격을 안다), 발선만 300 으로 맞춤:
-   walk8·attack8·hit4.
+   walk8·attack8·hit4·death8.
  공통: 알파 252 안팎으로 살짝 비치던 몸을 불투명하게(240 이상 → 255), 칸 가장자리 6px 부드럽게(공격 광채가 칸 경계에서 잘린 직선 자국 숨김).
    상대 초인은 붉은 코어·포구·광채 말고 채도 0.55(먹빛), 흰 테 제거(사망 연기 칸은 제외 — 잿빛 연기를 지우지 않게). 지휘 개체는 채도 0.85.
 사용: python3 scripts/r1177b-dys-sheets.py <Dots PNG 폴더> <출력 assets/r1177 폴더>
- 폴더 안 파일 이름: CX-0156SP_DYS-03_{walk8,attack8,hit4,death8}_r1_ROUGH.png, CX-0156SP_DYS-06_DYS-10_shared_{walk8,attack8,hit4}_r1_ROUGH.png"""
+ 폴더 안 파일 이름: CX-0156SP_DYS-03_{walk8,attack8,hit4,death8}_r1_ROUGH.png, CX-0156SP_DYS-06_DYS-10_shared_{walk8,attack8,hit4,death8}_r1_ROUGH.png"""
 import sys,hashlib,json
 from pathlib import Path
 import numpy as np
@@ -43,7 +43,8 @@ JOBS=[('s06-rival-dots-walk-right-8.webp','CX-0156SP_DYS-03_walk8_r1_ROUGH.png',
  ('s06-rival-dots-death-8.webp','CX-0156SP_DYS-03_death8_r1_ROUGH.png',256,320,8,dict(R161,s=232/239),dict(sat=.55,keep_red=True,fringe=False)),
  ('s06-commander-dots-walk-right-8.webp','CX-0156SP_DYS-06_DYS-10_shared_walk8_r1_ROUGH.png',320,320,8,CMD,dict(sat=.85,keep_red=False,fringe=True)),
  ('s06-commander-dots-attack-8.webp','CX-0156SP_DYS-06_DYS-10_shared_attack8_r1_ROUGH.png',320,320,8,CMD,dict(sat=.85,keep_red=False,fringe=True)),
- ('s06-commander-dots-hit-4.webp','CX-0156SP_DYS-06_DYS-10_shared_hit4_r1_ROUGH.png',320,320,4,CMD,dict(sat=.85,keep_red=False,fringe=True))]
+ ('s06-commander-dots-hit-4.webp','CX-0156SP_DYS-06_DYS-10_shared_hit4_r1_ROUGH.png',320,320,4,CMD,dict(sat=.85,keep_red=False,fringe=True)),
+ ('s06-commander-dots-death-8.webp','CX-0156SP_DYS-06_DYS-10_shared_death8_r1_ROUGH.png',320,320,8,CMD,dict(sat=.85,keep_red=False,fringe=False))]
 rep=[]
 for out,src,cw,ch,n,place,kw in JOBS:
     if place is not CMD and 'foot' not in place:place=dict(place)

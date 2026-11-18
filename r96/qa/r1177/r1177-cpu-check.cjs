@@ -65,7 +65,7 @@ const OWN=['pvfx-void-implosion','pvfx-rift-portal','pvfx-choir-moths','hands-bl
   assert(r.columns>0&&r.frames>0&&r.frame[0]>0&&r.frame[1]>0&&Number.isFinite(r.pivot[0]+r.pivot[1])&&Number.isFinite(r.fps)&&r.fps>0,k+' sane');}
  ok('same play length (±8%) for one-shots, loop flag kept, finite frame/pivot/fps');
  g.ready.add(A+'void-implosion-blood.webp');const row=globalThis.readyImage('assets/r163/pixelfx/'+g.meta['pvfx-void-implosion'].file);assert(row&&row.image.src===A+'void-implosion-blood.webp');
- globalThis.addImage('assets/r163/pixelfx/'+g.meta['pvfx-rift-portal'].file);assert(g.added.includes(A+'rift-blood.webp'));globalThis.addImage('assets/x.webp');assert(g.added.includes('assets/x.webp'));
+ globalThis.addImage('assets/r163/pixelfx/'+g.meta['pvfx-rift-portal'].file);assert(g.added.includes(A+'crimson-fissure-12.webp'));/* R1177c(사용자 밤샘 지시 'Dots 결과 적용'): 균열 문은 Dots C2 시트 */globalThis.addImage('assets/x.webp');assert(g.added.includes('assets/x.webp'));
  ok('aliases resolve through engine readyImage/addImage; other paths pass through');
  go(PZ);for(const k of OWN)assert((g.A.resolve('assets/r163/pixelfx/'+g.meta[k].file)||'').startsWith(A),'P own '+k);
  for(const k of P6)assert(g.meta[k].r976Path&&!/r163/.test(g.meta[k].r976Path),'P: R976 row '+k);ok('P: own keys swapped, R976 keeps its six');

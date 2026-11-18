@@ -10516,7 +10516,12 @@
     "assets/r1177/s06-rival-dots-death-8.webp",
     "assets/r1177/s06-rival-dots-hit-4.webp",
     "assets/r1177/s06-rival-dots-walk-right-8.webp",
-    "move-dir-r1167-data.js"
+    "move-dir-r1167-data.js",
+    "assets/r1177/s06-commander-dots-death-8.webp",
+    "assets/r1177/memory-tower-implode-14.webp",
+    "assets/r1177/crimson-fissure-12.webp",
+    "assets/r1177/ash-crimson-moths-16.webp",
+    "assets/r1177/spectral-hands-20.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11591,5 +11596,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "0ccc5ac0619cab1868ded61ada5e614b100026dfdf146ed05edf09160df98c09"
+  "runtimeManifestSHA256": "d45578086dbe2725019106b2cdb313d6eddb2bb235c74bd932dcb6dbe136c1d7"
 }

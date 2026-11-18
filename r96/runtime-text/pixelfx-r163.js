@@ -24,7 +24,8 @@ const list=[],SENT={type:'r163-pixelfx',x:0,y:0,age:0,life:Infinity,r163Sentinel
 const tinted=new Map();
 // R980: 모바일은 픽셀 상한(__STORYWORLD_MOBILE_MEMORY_R980__.px)까지만 둔다 — 쓰면 맨 뒤로(LRU), 넘치면 오래된 것부터 버린다. 데스크톱은 40장 그대로.
 let tintedPx=0;const sheetPx=c=>c&&typeof c.getContext==='function'?(c.width|0)*(c.height|0):0;
-function tintedSheet(name,im,t){const q=c=>(c||[0,0,0]).map(v=>Math.max(0,Math.min(255,Math.round(v/16)*16))),A=q(t.a),B=q(t.b),key=name+'|'+A+'|'+B;let c=tinted.get(key);if(c){tinted.delete(key);tinted.set(key,c);return c;}
+/* R1177c: 캐시 열쇠에 그 칸의 시트 파일도 넣는다 — 덧씌우기(R976·R1177)가 같은 이름 칸을 칠한 시트로 바꿔 끼운 뒤에도 본편에서 만든 물들인 도트 시트를 다시 내던 문제 */
+function tintedSheet(name,im,t){const q=c=>(c||[0,0,0]).map(v=>Math.max(0,Math.min(255,Math.round(v/16)*16))),A=q(t.a),B=q(t.b),key=name+'|'+(meta?.[name]?.file||'')+'|'+A+'|'+B;let c=tinted.get(key);if(c){tinted.delete(key);tinted.set(key,c);return c;}
  try{const w=im.naturalWidth||im.width,h=im.naturalHeight||im.height;c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,0,0);const d=g.getImageData(0,0,w,h),px=d.data,D=A.map(v=>v*.35);
   for(let i=0;i<px.length;i+=4){if(!px[i+3])continue;const l=(px[i]*.3+px[i+1]*.59+px[i+2]*.11)/255;let r,gg,b;
    if(l<.5){const k=l/.5;r=D[0]+(A[0]-D[0])*k;gg=D[1]+(A[1]-D[1])*k;b=D[2]+(A[2]-D[2])*k;}else if(l<.85){const k=(l-.5)/.35;r=A[0]+(B[0]-A[0])*k;gg=A[1]+(B[1]-A[1])*k;b=A[2]+(B[2]-A[2])*k;}else{const k=(l-.85)/.15;r=B[0]+(255-B[0])*k*.6;gg=B[1]+(255-B[1])*k*.6;b=B[2]+(255-B[2])*k*.6;}
@@ -34,7 +35,8 @@ function tintedSheet(name,im,t){const q=c=>(c||[0,0,0]).map(v=>Math.max(0,Math.m
  while(tinted.size>40||(tinted.size>1&&tintedPx>cap)){const k=tinted.keys().next().value;tintedPx-=sheetPx(tinted.get(k));tinted.delete(k);stats.tintEvicted=(stats.tintEvicted||0)+1;}stats.tinted=(stats.tinted||0)+1;return c;}
 // play(이름, 바닥 x, y, {h: 화면에서의 키(px, 기본 영웅 키 배수 k), k, delay(초), rate(재생 속도), alpha, flip, loop, key(같은 key 는 하나만), z(띄움 px), until(이 시각에 지움), fade(until 전 이 초 동안 옅어짐, R440)})
 // R440: 반복(loop) 시트를 until 없이 부르면 지역을 나갈 때까지 바닥에 남는다(피의 육망성 소환 균열 문 = 사용자 '빨간 원 계속 남음'). 반복 시트에는 until 을 꼭 준다.
-function play(name,x,y,o={}){if(!prefs.on||!meta?.[name]||!Number.isFinite(x+y))return null;image(name);
+function play(name,x,y,o={}){{const R=window.__STORYWORLD_SAMONG_PIXEL_ART_R1177__;if(R&&typeof R.route==='function'){try{const r=R.route(name,x,y,o);if(r&&typeof r.name==='string'){name=r.name;o=r.o||o;}}catch(_){}}}/* R1177c: 사몽 에피소드 칸 길 바꾸기(기억 조각 탑 무너짐·Dots 칸은 Dots 색 그대로) */
+ if(!prefs.on||!meta?.[name]||!Number.isFinite(x+y))return null;image(name);
  if(o.key){const old=list.find(e=>e.key===o.key);if(old){old.x=x;old.y=y;if(o.until)old.until=o.until;return old;}}
  if(list.length>=MAX)list.shift();const e={name,x,y,t0:T()+(o.delay||0),rate:o.rate||1,k:o.k||1,h:o.h||0,alpha:o.alpha??1,flip:!!o.flip,loop:o.loop??!!meta[name].loop,key:o.key||null,z:o.z||0,until:o.until||0,fade:o.fade||0,tint:o.tint||null};list.push(e);stats.plays++;arm();return e;}
 // R177: 화면 자리에 진행도(0~1)로 한 칸을 바로 그린다 — 이미 진행도를 가진 기존 연출(영웅 스킬 무늬)을 프레임 애니메이션으로 바꿀 때. 그림이 아직 없으면 false.

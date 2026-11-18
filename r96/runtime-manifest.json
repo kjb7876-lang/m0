@@ -12268,9 +12268,19 @@
       "sha256": "be3e445c80d0c2a59f1f743a5b94a96ca6210a8f4ed7b98fa0917f874bc64913"
     },
     {
+      "path": "assets/r1177/ash-crimson-moths-16.webp",
+      "bytes": 161242,
+      "sha256": "d98f0be89804d6e0b81d75b5898a94344a624d1db02f7a32e433ca60772e57b7"
+    },
+    {
       "path": "assets/r1177/choir-moths-blood.webp",
       "bytes": 162620,
       "sha256": "561eac0a8a73a07557e904871e5ba1a66d5af659d30ff73bbf065aba43f5fc85"
+    },
+    {
+      "path": "assets/r1177/crimson-fissure-12.webp",
+      "bytes": 101632,
+      "sha256": "d359462a7be878e4af8db98ba2d3dadd3baec12147047c392ac7faa03b037d2b"
     },
     {
       "path": "assets/r1177/hands-blood.webp",
@@ -12283,6 +12293,11 @@
       "sha256": "5c0cf6152a0551808c87740adb9632becebd7046eaf7aca829a2366a136dba9f"
     },
     {
+      "path": "assets/r1177/memory-tower-implode-14.webp",
+      "bytes": 99762,
+      "sha256": "13e2ed70e103d7292fa6019722e6d03897eff22875bdfbb6f8cd0365917d5d12"
+    },
+    {
       "path": "assets/r1177/rift-blood.webp",
       "bytes": 95258,
       "sha256": "a9496b2f07487f0ed0e198d1ca6631fbcc81f7a69e4d366ca150d5191d410d6a"
@@ -12291,6 +12306,11 @@
       "path": "assets/r1177/s06-commander-dots-attack-8.webp",
       "bytes": 130802,
       "sha256": "6e7d202bbcb3551a8855f09456fd72e264c7c39d8700df7adbb017adb4f191e4"
+    },
+    {
+      "path": "assets/r1177/s06-commander-dots-death-8.webp",
+      "bytes": 80990,
+      "sha256": "6f57fe88343dc2311f7af046b04f8f9dab050be87df4ebadb6a85f16e901ba2f"
     },
     {
       "path": "assets/r1177/s06-commander-dots-hit-4.webp",
@@ -12336,6 +12356,11 @@
       "path": "assets/r1177/s06-rival-walk-right-8.webp",
       "bytes": 106006,
       "sha256": "1c948210926829ac68fae4d7fcbbbc22d399570a31d5d1547425815573cd9556"
+    },
+    {
+      "path": "assets/r1177/spectral-hands-20.webp",
+      "bytes": 167736,
+      "sha256": "148e8dc25dc1f98a1bb4956a5535a23f6cbe099f4cfaefa2eb2e6808d64c9f0e"
     },
     {
       "path": "assets/r1177/void-implosion-blood.webp",
@@ -55719,8 +55744,8 @@
     },
     {
       "path": "pixelfx-r163.js",
-      "bytes": 8950,
-      "sha256": "1fa59f6002dd21d6c0f498b3f26b48f6d7259c16f4b56817751500a0e8ae8bc3"
+      "bytes": 9513,
+      "sha256": "f46f5491959ee8e0b1ff3b79b850c8d6b5daa013520e37dd02517b57190f8dd0"
     },
     {
       "path": "play-r106.js",
@@ -55929,8 +55954,8 @@
     },
     {
       "path": "samong-pixel-art-r1177.js",
-      "bytes": 6464,
-      "sha256": "3cf2b84909fabb1500c95af24919ff4eaf06e0346a9a3b2e01b312142a816886"
+      "bytes": 8454,
+      "sha256": "4e5982fb735c0ed54c86e51e050c40ff34c35e816c488cb0b28186589ae10623"
     },
     {
       "path": "samong-play-r162.js",
@@ -55944,8 +55969,8 @@
     },
     {
       "path": "samong-r161.js",
-      "bytes": 21929,
-      "sha256": "9cff5c3dac061c663b5a07b2f4697c455e4359a581a55fec0b9371ef8702304c"
+      "bytes": 21973,
+      "sha256": "df4821ae7b6fb487140627b5a11d90b9b12dc4961598fbf4116d8642f2f8dbab"
     },
     {
       "path": "samong-rooms-r511.js",
@@ -56533,8 +56558,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11306,
-  "totalBytes": 1358271654,
+  "fileCount": 11311,
+  "totalBytes": 1358885613,
   "webHTMLSha256": "d7ab4417ea6e532e3533c1394e33a40a10e4e4e468c40c2eb0edb853ded2991e",
   "largest": [
     {

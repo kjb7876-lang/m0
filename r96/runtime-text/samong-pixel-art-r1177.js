@@ -18,10 +18,13 @@ const UP='assets/',ALIAS_DIR='assets/r163/pixelfx/r1177/',ALIAS=new Map();
 // 원래 칸: hands-blood 42/15, pvfx-void-implosion 14/20, pvfx-rift-portal 16/20 반복, pvfx-choir-moths 60/20 반복
 const OWN=Object.freeze({
  'pvfx-void-implosion':{file:UP+'r1177/void-implosion-blood.webp',frame:[256,256],pivot:[128,150],columns:13,frames:13,fps:13/(14/20),loop:false,src:'R411 gravity-well 11-23 → 핏빛'},
- 'pvfx-rift-portal':{file:UP+'r1177/rift-blood.webp',frame:[256,256],pivot:[128,150],columns:7,frames:7,fps:10,loop:true,src:'R411 gravity-well 6-12 → 핏빛'},
- 'pvfx-choir-moths':{file:UP+'r1177/choir-moths-blood.webp',frame:[256,256],pivot:[128,150],columns:20,frames:20,fps:12,loop:true,src:'Dots ash-moth-v2 → 흩어지는 나방'},
- 'hands-blood':{file:UP+'r1177/hands-blood.webp',frame:[256,256],pivot:[128,200],columns:6,frames:18,fps:18/(42/15),loop:false,src:'R411 tentacle-bind 0-17 → 짙은 핏빛'}});
-for(const [k,v] of Object.entries(OWN))ALIAS.set(ALIAS_DIR+k+'.webp',v.file);
+ // R1177c: 균열 문·나방·손은 Dots CX-0156SP C2·C3·C4(ROUGH r1, scripts/r1177c-samong-fx-sheets.py) — 전에 쓰던 R411 물들인 시트(rift-blood·choir-moths-blood·hands-blood)는 보존
+ 'pvfx-rift-portal':{file:UP+'r1177/crimson-fissure-12.webp',frame:[256,256],pivot:[128,160],columns:4,frames:12,fps:10,loop:true,dots:true,src:'Dots CX-0156SP C2 핏빛 땅 균열(육망성 무늬 없이)'},
+ 'pvfx-choir-moths':{file:UP+'r1177/ash-crimson-moths-16.webp',frame:[256,256],pivot:[128,128],columns:4,frames:16,fps:12,loop:true,dots:true,src:'Dots CX-0156SP C3 잿빛·핏빛 나방'},
+ 'hands-blood':{file:UP+'r1177/spectral-hands-20.webp',frame:[256,256],pivot:[128,224],columns:5,frames:20,fps:20/(42/15),loop:false,dots:true,src:'Dots CX-0156SP C4 바닥에서 솟는 핏빛 손'}});
+// R1177c: 세뇌당한 기억의 조각 탑이 깨질 때(R178 이 탑 자리에서 pvfx-void-implosion 을 부름)만 Dots C1 무너지는 탑으로 — 몹 예고 같은 다른 부름은 위 핏빛 소용돌이 그대로
+const TOWER_KEY='r1177-memory-tower',TOWER={file:'r1177/'+TOWER_KEY+'.webp',frame:[256,256],pivot:[128,240],columns:7,frames:14,fps:20,loop:false,r1177:'Dots CX-0156SP C1 기억 조각 탑 무너짐',r1177Path:UP+'r1177/memory-tower-implode-14.webp'};
+for(const [k,v] of Object.entries(OWN))ALIAS.set(ALIAS_DIR+k+'.webp',v.file);ALIAS.set(ALIAS_DIR+TOWER_KEY+'.webp',TOWER.r1177Path);
 const real=p=>typeof p==='string'&&p.startsWith(ALIAS_DIR)?ALIAS.get(p)||null:null;
 try{if(typeof readyImage==='function'){const base=readyImage;readyImage=function(p,...a){const r=real(p);return base.call(this,r||p,...a);};}
  if(typeof addImage==='function'){const base=addImage;addImage=function(p,...a){const r=real(p);return base.call(this,r||p,...a);};}}catch(e){fail(e);}
@@ -37,7 +40,9 @@ function remember(meta){for(const k of [...Object.keys(OWN),...Object.keys(P976(
 const isPixelRow=v=>!!v&&typeof v.file==='string'&&!v.file.includes('/');
 function rowFor(k,base){if(!isPixelRow(base))return null;if(OWN[k]){const {src,file,...row}=OWN[k];return {...base,...row,file:'r1177/'+k+'.webp',pivot:row.pivot.slice(),frame:row.frame.slice(),r1177:src,r1177Path:file};}
  const s=P976()?.swap?.[k];if(!s)return null;const {src,file,...row}=s;return {...base,...row,file:'r976/'+k+'.webp',pivot:row.pivot.slice(),frame:row.frame.slice(),r976:src,r976Path:file};}/* R976 칸에는 r1177 표시를 달지 않는다 — R976 이 P 에서 이 행을 펼쳐 쓰므로 표시가 새어 나가면 R976 행을 이 파일 것으로 오인 */
-function step(){const X=PX(),meta=X&&typeof X.meta==='function'?X.meta():null;if(!meta)return;remember(meta);
+// 깨진 탑은 엔진이 적 목록에서 먼저 빼므로(killEnemy 뒤에 R178 이 부름) 이 구역의 탑을 따로 기억해 둔다
+let towers=[];function seeTowers(){const r=roomNow(),L=r&&Array.isArray(r.enemies)?r.enemies.filter(e=>e&&e.r170Tower):[];for(const e of L)if(!towers.includes(e))towers.push(e);if(towers.length>24)towers=towers.slice(-24);}
+function step(){try{seeTowers();}catch(_){}const X=PX(),meta=X&&typeof X.meta==='function'?X.meta():null;if(!meta)return;remember(meta);if(!meta[TOWER_KEY])meta[TOWER_KEY]=TOWER;
  const z=zoneOf(roomNow()),ep=prefs.on&&isEpisode(z),inP=isP(z);let sw=0,rs=0;
  for(const k of Object.keys(pristine)){const own=!!OWN[k];
   if(!own&&inP&&prefs.on)continue;// P 의 R976 6종은 R976 몫
@@ -45,7 +50,11 @@ function step(){const X=PX(),meta=X&&typeof X.meta==='function'?X.meta():null;if
   else if(meta[k]!==pristine[k]&&ours.has(meta[k])){meta[k]=pristine[k];rs++;}}
  if(sw)stats.swaps++;if(rs)stats.restores++;}
 try{if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{step();}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
+// R1177c: pixelfx play 가 먼저 묻는다 — 사몽 에피소드 안에서만. ① 깨지는 탑 자리의 무너짐 → C1 탑(바닥에 세움, 물들임 없이) ② Dots 칸은 물들이지 않고 Dots 색 그대로
+function route(name,x,y,o){if(!prefs.on)return null;const r=roomNow();if(!isEpisode(zoneOf(r)))return null;o=o||{};
+ if(name==='pvfx-void-implosion'&&[...(Array.isArray(r.enemies)?r.enemies:[]),...towers].some(e=>e&&e.r170Tower&&!(e.hp>0)&&Math.abs(e.x-x)<.01&&Math.abs(e.y-y)<.01)){stats.towers=(stats.towers||0)+1;return{name:TOWER_KEY,o:{...o,z:0,k:1.35,tint:null}};}
+ const X=PX(),row=X?.meta?.()?.[name];if(row&&row===mine.get(name)&&row.dots&&o.tint)return{name,o:{...o,tint:null}};return null;}
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}try{step();}catch(e){fail(e);}}
-window.__STORYWORLD_SAMONG_PIXEL_ART_R1177__=Object.freeze({revision:REV,set,swap:OWN,resolve:p=>real(p),
+window.__STORYWORLD_SAMONG_PIXEL_ART_R1177__=Object.freeze({revision:REV,set,swap:OWN,route,TOWER_KEY,resolve:p=>real(p),
  inspect:()=>({revision:REV,prefs:{...prefs},zone:zoneOf(roomNow()),stats:{...stats},swapped:[...mine.keys()].filter(k=>PX()?.meta?.()?.[k]===mine.get(k)),lastError})});
 })();
