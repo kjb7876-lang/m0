@@ -39,6 +39,45 @@ const BOOM='assets/r946/lauren-boom.webp';
  const g0=meteor({ready:false});ok('damage/timing identical with or without sheet',JSON.stringify(g.hits)===JSON.stringify(g0.hits));
  ok('missing sheet → code rings and sheet requested',vm.runInContext('rings',g0)>0&&vm.runInContext('asked',g0).includes(BOOM)&&vm.runInContext('drawn',g0).every(x=>x.src!==BOOM));
  ok('no errors',A(g).inspect().stats.errors===0&&A(g0).inspect().stats.errors===0);}
+{// LC-06 항성 반발(사용자 2026-11-18 '홀드도 개선 적용'): 칸 밖으로 넘치던 고리를 88% 로 줄이고 가장자리 8px 를 부드럽게 해 assets/r946/lauren-repulse.webp 로.
+ // 반발이 터지는 순간 고리가 커지기 시작하는 칸(5번째, 0부터 4)부터 0.7초(REP_LIFE) 안에 24번째 칸까지. 라우렌(과 페르소나 형상, R1113 이 언주로 구움)만, EGO 판은 코드 그림 그대로.
+ const REP='assets/r946/lauren-repulse.webp';const run=(hero,ego)=>{const g=env({hero});g.room.enemies.push(mob('a',11,10));A(g).qaForce('repulse');vm.runInContext("hitEnemy(room.enemies[0],1,{kind:'basic',sourceHero:player.hero})",g);step(g,20);return g;};
+ const g=run('lauren');const d=vm.runInContext('drawn',g).filter(x=>x.src===REP);ok('repulse draws LC-06 sheet',d.length>0);
+ const fr=d.map(x=>Math.round(x.a[1]/192)*6+Math.round(x.a[0]/192));ok('repulse starts at ring-growth frame (4..6) and reaches the fade (≥20) ('+fr[0]+'..'+fr[fr.length-1]+')',fr[0]>=4&&fr[0]<=6&&Math.max(...fr)>=20);
+ ok('repulse frames never go backwards',fr.every((f,i)=>i===0||f>=fr[i-1]));
+ const g0=env({ready:false});g0.room.enemies.push(mob('a',11,10));A(g0).qaForce('repulse');vm.runInContext("hitEnemy(room.enemies[0],1,{kind:'basic',sourceHero:player.hero})",g0);step(g0,20);
+ ok('repulse damage identical with or without sheet',JSON.stringify(g.hits)===JSON.stringify(g0.hits)&&g.hits.length>0);
+ const sh=fs.existsSync(path.join(R,'runtime-text',REP))?JSON.parse(cp.execFileSync('python3',['-I','-c',`
+import json
+from PIL import Image
+im=Image.open('${R}/runtime-text/${REP}').convert('RGBA');a=im.getchannel('A');b=0
+for i in range(24):
+  x0,y0=(i%6)*192,(i//6)*192;c=a.crop((x0,y0,x0+192,y0+192)).load()
+  for y in range(192):
+    for x in range(192):
+      if (x<3 or y<3 or x>188 or y>188) and c[x,y]>0:b+=1
+print(json.dumps({'size':im.size,'low':sum(a.histogram()[1:17]),'border':b}))`],{encoding:'utf8'})):null;
+ ok('repulse sheet 1152x768, no alpha 1..16, 3px cell border empty',!!sh&&sh.size[0]===1152&&sh.size[1]===768&&sh.low===0&&sh.border===0);
+ ok('runtime-inputs lists repulse sheet',fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8').includes(REP));}
+{// LC-05b 쌍성 소멸 꼬리(HOLD: 정확한 붙는 점·반복 이음매 미인증 → 붙는 점 (200,128) 을 소멸탄 중심에 두고, 반복 이음 차이가 칸 사이 차이 범위인 것 확인 후 적용).
+ // 꼬리 시트가 있으면 보라 구 열두 개 꼬리 대신 시트(반복), 소멸탄과 같은 방향(왼쪽으로 가면 좌우 반전). 판정 그대로.
+ const TAIL='assets/r946/lauren-tail.webp';const g=env();g.room.enemies.push(mob('a',14,10,{}));g.room.enemies[0].hp=1e9;A(g).qaForce('violet');vm.runInContext("hitEnemy(room.enemies[0],1,{kind:'basic',sourceHero:player.hero})",g);step(g,24);
+ const d=vm.runInContext('drawn',g).filter(x=>x.src===TAIL);ok('violet bolt draws LC-05b tail sheet',d.length>0);
+ ok('tail frames advance (loop)',new Set(d.map(x=>x.a[0]+','+x.a[1])).size>=3);
+ const g0=env({ready:false});g0.room.enemies.push(mob('a',14,10));g0.room.enemies[0].hp=1e9;A(g0).qaForce('violet');vm.runInContext("hitEnemy(room.enemies[0],1,{kind:'basic',sourceHero:player.hero})",g0);step(g0,24);
+ ok('violet damage identical with or without tail sheet',JSON.stringify(g.hits)===JSON.stringify(g0.hits)&&g.hits.length>0);
+ const m=fs.existsSync(path.join(R,'runtime-text',TAIL))?JSON.parse(cp.execFileSync('python3',['-I','-c',`
+import json
+import numpy as np
+from PIL import Image
+a=np.array(Image.open('${R}/runtime-text/${TAIL}').convert('RGBA')).astype(float)
+cells=[a[(i//6)*192:(i//6)*192+192,(i%6)*192:(i%6)*192+192] for i in range(24)]
+pm=lambda c:c[...,:3]*c[...,3:]/255
+d=[float(np.abs(pm(cells[i])-pm(cells[(i+1)%24])).mean()) for i in range(24)]
+print(json.dumps({'size':[a.shape[1],a.shape[0]],'low':int(((a[...,3]>0)&(a[...,3]<=16)).sum()),'seam':d[23],'maxStep':max(d[:23])}))`],{encoding:'utf8'})):null;
+ ok('tail sheet 1152x768, no alpha 1..16',!!m&&m.size[0]===1152&&m.size[1]===768&&m.low===0);
+ ok('tail loop seam (24→1) within the normal step range ('+(m&&m.seam.toFixed(2))+' ≤ '+(m&&m.maxStep.toFixed(2))+')',!!m&&m.seam<=m.maxStep);
+ ok('runtime-inputs lists tail sheet',fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8').includes(TAIL));}
 {// 다른 기술은 boom 시트를 쓰지 않음
  for(const k of ['red','blue','repulse']){const g=env();g.room.enemies.push(mob('a',13,10));A(g).qaForce(k);vm.runInContext("hitEnemy(room.enemies[0],1,{kind:'basic',sourceHero:player.hero})",g);step(g,40);ok(k+' does not use boom sheet',vm.runInContext('drawn',g).every(x=>x.src!==BOOM));}}
 {// 시트 파일
