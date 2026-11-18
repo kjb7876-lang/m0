@@ -14,24 +14,29 @@ check('① 각성 전신 = Dots 사본',P&&P.art.awake.dots==='assets/r1174/pers
 check('① 상반신 못 읽으면 임시 그림으로(onerror)',/onerror=\(\)=>\{n\.onerror=null;n\.setAttribute\('src',U\(ART\.bust\.temp\)\)/.test(src));
 check('② 쌍성 소멸 오른쪽 = 구 8칸 시트, 한 번 재생(steps 8, forwards)',P&&P.art.orbs&&P.art.orbs.path==='assets/r1174/persona-orbs8.webp'&&/\['orbs','merge'\]/.test(src)&&/r1174Sheet \.95s steps\(8,jump-none\) forwards/.test(src));
 check('③ 각성 고리 = 일식 고리 12칸(12 칸 위치 + 주소 채움)',P&&P.art.sigil&&(src.match(/background-position:\d+%\s\d+%/g)||[]).length>=12&&/CSS\.replace\('__SIGIL__',U\(ART\.sigil\.path\)\)/.test(src));
-// 이미지 검사(파이썬 PIL)
+// 이미지 검사(파이썬 PIL만 — CI 에 numpy 없음)
 const py=`
-import json,numpy as np
+import json
 from PIL import Image
 A=${JSON.stringify(A)}
-o=np.array(Image.open(A+'/persona-orbs8.webp').convert('RGBA')).astype(float);s=np.array(Image.open(A+'/persona-sigil12.webp').convert('RGBA')).astype(float)
+O=Image.open(A+'/persona-orbs8.webp').convert('RGBA');S=Image.open(A+'/persona-sigil12.webp').convert('RGBA')
 b=Image.open(A+'/persona-bust.webp');w=Image.open(A+'/persona-awake.webp')
-def edge(a,C,cols,rows):
-  m=0
+def edge(im,C,cols,rows):
+  al=im.getchannel('A');m=0
   for r in range(rows):
     for c in range(cols):
-      t=a[r*C:(r+1)*C,c*C:(c+1)*C,3];m=max(m,t[0].max(),t[-1].max(),t[:,0].max(),t[:,-1].max())
+      x0,y0=c*C,r*C
+      for box in ((x0,y0,x0+C,y0+1),(x0,y0+C-1,x0+C,y0+C),(x0,y0,x0+1,y0+C),(x0+C-1,y0,x0+C,y0+C)):
+        m=max(m,al.crop(box).getextrema()[1])
   return float(m)
-rgb=o[...,:3];al=o[...,3];mx=rgb.max(-1);mn=rgb.min(-1);sat=(mx-mn)/np.maximum(mx,1)
-haze=int(((sat<.28)&(al>40)&(al<200)&(mx>120)).sum())
-C=192;f7=float(o[:,6*C:7*C,3].sum());f8=float(o[:,7*C:8*C,3].sum())
-hot=int(((s[...,0]>225)&(s[...,1]<60)&(s[...,2]<60)&(s[...,3]>0)).sum())
-print(json.dumps({'o':list(o.shape[:2]),'s':list(s.shape[:2]),'b':b.size,'w':w.size,'oe':edge(o,192,8,1),'se':edge(s,384,6,2),'haze':haze,'f7':f7,'f8':f8,'hot':hot}))`;
+haze=0
+for (r,g,bb,al) in O.getdata():
+  mx=max(r,g,bb);mn=min(r,g,bb)
+  if (mx-mn)/max(mx,1)<.28 and 40<al<200 and mx>120: haze+=1
+C=192;oa=O.getchannel('A')
+f7=float(sum(oa.crop((6*C,0,7*C,C)).getdata()));f8=float(sum(oa.crop((7*C,0,8*C,C)).getdata()))
+hot=sum(1 for (r,g,bb,al) in S.getdata() if r>225 and g<60 and bb<60 and al>0)
+print(json.dumps({'o':[O.size[1],O.size[0]],'s':[S.size[1],S.size[0]],'b':b.size,'w':w.size,'oe':edge(O,192,8,1),'se':edge(S,384,6,2),'haze':haze,'f7':f7,'f8':f8,'hot':hot}))`;
 let m=null;try{m=JSON.parse(cp.execFileSync('python3',['-I','-c',py]).toString());}catch(e){check('④ 그림 읽기',false,e.message);}
 if(m){check('④ 구 시트 8×1 칸 192 (1536×192)',m.o[0]===192&&m.o[1]===1536,JSON.stringify(m.o));
  check('④ 고리 시트 6×2 칸 384 (2304×768)',m.s[0]===768&&m.s[1]===2304,JSON.stringify(m.s));

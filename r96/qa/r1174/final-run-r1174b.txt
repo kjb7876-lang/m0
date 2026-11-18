@@ -3,6 +3,9 @@ PASS ① 각성 전신 = Dots 사본
 PASS ① 상반신 못 읽으면 임시 그림으로(onerror)
 PASS ② 쌍성 소멸 오른쪽 = 구 8칸 시트, 한 번 재생(steps 8, forwards)
 PASS ③ 각성 고리 = 일식 고리 12칸(12 칸 위치 + 주소 채움)
+<string>:16: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+<string>:20: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+<string>:21: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
 PASS ④ 구 시트 8×1 칸 192 (1536×192)
 PASS ④ 고리 시트 6×2 칸 384 (2304×768)
 PASS ④ 상반신 576×768·각성 768×960
