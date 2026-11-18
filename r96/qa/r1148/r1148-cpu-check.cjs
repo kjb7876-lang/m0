@@ -1,7 +1,7 @@
 'use strict';
 // R1148 CPU 검사 — 무한 생존 영웅 배치 창(R720)에서 777 → 히든 영웅 EGO·페르소나 해금·배치·교대.
 //  사용자 2026-11-18 07:35Z "무한생존모드에서 영웅배치 칸에서 777그냥 누르면 히든영웅에고 랑 페르소나영웅 추가되고 배치및 전환 가능하게 버그없이 서사순서상관없이 잘적용해줘"
-//  ① 빌드 연결 ② 777(키·모바일 제목 7연타)·경계값 ③ 순수 규칙(형상 영웅 목록·가격·같은 몸 겹침 금지·교대)
+//  ① 빌드 연결 ② 777(키·모바일 제목 7연타)·경계값 ③ 순수 규칙(형상 영웅 목록·가격·교대) — R1148b(사용자 07:59Z): 같은 몸 금지 규칙은 없앴다(환도·EGO·라우렌·페르소나는 서로 다른 영웅)
 //  ④ 가짜 엔진 위 동작(몸 = 원래 영웅 + 형상 표식, 교대, 엔진 영웅 창 전환, asHero·has) ⑤ 회귀(해금 전 목록 그대로)
 //  가짜 엔진은 R720 CPU 검사의 mk() 를 그대로 가져와 형상 API(EGO R1046·페르소나 R1113)와 시계만 덧붙인다.
 const fs=require('fs'),path=require('path'),vm=require('vm');
@@ -71,19 +71,19 @@ function M(o={}){let F=null;const clock={t:1000};const m=mk({...o,pre:sb=>{F=for
  ok(P.idOf({hero:'hwando',egoSovereignR1046:true})==='ego'&&P.idOf({hero:'lauren',personaHeroR1113:true})==='persona'&&P.idOf({hero:'hwando',personaHeroR1113:true})==='hwando'&&P.idOf({hero:'hwando'})==='hwando','플레이어 → 배치 id(형상 표식은 맞는 원래 영웅일 때만)');
  const env={centre:{x:0,y:0},range:5};
  let st=P.fresh('hwando');st.crystals=9999;ok(P.doBuy(st,'ego',HEROES).ok,'EGO 영입');
- let r=P.doPlace(st,'ego',{x:2,y:0},env);ok(!r.ok&&r.why==='twin','환도 조종 중엔 EGO 배치 불가(같은 몸)',r);
+ let r=P.doPlace(st,'ego',{x:2,y:0},env);ok(r.ok,'R1148b: 환도 조종 중에도 EGO 배치 가능',r);
  st=P.fresh('hunter');st.crystals=9999;P.doBuy(st,'ego',HEROES);P.doBuy(st,'hwando',HEROES);P.doBuy(st,'persona',HEROES);P.doBuy(st,'lauren',HEROES);
  ok(P.doPlace(st,'ego',{x:2,y:0},env).ok,'헌터 조종 중 EGO 배치 가능');
- r=P.doPlace(st,'hwando',{x:-2,y:0},env);ok(!r.ok&&r.why==='twin','EGO 배치 중 환도 배치 불가',r);
+ r=P.doPlace(st,'hwando',{x:-2,y:0},env);ok(r.ok,'R1148b: EGO 배치 중 환도도 배치 가능',r);
  ok(P.doPlace(st,'persona',{x:0,y:2},env).ok,'페르소나 배치 가능');
- r=P.doReplace(st,0,'lauren',HEROES);ok(!r.ok&&r.why==='twin','페르소나가 다른 자리에 있으면 라우렌으로 바꾸기 불가',r);
- r=P.doReplace(st,1,'lauren',HEROES);ok(r.ok&&st.slots[1].hero==='lauren','페르소나 자리 자체를 라우렌으로 바꾸기는 가능',r);
+ r=P.doReplace(st,0,'lauren',HEROES);ok(r.ok&&st.slots[0].hero==='lauren'&&st.slots.some(x=>x.hero==='persona'),'R1148b: 페르소나가 다른 자리에 있어도 라우렌으로 바꾸기 가능(둘 다 배치)',st.slots);
+ r=P.doReplace(st,1,'lauren',HEROES);ok(!r.ok&&r.why==='placed','이미 배치된 영웅(라우렌)으로는 바꾸지 않음',r);
  // 교대: 형상으로 바꾸면 같은 몸 자리의 영웅과 맞바꿈
  st=P.fresh('hunter');st.crystals=9999;P.doBuy(st,'ego',HEROES);P.doPlace(st,'ego',{x:2,y:0},env);
  r=P.onHeroChange(st,'ego');ok(r.swapped&&st.main==='ego'&&st.slots[0].hero==='hunter','EGO 로 교대 → 헌터가 EGO 자리',st);
  r=P.onHeroChange(st,'hwando');ok(!r.swapped&&st.main==='hwando'&&st.slots[0].hero==='hunter'&&st.owned.ego===true,'EGO→환도(같은 몸) 바꾸기: 자리 그대로, 보유 유지',st);
  st=P.fresh('hunter');P.doBuy(Object.assign(st,{crystals:999}),'ego',HEROES);P.doPlace(st,'ego',{x:2,y:0},env);
- r=P.onHeroChange(st,'hwando');ok(r.swapped&&st.main==='hwando'&&st.slots[0].hero==='hunter'&&!st.slots.some(s=>P.baseOf(s.hero)==='hwando'),'EGO 배치 중 엔진 창으로 환도 고름 → 헌터가 그 자리(같은 몸 둘이 되지 않음)',st);}
+ r=P.onHeroChange(st,'hwando');ok(!r.swapped&&st.main==='hwando'&&st.slots[0].hero==='ego','R1148b: EGO 배치 중 엔진 창으로 환도 고름 → EGO 는 자리에 그대로(서로 다른 영웅)',st);}
 
 // ── ④ 가짜 엔진 위 동작 ──
 {const m=M({ego:true,persona:true,hero:'hunter'}),A=m.api,sb=m.sb;A.qaGive(2000);
@@ -136,6 +136,15 @@ function M(o={}){let F=null;const clock={t:1000};const m=mk({...o,pre:sb=>{F=for
  // 일반 영웅 몸에는 처리기를 부르지 않는다
  const n0=seen.length;A.qaGive(999);sb.player.x=47.5;sb.player.y=51;A.buy('neon');m.run(.3);const pn=sb.room.props.filter(q=>q&&q.r720AllyProp)[1];if(pn)sb.drawProp(pn);
  ok(seen.length===n0,'일반 영웅(네온) 몸은 형상 처리기 안 탐',seen.length-n0);}
+// R1148b asOwner·alive: 이어지는 기술은 쓴 몸으로만
+{const m=M({ego:true,hero:'hwando'}),A=m.api,sb=m.sb;A.qaGive(999);sb.player.x=52.5;sb.player.y=51;const r=A.buy('ego');m.run(.3);const eb=A.bodies()[0],main=sb.player;
+ ok(r.ok&&!!eb&&eb.hero==='hwando'&&eb.egoSovereignR1046===true&&main.hero==='hwando'&&main.egoSovereignR1046!==true,'환도 조종 + EGO 배치(몸 둘 다 환도 기술 틀)',r);
+ ok(A.asOwner(eb,()=>sb.player)===eb&&sb.player===main,'asOwner(EGO 몸) → 그 몸으로 돌고 조종 환도로 복귀');
+ ok(A.asOwner(main,()=>sb.player)===main,'asOwner(조종 환도) → 조종 환도로');
+ ok(A.asOwner(eb,()=>A.asOwner(main,()=>sb.player))===main&&sb.player===main,'몸 안에서 조종 영웅 몫을 부르면 조종 영웅으로 잠깐 돌아감');
+ ok(A.alive(eb)&&A.alive(main)&&!A.alive({hero:'hwando'}),'alive: 조종·배치 몸은 참, 판에 없는 몸은 거짓');
+ const stale={hero:'hwando'};ok(A.asOwner(stale,()=>1)===undefined,'판에 없는 몸의 일은 부르지 않음');
+ A.remove(0);ok(!A.alive(eb)&&A.asOwner(eb,()=>1)===undefined,'배치 해제된 몸의 일은 부르지 않음');}
 // ⑤ 회귀: 형상 API 가 없거나 꺼져 있으면 예전과 똑같다
 {const m=mk({});ok(m.api.pure.order().join()==='hwando,seoha,neon,michaela,lauren,hunter,slayer,gunner','형상 API 없으면 목록 8명 그대로');
  m.api.open();for(let i=0;i<3;i++)m.key('7',{code:'Digit7'});ok(m.api.inspect().lastError===null,'API 없을 때 777 도 오류 없음',m.api.inspect().lastError);}

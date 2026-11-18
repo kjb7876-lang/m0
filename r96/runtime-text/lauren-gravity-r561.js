@@ -14,7 +14,7 @@ const REV='R561-gravity-dots-2',KEY='storyworld.r561.gravity',HERO='lauren';
 const PULL_R=4.6,PULL_T=1.1,PULL_V=2.4,CORE=.55,COLLAPSE_AT=1.25,COLLAPSE_R=2.4,COLLAPSE_K=.35,END=1.75;
 const CRUSH_R=2.6,CRUSH_T=.55,CRUSH_V=2.0,CRUSH_MAX=3,AIM_REACH=3.4;
 const stats={wells:0,pulledSteps:0,collapses:0,collapseHits:0,crushes:0,draws:0,errors:0,lastError:null};
-let well=null,crushes=[],bursts=[],lastRoom=null,lastT=null,prefAt=-1e9,prefOn=true;
+let wells=[],crushes=[],bursts=[],lastRoom=null,lastT=null,prefAt=-1e9,prefOn=true;
 const T=()=>{try{return typeof time==='number'?time:0;}catch(_){return 0;}};
 const fail=e=>{stats.errors++;stats.lastError=String(e&&e.message||e).slice(0,200);};
 function readOn(){try{const v=JSON.parse(localStorage.getItem(KEY)||'null');return !(v&&v.on===false);}catch(_){return true;}}
@@ -39,14 +39,16 @@ function collapse(w){stats.collapses++;const src={kind:'r561-collapse',friendly:
 // 사몽 발현(R571) 중 반경 배율: 생성 때 한 번 받아 둔다(최대 2배, 발현이 끝나도 그 결계는 끝까지 같은 크기).
 function rk(){try{const g=window.__STORYWORLD_SAMONG_SURGE_R571__;const r=g?.range?Number(g.range(1)):1;return Number.isFinite(r)&&r>0?Math.min(2,Math.max(1,r)):1;}catch(_){return 1;}}
 function curRoom(){try{return typeof room!=='undefined'?room:null;}catch(_){return null;}}
-function startWell(point,power){lastRoom=curRoom();well={x:point.x,y:point.y,t0:T(),power,k:rk(),collapsed:false,seed:(stats.wells*7919)%360};stats.wells++;}
-function startCrush(x,y){lastRoom=curRoom();if(crushes.length>=CRUSH_MAX)crushes.shift();crushes.push({x,y,t0:T(),k:rk()});stats.crushes++;}
-function cancel(){well=null;crushes=[];bursts=[];}
+const asOwnerR1148=(o,fn)=>{const D=window.__STORYWORLD_HERO_DEFENSE_R720__;if(D&&typeof D.asOwner==='function')return D.asOwner(o,fn);let p=null;try{p=player;}catch(_){}return o&&o===p?fn():undefined;};/* R1148b: 결계·짓누름은 쓴 몸(owner)마다 따로 — 라우렌·페르소나를 함께 두어도 서로 덮지 않는다. R720 이 없으면 조종 영웅일 때만 */
+const ownerNow=()=>{try{return typeof player==='object'?player:null;}catch(_){return null;}};
+function startWell(point,power){lastRoom=curRoom();const owner=ownerNow();wells=wells.filter(w=>w.owner!==owner);wells.push({x:point.x,y:point.y,t0:T(),power,k:rk(),collapsed:false,seed:(stats.wells*7919)%360,owner});stats.wells++;}
+function startCrush(x,y){lastRoom=curRoom();if(crushes.length>=CRUSH_MAX)crushes.shift();crushes.push({x,y,t0:T(),k:rk(),owner:ownerNow()});stats.crushes++;}
+function cancel(){wells=[];crushes=[];bursts=[];}
 function step(){const t=T();const rm=typeof room!=='undefined'?room:null;if(rm!==lastRoom){if(lastRoom!==null)cancel();lastRoom=rm;}
  const dt=lastT==null||t<lastT?0:Math.min(.1,t-lastT);lastT=t;
- if(!on()||heroNow()!==HERO||!player||player.hp<=0||blockedNow()){cancel();return;}
- if(well){const u=t-well.t0;if(!well.bursted&&u>=COLLAPSE_AT-BURST_LEAD){well.bursted=true;if(bursts.length>=2)bursts.shift();bursts.push({x:well.x,y:well.y,k:well.k,t0:well.t0+COLLAPSE_AT-BURST_LEAD});}if(u<PULL_T)pull(well,PULL_R*(well.k||1),PULL_V,dt);if(!well.collapsed&&u>=COLLAPSE_AT){well.collapsed=true;collapse(well);}if(u>=END)well=null;}
- crushes=crushes.filter(c=>{const u=t-c.t0;if(u<CRUSH_T)pull(c,CRUSH_R*(c.k||1),CRUSH_V,dt);return u<CRUSH_T+.25;});}
+ const ok=()=>on()&&heroNow()===HERO&&!!player&&player.hp>0&&!blockedNow();
+ wells=wells.filter(well=>asOwnerR1148(well.owner,()=>{if(!ok())return false;const u=t-well.t0;if(!well.bursted&&u>=COLLAPSE_AT-BURST_LEAD){well.bursted=true;if(bursts.length>=2)bursts.shift();bursts.push({x:well.x,y:well.y,k:well.k,t0:well.t0+COLLAPSE_AT-BURST_LEAD});}if(u<PULL_T)pull(well,PULL_R*(well.k||1),PULL_V,dt);if(!well.collapsed&&u>=COLLAPSE_AT){well.collapsed=true;collapse(well);}return u<END;})===true);
+ crushes=crushes.filter(c=>asOwnerR1148(c.owner,()=>{if(!ok())return false;const u=t-c.t0;if(u<CRUSH_T)pull(c,CRUSH_R*(c.k||1),CRUSH_V,dt);return u<CRUSH_T+.25;})===true);}
 // ---- 시전 감지 ------------------------------------------------------------------------------
 if(typeof special==='function'){const base=special;special=function(...a){let before=0,point=null;
  try{if(on()&&heroNow()===HERO&&player){before=player.specialCD;const e=typeof nearestEnemy==='function'?nearestEnemy(12):null,ang=e?Math.atan2(e.y-player.y,e.x-player.x):aim();
@@ -57,7 +59,7 @@ if(typeof fx==='function'){const base=fx;fx=function(type,x,y,opt){const r=base.
  try{const o=opt||{};if(type==='storySourceSkill'&&o.storyWER&&o.stage==='release'&&o.sourceHero===HERO&&o.sourceSlot==='r'&&o.tx==null&&on()&&heroNow()===HERO)startCrush(x,y);}catch(err){fail(err);}return r;};}
 const asHeroR720=(id,fn)=>{const D=window.__STORYWORLD_HERO_DEFENSE_R720__;return D&&typeof D.asHero==='function'?D.asHero(id,fn):fn();};/* R720-4: 다음 틱에 이어지는 기술을 그 영웅 몸(생존 배치 영웅이면 그 몸)으로 돌린다 */
 if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);
- try{if(typeof started!=='undefined'&&started)asHeroR720(HERO,step);}catch(err){fail(err);cancel();}bursts=bursts.filter(b=>T()-b.t0<BURST_T&&T()>=b.t0-.05);sentinel(!!(well||crushes.length||bursts.length));return r;};}
+ try{if(typeof started!=='undefined'&&started)step();}catch(err){fail(err);cancel();}bursts=bursts.filter(b=>T()-b.t0<BURST_T&&T()>=b.t0-.05);sentinel(!!(wells.length||crushes.length||bursts.length));return r;};}
 // ---- 그리기(효과 단계 표지 하나, 3D 기록기에는 ctx.scope 로 자리 주인을 붙인다) -------------------------
 const VIOLET='200,160,223',DEEP='74,26,120',HOT='240,216,255';
 function sc(o,f){if(typeof ctx!=='undefined'&&ctx&&typeof ctx.scope==='function')ctx.scope(o,f);else f();}
@@ -109,15 +111,15 @@ function draw(){if(typeof project!=='function'||typeof ctx==='undefined'||!ctx)r
  const ci=bursts.length?img('collapse'):null;if(ci){const {T1}=scale();for(const b of bursts){const v=t-b.t0;if(v<0)continue;const fr=Math.min(23,Math.floor(v*BURST_FPS)),q=project(b.x,b.y);
   const Wb=PULL_R*(b.k||1)*T1/SHEETS.back.span,Wc=COLLAPSE_R*(b.k||1)*T1/SHEETS.collapse.span,k=Math.min(1,fr/6),W=Wb+(Wc-Wb)*k;
   sc({id:'r561:collapse:'+b.t0.toFixed(2),kind:'effect',pxfSide:'hero',x:b.x,y:b.y},()=>cell(ci,'collapse',fr,q,W,1));}}
- if(well)hole('r561:well:'+well.t0.toFixed(2),well,t-well.t0,COLLAPSE_AT,PULL_R*(well.k||1),true);
+ for(const well of wells)hole('r561:well:'+well.t0.toFixed(2),well,t-well.t0,COLLAPSE_AT,PULL_R*(well.k||1),true);
  for(const c of crushes)hole('r561:crush:'+c.t0.toFixed(2)+':'+c.x.toFixed(1),c,t-c.t0,CRUSH_T,CRUSH_R*.8*(c.k||1),false);}
 const SENT={type:'r561-gravity',x:0,y:0,age:0,life:Infinity,r561Sentinel:true};
 function sentinel(want){try{if(typeof effects==='undefined'||!Array.isArray(effects))return;const i=effects.indexOf(SENT);if(want&&i<0)effects.push(SENT);else if(!want&&i>=0)effects.splice(i,1);SENT.age=0;
- if(want&&well){SENT.x=well.x;SENT.y=well.y;}}catch(_){}}
+ if(want&&wells.length){const well=wells[wells.length-1];SENT.x=well.x;SENT.y=well.y;}}catch(_){}}
 let wrapped=false;function wrapEffect(){if(wrapped||typeof drawEffect!=='function')return wrapped;const base=drawEffect;
  drawEffect=function(e,...a){if(e&&e.r561Sentinel){try{draw();}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};wrapped=true;return true;}
 if(!wrapEffect()&&typeof setTimeout==='function'){let n=0;(function arm(){if(wrapEffect()||++n>40)return;setTimeout(arm,250);})();}
 function set(v){try{localStorage.setItem(KEY,JSON.stringify({on:v!==false}));}catch(_){}prefAt=-1e9;return on();}
 window.__STORYWORLD_LAUREN_GRAVITY_R561__=Object.freeze({revision:REV,set,on:()=>on(),
- inspect:()=>({revision:REV,on:prefOn,well:well?{...well}:null,crushes:crushes.map(c=>({...c})),tuning:{PULL_R,PULL_T,PULL_V,CORE,COLLAPSE_AT,COLLAPSE_R,COLLAPSE_K,END,CRUSH_R,CRUSH_T,CRUSH_V,CRUSH_MAX},stats:{...stats}})});
+ inspect:()=>({revision:REV,on:prefOn,well:wells.length?(({owner,...w})=>w)(wells[wells.length-1]):null,wells:wells.map(({owner,...w})=>w),crushes:crushes.map(({owner,...c})=>c),tuning:{PULL_R,PULL_T,PULL_V,CORE,COLLAPSE_AT,COLLAPSE_R,COLLAPSE_K,END,CRUSH_R,CRUSH_T,CRUSH_V,CRUSH_MAX},stats:{...stats}})});
 })();
