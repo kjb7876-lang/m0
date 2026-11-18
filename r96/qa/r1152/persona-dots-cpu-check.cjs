@@ -33,13 +33,13 @@ const DOTS={dmark:['w-mark',2048,256],dchain:['w-chain',2048,128],dhit:['w-hit',
 let PIL=null;try{PIL=require('child_process').execFileSync('python3',['-c',`
 import json,sys
 from PIL import Image
-import numpy as np
 out={}
 for n in sys.argv[1:]:
-  a=np.array(Image.open(n).convert('RGBA')).astype(int);al=a[...,3]
-  out[n]={'size':list(Image.open(n).size),'low':int(((al>0)&(al<=16)).sum()),'edgeL':int(al[:,0::256].max()) if al.shape[1]>=256 else -1,
-   'cellEdge':int(max(al[:,i*256].max() for i in range(al.shape[1]//256))),'cellEdgeR':int(max(al[:,i*256+255].max() for i in range(al.shape[1]//256))),
-   'corner':int(max(al[:12,i*256:i*256+40].max() for i in range(al.shape[1]//256)))}
+  im=Image.open(n).convert('RGBA');W,H=im.size;al=im.getchannel('A');px=al.load();cells=W//256
+  hist=al.histogram();low=sum(hist[1:17])
+  col=lambda x:max(px[x,y] for y in range(H))
+  out[n]={'size':[W,H],'low':low,'cellEdge':max(col(i*256) for i in range(cells)),'cellEdgeR':max(col(i*256+255) for i in range(cells)),
+   'corner':max(max(px[x,y] for x in range(i*256,i*256+40) for y in range(min(12,H))) for i in range(cells))}
 print(json.dumps(out))`,...Object.values(DOTS).map(d=>path.join(ROOT,'runtime-text/assets/r1152/'+d[0]+'.webp'))],{encoding:'utf8'});PIL=JSON.parse(PIL);}catch(e){PIL=null;}
 {const A=k=>PIL&&PIL[path.join(ROOT,'runtime-text/assets/r1152/'+DOTS[k][0]+'.webp')];
  ok(!!PIL&&Object.keys(DOTS).every(k=>A(k)&&A(k).size[0]===DOTS[k][1]&&A(k).size[1]===DOTS[k][2]),'① 시트 아홉 장, 크기 맞음');
