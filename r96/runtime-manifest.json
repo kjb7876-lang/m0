@@ -12094,8 +12094,8 @@
     },
     {
       "path": "assets/r1179/mobs/index.json",
-      "bytes": 1586,
-      "sha256": "c39785329cabd8be9e36fe8847503c067eb7d6c104a55a8a89e1f45fd04b3b13"
+      "bytes": 1544,
+      "sha256": "e42630170d11ff74f38f191eaede9db0869f216942a63882970f28420cc8e384"
     },
     {
       "path": "assets/r1179/mobs/m077.webp",
@@ -12104,8 +12104,8 @@
     },
     {
       "path": "assets/r1179/mobs/m081.webp",
-      "bytes": 266684,
-      "sha256": "2dccd110b916014840668d4500daeb8e93f35a60a025c41715283e56ecf5fb45"
+      "bytes": 283920,
+      "sha256": "e0f6b1ec048e8ee2cd2efc33e010ff851e2728720acc78ba7a95a7384b796191"
     },
     {
       "path": "assets/r118/clean/assets/visual-test/hospital-boss-motion-r53.png",
@@ -55039,8 +55039,8 @@
     },
     {
       "path": "mob-art-r1179.js",
-      "bytes": 3410,
-      "sha256": "1a6c7eae0efc806fd2977f863522a74d652be4c824d6e88868ab0557da9ef96b"
+      "bytes": 3477,
+      "sha256": "b35fb3d87a5c9fef1c62cca72c1df8989eaacfe28fc9b2d0e8f6d3490b72f8df"
     },
     {
       "path": "mob-art-r290.js",
@@ -56259,7 +56259,7 @@
     }
   ],
   "fileCount": 11251,
-  "totalBytes": 1353407112,
+  "totalBytes": 1353424373,
   "webHTMLSha256": "6cae5aadda60ea48378bf25ee8acaf68ecae545df6acafb3a81d6f8a6955bfb0",
   "largest": [
     {
