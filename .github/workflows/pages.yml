@@ -230,6 +230,8 @@ jobs:
         run: node r96/qa/r152/perf-small-cpu-check.cjs
       - name: R154 image crop memory across zone reloads
         run: node r96/qa/r154/crop-memo-cpu-check.cjs
+      - name: R1137 image crop fast scan equals the engine box
+        run: node r96/qa/r1137/crop-scan.cjs
       - name: R155 decal/lamp nearest-wall grid equals the all-walls answer
         run: node r96/qa/r155/decal-grid-cpu-check.cjs
       - name: R156 R90 floor-mark nearest-wall grid equals the all-walls answer
