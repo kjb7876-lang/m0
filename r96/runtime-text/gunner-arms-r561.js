@@ -170,12 +170,14 @@ function step(){const t=T();for(const f of fx){if(!validCast(f))continue;const e
 // ---- 그림(임시 코드 이펙트) ----
 function ellW(c,R){try{const k=R/Math.SQRT2,p1=project(c.x+k,c.y-k),p2=project(c.x-k,c.y+k),w=Math.abs(p1.x-p2.x);if(w>4)return w;const p3=project(c.x+R,c.y),p0=project(c.x,c.y);return Math.max(8,Math.abs(p3.x-p0.x)*2);}catch(_){return 80;}}
 // 연쇄 레이저(임시 코드 그림 — Dots 시트가 오면 교체): 두 적 사이를 가는 코발트 광선 둘레 + 흰 심, 중간 한 번 꺾임, 닿는 적에 작은 섬광. 한 줄 4번×뿌리 2 × 파동 3이 상한이라 그림도 한 프레임 약 40개 이하.
+const X1153=()=>{try{return window.__STORYWORLD_DOTS_STATUS_R1153__||null;}catch(_){return null;}};
 function drawArcs(S,H,t,f){if(!f.arcs||!f.arcs.length)return;const M=H*.45;
  for(const ar of f.arcs){const d=t-ar.at;if(d<-.02||d>ARC.life)continue;const k=Math.max(0,Math.min(1,d/ARC.life)),fade=1-k*k,a0=ar.a.hp>0?ar.a:{x:ar.ax,y:ar.ay},b0=ar.b.hp>0?ar.b:{x:ar.bx,y:ar.by},
    p=project(a0.x,a0.y),r=project(b0.x,b0.y),ax=p.x,ay=p.y-M,bx=r.x,by=r.y-M,dx=bx-ax,dy=by-ay,len=Math.hypot(dx,dy)||1,j=Math.sin(f.seed*3+ar.z*2.1+Math.floor(t*30))*H*.22,mx=ax+dx*.5-dy/len*j,my=ay+dy*.5+dx/len*j,reach=Math.min(1,(d+.02)/.07);
    const ex=ax+(bx-ax)*reach,ey=ay+(by-ay)*reach,m=reach<.5?{x:ax+(mx-ax)*reach*2,y:ay+(my-ay)*reach*2}:{x:mx,y:my};
+   /* R1153: Dots CX-0150MX D 연쇄 레이저 몸통(가로 타일) — 시트가 그리면 코드 줄 생략 */if(!X1153()?.chain?.(ax,ay,m.x,m.y,ex,ey,H,fade,t,f.t0.toFixed(3)+':'+ar.z,(a0.x+b0.x)/2,(a0.y+b0.y)/2)){
    S.along('line',COB,ax,ay,m.x,m.y,H*.1*fade,{alpha:.85,blend:'screen'});S.along('line',COB,m.x,m.y,ex,ey,H*.1*fade,{alpha:.85,blend:'screen'});
-   S.along('line',CORE,ax,ay,m.x,m.y,H*.04*fade,{alpha:1,blend:'screen'});S.along('line',CORE,m.x,m.y,ex,ey,H*.04*fade,{alpha:1,blend:'screen'});
+   S.along('line',CORE,ax,ay,m.x,m.y,H*.04*fade,{alpha:1,blend:'screen'});S.along('line',CORE,m.x,m.y,ex,ey,H*.04*fade,{alpha:1,blend:'screen'});}
    if(reach>=1&&d<.14)S.draw('flare',CORE,bx,by,H*.5*(1-d/.14)+H*.12,H*.5*(1-d/.14)+H*.12,{alpha:.9*fade,angle:t*9});
    /* 닿는 자리에 Dots 적중 시트(Q 끝점)의 앞 4장을 작게 — 코드 섬광만이던 연쇄에 그린 그림 맛을 */if(d>=.05&&d<.05+4/15&&gsOn('impact'))gsDraw('impact',Math.min(3,Math.floor((d-.05)*15)),bx,by,H*.55/GS.impact.vis,Math.atan2(by-ay,bx-ax),fade,.5,f.t0.toFixed(3)+':a'+ar.z);}}
 function draw(){const S0=SPR();if(!S0||typeof project!=='function')return;const S={draw:(n,F,x,y,w,h,o={})=>S0.draw(n,F,x,y,w,h,{overHero:true,...o}),along:(n,F,x0,y0,x1,y1,w,o={})=>S0.along?.(n,F,x0,y0,x1,y1,w,{overHero:true,...o})};
@@ -223,6 +225,7 @@ function draw(){const S0=SPR();if(!S0||typeof project!=='function')return;const 
     S.draw('ring',COB,c.x,c.y,Wd,Wd,{alpha:.95*blink,squash:.5,angle:t*.8,blend:'screen'});S.draw('ring',CORE,c.x,c.y,Wd*1.02,Wd*1.02,{alpha:.5*blink,squash:.5,blend:'screen'});S.draw('ring',CORE,c.x,c.y,Wd*(1-k)*.9+H*.3,Wd*(1-k)*.9+H*.3,{alpha:.8*blink,squash:.5,blend:'screen'});
     for(let i=0;i<4;i++){const ra=i*Math.PI/2+t*.8,rx=Math.cos(ra)*Wd*.5,ry=Math.sin(ra)*Wd*.25;S.along('line',CORE,c.x+rx*.82,c.y+ry*.82,c.x+rx*1.08,c.y+ry*1.08,H*.06,{alpha:.9*blink});}
     S.draw('glow',COB,c.x,c.y,H*(.6+.6*k),H*(.3+.3*k),{alpha:.8*blink});
+    /* R1153: Dots CX-0150MX C 조준 고리(1.6초 동안 8칸 좁혀짐) 한 겹 — 코드 고리(위험 표시)는 그대로 */X1153()?.reticle?.(c.x,c.y,Wd,k,blink,f.c.x,f.c.y);
     if(sheetOn)drawR(f,c,Wd,el);else if(k>.55){const s=(k-.55)/.45;S.draw('pillar',CORE,c.x,c.y,H*(.9-.7*s),H*9,{alpha:.7*s,blend:'screen'});}continue;}
    const b=el-DL(f),v=Math.min(1,b/2.2),u=1-v;
    if(sheetOn){S.draw('crack',SIL,c.x,c.y,Wd*.9,Wd*.9,{alpha:.7*u,squash:.5,blend:'source-over'});drawR(f,c,Wd,el);

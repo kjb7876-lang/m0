@@ -1,0 +1,12 @@
+PASS ⓐ 상태 표시 대상 3명(영웅 + 적 둘): [{"id":"actor","keys":["burn","poison","disease","chill","bind","shock","warp","curse","hellfire"]},{"id":"murder01:r75-pack:13","keys":["poison","shock","curse"]},{"id":"murder01:r75-pack:29","keys":["burn","chill"]}]
+PASS ⓐ 영웅: 9종 모두 따로 (burn,poison,disease,chill,bind,shock,warp,curse,hellfire)
+PASS ⓐ 몸 위 오버레이가 상태마다 따로 그려짐 (burn,poison,disease,chill,bind,shock,warp,curse,hellfire)
+PASS ⓐ 머리 위 아이콘: 화면 HUD 캔버스에 영웅 9 + 적 5칸 (칠해진 화소 5717, 누적 196)
+PASS ⓐ 오류 없음 (null)
+PASS ⓑ lauren 사몽 문양 Dots 시트(뒤·앞) 그려짐 (28개)
+PASS ⓑ hunter 사몽 문양 Dots 시트(뒤·앞) 그려짐 (28개)
+PASS ⓑ slayer 사몽 문양 Dots 시트(뒤·앞) 그려짐 (28개)
+PASS ⓑ gunner 사몽 문양 Dots 시트(뒤·앞) 그려짐 (28개)
+PASS ⓒ 기억사수 R 폭격 대기 동안 Dots 조준 고리 (발사 true, 17개)
+PASS ⓓ 페이지 오류 없음 []
+ALL PASS

@@ -22,6 +22,7 @@ const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.
 const U1025=(h,a,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__,v=u&&u.mask(h,a,k);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},S1025=h=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.share(h);return Number.isFinite(v)?Math.max(0,Math.min(1,v)):1;}catch(_){return 1;}},W1025=(h,w)=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.weights(h,w);return v||w;}catch(_){return w;}},A1025=(h,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.unlocked(h,k)!==false:true;}catch(_){return true;}},O1025=id=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.summonOpen(id)!==false:true;}catch(_){return true;}};/* R1025 특수 패시브 레벨별 해금·소환 영웅 서사 확인(파일 없으면 원래 값) */
 const C1033=(h,k,o,x)=>{try{window.__STORYWORLD_PASSIVE_CUTIN_R1033__?.fire(h,k,o,x);}catch(_){}};/* R1033 세 번째 특수 패시브 컷인(1·2단·몸·끔은 그쪽에서 거름) */
 const L1025=real=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u&&typeof u.summonList==='function'?u.summonList('seoha',['seoha',real&&real.hero]):null;}catch(_){return null;}};/* R1025: 소환 영웅 = 서사 순, 레벨마다 하나씩 최대 7명 */
+const K1157=(o,x,k)=>{try{const E=window.__STORYWORLD_EGO_SUMMON_R1157__;if(E&&o&&o.r1157Summon)E.chain(o,x,k);}catch(_){}};/* R1157: EGO 가 부른 영웅이 또 소환하면 둘 다 7초 연장·같이 끝 */
 const WEIGHTS=[['collapse',.5],['heroes',.3],['arbelia',.2]];
 // ③ 시간 붕괴
 const COL_PULSES=14,COL_PULSE0=.15,COL_GAP=.48,COL_WIND=.35,COL_R=7.5,COL_SPOTS=3,COL_BOOM_R=1.3,COL_K=.45,COL_STUN=.25,COL_BOOM_T=.45,GH_GAP=.14,GH_LIFE=.45,GH_MAX=6,SPOT_GAP=.4,SPOT_LIFE=2.4,SPOT_MAX=7;
@@ -128,7 +129,7 @@ function startHeroes(base,d){if(typeof basicAttack!=='function'||typeof drawHero
 function fire(kind,o,tg){const t=T(),d=dirTo(o,tg),base={owner:o,t0:t,until:t+DUR,power:ap(),room:curRoom(),props:[],seed:(stats.procTotal*7919)%360};let x=null;
  try{if(kind==='arbelia')x=startArbelia(base,d);else if(kind==='heroes')x=startHeroes(base,d);}catch(err){fail(err);x=null;}
  if(!x){if(kind!=='collapse')stats.fallbacks++;kind='collapse';x=startCollapse(base);}
- stats.procTotal++;stats.procs[kind]++;C1033(HERO,kind,o,kind==='arbelia'?{art:[ARB_ART.idle]}:null);acts.push(x);play('r546Sp_'+HERO);say(NAMES.passive+' · '+NAMES[kind]);return x;}
+ stats.procTotal++;stats.procs[kind]++;C1033(HERO,kind,o,kind==='arbelia'?{art:[ARB_ART.idle]}:null);acts.push(x);if(x.kind!=='collapse')K1157(o,x,'until');play('r546Sp_'+HERO);say(NAMES.passive+' · '+NAMES[kind]);return x;}
 function pick(){if(forced){const f=forced;forced=null;return f;}const WS=W1025(HERO,WEIGHTS);let r=rnd()*WS.reduce((n,w)=>n+w[1],0);for(const [k,w] of WS){if(r<w)return k;r-=w;}return WS.length?WS[WS.length-1][0]:'collapse';}
 function roll(e){const o=P();if(!o||o.hero!==HERO||o.hp<=0||blockedNow()||!solo())return;const s=stateOf(o),t=T();if(t<s.readyAt||t-s.lastRoll<ROLL_GAP)return;s.lastRoll=t;stats.rolls++;preload();
  if(acts.length>=MAX_ACTS||acts.some(x=>x.owner===o))return;
@@ -248,10 +249,10 @@ function drawCollapse(x,t){const {z,T1,AH}=scale(),o=x.owner,u=t-x.t0,fade=Math.
  // 서하 발밑: 빠르게 도는 가속 시계 판 + 맞물린 톱니 둘
  const q=project(o.x,o.y),hd=sheet('haste');
  sc({id:id+':base',kind:'effect',pxfSide:'hero',x:o.x,y:o.y,groundAligned:true},()=>{if(hd)cell(hd,'haste',Math.floor(t*25),q.x,q.y,AH*2.6/SH.haste.span,'source-over',.9*fade);else dial(q.x,q.y,AH*.9,t,.7*fade,z,[[7,.6],[1.4,.85]]);
-  gear(q.x-AH*1.5,q.y+AH*.16,AH*.5,t*2.6,10,.9*fade,z);gear(q.x+AH*1.45,q.y-AH*.26,AH*.4,-t*3.4,8,.9*fade,z);});
+  /* R1153: Dots CX-0149SE B 톱니바퀴·초침 시트(없으면 코드 톱니) */if(!X1153()?.gears?.(q.x-AH*1.5,q.y+AH*.16,AH*.5,t,.9*fade,1,o.x-1.2,o.y+.6)){gear(q.x-AH*1.5,q.y+AH*.16,AH*.5,t*2.6,10,.9*fade,z);}if(!X1153()?.gears?.(q.x+AH*1.45,q.y-AH*.26,AH*.4,t+.4,.9*fade,-1,o.x+.6,o.y-1.2)){gear(q.x+AH*1.45,q.y-AH*.26,AH*.4,-t*3.4,8,.9*fade,z);}});
  // 곳곳의 시계·톱니바퀴
  const ck=sheet('clock');x.spots.forEach((s,i)=>{const v=(t-s.t0)/SPOT_LIFE,a=Math.min(1,v/.12)*Math.min(1,(1-v)/.25)*fade,p=project(s.x,s.y),R=s.size*T1*.5;if(!(a>0))return;
-  sc({id:id+':spot:'+s.t0.toFixed(2),kind:'effect',pxfSide:'hero',x:s.x,y:s.y,groundAligned:true},()=>{if(s.gear){gear(p.x,p.y,R,t*3*s.dir,10,.85*a,z);gear(p.x+R*1.45,p.y+R*.2,R*.55,-t*5.4*s.dir+.3,6,.8*a,z);}
+  sc({id:id+':spot:'+s.t0.toFixed(2),kind:'effect',pxfSide:'hero',x:s.x,y:s.y,groundAligned:true},()=>{if(s.gear){if(!X1153()?.gears?.(p.x+R*.4,p.y,R,t+s.t0,.85*a,s.dir,s.x,s.y)){gear(p.x,p.y,R,t*3*s.dir,10,.85*a,z);gear(p.x+R*1.45,p.y+R*.2,R*.55,-t*5.4*s.dir+.3,6,.8*a,z);}}
    else if(ck)cell(ck,'clock',Math.floor((t-s.t0)*30)*s.dir,p.x,p.y,R*2/SH.clock.span,'source-over',.9*a);else dial(p.x,p.y,R,t*s.dir,.85*a,z,[[6,.55],[1,.8]]);});});
  // 적 자리: 감기는 시계 → 시간 폭발(깨지는 시계 판 + 시공 틈 섬광)
  const sh=sheet('shatter'),rf=sheet('riftF');for(const m of x.marks){const p=project(m.x,m.y),R=COL_BOOM_R*T1*.5,mid=id+':mark:'+m.t0.toFixed(2)+':'+m.x.toFixed(1)+':'+m.y.toFixed(1);
@@ -288,6 +289,7 @@ function drawArbFx(x,t){const {z,T1,AH}=scale(),id='r949:arb:'+x.t0.toFixed(2);
   else{const p=project(c.x,c.y),Rs=ARB_ROOM.safe*T1*.5,hd=sheet('haste');
    sc({id:cid,kind:'effect',pxfSide:'hero',x:c.x,y:c.y,groundAligned:true},()=>{if(hd)cell(hd,'haste',Math.floor(t*12.5),p.x,p.y,Rs*2/SH.haste.span,'source-over',.5+.4*w);ring(p,Rs,PALE,Math.max(2,3*z),.6+.4*w,.06);
     if(hv!=null){const R=Rs+(ARB_ROOM.r*T1*.5-Rs)*Math.sqrt(hv),f=1-hv;if(!(X995()&&X995().wave&&X995().wave(p,R,ARB_ROOM.r*T1*.5,f,cid,c,sc))&&!(X986()&&X986().room&&X986().room(p,R,f,cid,c,sc))){ring(p,R,VIO,Math.max(2,9*z*f),f,0);ring(p,R*.86,PALE,Math.max(1,3*z),f*.8,0);}}});}}}
+const X1153=()=>{try{return window.__STORYWORLD_DOTS_STATUS_R1153__||null;}catch(_){return null;}};
 const X986=()=>{try{return window.__STORYWORLD_SEOHA_FX_R986__||null;}catch(_){return null;}};
 const X995=()=>{try{return window.__STORYWORLD_SEOHA_FX_R995__||null;}catch(_){return null;}};
 const X1005=()=>{try{return window.__STORYWORLD_SEOHA_FX_R1005__||null;}catch(_){return null;}};

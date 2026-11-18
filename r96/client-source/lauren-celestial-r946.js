@@ -13,7 +13,7 @@
  * 상태는 영웅 몸(player 객체)마다 따로 둔다: 생존 모드 배치 영웅(R720)이 player 를 몸으로 바꿔 끼워 공격할 때도 그 몸의 공격력·자리·대기를 쓴다.
  * 그림: R946-2(2026-11-13) Dots CX-0087LC 추가1 실버·보라판 시트를 씀(assets/r946, index.json) — 은빛 거성 LC-01, 심연 왜성 LC-02 구 + LC-03 바닥 원반,
  *  쌍성 소멸 충전 LC-04 + 소멸탄 LC-05, 유성 궤도 조형물 고리 LC-07. 시트가 아직 안 읽혔거나 크기가 다르면 예전 코드 그림으로 그린다.
- *  Dots 가 보류한 LC-05b 꼬리 띠·LC-06 항성 반발·LC-08 중력 폭발과 결과가 없는 LC-09 돌 파편은 코드 그림을 그대로 쓴다. 소리는 기존 R546 라우렌 공격·고유기 소리를 다시 씀.
+ *  LC-08 중력 폭발은 R1151 이 Dots r2 시트(assets/r946/lauren-boom.webp, 페르소나 형상은 R1113 이 검빨로 구움)로 붙였다. Dots 가 보류한 LC-05b 꼬리 띠·LC-06 항성 반발과 결과가 없는 LC-09 돌 파편은 코드 그림을 그대로 쓴다. 소리는 기존 R546 라우렌 공격·고유기 소리를 다시 씀.
  * 끄기: localStorage['storyworld.r946.celestial']='{"on":false}'
  */
 (()=>{'use strict';
@@ -77,7 +77,7 @@ function restoreAct(x){if(x.kind!=='meteor'||x.restored)return;x.restored=true;f
 function cancel(){for(const x of acts)restoreAct(x);acts=[];pushers=[];pullers=[];booms=[];}
 // ---- 다섯 가지 발동 ---------------------------------------------------------------------------------
 function dirTo(o,tg){let ux,uy;if(tg){ux=tg.x-o.x;uy=tg.y-o.y;}const L=Math.hypot(ux||0,uy||0);if(!(L>1e-6)){const a=aim();return {ux:Math.cos(a),uy:Math.sin(a)};}return {ux:ux/L,uy:uy/L};}
-function fire(kind,o,tg){const t=T(),power=ap(),k=Math.min(2,Math.max(1,surge('range',1))),{ux,uy}=dirTo(o,tg),base={kind,owner:o,t0:t,power,k,ux,uy,seed:(stats.procTotal*7919)%360,ego:egoOwner(o)};
+function fire(kind,o,tg,extra){const t=T(),power=ap()*(extra&&Number.isFinite(extra.powerScale)&&extra.powerScale>0?extra.powerScale:1),k=Math.min(2,Math.max(1,surge('range',1))),{ux,uy}=dirTo(o,tg),base={kind,owner:o,t0:t,power,k,ux,uy,seed:(stats.procTotal*7919)%360,ego:egoOwner(o),...(extra&&extra.egoTint?{egoTint:extra.egoTint}:{})};
  if(base.ego){stats.procTotal+=1;stats.procs[kind]+=1;}/* R1094: EGO 판은 라우렌 컷인을 띄우지 않음 */else{stats.procTotal++;stats.procs[kind]++;C1033(HERO,kind,o);}
  if(kind==='repulse'){const c={x:o.x,y:o.y};stats.repulseCentres.push(c.x+','+c.y);if(stats.repulseCentres.length>20)stats.repulseCentres.shift();
   for(const e of enemiesNow()){if(hiddenActor(e))continue;const d=dist(e,c);if(d>REP_R*k||!lineOk(c,e))continue;deal(e,power*REP_K,'repulse');
@@ -101,7 +101,19 @@ function pick(s,t){if(forced){const f=forced;forced=null;return f;}if(comboOf(s,
 //   회전·명도를 낮춘다(시트 대조: 은빛 구 → 언주, 청 → 주홍, 무라사키 → 먹 테 주홍). 필터는 장면 기록(ctx.scope) 안에서 다시 건다(밖에서 건 값은 기록 칸이 지움).
 //   영웅 몸 가까이(1.2칸 안)에서는 옅게(가장 가까이 .4배), 전체 알파 .8배.
 const EGO_KINDS=['red','blue'],EGO_FILTER='saturate(6) hue-rotate(110deg) brightness(.72) contrast(1.3)',EGO_ALPHA=.8,EGO_NEAR=1.2,EGO_NEAR_MIN=.4;
-let egoPaint=false;
+// R1145(사용자 11-18 05:55Z "r 사용시 은빛거성 동시 사용하도록 심연왜성(백+빨강 색섞어서) … 묵월발동시 항성 반발도 백적색으로"): EGO 가 R·묵월에 이어 내는 판은 흰색이 섞인 붉은빛.
+//  같은 색상 회전에 채도는 덜 올리고 명도를 올린다(언주·먹 판보다 밝고 희다). 라우렌 본인 그림에는 걸지 않는다.
+const EGO_WR_FILTER='hue-rotate(76deg) saturate(1.2) brightness(1.25)';
+// R1145: 이펙트 수묵 색(R1095)이 켜져 있으면 그쪽이 렌더 단계에서 이 그림들을 이미 붉은 쪽으로 돌린다(실측: 뒤에 hue-rotate(76deg) saturate(1.46) 이 붙음).
+//  여기서도 색상을 돌리면 두 번 돌아 심연 왜성이 초록으로 나왔다(R1095 가 들어온 뒤부터의 기존 버그, 확률 발동 판도 같음) → R1095 가 켜져 있으면 색상은 돌리지 않고 명도만 맞춘다.
+const EGO_INK_FILTER='brightness(.8) contrast(1.25)',EGO_WR_INK_FILTER='saturate(.75) brightness(1.3)';
+const inkFxLive=()=>{try{return !!window.__STORYWORLD_INK_FX_R1095__?.active?.();}catch(_){return false;}};
+const egoFilterOf=x=>{const ink=inkFxLive();return x&&x.egoTint==='wr'?(ink?EGO_WR_INK_FILTER:EGO_WR_FILTER):(ink?EGO_INK_FILTER:EGO_FILTER);};
+let egoPaint=false,egoFilterNow=EGO_FILTER;
+// EGO 가 직접 내는 길(확률 굴림·대기와 따로): 은빛 거성·심연 왜성·항성 반발만. 라우렌·환도 본인은 거부. 쌍성 소멸 조건(redAt·blueAt)은 건드리지 않는다.
+function egoCast(kind,tg,opt){try{const o=P();if(!on()||!o||!egoOwner(o)||!(o.hp>0)||blockedNow()||!['red','blue','repulse'].includes(kind))return false;
+  const sc0=opt&&Number.isFinite(opt.scale)?Math.min(1,Math.max(.1,opt.scale)):1;lastRoom=curRoom();stats.egoCasts=(stats.egoCasts||0)+1;
+  fire(kind,o,tg&&Number.isFinite(tg.x)&&Number.isFinite(tg.y)?{x:tg.x,y:tg.y}:null,{egoTint:'wr',powerScale:sc0});return true;}catch(err){fail(err);return false;}}
 // 순수 계산: EGO 판 그림 알파(영웅과 떨어진 칸 거리 d)
 function egoAlpha(d){d=Number.isFinite(d)?Math.max(0,d):EGO_NEAR;return EGO_ALPHA*(d>=EGO_NEAR?1:EGO_NEAR_MIN+(1-EGO_NEAR_MIN)*d/EGO_NEAR);}
 function egoOwner(o){try{if(!o||o.hero===HERO)return false;const K=window.__STORYWORLD_EGO_KIT_R1094__;return !!(K&&K.active&&K.active());}catch(_){return false;}}
@@ -153,7 +165,7 @@ function step(){const t=T(),rm=curRoom();if(rm!==lastRoom){if(lastRoom!==null)ca
  if(!on()||blockedNow()){cancel();return;}
  {const o=P();if(o&&(o.hero===HERO||egoOwner(o)))askSheets();}
  acts=acts.filter(x=>{try{if(x.kind!=='meteor'&&x.kind!=='repulse'&&!ownerOk(x.owner)&&x.kind!=='red'){return false;}const keep=stepAct(x,t,dt);if(!keep)restoreAct(x);return keep;}catch(err){fail(err);restoreAct(x);return false;}});
- runPushers(dt);pullers=pullers.filter(p=>{if(t>p.until)return false;pull(p.c,p.r,MET_PULL_V,.4,dt);return true;});booms=booms.filter(b=>t-b.t0<.75);}
+ runPushers(dt);pullers=pullers.filter(p=>{if(t>p.until)return false;pull(p.c,p.r,MET_PULL_V,.4,dt);return true;});booms=booms.filter(b=>t-b.t0<Math.max(.75,BOOM_LIFE));}
 if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);
  try{if(typeof started==='undefined'||started)step();}catch(err){fail(err);cancel();}sentinel(acts.length>0||booms.length>0);return r;};}
 // ---- 그리기(효과 표지 하나, 3D 기록기에는 ctx.scope 로 자리 주인을 붙인다) -----------------------------------------
@@ -164,8 +176,13 @@ const RED=PALE,RED_HOT=SILVER,BLUE=DEEP,BLUE_HOT=DEEP_HOT;
 const SDIR='assets/r946/',SCELL=192,SCOLS=6;
 const SHEETS={red:{n:'lauren-red',frames:24,fps:12.5,loop:true,piv:[141,137],body:145},blue:{n:'lauren-blue',frames:24,fps:12.5,loop:true,piv:[128,126],body:127},
  disk:{n:'lauren-blue-disk',frames:24,fps:12.5,loop:true,piv:[127,134],body:192},fuse:{n:'lauren-fuse',frames:12,fps:24,loop:false,piv:[128,128],body:107,crop:[60,60,196,200]},
- violet:{n:'lauren-violet',frames:24,fps:12.5,loop:true,piv:[144,128],body:150},aura:{n:'lauren-aura',frames:24,fps:12.5,loop:true,piv:[128,124],body:194}};
-const SPATH=k=>SDIR+SHEETS[k].n+'.webp';let sheetsOn=true,askAt=-1e9;
+ violet:{n:'lauren-violet',frames:24,fps:12.5,loop:true,piv:[144,128],body:150},aura:{n:'lauren-aura',frames:24,fps:12.5,loop:true,piv:[128,124],body:194},
+ // R1151 Dots CX-0141CE LC-08 중력 폭발 r2(흡입 1~10칸 → 바깥으로 터짐 11~16칸 → 먹 잔광 17~24칸). 충돌 순간을 11번째 칸(0.8초)에 맞춰 그 뒤만 한 번 재생.
+ boom:{n:'lauren-boom',frames:24,fps:12.5,loop:false,piv:[128,128],body:186},
+ // R1151 Dots CX-0141CE LC-06 항성 반발 r1(HOLD → 88% 로 줄여 칸 안으로·가장자리 부드럽게, qa/r1151/make-repulse.py). 납작한 바닥 고리라 바닥 맞춤 없이 그린다. 고리 지름 ≈ 칸의 84%(256 기준 214).
+ repulse:{n:'lauren-repulse',frames:24,fps:12.5,loop:false,piv:[128,128],body:214},tail:{n:'lauren-tail',frames:24,fps:12.5,loop:true,piv:[200,128],body:185}};
+const BOOM_AT=.8,BOOM_LIFE=(24/12.5)-BOOM_AT;
+const SPATH=k=>(SHEETS[k].dir||SDIR)+SHEETS[k].n+'.webp';let sheetsOn=true,askAt=-1e9;
 // 크기가 시트 규격(6열×192)과 다르면 쓰지 않는다(엉뚱한 그림·덜 읽힌 그림 방지)
 function simg(k){try{const r=typeof readyImage==='function'?readyImage(SPATH(k)):null,im=r&&r.image;if(!im)return null;const w=im.naturalWidth||im.width||0,h=im.naturalHeight||im.height||0,rows=Math.ceil(SHEETS[k].frames/SCOLS);return w===SCOLS*SCELL&&h===rows*SCELL?im:null;}catch(_){return null;}}
 // 엔진 그림 저장소는 지역 이동 때 비워질 수 있다 → 안 읽힌 시트만 게임 시간 2초마다 다시 부탁
@@ -176,7 +193,7 @@ function sheet(k,age,x,y,d,o={}){if(!sheetsOn)return false;const im=simg(k);if(!
  ctx.save();try{ctx.globalAlpha*=Math.max(0,Math.min(1,o.alpha??1));ctx.translate(x,y);if(o.flip)ctx.scale(-1,1);if(o.angle)ctx.rotate(o.angle);ctx.drawImage(im,sx+c[0]*K,sy+c[1]*K,(c[2]-c[0])*K,(c[3]-c[1])*K,(c[0]-m.piv[0])/256*w,(c[1]-m.piv[1])/256*h,(c[2]-c[0])/256*w,(c[3]-c[1])/256*h);stats.sheetDraws++;}finally{ctx.restore();}return true;}
 // 진행 방향(화면) → 오른쪽 그림을 뒤집을지·기울일지(광원 왼쪽 위가 크게 돌지 않게 ±0.6 rad 까지)
 function heading(x){const a=project(x.x,x.y),b=project(x.x+(x.ux||1),x.y+(x.uy||0)),dx=b.x-a.x,dy=b.y-a.y;return {flip:dx<0,angle:Math.max(-.6,Math.min(.6,Math.atan2(dy,Math.abs(dx)||1e-6)))};}
-function sc(o,f){if(egoPaint){const g=f,pl=P(),d=pl&&o&&Number.isFinite(o.x)&&Number.isFinite(o.y)?Math.hypot(o.x-pl.x,o.y-pl.y):NaN,a=egoAlpha(d);f=()=>{ctx.save();try{ctx.filter=EGO_FILTER;ctx.globalAlpha*=a;stats.egoDraws=(stats.egoDraws||0)+1;return g();}finally{ctx.restore();}};}
+function sc(o,f){if(egoPaint){const g=f,pl=P(),d=pl&&o&&Number.isFinite(o.x)&&Number.isFinite(o.y)?Math.hypot(o.x-pl.x,o.y-pl.y):NaN,a=egoAlpha(d);f=()=>{ctx.save();try{ctx.filter=egoFilterNow;ctx.globalAlpha*=a;stats.egoDraws=(stats.egoDraws||0)+1;return g();}finally{ctx.restore();}};}
  if(typeof ctx!=='undefined'&&ctx&&typeof ctx.scope==='function')ctx.scope(o,f);else f();}
 function scale(){const z=typeof zoom==='number'&&zoom>0?zoom:1,TL=typeof TILE==='number'?TILE:34;return {z,T1:TL*z*Math.SQRT2,AH:typeof actorHeight==='function'?actorHeight():66*z};}
 function glowOrb(x,y,r,core,mid,alpha){ctx.save();try{ctx.globalAlpha*=alpha;const prev=ctx.globalCompositeOperation;ctx.globalCompositeOperation='lighter';
@@ -193,7 +210,9 @@ function swirl(x,y,r,col,spin,n,alpha){ctx.save();try{ctx.globalAlpha*=alpha;ctx
 function ring(q,R,col,w,alpha,fillA){ctx.save();try{ctx.globalAlpha*=alpha;const prev=ctx.globalCompositeOperation;ctx.globalCompositeOperation='lighter';if(fillA){ctx.fillStyle=`rgba(${col},${fillA})`;ctx.beginPath();ctx.ellipse(q.x,q.y,R,R*.5,0,0,Math.PI*2);ctx.fill();}
  ctx.lineWidth=w;ctx.strokeStyle=`rgba(${col},.9)`;ctx.beginPath();ctx.ellipse(q.x,q.y,R,R*.5,0,0,Math.PI*2);ctx.stroke();ctx.globalCompositeOperation=prev;}finally{ctx.restore();}}
 function drawRepulse(x,t){const u=t-x.t0,v=Math.min(1,u/REP_LIFE),q=project(x.x,x.y),{z,T1,AH}=scale(),R=REP_R*x.k*T1*.5*(.25+.85*Math.sqrt(v)),a=1-v,id='r946:repulse:'+x.t0.toFixed(2);
- sc({id:id+':ring',kind:'effect',pxfSide:'hero',x:x.x,y:x.y,groundAligned:true},()=>{ring(q,R,VIO_HOT,Math.max(2,9*z*a),a,.12*a);ring(q,R*.72,VIO,Math.max(1,3*z),a*.8,0);});
+ // R1151: LC-06 시트가 있으면 바닥 고리 대신 시트(고리가 커지기 시작하는 5번째 칸 → 24번째 칸을 REP_LIFE 동안). EGO 판(egoPaint)은 코드 그림 그대로.
+ let rs=false;if(!egoPaint)sc({id:id+':sheet',kind:'effect',pxfSide:'hero',x:x.x,y:x.y},()=>{rs=sheet('repulse',(4+v*19.99)/12.5,q.x,q.y,REP_R*x.k*T1*1.1);});
+ if(!rs)sc({id:id+':ring',kind:'effect',pxfSide:'hero',x:x.x,y:x.y,groundAligned:true},()=>{ring(q,R,VIO_HOT,Math.max(2,9*z*a),a,.12*a);ring(q,R*.72,VIO,Math.max(1,3*z),a*.8,0);});
  sc({id:id+':dome',kind:'effect',pxfSide:'hero',x:x.x,y:x.y+.01},()=>{ctx.save();try{ctx.globalAlpha*=a*.85;const prev=ctx.globalCompositeOperation;ctx.globalCompositeOperation='lighter';const cy=q.y-AH*.5;
   ctx.strokeStyle=`rgba(${VIO_HOT},.8)`;ctx.lineWidth=Math.max(1.5,4*z*a);ctx.beginPath();ctx.ellipse(q.x,cy,R*.9,AH*(.55+.5*v),0,Math.PI,Math.PI*2);ctx.stroke();
   ctx.lineWidth=Math.max(1,2*z);for(let i=0;i<14;i++){const an=i*Math.PI*2/14+(x.seed||0),r0=R*.35,r1=R*(.6+.4*v);ctx.strokeStyle=`rgba(${VIO_HOT},${.55*a})`;ctx.beginPath();ctx.moveTo(q.x+Math.cos(an)*r0,q.y+Math.sin(an)*r0*.5-AH*.15);ctx.lineTo(q.x+Math.cos(an)*r1,q.y+Math.sin(an)*r1*.5-AH*.15);ctx.stroke();}
@@ -216,8 +235,8 @@ function drawViolet(x,t){const {z,AH}=scale(),u=t-x.t0,lift=AH*.55,id='r946:viol
  const s=project(x.sx,x.sy),q=project(x.x,x.y),r=AH*.32,fade=x.end==null?1:Math.max(0,1-(t-x.end)/VIO_TRAIL);
  sc({id:id+':scar',kind:'effect',pxfSide:'hero',x:(x.sx+x.x)/2,y:(x.sy+x.y)/2,groundAligned:true},()=>{ctx.save();try{ctx.globalAlpha*=fade*.8;ctx.strokeStyle=`rgba(${VOID},.7)`;ctx.lineWidth=Math.max(2,r*.35);ctx.beginPath();ctx.moveTo(s.x,s.y);ctx.lineTo(q.x,q.y);ctx.stroke();
   const prev=ctx.globalCompositeOperation;ctx.globalCompositeOperation='lighter';ctx.strokeStyle=`rgba(${VIO},.7)`;ctx.lineWidth=Math.max(1,1.6*z);for(const sgn of [-1,1]){ctx.beginPath();ctx.moveTo(s.x,s.y+sgn*r*.22);ctx.lineTo(q.x,q.y+sgn*r*.22);ctx.stroke();}ctx.globalCompositeOperation=prev;}finally{ctx.restore();}});
- // 혜성 꼬리: 지나온 길을 따라 작아지고 옅어지는 보라 구 열두 개(직사각형 띠 대신)
- sc({id:id+':trail',kind:'effect',pxfSide:'hero',x:(x.sx+x.x)/2,y:(x.sy+x.y)/2},()=>{const L=Math.hypot(q.x-s.x,q.y-s.y),n=12;for(let i=n;i>=1;i--){const f=i/n,d=Math.min(L,r*7)*f,px=q.x+(s.x-q.x)/(L||1)*d,py=q.y+(s.y-q.y)/(L||1)*d;
+ // 혜성 꼬리: R1151 Dots LC-05b 꼬리 시트(은빛 끝이 구에 붙음), 시트가 없으면 지나온 길을 따라 작아지는 보라 구 열두 개
+ sc({id:id+':trail',kind:'effect',pxfSide:'hero',x:(x.sx+x.x)/2,y:(x.sy+x.y)/2},()=>{const L=Math.hypot(q.x-s.x,q.y-s.y),n=12;if(sheet('tail',t-x.t0-VIO_CHARGE,q.x,q.y-lift,Math.max(r*1.5,Math.min(L,r*7)),{...heading(x),alpha:fade}))return;for(let i=n;i>=1;i--){const f=i/n,d=Math.min(L,r*7)*f,px=q.x+(s.x-q.x)/(L||1)*d,py=q.y+(s.y-q.y)/(L||1)*d;
    ctx.save();try{ctx.globalAlpha*=fade*(1-f)*.75;const prev=ctx.globalCompositeOperation;ctx.globalCompositeOperation='lighter';ctx.fillStyle=`rgba(${i%2?VIO:VIO_HOT},.8)`;ctx.beginPath();ctx.arc(px,py-lift,r*(1-.75*f),0,Math.PI*2);ctx.fill();ctx.globalCompositeOperation=prev;}finally{ctx.restore();}}});
  if(x.end==null||t-x.end<.15)sc({id:id+':orb',kind:'effect',pxfSide:'hero',x:x.x,y:x.y},()=>{if(sheet('violet',t-x.t0-VIO_CHARGE,q.x,q.y-lift,r*2,heading(x)))return;glowOrb(q.x,q.y-lift,r,VIO_HOT,VIO,1);ctx.save();try{ctx.fillStyle=`rgba(${VOID},.9)`;ctx.beginPath();ctx.arc(q.x,q.y-lift,r*.42,0,Math.PI*2);ctx.fill();}finally{ctx.restore();}swirl(q.x,q.y-lift,r,VIO_HOT,t*11,4,1);});}
 function rockShape(cx,cy,s,shape){const pts=[[-.5,.1],[-.35,-.38],[.05,-.5],[.42,-.3],[.5,.12],[.2,.42],[-.28,.4]];ctx.beginPath();pts.forEach(([px,py],i)=>{const j=1+((shape*7+i*3)%5-2)*.06,X=cx+px*s*j,Y=cy+py*s*.8*j;if(i)ctx.lineTo(X,Y);else ctx.moveTo(X,Y);});ctx.closePath();}
@@ -239,12 +258,14 @@ function drawMeteor(x,t){const {z,AH}=scale(),o=x.owner&&ownerOk(x.owner)?x.owne
      if(typeof sprite==='function')sprite(r.path,q.x+wob,cy,h,{alpha:1});else{const w=h*b.w/b.h;if(b.x!=null)ctx.drawImage(row.image,b.x,b.y,b.w,b.h,q.x-w/2+wob,cy-h,w,h);else ctx.drawImage(row.image,q.x-w/2+wob,cy-h,w,h);}stats.draws++;return;}}
    const s=Math.max(AH*.62,h);rockFaces(q.x+wob,cy-s*.4,s,r.shape||i,z);stats.draws++;
   }finally{ctx.restore();}});});}
-function drawBoom(b,t){const {z,T1,AH}=scale(),v=Math.min(1,(t-b.t0)/.75),q=project(b.x,b.y),R=MET_R*b.k*T1*.5*(.3+.8*Math.sqrt(v)),a=1-v,id='r946:meteor:boom:'+b.t0.toFixed(2)+':'+b.x.toFixed(1);
+function drawBoom(b,t){const {z,T1,AH}=scale(),u0=t-b.t0,v=Math.min(1,u0/.75),q=project(b.x,b.y),R=MET_R*b.k*T1*.5*(.3+.8*Math.sqrt(v)),a=1-v,id='r946:meteor:boom:'+b.t0.toFixed(2)+':'+b.x.toFixed(1);
  sc({id:id,kind:'effect',pxfSide:'hero',x:b.x,y:b.y,groundAligned:true},()=>{ring(q,R,VIO_HOT,Math.max(2,8*z*a),a,.18*a);ring(q,R*.6,VIO,Math.max(1,3*z),a,0);
   ctx.save();try{ctx.globalAlpha*=a;ctx.fillStyle=`rgba(${VOID},.55)`;ctx.beginPath();ctx.ellipse(q.x,q.y,R*.35,R*.17,0,0,Math.PI*2);ctx.fill();}finally{ctx.restore();}});
- if(v<.35)sc({id:id+':flash',kind:'effect',pxfSide:'hero',x:b.x,y:b.y+.01},()=>glowOrb(q.x,q.y-AH*.3,AH*.45*(1-v/.35)+AH*.1,VIO_HOT,VIO,1-v/.35));}
+ // R1151: LC-08 시트가 있으면 섬광 구 대신 시트(충돌 = 11번째 칸). 바닥 고리(범위 표시)는 그대로 둔다.
+ let sh=false;if(u0<BOOM_LIFE)sc({id:id+':sheet',kind:'effect',pxfSide:'hero',x:b.x,y:b.y+.01},()=>{sh=sheet('boom',BOOM_AT+u0,q.x,q.y-AH*.3,MET_R*b.k*T1*1.05);});
+ if(!sh&&v<.35)sc({id:id+':flash',kind:'effect',pxfSide:'hero',x:b.x,y:b.y+.01},()=>glowOrb(q.x,q.y-AH*.3,AH*.45*(1-v/.35)+AH*.1,VIO_HOT,VIO,1-v/.35));}
 function draw(){if(typeof project!=='function'||typeof ctx==='undefined'||!ctx)return;const t=T();
- for(const x of acts){try{if(x.kind==='repulse')drawRepulse(x,t);else if(x.ego){egoPaint=true;try{if(x.kind==='red')drawRed(x,t);else if(x.kind==='blue')drawBlue(x,t);else if(x.kind==='violet')drawViolet(x,t);}finally{egoPaint=false;}}else if(x.kind==='red')drawRed(x,t);else if(x.kind==='blue')drawBlue(x,t);else if(x.kind==='violet')drawViolet(x,t);else if(x.kind==='meteor')drawMeteor(x,t);}catch(err){fail(err);}}
+ for(const x of acts){try{if(x.kind==='repulse'){if(x.ego&&x.egoTint==='wr'){egoPaint=true;egoFilterNow=egoFilterOf(x);try{drawRepulse(x,t);}finally{egoPaint=false;egoFilterNow=EGO_FILTER;}}else drawRepulse(x,t);}else if(x.ego){egoPaint=true;egoFilterNow=egoFilterOf(x);try{if(x.kind==='red')drawRed(x,t);else if(x.kind==='blue')drawBlue(x,t);else if(x.kind==='violet')drawViolet(x,t);}finally{egoPaint=false;egoFilterNow=EGO_FILTER;}}else if(x.kind==='red')drawRed(x,t);else if(x.kind==='blue')drawBlue(x,t);else if(x.kind==='violet')drawViolet(x,t);else if(x.kind==='meteor')drawMeteor(x,t);}catch(err){fail(err);}}
  for(const b of booms){try{drawBoom(b,t);}catch(err){fail(err);}}stats.draws++;}
 const SENT={type:'r946-celestial',x:0,y:0,age:0,life:Infinity,r946Sentinel:true};
 function sentinel(want){try{if(typeof effects==='undefined'||!Array.isArray(effects))return;const i=effects.indexOf(SENT);if(want&&i<0)effects.push(SENT);else if(!want&&i>=0)effects.splice(i,1);SENT.age=0;
@@ -259,7 +280,7 @@ window.__STORYWORLD_LAUREN_CELESTIAL_R946__=Object.freeze({revision:REV,set,on:(
  qaForce:k=>{forced=KINDS.includes(k)?k:null;return forced;},qaRandom:f=>{rng=typeof f==='function'?f:null;return !!rng;},
  qaProps:()=>{const rm=curRoom();return (rm&&Array.isArray(rm.props)?rm.props:[]).filter(eligible).map(a=>({id:a.id,x:a.x,y:a.y,height:a.height,path:a.path}));},
  qaSheets:v=>{sheetsOn=v!==false;return sheetsOn;},sheets:()=>Object.fromEntries(Object.keys(SHEETS).map(k=>[k,{path:SPATH(k),ready:!!simg(k)}])),
- egoAlpha,egoFilter:EGO_FILTER,
+ egoAlpha,egoFilter:EGO_FILTER,egoWrFilter:EGO_WR_FILTER,egoInkFilter:EGO_INK_FILTER,egoWrInkFilter:EGO_WR_INK_FILTER,egoCast,
  qaReset:()=>{const o=P();if(o){const s=stateOf(o);s.readyAt=-1e9;s.lastRoll=-1e9;}return true;},
  inspect:()=>{const o=P(),s=o?owners.get(o):null;return {revision:REV,on:prefOn,owners:ownerCount,comboReady:!!(s&&comboOf(s,T())),
   acts:acts.map(x=>({kind:x.kind,x:x.x,y:x.y,t0:x.t0,rocks:x.rocks?x.rocks.map(r=>({propId:r.propId,state:r.state})):undefined})),

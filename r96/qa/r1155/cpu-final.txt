@@ -1,0 +1,78 @@
+ok   hidden-hero-sfx-r1155.js 있음
+ok   hidden-hero-sfx-r1155.js runtime-text 사본 = client-source
+ok   태그: R541·R1145·R1144 뒤, combat-r118 앞
+ok   pages.yml CPU 검사 줄
+ok   공개 확인 목록
+ok   runtime-inputs 에 새 파일
+ok   tick 은 직접 감싸지 않음
+ok   새 키 없음
+ok   코드에 유료 생성 호출 없음
+ok   전용 종류 31개 이상
+ok   모든 소리 파일 있음
+ok   파일마다 60KB 이하
+ok   전용 폴더(assets/r1155/sfx)만 씀 — 환도·라우렌 파일 재사용 없음
+ok   필요한 종류 모두 표에 있음
+ok   자주 나는 소리(기본 공격·연타)는 변주 2개 이상
+ok   API __STORYWORLD_HIDDEN_HERO_SFX_R1155__
+ok   EGO 기본 공격 → r546Atk_ego
+ok   프로필 등록(전용 경로)
+ok   쾌적 계층 역할 별칭(공격·스킬)
+ok   EGO 때 이미 환도 평타로 바뀐 종류도 EGO 것으로
+ok   관계없는 종류(피격·구르기)는 그대로
+ok   EGO 형상을 끄면(환도 본인) 예전 그대로
+ok   페르소나 기본 공격 → r546Atk_persona
+ok   라우렌 본인은 그대로
+ok   형상 없는 환도는 그대로
+ok   다른 영웅은 그대로(형상 판정은 몸 영웅까지 확인)
+ok   Q: specialCD 가 막 걸림 → ego_q
+ok   쿨다운 변화 없는 special(소환·적 탄 등) → 그대로
+ok   W: ready 가 막 걸림 → ego_w
+ok   E: ready 가 막 걸림 → ego_e
+ok   R: ready 가 막 걸림 → ego_r
+ok   잠긴 칸(time+1e6 밀어 올림)은 시전으로 안 봄
+ok   한 시전은 한 번만 바꿈(같은 프레임 두 번째 special 은 그대로)
+ok   페르소나 Q
+ok   페르소나 R
+ok   POST_HOOKS 없어도 소리 호출마다 기준값을 새로 잡아 Q 판별
+ok   묵월 → ego_moon
+ok   칠묵영 → ego_clones
+ok   삼협묵희 → ego_trio
+ok   삼협묵희 1.2초 뒤 일격 special → ego_trioHit
+ok   일격 시간이 지나면 그대로
+ok   이름 글자와 소리가 다른 차례(작업)면 묶지 않음
+ok   환도 본인의 묵월은 예전 소리
+ok   EGO 은빛 거성 → ego_star
+ok   EGO 심연 왜성 → ego_abyss
+ok   EGO 항성 반발 → ego_repulse
+ok   EGO 쌍성 소멸(R1094 EGO판) → ego_violet — 라우렌 소리 아님
+ok   act 를 못 읽으면 EGO 천체 기본값(은빛 거성) — 라우렌 소리는 안 남
+ok   (진) 항성 반발
+ok   (진) 은빛 거성
+ok   (진) 심연 왜성
+ok   (진) 쌍성 소멸 시작 → 충전
+ok   (진) 쌍성 소멸 발사(레이저 7줄) → 발사
+ok   (진) 유성 궤도
+ok   라우렌 본인 천체 공명은 예전 소리
+ok   EGO 연참 틱
+ok   EGO 일섬 7연(1~6 / 7타)
+ok   페르소나 중력 틱
+ok   환도 본인 틱 그대로
+ok   EGO 적중음·큰 적중음
+ok   처치 마무리·바뀌기 전 enemyHit 은 그대로
+ok   페르소나 적중음·큰 적중음
+ok   환도 본인 적중음 그대로
+ok   적중음 역할 별칭 enemyHit
+ok   적중음 변주 4개
+ok   EGO: 안쪽 R785 가 고른 환도 적중 줄 → 전용 파일로 울림
+ok   호출 뒤 환도 적중 프로필 되돌림
+ok   EGO 큰 적중도
+ok   큰 적중 프로필도 되돌림
+ok   페르소나: 라우렌 적중 줄 → 전용, 뒤에 되돌림
+ok   환도 본인은 환도 적중 파일
+ok   바깥 오버레이가 바꾼 종류도 안쪽 감싸기가 전용으로
+ok   끄기 storyworld.r1155.sfx=0 → 그대로
+ok   프로필이 없으면(파일 못 받음 등) 원래 종류로
+ok   soundProfiles 없는 상태에서도 오류 없음
+ok   통계: mapped·errors
+
+76/76 — 모두 통과

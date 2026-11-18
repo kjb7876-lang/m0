@@ -230,6 +230,8 @@ jobs:
         run: node r96/qa/r152/perf-small-cpu-check.cjs
       - name: R154 image crop memory across zone reloads
         run: node r96/qa/r154/crop-memo-cpu-check.cjs
+      - name: R1137 image crop fast scan equals the engine box
+        run: node r96/qa/r1137/crop-scan.cjs
       - name: R155 decal/lamp nearest-wall grid equals the all-walls answer
         run: node r96/qa/r155/decal-grid-cpu-check.cjs
       - name: R156 R90 floor-mark nearest-wall grid equals the all-walls answer
@@ -486,7 +488,7 @@ jobs:
       - name: R390 cinema full narration + midboss hold + enemies keep chasing CPU check
         run: node r96/qa/r390/r390-cpu-check.cjs
       - name: R426 guide clears visible enemies before moving + 결전의 날 narration dedupe + betrayal cinematic per run CPU check
-        run: node r96/qa/r426/r426-cpu-check.cjs
+        run: node r96/qa/r426/r426-cpu-check.cjs && node r96/qa/r1132/r426-door-cpu-check.cjs
       - name: R406 prop placement (seats inward, wall art flush, indoor bulbs) + Drive StoryProps in boss zones CPU check
         run: node r96/qa/r406/r406-cpu-check.cjs
       - name: R409 combat readability (enemy/hero outlines, cast sigil behind caster, big hero FX veiled over enemies) CPU check
@@ -525,6 +527,10 @@ jobs:
         run: node r96/qa/r961/r961-cpu-check.cjs
       - name: R720 survival hero placement (I key, crystals, story-order prices, leash and range upgrades, swap rule) CPU check
         run: node r96/qa/r720/r720-cpu-check.cjs
+      - name: R1148 survival placement 777 unlocks hidden EGO and Persona (form heroes, same-body rule, swap) CPU check
+        run: node r96/qa/r1148/r1148-cpu-check.cjs
+      - name: R1171 survival hero picker offers hidden EGO and Persona (777 key or title 7 taps on mobile, starts as base hero plus form) CPU check
+        run: node r96/qa/r1171/r1171-cpu-check.cjs
       - name: R1050 survival placed heroes plant during attack and skill so the attack motion plays (no chase drift, start frame step undone) CPU check
         run: node r96/qa/r1050/r1050-cpu-check.cjs
       - name: R1050b heroes use attack art for attacks and skills (EGO buff swaps, hwando not walk when pushed, neon and lauren diagonals use side sheets, hit does not cover a skill) CPU check
@@ -583,8 +589,12 @@ jobs:
         run: node r96/qa/r962/r962-cpu-check.cjs
       - name: R970 777 developer test mode level input (level-based skill points, same rule as normal play, 1..99) CPU check
         run: node r96/qa/r970/r970-cpu-check.cjs
+      - name: R1141 narrative text in the bottom-right corner box (phone/PC placement avoids orbs, buttons, hotbar; settings top toggle shares the R1021 subtitle setting) CPU check
+        run: node r96/qa/r1141/narr-corner-cpu-check.cjs
       - name: R1126 777 developer test mode passive point input (sets remaining points exactly, 0..999999, empty/non-number rejected) CPU check
         run: node r96/qa/r1126/cheat-points-cpu-check.cjs
+      - name: R1138 region transition curtain (heavy first draws finish behind a loading-look cover; engine order, results and state untouched; always lifted) CPU check
+        run: node r96/qa/r1138/curtain-cpu-check.cjs
       - name: R1011 hero level cap 777 shared by story/samong/survival/777 code (777 code reaches Lv.777, stats finite at Lv.777) CPU check
         run: node r96/qa/r1011/r1011-cpu-check.cjs
       - name: R972 skill DoT / multi-hit split (total damage kept, lethal hits not split, own tick sounds rate-limited) CPU check
@@ -647,12 +657,30 @@ jobs:
         run: node r96/qa/r1113/persona-hero-cpu-check.cjs
       - name: 감싸기 핑퐁 막기(EGO·페르소나 tick·저장) CPU 검사
         run: node r96/qa/wrap-once/wrap-once-cpu-check.cjs
+      - name: R1131 길잡이 포탈 자동 통과 CPU 검사(+R83 끄기 설정 대기)
+        run: node r96/qa/r1131/guide-portal-auto-cpu-check.cjs && node r96/qa/r83/portal-check.cjs
       - name: R1120 persona hero own moves (lauren body echoes/ghosts/dash sheet/guard body reskinned, lauren r561 skill sheets -> persona vortex/eclipse sheets, EGO aura/eden fire Eonju, walk frame rate = engine 3.2/unit) CPU check
         run: node r96/qa/r1120/persona-hero-own-cpu-check.cjs
       - name: R1120b persona hero HUD icons/names from persona sheets, gravity-well core drawn as eclipse sheet cell CPU check
         run: node r96/qa/r1120/persona-hero-hud-well-cpu-check.cjs
       - name: R1173 persona hero walk gait (side 1.8 / vertical 1.3 frames per unit, side sheet pelvis bob and waist seam cleanup) CPU check
         run: node r96/qa/r1173/persona-walk-gait-cpu-check.cjs
+      - name: R1140 persona hero audit (W/E/R dock icons+names survive engine HUD rewrite, panel labels, eonju luminance bake, guard/blink tint) CPU check
+        run: node r96/qa/r1140/persona-hero-audit-cpu-check.cjs
+      - name: R1143 persona hero (jin) celestial resonance (name prefix only in persona form, repulse=eonju / pull=black / fused=dark red tint over the existing R946 art, hit logic unchanged) CPU check
+        run: node r96/qa/r1143/persona-celestial-cpu-check.cjs
+      - name: R1144 persona hero W/E/R add-ons (W marked-enemy eonju chain lightning, E orb volley + burn DoT, R orbiting orbs + burn DoT; persona form only, reused hero sheets recoloured) CPU check
+        run: node r96/qa/r1144/persona-wer-cpu-check.cjs
+      - name: R1145 persona hero basic attack without Lauren traces (R411 hit-teleport and R302 Lauren-violet bolt/impact copies baked to eonju in persona form only) CPU check
+        run: node r96/qa/r1145/persona-basic-cpu-check.cjs
+      - name: R1153 Dots status effects 9 kinds (per-actor icons + body overlays in every mode), samong sigils for Lauren/Hunter/Slayer/Gunner, Seoha clockwork, Slayer brand 1-5, Gunner R reticle + chain beam, deploy ring tinted by hero colour CPU check
+        run: node r96/qa/r1153/dots-status-cpu-check.cjs
+      - name: R1152 persona W/E/R and (jin) laser use the Dots sheets (CX-0143PL/0144PW/0145PR; HOLD seams feathered, opaque background keyed out; colours kept, hit logic unchanged) CPU check
+        run: node r96/qa/r1152/persona-dots-cpu-check.cjs
+      - name: R1156 persona boss base rear hit = Dots CX-0136 A5 r2 (support foot aligned, 4 of 6 frames, R1119 sheet as load fallback) CPU check
+        run: node r96/qa/r1156/persona-rear-hit-cpu-check.cjs
+      - name: R1156b mob hit4 = Dots CX-0136 A4 r2 HOLD fixed (u203-e3 knight, u203-e2 void, swamp root stalker; recoil sheared to ~10%, colour matched; art only) CPU check
+        run: node r96/qa/r1156/mob-hit-cpu-check.cjs
       - name: R1098 samong faces (Michaela final boss uses her own sheet, R161 puppet repainted as an ink-and-white-thread doll so it no longer looks like Hwando) CPU check
         run: node r96/qa/r1098/r1098-cpu-check.cjs
       - name: R1090 character ink tint (hero and mob body images only, follows the map ink wash, settings toggle, effects and telegraphs untouched) CPU check
@@ -703,6 +731,14 @@ jobs:
         run: node r96/qa/r1012/r1012-cpu-check.cjs
       - name: R1014 survival mid-boss no longer sticks at the 70% phase gate under the 6%/s damage cap CPU check
         run: node r96/qa/r1014/r1014-cpu-check.cjs
+      - name: R1135 survival boss count per difficulty (easy 1, normal 2, hard 3, nightmare 6), per-boss balance with the 66x floor, spread spawn spots CPU check
+        run: node r96/qa/r1135/r1135-cpu-check.cjs
+      - name: R1149 multiplayer rules (seats, per-player deploy limit, enemy HP by player count in story and survival, auto core level-up, hero-only cards, cinema solo) CPU check
+        run: node r96/qa/r1149/r1149-cpu-check.cjs
+      - name: R1149b multiplayer hero placement (one hero each for 2-4 players, none from 5, per-player wallet, guest command text, leaver cleanup) CPU check
+        run: node r96/qa/r1149/r1149b-deploy-cpu-check.cjs
+      - name: R1150 boss enrage (all modes) 1.06x body, all stats +66% (damage, move, attack speed, defense), 0.6% max HP regen per second CPU check
+        run: node r96/qa/r1150/r1150-cpu-check.cjs
       - name: R537 spider cave mud-back spider and memory-carrier spider, swamp root stalker renamed CPU check
         run: node r96/qa/r537/r537-cpu-check.cjs
       - name: R450 zone weather (63 story zones indoor/outdoor/cave/void, dust instead of rain indoors, canon weather, double-sided streaks) CPU check
@@ -732,7 +768,7 @@ jobs:
       - name: R522 hospital thin walls (the two free-standing maze baffles of ep1a08 moved to touch a thick wall, hospital only, routes stay connected) CPU check
         run: node r96/qa/r522/r522-cpu-check.cjs
       - name: R523 story rooms (clinic ep1a09 + sloth home ep1b02 furnished by room name along the real back walls, presentation only, angle-matched art only) CPU check
-        run: node r96/qa/r523/r523-cpu-check.cjs && node r96/qa/r1061/r1061-cpu-check.cjs && node r96/qa/r1062/prop-theme-cpu-check.cjs && node r96/qa/r1064/r1064-cpu-check.cjs && node r96/qa/r1064/r1064c-cpu-check.cjs && node r96/qa/r1065/r1065-cpu-check.cjs && node r96/qa/r1065/r1065c-cpu-check.cjs && node r96/qa/r1065/r1065e-cpu-check.cjs && node r96/qa/r1111/r1111-cpu-check.cjs && node r96/qa/r1117d/r1117d-cpu-check.cjs && node r96/qa/r1103/r1103-cpu-check.cjs && node r96/qa/r730/r730-cpu-check.cjs && node r96/qa/r731/r731-cpu-check.cjs && node r96/qa/r1114/r1114-cpu-check.cjs && node r96/qa/r1117/r1117-cpu-check.cjs && node r96/qa/r1122/r1122-cpu-check.cjs
+        run: node r96/qa/r523/r523-cpu-check.cjs && node r96/qa/r1061/r1061-cpu-check.cjs && node r96/qa/r1062/prop-theme-cpu-check.cjs && node r96/qa/r1064/r1064-cpu-check.cjs && node r96/qa/r1064/r1064c-cpu-check.cjs && node r96/qa/r1065/r1065-cpu-check.cjs && node r96/qa/r1065/r1065c-cpu-check.cjs && node r96/qa/r1065/r1065e-cpu-check.cjs && node r96/qa/r1111/r1111-cpu-check.cjs && node r96/qa/r1158/r1158-cpu-check.cjs && node r96/qa/r1117d/r1117d-cpu-check.cjs && node r96/qa/r1103/r1103-cpu-check.cjs && node r96/qa/r730/r730-cpu-check.cjs && node r96/qa/r731/r731-cpu-check.cjs && node r96/qa/r1114/r1114-cpu-check.cjs && node r96/qa/r1117/r1117-cpu-check.cjs && node r96/qa/r1122/r1122-cpu-check.cjs
       - name: R713 refuge walls (first map hub stone walls 0.24 -> 0.64 outer / 0.48 inner, floor-side face unchanged, corners filled, hub only) CPU check
         run: node r96/qa/r713/r713-cpu-check.cjs
       - name: R810 Bulmyeongwi night (last302/last303 navy moonlight ambient, deep amber lamps, no sepia, no spider-crack decals, night fog colour, lamps kept off the guide path; other zones unchanged) CPU check
@@ -773,6 +809,8 @@ jobs:
         run: node r96/qa/r1036/r1036-dirflip-cpu-check.cjs
       - name: R1032 unique gear (J seal, rose seal, hero weapons) + dream-fragment n^2 upgrades + K passive / I gear+memory / B placement windows CPU check
         run: node r96/qa/r1032/r1032-cpu-check.cjs
+      - name: R1154 EGO and Persona keep their own unique weapon level, name and art (separate from Hwando and Lauren) CPU check
+        run: node r96/qa/r1154/r1154-gear-cpu-check.cjs
       - name: R1039 hero EGO aura and hit/hurt code sprites replaced by painted R100 frame sheets CPU check
         run: node r96/qa/r1039/r1039-cpu-check.cjs
       - name: R1046 hidden hero EGO (unlock after S-07, hwando lineage form, observe-discard dispel 0.7s) CPU check
@@ -801,6 +839,18 @@ jobs:
         run: node r96/qa/r1116/r1116-cpu-check.cjs
       - name: R1121 EGO hidden hero persona shots keep their own persona art (not the hwando A slash) and never fire in safe hub (frozen at the hero's feet) CPU check
         run: node r96/qa/r1121/r1121-cpu-check.cjs
+      - name: R1139 EGO hidden hero audit (persona shots drawn large enough to read, no aura discs under ink clones, hwando silver-gold FX recolored to vermilion-white, skill name texts stacked) CPU check
+        run: node r96/qa/r1139/r1139-cpu-check.cjs
+      - name: R1139b EGO hidden hero Dots final art (slash motion, trail, impact, shield, icons) CPU check
+        run: node r96/qa/r1139b/r1139b-cpu-check.cjs
+      - name: R1145 EGO hidden hero celestial follow-ups (R casts silver giant + abyss dwarf, ink moon triggers stellar repulse, white-red tint, EGO only) CPU check
+        run: node r96/qa/r1145/r1145-cpu-check.cjs
+      - name: R1175 persona hidden hero sweeps every Lauren trace (R102 hit art, scene-owned violet, R409 outlined pixel FX, any Lauren art path) into vermilion CPU check
+        run: node r96/qa/r1175/r1175-cpu-check.cjs
+      - name: R1157 EGO R summons a random hero for 7s (0.7s skill cooldowns, own chance passives, chained summons extend together) CPU check
+        run: node r96/qa/r1157/r1157-cpu-check.cjs
+      - name: R1155 EGO and persona own sound effects (numpy-synthesised; basic, Q/W/E/R, ink passives, celestial branches and ticks remapped only in hidden-hero form) CPU check
+        run: node r96/qa/r1155/r1155-cpu-check.cjs
       - name: R1109 co-op relay build match (old R62 Render relay auto-fallback, default relay address) CPU check
         run: node r96/qa/r1109/r1109-cpu-check.cjs
       - name: R1092 story panel scene art (vertical-version scene paintings, ink-wash aware) CPU check
@@ -888,6 +938,8 @@ jobs:
         run: node r96/qa/r281/r281-cpu-check.cjs
       - name: R259 hit effects at enemy art centre CPU check
         run: node r96/qa/r259/r259-cpu-check.cjs
+      - name: R1172 shared enemy alpha box (tint copies pooled, no canvas read-back) CPU check
+        run: node r96/qa/r1172/r1172-cpu-check.cjs
       - name: R260 mob art preload and cave line flicker CPU check
         run: node r96/qa/r260/r260-cpu-check.cjs
       - name: R275 mob/boss audit — off-screen mobs skipped outermost, fixed R208/R223 mob strips CPU check
@@ -950,6 +1002,8 @@ jobs:
         run: node r96/qa/r705/semi-auto-cpu-check.cjs
       - name: R706 thread dance keeps the hero under player control (clone at strike spot, no snap back to start) CPU check
         run: node r96/qa/r706/dance-free-cpu-check.cjs
+      - name: R1148c dance memory follows a hero moved while game time is paused (placement panel open); running ticks unchanged CPU check
+        run: node r96/qa/r1148c/dance-modal-move-cpu-check.cjs
       - name: R663 QWER locked until learned with passive points, skill level widens range (+8 percent per level), auto-level buys QWER and silk dances CPU check
         run: node r96/qa/r663/skill-growth-cpu-check.cjs
       - name: R561 Lauren gravity chain (Q → gravity well pull → collapse burst, R → crush vortices; no new keys, bosses not pulled, walls respected) CPU check
@@ -962,6 +1016,8 @@ jobs:
         run: node r96/qa/r615/student-cpu-check.cjs
       - name: R620 boss motion CPU check
         run: node r96/qa/r620/r620-cpu-check.cjs
+      - name: R1147 Dots boss idle sheets CPU check
+        run: node r96/qa/r1147/r1147-cpu-check.cjs && node r96/qa/r1160/r1160-cpu-check.cjs && node r96/qa/r1161/r1161-cpu-check.cjs
       - name: R700 seven-sins boss art audit (size-lock heights match real art, no light matte fringe on drawn art, clean copies keep the body, originals kept) check
         run: python r96/qa/r700/boss-art-check.py
       - name: R710 hero south idle 6 / hit 4 sheets (feet on the 226 line, stand height ±3%, no alpha residue, flicker ≤2× current, holds not applied) check
@@ -1112,6 +1168,8 @@ jobs:
         run: node r96/qa/r1099/r1099-cpu-check.cjs
       - name: R946 Lauren passive celestial resonance (repulse burst, red push orb, blue pull orb, violet piercing fusion, prop meteors; per-hero instance)
         run: node r96/qa/r946/r946-cpu-check.cjs
+      - name: R1151 Dots LC-08 gravity explosion sheet on Lauren meteor impact CPU check
+        run: node r96/qa/r1151/r1151-cpu-check.cjs
       - name: R940 read-only state snapshot for QA (events, first-hit-after-entry, boss kill time; no game writes) CPU check
         run: node r96/qa/r940/r940-cpu-check.cjs
       - name: Install pinned sandboxed Chromium

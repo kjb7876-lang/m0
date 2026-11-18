@@ -1,0 +1,80 @@
+ok   ego-summon-r1157.js 있음
+ok   ego-summon-r1157.js runtime-text 사본 = client-source
+ok   태그: EGO 협주·천체 공명·소환 패시브 뒤, combat-r118 앞
+ok   pages.yml CPU 검사 줄
+ok   공개 확인 목록
+ok   runtime-inputs 에 새 파일
+ok   새 키 없음
+ok   tick 은 POST_HOOKS.register 로(직접 감싸지 않음)
+ok   hunter-squad-r952.js 사본 = client-source
+ok   seoha-epoch-r949.js 사본 = client-source
+ok   survival-passives-r962.js 사본 = client-source
+ok   hero-defense-r720.js 사본 = client-source
+ok   헌터 사냥 분대: 소환 몸이 부르면 R1157 연장 고리(end)
+ok   헌터 사냥 분대: R1157 몸도 주인으로 인정
+ok   서하 겹친 시간: 소환 몸이 부르면 R1157 연장 고리(until)
+ok   R962 명중 귀속: R1157 몸 포함
+ok   API 열림(__STORYWORLD_EGO_SUMMON_R1157__)
+ok   수치: 7초·쿨 0.7초·연장 7초
+ok   ① 환도 본인(EGO 아님) R → 소환 없음
+ok   ② R 대기만 바뀌고 시전 자세 없음 → 소환 없음
+ok   ③ EGO R → 영웅 1명 소환
+ok   ③ 기본 영웅 8명 중에서, EGO 자신(환도)은 제외
+ok   ③ 이미 판에 있는 영웅(배치 네온)과 겹치지 않음
+ok   ③ 소환 몸은 EGO·페르소나 형상이 아님(기본 영웅)
+ok   ③ 몸 표식: r720Ally + r1157Summon
+ok   ③ 방 소품으로 깊이 정렬에 들어감
+ok   ③ room.enemies 에 넣지 않음
+ok   고르기: 무작위(여러 영웅이 나옴), 판에 있는 영웅·환도 제외
+ok   ④ 소환 영웅이 기본 공격(몸으로)
+ok   ④ 고유기(Q) 0.7초 쿨로 여러 번(7초에 5번 이상)
+ok   ④ W 0.7초 쿨로 여러 번(7초에 5번 이상)
+ok   ④ W 간격은 0.7초보다 짧지 않음
+ok   ④ E 0.7초 쿨로 여러 번(7초에 5번 이상)
+ok   ④ E 간격은 0.7초보다 짧지 않음
+ok   ④ R 0.7초 쿨로 여러 번(7초에 5번 이상)
+ok   ④ R 간격은 0.7초보다 짧지 않음
+ok   ④ 피해는 엔진 hitEnemy 로(몸 차례 = player 가 소환 영웅 → 그 영웅 확률 패시브가 굴러감)
+ok   ④ 몸 차례 타격의 player.hero 는 소환 영웅
+ok   ④ 차례가 끝나면 조종 EGO 로 되돌아옴
+ok   ④ EGO 자신의 R 대기는 그대로(0.7초 적용은 소환 영웅만)
+ok   ④ 소환 영웅 공격력 = EGO 공격력 × HERO_K
+ok   ⑤ 7초 뒤 사라짐
+ok   ⑤ 방 소품도 걷힘
+ok   ⑥ 사라진 몸의 지연 작업은 버림
+ok   ⑦ 몸 차례의 경험치는 EGO 주인에게
+ok   ⑧ 소환 영웅의 소환 → 소환 영웅 +7초, 새 소환도 같은 때 끝
+ok   ⑧ 또 이어지면 모두 같은 끝 시각으로 맞춰짐
+ok   ⑧ 연장 상한(끝없이 늘지 않음)
+ok   ⑧ 소환 몸이 아니면 연장 안 함
+ok   ⑧ 주인 소환이 끝나면 이어진 소환도 같이 끝(몸 hp 0, 끝 시각 지금)
+ok   ⑨ 지역 이동 → 걷힘
+ok   ⑨ 서사 장면 → 걷힘
+ok   ⑨ EGO 쓰러짐 → 걷힘
+ok   ⑨ 끄기(localStorage) → 소환 없음
+ok   ⑩ 남아 있을 때 또 R → 다른 영웅 하나 더(겹치지 않음)
+ok   ⑩ 동시 소환 상한
+ok   ⑪ drawProp → 소환 몸으로 drawHero
+ok   ⑪ 그린 뒤 조종 영웅으로 되돌아옴
+ok   ⑪ 발밑 백적 고리 = 기존 시트 r100 sig-aura-red
+ok   ⑪ 등장 소용돌이 = 기존 시트 r100 sig-gather-red
+ok   ⑪ 아군 표시: 머리 위 영웅 이름
+ok   ⑪ 남은 시간 막대
+ok   ⑪ 그리기 좌표 NaN 없음
+ok   ⑪ 다른 소품은 원래 drawProp
+ok   ⑫ 협동 손님 화면: 직접 소환 안 함(방장 판정)
+ok   ⑫ 협동 방장: 손님 EGO 의 R → 소환
+ok   ⑫ 손님 소환 몸의 경험치는 손님에게
+ok   ⑫ 주인 = 손님
+ok   ⑫ 방장 player 그대로
+ok   ⑫ 협동: 다른 사람이 쓰는 영웅(네온)과 겹치지 않음
+ok   ⑭ 몸: Q·W·E·R 최소 1단계, 나머지 강화는 주인 값
+ok   ⑭ 주인 EGO 의 배움 상태는 안 바뀜
+ok   ⑮ 대기를 안 남기는 W 도 0.7초 간격
+ok   ⑮ 대기를 안 남기는 E 도 0.7초 간격
+ok   ⑮ 대기를 안 남기는 R 도 0.7초 간격
+ok   ⑯ 후보 영웅 W·E·R 시전 그림 미리 받기
+ok   ⑯ 후보 아닌 영웅(판에 있는 네온·환도)은 안 받음
+ok   ⑬ 오류 0
+
+R1157 CPU: 78/78 통과

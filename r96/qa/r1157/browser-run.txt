@@ -1,0 +1,19 @@
+ok   전투 지역 · EGO 형상
+ok   R 키 → 영웅 1명 소환: {"i":{"revision":"R1157-ego-summon-1","on":true,"live":1,"summons":[{"hero":"michaela","owner":"hwando","t0":2.8666666666666614,"until":9.866666666666662,"ext":0,"links":0,"x":86.81988415788938,"y":61.25321085971959}],"stats":{"summons":1,"ends":0,"cancels":0,"chains":0,"chainCapped":0,"casts":{"basic":1,"q":1,"w":0,"e":0,"r":0},"hits":17,"draws":10,"refused":0,"errors":0},"lastError":null},"bodies":[{"hero":"michaela"}],"t":3.299999999999993,"rdy":22.56}
+ok   소환 영웅은 기본 영웅(환도·EGO·페르소나 아님): [{"hero":"michaela"}]
+ok   4초 동안 스킬(Q·W·E·R) 여러 번 — 0.7초 쿨: {"basic":12,"q":8,"w":1,"e":1,"r":7}
+ok   W·E 도 나가고 R 이 혼자 몰아 나가지 않음(칸마다 0.7초): {"basic":12,"q":8,"w":1,"e":1,"r":7}
+ok   소환 영웅 타격이 엔진 hitEnemy 로 들어감: 103
+ok   R 원래 효과 유지: 협주 기술 R(R1094) + 은빛 거성·심연 왜성(R1145): {"c0":{"cel":0,"kit":0},"c1":{"cel":1,"kit":1}}
+ok   조종은 계속 EGO
+ok   7초 뒤 사라짐(소품도 걷힘): {"i":{"revision":"R1157-ego-summon-1","on":true,"live":0,"summons":[],"stats":{"summons":1,"ends":1,"cancels":0,"chains":0,"chainCapped":0,"casts":{"basic":15,"q":10,"w":1,"e":1,"r":10},"hits":124,"draws":141,"refused":0,"errors":0},"lastError":null},"props":0}
+ok   R1157 오류 0: null
+ok   hunter: 소환 영웅이 자기 소환 패시브를 씀 → 소환 영웅 7초 연장(총 14초): {"s":{"hero":"hunter","owner":"hwando","t0":11.950000000000173,"until":25.950000000000173,"ext":1,"links":1,"x":86.45507540660566,"y":61.59936947965371},"sub":{"on":true,"q":"{\"revision\":\"R952-hunter-squad-4\",\"on\":true,\"fx\":{\"icon\":2,\"volleys\":4,\"gates\":0},\"active\":true,\"tier\":\"squad\",\"name\":\"기러기진 섬멸\",\"left\":11.4,\"cooldown\":19.05,\"aim\":-0.6238489524645344,\"units\":[{\"kind\":\"hunter\",\"i\":0,\"x\":85.28007310861257,\"y\":61.028169339850706,\"hero\":\"hunter\",\"dir\":\"right\",\"anim\":0},"},"t":14.550000000000303}
+ok   헌터: 사냥 분대(슬레이어) 소환됨: {"on":true,"q":"{\"revision\":\"R952-hunter-squad-4\",\"on\":true,\"fx\":{\"icon\":2,\"volleys\":4,\"gates\":0},\"active\":true,\"tier\":\"squad\",\"name\":\"기러기진 섬멸\",\"left\":11.4,\"cooldown\":19.05,\"aim\":-0.6238489524645344,\"units\":[{\"kind\":\"hunter\",\"i\":0,\"x\":85.28007310861257,\"y\":61.028169339850706,\"hero\":\"hunter\",\"dir\":\"right\",\"anim\":0},"}
+ok   hunter: 끝나면 둘 다 같이 사라짐(소품 0): {"live":0,"arb":false,"props":0}
+ok   seoha: 소환 영웅이 자기 소환 패시브를 씀 → 소환 영웅 7초 연장(총 14초): {"s":{"hero":"seoha","owner":"hwando","t0":26.44999999999978,"until":40.449999999999775,"ext":1,"links":1,"x":83.30148391981817,"y":61.91020732790149},"sub":{"on":true,"until":40.449999999999775,"kind":"arbelia","procs":{"heroes":0,"arbelia":1,"collapse":0},"fallbacks":0,"rolls":1},"t":28.999999999999634}
+ok   서하: 아르벨리아 끝 = 소환 서하 끝(같이 사라짐): {"on":true,"until":40.449999999999775,"kind":"arbelia","procs":{"heroes":0,"arbelia":1,"collapse":0},"fallbacks":0,"rolls":1}
+ok   seoha: 끝나면 둘 다 같이 사라짐(소품 0): {"live":0,"arb":false,"props":0}
+ok   페이지 오류 없음: []
+
+R1157 브라우저(헤드리스): 17/17 통과

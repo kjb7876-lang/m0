@@ -1,0 +1,23 @@
+{
+ "round": "R1158",
+ "assets": [
+  {
+   "id": "MD-08",
+   "path": "assets/r1158/mobs/md-08-blackmarket-suspect-death.webp",
+   "bytes": 134818,
+   "sha256": "8772e6f22d52c46db4e7ba9ffcc4d97158562d90051ffe6560f6dc895e88f57c",
+   "sourceSha256": "fe253661fbbc6935346c4030bf8eef75b709e1c26cdb1778cb5646ae700b2cbb",
+   "source": "CX-P3_MD08_death6_r1_REVIEW.png",
+   "status": "Dots REVIEW r1 (CX-0115MD) — Claude 검사 후 적용, 픽셀 수정 없음"
+  },
+  {
+   "id": "MD-09",
+   "path": "assets/r1158/mobs/md-09-drug-craver-death.webp",
+   "bytes": 120128,
+   "sha256": "8a71d713f376e516a42d6cd282f4e03db657c1434b416c43a2d3cf6e484bce0a",
+   "sourceSha256": "d26b6be922920d1dc21e05de33cee68646260d98f577572f9daf523f0896eabd",
+   "source": "CX-P3_MD09_death6_r1_REVIEW.png",
+   "status": "Dots REVIEW r1 (CX-0115MD) — Claude 검사 후 적용, 픽셀 수정 없음"
+  }
+ ]
+}

@@ -1,0 +1,19 @@
+== out-p2 (전) 페르소나에만 남은 항목(적 팔레트 R114 제외): 12
+   ['ArrowUp', 'KeyD', 'KeyS'] PATH|effect|fx:#|r#:lauren|#|assets/vfx/generated/v#/burst-impact.webp
+   ['ArrowRight', 'ArrowUp', 'KeyA'] PATH|effect|fx:#|r#:lauren|#|assets/vfx/generated/v#/hero-impacts/lauren-stigma-puncture.webp
+   ['KeyS'] PATH|effect|r#:lauren:blink:#.#|m#/assets/r#/fx/lauren/blink.webp|filter
+   ['KeyD', 'KeyQ', 'KeyW'] PATH|effect|r#:red:#.#:orb|m#/assets/r#/lauren-red.webp|filter
+   ['KeyA'] PATH|effect|r#:well:#.#:front|m#/assets/r#/lauren/lauren-gravity-well-front.webp|filter
+   ['KeyQ'] VIOLETPX|hero|r#:hero:player|r#:outline:hero:u:http://#.#.#.#:#/m#/assets/pxf-additional-baked-#/extra-#-atlas.png:#,#,#,#:#:|0.31
+   ['KeyE', 'KeyF', 'KeyQ'] VIOLETPX|hero|r#:hero:player|r#:outline:hero:u:http://#.#.#.#:#/m#/assets/pxf-additional-baked-#/extra-#-atlas.png:#,#,#,#:#:|0.32
+   ['KeyQ'] VIOLETPX|hero|r#:hero:player|r#:outline:hero:u:http://#.#.#.#:#/m#/assets/pxf-additional-baked-#/extra-#-atlas.png:#,#,#,#:#:|0.36
+   ['KeyQ'] VIOLETPX|hero|r#:hero:player|r#:outline:hero:u:http://#.#.#.#:#/m#/assets/pxf-additional-baked-#/extra-#-atlas.png:#,#,#,#:#:|0.50
+   ['KeyD'] VIOLETPX|scene|scene|r#fx:cross:#.#.#:#.#.#|0.72
+   ['KeyF', 'KeyQ', 'KeyW'] VIOLETPX|scene|scene||0.71
+   ['KeyE', 'KeyF', 'KeyQ'] VIOLETPX|scene|scene||0.87
+  DOM 라우렌 글: []
+== out-f (후) 페르소나에만 남은 항목(적 팔레트 R114 제외): 3
+   ['KeyE', 'KeyR', 'hit'] PATH|effect|fx:#|r#:lauren|#|assets/vfx/generated/v#/burst-impact.webp|filter
+   ['ArrowUp', 'KeyQ', 'hit'] PATH|effect|fx:#|r#:lauren|#|assets/vfx/generated/v#/hero-impacts/lauren-stigma-puncture.webp|filter
+   ['KeyS'] PATH|effect|r#:lauren:blink:#.#|m#/assets/r#/fx/lauren/blink.webp|filter
+  DOM 라우렌 글: []

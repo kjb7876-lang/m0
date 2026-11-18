@@ -1,0 +1,89 @@
+{
+ "handoff": "EGO-R1139_클로드_사용자선택_최종인계 (A·B·C)",
+ "files": [
+  {
+   "source": "A/body/01_front.png",
+   "sourceSha256": "95b3565b341667169998f3577b9ee908de669e28c50e081d63b78a7d324080c3",
+   "sourceBytes": 825788,
+   "sourceCell": 512,
+   "file": "slash-front.webp",
+   "sha256": "7a158be8b916e94fd82d2cf4363ef6133bb76ce4cf11ecc69eafa24a4dcd7016",
+   "bytes": 99540,
+   "cell": 256,
+   "frames": 8,
+   "use": "기본 공격 가로 베기 · 앞"
+  },
+  {
+   "source": "A/body/01_rear.png",
+   "sourceSha256": "20e3fded484177444ff19db4f50e90dbfab0d3a5c5c88b0daed293521f079aba",
+   "sourceBytes": 902199,
+   "sourceCell": 512,
+   "file": "slash-rear.webp",
+   "sha256": "bce302c5bdad4f01aae68fbc1d83b5fd96356c5efb789ae4f37d0e662d03a248",
+   "bytes": 95486,
+   "cell": 256,
+   "frames": 8,
+   "use": "기본 공격 가로 베기 · 뒤"
+  },
+  {
+   "source": "B/body/01_right.png",
+   "sourceSha256": "6b60ff4a31f91287a9c204c1aa2f024ac3aaa013faa96e94e8e0592f77e6287c",
+   "sourceBytes": 771611,
+   "sourceCell": 512,
+   "file": "slash-right.webp",
+   "sha256": "27b5f95ba370134597477d3c763866898ef921296b47445ec6a8dbfb2ffced32",
+   "bytes": 90164,
+   "cell": 256,
+   "frames": 8,
+   "use": "기본 공격 가로 베기 · 오른쪽(왼쪽은 좌우 뒤집기)"
+  },
+  {
+   "source": "C/fx/07A_horizontal.png",
+   "sourceSha256": "8eb06fdd38d8cc1678a06856ba5fe3dd165517233dec67f4597933846d590456",
+   "sourceBytes": 154627,
+   "sourceCell": 512,
+   "file": "trail-horizontal.webp",
+   "sha256": "9e77abcb2e57ef95bc269e8924c450bfcdcdf3fc2f7099536545bf7047379c42",
+   "bytes": 29168,
+   "cell": 256,
+   "frames": 6,
+   "use": "가로 베기 붓 궤적"
+  },
+  {
+   "source": "C/fx/08_impact.png",
+   "sourceSha256": "3cb4168a60fb9bf0f982d1fe0a25495d0ae1f807c4d730aa3c065580fb66db6f",
+   "sourceBytes": 115914,
+   "sourceCell": 256,
+   "file": "impact.webp",
+   "sha256": "5429ab678ec65325f34f8e05f1e93cd2afb0587b976eddc599df8447567c65d1",
+   "bytes": 24758,
+   "cell": 128,
+   "frames": 8,
+   "use": "적중 먹 튐"
+  },
+  {
+   "source": "C/fx/09_shield.png",
+   "sourceSha256": "9e5b1e570757a017fcc298b59fc66bb00ab28cc319e6766639b6409544d2125c",
+   "sourceBytes": 612910,
+   "sourceCell": 512,
+   "file": "shield.webp",
+   "sha256": "3cc82203eff5dabf2b68745c2a0733e1e66da48f6e06e1be58b56b789d10f147",
+   "bytes": 114124,
+   "cell": 256,
+   "frames": 8,
+   "use": "되비친 집착 보호막 고리"
+  },
+  {
+   "source": "C/ui/10_icons.png",
+   "sourceSha256": "7e6507c3af7f74d8c6af1ea8eacea81b6309435a252e1379f7af7da4b3b57603",
+   "sourceBytes": 220809,
+   "sourceCell": 256,
+   "file": "icons.webp",
+   "sha256": "216865ac99e4c2a5ef6f36862147ce10c0e6f0fe690584fa0ab12d9bcc886810",
+   "bytes": 31028,
+   "cell": 128,
+   "frames": 7,
+   "use": "EGO 조작 아이콘 7"
+  }
+ ]
+}

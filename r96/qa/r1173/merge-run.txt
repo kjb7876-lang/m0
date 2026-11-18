@@ -1,0 +1,8 @@
+r96/qa/r1173/persona-walk-gait-cpu-check.cjs :: R1173 persona-walk-gait OK
+r96/qa/r1175/r1175-cpu-check.cjs :: ALL PASS
+r96/qa/r1120/persona-hero-own-cpu-check.cjs :: R1120 persona-hero-own OK
+r96/qa/r1113/persona-hero-cpu-check.cjs :: R1113 persona-hero PASSED
+r96/qa/r1144/persona-wer-cpu-check.cjs :: ALL PASS
+r96/qa/r1145/persona-basic-cpu-check.cjs :: ALL PASS
+r96/qa/r1145/r1145-cpu-check.cjs :: R1145 CPU 검사: 40/40 통과
+R1173 persona-walk-side-sheet OK
