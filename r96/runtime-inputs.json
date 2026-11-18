@@ -10360,7 +10360,8 @@
     "assets/r1139/ego/slash-front.webp",
     "assets/r1139/ego/slash-rear.webp",
     "assets/r1139/ego/slash-right.webp",
-    "assets/r1139/ego/trail-horizontal.webp"
+    "assets/r1139/ego/trail-horizontal.webp",
+    "ego-celestial-r1145.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11435,5 +11436,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "00de0224364bd4cf79e9e4dfe045d65a455036c49a1e82a673d9344160eea8a8"
+  "runtimeManifestSHA256": "7ba12af1e4926a04ee8137f85f75d1d81221e0595c37871b3ff5d4fcf8a27cdc"
 }
