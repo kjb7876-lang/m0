@@ -1013,7 +1013,7 @@ jobs:
       - name: R620 boss motion CPU check
         run: node r96/qa/r620/r620-cpu-check.cjs
       - name: R1147 Dots boss idle sheets CPU check
-        run: node r96/qa/r1147/r1147-cpu-check.cjs && node r96/qa/r1160/r1160-cpu-check.cjs && node r96/qa/r1161/r1161-cpu-check.cjs && node r96/qa/r1163/r1163-cpu-check.cjs
+        run: node r96/qa/r1147/r1147-cpu-check.cjs && node r96/qa/r1160/r1160-cpu-check.cjs && node r96/qa/r1161/r1161-cpu-check.cjs && node r96/qa/r1163/r1163-cpu-check.cjs && node r96/qa/r1164/r1164-cpu-check.cjs
       - name: R700 seven-sins boss art audit (size-lock heights match real art, no light matte fringe on drawn art, clean copies keep the body, originals kept) check
         run: python r96/qa/r700/boss-art-check.py
       - name: R710 hero south idle 6 / hit 4 sheets (feet on the 226 line, stand height ±3%, no alpha residue, flicker ≤2× current, holds not applied) check
