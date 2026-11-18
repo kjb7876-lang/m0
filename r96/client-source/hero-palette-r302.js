@@ -96,7 +96,11 @@ function remapF(F,name){const h=hero();if(!on||!h||!F)return F;stats.sp++;
 //  끄기(예전 길로): localStorage['storyworld.r302.memo']='0' 뒤 새로 고침, 또는 __STORYWORLD_HERO_PALETTE_R302__.memo(false) (끄면 그 값을 저장, 켜면 지움)
 let memoOn=true;try{if(localStorage.getItem('storyworld.r302.memo')==='0')memoOn=false;}catch(_){}
 const MISS={},memo=new Map(),MEMO_OK=32,MEMO_EARLY=256,MEMO_MAX=3000;let memoRnd=0x9e3779b9;
-const memoCheck=m=>{memoRnd=(Math.imul(memoRnd,1103515245)+12345)>>>0;return (memoRnd>>>16)%(++m.n<=MEMO_EARLY?4:16)===0;};let seenFile=null,seenKind=null,shadow=false,shadowQ=MISS,memoKey=null,fxType='';
+// R1178 렉(사용자 2026-11-18 "렉개선 … 사몽에피소드쪽 실플레이"): 사몽 에피소드 P-2(몹 50마리, 환도 777)에서 remapF 가 장면당 ~990번,
+//  스택 잡기의 48%가 이 무작위 재확인이었다(오래 맞은 열쇠도 영영 16번에 1번). 한 파일에서 MEMO_MATURE 번 넘게 같은 판정이 이어진 열쇠는 64번에 1번만 다시 본다.
+//  늦게 끼어든 다른 판정 파일을 알아채기까지 평균 64번(장면 한두 개)으로 늘어난다 — 그 뒤엔 예전처럼 영영 스택 길. 검사 qa/r1178.
+const MEMO_MATURE=4096;
+const memoCheck=m=>{memoRnd=(Math.imul(memoRnd,1103515245)+12345)>>>0;const n=++m.n;return (memoRnd>>>16)%(n<=MEMO_EARLY?4:n<=MEMO_MATURE?16:64)===0;};let seenFile=null,seenKind=null,shadow=false,shadowQ=MISS,memoKey=null,fxType='';
 const samePal=(x,y)=>x===y||(!!x&&!!y&&!!x.a&&!!y.a&&!!x.b&&!!y.b&&x.a.join()===y.a.join()&&x.b.join()===y.b.join());
 function memoHit(F,h,name){memoKey=null;seenFile=null;seenKind=null;shadowQ=MISS;if(!memoOn)return MISS;
  try{const P=SP0.pal(F);memoKey=fxType+'|'+(name||'')+'|'+P.a.join()+'|'+P.b.join()+'|'+h;}catch(_){return MISS;}

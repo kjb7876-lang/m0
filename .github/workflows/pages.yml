@@ -515,6 +515,8 @@ jobs:
         run: node r96/qa/r600/r600-cpu-check.cjs
       - name: R976 samong first region pixel art to painted assets CPU check
         run: node r96/qa/r976/r976-cpu-check.cjs
+      - name: R1177 samong episode pixel leftovers (S-06 pixel mobs, pixelfx sheets) to painted art CPU check
+        run: node r96/qa/r1177/r1177-cpu-check.cjs
       - name: R701 survival 77s choice window, difficulty, hero picker CPU check
         run: node r96/qa/r701/r701-cpu-check.cjs
       - name: R850 survival play-test fixes (arena terrain lock, hospital maze skip, next-stage prefetch, moving HUD) CPU check
@@ -663,6 +665,8 @@ jobs:
         run: node r96/qa/r1120/persona-hero-own-cpu-check.cjs
       - name: R1120b persona hero HUD icons/names from persona sheets, gravity-well core drawn as eclipse sheet cell CPU check
         run: node r96/qa/r1120/persona-hero-hud-well-cpu-check.cjs
+      - name: R1173 persona hero walk gait (side 1.8 / vertical 1.3 frames per unit, side sheet pelvis bob and waist seam cleanup) CPU check
+        run: node r96/qa/r1173/persona-walk-gait-cpu-check.cjs
       - name: R1140 persona hero audit (W/E/R dock icons+names survive engine HUD rewrite, panel labels, eonju luminance bake, guard/blink tint) CPU check
         run: node r96/qa/r1140/persona-hero-audit-cpu-check.cjs
       - name: R1143 persona hero (jin) celestial resonance (name prefix only in persona form, repulse=eonju / pull=black / fused=dark red tint over the existing R946 art, hit logic unchanged) CPU check
@@ -673,6 +677,8 @@ jobs:
         run: node r96/qa/r1145/persona-basic-cpu-check.cjs
       - name: R1153 Dots status effects 9 kinds (per-actor icons + body overlays in every mode), samong sigils for Lauren/Hunter/Slayer/Gunner, Seoha clockwork, Slayer brand 1-5, Gunner R reticle + chain beam, deploy ring tinted by hero colour CPU check
         run: node r96/qa/r1153/dots-status-cpu-check.cjs
+      - name: R1179 survival samong leftover R248 pixel mob sheets -> Drive hand-painted candidates (m077 alien invader; R410 sheet format, art only) CPU check
+        run: node r96/qa/r1179/r1179-cpu-check.cjs
       - name: R1152 persona W/E/R and (jin) laser use the Dots sheets (CX-0143PL/0144PW/0145PR; HOLD seams feathered, opaque background keyed out; colours kept, hit logic unchanged) CPU check
         run: node r96/qa/r1152/persona-dots-cpu-check.cjs
       - name: R1156 persona boss base rear hit = Dots CX-0136 A5 r2 (support foot aligned, 4 of 6 frames, R1119 sheet as load fallback) CPU check
@@ -727,6 +733,8 @@ jobs:
         run: node r96/qa/r441/r441-cpu-check.cjs
       - name: R1012 samong plaza hwando 777 lag (R302 palette caller lookup remembered per palette object, verified every 16th draw) CPU check
         run: node r96/qa/r1012/r1012-cpu-check.cjs
+      - name: R1178 samong episode lag (R302 palette memo re-checks mature keys 1 in 64) CPU check
+        run: node r96/qa/r1178/r1178-cpu-check.cjs
       - name: R1014 survival mid-boss no longer sticks at the 70% phase gate under the 6%/s damage cap CPU check
         run: node r96/qa/r1014/r1014-cpu-check.cjs
       - name: R1135 survival boss count per difficulty (easy 1, normal 2, hard 3, nightmare 6), per-boss balance with the 66x floor, spread spawn spots CPU check
@@ -843,6 +851,8 @@ jobs:
         run: node r96/qa/r1139b/r1139b-cpu-check.cjs
       - name: R1145 EGO hidden hero celestial follow-ups (R casts silver giant + abyss dwarf, ink moon triggers stellar repulse, white-red tint, EGO only) CPU check
         run: node r96/qa/r1145/r1145-cpu-check.cjs
+      - name: R1175 persona hidden hero sweeps every Lauren trace (R102 hit art, scene-owned violet, R409 outlined pixel FX, any Lauren art path) into vermilion CPU check
+        run: node r96/qa/r1175/r1175-cpu-check.cjs
       - name: R1157 EGO R summons a random hero for 7s (0.7s skill cooldowns, own chance passives, chained summons extend together) CPU check
         run: node r96/qa/r1157/r1157-cpu-check.cjs
       - name: R1155 EGO and persona own sound effects (numpy-synthesised; basic, Q/W/E/R, ink passives, celestial branches and ticks remapped only in hidden-hero form) CPU check
@@ -1013,7 +1023,7 @@ jobs:
       - name: R620 boss motion CPU check
         run: node r96/qa/r620/r620-cpu-check.cjs
       - name: R1147 Dots boss idle sheets CPU check
-        run: node r96/qa/r1147/r1147-cpu-check.cjs && node r96/qa/r1160/r1160-cpu-check.cjs && node r96/qa/r1161/r1161-cpu-check.cjs && node r96/qa/r1163/r1163-cpu-check.cjs && node r96/qa/r1164/r1164-cpu-check.cjs
+        run: node r96/qa/r1147/r1147-cpu-check.cjs && node r96/qa/r1160/r1160-cpu-check.cjs && node r96/qa/r1161/r1161-cpu-check.cjs && node r96/qa/r1162/r1162-cpu-check.cjs && node r96/qa/r1163/r1163-cpu-check.cjs && node r96/qa/r1164/r1164-cpu-check.cjs
       - name: R700 seven-sins boss art audit (size-lock heights match real art, no light matte fringe on drawn art, clean copies keep the body, originals kept) check
         run: python r96/qa/r700/boss-art-check.py
       - name: R710 hero south idle 6 / hit 4 sheets (feet on the 226 line, stand height ±3%, no alpha residue, flicker ≤2× current, holds not applied) check
@@ -1028,6 +1038,8 @@ jobs:
         run: node r96/qa/r860/boss-keypose-cover-cpu-check.cjs
       - name: R800 floor edge mask reused for identical input (no double build on region entry) CPU check
         run: node r96/qa/r800/edges-cache-cpu-check.cjs
+      - name: R1180 floor edge mask blurs walls once (one blurred draw of all walls instead of one per wall; same blur radius, same readbacks) CPU check
+        run: node r96/qa/r1180/edge-wall-blur-cpu-check.cjs
       - name: R801 samong guide calm (kill quota met / explore / maze / door open → guide fights only enemies within 2.5 tiles and walks to clues and the door; quota left, B/D/G/H/F, hold, lead, outside samong unchanged) CPU check
         run: node r96/qa/r801/samong-guide-calm-cpu-check.cjs
       - name: R802 samong S-02 plaza freeze (R615 student walk tint canvas marked static so 26 students stay under the Three recorder snapshot budget) CPU check

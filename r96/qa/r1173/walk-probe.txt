@@ -1,0 +1,5 @@
+down {'gameSec': 1.45, 'frames': 10, 'fps': 6.9, 'cycleSec': 1.16, 'speed': 4.91, 'perUnit': 1.4, 'sheets': ['r1104b/persona-walk-front.webp', 'r1173/persona-walk-side.webp']}
+up {'gameSec': 3.2, 'frames': 26, 'fps': 8.13, 'cycleSec': 0.98, 'speed': 5.71, 'perUnit': 1.42, 'sheets': ['r1104b/persona-walk-rear.webp', 'r1173/persona-walk-side.webp']}
+right {'gameSec': 0.6, 'frames': 4, 'fps': 6.67, 'cycleSec': 1.2, 'speed': 3.18, 'perUnit': 2.1, 'sheets': ['r1173/persona-walk-side.webp']}
+left {'gameSec': 2.85, 'frames': 28, 'fps': 9.82, 'cycleSec': 0.81, 'speed': 5.26, 'perUnit': 1.87, 'sheets': ['r1173/persona-walk-side.webp']}
+{'side': 1.8, 'vertical': 1.3} errors 0 None

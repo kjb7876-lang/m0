@@ -42,7 +42,8 @@ const ready=(o)=>{const w=world(o);w.api().setForm(true);w.frame([body()]);w.loa
    if(m){const f=+m[1];if(prev!=null){const j=(f-prev+8)%8;adv+=j;maxJ=Math.max(maxJ,j);}prev=f;}else prev=null;}
   return {rate:adv/dist,maxJ};};
  const A=run(2.4),B=run(6);
- ok(Math.abs(A.rate-3.2)/3.2<.15,'① 걷기 칸 넘김 거리 1당 '+A.rate.toFixed(2)+'칸 (엔진 영웅 3.2)');
+ // R1173(사용자 11-18 "위랑 좌우움직일때 다리가 너무빠름")로 옆 걷기를 거리 1당 1.8칸으로 더 낮춤 — 자세한 박자 검사는 qa/r1173
+ ok(Math.abs(A.rate-1.8)/1.8<.15,'① 걷기 칸 넘김 거리 1당 '+A.rate.toFixed(2)+'칸 (R1173 옆 1.8, 예전 엔진 영웅 3.2)');
  ok(B.maxJ<=1,'② 빠르게(6/초) 걸어도 렌더마다 최대 '+B.maxJ+'칸');}
 // ③
 {const w=ready();const bar=body('http://x/m0/assets/r100/barrier.webp',Q(470,220,48,90));bar.key='hero:2:bar';const g=body('assets/r130/guard/lauren/guard-s.webp');

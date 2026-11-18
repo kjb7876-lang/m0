@@ -1,0 +1,71 @@
+{
+ "revision": "R1179",
+ "generator": "scripts/r1179-mob-sheets.py",
+ "cell": [
+  256,
+  320
+ ],
+ "cols": 4,
+ "walk": [
+  0,
+  8
+ ],
+ "attack": [
+  8,
+  4
+ ],
+ "pivot": [
+  128,
+  300
+ ],
+ "source": "Google Drive 후보 묶음(검토·HOLD 포함, 읽기 전용 재사용)",
+ "approval": "사용자 2026-11-18 \"사몽에피소드쪽에 픽셀몹 및 픽셀자산 남아있던데 … 닷츠랑협업해서 이미지잘적용\", 2026-11-18 HOLD 자산 직접 개선 적용",
+ "mobs": {
+  "m077": {
+   "file": "m077.webp",
+   "sha256": "47765b26db4ebd6c153b688d36cfdd7f68ba208be19c40963eb67e2dcb44da66",
+   "bytes": 232898,
+   "size": [
+    1024,
+    960
+   ],
+   "body": 211,
+   "foot": [
+    297,
+    299
+   ],
+   "source": {
+    "kind": "sheet",
+    "zip": "SW-boss16-m077-candidate-v1.zip",
+    "file": "sheet.png",
+    "sha256": "033faa2388f4e1d7bf716bdfe67253dc21f1ee3e595081d1395d7fa6c53311d8",
+    "bytes": 347792
+   },
+   "processing": "none (pixels as-is)",
+   "replaces": "assets/r248/mobs/m077.webp"
+  },
+  "m081": {
+   "file": "m081.webp",
+   "sha256": "2dccd110b916014840668d4500daeb8e93f35a60a025c41715283e56ecf5fb45",
+   "bytes": 266684,
+   "size": [
+    1024,
+    960
+   ],
+   "body": 219,
+   "foot": [
+    276,
+    303
+   ],
+   "source": {
+    "kind": "sheet",
+    "zip": "SW-boss16-m081-candidate-v1.zip",
+    "file": "sheet.png",
+    "sha256": "d4ae5eab44388bc7daae16c32f58ad7677b21623068848987dbbf0cf5d6d046d",
+    "bytes": 374515
+   },
+   "processing": "soften: premultiplied gaussian r=.6 (edge staircase only)",
+   "replaces": "assets/r248/mobs/m081.webp"
+  }
+ }
+}

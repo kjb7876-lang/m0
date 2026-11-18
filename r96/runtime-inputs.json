@@ -10468,7 +10468,23 @@
     "assets/r1164/bosses/b04-hit4.webp",
     "assets/r1165/mobs/md-15-curtain-mannequin-death.webp",
     "assets/r1165/mobs/md-17-red-wing-figure-death.webp",
-    "assets/r1165/mobs/md-25-clockwork-collector-death.webp"
+    "assets/r1165/mobs/md-25-clockwork-collector-death.webp",
+    "mob-art-r1179.js",
+    "assets/r1179/mobs/m077.webp",
+    "assets/r1179/mobs/index.json",
+    "assets/r1179/mobs/m081.webp",
+    "samong-pixel-art-r1177.js",
+    "move-dir-r1162-data.js",
+    "assets/r1177/void-implosion-blood.webp",
+    "assets/r1177/hands-blood.webp",
+    "assets/r1177/s06-commander-walk-right-8.webp",
+    "assets/r1177/rift-blood.webp",
+    "assets/r1177/s06-rival-walk-right-8.webp",
+    "assets/r1177/s06-invader-walk-right-8.webp",
+    "assets/r1177/choir-moths-blood.webp",
+    "assets/r1177/index.json",
+    "assets/r1162/move/u205-mid-down.webp",
+    "assets/r1173/persona-walk-side.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11543,5 +11559,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "0dacc4cb1cfd9a572626b99c914fde7fc37e63378eb13046124e5fe139049d5c"
+  "runtimeManifestSHA256": "1b695e47a439ebe8fa79f33fafaa342940e3c9821b6f5a4263f3b620f05393fa"
 }
