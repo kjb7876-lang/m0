@@ -68,13 +68,14 @@ print(json.dumps({'size':im.size,'low':sum(a.histogram()[1:17]),'border':b}))`],
  ok('violet damage identical with or without tail sheet',JSON.stringify(g.hits)===JSON.stringify(g0.hits)&&g.hits.length>0);
  const m=fs.existsSync(path.join(R,'runtime-text',TAIL))?JSON.parse(cp.execFileSync('python3',['-I','-c',`
 import json
-import numpy as np
 from PIL import Image
-a=np.array(Image.open('${R}/runtime-text/${TAIL}').convert('RGBA')).astype(float)
-cells=[a[(i//6)*192:(i//6)*192+192,(i%6)*192:(i%6)*192+192] for i in range(24)]
-pm=lambda c:c[...,:3]*c[...,3:]/255
-d=[float(np.abs(pm(cells[i])-pm(cells[(i+1)%24])).mean()) for i in range(24)]
-print(json.dumps({'size':[a.shape[1],a.shape[0]],'low':int(((a[...,3]>0)&(a[...,3]<=16)).sum()),'seam':d[23],'maxStep':max(d[:23])}))`],{encoding:'utf8'})):null;
+im=Image.open('${R}/runtime-text/${TAIL}').convert('RGBA');W,H=im.size
+def pm(c):
+  b=c.tobytes();return [b[k]*b[k+3]//255 for k in range(0,len(b),4)]+[b[k+1]*b[k+3]//255 for k in range(0,len(b),4)]+[b[k+2]*b[k+3]//255 for k in range(0,len(b),4)]
+cells=[pm(im.crop(((i%6)*192,(i//6)*192,(i%6)*192+192,(i//6)*192+192))) for i in range(24)]
+d=[sum(abs(x-y) for x,y in zip(cells[i],cells[(i+1)%24]))/len(cells[i]) for i in range(24)]
+low=sum(1 for v in im.getchannel('A').tobytes() if 0<v<=16)
+print(json.dumps({'size':[W,H],'low':low,'seam':d[23],'maxStep':max(d[:23])}))`],{encoding:'utf8'})):null;
  ok('tail sheet 1152x768, no alpha 1..16',!!m&&m.size[0]===1152&&m.size[1]===768&&m.low===0);
  ok('tail loop seam (24→1) within the normal step range ('+(m&&m.seam.toFixed(2))+' ≤ '+(m&&m.maxStep.toFixed(2))+')',!!m&&m.seam<=m.maxStep);
  ok('runtime-inputs lists tail sheet',fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8').includes(TAIL));}
