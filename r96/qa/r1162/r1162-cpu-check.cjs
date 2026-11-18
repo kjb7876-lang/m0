@@ -42,19 +42,25 @@ const cyc=(e,t,i)=>{const J=V.idle[Math.floor(i/4)%8];e.__art={path:J.path,rect:
  ok(frames(c,mk({hp:0}),1,e=>{e.y+=.06;}).every(k=>!/r1162/.test(k.sourcePath)),'dead → untouched');}
 // ④ 그림 검사(파이썬)
 const py=`
-import sys,json,numpy as np
+import sys,json
 from PIL import Image
-a=np.asarray(Image.open(sys.argv[1]).convert('RGBA')).astype(int);C=320;al=a[...,3]
-r={'midAlpha':int(((al>0)&(al<=16)).sum()),'edge':[],'foot':[],'f2':None,'f4':None}
+im=Image.open(sys.argv[1]).convert('RGBA');C=320
+al=im.getchannel('A');h=al.histogram()
+mask=al.point(lambda v:255 if v>16 else 0)
+def bb(box):
+  b=mask.crop(box).getbbox()
+  return b  # (x0,y0,x1,y1) of alpha>16 pixels
+H=al.size[1]
+r={'midAlpha':int(sum(h[1:17])),'edge':[],'foot':[],'f2':None,'f4':None}
 for i in range(4):
-  c=al[:,i*C:(i+1)*C];ys,xs=np.nonzero(c>16);r['foot'].append(int(ys.max()));r['edge'].append(bool(xs.min()<=0 or xs.max()>=C-1 or ys.min()<=0))
+  x0,y0,x1,y1=bb((i*C,0,(i+1)*C,H))
+  r['foot'].append(y1-1);r['edge'].append(bool(x0<=0 or x1-1>=C-1 or y0<=0))
 cx=160
-def lifted(c,side):
-  h=c[:,:cx] if side=='L' else c[:,cx:];ys,xs=np.nonzero(h>16)
+def lifted(i,side):
   # 지지발(발 줄에 닿는 쪽)이 아닌 반쪽의 가장 낮은 줄 = 들린 발 밑
-  return int(ys.max())
-f2=al[:,320:640];f4=al[:,960:1280]
-r['f2']=lifted(f2,'R');r['f4']=lifted(f4,'L');r['f4R']=lifted(f4,'R');r['f2L']=lifted(f2,'L')
+  l=i*C;box=(l,0,l+cx,H) if side=='L' else (l+cx,0,l+C,H)
+  return bb(box)[3]-1
+r['f2']=lifted(1,'R');r['f4']=lifted(3,'L');r['f4R']=lifted(3,'R');r['f2L']=lifted(1,'L')
 print(json.dumps(r))`;
 const P=JSON.parse(execFileSync('python3',['-I','-c',py,path.join(R,'runtime-text',S.path)],{encoding:'utf8'}));
 ok(P.midAlpha===0,'no alpha 1–16');ok(P.edge.every(x=>!x),'no frame touches the cell edge');
