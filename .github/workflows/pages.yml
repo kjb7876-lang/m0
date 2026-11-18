@@ -1028,6 +1028,8 @@ jobs:
         run: node r96/qa/r860/boss-keypose-cover-cpu-check.cjs
       - name: R800 floor edge mask reused for identical input (no double build on region entry) CPU check
         run: node r96/qa/r800/edges-cache-cpu-check.cjs
+      - name: R1180 floor edge mask blurs walls once (one blurred draw of all walls instead of one per wall; same blur radius, same readbacks) CPU check
+        run: node r96/qa/r1180/edge-wall-blur-cpu-check.cjs
       - name: R801 samong guide calm (kill quota met / explore / maze / door open → guide fights only enemies within 2.5 tiles and walks to clues and the door; quota left, B/D/G/H/F, hold, lead, outside samong unchanged) CPU check
         run: node r96/qa/r801/samong-guide-calm-cpu-check.cjs
       - name: R802 samong S-02 plaza freeze (R615 student walk tint canvas marked static so 26 students stay under the Three recorder snapshot budget) CPU check
