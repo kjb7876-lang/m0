@@ -1,0 +1,277 @@
+{
+ "handoff": "Dots CX-0155EG r1 (EGO 2D 전신 모션, ROUGH·HOLD 포함 — 코드 손질 후 적용)",
+ "files": [
+  {
+   "source": "CX-0155EG-2_idle_front8_r1_ROUGH.png",
+   "sourceSha256": "17d0ed62d09c52a65e24f3ccbaad0b0d1379138f6c23d45c077ae7789de06df2",
+   "sourceBytes": 816532,
+   "sourceCell": 512,
+   "file": "idle-front.webp",
+   "sha256": "25056911c069c3aef6bb81ee468a266c366e1dc0254b08ba18b7b92100c53975",
+   "bytes": 89286,
+   "cell": 256,
+   "frames": 8,
+   "foot": [
+    128,
+    220
+   ],
+   "use": "대기 · 앞",
+   "fix": ""
+  },
+  {
+   "source": "CX-0155EG-2_idle_right8_r1_ROUGH.png",
+   "sourceSha256": "e2be6c9ca74bb2c9698db284612f9309ac2b6fc360560d40a1a3cc3671c10f27",
+   "sourceBytes": 718526,
+   "sourceCell": 512,
+   "file": "idle-right.webp",
+   "sha256": "2e0d9aa35965d72436e52e9de8c2d9ed6152177d47204e74089459695dce1f77",
+   "bytes": 74438,
+   "cell": 256,
+   "frames": 8,
+   "foot": [
+    128,
+    220
+   ],
+   "use": "대기 · 오른쪽(왼쪽은 좌우 뒤집기)",
+   "fix": ""
+  },
+  {
+   "source": "CX-0155EG-2_idle_rear8_r1_ROUGH.png",
+   "sourceSha256": "eab7ba87c525f3c9f75bb0b88efb18038dc95422ce4ebb045de56af6c2c5700c",
+   "sourceBytes": 825126,
+   "sourceCell": 512,
+   "file": "idle-rear.webp",
+   "sha256": "af505abf4e3c9d40217f316fa7e1d3d413faf4a37c521a6a4eb2b1a1483e811d",
+   "bytes": 81912,
+   "cell": 256,
+   "frames": 8,
+   "foot": [
+    128,
+    220
+   ],
+   "use": "대기 · 뒤",
+   "fix": ""
+  },
+  {
+   "source": "CX-0155EG-1_walk_front8_r1_ROUGH.png",
+   "sourceSha256": "25dfd0b6a3c1f2e3bd34d04da041ef5c8565281f41d2b0b3db73f1c7f100c83b",
+   "sourceBytes": 709313,
+   "sourceCell": 512,
+   "file": "walk-front.webp",
+   "sha256": "211d98c8cd44689a41e3ec4444bb316c72a31c8b77332af44e9ad4692242690b",
+   "bytes": 79608,
+   "cell": 256,
+   "frames": 8,
+   "foot": [
+    128,
+    220
+   ],
+   "use": "걷기 · 앞",
+   "fix": ""
+  },
+  {
+   "source": "CX-0155EG-1_walk_right8_r1_ROUGH.png",
+   "sourceSha256": "a786ac5d3f6eef7effa626fdba73481d66b2a94982c550b0279276ec86395e67",
+   "sourceBytes": 757385,
+   "sourceCell": 512,
+   "file": "walk-right.webp",
+   "sha256": "1a2e89ae1c68b2c75926a8e518e5e6cad631848113094a2d217fe1c55a1c8d6c",
+   "bytes": 81386,
+   "cell": 256,
+   "frames": 8,
+   "foot": [
+    128,
+    220
+   ],
+   "use": "걷기 · 오른쪽",
+   "fix": ""
+  },
+  {
+   "source": "CX-0155EG-1_walk_rear8_r1_ROUGH.png",
+   "sourceSha256": "fb65b2daf7c7ce6890567081937c396d269ad5d7ba0314c43c98e174ac2668ff",
+   "sourceBytes": 1583952,
+   "sourceCell": 512,
+   "file": "walk-rear.webp",
+   "sha256": "e29526ff2942c734d4093b2433a5ec097aebfb3add54c43b81fbd76d72f81d89",
+   "bytes": 88898,
+   "cell": 256,
+   "frames": 8,
+   "foot": [
+    128,
+    220
+   ],
+   "use": "걷기 · 뒤(종이 배경 지움)",
+   "fix": "paper 8/8, scale 0.986"
+  },
+  {
+   "source": "CX-0155EG-4_run_front8_r1_ROUGH.png",
+   "sourceSha256": "bcf403718c2e16e68270e46faabfc0d8b254b600cb2f12bf82bee211480f94cb",
+   "sourceBytes": 1834872,
+   "sourceCell": 512,
+   "file": "run-front.webp",
+   "sha256": "857faf4b353feff638a60e09fc5e2171330d9d3761e4b8fe578d712c1c0d8269",
+   "bytes": 114596,
+   "cell": 256,
+   "frames": 8,
+   "foot": [
+    128,
+    220
+   ],
+   "use": "달리기 · 앞(종이 배경 지움)",
+   "fix": "paper 8/8, scale 0.977"
+  },
+  {
+   "source": "CX-0155EG-4_run_right8_r1_HOLD.png",
+   "sourceSha256": "62efb2fb7a64182d22f2d2ebcb1d1806aefb7d8e2253cf1b931d7441039e1e34",
+   "sourceBytes": 1075449,
+   "sourceCell": 512,
+   "file": "run-right.webp",
+   "sha256": "60e75bd31cb8a25f0e68f62ae58daa550fb119834df06c7da66d28fe241a5e72",
+   "bytes": 118866,
+   "cell": 256,
+   "frames": 8,
+   "foot": [
+    128,
+    220
+   ],
+   "use": "달리기 · 오른쪽",
+   "fix": ""
+  },
+  {
+   "source": "CX-0155EG-4_run_rear8_r1_ROUGH.png",
+   "sourceSha256": "a1a8e96db44af2879e31ded0ab4acbc0038eb1731a7b6f04126c3ad1221fde98",
+   "sourceBytes": 677391,
+   "sourceCell": 512,
+   "file": "run-rear.webp",
+   "sha256": "c44df27425d93413067b69aa7d26ebf29436084d85ce9da49a9bd043cc268d81",
+   "bytes": 71642,
+   "cell": 256,
+   "frames": 8,
+   "foot": [
+    128,
+    220
+   ],
+   "use": "달리기 · 뒤",
+   "fix": ""
+  },
+  {
+   "source": "CX-0155EG-3_hit_front4_r1_ROUGH.png",
+   "sourceSha256": "23482a6dd0f70c904d233c1277abd8ecf296c54be91bd06e31a80ae79c31740c",
+   "sourceBytes": 419835,
+   "sourceCell": 512,
+   "file": "hit-front.webp",
+   "sha256": "1afa03ebd0f312be70b07da598d6e3d09236410656105ac3e70180e80aeaf543",
+   "bytes": 44978,
+   "cell": 256,
+   "frames": 4,
+   "foot": [
+    128,
+    220
+   ],
+   "use": "피격 · 앞",
+   "fix": ""
+  },
+  {
+   "source": "CX-0155EG-3_hit_right4_r1_ROUGH.png",
+   "sourceSha256": "d139de770908a01e2cea0f70b7168f4ccbab6e4fabad9856c78ea93a08eea90b",
+   "sourceBytes": 378324,
+   "sourceCell": 512,
+   "file": "hit-right.webp",
+   "sha256": "05803aeb5fb127e2b80a13f6572a8d68bff17fef52cfffebf568539a7476c2ee",
+   "bytes": 39174,
+   "cell": 256,
+   "frames": 4,
+   "foot": [
+    128,
+    220
+   ],
+   "use": "피격 · 오른쪽",
+   "fix": ""
+  },
+  {
+   "source": "CX-0155EG-3_hit_rear4_r1_ROUGH.png",
+   "sourceSha256": "0efc7ab2d5e9912235ddc4710ec46403dece52d1efbc8443aa41cf286088c09a",
+   "sourceBytes": 444532,
+   "sourceCell": 512,
+   "file": "hit-rear.webp",
+   "sha256": "ce155ed5081fa1f62bfe07d84b1bf3e931997279385cce28dc2513ae81f690c0",
+   "bytes": 42848,
+   "cell": 256,
+   "frames": 4,
+   "foot": [
+    128,
+    220
+   ],
+   "use": "피격 · 뒤",
+   "fix": ""
+  },
+  {
+   "source": "CX-0155EG-5_cast_front8_r1_ROUGH.png",
+   "sourceSha256": "722b86ffea03a68067b85761ead7443573a6d12002470b4f324c1d24fb142e7d",
+   "sourceBytes": 807554,
+   "sourceCell": 512,
+   "file": "cast-front.webp",
+   "sha256": "cc589d6ff5f63d77093ccbf579e4de3db7951774a323ce9bba33589bff8fa6f6",
+   "bytes": 88090,
+   "cell": 256,
+   "frames": 8,
+   "foot": [
+    128,
+    220
+   ],
+   "use": "스킬 시전 · 앞",
+   "fix": ""
+  },
+  {
+   "source": "CX-0155EG-5_cast_right8_r1_ROUGH.png",
+   "sourceSha256": "6b8ea3ff9c797a6d9bb1097ebf32785307f7f630102e52733d0e8775c72993a8",
+   "sourceBytes": 1628688,
+   "sourceCell": 512,
+   "file": "cast-right.webp",
+   "sha256": "6b623adbbfb7ba0bb5b27914d98519dd83238ffb8e47eebd0c5ffa1a658f4c90",
+   "bytes": 93396,
+   "cell": 256,
+   "frames": 8,
+   "foot": [
+    128,
+    220
+   ],
+   "use": "스킬 시전 · 오른쪽(종이 배경 지움)",
+   "fix": "paper 7/8, scale 0.988"
+  },
+  {
+   "source": "CX-0155EG-5_cast_rear8_r1_ROUGH.png",
+   "sourceSha256": "fd2ba901d83e863de0017593bc13eb05c7f2cf48a2d1049fbdb5bc1505432bc5",
+   "sourceBytes": 872494,
+   "sourceCell": 512,
+   "file": "cast-rear.webp",
+   "sha256": "8f7fba603d3b458c702bc48c7069a084e4930289557fe20e041d56d7b54ac08f",
+   "bytes": 85310,
+   "cell": 256,
+   "frames": 8,
+   "foot": [
+    128,
+    220
+   ],
+   "use": "스킬 시전 · 뒤",
+   "fix": ""
+  },
+  {
+   "source": "CX-0155EG-6_discard_front12_r1_ROUGH.png",
+   "sourceSha256": "2b4d10d7d14d1a44ae59954e1ebac92d41b9875e904c3b7a9fa99b970ce539c3",
+   "sourceBytes": 1224674,
+   "sourceCell": 512,
+   "file": "discard-front.webp",
+   "sha256": "8658fabf881ed4011d3c0df7b5259327c6532d809cb049ce7e194980e5eb09f6",
+   "bytes": 123944,
+   "cell": 256,
+   "frames": 12,
+   "foot": [
+    128,
+    220
+   ],
+   "use": "관측 폐기 · 앞(다른 방향도 이 그림)",
+   "fix": ""
+  }
+ ]
+}

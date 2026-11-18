@@ -11883,6 +11883,11 @@
       "sha256": "51082727cb9c57966c79d90a98957b3373025e086fe1c5d5da23da0254eddad4"
     },
     {
+      "path": "assets/r1162/move/u205-mid-down.webp",
+      "bytes": 44760,
+      "sha256": "03ba2b02b20f5ec1e94e0e457f0551b02df609402b13b110c3ae7677d15cc139"
+    },
+    {
       "path": "assets/r117/scene/ep-cup-k1.png",
       "bytes": 2264,
       "sha256": "a39b05d84a4613cb40d72e213a26b9bccbc254b82e4cd9888f0b47e085a209e2"
@@ -12091,6 +12096,101 @@
       "path": "assets/r117/scene/s03-ring-k4.png",
       "bytes": 15735,
       "sha256": "8aa7194697512b1fd43d594840c24af3d24aefac2c36120969d743e28560cb11"
+    },
+    {
+      "path": "assets/r1173/persona-walk-side.webp",
+      "bytes": 400832,
+      "sha256": "88ebb09daf98f3d998c55fa3ad4d7478abc4a8eb505435d4e86062eb4f645cd1"
+    },
+    {
+      "path": "assets/r1176/ego2d/cast-front.webp",
+      "bytes": 88090,
+      "sha256": "cc589d6ff5f63d77093ccbf579e4de3db7951774a323ce9bba33589bff8fa6f6"
+    },
+    {
+      "path": "assets/r1176/ego2d/cast-rear.webp",
+      "bytes": 85310,
+      "sha256": "8f7fba603d3b458c702bc48c7069a084e4930289557fe20e041d56d7b54ac08f"
+    },
+    {
+      "path": "assets/r1176/ego2d/cast-right.webp",
+      "bytes": 93396,
+      "sha256": "6b623adbbfb7ba0bb5b27914d98519dd83238ffb8e47eebd0c5ffa1a658f4c90"
+    },
+    {
+      "path": "assets/r1176/ego2d/discard-front.webp",
+      "bytes": 123944,
+      "sha256": "8658fabf881ed4011d3c0df7b5259327c6532d809cb049ce7e194980e5eb09f6"
+    },
+    {
+      "path": "assets/r1176/ego2d/hit-front.webp",
+      "bytes": 44978,
+      "sha256": "1afa03ebd0f312be70b07da598d6e3d09236410656105ac3e70180e80aeaf543"
+    },
+    {
+      "path": "assets/r1176/ego2d/hit-rear.webp",
+      "bytes": 42848,
+      "sha256": "ce155ed5081fa1f62bfe07d84b1bf3e931997279385cce28dc2513ae81f690c0"
+    },
+    {
+      "path": "assets/r1176/ego2d/hit-right.webp",
+      "bytes": 39174,
+      "sha256": "05803aeb5fb127e2b80a13f6572a8d68bff17fef52cfffebf568539a7476c2ee"
+    },
+    {
+      "path": "assets/r1176/ego2d/idle-front.webp",
+      "bytes": 89286,
+      "sha256": "25056911c069c3aef6bb81ee468a266c366e1dc0254b08ba18b7b92100c53975"
+    },
+    {
+      "path": "assets/r1176/ego2d/idle-rear.webp",
+      "bytes": 81912,
+      "sha256": "af505abf4e3c9d40217f316fa7e1d3d413faf4a37c521a6a4eb2b1a1483e811d"
+    },
+    {
+      "path": "assets/r1176/ego2d/idle-right.webp",
+      "bytes": 74438,
+      "sha256": "2e0d9aa35965d72436e52e9de8c2d9ed6152177d47204e74089459695dce1f77"
+    },
+    {
+      "path": "assets/r1176/ego2d/index.json",
+      "bytes": 7331,
+      "sha256": "111aa5d98c866b43589ea1bb7a58237bb79dac976ef3f2581b5c7356bc851772"
+    },
+    {
+      "path": "assets/r1176/ego2d/run-front.webp",
+      "bytes": 114596,
+      "sha256": "857faf4b353feff638a60e09fc5e2171330d9d3761e4b8fe578d712c1c0d8269"
+    },
+    {
+      "path": "assets/r1176/ego2d/run-rear.webp",
+      "bytes": 71642,
+      "sha256": "c44df27425d93413067b69aa7d26ebf29436084d85ce9da49a9bd043cc268d81"
+    },
+    {
+      "path": "assets/r1176/ego2d/run-right.webp",
+      "bytes": 118866,
+      "sha256": "60e75bd31cb8a25f0e68f62ae58daa550fb119834df06c7da66d28fe241a5e72"
+    },
+    {
+      "path": "assets/r1176/ego2d/walk-front.webp",
+      "bytes": 79608,
+      "sha256": "211d98c8cd44689a41e3ec4444bb316c72a31c8b77332af44e9ad4692242690b"
+    },
+    {
+      "path": "assets/r1176/ego2d/walk-rear.webp",
+      "bytes": 88898,
+      "sha256": "e29526ff2942c734d4093b2433a5ec097aebfb3add54c43b81fbd76d72f81d89"
+    },
+    {
+      "path": "assets/r1176/ego2d/walk-right.webp",
+      "bytes": 81386,
+      "sha256": "1a2e89ae1c68b2c75926a8e518e5e6cad631848113094a2d217fe1c55a1c8d6c"
+    },
+    {
+      "path": "assets/r1176/ego3d-portrait.webp",
+      "bytes": 6054,
+      "sha256": "be3e445c80d0c2a59f1f743a5b94a96ca6210a8f4ed7b98fa0917f874bc64913"
     },
     {
       "path": "assets/r118/clean/assets/visual-test/hospital-boss-motion-r53.png",
@@ -54338,6 +54438,11 @@
       "sha256": "a58b58979fb542c0f6f8ed2ba2a54a0894495972252c3879b88294047c2f464c"
     },
     {
+      "path": "ego-form-r1176.js",
+      "bytes": 16390,
+      "sha256": "6170b1b484fc32b291421e0b9ce51a609ff99a2d2953ebb6904757cc92b5c762"
+    },
+    {
       "path": "ego-guard-r1100.js",
       "bytes": 10667,
       "sha256": "a30177493270b38426ecb70a4fa2e59a15ef1eb035abf2c98a4bed0c348edf4f"
@@ -54849,8 +54954,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6581939,
-      "sha256": "6336c0a0838fc210e44719473f2a8cf3c3ab40395960ede7a23e176543be802b"
+      "bytes": 6582032,
+      "sha256": "c01dc46e57051febf9f81f3fef99551dcf2ba5afd8a219dd5f8949f85b9b6f2a"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -55223,6 +55328,11 @@
       "sha256": "494d60fa266c022a62a839e724d4d8dde3590ac67c707c6a912fa9efe080fd3e"
     },
     {
+      "path": "move-dir-r1162-data.js",
+      "bytes": 1737,
+      "sha256": "ec4c05626a4a57bd6bfc5c077dabc3f1d7b8e59ccb4ea659af4b3e33cdb62ca6"
+    },
+    {
       "path": "move-dir-r974-data.js",
       "bytes": 12620,
       "sha256": "1964909c541f39cb91539077081f36fd091fa0846b9cb15820bf1f5a2c0ce999"
@@ -55404,8 +55514,8 @@
     },
     {
       "path": "persona-hero-r1113.js",
-      "bytes": 49186,
-      "sha256": "b416d9af879a761ebc5f622e0e2f0d87b82d99cec2e1ffe1539deef8eae57def"
+      "bytes": 52827,
+      "sha256": "08ef641dd3f988976cd997b0611e106290e5518104191d9d34b1819f5dc8da96"
     },
     {
       "path": "persona-ink-r1097.js",
@@ -56243,9 +56353,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11248,
-  "totalBytes": 1352918808,
-  "webHTMLSha256": "6336c0a0838fc210e44719473f2a8cf3c3ab40395960ede7a23e176543be802b",
+  "fileCount": 11270,
+  "totalBytes": 1354718018,
+  "webHTMLSha256": "c01dc46e57051febf9f81f3fef99551dcf2ba5afd8a219dd5f8949f85b9b6f2a",
   "largest": [
     {
       "path": "index.html",
