@@ -1,0 +1,42 @@
+{
+ "revision": "R1229",
+ "hero": "hunter",
+ "format": "R128 sheet: 8 cells x 192x256, foot (96,226), body 180",
+ "files": {
+  "walk1229-s.webp": {
+   "sha256": "57424b0af5bdebf15dd305415faffe4addfb3a803b3225f8578b7ed051495267",
+   "bytes": 83376,
+   "source": "r91/walk/walk-hunter-s.png",
+   "sourceSha256": "4cc0cb32d117b8c8d5b90c6172ab4f26c42c28e0c2dd393efa7898c278aba581",
+   "mirrorOf": "s"
+  },
+  "walk1229-se.webp": {
+   "sha256": "a9cfac71374c71ed553225155dcf148481e23d037cc530aca9b9f5b588d17e78",
+   "bytes": 99888,
+   "source": "r91/walk/walk-hunter-se.png",
+   "sourceSha256": "e12bae28ecd61e0bfe8114729ab43ebbd1c377ae71250603883caa5f0ee640a4",
+   "mirrorOf": "se"
+  },
+  "walk1229-e.webp": {
+   "sha256": "8e4b487b2fd5e9bd144f20f2747e9be67dcfaefeddae36d3d5118dca073222a7",
+   "bytes": 98872,
+   "source": "r91/walk/walk-hunter-se.png",
+   "sourceSha256": "e12bae28ecd61e0bfe8114729ab43ebbd1c377ae71250603883caa5f0ee640a4",
+   "mirrorOf": "se"
+  },
+  "walk1229-ne.webp": {
+   "sha256": "f430488c65e71602e482933747ccb3897061f0a2ba665a9f66a1896cc1516770",
+   "bytes": 100726,
+   "source": "r91/walk/walk-hunter-ne.png",
+   "sourceSha256": "8c04e241096386e6f34012c72c4944b687cfd30a7a0ce342d273b4134a699c75",
+   "mirrorOf": "ne"
+  },
+  "walk1229-n.webp": {
+   "sha256": "2610639b314d5a4696cd8b409dd0109c60ae1525df3e21f68b228956a3f4e0a3",
+   "bytes": 88662,
+   "source": "r91/walk/walk-hunter-n.png",
+   "sourceSha256": "d6fc688ff2d94bfbe3c9de0e97c15783178bce291ead3b5954cf901a210ab5e2",
+   "mirrorOf": "n"
+  }
+ }
+}
