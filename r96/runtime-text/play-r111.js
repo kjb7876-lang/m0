@@ -218,7 +218,7 @@ function grayDone(image,c,w,h){const src=image.__storyworldStaticSource||image._
  Object.defineProperty(c,'__r1199AlphaOf',{value:image});/* R1199: 알파가 원본과 같다 → R409 테두리를 원본 열쇠로 같이 쓴다 */
  grayMap.set(image,c);grayList.push(c);samongState.grayImages++;samongState.grayPixels+=w*h;grayLog.push((preOn?'pre ':'on ')+w+'x'+h+' '+path.split('/').slice(-2).join('/'));if(grayLog.length>24)grayLog.shift();return c;}
 const grayLog=[];/* R1199 진단: 최근 만든 흑백 사본(예열 pre / 각성 중 on) */
-function grayReset(){for(const c of grayList){c.width=1;c.height=1;}grayMap=new WeakMap();grayList=[];samongState.grayPixels=0;preQ.clear();pend=null;}
+function grayReset(){preRelease();for(const c of grayList){c.width=1;c.height=1;}grayMap=new WeakMap();grayList=[];samongState.grayPixels=0;preQ.clear();pend=null;}
 // R1199 ① 예열(사용자 2026-11-19 "사몽각성관련해서 전수조사해서 렉이특히 심해지는이유와 그이유에맞게 규칙개선해서 렉개선해줘"):
 //  각성 첫 장면에 흑백 사본 16~18장(330만 화소)을 한꺼번에 만들고 GPU 에 올려 그 장면이 350~560ms 걸렸다(헤드리스, 평소 20ms).
 //  사몽을 곧 쓸 수 있는 동안(꿈 층·사몽 대기 3초 이하·각성 아님) 그 장면에 그린 세계 그림(영웅·이펙트·투사체 제외)을 줄에 넣고,
@@ -228,7 +228,12 @@ const PREWARM=Object.freeze({ready:3,budget:.75e6,budgetLow:.25e6,mobileCap:6e6,
 const preQ=new Set();let preOn=false,pend=null;/* pend: 장면 예산보다 큰 그림을 줄 단위로 나눠 만드는 중 {im,c,g,y} */
 const perfStep=()=>{try{const v=window.__STORYWORLD_PERF7_R1043__?.step?.();const n=Number(v);return Number.isFinite(n)?n:5;}catch(_){return 5;}};
 function preReady(){try{return !!(prefs.samong&&prefs.samongPrewarm&&live()&&typeof layer!=='undefined'&&layer==='DREAM'&&!samongState.on&&!(Number(player.samong)>0)&&Number(player.samongCD)<=PREWARM.ready&&!(Number(player.hp)<=0)&&perfStep()>1);}catch(_){return false;}}
-function preUpload(c){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;const tex=r?.commands?.texture?.(c,false);if(tex&&r.renderer?.initTexture){r.renderer.initTexture(tex);samongState.prewarmUploaded++;}}catch(e){fail(e);}}
+// R1211(R1199 후속, Dots 검수·코드 리뷰): texture() 는 참조를 하나 올린다 → 예열이 얻은 참조를 사본마다 한 번만 기록하고(얻은 장면과 함께),
+//  사본을 버릴 때(grayReset) 그 장면에 한 번만 돌려준다. 예전엔 놓지 않아 버린 사본의 텍스처가 R89 정리에 안 걸리고 쌓였다(모바일 각성 3회에 참조 1→2→3).
+const preLease=new Map();/* 사본 캔버스 → 참조를 얻은 CommandScene */
+function preRelease(){for(const [c,S] of preLease){try{S.release?.(c);samongState.prewarmReleased=(samongState.prewarmReleased||0)+1;}catch(e){fail(e);}}preLease.clear();}
+function preUpload(c){try{if(preLease.has(c))return;const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three,S=r?.commands;const tex=S?.texture?.(c,false);if(!tex)return;preLease.set(c,S);
+ if(r.renderer?.initTexture){r.renderer.initTexture(tex);samongState.prewarmUploaded++;}}catch(e){fail(e);}}
 function prewarmTick(){if(!preOn)return;const cap=grayMobile()?PREWARM.mobileCap:Infinity;let budget=lowFx()?PREWARM.budgetLow:PREWARM.budget;
  try{
   if(pend){const im=pend.im,w=pend.w,h=pend.h;if(grayMap.has(im)){pend=null;}else{const rows=Math.max(1,Math.min(h-pend.y,Math.floor(budget/w)));

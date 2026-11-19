@@ -84,5 +84,5 @@ ok(fs.readFileSync(path.join(RT,'combat-read-r409.js'),'utf8')===r409,'runtime-t
 const mIm=r409.match(/const imgId=im=>\{[^\n]*\n/);ok(!!mIm,'R409 imgId 찾음');
 if(mIm){const imgId=vm.runInNewContext('(()=>{const ids=new WeakMap();let idSerial=0;'+mIm[0]+';return imgId;})()',{WeakMap});
  const s2={src:'https://x/assets/mob.png',currentSrc:'https://x/assets/mob.png'},gc={};Object.defineProperty(gc,'__r1199AlphaOf',{value:s2});const other={};
- ok(imgId(gc)===imgId(s2),'R409: 흑백 사본 열쇠 = 원본 열쇠('+imgId(gc)+')');ok(imgId(other)!==imgId(s2)&&imgId(other)!==imgId({}),'R409: 원본 없는 캔버스는 예전처럼 물체마다 번호');}
+ ok(imgId(gc)===imgId(s2)+':g','R409: 흑백 사본 열쇠 = 원본 열쇠+:g(R1211 — 구운 칸에 몸 RGB 가 들어가 컬러와 나눔)('+imgId(gc)+')');ok(imgId(other)!==imgId(s2)&&imgId(other)!==imgId({}),'R409: 원본 없는 캔버스는 예전처럼 물체마다 번호');}
 console.log(`\nR1199 CPU ${n-bad}/${n} ${bad?'FAIL':'PASS'}`);process.exit(bad?1:0);
