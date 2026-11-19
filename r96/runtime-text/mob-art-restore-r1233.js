@@ -15,7 +15,7 @@
 //  · 끄기: localStorage['storyworld.r1233.restore']='{"on":false}'. API window.__STORYWORLD_MOB_ART_RESTORE_R1233__.
 (()=>{'use strict';
 if(window.__STORYWORLD_MOB_ART_RESTORE_R1233__)return;
-const REV='R1233-restore-4',KEY='storyworld.r1233.restore',INDEX='assets/r380/mobs/index.json';
+const REV='R1233-restore-5',KEY='storyworld.r1233.restore',INDEX='assets/r380/mobs/index.json';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={shade:0,rows:0,ward:0,frames:0,installs:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 // ② [기본 이름, 어디서(samong: 사몽 에피소드 구역 키 정규식 / dream: 스토리 사몽 꿈 층), R380 표 줄 id]
@@ -70,7 +70,9 @@ const SHEETS=Object.freeze({m044:Object.freeze({path:'assets/r1233/mobs/m044.web
  m057:Object.freeze({path:'assets/r1233/mobs/m057.webp',body:186,name:'본능 추출 결정'}),
  m091:Object.freeze({path:'assets/r1233/mobs/m091.webp',body:194,name:'서로의 결말을 먹는 도시'}),
  m043:Object.freeze({path:'assets/r1233/mobs/m043.webp',body:148,name:'장미이슬 슬라임'}),
- m058:Object.freeze({path:'assets/r1233/mobs/m058.webp',body:192,name:'죄책감 압축결정'})});
+ m058:Object.freeze({path:'assets/r1233/mobs/m058.webp',body:192,name:'죄책감 압축결정'}),
+ // 2차: 다시 일으켜 세워진 도전자(사몽 S-03, 석고 관절 인형)(사냥개 RC41 은 S-06-5 에서 헤드리스로 세 번 다 안 나와 확인 못 해 보류).
+ m069:Object.freeze({path:'assets/r1233/mobs/m069.webp',body:204,name:'다시 일으켜 세워진 도전자'})});
 const sheetOrig={},sheetApplied=[];
 function applySheets(on){const D=window.__STORYWORLD_MOB_UNIQUE_R248_DATA__;if(!D||!D.sheets)return false;sheetApplied.length=0;
  for(const [id,a] of Object.entries(SHEETS)){const s=D.sheets[id];if(!s||s.name!==a.name)continue;try{if(!sheetOrig[id])sheetOrig[id]={path:s.path,body:s.body};

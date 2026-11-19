@@ -77,7 +77,7 @@ W.room={id:'cult04'};ok(A().assign({name:'중간보스 · ID 배양 점액체',w
 {const ix=JSON.parse(fs.readFileSync(path.join(R,'runtime-text/assets/r1233/mobs/index.json'),'utf8')).mobs,SH=W.__STORYWORLD_MOB_ART_RESTORE_R1233__.sheets;
  for(const m of ix){ok(SH[m.id]&&SH[m.id].path==='assets/r1233/mobs/'+m.file&&SH[m.id].body===m.body&&SH[m.id].name===m.name,'SHEETS 줄 '+m.id+' '+m.name);
   ok(crypto0.createHash('sha256').update(fs.readFileSync(path.join(R,'runtime-text/assets/r1233/mobs',m.file))).digest('hex')===m.sha256,'시트 해시 '+m.id);}
- for(const id of ['m087','m072','m025','m026','m057','m091','m043','m058'])ok(ix.some(m=>m.id===id),'CX-0177RC 1차 적용 '+id);
+ for(const id of ['m087','m072','m025','m026','m057','m091','m043','m058','m069'])ok(ix.some(m=>m.id===id),'CX-0177RC 1차 적용 '+id);
  for(const id of ['m027','m029','m053','m061'])ok(!SH[id],'보류(사용자 채택 주장 m027·m029, DU07 경로 의존 m053, 잘림 m061) '+id);}
 ok(D.sheets.m072.path==='assets/r1233/mobs/m072.webp','규칙을 어기지 않는 마네킹 → Dots 나무 마네킹 시트');
 ok(D.sheets.m099.path==='assets/r410/mobs/m099.webp','다른 줄은 그대로');
