@@ -31,7 +31,9 @@ const SHEETS=Object.freeze({
  'u206-mech-01-v1':Object.freeze({path:'assets/r1170/mm-u206a-hit4.webp',cell:[256,320],own:'assets/r380/mobs/u206-mech-01-v1.webp'}),
  'u206-mech-02-v1':Object.freeze({path:'assets/r1170/mm-u206b-hit4.webp',cell:[256,320],own:'assets/r380/mobs/u206-mech-02-v1.webp'}),
  'war-machine-hound-v1':Object.freeze({path:'assets/r1170/mm-hound-hit4.webp',cell:[256,320],own:'assets/r380/mobs/war-machine-hound-v1.webp'}),
- 'electrode-machine-knight-v1':Object.freeze({path:'assets/r1170/mm-knight-hit4.webp',cell:[256,256],own:'assets/r380/mobs/electrode-machine-knight-v1.webp'})});
+ 'electrode-machine-knight-v1':Object.freeze({path:'assets/r1170/mm-knight-hit4.webp',cell:[256,256],own:'assets/r380/mobs/electrode-machine-knight-v1.webp'}),
+ /* R1184: S-06 외계 침공군(m077) — Dots CX-0162IV r1 ROUGH(scripts/r1184-iv-md31-sheets.py: 1~3칸 색 맞춤, 4칸 = 원본 0칸). R248 이 ctx.drawImage 로 직접 그리므로 frameFor 가 아니라 r248() 로 준다 */
+ 'm077':Object.freeze({path:'assets/r1184/iv-m077-hit4.webp',cell:[256,320],own:'assets/r1179/mobs/m077.webp'})});
 const stats={hits:0,frames:0,waiting:0,rewraps:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e&&e.message||e).slice(0,160);};
 let on=true;try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(v&&v.on===false)on=false;}catch(_){}
 const T=()=>{try{return typeof time==='number'?time:0;}catch(_){return 0;}};
@@ -40,10 +42,11 @@ function ready(p){try{const r=typeof readyImage==='function'?readyImage(p):null;
 function want(p){try{if(typeof ensureImages==='function'){const r=ensureImages([p]);if(r&&typeof r.catch==='function')r.catch(()=>{});}}catch(_){}}
 const attacking=e=>!!(e.attack&&Number.isFinite(e.attack.elapsed));
 function frameIdx(el){let ms=el*1000;for(let i=0;i<MS.length;i++){if(ms<MS[i]-1e-6)return i;ms-=MS[i];}return -1;}
-function hitFrame(e,base){if(!on||!e||!base||typeof base!=='object'||base.r1156Hit!=null)return base;const id=base.r208Mob||base.r374Mob,S=id&&SHEETS[id];if(!S)return base;
- const t=T(),h=Number(e.hitTimer)||0;let s=ST.get(e);if(!s){s={prev:0,t0:-1e9};ST.set(e,s);}
+function hitK(e){const t=T(),h=Number(e.hitTimer)||0;let s=ST.get(e);if(!s){s={prev:0,t0:-1e9};ST.set(e,s);}
  if(h>0&&(h>s.prev+1e-4||s.prev<=0)&&t-s.t0>=RESTART){s.t0=t;stats.hits++;}s.prev=h;
- if(!(e.hp>0)||attacking(e))return base;const k=frameIdx(t-s.t0);if(k<0)return base;
+ if(!(e.hp>0)||attacking(e))return -1;return frameIdx(t-s.t0);}
+function hitFrame(e,base){if(!on||!e||!base||typeof base!=='object'||base.r1156Hit!=null)return base;const id=base.r208Mob||base.r374Mob,S=id&&SHEETS[id];if(!S)return base;
+ const k=hitK(e);if(k<0)return base;
  if(!ready(S.path)){want(S.path);stats.waiting++;return base;}
  const af=base.assetFrame||{},[cw,ch]=S.cell,flip=base.path===S.own?!!base.flip:!base.flip;/* 왼쪽 보는 쌍둥이 시트면 뒤집기 뜻이 반대 */stats.frames++;
  return {...base,path:S.path,assetFrame:{...af,sourceRect:[k*cw,0,cw,ch]},sourceAlphaCore:[k*cw,0,cw,ch],flip,r1156Hit:k};}
@@ -58,6 +61,12 @@ function wrap(){try{const S=window.__STORYWORLD_STORY_COMBAT_R54__;if(!S||typeof
   const inner=S.frameFor,{__r1156:_old,...rest}=S;mine=Object.freeze({...rest,__r1156:true,frameFor(e,f){pass++;const b=inner.call(this,e,f);if(e===PROBE)return b;try{return hitFrame(e,b);}catch(err){fail(err);return b;}}});
   window.__STORYWORLD_STORY_COMBAT_R54__=mine;stats.rewraps++;return true;}catch(err){fail(err);return false;}}
 try{setTimeout(wrap,0);setInterval(wrap,1000);}catch(_){wrap();}
-window.__STORYWORLD_MOB_HIT_R1156__=Object.freeze({revision:REV,sheets:SHEETS,ms:MS,set:v=>{on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;},
+// R1184: R248(mob-unique-r248)이 직접 그리는 몹은 frameFor 를 안 탄다 → R248 이 그리기 전에 r248(e, 지금 시트 경로)를 묻는다(R1065c aimR248 과 같은 꼴).
+//  피격 시트 칸이 R248 칸(256×320, 발 128,300)과 같을 때만 쓴다. 공격·죽음 중이면 null.
+const normP=p=>String(p||'').split('?')[0].replace(/^.*?assets\//,'');const OWN248=new Map();for(const k in SHEETS){const S=SHEETS[k];if(S.cell[0]===256&&S.cell[1]===320)OWN248.set(normP(S.own),S);}
+function r248(e,p){try{if(!on||!e)return null;const S=OWN248.get(normP(p));if(!S)return null;const k=hitK(e);if(k<0)return null;
+ if(!ready(S.path)){want(S.path);stats.waiting++;return null;}let img=null;try{img=readyImage(S.path).image;}catch(_){}if(!img)return null;stats.frames++;
+ return {img,sx:k*256,sy:0,w:256,h:320,dx:-128,dy:-300,r:1,cell:k};}catch(err){fail(err);return null;}}
+window.__STORYWORLD_MOB_HIT_R1156__=Object.freeze({revision:REV,sheets:SHEETS,ms:MS,r248,set:v=>{on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;},
  inspect:()=>({revision:REV,on,stats:{...stats},lastError})});
 })();

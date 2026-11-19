@@ -8,7 +8,7 @@ const meta=JSON.parse(fs.readFileSync(path.join(root,'runtime-text/assets/r163/p
 const drawn=[];const room={};
 const canvas=()=>{const c={width:0,height:0,getContext:()=>({drawImage(im){c.src=im.src;},getImageData:(x,y,w,h)=>({data:new Uint8ClampedArray(4)}),putImageData(){}})};return c;};
 const ctx={save(){},restore(){},translate(){},scale(){},globalAlpha:1,drawImage(im){drawn.push(im.src);}};
-const sb={window:{},localStorage:{getItem(){return null;},setItem(){}},time:0,room,ctx,document:{createElement:canvas},
+const sb={window:{},localStorage:{getItem(k){return k==='storyworld.r1177.samongPixel'?'{"everywhere":false}':null;},setItem(){}},/* R1193: 기본이 모든 모드가 됨 → 이 검사(본편↔사몽 캐시 열쇠)는 '사몽 에피소드만' 스위치로 본다 */time:0,room,ctx,document:{createElement:canvas},
  fetch:async()=>({ok:true,json:async()=>meta}),readyImage:p=>({image:{src:p,width:256,height:256}}),addImage:()=>null,ensureImages:async()=>{},
  drawEffect(){},tick(){},project:(x,y)=>({x,y}),actorHeight:()=>60,effects:[],Math,JSON,String,Object,Number,Date,Promise,Array,Set,Map,WeakSet,Uint8ClampedArray};
 vm.createContext(sb);vm.runInContext(C('pixelfx-r163.js'),sb);

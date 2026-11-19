@@ -5,16 +5,18 @@
 //   · 엔진 블링크(S·터치 회피 단추 = 손 지시 / 길잡이 guideStep 이 체력 35% 아래에서 자동으로 부름)
 //   · 원거리 자동 회피(play-r111 autoDodge, moveActor 1.7칸) · 문양 실검무 궤도(hero-threads-r174, 영웅 자리를 바로 바꿈)
 //   · 엔진 실검무(R63/R74) — R706 이 이미 본체를 제자리에 두고 분신을 남긴다(그대로 둠). Q·W·R·T·A·D·F 는 본체를 안 옮김.
-//  끔(모바일 기본): 걷기와 손으로 누른 블링크만 본체를 옮긴다. 나머지는 엔진 판정 그대로 끝점까지 옮겨 피해·이펙트를 낸 뒤
+//  끔(기본, R1194 부터 PC 도): 걷기와 손으로 누른 블링크만 본체를 옮긴다. 나머지는 엔진 판정 그대로 끝점까지 옮겨 피해·이펙트를 낸 뒤
 //   (피해 자리·양·쿨타임은 켬과 같음) 그리기 전에 본체를 제자리(+그 tick 의 걷기)로 되돌리고, 옮겨졌던 자리에 영웅 분신(R767)을 남긴다.
 //   tick 안에서 부른 블링크(길잡이 자동 블링크)는 아무것도 안 한다(쿨타임도 안 씀).
-//  켬(PC 기본): 예전과 같다. 지역 이동·쓰러짐·함께하기(호스트가 자리 권한)는 손대지 않는다. 숫자가 아닌 자리는 쓰지 않는다.
+//  켬: 예전과 같다. 지역 이동·쓰러짐·함께하기(호스트가 자리 권한)는 손대지 않는다. 숫자가 아닌 자리는 쓰지 않는다.
 //  감싸기는 모든 스크립트가 읽힌 뒤(load)에 해서 R706·R174·R111 보다 바깥에서 돈다.
 //  설정: 설정 창 '전투 화면' 구역(R1021 section#combatScreenR1021)에 한 줄, 없으면 #quickSettingsR114 끝.
-//  끄기/켜기: localStorage 'storyworld.r1022.autoMove' = '0'/'1' 또는 __STORYWORLD_AUTO_MOVE_R1022__.set(bool).
+//  끄기/켜기: localStorage 'storyworld.r1194.autoMove' = '0'/'1' 또는 __STORYWORLD_AUTO_MOVE_R1022__.set(bool).
+//  R1194(사용자 2026-11-19 "기술이 영웅을 순간이동 시키기 끈 상태를 기본으로"): PC·모바일 모두 기본 끔. 새 기본값이 모두에게 적용되도록
+//   키를 r1194 로 바꿔 예전 키(storyworld.r1022.autoMove)에 남은 값은 읽지 않는다 — 켜려면 설정에서 다시 켠다.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_AUTO_MOVE_R1022__)return;
-const REV='R1022-auto-move-2',KEY='storyworld.r1022.autoMove',LEAP=1,CLONE_MIN=.35;
+const REV='R1194-auto-move-default-off',KEY='storyworld.r1194.autoMove',LEAP=1,CLONE_MIN=.35;
 // 끔일 때 밸런스(사용자 2026-11-14 "모바일 최적화로 네온 데미지 올리고 서하 헌터 회피를 확률회피로 변경해서 밸런스 맞추셈").
 //  헤드리스 오토 12초 × 3회(qa/r1022/autodps.mjs): 끔/켬 피해 네온 0.895 · 서하 0.95 · 헌터 0.97 → 네온 공격력 ×1.12(1/0.895).
 //  회피형 E(본편 E 가 'escape' — 서하·헌터, R111 원거리 자동 회피 포함)는 몸이 안 빠지는 대신 1.2초 동안 들어오는 피격의 60% 를 무시(첫 타는 피함,
@@ -31,7 +33,7 @@ const ROOM=()=>g(()=>typeof room!=='undefined'?room:null);
 const mobile=()=>g(()=>!!window.__STORYWORLD_MOBILE_R63__?.isMobile?.())===true;
 const solo=()=>{const m=g(()=>window.__STORYWORLD_COOP_SIM_R62__?.mode?.());return !m||m==='off';};
 function stored(){try{const v=localStorage.getItem(KEY);return v==='1'?true:v==='0'?false:null;}catch(_){return null;}}
-const on=()=>{const s=stored();return s===null?!mobile():s;};
+const on=()=>stored()===true;
 const off=()=>!on()&&solo();
 // 한 tick(또는 tick 밖 한 번의 동작) 동안의 기록.
 let depth=0,cur=null,manual=0,outside=null;
@@ -87,7 +89,7 @@ function row(){const doc=typeof document!=='undefined'?document:null;if(!doc||do
  const host=doc.getElementById('combatScreenR1021')||doc.getElementById('quickSettingsR114');if(!host)return;
  const d=doc.createElement('div');d.id='autoMoveR1022';d.className='r1021-row';
  d.innerHTML='<label><input type="checkbox" id="autoMoveR1022Toggle"> 기술이 영웅을 순간이동시키기</label>'+
-  '<p class="small muted">끄면 걷기와 직접 누른 블링크만 영웅을 옮깁니다. 돌진·자동 회피·길잡이 블링크·문양 실검무는 분신이 대신 가서 같은 피해와 이펙트를 냅니다. 모바일 기본은 끔.</p>';
+  '<p class="small muted">끄면 걷기와 직접 누른 블링크만 영웅을 옮깁니다. 돌진·자동 회피·길잡이 블링크·문양 실검무는 분신이 대신 가서 같은 피해와 이펙트를 냅니다. 기본은 끔.</p>';
  host.appendChild(d);const el=d.querySelector('#autoMoveR1022Toggle');if(el){el.checked=on();el.onchange=()=>set(!!el.checked);}}
 if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const r=base.apply(this,a);try{row();}catch(e){fail(e);}return r;};}
 function set(v){try{localStorage.setItem(KEY,v?'1':'0');}catch(_){}const el=typeof document!=='undefined'&&document.getElementById?.('autoMoveR1022Toggle');if(el)el.checked=on();return on();}
