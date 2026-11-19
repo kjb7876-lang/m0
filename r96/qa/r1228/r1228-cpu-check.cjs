@@ -10,7 +10,7 @@ const a=P.indexOf('function createController('),b=P.indexOf('  return controller
 const SRC=path.join(R,'client-source/three-recover-r1228.js');const has=fs.existsSync(SRC);ok(has,'three-recover-r1228.js 있음');
 const HTML=fs.readFileSync(path.join(R,'runtime-text/index.html'),'utf8');
 const iF=HTML.indexOf('<script src="./webgl-fallback-r221.js"></script>'),iR=HTML.indexOf('<script src="./three-recover-r1228.js"></script>'),iP=HTML.indexOf('<script src="./dist/phase1.js');
-ok(iR>iF&&iF>iP,'index.html: phase1 → R221 → (R171) → R1228 순서',{iP,iF,iR});
+ok(iR>iF&&iF>iP,'index.html: phase1 → R221 → (R171·R830·R838·R839) → R1228 순서',{iP,iF,iR});
 ok(HTML.indexOf('three-recover-r1228.js')<HTML.indexOf('const controller=api.createController('),'R1228 이 컨트롤러 만들기 전에 읽힘');
 const R221=fs.readFileSync(path.join(R,'client-source/webgl-fallback-r221.js'),'utf8');
 function world({gl2=true}={}){

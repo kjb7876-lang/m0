@@ -1,6 +1,6 @@
 PASS phase1 createController 원문을 찾음
 PASS three-recover-r1228.js 있음
-PASS index.html: phase1 → R221 → (R171) → R1228 순서 {"iP":4022733,"iF":4022780,"iR":4022874}
+PASS index.html: phase1 → R221 → (R171·R830·R838·R839) → R1228 순서 {"iP":4022733,"iF":4022780,"iR":4023004}
 PASS R1228 이 컨트롤러 만들기 전에 읽힘
 PASS 정상: 3D 로 5번 그림 {"requested":"three","requiredThree":true,"active":"three","reason":"Full compiled region path / eight heroes and preserved EGO; GPU unverified","failed":false,"disposed":false,"legacyFrames":0,"events":[],"chunks":null,"metrics":null,"commandScene":null,"spatial":null,"browserAcceptance":false}
 PASS 정상: 실패 알림 없음
