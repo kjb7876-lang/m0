@@ -1,0 +1,33 @@
+{
+ "revision": "R1206c",
+ "note": "Dots CX-0166SM-C 먹 번짐 예고 ROUGH r1. 무손실 WebP 로만 바꿈(자르지 않음). 발동 C2 는 Dots 품질 보류라 없음.",
+ "sheets": {
+  "ink-bloom-warn8": {
+   "path": "assets/r1206/fx/ink-bloom-warn8.webp",
+   "size": [
+    2048,
+    256
+   ],
+   "frames": 8,
+   "cell": 256,
+   "ellipse": [
+    216,
+    90
+   ],
+   "center": [
+    128,
+    128
+   ],
+   "seconds": 1.3,
+   "loop": false,
+   "bytes": 118660,
+   "sha256": "3f43a99976438b1167a4929a3cce6f695fe9a95d94a3688d8a9ed5e081a8217d",
+   "source": {
+    "file": "CX-0166SM-C_ink-bloom_warn8_r1_ROUGH.png",
+    "bytes": 187302,
+    "sha256": "c14b064ac3599eccfc62e63edf77f795171cca9cf2882bf2c716ecfb28544666"
+   },
+   "status": "ROUGH r1 적용(최종 검수 전)"
+  }
+ }
+}

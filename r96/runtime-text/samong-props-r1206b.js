@@ -7,13 +7,24 @@
 //  판정·충돌·저장·서사는 그대로(r123Deco 는 solid:false 표시용). 끄기: localStorage['storyworld.r1206b.props']='{"on":false}'.
 (()=>{'use strict';
 if(window.__STORYWORLD_SAMONG_PROPS_R1206B__)return;
-const REV='R1206b-samong-props-1',KEY='storyworld.r1206b.props',DIR='assets/r1206/props/';
+const REV='R1206b-samong-props-2',KEY='storyworld.r1206b.props',DIR='assets/r1206/props/';
 const ART=Object.freeze({
  lantern:Object.freeze({path:DIR+'lantern.webp',h:150}),
  inkpost:Object.freeze({path:DIR+'inkpost.webp',h:118}),
  shard:Object.freeze({path:DIR+'shard.webp',h:112}),
  canvas:Object.freeze({path:DIR+'canvas.webp',h:104}),
- stone:Object.freeze({path:DIR+'stone.webp',h:84,lift:46})});
+ stone:Object.freeze({path:DIR+'stone.webp',h:84,lift:46}),
+ // R1206c: Dots 추가분 10종(바닥 소품). 벽 소품 endless·sign 은 R123 이 벽면 기울기·층 문구를 그리므로 코드 그림 유지.
+ easel:Object.freeze({path:DIR+'easel.webp',h:150}),
+ bottle:Object.freeze({path:DIR+'bottle.webp',h:80}),
+ tree:Object.freeze({path:DIR+'tree.webp',h:230}),
+ goldpillar:Object.freeze({path:DIR+'goldpillar.webp',h:200}),
+ mirror:Object.freeze({path:DIR+'mirror.webp',h:135}),
+ gear:Object.freeze({path:DIR+'gear.webp',h:100}),
+ beacon:Object.freeze({path:DIR+'beacon.webp',h:105}),
+ cypress:Object.freeze({path:DIR+'cypress.webp',h:240}),
+ spool:Object.freeze({path:DIR+'spool.webp',h:60}),
+ willow:Object.freeze({path:DIR+'willow.webp',h:250})});
 let prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s.on==='boolean')prefs.on=s.on;}catch(_){}
 const stats={rooms:0,dressed:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const seen=new WeakSet();

@@ -101,15 +101,20 @@ function hexPath(c,r,rot){c.beginPath();for(let k=0;k<2;k++){for(let i=0;i<=3;i+
 // R1206(사용자 2026-11-19 "육망성 원 … 실체화 자산으로"): 사몽의 기억의 조각이 거는 바닥 공격은 핏빛 육망성 대신 먹 번짐으로 그린다.
 //  Dots 먹 번짐 시트(CX-0166SM C)가 오기 전 임시 코드 그림이다(최종 아트 아님). 본편 1부의 피의 육망성 조형물은 그대로. 끄기 storyworld.r170.combat {inkHex:false}.
 const inkHex=()=>prefs.inkHex!==false&&samongRoom();
-function inkBlot(g,w,grow,seed){const r=w*Math.max(.05,Math.min(1,grow)),n=11;let k=(Math.abs(Math.floor(seed*1e4))%9973)+1;const rnd=()=>{k=(k*16807)%2147483647;return k/2147483647;};
+// R1206c: Dots CX-0166SM-C 먹 번짐 예고 8프레임(칸 256, 타원 216×90, 중심 128,128). 예고 진행도 u(0~1)로 프레임을 고르고 마지막 장에서 멈춘다. 시트가 아직 없으면 요청만 하고 false(코드 먹 번짐으로 버팀).
+const INK_SHEET='assets/r1206/fx/ink-bloom-warn8.webp';
+function inkSheet(g,w,u){if(prefs.inkSheet===false)return false;let row=null;try{row=typeof readyImage==='function'?readyImage(INK_SHEET):null;if(!row&&typeof addImage==='function')addImage(INK_SHEET);}catch(_){row=null;}
+ if(!row?.image)return false;const n=8,cell=row.image.naturalWidth/n,f=Math.max(0,Math.min(n-1,Math.floor((Number(u)||0)*n))),s=2*w/216*(cell/256);
+ g.drawImage(row.image,f*cell,0,cell,row.image.naturalHeight,-128*s,-128*s,cell*s,row.image.naturalHeight*s);stats.inkSheets=(stats.inkSheets||0)+1;return true;}
+function inkBlot(g,w,grow,seed){if(!g)return;const r=w*Math.max(.05,Math.min(1,grow)),n=11;let k=(Math.abs(Math.floor(seed*1e4))%9973)+1;const rnd=()=>{k=(k*16807)%2147483647;return k/2147483647;};
  g.fillStyle='rgba(14,11,13,.55)';g.beginPath();for(let i=0;i<=n;i++){const a=i/n*Math.PI*2,rr=r*(.78+.3*rnd());if(i===0)g.moveTo(Math.cos(a)*rr,Math.sin(a)*rr);else g.lineTo(Math.cos(a)*rr,Math.sin(a)*rr);}g.closePath();g.fill();
  g.fillStyle='rgba(6,5,7,.62)';for(let i=0;i<6;i++){const a=rnd()*Math.PI*2,d=r*(.15+.45*rnd()),b=r*(.22+.2*rnd());g.beginPath();g.ellipse(Math.cos(a)*d,Math.sin(a)*d,b,b*(.7+.3*rnd()),a,0,Math.PI*2);g.fill();}
  /* 번진 가장자리: 어두운 바닥에서도 읽히게 한지빛 옅은 테(얼룩진 점들) */g.fillStyle='rgba(206,196,176,.16)';for(let i=0;i<16;i++){const a=i/16*Math.PI*2+rnd()*.3,d=r*(.86+.12*rnd()),b=r*(.05+.05*rnd());g.beginPath();g.ellipse(Math.cos(a)*d,Math.sin(a)*d,b*1.6,b,a,0,Math.PI*2);g.fill();}
  g.fillStyle='rgba(40,8,12,.38)';for(let i=0;i<9;i++){const a=rnd()*Math.PI*2,d=r*(.95+.25*rnd()),b=r*(.04+.06*rnd());g.beginPath();g.ellipse(Math.cos(a)*d,Math.sin(a)*d,b,b,0,0,Math.PI*2);g.fill();}}
 function drawHex(h){const q=project(h.x,h.y),w=h.radius*Math.SQRT2*Math.abs(project(h.x+1,h.y).x-q.x),// 마름모 격자: 반지름 r칸 = 화면 가로 반폭 r·√2·(한 칸 가로)
  warn=h.age<h.warning,u=warn?h.age/Math.max(.01,h.warning):1,P=h.r170.pal,S=SPR(),hh=H();
- ctx.save();try{ctx.translate(q.x,q.y);ctx.save();ctx.scale(1,.5);ctx.globalAlpha*=warn?.75+.25*u:Math.max(0,Math.min(1,(h.life-h.age)*3));
-  if(inkHex()){inkBlot(ctx,w,warn?.35+.65*u:1,h.r170.seed||0);ctx.restore();}else{
+ ctx.save();try{ctx.translate(q.x,q.y);const sheet=warn&&inkHex()&&inkSheet(ctx,w,u);ctx.save();ctx.scale(1,.5);ctx.globalAlpha*=warn?.75+.25*u:Math.max(0,Math.min(1,(h.life-h.age)*3));
+  if(inkHex()){inkBlot(sheet?null:ctx,w,warn?.35+.65*u:1,h.r170.seed||0);ctx.restore();}else{
   ctx.fillStyle='rgba(60,2,10,.62)';ctx.beginPath();ctx.arc(0,0,w*(warn?.4+.6*u:1),0,Math.PI*2);ctx.fill();
   ctx.lineWidth=Math.max(2.5,3.6*(typeof zoom==='number'?zoom:1));ctx.strokeStyle='rgba(200,16,30,1)';ctx.shadowColor='rgba(255,50,60,.95)';ctx.shadowBlur=14;
   ctx.beginPath();ctx.arc(0,0,w,0,Math.PI*2*Math.min(1,u*1.2));ctx.stroke();ctx.beginPath();ctx.arc(0,0,w*.93,0,Math.PI*2);ctx.lineWidth*=.45;ctx.stroke();ctx.lineWidth/=.45;hexPath(ctx,w*.86,-Math.PI/2+h.r170.seed*.1);ctx.globalAlpha*=Math.min(1,.4+u*1.2);ctx.stroke();ctx.restore();}
@@ -180,6 +185,6 @@ try{
    if(r!==false&&!restore)try{spreadStory();}catch(e){fail(e);}return r;};}
 }catch(e){fail(e);}
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
-window.__STORYWORLD_COMBAT_R170__=Object.freeze({revision:REV,set,artOf,samongPlan,inkBlot,nextSpot:()=>{try{nearSpot();}catch(_){}return spot0?{...spot0}:null;},towers:()=>towers().map(e=>({id:e.id,name:e.name,x:e.x,y:e.y,hp:e.hp,art:e.r170Tower.art})),cast:e=>cast(e),
+window.__STORYWORLD_COMBAT_R170__=Object.freeze({revision:REV,set,artOf,samongPlan,inkBlot,inkSheet,nextSpot:()=>{try{nearSpot();}catch(_){}return spot0?{...spot0}:null;},towers:()=>towers().map(e=>({id:e.id,name:e.name,x:e.x,y:e.y,hp:e.hp,art:e.r170Tower.art})),cast:e=>cast(e),
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},towers:live()?towers().length:0,lastError})});
 })();
