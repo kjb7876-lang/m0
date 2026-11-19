@@ -70,7 +70,8 @@ for(const h of HEROS){if(h==='hwando')continue;const e=make({hero:h});const ok=e
  const c=e.el('r1244Cine');const prof=e.C().profile(h);
  const eye=c&&c.querySelector('.r1244eye'),sig=c&&c.querySelector('.r1244sig'),plate=c&&c.querySelector('.r1244plate');
  check(`① ${h}: R1033 통과 → #r1244Cine on(passive, form=${h})`,ok===true&&c&&c.cls.has('on')&&c.getAttribute('data-form')===h&&c.getAttribute('data-mode')==='passive',JSON.stringify({ok,cls:c&&[...c.cls],f:c&&c.getAttribute('data-form')}));
- check(`① ${h}: 눈 클로즈업 = 영웅 초상(assets/r108/heroes/${h}.webp), 시그니처 시트 = 표`,eye&&eye.getAttribute('data-src')===`assets/r108/heroes/${h}.webp`&&sig&&prof&&prof.sig&&sig.getAttribute('data-src')===prof.sig.path&&/^assets\/r\d+\//.test(prof.sig.path),JSON.stringify({eye:eye&&eye.attrs,sig:sig&&sig.attrs,prof}));
+ /* R1244b(사용자 '자산은 닷츠랑 협업' → Dots 눈 시트 도착): 눈 그림 = Dots 시트가 있으면 시트, 없으면 영웅 초상 */
+ check(`① ${h}: 눈 클로즈업 = Dots 눈 시트 또는 영웅 초상(assets/r108/heroes/${h}.webp), 시그니처 시트 = 표`,eye&&eye.getAttribute('data-src')===(prof.eye.sheet?prof.eye.sheet.path:`assets/r108/heroes/${h}.webp`)&&sig&&prof&&prof.sig&&sig.getAttribute('data-src')===prof.sig.path&&/^assets\/r\d+\//.test(prof.sig.path),JSON.stringify({eye:eye&&eye.attrs,sig:sig&&sig.attrs,prof}));
  check(`① ${h}: 이름판에 영웅 이름·패시브 이름`,plate&&plate.textContent.includes(NAME[h])&&prof&&typeof prof.passive==='string'&&prof.passive.length>1&&plate.textContent.includes(prof.passive),plate&&plate.textContent);
 }
 // R1033 이 거른 경우(1단 kind)는 안 뜸
@@ -79,7 +80,7 @@ for(const h of HEROS){if(h==='hwando')continue;const e=make({hero:h});const ok=e
 {const e=make({hero:'lauren',persona:true});e.A().fire('lauren','violet',e.sb.player);const c=e.el('r1244Cine');const eye=c&&c.querySelector('.r1244eye');
  check('② 페르소나: form persona',c&&c.cls.has('on')&&c.getAttribute('data-form')==='persona',c&&c.getAttribute('data-form'));
  const all=c?c.all().map(x=>(x.getAttribute('data-src')||'')+(x.style.backgroundImage||'')).join(' '):'';
- check('② 페르소나: 라우렌 그림 0, 페르소나 그림(r1174)',eye&&/r1174\//.test(eye.getAttribute('data-src'))&&!/lauren/.test(all),all);}
+ check('② 페르소나: 라우렌 그림 0, 페르소나 그림(r1174 또는 Dots 페르소나 눈 시트)',eye&&/r1174\/|r1244\/eye-persona/.test(eye.getAttribute('data-src'))&&!/lauren/.test(all),all);}
 // ③ 환도·EGO
 {const e=make({hero:'hwando'});const r=e.A().allow('hwando');const c=e.el('r1244Cine');
  check('③ 환도 삼협묵희(allow) → form hwando, allow 반환 그대로',r===true&&c&&c.cls.has('on')&&c.getAttribute('data-form')==='hwando',JSON.stringify({r,f:c&&c.getAttribute('data-form')}));
@@ -136,6 +137,25 @@ check('⑧ 시트 파일이 실제로 있음',API.forms.every(f=>{const p=API.pr
 {const e=make({hero:'neon'});const n0=e.images.length;e.sb.player.hero='slayer';e.C().warm();const n1=e.images.length-n0;e.C().warm();const n2=e.images.length-n0;e.sb.player.hero='michaela';e.C().warm();const n3=e.images.length-n0;
  const mine=e.images.slice(n0).map(i=>i.src);
  check('⑨ 미리 읽기: 지금 형상만 ≤4장, 같은 형상 두 번째는 0장, 바뀌면 다시',n1>=2&&n1<=4&&n2===n1&&n3>n2&&n3-n2<=4&&mine.slice(0,n1).every(s=>!/michaela|neon/.test(s)),JSON.stringify({n0,n1,n2,n3,mine}));}
+// ⑪ R1244b Dots CX-0178CN 눈 클로즈업 4칸(2×2) 적용
+const DOTS=['hwando','ego','persona','slayer','michaela','lauren','neon','seoha'];
+check('⑪ Dots 눈 시트 8형상: eye.sheet = assets/r1244/eye-<형상>.webp(2×2) 파일 있음',DOTS.every(f=>{const e=API.profile(f).eye;return e.sheet&&e.sheet.path===`assets/r1244/eye-${f}.webp`&&e.sheet.cols===2&&e.sheet.rows===2&&fs.existsSync(path.join(root,'runtime-text',e.sheet.path));}),DOTS.map(f=>JSON.stringify(API.profile(f).eye.sheet)).join(' '));
+check('⑪ 아직 안 온 헌터·기억사수는 초상화 그대로',['hunter','gunner'].every(f=>!API.profile(f).eye.sheet&&/r108\/heroes/.test(API.profile(f).eye.path)));
+{const e=make({hero:'slayer'});e.C().play('slayer','awake');const c=e.el('r1244Cine');const eye=c.querySelector('.r1244eye');const seq=[];let t=0;
+ while(t<1.7){seq.push(eye.getAttribute('data-frame'));e.adv(1/48);t+=1/48;}
+ const uniq=seq.filter((v,i)=>v!==null&&v!==seq[i-1]);
+ check('⑪ 각성: 눈 그림 = Dots 시트, 칸이 0→1→2→3 차례로',eye.getAttribute('data-src')==='assets/r1244/eye-slayer.webp'&&uniq.join('')==='0123',JSON.stringify({src:eye.getAttribute('data-src'),uniq}));
+ check('⑪ 시트 칸은 px 로 덮기(cover) — backgroundSize 가 px 두 값',/^\d+(\.\d+)?px \d+(\.\d+)?px$/.test(eye.style.backgroundSize),eye.style.backgroundSize);}
+{const e=make({hero:'neon'});e.C().play('neon','passive','storm');const eye=e.el('r1244Cine').querySelector('.r1244eye');const seq=[];let t=0;while(t<1.2){seq.push(eye.getAttribute('data-frame'));e.adv(1/48);t+=1/48;}
+ const uniq=seq.filter((v,i)=>v!==null&&v!==seq[i-1]);check('⑪ 패시브도 0→1→2→3',uniq.join('')==='0123',JSON.stringify(uniq));}
+{const e=make({hero:'neon',ls:{'storyworld.r1043.perf7':JSON.stringify({step:1})}});e.C().play('neon','awake');const eye=e.el('r1244Cine').querySelector('.r1244eye');const f0=eye.getAttribute('data-frame');e.adv(1);
+ check('⑪ lite 는 칸 넘기기 없이 한 칸(발동 문양 2)',f0==='2'&&eye.getAttribute('data-frame')==='2',JSON.stringify({f0,f1:eye.getAttribute('data-frame')}));}
+{const e=make({hero:'hunter'});e.C().play('hunter','passive','squad');const eye=e.el('r1244Cine').querySelector('.r1244eye');check('⑪ 헌터는 초상화 경로 그대로(시트 없음)',eye.getAttribute('data-src')==='assets/r108/heroes/hunter.webp');}
+{const e=make({hero:'neon'});const n0=e.images.length;e.sb.player.hero='hwando';e.C().warm();const got=e.images.slice(n0).map(i=>i.src);
+ check('⑪ 미리 읽기: 시트가 있으면 시트(초상화 대신), 4장 이하',got.includes('assets/r1244/eye-hwando.webp')&&got.length<=4,JSON.stringify(got));}
+{const r=require('child_process').spawnSync('python3',['-c',"import sys\nfrom PIL import Image\nim=Image.open(sys.argv[1]).convert('RGB').resize((256,64))\nprint(max(max(p)-min(p) for p in im.getdata()))",path.join(root,'runtime-text','assets','r1244','eye-hwando.webp')],{encoding:'utf8'});
+ check('⑪ 환도 눈 시트 = 먹+흰(채도 최대 12 이하)',r.status===0&&+r.stdout.trim()<=12,r.stdout+r.stderr);}
+const man2=fs.readFileSync(path.join(root,'runtime-manifest.json'),'utf8');check('⑪ 눈 시트 8장 manifest 에 실림',DOTS.every(f=>man2.includes(`assets/r1244/eye-${f}.webp`)));
 // ⑩ 연결
 const RT=path.join(root,'runtime-text'),html=fs.readFileSync(path.join(RT,'index.html'),'utf8');
 check('⑩ index.html 태그(samong-stagger-r1217 바로 뒤)',html.includes('<script src="./samong-stagger-r1217.js"></script>\n<script src="./cinema-cutin-r1244.js"></script>'));
