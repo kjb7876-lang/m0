@@ -52,6 +52,15 @@ await p.evaluate(()=>{window.__SLOW=1;for(let i=hazards.length-1;i>=0;i--)if(haz
 for(const k of ['q','w','e','a','s']){await p.keyboard.down(k);await p.waitForTimeout(140);await p.keyboard.up(k);}
 await p.evaluate(()=>{window.__SLOW=1e-4;});await p.waitForTimeout(500);
 const h=await census(['r241','r1192']);ok('hero skills only: no effect command boosted',!!h&&h.otherMarked===0,h);
+// 기억 지역 먹 번짐 타격(R1177f): pixelfx 'mob-memory' 를 영웅 옆에 틀어 그 그림 명령만 밝아지는지
+{const played=await p.evaluate(()=>{window.__SLOW=1;const X=window.__STORYWORLD_PIXELFX_R163__;if(!X?.has?.('mob-memory'))return false;for(let i=0;i<3;i++)X.play('mob-memory',player.x+1+i*.6,player.y+.5,{k:1.3,rate:.0001,key:'r1192-ink-'+i});return true;});
+ ok('mob-memory ink hit sheet exists',played===true);
+ await p.waitForTimeout(1500);await p.evaluate(()=>{window.__SLOW=1e-4;});
+ const inkc=()=>p.evaluate(async()=>{const three=window.__STORYWORLD_PHASE1__.controller.state.three,base=three.render;let refs=null;three.render=function(f){if(!refs&&f&&Array.isArray(f.commands)&&f.commands.length)refs=f.commands.slice();return base.apply(this,arguments);};
+  for(let i=0;i<80&&!refs;i++)await new Promise(r=>setTimeout(r,100));three.render=base;const s=(refs||[]).filter(c=>/^r163:mob-memory:/.test(String(c.owner?.id||''))&&c.kind==='image');return {n:s.length,ink:s.filter(c=>c.r1192ink).length,f:s[0]?.style?.filter||null};});
+ await setOn(true);await p.waitForTimeout(400);const iOn=await inkc();await p.screenshot({path:`${out}/ink-on.png`});
+ await setOn(false);await p.waitForTimeout(400);const iOff=await inkc();await p.screenshot({path:`${out}/ink-off.png`});await setOn(true);
+ ok('ink hit commands brightened when on, untouched when off',iOn.n>=1&&iOn.ink===iOn.n&&/brightness/.test(String(iOn.f))&&iOff.n>=1&&iOff.ink===0,{iOn,iOff});}
 ok('no page errors',errs.length===0,errs.slice(0,3));
 const I=await p.evaluate(()=>window.__STORYWORLD_BOSS_FX_VIS_R1192__?.inspect?.());console.log('inspect',JSON.stringify(I));ok('module reports no internal errors',!!I&&I.stats.errors===0,I&&I.lastError);
 fs.writeFileSync(out+'/r1192-browser.json',JSON.stringify({frames,inspect:I},null,1));

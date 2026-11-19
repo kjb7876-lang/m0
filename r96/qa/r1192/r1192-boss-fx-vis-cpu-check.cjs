@@ -53,5 +53,9 @@ if(API){const c=API.curve,iv=API.inverse;
  ok('NaN alpha becomes a finite number',Number.isFinite(cmds[4].style.globalAlpha));
  const a0=cmds[0].style.globalAlpha,f0=cmds[0].style.filter;API.boostCommands(cmds,0);
  ok('boosting twice does not compound (marked once)',cmds[0].style.globalAlpha===a0&&cmds[0].style.filter===f0&&done>=4);
+ const ink=[{kind:'image',owner:{id:'r163:mob-memory:12.5'},style:{globalAlpha:.4,filter:'none'}},{kind:'image',owner:{id:'r163:mob-forge:3'},style:{globalAlpha:.4,filter:'none'}},{kind:'path',owner:{id:'r163:mob-memory:1'},style:{globalAlpha:.4,filter:'none'}}];
+ ok('ink hit (R1177f mob-memory) image gets brightness·contrast and the alpha curve',API.inkCommands(ink,0)===1&&/brightness\(1\.4\)/.test(ink[0].style.filter)&&known.test(ink[0].style.filter)&&Math.abs(ink[0].style.globalAlpha-c(.4))<1e-9,ink[0].style);
+ ok('other mob hit sheets and non-image commands are untouched',ink[1].style.filter==='none'&&ink[1].style.globalAlpha===.4&&ink[2].style.globalAlpha===.4);
+ ok('ink boost does not compound',API.inkCommands(ink,0)===0&&Math.abs(ink[0].style.globalAlpha-c(.4))<1e-9);
  ok('set(false) turns off and persists',API.set(false)===false&&API.inspect().on===false&&/false/.test(String(sb.window.localStorage.getItem('storyworld.r1192.bossFxVis'))));}
 console.log(`${n-bad}/${n} passed`);process.exit(bad?1:0);
