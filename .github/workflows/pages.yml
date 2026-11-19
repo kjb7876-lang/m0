@@ -579,6 +579,8 @@ jobs:
         run: node r96/qa/r1102/r1102-cpu-check.cjs
       - name: R1235 Michaela basic hit single-sprite flash cleanup CPU check
         run: node r96/qa/r1235/r1235-cpu-check.cjs
+      - name: R1235 Michaela skill effects to Dots frame sheets CPU check
+        run: node r96/qa/r1235/r1235-skill-cpu-check.cjs
       - name: R1003 gunner aim down art CPU check
         run: node r96/qa/r1003/r1003-cpu-check.cjs
       - name: R1045 gunner north aim and no-recoil east art CPU check
