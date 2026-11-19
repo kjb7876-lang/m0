@@ -91,7 +91,7 @@ function draw(name,F,x,y,w,h,o={}){if(!enabled||typeof ctx==='undefined'||!ctx)r
  const veil=o.overHero?1:heroVeil(x,y,w,h,piv,o);
  ctx.save();try{ctx.translate(x,y);if(o.squash&&o.squash!==1)ctx.scale(1,o.squash);if(o.angle){if(UPRIGHT.has(name)){/* R425: 십자가는 늘 정방향(위 짧고 아래 긴) — 사용자 2026-11-08 "절대로 역이 되면 안 됨". 평면 회전 대신 세로축 회전(가로 폭만 cos) */const k=Math.cos(o.angle);ctx.scale((k<0?-1:1)*Math.max(.18,Math.abs(k)),1);stats.upright=(stats.upright||0)+1;}else ctx.rotate(o.angle);}if(o.flip)ctx.scale(-1,1);
   /* R181: 큰 덧셈(lighter) 조각이 겹치면 흰색으로 타 버려 영웅이 안 보이던 것(환도·서하 고유기술 등) — 영웅 키 1.3배보다 큰 덧셈 조각만 넓이에 반비례해 옅게(최대 ×.35) */
-  let tame=1;if(!o.blend||o.blend==='lighter'){const hh=(typeof actorHeight==='function'?actorHeight():60)*1.3,ar=Math.abs(w*h)/(hh*hh);if(ar>1){tame=Math.max(.35,1/ar);stats.tamedBig=(stats.tamedBig||0)+1;}
+  let tame=1;/* R1192: 보스 이펙트(운석·재해·장판)는 영웅 스킬 흰빛 막기용 옅게 빼기에서 뺀다(o.noTame, R1192 오버레이가 넣음) — 넓이 합에도 안 더한다 */if(!o.noTame&&(!o.blend||o.blend==='lighter')){const hh=(typeof actorHeight==='function'?actorHeight():60)*1.3,ar=Math.abs(w*h)/(hh*hh);if(ar>1){tame=Math.max(.35,1/ar);stats.tamedBig=(stats.tamedBig||0)+1;}
    /* 좁은 기둥 여러 개가 나란히 겹쳐 하얗게 되는 것(미카엘라 고유기술 빛기둥 등): 한 프레임 덧셈 넓이 합이 영웅 넓이의 3배를 넘으면 넘친 만큼 옅게 */
    if(ar>.12){addArea+=ar;if(addArea>3){tame*=Math.max(.35,3/addArea);stats.tamedSum=(stats.tamedSum||0)+1;}}}
   ctx.globalAlpha*=clamp(alpha*veil*tame,0,1);ctx.globalCompositeOperation=o.blend||'lighter';ctx.drawImage(c,sx,sy,fw,fh,-piv[0]*w,-piv[1]*h,w,h);}
