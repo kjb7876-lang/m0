@@ -521,6 +521,8 @@ jobs:
         run: node r96/qa/r1210/r1210-cpu-check.cjs
       - name: R1213 기계 계열 몹 원거리(레이저·방사능·음파·폭탄) CPU check
         run: node r96/qa/r1213/r1213-cpu-check.cjs
+      - name: R1228 Three.js 일시 오류 복구(보스방 앞 중단) CPU check
+        run: node r96/qa/r1228/r1228-cpu-check.cjs
       - name: R1206 samong one mob one image, death look, one memory fragment, ink ground attack CPU check
         run: node r96/qa/r1206/r1206-cpu-check.cjs
       - name: R1206b samong mood props lantern inkpost shard canvas stone from Dots art CPU check
