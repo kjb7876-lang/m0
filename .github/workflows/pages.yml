@@ -579,6 +579,10 @@ jobs:
         run: node r96/qa/r1217/r1217-warm-cpu-check.cjs
       - name: R1217 각성 연출 0.3초 나눠 켜기·성능 1~4단계 줄이기 CPU check
         run: node r96/qa/r1217/r1217-stagger-cpu-check.cjs
+      - name: R1244 사몽 각성·특수 확률 패시브 극장판 컷인(사선 슬릿 눈·시그니처 시트 매치 컷) CPU check
+        run: node r96/qa/r1244/r1244-cpu-check.cjs
+      - name: R1244 사몽 각성 감싸기 겹침 고정(R1217·R1046 표식 옮겨 달기) CPU check
+        run: node r96/qa/r1244/r1244-wrap-chain-cpu-check.cjs
       - name: R1177f 기억 지역 몹 타격 Dots CX-0160MF(육망성 없음)
         run: node r96/qa/r1177/r1177f-cpu-check.cjs
       - name: R701 survival 77s choice window, difficulty, hero picker CPU check

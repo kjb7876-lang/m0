@@ -1,0 +1,4 @@
+PASS R1046 wrapAwake 함수를 찾음
+PASS 60초 뒤 각성 1번: 엔진 1번·R1217 감싸기 1번(겹침 없음)
+PASS R1244 까지 함께여도 겹침 없음
+{"total":3,"failed":0}

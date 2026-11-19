@@ -1,0 +1,81 @@
+PASS cinema-cutin-r1244.js 있음
+PASS 공개 객체 __STORYWORLD_CINEMA_CUTIN_R1244__
+PASS 형상 10개(8영웅 + EGO + 페르소나)
+PASS ① seoha: R1033 통과 → #r1244Cine on(passive, form=seoha)
+PASS ① seoha: 눈 클로즈업 = Dots 눈 시트 또는 영웅 초상(assets/r108/heroes/seoha.webp), 시그니처 시트 = 표
+PASS ① seoha: 이름판에 영웅 이름·패시브 이름
+PASS ① hunter: R1033 통과 → #r1244Cine on(passive, form=hunter)
+PASS ① hunter: 눈 클로즈업 = Dots 눈 시트 또는 영웅 초상(assets/r108/heroes/hunter.webp), 시그니처 시트 = 표
+PASS ① hunter: 이름판에 영웅 이름·패시브 이름
+PASS ① slayer: R1033 통과 → #r1244Cine on(passive, form=slayer)
+PASS ① slayer: 눈 클로즈업 = Dots 눈 시트 또는 영웅 초상(assets/r108/heroes/slayer.webp), 시그니처 시트 = 표
+PASS ① slayer: 이름판에 영웅 이름·패시브 이름
+PASS ① michaela: R1033 통과 → #r1244Cine on(passive, form=michaela)
+PASS ① michaela: 눈 클로즈업 = Dots 눈 시트 또는 영웅 초상(assets/r108/heroes/michaela.webp), 시그니처 시트 = 표
+PASS ① michaela: 이름판에 영웅 이름·패시브 이름
+PASS ① gunner: R1033 통과 → #r1244Cine on(passive, form=gunner)
+PASS ① gunner: 눈 클로즈업 = Dots 눈 시트 또는 영웅 초상(assets/r108/heroes/gunner.webp), 시그니처 시트 = 표
+PASS ① gunner: 이름판에 영웅 이름·패시브 이름
+PASS ① lauren: R1033 통과 → #r1244Cine on(passive, form=lauren)
+PASS ① lauren: 눈 클로즈업 = Dots 눈 시트 또는 영웅 초상(assets/r108/heroes/lauren.webp), 시그니처 시트 = 표
+PASS ① lauren: 이름판에 영웅 이름·패시브 이름
+PASS ① neon: R1033 통과 → #r1244Cine on(passive, form=neon)
+PASS ① neon: 눈 클로즈업 = Dots 눈 시트 또는 영웅 초상(assets/r108/heroes/neon.webp), 시그니처 시트 = 표
+PASS ① neon: 이름판에 영웅 이름·패시브 이름
+PASS ⑤ R1033 이 거른 1·2단은 안 뜸
+PASS ② 페르소나: form persona
+PASS ② 페르소나: 라우렌 그림 0, 페르소나 그림(r1174 또는 Dots 페르소나 눈 시트)
+PASS ③ 환도 삼협묵희(allow) → form hwando, allow 반환 그대로
+PASS ③ 컷인 끔이면 환도도 안 뜸(allow false 그대로)
+PASS ③ EGO 형상 삼협묵희 → form ego
+PASS ③ 환도 빈도(8초 안 두 번째 안 뜸)
+PASS ③ 환도 8초 뒤 다시 뜸
+PASS ④ (normal) 사몽 각성 → awake 모드, 이름판 '사몽 각성'·네온
+PASS ④ (normal) 엔진 showAwakening 1번, heroArt 되돌림
+PASS ④ (reverse) 사몽 각성 → awake 모드, 이름판 '사몽 각성'·네온
+PASS ④ (reverse) 엔진 showAwakening 1번, heroArt 되돌림
+PASS ④ 페르소나 각성 → form persona
+PASS ④ EGO 각성 → form ego
+PASS ④ 표식 확인형 감싸기(R1046)와 20번 번갈아도 겹침 고정(다시 감싸기 ≤1, 내 감싸기 ≤2)
+PASS ⑤ 끔(storyworld.r1244.cine=0)이면 안 뜸, 엔진은 그대로
+PASS ⑤ 대화창 중엔 안 뜸
+PASS ⑤ 배치 몸(r720Ally)이면 안 뜸
+PASS ⑤ 문서 없음·이상한 형상에도 안 멈춤
+PASS ⑤ 모르는 형상은 false
+PASS ⑥ passive: 시그니처 시트 칸이 6칸 이상 차례로 넘어감
+PASS ⑥ passive: 1.15초 안에 꺼짐
+PASS ⑥ passive: 끝나면 칸 넘기기 시계 멈춤(남은 타이머 0)
+PASS ⑥ passive: inspect 칸 수 기록
+PASS ⑥ awake: 시그니처 시트 칸이 6칸 이상 차례로 넘어감
+PASS ⑥ awake: 1.7초 안에 꺼짐
+PASS ⑥ awake: 끝나면 칸 넘기기 시계 멈춤(남은 타이머 0)
+PASS ⑥ awake: inspect 칸 수 기록
+PASS ⑦ 성능 1단계 → lite(칸 넘기기 없음)
+PASS ⑦ 모션 줄이기 → lite
+PASS ⑦ 성능 5단계 → 전체 연출
+PASS ⑦ DOM 노드 10개 이하
+PASS ⑦ 캔버스 그리기·fx·getContext 없음(게임 렌더 부담 0, 도형 이펙트 0)
+PASS ⑦ blur·drop-shadow 필터 없음
+PASS ⑦ 사몽 렉 규칙: 각성 때 새 그림을 읽지 않음(미리 읽기만), setInterval 칸 넘기기 없음
+PASS ⑧ 환도 = 먹+흰(채도 24 이하만)
+PASS ⑧ 페르소나 = 언주(#cc3428) 포함·보라 없음
+PASS ⑧ EGO = 언주+먹+흰
+PASS ⑧ 시그니처 시트는 모두 프레임 시트(cols×rows ≥ 8칸)
+PASS ⑧ 시트 파일이 실제로 있음
+PASS ⑨ 미리 읽기: 지금 형상만 ≤4장, 같은 형상 두 번째는 0장, 바뀌면 다시
+PASS ⑪ Dots 눈 시트 8형상: eye.sheet = assets/r1244/eye-<형상>.webp(2×2) 파일 있음
+PASS ⑪ 아직 안 온 헌터·기억사수는 초상화 그대로
+PASS ⑪ 각성: 눈 그림 = Dots 시트, 칸이 0→1→2→3 차례로
+PASS ⑪ 시트 칸은 px 로 덮기(cover) — backgroundSize 가 px 두 값
+PASS ⑪ 패시브도 0→1→2→3
+PASS ⑪ lite 는 칸 넘기기 없이 한 칸(발동 문양 2)
+PASS ⑪ 헌터는 초상화 경로 그대로(시트 없음)
+PASS ⑪ 미리 읽기: 시트가 있으면 시트(초상화 대신), 4장 이하
+PASS ⑪ 환도 눈 시트 = 먹+흰(채도 최대 12 이하)
+PASS ⑪ 눈 시트 8장 manifest 에 실림
+PASS ⑩ index.html 태그(samong-stagger-r1217 바로 뒤)
+PASS ⑩ runtime-text 사본 = client-source
+PASS ⑩ runtime-manifest 에 실림
+PASS ⑩ 공개 확인 목록
+PASS ⑩ CI 검사 줄
+{"total":80,"failed":0,"method":"node vm + tiny fake DOM; real game run by r1244-browser.mjs (headless)"}

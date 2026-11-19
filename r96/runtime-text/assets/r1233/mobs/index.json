@@ -46,6 +46,168 @@
    },
    "sha256": "123f6bb27ad58b07e8d49a6d6a6e5b255578740d2cc993d85eadb675e541cfb0",
    "bytes": 415630
+  },
+  {
+   "id": "m087",
+   "name": "관람석의 시선",
+   "file": "m087.webp",
+   "body": 187,
+   "finalArt": false,
+   "source": {
+    "drive": "Dots CX-0177RC-09 r1 ROUGH",
+    "sha256": "af1eab679db7804d67b53f77b852673b7ef340930f72cb247fb75a7c8e520f73"
+   },
+   "clean": {
+    "tool": "scripts/r1233-dots-clean.py",
+    "lowAlphaCleared": 0,
+    "detachedRemoved": 0
+   },
+   "sha256": "5decc2ec33f85033f247f216c9377600c4ca0a6fbc9ab1354f8dae843f3a61c5",
+   "bytes": 382668
+  },
+  {
+   "id": "m072",
+   "name": "규칙을 어기지 않는 마네킹",
+   "file": "m072.webp",
+   "body": 200,
+   "finalArt": false,
+   "source": {
+    "drive": "Dots CX-0177RC-10 r1 ROUGH",
+    "sha256": "657cae35c2a1c1f7c242f007804128e19c280580d2b834ee8ccfc41952f4b924"
+   },
+   "clean": {
+    "tool": "scripts/r1233-dots-clean.py",
+    "lowAlphaCleared": 0,
+    "detachedRemoved": 0
+   },
+   "sha256": "cf7a80b79d6f47502a17e0eae3bc65204fb64194ea37589803557b2aef2dbe9f",
+   "bytes": 190526
+  },
+  {
+   "id": "m025",
+   "name": "끓어오르는 검은 소화액",
+   "file": "m025.webp",
+   "body": 174,
+   "finalArt": false,
+   "source": {
+    "drive": "Dots CX-0177RC-12 r1 ROUGH",
+    "sha256": "e3dd9b0a6f4aea255502f6c6dbb7c039a15f4edf37cb16d578ee8eaa5abecc49"
+   },
+   "clean": {
+    "tool": "scripts/r1233-dots-clean.py",
+    "lowAlphaCleared": 0,
+    "detachedRemoved": 0
+   },
+   "sha256": "f4920a55c3752ee32bf94245e1dded159b62b646d474ebb0b5fd21542dce5d36",
+   "bytes": 283864
+  },
+  {
+   "id": "m026",
+   "name": "모든 면이 뒷면인 동전",
+   "file": "m026.webp",
+   "body": 203,
+   "finalArt": false,
+   "source": {
+    "drive": "Dots CX-0177RC-16 r1 ROUGH",
+    "sha256": "4343ec5293cb96400cdd6562555d4b688fd7597fd2c824df7c05a48ad9581008"
+   },
+   "clean": {
+    "tool": "scripts/r1233-dots-clean.py",
+    "lowAlphaCleared": 0,
+    "detachedRemoved": 0
+   },
+   "sha256": "9a6450936a7c426a22ab9eba13ddf92e92693e9319171df037496ad22ed5cdf9",
+   "bytes": 526010
+  },
+  {
+   "id": "m057",
+   "name": "본능 추출 결정",
+   "file": "m057.webp",
+   "body": 186,
+   "finalArt": false,
+   "source": {
+    "drive": "Dots CX-0177RC-20 r1 ROUGH",
+    "sha256": "5ae91ad064ce3ce5ebc912721b2279efded95f10dccba614cf7f1abdcef2e575"
+   },
+   "clean": {
+    "tool": "scripts/r1233-dots-clean.py",
+    "lowAlphaCleared": 0,
+    "detachedRemoved": 0
+   },
+   "sha256": "c9e6051de9ce43ac8fa4adbe084d1ceb96fd4f4a0fd5bec0c63cf8b968eb4c4b",
+   "bytes": 457752
+  },
+  {
+   "id": "m091",
+   "name": "서로의 결말을 먹는 도시",
+   "file": "m091.webp",
+   "body": 194,
+   "finalArt": false,
+   "source": {
+    "drive": "Dots CX-0177RC-25 r1 ROUGH",
+    "sha256": "5382f4e22408216fdb84126058e80d8940cc0289b1e2449ab4e2de2aed7ae656"
+   },
+   "clean": {
+    "tool": "scripts/r1233-dots-clean.py",
+    "lowAlphaCleared": 0,
+    "detachedRemoved": 0
+   },
+   "sha256": "9caf68d591e647b9d2111e87e5dc2cb174c49d0daaedd402a56cca663cd62897",
+   "bytes": 384872
+  },
+  {
+   "id": "m043",
+   "name": "장미이슬 슬라임",
+   "file": "m043.webp",
+   "body": 148,
+   "finalArt": false,
+   "source": {
+    "drive": "Dots CX-0177RC-33 r1 ROUGH",
+    "sha256": "dbd2469c098dddf2ee752b67afa49da0faecfc31f930a6f7410a13c08ad55d75"
+   },
+   "clean": {
+    "tool": "scripts/r1233-dots-clean.py",
+    "lowAlphaCleared": 0,
+    "detachedRemoved": 0
+   },
+   "sha256": "78eb565962cb743cfcf8b4973df57d036af1a61a5809ea8ede203815d30c49a0",
+   "bytes": 409602
+  },
+  {
+   "id": "m058",
+   "name": "죄책감 압축결정",
+   "file": "m058.webp",
+   "body": 192,
+   "finalArt": false,
+   "source": {
+    "drive": "Dots CX-0177RC-36 r1 ROUGH",
+    "sha256": "6c1c213b72ae87260bca17536af20583eb1e4e352d8255a2e38d529ab4fd84f4"
+   },
+   "clean": {
+    "tool": "scripts/r1233-dots-clean.py",
+    "lowAlphaCleared": 0,
+    "detachedRemoved": 90
+   },
+   "sha256": "68f5badc1884cd2877c47eb5c9b318928340daaed6b610c0de498035dc8aa77f",
+   "bytes": 403600
+  },
+  {
+   "id": "m069",
+   "name": "다시 일으켜 세워진 도전자",
+   "file": "m069.webp",
+   "body": 204,
+   "finalArt": false,
+   "source": {
+    "drive": "Dots CX-0177RC-15 r1 ROUGH",
+    "sha256": "7cced2b906fd58761aeb1e5e65846aeb15a9f90014d94a8074f7ea5d00d0fb8c"
+   },
+   "clean": {
+    "tool": "scripts/r1233-dots-clean.py",
+    "lowAlphaCleared": 0,
+    "detachedRemoved": 0
+   },
+   "sha256": "0a7231e3c3faa5230dc5ae3ac2a38b5191ed1fb0643af1036e5af1a52e4a6c26",
+   "bytes": 258378
   }
  ]
 }

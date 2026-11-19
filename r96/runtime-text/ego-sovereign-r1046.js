@@ -161,7 +161,7 @@ function wrapAwake(){if(typeof showAwakening!=='function'||showAwakening.__r1112
   finally{if(art)art.awakening=old;
    if(ego&&hasDoc()){try{stats.awake=(stats.awake||0)+1;const im=document.getElementById('awakeImage');if(im){if(im.getAttribute('src')!==url(P.cutin.image))im.src=url(P.cutin.image);im.removeAttribute('data-r1033');}
     const h=document.getElementById('awakeHero');if(h&&!h.textContent.startsWith(AWAKE_NAME))h.textContent=h.textContent.replace(/^[^·]*/,AWAKE_NAME+' ');}catch(e){fail(e);}}}};
- w.__r1112=true;showAwakening=w;}
+ /* R1244: 아래 감싸기들의 표식을 옮겨 단다 — 안 옮기면 R1217(16ms)·R1046(500ms)이 서로를 다시 감싸 1초에 2겹씩 끝없이 쌓였다 */for(const k of Object.keys(base))if(/^_*r\d+/i.test(k))try{w[k]=base[k];}catch(_){}w.__r1112=true;showAwakening=w;}
 function registerGameHooks() {
  window.__STORYWORLD_POST_HOOKS__.register('__r1046', {
   tick() { step(); ui(); },

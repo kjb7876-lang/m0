@@ -1,10 +1,10 @@
-// R1218b·c: 사몽 보스 교주의 인장(S05)·검은 명령선(S06)·코어 아래의 검은 뿌리(P-2) 가 범용 꼭두각시 대신 Dots CX-0175SB 시트를 쓴다.
+// R1218b·c: 사몽 보스 교주의 인장(S05)·검은 명령선(S06)·코어 아래의 검은 뿌리(P-2)·강재헌(S04, R1218d) 가 범용 꼭두각시 대신 Dots CX-0175SB 시트를 쓴다.
 const fs=require('fs'),path=require('path'),crypto=require('crypto');
 const R=path.join(__dirname,'..','..');const rt=path.join(R,'runtime-text');let ok=0,bad=0;
 const t=(n,c)=>{if(c){ok++;console.log('ok  ',n);}else{bad++;console.log('FAIL',n);}};
 const idx=JSON.parse(fs.readFileSync(path.join(rt,'assets/r380/mobs/index.json'),'utf8'));
 const inputs=fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8'),man=fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8');
-const want=[['samong-s05-cult-seal-v1','교주의 인장','S05-6','S06-23','CX-0175SB-02'],['samong-s06-command-wire-v1','검은 명령선','S06-23','S05-6','CX-0175SB-03'],['samong-p2-core-root-v1','코어 아래의 검은 뿌리','P-2',null,'CX-0175SB-04']];
+const want=[['samong-s05-cult-seal-v1','교주의 인장','S05-6','S06-23','CX-0175SB-02'],['samong-s06-command-wire-v1','검은 명령선','S06-23','S05-6','CX-0175SB-03'],['samong-p2-core-root-v1','코어 아래의 검은 뿌리','P-2',null,'CX-0175SB-04'],['samong-s04-kang-jaeheon-v1','강재헌','S04-11','S05-6','CX-0175SB-01']];
 for(const [id,name,zone,other,src] of want){const m=idx.mobs.find(x=>x.id===id);t(id+' 항목',!!m);if(!m)continue;
  const f=path.join(rt,m.path),b=fs.readFileSync(f);
  t(id+' 바이트·해시',b.length===m.bytes&&crypto.createHash('sha256').update(b).digest('hex')===m.sha256);

@@ -1,6 +1,6 @@
 // R1233 CPU 검사 — 임시로 얹은 R248 이름 시트가 사몽 잔영·채택 그림을 덮던 몹 바로잡기(mob-art-restore-r1233.js). 브라우저 없이 실제 모듈을 가짜 전역에서 돌린다.
 'use strict';
-const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('assert');
+const crypto0=require('crypto'),fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('assert');
 const R=path.resolve(__dirname,'../..'),NAME='mob-art-restore-r1233.js',SRC=path.join(R,'client-source',NAME);
 let pass=0;const ok=(c,m)=>{assert.ok(c,m);pass++;};
 ok(fs.existsSync(SRC),'오버레이 파일 있음');const code=fs.readFileSync(SRC,'utf8');
@@ -26,7 +26,7 @@ function boot(store={}){
  const w={localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=v;}},document:{readyState:'complete'},
   fetch:u=>Promise.resolve({ok:true,json:()=>Promise.resolve(u.includes('r380')?idx:{})}),setInterval:(f)=>{timers.push(f);return 1;},setTimeout:(f,ms)=>setTimeout(f,ms),
   readyImage:()=>({image:{}}),ensureImages:()=>Promise.resolve(),room:{id:'sz115-S05-2',samongR103:{zone:'S-05',key:'x'}},layer:'DREAM',
-  __STORYWORLD_MOB_UNIQUE_R248_DATA__:Object.freeze({sheets:{m044:{name:'피리 고블린',file:'m044.webp',path:'assets/r410/mobs/m044.webp',body:214},m019:{name:'갈망의 도시짐승',file:'m019.webp',path:'assets/r248/mobs/m019.webp',body:182},m099:{name:'다른 이름',path:'assets/r410/mobs/m099.webp',body:200}},byName:{}}),
+  __STORYWORLD_MOB_UNIQUE_R248_DATA__:Object.freeze({sheets:{m044:{name:'피리 고블린',file:'m044.webp',path:'assets/r410/mobs/m044.webp',body:214},m019:{name:'갈망의 도시짐승',file:'m019.webp',path:'assets/r248/mobs/m019.webp',body:182},m072:{name:'규칙을 어기지 않는 마네킹',file:'m072.webp',path:'assets/r410/mobs/m072.webp',body:267},m099:{name:'다른 이름',path:'assets/r410/mobs/m099.webp',body:200}},byName:{}}),
   __STORYWORLD_APPROVED_MOBS_R380__:A,__STORYWORLD_STORY_COMBAT_R54__:S,__STORYWORLD_SAMONG_SHADES_R200__:SH};
  w.window=w;vm.createContext(w);vm.runInContext(code,w);return {w,own,ROWS,frames:()=>frames,tick:()=>timers.forEach(f=>f())};}
 (async()=>{
@@ -73,6 +73,13 @@ W.room={id:'cult04'};ok(A().assign({name:'중간보스 · ID 배양 점액체',w
  // ③ 시트 줄(피리 고블린)
  const D=W.__STORYWORLD_MOB_UNIQUE_R248_DATA__;ok(D.sheets.m044.path==='assets/r1233/mobs/m044.webp'&&D.sheets.m044.body===196,'피리 고블린 R248 시트 줄 → r1233 고블린 시트(R410 상자머리 후보 대신)');
  ok(D.sheets.m019.path==='assets/r1233/mobs/m019.webp'&&D.sheets.m019.body===180,'갈망의 도시짐승 R248 시트 줄 → Dots DR-02 v1 손질 시트(작은 도트 개 대신)');
+// Dots CX-0177RC 1차(사용자 2026-11-19 "나머지후보그림 재생성닷츠와상호작용으로"): index.json 의 모든 줄이 SHEETS 에 같은 body 로 있고 파일·해시가 맞음
+{const ix=JSON.parse(fs.readFileSync(path.join(R,'runtime-text/assets/r1233/mobs/index.json'),'utf8')).mobs,SH=W.__STORYWORLD_MOB_ART_RESTORE_R1233__.sheets;
+ for(const m of ix){ok(SH[m.id]&&SH[m.id].path==='assets/r1233/mobs/'+m.file&&SH[m.id].body===m.body&&SH[m.id].name===m.name,'SHEETS 줄 '+m.id+' '+m.name);
+  ok(crypto0.createHash('sha256').update(fs.readFileSync(path.join(R,'runtime-text/assets/r1233/mobs',m.file))).digest('hex')===m.sha256,'시트 해시 '+m.id);}
+ for(const id of ['m087','m072','m025','m026','m057','m091','m043','m058','m069'])ok(ix.some(m=>m.id===id),'CX-0177RC 1차 적용 '+id);
+ for(const id of ['m027','m029','m053','m061'])ok(!SH[id],'보류(사용자 채택 주장 m027·m029, DU07 경로 의존 m053, 잘림 m061) '+id);}
+ok(D.sheets.m072.path==='assets/r1233/mobs/m072.webp','규칙을 어기지 않는 마네킹 → Dots 나무 마네킹 시트');
 ok(D.sheets.m099.path==='assets/r410/mobs/m099.webp','다른 줄은 그대로');
  api.set({on:false});ok(D.sheets.m044.path==='assets/r410/mobs/m044.webp'&&D.sheets.m044.body===214,'끄면 원래 줄로 되돌림');api.set({on:true});ok(D.sheets.m044.path==='assets/r1233/mobs/m044.webp','다시 켜면 다시 얹음');
  const six=JSON.parse(fs.readFileSync(path.join(R,'runtime-text/assets/r1233/mobs/index.json'),'utf8'));const row=six.mobs.find(m=>m.id==='m044');

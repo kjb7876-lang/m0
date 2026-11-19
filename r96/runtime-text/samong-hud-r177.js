@@ -49,7 +49,7 @@ try{
  // R160 사몽 아이콘·R137 보호막 원: 처음 한 번 끈다.
  if(prefs.on&&!prefs.iconsOff){for(const [api,k] of [['__STORYWORLD_COMBAT_R160__','samongIcon'],['__STORYWORLD_COMBAT_R137__','guardOrb']]){try{window[api]?.set?.({[k]:false});}catch(e){fail(e);}}set({iconsOff:true});}// 한 번만 끈다 — 설정에서 다시 켜면 그대로 둔다
  css();apply();
- if(typeof showAwakening==='function'){const base=showAwakening;showAwakening=function(...a){const r=base.apply(this,a);try{if(prefs.on)stats.shows++;}catch(e){fail(e);}return r;};}
+ if(typeof showAwakening==='function'){const base=showAwakening;const w=function(...a){const r=base.apply(this,a);try{if(prefs.on)stats.shows++;}catch(e){fail(e);}return r;};/* R1244: 아래 감싸기 표식 옮겨 달기 */for(const k of Object.keys(base))if(/^_*r\d+/i.test(k))try{w[k]=base[k];}catch(_){}showAwakening=w;}
  if(typeof tick==='function'){const base=tick;let at=0;tick=function(...a){const r=base.apply(this,a);
   try{if(prefs.on&&typeof player==='object'&&player&&player.samong>0){if(typeof cutinUntil!=='undefined'&&typeof time==='number')cutinUntil=Math.max(cutinUntil,time+.2);
    const now=performance.now();if(now-at>200){at=now;fixHud();hookBtn();leftBadge(true);if(tipOn){box().innerHTML=spec();place();}stats.updates++;}
