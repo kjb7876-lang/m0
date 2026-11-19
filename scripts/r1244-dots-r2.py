@@ -5,7 +5,7 @@
   회색 줄이기(대비 끌어올림), 머리 위 여백 8% 더함(그림을 92% 로 줄여 아래 가운데 정렬). 바탕이 검정이라 따로 빼지 않고 CSS 에서 screen 섞기.
 - 눈(헌터·기억사수)은 scripts/r1244-eye-dots.py <이 폴더> 로 만든다.
 원본: 아래 입력표(형상마다 쓸 판·폴더). R1244c-2: Dots r2 — 미카엘라(확정 복장)·네온·서하 임팩트 r2, 서하 베기 r2.
-헌터 임팩트 r2 는 가슴 노출이 있어 15세 기준을 지키려고 r1 을 그대로 씀(Dots 에 다시 요청)."""
+헌터 임팩트는 R1244d 에서 r3(노출 없음)로 바꿈."""
 import sys,os
 from PIL import Image,ImageOps
 D='/mnt/project-files/dots-results/'
@@ -14,6 +14,7 @@ SLASH_IN={f:('cx0178cn-r2','r1') for f in ['gunner','hunter','lauren','michaela'
 SLASH_IN['seoha']=('cx0178cn-r3','r2')
 IMPACT_IN={f:('cx0178cn-r2','r1') for f in ['ego','gunner','hunter','hwando','lauren','persona','slayer']}
 IMPACT_IN.update({'michaela':('cx0178cn-r3','r2'),'neon':('cx0178cn-r3','r2'),'seoha':('cx0178cn-r3','r2')})
+IMPACT_IN['hunter']=('cx0178cn-r4','r3')  # R1244d: r3 = 목까지 덮은 안쪽 옷·가죽 갑옷, 노출 없음(r2 는 15세 기준 미달로 안 씀)
 SRC=lambda d,kind,f,v:os.path.join(sys.argv[1] if len(sys.argv)>1 else D,d,f'CX-0178CN-{kind}_{f}_{v}_ROUGH.png')
 OUT=os.path.join(os.path.dirname(__file__),'..','r96','runtime-text','assets','r1244')
 os.makedirs(OUT,exist_ok=True)

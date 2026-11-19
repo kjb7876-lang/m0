@@ -13969,8 +13969,8 @@
     },
     {
       "path": "assets/r1244/impact-hunter.webp",
-      "bytes": 58062,
-      "sha256": "584799c347dfe80993a3d995a2a1849388d72086e45a1b5ad6878dd2e94b4782"
+      "bytes": 40302,
+      "sha256": "685742a2f2fac35516a79ce56c398ba8cc2cda05369af6d5e1d2fd53b6d7af15"
     },
     {
       "path": "assets/r1244/impact-hwando.webp",
@@ -58049,7 +58049,7 @@
     }
   ],
   "fileCount": 11609,
-  "totalBytes": 1385426663,
+  "totalBytes": 1385408903,
   "webHTMLSha256": "73960b0d58639f84b13fc6f19d84547eaea6f073ac8a1d60c89b4045819eee8f",
   "largest": [
     {
