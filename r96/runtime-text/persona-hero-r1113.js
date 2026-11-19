@@ -292,7 +292,7 @@ function inject(){const panel=document.getElementById('panel');if(!panel)return;
   if(!c){c=card(h,start);last.insertAdjacentElement('afterend',c);}else if(c.previousElementSibling!==last)last.insertAdjacentElement('afterend',c);}
  mark();}
 function onClick(ev){try{const el=ev.target?.closest?.('#panel [data-hero],#chooseHero,#slotConfirmR73,#panel [data-ego-r1046]');if(!el)return;
- if(el.id==='chooseHero'||el.id==='slotConfirmR73'){const sel=document.querySelector('#panel [data-persona-r1113].selected');commit=!!(sel&&want);return;}
+ if(el.id==='chooseHero'||el.id==='slotConfirmR73'){/* R1240: 페르소나 칸을 누르면 엔진이 창을 다시 그려 칸이 잠깐 없다 — 그 사이 확정해도 페르소나 의도(want)+라우렌 선택이면 페르소나 */const sel=document.querySelector('#panel [data-persona-r1113].selected')||(want&&document.querySelector('#panel [data-hero="'+BASE+'"].selected'));commit=!!(sel&&want);return;}
  if(!synthetic&&!ev.target.closest('[data-persona-r1113]'))want=false;}catch(e){fail(e);}}
 function hudName(){const n=G(()=>document.getElementById('heroName'),null);if(!n)return;const t=String(n.textContent||''),b=G(()=>HEROES[BASE].name,'라우렌');if(t.includes(b))n.textContent=t.split(b).join(PROFILE.name);else if(!t)n.textContent=PROFILE.name;}
 function nameFix(id,v){if(!formActive())return v;if(Object.prototype.hasOwnProperty.call(HUD_TEXT,id))return HUD_TEXT[id];if(id!=='heroName')return v;const t=String(v??''),b=G(()=>HEROES[BASE].name,'라우렌');return t.includes(b)?t.split(b).join(PROFILE.name):t;}

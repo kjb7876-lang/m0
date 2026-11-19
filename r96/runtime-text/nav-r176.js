@@ -28,8 +28,10 @@ function bar(){if(!prefs.buttons)return;const p=document.getElementById('panel')
  p.insertBefore(d,p.firstChild);}
 try{
  for(const name of OPENERS){const base=globalThis[name];if(typeof base!=='function')continue;globalThis[name]=function(...a){const prev=current;current=name;try{return base.apply(this,a);}finally{current=prev;}};}
- if(typeof openPanel==='function'){const base=openPanel;openPanel=function(html,...a){const was=typeof modal!=='undefined'&&modal,r=base.call(this,html,...a);
-   try{if(ready()&&!story()&&current&&H()){arm();if(!navigating){if(!(was&&stack[stack.length-1]===current)){stack.push(current);fwd=[];H().pushState({sw176:stack.length},'');stats.pushed++;}}bar();}}catch(e){fail(e);}return r;};}
+ if(typeof openPanel==='function'){const base=openPanel;openPanel=function(html,...a){const was=typeof modal!=='undefined'&&modal,hadBar=!!(was&&document.getElementById('r176Nav')),r=base.call(this,html,...a);
+   try{if(ready()&&!story()&&current&&H()){arm();if(!navigating){if(!(was&&stack[stack.length-1]===current)){stack.push(current);fwd=[];H().pushState({sw176:stack.length},'');stats.pushed++;}}bar();}
+   /* R1240: 같은 창을 제자리에서 다시 그릴 때(영웅 칸 누름 = 엔진 paint → openPanel) 뒤로·앞으로 줄이 빠져 창 내용이 21px 위로 튀어 '이 영웅으로 변경'을 헛누르게 했다 → 열린 창의 다시 그리기면 줄을 다시 붙인다 */
+   else if(hadBar&&!current&&stack.length&&ready()&&!story())bar();}catch(e){fail(e);}return r;};}
  if(typeof closePanel==='function'){const base=closePanel;closePanel=function(...a){const r=base.apply(this,a);
    try{if(!navigating&&!(typeof modal!=='undefined'&&modal)&&stack.length&&H()){const n=stack.length;stack=[];fwd=[];ignore++;H().go(-n);}}catch(e){fail(e);}return r;};}
  addEventListener('popstate',ev=>{try{if(ignore>0){ignore--;stats.ignored++;return;}if(!ready())return;const st=ev.state&&ev.state.sw176;

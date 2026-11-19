@@ -1,0 +1,26 @@
+{
+ "round": "R1243",
+ "request": "CX-0172BW",
+ "files": [
+  {
+   "dots": "CX-0172BW-07",
+   "source": "c103-walkR.png",
+   "sourceSha256": "8b520830fe4d4553347e1a7f2eb6808262ee71d73ac4e1a8959a9e3102cb4b21",
+   "toneGain": [
+    1.046,
+    0.958,
+    0.829
+   ],
+   "path": "assets/r1243/move/c103-mid-side.webp",
+   "size": [
+    3072,
+    384
+   ],
+   "bytes": 88452,
+   "sha256": "4512ea2f85b9c469b77f8f22eb37760532e4b85e716c0dbb72e320dfcc4a1419",
+   "use": "한리안 옆 걷기 8칸",
+   "applied": true,
+   "finalArt": false
+  }
+ ]
+}

@@ -707,6 +707,8 @@ jobs:
         run: node r96/qa/r1029/move-float-cpu-check.cjs
       - name: R1224 boss summons follow the room's current mobs (one rule for every boss; renamed or replaced kinds) and float movement for 8 bosses/midbosses that slid on one image CPU check
         run: node r96/qa/r1224/r1224-cpu-check.cjs
+      - name: R1243 seven sins bosses keep one body height when R620 idle/hit sheets swap in (sheet visible-height table for the R463 size lock) CPU check
+        run: node r96/qa/r1243/r1243-cpu-check.cjs
       - name: R1125 regular-mob up/down walk sheets (Dots CX-0127MV m033, CX-0135 B4 resonance knight, B7 fisher down; same id with other art attached as alt) CPU check
         run: node r96/qa/r1125/mob-move-cpu-check.cjs && node r96/qa/r1167/r1167-cpu-check.cjs
       - name: R996 bulmyeongwi fog summon still fires in the boss phase after every field mob is gone CPU check
@@ -987,12 +989,16 @@ jobs:
         run: node r96/qa/r1174/r1174-cpu-check.cjs
       - name: R1176 EGO hidden hero 2D and 3D looks (one hero, look saved only; 3D look keeps the 3D render body for every motion, attack ghost bodies and clone trail/halo copies removed, effects identical in both looks) CPU check
         run: node r96/qa/r1176/r1176-cpu-check.cjs
+      - name: R1240 hero change window fit (all hero cells and the confirm button stay inside the window; stage portrait shrinks, then one-row strip) CPU check
+        run: node r96/qa/r1240/r1240-cpu-check.cjs
       - name: R1174b persona cut-in Dots CX-0153PC art applied (bust, awake, orbs8, sigil12) CPU check
         run: node r96/qa/r1174/r1174b-dots-cpu-check.cjs
       - name: R1155 EGO and persona own sound effects (numpy-synthesised; basic, Q/W/E/R, ink passives, celestial branches and ticks remapped only in hidden-hero form) CPU check
         run: node r96/qa/r1155/r1155-cpu-check.cjs
       - name: R1212 code-synthesised sounds (R125 samong ambience beds and events, R356 kairo clock, R568 boss reveal boom, R123 banner tick) replaced by ElevenLabs files with synth fallback CPU check
         run: node r96/qa/r1212/r1212-cpu-check.cjs
+      - name: R1229 video motion and effect bugs (enemy story-vfx shape layer removed, R241 meteors as frame sheet, projectile sheets kept across regions, Balrog one size x1.66, summoning pillar fixed, hunter walk stride) CPU check
+        run: node r96/qa/r1229/r1229-cpu-check.cjs
       - name: R1109 co-op relay build match (old R62 Render relay auto-fallback, default relay address) CPU check
         run: node r96/qa/r1109/r1109-cpu-check.cjs
       - name: R1092 story panel scene art (vertical-version scene paintings, ink-wash aware) CPU check
