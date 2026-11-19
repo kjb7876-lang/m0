@@ -515,6 +515,8 @@ jobs:
         run: node r96/qa/r600/r600-cpu-check.cjs
       - name: R1181 mobile survival gem draw thinning CPU check
         run: node r96/qa/r1181/r1181-gem-thin-cpu-check.cjs
+      - name: R1195 mob cut feet and edges covered by ink mist CPU check
+        run: node r96/qa/r1195/feet-ink-cpu-check.cjs
       - name: R976 samong first region pixel art to painted assets CPU check
         run: node r96/qa/r976/r976-cpu-check.cjs
       - name: R1177 samong episode pixel leftovers (S-06 pixel mobs, pixelfx sheets) to painted art CPU check
@@ -707,6 +709,10 @@ jobs:
         run: node r96/qa/r1182/hit-death-alias-cpu-check.cjs
       - name: R1183 duplicate mobs tinted until Dots CX-0163DU art arrives (body image only, filters the 3D recorder accepts) CPU check
         run: node r96/qa/r1183/dup-tint-cpu-check.cjs
+      - name: R1186 dream-layer R248 mobs m032 + m049 painted walk/attack = Dots CX-0161DR r1 ROUGH (R1179 path/body overlay; art only) CPU check
+        run: node r96/qa/r1186/dream-mobs-cpu-check.cjs
+      - name: R1187 Dots CX-0163DU art swapped in for the duplicate mobs (same cell layout, tint kept only until the sheet loads) CPU check
+        run: node r96/qa/r1187/dup-art-cpu-check.cjs
       - name: R1196 long virtual run (1h/3h fake clock) - R613 gait and R1183 tint rewrap capped so the drawEnemy chain stays bounded and enemies and bosses keep drawing CPU check
         run: node r96/qa/r1196/long-run-wrap-check.cjs
       - name: R1196 HUD rewrap capped (R420 access and R1046 EGO form no longer re-wrap updateHUD around each other forever; 1h/3h fake clock) CPU check

@@ -1,0 +1,11 @@
+FAIL ① m032 → r1186 시트 (undefined)
+FAIL ① m032 body = index (198)
+FAIL ② m032 sha·등록
+FAIL ① m049 → r1186 시트 (undefined)
+FAIL ① m049 body = index (234)
+FAIL ② m049 sha·등록
+FAIL ④ 다시 켜면 적용
+FAIL ⑤ paths() 새 경로 포함
+FAIL ⑥ verify 접두
+FAIL ⑥ pages.yml
+FAILED 10/17

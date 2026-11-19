@@ -14,13 +14,16 @@ const REV='R1179-mob-art-1',KEY='storyworld.r1179.mobArt',DIR='assets/r1179/mobs
 const ART=Object.freeze({
  m077:Object.freeze({file:'m077.webp',body:211,name:"외계 침공군"}),
  m081:Object.freeze({file:'m081.webp',body:221,name:"여섯 물건의 그림자"}),/* Dots CX-0157PX r2(11-18, r1 HOLD 손·밑단·팔 고친 판) */
+ /* R1186: 꿈 층 R248 임시 도트 → Dots CX-0161DR r1 ROUGH 칠한 시트(scripts/r1186-dream-mob-sheets.py, assets/r1186/mobs/index.json). path 가 있으면 DIR 대신 그 경로 */
+ m032:Object.freeze({path:'assets/r1186/mobs/m032.webp',body:137,name:"인간의 뇌를 닮은 투명 연산 장치"}),/* 떠 있는 연산 장치 — 몸이 칸 위쪽(발 기준 땅 위로 뜸) */
+ m049:Object.freeze({path:'assets/r1186/mobs/m049.webp',body:227,name:"시간핵의 명령 잔류"}),
 });
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const orig={},applied=[];let lastError=null,late=false;const data=()=>window.__STORYWORLD_MOB_UNIQUE_R248_DATA__||null;
 function apply(on){applied.length=0;const D=data();if(!D||!D.sheets)return false;for(const [id,a] of Object.entries(ART)){const s=D.sheets[id];if(!s||s.name!==a.name)continue;/* 이름이 다르면 손대지 않는다 */
- try{if(!orig[id])orig[id]={path:s.path,body:s.body};if(on){s.path=DIR+a.file;s.body=a.body;applied.push(id);}else{if(orig[id].path===undefined)delete s.path;else s.path=orig[id].path;s.body=orig[id].body;}}catch(e){lastError=String(e?.message||e).slice(0,200);}}return true;}
+ try{if(!orig[id])orig[id]={path:s.path,body:s.body};if(on){s.path=a.path||DIR+a.file;s.body=a.body;applied.push(id);}else{if(orig[id].path===undefined)delete s.path;else s.path=orig[id].path;s.body=orig[id].body;}}catch(e){lastError=String(e?.message||e).slice(0,200);}}return true;}
 if(!apply(prefs.on!==false)){late=true;const go=()=>{try{apply(prefs.on!==false);}catch(e){lastError=String(e?.message||e).slice(0,200);}};
  try{if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go,{once:true});else setTimeout(go,0);}catch(e){lastError=String(e?.message||e).slice(0,200);}}
 function set(v){prefs={...prefs,...(typeof v==='object'?v:{on:v!==false})};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}apply(prefs.on!==false);return {...prefs};}
-window.__STORYWORLD_MOB_ART_R1179__=Object.freeze({revision:REV,dir:DIR,art:ART,set,paths:()=>Object.values(ART).map(a=>DIR+a.file),inspect:()=>({revision:REV,prefs:{...prefs},applied:[...applied],late,lastError})});
+window.__STORYWORLD_MOB_ART_R1179__=Object.freeze({revision:REV,dir:DIR,art:ART,set,paths:()=>Object.values(ART).map(a=>a.path||DIR+a.file),inspect:()=>({revision:REV,prefs:{...prefs},applied:[...applied],late,lastError})});
 })();

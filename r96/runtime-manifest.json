@@ -12893,6 +12893,61 @@
       "sha256": "1407495febf0bfd3109ecd921bd52a37bf71ce914462eb1da04ff40bca5311d9"
     },
     {
+      "path": "assets/r1186/mobs/index.json",
+      "bytes": 1038,
+      "sha256": "14fb3428e142701ad529936422daca33e786761bbe0b654bd8e9fbbf66e71034"
+    },
+    {
+      "path": "assets/r1186/mobs/m032.webp",
+      "bytes": 333334,
+      "sha256": "2e329d68d8c857c6e4d6ed3d7929ca99e79877462921f9c6eac442f397367c47"
+    },
+    {
+      "path": "assets/r1186/mobs/m049.webp",
+      "bytes": 275030,
+      "sha256": "045f8babb81e8940859aa4015817ac6042ea09215bbb0bf937c0fddae88b5c99"
+    },
+    {
+      "path": "assets/r1187/mobs/du05-rag-golem.webp",
+      "bytes": 156172,
+      "sha256": "055a99f3c306413f908e53bd80ac2c2d3e305e500b6f76cc562458fa4eb23291"
+    },
+    {
+      "path": "assets/r1187/mobs/du07-reverse-paper.webp",
+      "bytes": 173114,
+      "sha256": "502eb2845bde05a4ff42cf30149ece5cc02733ef36e123a9b7faf228e535b65b"
+    },
+    {
+      "path": "assets/r1187/mobs/du08-reverse-photo.webp",
+      "bytes": 219986,
+      "sha256": "51cad3f1d1c79da3d73961c04578de447481625f5fa0893600e58bd76b7763c0"
+    },
+    {
+      "path": "assets/r1187/mobs/du09-vermilion-wraith.webp",
+      "bytes": 281734,
+      "sha256": "5d0174a0731a25af7b2e47295558e826bc23c2b15331c7303990f5bca2399d42"
+    },
+    {
+      "path": "assets/r1187/mobs/du10-ink-echo.webp",
+      "bytes": 245066,
+      "sha256": "e05e4441431684150b304cc228b907edde3cb96082aaa2116a5c8d511bac6f67"
+    },
+    {
+      "path": "assets/r1187/mobs/du11-faded-guard.webp",
+      "bytes": 358434,
+      "sha256": "d9850c50dabbbc44891d138e24cd911193fb74a6f8d1d07b814ceb332be14f9a"
+    },
+    {
+      "path": "assets/r1187/mobs/du12-root-rag.webp",
+      "bytes": 289316,
+      "sha256": "cde09f6d93c03f7e59c6d3c6a6ade488f143030b962e607e0aa982070bd7b42f"
+    },
+    {
+      "path": "assets/r1187/mobs/index.json",
+      "bytes": 4644,
+      "sha256": "21bd816cb1a6ddccda53bfd53bc199c6c694b1a4942de0f3644a73d975961c84"
+    },
+    {
       "path": "assets/r119/heroes/gunner-n.webp",
       "bytes": 35746,
       "sha256": "1887e03e6fb23d2befc1cbb30f5b11d0984ca7fba0575a25a39a504490a0c867"
@@ -55439,8 +55494,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6582320,
-      "sha256": "f73e280be14df924080fbe3a1b2f19515f49aca8193811e3074e200f9ad8e1cd"
+      "bytes": 6582368,
+      "sha256": "1b5145b15a27ec88ee3703d2f18bab6636c1d202660a6d1948b740518b2114fe"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -55614,8 +55669,8 @@
     },
     {
       "path": "mob-art-r1179.js",
-      "bytes": 3477,
-      "sha256": "b35fb3d87a5c9fef1c62cca72c1df8989eaacfe28fc9b2d0e8f6d3490b72f8df"
+      "bytes": 3984,
+      "sha256": "5ac65040bce8583df8d92f995a672d421a86ccdca03042fb005e8f54ecbd81d0"
     },
     {
       "path": "mob-art-r290.js",
@@ -55664,8 +55719,13 @@
     },
     {
       "path": "mob-dup-tint-r1183.js",
-      "bytes": 6411,
-      "sha256": "8cdfb7b6adab99bd5395034c3ca809586846475be5c8c1aa6a50a4f83844b17c"
+      "bytes": 8070,
+      "sha256": "d5849969a160804dc2e84e49f0162bad5e3dc23e3fba8c3cbabb04868ddd0f87"
+    },
+    {
+      "path": "mob-feet-ink-r1195.js",
+      "bytes": 17520,
+      "sha256": "9e4b3d93348f163026547fdaba223a7f3f57158d04461f7d9d9fd6f15e05533c"
     },
     {
       "path": "mob-fix-r275.js",
@@ -56858,9 +56918,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11371,
-  "totalBytes": 1364934115,
-  "webHTMLSha256": "f73e280be14df924080fbe3a1b2f19515f49aca8193811e3074e200f9ad8e1cd",
+  "fileCount": 11383,
+  "totalBytes": 1367291717,
+  "webHTMLSha256": "1b5145b15a27ec88ee3703d2f18bab6636c1d202660a6d1948b740518b2114fe",
   "largest": [
     {
       "path": "index.html",

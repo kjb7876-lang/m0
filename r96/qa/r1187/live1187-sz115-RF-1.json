@@ -1,0 +1,30 @@
+{
+ "zone": "cult05 / \"sz115-RF-1\"",
+ "names": {
+  "낚싯바늘 원고지 망령": {
+   "rule": null,
+   "draws": [
+    [
+     "r200/shades/fishhook-manuscript.webp",
+     "saturate(.8)"
+    ]
+   ]
+  },
+  "스토리텔러": {
+   "rule": null,
+   "draws": []
+  }
+ },
+ "inspect": {
+  "revision": "R1183-dup-tint-2-r1187",
+  "on": true,
+  "stats": {
+   "tinted": 0,
+   "draws": 0,
+   "wraps": 14,
+   "errors": 0,
+   "swapped": 0
+  },
+  "lastError": null
+ }
+}

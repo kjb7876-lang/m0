@@ -1,0 +1,36 @@
+그림	몹 이름	잘린 칸 수	잘림 종류	보스·중간보스	구역
+assets/r200/shades/tram-passenger.webp	물감 철로의 유령 승객	10	bottom:art left right		sz115-S05-2 sz115-S05-3 sz115-S05-5 sz115-S05-6
+assets/r200/shades/mono-fighter.webp	흑백 잔상의 투사	7	left right		sz115-S03-2 sz115-S03-3 sz115-S03-5
+assets/r200/shades/cephalopod-invader.webp	두족류 생체기계 침공병	7	left right		sz115-S06-10 sz115-S06-11 sz115-S06-12 sz115-S06-14 sz115-S06-16 sz115-S06-17
+assets/r200/shades/mannequin.webp	식탁의 마네킹 잔영	6	left right		sz115-S01-2 sz115-S01-3
+assets/r200/shades/ring-sparrer.webp	검은 고리의 대련생	6	left right		sz115-S03-2 sz115-S03-3 sz115-S03-4 sz115-S03-5
+assets/r200/shades/mirror-shade.webp	관람석 거울의 잔영	6	left right		sz115-S03-2 sz115-S03-3 sz115-S03-5
+assets/r380/mobs/ep1b-banknote-blade-walk-d1.webp	칼날이 된 지폐, 칼날이 된 지폐 증원, 칼날이 된 지폐 후속 증원	5	bottom:edge		ep1b06
+assets/r200/shades/clockwork-legionary.webp	폐선로 태엽 군단병	5	left right		sz115-S06-11 sz115-S06-12 sz115-S06-14 sz115-S06-16 sz115-S06-18 sz115-S06-19
+assets/r200/shades/fishhook-manuscript.webp	낚싯바늘 원고지 망령	5	left right		sz115-RF-2
+assets/r200/shades/applause-shade.webp	박수치는 객석의 잔영	4	bottom:art left right		sz115-S04-10 sz115-S04-13 sz115-S04-2 sz115-S04-3 sz115-S04-4 sz115-S04-6
+assets/r200/shades/clockhand-warden.webp	카이로 회랑의 시계침 수문장 잔영	4	left right		sz115-RB-2 sz115-RB-3 sz115-RB-4 sz115-RB-5
+assets/r200/shades/wire-bound-dead.webp	검은 제단의 전선 망자 잔영	4	left right		sz115-RG-1 sz115-RG-10 sz115-RG-11 sz115-RG-5 sz115-RG-6 sz115-RG-8
+assets/r200/shades/paper-child.webp	면도날 종이 아이	3	left right		sz115-S02-3 sz115-S02-4 sz115-S02-5
+assets/r200/shades/parade-mannequin.webp	승전식 제복 마네킹 잔영	3	left right		sz115-RE-1 sz115-RE-2
+assets/r74/monsters.png	재 나방, 재 나방 우두머리	2	right		dist01
+assets/r198/mobs/M033-move.png	중간보스 · 되살아난 수호기사, 중간보스 · 전극기계수호기사	2	bottom:edge		dist04 ep1b08
+assets/r198/mobs/M012-idle.png	오만의 흰 가면, 오만의 흰 가면 우두머리	2	bottom:edge		ep1a09
+assets/r198/mobs/M024-idle.png	살아 있는 거대한 위장, 살아 있는 거대한 위장 우두머리, 살아 있는 거대한 위장 증원	2	bottom:edge		ep1b04
+assets/r198/mobs/M045-idle.png	중간보스 · 중립초원 슬라임, 중립초원 슬라임, 중립초원 슬라임 우두머리	2	bottom:edge		last304
+assets/r200/shades/furnace-taxidermist.webp	검은 공방의 용광로 박제공 잔영	2	left right		sz115-RG-1 sz115-RG-10 sz115-RG-5 sz115-RG-8
+assets/episode1a/hallucinated_orderly.webp	백의 구속자 후속 증원, 중간보스 · 백의 구속자	1	bottom:edge		ep1a08
+assets/r198/mobs/M022-move.png	중간보스 · 곰팡이와 오물 봉투	1	bottom:edge		ep1b02
+assets/episode1b/generated-v394/envy_leviathan.webp	긴 뱀의 그림자, 긴 뱀의 그림자 증원	1	bottom:edge		ep1b03
+assets/r116/mobs/M037-idle.png	중간보스 · 참호 공명기사, 참호 공명기사, 참호 공명기사 우두머리	1	bottom:art		u201
+assets/generated-v3125/kair-guardians/guardian_51.webp	상위수문장 51	1	bottom:art		kair05
+assets/generated-v3125/kair-guardians/guardian_52.webp	상위수문장 52	1	bottom:art		kair06
+assets/generated-v3125/kair-guardians/guardian_54.webp	상위수문장 54	1	bottom:art		kair07
+assets/generated-v3125/kair-guardians/guardian_55.webp	상위수문장 55	1	bottom:art		kair08
+assets/generated-v3125/kair-guardians/guardian_35.webp	시간수문장 35	1	bottom:art		kair09
+assets/generated-v3125/kair-guardians/guardian_57.webp	상위수문장 57	1	bottom:art		kair09
+assets/generated-v3125/kair-guardians/guardian_38.webp	시간수문장, 시간수문장 38, 시간수문장 우두머리	1	bottom:art		kair10
+assets/generated-v3125/kair-guardians/guardian_37.webp	시간수문장, 시간수문장 37, 시간수문장 우두머리	1	bottom:art		kair10
+assets/generated-v3125/kair-guardians/guardian_39.webp	시간수문장 우두머리	1	bottom:art		kair10
+assets/generated-v3125/kair-guardians/guardian_42.webp	시간수문장 42	1	bottom:art		kair10
+assets/generated-v3125/kair-guardians/guardian_43.webp	시간수문장 43, 시간수문장 우두머리	1	bottom:art		kair02

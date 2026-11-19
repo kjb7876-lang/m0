@@ -4,10 +4,12 @@
  * 몸 그림(ctx.drawImage)만 바꾼다: 체력 줄·글자·이펙트·판정·이동·보상 그대로. 맞은 번쩍 등 원래 필터 뒤에 이어 붙인다.
  * 필터는 Three.js 기록기가 받는 것만(hue-rotate·saturate·brightness·contrast·grayscale).
  * 끄기: localStorage['storyworld.r1183.dupTint']='{"on":false}'
+ * R1187: Dots CX-0163DU 새 그림이 온 몹(DU-05·07~12)은 겹치던 원래 시트를 그릴 때 같은 칸 배치의 새 시트로 바꿔 그리고 색조는 얹지 않는다.
+ *        새 시트가 아직 안 읽혔으면 그 동안만 색조로 구분한다(원래 동작). 원본 시트·다른 몹은 그대로.
  */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_DUP_TINT_R1183__)return;
-const REV='R1183-dup-tint-2',KEY='storyworld.r1183.dupTint';
+const REV='R1183-dup-tint-2-r1187',KEY='storyworld.r1183.dupTint';
 // 2-A(다른 이름)는 그림 조건 없이 이름으로, 2-B(같은 이름)는 겹치는 그 그림을 그릴 때만.
 // [이름 앞부분, 구역 조건(정규식, 없으면 어디서나), 그린 몸 그림 경로 조건(없으면 무엇이든 — 같은 몹이 층마다 다른 그림을 써도 따라감), 필터, 메모]
 const RULES=Object.freeze([
@@ -23,9 +25,21 @@ const RULES=Object.freeze([
  ['부정의 잔영',/-P-/,/m066|M016/,'hue-rotate(-40deg) saturate(1.15) brightness(.9)','DU-10 사몽 에피소드판'],
  ['거짓천국 근위천사',/-M-/,/m099|false-heaven/,'saturate(.55) brightness(.92) contrast(1.1)','DU-11 미카엘라 엔딩판'],
  ['뿌리에서 쏟아진 잔영',/-S-?0?1-/,/m063/,'hue-rotate(-30deg) saturate(1.2) contrast(1.05)','DU-12 사몽 S-01판']]);
+// R1187 [DU, 겹치던 원래 그림(정규식), 새 시트] — 새 시트는 원래 시트와 크기·칸 수·칸 순서·발 자리가 같다(scripts/r1187-dup-mob-sheets.py).
+const ART=Object.freeze({
+ 'DU-05':[/r380\/mobs\/r200-stitched-golem-v2\.webp/,'assets/r1187/mobs/du05-rag-golem.webp'],
+ 'DU-07':[/r290\/mobs\/m053\.webp/,'assets/r1187/mobs/du07-reverse-paper.webp'],
+ 'DU-08':[/r290\/mobs\/m088\.webp/,'assets/r1187/mobs/du08-reverse-photo.webp'],
+ 'DU-09':[/r290\/mobs\/m082\.webp/,'assets/r1187/mobs/du09-vermilion-wraith.webp'],
+ 'DU-10':[/r290\/mobs\/m066\.webp/,'assets/r1187/mobs/du10-ink-echo.webp'],
+ 'DU-11':[/r410\/mobs\/m099\.webp/,'assets/r1187/mobs/du11-faded-guard.webp'],
+ 'DU-12':[/r410\/mobs\/m063\.webp/,'assets/r1187/mobs/du12-root-rag.webp']});
+const IMGS=new Map();
+function artImg(path){let im=IMGS.get(path);if(!im){if(typeof Image!=='function')return null;im=new Image();im.decoding='async';im.src=path;IMGS.set(path,im);}return im.complete&&im.naturalWidth>0?im:null;}
+const duOf=rule=>String(rule&&rule[4]||'').slice(0,5);
 let active=false;
 const SKIP=/assets\/(?:vfx|r190|r411|r438|rc144|r163)\//;
-const stats={tinted:0,draws:0,wraps:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e&&e.message||e).slice(0,160);};
+const stats={tinted:0,draws:0,wraps:0,errors:0,swapped:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e&&e.message||e).slice(0,160);};
 let on=true;try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(v&&v.on===false)on=false;}catch(_){}
 // 사몽 장(에피소드·역행·엔딩)은 바탕 지도의 room.id(예: ep1b05) 위에 room.samongR103.zone(예: sz115-S01-2)을 얹는다 → 그 값을 먼저 본다.
 const zoneId=()=>{try{const r=typeof room!=='undefined'?room:null;if(!r)return '';const z=r.samongR103&&r.samongR103.zone;return String((z&&(typeof z==='string'?z:z.id))||r.id||'');}catch(_){return '';}};
@@ -37,6 +51,7 @@ function tintCall(c,rule,base,args){const img=args[0],src=srcOf(img);
  // 몸 그림만: 이펙트 폴더는 건너뜀, 경로 조건이 있으면 그 그림만. 경로를 모르는 그림(캔버스 등)은 경로 조건이 없을 때만.
  const isBody=src?(!SKIP.test(src)&&(!rule[2]||rule[2].test(src))):!rule[2];
  if(!isBody)return base.apply(c,args);
+ const art=ART[duOf(rule)];if(art&&src&&art[0].test(src)){const im=artImg(art[1]);if(im){stats.swapped++;const a2=args.slice();a2[0]=im;return base.apply(c,a2);}}
  const prev=c.filter;stats.draws++;try{c.filter=(prev&&prev!=='none'?prev+' ':'')+rule[3];return base.apply(c,args);}finally{c.filter=prev;}}
 // R1196: 다시 감싸기는 최대 MAX_WRAPS 번. 맨 바깥을 고집하는 R613 걷기(1초마다)와 서로 번갈아 감싸 사슬이 1시간에 수천 겹이 되어 스택이 넘쳤다.
 //  색조는 사슬 어디에 있어도 ctx.drawImage 를 바꿔 끼우므로 맨 바깥일 필요가 없다.
@@ -50,6 +65,6 @@ function wrap(){if(typeof drawEnemy!=='function'||drawEnemy.__r1183)return typeo
   active=true;try{return base.apply(this,[e,...a]);}finally{active=false;try{if(own)c.drawImage=d;else delete c.drawImage;}catch(err){fail(err);}}};
  w.__r1183=true;try{drawEnemy=w;stats.wraps++;}catch(err){fail(err);}return true;}
 wrap();setInterval(()=>{try{wrap();}catch(err){fail(err);}},1500);
-window.__STORYWORLD_DUP_TINT_R1183__=Object.freeze({revision:REV,rules:RULES.map(r=>({name:r[0],zone:r[1]&&String(r[1]),path:r[2]&&String(r[2]),filter:r[3],note:r[4]})),ruleFor:(e,z)=>{const r=ruleFor(e,z==null?zoneId():z);return r?r[3]:null;},
+window.__STORYWORLD_DUP_TINT_R1183__=Object.freeze({revision:REV,rules:RULES.map(r=>({name:r[0],zone:r[1]&&String(r[1]),path:r[2]&&String(r[2]),filter:r[3],note:r[4]})),art:Object.fromEntries(Object.entries(ART).map(([k,v])=>[k,{orig:String(v[0]),path:v[1]}])),ruleFor:(e,z)=>{const r=ruleFor(e,z==null?zoneId():z);return r?r[3]:null;},
  set:v=>{on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;},inspect:()=>({revision:REV,on,stats:{...stats},lastError})});
 })();

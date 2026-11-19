@@ -1,0 +1,74 @@
+{
+ "zone": "ep1b05 / \"sz115-S01-2\"",
+ "names": {
+  "기운 누더기 골렘": {
+   "rule": "hue-rotate(28deg) saturate(.7) brightness(.88) contrast(1.12)",
+   "draws": [
+    [
+     "r1187/mobs/du05-rag-golem.webp",
+     "saturate(.8)"
+    ]
+   ]
+  },
+  "뿌리에서 쏟아진 잔영": {
+   "rule": "hue-rotate(-30deg) saturate(1.2) contrast(1.05)",
+   "draws": [
+    [
+     "r161/puppet/puppet-ego-walk-right-8.webp",
+     "saturate(.92) contrast(1.05)"
+    ],
+    [
+     "r1187/mobs/du12-root-rag.webp",
+     "saturate(.78) brightness(.86) contrast(1.08)"
+    ]
+   ]
+  },
+  "식탁의 마네킹 잔영": {
+   "rule": null,
+   "draws": [
+    [
+     "r200/shades/mannequin.webp",
+     "saturate(.8)"
+    ]
+   ]
+  },
+  "꿰맨 아기 인형": {
+   "rule": null,
+   "draws": [
+    [
+     "r380/mobs/r200-stitched-golem-v2.webp",
+     "saturate(.8)"
+    ]
+   ]
+  },
+  "세뇌당한 기억의 조각": {
+   "rule": null,
+   "draws": [
+    [
+     "",
+     "none"
+    ],
+    [
+     "",
+     "none"
+    ],
+    [
+     "",
+     "none"
+    ]
+   ]
+  }
+ },
+ "inspect": {
+  "revision": "R1183-dup-tint-2-r1187",
+  "on": true,
+  "stats": {
+   "tinted": 16,
+   "draws": 2,
+   "wraps": 13,
+   "errors": 0,
+   "swapped": 0
+  },
+  "lastError": null
+ }
+}
