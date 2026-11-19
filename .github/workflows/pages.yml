@@ -517,6 +517,8 @@ jobs:
         run: node r96/qa/r1181/r1181-gem-thin-cpu-check.cjs
       - name: R1195 mob cut feet and edges covered by ink mist CPU check
         run: node r96/qa/r1195/feet-ink-cpu-check.cjs
+      - name: R1206b samong mood props lantern inkpost shard canvas stone from Dots art CPU check
+        run: node r96/qa/r1206b/r1206b-cpu-check.cjs
       - name: R976 samong first region pixel art to painted assets CPU check
         run: node r96/qa/r976/r976-cpu-check.cjs
       - name: R1177 samong episode pixel leftovers (S-06 pixel mobs, pixelfx sheets) to painted art CPU check

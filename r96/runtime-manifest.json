@@ -13073,6 +13073,36 @@
       "sha256": "6c2785664e1226250da23a2c048043ca8c3b2cfeeb4c5d1c8259c7d3d8b3649a"
     },
     {
+      "path": "assets/r1206/props/canvas.webp",
+      "bytes": 31702,
+      "sha256": "1830e7cb43a5cd12b398521b1715006459c8f7d7b8e01249818ee1378537dc66"
+    },
+    {
+      "path": "assets/r1206/props/index.json",
+      "bytes": 2563,
+      "sha256": "4098d958bdf5d9cfd512725ed4800d4d514ea48a64e599100f65f58c91c86ddd"
+    },
+    {
+      "path": "assets/r1206/props/inkpost.webp",
+      "bytes": 22560,
+      "sha256": "fbda9f970f5197f28dce18f48117d5604f1008961dc6b43278210b5aefa62016"
+    },
+    {
+      "path": "assets/r1206/props/lantern.webp",
+      "bytes": 29786,
+      "sha256": "71dd0cb77552ba1cffe5297b1af25d623f4ea8d9c8e2d766066554418e9893fd"
+    },
+    {
+      "path": "assets/r1206/props/shard.webp",
+      "bytes": 23874,
+      "sha256": "2af0a1970f421b72179fad6c4a38a95e90136305acc9aae2d3ebc38f44747270"
+    },
+    {
+      "path": "assets/r1206/props/stone.webp",
+      "bytes": 29530,
+      "sha256": "bcfadb676d4cf49a3365fa33bcf43965521580ec69d17f501400993af9eae547"
+    },
+    {
       "path": "assets/r121/heroes/gunner/aim_back.webp",
       "bytes": 15720,
       "sha256": "152c241d7a45672f52c13cf31bd51eea8c5e0154f2c1d835feb1fc38bff179ab"
@@ -55574,8 +55604,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6582461,
-      "sha256": "a2c1743866f777b6fc7712947f4b9927c2b42aea33441fad7c485054f74e5cfa"
+      "bytes": 6582510,
+      "sha256": "2621b1db2fd8087b8b689e2349645bf30685c9ea0943ce55e14b52e430a1a460"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -56403,6 +56433,11 @@
       "sha256": "78913442e364256dcf534c8e0b936e40c5b3ee3e316fde953e37834bd213a2ea"
     },
     {
+      "path": "samong-props-r1206b.js",
+      "bytes": 2838,
+      "sha256": "7ea242763b4695034781a1d1931cdf2acbc87cbf3cf720b600b127e60bf4b969"
+    },
+    {
       "path": "samong-r103.js",
       "bytes": 88037,
       "sha256": "282ebd08fa46cb05a78bee493be6e3792400c04dc0c457a575a1bc50bb295cc4"
@@ -57003,9 +57038,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11400,
-  "totalBytes": 1369486478,
-  "webHTMLSha256": "a2c1743866f777b6fc7712947f4b9927c2b42aea33441fad7c485054f74e5cfa",
+  "fileCount": 11407,
+  "totalBytes": 1369629380,
+  "webHTMLSha256": "2621b1db2fd8087b8b689e2349645bf30685c9ea0943ce55e14b52e430a1a460",
   "largest": [
     {
       "path": "index.html",

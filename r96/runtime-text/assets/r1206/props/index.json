@@ -1,0 +1,111 @@
+{
+ "revision": "R1206b",
+ "note": "Dots CX-0166SM-A ROUGH r1 (사몽 R123 분위기 소품). 투명 여백만 잘라 무손실 WebP. 최종 아트 아님(ROUGH).",
+ "props": {
+  "lantern": {
+   "path": "assets/r1206/props/lantern.webp",
+   "size": [
+    116,
+    352
+   ],
+   "bytes": 29786,
+   "sha256": "71dd0cb77552ba1cffe5297b1af25d623f4ea8d9c8e2d766066554418e9893fd",
+   "source": {
+    "file": "CX-0166SM-A_lantern_r1_ROUGH.png",
+    "bytes": 45683,
+    "sha256": "fd4a63db6d96ed04dcdfb23229aeda79d9b9abd97cd84be5890e4a37811bd373",
+    "crop": [
+     94,
+     24,
+     210,
+     376
+    ]
+   },
+   "status": "ROUGH r1 적용(최종 검수 전)"
+  },
+  "inkpost": {
+   "path": "assets/r1206/props/inkpost.webp",
+   "size": [
+    92,
+    224
+   ],
+   "bytes": 22560,
+   "sha256": "fbda9f970f5197f28dce18f48117d5604f1008961dc6b43278210b5aefa62016",
+   "source": {
+    "file": "CX-0166SM-A_inkpost_r1_ROUGH.png",
+    "bytes": 38154,
+    "sha256": "4b15a32a44bf26cc128a88e684e883c1edbeab97ac62a8c6ca693334b6d25c06",
+    "crop": [
+     82,
+     24,
+     174,
+     248
+    ]
+   },
+   "status": "ROUGH r1 적용(최종 검수 전)"
+  },
+  "shard": {
+   "path": "assets/r1206/props/shard.webp",
+   "size": [
+    136,
+    208
+   ],
+   "bytes": 23874,
+   "sha256": "2af0a1970f421b72179fad6c4a38a95e90136305acc9aae2d3ebc38f44747270",
+   "source": {
+    "file": "CX-0166SM-A_shard_r1_ROUGH.png",
+    "bytes": 40813,
+    "sha256": "4215f6f0a10c05b1f34565f64c2244f4592efa447cf73ab6b8f4d2558a048a90",
+    "crop": [
+     76,
+     31,
+     212,
+     239
+    ]
+   },
+   "status": "ROUGH r1 적용(최종 검수 전)"
+  },
+  "canvas": {
+   "path": "assets/r1206/props/canvas.webp",
+   "size": [
+    129,
+    224
+   ],
+   "bytes": 31702,
+   "sha256": "1830e7cb43a5cd12b398521b1715006459c8f7d7b8e01249818ee1378537dc66",
+   "source": {
+    "file": "CX-0166SM-A_canvas_r1_ROUGH.png",
+    "bytes": 49805,
+    "sha256": "d258329cfea24f313d31d671e5e9c1eca3707fb8537691f2d18762dc47e6ecdd",
+    "crop": [
+     63,
+     24,
+     192,
+     248
+    ]
+   },
+   "status": "ROUGH r1 적용(최종 검수 전)"
+  },
+  "stone": {
+   "path": "assets/r1206/props/stone.webp",
+   "size": [
+    111,
+    224
+   ],
+   "bytes": 29530,
+   "sha256": "bcfadb676d4cf49a3365fa33bcf43965521580ec69d17f501400993af9eae547",
+   "source": {
+    "file": "CX-0166SM-A_stone_r1_ROUGH.png",
+    "bytes": 49743,
+    "sha256": "3ae61adf95453f0451ec3827b31824833be01fe3d477a51a4ccbb030ada817b9",
+    "crop": [
+     72,
+     24,
+     183,
+     248
+    ]
+   },
+   "status": "ROUGH r1 적용(최종 검수 전)"
+  }
+ }
+}
