@@ -54619,8 +54619,8 @@
     },
     {
       "path": "cave-r204.js",
-      "bytes": 132830,
-      "sha256": "804f22bc08697803e67cecbc64c3fe44a9d0767ec180da4c47fd69ecb6249eff"
+      "bytes": 132990,
+      "sha256": "0e60d9a73f0b795f40ad7a0d9e87d080154600f4c4ea63644e3531961d33b463"
     },
     {
       "path": "cheat-level-r970.js",
@@ -55229,8 +55229,8 @@
     },
     {
       "path": "crates-r108.js",
-      "bytes": 6746,
-      "sha256": "1d8820f1f4884a00ff32ededbdd6d2cbcdffe831e18d9062cafb688acdcd868f"
+      "bytes": 9610,
+      "sha256": "24892becd3b71976aa2e593e634002d7620d6c47fec215670b66ac5cb91efc2b"
     },
     {
       "path": "cult-six-r1114.js",
@@ -56079,8 +56079,8 @@
     },
     {
       "path": "maps-palace-slum-r317.js",
-      "bytes": 15913,
-      "sha256": "01e01f4db15a9a925b7d2eb2843c9664432f04b29bacce72a8f7921a58cc9418"
+      "bytes": 20770,
+      "sha256": "64c81c50ca3fdec4673f98dcc625605066307fb83393a204a92cbc8106cceaac"
     },
     {
       "path": "memory-voice-r1223.js",
@@ -57394,7 +57394,7 @@
     }
   ],
   "fileCount": 11478,
-  "totalBytes": 1372563785,
+  "totalBytes": 1372571666,
   "webHTMLSha256": "6ad31931abbef0879082ec65e70514cb1cae3d0ac87dc62b25134fff733efbd4",
   "largest": [
     {

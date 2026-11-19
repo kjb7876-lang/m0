@@ -808,7 +808,8 @@ function furnish(rm,cfg,zid){if(prefs.rooms===false||!rm||!Array.isArray(rm.prop
 //  전수 측정(qa/r1062/survey.md): 병원(ep1a08·09·11)의 쓰러진 돌기둥·호텔 짐수레, 집(ep1b02·03·04)의 짐수레·돌기둥, 기계 중추(hando03)의 돌기둥, 무대·기계 법정(ep1b05·cult06)과 병원·집의 야외 게시판.
 //  이름 붙은 서사 소품·상자·상호작용 물건은 건드리지 않는다(그림이 어긋난 서사 소품은 그리는 쪽에서 바로잡는다 — R1061). 맘몬(ep1b06)은 표에 없다.
 const THEME_DENY=Object.freeze({ep1a08:/collapsed_pillar|hotel_luggage_cart|blank_memorial/,ep1a09:/collapsed_pillar|hotel_luggage_cart|blank_memorial/,ep1a11:/collapsed_pillar|hotel_luggage_cart|blank_memorial/,
- ep1b02:/hotel_luggage_cart|blank_memorial/,ep1b03:/collapsed_pillar|blank_memorial/,ep1b04:/hotel_luggage_cart|blank_memorial/,murder04:/blank_memorial/,hando03:/collapsed_pillar/,ep1b05:/blank_memorial/,cult06:/blank_memorial/});
+ ep1b02:/hotel_luggage_cart|blank_memorial/,ep1b03:/collapsed_pillar|blank_memorial/,ep1b04:/hotel_luggage_cart|blank_memorial/,murder04:/blank_memorial/,hando03:/collapsed_pillar/,ep1b05:/blank_memorial/,cult06:/blank_memorial/,
+ /* R1237(사용자 2026-11-19 11:48Z): 환자와 중독의 도시 — 미카엘라 옆 빨간 호텔 짐수레가 안 어울림 */ep1a10:/hotel_luggage_cart/});
 function themeProps(rm,zid){if(prefs.unify===false||!rm||!Array.isArray(rm.props)||rm.r1062Props)return 0;rm.r1062Props=true;const re=THEME_DENY[zid];if(!re)return 0;const before=rm.props.length;
  rm.props=rm.props.filter(q=>{if(!q||q.name||q.interactive||q.altar||q.chest||/chest|altar|portal|door|note|memory/i.test(String(q.kind||'')+String(q.id||'')))return true;return !(/assets\/props\//.test(String(q.path||''))&&re.test(String(q.path||'')));});
  const k=before-rm.props.length;stats.themeRemoved=(stats.themeRemoved||0)+k;return k;}

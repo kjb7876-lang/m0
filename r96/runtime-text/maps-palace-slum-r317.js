@@ -14,6 +14,13 @@ const PATHS=Object.freeze({blood:'assets/r161/tiles/blood-memory.webp',asphalt:'
 // Literal excerpts of hapil-canon-r106-improved.txt [09]/[10], including punctuation.
 const CAPTIONS=Object.freeze(['초천사가 웃으며 권능을 펼쳤다.','그런데 사라진 것은 악마들이 아니었다.','수호자 가운데 남아 있는 것은 나 하나뿐이었다.']);
 const WALL_TEXT=Object.freeze(['나는 다른 사람과 다르며','마음만 먹으면 끊을 수 있고','이번이 마지막이라는 믿음이었다.']);
+// R1237(사용자 2026-11-19 11:44Z): 상점 건물 벽 글자는 늘 보이지 않는다 — 건물 앞에서 C(상호작용)를 누르면 창으로 읽는다.
+//  창 글 = 정본 [10] 문장 그대로(위 WALL_TEXT 세 줄이 나뉘어 있던 바로 그 문장, 쉼표 포함). 제목 '누군가의 낙서'는 사용자 지정.
+const GRAFFITI=Object.freeze({title:'누군가의 낙서',text:'나는 다른 사람과 다르며, 마음만 먹으면 끊을 수 있고, 이번이 마지막이라는 믿음이었다.',reach:3.2,height:210});
+// R1237(11:51Z): '과거의 봉인 성물함'(r80-072)은 결전의 날 보스방에 큰 것 하나만. 두 지역의 R80/R81 장면 소품 성물함은 뺀다.
+const SEAL_PATH='assets/world-r80/r80-072.webp',SEAL_ZONES=new Set(['ep1a09b','ep1a10']);
+function pruneSeals(r){if(!r||!Array.isArray(r.props)||r.layer!=='STORY'||!SEAL_ZONES.has(r.id))return 0;const before=r.props.length;
+ r.props=r.props.filter(p=>!(p&&!p.r317&&p.r80Dressing&&String(p.path||'')===SEAL_PATH));return before-r.props.length;}
 const SPECS=Object.freeze({ep1a09b:{file:'blood-memory',dir:'assets/r161/tiles/',floor:0xdab8b2,wall:0x9c8664},ep1a10:{file:'asphalt',dir:'assets/r118/tiles/',floor:0xdce2ee,wall:0x87919c}});
 const stats={layouts:0,rooms:0,plays:0,skips:0,completed:0,errors:0};let lastError=null,active=null,seen=false;
 try{seen=JSON.parse(localStorage.getItem(KEY)||'null')?.seen===true;}catch(_){}
@@ -32,27 +39,38 @@ window.__STORYWORLD_LAYOUT_HOOK_R204__=function(id,L){const out=previousLayout?.
 function avoid(r){const L=r.exploration,out=[];for(const d of L.worldR74?.doors||[])out.push({x:d.x,y:d.y,r:Math.max(3.5,(Number(d.width)||0)/2+2)});
  for(const q of[L.entry,L.gate,r.objective,r.altar,L.altar])if(q&&Number.isFinite(q.x+q.y))out.push({...q,r:3.5});
  for(const p of r.props||[])if(p&&!p.r317&&Number.isFinite(p.x+p.y))out.push({x:p.x,y:p.y,r:p.interactive||p.solid||p.r74Door||p.r81WardDoor?3:1.6});return out;}
+// R1237: 상점 건물은 벽에 붙인다. 그림의 앞면은 화면 왼쪽 아래(+y)를 보고, 몸통은 가까운 모서리에서 -x·-y 쪽(화면 위)으로 뻗는다.
+//  → 뒤(-y)가 벽인 자리(좌우 반전하면 뒤가 -x). 벽은 모서리에서 카메라 반대쪽으로 5칸 이어지고, 카메라 쪽(+)으로는 2칸 안에 끝나야 한다
+//  (벽이 카메라 쪽으로 더 이어지면 3D 벽 덩어리가 건물 그림 아래쪽을 가린다 — 헤드리스 확인). 앞쪽 3줄은 바닥. 앵커는 벽에서 2.1칸 앞(그림 발밑 — 그림 옆면 깊이만큼 띄워 벽 끝 머리가 건물에 안 겹치게).
+function wallSpots(L,near){const F=new Set(L.floorCells.map(c=>c.join(','))),fl=(x,y)=>F.has(x+','+y),out=[];
+ for(const [x,y]of L.floorCells){for(const side of['-y','-x']){const along=(i)=>side==='-y'?[x+i,y]:[x,y+i],back=([ax,ay])=>side==='-y'?[ax,ay-1]:[ax-1,ay],fwd=([ax,ay],d)=>side==='-y'?[ax,ay+d]:[ax+d,ay];let ok=true;
+   for(let i=-4;i<=0&&ok;i++){const c=along(i);if(!fl(...c)||fl(...back(c)))ok=false;for(let d=1;d<=3&&ok;d++)if(!fl(...fwd(c,d)))ok=false;}
+   for(let i=1;i<=2&&ok;i++){const c=along(i);if(!fl(...c)||!fl(...back(c)))ok=false;}
+   if(!ok)continue;const p=side==='-y'?{x:x+.5,y:y+2.1}:{x:x+2.1,y:y+.5};if(near.every(q=>Math.hypot(p.x-q.x,p.y-q.y)>=q.r+2))out.push({...p,wall:{side,cx:x,cy:y}});}}return out;}
 function plan(r){if(!eligible(r)||!r.exploration?.floorCells?.length)return[];const L=r.exploration,F=new Set(L.floorCells.map(c=>c.join(','))),near=avoid(r),used=[],out=[];
  // Fully open 5x5 only: retain a readable passage; every addition is non-solid.
  const open=L.floorCells.filter(([x,y])=>{for(let j=-2;j<=2;j++)for(let i=-2;i<=2;i++)if(!F.has((x+i)+','+(y+j)))return false;return true;}).map(([x,y])=>({x:x+.5,y:y+.5}));
  const take=(name,h,kind='prop',focus=null)=>{const pool=open.filter(p=>near.every(q=>Math.hypot(p.x-q.x,p.y-q.y)>=q.r)&&used.every(q=>Math.hypot(p.x-q.x,p.y-q.y)>=4));
   const target=focus||{x:33,y:34};pool.sort((a,b)=>Math.hypot(a.x-target.x,a.y-target.y)-Math.hypot(b.x-target.x,b.y-target.y)||a.y-b.y||a.x-b.x);const p=pool[0];if(!p)return;used.push(p);out.push({...p,name,path:PATHS[name],height:h,kind});};
- if(r.id==='ep1a09b'){take('tree',150,'prop',L.worldWardR81?.bossAnchor||{x:16,y:13});take('column',55);take('arch',100);take('seal',58,'prop',{x:13,y:8});take('stain',80,'decal');take('crack',70,'decal');}
- else{take('storefront',100);take('storefront',90,'prop',{x:47,y:54});take('bag',26);take('syringe',24,'decal');take('papers',75,'decal');take('crack',70,'decal');}
+ if(r.id==='ep1a09b'){take('tree',150,'prop',L.worldWardR81?.bossAnchor||{x:16,y:13});take('column',55);take('arch',100);take('seal',130,'prop',{x:13,y:8});take('stain',80,'decal');take('crack',70,'decal');}
+ else{const spots=wallSpots(L,near);for(const focus of[{x:33,y:34},{x:47,y:54}]){const pool=spots.filter(p=>out.every(q=>Math.hypot(p.x-q.x,p.y-q.y)>=8));
+   pool.sort((a,b)=>Math.hypot(a.x-focus.x,a.y-focus.y)-Math.hypot(b.x-focus.x,b.y-focus.y)||a.y-b.y||a.x-b.x);const p=pool[0];
+   if(p){used.push(p);out.push({x:p.x,y:p.y,name:'storefront',path:PATHS.storefront,height:GRAFFITI.height,kind:'prop',r1237Wall:p.wall,r1237Flip:p.wall.side==='-x'});}else take('storefront',100,'prop',focus);}
+  take('bag',26);take('syringe',24,'decal');take('papers',75,'decal');take('crack',70,'decal');}
  return out;}
 const rooms=new WeakMap(),loaded=new Set();
 function ensure(p){if(typeof readyImage==='function'&&readyImage(p))return true;if(!loaded.has(p)){loaded.add(p);try{if(typeof addImage==='function')addImage(p,'R317 existing temporary art');if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(fail);}catch(e){fail(e);}}return false;}
-function apply(r){if(!eligible(r)||!Array.isArray(r.props)||!r.exploration||rooms.get(r)===r.exploration)return;
+function apply(r){pruneSeals(r);if(!eligible(r)||!Array.isArray(r.props)||!r.exploration||rooms.get(r)===r.exploration)return;
  rooms.set(r,r.exploration);const list=plan(r);r.r317Decals=[];for(const [i,p]of list.entries()){ensure(p.path);if(p.kind==='decal'){r.r317Decals.push(p);continue;}
- r.props.push({...p,id:'r317:'+r.id+':'+i,r317:true,solid:false,visible:true,enabled:true,interactive:false,autoTargetEligible6:false,r80PresentationOnly:true});}stats.rooms++;}
+ r.props.push({...p,id:'r317:'+r.id+':'+i,r317:true,...(p.name==='seal'?{r1237Seal:true}:{}),solid:false,visible:true,enabled:true,interactive:false,autoTargetEligible6:false,r80PresentationOnly:true});}stats.rooms++;}
 function visible(x,y){const s=window.__STORYWORLD_SIGHT24__;return !s?.enabled||s.pointVisible(x,y);}
 function drawOwn(p){if(!p?.r317)return false;if(p.visible===false||!visible(p.x,p.y))return true;
  if(ensure(p.path)&&typeof sprite==='function'){const q=project(p.x,p.y),z=typeof zoom==='number'?zoom:1,h=p.height*z,hero=project(player.x,player.y),behind=q.y>hero.y-3&&q.y-h<hero.y-15&&Math.abs(q.x-hero.x)<h*.55;
- const paint=()=>sprite(p.path,q.x,q.y,h,{alpha:behind?.32:1,filter:'brightness(.94) saturate(.85)'});
+ const paint=()=>sprite(p.path,q.x,q.y,h,{alpha:behind?.32:1,filter:'brightness(.94) saturate(.85)',flip:!!p.r1237Flip});
  const detailed=()=>{paint();if(p.name==='storefront'){
- ctx.save();try{ctx.translate(q.x,q.y-34*z);ctx.rotate(-.44);ctx.fillStyle='#c3c8cf';ctx.font=Math.max(8,10*z)+'px serif';ctx.textAlign='center';ctx.fillText(WALL_TEXT[p.id.endsWith(':0')?0:1],0,0);ctx.fillText(WALL_TEXT[2],0,13*z);}finally{ctx.restore();}
+ /* R1237: 늘 보이던 벽 글자는 그리지 않는다 — 건물 앞 C 로 '누군가의 낙서' 창에서 읽는다. */
  // Existing painted glow, small local reflected neon; no full-screen tint.
- window.__STORYWORLD_FX_SPRITES_R106__?.draw?.('glow',{a:[60,86,112],b:[136,170,186]},q.x,q.y,70*z,18*z,{alpha:.3,blend:'lighter'});
+ window.__STORYWORLD_FX_SPRITES_R106__?.draw?.('glow',{a:[60,86,112],b:[136,170,186]},q.x,q.y,70*z*p.height/100,18*z*p.height/100,{alpha:.3,blend:'lighter'});
  }};
  if(typeof ctx?.scope==='function')ctx.scope({id:'prop:'+p.id,kind:'prop',x:p.x,y:p.y,bodyPath:p.path,alive:true},detailed);else detailed();}return true;}
 try{const P=window.__STORYWORLD_PERF_GROUPS_R266__;if(P?.registerPropRenderer)P.registerPropRenderer(drawOwn);
@@ -63,6 +81,19 @@ function decals(){if(typeof room==='undefined'||!eligible(room)||!room.r317Decal
  if(ctx.scope)ctx.scope({id:'r317:decal:'+d.name,kind:'ground',x:d.x,y:d.y,groundAligned:true,presentationOnly:true,alive:false,sourcePath:d.path},paint);else paint();}}
 if(typeof groundImage==='function'){const b=groundImage;groundImage=function(...a){const out=b.apply(this,a);try{decals();}catch(e){fail(e);}return out;};}
 if(typeof makeRoom==='function'){const b=makeRoom;makeRoom=function(...a){const r=b.apply(this,a);try{apply(r);}catch(e){fail(e);}return r;};}
+// R1237: 건물 앞에서 C → '누군가의 낙서'. 다른 덧씌우기가 base 를 안 부르는 경우가 있어 첫 tick 에 바깥에서 얹는다(R840·R1060 과 같은 방식).
+const graffitiSpot=p=>({x:p.x,y:p.y});
+function graffitiNear(r){if(!r||r.id!=='ep1a10'||r.layer!=='STORY'||typeof player==='undefined'||!player)return null;let best=null,bd=GRAFFITI.reach;
+ for(const p of r.props||[]){if(!p?.r317||p.name!=='storefront'||p.visible===false)continue;const s=graffitiSpot(p),d=Math.hypot(player.x-s.x,player.y-s.y);if(d<=bd){bd=d;best=p;}}return best;}
+function readGraffiti(){const esc=typeof escapeHTML==='function'?escapeHTML:x=>String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ openPanel('<h2>'+esc(GRAFFITI.title)+'</h2><p class="r1237Graffiti" style="font-family:serif;font-size:1.08em;line-height:1.8;letter-spacing:.02em;margin:12px 0 16px">'+esc(GRAFFITI.text)+'</p><div class="actions"><button id="graffitiCloseR1237">닫기</button></div>');
+ try{const el=typeof $==='function'?$('graffitiCloseR1237'):document.getElementById('graffitiCloseR1237');if(el)el.onclick=()=>closePanel(true);}catch(e){fail(e);}stats.graffiti=(stats.graffiti||0)+1;return true;}
+let hinted=null,installed=false;
+function hint(){try{const r=typeof room!=='undefined'?room:null;if(!r||hinted===r||typeof started==='undefined'||!started||modal||loading)return;if(!graffitiNear(r))return;hinted=r;
+ const k=window.__STORYWORLD_KEYS_R291__?.legacy?'E':'C';if(typeof toast==='function')toast(k+' · 벽의 낙서 살펴보기',2.4);}catch(e){fail(e);}}
+function install(){if(installed||typeof interact!=='function')return;installed=true;const base=interact;
+ interact=function(...a){try{if(started&&!modal&&!loading&&player?.hp>0&&graffitiNear(typeof room!=='undefined'?room:null))return readGraffiti();}catch(e){fail(e);}return base.apply(this,a);};}
+
 // Native entry/restore wrappers prune decoded images after makeRoom. Reload only
 // this active room's existing visual paths after those wrappers have completed.
 async function prepareCurrent(){const r=typeof room!=='undefined'?room:null;if(!eligible(r))return;apply(r);const paths=[...new Set([...(r.props||[]).filter(p=>p.r317).map(p=>p.path),...(r.r317Decals||[]).map(p=>p.path)])];if(paths.length&&typeof ensureImages==='function')await ensureImages(paths);}
@@ -114,8 +145,8 @@ if(typeof killEnemy==='function'){const b=killEnemy;killEnemy=function(e,...a){c
  if(trigger&&e.hp<=0&&e.deadRecorded&&r===(typeof room!=='undefined'?room:null))try{play(r);}catch(err){fail(err);finish(true);}return out;};}
 // R426: '본 적 있음'을 기기 전체가 아니라 한 판(새 게임)마다로 — 새 게임을 시작하면 다시 나온다(영화 모드에서는 늘 나온다).
 if(typeof newGame==='function'){const b=newGame;newGame=function(...a){seen=false;try{localStorage.removeItem(KEY);}catch(_){}return b.apply(this,a);};}
-if(typeof tick==='function'){const b=tick;tick=function(...a){if(active){try{update(performance.now());}catch(e){fail(e);finish(true);}if(active)return;}return b.apply(this,a);};}
-window.__STORYWORLD_MAPS_PALACE_SLUM_R317__=Object.freeze({revision:REV,KEY,PATHS,CAPTIONS,WALL_TEXT,themeLayout,plan,apply,bgmGain,next,skip:()=>finish(true),update,
+if(typeof tick==='function'){const b=tick;tick=function(...a){try{if(!installed)install();hint();}catch(e){fail(e);}if(active){try{update(performance.now());}catch(e){fail(e);finish(true);}if(active)return;}return b.apply(this,a);};}
+window.__STORYWORLD_MAPS_PALACE_SLUM_R317__=Object.freeze({revision:REV,KEY,PATHS,CAPTIONS,WALL_TEXT,GRAFFITI,SEAL_PATH,install,graffitiSpot,graffitiNear,pruneSeals,wallSpots,themeLayout,plan,apply,bgmGain,next,skip:()=>finish(true),update,
  hold(on){const a=active;if(!a)return false;const t=performance.now();if(on){if(a.held==null)a.held=t;}else if(a.held!=null){a.start+=t-a.held;a.held=null;}return true;},
  inspect:()=>({revision:REV,temporary:true,seen,active:!!active,scene:active?.scene??null,stats:{...stats},lastError,GPUVerified:false,naturalBalrogPlacement:false})});
 })();
