@@ -1,0 +1,111 @@
+{
+ "round": "R1221",
+ "files": [
+  {
+   "key": "swamp-horned-lord",
+   "enemies": [
+    "mb-dist02"
+   ],
+   "dir": "side",
+   "source": "assets/r109/mobs/M008-move.png",
+   "sourceRects": [
+    [
+     0,
+     0,
+     148,
+     158
+    ],
+    [
+     148,
+     0,
+     148,
+     158
+    ],
+    [
+     296,
+     0,
+     148,
+     158
+    ],
+    [
+     444,
+     0,
+     148,
+     158
+    ]
+   ],
+   "sourceSha256": "fa4654af1921aec90ef85afb8cee050b0025c0a1a4d695eb8d57a1051e4afd17",
+   "sourceFacing": "left",
+   "flippedIntoSheet": true,
+   "toneGain": [
+    1.3,
+    1.3,
+    1.3
+   ],
+   "path": "assets/r1221/side/swamp-horned-lord-side.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 130204,
+   "sha256": "2a6028b324270490c89477909aa4ec09aca477859a122d0aa563df83f4a9355b",
+   "use": "옆 이동(왼쪽=원본 방향, 오른쪽=좌우반전)",
+   "applied": true,
+   "final": false,
+   "note": "게임 안 같은 인물 걷기 칸 재사용(임시, Dots 정식 옆 걷기 오면 교체)"
+  },
+  {
+   "key": "denial-specter",
+   "enemies": [
+    "a10-s1"
+   ],
+   "dir": "side",
+   "source": "assets/r92/mobs/M016-move.png",
+   "sourceRects": [
+    [
+     0,
+     0,
+     141,
+     172
+    ],
+    [
+     141,
+     0,
+     141,
+     172
+    ],
+    [
+     282,
+     0,
+     141,
+     172
+    ],
+    [
+     423,
+     0,
+     141,
+     172
+    ]
+   ],
+   "sourceSha256": "5c5a233500f8ebf4313b39bdc03492aa438f1b6ae5af1d96fddaec4306aa835a",
+   "sourceFacing": "front",
+   "flippedIntoSheet": false,
+   "toneGain": [
+    0.922,
+    0.957,
+    0.946
+   ],
+   "path": "assets/r1221/side/denial-specter-side.webp",
+   "size": [
+    1536,
+    384
+   ],
+   "bytes": 112038,
+   "sha256": "8e7db9dc2db6b7e0e27fd08435719eb87b1f98e065fb13a435ce274603a0fc04",
+   "use": "옆 이동(왼쪽=원본 방향, 오른쪽=좌우반전)",
+   "applied": true,
+   "final": false,
+   "note": "게임 안 같은 인물 걷기 칸 재사용(임시, Dots 정식 옆 걷기 오면 교체)"
+  }
+ ]
+}
