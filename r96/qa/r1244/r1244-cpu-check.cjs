@@ -160,7 +160,12 @@ const man2=fs.readFileSync(path.join(root,'runtime-manifest.json'),'utf8');check
 // ⑫ R1244c Dots CX-0178CN 2차분: 베기 시트 7종(4×3, 12칸) · 임팩트 정지 그림 10종(반전 흑백)
 const SL=['gunner','hunter','lauren','michaela','neon','persona','slayer'];
 check('⑫ 베기 7종: slash = assets/r1244/slash-<형상>.webp(4×3·12칸·4:1) 파일 있음',SL.every(f=>{const s=API.profile(f).slash;return s&&s.path===`assets/r1244/slash-${f}.webp`&&s.cols===4&&s.rows===3&&s.frames===12&&s.ar===4&&fs.existsSync(path.join(root,'runtime-text',s.path));}),SL.map(f=>JSON.stringify(API.profile(f).slash)).join(' '));
-check('⑫ 환도·EGO 는 기존 먹 붓(r945), 서하는 Dots HOLD 라 베기 시트 없음',['hwando','ego'].every(f=>/r945\/hwando-ink-sweep/.test(API.profile(f).slash.path))&&!API.profile('seoha').slash);
+check('⑫ 환도·EGO 는 기존 먹 붓(r945)',['hwando','ego'].every(f=>/r945\/hwando-ink-sweep/.test(API.profile(f).slash.path)));
+/* R1244c-2: Dots r2 — 서하 베기 도착(예전 기대 'HOLD 라 없음'을 바꿈), 베기 칸 비율 4:1 유지, 임팩트는 위 정렬(넓은 화면에서 머리 안 잘림) */
+check('⑫ 서하 베기 = assets/r1244/slash-seoha.webp(4×3·12칸) 파일 있음',(()=>{const s=API.profile('seoha').slash;return s&&s.path==='assets/r1244/slash-seoha.webp'&&s.frames===12&&fs.existsSync(path.join(root,'runtime-text',s.path));})());
+check('⑫ 베기 요소 = 가로 120vw·세로 30vw(칸 4:1 그대로, 찌그러짐 없음)',/\.r1244slash\{[^}]*width:120vw;height:30vw/.test(src),(src.match(/\.r1244slash\{[^}]*\}/)||[''])[0]);
+{const e=make({hero:'seoha'});e.C().play('seoha','awake');const im=e.el('r1244Cine').querySelector('.r1244impact');
+ check('⑫ 임팩트 위 정렬(background-position 50% 0%) — 1366×640 같은 넓은 화면에서 머리 위가 잘리지 않음',im.style.backgroundPosition==='50% 0%',im.style.backgroundPosition);}
 check('⑫ 임팩트 10형상: impact = assets/r1244/impact-<형상>.webp 파일 있음',API.forms.every(f=>{const i=API.profile(f).impact;return i===`assets/r1244/impact-${f}.webp`&&fs.existsSync(path.join(root,'runtime-text',i));}),API.forms.map(f=>API.profile(f).impact).join(' '));
 {const e=make({hero:'hunter'});e.C().play('hunter','awake');const im=e.el('r1244Cine').querySelector('.r1244impact');
  check('⑫ 각성 임팩트 = Dots 임팩트 그림(이미 반전해 구움 → 필터 없음)',im.getAttribute('data-src')==='assets/r1244/impact-hunter.webp'&&im.getAttribute('data-baked')==='1',JSON.stringify({src:im.getAttribute('data-src'),b:im.getAttribute('data-baked')}));

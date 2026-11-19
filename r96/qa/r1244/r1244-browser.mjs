@@ -77,6 +77,10 @@ await shot('hunter','awake',null,90,'awake-hunter-slash');
 await shot('hunter','awake',null,935,'awake-hunter-impact');
 await shot('persona','awake',null,935,'awake-persona-impact');
 await shot('gunner','awake',null,560,'awake-gunner-eye');
+// R1244c-2: Dots r2 — 서하 베기, 미카엘라·네온 임팩트, 넓은 화면(1366×640) 임팩트 머리 잘림 확인
+await shot('seoha','passive',null,90,'passive-seoha-slash');
+await shot('michaela','awake',null,935,'awake-michaela-impact');
+await p.setViewportSize({width:1366,height:640});await shot('neon','awake',null,935,'wide-neon-impact');await shot('lauren','passive',null,90,'wide-lauren-slash');
 await shot('michaela','passive','bloom',600,'passive-michaela-glow');
 await shot('hunter','passive','squad',420,'passive-hunter-eye');
 await shot('seoha','awake',null,700,'awake-seoha-glow');

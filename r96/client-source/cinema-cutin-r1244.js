@@ -21,13 +21,13 @@ const BUST=h=>'assets/r108/heroes/'+h+'.webp';
 const sheet=(path,cols,rows,frames,ar=1)=>Object.freeze({path,cols,rows,frames,ar});
 /* R1244b: Dots CX-0178CN 눈 클로즈업 4칸(2×2, 칸 1280×320): 0 평상 · 1 결의 · 2 발동 문양 · 3 반쯤 감김 — scripts/r1244-eye-dots.py. R1244c 에서 헌터·기억사수도 도착(10형상 모두). */
 const EYE=f=>Object.freeze({path:'assets/r1244/eye-'+f+'.webp',cols:2,rows:2,ar:4});
-/* R1244c: Dots CX-0178CN 2차분 — 베기 4×3(12칸, 칸 512×128: 0~5 길어짐·6~11 잔광 줄어듦), 임팩트 정지 그림(1280×720, 반전 흑백으로 구움) — scripts/r1244-dots-r2.py. 서하 베기는 Dots HOLD(없음) */
+/* R1244c: Dots CX-0178CN 2차분 — 베기 4×3(12칸, 칸 512×128: 0~5 길어짐·6~11 잔광 줄어듦), 임팩트 정지 그림(1280×720, 반전 흑백으로 구움) — scripts/r1244-dots-r2.py. 서하 베기는 R1244c-2 에서 r2 도착. 베기 요소는 120vw×30vw 로 칸 4:1 그대로 */
 const SLASH=f=>sheet('assets/r1244/slash-'+f+'.webp',4,3,12,4);
 const IMP=f=>'assets/r1244/impact-'+f+'.webp';
 const INK_SWEEP=sheet('assets/r945/hwando-ink-sweep.webp',4,4,16,4);/* 환도 먹 붓 16칸(512×128) — 베기 한 줄 */
 // 형상 표: eye = 초상화와 눈 초점(가로·세로 비율, 그림 가로/세로 비, z = 화면 폭 대비 확대 — 헤드리스 장면으로 눈이 슬릿 가운데 오게 맞춤), sig = 매치 컷 시그니처 시트, slash = 여는 베기 시트(없으면 슬릿만), tilt = 슬릿 기울기(도)
 const PROFILES=Object.freeze({
- seoha:{eye:{path:BUST('seoha'),fx:0.55,fy:0.245,ar:.75,z:1.3,sheet:EYE('seoha')},sig:sheet('assets/r564/seoha-time-blink.webp',6,4,24),impact:IMP('seoha'),tilt:-9,passive:'수문장 아르벨리아',colors:{key:'#78d2ff',ink:'#08142a',light:'#e8ce8c'}},
+ seoha:{eye:{path:BUST('seoha'),fx:0.55,fy:0.245,ar:.75,z:1.3,sheet:EYE('seoha')},sig:sheet('assets/r564/seoha-time-blink.webp',6,4,24),slash:SLASH('seoha'),impact:IMP('seoha'),tilt:-9,passive:'수문장 아르벨리아',colors:{key:'#78d2ff',ink:'#08142a',light:'#e8ce8c'}},
  hunter:{eye:{path:BUST('hunter'),fx:0.5,fy:0.2,ar:.75,z:1.3,sheet:EYE('hunter')},sig:sheet('assets/r535/hunter-fire-arrowhead.webp',6,4,24),slash:SLASH('hunter'),impact:IMP('hunter'),tilt:8,passive:'기러기진 섬멸',colors:{key:'#f1d9a0',ink:'#4a1812',light:'#e08a92'}},
  slayer:{eye:{path:BUST('slayer'),fx:0.62,fy:0.15,ar:.75,z:1.3,sheet:EYE('slayer')},sig:sheet('assets/r585/slayer-r-cross.webp',6,4,24),slash:SLASH('slayer'),impact:IMP('slayer'),tilt:-7,passive:'혈격자',colors:{key:'#c81422',ink:'#220408',light:'#f0e6e0'}},
  michaela:{eye:{path:BUST('michaela'),fx:0.48,fy:0.245,ar:.75,z:1.3,sheet:EYE('michaela')},sig:sheet('assets/r948/mh03-heart24.webp',6,4,24),slash:SLASH('michaela'),impact:IMP('michaela'),tilt:6,passive:'연심 대개화',colors:{key:'#b21a3e',ink:'#3a0a18',light:'#e2e8f2'}},
@@ -58,7 +58,7 @@ const CSS=[
  '#r1244Cine .r1244bar.t{top:0;transform-origin:50% 0}#r1244Cine .r1244bar.b{bottom:0;transform-origin:50% 100%}',
  '#r1244Cine .r1244slit{position:absolute;left:-8vw;right:-8vw;top:var(--sy,47vh);height:var(--sh,20vh);transform:rotate(var(--t)) scaleY(0);overflow:hidden;background:var(--d,var(--i));will-change:transform}',
  '#r1244Cine .r1244eye{position:absolute;inset:0;background-repeat:no-repeat;transform-origin:var(--ex,50%) 50%;filter:contrast(1.12) brightness(1.08)}',
- '#r1244Cine .r1244slash{position:absolute;left:-10vw;top:calc(var(--sy,47vh) + var(--sh,20vh)/2 - 9vh);width:120vw;height:18vh;transform:rotate(var(--t));background-repeat:no-repeat;opacity:0}',
+ '#r1244Cine .r1244slash{position:absolute;left:-10vw;top:calc(var(--sy,47vh) + var(--sh,20vh)/2 - 15vw);width:120vw;height:30vw;transform:rotate(var(--t));background-repeat:no-repeat;opacity:0}',
  '#r1244Cine .r1244sig{position:absolute;left:50%;top:calc(var(--sy,47vh) + var(--sh,20vh)/2);height:min(44vh,46vw);transform:translate(-50%,-50%) scale(.6);background-repeat:no-repeat;opacity:0}',
  '#r1244Cine .r1244impact{position:absolute;inset:0;background-repeat:no-repeat;background-position:50% 22%;background-size:cover;opacity:0;visibility:hidden;filter:grayscale(1) contrast(3.2) invert(1)}',
  '#r1244Cine .r1244plate{position:absolute;left:6vw;top:calc(var(--sy,47vh) + var(--sh,20vh) + 1.2vh);color:var(--l);font:700 clamp(15px,2.6vw,28px)/1.1 Georgia,"Nanum Myeongjo",serif;letter-spacing:.32em;text-shadow:0 0 6px var(--i),0 0 2px var(--i);opacity:0;white-space:nowrap}',
@@ -142,7 +142,7 @@ function play(form,mode,kind,owner){try{
   if(P.eye.sheet&&isLite){const b=box();coverCell(parts.eye,P.eye.sheet,b.sw,b.sh,2);}
   const ip=P.impact||(P.eye.sheet?P.eye.sheet.path:P.eye.path);parts.impact.setAttribute('data-src',ip);parts.impact.style.backgroundImage=isLite?'none':'url("'+U(ip)+'")';
   /* R1244c: Dots 임팩트 정지 그림(반전 흑백으로 구움) → 필터 없이 화면 가득(머리 위 여백은 구울 때 넣음) */
-  if(P.impact){parts.impact.setAttribute('data-baked','1');parts.impact.style.backgroundSize='cover';parts.impact.style.backgroundPosition='50% 50%';parts.impact.removeAttribute('data-frame');}
+  if(P.impact){parts.impact.setAttribute('data-baked','1');parts.impact.style.backgroundSize='cover';parts.impact.style.backgroundPosition='50% 0%';/* 넓은 화면(1366×640 등)에서 cover 가 위아래를 자르므로 위에 붙여 머리를 지킴 */parts.impact.removeAttribute('data-frame');}
   else if(P.eye.sheet&&!isLite){parts.impact.removeAttribute('data-baked');const b=box();coverCell(parts.impact,P.eye.sheet,b.vw,b.vh,1);}else{parts.impact.removeAttribute('data-baked');parts.impact.style.backgroundSize='cover';parts.impact.style.backgroundPosition='50% 22%';parts.impact.removeAttribute('data-frame');}
   const nm=nameOf(form),pass=(P.names&&P.names[kind])||P.passive;
   parts.pb.textContent=mode==='awake'?'사몽 각성':nm;parts.ps.textContent=mode==='awake'?nm:pass;
