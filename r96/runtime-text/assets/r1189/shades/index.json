@@ -1,0 +1,138 @@
+{
+ "schema": "storyworld.r1189.dots/v1",
+ "request": "CX-0164CR r1 ROUGH (CR05·07·08·10·11·12)",
+ "assets": [
+  {
+   "cr": "CR05",
+   "id": "ring-sparrer",
+   "file": "assets/r1189/shades/ring-sparrer.webp",
+   "replaces": "assets/r200/shades/ring-sparrer.webp",
+   "source": "Dots CX-0164CR CR05 walk-attack r1 ROUGH",
+   "sourceSha256": "ad55b8db823e3f436f2cbabc0ccca4ba150c5c31cb6b765c55949383c54584e4",
+   "sha256": "d28fc207f55e49eaa805b84b9e69e871937d5380f1ea518e5680c7275baea7da",
+   "bytes": 161238,
+   "minEdgeMargin": 40,
+   "path": "assets/r1189/shades/ring-sparrer.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "pivot": [
+    123.0,
+    236
+   ],
+   "visibleHeight": 159.0,
+   "finalArt": false
+  },
+  {
+   "cr": "CR07",
+   "id": "clockwork-legionary",
+   "file": "assets/r1189/shades/clockwork-legionary.webp",
+   "replaces": "assets/r200/shades/clockwork-legionary.webp",
+   "source": "Dots CX-0164CR CR07 walk-attack r1 ROUGH",
+   "sourceSha256": "8eac00e88ebb6ae80e7715298fe58b6a10ba9884187c29fe410d8688de580c77",
+   "sha256": "69a243bb51ce07bc6e4a87240eaf0cbfdc252bb31d1520d840a37b1b5db65807",
+   "bytes": 208388,
+   "minEdgeMargin": 47,
+   "path": "assets/r1189/shades/clockwork-legionary.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "pivot": [
+    124.5,
+    236
+   ],
+   "visibleHeight": 158.1,
+   "finalArt": false
+  },
+  {
+   "cr": "CR08",
+   "id": "fishhook-manuscript",
+   "file": "assets/r1189/shades/fishhook-manuscript.webp",
+   "replaces": "assets/r200/shades/fishhook-manuscript.webp",
+   "source": "Dots CX-0164CR CR08 walk-attack r1 ROUGH",
+   "sourceSha256": "0398d200656a727a4d2e6419cdd7d2afc4f6eac032a74930024b81e4759f470f",
+   "sha256": "61b6da25933147376627f5d508336fe936346a815187af10306740c3001063c0",
+   "bytes": 202342,
+   "minEdgeMargin": 49,
+   "path": "assets/r1189/shades/fishhook-manuscript.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "pivot": [
+    121.8,
+    236
+   ],
+   "visibleHeight": 158.6,
+   "finalArt": false
+  },
+  {
+   "cr": "CR10",
+   "id": "clockhand-warden",
+   "file": "assets/r1189/shades/clockhand-warden.webp",
+   "replaces": "assets/r200/shades/clockhand-warden.webp",
+   "source": "Dots CX-0164CR CR10 walk-attack r1 ROUGH",
+   "sourceSha256": "8896e67b7f8f6231b6e1f6f51b92ab6ed09be27aa5a121becd2469cf102fde34",
+   "sha256": "6c0cb047073f56a6e5e0b528b15c1be0c77d78b2e63152240f14a1326b0e53fb",
+   "bytes": 231802,
+   "minEdgeMargin": 27,
+   "path": "assets/r1189/shades/clockhand-warden.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "pivot": [
+    120.8,
+    236
+   ],
+   "visibleHeight": 160.4,
+   "finalArt": false
+  },
+  {
+   "cr": "CR11",
+   "id": "wire-bound-dead",
+   "file": "assets/r1189/shades/wire-bound-dead.webp",
+   "replaces": "assets/r200/shades/wire-bound-dead.webp",
+   "source": "Dots CX-0164CR CR11 walk-attack r1 ROUGH",
+   "sourceSha256": "7fd5db666c6a00cd6f8cc5260cc5e59aef0fb2351751dc57c7240dcd0d8c28b8",
+   "sha256": "59fc5d15baba37a61f306306456a0d4bac4cf9684bbdcf8c84230a8786b6b0bc",
+   "bytes": 173704,
+   "minEdgeMargin": 14,
+   "path": "assets/r1189/shades/wire-bound-dead.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "pivot": [
+    129.2,
+    236
+   ],
+   "visibleHeight": 164.8,
+   "finalArt": false
+  },
+  {
+   "cr": "CR12",
+   "id": "parade-mannequin",
+   "file": "assets/r1189/shades/parade-mannequin.webp",
+   "replaces": "assets/r200/shades/parade-mannequin.webp",
+   "source": "Dots CX-0164CR CR12 walk-attack r1 ROUGH",
+   "sourceSha256": "146ce6caed5f8eb6af0b864eec08b1c4d0256fb9a2359e8bfeeb34e1e53e20a2",
+   "sha256": "10136c3f2059f5c7380c4a45b40fec69443688c1100001e5d6a395a539b85683",
+   "bytes": 168558,
+   "minEdgeMargin": 57,
+   "path": "assets/r1189/shades/parade-mannequin.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "pivot": [
+    133.5,
+    236
+   ],
+   "visibleHeight": 165.9,
+   "finalArt": false
+  }
+ ]
+}

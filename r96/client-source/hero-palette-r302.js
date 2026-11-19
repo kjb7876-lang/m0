@@ -81,7 +81,7 @@ function remapF(F,name){const h=hero();if(!on||!h||!F)return F;stats.sp++;
  const thread=THREAD_FILES.has(file)||(file==='play-r111'&&T111.test(String(stack)));
  const kind=thread?'thread':HERO_FILES.has(file)?'hero':'other';seenFile=file;seenKind=kind;
  const k=k0+'|'+h+'|'+kind;
- let d=decided.get(k);if(d===undefined){d=kind==='other'?null:mapPal(F,h,thread?'hero-threads-r174':file);decided.set(k,d);stats.files[file||'?']=(stats.files[file||'?']||0)+1;if(decided.size>400)decided.delete(decided.keys().next().value);}
+ let d=decided.get(k);if(d===undefined){d=kind==='other'?null:mapPal(F,h,thread?'hero-threads-r174':file);/* R1197 렉: 바꾼 팔레트가 원래와 값이 같으면 '안 바꿈'(null) — 그리는 색은 값으로만 정해진다. 객체만 달라 다른 파일과 '섞인 열쇠'가 되어 매번 스택을 잡던 것(사몽 ep1b08 환도 프레임당 ~3ms)을 없앤다 */if(d&&d!==F){let P0=null;try{P0=SP0.pal(F);}catch(_){}if(P0&&samePal(d,P0)){d=null;stats.sameValue=(stats.sameValue||0)+1;}}decided.set(k,d);stats.files[file||'?']=(stats.files[file||'?']||0)+1;if(decided.size>400)decided.delete(decided.keys().next().value);}
  if(d){stats.spMapped++;return memoNote(F,d);}return memoNote(F,F);}
 // R1012 렉(사용자 2026-11-13 "사몽모드에서 환도로 광장처치666 에서 777코드로 플레이 하는데 렉이 심함"):
 //  광장에서 환도 777 은 한 장면에 remapF 를 300~650번 부르고 그때마다 호출 파일을 찾으려 스택을 잡는다. 이 게임은 그리기가 감싸기 수백 겹 안에서
@@ -113,7 +113,8 @@ function memoNote(F,res){const key=memoKey,file=seenFile,kind=seenKind;if(!memoO
   else if(memo.get(key)?.file!==file)stats.fastOtherFile=(stats.fastOtherFile||0)+1;return res;}
  const same=res===F;let m=memo.get(key);if(!m){if(memo.size>=MEMO_MAX)memo.clear();m={file,kind,res,same,ok:0,n:0,slow:false};memo.set(key,m);}
  if(!file)m.slow=true;
- else if(m.file!==file||m.kind!==kind||m.same!==same||(!same&&!samePal(m.res,res))){if(!m.slow)stats.memoMixed=(stats.memoMixed||0)+1;m.slow=true;}
+ /* R1197: 다른 파일이어도 판정 결과(값)가 같으면 섞임이 아니다 — 빠른 길이 돌려줄 값이 어느 파일에나 맞다. 결과가 다른 파일은 무작위 재확인이 예전처럼 잡는다 */
+ else if(m.same!==same||(!same&&!samePal(m.res,res))){if(!m.slow)stats.memoMixed=(stats.memoMixed||0)+1;m.slow=true;}
  else{m.ok++;m.res=res;}
  return res;}
 let SP0=null;

@@ -149,7 +149,7 @@ const RGBA=/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d.eE+-]+)\s*)?\)
 function recolorStr(v){if(typeof v!=='string')return v;return v.replace(RGBA,(m,r,g,b,a)=>{if(!violet(+r,+g,+b))return m;const c=eonju(+r,+g,+b);return a==null?'rgb('+c.join(',')+')':'rgba('+c.join(',')+','+a+')';});}
 function recolorPaint(v){if(typeof v==='string')return recolorStr(v);if(v&&typeof v==='object'&&Array.isArray(v.stops))return {...v,stops:v.stops.map(st=>st&&typeof st==='object'?{...st,color:recolorStr(st.color)}:st)};return v;}
 const VEC_ID=/^r561:/;
-const DOTS_ART=/(^|\/)assets\/r1152\//;
+const DOTS_ART=/(^|\/)assets\/(?:r1152|r1198)\//;
 const HIT411=/^r411:hero-hit:/,R302_MARK=c=>c?.image?.__r302Path==='r302-tint';
 const HIT_ID=/^r101:\d+$/,HIT_ART=/\/r100\/sig-(hit|slash)-(violet|pale)\.webp/;
 // R1120: 픽셀 이펙트(R163) — 라우렌 특수기(R178 pvfx-warm-explosion 등)는 영웅 팔레트(보라)를 색조로 넘겨 구운 캔버스라 그림 필터가 안 닿는다 → play 로 넘기는 색조를 언주로.
