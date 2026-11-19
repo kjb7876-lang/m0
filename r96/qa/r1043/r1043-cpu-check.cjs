@@ -44,10 +44,10 @@ if(src){
   ok('7 steps map onto R1023 tiers: 1·2 low, 3 mid, 4 high, 5·6·7 pc',pc.map(p=>p.r1023).join()==='low,low,mid,high,pc,pc,pc',pc.map(p=>p.r1023));
   ok('R150 light screen: 1 on, 2–5 auto, 6–7 off',pc.map(p=>p.lite).join()==='on,auto,auto,auto,auto,off,off',pc.map(p=>p.lite));
   ok('step 1 renders below the current lowest (dpr 0.75 < 1)',pc[0].dpr===.75&&mo[0].dpr===.75);
-  ok('steps 2–5 leave resolution to R1023 (no override)',[1,2,3,4].every(i=>pc[i].dpr==null&&mo[i].dpr==null));
+  /* R1201(사용자 11-19 04:03Z 단계마다 확실히 다르게): 2단계 배율 0.9, 3–5단계는 R1023 그대로 */ok('step 2 = 0.9, steps 3–5 leave resolution to R1023 (no override)',pc[1].dpr===.9&&mo[1].dpr===.9&&[2,3,4].every(i=>pc[i].dpr==null&&mo[i].dpr==null));
   ok('PC 6 = 1.75, 7 = 2 (supersampled even on a 1x screen)',pc[5].dpr===1.75&&pc[6].dpr===2,[pc[5].dpr,pc[6].dpr]);
   ok('phone 6/7 capped by the device ratio (dev 1.5 → 1.5)',P.plan(7,{mobile:true,dev:1.5}).dpr===1.5&&P.plan(6,{mobile:true,dev:3}).dpr===1.75&&P.plan(7,{mobile:true,dev:3}).dpr===2);
-  ok('step 1 switches light/fog, weather, local light, actor tone off; step 7 forces them on; others leave them',JSON.stringify(pc[0].force)===JSON.stringify({r300:false,r450:false,r451:false,r453:false})&&JSON.stringify(pc[6].force)===JSON.stringify({r300:true,r450:true,r451:true,r453:true})&&[1,2,3,4,5].every(i=>pc[i].force==null));
+  ok('step 1 switches light/fog, weather, local light, actor tone off; step 7 forces them on; others leave them',JSON.stringify(pc[0].force)===JSON.stringify({r300:false,r450:false,r451:false,r453:false})&&JSON.stringify(pc[6].force)===JSON.stringify({r300:true,r450:true,r451:true,r453:true})&&[2,3,4].every(i=>pc[i].force==null)/* R1201: 2단계 날씨·국지 조명 끔, 6단계도 모두 켬 */&&JSON.stringify(pc[1].force)===JSON.stringify({r450:false,r451:false})&&JSON.stringify(pc[5].force)===JSON.stringify(pc[6].force));
   ok('6 and 7 force full effects (lowFx off)',pc[5].lowFx===false&&pc[6].lowFx===false&&pc[0].lowFx==null);
   // 경계값
   ok('step clamp: 0→1, 99→7, 3.6→4, "5"→5',P.norm(0)===1&&P.norm(99)===7&&P.norm(3.6)===4&&P.norm('5')===5);

@@ -61,6 +61,7 @@ function mobile(){try{const m=window.__STORYWORLD_MOBILE_R63__;if(typeof m?.isMo
  try{return typeof matchMedia==='function'&&matchMedia('(pointer:coarse)').matches;}catch(_){return false;}}
 const tier=()=>{const T=window.__STORYWORLD_MOBILE_TIER_R1023__;return T?(T.pcGrade()?'pc':'mobile'):(mobile()?'mobile':'pc');};/* R1023: 그래픽 단계 PC급이면 PC 예산, 그 아래(휴대폰 기본·PC 에서 고른 낮은 단계)는 모바일 예산 */
 const lowFx=()=>!!(typeof settings!=='undefined'&&settings?.lowFx);
+const dens=()=>{let v=1;try{v=+window.__STORYWORLD_PERF7_R1043__?.scale?.();}catch(_){v=1;}return Number.isFinite(v)&&v>0?Math.min(2,v):1;};/* R1201: 성능 단계 효과 밀도(5단계·자동 = 1) */
 const reduced=()=>!!(typeof settings!=='undefined'&&settings?.reducedMotion);
 function familyOf(r){try{const L=r?.exploration;return L?.surface?.art?.r81Environment||L?.worldWardR81?.environment?.family||window.__STORYWORLD_ENVIRONMENT_R81__?.specs?.[r?.id]?.family||(r?.id==='ep1a08'?'clinical':'regional');}catch(_){return 'regional';}}
 // 사몽 방의 room.id 는 그 에피소드가 빌린 본편 지역 id 다(samong-r103 id=ep.host) → 구역을 못 찾으면 본편 표(PLACE)·정본 날씨(ZONES)로 잘못 떨어진다.
@@ -181,7 +182,7 @@ function quadGeo(T,n,seedV,flat){const g=new T.InstancedBufferGeometry();
  g.boundingSphere=new T.Sphere(new T.Vector3(),1e6);return g;}
 function pointGeo(T,n,seedV){const g=new T.BufferGeometry();g.setAttribute('position',new T.BufferAttribute(new Float32Array(n*3),3));g.setAttribute('seed',new T.BufferAttribute(seeds(n,seedV),4));
  g.boundingSphere=new T.Sphere(new T.Vector3(),1e6);g.setDrawRange(0,0);return g;}
-const MAXN={streak:1400,splash:160,flake:1400,gust:280,dust:440};
+const MAXN={streak:1400,splash:300,flake:2400,gust:480,dust:800};/* R1201: 7단계(효과 1.8배)까지 담음 — 씨앗은 앞에서부터 같아 5단계 그림은 그대로 */
 function build(r){if(r.__r450)return r.__r450;const T=r.T,o={T};
  const base=()=>({t:{value:0},center:{value:new T.Vector3()},box:{value:new T.Vector3(50,9,50)},speed:{value:10},wind:{value:new T.Vector2()},alpha:{value:.4},lit:{value:0},color:{value:new T.Color(1,1,1)},...lightUniforms(T)});
  const streak=(name,order,max)=>{const m=new T.Mesh(quadGeo(T,max,name==='r450-gust'?0x450b:0x450a,false),new T.ShaderMaterial({uniforms:{...base(),len:{value:1},widthPx:{value:1.2},res:{value:new T.Vector2(1280,720)}},
@@ -218,22 +219,22 @@ function update(r,frame){const o=r.__r450;if(!o)return;
  const size=r.renderer?.getDrawingBufferSize?.(o.res||(o.res=new o.T.Vector2()));
  let drops=0,spl=0,flakes=0,gusts=0,dust=0;
  // 비·이슬비
- if(spec.precip==='rain'&&prefs.precip&&!rm){const n=Math.round(spec.count[tr]*(lf?.34:1));const u=o.rain.material.uniforms;common(u,spec,t,cx,cz,spec.box);
+ if(spec.precip==='rain'&&prefs.precip&&!rm){const n=Math.round(spec.count[tr]*(lf?.34:1)*dens());const u=o.rain.material.uniforms;common(u,spec,t,cx,cz,spec.box);
   u.speed.value=spec.speed;u.wind.value.set(spec.wind[0],spec.wind[1]);u.len.value=spec.len;u.widthPx.value=Math.max(1.3,spec.width*px);if(size)u.res.value.copy(size);u.alpha.value=spec.alpha;u.color.value.setRGB(...spec.color);u.lit.value=.55;setLights(u,o.lightList,1);
   o.rain.geometry.instanceCount=Math.min(MAXN.streak,n);drops=o.rain.geometry.instanceCount;
   if(prefs.splash&&!lf&&floorMap(o,room)){const s=o.splash.material.uniforms;common(s,spec,t,cx,cz,spec.box);s.speed.value=spec.speed;s.wind.value.set(spec.wind[0],spec.wind[1]);s.alpha.value=spec.alpha*1.15;
    s.color.value.setRGB(...spec.color);s.lit.value=.5;setLights(s,o.lightList,1);
-   /* 물튐은 앞쪽 빗방울과 같은 씨앗(앞 n개)이라 같은 자리·때에 떨어진다 */o.splash.geometry.instanceCount=Math.min(MAXN.splash,spec.splash[tr]);spl=o.splash.geometry.instanceCount;}}
+   /* 물튐은 앞쪽 빗방울과 같은 씨앗(앞 n개)이라 같은 자리·때에 떨어진다 */o.splash.geometry.instanceCount=Math.min(MAXN.splash,Math.round(spec.splash[tr]*dens()));spl=o.splash.geometry.instanceCount;}}
  // 눈·눈보라·재
- if((spec.precip==='snow'||spec.precip==='ash')&&prefs.precip&&!rm){const n=Math.round(spec.count[tr]*(lf?.34:1));const u=o.flake.material.uniforms;common(u,spec,t,cx,cz,spec.box);
+ if((spec.precip==='snow'||spec.precip==='ash')&&prefs.precip&&!rm){const n=Math.round(spec.count[tr]*(lf?.34:1)*dens());const u=o.flake.material.uniforms;common(u,spec,t,cx,cz,spec.box);
   u.speed.value=spec.speed;u.wind.value.set(spec.wind[0],spec.wind[1]);u.sway.value=spec.sway;u.size.value.set(spec.size[0],spec.size[1]);u.px.value=px;u.alpha.value=spec.alpha;u.color.value.setRGB(...spec.color);
   u.mode.value=spec.precip==='ash'?2:1;u.lit.value=spec.precip==='ash'?.35:.25;setLights(u,o.lightList,1);o.flake.geometry.setDrawRange(0,Math.min(MAXN.flake,n));flakes=Math.min(MAXN.flake,n);
   if(spec.gust&&!lf){const g=spec.gust,v=o.gust.material.uniforms;common(v,g,t,cx,cz,spec.box);v.speed.value=g.speed;v.wind.value.set(g.wind[0],g.wind[1]);v.len.value=g.len;v.widthPx.value=Math.max(1.2,g.width*px);if(size)v.res.value.copy(size);
-   v.alpha.value=g.alpha;v.color.value.setRGB(...g.color);v.lit.value=.2;setLights(v,o.lightList,1);o.gust.geometry.instanceCount=Math.min(MAXN.gust,g.count[tr]);gusts=o.gust.geometry.instanceCount;}}
+   v.alpha.value=g.alpha;v.color.value.setRGB(...g.color);v.lit.value=.2;setLights(v,o.lightList,1);o.gust.geometry.instanceCount=Math.min(MAXN.gust,Math.round(g.count[tr]*dens()));gusts=o.gust.geometry.instanceCount;}}
  // 먼지(빛 둘레에서만) — 움직임 줄이기에서는 멈춘 채로 보인다
  if(spec.dust&&prefs.dust&&!lf){const u=o.dust.material.uniforms;common(u,spec,rm?0:t,cx,cz,spec.box);u.speed.value=.06;u.wind.value.set(.05,.03);u.sway.value=.35;
   u.size.value.set(spec.size[0],spec.size[1]);u.px.value=px;u.alpha.value=spec.alpha;u.lit.value=spec.lit;u.color.value.setRGB(...spec.color);u.mode.value=3;setLights(u,o.lightList,1);
-  o.dust.geometry.setDrawRange(0,Math.min(MAXN.dust,spec.count[tr]));dust=Math.min(MAXN.dust,spec.count[tr]);}
+  {const nd=Math.min(MAXN.dust,Math.round(spec.count[tr]*dens()));o.dust.geometry.setDrawRange(0,nd);dust=nd;}}
  o.rain.visible=drops>0;o.splash.visible=spl>0;o.flake.visible=flakes>0;o.gust.visible=gusts>0;o.dust.visible=dust>0;
  Object.assign(stats,{drops,splashes:spl,flakes,gusts,dust});
  attach(r,o);}

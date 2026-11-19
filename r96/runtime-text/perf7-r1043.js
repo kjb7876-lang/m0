@@ -16,9 +16,12 @@
 //  판정·피해·저장·그림 원본·세 모드 공통 코드는 그대로다. 끄기: localStorage['storyworld.r1043.perf7']='{"off":true}'(설정 정리·단계 모두 끔).
 (()=>{'use strict';
 if(window.__STORYWORLD_PERF7_R1043__)return;
-const REV='R1043-perf7-2-R1052',KEY='storyworld.r1043.perf7';
+const REV='R1043-perf7-3-R1201',KEY='storyworld.r1043.perf7';
 const NAMES=['','초저','낮음','보통','높음','PC급','고화질','풀옵션'];
 const TIER=['','low','low','mid','high','pc','pc','pc'],LITE=['','on','auto','auto','auto','auto','off','off'];
+// R1201(사용자 11-19 04:03Z "7가지성능설정에 따라 확실하게 더 화려해지고 단계내리면 확실하게 렉개선되도록"): 단계별 효과 밀도.
+//  R106 효과 예산·R450 날씨 입자·R300 재·포자 수가 이 배율을 따른다. 5단계·자동·미선택 = 1(지금 그대로).
+const SCALE=[1,.4,.6,.8,.9,1,1.4,1.8];
 const MODS={r300:'__STORYWORLD_LIGHT_ATMOS_R300__',r450:'__STORYWORLD_WEATHER_R450__',r451:'__STORYWORLD_LOCAL_LIGHT_R451__',r453:'__STORYWORLD_ACTOR_TONE_R453__'};
 const stats={applies:0,resizes:0,settingsBuilt:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,240);};
 function mobile(){try{const m=window.__STORYWORLD_MOBILE_R63__;if(typeof m?.isMobile==='function')return !!m.isMobile();}catch(_){}
@@ -26,11 +29,12 @@ function mobile(){try{const m=window.__STORYWORLD_MOBILE_R63__;if(typeof m?.isMo
 function norm(v){if(v==='auto')return 'auto';if(v==null||v==='')return null;const n=typeof v==='number'?v:typeof v==='string'&&/^\s*-?\d+(\.\d+)?\s*$/.test(v)?Number(v):NaN;
  if(!Number.isFinite(n))return null;return Math.max(1,Math.min(7,Math.round(n)));}
 function plan(step,o={}){const s=norm(step),mob=!!o.mobile,dev=Number.isFinite(o.dev)&&o.dev>0?o.dev:1;
- if(s==null||s==='auto')return {step:s==null?null:'auto',r1023:'auto',lite:'auto',dpr:null,lowFx:null,force:null};
+ if(s==null||s==='auto')return {step:s==null?null:'auto',r1023:'auto',lite:'auto',dpr:null,lowFx:null,force:null,scale:1};
  const cap=v=>mob?Math.min(Math.max(1,dev),v):v;
- const want=s===1?.75:s===6?cap(1.75):s===7?cap(2):null;const dpr=s>=6?fit(want,o.W,o.H,mob,dev):want;
- const force=s===1?{r300:false,r450:false,r451:false,r453:false}:s===7?{r300:true,r450:true,r451:true,r453:true}:null;
- return {step:s,r1023:TIER[s],lite:LITE[s],dpr,want,lowFx:s>=6?false:null,force};}
+ const want=s===1?.75:s===2?.9:s===6?cap(1.75):s===7?cap(2):null;/* R1201: 2단계 0.9 */const dpr=s>=6?fit(want,o.W,o.H,mob,dev):want;
+ const ALL_ON={r300:true,r450:true,r451:true,r453:true};/* R1201: 2단계 날씨·국지 조명 끔, 6단계도 모두 켬 */
+ const force=s===1?{r300:false,r450:false,r451:false,r453:false}:s===2?{r450:false,r451:false}:s>=6?{...ALL_ON}:null;
+ return {step:s,r1023:TIER[s],lite:LITE[s],dpr,want,lowFx:s>=6?false:null,force,scale:SCALE[s]};}
 // R1052(사용자 11-15 10:02Z "최고사양 버그없는지 확인… 7품질설정 디버깅개선 최적화"): 6·7단계 화소 예산.
 //  창이 크면(2560×1440 → 7단계 5120×2880, 1,470만 화소) 그리기·메모리만 늘고 보이는 이득이 없다 → 캔버스가 4K(829만 화소)를 넘지 않게 배율을 줄인다.
 //  다만 5단계(엔진 기본 배율 min(기기 배율, 1.5)·휴대폰 1.25)보다 낮아지면 null(= 엔진 배율 그대로)로 둔다. 창 크기를 모르면 원래 값.
@@ -74,7 +78,7 @@ function css(){if(document.getElementById('perf7R1043Css'))return;const s=docume
  s.textContent='.'+HIDE+'{display:none!important}#perf7RowR1043{display:flex;flex-wrap:wrap;gap:.3em;align-items:center;margin:.35em 0}'
  +'#perf7RowR1043 button{min-width:2.6em}#perf7RowR1043 .r1043-now{opacity:.8;font-size:.88em;flex-basis:100%}'
  +'#gfxDetailR1043{margin:.3em 0;border:1px solid #3b3128;border-radius:8px;padding:.2em .5em}#gfxDetailR1043>summary{cursor:pointer}';document.head.appendChild(s);}
-const DESC=['','가장 가볍게(화면 0.75배·빛·날씨 끔)','지금 휴대폰 기본','큰 그림만 줄임','효과 켬·배율 1.25','지금 PC 기본','배율 1.75·촘촘히','배율 2·모든 빛·날씨 켬(고사양)'];
+const DESC=['','가장 가볍게(화면 0.75배·빛·날씨 끔·효과 0.4배)','가볍게(화면 0.9배·날씨·국지 조명 끔·효과 0.6배)','큰 그림만 줄임·효과 0.8배','효과 켬·효과 0.9배','지금 PC 기본','배율 1.75·빛·날씨 켬·효과 1.4배','배율 2·모든 빛·날씨 켬·효과 1.8배(고사양)'];
 function rowRefresh(){try{const row=document.getElementById('perf7RowR1043');if(!row)return;const s=step();
  row.querySelectorAll('[data-r1043-step]').forEach(b=>{const on=String(s)===b.dataset.r1043Step;b.classList.toggle('active',on);b.setAttribute('aria-pressed',String(on));});
  const n=row.querySelector('.r1043-now');if(n){let t=s==='auto'?'자동: 기기 상태에 맞춰 2~5단계':s+'단계 '+NAMES[s]+' — '+DESC[s];
@@ -122,6 +126,6 @@ try{if(typeof showSettings==='function'){const b=showSettings;showSettings=funct
 function start(){try{wrapResize();if(!off&&chosen!=null)apply();}catch(e){fail(e);}}
 // R1023 은 load 때 시작하므로 그 뒤에 적용한다(같은 load 이벤트, 나중에 등록).
 if(document.readyState==='complete')start();else window.addEventListener('load',start,{once:true});
-window.__STORYWORLD_PERF7_R1043__=Object.freeze({revision:REV,storageKey:KEY,names:NAMES.slice(1),norm,plan,step,setStep,build,
+window.__STORYWORLD_PERF7_R1043__=Object.freeze({revision:REV,storageKey:KEY,names:NAMES.slice(1),norm,plan,step,setStep,build,scale:()=>off?1:(Number.isFinite(cur.scale)?cur.scale:1),
  inspect:()=>({revision:REV,off,step:step(),chosen,held:held?{...held}:null,plan:{...cur},mobile:mobile(),stats:{...stats},lastError,presentationOnly:true,gameplayChanged:false})});
 })();
