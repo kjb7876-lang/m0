@@ -13073,14 +13073,54 @@
       "sha256": "6c2785664e1226250da23a2c048043ca8c3b2cfeeb4c5d1c8259c7d3d8b3649a"
     },
     {
+      "path": "assets/r1206/fx/index.json",
+      "bytes": 781,
+      "sha256": "5a93cc696c5c8da2ff59461acc2b5b72c88d9d4c9d5f18a21d90bce7cd2af8d3"
+    },
+    {
+      "path": "assets/r1206/fx/ink-bloom-warn8.webp",
+      "bytes": 118660,
+      "sha256": "3f43a99976438b1167a4929a3cce6f695fe9a95d94a3688d8a9ed5e081a8217d"
+    },
+    {
+      "path": "assets/r1206/props/beacon.webp",
+      "bytes": 24906,
+      "sha256": "f2455d937e31c967aee12d43c78b93a32613f7e5ebe525ef7de02f4a0d30886e"
+    },
+    {
+      "path": "assets/r1206/props/bottle.webp",
+      "bytes": 31058,
+      "sha256": "4967e006366f6cf24ca8be6bd24da3cf4ff22cdbad7b0daf22cc668bd7800e76"
+    },
+    {
       "path": "assets/r1206/props/canvas.webp",
       "bytes": 31702,
       "sha256": "1830e7cb43a5cd12b398521b1715006459c8f7d7b8e01249818ee1378537dc66"
     },
     {
+      "path": "assets/r1206/props/cypress.webp",
+      "bytes": 36492,
+      "sha256": "85e8e0e3e01800430868d837e175bc71ad89620f343f2aba5a129949eddac817"
+    },
+    {
+      "path": "assets/r1206/props/easel.webp",
+      "bytes": 20106,
+      "sha256": "9621e000396b3d239607a36584e2da4ed72e02ee8f39e55880d8508e684103ac"
+    },
+    {
+      "path": "assets/r1206/props/gear.webp",
+      "bytes": 53994,
+      "sha256": "980b26b59a81795f6571e6d3668347f337118900e1bd097e2815e8070f789c5b"
+    },
+    {
+      "path": "assets/r1206/props/goldpillar.webp",
+      "bytes": 40664,
+      "sha256": "a8cf0bb3a9c0329f108bf78949a063f3558606937a13b59b61bc5284a3daf63c"
+    },
+    {
       "path": "assets/r1206/props/index.json",
-      "bytes": 2563,
-      "sha256": "4098d958bdf5d9cfd512725ed4800d4d514ea48a64e599100f65f58c91c86ddd"
+      "bytes": 7335,
+      "sha256": "4850f2bc8db6dd7fa91ab5bcdd2980d27b6d9c97acecce45bf416d49cb35ff48"
     },
     {
       "path": "assets/r1206/props/inkpost.webp",
@@ -13093,14 +13133,34 @@
       "sha256": "71dd0cb77552ba1cffe5297b1af25d623f4ea8d9c8e2d766066554418e9893fd"
     },
     {
+      "path": "assets/r1206/props/mirror.webp",
+      "bytes": 52952,
+      "sha256": "cdf635f0ca984c30133eba77b071a7777a6298e4eb8ec90f19825eadfe4209de"
+    },
+    {
       "path": "assets/r1206/props/shard.webp",
       "bytes": 23874,
       "sha256": "2af0a1970f421b72179fad6c4a38a95e90136305acc9aae2d3ebc38f44747270"
     },
     {
+      "path": "assets/r1206/props/spool.webp",
+      "bytes": 45366,
+      "sha256": "6fac468dbd9f045c2cf4d685adb7852f38cf6abb3ef449bfd349fe5449b950c1"
+    },
+    {
       "path": "assets/r1206/props/stone.webp",
       "bytes": 29530,
       "sha256": "bcfadb676d4cf49a3365fa33bcf43965521580ec69d17f501400993af9eae547"
+    },
+    {
+      "path": "assets/r1206/props/tree.webp",
+      "bytes": 49932,
+      "sha256": "e5f3a8df07945d3b0f6af1421f32c923b20376cc5c691ad355025812952dbb13"
+    },
+    {
+      "path": "assets/r1206/props/willow.webp",
+      "bytes": 80314,
+      "sha256": "11a53decd3042e826c2b696fc2c420ad7fb49a0c1b9489af00fbde98dfd1af8c"
     },
     {
       "path": "assets/r121/heroes/gunner/aim_back.webp",
@@ -55044,8 +55104,8 @@
     },
     {
       "path": "combat-r170.js",
-      "bytes": 30169,
-      "sha256": "77bfb28877b9f3963371c8d34a7944db362ca6c34bebc27ed47a2bd03e4ebe59"
+      "bytes": 31099,
+      "sha256": "76e2c2d57871b343ae288ba99b32a44f52fb4fc44eedffb0b84ec9a1c859ad6b"
     },
     {
       "path": "combat-r98.js",
@@ -56629,8 +56689,8 @@
     },
     {
       "path": "samong-props-r1206b.js",
-      "bytes": 2838,
-      "sha256": "7ea242763b4695034781a1d1931cdf2acbc87cbf3cf720b600b127e60bf4b969"
+      "bytes": 3538,
+      "sha256": "81fc1a6452bd9e1255e0631abd7fd722548a6ffeeaa0a0fad9b1172510887ed9"
     },
     {
       "path": "samong-r103.js",
@@ -57238,8 +57298,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11447,
-  "totalBytes": 1371027278,
+  "fileCount": 11459,
+  "totalBytes": 1371588905,
   "webHTMLSha256": "35e2e108e4122cb883241936b2d097d75def00ae01cbf25a5bbea4fde53ddfb3",
   "largest": [
     {
