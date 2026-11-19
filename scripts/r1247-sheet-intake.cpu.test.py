@@ -156,5 +156,33 @@ with tempfile.TemporaryDirectory() as td:
     check('census summary', rep.get('summary', {}).get('HOLD') == 1 and rep.get('summary', {}).get('PASS') == 1, rep.get('summary'))
     check('census markdown', (out / 'sheet-intake-report.md').exists())
 
+# 14 회귀(Dots 검토 R1245_PR882_R1233_census_누락검증): index 맨 위에 cell·cols 가 없으면 조용히 빠지던 문제
+with tempfile.TemporaryDirectory() as td:
+    root = pathlib.Path(td) / 'assets'
+    (root / 'rZ' / 'mobs').mkdir(parents=True); (root / 'rA' / 'mobs').mkdir(parents=True)
+    sheet(1, 4).save(root / 'rZ' / 'mobs' / 'z1.png')
+    json.dump({'mobs': [{'id': 'z1', 'file': 'z1.png'}]}, open(root / 'rZ' / 'mobs' / 'index.json', 'w'))  # 메타 없음
+    sheet(1, 4).save(root / 'rA' / 'mobs' / 'a1.png'); sheet(1, 4, {1: dict(foot=40)}).save(root / 'rA' / 'mobs' / 'a2.png')
+    json.dump({'mobs': [{'id': 'a1', 'file': 'a1.png'}, {'id': 'a2', 'file': 'a2.png'}]}, open(root / 'rA' / 'mobs' / 'index.json', 'w'))
+    rep = si.census(root, pathlib.Path(td) / 'out', adapters={'rA/mobs': dict(cell=(CW, CH), cols=4, walk=[0, 2], attack=[2, 2])})
+    sk = {k['path']: k for k in rep['skipped']}; sh = {k['path']: k for k in rep['sheets']}
+    check('no-meta sheet recorded as skipped', 'rZ/mobs/z1.png' in sk and 'metadata' in sk['rZ/mobs/z1.png']['reason'], rep['skipped'])
+    check('adapter sheets measured', set(sh) == {'rA/mobs/a1.png', 'rA/mobs/a2.png'}, list(sh))
+    check('adapter groups used', sh.get('rA/mobs/a2.png', {}).get('verdict') == 'HOLD' and sh.get('rA/mobs/a2.png', {}).get('layout') == 'adapter:rA/mobs', sh.get('rA/mobs/a2.png'))
+
+# 15 실제 저장소: R1233 몹 13종이 보고서(sheets+skipped)에 정확히 한 번씩
+R1233 = ['m019', 'm025', 'm026', 'm027', 'm029', 'm043', 'm044', 'm057', 'm058', 'm069', 'm072', 'm087', 'm091']
+assets = HERE.parent / 'r96' / 'runtime-text' / 'assets'
+if (assets / 'r1233' / 'mobs' / 'index.json').exists():
+    with tempfile.TemporaryDirectory() as td:
+        rep = si.census(assets, td)
+        allp = [s['path'] for s in rep['sheets']] + [s['path'] for s in rep['skipped']]
+        cnt = {m: allp.count(f'r1233/mobs/{m}.webp') for m in R1233}
+        check('r1233 13 mobs each exactly once', all(v == 1 for v in cnt.values()), cnt)
+        check('r1233 mobs measured (not skipped)', all(any(s['path'] == f'r1233/mobs/{m}.webp' for s in rep['sheets']) for m in R1233))
+        check('every listed sheet appears once', len(allp) == len(set(allp)), len(allp) - len(set(allp)))
+else:
+    check('r1233 index present', False, 'missing r96/runtime-text/assets/r1233/mobs/index.json')
+
 print(f'{len(fails)} failed' if fails else 'all passed')
 sys.exit(1 if fails else 0)

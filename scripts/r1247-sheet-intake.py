@@ -172,20 +172,41 @@ def _entries(d, base, assets):
     return uniq
 
 
-def census(assets, out_dir):
+# index.json 맨 위에 cell·cols 가 없는 묶음의 칸 규격(런타임 index 는 건드리지 않고 여기서 보충).
+# R1233: scripts/r1233-mob-sheets.py 가 R290·R410 규격(256x320, 4x3, 걷기 0-7 · 공격 8-11)으로 만든다.
+ADAPTERS = {
+    'r1233/mobs': dict(cell=(256, 320), cols=4, walk=[0, 8], attack=[8, 4]),
+}
+
+
+def census(assets, out_dir, adapters=None):
     assets = pathlib.Path(assets).resolve()
-    sheets, skipped, seen = [], [], set()
+    adapters = ADAPTERS if adapters is None else adapters
+    sheets, skipped, seen, nometa = [], [], set(), []
     for idx in sorted(assets.rglob('index.json')):
         try:
             d = json.loads(idx.read_text())
         except Exception:
             continue
-        if not isinstance(d, dict) or 'cell' not in d or 'cols' not in d:
+        if not isinstance(d, dict):
             continue
+        rel = idx.parent.relative_to(assets).as_posix()
+        layout = 'index'
+        if 'cell' not in d or 'cols' not in d:
+            if rel in adapters:
+                d = dict(d, **adapters[rel]); layout = f'adapter:{rel}'
+            else:
+                # 칸 규격을 모르면 재지 않지만, 시트를 가리키는 index 면 이유를 남긴다(조용히 빠지지 않게)
+                for p in _entries(d, idx.parent, assets):
+                    try:
+                        rp = p.resolve().relative_to(assets).as_posix()
+                    except ValueError:
+                        rp = str(p)
+                    nometa.append(dict(path=rp, index=f'{rel}/index.json', reason='no cell/cols layout metadata (index 에도 ADAPTERS 에도 없음)'))
+                continue
         c = d['cell']
         cell = (c, c) if isinstance(c, int) else tuple(c)
         groups = [tuple(d[k]) for k in ('walk', 'attack') if isinstance(d.get(k), list) and len(d[k]) == 2] or None
-        rel = idx.parent.relative_to(assets).as_posix()
         kind = 'fx' if ('fx' in d or '/fx' in '/' + rel or 'fx' in rel.split('/')[-1:]) else 'char'
         for p in _entries(d, idx.parent, assets):
             try:
@@ -203,7 +224,10 @@ def census(assets, out_dir):
             except Exception as e:
                 skipped.append(dict(path=rp, index=f'{rel}/index.json', reason=str(e))); continue
             r.pop('cells'); r.pop('tolerances')
-            sheets.append(dict(path=rp, index=f'{rel}/index.json', **r))
+            sheets.append(dict(path=rp, index=f'{rel}/index.json', layout=layout, **r))
+    for k in nometa:  # 다른 index 가 규격과 함께 가리켜 이미 잰 시트는 빼고, 한 번씩만
+        if k['path'] not in seen:
+            seen.add(k['path']); skipped.append(k)
     summary = dict(PASS=sum(s['verdict'] == 'PASS' for s in sheets), HOLD=sum(s['verdict'] == 'HOLD' for s in sheets), skipped=len(skipped))
     by_rule = {}
     for s in sheets:
@@ -222,7 +246,12 @@ def census(assets, out_dir):
         iss = '; '.join(f"{i['rule']}{i['cells']}" for i in s['issues']) or '-'
         md.append(f"| {s['path']} | {s['verdict']} | {iss} | {s['foot_spread']} | {s['center_spread']} | {s['scale_ratio']} |")
     if skipped:
-        md += ['', '## 건너뜀', ''] + [f"- {k['path']} ({k['reason']})" for k in skipped]
+        groups = {}
+        for k in skipped:
+            groups.setdefault((k['reason'], k['index']), []).append(k['path'])
+        md += ['', '## 건너뜀(이유·index 별)', '']
+        for (reason, ix), ps in sorted(groups.items()):
+            md.append(f"- {ix} — {reason}: {len(ps)}장" + (f" ({', '.join(ps)})" if len(ps) <= 5 else ''))
     (out / 'sheet-intake-report.md').write_text('\n'.join(md) + '\n')
     return rep
 
