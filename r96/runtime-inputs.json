@@ -10688,7 +10688,8 @@
     "memory-voice-r1223.js",
     "swamp-splash-r1222.js",
     "assets/r163/pixelfx/r1222/mob-swamp-dots-12.webp",
-    "story-half-dmg-r1225.js"
+    "story-half-dmg-r1225.js",
+    "hero-blocked-r1238.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11763,5 +11764,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "e793d0fdc4360a275e87f1eb44343fefb8c2b546666faf342d56ba615cc809b6"
+  "runtimeManifestSHA256": "af55f89b1828e3a9b9ff96397f9b0fef2e92bfd20dd5a4ca65521664d568ecd2"
 }
