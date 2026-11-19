@@ -1,0 +1,22 @@
+FAIL ① 창처럼 날아오는 역십자가 @ep1b08 색조 (none)
+FAIL ① 전극을 두른 좀비 수호기사 @ep1b08 색조 (none)
+FAIL ① 기계화 감옥 공명기사 @kair07 색조 (none)
+FAIL ① 면도날 종이 아이 @sz115-S02-8 색조 (none)
+FAIL ① 기운 누더기 골렘 @sz115-S01-2 색조 (none)
+FAIL ① 적 지휘 개체 @sz115-S06-3 색조 (none)
+FAIL ① 제출되지 못한 문장 @sz115-RF-1 색조 (none)
+FAIL ① 찢어진 사진의 망령 @sz115-RC-3 색조 (none)
+FAIL ① 백은 없는 그림자 @sz115-S07-3 색조 (none)
+FAIL ① 부정의 잔영 @sz162-P-D 색조 (none)
+FAIL ① 거짓천국 근위천사 @sz115-M-1 색조 (none)
+FAIL ① 뿌리에서 쏟아진 잔영 @sz115-S01-2 색조 (none)
+FAIL ① 뿌리에서 쏟아진 잔영 @sz162-S-01-B 색조 (none)
+FAIL ① 맞은 번쩍 필터 뒤에 이어 붙임 (brightness(1.8))
+FAIL ④ 규칙 12건
+FAIL ④ 기록기가 받는 필터만
+FAIL ④ index.html 스크립트 태그
+FAIL ④ runtime-text 사본
+FAIL ④ sync 등록
+FAIL ④ verify 목록
+FAIL ④ pages.yml
+FAILED 21/85
