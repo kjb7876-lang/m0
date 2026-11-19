@@ -15,7 +15,7 @@
  * 판정·피해·시간은 바꾸지 않는다(그리기만). 십자가·뒤집기 없음. */
 (()=>{'use strict';
 if(window.__STORYWORLD_HERO_DOTS_FX_R1041__)return;
-const REV='R1041-hero-dots-fx-1',KEY='storyworld.r1041.dotsfx',fin=Number.isFinite;
+const REV='R1235-michaela-skill-sheets+R1041-hero-dots-fx-1',KEY='storyworld.r1041.dotsfx',fin=Number.isFinite;
 const stats={swapped:0,dropped:0,hurts:0,fallback:0,kept:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 let on=true;try{const v=localStorage.getItem(KEY);if(v==='off'||v==='0'||v==='false')on=false;}catch(_){}
 const DIR='assets/r1041/';
@@ -63,6 +63,20 @@ function isHurt(owner){const id=owner.id;if(hurtIds.has(id))return hurtIds.get(i
  try{const p=typeof player!=='undefined'?player:null,fx=window.__STORYWORLD_POLISH_R101__?.effects?.()||[];
   yes=!!p&&fin(owner.x)&&fin(owner.y)&&Math.hypot(owner.x-p.x,owner.y-p.y)<.35&&fx.some(e=>e&&e.kind==='heroHurt'&&e.age>=0&&e.age<.15);}catch(e){fail(e);}
  hurtIds.set(id,yes);if(hurtIds.size>120)for(const k of hurtIds.keys()){hurtIds.delete(k);if(hurtIds.size<=60)break;}if(yes)stats.hurts++;return yes;}
+const skillOn=()=>{try{const v=localStorage.getItem('storyworld.r1235.skillSheets');return v!=='off'&&v!=='0'&&v!=='false';}catch(_){return true;}};
+const actorH=()=>{try{const h=typeof actorHeight==='function'?actorHeight():60;return fin(h)&&h>0?h:60;}catch(_){return 60;}};
+// M4 하트 적중 칸: 칸 .85 높이 = 바닥 물결(발), 한 변 = 영웅 키 1.7배
+const m4At=(bx,by)=>{const s=actorH()*1.7;return rect(bx-s/2,by-s*.85,bx+s/2,by+s*.15);};
+function skillRule(name,id,cmds){
+ if(name==='halo'&&image(SHEET.M1.path))return {S:SHEET.M1,key:id+'|halo',box:P=>remap(P,.5-.725,.5-.725,.5+.725,.5+.725)};
+ // 빛기둥: 피벗(.5,.99) = 기둥 발. M7 칸(256×512) 바닥 .98 = 기둥 발, 높이 같게, 너비 = 높이/2.
+ if(name==='pillar'&&image(SHEET.M7.path)){const k=nth(cmds,id,'pillar');return {S:SHEET.M7,key:id+'|pillar|'+k,box:P=>{const [w,h]=side(P);if(!(w>0&&h>0))return null;const u=h/2/w;return remap(P,.5-u/2,.99-.98,.5+u/2,.99+.02);}};}
+ if(name==='ring'&&image(SHEET.C4.path))return {S:SHEET.C4,key:id+'|ring',box:P=>P};
+ if((name==='cross'||name==='flare')&&image(SHEET.M4.path)){
+  if(name==='cross'){/* 표적 위 큰 십자(키 .5 이상)만 — 방벽 둘레·빛살 끝 작은 십자는 그대로 */return {S:SHEET.M4,key:id+'|m4|'+nth(cmds,id,'cross4'),needBig:true,make:P=>{if(!Array.isArray(P)||P.length!==4)return null;const [w,h]=side(P);if(!(h>=actorH()*.5))return null;mark(cmds,id,'m4');const bx=(P[0][0]+P[1][0]+P[2][0]+P[3][0])/4,by=(P[2][1]+P[3][1])/2;return m4At(bx,by);}};}
+  if(marked(cmds,id,'m4'))return 'drop';
+  return {S:SHEET.M4,key:id+'|flare',make:P=>{if(!Array.isArray(P)||P.length!==4)return null;const bx=(P[0][0]+P[1][0]+P[2][0]+P[3][0])/4,by=(P[0][1]+P[1][1]+P[2][1]+P[3][1])/4+actorH()*.4;return m4At(bx,by);}};}
+ return null;}
 // 바꿀 규칙: {S, box(P)→새 points} 또는 'drop' 또는 null(그대로)
 function rule(kind,owner,data,cmds){const id=String(owner?.id||'');
  if(kind==='fill'||kind==='stroke'){
@@ -81,6 +95,9 @@ function rule(kind,owner,data,cmds){const id=String(owner?.id||'');
   return null;}
  if(kind!=='image')return null;const path=String(data?.sourcePath||''),name=r106Name(path);
  if(name){
+  // R1235(사용자 2026-11-19 11:34Z "미카엘라 영웅 이펙트중 아직 프레임애니메이션 아닌 이펙트는 프레임애니메이션으로"): R106 D2S 미카엘라 기술(Q 천국의 주먹·W 성역 방벽·E 날개 돌진·R 세라핌 강림)의
+  //  코드 한 장 그림 중 맞는 Dots 시트가 있는 것만 바꾼다. 깃털·불꽃줄·파편·베기선·빛·작은 십자는 맞는 시트가 없어 그대로(Dots 요청 대상). 끄기 storyworld.r1235.skillSheets = off.
+  if(owner?.r106&&heroIs('michaela')&&skillOn()){const r=skillRule(name,id,cmds);if(r)return r;}
   // 후광: 칸 안 고리가 칸 너비의 ~65% 라 1.45배로 키워 원래 후광 너비에 맞춘다(비율 256:96 그대로).
   if(name==='halo'&&id.startsWith('r101:aura-front:'))return {S:SHEET.M1,key:id,box:P=>remap(P,.5-.725,.5-.725,.5+.725,.5+.725)};
   if(name==='flame'&&id.startsWith('r101:aura-back:')){
@@ -114,7 +131,7 @@ function wrapPush(){const DC=window.StoryPhase1?.DrawCommands,P=DC?.prototype;if
  const w=function(kind,data){if(!on)return base.call(this,kind,data);let r=null;try{r=rule(kind,this.owner||{},data,this.commands);}catch(e){fail(e);r=null;}
   if(!r)return base.call(this,kind,data);
   if(r==='drop'){stats.dropped++;return;}
-  try{const im=image(r.S.path),pts=data?.points;if(im&&(r.make||Array.isArray(pts)&&pts.length===4)){const np=r.make?r.make():r.box(pts);
+  try{const im=image(r.S.path),pts=data?.points;if(im&&(r.make||Array.isArray(pts)&&pts.length===4)){const np=r.make?r.make(pts):r.box(pts);
     if(np&&np.flat().every(fin)){const t=nowT(),fr=fin(r.fr)?r.fr:r.pulse?pulseFrame(ageOf(r.key,t)):frameOf(r.S,r.key,t);stats.swapped++;if(r.make)kind='image';
      const ga=this.globalAlpha,g=r.S.gain||1;if(g!==1&&fin(ga))this.globalAlpha=Math.min(1,ga*g);
      const sw={image:im,mutable:false,sourcePath:r.S.path,immutableTint:null,sourceRect:[fr*r.S.cw,0,r.S.cw,r.S.ch],imageSize:[r.S.cw*r.S.n,r.S.ch],points:np};
