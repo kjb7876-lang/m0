@@ -55574,13 +55574,13 @@
     },
     {
       "path": "gunner-aim-r991.js",
-      "bytes": 27877,
-      "sha256": "80c04e121427e9641b452295055a2530e54754b609112e828a8311e3f6e16877"
+      "bytes": 31328,
+      "sha256": "7861ddd6f7aa652c1ffa4514c3f8bff999705926175ba949dd158ffc8a9b7344"
     },
     {
       "path": "gunner-arms-r561.js",
-      "bytes": 47831,
-      "sha256": "33369ca1f15f5eae19ca5361879706a5a3949aa9f73c15f763d21cd9082d17e8"
+      "bytes": 49433,
+      "sha256": "1db0d88c40acab1ad3bc6050407698848a2de3c843626b7453e2a72423759d9f"
     },
     {
       "path": "gunner-veil-r953.js",
@@ -56504,13 +56504,13 @@
     },
     {
       "path": "projectile-sheets-r912.js",
-      "bytes": 15666,
-      "sha256": "e6a3f4b447497e3f48c6e8a4efd2b6bee86154208aac52a464920ee41611a6ec"
+      "bytes": 15875,
+      "sha256": "46b90d77fb6af317c22a92ba26be00f4502d5ec2ded9784c1a48f4f26c11e360"
     },
     {
       "path": "projectile-size-r911.js",
-      "bytes": 12461,
-      "sha256": "b1cae37ec719a9d2049e0b9d5bee094574c462d5020b27e3cb380b2d494c3ee6"
+      "bytes": 12618,
+      "sha256": "a53fbd8873959bd038bcbccf3994ffce60fe0484cdc26d70a7dcf79ca32e562d"
     },
     {
       "path": "prop-shadow-r329.js",
@@ -57279,7 +57279,7 @@
     }
   ],
   "fileCount": 11455,
-  "totalBytes": 1371515497,
+  "totalBytes": 1371520916,
   "webHTMLSha256": "35e2e108e4122cb883241936b2d097d75def00ae01cbf25a5bbea4fde53ddfb3",
   "largest": [
     {

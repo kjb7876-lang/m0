@@ -118,7 +118,7 @@
     const base=drawProjectile;baseRef=base;
     const wrapped=function(p,...rest){
       if(!p||typeof p!=='object')return;
-      if(inside||busy||!enabled||ctx?.__r911probe||skipZone())return base.apply(this,[p,...rest]);
+      if(inside||busy||!enabled||ctx?.__r911probe||skipZone()||p.r1220Muzzle)return base.apply(this,[p,...rest]);/* R1220: 기억사수 기본탄은 총구 굵기(사용자 11-19 "총탄 총구크기에 맞추고") — 최소 크기로 키우지 않음 */
       stats.draws++;
       let s=state.get(p);const now=typeof time==='number'?time:0;
       if(!s||now-s.at>=CFG.remeasure||now<s.at){const m=measureWith(base,this,[p,...rest]);stats.measured++;s={at:now,m};state.set(p,s);}
