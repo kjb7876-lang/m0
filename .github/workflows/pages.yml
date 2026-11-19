@@ -543,6 +543,12 @@ jobs:
         run: node r96/qa/r1199/r1199-clone-cpu-check.cjs
       - name: R1211 R1199 후속 — 흑백 예열 텍스처 참조 돌려주기·R409 컬러/흑백 테두리 열쇠 나누기 CPU check
         run: node r96/qa/r1211/r1211-cpu-check.cjs
+      - name: R1217 사몽 흑백 셰이더(흑백 사본 없이)·R409 흑백 몸 테두리 CPU check
+        run: node r96/qa/r1217/r1217-shader-cpu-check.cjs
+      - name: R1217 사몽 그림 기본 목록·로딩 화면 미리 읽기 CPU check
+        run: node r96/qa/r1217/r1217-warm-cpu-check.cjs
+      - name: R1217 각성 연출 0.3초 나눠 켜기·성능 1~4단계 줄이기 CPU check
+        run: node r96/qa/r1217/r1217-stagger-cpu-check.cjs
       - name: R1177f 기억 지역 몹 타격 Dots CX-0160MF(육망성 없음)
         run: node r96/qa/r1177/r1177f-cpu-check.cjs
       - name: R701 survival 77s choice window, difficulty, hero picker CPU check

@@ -55054,8 +55054,8 @@
     },
     {
       "path": "combat-read-r409.js",
-      "bytes": 26328,
-      "sha256": "43e5fe2667986bfc350595561d996d64340d60d646c1da2c48ed2c2f5bc021e7"
+      "bytes": 27951,
+      "sha256": "f204f6949de5335f8188a47300ebcc17bef88635d3a911b1840d7f2d0f7bc739"
     },
     {
       "path": "combat-sfx-r785.js",
@@ -55799,8 +55799,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6582601,
-      "sha256": "35e2e108e4122cb883241936b2d097d75def00ae01cbf25a5bbea4fde53ddfb3"
+      "bytes": 6582703,
+      "sha256": "8b92b4164318e536091c3ebecbe7789bfa38d878277af8bfd2f2b4c6f069b4ef"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -56419,8 +56419,8 @@
     },
     {
       "path": "play-r111.js",
-      "bytes": 52823,
-      "sha256": "e19691dc66c4ecea912624998423450fa7d18ca42edb25e88eea3414dc620bbe"
+      "bytes": 53451,
+      "sha256": "392b2d6f2dd743fd8b2ef3db647484814e510c2f3f8c81dc41bb63f38fcc0265"
     },
     {
       "path": "play-r113.js",
@@ -56653,9 +56653,14 @@
       "sha256": "47705ce72cc640db7ec169987f55f8c816bfa8a054c707918a7212ff00d9b7cc"
     },
     {
+      "path": "samong-stagger-r1217.js",
+      "bytes": 2857,
+      "sha256": "dd69c51126ab5c6688d86e183ee2b226b7898bd6cd33967c6ae5506477dac9f2"
+    },
+    {
       "path": "samong-surge-r571.js",
-      "bytes": 16216,
-      "sha256": "76ca776d796fc49b2695969fcf3cb3ba565b42cf3ad073747666bb6a80ac4570"
+      "bytes": 16472,
+      "sha256": "87a50f545646a9866db1a8006660d17266d3d8ae8430c563a311f0ca74418402"
     },
     {
       "path": "samong-text-r103.js",
@@ -56679,8 +56684,13 @@
     },
     {
       "path": "samong-warm-r1199.js",
-      "bytes": 7802,
-      "sha256": "5c2dc4157545ae383a4b0e09840659dd802859311709a08da9f1879854124d68"
+      "bytes": 9165,
+      "sha256": "e5c7c130221d4814f60ebeeb3e794c90a7982bb9f2ecda33ea221cb8b723e7e7"
+    },
+    {
+      "path": "samong-warm-r1217-data.js",
+      "bytes": 4381,
+      "sha256": "7b4d8bcaffbb9af85adbc7d1aca2cf048571ccddc57131a5703738ab951f564a"
     },
     {
       "path": "samong-wide-r355.js",
@@ -57238,9 +57248,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11447,
-  "totalBytes": 1371027278,
-  "webHTMLSha256": "35e2e108e4122cb883241936b2d097d75def00ae01cbf25a5bbea4fde53ddfb3",
+  "fileCount": 11449,
+  "totalBytes": 1371038488,
+  "webHTMLSha256": "8b92b4164318e536091c3ebecbe7789bfa38d878277af8bfd2f2b4c6f069b4ef",
   "largest": [
     {
       "path": "index.html",
