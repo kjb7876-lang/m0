@@ -41,7 +41,7 @@ ok('steps 3–5 leave the extras to the player',[2,3,4].every(i=>pc[i].force==nu
 const fx=C('fx-sprites-r106.js'),wx=C('weather-r450.js'),la=C('light-atmos-r300.js');
 for(const [f,s] of [['fx-sprites-r106.js',fx],['weather-r450.js',wx],['light-atmos-r300.js',la]]){
  ok(f+' reads the perf7 density',/__STORYWORLD_PERF7_R1043__\?\.scale/.test(s));ok(f+' runtime copy identical',RT(f)===s);}
-ok('R106 effect budget = 150 × density',/fb0=FB\*dens\(\)/.test(fx)||/FB\*dens\(\)/.test(fx));
+ok('R106 effect budget = 150 × density (crowd ×.73 kept)',/const fb=Math\.round\(\(crowd>25\?Math\.round\(FB\*\.73\):FB\)\*dens\(\)\);/.test(fx));
 ok('R450 rain/snow/splash/gust/dust counts × density, still capped by MAXN',(wx.match(/\*dens\(\)/g)||[]).length>=5&&/Math\.min\(MAXN\.flake/.test(wx));
 ok('R300 motes × density inside a buffer big enough for step 7',/motes:lf\?0:Math\.round\(CFG\.motes\[t\]\*dens\(\)\)/.test(la)&&/MOTE_CAP/.test(la));
 // density helper: NaN/Infinity/0 → 1, clamp 0.2..2
