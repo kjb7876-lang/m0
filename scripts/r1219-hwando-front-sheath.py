@@ -62,16 +62,40 @@ def cell(A):
     res[~(keep|fill)]=0
     res[keep]=A[keep]
     return np.clip(res+.5,0,255).astype(np.uint8),int(M.sum()),int(fill.sum())
+# R1219b(사용자 2026-11-19 10:20Z "환도영웅 아래모션 개선해서 적용해줘"): 원화는 머리·몸통이 6칸 내내 한 픽셀도 안 움직여(머리 꼭대기 3·몸통 x ±0.3)
+# 팔·어깨가 굳어 보인다 → 다리·발(아래 60줄)은 그대로 두고 상체만 걸음 박자로 움직인다.
+#  · 오르내림: 딛는 칸(0·3)에서 1.5px 내려앉고 지나가는 칸에서 올라온다.
+#  · 체중 이동: 엉덩이(y=HIP)를 축으로 기울이듯 머리 쪽일수록 더 옮긴다 — 첫 걸음(0~2칸)은 왼쪽, 둘째 걸음(3~5칸)은 오른쪽, 머리에서 최대 SWAY px.
+#  허리 아래 BLEND 구간에서 0 으로 부드럽게 줄여 다리와 이음매가 없게 한다(쌍선형 재표본, 알파 곱한 색).
+HIP=120.0;SWAY=2.0;BOB=1.0;LEG=60;BLEND=(95.0,130.0)
+def motion(k,n):
+    ph=2*np.pi*(k+.5)/n
+    return -SWAY*np.sin(ph),BOB*np.cos(4*np.pi*k/n)+.5
+def warp(C,k,n):
+    H,W=C.shape[:2];sx,dy=motion(k,n)
+    y=np.arange(H,dtype=float)[:,None];x=np.arange(W,dtype=float)[None,:]
+    t=np.clip((BLEND[1]-y)/(BLEND[1]-BLEND[0]),0,1);w=t*t*(3-2*t);w[H-LEG:]=0
+    dx=sx*w*np.clip((HIP-y)/(HIP-3),0,None)/1.0;dyy=dy*w
+    X=np.broadcast_to(x-dx,(H,W));Y=np.broadcast_to(y-dyy,(H,W))
+    a=C[:,:,3:4].astype(float)/255.0;P=np.concatenate([C[:,:,:3]*a,a*255],axis=2)
+    x0=np.floor(X).astype(int);y0=np.floor(Y).astype(int);fx=(X-x0)[...,None];fy=(Y-y0)[...,None]
+    def g(yy,xx):
+        ok=(yy>=0)&(yy<H)&(xx>=0)&(xx<W);v=np.zeros((H,W,4));v[ok]=P[yy[ok],xx[ok]];return v
+    R=g(y0,x0)*(1-fx)*(1-fy)+g(y0,x0+1)*fx*(1-fy)+g(y0+1,x0)*(1-fx)*fy+g(y0+1,x0+1)*fx*fy
+    out=np.zeros_like(C);al=R[:,:,3];nz=al>0.5
+    out[:,:,3]=np.clip(al+.5,0,255).astype(np.uint8);out[nz,:3]=np.clip(R[nz,:3]/(al[nz,None]/255.0)+.5,0,255).astype(np.uint8)
+    out[H-LEG:]=C[H-LEG:]
+    return out
 def main():
     j=json.load(open(os.path.join(AS,'r436','hwando','index.json')))['walk']['s'];n=j['n'];cw,ch=j['cell']
     A=np.array(Image.open(SRC).convert('RGBA'));O=np.zeros_like(A);rep=[]
     for k in range(n):
-        o,m,f=cell(A[:,k*cw:(k+1)*cw]);O[:,k*cw:(k+1)*cw]=o;rep.append({'frame':k,'blade_px':m,'filled_px':f})
+        o,m,f=cell(A[:,k*cw:(k+1)*cw]);o=warp(o,k,n);O[:,k*cw:(k+1)*cw]=o;sx,dy=motion(k,n);rep.append({'frame':k,'blade_px':m,'filled_px':f,'sway_head_px':round(float(sx),2),'bob_px':round(float(dy),2)})
     os.makedirs(os.path.dirname(OUT),exist_ok=True)
     Image.fromarray(O).save(OUT,'WEBP',lossless=True,quality=100,method=6)
     b=open(OUT,'rb').read()
-    meta={'revision':'R1219-hwando-front-sheath-1','source':'assets/r436/hwando/walk-s.webp','source_sha256':hashlib.sha256(open(SRC,'rb').read()).hexdigest(),
+    meta={'revision':'R1219b-hwando-front-sheath-2','source':'assets/r436/hwando/walk-s.webp','source_sha256':hashlib.sha256(open(SRC,'rb').read()).hexdigest(),
           'file':'walk-s.webp','sha256':hashlib.sha256(b).hexdigest(),'bytes':len(b),'frames':rep,'temporary':True,
-          'note':'칼날만 지운 임시 파생본. Dots 칼집 걷기 시트가 오면 바꾼다. 색인·발 기준점·몸 키는 R436 index.json 그대로.'}
+          'front_idle_frame':2,'note':'칼날을 지우고 상체에 걸음 박자 오르내림·체중 이동을 넣은 임시 파생본(다리·발 불변). Dots 칼집 걷기 시트가 오면 바꾼다. 색인·발 기준점·몸 키는 R436 index.json 그대로.'}
     json.dump(meta,open(os.path.join(os.path.dirname(OUT),'r1219.json'),'w'),ensure_ascii=False,indent=1);print(json.dumps(meta,ensure_ascii=False))
 if __name__=='__main__':main()

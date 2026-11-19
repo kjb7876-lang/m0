@@ -33,6 +33,10 @@ let tex1063=true;try{const s=JSON.parse(localStorage.getItem('storyworld.r1063.h
 const SHEATH1219_SRC='assets/r436/hwando/walk-s.webp',SHEATH1219='assets/r1219/r436/hwando/walk-s.webp';
 let sheath1219=true;try{const s=JSON.parse(localStorage.getItem('storyworld.r1219.hwandoSheath')||'null');if(s&&s.on===false)sheath1219=false;}catch(_){}
 function sheath(p){return sheath1219&&p===SHEATH1219_SRC?SHEATH1219:p;}
+/* R1219b(사용자 2026-11-19 10:20Z "환도영웅 아래모션 개선해서 적용해줘"): 아래로 걷다 멈추면 앞모습으로 선다(칼집 걷기의 두 발 모은 칸 + 숨쉬기).
+   가까운 적이 옆·위에 있으면 지금처럼 그쪽 좌·우 선 자세(R283). v = 영웅→적 화면 벡터(없으면 null). */
+const FRONT_IDLE_FRAME=2;
+function frontIdle(last,v){if(!sheath1219||last!=='s')return false;if(!Array.isArray(v)||v.length<2||!Number.isFinite(v[0])||!Number.isFinite(v[1]))return true;return v[1]>0&&Math.abs(v[1])>=Math.abs(v[0]);}
 function tex(p){if(!tex1063||typeof p!=='string'||!TEX1063.test(p))return p;return 'assets/r1063/'+p.slice(7);}
 const asked=new Map();
 /* R440(사용자 2026-11-09 "환도영웅에 옛 이미지 갑자기 등장 버그"): 지역에 들어서면 엔진 그림 캐시가 다시 채워지는 몇 프레임 동안 readyImage 가 비어
@@ -97,12 +101,13 @@ function choose(rec,st){const best=pickBody(rec,st);if(!best)return;const t=T(),
  if(S.hit&&M&&S.hit.shown&&!(hurt>0)&&t-(S.hit.lastHurt??S.hit.t0)>.05){S.hit=null;}/* R895 규칙 6: 피격 반응은 피격 시간이 끝나면 0.05초 안에 끝난다 */
  if(S.hit&&hurt>0)S.hit.lastHurt=t;
  if(S.hit&&!moving&&!sw440/* R1050c: 스킬 중 피격은 스킬 모션 그대로 */){S.hit.shown=true;const d=S.hit.dir,h=res('hit',d)?.A,el=(t-S.hit.t0)*ms/.6;if(h&&el<h.ms.reduce((x,y)=>x+y,0)){S.dir=d;return draw(rec,st,best,'hit',d,frameAt(h.ms,el,false));}S.hit=null;}
- if(moving){const P=P277();S.dir=P?.walkDir?P.walkDir(S.walkDir,S.sx):S.walkDir;P?.face(S.dir);const ws=S.dir==='s'?wsRes():null,R=ws||res('walk',S.dir),k=want()/(R?.A?.body||180),fps=R?.A?.frames_per_stride,per=(IDX.anims.walk?.stride?.px_per_frame||12.8)*k*(fps?(IDX.anims.walk?.stride?.frames_per_stride||12)/fps:1);/* R436: 6키 = 두 걸음 → 칸당 거리 2배(보폭 같게) */return draw(rec,st,best,'walk',S.dir,Math.floor(S.dist/Math.max(1,per)),{s:!!ws});}
+ if(moving){const P=P277();S.dir=P?.walkDir?P.walkDir(S.walkDir,S.sx):S.walkDir;P?.face(S.dir);S.lastWalk=S.dir;/* R1219b */const ws=S.dir==='s'?wsRes():null,R=ws||res('walk',S.dir),k=want()/(R?.A?.body||180),fps=R?.A?.frames_per_stride,per=(IDX.anims.walk?.stride?.px_per_frame||12.8)*k*(fps?(IDX.anims.walk?.stride?.frames_per_stride||12)/fps:1);/* R436: 6키 = 두 걸음 → 칸당 거리 2배(보폭 같게) */return draw(rec,st,best,'walk',S.dir,Math.floor(S.dist/Math.max(1,per)),{s:!!ws});}
+ if(frontIdle(S.lastWalk,enemyVec())&&P277()?.walkS?.()&&wsRes()){S.dir='s';stats.frontIdle=(stats.frontIdle||0)+1;return draw(rec,st,best,'walk','s',FRONT_IDLE_FRAME,{s:true,breath:true,hold:true});}/* R1219b: 앞모습 서기 */
  const fd=enemyDir()||S.dir;S.dir=fd;const P=P277();if(P){P.face(fd);const I=window.__STORYWORLD_HWANDO_R283__?.idle?.(P),dd=I?I.dir:fd;S.dir=dd;/* R354: 날개(R101) 등이 실제로 그린 선 자세 방향을 보게 */const w=res('walk',dd)?.A;if(!w)return;P.idle(dd);return draw(rec,st,best,'walk',dd,I?Math.min(I.frame,w.n-1):w.n-1);}/* R283: 좌·우 걷기의 선 자세 칸 *//* R277: 걷기 마지막 칸으로 멈춘 대기 */const a=res('idle',fd)?.A;if(!a)return;
  return draw(rec,st,best,'idle',fd,frameAt(a.ms,t*ms,true),{breath:true});}
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
  try{if(on&&st>=0&&solo()&&player?.hero==='hwando'&&player.hp>0){loadIndex();if(P277()?.walkS?.())loadWalkS();if(IDX)choose(rec,st);}}catch(e){fail(e);}return r;};}
 loadIndex();
-window.__STORYWORLD_HWANDO_R271__=Object.freeze({revision:REV,pure:Object.freeze({walkTail,tex,sheath}),active:()=>on&&!!IDX&&typeof player==='object'&&player?.hero==='hwando'&&solo(),index:()=>IDX,state:()=>({...S,swing:S.swing&&{...S.swing},hit:S.hit&&{...S.hit}}),
+window.__STORYWORLD_HWANDO_R271__=Object.freeze({revision:REV,pure:Object.freeze({walkTail,tex,sheath,frontIdle}),active:()=>on&&!!IDX&&typeof player==='object'&&player?.hero==='hwando'&&solo(),index:()=>IDX,state:()=>({...S,swing:S.swing&&{...S.swing},hit:S.hit&&{...S.hit}}),
  inspect:()=>({revision:REV,on,ready:!!IDX,stats:{...stats},lastError}),set:v=>{on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}});
 })();

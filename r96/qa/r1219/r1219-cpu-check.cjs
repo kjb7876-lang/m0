@@ -24,6 +24,16 @@ if(typeof sh==='function'){
  ok('경계: 빈 값·문자열 아님 통과',sh('')===''&&sh(undefined)===undefined&&sh(null)===null);
  ok('R1063 tex 는 아래 걷기를 여전히 바꾸지 않는다(서로 독립)',tex(SRC)===SRC);
  const off=boot({'storyworld.r1219.hwandoSheath':'{"on":false}'});ok('끄기 키로 원래 칼 뽑은 그림',off?.pure?.sheath?.(SRC)===SRC);
+ const fi=H?.pure?.frontIdle;ok('pure.frontIdle 노출(아래 방향 대기)',typeof fi==='function');
+ if(typeof fi==='function'){
+  ok('아래로 걷다 멈추고 적 없음 → 앞모습 서기',fi('s',null)===true);
+  ok('아래로 걷다 멈추고 적이 아래쪽 → 앞모습 서기',fi('s',[10,80])===true);
+  ok('적이 옆쪽(가로가 큼) → 좌·우 선 자세(R283 그대로)',fi('s',[90,20])===false&&fi('s',[-90,-20])===false);
+  ok('적이 위쪽 → 좌·우 선 자세',fi('s',[5,-80])===false);
+  ok('좌·우·위로 걷다 멈춤 → 앞모습 아님',['e','w','n'].every(d=>fi(d,null)===false));
+  ok('경계: 잘못된 벡터·NaN 은 적 없음과 같게',fi('s',[NaN,1])===true&&fi('s','x')===true&&fi(undefined,null)===false);
+  const offI=boot({'storyworld.r1219.hwandoSheath':'{"on":false}'});ok('끄기 키면 앞모습 서기도 끔',offI?.pure?.frontIdle?.('s',null)===false);}
+ ok('대기에서 frontIdle 을 묻고 앞모습 칸을 숨쉬기로 그린다',/frontIdle\(S\.lastWalk/.test(src)&&/FRONT_IDLE_FRAME/.test(src)&&/breath:true/.test(src));
  const bad=boot({'storyworld.r1219.hwandoSheath':'{bad'});ok('망가진 설정값이면 켜짐(기본)',bad?.pure?.sheath?.(SRC)===DRV);}
 ok('그리기·미리 받기 둘 다 sheath() 를 거친다',/p=sheath\(tex\(/.test(src)&&/if\(WS\)image\(sheath\(WS_BASE\+WS\.file\)\)/.test(src));
 ok('판정·피해·쿨다운 쓰기 없음(R1219 줄)',!/R1219[^\n]*(player\.hp\s*=|damage\s*=|attackCD\s*=)/.test(src));

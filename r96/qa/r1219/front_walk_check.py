@@ -5,7 +5,8 @@
  A 정적: r271 이 R436 아래 걷기를 R1219 파생본으로 바꿔 그리고·미리 받는다, 끄기 키가 있다, EGO 파일은 손대지 않는다.
  B 칼날 없음: 칸마다 몸 바깥(가는 조각)의 강철빛 무채색 픽셀 ≤ 6, 손 위 오른쪽(칼날이 지나던 곳) 무채색 ≤ 12.
  C 구멍 없음: 칼날을 지운 자리 중 몸 윤곽(닫힘) 안쪽은 메워서 투명 ≤ 4, 칼날 아닌 옷 픽셀 지움 ≤ 40.
- D 나머지 그대로: 머리(위 38줄 × 왼쪽 80열 — 오른쪽은 칼끝이 지나던 곳)·다리와 발(아래 70줄)은 원본과 바이트까지 같다 → 몸 키·발 기준점·윤곽 불변.
+ D 다리·발(아래 60줄)은 원본과 바이트까지 같다 → 발 기준점·딛는 발 불변.
+ E 2차(사용자 10:20Z "환도영웅 아래모션 개선해서 적용해줘"): 상체가 걸음 박자에 맞춰 1~3px 오르내리고 1~3.5px 좌우로 체중을 옮긴다(굳은 팔·어깨 완화).
  E 칸 일관성: 머리 꼭대기 흔들림 ≤ 2px, 몸통 가운데 x 흔들림 ≤ 1.5px, 몸 넓이 변화 ≤ 6%, 칼집(적갈색) 픽셀이 칸마다 있다.
  F 경계: 칸 수 6, 시트 크기 원본과 같음, 알파가 0 인 곳 색은 상관없음.
 """
@@ -54,20 +55,25 @@ for k in range(N):
     up=sum(1 for y in range(0,100) for x in range(72,CW) if steel(P[x,y]))
     ok(up<=12,f'B2 칸{k} 손 위 오른쪽(x≥72, 소매 밝은 흰빛 제외) 무채색 {up}px (>12)')
     Q=s.load()
-    holes=sum(1 for y in range(40,130) for x in range(CW) if C[x,y] and P[x,y][3]<=40 and Q[x,y][3]>40)
-    ok(holes<=4,f'C1 칸{k} 칼날 지운 자리 몸 안 구멍 {holes}px (>4)')
+    holes=sum(1 for y in range(40,130) for x in range(50,CW) if C[x,y] and P[x,y][3]<=40 and Q[x,y][3]>40)
+    ok(holes<=4,f'C1 칸{k} 칼날 지운 자리(몸통 가운데 오른쪽, 칼이 지나던 쪽) 몸 안 구멍 {holes}px (>4)')
     lost=sum(1 for y in range(CH) for x in range(CW) if Q[x,y][3]>40 and P[x,y][3]<=40 and not steel(Q[x,y]) and not (Q[x,y][3]<200))
     ok(lost<=40,f'C2 칸{k} 칼날 아닌 옷 픽셀 지워짐 {lost}px (>40)')
     nz=lambda im:[v if v[3] else (0,0,0,0) for v in flat(im)]
     same=lambda y0,y1,x1=CW:nz(c.crop((0,y0,x1,y1)))==nz(s.crop((0,y0,x1,y1)))
-    ok(same(0,38,80),f'D1 칸{k} 머리(왼쪽 80열 × 위 38줄) 바뀜');ok(same(CH-70,CH),f'D2 칸{k} 다리·발 줄 바뀜')
+    ok(same(CH-60,CH),f'D2 칸{k} 다리·발(아래 60줄) 바뀜 — 발 기준점·딛는 발은 그대로여야 함')
     ys=[y for y in range(CH) if any(O[x,y] for x in range(CW))];tops.append(ys[0])
     xs=[x for y in range(ys[0]+30,ys[0]+100) for x in range(CW) if O[x,y]];cxs.append(sum(xs)/len(xs))
     areas.append(sum(1 for v in flat(o) if v))
     sheath=sum(1 for y in range(85,115) for x in range(55,95) if (lambda r,g,b,al:al>200 and r-b>45 and r<190 and g<140)(*P[x,y]))
     ok(sheath>=25,f'E4 칸{k} 칼집(적갈색) 픽셀 {sheath} (<25)')
-ok(max(tops)-min(tops)<=2,f'E1 머리 꼭대기 흔들림 {max(tops)-min(tops)}px')
-ok(max(cxs)-min(cxs)<=1.5,f'E2 몸통 가운데 흔들림 {max(cxs)-min(cxs):.2f}px')
+ok(1<=max(tops)-min(tops)<=3,f'E1 걸음 박자 머리 오르내림 {max(tops)-min(tops)}px (1~3px 이어야 — 0 이면 굳은 상체)')
+ok(1.0<=max(cxs)-min(cxs)<=3.5,f'E2 몸통 좌우 체중 이동 {max(cxs)-min(cxs):.2f}px (1~3.5px 이어야)')
+# E5 리듬: 딛는 칸(0·3)이 가장 낮고, 체중이 앞 칸 셋(0~2)과 뒤 칸 셋(3~5)에서 서로 반대쪽으로 옮겨진다
+ok(tops[0]>=max(tops[1],tops[2]) and tops[3]>=max(tops[4],tops[5]),f'E5 딛는 칸(0·3)이 가장 낮지 않음 {tops}')
+ok((sum(cxs[0:3])/3-sum(cxs)/6)*(sum(cxs[3:6])/3-sum(cxs)/6)<0,f'E6 좌우 체중 이동이 걸음마다 번갈지 않음 {[round(v,1) for v in cxs]}')
+# E7 이웃 칸 사이 몸통 이동은 1.6px 안(튀지 않게)
+ok(all(abs(cxs[i]-cxs[(i+1)%N])<=1.6 for i in range(N)),f'E7 이웃 칸 몸통 이동 1.6px 초과 {[round(v,1) for v in cxs]}')
 ok((max(areas)-min(areas))/max(areas)<=.06,f'E3 몸 넓이 변화 {(max(areas)-min(areas))/max(areas):.3f}')
 print('tops',tops,'cx',[round(v,1) for v in cxs],'area',areas)
 for f in fails: print('FAIL',f)
