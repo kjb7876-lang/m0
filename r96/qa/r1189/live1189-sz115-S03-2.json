@@ -1,0 +1,60 @@
+{
+ "zone": "dist04 / \"sz115-S03-2\"",
+ "names": {
+  "관람석 거울의 잔영": {
+   "rule": null,
+   "draws": [
+    [
+     "r200/shades/mirror-shade.webp",
+     "saturate(.8)"
+    ]
+   ]
+  },
+  "검은 고리의 대련생": {
+   "rule": null,
+   "draws": [
+    [
+     "r1189/shades/ring-sparrer.webp",
+     "saturate(.8)"
+    ]
+   ]
+  },
+  "세뇌당한 기억의 조각": {
+   "rule": null,
+   "draws": [
+    [
+     "",
+     "none"
+    ],
+    [
+     "",
+     "none"
+    ],
+    [
+     "",
+     "none"
+    ]
+   ]
+  },
+  "흑백 잔상의 투사": {
+   "rule": null,
+   "draws": [
+    [
+     "r200/shades/mono-fighter.webp",
+     "saturate(.8)"
+    ]
+   ]
+  }
+ },
+ "inspect": {
+  "revision": "R1183-dup-tint-1",
+  "on": true,
+  "stats": {
+   "tinted": 0,
+   "draws": 0,
+   "wraps": 13,
+   "errors": 0
+  },
+  "lastError": null
+ }
+}

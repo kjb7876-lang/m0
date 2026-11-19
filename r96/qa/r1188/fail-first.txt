@@ -1,0 +1,19 @@
+FAIL ① tram-passenger 새 시트 (assets/r200/shades/tram-passenger.webp)
+FAIL ① tram-passenger 256 칸
+FAIL ① tram-passenger 발 236·보이는 키
+FAIL ① tram-passenger 공격 칸 5~10 그대로
+FAIL ① cephalopod-invader 새 시트 (assets/r200/shades/cephalopod-invader.webp)
+FAIL ① cephalopod-invader 256 칸
+FAIL ① cephalopod-invader 발 236·보이는 키
+FAIL ① cephalopod-invader 공격 칸 5~10 그대로
+FAIL ① mannequin 새 시트 (assets/r200/shades/mannequin.webp)
+FAIL ① mannequin 256 칸
+FAIL ① mannequin 발 236·보이는 키
+FAIL ① mannequin 공격 칸 5~10 그대로
+FAIL ③ tram-passenger 발 줄 236 (235,236)
+FAIL ③ cephalopod-invader 발 줄 236 (235,236)
+FAIL ③ mannequin 발 줄 236 (235,236)
+FAIL ④ sync 등록
+FAIL ④ verify 자산 접두
+FAIL ④ pages.yml
+FAILED 18/30

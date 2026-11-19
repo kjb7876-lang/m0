@@ -515,6 +515,8 @@ jobs:
         run: node r96/qa/r600/r600-cpu-check.cjs
       - name: R1181 mobile survival gem draw thinning CPU check
         run: node r96/qa/r1181/r1181-gem-thin-cpu-check.cjs
+      - name: R1195 mob cut feet and edges covered by ink mist CPU check
+        run: node r96/qa/r1195/feet-ink-cpu-check.cjs
       - name: R976 samong first region pixel art to painted assets CPU check
         run: node r96/qa/r976/r976-cpu-check.cjs
       - name: R1177 samong episode pixel leftovers (S-06 pixel mobs, pixelfx sheets) to painted art CPU check
@@ -707,12 +709,20 @@ jobs:
         run: node r96/qa/r1182/hit-death-alias-cpu-check.cjs
       - name: R1183 duplicate mobs tinted until Dots CX-0163DU art arrives (body image only, filters the 3D recorder accepts) CPU check
         run: node r96/qa/r1183/dup-tint-cpu-check.cjs
+      - name: R1186 dream-layer R248 mobs m032 + m049 painted walk/attack = Dots CX-0161DR r1 ROUGH (R1179 path/body overlay; art only) CPU check
+        run: node r96/qa/r1186/dream-mobs-cpu-check.cjs
+      - name: R1187 Dots CX-0163DU art swapped in for the duplicate mobs (same cell layout, tint kept only until the sheet loads) CPU check
+        run: node r96/qa/r1187/dup-art-cpu-check.cjs
       - name: R1196 long virtual run (1h/3h fake clock) - R613 gait and R1183 tint rewrap capped so the drawEnemy chain stays bounded and enemies and bosses keep drawing CPU check
         run: node r96/qa/r1196/long-run-wrap-check.cjs
       - name: R1196 HUD rewrap capped (R420 access and R1046 EGO form no longer re-wrap updateHUD around each other forever; 1h/3h fake clock) CPU check
         run: node r96/qa/r1196/hud-wrap-check.cjs
       - name: R1184 S-06 invader (m077, R248 direct draw) hit4 + death6 = Dots CX-0162IV, MD-31 nightmare scout death6 = Dots CX-0115MD (ROUGH, colour matched; art only) CPU check
         run: node r96/qa/r1184/iv-md31-cpu-check.cjs
+      - name: R1188 Samong shades that were cut off at the cell edges use the redrawn Dots CX-0164CR 256px sheets (same 11-cell order, feet at y236) CPU check
+        run: node r96/qa/r1188/uncut-shades-cpu-check.cjs
+      - name: R1189 the other six cut-off Samong shades use the redrawn Dots CX-0164CR sheets (walk 0-4, attack 5-10 as drawn) CPU check
+        run: node r96/qa/r1189/uncut-shades-cpu-check.cjs
       - name: R1098 samong faces (Michaela final boss uses her own sheet, R161 puppet repainted as an ink-and-white-thread doll so it no longer looks like Hwando) CPU check
         run: node r96/qa/r1098/r1098-cpu-check.cjs
       - name: R1090 character ink tint (hero and mob body images only, follows the map ink wash, settings toggle, effects and telegraphs untouched) CPU check
@@ -763,6 +773,10 @@ jobs:
         run: node r96/qa/r1012/r1012-cpu-check.cjs
       - name: R1178 samong episode lag (R302 palette memo re-checks mature keys 1 in 64) CPU check
         run: node r96/qa/r1178/r1178-cpu-check.cjs
+      - name: R1197 draw lag (R302 value-identical palette decisions are not mixed keys) CPU check
+        run: node r96/qa/r1197/r1197-cpu-check.cjs
+      - name: R1200 draw lag (command meshes reuse their mesh when only the image changes) CPU check
+        run: node r96/qa/r1200/r1200-cpu-check.cjs
       - name: R1014 survival mid-boss no longer sticks at the 70% phase gate under the 6%/s damage cap CPU check
         run: node r96/qa/r1014/r1014-cpu-check.cjs
       - name: R1135 survival boss count per difficulty (easy 1, normal 2, hard 3, nightmare 6), per-boss balance with the 66x floor, spread spawn spots CPU check
