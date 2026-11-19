@@ -10577,9 +10577,14 @@
     "assets/r1177/mob-memory-dots-12.webp",
     "boss-fx-vis-r1192.js",
     "mob-dup-tint-r1183.js",
+    "dream-mob-art-r1193.js",
+    "assets/r1184/iv-m077-hit4.webp",
+    "assets/r1184/iv-m077-death6.webp",
+    "assets/r1184/md-31-timeless-silver-scout-death6.webp",
+    "assets/r1184/index.json",
+    "assets/r1186/mobs/index.json",
     "assets/r1186/mobs/m032.webp",
     "assets/r1186/mobs/m049.webp",
-    "assets/r1186/mobs/index.json",
     "assets/r1187/mobs/du05-rag-golem.webp",
     "assets/r1187/mobs/du07-reverse-paper.webp",
     "assets/r1187/mobs/du08-reverse-photo.webp",
@@ -11663,5 +11668,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "9510934ba994cf278e145b78d555e05830b9ba20e470a4c84633c6a5dc1fd8f3"
+  "runtimeManifestSHA256": "05ec9ce0501d44a905e7992b1bdbd3c81452ef3a67ea7c00364136359e4d3ff7"
 }

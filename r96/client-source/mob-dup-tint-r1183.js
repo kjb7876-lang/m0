@@ -53,7 +53,10 @@ function tintCall(c,rule,base,args){const img=args[0],src=srcOf(img);
  if(!isBody)return base.apply(c,args);
  const art=ART[duOf(rule)];if(art&&src&&art[0].test(src)){const im=artImg(art[1]);if(im){stats.swapped++;const a2=args.slice();a2[0]=im;return base.apply(c,a2);}}
  const prev=c.filter;stats.draws++;try{c.filter=(prev&&prev!=='none'?prev+' ':'')+rule[3];return base.apply(c,args);}finally{c.filter=prev;}}
-function wrap(){if(typeof drawEnemy!=='function'||drawEnemy.__r1183)return typeof drawEnemy==='function';const base=drawEnemy;
+// R1196: 다시 감싸기는 최대 MAX_WRAPS 번. 맨 바깥을 고집하는 R613 걷기(1초마다)와 서로 번갈아 감싸 사슬이 1시간에 수천 겹이 되어 스택이 넘쳤다.
+//  색조는 사슬 어디에 있어도 ctx.drawImage 를 바꿔 끼우므로 맨 바깥일 필요가 없다.
+const MAX_WRAPS=4;
+function wrap(){if(typeof drawEnemy!=='function'||drawEnemy.__r1183)return typeof drawEnemy==='function';if(stats.wraps>=MAX_WRAPS)return true;const base=drawEnemy;
  // 다른 덧씌우기가 우리 껍데기를 감싸면 다시 감싸게 되어 사슬에 여러 번 들어간다 → 이미 칠하는 중이면 그냥 넘긴다(겹쳐 칠하기 방지).
  const w=function(e,...a){if(active)return base.apply(this,[e,...a]);let rule=null;try{rule=ruleFor(e,zoneId());}catch(err){fail(err);}
   const c=rule&&typeof ctx!=='undefined'?ctx:null;if(!c||typeof c.drawImage!=='function')return base.apply(this,[e,...a]);

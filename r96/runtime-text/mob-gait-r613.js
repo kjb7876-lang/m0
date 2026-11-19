@@ -60,7 +60,9 @@ function installPose(){const chain=window.__STORYWORLD_HOSPITAL_CHARGE_R52__;if(
 // 바깥에 늦게 감싼 그림 공급자(sin-boss-art-r463 등)가 그리는 몸까지 보려면 이 감싸기가 맨 바깥이어야 한다 → 1초마다 맨 위가 아니면 다시 감싼다.
 //  안쪽에 남은 옛 감싸기는 depth 로 그냥 통과시킨다(두 번 판정·두 번 자세 없음).
 let depth=0;
-function installDraw(){if(typeof drawEnemy!=='function')return false;if(drawEnemy.__r613)return true;const base=drawEnemy;
+// R1196: 다시 감싸기 상한. 다른 덧씌우기도 '맨 바깥이 아니면 다시 감싸기'를 하면 둘이 번갈아 감싸 사슬이 끝없이 길어진다(R1183 과 1시간 4800겹 → 스택 넘침).
+const MAX_WRAPS=12;
+function installDraw(){if(typeof drawEnemy!=='function')return false;if(drawEnemy.__r613)return true;if((stats.wraps||0)>=MAX_WRAPS)return true;const base=drawEnemy;
  const w=function(e,...a){if(depth>0||!eligible(e))return base.call(this,e,...a);depth++;try{return draw.call(this,base,e,a);}finally{depth--;}};
  w.__r613=true;try{drawEnemy=w;}catch(_){}try{window.drawEnemy=w;}catch(_){}stats.wraps=(stats.wraps||0)+1;return true;}
 function draw(base,e,a){let s=null,r=null,hook=null,best=null;

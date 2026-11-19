@@ -1,0 +1,50 @@
+{
+ "schema": "storyworld.r1184.dots/v1",
+ "request": "CX-0162IV r1 ROUGH + CX-0115MD MD-31 r1 ROUGH",
+ "assets": [
+  {
+   "file": "assets/r1184/iv-m077-hit4.webp",
+   "source": "Dots CX-0162IV m077 hit4 r1 ROUGH",
+   "sourceSha256": "3f67225588b4c5858fe47d5f3027c0a83b18da361268e235cb6235c5b546cf5c",
+   "sha256": "7fbfc33e9e44fc41abaa575559e39a0b61622fdf844041f9a2bd0189c6985505",
+   "bytes": 77098,
+   "use": "피격 4칸(R1156 표, R248 직접 그리기)",
+   "gains": [
+    [
+     0.954,
+     1.005,
+     1.014
+    ],
+    [
+     0.944,
+     0.992,
+     1.001
+    ],
+    [
+     0.956,
+     1.004,
+     1.012
+    ]
+   ],
+   "finalArt": false
+  },
+  {
+   "file": "assets/r1184/iv-m077-death6.webp",
+   "source": "Dots CX-0162IV m077 death6 r1 ROUGH",
+   "sourceSha256": "e0eb3db3ddb82eac381c4df2fd12b5e725e47a59436ab23af62baee38b3ad9fe",
+   "sha256": "d72cb2c28ef9a449469e73b7e1627b2d2119fdc3cd2454e3b38b5b65b6dd610a",
+   "bytes": 76682,
+   "use": "사망 6칸(R1065 사망 표 IV-01)",
+   "finalArt": false
+  },
+  {
+   "file": "assets/r1184/md-31-timeless-silver-scout-death6.webp",
+   "source": "Dots CX-0115MD r1 MD-31 death6 ROUGH",
+   "sourceSha256": "fb5469fee52c16ed014074bcb83532a8ce8e68618aaaa541bc0f01e26d6771bb",
+   "sha256": "1407495febf0bfd3109ecd921bd52a37bf71ce914462eb1da04ff40bca5311d9",
+   "bytes": 300590,
+   "use": "사망 6칸(R1065 사망 표 MD-31)",
+   "finalArt": false
+  }
+ ]
+}
