@@ -14,7 +14,7 @@
 //  점검: window.__STORYWORLD_MOB_DASH_R1221__.inspect()
 (()=>{'use strict';
 if(window.__STORYWORLD_MOB_DASH_R1221__)return;
-const REV='R1221-mob-dash-2',KEY='storyworld.r1221.dash',ORD_GAP=45,BOSS_GAP=15.4,R286_GAP=45,NEAR=2.6,TINY=1e-6,MARK='__r1221';
+const REV='R1221-mob-dash-3',KEY='storyworld.r1221.dash',ORD_GAP=45,BOSS_GAP=15.4,R286_GAP=45,NEAR=2.6,TINY=1e-6,MARK='__r1221';
 let prefs={on:true,ordinary:'rare'};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object')prefs={...prefs,...s};}catch(_){}
 const stats={r52Seen:0,r52Blocked:0,r52Allowed:0,r286Pushed:0,r286Started:0,rangedSkipped:0,rewraps:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
@@ -39,17 +39,21 @@ function wrapR52(){const o=window.__STORYWORLD_HOSPITAL_CHARGE_R52__;if(!o||type
  const copy={...o,tickEnemy};Object.defineProperty(copy,MARK,{value:true});
  try{window.__STORYWORLD_HOSPITAL_CHARGE_R52__=Object.freeze(copy);stats.rewraps++;}catch(err){fail(err);}}
 // R286: 돌진 시작을 보고 다음 차례를 뒤로 민다
-function r286(){if(!prefs.on)return;let list;try{list=room?.enemies;}catch(_){return;}if(!Array.isArray(list))return;const t=now();
+// 끄면(검수 11-19): R1221 이 마지막으로 직접 쓴 값이 그대로 남은 몹만 원래 R286 차례(처음 본 값 또는 R286 기본 간격)로 되돌린다. 다른 쪽이 바꾼 값은 두지 않는다.
+const SET=(e,s,r,v,base)=>{if(r.set286==null||s.nextDash!==r.set286)r.base286=base;s.nextDash=v;r.set286=v;};
+function restore286(list,t){for(const e of list){const s=e?.r286,r=e&&S.get(e);if(!s||!r||r.set286==null)continue;if(s.nextDash===r.set286)s.nextDash=Math.min(r.set286,Math.max(t,r.base286??t));r.set286=null;r.base286=null;}}
+function r286(){let list;try{list=room?.enemies;}catch(_){return;}if(!Array.isArray(list))return;const t=now();if(!prefs.on){restore286(list,t);return;}
  for(const e of list){if(!e||!(e.hp>0)||major(e))continue;const s=e.r286;
   if(!s){try{if(window.__STORYWORLD_MOB_MOTION_R286__?.kindOf?.(e)!=='attack-only')continue;}catch(_){continue;}
-   const r=rec(e),rg0=ranged(e);r.hold286=rg0;e.r286={mode:null,t0:0,nextDash:rg0?t+1e6:t+R286_GAP*(.5+.5*hash(e.id??e.name)),nextShot:t+1.5+hash((e.id??'')+'s')*6.6,side:hash(e.id)<.5?1:-1};r.p286=true;continue;}
+   const r=rec(e),rg0=ranged(e);r.hold286=rg0;e.r286={mode:null,t0:0,nextDash:0,nextShot:t+1.5+hash((e.id??'')+'s')*6.6,side:hash(e.id)<.5?1:-1};
+   SET(e,e.r286,r,rg0?t+1e6:t+R286_GAP*(.5+.5*hash(e.id??e.name)),t+hash(e.id)*2.2);r.p286=true;continue;}
   const r=rec(e);
   if(s.mode==='charge'||s.mode==='dash'){if(r.t0286!==s.t0){r.t0286=s.t0;r.last286=t;stats.r286Started++;}continue;}
   if(s.mode)continue;
   const rg=ranged(e),want=rg?t+1e6:r.last286+R286_GAP;
   // 원거리 단계가 끝나면 걸어 둔 아주 먼 차례를 보통 간격으로 되돌린다
-  if(!rg&&r.hold286){r.hold286=false;s.nextDash=Math.max(want,t);continue;}if(rg)r.hold286=true;
-  if(!(s.nextDash>=want)){s.nextDash=want;stats.r286Pushed++;}}}
+  if(!rg&&r.hold286){r.hold286=false;SET(e,s,r,Math.max(want,t),t);continue;}if(rg)r.hold286=true;
+  if(!(s.nextDash>=want)){SET(e,s,r,want,s.nextDash);stats.r286Pushed++;}}}
 function tickWrap(){if(typeof tick!=='function'||tick[MARK])return;const base=tick;
  const w=function(...a){try{wrapR52();r286();}catch(err){fail(err);}const res=base.apply(this,a);try{r286();}catch(err){fail(err);}return res;};
  Object.defineProperty(w,MARK,{value:true});try{tick=w;}catch(_){}try{window.tick=w;}catch(_){}}

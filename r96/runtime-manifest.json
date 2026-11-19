@@ -13478,6 +13478,56 @@
       "sha256": "8e7db9dc2db6b7e0e27fd08435719eb87b1f98e065fb13a435ce274603a0fc04"
     },
     {
+      "path": "assets/r1221/side/kair-guardian-05-side.webp",
+      "bytes": 133512,
+      "sha256": "bb7e4c3f572b96e7c60dc458ae30dd7ede565a92a64d97b841792093f830297e"
+    },
+    {
+      "path": "assets/r1221/side/kair-guardian-07-side.webp",
+      "bytes": 129528,
+      "sha256": "355fbd8c2b50f460d3d0899afc9e912755bb9ea0a29597a4f7b294fae98c2416"
+    },
+    {
+      "path": "assets/r1221/side/kair-guardian-08-side.webp",
+      "bytes": 119212,
+      "sha256": "1481eb03e8ea6f51ffa1f585ab6df80cc22281214f7ed849f138a7f7a3de20f9"
+    },
+    {
+      "path": "assets/r1221/side/kair-guardian-10-side.webp",
+      "bytes": 140980,
+      "sha256": "c7e327071b9ffa2754d4dff8c0e272e054a9c5d5e6680e08664ac101d5bf95c2"
+    },
+    {
+      "path": "assets/r1221/side/kair-guardian-13-side.webp",
+      "bytes": 113400,
+      "sha256": "9ed1ce5d4233e8856fda3503af78ad4583393c98dce0594d17d8bad192d7d8ef"
+    },
+    {
+      "path": "assets/r1221/side/kair-guardian-15-side.webp",
+      "bytes": 205828,
+      "sha256": "09d5120ba0cfc5757a661116a1d4f6185587a4ac2e5f1492a99887534afc3a5c"
+    },
+    {
+      "path": "assets/r1221/side/kair-guardian-16-side.webp",
+      "bytes": 217070,
+      "sha256": "8544daca8f0a3f8d42ad2dc3f0e67b37df5a46b59dabc3d42b79115bf6ab311d"
+    },
+    {
+      "path": "assets/r1221/side/kair-guardian-20-side.webp",
+      "bytes": 200110,
+      "sha256": "e021a81970af6fdcc705b6c68d3912ad340cff2478bea728b0370a3b279c98e9"
+    },
+    {
+      "path": "assets/r1221/side/kair-guardian-34-side.webp",
+      "bytes": 130220,
+      "sha256": "8e23bf847481341d9885d9ce677592e507fb82c9535a9b2d70f046707cd59c9c"
+    },
+    {
+      "path": "assets/r1221/side/kair-guardian-40-side.webp",
+      "bytes": 165882,
+      "sha256": "6c8d467488d50e8eb313ec10efb13a3abf42b32d50074aa6808231097a41b3aa"
+    },
+    {
       "path": "assets/r1221/side/swamp-horned-lord-side.webp",
       "bytes": 130204,
       "sha256": "2a6028b324270490c89477909aa4ec09aca477859a122d0aa563df83f4a9355b"
@@ -56054,8 +56104,8 @@
     },
     {
       "path": "mob-dash-r1221.js",
-      "bytes": 6731,
-      "sha256": "9dd38ef065ecf1221729eca199c10b0d8595d51765987c1eb0cafcc3db18a633"
+      "bytes": 7357,
+      "sha256": "dcdcbca899171c233974cf835ad543b2438d8779bf4eb94a3070f3c3448c7358"
     },
     {
       "path": "mob-death-r188.js",
@@ -56269,8 +56319,8 @@
     },
     {
       "path": "move-side-r1221-data.js",
-      "bytes": 1493,
-      "sha256": "3ea674d9762a406f23849a917a48d5020a488661c45e71eec49701640c49cee2"
+      "bytes": 4483,
+      "sha256": "a3120aedf1a5e0c9347aed6a66952a7847e6bfcb8439c2ba82b12e6b0a90bec5"
     },
     {
       "path": "music-box-r378.js",
@@ -57298,8 +57348,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11459,
-  "totalBytes": 1371766057,
+  "fileCount": 11469,
+  "totalBytes": 1373325415,
   "webHTMLSha256": "7436034cc2a37221a83b2214a468d8a9022acfe552586c606553989d07caa911",
   "largest": [
     {
