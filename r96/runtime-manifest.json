@@ -12948,6 +12948,26 @@
       "sha256": "21bd816cb1a6ddccda53bfd53bc199c6c694b1a4942de0f3644a73d975961c84"
     },
     {
+      "path": "assets/r1188/shades/cephalopod-invader.webp",
+      "bytes": 264988,
+      "sha256": "9152d2cd750ccf10978296f3071f4bf13c57bfe643ae071463c1265f36e95d6b"
+    },
+    {
+      "path": "assets/r1188/shades/index.json",
+      "bytes": 1933,
+      "sha256": "0472cc56a33b286ae087d79ebd53fa5f72ba8a9e14767e0d6d15f03b695f4026"
+    },
+    {
+      "path": "assets/r1188/shades/mannequin.webp",
+      "bytes": 175566,
+      "sha256": "ccb685f143eab8bafd45a52cef200bb966fb27e22850df4be50b28624df46d57"
+    },
+    {
+      "path": "assets/r1188/shades/tram-passenger.webp",
+      "bytes": 162474,
+      "sha256": "1449f5f2282974f439ded7b874d62d561a8fd5a7816bb6268d5e6a940027f5b6"
+    },
+    {
       "path": "assets/r119/heroes/gunner-n.webp",
       "bytes": 35746,
       "sha256": "1887e03e6fb23d2befc1cbb30f5b11d0984ca7fba0575a25a39a504490a0c867"
@@ -56344,8 +56364,8 @@
     },
     {
       "path": "samong-shades-r200.js",
-      "bytes": 6727,
-      "sha256": "d268ebb38242683f1fe8758dc590dd18068085710b63ef076abdec3f53b3d587"
+      "bytes": 7844,
+      "sha256": "597fc433e7189a066d1de8a410a9c5bd1611f6cf0a6eade0a2dd1540c4ae277e"
     },
     {
       "path": "samong-surge-r571.js",
@@ -56923,8 +56943,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11384,
-  "totalBytes": 1367303152,
+  "fileCount": 11388,
+  "totalBytes": 1367909230,
   "webHTMLSha256": "f774ae026db0057bb3b7ad2af5f4c70f8f3aeb392881f54e7b614dfe2fb9a4b8",
   "largest": [
     {
