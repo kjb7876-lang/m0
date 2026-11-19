@@ -13473,6 +13473,46 @@
       "sha256": "22160085186637605ca8836691ff76612e9cefd34c083db2bf09ef558e62171b"
     },
     {
+      "path": "assets/r1224/float/b19d67bb1973-siren-idle.webp",
+      "bytes": 105030,
+      "sha256": "b423c08f3ca51aba59c35dc58dba516de8d6a06963d8e115dc03f94318be0d03"
+    },
+    {
+      "path": "assets/r1224/float/blue-executor-idle.webp",
+      "bytes": 144138,
+      "sha256": "5a62fde8c6e24a02ae78615b4ae19b0eaacc678c539b30ca3b33434ff855b50d"
+    },
+    {
+      "path": "assets/r1224/float/c101-mid.webp",
+      "bytes": 128356,
+      "sha256": "29968d972b21208e672568b862b57828ad35be7ee584d35483e2c94a456b186a"
+    },
+    {
+      "path": "assets/r1224/float/c102-boss-poses.webp",
+      "bytes": 223526,
+      "sha256": "56b370085af6d83eff8fb97a3b35c37de2f3569cccf75e5452b43aa0d02777cf"
+    },
+    {
+      "path": "assets/r1224/float/c103-mid-poses.webp",
+      "bytes": 61332,
+      "sha256": "3bae673d98304454186922ae45b7a03c94fe2f8b14726e33e032c2ef0b35249b"
+    },
+    {
+      "path": "assets/r1224/float/c105-mid.webp",
+      "bytes": 135536,
+      "sha256": "cc66a8a78fd54ae211bb1ebcf46888cd4c3577fbe41b387dadfb43b2625171a2"
+    },
+    {
+      "path": "assets/r1224/float/c106-mid.webp",
+      "bytes": 139156,
+      "sha256": "227c13381186f81cd1c7a08edd88e2de884e02a9a964da810f6ca9c5ebafbfb9"
+    },
+    {
+      "path": "assets/r1224/float/mb-kair01-v31231.webp",
+      "bytes": 105568,
+      "sha256": "4298189d0c3ec2e45a1cf8420735651dae47c9b6de9913636b905b6dd9f26d15"
+    },
+    {
       "path": "assets/r126/props/badge.webp",
       "bytes": 25464,
       "sha256": "fd12f3e8efd3654d060607145cbd6f6f55728f7fd65afd5a9f4d3d1507ae0281"
@@ -55839,8 +55879,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6582601,
-      "sha256": "35e2e108e4122cb883241936b2d097d75def00ae01cbf25a5bbea4fde53ddfb3"
+      "bytes": 6582701,
+      "sha256": "cdc7167c42dfb07f4243c2fc8a80859a2ff4fec42b4d4341e1d36cdb819ab975"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -56251,6 +56291,11 @@
       "path": "move-float-r1029-data.js",
       "bytes": 15869,
       "sha256": "17b11f56503ad0d9bd180913b77562ed54a75f434a4fd4789a5150c288f2c734"
+    },
+    {
+      "path": "move-float-r1224-data.js",
+      "bytes": 2066,
+      "sha256": "1df1f73587351c092942126db6fcbadf737357ade82446fd29224276efe94c5b"
     },
     {
       "path": "music-box-r378.js",
@@ -56953,6 +56998,11 @@
       "sha256": "45cd0c5dd21b00fe8a67372ece3c276e72d736ec8c91b07c30fbd872cd8162de"
     },
     {
+      "path": "summon-follow-r1224.js",
+      "bytes": 6839,
+      "sha256": "acc3c946aea46a8c5b60fcf4e943a74a6b9fd4b19d5e1364e7761242887d99de"
+    },
+    {
       "path": "summoning-r251.js",
       "bytes": 10430,
       "sha256": "7bf39f6e352e3b65c5173b252bfe92300e4f3aed2d62d19b5eb1329bba570ce8"
@@ -57278,9 +57328,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11455,
-  "totalBytes": 1371515497,
-  "webHTMLSha256": "35e2e108e4122cb883241936b2d097d75def00ae01cbf25a5bbea4fde53ddfb3",
+  "fileCount": 11465,
+  "totalBytes": 1372567144,
+  "webHTMLSha256": "cdc7167c42dfb07f4243c2fc8a80859a2ff4fec42b4d4341e1d36cdb819ab975",
   "largest": [
     {
       "path": "index.html",
