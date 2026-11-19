@@ -1,0 +1,11 @@
+PASS ① 파일 받기·해독 실패 0 (받은 수 33, 컨텍스트 running)
+PASS ② 표 27종(가끔 17·깔리는 5·카이로 3·보스 1·딸깍 1) 모두 준비 
+PASS ③ 종류마다 실제 소리가 남 
+PASS ③ 피크 .95 미만(깨짐 없음) 
+   렌더 피크·RMS {"amb_bell":{"pk":0.3314,"rmsDb":-31.3},"amb_boom":{"pk":0.474,"rmsDb":-31.1},"amb_brush":{"pk":0.1163,"rmsDb":-44.5},"amb_chime":{"pk":0.2636,"rmsDb":-39.3},"amb_chirp":{"pk":0.1687,"rmsDb":-46},"amb_clank":{"pk":0.1449,"rmsDb":-45.7},"amb_ding":{"pk":0.1635,"rmsDb":-37.1},"amb_drip":{"pk":0.1953,"rmsDb":-48.9},"amb_glass":{"pk":0.2547,"rmsDb":-40},"amb_glitch":{"pk":0.0874,"rmsDb":-43.8},"amb_gust":{"pk":0.099,"rmsDb":-40.7},"amb_heart":{"pk":0.486,"rmsDb":-36.2},"amb_music":{"pk":0.1253,"rmsDb":-42.6},"amb_steps":{"pk":0.1969,"rmsDb":-44.4},"amb_tick":{"pk":0.1274,"rmsDb":-54.8},"amb_tram":{"pk":0.1675,"rmsDb":-36.2},"amb_whisper":{"pk":0.0873,"rmsDb":-43.9},"banner_tick":{"pk":0.1112,"rmsDb":-55.7},"bed_drone":{"pk":0.7239,"rmsDb":-13.8},"bed_hum":{"pk":0.3451,"rmsDb":-21.9},"bed_leaves":{"pk":0.4276,"rmsDb":-20.6},"bed_room":{"pk":0.2033,"rmsDb":-24},"bed_wind":{"pk":0.2646,"rmsDb":-23.8},"boss_reveal":{"pk":0.4967,"rmsDb":-25.4},"kairo_chime":{"pk":0.0551,"rmsDb":-47.7},"kairo_tick":{"pk":0.064,"rmsDb":-60.8},"kairo_toll":{"pk":0.1289,"rmsDb":-39.4}}
+   R125 {"mood":"machine","bed":"hum","ev":1,"h":{"plays":25,"beds":6,"misses":0,"loads":33,"errors":0}}
+PASS ④ 사몽 기계 구역: 깔리는 소리(hum)를 파일로 깜
+PASS ④ 가끔 소리도 파일로(이벤트 1, 파일 재생 3)
+PASS ⑤ 페이지 오류 0 
+
+모두 통과

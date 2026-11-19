@@ -517,8 +517,12 @@ jobs:
         run: node r96/qa/r1181/r1181-gem-thin-cpu-check.cjs
       - name: R1195 mob cut feet and edges covered by ink mist CPU check
         run: node r96/qa/r1195/feet-ink-cpu-check.cjs
+      - name: R1210 S-06 디스토피아 몹 미래형 원거리 공격(레이저·방사능·음파) CPU check
+        run: node r96/qa/r1210/r1210-cpu-check.cjs
       - name: R1206 samong one mob one image, death look, one memory fragment, ink ground attack CPU check
         run: node r96/qa/r1206/r1206-cpu-check.cjs
+      - name: R1206b samong mood props lantern inkpost shard canvas stone from Dots art CPU check
+        run: node r96/qa/r1206b/r1206b-cpu-check.cjs
       - name: R976 samong first region pixel art to painted assets CPU check
         run: node r96/qa/r976/r976-cpu-check.cjs
       - name: R1177 samong episode pixel leftovers (S-06 pixel mobs, pixelfx sheets) to painted art CPU check
@@ -925,6 +929,8 @@ jobs:
         run: node r96/qa/r1174/r1174b-dots-cpu-check.cjs
       - name: R1155 EGO and persona own sound effects (numpy-synthesised; basic, Q/W/E/R, ink passives, celestial branches and ticks remapped only in hidden-hero form) CPU check
         run: node r96/qa/r1155/r1155-cpu-check.cjs
+      - name: R1212 code-synthesised sounds (R125 samong ambience beds and events, R356 kairo clock, R568 boss reveal boom, R123 banner tick) replaced by ElevenLabs files with synth fallback CPU check
+        run: node r96/qa/r1212/r1212-cpu-check.cjs
       - name: R1109 co-op relay build match (old R62 Render relay auto-fallback, default relay address) CPU check
         run: node r96/qa/r1109/r1109-cpu-check.cjs
       - name: R1092 story panel scene art (vertical-version scene paintings, ink-wash aware) CPU check

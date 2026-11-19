@@ -1,0 +1,7 @@
+FAIL 고음 줄임: 5kHz 위 비중 12% 이하 ["amb-steps-1.ogg undefined","amb-steps-2.ogg undefined","amb-bell-1.ogg undefined","amb-ding-1.ogg undefined","amb-gust-1.ogg undefined","amb-clank-1.ogg undefined","amb-boom-1.ogg undefined","amb-chirp-1.ogg undefined","amb-chirp-2.ogg undefined","amb
+FAIL 거슬림 줄임: 2~5kHz 35% 이하 ["amb-clank-1.ogg 0.446","amb-glitch-2.ogg 0.382"]
+FAIL 잘린(평평한) 파형 0 — 원본이 0dBFS 를 넘은 것은 걸러 냄 ["amb-steps-1.ogg undefined","amb-steps-2.ogg undefined","amb-bell-1.ogg undefined","amb-ding-1.ogg undefined","amb-gust-1.ogg undefined","amb-clank-1.ogg undefined","amb-boom-1.ogg undefined","amb-chirp-1.ogg undefined
+FAIL 스피커가 떨리는 초저음 몰림 85% 이하 ["amb-heart-1.ogg 0.958","amb-heart-2.ogg 0.966","boss-reveal-1.ogg 0.953"]
+FAIL 저음 소리 게인 1.2 이하(작은 스피커 찌그러짐) ["amb_heart 1.864","amb_boom 1.799","boss_reveal 1.431"]
+FAIL 유리음 재생 속도 1.2 이하(다시 높아지지 않게) 1.5
+36/42 FAIL

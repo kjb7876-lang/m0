@@ -34,8 +34,8 @@
     },
     {
       "path": "ambience-r125.js",
-      "bytes": 9345,
-      "sha256": "e2496f2599d2e606bc6b5be71a9781709daee6b7aa12e008fb2c996f879a1aa9"
+      "bytes": 9856,
+      "sha256": "e2ee727f37603b5ed843bbe9fe5a8d4ec1e3b4010233350333dcc9b269347b1d"
     },
     {
       "path": "ambience-r664.js",
@@ -13073,6 +13073,36 @@
       "sha256": "6c2785664e1226250da23a2c048043ca8c3b2cfeeb4c5d1c8259c7d3d8b3649a"
     },
     {
+      "path": "assets/r1206/props/canvas.webp",
+      "bytes": 31702,
+      "sha256": "1830e7cb43a5cd12b398521b1715006459c8f7d7b8e01249818ee1378537dc66"
+    },
+    {
+      "path": "assets/r1206/props/index.json",
+      "bytes": 2563,
+      "sha256": "4098d958bdf5d9cfd512725ed4800d4d514ea48a64e599100f65f58c91c86ddd"
+    },
+    {
+      "path": "assets/r1206/props/inkpost.webp",
+      "bytes": 22560,
+      "sha256": "fbda9f970f5197f28dce18f48117d5604f1008961dc6b43278210b5aefa62016"
+    },
+    {
+      "path": "assets/r1206/props/lantern.webp",
+      "bytes": 29786,
+      "sha256": "71dd0cb77552ba1cffe5297b1af25d623f4ea8d9c8e2d766066554418e9893fd"
+    },
+    {
+      "path": "assets/r1206/props/shard.webp",
+      "bytes": 23874,
+      "sha256": "2af0a1970f421b72179fad6c4a38a95e90136305acc9aae2d3ebc38f44747270"
+    },
+    {
+      "path": "assets/r1206/props/stone.webp",
+      "bytes": 29530,
+      "sha256": "bcfadb676d4cf49a3365fa33bcf43965521580ec69d17f501400993af9eae547"
+    },
+    {
       "path": "assets/r121/heroes/gunner/aim_back.webp",
       "bytes": 15720,
       "sha256": "152c241d7a45672f52c13cf31bd51eea8c5e0154f2c1d835feb1fc38bff179ab"
@@ -13211,6 +13241,196 @@
       "path": "assets/r121/walk/walk-gunner-se.png",
       "bytes": 280468,
       "sha256": "236a5e4749d9598207dde510a4353a3ba0b897f4ed60ae4f8b5866a8ea10b8ea"
+    },
+    {
+      "path": "assets/r1210/index.json",
+      "bytes": 1397,
+      "sha256": "b8ce367bec25f1b3f2203673a907f19468768dcb31927da376488fc997b17761"
+    },
+    {
+      "path": "assets/r1210/laser-aim6.webp",
+      "bytes": 23894,
+      "sha256": "7743f1bebdc842ba6d4b928d7cca268a146eceac7b147288071d7bb93207f030"
+    },
+    {
+      "path": "assets/r1210/laser-body8.webp",
+      "bytes": 297552,
+      "sha256": "d40b88972c336a52fb628d42c93a14277b73ae1a04197f85a2d2151a3af1627a"
+    },
+    {
+      "path": "assets/r1210/laser-charge8.webp",
+      "bytes": 57868,
+      "sha256": "23eac57cfe24a1538ac7a6532d2d894afb8b66d81fc4d255b63da15f30e9427c"
+    },
+    {
+      "path": "assets/r1210/laser-impact8.webp",
+      "bytes": 35294,
+      "sha256": "0b57502d8783c683cc24be5aa2ba70f741e294ac5cd227a893816a9832dbfee8"
+    },
+    {
+      "path": "assets/r1210/sonic-ring.webp",
+      "bytes": 390026,
+      "sha256": "60ac05dd6e3167635857fc92b1b0fef20fe55ed748af86d999184d1ad2439b2d"
+    },
+    {
+      "path": "assets/r1212/sfx/amb-bell-1.ogg",
+      "bytes": 15271,
+      "sha256": "26d8ef93dbda23cea7da0f359c6d4c4d50a5f5b1ccfd73005d48f7e4f229df8d"
+    },
+    {
+      "path": "assets/r1212/sfx/amb-boom-1.ogg",
+      "bytes": 17907,
+      "sha256": "cf19299902700b4ac771ec4f73d712aaf5c697a8b2ee9efbf4bc66e90d2252e3"
+    },
+    {
+      "path": "assets/r1212/sfx/amb-brush-1.ogg",
+      "bytes": 13025,
+      "sha256": "9e3a8aece24637ffc3b687b253caff3961a8738f62e364028564dce4d6f3ec7b"
+    },
+    {
+      "path": "assets/r1212/sfx/amb-brush-2.ogg",
+      "bytes": 12867,
+      "sha256": "bf34b57b0c1cd0db428ae97530a1b0c3861e8920ee16e5ea203d9ac2a473657c"
+    },
+    {
+      "path": "assets/r1212/sfx/amb-chime-1.ogg",
+      "bytes": 23791,
+      "sha256": "ccf94ee5220c62213114372714e7cb73532fa3969353860ae1db5c3ab7de68cd"
+    },
+    {
+      "path": "assets/r1212/sfx/amb-chirp-1.ogg",
+      "bytes": 9087,
+      "sha256": "a516a4d475b6acb3046ebe896ac2c32384276f84cc48d95189b52e0ca3d3c43d"
+    },
+    {
+      "path": "assets/r1212/sfx/amb-chirp-2.ogg",
+      "bytes": 9086,
+      "sha256": "776b99bc2eeba668ec53aab07062d303d4d4bb505c6fddba35b81f6cd6672079"
+    },
+    {
+      "path": "assets/r1212/sfx/amb-clank-1.ogg",
+      "bytes": 12211,
+      "sha256": "66613e759d7b27b01cbb162882799de89d79496f551a989f93774d2923c3bf15"
+    },
+    {
+      "path": "assets/r1212/sfx/amb-ding-1.ogg",
+      "bytes": 11751,
+      "sha256": "bfc1603691fbf5df14b83d9189fe9b572c7d53460e70fbda54bb025bccac20b4"
+    },
+    {
+      "path": "assets/r1212/sfx/amb-drip-1.ogg",
+      "bytes": 6908,
+      "sha256": "f952d85898e5e027c8eedf3268637f6c108af8a5953466182cf3a7973ffa9161"
+    },
+    {
+      "path": "assets/r1212/sfx/amb-drip-2.ogg",
+      "bytes": 7997,
+      "sha256": "bd4edace247b118d5ac9a7c28a9fa1150a419b99878b36f650db56a68fef2c43"
+    },
+    {
+      "path": "assets/r1212/sfx/amb-glitch-1.ogg",
+      "bytes": 8928,
+      "sha256": "b47952b162d3cdbcb0bf5cefa09da8993a5fd5978aba77031addbc79505cf9bf"
+    },
+    {
+      "path": "assets/r1212/sfx/amb-glitch-2.ogg",
+      "bytes": 8909,
+      "sha256": "60d41212d77931fb94e8cc7be8d7239d4a280fe17dd97d832304ebe96b953f34"
+    },
+    {
+      "path": "assets/r1212/sfx/amb-gust-1.ogg",
+      "bytes": 16489,
+      "sha256": "944022d537de90251f8188d8e1b0454a265d51be6d1c92eae66fa9c576768900"
+    },
+    {
+      "path": "assets/r1212/sfx/amb-heart-1.ogg",
+      "bytes": 5573,
+      "sha256": "6d84da308ed83b244f86d8e66ca750fa0e47835ca1fcde76aa11b53ff5c27bee"
+    },
+    {
+      "path": "assets/r1212/sfx/amb-heart-2.ogg",
+      "bytes": 5014,
+      "sha256": "9e24db33c3ec3bd9add75323980ee8bcc6ff3241548c1b3bab6afd09c1176f79"
+    },
+    {
+      "path": "assets/r1212/sfx/amb-music-1.ogg",
+      "bytes": 26464,
+      "sha256": "71a6c2f8952fd16b55a8b15be9b73644d53538b6bcdb736cf99624059ed3a45b"
+    },
+    {
+      "path": "assets/r1212/sfx/amb-steps-1.ogg",
+      "bytes": 20788,
+      "sha256": "b5db011b8a781afe9ea954ef00ad868285d2af8a1e6d5a181242e674f41fe5ab"
+    },
+    {
+      "path": "assets/r1212/sfx/amb-steps-2.ogg",
+      "bytes": 18946,
+      "sha256": "5675a1a2a99384e7f973b8b183742fa049be73053d0d2454825d17023a19420a"
+    },
+    {
+      "path": "assets/r1212/sfx/amb-tick-1.ogg",
+      "bytes": 4321,
+      "sha256": "0a9fa857c75527f23be90867109348ba471d2d8bbca3b175b81cbbe0cb590834"
+    },
+    {
+      "path": "assets/r1212/sfx/amb-tick-2.ogg",
+      "bytes": 5076,
+      "sha256": "855389f9ae95aa231ec64b45d0f9b491449bb04a062761092d7fd6e1acde9b8a"
+    },
+    {
+      "path": "assets/r1212/sfx/amb-tram-1.ogg",
+      "bytes": 16634,
+      "sha256": "512857775cebf6547143f9ab2e1a67e2578b50ba91117072982b6d413fe24b1c"
+    },
+    {
+      "path": "assets/r1212/sfx/amb-whisper-1.ogg",
+      "bytes": 17051,
+      "sha256": "ae1146469220f6d71aa4e4a7c0f17e04c00ab0c7fe387bba14db4e630b293f1b"
+    },
+    {
+      "path": "assets/r1212/sfx/banner-tick-1.ogg",
+      "bytes": 4972,
+      "sha256": "3b65bfa9820a22e33a251ff387104d5b932ffc52ff8ce3ee62712f5c350b29f0"
+    },
+    {
+      "path": "assets/r1212/sfx/banner-tick-2.ogg",
+      "bytes": 5497,
+      "sha256": "03d55b37930c34877978b953c7a09c6baebb3d4fc810d3ec3e475ea8e2a47b9d"
+    },
+    {
+      "path": "assets/r1212/sfx/bed-drone.ogg",
+      "bytes": 39028,
+      "sha256": "3f18507f0a019ac83a6d2ceece777361b4bdb59ee06d093b0b09abcd732267c3"
+    },
+    {
+      "path": "assets/r1212/sfx/bed-hum.ogg",
+      "bytes": 55633,
+      "sha256": "9ea9c31985f17b2c464f01a2dbc822f0b65ea5cb05310e5847f674a8aad862a8"
+    },
+    {
+      "path": "assets/r1212/sfx/bed-leaves.ogg",
+      "bytes": 58555,
+      "sha256": "9caf784718e676a50b787b206a607ef050ac714da6eb591d55ac1f0ab00298d5"
+    },
+    {
+      "path": "assets/r1212/sfx/boss-reveal-1.ogg",
+      "bytes": 14238,
+      "sha256": "85820502314cb857260c10ea994847d04f134b8f5a3bd7614d206d7dc95bc527"
+    },
+    {
+      "path": "assets/r1212/sfx/index.json",
+      "bytes": 27884,
+      "sha256": "07e65e693e6f2cc20b61e79cb069d4253c5593eb675bc58f40aec95b9a6dd733"
+    },
+    {
+      "path": "assets/r1212/sfx/kairo-chime-1.ogg",
+      "bytes": 17976,
+      "sha256": "c02ca2ae24cb37dcc737ec8db8174dd1fee85d5d47d78f41933c500303e39373"
+    },
+    {
+      "path": "assets/r1212/sfx/kairo-toll-1.ogg",
+      "bytes": 31942,
+      "sha256": "ac587bf56f22d02ddd9b4655a7d3648e350e03e35837c4880dc85a2fd10776ea"
     },
     {
       "path": "assets/r126/props/badge.webp",
@@ -54204,8 +54424,8 @@
     },
     {
       "path": "boss-cinematic-r568.js",
-      "bytes": 29154,
-      "sha256": "199866e46943528300ad4c4b67cdfe4ff7539ff1a01228e34bbe67974f30f47f"
+      "bytes": 29525,
+      "sha256": "5eb6618289c634589c1f8e3ce20e77385bc74779414076ab2c7ffb687c65b19b"
     },
     {
       "path": "boss-fx-vis-r1192.js",
@@ -55028,6 +55248,11 @@
       "sha256": "960343e5c0744fccbc56d8527c7095b1fcb4cfb09ad0e03bbc24c6a06dcc86fa"
     },
     {
+      "path": "dys-ranged-r1210.js",
+      "bytes": 20484,
+      "sha256": "d2dde2f073f686d3e8b3e87c7701c268784ed1dc2025b959b53e0190e12dc4fb"
+    },
+    {
       "path": "edges-r188.js",
       "bytes": 9629,
       "sha256": "9ba119f15446a69d26198929e364b67feba32aa0302e4d9abeaa24781e52db58"
@@ -55574,8 +55799,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6582461,
-      "sha256": "a2c1743866f777b6fc7712947f4b9927c2b42aea33441fad7c485054f74e5cfa"
+      "bytes": 6582601,
+      "sha256": "35e2e108e4122cb883241936b2d097d75def00ae01cbf25a5bbea4fde53ddfb3"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -55604,8 +55829,8 @@
     },
     {
       "path": "kairo-homage-r356.js",
-      "bytes": 21048,
-      "sha256": "ff5769d70fe4c8e511e748f4099893a21985ab6960e4f1b47b8e21d397ecced6"
+      "bytes": 21548,
+      "sha256": "a795c4886517dc607b85be6c0662e59067ab8f32edf039158bedab59d0690a90"
     },
     {
       "path": "kairo-tech-r930.js",
@@ -56384,8 +56609,8 @@
     },
     {
       "path": "samong-mood-r123.js",
-      "bytes": 80932,
-      "sha256": "03b4cfcf89114c4e1d78422e6fbcb6488b3188cd50215e2c2a4ca8182fc5e76a"
+      "bytes": 81230,
+      "sha256": "04e8f50827d9a057d710c24a4379ab6936adfc5d8522189073dd919813c2da30"
     },
     {
       "path": "samong-p-art-r976.js",
@@ -56401,6 +56626,11 @@
       "path": "samong-play-r162.js",
       "bytes": 18983,
       "sha256": "78913442e364256dcf534c8e0b936e40c5b3ee3e316fde953e37834bd213a2ea"
+    },
+    {
+      "path": "samong-props-r1206b.js",
+      "bytes": 2838,
+      "sha256": "7ea242763b4695034781a1d1931cdf2acbc87cbf3cf720b600b127e60bf4b969"
     },
     {
       "path": "samong-r103.js",
@@ -56728,6 +56958,11 @@
       "sha256": "13c441e1847a4d0fcaa96a568ec686f33075b6f1efbde3f06ad1112fcf42d73d"
     },
     {
+      "path": "synth-sfx-r1212.js",
+      "bytes": 7646,
+      "sha256": "6fa547f0f94e0e6f190da07ce5ce16324055e132e83aaa1518d7865703019651"
+    },
+    {
       "path": "tentacle-strike-r1028.js",
       "bytes": 9104,
       "sha256": "55a062702f7dce1c7f81be421137bb16de84460bcca5890838e781cf1dd07668"
@@ -57003,9 +57238,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11400,
-  "totalBytes": 1369498625,
-  "webHTMLSha256": "a2c1743866f777b6fc7712947f4b9927c2b42aea33441fad7c485054f74e5cfa",
+  "fileCount": 11447,
+  "totalBytes": 1371027278,
+  "webHTMLSha256": "35e2e108e4122cb883241936b2d097d75def00ae01cbf25a5bbea4fde53ddfb3",
   "largest": [
     {
       "path": "index.html",

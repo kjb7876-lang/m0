@@ -1,0 +1,58 @@
+{
+ "laser-aim6": {
+  "path": "assets/r1210/laser-aim6.webp",
+  "frames": 6,
+  "cell": [
+   512,
+   32
+  ],
+  "source": "CX-0167RA_machine-laser-aim6_r1_ROUGH.png",
+  "sourceSha256": "79457a0545c5894c97d4fa1eb78108f70f8144016cd97af05cee8ed84a68f038",
+  "bytes": 23894
+ },
+ "laser-charge8": {
+  "path": "assets/r1210/laser-charge8.webp",
+  "frames": 8,
+  "cell": [
+   128,
+   128
+  ],
+  "source": "CX-0167RA_machine-laser-charge8_r1_ROUGH.png",
+  "sourceSha256": "18680844e5de5a5c236a627a63a7d339852ccd7133d2cb39b3f5135414c037f9",
+  "bytes": 57868
+ },
+ "laser-body8": {
+  "path": "assets/r1210/laser-body8.webp",
+  "frames": 8,
+  "cell": [
+   512,
+   64
+  ],
+  "source": "CX-0167RA_machine-laser-body8_r1_ROUGH.png",
+  "sourceSha256": "aac790308f326164c65df14f88bd2b50608e67cf7ae9ad4c252006a2c4abb481",
+  "bytes": 297552
+ },
+ "laser-impact8": {
+  "path": "assets/r1210/laser-impact8.webp",
+  "frames": 8,
+  "cell": [
+   128,
+   128
+  ],
+  "source": "CX-0167RA_machine-laser-impact8_r1_ROUGH.png",
+  "sourceSha256": "9af7d9e2702ac858a3bf5b8ad16b38f3c924dfb6bb4b2cb88d9a592b233ddf7f",
+  "bytes": 35294
+ },
+ "sonic-ring": {
+  "path": "assets/r1210/sonic-ring.webp",
+  "frames": 24,
+  "grid": [
+   6,
+   4
+  ],
+  "source": "assets/r438/fx/enemy-shockwave.webp",
+  "sourceSha256": "db01829840be9f122af573e90a3672403cd61a30046433539ce2dd51cf66c37d",
+  "bytes": 390026,
+  "note": "청회색 재채색"
+ }
+}

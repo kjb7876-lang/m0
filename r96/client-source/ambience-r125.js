@@ -28,12 +28,16 @@
  function src(A){const s=A.createBufferSource();s.buffer=noiseBuf(A);s.loop=true;return s;}
  // 깔리는 소리: 몇 개의 노드를 만들고 stop() 하나로 거둔다
  function makeBed(A,kind,dest){const nodes=[],g=A.createGain();g.gain.value=0;g.connect(dest);const add=n=>{nodes.push(n);return n;};
-  if(kind==='wind'||kind==='leaves'){const s=add(src(A)),f=A.createBiquadFilter();f.type=kind==='wind'?'bandpass':'highpass';f.frequency.value=kind==='wind'?520:2600;f.Q.value=kind==='wind'?.9:.4;
+  const fb=SX()?.bed?.('bed_'+kind,A,g);// R1212: ElevenLabs 파일이 준비돼 있으면 그것을 깐다(없으면 아래 합성)
+  if(fb){add(fb);}
+  else if(kind==='wind'||kind==='leaves'){const s=add(src(A)),f=A.createBiquadFilter();f.type=kind==='wind'?'bandpass':'highpass';f.frequency.value=kind==='wind'?520:2600;f.Q.value=kind==='wind'?.9:.4;
    const l=add(A.createOscillator()),lg=A.createGain();l.frequency.value=kind==='wind'?.13:.31;lg.gain.value=kind==='wind'?260:700;l.connect(lg);lg.connect(f.frequency);s.connect(f);f.connect(g);s.start();l.start();}
   else if(kind==='hum'){for(const[fq,a]of[[55,.5],[110,.25],[165,.1]]){const o=add(A.createOscillator()),og=A.createGain();o.type='sawtooth';o.frequency.value=fq;og.gain.value=a;const f=A.createBiquadFilter();f.type='lowpass';f.frequency.value=320;o.connect(f);f.connect(og);og.connect(g);o.start();}}
   else if(kind==='drone'){for(const fq of[61.7,62.3,92.5]){const o=add(A.createOscillator()),og=A.createGain();o.type='sine';o.frequency.value=fq;og.gain.value=fq>90?.18:.4;o.connect(og);og.connect(g);o.start();}}
   else{const s=add(src(A)),f=A.createBiquadFilter();f.type='lowpass';f.frequency.value=380;s.connect(f);f.connect(g);s.start();}
-  stats.beds++;return{kind,g,nodes,stop(t){try{g.gain.cancelScheduledValues(t);g.gain.setTargetAtTime(0,t,.4);}catch(_){}for(const n of nodes)try{n.stop(t+2);}catch(_){}stats.stops++;}};}
+  stats.beds++;return{kind,file:!!fb,g,nodes,stop(t){try{g.gain.cancelScheduledValues(t);g.gain.setTargetAtTime(0,t,.4);}catch(_){}for(const n of nodes)try{n.stop(t+2);}catch(_){}stats.stops++;}};}
+ const SX=()=>window.__STORYWORLD_SYNTH_SFX_R1212__||null;
+ function ev(k,A,d,t){if(!SX()?.play?.('amb_'+k,A,d,t))EV[k](A,d,t);}// R1212: 가끔 소리도 파일 먼저
  const BED_LEVEL={wind:.9,leaves:.35,hum:.22,drone:.5,room:.45};
  // 가끔 소리
  function env(A,dest,t,a,d,peak){const g=A.createGain();g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(Math.max(.0002,peak),t+a);g.gain.exponentialRampToValueAtTime(.0001,t+a+d);g.connect(dest);return g;}
@@ -61,10 +65,11 @@
   o.gain.setTargetAtTime(key?vol():0,now,.5);
   if(key!==theme){if(bed){bed.stop(now);bed=null;}theme=key;nextEv=now+3+Math.random()*4;heartAt=now+1;if(key){bed=makeBed(A,PLAN[key].bed,o);}}
   if(!key||!bed)return;
+  if(!bed.file&&SX()?.ready?.('bed_'+bed.kind,A)){bed.stop(now);bed=makeBed(A,PLAN[key].bed,o);}// R1212: 합성으로 먼저 깔았으면 파일이 오는 대로 바꿔 낌
   let lvl=BED_LEVEL[bed.kind]||.4;if(key==='tower'){const f=m.floor,h=f==='G'?0:clamp((+f||1)/16,0,1);lvl*=.25+.9*h;}// 높을수록 바람이 세다
   bed.g.gain.setTargetAtTime(lvl,now,.8);
-  if(key==='root'){if(now>=heartAt){EV.heart(A,o,now+.02);heartAt=now+1.3;stats.events++;}}
-  else if(now>=nextEv){const list=PLAN[key].ev;EV[list[Math.random()*list.length|0]](A,o,now+.05);stats.events++;nextEv=now+5+Math.random()*9;}}
+  if(key==='root'){if(now>=heartAt){ev('heart',A,o,now+.02);heartAt=now+1.3;stats.events++;}}
+  else if(now>=nextEv){const list=PLAN[key].ev;ev(list[Math.random()*list.length|0],A,o,now+.05);stats.events++;nextEv=now+5+Math.random()*9;}}
  let timer=null;function start(){if(timer||typeof setInterval!=='function')return;timer=setInterval(()=>{try{tick();}catch(e){fail(e);}},250);}
  function settingsSection(){if(typeof document==='undefined'||document.getElementById('r125Ambience'))return;const host=document.getElementById('moodSettingsR123')?.querySelector('.settings');if(!host)return;const d=document.createElement('div');d.id='r125Ambience';
   d.innerHTML='<label><input type="checkbox" data-r125="on" '+(prefs.on?'checked':'')+'> 구역 분위기 소리(바람·발소리·종·기계음·심장 박동)</label><label>분위기 소리 크기 <input type="range" min="0" max="1" step=".05" value="'+prefs.level+'" data-r125="level"></label>';
