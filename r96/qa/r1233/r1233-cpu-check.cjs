@@ -19,7 +19,7 @@ for(const id of ['samong-s05-wraith-officer-v2','r200-stitched-golem-v2','false-
 // ---- 동작(가짜 전역) ----
 function boot(store={}){
  const ROWS=Object.fromEntries(idx.mobs.map(m=>[m.id,m]));const own=new Map();let frames=0;
- const A={revision:'fake',assign:e=>own.get(e)||null,frameOf:(e,m,id)=>{frames++;return {path:m.path,id};},cellFor:()=>0};
+ const A={revision:'fake',assign:e=>own.get(e)||(w.room?.id==='cult05'&&w.layer==='STORY'&&/^ID 배양 점액체/.test(String(e.name||''))&&!e.boss?ROWS['legacy-m130-slime-cult05-v2']:null),/* R380 이름 정규식 흉내('^ID 배양 점액체' — 앞말 붙은 이름은 못 맞춤) */frameOf:(e,m,id)=>{frames++;return {path:m.path,id};},cellFor:()=>0};
  const S={frameFor:(e,f)=>({path:'base'})};
  const SH={assign:e=>e.r200Shade==='extra-informant'?{id:'extra-informant',name:'호외 신문의 밀고자 잔영',path:'assets/r200/shades/extra-informant.webp',attack:[5,6]}:e.r200Shade==='mannequin'?{id:'mannequin',name:'식탁의 마네킹 잔영',path:'assets/r1188/shades/mannequin.webp',attack:[5]}:null};
  const timers=[];
@@ -61,6 +61,15 @@ function boot(store={}){
  ok(A().assign({name:'부정의 잔영',samongR103:{},hp:5})===null,'사몽 에피소드 -P- 부정의 잔영(R1187 DU-10 몫) → 손대지 않음');
  W.layer='STORY';ok(A().assign({name:'거짓천국 근위천사',hp:5})===null&&A().assign({name:'부정의 잔영',hp:5})===null,'스토리 층 → 손대지 않음(원래 그림 그대로)');
  ok(A().assign({name:'규칙을 어기지 않는 마네킹',hp:5})===null,'대상 아닌 이름 → 손대지 않음');
+// ④ R81 지역 수호자(일반몹 그림을 키운 것, '중간보스 · ' 앞말 — e.midboss 아님): R380 이름 정규식이 앞말 때문에 못 맞추던 것 → 앞말 뺀 이름으로 같은 채택 그림
+W.room={id:'cult05'};W.layer='STORY';const wc={name:'중간보스 · ID 배양 점액체',wardChampionR81:true,hp:5};
+ok(A().assign(wc)?.id==='legacy-m130-slime-cult05-v2','지역 수호자 중간보스 · ID 배양 점액체 → 같은 이름 채택 그림 줄(R248 물러남)');
+ok(F().frameFor(wc,null).path===idx.mobs.find(m=>m.id==='legacy-m130-slime-cult05-v2').path,'그림도 R380 frameOf 로 채택 점액체');
+ok(wc.name==='중간보스 · ID 배양 점액체'&&!wc.r380Renamed,'수호자 이름·상태는 그대로');
+ok(A().assign({name:'중간보스 · ID 배양 점액체',midboss:true,wardChampionR81:true,hp:5})===null,'진짜 중간보스(midboss) → 손대지 않음(R1224 몫)');
+ok(A().assign({name:'중간보스 · ID 배양 점액체',hp:5})===null,'수호자 표시 없는 중간보스 이름 → 손대지 않음');
+ok(A().assign({name:'중간보스 · 없는 이름 몹',wardChampionR81:true,hp:5})===null,'채택 그림 없는 수호자 → 손대지 않음');
+W.room={id:'cult04'};ok(A().assign({name:'중간보스 · ID 배양 점액체',wardChampionR81:true,hp:5})===null,'다른 지역(R380 줄 조건 밖) → 손대지 않음');
  // ③ 시트 줄(피리 고블린)
  const D=W.__STORYWORLD_MOB_UNIQUE_R248_DATA__;ok(D.sheets.m044.path==='assets/r1233/mobs/m044.webp'&&D.sheets.m044.body===196,'피리 고블린 R248 시트 줄 → r1233 고블린 시트(R410 상자머리 후보 대신)');
  ok(D.sheets.m099.path==='assets/r410/mobs/m099.webp','다른 줄은 그대로');
