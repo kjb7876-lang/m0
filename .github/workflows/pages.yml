@@ -521,8 +521,18 @@ jobs:
         run: node r96/qa/r1210/r1210-cpu-check.cjs
       - name: R1213 기계 계열 몹 원거리(레이저·방사능·음파·폭탄) CPU check
         run: node r96/qa/r1213/r1213-cpu-check.cjs
+      - name: R1214 귀신 계열 몹 원거리(공포·암흑·그림자·촉수) CPU check
+        run: node r96/qa/r1214/r1214-cpu-check.cjs
       - name: R1222 늪 혼령체 물 튐 늪색 CPU check
         run: node r96/qa/r1222/r1222-cpu-check.cjs
+      - name: R1221 mob attack dash frequency lowered CPU check
+        run: node r96/qa/r1221/mob-dash-cpu-check.cjs
+      - name: R1221 side move sheets for mobs without side walk CPU check
+        run: node r96/qa/r1221/side-move-cpu-check.cjs
+      - name: R1228 Three.js 일시 오류 복구(보스방 앞 중단) CPU check
+        run: node r96/qa/r1228/r1228-cpu-check.cjs
+      - name: R1230 위치 고정 적 공격 모션(몸 키프레임·발광·충전 프레임 시트) CPU check
+        run: node r96/qa/r1230/r1230-cpu-check.cjs
       - name: R1206 samong one mob one image, death look, one memory fragment, ink ground attack CPU check
         run: node r96/qa/r1206/r1206-cpu-check.cjs
       - name: R1226 mob motion consistency (face side, hand, size, pilgrim tint) CPU check
@@ -587,6 +597,8 @@ jobs:
         run: node r96/qa/r991/r991-cpu-check.cjs
       - name: R1102 hunter basic arrow size, bow-grip launch and always-attack motion CPU check
         run: node r96/qa/r1102/r1102-cpu-check.cjs
+      - name: R1232 Michaela basic shot height and size CPU check
+        run: node r96/qa/r1232/r1232-cpu-check.cjs
       - name: R1003 gunner aim down art CPU check
         run: node r96/qa/r1003/r1003-cpu-check.cjs
       - name: R1045 gunner north aim and no-recoil east art CPU check
@@ -859,6 +871,8 @@ jobs:
         run: node r96/qa/r522/r522-cpu-check.cjs
       - name: R523 story rooms (clinic ep1a09 + sloth home ep1b02 furnished by room name along the real back walls, presentation only, angle-matched art only) CPU check
         run: node r96/qa/r523/r523-cpu-check.cjs && node r96/qa/r1061/r1061-cpu-check.cjs && node r96/qa/r1062/prop-theme-cpu-check.cjs && node r96/qa/r1064/r1064-cpu-check.cjs && node r96/qa/r1064/r1064c-cpu-check.cjs && node r96/qa/r1065/r1065-cpu-check.cjs && node r96/qa/r1065/r1065c-cpu-check.cjs && node r96/qa/r1065/r1065e-cpu-check.cjs && node r96/qa/r1111/r1111-cpu-check.cjs && node r96/qa/r1158/r1158-cpu-check.cjs && node r96/qa/r1165/r1165-cpu-check.cjs && node r96/qa/r1166/r1166-cpu-check.cjs && node r96/qa/r1117d/r1117d-cpu-check.cjs && node r96/qa/r1103/r1103-cpu-check.cjs && node r96/qa/r730/r730-cpu-check.cjs && node r96/qa/r731/r731-cpu-check.cjs && node r96/qa/r1114/r1114-cpu-check.cjs && node r96/qa/r1117/r1117-cpu-check.cjs && node r96/qa/r1122/r1122-cpu-check.cjs
+      - name: R1220 gunner muzzle (basic bullet tail at drawn muzzle incl. 18px draw lift, bullet thickness = muzzle, memory echo shot, sticky aim cell, idle follows shot family, W/E skill rounds from muzzle)
+        run: node r96/qa/r1220/r1220-cpu-check.cjs
       - name: R713 refuge walls (first map hub stone walls 0.24 -> 0.64 outer / 0.48 inner, floor-side face unchanged, corners filled, hub only) CPU check
         run: node r96/qa/r713/r713-cpu-check.cjs
       - name: R810 Bulmyeongwi night (last302/last303 navy moonlight ambient, deep amber lamps, no sepia, no spider-crack decals, night fog colour, lamps kept off the guide path; other zones unchanged) CPU check
