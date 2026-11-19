@@ -1,0 +1,870 @@
+{
+ "revision": "R1212",
+ "generator": "scripts/build-sfx-r1212.py",
+ "flow": "ElevenLabs flow (R1212 합성음 교체), 23 prompts x 4 variants, 약 1,564 credits",
+ "loudness": "표 게인 = 예전 합성 소리 가장 큰 구간 RMS / 파일 RMS(같은 창)",
+ "table": {
+  "amb_bell": {
+   "files": [
+    "assets/r1212/sfx/amb-bell-1.ogg"
+   ],
+   "gain": 0.827,
+   "synthRmsDb": -21.6
+  },
+  "amb_boom": {
+   "files": [
+    "assets/r1212/sfx/amb-boom-1.ogg"
+   ],
+   "gain": 1.2,
+   "synthRmsDb": -15.4
+  },
+  "amb_brush": {
+   "files": [
+    "assets/r1212/sfx/amb-brush-1.ogg",
+    "assets/r1212/sfx/amb-brush-2.ogg"
+   ],
+   "gain": 0.299,
+   "synthRmsDb": -34.0
+  },
+  "amb_chime": {
+   "files": [
+    "assets/r1212/sfx/amb-chime-1.ogg"
+   ],
+   "gain": 0.655,
+   "synthRmsDb": -31.6
+  },
+  "amb_chirp": {
+   "files": [
+    "assets/r1212/sfx/amb-chirp-1.ogg",
+    "assets/r1212/sfx/amb-chirp-2.ogg"
+   ],
+   "gain": 0.479,
+   "synthRmsDb": -34.0
+  },
+  "amb_clank": {
+   "files": [
+    "assets/r1212/sfx/amb-clank-1.ogg"
+   ],
+   "gain": 0.4,
+   "synthRmsDb": -34.0
+  },
+  "amb_ding": {
+   "files": [
+    "assets/r1212/sfx/amb-ding-1.ogg"
+   ],
+   "gain": 0.413,
+   "synthRmsDb": -26.2
+  },
+  "amb_drip": {
+   "files": [
+    "assets/r1212/sfx/amb-drip-1.ogg",
+    "assets/r1212/sfx/amb-drip-2.ogg"
+   ],
+   "gain": 0.513,
+   "synthRmsDb": -34.0
+  },
+  "amb_glass": {
+   "files": [
+    "assets/r1212/sfx/amb-chime-1.ogg"
+   ],
+   "gain": 0.655,
+   "synthRmsDb": -31.6,
+   "rate": 1.15,
+   "alias": "amb_chime"
+  },
+  "amb_glitch": {
+   "files": [
+    "assets/r1212/sfx/amb-glitch-1.ogg",
+    "assets/r1212/sfx/amb-glitch-2.ogg"
+   ],
+   "gain": 0.228,
+   "synthRmsDb": -34.0
+  },
+  "amb_gust": {
+   "files": [
+    "assets/r1212/sfx/amb-gust-1.ogg"
+   ],
+   "gain": 0.246,
+   "synthRmsDb": -30.6
+  },
+  "amb_heart": {
+   "files": [
+    "assets/r1212/sfx/amb-heart-1.ogg",
+    "assets/r1212/sfx/amb-heart-2.ogg"
+   ],
+   "gain": 1.2,
+   "synthRmsDb": -19.5
+  },
+  "amb_music": {
+   "files": [
+    "assets/r1212/sfx/amb-music-1.ogg"
+   ],
+   "gain": 0.309,
+   "synthRmsDb": -34.0
+  },
+  "amb_steps": {
+   "files": [
+    "assets/r1212/sfx/amb-steps-1.ogg",
+    "assets/r1212/sfx/amb-steps-2.ogg"
+   ],
+   "gain": 0.494,
+   "synthRmsDb": -34.0
+  },
+  "amb_tick": {
+   "files": [
+    "assets/r1212/sfx/amb-tick-1.ogg",
+    "assets/r1212/sfx/amb-tick-2.ogg"
+   ],
+   "gain": 0.348,
+   "synthRmsDb": -34.0
+  },
+  "amb_tram": {
+   "files": [
+    "assets/r1212/sfx/amb-tram-1.ogg"
+   ],
+   "gain": 0.423,
+   "synthRmsDb": -29.0
+  },
+  "amb_whisper": {
+   "files": [
+    "assets/r1212/sfx/amb-whisper-1.ogg"
+   ],
+   "gain": 0.234,
+   "synthRmsDb": -34.0
+  },
+  "banner_tick": {
+   "files": [
+    "assets/r1212/sfx/banner-tick-1.ogg",
+    "assets/r1212/sfx/banner-tick-2.ogg"
+   ],
+   "gain": 0.283,
+   "synthRmsDb": -36.0
+  },
+  "bed_drone": {
+   "files": [
+    "assets/r1212/sfx/bed-drone.ogg"
+   ],
+   "gain": 2.5,
+   "loop": true,
+   "synthRmsDb": -13.4
+  },
+  "bed_hum": {
+   "files": [
+    "assets/r1212/sfx/bed-hum.ogg"
+   ],
+   "gain": 0.999,
+   "loop": true,
+   "synthRmsDb": -22.0
+  },
+  "bed_leaves": {
+   "files": [
+    "assets/r1212/sfx/bed-leaves.ogg"
+   ],
+   "gain": 1.365,
+   "loop": true,
+   "synthRmsDb": -19.2
+  },
+  "bed_room": {
+   "files": [
+    "assets/r664/ambience/hall.ogg"
+   ],
+   "gain": 2.5,
+   "loop": true,
+   "reuse": "R664 ElevenLabs 환경음"
+  },
+  "bed_wind": {
+   "files": [
+    "assets/r664/ambience/wind.ogg"
+   ],
+   "gain": 2.5,
+   "loop": true,
+   "reuse": "R664 ElevenLabs 환경음"
+  },
+  "boss_reveal": {
+   "files": [
+    "assets/r1212/sfx/boss-reveal-1.ogg"
+   ],
+   "gain": 1.2,
+   "synthRmsDb": -13.8
+  },
+  "kairo_chime": {
+   "files": [
+    "assets/r1212/sfx/kairo-chime-1.ogg"
+   ],
+   "gain": 0.137,
+   "synthRmsDb": -38.3
+  },
+  "kairo_tick": {
+   "files": [
+    "assets/r1212/sfx/amb-tick-1.ogg",
+    "assets/r1212/sfx/amb-tick-2.ogg"
+   ],
+   "gain": 0.175,
+   "synthRmsDb": -40.0,
+   "alias": "amb_tick"
+  },
+  "kairo_toll": {
+   "files": [
+    "assets/r1212/sfx/kairo-toll-1.ogg"
+   ],
+   "gain": 0.343,
+   "synthRmsDb": -29.1
+  }
+ },
+ "files": {
+  "assets/r1212/sfx/amb-steps-1.ogg": {
+   "use": "R125 학교·만화·경성: 빈 건물 발소리",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Slow footsteps on old wooden floorboards in an empty building, three soft steps, slight creak",
+   "source": "amb_steps-1.mp3",
+   "sourceSha256": "2424f3b35e2c962ca811baa8508ade0601c326253c2e11e8cac158310c8a37e7",
+   "sourceBytes": 114135,
+   "highpassHz": 90,
+   "lowpassHz": 6000,
+   "pickScore": 0.617,
+   "bytes": 20788,
+   "sha256": "b5db011b8a781afe9ea954ef00ad868285d2af8a1e6d5a181242e674f41fe5ab",
+   "duration": 2.6,
+   "peakDb": -7.99,
+   "activeSec": 0.94,
+   "lowShare150": 0.167,
+   "hfShare5k": 0.0002,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.016,
+   "centroidHz": 345
+  },
+  "assets/r1212/sfx/amb-steps-2.ogg": {
+   "use": "R125 학교·만화·경성: 빈 건물 발소리",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Slow footsteps on old wooden floorboards in an empty building, three soft steps, slight creak",
+   "source": "amb_steps-2.mp3",
+   "sourceSha256": "9cfc81614e02cfc2783180f10a0c44531ba732fb128bceb4bab362409c0bb676",
+   "sourceBytes": 114135,
+   "highpassHz": 90,
+   "lowpassHz": 6000,
+   "pickScore": 0.663,
+   "bytes": 18946,
+   "sha256": "5675a1a2a99384e7f973b8b183742fa049be73053d0d2454825d17023a19420a",
+   "duration": 2.327,
+   "peakDb": -7.9,
+   "activeSec": 0.73,
+   "lowShare150": 0.105,
+   "hfShare5k": 0.0002,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.01,
+   "centroidHz": 290
+  },
+  "assets/r1212/sfx/amb-bell-1.ogg": {
+   "use": "R125 학교: 먼 종",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Distant old school hand bell, single ring echoing down an empty hallway",
+   "source": "amb_bell-4.mp3",
+   "sourceSha256": "4eb527e55490593330abf051308c40ead03cb519da6ee1852d46ff81fd08ed73",
+   "sourceBytes": 82370,
+   "highpassHz": 150,
+   "lowpassHz": 8000,
+   "pickScore": 0.793,
+   "bytes": 15271,
+   "sha256": "26d8ef93dbda23cea7da0f359c6d4c4d50a5f5b1ccfd73005d48f7e4f229df8d",
+   "duration": 1.78,
+   "peakDb": -7.94,
+   "activeSec": 1.66,
+   "lowShare150": 0.0,
+   "hfShare5k": 0.0418,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.252,
+   "centroidHz": 1565
+  },
+  "assets/r1212/sfx/amb-ding-1.ogg": {
+   "use": "R125 감정의 탑: 작은 종 두 음",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Small brass bell two-note ding, high clear tone with gentle decay",
+   "source": "amb_ding-1.mp3",
+   "sourceSha256": "b2aadf488913219ab895400640263f95e0143166fed2724d37cb5704a8b7edc1",
+   "sourceBytes": 66070,
+   "highpassHz": 150,
+   "lowpassHz": 8000,
+   "pickScore": 0.488,
+   "bytes": 11751,
+   "sha256": "bfc1603691fbf5df14b83d9189fe9b572c7d53460e70fbda54bb025bccac20b4",
+   "duration": 1.746,
+   "peakDb": -8.05,
+   "activeSec": 1.35,
+   "lowShare150": 0.0,
+   "hfShare5k": 0.0065,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.054,
+   "centroidHz": 1996
+  },
+  "assets/r1212/sfx/amb-gust-1.ogg": {
+   "use": "R125 탑·경성·달리: 바람 한 줄기",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Single gust of cold wind sweeping past high tower windows, airy whoosh rising and fading",
+   "source": "amb_gust-3.mp3",
+   "sourceSha256": "8bad0bf3353f402b83f20da0a49604660845d90a809db49c8e917d7731620683",
+   "sourceBytes": 82370,
+   "highpassHz": 120,
+   "lowpassHz": 7000,
+   "pickScore": 0.233,
+   "bytes": 16489,
+   "sha256": "944022d537de90251f8188d8e1b0454a265d51be6d1c92eae66fa9c576768900",
+   "duration": 1.863,
+   "peakDb": -7.9,
+   "activeSec": 1.62,
+   "lowShare150": 0.003,
+   "hfShare5k": 0.0024,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.014,
+   "centroidHz": 996
+  },
+  "assets/r1212/sfx/amb-clank-1.ogg": {
+   "use": "R125 기계: 쇠 부딪는 소리",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Heavy metal clank of factory machinery, single iron hit with short ringing resonance",
+   "source": "amb_clank-1.mp3",
+   "sourceSha256": "520bc7b2a74e2b07e8394fe6754ff7ccead6d8d8ed890f700c6dcfbd01bd1be5",
+   "sourceBytes": 66070,
+   "highpassHz": 150,
+   "lowpassHz": 6500,
+   "pickScore": 0.6,
+   "bytes": 12211,
+   "sha256": "66613e759d7b27b01cbb162882799de89d79496f551a989f93774d2923c3bf15",
+   "duration": 1.4,
+   "peakDb": -8.82,
+   "activeSec": 0.61,
+   "lowShare150": 0.004,
+   "hfShare5k": 0.0065,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.277,
+   "centroidHz": 1650
+  },
+  "assets/r1212/sfx/amb-boom-1.ogg": {
+   "use": "R125 기계: 먼 기계 쿵",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Distant heavy machine thump deep inside a factory, low soft impact with short rumble",
+   "source": "amb_boom-2.mp3",
+   "sourceSha256": "f22606eecd1cd0712d823df583ca73c1aea1edd6edbbf105c7666a84dc6e3177",
+   "sourceBytes": 66070,
+   "highpassHz": 45,
+   "lowpassHz": 5000,
+   "pickScore": 0.356,
+   "bytes": 17907,
+   "sha256": "cf19299902700b4ac771ec4f73d712aaf5c697a8b2ee9efbf4bc66e90d2252e3",
+   "duration": 2.4,
+   "peakDb": -8.07,
+   "activeSec": 2.15,
+   "lowShare150": 0.157,
+   "hfShare5k": 0.0,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.0,
+   "centroidHz": 233
+  },
+  "assets/r1212/sfx/amb-chirp-1.ogg": {
+   "use": "R125 데이터: 전자 짹짹",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Short digital data chirps, soft electronic beeps, quick computer blips",
+   "source": "amb_chirp-1.mp3",
+   "sourceSha256": "086312e2751dcbdfc8931942f5a05afbcda503519bb2cee4d46226ee001eff57",
+   "sourceBytes": 50187,
+   "highpassHz": 300,
+   "lowpassHz": 7000,
+   "pickScore": 1.74,
+   "bytes": 9087,
+   "sha256": "a516a4d475b6acb3046ebe896ac2c32384276f84cc48d95189b52e0ca3d3c43d",
+   "duration": 0.997,
+   "peakDb": -9.07,
+   "activeSec": 0.91,
+   "lowShare150": 0.0,
+   "hfShare5k": 0.0031,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.226,
+   "centroidHz": 1591
+  },
+  "assets/r1212/sfx/amb-chirp-2.ogg": {
+   "use": "R125 데이터: 전자 짹짹",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Short digital data chirps, soft electronic beeps, quick computer blips",
+   "source": "amb_chirp-2.mp3",
+   "sourceSha256": "dd55ba18477f486a784f162eda37764233a46ee094d65cac2bb4ea295a29c38c",
+   "sourceBytes": 66070,
+   "highpassHz": 300,
+   "lowpassHz": 7000,
+   "pickScore": 1.782,
+   "bytes": 9086,
+   "sha256": "776b99bc2eeba668ec53aab07062d303d4d4bb505c6fddba35b81f6cd6672079",
+   "duration": 0.997,
+   "peakDb": -9.01,
+   "activeSec": 0.94,
+   "lowShare150": 0.0,
+   "hfShare5k": 0.002,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.206,
+   "centroidHz": 1555
+  },
+  "assets/r1212/sfx/amb-glitch-1.ogg": {
+   "use": "R125 데이터: 신호 깨짐",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Short digital glitch stutter, crackling electronic data corruption burst",
+   "source": "amb_glitch-1.mp3",
+   "sourceSha256": "ecc1c53eb7f6ca838dfbb7a682b245b25fc30810bd7357c098d48fed2da3048c",
+   "sourceBytes": 50187,
+   "highpassHz": 150,
+   "lowpassHz": 7000,
+   "pickScore": 1.668,
+   "bytes": 8928,
+   "sha256": "b47952b162d3cdbcb0bf5cefa09da8993a5fd5978aba77031addbc79505cf9bf",
+   "duration": 0.797,
+   "peakDb": -8.67,
+   "activeSec": 0.74,
+   "lowShare150": 0.015,
+   "hfShare5k": 0.0022,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.088,
+   "centroidHz": 932
+  },
+  "assets/r1212/sfx/amb-glitch-2.ogg": {
+   "use": "R125 데이터: 신호 깨짐",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Short digital glitch stutter, crackling electronic data corruption burst",
+   "source": "amb_glitch-3.mp3",
+   "sourceSha256": "957c2d5b7966d10c8f15370152c58848d1dfb821b7f14abc8ae3583b984e1fae",
+   "sourceBytes": 50187,
+   "highpassHz": 150,
+   "lowpassHz": 7000,
+   "pickScore": 1.705,
+   "bytes": 8909,
+   "sha256": "60d41212d77931fb94e8cc7be8d7239d4a280fe17dd97d832304ebe96b953f34",
+   "duration": 0.797,
+   "peakDb": -8.33,
+   "activeSec": 0.77,
+   "lowShare150": 0.01,
+   "hfShare5k": 0.0011,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.063,
+   "centroidHz": 824
+  },
+  "assets/r1212/sfx/amb-chime-1.ogg": {
+   "use": "R125 숲·클림트·모네: 풍경(유리 종)",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Gentle glass wind chime tinkling in a soft breeze, sparse delicate notes",
+   "source": "amb_chime-1.mp3",
+   "sourceSha256": "6461ce50812d99dbdb1b94c51ff439e872312685f1e98d3526997bc03e3358f3",
+   "sourceBytes": 146318,
+   "highpassHz": 200,
+   "lowpassHz": 8000,
+   "pickScore": 1.04,
+   "bytes": 23791,
+   "sha256": "ccf94ee5220c62213114372714e7cb73532fa3969353860ae1db5c3ab7de68cd",
+   "duration": 3.2,
+   "peakDb": -7.9,
+   "activeSec": 2.82,
+   "lowShare150": 0.0,
+   "hfShare5k": 0.0158,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.342,
+   "centroidHz": 2235
+  },
+  "assets/r1212/sfx/amb-music-1.ogg": {
+   "use": "R125 장미: 낡은 오르골",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Old worn music box playing four slow descending notes, slightly out of tune, tinny comb tines",
+   "source": "amb_music-1.mp3",
+   "sourceSha256": "8779e0b7ebc71509c5541396e8ad6f157f611aaa4792178bb60f4bfc8698799d",
+   "sourceBytes": 146318,
+   "highpassHz": 150,
+   "lowpassHz": 7000,
+   "pickScore": 0.852,
+   "bytes": 26464,
+   "sha256": "71a6c2f8952fd16b55a8b15be9b73644d53538b6bcdb736cf99624059ed3a45b",
+   "duration": 3.2,
+   "peakDb": -7.84,
+   "activeSec": 2.46,
+   "lowShare150": 0.0,
+   "hfShare5k": 0.0006,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.154,
+   "centroidHz": 1687
+  },
+  "assets/r1212/sfx/amb-tick-1.ogg": {
+   "use": "R125 장미·페르소나·달리·초현실: 시계 초침 / R356 카이로 초침",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Single old pocket watch tick, crisp small metallic click, close-mic, dry",
+   "source": "amb_tick-2.mp3",
+   "sourceSha256": "76d2e1f7a57762e8c8f3558e9e1d3d907a59a96fe113699a1c180e2a2cbef549",
+   "sourceBytes": 25946,
+   "highpassHz": 200,
+   "lowpassHz": 8000,
+   "pickScore": 0.306,
+   "bytes": 4321,
+   "sha256": "0a9fa857c75527f23be90867109348ba471d2d8bbca3b175b81cbbe0cb590834",
+   "duration": 0.158,
+   "peakDb": -8.73,
+   "activeSec": 0.06,
+   "lowShare150": 0.004,
+   "hfShare5k": 0.0029,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.13,
+   "centroidHz": 977
+  },
+  "assets/r1212/sfx/amb-tick-2.ogg": {
+   "use": "R125 장미·페르소나·달리·초현실: 시계 초침 / R356 카이로 초침",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Single old pocket watch tick, crisp small metallic click, close-mic, dry",
+   "source": "amb_tick-3.mp3",
+   "sourceSha256": "e3023e2024f1888b436504a2879408fd3f37e5352fbeca9c92921bc92d55856e",
+   "sourceBytes": 25946,
+   "highpassHz": 200,
+   "lowpassHz": 8000,
+   "pickScore": 0.349,
+   "bytes": 5076,
+   "sha256": "855389f9ae95aa231ec64b45d0f9b491449bb04a062761092d7fd6e1acde9b8a",
+   "duration": 0.326,
+   "peakDb": -8.34,
+   "activeSec": 0.06,
+   "lowShare150": 0.027,
+   "hfShare5k": 0.0012,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.125,
+   "centroidHz": 1151
+  },
+  "assets/r1212/sfx/amb-drip-1.ogg": {
+   "use": "R125 만화·먹·갤러리·모네: 물방울",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Single water drop falling into a still puddle in a quiet stone room, clear plip with soft echo",
+   "source": "amb_drip-4.mp3",
+   "sourceSha256": "6686bcc1660859969452296c8b13cc019825ba31758d00b77b29832b3dc98a78",
+   "sourceBytes": 50187,
+   "highpassHz": 150,
+   "lowpassHz": 7000,
+   "pickScore": 0.193,
+   "bytes": 6908,
+   "sha256": "f952d85898e5e027c8eedf3268637f6c108af8a5953466182cf3a7973ffa9161",
+   "duration": 0.456,
+   "peakDb": -8.39,
+   "activeSec": 0.32,
+   "lowShare150": 0.0,
+   "hfShare5k": 0.0221,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.014,
+   "centroidHz": 1184
+  },
+  "assets/r1212/sfx/amb-drip-2.ogg": {
+   "use": "R125 만화·먹·갤러리·모네: 물방울",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Single water drop falling into a still puddle in a quiet stone room, clear plip with soft echo",
+   "source": "amb_drip-2.mp3",
+   "sourceSha256": "2d137326e169555134d47677675fc7ea9a897c300e8756484ea53c7cd97f67fb",
+   "sourceBytes": 50187,
+   "highpassHz": 150,
+   "lowpassHz": 7000,
+   "pickScore": 0.287,
+   "bytes": 7997,
+   "sha256": "bd4edace247b118d5ac9a7c28a9fa1150a419b99878b36f650db56a68fef2c43",
+   "duration": 0.594,
+   "peakDb": -7.77,
+   "activeSec": 0.37,
+   "lowShare150": 0.0,
+   "hfShare5k": 0.008,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.009,
+   "centroidHz": 1044
+  },
+  "assets/r1212/sfx/amb-brush-1.ogg": {
+   "use": "R125 먹·갤러리·고흐: 붓질",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Paintbrush stroke on rough canvas, soft dry bristle swish, close-mic",
+   "source": "amb_brush-4.mp3",
+   "sourceSha256": "e3a4af394fe18c467221abb87e82d5bdb98fadffbc7f354967424906898813ad",
+   "sourceBytes": 66070,
+   "highpassHz": 150,
+   "lowpassHz": 7000,
+   "pickScore": 1.837,
+   "bytes": 13025,
+   "sha256": "9e3a8aece24637ffc3b687b253caff3961a8738f62e364028564dce4d6f3ec7b",
+   "duration": 1.2,
+   "peakDb": -8.2,
+   "activeSec": 1.14,
+   "lowShare150": 0.047,
+   "hfShare5k": 0.025,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.205,
+   "centroidHz": 1317
+  },
+  "assets/r1212/sfx/amb-brush-2.ogg": {
+   "use": "R125 먹·갤러리·고흐: 붓질",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Paintbrush stroke on rough canvas, soft dry bristle swish, close-mic",
+   "source": "amb_brush-3.mp3",
+   "sourceSha256": "62081fcff5dbd06049bd6d610629e3646d2a0aa4114998a2fd63f503d372df83",
+   "sourceBytes": 66070,
+   "highpassHz": 150,
+   "lowpassHz": 7000,
+   "pickScore": 1.891,
+   "bytes": 12867,
+   "sha256": "bf34b57b0c1cd0db428ae97530a1b0c3861e8920ee16e5ea203d9ac2a473657c",
+   "duration": 1.2,
+   "peakDb": -8.35,
+   "activeSec": 1.14,
+   "lowShare150": 0.031,
+   "hfShare5k": 0.0276,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.234,
+   "centroidHz": 1441
+  },
+  "assets/r1212/sfx/amb-tram-1.ogg": {
+   "use": "R125 경성: 전차 종",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Old streetcar bell, two bright dings in the distance on a city street",
+   "source": "amb_tram-2.mp3",
+   "sourceSha256": "b9dc65de14241dcede4908aef8f0909e9e36c2b27f1cfa163bbbab476831eb41",
+   "sourceBytes": 98253,
+   "highpassHz": 150,
+   "lowpassHz": 7000,
+   "pickScore": 1.671,
+   "bytes": 16634,
+   "sha256": "512857775cebf6547143f9ab2e1a67e2578b50ba91117072982b6d413fe24b1c",
+   "duration": 2.0,
+   "peakDb": -8.05,
+   "activeSec": 1.96,
+   "lowShare150": 0.022,
+   "hfShare5k": 0.0039,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.228,
+   "centroidHz": 1398
+  },
+  "assets/r1212/sfx/amb-whisper-1.ogg": {
+   "use": "R125 페르소나: 속삭임 숨",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Faint ghostly breathy whisper with no words, airy and eerie, fading away",
+   "source": "amb_whisper-1.mp3",
+   "sourceSha256": "d05c9ef4aed6d261d0e2d773952595ac92b56387f06984d412ef0decb2cd7af7",
+   "sourceBytes": 82370,
+   "highpassHz": 150,
+   "lowpassHz": 7000,
+   "pickScore": 0.714,
+   "bytes": 17051,
+   "sha256": "ae1146469220f6d71aa4e4a7c0f17e04c00ab0c7fe387bba14db4e630b293f1b",
+   "duration": 1.89,
+   "peakDb": -8.57,
+   "activeSec": 1.68,
+   "lowShare150": 0.0,
+   "hfShare5k": 0.0056,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.077,
+   "centroidHz": 1368
+  },
+  "assets/r1212/sfx/amb-heart-1.ogg": {
+   "use": "R125 뿌리(문턱): 심장 박동",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "One slow deep heartbeat, single lub-dub, soft warm thump, close-mic",
+   "source": "amb_heart-3.mp3",
+   "sourceSha256": "305ef4b95077bb2367e6cf4511139bcbc37277dcfc39874d5d9fd58e6dc8e2c8",
+   "sourceBytes": 66070,
+   "highpassHz": 35,
+   "lowpassHz": 4000,
+   "pickScore": 0.62,
+   "bytes": 5573,
+   "sha256": "6d84da308ed83b244f86d8e66ca750fa0e47835ca1fcde76aa11b53ff5c27bee",
+   "duration": 0.617,
+   "peakDb": -8.0,
+   "activeSec": 0.19,
+   "lowShare150": 0.547,
+   "hfShare5k": 0.0,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.0,
+   "centroidHz": 134
+  },
+  "assets/r1212/sfx/amb-heart-2.ogg": {
+   "use": "R125 뿌리(문턱): 심장 박동",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "One slow deep heartbeat, single lub-dub, soft warm thump, close-mic",
+   "source": "amb_heart-4.mp3",
+   "sourceSha256": "daeba1f655945ccc3009875ac1d99126ecbca02bc93145ea982b59b2e5b1242b",
+   "sourceBytes": 66070,
+   "highpassHz": 35,
+   "lowpassHz": 4000,
+   "pickScore": 0.62,
+   "bytes": 5014,
+   "sha256": "9e24db33c3ec3bd9add75323980ee8bcc6ff3241548c1b3bab6afd09c1176f79",
+   "duration": 0.437,
+   "peakDb": -7.85,
+   "activeSec": 0.19,
+   "lowShare150": 0.719,
+   "hfShare5k": 0.0,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.0,
+   "centroidHz": 127
+  },
+  "assets/r1212/sfx/kairo-chime-1.ogg": {
+   "use": "R356 카이로: 시간 제어 종",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Magical clock chime, two clear bell tones with a shimmering reversed swell, time stopping",
+   "source": "kairo_chime-2.mp3",
+   "sourceSha256": "f0a89598aefb6e191644c6134a62b0b6de12b8829e21cc12bff7f52eeffa26fe",
+   "sourceBytes": 98253,
+   "highpassHz": 150,
+   "lowpassHz": 8000,
+   "pickScore": 1.74,
+   "bytes": 17976,
+   "sha256": "c02ca2ae24cb37dcc737ec8db8174dd1fee85d5d47d78f41933c500303e39373",
+   "duration": 2.29,
+   "peakDb": -7.9,
+   "activeSec": 2.1,
+   "lowShare150": 0.0,
+   "hfShare5k": 0.0054,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.302,
+   "centroidHz": 1735
+  },
+  "assets/r1212/sfx/kairo-toll-1.ogg": {
+   "use": "R356 카이로: 구역 입장 쇠종",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Deep old iron bell, single toll in a large stone hall, long resonant decay",
+   "source": "kairo_toll-3.mp3",
+   "sourceSha256": "05fa8aee3bb77ab73aaf32c07b5918187cb01c501f8183eca6cc63f95ddb950e",
+   "sourceBytes": 178083,
+   "highpassHz": 60,
+   "lowpassHz": 6000,
+   "pickScore": 0.116,
+   "bytes": 31942,
+   "sha256": "ac587bf56f22d02ddd9b4655a7d3648e350e03e35837c4880dc85a2fd10776ea",
+   "duration": 4.5,
+   "peakDb": -8.5,
+   "activeSec": 3.51,
+   "lowShare150": 0.001,
+   "hfShare5k": 0.0001,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.01,
+   "centroidHz": 787
+  },
+  "assets/r1212/sfx/boss-reveal-1.ogg": {
+   "use": "R568 보스 등장 울림",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Deep ominous impact boom with a low rumbling tail, heavy dark hit as a giant monster appears",
+   "source": "boss_reveal-1.mp3",
+   "sourceSha256": "f38f5b1fe3956582468bf3d2291634d873ae7eceb08577f283a18067bb2ae5b7",
+   "sourceBytes": 114135,
+   "highpassHz": 35,
+   "lowpassHz": 5000,
+   "pickScore": 0.19,
+   "bytes": 14238,
+   "sha256": "85820502314cb857260c10ea994847d04f134b8f5a3bd7614d206d7dc95bc527",
+   "duration": 2.6,
+   "peakDb": -7.66,
+   "activeSec": 2.37,
+   "lowShare150": 0.601,
+   "hfShare5k": 0.0,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.0,
+   "centroidHz": 141
+  },
+  "assets/r1212/sfx/banner-tick-1.ogg": {
+   "use": "R123 층·연도 숫자 딸깍",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Soft mechanical counter click, tiny dry tick of a rolling number dial",
+   "source": "banner_tick-4.mp3",
+   "sourceSha256": "962b5ecbc987160993c48988e7db5de891951944c86b18a4d13e95d7ac715a7b",
+   "sourceBytes": 25946,
+   "highpassHz": 200,
+   "lowpassHz": 8000,
+   "pickScore": 0.733,
+   "bytes": 4972,
+   "sha256": "3b65bfa9820a22e33a251ff387104d5b932ffc52ff8ce3ee62712f5c350b29f0",
+   "duration": 0.247,
+   "peakDb": -8.36,
+   "activeSec": 0.09,
+   "lowShare150": 0.0,
+   "hfShare5k": 0.0091,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.238,
+   "centroidHz": 1510
+  },
+  "assets/r1212/sfx/banner-tick-2.ogg": {
+   "use": "R123 층·연도 숫자 딸깍",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Soft mechanical counter click, tiny dry tick of a rolling number dial",
+   "source": "banner_tick-1.mp3",
+   "sourceSha256": "5f6b11430bff540bc9a4ca31222809a7dd225abede067986cfdf4ec032444b2b",
+   "sourceBytes": 25946,
+   "highpassHz": 200,
+   "lowpassHz": 8000,
+   "pickScore": 1.302,
+   "bytes": 5497,
+   "sha256": "03d55b37930c34877978b953c7a09c6baebb3d4fc810d3ec3e475ea8e2a47b9d",
+   "duration": 0.247,
+   "peakDb": -8.11,
+   "activeSec": 0.23,
+   "lowShare150": 0.0,
+   "hfShare5k": 0.0048,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.185,
+   "centroidHz": 1175
+  },
+  "assets/r1212/sfx/bed-leaves.ogg": {
+   "use": "R125 숲·고흐·모네·정원: 나뭇잎 바람",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Gentle forest leaves rustling in a soft breeze, calm steady ambience, seamless loop",
+   "source": "bed_leaves-3.mp3",
+   "sourceSha256": "0d5bd5ffb1d2bcef94fad5bb2076d44329f104211343411ff25805bb36d2f66e",
+   "sourceBytes": 498240,
+   "highpassHz": 150,
+   "lowpassHz": 4500,
+   "loopCrossfadeSec": 1.6,
+   "steadiness": 0.173,
+   "bytes": 58555,
+   "sha256": "9caf784718e676a50b787b206a607ef050ac714da6eb591d55ac1f0ab00298d5",
+   "duration": 14.0,
+   "peakDb": -6.68,
+   "activeSec": 14.0,
+   "lowShare150": 0.021,
+   "hfShare5k": 0.0061,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.225,
+   "centroidHz": 1293
+  },
+  "assets/r1212/sfx/bed-hum.ogg": {
+   "use": "R125 기계: 기계 웅웅",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Steady industrial machinery hum in a factory hall, soft mechanical drone, no impacts, seamless loop",
+   "source": "bed_hum-3.mp3",
+   "sourceSha256": "0b2ee3a76bd49a3cba4c80e7391b3e2f6a6a4b349589412fc5a6b3f662f502d8",
+   "sourceBytes": 498240,
+   "highpassHz": 90,
+   "lowpassHz": 5000,
+   "loopCrossfadeSec": 1.6,
+   "steadiness": 0.046,
+   "bytes": 55633,
+   "sha256": "9ea9c31985f17b2c464f01a2dbc822f0b65ea5cb05310e5847f674a8aad862a8",
+   "duration": 14.0,
+   "peakDb": -8.82,
+   "activeSec": 14.0,
+   "lowShare150": 0.08,
+   "hfShare5k": 0.0002,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.019,
+   "centroidHz": 561
+  },
+  "assets/r1212/sfx/bed-drone.ogg": {
+   "use": "R125 장미·만화·먹·뿌리·페르소나·초현실: 낮은 울림",
+   "origin": "ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19",
+   "prompt": "Dark eerie low ambient drone, slow evolving pad, unsettling but soft, seamless loop",
+   "source": "bed_drone-1.mp3",
+   "sourceSha256": "994f7acdc29d22247571d113de878e5c47ade3ef84e6894bcb8e6c5f45988fa8",
+   "sourceBytes": 498240,
+   "highpassHz": 60,
+   "lowpassHz": 4000,
+   "loopCrossfadeSec": 1.6,
+   "steadiness": 0.06,
+   "bytes": 39028,
+   "sha256": "3f18507f0a019ac83a6d2ceece777361b4bdb59ee06d093b0b09abcd732267c3",
+   "duration": 14.0,
+   "peakDb": -10.25,
+   "activeSec": 14.0,
+   "lowShare150": 0.006,
+   "hfShare5k": 0.0,
+   "flatRuns": 0,
+   "harshShare2to5k": 0.0,
+   "centroidHz": 857
+  }
+ }
+}

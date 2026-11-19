@@ -1,0 +1,27 @@
+FAIL synth-sfx-r1212.js 있음 
+FAIL runtime-text 사본 = client-source 
+FAIL 태그: combat-r118 앞 -1
+FAIL pages.yml CPU 검사 줄 
+FAIL 공개 확인 목록 
+FAIL runtime-inputs 에 새 파일 
+ok   코드에 유료 생성 호출 없음
+ok   새 오버레이는 합성하지 않음(파일만 재생)
+ok   R125 가끔 소리 17종 읽음
+FAIL API __STORYWORLD_SYNTH_SFX_R1212__ 
+FAIL 합성 소리 27종 모두 표에 있음 ["amb_steps","amb_bell","amb_ding","amb_gust","amb_clank","amb_boom","amb_chirp","amb_glitch","amb_chime","amb_music","amb_tick","amb_drip","amb_brush","amb_glass","amb_tram","amb_whisper","amb_heart","bed_wind","bed_leaves","bed_hum","bed_drone","bed_room","kairo_tick","kairo_chime","kairo_toll","boss_reveal","banner_tick"]
+FAIL 모든 소리 파일 있음(0) []
+ok   파일 크기 상한(한 번 소리 70KB·깔리는 소리 260KB)
+FAIL 새 파일 20개 이상·합 1.6MB 미만(Pages 예산) {"n":0,"sz":0}
+ok   index.json: 파일마다 출처(ElevenLabs)·프롬프트·해시
+ok   프롬프트에 외부 게임 이름 없음
+ok   게인 범위 0~2.5
+FAIL 받기 전에는 null(호출한 쪽이 합성으로 대신) 
+FAIL preload 뒤 준비됨 
+FAIL 파일 재생: 버퍼 소스를 정한 시각에 시작 
+FAIL 게인 = 표 게인 × 호출 게인, 받은 목적지로 연결 null
+FAIL 재생 속도 옵션 
+FAIL 깔리는 소리는 반복 재생 
+FAIL 같은 사이트 상대 경로만 받음 
+FAIL 예외 TypeError: Cannot read properties of null (reading 'preload')
+    at /home/user/m0/r96/qa/r1212/r1212-cpu-check.cjs:69:69
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
