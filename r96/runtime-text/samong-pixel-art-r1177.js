@@ -25,7 +25,7 @@ const OWN=Object.freeze({
 // R1177c: 세뇌당한 기억의 조각 탑이 깨질 때(R178 이 탑 자리에서 pvfx-void-implosion 을 부름)만 Dots C1 무너지는 탑으로 — 몹 예고 같은 다른 부름은 위 핏빛 소용돌이 그대로
 // R1177d: R169 지역 몹 타격 칸(mob-*, 원래 흑백 도트를 몹 색으로 물들여 씀) 9종 → Dots CX-0156SP D 칠한 시트(ROUGH r1, scripts/r1177d-mob-hit-sheets.py).
 //  사몽 에피소드만이 아니라 모든 모드(스토리·생존·사몽)에서 바꾼다. 칸 크기·기준점은 원래 칸과 화면 크기가 같게 맞췄고 재생 길이는 원래 이하. Dots 색 그대로(물들이지 않음).
-//  기억(mob-memory)은 Dots 칸이 없어 원래대로. 끄기 storyworld.r1177.samongPixel {"mobHit":false}.
+//  기억(mob-memory)은 R1177f 에서 Dots CX-0160MF(육망성 없음)로. 끄기 storyworld.r1177.samongPixel {"mobHit":false}.
 const MOBD=Object.freeze({
  'mob-domestic':{file:UP+'r1177/mob-domestic-dots-12.webp',frame:[272,179],pivot:[73,152],columns:4,frames:12,fps:18,src:'Dots D house-double-claw12 집 — 두 번 할퀴기'},
  'mob-forge':{file:UP+'r1177/mob-forge-dots-12.webp',frame:[242,131],pivot:[93,107],columns:4,frames:12,fps:12,src:'Dots D forge-hammer-sparks12 대장간 — 망치 불티'},
@@ -35,7 +35,8 @@ const MOBD=Object.freeze({
  'mob-stone':{file:UP+'r1177/mob-stone-dots-12.webp',frame:[212,120],pivot:[106,103],columns:4,frames:12,fps:12,src:'Dots D stone-rising-spines12 석조·동굴 — 솟는 돌가시'},
  'mob-snow':{file:UP+'r1177/mob-snow-dots-12.webp',frame:[322,162],pivot:[98,129],columns:4,frames:12,fps:12,src:'Dots D snow-ice-break12 눈 — 얼음 깨짐'},
  'mob-coast':{file:UP+'r1177/mob-coast-dots-12.webp',frame:[175,105],pivot:[87,83],columns:4,frames:12,fps:12,src:'Dots D coast-water-splash12 해안·늪 — 물 튐'},
- 'mob-regional':{file:UP+'r1177/mob-regional-dots-8.webp',frame:[168,131],pivot:[55,116],columns:4,frames:8,fps:13.33,src:'Dots D common-crescent-slash8 그 밖 — 초승달 베기'}});
+ 'mob-regional':{file:UP+'r1177/mob-regional-dots-8.webp',frame:[168,131],pivot:[55,116],columns:4,frames:8,fps:13.33,src:'Dots D common-crescent-slash8 그 밖 — 초승달 베기'},
+ 'mob-memory':{file:UP+'r1177/mob-memory-dots-12.webp',frame:[215,219],pivot:[108,144],columns:4,frames:12,fps:12,src:'Dots CX-0160MF 기억 — 육망성 없이 먹 번짐·깨지는 조각(R1177f)'}});
 const TOWER_KEY='r1177-memory-tower',TOWER={file:'r1177/'+TOWER_KEY+'.webp',frame:[256,256],pivot:[128,240],columns:7,frames:14,fps:20,loop:false,r1177:'Dots CX-0156SP C1 기억 조각 탑 무너짐',r1177Path:UP+'r1177/memory-tower-implode-14.webp'};
 for(const [k,v] of [...Object.entries(OWN),...Object.entries(MOBD)])ALIAS.set(ALIAS_DIR+k+'.webp',v.file);ALIAS.set(ALIAS_DIR+TOWER_KEY+'.webp',TOWER.r1177Path);
 const real=p=>typeof p==='string'&&p.startsWith(ALIAS_DIR)?ALIAS.get(p)||null:null;
