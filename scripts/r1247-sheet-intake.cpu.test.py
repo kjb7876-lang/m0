@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""R1245 Dots 시트 입고 검사(scripts/r1245-sheet-intake.py) CPU 테스트 — PIL 만 쓴다.
+"""R1247 Dots 시트 입고 검사(scripts/r1247-sheet-intake.py) CPU 테스트 — PIL 만 쓴다.
 합성 시트로 정상(PASS)·경계값·회귀(떨림·칸 넘침·발 기준선·크기 흔들림·빈 칸·크로마키·티끌)와 보고용 전수 모드를 확인한다."""
 import importlib.util, json, os, pathlib, subprocess, sys, tempfile
 from PIL import Image, ImageDraw
 
 HERE = pathlib.Path(__file__).resolve().parent
-SCRIPT = HERE / 'r1245-sheet-intake.py'
+SCRIPT = HERE / 'r1247-sheet-intake.py'
 spec = importlib.util.spec_from_file_location('sheet_intake', SCRIPT)
 si = importlib.util.module_from_spec(spec); spec.loader.exec_module(si)
 

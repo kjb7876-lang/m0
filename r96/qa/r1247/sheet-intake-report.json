@@ -1,6 +1,6 @@
 {
- "revision": "R1245",
- "generator": "scripts/r1245-sheet-intake.py census",
+ "revision": "R1247",
+ "generator": "scripts/r1247-sheet-intake.py census",
  "mode": "report-only (CI 를 막지 않음)",
  "summary": {
   "PASS": 204,

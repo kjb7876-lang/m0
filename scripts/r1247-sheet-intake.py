@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""R1245 Dots 시트 입고 검사 — 칸 시트를 받아 쓰기 전에 숫자로 걸러 낸다(PIL 만, numpy 없음).
+"""R1247 Dots 시트 입고 검사 — 칸 시트를 받아 쓰기 전에 숫자로 걸러 낸다(PIL 만, numpy 없음).
 
 검사 규칙(oh-my-hermes 의 omh-sprite-forge 'fail-closed 시트 QC' 아이디어를 참고해 새로 짬, 코드 복사 없음):
   empty    — 그림이 없는 칸
@@ -13,9 +13,9 @@ kind=fx 이면 empty·bleed 만 본다(이펙트는 발·몸이 없음). fx 끝�
 배경: 시트에 투명 픽셀이 있으면 알파를 그대로 쓰고, 없으면 --key(기본 FF00FF) 크로마키 ±tolerance.
 
 사용:
-  python3 -I scripts/r1245-sheet-intake.py check <sheet> (--cell WxH | --grid RxC) [--frames N] [--group S:N ...] [--kind char|fx]
+  python3 -I scripts/r1247-sheet-intake.py check <sheet> (--cell WxH | --grid RxC) [--frames N] [--group S:N ...] [--kind char|fx]
       → JSON 출력, 종료 0=PASS 1=HOLD 2=입력 거부
-  python3 -I scripts/r1245-sheet-intake.py census [assets 루트] [--out 디렉터리]
+  python3 -I scripts/r1247-sheet-intake.py census [assets 루트] [--out 디렉터리]
       → index.json 에 cell·cols 가 적힌 시트를 모두 재서 보고서(json·md)를 쓴다. 보고용이라 늘 종료 0.
 """
 import argparse, json, pathlib, statistics, sys
@@ -210,11 +210,11 @@ def census(assets, out_dir):
         for i in s['issues']:
             by_rule[i['rule']] = by_rule.get(i['rule'], 0) + 1
     summary['by_rule'] = dict(sorted(by_rule.items()))
-    rep = dict(revision='R1245', generator='scripts/r1245-sheet-intake.py census', mode='report-only (CI 를 막지 않음)',
+    rep = dict(revision='R1247', generator='scripts/r1247-sheet-intake.py census', mode='report-only (CI 를 막지 않음)',
                summary=summary, sheets=sheets, skipped=skipped)
     out = pathlib.Path(out_dir); out.mkdir(parents=True, exist_ok=True)
     (out / 'sheet-intake-report.json').write_text(json.dumps(rep, ensure_ascii=False, indent=1) + '\n')
-    md = ['# R1245 Dots 시트 입고 검사 — 기존 자산 전수(보고용)', '',
+    md = ['# R1247 Dots 시트 입고 검사 — 기존 자산 전수(보고용)', '',
           f"PASS {summary['PASS']} · HOLD {summary['HOLD']} · 건너뜀 {summary['skipped']} · 규칙별 {summary['by_rule']}", '',
           '보고용이다. 그룹(walk·attack) 정보가 없는 시트는 모든 칸을 한 그룹으로 비교하므로 공격 돌진·달리기 체공 칸이 baseline·jitter 로 잡힐 수 있다(사람이 그림으로 확인할 후보 목록).', '',
           '| 시트 | 판정 | 문제(칸) | 발 줄 차이(px) | 몸통 중심 차이(px) | 키 비율 |', '|---|---|---|---|---|---|']
@@ -240,7 +240,7 @@ def main(argv=None):
     s = sub.add_parser('census')
     root = pathlib.Path(__file__).resolve().parent.parent / 'r96'
     s.add_argument('assets', nargs='?', default=str(root / 'runtime-text' / 'assets'))
-    s.add_argument('--out', default=str(root / 'qa' / 'r1245'))
+    s.add_argument('--out', default=str(root / 'qa' / 'r1247'))
     a = ap.parse_args(argv)
     if a.cmd == 'census':
         rep = census(a.assets, a.out)

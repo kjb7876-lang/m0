@@ -1,4 +1,4 @@
-# R1245 Dots 시트 입고 검사 — 기존 자산 전수(보고용)
+# R1247 Dots 시트 입고 검사 — 기존 자산 전수(보고용)
 
 PASS 204 · HOLD 143 · 건너뜀 60 · 규칙별 {'baseline': 67, 'bleed': 42, 'empty': 2, 'jitter': 42, 'scale': 5}
 
