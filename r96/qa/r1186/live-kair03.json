@@ -1,0 +1,19 @@
+{
+ "zone": "kair03",
+ "names": {
+  "세이렌 모르": [],
+  "시간핵의 명령 파동": [
+   "kair/enemies/time-collector.png"
+  ],
+  "시간핵의 명령 잔류": [],
+  "뿌리 추적자 우두머리": [
+   "r74/monsters.png"
+  ],
+  "뿌리 추적자": [
+   "r74/monsters.png"
+  ],
+  "시간핵의 명령 파동 우두머리": [
+   "kair/enemies/resonance-slave.png"
+  ]
+ }
+}
