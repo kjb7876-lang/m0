@@ -140,7 +140,8 @@ check('⑧ 시트 파일이 실제로 있음',API.forms.every(f=>{const p=API.pr
 // ⑪ R1244b Dots CX-0178CN 눈 클로즈업 4칸(2×2) 적용
 const DOTS=['hwando','ego','persona','slayer','michaela','lauren','neon','seoha'];
 check('⑪ Dots 눈 시트 8형상: eye.sheet = assets/r1244/eye-<형상>.webp(2×2) 파일 있음',DOTS.every(f=>{const e=API.profile(f).eye;return e.sheet&&e.sheet.path===`assets/r1244/eye-${f}.webp`&&e.sheet.cols===2&&e.sheet.rows===2&&fs.existsSync(path.join(root,'runtime-text',e.sheet.path));}),DOTS.map(f=>JSON.stringify(API.profile(f).eye.sheet)).join(' '));
-check('⑪ 아직 안 온 헌터·기억사수는 초상화 그대로',['hunter','gunner'].every(f=>!API.profile(f).eye.sheet&&/r108\/heroes/.test(API.profile(f).eye.path)));
+/* R1244c: Dots 2차분으로 헌터·기억사수 눈 시트도 도착 → 10형상 모두 시트(예전 '헌터·기억사수는 초상화 그대로' 기대를 바꿈) */
+check('⑪ R1244c 헌터·기억사수도 Dots 눈 시트(2×2) 파일 있음',['hunter','gunner'].every(f=>{const e=API.profile(f).eye;return e.sheet&&e.sheet.path===`assets/r1244/eye-${f}.webp`&&fs.existsSync(path.join(root,'runtime-text',e.sheet.path));}));
 {const e=make({hero:'slayer'});e.C().play('slayer','awake');const c=e.el('r1244Cine');const eye=c.querySelector('.r1244eye');const seq=[];let t=0;
  while(t<1.7){seq.push(eye.getAttribute('data-frame'));e.adv(1/48);t+=1/48;}
  const uniq=seq.filter((v,i)=>v!==null&&v!==seq[i-1]);
@@ -150,12 +151,28 @@ check('⑪ 아직 안 온 헌터·기억사수는 초상화 그대로',['hunter'
  const uniq=seq.filter((v,i)=>v!==null&&v!==seq[i-1]);check('⑪ 패시브도 0→1→2→3',uniq.join('')==='0123',JSON.stringify(uniq));}
 {const e=make({hero:'neon',ls:{'storyworld.r1043.perf7':JSON.stringify({step:1})}});e.C().play('neon','awake');const eye=e.el('r1244Cine').querySelector('.r1244eye');const f0=eye.getAttribute('data-frame');e.adv(1);
  check('⑪ lite 는 칸 넘기기 없이 한 칸(발동 문양 2)',f0==='2'&&eye.getAttribute('data-frame')==='2',JSON.stringify({f0,f1:eye.getAttribute('data-frame')}));}
-{const e=make({hero:'hunter'});e.C().play('hunter','passive','squad');const eye=e.el('r1244Cine').querySelector('.r1244eye');check('⑪ 헌터는 초상화 경로 그대로(시트 없음)',eye.getAttribute('data-src')==='assets/r108/heroes/hunter.webp');}
+{const e=make({hero:'hunter'});e.C().play('hunter','passive','squad');const eye=e.el('r1244Cine').querySelector('.r1244eye');check('⑪ R1244c 헌터 패시브도 Dots 눈 시트(예전: 초상화 그대로)',eye.getAttribute('data-src')==='assets/r1244/eye-hunter.webp',eye.getAttribute('data-src'));}
 {const e=make({hero:'neon'});const n0=e.images.length;e.sb.player.hero='hwando';e.C().warm();const got=e.images.slice(n0).map(i=>i.src);
  check('⑪ 미리 읽기: 시트가 있으면 시트(초상화 대신), 4장 이하',got.includes('assets/r1244/eye-hwando.webp')&&got.length<=4,JSON.stringify(got));}
 {const r=require('child_process').spawnSync('python3',['-c',"import sys\nfrom PIL import Image\nim=Image.open(sys.argv[1]).convert('RGB').resize((256,64))\nprint(max(max(p)-min(p) for p in im.getdata()))",path.join(root,'runtime-text','assets','r1244','eye-hwando.webp')],{encoding:'utf8'});
  check('⑪ 환도 눈 시트 = 먹+흰(채도 최대 12 이하)',r.status===0&&+r.stdout.trim()<=12,r.stdout+r.stderr);}
 const man2=fs.readFileSync(path.join(root,'runtime-manifest.json'),'utf8');check('⑪ 눈 시트 8장 manifest 에 실림',DOTS.every(f=>man2.includes(`assets/r1244/eye-${f}.webp`)));
+// ⑫ R1244c Dots CX-0178CN 2차분: 베기 시트 7종(4×3, 12칸) · 임팩트 정지 그림 10종(반전 흑백)
+const SL=['gunner','hunter','lauren','michaela','neon','persona','slayer'];
+check('⑫ 베기 7종: slash = assets/r1244/slash-<형상>.webp(4×3·12칸·4:1) 파일 있음',SL.every(f=>{const s=API.profile(f).slash;return s&&s.path===`assets/r1244/slash-${f}.webp`&&s.cols===4&&s.rows===3&&s.frames===12&&s.ar===4&&fs.existsSync(path.join(root,'runtime-text',s.path));}),SL.map(f=>JSON.stringify(API.profile(f).slash)).join(' '));
+check('⑫ 환도·EGO 는 기존 먹 붓(r945)',['hwando','ego'].every(f=>/r945\/hwando-ink-sweep/.test(API.profile(f).slash.path)));
+/* R1244c-2: Dots r2 — 서하 베기 도착(예전 기대 'HOLD 라 없음'을 바꿈), 베기 칸 비율 4:1 유지, 임팩트는 위 정렬(넓은 화면에서 머리 안 잘림) */
+check('⑫ 서하 베기 = assets/r1244/slash-seoha.webp(4×3·12칸) 파일 있음',(()=>{const s=API.profile('seoha').slash;return s&&s.path==='assets/r1244/slash-seoha.webp'&&s.frames===12&&fs.existsSync(path.join(root,'runtime-text',s.path));})());
+check('⑫ 베기 요소 = 가로 120vw·세로 30vw(칸 4:1 그대로, 찌그러짐 없음)',/\.r1244slash\{[^}]*width:120vw;height:30vw/.test(src),(src.match(/\.r1244slash\{[^}]*\}/)||[''])[0]);
+{const e=make({hero:'seoha'});e.C().play('seoha','awake');const im=e.el('r1244Cine').querySelector('.r1244impact');
+ check('⑫ 임팩트 위 정렬(background-position 50% 0%) — 1366×640 같은 넓은 화면에서 머리 위가 잘리지 않음',im.style.backgroundPosition==='50% 0%',im.style.backgroundPosition);}
+check('⑫ 임팩트 10형상: impact = assets/r1244/impact-<형상>.webp 파일 있음',API.forms.every(f=>{const i=API.profile(f).impact;return i===`assets/r1244/impact-${f}.webp`&&fs.existsSync(path.join(root,'runtime-text',i));}),API.forms.map(f=>API.profile(f).impact).join(' '));
+{const e=make({hero:'hunter'});e.C().play('hunter','awake');const im=e.el('r1244Cine').querySelector('.r1244impact');
+ check('⑫ 각성 임팩트 = Dots 임팩트 그림(이미 반전해 구움 → 필터 없음)',im.getAttribute('data-src')==='assets/r1244/impact-hunter.webp'&&im.getAttribute('data-baked')==='1',JSON.stringify({src:im.getAttribute('data-src'),b:im.getAttribute('data-baked')}));
+ const sl=e.el('r1244Cine').querySelector('.r1244slash');check('⑫ 헌터 각성: 베기 = Dots 헌터 베기 시트',sl.getAttribute('data-src')==='assets/r1244/slash-hunter.webp',sl.getAttribute('data-src'));}
+{const e=make({hero:'neon',ls:{'storyworld.r1043.perf7':JSON.stringify({step:1})}});e.C().play('neon','awake');const im=e.el('r1244Cine').querySelector('.r1244impact');
+ check('⑫ lite 는 임팩트 그림 안 받음',im.style.backgroundImage==='none',im.style.backgroundImage);}
+
 // ⑩ 연결
 const RT=path.join(root,'runtime-text'),html=fs.readFileSync(path.join(RT,'index.html'),'utf8');
 check('⑩ index.html 태그(samong-stagger-r1217 바로 뒤)',html.includes('<script src="./samong-stagger-r1217.js"></script>\n<script src="./cinema-cutin-r1244.js"></script>'));

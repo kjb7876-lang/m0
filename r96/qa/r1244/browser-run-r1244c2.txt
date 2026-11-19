@@ -1,0 +1,28 @@
+PASS ① API·형상 10 {"has":true,"forms":10,"fire":true,"allow":true,"awake":true}
+PASS ① R1033 fire·allow 감싸짐
+PASS ① showAwakening 감싸짐
+PASS ①b 각성 감싸기 겹침 없음(10초 사이 1→1)
+PASS ② slayer 패시브 컷인 {"form":"slayer","plate":"슬레이어혈격자"}
+PASS ② slayer 눈·시트 그림 읽힘 2560/1152
+PASS ② michaela 패시브 컷인 {"form":"michaela","plate":"미카엘라연심 대개화"}
+PASS ② michaela 눈·시트 그림 읽힘 2560/1536
+PASS ② lauren 패시브 컷인 {"form":"lauren","plate":"라우렌유성 궤도"}
+PASS ② lauren 눈·시트 그림 읽힘 2560/1152
+PASS ② neon 패시브 컷인 {"form":"neon","plate":"네온천공 낙뢰"}
+PASS ② neon 눈·시트 그림 읽힘 2560/1536
+PASS ② seoha 패시브 컷인 {"form":"seoha","plate":"윤서하수문장 아르벨리아"}
+PASS ② seoha 눈·시트 그림 읽힘 2560/1152
+PASS ② hunter 패시브 컷인 {"form":"hunter","plate":"헌터기러기진 섬멸"}
+PASS ② hunter 눈·시트 그림 읽힘 2560/1152
+PASS ② gunner 패시브 컷인 {"form":"gunner","plate":"기억사수귀환 전우"}
+PASS ② gunner 눈·시트 그림 읽힘 2560/1536
+PASS ② 환도 삼협묵희 컷인(먹 붓 베기) {"a":true,"form":"hwando","on":true,"slash":"url(\"./assets/r945/hwando-ink-sweep.webp\")"}
+PASS ② 페르소나 컷인 {"ok":true,"form":"persona","plate":"페르소나(진) 쌍성 소멸","eye":"url(\"./assets/r1244/eye-persona.webp\")"}
+PASS ② 페르소나 그림 읽힘
+PASS ② EGO 컷인 {"ok":true,"form":"ego","eye":"url(\"./assets/r1244/eye-ego.webp\")"}
+PASS ③ 사몽 각성 극장판 컷인 {"ok":true,"on":true,"mode":"awake","form":"slayer","plate":"사몽 각성슬레이어","engine":true}
+PASS ③ 엔진 각성 컷인(#cutin)도 그대로
+LAG {"on":{"call":6.0499999999883585,"max":349.90000000000146,"mean":254.28409090909102,"n":10.5},"off":{"call":3.8999999999941792,"max":366.59999999999854,"mean":254.07999999999956,"n":10}}
+PASS ④ 각성 렉 회귀 없음(평균 프레임 254 vs 254ms, 최대 프레임 차 -16.7ms, 호출 차 2.1ms)
+PASS ⑥ 페이지 오류 0 
+{"fails":0,"method":"headless chromium software render"}
