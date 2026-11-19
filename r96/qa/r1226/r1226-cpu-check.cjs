@@ -18,6 +18,10 @@ if(!exists){// ⑩ 오만의 폐허핵(사용자 2026-11-19 "공격시 반대방
  const k=(L[0].points[2][1]-L[0].points[0][1])/418;ok('superego swapped art keeps feet on anchor',Math.abs(L[0].points[0][1]+393*k-p.y)<1e-6);
  ok('superego old overlay layer hidden',L[1].alpha===0);
  const o=mob({id:'a11:x',nativeId:'x9',name:'황금 창 천사'});const b2=body(key,[0,0,208,208],{},o);const L2=draw(g,o,[b2],false);ok('other M017 mob not swapped',L2[0].sourcePath===key);}
+// ⑫ 전수조사(헤드리스 전 지역, 2배 확대로 그림 쪽 확인): 걷기·대기·공격이 서로 다른 쪽으로 뒤집히던 몹들 — 한 몹 안의 시트는 같은 손·같은 쪽으로
+{const W={'r92/mobs/M095-move.png':'L','r92/mobs/M095-attack.png':'L','r92/mobs/M064-attack.png':'L','r92/mobs/M055-attack.png':'L','r92/mobs/M023-move.png':'L','r92/mobs/M023-attack.png':'L',
+ 'r92/mobs/M033-attack.png':'R','r198/mobs/M033-move.png':'L','r198/mobs/M024-idle.png':'R','r92/mobs/M024-attack.png':'R','r198/mobs/M047-idle.png':'R','r198/mobs/M047-move.png':'R','r92/mobs/M047-attack.png':'R'};
+ for(const [k,v] of Object.entries(W))ok('census FACE '+k+' = '+v,T.face[k]===v);}
 console.log(`\n${pass} passed, ${fail} failed`);process.exit(1);}
 const src=C(F);
 ok('runtime copy matches source',fs.existsSync(path.join(R,'runtime-text',F))&&src===RT(F));
@@ -65,7 +69,7 @@ ok('M007 attack cells all R (faces right)',G7.join('')==='RRRR');
  const b=body('blob:x/assets/r92/mobs/M007-attack.png:204,0,204,167:6:enemy',[0,0,218,181],{mir:true},e);const L=draw(g,e,[b],false);ok('cached-canvas key parsed (M007 #204,0), mirrored-by-R425 cell drawn facing right (hero side)',A.art(b).cell==='204,0'&&drawnLeft(L[0],'R')===false);
  const b2=body('blob:x/assets/r92/mobs/M007-attack.png:0,0,204,167:6:enemy',[0,0,218,181],{},e);const L2=draw(g,e,[b2],true);ok('gargoyle attack faces left when hero/attack is left',drawnLeft(L2[0],'R')===true);}
 // ⑤ 발 세로선 기준 반전: 반전 뒤 발 x(아래 두 점 가운데)가 project x 와 같다
-{const e=mob();const b=body('assets/r92/mobs/M008-attack.png',[0,0,142,173],{},e);b.points=b.points.map(p=>[p[0]+10,p[1]]);const L=draw(g,e,[b],false);const fx=q(e.x,e.y).x;const mid=(L[0].points[2][0]+L[0].points[3][0])/2;
+{const e=mob();const b=body('assets/r116/mobs/M008-hit.png',[0,0,142,173],{},e);b.points=b.points.map(p=>[p[0]+10,p[1]]);const L=draw(g,e,[b],false);const fx=q(e.x,e.y).x;const mid=(L[0].points[2][0]+L[0].points[3][0])/2;
  ok('mirror about foot x (offset body keeps mirrored offset)',Math.abs(mid-(fx-10))<1e-6);}
 // ⑥ 맡지 않는 것: 보스·중간보스·페르소나·맘몬·표에 없는 그림·R974 칸·NaN
 {const cases=[['boss',mob({boss:true})],['midboss',mob({midboss:true,name:'늪의 뿔악마 군주',nativeId:'mb-dist02'})],['persona',mob({persona:true})]];
@@ -102,4 +106,8 @@ ok('M007 attack cells all R (faces right)',G7.join('')==='RRRR');
  const k=(L[0].points[2][1]-L[0].points[0][1])/418;ok('superego swapped art keeps feet on anchor',Math.abs(L[0].points[0][1]+393*k-p.y)<1e-6);
  ok('superego old overlay layer hidden',L[1].alpha===0);
  const o=mob({id:'a11:x',nativeId:'x9',name:'황금 창 천사'});const b2=body(key,[0,0,208,208],{},o);const L2=draw(g,o,[b2],false);ok('other M017 mob not swapped',L2[0].sourcePath===key);}
+// ⑫ 전수조사(헤드리스 전 지역, 2배 확대로 그림 쪽 확인): 걷기·대기·공격이 서로 다른 쪽으로 뒤집히던 몹들 — 한 몹 안의 시트는 같은 손·같은 쪽으로
+{const W={'r92/mobs/M095-move.png':'L','r92/mobs/M095-attack.png':'L','r92/mobs/M064-attack.png':'L','r92/mobs/M055-attack.png':'L','r92/mobs/M023-move.png':'L','r92/mobs/M023-attack.png':'L',
+ 'r92/mobs/M033-attack.png':'R','r198/mobs/M033-move.png':'L','r198/mobs/M024-idle.png':'R','r92/mobs/M024-attack.png':'R','r198/mobs/M047-idle.png':'R','r198/mobs/M047-move.png':'R','r92/mobs/M047-attack.png':'R'};
+ for(const [k,v] of Object.entries(W))ok('census FACE '+k+' = '+v,T.face[k]===v);}
 console.log(`\n${pass} passed, ${fail} failed`);process.exit(fail?1:0);

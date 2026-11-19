@@ -36,11 +36,22 @@ const FACE=Object.freeze({
  // 오만의 폐허핵(ep1a10 중간보스, 사용자 2026-11-19 "공격시 반대방향으로 공격하는 모션") 아틀라스: 1번 칸 준비·2번 칸 주먹 지르기는 그림 오른쪽으로 침(R425 표는 'L' 로 잘못 적혀 영웅 반대쪽으로 쳤다).
  //  대기 0번 칸·r104 열쇠자세(p1~p4)는 정면이라 적지 않는다. 중간보스는 R1224 몫이지만 이 몹의 좌우만 사용자 요청으로 맡는다(MID_OK).
  'generated-story10-cycle-20261005/ep1a10/mb-ep1a10-pride-ruin-core-atlas.png#710,0':'R','generated-story10-cycle-20261005/ep1a10/mb-ep1a10-pride-ruin-core-atlas.png#1330,0':'R',
+ // 전수조사(헤드리스 전 지역 기록 + 2배 확대 확인)로 찾은 나머지: 같은 몹의 시트끼리 서로 다른 쪽으로 뒤집히거나(걷기 ↔ 공격) 움직일 때마다 좌우가 흔들리던 것
+ //  시간수문장 M095(뱀 꼬리 수문장): 걷기·공격 모두 왼쪽 — 걷기만 반대로 돌았다. M064·M055 공격(왼쪽으로 베기)은 좌우가 칸마다 흔들렸다.
+ 'r92/mobs/M095-move.png':'L','r92/mobs/M095-attack.png':'L','r92/mobs/M064-attack.png':'L','r92/mobs/M055-attack.png':'L',
+ //  긴 뱀의 그림자 M023: 머리·숨결 모두 왼쪽. 되살아난 수호기사 M033: 공격은 오른쪽으로 찌르고 칼은 그림 오른편, 걷기 그림은 칼이 그림 왼편이라 걷기를 반대로 둬 같은 손에 칼이 오게 한다.
+ 'r92/mobs/M023-move.png':'L','r92/mobs/M023-attack.png':'L','r92/mobs/M033-attack.png':'R','r198/mobs/M033-move.png':'L',
+ //  살아 있는 거대한 위장 M024: 국자로 오른쪽을 침(기존 표는 왼쪽). 숲 고블린 M047: 대기·걷기·공격 모두 칼이 그림 오른편, 오른쪽으로 벰.
+ 'r198/mobs/M024-idle.png':'R','r92/mobs/M024-attack.png':'R','r198/mobs/M047-idle.png':'R','r198/mobs/M047-move.png':'R','r92/mobs/M047-attack.png':'R',
  // 안정화 집행체 새 시트(M012 원본, 위와 같은 손)
  'r1226/mobs/m015-stabilizer.webp':'L',
 });
 // SIZE: 열쇠 = 경로, 값 = 발 기준 배율(대기·걷기 기준 몸 키에 맞춤).
 const SIZE=Object.freeze({
+ // 전수조사(게임 화면 몸 키 중앙값, 일반몹 286종): 대부분 ±12% 안. 웅크림·폭발처럼 동작 자체로 작아지거나 커지는 칸(슬라임 늘어남 1.28, M018 폭발 1.14)은 두고,
+ // 공격 때 몸이 눈에 띄게 줄던 두 시트만 줄어든 몫의 절반쯤 되돌린다(웅크림 느낌은 남김).
+ 'r92/mobs/M008-attack.png':1.06,   // 소환진 순례악마: 공격 몸 키 0.88(대기 대비)
+ 'r92/mobs/M060-attack.png':1.08,   // 시간수문장 06: 공격 몸 키 0.83
 });
 // TINT: 이름·nativeId 로 고른 몹의 몸 그림 색 바꾸기(초록·이끼 색상대만 다른 색으로, 금속 뿔·칼·피부 어두운 곳은 그대로).
 const TINT=Object.freeze([
@@ -115,7 +126,7 @@ function post(e,cmds,st){const b=bodyCmd(cmds,st);if(!b){stats.skipped++;return;
  const q=typeof project==='function'?project(e.x,e.y):null;if(!q||!fin(q.x)||!fin(q.y))return;const fx=q.x,fy=q.y;
  let a=artOf(b);
  if(artSwap(e,cmds,st,b,a,fx,fy))a=artOf(b);
- if(prefs.size){const k=SIZE[a.path];if(fin(k)&&k>0&&Math.abs(k-1)>.01){const hit=[];for(let i=st;i<cmds.length;i++)if(sameArt(cmds[i],b))hit.push(cmds[i]);for(const c of hit)mapCmd(c,p=>[fx+(p[0]-fx)*k,fy+(p[1]-fy)*k]);stats.scaled++;}}
+ if(prefs.size&&!b.r974){const k=SIZE[a.path];if(fin(k)&&k>0&&Math.abs(k-1)>.01){const hit=[];for(let i=st;i<cmds.length;i++)if(sameArt(cmds[i],b))hit.push(cmds[i]);for(const c of hit)mapCmd(c,p=>[fx+(p[0]-fx)*k,fy+(p[1]-fy)*k]);stats.scaled++;}}
  if(prefs.face&&!b.r974){const f=faceOf(a);if(f){const want=wantLeft(e);if(want!=null){const mir=b.points[1][0]<b.points[0][0],left=(f==='L')!==mir;
    if(left!==want){const hit=[];for(let i=st;i<cmds.length;i++)if(sameArt(cmds[i],b))hit.push(cmds[i]);for(const c of hit)mapCmd(c,p=>[2*fx-p[0],p[1]]);stats.flipped++;}else stats.kept++;}}}
  if(prefs.tint)tintCmds(e,cmds,st);}
