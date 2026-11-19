@@ -13,6 +13,7 @@
 //     보스 색 불꽃(덮어 그리기) — 회색 바닥 위에서 덧셈 불빛이 분홍으로 날아가지 않고 색과 윤곽이 남는다. 도형(원·고리·룬)은 쓰지 않는다(R241 규칙).
 //   · 주황 예고 도형(#712 삭제)은 되살리지 않는다. 수묵화풍(R1055)·수묵 이펙트 색(R1095)은 그대로.
 //   · Three 기록기가 아닌 2D 캔버스(예비 경로)에서는 같은 곡선을 globalAlpha 설정에 건다.
+//   · 기억 지역 몹 타격(R1177f Dots CX-0160MF 먹 번짐, pixelfx 'mob-memory')은 중간 회색 먹이라 어두운 바닥에서 옅다 → 그 그림 명령만 brightness(1.4) contrast(1.3) + 같은 알파 곡선.
 // 끄기: localStorage['storyworld.r1192.bossFxVis']='{"on":false}'
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_BOSS_FX_VIS_R1192__)return;
@@ -33,6 +34,10 @@ function boostCommands(list,from){if(!Array.isArray(list))return 0;let n=0;for(l
  const s=c.style,a0=Number.isFinite(+s.globalAlpha)?+s.globalAlpha:0;let a=curve(a0);if((s.globalCompositeOperation||'source-over')!=='lighter')a=Math.max(Math.min(a,OVER_CAP),clamp01(a0));s.globalAlpha=a;
  if(c.kind==='image'){const f=String(s.filter||'none').trim();s.filter=(f&&f!=='none')?f+' '+FILTER:FILTER;}
  c.r1192=true;n++;}stats.commands+=n;return n;}
+// 기억 지역 먹 번짐 타격(R1177f) — pixelfx 가 'r163:mob-memory:<시각>' 으로 그린 그림 명령만
+const INK_ID=/^r163:mob-memory:/,INK_FILTER='brightness(1.4) contrast(1.3)';
+function inkCommands(list,from){if(!Array.isArray(list))return 0;let n=0;for(let i=Math.max(0,from|0);i<list.length;i++){const c=list[i];if(!c||c.r1192ink||c.kind!=='image'||!c.style||!INK_ID.test(String(c.owner?.id||'')))continue;
+ const s=c.style,f=String(s.filter||'none').trim();s.filter=(f&&f!=='none')?f+' '+INK_FILTER:INK_FILTER;s.globalAlpha=curve(Number.isFinite(+s.globalAlpha)?+s.globalAlpha:0);c.r1192ink=true;n++;}stats.ink=(stats.ink||0)+n;return n;}
 // 2D 캔버스 예비 경로: globalAlpha 설정에 곡선을 건다(읽기는 역곡선 — save/restore·*= 가 섞여도 값이 일관)
 function legacyEnter(c){try{if(!c||Object.prototype.hasOwnProperty.call(c,'globalAlpha'))return null;let P=Object.getPrototypeOf(c),d=null;while(P&&!d){d=Object.getOwnPropertyDescriptor(P,'globalAlpha');P=Object.getPrototypeOf(P);}
  if(!d||!d.set||!d.get)return null;Object.defineProperty(c,'globalAlpha',{configurable:true,get(){return inverse(d.get.call(c));},set(v){d.set.call(c,curve(v));}});stats.legacy++;return()=>{try{delete c.globalAlpha;}catch(_){}};}catch(e){fail(e);return null;}}
@@ -63,13 +68,14 @@ function meteorUnder(h){const S=window.__STORYWORLD_FX_SPRITES_R106__,PJ=typeof 
 // 가장 바깥에서 감싸야 R241·R105·R330·R1040·R162 가 자기 표지를 처리하고 돌아가기 전에 잡는다 → 누가 뒤에 감싸면 다시 바깥을 감싼다(15초 동안)
 let myDE=null,myDH=null,effW=false,hazW=false;
 function install(){wrapSprites();
- if(typeof drawEffect==='function'&&drawEffect!==myDE){const base=drawEffect;myDE=function(e,...a){if(!on||!isBossEffect(e))return base.apply(this,[e,...a]);const top=depth===0;if(top)stats.effects++;wrapSprites();
+ if(typeof drawEffect==='function'&&drawEffect!==myDE){const base=drawEffect;myDE=function(e,...a){if(on&&e&&e.type==='r163-pixelfx'){const c=typeof ctx!=='undefined'?ctx:null,rec=!!c&&Array.isArray(c.commands);const from=rec?c.commands.length:0;try{return base.apply(this,[e,...a]);}finally{if(rec){try{inkCommands(c.commands,from);}catch(err){fail(err);}}}}
+  if(!on||!isBossEffect(e))return base.apply(this,[e,...a]);const top=depth===0;if(top)stats.effects++;wrapSprites();
    return within(()=>{if(top&&e.type==='r241-fx'){try{const hz=typeof hazards!=='undefined'?hazards:null;if(Array.isArray(hz))for(const h of hz)if(h&&h.r241Meteor)meteorUnder(h);}catch(err){fail(err);}}return base.apply(this,[e,...a]);});};
   drawEffect=myDE;effW=true;}
  if(typeof drawHazard==='function'&&drawHazard!==myDH){const base=drawHazard;myDH=function(h,...a){let b=false;try{b=on&&isBossHazard(h);}catch(err){fail(err);}if(!b)return base.apply(this,[h,...a]);if(depth===0)stats.hazards++;wrapSprites();return within(()=>base.apply(this,[h,...a]));};
   drawHazard=myDH;hazW=true;}}
 let tries=0;(function arm(){try{install();}catch(e){fail(e);}if(++tries<60&&typeof setTimeout==='function')setTimeout(arm,250);})();
-window.__STORYWORLD_BOSS_FX_VIS_R1192__=Object.freeze({revision:REV,curve,inverse,isBossHazard,isBossEffect,boostCommands,
+window.__STORYWORLD_BOSS_FX_VIS_R1192__=Object.freeze({revision:REV,curve,inverse,isBossHazard,isBossEffect,boostCommands,inkCommands,
  inspect:()=>({revision:REV,on,installed:{effect:effW,hazard:hazW,sprites:!!SP0},stats:{...stats},lastError}),
  set:v=>{on=v!==false;try{window.localStorage?.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}});
 })();
