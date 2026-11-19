@@ -8962,6 +8962,61 @@
    ],
    "status": "Dots CX-0175SB ROUGH r1 (R1218b)",
    "finalArt": false
+  },
+  {
+   "id": "samong-s04-kang-jaeheon-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/samong-s04-kang-jaeheon-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 9,
+   "pivot": [
+    128.0,
+    236.0
+   ],
+   "visibleHeight": 194.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    8
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^강재헌$",
+    "boss": true,
+    "samong": "(^|[^0-9])S-?04([^0-9]|$)"
+   },
+   "bytes": 105040,
+   "sha256": "1c4e61325f3f0bd03104d4699c3a585f06fc83438d3e66e62e1e9880b727265d",
+   "source": [
+    {
+     "file": "CX-0175SB-01_kang-jaeheon_idle4_r1_ROUGH.png",
+     "sha256": "ee4dd209e6e44ba5a849799f198759b18f3f1bd022abbdeb6ae6ee03dc9e4734"
+    },
+    {
+     "file": "CX-0175SB-01_kang-jaeheon_move4_r1_ROUGH.png",
+     "sha256": "42b85b36d7f0ee5ed9f6d1e61169c2a8a9067c09a1f989537b6da0acadd0a495"
+    },
+    {
+     "file": "CX-0175SB-01_kang-jaeheon_attack4_r1_ROUGH.png",
+     "sha256": "1f14848ed8d8e374954e3f41e19d7d9c3b3e39fc32b6ba200de7e5ad8b713269"
+    }
+   ],
+   "status": "Dots CX-0175SB ROUGH r1 (R1218b)",
+   "finalArt": false
   }
  ]
 }

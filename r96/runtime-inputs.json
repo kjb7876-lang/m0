@@ -10780,7 +10780,8 @@
     "move-dir-r1243-data.js",
     "assets/r1243/move/c103-mid-side.webp",
     "hero-fit-r1240.js",
-    "assets/r380/mobs/samong-p2-core-root-v1.webp"
+    "assets/r380/mobs/samong-p2-core-root-v1.webp",
+    "assets/r380/mobs/samong-s04-kang-jaeheon-v1.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11855,5 +11856,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "38c30a8a2a56568197faaa36b81c10654d3993148b26a62a807b531f4d42c704"
+  "runtimeManifestSHA256": "87294e7101b24fbaacd779426b78c0e6c837591bc97980cd2be29fc00a4e7093"
 }

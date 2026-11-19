@@ -20299,8 +20299,8 @@
     },
     {
       "path": "assets/r380/mobs/index.json",
-      "bytes": 200682,
-      "sha256": "2cc324b708cea1d905cccb901bc4f2b4e36c396a82ce9199d7575432a5c8cff4"
+      "bytes": 201862,
+      "sha256": "33433bf73dd1098bf68173e4609aa2d8edabb3eb9a0ce8b07319e6d2b4df5ac6"
     },
     {
       "path": "assets/r380/mobs/jealousy-wraith-v1.webp",
@@ -20626,6 +20626,11 @@
       "path": "assets/r380/mobs/samong-s02-student-v1.webp",
       "bytes": 66654,
       "sha256": "71a1b0b02ce9b925a070cc65a02ba4f74f801963279646edd5e3f4aaec9c0d1e"
+    },
+    {
+      "path": "assets/r380/mobs/samong-s04-kang-jaeheon-v1.webp",
+      "bytes": 105040,
+      "sha256": "1c4e61325f3f0bd03104d4699c3a585f06fc83438d3e66e62e1e9880b727265d"
     },
     {
       "path": "assets/r380/mobs/samong-s05-cult-seal-v1.webp",
@@ -57853,8 +57858,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11570,
-  "totalBytes": 1380093263,
+  "fileCount": 11571,
+  "totalBytes": 1380199483,
   "webHTMLSha256": "78e5d51c39ba22458c1d953dfc079360a0382bcafbc2b93c64744361f12255f8",
   "largest": [
     {
