@@ -19,7 +19,8 @@ const KINDS=[['red',[.25,.7]],['blue',[.45,.9]],['violet',[.6,.9]]];
 await run('warm',[['repulse',[.3]]]);await p.waitForFunction(()=>Object.values(window.__STORYWORLD_LAUREN_CELESTIAL_R946__.sheets()).every(s=>s.ready),null,{timeout:60000}).catch(()=>{});
 const P=await run('persona',KINDS);
 for(const k of ['red','blue','violet']){const hl=P[k].filter(c=>/:hl:/.test(c.id));ok(hl.length>0,`ⓐ ${k} 페르소나 하이라이트 덧그림이 장면 명령으로 나감 (${hl.length}, 예 ${hl[0]?hl[0].img:'-'})`);
- const tone={red:'eonju',blue:'black',violet:'darkred'}[k];const sh=hl.filter(c=>/r946|r1140/.test(c.img));{const bad=sh.filter(c=>!new RegExp('^r1140:'+tone+':').test(c.img)&&c.f==='none');/* 굽기 예산이 남지 않은 첫 몇 프레임은 필터로 물듦(R1113) */ok(sh.length>0&&bad.length===0,`ⓑ ${k} 덧그림 시트가 페르소나 ${tone} 굽기 (${sh.length}, 예외 ${JSON.stringify(bad.slice(0,2))})`);}}
+ const tone={red:'eonju',blue:'black',violet:'darkred'}[k];const sh=hl.filter(c=>/r946|r1140/.test(c.img));{const bad=sh.filter(c=>!new RegExp('^r1140:'+tone+':').test(c.img)&&c.f==='none');/* 굽기 예산이 남지 않은 첫 몇 프레임은 필터로 물듦(R1113) */ok(bad.length===0,`ⓑ ${k} 덧그림 시트가 페르소나 ${tone} 굽기 (${sh.length}, 예외 ${JSON.stringify(bad.slice(0,2))})`);}}
+for(const [k,n] of [['red','ring'],['blue','collapse'],['violet','burst']]){const d=P[k].filter(c=>new RegExp('assets/r1198/persona-hl-'+n).test(c.img));ok(d.length>0&&d.every(c=>!/^r1140:/.test(c.img)),`ⓗ ${k} Dots CX-0165PH ${n} 시트 그대로(다시 굽지 않음) (${d.length})`);}
 const H=await p.evaluate(()=>window.__STORYWORLD_LAUREN_CELESTIAL_R946__.highlight());ok(H.persona===true&&H.range===1.5,'ⓒ highlight() 페르소나 켜짐 '+JSON.stringify(H));
 const lz=await p.evaluate(()=>window.__STORYWORLD_PERSONA_WER_R1144__.inspect());ok(lz&&lz.on!==false,'ⓓ (진) 레이저 모듈 살아 있음 '+JSON.stringify({dots:lz.dots}).slice(0,120));
 await p.evaluate(A=>{window[A].setForm(false);},A);await p.waitForTimeout(500);

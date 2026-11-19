@@ -190,6 +190,9 @@ const SHEETS={red:{n:'lauren-red',frames:24,fps:12.5,loop:true,piv:[141,137],bod
  // R1151 Dots CX-0141CE LC-08 중력 폭발 r2(흡입 1~10칸 → 바깥으로 터짐 11~16칸 → 먹 잔광 17~24칸). 충돌 순간을 11번째 칸(0.8초)에 맞춰 그 뒤만 한 번 재생.
  boom:{n:'lauren-boom',frames:24,fps:12.5,loop:false,piv:[128,128],body:186},
  // R1151 Dots CX-0141CE LC-06 항성 반발 r1(HOLD → 88% 로 줄여 칸 안으로·가장자리 부드럽게, qa/r1151/make-repulse.py). 납작한 바닥 고리라 바닥 맞춤 없이 그린다. 고리 지름 ≈ 칸의 84%(256 기준 214).
+ // R1198b Dots CX-0165PH 페르소나 하이라이트 전용(언주·흑·검빨로 그려 옴, R1113 이 다시 굽지 않음). scripts/r1198-persona-hl-dots.py, 출처 assets/r1198/index.json
+ phBurst:{n:'persona-hl-burst',dir:'assets/r1198/',frames:24,fps:20,loop:false,piv:[48,128],body:215},phRing:{n:'persona-hl-ring',dir:'assets/r1198/',frames:24,fps:20,loop:false,piv:[128,128],body:211},
+ phCollapse:{n:'persona-hl-collapse',dir:'assets/r1198/',frames:24,fps:20,loop:false,piv:[128,128],body:200},
  repulse:{n:'lauren-repulse',frames:24,fps:12.5,loop:false,piv:[128,128],body:214},tail:{n:'lauren-tail',frames:24,fps:12.5,loop:true,piv:[200,128],body:185}};
 const BOOM_AT=.8,BOOM_LIFE=(24/12.5)-BOOM_AT;
 const SPATH=k=>(SHEETS[k].dir||SDIR)+SHEETS[k].n+'.webp';let sheetsOn=true,askAt=-1e9;
@@ -229,15 +232,15 @@ function drawRepulse(x,t){const u=t-x.t0,v=Math.min(1,u/REP_LIFE),q=project(x.x,
   ctx.globalCompositeOperation=prev;}finally{ctx.restore();}});}
 // R1198 하이라이트 덧그림(페르소나만). 시트가 없으면 바닥 고리 코드 그림.
 function hlRing(id,wx,wy,age,life,R,alpha){const q=project(wx,wy),{z}=scale(),v=Math.max(0,Math.min(1,age/life)),a=(1-v)*alpha;if(!(a>0))return;
- sc({id:id+':ring',kind:'effect',pxfSide:'hero',x:wx,y:wy,groundAligned:true},()=>{if(sheet('repulse',(4+v*19.99)/12.5,q.x,q.y,R*1.1,{alpha:a}))return;ring(q,R*.5*(.3+.8*Math.sqrt(v)),VIO_HOT,Math.max(2,8*z*(1-v)),a,.14*a);ring(q,R*.36*(.3+.8*Math.sqrt(v)),VIO,Math.max(1,3*z),a*.8,0);});}
-function hlBoom(id,wx,wy,age,R,alpha){if(!(age>=0&&age<BOOM_LIFE))return;const q=project(wx,wy),{AH}=scale(),v=age/BOOM_LIFE;
- sc({id:id+':boom',kind:'effect',pxfSide:'hero',x:wx,y:wy+.01},()=>{if(sheet('boom',BOOM_AT+age,q.x,q.y-AH*.3,R,{alpha}))return;if(v<.4)glowOrb(q.x,q.y-AH*.3,R*.25*(1-v/.4)+AH*.1,VIO_HOT,VIO,alpha*(1-v/.4));});}
+ sc({id:id+':ring',kind:'effect',pxfSide:'hero',x:wx,y:wy,groundAligned:true},()=>{if(sheet('phRing',v*23.99/20,q.x,q.y,R,{alpha:Math.min(1,alpha*1.1)}))return;if(sheet('repulse',(4+v*19.99)/12.5,q.x,q.y,R*1.1,{alpha:a}))return;ring(q,R*.5*(.3+.8*Math.sqrt(v)),VIO_HOT,Math.max(2,8*z*(1-v)),a,.14*a);ring(q,R*.36*(.3+.8*Math.sqrt(v)),VIO,Math.max(1,3*z),a*.8,0);});}
+function hlBoom(id,wx,wy,age,R,alpha,ph,hd){if(!(age>=0&&age<BOOM_LIFE))return;const q=project(wx,wy),{AH}=scale(),v=age/BOOM_LIFE;
+ sc({id:id+':boom',kind:'effect',pxfSide:'hero',x:wx,y:wy+.01},()=>{if(ph&&sheet(ph,age,q.x,q.y-AH*.3,R*(ph==='phBurst'?1.15:1),{alpha,...(hd||{})}))return;if(sheet('boom',BOOM_AT+age,q.x,q.y-AH*.3,R,{alpha}))return;if(v<.4)glowOrb(q.x,q.y-AH*.3,R*.25*(1-v/.4)+AH*.1,VIO_HOT,VIO,alpha*(1-v/.4));});}
 // 성능 7단계(perf7-r1043, 렉 전수조사 스레드 11-19 04:06Z '올리면 확실히 더 화려, 내리면 확실히 렉 감소'): 1·2단계 덧그림 끔, 3·4단계 주 그림 하나, 5~7단계 전부. 판정은 단계와 무관.
 function hlTier(){try{const v=Number(window.__STORYWORLD_PERF7_R1043__?.step?.());if(!Number.isFinite(v))return 2;return v<=2?0:v<=4?1:2;}catch(_){return 2;}}
 function drawHl(x,t){const tier=hlTier();if(tier<=0)return;const full=tier>=2,{T1}=scale(),u=t-x.t0,id='r946:'+x.kind+':hl:'+x.t0.toFixed(2);stats.hlDraws=(stats.hlDraws||0)+1;
  if(x.kind==='red'){hlRing(id,x.ox,x.oy,u,.6,RED_R*x.k*T1*2.6,.9);return;}
- if(x.kind==='blue'){const v=u-BLUE_FLY;if(v>=0){hlBoom(id,x.tx,x.ty,v,BLUE_R*x.k*T1*.9,.85);if(full)hlRing(id+':floor',x.tx,x.ty,v,.7,BLUE_HIT_R*x.k*T1*1.6,.7);}return;}
- if(x.kind==='violet'&&x.launchT!=null){const v=t-x.launchT;hlBoom(id+':muzzle',x.sx,x.sy,v,T1*2.4*(x.vs||1),.95);if(!full)return;hlRing(id,x.ox,x.oy,v,.7,T1*3.2*(x.vs||1),.9);
+ if(x.kind==='blue'){const v=u-BLUE_FLY;if(v>=0){hlBoom(id,x.tx,x.ty,v,BLUE_R*x.k*T1*.9,.85,'phCollapse');if(full)hlRing(id+':floor',x.tx,x.ty,v,.7,BLUE_HIT_R*x.k*T1*1.6,.7);}return;}
+ if(x.kind==='violet'&&x.launchT!=null){const v=t-x.launchT;hlBoom(id+':muzzle',x.sx,x.sy,v,T1*2.4*(x.vs||1),.95,'phBurst',heading(x));if(!full)return;hlRing(id,x.ox,x.oy,v,.7,T1*3.2*(x.vs||1),.9);
   if(x.end!=null)hlBoom(id+':end',x.x,x.y,t-x.end,T1*2.8*(x.vs||1),.9);}}
 function drawRed(x,t){if(x.hl)drawHl(x,t);const {z,AH}=scale(),q=project(x.x,x.y),lift=AH*.55,r=AH*.28*(x.vs||1),fade=x.end==null?1:Math.max(0,1-(t-x.end)/.3),id='r946:red:'+x.t0.toFixed(2);
  sc({id:id+':orb',kind:'effect',pxfSide:'hero',x:x.x,y:x.y},()=>{for(let i=0;i<x.trail.length;i++){const p=project(x.trail[i].x,x.trail[i].y),k=(i+1)/(x.trail.length+1);glowOrb(p.x,p.y-lift,r*(.35+.45*k),RED_HOT,RED,.22*k*fade);}

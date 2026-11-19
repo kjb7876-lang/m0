@@ -1,0 +1,33 @@
+{
+ "request": "CX-0165PH",
+ "source": "Dots (Google Drive), ROUGH r1",
+ "cell": 192,
+ "cols": 6,
+ "frames": 24,
+ "sheets": {
+  "persona-hl-burst": {
+   "from": "ph01_binary-annihilation-burst.png",
+   "sha256": "44233822b9cecead645b2dd484950acdfe72667a5b0f268e2f314121ce43b60e",
+   "bytes": 423702,
+   "out_sha256": "8719e95d2e9c3b2843531450eab8a8b0589ed7b6d3c3e08cf8c043cd68794f8d",
+   "out_bytes": 125750,
+   "edit": "burst"
+  },
+  "persona-hl-ring": {
+   "from": "ph02_vermilion-ground-shockwave.png",
+   "sha256": "3e8a23a58ece86f89f20acb337e6335dc4b9ebfe68da09076404970dfa5d024a",
+   "bytes": 342589,
+   "out_sha256": "5e27d63895b6c6a4342e806cb2fe257ce1c87afaaa52a1351d2081a09ac898ed",
+   "out_bytes": 134568,
+   "edit": "ring"
+  },
+  "persona-hl-collapse": {
+   "from": "ph03_abyss-dwarf-collapse.png",
+   "sha256": "c26f86e4280667e7bce356c9560ae71941b782ffe149f1912dc699866e7394e2",
+   "bytes": 649567,
+   "out_sha256": "1ec8bfad10029e836405411b3840408627ee7d5e5d87c3cc1fcd68f9c85cdbaa",
+   "out_bytes": 146202,
+   "edit": "collapse"
+  }
+ }
+}

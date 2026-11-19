@@ -1,9 +1,12 @@
-PASS ⓐ red 페르소나 하이라이트 덧그림이 장면 명령으로 나감 (12, 예 r1140:eonju:11:m0/assets/r946/lauren-repulse.webp)
-PASS ⓑ red 덧그림 시트가 페르소나 eonju 굽기 (12, 예외 [])
-PASS ⓐ blue 페르소나 하이라이트 덧그림이 장면 명령으로 나감 (37, 예 r1140:black:14:m0/assets/r946/lauren-boom.webp)
-PASS ⓑ blue 덧그림 시트가 페르소나 black 굽기 (37, 예외 [])
-PASS ⓐ violet 페르소나 하이라이트 덧그림이 장면 명령으로 나감 (53, 예 r1140:darkred:18:m0/assets/r946/lauren-boom.webp)
-PASS ⓑ violet 덧그림 시트가 페르소나 darkred 굽기 (53, 예외 [])
+PASS ⓐ red 페르소나 하이라이트 덧그림이 장면 명령으로 나감 (12, 예 m0/assets/r1198/persona-hl-ring.webp)
+PASS ⓑ red 덧그림 시트가 페르소나 eonju 굽기 (0, 예외 [])
+PASS ⓐ blue 페르소나 하이라이트 덧그림이 장면 명령으로 나감 (37, 예 m0/assets/r1198/persona-hl-collapse.webp)
+PASS ⓑ blue 덧그림 시트가 페르소나 black 굽기 (0, 예외 [])
+PASS ⓐ violet 페르소나 하이라이트 덧그림이 장면 명령으로 나감 (53, 예 m0/assets/r1198/persona-hl-burst.webp)
+PASS ⓑ violet 덧그림 시트가 페르소나 darkred 굽기 (16, 예외 [])
+PASS ⓗ red Dots CX-0165PH ring 시트 그대로(다시 굽지 않음) (12)
+PASS ⓗ blue Dots CX-0165PH collapse 시트 그대로(다시 굽지 않음) (23)
+PASS ⓗ violet Dots CX-0165PH burst 시트 그대로(다시 굽지 않음) (23)
 PASS ⓒ highlight() 페르소나 켜짐 {"revision":"R1198-persona-highlight-1","tier":2,"chance":0.13,"weights":{"repulse":0.5,"red":1.6,"blue":1.6,"meteor":0.5,"violet":1},"range":1.5,"vis":1.7,"shake":{"red":4,"blue":5,"violet":7},"sheets":["repulse","boom"],"persona":true}
 PASS ⓓ (진) 레이저 모듈 살아 있음 {"dots":{"dmark":true,"dchain":true,"dhit":true,"dorb":true,"dtail":true,"dember":true,"lbody":true,"lstart":true,"lend"
 PASS ⓔ 라우렌 본인은 덧그림 없음

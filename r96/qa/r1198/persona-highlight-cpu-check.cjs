@@ -81,4 +81,14 @@ ok('⑨ 2단계(낮음) 덧그림 없음',hlAt(2,'violet',24).length===0);
 {const lo=hlAt(3,'violet',30),hi=hlAt(7,'violet',30);ok('⑨ 3단계는 주 그림만(총구 폭발), 7단계는 발밑 고리·끝 폭발까지 ('+new Set(lo.map(i=>i.split(':').slice(4).join(':'))).size+' < '+new Set(hi.map(i=>i.split(':').slice(4).join(':'))).size+')',lo.length>0&&new Set(lo.map(i=>i.split(':').slice(4).join(':'))).size<new Set(hi.map(i=>i.split(':').slice(4).join(':'))).size);}
 ok('⑨ \'auto\'·없음 → 기본(전부)',hlAt('auto','red',10).length>0);
 {const g=env('lauren',true);vm.runInContext('window.__STORYWORLD_PERF7_R1043__={step:()=>1}',g);A(g).qaForce('red');const t=mob('t',11,10),f=mob('f',21,10);g.room.enemies.push(t,f);heroHit(g,'t');step(g,80);ok('⑨ 1단계에서도 사거리(판정) 그대로 12칸',procHits(g,'red').some(h=>h.id==='f'));}
+// ⑩ R1198b Dots CX-0165PH 전용 시트(총구 대폭발·언주 충격 고리·심연 붕괴) — 읽혔으면 덧그림이 그 시트로, 없으면 예전 시트
+{const PH={'assets/r1198/persona-hl-burst.webp':1,'assets/r1198/persona-hl-ring.webp':1,'assets/r1198/persona-hl-collapse.webp':1};
+ const man=rd('runtime-manifest.json');for(const k of Object.keys(PH)){ok('⑩ '+k+' 파일·매니페스트',fs.existsSync(path.join(R,'runtime-text',k))&&man.includes(k));}
+ ok('⑩ 출처 표 assets/r1198/index.json (CX-0165PH, sha256)',/CX-0165PH/.test(rd('runtime-text/assets/r1198/index.json'))&&/sha256/.test(rd('runtime-text/assets/r1198/index.json')));
+ const withPh=(kind,n)=>{const g=env('lauren',true);vm.runInContext("readyImage=function(p){return {image:{src:p,naturalWidth:1152,naturalHeight:768}};}",g);A(g).qaForce(kind);g.room.enemies.push(mob('t',13,10));heroHit(g,'t');step(g,n);return g.drawn.filter(d=>/assets\/r1198\//.test(d.src)).map(d=>d.src);};
+ ok('⑩ 은빛 거성 발밑 고리 = persona-hl-ring',withPh('red',8).some(x=>/persona-hl-ring/.test(x)));
+ ok('⑩ 심연 왜성 붕괴 = persona-hl-collapse',withPh('blue',16).some(x=>/persona-hl-collapse/.test(x)));
+ ok('⑩ 쌍성 소멸 총구 = persona-hl-burst',withPh('violet',16).some(x=>/persona-hl-burst/.test(x)));
+ {const g=env('lauren',false);vm.runInContext("readyImage=function(p){return {image:{src:p,naturalWidth:1152,naturalHeight:768}};}",g);A(g).qaForce('violet');g.room.enemies.push(mob('t',13,10));heroHit(g,'t');step(g,16);ok('⑩ 라우렌 본인은 전용 시트 안 씀',!g.drawn.some(d=>/assets\/r1198\//.test(d.src)));}
+ ok('⑩ 페르소나 굽기가 r1198 Dots 그림은 다시 굽지 않음(DOTS_ART)',/DOTS_ART=\/[^\n]*r1198/.test(rd('client-source/persona-hero-r1113.js')));}
 console.log((fail?'FAILED ':'ALL PASS ')+pass+'/'+(pass+fail));process.exit(fail?1:0);
