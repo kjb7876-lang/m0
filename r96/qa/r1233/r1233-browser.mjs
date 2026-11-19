@@ -25,10 +25,11 @@ const CASES=[
  ['last304:STORY','장미이슬 슬라임',/assets\/r1233\/mobs\/m043\./],['sz115-RD-2','서로의 결말을 먹는 도시',/assets\/r1233\/mobs\/m091\./],
  ['sz115-RC-1','관람석의 시선',/assets\/r1233\/mobs\/m087\.|assets\/r380\/mobs\//]/* RC 판은 일부 몹에 R380 채택 그림(slot)이 먼저 */,['sz115-S04-2','규칙을 어기지 않는 마네킹',/assets\/r1233\/mobs\/m072\./],
  ['sz115-S03-2','다시 일으켜 세워진 도전자',/assets\/r1233\/mobs\/m069\./],
+ ['ep1b06b:STORY','고슴도치 가시 사탕',/assets\/r1233\/mobs\/m027\./],['ep1b06b:STORY','낡은 장난감 요요',/assets\/r1233\/mobs\/m029\./],/* 사용자 선택 새 그림 */
  ['cult05:STORY','중간보스 · ID 배양 점액체',/assets\/r380\/mobs\/legacy-m130-slime-cult05-v2\./],/* R81 지역 수호자(앞말 붙은 일반몹) */
 ];
 // 대조군: 손대지 않아야 할 이름·층
-const CONTROL=[['ep1b06b:STORY','고슴도치 가시 사탕',/assets\/r410\/mobs\/m027\./],
+const CONTROL=[['murder04:STORY','제출되지 못한 문장',/assets\/r290\/mobs\/m053\.|du07/],
  ['ep1a10:STORY','부정의 잔영',/assets\/r92\/mobs\/M016-|denial_specter/],['ep1a11:STORY','거짓천국 근위천사',/assets\/r380\/mobs\/false-heaven-guard-v1\./],['last305:STORY','숲 고블린',/M047-|Monster_Goblin/]];
 const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:640,height:360}});
 await ctx.addInitScript(()=>{localStorage.setItem('storyworld.r790.npc','{"on":false}');localStorage.setItem('storyworld.r183.scene3d','{"on":false}');});
@@ -51,11 +52,11 @@ const ctlMiss=[];const byZone={};for(const c of [...CASES,...CONTROL])(byZone[c[
 const ONLY=process.env.ONLY?new RegExp(process.env.ONLY):null;/* 실패한 구역만 다시 볼 때 ONLY=정규식 */
 for(const [z,list] of Object.entries(byZone)){if(ONLY&&!ONLY.test(z))continue;const R=await visit(z);
  for(const [,name,re] of list){const L=R.filter(r=>(r.base===name||r.name===name||String(r.name).startsWith(name+' '))&&!r.boss);const ctl=CONTROL.some(c=>c[0]===z&&c[1]===name);
-  if(ctl){if(!L.length&&/가시 사탕/.test(name)){ctlMiss.push(z);continue;}ok(`대조군 ${z} ${name}: 원래 그림 그대로`,L.length>0&&L.every(r=>Object.keys(r.drawn).some(k=>re.test(k))),L.map(r=>r.drawn));continue;}
+  if(ctl){if(!L.length&&/제출되지 못한/.test(name)){ctlMiss.push(z);continue;}ok(`대조군 ${z} ${name}: 원래 그림 그대로`,L.length>0&&L.every(r=>Object.keys(r.drawn).some(k=>re.test(k))),L.map(r=>r.drawn));continue;}
   ok(`${z} ${name}: 몹이 나옴`,L.length>0,[...new Set(R.map(r=>r.base))]);
   ok(`${z} ${name}: ${L.length}마리 모두 채택 그림으로 그림`,L.length>0&&L.every(r=>Object.keys(r.drawn).some(k=>re.test(k))),L.map(r=>[r.name,r.drawn]));
   ok(`${z} ${name}: 임시 후보 시트(R248·R290·R410)·꼭두각시 한 장으로 그린 몹 없음`,L.every(r=>!Object.keys(r.drawn).some(k=>TEMP.test(k)||/^blob:/.test(k))),L.filter(r=>Object.keys(r.drawn).some(k=>TEMP.test(k)||/^blob:/.test(k))).map(r=>[r.name,r.drawn]));}
  if(SHOTS)await p.screenshot({path:`${SHOTS}/r1233-${z}.jpg`,quality:85});}
-ok('대조군 고슴도치 가시 사탕(보류 m027)이 나옴',ctlMiss.length<1,ctlMiss);
+ok('대조군 제출되지 못한 문장(보류 m053)이 나옴',ctlMiss.length<1,ctlMiss);
 ok('페이지 오류 0',errs.length===0,errs.slice(0,3));
 console.log(`\nR1233 browser ${n-bad}/${n}`);await b.close();process.exit(bad?1:0);

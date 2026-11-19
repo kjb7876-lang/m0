@@ -202,6 +202,44 @@
    },
    "sha256": "0a7231e3c3faa5230dc5ae3ac2a38b5191ed1fb0643af1036e5af1a52e4a6c26",
    "bytes": 258378
+  },
+  {
+   "id": "m027",
+   "name": "고슴도치 가시 사탕",
+   "file": "m027.webp",
+   "body": 176,
+   "finalArt": false,
+   "source": {
+    "drive": "Dots CX-0177RC-07 r1 ROUGH",
+    "sha256": "bfe4c110c577ab30133b1aace37cc434174505ea59f1bd12404b4fc952448757"
+   },
+   "clean": {
+    "tool": "scripts/r1233-dots-clean.py",
+    "lowAlphaCleared": 0,
+    "detachedRemoved": 0
+   },
+   "userChoice": "2026-11-19 21:57Z 새 그림으로 바꾸기",
+   "sha256": "566fe752e0f11357ba49f3aaaf09f38c28a18e2756e035390ce3f3c80f3d38ca",
+   "bytes": 446494
+  },
+  {
+   "id": "m029",
+   "name": "낡은 장난감 요요",
+   "file": "m029.webp",
+   "body": 182,
+   "finalArt": false,
+   "source": {
+    "drive": "Dots CX-0177RC-13 r1 ROUGH",
+    "sha256": "9203fa3eb231092351290c0c0cc7f00f36f71df579cd6fd464beb7527e118121"
+   },
+   "clean": {
+    "tool": "scripts/r1233-dots-clean.py",
+    "lowAlphaCleared": 0,
+    "detachedRemoved": 0
+   },
+   "userChoice": "2026-11-19 21:57Z 새 그림으로 바꾸기",
+   "sha256": "758e92c46bbce16c9dae318ccda92c6feae9d7c1c5981ae032c7cd764d942ad2",
+   "bytes": 536590
   }
  ]
 }
