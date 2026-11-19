@@ -13214,48 +13214,48 @@
     },
     {
       "path": "assets/r1212/sfx/amb-bell-1.ogg",
-      "bytes": 16963,
-      "sha256": "891c0a95805ec5136a2dd4b9f696e070bc9dea9d91a3ade46b27dbe0a7064d90"
+      "bytes": 15271,
+      "sha256": "26d8ef93dbda23cea7da0f359c6d4c4d50a5f5b1ccfd73005d48f7e4f229df8d"
     },
     {
       "path": "assets/r1212/sfx/amb-boom-1.ogg",
-      "bytes": 19070,
-      "sha256": "b7ec2872e9f0642f443b504193b2f48d1e6c56e8b54685926bae93f2b95fa5ca"
+      "bytes": 17907,
+      "sha256": "cf19299902700b4ac771ec4f73d712aaf5c697a8b2ee9efbf4bc66e90d2252e3"
     },
     {
       "path": "assets/r1212/sfx/amb-brush-1.ogg",
-      "bytes": 12883,
-      "sha256": "dc7f6c13db44abec4a5525ae7c6af71db5c1ba71938611ca0409ef1e5d4fef2a"
-    },
-    {
-      "path": "assets/r1212/sfx/amb-brush-2.ogg",
       "bytes": 13025,
       "sha256": "9e3a8aece24637ffc3b687b253caff3961a8738f62e364028564dce4d6f3ec7b"
     },
     {
+      "path": "assets/r1212/sfx/amb-brush-2.ogg",
+      "bytes": 12867,
+      "sha256": "bf34b57b0c1cd0db428ae97530a1b0c3861e8920ee16e5ea203d9ac2a473657c"
+    },
+    {
       "path": "assets/r1212/sfx/amb-chime-1.ogg",
-      "bytes": 26921,
-      "sha256": "37ffd603561fc59527a6d26b5190a34bb412d4f28aa6ccdc41ccc5ddb63bcc1d"
+      "bytes": 23791,
+      "sha256": "ccf94ee5220c62213114372714e7cb73532fa3969353860ae1db5c3ab7de68cd"
     },
     {
       "path": "assets/r1212/sfx/amb-chirp-1.ogg",
-      "bytes": 12890,
-      "sha256": "7d85b0c6e55faf9a86c4b525b91414f2f1f36e8c58b5dd1ddba894d856dc07ed"
+      "bytes": 9087,
+      "sha256": "a516a4d475b6acb3046ebe896ac2c32384276f84cc48d95189b52e0ca3d3c43d"
     },
     {
       "path": "assets/r1212/sfx/amb-chirp-2.ogg",
-      "bytes": 11657,
-      "sha256": "ba568aeb9e553a0ae9f0e54d6f9b3634129689e2263ffe2380b76bcadccf7709"
+      "bytes": 9086,
+      "sha256": "776b99bc2eeba668ec53aab07062d303d4d4bb505c6fddba35b81f6cd6672079"
     },
     {
       "path": "assets/r1212/sfx/amb-clank-1.ogg",
-      "bytes": 10121,
-      "sha256": "1a2e0882b67f52de105aca02f4da8733d95ae1c5536f6042a233bb79ef3c52fe"
+      "bytes": 12211,
+      "sha256": "66613e759d7b27b01cbb162882799de89d79496f551a989f93774d2923c3bf15"
     },
     {
       "path": "assets/r1212/sfx/amb-ding-1.ogg",
-      "bytes": 8589,
-      "sha256": "b0b4b056c003ac8bb6dcdb07076477de7c9fa90c85b24736332bd69b95861a8a"
+      "bytes": 11751,
+      "sha256": "bfc1603691fbf5df14b83d9189fe9b572c7d53460e70fbda54bb025bccac20b4"
     },
     {
       "path": "assets/r1212/sfx/amb-drip-1.ogg",
@@ -13264,18 +13264,18 @@
     },
     {
       "path": "assets/r1212/sfx/amb-drip-2.ogg",
-      "bytes": 9683,
-      "sha256": "d4f91056985533cd7666752d405b3aaba478e0cb81d9017423b43bb6a891567b"
+      "bytes": 7997,
+      "sha256": "bd4edace247b118d5ac9a7c28a9fa1150a419b99878b36f650db56a68fef2c43"
     },
     {
       "path": "assets/r1212/sfx/amb-glitch-1.ogg",
-      "bytes": 9816,
-      "sha256": "ff340deef67dc52c9d702a36502f4ff6e4adedd4b99d4d75789a0ec48ff46bfa"
+      "bytes": 8928,
+      "sha256": "b47952b162d3cdbcb0bf5cefa09da8993a5fd5978aba77031addbc79505cf9bf"
     },
     {
       "path": "assets/r1212/sfx/amb-glitch-2.ogg",
-      "bytes": 9746,
-      "sha256": "291214e9990e2bfbe6d509c05c5a1c108281eab81c3e1e11ec9cc22878621b0d"
+      "bytes": 8909,
+      "sha256": "60d41212d77931fb94e8cc7be8d7239d4a280fe17dd97d832304ebe96b953f34"
     },
     {
       "path": "assets/r1212/sfx/amb-gust-1.ogg",
@@ -13284,13 +13284,13 @@
     },
     {
       "path": "assets/r1212/sfx/amb-heart-1.ogg",
-      "bytes": 5611,
-      "sha256": "9d8780bcb8ef22e747bd2f92795ede9d3ee837f0526df2ca9aebfc1eaea2f44b"
+      "bytes": 5573,
+      "sha256": "6d84da308ed83b244f86d8e66ca750fa0e47835ca1fcde76aa11b53ff5c27bee"
     },
     {
       "path": "assets/r1212/sfx/amb-heart-2.ogg",
-      "bytes": 5035,
-      "sha256": "8995dbba2418bfe24b7b99aec0415d2d097250d20ddb258dada69903514a2925"
+      "bytes": 5014,
+      "sha256": "9e24db33c3ec3bd9add75323980ee8bcc6ff3241548c1b3bab6afd09c1176f79"
     },
     {
       "path": "assets/r1212/sfx/amb-music-1.ogg",
@@ -13309,18 +13309,18 @@
     },
     {
       "path": "assets/r1212/sfx/amb-tick-1.ogg",
-      "bytes": 4324,
-      "sha256": "80b33bd02f6343a603afa805880b8344b68653255e70e67323db7aca3626b44e"
+      "bytes": 4321,
+      "sha256": "0a9fa857c75527f23be90867109348ba471d2d8bbca3b175b81cbbe0cb590834"
     },
     {
       "path": "assets/r1212/sfx/amb-tick-2.ogg",
-      "bytes": 4781,
-      "sha256": "04b082eae36c1694a8ac6c429b3c7c9a49ffc47683ebd4bff86df2a7f820f1fd"
+      "bytes": 5076,
+      "sha256": "855389f9ae95aa231ec64b45d0f9b491449bb04a062761092d7fd6e1acde9b8a"
     },
     {
       "path": "assets/r1212/sfx/amb-tram-1.ogg",
-      "bytes": 18029,
-      "sha256": "8acb950710f04dc00ba1ac5903cc60b8e4693564ddd06c629f79acdcb7d59ca9"
+      "bytes": 16634,
+      "sha256": "512857775cebf6547143f9ab2e1a67e2578b50ba91117072982b6d413fe24b1c"
     },
     {
       "path": "assets/r1212/sfx/amb-whisper-1.ogg",
@@ -13329,13 +13329,13 @@
     },
     {
       "path": "assets/r1212/sfx/banner-tick-1.ogg",
-      "bytes": 5279,
-      "sha256": "d6df1a8f2bf7e1b33582026902bb797f95c011608fd5143b96187936ac1ca0fa"
+      "bytes": 4972,
+      "sha256": "3b65bfa9820a22e33a251ff387104d5b932ffc52ff8ce3ee62712f5c350b29f0"
     },
     {
       "path": "assets/r1212/sfx/banner-tick-2.ogg",
-      "bytes": 5961,
-      "sha256": "936cde014668df0b460062b40b84d3bbc89f75c9481075da79da5aabc13402eb"
+      "bytes": 5497,
+      "sha256": "03d55b37930c34877978b953c7a09c6baebb3d4fc810d3ec3e475ea8e2a47b9d"
     },
     {
       "path": "assets/r1212/sfx/bed-drone.ogg",
@@ -13349,23 +13349,23 @@
     },
     {
       "path": "assets/r1212/sfx/bed-leaves.ogg",
-      "bytes": 60464,
-      "sha256": "82c8bf6bbeed0178935424d76a465da0779e7bab44dbbad3beca3fdbb0016482"
+      "bytes": 58555,
+      "sha256": "9caf784718e676a50b787b206a607ef050ac714da6eb591d55ac1f0ab00298d5"
     },
     {
       "path": "assets/r1212/sfx/boss-reveal-1.ogg",
-      "bytes": 14625,
-      "sha256": "2f8399bf898691300478a73bb1ecda4a096106de1f57d8748ba2be9cc79af977"
+      "bytes": 14238,
+      "sha256": "85820502314cb857260c10ea994847d04f134b8f5a3bd7614d206d7dc95bc527"
     },
     {
       "path": "assets/r1212/sfx/index.json",
-      "bytes": 26604,
-      "sha256": "3b94bef908c647273c596475537791ec0eaa4155fd2fc224b10dee36510a47fa"
+      "bytes": 27884,
+      "sha256": "07e65e693e6f2cc20b61e79cb069d4253c5593eb675bc58f40aec95b9a6dd733"
     },
     {
       "path": "assets/r1212/sfx/kairo-chime-1.ogg",
-      "bytes": 17027,
-      "sha256": "6f8ac5ad4515db55a4656809579c3513223ea71655afd08624526d35f0bb9eb3"
+      "bytes": 17976,
+      "sha256": "c02ca2ae24cb37dcc737ec8db8174dd1fee85d5d47d78f41933c500303e39373"
     },
     {
       "path": "assets/r1212/sfx/kairo-toll-1.ogg",
@@ -56889,8 +56889,8 @@
     },
     {
       "path": "synth-sfx-r1212.js",
-      "bytes": 7652,
-      "sha256": "05ae68a4e3e7c9c373229cc0477a0e9d9c611ab1f3f5ad90ba02e3c03a96cf93"
+      "bytes": 7646,
+      "sha256": "6fa547f0f94e0e6f190da07ce5ce16324055e132e83aaa1518d7865703019651"
     },
     {
       "path": "tentacle-strike-r1028.js",
@@ -57169,7 +57169,7 @@
     }
   ],
   "fileCount": 11433,
-  "totalBytes": 1370057383,
+  "totalBytes": 1370044843,
   "webHTMLSha256": "e5ddae1ab0d8b7874f1dca579c94b83b20bfd14b19ae9fa85e2787875b780a14",
   "largest": [
     {

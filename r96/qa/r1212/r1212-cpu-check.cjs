@@ -45,6 +45,17 @@ ok(own.length>=20&&sz<1600000,'새 파일 20개 이상·합 1.6MB 미만(Pages �
  ok(own.every(f=>idx.files&&idx.files[f]&&/ElevenLabs/.test(idx.files[f].origin||'')&&idx.files[f].prompt&&idx.files[f].sha256),'index.json: 파일마다 출처(ElevenLabs)·프롬프트·해시',own.filter(f=>!(idx.files&&idx.files[f])));
  ok(!JSON.stringify(idx).match(/maple|warcraft|starcraft|blizzard|nexon|diablo/i),'프롬프트에 외부 게임 이름 없음');}
 ok(Object.values(T).every(v=>v.gain>0&&v.gain<=2.5),'게인 범위 0~2.5');
+// 사용자 2026-11-19 07:52Z "소리가 너무 높고 깨지는소리는 개선해줘": 파일마다 5kHz 위 비중·2~5kHz 거슬림·피크·잘린 파형·저음 몰림을 index.json 수치로 본다.
+{const idx=JSON.parse(rd(path.join(R,'runtime-text','assets/r1212/sfx/index.json'))||'{}'),F=idx.files||{};
+ const hi=Object.entries(F).filter(([f,m])=>!(m.hfShare5k<=.12)),harsh=Object.entries(F).filter(([f,m])=>!(m.harshShare2to5k<=.35)),pk=Object.entries(F).filter(([f,m])=>!(m.peakDb<=-6)),
+  clip=Object.entries(F).filter(([f,m])=>!(m.flatRuns===0)),boom=Object.entries(F).filter(([f,m])=>!(m.lowShare150<=.85));
+ ok(!hi.length,'고음 줄임: 5kHz 위 비중 12% 이하',hi.map(([f,m])=>f.split('/').pop()+' '+m.hfShare5k));
+ ok(!harsh.length,'거슬림 줄임: 2~5kHz 35% 이하',harsh.map(([f,m])=>f.split('/').pop()+' '+m.harshShare2to5k));
+ ok(!pk.length,'피크 -6dBFS 이하',pk.map(([f,m])=>f.split('/').pop()+' '+m.peakDb));
+ ok(!clip.length,'잘린(평평한) 파형 0 — 원본이 0dBFS 를 넘은 것은 걸러 냄',clip.map(([f,m])=>f.split('/').pop()+' '+m.flatRuns));
+ ok(!boom.length,'스피커가 떨리는 초저음 몰림 85% 이하',boom.map(([f,m])=>f.split('/').pop()+' '+m.lowShare150));
+ const lowG=['amb_heart','amb_boom','boss_reveal'].filter(k=>!(T[k]&&T[k].gain<=1.2));ok(!lowG.length,'저음 소리 게인 1.2 이하(작은 스피커 찌그러짐)',lowG.map(k=>k+' '+(T[k]&&T[k].gain)));
+ ok(!(T.amb_glass&&T.amb_glass.rate>1.2),'유리음 재생 속도 1.2 이하(다시 높아지지 않게)',T.amb_glass&&T.amb_glass.rate);}
 // ── 재생 동작(가짜 Web Audio) ──
 const live=[];let oscs=0;
 const param=v=>({value:v,setValueAtTime(x){this.value=x;},exponentialRampToValueAtTime(x){this.value=x;},setTargetAtTime(x){this.value=x;},cancelScheduledValues(){},linearRampToValueAtTime(x){this.value=x;}});

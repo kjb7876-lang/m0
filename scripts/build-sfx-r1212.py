@@ -34,19 +34,32 @@ SPEC={
  'boss_reveal':(2.0,2.6,35,5000,1,'R568 보스 등장 울림'),
  'banner_tick':(.05,.25,200,8000,2,'R123 층·연도 숫자 딸깍'),
 }
-BEDS={'bed_leaves':(150,6000,'R125 숲·고흐·모네·정원: 나뭇잎 바람'),'bed_hum':(90,5000,'R125 기계: 기계 웅웅'),'bed_drone':(60,4000,'R125 장미·만화·먹·뿌리·페르소나·초현실: 낮은 울림')}
+BEDS={'bed_leaves':(150,4500,'R125 숲·고흐·모네·정원: 나뭇잎 바람'),'bed_hum':(90,5000,'R125 기계: 기계 웅웅'),'bed_drone':(60,4000,'R125 장미·만화·먹·뿌리·페르소나·초현실: 낮은 울림')}
+# 사용자 2026-11-19 07:52Z "소리가 너무 높고 깨지는소리는 개선해줘": 높은 소리는 음높이를 내려(파일에 구움) 저역통과를 낮추고, 거슬리는 2~5kHz 는 깎고,
+# 초저음 몰린 소리(심장·보스 등장)는 작은 스피커가 찌그러지지 않게 90Hz 아래를 걷고 150~250Hz 몸통을 살린다. 이름: (음높이 배율, 저역통과 Hz, 추가 필터)
+OVR={'amb_bell':(.8,4000,',equalizer=f=3200:t=q:w=1.2:g=-6'),'amb_ding':(.68,4000,''),'amb_chime':(.8,4500,''),'amb_chirp':(.5,3000,',lowpass=f=3000,lowpass=f=3000,equalizer=f=2800:t=q:w=1.2:g=-4'),'amb_tick':(.66,3200,',lowpass=f=3200,equalizer=f=3000:t=q:w=1.4:g=-8'),'banner_tick':(.8,3800,''),
+ 'kairo_chime':(.8,4500,''),'amb_clank':(.85,4200,',equalizer=f=3200:t=q:w=1.2:g=-6'),'amb_glitch':(.8,3200,',equalizer=f=2800:t=q:w=1.4:g=-6'),'amb_tram':(.9,4500,',equalizer=f=3000:t=q:w=1.2:g=-3'),
+ 'amb_heart':(1,3000,',highpass=f=90,highpass=f=90,equalizer=f=170:t=q:w=1:g=6'),'boss_reveal':(1,4000,',highpass=f=80,highpass=f=80,equalizer=f=180:t=q:w=1:g=6'),'amb_boom':(1,4000,',highpass=f=70,equalizer=f=200:t=q:w=1:g=3')}
+LOWCAP=('amb_heart','amb_boom','boss_reveal')  # 저음 소리 게인 상한 1.2
 REUSE={'bed_wind':'assets/r664/ambience/wind.ogg','bed_room':'assets/r664/ambience/hall.ogg'}
-ALIAS={'amb_glass':('amb_chime',1.5)}  # 예전 glass = 2637Hz 짧은 유리음 → 풍경을 높게
+ALIAS={'amb_glass':('amb_chime',1.15)}  # 예전 glass = 2637Hz 짧은 유리음 → 풍경을 높게
 def dec(p,sr=SR):return np.frombuffer(subprocess.run(['ffmpeg','-v','quiet','-i',str(p),'-f','f32le','-ac','1','-ar',str(sr),'-'],capture_output=True,check=True).stdout,dtype=np.float32).astype(float)
-def filt(x,hp,lp,sr=SR):
-    t=subprocess.run(['ffmpeg','-v','quiet','-f','f32le','-ar',str(sr),'-ac','1','-i','-','-af',f'highpass=f={hp},highpass=f={hp},lowpass=f={lp},lowpass=f={lp}','-f','f32le','-ac','1','-ar',str(sr),'-'],input=x.astype(np.float32).tobytes(),capture_output=True,check=True).stdout
+def filt(x,hp,lp,sr=SR,rate=1,extra=''):
+    pre=f'asetrate={int(sr*rate)},aresample={sr},' if rate!=1 else ''
+    t=subprocess.run(['ffmpeg','-v','quiet','-f','f32le','-ar',str(sr),'-ac','1','-i','-','-af',f'{pre}highpass=f={hp},highpass=f={hp},lowpass=f={lp},lowpass=f={lp}{extra}','-f','f32le','-ac','1','-ar',str(sr),'-'],input=x.astype(np.float32).tobytes(),capture_output=True,check=True).stdout
     return np.frombuffer(t,dtype=np.float32).astype(float)
+def flat(x):  # 잘린 파형: 최댓값 0.01% 안에 5샘플 넘게 붙어 있는 구간 수
+    a=np.abs(x)>=np.abs(x).max()*.9999;r=0;n=0
+    for v in a:
+        n=n+1 if v else 0
+        if n==5:r+=1
+    return r
 def env_rms(x,w):
     n=max(1,int(w*SR));c=np.convolve(x**2,np.ones(n)/n,'valid') if len(x)>n else np.array([np.mean(x**2)]);return float(np.sqrt(c.max()))
 def stats(x,sr=SR):
     S=np.abs(np.fft.rfft(x))**2+1e-20;f=np.fft.rfftfreq(len(x),1/sr);e=np.sqrt(np.convolve(x**2,np.ones(int(.05*sr))/int(.05*sr),'same'))
     return {'duration':round(len(x)/sr,3),'peakDb':round(float(20*np.log10(np.abs(x).max()+1e-12)),2),'activeSec':round(float((e>.05*e.max()).sum()/sr),2),
-     'lowShare150':round(float(S[f<150].sum()/S.sum()),3),'harshShare2to5k':round(float(S[(f>=2000)&(f<5000)].sum()/S.sum()),3),'centroidHz':int((S*f).sum()/S.sum())}
+     'lowShare150':round(float(S[f<150].sum()/S.sum()),3),'hfShare5k':round(float(S[f>5000].sum()/S.sum()),4),'flatRuns':flat(x),'harshShare2to5k':round(float(S[(f>=2000)&(f<5000)].sum()/S.sum()),3),'centroidHz':int((S*f).sum()/S.sum())}
 # ── 예전 합성 소리 흉내(ambience-r125.js·kairo-homage-r356.js·boss-cinematic-r568.js·samong-mood-r123.js 와 같은 수치) ──
 rng=np.random.default_rng(1212)
 def envl(n0,a,d,peak,L):
@@ -111,15 +124,15 @@ def floor(name):return -40 if name.startswith('kairo') else -36 if name=='banner
 WIN=lambda tgt:min(.4,max(.05,tgt))
 def onset(x,fr=.1):
     e=np.abs(x);i=int(np.argmax(e>=fr*e.max()));return max(0,i-int(.003*SR))
-def shape(x,tgt,mx,hp,lp):
-    s=onset(x);seg=x[s:s+int(mx*SR)]
+def shape(x,tgt,mx,hp,lp,name=''):
+    rate,lp2,extra=OVR.get(name,(1,lp,''));lp=min(lp,lp2);s=onset(x);seg=x[s:s+int(mx*SR*rate)]
     tr=np.sqrt(np.convolve(seg**2,np.ones(441)/441,'same'));act=np.nonzero(tr>.03*tr.max())[0];end=min(len(seg),int((act[-1] if len(act) else len(seg))+.08*SR))
-    seg=seg[:max(int(.04*SR),end)];y=filt(seg,hp,lp)[:len(seg)];n=len(y);ni=int(.004*SR);no=min(int(.25*SR),int(n*.35))
+    seg=seg[:max(int(.04*SR),end)];y=filt(seg,hp,lp,SR,rate,extra);y=y[:int(len(seg)/rate)];n=len(y);ni=int(.004*SR);no=min(int(.25*SR),int(n*.35))
     y[:ni]*=np.sin(np.linspace(0,np.pi/2,ni))**2;y[-no:]*=np.cos(np.linspace(0,np.pi/2,no))**2
     pk=np.abs(y).max();return y*(10**(-8/20)/pk) if pk>0 else y  # 피크 -8dBFS 로 맞춤(ogg 가 1~2dB 키움 → -6 아래)
 def score(name,x):
-    tgt,mx,hp,lp,_,_=SPEC[name];y=shape(x,tgt,mx,hp,lp);m=stats(y);low=name in('amb_heart','boss_reveal','amb_boom','kairo_toll')
-    return abs(m['activeSec']-tgt)/max(tgt,.2)+2*m['harshShare2to5k']+(0 if low else m['lowShare150'])+(.6 if m['centroidHz']>9000 else 0),y,m
+    tgt,mx,hp,lp,_,_=SPEC[name];y=shape(x,tgt,mx,hp,lp,name);m=stats(y);low=name in('amb_heart','boss_reveal','amb_boom','kairo_toll')
+    return abs(m['activeSec']-tgt)/max(tgt,.2)+2*m['harshShare2to5k']+(0 if low else m['lowShare150'])+(.6 if m['centroidHz']>9000 else 0)+4*m['hfShare5k'],y,m
 def enc(y,path,sr=SR,q=3):
     tmp=path.with_suffix('.wav');subprocess.run(['ffmpeg','-v','quiet','-y','-f','f32le','-ar',str(sr),'-ac','1','-i','-','-c:a','pcm_f32le',str(tmp)],input=y.astype(np.float32).tobytes(),check=True)
     subprocess.run(['ffmpeg','-v','quiet','-y','-i',str(tmp),'-c:a','libvorbis','-q:a',str(q),'-map_metadata','-1','-fflags','+bitexact','-flags:a','+bitexact',str(path)],check=True);tmp.unlink()
@@ -136,7 +149,7 @@ for name,(tgt,mx,hp,lp,k,use) in SPEC.items():
         yy=dec(p);gains.append(ref/max(1e-9,env_rms(yy,WIN(tgt))))
         files[rel]={'use':use,'origin':'ElevenLabs text-to-sound v3 (eleven_text_to_sound_v3), 2026-11-19','prompt':JOBS[name]['prompt'],'source':f.name,'sourceSha256':sha(f),'sourceBytes':f.stat().st_size,
           'highpassHz':hp,'lowpassHz':lp,'pickScore':round(s,3),'bytes':p.stat().st_size,'sha256':sha(p),**stats(yy)}
-    g=float(np.clip(np.median(gains),.01,2.5))
+    g=float(np.clip(np.median(gains),.01,1.2 if name in LOWCAP else 2.5))
     table[name]={'files':paths,'gain':round(g,3),'synthRmsDb':round(20*np.log10(ref),1)}
 for name,(hp,lp,use) in BEDS.items():
     best=None
