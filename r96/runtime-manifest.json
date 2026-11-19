@@ -56139,8 +56139,8 @@
     },
     {
       "path": "perf7-r1043.js",
-      "bytes": 15422,
-      "sha256": "77ea33a765a93f111f1159c4a123bf80f0d4987d4a92cdb66a55d33ef62f0c20"
+      "bytes": 15712,
+      "sha256": "4bcfe1013173d3801f0bd5c81d7aefaba53111cb4125a216689e00f2bf265521"
     },
     {
       "path": "persona-cutin-r1174.js",
@@ -56999,7 +56999,7 @@
     }
   ],
   "fileCount": 11399,
-  "totalBytes": 1369471505,
+  "totalBytes": 1369471795,
   "webHTMLSha256": "f774ae026db0057bb3b7ad2af5f4c70f8f3aeb392881f54e7b614dfe2fb9a4b8",
   "largest": [
     {

@@ -61,7 +61,9 @@ function wrapResize(){if(resizeWrapped||typeof resize!=='function')return;const 
  const w=function(){const r=base.apply(this,arguments);applyDpr();return r;};try{resize=w;resizeWrapped=resize===w;}catch(e){fail(e);}}
 function api(k){try{return window[MODS[k]]||null;}catch(_){return null;}}
 function applyForce(){try{const f=cur.force;
- if(f){if(!held){held={};for(const k in MODS){const A=api(k);if(A?.prefs)held[k]=A.prefs().on!==false;}}for(const k in f){const A=api(k);if(A?.set)A.set({on:f[k]});}}
+ if(f){if(!held){held={};for(const k in MODS){const A=api(k);if(A?.prefs)held[k]=A.prefs().on!==false;}}
+  /* R1203(사용자 11-19 06:46Z): 이번 단계가 강제하지 않는 칸은 사람 값으로 되돌린다 — 1·6·7 → 2 처럼 강제 칸이 줄면 이전 단계의 빛·안개·색감이 남았다 */
+  for(const k in MODS){const A=api(k);if(!A?.set)continue;if(k in f)A.set({on:f[k]});else if(typeof held[k]==='boolean')A.set({on:held[k]});}}
  else if(held){for(const k in held){const A=api(k);if(A?.set&&typeof held[k]==='boolean')A.set({on:held[k]});}held=null;}}catch(e){fail(e);}}
 function apply(){if(off)return;stats.applies++;cur=plan(step(),{mobile:mobile(),dev:devRatio(),W:typeof W!=='undefined'?W:null,H:typeof H!=='undefined'?H:null});
  try{const T=window.__STORYWORLD_MOBILE_TIER_R1023__;if(T?.setPref)T.setPref(cur.r1023);}catch(e){fail(e);}
