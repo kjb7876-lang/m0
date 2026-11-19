@@ -50,6 +50,8 @@ const SHAPES={
  viaSprites:"function go(F){viaSprites(F);}",
  arrow:"const go=F=>[0].forEach(()=>__STORYWORLD_FX_SPRITES_R106__.draw('glow',F,0,0));"};
 function drive(SRC,count,{files=FILES,shapes=Object.keys(SHAPES),shuffle=0}={}){const E=engine(SRC),out=[],jobs=[];
+ // R1197: 칸 수 재기(②)는 R361 스택 길 자체를 잰다 — R1012 기억이 같은 값 판정을 여러 파일에 함께 쓰게 되어(R1197) 스택을 아예 안 잡는 호출이 생기므로 재는 동안만 기억을 끈다
+ if(count)E.g.__STORYWORLD_HERO_PALETTE_R302__.memo(false);
  for(const h of ['hwando','seoha','neon','michaela','lauren','hunter','slayer','gunner'])for(const file of files)for(const sh of shapes)for(const F of PALS)jobs.push({h,file,sh,F});
  if(shuffle){let x=shuffle;const rnd=()=>(x=(x*1103515245+12345)>>>0)/2**32;for(let i=jobs.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[jobs[i],jobs[j]]=[jobs[j],jobs[i]];}}
  const gos=new Map();for(const{h,file,sh,F}of jobs){E.g.player.hero=h;const key=file+'|'+sh;let go=gos.get(key);if(!go)gos.set(key,go=E.run(file,'(function(){'+SHAPES[sh]+';return go;})()'));
