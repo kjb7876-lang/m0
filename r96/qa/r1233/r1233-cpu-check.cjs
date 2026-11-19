@@ -78,8 +78,9 @@ W.room={id:'cult04'};ok(A().assign({name:'중간보스 · ID 배양 점액체',w
  for(const m of ix){ok(SH[m.id]&&SH[m.id].path==='assets/r1233/mobs/'+m.file&&SH[m.id].body===m.body&&SH[m.id].name===m.name,'SHEETS 줄 '+m.id+' '+m.name);
   ok(crypto0.createHash('sha256').update(fs.readFileSync(path.join(R,'runtime-text/assets/r1233/mobs',m.file))).digest('hex')===m.sha256,'시트 해시 '+m.id);}
  ok(ix.find(m=>m.id==='m044')?.source?.drive==='Dots CX-0177RC-42 r1 ROUGH','피리 고블린 = Dots RC42 빨간 두건 피리 그림(잿빛 청록 임시본 대신)');
- for(const id of ['m087','m072','m025','m026','m057','m091','m043','m058','m069'])ok(ix.some(m=>m.id===id),'CX-0177RC 1차 적용 '+id);
- for(const id of ['m027','m029','m053','m061'])ok(!SH[id],'보류(사용자 채택 주장 m027·m029, DU07 경로 의존 m053, 잘림 m061) '+id);}
+ for(const id of ['m087','m072','m025','m026','m057','m091','m043','m058','m069','m027','m029'])ok(ix.some(m=>m.id===id),'CX-0177RC 1차 적용 '+id);
+ for(const id of ['m053','m061'])ok(!SH[id],'보류(DU07 경로 의존 m053, 잘림 m061) '+id);
+ for(const id of ['m027','m029'])ok(SH[id]&&ix.some(m=>m.id===id),'사용자 11-19 21:57Z 선택 "새 그림으로 바꾸기" — 가시 사탕·요요 Dots 새 그림 '+id);}
 ok(D.sheets.m072.path==='assets/r1233/mobs/m072.webp','규칙을 어기지 않는 마네킹 → Dots 나무 마네킹 시트');
 ok(D.sheets.m099.path==='assets/r410/mobs/m099.webp','다른 줄은 그대로');
  api.set({on:false});ok(D.sheets.m044.path==='assets/r410/mobs/m044.webp'&&D.sheets.m044.body===214,'끄면 원래 줄로 되돌림');api.set({on:true});ok(D.sheets.m044.path==='assets/r1233/mobs/m044.webp','다시 켜면 다시 얹음');

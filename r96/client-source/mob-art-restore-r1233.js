@@ -15,7 +15,7 @@
 //  · 끄기: localStorage['storyworld.r1233.restore']='{"on":false}'. API window.__STORYWORLD_MOB_ART_RESTORE_R1233__.
 (()=>{'use strict';
 if(window.__STORYWORLD_MOB_ART_RESTORE_R1233__)return;
-const REV='R1233-restore-6',KEY='storyworld.r1233.restore',INDEX='assets/r380/mobs/index.json';
+const REV='R1233-restore-7',KEY='storyworld.r1233.restore',INDEX='assets/r380/mobs/index.json';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={shade:0,rows:0,ward:0,frames:0,installs:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 // ② [기본 이름, 어디서(samong: 사몽 에피소드 구역 키 정규식 / dream: 스토리 사몽 꿈 층), R380 표 줄 id]
@@ -62,7 +62,7 @@ try{setInterval(install,1000);}catch(e){fail(e);}
 //    갈망의 도시짐승(ep1a10): R248 작은 도트 개 → Dots DR-02 v1(두건 쓴 도시 굶주린 짐승, 결과 루트 05_m019_v1.png sha 1b2f9979…) 을 scripts/r1233-dots-clean.py 로 손질(저알파 16 이하 지움·떨어진 발톱 33픽셀 지움).
 const SHEETS=Object.freeze({m044:Object.freeze({path:'assets/r1233/mobs/m044.webp',body:194,name:'피리 고블린'}),m019:Object.freeze({path:'assets/r1233/mobs/m019.webp',body:180,name:'갈망의 도시짐승'}),
  // Dots CX-0177RC r1 ROUGH 1차(사용자 2026-11-19 "나머지후보그림 재생성닷츠와상호작용으로") — scripts/r1233-dots-clean.py 손질. body = 걷기 칸 몸 높이 중앙값.
- //  보류: m027·m029(Dots 메모 '사용자 채택 후보' 확인 전), m053(R1183/R1187 DU07 이 원래 경로로 고름 — 전역 교체 금지), m061(판 잘림·높이 121~255 수선 대기).
+ //  보류: m053(R1183/R1187 DU07 이 원래 경로로 고름 — 전역 교체 금지), m061(판 잘림·높이 121~255 수선 대기).
  m087:Object.freeze({path:'assets/r1233/mobs/m087.webp',body:187,name:'관람석의 시선'}),
  m072:Object.freeze({path:'assets/r1233/mobs/m072.webp',body:200,name:'규칙을 어기지 않는 마네킹'}),
  m025:Object.freeze({path:'assets/r1233/mobs/m025.webp',body:174,name:'끓어오르는 검은 소화액'}),
@@ -72,7 +72,10 @@ const SHEETS=Object.freeze({m044:Object.freeze({path:'assets/r1233/mobs/m044.web
  m043:Object.freeze({path:'assets/r1233/mobs/m043.webp',body:148,name:'장미이슬 슬라임'}),
  m058:Object.freeze({path:'assets/r1233/mobs/m058.webp',body:192,name:'죄책감 압축결정'}),
  // 2차: 다시 일으켜 세워진 도전자(사몽 S-03, 석고 관절 인형)(사냥개 RC41 은 S-06-5 에서 헤드리스로 세 번 다 안 나와 확인 못 해 보류).
- m069:Object.freeze({path:'assets/r1233/mobs/m069.webp',body:204,name:'다시 일으켜 세워진 도전자'})});
+ m069:Object.freeze({path:'assets/r1233/mobs/m069.webp',body:204,name:'다시 일으켜 세워진 도전자'}),
+ // 3차(사용자 2026-11-19 21:57Z 카드 '새 그림으로 바꾸기'): 고슴도치 가시 사탕(호박색 사탕)·낡은 장난감 요요(나무 요요).
+ m027:Object.freeze({path:'assets/r1233/mobs/m027.webp',body:176,name:'고슴도치 가시 사탕'}),
+ m029:Object.freeze({path:'assets/r1233/mobs/m029.webp',body:182,name:'낡은 장난감 요요'})});
 const sheetOrig={},sheetApplied=[];
 function applySheets(on){const D=window.__STORYWORLD_MOB_UNIQUE_R248_DATA__;if(!D||!D.sheets)return false;sheetApplied.length=0;
  for(const [id,a] of Object.entries(SHEETS)){const s=D.sheets[id];if(!s||s.name!==a.name)continue;try{if(!sheetOrig[id])sheetOrig[id]={path:s.path,body:s.body};
