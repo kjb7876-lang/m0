@@ -50,6 +50,10 @@ if(exists){const code=fs.readFileSync(SRC,'utf8');
  {const h=env();h.window.__STORYWORLD_DYS_RANGED_R1210__={roleFor:()=> 'melee',effRole:e=>e.phaseRanged?'ranged':'melee'};mob(h,{id:'ph',extra:{phaseRanged:true}});mob(h,{id:'pa',kind286:'attack-only',d:9,extra:{phaseRanged:true}});mob(h,{id:'pm'});run(h,180);
   ok('effRole ranged phase never R52-charges',cnt(h,'ph','charge')===0);ok('effRole ranged phase never R286-dashes',cnt(h,'pa','r286')===0);ok('effRole melee still charges rarely ('+cnt(h,'pm','charge')+')',cnt(h,'pm','charge')>=1);}
  {const h=env();h.window.__STORYWORLD_DYS_RANGED_R1210__={roleFor:()=> 'melee',effRole:e=>e.phaseRanged?'ranged':'melee'};const q=mob(h,{id:'pq',kind286:'attack-only',d:9,extra:{phaseRanged:true}});run(h,30);q.phaseRanged=false;run(h,120);ok('R286 dashes again after ranged phase ends ('+cnt(h,'pq','r286')+')',cnt(h,'pq','r286')>=1);}
+ // 검수(11-19): 켰다가 곧 끄면 R1221 이 민 R286 차례가 원래대로 돌아온다(원래 2.2초 리듬 안에 돌진)
+ {const h=env();mob(h,{id:'q1',kind286:'attack-only',d:9});run(h,.1);h.window.__STORYWORLD_MOB_DASH_R1221__.set({on:false});run(h,4);ok('on→off at 0.1s restores R286 dash soon ('+cnt(h,'q1','r286')+' in 4s)',cnt(h,'q1','r286')>=1);}
+ {const h=env({ls:{'storyworld.r1221.dash':'{"on":false}'}});mob(h,{id:'q2',kind286:'attack-only',d:9});run(h,1);h.window.__STORYWORLD_MOB_DASH_R1221__.set({on:true});run(h,3);const c0=cnt(h,'q2','r286');h.window.__STORYWORLD_MOB_DASH_R1221__.set({on:false});run(h,6);ok('already-moving R286 mob: on pushes, off restores ('+c0+' → '+cnt(h,'q2','r286')+')',cnt(h,'q2','r286')>c0);}
+ {const h=env();const q=mob(h,{id:'q3',kind286:'attack-only',d:9});run(h,1);q.r286.nextDash=h.time+120;h.window.__STORYWORLD_MOB_DASH_R1221__.set({on:false});run(h,.1);ok('value changed by someone else is kept on off',Math.abs(q.r286.nextDash-(h.time-.1+120))<.2);}
  // 회귀(헤드리스 ep1b05): 이름만 '중간보스 ·' 이고 midboss 표시가 없는 몹도 보스 간격(절반)으로
  {const h=env();mob(h,{id:'mn',name:'중간보스 · 붉은 하이힐 칼날'});run(h,180);const c=cnt(h,'mn','charge');ok('name-only midboss uses boss gap ('+c+')',c>=Math.floor(base.m*.35)&&c<=Math.ceil(base.m*.6));}
  // 경계: 보스 2칸 안 휘두르기는 막지 않음

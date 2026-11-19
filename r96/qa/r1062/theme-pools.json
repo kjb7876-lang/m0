@@ -171,8 +171,7 @@
   "ep1a10": {
    "theme": "urban",
    "allow": [
-    "blank_memorial",
-    "hotel_luggage_cart"
+    "blank_memorial"
    ]
   },
   "ep1a11": {

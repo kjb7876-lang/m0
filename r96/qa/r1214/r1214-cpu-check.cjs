@@ -137,6 +137,8 @@ for(const [name,kind] of [['복도 비명잔영','fear'],['안정화 집행체',
  for(let i=0;i<300&&!(e.r1210?.count>=1);i++)step(S,1/30);ok(e.ai==='melee'&&S.A.inspect().live>=1,'솔로: 오버레이 발사',S.A.inspect().live);
  mode='host';step(S,1/30);ok(S.A.inspect().live===0&&!e.r1210.mode&&e.ai==='hybrid','협동 전환: 남은 공격 지움·ai 복귀',{live:S.A.inspect().live,ai:e.ai});
  e.rangedWindup=.3;e.rangedAim=0;S.calls.imgs.length=0;S.sb.drawEffect(S.sb.effects.find(x=>x.type==='r1210-fx')||{type:'r1210-fx'});ok(!S.calls.imgs.some(q=>/r121[034]\//.test(q||'')),'협동: 엔진 겨누기에 새 예고 시트 없음',[...new Set(S.calls.imgs)]);}
+{// 사용자 11-19 11:42Z: 암시장의 수상한 자 = 근거리 경향(근접 3 : 원거리 1)
+ ok(A.roleFor('암시장의 수상한 자')==='melee'&&A.roleFor('암시장의 수상한 자 증원')==='melee'&&A.kindFor('암시장의 수상한 자')==='dark','암시장의 수상한 자: 근거리 경향·원거리는 암흑 1번');}
 {// 보스는 역할 손대지 않음(맵 몹 공격 동시 그대로)
  const S=sandbox();const b=mob('백의 안정화 감독',{boss:true,ai:'hybrid',x:15});S.sb.room.enemies.push(b);step(S,1);ok(b.ai==='hybrid','보스 ai 그대로');}
 ok(sandbox().A.inspect().stats.errors===0,'오류 0');

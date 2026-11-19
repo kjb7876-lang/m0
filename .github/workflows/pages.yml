@@ -517,12 +517,16 @@ jobs:
         run: node r96/qa/r1181/r1181-gem-thin-cpu-check.cjs
       - name: R1195 mob cut feet and edges covered by ink mist CPU check
         run: node r96/qa/r1195/feet-ink-cpu-check.cjs
+      - name: R1234 ink mist body pick, boss fit body, death size from drawn body, blocked mob position steady CPU check
+        run: node r96/qa/r1234/jitter-fog-cpu-check.cjs
       - name: R1210 S-06 디스토피아 몹 미래형 원거리 공격(레이저·방사능·음파) CPU check
         run: node r96/qa/r1210/r1210-cpu-check.cjs
       - name: R1213 기계 계열 몹 원거리(레이저·방사능·음파·폭탄) CPU check
         run: node r96/qa/r1213/r1213-cpu-check.cjs
       - name: R1214 귀신 계열 몹 원거리(공포·암흑·그림자·촉수) CPU check
         run: node r96/qa/r1214/r1214-cpu-check.cjs
+      - name: R1241 제72문 보스 72 그림자 소환 CPU check
+        run: node r96/qa/r1241/r1241-cpu-check.cjs
       - name: R1222 늪 혼령체 물 튐 늪색 CPU check
         run: node r96/qa/r1222/r1222-cpu-check.cjs
       - name: R1221 mob attack dash frequency lowered CPU check
@@ -541,6 +545,10 @@ jobs:
         run: node r96/qa/r1206b/r1206b-cpu-check.cjs
       - name: R1206c samong ink bloom warning sheet from Dots CPU check
         run: node r96/qa/r1206c/r1206c-cpu-check.cjs
+      - name: R1233 temporary R248 name sheets yield to samong shades and approved art (S-05·S-01·dream ep1a10·ep1a11) CPU check
+        run: node r96/qa/r1233/r1233-cpu-check.cjs
+      - name: R1218 boss echo throw uses the drawn body art CPU check
+        run: node r96/qa/r1218/r1218-cpu-check.cjs
       - name: R976 samong first region pixel art to painted assets CPU check
         run: node r96/qa/r976/r976-cpu-check.cjs
       - name: R1177 samong episode pixel leftovers (S-06 pixel mobs, pixelfx sheets) to painted art CPU check
@@ -599,6 +607,12 @@ jobs:
         run: node r96/qa/r1102/r1102-cpu-check.cjs
       - name: R1232 Michaela basic shot height and size CPU check
         run: node r96/qa/r1232/r1232-cpu-check.cjs
+      - name: R1235 Michaela basic hit single-sprite flash cleanup CPU check
+        run: node r96/qa/r1235/r1235-cpu-check.cjs
+      - name: R1235 Michaela skill effects to Dots frame sheets CPU check
+        run: node r96/qa/r1235/r1235-skill-cpu-check.cjs
+      - name: R1242 Seoha basic shot from orb CPU check
+        run: node r96/qa/r1242/r1242-cpu-check.cjs
       - name: R1003 gunner aim down art CPU check
         run: node r96/qa/r1003/r1003-cpu-check.cjs
       - name: R1045 gunner north aim and no-recoil east art CPU check
@@ -623,6 +637,10 @@ jobs:
         run: node r96/qa/r1108b/r1108b-cpu-check.cjs
       - name: R1108c seoha left/right walk new sheet CPU check
         run: node r96/qa/r1108c/r1108c-cpu-check.cjs
+      - name: R1238 blocked move draws idle (no left-facing old run frame at boss door) CPU check
+        run: node r96/qa/r1238/r1238-cpu-check.cjs
+      - name: R1238b neon side attack slimmer body/head derived sheet CPU and art check
+        run: node r96/qa/r1238/r1238b-cpu-check.cjs && python3 r96/qa/r1238/r1238b-art-check.py
       - name: R1047 reach bounds (minX,minY,maxX,maxY) keep hidden persona reachable CPU check
         run: node r96/qa/r1047/reach-bounds-cpu-check.cjs
       - name: R1096 hidden persona mirror-celestial patterns (telegraphed crimson push orb, abyss pull well, eclipse beam; probabilistic) CPU check
@@ -679,6 +697,8 @@ jobs:
         run: node r96/qa/r1024/mob-move-cpu-check.cjs
       - name: R1029 float movement for mobs and bosses that slide on one image (wing flap, ghost hem, dark flame mist; looked up by art, direction sheets win) CPU check
         run: node r96/qa/r1029/move-float-cpu-check.cjs
+      - name: R1224 boss summons follow the room's current mobs (one rule for every boss; renamed or replaced kinds) and float movement for 8 bosses/midbosses that slid on one image CPU check
+        run: node r96/qa/r1224/r1224-cpu-check.cjs
       - name: R1125 regular-mob up/down walk sheets (Dots CX-0127MV m033, CX-0135 B4 resonance knight, B7 fisher down; same id with other art attached as alt) CPU check
         run: node r96/qa/r1125/mob-move-cpu-check.cjs && node r96/qa/r1167/r1167-cpu-check.cjs
       - name: R996 bulmyeongwi fog summon still fires in the boss phase after every field mob is gone CPU check
@@ -841,6 +861,8 @@ jobs:
         run: node r96/qa/r1225/r1225-cpu-check.cjs
       - name: R1236 camera catches up within ~0.1s after blink/teleport/fast dash (all heroes), normal walking follow unchanged CPU check
         run: node r96/qa/r1236/r1236-cpu-check.cjs
+      - name: R1237 graffiti storefront (wall-placed, no always-on text, C opens canon line), luggage cart and seal reliquary pruning, scattered +1 point orbs CPU check
+        run: node r96/qa/r1237/r1237-cpu-check.cjs
       - name: R537 spider cave mud-back spider and memory-carrier spider, swamp root stalker renamed CPU check
         run: node r96/qa/r537/r537-cpu-check.cjs
       - name: R450 zone weather (63 story zones indoor/outdoor/cave/void, dust instead of rain indoors, canon weather, double-sided streaks) CPU check
