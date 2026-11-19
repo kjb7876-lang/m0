@@ -10690,6 +10690,26 @@
     "assets/r163/pixelfx/r1222/mob-swamp-dots-12.webp",
     "story-half-dmg-r1225.js",
     "blink-camera-r1236.js",
+    "mob-dash-r1221.js",
+    "move-side-r1221-data.js",
+    "three-recover-r1228.js",
+    "fixed-attack-r1230.js",
+    "michaela-shot-r1232.js",
+    "assets/r1214/dark-impact8.webp",
+    "assets/r1214/dark-orb-flight8.webp",
+    "assets/r1214/fear-gaze12.webp",
+    "assets/r1214/fear-status8.webp",
+    "assets/r1214/fissure-warning8.webp",
+    "assets/r1214/index.json",
+    "assets/r1214/ink-rise10.webp",
+    "assets/r1214/shadow-hand-warning8.webp",
+    "assets/r1214/shadow-rise12.webp",
+    "assets/r1221/side/denial-specter-side.webp",
+    "assets/r1221/side/swamp-horned-lord-side.webp",
+    "assets/r1227/cast-tell8.webp",
+    "assets/r1227/crimson-impact12.webp",
+    "assets/r1227/fireball-flight8.webp",
+    "assets/r1227/index.json",
     "mob-motion-consistency-r1226.js",
     "assets/r1226/mobs/m015-stabilizer.webp",
     "assets/r1226/mobs/superego-attack.webp"
@@ -11767,5 +11787,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "fc280c7ec8179005bf58fa4b7a39e14a6f8539574f1c5f2c70c455e1493c67de"
+  "runtimeManifestSHA256": "81b5fef1f4746579139a60137522812c557e97c59e0fdadb7d73ffffdb50dc4c"
 }

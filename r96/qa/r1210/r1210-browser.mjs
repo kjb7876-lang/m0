@@ -25,7 +25,7 @@ async function run(zone,on){await p.evaluate(on=>window.__STORYWORLD_DYS_RANGED_
   room.enemies.filter(e=>!ds.includes(e)).forEach(e=>{e.hp=0;e.spawnState='dead';});
   let took=0,byKind={};const H=hurt;hurt=function(d,src,...a){const before=player.hp;const r=H.call(this,d,src,...a);const lost=Math.max(0,before-player.hp);took+=lost;const k=src?.r1210||'other';byKind[k]=(byKind[k]||0)+lost;player.hp=maxHP();return r;};
   const t0=time;await new Promise(r=>{const f=()=>{player.x=player.x;if(time>t0+secs)r();else setTimeout(f,40);};f();});hurt=H;
-  return {log:A.inspect().log,zone:room.samongR103?.zone,mobs:ds.map(e=>[e.name,e.ai,A.kindFor(e.name)]),took:Math.round(took),byKind,stats:A.inspect().stats,game:+(time-t0).toFixed(1)};},[SECS]);}
+  return {log:A.inspect().log,zone:room.samongR103?.zone,mobs:ds.map(e=>[e.name,e.ai,A.kindFor(e.name),A.roleFor?.(e.name)]),took:Math.round(took),byKind,stats:A.inspect().stats,game:+(time-t0).toFixed(1)};},[SECS]);}
 const r1=await run('sz115-S06-1',true);console.log(JSON.stringify(r1));
 ok(r1.stats.errors===0,'근접형 구역: R1210 오류 0',r1.stats);
 ok(r1.stats.aims>=1&&Object.values(r1.stats.fires).reduce((a,b)=>a+b,0)>=1,'근접형 구역: 디스토피아 몹이 겨누고 쏨',r1.stats);
@@ -34,9 +34,11 @@ if(SHOT){// 예고·발사 장면(헤드리스 소프트웨어 렌더)
  for(let i=0;i<6;i++){await waitGame(.35);await p.screenshot({path:`${SHOT}/r1210-s06-1-${i}.png`});}}
 const r0=await run('sz115-S06-1',false);console.log(JSON.stringify(r0));
 const h1=await run('sz115-S06-5',true);console.log(JSON.stringify(h1));
-ok(h1.stats.engine>=1,'원거리형 구역: 엔진 기본 탄 차례가 미래형 공격으로',h1.stats);ok(h1.stats.errors===0,'원거리형 구역: 오류 0');
+/* 사용자 지시 동작 변경(11-19 09:47Z 근접·원거리 몹 확실히 나누기, R1214b) — 원거리 몹은 엔진 ranged3 대신 이 오버레이가 거리를 지키며 쏘고, 근접 몹은 원거리를 안 한다 */
+ok(Object.values(h1.stats.fires).reduce((a,b)=>a+b,0)>=1||h1.mobs.every(m=>window_role(m)!=='ranged'),'원거리형 구역: 원거리 몹이 미래형 공격을 쏨',h1.stats);ok(h1.stats.errors===0,'원거리형 구역: 오류 0');
 if(SHOT){for(let i=0;i<6;i++){await waitGame(.35);await p.screenshot({path:`${SHOT}/r1210-s06-5-${i}.png`});}}
 const h0=await run('sz115-S06-5',false);console.log(JSON.stringify(h0));
+function window_role(m){return m[3];}
 const ratio=(a,b)=>b>0?+(a/b).toFixed(2):null;
 console.log('받은 피해 켬/끔: 근접형',r1.took,'/',r0.took,ratio(r1.took,r0.took),' 원거리형',h1.took,'/',h0.took,ratio(h1.took,h0.took));
 ok(r0.took===0||r1.took<=r0.took*1.6+40,'근접형 구역: 켬 피해가 끔의 1.6배 이하',{on:r1.took,off:r0.took});

@@ -37,7 +37,7 @@ for(const [r,L] of Object.entries(REG)){const ks=L.map(x=>A.kindFor(x));ok(ks.ev
 ok(used.size===4,'기계 네 종류 모두 쓰임',[...used]);
 for(const [nm,k] of [['전쟁기억 정찰드론 우두머리','laser'],['태엽 수집자 후속 증원','bomb'],['기계화 망각거미 3','radiation'],['참호 공명기사 추격대','sonic'],['복종 봉인구 증원','laser'],['기계화 감옥 공명기사 우두머리','sonic'],['전극기계수호기사 추격대','laser']])
  ok(A.kindFor(nm)===k,'꼬리 뗀 이름: '+nm+' → '+k,A.kindFor(nm));
-for(const nm of ['숲 고블린','늪의 염소머리 악마','검은기둥 주문사','유리 망령','시간수문장 03','잠식된 어부 우두머리','제8단계 자비 교정관'])ok(A.kindFor(nm)===null,'기계 몹 아님: '+nm);
+for(const nm of ['숲 고블린','늪의 염소머리 악마','검은기둥 주문사','유리 망령','시간수문장 03','잠식된 어부 우두머리','제8단계 자비 교정관'])ok(!['laser','radiation','sonic','bomb'].includes(A.kindFor(nm)),'기계 종류 아님: '+nm,A.kindFor(nm));/* R1214 부터 귀신 계열 몹은 귀신 종류를 가진다 */
 // ---- 폭탄 수치 ----
 {const u=A.tune.bomb;ok(u&&u.min>=2.4&&u.max<=7.5&&u.dmg>0&&u.dmg<=.9&&u.windup>=.5&&u.windup<=1,'폭탄: 사거리·한 번 피해·예고 띠',u);
  const dps=u.dmg/(u.cd+u.windup),engine=1/(2.1+.55);ok(dps<=engine*.5,'폭탄: 원거리 압박 ≤ 엔진 원거리 몹의 절반',{dps,engine});
@@ -67,6 +67,7 @@ for(const [name,kind,re] of [['포낭 곡사체','radiation',/r1213\/(green-warn
  S.player.invincible=0;step(S,3);const bd=S.calls.hurt.reduce((a,b)=>a+b[0],0);ok(bd>0&&bd<=boss.damage*1.5+1e-9,'보스 동시 사격 피해 합 ≤ 보스 근접 1.5대('+bd.toFixed(1)+')');
  ok(A.bossK(['laser','radiation','sonic'])===.6&&A.bossK(['laser','radiation','sonic','bomb'])<.6,'종류 셋까지는 0.6배 그대로, 넷이면 줄임',[A.bossK(['laser','radiation','sonic']),A.bossK(['laser','radiation','sonic','bomb'])]);}
 // ---- hybrid 기계 몹: 엔진 탄 차례만 바꿈 ----
-{const S=sandbox();const e=mob('전쟁기계사냥개',{ai:'hybrid',rangedAim:Math.PI});S.sb.room.enemies.push(e);S.sb.ranged3(e);ok(S.calls.base===0&&S.A.inspect().stats.engine===1&&S.A.inspect().stats.fires.radiation===1,'hybrid 기계 몹: 엔진 탄 대신 자기 종류(방사능)',S.A.inspect().stats);}
+/* 사용자 지시 동작 변경(11-19 09:47Z 근접·원거리 몹 확실히 나누기, R1214b) — 전쟁기계사냥개는 근접 몹 → 원거리 몹 배양 공병(방사능)으로 */
+{const S=sandbox();const e=mob('배양 공병',{ai:'hybrid',rangedAim:Math.PI});S.sb.room.enemies.push(e);S.sb.ranged3(e);ok(S.calls.base===0&&S.A.inspect().stats.engine===1&&S.A.inspect().stats.fires.radiation===1,'hybrid 기계 몹: 엔진 탄 대신 자기 종류(방사능)',S.A.inspect().stats);}
 ok(sandbox().A.inspect().stats.errors===0,'오류 0');
 console.log('R1213 CPU check '+n+' PASS');

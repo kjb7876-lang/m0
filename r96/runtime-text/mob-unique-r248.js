@@ -79,6 +79,8 @@ const PAL={bite:{a:[150,30,30],b:[255,150,140]},claw:{a:[150,30,30],b:[255,170,1
 const fx=[],SENT={type:'r248-fx',x:0,y:0,age:0,life:Infinity};let slowAt=-99;
 function arm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)&&!effects.includes(SENT)){SENT.age=0;effects.push(SENT);}}catch(_){}}
 function onContact(e,s){const k=fxKindOf(s,e),S=shapeOf(e),near=Math.hypot(player.x-e.x,player.y-e.y)<=S.range+(e.radius||.4)+.6;
+ /* R1227: 불 계열 근접 몹(추락)은 dys-ranged-r1210 이 Dots 시트 타격 자국을 그린다 — 여기 도형은 그리지 않음 */
+ try{const hx=near?player.x:e.x+Math.cos(e.attack.angle||0)*1.1,hy=near?player.y:e.y+Math.sin(e.attack.angle||0)*1.1;if(window.__STORYWORLD_DYS_RANGED_R1210__?.contactFx?.(e,hx,hy)){stats.fx++;return;}}catch(_){}
  fx.push({k,x:near?player.x:e.x+Math.cos(e.attack.angle||0)*1.1,y:near?player.y:e.y+Math.sin(e.attack.angle||0)*1.1,ex:e.x,ey:e.y,t0:T(),seed:Math.random()*6,life:k==='drop'?1.0:.6});if(fx.length>12)fx.shift();stats.fx++;arm();
  const sl=SLOW[k];if(near&&sl&&T()-slowAt>4){slowAt=T();try{player.heroSlowUntil150=Math.max(Number(player.heroSlowUntil150)||0,T()+sl[1]);player.storyStatus150={key:'r248-'+k,label:sl[0],until:T()+sl[1]};stats.slows++;}catch(err){fail(err);}}}
 function tickFx(){if(!prefs.fx||!solo()||typeof room!=='object'||!room)return;for(const e of room.enemies||[]){if(!(e.hp>0)||!e.attack)continue;const s=sheetOf(e);if(!s)continue;const S=shapeOf(e),A=e.attack,id=A.id??A;
