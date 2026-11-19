@@ -1,0 +1,133 @@
+{
+ "res": {
+  "errors": [],
+  "pc": {
+   "story": {
+    "zone": "murder01",
+    "layer": "STORY",
+    "samong": null,
+    "zoom": 0.8133,
+    "range": {
+     "u": 46.29,
+     "v": 48.89
+    },
+    "heroPx": {
+     "x": 0,
+     "y": 13.5
+    },
+    "r81": true,
+    "r1245": {
+     "revision": "R1245-dream-camera-1",
+     "on": false,
+     "factor": 1.22,
+     "camera": null,
+     "stats": {
+      "updates": 0,
+      "snaps": 0,
+      "delegated": 65,
+      "errors": 0
+     },
+     "lastError": null
+    }
+   },
+   "dream": {
+    "zone": "murder01",
+    "layer": "DREAM",
+    "samong": null,
+    "zoom": 0.6667,
+    "range": {
+     "u": 56.47,
+     "v": 59.65
+    },
+    "heroPx": {
+     "x": 0,
+     "y": 13.5
+    },
+    "r81": false,
+    "r1245": {
+     "revision": "R1245-dream-camera-1",
+     "on": false,
+     "factor": 1.22,
+     "camera": null,
+     "stats": {
+      "updates": 0,
+      "snaps": 0,
+      "delegated": 98,
+      "errors": 0
+     },
+     "lastError": null
+    }
+   },
+   "episode": {
+    "zone": "u201",
+    "layer": "DREAM",
+    "samong": "sz115-S06-1",
+    "zoom": 0.6667,
+    "range": {
+     "u": 56.47,
+     "v": 59.65
+    },
+    "heroPx": {
+     "x": 0,
+     "y": 13.5
+    },
+    "r81": false,
+    "r1245": {
+     "revision": "R1245-dream-camera-1",
+     "on": false,
+     "factor": 1.22,
+     "camera": null,
+     "stats": {
+      "updates": 0,
+      "snaps": 0,
+      "delegated": 137,
+      "errors": 0
+     },
+     "lastError": null
+    }
+   },
+   "edge": {
+    "cell": [
+     11,
+     4
+    ],
+    "heroPx": {
+     "x": 0,
+     "y": -111.3
+    }
+   }
+  }
+ },
+ "checks": [
+  [
+   "pc dream zoom == story",
+   false,
+   "0.6667 vs 0.8133"
+  ],
+  [
+   "pc dream hero screen offset == story",
+   true,
+   "{\"x\":0,\"y\":13.5}"
+  ],
+  [
+   "pc episode zoom == story",
+   false,
+   "0.6667 vs 0.8133"
+  ],
+  [
+   "pc episode hero screen offset == story",
+   true,
+   "{\"x\":0,\"y\":13.5}"
+  ],
+  [
+   "pc edge: hero stays centred",
+   false,
+   "{\"cell\":[11,4],\"heroPx\":{\"x\":0,\"y\":-111.3}}"
+  ],
+  [
+   "no page errors",
+   true,
+   ""
+  ]
+ ]
+}

@@ -1,0 +1,259 @@
+{
+ "res": {
+  "errors": [],
+  "pc": {
+   "story": {
+    "zone": "murder01",
+    "layer": "STORY",
+    "samong": null,
+    "zoom": 0.8133,
+    "range": {
+     "u": 46.29,
+     "v": 48.89
+    },
+    "heroPx": {
+     "x": 0,
+     "y": 13.5
+    },
+    "r81": true,
+    "r1245": {
+     "revision": "R1245-dream-camera-1",
+     "on": true,
+     "factor": 1.22,
+     "camera": null,
+     "stats": {
+      "updates": 0,
+      "snaps": 0,
+      "delegated": 68,
+      "errors": 0
+     },
+     "lastError": null
+    }
+   },
+   "dream": {
+    "zone": "murder01",
+    "layer": "DREAM",
+    "samong": null,
+    "zoom": 0.8133,
+    "range": {
+     "u": 46.29,
+     "v": 48.89
+    },
+    "heroPx": {
+     "x": 0,
+     "y": 13.5
+    },
+    "r81": false,
+    "r1245": {
+     "revision": "R1245-dream-camera-1",
+     "on": true,
+     "factor": 1.22,
+     "camera": {
+      "x": 88,
+      "y": 60.5,
+      "zoom": 0.8133333333333332,
+      "target": 0.8133333333333332
+     },
+     "stats": {
+      "updates": 26,
+      "snaps": 0,
+      "delegated": 78,
+      "errors": 0
+     },
+     "lastError": null
+    }
+   },
+   "episode": {
+    "zone": "u201",
+    "layer": "DREAM",
+    "samong": "sz115-S06-1",
+    "zoom": 0.8133,
+    "range": {
+     "u": 46.29,
+     "v": 48.89
+    },
+    "heroPx": {
+     "x": 0,
+     "y": 13.5
+    },
+    "r81": false,
+    "r1245": {
+     "revision": "R1245-dream-camera-1",
+     "on": true,
+     "factor": 1.22,
+     "camera": {
+      "x": 6.31,
+      "y": 35.88,
+      "zoom": 0.8133333333333332,
+      "target": 0.8133333333333332
+     },
+     "stats": {
+      "updates": 64,
+      "snaps": 0,
+      "delegated": 80,
+      "errors": 0
+     },
+     "lastError": null
+    }
+   },
+   "edge": {
+    "cell": [
+     11,
+     4
+    ],
+    "heroPx": {
+     "x": 0,
+     "y": 13.5
+    }
+   }
+  },
+  "mobile": {
+   "story": {
+    "zone": "murder01",
+    "layer": "STORY",
+    "samong": null,
+    "zoom": 0.6667,
+    "range": {
+     "u": 37.24,
+     "v": 30.44
+    },
+    "heroPx": {
+     "x": 0,
+     "y": 6.9
+    },
+    "r81": false,
+    "r1245": {
+     "revision": "R1245-dream-camera-1",
+     "on": true,
+     "factor": 1.22,
+     "camera": null,
+     "stats": {
+      "updates": 0,
+      "snaps": 0,
+      "delegated": 85,
+      "errors": 0
+     },
+     "lastError": null
+    }
+   },
+   "dream": {
+    "zone": "murder01",
+    "layer": "DREAM",
+    "samong": null,
+    "zoom": 0.6667,
+    "range": {
+     "u": 37.24,
+     "v": 30.44
+    },
+    "heroPx": {
+     "x": 0,
+     "y": 6.9
+    },
+    "r81": false,
+    "r1245": {
+     "revision": "R1245-dream-camera-1",
+     "on": true,
+     "factor": 1.22,
+     "camera": null,
+     "stats": {
+      "updates": 0,
+      "snaps": 0,
+      "delegated": 118,
+      "errors": 0
+     },
+     "lastError": null
+    }
+   },
+   "episode": {
+    "zone": "u201",
+    "layer": "DREAM",
+    "samong": "sz115-S06-1",
+    "zoom": 0.6667,
+    "range": {
+     "u": 37.24,
+     "v": 30.44
+    },
+    "heroPx": {
+     "x": 0,
+     "y": 6.9
+    },
+    "r81": false,
+    "r1245": {
+     "revision": "R1245-dream-camera-1",
+     "on": true,
+     "factor": 1.22,
+     "camera": null,
+     "stats": {
+      "updates": 0,
+      "snaps": 0,
+      "delegated": 162,
+      "errors": 0
+     },
+     "lastError": null
+    }
+   },
+   "edge": {
+    "cell": [
+     11,
+     4
+    ],
+    "heroPx": {
+     "x": 0,
+     "y": 6.9
+    }
+   }
+  }
+ },
+ "checks": [
+  [
+   "pc dream zoom == story",
+   true,
+   "0.8133 vs 0.8133"
+  ],
+  [
+   "pc dream hero screen offset == story",
+   true,
+   "{\"x\":0,\"y\":13.5}"
+  ],
+  [
+   "pc episode zoom == story",
+   true,
+   "0.8133 vs 0.8133"
+  ],
+  [
+   "pc episode hero screen offset == story",
+   true,
+   "{\"x\":0,\"y\":13.5}"
+  ],
+  [
+   "pc edge: hero stays centred",
+   true,
+   "{\"cell\":[11,4],\"heroPx\":{\"x\":0,\"y\":13.5}}"
+  ],
+  [
+   "mobile dream zoom == story",
+   true,
+   "0.6667 vs 0.6667"
+  ],
+  [
+   "mobile dream hero screen offset == story",
+   true,
+   "{\"x\":0,\"y\":6.9}"
+  ],
+  [
+   "mobile episode zoom == story",
+   true,
+   "0.6667 vs 0.6667"
+  ],
+  [
+   "mobile episode hero screen offset == story",
+   true,
+   "{\"x\":0,\"y\":6.9}"
+  ],
+  [
+   "no page errors",
+   true,
+   ""
+  ]
+ ]
+}

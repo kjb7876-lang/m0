@@ -55923,6 +55923,11 @@
       "sha256": "361f80b5a54aa4cb57ffc599765b4a5b22d94151e91aaf5d6fa48dc16a425452"
     },
     {
+      "path": "dream-camera-r1245.js",
+      "bytes": 3790,
+      "sha256": "7ffd81fee82a6e5d78d59a234e5d11f8a9dee6a154b61a473221fca0c81a5c4e"
+    },
+    {
       "path": "dream-mob-art-r1193.js",
       "bytes": 5864,
       "sha256": "8eed981213c7fe9e501ff826a10a652eea5226df8706d0b7eab86fc85f9373e5"
@@ -56514,8 +56519,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6583968,
-      "sha256": "73960b0d58639f84b13fc6f19d84547eaea6f073ac8a1d60c89b4045819eee8f"
+      "bytes": 6584016,
+      "sha256": "f73847d7064a59599797bf3fe77d35cda64f279b8bf50e05c219246e89da2496"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -58058,9 +58063,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11611,
-  "totalBytes": 1386393390,
-  "webHTMLSha256": "73960b0d58639f84b13fc6f19d84547eaea6f073ac8a1d60c89b4045819eee8f",
+  "fileCount": 11612,
+  "totalBytes": 1386397228,
+  "webHTMLSha256": "f73847d7064a59599797bf3fe77d35cda64f279b8bf50e05c219246e89da2496",
   "largest": [
     {
       "path": "index.html",
