@@ -13473,6 +13473,16 @@
       "sha256": "22160085186637605ca8836691ff76612e9cefd34c083db2bf09ef558e62171b"
     },
     {
+      "path": "assets/r1221/side/denial-specter-side.webp",
+      "bytes": 112038,
+      "sha256": "8e7db9dc2db6b7e0e27fd08435719eb87b1f98e065fb13a435ce274603a0fc04"
+    },
+    {
+      "path": "assets/r1221/side/swamp-horned-lord-side.webp",
+      "bytes": 130204,
+      "sha256": "2a6028b324270490c89477909aa4ec09aca477859a122d0aa563df83f4a9355b"
+    },
+    {
       "path": "assets/r126/props/badge.webp",
       "bytes": 25464,
       "sha256": "fd12f3e8efd3654d060607145cbd6f6f55728f7fd65afd5a9f4d3d1507ae0281"
@@ -55839,8 +55849,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6582601,
-      "sha256": "35e2e108e4122cb883241936b2d097d75def00ae01cbf25a5bbea4fde53ddfb3"
+      "bytes": 6582695,
+      "sha256": "f46696376139541fa5aa6ee6985a80bd06d8d8d49956c8be7a053688762df02e"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -56041,6 +56051,11 @@
       "path": "mob-attack-dots-r1065.js",
       "bytes": 30399,
       "sha256": "a224f371f4c72e8f3476f7ef97a2c86c8e4a3a40c120a439f7e0064279c3ab7c"
+    },
+    {
+      "path": "mob-dash-r1221.js",
+      "bytes": 6275,
+      "sha256": "299d055ba627fe90a3dd3142cd28457084237d294dacb2083c92f885b269ea1a"
     },
     {
       "path": "mob-death-r188.js",
@@ -56251,6 +56266,11 @@
       "path": "move-float-r1029-data.js",
       "bytes": 15869,
       "sha256": "17b11f56503ad0d9bd180913b77562ed54a75f434a4fd4789a5150c288f2c734"
+    },
+    {
+      "path": "move-side-r1221-data.js",
+      "bytes": 1493,
+      "sha256": "3ea674d9762a406f23849a917a48d5020a488661c45e71eec49701640c49cee2"
     },
     {
       "path": "music-box-r378.js",
@@ -57278,9 +57298,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11455,
-  "totalBytes": 1371515497,
-  "webHTMLSha256": "35e2e108e4122cb883241936b2d097d75def00ae01cbf25a5bbea4fde53ddfb3",
+  "fileCount": 11459,
+  "totalBytes": 1371765601,
+  "webHTMLSha256": "f46696376139541fa5aa6ee6985a80bd06d8d8d49956c8be7a053688762df02e",
   "largest": [
     {
       "path": "index.html",
