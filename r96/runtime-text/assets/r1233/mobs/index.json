@@ -1,0 +1,51 @@
+{
+ "schema": "storyworld.r1233.mobs/v1",
+ "note": "R1233 임시 후보 시트 → 지역 테마 그림(scripts/r1233-mob-sheets.py)",
+ "mobs": [
+  {
+   "id": "m044",
+   "name": "피리 고블린",
+   "file": "m044.webp",
+   "body": 196,
+   "scale": 1.3,
+   "mirror": true,
+   "recolorPixels": 41539,
+   "recolor": {
+    "to_h": 0.52,
+    "sat": 0.38,
+    "val": 0.92
+   },
+   "sources": [
+    {
+     "path": "assets/r198/mobs/M047-move.png",
+     "sha256": "f31c4e35b16aa4d15aaf5becf238bb25aed009a1a0d36c793540c382a90997ed"
+    },
+    {
+     "path": "assets/r92/mobs/M047-attack.png",
+     "sha256": "33993e37ec21a8101b9fa99cf37af694211627204cef0fe2830607a3318be3df"
+    }
+   ],
+   "sha256": "b00c706781ebabfb8571dde9763eb80e68d6b899ec75ce374b983b9a76cc410f",
+   "bytes": 294772,
+   "finalArt": false
+  },
+  {
+   "id": "m019",
+   "name": "갈망의 도시짐승",
+   "file": "m019.webp",
+   "body": 180,
+   "finalArt": false,
+   "source": {
+    "drive": "Dots 결과 루트 05_m019_v1.png (DR-02 v1, CX-0161DR 검증 메모)",
+    "sha256": "1b2f997943125faa8c0c6361ed99ac67eded59e0af411a0e5c883189fb9bdb35"
+   },
+   "clean": {
+    "tool": "scripts/r1233-dots-clean.py",
+    "lowAlphaCleared": 15385,
+    "detachedRemoved": 33
+   },
+   "sha256": "123f6bb27ad58b07e8d49a6d6a6e5b255578740d2cc993d85eadb675e541cfb0",
+   "bytes": 415630
+  }
+ ]
+}

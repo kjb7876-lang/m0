@@ -23,9 +23,14 @@ if(fs.existsSync(SRC)){const code=fs.readFileSync(SRC,'utf8');
   ok('no up/down invented for boss',!B.dirs.up&&!B.dirs.down);}
  ok('no data object → no throw',(()=>{try{run('');return true;}catch(e){return false;}})());
  const man=JSON.parse(fs.readFileSync(path.join(R,'r1221-side-move.json'),'utf8'));
- for(const f of man.files){const p=path.join(R,'runtime-text',f.path);ok(f.path+' exists, size '+f.size,fs.existsSync(p)&&f.size[0]===384*4&&f.size[1]===384);
+ for(const f of man.files){const p=path.join(R,'runtime-text',f.path);ok(f.path+' exists, size '+f.size,fs.existsSync(p)&&f.size[1]===384&&f.size[0]%384===0&&f.size[0]>=384*4&&f.size[0]<=384*8);
   ok(f.path+' sha matches manifest',fs.existsSync(p)&&require('crypto').createHash('sha256').update(fs.readFileSync(p)).digest('hex')===f.sha256);
   ok(f.key+' marked temporary (not final art)',f.final===false);}
+ // Dots CX-0169SW 시간수문장 지상 걷기 11종(24 추가)(사용자 승인분만): 번호가 같은 일반몹에만, 왼쪽 원본을 뒤집어 넣고 프레임 수 = 표 n
+ {const G=['34','40','05','07','08','10','13','16','15','20','24'];for(const n of G){const f=man.files.find(x=>x.key==='kair-guardian-'+n);
+  ok('guardian '+n+' applied to kair-guardian-'+n+' only',!!f&&f.enemies.length===1&&f.enemies[0]==='kair-guardian-'+n&&f.source.includes('CX-0169SW_guardian_'+n+'_walkL')&&f.flippedIntoSheet===true);
+  const t=E['kair-guardian-'+n];ok('guardian '+n+' table n matches sheet ('+(t&&t.n)+')',!!t&&!!f&&t.n*384===f.size[0]&&t.idle.some(q=>q.path.endsWith('kair-guardians/guardian_'+n+'.webp')));}
+  ok('hover/missing guardians (02·04·09·21 hover, 39·46·47) not applied',!['02','04','09','21','39','46','47'].some(n=>man.files.some(x=>x.key==='kair-guardian-'+n)));}
  ok('mb-dist02 side made from 일곱 기둥 소환진 순례악마 walk (M008), flipped into right-facing sheet',man.files.some(f=>f.enemies.includes('mb-dist02')&&/M008-move/.test(f.source)&&f.flippedIntoSheet===true));
 }
 console.log(`R1221 side-move: ${pass} passed, ${fail} failed`);process.exit(fail?1:0);

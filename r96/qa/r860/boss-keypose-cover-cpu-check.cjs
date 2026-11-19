@@ -33,7 +33,7 @@ for(const ph of [0,1,2]){const e={nativeId:'l301-boss',boss:true,phase:ph,__ask:
 // 4) 회귀: 다른 몹·보스 밖에서는 바꾸지 않는다
 {const e={nativeId:'some-mob',phase:0,__ask:[OLD['l301-boss'].idle]};const g=ctx.__draw(e);check('다른 몹이 같은 경로를 물으면 그대로(회귀)',g[0]===OLD['l301-boss'].idle,g.join(','));}
 check('보스 그리기 밖 readyImage 는 그대로(회귀)',ctx.readyImage(OLD['l301-boss'].idle).path===OLD['l301-boss'].idle);
-check('기존 7대죄·루시퍼·교주 단계 표 유지(회귀)',JSON.stringify(B.phases['b02-boss'])==='[0,1]'&&JSON.stringify(B.phases['c104-boss'])==='[0,1,2,3]'&&JSON.stringify(B.phases['a11-boss'])==='[0]');
+check('기존 7대죄·루시퍼·교주 단계 표 유지(회귀)',JSON.stringify(B.phases['b02-boss'])==='[0,1]'&&JSON.stringify(B.phases['c104-boss'])==='[0,1,2,3]'&&JSON.stringify(B.phases['a11-boss'])==='[0,1,2]');/* 사용자 지시 동작 변경(2026-11-19 R1239 루시퍼 전수조사): 루시퍼 2·3단계도 열쇠 자세 몸(옛 회색 저화질 그림으로 떨어지던 것) */
 // 4b) 엔진·보스 전용 모듈(예: 발록 balrogAction bodyRect)이 옛 그림 기준 잘라 그리기 칸을 주면 새 그림이 잘린다
 //     (헤드리스 2026-11-12: 발록 p2 가 왼쪽이 칼로 자른 듯 잘려 그려짐, 칸 178.5,63,316.75,292.25).
 //     R104 로 바꾼 그림은 칸 전체를 그리되 옛 칸이 차지하던 화면 상자에 키를 맞추고 발(아래 끝)·가운데를 지킨다.
