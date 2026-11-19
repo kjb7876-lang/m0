@@ -62,7 +62,8 @@ function classify(alpha,sw,sh){
  //     끝 열이 리샘플로 반투명이면 바로 안쪽 열이 단단하고 끝 열도 비어 있지 않을 때를 잘림으로 본다.
  const colRun=(x,xi)=>{let n=0,y0=-1,y1=-1;for(let y=0;y<sh;y++){const a=alpha[y*sw+x];if(a>=HARD||(a>=SOFT&&alpha[y*sw+xi]>=HARD)){n++;if(y0<0)y0=y;y1=y;}}return n>=Math.max(6,.04*sh)?{y0,y1:y1+1,n}:null;};
  if(!tight){out.left=colRun(0,1);out.right=colRun(sw-1,sw-2);}
- if(!out.bottom&&!out.left&&!out.right)return{none:true,maxW,last};
+ const [fx0,fx1]=foot(last);out.feet={y:last+1,x0:fx0,x1:fx1};
+ if(!out.bottom&&!out.left&&!out.right)return{none:true,maxW,last,feet:out.feet};
  return out;}
 
 // ---- 칸 읽기(캐시) ------------------------------------------------------------------------------------------
@@ -95,26 +96,42 @@ function mist(im,fr,cx,cy,w,h,rot,alpha,flip){if(!(w>2&&h>1)||![cx,cy,w,h].every
 function wisp(im,fr,x,y,h,alpha,flip){if(!(h>2)||![x,y,h].every(Number.isFinite))return;fr=((fr%SMOKE.frames)+SMOKE.frames)%SMOKE.frames;const k=BAKE_K,C=SMOKE.cell*k,s=h/(SMOKE.vh*k);
  ctx.save();try{ctx.globalAlpha*=Math.max(0,Math.min(1,alpha));ctx.translate(x,y);ctx.scale(flip?-s:s,s);
   ctx.drawImage(im,(fr%SMOKE.cols)*C,Math.floor(fr/SMOKE.cols)*C,C,C,-SMOKE.px*k,-SMOKE.py*k,C,C);stats.draws++;}finally{ctx.restore();}}
-function cover(e,c,v,low){const im=inked(MIST);if(!im)return false;const M=mapper(c),dpr=+ctx.dpr||1,r=c.sourceRect,sw=r[2],sh=r[3];
- const seed=(typeof e.id==='number'?e.id:String(e.id||e.name||'').length*7)|0,t=T(),fr=Math.floor(t*9+seed*3);
+// ---- 모션 사이 일관성(사용자 2026-11-19 03:36Z "그 부분만 덮지 말고 그 부분에 맞게 계속 덮어서 일관성도 유지 — 모션 간") ----
+//  · 한 번이라도 잘린 칸이 보인 몹(같은 nativeId·이름의 몹 전부)은 그 뒤 모든 모션 칸에서 발밑 안개를 계속 그린다.
+//  · 잘리지 않은 칸은 그 칸 그림의 발 줄(가장 아랫줄)에 안개를 둔다. 크기·위치(칸 비율)는 몹마다 부드럽게 따라가
+//    걷기·공격·피격 칸이 바뀌어도 안개가 튀지 않는다. 칸을 아직 못 읽었으면 지난 값 그대로.
+//  · 옆 잘림 안개는 그 칸에서 차오르고(0.15초) 끝나면 0.4초에 걸쳐 옅어진다(공격 동작 사이 끊김 없이).
+const kinds=new Map();
+const kindOf=e=>String(e.nativeId||e.r248Key||e.name||'').replace(/\s*(우두머리|후속 증원|증원|\d+)\s*$/,'');
+function stateOf(e){let st=e.__r1195;if(!st){st={u:null,v:null,w:null,h:null,side:{left:0,right:0},sg:{left:null,right:null},t:0};try{Object.defineProperty(e,'__r1195',{value:st,configurable:true,writable:true});}catch(_){e.__r1195=st;}}return st;}
+const ease=(a,b,k)=>a==null||!Number.isFinite(a)?b:a+(b-a)*k;
+function cover(e,c,v,low,K){const im=inked(MIST);if(!im)return false;const M=mapper(c),dpr=+ctx.dpr||1,r=c.sourceRect,sw=r[2],sh=r[3];
+ const seed=(typeof e.id==='number'?e.id:String(e.id||e.name||'').length*7)|0,t=T(),fr=Math.floor(t*9+seed*3),st=stateOf(e);
+ const first=!st.t,dt=Math.max(0,Math.min(.25,t-(st.t||t)));st.t=t;
+ // 이 칸이 말하는 발 줄·발 폭(칸 비율). 못 읽은 칸(v 없음)은 지난 값.
+ const f=v&&(v.bottom||v.feet);
+ if(f){const tu=((Math.max(0,f.x0)+Math.min(sw,f.x1))/2)/sw,tv=f.y/sh,tw=(Math.min(sw,f.x1)-Math.max(0,f.x0))/sw;const k=st.u==null||st.path!==c.sourcePath?1:Math.min(1,dt*6);st.path=c.sourcePath; /* 다른 시트로 바뀌면 칸 비율이 달라 바로 맞춘다(크기는 화면 기준으로 계속 부드럽게) */
+  st.u=ease(st.u,tu,k);st.v=ease(st.v,tv,k);st.fw=ease(st.fw,tw,k);}
+ if(st.u==null)return false;
   // enemy:true — 몹 쪽 그림으로 표시해 R350(영웅 가림)·R409(몹 가림) 옅게에서 빠진다(안 그러면 몹 곁에서 1/3 로 옅어져 안 보임).
  const owner={id:'r1195-'+String(e.id??seed),kind:'effect',sourcePath:'r1195:ink:'+MIST.p,x:e.x,y:e.y,groundAligned:false,lightShadowApproved:true,enemy:true};
+ for(const side of['left','right']){const cur=v&&v[side];if(cur)st.sg[side]={y0:cur.y0/sh,y1:cur.y1/sh};st.side[side]=first?(cur?1:0):Math.max(0,Math.min(1,st.side[side]+(cur?dt/.15:-dt/.4)));}
  const paint=()=>{ctx.save();try{ctx.setTransform(dpr,0,0,dpr,0,0);
-  if(v.bottom){const b=v.bottom,x0=Math.max(0,b.x0),x1=Math.min(sw,b.x1),mid=(x0+x1)/2;
-   const A=M(x0,b.y),B=M(x1,b.y),C=M(mid,b.y),H=M(mid,b.y-sh);const wpx=Math.hypot(B[0]-A[0],B[1]-A[1]),hpx=Math.hypot(H[0]-C[0],H[1]-C[1]);
-   // 아래 겹: 잘린 줄을 가운데보다 조금 위에 두고 발 둘레보다 넓게. 위 겹: 옅게 피어올라 잘린 선 위 몸 아랫부분으로 번진다.
-   const w=Math.max(wpx*1.3,hpx*.42),h=Math.max(w*.42,hpx*.22);
+  if(K.bottom){const x0=(st.u-st.fw/2)*sw,x1=(st.u+st.fw/2)*sw,y=st.v*sh,mid=st.u*sw;
+   const A=M(x0,y),B=M(x1,y),C=M(mid,y),H=M(mid,y-sh);const wpx=Math.hypot(B[0]-A[0],B[1]-A[1]),hpx=Math.hypot(H[0]-C[0],H[1]-C[1]);
+   // 아래 겹: 발 줄을 가운데보다 조금 위에 두고 발 둘레보다 넓게. 위 겹: 옅게 피어올라 몸 아랫부분으로 번진다. 크기는 몹마다 부드럽게.
+   const k=st.w==null?1:Math.min(1,dt*4);st.w=ease(st.w,Math.max(wpx*1.3,hpx*.42),k);st.h=ease(st.h,Math.max(st.w*.42,hpx*.22),k);const w=st.w,h=st.h;
    mist(im,fr,C[0],C[1]-h*.28,w,h,0,1,false);
    if(!low){mist(im,fr+10,C[0]-w*.04,C[1]-h*.72,w*.8,h*.8,0,.55,true);
     const sm=inked(SMOKE);if(sm){const ph=(t*.55+seed*.37)%1,sfr=4+Math.floor(ph*8);wisp(sm,sfr,C[0]+w*.18,C[1]+h*.1,hpx*.42,.38*Math.sin(Math.PI*ph),false);
      const ph2=(ph+.5)%1;wisp(sm,4+Math.floor(ph2*8),C[0]-w*.2,C[1]+h*.1,hpx*.36,.32*Math.sin(Math.PI*ph2),true);}}}
-  for(const side of['left','right']){const s=v[side];if(!s)continue;const x=side==='left'?0:sw,ym=(s.y0+s.y1)/2;
-   const A=M(x,s.y0),B=M(x,s.y1),C=M(x,ym);const len=Math.hypot(B[0]-A[0],B[1]-A[1]);if(len<3)continue;
+  for(const side of['left','right']){const a=st.side[side],g=st.sg[side];if(!(a>.02)||!g)continue;const x=side==='left'?0:sw;
+   const A=M(x,g.y0*sh),B=M(x,g.y1*sh),C=M(x,(g.y0+g.y1)/2*sh);const len=Math.hypot(B[0]-A[0],B[1]-A[1]);if(len<3)continue;
    const rot=Math.atan2(B[1]-A[1],B[0]-A[0]);
-   mist(im,fr+5,C[0],C[1],len*1.45,Math.max(len*.42,8),rot,.88,side==='left');}
+   mist(im,fr+5,C[0],C[1],len*1.45,Math.max(len*.42,8),rot,.88*a,side==='left');}
  }finally{ctx.restore();}};
  if(typeof ctx.scope==='function')ctx.scope(owner,paint);else paint();stats.covered++;
- if(recent.length>=24)recent.shift();const P=c.points;recent.push({name:e.name,box:[Math.min(P[0][0],P[1][0],P[2][0],P[3][0]),Math.min(P[0][1],P[3][1]),Math.max(P[0][0],P[1][0],P[2][0],P[3][0]),Math.max(P[2][1],P[3][1])].map(v=>Math.round(v)),bottom:!!v.bottom,side:!!(v.left||v.right)});return true;}
+ if(recent.length>=24)recent.shift();const P=c.points;recent.push({name:e.name,box:[Math.min(P[0][0],P[1][0],P[2][0],P[3][0]),Math.min(P[0][1],P[3][1]),Math.max(P[0][0],P[1][0],P[2][0],P[3][0]),Math.max(P[2][1],P[3][1])].map(v=>Math.round(v)),bottom:!!(v&&v.bottom),side:!!(v&&(v.left||v.right)),sticky:true});return true;}
 
 // ---- 몸 그림 명령 찾기 ---------------------------------------------------------------------------------------
 function bodyOf(C,n0){let best=null,bs=0;for(let i=n0;i<C.length;i++){const q=C[i];if(!q||q.kind!=='image'||!q.points||!q.sourceRect)continue;
@@ -125,7 +142,12 @@ function wrap(base){const w=function(e,...a){if(depth>0)return base.call(this,e,
  const inner=function(e,a){const C=(typeof ctx!=='undefined'&&ctx&&Array.isArray(ctx.commands))?ctx.commands:null,n0=C?C.length:0;
   const r=base.call(this,e,...a);
   try{if(C&&e&&e.hp>0&&!e.hidden&&on()&&C.length>n0){const c=bodyOf(C,n0);
-    if(c){if(c.mutable){stats.skippedMutable++;}else{const v=verdict(c);if(v&&!v.none)cover(e,c,v,mobile());}}}}catch(err){fail(err);}
+    if(c){if(c.mutable){stats.skippedMutable++;}else{const v=verdict(c),kk=kindOf(e);
+     // 잘린 칸을 한 번 본 몹 종류는 그 뒤 모든 모션에서 계속 덮는다(모션 사이 일관성).
+     //  아래(발) 잘림이 있던 몹 → 발밑 안개를 모든 모션에서. 옆 잘림만 있던 몹 → 옆 안개만(그 칸에서 차오르고 옅어짐).
+     if(v&&!v.none&&kk){const K=kinds.get(kk)||{bottom:false,side:false};if(v.bottom)K.bottom=true;if(v.left||v.right)K.side=true;if(!kinds.has(kk)){kinds.set(kk,K);stats.kinds=kinds.size;}}
+     const K=kk?kinds.get(kk):null;
+     if((v&&!v.none)||K)cover(e,c,v,mobile(),K||{bottom:!!(v&&v.bottom),side:true});}}}}catch(err){fail(err);}
   return r;};
  // 다른 오버레이의 '이미 감쌌음' 표시(__rNNN)를 그대로 옮겨, 서로 표시를 못 보고 번갈아 다시 감싸는 일을 막는다.
  try{for(const k of Object.keys(base))if(/^__/.test(k)&&!/^__r1195/.test(k)&&!(k in w))w[k]=base[k];}catch(_){}
@@ -135,6 +157,6 @@ function install(){try{if(typeof drawEnemy!=='function')return false;if(drawEnem
 let frames=0;function pump(){frames++;budget=mobile()?1:3;install();requestAnimationFrame(pump);}
 if(typeof requestAnimationFrame==='function')requestAnimationFrame(pump);install();
 window.__STORYWORLD_FEET_INK_R1195__=Object.freeze({revision:REV,classify,inkTone,
- inspect:()=>({revision:REV,installed:typeof drawEnemy==='function'&&!!drawEnemy.__r1195,on:on(),mobile:mobile(),cache:cache.size,stats:{...stats},recent:recent.slice(),lastError}),
+ inspect:()=>({revision:REV,installed:typeof drawEnemy==='function'&&!!drawEnemy.__r1195,on:on(),mobile:mobile(),cache:cache.size,kinds:[...kinds.keys()].slice(0,80),stats:{...stats},recent:recent.slice(),lastError}),
  cached:()=>[...cache.entries()].filter(([,v])=>v&&!v.none).map(([k,v])=>({k,bottom:v.bottom||null,left:v.left||null,right:v.right||null}))});
 })();

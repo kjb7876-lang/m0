@@ -82,4 +82,26 @@ ok(API.classify(mk(),W,H)===null,'빈 칸 null');ok(API.classify(new Uint8Array(
  vm.runInContext(code,sb3);for(let i=0;i<20;i++){vm.runInContext('other()',sb3);sb3.__raf();}
  const I=sb3.__STORYWORLD_FEET_INK_R1195__.inspect();ok(I.stats.wraps<=2,'번갈아 다시 감싸지 않음 wraps='+I.stats.wraps);
  vm.runInContext('drawEnemy({id:1,hp:1})',sb3);ok(calls===1,'원래 그리기는 한 번만');}
+// ---- 모션 사이 일관성(사용자 11-19 03:36Z "그 부분만 덮지 말고 그 부분에 맞게 계속 덮어서 일관성 유지 — 모션 간") ----
+{const {__STORYWORLD_FEET_INK_R1195__:_d,...base}=sb;const draws=[];
+ const rec={commands:[],dpr:1,owner:{id:'scene',kind:'scene'},globalAlpha:1,save(){},restore(){},setTransform(){},translate(x,y){this.lastT=[x,y];},rotate(){},scale(sx,sy){this.lastS=[sx,sy];},
+  scope(o,fn){const p=this.owner;this.owner=o;try{return fn();}finally{this.owner=p;}},drawImage(im,...a){draws.push({owner:this.owner,t:this.lastT,s:this.lastS,a,ga:this.globalAlpha});}};
+ const cut=new Uint8Array(64*64);for(let y=10;y<64;y++)for(let x=12;x<52;x++)cut[y*64+x]=255;            // 칸 바닥 잘림(걷기 칸)
+ const whole=new Uint8Array(64*64);for(let y=6;y<56;y++)for(let x=14;x<50;x++)whole[y*64+x]=y>50?120:255; // 안 잘린 칸(공격 칸, 발이 칸 안)
+ const side=new Uint8Array(64*64);for(let y=10;y<56;y++)for(let x=20;x<64;x++)side[y*64+x]=255;           // 오른쪽 옆 잘림(공격 칸)
+ const arm=new Uint8Array(64*64);for(let y=10;y<56;y++){const hw=Math.max(1,Math.round(10-(y-10)*.2));for(let x=40-hw;x<40+hw;x++)arm[y*64+x]=255;}for(let y=20;y<30;y++)for(let x=40;x<64;x++)arm[y*64+x]=255; // 옆(팔)만 잘림
+ const cells={'e.webp':arm,'a.webp':cut,'b.webp':whole,'c.webp':side,'d.webp':whole};let cur=null;
+ const sb4={...base,window:null,ctx:rec,time:1,readyImage:p=>p==='assets/r430/mist-loop.webp'?{image:{width:1152,height:768}}:null,ensureImages:()=>Promise.resolve(),
+  document:{createElement:()=>({width:0,height:0,getContext:()=>({clearRect(){},drawImage(im){cur=im;},putImageData(){},getImageData:(x,y,w,h)=>{const src=cells[cur&&cur.p]||new Uint8Array(w*h);const d=new Uint8ClampedArray(w*h*4);for(let i=0;i<w*h;i++)d[i*4+3]=src[i]||0;return{data:d};}})})},
+  requestAnimationFrame:f=>{sb4.__raf=f;},drawEnemy:function(e){rec.commands.push({kind:'image',spatialRole:'',sourcePath:'assets/'+e.__img,sourceRect:[0,0,64,64],image:{p:e.__img},points:[[100,100],[164,100],[164,164],[100,164]]});}};
+ sb4.window=sb4;vm.createContext(sb4);vm.runInContext(code,sb4);
+ const step=(img,id,nid)=>{sb4.__raf();sb4.time+=.05;const n=draws.length;const E=(sb4.__Es=sb4.__Es||{})[id]||(sb4.__Es[id]={id,hp:5,x:1,y:2,nativeId:nid});E.__img=img;sb4.__E=E;vm.runInContext('drawEnemy(__E)',sb4);return draws.slice(n).filter(d=>d.owner&&/^r1195-/.test(d.owner.id));};
+ const d1=step('a.webp',7,'kn');ok(d1.length>=1,'잘린 칸: 덮음');
+ const d2=step('b.webp',7,'kn');ok(d2.length>=1,'같은 몹의 안 잘린 다음 모션 칸에서도 계속 덮음');
+ const w1=Math.abs(d1[0].s[0]),w2=Math.abs(d2[0].s[0]);ok(Math.abs(w2-w1)/w1<.15,'모션이 바뀌어도 안개 크기가 갑자기 바뀌지 않음 '+w1.toFixed(3)+'→'+w2.toFixed(3));
+ ok(Math.abs(d2[0].t[0]-d1[0].t[0])<6&&Math.abs(d2[0].t[1]-d1[0].t[1])<8,'안개 위치도 모션 사이에 튀지 않음 '+JSON.stringify([d1[0].t,d2[0].t]));
+ const d3=step('d.webp',8,'kn');ok(d3.length>=1,'같은 종류의 다른 몹(같은 nativeId)도 처음부터 덮음');
+ const d4=step('b.webp',9,'other');ok(d4.length===0,'잘림이 한 번도 없던 몹은 덮지 않음');
+ const o1=step('e.webp',20,'wingonly').length,o2=step('b.webp',20,'wingonly').length;ok(o1>=1&&o2>=1&&o2<=1,'옆 잘림만 있던 몹은 다음 칸에서 옆 안개만 옅어지며 남고 발밑 안개는 없음 '+o1+'/'+o2);
+ const s1=step('c.webp',7,'kn').length,s2=step('b.webp',7,'kn').length;ok(s1>d2.length,'옆 잘림 칸: 옆 안개 추가');ok(s2>=d2.length,'옆 잘림이 끝난 다음 칸: 옆 안개가 바로 사라지지 않고 옅어짐');}
 console.log(JSON.stringify({check:'r1195-feet-ink',pass}));
