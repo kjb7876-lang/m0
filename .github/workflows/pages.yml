@@ -525,6 +525,8 @@ jobs:
         run: node r96/qa/r1177/r1177c-cpu-check.cjs
       - name: R1177d 지역 몹 타격 pixelfx 9종 Dots D 칠한 시트(모든 모드)
         run: node r96/qa/r1177/r1177d-cpu-check.cjs
+      - name: R1193 꿈 층 R248 도트 몹 12종 스토리 그림 연결 + 화염술사·호위병 꿈 층 + pixelfx 칠한 칸 모든 모드
+        run: node r96/qa/r1193/r1193-cpu-check.cjs
       - name: R701 survival 77s choice window, difficulty, hero picker CPU check
         run: node r96/qa/r701/r701-cpu-check.cjs
       - name: R850 survival play-test fixes (arena terrain lock, hospital maze skip, next-stage prefetch, moving HUD) CPU check

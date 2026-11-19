@@ -34,6 +34,7 @@ const KINDS=[
  // R410(드라이브 11/6 인계 FALL-MAP·GREEN-SWAMP-PILLAR-ESCORT, 사용자 원문 "검은기둥 화염술사는 검은기둥 주문사 로 대체 이름도 주문사로",
  //  "마지막길의호위병은 완전 삭제"): 추락 dist06-m1(증원·추격대 포함)은 일곱 기둥 dist05-m1 검은기둥 주문사 그림·이름으로,
  //  일곱 기둥 dist05-s1 호위병 자리는 같은 지역 검은기둥 가고일 수호자(dist05-c1)로 → 호위병은 출현하지 않고 30마리·웨이브·문 판정은 그대로.
+ // R1193(사용자 2026-11-19 "응" — 꿈 층도 스토리처럼): 이 두 줄(화염술사→주문사, 호위병 출현 없음)만 스토리 사몽(꿈 층)에서도 적용한다 — 아래 DREAM_KINDS.
  ['dist06',e=>/^dist06-m1(\b|-)/.test(String(e.nativeId||'')),['dist05','dist05-m1'],'검은기둥 주문사'],
  ['dist05',e=>/^dist05-s1(\b|-)/.test(String(e.nativeId||'')),['dist05','dist05-c1'],'검은기둥 가고일 수호자'],
  // R537(사용자 2026-11-10 "진흙등거미 거미동굴나오게", "기억운반거미도 거미동굴나오게"): 거미동굴(dist01)의 옛 망각의 거미 자리(R380 이 재 나방·알집지기·수호병으로 돌려 개명한 일반 몹)
@@ -54,17 +55,18 @@ function donor(zone,nid){const k=zone+'|'+nid;if(!donors.has(k)){let d=null;buil
 function preload(id){if(preloaded.has(id))return;preloaded.add(id);try{const def=typeof regionById==='object'?regionById[id]:null;if(!def)return;const paths=new Set(def.paths||[]);
  for(const [z,,[sz,nid]] of KINDS){if(z!==id)continue;const d=donor(sz,nid);if(!d)continue;if(d.path)paths.add(d.path);for(const f of Object.values(d.profile?.frames||{}))if(f?.path)paths.add(f.path);}
  for(const p of paths)if(!(def.paths||[]).includes(p)&&typeof register==='function')register(p,'image','StoryWorld R385 몹 옮기기 · '+id);def.paths=[...paths];}catch(err){fail(err);}}
-function apply(r,id,l){if(building||!prefs.on||!r||!Array.isArray(r.enemies)||l==='DREAM')return r;let touched=false;
- for(const [z,from,to] of RENAME)if(id===z)for(const e of r.enemies){if(!e||e.r385Renamed)continue;const n=String(e.name||'');if(!n.includes(from))continue;
+const DREAM_KINDS=k=>(k[0]==='dist06'&&k[3]==='검은기둥 주문사')||(k[0]==='dist05'&&k[3]==='검은기둥 가고일 수호자');/* R1193 */
+function apply(r,id,l){if(building||!prefs.on||!r||!Array.isArray(r.enemies))return r;const dreamL=l==='DREAM';if(dreamL&&prefs.dream===false)return r;let touched=false;/* R1193: 꿈 층은 'dream' 줄만 */
+ for(const [z,from,to] of RENAME)if(id===z&&!dreamL)for(const e of r.enemies){if(!e||e.r385Renamed)continue;const n=String(e.name||'');if(!n.includes(from))continue;
   e.r385From=n;if(!e.r248Key)e.r248Key=plainName(n);e.name=n.replace(from,to);if(typeof e.r373Name==='string')e.r373Name=e.r373Name.replace(from,to);e.r385Renamed=true;stats.renamed++;touched=true;}
- const rows=KINDS.filter(k=>k[0]===id);if(rows.length){let pi=0,sj=0;
+ const rows=KINDS.filter(k=>k[0]===id&&(!dreamL||DREAM_KINDS(k)));if(rows.length){let pi=0,sj=0;
   for(const e of r.enemies){if(!e||e.boss||e.r385Look)continue;const i=isPatrol(e)?pi++:-1,j=oldSpider(e)?sj++:-1;const k=rows.find(([,pick])=>pick(e,i,j));if(!k)continue;
    const [,,[sz,nid],name]=k;e.r385Look=[sz,nid];e.r385From=e.name;e.r385Key0=e.r248Key;
    // R248 은 r248Key 로 몹 그림 시트·공격 효과를 고른다 → 옮겨 온 몹의 키로 바꿔야 그 몹 그림·효과가 나온다(시트가 없으면 엔진 원래 그림을 빌림).
    const dk=donor(sz,nid)?.key;e.r248Key=dk||plainName(e.name);
    const n=String(e.name||''),mid=/^중간보스 · /.test(n),suf=(n.match(/ (증원|추격대|후속 증원|우두머리|\d+)$/)||[''])[0];
    e.name=(mid?'중간보스 · ':'')+name+suf;if(typeof e.r373Name==='string')e.r373Name=name;delete e.r74Monster;stats.renamed++;touched=true;}}
- for(const [z,mon] of ATLAS_OFF)if(id===z)for(const e of r.enemies){if(!e||e.r385Look||!isPatrol(e)||e.r74Monster!==mon)continue;e.r385Atlas=mon;delete e.r74Monster;stats.renamed++;touched=true;}
+ for(const [z,mon] of ATLAS_OFF)if(id===z&&!dreamL)for(const e of r.enemies){if(!e||e.r385Look||!isPatrol(e)||e.r74Monster!==mon)continue;e.r385Atlas=mon;delete e.r74Monster;stats.renamed++;touched=true;}
  if(touched)stats.rooms++;return r;}
 function view(e){if(!prefs.on||!e?.r385Look)return null;const d=donor(e.r385Look[0],e.r385Look[1]);return d&&{nativeId:d.nativeId,path:d.path,profile:d.profile};}
 function installRoom(){if(roomOn)return true;if(typeof makeRoom!=='function')return false;if(makeRoom.__r385)return roomOn=true;roomOn=true;const base=makeRoom;makeBase=base;

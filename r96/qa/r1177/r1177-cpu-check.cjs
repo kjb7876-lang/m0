@@ -42,7 +42,7 @@ function engine(order='976-first'){const row=(file,frame,cols,frames,fps,loop)=>
   'pvfx-rift-portal':row('pvfx-rift-portal.webp',[192,192],5,16,20,true),'pvfx-choir-moths':row('pvfx-choir-moths.webp',[192,192],5,60,20,true),
   'crit-hit':row('crit-hit.webp',[216,136],5,11,15,false),'pvfx-frost-nova':row('pvfx-frost-nova.webp',[192,192],5,13,20,false)};
  const orig=JSON.parse(JSON.stringify(meta));const ready=new Set(),added=[];
- const g={window:{},document:{getElementById:()=>null,addEventListener(){}},localStorage:{getItem:()=>null,setItem(){}},meta,orig,ready,added};
+ const g={window:{},document:{getElementById:()=>null,addEventListener(){}},localStorage:{getItem:k=>k==='storyworld.r1177.samongPixel'?'{"everywhere":false}':null,setItem(){}},meta,orig,ready,added};/* R1193: 기본이 모든 모드가 됨 → 이 검사는 '사몽 에피소드만' 스위치로 원래 동작을 본다(모든 모드는 r1193-cpu-check) */
  g.window.__STORYWORLD_PIXELFX_R163__=Object.freeze({meta:()=>meta,has:k=>!!meta[k],dir:'assets/r163/pixelfx/'});
  globalThis.room=null;globalThis.time=0;globalThis.started=true;globalThis.player={x:0,y:0};globalThis.actorHeight=()=>60;
  globalThis.addImage=p=>{added.push(p);};globalThis.readyImage=p=>ready.has(p)?{image:{src:p,width:1,height:1}}:null;globalThis.tick=()=>{};

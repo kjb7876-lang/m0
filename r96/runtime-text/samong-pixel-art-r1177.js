@@ -56,7 +56,7 @@ function rowFor(k,base){if(!isPixelRow(base))return null;if(MOBD[k]){const {src,
 // 깨진 탑은 엔진이 적 목록에서 먼저 빼므로(killEnemy 뒤에 R178 이 부름) 이 구역의 탑을 따로 기억해 둔다
 let towers=[];function seeTowers(){const r=roomNow(),L=r&&Array.isArray(r.enemies)?r.enemies.filter(e=>e&&e.r170Tower):[];for(const e of L)if(!towers.includes(e))towers.push(e);if(towers.length>24)towers=towers.slice(-24);}
 function step(){try{seeTowers();}catch(_){}const X=PX(),meta=X&&typeof X.meta==='function'?X.meta():null;if(!meta)return;remember(meta);if(!meta[TOWER_KEY])meta[TOWER_KEY]=TOWER;
- const z=zoneOf(roomNow()),ep=prefs.on&&isEpisode(z),inP=isP(z);let sw=0,rs=0;
+ const z=zoneOf(roomNow()),ep=prefs.on&&(isEpisode(z)||prefs.everywhere!==false),inP=isP(z);/* R1193(사용자 2026-11-19): 칠한 칸 9줄을 스토리·꿈 층·생존 등 모든 모드로 — 끄기 {"everywhere":false} */let sw=0,rs=0;
  for(const k of Object.keys(pristine)){const own=!!OWN[k],mob=!!MOBD[k];
   if(!own&&!mob&&inP&&prefs.on)continue;// P 의 R976 6종은 R976 몫
   if(mob?prefs.on&&prefs.mobHit!==false:ep){let row=mine.get(k);if(!row){row=rowFor(k,pristine[k]);if(!row)continue;mine.set(k,row);ours.add(row);}if(meta[k]!==row){meta[k]=row;sw++;}}
@@ -66,7 +66,7 @@ try{if(typeof tick==='function'){const base=tick;tick=function(...a){const r=bas
 // R1177c: pixelfx play 가 먼저 묻는다 — 사몽 에피소드 안에서만. ① 깨지는 탑 자리의 무너짐 → C1 탑(바닥에 세움, 물들임 없이) ② Dots 칸은 물들이지 않고 Dots 색 그대로
 function route(name,x,y,o){if(!prefs.on)return null;o=o||{};
  if(MOBD[name]){const row=PX()?.meta?.()?.[name];return row&&row===mine.get(name)&&o.tint?{name,o:{...o,tint:null}}:null;}// R1177d: 몹 타격 Dots 칸은 모든 모드에서 Dots 색 그대로
- const r=roomNow();if(!isEpisode(zoneOf(r)))return null;
+ const r=roomNow();if(!isEpisode(zoneOf(r))&&prefs.everywhere===false)return null;/* R1193: 모든 모드 */
  if(name==='pvfx-void-implosion'&&[...(Array.isArray(r.enemies)?r.enemies:[]),...towers].some(e=>e&&e.r170Tower&&!(e.hp>0)&&Math.abs(e.x-x)<.01&&Math.abs(e.y-y)<.01)){stats.towers=(stats.towers||0)+1;return{name:TOWER_KEY,o:{...o,z:0,k:1.35,tint:null}};}
  const X=PX(),row=X?.meta?.()?.[name];if(row&&row===mine.get(name)&&row.dots&&o.tint)return{name,o:{...o,tint:null}};return null;}
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}try{step();}catch(e){fail(e);}}
