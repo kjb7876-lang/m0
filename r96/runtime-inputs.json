@@ -10769,7 +10769,15 @@
     "assets/r1241/shadow-seal8.webp",
     "assets/r380/mobs/samong-s05-cult-seal-v1.webp",
     "assets/r380/mobs/samong-s06-command-wire-v1.webp",
-    "cinema-cutin-r1244.js"
+    "cinema-cutin-r1244.js",
+    "assets/r1244/eye-ego.webp",
+    "assets/r1244/eye-hwando.webp",
+    "assets/r1244/eye-lauren.webp",
+    "assets/r1244/eye-michaela.webp",
+    "assets/r1244/eye-neon.webp",
+    "assets/r1244/eye-persona.webp",
+    "assets/r1244/eye-seoha.webp",
+    "assets/r1244/eye-slayer.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11844,5 +11852,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "e1cf71eb3932bb88c401c8134a89637e917607dc85a367be67e2e64a60cebcf6"
+  "runtimeManifestSHA256": "1b243daec0f405dca3a31b54b531caa4ad56d17c93e0bda8725a39262b7f4de7"
 }
