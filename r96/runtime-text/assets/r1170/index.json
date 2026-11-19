@@ -1,0 +1,175 @@
+{
+ "schema": "storyworld.r1170.dots/v1",
+ "request": "CX-0159MM r1 ROUGH",
+ "assets": [
+  {
+   "file": "assets/r1170/mm-mech01-hit4.webp",
+   "source": "Dots CX-0159MM mech01 hit4 r1 ROUGH",
+   "sourceSha256": "eb07fa3d9d08410495643217ff8be90e8cdb08f5fff01ba05fa1bc6e76d8dcb4",
+   "sha256": "9e1795808ca3251cec47d5fedf6e50a994466f2fcec45d4a907621909a57084d",
+   "bytes": 92742,
+   "use": "피격 4칸(R1156 표)",
+   "heightFix": [],
+   "finalArt": false
+  },
+  {
+   "file": "assets/r1170/mm-mech01-death6.webp",
+   "source": "Dots CX-0159MM mech01 death6 r1 ROUGH",
+   "sourceSha256": "50bb447a40def31d57cb99f08be61b1da29492a9b0e844bf469f904aba1ad272",
+   "sha256": "db4366ecced245e28f181b79c1d8a9821c1d816d919729f239a8e85a5682692c",
+   "bytes": 72524,
+   "use": "사망 6칸(R1065 사망 표)",
+   "dehazedPx": 14679,
+   "finalArt": false
+  },
+  {
+   "file": "assets/r1170/mm-mech02-hit4.webp",
+   "source": "Dots CX-0159MM mech02 hit4 r1 ROUGH",
+   "sourceSha256": "82465eb86b835ebb673d722a28b1aef8799dc38b798f43a9be590c6657d327be",
+   "sha256": "d5b6d205ec807a50d3a1c9ad39a0669db4a7a7eac31164ccc91c0a39cb61c63a",
+   "bytes": 79144,
+   "use": "피격 4칸(R1156 표)",
+   "heightFix": [],
+   "finalArt": false
+  },
+  {
+   "file": "assets/r1170/mm-mech02-death6.webp",
+   "source": "Dots CX-0159MM mech02 death6 r1 ROUGH",
+   "sourceSha256": "853c48238647b358a7ee2ad66a3d8443a814dc5a7196c8fc71113fc13663491e",
+   "sha256": "62d832e5ebd74cea2addf689d4109606b2abe45e86ed0d1e3927ebce8be77c36",
+   "bytes": 60816,
+   "use": "사망 6칸(R1065 사망 표)",
+   "dehazedPx": 17819,
+   "finalArt": false
+  },
+  {
+   "file": "assets/r1170/mm-mech03-hit4.webp",
+   "source": "Dots CX-0159MM mech03 hit4 r1 ROUGH",
+   "sourceSha256": "27cc065bf032a6c01c1adc70a1f5f0759f2e1be5f299412a14b78a76c4e57ae9",
+   "sha256": "0a9a1606f558b83f0f0cef6bbc2974f096e96856b6214ea90a43d7e120119b3f",
+   "bytes": 89112,
+   "use": "피격 4칸(R1156 표)",
+   "heightFix": [],
+   "finalArt": false
+  },
+  {
+   "file": "assets/r1170/mm-mech03-death6.webp",
+   "source": "Dots CX-0159MM mech03 death6 r1 ROUGH",
+   "sourceSha256": "93f74c052ed13b1074e0fb5a9d9cb8e6f60b3edfe6fa4d8f31c1d6da18741d2c",
+   "sha256": "cf8611dc7e7092f50e840e773b7b85fd66ff8a78909d53e97066afaed845881c",
+   "bytes": 85198,
+   "use": "사망 6칸(R1065 사망 표)",
+   "dehazedPx": 30416,
+   "finalArt": false
+  },
+  {
+   "file": "assets/r1170/mm-mech04-death6.webp",
+   "source": "Dots CX-0159MM mech04 death6 r1 ROUGH",
+   "sourceSha256": "b4018dd8efe7c7c8470d4df31eb18891f0ded7799b7b8d2d295cc2345a0187e0",
+   "sha256": "04adf34bc16b61465a5570409dcf13981c6d6263da11911c255f5d7ba66080ad",
+   "bytes": 89478,
+   "use": "사망 6칸(R1065 사망 표)",
+   "dehazedPx": 77,
+   "finalArt": false
+  },
+  {
+   "file": "assets/r1170/mm-u206a-hit4.webp",
+   "source": "Dots CX-0159MM u206a hit4 r1 ROUGH",
+   "sourceSha256": "a275eb662c79ce05e10d5cb98cda107d49dbabf89418af841c5ee4261ada1b02",
+   "sha256": "8f87e9ab9605c4d88f525ecb61d678cfc357574d46741eb92fef940ae51de925",
+   "bytes": 122754,
+   "use": "피격 4칸(R1156 표)",
+   "heightFix": [
+    [
+     1,
+     1.15
+    ]
+   ],
+   "finalArt": false
+  },
+  {
+   "file": "assets/r1170/mm-u206a-death6.webp",
+   "source": "Dots CX-0159MM u206a death6 r1 ROUGH",
+   "sourceSha256": "f54e457e1784567334a2fbc64144de5ba4840f07043493aa9b9cab5c85cc6fd7",
+   "sha256": "01ff92f4b1fc435454df139cf2a0fe694f21d41680f1573b4185e7ec3c0fb80f",
+   "bytes": 157820,
+   "use": "사망 6칸(R1065 사망 표)",
+   "dehazedPx": 5819,
+   "finalArt": false
+  },
+  {
+   "file": "assets/r1170/mm-u206b-hit4.webp",
+   "source": "Dots CX-0159MM u206b hit4 r1 ROUGH",
+   "sourceSha256": "5d560e6be92250f70ad783ce455145a437ed424254edd61dfa5691e901c5cdbb",
+   "sha256": "9a41fa1dbdf0292ccf2e3a92d2dc0f25669d7287eb9039a0fc7a271676a86433",
+   "bytes": 103168,
+   "use": "피격 4칸(R1156 표)",
+   "heightFix": [
+    [
+     1,
+     1.213
+    ],
+    [
+     2,
+     1.114
+    ]
+   ],
+   "finalArt": false
+  },
+  {
+   "file": "assets/r1170/mm-u206b-death6.webp",
+   "source": "Dots CX-0159MM u206b death6 r1 ROUGH",
+   "sourceSha256": "942390087769472ed835c22fac8575088759883bbca2f8bc52276831b05346c0",
+   "sha256": "00e4c8f13bd23bc8c37b1c2c614caf21690c894c441807e310ab40a96c88b4f2",
+   "bytes": 81366,
+   "use": "사망 6칸(R1065 사망 표)",
+   "dehazedPx": 98762,
+   "finalArt": false
+  },
+  {
+   "file": "assets/r1170/mm-hound-hit4.webp",
+   "source": "Dots CX-0159MM hound hit4 r1 ROUGH",
+   "sourceSha256": "fc77cb66837b2691b1c547e02c98d289f6a71e299c83f8b7253f6b6103b1d865",
+   "sha256": "1de13a418f4391eec65804cb358854c9071e7fb4ff4c6a70f10dc823405ec0da",
+   "bytes": 95130,
+   "use": "피격 4칸(R1156 표)",
+   "heightFix": [],
+   "finalArt": false
+  },
+  {
+   "file": "assets/r1170/mm-hound-death6.webp",
+   "source": "Dots CX-0159MM hound death6 r1 ROUGH",
+   "sourceSha256": "a58a0ea074f3e87f6a55bbaf20f75a6a1748dbe72be1c3ea4e2470497db0944b",
+   "sha256": "2af2ec6a256a13d3ae3da94793bf0c8a376af94063d737b65bf0752fee1adab1",
+   "bytes": 92848,
+   "use": "사망 6칸(R1065 사망 표)",
+   "dehazedPx": 2,
+   "finalArt": false
+  },
+  {
+   "file": "assets/r1170/mm-knight-hit4.webp",
+   "source": "Dots CX-0159MM knight hit4 r1 ROUGH",
+   "sourceSha256": "ff0ec056a5fc4378f962c37012c9542259e4f605719056d5a1aaa7e27f143dbd",
+   "sha256": "849f322f7e027a890ddf9703344d512585085acadecc91c05c66356146a964be",
+   "bytes": 134502,
+   "use": "피격 4칸(R1156 표)",
+   "heightFix": [
+    [
+     1,
+     1.09
+    ]
+   ],
+   "finalArt": false
+  },
+  {
+   "file": "assets/r1170/mm-knight-death6.webp",
+   "source": "Dots CX-0159MM knight death6 r1 ROUGH",
+   "sourceSha256": "61c1d6174d0c50d7394102c7224d9c86d5b5e858c6fe23e5faacfef1155011e9",
+   "sha256": "1039630e52d2f28e1d9540835d47a9a56dd24d16d3a036aceed48ba7bc7de70a",
+   "bytes": 137982,
+   "use": "사망 6칸(R1065 사망 표)",
+   "dehazedPx": 20,
+   "finalArt": false
+  }
+ ]
+}

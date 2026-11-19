@@ -23,7 +23,15 @@ const SHEETS=Object.freeze({
  'dys-engineer-v2':Object.freeze({path:'assets/r1169/dys-engineer-hit4.webp',cell:[256,320],own:'assets/r380/mobs/dys-engineer-v2.webp'}),
  'dys-pulse-raider-v2':Object.freeze({path:'assets/r1169/dys-pulse-raider-hit4.webp',cell:[256,320],own:'assets/r380/mobs/dys-pulse-raider-v2-walk-d1.webp'}),
  'dys-prism-stalker-v2':Object.freeze({path:'assets/r1169/dys-prism-stalker-hit4.webp',cell:[256,320],own:'assets/r380/mobs/dys-prism-stalker-v2-walk-d1.webp'}),
- 'dys-siege-gunner-v2':Object.freeze({path:'assets/r1169/dys-siege-gunner-hit4.webp',cell:[256,320],own:'assets/r380/mobs/dys-siege-gunner-v2-walk-d1.webp'})});
+ 'dys-siege-gunner-v2':Object.freeze({path:'assets/r1169/dys-siege-gunner-hit4.webp',cell:[256,320],own:'assets/r380/mobs/dys-siege-gunner-v2-walk-d1.webp'}),
+ /* R1170: 기계 몹 7종(u204 1~3·u206 1~2·전쟁기계 사냥개·전극 기계기사) — Dots CX-0159MM r1 ROUGH(scripts/r1170-mech-sheets.py: 1~3칸 색·키 맞춤, 4칸 = 원본 0칸). u204-mech-04 는 R620 보스 동작이 맡아 뺌 */
+ 'u204-mech-01-v1':Object.freeze({path:'assets/r1170/mm-mech01-hit4.webp',cell:[256,256],own:'assets/r380/mobs/u204-mech-01-v1.webp'}),
+ 'u204-mech-02-v1':Object.freeze({path:'assets/r1170/mm-mech02-hit4.webp',cell:[256,256],own:'assets/r380/mobs/u204-mech-02-v1.webp'}),
+ 'u204-mech-03-v1':Object.freeze({path:'assets/r1170/mm-mech03-hit4.webp',cell:[256,256],own:'assets/r380/mobs/u204-mech-03-v1.webp'}),
+ 'u206-mech-01-v1':Object.freeze({path:'assets/r1170/mm-u206a-hit4.webp',cell:[256,320],own:'assets/r380/mobs/u206-mech-01-v1.webp'}),
+ 'u206-mech-02-v1':Object.freeze({path:'assets/r1170/mm-u206b-hit4.webp',cell:[256,320],own:'assets/r380/mobs/u206-mech-02-v1.webp'}),
+ 'war-machine-hound-v1':Object.freeze({path:'assets/r1170/mm-hound-hit4.webp',cell:[256,320],own:'assets/r380/mobs/war-machine-hound-v1.webp'}),
+ 'electrode-machine-knight-v1':Object.freeze({path:'assets/r1170/mm-knight-hit4.webp',cell:[256,256],own:'assets/r380/mobs/electrode-machine-knight-v1.webp'})});
 const stats={hits:0,frames:0,waiting:0,rewraps:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e&&e.message||e).slice(0,160);};
 let on=true;try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(v&&v.on===false)on=false;}catch(_){}
 const T=()=>{try{return typeof time==='number'?time:0;}catch(_){return 0;}};
