@@ -14,26 +14,29 @@
 //  끄기: localStorage 'storyworld.r1244.cine'='0' 또는 set(false). 서사·판정·쿨타임·스킬 키는 건드리지 않는다.
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_CINEMA_CUTIN_R1244__)return;
-const REV='R1244-cinema-cutin-1',KEY='storyworld.r1244.cine',DUR=Object.freeze({passive:1100,awake:1600}),FPS=24;
+const REV='R1244-cinema-cutin-2',KEY='storyworld.r1244.cine',DUR=Object.freeze({passive:1100,awake:1600}),FPS=24;
 const G=(f,d)=>{try{const v=f();return v===undefined?d:v;}catch(_){return d;}};
 const U=p=>{try{const u=typeof urlFor==='function'?urlFor(p):p;return typeof u==='string'&&u&&!/["\\]/.test(u)?u:p;}catch(_){return p;}};
 const BUST=h=>'assets/r108/heroes/'+h+'.webp';
 const sheet=(path,cols,rows,frames,ar=1)=>Object.freeze({path,cols,rows,frames,ar});
-/* R1244b: Dots CX-0178CN 눈 클로즈업 4칸(2×2, 칸 1280×320): 0 평상 · 1 결의 · 2 발동 문양 · 3 반쯤 감김 — scripts/r1244-eye-dots.py. 헌터·기억사수는 아직 안 와 초상화 확대. */
+/* R1244b: Dots CX-0178CN 눈 클로즈업 4칸(2×2, 칸 1280×320): 0 평상 · 1 결의 · 2 발동 문양 · 3 반쯤 감김 — scripts/r1244-eye-dots.py. R1244c 에서 헌터·기억사수도 도착(10형상 모두). */
 const EYE=f=>Object.freeze({path:'assets/r1244/eye-'+f+'.webp',cols:2,rows:2,ar:4});
+/* R1244c: Dots CX-0178CN 2차분 — 베기 4×3(12칸, 칸 512×128: 0~5 길어짐·6~11 잔광 줄어듦), 임팩트 정지 그림(1280×720, 반전 흑백으로 구움) — scripts/r1244-dots-r2.py. 서하 베기는 Dots HOLD(없음) */
+const SLASH=f=>sheet('assets/r1244/slash-'+f+'.webp',4,3,12,4);
+const IMP=f=>'assets/r1244/impact-'+f+'.webp';
 const INK_SWEEP=sheet('assets/r945/hwando-ink-sweep.webp',4,4,16,4);/* 환도 먹 붓 16칸(512×128) — 베기 한 줄 */
 // 형상 표: eye = 초상화와 눈 초점(가로·세로 비율, 그림 가로/세로 비, z = 화면 폭 대비 확대 — 헤드리스 장면으로 눈이 슬릿 가운데 오게 맞춤), sig = 매치 컷 시그니처 시트, slash = 여는 베기 시트(없으면 슬릿만), tilt = 슬릿 기울기(도)
 const PROFILES=Object.freeze({
- seoha:{eye:{path:BUST('seoha'),fx:0.55,fy:0.245,ar:.75,z:1.3,sheet:EYE('seoha')},sig:sheet('assets/r564/seoha-time-blink.webp',6,4,24),tilt:-9,passive:'수문장 아르벨리아',colors:{key:'#78d2ff',ink:'#08142a',light:'#e8ce8c'}},
- hunter:{eye:{path:BUST('hunter'),fx:0.5,fy:0.2,ar:.75,z:1.3},sig:sheet('assets/r535/hunter-fire-arrowhead.webp',6,4,24),tilt:8,passive:'기러기진 섬멸',colors:{key:'#f1d9a0',ink:'#4a1812',light:'#e08a92'}},
- slayer:{eye:{path:BUST('slayer'),fx:0.62,fy:0.15,ar:.75,z:1.3,sheet:EYE('slayer')},sig:sheet('assets/r585/slayer-r-cross.webp',6,4,24),tilt:-7,passive:'혈격자',colors:{key:'#c81422',ink:'#220408',light:'#f0e6e0'}},
- michaela:{eye:{path:BUST('michaela'),fx:0.48,fy:0.245,ar:.75,z:1.3,sheet:EYE('michaela')},sig:sheet('assets/r948/mh03-heart24.webp',6,4,24),tilt:6,passive:'연심 대개화',colors:{key:'#b21a3e',ink:'#3a0a18',light:'#e2e8f2'}},
- gunner:{eye:{path:BUST('gunner'),fx:0.48,fy:0.19,ar:.75,z:1.3},sig:sheet('assets/r561/gunner-q-muzzle.webp',6,4,24),tilt:-5,passive:'귀환 전우',colors:{key:'#4682e6',ink:'#081024',light:'#c8d7f0'}},
- lauren:{eye:{path:BUST('lauren'),fx:0.47,fy:0.2,ar:.75,z:1.3,sheet:EYE('lauren')},sig:sheet('assets/r946/lauren-blue.webp',6,4,24),tilt:9,passive:'유성 궤도',names:{meteor:'유성 궤도',violet:'쌍성 소멸'},colors:{key:'#9a5ad2',ink:'#160a26',light:'#e2e2f0'}},
- neon:{eye:{path:BUST('neon'),fx:0.56,fy:0.215,ar:.75,z:1.3,sheet:EYE('neon')},sig:sheet('assets/r951/neon-skybeam.webp',6,2,12,.25),tilt:-11,passive:'천공 낙뢰',colors:{key:'#5ff0c8',ink:'#061a18',light:'#e8c460'}},
- hwando:{eye:{path:BUST('hwando'),fx:0.47,fy:0.25,ar:.75,z:1.4,sheet:EYE('hwando')},sig:sheet('assets/r945/hwando-ink-burst.webp',6,2,12),slash:INK_SWEEP,tilt:-8,passive:'삼협묵희',colors:{key:'#f2eee2',ink:'#0e0e0e',light:'#b8b4aa'}},
- ego:{eye:{path:'assets/r1046/ego-portrait.webp',fx:0.51,fy:0.275,ar:.75,z:1.9,sheet:EYE('ego')},sig:sheet('assets/r1174/persona-sigil12.webp',6,2,12),slash:INK_SWEEP,tilt:-8,passive:'삼협묵희',name:'EGO',colors:{key:'#cc3428',ink:'#0e0b0b',light:'#f2eee8'}},
- persona:{eye:{path:'assets/r1174/persona-bust.webp',fx:0.5,fy:0.235,ar:.75,z:1.3,sheet:EYE('persona')},sig:sheet('assets/r1174/persona-sigil12.webp',6,2,12),tilt:7,passive:'(진) 유성 궤도',names:{meteor:'(진) 유성 궤도',violet:'(진) 쌍성 소멸'},name:'페르소나',colors:{key:'#cc3428',ink:'#0b0606',light:'#f2d6cf',deep:'#5a0c12'}}});
+ seoha:{eye:{path:BUST('seoha'),fx:0.55,fy:0.245,ar:.75,z:1.3,sheet:EYE('seoha')},sig:sheet('assets/r564/seoha-time-blink.webp',6,4,24),impact:IMP('seoha'),tilt:-9,passive:'수문장 아르벨리아',colors:{key:'#78d2ff',ink:'#08142a',light:'#e8ce8c'}},
+ hunter:{eye:{path:BUST('hunter'),fx:0.5,fy:0.2,ar:.75,z:1.3,sheet:EYE('hunter')},sig:sheet('assets/r535/hunter-fire-arrowhead.webp',6,4,24),slash:SLASH('hunter'),impact:IMP('hunter'),tilt:8,passive:'기러기진 섬멸',colors:{key:'#f1d9a0',ink:'#4a1812',light:'#e08a92'}},
+ slayer:{eye:{path:BUST('slayer'),fx:0.62,fy:0.15,ar:.75,z:1.3,sheet:EYE('slayer')},sig:sheet('assets/r585/slayer-r-cross.webp',6,4,24),slash:SLASH('slayer'),impact:IMP('slayer'),tilt:-7,passive:'혈격자',colors:{key:'#c81422',ink:'#220408',light:'#f0e6e0'}},
+ michaela:{eye:{path:BUST('michaela'),fx:0.48,fy:0.245,ar:.75,z:1.3,sheet:EYE('michaela')},sig:sheet('assets/r948/mh03-heart24.webp',6,4,24),slash:SLASH('michaela'),impact:IMP('michaela'),tilt:6,passive:'연심 대개화',colors:{key:'#b21a3e',ink:'#3a0a18',light:'#e2e8f2'}},
+ gunner:{eye:{path:BUST('gunner'),fx:0.48,fy:0.19,ar:.75,z:1.3,sheet:EYE('gunner')},sig:sheet('assets/r561/gunner-q-muzzle.webp',6,4,24),slash:SLASH('gunner'),impact:IMP('gunner'),tilt:-5,passive:'귀환 전우',colors:{key:'#4682e6',ink:'#081024',light:'#c8d7f0'}},
+ lauren:{eye:{path:BUST('lauren'),fx:0.47,fy:0.2,ar:.75,z:1.3,sheet:EYE('lauren')},sig:sheet('assets/r946/lauren-blue.webp',6,4,24),slash:SLASH('lauren'),impact:IMP('lauren'),tilt:9,passive:'유성 궤도',names:{meteor:'유성 궤도',violet:'쌍성 소멸'},colors:{key:'#9a5ad2',ink:'#160a26',light:'#e2e2f0'}},
+ neon:{eye:{path:BUST('neon'),fx:0.56,fy:0.215,ar:.75,z:1.3,sheet:EYE('neon')},sig:sheet('assets/r951/neon-skybeam.webp',6,2,12,.25),slash:SLASH('neon'),impact:IMP('neon'),tilt:-11,passive:'천공 낙뢰',colors:{key:'#5ff0c8',ink:'#061a18',light:'#e8c460'}},
+ hwando:{eye:{path:BUST('hwando'),fx:0.47,fy:0.25,ar:.75,z:1.4,sheet:EYE('hwando')},sig:sheet('assets/r945/hwando-ink-burst.webp',6,2,12),slash:INK_SWEEP,impact:IMP('hwando'),tilt:-8,passive:'삼협묵희',colors:{key:'#f2eee2',ink:'#0e0e0e',light:'#b8b4aa'}},
+ ego:{eye:{path:'assets/r1046/ego-portrait.webp',fx:0.51,fy:0.275,ar:.75,z:1.9,sheet:EYE('ego')},sig:sheet('assets/r1174/persona-sigil12.webp',6,2,12),slash:INK_SWEEP,impact:IMP('ego'),tilt:-8,passive:'삼협묵희',name:'EGO',colors:{key:'#cc3428',ink:'#0e0b0b',light:'#f2eee8'}},
+ persona:{eye:{path:'assets/r1174/persona-bust.webp',fx:0.5,fy:0.235,ar:.75,z:1.3,sheet:EYE('persona')},sig:sheet('assets/r1174/persona-sigil12.webp',6,2,12),slash:SLASH('persona'),impact:IMP('persona'),tilt:7,passive:'(진) 유성 궤도',names:{meteor:'(진) 유성 궤도',violet:'(진) 쌍성 소멸'},name:'페르소나',colors:{key:'#cc3428',ink:'#0b0606',light:'#f2d6cf',deep:'#5a0c12'}}});
 const FORMS=Object.freeze(Object.keys(PROFILES));
 const stats={shown:0,awake:0,passive:0,skipped:{off:0,form:0,body:0,scene:0,dom:0,gap:0},errors:0,warmed:0,frames:0,wraps:0};let lastError=null,last=null,el=null,parts=null,offTimer=0,tickTimer=0,token=0,nowFn=null,hwAt=-1e9;
 function fail(e){stats.errors++;lastError=String(e&&e.message||e).slice(0,200);}
@@ -78,12 +81,15 @@ const CSS=[
  '#r1244Cine.on[data-mode="awake"] .r1244sig{animation:r1244SigA 1.6s ease-out forwards}',
  '#r1244Cine.on[data-mode="awake"] .r1244slash{animation:r1244SlashA 1.6s linear forwards}',
  '#r1244Cine.on[data-mode="awake"] .r1244impact{animation:r1244Impact 1.6s steps(1,end) forwards}',
+ '#r1244Cine .r1244impact[data-baked="1"]{filter:none}',
+ '#r1244Cine.on[data-mode="awake"] .r1244impact[data-baked="1"]{animation:r1244ImpactD 1.6s steps(1,end) forwards}',
  '#r1244Cine.on[data-mode="awake"] .r1244plate{animation:r1244PlateA 1.6s cubic-bezier(.2,.8,.2,1) forwards}',
  '@keyframes r1244Bar{0%{opacity:0;transform:scaleY(0)}9%{opacity:.88;transform:scaleY(1)}86%{opacity:.88;transform:scaleY(1)}100%{opacity:0;transform:scaleY(0)}}',
  '@keyframes r1244SlitA{0%,7%{transform:rotate(var(--t)) scaleY(0)}12%{transform:rotate(var(--t)) scaleY(.1)}20%{transform:rotate(var(--t)) scaleY(1)}53%{transform:rotate(var(--t)) scaleY(1)}60%{transform:rotate(var(--t)) scaleY(.02);visibility:visible}61%,100%{transform:rotate(var(--t)) scaleY(0);visibility:hidden}}',
  '@keyframes r1244DollyA{0%{transform:scale(1.22) translateX(2.5vw)}20%{transform:scale(1.05)}53%{transform:scale(1.16)}100%{transform:scale(1.22)}}',
  '@keyframes r1244SigA{0%,51%{visibility:hidden}0%,52%{opacity:0;transform:translate(-50%,-50%) scale(.5)}62%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}86%{opacity:1;transform:translate(-50%,-50%) scale(1.25)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.4)}}',
  '@keyframes r1244SlashA{0%{opacity:1}12%{opacity:1}18%{opacity:0;visibility:visible}19%,100%{opacity:0;visibility:hidden}}',
+ '@keyframes r1244ImpactD{0%,57%{opacity:0;visibility:hidden}58%{opacity:.62;visibility:visible}62%,100%{opacity:0;visibility:hidden}}',
  '@keyframes r1244Impact{0%,57%{opacity:0;visibility:hidden}58%{opacity:.42;visibility:visible}62%,100%{opacity:0;visibility:hidden}}',
  '@keyframes r1244PlateA{0%,9%{opacity:0;transform:translateX(-5vw)}22%{opacity:1;transform:translateX(0)}84%{opacity:1;transform:translateX(1.2vw)}100%{opacity:0;transform:translateX(2.4vw)}}',
  // lite: 칸 넘기기·임팩트·베기 없이 슬릿·이름판만 부드럽게
@@ -134,8 +140,10 @@ function play(form,mode,kind,owner){try{
   placeEye(parts.eye,P,mode);paintSheet(parts.sig,P.sig);parts.sig.style.backgroundPosition=cell(P.sig,isLite?P.sig.frames*.45:0);
   if(P.slash)paintSheet(parts.slash,P.slash);else{parts.slash.removeAttribute('data-src');parts.slash.style.backgroundImage='none';}
   if(P.eye.sheet&&isLite){const b=box();coverCell(parts.eye,P.eye.sheet,b.sw,b.sh,2);}
-  const ip=P.eye.sheet?P.eye.sheet.path:P.eye.path;parts.impact.setAttribute('data-src',ip);parts.impact.style.backgroundImage=isLite?'none':'url("'+U(ip)+'")';
-  if(P.eye.sheet&&!isLite){const b=box();coverCell(parts.impact,P.eye.sheet,b.vw,b.vh,1);}else{parts.impact.style.backgroundSize='cover';parts.impact.style.backgroundPosition='50% 22%';parts.impact.removeAttribute('data-frame');}
+  const ip=P.impact||(P.eye.sheet?P.eye.sheet.path:P.eye.path);parts.impact.setAttribute('data-src',ip);parts.impact.style.backgroundImage=isLite?'none':'url("'+U(ip)+'")';
+  /* R1244c: Dots 임팩트 정지 그림(반전 흑백으로 구움) → 필터 없이 화면 가득(머리 위 여백은 구울 때 넣음) */
+  if(P.impact){parts.impact.setAttribute('data-baked','1');parts.impact.style.backgroundSize='cover';parts.impact.style.backgroundPosition='50% 50%';parts.impact.removeAttribute('data-frame');}
+  else if(P.eye.sheet&&!isLite){parts.impact.removeAttribute('data-baked');const b=box();coverCell(parts.impact,P.eye.sheet,b.vw,b.vh,1);}else{parts.impact.removeAttribute('data-baked');parts.impact.style.backgroundSize='cover';parts.impact.style.backgroundPosition='50% 22%';parts.impact.removeAttribute('data-frame');}
   const nm=nameOf(form),pass=(P.names&&P.names[kind])||P.passive;
   parts.pb.textContent=mode==='awake'?'사몽 각성':nm;parts.ps.textContent=mode==='awake'?nm:pass;
   e.classList.remove('on');void e.offsetWidth;e.classList.add('on');
@@ -162,7 +170,7 @@ function wrapAwake(){try{if(typeof showAwakening!=='function'||showAwakening.__r
 // ---- 지금 형상 그림만 미리 읽기(형상이 바뀔 때만) ----
 const warmed=new Set();
 function warm(){try{const f=formOf(G(()=>player,null));if(!f||warmed.has(f)||typeof Image!=='function'||!on())return;warmed.add(f);const P=PROFILES[f];
-  for(const p of new Set([P.eye.sheet?P.eye.sheet.path:P.eye.path,P.sig.path,P.slash&&P.slash.path].filter(Boolean))){const im=new Image();G(()=>{im.decoding='async';});im.src=U(p);stats.warmed++;}build();}catch(e){fail(e);}}
+  for(const p of new Set([P.eye.sheet?P.eye.sheet.path:P.eye.path,P.sig.path,P.slash&&P.slash.path,P.impact].filter(Boolean))){const im=new Image();G(()=>{im.decoding='async';});im.src=U(p);stats.warmed++;}build();}catch(e){fail(e);}}
 let installs=0;
 function install(){installs++;wrap1033();wrapAwake();warm();}
 G(()=>setInterval(()=>{if(installs<400)install();else warm();},1500));

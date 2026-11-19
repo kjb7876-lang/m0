@@ -13913,6 +13913,16 @@
       "sha256": "01dbeab01c8b49a7b320db7aa180d9b73cee116f03d57d4652e6f535158ab7f4"
     },
     {
+      "path": "assets/r1244/eye-gunner.webp",
+      "bytes": 153074,
+      "sha256": "26a026bf84351786566787d97b85824ea546273dfed051bf930f6a70e54588b8"
+    },
+    {
+      "path": "assets/r1244/eye-hunter.webp",
+      "bytes": 96412,
+      "sha256": "407e828f49be467150c6c4a267783c3df9ca43ef9c8aab7f047e3cead146a7f0"
+    },
+    {
       "path": "assets/r1244/eye-hwando.webp",
       "bytes": 80702,
       "sha256": "f3e51760c4876964a706076e64f6fc058564eac5312d1610b2a5478ff57eeb41"
@@ -13946,6 +13956,91 @@
       "path": "assets/r1244/eye-slayer.webp",
       "bytes": 71558,
       "sha256": "f9e7bd84a8b2ca050e65a5d4b8416328ba79a91d86b2050921e1897f2a3d649c"
+    },
+    {
+      "path": "assets/r1244/impact-ego.webp",
+      "bytes": 66506,
+      "sha256": "1d4c5f01b2f6c7f1a3417f881ada8675ae53c6890751c11071ff1f14aaf0391f"
+    },
+    {
+      "path": "assets/r1244/impact-gunner.webp",
+      "bytes": 48194,
+      "sha256": "9c373c4d5e354b548c4d997fe5681e16531684c4f139fa1cf3ff751dcc0667ea"
+    },
+    {
+      "path": "assets/r1244/impact-hunter.webp",
+      "bytes": 58062,
+      "sha256": "584799c347dfe80993a3d995a2a1849388d72086e45a1b5ad6878dd2e94b4782"
+    },
+    {
+      "path": "assets/r1244/impact-hwando.webp",
+      "bytes": 63654,
+      "sha256": "21f2f9422cf461b2a09657460d4e47bd9069c07357b554464cfefcc0004a8cc6"
+    },
+    {
+      "path": "assets/r1244/impact-lauren.webp",
+      "bytes": 60052,
+      "sha256": "f8adc1824e24ce9bb360de5a7938399d265495acebefd028bffb5116f55ce793"
+    },
+    {
+      "path": "assets/r1244/impact-michaela.webp",
+      "bytes": 53406,
+      "sha256": "e9a64cc0035412a548901cc822c6595fbf516838502b207c6cbb61c5db98bc3a"
+    },
+    {
+      "path": "assets/r1244/impact-neon.webp",
+      "bytes": 43322,
+      "sha256": "e057e890ffe1ae01193bf3e7163270d0feadbfc42db2357fa700b78ee218f062"
+    },
+    {
+      "path": "assets/r1244/impact-persona.webp",
+      "bytes": 55076,
+      "sha256": "e6230fcf4111369aac0b6e71c23778c144db009f46711a1d35c283b3760f2aa1"
+    },
+    {
+      "path": "assets/r1244/impact-seoha.webp",
+      "bytes": 40406,
+      "sha256": "04839d9c1d8a7fb713e416055547bb0ac38a4363fd0e39877a6a749b8ab555e8"
+    },
+    {
+      "path": "assets/r1244/impact-slayer.webp",
+      "bytes": 52562,
+      "sha256": "313165dd900bcf40abbb26bfd137b05c2f9a3469972f593bae53bb5b8654c25e"
+    },
+    {
+      "path": "assets/r1244/slash-gunner.webp",
+      "bytes": 69406,
+      "sha256": "8f5702eeaa2c9e2ffa9805884ccb6a9f02a061db3c5d302877f4a3c34626edab"
+    },
+    {
+      "path": "assets/r1244/slash-hunter.webp",
+      "bytes": 31480,
+      "sha256": "25281f373a054345f6911960b50b0d3f3abdea78f90c0104dc079b06178b76e0"
+    },
+    {
+      "path": "assets/r1244/slash-lauren.webp",
+      "bytes": 35646,
+      "sha256": "4e400e83507a8394ea78a446151a7f06247cf98785abbf21f6fd79fb75c6611a"
+    },
+    {
+      "path": "assets/r1244/slash-michaela.webp",
+      "bytes": 46976,
+      "sha256": "418e548ac6fdf65c2d9c69b2790166c659b50ed9bd0c68a91e24ef5ad4ebbb73"
+    },
+    {
+      "path": "assets/r1244/slash-neon.webp",
+      "bytes": 62142,
+      "sha256": "2b4e2f3c7135af5071dcfacda25b817efc756d6fcce49f6c70883ffa955d2bd8"
+    },
+    {
+      "path": "assets/r1244/slash-persona.webp",
+      "bytes": 31968,
+      "sha256": "a75a30ed241e53e03fb279a429d76ee6fac2eb9b6c717d8c43f4b1c382b1e0a7"
+    },
+    {
+      "path": "assets/r1244/slash-slayer.webp",
+      "bytes": 56344,
+      "sha256": "6c09502168849cefa74ad0fac8493c94b24c85b9c7f21ea82054d6045d0e4550"
     },
     {
       "path": "assets/r126/props/badge.webp",
@@ -55569,8 +55664,8 @@
     },
     {
       "path": "cinema-cutin-r1244.js",
-      "bytes": 23387,
-      "sha256": "606db31a85955e213cd260ba93fdb8fcdbfd2179b94839cb5bc7f814b65ea26d"
+      "bytes": 24909,
+      "sha256": "d9bd5a8c4ef1ea2f515f23fe8d773919d40c7e8076e4a246e14ac5b13324bfc3"
     },
     {
       "path": "cinema-finish-r1008.js",
@@ -57948,8 +58043,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11589,
-  "totalBytes": 1384311608,
+  "fileCount": 11608,
+  "totalBytes": 1385437818,
   "webHTMLSha256": "73960b0d58639f84b13fc6f19d84547eaea6f073ac8a1d60c89b4045819eee8f",
   "largest": [
     {

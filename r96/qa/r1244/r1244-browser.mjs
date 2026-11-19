@@ -23,7 +23,9 @@ async function shot(form,mode,kind,ms,name){await p.evaluate(([f,m,k])=>{__STORY
  // 실제 시간 끄기 타이머(1.1~1.6초)가 지난 뒤 클래스를 다시 붙이고 애니메이션 시각을 고정, 시트 칸은 그 시각에 맞춰 직접 놓는다(헤드리스 프레임이 느려 타이머와 겨루지 않게)
  await p.evaluate(()=>document.getElementById('r1244Cine').classList.add('on'));await freeze(ms);
  await p.evaluate(([f,m,ms])=>{const P=__STORYWORLD_CINEMA_CUTIN_R1244__.profile(f),d=m==='awake'?1600:1100,w=m==='awake'?.52:.58,pr=(ms/d-w)/(1-w);if(pr>=0){const s=P.sig,fr=Math.min(s.frames-1,Math.floor(pr*s.frames)),c=fr%s.cols,r=Math.floor(fr/s.cols);
-  document.querySelector('#r1244Cine .r1244sig').style.backgroundPosition=(s.cols>1?c/(s.cols-1)*100:0)+'% '+(s.rows>1?r/(s.rows-1)*100:0)+'%';}__STORYWORLD_CINEMA_CUTIN_R1244__.qaPose(ms/d);},[form,mode,ms]);
+  document.querySelector('#r1244Cine .r1244sig').style.backgroundPosition=(s.cols>1?c/(s.cols-1)*100:0)+'% '+(s.rows>1?r/(s.rows-1)*100:0)+'%';}if(P.slash){const sl=P.slash,se=m==='awake'?.13:.16,fr=Math.min(sl.frames-1,Math.floor(Math.min(1,ms/d/se)*sl.frames)),c=fr%sl.cols,r=Math.floor(fr/sl.cols);/* R1244c: 베기 칸도 그 시각에 맞춰 놓음 */
+  document.querySelector('#r1244Cine .r1244slash').style.backgroundPosition=(sl.cols>1?c/(sl.cols-1)*100:0)+'% '+(sl.rows>1?r/(sl.rows-1)*100:0)+'%';}
+  __STORYWORLD_CINEMA_CUTIN_R1244__.qaPose(ms/d);},[form,mode,ms]);
  await p.waitForTimeout(250);await p.screenshot({path:`${OUT}/${name}.jpg`,quality:82});await thaw();await p.evaluate(()=>document.getElementById('r1244Cine').classList.remove('on'));}
 // ② 패시브
 for(const h of ['slayer','michaela','lauren','neon','seoha','hunter','gunner']){
@@ -68,6 +70,13 @@ await shot('persona','awake',null,560,'awake-persona-eye');
 await shot('persona','awake',null,1150,'awake-persona-sig');
 await shot('neon','passive','storm',420,'passive-neon-eye');
 await shot('michaela','passive','bloom',420,'passive-michaela-eye');
+// R1244c: Dots 2차분 — 베기 시트(길어지는 칸)·임팩트 정지 그림
+await shot('neon','passive','storm',70,'passive-neon-slash');
+await shot('gunner','passive',null,70,'passive-gunner-slash');
+await shot('hunter','awake',null,90,'awake-hunter-slash');
+await shot('hunter','awake',null,935,'awake-hunter-impact');
+await shot('persona','awake',null,935,'awake-persona-impact');
+await shot('gunner','awake',null,560,'awake-gunner-eye');
 await shot('michaela','passive','bloom',600,'passive-michaela-glow');
 await shot('hunter','passive','squad',420,'passive-hunter-eye');
 await shot('seoha','awake',null,700,'awake-seoha-glow');
