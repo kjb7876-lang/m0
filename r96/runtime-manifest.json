@@ -13739,8 +13739,8 @@
     },
     {
       "path": "assets/r1233/mobs/index.json",
-      "bytes": 1341,
-      "sha256": "49bcc432a34728d02af480fb3f15404b4e5520dacd7f4ffd09e07247cba53eff"
+      "bytes": 5252,
+      "sha256": "bbf7a2a2f254952f8202a9dfbd4473740c538a71cbe9400bf43a0411fa7ec9a4"
     },
     {
       "path": "assets/r1233/mobs/m019.webp",
@@ -13748,9 +13748,49 @@
       "sha256": "123f6bb27ad58b07e8d49a6d6a6e5b255578740d2cc993d85eadb675e541cfb0"
     },
     {
+      "path": "assets/r1233/mobs/m025.webp",
+      "bytes": 283864,
+      "sha256": "f4920a55c3752ee32bf94245e1dded159b62b646d474ebb0b5fd21542dce5d36"
+    },
+    {
+      "path": "assets/r1233/mobs/m026.webp",
+      "bytes": 526010,
+      "sha256": "9a6450936a7c426a22ab9eba13ddf92e92693e9319171df037496ad22ed5cdf9"
+    },
+    {
+      "path": "assets/r1233/mobs/m043.webp",
+      "bytes": 409602,
+      "sha256": "78eb565962cb743cfcf8b4973df57d036af1a61a5809ea8ede203815d30c49a0"
+    },
+    {
       "path": "assets/r1233/mobs/m044.webp",
       "bytes": 294772,
       "sha256": "b00c706781ebabfb8571dde9763eb80e68d6b899ec75ce374b983b9a76cc410f"
+    },
+    {
+      "path": "assets/r1233/mobs/m057.webp",
+      "bytes": 457752,
+      "sha256": "c9e6051de9ce43ac8fa4adbe084d1ceb96fd4f4a0fd5bec0c63cf8b968eb4c4b"
+    },
+    {
+      "path": "assets/r1233/mobs/m058.webp",
+      "bytes": 403600,
+      "sha256": "68f5badc1884cd2877c47eb5c9b318928340daaed6b610c0de498035dc8aa77f"
+    },
+    {
+      "path": "assets/r1233/mobs/m072.webp",
+      "bytes": 190526,
+      "sha256": "cf7a80b79d6f47502a17e0eae3bc65204fb64194ea37589803557b2aef2dbe9f"
+    },
+    {
+      "path": "assets/r1233/mobs/m087.webp",
+      "bytes": 382668,
+      "sha256": "5decc2ec33f85033f247f216c9377600c4ca0a6fbc9ab1354f8dae843f3a61c5"
+    },
+    {
+      "path": "assets/r1233/mobs/m091.webp",
+      "bytes": 384872,
+      "sha256": "9caf68d591e647b9d2111e87e5dc2cb174c49d0daaedd402a56cca663cd62897"
     },
     {
       "path": "assets/r1235/fx-mk02-michaela-mark.webp",
@@ -56474,8 +56514,8 @@
     },
     {
       "path": "mob-art-restore-r1233.js",
-      "bytes": 10619,
-      "sha256": "00dc66534401aa8d70221026f9de4ef19308ba7326210abc4933398f333fd53a"
+      "bytes": 11837,
+      "sha256": "0eb87c49e2ee50577f9c62eeae6adc6f9088ef5cbc2cdc9735f15c58d82626cf"
     },
     {
       "path": "mob-art-variants-r306-data.js",
@@ -57793,8 +57833,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11558,
-  "totalBytes": 1379419244,
+  "fileCount": 11566,
+  "totalBytes": 1382463267,
   "webHTMLSha256": "3795edef67adee921583165bb407cd80bb1e4de97372d61fa2a72caf10e9d292",
   "largest": [
     {
