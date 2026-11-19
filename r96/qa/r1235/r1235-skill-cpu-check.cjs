@@ -45,10 +45,30 @@ const src_=c=>c.sourcePath,cx=c=>(c.points[0][0]+c.points[1][0])/2,bot=c=>c.poin
 // 섬광만(E 날개 돌진 적중) → M4 (중심 아래 영웅 키 .4 를 발로)
 {const B=sandbox();const F=run(B,'r106:11',c=>c.img(R106P('flare'),60,100,120,120),ts).flat();
  ok(F.every(c=>src_(c)==='assets/r1041/fx-m4-michaela-hit.webp'&&Math.abs(cx(c)-120)<.01&&Math.abs(c.points[0][1]+hei(c)*.85-(160+H*.4))<.6),'큰 십자 없는 섬광(E) → M4, 발 = 섬광 가운데 + 영웅 키 .4');}
-// 작은 십자(방벽 둘레·주먹 빛살) → 그대로(맞는 시트 없음, Dots 요청 대상)
-{const B=sandbox();const F=run(B,'r106:12',c=>c.img(R106P('cross'),100,100,18,27),ts).flat();ok(F.every(c=>src_(c)===R106P('cross')),'작은 십자(영웅 키 .5 미만) 그대로');}
+// R1235c(Dots CX-0173MK): 작은 십자(방벽 둘레·주먹 빛살 끝) → MK02 빛 표식(반복 8칸), 같은 가운데, 표식이 원래 십자 높이의 .6배
+const MK='assets/r1235/';
+{const B=sandbox();const F=run(B,'r106:12',c=>c.img(R106P('cross'),100,100,18,27),ts).flat();
+ ok(F.every(c=>src_(c)===MK+'fx-mk02-michaela-mark.webp')&&new Set(F.map(c=>c.sourceRect[0])).size>=4,'작은 십자(영웅 키 .5 미만) → MK02 표식 시트, 칸이 시간 따라 바뀜');
+ ok(F.every(c=>Math.abs(cx(c)-109)<.01&&Math.abs((c.points[0][1]+c.points[3][1])/2-113.5)<.01&&Math.abs(hei(c)*.36/27-.61)<.06&&Math.abs(wid(c)/hei(c)-18/27)<.01),'MK02 은 원래 십자 가운데·비율 그대로, 보이는 표식 높이 ≈ 원래 십자의 .6(속이 찬 물방울이라 작게)',F[0].points);
+ ok(F.every(c=>c.points[1][1]===c.points[0][1]&&c.points[3][0]===c.points[0][0]),'표식은 늘 똑바로(기울이지 않음)');}
+// 불꽃줄(spark)·베기선(slashline)·빛줄(line) → MK03 빛 리본(반복), 줄 방향 그대로(머리 = 끝점)
+{const B=sandbox();const F=run(B,'r106:20',c=>{c.img(R106P('spark'),0,95,80,10);},ts).flat();
+ ok(F.every(c=>src_(c)===MK+'fx-mk03-michaela-ribbon.webp')&&new Set(F.map(c=>c.sourceRect[0])).size>=4,'불꽃줄 → MK03 리본 시트(반복)');
+ ok(F.every(c=>c.points[0][0]<c.points[1][0]&&Math.abs((c.points[0][1]+c.points[3][1])/2-100)<.01&&Math.abs(wid(c)-80*1.14)<1),'리본은 원래 줄과 같은 축·방향(왼→오른쪽 그대로)',F[0].points);}
+{const B=sandbox();const F=run(B,'r106:21',c=>{c.img(R106P('slashline'),0,0,100,30);c.img(R106P('line'),0,40,200,12);},ts).flat();
+ ok(F.every(c=>src_(c)===MK+'fx-mk03-michaela-ribbon.webp'),'베기선·빛줄 → MK03 리본 시트');
+ const ln=F.filter((c,i)=>i%2===1);ok(ln.every(c=>c.points[0][0]>=40&&c.points[1][0]<=160),'빛줄(line)은 원래 그림의 가운데 절반(실제 선 길이)에만',ln[0].points);}
+// 빛(glow) → MK04 퍼진 빛, 옅게(gain<1)·작은 맥박(가운데 칸만 왕복)
+{const B=sandbox();const F=run(B,'r106:22',c=>c.img(R106P('glow'),0,0,140,130),ts).flat();
+ const fr=F.map(c=>c.sourceRect[0]/256);
+ ok(F.every(c=>src_(c)===MK+'fx-mk04-michaela-glow.webp'&&Math.abs(wid(c)-140)<.01&&Math.abs(hei(c)-130)<.01),'빛 → MK04 퍼진 빛 시트, 같은 자리·크기');
+ ok(fr.every(v=>v>=2&&v<=5)&&new Set(fr).size>=2,'퍼진 빛은 가운데 칸(2~5)만 오가 크게 번쩍이지 않음',fr);
+ ok(F.every(c=>c.alpha<.5),'퍼진 빛은 원래보다 옅게(알파 .5 → 그 아래)',F.map(c=>c.alpha));}
 // 회귀·경계
-{const B=sandbox();const F=run(B,'r106:13',c=>{c.img(R106P('feather'),0,0,20,60);c.img(R106P('spark'),0,0,40,10);c.img(R106P('glow'),0,0,50,50);},ts).flat();ok(F.every(c=>/^r106fx:(feather|spark|glow):/.test(src_(c))),'시트 없는 깃털·불꽃줄·빛은 그대로');}
+{const B=sandbox();const F=run(B,'r106:13',c=>{c.img(R106P('feather'),0,0,20,60);},ts).flat();ok(F.every(c=>/^r106fx:feather:/.test(src_(c))),'깃털은 그대로(Dots 01 깃털 시트는 품질 보류)');}
+{const B=sandbox({hero:'seoha'});const F=run(B,'r106:23',c=>{c.img(R106P('glow'),0,0,50,50);c.img(R106P('spark'),0,0,40,10);c.img(R106P('cross'),0,0,18,27);},ts).flat();ok(F.every(c=>/^r106fx:/.test(src_(c))),'다른 영웅의 빛·불꽃줄·십자는 그대로');}
+{const B=sandbox({prefs:{'storyworld.r1235.skillSheets':'off'}});const F=run(B,'r106:24',c=>{c.img(R106P('glow'),0,0,50,50);c.img(R106P('cross'),0,0,18,27);},ts).flat();ok(F.every(c=>/^r106fx:/.test(src_(c))),'끄면 빛·작은 십자도 그대로');}
+{const p=path.join(R,'runtime-text','assets','r1235');ok(['fx-mk02-michaela-mark.webp','fx-mk03-michaela-ribbon.webp','fx-mk04-michaela-glow.webp'].every(f=>fs.existsSync(path.join(p,f))),'MK02·MK03·MK04 시트 파일 있음');}
 {const B=sandbox({hero:'neon'});const F=run(B,'r106:14',c=>{c.img(R106P('ring'),0,0,50,25);c.img(R106P('halo'),0,0,50,20);},ts).flat();ok(F.every(c=>/^r106fx:/.test(src_(c))),'다른 영웅 기술 그대로');}
 {const B=sandbox({prefs:{'storyworld.r1235.skillSheets':'off'}});const F=run(B,'r106:15',c=>c.img(R106P('ring'),0,0,50,25),ts).flat();ok(F.every(c=>/^r106fx:/.test(src_(c))),'끄면(storyworld.r1235.skillSheets=off) 그대로');}
 {const B=sandbox({images:false});const F=run(B,'r106:16',c=>c.img(R106P('pillar'),0,0,50,200),ts).flat();ok(F.every(c=>/^r106fx:/.test(src_(c))),'시트 그림이 아직 없으면 원래 그림');}
