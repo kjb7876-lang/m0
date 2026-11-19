@@ -1,0 +1,68 @@
+{
+ "zone": "cult06 / \"sz115-RG-1\"",
+ "names": {
+  "검은 공방의 용광로 박제공 잔영": {
+   "rule": null,
+   "draws": [
+    [
+     "r200/shades/furnace-taxidermist.webp",
+     "saturate(.8)"
+    ]
+   ]
+  },
+  "검은 제단의 전선 망자 잔영": {
+   "rule": null,
+   "draws": [
+    [
+     "r1189/shades/wire-bound-dead.webp",
+     "saturate(.8)"
+    ]
+   ]
+  },
+  "일곱 나팔의 빈 소매 잔영": {
+   "rule": null,
+   "draws": [
+    [
+     "r290/mobs/m095.webp",
+     "saturate(.78) brightness(.86) contrast(1.08)"
+    ]
+   ]
+  },
+  "세뇌당한 기억의 조각": {
+   "rule": null,
+   "draws": [
+    [
+     "",
+     "none"
+    ],
+    [
+     "",
+     "none"
+    ],
+    [
+     "",
+     "none"
+    ]
+   ]
+  },
+  "막힌 이름들": {
+   "rule": null,
+   "draws": []
+  },
+  "인과 고리충": {
+   "rule": null,
+   "draws": []
+  }
+ },
+ "inspect": {
+  "revision": "R1183-dup-tint-1",
+  "on": true,
+  "stats": {
+   "tinted": 0,
+   "draws": 0,
+   "wraps": 13,
+   "errors": 0
+  },
+  "lastError": null
+ }
+}

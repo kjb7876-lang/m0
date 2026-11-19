@@ -35,11 +35,15 @@ function mk(o={}){
  const flush=()=>{while(micro.length)micro.shift()();};
  return{sb,ls,clones,rebased,flush,API:sb.window.__STORYWORLD_AUTO_MOVE_R1022__};}
 const run=(m,fn)=>{m.sb.steps.push(fn);m.sb.tick(.016);};
-// ① 기본값: PC 켬(예전과 같음), 모바일 끔. 저장한 값이 우선.
-{const pc=mk(),mob=mk({mobile:true}),ovr=mk({mobile:true,ls:{'storyworld.r1022.autoMove':'1'}}),ovr2=mk({ls:{'storyworld.r1022.autoMove':'0'}});
- ok('defaults: PC on, mobile off; stored choice wins',pc.API&&pc.API.on()===true&&mob.API.on()===false&&ovr.API.on()===true&&ovr2.API.on()===false,{pc:pc.API?.on(),mob:mob.API?.on()});}
+// ① 기본값(R1194, 사용자 2026-11-19 "기술이 영웅을 순간이동 시키기 끈 상태를 기본으로"): PC·모바일 모두 끔. 새 키에 저장한 값이 우선.
+//  예전 키(storyworld.r1022.autoMove)에 남은 '1' 은 새 기본값이 적용되도록 읽지 않는다(R1194 전 값 = 옛 기본값 아래의 선택).
+const K='storyworld.r1194.autoMove',OLD='storyworld.r1022.autoMove',ON={[K]:'1'};
+{const pc=mk(),mob=mk({mobile:true}),ovr=mk({mobile:true,ls:{[K]:'1'}}),ovrPc=mk({ls:{[K]:'1'}}),ovr2=mk({ls:{[K]:'0'}}),old1=mk({ls:{[OLD]:'1'}}),old1m=mk({mobile:true,ls:{[OLD]:'1'}}),old0=mk({ls:{[OLD]:'0'}}),bad=mk({ls:{[K]:'yes'}});
+ ok('defaults (R1194): PC off, mobile off; stored choice under the new key wins',pc.API&&pc.API.on()===false&&mob.API.on()===false&&ovr.API.on()===true&&ovrPc.API.on()===true&&ovr2.API.on()===false,{pc:pc.API?.on(),mob:mob.API?.on()});
+ ok('R1194: old R1022 saved value is ignored (old 1 -> off on PC and mobile, old 0 -> off); unknown stored value -> off',old1.API.on()===false&&old1m.API.on()===false&&old0.API.on()===false&&bad.API.on()===false,{old1:old1.API.on(),old1m:old1m.API.on()});
+ ok('R1194: settings text no longer says only mobile defaults to off',!/모바일 기본은 끔/.test(src)&&/기본은 끔/.test(src));}
 // ② 켬: 자동 돌진은 예전처럼 본체가 끝점으로 간다(PC 동작 그대로).
-{const m=mk();let end;run(m,()=>{end=m.sb.dash();});
+{const m=mk({ls:ON});let end;run(m,()=>{end=m.sb.dash();});
  ok('on: dash moves the hero to the end point as before, no clone',near(m.sb.player.x,13.8)&&m.clones.length===0&&m.sb.enemies[0].hp===70,{x:m.sb.player.x});}
 // ③ 끔: 돌진 피해는 같은 선분(같은 양)에서 나가고, 본체는 제자리, 분신이 끝점에.
 {const m=mk({mobile:true});let end;run(m,()=>{end=m.sb.dash();});
@@ -72,19 +76,19 @@ const run=(m,fn)=>{m.sb.steps.push(fn);m.sb.tick(.016);};
 // ⑩ 벽: 돌진이 벽에 막혀 짧게 끝나면 분신도 그 자리(엔진 판정 그대로).
 {const m=mk({mobile:true,wallX:12.5});let end;run(m,()=>{end=m.sb.dash();});ok('off: wall-blocked dash keeps engine end point (no clone through walls)',near(m.sb.player.x,10)&&m.clones.every(c=>c.x<12.5),{end,clones:m.clones});}
 // ⑪ 켜고 끄기 API·설정 저장.
-{const m=mk({mobile:true});m.API.set(true);const a=m.API.on(),s1=m.ls['storyworld.r1022.autoMove'];m.API.set(false);ok('set() stores 1/0 and switches live',a===true&&s1==='1'&&m.API.on()===false&&m.ls['storyworld.r1022.autoMove']==='0');}
+{const m=mk({mobile:true});m.API.set(true);const a=m.API.on(),s1=m.ls[K];m.API.set(false);ok('set() stores 1/0 under the R1194 key and switches live',a===true&&s1==='1'&&m.API.on()===false&&m.ls[K]==='0'&&!(OLD in m.ls));}
 // ⑫ 설정 창 줄: R1021 '전투 화면' 구역이 있으면 그 안, 없으면 #quickSettingsR114 끝.
 ok('settings row targets section#combatScreenR1021 (div.r1021-row) with #quickSettingsR114 fallback',/combatScreenR1021/.test(src)&&/r1021-row/.test(src)&&/quickSettingsR114/.test(src));
 
 // ⑬ 밸런스(사용자 2026-11-14 "모바일 최적화로 네온 데미지 올리고 서하 헌터 회피를 확률회피로 변경해서 밸런스 맞추셈") — 끔일 때만.
-{const m=mk({mobile:true});const a=m.sb.attackPower();m.sb.player.hero='seoha';const b2=m.sb.attackPower();const pc=mk();const c=pc.sb.attackPower();const co=mk({mobile:true,coop:true});const d=co.sb.attackPower();
+{const m=mk({mobile:true});const a=m.sb.attackPower();m.sb.player.hero='seoha';const b2=m.sb.attackPower();const pc=mk({ls:ON});const c=pc.sb.attackPower();const co=mk({mobile:true,coop:true});const d=co.sb.attackPower();
  ok('off: neon attack power ×1.12; other heroes, on (PC) and co-op unchanged',near(a,112)&&near(b2,100)&&near(c,100)&&near(d,100),{a,b2,c,d});}
 {const m=mk({mobile:true});m.sb.player.hero='seoha';run(m,()=>m.sb.dash());const res=[];for(let i=0;i<5;i++)res.push(m.sb.hurt(10));
  ok('off: escape-type E (seoha) keeps the body home and opens a chance-dodge window: 60% of hits ignored, first hit dodged',near(m.sb.player.x,10)&&res.join(',')==='missed,hit,missed,hit,missed'&&m.sb.hurtLog.length===2&&m.sb.cues.filter(k=>k==='dodge').length===3,{res,log:m.sb.hurtLog});
  m.sb.time+=1.3;const after=m.sb.hurt(10);ok('chance-dodge window ends after 1.2 s',after==='hit'&&m.sb.hurtLog.length===3,{after});}
 {const m=mk({mobile:true});m.sb.player.hero='hunter';run(m,()=>m.sb.dash());ok('off: hunter escape also gets the window',m.sb.hurt(10)==='missed');}
 {const m=mk({mobile:true});m.sb.player.hero='neon';run(m,()=>m.sb.dash());ok('off: dash-type E (neon) gives no dodge window',m.sb.hurt(10)==='hit');}
-{const m=mk();m.sb.player.hero='seoha';run(m,()=>m.sb.dash());ok('on (PC): escape moves the body as before and no chance-dodge is added',near(m.sb.player.x,13.8)&&m.sb.hurt(10)==='hit');}
+{const m=mk({ls:ON});m.sb.player.hero='seoha';run(m,()=>m.sb.dash());ok('on (PC): escape moves the body as before and no chance-dodge is added',near(m.sb.player.x,13.8)&&m.sb.hurt(10)==='hit');}
 {const m=mk({mobile:true});m.sb.player.hero='seoha';run(m,()=>m.sb.dash());ok('chance-dodge ignores bad damage values (NaN/0) and passes them to the engine untouched',m.sb.hurt(NaN)==='ignored'&&m.sb.hurt(0)==='ignored'&&m.sb.hurt(10)==='missed'&&Number.isFinite(m.sb.player.hp));}
 const fail=checks.filter(c=>!c.pass);for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail??'')));
 console.log(JSON.stringify({status:fail.length?'R1022_FAILED':'R1022_PASSED',passed:checks.length-fail.length,total:checks.length}));process.exit(fail.length?1:0);

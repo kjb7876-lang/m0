@@ -57,7 +57,7 @@ function wrapExits(){if(typeof drawExits!=='function'||drawExits.__r420)return;c
 // R421: 터치 기기 아래 안내 줄(#hint)·작은 지도 글(#miniLabel)의 'C를 눌러 이동'·'C · …' → '버튼을 눌러 이동'·'버튼 · …' (키보드 없는 폰에서 C 는 없는 키)
 function touchText(t){const k=(typeof KR291==='object'&&KR291&&KR291.i)||'C';let n=String(t);n=n.split(k+'를 눌러').join('버튼을 눌러');if(n.startsWith(k+' · '))n='버튼 · '+n.slice(k.length+3);n=n.split('에서 '+k+' · ').join('에서 버튼 · ');return n;}
 function fixHint(){if(!coarse()||typeof document==='undefined')return;for(const id of ['hint','miniLabel']){const el=document.getElementById(id);if(!el)continue;const t=el.textContent||'',n=touchText(t);if(n!==t){el.textContent=n;stats.hintsFixed=(stats.hintsFixed||0)+1;}}}
-function wrapHud(){if(typeof updateHUD!=='function'||updateHUD.__r420)return;const base=updateHUD;const w=function(...a){const r=base.apply(this,a);try{fixHint();}catch(e){fail(e);}return r;};w.__r420=true;updateHUD=w;}
+function wrapHud(){if(typeof updateHUD!=='function'||updateHUD.__r420||(wrapHud.n|0)>=4)return;wrapHud.n=(wrapHud.n|0)+1;/* R1196: 다시 감싸기 상한 — R1046 과 번갈아 감싸 1시간 7,200겹이 쌓였다 */const base=updateHUD;const w=function(...a){const r=base.apply(this,a);try{fixHint();}catch(e){fail(e);}return r;};w.__r420=true;updateHUD=w;}
 
 // ⑤ 전투 집중 HUD --------------------------------------------------------------------------
 const FOCUS_MQ='(min-width:781px) and (pointer:fine)';

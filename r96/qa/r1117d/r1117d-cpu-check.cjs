@@ -9,7 +9,7 @@ function world(){const store={};const ctx={Math,String,Number,Array,Object,JSON,
 const API=c=>c.__STORYWORLD_MOB_ATTACK_DOTS_R1065__;
 const C=world(),A=API(C),S=A.inspect().sheets;
 const NEW={'MD-07':{cells:4,cell:[192,192]},'MD-12':{cells:6,cell:[342,162]},'MD-16':{cells:6,cell:[320,328]},'MD-22':{cells:6,cell:[256,256]},'MD-26':{cells:6,cell:[256,320]},'MD-30':{cells:6,cell:[95,189]},'MD-43':{cells:4,cell:[362,362]},'MD-79':{cells:4,cell:[256,320]}};
-const D=Object.entries(S).filter(([k,v])=>v.kind==='death');ok(D.length===48,'48 death sheets (16 + 8 new + R1158 MD-08·MD-09 + R1165 MD-15·17·25 + R1166 MD-01·03 + R1169 DY-01~09 + R1170 MM-01~08): '+D.length);
+const D=Object.entries(S).filter(([k,v])=>v.kind==='death');ok(D.length===50,'50 death sheets (16 + 8 new + R1158 MD-08·MD-09 + R1165 MD-15·17·25 + R1166 MD-01·03 + R1169 DY-01~09 + R1170 MM-01~08 + R1184 IV-01·MD-31): '+D.length);
 for(const [k,e] of Object.entries(NEW)){const s=S[k];ok(s&&s.kind==='death','death sheet '+k);ok(s.cells===e.cells&&s.cell[0]===e.cell[0]&&s.cell[1]===e.cell[1],k+' cells/cell size');
  const p=path.join(R,'runtime-text',s.path);ok(fs.existsSync(p)&&fs.statSync(p).size>1000,k+' sheet file');
  const dim=cp.execFileSync('python3',['-I','-c','from PIL import Image;import sys;print(*Image.open(sys.argv[1]).size)',p]).toString().trim().split(' ').map(Number);

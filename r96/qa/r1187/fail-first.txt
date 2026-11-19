@@ -1,0 +1,18 @@
+FAIL ① 기운 누더기 골렘 @sz115-S01-2 새 시트 (https://x/assets/r380/mobs/r200-stitched-golem-v2.webp)
+FAIL ① 기운 누더기 골렘 색조 안 얹음 (hue-rotate(28deg) saturate(.7) brightness(.88) contrast(1.12))
+FAIL ① 제출되지 못한 문장 @sz115-RF-1 새 시트 (https://x/assets/r290/mobs/m053.webp)
+FAIL ① 제출되지 못한 문장 색조 안 얹음 (hue-rotate(-35deg) saturate(1.2) contrast(1.06))
+FAIL ① 찢어진 사진의 망령 @sz115-RC-3 새 시트 (https://x/assets/r290/mobs/m088.webp)
+FAIL ① 찢어진 사진의 망령 색조 안 얹음 (hue-rotate(-35deg) saturate(1.2) contrast(1.06))
+FAIL ① 백은 없는 그림자 @sz115-S07-2 새 시트 (https://x/assets/r290/mobs/m082.webp)
+FAIL ① 백은 없는 그림자 색조 안 얹음 (hue-rotate(-40deg) saturate(1.25))
+FAIL ① 부정의 잔영 @sz115-P-3 새 시트 (https://x/assets/r290/mobs/m066.webp)
+FAIL ① 부정의 잔영 색조 안 얹음 (hue-rotate(-40deg) saturate(1.15) brightness(.9))
+FAIL ① 거짓천국 근위천사 @sz115-M-1 새 시트 (https://x/assets/r410/mobs/m099.webp)
+FAIL ① 거짓천국 근위천사 색조 안 얹음 (saturate(.55) brightness(.92) contrast(1.1))
+FAIL ① 뿌리에서 쏟아진 잔영 @sz115-S01-2 새 시트 (https://x/assets/r410/mobs/m063.webp)
+FAIL ① 뿌리에서 쏟아진 잔영 색조 안 얹음 (hue-rotate(-30deg) saturate(1.2) contrast(1.05))
+FAIL ⑤ sync 등록
+FAIL ⑤ verify 자산 접두
+FAIL ⑤ pages.yml
+FAILED 17/58

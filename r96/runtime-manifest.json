@@ -9,8 +9,8 @@
     },
     {
       "path": "access-r420.js",
-      "bytes": 18902,
-      "sha256": "bd72f0a05519273926284d268cf2de0b90dd7b53f95c62be9107f587c17966cb"
+      "bytes": 19043,
+      "sha256": "237aa0883c1bc33dd8006f03b439957c978d23673980436bfcacd7695eb6741d"
     },
     {
       "path": "actor-tone-r453.js",
@@ -12873,6 +12873,136 @@
       "sha256": "23055900f7e6b9a26df18ff4141104dacc53bc62835ba05e72512eb418d7fe63"
     },
     {
+      "path": "assets/r1184/index.json",
+      "bytes": 1405,
+      "sha256": "e485ae481f3d9bda1d0544886bdfb6b0f32509f4dda50fdc70585c97c3424b03"
+    },
+    {
+      "path": "assets/r1184/iv-m077-death6.webp",
+      "bytes": 76682,
+      "sha256": "d72cb2c28ef9a449469e73b7e1627b2d2119fdc3cd2454e3b38b5b65b6dd610a"
+    },
+    {
+      "path": "assets/r1184/iv-m077-hit4.webp",
+      "bytes": 77098,
+      "sha256": "7fbfc33e9e44fc41abaa575559e39a0b61622fdf844041f9a2bd0189c6985505"
+    },
+    {
+      "path": "assets/r1184/md-31-timeless-silver-scout-death6.webp",
+      "bytes": 300590,
+      "sha256": "1407495febf0bfd3109ecd921bd52a37bf71ce914462eb1da04ff40bca5311d9"
+    },
+    {
+      "path": "assets/r1186/mobs/index.json",
+      "bytes": 1038,
+      "sha256": "14fb3428e142701ad529936422daca33e786761bbe0b654bd8e9fbbf66e71034"
+    },
+    {
+      "path": "assets/r1186/mobs/m032.webp",
+      "bytes": 333334,
+      "sha256": "2e329d68d8c857c6e4d6ed3d7929ca99e79877462921f9c6eac442f397367c47"
+    },
+    {
+      "path": "assets/r1186/mobs/m049.webp",
+      "bytes": 275030,
+      "sha256": "045f8babb81e8940859aa4015817ac6042ea09215bbb0bf937c0fddae88b5c99"
+    },
+    {
+      "path": "assets/r1187/mobs/du05-rag-golem.webp",
+      "bytes": 156172,
+      "sha256": "055a99f3c306413f908e53bd80ac2c2d3e305e500b6f76cc562458fa4eb23291"
+    },
+    {
+      "path": "assets/r1187/mobs/du07-reverse-paper.webp",
+      "bytes": 173114,
+      "sha256": "502eb2845bde05a4ff42cf30149ece5cc02733ef36e123a9b7faf228e535b65b"
+    },
+    {
+      "path": "assets/r1187/mobs/du08-reverse-photo.webp",
+      "bytes": 219986,
+      "sha256": "51cad3f1d1c79da3d73961c04578de447481625f5fa0893600e58bd76b7763c0"
+    },
+    {
+      "path": "assets/r1187/mobs/du09-vermilion-wraith.webp",
+      "bytes": 281734,
+      "sha256": "5d0174a0731a25af7b2e47295558e826bc23c2b15331c7303990f5bca2399d42"
+    },
+    {
+      "path": "assets/r1187/mobs/du10-ink-echo.webp",
+      "bytes": 245066,
+      "sha256": "e05e4441431684150b304cc228b907edde3cb96082aaa2116a5c8d511bac6f67"
+    },
+    {
+      "path": "assets/r1187/mobs/du11-faded-guard.webp",
+      "bytes": 358434,
+      "sha256": "d9850c50dabbbc44891d138e24cd911193fb74a6f8d1d07b814ceb332be14f9a"
+    },
+    {
+      "path": "assets/r1187/mobs/du12-root-rag.webp",
+      "bytes": 289316,
+      "sha256": "cde09f6d93c03f7e59c6d3c6a6ade488f143030b962e607e0aa982070bd7b42f"
+    },
+    {
+      "path": "assets/r1187/mobs/index.json",
+      "bytes": 4644,
+      "sha256": "21bd816cb1a6ddccda53bfd53bc199c6c694b1a4942de0f3644a73d975961c84"
+    },
+    {
+      "path": "assets/r1188/shades/cephalopod-invader.webp",
+      "bytes": 264988,
+      "sha256": "9152d2cd750ccf10978296f3071f4bf13c57bfe643ae071463c1265f36e95d6b"
+    },
+    {
+      "path": "assets/r1188/shades/index.json",
+      "bytes": 1933,
+      "sha256": "0472cc56a33b286ae087d79ebd53fa5f72ba8a9e14767e0d6d15f03b695f4026"
+    },
+    {
+      "path": "assets/r1188/shades/mannequin.webp",
+      "bytes": 175566,
+      "sha256": "ccb685f143eab8bafd45a52cef200bb966fb27e22850df4be50b28624df46d57"
+    },
+    {
+      "path": "assets/r1188/shades/tram-passenger.webp",
+      "bytes": 162474,
+      "sha256": "1449f5f2282974f439ded7b874d62d561a8fd5a7816bb6268d5e6a940027f5b6"
+    },
+    {
+      "path": "assets/r1189/shades/clockhand-warden.webp",
+      "bytes": 231802,
+      "sha256": "6c0cb047073f56a6e5e0b528b15c1be0c77d78b2e63152240f14a1326b0e53fb"
+    },
+    {
+      "path": "assets/r1189/shades/clockwork-legionary.webp",
+      "bytes": 208388,
+      "sha256": "69a243bb51ce07bc6e4a87240eaf0cbfdc252bb31d1520d840a37b1b5db65807"
+    },
+    {
+      "path": "assets/r1189/shades/fishhook-manuscript.webp",
+      "bytes": 202342,
+      "sha256": "61b6da25933147376627f5d508336fe936346a815187af10306740c3001063c0"
+    },
+    {
+      "path": "assets/r1189/shades/index.json",
+      "bytes": 3831,
+      "sha256": "04dbe23166cd95e6290d71b997c7e7782996b8b840cd5d2f366d5320d666f08d"
+    },
+    {
+      "path": "assets/r1189/shades/parade-mannequin.webp",
+      "bytes": 168558,
+      "sha256": "10136c3f2059f5c7380c4a45b40fec69443688c1100001e5d6a395a539b85683"
+    },
+    {
+      "path": "assets/r1189/shades/ring-sparrer.webp",
+      "bytes": 161238,
+      "sha256": "d28fc207f55e49eaa805b84b9e69e871937d5380f1ea518e5680c7275baea7da"
+    },
+    {
+      "path": "assets/r1189/shades/wire-bound-dead.webp",
+      "bytes": 173704,
+      "sha256": "59fc5d15baba37a61f306306456a0d4bac4cf9684bbdcf8c84230a8786b6b0bc"
+    },
+    {
       "path": "assets/r119/heroes/gunner-n.webp",
       "bytes": 35746,
       "sha256": "1887e03e6fb23d2befc1cbb30f5b11d0984ca7fba0575a25a39a504490a0c867"
@@ -12901,6 +13031,26 @@
       "path": "assets/r119/mobs/a11c1-attack.png",
       "bytes": 189997,
       "sha256": "8e6341ff4e7e92583786bf7964fa0f35b8d6c4e7100e7c9788bc1b06ec7d19f2"
+    },
+    {
+      "path": "assets/r1198/index.json",
+      "bytes": 1050,
+      "sha256": "b36f8f5576f3e0acb2a7154f45916a3a1910d89daf60c339e96ac1ae7b76494e"
+    },
+    {
+      "path": "assets/r1198/persona-hl-burst.webp",
+      "bytes": 125750,
+      "sha256": "8719e95d2e9c3b2843531450eab8a8b0589ed7b6d3c3e08cf8c043cd68794f8d"
+    },
+    {
+      "path": "assets/r1198/persona-hl-collapse.webp",
+      "bytes": 146202,
+      "sha256": "1ec8bfad10029e836405411b3840408627ee7d5e5d87c3cc1fcd68f9c85cdbaa"
+    },
+    {
+      "path": "assets/r1198/persona-hl-ring.webp",
+      "bytes": 134568,
+      "sha256": "5e27d63895b6c6a4342e806cb2fe257ce1c87afaaa52a1351d2081a09ac898ed"
     },
     {
       "path": "assets/r120/cult/cult-leader-drive-fold-v17.webp",
@@ -53999,8 +54149,8 @@
     },
     {
       "path": "auto-move-r1022.js",
-      "bytes": 8897,
-      "sha256": "77fa3e69af738a5fdc5a5e731b2f3291bd82463bf77a1544f5adedcb1c5dd102"
+      "bytes": 9192,
+      "sha256": "4099387ad43c4441a30d7330f359e21a5986130fc9a3325e510a1a8c17b7005a"
     },
     {
       "path": "balance-r179.js",
@@ -54853,6 +55003,11 @@
       "sha256": "361f80b5a54aa4cb57ffc599765b4a5b22d94151e91aaf5d6fa48dc16a425452"
     },
     {
+      "path": "dream-mob-art-r1193.js",
+      "bytes": 5864,
+      "sha256": "8eed981213c7fe9e501ff826a10a652eea5226df8706d0b7eab86fc85f9373e5"
+    },
+    {
       "path": "drive-buildings-r414.js",
       "bytes": 9554,
       "sha256": "3953e753725747314f0918aef50ac95d26ac7bd1d7f3c85ebc45df970a3f155b"
@@ -54959,8 +55114,8 @@
     },
     {
       "path": "ego-sovereign-r1046.js",
-      "bytes": 23789,
-      "sha256": "de2b23e3df76d13bf862ae999fb005b229de999455ea07c24cacc99c6edcc93a"
+      "bytes": 23929,
+      "sha256": "1ab9a6c945ff0f4b184be2427401c3127235fc949bfc3bed2c17365c042b3d5f"
     },
     {
       "path": "ego-summon-r1157.js",
@@ -55419,8 +55574,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6582317,
-      "sha256": "8969cf053204aef12bcb084a06ff6d6773e4018c248385a47e38e49c663cb990"
+      "bytes": 6582414,
+      "sha256": "f774ae026db0057bb3b7ad2af5f4c70f8f3aeb392881f54e7b614dfe2fb9a4b8"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -55474,8 +55629,8 @@
     },
     {
       "path": "lauren-celestial-r946.js",
-      "bytes": 45884,
-      "sha256": "8142b9ddc9bbcf43a6c88a7999958440ab0358f7fd07f4ad859429ed20c27fc3"
+      "bytes": 50961,
+      "sha256": "e782f347ab484b346e1cdab42f71e39faf5aa0e6344d4acbdea5e9a398b0cdc5"
     },
     {
       "path": "lauren-gravity-r561.js",
@@ -55594,8 +55749,8 @@
     },
     {
       "path": "mob-art-r1179.js",
-      "bytes": 3477,
-      "sha256": "b35fb3d87a5c9fef1c62cca72c1df8989eaacfe28fc9b2d0e8f6d3490b72f8df"
+      "bytes": 3984,
+      "sha256": "5ac65040bce8583df8d92f995a672d421a86ccdca03042fb005e8f54ecbd81d0"
     },
     {
       "path": "mob-art-r290.js",
@@ -55619,8 +55774,8 @@
     },
     {
       "path": "mob-attack-dots-r1065.js",
-      "bytes": 29759,
-      "sha256": "f2c98f5febc9d51a6646e3ad582fea75ede99b05f44b240929d93b1eb01e0ab9"
+      "bytes": 30399,
+      "sha256": "a224f371f4c72e8f3476f7ef97a2c86c8e4a3a40c120a439f7e0064279c3ab7c"
     },
     {
       "path": "mob-death-r188.js",
@@ -55644,8 +55799,13 @@
     },
     {
       "path": "mob-dup-tint-r1183.js",
-      "bytes": 6050,
-      "sha256": "91b2fd4ea317013dd4935593d78e4943f0ed436d9b929aca4982ed8c9b56de00"
+      "bytes": 8070,
+      "sha256": "d5849969a160804dc2e84e49f0162bad5e3dc23e3fba8c3cbabb04868ddd0f87"
+    },
+    {
+      "path": "mob-feet-ink-r1195.js",
+      "bytes": 17520,
+      "sha256": "9e4b3d93348f163026547fdaba223a7f3f57158d04461f7d9d9fd6f15e05533c"
     },
     {
       "path": "mob-fix-r275.js",
@@ -55664,8 +55824,8 @@
     },
     {
       "path": "mob-gait-r613.js",
-      "bytes": 10016,
-      "sha256": "ed05e114f8e497aaa9e43f24398c13a8c54df7112f2cd0d8cacc2ae79b04717b"
+      "bytes": 10293,
+      "sha256": "f6ef8116313dbdfe5560a9657d0f9898c6edbfec56a9da6e100bba106c72a2ca"
     },
     {
       "path": "mob-gaze-r268.js",
@@ -55679,8 +55839,8 @@
     },
     {
       "path": "mob-hit-r1156.js",
-      "bytes": 8286,
-      "sha256": "621693a9bc604370bac576c32a6ceff4d800d7a1b83098162ca9fe72a301bd13"
+      "bytes": 9555,
+      "sha256": "0d1ac7a468a366ac27d6fe21e34a8136b3e027e25fde3d4430960dd3087bd720"
     },
     {
       "path": "mob-legacy-r363.js",
@@ -55699,8 +55859,8 @@
     },
     {
       "path": "mob-moves-r385.js",
-      "bytes": 12763,
-      "sha256": "faf275bf3c30e234535622903801dab46b0c7a4bd898ca0cffac5cfeaf2899f3"
+      "bytes": 13252,
+      "sha256": "c2777a185abc13ed764d6c50aa6082277c156e94ac2cc7d9a3c83e5022ce7149"
     },
     {
       "path": "mob-preload-r260.js",
@@ -55734,8 +55894,8 @@
     },
     {
       "path": "mob-unique-r248.js",
-      "bytes": 18389,
-      "sha256": "acfdf5cdf217564141dae7efe37dcff78f39f71ddc912d4cd6b7bd3e64eee12c"
+      "bytes": 18596,
+      "sha256": "4e1e6d10fe38d9df3d04bd0ca4e9562743c2e4408a25aee88753ecdc20d9291a"
     },
     {
       "path": "mobile-bonus-r286.js",
@@ -55994,8 +56154,8 @@
     },
     {
       "path": "persona-hero-r1113.js",
-      "bytes": 52827,
-      "sha256": "08ef641dd3f988976cd997b0611e106290e5518104191d9d34b1819f5dc8da96"
+      "bytes": 52837,
+      "sha256": "a8b433359a53ec829ee7d4c7d965c7708d1c51bd7d5c7edbbf769c6ca15b959f"
     },
     {
       "path": "persona-ink-r1097.js",
@@ -56014,8 +56174,8 @@
     },
     {
       "path": "persona-wer-r1144.js",
-      "bytes": 31477,
-      "sha256": "098233757cc6444d4ab628f21d53461213b519f7eac56252066ee4e34471f4df"
+      "bytes": 31883,
+      "sha256": "fb37886241abcf4f383face12fafe1d4a9f28ebcdad0d84c456653b9d8dc51fc"
     },
     {
       "path": "pixel-readable-r325.js",
@@ -56234,8 +56394,8 @@
     },
     {
       "path": "samong-pixel-art-r1177.js",
-      "bytes": 11350,
-      "sha256": "cc6b22eb47fb2b58fdb987fdb4766c525293b785f891d195d0fcf71a15166385"
+      "bytes": 11563,
+      "sha256": "f58595b1e1ce7276f242e95ce161396b2e7f3ec146c07794a66acb0368ec5f9d"
     },
     {
       "path": "samong-play-r162.js",
@@ -56259,8 +56419,8 @@
     },
     {
       "path": "samong-shades-r200.js",
-      "bytes": 6727,
-      "sha256": "d268ebb38242683f1fe8758dc590dd18068085710b63ef076abdec3f53b3d587"
+      "bytes": 9131,
+      "sha256": "5d685a15769e733f80802826dca458926ce6262d8ac9880d6436c1dfeba4320d"
     },
     {
       "path": "samong-surge-r571.js",
@@ -56838,9 +56998,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11367,
-  "totalBytes": 1364476707,
-  "webHTMLSha256": "8969cf053204aef12bcb084a06ff6d6773e4018c248385a47e38e49c663cb990",
+  "fileCount": 11399,
+  "totalBytes": 1369470320,
+  "webHTMLSha256": "f774ae026db0057bb3b7ad2af5f4c70f8f3aeb392881f54e7b614dfe2fb9a4b8",
   "largest": [
     {
       "path": "index.html",

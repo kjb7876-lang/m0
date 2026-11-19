@@ -1,0 +1,38 @@
+[
+ {
+  "n": "시간핵의 명령 잔류 1",
+  "ss": "active",
+  "vis2": true,
+  "hp": 1793.6299999999999,
+  "vis": true,
+  "inv": null,
+  "mob": null,
+  "fs": [
+   "r1186/mobs/m049.webp"
+  ]
+ },
+ {
+  "n": "시간핵의 명령 잔류 3",
+  "ss": "active",
+  "vis2": true,
+  "hp": 1793.6299999999999,
+  "vis": true,
+  "inv": null,
+  "mob": null,
+  "fs": [
+   "r1186/mobs/m049.webp"
+  ]
+ },
+ {
+  "n": "시간핵의 명령 잔류 5",
+  "ss": "active",
+  "vis2": true,
+  "hp": 1793.6299999999999,
+  "vis": true,
+  "inv": null,
+  "mob": null,
+  "fs": [
+   "r1186/mobs/m049.webp"
+  ]
+ }
+]

@@ -20,17 +20,20 @@
  *  W = 표식 눈(CX-0144PW A, 표식 걸린 적 머리 위)·먹 번개(B, 이음매 손질)·적중 섬광(C) / E·R = 붉은 눈 구슬(CX-0145PR A)·짧은 꼬리(B)·화상 불씨(C)
  *  (진) 레이저 = CX-0143PL 시작 구(B, 배경 빼기)·몸통(A, 이음매 손질 뒤 겹쳐 잇기)·끝 터짐(C). 색은 그림 그대로(언주·먹·흑적) — 페르소나 굽기는 assets/r1152 를 건드리지 않는다.
  *  시트가 안 읽혔으면 예전 그림(빌린 시트·코드 선)으로 그린다. 정리 스크립트 scripts/r1152-persona-dots.py, 출처 표 assets/r1152/index.json.
+ * R1198(사용자 2026-11-19 03:52Z 하이라이트 스킬 '사거리 스킬범위 이펙트 크기 자체를 키워줘 쌍성소멸도 마찬가지'): (진) 레이저 판정 굵기 .55→.85칸, 여운 .85→1.15초,
+ *  그림 굵기·시작 구·끝 터짐 ×LASER_VIS(1.45). 일곱 줄·맵 끝·즉사·보스 7% 는 그대로.
  * 끄기: localStorage['storyworld.r1144.personaWer']='{"on":false}'
  */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_PERSONA_WER_R1144__)return;
-const REV='R1144-persona-wer-2-dots-r1152',KEY='storyworld.r1144.personaWer',HERO='lauren',SLOTS=['w','e','r'];
+const LASER_VIS=1.45;/* R1198 */
+const REV='R1144-persona-wer-3-hl-r1198',KEY='storyworld.r1144.personaWer',HERO='lauren',SLOTS=['w','e','r'];
 const TUNE=Object.freeze({
  chain:Object.freeze({delay:.2,again:1.2,pulses:2,k:.6,reach:9,link:7,max:8,stagger:.06,life:.55}),
  volley:Object.freeze({delay:.2,k:.6,reach:4.5,max:4,speed:14}),
  orbit:Object.freeze({delay:.14,time:3,n:3,radius:1.5,period:1,hitR:.55,k:.35,gap:.6}),
  burn:Object.freeze({total:.3,time:2.5,every:.5,max:12}),
- laser:Object.freeze({charge:.5,rays:[-.42,-.28,-.14,0,.14,.28,.42],spread:.3,hitAt:.22,life:.85,width:.55,bossK:.07,maxLen:90})});
+ laser:Object.freeze({charge:.5,rays:[-.42,-.28,-.14,0,.14,.28,.42],spread:.3,hitAt:.22,life:1.15,width:.85,bossK:.07,maxLen:90})});
 const SHEETS=Object.freeze({
  chain:Object.freeze({path:'assets/r562/dots/neon-chain.webp',cell:256,cols:6,n:24,x0:18,x1:240,y:125,fallback:'hue-rotate(200deg) saturate(1.6) brightness(.85)'}),
  burn:Object.freeze({path:'assets/r535/dots/hunter-burn.webp',cell:256,cols:6,n:20,piv:[128,208],fps:14,fallback:'hue-rotate(345deg) saturate(1.3) brightness(.9)'}),
@@ -158,7 +161,7 @@ function drawLaser(z,t){const L=TUNE.laser,S=SHEETS.chain,age=t-z.t0,{z:zm,AH}=s
  for(let i=0;i<z.rays.length;i++){const r=z.rays[i],an=z.base+r.d*e,cx=Math.cos(an),cy=Math.sin(an),len=r.len*Math.min(1,age/(L.spread*.8)),ex=z.sx+cx*len,ey=z.sy+cy*len,p0=project(z.sx,z.sy),p1=project(ex,ey),PL=Math.hypot(p1.x-p0.x,p1.y-p0.y);if(!(PL>1))continue;
   const ang=Math.atan2(p1.y-p0.y,p1.x-p0.x),id='r946:violet:laser:'+z.seed+':'+i;
   // 심(임시 코드 선): 굵은 먹 → 언주 → 밝은 심. 페르소나 굽기가 검빨로 맞춘다
-  sc(own(id+':core',z.sx+cx*len/2,z.sy+cy*len/2,{groundAligned:false}),()=>{ctx.save();try{for(const [col,w,al] of [[INK,9*zm,.55],[EONJU,4.5*zm,.9],[EONJU_HOT,1.6*zm,.85]]){ctx.globalAlpha=fade*al;ctx.strokeStyle='rgba('+col+',1)';ctx.lineWidth=Math.max(1,w*(1-.4*(1-grow)));ctx.beginPath();ctx.moveTo(p0.x,p0.y-h);ctx.lineTo(p1.x,p1.y-h);ctx.stroke();}}finally{ctx.restore();}});stats.tempDraws++;
+  sc(own(id+':core',z.sx+cx*len/2,z.sy+cy*len/2,{groundAligned:false}),()=>{ctx.save();try{for(const [col,w,al] of [[INK,9*zm*LASER_VIS,.55],[EONJU,4.5*zm*LASER_VIS,.9],[EONJU_HOT,1.6*zm*LASER_VIS,.85]]){ctx.globalAlpha=fade*al;ctx.strokeStyle='rgba('+col+',1)';ctx.lineWidth=Math.max(1,w*(1-.4*(1-grow)));ctx.beginPath();ctx.moveTo(p0.x,p0.y-h);ctx.lineTo(p1.x,p1.y-h);ctx.stroke();}}finally{ctx.restore();}});stats.tempDraws++;
   // 결(기존 네온 번개 시트): 줄 따라 이어 붙임
   if(im){const seg=(S.x1-S.x0),n=Math.min(24,Math.ceil(PL/seg)),fr=Math.floor(age*30+i*5)%S.n,[sx,sy,sw,sh]=cell('chain',fr);
    sc(own(id,z.sx+cx*len/2,z.sy+cy*len/2+.01),()=>{ctx.save();try{ctx.globalCompositeOperation='lighter';ctx.globalAlpha*=fade;ctx.translate(p0.x,p0.y-h);ctx.rotate(ang);for(let k=0;k<n;k++){ctx.save();try{ctx.translate(k*seg,0);ctx.scale(1,1.25);ctx.drawImage(im,sx,sy,sw,sh,-S.x0,-S.y,S.cell,S.cell);}finally{ctx.restore();}}}finally{ctx.restore();}});stats.sheetDraws++;}}}
@@ -178,7 +181,7 @@ function drawHit(hh,t){const S=SHEETS.dhit,{AH}=scale(),e=hh.e,x=alive(e)?e.x:hh
  sc(own('r1144:hit:'+hh.seed,x,y+.02),()=>{ctx.save();try{ctx.drawImage(simg('dhit'),sx,sy,sw,sh,q.x-S.piv[0]/256*w,q.y-AH*.5-S.piv[1]/256*w,w,w);}finally{ctx.restore();}});stats.sheetDraws++;}
 function drawTail(id,wx,wy,px,py,age,alpha,lift,d){const S=SHEETS.dtail,q=project(wx,wy),pq=project(px,py),ang=Math.atan2(q.y-pq.y,q.x-pq.x),s=d*1.5/S.len,fr=Math.floor(age*S.fps)%S.n,[sx,sy,sw,sh]=cell('dtail',fr);
  sc(own(id,wx,wy-.01),()=>{ctx.save();try{ctx.globalAlpha*=alpha;ctx.translate(q.x,q.y-lift);ctx.rotate(ang);ctx.scale(s,s);ctx.drawImage(simg('dtail'),sx,sy,sw,sh,-S.head[0],-S.head[1],S.cell,S.cell);}finally{ctx.restore();}});stats.sheetDraws++;}
-function drawLaserDots(z,t){const L=TUNE.laser,age=t-z.t0,{AH}=scale(),h=AH*.55,grow=Math.min(1,age/L.spread),e=grow*(2-grow),fade=age<L.life-.3?1:Math.max(0,(L.life-age)/.3),s=Math.max(.32,Math.min(.9,AH/170)),p0=project(z.sx,z.sy);
+function drawLaserDots(z,t){const L=TUNE.laser,age=t-z.t0,{AH}=scale(),h=AH*.55,grow=Math.min(1,age/L.spread),e=grow*(2-grow),fade=age<L.life-.3?1:Math.max(0,(L.life-age)/.3),s=Math.max(.32,Math.min(.9,AH/170))*LASER_VIS,p0=project(z.sx,z.sy);
  const fb=Math.floor(age*SHEETS.lbody.fps),fe=Math.min(SHEETS.lend.n-1,Math.floor(age*SHEETS.lend.n/L.life));
  for(let i=0;i<z.rays.length;i++){const r=z.rays[i],an=z.base+r.d*e,cx=Math.cos(an),cy=Math.sin(an),len=r.len*Math.min(1,age/(L.spread*.8)),ex=z.sx+cx*len,ey=z.sy+cy*len,p1=project(ex,ey),PL=Math.hypot(p1.x-p0.x,p1.y-p0.y);if(!(PL>1))continue;
   const ang=Math.atan2(p1.y-p0.y,p1.x-p0.x),id='r946:violet:laser:'+z.seed+':'+i;

@@ -55,6 +55,7 @@ function drawOwn(e,s,im){const dead=e.hp<=0||e.spawnState==='dead',age=T()-(Numb
  m.x=e.x;m.y=e.y;let fr=attackFrame(e);if(fr>=0&&Number.isFinite(e.attack?.angle)){const sd=Math.cos(e.attack.angle)-Math.sin(e.attack.angle);if(Math.abs(sd)>.05)m.face=sd<0?-1:1;}
  {const r444=window.__STORYWORLD_ENEMY_FACE_R444__?.left?.(e);if(typeof r444==='boolean')m.face=r444?-1:1;}/* R444: 좌우는 enemy-face-r444 한 곳에서(공격 판정 각·충돌 뒤 실제 걸음·영웅 쪽) — 꺼지면 위 R259 규칙 */
  /* R1065c: 원거리 조준(rangedWindup) 동안 Dots 조준 시트(CX-0116RA)가 있으면 그 칸으로 */let A=null;if(fr<0&&e.rangedWindup>0&&!e.attack){try{A=window.__STORYWORLD_MOB_ATTACK_DOTS_R1065__?.aimR248?.(e,s.path)||null;}catch(_){A=null;}}
+ /* R1184: 맞은 순간 Dots 피격 4칸(R1156 표)이 있으면 그 칸으로(공격·조준이 먼저) */if(fr<0&&!A){try{A=window.__STORYWORLD_MOB_HIT_R1156__?.r248?.(e,s.path)||null;}catch(_){A=null;}}
  if(fr<0)fr=T()<m.moving?Math.floor(T()*FPS+m.seed)%8:Math.floor(T()*2+m.seed)%2;
  const sx0=(fr%4)*CW,sy0=Math.floor(fr/4)*CH;
  ctx.save();try{ctx.globalAlpha*=dead?Math.max(0,1-age/.8):1;ctx.filter=e.flash>0?'brightness(1.8) saturate(.5)':'saturate(.78) brightness(.86) contrast(1.08)';/* 칠한 배경과 덜 튀게 */
