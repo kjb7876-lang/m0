@@ -15,7 +15,7 @@
 //  · 끄기: localStorage['storyworld.r1233.restore']='{"on":false}'. API window.__STORYWORLD_MOB_ART_RESTORE_R1233__.
 (()=>{'use strict';
 if(window.__STORYWORLD_MOB_ART_RESTORE_R1233__)return;
-const REV='R1233-restore-2',KEY='storyworld.r1233.restore',INDEX='assets/r380/mobs/index.json';
+const REV='R1233-restore-3',KEY='storyworld.r1233.restore',INDEX='assets/r380/mobs/index.json';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={shade:0,rows:0,ward:0,frames:0,installs:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 // ② [기본 이름, 어디서(samong: 사몽 에피소드 구역 키 정규식 / dream: 스토리 사몽 꿈 층), R380 표 줄 id]
@@ -59,7 +59,8 @@ try{setInterval(install,1000);}catch(e){fail(e);}
 // ③ 같은 지역 테마 그림 시트(scripts/r1233-mob-sheets.py, assets/r1233/mobs/index.json) — R248 시트 표의 그 줄에 path·body 만 얹는다(R290·R410 과 같은 방식, 이름이 같을 때만).
 //    피리 고블린(last305): R410 상자머리 인형 후보 → 같은 숲의 고블린 그림을 잿빛 청록 피부로(숲 고블린과 구분). 표 R974/R1018 의 상자머리 위·아래 걷기 시트는
 //    '그린 몸이 표의 대기 그림일 때만' 바꾸므로 path 가 바뀌면 저절로 안 쓰인다.
-const SHEETS=Object.freeze({m044:Object.freeze({path:'assets/r1233/mobs/m044.webp',body:196,name:'피리 고블린'})});
+//    갈망의 도시짐승(ep1a10): R248 작은 도트 개 → Dots DR-02 v1(두건 쓴 도시 굶주린 짐승, 결과 루트 05_m019_v1.png sha 1b2f9979…) 을 scripts/r1233-dots-clean.py 로 손질(저알파 16 이하 지움·떨어진 발톱 33픽셀 지움).
+const SHEETS=Object.freeze({m044:Object.freeze({path:'assets/r1233/mobs/m044.webp',body:196,name:'피리 고블린'}),m019:Object.freeze({path:'assets/r1233/mobs/m019.webp',body:180,name:'갈망의 도시짐승'})});
 const sheetOrig={},sheetApplied=[];
 function applySheets(on){const D=window.__STORYWORLD_MOB_UNIQUE_R248_DATA__;if(!D||!D.sheets)return false;sheetApplied.length=0;
  for(const [id,a] of Object.entries(SHEETS)){const s=D.sheets[id];if(!s||s.name!==a.name)continue;try{if(!sheetOrig[id])sheetOrig[id]={path:s.path,body:s.body};
