@@ -21,7 +21,7 @@
 // 끄기(엔진 원래 스킬로 되돌림): localStorage['storyworld.r561.gunner']='{"on":false}' · 연계만 끄기 '{"chain":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_GUNNER_ARMS_R561__)return;
-const REV='R561-gunner-arms-2',KEY='storyworld.r561.gunner',HERO='gunner';
+const REV='R561-gunner-arms-2+R1220-muzzle',KEY='storyworld.r561.gunner',HERO='gunner';
 let on=true,chainOn=true,arcsOn=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;if(s&&s.chain===false)chainOn=false;if(s&&s.arcs===false)arcsOn=false;}catch(_){}
 const stats={q:0,w:0,e:0,r:0,hits:0,drawn:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0,SPR=()=>window.__STORYWORLD_FX_SPRITES_R106__;
@@ -112,6 +112,11 @@ function muzzleScreen(){try{const A=window.__STORYWORLD_PHASE1_ART__;let fr=A?.h
   const q=project(player.x,player.y),h=actorHeight()*hs,k=h/a.visibleHeight,lift=Math.max(0,Math.min(h*.65,Number(player.visualLiftPx)||0));
   const lx=(mzp[0]-a.sourceRect[0]-a.pivot[0])*k*(n?.flip?-1:1),ly=(mzp[1]-a.sourceRect[1]-a.pivot[1])*k,bp=bodyPoses.get(player),M=bp&&T()-bp.at<.5?bp.matrix:null,
    x=q.x+(M?M[0]*lx+M[2]*ly+M[4]:lx),y=q.y-lift+(M?M[1]*lx+M[3]*ly+M[5]:ly);return Number.isFinite(x)&&Number.isFinite(y)?{x,y}:null;}catch(e){fail(e);return null;}}
+// R1220(사용자 11-19 "총탄도 총구에서 나오게 총구크기에 맞추고"): W 저격·E 연사 탄은 몸 가운데 높이(영웅 키 .45, 총구와 무관)에서 나갔다 →
+//  쏘는 순간 그려진 총구 끝(muzzleScreen, Q 광선과 같은 점)을 영웅 발 기준 화면 오프셋으로 적어 두고 거기서 그린다. 못 구하면 예전 높이. 끄기 storyworld.r561.gunner {"muzzle":false}
+let mzOn=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.muzzle===false)mzOn=false;}catch(_){}
+function mzOff(){if(!mzOn||typeof project!=='function')return null;try{const m=muzzleScreen();if(!m)return null;const q=project(player.x,player.y);const r={x:m.x-q.x,y:m.y-q.y};return Number.isFinite(r.x)&&Number.isFinite(r.y)&&Math.hypot(r.x,r.y)<(typeof actorHeight==='function'?actorHeight():66)*1.5?r:null;}catch(e){fail(e);return null;}}
+const MX=(o,mo)=>mo?o.x+mo.x:o.x,MY=(o,mo,M)=>mo?o.y+mo.y:o.y-M;
 // 시전 순간 굳힌 자세 방향: R561 이 엔진 special 을 건너뛰어 엔진이 방향을 새로 굳히지 않으므로(옛 값에 머묾) 여기서 겨눈 방향의 칸을 직접 고른다
 let poseLock=null;
 function commitPose(a,life){try{const t=T();poseLock={owner:player,start:t,sector:sectorOf(Math.cos(a),Math.sin(a)),until:t+life};(player.poseStarted5??=Object.create(null)).skill=t;(player.poseDuration5??=Object.create(null)).skill=life;player.skillAnim=Math.max(player.skillAnim||0,life);}catch(e){fail(e);}}
@@ -137,14 +142,14 @@ function planChain(f,rows,t){if(!rows.length||arcsOn===false)return;const taken=
 // ---- W 망각 저격 ----
 function snipeTarget(){const rows=live().filter(e=>dist(e,player)<=rgs('w',RANGE.w)&&los(player,e));const big=rows.filter(e=>e.boss||e.elite).sort((a,b)=>dist(a,player)-dist(b,player))[0];return big||rows.sort((a,b)=>dist(a,player)-dist(b,player))[0]||null;}
 function castW(){const tg=snipeTarget(),a=aimAt(tg);face(a);fx.push({owner:player,room:typeof room!=='undefined'?room:null,k:'w',t0:T(),life:SNIPE.aim+1.3,tg,a,o:{x:player.x,y:player.y},fired:false,end:null,dmg:power()*SNIPE.dmg*grow('w')*GR663('w').power,seed:Math.random()*6});armSent();stats.w++;return true;}
-function fireW(f){f.fired=true;const o={x:player.x,y:player.y};f.o=o;/* 총구 방향 고정 — 목표로 꺾지 않음 */const L=reach(o,f.a,rgs('w',RANGE.w)),rows=onLine(o,f.a,L,SNIPE.half);
+function fireW(f){f.fired=true;const o={x:player.x,y:player.y};f.o=o;f.mo=mzOff();/* 총구 방향 고정 — 목표로 꺾지 않음 */const L=reach(o,f.a,rgs('w',RANGE.w)),rows=onLine(o,f.a,L,SNIPE.half);
  let endL=L;if(rows[0]){hit(rows[0],f.dmg,'gunnerSnipeR561');try{if(typeof moveActor==='function')moveActor(rows[0],Math.cos(f.a)*SNIPE.push,Math.sin(f.a)*SNIPE.push,rows[0].radius||.3);}catch(_){}endL=dist(rows[0],o);}
  if(rows[1]){hit(rows[1],f.dmg*SNIPE.pierce,'gunnerSnipeR561');endL=dist(rows[1],o);}
  f.L=Math.max(L*.999,endL);f.hitL=endL;f.tf=T();quake(.45);snd('special');face(f.a);player.skillAnim=Math.max(player.skillAnim||0,.35);}
 // ---- E 잔향 연사 ----
 function castE(){const e=nearest(rgs('e',RANGE.e)),a=aimAt(e);face(a);fx.push({owner:player,room:typeof room!=='undefined'?room:null,k:'e',t0:T(),life:RIFLE.every*(RIFLE.n-1)+(gsOn('casing')?1.1:.5),a,done:0,rounds:[],dmg:power()*RIFLE.dmg*grow('e')*GR663('e').power});armSent();stats.e++;return true;}
 function shotE(f,i){const o={x:player.x,y:player.y};if(f.a0==null)f.a0=f.a;const a=f.a0+(i%2?1:-1)*.035*((i%3)/2);f.a=a;const L=reach(o,a,rgs('e',RANGE.e)),first=onLine(o,a,L,RIFLE.half)[0];let endL=L;
- if(first){hit(first,f.dmg,'gunnerRifleR561');endL=dist(first,o);}f.rounds.push({t:T(),o,a,L:endL,hit:!!first});face(a);player.skillAnim=Math.max(player.skillAnim||0,.2);if(i%3===0)snd('attack');}
+ if(first){hit(first,f.dmg,'gunnerRifleR561');endL=dist(first,o);}f.rounds.push({t:T(),o,a,L:endL,hit:!!first,mo:mzOff()});face(a);player.skillAnim=Math.max(player.skillAnim||0,.2);if(i%3===0)snd('attack');}
 // ---- R 기억 소거 폭격 ----
 function strikePoint(minCount=1){const rows=live().filter(e=>dist(e,player)<=rgs('r',RANGE.r));let best=null,bn=0;for(const e of rows){const n=rows.filter(v=>dist(v,e)<=rgs('r',STRIKE.R)*.75).length+(e.boss?2:0);if(n>bn||(n===bn&&best&&dist(e,player)<dist(best,player))){bn=n;best=e;}}
  if(!best||bn<minCount)return null;const grp=rows.filter(v=>dist(v,best)<=rgs('r',STRIKE.R)*.75);return {x:grp.reduce((s,v)=>s+v.x,0)/grp.length,y:grp.reduce((s,v)=>s+v.y,0)/grp.length,n:bn};}
@@ -206,18 +211,20 @@ function draw(){const S0=SPR();if(!S0||typeof project!=='function')return;const 
     S.along('line',COB,q.x,q.y-M,tp.x,tp.y-M,H*.035,{alpha:.55+.4*k});S.draw('ring',COB,tp.x,tp.y,H*(1.7-1.0*k),H*(1.7-1.0*k),{alpha:.5+.5*k,squash:.5,angle:t*2,blend:'screen'});S.draw('ring',CORE,tp.x,tp.y-M,H*(.9-.5*k),H*(.9-.5*k),{alpha:.35+.5*k});
     S.draw('glow',COB,q.x+Math.cos(f.a)*H*.3,q.y-M,H*.5*k,H*.5*k,{alpha:.7});continue;}
    const v=Math.min(1,(t-f.tf)/.45),u=1-v,o=project(f.o.x,f.o.y),e=project(f.o.x+Math.cos(f.a)*f.hitL,f.o.y+Math.sin(f.a)*f.hitL),ang=Math.atan2(e.y-o.y,e.x-o.x);
+   /* R1220: 총구에서(f.mo), 탄 굵기 = 총구(심 6px/시트 vis 14 → 영웅 키 .2 를 .09 로, 흰 심 .08 → .04), 끝점은 같은 화면 벡터만큼(높이 같게) */const ox=MX(o,f.mo),oy=MY(o,f.mo,M),ex=ox+(e.x-o.x),ey=oy+(e.y-o.y),TW=f.mo?.09:.2,mz=f.mo?0:H*.3;
    if(gsOn('tracer')&&gsOn('wimpact')){const d=t-f.tf,fr=Math.floor(d*12.5),id=f.t0.toFixed(3);if(fr>=GS.tracer.frames)continue;
-    gsDraw('tracer',fr,o.x,o.y-M,H*.2/GS.tracer.vis,ang,1,.6,id,Math.hypot(e.x-o.x,e.y-o.y),true);if(d<.12)S.along('line',CORE,o.x,o.y-M,e.x,e.y-M,H*.08,{alpha:1-d/.12,blend:'screen'});
-    gsDraw('wimpact',fr,e.x,e.y-M,H*1.6/GS.wimpact.vis,ang,1,.5,id);if(gsOn('wmuzzle'))gsDraw('wmuzzle',GS.wmuzzle.hit+fr,o.x+Math.cos(ang)*H*.3,o.y-M+Math.sin(ang)*H*.3,H*2.2/GS.wmuzzle.vis,ang,1,.9,id);continue;}
-   S.along('slashline',SIL,o.x,o.y-M,e.x,e.y-M,H*.36*u,{alpha:.8*u,blend:'screen'});S.along('line',CORE,o.x,o.y-M,e.x,e.y-M,H*.12*(.4+u),{alpha:.95*u});
+    gsDraw('tracer',fr,ox,oy,H*TW/GS.tracer.vis,ang,1,.6,id,Math.hypot(e.x-o.x,e.y-o.y),true);if(d<.12)S.along('line',CORE,ox,oy,ex,ey,H*(f.mo?.04:.08),{alpha:1-d/.12,blend:'screen'});
+    gsDraw('wimpact',fr,ex,ey,H*1.6/GS.wimpact.vis,ang,1,.5,id);if(gsOn('wmuzzle'))gsDraw('wmuzzle',GS.wmuzzle.hit+fr,ox+Math.cos(ang)*mz,oy+Math.sin(ang)*mz,H*2.2/GS.wmuzzle.vis,ang,1,.9,id);continue;}
+   S.along('slashline',SIL,ox,oy,ex,ey,H*(f.mo?.09:.36)*u,{alpha:.8*u,blend:'screen'});S.along('line',CORE,ox,oy,ex,ey,H*(f.mo?.04:.12)*(.4+u),{alpha:.95*u});
    S.draw('flare',CORE,o.x+Math.cos(ang)*H*.25,o.y-M+Math.sin(ang)*H*.25,H*1.2*u+H*.2,H*.7*u+H*.1,{alpha:u,angle:ang});S.draw('ring',SIL,o.x,o.y-M,H*(.4+1.4*v),H*(.4+1.4*v),{alpha:.6*u,squash:.6});
    S.draw('flare',COB,e.x,e.y-M,H*1.3*u+H*.2,H*1.3*u+H*.2,{alpha:.9*u,angle:t*5});for(let i=0;i<6;i++){const ra=ang+Math.PI+(i-2.5)*.4;S.draw('spark',CORE,e.x+Math.cos(ra)*H*.6*v,e.y-M+Math.sin(ra)*H*.6*v,H*.55,H*.12,{alpha:u,angle:ra});}}
-  else if(f.k==='e'){const cOn=gsOn('casing');for(const r of f.rounds){const d=t-r.t;if(d<0||d>(cOn?.8:.32))continue;const o=project(r.o.x,r.o.y),e=project(r.o.x+Math.cos(r.a)*r.L,r.o.y+Math.sin(r.a)*r.L),ang=Math.atan2(e.y-o.y,e.x-o.x);
+  else if(f.k==='e'){const cOn=gsOn('casing');for(const r of f.rounds){const d=t-r.t;if(d<0||d>(cOn?.8:.32))continue;const o0=project(r.o.x,r.o.y),e0=project(r.o.x+Math.cos(r.a)*r.L,r.o.y+Math.sin(r.a)*r.L),ang=Math.atan2(e0.y-o0.y,e0.x-o0.x);
+    /* R1220: 총구에서 — 그리기 식이 o.y-M 을 쓰므로 o 를 총구 높이만큼 옮겨 M 을 되돌려 둔다(끝점 e 도 같은 화면 벡터) */const o=r.mo?{x:o0.x+r.mo.x,y:o0.y+r.mo.y+M}:o0,e=r.mo?{x:e0.x+r.mo.x,y:e0.y+r.mo.y+M}:e0,fw=r.mo?0:1;
     // 탄피(Dots GN-08 r3, 16칸): 총 반대쪽으로 튀어 떨어짐. 금속이라 덧셈 빛 없이. 왼쪽을 볼 땐 좌우만 뒤집음(π 회전 + gsDraw 위아래 뒤집기).
     if(cOn){gsDraw('casing',Math.min(GS.casing.frames-1,Math.floor(d*20)),o.x,o.y-M,H*.3/GS.casing.vis,Math.cos(ang)>=0?Math.PI:0,d>.65?(.8-d)/.15:1,0,f.t0.toFixed(3)+':c'+r.t.toFixed(3));if(d>.32)continue;}
-    const rOn=gsOn('rifle');if(rOn)gsDraw('rifle',Math.min(3,Math.floor(d*12.5)),o.x,o.y-M,H*1.5/GS.rifle.vis,ang,1,.5,f.t0.toFixed(3)+':'+r.t.toFixed(3));
+    const rOn=gsOn('rifle');if(rOn)gsDraw('rifle',Math.min(3,Math.floor(d*12.5)),o.x,o.y-M,H*1.5/GS.rifle.vis/* 심 4px/vis 165 → 영웅 키 .036 ≈ 총구(.039) 그대로 */,ang,1,.5,f.t0.toFixed(3)+':'+r.t.toFixed(3));
     if(!rOn&&d<.09){const k=d/.09,hx=o.x+(e.x-o.x)*k,hy=o.y-M+(e.y-o.y)*k,tx=o.x+(e.x-o.x)*Math.max(0,k-.35),ty=o.y-M+(e.y-o.y)*Math.max(0,k-.35);S.along('spark',CORE,tx,ty,hx,hy,H*.16,{alpha:.95});}
-    if(!rOn&&d<.06)S.draw('flare',COB,o.x+Math.cos(ang)*H*.28,o.y-M+Math.sin(ang)*H*.28,H*.55,H*.35,{alpha:1-d/.06,angle:ang});
+    if(!rOn&&d<.06)S.draw('flare',COB,o.x+Math.cos(ang)*H*.28*fw,o.y-M+Math.sin(ang)*H*.28*fw,H*.55,H*.35,{alpha:1-d/.06,angle:ang});
     if(r.hit&&d>=.06&&d<.22){const k=(d-.06)/.16;S.draw('flare',CORE,e.x,e.y-M,H*.5*(1-k)+H*.1,H*.5*(1-k)+H*.1,{alpha:1-k,angle:ang});for(let i=0;i<3;i++)S.draw('pixel',SIL,e.x+Math.cos(ang+Math.PI+(i-1)*.7)*H*.4*k,e.y-M+Math.sin(ang+Math.PI+(i-1)*.7)*H*.4*k,H*.1,H*.1,{alpha:1-k});}
     if(!cOn){const k=d/.32,side=Math.cos(ang)>=0?-1:1;S.draw('pixel',SIL,o.x+side*H*(.15+.35*k),o.y-M-H*.25*Math.sin(Math.PI*k)+H*.35*k*k,H*.07,H*.04,{alpha:.9*(1-k),angle:t*20,blend:'source-over'});}}}
   else if(f.k==='r'){const c=project(f.c.x,f.c.y),Wd=ellW(f.c,rgs('r',STRIKE.R)),sheetOn=gsOn('blast')||!!sheet(METEOR.path);

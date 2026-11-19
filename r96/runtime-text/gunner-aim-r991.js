@@ -12,7 +12,7 @@
  *  설정 storyworld.r991.gunnerAim {"on":false} 로 끄면 예전 그대로. Canonical source; copied by scripts/sync-r99.py. */
 (()=>{'use strict';
 if(window.__STORYWORLD_GUNNER_AIM_R991__)return;
-const REV='R1111-gunner-updown+R1101c-gunner-diag2+R1101b-gunner-diag+R1101-gunner-aim-7+R1045d+R1045c+R1045b+R1045+R1003-s2',KEY='storyworld.r991.gunnerAim',HERO='gunner';
+const REV='R1220-gunner-muzzle+R1111-gunner-updown+R1101c-gunner-diag2+R1101b-gunner-diag+R1101-gunner-aim-7+R1045d+R1045c+R1045b+R1045+R1003-s2',KEY='storyworld.r991.gunnerAim',HERO='gunner';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={walk:0,idle:0,swings:0,replaced:0,shots:0,moved:0,blocked:0,waiting:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
@@ -23,7 +23,7 @@ const fin=(v,d=0)=>Number.isFinite(v)?v:d,clamp=(v,a,b)=>Math.min(b,Math.max(a,v
 //  face: 몸(얼굴·어깨)이 향한 화면 각 — 총 각도가 비슷하면 몸도 그쪽을 보는 칸을 고른다(앞모습에 총만 비스듬한 s 보다 몸을 돌린 se).
 const SHEET={e:{gun:-3,face:0,body:181,tip:[[159,75],[154,72],[172,83],[151,71],[159,75],[163,77]]},
  se:{gun:35,face:45,body:182,tip:[[158,133],[155,130],[163,143],[152,126],[158,133],[159,137]]},
- s:{gun:50,face:90,body:182,tip:[[128,126],[128,126],[132,131],[125,119],[135,169],[135,169]]},
+ s:{gun:50,face:90,body:182,aimFrames:4,tip:[[128,126],[128,126],[132,131],[125,119],[135,169],[135,169]]},
  ne:{gun:-52,face:-60,body:180,tip:[[156,38],[150,36],[170,43],[146,35],[156,38],[160,39]]},
  n:{gun:-57,face:-90,body:182,tip:[[134,44],[130,44],[145,47],[128,44],[135,45],[138,45]]},
  // R1003 Dots 정 아래 조준(앞모습, 총구가 화면 앞으로) — 드라이브 HERO-gunner-attack-s2 후보, 7분야 심사 통과분. 대칭 그림이라 반전하지 않는다. tip 은 Dots 수동 측정값.
@@ -92,7 +92,7 @@ function sideIdle(rec,st){if(prefs.sideIdle===false)return 0;const six=prefs.idl
 const IDLE_N=/^assets\/r128\/gunner\/idle-n\.webp$/,N6_PATH='assets/r1111/gunner/idle-n6.webp',N_FRAMES=[0,1,0,5],N_STEP=.3,N6_STEP=.12;
 function northIdle(rec,st){if(prefs.northIdle===false||prefs.n3===false||!/r1045\/gunner\/attack-n3/.test(SHEET.n.path))return 0;let n=0,aim;const six=prefs.idleN6!==false,path=six?N6_PATH:SHEET.n.path;
  for(let i=Math.max(0,st|0);i<(rec?.commands?.length||0);i++){const c=rec.commands[i];if(c?.kind!=='image'||!c.points||!c.sourceRect||!IDLE_N.test(srcOf(c)))continue;
-  if(aim===undefined){aim=aimHold((typeof HEROES!=='undefined'&&HEROES?.[HERO]?.range)||7);}if(!aim||sector8(aim.a)!=='n')return n;
+  if(aim===undefined){aim=aimHold((typeof HEROES!=='undefined'&&HEROES?.[HERO]?.range)||7);}if(!aim||famDir(aim)!=='n')return n;
   const row=typeof readyImage==='function'?readyImage(path):null;if(!row?.image){image(path);continue;}
   if(toFullCell(c,row.image,path)){const t=Math.max(0,fin(T()));c.sourceRect[0]=(six?Math.floor(t/N6_STEP)%6:N_FRAMES[Math.floor(t/N_STEP)%N_FRAMES.length])*CW;c.r1111Idle='n';n++;}}
  stats.northIdle=(stats.northIdle||0)+n;return n;}
@@ -107,6 +107,13 @@ const faceAngle=(s,mirror)=>{const g=(SHEET[s]||SHEET.e).face*D;return mirror?Ma
 const FACE_W=.25,cost=(a,s,m)=>angDiff(a,gunAngle(s,m))+FACE_W*angDiff(a,faceAngle(s,m));
 function pick(a){a=Number.isFinite(a)?Math.atan2(Math.sin(a),Math.cos(a)):0;if(!Number.isFinite(a))a=0;let best={sheet:'e',mirror:false},bd=Infinity;
  for(const s of SHEETS)for(const m of (SHEET[s].noMirror?[false]:[false,true])){const d=cost(a,s,m);if(d<bd-1e-9){bd=d;best={sheet:s,mirror:m};}}return best;}
+// R1220(사용자 11-19 녹화 "공격모션 버그"): 표적이 칸 경계 근처에서 조금만 움직여도 쏠 때마다 옆모습(e)↔뒷모습(ne2) 칸이 번갈아 깜빡였다
+//  → 바로 앞 조준(1초 안)의 칸이 새 최선 칸보다 7° 안쪽으로만 나쁘면 그 칸을 유지한다. {"sticky":false} 면 예전.
+const STICK=.12;function pickSticky(a,prev){const best=pick(a);if(prefs.sticky===false||!prev||!SHEET[prev.sheet]||SHEET[prev.sheet].retired||T()-prev.at>1)return best;
+ if(prev.mirror&&SHEET[prev.sheet].noMirror)return best;return cost(a,prev.sheet,prev.mirror)-cost(a,best.sheet,best.mirror)<STICK?{sheet:prev.sheet,mirror:prev.mirror}:best;}
+// R1220: 쏜 칸의 가족(몸이 향한 쪽) — 쏘는 사이 서 있기가 칸과 다른 8방향 칸(예: 공격 n·서 있기 ne, 공격 ne2 반전·서 있기 e 반전)을 골라 앞뒤로 깜빡였다 → 같은 가족으로
+const FAM={e:'e',se:'se',se2:'se',se3:'se',ne:'ne',ne2:'ne',ne3:'ne',n:'n',s:'s',s2:'s'},MIRF={e:'w',se:'sw',ne:'nw',n:'n',s:'s'};
+function famDir(aim){const sw=swingOf(player);if(prefs.family!==false&&sw&&T()-sw.at<=2.5&&FAM[sw.sheet]){const f=FAM[sw.sheet];return sw.mirror?MIRF[f]:f;}return sector8(aim.a);}
 function tip(s,fr){const t=(SHEET[s]||SHEET.e).tip;const i=clamp(Math.round(fin(fr,0)),0,t.length-1);return t[i].slice();}
 // 화면 오프셋(rx,ry px) → 땅 좌표: 엔진 project(x,y)=((x−y)·TILE·zoom, (x+y)·TILE·.5·zoom) 의 역
 function screenToGround(o,rx,ry,TILE,zoom){const T=fin(TILE,64)*Math.max(.05,fin(zoom,1)),a=fin(rx)/T,b=fin(ry)/(T*.5);return{x:fin(o?.x)+(a+b)/2,y:fin(o?.y)+(b-a)/2};}
@@ -126,19 +133,29 @@ function aimNow(range){const e=typeof nearestEnemy==='function'?nearestEnemy(ran
 // R1111: 쏘는 사이 적이 잠깐 안 잡히거나(맞고 밀림·막 죽음) 없을 때도 서 있기가 방금 쏜 쪽을 보게 — 마지막 조준을 2.5초 쓴다.
 function aimHold(range){const a=aimNow(range);if(a)return a;const sw=swingOf(player);return sw&&T()-sw.at<=2.5&&Number.isFinite(sw.a)?{a:sw.a,target:null}:null;}
 function wrapAttack(){if(typeof basicAttack!=='function'||basicAttack.r991)return;const base=basicAttack;const w=function(...args){
-  if(!on())return base.apply(this,args);let aim=null;try{const before=player.combo;aim=aimNow((typeof HEROES!=='undefined'&&HEROES?.[HERO]?.range)||7);pending=aim?{...aim,t:T(),before}:null;}catch(e){fail(e);}
-  try{return base.apply(this,args);}finally{try{if(pending&&player.combo>pending.before){const pk=pick(pending.a);swings.set(player,{...pending,...pk,at:T()});stats.swings++;}}catch(e){fail(e);}pending=null;}};
+  if(!on())return base.apply(this,args);let aim=null;try{const before=player.combo;aim=aimNow((typeof HEROES!=='undefined'&&HEROES?.[HERO]?.range)||7);pending=aim?{...aim,t:T(),before,pk:pickSticky(aim.a,swingOf(player))}:null;}catch(e){fail(e);}
+  try{return base.apply(this,args);}finally{try{if(pending&&player.combo>pending.before){const pk=pending.pk||pick(pending.a);swings.set(player,{...pending,...pk,at:T()});stats.swings++;}}catch(e){fail(e);}pending=null;}};
  w.r991=true;basicAttack=w;}
 // 탄 출발점: 고른 칸 첫 칸(쏘는 순간)의 총구 끝
+// R1220: 그려진 탄은 탄 자리에서 18px×zoom 위(엔진·R912 같음)에, 몸통 가운데가 탄 자리다 → 예전엔 화면에서 총구보다 18px 위·몸통 절반만큼 뒤에서 나왔다.
+//  탄 꼬리(뒤끝)가 총구 끝에 닿게: 화면 점 = 총구 + 나는 쪽×몸통 절반, 땅 좌표는 그 점에서 18px×zoom 아래로 되돌려 잡는다.
+//  기억 공명(3타마다 .15초 뒤 한 발 더, 엔진 memory 메아리)은 basicAttack 밖(delay)에서 나와 발밑에서 나갔다 → .35초 안 마지막 조준으로 같이 옮긴다.
+const DRAW_LIFT=18,ECHO_WIN=.35;
+function bulletLen(){try{const R=window.__STORYWORLD_PROJ_SHEETS_R912__,z=R&&R.enabled&&R.kinds?.pj04?.size;if(prefs.muzzleSize===false||!(z>0))return 0;return fin(typeof actorHeight==='function'?actorHeight():0)*z;}catch(_){return 0;}}
 function wrapShot(){if(typeof makeShot!=='function'||makeShot.r991)return;const base=makeShot;const w=function(...args){const s=base.apply(this,args);
-  try{const wk=walking();if(pending&&s?.friendly&&on()&&(sheetLive()||wk)&&s.attackKind9!=='skill'&&!s.storyWER&&Number.isFinite(s.x+s.y+s.vx+s.vy)){const pk=pick(pending.a),k0=wk?walkGeo.k:typeof actorHeight==='function'?fin(actorHeight())*standRatio()/SHEET[pk.sheet].body:0;
-    if(k0>0&&typeof project==='function'){const t=wk?WALK[pk.sheet].tip[clamp(walkGeo.frame,0,7)]:tip(pk.sheet,0),f=pk.mirror?-1:1,lift=clamp(fin(player.visualLiftPx),0,k0*SHEET[pk.sheet].body*.65),
-      rx=wk?walkGeo.dx+f*(t[0]-FX)*k0:f*(t[0]-FX)*k0,ry=wk?walkGeo.dy+(t[1]-WFY)*k0:(t[1]-FY)*k0-lift,g=screenToGround(player,rx,ry,typeof TILE==='number'?TILE:64,typeof zoom==='number'?zoom:1);stats.shots++;
+  try{if(s?.friendly&&on()&&s.attackKind9!=='skill'&&!s.storyWER&&prefs.muzzleSize!==false&&/gunner-laser-bullet/.test(String(s.asset||''))&&bulletLen()>0)s.r1220Muzzle=true;}catch(e){fail(e);}/* 옮기지 못한 탄(협동·벽)도 같은 크기 */
+  try{const wk=walking();let pd=pending;if(!pd&&prefs.echo!==false){const sw=swingOf(player);if(sw&&sw.target&&T()-sw.at<=ECHO_WIN)pd={a:sw.a,target:sw.target,pk:{sheet:sw.sheet,mirror:sw.mirror},echo:true};}
+   if(pd&&s?.friendly&&on()&&(sheetLive()||wk)&&s.attackKind9!=='skill'&&!s.storyWER&&Number.isFinite(s.x+s.y+s.vx+s.vy)){const pk=pd.pk||pick(pd.a),k0=wk?walkGeo.k:typeof actorHeight==='function'?fin(actorHeight())*standRatio()/SHEET[pk.sheet].body:0;
+    if(k0>0&&typeof project==='function'&&WALK[pk.sheet]){const t=wk?WALK[pk.sheet].tip[clamp(walkGeo.frame,0,7)]:tip(pk.sheet,0),f=pk.mirror?-1:1,lift=clamp(fin(player.visualLiftPx),0,k0*SHEET[pk.sheet].body*.65),
+      rx=wk?walkGeo.dx+f*(t[0]-FX)*k0:f*(t[0]-FX)*k0,ry=wk?walkGeo.dy+(t[1]-WFY)*k0:(t[1]-FY)*k0-lift,z=typeof zoom==='number'?zoom:1,tg=pd.target;stats.shots++;
+     let cx=rx,cy=ry;const L=prefs.tail===false?0:bulletLen();
+     if(L>0){const q=project(player.x,player.y),e=project(tg.x,tg.y),ex=e.x-q.x-rx,ey=e.y-q.y-ry,d=Math.hypot(ex,ey);if(d>1e-6&&Number.isFinite(d)){cx+=ex/d*L/2;cy+=ey/d*L/2;}}
+     const g=screenToGround(player,cx,cy+(prefs.lift===false?0:DRAW_LIFT*z),typeof TILE==='number'?TILE:64,z);
      if(typeof blocked==='function'&&blocked(g.x,g.y,s.radius||.14)){stats.blocked++;}else if(Number.isFinite(g.x+g.y)){
-      const sp=Math.hypot(s.vx,s.vy),tg=pending.target,old=Math.atan2(s.vy,s.vx),aimOld=Math.atan2(tg.y-s.y,tg.x-s.x),spread=Math.atan2(Math.sin(old-aimOld),Math.cos(old-aimOld)),
+      const sp=Math.hypot(s.vx,s.vy),old=Math.atan2(s.vy,s.vx),aimOld=Math.atan2(tg.y-s.y,tg.x-s.x),spread=Math.atan2(Math.sin(old-aimOld),Math.cos(old-aimOld)),
        na=Math.atan2(tg.y-g.y,tg.x-g.x)+spread,dOld=Math.hypot(tg.x-s.x,tg.y-s.y),dNew=Math.hypot(tg.x-g.x,tg.y-g.y);
       if(Number.isFinite(na)&&sp>0){s.x=s.px=g.x;s.y=s.py=g.y;s.vx=Math.cos(na)*sp;s.vy=Math.sin(na)*sp;if(Number.isFinite(s.life))s.life=Math.max(.001,s.life+(dNew-dOld)/sp);
-       s.currentPublicMuzzle={...(s.currentPublicMuzzle||{}),applied:true,r991:{sheet:pk.sheet,mirror:pk.mirror,tip:t}};stats.moved++;}}}}}catch(e){fail(e);}return s;};
+       s.currentPublicMuzzle={...(s.currentPublicMuzzle||{}),applied:true,r991:{sheet:pk.sheet,mirror:pk.mirror,tip:t,echo:!!pd.echo}};stats.moved++;if(pd.echo)stats.echo=(stats.echo||0)+1;}}}}}catch(e){fail(e);}return s;};
  w.r991=true;makeShot=w;}
 // 몸 그림: R143 이 그린 공격 칸을 고른 칸(같은 프레임·같은 키·같은 발)으로 바꿔 놓는다
 // R1110: 쏘는 도중(attackAnim>0) 기록된 조준이 .6초 넘게 묵으면(표적이 사거리 밖으로 걸어 나가 새 기록이 안 생김) R143 이 걷는 쪽으로 반전해 그린 attack-e 칸이 끼어 반대쪽을 봤다
@@ -149,10 +166,12 @@ function replace(rec,st){const sw=liveSwing();if(!sw)return;/* R1111: attackAnim
  for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||!c.r143Attack||!c.points||!c.sourceRect)continue;
   const src=String(c.sourcePath||c.image?.src||''),m=/(?:r143\/attack|r1003|r1045|r1101b|r1101c)\/gunner\/attack-([a-z0-9]+)\.webp/.exec(src);if(!m)continue;
   const P=c.points,oldMir=P[1][0]<P[0][0],fOld=oldMir?-1:1,k=Math.abs(P[1][0]-P[0][0])/CW,ky=(P[3][1]-P[0][1])/CH;if(!(k>0)||!Number.isFinite(ky))return;
-  if(m[1]===sw.sheet&&oldMir===sw.mirror&&src.includes(pathOf(sw.sheet)))return;/* R1045: 같은 칸 이름이어도 n·e 는 새 그림 경로로 바꿈 */const p=pathOf(sw.sheet),im=image(p);if(!im)return;
+  /* R1220: R143 attack-s 5·6번 칸은 총을 내린 회복 자세(총구가 발 쪽, tip y169) — 연사 중 앞모습으로 총을 내렸다 올리는 깜빡임과 탄 출발점 13px 어긋남 → 겨눈 칸(0번)으로 */
+  const AF=SHEET[sw.sheet]?.aimFrames,fi=Math.round(fin(c.sourceRect[0])/CW);
+  if(m[1]===sw.sheet&&oldMir===sw.mirror&&src.includes(pathOf(sw.sheet))){if(AF&&prefs.aimHoldFrames!==false&&fi>=AF){c.sourceRect=[0,c.sourceRect[1]||0,c.sourceRect[2]||CW,c.sourceRect[3]||CH];c.r1220Hold=fi;stats.hold=(stats.hold||0)+1;}return;}/* R1045: 같은 칸 이름이어도 n·e 는 새 그림 경로로 바꿈 */const p=pathOf(sw.sheet),im=image(p);if(!im)return;
   const fx=P[0][0]+fOld*FX*k,fy=P[0][1]+FY*ky,f=sw.mirror?-1:1,X=v=>fx+f*(v-FX)*k,Y=v=>fy+(v-FY)*ky,sx=Math.round(clamp(Math.round(fin(c.sourceRect[0])/CW),0,5)*(fin(SHEET[sw.sheet]?.frames,6)-1)/5)*CW;
   const pts=[[X(0),Y(0)],[X(CW),Y(0)],[X(CW),Y(CH)],[X(0),Y(CH)]];if(pts.flat().some(v=>!Number.isFinite(v)))return;
-  Object.assign(c,{image:im,sourcePath:p,sourceRect:[sx,0,CW,CH],imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],points:pts,r991Aim:{sheet:sw.sheet,mirror:sw.mirror}});stats.replaced++;return;}}
+  Object.assign(c,{image:im,sourcePath:p,sourceRect:[(AF&&prefs.aimHoldFrames!==false&&fi>=AF)?0:sx,0,CW,CH],imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],points:pts,r991Aim:{sheet:sw.sheet,mirror:sw.mirror}});stats.replaced++;return;}}
 // 쏘고 난 뒤 서 있기: R93 서 있기는 4방향(player.direction)이라 대각선 표적을 두고 총이 수평으로 섰다.
 //  사거리 안에 적이 있으면 R128 8방향 서 있기(idle-<d>, 왼쪽은 왼쪽 그림) 중 표적 쪽 칸으로 바꾼다. 같은 프레임·발·키(refBody 비율).
 const SEC8=['e','se','s','sw','w','nw','n','ne'];
@@ -160,7 +179,7 @@ const sector8=a=>SEC8[((Math.round(fin(a)/(Math.PI/4))%8)+8)%8];
 function replaceIdle(rec,st){const S=window.__STORYWORLD_HERO_SHEETS__;if(!S?.idleItem)return;
  for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||!c.points||!c.sourceRect)continue;
   const src=String(c.sourcePath||c.image?.src||''),m=/(?:r128|r710)\/gunner\/idle-([a-z]+)\.webp/.exec(src);if(!m)continue;
-  const aim=aimHold((typeof HEROES!=='undefined'&&HEROES?.[HERO]?.range)||7);if(!aim)return;const d=sector8(aim.a),P=c.points,oldMir=P[1][0]<P[0][0];
+  const aim=aimHold((typeof HEROES!=='undefined'&&HEROES?.[HERO]?.range)||7);if(!aim)return;const d=famDir(aim),P=c.points,oldMir=P[1][0]<P[0][0];
   const oldShown=oldMir?({e:'w',w:'e',se:'sw',sw:'se',ne:'nw',nw:'ne'}[m[1]]||m[1]):m[1];const s2=d==='s'&&prefs.s2!==false;if(oldShown===d&&!s2)return;
   let it=S.idleItem(HERO,d,false);const from=S.idleItem(HERO,m[1],false);if(s2){const im=image(IDLE_S2.path);if(!im)return;it={...IDLE_S2,image:im};}if(!it?.image)return;
   const cw=fin(it.cellW,192),ch=fin(it.cellH,256),k0=Math.abs(P[1][0]-P[0][0])/fin(from?.cellW,192),ky0=(P[3][1]-P[0][1])/fin(from?.cellH,256);if(!(k0>0)||!Number.isFinite(ky0))return;
