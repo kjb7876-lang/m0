@@ -1,4 +1,4 @@
-// R1207 브라우저 검사(헤드리스): 실제 엔진 굴림 문턱(라우렌, 주사위 고정)이 11.1%→77.7% 곡선을 따르는지, 확률 발동 피해가 예전÷새 확률만큼 줄었는지.
+// R1207 브라우저 검사(헤드리스): 실제 엔진 굴림 문턱(라우렌, 주사위 고정)이 11.1%→77.7% 곡선을 따르는지, 재발동 대기 ×0.51, 확률 발동 피해가 예전÷새 초당 발동 수만큼 줄었는지.
 import {chromium,boot,go} from '../r444/lib.mjs';
 const b=await chromium.launch();const {p}=await boot(b,{vp:{width:640,height:360}});await go(p,process.env.ZONE||'dist00');
 let fail=0;const ok=(n,c)=>{console.log(c?'PASS':'FAIL',n);if(!c)fail++;};
@@ -23,7 +23,8 @@ const dmg=on=>p.evaluate(async on=>{const G=window.__STORYWORLD_PASSIVE_GROWTH_R
  try{base.call(window,e,1,{kind:'basic',sourceHero:'lauren'});}finally{}
  const t0=performance.now();while(!rec.length&&performance.now()-t0<20000)await new Promise(r=>setTimeout(r,100));window.hitEnemy=base;G.set(true);e.x=player.x+30;return {v:rec[0],ap:attackPower()};},on);
 const off=await dmg(false),on7=await dmg(true);console.log(JSON.stringify({off,on7}));
-const ratio=on7.v/off.v;ok('7단계 고정 피해 비 '+(ratio||0).toFixed(4)+' ≈ 14.9/77.7='+(0.149/0.777).toFixed(4),Number.isFinite(ratio)&&Math.abs(ratio-.149/.777)<.01);
+const ratio=on7.v/off.v,want=(1/(5*.79+.35/.149))/(1/(5*.51+.35/.777));ok('7단계 고정 피해 비 '+(ratio||0).toFixed(4)+' ≈ 초당 발동 수 비 '+want.toFixed(4),Number.isFinite(ratio)&&Math.abs(ratio-want)<.01);
+const cdm=await p.evaluate(()=>window.__STORYWORLD_PASSIVE_GROWTH_R971__.cooldown('lauren',5));ok('7단계 재발동 대기 5초 → '+cdm.toFixed(2)+'초(×0.51)',Math.abs(cdm-2.55)<1e-9);
 const ins=await p.evaluate(()=>window.__STORYWORLD_PASSIVE_GROWTH_R971__.inspect());console.log(JSON.stringify(ins));ok('R971 오류 0',ins.stats.errors===0);
 ok('페이지 오류 없음 '+errs.slice(0,2).join(' | '),errs.length===0);
 await b.close();console.log(fail?'FAIL':'OK');process.exit(fail?1:0);

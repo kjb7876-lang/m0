@@ -14,6 +14,10 @@ const src=C(F);
 const MIN=.111,MAX=.777,curve=r=>MIN+(MAX-MIN)*r/7;
 const BASE={hwando:.27,lauren:.10,slayer:.32,michaela:.11,seoha:.05,neon:.09,hunter:.09,gunner:.20,ego:.10};
 const oldT=(b,r)=>Math.min(b*(1+.07*r),Math.max(b,.40));
+// R1207-2(사용자 07:27Z "재발동대기 그것도 높여서 … 발동 자체가 더 자주 대신 데미지는 줄이는 방향"): 대기 ×(1−.07·단계)(예전 .03), 피해 = 초당 기대 발동 수 비(굴림 간격 .35초).
+const ICD={hwando:(.18*1.2+.06*7+.03*20)/.27,lauren:5,slayer:(.2*.9+.08*6+.04*14)/.32,michaela:5,seoha:14,neon:6,hunter:21,gunner:(.10*16+.07*10+.03*34)/.20,ego:5},GAP=.35;
+const rate=(p,icd)=>1/(icd+GAP/p);
+const dmgX=(h,r)=>Math.min(1,rate(oldT(BASE[h],r),ICD[h]*(1-.03*r))/rate(newT(BASE[h],r),ICD[h]*(1-.07*r)));
 const newT=(b,r)=>Math.min(MAX,Math.max(oldT(b,r),curve(r)));
 ok('pages.yml CPU 검사 줄',rd(path.join(ROOT,'.github/workflows/pages.yml')).includes('node r96/qa/r1207/r1207-cpu-check.cjs'));
 
@@ -31,21 +35,21 @@ if(typeof g.damage==='function'&&typeof g.total==='function'){
  const sum=a=>a.reduce((x,y)=>x+y,0);
  // 곡선: 11.1% → 77.7%
  A.ranks[ID]=0;ok('0단계 서하 5% → 11.1%',near(sum(g.chances('seoha',[.05])),.111));
- ok('0단계 서하 고정 피해 ×'+(g.damage('seoha')).toFixed(4)+' (= 5/11.1)',near(g.damage('seoha'),.05/.111));
+ ok('0단계 서하 고정 피해 ×'+(g.damage('seoha')).toFixed(4)+' (초당 발동 수 비)',near(g.damage('seoha'),dmgX('seoha',0)));
  A.ranks[ID]=7;ok('7단계 서하 → 77.7%',near(sum(g.chances('seoha',[.05])),.777));
- ok('7단계 서하 고정 피해 = 7.45/77.7',near(g.damage('seoha'),.0745/.777));
+ ok('7단계 서하 고정 피해 = 초당 발동 수 비 '+dmgX('seoha',7).toFixed(4),near(g.damage('seoha'),dmgX('seoha',7)));
  for(let r=0;r<=7;r++){A.ranks[ID]=r;ok(r+'단계 곡선 '+(curve(r)*100).toFixed(2)+'% (네온 9%)',near(sum(g.chances('neon',[.09])),curve(r))&&near(g.total('neon'),curve(r)));}
  // 10명 모두: 단계별 합계·피해·기대값
  let mono=true,cap=true,ev=true,dm=true,tb=true;
  for(const[h,b]of Object.entries(BASE)){let prev=-1;for(let r=0;r<=7;r++){A.ranks[ID]=r;const t=g.total(h),d=g.damage(h);
-  if(!near(t,newT(b,r)))tb=false;if(t<prev-1e-12)mono=false;prev=t;if(t>MAX+1e-12)cap=false;if(!(d>0&&d<=1))dm=false;if(!near(t*d,oldT(b,r),1e-9))ev=false;}}
+  if(!near(t,newT(b,r)))tb=false;if(t<prev-1e-12)mono=false;prev=t;if(t>MAX+1e-12)cap=false;if(!(d>0&&d<=1))dm=false;const icd=ICD[h];if(!near(rate(t,icd*(1-.07*r))*d,rate(oldT(b,r),icd*(1-.03*r)),1e-9))ev=false;}}
  ok('10명 굴림 합계 = max(예전, 곡선), 77.7% 이하',tb);ok('단계 오를수록 줄지 않음',mono);ok('77.7% 상한',cap);ok('고정 피해 배율 0~1',dm);
- ok('굴림당 기대 피해(확률×피해) = 예전과 같음(10명·0~7단계)',ev);
+ ok('초당 기대 피해(초당 발동 수×피해) = 예전과 같음(10명·0~7단계)',ev);
  A.ranks[ID]=7;for(const h of Object.keys(BASE))ok('7단계 '+h+' 합계 77.7%',near(g.total(h),.777));
  // 지금 곡선보다 높은 영웅은 낮추지 않음
  A.ranks[ID]=0;const hw=g.chances('hwando',[.18,.06,.03]);ok('0단계 환도 27% 그대로(낮추지 않음), 피해 ×1',near(sum(hw),.27)&&near(g.damage('hwando'),1));
  A.ranks[ID]=7;const hw7=g.chances('hwando',[.18,.06,.03]);ok('7단계 환도 77.7%, 갈래 비율 그대로 3:1 → '+hw7.map(v=>(v*100).toFixed(2)).join('/'),near(sum(hw7),.777)&&near(hw7[0]/hw7[1],3)&&near(hw7[1]/hw7[2],2));
- ok('7단계 환도 피해 = 40/77.7',near(g.damage('hwando'),.40/.777));
+ ok('7단계 환도 피해 = 초당 발동 수 비 '+dmgX('hwando',7).toFixed(4)+' (1보다 작음)',near(g.damage('hwando'),dmgX('hwando',7))&&g.damage('hwando')<1);
  A.ranks[ID]=3;ok('3단계 슬레이어 = 곡선 39.64%(예전 38.72%보다 큼)',near(sum(g.chances('slayer',[.2,.08,.04])),curve(3)));
  A.ranks[ID]=0;ok('0단계 기억사수 20% 그대로',near(sum(g.chances('gunner',[.10,.07,.03])),.20));
  // 개별 보정은 비율대로, 77.7% 상한
@@ -65,7 +69,8 @@ if(typeof g.damage==='function'&&typeof g.total==='function'){
  ok('빈 배열 안전',Array.isArray(g.chances('x',[]))&&g.chances('x',[]).length===0);
  ok('모르는 영웅 피해 배율 유한',Number.isFinite(g.damage('zzz'))&&g.damage('zzz')>0&&g.damage('zzz')<=1);
  // 대기 ×(1−.03·단계) 그대로
- A.ranks[ID]=7;ok('재발동 대기 7단계 ×0.79 그대로',near(g.cooldown('hunter',21),21*.79));
+ A.ranks[ID]=7;ok('재발동 대기 7단계 ×0.51(더 자주)',near(g.cooldown('hunter',21),21*.51));A.ranks[ID]=3;ok('재발동 대기 3단계 ×0.79',near(g.cooldown('hunter',21),21*.79));
+ A.ranks[ID]=0;ok('0단계 대기 그대로',g.cooldown('hunter',21)===21);
  // 몸(r720Ally) 은 조종 영웅 단계
  A.ranks[ID]=4;g.total('seoha');const main=A.ctx.player;A.ctx.player={hero:'slayer',r720Ally:true,__ranks:{}};
  ok('배치 몸: 조종 영웅 단계(4) 곡선',near(g.total('seoha'),curve(4)));A.ctx.player=main;
@@ -76,7 +81,7 @@ if(typeof g.damage==='function'&&typeof g.total==='function'){
 }
 // 카드 설명: 지금 단계 확률·다음 단계·피해 배율
 {const B=mk();B.ctx.player.hero='seoha';const d=B.W.__STORYWORLD_PROGRESSION_R62__.defs.find(x=>x&&x.id===ID);
- B.ranks[ID]=0;ok('카드 설명: 11.1% → 20.6%·77.7%·고정 피해',!!d&&/11\.1%/.test(d.text)&&/20\.6%/.test(d.text)&&/77\.7%/.test(d.text)&&/고정 피해/.test(d.text)&&/체력 비례/.test(d.text));
+ B.ranks[ID]=0;ok('카드 설명: 11.1% → 20.6%·77.7%·고정 피해·대기 ×0.93',!!d&&/11\.1%/.test(d.text)&&/20\.6%/.test(d.text)&&/77\.7%/.test(d.text)&&/고정 피해/.test(d.text)&&/체력 비례/.test(d.text)&&/×0\.93/.test(d.text));
  B.ranks[ID]=7;ok('카드 설명 7단계: 77.7% (최대)',!!d&&/77\.7%/.test(d.text)&&/최대/.test(d.text));}
 
 // ── 모듈: 상한·피해 배율 연결 ──
