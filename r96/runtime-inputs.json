@@ -10689,7 +10689,9 @@
     "swamp-splash-r1222.js",
     "assets/r163/pixelfx/r1222/mob-swamp-dots-12.webp",
     "story-half-dmg-r1225.js",
-    "hero-blocked-r1238.js"
+    "hero-blocked-r1238.js",
+    "neon-attack-r1238.js",
+    "assets/r1238/neon/attack-e.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11764,5 +11766,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "af55f89b1828e3a9b9ff96397f9b0fef2e92bfd20dd5a4ca65521664d568ecd2"
+  "runtimeManifestSHA256": "a54f3e8a25d3e1d8dd9c958b92cf1b4bf5fcf9df98440522eb0c1ca2a6e5f47a"
 }
