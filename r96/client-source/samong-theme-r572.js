@@ -9,7 +9,7 @@
 if(typeof window==='undefined'||window.__STORYWORLD_SAMONG_THEME_R572__)return;
 const REV='R572-samong-theme-1',KEY='storyworld.r572.theme',TAU=Math.PI*2;
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
-const stats={motifs:0,marks:0,dropped:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e&&e.message||e).slice(0,160);};
+const stats={motifs:0,marks:0,dropped:0,markPasses:0,cloneSkips:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e&&e.message||e).slice(0,160);};
 const S571=()=>window.__STORYWORLD_SAMONG_SURGE_R571__;
 const P=()=>typeof player==='object'&&player?player:null;
 const now=()=>typeof time==='number'&&Number.isFinite(time)?time:0;
@@ -123,11 +123,17 @@ function motif(p,L){const T=THEMES[String(p.hero)];if(!T)return;const q=project(
  fy=q.y-Math.max(0,Math.min(h*.65,Number(p.visualLiftPx)||0)),a=Math.min(1,Number(p.samong)/.6);
  const go=()=>{ctx.save();try{T.draw(L,q.x,fy,h,pal(String(p.hero)),now(),a,lowFx());}finally{ctx.restore();}};
  if(typeof ctx.scope==='function')ctx.scope({id:'r572:'+L,kind:'effect',x:p.x,y:p.y,groundAligned:false,r572:true},go);else go();stats.motifs++;}
-function drawMarks(){prune();if(!marks.length)return;const t=now();const go=()=>{ctx.save();try{for(const m of marks)markDraw(m,t);}finally{ctx.restore();}};
+function drawMarks(){prune();if(!marks.length)return;stats.markPasses++;const t=now();const go=()=>{ctx.save();try{for(const m of marks)markDraw(m,t);}finally{ctx.restore();}};
  if(typeof ctx.scope==='function')ctx.scope({id:'r572:marks',kind:'effect',x:P()?.x||0,y:P()?.y||0,groundAligned:false,r572:true},go);else go();}
-try{if(typeof drawHero==='function'){const b=drawHero;drawHero=function(...args){const p=P(),on=!!(p&&active(p)&&typeof ctx!=='undefined'&&ctx&&typeof project==='function');
- if(on)try{motif(p,'back');}catch(e){fail(e);}const r=b.apply(this,args);
- if(on)try{motif(p,'front');}catch(e){fail(e);}try{if(typeof ctx!=='undefined'&&ctx&&typeof project==='function')drawMarks();}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
+// R1199(사용자 2026-11-19 사몽 각성 렉): 분신(R945 칠묵영 7체·R113 잔상 등)은 영웅 그리기(drawHero)를 안에서 다시 부른다(깊이 ≥1).
+//  ① 적중 문양은 맵에 한 벌이라 바깥(깊이 0) 그리기에서만 그린다 — 예전엔 분신 그리기마다 같은 자리에 다시 그려 무한생존 사몽에서 장면당 15번(JS 약 14ms).
+//  ② 분신의 몸 문양은 성능 7단계 5(기본·자동) 이하에서 생략(6~7 그대로, 사용자 2026-11-19 결정).
+let depth=0;
+const perfStep=()=>{try{const n=Number(window.__STORYWORLD_PERF7_R1043__?.step?.());return Number.isFinite(n)?n:5;}catch(_){return 5;}};
+try{if(typeof drawHero==='function'){const b=drawHero;drawHero=function(...args){const p=P(),nested=depth>0,on=!!(p&&active(p)&&typeof ctx!=='undefined'&&ctx&&typeof project==='function')&&!(nested&&perfStep()<=5);
+ if(nested&&!on&&p&&active(p))stats.cloneSkips++;
+ if(on)try{motif(p,'back');}catch(e){fail(e);}let r;depth++;try{r=b.apply(this,args);}finally{depth--;}
+ if(on)try{motif(p,'front');}catch(e){fail(e);}if(!nested)try{if(typeof ctx!=='undefined'&&ctx&&typeof project==='function')drawMarks();}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
 
 window.__STORYWORLD_SAMONG_THEME_R572__=Object.freeze({revision:REV,theme,themes:Object.keys(THEMES),crossGeometry,marks:()=>{prune();return marks.map(m=>({...m}));},
  set(next){prefs={...prefs,...next};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};},

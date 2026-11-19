@@ -58,7 +58,7 @@ const cache=new Map();let cachePx=0;/* key → canvas (삽입 순서 = 오래된
 const ids=new WeakMap();let idSerial=0;
 // R441: 주소가 있는 그림(img)은 주소로 열쇠를 삼는다 — 지역을 옮기면 본편이 같은 그림을 새 Image 로 다시 받아(R154) 예전엔 열쇠가 바뀌어
 //  같은 영웅 걷기 칸도 지역마다 다시 구웠다. 주소가 같으면 픽셀이 같다. 주소 없는 캔버스(물들인 사본 등)는 예전처럼 물체마다 번호.
-const imgId=im=>{let v=ids.get(im);if(!v){const u=typeof im?.currentSrc==='string'&&im.currentSrc||(typeof im?.src==='string'&&im.src)||'';v=u&&!/^blob:/.test(u)?'u:'+u:++idSerial;ids.set(im,v);}return v;};
+const imgId=im=>{if(im&&im.__r1199AlphaOf)im=im.__r1199AlphaOf;/* R1199: R111 흑백 사본은 원본과 알파가 같아 테두리를 원본 열쇠로 같이 쓴다 */let v=ids.get(im);if(!v){const u=typeof im?.currentSrc==='string'&&im.currentSrc||(typeof im?.src==='string'&&im.src)||'';v=u&&!/^blob:/.test(u)?'u:'+u:++idSerial;ids.set(im,v);}return v;};
 function makeCanvas(w,h){const c=document.createElement('canvas');c.width=w;c.height=h;return c;}
 // 알파 0.45 넘는 곳만 실루엣으로(그림 안 반투명 그림자·연기 띠에 테가 붙지 않게).
 // R440(사용자 2026-11-09 "영웅 잘 보이게 하는 선이 좀 잘리는 느낌, 어색"): 영웅 테가 가는 칼날(무채색 금속)까지 굵은 관처럼 감싸고,
