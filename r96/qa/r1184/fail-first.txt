@@ -1,0 +1,22 @@
+FAIL ① r248 API
+FAIL ① 평소 null
+FAIL ① 4칸 차례(70·110·100·100ms) -1,-1,-1,-1,-1,-1
+FAIL ① 다른 몹 null
+FAIL ① 공격 중 null
+FAIL ① 죽음 null
+FAIL ② R248 이 피격 칸을 묻는다
+FAIL ② 조준 다음·걷기 칸 앞
+FAIL ③ IV-01 사망 6칸 표
+FAIL ③ IV-01 발 아래 여백
+FAIL ③ IV-01 경로로 고름
+FAIL ③ MD-31 사망 6칸 표
+FAIL ③ MD-31 발 아래 여백
+FAIL ③ MD-31 경로로 고름
+FAIL ③ IV-01 이름으로도(R248 직접 그리기)
+FAIL ④ 피격 시트 경로로 죽어도 IV-01
+FAIL ⑤ assets/r1184/iv-m077-hit4.webp sha·등록
+FAIL ⑤ assets/r1184/iv-m077-death6.webp sha·등록
+FAIL ⑤ assets/r1184/md-31-timeless-silver-scout-death6.webp sha·등록
+FAIL ⑤ verify 접두
+FAIL ⑤ pages.yml
+FAILED 21/26
