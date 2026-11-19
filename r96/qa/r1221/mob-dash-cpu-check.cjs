@@ -46,6 +46,10 @@ if(exists){const code=fs.readFileSync(SRC,'utf8');
  ok('boss R52 charge kept but about half ('+B+' vs '+base.b+')',B>=Math.floor(base.b*.35)&&B<=Math.ceil(base.b*.6));
  ok('R286 dash ≥5x rarer ('+A+' vs '+base.a+')',A*5<=base.a&&A>=1);
  ok('ranged-role mob never R52-charges',cnt(g,'r','charge')===0);ok('ranged-role mob never R286-dashes',cnt(g,'ra','r286')===0);
+ // R1231: 근접 몹이 물러나 쏘는 단계(effRole==='ranged')에는 돌진하지 않는다(effRole 이 없으면 이름 역할만)
+ {const h=env();h.window.__STORYWORLD_DYS_RANGED_R1210__={roleFor:()=> 'melee',effRole:e=>e.phaseRanged?'ranged':'melee'};mob(h,{id:'ph',extra:{phaseRanged:true}});mob(h,{id:'pa',kind286:'attack-only',d:9,extra:{phaseRanged:true}});mob(h,{id:'pm'});run(h,180);
+  ok('effRole ranged phase never R52-charges',cnt(h,'ph','charge')===0);ok('effRole ranged phase never R286-dashes',cnt(h,'pa','r286')===0);ok('effRole melee still charges rarely ('+cnt(h,'pm','charge')+')',cnt(h,'pm','charge')>=1);}
+ {const h=env();h.window.__STORYWORLD_DYS_RANGED_R1210__={roleFor:()=> 'melee',effRole:e=>e.phaseRanged?'ranged':'melee'};const q=mob(h,{id:'pq',kind286:'attack-only',d:9,extra:{phaseRanged:true}});run(h,30);q.phaseRanged=false;run(h,120);ok('R286 dashes again after ranged phase ends ('+cnt(h,'pq','r286')+')',cnt(h,'pq','r286')>=1);}
  // 회귀(헤드리스 ep1b05): 이름만 '중간보스 ·' 이고 midboss 표시가 없는 몹도 보스 간격(절반)으로
  {const h=env();mob(h,{id:'mn',name:'중간보스 · 붉은 하이힐 칼날'});run(h,180);const c=cnt(h,'mn','charge');ok('name-only midboss uses boss gap ('+c+')',c>=Math.floor(base.m*.35)&&c<=Math.ceil(base.m*.6));}
  // 경계: 보스 2칸 안 휘두르기는 막지 않음

@@ -14,14 +14,15 @@
 //  점검: window.__STORYWORLD_MOB_DASH_R1221__.inspect()
 (()=>{'use strict';
 if(window.__STORYWORLD_MOB_DASH_R1221__)return;
-const REV='R1221-mob-dash-1',KEY='storyworld.r1221.dash',ORD_GAP=45,BOSS_GAP=15.4,R286_GAP=45,NEAR=2.6,TINY=1e-6,MARK='__r1221';
+const REV='R1221-mob-dash-2',KEY='storyworld.r1221.dash',ORD_GAP=45,BOSS_GAP=15.4,R286_GAP=45,NEAR=2.6,TINY=1e-6,MARK='__r1221';
 let prefs={on:true,ordinary:'rare'};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object')prefs={...prefs,...s};}catch(_){}
 const stats={r52Seen:0,r52Blocked:0,r52Allowed:0,r286Pushed:0,r286Started:0,rangedSkipped:0,rewraps:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const now=()=>{try{const t=typeof time==='number'?time:0;return Number.isFinite(t)?t:0;}catch(_){return 0;}};
 const major=e=>!!(e&&(e.boss||e.midboss||e.persona||e.cosmic||e.trial||e.samongBoss||e.combatProfile?.major||/중간보스/.test(String(e.name||''))));
 const hash=s=>{let h=2166136261;for(const c of String(s))h=Math.imul(h^c.charCodeAt(0),16777619);return (h>>>0)/4294967296;};
-function ranged(e){try{const f=window.__STORYWORLD_DYS_RANGED_R1210__?.roleFor;return typeof f==='function'&&f(String(e?.name||''))==='ranged';}catch(_){return false;}}
+// 원거리 역할(이름) 또는 R1231 지금 단계 역할(effRole: 근접 몹이 물러나 쏘는 단계)이 ranged 면 돌진하지 않는다
+function ranged(e){try{const R=window.__STORYWORLD_DYS_RANGED_R1210__;if(typeof R?.effRole==='function'&&R.effRole(e)==='ranged')return true;const f=R?.roleFor;return typeof f==='function'&&f(String(e?.name||''))==='ranged';}catch(_){return false;}}
 const S=new WeakMap();
 function rec(e){let r=S.get(e);if(!r){const t=now();S.set(e,r={seen:t,last:null,first:t+ORD_GAP*(.5+.5*hash(e.id??e.name)),last286:t-R286_GAP*.5*hash((e.id??e.name)+'d')});}return r;}
 // 지금 R52 돌진을 시작해도 되나
@@ -41,11 +42,14 @@ function wrapR52(){const o=window.__STORYWORLD_HOSPITAL_CHARGE_R52__;if(!o||type
 function r286(){if(!prefs.on)return;let list;try{list=room?.enemies;}catch(_){return;}if(!Array.isArray(list))return;const t=now();
  for(const e of list){if(!e||!(e.hp>0)||major(e))continue;const s=e.r286;
   if(!s){try{if(window.__STORYWORLD_MOB_MOTION_R286__?.kindOf?.(e)!=='attack-only')continue;}catch(_){continue;}
-   const r=rec(e);e.r286={mode:null,t0:0,nextDash:ranged(e)?t+1e6:t+R286_GAP*(.5+.5*hash(e.id??e.name)),nextShot:t+1.5+hash((e.id??'')+'s')*6.6,side:hash(e.id)<.5?1:-1};r.p286=true;continue;}
+   const r=rec(e),rg0=ranged(e);r.hold286=rg0;e.r286={mode:null,t0:0,nextDash:rg0?t+1e6:t+R286_GAP*(.5+.5*hash(e.id??e.name)),nextShot:t+1.5+hash((e.id??'')+'s')*6.6,side:hash(e.id)<.5?1:-1};r.p286=true;continue;}
   const r=rec(e);
   if(s.mode==='charge'||s.mode==='dash'){if(r.t0286!==s.t0){r.t0286=s.t0;r.last286=t;stats.r286Started++;}continue;}
   if(s.mode)continue;
-  const want=ranged(e)?t+1e6:r.last286+R286_GAP;if(!(s.nextDash>=want)){s.nextDash=want;stats.r286Pushed++;}}}
+  const rg=ranged(e),want=rg?t+1e6:r.last286+R286_GAP;
+  // 원거리 단계가 끝나면 걸어 둔 아주 먼 차례를 보통 간격으로 되돌린다
+  if(!rg&&r.hold286){r.hold286=false;s.nextDash=Math.max(want,t);continue;}if(rg)r.hold286=true;
+  if(!(s.nextDash>=want)){s.nextDash=want;stats.r286Pushed++;}}}
 function tickWrap(){if(typeof tick!=='function'||tick[MARK])return;const base=tick;
  const w=function(...a){try{wrapR52();r286();}catch(err){fail(err);}const res=base.apply(this,a);try{r286();}catch(err){fail(err);}return res;};
  Object.defineProperty(w,MARK,{value:true});try{tick=w;}catch(_){}try{window.tick=w;}catch(_){}}
