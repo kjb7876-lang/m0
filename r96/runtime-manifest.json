@@ -13533,6 +13533,16 @@
       "sha256": "22160085186637605ca8836691ff76612e9cefd34c083db2bf09ef558e62171b"
     },
     {
+      "path": "assets/r1233/mobs/index.json",
+      "bytes": 809,
+      "sha256": "6cf40d639c9d5b8792111d871d7b160383bae1a9cb6d744f05f4955adabe7fed"
+    },
+    {
+      "path": "assets/r1233/mobs/m044.webp",
+      "bytes": 294772,
+      "sha256": "b00c706781ebabfb8571dde9763eb80e68d6b899ec75ce374b983b9a76cc410f"
+    },
+    {
       "path": "assets/r126/props/badge.webp",
       "bytes": 25464,
       "sha256": "fd12f3e8efd3654d060607145cbd6f6f55728f7fd65afd5a9f4d3d1507ae0281"
@@ -55899,8 +55909,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6582601,
-      "sha256": "35e2e108e4122cb883241936b2d097d75def00ae01cbf25a5bbea4fde53ddfb3"
+      "bytes": 6582652,
+      "sha256": "35566139ae753e4737e518747c92fa0d8205950cf4b88601cf808ba07481ff0a"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -56086,6 +56096,11 @@
       "path": "mob-art-r410.js",
       "bytes": 6184,
       "sha256": "c97fc9ebbb23e98ad7771d6efa582edf02fb3442a01edb97d72eb12a841fae81"
+    },
+    {
+      "path": "mob-art-restore-r1233.js",
+      "bytes": 8574,
+      "sha256": "8c7e10e57fa0a789f9426f086349d29c9351927fd082138025ed28a0e74c060b"
     },
     {
       "path": "mob-art-variants-r306-data.js",
@@ -57338,9 +57353,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11467,
-  "totalBytes": 1372077124,
-  "webHTMLSha256": "35e2e108e4122cb883241936b2d097d75def00ae01cbf25a5bbea4fde53ddfb3",
+  "fileCount": 11470,
+  "totalBytes": 1372381330,
+  "webHTMLSha256": "35566139ae753e4737e518747c92fa0d8205950cf4b88601cf808ba07481ff0a",
   "largest": [
     {
       "path": "index.html",

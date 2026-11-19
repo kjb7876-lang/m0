@@ -527,6 +527,8 @@ jobs:
         run: node r96/qa/r1206b/r1206b-cpu-check.cjs
       - name: R1206c samong ink bloom warning sheet from Dots CPU check
         run: node r96/qa/r1206c/r1206c-cpu-check.cjs
+      - name: R1233 temporary R248 name sheets yield to samong shades and approved art (S-05·S-01·dream ep1a10·ep1a11) CPU check
+        run: node r96/qa/r1233/r1233-cpu-check.cjs
       - name: R976 samong first region pixel art to painted assets CPU check
         run: node r96/qa/r976/r976-cpu-check.cjs
       - name: R1177 samong episode pixel leftovers (S-06 pixel mobs, pixelfx sheets) to painted art CPU check
