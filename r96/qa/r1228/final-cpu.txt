@@ -1,0 +1,18 @@
+PASS phase1 createController 원문을 찾음
+PASS three-recover-r1228.js 있음
+PASS index.html: phase1 → R221 → (R171) → R1228 순서 {"iP":4022733,"iF":4022780,"iR":4022874}
+PASS R1228 이 컨트롤러 만들기 전에 읽힘
+PASS 정상: 3D 로 5번 그림 {"requested":"three","requiredThree":true,"active":"three","reason":"Full compiled region path / eight heroes and preserved EGO; GPU unverified","failed":false,"disposed":false,"legacyFrames":0,"events":[],"chunks":null,"metrics":null,"commandScene":null,"spatial":null,"browserAcceptance":false}
+PASS 정상: 실패 알림 없음
+PASS 예외 1번: 그 자리에서 실패 상태로 남지 않음(PC 테스트가 멈추지 않음) {"failed":false,"reason":"R1228 3D 다시 시작 중 · Nonfinite original draw command"}
+PASS 예외 1번: 3D 다시 시작해 그림 {"active":"three","created":2}
+PASS 새 캔버스·새 렌더러로 다시 만듦 {"created":2,"canvases":2}
+PASS 예외 1번: "PC 테스트를 중단" 알림 없음 []
+PASS 복구 횟수·마지막 이유 기록 {"revision":"R1228-recover-1","wrapped":true,"failures":1,"recovered":1,"gaveUp":0,"last":"Nonfinite original draw command","recent":1,"stored":[]}
+PASS 1분 안 3번 예외: 모두 복구 {"created":4}
+PASS 4번째: 포기하고 알림 1번 {"failed":true,"n":1}
+PASS 61초 뒤 예외는 다시 복구 {"failed":false}
+PASS 다시 만들기 계속 실패: 알림 1번으로 끝 {"n":1,"failed":true}
+PASS WebGL2 없음: 바로 알림 {"n":1}
+PASS 포기 때 상태 줄에 이유를 붙임
+17/17 passed
