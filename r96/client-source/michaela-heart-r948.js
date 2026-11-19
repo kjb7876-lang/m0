@@ -18,8 +18,9 @@
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_MICHAELA_HEART_R948__)return;
 const REV='R948-heart-6',KEY='storyworld.r948.heart',HERO='michaela';
-const CHANCE=.11,CROWD_BONUS=.04,CROWD_N=4,CROWD_R=2,CHANCE_MAX=.35,ROLL_GAP=.35,ICD=5;
+const CHANCE=.11,CROWD_BONUS=.04,CROWD_N=4,CROWD_R=2,CHANCE_MAX=.777,ROLL_GAP=.35,ICD=5;
 const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
+const M1207=h=>{try{const v=window.__STORYWORLD_PASSIVE_GROWTH_R971__?.damage?.(h);return Number.isFinite(v)&&v>0?Math.min(1,v):1;}catch(_){return 1;}};/* R1207 확률 상향만큼 고정 피해 배율(체력 비례 피해에는 안 씀) */
 const U1025=(h,a,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__,v=u&&u.mask(h,a,k);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},S1025=h=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.share(h);return Number.isFinite(v)?Math.max(0,Math.min(1,v)):1;}catch(_){return 1;}},W1025=(h,w)=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.weights(h,w);return v||w;}catch(_){return w;}},A1025=(h,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.unlocked(h,k)!==false:true;}catch(_){return true;}},O1025=id=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.summonOpen(id)!==false:true;}catch(_){return true;}};/* R1025 특수 패시브 레벨별 해금·소환 영웅 서사 확인(파일 없으면 원래 값) */
 const C1033=(h,k,o,x)=>{try{window.__STORYWORLD_PASSIVE_CUTIN_R1033__?.fire(h,k,o,x);}catch(_){}};/* R1033 세 번째 특수 패시브 컷인(1·2단·몸·끔은 그쪽에서 거름) */
 const WEIGHTS=[['volley',.55],['tower',.30],['bloom',.15]];
@@ -62,7 +63,7 @@ function bodyR(e){return e.combatProfile?.bodyBlock?.r||e.radius||.27;}
 function surge(kind,v){try{const g=window.__STORYWORLD_SAMONG_SURGE_R571__;if(g&&typeof g[kind]==='function'&&(!g.active||g.active())){const r=Number(g[kind](v));if(Number.isFinite(r)&&r>0)return r;}}catch(_){}return v;}
 function play(k){try{if(typeof sound==='function')sound(k);}catch(_){}}
 function shakeBy(v){try{if(typeof shake==='number')shake=Math.max(shake,v);}catch(_){}}
-function deal(e,v,kind){if(!e||hiddenActor(e)||!canHit(e)||!(v>0))return false;inner++;try{const r=hitEnemy(e,v,{kind:'r948-'+kind,friendly:true,owner:'hero',sourceHero:HERO,r948:true});if(r!==false)stats.hits++;return r;}catch(err){fail(err);return false;}finally{inner--;}}
+function deal(e,v,kind){if(!e||hiddenActor(e)||!canHit(e)||!(v>0))return false;inner++;try{const r=hitEnemy(e,v*M1207(HERO),{kind:'r948-'+kind,friendly:true,owner:'hero',sourceHero:HERO,r948:true});if(r!==false)stats.hits++;return r;}catch(err){fail(err);return false;}finally{inner--;}}
 function stateOf(o){let s=owners.get(o);if(!s){s={lastRoll:-1e9,readyAt:-1e9};owners.set(o,s);ownerCount++;}return s;}
 function preload(){if(preloaded)return;preloaded=true;try{if(typeof addImage==='function'&&typeof readyImage==='function')for(const p of [...ORGEL,FLY,HIT,BURST,M03,M04,M07,M10,M10A,M10B,M05])if(!readyImage(p))addImage(p);}catch(err){fail(err);}}
 // ---- 홀림(엔진 moveActor, 벽 존중) ----------------------------------------------------------------
