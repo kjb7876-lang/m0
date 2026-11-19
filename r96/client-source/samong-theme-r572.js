@@ -127,10 +127,10 @@ function drawMarks(){prune();if(!marks.length)return;stats.markPasses++;const t=
  if(typeof ctx.scope==='function')ctx.scope({id:'r572:marks',kind:'effect',x:P()?.x||0,y:P()?.y||0,groundAligned:false,r572:true},go);else go();}
 // R1199(사용자 2026-11-19 사몽 각성 렉): 분신(R945 칠묵영 7체·R113 잔상 등)은 영웅 그리기(drawHero)를 안에서 다시 부른다(깊이 ≥1).
 //  ① 적중 문양은 맵에 한 벌이라 바깥(깊이 0) 그리기에서만 그린다 — 예전엔 분신 그리기마다 같은 자리에 다시 그려 무한생존 사몽에서 장면당 15번(JS 약 14ms).
-//  ② 분신의 몸 문양은 성능 7단계 4 이하에서 생략(5~7 그대로).
+//  ② 분신의 몸 문양은 성능 7단계 5(기본·자동) 이하에서 생략(6~7 그대로, 사용자 2026-11-19 결정).
 let depth=0;
 const perfStep=()=>{try{const n=Number(window.__STORYWORLD_PERF7_R1043__?.step?.());return Number.isFinite(n)?n:5;}catch(_){return 5;}};
-try{if(typeof drawHero==='function'){const b=drawHero;drawHero=function(...args){const p=P(),nested=depth>0,on=!!(p&&active(p)&&typeof ctx!=='undefined'&&ctx&&typeof project==='function')&&!(nested&&perfStep()<=4);
+try{if(typeof drawHero==='function'){const b=drawHero;drawHero=function(...args){const p=P(),nested=depth>0,on=!!(p&&active(p)&&typeof ctx!=='undefined'&&ctx&&typeof project==='function')&&!(nested&&perfStep()<=5);
  if(nested&&!on&&p&&active(p))stats.cloneSkips++;
  if(on)try{motif(p,'back');}catch(e){fail(e);}let r;depth++;try{r=b.apply(this,args);}finally{depth--;}
  if(on)try{motif(p,'front');}catch(e){fail(e);}if(!nested)try{if(typeof ctx!=='undefined'&&ctx&&typeof project==='function')drawMarks();}catch(e){fail(e);}return r;};}}catch(e){fail(e);}

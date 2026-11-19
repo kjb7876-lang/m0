@@ -4,7 +4,7 @@
 //   R571 불꽃 오라 앞·뒤를 15번씩 그려 이 셋만 장면당 JS 약 26ms(장면 명령 1,461개 중 R572 문양 345·R571 오라 541).
 //  사몽은 확률 ×1.77 이라 칠묵영(6%→10.6%) 같은 분신 패시브가 더 자주 터져 각성 때 특히 심해진다.
 //  규칙: ① 적중 문양은 맵에 한 벌이므로 바깥(조종 영웅) 그리기 한 번에만 그린다(분신 그리기 안에서는 안 그림). 화면 결과는 같은 자리 겹그리기만 빠진다.
-//   ② 분신의 사몽 장식(R571 오라·R572 몸 문양)은 성능 7단계 4 이하에서 생략, 5~7 은 그대로(기본 5 의 화면은 그대로).
+//   ② 분신의 사몽 장식(R571 오라·R572 몸 문양)은 성능 7단계 5(기본·자동) 이하에서 생략, 6~7 은 그대로(사용자 2026-11-19 05:38Z 결정).
 const fs=require('fs'),path=require('path'),vm=require('vm');
 const R=path.join(__dirname,'..','..'),SRC=path.join(R,'client-source'),RT=path.join(R,'runtime-text');
 let n=0,bad=0;const ok=(c,m)=>{n++;if(!c){bad++;console.log('FAIL',m);}else console.log('PASS',m);};
@@ -30,10 +30,10 @@ const marks0=s.T.inspect().marks;ok(marks0>=1,'적중 문양이 쌓임('+marks0+
 const st=()=>({mp:s.T.inspect().stats.markPasses,mo:s.T.inspect().stats.motifs,au:s.S.inspect().stats.auraDraws});
 let a=st();s.frame(0);let b=st();ok(b.mp-a.mp===1,'분신 없음: 적중 문양 장면당 1번('+(b.mp-a.mp)+')');
 a=st();s.frame(14);b=st();ok(b.mp-a.mp===1,'분신 14번 그리기: 적중 문양은 여전히 장면당 1번('+(b.mp-a.mp)+')');
-ok(b.au-a.au===30&&b.mo-a.mo===30,'성능 단계 없음(기본): 분신 오라·몸 문양은 그대로(오라 '+(b.au-a.au)+'·문양 '+(b.mo-a.mo)+' = 15벌×앞뒤)');
-for(const step of [5,6,7]){s=stage({step});a=st();s.frame(14);b=st();ok(b.au-a.au===30&&b.mo-a.mo===30&&b.mp-a.mp===1,'성능 '+step+'단계: 분신 장식 그대로, 문양 1번(오라 '+(b.au-a.au)+')');}
-for(const step of [1,4]){s=stage({step});a=st();s.frame(14);b=st();ok(b.au-a.au===2&&b.mo-a.mo===2&&b.mp-a.mp===1,'성능 '+step+'단계: 분신의 사몽 오라·몸 문양 생략, 조종 영웅만(오라 '+(b.au-a.au)+'·문양 '+(b.mo-a.mo)+')');}
-s=stage({step:4});a=st();s.frame(0);b=st();ok(b.au-a.au===2&&b.mo-a.mo===2,'성능 4단계라도 분신이 없으면 조종 영웅 장식은 그대로');
+ok(b.au-a.au===2&&b.mo-a.mo===2,'성능 단계 없음(기본 5): 분신 오라·몸 문양 생략, 조종 영웅만(오라 '+(b.au-a.au)+'·문양 '+(b.mo-a.mo)+' = 1벌×앞뒤)');
+for(const step of [6,7]){s=stage({step});a=st();s.frame(14);b=st();ok(b.au-a.au===30&&b.mo-a.mo===30&&b.mp-a.mp===1,'성능 '+step+'단계: 분신 장식 그대로, 문양 1번(오라 '+(b.au-a.au)+')');}
+for(const step of [1,4,5]){s=stage({step});a=st();s.frame(14);b=st();ok(b.au-a.au===2&&b.mo-a.mo===2&&b.mp-a.mp===1,'성능 '+step+'단계: 분신의 사몽 오라·몸 문양 생략, 조종 영웅만(오라 '+(b.au-a.au)+'·문양 '+(b.mo-a.mo)+')');}
+s=stage({step:5});a=st();s.frame(0);b=st();ok(b.au-a.au===2&&b.mo-a.mo===2,'성능 5단계라도 분신이 없으면 조종 영웅 장식은 그대로');
 // 분신 그리기 도중 예외가 나도 깊이가 돌아온다
 s=stage();s.run(`var boom=true;`);const dh=s.sb.drawHero;let threw=false;s.sb.clones=0;
 try{s.run(`(function(){const b=drawHero;drawHero=function(){if(boom){boom=false;throw new Error('x');}return b.apply(this,arguments);};})();`);s.run('drawHero()');}catch(_){threw=true;}

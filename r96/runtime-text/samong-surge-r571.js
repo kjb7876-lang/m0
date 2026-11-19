@@ -140,10 +140,10 @@ function aura(p,layer){const q=project(p.x,p.y),Z=typeof zoom==='number'?zoom:1,
  }finally{ctx.restore();}};
  if(typeof ctx.scope==='function')ctx.scope({id:'r571:aura-'+layer+':'+String(p.coopIdR62||'hero'),kind:'effect',x:p.x,y:p.y,groundAligned:false,r571:true},draw);else draw();
  stats.auraDraws++;}
-// R1199(사몽 각성 렉): 분신(R945 칠묵영 7체 등)이 drawHero 를 안에서 다시 부르면(깊이 ≥1) 그 분신에도 오라를 그린다 — 성능 7단계 4 이하에서는 분신 오라를 생략(5~7 그대로).
+// R1199(사몽 각성 렉): 분신(R945 칠묵영 7체 등)이 drawHero 를 안에서 다시 부르면(깊이 ≥1) 그 분신에도 오라를 그린다 — 성능 7단계 5(기본·자동) 이하에서는 분신 오라를 생략(6~7 그대로, 사용자 2026-11-19 결정).
 let heroDepth=0;
 const perfStep=()=>{try{const n=Number(window.__STORYWORLD_PERF7_R1043__?.step?.());return Number.isFinite(n)?n:5;}catch(_){return 5;}};
-wrapGlobal('drawHero',b=>function(...a){const p=P(),nested=heroDepth>0,on=!!(prefs.aura&&active(p)&&typeof ctx!=='undefined'&&ctx&&typeof project==='function')&&!(nested&&perfStep()<=4);
+wrapGlobal('drawHero',b=>function(...a){const p=P(),nested=heroDepth>0,on=!!(prefs.aura&&active(p)&&typeof ctx!=='undefined'&&ctx&&typeof project==='function')&&!(nested&&perfStep()<=5);
  if(!on&&p&&!nested)starts.delete(p);
  if(on)try{aura(p,'back');}catch(e){fail(e);}let r;heroDepth++;try{r=b.apply(this,a);}finally{heroDepth--;}if(on)try{aura(p,'front');}catch(e){fail(e);}return r;});
 

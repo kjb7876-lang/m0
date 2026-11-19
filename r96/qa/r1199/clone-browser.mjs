@@ -1,6 +1,6 @@
 // R1199 ② 브라우저 검사(헤드리스, 소프트웨어 렌더링): 사몽 중 환도 칠묵영 분신 7체를 띄우고 장면당 그리기 횟수를 센다.
 //  기대: 적중 문양(R572 markPasses) 장면당 1번(분신 수와 무관), 성능 5단계는 분신 오라 그대로(R571 auraDraws 장면당 > 2), 4단계는 조종 영웅만(장면당 2).
-//  STEP=4|5 (기본 5). GPU·실기기·자연 플레이 아님.
+//  STEP=5|6 (기본 5). GPU·실기기·자연 플레이 아님.
 import {chromium,boot,skip} from '../r444/lib.mjs';
 const STEP=+(process.env.STEP||5);
 const b=await chromium.launch();const {p}=await boot(b,{vp:{width:640,height:360},init:{'storyworld.r1043.perf7':JSON.stringify({step:STEP})}});
@@ -19,7 +19,7 @@ let n=0,bad=0;const ok=(c,m)=>{n++;if(!c)bad++;console.log(c?'PASS':'FAIL',m);};
 console.log(JSON.stringify(r));
 ok(r.casts>0&&r.cloneDrawsPerFrame>=7&&r.samong>0,'사몽 중 분신이 떠 있음(분신 그리기 장면당 '+r.cloneDrawsPerFrame+')');
 ok(r.markPassesPerFrame<=1.05,'적중 문양 장면당 1번 이하('+r.markPassesPerFrame+')');
-if(STEP<=4)ok(r.auraPerFrame<=2.05,'성능 '+STEP+'단계: 분신 오라 생략 — 오라는 조종 영웅 앞·뒤만(장면당 '+r.auraPerFrame+')');
+if(STEP<=5)ok(r.auraPerFrame<=2.05,'성능 '+STEP+'단계: 분신 오라 생략 — 오라는 조종 영웅 앞·뒤만(장면당 '+r.auraPerFrame+')');
 else ok(r.auraPerFrame>2.5,'성능 '+STEP+'단계: 분신 오라 그대로(장면당 '+r.auraPerFrame+')');
 ok(!errs.length,'페이지 오류 없음 '+JSON.stringify(errs.slice(0,3)));
 console.log(`R1199 clone browser STEP=${STEP} ${n-bad}/${n}`);await b.close();process.exit(bad?1:0);
