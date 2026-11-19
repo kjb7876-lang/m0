@@ -13518,6 +13518,11 @@
       "sha256": "e021a81970af6fdcc705b6c68d3912ad340cff2478bea728b0370a3b279c98e9"
     },
     {
+      "path": "assets/r1221/side/kair-guardian-24-side.webp",
+      "bytes": 162238,
+      "sha256": "4d150fa6d70e076c533c70fbf26a2e61776286c3cf96537a403af7d208153b15"
+    },
+    {
       "path": "assets/r1221/side/kair-guardian-34-side.webp",
       "bytes": 130220,
       "sha256": "8e23bf847481341d9885d9ce677592e507fb82c9535a9b2d70f046707cd59c9c"
@@ -56319,8 +56324,8 @@
     },
     {
       "path": "move-side-r1221-data.js",
-      "bytes": 4483,
-      "sha256": "a3120aedf1a5e0c9347aed6a66952a7847e6bfcb8439c2ba82b12e6b0a90bec5"
+      "bytes": 4782,
+      "sha256": "e18c34d85e2a3d22216d6b742f7154d0b9e40e520d1edf83d553eb5acae68c46"
     },
     {
       "path": "music-box-r378.js",
@@ -57348,8 +57353,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11469,
-  "totalBytes": 1373325415,
+  "fileCount": 11470,
+  "totalBytes": 1373487952,
   "webHTMLSha256": "7436034cc2a37221a83b2214a468d8a9022acfe552586c606553989d07caa911",
   "largest": [
     {

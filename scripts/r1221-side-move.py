@@ -23,7 +23,7 @@ TARGETS=[
 ]
 # (열쇠, 적 nativeId 들, 대상 그림, Dots 시트 파일 이름) — Dots 시트는 왼쪽을 본다
 GV='generated-v3125/kair-guardians/guardian_%s.webp'
-DOTS=[('kair-guardian-%s'%n,['kair-guardian-%s'%n],[(GV%n,[[0,0,192,192]])],'CX-0169SW_guardian_%s_walkL_r1_ROUGH.png'%n) for n in ['34','40','05','07','08','10','13','16','15','20']]
+DOTS=[('kair-guardian-%s'%n,['kair-guardian-%s'%n],[(GV%n,[[0,0,192,192]])],'CX-0169SW_guardian_%s_walkL_r1_ROUGH.png'%n) for n in ['34','40','05','07','08','10','13','16','15','20','24']]
 SWAY=.75
 def idle_list(site,arts):
   idles=[];im0=None

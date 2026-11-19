@@ -484,6 +484,45 @@
    "sha256": "e021a81970af6fdcc705b6c68d3912ad340cff2478bea728b0370a3b279c98e9",
    "applied": true,
    "final": false
+  },
+  {
+   "key": "kair-guardian-24",
+   "enemies": [
+    "kair-guardian-24"
+   ],
+   "dir": "side",
+   "source": "Dots CX-0169SW_guardian_24_walkL_r1_ROUGH.png",
+   "sourceSha256": "f3d2f1c3c78e22d28894aeb98a9c255c952f271426c1b8fad72114f53e292760",
+   "sourceFacing": "left",
+   "flippedIntoSheet": true,
+   "frames": 8,
+   "torsoSwayPx": 20.9,
+   "shiftsPx": [
+    6,
+    -9,
+    -7,
+    6,
+    0,
+    -8,
+    -9,
+    3
+   ],
+   "use": "옆 이동(왼쪽=Dots 원본 방향, 오른쪽=좌우반전)",
+   "note": "Dots CX-0169SW _ROUGH, 사용자 승인 10종. 몸통 흔들림 75% 보정·색 맞춤만",
+   "toneGain": [
+    0.75,
+    0.831,
+    0.82
+   ],
+   "path": "assets/r1221/side/kair-guardian-24-side.webp",
+   "size": [
+    3072,
+    384
+   ],
+   "bytes": 162238,
+   "sha256": "4d150fa6d70e076c533c70fbf26a2e61776286c3cf96537a403af7d208153b15",
+   "applied": true,
+   "final": false
   }
  ]
 }
