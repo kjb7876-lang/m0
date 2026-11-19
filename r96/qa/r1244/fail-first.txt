@@ -1,0 +1,3 @@
+FAIL cinema-cutin-r1244.js 있음
+{"total":1,"failed":1,"method":"node vm + tiny fake DOM; real game run by r1244-browser.mjs (headless)"}
+FAIL ④ 표식 확인형 감싸기(R1046)와 20번 번갈아도 겹침 고정(다시 감싸기 ≤1, 내 감싸기 ≤2) :: {"rewraps":20,"calls":1,"awake":1}

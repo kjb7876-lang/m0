@@ -1,0 +1,13 @@
+import {chromium,boot,go} from '../r444/lib.mjs';
+const b=await chromium.launch();const {p}=await boot(b,{vp:{width:960,height:540}});
+await go(p,'dist06');await p.evaluate(async()=>{const B=room.enemies.find(e=>e.boss);player.x=B.x+3;player.y=B.y+1.5;room.engaged=true;const t0=time;await new Promise(r=>{const g=()=>{if(time-t0>2)return r();setTimeout(g,150);};g();});});
+await go(p,'ep1a09b');
+const r=await p.evaluate(async()=>{const B=room.enemies.find(e=>e.boss&&/발록/.test(e.name))||room.enemies.find(e=>/발록/.test(e.name||''));for(const e of room.enemies)if(e!==B&&!/발록/.test(e.name||''))e.hp=0;
+ player.x=B.x+3;player.y=B.y+1.5;room.engaged=true;B.spawnState='active';B.visible=true;B.disabled=false;B.hp=B.maxHp=1e8;
+ setInterval(()=>{try{player.hp=maxHP();player.invincible=99;if(modal&&!storyScene)closePanel(true);if(storyScene)advanceScene();}catch(_){}},250);
+ const three=window.__STORYWORLD_PHASE1__.controller.state.three,base=three.render;const rows=[];const t0=time;const own='enemy:'+B.id;
+ three.render=function(f){const pre=(f.commands||[]).filter(c=>c.owner?.id===own).map(c=>c.kind+':'+String(c.sourcePath||'').split('/').slice(-1)[0].slice(0,30)+(c.r1229Fit?'#':''));const rr=base.apply(this,arguments);const cs=f.commands||[];const mine=cs.filter(c=>c.owner?.id===own);const q=project(B.x,B.y);
+  const tall=mine.filter(c=>c.kind==='image'&&c.points).sort((a,b)=>Math.abs(b.points[3][1]-b.points[0][1])-Math.abs(a.points[3][1]-a.points[0][1]))[0];rows.push({pre,tall:tall?{sp:tall.sourcePath===undefined?'UNDEF':String(tall.sourcePath).slice(-60),r:tall.r1229,h:Math.abs(tall.points[3][1]-tall.points[0][1])|0,key:String(tall.key||'').slice(0,60)}:null,t:+(time-t0).toFixed(2),n:mine.length,img:mine.filter(c=>c.kind==='image').map(c=>String(c.sourcePath||'').split('/').slice(-1)[0].slice(0,40)+(c.r1229?'*':'')).slice(0,4),q:[q.x|0,q.y|0],vis:B.visible,sp:B.spawnState,hp:B.hp>0,ids:[...new Set(cs.filter(c=>/enemy/.test(c.owner?.kind||'')).map(c=>c.owner.id))].slice(0,4)});return rr;};
+ await new Promise(r=>{const g=()=>{if(time-t0>12)return r();setTimeout(g,150);};g();});three.render=base;return {rows,id:B.id,name:B.name,st:window.__STORYWORLD_MOTION_FX_R1229__.inspect()};});
+const miss=r.rows.filter(x=>!x.tall||x.tall.sp==='UNDEF'||x.tall.sp==='null');console.log(r.id,r.name,'rows',r.rows.length,'miss',miss.length);console.log(JSON.stringify(miss.slice(0,6)));console.log(JSON.stringify(r.rows.slice(0,3)));console.log(JSON.stringify(r.st.stats),r.st.lastError);
+await b.close();

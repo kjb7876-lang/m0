@@ -133,7 +133,7 @@ const portraitOn=()=>G(()=>localStorage.getItem(KEY_P),null)!=='0';
 function wrapAwake(){try{if(typeof showAwakening!=='function'||showAwakening.r1033)return;const base=showAwakening;
   const w=function(...a){let art=null,old;try{const h=G(()=>player.hero,null);art=G(()=>heroArt[h],null);if(art&&HEROES_ALL.includes(h)&&!personaForm()&&portraitOn()&&!egoForm()){old=art.awakening;art.awakening=BUST(h);}else art=null;}catch(e){fail(e);art=null;}
    try{return base.apply(this,a);}finally{if(art){art.awakening=old;try{mark(G(()=>player.hero,''));}catch(e){fail(e);}}}};
-  w.r1033=true;showAwakening=w;}catch(e){fail(e);}}
+  /* R1244: 아래 감싸기 표식 옮겨 달기(R1217 이 다시 감싸지 않게) */for(const k of Object.keys(base))if(/^_*r\d+/i.test(k))try{w[k]=base[k];}catch(_){}w.r1033=true;showAwakening=w;}catch(e){fail(e);}}
 // R1112: 히든 EGO 형상(몸은 환도)일 때는 환도 초상으로 바꾸지 않는다 — EGO 컷인 원화는 R1046 이 넣는다(RC151 변신 중은 그쪽 컷인).
 const egoForm=()=>G(()=>!!window.__STORYWORLD_EGO_SOVEREIGN_R1046__?.formActive?.()&&!(typeof ego151!=='undefined'&&ego151?.active),false);
 // R1174: 페르소나 형상(라우렌 몸)일 때도 라우렌 초상으로 바꾸지 않는다 — 페르소나 각성 그림은 persona-cutin-r1174 가 넣는다.

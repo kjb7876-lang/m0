@@ -161,7 +161,7 @@ function wrapAwake(){if(typeof showAwakening!=='function'||showAwakening.__r1112
   finally{if(art)art.awakening=old;
    if(ego&&hasDoc()){try{stats.awake=(stats.awake||0)+1;const im=document.getElementById('awakeImage');if(im){if(im.getAttribute('src')!==url(P.cutin.image))im.src=url(P.cutin.image);im.removeAttribute('data-r1033');}
     const h=document.getElementById('awakeHero');if(h&&!h.textContent.startsWith(AWAKE_NAME))h.textContent=h.textContent.replace(/^[^·]*/,AWAKE_NAME+' ');}catch(e){fail(e);}}}};
- w.__r1112=true;showAwakening=w;}
+ /* R1244: 아래 감싸기들의 표식을 옮겨 단다 — 안 옮기면 R1217(16ms)·R1046(500ms)이 서로를 다시 감싸 1초에 2겹씩 끝없이 쌓였다 */for(const k of Object.keys(base))if(/^_*r\d+/i.test(k))try{w[k]=base[k];}catch(_){}w.__r1112=true;showAwakening=w;}
 function registerGameHooks() {
  window.__STORYWORLD_POST_HOOKS__.register('__r1046', {
   tick() { step(); ui(); },
@@ -217,7 +217,7 @@ function inject(){const panel=document.getElementById('panel');if(!panel)return;
   if(!c){c=card(h,start);/* R1048: 사용자 11-15 11:56Z — EGO 각성은 0번째 영웅(히든 해금 칸) → 영웅 줄 맨 앞 */const first=[...row.children].find(x=>x.matches?.('[data-hero]'))||h;first.insertAdjacentElement('beforebegin',c);}}
  mark();}
 function onClick(ev){try{const el=ev.target?.closest?.('#panel [data-hero],#chooseHero,#slotConfirmR73');if(!el)return;
- if(el.id==='chooseHero'||el.id==='slotConfirmR73'){const sel=document.querySelector('#panel [data-ego-r1046].selected');commit=!!(sel&&want);if(commit)stats.chosen=(stats.chosen||0)+1;return;}
+ if(el.id==='chooseHero'||el.id==='slotConfirmR73'){/* R1240: EGO 칸을 누르면 엔진이 창을 다시 그려 EGO 칸이 잠깐(주기 점검 전) 없다 — 그 사이 확정해도 EGO 의도(want)+기본 영웅 선택이면 EGO */const sel=document.querySelector('#panel [data-ego-r1046].selected')||(want&&document.querySelector('#panel [data-hero="'+P.base+'"].selected'));commit=!!(sel&&want);if(commit)stats.chosen=(stats.chosen||0)+1;return;}
  if(!synthetic&&!ev.target.closest('[data-ego-r1046]'))want=false;}catch(e){fail(e);}}
 function cutin(){if(!cutinQueued||!hasDoc())return;if(G(()=>loading||storyScene||modal,true))return;if(document.getElementById('r1046Cutin'))return;cutinQueued=false;stats.cutins++;css();
  const d=document.createElement('div');d.id='r1046Cutin';d.innerHTML='<b>'+P.title+'</b><img alt="EGO"><p></p>';d.querySelector('img').src=url(P.cutin.image);d.querySelector('p').textContent=P.cutin.caption;
