@@ -35,8 +35,8 @@ const Z=()=>typeof zoom==='number'?zoom:1;
 
 // ---- preferences ----------------------------------------------------------------------------
 const KEY=(window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.hospital-three-pc.maze.v11:')+'r111.play';
-const DEFAULTS=Object.freeze({facing:true,resonance777:true,egoAura:true,threadArt:true,props:true,ranged:true,guard:true,samong:true,shots:true,bossRoot:true});
-const LABELS={facing:'전투 중 이동해도 적 바라보기',resonance777:'공명 777 표시·빨리 차기',egoAura:'EGO 불꽃 오라',threadArt:'실검무 은빛 오라·베기 그림',props:'조형물 벽 간격·그림자 접지',ranged:'원거리 영웅: E 회피·사거리 상향·자동 회피 (다시 불러오면 적용)',guard:'D 공명 방어: 피해 77% 감소·초당 7% 회복·빛 연출',samong:'사몽 각성: 주인공만 색·나머지 흑백·영웅색 폭풍 선·일반 몹 현재 체력 77%',shots:'아군 투사체: 무기 끝에서 시작·기본 탄 크게',bossRoot:'보스 속박: 보스 고유색·기계 보스는 전선 촉수'};
+const DEFAULTS=Object.freeze({facing:true,resonance777:true,egoAura:true,threadArt:true,props:true,ranged:true,guard:true,samong:true,shots:true,bossRoot:true,samongPrewarm:true});
+const LABELS={samongPrewarm:'사몽 흑백 그림 미리 만들기(각성 첫 장면 렉 줄임)',facing:'전투 중 이동해도 적 바라보기',resonance777:'공명 777 표시·빨리 차기',egoAura:'EGO 불꽃 오라',threadArt:'실검무 은빛 오라·베기 그림',props:'조형물 벽 간격·그림자 접지',ranged:'원거리 영웅: E 회피·사거리 상향·자동 회피 (다시 불러오면 적용)',guard:'D 공명 방어: 피해 77% 감소·초당 7% 회복·빛 연출',samong:'사몽 각성: 주인공만 색·나머지 흑백·영웅색 폭풍 선·일반 몹 현재 체력 77%',shots:'아군 투사체: 무기 끝에서 시작·기본 탄 크게',bossRoot:'보스 속박: 보스 고유색·기계 보스는 전선 촉수'};
 const prefs={...DEFAULTS};
 try{const saved=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(DEFAULTS))if(typeof saved?.[k]==='boolean')prefs[k]=saved[k];}catch(_){}
 function set(patch={}){for(const k of Object.keys(DEFAULTS))if(typeof patch[k]==='boolean')prefs[k]=patch[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
@@ -203,18 +203,43 @@ function guardFront(p,S){const {x,y,h}=heroFoot(p),age=time-guardState.at,open=c
 // three 기록기는 ctx.filter를 무시하므로, 각성 동안 영웅·이펙트·투사체가 아닌 그림(바닥·벽·조형물·몹·그림자)은
 // 미리 흑백으로 만든 사본 캔버스로 바꿔 넘기고(정적 원본 표시를 달아 매 프레임 복사하지 않게), 채움·선 색도 회색으로 바꾼다.
 const SAMONG_CUT=.77,GRAY_KEEP=new Set(['hero','effect','projectile']);
-const samongState={on:false,grayImages:0,grayPixels:0,grayFills:0,cuts:0,cutDamage:0,bossSkips:0,lines:0};
+const samongState={on:false,grayImages:0,grayPixels:0,grayFills:0,cuts:0,cutDamage:0,bossSkips:0,lines:0,prewarmMade:0,prewarmUploaded:0,prewarmQueued:0};
 let grayMap=new WeakMap(),grayList=[],grayBudget=0;
 const samongOn=()=>{try{return !!(prefs.samong&&live()&&window.__STORYWORLD_SAMONG_R75__?.active?.());}catch(_){return false;}};
 function grayOf(image){if(!image)return null;const got=grayMap.get(image);if(got)return got;
  const mutable=typeof image.getContext==='function'&&!image.__storyworldStaticSource&&!image.__storyworldStaticTint;if(mutable)return null;
  const w=image.naturalWidth||image.width,h=image.naturalHeight||image.height;if(!(w>0&&h>0))return null;
+ if(pend&&pend.im===image){const left=(h-pend.y)*w;if(grayBudget<=0)return null;grayBudget-=left;try{pend.g.drawImage(image,0,pend.y,w,h-pend.y,0,pend.y,w,h-pend.y);const c=pend.c;pend=null;return grayDone(image,c,w,h);}catch(e){pend=null;fail(e);return null;}}/* R1199: 예열하다 만 사본은 나머지 줄만 */
  if(grayBudget<=0||samongState.grayPixels+w*h>(lowFx()?12e6:28e6))return null;grayBudget-=w*h;
- try{const c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d');g.filter='grayscale(1) contrast(1.08) brightness(.92)';g.drawImage(image,0,0);
-  const src=image.__storyworldStaticSource||image.__storyworldStaticTint,path=String(src?.path||image.src||image.path||'');
-  c.__storyworldStaticSource=Object.freeze({...(src||{}),path,immutable:true,r111SamongGray:true,sourceFilter:g.filter});
-  grayMap.set(image,c);grayList.push(c);samongState.grayImages++;samongState.grayPixels+=w*h;return c;}catch(e){fail(e);return null;}}
-function grayReset(){for(const c of grayList){c.width=1;c.height=1;}grayMap=new WeakMap();grayList=[];samongState.grayPixels=0;}
+ try{const c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d');g.filter=GRAY_FILTER;g.drawImage(image,0,0);return grayDone(image,c,w,h);}catch(e){fail(e);return null;}}
+const GRAY_FILTER='grayscale(1) contrast(1.08) brightness(.92)';
+function grayDone(image,c,w,h){const src=image.__storyworldStaticSource||image.__storyworldStaticTint,path=String(src?.path||image.src||image.path||'');
+ c.__storyworldStaticSource=Object.freeze({...(src||{}),path,immutable:true,r111SamongGray:true,sourceFilter:GRAY_FILTER});
+ Object.defineProperty(c,'__r1199AlphaOf',{value:image});/* R1199: 알파가 원본과 같다 → R409 테두리를 원본 열쇠로 같이 쓴다 */
+ grayMap.set(image,c);grayList.push(c);samongState.grayImages++;samongState.grayPixels+=w*h;grayLog.push((preOn?'pre ':'on ')+w+'x'+h+' '+path.split('/').slice(-2).join('/'));if(grayLog.length>24)grayLog.shift();return c;}
+const grayLog=[];/* R1199 진단: 최근 만든 흑백 사본(예열 pre / 각성 중 on) */
+function grayReset(){for(const c of grayList){c.width=1;c.height=1;}grayMap=new WeakMap();grayList=[];samongState.grayPixels=0;preQ.clear();pend=null;}
+// R1199 ① 예열(사용자 2026-11-19 "사몽각성관련해서 전수조사해서 렉이특히 심해지는이유와 그이유에맞게 규칙개선해서 렉개선해줘"):
+//  각성 첫 장면에 흑백 사본 16~18장(330만 화소)을 한꺼번에 만들고 GPU 에 올려 그 장면이 350~560ms 걸렸다(헤드리스, 평소 20ms).
+//  사몽을 곧 쓸 수 있는 동안(꿈 층·사몽 대기 3초 이하·각성 아님) 그 장면에 그린 세계 그림(영웅·이펙트·투사체 제외)을 줄에 넣고,
+//  다음 장면부터 장면당 PC 75만·저사양 25만 화소씩 흑백 사본을 미리 만들어 GPU 에 미리 올린다(화면에는 여전히 색 원본을 그림).
+//  성능 7단계 1(초저)은 메모리 때문에 예열하지 않는다. 모바일은 예열 사본 합계 600만 화소까지. 끄기: r111.play {samongPrewarm:false}.
+const PREWARM=Object.freeze({ready:3,budget:.75e6,budgetLow:.25e6,mobileCap:6e6,queue:400});
+const preQ=new Set();let preOn=false,pend=null;/* pend: 장면 예산보다 큰 그림을 줄 단위로 나눠 만드는 중 {im,c,g,y} */
+const perfStep=()=>{try{const v=window.__STORYWORLD_PERF7_R1043__?.step?.();const n=Number(v);return Number.isFinite(n)?n:5;}catch(_){return 5;}};
+function preReady(){try{return !!(prefs.samong&&prefs.samongPrewarm&&live()&&typeof layer!=='undefined'&&layer==='DREAM'&&!samongState.on&&!(Number(player.samong)>0)&&Number(player.samongCD)<=PREWARM.ready&&!(Number(player.hp)<=0)&&perfStep()>1);}catch(_){return false;}}
+function preUpload(c){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;const tex=r?.commands?.texture?.(c,false);if(tex&&r.renderer?.initTexture){r.renderer.initTexture(tex);samongState.prewarmUploaded++;}}catch(e){fail(e);}}
+function prewarmTick(){if(!preOn)return;const cap=grayMobile()?PREWARM.mobileCap:Infinity;let budget=lowFx()?PREWARM.budgetLow:PREWARM.budget;
+ try{
+  if(pend){const im=pend.im,w=pend.w,h=pend.h;if(grayMap.has(im)){pend=null;}else{const rows=Math.max(1,Math.min(h-pend.y,Math.floor(budget/w)));
+    pend.g.drawImage(im,0,pend.y,w,rows,0,pend.y,w,rows);pend.y+=rows;budget-=rows*w;
+    if(pend.y>=h){const c=pend.c;pend=null;grayDone(im,c,w,h);samongState.prewarmMade++;preUpload(c);}return;}}
+  for(const im of preQ){if(budget<=0)break;preQ.delete(im);if(grayMap.has(im))continue;const w=im.naturalWidth||im.width,h=im.naturalHeight||im.height;
+   if(!(w>0&&h>0)||samongState.grayPixels+w*h>Math.min(cap,(lowFx()?12e6:28e6)*.85))continue;/* 각성 시작 때 R977 비우기(85%)에 걸리지 않게 */
+   const c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d');g.filter=GRAY_FILTER;
+   if(w*h<=budget){g.drawImage(im,0,0);budget-=w*h;grayDone(im,c,w,h);samongState.prewarmMade++;preUpload(c);}
+   else{pend={im,c,g,w,h,y:0};break;}/* 큰 그림은 다음 장면부터 예산만큼 줄씩 */}}
+ catch(e){pend=null;fail(e);}}
 const HEX=/^#([0-9a-f]{3,8})$/i,RGB=/^rgba?\(([^)]+)\)$/i;
 function grayColour(v){if(typeof v!=='string')return v;let r,g,b,a=1,m=v.trim().match(HEX);
  if(m){let h=m[1];if(h.length<=4)h=h.split('').map(c=>c+c).join('');r=parseInt(h.slice(0,2),16);g=parseInt(h.slice(2,4),16);b=parseInt(h.slice(4,6),16);if(h.length===8)a=parseInt(h.slice(6,8),16)/255;}
@@ -222,7 +247,7 @@ function grayColour(v){if(typeof v!=='string')return v;let r,g,b,a=1,m=v.trim().
  if(![r,g,b,a].every(Number.isFinite))return v;const y=Math.round(clamp((.299*r+.587*g+.114*b)*.95,0,255));return 'rgba('+y+','+y+','+y+','+a+')';}
 function installGray(){const DC=window.StoryPhase1?.DrawCommands,P=DC?.prototype;if(!P||P.r111Gray||Object.isFrozen(P))return false;
  const imageBase=P.drawImage,pushBase=P.push;
- P.drawImage=function(image,...a){if(rootState.theme&&image){const t=tintOf(image);if(t)image=t;}if(samongState.on&&image&&!GRAY_KEEP.has(this.owner?.kind)){const g=grayOf(image);if(g)image=g;}return imageBase.call(this,image,...a);};
+ P.drawImage=function(image,...a){if(rootState.theme&&image){const t=tintOf(image);if(t)image=t;}if(samongState.on&&image&&!GRAY_KEEP.has(this.owner?.kind)){const g=grayOf(image);if(g)image=g;}else if(preOn&&image&&preQ.size<PREWARM.queue&&!GRAY_KEEP.has(this.owner?.kind)&&!grayMap.has(image)&&!(typeof image.getContext==='function'&&!image.__storyworldStaticSource&&!image.__storyworldStaticTint)){if(!preQ.has(image)){preQ.add(image);samongState.prewarmQueued++;}}return imageBase.call(this,image,...a);};
  P.push=function(kind,data){const r=pushBase.call(this,kind,data);if(samongState.on&&(kind==='fill'||kind==='stroke')&&!GRAY_KEEP.has(this.owner?.kind)){const c=this.commands[this.commands.length-1],st=c?.style;
    if(st){for(const k of ['fillStyle','strokeStyle'])if(typeof st[k]==='string')st[k]=grayColour(st[k]);samongState.grayFills++;}}return r;};
  Object.defineProperty(P,'r111Gray',{value:true});return true;}
@@ -236,8 +261,11 @@ function samongTick(){const on=samongOn();
  if(on!==samongState.on){samongState.on=on;
   if(on){if(grayList.length&&(grayRoomKey()!==grayRoom||samongState.grayPixels>(lowFx()?12e6:28e6)*.85))grayReset();grayRoom=grayRoomKey();}
   else{grayOff=time;if(grayMobile())grayReset();}}
- else if(!on&&grayList.length&&!(time-grayOff>=0&&time-grayOff<=100))grayReset();
- grayBudget=lowFx()?2e6:6e6;}
+ preOn=!on&&preReady();
+ if(preOn){if(grayRoomKey()!==grayRoom){if(grayList.length)grayReset();grayRoom=grayRoomKey();}grayOff=time;}/* R1199: 준비 중엔 지역이 같으면 들고 있다 */
+ else{if(preQ.size)preQ.clear();if(!on)pend=null;}/* 각성 중엔 만들던 사본을 grayOf 가 마저 그림 */
+ if(!on&&!preOn&&grayList.length&&!(time-grayOff>=0&&time-grayOff<=100))grayReset();
+ grayBudget=lowFx()?2e6:6e6;prewarmTick();}
 const majorFoe=e=>!!(e&&(e.boss||e.midboss||e.persona||e.majorBoss||e.r54Boss||e.combatProfile?.boss));
 function samongLine(e){const ray=e.r75Storm;if(!ray||!Array.isArray(ray.runs))return false;const S=SPR(),F=palOf(player),age=time-ray.start,active=age>=.18&&age<=.34,
  a=age<.18?.25+age/.18*.35:Math.max(0,1-(age-.18)/.36),lo=lowFx();let n=0;
@@ -349,5 +377,5 @@ function settingsSection(){const host=document.getElementById('retroSettingsR98C
  host.parentNode.insertBefore(s,host.nextSibling);for(const k of Object.keys(DEFAULTS)){const el=s.querySelector('#r111-'+k);el.checked=prefs[k];el.onchange=()=>set({[k]:el.checked});}}
 
 window.__STORYWORLD_PLAY_R111__=Object.freeze({revision:REV,prefs:()=>({...prefs}),set,resonance:{scale:RES_SCALE,gain:RES_GAIN,max:777,shown},ranged:RANGED,foot:path=>feet.get(path),sectorOf,
- inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError,faceFoe:faceFoe?.id||null,combatLeft:+(combatUntil-(typeof time==='number'?time:0)).toFixed(2),ego:live()?egoOn(player):false,threadRank:live()?threadRank(player):0,threadInstalled:!!window.__STORYWORLD_CAMPAIGN_R63R1__?.r111Thread,guard:{on:guardState.on,healed:Math.round(guardState.healed),blocked:Math.round(guardState.blocked),taken:GUARD_TAKEN,heal:GUARD_HEAL},shots:{...shotState},bossRoot:{...rootState,theme:rootState.theme&&{key:rootState.theme.key,boss:rootState.theme.boss,elem:rootState.theme.elem,mecha:rootState.theme.mecha}},samong:{...samongState,grayInstalled:!!window.StoryPhase1?.DrawCommands?.prototype?.r111Gray},ranged:{applied:rangedState.applied,dodges:rangedState.dodges,base:{...rangedState.base}},presentationOnly:true,resonanceGainChanged:true})});
+ inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError,faceFoe:faceFoe?.id||null,combatLeft:+(combatUntil-(typeof time==='number'?time:0)).toFixed(2),ego:live()?egoOn(player):false,threadRank:live()?threadRank(player):0,threadInstalled:!!window.__STORYWORLD_CAMPAIGN_R63R1__?.r111Thread,guard:{on:guardState.on,healed:Math.round(guardState.healed),blocked:Math.round(guardState.blocked),taken:GUARD_TAKEN,heal:GUARD_HEAL},shots:{...shotState},bossRoot:{...rootState,theme:rootState.theme&&{key:rootState.theme.key,boss:rootState.theme.boss,elem:rootState.theme.elem,mecha:rootState.theme.mecha}},samong:{...samongState,grayLog:grayLog.slice(),grayInstalled:!!window.StoryPhase1?.DrawCommands?.prototype?.r111Gray},ranged:{applied:rangedState.applied,dodges:rangedState.dodges,base:{...rangedState.base}},presentationOnly:true,resonanceGainChanged:true})});
 })();
