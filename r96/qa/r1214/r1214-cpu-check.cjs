@@ -78,14 +78,14 @@ for(const [name,kind] of [['복도 비명잔영','fear'],['안정화 집행체',
  // 원거리 몹은 근접을 안 하는 대신 자주 쏘지만, 압박은 엔진 원거리 몹(2.65초마다 한 대) 이하
  for(const k of Object.keys(A.tune)){const u=A.tune[k],dps=u.dmg*(u.ticks||1)/(u.cd*A.rangedCd+u.windup);ok(dps<=1/(2.1+.55)+1e-9,k+': 원거리 몹 압박 ≤ 엔진 원거리 몹',dps);}}
 {// 근접 몹: hybrid 였어도 ai 'melee', 20초 동안 원거리 0
- const S=sandbox();const e=mob('외계 침공군',{ai:'hybrid',x:15});S.sb.room.enemies.push(e);step(S,20);ok(e.ai==='melee'&&!(e.r1210?.count>0)&&S.calls.hurt.length===0,'근접 몹(외계 침공군): ai melee·원거리 0',{ai:e.ai,s:e.r1210});
+ const S=sandbox();const e=mob('외계 침공군',{ai:'hybrid',x:15});S.sb.room.enemies.push(e);step(S,20);/* 사용자 11-19 11:22Z R1231 동작 변경: 근거리 몹도 근접 3번(못 하면 10초) 뒤 원거리 1번 → '원거리 0' 에서 '20초에 1번 이하, 다시 근접 단계' 로 바꿈 */ok(e.ai==='melee'&&(e.r1210?.count||0)<=1&&S.calls.hurt.length<=1&&S.A.effRole(e)==='melee','근접 몹(외계 침공군): ai melee·20초 원거리 1번 이하',{ai:e.ai,s:e.r1210,L:e.r1231});
  S.sb.ranged3(e);ok(S.calls.base===1&&S.A.inspect().stats.engine===0,'근접 몹은 엔진 탄 바꾸기에서도 빠짐');}
 {// 원거리 몹: 다가오려 해도 거리를 지키며 계속 쏘고, 근접 공격은 취소
  const S=sandbox();const e=mob('프리즘 저격병',{ai:'melee',x:15,speed:1.5});S.sb.room.enemies.push(e);let minD=9,atk=0;
  for(let i=0;i<20*30;i++){/* 엔진 걸음 흉내: 영웅 쪽으로 다가감 */if(e.r1210?.mode!=='windup'){const d=Math.hypot(e.x-10,e.y-10);e.x-=(e.x-10)/d*1.5/30;e.y-=(e.y-10)/d*1.5/30;}
-  if(i%90===45){e.attack={t:0};atk++;}step(S,1/30);minD=Math.min(minD,Math.hypot(e.x-10,e.y-10));}
- ok(e.r1210.count>=4,'원거리 몹 20초에 4번 이상 쏨('+e.r1210.count+')',e.r1210);ok(minD>=A.keep.min-.1,'원거리 몹이 3.2칸 안으로 안 들어옴(최소 '+minD.toFixed(2)+')');
- ok(!e.attack&&S.A.inspect().roleStats.meleeCancels>=atk-1,'원거리 몹 근접 공격 취소',S.A.inspect().roleStats);}
+  if(i%90===45){e.attack={t:0};atk++;}step(S,1/30);/* R1231: 거리 유지는 첫 쏘기 단계에서만 잼(근접 단계는 일부러 다가감) */if(!S.A.inspect().roleStats.toClose)minD=Math.min(minD,Math.hypot(e.x-10,e.y-10));}
+ /* 사용자 11-19 11:22Z R1231 동작 변경: 원거리 몹은 쏘기 3번 뒤 근접 1번 순환 → 20초 4번 이상에서 3번 이상 + 근접 단계 넘어감으로 바꿈 */ok(e.r1210.count>=3&&S.A.inspect().roleStats.toClose>=1,'원거리 몹 20초에 3번 이상 쏘고 근접 단계로('+e.r1210.count+')',[e.r1210,S.A.inspect().roleStats]);ok(minD>=A.keep.min-.1,'원거리 몹이 3.2칸 안으로 안 들어옴(최소 '+minD.toFixed(2)+')');
+ /* R1231: 근접 단계에서 휘두른 것(swings)은 취소하지 않음 */const rs=S.A.inspect().roleStats;ok((!e.attack||S.A.effRole(e)==='melee')&&rs.meleeCancels>=atk-1-rs.swings-1,'원거리 몹 쏘기 단계 근접 공격 취소',rs);}
 {// 원거리 몹: 영웅이 다가오면 물러남
  const S=sandbox();const e=mob('포낭 곡사체',{x:11.5,speed:1.5});S.sb.room.enemies.push(e);step(S,3);ok(Math.hypot(e.x-10,e.y-10)>=A.keep.min-.05&&S.A.inspect().roleStats.backs>0,'원거리 몹이 붙으면 물러남',{x:e.x,st:S.A.inspect().roleStats});}
 {// 벽에 몰려 못 물러나면 가까이서도 쏨(근접은 여전히 안 함)
@@ -113,6 +113,25 @@ for(const [name,kind] of [['복도 비명잔영','fear'],['안정화 집행체',
  const r248=fs.readFileSync(path.join(R,'client-source/mob-unique-r248.js'),'utf8');ok(/__STORYWORLD_DYS_RANGED_R1210__\?\.contactFx\?\.\(e,hx,hy\)/.test(r248)&&r248===fs.readFileSync(path.join(R,'runtime-text/mob-unique-r248.js'),'utf8'),'R248 접촉 도형 앞에서 R1227 에 먼저 물음(사본 같음)');}
 {// R1230 연동: 제자리 고정 적(탑·소환진)은 이 오버레이가 쏘거나 움직이지 않음
  const S=sandbox();const t=mob('검은기둥 주문사',{r75Tower:true,speed:0,x:12}),x0=t.x,y0=t.y;S.sb.room.enemies.push(t);step(S,4,1/30);ok(!t.r1210||t.r1210.mode==null,'고정형: 겨누기 없음',t.r1210);ok(t.x===x0&&t.y===y0,'고정형: 거리 유지 이동 없음');ok(S.A.contactFx(mob('지옥문 파수악마',{r251Circle:true}),10,10)===false,'고정형: 접촉 시트 없음');}
+{// R1231 원거리 경향: 쏘기 3 → 근접 1 → 다시 쏘기(엔진 걸음·근접 흉내). 60초 동안 쏘기:근접 ≈ 3:1
+ const S=sandbox();const e=mob('프리즘 저격병',{x:16,speed:1.5});S.sb.room.enemies.push(e);let sw=0,cancelInMelee=0;
+ for(let i=0;i<60*30;i++){const ph=S.A.effRole(e),d=Math.hypot(e.x-10,e.y-10);
+  if(e.r1210?.mode!=='windup'&&d>1.2){e.x-=(e.x-10)/d*1.5/30;e.y-=(e.y-10)/d*1.5/30;}
+  if(ph==='melee'&&d<=1.3&&!e.attack){e.attack={t:0};e.atkLeft=.5;sw++;}
+  if(e.attack&&e.atkLeft!=null){e.atkLeft-=1/30;if(e.atkLeft<=0){e.attack=null;e.atkLeft=null;}}
+  const had=!!e.attack;step(S,1/30);if(had&&ph==='melee'&&S.A.effRole(e)==='melee'&&!e.attack&&e.atkLeft>0)cancelInMelee++;}
+ const st=S.A.inspect().roleStats,f=e.r1210.count;ok(sw>=2&&f>=3*sw-2&&f<=3*sw+3,'원거리 경향: 쏘기 '+f+' : 근접 '+sw+' ≈ 3:1',st);ok(cancelInMelee===0,'근접 단계에선 근접 공격을 취소하지 않음');ok(st.toClose>=2&&st.toRange>=2,'근접·원거리 단계를 오감',st);}
+{// R1231 근거리 경향: 근접 3 → 물러나 쏘기 1 → 다시 근접
+ const S=sandbox();const e=mob('지옥문 파수악마',{x:11,speed:1.5});S.sb.room.enemies.push(e);let sw=0;
+ for(let i=0;i<60*30;i++){const ph=S.A.effRole(e),d=Math.hypot(e.x-10,e.y-10);
+  if(ph==='melee'){if(d>1.2){e.x-=(e.x-10)/d*1.5/30;e.y-=(e.y-10)/d*1.5/30;}else if(!e.attack&&!(e.cd>0)){e.attack={t:0};e.atkLeft=.5;e.cd=1.2;sw++;}}
+  if(e.attack&&e.atkLeft!=null){e.atkLeft-=1/30;if(e.atkLeft<=0){e.attack=null;e.atkLeft=null;}}e.cd=Math.max(0,(e.cd||0)-1/30);
+  step(S,1/30);}
+ const f=e.r1210?.count||0;ok(f>=2&&sw>=3*f-1&&sw<=3*f+3,'근거리 경향: 근접 '+sw+' : 쏘기 '+f+' ≈ 3:1',[S.A.inspect().roleStats,e.r1210]);
+ ok(S.A.inspect().stats.hits.fire+S.A.inspect().stats.fires.fire>=f,'근거리 몹 원거리는 자기 종류(불)로');}
+{// R1231: 원거리 불 몹이 근접 단계에서 휘두르면 도형 대신 진홍 시트(contactFx)
+ const S=sandbox();const e=mob('검은기둥 주문사');S.sb.room.enemies.push(e);ok(S.A.contactFx(e,10,10)===false,'쏘기 단계 주문사: 접촉 시트 없음');
+ step(S,.1);const st=e.r1210;st.count+=3;st.mode=null;st.next=99;step(S,.2);ok(S.A.effRole(e)==='melee'&&S.A.contactFx(e,10,10)===true,'근접 단계 주문사: 진홍 시트로',e.r1231);}
 {// 보스는 역할 손대지 않음(맵 몹 공격 동시 그대로)
  const S=sandbox();const b=mob('백의 안정화 감독',{boss:true,ai:'hybrid',x:15});S.sb.room.enemies.push(b);step(S,1);ok(b.ai==='hybrid','보스 ai 그대로');}
 ok(sandbox().A.inspect().stats.errors===0,'오류 0');

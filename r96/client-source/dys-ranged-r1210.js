@@ -19,7 +19,7 @@
 //  끄기: localStorage['storyworld.r1210.dys']='{"on":false}'. 점검: window.__STORYWORLD_DYS_RANGED_R1210__.inspect()
 (()=>{'use strict';
 if(window.__STORYWORLD_DYS_RANGED_R1210__)return;
-const REV='R1214b-role-split',KEY='storyworld.r1210.dys';
+const REV='R1231-lean',KEY='storyworld.r1210.dys';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={aims:0,fires:{laser:0,radiation:0,sonic:0,bomb:0,fear:0,dark:0,shadow:0,tentacle:0,fire:0},engine:0,hits:{laser:0,radiation:0,sonic:0,bomb:0,fear:0,dark:0,shadow:0,tentacle:0,fire:0},contact:0,cancels:0,drawn:{},tele:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
@@ -132,7 +132,7 @@ const major=e=>!!(e&&(e.boss||e.midboss||e.persona||e.cosmic||e.trial||e.samongB
 const banned=()=>{try{return /^ep1b06$|mammon/i.test(String(G('room')?.id||''));}catch(_){return false;}};
 /* R1230 연동: 제자리 고정 적(탑·소환진·조형물)은 이 오버레이가 쏘거나 움직이지 않는다 */
 const fixedFoe=e=>!!(e&&(e.r75Tower||e.r251Circle||e.r170Tower||e.prop||e.object||e.stationary));
-function eligible(e){return !!(e&&!fixedFoe(e)&&roleFor(e.name)==='ranged'&&!banned()&&e.hp>0&&e.spawnState==='active'&&!e.disabled&&!major(e)&&kindFor(e.name));}
+function eligible(e){return !!(e&&!fixedFoe(e)&&effRole(e)==='ranged'&&!banned()&&e.hp>0&&e.spawnState==='active'&&!e.disabled&&!major(e)&&kindFor(e.name));}
 const bossLike=e=>!!(e&&(e.boss||e.midboss));
 // 그 맵(방)의 일반 몹 종류 — 죽은 몹도 센다(보스전 땐 몹이 다 죽어 있을 수 있음). 방마다 캐시.
 const mapCache=new WeakMap();
@@ -196,11 +196,24 @@ function step(){if(!prefs.on||paused())return;const now=T();if(!(now>lastT)){las
   /* 벽에 몰려 더 못 물러나는 원거리 몹은 1칸 거리까지 쏜다 */
   if(d<(e.r1214Stuck?1:u.min)||d>u.max||!sees(e))continue;startWindup(e,st,now);n++;}}
 /* R1214b 역할 지키기: 원거리 몹은 ai 'ranged'·거리 유지·근접 안 함, 근접 몹은 ai 'melee'(원거리 없음). 원래 ai 는 e.r1214Ai 에 둔다 */
-let lastRoleT=-1;const roleStats={ranged:0,melee:0,backs:0,holds:0,meleeCancels:0};
+let lastRoleT=-1;const roleStats={ranged:0,melee:0,backs:0,holds:0,meleeCancels:0,toClose:0,toRange:0,swings:0};
+/* R1231 경향(사용자 11-19 11:22Z, 피로물든병원 안정화 집행체 규칙): 원거리 몹 = 쏘기 3번 → 다가가 근접 1번 → 다시 물러나 쏘기.
+   근거리 몹(원거리 종류가 있는 몹) = 근접 3번 → 물러나 쏘기 1번 → 다시 근접. 순환이 막히면(못 닿음·못 쏨) 제한 시간 뒤 원래 경향으로 돌아간다 */
+const LEAN=Object.freeze({shots:3,swings:3,closeMax:6,rangeMax:7,meleeMax:10});
+function effRole(e){const r=roleFor(e?.name);if(!r)return null;const L=e.r1231;return L&&L.lean===r?L.phase:r;}
+function leanTick(e,r,now){let L=e.r1231;if(!L||L.lean!==r)L=e.r1231={lean:r,phase:r,t0:now,c0:e.r1210?.count||0,swings:0,atk:null};
+ const cnt=e.r1210?.count||0,set=(ph)=>{L.phase=ph;L.t0=now;L.c0=cnt;L.swings=0;e.r1214P=null;e.r1214Close=null;e.r1214Stuck=false;if(ph==='melee')roleStats.toClose++;else roleStats.toRange++;};
+ const a=e.attack;if(a&&!a.r1210Fake&&a!==L.atk){L.atk=a;if(L.phase==='melee'){L.swings++;roleStats.swings++;}}
+ if(r==='ranged'){if(L.phase==='ranged'){if(cnt-L.c0>=LEAN.shots&&!e.r1210?.mode)set('melee');}
+  else if((L.swings>=1&&!e.attack)||now-L.t0>LEAN.closeMax)set('ranged');}
+ else if(!kindFor(e.name)){L.phase='melee';}
+ else if(L.phase==='melee'){/* 근접 공격을 못 하는 몹(시전형 등)도 10초 지나면 한 번 쏜다 */if((L.swings>=LEAN.swings&&!e.attack)||(now-L.t0>LEAN.meleeMax&&!e.attack)){set('ranged');const s=S(e);s.next=Math.min(s.next,now+.6);}}
+ else if((cnt>L.c0&&!e.r1210?.mode)||now-L.t0>LEAN.rangeMax)set('melee');
+ return L.phase;}
 /* 둘 다 엔진 ai 는 'melee' 로 둔다(엔진 기본 탄 ranged3 는 안 쏨). 원거리 몹은 이 오버레이가 겨누기 예고(Dots 시트)와 함께 RANGED_CD 배 짧은 간격으로 쏘고, 거리를 지킨다 */
 function roleTick(e,p){if(fixedFoe(e))return;const r=roleFor(e.name);if(!r)return;if(e.r1214Ai===undefined)e.r1214Ai=e.ai;
  if(e.ai!=='melee'){e.ai='melee';roleStats[r]++;}
- if(r==='melee')return;
+ /* R1231: 지금 순환 단계로 움직인다(근접 단계면 엔진 근접 AI 그대로) */if(leanTick(e,r,T())==='melee')return;
  if(e.spawnState!=='active')return;const now=T(),dt=Math.min(.1,Math.max(0,now-(e.r1214T??now)));e.r1214T=now;
  if(e.attack&&!e.attack.r1210Fake&&!e.attack.storyWorldPose5){e.attack=null;roleStats.meleeCancels++;}
  const d=Math.hypot(p.x-e.x,p.y-e.y);
@@ -334,8 +347,8 @@ let lastRoom=null;if(typeof setInterval==="function")setInterval(()=>{try{const 
 function set(v){prefs={...prefs,...(v&&typeof v==='object'?v:{on:v!==false})};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}if(!prefs.on){live=[];for(const e of G('room')?.enemies||[])if(e?.r1210)e.r1210.mode=null;}return {...prefs};}
 window.__STORYWORLD_DYS_RANGED_R1210__=Object.freeze({revision:REV,set,kindFor,eligible,bossEligible,mapKinds,scaled,bossScale:BOSS.scale,boss:BOSS,laserHits,waveHits,poolHits,bossK,hueOf,tune:TUNE,names:NAMES,maxLive:MAXLIVE,firstDelay:FIRST,
  /* 장면 확인용: 영웅 앞에 그 종류 공격을 하나 띄운다(피해 없음) */demo:(kind,dx=3,dy=-1)=>{try{const p=P();if(!TUNE[kind]||!p)return false;const u=TUNE[kind],ox=p.x+dx,oy=p.y+dy,a=Math.atan2(p.y-oy,p.x-ox),now=T();live.push({kind,owner:'demo',scale:1,u,ox,oy,a,t0:now,dmg:0,src:{r1210:kind},hue:0,tx:p.x,ty:p.y,life:(u.flight||u.delay||.3)+(u.pool||u.blast||u.rise||u.impact||u.life||.5)+1,hit:false,ticks:0,lastTick:-9,end:null,px:p.x,py:p.y});arm();return true;}catch(err){fail(err);return false;}},
- roleFor,melee:MELEE,keep:KEEP,rangedCd:RANGED_CD,
+ roleFor,effRole,lean:LEAN,melee:MELEE,keep:KEEP,rangedCd:RANGED_CD,
  /* R1227: R248 근접 타격 도형(선·불꽃) 대신 Dots 불 시트 타격 자국 — 불 계열 근접 몹만. 처리했으면 true(R248 은 자기 도형을 안 그림) */
- contactFx:(e,tx,ty)=>{try{if(!prefs.on||!e||fixedFoe(e)||kindFor(e.name)!=='fire'||roleFor(e.name)!=='melee'||banned())return false;if(live.filter(x=>x.kind==='mhit').length>=6)return false;
+ contactFx:(e,tx,ty)=>{try{if(!prefs.on||!e||fixedFoe(e)||kindFor(e.name)!=='fire'||effRole(e)!=='melee'||banned())return false;if(live.filter(x=>x.kind==='mhit').length>=6)return false;
   live.push({kind:'mhit',owner:e.id,scale:1,u:null,ox:e.x,oy:e.y,a:0,t0:T(),dmg:0,src:null,hue:hueOf(e.name),tx,ty,life:.6});stats.contact++;warm();arm();return true;}catch(err){fail(err);return false;}},inspect:()=>({revision:REV,roleStats:{...roleStats},prefs:{...prefs},stats:JSON.parse(JSON.stringify(stats)),live:live.length,liveDetail:live.map(x=>({kind:x.kind,owner:x.owner,scale:x.scale})),log:log.slice(-30),lastError})});
 })();
