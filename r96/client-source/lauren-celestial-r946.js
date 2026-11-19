@@ -19,8 +19,9 @@
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_LAUREN_CELESTIAL_R946__)return;
 const REV='R946-celestial-4-ego',HL_REV='R1198-persona-highlight-1'/* R1143 검사가 REV 를 고정해 둠 */,KEY='storyworld.r946.celestial',HERO='lauren';
-const CHANCE=.10,CROWD_BONUS=.04,CROWD_N=4,CROWD_R=2,CHANCE_MAX=.35,ROLL_GAP=.35,ICD=5,COMBO_WINDOW=12;
+const CHANCE=.10,CROWD_BONUS=.04,CROWD_N=4,CROWD_R=2,CHANCE_MAX=.777,ROLL_GAP=.35,ICD=5,COMBO_WINDOW=12;
 const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
+const M1207=h=>{try{const v=window.__STORYWORLD_PASSIVE_GROWTH_R971__?.damage?.(h);return Number.isFinite(v)&&v>0?Math.min(1,v):1;}catch(_){return 1;}};/* R1207 확률 상향만큼 고정 피해 배율(체력 비례 피해에는 안 씀) */
 const U1025=(h,a,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__,v=u&&u.mask(h,a,k);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},S1025=h=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.share(h);return Number.isFinite(v)?Math.max(0,Math.min(1,v)):1;}catch(_){return 1;}},W1025=(h,w)=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.weights(h,w);return v||w;}catch(_){return w;}},A1025=(h,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.unlocked(h,k)!==false:true;}catch(_){return true;}},O1025=id=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.summonOpen(id)!==false:true;}catch(_){return true;}};/* R1025 특수 패시브 레벨별 해금·소환 영웅 서사 확인(파일 없으면 원래 값) */
 const C1033=(h,k,o,x)=>{try{window.__STORYWORLD_PASSIVE_CUTIN_R1033__?.fire(h,k,o,x);}catch(_){}};/* R1033 세 번째 특수 패시브 컷인(1·2단·몸·끔은 그쪽에서 거름) */
 const REP_R=2.8,REP_K=1.2,REP_PUSH=2.0,REP_PUSH_T=.25,REP_STUN=.45,REP_LIFE=.7;
@@ -129,11 +130,11 @@ function egoAlpha(d){d=Number.isFinite(d)?Math.max(0,d):EGO_NEAR;return EGO_ALPH
 function egoOwner(o){try{if(!o||o.hero===HERO)return false;const K=window.__STORYWORLD_EGO_KIT_R1094__;return !!(K&&K.active&&K.active());}catch(_){return false;}}
 function pickEgo(s,t){if(forced&&['red','blue','violet'].includes(forced)){const f=forced;forced=null;return f;}if(comboOf(s,t))return 'violet';
  if(s.redAt>s.blueAt)return 'blue';if(s.blueAt>s.redAt)return 'red';return EGO_KINDS[rnd()<.5?0:1];}
-function chanceFor(o){if(egoOwner(o)){let n=0;for(const e of enemiesNow())if(!hiddenActor(e)&&dist(e,o)<=CROWD_R)n++;return Math.min(CHANCE_MAX,CHANCE+(n>=CROWD_N?CROWD_BONUS:0));}let n=0;for(const e of enemiesNow())if(!hiddenActor(e)&&dist(e,o)<=CROWD_R)n++;const c=(personaOwner(o)?HL.chance:CHANCE)+(n>=CROWD_N?CROWD_BONUS:0);return Math.min(CHANCE_MAX,surge('chance',G971(HERO,[c])[0]))*S1025(HERO);}
+function chanceFor(o){if(egoOwner(o)){let n=0;for(const e of enemiesNow())if(!hiddenActor(e)&&dist(e,o)<=CROWD_R)n++;return Math.min(CHANCE_MAX,G971('ego',[CHANCE+(n>=CROWD_N?CROWD_BONUS:0)])[0]);}let n=0;for(const e of enemiesNow())if(!hiddenActor(e)&&dist(e,o)<=CROWD_R)n++;const c=(personaOwner(o)?HL.chance:CHANCE)+(n>=CROWD_N?CROWD_BONUS:0);return Math.min(CHANCE_MAX,surge('chance',G971(HERO,[c])[0]))*S1025(HERO);}
 function roll(e){const o=P();const ego=egoOwner(o);if(!o||(o.hero!==HERO&&!ego)||o.hp<=0||blockedNow())return;const s=stateOf(o),t=T();if(t<s.readyAt||t-s.lastRoll<ROLL_GAP)return;s.lastRoll=t;stats.rolls++;
  if(!forced&&!(rnd()<chanceFor(o)))return;const kind=ego?pickEgo(s,t):pick(s,t,o);s.readyAt=t+(ego?ICD:D971(HERO,ICD));if(ego)stats.egoProcs=(stats.egoProcs||0)+1;
  if(kind==='red')s.redAt=t;else if(kind==='blue')s.blueAt=t;else if(kind==='violet'){s.redAt=-1e9;s.blueAt=-1e9;}
- lastRoom=curRoom();fire(kind,o,e&&Number.isFinite(e.x)?{x:e.x,y:e.y}:null);}
+ lastRoom=curRoom();fire(kind,o,e&&Number.isFinite(e.x)?{x:e.x,y:e.y}:null,{powerScale:M1207(ego?'ego':HERO)});}
 // 라우렌 본인 타격만(다른 영웅·협동 동료·적·이 패시브 자신의 피해 제외).
 function mine(src){const o=P();const ego=typeof egoOwner==='function'&&egoOwner(o);/* R962 검사가 mine() 만 떼어 돌린다 */if(!o||(o.hero!==HERO&&!ego))return false;if(src&&typeof src==='object'){if(src.r946||src.sourceHero&&src.sourceHero!==(ego?o.hero:HERO))return false;if(src.coopIdR62||src.ally||src.owner==='ally'||src.owner==='enemy'||src.hostile)return false;}return true;}
 if(typeof hitEnemy==='function'){const base=hitEnemy;hitEnemy=function(e,value,source,...a){const r=base.call(this,e,value,source,...a);

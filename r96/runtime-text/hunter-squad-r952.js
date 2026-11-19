@@ -41,6 +41,7 @@ const CFG=Object.freeze({chance:.09,gap:.35,icd:21,life:7,fade:.45,
   ring:Object.freeze({path:'assets/r952/hs05-feather-ring.webp',cell:Object.freeze([256,128]),cols:3,frames:12,piv:Object.freeze([128,64]),fps:12.5}),
   line:Object.freeze({path:'assets/r952/hs04-flow-line.webp',cell:Object.freeze([256,64]),cols:1,frames:8,piv:Object.freeze([0,32]),fps:8,maxSpans:24})})});
 const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
+const M1207=h=>{try{const v=window.__STORYWORLD_PASSIVE_GROWTH_R971__?.damage?.(h);return Number.isFinite(v)&&v>0?Math.min(1,v):1;}catch(_){return 1;}};/* R1207 확률 상향만큼 고정 피해 배율(체력 비례 피해에는 안 씀) */
 const U1025=(h,a,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__,v=u&&u.mask(h,a,k);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},S1025=h=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.share(h);return Number.isFinite(v)?Math.max(0,Math.min(1,v)):1;}catch(_){return 1;}},W1025=(h,w)=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.weights(h,w);return v||w;}catch(_){return w;}},A1025=(h,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.unlocked(h,k)!==false:true;}catch(_){return true;}},O1025=id=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.summonOpen(id)!==false:true;}catch(_){return true;}};/* R1025 특수 패시브 레벨별 해금·소환 영웅 서사 확인(파일 없으면 원래 값) */
 const C1033=(h,k,o,x)=>{try{window.__STORYWORLD_PASSIVE_CUTIN_R1033__?.fire(h,k,o,x);}catch(_){}};/* R1033 세 번째 특수 패시브 컷인(1·2단·몸·끔은 그쪽에서 거름) */
 const K1157=(o,x,k)=>{try{const E=window.__STORYWORLD_EGO_SUMMON_R1157__;if(E&&o&&o.r1157Summon)E.chain(o,x,k);}catch(_){}};/* R1157: EGO 가 부른 영웅이 또 소환하면 둘 다 7초 연장·같이 끝 */
@@ -167,7 +168,7 @@ function stepHunter(sq,u,foes,dt,t){const C=CFG.squad,b=u.body,s=sq.slots[u.i]||
  const tg=nearestTo(u,G(()=>HEROES[HERO].range,8),foes);
  if(tg&&t>=u.born+.3){as(u,()=>actHunter(sq,u,tg,t));b.x=u.x;b.y=u.y;/* 분신은 자리를 지킨다 */}}
 function stepShades(sq,t){const S=sq.state.stats;for(let i=sq.shades.length-1;i>=0;i--){const c=sq.shades[i];
- if(!c.done&&t>=c.hitAt){c.done=true;const e=c.e;if(e&&e.hp>0&&dmgOK(e)&&c.power>0){try{if(hitEnemy(e,c.power*CFG.shade.mul,{kind:'r952-shade',friendly:true,owner:'hero',r952:'shade',sourceHero:ALLY,attackKind9:'basic'}))S.shadeHits++;}catch(err){fail(err);}
+ if(!c.done&&t>=c.hitAt){c.done=true;const e=c.e;if(e&&e.hp>0&&dmgOK(e)&&c.power>0){try{if(hitEnemy(e,c.power*CFG.shade.mul*M1207(HERO),{kind:'r952-shade',friendly:true,owner:'hero',r952:'shade',sourceHero:ALLY,attackKind9:'basic'}))S.shadeHits++;}catch(err){fail(err);}
    try{window.__STORYWORLD_BLOOD_R190__?.play?.('blood-burst',e.x,e.y,{k:.8,z:0});}catch(_){}}}
  if(t-c.t0>=c.life)sq.shades.splice(i,1);}}
 function step(sq,dt){const t=T(),p=sq.owner,foes=foesNow();formation(sq,foes);
@@ -257,7 +258,7 @@ function drawUnit(p){if(p.r952Form){const sq=p.r952Squad;if(live.includes(sq))dr
 // ── 엔진 연결(이 파일이 가장 바깥에서 감싼다) ──
 let baseAP=null,lastT=null;const rawPower=()=>baseAP?baseAP():G(()=>attackPower(),0);
 function install(){
- if(typeof attackPower==='function'){baseAP=attackPower;attackPower=function(...a){const v=baseAP.apply(this,a),p=P();return isSummon(p)&&fin(v)?v*(+p.r952Mul||1):v;};}
+ if(typeof attackPower==='function'){baseAP=attackPower;attackPower=function(...a){const v=baseAP.apply(this,a),p=P();return isSummon(p)&&fin(v)?v*(+p.r952Mul||1)*M1207(HERO):v;};}
  if(typeof basicAttack==='function'){const base=basicAttack;basicAttack=function(...a){const p=P();if(!on||!isOwner(p))return base.apply(this,a);const cd0=+p.attackCD||0,r=base.apply(this,a);
    try{if(P()===p&&p.attackCD>cd0)onSwing(p);}catch(e){fail(e);}return r;};}
  if(typeof delay==='function'){const base=delay;delay=function(sec,fn,...r){const u=top();if(u&&typeof fn==='function'){const b=u.body,f=fn;fn=function(...x){if(!alive(u)||u.body!==b)return;return as(u,()=>f.apply(this,x));};}return base.call(this,sec,fn,...r);};}

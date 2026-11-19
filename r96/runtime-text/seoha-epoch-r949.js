@@ -17,8 +17,9 @@
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_SEOHA_EPOCH_R949__)return;
 const REV='R949-epoch-1',KEY='storyworld.r949.epoch',HERO='seoha';
-const CHANCE=.05,CHANCE_MAX=.2,ROLL_GAP=.35,DUR=7,ICD=14,MAX_ACTS=2;
+const CHANCE=.05,CHANCE_MAX=.777,ROLL_GAP=.35,DUR=7,ICD=14,MAX_ACTS=2;
 const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
+const M1207=h=>{try{const v=window.__STORYWORLD_PASSIVE_GROWTH_R971__?.damage?.(h);return Number.isFinite(v)&&v>0?Math.min(1,v):1;}catch(_){return 1;}};/* R1207 확률 상향만큼 고정 피해 배율(체력 비례 피해에는 안 씀) */
 const U1025=(h,a,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__,v=u&&u.mask(h,a,k);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},S1025=h=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.share(h);return Number.isFinite(v)?Math.max(0,Math.min(1,v)):1;}catch(_){return 1;}},W1025=(h,w)=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.weights(h,w);return v||w;}catch(_){return w;}},A1025=(h,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.unlocked(h,k)!==false:true;}catch(_){return true;}},O1025=id=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.summonOpen(id)!==false:true;}catch(_){return true;}};/* R1025 특수 패시브 레벨별 해금·소환 영웅 서사 확인(파일 없으면 원래 값) */
 const C1033=(h,k,o,x)=>{try{window.__STORYWORLD_PASSIVE_CUTIN_R1033__?.fire(h,k,o,x);}catch(_){}};/* R1033 세 번째 특수 패시브 컷인(1·2단·몸·끔은 그쪽에서 거름) */
 const L1025=real=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u&&typeof u.summonList==='function'?u.summonList('seoha',['seoha',real&&real.hero]):null;}catch(_){return null;}};/* R1025: 소환 영웅 = 서사 순, 레벨마다 하나씩 최대 7명 */
@@ -66,7 +67,7 @@ function ready(p){try{return typeof readyImage==='function'&&!!readyImage(p);}ca
 function ask(paths,key){const n=Date.now();if(n-(asked[key]||-1e9)<1500)return;asked[key]=n;try{if(typeof ensureImages==='function')Promise.resolve(ensureImages(paths)).catch(()=>{});}catch(err){fail(err);}}
 function img(p){try{const g=typeof readyImage==='function'?readyImage(p):null;if(g&&g.image)return g.image;ask([p],p);}catch(err){fail(err);}return null;}
 // 이 패시브가 직접 주는 피해(시간 폭발·아르벨리아): 엔진 hitEnemy 한 길. 다시 굴리지 않게 inner 로 표시한다.
-function deal(e,v,kind){if(!e||hiddenActor(e)||!canHit(e)||!(v>0))return false;inner++;try{const r=hitEnemy(e,v,{kind:'r949-'+kind,friendly:true,owner:'hero',sourceHero:HERO,r949:true});if(r!==false)stats.hits++;return r;}catch(err){fail(err);return false;}finally{inner--;}}
+function deal(e,v,kind){if(!e||hiddenActor(e)||!canHit(e)||!(v>0))return false;inner++;try{const r=hitEnemy(e,v*M1207(HERO),{kind:'r949-'+kind,friendly:true,owner:'hero',sourceHero:HERO,r949:true});if(r!==false)stats.hits++;return r;}catch(err){fail(err);return false;}finally{inner--;}}
 function stateOf(o){let s=owners.get(o);if(!s){s={lastRoll:-1e9,readyAt:-1e9};owners.set(o,s);ownerCount++;}return s;}
 function ownerOk(o){return !!o&&!(o.hp<=0);}
 
@@ -141,7 +142,7 @@ function mine(src){const o=P();if(!o||o.hero!==HERO||o.r949Summon)return false;i
 if(typeof hitEnemy==='function'){const base=hitEnemy;hitEnemy=function(e,value,source,...a){const r=base.call(this,e,value,source,...a);
  try{if(cur.length){if(r!==false)stats.heroHits++;}else if(!inner&&r!==false&&e&&on()&&mine(source))roll(e);}catch(err){fail(err);}return r;};}
 // 소환 영웅 몸으로 도는 동안: 공격력은 0.25배(서하 레벨·패시브로 계산된 값 기준), 지연 작업은 같은 몸으로 다시 끼워 돌리고, 쏜 탄에는 표식을 붙이고, 처치 경험치는 조종 영웅에게 준다.
-if(typeof attackPower==='function'){const base=attackPower;attackPower=function(...a){const v=base.apply(this,a);return cur.length&&fin(v)?v*HERO_K:v;};}
+if(typeof attackPower==='function'){const base=attackPower;attackPower=function(...a){const v=base.apply(this,a);return cur.length&&fin(v)?v*HERO_K*M1207(HERO):v;};}
 if(typeof delay==='function'){const base=delay;delay=function(sec,fn,...r){const s=curS();if(s&&typeof fn==='function'){const b=s.body,f=fn;fn=function(...x){if(!validS(s)||s.body!==b)return;return as(s,()=>f.apply(this,x));};}return base.call(this,sec,fn,...r);};}
 if(typeof makeShot==='function'){const base=makeShot;makeShot=function(x,y,ang,spd,dmg,opt,...r){if(cur.length)opt={...(opt||{}),r949Summon:true};return base.call(this,x,y,ang,spd,dmg,opt,...r);};}
 if(typeof gainXP==='function'){const base=gainXP;gainXP=function(...a){if(cur.length&&realP&&player!==realP){const b=player;player=realP;try{return base.apply(this,a);}finally{player=b;}}return base.apply(this,a);};}
