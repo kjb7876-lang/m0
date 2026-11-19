@@ -13633,6 +13633,11 @@
       "sha256": "1c09fcc0fd8d3b45322eaa6e33f6ac4c95f5e32320df297458f87f0e7a5caa01"
     },
     {
+      "path": "assets/r1243/move/c103-mid-side.webp",
+      "bytes": 88452,
+      "sha256": "4512ea2f85b9c469b77f8f22eb37760532e4b85e716c0dbb72e320dfcc4a1419"
+    },
+    {
       "path": "assets/r126/props/badge.webp",
       "bytes": 25464,
       "sha256": "fd12f3e8efd3654d060607145cbd6f6f55728f7fd65afd5a9f4d3d1507ae0281"
@@ -56014,8 +56019,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6583196,
-      "sha256": "f1d8f272b010c3669ccf920f69d19f8626c09fe799e661a6ae2d74fe48a654d1"
+      "bytes": 6583245,
+      "sha256": "f1a8972731699712ded3f9877bf0575973ccf830cddca356f8956923bd9a576c"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -56426,6 +56431,11 @@
       "path": "move-dir-r1167-data.js",
       "bytes": 6439,
       "sha256": "6fa4ff124921c91178fd4f8b1c1d7a0bccb1ad555b669f1ec435497ef1e9f44d"
+    },
+    {
+      "path": "move-dir-r1243-data.js",
+      "bytes": 736,
+      "sha256": "5843b6390d57ec0faa23da002232f6a1f1810428a9f42a96fffbb6596617667a"
     },
     {
       "path": "move-dir-r974-data.js",
@@ -57503,9 +57513,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11500,
-  "totalBytes": 1373328521,
-  "webHTMLSha256": "f1d8f272b010c3669ccf920f69d19f8626c09fe799e661a6ae2d74fe48a654d1",
+  "fileCount": 11502,
+  "totalBytes": 1373417758,
+  "webHTMLSha256": "f1a8972731699712ded3f9877bf0575973ccf830cddca356f8956923bd9a576c",
   "largest": [
     {
       "path": "index.html",

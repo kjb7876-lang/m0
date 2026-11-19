@@ -34,4 +34,12 @@ const idx=fs.readFileSync(path.join(R,'runtime-text/index.html'),'utf8');ok(/sin
 const ver=fs.readFileSync(path.join(R,'..','scripts/verify-r96-public.py'),'utf8');ok(ver.includes('sin-boss-sheet-vis-r1243-data.js'),'공개 검증 목록');
 const man=fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8');ok(man.includes('sin-boss-sheet-vis-r1243-data.js'),'manifest');
 const yml=fs.readFileSync(path.join(R,'..','.github/workflows/pages.yml'),'utf8');ok(yml.includes('qa/r1243/r1243-cpu-check.cjs'),'pages.yml 검사 줄');
+// 한리안(c103-mid) 옆 걷기(Dots CX-0172BW-07 walkR ROUGH) — R974 표에 옆 방향만 더함, 위·아래는 R1224 떠서 이동이 맡음
+{const sb={window:{}};sb.window=sb;vm.createContext(sb);vm.runInContext(read('move-dir-r974-data.js'),sb);vm.runInContext(read('move-dir-r1243-data.js'),sb);
+ const E=sb.__STORYWORLD_MOVE_DIR_R974_DATA__?.enemies?.['c103-mid'];ok(!!E,'c103-mid R974 표에 들어감');ok(sb.__STORYWORLD_MOVE_DIR_R1243__?.joined===true,'R974 표와 합침');
+ if(E){ok(E.n===8&&E.cell===384&&E.fps===8,'8칸 384 8fps');ok(!!E.dirs.side&&!E.dirs.up&&!E.dirs.down,'옆만(위·아래는 떠서 이동)');ok(E.idle.some(i=>i.path==='assets/boss-actions-20261011/c103-mid-poses.png'&&String(i.rect)==='255,0,270,520'),'게임이 걷는 동안 그리는 칸');
+  const f=path.join(R,'runtime-text',E.dirs.side.path);ok(fs.existsSync(f),'시트 파일');ok(E.dirs.side.vis>250&&E.dirs.side.py>300&&E.dirs.side.py<384,'발 줄·보이는 키 값');
+  const b=fs.readFileSync(f);ok(b.slice(0,4).toString()==='RIFF'&&b.slice(8,12).toString()==='WEBP','webp');ok(read('move-dir-r1243-data.js')===fs.readFileSync(path.join(R,'runtime-text/move-dir-r1243-data.js'),'utf8'),'runtime-text 사본 같음');}
+ const html=fs.readFileSync(path.join(R,'runtime-text/index.html'),'utf8');ok(html.includes('<script src="./move-dir-r1167-data.js"></script>\n<script src="./move-dir-r1243-data.js"></script>\n'),'태그 move-dir-r1167-data.js 바로 뒤');
+ const mf=fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8');ok(mf.includes('assets/r1243/move/c103-mid-side.webp')&&mf.includes('move-dir-r1243-data.js'),'manifest 에 시트·표');}
 console.log(`R1243 CPU ${n-fails}/${n}`);process.exit(fails?1:0);
