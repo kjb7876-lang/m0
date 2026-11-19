@@ -27,6 +27,12 @@ const T=()=>typeof time==='number'?time:0;
    끄기: localStorage['storyworld.r1063.hwandoTex']='{"on":false}' */
 const TEX1063=/^assets\/(?:r283\/hwando\/r271\/(?:walk-[ewn]|attack-e)|r283\/hwando\/r242\/(?:attack-[sn]|hit-[ens])|r439\/hwando\/attack-e)\.webp$/;
 let tex1063=true;try{const s=JSON.parse(localStorage.getItem('storyworld.r1063.hwandoTex')||'null');if(s&&s.on===false)tex1063=false;}catch(_){}
+/* R1219(사용자 2026-11-19 "환도영웅 앞모습모션 더 일관성있게 만들고싶은데 칼집에 칼을둔채로 간지나게 이동하게"): 아래(앞모습) 걷기 v2 에서 뽑아 든 칼날만 지우고
+   가렸던 망토를 메운 파생본(scripts/r1219-hwando-front-sheath.py) — 두 손을 칼집에 꽂힌 칼자루에 얹고 걷는다. 칸·발 기준점·몸 키·색인은 R436 그대로.
+   Dots 칼집 걷기 시트가 오기 전 임시본. 끄기: localStorage['storyworld.r1219.hwandoSheath']='{"on":false}' */
+const SHEATH1219_SRC='assets/r436/hwando/walk-s.webp',SHEATH1219='assets/r1219/r436/hwando/walk-s.webp';
+let sheath1219=true;try{const s=JSON.parse(localStorage.getItem('storyworld.r1219.hwandoSheath')||'null');if(s&&s.on===false)sheath1219=false;}catch(_){}
+function sheath(p){return sheath1219&&p===SHEATH1219_SRC?SHEATH1219:p;}
 function tex(p){if(!tex1063||typeof p!=='string'||!TEX1063.test(p))return p;return 'assets/r1063/'+p.slice(7);}
 const asked=new Map();
 /* R440(사용자 2026-11-09 "환도영웅에 옛 이미지 갑자기 등장 버그"): 지역에 들어서면 엔진 그림 캐시가 다시 채워지는 몇 프레임 동안 readyImage 가 비어
@@ -54,7 +60,7 @@ function track(){const t=T();if(S.x!=null){const dx=player.x-S.x,dy=player.y-S.y
    const nd=walkFromVec(v[0],v[1]);if(nd!==S.walkDir){S.pend=(S.pendDir===nd?(S.pend||0)+1:1);S.pendDir=nd;if(S.pend>=2){S.walkDir=nd;S.pend=0;}}else S.pend=0;}}
  S.x=player.x;S.y=player.y;}
 const want=()=>(typeof actorHeight==='function'?actorHeight():66)*((window.__STORYWORLD_VISUAL_R119__?.inspect?.()?.stats?.standRatio)||.98);
-function draw(rec,st,best,anim,dir,frame,opt={}){const ws=anim==='walk'&&dir==='s'&&opt.s?wsRes():null;/* R436: 아래 걷기만 새 v2 */if(dir==='s'&&!ws){const P=P277();if(P?.down)dir=P.down();}/* R349: 그 밖의 아래 그림은 쓰지 않는다(위·좌·우만) */const R=ws||res(anim,dir);if(!R)return false;const A=R.A,p=tex((window.__STORYWORLD_HWANDO_R283__?.path?.(R.base,A.file))||R.base+A.file),im=image(p);/* R283 색 맞춘 파생본 */if(!im){/* R345: 공격·피격 그림이 아직 안 받아졌으면 엔진 옛 그림 대신 이미 받은 같은 방향 걷기 선 자세로(옛 그림이 한 순간 튀지 않게) */if(!opt.fb&&anim!=='walk'){stats.standIn=(stats.standIn||0)+1;const w=res('walk',dir)?.A;if(w&&draw(rec,st,best,'walk',dir,Math.min(3,w.n-1),{fb:true}))return true;}return false;}
+function draw(rec,st,best,anim,dir,frame,opt={}){const ws=anim==='walk'&&dir==='s'&&opt.s?wsRes():null;/* R436: 아래 걷기만 새 v2 */if(dir==='s'&&!ws){const P=P277();if(P?.down)dir=P.down();}/* R349: 그 밖의 아래 그림은 쓰지 않는다(위·좌·우만) */const R=ws||res(anim,dir);if(!R)return false;const A=R.A,p=sheath(tex((window.__STORYWORLD_HWANDO_R283__?.path?.(R.base,A.file))||R.base+A.file)),im=image(p);/* R1219 *//* R283 색 맞춘 파생본 */if(!im){/* R345: 공격·피격 그림이 아직 안 받아졌으면 엔진 옛 그림 대신 이미 받은 같은 방향 걷기 선 자세로(옛 그림이 한 순간 튀지 않게) */if(!opt.fb&&anim!=='walk'){stats.standIn=(stats.standIn||0)+1;const w=res('walk',dir)?.A;if(w&&draw(rec,st,best,'walk',dir,Math.min(3,w.n-1),{fb:true}))return true;}return false;}
  const n=A.n,fr=((frame%n)+n)%n,cw=A.cell[0],ch=A.cell[1],col=fr%A.cols,row=Math.floor(fr/A.cols);
  const body=R.body||A.body||180,w=want(),k=w/body,ky=opt.breath?k*(1+.008*Math.sin(T()*2.2)):k;
  const q=project(player.x,player.y),lift=Math.min(Math.max(+player.visualLiftPx||0,0),w*.65),fx=q.x,fy=q.y-lift,f=R.mir?-1:1,[ax,ay]=A.anchor;
@@ -69,7 +75,7 @@ const BODY_ART=/r436\/hwando\/|hero_direction|hero-authored|assets\/heroes\/|r91
 function pickBody(rec,st){let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!BODY_ART.test(String(c.sourcePath||c.image?.src||'')))continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}return best;}
 let preloaded=null;
 function preload(){if(!IDX||preloaded===room)return;preloaded=room;for(const a of (P277()?['walk']:['walk','idle']))for(const d of ['n','s','e','w']){const A=IDX.anims[a]?.[d];if(A?.file)image(tex((window.__STORYWORLD_HWANDO_R283__?.path?.(BASE,A.file))||BASE+A.file));}
- if(WS)image(WS_BASE+WS.file);/* R436 */
+ if(WS)image(sheath(WS_BASE+WS.file));/* R436 · R1219 */
  /* R345: 공격·피격(새 팩 → R242 대체 포함)도 미리 받는다 — 처음 휘두르거나 맞는 순간 옛 그림이 튀던 원인 */for(const a of ['attack','hit'])for(const d of ['n','s','e','w']){const R=res(a,d);if(R?.A?.file)image(tex((window.__STORYWORLD_HWANDO_R283__?.path?.(R.base,R.A.file))||R.base+R.A.file));}}
 const atkOf=d=>res('attack',d)?.A;
 // R1050b: 걷기 꼬리는 0.15초. 공격 중인데 엔진이 '걷는 중 아님'이면 몹·동료에게 밀린 것 → 걷기 그림으로 공격을 덮지 않는다
@@ -97,6 +103,6 @@ function choose(rec,st){const best=pickBody(rec,st);if(!best)return;const t=T(),
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
  try{if(on&&st>=0&&solo()&&player?.hero==='hwando'&&player.hp>0){loadIndex();if(P277()?.walkS?.())loadWalkS();if(IDX)choose(rec,st);}}catch(e){fail(e);}return r;};}
 loadIndex();
-window.__STORYWORLD_HWANDO_R271__=Object.freeze({revision:REV,pure:Object.freeze({walkTail,tex}),active:()=>on&&!!IDX&&typeof player==='object'&&player?.hero==='hwando'&&solo(),index:()=>IDX,state:()=>({...S,swing:S.swing&&{...S.swing},hit:S.hit&&{...S.hit}}),
+window.__STORYWORLD_HWANDO_R271__=Object.freeze({revision:REV,pure:Object.freeze({walkTail,tex,sheath}),active:()=>on&&!!IDX&&typeof player==='object'&&player?.hero==='hwando'&&solo(),index:()=>IDX,state:()=>({...S,swing:S.swing&&{...S.swing},hit:S.hit&&{...S.hit}}),
  inspect:()=>({revision:REV,on,ready:!!IDX,stats:{...stats},lastError}),set:v=>{on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}});
 })();

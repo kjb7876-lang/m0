@@ -1,0 +1,42 @@
+{
+ "revision": "R1219-hwando-front-sheath-1",
+ "source": "assets/r436/hwando/walk-s.webp",
+ "source_sha256": "8d8837750e4201c1da00690c749f90ce7b672b53401225dd87c6035114a1382a",
+ "file": "walk-s.webp",
+ "sha256": "80d3965f590c56301816ebb37401677d34150739ff86f1b3e47fd32ebf11b33a",
+ "bytes": 134288,
+ "frames": [
+  {
+   "frame": 0,
+   "blade_px": 578,
+   "filled_px": 104
+  },
+  {
+   "frame": 1,
+   "blade_px": 597,
+   "filled_px": 118
+  },
+  {
+   "frame": 2,
+   "blade_px": 550,
+   "filled_px": 96
+  },
+  {
+   "frame": 3,
+   "blade_px": 580,
+   "filled_px": 107
+  },
+  {
+   "frame": 4,
+   "blade_px": 585,
+   "filled_px": 109
+  },
+  {
+   "frame": 5,
+   "blade_px": 593,
+   "filled_px": 104
+  }
+ ],
+ "temporary": true,
+ "note": "칼날만 지운 임시 파생본. Dots 칼집 걷기 시트가 오면 바꾼다. 색인·발 기준점·몸 키는 R436 index.json 그대로."
+}
