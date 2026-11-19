@@ -95,7 +95,12 @@ function bodyFrac(image,rect){if(!image||!rect)return null;let m=fracCache.get(i
  let out=null;try{const [sx,sy,sw,sh]=rect,H=64,W=Math.max(8,Math.round(64*sw/sh)),c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(image,sx,sy,sw,sh,0,0,W,H);
   const d=g.getImageData(0,0,W,H).data,rows=[];for(let y=0;y<H;y++){let n=0;for(let x=0;x<W;x++)if(d[(y*W+x)*4+3]>100)n++;rows.push(n);}const mx=Math.max(...rows);if(mx>0){const th=mx*.12;let a=-1,b=-1;for(let y=0;y<H;y++)if(rows[y]>=th){if(a<0)a=y;b=y;}out=(b-a+1)/H;}
   c.width=c.height=1;}catch(_){out=null;}m.set(key,out);stats.fracScans=(stats.fracScans||0)+1;return out;}
-function fitMin(st){const C=ctx.commands;let best=null,bh=0;for(let i=st;i<C.length;i++){const c=C[i];if(c?.kind!=='image'||!c.points)continue;const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>bh){bh=h;best=c;}}
+// R1234: 몸 = 가장 높은 그림이되 효과 그림(공격 예고 고리 final42 effects/251 atlas 등 이펙트 폴더·주인이 몹이 아닌 것)은 뺀다.
+//  예고 고리를 몸으로 보면 '이미 충분히 크다'로 읽혀 공격 준비 동안만 최소 크기 맞춤이 빠져 보스가 작아졌다 커졌다 했다.
+const FX205=/(^|\/)(?:fx|vfx|pixelfx|effects?|telegraphs?|warnings?)\/|r251\/atlas|^r1195:|\/r430\/|\/r108\/|\/r411\/|\/r163\//i;
+const src205=c=>String(c&&(c.sourcePath||c.image&&c.image.__storyworldStaticSource&&c.image.__storyworldStaticSource.path||c.image&&c.image.src)||'').replace(/^https?:\/\/[^/]+\/(?:m0\/)?/,'');
+function fitBody(C,st){let best=null,bh=0;for(let i=st;i<C.length;i++){const c=C[i];if(c?.kind!=='image'||!c.points)continue;if(FX205.test(src205(c))||(c.owner&&c.owner.kind&&c.owner.kind!=='enemy'))continue;const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>bh){bh=h;best=c;}}return best;}
+function fitMin(st){const C=ctx.commands;const best=fitBody(C,st),bh=best?Math.abs(best.points[3][1]-best.points[0][1]):0;
  if(!best||bh<6)return;const f=bodyFrac(best.image,best.sourceRect)||1,now=bh*f,want=actorHeight()*HERO_BODY*MIN_BOSS_H;stats.lastBodyRatio=Math.round(now/(actorHeight()*HERO_BODY)*100)/100;if(now>=want*.98)return;
  const k=Math.min(MAX_FIT,want/now),P=best.points,fx=(P[2][0]+P[3][0])/2,fy=(P[2][1]+P[3][1])/2,own=best.owner;
  for(let i=st;i<C.length;i++){const c=C[i];if(c?.kind!=='image'||!c.points||(c!==best&&(!own||c.owner!==own)))continue;c.points=c.points.map(([x,y])=>[fx+(x-fx)*k,fy+(y-fy)*k]);}
@@ -109,6 +114,6 @@ if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a
  const big=prefs.minSize&&recOK()&&e.hp>0&&(bossClass(e)||midClass(e)||e.midboss),st=big?ctx.commands.length:0;
  try{return base.apply(this,arguments);}finally{if(k!==1)e.defScale=ds;if(big)try{fitMin(st);}catch(err){fail(err);}}};}
 function set(p={}){for(const k of Object.keys(DEFAULTS))if(typeof p[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
-window.__STORYWORLD_BOSS_R205__=Object.freeze({revision:REV,set,bossClass,midClass,enrage,scaleRanges,constants:{ENRAGE_AT,ENRAGE_DMG,ENRAGE_STAT,ENRAGE_REGEN,ENRAGE_SIZE,ENRAGE_RANGE,ECHO_GAP,MOVE_MAX,ROOT_GAP_MUL,MIN_BOSS_H},rootBoss,gapOf,
+window.__STORYWORLD_BOSS_R205__=Object.freeze({revision:REV,fitBody,set,bossClass,midClass,enrage,scaleRanges,constants:{ENRAGE_AT,ENRAGE_DMG,ENRAGE_STAT,ENRAGE_REGEN,ENRAGE_SIZE,ENRAGE_RANGE,ECHO_GAP,MOVE_MAX,ROOT_GAP_MUL,MIN_BOSS_H},rootBoss,gapOf,
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},moving:moving.size,lastError})});
 })();

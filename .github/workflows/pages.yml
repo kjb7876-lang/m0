@@ -517,6 +517,8 @@ jobs:
         run: node r96/qa/r1181/r1181-gem-thin-cpu-check.cjs
       - name: R1195 mob cut feet and edges covered by ink mist CPU check
         run: node r96/qa/r1195/feet-ink-cpu-check.cjs
+      - name: R1234 ink mist body pick, boss fit body, death size from drawn body, blocked mob position steady CPU check
+        run: node r96/qa/r1234/jitter-fog-cpu-check.cjs
       - name: R1210 S-06 디스토피아 몹 미래형 원거리 공격(레이저·방사능·음파) CPU check
         run: node r96/qa/r1210/r1210-cpu-check.cjs
       - name: R1213 기계 계열 몹 원거리(레이저·방사능·음파·폭탄) CPU check

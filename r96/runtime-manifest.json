@@ -54549,8 +54549,8 @@
     },
     {
       "path": "boss-r205.js",
-      "bytes": 14736,
-      "sha256": "fde7be7f765355447556baf221f4eb21304ca4b780c52137f18a500ec2635536"
+      "bytes": 15605,
+      "sha256": "2bc458103aa38899dd7264f515c33f93f67dcc4136e29221e6e71b3b5c218f2f"
     },
     {
       "path": "bosses-r104-data.js",
@@ -55899,8 +55899,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6582601,
-      "sha256": "35e2e108e4122cb883241936b2d097d75def00ae01cbf25a5bbea4fde53ddfb3"
+      "bytes": 6582647,
+      "sha256": "842964a985cd508b9b1ccda4a442808d026594f29474356b4155babfc2d974d0"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -56109,8 +56109,8 @@
     },
     {
       "path": "mob-death-r462.js",
-      "bytes": 46685,
-      "sha256": "4dccc1b5af1474dbb38b93b9ad113611f72f3bda0685aa65d410ea584eab5eb7"
+      "bytes": 50756,
+      "sha256": "8dd3dd1418783d46679eb91b95332c74b457132c72221e96abed1746a8f1fd0e"
     },
     {
       "path": "mob-dots-r374.js",
@@ -56129,8 +56129,8 @@
     },
     {
       "path": "mob-feet-ink-r1195.js",
-      "bytes": 17520,
-      "sha256": "9e4b3d93348f163026547fdaba223a7f3f57158d04461f7d9d9fd6f15e05533c"
+      "bytes": 18639,
+      "sha256": "a8fd137d7f4badc78130ade5dc29bd54892927cf96587c7d63e3cf59b2c031f1"
     },
     {
       "path": "mob-fix-r275.js",
@@ -56561,6 +56561,11 @@
       "path": "portal-interaction-r83.js",
       "bytes": 6532,
       "sha256": "2227fe53ac7a22272a8d565df7c9868743276bc2d2f28122f8ad7a7ad98f56be"
+    },
+    {
+      "path": "pos-steady-r1234.js",
+      "bytes": 6316,
+      "sha256": "b8944fdcfbf488151863ba2447c862ecb5e5b0e62361941a22821293b968b1e4"
     },
     {
       "path": "projectile-sheets-r912.js",
@@ -57338,9 +57343,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11467,
-  "totalBytes": 1372077124,
-  "webHTMLSha256": "35e2e108e4122cb883241936b2d097d75def00ae01cbf25a5bbea4fde53ddfb3",
+  "fileCount": 11468,
+  "totalBytes": 1372089545,
+  "webHTMLSha256": "842964a985cd508b9b1ccda4a442808d026594f29474356b4155babfc2d974d0",
   "largest": [
     {
       "path": "index.html",
