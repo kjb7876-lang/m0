@@ -21,7 +21,7 @@
 if(window.__STORYWORLD_DYS_RANGED_R1210__)return;
 const REV='R1214b-role-split',KEY='storyworld.r1210.dys';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
-const stats={aims:0,fires:{laser:0,radiation:0,sonic:0,bomb:0,fear:0,dark:0,shadow:0,tentacle:0},engine:0,hits:{laser:0,radiation:0,sonic:0,bomb:0,fear:0,dark:0,shadow:0,tentacle:0},cancels:0,drawn:{},tele:0,errors:0};let lastError=null;
+const stats={aims:0,fires:{laser:0,radiation:0,sonic:0,bomb:0,fear:0,dark:0,shadow:0,tentacle:0,fire:0},engine:0,hits:{laser:0,radiation:0,sonic:0,bomb:0,fear:0,dark:0,shadow:0,tentacle:0,fire:0},contact:0,cancels:0,drawn:{},tele:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 const G=n=>{try{return Function('return typeof '+n+"!=='undefined'?"+n+':undefined')();}catch(_){return undefined;}};
 const T=()=>{const t=G('time');return typeof t==='number'?t:0;};
@@ -35,6 +35,8 @@ const TUNE=Object.freeze({
  /* R1214 귀신 계열 */
  fear:Object.freeze({min:2.6,max:6,windup:.7,dmg:.75,cd:6.6,half:.3,reach:6.5,life:.7}),
  dark:Object.freeze({min:3,max:7,windup:.6,dmg:.75,cd:6.2,speed:5.5,hitR:.5,reach:7.5,impact:.45}),
+ /* R1227 마법 계열 불(추락 dist06 먼저): 곧게 나는 불덩이, 맞으면 진홍 폭발. 암흑과 같은 판정 */
+ fire:Object.freeze({min:3,max:7,windup:.65,dmg:.75,cd:6.4,speed:6,hitR:.5,reach:7.5,impact:.55}),
  shadow:Object.freeze({min:2.8,max:6.5,windup:.75,dmg:.8,cd:6.8,radius:1.05,delay:.3,rise:.9}),
  tentacle:Object.freeze({min:2.6,max:6,windup:.7,dmg:.8,cd:6.6,width:.45,len:5.5,delay:.3,rise:.8})});
 const NAMES=Object.freeze({
@@ -91,9 +93,11 @@ const NAMES=Object.freeze({
  '붉은 교정 표시':'tentacle','정해진 시각에 도착하지 못한 발자국':'shadow','관람석의 시선':'fear','종이 형상':'dark','막힌 이름들':'tentacle',
  // 사몽 R380 이 바꿔 다는 이름(그림 기준)
  '발소리 추적 잔영':'shadow','검은 뿌리 포획체':'tentacle','봉합 정원사 인형':'tentacle','결말 접합체':'radiation','허위 승전 훈장막':'laser','금박 유리관 수확기':'fear',
- '재주문 도장체':'dark','세 번째 잔의 강요체':'fear','녹슨 개찰구 수집체':'tentacle','인과 고리충':'dark','비극 계량체':'fear'});
+ '재주문 도장체':'dark','세 번째 잔의 강요체':'fear','녹슨 개찰구 수집체':'tentacle','인과 고리충':'dark','비극 계량체':'fear',
+ /* R1227 추락(dist06, 사용자 11-19 10:51Z "추락일반몹 원거리공격및 스킬 도형으로나오는문제 개선") — 지옥·악마 지역이라 불. 주문사·화염술사 = 원거리, 파수악마·타락천사 = 근접(타격 자국만 불 시트) */
+ '검은기둥 주문사':'fire','검은기둥 화염술사':'fire','지옥문 파수악마':'fire','소환진 타락천사':'fire'});
 /* R1214b 역할: 그림에 총·포·캐논·통·주문·눈이 있으면 원거리, 칼·낫·발톱·이빨·돌진 몸이면 근접. 여기 없는 이름은 원거리 */
-const MELEE=Object.freeze(new Set([
+const MELEE=Object.freeze(new Set(['지옥문 파수악마','소환진 타락천사',
  // S-06 디스토피아(dys-bulwark·scythe·membrane·cleaver·behemoth 그림 = 돌진·낫·날개 급습·집게·거대 팔)
  '방벽 돌진체','낫팔 잠복체','막익 급습체','전선 절단자 · 짙은 형상','심해 연산거수 · 짙은 형상','변이된 사냥개 괴수','폐선로 태엽 군단병','외계 침공군',
  // 기계
@@ -126,7 +130,9 @@ function kindFor(name){const k=NAMES[norm(name)];return k||null;}
 const major=e=>!!(e&&(e.boss||e.midboss||e.persona||e.cosmic||e.trial||e.samongBoss||e.combatProfile?.major));
 /* 맘몬 지역(ep1b06·mammon)은 사용자 지시로 손대지 않는다 */
 const banned=()=>{try{return /^ep1b06$|mammon/i.test(String(G('room')?.id||''));}catch(_){return false;}};
-function eligible(e){return !!(e&&roleFor(e.name)==='ranged'&&!banned()&&e.hp>0&&e.spawnState==='active'&&!e.disabled&&!major(e)&&kindFor(e.name));}
+/* R1230 연동: 제자리 고정 적(탑·소환진·조형물)은 이 오버레이가 쏘거나 움직이지 않는다 */
+const fixedFoe=e=>!!(e&&(e.r75Tower||e.r251Circle||e.r170Tower||e.prop||e.object||e.stationary));
+function eligible(e){return !!(e&&!fixedFoe(e)&&roleFor(e.name)==='ranged'&&!banned()&&e.hp>0&&e.spawnState==='active'&&!e.disabled&&!major(e)&&kindFor(e.name));}
 const bossLike=e=>!!(e&&(e.boss||e.midboss));
 // 그 맵(방)의 일반 몹 종류 — 죽은 몹도 센다(보스전 땐 몹이 다 죽어 있을 수 있음). 방마다 캐시.
 const mapCache=new WeakMap();
@@ -160,15 +166,15 @@ function launch(e,s,kind,now){const k=s.boss?BOSS.scale:1,u=s.boss?scaled(kind):
  else if(kind==='sonic')live.push({...base,life:u.reach/u.speed,hit:false});
  else if(kind==='fear'){/* 시선: 쏘는 순간 부채꼴(겨눈 쪽 ±half, reach 안)에 있으면 맞음 */const d=Math.hypot(p.x-e.x,p.y-e.y),hit=d<=u.reach&&angDiff(Math.atan2(p.y-e.y,p.x-e.x),a)<=u.half&&sees(e);
   live.push({...base,life:u.life,hit,px:p.x,py:p.y});if(hit){hurtP(dmg,src);stats.hits.fear++;}}
- else if(kind==='dark')live.push({...base,life:u.reach/u.speed+u.impact,hit:false,end:null});
+ else if(kind==='dark'||kind==='fire')live.push({...base,life:u.reach/u.speed+u.impact,hit:false,end:null});
  else if(kind==='shadow'||kind==='tentacle'){const d=Math.min(Math.hypot(s.aim.x-e.x,s.aim.y-e.y),s.boss?BOSS.max:u.max);live.push({...base,tx:e.x+Math.cos(a)*d,ty:e.y+Math.sin(a)*d,life:u.delay+u.rise,hit:false});}
  else{const d=Math.min(Math.hypot(s.aim.x-e.x,s.aim.y-e.y),s.boss?BOSS.max:u.max),tx=e.x+Math.cos(a)*d,ty=e.y+Math.sin(a)*d;
   if(kind==='bomb')live.push({...base,tx,ty,life:u.flight+u.blast,hit:false});else live.push({...base,tx,ty,life:u.flight+u.pool,ticks:0,lastTick:-9});}}
 function advanceLive(now){const p=P(),alive=new Set();for(const e of G('room')?.enemies||[])if(e&&e.hp>0)alive.add(e.id);
  /* 쏜 몹이 죽으면 남은 공격도 사라짐(엔진 cleanupOwner3 와 같게) */live=live.filter(x=>{const age=now-x.t0;if(age>x.life)return false;if(x.owner!=null&&x.owner!=='demo'&&!alive.has(x.owner))return false;
  if(x.kind==='sonic'&&!x.hit){const u=x.u,r=age*u.speed;if(waveHits(x.ox,x.oy,x.a,r,p.x,p.y,u.band,u.half)){x.hit=true;hurtP(x.dmg,x.src);stats.hits.sonic++;}}
- else if(x.kind==='dark'&&!x.end){const u=x.u,fl=Math.min(age,u.reach/u.speed)*u.speed,qx=x.ox+Math.cos(x.a)*fl,qy=x.oy+Math.sin(x.a)*fl;
-  if(Math.hypot(p.x-qx,p.y-qy)<=u.hitR){x.hit=true;x.end={x:qx,y:qy,t:now};hurtP(x.dmg,x.src);stats.hits.dark++;}else if(age>=u.reach/u.speed)x.end={x:qx,y:qy,t:now};}
+ else if((x.kind==='dark'||x.kind==='fire')&&!x.end){const u=x.u,fl=Math.min(age,u.reach/u.speed)*u.speed,qx=x.ox+Math.cos(x.a)*fl,qy=x.oy+Math.sin(x.a)*fl;
+  if(Math.hypot(p.x-qx,p.y-qy)<=u.hitR){x.hit=true;x.end={x:qx,y:qy,t:now};hurtP(x.dmg,x.src);stats.hits[x.kind]++;}else if(age>=u.reach/u.speed)x.end={x:qx,y:qy,t:now};}
  else if((x.kind==='shadow'||x.kind==='tentacle')&&!x.hit){const u=x.u;if(age>=u.delay){x.hit=true;const h=x.kind==='shadow'?poolHits(x.tx,x.ty,u.radius,p.x,p.y):laserHits(x.ox,x.oy,x.a,u.len,p.x,p.y,u.width);if(h){hurtP(x.dmg,x.src);stats.hits[x.kind]++;x.struck=true;}}}
  else if(x.kind==='bomb'&&!x.hit){if(age>=x.u.flight){x.hit=true;if(poolHits(x.tx,x.ty,x.u.radius,p.x,p.y)){hurtP(x.dmg,x.src);stats.hits.bomb++;}}}
  else if(x.kind==='radiation'){const u=x.u;if(age>=u.flight&&x.ticks<u.ticks&&now-x.lastTick>=u.gap-1e-6&&poolHits(x.tx,x.ty,u.radius,p.x,p.y)){x.ticks++;x.lastTick=now;hurtP(x.dmg,x.src);stats.hits.radiation++;}}
@@ -192,7 +198,7 @@ function step(){if(!prefs.on||paused())return;const now=T();if(!(now>lastT)){las
 /* R1214b 역할 지키기: 원거리 몹은 ai 'ranged'·거리 유지·근접 안 함, 근접 몹은 ai 'melee'(원거리 없음). 원래 ai 는 e.r1214Ai 에 둔다 */
 let lastRoleT=-1;const roleStats={ranged:0,melee:0,backs:0,holds:0,meleeCancels:0};
 /* 둘 다 엔진 ai 는 'melee' 로 둔다(엔진 기본 탄 ranged3 는 안 쏨). 원거리 몹은 이 오버레이가 겨누기 예고(Dots 시트)와 함께 RANGED_CD 배 짧은 간격으로 쏘고, 거리를 지킨다 */
-function roleTick(e,p){const r=roleFor(e.name);if(!r)return;if(e.r1214Ai===undefined)e.r1214Ai=e.ai;
+function roleTick(e,p){if(fixedFoe(e))return;const r=roleFor(e.name);if(!r)return;if(e.r1214Ai===undefined)e.r1214Ai=e.ai;
  if(e.ai!=='melee'){e.ai='melee';roleStats[r]++;}
  if(r==='melee')return;
  if(e.spawnState!=='active')return;const now=T(),dt=Math.min(.1,Math.max(0,now-(e.r1214T??now)));e.r1214T=now;
@@ -216,6 +222,7 @@ if(typeof R3==='function'){const base=R3;const wrapped=function(e,...a){try{if(p
 const SH=Object.freeze({laserAim:'assets/r1210/laser-aim6.webp',laserCharge:'assets/r1210/laser-charge8.webp',laserBody:'assets/r1210/laser-body8.webp',laserHit:'assets/r1210/laser-impact8.webp',
  ring:'assets/r1210/sonic-ring.webp',blast:'assets/r1213/bomb-blast24.webp',
  /* R1213: Dots CX-0167RA r1 ROUGH 기계 시트(가로 한 줄) */bombWarn:'assets/r1213/bomb-warning8.webp',inkBurst:'assets/r1213/ink-dispersal12.webp',orb:'assets/r1213/orb-flight8.webp',capsule:'assets/r1213/capsule-flight8.webp',greenWarn:'assets/r1213/green-warning8.webp',sonicCharge:'assets/r1213/sonic-charge6.webp',
+ /* R1227 불 계열 Dots 시트 */fireball:'assets/r1227/fireball-flight8.webp',crimson:'assets/r1227/crimson-impact12.webp',castTell:'assets/r1227/cast-tell8.webp',
  /* R1214 귀신 계열 Dots 시트 */gaze:'assets/r1214/fear-gaze12.webp',fearMark:'assets/r1214/fear-status8.webp',darkOrb:'assets/r1214/dark-orb-flight8.webp',darkHit:'assets/r1214/dark-impact8.webp',
  handWarn:'assets/r1214/shadow-hand-warning8.webp',handRise:'assets/r1214/shadow-rise12.webp',fissure:'assets/r1214/fissure-warning8.webp',inkRise:'assets/r1214/ink-rise10.webp',mist:'assets/r562/neon-toxic-mist.webp',pool:'assets/r562/dots/neon-toxic-pool.webp'});
 const COL=Object.freeze({ink:'rgba(12,14,20,.62)',laser:'#a8f4ff',rad:'#9be37a',sonic:'#c9d6f2',bomb:'#b8a6ff',ghost:'#b9b2c8',dark:'#8a74b8'});
@@ -251,6 +258,7 @@ function drawTele(c,e,kind,u01,aim,k=1){stats.tele++;const pr=G('project'),ah=AH
  else if(kind==='fear'){/* 머리 위에 눈이 뜨고(0~5칸) 겨눈 쪽으로 옅은 먹 부채꼴 */const u=TUNE.fear;halo(c,q.x,q.y-ah*1.25,ah*.5*k,ah*.3*k,.5+.5*g);cell(SH.gaze,12,Math.floor(g*5.99),q.x,q.y-ah*1.25,ah*1.1*k,ah*1.1*k,.7+.3*g);
   for(const sd of [-1,1]){const t=aim.a+sd*u.half,end=pr(e.x+Math.cos(t)*u.reach*k,e.y+Math.sin(t)*u.reach*k);line(c,chest,{x:end.x,y:end.y-ah*.35},2*k,COL.ink,.18+.25*g);}
   arcs(c,e,aim.a,u.reach*k*(.3+.7*g),u.half,COL.ghost,.2+.3*g,1.5*k);}
+ else if(kind==='fire'){/* 발밑 시전 고리(Dots TL03) + 손에 불덩이가 커짐 — 코드 선·원 없이 시트만 */cell(SH.castTell,8,Math.floor(g*7.99),q.x,q.y,ah*1.3*k,ah*.65*k,.75+.25*g);cell(SH.fireball,8,Math.floor(now*14)%8,chest.x,chest.y,ah*(.45+.45*g)*k,ah*(.45+.45*g)*.75*k,.6+.4*g);}
  else if(kind==='dark'){const u=TUNE.dark,end=pr(e.x+Math.cos(aim.a)*u.reach*k,e.y+Math.sin(aim.a)*u.reach*k);line(c,chest,{x:end.x,y:end.y-ah*.35},(2+2*g)*k,COL.ink,.2+.3*g);
   line(c,chest,{x:end.x,y:end.y-ah*.35},1.5*k,COL.dark,.25+.35*g);cell(SH.darkOrb,8,Math.floor(now*14)%8,chest.x,chest.y,ah*(.5+.4*g)*k,ah*(.5+.4*g)*k,.7+.3*g);}
  else if(kind==='shadow'){const u=TUNE.shadow,d=Math.min(Math.hypot(aim.x-e.x,aim.y-e.y),k>1?BOSS.max:u.max),t=pr(e.x+Math.cos(aim.a)*d,e.y+Math.sin(aim.a)*d),R=u.radius*k*unit()*ISO;
@@ -274,6 +282,10 @@ function drawLive(c,now){const pr=G('project'),ah=AH(),U=unit();
   else if(x.kind==='fear'){const u=x.u,v=Math.min(1,age/u.life),o=pr(x.ox,x.oy);halo(c,o.x,o.y-ah*1.25,ah*.5*K,ah*.3*K,1-v);cell(SH.gaze,12,6+Math.floor(v*5.99),o.x,o.y-ah*1.25,ah*1.1*K,ah*1.1*K,1-v*.3);
    arcs(c,{x:x.ox,y:x.oy},x.a,u.reach*(.4+.6*v),u.half,COL.ink,.35*(1-v),5*K);arcs(c,{x:x.ox,y:x.oy},x.a,u.reach*(.4+.6*v),u.half,COL.ghost,.5*(1-v),2*K);
    if(x.hit){const P0=P(),q=pr(P0.x,P0.y);halo(c,q.x,q.y-ah*1.15,ah*.35,ah*.3,1);cell(SH.fearMark,8,Math.floor(age*12)%8,q.x,q.y-ah*1.15,ah*.55,ah*.55,.9);}}
+  else if(x.kind==='fire'){const u=x.u;if(!x.end){const fl=age*u.speed,q=pr(x.ox+Math.cos(x.a)*fl,x.oy+Math.sin(x.a)*fl),sx=Math.cos(x.a)-Math.sin(x.a);/* 시트 불덩이는 오른쪽으로 날아가는 그림 → 화면 진행 방향이 왼쪽이면 좌우 반전 */
+    if(sx<0){c.save();c.translate(q.x,0);c.scale(-1,1);cell(SH.fireball,8,Math.floor(age*16)%8,0,q.y-ah*.45,U*2.6*K,U*1.95*K,1);c.restore();}else cell(SH.fireball,8,Math.floor(age*16)%8,q.x,q.y-ah*.45,U*2.6*K,U*1.95*K,1);}
+   else{const pa=now-x.end.t,q=pr(x.end.x,x.end.y);cell(SH.crimson,12,Math.min(11,Math.floor(pa/u.impact*12)),q.x,q.y+U*.3*K,U*2.6*K,U*2.6*K,1,true);}}
+  else if(x.kind==='mhit'){/* 근접 불 몹 타격 자국(R248 선·불꽃 도형 대신) */const v=Math.min(1,age/x.life),q=pr(x.tx,x.ty);cell(SH.crimson,12,Math.min(11,Math.floor(v*12)),q.x,q.y+ah*.15,ah*1.5,ah*1.5,1,true);}
   else if(x.kind==='dark'){const u=x.u;if(!x.end){const fl=age*u.speed,q=pr(x.ox+Math.cos(x.a)*fl,x.oy+Math.sin(x.a)*fl);cell(SH.darkOrb,8,Math.floor(age*16)%8,q.x,q.y-ah*.45,U*1.4*K,U*1.4*K,1);ell(c,q,6*K,3*K,COL.ink,.3,true);}
    else{const pa=now-x.end.t,q=pr(x.end.x,x.end.y);cell(SH.darkHit,8,Math.min(7,Math.floor(pa/u.impact*8)),q.x,q.y-ah*.4,U*1.6*K,U*1.6*K,1);}}
   else if(x.kind==='shadow'){const u=x.u,q=pr(x.tx,x.ty),R=u.radius*U*ISO;if(age<u.delay)cell(SH.handWarn,8,7,q.x,q.y,R*2.6,R*1.3,1);
@@ -322,5 +334,8 @@ let lastRoom=null;if(typeof setInterval==="function")setInterval(()=>{try{const 
 function set(v){prefs={...prefs,...(v&&typeof v==='object'?v:{on:v!==false})};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}if(!prefs.on){live=[];for(const e of G('room')?.enemies||[])if(e?.r1210)e.r1210.mode=null;}return {...prefs};}
 window.__STORYWORLD_DYS_RANGED_R1210__=Object.freeze({revision:REV,set,kindFor,eligible,bossEligible,mapKinds,scaled,bossScale:BOSS.scale,boss:BOSS,laserHits,waveHits,poolHits,bossK,hueOf,tune:TUNE,names:NAMES,maxLive:MAXLIVE,firstDelay:FIRST,
  /* 장면 확인용: 영웅 앞에 그 종류 공격을 하나 띄운다(피해 없음) */demo:(kind,dx=3,dy=-1)=>{try{const p=P();if(!TUNE[kind]||!p)return false;const u=TUNE[kind],ox=p.x+dx,oy=p.y+dy,a=Math.atan2(p.y-oy,p.x-ox),now=T();live.push({kind,owner:'demo',scale:1,u,ox,oy,a,t0:now,dmg:0,src:{r1210:kind},hue:0,tx:p.x,ty:p.y,life:(u.flight||u.delay||.3)+(u.pool||u.blast||u.rise||u.impact||u.life||.5)+1,hit:false,ticks:0,lastTick:-9,end:null,px:p.x,py:p.y});arm();return true;}catch(err){fail(err);return false;}},
- roleFor,melee:MELEE,keep:KEEP,rangedCd:RANGED_CD,inspect:()=>({revision:REV,roleStats:{...roleStats},prefs:{...prefs},stats:JSON.parse(JSON.stringify(stats)),live:live.length,liveDetail:live.map(x=>({kind:x.kind,owner:x.owner,scale:x.scale})),log:log.slice(-30),lastError})});
+ roleFor,melee:MELEE,keep:KEEP,rangedCd:RANGED_CD,
+ /* R1227: R248 근접 타격 도형(선·불꽃) 대신 Dots 불 시트 타격 자국 — 불 계열 근접 몹만. 처리했으면 true(R248 은 자기 도형을 안 그림) */
+ contactFx:(e,tx,ty)=>{try{if(!prefs.on||!e||fixedFoe(e)||kindFor(e.name)!=='fire'||roleFor(e.name)!=='melee'||banned())return false;if(live.filter(x=>x.kind==='mhit').length>=6)return false;
+  live.push({kind:'mhit',owner:e.id,scale:1,u:null,ox:e.x,oy:e.y,a:0,t0:T(),dmg:0,src:null,hue:hueOf(e.name),tx,ty,life:.6});stats.contact++;warm();arm();return true;}catch(err){fail(err);return false;}},inspect:()=>({revision:REV,roleStats:{...roleStats},prefs:{...prefs},stats:JSON.parse(JSON.stringify(stats)),live:live.length,liveDetail:live.map(x=>({kind:x.kind,owner:x.owner,scale:x.scale})),log:log.slice(-30),lastError})});
 })();

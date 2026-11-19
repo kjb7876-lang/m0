@@ -13578,6 +13578,26 @@
       "sha256": "dbe51276f8ee40668152bf35dd07c2a379af3184f8ff32a4c13ad4ffde3f0d67"
     },
     {
+      "path": "assets/r1227/cast-tell8.webp",
+      "bytes": 7162,
+      "sha256": "304203c6cb38d8aec1e410ea7ab7c1d6fea12843dfd61ccded08410aeb841ba5"
+    },
+    {
+      "path": "assets/r1227/crimson-impact12.webp",
+      "bytes": 61260,
+      "sha256": "470c67c000223da0555c0762ec2aefa2f511e62740de1afea9b0c631115d38c3"
+    },
+    {
+      "path": "assets/r1227/fireball-flight8.webp",
+      "bytes": 8582,
+      "sha256": "c8e95bf676fec9c3f4bf8f622b2d144c5d5ad2436672c41d7b769ddf6ad52966"
+    },
+    {
+      "path": "assets/r1227/index.json",
+      "bytes": 1335,
+      "sha256": "1c09fcc0fd8d3b45322eaa6e33f6ac4c95f5e32320df297458f87f0e7a5caa01"
+    },
+    {
       "path": "assets/r126/props/badge.webp",
       "bytes": 25464,
       "sha256": "fd12f3e8efd3654d060607145cbd6f6f55728f7fd65afd5a9f4d3d1507ae0281"
@@ -55394,8 +55414,8 @@
     },
     {
       "path": "dys-ranged-r1210.js",
-      "bytes": 45132,
-      "sha256": "7e2ba2b94e09c27aebec3f69f4e19d45d5dfe2cc1e6987ff1f999708bd6ddd97"
+      "bytes": 48053,
+      "sha256": "42f9e95bdf8cc9e6ed4600c0caed44c079b7ebbc865e28f27fe65b5760c90e9d"
     },
     {
       "path": "edges-r188.js",
@@ -56264,8 +56284,8 @@
     },
     {
       "path": "mob-unique-r248.js",
-      "bytes": 19216,
-      "sha256": "48a4b180ebfe77854472a270713621a03886abe8a3a1533c72e4beb448dd1fa4"
+      "bytes": 19574,
+      "sha256": "bb120c73df820e71a6ed892c5aaf54e08a88226893ab4d4869742bf68390a7b7"
     },
     {
       "path": "mobile-bonus-r286.js",
@@ -57383,8 +57403,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11476,
-  "totalBytes": 1372477328,
+  "fileCount": 11480,
+  "totalBytes": 1372558946,
   "webHTMLSha256": "35e2e108e4122cb883241936b2d097d75def00ae01cbf25a5bbea4fde53ddfb3",
   "largest": [
     {

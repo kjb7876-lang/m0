@@ -1,0 +1,56 @@
+{
+ "fireball-flight8": {
+  "file": "fireball-flight8.webp",
+  "frames": 8,
+  "grid": [
+   8,
+   1
+  ],
+  "cell": [
+   128,
+   96
+  ],
+  "source": "CX-0167RA_magic-fireball-flight8_r1_ROUGH.png",
+  "sourceSha256": "2bd4bec64645e081d87861f2a331c5ca014ce2247613123c28daedaa732b6a0c",
+  "sha256": "c8e95bf676fec9c3f4bf8f622b2d144c5d5ad2436672c41d7b769ddf6ad52966",
+  "bytes": 8582,
+  "use": "불: 날아가는 불덩이",
+  "final": false
+ },
+ "crimson-impact12": {
+  "file": "crimson-impact12.webp",
+  "frames": 12,
+  "grid": [
+   12,
+   1
+  ],
+  "cell": [
+   256,
+   256
+  ],
+  "source": "CX-0167RA_magic-crimson-impact12_r1_ROUGH.png",
+  "sourceSha256": "35a22995167db8d252ad6e8c352ebbecea0c8cf782e1cf2f3ab0e6587ca9d907",
+  "sha256": "470c67c000223da0555c0762ec2aefa2f511e62740de1afea9b0c631115d38c3",
+  "bytes": 61260,
+  "use": "불: 맞은 자리 진홍 폭발, 근접 타격 자국",
+  "final": false
+ },
+ "cast-tell8": {
+  "file": "cast-tell8.webp",
+  "frames": 8,
+  "grid": [
+   8,
+   1
+  ],
+  "cell": [
+   128,
+   128
+  ],
+  "source": "CX-0167RA_magic-cast-tell8_r1_ROUGH.png",
+  "sourceSha256": "b49afe8fca3a84b1353f6524350977868f520660f17fbf053eb0f4046676e54f",
+  "sha256": "304203c6cb38d8aec1e410ea7ab7c1d6fea12843dfd61ccded08410aeb841ba5",
+  "bytes": 7162,
+  "use": "마법 시전 예고(발밑 고리)",
+  "final": false
+ }
+}

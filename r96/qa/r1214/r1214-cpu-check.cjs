@@ -99,6 +99,20 @@ for(const [name,kind] of [['복도 비명잔영','fear'],['안정화 집행체',
 {// 사몽 각성 감속(R75) 시계 훅: 겨누기 시작·쿨다운·날아가는 공격이 같이 밀림
  const S=sandbox();const hooks=S.sb.window.__STORYWORLD_ENEMY_CLOCKS_R75__;ok(Array.isArray(hooks)&&hooks.length===1,'R75 시계 훅 등록');const e=mob('프리즘 저격병');S.sb.room.enemies.push(e);for(let i=0;i<200&&e.r1210?.mode!=='windup';i++)step(S,1/30);
  const t0=e.r1210.t0,nx=e.r1210.next;hooks[0](e,(o,ks)=>{for(const k of ks)if(o&&typeof o[k]==='number')o[k]+=.5;});ok(Math.abs(e.r1210.t0-t0-.5)<1e-9&&Math.abs(e.r1210.next-nx-.5)<1e-9,'감속 시 겨누기·쿨다운 밀림');}
+// ---- R1227 추락(dist06) 불 계열(사용자 11-19 10:51Z "추락일반몹 원거리공격및 스킬 도형으로나오는문제 개선") ----
+{for(const [n,k,r] of [['검은기둥 주문사 증원','fire','ranged'],['검은기둥 화염술사','fire','ranged'],['지옥문 파수악마 우두머리','fire','melee'],['소환진 타락천사 추격대','fire','melee']])ok(A.kindFor(n)===k&&A.roleFor(n)===r,'추락 몹: '+n+' → '+k+'·'+r,[A.kindFor(n),A.roleFor(n)]);
+ const idx=JSON.parse(fs.readFileSync(path.join(R,'runtime-text/assets/r1227/index.json'),'utf8'));
+ for(const [k,n] of [['fireball-flight8',8],['crimson-impact12',12],['cast-tell8',8]])ok(idx[k]?.frames===n&&/CX-0167RA_magic-/.test(idx[k].source)&&fs.existsSync(path.join(R,'runtime-text/assets/r1227',k+'.webp'))&&src.includes('assets/r1227/'+k+'.webp'),'Dots 불 시트: '+k);
+ const u=A.tune.fire;ok(u&&u.min>=2.4&&u.max<=7.5&&u.dmg<=.9&&u.windup>=.5&&u.windup<=1&&u.dmg/(u.cd*A.rangedCd+u.windup)<=1/(2.1+.55),'불: 사거리·피해·압박 띠',u);
+ const S=sandbox();const e=mob('검은기둥 주문사');S.sb.room.enemies.push(e);for(let i=0;i<120&&e.r1210?.mode!=='windup';i++)step(S,1/30);ok(e.r1210?.mode==='windup'&&e.r1210.kind==='fire','주문사: 불 겨누기');
+ S.calls.imgs.length=0;S.sb.drawEffect(S.sb.effects.find(x=>x.type==='r1210-fx'));ok(S.calls.imgs.some(q=>/r1227\/cast-tell8/.test(q||''))&&S.calls.imgs.some(q=>/r1227\/fireball-flight8/.test(q||'')),'주문사 예고: 시전 고리·불덩이 시트',[...new Set(S.calls.imgs)]);
+ const lines=S.calls.draw.filter(k=>k==='stroke').length;
+ S.calls.imgs.length=0;step(S,2.4,1/30,true);ok(S.calls.hurt.length===1&&S.calls.hurt[0][1]==='fire','가만히 선 영웅이 불덩이에 한 번 맞음',S.calls.hurt);ok(S.calls.imgs.some(q=>/r1227\/fireball-flight8/.test(q||''))&&S.calls.imgs.some(q=>/r1227\/crimson-impact12/.test(q||'')),'날아가는 불덩이·진홍 폭발 시트',[...new Set(S.calls.imgs)]);
+ const T2=sandbox();const m=mob('지옥문 파수악마'),c=mob('검은기둥 주문사');T2.sb.room.enemies.push(m,c);ok(T2.A.contactFx(m,10,10)===true&&T2.A.contactFx(c,10,10)===false&&T2.A.contactFx(mob('숲 고블린'),10,10)===false,'근접 불 몹만 타격 자국을 넘겨받음');
+ T2.calls.imgs.length=0;T2.sb.drawEffect(T2.sb.effects.find(x=>x.type==='r1210-fx'));ok(T2.calls.imgs.some(q=>/r1227\/crimson-impact12/.test(q||'')),'파수악마 타격 자국 = 진홍 폭발 시트(도형 아님)',[...new Set(T2.calls.imgs)]);
+ const r248=fs.readFileSync(path.join(R,'client-source/mob-unique-r248.js'),'utf8');ok(/__STORYWORLD_DYS_RANGED_R1210__\?\.contactFx\?\.\(e,hx,hy\)/.test(r248)&&r248===fs.readFileSync(path.join(R,'runtime-text/mob-unique-r248.js'),'utf8'),'R248 접촉 도형 앞에서 R1227 에 먼저 물음(사본 같음)');}
+{// R1230 연동: 제자리 고정 적(탑·소환진)은 이 오버레이가 쏘거나 움직이지 않음
+ const S=sandbox();const t=mob('검은기둥 주문사',{r75Tower:true,speed:0,x:12}),x0=t.x,y0=t.y;S.sb.room.enemies.push(t);step(S,4,1/30);ok(!t.r1210||t.r1210.mode==null,'고정형: 겨누기 없음',t.r1210);ok(t.x===x0&&t.y===y0,'고정형: 거리 유지 이동 없음');ok(S.A.contactFx(mob('지옥문 파수악마',{r251Circle:true}),10,10)===false,'고정형: 접촉 시트 없음');}
 {// 보스는 역할 손대지 않음(맵 몹 공격 동시 그대로)
  const S=sandbox();const b=mob('백의 안정화 감독',{boss:true,ai:'hybrid',x:15});S.sb.room.enemies.push(b);step(S,1);ok(b.ai==='hybrid','보스 ai 그대로');}
 ok(sandbox().A.inspect().stats.errors===0,'오류 0');
