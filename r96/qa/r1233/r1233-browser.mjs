@@ -18,6 +18,7 @@ const CASES=[
  ['ep1a11:DREAM','거짓천국 근위천사',/assets\/r380\/mobs\/false-heaven-guard-v1\./],
  ['ep1a10:DREAM','부정의 잔영',/assets\/r380\/mobs\/samong-m066-v3\./],
  ['last305:STORY','피리 고블린',/assets\/r1233\/mobs\/m044\./],
+ ['ep1a10:DREAM','갈망의 도시짐승',/assets\/r1233\/mobs\/m019\./],/* Dots DR-02 v1 손질 시트 */
  ['cult05:STORY','중간보스 · ID 배양 점액체',/assets\/r380\/mobs\/legacy-m130-slime-cult05-v2\./],/* R81 지역 수호자(앞말 붙은 일반몹) */
 ];
 // 대조군: 손대지 않아야 할 이름·층

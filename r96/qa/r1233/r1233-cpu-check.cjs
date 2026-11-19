@@ -26,7 +26,7 @@ function boot(store={}){
  const w={localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=v;}},document:{readyState:'complete'},
   fetch:u=>Promise.resolve({ok:true,json:()=>Promise.resolve(u.includes('r380')?idx:{})}),setInterval:(f)=>{timers.push(f);return 1;},setTimeout:(f,ms)=>setTimeout(f,ms),
   readyImage:()=>({image:{}}),ensureImages:()=>Promise.resolve(),room:{id:'sz115-S05-2',samongR103:{zone:'S-05',key:'x'}},layer:'DREAM',
-  __STORYWORLD_MOB_UNIQUE_R248_DATA__:Object.freeze({sheets:{m044:{name:'피리 고블린',file:'m044.webp',path:'assets/r410/mobs/m044.webp',body:214},m099:{name:'다른 이름',path:'assets/r410/mobs/m099.webp',body:200}},byName:{}}),
+  __STORYWORLD_MOB_UNIQUE_R248_DATA__:Object.freeze({sheets:{m044:{name:'피리 고블린',file:'m044.webp',path:'assets/r410/mobs/m044.webp',body:214},m019:{name:'갈망의 도시짐승',file:'m019.webp',path:'assets/r248/mobs/m019.webp',body:182},m099:{name:'다른 이름',path:'assets/r410/mobs/m099.webp',body:200}},byName:{}}),
   __STORYWORLD_APPROVED_MOBS_R380__:A,__STORYWORLD_STORY_COMBAT_R54__:S,__STORYWORLD_SAMONG_SHADES_R200__:SH};
  w.window=w;vm.createContext(w);vm.runInContext(code,w);return {w,own,ROWS,frames:()=>frames,tick:()=>timers.forEach(f=>f())};}
 (async()=>{
@@ -72,7 +72,8 @@ ok(A().assign({name:'중간보스 · 없는 이름 몹',wardChampionR81:true,hp:
 W.room={id:'cult04'};ok(A().assign({name:'중간보스 · ID 배양 점액체',wardChampionR81:true,hp:5})===null,'다른 지역(R380 줄 조건 밖) → 손대지 않음');
  // ③ 시트 줄(피리 고블린)
  const D=W.__STORYWORLD_MOB_UNIQUE_R248_DATA__;ok(D.sheets.m044.path==='assets/r1233/mobs/m044.webp'&&D.sheets.m044.body===196,'피리 고블린 R248 시트 줄 → r1233 고블린 시트(R410 상자머리 후보 대신)');
- ok(D.sheets.m099.path==='assets/r410/mobs/m099.webp','다른 줄은 그대로');
+ ok(D.sheets.m019.path==='assets/r1233/mobs/m019.webp'&&D.sheets.m019.body===180,'갈망의 도시짐승 R248 시트 줄 → Dots DR-02 v1 손질 시트(작은 도트 개 대신)');
+ok(D.sheets.m099.path==='assets/r410/mobs/m099.webp','다른 줄은 그대로');
  api.set({on:false});ok(D.sheets.m044.path==='assets/r410/mobs/m044.webp'&&D.sheets.m044.body===214,'끄면 원래 줄로 되돌림');api.set({on:true});ok(D.sheets.m044.path==='assets/r1233/mobs/m044.webp','다시 켜면 다시 얹음');
  const six=JSON.parse(fs.readFileSync(path.join(R,'runtime-text/assets/r1233/mobs/index.json'),'utf8'));const row=six.mobs.find(m=>m.id==='m044');
  ok(row&&row.body===196&&row.name==='피리 고블린'&&fs.existsSync(path.join(R,'runtime-text/assets/r1233/mobs/m044.webp')),'시트 파일·index.json(body 196) 있음');
