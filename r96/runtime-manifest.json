@@ -55899,8 +55899,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6582601,
-      "sha256": "35e2e108e4122cb883241936b2d097d75def00ae01cbf25a5bbea4fde53ddfb3"
+      "bytes": 6582651,
+      "sha256": "5351c3f953ecf2913b37562c8bb33d7f6f98ddd887149d57b9972446217e7f0a"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -56061,6 +56061,11 @@
       "path": "michaela-heart-r948.js",
       "bytes": 39715,
       "sha256": "0b788dd34352a4a34baee677e82dc54bdd15b866342e5480d272ba7421e7c340"
+    },
+    {
+      "path": "michaela-hitfx-r1235.js",
+      "bytes": 3711,
+      "sha256": "9ab980cddc5cead0371eac522e65a0fe076f7a5113f2276433a06a8761a25319"
     },
     {
       "path": "michaela-r247.js",
@@ -57338,9 +57343,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11467,
-  "totalBytes": 1372077124,
-  "webHTMLSha256": "35e2e108e4122cb883241936b2d097d75def00ae01cbf25a5bbea4fde53ddfb3",
+  "fileCount": 11468,
+  "totalBytes": 1372080885,
+  "webHTMLSha256": "5351c3f953ecf2913b37562c8bb33d7f6f98ddd887149d57b9972446217e7f0a",
   "largest": [
     {
       "path": "index.html",
