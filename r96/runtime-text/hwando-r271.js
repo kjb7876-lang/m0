@@ -16,9 +16,16 @@ let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on
 const stats={frames:0,walk:0,idle:0,attack:0,hit:0,skill:0,fallback:0,waiting:0,errors:0,dupRemoved:0,loads:0,last:null};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 let IDX=null,idxReq=false;
 /* R436: 아래 걷기 v2 — 별도 색인(assets/r436/hwando/index.json, R271 몸 키 180·발 기준점·R283 색 목표에 맞춘 6키) */
-const WS_BASE='assets/r436/hwando/';let WS=null,wsReq=false;
-function loadWalkS(){if(WS||wsReq||typeof fetch!=='function')return;wsReq=true;fetch(WS_BASE+'index.json').then(r=>r.ok?r.json():null).then(j=>{if(j?.walk?.s?.file)WS=j.walk.s;else wsReq=false;}).catch(e=>{wsReq=false;fail(e);});}
+/* R1219c: 칼집 켜짐이면 Dots 정식 앞모습 칼집 걷기 8칸·서기 6칸(CX-0168HW 손질본, scripts/r1219c-hwando-cx0168.py) 색인을 받는다 — 경로에 'r436/hwando/' 꼬리를 품어 몸 그림 정규식이 그대로 통한다.
+   정식 색인이 아직이면 R436 원본 색인 + R1219 칼날 지운 임시본(sheath)으로 그린다. */
+const WS_R436='assets/r436/hwando/',WS_SHEATHED='assets/r1219/r436/hwando/sheathed/';let WS_BASE=WS_R436;let WS=null,WSI=null,wsReq=false;
+const walkSBase=()=>sheath1219?WS_SHEATHED:WS_R436;
+function loadWalkS(){if(WS||wsReq||typeof fetch!=='function')return;wsReq=true;const want=walkSBase();
+ const take=(b,j)=>{if(!j?.walk?.s?.file)return false;WS_BASE=b;WS=j.walk.s;WSI=j.idle?.s?.file?j.idle.s:null;return true;};
+ const get=b=>fetch(b+'index.json').then(r=>r.ok?r.json():null);
+ get(want).then(j=>{if(take(want,j))return;if(want!==WS_R436)return get(WS_R436).then(k=>{if(!take(WS_R436,k))wsReq=false;});wsReq=false;}).catch(e=>{wsReq=false;fail(e);});}
 const wsRes=()=>WS?{A:WS,base:WS_BASE,mir:false}:null;
+const wsIdleRes=()=>WSI?{A:WSI,base:WS_BASE,mir:false}:null;
 function loadIndex(){if(IDX||idxReq||typeof fetch!=='function')return;idxReq=true;fetch(BASE+'index.json').then(r=>r.ok?r.json():null).then(j=>{if(j&&j.anims)IDX=j;else idxReq=false;}).catch(e=>{idxReq=false;fail(e);});}
 const solo=()=>{let m=null;try{m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();}catch(_){}return !m||m==='off';};
 const T=()=>typeof time==='number'?time:0;
@@ -64,7 +71,7 @@ function track(){const t=T();if(S.x!=null){const dx=player.x-S.x,dy=player.y-S.y
    const nd=walkFromVec(v[0],v[1]);if(nd!==S.walkDir){S.pend=(S.pendDir===nd?(S.pend||0)+1:1);S.pendDir=nd;if(S.pend>=2){S.walkDir=nd;S.pend=0;}}else S.pend=0;}}
  S.x=player.x;S.y=player.y;}
 const want=()=>(typeof actorHeight==='function'?actorHeight():66)*((window.__STORYWORLD_VISUAL_R119__?.inspect?.()?.stats?.standRatio)||.98);
-function draw(rec,st,best,anim,dir,frame,opt={}){const ws=anim==='walk'&&dir==='s'&&opt.s?wsRes():null;/* R436: 아래 걷기만 새 v2 */if(dir==='s'&&!ws){const P=P277();if(P?.down)dir=P.down();}/* R349: 그 밖의 아래 그림은 쓰지 않는다(위·좌·우만) */const R=ws||res(anim,dir);if(!R)return false;const A=R.A,p=sheath(tex((window.__STORYWORLD_HWANDO_R283__?.path?.(R.base,A.file))||R.base+A.file)),im=image(p);/* R1219 *//* R283 색 맞춘 파생본 */if(!im){/* R345: 공격·피격 그림이 아직 안 받아졌으면 엔진 옛 그림 대신 이미 받은 같은 방향 걷기 선 자세로(옛 그림이 한 순간 튀지 않게) */if(!opt.fb&&anim!=='walk'){stats.standIn=(stats.standIn||0)+1;const w=res('walk',dir)?.A;if(w&&draw(rec,st,best,'walk',dir,Math.min(3,w.n-1),{fb:true}))return true;}return false;}
+function draw(rec,st,best,anim,dir,frame,opt={}){const ws=(opt.idleS?wsIdleRes():null)||(anim==='walk'&&dir==='s'&&opt.s?wsRes():null);/* R1219c: 앞모습 서기 *//* R436: 아래 걷기만 새 v2 */if(dir==='s'&&!ws){const P=P277();if(P?.down)dir=P.down();}/* R349: 그 밖의 아래 그림은 쓰지 않는다(위·좌·우만) */const R=ws||res(anim,dir);if(!R)return false;const A=R.A,p=sheath(tex((window.__STORYWORLD_HWANDO_R283__?.path?.(R.base,A.file))||R.base+A.file)),im=image(p);/* R1219 *//* R283 색 맞춘 파생본 */if(!im){/* R345: 공격·피격 그림이 아직 안 받아졌으면 엔진 옛 그림 대신 이미 받은 같은 방향 걷기 선 자세로(옛 그림이 한 순간 튀지 않게) */if(!opt.fb&&anim!=='walk'){stats.standIn=(stats.standIn||0)+1;const w=res('walk',dir)?.A;if(w&&draw(rec,st,best,'walk',dir,Math.min(3,w.n-1),{fb:true}))return true;}return false;}
  const n=A.n,fr=((frame%n)+n)%n,cw=A.cell[0],ch=A.cell[1],col=fr%A.cols,row=Math.floor(fr/A.cols);
  const body=R.body||A.body||180,w=want(),k=w/body,ky=opt.breath?k*(1+.008*Math.sin(T()*2.2)):k;
  const q=project(player.x,player.y),lift=Math.min(Math.max(+player.visualLiftPx||0,0),w*.65),fx=q.x,fy=q.y-lift,f=R.mir?-1:1,[ax,ay]=A.anchor;
@@ -79,7 +86,7 @@ const BODY_ART=/r436\/hwando\/|hero_direction|hero-authored|assets\/heroes\/|r91
 function pickBody(rec,st){let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!BODY_ART.test(String(c.sourcePath||c.image?.src||'')))continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}return best;}
 let preloaded=null;
 function preload(){if(!IDX||preloaded===room)return;preloaded=room;for(const a of (P277()?['walk']:['walk','idle']))for(const d of ['n','s','e','w']){const A=IDX.anims[a]?.[d];if(A?.file)image(tex((window.__STORYWORLD_HWANDO_R283__?.path?.(BASE,A.file))||BASE+A.file));}
- if(WS)image(sheath(WS_BASE+WS.file));/* R436 · R1219 */
+ if(WS)image(sheath(WS_BASE+WS.file));if(WSI)image(WS_BASE+WSI.file);/* R436 · R1219 · R1219c 서기 */
  /* R345: 공격·피격(새 팩 → R242 대체 포함)도 미리 받는다 — 처음 휘두르거나 맞는 순간 옛 그림이 튀던 원인 */for(const a of ['attack','hit'])for(const d of ['n','s','e','w']){const R=res(a,d);if(R?.A?.file)image(tex((window.__STORYWORLD_HWANDO_R283__?.path?.(R.base,R.A.file))||R.base+R.A.file));}}
 const atkOf=d=>res('attack',d)?.A;
 // R1050b: 걷기 꼬리는 0.15초. 공격 중인데 엔진이 '걷는 중 아님'이면 몹·동료에게 밀린 것 → 걷기 그림으로 공격을 덮지 않는다
@@ -102,12 +109,12 @@ function choose(rec,st){const best=pickBody(rec,st);if(!best)return;const t=T(),
  if(S.hit&&hurt>0)S.hit.lastHurt=t;
  if(S.hit&&!moving&&!sw440/* R1050c: 스킬 중 피격은 스킬 모션 그대로 */){S.hit.shown=true;const d=S.hit.dir,h=res('hit',d)?.A,el=(t-S.hit.t0)*ms/.6;if(h&&el<h.ms.reduce((x,y)=>x+y,0)){S.dir=d;return draw(rec,st,best,'hit',d,frameAt(h.ms,el,false));}S.hit=null;}
  if(moving){const P=P277();S.dir=P?.walkDir?P.walkDir(S.walkDir,S.sx):S.walkDir;P?.face(S.dir);S.lastWalk=S.dir;/* R1219b */const ws=S.dir==='s'?wsRes():null,R=ws||res('walk',S.dir),k=want()/(R?.A?.body||180),fps=R?.A?.frames_per_stride,per=(IDX.anims.walk?.stride?.px_per_frame||12.8)*k*(fps?(IDX.anims.walk?.stride?.frames_per_stride||12)/fps:1);/* R436: 6키 = 두 걸음 → 칸당 거리 2배(보폭 같게) */return draw(rec,st,best,'walk',S.dir,Math.floor(S.dist/Math.max(1,per)),{s:!!ws});}
- if(frontIdle(S.lastWalk,enemyVec())&&P277()?.walkS?.()&&wsRes()){S.dir='s';stats.frontIdle=(stats.frontIdle||0)+1;return draw(rec,st,best,'walk','s',FRONT_IDLE_FRAME,{s:true,breath:true,hold:true});}/* R1219b: 앞모습 서기 */
+ if(frontIdle(S.lastWalk,enemyVec())&&P277()?.walkS?.()&&wsRes()){S.dir='s';stats.frontIdle=(stats.frontIdle||0)+1;const I=wsIdleRes();if(I){const fr=frameAt(I.A.ms,T()*1000,true);return draw(rec,st,best,'idle','s',fr,{idleS:true,hold:true});}return draw(rec,st,best,'walk','s',FRONT_IDLE_FRAME,{s:true,breath:true,hold:true});}/* R1219b: 앞모습 서기 */
  const fd=enemyDir()||S.dir;S.dir=fd;const P=P277();if(P){P.face(fd);const I=window.__STORYWORLD_HWANDO_R283__?.idle?.(P),dd=I?I.dir:fd;S.dir=dd;/* R354: 날개(R101) 등이 실제로 그린 선 자세 방향을 보게 */const w=res('walk',dd)?.A;if(!w)return;P.idle(dd);return draw(rec,st,best,'walk',dd,I?Math.min(I.frame,w.n-1):w.n-1);}/* R283: 좌·우 걷기의 선 자세 칸 *//* R277: 걷기 마지막 칸으로 멈춘 대기 */const a=res('idle',fd)?.A;if(!a)return;
  return draw(rec,st,best,'idle',fd,frameAt(a.ms,t*ms,true),{breath:true});}
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
  try{if(on&&st>=0&&solo()&&player?.hero==='hwando'&&player.hp>0){loadIndex();if(P277()?.walkS?.())loadWalkS();if(IDX)choose(rec,st);}}catch(e){fail(e);}return r;};}
 loadIndex();
-window.__STORYWORLD_HWANDO_R271__=Object.freeze({revision:REV,pure:Object.freeze({walkTail,tex,sheath,frontIdle}),active:()=>on&&!!IDX&&typeof player==='object'&&player?.hero==='hwando'&&solo(),index:()=>IDX,state:()=>({...S,swing:S.swing&&{...S.swing},hit:S.hit&&{...S.hit}}),
+window.__STORYWORLD_HWANDO_R271__=Object.freeze({revision:REV,pure:Object.freeze({walkTail,tex,sheath,frontIdle,walkSBase}),active:()=>on&&!!IDX&&typeof player==='object'&&player?.hero==='hwando'&&solo(),index:()=>IDX,state:()=>({...S,swing:S.swing&&{...S.swing},hit:S.hit&&{...S.hit}}),
  inspect:()=>({revision:REV,on,ready:!!IDX,stats:{...stats},lastError}),set:v=>{on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}});
 })();

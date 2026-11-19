@@ -10667,7 +10667,10 @@
     "assets/r1213/green-warning8.webp",
     "assets/r1213/sonic-charge6.webp",
     "assets/r1219/r436/hwando/walk-s.webp",
-    "assets/r1219/r436/hwando/r1219.json"
+    "assets/r1219/r436/hwando/r1219.json",
+    "assets/r1219/r436/hwando/sheathed/walk-s.webp",
+    "assets/r1219/r436/hwando/sheathed/idle-s.webp",
+    "assets/r1219/r436/hwando/sheathed/index.json"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11742,5 +11745,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "b037261672fadad0a98d0bb7325800ac9b12d76d464a1c68743ab06b5a6d3808"
+  "runtimeManifestSHA256": "b552b63108a4c155d3a71c2da8bfeeb5c340049a4aeb2067d3eeef39e0b44cdc"
 }

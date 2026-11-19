@@ -7,7 +7,7 @@ await p.evaluate(async()=>{loading=true;try{await ensureImages(heroPaths('hwando
 await p.waitForTimeout(3000);
 await p.evaluate(()=>{window.__rec=[];const dh=drawHero;drawHero=function(...a){const c=ctx,st=Array.isArray(c?.commands)?c.commands.length:-1;const r=dh.apply(this,a);
  if(window.__on&&st>=0){let best=null,bh=0;for(let i=st;i<c.commands.length;i++){const k=c.commands[i];if(k?.kind!=='image'||!Array.isArray(k.points)||k.owner?.kind!=='hero')continue;const h=Math.abs(k.points[3][1]-k.points[0][1]);if(h>bh){bh=h;best=k;}}
-  const q=project(player.x,player.y);if(best)window.__rec.push({t:+time.toFixed(3),mv:!!player.moving,s:String(best.sourcePath||'').replace(/^.*?(assets\/)/,'$1'),sx:best.sourceRect?.[0],h:+bh.toFixed(2),foot:+(best.points[3][1]-q.y).toFixed(2),cx:+((best.points[0][0]+best.points[1][0])/2-q.x).toFixed(2)});}
+  const q=project(player.x,player.y);if(best)window.__rec.push({t:+time.toFixed(3),mv:!!player.moving,s:String(best.sourcePath||'').replace(/^.*?(assets\/)/,'$1'),sx:best.sourceRect?.[0],h:+bh.toFixed(2),foot:+(best.points[3][1]-q.y).toFixed(2),cx:+((best.points[0][0]+best.points[1][0])/2-q.x).toFixed(2),st:(()=>{try{const s=window.__STORYWORLD_HWANDO_R271__.state();return [s.dir,s.walkDir,s.lastWalk,+(+s.sx).toFixed(2),+(+s.sy).toFixed(2)];}catch(_){return null;}})(),mvv:[+(+player.moveVX150||0).toFixed(2),+(+player.moveVY150||0).toFixed(2)]});}
  return r;};});
 await p.evaluate(()=>{window.__on=true;keys.add('ArrowDown');window.__t0=time;});
 await p.waitForFunction(w=>time-window.__t0>w,+(process.env.WT||0.45),{timeout:120000,polling:200});
