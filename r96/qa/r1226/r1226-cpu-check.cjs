@@ -22,6 +22,11 @@ if(!exists){// ⑩ 오만의 폐허핵(사용자 2026-11-19 "공격시 반대방
 {const W={'r92/mobs/M095-move.png':'L','r92/mobs/M095-attack.png':'L','r92/mobs/M064-attack.png':'L','r92/mobs/M055-attack.png':'L','r92/mobs/M023-move.png':'L','r92/mobs/M023-attack.png':'L',
  'r92/mobs/M033-attack.png':'R','r198/mobs/M033-move.png':'L','r198/mobs/M024-idle.png':'R','r92/mobs/M024-attack.png':'R','r198/mobs/M047-idle.png':'R','r198/mobs/M047-move.png':'R','r92/mobs/M047-attack.png':'R'};
  for(const [k,v] of Object.entries(W))ok('census FACE '+k+' = '+v,T.face[k]===v);}
+// ⑬ 늦게 실리는 R410(같은 R248 줄에 path 를 얹음)이 덮어써도 다시 병원 그림으로(헤드리스 전수조사에서 r410 m015 가 그대로 그려졌음)
+{const g3=env0({m015:{name:'안정화 집행체',path:'assets/r248/mobs/m015.webp',body:208}});const D=g3.__STORYWORLD_MOB_UNIQUE_R248_DATA__;
+ D.sheets.m015.path='assets/r410/mobs/m015.webp';D.sheets.m015.body=208;g3.drawEnemy({hp:1,name:'x'});
+ ok('stabilizer swap survives later R410 overwrite',D.sheets.m015.path==='assets/r1226/mobs/m015-stabilizer.webp'&&D.sheets.m015.body===150);
+ g3.__STORYWORLD_MOB_MOTION_R1226__.set({sheets:false});ok('turn off after overwrite restores R410 path',D.sheets.m015.path==='assets/r410/mobs/m015.webp');}
 console.log(`\n${pass} passed, ${fail} failed`);process.exit(1);}
 const src=C(F);
 ok('runtime copy matches source',fs.existsSync(path.join(R,'runtime-text',F))&&src===RT(F));
@@ -110,4 +115,9 @@ ok('M007 attack cells all R (faces right)',G7.join('')==='RRRR');
 {const W={'r92/mobs/M095-move.png':'L','r92/mobs/M095-attack.png':'L','r92/mobs/M064-attack.png':'L','r92/mobs/M055-attack.png':'L','r92/mobs/M023-move.png':'L','r92/mobs/M023-attack.png':'L',
  'r92/mobs/M033-attack.png':'R','r198/mobs/M033-move.png':'L','r198/mobs/M024-idle.png':'R','r92/mobs/M024-attack.png':'R','r198/mobs/M047-idle.png':'R','r198/mobs/M047-move.png':'R','r92/mobs/M047-attack.png':'R'};
  for(const [k,v] of Object.entries(W))ok('census FACE '+k+' = '+v,T.face[k]===v);}
+// ⑬ 늦게 실리는 R410(같은 R248 줄에 path 를 얹음)이 덮어써도 다시 병원 그림으로(헤드리스 전수조사에서 r410 m015 가 그대로 그려졌음)
+{const g3=env0({m015:{name:'안정화 집행체',path:'assets/r248/mobs/m015.webp',body:208}});const D=g3.__STORYWORLD_MOB_UNIQUE_R248_DATA__;
+ D.sheets.m015.path='assets/r410/mobs/m015.webp';D.sheets.m015.body=208;g3.drawEnemy({hp:1,name:'x'});
+ ok('stabilizer swap survives later R410 overwrite',D.sheets.m015.path==='assets/r1226/mobs/m015-stabilizer.webp'&&D.sheets.m015.body===150);
+ g3.__STORYWORLD_MOB_MOTION_R1226__.set({sheets:false});ok('turn off after overwrite restores R410 path',D.sheets.m015.path==='assets/r410/mobs/m015.webp');}
 console.log(`\n${pass} passed, ${fail} failed`);process.exit(fail?1:0);

@@ -65,7 +65,8 @@ const TINT=Object.freeze([
 const SHEET_SWAP=Object.freeze({m015:{name:'안정화 집행체',path:'assets/r1226/mobs/m015-stabilizer.webp',body:150}});
 const swapped=[];
 function swapSheets(on){const D=window.__STORYWORLD_MOB_UNIQUE_R248_DATA__;if(!D||!D.sheets)return;for(const [id,a] of Object.entries(SHEET_SWAP)){const s=D.sheets[id];if(!s||s.name!==a.name)continue;
- try{if(!s.__r1226)s.__r1226={path:s.path,body:s.body};if(on){s.path=a.path;s.body=a.body;if(!swapped.includes(id))swapped.push(id);}else{s.path=s.__r1226.path;s.body=s.__r1226.body;}}catch(err){fail(err);}}}
+ // 뒤에 실리는 R410 이 같은 줄에 path 를 다시 얹으면(헤드리스에서 확인) 그 값을 원래 값으로 새로 기억하고 다시 바꾼다
+ try{if(!s.__r1226||(s.path!==a.path&&s.path!==s.__r1226.path))s.__r1226={path:s.path,body:s.body};if(on){s.path=a.path;s.body=a.body;if(!swapped.includes(id))swapped.push(id);}else{s.path=s.__r1226.path;s.body=s.__r1226.body;}}catch(err){fail(err);}}}
 swapSheets(prefs.on!==false&&prefs.sheets!==false);
 // 초자아 잠식체(ep1a11 a11-d1, 사용자 2026-11-19 "초자아잠식체 일관성이 좀 떨어지는데"): 대기·걷기는 어두운 이끼빛 그릇 몸(ego_corrosion_vessel·R1029 안개판)인데
 //  공격만 R92 M017(창 든 금빛 천사 — 다른 몹 그림)으로 바뀌어 동작마다 다른 몹처럼 보였다 → 공격 칸도 제 몸 그림으로 그린다(발·키 유지, R109 짧은 내딛기만).
@@ -133,7 +134,8 @@ function post(e,cmds,st){const b=bodyCmd(cmds,st);if(!b){stats.skipped++;return;
 // ---- drawEnemy 맨 바깥 감싸기(다른 오버레이가 나중에 감싸도 다시 바깥으로, 최대 6번) ----
 let mine=null,rewraps=0;
 function wrap(){if(typeof drawEnemy!=='function')return;const base=drawEnemy;
- mine=function(e,...a){const rec=typeof ctx==='object'?ctx:null,cmds=Array.isArray(rec?.commands)?rec.commands:null;
+ mine=function(e,...a){if(prefs.on&&prefs.sheets!==false){const D=window.__STORYWORLD_MOB_UNIQUE_R248_DATA__,t=D&&D.sheets;if(t)for(const [id,x] of Object.entries(SHEET_SWAP))if(t[id]&&t[id].name===x.name&&t[id].path!==x.path){swapSheets(true);break;}}
+  const rec=typeof ctx==='object'?ctx:null,cmds=Array.isArray(rec?.commands)?rec.commands:null;
   if(!prefs.on||!cmds||excluded(e))return base.apply(this,[e,...a]);const st=cmds.length;const r=base.apply(this,[e,...a]);
   try{if(cmds.length>st)post(e,cmds,st);}catch(err){fail(err);}return r;};
  mine.__r1226=true;drawEnemy=mine;stats.wraps++;}
