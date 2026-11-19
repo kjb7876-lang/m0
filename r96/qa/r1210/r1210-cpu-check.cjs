@@ -69,7 +69,8 @@ for(const [name,kind] of [['프리즘 저격병','laser'],['펄스 척후병','s
  ok(S.calls.hurt.every(h=>h[1]===kind),name+': 피해 출처에 종류 표시');
  ok(seen.some(p=>kind==='laser'?/r1210\/laser-(body|charge|impact|aim)/.test(p||''):/r1210\/sonic-ring|r562/.test(p||'')),name+': 날아가는 동안 재사용 시트로 그림',[...new Set(seen)]);
  // 쿨다운: 바로 다시 겨누지 않음
- const shots=e.r1210.count;step(S,2);ok(e.r1210.count===shots,name+': 쿨다운 동안 다시 안 쏨');
+ /* 사용자 지시 동작 변경(11-19 09:47Z 근접·원거리 몹 확실히 나누기, R1214b) — 원거리 몹은 쿨다운 절반(≥3.1초) → 겨누기 끝난 뒤 2.6초 지나 1초 더 봐도 다시 안 쏨 */
+ const shots=e.r1210.count;step(S,1);ok(e.r1210.count===shots,name+': 쿨다운 동안 다시 안 쏨');
 }
 {// 레이저: 쏘는 순간 시트 그림
  const S=sandbox();const e=mob('중장 광선포병');S.sb.room.enemies.push(e);for(let i=0;i<400&&!(e.r1210?.count>=1);i++)step(S,1/30);ok(e.r1210?.count===1,'레이저 한 번 쏨');
@@ -77,7 +78,10 @@ for(const [name,kind] of [['프리즘 저격병','laser'],['펄스 척후병','s
 {// 피하면 안 맞음(레이저 조준은 겨누기 시작 때 고정)
  const S=sandbox();const e=mob('프리즘 저격병');S.sb.room.enemies.push(e);for(let i=0;i<400&&e.r1210?.mode!=='windup';i++)step(S,1/30);S.player.y=12.5;step(S,1.5);ok(S.calls.hurt.length===0,'레이저: 예고 보고 옆으로 피하면 안 맞음');}
 {// 거리 밖·근접 거리에서는 안 쏨
- const S=sandbox();const a=mob('프리즘 저격병',{x:20}),b=mob('펄스 척후병',{x:11.2});S.sb.room.enemies.push(a,b);step(S,4);ok(!a.r1210?.mode&&!b.r1210?.mode&&S.calls.hurt.length===0,'10칸 밖·1.2칸 근접에서는 원거리 안 함',[a.r1210,b.r1210]);}
+ const S=sandbox();const a=mob('프리즘 저격병',{x:20});S.sb.room.enemies.push(a);step(S,4);ok(!a.r1210?.mode&&S.calls.hurt.length===0,'10칸 밖에서는 원거리 안 함',a.r1210);}
+{/* 사용자 지시 동작 변경(11-19 09:47Z 근접·원거리 몹 확실히 나누기, R1214b) — 예전엔 1.2칸 근접에선 안 쏘고 붙어 싸웠다. 이제 원거리 몹은 3.2칸까지 물러난 뒤에 쏜다 */
+ const S=sandbox();const b=mob('펄스 척후병',{x:11.2,speed:1.5});S.sb.room.enemies.push(b);let firstAt=null;for(let i=0;i<150;i++){step(S,1/30);if(b.r1210?.mode==='windup'&&firstAt===null)firstAt=Math.hypot(b.x-10,b.y-10);}
+ ok(firstAt!==null&&firstAt>=S.A.tune.sonic.min-1e-6,'1.2칸 근접 원거리 몹: 물러난 뒤 사거리 안에서 쏨('+(firstAt??-1).toFixed(2)+'칸)',b);}
 {// 엔진 공격 중이면 안 함, 시야 막히면 안 함
  const S=sandbox();const a=mob('프리즘 저격병',{attack:{elapsed:0}});S.sb.room.enemies.push(a);step(S,4);ok(!a.r1210?.mode,'엔진 근접 공격 중엔 안 겨눔');
  const S2=sandbox();S2.sb.clearLine=()=>false;const c=mob('프리즘 저격병');S2.sb.room.enemies.push(c);step(S2,4);ok(!c.r1210?.mode,'시야 막히면 안 겨눔');}
@@ -94,10 +98,12 @@ for(const [name,kind] of [['프리즘 저격병','laser'],['펄스 척후병','s
  // hybrid 몹에는 자체 겨누기를 따로 걸지 않는다(엔진 원거리와 겹쳐 두 배가 되지 않게)
  const S2=sandbox();const h=mob('프리즘 저격병',{ai:'hybrid'});S2.sb.room.enemies.push(h);step(S2,4);ok(!h.r1210||h.r1210.mode!=='windup','hybrid 몹은 자체 겨누기 없음(엔진 원거리 차례만 바꿈)',h.r1210);}
 {// 회귀(헤드리스 실측): 몹이 처음엔 '외계 침공군'(레이저)으로 나왔다가 R200·R380 이 이름을 바꾸면 종류도 바뀐 이름을 따라야 한다
- const S=sandbox();const e=mob('외계 침공군');S.sb.room.enemies.push(e);step(S,.1);e.name='방벽 돌진체';for(let i=0;i<120&&!(e.r1210?.count>=1);i++)step(S,1/30);
- ok(e.r1210?.kind==='sonic','이름이 바뀌면 종류도(외계 침공군→방벽 돌진체 = 음파)',e.r1210);
+ /* 사용자 지시 동작 변경(11-19 09:47Z 근접·원거리 몹 확실히 나누기, R1214b) — 외계 침공군·방벽 돌진체는 근접 몹이 됨 → 원거리 몹 프리즘 저격병→펄스 척후병으로 */
+ const S=sandbox();const e=mob('프리즘 저격병');S.sb.room.enemies.push(e);step(S,.1);e.name='펄스 척후병';for(let i=0;i<120&&!(e.r1210?.count>=1);i++)step(S,1/30);
+ ok(e.r1210?.kind==='sonic','이름이 바뀌면 종류도(프리즘 저격병→펄스 척후병 = 음파)',e.r1210);
  // 쿨다운: 20초 동안 한 마리 발사 수 ≤ 20/(cd+windup)+1
- const S2=sandbox();const f=mob('프리즘 저격병');S2.sb.room.enemies.push(f);step(S2,20);const u=S2.A.tune.laser;ok(f.r1210.count<=Math.floor(20/(u.cd+u.windup))+1,'20초 발사 수 쿨다운 지킴',f.r1210.count);}
+ const S2=sandbox();const f=mob('프리즘 저격병');S2.sb.room.enemies.push(f);step(S2,20);const u=S2.A.tune.laser;/* 사용자 지시 동작 변경(R1214b) — 원거리 몹은 근접을 안 하는 대신 쿨다운 ×rangedCd(0.5) */
+ ok(f.r1210.count<=Math.floor(20/(u.cd*S2.A.rangedCd+u.windup))+1&&f.r1210.count>=Math.floor(20/(u.cd*S2.A.rangedCd+u.windup+.8))-1,'20초 발사 수 쿨다운 지킴(원거리 몹 간격 절반)',f.r1210.count);}
 {// 회귀(헤드리스 실측): 엔진은 지역을 옮기면 안 쓰는 그림을 내린다 → readyImage 가 비면 addImage 로 다시 부른다(부팅·로딩 중엔 안 부름)
  const S=sandbox();const asked=new Set();S.sb.readyImage=()=>null;S.sb.addImage=p=>{asked.add(p);return {};};const e=mob('프리즘 저격병');S.sb.room.enemies.push(e);step(S,.2);
  ok(['assets/r1210/laser-body8.webp','assets/r1210/sonic-ring.webp','assets/r562/dots/neon-toxic-pool.webp'].every(p=>asked.has(p)),'디스토피아 몹이 보이면 시트를 미리 부름',[...asked]);

@@ -20,9 +20,9 @@
   const KINDS={
     pj01:{src:[HV+'seoha-a.webp'],size:.62,hit:1.15},
     pj02:{src:[HV+'hunter-a.webp'],size:.50,hit:1.05},/* R1102(사용자 2026-11-16 "헌터 기본화살이 너무크고"): 0.80 → 0.50(R911 최소 크기 = 영웅 키 절반) */
-    pj03:{src:[HV+'michaela-a.webp'],size:.60,hit:1.10,upright:true},
-    pj03x:{src:[HV+'michaela-a.webp'],size:.60,hit:1.10,upright:true},
-    pj04:{src:[HV+'gunner-laser-bullet.webp'],size:.66,hit:1.10},
+    pj03:{src:[HV+'michaela-a.webp'],size:.46,hit:1.10,upright:true},/* R1232(사용자 2026-11-19 "탄환크기 조금 줄여줘"): .60 → .46, R911 최소 크기 예외(r1232Michaela) */
+    pj03x:{src:[HV+'michaela-a.webp'],size:.46,hit:1.10,upright:true},
+    pj04:{src:[HV+'gunner-laser-bullet.webp'],size:.12,hit:1.10},/* R1220(사용자 2026-11-19 "총탄 총구크기에 맞추고"): .66 → .12 — 몸통 굵기 ≈ 총구 지름(attack-e4 총열 7px/몸 181px ≈ 영웅 키 .039). R911 최소 크기 예외(r1220Muzzle) */
     pj05:{src:[],size:.60,hit:1.05,direct:true},
     pj06:{src:[HV+'seoha-q.webp'],size:.80,hit:1.25},
     pj07:{src:[HV+'hunter-a.webp'],size:.70,hit:.8,hitAs:'pj02'},

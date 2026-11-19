@@ -1,0 +1,154 @@
+{
+ "fear-gaze12": {
+  "file": "fear-gaze12.webp",
+  "frames": 12,
+  "grid": [
+   12,
+   1
+  ],
+  "cell": [
+   192,
+   192
+  ],
+  "source": "CX-0167RA_ghost-fear-gaze12_r1_ROUGH.png",
+  "sourceSha256": "2eefde025612d63a40eb1a045be3fee553630056e54d87409fa77683f4ce18d0",
+  "sha256": "070eb1ae88af427571724deeec6dfcaa74c8d61f83aa7b17b4ceb75430ac9f3c",
+  "bytes": 76260,
+  "use": "공포: 머리 위 눈(0~5 뜨기, 6~11 감기)",
+  "final": false,
+  "rim": "옅은 종이빛 테두리(R1214c)"
+ },
+ "fear-status8": {
+  "file": "fear-status8.webp",
+  "frames": 8,
+  "grid": [
+   8,
+   1
+  ],
+  "cell": [
+   128,
+   128
+  ],
+  "source": "CX-0167RA_ghost-fear-status8_r1_ROUGH.png",
+  "sourceSha256": "3d60845f8c052a6db84285c01fadce857fbc031a18833762c37e3a27c46f01bf",
+  "sha256": "30d70b0be9462fb5adcac2ee9f7b3366e0e3e5a9563b5def2307a537c07f23c6",
+  "bytes": 20902,
+  "use": "공포에 걸린 영웅 머리 위 먹 소용돌이",
+  "final": false,
+  "rim": "옅은 종이빛 테두리(R1214c)"
+ },
+ "dark-orb-flight8": {
+  "file": "dark-orb-flight8.webp",
+  "frames": 8,
+  "grid": [
+   8,
+   1
+  ],
+  "cell": [
+   96,
+   96
+  ],
+  "source": "CX-0167RA_ghost-dark-orb-flight8_r1_ROUGH.png",
+  "sourceSha256": "81545c216ee861f55cde6bc2dfab636a1fa8b808eeb8968497c8ec57c68eb506",
+  "sha256": "5c45bbce0e6c11fa39e407a56c276463a6afa1950da4bfc68d7f8613df908d26",
+  "bytes": 16122,
+  "use": "암흑 구체 날아감",
+  "final": false,
+  "rim": "옅은 종이빛 테두리(R1214c)"
+ },
+ "dark-impact8": {
+  "file": "dark-impact8.webp",
+  "frames": 8,
+  "grid": [
+   8,
+   1
+  ],
+  "cell": [
+   128,
+   128
+  ],
+  "source": "CX-0167RA_ghost-dark-impact8_r1_ROUGH.png",
+  "sourceSha256": "41418eaf66c47f4c7fcb969190278526c6cb607880322de4f0396b2df1da72f3",
+  "sha256": "6acd2661c8859abc50fd384356cc6dbcda2240218a43be35b6c7fa36f1e8cdd3",
+  "bytes": 21036,
+  "use": "암흑 구체 맞음",
+  "final": false,
+  "rim": "옅은 종이빛 테두리(R1214c)"
+ },
+ "shadow-hand-warning8": {
+  "file": "shadow-hand-warning8.webp",
+  "frames": 8,
+  "grid": [
+   8,
+   1
+  ],
+  "cell": [
+   256,
+   256
+  ],
+  "source": "CX-0167RA_ghost-shadow-hand-warning8_r1_ROUGH.png",
+  "sourceSha256": "a46f71788a8650ef11790ab194b28ea4bfe9293d7954ed0fbdbeb533637b6498",
+  "sha256": "f1104e73a15e6733146e19d216fe44c9e87fdacd7b7d18796684beaaf61de1d0",
+  "bytes": 51706,
+  "use": "그림자 손 예고(발밑 먹 웅덩이)",
+  "final": false,
+  "rim": "옅은 종이빛 테두리(R1214c)"
+ },
+ "shadow-rise12": {
+  "file": "shadow-rise12.webp",
+  "frames": 12,
+  "grid": [
+   12,
+   1
+  ],
+  "cell": [
+   192,
+   256
+  ],
+  "source": "CX-0167RA_ghost-shadow-rise12_r1_ROUGH.png",
+  "sourceSha256": "76ccde39d91fa9fc7f8b14cfd77e8dfc30434c7fa34ba1f99378e23d8c09a33a",
+  "sha256": "dbe51276f8ee40668152bf35dd07c2a379af3184f8ff32a4c13ad4ffde3f0d67",
+  "bytes": 79512,
+  "use": "그림자 손 솟음",
+  "final": false,
+  "rim": "옅은 종이빛 테두리(R1214c)"
+ },
+ "fissure-warning8": {
+  "file": "fissure-warning8.webp",
+  "frames": 8,
+  "grid": [
+   8,
+   1
+  ],
+  "cell": [
+   512,
+   96
+  ],
+  "source": "CX-0167RA_ghost-fissure-warning8_r1_ROUGH.png",
+  "sourceSha256": "49dd750951644e794375af99bde7a4b57e6cdd2e91023212fe0262e6ef6fbc2c",
+  "sha256": "ea0c11e2631c2e03061b046d5c8c8f09959cda4fd2fbbda288eb01f90d3ca0d8",
+  "bytes": 75680,
+  "use": "촉수 예고(땅 갈라짐 줄)",
+  "final": false,
+  "rim": "옅은 종이빛 테두리(R1214c)"
+ },
+ "ink-rise10": {
+  "file": "ink-rise10.webp",
+  "frames": 10,
+  "grid": [
+   10,
+   1
+  ],
+  "cell": [
+   192,
+   256
+  ],
+  "source": "CX-0167RA_ghost-ink-rise10_r1_ROUGH.png",
+  "sourceSha256": "cda77e02487e4552f4d5417f70bc64cab58675c5a0df49672065418860d858d5",
+  "sha256": "ea0ca007ebb51c13ecc4678aaab85b6dceb7324478d3d05f18e024ba15e537c2",
+  "bytes": 36896,
+  "use": "촉수 먹 솟음",
+  "final": false,
+  "rim": "옅은 종이빛 테두리(R1214c)"
+ }
+}
