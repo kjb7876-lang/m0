@@ -56014,8 +56014,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6583137,
-      "sha256": "5134854e7f5309cd53bae3f7627e2490bd37596d154b1e0b4ed5b702da697098"
+      "bytes": 6583195,
+      "sha256": "6f4c43c243b665f49b3cc74a1372eb448ae6baedec42356b9542f47a9fd78998"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -57024,8 +57024,13 @@
     },
     {
       "path": "sin-boss-art-r463.js",
-      "bytes": 6699,
-      "sha256": "390318b1288ab1b83f9b54b9b92dd8b06a2127cdf9fc86a3c8070b10dee4b311"
+      "bytes": 6998,
+      "sha256": "b02bf23cab0c83abc81a178073f824e377614acdfb0b0bd3be86bb8243f03568"
+    },
+    {
+      "path": "sin-boss-sheet-vis-r1243-data.js",
+      "bytes": 927,
+      "sha256": "0703ee6f09308a16d3f5609be8e3202b93ed167ad0fdf4481e35ecf243b7b2eb"
     },
     {
       "path": "sin-room-art.js",
@@ -57498,9 +57503,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11499,
-  "totalBytes": 1373327236,
-  "webHTMLSha256": "5134854e7f5309cd53bae3f7627e2490bd37596d154b1e0b4ed5b702da697098",
+  "fileCount": 11500,
+  "totalBytes": 1373328520,
+  "webHTMLSha256": "6f4c43c243b665f49b3cc74a1372eb448ae6baedec42356b9542f47a9fd78998",
   "largest": [
     {
       "path": "index.html",
