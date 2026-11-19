@@ -10658,6 +10658,14 @@
     "assets/r1212/sfx/index.json",
     "assets/r1212/sfx/kairo-chime-1.ogg",
     "assets/r1212/sfx/kairo-toll-1.ogg",
+    "assets/r1213/bomb-blast24.webp",
+    "assets/r1213/index.json",
+    "assets/r1213/bomb-warning8.webp",
+    "assets/r1213/ink-dispersal12.webp",
+    "assets/r1213/orb-flight8.webp",
+    "assets/r1213/capsule-flight8.webp",
+    "assets/r1213/green-warning8.webp",
+    "assets/r1213/sonic-charge6.webp",
     "assets/r1206/props/easel.webp",
     "assets/r1206/props/bottle.webp",
     "assets/r1206/props/tree.webp",
@@ -11744,5 +11752,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "bb0b530876a6f3e16d51760022e207cacd75a76d6c850724e49cd2de5d6dc080"
+  "runtimeManifestSHA256": "a30d1a058ecf3785c2fe621ed762f5659fbfaec3d20795dd7c841a3b05ddb7ea"
 }

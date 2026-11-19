@@ -1,0 +1,128 @@
+{
+ "bomb-blast24": {
+  "file": "bomb-blast24.webp",
+  "frames": 24,
+  "grid": [
+   6,
+   4
+  ],
+  "cell": [
+   256,
+   256
+  ],
+  "source": "assets/r411/fx/hit-explosion.webp",
+  "sourceSha256": "9b2fc08aac2d7f1704ca2dd3299f41d0185820bfaeb693cd5d2fa9e52152f01f",
+  "sha256": "d3731723c72ad2103bd0699a0f137588f7a34bbeb60d7defd5d2bed39867816f",
+  "bytes": 258376,
+  "use": "R1213 기계 계열 몹 폭탄 터짐(임시 재채색 — Dots CX-0167RA MR-10~12 오면 교체)",
+  "final": false
+ },
+ "bomb-warning8": {
+  "file": "bomb-warning8.webp",
+  "frames": 8,
+  "grid": [
+   8,
+   1
+  ],
+  "cell": [
+   256,
+   256
+  ],
+  "source": "CX-0167RA_machine-bomb-warning8_r1_ROUGH.png",
+  "sourceSha256": "61debb698708dbe5cce131f90606ed660f4c512034b0147b16478cf687a1fd5c",
+  "sha256": "0a07c64ad3107efccf347ecd497bbab03e8c2a87b7318d2129244c0b84777245",
+  "bytes": 63804,
+  "use": "폭탄 떨어질 자리 예고(먹 고리가 감겨 닫힘)",
+  "final": false
+ },
+ "ink-dispersal12": {
+  "file": "ink-dispersal12.webp",
+  "frames": 12,
+  "grid": [
+   12,
+   1
+  ],
+  "cell": [
+   256,
+   256
+  ],
+  "source": "CX-0167RA_machine-ink-dispersal12_r1_ROUGH.png",
+  "sourceSha256": "ce80bd12762bc86fbedf0ad2a17a8c1e9516f5ded5bd21bcbd4e7928a440ee6d",
+  "sha256": "c551cb7c5790228520e044bd11f06c910c320a002b6642e850ff7ae9c0cec052",
+  "bytes": 29206,
+  "use": "폭탄 터진 뒤 먹 흩어짐",
+  "final": false
+ },
+ "orb-flight8": {
+  "file": "orb-flight8.webp",
+  "frames": 8,
+  "grid": [
+   8,
+   1
+  ],
+  "cell": [
+   96,
+   96
+  ],
+  "source": "CX-0167RA_machine-orb-flight8_r1_ROUGH.png",
+  "sourceSha256": "ca188f92cf219ed1c430b2234aa0c378f2153a4c967dac9e3d55c3bc66dcef01",
+  "sha256": "0f5817713c5530fedf7553c1ade2f856b95ba9d23e3325421ac5bebb8c1b2138",
+  "bytes": 14530,
+  "use": "폭탄 통(날아가는 구체)",
+  "final": false
+ },
+ "capsule-flight8": {
+  "file": "capsule-flight8.webp",
+  "frames": 8,
+  "grid": [
+   8,
+   1
+  ],
+  "cell": [
+   96,
+   96
+  ],
+  "source": "CX-0167RA_machine-capsule-flight8_r1_ROUGH.png",
+  "sourceSha256": "2454b04d6eb0d3bbbd0010e0202d3336413b0672e98bfeb2e6ea303ce98062dd",
+  "sha256": "c5deefd38e337189da2fac89352d0af00acf213924ebeebb80d2fb918ab85217",
+  "bytes": 9708,
+  "use": "방사능 포낭(날아가는 캡슐)",
+  "final": false
+ },
+ "green-warning8": {
+  "file": "green-warning8.webp",
+  "frames": 8,
+  "grid": [
+   8,
+   1
+  ],
+  "cell": [
+   256,
+   256
+  ],
+  "source": "CX-0167RA_machine-green-warning8_r1_ROUGH.png",
+  "sourceSha256": "9310860036b66f7fc4b1ef293f2484ba348811071d26f460b2e0ca3c2f8f221f",
+  "sha256": "48721fb0225a95bb7577e2dacf171827f68ea6c258840424aedc41d8514f1ce2",
+  "bytes": 93016,
+  "use": "방사능 떨어질 자리 예고(녹색으로 차오름)",
+  "final": false
+ },
+ "sonic-charge6": {
+  "file": "sonic-charge6.webp",
+  "frames": 6,
+  "grid": [
+   6,
+   1
+  ],
+  "cell": [
+   128,
+   128
+  ],
+  "source": "CX-0167RA_machine-sonic-charge6_r1_ROUGH.png",
+  "sourceSha256": "5e924475c775639e2026ef31ee801c29e945526654c033dcd37adc880e1a05a9",
+  "sha256": "22160085186637605ca8836691ff76612e9cefd34c083db2bf09ef558e62171b",
+  "bytes": 9968,
+  "use": "음파 모으기(가슴 앞 고리)",
+  "final": false
+ }
+}

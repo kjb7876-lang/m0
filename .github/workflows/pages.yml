@@ -519,6 +519,8 @@ jobs:
         run: node r96/qa/r1195/feet-ink-cpu-check.cjs
       - name: R1210 S-06 디스토피아 몹 미래형 원거리 공격(레이저·방사능·음파) CPU check
         run: node r96/qa/r1210/r1210-cpu-check.cjs
+      - name: R1213 기계 계열 몹 원거리(레이저·방사능·음파·폭탄) CPU check
+        run: node r96/qa/r1213/r1213-cpu-check.cjs
       - name: R1206 samong one mob one image, death look, one memory fragment, ink ground attack CPU check
         run: node r96/qa/r1206/r1206-cpu-check.cjs
       - name: R1206b samong mood props lantern inkpost shard canvas stone from Dots art CPU check
