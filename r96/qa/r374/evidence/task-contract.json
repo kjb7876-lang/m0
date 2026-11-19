@@ -1,0 +1,45 @@
+{
+  "task-contract": "v1",
+  "task_id": "SW-0004",
+  "project": "storyworld-m0",
+  "repository": "kjb7876-lang/m0",
+  "issue_number": 268,
+  "revision": 2,
+  "goal": "이동 모션이 없는 몬스터의 자연스러운 그림자 이동·대시 보완과 이동 경로 안전성",
+  "acceptance_criteria": [
+    "실제 이동 그림이 없는 일반 몹만 적용",
+    "고정형·정상 이동 시트·서사·세이브·원본 보존",
+    "이동 중 벽과 닫힌 문 통과 방지, 출현과 공격 가독성 검증",
+    "CPU 회귀·브라우저 증거·7분야 시각 검토 및 미검증 명시"
+  ],
+  "non_goals": [
+    "병합·공개 배포",
+    "신규 비용·유료 API",
+    "다른 에이전트 수정 중인 공통 등록 파일 변경"
+  ],
+  "allowed_paths": [
+    "r96/client-source/mob-shadow-r374.js",
+    "r96/qa/r374/",
+    "docs/qa/mob-shadow-r374.md",
+    "r96/client-source/mob-gaze-r268.js",
+    "r96/client-source/mob-motion-r286.js",
+    "r96/client-source/mob-flank-r230.js"
+  ],
+  "base_commit": "b03cb4ee7710f7ae71b5a742e259136d9e925804",
+  "input_manifest_hash": null,
+  "executor": "codex-cloud",
+  "reviewer": "claude",
+  "dependencies": [
+    "PR #267 공통 런타임 등록 파일 조정 후 통합 담당자의 등록 필요"
+  ],
+  "status": "QUEUED",
+  "dispatch_id": "SW-0004-r2-via-dots",
+  "provider_task_id": null,
+  "attempt_count": 1,
+  "artifact_manifest": null,
+  "evidence": [],
+  "blocked_reason": null,
+  "approval_scope": "구현·검증·draft PR만. 병합·공개 배포 승인 없음.",
+  "completion": "pr-opened",
+  "codex_route": "via-dots"
+}
