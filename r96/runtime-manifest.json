@@ -13558,6 +13558,26 @@
       "sha256": "466c975261ac417661e52d68eb47471a3514fe5aae6deba5ab9136975baa20f0"
     },
     {
+      "path": "assets/r1241/index.json",
+      "bytes": 702,
+      "sha256": "2626235bc4f51635e8eaf489d5b8908ccb1264f221e30a8dd1157a28e5b9247e"
+    },
+    {
+      "path": "assets/r1241/shadow-burst12.webp",
+      "bytes": 20804,
+      "sha256": "b42870f8fcc1d5e33ccf65bec214eeb67f748f634ac7dff86bbefea0dfff0593"
+    },
+    {
+      "path": "assets/r1241/shadow-rise12.webp",
+      "bytes": 62654,
+      "sha256": "073b095c78e320975de331c5d801d3c978fc12e14e45c5df030065e3d1ae64ff"
+    },
+    {
+      "path": "assets/r1241/shadow-seal8.webp",
+      "bytes": 48296,
+      "sha256": "2013323e5f17dff994433c99335ae2355b7273683f7a120c4e62b5428c5036b7"
+    },
+    {
       "path": "assets/r126/props/badge.webp",
       "bytes": 25464,
       "sha256": "fd12f3e8efd3654d060607145cbd6f6f55728f7fd65afd5a9f4d3d1507ae0281"
@@ -54583,6 +54603,11 @@
       "sha256": "fde7be7f765355447556baf221f4eb21304ca4b780c52137f18a500ec2635536"
     },
     {
+      "path": "boss72-shadows-r1241.js",
+      "bytes": 12112,
+      "sha256": "f1aac17f3fcb9401baa41b74a74eefa00fd214862a6190d4b1430d1d1a485082"
+    },
+    {
       "path": "bosses-r104-data.js",
       "bytes": 23584,
       "sha256": "4080be736347850afbe307eba085ca92f943ebdde6019e127dfdf4b766209321"
@@ -55929,8 +55954,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6582849,
-      "sha256": "6ad31931abbef0879082ec65e70514cb1cae3d0ac87dc62b25134fff733efbd4"
+      "bytes": 6582899,
+      "sha256": "8b6a16545078e8c4064be6415872099d2d6dde3af9491d2f17ea541ea1fe0c0e"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -57393,9 +57418,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11478,
-  "totalBytes": 1372563785,
-  "webHTMLSha256": "6ad31931abbef0879082ec65e70514cb1cae3d0ac87dc62b25134fff733efbd4",
+  "fileCount": 11483,
+  "totalBytes": 1372708403,
+  "webHTMLSha256": "8b6a16545078e8c4064be6415872099d2d6dde3af9491d2f17ea541ea1fe0c0e",
   "largest": [
     {
       "path": "index.html",

@@ -521,6 +521,8 @@ jobs:
         run: node r96/qa/r1210/r1210-cpu-check.cjs
       - name: R1213 기계 계열 몹 원거리(레이저·방사능·음파·폭탄) CPU check
         run: node r96/qa/r1213/r1213-cpu-check.cjs
+      - name: R1241 제72문 보스 72 그림자 소환 CPU check
+        run: node r96/qa/r1241/r1241-cpu-check.cjs
       - name: R1222 늪 혼령체 물 튐 늪색 CPU check
         run: node r96/qa/r1222/r1222-cpu-check.cjs
       - name: R1206 samong one mob one image, death look, one memory fragment, ink ground attack CPU check
