@@ -551,6 +551,8 @@ jobs:
         run: node r96/qa/r1233/r1233-cpu-check.cjs
       - name: R1218 boss echo throw uses the drawn body art CPU check
         run: node r96/qa/r1218/r1218-cpu-check.cjs
+      - name: R1218b samong bosses cult seal and black command wire from Dots CX-0175SB CPU check
+        run: node r96/qa/r1218b/r1218b-cpu-check.cjs
       - name: R976 samong first region pixel art to painted assets CPU check
         run: node r96/qa/r976/r976-cpu-check.cjs
       - name: R1177 samong episode pixel leftovers (S-06 pixel mobs, pixelfx sheets) to painted art CPU check
