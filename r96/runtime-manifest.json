@@ -12873,6 +12873,21 @@
       "sha256": "23055900f7e6b9a26df18ff4141104dacc53bc62835ba05e72512eb418d7fe63"
     },
     {
+      "path": "assets/r1186/mobs/index.json",
+      "bytes": 1038,
+      "sha256": "14fb3428e142701ad529936422daca33e786761bbe0b654bd8e9fbbf66e71034"
+    },
+    {
+      "path": "assets/r1186/mobs/m032.webp",
+      "bytes": 333334,
+      "sha256": "2e329d68d8c857c6e4d6ed3d7929ca99e79877462921f9c6eac442f397367c47"
+    },
+    {
+      "path": "assets/r1186/mobs/m049.webp",
+      "bytes": 275030,
+      "sha256": "045f8babb81e8940859aa4015817ac6042ea09215bbb0bf937c0fddae88b5c99"
+    },
+    {
       "path": "assets/r119/heroes/gunner-n.webp",
       "bytes": 35746,
       "sha256": "1887e03e6fb23d2befc1cbb30f5b11d0984ca7fba0575a25a39a504490a0c867"
@@ -55589,8 +55604,8 @@
     },
     {
       "path": "mob-art-r1179.js",
-      "bytes": 3477,
-      "sha256": "b35fb3d87a5c9fef1c62cca72c1df8989eaacfe28fc9b2d0e8f6d3490b72f8df"
+      "bytes": 3984,
+      "sha256": "5ac65040bce8583df8d92f995a672d421a86ccdca03042fb005e8f54ecbd81d0"
     },
     {
       "path": "mob-art-r290.js",
@@ -56833,8 +56848,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11366,
-  "totalBytes": 1364468395,
+  "fileCount": 11369,
+  "totalBytes": 1365078304,
   "webHTMLSha256": "aa1610f331dbcceb32d5e28b6aea49e3b655b8485534ce1db5cdcce16759ac84",
   "largest": [
     {
