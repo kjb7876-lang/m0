@@ -25,6 +25,7 @@ const KEY=(window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.hospital-t
 let enabled=true;try{const v=localStorage.getItem(KEY);if(v==='0')enabled=false;}catch(_){}
 function setEnabled(on){enabled=!!on;try{localStorage.setItem(KEY,enabled?'1':'0');}catch(_){}return enabled;}
 const lowFx=()=>!!(typeof settings!=='undefined'&&settings?.lowFx);
+const dens=()=>{let v=1;try{v=+window.__STORYWORLD_PERF7_R1043__?.scale?.();}catch(_){v=1;}return Number.isFinite(v)&&v>0?Math.min(2,v):1;};/* R1201: 성능 단계 효과 밀도(5단계·자동 = 1) */
 
 // ---- palettes -----------------------------------------------------------------------
 const luts=new Map();
@@ -83,7 +84,7 @@ function draw(name,F,x,y,w,h,o={}){if(!enabled||typeof ctx==='undefined'||!ctx)r
  const alpha=o.alpha??1;if(!(alpha>.004))return true;
  /* R269: 다른 오버레이가 특정 그림을 빼도록(미카엘라 스킬의 조잡한 'wing' 등) — 거르개가 false 면 그리지 않는다 */
  if(FILT.length)for(const f of FILT){try{if(f(name,o)===false){stats.filtered=(stats.filtered||0)+1;return true;}}catch(_){}}
- if(FB>0&&!o.overHero){const fb=crowd>25?Math.round(FB*.73):FB;if(frameDraws>=fb&&(alpha<.55||frameDraws>=fb*1.7)){stats.budgetSkips++;return true;}}
+ if(FB>0&&!o.overHero){const fb=Math.round(FB*dens()*(crowd>25?.73:1));if(frameDraws>=fb&&(alpha<.55||frameDraws>=fb*1.7)){stats.budgetSkips++;return true;}}
  const m=META[name];if(!m)return false;
  if(!HERO_WINGS&&isWing(name)){let have=false;try{have=!!(typeof readyImage==='function'&&readyImage((R107.has(name)?'assets/r107/fx/':BASE)+name+'.webp')?.image);}catch(_){}if(have)stats.wingsOff=(stats.wingsOff||0)+1;return have;}
  const P=pal(F),c=tinted(name,P);if(!c){stats.misses++;return false;}

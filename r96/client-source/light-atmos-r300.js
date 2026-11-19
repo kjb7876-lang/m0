@@ -22,6 +22,7 @@ const CFG=Object.freeze({
  heroAlpha:{pc:1,mobile:.75}
 });
 const DEFAULTS=Object.freeze({on:true,pools:true,fog:true,motes:true,hero:true});
+const MOTE_CAP=Math.ceil(CFG.motes.pc*2);/* R1201: 7단계(효과 1.8배)까지 담는 버퍼, 그리기 수는 budget().motes */
 let prefs={...DEFAULTS};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s)for(const k in DEFAULTS)if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={frames:0,pools:0,poolsMax:0,motes:0,fogBands:0,dimFrames:0,heroDraws:0,errors:0};let lastError=null;
@@ -30,11 +31,12 @@ function mobile(){try{const m=window.__STORYWORLD_MOBILE_R63__;if(typeof m?.isMo
  try{return typeof matchMedia==='function'&&matchMedia('(pointer:coarse)').matches;}catch(_){return false;}}
 const tier=()=>{const T=window.__STORYWORLD_MOBILE_TIER_R1023__;return T?(T.pcGrade()?'pc':'mobile'):(mobile()?'mobile':'pc');};/* R1023: 그래픽 단계 PC급이면 PC 예산, 그 아래(휴대폰 기본·PC 에서 고른 낮은 단계)는 모바일 예산 */
 const lowFx=()=>!!(typeof settings!=='undefined'&&settings?.lowFx);
+const dens=()=>{let v=1;try{v=+window.__STORYWORLD_PERF7_R1043__?.scale?.();}catch(_){v=1;}return Number.isFinite(v)&&v>0?Math.min(2,v):1;};/* R1201: 성능 단계 효과 밀도(5단계·자동 = 1) */
 const reduced=()=>!!(typeof settings!=='undefined'&&settings?.reducedMotion);
 const sightOn=()=>!!(typeof settings!=='undefined'&&settings&&settings.flashlight58!==false);
 const want=k=>prefs.on&&prefs[k]!==false;
 function budget(){const t=tier(),lf=lowFx();
- return{tier:t,dim:CFG.dim[t],pools:lf?Math.min(6,CFG.pools[t]):CFG.pools[t],poolGain:CFG.poolGain[t],motes:lf?0:CFG.motes[t],fogBands:lf?1:CFG.fogBands[t],heroAlpha:CFG.heroAlpha[t]};}
+ return{tier:t,dim:CFG.dim[t],pools:lf?Math.min(6,CFG.pools[t]):CFG.pools[t],poolGain:CFG.poolGain[t],motes:lf?0:Math.round(CFG.motes[t]*dens()),fogBands:lf?1:CFG.fogBands[t],heroAlpha:CFG.heroAlpha[t]};}
 
 // ---- 빛 자리(R123 과 같은 자리: 소품 + 뒷벽 횃불) ----
 const lightCache=new WeakMap(),wallCache=new WeakMap();
@@ -86,7 +88,7 @@ function build(r){if(r.__r300)return r.__r300;const T=r.T,o={};
   const m=new T.ShaderMaterial({uniforms:{map:{value:o.fogTex},off:{value:new T.Vector2()},scale:{value:.045+i*.018},opacity:{value:.16},color:{value:new T.Color(.62,.58,.55)},center:{value:new T.Vector2()},radius:{value:18}},vertexShader:fv,fragmentShader:ff,transparent:true,depthWrite:false,depthTest:true,toneMapped:false});
   const mesh=new T.Mesh(g,m);mesh.name='r300-fog-'+i;mesh.renderOrder=-985+i;mesh.frustumCulled=false;mesh.position.y=.1+i*.22;mesh.scale.set(40,1,40);o.fog.push(mesh);}
  // 재·포자: Points 1개, 위치는 셰이더에서 영웅 둘레 상자 안으로 감아 돈다(매 프레임 버퍼 갱신 없음).
- const n=CFG.motes.pc,seed=new Float32Array(n*3);let s=7;const rnd=()=>{s=(s*16807)%2147483647;return s/2147483647;};for(let i=0;i<n*3;i++)seed[i]=rnd();
+ const n=MOTE_CAP,seed=new Float32Array(n*3);let s=7;const rnd=()=>{s=(s*16807)%2147483647;return s/2147483647;};for(let i=0;i<n*3;i++)seed[i]=rnd();
  const mg=new T.BufferGeometry();mg.setAttribute('position',new T.BufferAttribute(seed,3));mg.boundingSphere=new T.Sphere(new T.Vector3(),1e6);
  o.motes=new T.Points(mg,new T.ShaderMaterial({uniforms:{t:{value:0},center:{value:new T.Vector3()},box:{value:new T.Vector3(30,5,30)},color:{value:new T.Color(1,.62,.32)},size:{value:2.4},rise:{value:.35}},
   vertexShader:'uniform float t;uniform vec3 center;uniform vec3 box;uniform float size;uniform float rise;varying float vA;void main(){vec3 s=position;vec3 lo=center-box*.5;'+
@@ -131,7 +133,7 @@ function update(r,frame){const o=r.__r300;if(!o)return;
   f.position.x=cx;f.position.z=cy;u.center.value.set(cx,cy);u.radius.value=19;u.opacity.value=Math.min(.3,(samong?.13:.09)*(i?.7:1)*fogK);u.color.value.setRGB(...fogCol);
   u.off.value.set(t*sp*(i%2?-1:1),t*sp*.6);});stats.fogBands=bands;
  // 재·포자
- const mo=wx?.motes,motes=want('motes')&&mo!==false?Math.round(B.motes*(Number.isFinite(mo?.k)?mo.k:1)):0;o.motes.visible=motes>0;stats.motes=motes;
+ const mo=wx?.motes,motes=want('motes')&&mo!==false?Math.min(MOTE_CAP,Math.round(B.motes*(Number.isFinite(mo?.k)?mo.k:1))):0;o.motes.visible=motes>0;stats.motes=motes;
  if(motes){o.motes.geometry.setDrawRange(0,motes);const u=o.motes.material.uniforms;u.t.value=reduced()?0:t;u.center.value.set(player.x,0,player.y);
   u.color.value.setRGB(...(mo?.color||(samong?[.9,.24,.2]:[1,.62,.32])));u.rise.value=Number.isFinite(mo?.rise)?mo.rise:.35;u.size.value=2.4*Math.min(2,r.renderer?.getPixelRatio?.()||1);}
  attach(r,o);}

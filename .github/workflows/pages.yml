@@ -759,6 +759,8 @@ jobs:
         run: node r96/qa/r1197/r1197-cpu-check.cjs
       - name: R1200 draw lag (command meshes reuse their mesh when only the image changes) CPU check
         run: node r96/qa/r1200/r1200-cpu-check.cjs
+      - name: R1201 perf steps density CPU check
+        run: node r96/qa/r1201/r1201-cpu-check.cjs
       - name: R1014 survival mid-boss no longer sticks at the 70% phase gate under the 6%/s damage cap CPU check
         run: node r96/qa/r1014/r1014-cpu-check.cjs
       - name: R1135 survival boss count per difficulty (easy 1, normal 2, hard 3, nightmare 6), per-boss balance with the 66x floor, spread spawn spots CPU check
