@@ -81,14 +81,17 @@ function wrapDraws(){
    if(!prefs.on||!e||major(e)||!(e.hp>0)||e.spawnState==='dead')return base.apply(this,[e,...a]);
    // 엔진 drawEnemy 는 그림을 window.__STORYWORLD_STORY_COMBAT_R54__.frameFor / __STORYWORLD_PHASE1_ART__.enemy 로 고른다(R380 등은 ctx.drawImage 로 바로 그림).
    //  그리는 동안만 둘을 엿보는 껍데기로 바꿔 '이번에 고른 그림'을 받아 적는다(값은 그대로 돌려줌).
-   const prior=capturing,c={h:0,path:null,frame:null,flip:false,picked:null};capturing=c;
+   const prior=capturing,c={h:0,path:null,frame:null,flip:false,picked:null};capturing=c;try{e.r1206Look=null;}catch(_){}
    const S=window.__STORYWORLD_STORY_COMBAT_R54__,A=window.__STORYWORLD_PHASE1_ART__;
    try{if(S&&typeof S.frameFor==='function')window.__STORYWORLD_STORY_COMBAT_R54__={...S,frameFor(x,f){const r=S.frameFor(x,f);if(x===e&&r&&(r.path||r.assetFrame))c.picked=r;return r;}};}catch(_){}
    try{if(A&&typeof A.enemy==='function')window.__STORYWORLD_PHASE1_ART__={...A,enemy(x){const r=A.enemy(x);if(x===e&&r?.frame&&!c.picked)c.picked=r.frame.path?r.frame:{...r.frame,path:r.path};return r;}};}catch(_){}
    try{return base.apply(this,[e,...a]);}finally{capturing=prior;
     try{if(window.__STORYWORLD_STORY_COMBAT_R54__!==S)window.__STORYWORLD_STORY_COMBAT_R54__=S;}catch(_){}try{if(window.__STORYWORLD_PHASE1_ART__!==A)window.__STORYWORLD_PHASE1_ART__=A;}catch(_){}
     try{const z=typeof zoom==='number'&&zoom>0?zoom:1;let look=null;
-     if(c.path&&c.h>4)look={path:c.path,frame:c.frame,flip:c.flip,h:c.h/z};
+     // R1206(사용자 2026-11-19 "사몽 에피소드 몹 죽을 때 다른 몹 이미지 그림자"): 엔진 몸 그림을 가리고 자기 시트를 ctx.drawImage 로 직접 그리는 쪽(R248 이름 시트·R161 꼭두각시)은
+     //  sprite/frameFor 로 잡히는 게 '가려진 엔진 몸(다른 몹 그림)'이다 → 그 쪽이 이번 그리기에 남긴 실제 그림(e.r1206Look)을 먼저 쓴다.
+     const own=e.r1206Look;if(own&&own.path&&own.frame?.assetFrame&&fin(own.h)&&own.h>4){look={path:own.path,frame:own.frame,flip:!!own.flip,h:own.h/z};stats.ownLooks=(stats.ownLooks||0)+1;}
+     else if(c.path&&c.h>4)look={path:c.path,frame:c.frame,flip:c.flip,h:c.h/z};
      else if(c.picked&&(c.picked.path||e.path)&&c.picked.assetFrame){const f=c.picked,b=f.assetFrame.bakedFacing,
        flip=typeof f.flip==='boolean'?f.flip:b==='left'?e.direction==='right':b==='right'?e.direction==='left':b==='front'||b==='back'||b==='eight-way'?false:e.direction==='left',
        hh=(typeof actorHeight==='function'?actorHeight():60)*(e.combatProfile?.spriteRect?.height||1)*(e.defScale||1);
@@ -340,6 +343,6 @@ try{if(typeof showSettings==='function'){const base=showSettings;showSettings=fu
 // R690: 이 몹의 죽음을 R462 가 맡는가(그렇다면 R91 공용 잔해·파편, R165 연기는 겹치지 않게 건너뜀)
 function owns(e){try{return !!(prefs.on&&e&&typeof e==='object'&&!major(e)&&looks.has(e.id));}catch(_){return false;}}
 window.__STORYWORLD_MOB_DEATH_R462__=Object.freeze({revision:REV,set,kindOf,owns,corpseOwner:CORPSE_OWNER,shards,shardBox,pieceAt,
- fireZones:FIRE_ZONES,isFireSource:src=>fireWindow(src)>0,
+ lookOf:id=>{const l=looks.get(id);return l?{...l}:null;},fireZones:FIRE_ZONES,isFireSource:src=>fireWindow(src)>0,
  inspect:()=>({revision:REV,installed:ok,prefs:{...prefs},style:style(),age15:A15(),corpses:corpses.length,corpsesBurning:corpses.filter(c=>c.flame&&T()-c.t0>=0&&T()-c.t0<4.5).length,fireZones:[...FIRE_ZONES],fireTracked:fireHits.size,atlasCache:atlasCache.size,stats:{...stats},lastError})});
 })();

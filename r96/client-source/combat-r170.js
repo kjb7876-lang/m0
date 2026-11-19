@@ -56,7 +56,10 @@ function artFor(){if(samongRoom())return{path:SCULPT,name:'세뇌당한 기억�
 const SPECIAL=new Set(['ep1a08']);// 특수 병동(본편 미로 진행·집결 규칙)은 손대지 않는다
 // R830(사용자 2026-11-12 "피의 육망성 조형물도 에피소드 1a 약물중독쪽에만"): 본편의 피의 육망성 조형물은 1부 지역에만 선다(규칙은 props-r272 towerOk, 사몽 구역의 기억 조각은 그대로).
 const canonTower=()=>{try{const P=window.__STORYWORLD_PROPS_R272__;return !P?.towerOk||P.towerOk(room)!==false;}catch(_){return true;}};
-function wanted(){if(!live()||!solo()||SPECIAL.has(room.id))return 0;if(!canonTower())return 0;if(samongRoom()){const m=zoneMode();return m==='F'?6:m==='B'||m==='D'||m==='G'?2:m==='H'||m==='C'||m==='combat'?1:0;}// R173: F(조각 깨기)는 6개
+// R1206(사용자 2026-11-19 "세뇌당한 기억의 조각은 각 맵당 1개체만 나오게, 빈자리는 그 맵 다른 몹으로 메꿔"): 사몽 구역의 조각은 많아야 1개.
+//  예전 수(F 6·B/D/G 2·H/C 1) 중 빠진 자리는 그 맵 잡몹(조각을 본뜬 몹과 같은 몹)으로 채운다. F 구역 문 조건(r173Need)은 실제로 선 수(1)를 따른다.
+function samongPlan(m){const old=m==='F'?6:m==='B'||m==='D'||m==='G'?2:m==='H'||m==='C'||m==='combat'?1:0;const towers=Math.min(1,old);return{old,towers,fill:old-towers};}
+function wanted(){if(!live()||!solo()||SPECIAL.has(room.id))return 0;if(!canonTower())return 0;if(samongRoom())return samongPlan(zoneMode()).towers;// R173: F(조각 깨기)는 6개 → R1206: 1개
  try{if(typeof safeRegion==='function'&&safeRegion())return 0;}catch(_){}return (room.enemies||[]).filter(e=>e.hp>0&&!major(e)).length>=20?1:0;}
 const okCell=(x,y)=>{try{return typeof blocked!=='function'||[[0,0],[1,0],[-1,0],[0,1],[0,-1],[1,1],[-1,-1],[1,-1],[-1,1]].every(([a,b])=>!blocked(x+a*.8,y+b*.8,.3,room));}catch(_){return true;}};
 function spotFor(n,taken){const L=room.exploration;if(!L?.floorCells?.length)return null;const path=window.__STORYWORLD_PLAY_R169__?.pathCells?.(room)||null,entry=L.entry||room.r72Entry||player;
@@ -79,6 +82,10 @@ function place(){const want=prefs.towers?wanted():0,key=String(room.id)+':'+Stri
    name:art.name||'피의 육망성 조형물'});
   e.maxHp=e.hp=Math.round(samongRoom()?atk*25:Math.max(60,(Number(donor.maxHp)||60)*6));e.damage=(Number(donor.damage)||10)*1.3;e.defScale=1;e.cd=99;
   room.enemies.push(e);stats.towers++;if(x)x.r173Towers=(x.r173Towers||0)+1;try{if(typeof ensureImages==='function')ensureImages([art.path]);}catch(_){}}
+ // R1206: 빠진 조각 자리는 그 맵 잡몹으로(조각 자리 후보에, 없으면 본뜬 몹 곁에). 한 구역에 한 번만(placedKey).
+ if(samongRoom()){const fill=samongPlan(zoneMode()).fill;for(let n=0;n<fill;n++){const at=spotFor(want+n,taken)||{x:donor.x+Math.cos(n*2.4)*1.2,y:donor.y+Math.sin(n*2.4)*1.2};taken.push(at);let m;try{m=JSON.parse(snap);}catch(_){break;}
+   Object.assign(m,{id:'r1206:fill:'+room.id+':'+n,x:at.x,y:at.y,homeX:at.x,homeY:at.y,nav:[],navAt:0,attack:null,rangedWindup:0,deadRecorded:false,spawnState:'active',r1206Fill:true});
+   m.hp=m.maxHp;if(typeof blocked==='function'&&blocked(m.x,m.y,.25,room)){m.x=donor.x;m.y=donor.y;}room.enemies.push(m);stats.fills=(stats.fills||0)+1;}}
  if(x){x.r173PlacedKey=key;x.r173Need=x.r173Towers||0;}}// 실제로 선 수(자리가 모자라면 6보다 적다) — F 구역 문 조건은 이 수를 따른다
 function palOf(e){if(e.r170Tower.pal)return e.r170Tower.pal;const P=window.__STORYWORLD_COMBAT_R114__?.palette;let pl=null;try{pl=P?P(JSON.parse(e.r170Tower.snap)):null;}catch(_){}
  return e.r170Tower.pal=pl?{main:{a:pl.p,b:pl.gp},sub:{a:pl.s,b:pl.gs}}:{main:{a:[90,12,20],b:[255,120,110]},sub:{a:[40,6,10],b:[200,60,60]}};}
@@ -91,12 +98,21 @@ function towerTick(){for(const e of towers()){if(RETIRED.test(String(e.r170Tower
   if(Math.hypot(player.x-e.x,player.y-e.y)>11){t.next=Math.max(t.next,T()+1.5);continue;}if(T()>=t.next){t.next=T()+6;cast(e);}}}
 // 피의 육망성 → 촉수
 function hexPath(c,r,rot){c.beginPath();for(let k=0;k<2;k++){for(let i=0;i<=3;i++){const a=rot+k*Math.PI/3+i*2*Math.PI/3,x=Math.cos(a)*r,y=Math.sin(a)*r;i?c.lineTo(x,y):c.moveTo(x,y);}}}
+// R1206(사용자 2026-11-19 "육망성 원 … 실체화 자산으로"): 사몽의 기억의 조각이 거는 바닥 공격은 핏빛 육망성 대신 먹 번짐으로 그린다.
+//  Dots 먹 번짐 시트(CX-0166SM C)가 오기 전 임시 코드 그림이다(최종 아트 아님). 본편 1부의 피의 육망성 조형물은 그대로. 끄기 storyworld.r170.combat {inkHex:false}.
+const inkHex=()=>prefs.inkHex!==false&&samongRoom();
+function inkBlot(g,w,grow,seed){const r=w*Math.max(.05,Math.min(1,grow)),n=11;let k=(Math.abs(Math.floor(seed*1e4))%9973)+1;const rnd=()=>{k=(k*16807)%2147483647;return k/2147483647;};
+ g.fillStyle='rgba(14,11,13,.55)';g.beginPath();for(let i=0;i<=n;i++){const a=i/n*Math.PI*2,rr=r*(.78+.3*rnd());if(i===0)g.moveTo(Math.cos(a)*rr,Math.sin(a)*rr);else g.lineTo(Math.cos(a)*rr,Math.sin(a)*rr);}g.closePath();g.fill();
+ g.fillStyle='rgba(6,5,7,.62)';for(let i=0;i<6;i++){const a=rnd()*Math.PI*2,d=r*(.15+.45*rnd()),b=r*(.22+.2*rnd());g.beginPath();g.ellipse(Math.cos(a)*d,Math.sin(a)*d,b,b*(.7+.3*rnd()),a,0,Math.PI*2);g.fill();}
+ /* 번진 가장자리: 어두운 바닥에서도 읽히게 한지빛 옅은 테(얼룩진 점들) */g.fillStyle='rgba(206,196,176,.16)';for(let i=0;i<16;i++){const a=i/16*Math.PI*2+rnd()*.3,d=r*(.86+.12*rnd()),b=r*(.05+.05*rnd());g.beginPath();g.ellipse(Math.cos(a)*d,Math.sin(a)*d,b*1.6,b,a,0,Math.PI*2);g.fill();}
+ g.fillStyle='rgba(40,8,12,.38)';for(let i=0;i<9;i++){const a=rnd()*Math.PI*2,d=r*(.95+.25*rnd()),b=r*(.04+.06*rnd());g.beginPath();g.ellipse(Math.cos(a)*d,Math.sin(a)*d,b,b,0,0,Math.PI*2);g.fill();}}
 function drawHex(h){const q=project(h.x,h.y),w=h.radius*Math.SQRT2*Math.abs(project(h.x+1,h.y).x-q.x),// 마름모 격자: 반지름 r칸 = 화면 가로 반폭 r·√2·(한 칸 가로)
  warn=h.age<h.warning,u=warn?h.age/Math.max(.01,h.warning):1,P=h.r170.pal,S=SPR(),hh=H();
  ctx.save();try{ctx.translate(q.x,q.y);ctx.save();ctx.scale(1,.5);ctx.globalAlpha*=warn?.75+.25*u:Math.max(0,Math.min(1,(h.life-h.age)*3));
+  if(inkHex()){inkBlot(ctx,w,warn?.35+.65*u:1,h.r170.seed||0);ctx.restore();}else{
   ctx.fillStyle='rgba(60,2,10,.62)';ctx.beginPath();ctx.arc(0,0,w*(warn?.4+.6*u:1),0,Math.PI*2);ctx.fill();
   ctx.lineWidth=Math.max(2.5,3.6*(typeof zoom==='number'?zoom:1));ctx.strokeStyle='rgba(200,16,30,1)';ctx.shadowColor='rgba(255,50,60,.95)';ctx.shadowBlur=14;
-  ctx.beginPath();ctx.arc(0,0,w,0,Math.PI*2*Math.min(1,u*1.2));ctx.stroke();ctx.beginPath();ctx.arc(0,0,w*.93,0,Math.PI*2);ctx.lineWidth*=.45;ctx.stroke();ctx.lineWidth/=.45;hexPath(ctx,w*.86,-Math.PI/2+h.r170.seed*.1);ctx.globalAlpha*=Math.min(1,.4+u*1.2);ctx.stroke();ctx.restore();
+  ctx.beginPath();ctx.arc(0,0,w,0,Math.PI*2*Math.min(1,u*1.2));ctx.stroke();ctx.beginPath();ctx.arc(0,0,w*.93,0,Math.PI*2);ctx.lineWidth*=.45;ctx.stroke();ctx.lineWidth/=.45;hexPath(ctx,w*.86,-Math.PI/2+h.r170.seed*.1);ctx.globalAlpha*=Math.min(1,.4+u*1.2);ctx.stroke();ctx.restore();}
   if(warn&&S){S.draw('ring',P.main,0,0,w*2.2,w*1.2,{alpha:.55+.35*u,overHero:true});S.draw('glow',{a:[120,8,16],b:[255,90,90]},0,-hh*.05,w*1.4*u,w*.7*u,{alpha:.45*u,overHero:true});}
   const PX=window.__STORYWORLD_PIXELFX_R163__,pxOn=!!PX?.has?.('tendrils-blood');// R176: 터진 뒤는 프레임 애니메이션(핏빛 촉수)만 — 한 장짜리 가시 늘이기는 시트가 없을 때만
   if(!warn&&S&&!pxOn){const v=Math.min(1,(h.age-h.warning)/.25),n=7;for(let i=0;i<n;i++){const a=h.r170.seed+i*2*Math.PI/n,rr=w*(.25+.55*((i*37)%7)/7),x=Math.cos(a)*rr,y=Math.sin(a)*rr*.55,len=hh*(1.1+.5*((i*13)%5)/5)*v;
@@ -164,6 +180,6 @@ try{
    if(r!==false&&!restore)try{spreadStory();}catch(e){fail(e);}return r;};}
 }catch(e){fail(e);}
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
-window.__STORYWORLD_COMBAT_R170__=Object.freeze({revision:REV,set,artOf,nextSpot:()=>{try{nearSpot();}catch(_){}return spot0?{...spot0}:null;},towers:()=>towers().map(e=>({id:e.id,name:e.name,x:e.x,y:e.y,hp:e.hp,art:e.r170Tower.art})),cast:e=>cast(e),
+window.__STORYWORLD_COMBAT_R170__=Object.freeze({revision:REV,set,artOf,samongPlan,inkBlot,nextSpot:()=>{try{nearSpot();}catch(_){}return spot0?{...spot0}:null;},towers:()=>towers().map(e=>({id:e.id,name:e.name,x:e.x,y:e.y,hp:e.hp,art:e.r170Tower.art})),cast:e=>cast(e),
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},towers:live()?towers().length:0,lastError})});
 })();
