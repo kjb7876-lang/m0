@@ -38,13 +38,15 @@ const live=new Set();let bucket=null;
 function hush(){for(const v of live){for(const s of v.src){try{s.stop();}catch(_){}}try{v.g.disconnect();}catch(_){}}const n=live.size;live.clear();clearTimeout(stingTimer);stingTimer=null;return n;}
 function tone(C,dest,t,fq,d,peak,type='sine'){const o=C.createOscillator();bucket?.push(o);o.type=type;o.frequency.setValueAtTime(fq,t);o.connect(env(C,dest,t,.004,d,peak));o.start(t);o.stop(t+d+.06);}
 function click(C,dest,t,fq,d,peak){const s=C.createBufferSource(),f=C.createBiquadFilter();bucket?.push(s);s.buffer=noiseBuf(C);f.type='bandpass';f.frequency.value=fq;f.Q.value=6;s.connect(f);f.connect(env(C,dest,t,.002,d,peak));s.start(t);s.stop(t+d+.05);}
+// R1212: ElevenLabs 파일이 준비돼 있으면 파일(초침·종·쇠종)을 내고 소스를 hush 대상에 넣는다. 없으면 아래 합성.
+function FX(kind,C,d,t,k=1){const s=window.__STORYWORLD_SYNTH_SFX_R1212__?.play?.('kairo_'+kind,C,d,t,{gain:k});if(s){bucket?.push(s);return true;}return false;}
 const SND={
  // 초침: 1.5kHz 금속 딸깍(시제품 시계 소리 결)
- tick(C,d,t,k=1){click(C,d,t,1500,.03,.05*k);tone(C,d,t,1508,.035,.012*k,'triangle');},
+ tick(C,d,t,k=1){if(FX('tick',C,d,t,k))return;click(C,d,t,1500,.03,.05*k);tone(C,d,t,1508,.035,.012*k,'triangle');},
  // 시간 제어: 맑은 종 두 겹(E6·B6)과 거꾸로 감기는 초침 둘
- chime(C,d,t){for(const[fq,p,dd]of[[1318.5,.035,.9],[1975.5,.018,.7],[3290,.006,.35]])tone(C,d,t,fq,dd,p);SND.tick(C,d,t+.08,.7);SND.tick(C,d,t+.2,.5);},
+ chime(C,d,t){if(FX('chime',C,d,t)){SND.tick(C,d,t+.08,.7);SND.tick(C,d,t+.2,.5);return;}for(const[fq,p,dd]of[[1318.5,.035,.9],[1975.5,.018,.7],[3290,.006,.35]])tone(C,d,t,fq,dd,p);SND.tick(C,d,t+.08,.7);SND.tick(C,d,t+.2,.5);},
  // 구역 입장: 낮은 쇠종(E2·B2·E3, 비조화 배음) + 1초 간격 초침 넷
- toll(C,d,t){for(const[fq,p,dd]of[[82.4,.06,3.2],[123.5,.03,2.6],[164.8,.025,2.2],[226.6,.012,1.4]])tone(C,d,t,fq,dd,p);click(C,d,t,420,.12,.03);for(let i=1;i<=4;i++)SND.tick(C,d,t+.6+i*1.0,.8-i*.12);}};
+ toll(C,d,t){if(FX('toll',C,d,t)){for(let i=1;i<=4;i++)SND.tick(C,d,t+.6+i*1.0,.8-i*.12);return;}for(const[fq,p,dd]of[[82.4,.06,3.2],[123.5,.03,2.6],[164.8,.025,2.2],[226.6,.012,1.4]])tone(C,d,t,fq,dd,p);click(C,d,t,420,.12,.03);for(let i=1;i<=4;i++)SND.tick(C,d,t+.6+i*1.0,.8-i*.12);}};
 function play(kind,...a){stats.sounds[kind]=(stats.sounds[kind]||0)+1;const C=audible()?A():null;note('sound',{kind,played:!!C});if(!C)return false;
  const v={g:null,src:[]};bucket=v.src;try{const g=v.g=C.createGain();g.gain.value=vol();g.connect(out(C));live.add(v);SND[kind](C,g,C.currentTime+.01,...a);setTimeout(()=>{live.delete(v);try{g.disconnect();}catch(_){}},5000);return true;}catch(e){fail(e);return false;}finally{bucket=null;}}
 if(typeof stopEffects==='function'){const base=stopEffects;stopEffects=function(...a){try{hush();}catch(e){fail(e);}return base.apply(this,a);};}

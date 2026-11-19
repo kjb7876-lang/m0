@@ -77,7 +77,9 @@ if(typeof setInterval==='function'){setInterval(wrapInst,700);}
 function snapshot(cb){wrapInst();let done=false;const k=s=>{if(done)return;done=true;cb(s);};snapWanted=k;setTimeout(()=>{if(!done){snapWanted=null;k(grabScreen());}},120);}
 // ---- 소리: 보스가 드러나는 순간 낮은 울림 한 번(설정 효과음·음량을 따름) ----
 function boom(){try{const s=typeof settings!=='undefined'?settings:null;if(s&&(!s.sound||!(+s.volume>0)))return;const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
- const ac=boom.ac||(boom.ac=new AC()),t=ac.currentTime,v=clamp((s?+s.volume:1)*.55);const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.setValueAtTime(74,t);o.frequency.exponentialRampToValueAtTime(31,t+1.6);
+ const ac=boom.ac||(boom.ac=new AC()),t=ac.currentTime,v=clamp((s?+s.volume:1)*.55);
+ const X=window.__STORYWORLD_SYNTH_SFX_R1212__,G=typeof audioContext!=='undefined'&&audioContext&&audioContext.state==='running'?audioContext:ac;// R1212: ElevenLabs 울림 먼저(미리 받아 둔 게임 컨텍스트로, 없으면 이 컨텍스트에 받아 다음부터)
+ if(X){if(X.play('boss_reveal',G,G.destination,G.currentTime,{gain:v/.55}))return;X.preload(ac);}const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.setValueAtTime(74,t);o.frequency.exponentialRampToValueAtTime(31,t+1.6);
  g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(v,t+.04);g.gain.exponentialRampToValueAtTime(.0001,t+1.9);o.connect(g).connect(ac.destination);o.start(t);o.stop(t+2);
  const n=ac.createBufferSource(),b=ac.createBuffer(1,ac.sampleRate*.5|0,ac.sampleRate),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,3);
  const f=ac.createBiquadFilter(),ng=ac.createGain();f.type='lowpass';f.frequency.value=420;ng.gain.value=v*.5;n.buffer=b;n.connect(f).connect(ng).connect(ac.destination);n.start(t);}catch(_){}}

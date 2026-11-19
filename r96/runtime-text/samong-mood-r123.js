@@ -411,7 +411,8 @@
   if(!want){untilt();return;}const q=project(player.x,player.y),deg=(-1.8+.25*Math.sin(now()*.35)).toFixed(2);tilted={tf:'rotate('+deg+'deg)'};c.style.transformOrigin=Math.round(q.x)+'px '+Math.round(q.y)+'px';if(!fx)c.style.transform=tilted.tf;}
  function untilt(){if(!tilted)return;tilted=null;const c=webgl();if(c&&!fx){c.style.transform='';c.style.transformOrigin='';}}
  function tickSound(hi){if(!prefs.tick)return;try{if(typeof settings!=='undefined'&&(settings.sound===false||settings.volume<=0))return;const A=window.AudioContext||window.webkitAudioContext;if(!A)return;ac=ac||new A();if(ac.state==='suspended')ac.resume?.();
-  const t0=ac.currentTime,o=ac.createOscillator(),gn=ac.createGain(),v=.05*clamp(typeof settings!=='undefined'&&Number.isFinite(+settings.volume)?+settings.volume:1,0,1);o.type='square';o.frequency.value=hi?2300:1700;
+  const t0=ac.currentTime,v=.05*clamp(typeof settings!=='undefined'&&Number.isFinite(+settings.volume)?+settings.volume:1,0,1);const X=window.__STORYWORLD_SYNTH_SFX_R1212__,G=typeof audioContext!=='undefined'&&audioContext&&audioContext.state==='running'?audioContext:ac;if(X){if(X.play('banner_tick',G,G.destination,G.currentTime,{gain:v/.05,rate:hi?1.25:1}))return;X.preload(ac);}// R1212: ElevenLabs 딸깍 먼저
+  const o=ac.createOscillator(),gn=ac.createGain();o.type='square';o.frequency.value=hi?2300:1700;
   gn.gain.setValueAtTime(.0001,t0);gn.gain.exponentialRampToValueAtTime(Math.max(.0002,v),t0+.004);gn.gain.exponentialRampToValueAtTime(.0001,t0+.05);o.connect(gn);gn.connect(ac.destination);o.start(t0);o.stop(t0+.06);}catch(_){}}
 
  // ---- 들어설 때 표시(층·연도) -----------------------------------------------------------------------------

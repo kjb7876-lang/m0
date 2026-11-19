@@ -1,0 +1,37 @@
+ok   synth-sfx-r1212.js 있음
+ok   runtime-text 사본 = client-source
+ok   태그: combat-r118 앞
+ok   pages.yml CPU 검사 줄
+ok   공개 확인 목록
+ok   runtime-inputs 에 새 파일
+ok   코드에 유료 생성 호출 없음
+ok   새 오버레이는 합성하지 않음(파일만 재생)
+ok   R125 가끔 소리 17종 읽음
+ok   API __STORYWORLD_SYNTH_SFX_R1212__
+ok   합성 소리 27종 모두 표에 있음
+ok   모든 소리 파일 있음(33)
+ok   파일 크기 상한(한 번 소리 70KB·깔리는 소리 260KB)
+ok   새 파일 20개 이상·합 1.6MB 미만(Pages 예산)
+ok   index.json: 파일마다 출처(ElevenLabs)·프롬프트·해시
+ok   프롬프트에 외부 게임 이름 없음
+ok   게인 범위 0~2.5
+ok   받기 전에는 null(호출한 쪽이 합성으로 대신)
+ok   preload 뒤 준비됨
+ok   파일 재생: 버퍼 소스를 정한 시각에 시작
+ok   게인 = 표 게인 × 호출 게인, 받은 목적지로 연결
+ok   재생 속도 옵션
+ok   깔리는 소리는 반복 재생
+ok   같은 사이트 상대 경로만 받음
+ok   끄기(storyworld.r1212.sfx=0) → 예전 합성 그대로
+ok   R125: 파일 준비 → 깔리는 소리·가끔 소리·심장 박동 모두 파일, 오실레이터 0
+ok   R125: 오버레이 없으면 예전 합성 그대로
+ok   R125: 합성으로 먼저 깔린 소리를 파일이 오면 바꿔 낌
+ok   R356 카이로 play() 가 파일 먼저
+ok   R568 보스 등장 울림이 파일 먼저
+ok   R123 숫자 딸깍이 파일 먼저
+ok   kairo-homage-r356.js runtime 사본 같음
+ok   boss-cinematic-r568.js runtime 사본 같음
+ok   samong-mood-r123.js runtime 사본 같음
+ok   ambience-r125.js runtime 사본 같음
+
+35/35 ok
