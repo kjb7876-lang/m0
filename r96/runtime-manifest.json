@@ -13558,6 +13558,71 @@
       "sha256": "466c975261ac417661e52d68eb47471a3514fe5aae6deba5ab9136975baa20f0"
     },
     {
+      "path": "assets/r1239/fx/mask-burst10-crimson.webp",
+      "bytes": 75612,
+      "sha256": "3a1eb8d37769200d87b13f92624798c03a1519838dad7e4eac79cb8ec03e63d2"
+    },
+    {
+      "path": "assets/r1239/fx/mask-burst10.webp",
+      "bytes": 76150,
+      "sha256": "45cbd51cdbfa3e052fb1955fda9d5bd4bbac63bfeb9c23dcf5dcfd502ea0d2a0"
+    },
+    {
+      "path": "assets/r1239/fx/mask-crack8-crimson.webp",
+      "bytes": 58818,
+      "sha256": "0319dd419b6582e2bbd4ad53f9a637c48ba58b7a3221d14c952453b8c0098390"
+    },
+    {
+      "path": "assets/r1239/fx/mask-crack8.webp",
+      "bytes": 57576,
+      "sha256": "08485cdadff401e7b6772b8ed17ce556f21b0f4489130585b1a4f238122c8dc5"
+    },
+    {
+      "path": "assets/r1239/fx/mask-swarm12-crimson.webp",
+      "bytes": 182106,
+      "sha256": "161de353a9fc739c2e24fa757cd5387b94895d61a29a070e85ff1c787cb37625"
+    },
+    {
+      "path": "assets/r1239/fx/mask-swarm12.webp",
+      "bytes": 181272,
+      "sha256": "8a84cc1bb3c41931551d7f258cc8875e2cebbfffca61cfa673dc25b98bbfbeff"
+    },
+    {
+      "path": "assets/r1239/lucifer/a11-dark-float8.webp",
+      "bytes": 182894,
+      "sha256": "1a819f93ffd5c650b8bdbe1c2a80d64e3857c87d14a7ae755c53e5b90c88f51d"
+    },
+    {
+      "path": "assets/r1239/lucifer/a11-dark-hit4.webp",
+      "bytes": 163646,
+      "sha256": "4d823b02c0cc76d6726d1f2a2498ae0a261a21e90b7873b2529834b80f99afe4"
+    },
+    {
+      "path": "assets/r1239/lucifer/a11-dark-idle6.webp",
+      "bytes": 286030,
+      "sha256": "50e3eea36ef4bc6e41bdccba0020d0b1f3254643f20fd97c5626b65e914c031a"
+    },
+    {
+      "path": "assets/r1239/lucifer/a11-dark-p1.webp",
+      "bytes": 69264,
+      "sha256": "7984dd96ec1852bae16fb126f5c81fe2bac94b6eb06c92cd29457ffb730fb24f"
+    },
+    {
+      "path": "assets/r1239/lucifer/a11-dark-p2.webp",
+      "bytes": 69094,
+      "sha256": "9926bb3934cdca7a81dbdb9b8b566253d29810820c6a8f081810437e9798cce3"
+    },
+    {
+      "path": "assets/r1239/lucifer/a11-dark-p3.webp",
+      "bytes": 68724,
+      "sha256": "7562c1f11a3915c765a953d5fc506b5e75d23e6c509633412e8f51e1d3639458"
+    },
+    {
+      "path": "assets/r1239/lucifer/a11-dark-p4.webp",
+      "bytes": 70406,
+      "sha256": "6d529b952cbe3be4e93911855ae418d3d6c063a1c66e872e17b77f548aee10ba"
+    },
+    {
       "path": "assets/r126/props/badge.webp",
       "bytes": 25464,
       "sha256": "fd12f3e8efd3654d060607145cbd6f6f55728f7fd65afd5a9f4d3d1507ae0281"
@@ -54589,8 +54654,8 @@
     },
     {
       "path": "bosses-r104.js",
-      "bytes": 6838,
-      "sha256": "daba8b32674813c7d955f80827f97a134ff252e38d40c67c2cf601adb43c80d1"
+      "bytes": 6994,
+      "sha256": "beb7db0df815c590345ae3ff700fb11753f07f642d88b7d835621568d45c5901"
     },
     {
       "path": "bossroom-tidy-r438.js",
@@ -55929,8 +55994,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6582849,
-      "sha256": "6ad31931abbef0879082ec65e70514cb1cae3d0ac87dc62b25134fff733efbd4"
+      "bytes": 6582890,
+      "sha256": "10f3b2f61a6b963ffa5864d012e292450bd725e309a91a1600d18083f79e76a5"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -56081,6 +56146,11 @@
       "path": "maps-palace-slum-r317.js",
       "bytes": 15913,
       "sha256": "01e01f4db15a9a925b7d2eb2843c9664432f04b29bacce72a8f7921a58cc9418"
+    },
+    {
+      "path": "masks-r1239.js",
+      "bytes": 17758,
+      "sha256": "903f5be421ec7cc8b9bf6037ad6d898c6e93583f889c93bf5483da243fe81df4"
     },
     {
       "path": "memory-voice-r1223.js",
@@ -57393,9 +57463,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11478,
-  "totalBytes": 1372563785,
-  "webHTMLSha256": "6ad31931abbef0879082ec65e70514cb1cae3d0ac87dc62b25134fff733efbd4",
+  "fileCount": 11492,
+  "totalBytes": 1374123332,
+  "webHTMLSha256": "10f3b2f61a6b963ffa5864d012e292450bd725e309a91a1600d18083f79e76a5",
   "largest": [
     {
       "path": "index.html",

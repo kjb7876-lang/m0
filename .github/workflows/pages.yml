@@ -523,6 +523,8 @@ jobs:
         run: node r96/qa/r1213/r1213-cpu-check.cjs
       - name: R1222 늪 혼령체 물 튐 늪색 CPU check
         run: node r96/qa/r1222/r1222-cpu-check.cjs
+      - name: R1239 천사의 가면 '수천 개의 얼굴' 가면 스킬·루시퍼 그림 일관성 CPU check
+        run: node r96/qa/r1239/r1239-cpu-check.cjs
       - name: R1206 samong one mob one image, death look, one memory fragment, ink ground attack CPU check
         run: node r96/qa/r1206/r1206-cpu-check.cjs
       - name: R1206b samong mood props lantern inkpost shard canvas stone from Dots art CPU check

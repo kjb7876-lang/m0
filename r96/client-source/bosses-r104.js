@@ -9,7 +9,7 @@
  if(window.__STORYWORLD_BOSS_KEYPOSES_R104__)return;
  const DATA=window.__STORYWORLD_BOSS_KEYPOSES_R104_DATA__||{},REV='boss-keyposes-r104';
  // Phase indices (phaseSprites5 / phasePresentation order) each form depicts.
- const PHASES={'b02-boss':[0,1],'b04-boss':[2],'b06-boss':[0,1],'b06b-boss':[0],'b07-boss':[0],'b08-boss':[0,1],'b09-boss':[1,2],'a11-boss':[0],'c104-boss':[0,1,2,3],'l301-boss':[0,1,2,3,4],'dist06-boss':[0,1,2,3,4],'h103-boss':[0,1]};// R860: 열쇠 자세가 있는데 표에 빠져 옛 그림만 그리던 본보스 — 타락천사 기사·발록은 모든 단계가 같은 몸, EGO 강탈 악몽왕은 2단계(날개 고치 변신)만 원래 그림// R119: 교만의 사이보그 교주(Drive v17) — 그림 객체가 잠겨 있어 경로 단위 교체로 그린다
+ const PHASES={'b02-boss':[0,1],'b04-boss':[2],'b06-boss':[0,1],'b06b-boss':[0],'b07-boss':[0],'b08-boss':[0,1],'b09-boss':[1,2],'a11-boss':[0,1,2],'c104-boss':[0,1,2,3],'l301-boss':[0,1,2,3,4],'dist06-boss':[0,1,2,3,4],'h103-boss':[0,1]};// R1239: 루시퍼는 2·3단계도 같은 몸(masks-r1239 가 검게 물든 판으로 바꿈) — 전엔 옛 회색 저화질 그림으로 떨어졌다. R860: 열쇠 자세가 있는데 표에 빠져 옛 그림만 그리던 본보스 — 타락천사 기사·발록은 모든 단계가 같은 몸, EGO 강탈 악몽왕은 2단계(날개 고치 변신)만 원래 그림// R119: 교만의 사이보그 교주(Drive v17) — 그림 객체가 잠겨 있어 경로 단위 교체로 그린다
  // Native frame keys -> key pose (0 anticipation, 1 strike, 2 follow-through, 3 recovery).
  const POSE={anticipation:0,windup:0,prepare:0,charge:0,attack:1,attackA:1,strike:1,contact:1,attackB:2,hit:2,recover:2,follow:2,idle:3,move:3,recovery:3,death:3};
  const FIT=new Set(['l301-boss','dist06-boss','h103-boss','c104-boss']),fitIm=new WeakMap();
