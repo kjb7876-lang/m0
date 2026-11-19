@@ -43,7 +43,9 @@ const DEATH_NAME=[[/^불길 속의 용/,'MD-21'],[/^이동문 공허잔영/,'MD-
 const DEATH_NAME_RAW=[[/^중간보스 · 강철 턱의 사이보그 개/,'MD-29']];
 // R1166: 아틀라스 한 장에 여러 인물·뒷모습 줄이 있는 그림(병원 R51·R52)은 bases.rows(살아 있는 칸 sourceRect y)로 그 줄일 때만 고른다. 칸을 모르면 고르지 않는다.
 function deathRowOk(h,look){if(!h.b||!Array.isArray(h.b.rows))return true;const f=look&&look.frame,sr=f&&(f.assetFrame&&f.assetFrame.sourceRect||f.sourceRect);return Array.isArray(sr)&&sr.length>=4&&h.b.rows.includes(Math.round(+sr[1]||0));}
-function deathHit(look){const h=DEATH.get(norm(look.path));if(h&&deathRowOk(h,look))return h;const raw=String(look.name||'').trim();for(const [re,id] of DEATH_NAME_RAW)if(re.test(raw)){const s=SHEETS[id];if(s)return {id,s,b:null};}const n=raw.replace(/^중간보스 · /,'').trim();for(const [re,id] of DEATH_NAME)if(re.test(n)){const s=SHEETS[id];if(s)return {id,s,b:null};}return null;}
+// R1182: 피격 4칸(R1156 표) 도중에 죽으면 R462 가 마지막으로 그린 피격 시트 경로를 넘긴다 → 그 시트의 own(살아 있는 원본) 경로로 다시 찾는다.
+function hitOwn(p){try{const H=window.__STORYWORLD_MOB_HIT_R1156__&&window.__STORYWORLD_MOB_HIT_R1156__.sheets;if(!H)return null;const n=norm(p);for(const k in H){const h=H[k];if(h&&h.own&&norm(h.path)===n)return norm(h.own);}}catch(_){}return null;}
+function deathHit(look){let h=DEATH.get(norm(look.path));if(!h){const o=hitOwn(look.path);if(o)h=DEATH.get(o);}if(h&&deathRowOk(h,look))return h;const raw=String(look.name||'').trim();for(const [re,id] of DEATH_NAME_RAW)if(re.test(raw)){const s=SHEETS[id];if(s)return {id,s,b:null};}const n=raw.replace(/^중간보스 · /,'').trim();for(const [re,id] of DEATH_NAME)if(re.test(n)){const s=SHEETS[id];if(s)return {id,s,b:null};}return null;}
 function deathFrame(look,age){if(!prefs.on||!look||!Number.isFinite(+age)||age<0)return null;const hit=deathHit(look);if(!hit)return null;
  if(!ready(hit.s.path)){want(hit.s.path);stats.waiting++;return null;}
  let k=0;for(let i=0;i<DEATH_T.length;i++)if(age>=DEATH_T[i])k=i;if(hit.s.cells<6)k=Math.round(k*(hit.s.cells-1)/5);k=Math.min(hit.s.cells-1,k);
