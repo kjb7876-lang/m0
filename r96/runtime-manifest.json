@@ -13533,6 +13533,31 @@
       "sha256": "22160085186637605ca8836691ff76612e9cefd34c083db2bf09ef558e62171b"
     },
     {
+      "path": "assets/r1219/r436/hwando/r1219.json",
+      "bytes": 1238,
+      "sha256": "47e7ecc80d5cdbb0e7e13d56d4a968462be8e188632fe33f55cd134881e978a6"
+    },
+    {
+      "path": "assets/r1219/r436/hwando/sheathed/idle-s.webp",
+      "bytes": 111714,
+      "sha256": "d38babd3e23c67ed75e52cf1062b93c99f667c678f81d10d8242fff563bc0200"
+    },
+    {
+      "path": "assets/r1219/r436/hwando/sheathed/index.json",
+      "bytes": 1982,
+      "sha256": "a80e3678bb98825d3e351c38f9e9fdd4260d9a51337712d168147e322f920c47"
+    },
+    {
+      "path": "assets/r1219/r436/hwando/sheathed/walk-s.webp",
+      "bytes": 135400,
+      "sha256": "c041d26d0fc047d18dc342bf75cad36c85f85c7ec358608161fdb7b5ab2df41c"
+    },
+    {
+      "path": "assets/r1219/r436/hwando/walk-s.webp",
+      "bytes": 130944,
+      "sha256": "466c975261ac417661e52d68eb47471a3514fe5aae6deba5ab9136975baa20f0"
+    },
+    {
       "path": "assets/r126/props/badge.webp",
       "bytes": 25464,
       "sha256": "fd12f3e8efd3654d060607145cbd6f6f55728f7fd65afd5a9f4d3d1507ae0281"
@@ -55154,8 +55179,8 @@
     },
     {
       "path": "combat-read-r409.js",
-      "bytes": 26328,
-      "sha256": "43e5fe2667986bfc350595561d996d64340d60d646c1da2c48ed2c2f5bc021e7"
+      "bytes": 27951,
+      "sha256": "f204f6949de5335f8188a47300ebcc17bef88635d3a911b1840d7f2d0f7bc739"
     },
     {
       "path": "combat-sfx-r785.js",
@@ -55879,8 +55904,8 @@
     },
     {
       "path": "hwando-r271.js",
-      "bytes": 16488,
-      "sha256": "3a9c44480a5cb3fdddf89959d753c793fa1cdd8d9f8114e4b02d7d33dc273eca"
+      "bytes": 19280,
+      "sha256": "3567efb64d5222617f468b22e07b14645034755e658b618c9cf8cbdd75749a6e"
     },
     {
       "path": "hwando-r277.js",
@@ -55899,8 +55924,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6582601,
-      "sha256": "35e2e108e4122cb883241936b2d097d75def00ae01cbf25a5bbea4fde53ddfb3"
+      "bytes": 6582703,
+      "sha256": "8b92b4164318e536091c3ebecbe7789bfa38d878277af8bfd2f2b4c6f069b4ef"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -56519,8 +56544,8 @@
     },
     {
       "path": "play-r111.js",
-      "bytes": 52823,
-      "sha256": "e19691dc66c4ecea912624998423450fa7d18ca42edb25e88eea3414dc620bbe"
+      "bytes": 53451,
+      "sha256": "392b2d6f2dd743fd8b2ef3db647484814e510c2f3f8c81dc41bb63f38fcc0265"
     },
     {
       "path": "play-r113.js",
@@ -56753,9 +56778,14 @@
       "sha256": "47705ce72cc640db7ec169987f55f8c816bfa8a054c707918a7212ff00d9b7cc"
     },
     {
+      "path": "samong-stagger-r1217.js",
+      "bytes": 2857,
+      "sha256": "dd69c51126ab5c6688d86e183ee2b226b7898bd6cd33967c6ae5506477dac9f2"
+    },
+    {
       "path": "samong-surge-r571.js",
-      "bytes": 16216,
-      "sha256": "76ca776d796fc49b2695969fcf3cb3ba565b42cf3ad073747666bb6a80ac4570"
+      "bytes": 16472,
+      "sha256": "87a50f545646a9866db1a8006660d17266d3d8ae8430c563a311f0ca74418402"
     },
     {
       "path": "samong-text-r103.js",
@@ -56779,8 +56809,13 @@
     },
     {
       "path": "samong-warm-r1199.js",
-      "bytes": 7802,
-      "sha256": "5c2dc4157545ae383a4b0e09840659dd802859311709a08da9f1879854124d68"
+      "bytes": 9165,
+      "sha256": "e5c7c130221d4814f60ebeeb3e794c90a7982bb9f2ecda33ea221cb8b723e7e7"
+    },
+    {
+      "path": "samong-warm-r1217-data.js",
+      "bytes": 4381,
+      "sha256": "7b4d8bcaffbb9af85adbc7d1aca2cf048571ccddc57131a5703738ab951f564a"
     },
     {
       "path": "samong-wide-r355.js",
@@ -57338,9 +57373,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11467,
-  "totalBytes": 1372077124,
-  "webHTMLSha256": "35e2e108e4122cb883241936b2d097d75def00ae01cbf25a5bbea4fde53ddfb3",
+  "fileCount": 11474,
+  "totalBytes": 1372472404,
+  "webHTMLSha256": "8b92b4164318e536091c3ebecbe7789bfa38d878277af8bfd2f2b4c6f069b4ef",
   "largest": [
     {
       "path": "index.html",
