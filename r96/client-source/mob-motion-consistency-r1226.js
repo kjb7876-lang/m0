@@ -29,6 +29,15 @@ const FACE=Object.freeze({
  'r116/mobs/M008-idle.png':'L','r109/mobs/M008-move.png':'L','r92/mobs/M008-attack.png':'L','r116/mobs/M008-hit.png':'L','episode1a/horned_swamp_demon.webp':'L',
  // 검은기둥 가고일 수호자(dist05-c1·s1) 공격: 4칸 모두 머리·몸이 오른쪽을 보는 3/4 그림(R425 ATK_FACE 는 'L' 로 적어 영웅 반대쪽을 보고 덮쳤다)
  'r92/mobs/M007-attack.png':'R',
+ // 가면 잡역부 M012(오만의 흰 가면 ep1a09 등): 걷기·대기·공격 모두 주사기·구속끈을 그림 왼쪽 손에 들고 왼쪽으로 찌름 — 걷기 시트만 반대로 뒤집혀 뒷걸음처럼 보였다
+ 'r92/mobs/M012-move.png':'L','r109/mobs/M012-move.png':'L','r116/mobs/M012-idle.png':'L','r92/mobs/M012-attack.png':'L','r116/mobs/M012-hit.png':'L',
+ // 늑대 M046(중립초원 늑대 last304 등): 대기·걷기·공격·피격 모두 왼쪽을 보는 그림 — 걷기 시트만 반대로 뒤집혀 공격 때 몸이 홱 돌았다
+ 'r198/mobs/M046-idle.png':'L','r198/mobs/M046-move.png':'L','r92/mobs/M046-attack.png':'L','r116/mobs/M046-hit.png':'L',
+ // 오만의 폐허핵(ep1a10 중간보스, 사용자 2026-11-19 "공격시 반대방향으로 공격하는 모션") 아틀라스: 1번 칸 준비·2번 칸 주먹 지르기는 그림 오른쪽으로 침(R425 표는 'L' 로 잘못 적혀 영웅 반대쪽으로 쳤다).
+ //  대기 0번 칸·r104 열쇠자세(p1~p4)는 정면이라 적지 않는다. 중간보스는 R1224 몫이지만 이 몹의 좌우만 사용자 요청으로 맡는다(MID_OK).
+ 'generated-story10-cycle-20261005/ep1a10/mb-ep1a10-pride-ruin-core-atlas.png#710,0':'R','generated-story10-cycle-20261005/ep1a10/mb-ep1a10-pride-ruin-core-atlas.png#1330,0':'R',
+ // 안정화 집행체 새 시트(M012 원본, 위와 같은 손)
+ 'r1226/mobs/m015-stabilizer.webp':'L',
 });
 // SIZE: 열쇠 = 경로, 값 = 발 기준 배율(대기·걷기 기준 몸 키에 맞춤).
 const SIZE=Object.freeze({
@@ -39,15 +48,32 @@ const TINT=Object.freeze([
 ]);
 // 피로물든 병원 안정화 집행체: R410 이 얹은 드라이브 후보(assets/r410/mobs/m015.webp)는 보라 상자머리 픽셀 인형이라 병원과 맞지 않았다
 //  (사용자 2026-11-19 "안정화 집행체몹도 기본이미지는 다른이미지가 적용되어야" · "피로물든 병원에서는 병원관련 몹이미지만").
-//  → 이 몹의 원래 병원 그림(가면 잡역부, episode1a/hallucinated_orderly)으로 만든 시트(scripts/r1226-stabilizer-sheet.py, 같은 R248 칸 틀)로 바꾼다.
-//    백의 구속자와 구분되게 흰 가운을 수술복 청록 쪽으로 옮겼다. 임시본: Dots 걷기·공격 시트가 오면 바꾼다.
-const SHEET_SWAP=Object.freeze({m015:{name:'안정화 집행체',path:'assets/r1226/mobs/m015-stabilizer.webp',body:226}});
+//  → 이 몹의 원래 병원 그림(가면 잡역부, episode1a/hallucinated_orderly)과 같은 원본의 걷기 8·공격 4칸(r92 M012)으로 만든 시트
+//    (scripts/r1226-stabilizer-sheet.py, 같은 R248 칸 틀)로 바꾼다. 오만의 흰 가면·백의 구속자와 구분되게 흰 가운을 수술복 청록 쪽으로 옮겼다.
+//    임시본: Dots CX-0170SO 걷기·공격·피격 시트가 오면 바꾼다.
+const SHEET_SWAP=Object.freeze({m015:{name:'안정화 집행체',path:'assets/r1226/mobs/m015-stabilizer.webp',body:150}});
 const swapped=[];
 function swapSheets(on){const D=window.__STORYWORLD_MOB_UNIQUE_R248_DATA__;if(!D||!D.sheets)return;for(const [id,a] of Object.entries(SHEET_SWAP)){const s=D.sheets[id];if(!s||s.name!==a.name)continue;
  try{if(!s.__r1226)s.__r1226={path:s.path,body:s.body};if(on){s.path=a.path;s.body=a.body;if(!swapped.includes(id))swapped.push(id);}else{s.path=s.__r1226.path;s.body=s.__r1226.body;}}catch(err){fail(err);}}}
 swapSheets(prefs.on!==false&&prefs.sheets!==false);
+// 초자아 잠식체(ep1a11 a11-d1, 사용자 2026-11-19 "초자아잠식체 일관성이 좀 떨어지는데"): 대기·걷기는 어두운 이끼빛 그릇 몸(ego_corrosion_vessel·R1029 안개판)인데
+//  공격만 R92 M017(창 든 금빛 천사 — 다른 몹 그림)으로 바뀌어 동작마다 다른 몹처럼 보였다 → 공격 칸도 제 몸 그림으로 그린다(발·키 유지, R109 짧은 내딛기만).
+//  전용 공격 시트는 Dots 요청. ART_SWAP: 이름 → {from: 바꿀 그림 경로, to: 제 그림, toBox: 제 그림 알파 경계 [x0,y0,x1,y1,w,h], fromBody: 바꿀 칸 몸 키/칸 키}
+const ART_SWAP=Object.freeze([
+ {name:/^초자아 잠식체/,nid:/^a11-d1$/,from:'r92/mobs/M017-attack.png',to:'assets/episode1a/generated-v392/ego_corrosion_vessel.webp',toBox:[26,8,356,393,418,418],fromBody:145/196},
+]);
+function artSwap(e,cmds,st,b,a,fx,fy){if(!prefs.sheets)return false;const R=ART_SWAP.find(r=>r.from===a.path&&(r.nid.test(String(e.nativeId||''))||r.name.test(String(e.name||''))));if(!R)return false;
+ const im=typeof readyImage==='function'?readyImage(R.to)?.image:null;if(!im||!((im.naturalWidth||im.width)>0)){try{if(typeof addImage==='function')addImage(R.to,'R1226 art swap');}catch(_){}return false;}
+ const P=b.points,qh=Math.abs(P[3][1]-P[0][1]),pad=(b.sourceRect&&b.sourceRect[3]>0)?b.sourceRect[3]:qh;
+ // 캐시 캔버스 칸 = 원래 칸 높이 + 위아래 여백: 몸 키 = 칸 높이 비율 × fromBody
+ const m=/:(\d+(?:\.\d+)?),(\d+(?:\.\d+)?),(\d+(?:\.\d+)?),(\d+(?:\.\d+)?):(\d+):/.exec(String(b.sourcePath||''));const cellH=m?+m[4]:pad;const hv=qh*(cellH/pad)*R.fromBody;if(!(hv>2&&fin(hv)))return false;
+ const [x0,y0,x1,y1,W,H]=R.toBox,k=hv/(y1-y0),w=W*k,h=H*k,left=fx-((x0+x1)/2)*k,top=fy-y1*k;
+ const mir=P[1][0]<P[0][0];let Q=[[left,top],[left+w,top],[left+w,top+h],[left,top+h]];if(mir)Q=[Q[1],Q[0],Q[3],Q[2]];
+ b.image=im;b.sourceRect=[0,0,W,H];b.sourcePath=R.to;b.imageSize=[W,H];b.points=Q;delete b.immutableTint;
+ for(let i=st;i<cmds.length;i++){const c=cmds[i];if(c!==b&&c?.kind==='image'&&c.owner?.kind==='enemy'&&String(c.sourcePath||'')===String(m?m.input:'')){c.alpha=0;}}stats.swapped=(stats.swapped||0)+1;return true;}
 // ---- 도우미 ----
-function excluded(e){if(!e||!(e.hp>0)||e.persona||e.boss)return true;if(e.midboss&&!e.wardChampionR81&&!/^중간보스 · /.test(String(e.name||'')))return true;
+const MID_OK=/^mb-ep1a10$/;
+function excluded(e){if(!e||!(e.hp>0)||e.persona||e.boss)return true;if(e.midboss&&!e.wardChampionR81&&!/^중간보스 · /.test(String(e.name||''))&&!MID_OK.test(String(e.nativeId||'')))return true;
  if(e.r170Tower||e.r446Pillar||e.r251Circle||e.towerR193||e.r193Tower||e.prop||e.object)return true;
  try{const id=String(typeof room==='object'&&room?room.id||'':'');if(/mammon/i.test(id)||id==='ep1b06'||e.mammon||/mammon/i.test(String(e.nativeId||'')))return true;}catch(_){}return false;}
 // 몸 명령의 원래 그림 경로·칸: 몹 캐시 캔버스는 sourcePath 가 'assets/…png:sx,sy,sw,sh:pad:enemy' 꼴, 아니면 경로 + sourceRect
@@ -87,7 +113,8 @@ function tintCmds(e,cmds,st){const T=tintOf(e);if(!T)return;for(let i=st;i<cmds.
 // ---- 한 몹 그리기 뒤처리 ----
 function post(e,cmds,st){const b=bodyCmd(cmds,st);if(!b){stats.skipped++;return;}stats.draws++;
  const q=typeof project==='function'?project(e.x,e.y):null;if(!q||!fin(q.x)||!fin(q.y))return;const fx=q.x,fy=q.y;
- const a=artOf(b);
+ let a=artOf(b);
+ if(artSwap(e,cmds,st,b,a,fx,fy))a=artOf(b);
  if(prefs.size){const k=SIZE[a.path];if(fin(k)&&k>0&&Math.abs(k-1)>.01){const hit=[];for(let i=st;i<cmds.length;i++)if(sameArt(cmds[i],b))hit.push(cmds[i]);for(const c of hit)mapCmd(c,p=>[fx+(p[0]-fx)*k,fy+(p[1]-fy)*k]);stats.scaled++;}}
  if(prefs.face&&!b.r974){const f=faceOf(a);if(f){const want=wantLeft(e);if(want!=null){const mir=b.points[1][0]<b.points[0][0],left=(f==='L')!==mir;
    if(left!==want){const hit=[];for(let i=st;i<cmds.length;i++)if(sameArt(cmds[i],b))hit.push(cmds[i]);for(const c of hit)mapCmd(c,p=>[2*fx-p[0],p[1]]);stats.flipped++;}else stats.kept++;}}}

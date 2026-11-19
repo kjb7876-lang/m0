@@ -13534,8 +13534,8 @@
     },
     {
       "path": "assets/r1226/mobs/m015-stabilizer.webp",
-      "bytes": 214412,
-      "sha256": "9c50b0f1b1573d0a128eaf0b1a9b568c19ba898c831176978f9be84036995838"
+      "bytes": 156954,
+      "sha256": "a1087a7d5acf3d86f128ffbfbb6810728805e9a53577c3baf8e7c3d60d151a0a"
     },
     {
       "path": "assets/r126/props/badge.webp",
@@ -56184,8 +56184,8 @@
     },
     {
       "path": "mob-motion-consistency-r1226.js",
-      "bytes": 13024,
-      "sha256": "06aff8d8804813a7bbe781029ce24e3c31eb37f9d1e1087d12fa70caff692cd7"
+      "bytes": 16855,
+      "sha256": "638323cb5c83eebba96093b69642a01c8caf7e2b597796f464b20e9290cb58a7"
     },
     {
       "path": "mob-motion-r286.js",
@@ -57349,7 +57349,7 @@
     }
   ],
   "fileCount": 11469,
-  "totalBytes": 1372304618,
+  "totalBytes": 1372250991,
   "webHTMLSha256": "42a51f29835265ba5a79ef0942275b876c67a5050ac7fbc52c34ccecf7a6862a",
   "largest": [
     {

@@ -6,7 +6,19 @@ const fs=require('fs'),path=require('path'),vm=require('vm');const R=path.join(_
 const C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8'),RT=f=>fs.readFileSync(path.join(R,'runtime-text',f),'utf8');
 let pass=0,fail=0;const ok=(n,c)=>{if(c){pass++;console.log('PASS',n);}else{fail++;console.log('FAIL',n);}};
 const F='mob-motion-consistency-r1226.js';const exists=fs.existsSync(path.join(R,'client-source',F));ok(F+' exists',exists);
-if(!exists){console.log(`\n${pass} passed, ${fail} failed`);process.exit(1);}
+if(!exists){// ⑩ 오만의 폐허핵(사용자 2026-11-19 "공격시 반대방향으로 공격"): 아틀라스 1·2번 칸은 오른쪽으로 침(2배 확대로 확인) → 영웅이 왼쪽이면 뒤집혀 왼쪽으로 쳐야 한다
+{const AT='generated-story10-cycle-20261005/ep1a10/mb-ep1a10-pride-ruin-core-atlas.png';ok('pride-ruin-core punch cells native R',T.face[AT+'#710,0']==='R'&&T.face[AT+'#1330,0']==='R');
+ const e=mob({id:'ep1a10:mb-ep1a10',nativeId:'mb-ep1a10',name:'오만의 폐허핵',midboss:true});
+ for(const left of [true,false]){const b=body('blob:x/assets/'+AT+':1330,0,620,600:6:enemy',[0,0,632,612],{},e);const L=draw(g,e,[b],left);ok(`pride-ruin-core punch faces ${left?'left':'right'} with hero`,drawnLeft(L[0],'R')===left);}}
+// ⑪ 초자아 잠식체: 공격 때만 다른 몹(M017 황금 창 천사) 칸이 나옴 → 제 몸 그림으로, 발 고정, 겹 그림은 숨김, 다른 몹은 그대로
+{g.readyImage=p=>/ego_corrosion_vessel\.webp$/.test(p)?{image:{width:418,height:418}}:null;
+ const e=mob({id:'a11:a11-d1',nativeId:'a11-d1',name:'초자아 잠식체'});const key='blob:x/assets/r92/mobs/M017-attack.png:0,0,196,196:6:enemy';
+ const b=body(key,[0,0,208,208],{},e),ov=body(key,[0,0,208,208],{},e);const L=draw(g,e,[b,ov],false);const p=q(e.x,e.y);
+ ok('superego attack body uses its own art',/ego_corrosion_vessel\.webp$/.test(String(L[0].sourcePath))&&L[0].image.width===418);
+ const k=(L[0].points[2][1]-L[0].points[0][1])/418;ok('superego swapped art keeps feet on anchor',Math.abs(L[0].points[0][1]+393*k-p.y)<1e-6);
+ ok('superego old overlay layer hidden',L[1].alpha===0);
+ const o=mob({id:'a11:x',nativeId:'x9',name:'황금 창 천사'});const b2=body(key,[0,0,208,208],{},o);const L2=draw(g,o,[b2],false);ok('other M017 mob not swapped',L2[0].sourcePath===key);}
+console.log(`\n${pass} passed, ${fail} failed`);process.exit(1);}
 const src=C(F);
 ok('runtime copy matches source',fs.existsSync(path.join(R,'runtime-text',F))&&src===RT(F));
 try{new vm.Script(src);ok('syntax',true);}catch(e){ok('syntax '+e.message,false);}
@@ -78,4 +90,16 @@ ok('M007 attack cells all R (faces right)',G7.join('')==='RRRR');
  g2.__STORYWORLD_MOB_MOTION_R1226__.set({sheets:false});ok('turn off restores R410 path',D.sheets.m015.path==='assets/r410/mobs/m015.webp'&&D.sheets.m015.body===208);
  ok('new sheet asset exists (R248 1024x960 frame)',fs.existsSync(path.join(R,'runtime-text','assets','r1226','mobs','m015-stabilizer.webp')));
  ok('new sheet in runtime-inputs.json',fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8').includes('assets/r1226/mobs/m015-stabilizer.webp'));}
+// ⑩ 오만의 폐허핵(사용자 2026-11-19 "공격시 반대방향으로 공격"): 아틀라스 1·2번 칸은 오른쪽으로 침(2배 확대로 확인) → 영웅이 왼쪽이면 뒤집혀 왼쪽으로 쳐야 한다
+{const AT='generated-story10-cycle-20261005/ep1a10/mb-ep1a10-pride-ruin-core-atlas.png';ok('pride-ruin-core punch cells native R',T.face[AT+'#710,0']==='R'&&T.face[AT+'#1330,0']==='R');
+ const e=mob({id:'ep1a10:mb-ep1a10',nativeId:'mb-ep1a10',name:'오만의 폐허핵',midboss:true});
+ for(const left of [true,false]){const b=body('blob:x/assets/'+AT+':1330,0,620,600:6:enemy',[0,0,632,612],{},e);const L=draw(g,e,[b],left);ok(`pride-ruin-core punch faces ${left?'left':'right'} with hero`,drawnLeft(L[0],'R')===left);}}
+// ⑪ 초자아 잠식체: 공격 때만 다른 몹(M017 황금 창 천사) 칸이 나옴 → 제 몸 그림으로, 발 고정, 겹 그림은 숨김, 다른 몹은 그대로
+{g.readyImage=p=>/ego_corrosion_vessel\.webp$/.test(p)?{image:{width:418,height:418}}:null;
+ const e=mob({id:'a11:a11-d1',nativeId:'a11-d1',name:'초자아 잠식체'});const key='blob:x/assets/r92/mobs/M017-attack.png:0,0,196,196:6:enemy';
+ const b=body(key,[0,0,208,208],{},e),ov=body(key,[0,0,208,208],{},e);const L=draw(g,e,[b,ov],false);const p=q(e.x,e.y);
+ ok('superego attack body uses its own art',/ego_corrosion_vessel\.webp$/.test(String(L[0].sourcePath))&&L[0].image.width===418);
+ const k=(L[0].points[2][1]-L[0].points[0][1])/418;ok('superego swapped art keeps feet on anchor',Math.abs(L[0].points[0][1]+393*k-p.y)<1e-6);
+ ok('superego old overlay layer hidden',L[1].alpha===0);
+ const o=mob({id:'a11:x',nativeId:'x9',name:'황금 창 천사'});const b2=body(key,[0,0,208,208],{},o);const L2=draw(g,o,[b2],false);ok('other M017 mob not swapped',L2[0].sourcePath===key);}
 console.log(`\n${pass} passed, ${fail} failed`);process.exit(fail?1:0);
