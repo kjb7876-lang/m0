@@ -789,6 +789,8 @@ jobs:
         run: node r96/qa/r1203/r1203-cpu-check.cjs
       - name: R1202 R101 aura drawn once per frame for hero clones at perf steps 1-5 CPU check
         run: node r96/qa/r1202/r1202-cpu-check.cjs
+      - name: R1208 dystopia (S-06) zone banners show story years instead of DYS-xx CPU check
+        run: node r96/qa/r1208/r1208-cpu-check.cjs
       - name: R1014 survival mid-boss no longer sticks at the 70% phase gate under the 6%/s damage cap CPU check
         run: node r96/qa/r1014/r1014-cpu-check.cjs
       - name: R1135 survival boss count per difficulty (easy 1, normal 2, hard 3, nightmare 6), per-boss balance with the 66x floor, spread spawn spots CPU check
