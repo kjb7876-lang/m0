@@ -10678,7 +10678,10 @@
     "assets/r1206/props/willow.webp",
     "assets/r1206/fx/ink-bloom-warn8.webp",
     "assets/r1206/fx/index.json",
-    "michaela-hitfx-r1235.js"
+    "michaela-hitfx-r1235.js",
+    "assets/r1235/fx-mk02-michaela-mark.webp",
+    "assets/r1235/fx-mk03-michaela-ribbon.webp",
+    "assets/r1235/fx-mk04-michaela-glow.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11753,5 +11756,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "fe9e4ac857f7426b90214cdef43d52733a02702157cc9b501a45ce28f8f2389d"
+  "runtimeManifestSHA256": "dd46279ced7016ad13b529be8c2dd859623d053222b2ece18f08d57df6919bb9"
 }

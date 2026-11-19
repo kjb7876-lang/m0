@@ -13533,6 +13533,21 @@
       "sha256": "22160085186637605ca8836691ff76612e9cefd34c083db2bf09ef558e62171b"
     },
     {
+      "path": "assets/r1235/fx-mk02-michaela-mark.webp",
+      "bytes": 18648,
+      "sha256": "8e96a036f2c84ffa26b35d2cb019e43a042a64140b954eedacd73562ebf6664b"
+    },
+    {
+      "path": "assets/r1235/fx-mk03-michaela-ribbon.webp",
+      "bytes": 56808,
+      "sha256": "26c2e93455cab3a94267296524a0a3f8a781d6bd55f7c6fc215da6d4827be7a7"
+    },
+    {
+      "path": "assets/r1235/fx-mk04-michaela-glow.webp",
+      "bytes": 43082,
+      "sha256": "18965f73ae8b6b0b6cda99f7ce58b2f3b811503c82edcda98f824fbc4de02661"
+    },
+    {
       "path": "assets/r126/props/badge.webp",
       "bytes": 25464,
       "sha256": "fd12f3e8efd3654d060607145cbd6f6f55728f7fd65afd5a9f4d3d1507ae0281"
@@ -55659,8 +55674,8 @@
     },
     {
       "path": "hero-dots-fx-r1041.js",
-      "bytes": 17114,
-      "sha256": "08cf3e6fecbc9e2fb2352aa1a660554e82a08fbe10e967a1ada43f06803aa716"
+      "bytes": 19059,
+      "sha256": "e4d4b27bac8e4d5aed4853993478b5a62f82aef5572772e644ebd42e4da95794"
     },
     {
       "path": "hero-facing-r336.js",
@@ -57343,8 +57358,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11468,
-  "totalBytes": 1372083307,
+  "fileCount": 11471,
+  "totalBytes": 1372203790,
   "webHTMLSha256": "5351c3f953ecf2913b37562c8bb33d7f6f98ddd887149d57b9972446217e7f0a",
   "largest": [
     {

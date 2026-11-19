@@ -15,7 +15,7 @@
  * 판정·피해·시간은 바꾸지 않는다(그리기만). 십자가·뒤집기 없음. */
 (()=>{'use strict';
 if(window.__STORYWORLD_HERO_DOTS_FX_R1041__)return;
-const REV='R1235-michaela-skill-sheets+R1041-hero-dots-fx-1',KEY='storyworld.r1041.dotsfx',fin=Number.isFinite;
+const REV='R1235c-michaela-mk-sheets+R1235-michaela-skill-sheets+R1041-hero-dots-fx-1',KEY='storyworld.r1041.dotsfx',fin=Number.isFinite;
 const stats={swapped:0,dropped:0,hurts:0,fallback:0,kept:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 let on=true;try{const v=localStorage.getItem(KEY);if(v==='off'||v==='0'||v==='false')on=false;}catch(_){}
 const DIR='assets/r1041/';
@@ -31,7 +31,11 @@ const SHEET=Object.freeze({
  M3:{path:DIR+'fx-m3-michaela-ego-loop.webp',cw:384,ch:384,n:10,fps:12},
  M4:{path:DIR+'fx-m4-michaela-hit.webp',cw:256,ch:256,n:8,fps:20,once:true},
  M5:{path:DIR+'fx-m5-michaela-ground-heart.webp',cw:256,ch:128,n:10,fps:12,gain:.9},
- M7:{path:DIR+'fx-m7-michaela-sky-pillar.webp',cw:256,ch:512,n:12,fps:12,once:true,gain:2}});
+ M7:{path:DIR+'fx-m7-michaela-sky-pillar.webp',cw:256,ch:512,n:12,fps:12,once:true,gain:2},
+ // R1235c(Dots CX-0173MK r1 ROUGH, 11-19): 작은 빛 표식 · 빛 리본(머리 = 오른쪽 끝) · 퍼진 빛(seq = 가운데 칸만 왕복해 맥박 작게, gain = 옅게)
+ MK02:{path:'assets/r1235/fx-mk02-michaela-mark.webp',cw:128,ch:192,n:8,fps:10,gain:.8},
+ MK03:{path:'assets/r1235/fx-mk03-michaela-ribbon.webp',cw:512,ch:96,n:8,fps:12},
+ MK04:{path:'assets/r1235/fx-mk04-michaela-glow.webp',cw:256,ch:256,n:8,fps:6,seq:[2,3,4,5,4,3],gain:.7}});
 const DARK=':60.8.16:110.30.42',SLAYER='r106fx:flame:222.22.52:';
 const asked=new Map();
 function image(path){try{const r=typeof readyImage==='function'?readyImage(path):null;if(r?.image)return r.image;const t=Date.now();if(t-(asked.get(path)||0)>1500){asked.set(path,t);if(typeof addImage==='function')addImage(path,'R1041 Dots FX');else if(typeof ensureImages==='function')Promise.resolve(ensureImages([path])).catch(()=>{});}}catch(e){fail(e);}return null;}
@@ -41,7 +45,7 @@ const born=new Map();
 function ageOf(key,t){let b=born.get(key);if(!b||t-b.last>.25||t<b.last-.01){b={at:t,last:t};born.set(key,b);if(born.size>200)for(const k of born.keys()){born.delete(k);if(born.size<=120)break;}}b.last=t;return t-b.at;}
 // 바닥 하트: 그려지는 4칸 뒤 4·5·6·5 칸으로 맥박(하트가 남아 있는 동안). 마지막 흩어짐 칸은 하트 표시가 끝날 때 원래 코드가 사라지므로 쓰지 않는다.
 const pulseFrame=a=>{const r=Math.max(0,Math.floor((fin(a)?a:0)*12));return r<4?r:[4,5,6,5][(r-4)%4];};
-function frameOf(S,key,t){if(!fin(t))return 0;if(S.once){const a=ageOf(key,t);return Math.max(0,Math.min(S.n-1,Math.floor(a*S.fps)));}return ((Math.floor(t*S.fps)%S.n)+S.n)%S.n;}
+function frameOf(S,key,t){if(!fin(t))return 0;if(S.seq){const q=S.seq,i=((Math.floor(t*S.fps)%q.length)+q.length)%q.length;return q[i];}if(S.once){const a=ageOf(key,t);return Math.max(0,Math.min(S.n-1,Math.floor(a*S.fps)));}return ((Math.floor(t*S.fps)%S.n)+S.n)%S.n;}
 // 원래 사각(points: 좌상·우상·우하·좌하)의 정규 좌표 (u0,v0)-(u1,v1) 를 새 사각으로(아핀이라 그대로 맞음).
 function remap(P,u0,v0,u1,v1){const [a,b,,d]=P,ex=[b[0]-a[0],b[1]-a[1]],ey=[d[0]-a[0],d[1]-a[1]],at=(u,v)=>[a[0]+ex[0]*u+ey[0]*v,a[1]+ex[1]*u+ey[1]*v];return [at(u0,v0),at(u1,v0),at(u1,v1),at(u0,v1)];}
 const side=P=>[Math.hypot(P[1][0]-P[0][0],P[1][1]-P[0][1]),Math.hypot(P[3][0]-P[0][0],P[3][1]-P[0][1])];
@@ -67,11 +71,20 @@ const skillOn=()=>{try{const v=localStorage.getItem('storyworld.r1235.skillSheet
 const actorH=()=>{try{const h=typeof actorHeight==='function'?actorHeight():60;return fin(h)&&h>0?h:60;}catch(_){return 60;}};
 // M4 하트 적중 칸: 칸 .85 높이 = 바닥 물결(발), 한 변 = 영웅 키 1.7배
 const m4At=(bx,by)=>{const s=actorH()*1.7;return rect(bx-s/2,by-s*.85,bx+s/2,by+s*.15);};
-function skillRule(name,id,cmds){
+function skillRule(name,id,cmds,data){
  if(name==='halo'&&image(SHEET.M1.path))return {S:SHEET.M1,key:id+'|halo',box:P=>remap(P,.5-.725,.5-.725,.5+.725,.5+.725)};
  // 빛기둥: 피벗(.5,.99) = 기둥 발. M7 칸(256×512) 바닥 .98 = 기둥 발, 높이 같게, 너비 = 높이/2.
  if(name==='pillar'&&image(SHEET.M7.path)){const k=nth(cmds,id,'pillar');return {S:SHEET.M7,key:id+'|pillar|'+k,box:P=>{const [w,h]=side(P);if(!(w>0&&h>0))return null;const u=h/2/w;return remap(P,.5-u/2,.99-.98,.5+u/2,.99+.02);}};}
  if(name==='ring'&&image(SHEET.C4.path))return {S:SHEET.C4,key:id+'|ring',box:P=>P};
+ // R1235c: 작은 십자(키 .5 미만: 방벽 둘레·주먹 빛살 끝) → MK02 빛 표식. 칸 안 표식이 칸 높이의 .36 → 1.7배 칸이면 표식 높이 ≈ 십자의 .6(속이 찬 물방울이라 가는 십자보다 무거워 보여 작게, 헤드리스 확대 비교). 늘 똑바로, 회전 없음.
+ if(name==='cross'&&image(SHEET.MK02.path)){const P0=data?.points;const h0=Array.isArray(P0)&&P0.length===4?side(P0)[1]:NaN;
+  if(fin(h0)&&h0>0&&h0<actorH()*.5){const k=nth(cmds,id,'small');
+   return {S:SHEET.MK02,key:id+'|mk|'+k,box:P=>{const [w,h]=side(P),cxp=(P[0][0]+P[1][0]+P[2][0]+P[3][0])/4,cyp=(P[0][1]+P[1][1]+P[2][1]+P[3][1])/4,s=.85;return rect(cxp-w*s,cyp-h*s,cxp+w*s,cyp+h*s);}};}}
+ // R1235c: 불꽃줄·베기선·빛줄 → MK03 빛 리본. 리본은 칸 가로 .06~.94·세로 .3~.7 → 원래 줄 축 그대로 맞춘다(머리 = 끝점). line 은 그림 가운데 절반이 실제 선.
+ if((name==='spark'||name==='slashline'||name==='line')&&image(SHEET.MK03.path)){const u0=name==='line'?.25:0,u1=name==='line'?.75:1,L=u1-u0;
+  return {S:SHEET.MK03,key:id+'|rb',box:P=>remap(P,u0-.07*L,.5-1.25*(name==='line'?.5:1),u1+.07*L,.5+1.25*(name==='line'?.5:1))};}
+ // R1235c: 빛 → MK04 퍼진 빛(같은 자리·크기, 옅게·작은 맥박)
+ if(name==='glow'&&image(SHEET.MK04.path))return {S:SHEET.MK04,key:id+'|glow',box:P=>P};
  if((name==='cross'||name==='flare')&&image(SHEET.M4.path)){
   if(name==='cross'){/* 표적 위 큰 십자(키 .5 이상)만 — 방벽 둘레·빛살 끝 작은 십자는 그대로 */return {S:SHEET.M4,key:id+'|m4|'+nth(cmds,id,'cross4'),needBig:true,make:P=>{if(!Array.isArray(P)||P.length!==4)return null;const [w,h]=side(P);if(!(h>=actorH()*.5))return null;mark(cmds,id,'m4');const bx=(P[0][0]+P[1][0]+P[2][0]+P[3][0])/4,by=(P[2][1]+P[3][1])/2;return m4At(bx,by);}};}
   if(marked(cmds,id,'m4'))return 'drop';
@@ -97,7 +110,7 @@ function rule(kind,owner,data,cmds){const id=String(owner?.id||'');
  if(name){
   // R1235(사용자 2026-11-19 11:34Z "미카엘라 영웅 이펙트중 아직 프레임애니메이션 아닌 이펙트는 프레임애니메이션으로"): R106 D2S 미카엘라 기술(Q 천국의 주먹·W 성역 방벽·E 날개 돌진·R 세라핌 강림)의
   //  코드 한 장 그림 중 맞는 Dots 시트가 있는 것만 바꾼다. 깃털·불꽃줄·파편·베기선·빛·작은 십자는 맞는 시트가 없어 그대로(Dots 요청 대상). 끄기 storyworld.r1235.skillSheets = off.
-  if(owner?.r106&&heroIs('michaela')&&skillOn()){const r=skillRule(name,id,cmds);if(r)return r;}
+  if(owner?.r106&&heroIs('michaela')&&skillOn()){const r=skillRule(name,id,cmds,data);if(r)return r;}
   // 후광: 칸 안 고리가 칸 너비의 ~65% 라 1.45배로 키워 원래 후광 너비에 맞춘다(비율 256:96 그대로).
   if(name==='halo'&&id.startsWith('r101:aura-front:'))return {S:SHEET.M1,key:id,box:P=>remap(P,.5-.725,.5-.725,.5+.725,.5+.725)};
   if(name==='flame'&&id.startsWith('r101:aura-back:')){
