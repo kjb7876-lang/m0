@@ -703,6 +703,8 @@ jobs:
         run: node r96/qa/r1029/move-float-cpu-check.cjs
       - name: R1224 boss summons follow the room's current mobs (one rule for every boss; renamed or replaced kinds) and float movement for 8 bosses/midbosses that slid on one image CPU check
         run: node r96/qa/r1224/r1224-cpu-check.cjs
+      - name: R1243 seven sins bosses keep one body height when R620 idle/hit sheets swap in (sheet visible-height table for the R463 size lock) CPU check
+        run: node r96/qa/r1243/r1243-cpu-check.cjs
       - name: R1125 regular-mob up/down walk sheets (Dots CX-0127MV m033, CX-0135 B4 resonance knight, B7 fisher down; same id with other art attached as alt) CPU check
         run: node r96/qa/r1125/mob-move-cpu-check.cjs && node r96/qa/r1167/r1167-cpu-check.cjs
       - name: R996 bulmyeongwi fog summon still fires in the boss phase after every field mob is gone CPU check

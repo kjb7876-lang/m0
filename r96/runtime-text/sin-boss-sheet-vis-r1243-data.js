@@ -1,0 +1,3 @@
+// R1243 7대죄 보스 대기·맞음 시트(R620·R1147·R1160·R1163·R1164)의 보이는 키 — scripts/r1243-sheet-vis.py 가 만든다(손으로 고치지 않는다).
+// R463 sizeLock 이 원본 그림 표(vis)에 없는 시트 경로를 만나면 이 값을 쓴다 → 서 있을 때·맞을 때도 몸 키가 공격·걷기와 같다.
+window.__STORYWORLD_SIN_BOSS_SHEET_VIS_R1243__=Object.freeze({"b02-boss": {"assets/r1163/bosses/b02-hit4.webp": 207.01, "assets/r1163/bosses/b02-idle6.webp": 207.01}, "b03-boss": {"assets/r620/bosses/b03-hit4.webp": 289.0, "assets/r620/bosses/b03-idle6.webp": 289.0}, "b04-boss": {"assets/r1164/bosses/b04-hit4.webp": 290.0, "assets/r1164/bosses/b04-idle6.webp": 291.0}, "b07-boss": {"assets/r1147/bosses/b07-hit4.webp": 402.01, "assets/r1147/bosses/b07-idle6.webp": 404.02}, "b08-boss": {"assets/r1160/bosses/b08-hit4.webp": 402.01, "assets/r1160/bosses/b08-idle6.webp": 402.01}});

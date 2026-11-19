@@ -39,8 +39,9 @@ if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a
   const prevKP=curKP;cur=e;curD=d;curKP=keyPoses(e);if(pin){e.phase=0;stats.pinned++;}if(swap)e.path=d.idle;
   try{return base.call(this,e,...a);}finally{cur=prev;curD=prevD;curKP=prevKP;if(pin&&e.phase===0)e.phase=ph;if(swap&&e.path===d.idle)e.path=path;}};}
 // R425 가 몸 그림 명령 b 를 재기 직전에 묻는다: 그 그림 무리의 보이는 키 비율과 한 점짜리 띠.
+//  R1243: R620 계열이 서 있을 때·맞을 때 바꿔 끼운 idle6/hit4 시트 경로는 표에 없어 잠금이 풀려 몸이 약 10% 줄었다 → 시트 보이는 키 표(sin-boss-sheet-vis-r1243-data.js)도 본다.
 function sizeLock(e,b,K){if(!prefs.size)return null;const d=dataOf(e);if(!d||!b||!Array.isArray(b.sourceRect))return null;
- const v=d.vis[norm(b.sourcePath||b.image?.__path||b.image?.src)],h=+b.sourceRect[3];if(!(v>0&&h>0)){stats.unknown++;stats.lastUnknown=String(b.sourcePath||'').slice(-90);return null;}
+ const np=norm(b.sourcePath||b.image?.__path||b.image?.src),v=d.vis[np]||window.__STORYWORLD_SIN_BOSS_SHEET_VIS_R1243__?.[e.nativeId]?.[np],h=+b.sourceRect[3];if(!(v>0&&h>0)){stats.unknown++;stats.lastUnknown=String(b.sourcePath||'').slice(-90);return null;}
  stats.locks++;const t=BOSS_K*(K||1);return {frac:Math.min(1,v/h),band:[t,t]};}
 // 분노 보스: 옛 그림에서 오린 빗자루 조각 대신 조형물 던지기.
 function weaponOff(e){if(!prefs.weapon||!e||e.nativeId!=='b07-boss'||!dataOf(e))return false;stats.weaponOff++;return true;}
