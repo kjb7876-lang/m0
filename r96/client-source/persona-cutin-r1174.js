@@ -95,7 +95,7 @@ function wrapAwake(){try{if(typeof showAwakening!=='function'||showAwakening.__r
     if(on){try{stats.awake++;const d=doc();if(d){const want=U(pick(ART.awake)),im=d.getElementById('awakeImage');if(im){if(im.getAttribute('src')!==want)im.src=want;im.removeAttribute&&im.removeAttribute('data-r1033');im.setAttribute('data-r1174','1');}
       const h=d.getElementById('awakeHero');if(h&&!/^페르소나/.test(h.textContent))h.textContent=h.textContent.replace(/^[^·]*/,'페르소나 ');
       const b=G(()=>d.querySelector('#sw8Awakening img'),null);if(b){b.removeAttribute&&b.removeAttribute('data-r1033');b.setAttribute('data-r1174','1');}}awakeFx();}catch(e){fail(e);}}}};
-  w.__r1174=true;showAwakening=w;}catch(e){fail(e);}}
+  /* R1244: 아래 감싸기 표식 옮겨 달기(R1217 이 다시 감싸지 않게) */for(const k of Object.keys(base))if(/^_*r\d+/i.test(k))try{w[k]=base[k];}catch(_){}w.__r1174=true;showAwakening=w;}catch(e){fail(e);}}
 // ---- 형상일 때만 그림 미리 읽기 ----
 let warmedOnce=false;
 function warm(){try{if(warmedOnce||!persona(pl())||typeof Image!=='function')return;warmedOnce=true;for(const p of [pick(ART.bust),pick(ART.awake),ART.star.path,ART.orbs.path,ART.sigil.path]){const im=new Image();im.decoding='async';im.src=U(p);stats.warmed++;}build();}catch(e){fail(e);}}

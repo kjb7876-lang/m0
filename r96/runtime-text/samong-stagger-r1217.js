@@ -19,7 +19,7 @@ function wrap(){try{if(typeof showAwakening!=='function'||showAwakening.__r1217)
  const w=function(...a){if(!prefs.on||typeof fx!=='function')return inner.apply(this,a);stats.shows++;const orig=fx,got=[];
   const collect=function(...f){got.push(f);};fx=collect;let r;try{r=inner.apply(this,a);}finally{if(fx===collect)fx=orig;}
   const t=now(),keep=keepN();let k=0;for(const f of got){if(k>=keep){stats.dropped++;continue;}k++;queue.push({at:t+GAP*k,args:f});stats.queued++;}
-  return r;};w.__r1217=true;showAwakening=w;}catch(e){fail(e);}}
+  return r;};/* R1244: 아래 감싸기들의 표식을 옮겨 단다 — 안 옮기면 R1217(16ms)·R1046(500ms)이 서로를 다시 감싸 1초에 2겹씩 끝없이 쌓였다 */for(const k of Object.keys(inner))if(/^_*r\d+/i.test(k))try{w[k]=inner[k];}catch(_){}w.__r1217=true;showAwakening=w;}catch(e){fail(e);}}
 wrap();setInterval(()=>{wrap();flush();},16);
 function set(patch){if(typeof patch?.on==='boolean')prefs.on=patch.on;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
 window.__STORYWORLD_SAMONG_STAGGER_R1217__=Object.freeze({revision:REV,set,flush,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},pending:queue.length,lastError})});
