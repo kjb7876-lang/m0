@@ -35,8 +35,8 @@ const Z=()=>typeof zoom==='number'?zoom:1;
 
 // ---- preferences ----------------------------------------------------------------------------
 const KEY=(window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.hospital-three-pc.maze.v11:')+'r111.play';
-const DEFAULTS=Object.freeze({facing:true,resonance777:true,egoAura:true,threadArt:true,props:true,ranged:true,guard:true,samong:true,shots:true,bossRoot:true,samongPrewarm:true});
-const LABELS={samongPrewarm:'사몽 흑백 그림 미리 만들기(각성 첫 장면 렉 줄임)',facing:'전투 중 이동해도 적 바라보기',resonance777:'공명 777 표시·빨리 차기',egoAura:'EGO 불꽃 오라',threadArt:'실검무 은빛 오라·베기 그림',props:'조형물 벽 간격·그림자 접지',ranged:'원거리 영웅: E 회피·사거리 상향·자동 회피 (다시 불러오면 적용)',guard:'D 공명 방어: 피해 77% 감소·초당 7% 회복·빛 연출',samong:'사몽 각성: 주인공만 색·나머지 흑백·영웅색 폭풍 선·일반 몹 현재 체력 77%',shots:'아군 투사체: 무기 끝에서 시작·기본 탄 크게',bossRoot:'보스 속박: 보스 고유색·기계 보스는 전선 촉수'};
+const DEFAULTS=Object.freeze({facing:true,resonance777:true,egoAura:true,threadArt:true,props:true,ranged:true,guard:true,samong:true,shots:true,bossRoot:true,samongPrewarm:true,samongShader:true});
+const LABELS={samongPrewarm:'사몽 흑백 그림 미리 만들기(각성 첫 장면 렉 줄임)',samongShader:'사몽 흑백을 셰이더로(흑백 사본 없이, 각성 첫 장면 렉 줄임)',facing:'전투 중 이동해도 적 바라보기',resonance777:'공명 777 표시·빨리 차기',egoAura:'EGO 불꽃 오라',threadArt:'실검무 은빛 오라·베기 그림',props:'조형물 벽 간격·그림자 접지',ranged:'원거리 영웅: E 회피·사거리 상향·자동 회피 (다시 불러오면 적용)',guard:'D 공명 방어: 피해 77% 감소·초당 7% 회복·빛 연출',samong:'사몽 각성: 주인공만 색·나머지 흑백·영웅색 폭풍 선·일반 몹 현재 체력 77%',shots:'아군 투사체: 무기 끝에서 시작·기본 탄 크게',bossRoot:'보스 속박: 보스 고유색·기계 보스는 전선 촉수'};
 const prefs={...DEFAULTS};
 try{const saved=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(DEFAULTS))if(typeof saved?.[k]==='boolean')prefs[k]=saved[k];}catch(_){}
 function set(patch={}){for(const k of Object.keys(DEFAULTS))if(typeof patch[k]==='boolean')prefs[k]=patch[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
@@ -203,7 +203,7 @@ function guardFront(p,S){const {x,y,h}=heroFoot(p),age=time-guardState.at,open=c
 // three 기록기는 ctx.filter를 무시하므로, 각성 동안 영웅·이펙트·투사체가 아닌 그림(바닥·벽·조형물·몹·그림자)은
 // 미리 흑백으로 만든 사본 캔버스로 바꿔 넘기고(정적 원본 표시를 달아 매 프레임 복사하지 않게), 채움·선 색도 회색으로 바꾼다.
 const SAMONG_CUT=.77,GRAY_KEEP=new Set(['hero','effect','projectile']);
-const samongState={on:false,grayImages:0,grayPixels:0,grayFills:0,cuts:0,cutDamage:0,bossSkips:0,lines:0,prewarmMade:0,prewarmUploaded:0,prewarmQueued:0};
+const samongState={on:false,grayImages:0,grayPixels:0,grayFills:0,cuts:0,cutDamage:0,bossSkips:0,lines:0,prewarmMade:0,prewarmUploaded:0,prewarmQueued:0,shaderDraws:0};
 let grayMap=new WeakMap(),grayList=[],grayBudget=0;
 const samongOn=()=>{try{return !!(prefs.samong&&live()&&window.__STORYWORLD_SAMONG_R75__?.active?.());}catch(_){return false;}};
 function grayOf(image){if(!image)return null;const got=grayMap.get(image);if(got)return got;
@@ -227,7 +227,7 @@ function grayReset(){preRelease();for(const c of grayList){c.width=1;c.height=1;
 const PREWARM=Object.freeze({ready:3,budget:.75e6,budgetLow:.25e6,mobileCap:6e6,queue:400});
 const preQ=new Set();let preOn=false,pend=null;/* pend: 장면 예산보다 큰 그림을 줄 단위로 나눠 만드는 중 {im,c,g,y} */
 const perfStep=()=>{try{const v=window.__STORYWORLD_PERF7_R1043__?.step?.();const n=Number(v);return Number.isFinite(n)?n:5;}catch(_){return 5;}};
-function preReady(){try{return !!(prefs.samong&&prefs.samongPrewarm&&live()&&typeof layer!=='undefined'&&layer==='DREAM'&&!samongState.on&&!(Number(player.samong)>0)&&Number(player.samongCD)<=PREWARM.ready&&!(Number(player.hp)<=0)&&perfStep()>1);}catch(_){return false;}}
+function preReady(){try{return !!(prefs.samong&&prefs.samongPrewarm&&!prefs.samongShader&&live()&&typeof layer!=='undefined'&&layer==='DREAM'&&!samongState.on&&!(Number(player.samong)>0)&&Number(player.samongCD)<=PREWARM.ready&&!(Number(player.hp)<=0)&&perfStep()>1);}catch(_){return false;}}
 // R1211(R1199 후속, Dots 검수·코드 리뷰): texture() 는 참조를 하나 올린다 → 예열이 얻은 참조를 사본마다 한 번만 기록하고(얻은 장면과 함께),
 //  사본을 버릴 때(grayReset) 그 장면에 한 번만 돌려준다. 예전엔 놓지 않아 버린 사본의 텍스처가 R89 정리에 안 걸리고 쌓였다(모바일 각성 3회에 참조 1→2→3).
 const preLease=new Map();/* 사본 캔버스 → 참조를 얻은 CommandScene */
@@ -252,7 +252,7 @@ function grayColour(v){if(typeof v!=='string')return v;let r,g,b,a=1,m=v.trim().
  if(![r,g,b,a].every(Number.isFinite))return v;const y=Math.round(clamp((.299*r+.587*g+.114*b)*.95,0,255));return 'rgba('+y+','+y+','+y+','+a+')';}
 function installGray(){const DC=window.StoryPhase1?.DrawCommands,P=DC?.prototype;if(!P||P.r111Gray||Object.isFrozen(P))return false;
  const imageBase=P.drawImage,pushBase=P.push;
- P.drawImage=function(image,...a){if(rootState.theme&&image){const t=tintOf(image);if(t)image=t;}if(samongState.on&&image&&!GRAY_KEEP.has(this.owner?.kind)){const g=grayOf(image);if(g)image=g;}else if(preOn&&image&&preQ.size<PREWARM.queue&&!GRAY_KEEP.has(this.owner?.kind)&&!grayMap.has(image)&&!(typeof image.getContext==='function'&&!image.__storyworldStaticSource&&!image.__storyworldStaticTint)){if(!preQ.has(image)){preQ.add(image);samongState.prewarmQueued++;}}return imageBase.call(this,image,...a);};
+ P.drawImage=function(image,...a){if(rootState.theme&&image){const t=tintOf(image);if(t)image=t;}if(samongState.on&&image&&!GRAY_KEEP.has(this.owner?.kind)){if(prefs.samongShader){const prev=this.filter;this.filter=prev&&prev!=='none'?GRAY_FILTER+' '+prev:GRAY_FILTER;samongState.shaderDraws++;try{return imageBase.call(this,image,...a);}finally{this.filter=prev;}}const g=grayOf(image);if(g)image=g;}else if(preOn&&image&&preQ.size<PREWARM.queue&&!GRAY_KEEP.has(this.owner?.kind)&&!grayMap.has(image)&&!(typeof image.getContext==='function'&&!image.__storyworldStaticSource&&!image.__storyworldStaticTint)){if(!preQ.has(image)){preQ.add(image);samongState.prewarmQueued++;}}return imageBase.call(this,image,...a);};
  P.push=function(kind,data){const r=pushBase.call(this,kind,data);if(samongState.on&&(kind==='fill'||kind==='stroke')&&!GRAY_KEEP.has(this.owner?.kind)){const c=this.commands[this.commands.length-1],st=c?.style;
    if(st){for(const k of ['fillStyle','strokeStyle'])if(typeof st[k]==='string')st[k]=grayColour(st[k]);samongState.grayFills++;}}return r;};
  Object.defineProperty(P,'r111Gray',{value:true});return true;}
@@ -381,6 +381,6 @@ function settingsSection(){const host=document.getElementById('retroSettingsR98C
  const s=document.createElement('section');s.id='retroSettingsR111';s.innerHTML='<h3>전투·오라·조형물 (R111)</h3>'+Object.keys(DEFAULTS).map(k=>'<label><input type="checkbox" id="r111-'+k+'"> '+LABELS[k]+'</label> ').join('');
  host.parentNode.insertBefore(s,host.nextSibling);for(const k of Object.keys(DEFAULTS)){const el=s.querySelector('#r111-'+k);el.checked=prefs[k];el.onchange=()=>set({[k]:el.checked});}}
 
-window.__STORYWORLD_PLAY_R111__=Object.freeze({revision:REV,prefs:()=>({...prefs}),set,resonance:{scale:RES_SCALE,gain:RES_GAIN,max:777,shown},ranged:RANGED,foot:path=>feet.get(path),sectorOf,
+window.__STORYWORLD_PLAY_R111__=Object.freeze({revision:REV,grayFilter:GRAY_FILTER,samongSoon:()=>{try{return !!(prefs.samong&&live()&&typeof layer!=='undefined'&&layer==='DREAM'&&!samongState.on&&!(Number(player.samong)>0)&&Number(player.samongCD)<=PREWARM.ready&&!(Number(player.hp)<=0)&&perfStep()>1);}catch(_){return false;}},prefs:()=>({...prefs}),set,resonance:{scale:RES_SCALE,gain:RES_GAIN,max:777,shown},ranged:RANGED,foot:path=>feet.get(path),sectorOf,
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError,faceFoe:faceFoe?.id||null,combatLeft:+(combatUntil-(typeof time==='number'?time:0)).toFixed(2),ego:live()?egoOn(player):false,threadRank:live()?threadRank(player):0,threadInstalled:!!window.__STORYWORLD_CAMPAIGN_R63R1__?.r111Thread,guard:{on:guardState.on,healed:Math.round(guardState.healed),blocked:Math.round(guardState.blocked),taken:GUARD_TAKEN,heal:GUARD_HEAL},shots:{...shotState},bossRoot:{...rootState,theme:rootState.theme&&{key:rootState.theme.key,boss:rootState.theme.boss,elem:rootState.theme.elem,mecha:rootState.theme.mecha}},samong:{...samongState,grayLog:grayLog.slice(),grayInstalled:!!window.StoryPhase1?.DrawCommands?.prototype?.r111Gray},ranged:{applied:rangedState.applied,dodges:rangedState.dodges,base:{...rangedState.base}},presentationOnly:true,resonanceGainChanged:true})});
 })();

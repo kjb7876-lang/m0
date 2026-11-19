@@ -10678,6 +10678,18 @@
     "assets/r1206/props/willow.webp",
     "assets/r1206/fx/ink-bloom-warn8.webp",
     "assets/r1206/fx/index.json",
+    "samong-stagger-r1217.js",
+    "samong-warm-r1217-data.js",
+    "assets/r1219/r436/hwando/walk-s.webp",
+    "assets/r1219/r436/hwando/r1219.json",
+    "assets/r1219/r436/hwando/sheathed/walk-s.webp",
+    "assets/r1219/r436/hwando/sheathed/idle-s.webp",
+    "assets/r1219/r436/hwando/sheathed/index.json",
+    "memory-voice-r1223.js",
+    "swamp-splash-r1222.js",
+    "assets/r163/pixelfx/r1222/mob-swamp-dots-12.webp",
+    "story-half-dmg-r1225.js",
+    "blink-camera-r1236.js",
     "mob-motion-consistency-r1226.js",
     "assets/r1226/mobs/m015-stabilizer.webp"
   ],
@@ -11754,5 +11766,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "52b61b903f70291b9424f39c9859a8fc59a4cc079086f5f0fd335dc4650bf77b"
+  "runtimeManifestSHA256": "56e9323c441acd574717a17bf1334c38da9909d66aeac2de84cd1ad8fd08631d"
 }

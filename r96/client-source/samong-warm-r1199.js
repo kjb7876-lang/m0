@@ -44,10 +44,18 @@ function learn(S,frame,p){const key=heroKey(p);if(!key)return;const list=book[ke
   if(!isImg(im)||!(px(im)>0)||px(im)>CFG.maxPx||S.textures?.has?.(im)||idle?.has?.(im))continue;
   const path=pathOf(im);if(!path||list.includes(path))continue;list.push(path);stats.learned++;dirty=true;}
  save();}
+// R1217 ②(사용자 2026-11-19 "1-4 개선적용"): 첫 접속 첫 각성은 배운 것이 없어 첫 장면에 사몽 그림 4~5백만 화소를 올렸다
+//  → 영웅·형상 10가지 기본 목록(samong-warm-r1217-data.js, 헤드리스 실측)을 배운 목록 뒤에 합쳐 쓰고(겹침 없이 최대 40),
+//    로딩 화면에서 꿈 층으로 들어갈 때 그 그림을 미리 읽고 디코드해 둔다(addImage). GPU 올리기는 그대로 준비 때(대기 3초 이하) 한다.
+const DEF=()=>G(()=>window.__STORYWORLD_SAMONG_WARM_DEFAULTS_R1217__||{},{});
+function listFor(key){const out=[];for(const src of [book[key]||[],DEF()[key]||[]])for(const p of src){if(out.length>=CFG.maxPaths)return out;if(typeof p==='string'&&p&&!out.includes(p))out.push(p);}return out;}
+function preload(){try{if(!prefs.on||perfStep()<=1||!G(()=>typeof loading!=='undefined'&&loading===true,false)||!G(()=>typeof layer!=='undefined'&&layer==='DREAM',false))return;
+ const key=heroKey(P());if(!key)return;for(const path of listFor(key)){if(asked.has(path))continue;if(G(()=>typeof readyImage==='function'&&readyImage(path),null))continue;asked.add(path);stats.preloads=(stats.preloads||0)+1;
+  try{if(typeof addImage==='function'){const a=addImage(path);a?.promise?.catch?.(()=>{});}}catch(e){fail(e);}}}catch(e){fail(e);}}
 // ---- 예열·붙잡기 ----
 let owner=null,heldKey='';const held=new Map();/* image → path */const asked=new Set();
 function releaseAll(){const S=owner;for(const im of held.keys()){try{S?.release?.(im);stats.released++;}catch(e){fail(e);}}held.clear();stats.held=0;}
-function warm(r,S,p){const key=heroKey(p),list=book[key];if(key!==heldKey){releaseAll();heldKey=key;}if(!list||!list.length)return;
+function warm(r,S,p){const key=heroKey(p),list=listFor(key);if(key!==heldKey){releaseAll();heldKey=key;}if(!list||!list.length)return;
  let budget=lowFx()?CFG.budgetLow:CFG.budget,n=0;const heldPaths=new Set(held.values());
  for(const path of list){if(heldPaths.has(path))continue;
   const row=G(()=>typeof readyImage==='function'?readyImage(path):null,null);
@@ -65,9 +73,9 @@ const wrapFn=fn=>{if(fn.__r1199)return fn;const w=function(frame){before(this,fr
 const wrapped=new WeakSet();
 function wrapOnce(t){if(!t||wrapped.has(t)||typeof t.render!=='function')return;wrapped.add(t);t.render=wrapFn(t.render);}
 function wrapAll(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(!r)return;wrapOnce(Object.getPrototypeOf(r));if(Object.prototype.hasOwnProperty.call(r,'render'))wrapOnce(r);}catch(e){fail(e);}}
-setInterval(wrapAll,500);wrapAll();
+setInterval(()=>{wrapAll();preload();},500);wrapAll();
 function set(patch){if(typeof patch?.on==='boolean')prefs.on=patch.on;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}if(!prefs.on)releaseAll();return{...prefs};}
 window.__STORYWORLD_SAMONG_WARM_R1199__=Object.freeze({revision:REV,config:CFG,set,ready:()=>ready(P()),heroKey:()=>heroKey(P()),
- learned:k=>(book[k]||[]).slice(),forget:k=>{if(k)delete book[k];else book={};dirty=true;save();},
+ learned:k=>(book[k]||[]).slice(),list:k=>listFor(k),forget:k=>{if(k)delete book[k];else book={};dirty=true;save();},
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},held:[...held.values()],heldKey,lastError})});
 })();

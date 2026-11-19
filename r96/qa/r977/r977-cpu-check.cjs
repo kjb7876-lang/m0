@@ -15,7 +15,7 @@ ok(fs.readFileSync(path.join(RT,'play-r111.js'),'utf8')===src,'runtime-text 사�
 function mk(opt={}){let made=0,freed=0;const canvases=[];
  class DrawCommands{constructor(){this.commands=[];this.owner={kind:'prop'};this.got=[];}drawImage(image){this.got.push(image);}push(kind,data){this.commands.push({kind,style:{...(data||{})}});return true;}}
  const sb={console,Math,JSON,Set,Map,WeakMap,WeakSet,Object,Array,Number,String,Boolean,Error,Promise,setTimeout,
-  localStorage:{getItem:()=>null,setItem(){}},NodeFilter:{SHOW_TEXT:4},performance:{now:()=>0},
+  localStorage:{getItem:k=>/r111\.play$/.test(k)?'{"samongShader":false}':null,setItem(){}},/* R1217: 기본은 셰이더 흑백 — 이 검사는 흑백 사본 길(samongShader:false)을 본다 */NodeFilter:{SHOW_TEXT:4},performance:{now:()=>0},
   document:{getElementById:()=>null,querySelector:()=>null,createTreeWalker:()=>({nextNode:()=>null}),
    createElement:()=>{made++;let w=0;const c={get width(){return w;},set width(v){if(v===1&&w>1)freed++;w=v;},height:0,getContext:()=>({filter:'none',drawImage(){}})};canvases.push(c);return c;}},
   time:10,started:true,modal:false,loading:false,settings:{lowFx:!!opt.lowFx},zoom:1,target:null,

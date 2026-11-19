@@ -1,0 +1,121 @@
+{
+ "revision": "R1219c-hwando-front-sheathed-1",
+ "source": {
+  "dots": "CX-0168HW r1 _ROUGH (드라이브 결과 폴더)",
+  "walk_raw_sha256": "29df07ede425f7aef07a0baee960bbea50a85197c76102938f7d58f44c60e06c",
+  "idle_raw_sha256": "0726591f3f08e5502d07fb6cda392e34fe79f02062634dba1c39aa006c48ee42",
+  "processing": "밝기 분위를 R436 아래 걷기에 맞춤, 걷기 상체 박자(뒤 발 들림 비례)",
+  "ref_lum_q": [
+   0.2657,
+   0.5827,
+   0.8688
+  ]
+ },
+ "walk": {
+  "s": {
+   "file": "walk-s.webp",
+   "n": 8,
+   "cols": 8,
+   "cell": [
+    192,
+    256
+   ],
+   "atlas": [
+    1536,
+    256
+   ],
+   "ms": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+   ],
+   "anchor": [
+    96,
+    226
+   ],
+   "body": 173.0,
+   "loop": true,
+   "frames_per_stride": 8,
+   "sha256": "c041d26d0fc047d18dc342bf75cad36c85f85c7ec358608161fdb7b5ab2df41c",
+   "bytes": 135400,
+   "bob": [
+    {
+     "frame": 0,
+     "back_foot_lift_px": 0,
+     "body_dy_px": 1.0
+    },
+    {
+     "frame": 1,
+     "back_foot_lift_px": 10,
+     "body_dy_px": 0.0
+    },
+    {
+     "frame": 2,
+     "back_foot_lift_px": 21,
+     "body_dy_px": -1.0
+    },
+    {
+     "frame": 3,
+     "back_foot_lift_px": 10,
+     "body_dy_px": 0.0
+    },
+    {
+     "frame": 4,
+     "back_foot_lift_px": 14,
+     "body_dy_px": 0.0
+    },
+    {
+     "frame": 5,
+     "back_foot_lift_px": 0,
+     "body_dy_px": 1.0
+    },
+    {
+     "frame": 6,
+     "back_foot_lift_px": 1,
+     "body_dy_px": 1.0
+    },
+    {
+     "frame": 7,
+     "back_foot_lift_px": 0,
+     "body_dy_px": 1.0
+    }
+   ]
+  }
+ },
+ "idle": {
+  "s": {
+   "file": "idle-s.webp",
+   "n": 6,
+   "cols": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "atlas": [
+    1152,
+    256
+   ],
+   "ms": [
+    160,
+    160,
+    160,
+    160,
+    160,
+    160
+   ],
+   "anchor": [
+    96,
+    226
+   ],
+   "body": 173.0,
+   "loop": true,
+   "sha256": "d38babd3e23c67ed75e52cf1062b93c99f667c678f81d10d8242fff563bc0200",
+   "bytes": 111714
+  }
+ }
+}
