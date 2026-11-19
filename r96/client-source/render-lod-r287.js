@@ -3,7 +3,7 @@
 //  측정(헤드리스, 같은 빌드): 맵 지형은 엔진이 영웅 둘레 3×3 덩어리(10칸)+화면 안만 올리고, 벗어나면 내린다(병원 벽 그림·가림 재질은 버림).
 //  그래서 처음 가는 곳·되돌아오는 곳에서 덩어리를 새로 만들고 GPU 에 다시 올리느라 한 프레임이 길어진다(ep1a08 순간 이동 뒤 3D 그리기 최대 수백 ms).
 //  또 2D 그리기는 맵의 모든 조형물·벽(ep1a08 222개×2번)을 매 프레임 그리고, 화면 밖 것은 엔진이 나중에 버린다.
-//  ① 보조 렌더링(한 번): 지역에 들어오면 맵 전체 덩어리를 한 번 올리고(덩어리 수 상한×3 안에서),
+//  ① 보조 렌더링(한 번): 휴대폰 낮음·보통은 시야와 영웅 주변부터 그린다. 그 외에는 맵 전체 덩어리를 한 번 올리고(덩어리 수 상한×3 안에서),
 //     다 올라오면 화면 밖 4×4 렌더 타깃에 장면 전체를 한 번 그려 셰이더·지오메트리·텍스처를 미리 올린다. 화면에는 아무것도 그리지 않는다.
 //     덩어리 그림 파일은 지역을 떠날 때까지 잡아 두고(리스), 2D 조형물 그림 텍스처도 지역 동안 잡아 둔다 → 다시 와도 다시 올리지 않는다.
 //  ② 우선 렌더링: 대기 중인 덩어리 메시 중 엔진이 원래 올려 두었을 것(영웅 둘레 3×3+보이는 범위, 엔진 규칙 그대로)만 그리고 — 그래서 화면에 그려지는 지형은 끄기 상태와 같다 —
@@ -71,21 +71,31 @@ if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){t
 // ---- 3D: 덩어리 대기·미리 올리기·시야 밖 대기 ----
 let lastArgs=null,R=null,zoneKey=null,warmState='idle',warmPromise=null,leases=[],held=[],heldSet=new WeakSet(),heldOwner=null,warmRT=null;
 let coarse=null;const capFor=r=>{if(coarse===null){try{coarse=!!matchMedia('(pointer:coarse)').matches;}catch(_){coarse=false;}}return((r?.lastViewportWidth||innerWidth)<960||coarse)?CFG.capLow:CFG.cap;};
-function releaseZone(){for(const l of leases){try{l.release();}catch(e){fail(e);}}leases=[];
+function releaseTerrainLeases(){for(const l of leases){try{l.release();}catch(e){fail(e);}}leases=[];stats.leases=0;}
+function releaseZone(){releaseTerrainLeases();
  if(heldOwner){for(const img of held){try{heldOwner.release(img);}catch(e){fail(e);}}}held=[];heldSet=new WeakSet();heldOwner=null;stats.leases=0;stats.texHeld=0;}
-let zoneAt=0,warmGen=0;
-function newZone(zone){
- warmGen++;releaseZone();coarse=null;zoneKey=zone;zoneAt=frameNo;stats.zones++;
- // 휴대폰 낮음: 엔진이 시야와 영웅 둘레 3×3을 바로 불러온다. 이동 중에는 6MB 지형 캐시를 재사용한다.
- const tier=window.__STORYWORLD_MOBILE_TIER_R1023__;
- const viewportOnly=!prefs.resident&&tier?.tier?.()===0&&tier.active?.();
- warmState=viewportOnly?'done':'loading';
- if(viewportOnly)stats.viewportStarts++;
+let zoneAt=0,warmGen=0,mapWarm=false,mapResident=false;
+function prepareTerrain(r,zone){
+ const newZone=zone!==zoneKey,tier=window.__STORYWORLD_MOBILE_TIER_R1023__,level=tier?.tier?.();
+ const viewportOnly=!prefs.resident&&(level===0||level===1)&&tier.active?.();
+ const warm=prefs.warm&&!viewportOnly;
+ if(!newZone&&warm===mapWarm&&prefs.resident===mapResident)return;
+ if(newZone){releaseZone();coarse=null;zoneKey=zone;stats.zones++;}
+ else{
+  // 가만히 있어도 이번 프레임에 엔진이 현재 시야로 다시 요청한다. 활성 덩어리는 엔진이 그대로 재사용한다.
+  r.lastChunkPosition=null;
+  if(!warm&&mapWarm)releaseTerrainLeases();
+ }
+ if(newZone||warm!==mapWarm){
+  warmGen++;zoneAt=frameNo;warmState=warm?'loading':'done';
+  if(viewportOnly)stats.viewportStarts++;
+ }
+ mapWarm=warm;mapResident=prefs.resident;
 }
 function wrapChunks(r){const C=r?.chunks;if(!C||typeof C.update!=='function'||C.__r287)return;const base=C.update;
  const w=function(x,y,zone,grid={}){lastArgs={x,y,grid};if(!prefs.on)return base.call(this,x,y,zone,grid);
   let vb=grid?.visibleBounds;try{const g=chunkGrid(grid),cap=capFor(r),size=this.size||10;stats.chunksAll=g.count;
-   if(zone!==zoneKey)newZone(zone);
+   if(zone!==zoneKey)prepareTerrain(r,zone);
    const warming=warmState==='loading'||warmState==='ready';/* 'ready'(다 올라옴, 미리 그리기·리스 전)에도 맵 전체를 붙잡아 둔다 — 그 사이 엔진이 update 를 다시 불러도 먼 덩어리가 내려가지 않게 */
    if(warming&&frameNo-zoneAt>CFG.warmTimeout)warmState='done';// 덩어리가 끝내 안 올라오면 미리 그리기 없이 진행
    const all=(prefs.resident&&g.count<=cap)||(prefs.warm&&warming&&warmState!=='done'&&g.count<=cap*3);
@@ -145,7 +155,7 @@ function boostCache(r){if(!r||r.__r287Cache)return;const ownB=Object.getOwnPrope
  Object.defineProperty(r,'idleGeometryByteLimit',{configurable:true,enumerable:true,get(){return on('cache')?Math.max(b||0,capFor(r)===CFG.cap?CFG.cacheBytes:CFG.cacheBytesLow):b;},set(v){b=v;}});
  Object.defineProperty(r,'idleGeometryLimit',{configurable:true,enumerable:true,get(){return on('cache')?Math.max(n||0,CFG.cacheCount):n;},set(v){n=v;}});}
 function unboostCache(r){if(!r?.__r287Cache)return;const b=r.idleGeometryByteLimit,n=r.idleGeometryLimit;delete r.idleGeometryByteLimit;delete r.idleGeometryLimit;delete r.__r287Cache;r.idleGeometryByteLimit=b;r.idleGeometryLimit=n;}/* set() 이 prefs 를 먼저 바꿔 두므로 위 b,n 은 엔진 값 */
-function before(r,frame){try{stats.frames++;if(r!==R){R=r;}wrapChunks(r);if(!prefs.on)return;boostCache(r);const key=frame?.layer+':'+frame?.zone;if(frame?.zone&&key!==zoneKey)newZone(key);if(on('warm')&&(zoneFrames<90||frameNo%15===0))holdCommandTextures(r,frame);/* 들어온 직후 몇 초 동안 + 그 뒤 15프레임에 한 번만 훑는다 */r.__r287Pending=true;}catch(e){fail(e);}}
+function before(r,frame){try{stats.frames++;if(r!==R){R=r;}wrapChunks(r);if(!prefs.on)return;boostCache(r);if(frame?.zone)prepareTerrain(r,frame.layer+':'+frame.zone);if(on('warm')&&(zoneFrames<90||frameNo%15===0))holdCommandTextures(r,frame);/* 들어온 직후 몇 초 동안 + 그 뒤 15프레임에 한 번만 훑는다 */r.__r287Pending=true;}catch(e){fail(e);}}
 /* 미리 그리기(또는 시간 초과)가 끝나면 엔진 범위로 바로 줄인다 — 엔진은 위치·시야 키가 바뀔 때만 update 를 불러, 가만히 있으면 맵 전체가 남는다.
    마지막 엔진 요청 그대로 다시 부르고(이제 'done' 이라 원래 범위), 엔진 키도 비워 다음 프레임에 엔진이 스스로 다시 요청하게 한다. */
 function shrink(r){try{if('lastChunkPosition' in r)r.lastChunkPosition=null;const A=lastArgs;if(A&&zoneKey&&r.chunks?.update&&!(prefs.resident&&chunkGrid(A.grid).count<=capFor(r)))Promise.resolve(r.chunks.update(A.x,A.y,zoneKey,A.grid)).catch(fail);}catch(e){fail(e);}}
@@ -162,7 +172,7 @@ function wrapAll(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.
  if(Object.prototype.hasOwnProperty.call(r,'render'))wrapOnce(r);wrapGL(r);wrapChunks(r);}catch(e){fail(e);}}
 setInterval(wrapAll,500);wrapAll();
 function set(p){const was=prefs.on;for(const k in prefs)if(typeof p?.[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}
- if(!prefs.on||!prefs.warm){releaseZone();}if(!prefs.on&&R){unwrapChunks(R);unboostCache(R);}else if(!prefs.cache&&R)unboostCache(R);if(prefs.on&&!was){zoneKey=null;wrapAll();}return{...prefs};}
+ if(!prefs.on||!prefs.warm){releaseZone();}if(!prefs.on&&R){warmGen++;warmState='idle';R.lastChunkPosition=null;unwrapChunks(R);unboostCache(R);}else if(!prefs.cache&&R)unboostCache(R);if(prefs.on&&!was){zoneKey=null;wrapAll();}return{...prefs};}
 window.__STORYWORLD_RENDER_LOD_R287__=Object.freeze({revision:REV,config:CFG,expand,engineKeeps,chunkGrid,fullBounds,outside,screenOutside,farTurn,propMargin,set,
  inspect:()=>({revision:REV,prefs:{...prefs},zone:zoneKey,warmState,stats:{...stats},lastError,gameplayChanged:false,browserVerified:false,GPUVerified:false})});
 })();

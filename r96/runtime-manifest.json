@@ -56204,8 +56204,8 @@
     },
     {
       "path": "grove-r481.js",
-      "bytes": 10174,
-      "sha256": "87fd0bd490c899dbf7068d5176df4aca6a1e3ca58bd06e20923a46c26afc7ab8"
+      "bytes": 11646,
+      "sha256": "54675080225e029bdd15292c9d8babd0cb717f57e5868886ebb951ebeccd5274"
     },
     {
       "path": "growth-r103.js",
@@ -56884,8 +56884,8 @@
     },
     {
       "path": "mobile-memory-r980.js",
-      "bytes": 16788,
-      "sha256": "b78d9c77ca19e2fa6d89b714d8016459470c1b57aeba6f402b695459bbdcd87c"
+      "bytes": 23208,
+      "sha256": "068ff077ba5e91f16e686ea474b6c78d65808670c01f9733477a58b065cd98c7"
     },
     {
       "path": "mobile-perf-r298.js",
@@ -57294,8 +57294,8 @@
     },
     {
       "path": "props-tidy-r412.js",
-      "bytes": 42214,
-      "sha256": "9b6ef492d4d6a21d75cbb61c42560976c98af65c7e8dca354466f1985065209f"
+      "bytes": 65323,
+      "sha256": "f4715530e07f5182dccff6a69acb74ddd228c54a1464c4ef16c051b8351c2d6f"
     },
     {
       "path": "props-variety-r140.js",
@@ -57349,8 +57349,8 @@
     },
     {
       "path": "render-lod-r287.js",
-      "bytes": 20689,
-      "sha256": "a58c698c54f0a342f9486599de19ba43937af3023eab4f2fb2d20a98df34d3ff"
+      "bytes": 21229,
+      "sha256": "98c44a22a9920aa09fee2306dff9409a018b85bfd5d7990013fd8c819460d4cc"
     },
     {
       "path": "roof-height-r267.js",
@@ -58064,7 +58064,7 @@
     }
   ],
   "fileCount": 11612,
-  "totalBytes": 1386397228,
+  "totalBytes": 1386428769,
   "webHTMLSha256": "f73847d7064a59599797bf3fe77d35cda64f279b8bf50e05c219246e89da2496",
   "largest": [
     {

@@ -1,0 +1,92 @@
+{
+  "scenario": "STORY dist02, R1043 preset 3, repeat trusted movement for at least 65 seconds wall time",
+  "environment": "Linux WPE WebKit, 812x375 CSS, DPR 3, software rendering, not a physical iPhone",
+  "metric": "Distinct rendered R481 grove BufferGeometry instances observed by object identity",
+  "initialGroveMeasurement": "Each run starts observing after entry. Entry timing and number of completed movement samples differ.",
+  "versions": {
+    "baseline": {
+      "commit": "ddec62cccf87c49c4e9eabe05bc43a1b4188f7b0",
+      "renderedGroveGeometries": 744,
+      "countsByMesh": {
+        "r481-grove-0": 62,
+        "r481-grove-1": 62,
+        "r481-grove-2": 62,
+        "r481-grove-3": 62,
+        "r481-grove-4": 62,
+        "r481-grove-5": 62,
+        "r481-grove-6": 62,
+        "r481-grove-7": 62,
+        "r481-grove-8": 62,
+        "r481-grove-9": 62,
+        "r481-grove-10": 62,
+        "r481-grove-11": 62
+      },
+      "totalRendererGeometriesAtMovementSamples": [
+        186,
+        292,
+        373,
+        449,
+        532,
+        640,
+        721,
+        828
+      ],
+      "gameSecondsAtMovementSamples": [
+        1.6,
+        2.85,
+        4.1,
+        5.35,
+        6.6,
+        7.85,
+        9.1,
+        10.35
+      ],
+      "peakLivingEnemies": 53,
+      "errors": []
+    },
+    "fixed": {
+      "commit": "4bd5718f0dc2de87d589d09d3b49216b5ffa831a",
+      "renderedGroveGeometries": 12,
+      "countsByMesh": {
+        "r481-grove-0": 1,
+        "r481-grove-1": 1,
+        "r481-grove-2": 1,
+        "r481-grove-3": 1,
+        "r481-grove-4": 1,
+        "r481-grove-5": 1,
+        "r481-grove-6": 1,
+        "r481-grove-7": 1,
+        "r481-grove-8": 1,
+        "r481-grove-9": 1,
+        "r481-grove-10": 1,
+        "r481-grove-11": 1
+      },
+      "totalRendererGeometriesAtMovementSamples": [
+        66,
+        100,
+        85,
+        77,
+        64,
+        76
+      ],
+      "gameSecondsAtMovementSamples": [
+        1.7,
+        2.95,
+        4.2,
+        5.45,
+        6.75,
+        8.0
+      ],
+      "peakLivingEnemies": 53,
+      "errors": [],
+      "lastGrove": {
+        "builds": 1,
+        "spots": 146,
+        "meshes": 12,
+        "ms": 19,
+        "errors": 0,
+        "zone": "dist02"
+      }
+    }
+  }
+}
