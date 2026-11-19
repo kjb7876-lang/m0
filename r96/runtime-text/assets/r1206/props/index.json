@@ -1,5 +1,5 @@
 {
- "revision": "R1206b",
+ "revision": "R1206b+R1206c",
  "note": "Dots CX-0166SM-A ROUGH r1 (사몽 R123 분위기 소품). 투명 여백만 잘라 무손실 WebP. 최종 아트 아님(ROUGH).",
  "props": {
   "lantern": {
@@ -103,6 +103,216 @@
      24,
      183,
      248
+    ]
+   },
+   "status": "ROUGH r1 적용(최종 검수 전)"
+  },
+  "easel": {
+   "path": "assets/r1206/props/easel.webp",
+   "size": [
+    103,
+    224
+   ],
+   "bytes": 20106,
+   "sha256": "9621e000396b3d239607a36584e2da4ed72e02ee8f39e55880d8508e684103ac",
+   "source": {
+    "file": "CX-0166SM-A_easel_r1_ROUGH.png",
+    "bytes": 23577,
+    "sha256": "5a39b849a328766e76f786abc17d0b4c48d49659f17ca4c1cf51b38b4f5d7b55",
+    "crop": [
+     76,
+     24,
+     179,
+     248
+    ]
+   },
+   "status": "ROUGH r1 적용(최종 검수 전)"
+  },
+  "bottle": {
+   "path": "assets/r1206/props/bottle.webp",
+   "size": [
+    119,
+    221
+   ],
+   "bytes": 31058,
+   "sha256": "4967e006366f6cf24ca8be6bd24da3cf4ff22cdbad7b0daf22cc668bd7800e76",
+   "source": {
+    "file": "CX-0166SM-A_bottle_r1_ROUGH.png",
+    "bytes": 49004,
+    "sha256": "2b38cf966a5df77ae1411887d2f4bfba3e5bb0421f5d7889a56a8b5e6ddea674",
+    "crop": [
+     68,
+     19,
+     187,
+     240
+    ]
+   },
+   "status": "ROUGH r1 적용(최종 검수 전)"
+  },
+  "tree": {
+   "path": "assets/r1206/props/tree.webp",
+   "size": [
+    237,
+    360
+   ],
+   "bytes": 49932,
+   "sha256": "e5f3a8df07945d3b0f6af1421f32c923b20376cc5c691ad355025812952dbb13",
+   "source": {
+    "file": "CX-0166SM-A_tree_r1_ROUGH.png",
+    "bytes": 77477,
+    "sha256": "863890b55b307394920053374335d678a26a489df19198a749e008d73e661960",
+    "crop": [
+     9,
+     16,
+     246,
+     376
+    ]
+   },
+   "status": "ROUGH r1 적용(최종 검수 전)"
+  },
+  "goldpillar": {
+   "path": "assets/r1206/props/goldpillar.webp",
+   "size": [
+    88,
+    347
+   ],
+   "bytes": 40664,
+   "sha256": "a8cf0bb3a9c0329f108bf78949a063f3558606937a13b59b61bc5284a3daf63c",
+   "source": {
+    "file": "CX-0166SM-A_goldpillar_r1_ROUGH.png",
+    "bytes": 59040,
+    "sha256": "14975c0fefaa2d68464f1cf552ab7d8aab2110b8bfe1e3dabe5c5269a99fc1cb",
+    "crop": [
+     84,
+     20,
+     172,
+     367
+    ]
+   },
+   "status": "ROUGH r1 적용(최종 검수 전)"
+  },
+  "mirror": {
+   "path": "assets/r1206/props/mirror.webp",
+   "size": [
+    181,
+    360
+   ],
+   "bytes": 52952,
+   "sha256": "cdf635f0ca984c30133eba77b071a7777a6298e4eb8ec90f19825eadfe4209de",
+   "source": {
+    "file": "CX-0166SM-A_mirror_r1_ROUGH.png",
+    "bytes": 81308,
+    "sha256": "7f6d8ba0bb08695568f660d8e2ab7989e57a1bd3213eb519a1d0994e89b7d38c",
+    "crop": [
+     37,
+     16,
+     218,
+     376
+    ]
+   },
+   "status": "ROUGH r1 적용(최종 검수 전)"
+  },
+  "gear": {
+   "path": "assets/r1206/props/gear.webp",
+   "size": [
+    217,
+    233
+   ],
+   "bytes": 53994,
+   "sha256": "980b26b59a81795f6571e6d3668347f337118900e1bd097e2815e8070f789c5b",
+   "source": {
+    "file": "CX-0166SM-A_gear_r1_ROUGH.png",
+    "bytes": 79086,
+    "sha256": "b87ff858255443874ff20f4327453eb16ae501d9cd2cb95e0ed2640324d3f3f6",
+    "crop": [
+     19,
+     12,
+     236,
+     245
+    ]
+   },
+   "status": "ROUGH r1 적용(최종 검수 전)"
+  },
+  "beacon": {
+   "path": "assets/r1206/props/beacon.webp",
+   "size": [
+    96,
+    224
+   ],
+   "bytes": 24906,
+   "sha256": "f2455d937e31c967aee12d43c78b93a32613f7e5ebe525ef7de02f4a0d30886e",
+   "source": {
+    "file": "CX-0166SM-A_beacon_r1_ROUGH.png",
+    "bytes": 39625,
+    "sha256": "f88bfc83a4109ec5f0340cead3b5d114699b3ef6ecd5a19de5e6401ce8a2f025",
+    "crop": [
+     80,
+     24,
+     176,
+     248
+    ]
+   },
+   "status": "ROUGH r1 적용(최종 검수 전)"
+  },
+  "cypress": {
+   "path": "assets/r1206/props/cypress.webp",
+   "size": [
+    100,
+    353
+   ],
+   "bytes": 36492,
+   "sha256": "85e8e0e3e01800430868d837e175bc71ad89620f343f2aba5a129949eddac817",
+   "source": {
+    "file": "CX-0166SM-A_cypress_r1_ROUGH.png",
+    "bytes": 58138,
+    "sha256": "b08abdfba97c2710ba9779aabd551ed4ad1e11e7141ee3da9fe3db1529d1c2a7",
+    "crop": [
+     78,
+     16,
+     178,
+     369
+    ]
+   },
+   "status": "ROUGH r1 적용(최종 검수 전)"
+  },
+  "spool": {
+   "path": "assets/r1206/props/spool.webp",
+   "size": [
+    148,
+    224
+   ],
+   "bytes": 45366,
+   "sha256": "6fac468dbd9f045c2cf4d685adb7852f38cf6abb3ef449bfd349fe5449b950c1",
+   "source": {
+    "file": "CX-0166SM-A_spool_r1_ROUGH.png",
+    "bytes": 70005,
+    "sha256": "a33fb17803cd926052403d4c56ae74093b5cdf12b97295b3ce8fba8ab103e328",
+    "crop": [
+     54,
+     24,
+     202,
+     248
+    ]
+   },
+   "status": "ROUGH r1 적용(최종 검수 전)"
+  },
+  "willow": {
+   "path": "assets/r1206/props/willow.webp",
+   "size": [
+    234,
+    272
+   ],
+   "bytes": 80314,
+   "sha256": "11a53decd3042e826c2b696fc2c420ad7fb49a0c1b9489af00fbde98dfd1af8c",
+   "source": {
+    "file": "CX-0166SM-A_willow_r1_ROUGH.png",
+    "bytes": 120191,
+    "sha256": "5a38769a0a720154865c7f3529cce1e57536cf5ee2a8de2e7e2b5355dad76d09",
+    "crop": [
+     11,
+     86,
+     245,
+     358
     ]
    },
    "status": "ROUGH r1 적용(최종 검수 전)"

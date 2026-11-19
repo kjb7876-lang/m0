@@ -29,5 +29,12 @@ const deco=(kind,id,extra={})=>({id,x:1,y:1,height:60,r123Deco:{id,kind,seed:1},
  sb.tick();ok('경계: 같은 방은 한 번만(다시 tick 해도 요청 늘지 않음)',added.length===5,added.length);}
 {const room={id:'ep1a09',props:[deco('lantern','a')]};const {sb,added}=mk(room);sb.tick();ok('경계: 사몽 밖 방은 손대지 않음',!room.props[0].path&&added.length===0);}
 {const room={id:'last302',samongR103:{zone:'sz115-S05-1'},props:[deco('lantern','a')]};const {sb}=mk(room,'{"on":false}');sb.tick();ok('끄기 storyworld.r1206b.props {"on":false} 면 코드 그림 그대로',!room.props[0].path);}
+// ---- R1206c: Dots 추가분 10종 ----
+const KINDS2=['easel','bottle','tree','goldpillar','mirror','gear','beacon','cypress','spool','willow'];
+ok('R1206c 그림 10종 있음·바이트 일치·runtime-inputs 등록',KINDS2.every(k=>{const m=idx.props[k];return m&&fs.existsSync(path.join(R,'runtime-text',m.path))&&fs.statSync(path.join(R,'runtime-text',m.path)).size===m.bytes&&fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8').includes(m.path);}));
+{const room={id:'last302',samongR103:{zone:'sz115-S07-1'},props:[...KINDS2.map((k,i)=>deco(k,'k'+i)),deco('endless','w1'),deco('sign','w2')]};const {sb,added}=mk(room);sb.tick();
+ ok('R1206c 10종은 그림 경로·높이를 얻음',KINDS2.every((k,i)=>room.props[i].path===idx.props[k].path&&room.props[i].height>40),room.props.map(p=>[p.id,p.path,p.height]));
+ ok('R1206c 벽 소품(endless·sign)은 코드 그림 그대로(벽면 기울기·층 문구)',!room.props[10].path&&!room.props[11].path);
+ ok('R1206c 그림 요청 10장',added.length===10,added.length);}
 const pass=checks.filter(c=>c.p).length;for(const c of checks)console.log((c.p?'PASS ':'FAIL ')+c.n+(c.p?'':' '+String(JSON.stringify(c.d)??'').slice(0,400)));
 console.log(`R1206b ${pass}/${checks.length}`);if(pass!==checks.length)process.exit(1);
