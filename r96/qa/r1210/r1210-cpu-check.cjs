@@ -12,8 +12,10 @@ ok(fs.readFileSync(path.join(ROOT,'scripts/verify-r96-public.py'),'utf8').includ
 ok(fs.readFileSync(path.join(ROOT,'.github/workflows/pages.yml'),'utf8').includes('node r96/qa/r1210/r1210-cpu-check.cjs'),'pages.yml CPU 검사 줄');
 const man=fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8');ok(man.includes('"'+F+'"')||man.includes('/'+F+'"'),'runtime-manifest 에 들어감');
 // 재사용 시트는 실제로 있어야 한다(지어낸 경로 금지)
-for(const a of ['assets/sw0011/beam-0.webp','assets/sw0011/beam-1.webp','assets/r600/dots/sv-beam-start.webp','assets/r600/dots/sv-beam-hit.webp','assets/r438/fx/enemy-shockwave.webp','assets/r562/neon-toxic-mist.webp','assets/r562/dots/neon-toxic-pool.webp'])
+/* 사용자 지시 동작 변경(11-19 07:39Z 프레임 애니메이션, Dots CX-0167RA 레이저 r1 도착): 레이저는 R600 빛줄기 대신 Dots 전용 시트 */
+for(const a of ['assets/r1210/laser-aim6.webp','assets/r1210/laser-charge8.webp','assets/r1210/laser-body8.webp','assets/r1210/laser-impact8.webp','assets/r1210/sonic-ring.webp','assets/r562/neon-toxic-mist.webp','assets/r562/dots/neon-toxic-pool.webp'])
  ok(src.includes(a)&&fs.existsSync(path.join(R,'runtime-text',a)),'재사용 시트 있음: '+a);
+{const idx=JSON.parse(fs.readFileSync(path.join(R,'runtime-text/assets/r1210/index.json'),'utf8'));ok(idx['laser-body8']?.frames===8&&idx['laser-charge8']?.frames===8&&idx['laser-impact8']?.frames===8&&idx['laser-aim6']?.frames===6&&['laser-aim6','laser-charge8','laser-body8','laser-impact8'].every(k=>/CX-0167RA_machine-laser-/.test(idx[k].source))&&idx['sonic-ring']?.frames===24,'Dots CX-0167RA 레이저 시트 4장 표',idx);}
 // 주황 예고 도형 금지(#712): 코드 안 색 문자열에 주황·노랑 계열이 없어야 한다
 {const hexes=[...src.matchAll(/#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})\b/g)].map(m=>m[1]),rgbs=[...src.matchAll(/rgba?\((\d+),\s*(\d+),\s*(\d+)/g)].map(m=>[+m[1],+m[2],+m[3]]);
  const toRgb=h=>h.length===3?[...h].map(c=>parseInt(c+c,16)):[0,2,4].map(i=>parseInt(h.slice(i,i+2),16));
@@ -65,13 +67,13 @@ for(const [name,kind] of [['프리즘 저격병','laser'],['펄스 척후병','s
  S.calls.imgs.length=0;step(S,2.6,1/30,true);const seen=[...S.calls.imgs];ok(S.calls.hurt.length>=1,name+': 가만히 선 영웅이 맞음',S.calls.hurt);
  const d=S.calls.hurt.reduce((a,b)=>a+b[0],0);ok(d>0&&d<=e.damage*1.0+1e-9,name+': 피해 합 ≤ 근접 한 대('+d.toFixed(2)+')');
  ok(S.calls.hurt.every(h=>h[1]===kind),name+': 피해 출처에 종류 표시');
- ok(seen.some(p=>kind==='laser'?/sw0011\/beam|sv-beam/.test(p||''):/r438|r562/.test(p||'')),name+': 날아가는 동안 재사용 시트로 그림',[...new Set(seen)]);
+ ok(seen.some(p=>kind==='laser'?/r1210\/laser-(body|charge|impact|aim)/.test(p||''):/r1210\/sonic-ring|r562/.test(p||'')),name+': 날아가는 동안 재사용 시트로 그림',[...new Set(seen)]);
  // 쿨다운: 바로 다시 겨누지 않음
  const shots=e.r1210.count;step(S,2);ok(e.r1210.count===shots,name+': 쿨다운 동안 다시 안 쏨');
 }
 {// 레이저: 쏘는 순간 시트 그림
  const S=sandbox();const e=mob('중장 광선포병');S.sb.room.enemies.push(e);for(let i=0;i<400&&!(e.r1210?.count>=1);i++)step(S,1/30);ok(e.r1210?.count===1,'레이저 한 번 쏨');
- S.calls.imgs.length=0;S.sb.drawEffect(S.sb.effects.find(x=>x.type==='r1210-fx'));ok(S.calls.imgs.some(p=>/sw0011\/beam|sv-beam/.test(p||'')),'레이저: 빛줄기 시트로 그림',S.calls.imgs);}
+ S.calls.imgs.length=0;S.sb.drawEffect(S.sb.effects.find(x=>x.type==='r1210-fx'));ok(S.calls.imgs.some(p=>/r1210\/laser-body8/.test(p||''))&&S.calls.imgs.some(p=>/r1210\/laser-impact8/.test(p||'')),'레이저: Dots 몸통·적중 시트로 그림',S.calls.imgs);}
 {// 피하면 안 맞음(레이저 조준은 겨누기 시작 때 고정)
  const S=sandbox();const e=mob('프리즘 저격병');S.sb.room.enemies.push(e);for(let i=0;i<400&&e.r1210?.mode!=='windup';i++)step(S,1/30);S.player.y=12.5;step(S,1.5);ok(S.calls.hurt.length===0,'레이저: 예고 보고 옆으로 피하면 안 맞음');}
 {// 거리 밖·근접 거리에서는 안 쏨
@@ -98,8 +100,20 @@ for(const [name,kind] of [['프리즘 저격병','laser'],['펄스 척후병','s
  const S2=sandbox();const f=mob('프리즘 저격병');S2.sb.room.enemies.push(f);step(S2,20);const u=S2.A.tune.laser;ok(f.r1210.count<=Math.floor(20/(u.cd+u.windup))+1,'20초 발사 수 쿨다운 지킴',f.r1210.count);}
 {// 회귀(헤드리스 실측): 엔진은 지역을 옮기면 안 쓰는 그림을 내린다 → readyImage 가 비면 addImage 로 다시 부른다(부팅·로딩 중엔 안 부름)
  const S=sandbox();const asked=new Set();S.sb.readyImage=()=>null;S.sb.addImage=p=>{asked.add(p);return {};};const e=mob('프리즘 저격병');S.sb.room.enemies.push(e);step(S,.2);
- ok(['assets/sw0011/beam-0.webp','assets/r438/fx/enemy-shockwave.webp','assets/r562/dots/neon-toxic-pool.webp'].every(p=>asked.has(p)),'디스토피아 몹이 보이면 시트를 미리 부름',[...asked]);
+ ok(['assets/r1210/laser-body8.webp','assets/r1210/sonic-ring.webp','assets/r562/dots/neon-toxic-pool.webp'].every(p=>asked.has(p)),'디스토피아 몹이 보이면 시트를 미리 부름',[...asked]);
  const S2=sandbox();const asked2=[];S2.sb.readyImage=()=>null;S2.sb.addImage=p=>asked2.push(p);S2.sb.loading=true;S2.sb.room.enemies.push(mob('프리즘 저격병'));step(S2,.2);ok(asked2.length===0,'로딩 중엔 부르지 않음');}
+{// 보스(사용자 11-19 07:56Z "그맵의 보스는 그맵 몹들의 그런원거리공격 동시에 사용함 이펙트범위크기 66프로증가")
+ const S=sandbox();const A=S.A;ok(A.bossScale===1.66,'보스판 크기·범위 1.66배');
+ const boss=mob('상대 초인',{boss:true,damage:15,x:15}),m1=mob('프리즘 저격병',{x:30}),m2=mob('포낭 곡사체',{x:30}),dead=mob('펄스 척후병',{hp:0,spawnState:'dead',x:30});
+ S.sb.room.enemies.push(boss,m1,m2,dead);
+ ok(JSON.stringify(A.mapKinds(S.sb.room).sort())===JSON.stringify(['laser','radiation','sonic']),'맵 몹 종류(죽은 몹 포함)',A.mapKinds(S.sb.room));
+ let fired=false;for(let i=0;i<400&&!fired;i++){step(S,1/30);fired=boss.r1210?.count>=1;}ok(fired,'보스가 맵 몹들의 원거리 공격을 씀',boss.r1210);
+ ok(JSON.stringify([...boss.r1210.kinds].sort())===JSON.stringify(['laser','radiation','sonic']),'보스는 세 종류를 동시에',boss.r1210.kinds);
+ const lv=A.inspect().liveDetail.filter(x=>x.owner===boss.id);ok(lv.length===3&&lv.every(x=>x.scale===1.66),'세 공격이 같은 순간·1.66배',lv);
+ step(S,3);const bd=S.calls.hurt.reduce((a,b)=>a+b[0],0);ok(bd>0&&bd<=boss.damage*1.5+1e-9,'보스 한 번 동시 사격 피해 합 ≤ 보스 근접 1.5대('+bd.toFixed(1)+')');
+ const lw=A.tune.laser,u=A.scaled('laser');ok(Math.abs(u.width-lw.width*1.66)<1e-9&&Math.abs(u.len-lw.len*1.66)<1e-9,'보스 레이저 폭·길이 1.66배');
+ ok(Math.abs(A.scaled('radiation').radius-A.tune.radiation.radius*1.66)<1e-9&&Math.abs(A.scaled('sonic').band-A.tune.sonic.band*1.66)<1e-9,'보스 방사능 반지름·음파 띠 1.66배');
+ const S2=sandbox();const b2=mob('숲의 왕',{boss:true});S2.sb.room.enemies.push(b2,mob('숲 고블린'));step(S2,4);ok(!b2.r1210?.count,'디스토피아 몹이 없는 맵의 보스는 그대로');}
 {// 끄기
  const S=sandbox();S.A.set({on:false});const e=mob('프리즘 저격병'),h=mob('배양 공병',{ai:'hybrid'});S.sb.room.enemies.push(e);step(S,4);S.sb.ranged3(h);
  ok(!e.r1210?.mode&&S.calls.base===1,'끄면 원래대로(겨누기 없음, 엔진 탄)');ok(JSON.parse(S.sb.localStorage.store['storyworld.r1210.dys']).on===false,'끄기 저장');}

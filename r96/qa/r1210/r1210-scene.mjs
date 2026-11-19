@@ -18,4 +18,18 @@ for(const [kind,name] of [['laser','프리즘 저격병'],['radiation','포낭 �
   await p.waitForFunction(c=>room.enemies.some(e=>{const s=e.r1210;return s&&s.mode!==undefined&&eval(c);}),cond,{timeout:120000,polling:30}).catch(()=>console.log('timeout',kind,tag));
   await p.screenshot({path:`${SHOT}/r1210-${kind}-${tag}.png`});}
 }
+// 보스: 그 맵 몹들의 원거리 공격을 동시에(1.66배)
+await p.evaluate(async zone=>{const SM=__STORYWORLD_SAMONG_R103__,i=SM.episodes.findIndex(e=>e.key==='S-06');await SM.go(i,null,{zone});},'sz115-S06-5');
+await p.waitForFunction(()=>!loading,null,{timeout:150000});await skip();
+const bi=await p.evaluate(()=>{auto=false;guide=false;player.invincible=1e9;const A=window.__STORYWORLD_DYS_RANGED_R1210__;room.engaged=true;
+ const b=room.enemies.find(e=>e.boss);for(const e of room.enemies){if(e===b)continue;if(!e.boss){e.hp=0;e.spawnState='dead';}}
+ // 맵 몹 종류를 셋 다 보이게 죽은 몹 이름을 바꾼다(장면 확인용)
+ const dead=room.enemies.filter(e=>!e.boss);['프리즘 저격병','포낭 곡사체','펄스 척후병'].forEach((n,i)=>{if(dead[i])dead[i].name=n;});
+ b.spawnState='active';b.graceUntil=0;b.x=player.x+4.2;b.y=player.y-2.2;b.speed=0;b.r1210=null;return {name:b.name,kinds:A.mapKinds(room)};});
+console.log('boss',JSON.stringify(bi));
+await p.evaluate(()=>{const b=room.enemies.find(e=>e.boss);const t=()=>{if(b.r1210)b.r1210.next=0;else setTimeout(t,30);};t();});
+for(const [tag,cond] of [['windup',"s.boss&&s.mode==='windup'&&time-s.t0>s.windup*.6"],['fire',"s.boss&&window.__STORYWORLD_DYS_RANGED_R1210__.inspect().liveDetail.some(x=>x.scale>1)&&time-s.t0<.25"],['pool',"s.boss&&s.count>=1&&time-s.t0>.8&&time-s.t0<1.4"]]){
+ await p.waitForFunction(c=>room.enemies.some(e=>{const s=e.r1210;return s&&eval(c);}),cond,{timeout:120000,polling:30}).catch(()=>console.log('timeout boss',tag));
+ await p.screenshot({path:`${SHOT}/r1210-boss-${tag}.png`});}
+console.log('bossLog',JSON.stringify(await p.evaluate(()=>window.__STORYWORLD_DYS_RANGED_R1210__.inspect().log.slice(-3))));
 console.log('errs',errs.slice(0,3),await p.evaluate(()=>window.__STORYWORLD_DYS_RANGED_R1210__.inspect().stats));await b.close();

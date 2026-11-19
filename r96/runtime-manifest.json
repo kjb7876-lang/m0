@@ -13213,6 +13213,36 @@
       "sha256": "236a5e4749d9598207dde510a4353a3ba0b897f4ed60ae4f8b5866a8ea10b8ea"
     },
     {
+      "path": "assets/r1210/index.json",
+      "bytes": 1397,
+      "sha256": "b8ce367bec25f1b3f2203673a907f19468768dcb31927da376488fc997b17761"
+    },
+    {
+      "path": "assets/r1210/laser-aim6.webp",
+      "bytes": 23894,
+      "sha256": "7743f1bebdc842ba6d4b928d7cca268a146eceac7b147288071d7bb93207f030"
+    },
+    {
+      "path": "assets/r1210/laser-body8.webp",
+      "bytes": 297552,
+      "sha256": "d40b88972c336a52fb628d42c93a14277b73ae1a04197f85a2d2151a3af1627a"
+    },
+    {
+      "path": "assets/r1210/laser-charge8.webp",
+      "bytes": 57868,
+      "sha256": "23eac57cfe24a1538ac7a6532d2d894afb8b66d81fc4d255b63da15f30e9427c"
+    },
+    {
+      "path": "assets/r1210/laser-impact8.webp",
+      "bytes": 35294,
+      "sha256": "0b57502d8783c683cc24be5aa2ba70f741e294ac5cd227a893816a9832dbfee8"
+    },
+    {
+      "path": "assets/r1210/sonic-ring.webp",
+      "bytes": 390026,
+      "sha256": "60ac05dd6e3167635857fc92b1b0fef20fe55ed748af86d999184d1ad2439b2d"
+    },
+    {
       "path": "assets/r126/props/badge.webp",
       "bytes": 25464,
       "sha256": "fd12f3e8efd3654d060607145cbd6f6f55728f7fd65afd5a9f4d3d1507ae0281"
@@ -55029,8 +55059,8 @@
     },
     {
       "path": "dys-ranged-r1210.js",
-      "bytes": 17903,
-      "sha256": "62d9d2243aefb68c602d65065b12e5f1a416d0a2c101b14e7862a14366299cf7"
+      "bytes": 20484,
+      "sha256": "d2dde2f073f686d3e8b3e87c7701c268784ed1dc2025b959b53e0190e12dc4fb"
     },
     {
       "path": "edges-r188.js",
@@ -57008,8 +57038,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11401,
-  "totalBytes": 1369503602,
+  "fileCount": 11407,
+  "totalBytes": 1370312214,
   "webHTMLSha256": "cfe0efd9f64551580a523b567573ee3841fd6450d0eb2dfe017dc6b8a1b10833",
   "largest": [
     {
