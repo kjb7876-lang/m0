@@ -7,12 +7,16 @@
 //  · 피해: 한 번 ≤ 근접 피해 e.damage×0.8, 방사능은 0.25×최대 3번. 근접형에 붙는 원거리 압박은 엔진 원거리 몹의 절반 이하(qa/r1210).
 //  · 그림(임시, Dots 시트 오기 전): 레이저 = R600 빛줄기 시트(sw0011 쪽 나눔)·시작·명중 섬광, 방사능 = R562 독안개·독웅덩이 시트, 음파 = R438 충격파 시트 + 먹선 부채꼴.
 //    예고는 먹선 + 차가운 계열 색(주황 예고 도형 금지 #712). 보스·중간보스는 건드리지 않는다.
+//  R1213(11-19): 기계 계열 나머지 지역(ep1b09·u201~u206·cult02·05·06 등)으로 넓히고 4번째 종류 '폭탄'(던진 통이 떨어진 자리에서 한 번 터짐)을 더한다.
+//    사용자 07:41Z "일반몹은 하나의 원거리 공격만해 / 각몹에맞게" → 몹마다 한 종류. 07:56Z "최대한 다채롭게" → 몹 이름마다 시트 색조를 조금씩 돌린다(hue-rotate, 차가운 계열 안).
+//    폭탄 터짐 = R411 hit-explosion 24칸을 청보라 플라스마로 다시 칠한 시트 + Dots 먹 흩어짐 12칸, 예고·통 = Dots CX-0167RA r1 ROUGH(bomb-warning8·orb-flight8).
+//    방사능 예고·포낭 = Dots green-warning8·capsule-flight8, 음파 모으기 = Dots sonic-charge6(scripts/r1213-bomb-sheet.py).
 //  끄기: localStorage['storyworld.r1210.dys']='{"on":false}'. 점검: window.__STORYWORLD_DYS_RANGED_R1210__.inspect()
 (()=>{'use strict';
 if(window.__STORYWORLD_DYS_RANGED_R1210__)return;
-const REV='R1210-dys-ranged-2',KEY='storyworld.r1210.dys';
+const REV='R1213-mech-ranged-1',KEY='storyworld.r1210.dys';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
-const stats={aims:0,fires:{laser:0,radiation:0,sonic:0},engine:0,hits:{laser:0,radiation:0,sonic:0},cancels:0,drawn:{},errors:0};let lastError=null;
+const stats={aims:0,fires:{laser:0,radiation:0,sonic:0,bomb:0},engine:0,hits:{laser:0,radiation:0,sonic:0,bomb:0},cancels:0,drawn:{},tele:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 const G=n=>{try{return Function('return typeof '+n+"!=='undefined'?"+n+':undefined')();}catch(_){return undefined;}};
 const T=()=>{const t=G('time');return typeof t==='number'?t:0;};
@@ -21,17 +25,42 @@ const hash=s=>{let h=2166136261;for(const c of String(s))h=Math.imul(h^c.charCod
 const TUNE=Object.freeze({
  laser:Object.freeze({min:3,max:7,windup:.7,dmg:.8,cd:6.2,width:.42,len:7.5,life:.32}),
  radiation:Object.freeze({min:3,max:6.5,windup:.6,dmg:.25,ticks:3,cd:7.2,radius:1.15,flight:.55,pool:2.2,gap:.5}),
- sonic:Object.freeze({min:2.6,max:5.5,windup:.55,dmg:.7,cd:6.0,speed:6,band:.45,half:.62,reach:6})});
+ sonic:Object.freeze({min:2.6,max:5.5,windup:.55,dmg:.7,cd:6.0,speed:6,band:.45,half:.62,reach:6}),
+ bomb:Object.freeze({min:3,max:6.5,windup:.65,dmg:.85,cd:6.8,radius:1.2,flight:.7,blast:.9})});
 const NAMES=Object.freeze({
  '프리즘 저격병':'laser','중장 광선포병':'laser','외계 침공군':'laser','전선 절단자 · 짙은 형상':'laser','낫팔 잠복체':'laser',
  '두족류 생체기계 침공병':'radiation','변이된 사냥개 괴수':'radiation','포낭 곡사체':'radiation','배양 공병':'radiation',
- '폐선로 태엽 군단병':'sonic','펄스 척후병':'sonic','막익 급습체':'sonic','방벽 돌진체':'sonic','원반 포획체':'sonic','심해 연산거수 · 짙은 형상':'sonic'});
+ '폐선로 태엽 군단병':'sonic','펄스 척후병':'sonic','막익 급습체':'sonic','방벽 돌진체':'sonic','원반 포획체':'sonic','심해 연산거수 · 짙은 형상':'sonic',
+ /* R1213 기계 계열 — 몸·이름에 맞게 한 종류(드론·관측·결정 = 레이저, 공명·주파수·개 = 음파, 점액·거미·공허 = 방사능, 소형 로봇·수집가·압축 = 폭탄) */
+ // ep1b09 생체 부트로더
+ '강철 턱의 사이보그 개':'sonic','걸어다니는 소형 로봇':'bomb','설원 잠복 보행기':'laser','태엽 수집자':'bomb',
+ // u201 방어의 군단 · u202 잔인한 구원
+ '전쟁기억 정찰드론':'laser','전쟁기계사냥개':'radiation','참호 공명기사':'sonic',
+ '기계화 망각거미':'radiation','복종 봉인구':'laser','감옥 공명기사':'sonic','가짜 자비 수집가':'bomb',
+ // u204 시스템의 거부권 · u205 관리자 권한 · u206 중앙 코어 이주실 · u203 기억의 문
+ '기계화 첫 기억 청람잔영':'laser','기계화 기억 공백 망령':'sonic','기계화 문턱 관측거미':'radiation',
+ '학대기록 공허체':'radiation','관리자 추적견':'laser','역전기록 수집가':'bomb',
+ '기계화 기억이주 연결자':'laser','기계화 공명술사':'sonic','입양기억 청람잔영':'radiation',
+ '이동문 청람잔영':'laser','이동문 공허잔영':'radiation','최종문 공명기사':'sonic',
+ // cult02 교주가 기다리는 전쟁 · cult05 돌아오는 현실의 기억 · cult06 처음 세웠던 목표
+ '신경 케이블 포식체':'laser','합일 주파수 결정':'sonic','과열 시냅스 점액체':'radiation','기계화 제8단계 자비 교정관':'bomb',
+ 'ID 배양 점액체':'radiation','생체기계 악몽':'bomb','본능 추출 결정':'laser','설원 아래의 기계 다리':'sonic',
+ 'SUPER EGO 판결인장':'laser','기계재판 연결자':'sonic','죄책감 압축결정':'bomb',
+ // 다른 지역에 섞여 나오는 기계 몹(kair07·cult01·ep1b08)
+ '기계화 감옥 공명기사':'sonic','기계화 복종 봉인구':'laser','전극기계수호기사':'laser'});
 const FIRST=Object.freeze([.8,2.4]),MAXLIVE=3,FIRE_HOLD=.25;
 // 보스(사용자 11-19 07:56Z): 그 맵 일반 몹들의 원거리 공격을 동시에, 이펙트·범위 1.66배. 피해는 종류별 0.6배라 세 종류를 다 맞아도 보스 근접 1.5대 이하.
-const BOSS=Object.freeze({scale:1.66,dmgK:.6,cd:7.5,windup:.9,min:2.5,max:10});
+const BOSS=Object.freeze({scale:1.66,dmgK:.6,cd:7.5,windup:.9,min:2.5,max:10,cap:1.4});
+/* R1213: 종류가 넷이면 0.6배로도 합이 1.5대를 넘는다 → 다 맞은 합이 보스 근접 1.4대가 되도록 줄인다(셋 이하는 0.6 그대로) */
+const totalOf=k=>TUNE[k].dmg*(TUNE[k].ticks||1);
+function bossK(kinds){const sum=(kinds||[]).reduce((a,k)=>a+(TUNE[k]?totalOf(k):0),0);return sum>0?Math.min(BOSS.dmgK,BOSS.cap/sum):BOSS.dmgK;}
+/* 몹 이름마다 시트 색조를 조금 돌린다(-35°~+35°) — 같은 종류라도 지역·몹마다 달라 보이게. 보스는 원색 */
+const hueOf=name=>Math.round((hash('hue:'+norm(name))-.5)*70);
 const SCALED_KEYS=['width','len','radius','band','reach','speed'];
 function scaled(kind,k=BOSS.scale){const u=TUNE[kind],o={...u};for(const key of SCALED_KEYS)if(key in o)o[key]=u[key]*k;return Object.freeze(o);}
-const norm=n=>String(n??'').replace(/\s+\d+$/,'').trim();
+/* 이름 끝 번호·'우두머리·증원·추격대·후속 증원' 꼬리는 떼고 찾는다(R1213: 지역 몹은 꼬리를 단 채로 나온다) */
+const TAIL=/\s+(?:\d+|우두머리|증원|추격대|후속 증원)$/;
+const norm=n=>{let s=String(n??'').trim();for(let i=0;i<4&&TAIL.test(s);i++)s=s.replace(TAIL,'').trim();return s;};
 function kindFor(name){const k=NAMES[norm(name)];return k||null;}
 const major=e=>!!(e&&(e.boss||e.midboss||e.persona||e.cosmic||e.trial||e.samongBoss||e.combatProfile?.major));
 function eligible(e){return !!(e&&e.hp>0&&e.spawnState==='active'&&!e.disabled&&!major(e)&&kindFor(e.name));}
@@ -62,13 +91,15 @@ function startWindup(e,s,now){const p=P();s.mode='windup';s.t0=now;s.windup=s.bo
 function fire(e,s,now){const kinds=s.boss?s.kinds:[s.kind];s.mode='fire';s.t0=now;s.count++;
  log.push([String(e.name||''),kinds.join('+'),+now.toFixed(2),s.count]);if(log.length>60)log.shift();
  s.next=now+(s.boss?BOSS.cd:TUNE[s.kind].cd)+hash((e.id||'')+':'+s.count)*.8;for(const k of kinds)launch(e,s,k,now);}
-function launch(e,s,kind,now){const k=s.boss?BOSS.scale:1,u=s.boss?scaled(kind):TUNE[kind],p=P(),dmg=(Number(e.damage)||0)*u.dmg*(s.boss?BOSS.dmgK:1),a=s.aim.a,src={x:e.x,y:e.y,owner:e.id,r1210:kind};
- stats.fires[kind]++;const base={kind,owner:e.id,scale:k,u,ox:e.x,oy:e.y,a,t0:now,dmg,src};
+function launch(e,s,kind,now){const k=s.boss?BOSS.scale:1,u=s.boss?scaled(kind):TUNE[kind],p=P(),dmg=(Number(e.damage)||0)*u.dmg*(s.boss?bossK(s.kinds):1),a=s.aim.a,src={x:e.x,y:e.y,owner:e.id,r1210:kind};
+ stats.fires[kind]++;const base={kind,owner:e.id,scale:k,u,ox:e.x,oy:e.y,a,t0:now,dmg,src,hue:s.boss?0:hueOf(e.name)};
  if(kind==='laser'){live.push({...base,len:u.len,life:u.life});if(laserHits(e.x,e.y,a,u.len,p.x,p.y,u.width)){hurtP(dmg,src);stats.hits.laser++;}}
  else if(kind==='sonic')live.push({...base,life:u.reach/u.speed,hit:false});
- else{const d=Math.min(Math.hypot(s.aim.x-e.x,s.aim.y-e.y),s.boss?BOSS.max:u.max),tx=e.x+Math.cos(a)*d,ty=e.y+Math.sin(a)*d;live.push({...base,tx,ty,life:u.flight+u.pool,ticks:0,lastTick:-9});}}
+ else{const d=Math.min(Math.hypot(s.aim.x-e.x,s.aim.y-e.y),s.boss?BOSS.max:u.max),tx=e.x+Math.cos(a)*d,ty=e.y+Math.sin(a)*d;
+  if(kind==='bomb')live.push({...base,tx,ty,life:u.flight+u.blast,hit:false});else live.push({...base,tx,ty,life:u.flight+u.pool,ticks:0,lastTick:-9});}}
 function advanceLive(now){const p=P();live=live.filter(x=>{const age=now-x.t0;if(age>x.life)return false;
  if(x.kind==='sonic'&&!x.hit){const u=x.u,r=age*u.speed;if(waveHits(x.ox,x.oy,x.a,r,p.x,p.y,u.band,u.half)){x.hit=true;hurtP(x.dmg,x.src);stats.hits.sonic++;}}
+ else if(x.kind==='bomb'&&!x.hit){if(age>=x.u.flight){x.hit=true;if(poolHits(x.tx,x.ty,x.u.radius,p.x,p.y)){hurtP(x.dmg,x.src);stats.hits.bomb++;}}}
  else if(x.kind==='radiation'){const u=x.u;if(age>=u.flight&&x.ticks<u.ticks&&now-x.lastTick>=u.gap-1e-6&&poolHits(x.tx,x.ty,u.radius,p.x,p.y)){x.ticks++;x.lastTick=now;hurtP(x.dmg,x.src);stats.hits.radiation++;}}
  return true;});}
 let lastT=-1;
@@ -93,15 +124,16 @@ if(typeof R3==='function'){const base=R3;const wrapped=function(e,...a){try{if(p
 // ---- 그리기 ----
 /* 레이저 = Dots CX-0167RA r1 ROUGH(scripts/r1210-laser-sheets.py). 방사능은 MR-05~07 오기 전 R562 독안개·독웅덩이 재사용, 음파 고리는 R438 충격파를 청회색으로 다시 칠한 것 */
 const SH=Object.freeze({laserAim:'assets/r1210/laser-aim6.webp',laserCharge:'assets/r1210/laser-charge8.webp',laserBody:'assets/r1210/laser-body8.webp',laserHit:'assets/r1210/laser-impact8.webp',
- ring:'assets/r1210/sonic-ring.webp',mist:'assets/r562/neon-toxic-mist.webp',pool:'assets/r562/dots/neon-toxic-pool.webp'});
-const COL=Object.freeze({ink:'rgba(12,14,20,.62)',laser:'#a8f4ff',rad:'#9be37a',sonic:'#c9d6f2'});
+ ring:'assets/r1210/sonic-ring.webp',blast:'assets/r1213/bomb-blast24.webp',
+ /* R1213: Dots CX-0167RA r1 ROUGH 기계 시트(가로 한 줄) */bombWarn:'assets/r1213/bomb-warning8.webp',inkBurst:'assets/r1213/ink-dispersal12.webp',orb:'assets/r1213/orb-flight8.webp',capsule:'assets/r1213/capsule-flight8.webp',greenWarn:'assets/r1213/green-warning8.webp',sonicCharge:'assets/r1213/sonic-charge6.webp',mist:'assets/r562/neon-toxic-mist.webp',pool:'assets/r562/dots/neon-toxic-pool.webp'});
+const COL=Object.freeze({ink:'rgba(12,14,20,.62)',laser:'#a8f4ff',rad:'#9be37a',sonic:'#c9d6f2',bomb:'#b8a6ff'});
 function img(path){try{const r=G('readyImage')?.(path),im=r?.image;if(!r)want(path);return im&&(im.naturalWidth||im.width)>0?im:null;}catch(_){return null;}}
 /* 엔진은 지역을 옮길 때 그 지역에 안 쓰는 그림을 imageCache 에서 내린다(R912) → 없으면 다시 부른다(부팅 중엔 부르지 않음). 디스토피아 몹을 처음 보면 미리 부른다. */
 function want(path){try{if(G('loading')||!G('started'))return;const ad=G('addImage');if(typeof ad==='function')ad(path);}catch(err){fail(err);}}
 let warmAt=-9;function warm(){const now=T();if(now-warmAt<2&&now>=warmAt)return;warmAt=now;for(const q of Object.values(SH))if(!G('readyImage')?.(q))want(q);}
 function grid(path,f,x,y,w,h,alpha){const im=img(path);if(!im)return false;const c=G('ctx'),cw=(im.naturalWidth||im.width)/6,ch=(im.height||im.naturalHeight)/4,i=((f%24)+24)%24;
  c.save();c.globalAlpha=alpha;c.drawImage(im,(i%6)*cw,Math.floor(i/6)*ch,cw,ch,x-w/2,y-h/2,w,h);c.restore();return true;}
-function strip(path,n,cell,f,x,y,size,alpha){const im=img(path);if(!im)return false;const c=G('ctx');c.save();c.globalAlpha=alpha;c.drawImage(im,(Math.max(0,Math.min(n-1,f)))*cell,0,cell,cell,x-size/2,y-size/2,size,size);c.restore();return true;}
+function strip(path,n,cell,f,x,y,size,alpha,h){const im=img(path);if(!im)return false;const c=G('ctx'),hh=h||size;c.save();c.globalAlpha=alpha;c.drawImage(im,(Math.max(0,Math.min(n-1,f)))*cell,0,cell,cell,x-size/2,y-hh/2,size,hh);c.restore();return true;}
 const unit=()=>(Number(G('TILE'))||32)*(Number(G('zoom'))||1);
 const AH=()=>{try{return G('actorHeight')?.()||60;}catch(_){return 60;}};
 function line(c,a,b,w,col,alpha){c.save();c.globalAlpha=alpha;c.strokeStyle=col;c.lineWidth=w;c.beginPath();c.moveTo(a.x,a.y);c.lineTo(b.x,b.y);c.stroke();c.restore();}
@@ -111,16 +143,19 @@ function arcs(c,o,a,r,half,col,alpha,w){/* 아이소 화면에서 부채꼴 고�
 /* 가로 스트립 시트 칸 하나를 두 점 사이에 늘여 그린다(레이저 조준선·몸통) */
 function band(path,n,f,from,to,h,alpha){const im=img(path);if(!im)return false;const c=G('ctx'),cw=(im.naturalWidth||im.width)/n,ch=im.naturalHeight||im.height,len=Math.hypot(to.x-from.x,to.y-from.y),an=Math.atan2(to.y-from.y,to.x-from.x),i=((f%n)+n)%n;
  if(!(len>1))return false;c.save();c.globalAlpha=alpha;c.translate(from.x,from.y);c.rotate(an);c.drawImage(im,i*cw,0,cw,ch,0,-h/2,len,h);c.restore();return true;}
-function drawTele(c,e,kind,u01,aim,k=1){const pr=G('project'),ah=AH(),q=pr(e.x,e.y),chest={x:q.x,y:q.y-ah*.45},g=Math.max(0,Math.min(1,u01)),now=T();
+function drawTele(c,e,kind,u01,aim,k=1){stats.tele++;const pr=G('project'),ah=AH(),q=pr(e.x,e.y),chest={x:q.x,y:q.y-ah*.45},g=Math.max(0,Math.min(1,u01)),now=T();
  if(kind==='laser'){const L=TUNE.laser.len*k,end=pr(e.x+Math.cos(aim.a)*L,e.y+Math.sin(aim.a)*L),to={x:end.x,y:end.y-ah*.35};
   /* Dots MR-04 조준선(6칸 반복) + MR-01 총구 충전(8칸, 겨누기 진행에 맞춰) */
   /* 조준선 시트는 칸(32px) 안 선이 가늘어 수묵 필터 아래 묻힌다 → 먹 밑선 + 시트 두 겹 */
   line(c,chest,to,(2+2*g)*k,COL.ink,.3+.3*g);if(band(SH.laserAim,6,Math.floor(now*14),chest,to,Math.max(10,ah*.3)*k,.6+.4*g))band(SH.laserAim,6,Math.floor(now*14)+3,chest,to,Math.max(6,ah*.16)*k,.5+.5*g);else line(c,chest,to,1.5,COL.laser,.3+.5*g);
   strip(SH.laserCharge,8,128,Math.floor(g*7.99),chest.x,chest.y,ah*(.45+.4*g)*k,.65+.35*g);}
- else if(kind==='sonic'){const half=TUNE.sonic.half;for(let j=0;j<3;j++){const r=(.5+j*.45+g*.3)*k;arcs(c,e,aim.a,r,half,COL.ink,.3*(1-j*.25),4*k);arcs(c,e,aim.a,r,half,COL.sonic,(.25+.5*g)*(1-j*.25),1.5*k);}grid(SH.ring,Math.floor(g*9.99),chest.x,chest.y,ah*.7*k,ah*.45*k,.35+.4*g);}
- else{const t=pr(aim.x,aim.y),R=TUNE.radiation.radius*k*unit();ell(c,t,R,R*.5,COL.ink,.55,false,4);ell(c,t,R,R*.5,COL.rad,.45+.4*g,false,1.5);ell(c,t,R*g,R*.5*g,COL.rad,.12+.18*g,true);grid(SH.mist,Math.floor(g*23.99),chest.x,chest.y,ah*(.4+.3*g)*k,ah*(.4+.3*g)*k,.5+.5*g);}}
+ else if(kind==='sonic'){const half=TUNE.sonic.half;for(let j=0;j<3;j++){const r=(.5+j*.45+g*.3)*k;arcs(c,e,aim.a,r,half,COL.ink,.3*(1-j*.25),4*k);arcs(c,e,aim.a,r,half,COL.sonic,(.25+.5*g)*(1-j*.25),1.5*k);}grid(SH.ring,Math.floor(g*9.99),chest.x,chest.y,ah*.7*k,ah*.45*k,.25+.3*g);strip(SH.sonicCharge,6,128,Math.floor(g*5.99),chest.x,chest.y,ah*(.5+.35*g)*k,.6+.4*g);}
+ else if(kind==='bomb'){/* 떨어질 자리: 먹 테 + 보라 테, 음파 고리 시트를 거꾸로 돌려 조여드는 고리 */const u=TUNE.bomb,d=Math.min(Math.hypot(aim.x-e.x,aim.y-e.y),k>1?BOSS.max:u.max),t=pr(e.x+Math.cos(aim.a)*d,e.y+Math.sin(aim.a)*d),R=u.radius*k*unit();
+  /* Dots 먹 고리가 감겨 닫히는 8칸(시트 원 지름 ≈ 칸의 0.68) *//* 먹 테는 늘 깐다(밝은 바닥에서도 읽히게) */ell(c,t,R,R*.5,COL.ink,.6,false,4);ell(c,t,R,R*.5,COL.bomb,.35+.4*g,false,1.5);strip(SH.bombWarn,8,256,Math.floor(g*7.99),t.x,t.y,R*2/.68,.75+.25*g,R/.68);ell(c,{x:chest.x,y:chest.y},ah*.08*k,ah*.08*k,COL.bomb,.4+.5*g,true);}
+ else{const t=pr(aim.x,aim.y),R=TUNE.radiation.radius*k*unit();/* Dots 녹색으로 차오르는 원 8칸 */ell(c,t,R,R*.5,COL.ink,.6,false,4);ell(c,t,R,R*.5,COL.rad,.35+.4*g,false,1.5);strip(SH.greenWarn,8,256,Math.floor(g*7.99),t.x,t.y,R*2/.68,.7+.3*g,R/.68);grid(SH.mist,Math.floor(g*23.99),chest.x,chest.y,ah*(.4+.3*g)*k,ah*(.4+.3*g)*k,.5+.5*g);}}
 function drawLive(c,now){const pr=G('project'),ah=AH(),U=unit();
  for(const x of live){const age=now-x.t0,K=x.scale||1;stats.drawn[x.kind]=(stats.drawn[x.kind]||0)+1;
+  const tint=x.hue?'hue-rotate('+x.hue+'deg)':'';if(tint){c.save();try{c.filter=tint;}catch(_){}}try{
   if(x.kind==='laser'){const k=Math.max(0,1-age/x.life),o=pr(x.ox,x.oy),e=pr(x.ox+Math.cos(x.a)*x.len,x.oy+Math.sin(x.a)*x.len),from={x:o.x,y:o.y-ah*.45},to={x:e.x,y:e.y-ah*.35},bh=Math.max(16,ah*.5)*K;
    /* Dots MR-02 몸통(8칸 반복, 먹 번짐 테두리 포함) */
    if(!band(SH.laserBody,8,Math.floor(age*24),from,to,bh,.5+.5*k))line(c,from,to,3,COL.laser,k);
@@ -129,10 +164,18 @@ function drawLive(c,now){const pr=G('project'),ah=AH(),U=unit();
   else if(x.kind==='sonic'){const u=x.u,r=age*u.speed,k=Math.max(0,1-age/x.life);
    for(let j=0;j<3;j++){const rr=Math.max(.2,r-j*.35*K);arcs(c,{x:x.ox,y:x.oy},x.a,rr,u.half,COL.ink,.55*k*(1-j*.3),8*K);arcs(c,{x:x.ox,y:x.oy},x.a,rr,u.half,COL.sonic,.9*k*(1-j*.3),3*K);}
    if(age<.4){const o=pr(x.ox,x.oy);grid(SH.ring,Math.floor(age*30),o.x,o.y-ah*.2,U*2.2*K,U*1.4*K,.8*(1-age/.4));}}
+  else if(x.kind==='bomb'){const u=x.u;
+   if(age<u.flight){/* 던진 통: 먹 몸 + 깜박이는 보라 심지, 포물선 */const v=age/u.flight,wx=x.ox+(x.tx-x.ox)*v,wy=x.oy+(x.ty-x.oy)*v,q=pr(wx,wy),lift=ah*(.45+1.3*v*(1-v)*2),blink=(Math.floor(age*14)%2)?1:.45;
+    if(!strip(SH.orb,8,96,Math.floor(age*16)%8,q.x,q.y-lift,U*.75*K,1)){ell(c,{x:q.x,y:q.y-lift},U*.2*K,U*.16*K,COL.ink,.7,true);ell(c,{x:q.x,y:q.y-lift-U*.1*K},U*.07*K,U*.07*K,COL.bomb,blink,true);}ell(c,q,6*K,3*K,COL.ink,.3,true);
+    const t=pr(x.tx,x.ty),R=u.radius*U;if(!strip(SH.bombWarn,8,256,7,t.x,t.y,R*2/.68,.8,R/.68))ell(c,t,R,R*.5,COL.ink,.45,false,3);ell(c,t,R*(1-v*.6),R*.5*(1-v*.6),COL.bomb,.5,false,1.5);}
+   else{const pa=age-u.flight,q=pr(x.tx,x.ty),R=u.radius*U,f=Math.floor(pa/u.blast*24);
+    if(!grid(SH.blast,Math.min(23,f),q.x,q.y-R*1.05,R*2.6,R*2.6,1))ell(c,q,R,R*.5,COL.bomb,.6*(1-pa/u.blast),true);
+    /* Dots 먹 흩어짐 12칸 — 터짐 위에 땅바닥 먹물 */strip(SH.inkBurst,12,256,Math.min(11,Math.floor(pa/u.blast*12)),q.x,q.y,R*2.4,.9,R*1.4);}}
   else{const u=x.u;
-   if(age<u.flight){const v=age/u.flight,wx=x.ox+(x.tx-x.ox)*v,wy=x.oy+(x.ty-x.oy)*v,q=pr(wx,wy),lift=ah*(.45+1.1*v*(1-v)*2);ell(c,{x:q.x,y:q.y-lift},U*.22*K,U*.22*K,COL.ink,.55,true);grid(SH.mist,Math.floor(age*20),q.x,q.y-lift,U*1.4*K,U*1.4*K,1);ell(c,{x:q.x,y:q.y-lift},U*.1*K,U*.1*K,COL.rad,.9,true);ell(c,q,5*K,2.5*K,COL.ink,.3,true);}
+   if(age<u.flight){const v=age/u.flight,wx=x.ox+(x.tx-x.ox)*v,wy=x.oy+(x.ty-x.oy)*v,q=pr(wx,wy),lift=ah*(.45+1.1*v*(1-v)*2);grid(SH.mist,Math.floor(age*20),q.x,q.y-lift,U*1.1*K,U*1.1*K,.6);if(!strip(SH.capsule,8,96,Math.floor(age*16)%8,q.x,q.y-lift,U*.8*K,1)){ell(c,{x:q.x,y:q.y-lift},U*.22*K,U*.22*K,COL.ink,.55,true);ell(c,{x:q.x,y:q.y-lift},U*.1*K,U*.1*K,COL.rad,.9,true);}ell(c,q,5*K,2.5*K,COL.ink,.3,true);}
    else{const pa=age-u.flight,k=Math.min(1,pa/.2)*Math.min(1,(u.pool-pa)/.4),q=pr(x.tx,x.ty),R=u.radius*U;
-    grid(SH.pool,Math.floor(pa*12.5),q.x,q.y,R*2.3,R*1.25,.85*k);grid(SH.mist,Math.floor(pa*12.5)+7,q.x,q.y-R*.35,R*1.4,R*1.2,.55*k);}}}}
+    grid(SH.pool,Math.floor(pa*12.5),q.x,q.y,R*2.3,R*1.25,.85*k);grid(SH.mist,Math.floor(pa*12.5)+7,q.x,q.y-R*.35,R*1.4,R*1.2,.55*k);}}
+  }finally{if(tint)c.restore();}}}
 function drawFx(){const c=G('ctx'),room=G('room');if(!c||!room||typeof G('project')!=='function')return;const now=T();
  for(const e of room.enemies||[]){if(!e||!(e.hp>0))continue;const s=e.r1210;
   if(s?.mode==='windup'&&s.aim){for(const k of (s.boss?s.kinds:[s.kind]))drawTele(c,e,k,(now-s.t0)/s.windup,s.aim,s.boss?BOSS.scale:1);}
@@ -151,6 +194,6 @@ const DEN=G('drawEnemy');if(typeof DEN==='function'){const base=DEN;try{Function
 // 방을 옮기면 남은 공격을 지운다
 let lastRoom=null;if(typeof setInterval==="function")setInterval(()=>{try{const r=G('room');if(r!==lastRoom){lastRoom=r;live=[];}}catch(_){}},500);
 function set(v){prefs={...prefs,...(v&&typeof v==='object'?v:{on:v!==false})};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}if(!prefs.on){live=[];for(const e of G('room')?.enemies||[])if(e?.r1210)e.r1210.mode=null;}return {...prefs};}
-window.__STORYWORLD_DYS_RANGED_R1210__=Object.freeze({revision:REV,set,kindFor,eligible,bossEligible,mapKinds,scaled,bossScale:BOSS.scale,boss:BOSS,laserHits,waveHits,poolHits,tune:TUNE,names:NAMES,maxLive:MAXLIVE,firstDelay:FIRST,
+window.__STORYWORLD_DYS_RANGED_R1210__=Object.freeze({revision:REV,set,kindFor,eligible,bossEligible,mapKinds,scaled,bossScale:BOSS.scale,boss:BOSS,laserHits,waveHits,poolHits,bossK,hueOf,tune:TUNE,names:NAMES,maxLive:MAXLIVE,firstDelay:FIRST,
  inspect:()=>({revision:REV,prefs:{...prefs},stats:JSON.parse(JSON.stringify(stats)),live:live.length,liveDetail:live.map(x=>({kind:x.kind,owner:x.owner,scale:x.scale})),log:log.slice(-30),lastError})});
 })();
