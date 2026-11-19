@@ -20,8 +20,8 @@
   const KINDS={
     pj01:{src:[HV+'seoha-a.webp'],size:.62,hit:1.15},
     pj02:{src:[HV+'hunter-a.webp'],size:.50,hit:1.05},/* R1102(사용자 2026-11-16 "헌터 기본화살이 너무크고"): 0.80 → 0.50(R911 최소 크기 = 영웅 키 절반) */
-    pj03:{src:[HV+'michaela-a.webp'],size:.60,hit:1.10,upright:true},
-    pj03x:{src:[HV+'michaela-a.webp'],size:.60,hit:1.10,upright:true},
+    pj03:{src:[HV+'michaela-a.webp'],size:.46,hit:1.10,upright:true},/* R1232(사용자 2026-11-19 "탄환크기 조금 줄여줘"): .60 → .46, R911 최소 크기 예외(r1232Michaela) */
+    pj03x:{src:[HV+'michaela-a.webp'],size:.46,hit:1.10,upright:true},
     pj04:{src:[HV+'gunner-laser-bullet.webp'],size:.66,hit:1.10},
     pj05:{src:[],size:.60,hit:1.05,direct:true},
     pj06:{src:[HV+'seoha-q.webp'],size:.80,hit:1.25},

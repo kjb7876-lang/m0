@@ -55899,8 +55899,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6582601,
-      "sha256": "35e2e108e4122cb883241936b2d097d75def00ae01cbf25a5bbea4fde53ddfb3"
+      "bytes": 6582650,
+      "sha256": "27263cd6ce76c943b1f222584ae1d482286bf5aff4596d8fe642e39ea82a1e3e"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -56066,6 +56066,11 @@
       "path": "michaela-r247.js",
       "bytes": 12747,
       "sha256": "b56501f9b42eb76dbe6ae6d035caf6eb69a577cefb5e125ae1100b485d7a4a5b"
+    },
+    {
+      "path": "michaela-shot-r1232.js",
+      "bytes": 5768,
+      "sha256": "a293a27aaf2dcf44c6e140312c3527da58c56f9641fc230fd8ec21af5b31f79b"
     },
     {
       "path": "midboss-puppet-r981.js",
@@ -56564,13 +56569,13 @@
     },
     {
       "path": "projectile-sheets-r912.js",
-      "bytes": 15666,
-      "sha256": "e6a3f4b447497e3f48c6e8a4efd2b6bee86154208aac52a464920ee41611a6ec"
+      "bytes": 15786,
+      "sha256": "cb60d6ab6508f0020926abb1139cdafe2773ef37c758f0e11071eda79745f50a"
     },
     {
       "path": "projectile-size-r911.js",
-      "bytes": 12461,
-      "sha256": "b1cae37ec719a9d2049e0b9d5bee094574c462d5020b27e3cb380b2d494c3ee6"
+      "bytes": 12623,
+      "sha256": "a0a691eb2a1c5c9e9fc023d5fed7ea8129da41a96baa5fcd1d8b0befc9ef7036"
     },
     {
       "path": "prop-shadow-r329.js",
@@ -57338,9 +57343,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11467,
-  "totalBytes": 1372077124,
-  "webHTMLSha256": "35e2e108e4122cb883241936b2d097d75def00ae01cbf25a5bbea4fde53ddfb3",
+  "fileCount": 11468,
+  "totalBytes": 1372083223,
+  "webHTMLSha256": "27263cd6ce76c943b1f222584ae1d482286bf5aff4596d8fe642e39ea82a1e3e",
   "largest": [
     {
       "path": "index.html",

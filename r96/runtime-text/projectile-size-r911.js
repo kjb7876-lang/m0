@@ -118,7 +118,7 @@
     const base=drawProjectile;baseRef=base;
     const wrapped=function(p,...rest){
       if(!p||typeof p!=='object')return;
-      if(inside||busy||!enabled||ctx?.__r911probe||skipZone())return base.apply(this,[p,...rest]);
+      if(inside||busy||!enabled||ctx?.__r911probe||skipZone()||p.r1232Michaela)return base.apply(this,[p,...rest]);/* R1232: 미카엘라 기본탄은 사용자 요청으로 작게(11-19 "탄환크기 조금 줄여줘") — 최소 크기로 키우지 않음 */
       stats.draws++;
       let s=state.get(p);const now=typeof time==='number'?time:0;
       if(!s||now-s.at>=CFG.remeasure||now<s.at){const m=measureWith(base,this,[p,...rest]);stats.measured++;s={at:now,m};state.set(p,s);}
