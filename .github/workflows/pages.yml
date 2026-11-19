@@ -961,6 +961,8 @@ jobs:
         run: node r96/qa/r1155/r1155-cpu-check.cjs
       - name: R1212 code-synthesised sounds (R125 samong ambience beds and events, R356 kairo clock, R568 boss reveal boom, R123 banner tick) replaced by ElevenLabs files with synth fallback CPU check
         run: node r96/qa/r1212/r1212-cpu-check.cjs
+      - name: R1229 video motion and effect bugs (enemy story-vfx shape layer removed, R241 meteors as frame sheet, projectile sheets kept across regions, Balrog one size x1.66, summoning pillar fixed, hunter walk stride) CPU check
+        run: node r96/qa/r1229/r1229-cpu-check.cjs
       - name: R1109 co-op relay build match (old R62 Render relay auto-fallback, default relay address) CPU check
         run: node r96/qa/r1109/r1109-cpu-check.cjs
       - name: R1092 story panel scene art (vertical-version scene paintings, ink-wash aware) CPU check
