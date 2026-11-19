@@ -19964,8 +19964,8 @@
     },
     {
       "path": "assets/r380/mobs/index.json",
-      "bytes": 197029,
-      "sha256": "e1aac1c6c63f85d1f1c28be8f8923eb1fd80c1ea804439825a8adcb198d290f8"
+      "bytes": 199406,
+      "sha256": "af5d4a74b592c63bbbff7c6cdc72bdb6da97baad0f2175ddfbae6634233763eb"
     },
     {
       "path": "assets/r380/mobs/jealousy-wraith-v1.webp",
@@ -20288,6 +20288,11 @@
       "sha256": "71a1b0b02ce9b925a070cc65a02ba4f74f801963279646edd5e3f4aaec9c0d1e"
     },
     {
+      "path": "assets/r380/mobs/samong-s05-cult-seal-v1.webp",
+      "bytes": 120478,
+      "sha256": "b778d548e6ed2fed21d6ad5fa33aa1c16d3fa2609cf6d29b20c4ebed66ed576a"
+    },
+    {
       "path": "assets/r380/mobs/samong-s05-wraith-jihyeon-v2.webp",
       "bytes": 117596,
       "sha256": "76e3ba366b8712758947991789dbfb8f1d995e1ee41e16aa48e9694b0dc64fd5"
@@ -20296,6 +20301,11 @@
       "path": "assets/r380/mobs/samong-s05-wraith-officer-v2.webp",
       "bytes": 134030,
       "sha256": "9620ae766082f65578c3e6fd876cf4bd23c7e8883b5d526aebba41bf9225144a"
+    },
+    {
+      "path": "assets/r380/mobs/samong-s06-command-wire-v1.webp",
+      "bytes": 129722,
+      "sha256": "adb47f62c8a231651e87e84f56f19f1d28850529394d8f7915be66643ea3cce9"
     },
     {
       "path": "assets/r380/mobs/sloth-burden-man-v1.webp",
@@ -57398,8 +57408,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11479,
-  "totalBytes": 1372566848,
+  "fileCount": 11481,
+  "totalBytes": 1372819425,
   "webHTMLSha256": "48ce40bbb20738142d1be8159d44f4143da06e8bc61590ce3075a7ea272ca4b2",
   "largest": [
     {
