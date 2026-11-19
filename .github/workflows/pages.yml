@@ -537,6 +537,8 @@ jobs:
         run: node r96/qa/r1228/r1228-cpu-check.cjs
       - name: R1230 위치 고정 적 공격 모션(몸 키프레임·발광·충전 프레임 시트) CPU check
         run: node r96/qa/r1230/r1230-cpu-check.cjs
+      - name: R1239 천사의 가면 '수천 개의 얼굴' 가면 스킬·루시퍼 그림 일관성 CPU check
+        run: node r96/qa/r1239/r1239-cpu-check.cjs
       - name: R1206 samong one mob one image, death look, one memory fragment, ink ground attack CPU check
         run: node r96/qa/r1206/r1206-cpu-check.cjs
       - name: R1226 mob motion consistency (face side, hand, size, pilgrim tint) CPU check
