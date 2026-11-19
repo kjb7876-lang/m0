@@ -1,0 +1,134 @@
+{
+ "zone": "ep1b08",
+ "names": {
+  "전극을 두른 좀비 수호기사": {
+   "rule": "hue-rotate(75deg) saturate(.75) brightness(.9)",
+   "draws": [
+    [
+     "episode1b/generated-v31342-rc39/zombie_guardian_knight_bloodied.webp",
+     "saturate(.8) hue-rotate(75deg) saturate(.75) brightness(.9)"
+    ]
+   ]
+  },
+  "창처럼 날아오는 역십자가": {
+   "rule": "hue-rotate(-32deg) saturate(1.3) brightness(.92)",
+   "draws": [
+    [
+     "episode1b/generated-v3102/ep1b08_pride_zombie.webp",
+     "saturate(.8) hue-rotate(-32deg) saturate(1.3) brightness(.92)"
+    ]
+   ]
+  },
+  "육망성의 흑마술 실험체": {
+   "rule": null,
+   "draws": [
+    [
+     "r248/mobs/m031.webp",
+     "saturate(.78) brightness(.86) contrast(1.08)"
+    ]
+   ]
+  },
+  "전극을 두른 좀비 수호기사 증원": {
+   "rule": "hue-rotate(75deg) saturate(.75) brightness(.9)",
+   "draws": [
+    [
+     "episode1b/generated-v31342-rc39/zombie_guardian_knight_bloodied.webp",
+     "saturate(.8) hue-rotate(75deg) saturate(.75) brightness(.9)"
+    ]
+   ]
+  },
+  "창처럼 날아오는 역십자가 증원": {
+   "rule": "hue-rotate(-32deg) saturate(1.3) brightness(.92)",
+   "draws": [
+    [
+     "episode1b/generated-v3102/ep1b08_pride_zombie.webp",
+     "saturate(.8) hue-rotate(-32deg) saturate(1.3) brightness(.92)"
+    ]
+   ]
+  },
+  "전극을 두른 좀비 수호기사 추격대": {
+   "rule": "hue-rotate(75deg) saturate(.75) brightness(.9)",
+   "draws": []
+  },
+  "창처럼 날아오는 역십자가 추격대": {
+   "rule": "hue-rotate(-32deg) saturate(1.3) brightness(.92)",
+   "draws": []
+  },
+  "육망성의 흑마술 실험체 추격대": {
+   "rule": null,
+   "draws": []
+  },
+  "전극을 두른 좀비 수호기사 후속 증원": {
+   "rule": "hue-rotate(75deg) saturate(.75) brightness(.9)",
+   "draws": []
+  },
+  "창처럼 날아오는 역십자가 후속 증원": {
+   "rule": "hue-rotate(-32deg) saturate(1.3) brightness(.92)",
+   "draws": []
+  },
+  "역십자가 시체경호체": {
+   "rule": null,
+   "draws": []
+  },
+  "백색 정장의 호텔 그룹 회장": {
+   "rule": null,
+   "draws": []
+  },
+  "유리 망령": {
+   "rule": null,
+   "draws": [
+    [
+     "r410/mobs/m018.webp",
+     "saturate(.78) brightness(.86) contrast(1.08)"
+    ]
+   ]
+  },
+  "유리 망령 우두머리": {
+   "rule": null,
+   "draws": [
+    [
+     "r410/mobs/m018.webp",
+     "saturate(.78) brightness(.86) contrast(1.08)"
+    ]
+   ]
+  },
+  "육망성의 흑마술 실험체 우두머리": {
+   "rule": null,
+   "draws": [
+    [
+     "r248/mobs/m031.webp",
+     "saturate(.78) brightness(.86) contrast(1.08)"
+    ]
+   ]
+  },
+  "전극을 두른 좀비 수호기사 우두머리": {
+   "rule": "hue-rotate(75deg) saturate(.75) brightness(.9)",
+   "draws": [
+    [
+     "episode1b/generated-v31342-rc39/zombie_guardian_knight_bloodied.webp",
+     "saturate(.8) hue-rotate(75deg) saturate(.75) brightness(.9)"
+    ]
+   ]
+  },
+  "창처럼 날아오는 역십자가 우두머리": {
+   "rule": "hue-rotate(-32deg) saturate(1.3) brightness(.92)",
+   "draws": [
+    [
+     "episode1b/generated-v3102/ep1b08_pride_zombie.webp",
+     "saturate(.8) hue-rotate(-32deg) saturate(1.3) brightness(.92)"
+    ]
+   ]
+  }
+ },
+ "inspect": {
+  "revision": "R1183-dup-tint-1",
+  "on": true,
+  "stats": {
+   "tinted": 504,
+   "draws": 0,
+   "wraps": 9,
+   "errors": 0
+  },
+  "lastError": null
+ }
+}

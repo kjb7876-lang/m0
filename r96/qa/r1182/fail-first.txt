@@ -1,0 +1,36 @@
+FAIL 피격 중 사망 u203-e2-mech → MD-34 (null)
+FAIL 좌우 유지 u203-e2-mech
+FAIL 피격 중 사망 dys-scythe-v1 → DY-01 (null)
+FAIL 좌우 유지 dys-scythe-v1
+FAIL 피격 중 사망 dys-sacshell-v1 → DY-02 (null)
+FAIL 좌우 유지 dys-sacshell-v1
+FAIL 피격 중 사망 dys-membrane-v1 → DY-03 (null)
+FAIL 좌우 유지 dys-membrane-v1
+FAIL 피격 중 사망 dys-bulwark-v2 → DY-04 (null)
+FAIL 좌우 유지 dys-bulwark-v2
+FAIL 피격 중 사망 dys-disc-v2 → DY-05 (null)
+FAIL 좌우 유지 dys-disc-v2
+FAIL 피격 중 사망 dys-engineer-v2 → DY-06 (null)
+FAIL 좌우 유지 dys-engineer-v2
+FAIL 피격 중 사망 dys-pulse-raider-v2 → DY-07 (null)
+FAIL 좌우 유지 dys-pulse-raider-v2
+FAIL 피격 중 사망 dys-prism-stalker-v2 → DY-08 (null)
+FAIL 좌우 유지 dys-prism-stalker-v2
+FAIL 피격 중 사망 dys-siege-gunner-v2 → DY-09 (null)
+FAIL 좌우 유지 dys-siege-gunner-v2
+FAIL 피격 중 사망 u204-mech-01-v1 → MM-01 (null)
+FAIL 좌우 유지 u204-mech-01-v1
+FAIL 피격 중 사망 u204-mech-02-v1 → MM-02 (null)
+FAIL 좌우 유지 u204-mech-02-v1
+FAIL 피격 중 사망 u204-mech-03-v1 → MM-03 (null)
+FAIL 좌우 유지 u204-mech-03-v1
+FAIL 피격 중 사망 u206-mech-01-v1 → MM-05 (null)
+FAIL 좌우 유지 u206-mech-01-v1
+FAIL 피격 중 사망 u206-mech-02-v1 → MM-06 (null)
+FAIL 좌우 유지 u206-mech-02-v1
+FAIL 피격 중 사망 war-machine-hound-v1 → MM-07 (null)
+FAIL 좌우 유지 war-machine-hound-v1
+FAIL 피격 중 사망 electrode-machine-knight-v1 → MM-08 (null)
+FAIL 좌우 유지 electrode-machine-knight-v1
+FAIL pages.yml
+FAILED 35/41

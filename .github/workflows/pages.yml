@@ -703,6 +703,10 @@ jobs:
         run: node r96/qa/r1169/dys-cpu-check.cjs
       - name: R1170 machine mobs hit4 (7) + death6 (8) = Dots CX-0159MM r1 ROUGH (colour and body height matched, halo keyed out; art only) CPU check
         run: node r96/qa/r1170/mech-cpu-check.cjs
+      - name: R1182 death sheet still picked when a mob dies during its hit4 frames (hit sheet path mapped back to the live art; art only) CPU check
+        run: node r96/qa/r1182/hit-death-alias-cpu-check.cjs
+      - name: R1183 duplicate mobs tinted until Dots CX-0163DU art arrives (body image only, filters the 3D recorder accepts) CPU check
+        run: node r96/qa/r1183/dup-tint-cpu-check.cjs
       - name: R1098 samong faces (Michaela final boss uses her own sheet, R161 puppet repainted as an ink-and-white-thread doll so it no longer looks like Hwando) CPU check
         run: node r96/qa/r1098/r1098-cpu-check.cjs
       - name: R1090 character ink tint (hero and mob body images only, follows the map ink wash, settings toggle, effects and telegraphs untouched) CPU check
@@ -887,6 +891,8 @@ jobs:
         run: node r96/qa/r1092/r1092-cpu-check.cjs
       - name: R1040 boss pattern frame fx CPU check
         run: node r96/qa/r1040/boss-pattern-fx-cpu-check.cjs
+      - name: R1192 boss effect visibility (meteor alpha curve, no R181 dimming, contrast underlay) CPU check
+        run: node r96/qa/r1192/r1192-boss-fx-vis-cpu-check.cjs
       - name: R1042 lust boss kiss lips attack (telegraph, 66 percent of current HP, frame sheets) CPU check
         run: node r96/qa/r1042/kiss-lips-cpu-check.cjs
       - name: R1053 enemy combat rules (bosses close in and face the hero, attack super armour, hit-stagger cap) CPU check
