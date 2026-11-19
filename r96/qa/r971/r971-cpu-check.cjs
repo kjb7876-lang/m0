@@ -1,4 +1,5 @@
 // R971 CPU 검사: 영웅 특수 패시브(확률 발동) 강화 — 사용자 2026-11-13 00:47Z "영웅들 특수패시브스킬도 확률등 스킬포인트로 업그레이드 가능하도록".
+//  ※ R1207(2026-11-19 사용자 지시 동작 변경): 재발동 대기 ×(1−0.07·단계)(최대 ×0.51), 확률이 0단계 11.1% → 7단계 77.7% 곡선(예전 값이 더 높으면 유지)·합계 상한 77.7% 로 바뀌어 해당 기대값을 고쳤다.
 //  · 기존 패시브 포인트(R62 P 창)에 카드 하나('heroPassiveR971')를 더한다. 1~7단계(사용자 01:24Z "7단계7프로씩"), 비용 = 다음 단계(1~7점, 합 28점).
 //  · 단계마다 발동 확률 +7%(×(1+0.07·단계), 최대 ×1.49), 한 굴림 합계 40% 이하(절대 상한), 모듈 자체 상한(CHANCE_MAX)은 그대로.
 //    재발동 대기는 ×(1−0.03·단계)(최대 ×0.79).
@@ -65,31 +66,31 @@ if(A.api){const g=A.api,d=A.defs.find(x=>x.id===ID);
  const names={hwando:'묵월',lauren:'천체 공명',slayer:'혈침',michaela:'사랑의 처방',seoha:'겹친 시간',neon:'독전 회로',hunter:'사냥 분대',gunner:'잔영 위장'};
  let nm=true;for(const[h,w]of Object.entries(names)){A.ctx.player.hero=h;if(!String(d.name).includes(w)||!/확률/.test(String(d.text)))nm=false;}A.ctx.player.hero='hwando';
  ok('카드 이름에 지금 영웅의 특수 패시브 이름, 설명에 확률',nm);
- ok('설명 첫 문장이 수치(모음 보기 한 줄)',/^발동 확률 ×/.test(d.text));
- ok('설명에 단계당 +7%·상한 40%',/7%/.test(d.text)&&/40%/.test(d.text));
- A.ranks[ID]=2;ok('설명에 지금 → 다음 단계',/×1\.14/.test(d.text)&&/×1\.21/.test(d.text));
+ ok('설명 첫 문장이 수치(모음 보기 한 줄)',/^발동 확률 \d/.test(d.text));/* R1207 사용자 지시 동작 변경: ×배율 → 11.1%~77.7% 확률 */
+ ok('설명에 기본 11.1%·7단계 77.7%(R1207)',/11\.1%/.test(d.text)&&/77\.7%/.test(d.text));
+ A.ranks[ID]=2;ok('설명에 지금 → 다음 단계(R1207 30.1% → 39.6%)',/30\.1%/.test(d.text)&&/39\.6%/.test(d.text));
  // 0단계 = 원래 값 그대로
  A.ranks[ID]=0;
  const base=[.18,.06,.03];ok('0단계: 확률 그대로(같은 값)',JSON.stringify(g.chances('hwando',base))===JSON.stringify(base));
  ok('0단계: 대기 그대로',g.cooldown('hwando',7)===7&&g.cooldown('hunter',21)===21);
  // 단계별
- for(const k of [1,3,7]){A.ranks[ID]=k;const v=g.chances('lauren',[.10]);ok(k+'단계 라우렌 10% → '+(v[0]*100).toFixed(2)+'%',near(v[0],.10*(1+.07*k)));
-  ok(k+'단계 대기 ×'+(1-.03*k).toFixed(2),near(g.cooldown('lauren',5),5*(1-.03*k)));}
+ for(const k of [1,3,7]){A.ranks[ID]=k;const v=g.chances('lauren',[.10]);ok(k+'단계 라우렌 10% → '+(v[0]*100).toFixed(2)+'% (R1207 곡선 11.1%→77.7%)',near(v[0],.111+.666*k/7));
+  ok(k+'단계 대기 ×'+(1-.07*k).toFixed(2)+'(R1207-2)',near(g.cooldown('lauren',5),5*(1-.07*k)));}
  A.ranks[ID]=7;
- ok('7단계 최대 ×1.49: 서하 5% → 7.45%',near(g.chances('seoha',[.05])[0],.0745));
+ ok('7단계 최대: 서하 5% → 77.7%(R1207)',near(g.chances('seoha',[.05])[0],.777));
  const hw=g.chances('hwando',[.18,.06,.03]),hs=hw.reduce((a,b)=>a+b,0);
- ok('7단계 환도 합 27% → 40%(절대 상한, ×1.49면 40.23%) = '+(hs*100).toFixed(2),near(hs,.40));
+ ok('7단계 환도 합 27% → 77.7%(R1207 상한) = '+(hs*100).toFixed(2),near(hs,.777));
  ok('여러 갈래는 비율 그대로 늘림',near(hw[0]/hw[1],3)&&near(hw[1]/hw[2],2));
- ok('갈래마다 원래 ×1.49 이하',hw.every((v,i)=>v<=base[i]*1.49+1e-12));
- const mh=g.chances('michaela',[.11]);ok('7단계 미카엘라 11% → 16.39%',near(mh[0],.1639));
- const sl=g.chances('slayer',[.2,.08,.04]);ok('슬레이어 32% → 40%(상한)',near(sl.reduce((a,b)=>a+b,0),.40));
- const big=g.chances('x',[.30,.08]);ok('절대 상한: 합 40% 넘지 않음(38% → '+(big.reduce((a,b)=>a+b,0)*100).toFixed(1)+'%)',big.reduce((a,b)=>a+b,0)<=.40+1e-12);
- const over=g.chances('x',[.5]);ok('원래 40% 넘던 값은 줄이지도 늘리지도 않음',over[0]===.5);
- ok('대기 최저 ×0.79',near(g.cooldown('hunter',21),16.59)&&g.cooldown('hunter',21)>=7);
+ ok('갈래마다 원래 ×(77.7/27) 이하(R1207)',hw.every((v,i)=>v<=base[i]*.777/.27+1e-12));
+ const mh=g.chances('michaela',[.11]);ok('7단계 미카엘라 11% → 77.7%(R1207)',near(mh[0],.777));
+ const sl=g.chances('slayer',[.2,.08,.04]);ok('슬레이어 32% → 77.7%(R1207 상한)',near(sl.reduce((a,b)=>a+b,0),.777));
+ const big=g.chances('x',[.30,.08]);ok('절대 상한: 합 77.7% 넘지 않음(R1207, 38% → '+(big.reduce((a,b)=>a+b,0)*100).toFixed(1)+'%)',big.reduce((a,b)=>a+b,0)<=.777+1e-12);
+ const over=g.chances('x',[.9]);ok('원래 77.7% 넘던 값은 줄이지도 늘리지도 않음(R1207)',near(over[0],.9));
+ ok('대기 최저 ×0.51(R1207-2)',near(g.cooldown('hunter',21),10.71)&&g.cooldown('hunter',21)>=7);
  // 경계·나쁜 값
- A.ranks[ID]=99;ok('단계는 7로 잘림',near(g.chances('seoha',[.05])[0],.0745));
- A.ranks[ID]=NaN;ok('단계 NaN → 0',g.chances('seoha',[.05])[0]===.05);
- A.ranks[ID]=-3;ok('음수 단계 → 0',g.chances('seoha',[.05])[0]===.05&&g.cooldown('seoha',14)===14);
+ A.ranks[ID]=99;ok('단계는 7로 잘림',near(g.chances('seoha',[.05])[0],.777));
+ A.ranks[ID]=NaN;ok('단계 NaN → 0(R1207 0단계 11.1%)',near(g.chances('seoha',[.05])[0],.111));
+ A.ranks[ID]=-3;ok('음수 단계 → 0(R1207 0단계 11.1%)',near(g.chances('seoha',[.05])[0],.111)&&g.cooldown('seoha',14)===14);
  A.ranks[ID]=7;
  const bad=g.chances('x',[NaN,-1,Infinity,.1]);ok('나쁜 확률 값은 유한·0 이상으로',bad.every(v=>Number.isFinite(v)&&v>=0));
  ok('빈 배열·배열 아님 안전',Array.isArray(g.chances('x',[]))&&g.chances('x',[]).length===0&&Array.isArray(g.chances('x',null)));
@@ -97,8 +98,8 @@ if(A.api){const g=A.api,d=A.defs.find(x=>x.id===ID);
  // 배치·소환 몸(R720·R949·R952): 몸이 player 자리에 끼워져도 조종 영웅 단계를 쓴다
  A.ranks[ID]=4;g.chances('hwando',[.1]);// 조종 영웅 단계 기억
  const main=A.ctx.player;A.ctx.player={hero:'slayer',r720Ally:true,__ranks:{}};
- ok('배치 영웅 몸: 조종 영웅 단계(4) 사용',near(g.chances('slayer',[.2])[0],.2*(1+.07*4)));
- A.ctx.player={hero:'slayer',r949Summon:true,__ranks:{}};ok('소환 영웅 몸: 조종 영웅 단계 사용',near(g.cooldown('slayer',6),6*(1-.12)));
+ ok('배치 영웅 몸: 조종 영웅 단계(4) 사용(R1207 슬레이어 기본 32% 대비 비율)',near(g.chances('slayer',[.2])[0],.2*(.111+.666*4/7)/.32));
+ A.ctx.player={hero:'slayer',r949Summon:true,__ranks:{}};ok('소환 영웅 몸: 조종 영웅 단계 사용',near(g.cooldown('slayer',6),6*(1-.28)));
  A.ctx.player=main;
  // 끄기
  A.ranks[ID]=7;g.set(false);ok('끄면 원래 값',g.chances('seoha',[.05])[0]===.05&&g.cooldown('seoha',14)===14);g.set(true);

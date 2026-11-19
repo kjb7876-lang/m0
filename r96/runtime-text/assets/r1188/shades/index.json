@@ -11,7 +11,7 @@
    "sourceSha256": "37aa419f1f5cdc779334c2f9f7c2b786355dcb69fabe776af29af64f305ef150",
    "sha256": "1449f5f2282974f439ded7b874d62d561a8fd5a7816bb6268d5e6a940027f5b6",
    "bytes": 162474,
-   "minEdgeMargin": 35,
+   "minEdgeMargin": 20,
    "path": "assets/r1188/shades/tram-passenger.webp",
    "cell": [
     256,
@@ -33,7 +33,7 @@
    "sourceSha256": "bc57eea440beab5623364547ce72c12957eb909f94c0d34e6cb2100d02ce46e0",
    "sha256": "9152d2cd750ccf10978296f3071f4bf13c57bfe643ae071463c1265f36e95d6b",
    "bytes": 264988,
-   "minEdgeMargin": 52,
+   "minEdgeMargin": 20,
    "path": "assets/r1188/shades/cephalopod-invader.webp",
    "cell": [
     256,
@@ -55,7 +55,7 @@
    "sourceSha256": "1ada913d2f8966cbbc1fa0271abef1dae8ca2e36b6c76e4d09b67966e0a8534f",
    "sha256": "ccb685f143eab8bafd45a52cef200bb966fb27e22850df4be50b28624df46d57",
    "bytes": 175566,
-   "minEdgeMargin": 61,
+   "minEdgeMargin": 20,
    "path": "assets/r1188/shades/mannequin.webp",
    "cell": [
     256,

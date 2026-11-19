@@ -14,7 +14,7 @@
  *  판정·확률·피해·키는 건드리지 않는다(R946 그대로). 렉: DOM 노드 6개, 그리기 루프 없음, 형상일 때만 그림 3장 미리 읽음. */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_PERSONA_CUTIN_R1174__)return;
-const REV='R1174-persona-cutin-2-dots',FIELD='personaHeroR1113',BASE='lauren',MS=1250,AWAKE_MS=1650;
+const REV='R1174-persona-cutin-3-nocrop',FIELD='personaHeroR1113',BASE='lauren',MS=1250,AWAKE_MS=1650;
 const G=(f,d)=>{try{const v=f();return v===undefined?d:v;}catch(_){return d;}};
 // Dots CX-0153PC 가 오면 dots 경로를 채운다(그림만 교체). 임시: rc133 페르소나 각성 그림(344×400 투명) + R1107 페르소나 시트(6×4, 192칸).
 const ART=Object.freeze({bust:Object.freeze({temp:'assets/rc133/art/awake-0.png',dots:'assets/r1174/persona-bust.webp'}),awake:Object.freeze({temp:'assets/rc133/art/awake-0.png',dots:'assets/r1174/persona-awake.webp'}),
@@ -34,7 +34,7 @@ const pl=()=>G(()=>typeof player==='object'&&player?player:null,null);
 const doc=()=>G(()=>typeof document!=='undefined'&&document&&typeof document.createElement==='function'&&document.body?document:null,null);
 // 색: 언주 #cc3428(204,52,40) · 흑 #0b0606 · 검빨 #5a0c12(90,12,18)
 const CSS=[
- '#r1174Cutin{position:fixed;left:0;right:0;top:13vh;height:min(30vh,250px,31vw);pointer-events:none;z-index:45;display:flex;justify-content:center;align-items:flex-end;opacity:0;visibility:hidden;contain:layout paint}',
+ '#r1174Cutin{position:fixed;left:0;right:0;top:13vh;height:min(30vh,250px,31vw);pointer-events:none;z-index:45;display:flex;justify-content:center;align-items:flex-end;opacity:0;visibility:hidden;contain:layout}', // R1209: paint 를 빼야 150% 높이 상반신 머리·손이 띠 상자에서 안 잘림,
  '#r1174Cutin::before{content:"";position:absolute;left:-6%;right:-6%;top:8%;bottom:3%;background:linear-gradient(90deg,transparent 0%,rgba(11,6,6,.95) 20%,rgba(11,6,6,.95) 80%,transparent 100%);transform:skewY(-2.5deg);-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 24%,#000 80%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0%,#000 24%,#000 80%,transparent 100%)}',
  '#r1174Cutin::after{content:"";position:absolute;left:8%;right:8%;top:20%;bottom:9%;transform:skewY(-2.5deg);opacity:.9;-webkit-mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent);mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent)}',
  '#r1174Cutin[data-look="orbit"]::after{background:radial-gradient(ellipse 46% 34% at 50% 58%,transparent 0 92%,rgba(204,52,40,.75) 93% 95%,transparent 96%),radial-gradient(ellipse 30% 22% at 50% 58%,transparent 0 90%,rgba(204,52,40,.45) 91% 94%,transparent 95%),radial-gradient(ellipse at 50% 62%,rgba(90,12,18,.6),transparent 64%)}',

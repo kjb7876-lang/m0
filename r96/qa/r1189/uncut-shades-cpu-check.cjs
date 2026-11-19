@@ -21,6 +21,8 @@ function pick(C,zone,id){for(let i=0;i<400;i++){const e={id:'m'+i,name:'x',hp:10
    r.e.attack=null;r.e.moving=true;let mx=0;for(let t=0;t<40;t++){C.time=t*.07;mx=Math.max(mx,C.__STORYWORLD_STORY_COMBAT_R54__.frameFor(r.e,null).assetFrame.sourceRect[0]/256);}ok(mx<=4,'① '+id+' 걷기는 0~4칸만(새 시트 칸 나눔) (최대 '+mx+')');}
   const D=await world(z,{uncut:false});const d=pick(D,z,id);ok(d&&d.f.path==='assets/r200/shades/'+id+'.webp','② '+id+' 끄면 원래 그림');}
  {const C=await world('sz115-RG-1');const m=INDEX.mobs.find(m=>m.zone==='RG'&&!['wire-bound-dead'].includes(m.id));const o=m&&pick(C,'sz115-RG-1',m.id);ok(o&&o.f.path===m.path,'② 다른 잔영('+(m&&m.id)+') 그대로');}
+ {const C=await world('sz115-S01-2');const r=pick(C,'sz115-S01-2','mannequin');const P=()=>C.__STORYWORLD_STORY_COMBAT_R54__.frameFor(r.e,null).path,A=C.__STORYWORLD_SAMONG_SHADES_R200__;const p1=r&&P();A.set({uncut:false});const p2=r&&P();A.set({uncut:true});const p3=r&&P();
+  ok(p1==='assets/r1188/shades/mannequin.webp'&&p2==='assets/r200/shades/mannequin.webp'&&p3===p1,'② 켜기·끄기가 새로고침 없이 바로 먹음 ('+[p1,p2,p3].join(' → ')+')');}
  {const C=await world('sz115-S05-2');const r=pick(C,'sz115-S05-2','tram-passenger');ok(r&&r.f.path==='assets/r1188/shades/tram-passenger.webp','② R1188 3종 그대로');}
  let S=null;try{S=JSON.parse(cp.execFileSync('python3',['-c',`import sys,json
 from PIL import Image

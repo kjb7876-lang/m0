@@ -68,7 +68,7 @@ const bodyOf=s=>s.body||P();
 const busy=s=>s.needles.length||s.swords.length||s.lattice||s.crosses.length;
 function wipe(s){s.needles.length=0;s.swords.length=0;s.lattice=null;s.crosses.length=0;}
 // ---- 피해 ----------------------------------------------------------------------------------------------------
-function strike(s,e,mult,base,tag,id){if(!solo()){s.stats.coopSkipped++;return false;}if(typeof hitEnemy!=='function'||!e||!(e.hp>0))return false;const dmg=base*mult;if(!(dmg>0))return false;
+function strike(s,e,mult,base,tag,id){if(!solo()){s.stats.coopSkipped++;return false;}if(typeof hitEnemy!=='function'||!e||!(e.hp>0))return false;const dmg=base*mult*M1207(HERO);if(!(dmg>0))return false;
  if(typeof damageable3==='function'&&!damageable3(e))return false;const old=e.hp,ok=hitEnemy(e,dmg,{kind:'story-slayer-blood-r947',attackKind9:'skill',friendly:true,owner:'hero',sourceHero:HERO,sourceSlot:'a',attackId9:'r947:'+id,r947:tag});
  if(ok&&old>e.hp){s.stats.hits++;s.stats.damage+=old-e.hp;try{if(typeof floatText==='function')floatText(Math.round(old-e.hp),e.x,e.y);}catch(_){}}return ok;}
 // ---- 그림 목록·표지 ------------------------------------------------------------------------------------------
@@ -80,6 +80,7 @@ function disarm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)){c
 function clearAll(){for(const s of states())wipe(s);vis.length=0;disarm();}
 // ---- 발동 ----------------------------------------------------------------------------------------------------
 const G971=(h,a)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.chances(h,a);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},D971=(h,s)=>{try{const g=window.__STORYWORLD_PASSIVE_GROWTH_R971__,v=g&&g.cooldown(h,s);return Number.isFinite(v)&&v>0?v:s;}catch(_){return s;}};/* R971 특수 패시브 강화(0단계=원래 값) */
+const M1207=h=>{try{const v=window.__STORYWORLD_PASSIVE_GROWTH_R971__?.damage?.(h);return Number.isFinite(v)&&v>0?Math.min(1,v):1;}catch(_){return 1;}};/* R1207 확률 상향만큼 고정 피해 배율(체력 비례 피해에는 안 씀) */
 const U1025=(h,a,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__,v=u&&u.mask(h,a,k);return Array.isArray(v)&&v.length===a.length&&v.every(x=>Number.isFinite(x)&&x>=0)?v:a;}catch(_){return a;}},S1025=h=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.share(h);return Number.isFinite(v)?Math.max(0,Math.min(1,v)):1;}catch(_){return 1;}},W1025=(h,w)=>{try{const v=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__?.weights(h,w);return v||w;}catch(_){return w;}},A1025=(h,k)=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.unlocked(h,k)!==false:true;}catch(_){return true;}},O1025=id=>{try{const u=window.__STORYWORLD_PASSIVE_UNLOCK_R1025__;return u?u.summonOpen(id)!==false:true;}catch(_){return true;}};/* R1025 특수 패시브 레벨별 해금·소환 영웅 서사 확인(파일 없으면 원래 값) */
 const C1033=(h,k,o,x)=>{try{window.__STORYWORLD_PASSIVE_CUTIN_R1033__?.fire(h,k,o,x);}catch(_){}};/* R1033 세 번째 특수 패시브 컷인(1·2단·몸·끔은 그쪽에서 거름) */
 function pick(s){if(s.force){const k=s.force;s.force=null;return k;}

@@ -24,7 +24,7 @@ def main(raw):
             c = a.crop((k * W, 0, k * W + W, H)); c.putalpha(c.getchannel('A').point(lambda v: 0 if v <= 16 else v)); b = bb(c)
             dy = FOOT - b[3] if b else 0; out.paste(c, (k * W, dy))
             if b:
-                edge = min(edge, b[0], W - b[2], b[1] + dy)
+                edge = min(edge, b[0], W - b[2], b[1] + dy, H - (b[3] + dy))
                 if k in old['move']: hs.append(b[3] - b[1]); xs.append((b[0] + b[2]) / 2)
         ohs = [(lambda b: b[3] - b[1])(bb(o.crop((k * ow, 0, k * ow + ow, oh)))) for k in old['move']]
         vh = round(old['visibleHeight'] * st.median(hs) / st.median(ohs), 1)

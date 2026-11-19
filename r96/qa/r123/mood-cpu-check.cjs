@@ -42,7 +42,8 @@ check('higher floor → darker/narrower (height grows with floor)',M.heightOf('G
 const ns=ids.filter(id=>id.startsWith('sz115-S06-'));
 check('S-06: every zone is tied to its DYS section (DYS-01~DYS-13)',ns.length===23&&ns.every(id=>/^DYS-(0[1-9]|1[0-3])$/.test(T[id]?.sec||'')),ns.map(id=>T[id]?.sec).join(','));
 const yr=sec=>T[ns.find(id=>T[id].sec===sec)].ns;
-check('DYS banners show the canon section title (no invented years)',yr('DYS-01').year===null&&yr('DYS-01').label==='침공'&&yr('DYS-13').label==='기록이 끝난 자리',JSON.stringify([yr('DYS-01'),yr('DYS-13')]));
+// R1208(사용자 2026-11-19 지시로 동작 변경): DYS 배너는 원문 제목 + 서사 연도 표(2037~)를 보여 준다. 제목 글은 그대로.
+check('DYS banners show the canon section title with the R1208 story year',yr('DYS-01').year==='2037'&&yr('DYS-13').year==='????'&&yr('DYS-01').label==='침공'&&yr('DYS-13').label==='기록이 끝난 자리',JSON.stringify([yr('DYS-01'),yr('DYS-13')]));
 const eras=ns.map(id=>T[id].key);let switches=0;for(let i=1;i<eras.length;i++)if(eras[i]!==eras[i-1])switches++;
 check('eras (기계 폐허 · 데이터 · 원룸의 빛) alternate across the 23 zones',['machine','data','forest'].every(e=>eras.includes(e))&&switches>=6,eras.join(' '));
 // ---- 장미의 집 · 학교 · 호러 만화 · 화가 ----

@@ -517,6 +517,8 @@ jobs:
         run: node r96/qa/r1181/r1181-gem-thin-cpu-check.cjs
       - name: R1195 mob cut feet and edges covered by ink mist CPU check
         run: node r96/qa/r1195/feet-ink-cpu-check.cjs
+      - name: R1206 samong one mob one image, death look, one memory fragment, ink ground attack CPU check
+        run: node r96/qa/r1206/r1206-cpu-check.cjs
       - name: R976 samong first region pixel art to painted assets CPU check
         run: node r96/qa/r976/r976-cpu-check.cjs
       - name: R1177 samong episode pixel leftovers (S-06 pixel mobs, pixelfx sheets) to painted art CPU check
@@ -625,6 +627,8 @@ jobs:
         run: node r96/qa/r972/r972-cpu-check.cjs
       - name: R971 hero special passive growth CPU check
         run: node r96/qa/r971/r971-cpu-check.cjs
+      - name: R1207 special passive chance 11.1%->77.7% with fixed damage scaled down (HP-ratio damage kept) CPU check
+        run: node r96/qa/r1207/r1207-cpu-check.cjs
       - name: R1025 hero special passive level unlock CPU check
         run: node r96/qa/r1025/r1025-cpu-check.cjs
       - name: R1033 third special passive cut-in (7 heroes, shared DOM band like Hwando trio; bodies/scenes/off skipped; 8s story / 20s survival gap) CPU check
@@ -791,6 +795,8 @@ jobs:
         run: node r96/qa/r1203/r1203-cpu-check.cjs
       - name: R1202 R101 aura drawn once per frame for hero clones at perf steps 1-5 CPU check
         run: node r96/qa/r1202/r1202-cpu-check.cjs
+      - name: R1208 dystopia (S-06) zone banners show story years instead of DYS-xx CPU check
+        run: node r96/qa/r1208/r1208-cpu-check.cjs
       - name: R1014 survival mid-boss no longer sticks at the 70% phase gate under the 6%/s damage cap CPU check
         run: node r96/qa/r1014/r1014-cpu-check.cjs
       - name: R1135 survival boss count per difficulty (easy 1, normal 2, hard 3, nightmare 6), per-boss balance with the 66x floor, spread spawn spots CPU check
