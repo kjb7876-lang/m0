@@ -8906,6 +8906,62 @@
    ],
    "status": "Dots CX-0175SB ROUGH r1 (R1218b)",
    "finalArt": false
+  },
+  {
+   "id": "samong-p2-core-root-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/samong-p2-core-root-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 9,
+   "pivot": [
+    128.0,
+    236.0
+   ],
+   "visibleHeight": 90.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    8
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^코어 아래의 검은 뿌리$",
+    "boss": true,
+    "samong": "."
+   },
+   "bytes": 77198,
+   "sha256": "8b013499eeb8de3c5cfb9d6022ffdda466709e0765787ac20a9dd04bafabb380",
+   "source": [
+    {
+     "file": "CX-0175SB-04_core-black-root_idle4_r1_ROUGH.png",
+     "sha256": "ab3a87a439ec2bd84e7bb48275e9211e6f327b16cf477d7dd744908badc5bdbe"
+    },
+    {
+     "file": "CX-0175SB-04_core-black-root_move4_r1_ROUGH.png",
+     "sha256": "9806f891b26555a61ec58c2283b94be1ef575e2efe19b2fc93c8b6d7d4b84f3d"
+    },
+    {
+     "file": "CX-0175SB-04_core-black-root_attack4_r1_ROUGH.png",
+     "sha256": "d0c0205f891b36523247195a9c5d09da936ffa8baaace943e5c74664f0fe3d1f",
+     "edit": "attack 3번째 칸 몸에서 떨어진 작은 붓자국(40px) 투명 처리(R1218c)"
+    }
+   ],
+   "status": "Dots CX-0175SB ROUGH r1 (R1218b)",
+   "finalArt": false
   }
  ]
 }
