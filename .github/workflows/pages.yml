@@ -985,6 +985,8 @@ jobs:
         run: node r96/qa/r1174/r1174-cpu-check.cjs
       - name: R1176 EGO hidden hero 2D and 3D looks (one hero, look saved only; 3D look keeps the 3D render body for every motion, attack ghost bodies and clone trail/halo copies removed, effects identical in both looks) CPU check
         run: node r96/qa/r1176/r1176-cpu-check.cjs
+      - name: R1240 hero change window fit (all hero cells and the confirm button stay inside the window; stage portrait shrinks, then one-row strip) CPU check
+        run: node r96/qa/r1240/r1240-cpu-check.cjs
       - name: R1174b persona cut-in Dots CX-0153PC art applied (bust, awake, orbs8, sigil12) CPU check
         run: node r96/qa/r1174/r1174b-dots-cpu-check.cjs
       - name: R1155 EGO and persona own sound effects (numpy-synthesised; basic, Q/W/E/R, ink passives, celestial branches and ticks remapped only in hidden-hero form) CPU check
