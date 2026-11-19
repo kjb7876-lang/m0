@@ -181,6 +181,8 @@ function advanceLive(now){const p=P(),alive=new Set();for(const e of G('room')?.
  return true;});}
 let lastT=-1;
 function step(){if(!prefs.on||paused())return;const now=T();if(!(now>lastT)){lastT=now;return;}lastT=now;
+ /* Dots 협동 검수(11-19 11:10Z): 협동으로 바뀌면 남은 겨누기·날아가는 공격을 지우고 원래 ai 로 돌린다(협동은 엔진 기본 탄만) */
+ if(!solo()){if(live.length)live=[];for(const e of G('room')?.enemies||[]){if(e?.r1210?.mode)e.r1210.mode=null;if(e&&e.r1214Ai!==undefined&&e.ai!==e.r1214Ai){e.ai=e.r1214Ai;}}return;}
  advanceLive(now);const p=P(),room=G('room');let n=busy();
  for(const e of room.enemies||[]){if(!e)continue;const s=e.r1210;
   if(solo()&&!bossLike(e)&&!major(e)&&e.hp>0&&!banned())roleTick(e,p);
@@ -325,7 +327,7 @@ function drawFx(){const c=G('ctx'),room=G('room');if(!c||!room||typeof G('projec
 function drawFxInner(c,room){const now=T();
  for(const e of room.enemies||[]){if(!e||!(e.hp>0))continue;const s=e.r1210;
   if(s?.mode==='windup'&&s.aim){for(const k of (s.boss?s.kinds:[s.kind]))drawTele(c,e,k,(now-s.t0)/s.windup,s.aim,s.boss?BOSS.scale:1);}
-  else if(e.rangedWindup>0&&prefs.on&&eligible(e)){const k=kindFor(e.name),p=P(),a=Number.isFinite(e.rangedAim)?e.rangedAim:Math.atan2(p.y-e.y,p.x-e.x),d=Math.hypot(p.x-e.x,p.y-e.y);drawTele(c,e,k,1-e.rangedWindup/.55,{a,x:e.x+Math.cos(a)*d,y:e.y+Math.sin(a)*d});}}
+  else if(e.rangedWindup>0&&prefs.on&&solo()&&eligible(e)){const k=kindFor(e.name),p=P(),a=Number.isFinite(e.rangedAim)?e.rangedAim:Math.atan2(p.y-e.y,p.x-e.x),d=Math.hypot(p.x-e.x,p.y-e.y);drawTele(c,e,k,1-e.rangedWindup/.55,{a,x:e.x+Math.cos(a)*d,y:e.y+Math.sin(a)*d});}}
  drawLive(c,now);}
 /* enemy·pxfSide: R350 영웅 가림 옅게(영웅 상자를 덮는 '영웅 쪽' 이펙트를 85%까지 옅게)가 적 공격을 빼도록 — 안 달면 영웅 위·발밑에 닿는 그림자 손·암흑 구체·공포 표식이 사라졌다(헤드리스 실측) */
 const SENT={type:'r1210-fx',x:0,y:0,age:0,life:Infinity,enemy:true,pxfSide:'enemy'};

@@ -132,6 +132,11 @@ for(const [name,kind] of [['복도 비명잔영','fear'],['안정화 집행체',
 {// R1231: 원거리 불 몹이 근접 단계에서 휘두르면 도형 대신 진홍 시트(contactFx)
  const S=sandbox();const e=mob('검은기둥 주문사');S.sb.room.enemies.push(e);ok(S.A.contactFx(e,10,10)===false,'쏘기 단계 주문사: 접촉 시트 없음');
  step(S,.1);const st=e.r1210;st.count+=3;st.mode=null;st.next=99;step(S,.2);ok(S.A.effRole(e)==='melee'&&S.A.contactFx(e,10,10)===true,'근접 단계 주문사: 진홍 시트로',e.r1231);}
+{// Dots 협동 검수(11-19): 솔로→협동 전환 때 겨누기·남은 공격 정리, 원래 ai 복귀, 엔진 겨누기에 새 예고 시트 안 그림
+ const S=sandbox();let mode='off';S.sb.window.__STORYWORLD_COOP_SIM_R62__={mode:()=>mode};const e=mob('포낭 곡사체',{ai:'hybrid',x:15});S.sb.room.enemies.push(e);
+ for(let i=0;i<300&&!(e.r1210?.count>=1);i++)step(S,1/30);ok(e.ai==='melee'&&S.A.inspect().live>=1,'솔로: 오버레이 발사',S.A.inspect().live);
+ mode='host';step(S,1/30);ok(S.A.inspect().live===0&&!e.r1210.mode&&e.ai==='hybrid','협동 전환: 남은 공격 지움·ai 복귀',{live:S.A.inspect().live,ai:e.ai});
+ e.rangedWindup=.3;e.rangedAim=0;S.calls.imgs.length=0;S.sb.drawEffect(S.sb.effects.find(x=>x.type==='r1210-fx')||{type:'r1210-fx'});ok(!S.calls.imgs.some(q=>/r121[034]\//.test(q||'')),'협동: 엔진 겨누기에 새 예고 시트 없음',[...new Set(S.calls.imgs)]);}
 {// 보스는 역할 손대지 않음(맵 몹 공격 동시 그대로)
  const S=sandbox();const b=mob('백의 안정화 감독',{boss:true,ai:'hybrid',x:15});S.sb.room.enemies.push(b);step(S,1);ok(b.ai==='hybrid','보스 ai 그대로');}
 ok(sandbox().A.inspect().stats.errors===0,'오류 0');
