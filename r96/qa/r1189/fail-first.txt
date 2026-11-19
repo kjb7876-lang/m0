@@ -1,0 +1,28 @@
+FAIL ① ring-sparrer 새 시트 (assets/r200/shades/ring-sparrer.webp)
+FAIL ① ring-sparrer 256 칸
+FAIL ① ring-sparrer 발 236·보이는 키
+FAIL ① ring-sparrer 공격 칸 5~10
+FAIL ① clockwork-legionary 새 시트 (assets/r200/shades/clockwork-legionary.webp)
+FAIL ① clockwork-legionary 256 칸
+FAIL ① clockwork-legionary 발 236·보이는 키
+FAIL ① clockwork-legionary 공격 칸 5~10
+FAIL ① fishhook-manuscript 새 시트 (assets/r200/shades/fishhook-manuscript.webp)
+FAIL ① fishhook-manuscript 256 칸
+FAIL ① fishhook-manuscript 발 236·보이는 키
+FAIL ① fishhook-manuscript 공격 칸 5~10
+FAIL ① clockhand-warden 새 시트 (assets/r200/shades/clockhand-warden.webp)
+FAIL ① clockhand-warden 256 칸
+FAIL ① clockhand-warden 발 236·보이는 키
+FAIL ① clockhand-warden 공격 칸 5~10
+FAIL ① wire-bound-dead 새 시트 (assets/r200/shades/wire-bound-dead.webp)
+FAIL ① wire-bound-dead 256 칸
+FAIL ① wire-bound-dead 발 236·보이는 키
+FAIL ① wire-bound-dead 공격 칸 5~10
+FAIL ① parade-mannequin 새 시트 (assets/r200/shades/parade-mannequin.webp)
+FAIL ① parade-mannequin 256 칸
+FAIL ① parade-mannequin 발 236·보이는 키
+FAIL ① parade-mannequin 공격 칸 5~10
+FAIL ④ sync 등록
+FAIL ④ verify 자산 접두
+FAIL ④ pages.yml
+FAILED 27/61

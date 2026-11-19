@@ -1,0 +1,52 @@
+PASS ① runtime-text 사본 = client-source (r946)
+PASS ① runtime-text 사본 = client-source (r1144)
+FAIL ① pages.yml CPU 검사 줄
+PASS ① 새 키 없음·기록기가 못 받는 필터 없음
+FAIL ① API highlight() 있음
+FAIL ② 페르소나: 은빛 거성+심연 왜성 몫 ≥ 70% (0.489)
+FAIL ② 페르소나: 둘 다 각각 ≥ 33% (red 0.221, blue 0.268)
+PASS ② 라우렌 본인 몫 그대로 ≈ 48% (0.489)
+FAIL ② 페르소나 발동 확률 자체도 올라감(같은 난수열 총 발동 418 > 418)
+FAIL ③ 페르소나 은빛 거성 11칸 앞 적까지 닿음
+PASS ③ 라우렌 은빛 거성 11칸은 안 닿음(8칸 그대로)
+PASS ③ 페르소나 은빛 거성 사거리 끝(12칸) 넘으면 안 닿음(13.6칸)
+FAIL ③ 페르소나 은빛 거성 굵기: 줄에서 1.4칸 떨어진 적도 맞음
+PASS ③ 라우렌은 1.4칸 떨어진 적 안 맞음
+FAIL ③ 페르소나 심연 왜성 4.8칸 밖 적도 끌어당김
+PASS ③ 라우렌 심연 왜성 4.8칸은 안 끌림(3.4칸 그대로)
+FAIL ③ 페르소나 심연 왜성 핵 2.2칸 보스(안 끌림)도 피해
+PASS ③ 라우렌 심연 왜성 핵 2.2칸 보스는 피해 없음(1.6칸 그대로)
+PASS ③ 페르소나 심연 왜성 5.6칸 밖은 안 끌림(경계)
+FAIL ③ 페르소나 쌍성 소멸 15칸 앞 적까지 꿰뚫음
+PASS ③ 라우렌 쌍성 소멸 15칸은 안 닿음(11칸 그대로)
+PASS ③ 페르소나 쌍성 소멸 18칸 밖은 안 닿음(경계)
+PASS ④ 은빛 거성 0.9×AP 그대로
+PASS ④ 쌍성 소멸 3.0×/보스 1.8× 그대로
+FAIL ⑤ red 그림 크기 페르소나 ≥ 1.45배 (38.8 / 38.8)
+FAIL ⑤ blue 그림 크기 페르소나 ≥ 1.45배 (81.7 / 81.7)
+FAIL ⑤ violet 그림 크기 페르소나 ≥ 1.45배 (44.4 / 44.4)
+FAIL ⑥ red 페르소나 하이라이트 덧그림 있음
+PASS ⑥ red 라우렌은 덧그림 없음
+PASS ⑥ red 덧그림 주인 kind=effect·pxfSide=hero
+FAIL ⑥ blue 페르소나 하이라이트 덧그림 있음
+PASS ⑥ blue 라우렌은 덧그림 없음
+PASS ⑥ blue 덧그림 주인 kind=effect·pxfSide=hero
+FAIL ⑥ violet 페르소나 하이라이트 덧그림 있음
+PASS ⑥ violet 라우렌은 덧그림 없음
+PASS ⑥ violet 덧그림 주인 kind=effect·pxfSide=hero
+FAIL ⑥ 쌍성 소멸 발사 화면 흔들림 ≥ 6 (라우렌 4)
+/home/user/m0/r96/qa/r1198/persona-highlight-cpu-check.cjs:69
+{const g=env('lauren',true),h=A(g).highlight();ok('⑥ 덧그림은 기존 Dots 시트(lauren-boom·lauren-repulse) 재사용, 새 자산 없음',Array.isArray(h.sheets)&&h.sheets.every(k=>['boom','repulse','fuse','aura','disk'].includes(k))&&h.sheets.length>=2);}
+                                   ^
+
+TypeError: A(...).highlight is not a function
+    at Object.<anonymous> (/home/user/m0/r96/qa/r1198/persona-highlight-cpu-check.cjs:69:36)
+    at Module._compile (node:internal/modules/cjs/loader:1781:14)
+    at Object..js (node:internal/modules/cjs/loader:1913:10)
+    at Module.load (node:internal/modules/cjs/loader:1505:32)
+    at Function._load (node:internal/modules/cjs/loader:1309:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:254:19)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+    at node:internal/main/run_main_module:36:49
+
+Node.js v22.23.5

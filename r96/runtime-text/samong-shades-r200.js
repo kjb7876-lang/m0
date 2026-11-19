@@ -12,11 +12,25 @@
 //  · 판정·체력·공격·보상·저장은 그대로. storyworld.r200.shades {on:false,puppetShare:.15} 로 조절.
 (()=>{'use strict';
 if(window.__STORYWORLD_SAMONG_SHADES_R200__)return;
-const REV='R203-shades-2',KEY='storyworld.r200.shades',INDEX='assets/r200/shades/index.json';
+const REV='R203-shades-2-r1189',KEY='storyworld.r200.shades',INDEX='assets/r200/shades/index.json';
 let prefs={on:true,puppetShare:.15};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={assigned:0,puppetKept:0,frames:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 let idx=null,byZone={};
-fetch(INDEX).then(r=>r.ok?r.json():null).then(j=>{if(!j?.mobs)return;idx=j;for(const m of j.mobs)(byZone[m.zone]=byZone[m.zone]||[]).push(m);}).catch(fail);
+// R1188 — 칸이 좁아 공격 칸이 양옆으로 잘리던 잔영을 Dots CX-0164CR 새 시트(칸 256×256, 같은 11칸 순서)로 바꾼다(사용자 11-19 "너무 심각한것들은 다시 재창조해서 개선 적용해").
+//  원래 경로·칸은 m.r1188Orig 에 남긴다. 끄기: storyworld.r200.shades {uncut:false}. 손질: scripts/r1188-uncut-shades.py
+const UNCUT=Object.freeze({
+ 'tram-passenger':Object.freeze({path:'assets/r1188/shades/tram-passenger.webp',cell:[256,256],pivot:[106.5,236],visibleHeight:159}),
+ 'cephalopod-invader':Object.freeze({path:'assets/r1188/shades/cephalopod-invader.webp',cell:[256,256],pivot:[134,236],visibleHeight:157.9}),
+ 'mannequin':Object.freeze({path:'assets/r1188/shades/mannequin.webp',cell:[256,256],pivot:[128,236],visibleHeight:163.6}),
+ // R1189 — 나머지 6종(CX-0164CR CR05·07·08·10·11·12). 새 시트는 이동 0~4·공격 5~10 으로 그려 왔다 → 역행(RB·RE·RF·RG) 4종은 칸 나눔도 새 시트를 따른다.
+ 'ring-sparrer':Object.freeze({path:'assets/r1189/shades/ring-sparrer.webp',cell:[256,256],pivot:[123,236],visibleHeight:159}),
+ 'clockwork-legionary':Object.freeze({path:'assets/r1189/shades/clockwork-legionary.webp',cell:[256,256],pivot:[124.5,236],visibleHeight:158.1}),
+ 'fishhook-manuscript':Object.freeze({path:'assets/r1189/shades/fishhook-manuscript.webp',cell:[256,256],pivot:[121.8,236],visibleHeight:158.6,move:[0,1,2,3,4],attack:[5,6,7,8,9,10]}),
+ 'clockhand-warden':Object.freeze({path:'assets/r1189/shades/clockhand-warden.webp',cell:[256,256],pivot:[120.8,236],visibleHeight:160.4,move:[0,1,2,3,4],attack:[5,6,7,8,9,10]}),
+ 'wire-bound-dead':Object.freeze({path:'assets/r1189/shades/wire-bound-dead.webp',cell:[256,256],pivot:[129.2,236],visibleHeight:164.8,move:[0,1,2,3,4],attack:[5,6,7,8,9,10]}),
+ 'parade-mannequin':Object.freeze({path:'assets/r1189/shades/parade-mannequin.webp',cell:[256,256],pivot:[133.5,236],visibleHeight:165.9,move:[0,1,2,3,4],attack:[5,6,7,8,9,10]})});
+const uncut=m=>{const u=prefs.uncut!==false&&UNCUT[m.id];if(!u)return m;return {...m,r1188Orig:{path:m.path,cell:m.cell,pivot:m.pivot,visibleHeight:m.visibleHeight,move:m.move,attack:m.attack},path:u.path,cell:u.cell.slice(),pivot:u.pivot.slice(),visibleHeight:u.visibleHeight,move:(u.move||m.move).slice(),attack:(u.attack||m.attack).slice()};};
+fetch(INDEX).then(r=>r.ok?r.json():null).then(j=>{if(!j?.mobs)return;j={...j,mobs:j.mobs.map(uncut)};idx=j;for(const m of j.mobs)(byZone[m.zone]=byZone[m.zone]||[]).push(m);}).catch(fail);
 const hash=s=>{let h=2166136261;for(const c of String(s))h=Math.imul(h^c.charCodeAt(0),16777619);h^=h>>>16;h=Math.imul(h,0x85ebca6b);h^=h>>>13;h=Math.imul(h,0xc2b2ae35);h^=h>>>16;return (h>>>0)/4294967296;};/* 끝 섞기(브라우저에서 비슷한 id 가 몰려 꼭두각시 15%가 0%로 나왔음) */
 const objective=e=>/기억의 조각|단서|코어/.test(String(e?.name||''))||!!(e?.objective||e?.r162Shard||e?.r162Fragment);/* 깨는 목표물(세뇌당한 기억의 조각 등)은 몹이 아님 */
 const major=e=>!!(e&&(e.boss||e.midboss||e.miniBoss||e.persona||e.cosmic||e.trial||e.r170Tower||e.r193Doll||e.samongMidR162||e.combatProfile?.major||/중간보스/.test(String(e.name||''))));
@@ -43,5 +57,5 @@ function install(){const S=window.__STORYWORLD_STORY_COMBAT_R54__;if(!S||typeof 
    stats.frames++;return frameOf(e,m);}}catch(err){fail(err);}return S.frameFor(e,f);}});return true;}
 let tries=0;(function arm(){let ok=false;try{ok=install();}catch(e){fail(e);}if(!ok&&++tries<80)setTimeout(arm,250);})();
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
-window.__STORYWORLD_SAMONG_SHADES_R200__=Object.freeze({revision:REV,set,assign,zoneKey,inspect:()=>({revision:REV,prefs:{...prefs},loaded:!!idx,zones:Object.fromEntries(Object.entries(byZone).map(([k,v])=>[k,v.map(m=>m.name)])),stats:{...stats},lastError})});
+window.__STORYWORLD_SAMONG_SHADES_R200__=Object.freeze({revision:REV,set,assign,zoneKey,uncut:Object.keys(UNCUT),inspect:()=>({revision:REV,prefs:{...prefs},loaded:!!idx,zones:Object.fromEntries(Object.entries(byZone).map(([k,v])=>[k,v.map(m=>m.name)])),stats:{...stats},lastError})});
 })();

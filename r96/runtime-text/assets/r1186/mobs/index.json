@@ -1,0 +1,30 @@
+{
+ "schema": "storyworld.r1186.dots/v1",
+ "request": "CX-0161DR r1 ROUGH",
+ "assets": [
+  {
+   "file": "assets/r1186/mobs/m032.webp",
+   "id": "m032",
+   "name": "인간의 뇌를 닮은 투명 연산 장치",
+   "source": "Dots CX-0161DR DR-05 m032 walk-attack r1 ROUGH",
+   "sourceSha256": "d7af717f2def9d8f60aa842f69c7cb63e8501c3d250a5e6405315ebe28f173cf",
+   "sha256": "2e329d68d8c857c6e4d6ed3d7929ca99e79877462921f9c6eac442f397367c47",
+   "bytes": 333334,
+   "body": 137,
+   "use": "R248 시트 표 path·body 덧씌우기(R1179 방식)",
+   "finalArt": false
+  },
+  {
+   "file": "assets/r1186/mobs/m049.webp",
+   "id": "m049",
+   "name": "시간핵의 명령 잔류",
+   "source": "Dots CX-0161DR DR-07 m049 walk-attack r1 ROUGH",
+   "sourceSha256": "7702433d426136d554a98696de213f542705330731776bb11f3a9d4d22faea2a",
+   "sha256": "045f8babb81e8940859aa4015817ac6042ea09215bbb0bf937c0fddae88b5c99",
+   "bytes": 275030,
+   "body": 227,
+   "use": "R248 시트 표 path·body 덧씌우기(R1179 방식)",
+   "finalArt": false
+  }
+ ]
+}
