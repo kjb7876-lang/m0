@@ -14,7 +14,7 @@
 //  · 끄기: localStorage storyworld.r1195.feetInk = '0'. 검사 qa/r1195/feet-ink-cpu-check.cjs.
 (()=>{'use strict';
 if(window.__STORYWORLD_FEET_INK_R1195__)return;
-const REV='R1195-feet-ink-1';
+const REV='R1195-feet-ink-1+R1234';
 const MIST={p:'assets/r430/mist-loop.webp',cell:192,cols:6,frames:20,cx:96,cy:108,vw:132,vh:62};
 // R462 15세 사망 연기와 같은 R108 연기 기둥 시트(16칸) — 잘린 줄에서 먹 연기가 가늘게 피어오르는 겹(PC만)
 const SMOKE={p:'assets/r108/eden/smoke.webp',cell:256,cols:4,frames:15,px:128,py:228,vh:200};
@@ -134,7 +134,14 @@ function cover(e,c,v,low,K){const im=inked(MIST);if(!im)return false;const M=map
  if(recent.length>=24)recent.shift();const P=c.points;recent.push({name:e.name,box:[Math.min(P[0][0],P[1][0],P[2][0],P[3][0]),Math.min(P[0][1],P[3][1]),Math.max(P[0][0],P[1][0],P[2][0],P[3][0]),Math.max(P[2][1],P[3][1])].map(v=>Math.round(v)),bottom:!!(v&&v.bottom),side:!!(v&&(v.left||v.right)),sticky:true});return true;}
 
 // ---- 몸 그림 명령 찾기 ---------------------------------------------------------------------------------------
+// R1234(사용자 2026-11-19 "주사실 감시환각 우두머리 … 검은안개가 너무 커졌다가 작아지는 버그"): 공격 준비 동안 drawEnemy 안에서 함께 그려지는
+//  바닥 공격 예고 고리(final42-r88/effects/251/atlas.png — 화면 너비만 한 상자)가 가장 큰 그림이라 몸으로 골려, 안개가 44px → 613px 로 부풀었다가
+//  공격이 끝나면 1초에 걸쳐 줄었다(헤드리스 실측). → 효과·이펙트 폴더 그림과 자기 먹 안개(r1195:)·주인이 몹이 아닌 그림은 몸 후보에서 뺀다.
+//  경로 조각(폴더 이름)으로만 보므로 몹 이름에 blood·ring 이 든 몸 그림은 그대로 몸이다.
+const FX1234=/(^|\/)(?:fx|vfx|pixelfx|effects?|telegraphs?|warnings?)\/|r251\/atlas|^r1195:|\/r430\/|\/r108\/|\/r411\/|\/r163\//i;
+const srcOf=q=>String(q&&(q.sourcePath||q.image&&q.image.__storyworldStaticSource&&q.image.__storyworldStaticSource.path||q.image&&q.image.src)||'').replace(/^https?:\/\/[^/]+\/(?:m0\/)?/,'');
 function bodyOf(C,n0){let best=null,bs=0;for(let i=n0;i<C.length;i++){const q=C[i];if(!q||q.kind!=='image'||!q.points||!q.sourceRect)continue;
+ if(FX1234.test(srcOf(q))||(q.owner&&q.owner.kind&&q.owner.kind!=='enemy'))continue;
  const P=q.points,ar=Math.abs((P[1][0]-P[0][0])*(P[3][1]-P[0][1])-(P[1][1]-P[0][1])*(P[3][0]-P[0][0]));if(!(ar>0))continue;
  const s=ar*(q.spatialRole==='body'?100:1);if(s>bs){bs=s;best=q;}}return best;}
 let depth=0;
@@ -156,7 +163,7 @@ function install(){try{if(typeof drawEnemy!=='function')return false;if(drawEnem
 // 다른 오버레이가 나중에 drawEnemy 를 감싸도 맨 바깥에 오도록(공격 좌우 바로잡기 R425 뒤의 점을 읽기 위해) 가끔 다시 확인한다.
 let frames=0;function pump(){frames++;budget=mobile()?1:3;install();requestAnimationFrame(pump);}
 if(typeof requestAnimationFrame==='function')requestAnimationFrame(pump);install();
-window.__STORYWORLD_FEET_INK_R1195__=Object.freeze({revision:REV,classify,inkTone,
+window.__STORYWORLD_FEET_INK_R1195__=Object.freeze({revision:REV,classify,inkTone,bodyOf,
  inspect:()=>({revision:REV,installed:typeof drawEnemy==='function'&&!!drawEnemy.__r1195,on:on(),mobile:mobile(),cache:cache.size,kinds:[...kinds.keys()].slice(0,80),stats:{...stats},recent:recent.slice(),lastError}),
  cached:()=>[...cache.entries()].filter(([,v])=>v&&!v.none).map(([k,v])=>({k,bottom:v.bottom||null,left:v.left||null,right:v.right||null}))});
 })();
