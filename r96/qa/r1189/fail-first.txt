@@ -26,3 +26,5 @@ FAIL ④ sync 등록
 FAIL ④ verify 자산 접두
 FAIL ④ pages.yml
 FAILED 27/61
+FAIL ② 켜기·끄기가 새로고침 없이 바로 먹음 (assets/r1188/shades/mannequin.webp → assets/r1188/shades/mannequin.webp → assets/r1188/shades/mannequin.webp)
+FAILED 2/62

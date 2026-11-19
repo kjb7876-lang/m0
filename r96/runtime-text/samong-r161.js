@@ -44,7 +44,10 @@ function hasSamongArt(e){try{return !!window.__STORYWORLD_DRIVE_ART_R105__?.artF
 // R177: 사몽 그림이 없는 보스·대면 상대(예: 교주의 인장)도 스토리 모드 그림을 다시 쓰지 않고 꼭두각시 자아로(보스는 더 크고 짙게).
 // R389: R380 승인 시트가 정해진 몹(사몽 S-07 '페르소나' 보스 = 지금 영웅의 페르소나)은 꼭두각시로 덮지 않음.
 function hasApproved(e){try{return !!window.__STORYWORLD_APPROVED_MOBS_R380__?.assign?.(e);}catch(_){return false;}}
-const puppetOf=e=>prefs.puppet&&solo()&&samongRoom()&&!!e?.samongR103&&!e.r170Tower&&!hasSamongArt(e)&&!e.r200Shade&&!hasApproved(e)/* R200: 잔영 그림이 정해진 몹은 꼭두각시로 덮지 않음 */&&!faceR1098(e);
+const puppetOf=e=>prefs.puppet&&solo()&&samongRoom()&&!!e?.samongR103&&!e.r170Tower&&!hasSamongArt(e)&&!e.r200Shade&&!hasApproved(e)/* R200: 잔영 그림이 정해진 몹은 꼭두각시로 덮지 않음 */&&!faceR1098(e)&&!nameSheet(e);
+// R1206(사용자 2026-11-19 "망토 셋 … 사몽 에피소드에 이런 몹 많던데 개선"): R248 이름 시트(R290·R410 손그림 포함)로 그리는 몹은 꼭두각시로 덮지 않는다.
+//  R248 이 바깥에서 엔진 몸 그림만 가리고 이름 시트를 그리는데, 안쪽 이 파일의 꼭두각시는 가려지지 않아 한 몹에 그림 두 장(예: 뿌리에서 쏟아진 잔영 = m063 + 실 인형)이 겹쳤다.
+function nameSheet(e){try{return !!window.__STORYWORLD_MOB_UNIQUE_R248__?.covers?.(e);}catch(_){return false;}}
 // R1098: 사몽 최종 보스 미카엘라는 미카엘라 본인 시트(samong-face-r1098.js)로 그린다 — 꼭두각시로 덮지 않음.
 function faceR1098(e){try{return !!window.__STORYWORLD_SAMONG_FACE_R1098__?.covers?.(e);}catch(_){return false;}}
 
@@ -108,12 +111,14 @@ function drawPuppet(e,im,key){const dead=e.hp<=0||e.spawnState==='dead',age=T()-
   if(big&&!(e.flash>0)){const S=window.__STORYWORLD_FX_SPRITES_R106__;if(S?.on?.())S.draw('glow',{a:[120,0,18],b:[200,20,40]},q.x+ox,q.y-lift+oy-CH*k*.35,CW*k*1.15,CH*k*.9,{alpha:.55,blend:'source-over'});}
   ctx.filter=e.flash>0?'brightness(1.8) saturate(.5)':big?'saturate(.75) contrast(1.18) brightness(.82)':'saturate(.92) contrast(1.05)';
   ctx.translate(q.x+ox,q.y-lift+oy);if(lean)ctx.rotate(lean*m.face);const kb=(big&&!(e.defScale>1.2)?k*1.25:k)*g.s;ctx.scale(m.face*kb,kb);ctx.drawImage(sheet,sx0,sy0,g.cw,g.ch,-g.px,-g.py,g.cw,g.ch);}finally{ctx.restore();}
+ /* R1206: 죽음 연출(R462)이 가려진 엔진 몸(다른 몹 그림) 대신 이 꼭두각시 칸을 쓰게 남긴다(걷기 시트 경로 — 구운 그림은 같은 경로로 나옴) */if(!dead)try{const kb=(big0(e)&&!(e.defScale>1.2)?k*1.25:k)*g.s;e.r1206Look={path:key,frame:{assetFrame:{sourceRect:[sx0,sy0,g.cw,g.ch],pivot:[g.px,g.py],visibleHeight:BODY}},flip:m.face<0,h:BODY*kb};}catch(_){}
  stats.puppetDraws++;}
 if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){let im=null;
  let key=null;try{if(puppetOf(e)){im=image(sheetFor(e));key=sheetFor(e);if(!im)stats.waits++;}else if(e?.samongR103&&samongRoom()){if(major(e))stats.skippedMajor++;else stats.skippedArt++;}}catch(err){fail(err);im=null;}
  if(!im)return base.apply(this,[e,...a]);
  hiding=e;let r;try{r=base.apply(this,[e,...a]);}finally{hiding=null;}
  try{scopeDraw(e,()=>drawPuppet(e,im,key));}catch(err){fail(err);}return r;};}
+const big0=e=>major(e)&&!e.samongMidR162;
 function scopeDraw(e,f){if(typeof ctx.scope==='function')ctx.scope({id:'r161:puppet:'+e.id,kind:'enemy',x:e.x,y:e.y},f);else f();}
 
 // ---- 세뇌당한 기억의 조각 --------------------------------------------------------------------
@@ -133,7 +138,9 @@ function dress(){if(!prefs.sculpture||!solo()||!samongRoom())return;const r=room
   const d=marks.length?Math.min(...marks.map(m=>Math.hypot(m.x-x,m.y-y))):0,score=marks.length?Math.abs(d-2.4):t;if(score<bs){bs=score;best={x,y};}if(!marks.length)break;}
  if(best){props.push({id:'r161:sculpt:'+key+':0',path:SCULPT,x:best.x,y:best.y,height:118+(h%17),solid:false,autoTargetEligible6:false,visible:true,r80PresentationOnly:true,r161Sculpture:true,flip:!!(h&1)});n=1;stats.sculptures++;}
  if(n)image(SCULPT);}
-if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){if(p?.r161Sculpture&&!image(p.path))return;return base.apply(this,[p,...a]);};}
+// R1206(사용자 2026-11-19 "세뇌당한 기억의 조각은 각 맵당 1개체만"): 같은 방에 조각 적(R170 탑)이 서면 장식 조각은 그리지 않는다(한 맵에 조각 하나).
+const towerHere=()=>{try{return (room?.enemies||[]).some(e=>e&&e.r170Tower);}catch(_){return false;}};
+if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){if(p?.r161Sculpture&&(!image(p.path)||(prefs.oneSculpture!==false&&towerHere()))){if(towerHere())stats.sculptHidden=(stats.sculptHidden||0)+1;return;}return base.apply(this,[p,...a]);};}
 let next=0;
 if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{if(T()>=next||T()<next-5){next=T()+.5;dress();}bloodTick();const t=T();for(let i=bfx.length-1;i>=0;i--)if(t-bfx[i].t0>bfx[i].life)bfx.splice(i,1);if(bfx.length)barm();else if(typeof effects!=='undefined'){const i=effects.indexOf(BSENT);if(i>=0)effects.splice(i,1);}}catch(e){fail(e);}return r;};}
 if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(ef,...a){if(ef&&ef.type==='r167-blood'){try{drawBlood();}catch(err){fail(err);}return;}return base.apply(this,[ef,...a]);};}

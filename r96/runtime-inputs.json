@@ -10610,14 +10610,7 @@
     "assets/r1198/persona-hl-ring.webp",
     "assets/r1198/persona-hl-collapse.webp",
     "assets/r1198/index.json",
-    "samong-warm-r1199.js",
-    "dys-ranged-r1210.js",
-    "assets/r1210/laser-aim6.webp",
-    "assets/r1210/laser-charge8.webp",
-    "assets/r1210/laser-body8.webp",
-    "assets/r1210/laser-impact8.webp",
-    "assets/r1210/sonic-ring.webp",
-    "assets/r1210/index.json"
+    "samong-warm-r1199.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11692,5 +11685,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "2f2c8f30e5108bc8faa4e9d03f9516a70629ea71f623ee1cc9811b5ac280908f"
+  "runtimeManifestSHA256": "991b26ff67f74a96d7b1a918538edd097bcd23f38853d7a819c537a8bb1a7bf6"
 }

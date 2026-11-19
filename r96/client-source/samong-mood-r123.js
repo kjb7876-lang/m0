@@ -49,8 +49,12 @@
   'R-09':'surreal','R-10':'surreal','R-11':'surreal','R-12':'blank','R-13':'dali','R-14':'gallery','R-15':'surreal','R-16':'surreal','R-17':'garden'};
  function towerFloors(z){if(!z)return null;if(z.id==='sz115-S04-1')return{list:['G'],ground:true};if(z.id==='sz115-S04-2')return{list:[1]};
   const m=/(\d+)(?:~(\d+))?층/.exec(z.title||'');if(!m)return null;const a=+m[1],b=m[2]?+m[2]:a,list=[];for(let f=a;f<=b;f++)list.push(f);return{list};}
- function nsInfo(sec){const t=String(TXT()[sec]?.title||'').replace(/^\[[^\]]*\]\s*/,''),y=/(\d{4})년/.exec(t);
-  return{year:y?y[1]:null,label:(y?t.replace(/\d{4}년\s*·?\s*/,''):t).trim()||sec,noYear:!y};}
+ // R1208(사용자 2026-11-19 "dys05 화면에 뜨는거 적당한 년도 2037년 이런식으로 서사에 맞게"): 정본 제목에 연도가 없어 배너가 'DYS-05'로 멈추던 것을
+ //  원문 흐름에 맞춘 연도로 보여 준다(원문 제목·문단은 그대로). 01~05 침공·전쟁·잠입(일주일 뒤)·기밀·지배 = 같은 해 2037, 06~08 반란(수개월)·고가도로·금지된 지능 = 2038,
+ //  09~11 '사흘 전' 도약으로 되돌아간 2037, 12 스무 살의 원룸 = 2019(18년 전, 코어 설계 '수십 년 전'보다 뒤), 13 기록이 끝난 자리 = 읽히지 않는 ????.
+ const DYS_YEAR={'DYS-01':'2037','DYS-02':'2037','DYS-03':'2037','DYS-04':'2037','DYS-05':'2037','DYS-06':'2038','DYS-07':'2038','DYS-08':'2038','DYS-09':'2037','DYS-10':'2037','DYS-11':'2037','DYS-12':'2019','DYS-13':'????'};
+ function nsInfo(sec){const t=String(TXT()[sec]?.title||'').replace(/^\[[^\]]*\]\s*/,''),y=/(\d{4})년/.exec(t),yr=y?y[1]:(DYS_YEAR[sec]||null);
+  return{year:yr,label:(y?t.replace(/\d{4}년\s*·?\s*/,''):t).trim()||sec,noYear:!yr};}
  function themeOf(zid){const m=/^sz115-([A-Z0-9]+)-(\d+)$/.exec(String(zid||''))||/^sz162-([A-Z0-9-]+)-[BD]$/.exec(String(zid||''))||/^sz173-([A-Z0-9-]+)-G$/.exec(String(zid||''));/* R173: G(코어 호위) 구역도 그 장의 분위기 */if(!m)return null;const ch=m[1].replace('-',''),/* R162: 새 B·D 구역(sz162-<장>-B/D)도 그 장의 분위기 */z=ZN()?.zone?.(zid)||null,sec=sectionOf(z);
   if(ch==='S04')return{key:'tower',zone:zid,sec:'S-04',floors:towerFloors(z),z};
   if(ch==='S06')return{key:ERA[zid]||'machine',zone:zid,sec,ns:sec&&/^(NS-|DYS-)/.test(sec)?nsInfo(sec):null,z};

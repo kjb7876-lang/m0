@@ -1,0 +1,119 @@
+PASS 1920x1080 violet: 컷인 뜸·상반신 그림 읽힘 (assets/r1174/persona-bust.webp, 576,768)
+PASS 1920x1080 violet: 머리(그림 위쪽) 안 잘림 — 잘린 높이 0.0px (그림 위 83, 자르는 상자 위 0 [화면])
+PASS 1920x1080 violet: 몸·손(마스크가 0 되기 전)에서 딱 끊기지 않음 — 잘린 높이 0.0px (마스크 끝 390, 상자 아래 1080)
+PASS 1920x1080 violet: 좌우 안 잘림 (0.0/0.0)
+PASS 1920x1080 violet: 기술 이름 줄 화면 안
+PASS 1920x1080 violet: 별·구 그림 세로로 안 잘림
+PASS 1920x1080 meteor: 컷인 뜸·상반신 그림 읽힘 (assets/r1174/persona-bust.webp, 576,768)
+PASS 1920x1080 meteor: 머리(그림 위쪽) 안 잘림 — 잘린 높이 0.0px (그림 위 83, 자르는 상자 위 0 [화면])
+PASS 1920x1080 meteor: 몸·손(마스크가 0 되기 전)에서 딱 끊기지 않음 — 잘린 높이 0.0px (마스크 끝 390, 상자 아래 1080)
+PASS 1920x1080 meteor: 좌우 안 잘림 (0.0/0.0)
+PASS 1920x1080 meteor: 기술 이름 줄 화면 안
+PASS 1920x1080 meteor: 별·구 그림 세로로 안 잘림
+PASS 1920x1080: 페이지 오류 0 
+PASS 1280x720 violet: 컷인 뜸·상반신 그림 읽힘 (assets/r1174/persona-bust.webp, 576,768)
+PASS 1280x720 violet: 머리(그림 위쪽) 안 잘림 — 잘린 높이 0.0px (그림 위 55, 자르는 상자 위 0 [화면])
+PASS 1280x720 violet: 몸·손(마스크가 0 되기 전)에서 딱 끊기지 않음 — 잘린 높이 0.0px (마스크 끝 321, 상자 아래 720)
+PASS 1280x720 violet: 좌우 안 잘림 (0.0/0.0)
+PASS 1280x720 violet: 기술 이름 줄 화면 안
+PASS 1280x720 violet: 별·구 그림 세로로 안 잘림
+PASS 1280x720 meteor: 컷인 뜸·상반신 그림 읽힘 (assets/r1174/persona-bust.webp, 576,768)
+PASS 1280x720 meteor: 머리(그림 위쪽) 안 잘림 — 잘린 높이 0.0px (그림 위 55, 자르는 상자 위 0 [화면])
+PASS 1280x720 meteor: 몸·손(마스크가 0 되기 전)에서 딱 끊기지 않음 — 잘린 높이 0.0px (마스크 끝 321, 상자 아래 720)
+PASS 1280x720 meteor: 좌우 안 잘림 (0.0/0.0)
+PASS 1280x720 meteor: 기술 이름 줄 화면 안
+PASS 1280x720 meteor: 별·구 그림 세로로 안 잘림
+PASS 1280x720: 페이지 오류 0 
+PASS 960x540 violet: 컷인 뜸·상반신 그림 읽힘 (assets/r1174/persona-bust.webp, 576,768)
+PASS 960x540 violet: 머리(그림 위쪽) 안 잘림 — 잘린 높이 0.0px (그림 위 41, 자르는 상자 위 0 [화면])
+PASS 960x540 violet: 몸·손(마스크가 0 되기 전)에서 딱 끊기지 않음 — 잘린 높이 0.0px (마스크 끝 241, 상자 아래 540)
+PASS 960x540 violet: 좌우 안 잘림 (0.0/0.0)
+PASS 960x540 violet: 기술 이름 줄 화면 안
+PASS 960x540 violet: 별·구 그림 세로로 안 잘림
+PASS 960x540 meteor: 컷인 뜸·상반신 그림 읽힘 (assets/r1174/persona-bust.webp, 576,768)
+PASS 960x540 meteor: 머리(그림 위쪽) 안 잘림 — 잘린 높이 0.0px (그림 위 41, 자르는 상자 위 0 [화면])
+PASS 960x540 meteor: 몸·손(마스크가 0 되기 전)에서 딱 끊기지 않음 — 잘린 높이 0.0px (마스크 끝 241, 상자 아래 540)
+PASS 960x540 meteor: 좌우 안 잘림 (0.0/0.0)
+PASS 960x540 meteor: 기술 이름 줄 화면 안
+PASS 960x540 meteor: 별·구 그림 세로로 안 잘림
+PASS 960x540: 페이지 오류 0 
+PASS 2560x1080 violet: 컷인 뜸·상반신 그림 읽힘 (assets/r1174/persona-bust.webp, 576,768)
+PASS 2560x1080 violet: 머리(그림 위쪽) 안 잘림 — 잘린 높이 0.0px (그림 위 64, 자르는 상자 위 0 [화면])
+PASS 2560x1080 violet: 몸·손(마스크가 0 되기 전)에서 딱 끊기지 않음 — 잘린 높이 0.0px (마스크 끝 371, 상자 아래 1080)
+PASS 2560x1080 violet: 좌우 안 잘림 (0.0/0.0)
+PASS 2560x1080 violet: 기술 이름 줄 화면 안
+PASS 2560x1080 violet: 별·구 그림 세로로 안 잘림
+PASS 2560x1080 meteor: 컷인 뜸·상반신 그림 읽힘 (assets/r1174/persona-bust.webp, 576,768)
+PASS 2560x1080 meteor: 머리(그림 위쪽) 안 잘림 — 잘린 높이 0.0px (그림 위 64, 자르는 상자 위 0 [화면])
+PASS 2560x1080 meteor: 몸·손(마스크가 0 되기 전)에서 딱 끊기지 않음 — 잘린 높이 0.0px (마스크 끝 371, 상자 아래 1080)
+PASS 2560x1080 meteor: 좌우 안 잘림 (0.0/0.0)
+PASS 2560x1080 meteor: 기술 이름 줄 화면 안
+PASS 2560x1080 meteor: 별·구 그림 세로로 안 잘림
+PASS 2560x1080: 페이지 오류 0 
+PASS 1024x768 violet: 컷인 뜸·상반신 그림 읽힘 (assets/r1174/persona-bust.webp, 576,768)
+PASS 1024x768 violet: 머리(그림 위쪽) 안 잘림 — 잘린 높이 0.0px (그림 위 69, 자르는 상자 위 0 [화면])
+PASS 1024x768 violet: 몸·손(마스크가 0 되기 전)에서 딱 끊기지 않음 — 잘린 높이 0.0px (마스크 끝 352, 상자 아래 768)
+PASS 1024x768 violet: 좌우 안 잘림 (0.0/0.0)
+PASS 1024x768 violet: 기술 이름 줄 화면 안
+PASS 1024x768 violet: 별·구 그림 세로로 안 잘림
+PASS 1024x768 meteor: 컷인 뜸·상반신 그림 읽힘 (assets/r1174/persona-bust.webp, 576,768)
+PASS 1024x768 meteor: 머리(그림 위쪽) 안 잘림 — 잘린 높이 0.0px (그림 위 69, 자르는 상자 위 0 [화면])
+PASS 1024x768 meteor: 몸·손(마스크가 0 되기 전)에서 딱 끊기지 않음 — 잘린 높이 0.0px (마스크 끝 352, 상자 아래 768)
+PASS 1024x768 meteor: 좌우 안 잘림 (0.0/0.0)
+PASS 1024x768 meteor: 기술 이름 줄 화면 안
+PASS 1024x768 meteor: 별·구 그림 세로로 안 잘림
+PASS 1024x768: 페이지 오류 0 
+PASS 844x390 violet: 컷인 뜸·상반신 그림 읽힘 (assets/r1174/persona-bust.webp, 576,768)
+PASS 844x390 violet: 머리(그림 위쪽) 안 잘림 — 잘린 높이 0.0px (그림 위 25, 자르는 상자 위 0 [화면])
+PASS 844x390 violet: 몸·손(마스크가 0 되기 전)에서 딱 끊기지 않음 — 잘린 높이 0.0px (마스크 끝 169, 상자 아래 390)
+PASS 844x390 violet: 좌우 안 잘림 (0.0/0.0)
+PASS 844x390 violet: 기술 이름 줄 화면 안
+PASS 844x390 violet: 별·구 그림 세로로 안 잘림
+PASS 844x390 meteor: 컷인 뜸·상반신 그림 읽힘 (assets/r1174/persona-bust.webp, 576,768)
+PASS 844x390 meteor: 머리(그림 위쪽) 안 잘림 — 잘린 높이 0.0px (그림 위 25, 자르는 상자 위 0 [화면])
+PASS 844x390 meteor: 몸·손(마스크가 0 되기 전)에서 딱 끊기지 않음 — 잘린 높이 0.0px (마스크 끝 169, 상자 아래 390)
+PASS 844x390 meteor: 좌우 안 잘림 (0.0/0.0)
+PASS 844x390 meteor: 기술 이름 줄 화면 안
+PASS 844x390 meteor: 별·구 그림 세로로 안 잘림
+PASS 844x390: 페이지 오류 0 
+PASS 667x375 violet: 컷인 뜸·상반신 그림 읽힘 (assets/r1174/persona-bust.webp, 576,768)
+PASS 667x375 violet: 머리(그림 위쪽) 안 잘림 — 잘린 높이 0.0px (그림 위 29, 자르는 상자 위 0 [화면])
+PASS 667x375 violet: 몸·손(마스크가 0 되기 전)에서 딱 끊기지 않음 — 잘린 높이 0.0px (마스크 끝 167, 상자 아래 375)
+PASS 667x375 violet: 좌우 안 잘림 (0.0/0.0)
+PASS 667x375 violet: 기술 이름 줄 화면 안
+PASS 667x375 violet: 별·구 그림 세로로 안 잘림
+PASS 667x375 meteor: 컷인 뜸·상반신 그림 읽힘 (assets/r1174/persona-bust.webp, 576,768)
+PASS 667x375 meteor: 머리(그림 위쪽) 안 잘림 — 잘린 높이 0.0px (그림 위 29, 자르는 상자 위 0 [화면])
+PASS 667x375 meteor: 몸·손(마스크가 0 되기 전)에서 딱 끊기지 않음 — 잘린 높이 0.0px (마스크 끝 167, 상자 아래 375)
+PASS 667x375 meteor: 좌우 안 잘림 (0.0/0.0)
+PASS 667x375 meteor: 기술 이름 줄 화면 안
+PASS 667x375 meteor: 별·구 그림 세로로 안 잘림
+PASS 667x375: 페이지 오류 0 
+PASS 390x844 violet: 컷인 뜸·상반신 그림 읽힘 (assets/r1174/persona-bust.webp, 576,768)
+PASS 390x844 violet: 머리(그림 위쪽) 안 잘림 — 잘린 높이 0.0px (그림 위 98, 자르는 상자 위 0 [화면])
+PASS 390x844 violet: 몸·손(마스크가 0 되기 전)에서 딱 끊기지 않음 — 잘린 높이 0.0px (마스크 끝 247, 상자 아래 844)
+PASS 390x844 violet: 좌우 안 잘림 (0.0/0.0)
+PASS 390x844 violet: 기술 이름 줄 화면 안
+PASS 390x844 violet: 별·구 그림 세로로 안 잘림
+PASS 390x844 meteor: 컷인 뜸·상반신 그림 읽힘 (assets/r1174/persona-bust.webp, 576,768)
+PASS 390x844 meteor: 머리(그림 위쪽) 안 잘림 — 잘린 높이 0.0px (그림 위 98, 자르는 상자 위 0 [화면])
+PASS 390x844 meteor: 몸·손(마스크가 0 되기 전)에서 딱 끊기지 않음 — 잘린 높이 0.0px (마스크 끝 247, 상자 아래 844)
+PASS 390x844 meteor: 좌우 안 잘림 (0.0/0.0)
+PASS 390x844 meteor: 기술 이름 줄 화면 안
+PASS 390x844 meteor: 별·구 그림 세로로 안 잘림
+PASS 390x844: 페이지 오류 0 
+PASS 360x640 violet: 컷인 뜸·상반신 그림 읽힘 (assets/r1174/persona-bust.webp, 576,768)
+PASS 360x640 violet: 머리(그림 위쪽) 안 잘림 — 잘린 높이 0.0px (그림 위 72, 자르는 상자 위 0 [화면])
+PASS 360x640 violet: 몸·손(마스크가 0 되기 전)에서 딱 끊기지 않음 — 잘린 높이 0.0px (마스크 끝 210, 상자 아래 640)
+PASS 360x640 violet: 좌우 안 잘림 (0.0/0.0)
+PASS 360x640 violet: 기술 이름 줄 화면 안
+PASS 360x640 violet: 별·구 그림 세로로 안 잘림
+PASS 360x640 meteor: 컷인 뜸·상반신 그림 읽힘 (assets/r1174/persona-bust.webp, 576,768)
+PASS 360x640 meteor: 머리(그림 위쪽) 안 잘림 — 잘린 높이 0.0px (그림 위 72, 자르는 상자 위 0 [화면])
+PASS 360x640 meteor: 몸·손(마스크가 0 되기 전)에서 딱 끊기지 않음 — 잘린 높이 0.0px (마스크 끝 210, 상자 아래 640)
+PASS 360x640 meteor: 좌우 안 잘림 (0.0/0.0)
+PASS 360x640 meteor: 기술 이름 줄 화면 안
+PASS 360x640 meteor: 별·구 그림 세로로 안 잘림
+PASS 360x640: 페이지 오류 0 
+
+R1209 결과: 통과 117 · 실패 0

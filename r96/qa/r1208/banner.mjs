@@ -1,0 +1,9 @@
+// R1208 헤드리스 확인: 사몽 디스토피아 구역에 들어설 때 배너 큰 글자가 'DYS-xx' 대신 연도로 멈추는지 화면 DOM 과 스크린샷으로 본다.
+// 사용: SW_URL=http://127.0.0.1:4410/m0/ node r96/qa/r1208/banner.mjs <out> [zone…]
+import {chromium,boot,skip} from '../r444/lib.mjs';import fs from 'node:fs';
+const OUT=process.argv[2];fs.mkdirSync(OUT,{recursive:true});const Z=process.argv.slice(3).length?process.argv.slice(3):['sz115-S06-7','sz115-S06-14','sz115-S06-22','sz115-S06-23'];
+const b=await chromium.launch();const {p}=await boot(b,{vp:{width:1280,height:720}});const res=[];
+for(const z of Z){await p.evaluate(async z=>{await window.__STORYWORLD_SAMONG_R103__.goZone(z);},z);await p.waitForFunction(()=>!loading,null,{timeout:120000});await skip(p);
+ await p.evaluate(()=>{for(const d of document.querySelectorAll('div'))if(d.querySelector(':scope>[data-b="big"]')){d.querySelector('[data-b="big"]').textContent='old';d.style.opacity='0';}});let txt=null;for(let i=0;i<200;i++){txt=await p.evaluate(()=>{const els=[...document.querySelectorAll('div')].filter(d=>d.querySelector(':scope>[data-b="big"]'));const el=els.find(e=>e.style.opacity==='1')||els[0];return el?{big:el.querySelector('[data-b="big"]').textContent,sub:el.children[1]?.textContent,op:el.style.opacity}:null;});if(txt&&txt.op==='1'&&/년$|DYS/.test(txt.big))break;await p.evaluate(()=>{try{if(typeof storyScene!=='undefined'&&storyScene&&typeof closeStoryScene==='function')closeStoryScene();}catch(_){}});await skip(p).catch(()=>{});await p.waitForTimeout(100);}
+ await p.evaluate(()=>{for(const d of document.querySelectorAll('div'))if(d.querySelector(':scope>[data-b="big"]'))d.style.opacity='1';});/* 헤드리스는 느려 3.6초 뒤 사라진 배너를 찍으려고 다시 보이게 한다 */await p.screenshot({path:OUT+'/banner-'+z+'.png'});res.push({zone:z,...txt});console.log(JSON.stringify(res.at(-1)));}
+fs.writeFileSync(OUT+'/banner.json',JSON.stringify(res,null,1));await b.close();
