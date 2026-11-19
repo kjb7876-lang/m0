@@ -55469,8 +55469,8 @@
     },
     {
       "path": "ego-sovereign-r1046.js",
-      "bytes": 23929,
-      "sha256": "1ab9a6c945ff0f4b184be2427401c3127235fc949bfc3bed2c17365c042b3d5f"
+      "bytes": 24189,
+      "sha256": "1a9bc152f832a93986a7a9d5d747faec177f4ce01c417fe4787d94d4e89d05ad"
     },
     {
       "path": "ego-summon-r1157.js",
@@ -55696,6 +55696,11 @@
       "path": "hero-facing-r336.js",
       "bytes": 2132,
       "sha256": "877f2b8f9988ab1c4b2eac31529a2e6c2b1d6dbb52f6bbd03f822d636f7cb8a9"
+    },
+    {
+      "path": "hero-fit-r1240.js",
+      "bytes": 9464,
+      "sha256": "d3a40601c1fe348346e451e4b298c83515fde53cb708c484a0089b611823df7d"
     },
     {
       "path": "hero-fx-r102.js",
@@ -55929,8 +55934,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6582849,
-      "sha256": "6ad31931abbef0879082ec65e70514cb1cae3d0ac87dc62b25134fff733efbd4"
+      "bytes": 6582893,
+      "sha256": "e4dfbf775df09d72db9e0cb82647a6524ee3aef5a3fce35c99060b5366384b6a"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -56369,8 +56374,8 @@
     },
     {
       "path": "nav-r176.js",
-      "bytes": 5684,
-      "sha256": "dc9f25885b4cbc747d36fe10f234459df1acfdb8af0b0d972d83ef9952d3d886"
+      "bytes": 6091,
+      "sha256": "74c857bc471f6dca96436d2d51be9412dad0ca433b3f20ae751d678bb3a06cec"
     },
     {
       "path": "neon-lauren-r437.js",
@@ -56514,8 +56519,8 @@
     },
     {
       "path": "persona-hero-r1113.js",
-      "bytes": 52837,
-      "sha256": "a8b433359a53ec829ee7d4c7d965c7708d1c51bd7d5c7edbbf769c6ca15b959f"
+      "bytes": 53095,
+      "sha256": "f70f536b43e382aa809fde3103a694b71729040ccaf7882ad81525eff21e7d51"
     },
     {
       "path": "persona-ink-r1097.js",
@@ -57393,9 +57398,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11478,
-  "totalBytes": 1372563785,
-  "webHTMLSha256": "6ad31931abbef0879082ec65e70514cb1cae3d0ac87dc62b25134fff733efbd4",
+  "fileCount": 11479,
+  "totalBytes": 1372574218,
+  "webHTMLSha256": "e4dfbf775df09d72db9e0cb82647a6524ee3aef5a3fce35c99060b5366384b6a",
   "largest": [
     {
       "path": "index.html",
