@@ -19,8 +19,14 @@ const WALL_TEXT=Object.freeze(['나는 다른 사람과 다르며','마음만 �
 const GRAFFITI=Object.freeze({title:'누군가의 낙서',text:'나는 다른 사람과 다르며, 마음만 먹으면 끊을 수 있고, 이번이 마지막이라는 믿음이었다.',reach:3.2,height:210});
 // R1237(11:51Z): '과거의 봉인 성물함'(r80-072)은 결전의 날 보스방에 큰 것 하나만. 두 지역의 R80/R81 장면 소품 성물함은 뺀다.
 const SEAL_PATH='assets/world-r80/r80-072.webp',SEAL_ZONES=new Set(['ep1a09b','ep1a10']);
-function pruneSeals(r){if(!r||!Array.isArray(r.props)||r.layer!=='STORY'||!SEAL_ZONES.has(r.id))return 0;const before=r.props.length;
- r.props=r.props.filter(p=>!(p&&!p.r317&&p.r80Dressing&&String(p.path||'')===SEAL_PATH));return before-r.props.length;}
+//  장면 소품 수(지역마다 8개, R81·R86 관문)는 지키므로 빼지 않고 지역에 맞는 기존 R80 그림으로 바꿔 입힌다(새 자산 없음):
+//  중독의 도시 = 쓰레기 더미(r80-025)·신호등(r80-052) 번갈아, 결전의 날 = 무너진 궁전 기둥(r80-021).
+const SEAL_SWAP=Object.freeze({ep1a10:['r80-025','r80-052'],ep1a09b:['r80-021']});
+function pruneSeals(r){if(!r||!Array.isArray(r.props)||r.layer!=='STORY'||!SEAL_ZONES.has(r.id))return 0;const D=window.__STORYWORLD_ASSETS_R80_DATA__,keys=SEAL_SWAP[r.id];let n=0;
+ for(const p of r.props){if(!p||p.r317||!p.r80Dressing||String(p.path||'')!==SEAL_PATH)continue;const key=keys[n%keys.length],a=D?.assets?.[key];n++;
+  if(a){p.path=a.path;p.r80Art=key;p.height=64*(a.scale||1);p.r1237Reskin=true;}else p.visible=false;}
+ if(n&&typeof ensureImages==='function')try{Promise.resolve(ensureImages([...new Set(keys.map(k=>D?.assets?.[k]?.path).filter(Boolean))])).catch(fail);}catch(e){fail(e);}
+ return n;}
 const SPECS=Object.freeze({ep1a09b:{file:'blood-memory',dir:'assets/r161/tiles/',floor:0xdab8b2,wall:0x9c8664},ep1a10:{file:'asphalt',dir:'assets/r118/tiles/',floor:0xdce2ee,wall:0x87919c}});
 const stats={layouts:0,rooms:0,plays:0,skips:0,completed:0,errors:0};let lastError=null,active=null,seen=false;
 try{seen=JSON.parse(localStorage.getItem(KEY)||'null')?.seen===true;}catch(_){}

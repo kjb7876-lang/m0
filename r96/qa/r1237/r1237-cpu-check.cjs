@@ -62,9 +62,10 @@ check('R1062 deny table keeps previous zones and adds ep1a10 cart only',()=>{con
 
 // 봉인 성물함(11:51Z): 중독의 도시 0개, 결전의 날 큰 것 1개(보스방), 그 1개는 장식, 다른 성물함은 포인트 상자
 const seals=JSON.parse(run(`(()=>{const out={};for(const id of ['ep1a10','ep1a09b']){const r=makeRoom(id,'STORY');__STORYWORLD_MAPS_PALACE_SLUM_R317__.apply(r);const L=r.exploration,b=L.worldWardR81?.bossAnchor,door=L.worldR74.doors.find(d=>d.id===L.bossDoorId);
- const s=r.props.filter(p=>/r80-072/.test(String(p.path||'')));out[id]={n:s.length,rows:s.map(p=>({x:p.x,y:p.y,h:p.height,keep:!!p.r1237Seal,crate:__STORYWORLD_CRATES_R108__.eligible(p),dBoss:b?Math.hypot(p.x-b.x,p.y-b.y):null,
+ const s=r.props.filter(p=>/r80-072/.test(String(p.path||'')));out[id]={scene:r.props.filter(p=>p.r80Dressing&&!p.r224Furniture&&!p.r449Furniture).length,n:s.length,rows:s.map(p=>({x:p.x,y:p.y,h:p.height,keep:!!p.r1237Seal,crate:__STORYWORLD_CRATES_R108__.eligible(p),dBoss:b?Math.hypot(p.x-b.x,p.y-b.y):null,
    sameSideAsBoss:door&&b?Math.sign((p.x+p.y)-(door.x+door.y))===Math.sign((b.x+b.y)-(door.x+door.y)):null}))};}
  out.other=__STORYWORLD_CRATES_R108__.eligible({id:'x',x:1,y:1,path:'assets/world-r80/r80-072.webp',r80Dressing:true});return JSON.stringify(out);})()`));
+check('scene-prop count kept at 8+ in both zones (R81 environment / R86 usage gates) — reliquaries reskinned, not dropped',()=>{for(const z of ['ep1a10','ep1a09b'])assert.ok(seals[z].scene>=8,z+' '+seals[z].scene);});
 check('ep1a10 has no seal reliquary (8 removed)',()=>assert.equal(seals.ep1a10.n,0,JSON.stringify(seals.ep1a10)));
 check('ep1a09b has exactly one reliquary, enlarged (>=120px), in the boss room near the boss anchor',()=>{assert.equal(seals.ep1a09b.n,1,JSON.stringify(seals.ep1a09b));const s=seals.ep1a09b.rows[0];assert.ok(s.keep&&s.h>=120&&s.dBoss<=9&&s.sameSideAsBoss,JSON.stringify(s));});
 check('boss-room reliquary is decoration, not a point box',()=>assert.equal(seals.ep1a09b.rows[0].crate,false));
