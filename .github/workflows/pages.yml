@@ -897,6 +897,8 @@ jobs:
         run: node r96/qa/r1092/r1092-cpu-check.cjs
       - name: R1040 boss pattern frame fx CPU check
         run: node r96/qa/r1040/boss-pattern-fx-cpu-check.cjs
+      - name: R1198 persona highlight celestial skills (silver giant / abyss dwarf share up, range and effect size x1.5-1.7, Dots sheet flourishes, (true) laser wider) CPU check
+        run: node r96/qa/r1198/persona-highlight-cpu-check.cjs
       - name: R1192 boss effect visibility (meteor alpha curve, no R181 dimming, contrast underlay) CPU check
         run: node r96/qa/r1192/r1192-boss-fx-vis-cpu-check.cjs
       - name: R1042 lust boss kiss lips attack (telegraph, 66 percent of current HP, frame sheets) CPU check
