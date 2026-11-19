@@ -104,7 +104,7 @@ function tongue(bx,by,bw,th,sway,col,alpha,edge){ctx.fillStyle=rgba(col,alpha);c
  ctx.quadraticCurveTo(bx,by+bw*.45,bx-bw,by);ctx.closePath();ctx.fill();
  if(edge){ctx.strokeStyle=rgba(edge,Math.min(1,alpha*1.25));ctx.lineWidth=Math.max(1,1.2*(typeof zoom==='number'?zoom:1));ctx.beginPath();ctx.moveTo(bx-bw*.9,by-th*.12);ctx.bezierCurveTo(bx-bw*.98,by-th*.45,bx+sway*.4-bw*.5,by-th*.7,bx+sway,by-th);ctx.stroke();}}
 // 고리 둘레 혀 n개. part='back' 은 뒤쪽 반(키 큼), 'front' 는 앞쪽 반(키 낮고 옅음). 혀마다 박자가 다르다.
-function crown(x,fy,h,F,a,n,part,seed){const t=now(),rx=h*.36,ry=rx*.38;
+function crown(x,fy,h,F,a,n,part,seed,weak){const t=now(),rx=h*.36,ry=rx*.38;
  const rows=[];for(let i=0;i<n;i++){const ang=Math.PI*2*(i+.5)/n+seed,s=Math.sin(ang);if((part==='back')!==(s<=0.05))continue;rows.push({i,ang,s});}
  rows.sort((u,v)=>u.s-v.s);
  for(const {i,ang,s} of rows){const bx=x+Math.cos(ang)*rx,by=fy+s*ry,ph=t*(6.5+2.5*rnd(seed,i))+i*1.9,
@@ -112,12 +112,13 @@ function crown(x,fy,h,F,a,n,part,seed){const t=now(),rx=h*.36,ry=rx*.38;
   th=h*(part==='back'?1.85:.8)*side*fl*(.85+.3*rnd(seed,i+9)),bw=h*(.15+.04*rnd(seed,i+17)),sway=Math.sin(t*3.1+i*1.7)*h*.08-Math.cos(ang)*h*.06,
   al=(part==='back'?1:.36)*a;
   // 겉불(주색)은 덮어 칠해 하얗게 타 버리지 않게, 속불(보조색)만 더해 빛나게.
-  ctx.globalCompositeOperation='lighter';if(part==='back')tongue(bx,by,bw*1.5,th*1.12,sway*1.2,F.main,.12*al,null);
+  ctx.globalCompositeOperation='lighter';if(part==='back'&&!weak)tongue(bx,by,bw*1.5,th*1.12,sway*1.2,F.main,.12*al,null);
   ctx.globalCompositeOperation='source-over';tongue(bx,by,bw,th,sway,F.main,.46*al,F.sub);
   ctx.globalCompositeOperation='lighter';tongue(bx,by,bw*.5,th*.66,sway*.8,F.sub,.32*al,null);}}
 function aura(p,layer){const q=project(p.x,p.y),Z=typeof zoom==='number'?zoom:1,h=typeof actorHeight==='function'?actorHeight():66*Z,
  lift=Math.max(0,Math.min(h*.65,Number(p.visualLiftPx)||0)),fy=q.y-lift,F=palette(String(p.hero||'hwando')),seed=rnd(String(p.hero).length,3)*6,
- a=fade(p),low=lowFx(),t=now(),n=low?8:14;
+ a=fade(p),low=lowFx(),t=now(),weak=perfStep()<=4,n=weak?6:low?8:14;
+ // R1217 ④(사용자 2026-11-19 "1-4 개선적용"): 성능 7단계 1~4 는 사몽 불꽃 오라를 크게 줄인다 — 혀 6개·불티 4개, 뒤쪽 바깥 큰 혀(lighter) 생략. 5~7 그대로.
  const draw=()=>{ctx.save();try{ctx.globalCompositeOperation='lighter';
   if(layer==='back'){
    // 몸 둘레 은은한 빛(타원 두 겹)
@@ -128,12 +129,12 @@ function aura(p,layer){const q=project(p.x,p.y),Z=typeof zoom==='number'?zoom:1,
    ctx.fillStyle=rgba(F.main,.18*a);ctx.beginPath();ctx.arc(0,0,h*.6*pr,0,Math.PI*2);ctx.fill();
    ctx.strokeStyle=rgba(F.sub,.6*a);ctx.lineWidth=Math.max(1,2.2*Z);ctx.beginPath();ctx.arc(0,0,h*.46*pr,0,Math.PI*2);ctx.stroke();ctx.restore();
    // 뒤쪽 불꽃 혀(키 큼)
-   crown(q.x,fy,h,F,a,n,'back',seed);
+   crown(q.x,fy,h,F,a,n,'back',seed,weak);
   }else{
    // 앞쪽 불꽃 혀(낮고 옅게, 몸이 보이게)
-   crown(q.x,fy,h,F,a,n,'front',seed);
+   crown(q.x,fy,h,F,a,n,'front',seed,weak);
    // 위로 솟는 불티
-   const m=low?5:12;for(let i=0;i<m;i++){const ph=(t*(.55+.35*rnd(seed,i))+rnd(seed,i+40))%1,
+   const m=weak?4:low?5:12;for(let i=0;i<m;i++){const ph=(t*(.55+.35*rnd(seed,i))+rnd(seed,i+40))%1,
     ex=q.x+(rnd(seed,i+80)-.5)*h*.9+Math.sin(t*4+i)*h*.06,ey=fy-h*(.1+1.45*ph),sz=(1.6+2.4*rnd(seed,i+120))*Z*(1-ph*.5);
     ctx.fillStyle=rgba(i%2?F.main:F.sub,.85*(1-ph)*a);ctx.beginPath();ctx.moveTo(ex,ey-sz*1.8);ctx.lineTo(ex+sz*.7,ey);ctx.lineTo(ex,ey+sz*.9);ctx.lineTo(ex-sz*.7,ey);ctx.closePath();ctx.fill();}
   }

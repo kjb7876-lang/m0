@@ -523,6 +523,8 @@ jobs:
         run: node r96/qa/r1213/r1213-cpu-check.cjs
       - name: R1214 귀신 계열 몹 원거리(공포·암흑·그림자·촉수) CPU check
         run: node r96/qa/r1214/r1214-cpu-check.cjs
+      - name: R1222 늪 혼령체 물 튐 늪색 CPU check
+        run: node r96/qa/r1222/r1222-cpu-check.cjs
       - name: R1206 samong one mob one image, death look, one memory fragment, ink ground attack CPU check
         run: node r96/qa/r1206/r1206-cpu-check.cjs
       - name: R1206b samong mood props lantern inkpost shard canvas stone from Dots art CPU check
@@ -549,6 +551,12 @@ jobs:
         run: node r96/qa/r1199/r1199-clone-cpu-check.cjs
       - name: R1211 R1199 후속 — 흑백 예열 텍스처 참조 돌려주기·R409 컬러/흑백 테두리 열쇠 나누기 CPU check
         run: node r96/qa/r1211/r1211-cpu-check.cjs
+      - name: R1217 사몽 흑백 셰이더(흑백 사본 없이)·R409 흑백 몸 테두리 CPU check
+        run: node r96/qa/r1217/r1217-shader-cpu-check.cjs
+      - name: R1217 사몽 그림 기본 목록·로딩 화면 미리 읽기 CPU check
+        run: node r96/qa/r1217/r1217-warm-cpu-check.cjs
+      - name: R1217 각성 연출 0.3초 나눠 켜기·성능 1~4단계 줄이기 CPU check
+        run: node r96/qa/r1217/r1217-stagger-cpu-check.cjs
       - name: R1177f 기억 지역 몹 타격 Dots CX-0160MF(육망성 없음)
         run: node r96/qa/r1177/r1177f-cpu-check.cjs
       - name: R701 survival 77s choice window, difficulty, hero picker CPU check
@@ -817,6 +825,8 @@ jobs:
         run: node r96/qa/r1149/r1149b-deploy-cpu-check.cjs
       - name: R1150 boss enrage (all modes) 1.06x body, all stats +66% (damage, move, attack speed, defense), 0.6% max HP regen per second CPU check
         run: node r96/qa/r1150/r1150-cpu-check.cjs
+      - name: R1225 story mode enemies and bosses take half of all damage (fixed, proc, max-HP %), normal-mob instakills kept, samong episode/survival/cinema unchanged CPU check
+        run: node r96/qa/r1225/r1225-cpu-check.cjs
       - name: R537 spider cave mud-back spider and memory-carrier spider, swamp root stalker renamed CPU check
         run: node r96/qa/r537/r537-cpu-check.cjs
       - name: R450 zone weather (63 story zones indoor/outdoor/cave/void, dust instead of rain indoors, canon weather, double-sided streaks) CPU check
@@ -967,6 +977,8 @@ jobs:
         run: node r96/qa/r1041/r1041-cpu-check.cjs
       - name: R1044 story-window recorded narration voice + remove unused voice buttons CPU check
         run: node r96/qa/r1044/r1044-cpu-check.cjs
+      - name: R1223 memory-fragment paper + entry video recorded voice by default, one always-visible voice off button + settings row CPU check
+        run: node r96/qa/r1223/r1223-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
         run: node r96/qa/r430/r430-cpu-check.cjs
       - name: R431 boss-room center fights + theme boss skill 6s + touch status/DoT + black-flame prop throws CPU check
@@ -1048,6 +1060,8 @@ jobs:
         run: node r96/qa/r439/hwando-tip-cpu-check.cjs
       - name: R1063 Hwando cloth texture unified to the down-walk reference CPU check
         run: node r96/qa/r1063/r1063-cpu-check.cjs
+      - name: R1219 Hwando front walk keeps the sword sheathed CPU check
+        run: node r96/qa/r1219/r1219-cpu-check.cjs && python3 r96/qa/r1219/front_walk_check.py && python3 r96/qa/r1219/sheathed_check.py
       - name: R447 R74 ash moth flaps its wings while moving CPU check
         run: node r96/qa/r447/mob-flap-cpu-check.cjs
       - name: R440 heroes play their attack motion while casting skills CPU check

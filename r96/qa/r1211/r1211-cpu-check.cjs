@@ -19,7 +19,7 @@ function mk(opt={}){
   refs(){let s=0;for(const r of textures.values())s+=r.refs;return s;}};};
  const three={commands:mkScene(),renderer:{initTexture(){}}};
  const sb={console,Math,JSON,Set,Map,WeakMap,WeakSet,Object,Array,Number,String,Boolean,Error,Promise,setTimeout,
-  localStorage:{getItem:()=>null,setItem(){}},NodeFilter:{SHOW_TEXT:4},performance:{now:()=>0},
+  localStorage:{getItem:k=>/r111\.play$/.test(k)?'{"samongShader":false}':null,setItem(){}},/* R1217: 기본은 셰이더 흑백 — 이 검사는 흑백 사본 길(samongShader:false)을 본다 */NodeFilter:{SHOW_TEXT:4},performance:{now:()=>0},
   document:{getElementById:()=>null,querySelector:()=>null,createTreeWalker:()=>({nextNode:()=>null}),
    createElement:()=>{let w=0;return{get width(){return w;},set width(v){w=v;},height:0,getContext:()=>({filter:'none',drawImage(){}})};}},
   time:10,started:true,modal:false,loading:false,settings:{lowFx:false},zoom:1,target:null,layer:'DREAM',

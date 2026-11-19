@@ -1,0 +1,55 @@
+{
+ "revision": "R1219b-hwando-front-sheath-2",
+ "source": "assets/r436/hwando/walk-s.webp",
+ "source_sha256": "8d8837750e4201c1da00690c749f90ce7b672b53401225dd87c6035114a1382a",
+ "file": "walk-s.webp",
+ "sha256": "466c975261ac417661e52d68eb47471a3514fe5aae6deba5ab9136975baa20f0",
+ "bytes": 130944,
+ "frames": [
+  {
+   "frame": 0,
+   "blade_px": 578,
+   "filled_px": 104,
+   "sway_head_px": -1.0,
+   "bob_px": 1.5
+  },
+  {
+   "frame": 1,
+   "blade_px": 597,
+   "filled_px": 118,
+   "sway_head_px": -2.0,
+   "bob_px": 0.0
+  },
+  {
+   "frame": 2,
+   "blade_px": 550,
+   "filled_px": 96,
+   "sway_head_px": -1.0,
+   "bob_px": -0.0
+  },
+  {
+   "frame": 3,
+   "blade_px": 580,
+   "filled_px": 107,
+   "sway_head_px": 1.0,
+   "bob_px": 1.5
+  },
+  {
+   "frame": 4,
+   "blade_px": 585,
+   "filled_px": 109,
+   "sway_head_px": 2.0,
+   "bob_px": 0.0
+  },
+  {
+   "frame": 5,
+   "blade_px": 593,
+   "filled_px": 104,
+   "sway_head_px": 1.0,
+   "bob_px": 0.0
+  }
+ ],
+ "temporary": true,
+ "front_idle_frame": 2,
+ "note": "칼날을 지우고 상체에 걸음 박자 오르내림·체중 이동을 넣은 임시 파생본(다리·발 불변). Dots 칼집 걷기 시트가 오면 바꾼다. 색인·발 기준점·몸 키는 R436 index.json 그대로."
+}
