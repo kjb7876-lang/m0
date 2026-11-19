@@ -18,9 +18,10 @@ const CASES=[
  ['ep1a11:DREAM','거짓천국 근위천사',/assets\/r380\/mobs\/false-heaven-guard-v1\./],
  ['ep1a10:DREAM','부정의 잔영',/assets\/r380\/mobs\/samong-m066-v3\./],
  ['last305:STORY','피리 고블린',/assets\/r1233\/mobs\/m044\./],
+ ['cult05:STORY','중간보스 · ID 배양 점액체',/assets\/r380\/mobs\/legacy-m130-slime-cult05-v2\./],/* R81 지역 수호자(앞말 붙은 일반몹) */
 ];
 // 대조군: 손대지 않아야 할 이름·층
-const CONTROL=[['sz115-S04-2','규칙을 어기지 않는 마네킹',/assets\/r410\/mobs\/m072\./],['sz115-S04-10','규칙을 어기지 않는 마네킹',/assets\/r410\/mobs\/m072\./],
+const CONTROL=[['sz115-S04-2','규칙을 어기지 않는 마네킹',/assets\/r410\/mobs\/m072\./],['sz115-S04-10','규칙을 어기지 않는 마네킹',/assets\/r410\/mobs\/m072\./],['sz115-S04-3','규칙을 어기지 않는 마네킹',/assets\/r410\/mobs\/m072\./],
  ['ep1a10:STORY','부정의 잔영',/assets\/r92\/mobs\/M016-|denial_specter/],['ep1a11:STORY','거짓천국 근위천사',/assets\/r380\/mobs\/false-heaven-guard-v1\./],['last305:STORY','숲 고블린',/M047-|Monster_Goblin/]];
 const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:640,height:360}});
 await ctx.addInitScript(()=>{localStorage.setItem('storyworld.r790.npc','{"on":false}');localStorage.setItem('storyworld.r183.scene3d','{"on":false}');});
@@ -38,16 +39,16 @@ async function visit(z){if(z.includes(':')){const [id,l]=z.split(':');await p.ev
  await p.evaluate(()=>{__T.seen=new Map();player.invincible=1e9;});
  for(let k=0;k<10;k++){const left=await p.evaluate(()=>{player.invincible=1e9;const L=(room.enemies||[]).filter(e=>e.hp>0&&!e.__t1233);const B=L.slice(0,9);B.forEach((e,n)=>{e.__t1233=1;e.speed=0;const a=n/9*6.283;e.x=player.x+Math.cos(a)*1.6;e.y=player.y+Math.sin(a)*1.1;});return L.length-B.length;});await waitGame(.6);await skip();if(left<=0)break;}
  return p.evaluate(()=>{const U=window.__STORYWORLD_MOB_UNIQUE_R248__,S=window.__STORYWORLD_STORY_COMBAT_R54__;const out=[];
-  for(const [e,o] of __T.seen){let fp='';try{const f=S.frameFor(e,null);fp=String(f?.path||'');}catch(_){}out.push({name:e.name,base:U?.baseName?.(e.name)||e.name,drawn:o,frame:fp,cover:!!U?.covers?.(e),v:e.r1233?.v||null,boss:!!(e.boss||e.midboss)});}return out;});}
+  for(const [e,o] of __T.seen){let fp='';try{const f=S.frameFor(e,null);fp=String(f?.path||'');}catch(_){}out.push({name:e.name,base:U?.baseName?.(e.name)||e.name,drawn:o,frame:fp,cover:!!U?.covers?.(e),v:e.r1233?.v||null,boss:!!(e.boss||e.midboss),ward:!!e.wardChampionR81});}return out;});}
 const ctlMiss=[];const byZone={};for(const c of [...CASES,...CONTROL])(byZone[c[0]]=byZone[c[0]]||[]).push(c);
 const ONLY=process.env.ONLY?new RegExp(process.env.ONLY):null;/* 실패한 구역만 다시 볼 때 ONLY=정규식 */
 for(const [z,list] of Object.entries(byZone)){if(ONLY&&!ONLY.test(z))continue;const R=await visit(z);
- for(const [,name,re] of list){const L=R.filter(r=>r.base===name&&!r.boss);const ctl=CONTROL.some(c=>c[0]===z&&c[1]===name);
+ for(const [,name,re] of list){const L=R.filter(r=>(r.base===name||r.name===name||String(r.name).startsWith(name+' '))&&!r.boss);const ctl=CONTROL.some(c=>c[0]===z&&c[1]===name);
   if(ctl){if(!L.length&&/마네킹/.test(name)){ctlMiss.push(z);continue;}ok(`대조군 ${z} ${name}: 원래 그림 그대로`,L.length>0&&L.every(r=>Object.keys(r.drawn).some(k=>re.test(k))),L.map(r=>r.drawn));continue;}
   ok(`${z} ${name}: 몹이 나옴`,L.length>0,[...new Set(R.map(r=>r.base))]);
   ok(`${z} ${name}: ${L.length}마리 모두 채택 그림으로 그림`,L.length>0&&L.every(r=>Object.keys(r.drawn).some(k=>re.test(k))),L.map(r=>[r.name,r.drawn]));
   ok(`${z} ${name}: 임시 후보 시트(R248·R290·R410)·꼭두각시 한 장으로 그린 몹 없음`,L.every(r=>!Object.keys(r.drawn).some(k=>TEMP.test(k)||/^blob:/.test(k))),L.filter(r=>Object.keys(r.drawn).some(k=>TEMP.test(k)||/^blob:/.test(k))).map(r=>[r.name,r.drawn]));}
  if(SHOTS)await p.screenshot({path:`${SHOTS}/r1233-${z}.jpg`,quality:85});}
-ok('대조군 마네킹이 S-04 두 구역 중 하나 이상에서 나옴(구역마다 몹 구성이 무작위)',ctlMiss.length<2,ctlMiss);
+ok('대조군 마네킹이 S-04 세 구역 중 하나 이상에서 나옴(구역마다 몹 구성이 무작위)',ctlMiss.length<3,ctlMiss);
 ok('페이지 오류 0',errs.length===0,errs.slice(0,3));
 console.log(`\nR1233 browser ${n-bad}/${n}`);await b.close();process.exit(bad?1:0);

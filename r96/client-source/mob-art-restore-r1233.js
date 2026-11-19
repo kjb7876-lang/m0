@@ -10,13 +10,14 @@
 //    ① 은 R200 frameFor 가 원래대로 잔영 그림을 그리고, ② 는 R54 frameFor 사슬 바깥에서 R380 frameOf 로 같은 이름의 채택 그림 줄을 그린다.
 //    같은 이름 = 같은 몹이라 같은 그림(R248 규칙 "같은 몹의 변형은 같은 그림"). 판정·체력·피해·보상·이름·저장은 그대로(그림만).
 //    ③ 같은 지역에 테마 그림이 이미 있는데 R410 이 엉뚱한 후보(상자머리 인형)를 얹은 몹: 마지막 길 '피리 고블린' → 같은 숲 고블린 그림을 피부색만 바꿔 시트로.
-//  · 보스·중간보스(R1224·R1218 몫)·안정화 집행체(R1226 몫)·탑·소환진은 건드리지 않는다. 사몽 에피소드 -M-·-P- 판 Dots 그림(R1187 DU-10·11)도 그대로.
+//    ④ R81 지역 수호자('중간보스 · ' 앞말이 붙은 일반몹 — R380 이름 정규식이 앞말 때문에 못 맞춤): 앞말 뺀 이름으로 R380 에 다시 물어 같은 채택 그림(cult05 'ID 배양 점액체').
+//  · 보스·중간보스(e.boss·e.midboss, R1224·R1218 몫)·안정화 집행체(R1226 몫)·탑·소환진은 건드리지 않는다. 사몽 에피소드 -M-·-P- 판 Dots 그림(R1187 DU-10·11)도 그대로.
 //  · 끄기: localStorage['storyworld.r1233.restore']='{"on":false}'. API window.__STORYWORLD_MOB_ART_RESTORE_R1233__.
 (()=>{'use strict';
 if(window.__STORYWORLD_MOB_ART_RESTORE_R1233__)return;
-const REV='R1233-restore-1',KEY='storyworld.r1233.restore',INDEX='assets/r380/mobs/index.json';
+const REV='R1233-restore-2',KEY='storyworld.r1233.restore',INDEX='assets/r380/mobs/index.json';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
-const stats={shade:0,rows:0,frames:0,installs:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
+const stats={shade:0,rows:0,ward:0,frames:0,installs:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 // ② [기본 이름, 어디서(samong: 사몽 에피소드 구역 키 정규식 / dream: 스토리 사몽 꿈 층), R380 표 줄 id]
 const MAP=Object.freeze([
  ['찢긴 호외의 잔향',{samong:/(^|[^0-9])S-?05([^0-9]|$)/},'samong-s05-wraith-officer-v2'],
@@ -37,11 +38,20 @@ function shadeOf(e){if(skip(e)||!e.r200Shade)return null;try{const m=window.__ST
 function rowOf(e){if(skip(e))return null;const b=baseName(e.r200OrigName&&!e.r200Shade?e.r200OrigName:e.name);const x=MAP.find(r=>r[0]===b);if(!x)return null;
  const w=x[1];if(w.samong){if(!e.samongR103||!w.samong.test(zoneKey()))return null;}else if(w.dream){if(!dream()||e.samongR103)return null;}
  return rows[x[2]]||null;}
-function pick(e){const s=shadeOf(e);if(s)return {kind:'shade',row:s};const r=rowOf(e);return r?{kind:'r380',row:r}:null;}
+// ④ R81 지역 수호자(일반몹 그림을 키운 것, 이름 앞에 '중간보스 · ' — e.midboss 아님): R380 줄 이름 정규식('^ID 배양 점액체' 등)이 앞말 때문에 못 맞춰
+//    R248 임시 후보 시트(cult05 수호자 → R410 상자머리 m056)로 떨어졌다. 앞말 뺀 이름의 사본으로 R380 본래 assign 에 물어 그 줄(층·지역·slot 조건 그대로)을 쓴다.
+//    사본만 묻고 몹 자신의 이름·상태는 건드리지 않는다. 3초마다·이름·층·방이 바뀌면 다시 묻는다(R200 이 늦게 읽혀도 따라감).
+let r380Base=null;
+const ward=e=>prefs.on&&!!e&&e.wardChampionR81===true&&!e.boss&&!e.midboss&&!e.hero&&!e.r170Tower&&!e.r251Circle&&/^(중간보스|준보스)\s*·/.test(String(e.name||''));
+function wardRow(e){if(!ward(e)||!r380Base)return null;let k='';try{k=String(e.name)+'|'+(dream()?'D':'S')+'|'+String(room?.id||'')+'|'+String(player?.hero||'')+'|'+Math.floor(Date.now()/3000);}catch(_){k=String(e.name);}
+ if(e.r1233WardK===k)return e.r1233WardRow||null;let r=null;
+ try{const c={...e,name:baseName(e.name)};for(const f of ['r380Checked','r380Mob','r380Renamed','r389Renamed','r389From'])delete c[f];r=r380Base.fn.call(r380Base.self,c)||null;}catch(err){fail(err);}
+ e.r1233WardK=k;e.r1233WardRow=r;return r;}
+function pick(e){const s=shadeOf(e);if(s)return {kind:'shade',row:s};const r=rowOf(e);if(r)return {kind:'r380',row:r};const w=wardRow(e);return w?{kind:'ward',row:w}:null;}
 function installAssign(){const A=window.__STORYWORLD_APPROVED_MOBS_R380__;if(!A||A.__r1233)return !!A;
- const base=A.assign;window.__STORYWORLD_APPROVED_MOBS_R380__=Object.freeze({...A,__r1233:true,assign(e){const own=base.call(this,e);if(own)return own;try{const p=pick(e);if(p){stats[p.kind==='shade'?'shade':'rows']++;return p.row;}}catch(err){fail(err);}return own;}});stats.installs++;return true;}
+ const base=A.assign;r380Base={fn:base,self:A};window.__STORYWORLD_APPROVED_MOBS_R380__=Object.freeze({...A,__r1233:true,assign(e){const own=base.call(this,e);if(own)return own;try{const p=pick(e);if(p){stats[p.kind==='shade'?'shade':p.kind==='ward'?'ward':'rows']++;return p.row;}}catch(err){fail(err);}return own;}});stats.installs++;return true;}
 function installFrame(){const S=window.__STORYWORLD_STORY_COMBAT_R54__,A=window.__STORYWORLD_APPROVED_MOBS_R380__;if(!S||typeof S.frameFor!=='function'||!A?.frameOf)return false;if(S.__r1233)return true;
- const base=S.frameFor;window.__STORYWORLD_STORY_COMBAT_R54__=Object.freeze({...S,__r1233:true,frameFor(e,f){try{if(!shadeOf(e)){const r=rowOf(e);if(r){let own=null;try{const A2=window.__STORYWORLD_APPROVED_MOBS_R380__;own=A2.assign.call(A2,e);}catch(_){}
+ const base=S.frameFor;window.__STORYWORLD_STORY_COMBAT_R54__=Object.freeze({...S,__r1233:true,frameFor(e,f){try{if(!shadeOf(e)){const r=rowOf(e)||wardRow(e);if(r){let own=null;try{const A2=window.__STORYWORLD_APPROVED_MOBS_R380__;own=A2.assign.call(A2,e);}catch(_){}
   if(own===r){const im=typeof readyImage==='function'?readyImage(r.path):null;if(im?.image||im===true){stats.frames++;return A.frameOf(e,r,r.id);}if(!im&&typeof ensureImages==='function')Promise.resolve(ensureImages([r.path])).catch(()=>{});}}}}catch(err){fail(err);}return base.call(this,e,f);}});stats.installs++;return true;}
 function install(){try{if(!solo())return;installAssign();installFrame();}catch(e){fail(e);}}
 try{if(typeof document!=='undefined'&&document.readyState==='loading')document.addEventListener('DOMContentLoaded',install);else install();}catch(e){fail(e);}
