@@ -173,6 +173,9 @@ check('⑫ 임팩트 10형상: impact = assets/r1244/impact-<형상>.webp 파일
 {const e=make({hero:'neon',ls:{'storyworld.r1043.perf7':JSON.stringify({step:1})}});e.C().play('neon','awake');const im=e.el('r1244Cine').querySelector('.r1244impact');
  check('⑫ lite 는 임팩트 그림 안 받음',im.style.backgroundImage==='none',im.style.backgroundImage);}
 
+// R1244d: 헌터 임팩트 r3(노출 없음, 15세 기준) — 입력표가 r3 를 고름
+{const py=fs.readFileSync(path.join(root,'..','scripts','r1244-dots-r2.py'),'utf8');check("⑫ 입력표: 헌터 임팩트 = cx0178cn-r4 r3",/IMPACT_IN\[?['"]?hunter['"]?\]?\s*=\s*\(\s*'cx0178cn-r4'\s*,\s*'r3'\s*\)|'hunter'\s*:\s*\(\s*'cx0178cn-r4'\s*,\s*'r3'\s*\)/.test(py));}
+
 // ⑩ 연결
 const RT=path.join(root,'runtime-text'),html=fs.readFileSync(path.join(RT,'index.html'),'utf8');
 check('⑩ index.html 태그(samong-stagger-r1217 바로 뒤)',html.includes('<script src="./samong-stagger-r1217.js"></script>\n<script src="./cinema-cutin-r1244.js"></script>'));
