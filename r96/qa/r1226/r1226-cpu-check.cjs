@@ -27,6 +27,17 @@ if(!exists){// ⑩ 오만의 폐허핵(사용자 2026-11-19 "공격시 반대방
  D.sheets.m015.path='assets/r410/mobs/m015.webp';D.sheets.m015.body=208;g3.drawEnemy({hp:1,name:'x'});
  ok('stabilizer swap survives later R410 overwrite',D.sheets.m015.path==='assets/r1226/mobs/m015-stabilizer.webp'&&D.sheets.m015.body===150);
  g3.__STORYWORLD_MOB_MOTION_R1226__.set({sheets:false});ok('turn off after overwrite restores R410 path',D.sheets.m015.path==='assets/r410/mobs/m015.webp');}
+// ⑭ 초자아 잠식체 Dots 공격 시트(CX-0171EC, 몸 중심 다시 놓은 320×320 칸 4개): 원래 M017 공격 칸 번호대로 같은 번호 칸, 그림은 왼쪽을 봄
+{g.readyImage=p=>/superego-attack\.webp$/.test(p)?{image:{width:1280,height:320}}:/ego_corrosion_vessel\.webp$/.test(p)?{image:{width:418,height:418}}:null;
+ const e=mob({id:'a11:a11-d1',nativeId:'a11-d1',name:'초자아 잠식체'});ok('superego attack sheet FACE L',T.face['r1226/mobs/superego-attack.webp']==='L');
+ for(const i of [0,2,3]){const key=`blob:x/assets/r92/mobs/M017-attack.png:${i*205},0,205,196:6:enemy`;const b=body(key,[0,0,217,208],{},e);const L=draw(g,e,[b],false);
+  ok(`superego attack cell ${i} → sheet cell ${i}`,/superego-attack\.webp$/.test(String(L[0].sourcePath))&&L[0].sourceRect[0]===i*320&&L[0].sourceRect[2]===320);
+  const P=L[0].points,p=q(e.x,e.y),k=Math.abs(P[3][1]-P[0][1])/320;ok(`superego attack cell ${i} feet on anchor`,Math.abs((Math.min(P[0][1],P[3][1])+288*k)-p.y)<1e-6);}
+ const fe=fs.existsSync(path.join(R,'runtime-text','assets','r1226','mobs','superego-attack.webp'));ok('superego attack sheet asset exists + in inputs',fe&&fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8').includes('assets/r1226/mobs/superego-attack.webp'));}
+// ⑮ 기록기 안에서는 캐시 키가 아직 없고 경로 + sourceRect 로 온다(헤드리스에서 늘 0번 칸만 나왔던 원인) → sourceRect 로도 칸 번호를 읽는다
+{const e=mob({id:'a11:a11-d1',nativeId:'a11-d1',name:'초자아 잠식체'});
+ for(const i of [1,3]){const b=body('assets/r92/mobs/M017-attack.png',[i*205,0,205,196],{},e);const L=draw(g,e,[b],false);ok(`superego plain-path cell ${i} → sheet cell ${i}`,/superego-attack\.webp$/.test(String(L[0].sourcePath))&&L[0].sourceRect[0]===i*320);}}
+{const e=mob({id:'a11:a11-d1',nativeId:'a11-d1',name:'초자아 잠식체'});const b=body('assets/r92/mobs/M017-attack.png',[205,0,205,196],{},e),ov=body('assets/r92/mobs/M017-attack.png',[205,0,205,196],{},e);const L=draw(g,e,[b,ov],false);ok('superego plain-path overlay layer hidden',L[1].alpha===0);}
 console.log(`\n${pass} passed, ${fail} failed`);process.exit(1);}
 const src=C(F);
 ok('runtime copy matches source',fs.existsSync(path.join(R,'runtime-text',F))&&src===RT(F));
@@ -120,4 +131,15 @@ ok('M007 attack cells all R (faces right)',G7.join('')==='RRRR');
  D.sheets.m015.path='assets/r410/mobs/m015.webp';D.sheets.m015.body=208;g3.drawEnemy({hp:1,name:'x'});
  ok('stabilizer swap survives later R410 overwrite',D.sheets.m015.path==='assets/r1226/mobs/m015-stabilizer.webp'&&D.sheets.m015.body===150);
  g3.__STORYWORLD_MOB_MOTION_R1226__.set({sheets:false});ok('turn off after overwrite restores R410 path',D.sheets.m015.path==='assets/r410/mobs/m015.webp');}
+// ⑭ 초자아 잠식체 Dots 공격 시트(CX-0171EC, 몸 중심 다시 놓은 320×320 칸 4개): 원래 M017 공격 칸 번호대로 같은 번호 칸, 그림은 왼쪽을 봄
+{g.readyImage=p=>/superego-attack\.webp$/.test(p)?{image:{width:1280,height:320}}:/ego_corrosion_vessel\.webp$/.test(p)?{image:{width:418,height:418}}:null;
+ const e=mob({id:'a11:a11-d1',nativeId:'a11-d1',name:'초자아 잠식체'});ok('superego attack sheet FACE L',T.face['r1226/mobs/superego-attack.webp']==='L');
+ for(const i of [0,2,3]){const key=`blob:x/assets/r92/mobs/M017-attack.png:${i*205},0,205,196:6:enemy`;const b=body(key,[0,0,217,208],{},e);const L=draw(g,e,[b],false);
+  ok(`superego attack cell ${i} → sheet cell ${i}`,/superego-attack\.webp$/.test(String(L[0].sourcePath))&&L[0].sourceRect[0]===i*320&&L[0].sourceRect[2]===320);
+  const P=L[0].points,p=q(e.x,e.y),k=Math.abs(P[3][1]-P[0][1])/320;ok(`superego attack cell ${i} feet on anchor`,Math.abs((Math.min(P[0][1],P[3][1])+288*k)-p.y)<1e-6);}
+ const fe=fs.existsSync(path.join(R,'runtime-text','assets','r1226','mobs','superego-attack.webp'));ok('superego attack sheet asset exists + in inputs',fe&&fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8').includes('assets/r1226/mobs/superego-attack.webp'));}
+// ⑮ 기록기 안에서는 캐시 키가 아직 없고 경로 + sourceRect 로 온다(헤드리스에서 늘 0번 칸만 나왔던 원인) → sourceRect 로도 칸 번호를 읽는다
+{const e=mob({id:'a11:a11-d1',nativeId:'a11-d1',name:'초자아 잠식체'});
+ for(const i of [1,3]){const b=body('assets/r92/mobs/M017-attack.png',[i*205,0,205,196],{},e);const L=draw(g,e,[b],false);ok(`superego plain-path cell ${i} → sheet cell ${i}`,/superego-attack\.webp$/.test(String(L[0].sourcePath))&&L[0].sourceRect[0]===i*320);}}
+{const e=mob({id:'a11:a11-d1',nativeId:'a11-d1',name:'초자아 잠식체'});const b=body('assets/r92/mobs/M017-attack.png',[205,0,205,196],{},e),ov=body('assets/r92/mobs/M017-attack.png',[205,0,205,196],{},e);const L=draw(g,e,[b,ov],false);ok('superego plain-path overlay layer hidden',L[1].alpha===0);}
 console.log(`\n${pass} passed, ${fail} failed`);process.exit(fail?1:0);

@@ -13563,6 +13563,11 @@
       "sha256": "a1087a7d5acf3d86f128ffbfbb6810728805e9a53577c3baf8e7c3d60d151a0a"
     },
     {
+      "path": "assets/r1226/mobs/superego-attack.webp",
+      "bytes": 153774,
+      "sha256": "cb8a4c24fc31bd9776c2474679c4c9dc4a4d913a297c8cbc2dabd63b52aa8855"
+    },
+    {
       "path": "assets/r126/props/badge.webp",
       "bytes": 25464,
       "sha256": "fd12f3e8efd3654d060607145cbd6f6f55728f7fd65afd5a9f4d3d1507ae0281"
@@ -56224,8 +56229,8 @@
     },
     {
       "path": "mob-motion-consistency-r1226.js",
-      "bytes": 19082,
-      "sha256": "2ff0aa3da65fcdbebbc6d6e8705b04e10e1d99a80c077ea756fcfaa4772683f8"
+      "bytes": 20266,
+      "sha256": "1ed8f11ac57e442f4c8b78db9d3ec7987a8fcbbd29257ff13df37934e8d4ad3b"
     },
     {
       "path": "mob-motion-r286.js",
@@ -57408,8 +57413,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11481,
-  "totalBytes": 1372742942,
+  "fileCount": 11482,
+  "totalBytes": 1372897900,
   "webHTMLSha256": "33d467db34a2d3678d70e82db0a7852cf316ea91eb918cd745446e66e6f22a26",
   "largest": [
     {

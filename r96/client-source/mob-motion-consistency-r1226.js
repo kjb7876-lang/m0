@@ -45,6 +45,8 @@ const FACE=Object.freeze({
  'r198/mobs/M024-idle.png':'R','r92/mobs/M024-attack.png':'R','r198/mobs/M047-idle.png':'R','r198/mobs/M047-move.png':'R','r92/mobs/M047-attack.png':'R',
  // 안정화 집행체 새 시트(M012 원본, 위와 같은 손)
  'r1226/mobs/m015-stabilizer.webp':'L',
+ // 초자아 잠식체 Dots 공격 시트: 가면 얼굴·먹 고리 모두 왼쪽
+ 'r1226/mobs/superego-attack.webp':'L',
 });
 // SIZE: 열쇠 = 경로, 값 = 발 기준 배율(대기·걷기 기준 몸 키에 맞춤).
 const SIZE=Object.freeze({
@@ -72,17 +74,24 @@ swapSheets(prefs.on!==false&&prefs.sheets!==false);
 //  공격만 R92 M017(창 든 금빛 천사 — 다른 몹 그림)으로 바뀌어 동작마다 다른 몹처럼 보였다 → 공격 칸도 제 몸 그림으로 그린다(발·키 유지, R109 짧은 내딛기만).
 //  전용 공격 시트는 Dots 요청. ART_SWAP: 이름 → {from: 바꿀 그림 경로, to: 제 그림, toBox: 제 그림 알파 경계 [x0,y0,x1,y1,w,h], fromBody: 바꿀 칸 몸 키/칸 키}
 const ART_SWAP=Object.freeze([
- {name:/^초자아 잠식체/,nid:/^a11-d1$/,from:'r92/mobs/M017-attack.png',to:'assets/episode1a/generated-v392/ego_corrosion_vessel.webp',toBox:[26,8,356,393,418,418],fromBody:145/196},
+ {name:/^초자아 잠식체/,nid:/^a11-d1$/,from:'r92/mobs/M017-attack.png',to:'assets/episode1a/generated-v392/ego_corrosion_vessel.webp',toBox:[26,8,356,393,418,418],fromBody:145/196,
+  // Dots CX-0171EC 공격 4칸(ROUGH, scripts/r1226-superego-attack.py 로 몸 중심 x192·발 y288 에 다시 놓은 320×320 칸). 원래 M017 칸 번호와 같은 칸을 쓴다. 아직 못 읽었으면 위 몸 그림.
+  sheet:{to:'assets/r1226/mobs/superego-attack.webp',cells:4,cw:320,box:[191,79,193,288,320,320]}},
 ]);
 function artSwap(e,cmds,st,b,a,fx,fy){if(!prefs.sheets)return false;const R=ART_SWAP.find(r=>r.from===a.path&&(r.nid.test(String(e.nativeId||''))||r.name.test(String(e.name||''))));if(!R)return false;
- const im=typeof readyImage==='function'?readyImage(R.to)?.image:null;if(!im||!((im.naturalWidth||im.width)>0)){try{if(typeof addImage==='function')addImage(R.to,'R1226 art swap');}catch(_){}return false;}
+ const ready=p=>{const im=typeof readyImage==='function'?readyImage(p)?.image:null;if(im&&(im.naturalWidth||im.width)>0)return im;try{if(typeof addImage==='function')addImage(p,'R1226 art swap');}catch(_){}return null;};
+ const sx0=/:(\d+(?:\.\d+)?),(\d+(?:\.\d+)?),(\d+(?:\.\d+)?),(\d+(?:\.\d+)?):(\d+):/.exec(String(b.sourcePath||''));
+ const origSrc=String(b.sourcePath||''),origSr=b.sourceRect?Array.from(b.sourceRect):null;
+ let im=null,to=R.to,box=R.toBox,sr=null;
+ if(R.sheet){const sim=ready(R.sheet.to);if(sim){const so=b.sourceRect||[],cw=sx0?+sx0[3]:+so[2]||0,cx0=sx0?+sx0[1]:+so[0]||0,ci=cw>0?Math.max(0,Math.min(R.sheet.cells-1,Math.round(cx0/cw))):0;/* 기록기 안에선 캐시 키 없이 경로+sourceRect */im=sim;to=R.sheet.to;box=R.sheet.box;sr=[ci*R.sheet.cw,0,R.sheet.cw,box[5]];}}
+ if(!im){im=ready(R.to);if(!im)return false;}
  const P=b.points,qh=Math.abs(P[3][1]-P[0][1]),pad=(b.sourceRect&&b.sourceRect[3]>0)?b.sourceRect[3]:qh;
  // 캐시 캔버스 칸 = 원래 칸 높이 + 위아래 여백: 몸 키 = 칸 높이 비율 × fromBody
  const m=/:(\d+(?:\.\d+)?),(\d+(?:\.\d+)?),(\d+(?:\.\d+)?),(\d+(?:\.\d+)?):(\d+):/.exec(String(b.sourcePath||''));const cellH=m?+m[4]:pad;const hv=qh*(cellH/pad)*R.fromBody;if(!(hv>2&&fin(hv)))return false;
- const [x0,y0,x1,y1,W,H]=R.toBox,k=hv/(y1-y0),w=W*k,h=H*k,left=fx-((x0+x1)/2)*k,top=fy-y1*k;
+ const [x0,y0,x1,y1,W,H]=box,k=hv/(y1-y0),w=W*k,h=H*k,left=fx-((x0+x1)/2)*k,top=fy-y1*k;
  const mir=P[1][0]<P[0][0];let Q=[[left,top],[left+w,top],[left+w,top+h],[left,top+h]];if(mir)Q=[Q[1],Q[0],Q[3],Q[2]];
- b.image=im;b.sourceRect=[0,0,W,H];b.sourcePath=R.to;b.imageSize=[W,H];b.points=Q;delete b.immutableTint;
- for(let i=st;i<cmds.length;i++){const c=cmds[i];if(c!==b&&c?.kind==='image'&&c.owner?.kind==='enemy'&&String(c.sourcePath||'')===String(m?m.input:'')){c.alpha=0;}}stats.swapped=(stats.swapped||0)+1;return true;}
+ b.image=im;b.sourceRect=sr||[0,0,W,H];b.sourcePath=to;b.imageSize=[im.naturalWidth||im.width,im.naturalHeight||im.height];b.points=Q;delete b.immutableTint;
+ for(let i=st;i<cmds.length;i++){const c=cmds[i];if(c!==b&&c?.kind==='image'&&c.owner?.kind==='enemy'&&String(c.sourcePath||'')===origSrc&&(!m||!c.sourceRect||!origSr||c.sourceRect[0]===origSr[0])){c.alpha=0;}}stats.swapped=(stats.swapped||0)+1;return true;}
 // ---- 도우미 ----
 const MID_OK=/^mb-ep1a10$/;
 function excluded(e){if(!e||!(e.hp>0)||e.persona||e.boss)return true;if(e.midboss&&!e.wardChampionR81&&!/^중간보스 · /.test(String(e.name||''))&&!MID_OK.test(String(e.nativeId||'')))return true;
