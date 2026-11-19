@@ -54848,6 +54848,11 @@
       "sha256": "9737bedaa6821688cdde163d61bc38a925272033be414098912e62d596f61dc5"
     },
     {
+      "path": "draw-reuse-r1200.js",
+      "bytes": 6029,
+      "sha256": "361f80b5a54aa4cb57ffc599765b4a5b22d94151e91aaf5d6fa48dc16a425452"
+    },
+    {
       "path": "drive-buildings-r414.js",
       "bytes": 9554,
       "sha256": "3953e753725747314f0918aef50ac95d26ac7bd1d7f3c85ebc45df970a3f155b"
@@ -55214,8 +55219,8 @@
     },
     {
       "path": "hero-palette-r302.js",
-      "bytes": 23175,
-      "sha256": "6d4c3ce84808a3c9f1e4730c27784dd147f30c67912a90d6bca44f45643a6d93"
+      "bytes": 23765,
+      "sha256": "ae78f00e2bcc52eb445835d7f84ec708f47e69f3112007ffc63ed201c6c5a159"
     },
     {
       "path": "hero-presentation-r83.js",
@@ -55414,8 +55419,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6582271,
-      "sha256": "aa1610f331dbcceb32d5e28b6aea49e3b655b8485534ce1db5cdcce16759ac84"
+      "bytes": 6582317,
+      "sha256": "8969cf053204aef12bcb084a06ff6d6773e4018c248385a47e38e49c663cb990"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -56833,9 +56838,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11366,
-  "totalBytes": 1364468395,
-  "webHTMLSha256": "aa1610f331dbcceb32d5e28b6aea49e3b655b8485534ce1db5cdcce16759ac84",
+  "fileCount": 11367,
+  "totalBytes": 1364475060,
+  "webHTMLSha256": "8969cf053204aef12bcb084a06ff6d6773e4018c248385a47e38e49c663cb990",
   "largest": [
     {
       "path": "index.html",
