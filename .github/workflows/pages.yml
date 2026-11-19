@@ -531,6 +531,8 @@ jobs:
         run: node r96/qa/r1221/side-move-cpu-check.cjs
       - name: R1228 Three.js 일시 오류 복구(보스방 앞 중단) CPU check
         run: node r96/qa/r1228/r1228-cpu-check.cjs
+      - name: R1230 위치 고정 적 공격 모션(몸 키프레임·발광·충전 프레임 시트) CPU check
+        run: node r96/qa/r1230/r1230-cpu-check.cjs
       - name: R1206 samong one mob one image, death look, one memory fragment, ink ground attack CPU check
         run: node r96/qa/r1206/r1206-cpu-check.cjs
       - name: R1206b samong mood props lantern inkpost shard canvas stone from Dots art CPU check
