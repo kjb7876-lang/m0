@@ -1,0 +1,50 @@
+PASS ① u204-mech-01-v1 피격 0칸·좌우·보이는 키 (assets/r1170/mm-mech01-hit4.webp)
+PASS ① u204-mech-02-v1 피격 0칸·좌우·보이는 키 (assets/r1170/mm-mech02-hit4.webp)
+PASS ① u204-mech-03-v1 피격 0칸·좌우·보이는 키 (assets/r1170/mm-mech03-hit4.webp)
+PASS ① u204-mech-04-v1 피격 표 없음(R620 보스 동작)
+PASS ① u206-mech-01-v1 피격 0칸·좌우·보이는 키 (assets/r1170/mm-u206a-hit4.webp)
+PASS ① u206-mech-02-v1 피격 0칸·좌우·보이는 키 (assets/r1170/mm-u206b-hit4.webp)
+PASS ① war-machine-hound-v1 피격 0칸·좌우·보이는 키 (assets/r1170/mm-hound-hit4.webp)
+PASS ① electrode-machine-knight-v1 피격 0칸·좌우·보이는 키 (assets/r1170/mm-knight-hit4.webp)
+PASS ③ 다른 몹 피격 표 그대로
+PASS ③ R1168·R1169 피격 표 그대로
+PASS ② MM-01 u204-mech-01-v1 사망 6칸 표(256×256, 살아 있는 그림 r380/mobs/u204-mech-01-v1.webp)
+PASS ② MM-01 발 자리·발 아래 여백
+PASS ② MM-02 u204-mech-02-v1 사망 6칸 표(256×256, 살아 있는 그림 r380/mobs/u204-mech-02-v1.webp)
+PASS ② MM-02 발 자리·발 아래 여백
+PASS ② MM-03 u204-mech-03-v1 사망 6칸 표(256×256, 살아 있는 그림 r380/mobs/u204-mech-03-v1.webp)
+PASS ② MM-03 발 자리·발 아래 여백
+PASS ② MM-04 u204-mech-04-v1 사망 6칸 표(256×256, 살아 있는 그림 r380/mobs/u204-mech-04-v1.webp)
+PASS ② MM-04 발 자리·발 아래 여백
+PASS ② MM-05 u206-mech-01-v1 사망 6칸 표(256×320, 살아 있는 그림 r380/mobs/u206-mech-01-v1.webp)
+PASS ② MM-05 발 자리·발 아래 여백
+PASS ② MM-06 u206-mech-02-v1 사망 6칸 표(256×320, 살아 있는 그림 r380/mobs/u206-mech-02-v1.webp)
+PASS ② MM-06 발 자리·발 아래 여백
+PASS ② MM-07 war-machine-hound-v1 사망 6칸 표(256×320, 살아 있는 그림 r380/mobs/war-machine-hound-v1.webp)
+PASS ② MM-07 발 자리·발 아래 여백
+PASS ② MM-08 electrode-machine-knight-v1 사망 6칸 표(256×256, 살아 있는 그림 r380/mobs/electrode-machine-knight-v1.webp)
+PASS ② MM-08 발 자리·발 아래 여백
+PASS ③ MD-25 그대로
+PASS ③ 설원 잠복자는 이번에 손대지 않음(Dots HOLD)
+PASS ③ DY-09 그대로
+PASS ④ 출처표 15장
+PASS ④ assets/r1170/mm-mech01-hit4.webp sha·등록
+PASS ④ assets/r1170/mm-mech01-death6.webp sha·등록
+PASS ④ assets/r1170/mm-mech02-hit4.webp sha·등록
+PASS ④ assets/r1170/mm-mech02-death6.webp sha·등록
+PASS ④ assets/r1170/mm-mech03-hit4.webp sha·등록
+PASS ④ assets/r1170/mm-mech03-death6.webp sha·등록
+PASS ④ assets/r1170/mm-mech04-death6.webp sha·등록
+PASS ④ assets/r1170/mm-u206a-hit4.webp sha·등록
+PASS ④ assets/r1170/mm-u206a-death6.webp sha·등록
+PASS ④ assets/r1170/mm-u206b-hit4.webp sha·등록
+PASS ④ assets/r1170/mm-u206b-death6.webp sha·등록
+PASS ④ assets/r1170/mm-hound-hit4.webp sha·등록
+PASS ④ assets/r1170/mm-hound-death6.webp sha·등록
+PASS ④ assets/r1170/mm-knight-hit4.webp sha·등록
+PASS ④ assets/r1170/mm-knight-death6.webp sha·등록
+PASS ④ verify 접두
+PASS ④ pages.yml
+PASS ④ runtime-text 사본 mob-hit-r1156.js
+PASS ④ runtime-text 사본 mob-attack-dots-r1065.js
+ALL PASS

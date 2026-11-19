@@ -16,12 +16,12 @@ vm.createContext(sb);vm.runInContext(C('pixelfx-r163.js'),sb);
  const real=p=>A.resolve(p)||p;const tint={a:[40,10,30],b:[150,90,170]};
  const play=(name,o)=>{drawn.length=0;sb.time+=10;X.stop('t');const e=X.play(name,1,1,{...o,key:'t'});sb.drawEffect(sb.effects.find(x=>x.type==='r163-pixelfx'));return {e,src:drawn[drawn.length-1]||null};};
  const D=A.mobHit||{};const want={domestic:/house-double-claw|mob-domestic-dots/,forge:/mob-forge-dots/,neural:/mob-neural-dots/,clinical:/mob-clinical-dots/,garden:/mob-garden-dots/,stone:/mob-stone-dots/,snow:/mob-snow-dots/,coast:/mob-coast-dots/,regional:/mob-regional-dots/};
- ok(Object.keys(D).length===9,'몹 타격 Dots 칸 9종',Object.keys(D));
+ ok(Object.keys(D).length===10,'몹 타격 Dots 칸 10종(R1177f 에서 기억 추가 — 사용자 지시 동작 변경)',Object.keys(D));
  // 본편(스토리·생존: 사몽 구역 아님)에서도 바뀜
  room.samongR103=null;sb.tick();
  for(const [f,re] of Object.entries(want)){const k='mob-'+f;ok(re.test(D[k]?.file||''),k+' → Dots 시트',D[k]);const r=play(k,{tint,k:1.3,rate:1.2});ok(re.test(real(r.src||'')),k+' 본편에서 실제로 Dots 시트를 그림',r.src);ok(!r.e||r.e.tint===null,k+' 물들이지 않음(Dots 색 그대로)',r.e&&r.e.tint);}
- // 기억(memory)은 Dots 칸이 없으니 원래 도트 그대로
- let r=play('mob-memory',{tint});ok(/assets\/r163\/pixelfx\/mob-memory\.webp$/.test(r.src||''),'mob-memory 원래 칸 그대로',r.src);ok(r.e&&r.e.tint,'mob-memory 물들임 그대로');
+ // 기억(memory)도 R1177f 부터 Dots CX-0160MF(사용자 지시 동작 변경 — 원래는 '원래 도트 그대로')
+ let r=play('mob-memory',{tint});ok(/mob-memory-dots-12\.webp$/.test(real(r.src||'')),'mob-memory Dots 칸',r.src);ok(!r.e||r.e.tint===null,'mob-memory 물들이지 않음');
  // 사몽 에피소드 안에서도 같음
  room.samongR103={key:'S-06',zone:'sz115-S06-3'};sb.tick();r=play('mob-forge',{tint});ok(/mob-forge-dots/.test(real(r.src||'')),'사몽 에피소드에서도 Dots 시트',r.src);
  // 끄면 원래 도트 칸·물들임으로

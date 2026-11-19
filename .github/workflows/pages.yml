@@ -527,6 +527,8 @@ jobs:
         run: node r96/qa/r1177/r1177d-cpu-check.cjs
       - name: R1193 꿈 층 R248 도트 몹 12종 스토리 그림 연결 + 화염술사·호위병 꿈 층 + pixelfx 칠한 칸 모든 모드
         run: node r96/qa/r1193/r1193-cpu-check.cjs
+      - name: R1177f 기억 지역 몹 타격 Dots CX-0160MF(육망성 없음)
+        run: node r96/qa/r1177/r1177f-cpu-check.cjs
       - name: R701 survival 77s choice window, difficulty, hero picker CPU check
         run: node r96/qa/r701/r701-cpu-check.cjs
       - name: R850 survival play-test fixes (arena terrain lock, hospital maze skip, next-stage prefetch, moving HUD) CPU check
@@ -699,6 +701,8 @@ jobs:
         run: node r96/qa/r1168/cult05-hit-cpu-check.cjs
       - name: R1169 S-06 dystopia mobs hit4 + death6 = Dots CX-0158DY r1 ROUGH (colour matched, death haze keyed out; art only) CPU check
         run: node r96/qa/r1169/dys-cpu-check.cjs
+      - name: R1170 machine mobs hit4 (7) + death6 (8) = Dots CX-0159MM r1 ROUGH (colour and body height matched, halo keyed out; art only) CPU check
+        run: node r96/qa/r1170/mech-cpu-check.cjs
       - name: R1098 samong faces (Michaela final boss uses her own sheet, R161 puppet repainted as an ink-and-white-thread doll so it no longer looks like Hwando) CPU check
         run: node r96/qa/r1098/r1098-cpu-check.cjs
       - name: R1090 character ink tint (hero and mob body images only, follows the map ink wash, settings toggle, effects and telegraphs untouched) CPU check

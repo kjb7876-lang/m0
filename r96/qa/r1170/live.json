@@ -1,0 +1,100 @@
+{
+ "u204": {
+  "assets/r380/mobs/u204-mech-01-v1.webp": [
+   "기계화 첫 기억 청람잔영",
+   "assets/r1170/mm-mech01-hit4.webp",
+   [
+    0,
+    0,
+    256,
+    256
+   ]
+  ],
+  "assets/r380/mobs/u204-mech-02-v1.webp": [
+   "기계화 기억 공백 망령",
+   "assets/r1170/mm-mech02-hit4.webp",
+   [
+    0,
+    0,
+    256,
+    256
+   ]
+  ],
+  "assets/r380/mobs/u204-mech-03-v1.webp": [
+   "기계화 문턱 관측거미",
+   "assets/r1170/mm-mech03-hit4.webp",
+   [
+    0,
+    0,
+    256,
+    256
+   ]
+  ],
+  "assets/r380/mobs/u204-mech-04-v1.webp": [
+   "기계화 제12단계 기억 검열기",
+   "assets/r380/mobs/u204-mech-04-v1.webp",
+   [
+    0,
+    0,
+    256,
+    256
+   ]
+  ],
+  "deathMM": [
+   "MM-01",
+   "MM-02",
+   "MM-03",
+   "MM-04",
+   "MM-05",
+   "MM-06",
+   "MM-07",
+   "MM-08"
+  ],
+  "hitStats": {
+   "hits": 76,
+   "frames": 38,
+   "waiting": 76,
+   "rewraps": 2,
+   "errors": 0
+  }
+ },
+ "u206": {
+  "assets/r380/mobs/u206-mech-01-v1.webp": [
+   "기계화 기억이주 연결자",
+   "assets/r1170/mm-u206a-hit4.webp",
+   [
+    0,
+    0,
+    256,
+    320
+   ]
+  ],
+  "assets/r380/mobs/u206-mech-02-v1.webp": [
+   "기계화 공명술사",
+   "assets/r1170/mm-u206b-hit4.webp",
+   [
+    0,
+    0,
+    256,
+    320
+   ]
+  ],
+  "deathMM": [
+   "MM-01",
+   "MM-02",
+   "MM-03",
+   "MM-04",
+   "MM-05",
+   "MM-06",
+   "MM-07",
+   "MM-08"
+  ],
+  "hitStats": {
+   "hits": 136,
+   "frames": 85,
+   "waiting": 136,
+   "rewraps": 2,
+   "errors": 0
+  }
+ }
+}
