@@ -12968,6 +12968,41 @@
       "sha256": "1449f5f2282974f439ded7b874d62d561a8fd5a7816bb6268d5e6a940027f5b6"
     },
     {
+      "path": "assets/r1189/shades/clockhand-warden.webp",
+      "bytes": 231802,
+      "sha256": "6c0cb047073f56a6e5e0b528b15c1be0c77d78b2e63152240f14a1326b0e53fb"
+    },
+    {
+      "path": "assets/r1189/shades/clockwork-legionary.webp",
+      "bytes": 208388,
+      "sha256": "69a243bb51ce07bc6e4a87240eaf0cbfdc252bb31d1520d840a37b1b5db65807"
+    },
+    {
+      "path": "assets/r1189/shades/fishhook-manuscript.webp",
+      "bytes": 202342,
+      "sha256": "61b6da25933147376627f5d508336fe936346a815187af10306740c3001063c0"
+    },
+    {
+      "path": "assets/r1189/shades/index.json",
+      "bytes": 3831,
+      "sha256": "04dbe23166cd95e6290d71b997c7e7782996b8b840cd5d2f366d5320d666f08d"
+    },
+    {
+      "path": "assets/r1189/shades/parade-mannequin.webp",
+      "bytes": 168558,
+      "sha256": "10136c3f2059f5c7380c4a45b40fec69443688c1100001e5d6a395a539b85683"
+    },
+    {
+      "path": "assets/r1189/shades/ring-sparrer.webp",
+      "bytes": 161238,
+      "sha256": "d28fc207f55e49eaa805b84b9e69e871937d5380f1ea518e5680c7275baea7da"
+    },
+    {
+      "path": "assets/r1189/shades/wire-bound-dead.webp",
+      "bytes": 173704,
+      "sha256": "59fc5d15baba37a61f306306456a0d4bac4cf9684bbdcf8c84230a8786b6b0bc"
+    },
+    {
       "path": "assets/r119/heroes/gunner-n.webp",
       "bytes": 35746,
       "sha256": "1887e03e6fb23d2befc1cbb30f5b11d0984ca7fba0575a25a39a504490a0c867"
@@ -56364,8 +56399,8 @@
     },
     {
       "path": "samong-shades-r200.js",
-      "bytes": 7844,
-      "sha256": "597fc433e7189a066d1de8a410a9c5bd1611f6cf0a6eade0a2dd1540c4ae277e"
+      "bytes": 9131,
+      "sha256": "5d685a15769e733f80802826dca458926ce6262d8ac9880d6436c1dfeba4320d"
     },
     {
       "path": "samong-surge-r571.js",
@@ -56943,8 +56978,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11388,
-  "totalBytes": 1367909230,
+  "fileCount": 11395,
+  "totalBytes": 1369060380,
   "webHTMLSha256": "f774ae026db0057bb3b7ad2af5f4c70f8f3aeb392881f54e7b614dfe2fb9a4b8",
   "largest": [
     {

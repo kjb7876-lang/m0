@@ -20,7 +20,7 @@ ok('in the public verify list',/'samong-shades-r200\.js'/.test(fs.readFileSync(p
  ok('about 85% of regular samong mobs get a shade, the rest stay puppets',shaded>150&&shaded<190,shaded);
  const s3=new Set(ix.mobs.filter(m=>m.zone==='S-03').map(m=>m.id));ok('S-03 mobs only use S-03 shades, and take the shade name',fr.filter(f=>f.r200Shade).every(f=>s3.has(f.r200Shade))&&mobs.filter(e=>e.r200Shade).every(e=>ix.mobs.find(m=>m.id===e.r200Shade).name===e.name));
  const one=mobs.find(e=>e.r200Shade),m=ix.mobs.find(x=>x.id===one.r200Shade);
- one.moving=false;const idle=F().frameFor(one,null).assetFrame.sourceRect[0]/m.cell[0];one.attack={elapsed:.5,shape154:{windup:.4,active:.2,recovery:.4}};const atk=F().frameFor(one,null).assetFrame.sourceRect[0]/m.cell[0];delete one.attack;
+ one.moving=false;const cellOf=r=>r[0]/r[2];/* R1189: 칸 번호는 실제 그린 칸 너비로 센다(Dots 새 시트는 칸 256, 사용자 11-19 지시 동작 변경) */const idle=cellOf(F().frameFor(one,null).assetFrame.sourceRect);one.attack={elapsed:.5,shape154:{windup:.4,active:.2,recovery:.4}};const atk=cellOf(F().frameFor(one,null).assetFrame.sourceRect);delete one.attack;
  ok('idle uses cells 1-2, attack uses cells 6-11 by progress',idle<=1&&atk>=5&&atk<=10,{idle,atk});
  const keep=[{boss:true},{midboss:true},{persona:true},{r170Tower:true},{r193Doll:true},{samongMidR162:true}].map((o,i)=>({id:'k'+i,hp:10,samongR103:{},...o}));
  ok('bosses, midbosses, persona, towers, dolls untouched',keep.every(e=>F().frameFor(e,null).path==='base'));
