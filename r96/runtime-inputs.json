@@ -10581,7 +10581,8 @@
     "assets/r1184/iv-m077-hit4.webp",
     "assets/r1184/iv-m077-death6.webp",
     "assets/r1184/md-31-timeless-silver-scout-death6.webp",
-    "assets/r1184/index.json"
+    "assets/r1184/index.json",
+    "samong-warm-r1199.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11656,5 +11657,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "696e7e53beb354214955849746868b70b0b15adda718f3bfba6e29804a90ecae"
+  "runtimeManifestSHA256": "168e7cf855f6a7067bd13de5b613d9f751840a0d7942069c9805a13178098182"
 }
