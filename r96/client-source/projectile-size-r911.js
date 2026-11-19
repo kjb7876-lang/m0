@@ -119,6 +119,7 @@
     const wrapped=function(p,...rest){
       if(!p||typeof p!=='object')return;
       if(inside||busy||!enabled||ctx?.__r911probe||skipZone()||p.r1220Muzzle)return base.apply(this,[p,...rest]);/* R1220: 기억사수 기본탄은 총구 굵기(사용자 11-19 "총탄 총구크기에 맞추고") — 최소 크기로 키우지 않음 */
+      if(!enabled||p.r1232Michaela)return base.apply(this,[p,...rest]);/* R1232: 미카엘라 기본탄은 사용자 요청으로 작게(11-19 "탄환크기 조금 줄여줘") — 최소 크기로 키우지 않음 */
       stats.draws++;
       let s=state.get(p);const now=typeof time==='number'?time:0;
       if(!s||now-s.at>=CFG.remeasure||now<s.at){const m=measureWith(base,this,[p,...rest]);stats.measured++;s={at:now,m};state.set(p,s);}
