@@ -1,0 +1,2 @@
+FAIL memory-voice-r1223.js 가 있음
+{"total":1,"failed":1,"method":"node vm + fake DOM/R177/R381/R1044; real audio checked by r1223-browser.mjs (headless)"}
