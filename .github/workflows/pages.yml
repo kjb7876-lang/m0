@@ -707,6 +707,8 @@ jobs:
         run: node r96/qa/r1183/dup-tint-cpu-check.cjs
       - name: R1186 dream-layer R248 mobs m032 + m049 painted walk/attack = Dots CX-0161DR r1 ROUGH (R1179 path/body overlay; art only) CPU check
         run: node r96/qa/r1186/dream-mobs-cpu-check.cjs
+      - name: R1187 Dots CX-0163DU art swapped in for the duplicate mobs (same cell layout, tint kept only until the sheet loads) CPU check
+        run: node r96/qa/r1187/dup-art-cpu-check.cjs
       - name: R1098 samong faces (Michaela final boss uses her own sheet, R161 puppet repainted as an ink-and-white-thread doll so it no longer looks like Hwando) CPU check
         run: node r96/qa/r1098/r1098-cpu-check.cjs
       - name: R1090 character ink tint (hero and mob body images only, follows the map ink wash, settings toggle, effects and telegraphs untouched) CPU check

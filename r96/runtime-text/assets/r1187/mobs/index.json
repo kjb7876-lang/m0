@@ -1,0 +1,240 @@
+{
+ "schema": "storyworld.r1187.dots/v1",
+ "request": "CX-0163DU r1 ROUGH",
+ "assets": [
+  {
+   "du": "DU-05",
+   "file": "assets/r1187/mobs/du05-rag-golem.webp",
+   "replaces": "assets/r380/mobs/r200-stitched-golem-v2.webp",
+   "mob": "기운 누더기 골렘",
+   "cell": [
+    184,
+    184
+   ],
+   "cells": 8,
+   "source": "Dots CX-0163DU DU-05 walk-attack r1 ROUGH",
+   "sourceSha256": "7cb5ea572db48c184b5b7d28451e94e5bd2e9152d34af5ceae54cd35a173b909",
+   "sha256": "055a99f3c306413f908e53bd80ac2c2d3e305e500b6f76cc562458fa4eb23291",
+   "bytes": 156172,
+   "footShift": [
+    0,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1
+   ],
+   "heightRatio": [
+    1.03,
+    1.125
+   ],
+   "finalArt": false
+  },
+  {
+   "du": "DU-07",
+   "file": "assets/r1187/mobs/du07-reverse-paper.webp",
+   "replaces": "assets/r290/mobs/m053.webp",
+   "mob": "제출되지 못한 문장(사몽 역행)",
+   "cell": [
+    256,
+    320
+   ],
+   "cells": 12,
+   "source": "Dots CX-0163DU DU-07 walk-attack r1 ROUGH",
+   "sourceSha256": "21f215b04f60f24a9d7d15698d1b4442b22161583e688d43161aad56cfa6681c",
+   "sha256": "502eb2845bde05a4ff42cf30149ece5cc02733ef36e123a9b7faf228e535b65b",
+   "bytes": 173114,
+   "footShift": [
+    1,
+    -2,
+    -2,
+    -2,
+    1,
+    0,
+    -1,
+    -1,
+    0,
+    -1,
+    -2,
+    0
+   ],
+   "heightRatio": [
+    0.915,
+    1.019
+   ],
+   "finalArt": false
+  },
+  {
+   "du": "DU-08",
+   "file": "assets/r1187/mobs/du08-reverse-photo.webp",
+   "replaces": "assets/r290/mobs/m088.webp",
+   "mob": "찢어진 사진의 망령(사몽 역행)",
+   "cell": [
+    256,
+    320
+   ],
+   "cells": 12,
+   "source": "Dots CX-0163DU DU-08 walk-attack r1 ROUGH",
+   "sourceSha256": "512ef58a9d21fbab644a707d1622a03da5f29bae4edc234603ba26bb9f8a4bcc",
+   "sha256": "51cad3f1d1c79da3d73961c04578de447481625f5fa0893600e58bd76b7763c0",
+   "bytes": 219986,
+   "footShift": [
+    3,
+    1,
+    -1,
+    1,
+    3,
+    5,
+    4,
+    4,
+    6,
+    4,
+    3,
+    1
+   ],
+   "heightRatio": [
+    0.969,
+    1.005
+   ],
+   "finalArt": false
+  },
+  {
+   "du": "DU-09",
+   "file": "assets/r1187/mobs/du09-vermilion-wraith.webp",
+   "replaces": "assets/r290/mobs/m082.webp",
+   "mob": "백은 없는 그림자(사몽 S-07)",
+   "cell": [
+    256,
+    320
+   ],
+   "cells": 12,
+   "source": "Dots CX-0163DU DU-09 walk-attack r1 ROUGH",
+   "sourceSha256": "16c5608829eb843006fed3c18634bc7c5934ecfe7d4f6b0f0e3ccd0994d6710b",
+   "sha256": "5d0174a0731a25af7b2e47295558e826bc23c2b15331c7303990f5bca2399d42",
+   "bytes": 281734,
+   "footShift": [
+    2,
+    2,
+    1,
+    2,
+    0,
+    -2,
+    -1,
+    -2,
+    0,
+    0,
+    -3,
+    -1
+   ],
+   "heightRatio": [
+    0.986,
+    1.014
+   ],
+   "finalArt": false
+  },
+  {
+   "du": "DU-10",
+   "file": "assets/r1187/mobs/du10-ink-echo.webp",
+   "replaces": "assets/r290/mobs/m066.webp",
+   "mob": "부정의 잔영(사몽 P)",
+   "cell": [
+    256,
+    320
+   ],
+   "cells": 12,
+   "source": "Dots CX-0163DU DU-10 walk-attack r1 ROUGH",
+   "sourceSha256": "49d2a0cc6af8f36579380602f4c66736c56cbe6fe33e1711ca15a1adf96f9c3b",
+   "sha256": "e05e4441431684150b304cc228b907edde3cb96082aaa2116a5c8d511bac6f67",
+   "bytes": 245066,
+   "footShift": [
+    5,
+    4,
+    1,
+    4,
+    1,
+    1,
+    2,
+    0,
+    3,
+    3,
+    4,
+    4
+   ],
+   "heightRatio": [
+    0.975,
+    0.995
+   ],
+   "finalArt": false
+  },
+  {
+   "du": "DU-11",
+   "file": "assets/r1187/mobs/du11-faded-guard.webp",
+   "replaces": "assets/r410/mobs/m099.webp",
+   "mob": "거짓천국 근위천사(미카엘라 엔딩)",
+   "cell": [
+    256,
+    320
+   ],
+   "cells": 12,
+   "source": "Dots CX-0163DU DU-11 walk-attack r1 ROUGH",
+   "sourceSha256": "a8aa4005fc8b26fd399efb50001270436b566af6e80aaf100a4dc3221fb62a96",
+   "sha256": "d9850c50dabbbc44891d138e24cd911193fb74a6f8d1d07b814ceb332be14f9a",
+   "bytes": 358434,
+   "footShift": [
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    -1,
+    -2,
+    -2,
+    -2
+   ],
+   "heightRatio": [
+    0.995,
+    1.009
+   ],
+   "finalArt": false
+  },
+  {
+   "du": "DU-12",
+   "file": "assets/r1187/mobs/du12-root-rag.webp",
+   "replaces": "assets/r410/mobs/m063.webp",
+   "mob": "뿌리에서 쏟아진 잔영(사몽 S-01)",
+   "cell": [
+    256,
+    320
+   ],
+   "cells": 12,
+   "source": "Dots CX-0163DU DU-12 walk-attack r1 ROUGH",
+   "sourceSha256": "d4e19fd01cfa7dc368235ef39220f782ee03d0a0b3f4e507708ccb6541747ff7",
+   "sha256": "cde09f6d93c03f7e59c6d3c6a6ade488f143030b962e607e0aa982070bd7b42f",
+   "bytes": 289316,
+   "footShift": [
+    8,
+    7,
+    2,
+    4,
+    7,
+    5,
+    4,
+    6,
+    6,
+    6,
+    5,
+    6
+   ],
+   "heightRatio": [
+    0.964,
+    0.995
+   ],
+   "finalArt": false
+  }
+ ]
+}

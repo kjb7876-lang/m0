@@ -12888,6 +12888,46 @@
       "sha256": "045f8babb81e8940859aa4015817ac6042ea09215bbb0bf937c0fddae88b5c99"
     },
     {
+      "path": "assets/r1187/mobs/du05-rag-golem.webp",
+      "bytes": 156172,
+      "sha256": "055a99f3c306413f908e53bd80ac2c2d3e305e500b6f76cc562458fa4eb23291"
+    },
+    {
+      "path": "assets/r1187/mobs/du07-reverse-paper.webp",
+      "bytes": 173114,
+      "sha256": "502eb2845bde05a4ff42cf30149ece5cc02733ef36e123a9b7faf228e535b65b"
+    },
+    {
+      "path": "assets/r1187/mobs/du08-reverse-photo.webp",
+      "bytes": 219986,
+      "sha256": "51cad3f1d1c79da3d73961c04578de447481625f5fa0893600e58bd76b7763c0"
+    },
+    {
+      "path": "assets/r1187/mobs/du09-vermilion-wraith.webp",
+      "bytes": 281734,
+      "sha256": "5d0174a0731a25af7b2e47295558e826bc23c2b15331c7303990f5bca2399d42"
+    },
+    {
+      "path": "assets/r1187/mobs/du10-ink-echo.webp",
+      "bytes": 245066,
+      "sha256": "e05e4441431684150b304cc228b907edde3cb96082aaa2116a5c8d511bac6f67"
+    },
+    {
+      "path": "assets/r1187/mobs/du11-faded-guard.webp",
+      "bytes": 358434,
+      "sha256": "d9850c50dabbbc44891d138e24cd911193fb74a6f8d1d07b814ceb332be14f9a"
+    },
+    {
+      "path": "assets/r1187/mobs/du12-root-rag.webp",
+      "bytes": 289316,
+      "sha256": "cde09f6d93c03f7e59c6d3c6a6ade488f143030b962e607e0aa982070bd7b42f"
+    },
+    {
+      "path": "assets/r1187/mobs/index.json",
+      "bytes": 4644,
+      "sha256": "21bd816cb1a6ddccda53bfd53bc199c6c694b1a4942de0f3644a73d975961c84"
+    },
+    {
       "path": "assets/r119/heroes/gunner-n.webp",
       "bytes": 35746,
       "sha256": "1887e03e6fb23d2befc1cbb30f5b11d0984ca7fba0575a25a39a504490a0c867"
@@ -55654,8 +55694,8 @@
     },
     {
       "path": "mob-dup-tint-r1183.js",
-      "bytes": 6050,
-      "sha256": "91b2fd4ea317013dd4935593d78e4943f0ed436d9b929aca4982ed8c9b56de00"
+      "bytes": 7709,
+      "sha256": "15d85d64772d1fb287fe075cdceaa2033b98dfa33b2a5f3ded862d442417ee67"
     },
     {
       "path": "mob-fix-r275.js",
@@ -56848,8 +56888,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11369,
-  "totalBytes": 1365078304,
+  "fileCount": 11377,
+  "totalBytes": 1366808429,
   "webHTMLSha256": "aa1610f331dbcceb32d5e28b6aea49e3b655b8485534ce1db5cdcce16759ac84",
   "largest": [
     {
