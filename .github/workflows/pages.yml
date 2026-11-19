@@ -707,6 +707,8 @@ jobs:
         run: node r96/qa/r1182/hit-death-alias-cpu-check.cjs
       - name: R1183 duplicate mobs tinted until Dots CX-0163DU art arrives (body image only, filters the 3D recorder accepts) CPU check
         run: node r96/qa/r1183/dup-tint-cpu-check.cjs
+      - name: R1184 S-06 invader (m077, R248 direct draw) hit4 + death6 = Dots CX-0162IV, MD-31 nightmare scout death6 = Dots CX-0115MD (ROUGH, colour matched; art only) CPU check
+        run: node r96/qa/r1184/iv-md31-cpu-check.cjs
       - name: R1098 samong faces (Michaela final boss uses her own sheet, R161 puppet repainted as an ink-and-white-thread doll so it no longer looks like Hwando) CPU check
         run: node r96/qa/r1098/r1098-cpu-check.cjs
       - name: R1090 character ink tint (hero and mob body images only, follows the map ink wash, settings toggle, effects and telegraphs untouched) CPU check
