@@ -73,8 +73,7 @@ ok(cg.style.filter==='none'&&cb.style.filter==='brightness(0.8)','구운 몸 명
 ok(cb.image===cg.image,'흑백 몸 칸은 원래 필터와 상관없이 같은 칸을 씀');
 const ce=cmd(sp,GF);ce.owner={kind:'prop',id:'prop:1'};A.process([ce]);ok(ce.style.filter===GF&&!ce.r409Outlined,'테두리 없는 그림(소품 등)은 흑백 필터가 그대로 셰이더로 감');
 // R409 미리 굽기: 사몽 준비 중(R111 samongSoon)이면 컬러 몸을 구운 뒤 같은 장면 예산 안에서 흑백 몸 칸도 미리 굽는다(각성 첫 장면 굽기 몰림 줄이기)
-/* 시계 고정: R409 장면 굽기 예산(BAKE_BUDGET_MS=6)이 실제 시간이라 느린 CI 러너에서 컬러 굽기가 6ms 를 넘으면 흑백 미리 굽기가 미뤄져 이 항목이 갈렸다(#876·#879 CI). 검사하는 것은 '준비 중이면 미리 굽는다'는 논리이므로 시계를 0 으로 고정 */
-{const ctx2={console,performance:{now:()=>0},setInterval:()=>0,document:{createElement:()=>new Canvas()},player:{hero:'slayer'},room:{enemies:[]}};ctx2.window=ctx2;ctx2.localStorage={getItem:()=>null,setItem(){}};
+{const ctx2={console,performance,setInterval:()=>0,document:{createElement:()=>new Canvas()},player:{hero:'slayer'},room:{enemies:[]}};ctx2.window=ctx2;ctx2.localStorage={getItem:()=>null,setItem(){}};
  let soon=true;ctx2.__STORYWORLD_PLAY_R111__={grayFilter:GF,samongSoon:()=>soon};vm.createContext(ctx2);vm.runInContext(r409,ctx2,{filename:'combat-read-r409.js'});const B=ctx2.__STORYWORLD_COMBAT_READ_R409__;
  const s2=sprite();B.process([cmd(s2,'none')]);const st=B.inspect().stats;ok(st.baked===2&&st.grayPrebaked===1,'준비 중: 컬러 몸 굽고 흑백 몸도 미리 구움(구움 '+st.baked+'·미리 '+st.grayPrebaked+')');
  const g2=cmd(s2,GF);B.process([g2]);ok(B.inspect().stats.baked===2&&g2.r409Outlined,'각성 첫 장면: 흑백 몸은 미리 구운 칸을 그대로 씀(새로 굽기 0)');
