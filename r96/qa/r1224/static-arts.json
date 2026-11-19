@@ -1,0 +1,10 @@
+[
+{"who":"mb-kair01-v31231|최초명령 코어 오염체|mid","path":"rc140/story-cycle-motions/mb-kair01-v31231.png","rect":[0,0,726,724],"kind":"mist"},
+{"who":"k103-boss|세이렌 모르|boss","path":"generated-v31224/actors-normalized/b19d67bb1973_siren_idle.webp","rect":[0,0,672,384],"kind":"ghost"},
+{"who":"blue-executor|파란불|boss","path":"generated-story10-cycle-20261005/cyclic-murder/blue_executor_idle.png","rect":[270,73,768,1134],"kind":"mist"},
+{"who":"c101-mid|칩 제단 방화벽|mid","path":"rc140/story-cycle-motions/c101-mid.png","rect":[0,0,661,724],"kind":"ghost"},
+{"who":"c102-boss|네트워크 합창체|boss","path":"boss-actions-20261011/c102-boss-poses.png","rect":[160,5,545,505],"kind":"wing"},
+{"who":"c103-mid|이단의목사 한리안|mid","path":"boss-actions-20261011/c103-mid-poses.png","rect":[255,0,270,520],"kind":"mist"},
+{"who":"c105-mid|ID 생체조 관리자|mid","path":"rc140/story-cycle-motions/c105-mid.png","rect":[0,0,728,724],"kind":"ghost"},
+{"who":"c106-mid|기계재판 집행핵|mid","path":"rc140/story-cycle-motions/c106-mid.png","rect":[0,0,685,724],"kind":"mist"}
+]

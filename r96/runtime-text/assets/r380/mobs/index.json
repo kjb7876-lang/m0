@@ -8796,6 +8796,116 @@
    ],
    "walkSource": "Dots CX-0067MV_black_rose_chip_penitent_walk8.png (색은 원본에 맞춤, R615)",
    "finalArt": false
+  },
+  {
+   "id": "samong-s05-cult-seal-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/samong-s05-cult-seal-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 9,
+   "pivot": [
+    128.0,
+    236.0
+   ],
+   "visibleHeight": 120.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    8
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^교주의 인장$",
+    "boss": true,
+    "samong": "(^|[^0-9])S-?05([^0-9]|$)"
+   },
+   "bytes": 120478,
+   "sha256": "b778d548e6ed2fed21d6ad5fa33aa1c16d3fa2609cf6d29b20c4ebed66ed576a",
+   "source": [
+    {
+     "file": "CX-0175SB-02_cult-seal_idle4_r1_ROUGH.png",
+     "sha256": "b26667c8d8b7d68779d1c062a8bc5c05630460f336426d8da5d7591fb3555128"
+    },
+    {
+     "file": "CX-0175SB-02_cult-seal_move4_r1_ROUGH.png",
+     "sha256": "0e048c6a26e9420362e14b627bb320049d3b24d08b410fab2d75db0cb9ea3805"
+    },
+    {
+     "file": "CX-0175SB-02_cult-seal_attack4_r1_ROUGH.png",
+     "sha256": "789499b1de00d757178b3d7a8a7e55c74fb8144f01dedac2f475ab6e20dd487d"
+    }
+   ],
+   "status": "Dots CX-0175SB ROUGH r1 (R1218b)",
+   "finalArt": false
+  },
+  {
+   "id": "samong-s06-command-wire-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/samong-s06-command-wire-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 9,
+   "pivot": [
+    128.0,
+    236.0
+   ],
+   "visibleHeight": 130.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    8
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^검은 명령선$",
+    "boss": true,
+    "samong": "(^|[^0-9])S-?06([^0-9]|$)"
+   },
+   "bytes": 129722,
+   "sha256": "adb47f62c8a231651e87e84f56f19f1d28850529394d8f7915be66643ea3cce9",
+   "source": [
+    {
+     "file": "CX-0175SB-03_black-command-wire_idle4_r1_ROUGH.png",
+     "sha256": "9eddbfd7ed5975ed868f8ec053eb504d85070b29160c51d2f6ab8f459724d96e"
+    },
+    {
+     "file": "CX-0175SB-03_black-command-wire_move4_r1_ROUGH.png",
+     "sha256": "fae61540a25477f84a9ddee0ac0833d3b8ee7b7dc04d9cfb65d63a230040c0e7"
+    },
+    {
+     "file": "CX-0175SB-03_black-command-wire_attack4_r1_ROUGH.png",
+     "sha256": "9151b736477d668613e1b3d141ff5549621ccee7440a40f00830feecd7703e13"
+    }
+   ],
+   "status": "Dots CX-0175SB ROUGH r1 (R1218b)",
+   "finalArt": false
   }
  ]
 }

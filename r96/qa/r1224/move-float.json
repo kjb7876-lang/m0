@@ -1,0 +1,181 @@
+{
+ "revision": "R1029",
+ "rows": [
+  {
+   "who": "mb-kair01-v31231|최초명령 코어 오염체|mid",
+   "source": "assets/rc140/story-cycle-motions/mb-kair01-v31231.png",
+   "sourceRect": [
+    0,
+    0,
+    726,
+    724
+   ],
+   "sourceSha256": "e196494c0874cd81cc05b349d7531998cb1d1d434d8d9d313a8deaae7ef99464",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1224/float/mb-kair01-v31231.webp",
+   "size": [
+    2296,
+    256
+   ],
+   "bytes": 105568,
+   "sha256": "4298189d0c3ec2e45a1cf8420735651dae47c9b6de9913636b905b6dd9f26d15",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "k103-boss|세이렌 모르|boss",
+   "source": "assets/generated-v31224/actors-normalized/b19d67bb1973_siren_idle.webp",
+   "sourceRect": [
+    0,
+    0,
+    672,
+    384
+   ],
+   "sourceSha256": "985137aa992b23610fe2cd11a0a5624bd49ef90b0d22a99896d7871072a0dcb0",
+   "kind": "ghost",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1224/float/b19d67bb1973-siren-idle.webp",
+   "size": [
+    4016,
+    256
+   ],
+   "bytes": 105030,
+   "sha256": "b423c08f3ca51aba59c35dc58dba516de8d6a06963d8e115dc03f94318be0d03",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "blue-executor|파란불|boss",
+   "source": "assets/generated-story10-cycle-20261005/cyclic-murder/blue_executor_idle.png",
+   "sourceRect": [
+    270,
+    73,
+    768,
+    1134
+   ],
+   "sourceSha256": "aa4bbeab4ff115d4288e9ef5d16f38001a0996fe6bd8b93a9953a575e488ec13",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1224/float/blue-executor-idle.webp",
+   "size": [
+    1552,
+    256
+   ],
+   "bytes": 144138,
+   "sha256": "5a62fde8c6e24a02ae78615b4ae19b0eaacc678c539b30ca3b33434ff855b50d",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "c101-mid|칩 제단 방화벽|mid",
+   "source": "assets/rc140/story-cycle-motions/c101-mid.png",
+   "sourceRect": [
+    0,
+    0,
+    661,
+    724
+   ],
+   "sourceSha256": "9d9aed9d1387151b8eb054fdcbdf44939a9fedcb48378f6422636d4b2f792200",
+   "kind": "ghost",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1224/float/c101-mid.webp",
+   "size": [
+    2096,
+    256
+   ],
+   "bytes": 128356,
+   "sha256": "29968d972b21208e672568b862b57828ad35be7ee584d35483e2c94a456b186a",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "c102-boss|네트워크 합창체|boss",
+   "source": "assets/boss-actions-20261011/c102-boss-poses.png",
+   "sourceRect": [
+    160,
+    5,
+    545,
+    505
+   ],
+   "sourceSha256": "2cd6221abe369c77da40ef0a6b7d8fbe72e1f63e1d8fe3519e060ef38bb29fb3",
+   "kind": "wing",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1224/float/c102-boss-poses.webp",
+   "size": [
+    2472,
+    256
+   ],
+   "bytes": 223526,
+   "sha256": "56b370085af6d83eff8fb97a3b35c37de2f3569cccf75e5452b43aa0d02777cf",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "c103-mid|이단의목사 한리안|mid",
+   "source": "assets/boss-actions-20261011/c103-mid-poses.png",
+   "sourceRect": [
+    255,
+    0,
+    270,
+    520
+   ],
+   "sourceSha256": "ce81741a6d869a50846dfd68d63c240531e3c110952bc693b3207dcb3ada2110",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1224/float/c103-mid-poses.webp",
+   "size": [
+    1184,
+    256
+   ],
+   "bytes": 61332,
+   "sha256": "3bae673d98304454186922ae45b7a03c94fe2f8b14726e33e032c2ef0b35249b",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "c105-mid|ID 생체조 관리자|mid",
+   "source": "assets/rc140/story-cycle-motions/c105-mid.png",
+   "sourceRect": [
+    0,
+    0,
+    728,
+    724
+   ],
+   "sourceSha256": "0821ab272748610fd7b4afbbe0490404ec889d70c47b8ef7efa6188649a919b5",
+   "kind": "ghost",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1224/float/c105-mid.webp",
+   "size": [
+    2304,
+    256
+   ],
+   "bytes": 135536,
+   "sha256": "cc66a8a78fd54ae211bb1ebcf46888cd4c3577fbe41b387dadfb43b2625171a2",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  },
+  {
+   "who": "c106-mid|기계재판 집행핵|mid",
+   "source": "assets/rc140/story-cycle-motions/c106-mid.png",
+   "sourceRect": [
+    0,
+    0,
+    685,
+    724
+   ],
+   "sourceSha256": "75f19233170152193c19792a0837241528371ef47e08b46ba83ff8b9b52d5dd7",
+   "kind": "mist",
+   "mist": "assets/r430/mist-loop.webp(검게 물들임)",
+   "path": "assets/r1224/float/c106-mid.webp",
+   "size": [
+    2168,
+    256
+   ],
+   "bytes": 139156,
+   "sha256": "227c13381186f81cd1c7a08edd88e2de884e02a9a964da810f6ca9c5ebafbfb9",
+   "use": "이동 그림이 없는 몹·보스의 떠서 이동(임시 연출, Dots 방향 시트가 오면 그 방향은 시트가 먼저)",
+   "applied": true
+  }
+ ]
+}

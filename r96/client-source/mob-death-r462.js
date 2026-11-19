@@ -72,6 +72,30 @@ function kindOf(look){const n=String(look?.name||'').replace(/^중간보스 · /
 const looks=new Map();let capturing=null;
 function remember(e,c){if(!e||!c)return;const prev=looks.get(e.id);if(!prev)stats.looks++;looks.delete(e.id);looks.set(e.id,c);
  if(looks.size>260){const it=looks.keys();for(let i=0;i<60;i++)looks.delete(it.next().value);}}
+// R1234(사용자 2026-11-19 "몹이 죽을때 가끔 커지는 문제"): 죽음 몸 높이(look.h)는 엔진 명목 높이(actorHeight×spriteRect×defScale)였는데,
+//  살아 있을 때는 R425 크기 맞춤(띠)·R205 중간보스 반 크기 등이 실제 그림을 줄이거나 키운다 → 주사실 '중간보스 ·' 몹 둘이 죽는 순간 1.63·1.92배로 커지고
+//  우두머리는 0.87배로 작아졌다(헤드리스 실측). → 이번 그리기에서 실제로 그려진 같은 칸 그림(같은 그림·같은 원본 칸)의 화면 높이로 맞춘다.
+//  drawAssetFrame3 는 칸 높이 sh 를 height/visibleHeight 배로 그리므로 화면 상자 높이 = sh×h×z/vh → h = 상자 높이×vh/(sh×z).
+//  같은 칸을 못 찾거나 10배 넘게 다르면(다른 그림) 원래 값.
+const pathTail=p=>String(p||'').replace(/^https?:\/\/[^/]+\//,'').replace(/^(?:\.\/)?(?:m0\/)?/,'');
+function drawnLookH(C,n0,look,z){const a=look&&look.frame&&look.frame.assetFrame,sr=a&&a.sourceRect,vh=a&&+a.visibleHeight;if(!Array.isArray(C)||!sr||!(vh>0)||!(sr[3]>0)||!(look.h>0))return look?look.h:0;
+ z=z>0?z:1;const want=sr.map(v=>Math.round(v)).join(','),lp=pathTail(look.path);let best=null,bh=0;
+ for(let i=Math.max(0,n0);i<C.length;i++){const q=C[i];if(!q||q.kind!=='image'||!q.points||!q.sourceRect)continue;if(q.sourceRect.map(v=>Math.round(v)).join(',')!==want)continue;
+  const qp=pathTail(q.sourcePath||q.image&&q.image.src);if(lp&&qp&&!qp.endsWith(lp)&&!lp.endsWith(qp))continue;
+  const P=q.points,h=Math.hypot(P[3][0]-P[0][0],P[3][1]-P[0][1]);if(h>bh){bh=h;best=q;}}
+ if(!best||!(bh>2))return look.h;const h=bh*vh/(sr[3]*z),r=h/look.h;if(!(r>.1&&r<10))return look.h;stats.drawnH=(stats.drawnH||0)+1;try{look.drawnR1234=true;}catch(_){}return h;}
+// R1234: Dots 죽음 시트(R1065)는 칸·visibleHeight 기준이 살아 있을 때 시트와 달라 같은 hPx 로 그리면 몸이 커졌다(재 나방 1.22~1.46배, 헤드리스).
+//  → 두 칸의 '그림 속 몸 높이 비율'(알파 줄 범위, 칸마다 한 번만 재고 기억)로 죽음 칸 높이를 살아 있을 때 몸 높이에 맞춘다(0.5~1.5배 안).
+function matchDeathH(h,alive,df){if(!alive||!df||!(alive.frac>0)||!(df.frac>0)||!(alive.vh>0)||!(df.vh>0)||!(alive.sh>0)||!(df.sh>0))return h;
+ const r=(alive.sh*alive.frac/alive.vh)/(df.sh*df.frac/df.vh);if(!Number.isFinite(r))return h;return h*Math.max(.5,Math.min(1.5,r));}
+const fracMemo=new Map();
+function frameFrac(path,frame){const a=frame&&frame.assetFrame,sr=a&&a.sourceRect;if(!path||!sr||!(+a.visibleHeight>0))return null;const k=path+'|'+sr.map(v=>Math.round(v)).join(',');
+ if(fracMemo.has(k))return fracMemo.get(k);const im=image(path);if(!im)return null;let v=null;
+ try{const [sx,sy,sw,sh]=sr.map(Math.round),H=64,W=Math.max(4,Math.min(256,Math.round(64*sw/Math.max(1,sh))));const c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d',{willReadFrequently:true});
+  g.drawImage(im,sx,sy,sw,sh,0,0,W,H);const d=g.getImageData(0,0,W,H).data;let y0=-1,y1=-1;for(let y=0;y<H;y++){let n=0;for(let x=0;x<W;x++)if(d[(y*W+x)*4+3]>90)n++;if(n>0){if(y0<0)y0=y;y1=y;}}
+  v=y0<0?null:{sh,vh:+a.visibleHeight,frac:(y1-y0+1)/H};c.width=c.height=1;}catch(err){fail(err);v=null;}
+ if(fracMemo.size>400)fracMemo.delete(fracMemo.keys().next().value);fracMemo.set(k,v);return v;}
+function dotsH(look,DF,h){if(!look||!look.drawnR1234)return h;/* 살아 있을 때 그 칸이 실제로 그려진 게 확인된 그림만(엔진이 고른 칸을 다른 오버레이가 가려 그린 몹은 칸 비율이 엉뚱함 — 재 나방 우두머리 0.68배) */try{const A=frameFrac(look.path,look.frame),D=frameFrac(DF.path,DF.frame);if(!A||!D)return h;const r=matchDeathH(h,A,D);if(r!==h)stats.dotsSized=(stats.dotsSized||0)+1;return r;}catch(err){fail(err);return h;}}
 function wrapDraws(){
  if(typeof sprite==='function'&&!sprite.__r462){const base=sprite;const w=function(path,x,y,height,opt){const c=capturing;if(c&&fin(height)&&height>=c.h&&path&&!/assets\/(?:vfx|r190|r411|r438|rc144)\//.test(String(path)))
    {c.h=height;c.path=path;c.frame=null;c.flip=!!opt?.flip;c.x=x;c.y=y;}return base.apply(this,arguments);};w.__r462=true;try{sprite=w;}catch(_){}}
@@ -81,7 +105,7 @@ function wrapDraws(){
    if(!prefs.on||!e||major(e)||!(e.hp>0)||e.spawnState==='dead')return base.apply(this,[e,...a]);
    // 엔진 drawEnemy 는 그림을 window.__STORYWORLD_STORY_COMBAT_R54__.frameFor / __STORYWORLD_PHASE1_ART__.enemy 로 고른다(R380 등은 ctx.drawImage 로 바로 그림).
    //  그리는 동안만 둘을 엿보는 껍데기로 바꿔 '이번에 고른 그림'을 받아 적는다(값은 그대로 돌려줌).
-   const prior=capturing,c={h:0,path:null,frame:null,flip:false,picked:null};capturing=c;try{e.r1206Look=null;}catch(_){}
+   const prior=capturing,c={h:0,path:null,frame:null,flip:false,picked:null};capturing=c;let n0=-1;try{if(typeof ctx==='object'&&ctx&&Array.isArray(ctx.commands))n0=ctx.commands.length;}catch(_){}try{e.r1206Look=null;}catch(_){}
    const S=window.__STORYWORLD_STORY_COMBAT_R54__,A=window.__STORYWORLD_PHASE1_ART__;
    try{if(S&&typeof S.frameFor==='function')window.__STORYWORLD_STORY_COMBAT_R54__={...S,frameFor(x,f){const r=S.frameFor(x,f);if(x===e&&r&&(r.path||r.assetFrame))c.picked=r;return r;}};}catch(_){}
    try{if(A&&typeof A.enemy==='function')window.__STORYWORLD_PHASE1_ART__={...A,enemy(x){const r=A.enemy(x);if(x===e&&r?.frame&&!c.picked)c.picked=r.frame.path?r.frame:{...r.frame,path:r.path};return r;}};}catch(_){}
@@ -96,6 +120,7 @@ function wrapDraws(){
        flip=typeof f.flip==='boolean'?f.flip:b==='left'?e.direction==='right':b==='right'?e.direction==='left':b==='front'||b==='back'||b==='eight-way'?false:e.direction==='left',
        hh=(typeof actorHeight==='function'?actorHeight():60)*(e.combatProfile?.spriteRect?.height||1)*(e.defScale||1);
        look={path:f.path||e.path,frame:f,flip,h:hh/z};}
+     if(look&&n0>=0){try{look.h=drawnLookH(ctx.commands,n0,look,z);}catch(err){fail(err);}}
      if(look){look.asp=aspectOf(look);remember(e,{id:e.id,name:e.name,nativeId:e.nativeId,dir:e.direction,...look});}}catch(err){fail(err);}}};
   w.__r462=true;try{drawEnemy=w;}catch(_){}}
  return typeof drawEnemy==='function'&&!!drawEnemy.__r462;}
@@ -244,7 +269,7 @@ function drawDyingAsh(fx,base){const R=fx.r462,look=R.look,age=+fx.age;if(!fin(a
  /* R1065c: Dots 죽음 시트(CX-0115MD)가 있는 몹은 검은 실루엣 대신 자기 그림 6칸으로 휘청 → 무너짐 → 재·빛 조각으로 흩어짐(피·시체 없음, 15세). 연기·재 조각은 그대로 위에. */
  let DF=null;try{DF=window.__STORYWORLD_MOB_ATTACK_DOTS_R1065__?.deathFrame?.(look,age)||null;}catch(_){DF=null;}
  if(DF){const b=(age<.06?1.45:1)*(1-.35*dark),fadeD=1-clamp01((age-.95)/.25);if(fadeD>.01){R.dots=DF.id;stats.dotsDeath=(stats.dotsDeath||0)+1;
-   body({...look,path:DF.path,frame:DF.frame},q.x,q.y,hPx,{alpha:fadeD,filter:`brightness(${b.toFixed(3)}) saturate(${(1-.3*dark).toFixed(3)})`});}}
+   body({...look,path:DF.path,frame:DF.frame},q.x,q.y,dotsH(look,DF,hPx),{alpha:fadeD,filter:`brightness(${b.toFixed(3)}) saturate(${(1-.3*dark).toFixed(3)})`});}}
  else if(fade>.01){const b=(age<.06?1.5:1)*(1-dark)+.07*dark;
   body(look,q.x,q.y-hPx*.05*rise,hPx,{alpha:fade,filter:`brightness(${b.toFixed(3)}) saturate(${(1-dark).toFixed(3)}) contrast(${(1+dark*.25).toFixed(3)})`});}
  const t=clamp01((age-.12)/(life-.12));
@@ -342,7 +367,7 @@ try{if(typeof showSettings==='function'){const base=showSettings;showSettings=fu
   s.value=A15()?'ash':prefs.style==='lay'?'lay':'gore';s.onchange=()=>{if(!A15())set({style:s.value==='lay'?'lay':'gore'});};l.appendChild(document.createTextNode('몹 죽음 연출 '));l.appendChild(s);grid.appendChild(l);}}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
 // R690: 이 몹의 죽음을 R462 가 맡는가(그렇다면 R91 공용 잔해·파편, R165 연기는 겹치지 않게 건너뜀)
 function owns(e){try{return !!(prefs.on&&e&&typeof e==='object'&&!major(e)&&looks.has(e.id));}catch(_){return false;}}
-window.__STORYWORLD_MOB_DEATH_R462__=Object.freeze({revision:REV,set,kindOf,owns,corpseOwner:CORPSE_OWNER,shards,shardBox,pieceAt,
+window.__STORYWORLD_MOB_DEATH_R462__=Object.freeze({revision:REV,drawnLookH,matchDeathH,set,kindOf,owns,corpseOwner:CORPSE_OWNER,shards,shardBox,pieceAt,
  lookOf:id=>{const l=looks.get(id);return l?{...l}:null;},fireZones:FIRE_ZONES,isFireSource:src=>fireWindow(src)>0,
  inspect:()=>({revision:REV,installed:ok,prefs:{...prefs},style:style(),age15:A15(),corpses:corpses.length,corpsesBurning:corpses.filter(c=>c.flame&&T()-c.t0>=0&&T()-c.t0<4.5).length,fireZones:[...FIRE_ZONES],fireTracked:fireHits.size,atlasCache:atlasCache.size,stats:{...stats},lastError})});
 })();

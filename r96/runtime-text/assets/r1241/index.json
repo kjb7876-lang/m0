@@ -1,0 +1,45 @@
+{
+ "shadow-rise12": {
+  "frames": 12,
+  "cell": [
+   192,
+   256
+  ],
+  "pivot": [
+   96,
+   246
+  ],
+  "rise": [
+   0,
+   5
+  ],
+  "sink": [
+   6,
+   11
+  ],
+  "source": "assets/r1166/mobs/md-01-ghost-patient-death.webp",
+  "process": "ink recolor + ground reveal mask",
+  "final": false
+ },
+ "shadow-burst12": {
+  "frames": 12,
+  "cell": [
+   256,
+   256
+  ],
+  "source": "assets/r1213/ink-dispersal12.webp (Dots)",
+  "process": "ink+dark violet recolor",
+  "final": false
+ },
+ "shadow-seal8": {
+  "frames": 8,
+  "cell": [
+   256,
+   256
+  ],
+  "ringDiameterRatio": 0.68,
+  "source": "assets/r1213/bomb-warning8.webp (Dots CX-0167RA r1)",
+  "process": "ink+dark violet recolor",
+  "final": false
+ }
+}

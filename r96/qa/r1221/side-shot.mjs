@@ -3,7 +3,7 @@
 import {chromium,boot,go,skip} from '../r444/lib.mjs';import fs from 'node:fs';
 const [zone,name,out]=process.argv.slice(2);fs.mkdirSync(out,{recursive:true});const b=await chromium.launch();const {p}=await boot(b,{vp:{width:960,height:540}});
 await go(p,zone);await skip(p);
-for(const dir of ['left','right']){const info=await p.evaluate(async([nm,dir])=>{auto=false;guide=false;const B=room.enemies.find(e=>e.hp>0&&String(e.name).includes(nm));if(!B)return null;
+for(const dir of ['left','right']){const info=await p.evaluate(async([nm,dir])=>{auto=false;guide=false;const B=room.enemies.find(e=>e.hp>0&&(nm.startsWith("id:")?e.nativeId===nm.slice(3):String(e.name).includes(nm)));if(!B)return null;
   for(const e of room.enemies)if(e!==B){e.hp=0;e.spawnState='dead';}B.spawnState='active';B.hidden=false;B.hp=B.maxHp=1e9;B.speed=0;
   const p0=project(0,0),px=project(1,0),py=project(0,1);let hx=-(py.y-p0.y),hy=(px.y-p0.y);const s=(project(hx,hy).x-p0.x)>=0?1:-1;const m=Math.hypot(hx,hy);hx*=s/m;hy*=s/m;const sg=dir==='left'?-1:1;
   const cx=player.x+hx*2.2,cy=player.y+hy*2.2+.0;const t0=time;

@@ -106,6 +106,423 @@
    "applied": true,
    "final": false,
    "note": "게임 안 같은 인물 걷기 칸 재사용(임시, Dots 정식 옆 걷기 오면 교체)"
+  },
+  {
+   "key": "kair-guardian-34",
+   "enemies": [
+    "kair-guardian-34"
+   ],
+   "dir": "side",
+   "source": "Dots CX-0169SW_guardian_34_walkL_r1_ROUGH.png",
+   "sourceSha256": "fb0beed1de662f5ba8f2ce105097356c872f5cb1a2761aa153dbfced5b027ab3",
+   "sourceFacing": "left",
+   "flippedIntoSheet": true,
+   "frames": 6,
+   "torsoSwayPx": 7.2,
+   "shiftsPx": [
+    16,
+    16,
+    15,
+    11,
+    15,
+    14
+   ],
+   "use": "옆 이동(왼쪽=Dots 원본 방향, 오른쪽=좌우반전)",
+   "note": "Dots CX-0169SW _ROUGH, 사용자 승인 10종. 몸통 흔들림 75% 보정·색 맞춤만",
+   "toneGain": [
+    0.818,
+    0.955,
+    0.966
+   ],
+   "path": "assets/r1221/side/kair-guardian-34-side.webp",
+   "size": [
+    2304,
+    384
+   ],
+   "bytes": 130220,
+   "sha256": "8e23bf847481341d9885d9ce677592e507fb82c9535a9b2d70f046707cd59c9c",
+   "applied": true,
+   "final": false
+  },
+  {
+   "key": "kair-guardian-40",
+   "enemies": [
+    "kair-guardian-40"
+   ],
+   "dir": "side",
+   "source": "Dots CX-0169SW_guardian_40_walkL_r1_ROUGH.png",
+   "sourceSha256": "da2337dfc18ef8e302503d1b32885e4f4fd27d270fe8a9f1ccb10d2587ffec0a",
+   "sourceFacing": "left",
+   "flippedIntoSheet": true,
+   "frames": 8,
+   "torsoSwayPx": 25.7,
+   "shiftsPx": [
+    11,
+    3,
+    0,
+    9,
+    5,
+    1,
+    -4,
+    15
+   ],
+   "use": "옆 이동(왼쪽=Dots 원본 방향, 오른쪽=좌우반전)",
+   "note": "Dots CX-0169SW _ROUGH, 사용자 승인 10종. 몸통 흔들림 75% 보정·색 맞춤만",
+   "toneGain": [
+    0.8,
+    0.856,
+    0.837
+   ],
+   "path": "assets/r1221/side/kair-guardian-40-side.webp",
+   "size": [
+    3072,
+    384
+   ],
+   "bytes": 165882,
+   "sha256": "6c8d467488d50e8eb313ec10efb13a3abf42b32d50074aa6808231097a41b3aa",
+   "applied": true,
+   "final": false
+  },
+  {
+   "key": "kair-guardian-05",
+   "enemies": [
+    "kair-guardian-05"
+   ],
+   "dir": "side",
+   "source": "Dots CX-0169SW_guardian_05_walkL_r1_ROUGH.png",
+   "sourceSha256": "d0fed1d5dec0f86b39f4fdb31da73d650f0815dad222634e5a39cb9e03f796f3",
+   "sourceFacing": "left",
+   "flippedIntoSheet": true,
+   "frames": 6,
+   "torsoSwayPx": 13.7,
+   "shiftsPx": [
+    -4,
+    -14,
+    -4,
+    -8,
+    -14,
+    -13
+   ],
+   "use": "옆 이동(왼쪽=Dots 원본 방향, 오른쪽=좌우반전)",
+   "note": "Dots CX-0169SW _ROUGH, 사용자 승인 10종. 몸통 흔들림 75% 보정·색 맞춤만",
+   "toneGain": [
+    0.97,
+    1.3,
+    1.3
+   ],
+   "path": "assets/r1221/side/kair-guardian-05-side.webp",
+   "size": [
+    2304,
+    384
+   ],
+   "bytes": 133512,
+   "sha256": "bb7e4c3f572b96e7c60dc458ae30dd7ede565a92a64d97b841792093f830297e",
+   "applied": true,
+   "final": false
+  },
+  {
+   "key": "kair-guardian-07",
+   "enemies": [
+    "kair-guardian-07"
+   ],
+   "dir": "side",
+   "source": "Dots CX-0169SW_guardian_07_walkL_r1_ROUGH.png",
+   "sourceSha256": "e3f38051239e32eafcd325ad8c299de2a69c158791ead64cc6f95cc64c853ff5",
+   "sourceFacing": "left",
+   "flippedIntoSheet": true,
+   "frames": 6,
+   "torsoSwayPx": 10.0,
+   "shiftsPx": [
+    10,
+    6,
+    5,
+    2,
+    6,
+    6
+   ],
+   "use": "옆 이동(왼쪽=Dots 원본 방향, 오른쪽=좌우반전)",
+   "note": "Dots CX-0169SW _ROUGH, 사용자 승인 10종. 몸통 흔들림 75% 보정·색 맞춤만",
+   "toneGain": [
+    0.891,
+    0.984,
+    1.023
+   ],
+   "path": "assets/r1221/side/kair-guardian-07-side.webp",
+   "size": [
+    2304,
+    384
+   ],
+   "bytes": 129528,
+   "sha256": "355fbd8c2b50f460d3d0899afc9e912755bb9ea0a29597a4f7b294fae98c2416",
+   "applied": true,
+   "final": false
+  },
+  {
+   "key": "kair-guardian-08",
+   "enemies": [
+    "kair-guardian-08"
+   ],
+   "dir": "side",
+   "source": "Dots CX-0169SW_guardian_08_walkL_r1_ROUGH.png",
+   "sourceSha256": "0067337035cf67836cda1cdd661f6f613e81df1b7ae206cb15e01870f5bebefe",
+   "sourceFacing": "left",
+   "flippedIntoSheet": true,
+   "frames": 6,
+   "torsoSwayPx": 12.3,
+   "shiftsPx": [
+    5,
+    -4,
+    3,
+    1,
+    -1,
+    5
+   ],
+   "use": "옆 이동(왼쪽=Dots 원본 방향, 오른쪽=좌우반전)",
+   "note": "Dots CX-0169SW _ROUGH, 사용자 승인 10종. 몸통 흔들림 75% 보정·색 맞춤만",
+   "toneGain": [
+    1.027,
+    1.209,
+    1.258
+   ],
+   "path": "assets/r1221/side/kair-guardian-08-side.webp",
+   "size": [
+    2304,
+    384
+   ],
+   "bytes": 119212,
+   "sha256": "1481eb03e8ea6f51ffa1f585ab6df80cc22281214f7ed849f138a7f7a3de20f9",
+   "applied": true,
+   "final": false
+  },
+  {
+   "key": "kair-guardian-10",
+   "enemies": [
+    "kair-guardian-10"
+   ],
+   "dir": "side",
+   "source": "Dots CX-0169SW_guardian_10_walkL_r1_ROUGH.png",
+   "sourceSha256": "a90b5d24a587596cb8063d09240c7cf8bce52726ef8711c301fd14260eefc5e8",
+   "sourceFacing": "left",
+   "flippedIntoSheet": true,
+   "frames": 6,
+   "torsoSwayPx": 15.7,
+   "shiftsPx": [
+    -2,
+    -14,
+    -3,
+    -4,
+    -14,
+    -5
+   ],
+   "use": "옆 이동(왼쪽=Dots 원본 방향, 오른쪽=좌우반전)",
+   "note": "Dots CX-0169SW _ROUGH, 사용자 승인 10종. 몸통 흔들림 75% 보정·색 맞춤만",
+   "toneGain": [
+    0.927,
+    1.052,
+    1.121
+   ],
+   "path": "assets/r1221/side/kair-guardian-10-side.webp",
+   "size": [
+    2304,
+    384
+   ],
+   "bytes": 140980,
+   "sha256": "c7e327071b9ffa2754d4dff8c0e272e054a9c5d5e6680e08664ac101d5bf95c2",
+   "applied": true,
+   "final": false
+  },
+  {
+   "key": "kair-guardian-13",
+   "enemies": [
+    "kair-guardian-13"
+   ],
+   "dir": "side",
+   "source": "Dots CX-0169SW_guardian_13_walkL_r1_ROUGH.png",
+   "sourceSha256": "f9bdad6953b2cda8a6f7b3f712ca1e3f5337668a7174a3da4dae3ecb423c4008",
+   "sourceFacing": "left",
+   "flippedIntoSheet": true,
+   "frames": 6,
+   "torsoSwayPx": 11.6,
+   "shiftsPx": [
+    13,
+    7,
+    13,
+    6,
+    4,
+    12
+   ],
+   "use": "옆 이동(왼쪽=Dots 원본 방향, 오른쪽=좌우반전)",
+   "note": "Dots CX-0169SW _ROUGH, 사용자 승인 10종. 몸통 흔들림 75% 보정·색 맞춤만",
+   "toneGain": [
+    0.754,
+    0.826,
+    0.75
+   ],
+   "path": "assets/r1221/side/kair-guardian-13-side.webp",
+   "size": [
+    2304,
+    384
+   ],
+   "bytes": 113400,
+   "sha256": "9ed1ce5d4233e8856fda3503af78ad4583393c98dce0594d17d8bad192d7d8ef",
+   "applied": true,
+   "final": false
+  },
+  {
+   "key": "kair-guardian-16",
+   "enemies": [
+    "kair-guardian-16"
+   ],
+   "dir": "side",
+   "source": "Dots CX-0169SW_guardian_16_walkL_r1_ROUGH.png",
+   "sourceSha256": "5ffb15aded8c08c7fc6746c3f69d7846d33e78bbdc42ec3e7644c32848e5320a",
+   "sourceFacing": "left",
+   "flippedIntoSheet": true,
+   "frames": 8,
+   "torsoSwayPx": 9.8,
+   "shiftsPx": [
+    -2,
+    -2,
+    -2,
+    3,
+    -3,
+    -4,
+    -5,
+    2
+   ],
+   "use": "옆 이동(왼쪽=Dots 원본 방향, 오른쪽=좌우반전)",
+   "note": "Dots CX-0169SW _ROUGH, 사용자 승인 10종. 몸통 흔들림 75% 보정·색 맞춤만",
+   "toneGain": [
+    1.081,
+    1.259,
+    1.3
+   ],
+   "path": "assets/r1221/side/kair-guardian-16-side.webp",
+   "size": [
+    3072,
+    384
+   ],
+   "bytes": 217070,
+   "sha256": "8544daca8f0a3f8d42ad2dc3f0e67b37df5a46b59dabc3d42b79115bf6ab311d",
+   "applied": true,
+   "final": false
+  },
+  {
+   "key": "kair-guardian-15",
+   "enemies": [
+    "kair-guardian-15"
+   ],
+   "dir": "side",
+   "source": "Dots CX-0169SW_guardian_15_walkL_r1_ROUGH.png",
+   "sourceSha256": "e175ff25eb1b3547ef96d59c1728987b323621893cd97dd7772201d47813400f",
+   "sourceFacing": "left",
+   "flippedIntoSheet": true,
+   "frames": 8,
+   "torsoSwayPx": 19.4,
+   "shiftsPx": [
+    9,
+    -6,
+    -2,
+    7,
+    3,
+    -4,
+    -2,
+    4
+   ],
+   "use": "옆 이동(왼쪽=Dots 원본 방향, 오른쪽=좌우반전)",
+   "note": "Dots CX-0169SW _ROUGH, 사용자 승인 10종. 몸통 흔들림 75% 보정·색 맞춤만",
+   "toneGain": [
+    0.788,
+    0.954,
+    0.848
+   ],
+   "path": "assets/r1221/side/kair-guardian-15-side.webp",
+   "size": [
+    3072,
+    384
+   ],
+   "bytes": 205828,
+   "sha256": "09d5120ba0cfc5757a661116a1d4f6185587a4ac2e5f1492a99887534afc3a5c",
+   "applied": true,
+   "final": false
+  },
+  {
+   "key": "kair-guardian-20",
+   "enemies": [
+    "kair-guardian-20"
+   ],
+   "dir": "side",
+   "source": "Dots CX-0169SW_guardian_20_walkL_r1_ROUGH.png",
+   "sourceSha256": "5bbdb9cce78fd97fac80edb1f0df4fc5036194c6376e30aaabad4f97718684de",
+   "sourceFacing": "left",
+   "flippedIntoSheet": true,
+   "frames": 8,
+   "torsoSwayPx": 10.1,
+   "shiftsPx": [
+    -6,
+    -6,
+    -7,
+    0,
+    -7,
+    -3,
+    -5,
+    -2
+   ],
+   "use": "옆 이동(왼쪽=Dots 원본 방향, 오른쪽=좌우반전)",
+   "note": "Dots CX-0169SW _ROUGH, 사용자 승인 10종. 몸통 흔들림 75% 보정·색 맞춤만",
+   "toneGain": [
+    0.843,
+    0.907,
+    1.048
+   ],
+   "path": "assets/r1221/side/kair-guardian-20-side.webp",
+   "size": [
+    3072,
+    384
+   ],
+   "bytes": 200110,
+   "sha256": "e021a81970af6fdcc705b6c68d3912ad340cff2478bea728b0370a3b279c98e9",
+   "applied": true,
+   "final": false
+  },
+  {
+   "key": "kair-guardian-24",
+   "enemies": [
+    "kair-guardian-24"
+   ],
+   "dir": "side",
+   "source": "Dots CX-0169SW_guardian_24_walkL_r1_ROUGH.png",
+   "sourceSha256": "f3d2f1c3c78e22d28894aeb98a9c255c952f271426c1b8fad72114f53e292760",
+   "sourceFacing": "left",
+   "flippedIntoSheet": true,
+   "frames": 8,
+   "torsoSwayPx": 20.9,
+   "shiftsPx": [
+    6,
+    -9,
+    -7,
+    6,
+    0,
+    -8,
+    -9,
+    3
+   ],
+   "use": "옆 이동(왼쪽=Dots 원본 방향, 오른쪽=좌우반전)",
+   "note": "Dots CX-0169SW _ROUGH, 사용자 승인 10종. 몸통 흔들림 75% 보정·색 맞춤만",
+   "toneGain": [
+    0.75,
+    0.831,
+    0.82
+   ],
+   "path": "assets/r1221/side/kair-guardian-24-side.webp",
+   "size": [
+    3072,
+    384
+   ],
+   "bytes": 162238,
+   "sha256": "4d150fa6d70e076c533c70fbf26a2e61776286c3cf96537a403af7d208153b15",
+   "applied": true,
+   "final": false
   }
  ]
 }
