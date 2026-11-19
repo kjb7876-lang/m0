@@ -226,7 +226,14 @@ function auraFront(p){const F=heroOf(p),t=tierOf(p),k=heat(p,t),L=formLevel(p,t)
   if(F.form==='blade'&&BLADE_ORBIT)blades(q.x,fy,h,F,k,seed,'front',4-L.cut);
   orbs(p,q.x,fy,h,F,k,seed,'front',L.cut);
  }finally{ctx.restore();}});}
-const heroBase=drawHero;drawHero=function(...a){const p=live()?player:null,on=!!(p&&prefs.aura&&p.hp>0&&p.visible!==false&&p.disabled!==true&&finite(p.x+p.y,NaN)===p.x+p.y);
+// R1202(그리기 전수조사, R1199 #833 이 넘긴 몫): 칠묵영·소환 등 분신은 같은 프레임에 전역 drawHero 를 다시 불러 이 오라가 분신마다(최대 15번) 그려졌다.
+//  성능 단계 1~5·자동(perf7 scale≤1, 사용자 11-19 R1199 '나은 방향')에서는 한 프레임의 첫 영웅 그리기(진짜 영웅)만 오라를 그린다. 6·7 은 분신마다 그대로.
+//  새 프레임 판정: 그리기 명령 배열이 바뀌었거나 길이가 늘지 않았거나(render 뒤 비움) 게임 시간이 바뀜.
+const auraSeen={t:NaN,cm:null,len:-1,n:0,skipped:0};
+function cloneAuraSkip(){let cm=null,t=NaN;try{cm=typeof ctx!=='undefined'&&ctx&&Array.isArray(ctx.commands)?ctx.commands:null;t=typeof time==='number'?time:NaN;}catch(_){}
+ const len=cm?cm.length:-1;if(cm!==auraSeen.cm||len<=auraSeen.len||!(t===auraSeen.t)){auraSeen.cm=cm;auraSeen.t=t;auraSeen.n=0;}auraSeen.len=len;auraSeen.n++;if(auraSeen.n<=1)return false;
+ let sc=1;try{sc=+window.__STORYWORLD_PERF7_R1043__?.scale?.();}catch(_){sc=1;}if(Number.isFinite(sc)&&sc<=1){auraSeen.skipped++;return true;}return false;}
+const heroBase=drawHero;drawHero=function(...a){const p=live()?player:null,on=!!(p&&prefs.aura&&p.hp>0&&p.visible!==false&&p.disabled!==true&&finite(p.x+p.y,NaN)===p.x+p.y)&&!cloneAuraSkip();
  if(on)try{auraBack(p);}catch(e){fail(e);}const r=heroBase.apply(this,a);if(on)try{auraFront(p);}catch(e){fail(e);}return r;};
 
 // ---- hit feel: hero skill → enemy -------------------------------------------------------
@@ -548,5 +555,5 @@ if(typeof showSettings==='function'){const sb=showSettings;showSettings=function
 
 window.__STORYWORLD_POLISH_R101__=Object.freeze({revision:'R101-polish',prefs:()=>({...prefs}),set,palette:id=>({...fxOf(id)}),heat:()=>live()?heat(player):0,motion:e=>e?{...motion(e)}:null,
  effects:()=>list.map(e=>({kind:e.kind,age:age(e),life:e.life})),pickedHero:()=>pickedHero,toggleGuide,
- inspect:()=>({revision:'R101-polish',prefs:{...prefs},stats:{...stats},effects:list.length,tier:live()?tierOf(player):null,lastError,relayBuilds:[...RELAY_BUILDS],presentationOnly:true,gameplayChanged:false,savesTouched:false})});
+ inspect:()=>({revision:'R101-polish',prefs:{...prefs},stats:{...stats,auraCloneSkips:auraSeen.skipped},effects:list.length,tier:live()?tierOf(player):null,lastError,relayBuilds:[...RELAY_BUILDS],presentationOnly:true,gameplayChanged:false,savesTouched:false})});
 })();
