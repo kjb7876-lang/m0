@@ -837,6 +837,8 @@ jobs:
         run: node r96/qa/r1150/r1150-cpu-check.cjs
       - name: R1225 story mode enemies and bosses take half of all damage (fixed, proc, max-HP %), normal-mob instakills kept, samong episode/survival/cinema unchanged CPU check
         run: node r96/qa/r1225/r1225-cpu-check.cjs
+      - name: R1236 camera catches up within ~0.1s after blink/teleport/fast dash (all heroes), normal walking follow unchanged CPU check
+        run: node r96/qa/r1236/r1236-cpu-check.cjs
       - name: R537 spider cave mud-back spider and memory-carrier spider, swamp root stalker renamed CPU check
         run: node r96/qa/r537/r537-cpu-check.cjs
       - name: R450 zone weather (63 story zones indoor/outdoor/cave/void, dust instead of rain indoors, canon weather, double-sided streaks) CPU check

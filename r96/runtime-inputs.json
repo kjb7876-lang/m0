@@ -10689,6 +10689,7 @@
     "swamp-splash-r1222.js",
     "assets/r163/pixelfx/r1222/mob-swamp-dots-12.webp",
     "story-half-dmg-r1225.js",
+    "blink-camera-r1236.js",
     "mob-dash-r1221.js",
     "move-side-r1221-data.js",
     "three-recover-r1228.js",
@@ -11783,5 +11784,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "b470a2ebf69aaab959fdcba7e7e8dddf2f9903c0bf7dd94352fdc5c6e874b01e"
+  "runtimeManifestSHA256": "1d7e4ac0f396d60648496874e1d74771d4d6315fd3c289f7991e8fa433033a5d"
 }

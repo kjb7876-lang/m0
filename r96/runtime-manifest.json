@@ -54613,6 +54613,11 @@
       "sha256": "bbed0e0c81a4c310efb2aad337b3d05455def8548c35f330d593c7d2f43fdd02"
     },
     {
+      "path": "blink-camera-r1236.js",
+      "bytes": 3015,
+      "sha256": "b25f46175da4086d7a3a9b0bced3e607c8e93e7a79dcc6d22dda2ed9033824b6"
+    },
+    {
       "path": "boot-lean-r1038.js",
       "bytes": 2142,
       "sha256": "67fd27b461c55ff3de66e0b4e484a76960a013a791fd609d911d9405e20d5d5b"
@@ -56009,8 +56014,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6583089,
-      "sha256": "b00677158122d264a64f9d6c2d0c75d20079875ce28be5794a0b8e3baf43dff5"
+      "bytes": 6583137,
+      "sha256": "5134854e7f5309cd53bae3f7627e2490bd37596d154b1e0b4ed5b702da697098"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -57493,9 +57498,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11498,
-  "totalBytes": 1373324173,
-  "webHTMLSha256": "b00677158122d264a64f9d6c2d0c75d20079875ce28be5794a0b8e3baf43dff5",
+  "fileCount": 11499,
+  "totalBytes": 1373327236,
+  "webHTMLSha256": "5134854e7f5309cd53bae3f7627e2490bd37596d154b1e0b4ed5b702da697098",
   "largest": [
     {
       "path": "index.html",
