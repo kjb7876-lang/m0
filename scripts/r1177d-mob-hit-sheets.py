@@ -16,13 +16,14 @@ JOBS=[('mob-domestic','D_house-double-claw12.png',12),('mob-forge','D_forge-hamm
  ('mob-neural','D_nerve-branch-current12.png',12),('mob-clinical','D_hospital-silver-hit8.png',8),
  ('mob-garden','D_garden-foliage-arc12.png',12),('mob-stone','D_stone-rising-spines12.png',12),
  ('mob-snow','D_snow-ice-break12.png',12),('mob-coast','D_coast-water-splash12.png',12),
- ('mob-regional','D_common-crescent-slash8.png',8)]
+ ('mob-regional','D_common-crescent-slash8.png',8),
+ ('mob-memory','D_memory-ink-shards12.png',12)]# R1177f: Dots CX-0160MF 기억 — 육망성 없이 먹 번짐·깨지는 조각(흑백)
 def union(a,fw,fh,cols,n):
     U=np.zeros((fh,fw),bool)
     for i in range(n):r,c=divmod(i,cols);U|=a[r*fh:(r+1)*fh,c*fw:(c+1)*fw]>30
     ys,xs=np.nonzero(U);return xs.min(),ys.min(),xs.max()+1,ys.max()+1
 # 사방으로 퍼지는 칸(얼음 깨짐·신경 전류)은 Dots 그림 한가운데가 맞은 자리 — 원래 도트 칸은 오른쪽으로 뻗는 그림이라 기준점이 왼쪽이었다
-CENTER={'mob-snow':None,'mob-neural':.5}
+CENTER={'mob-snow':None,'mob-neural':.5,'mob-memory':.5}
 # R1177e: Dots 인계 메모 '눈가루가 서리 장판처럼 보임 → 연무 투명도 낮춤' — 반투명(알파<230) 연무만 옅게, 단단한 얼음 조각(불투명)은 그대로
 HAZE={'mob-snow':.5}
 rows=[]

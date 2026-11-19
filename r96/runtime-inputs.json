@@ -10558,6 +10558,23 @@
     "assets/r1169/dys-siege-gunner-hit4.webp",
     "assets/r1169/dys-siege-gunner-death6.webp",
     "assets/r1169/index.json",
+    "assets/r1170/index.json",
+    "assets/r1170/mm-hound-death6.webp",
+    "assets/r1170/mm-hound-hit4.webp",
+    "assets/r1170/mm-knight-death6.webp",
+    "assets/r1170/mm-knight-hit4.webp",
+    "assets/r1170/mm-mech01-death6.webp",
+    "assets/r1170/mm-mech01-hit4.webp",
+    "assets/r1170/mm-mech02-death6.webp",
+    "assets/r1170/mm-mech02-hit4.webp",
+    "assets/r1170/mm-mech03-death6.webp",
+    "assets/r1170/mm-mech03-hit4.webp",
+    "assets/r1170/mm-mech04-death6.webp",
+    "assets/r1170/mm-u206a-death6.webp",
+    "assets/r1170/mm-u206a-hit4.webp",
+    "assets/r1170/mm-u206b-death6.webp",
+    "assets/r1170/mm-u206b-hit4.webp",
+    "assets/r1177/mob-memory-dots-12.webp",
     "boss-fx-vis-r1192.js"
   ],
   "mediaPaths": [
@@ -11633,5 +11650,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "ca40729be78f5d8e3aed82d3fde6191aa3645749cbfcb27f964c5aa44b088284"
+  "runtimeManifestSHA256": "c29740afac410cf26eefb4dcd95abba1379c5e95fd211259af8cf6d850de75a7"
 }
