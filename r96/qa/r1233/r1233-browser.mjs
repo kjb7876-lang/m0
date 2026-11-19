@@ -24,6 +24,7 @@ const CASES=[
  ['ep1b04:STORY','끓어오르는 검은 소화액',/assets\/r1233\/mobs\/m025\./],['ep1b06:STORY','모든 면이 뒷면인 동전',/assets\/r1233\/mobs\/m026\./],
  ['last304:STORY','장미이슬 슬라임',/assets\/r1233\/mobs\/m043\./],['sz115-RD-2','서로의 결말을 먹는 도시',/assets\/r1233\/mobs\/m091\./],
  ['sz115-RC-1','관람석의 시선',/assets\/r1233\/mobs\/m087\.|assets\/r380\/mobs\//]/* RC 판은 일부 몹에 R380 채택 그림(slot)이 먼저 */,['sz115-S04-2','규칙을 어기지 않는 마네킹',/assets\/r1233\/mobs\/m072\./],
+ ['sz115-S03-2','다시 일으켜 세워진 도전자',/assets\/r1233\/mobs\/m069\./],
  ['cult05:STORY','중간보스 · ID 배양 점액체',/assets\/r380\/mobs\/legacy-m130-slime-cult05-v2\./],/* R81 지역 수호자(앞말 붙은 일반몹) */
 ];
 // 대조군: 손대지 않아야 할 이름·층

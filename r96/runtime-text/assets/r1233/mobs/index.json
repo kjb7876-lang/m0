@@ -190,6 +190,24 @@
    },
    "sha256": "68f5badc1884cd2877c47eb5c9b318928340daaed6b610c0de498035dc8aa77f",
    "bytes": 403600
+  },
+  {
+   "id": "m069",
+   "name": "다시 일으켜 세워진 도전자",
+   "file": "m069.webp",
+   "body": 204,
+   "finalArt": false,
+   "source": {
+    "drive": "Dots CX-0177RC-15 r1 ROUGH",
+    "sha256": "7cced2b906fd58761aeb1e5e65846aeb15a9f90014d94a8074f7ea5d00d0fb8c"
+   },
+   "clean": {
+    "tool": "scripts/r1233-dots-clean.py",
+    "lowAlphaCleared": 0,
+    "detachedRemoved": 0
+   },
+   "sha256": "0a7231e3c3faa5230dc5ae3ac2a38b5191ed1fb0643af1036e5af1a52e4a6c26",
+   "bytes": 258378
   }
  ]
 }

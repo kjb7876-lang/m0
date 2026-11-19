@@ -13739,8 +13739,8 @@
     },
     {
       "path": "assets/r1233/mobs/index.json",
-      "bytes": 5252,
-      "sha256": "bbf7a2a2f254952f8202a9dfbd4473740c538a71cbe9400bf43a0411fa7ec9a4"
+      "bytes": 5750,
+      "sha256": "3ea57205b7c656f6035f219ca1999f29758a2674a2c79d2124b067505e4cc8b5"
     },
     {
       "path": "assets/r1233/mobs/m019.webp",
@@ -13776,6 +13776,11 @@
       "path": "assets/r1233/mobs/m058.webp",
       "bytes": 403600,
       "sha256": "68f5badc1884cd2877c47eb5c9b318928340daaed6b610c0de498035dc8aa77f"
+    },
+    {
+      "path": "assets/r1233/mobs/m069.webp",
+      "bytes": 258378,
+      "sha256": "0a7231e3c3faa5230dc5ae3ac2a38b5191ed1fb0643af1036e5af1a52e4a6c26"
     },
     {
       "path": "assets/r1233/mobs/m072.webp",
@@ -56514,8 +56519,8 @@
     },
     {
       "path": "mob-art-restore-r1233.js",
-      "bytes": 11837,
-      "sha256": "0eb87c49e2ee50577f9c62eeae6adc6f9088ef5cbc2cdc9735f15c58d82626cf"
+      "bytes": 12127,
+      "sha256": "9422d1eb0d14e98158426fc2652331d2f70c91466d80521d0f2915f36a4f6154"
     },
     {
       "path": "mob-art-variants-r306-data.js",
@@ -57833,8 +57838,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11566,
-  "totalBytes": 1382463267,
+  "fileCount": 11567,
+  "totalBytes": 1382722433,
   "webHTMLSha256": "3795edef67adee921583165bb407cd80bb1e4de97372d61fa2a72caf10e9d292",
   "largest": [
     {
