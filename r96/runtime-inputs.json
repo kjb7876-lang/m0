@@ -10677,7 +10677,18 @@
     "assets/r1206/props/spool.webp",
     "assets/r1206/props/willow.webp",
     "assets/r1206/fx/ink-bloom-warn8.webp",
-    "assets/r1206/fx/index.json"
+    "assets/r1206/fx/index.json",
+    "samong-stagger-r1217.js",
+    "samong-warm-r1217-data.js",
+    "assets/r1219/r436/hwando/walk-s.webp",
+    "assets/r1219/r436/hwando/r1219.json",
+    "assets/r1219/r436/hwando/sheathed/walk-s.webp",
+    "assets/r1219/r436/hwando/sheathed/idle-s.webp",
+    "assets/r1219/r436/hwando/sheathed/index.json",
+    "memory-voice-r1223.js",
+    "swamp-splash-r1222.js",
+    "assets/r163/pixelfx/r1222/mob-swamp-dots-12.webp",
+    "story-half-dmg-r1225.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11752,5 +11763,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "a30d1a058ecf3785c2fe621ed762f5659fbfaec3d20795dd7c841a3b05ddb7ea"
+  "runtimeManifestSHA256": "e793d0fdc4360a275e87f1eb44343fefb8c2b546666faf342d56ba615cc809b6"
 }
