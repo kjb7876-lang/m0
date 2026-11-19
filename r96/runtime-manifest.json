@@ -13533,6 +13533,51 @@
       "sha256": "22160085186637605ca8836691ff76612e9cefd34c083db2bf09ef558e62171b"
     },
     {
+      "path": "assets/r1214/dark-impact8.webp",
+      "bytes": 21036,
+      "sha256": "6acd2661c8859abc50fd384356cc6dbcda2240218a43be35b6c7fa36f1e8cdd3"
+    },
+    {
+      "path": "assets/r1214/dark-orb-flight8.webp",
+      "bytes": 16122,
+      "sha256": "5c45bbce0e6c11fa39e407a56c276463a6afa1950da4bfc68d7f8613df908d26"
+    },
+    {
+      "path": "assets/r1214/fear-gaze12.webp",
+      "bytes": 76260,
+      "sha256": "070eb1ae88af427571724deeec6dfcaa74c8d61f83aa7b17b4ceb75430ac9f3c"
+    },
+    {
+      "path": "assets/r1214/fear-status8.webp",
+      "bytes": 20902,
+      "sha256": "30d70b0be9462fb5adcac2ee9f7b3366e0e3e5a9563b5def2307a537c07f23c6"
+    },
+    {
+      "path": "assets/r1214/fissure-warning8.webp",
+      "bytes": 75680,
+      "sha256": "ea0c11e2631c2e03061b046d5c8c8f09959cda4fd2fbbda288eb01f90d3ca0d8"
+    },
+    {
+      "path": "assets/r1214/index.json",
+      "bytes": 3875,
+      "sha256": "7901c2838c2b580962b3d97c08da85c87cfa3a45d7ba148344e7e8e847b5064b"
+    },
+    {
+      "path": "assets/r1214/ink-rise10.webp",
+      "bytes": 36896,
+      "sha256": "ea0ca007ebb51c13ecc4678aaab85b6dceb7324478d3d05f18e024ba15e537c2"
+    },
+    {
+      "path": "assets/r1214/shadow-hand-warning8.webp",
+      "bytes": 51706,
+      "sha256": "f1104e73a15e6733146e19d216fe44c9e87fdacd7b7d18796684beaaf61de1d0"
+    },
+    {
+      "path": "assets/r1214/shadow-rise12.webp",
+      "bytes": 79512,
+      "sha256": "dbe51276f8ee40668152bf35dd07c2a379af3184f8ff32a4c13ad4ffde3f0d67"
+    },
+    {
       "path": "assets/r126/props/badge.webp",
       "bytes": 25464,
       "sha256": "fd12f3e8efd3654d060607145cbd6f6f55728f7fd65afd5a9f4d3d1507ae0281"
@@ -55349,8 +55394,8 @@
     },
     {
       "path": "dys-ranged-r1210.js",
-      "bytes": 26917,
-      "sha256": "0bb86f730b1ca454646d9c75166b3c4e9e4cd252a9265330b0da44e2f4031dd3"
+      "bytes": 45132,
+      "sha256": "7e2ba2b94e09c27aebec3f69f4e19d45d5dfe2cc1e6987ff1f999708bd6ddd97"
     },
     {
       "path": "edges-r188.js",
@@ -57338,8 +57383,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 11467,
-  "totalBytes": 1372077124,
+  "fileCount": 11476,
+  "totalBytes": 1372477328,
   "webHTMLSha256": "35e2e108e4122cb883241936b2d097d75def00ae01cbf25a5bbea4fde53ddfb3",
   "largest": [
     {
