@@ -1,0 +1,9 @@
+FAIL ① 1시간 뒤 updateHUD 돎 (Maximum call stack size exceeded)
+FAIL ③ 1시간 뒤 원래 HUD 1번 (0)
+FAIL ② 1시간 뒤 R420 겹 수 상한 (1분 61 → 1시간 0)
+FAIL ② 1시간 뒤 R1046 겹 수 상한 (1분 61 → 1시간 0)
+FAIL ② 1시간 뒤 사슬 깊이 그대로 (1분 132 → 1시간 0)
+FAIL ① 3시간 뒤 그대로 (Maximum call stack size exceeded)
+FAIL ③ 늦은 덧씌우기 뒤에도 동작 ({"fix":0,"name":0})
+FAIL pages.yml 연결
+FAILED 8/9

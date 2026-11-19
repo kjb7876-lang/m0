@@ -707,6 +707,8 @@ jobs:
         run: node r96/qa/r1183/dup-tint-cpu-check.cjs
       - name: R1196 long virtual run (1h/3h fake clock) - R613 gait and R1183 tint rewrap capped so the drawEnemy chain stays bounded and enemies and bosses keep drawing CPU check
         run: node r96/qa/r1196/long-run-wrap-check.cjs
+      - name: R1196 HUD rewrap capped (R420 access and R1046 EGO form no longer re-wrap updateHUD around each other forever; 1h/3h fake clock) CPU check
+        run: node r96/qa/r1196/hud-wrap-check.cjs
       - name: R1098 samong faces (Michaela final boss uses her own sheet, R161 puppet repainted as an ink-and-white-thread doll so it no longer looks like Hwando) CPU check
         run: node r96/qa/r1098/r1098-cpu-check.cjs
       - name: R1090 character ink tint (hero and mob body images only, follows the map ink wash, settings toggle, effects and telegraphs untouched) CPU check
