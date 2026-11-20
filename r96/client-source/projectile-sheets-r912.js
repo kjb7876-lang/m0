@@ -106,6 +106,8 @@
       stats.draws++;
       const saved=ctx,log=[];realCanvas=saved&&saved.canvas;sinkLog=log;nest++;ctx=SINK;let out;
       try{out=base.apply(this,[p,...rest]);}catch(e){fail(e);}finally{ctx=saved;nest--;sinkLog=null;}
+      /* R1254(외부 리뷰): 시야 밖이라 원래 그리기가 아무것도 안 그렸으면(빈 기록) 판정을 미룬다 — 전엔 '아니다'로 굳어 화면에 들어온 뒤에도 회색 기본 탄으로 남았다 */
+      if(el===undefined&&!k.direct&&!log.length){stats.deferred=(stats.deferred||0)+1;nest++;try{return base.apply(this,[p,...rest]);}finally{nest--;}}
       if(el===undefined){const yes=isEligible(p,k,log);try{eligible.set(p,yes);}catch{}if(!yes){stats.missed++;nest++;try{return base.apply(this,[p,...rest]);}finally{nest--;}}}
       try{if(drawFly(p,k,row,q.x,q.y-18*z,undefined,1)){if(k.direct)stats.direct++;else stats.swapped++;}}catch(e){fail(e);}
       return out;

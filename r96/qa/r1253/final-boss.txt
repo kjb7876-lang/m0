@@ -1,0 +1,10 @@
+michaela PREP false 준비 {"tex":0,"texMs":0,"texMpx":0,"shMs":0,"links":0} 
+ 각성 {"maxFrame":633,"frames":5,"newPrograms":1,"tex":6,"texMs":21.2,"texMpx":1.96,"shMs":4.9,"links":1,"top":["HTML:final42-r88/effects/246/atlas.png 1.64M 18.7ms","HTML:CANVAS 0.22M 1.8ms","HTML:CANVAS 0.07M 0.4ms","HTML:CANVAS 0.03M 0.3ms","HTML:CANVAS 0.00M 0.0ms","HTML:CANVAS 0.00M 0.0ms"]}
+hwando PREP false 준비 {"tex":0,"texMs":0,"texMpx":0,"shMs":0,"links":0} 
+ 각성 {"maxFrame":450,"frames":7,"newPrograms":0,"tex":21,"texMs":39.9,"texMpx":4.7,"shMs":0,"links":0,"top":["HTML:final42-r88/effects/217/atlas.png 1.64M 18.3ms","HTML:final42-r88/effects/246/atlas.png 1.64M 15.2ms","HTML:CANVAS 0.22M 1.1ms","HTML:CANVAS 0.16M 0.9ms","HTML:CANVAS 0.09M 0.6ms","HTML:CANVAS 0.22M 0.5ms"]}
+lauren PREP false 준비 {"tex":0,"texMs":0,"texMpx":0,"shMs":0,"links":0} 
+ 각성 {"maxFrame":400,"frames":8,"newPrograms":0,"tex":13,"texMs":22.3,"texMpx":1.86,"shMs":0,"links":0,"top":["HTML:r1027/mend.webp 0.61M 14.8ms","HTML:CANVAS 0.61M 3.2ms","HTML:CANVAS 0.22M 1.3ms","HTML:CANVAS 0.16M 1.1ms","HTML:CANVAS 0.03M 0.3ms","HTML:CANVAS 0.03M 0.3ms"]}
+PASS michaela: 첫 각성 장면 텍스처 올림+셰이더 26ms(올림 6장 1.96M화소, 새 셰이더 1) ≤ 60ms
+PASS hwando: 첫 각성 장면 텍스처 올림+셰이더 40ms(올림 21장 4.7M화소, 새 셰이더 0) ≤ 60ms
+PASS lauren: 첫 각성 장면 텍스처 올림+셰이더 22ms(올림 13장 1.86M화소, 새 셰이더 0) ≤ 60ms
+{"heroes":3,"failed":0,"headless":true}

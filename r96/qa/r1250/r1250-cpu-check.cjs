@@ -58,6 +58,19 @@ if(A){const {sb}=a;const step=(dt,k=1)=>{for(let i=0;i<k;i++){sb.time+=dt;A.tick
  // 새 게임 = 새 기록
  sb.newGame('lauren');A.tick();ok('새 게임이면 새 기록',A.current().hero!=='hwando'||A.runs().length>=2,A.runs().length);
 }
+// R1250b(Codex 리뷰 #890): 숨은(spawnState≠active) 적은 교전·첫 보스로 세지 않음, footprint154 예고(병원 의료 공격)도 위협으로 셈
+{const b=boot();const B=b.A,sb=b.sb;
+ sb.footprintContains154=(g,x,y,r=0)=>g.shape==='circle'&&Math.hypot(x-g.x,y-g.y)<=g.radius+r;
+ if(B){sb.newGame('hwando');sb.room={id:'murder01',enemies:[{x:7,y:5,hp:500,boss:true,name:'숨은 보스',spawnState:'hidden'}]};B.tick();
+  for(let i=0;i<20;i++){sb.time+=.5;B.tick();}
+  let c=B.current();ok('숨은 보스(spawnState hidden)는 첫 보스·교전 시간에 안 셈',c&&c.firstBoss===null&&c.combatSecs===0,c);
+  sb.room.enemies[0].spawnState='active';sb.time+=.5;B.tick();sb.time+=.5;B.tick();c=B.current();
+  ok('나타난 뒤(active)에는 첫 보스·교전 시간 셈',c.firstBoss&&c.firstBoss.name==='숨은 보스'&&c.combatSecs>0,c);
+  sb.room.enemies=[];const t0=c.telegraphs;
+  const m={id:'med',type:'medical20',x:9,y:9,age:0,warning:1,life:2,damage:12,footprint154:{shape:'circle',x:5,y:5,radius:1.2}};
+  sb.hazards=[m];B.tick();sb.player.x=9;m.age=1.5;B.tick();sb.hazards=[];B.tick();c=B.current();
+  ok('footprint154 만 가진 예고(병원 의료 공격) 안에 서 있다 피하면 본 수·피한 수에 들어감',c.telegraphs===t0+1&&c.dodged>=1,c);}
+}
 // 무한생존
 {let st={active:true,diff:'hard',i:0,loop:0,ids:7,lv:1,hero:'ego',kills:0,over:false,core:{hp:100}};
  const surv={active:()=>!!st.active,state:()=>st.active?JSON.parse(JSON.stringify(st)):null,inspect:()=>({active:!!st.active})};

@@ -54,7 +54,7 @@ function makeTab(map, name) {
     setTimeout(run) { return 0; }, clearTimeout() {},
     blocked() { return false; },
     toast(m) { host.toasts.push(String(m)); },
-    $() { return null; }, openPanel(h) { host.panelHTML = h; }, closePanel() {}, button() {},
+    $() { return null; }, openPanel(h) { host.panelHTML = h; }, closePanel() {}, buttons: {}, button(id, fn) { host.buttons[id] = fn; },
     escapeHTML: s => String(s), showTitle() {}, showMenu() {}, loadLocal() {}, normalizeSave3: x => x,
     warn() {}
   };
@@ -87,6 +87,24 @@ function makeTab(map, name) {
     catch (e) { host.lastSaveError = e.message; return false; }
   };
   host.enterRegion = async function(zone) { enter(zone, host.layer); return true; };
+  // R54 begin 흉내(출시 코드와 같은 순서): 지금 슬롯 내용을 prior 로 읽고 새 여정 저장, 실패하면 이전 진행 복원 뒤 prior 를 되쓴다.
+  host.__STORYWORLD_STORY_PROFILE_R54__ = {
+    inspect: () => ({error: host.beginError || null}),
+    async begin() {
+      const store = host.__STORYWORLD_TEST_STORAGE_B1__.store, key = host.normalSaveKeyR73();
+      const prior = store.getItem(key), old = host.started && host.player ? host.serializeSave() : null;
+      try {
+        host.player = {hero: 'hwando', hp: 260, x: 15, y: 19}; enter('hub', 'STORY'); host.started = true;
+        if (!host.saveGame(false)) throw new Error('새 여정을 저장하지 못했습니다.');
+        return true;
+      } catch (e) {
+        host.beginError = e.message;
+        if (old) { try { await host.restoreSave(old); } catch (_) {} }
+        if (prior === null) store.removeItem(key); else store.setItem(key, prior);
+        return false;
+      }
+    }
+  };
   vm.createContext(host);
   vm.runInContext(b1, host, {filename: 'b1-storage'});
   vm.runInContext(r73, host, {filename: 'save-slots-r73'});
@@ -237,6 +255,23 @@ function failingLoadCase(label, mode, target) {
     assert.equal(JSON.parse(map.get(conflictKey(1))).player.hp, 88, 'A 진행은 사본으로 보존');
     assert.equal(B.player.hp, 11, 'B 는 사본을 불러온 상태');
     B.player.hp = 13; assert.equal(B.saveGame(false), true);
+  });
+
+  await test('두 탭 — 오래된 탭의 새 여정 실패 복구 쓰기가 seen 을 올려 다음 자동 저장이 최신 진행을 덮지 않음(#890 P1)', async () => {
+    const map = new Map();
+    seed(map, {1: envelope({hp: 50, x: 5, y: 6, savedAt: '2026-11-20T00:00:01.000Z'})});
+    const A = makeTab(map, 'A'), B = makeTab(map, 'B');
+    assert.equal(await A.loadLocal(), true);
+    assert.equal(await B.loadLocal(), true);
+    A.player.hp = 88;
+    assert.equal(A.saveGame(false), true);
+    assert.equal(hp(map, 1), 88);
+    B.slots.confirm('new', 1);                     // 확인 창을 연다
+    assert.equal(await B.buttons.slotConfirmR73(), false, 'B 의 새 여정은 A 의 최신 저장과 충돌해 실패');
+    assert.equal(hp(map, 1), 88, '실패 복구 뒤 슬롯 1 은 A 진행');
+    B.player.hp = 11;
+    assert.equal(B.saveGame(false), false, '새 여정 실패 뒤에도 B 는 여전히 오래된 탭이라 저장이 막혀야 함');
+    assert.equal(hp(map, 1), 88, '슬롯 1 은 A 의 HP 88 유지 (지금 ' + hp(map, 1) + ')');
   });
 
   await test('한 탭만 쓸 때는 저장·불러오기·새 슬롯 첫 저장이 그대로', async () => {

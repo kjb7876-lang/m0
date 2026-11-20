@@ -43,7 +43,7 @@
   // stills). While such a boss is drawn in its depicted phase, those actor images
   // resolve to the key poses: attack stills to the strike, the rest to recovery.
   const imageBase=readyImage;readyImage=function(p,...a){
-   if(curOk&&cur&&PHASES[cur.nativeId]&&typeof p==='string'&&!p.startsWith('assets/r104/')&&(p===cur.path||/actors-normalized|actors\/v3|cult-v3123\/pride_cyborg_cult_leader/.test(p))){const n=NEW[cur.nativeId][/attack|strike|cast/i.test(p)?1:3];const row=imageBase.call(this,n.path,...a);if(row){stats.swapped++;if(FIT.has(cur.nativeId)&&row.image&&typeof row.image==='object')fitIm.set(row.image,n.assetFrame.sourceRect);return row;}}
+   if(curOk&&cur&&PHASES[cur.nativeId]&&typeof p==='string'&&!p.startsWith('assets/r104/')&&(p===cur.path||/actors-normalized|actors\/v3|cult-v3123\/pride_cyborg_cult_leader/.test(p))){const n=NEW[cur.nativeId][/raised|windup|anticip|prepare|charge/i.test(p)?0:/attack|strike|cast/i.test(p)?1:3];/* R1254: 발록 준비 자세(v31511 raised-body·sword, 검 들어 올림)는 회복 p4 가 아니라 준비 p1 */const row=imageBase.call(this,n.path,...a);if(row){stats.swapped++;if(FIT.has(cur.nativeId)&&row.image&&typeof row.image==='object')fitIm.set(row.image,n.assetFrame.sourceRect);return row;}}
    return imageBase.call(this,p,...a);};
   // R860: 엔진·보스 전용 모듈(발록 bodyRect 등)은 옛 그림 기준 잘라 그리기 칸을 준다 → 바꾼 R104 그림은 칸 전체를 그리고,
   // 옛 칸이 차지하던 화면 상자의 키·발(아래 끝)·가운데에 맞춘다. 새로 연결한 본보스만(맘몬 등 기존 표는 그대로).

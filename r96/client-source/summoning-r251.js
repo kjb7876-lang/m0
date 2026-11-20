@@ -37,8 +37,13 @@ function arm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)&&!eff
 function cast(e){const t=e.r251Circle;t.casts++;stats.casts++;const x=player.x,y=player.y,warn=1.2,R=1.6;
  try{if(typeof hazards!=='undefined')hazards.push({id:typeof uid!=='undefined'?++uid:Date.now(),type:'r251-hands',owner:e.id,x,y,radius:R,age:0,warning:warn,life:warn+.8,asset:null,damage:e.damage,lastHit:-99,r251:true});}catch(err){fail(err);}
  fx.push({x,y,t0:T(),warn,R,seed:Math.random()*6,owner:e.id});if(fx.length>8)fx.shift();arm();}
+// R1254(외부 리뷰 11-20): 엔진 사망 처리(killEnemy)는 죽은 보스를 room.enemies 에서 바로 뺀다 → 목록에서 '죽은 발록'을 찾던 예전 조건으로는
+//  소환진이 한 번도 생기지 않았다. 살아 있을 때 본 발록을 기억해 두고, 같은 방에서 그 발록이 목록에서 사라졌고 죽었으면(체력 0·사망 기록) 그 자리에 세운다.
+let seenB=null,seenRoom=null;
 function tickCircles(){if(!here())return;
- if(!room.r251Spawned&&!player.r251Broken){const b=(room.enemies||[]).find(isBalrog);if(b&&!(b.hp>0))spawn(b);}
+ if(!room.r251Spawned&&!player.r251Broken){const b=(room.enemies||[]).find(isBalrog);
+  if(b){if(b.hp>0){seenB=b;seenRoom=room;}else spawn(b);}
+  else if(seenB&&seenRoom===room&&(seenB.deadRecorded||!(seenB.hp>0))){const d=seenB;seenB=null;spawn(d);}}
  for(const e of circles()){const t=e.r251Circle;if(!(e.hp>0)){if(!t.broken){t.broken=true;player.r251Broken=true;stats.broken++;
     try{const X=window.__STORYWORLD_PIXELFX_R163__;X?.play?.('dark-explosion-blood',e.x,e.y,{k:1.4,rate:1.2});}catch(_){}
     fx.push({x:e.x,y:e.y,t0:T(),warn:0,R:2.4,seed:t.seed,crack:true});arm();
@@ -75,7 +80,7 @@ if(typeof drawHazard==='function'){const base=drawHazard;drawHazard=function(h,.
 if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{tickCircles();}catch(e){fail(e);}return r;};}
 // 저장: 깨뜨린 소환진은 다시 서지 않는다
 if(typeof serializeSave==='function'){const base=serializeSave;serializeSave=function(...a){const d=base.apply(this,a);try{if(d&&typeof player==='object'&&player?.r251Broken)d.r251Broken=true;}catch(e){fail(e);}return d;};}
-if(typeof restoreSave==='function'){const base=restoreSave;restoreSave=async function(raw,...a){const r=await base.apply(this,[raw,...a]);try{if(typeof player==='object'&&player)player.r251Broken=!!raw?.r251Broken;}catch(e){fail(e);}return r;};}
+if(typeof restoreSave==='function'){const base=restoreSave;restoreSave=async function(raw,...a){const r=await base.apply(this,[raw,...a]);try{/* R1249: 실패한 복원(false)은 부순 소환진 표시를 되살리지 않는다 */if(r!==false&&typeof player==='object'&&player)player.r251Broken=!!raw?.r251Broken;}catch(e){fail(e);}return r;};}
 function set(v){on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}
 window.__STORYWORLD_SUMMONING_R251__=Object.freeze({revision:REV,ART,set,spawn:b=>spawn(b),cast:e=>cast(e),circles:()=>circles().map(e=>({id:e.id,name:e.name,x:e.x,y:e.y,hp:e.hp,maxHp:e.maxHp})),inspect:()=>({revision:REV,on,stats:{...stats},fx:fx.length,lastError})});
 })();

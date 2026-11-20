@@ -185,6 +185,6 @@ try{
    if(r!==false&&!restore)try{spreadStory();}catch(e){fail(e);}return r;};}
 }catch(e){fail(e);}
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
-window.__STORYWORLD_COMBAT_R170__=Object.freeze({revision:REV,set,artOf,samongPlan,inkBlot,inkSheet,nextSpot:()=>{try{nearSpot();}catch(_){}return spot0?{...spot0}:null;},towers:()=>towers().map(e=>({id:e.id,name:e.name,x:e.x,y:e.y,hp:e.hp,art:e.r170Tower.art})),cast:e=>cast(e),
+window.__STORYWORLD_COMBAT_R170__=Object.freeze({revision:REV,set,artOf,samongPlan,inkBlot,inkSheet,inkMode:()=>inkHex(),nextSpot:()=>{try{nearSpot();}catch(_){}return spot0?{...spot0}:null;},towers:()=>towers().map(e=>({id:e.id,name:e.name,x:e.x,y:e.y,hp:e.hp,art:e.r170Tower.art})),cast:e=>cast(e),
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},towers:live()?towers().length:0,lastError})});
 })();

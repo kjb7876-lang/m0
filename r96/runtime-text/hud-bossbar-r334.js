@@ -30,6 +30,19 @@ if(!mount()){if(document.readyState==='loading')document.addEventListener('DOMCo
 // 다른 오버레이가 header 를 다시 짜거나, 모바일 실플레이가 켜지고 꺼질 때 자리를 맞춘다
 setInterval(mount,500);
 try{new MutationObserver(()=>mount()).observe(document.body,{attributes:true,attributeFilter:['class']});}catch(_){}
+// R1254(외부 리뷰 11-20): 보스·중간보스가 함께 싸우면(추락 발록 + 소환진 검은기둥) 엔진·R62·R66 은 room.enemies 의 첫 번째 큰 적을 체력바에 올려
+//  발록을 때려도 화면 밖 기둥 체력이 계속 보였다. → 체력바를 그리는 동안만 '방금(8초 안) 맞은 큰 적, 없으면 보스(중간보스보다 먼저)'를 그 첫 자리와 맞바꾼다.
+//  배열 자체·다른 적 순서는 그대로, 그리기 뒤 되돌린다. 큰 적이 하나뿐이면 아무것도 안 한다.
+const hurt=new WeakMap();
+const major=e=>!!e&&(e.boss||e.midboss||e.persona||e.cosmic||e.trial)&&e.hp>0&&!e.deadRecorded&&(e.spawnState===undefined||e.spawnState==='active');
+function focusPick(list){const T=typeof time==='number'?time:0;let best=null,bestAt=-Infinity,boss=null;
+ for(const e of list){let s=hurt.get(e);if(!s){s={hp:e.hp,at:-Infinity};hurt.set(e,s);}else{if(e.hp<s.hp-1e-6)s.at=T;s.hp=e.hp;}
+  if(s.at>T-8&&s.at>bestAt){bestAt=s.at;best=e;}if(!boss&&e.boss)boss=e;}
+ return best||boss||list[0];}
+if(typeof updateHUD==='function'){const base=updateHUD;updateHUD=function(...a){let r=null,i=-1,j=-1,L=null,A=null,F=null;
+ try{if(typeof room==='object'&&room&&Array.isArray(room.enemies)){L=room.enemies;const M=[];for(let k=0;k<L.length;k++)if(major(L[k]))M.push(k);
+  if(M.length>1){const f=focusPick(M.map(k=>L[k]));i=M[0];j=L.indexOf(f);if(j>i){A=L[i];F=f;L[i]=F;L[j]=A;stats.focused=(stats.focused||0)+1;}else i=j=-1;}}}catch(e){fail(e);i=j=-1;}
+ try{r=base.apply(this,a);}finally{if(i>=0&&L[i]===F&&L[j]===A){L[i]=A;L[j]=F;}else if(i>=0){/* 그리는 중 목록이 바뀌었으면 원래 순서 자리를 찾아 되돌린다 */const x=L.indexOf(F),y=L.indexOf(A);if(x>=0&&y>=0&&x<y){L[x]=A;L[y]=F;}}}return r;};}
 window.__STORYWORLD_HUD_BOSSBAR_R334__=Object.freeze({revision:REV,mount,
  inspect:()=>({revision:REV,on,inHeader:document.getElementById('bossbar')?.parentNode===document.querySelector('header'),stats:{...stats},lastError}),
  set:v=>{on=!!v;try{localStorage.setItem(KEY,on?'1':'0');}catch(_){}mount();return on;}});
