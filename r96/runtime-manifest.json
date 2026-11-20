@@ -56534,8 +56534,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6584354,
-      "sha256": "19c6376ae13382eba64e4fb6468d265580bad284ed6b927f1656a01ac6bc0612"
+      "bytes": 6584450,
+      "sha256": "41bdfa1c41b57bf66fcab1b40ba3ac33e2c5bc9e3a5d1262b657b96839dee0fd"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -57048,6 +57048,11 @@
       "sha256": "f74b6373fd6e77f49a3952d943e7fb9d728b20bcaaa5ab45da321f0c780f71c1"
     },
     {
+      "path": "note-fold-r1251.js",
+      "bytes": 3900,
+      "sha256": "e2b06317d2d6e6f0bbe4dea182c47417f4c1f53aaa57e3dd5aae5e76880674f1"
+    },
+    {
       "path": "npc-r790.js",
       "bytes": 33959,
       "sha256": "613aa1d9a1efd57c85440ce0347ee6b9e039d54440da5161130c86a82be9e633"
@@ -57401,6 +57406,11 @@
       "path": "samong-gate-r338.js",
       "bytes": 6645,
       "sha256": "30a5c9353c40cc0d52ac7ec50ac99d3c8057d2253517292b20c83f80c0ac5a8e"
+    },
+    {
+      "path": "samong-gpu-warm-r1253.js",
+      "bytes": 6909,
+      "sha256": "7abfed67cb8af647399ca4983f399718e0ea07c29408b4a98f28a1d4fc3c1e91"
     },
     {
       "path": "samong-hud-r177.js",
@@ -58098,9 +58108,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11619,
-  "totalBytes": 1386475367,
-  "webHTMLSha256": "19c6376ae13382eba64e4fb6468d265580bad284ed6b927f1656a01ac6bc0612",
+  "fileCount": 11621,
+  "totalBytes": 1386486272,
+  "webHTMLSha256": "41bdfa1c41b57bf66fcab1b40ba3ac33e2c5bc9e3a5d1262b657b96839dee0fd",
   "largest": [
     {
       "path": "index.html",
