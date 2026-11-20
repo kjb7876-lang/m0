@@ -10861,6 +10861,9 @@
     "assets/r1263/charm-blade8.webp",
     "assets/r1263/flesh12.webp",
     "assets/r1263/pan8.webp",
+    "chapter-veil-r1269.js",
+    "hero-art-hold-r1264.js",
+    "ego-fx-split-r1265.js",
     "still-attack-r1268.js"
   ],
   "mediaPaths": [
@@ -11936,5 +11939,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "c9ed5f287c1c54c3eb3482439c490daa8c432234e6401e62d5ed656724346d64"
+  "runtimeManifestSHA256": "cdc20b561aa608f740b40ed07d927cd032d9e75886406fbb259840104ac23b7c"
 }

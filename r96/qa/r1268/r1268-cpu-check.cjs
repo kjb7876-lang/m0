@@ -8,7 +8,7 @@ ok(fs.existsSync(SRC),'오버레이 파일 있음');const code=fs.readFileSync(S
 // ---- 정적 연결 ----
 const html=fs.readFileSync(path.join(R,'runtime-text/index.html'),'utf8');const t=n=>html.indexOf(n);
 ok(new RegExp('\\n<script src="\\./'+F.replace(/\./g,'\\.')+'"></script>\\n').test(html),'index.html 스크립트 태그(따로 한 줄)');
-ok(t(F)>t('save-guard-r1248.js')&&t('save-guard-r1248.js')>0&&t(F)<t('boot-lean-r1038.js'),'태그: save-guard-r1248 뒤, boot-lean-r1038 앞');
+ok(/\n<script src="\.\/sin-boss-sheet-vis-r1243-data\.js"><\/script>\n<script src="\.\/still-attack-r1268\.js"><\/script>\n<script src="\.\/hero-art-hold-r1264\.js"><\/script>\n/.test(html)&&t(F)<t('boot-lean-r1038.js'),'태그: sin-boss-sheet-vis-r1243-data 바로 뒤·hero-art-hold-r1264 바로 앞(R1264·R1269 인접 검사와 안 겹침), boot-lean-r1038 앞');
 ok(fs.readFileSync(path.join(R,'../scripts/verify-r96-public.py'),'utf8').includes("'"+F+"'"),'공개 확인 기대 목록');
 ok(fs.readFileSync(path.join(R,'../.github/workflows/pages.yml'),'utf8').includes('r96/qa/r1268/r1268-cpu-check.cjs'),'pages.yml 검사 줄');
 ok(fs.existsSync(path.join(R,'runtime-text',F))&&fs.readFileSync(path.join(R,'runtime-text',F),'utf8')===code,'runtime-text 사본(sync)이 같음');
