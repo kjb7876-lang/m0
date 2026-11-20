@@ -35,7 +35,7 @@ const W=960,H=540,VA=W*H;
 // 화면 넓이 비 a 를 덮는 정사각 명령
 function cmd(id,frac,alpha=1,op='lighter',kind='image'){const s=Math.sqrt(frac*VA);const P=[[100,100],[100+s,100],[100+s,100+s],[100,100+s]];return {kind,owner:{id,kind:'effect'},points:kind==='image'?P:undefined,paths:kind==='fill'?[{points:P}]:undefined,style:{globalAlpha:alpha,globalCompositeOperation:op}};}
 // 프레임 하나를 기록기→렌더로: time 을 올리고 render(frame) 를 부른다(엔진처럼). 돌려준 값 = 렌더가 받은 알파.
-function frame(g,cmds,dt=1/60){g.time=+(g.time+dt).toFixed(6);vm.runInContext('time='+g.time+';tick()',g);const fr={commands:cmds};const r=new g.StoryPhase1.ThreeRenderer();r.renderer={domElement:{width:W,height:H}};r.render(fr);return cmds.map(c=>c.style.globalAlpha);}
+function frame(g,cmds,dt=1/60,dpr=1,vp=true){g.time=+(g.time+dt).toFixed(6);vm.runInContext('time='+g.time+';tick()',g);const fr={commands:cmds};if(vp)fr.viewport={width:W,height:H,dpr};const r=new g.StoryPhase1.ThreeRenderer();r.renderer={domElement:{width:W*dpr,height:H*dpr}};g.devicePixelRatio=dpr;r.render(fr);return cmds.map(c=>c.style.globalAlpha);}
 const energy=(cmds)=>cmds.reduce((s,c)=>{const P=c.points||c.paths[0].points;const a=(P[1][0]-P[0][0])*(P[2][1]-P[1][1])/VA;return s+a*c.style.globalAlpha*(/lighter|screen/.test(c.style.globalCompositeOperation)?1:.5);},0);
 let g=env();ok('API exposed',!!API(g)&&typeof API(g).inspect==='function');
 // 1) 큰 이펙트가 툭 켜짐(화면 30%, 알파 1, 덧셈) → 첫 프레임 밝기는 기울기 한도 안, 0.5초 안에 다 차오름
@@ -137,6 +137,13 @@ function hitRun(store,hitEvery){const g=env('michaela',store);vm.runInContext('r
  ok('tile budget: 5 Hz pulsing effect → ≤ 3 flashes in any 1 s (WCAG 2.3.1)',worst<=3,{worst,n:fl.length});
  let sw=0;for(let i=1;i<seq.length;i++)sw=Math.max(sw,seq[i-1]-seq[i]);ok('tile budget: no hard cut when held (frame drop ≤ .004)',sw<=.004,sw);
  ok('tile budget: effect still visible at times (peak ≥ .004)',Math.max(...seq)>=.004,Math.max(...seq));}
+// 14) DPR(R1267b, PR #928 리뷰): 명령 좌표는 논리 픽셀 → DPR 1·1.5·2·3, viewport 없을 때(캔버스÷DPR)도 같은 효과의 첫 알파·칸이 같아야 한다.
+{const first=(dpr,vp)=>{const g=env();for(let i=0;i<3;i++)frame(g,[],1/60,dpr,vp);const c=[cmd('r106d2s:7',.05),cmd('r1235:hit:1',.01)];frame(g,c,1/60,dpr,vp);return c.map(x=>+x.style.globalAlpha.toFixed(6));};
+ const base=first(1,true);const rows=[[1.5,true],[2,true],[3,true],[1.5,false],[2,false]].map(([d,v])=>({d,v,a:first(d,v)}));
+ ok('DPR 1/1.5/2/3 (+ no viewport): same first alpha for the same effect',rows.every(r=>r.a.every((x,i)=>Math.abs(x-base[i])<1e-9)),{base,rows});
+ ok('DPR: big effect still ramps at DPR 1.5 (first alpha < .3)',rows[0].a[0]<.3,rows[0].a);}
+{const g=env();vm.runInContext('function actorHeight(){return 66;}',g);g.devicePixelRatio=2;const P=[[0,-600],[300,-600],[300,0],[0,0]];const c={kind:'image',owner:{id:'r563:pillar:1:1:beam'},sourcePath:'assets/r1041/fx-m7-michaela-sky-pillar.webp',points:P.map(q=>[q[0]+100,q[1]+500]),style:{globalAlpha:1,globalCompositeOperation:'lighter'}};
+ frame(g,[c],1/60,2);const h=c.points[3][1]-c.points[0][1];ok('DPR 2: beam height = actor 66 × 4.2 in logical px (not × DPR)',Math.abs(h-66*4.2)<1e-6,h);}
 // 10) 성능: 400 명령 프레임 240번
 {g=env();const t0=process.hrtime.bigint();for(let i=0;i<240;i++){const c=[];for(let k=0;k<400;k++)c.push(cmd((k%3?'r106d2s:':'scene:')+(k%40),.002));frame(g,c);}const ms=Number(process.hrtime.bigint()-t0)/1e6;console.log('  240 frames × 400 cmds: '+ms.toFixed(1)+' ms');ok('cheap (< 400 ms in vm)',ms<400);}
 ok('errors stay 0',API(g).inspect().stats.errors===0,API(g).inspect().stats.lastError);

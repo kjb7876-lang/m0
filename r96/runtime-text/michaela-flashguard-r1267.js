@@ -22,7 +22,7 @@
  */
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_FLASH_GUARD_R1267__)return;
-const REV='R1267-flash-guard-3',KEY='storyworld.r1267.flashGuard',GKEY='storyworld.r1267.genesis',HERO='michaela',fin=Number.isFinite;
+const REV='R1267-flash-guard-4',KEY='storyworld.r1267.flashGuard',GKEY='storyworld.r1267.genesis',HERO='michaela',fin=Number.isFinite;
 // 밝기 단위 = 화면 넓이 비(알파×덮는 넓이/화면 넓이). 덧셈 합성 아닌 명령은 절반으로 친다.
 // 오름 한도: 이펙트 하나는 제 밝기까지 OWN_RAMP 초에 걸쳐(프레임당 알파 ≈ .08 — 휘도 한 걸음 .1 아래), 아주 작은 것(SMALL 이하)은 바로.
 // 전체는 ALL_RAMP 초 + 프레임당 ALL_FLOOR. 덧셈 합성 합 상한 ALL_CAP.
@@ -56,7 +56,8 @@ function tune(id){if(!/^r563:/.test(id))return 1;if(/:sheet$/.test(id))return .3
 // 제네시스 빛기둥 M7(가는 빛줄기 시트)은 R1041 이 하늘 끝까지 늘려(키 9배·폭 = 높이/2) 화면을 하얀 벽처럼 덮었다 →
 // 발 자리·가운데는 그대로, 높이를 영웅 키 PIL_H 배로 줄이고 폭은 시트 비율(1:2)로. (R563 굵은 몸통 시트는 자리 그대로 두고 옅게만)
 const PIL_H=4.2;
-function actorPx(){let h=66;try{h=typeof actorHeight==='function'?actorHeight():h;}catch(_){}let d=1;try{d=window.__STORYWORLD_PHASE1__?.controller?.state?.three?.dpr||window.devicePixelRatio||1;}catch(_){}return (fin(h)&&h>0?h:66)*(fin(d)&&d>0?d:1);}
+// 그리기 명령 좌표는 논리(CSS) 픽셀이다(DPR 1·1.5 실측: 영웅 상자 같음) → 영웅 키도 논리 픽셀 그대로.
+function actorPx(){let h=66;try{h=typeof actorHeight==='function'?actorHeight():h;}catch(_){}return fin(h)&&h>0?h:66;}
 function reshapeBeam(c,id){if(!genOn||c.kind!=='image'||!/^r563:pillar:.*:beam$/.test(id)||!/fx-m7-michaela-sky-pillar/.test(String(c.sourcePath||'')))return;const P=c.points;if(!Array.isArray(P)||P.length!==4||!P.flat().every(fin))return;
  const H=Math.hypot(P[3][0]-P[0][0],P[3][1]-P[0][1]),Hn=Math.min(H,actorPx()*PIL_H);if(!(Hn>0)||Hn>=H-.5)return;const fx=(P[2][0]+P[3][0])/2,fy=(P[2][1]+P[3][1])/2,w=Hn/2;
  c.points=[[fx-w/2,fy-Hn],[fx+w/2,fy-Hn],[fx+w/2,fy],[fx-w/2,fy]];stats.reshaped=(stats.reshaped||0)+1;}
@@ -103,11 +104,13 @@ function guardFrame(frame,VA,VW,VH){if(!(VW>0&&VH>0)){VW=Math.sqrt(VA*16/9);VH=V
   else if(v>tRef[i])tRef[i]=v;
   else if(tRef[i]-v>=FL_D){tSt[i]=-1;tRef[i]=v;F.push(t);stats.tileFlashes=(stats.tileFlashes|0)+1;if(F.length>=FL_MAX){tHold[i]=F[F.length-FL_MAX]+1;tLo[i]=v;}}}
  allPrev=out;stats.lastOut=+out.toFixed(4);}
-function viewDims(r){try{const el=r?.renderer?.domElement;if(el?.width>0&&el?.height>0)return [el.width,el.height];}catch(_){}try{if(typeof canvas!=='undefined'&&canvas?.width>0)return [canvas.width,canvas.height];}catch(_){}return [960,540];}
-function viewArea(r){try{const el=r?.renderer?.domElement;const w=el?.width,h=el?.height;if(w>0&&h>0)return w*h;}catch(_){}try{if(typeof canvas!=='undefined'&&canvas?.width>0)return canvas.width*canvas.height;}catch(_){}return 960*540;}
+// 화면 크기도 명령과 같은 논리 픽셀로: frame.viewport(논리) 우선, 없으면 캔버스 실제 픽셀 ÷ DPR. (R1267b: 실제 픽셀을 쓰면 DPR 1.5 에서 넓이 비가 1/2.25 로 줄어 '작은 것'으로 빠져 제한이 안 걸렸다)
+function viewDims(r,frame){try{const v=frame&&frame.viewport;if(v&&v.width>0&&v.height>0&&fin(v.width)&&fin(v.height))return [v.width,v.height];}catch(_){}
+ let d=1;try{const v=frame&&frame.viewport;d=v&&v.dpr>0&&fin(v.dpr)?v.dpr:(fin(window.devicePixelRatio)&&window.devicePixelRatio>0?window.devicePixelRatio:1);}catch(_){}
+ try{const el=r?.renderer?.domElement;if(el?.width>0&&el?.height>0)return [el.width/d,el.height/d];}catch(_){}try{if(typeof canvas!=='undefined'&&canvas?.width>0)return [canvas.width/d,canvas.height/d];}catch(_){}return [960,540];}
 function before(r,frame){try{prefs();if(!guardOn&&!genOn)return;if(!heroIs()){own.clear();allPrev=0;tileOut.fill(0);resetTiles();return;}
  /* 엔진은 frame 객체를 다시 쓰므로 명령 배열(프레임마다 새로 만듦)로 한 번만 처리 */const cm=frame&&frame.commands;if(!Array.isArray(cm)||done.has(cm))return;done.add(cm);
- if(guardOn){const d=viewDims(r);guardFrame(frame,d[0]*d[1],d[0],d[1]);}else if(genOn&&Array.isArray(frame?.commands)){for(const c of frame.commands){const id=String(c?.r1267Id||c?.owner?.id||'');if(c?.style&&fin(c.style.globalAlpha)){const k=tune(id);if(k!==1){c.style.globalAlpha*=k;stats.tuned++;}reshapeBeam(c,id);}}}}catch(e){fail(e);}}
+ if(guardOn){const d=viewDims(r,frame);guardFrame(frame,d[0]*d[1],d[0],d[1]);}else if(genOn&&Array.isArray(frame?.commands)){for(const c of frame.commands){const id=String(c?.r1267Id||c?.owner?.id||'');if(c?.style&&fin(c.style.globalAlpha)){const k=tune(id);if(k!==1){c.style.globalAlpha*=k;stats.tuned++;}reshapeBeam(c,id);}}}}catch(e){fail(e);}}
 const wrapFn=fn=>{if(typeof fn!=='function'||fn.__r1267)return fn;const w=function(frame){before(this,frame);return fn.apply(this,arguments);};w.__r1267=true;return w;};
 const wrapped=new WeakSet();
 function install(){try{const C=window.StoryPhase1?.ThreeRenderer?.prototype;if(C&&typeof C.render==='function'&&!C.render.__r1267)C.render=wrapFn(C.render);
