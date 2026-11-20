@@ -23,7 +23,9 @@ const G_={player:()=>typeof player==='object'?player:null,layer:()=>typeof layer
 const g=n=>{try{return G_[n]();}catch(_){return undefined;}};
 const pts=p=>Number(p?.points)||0;
 // R663: 안 배운 QWER 중 Q→W→E→R 순서로 맨 앞 칸
-function nextLocked(p){try{const g=window.__STORYWORLD_SKILL_GROWTH_R663__;if(!g)return null;for(const s of SLOTS663)if(g.locked(s,p))return 'skill'+s.toUpperCase()+'R663';}catch(_){}return null;}
+// R1275: 레벨 문턱 전 칸은 건너뛴다(점수를 묶어 두지 않음). 문턱 표는 Q<W<E<R 로 오르므로 그 뒤 칸도 모두 문턱 전이다.
+const L1275=()=>{try{const L=window.__STORYWORLD_SKILL_UNLOCK_R1275__;return L&&typeof L.locked==='function'?L:null;}catch(_){return null;}};
+function nextLocked(p){try{const g=window.__STORYWORLD_SKILL_GROWTH_R663__;if(!g)return null;const L=L1275();for(const s of SLOTS663)if(g.locked(s,p)){if(L&&L.locked(s,p))return null;return 'skill'+s.toUpperCase()+'R663';}}catch(_){}return null;}
 // 지금 살 수 있는 후보: {kind,id,cost,rank,name,order}
 function candidates(p){const out=[],have=pts(p);if(have<=0)return out;const L=g('layer');
  // 0) R663 QWER 배우기: 다음 칸 비용만큼 모이면 그것만 사고, 모자라면 다른 구매 없이 모은다
@@ -35,8 +37,11 @@ function candidates(p){const out=[],have=pts(p);if(have<=0)return out;const L=g(
  // 3) 오라·무한강화(R169 이후 비용 = 다음 단계²)
  try{const A=P62();if(A?.defs&&typeof A.ranks==='function'){const ids=L==='DREAM'?[...AURA,DREAM_AURA]:AURA;for(const id of ids){const d=A.defs.find(x=>x.id===id);if(!d)continue;const n=Number(A.ranks(id,p))||0;if(d.maxRank!=null&&n>=d.maxRank)continue;out.push({kind:'aura',id,cost:Number(d.cost)||1,rank:n,name:d.name,order:2});}}}catch(e){fail(e);}
  // 4) QWER 2~7단계(R663, 배우기는 위 0 번에서)·기본 실검무·문양 실검무
- try{const A=P62();if(A?.defs&&typeof A.ranks==='function')for(const id of [...SKILL,...THREAD,'heroPassiveR971']){const d=A.defs.find(x=>x.id===id);if(!d)continue;const n=Number(A.ranks(id,p))||0;if((d.maxRank!=null&&n>=d.maxRank)||n>=(AUTO_CAP[id]??Infinity)||(n<1&&SKILL.includes(id)))continue;out.push({kind:'aura',id,cost:Number(d.cost)||1,rank:n,name:d.name,order:1});}}catch(e){fail(e);}
+ try{const A=P62();if(A?.defs&&typeof A.ranks==='function')for(const id of [...SKILL,...THREAD,'heroPassiveR971'].flatMap(x=>x==='heroPassiveR971'?PASSIVE_IDS():[x])){const d=A.defs.find(x=>x.id===id);if(!d)continue;if(PASSIVE_LOCK(id,p))continue;const n=Number(A.ranks(id,p))||0;if((d.maxRank!=null&&n>=d.maxRank)||n>=(AUTO_CAP[id]??Infinity)||(n<1&&SKILL.includes(id)))continue;out.push({kind:'aura',id,cost:Number(d.cost)||1,rank:n,name:d.name,order:1});}}catch(e){fail(e);}
  return out.filter(c=>Number.isFinite(c.cost)&&c.cost>0&&c.cost<=have).sort((a,b)=>a.cost-b.cost||a.order-b.order||a.rank-b.rank);}
+// R1275: 확률 패시브 카드 = 패시브 1·2·3 세 장(R971). R1275 이 없으면 예전 통합 카드. 문턱 전 패시브 카드는 사지 않는다
+const PASSIVE_IDS=()=>{const L=L1275();return L&&Array.isArray(L.tierIds)&&L.tierIds.length?[...L.tierIds]:['heroPassiveR971'];};
+const PASSIVE_LOCK=(id,p)=>{const L=L1275();if(!L)return false;const i=Array.isArray(L.tierIds)?L.tierIds.indexOf(id):-1;return i>=0&&!!L.locked('p'+(i+1),p);};
 function buy(c){if(c.kind==='talent')return U169().buyTalent(c.id)===true;if(c.kind==='proc')return GR().buyProc(c.id)===true;if(c.kind==='aura')return P62().purchase(c.id)===true;return false;}
 function ready(){const p=g('player');if(!on||!p||!solo())return null;if(g('started')===false||g('modal')||g('loading')||g('storyScene'))return null;if(!(Number(p.hp)>0))return null;return p;}
 function step(force){stats.ticks++;const p=force?g('player'):ready();if(!p)return [];const bought=[];

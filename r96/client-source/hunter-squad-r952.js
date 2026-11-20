@@ -61,7 +61,8 @@ const isSummon=p=>!!p&&p.r952Summon===true;
 const isOwner=p=>!!p&&p.hero===HERO&&p.hp>0&&!isSummon(p);
 
 // ── 순수 규칙(QA 가 CPU 에서 부른다) ──
-function pickTier1025(r){/* R1025: 열린 단계만, 슬레이어 서사 전(스토리)이면 슬레이어 없는 기러기진만 */const t=CFG.tiers,ally=O1025(ALLY),ks=['call','shade','squad'].filter(k=>A1025(HERO,k)&&(ally||k==='squad'));if(!ks.length)return null;const tot=ks.reduce((n,k)=>n+t[k],0);let x=r*tot;for(const k of ks){if(x<t[k])return k;x-=t[k];}return ks[ks.length-1];}
+/* R1275 갈래별 강화 배수(패시브 1·2·3 카드) — 없으면 1 */const K1275=(h,k)=>{try{const v=window.__STORYWORLD_PASSIVE_GROWTH_R971__?.tierMult?.(h,k);return Number.isFinite(v)&&v>0?v:1;}catch(_){return 1;}};
+function pickTier1025(r){/* R1025: 열린 단계만, 슬레이어 서사 전(스토리)이면 슬레이어 없는 기러기진만 */const t=CFG.tiers,ally=O1025(ALLY),ks=['call','shade','squad'].filter(k=>A1025(HERO,k)&&(ally||k==='squad'));if(!ks.length)return null;const tot=ks.reduce((n,k)=>n+t[k]*K1275(HERO,k),0);let x=r*tot;for(const k of ks){const w=t[k]*K1275(HERO,k);if(x<w)return k;x-=w;}return ks[ks.length-1];}
 function pickTier(r){const t=CFG.tiers;return r<t.call?'call':r<t.call+t.shade?'shade':'squad';}
 // 기러기 대형: 헌터(px,py)가 꼭짓점, 겨눈 쪽(aim)이 앞. i 짝수 = 왼 날개, 홀수 = 오른 날개, 바깥 줄일수록 더 벌어지고 더 뒤.
 function slotsFor(px,py,aim,count,gap,back,k=1){const fx=Math.cos(aim),fy=Math.sin(aim),lx=-fy,ly=fx,out=[];

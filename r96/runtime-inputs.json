@@ -10863,7 +10863,8 @@
     "assets/r1263/pan8.webp",
     "chapter-veil-r1269.js",
     "hero-art-hold-r1264.js",
-    "ego-fx-split-r1265.js"
+    "ego-fx-split-r1265.js",
+    "skill-unlock-r1275.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11938,5 +11939,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "2c191cc1c9fa518658889a3c1423d14e8c5df6792917d4ad2bf9d274c76d9d19"
+  "runtimeManifestSHA256": "70da3fcbb5386ce952a30d42b803858b041bdc1cb0ddee03d5bd7b2ca6aaf84b"
 }
