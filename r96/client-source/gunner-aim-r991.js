@@ -12,7 +12,7 @@
  *  설정 storyworld.r991.gunnerAim {"on":false} 로 끄면 예전 그대로. Canonical source; copied by scripts/sync-r99.py. */
 (()=>{'use strict';
 if(window.__STORYWORLD_GUNNER_AIM_R991__)return;
-const REV='R1220-gunner-muzzle+R1111-gunner-updown+R1101c-gunner-diag2+R1101b-gunner-diag+R1101-gunner-aim-7+R1045d+R1045c+R1045b+R1045+R1003-s2',KEY='storyworld.r991.gunnerAim',HERO='gunner';
+const REV='R1264-gunner-skill-body+R1220-gunner-muzzle+R1111-gunner-updown+R1101c-gunner-diag2+R1101b-gunner-diag+R1101-gunner-aim-7+R1045d+R1045c+R1045b+R1045+R1003-s2',KEY='storyworld.r991.gunnerAim',HERO='gunner';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={walk:0,idle:0,swings:0,replaced:0,shots:0,moved:0,blocked:0,waiting:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
@@ -162,10 +162,19 @@ function wrapShot(){if(typeof makeShot!=='function'||makeShot.r991)return;const 
 //  → 묵었으면 지금 가장 가까운 적(넓은 사거리)으로 다시 고르고, 그것도 없으면 마지막 기록을 그대로 쓴다. 기록 자체(탄 출발점)는 건드리지 않는다.
 function liveSwing(){const sw=swingOf(player);if(sw&&T()-sw.at<=.6)return sw;if(!(player.attackAnim>0)||prefs.staleSwing===false)return null;
  try{const a=aimNow(40);if(a){const pk=pick(a.a);return{...a,...pk,at:T()};}}catch(e){fail(e);}return sw&&T()-sw.at<=3?sw:null;}
-function replace(rec,st){const sw=liveSwing();if(!sw)return;/* R1111: attackAnim 이 0 이 된 꼬리 프레임에도 R143 이 옛 그림을 그려 r143Attack 칸이 있으면 바꿈(.6초 안 기록만 통과) */
+// R1264(사용자 11-20 "기억사수 공격시 예전 이미지"): Q·W·E·R·궁극기 때 R440 이 공격 모션을 빌려 R143 옛 공격 시트(attack-e 총 수평·옛 얼굴)를 그리는데,
+//  기본 공격 조준 기록(swing)이 없어 위에서 그대로 돌아가 옛 그림이 스킬마다 0.3~0.4초 보였다(헤드리스 전수: 스킬 프레임 100% 옛 R143).
+//  → 기록이 없으면 가까운 적(넓은 사거리) 쪽, 그것도 없으면 R143 이 그린 방향 쪽 새 칸으로 고른다. {"skillBody":false} 면 예전.
+const R143_ANG={e:0,se:45,s:90,ne:-45,n:-90};
+function fallbackSwing(name,mir){if(prefs.skillBody===false)return null;try{const a=aimNow(40);if(a)return{...a,...pick(a.a),at:T()};}catch(e){fail(e);}
+ const d=R143_ANG[name];if(d===undefined)return null;const a=(mir?180-d:d)*D;return{a,target:null,...pick(a),at:T()};}
+function replace(rec,st){const sw=liveSwing();if(!sw)return;replaceWith(rec,st,sw);}
+function replaceNoSwing(rec,st){if(liveSwing())return;replaceWith(rec,st,null);}
+function replaceWith(rec,st,sw){/* R1111: attackAnim 이 0 이 된 꼬리 프레임에도 R143 이 옛 그림을 그려 r143Attack 칸이 있으면 바꿈(.6초 안 기록만 통과) */
  for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||!c.r143Attack||!c.points||!c.sourceRect)continue;
   const src=String(c.sourcePath||c.image?.src||''),m=/(?:r143\/attack|r1003|r1045|r1101b|r1101c)\/gunner\/attack-([a-z0-9]+)\.webp/.exec(src);if(!m)continue;
   const P=c.points,oldMir=P[1][0]<P[0][0],fOld=oldMir?-1:1,k=Math.abs(P[1][0]-P[0][0])/CW,ky=(P[3][1]-P[0][1])/CH;if(!(k>0)||!Number.isFinite(ky))return;
+  if(!sw){sw=fallbackSwing(m[1],oldMir);if(!sw)return;stats.skillBody=(stats.skillBody||0)+1;}
   /* R1220: R143 attack-s 5·6번 칸은 총을 내린 회복 자세(총구가 발 쪽, tip y169) — 연사 중 앞모습으로 총을 내렸다 올리는 깜빡임과 탄 출발점 13px 어긋남 → 겨눈 칸(0번)으로 */
   const AF=SHEET[sw.sheet]?.aimFrames,fi=Math.round(fin(c.sourceRect[0])/CW);
   if(m[1]===sw.sheet&&oldMir===sw.mirror&&src.includes(pathOf(sw.sheet))){if(AF&&prefs.aimHoldFrames!==false&&fi>=AF){c.sourceRect=[0,c.sourceRect[1]||0,c.sourceRect[2]||CW,c.sourceRect[3]||CH];c.r1220Hold=fi;stats.hold=(stats.hold||0)+1;}return;}/* R1045: 같은 칸 이름이어도 n·e 는 새 그림 경로로 바꿈 */const p=pathOf(sw.sheet),im=image(p);if(!im)return;
@@ -200,7 +209,7 @@ function replaceWalk(rec,st){const sw=swingOf(player);
 // 처음 쓰는 순간 그림이 없어 예전 그림이 한 번 보이지 않게 기억사수일 때 미리 받는다(지역을 옮기면 게임이 그림 기억을 비우므로 2초마다 확인)
 let preAt=0;function preload(){const t=Date.now();if(t-preAt<2000)return;preAt=t;try{for(const p of [...SHEETS.map(pathOf),...Object.values(WALK).map(w=>w.path),IDLE_S2.path,N6_PATH,...(prefs.idle6!==false?Object.values(IDLE6):[])])if(!(typeof readyImage==='function'&&readyImage(p)))image(p);}catch(e){fail(e);}}
 function wrapDraw(){if(typeof drawHero!=='function'||drawHero.r991)return;const base=drawHero;const w=function(...a){if(on())preload();const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
-  try{if(st>=0&&on()){for(let i=st;i<rec.commands.length;i++)if(rec.commands[i]?.r121Walk){walkAt=T();break;}if(solo()){replace(rec,st);if(T()-walkAt<.05)replaceWalk(rec,st);if(!(player.attackAnim>0)&&prefs.idle!==false)replaceIdle(rec,st);if(!(player.attackAnim>0)){sideIdle(rec,st);northIdle(rec,st);}}}}catch(e){fail(e);}return r;};w.r991=true;drawHero=w;}
+  try{if(st>=0&&on()){for(let i=st;i<rec.commands.length;i++)if(rec.commands[i]?.r121Walk){walkAt=T();break;}if(solo()){replace(rec,st);replaceNoSwing(rec,st);if(T()-walkAt<.05)replaceWalk(rec,st);if(!(player.attackAnim>0)&&prefs.idle!==false)replaceIdle(rec,st);if(!(player.attackAnim>0)){sideIdle(rec,st);northIdle(rec,st);}}}}catch(e){fail(e);}return r;};w.r991=true;drawHero=w;}
 function install(){try{wrapAttack();wrapShot();wrapDraw();}catch(e){fail(e);}}
 try{if(typeof document!=='undefined'&&document.readyState==='complete')install();else if(typeof window.addEventListener==='function')window.addEventListener('load',install);}catch(e){fail(e);}
 function set(k,v){prefs[k]=v;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
