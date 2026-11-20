@@ -14203,6 +14203,26 @@
       "sha256": "d7e19452b3a616678653790773d42851ff42d225e80e64f20944390dba6be8f9"
     },
     {
+      "path": "assets/r1274/index.json",
+      "bytes": 1655,
+      "sha256": "91f06a1576196974ed22ae83b43d60fc36122cbe41e0d3abe558c304f7fff755"
+    },
+    {
+      "path": "assets/r1274/lust-human-attack-mirror.webp",
+      "bytes": 61682,
+      "sha256": "3528d147295e0492aca411ec5fcf594031dc0b290da9bc83d6cb78953323fef8"
+    },
+    {
+      "path": "assets/r1274/spot-hero24.webp",
+      "bytes": 158594,
+      "sha256": "a75dd6cfabf121fbfbaddd8b076012208d6fded4218e9a80d8f66991ecb68b0d"
+    },
+    {
+      "path": "assets/r1274/spot-self24.webp",
+      "bytes": 164320,
+      "sha256": "99cc6ef0f2a220ef4a853e56e32c21e4d97af7d29615bd57c1a635417ef3cc78"
+    },
+    {
       "path": "assets/r128/gunner/actions-consistent-gunner-attack-back.webp",
       "bytes": 19348,
       "sha256": "9d62cbb5b4e9da1ddda518980e636ebf198883b86143631fdc1266d74d034249"
@@ -56669,8 +56689,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6584877,
-      "sha256": "f9e141e54ac102b751ea7284ba38e3fe466660762d11d4b3980d1c7003c305a0"
+      "bytes": 6584929,
+      "sha256": "46c8cd796cead3416a50dad357ae9ca8acc672436c1d577e99152a202211d7ff"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -57733,6 +57753,11 @@
       "sha256": "e4bcc075034e5c903e71a3f5fbdb09884c8d0ff999da686c0e65cf0d795ef48c"
     },
     {
+      "path": "seoyun-spotlight-r1274.js",
+      "bytes": 12054,
+      "sha256": "d8db960d31529543f3fdcffccebbf8c05cc84cf56f2de5eac4435439df173f35"
+    },
+    {
       "path": "seven-sins-bossrooms.js",
       "bytes": 14689,
       "sha256": "f6f539296fd11946a0688a5d82be7bf68b32f5c8d560aff5369e92f7dd439fc5"
@@ -58268,9 +58293,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11653,
-  "totalBytes": 1389351276,
-  "webHTMLSha256": "f9e141e54ac102b751ea7284ba38e3fe466660762d11d4b3980d1c7003c305a0",
+  "fileCount": 11658,
+  "totalBytes": 1389749633,
+  "webHTMLSha256": "46c8cd796cead3416a50dad357ae9ca8acc672436c1d577e99152a202211d7ff",
   "largest": [
     {
       "path": "index.html",
