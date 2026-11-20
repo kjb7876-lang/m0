@@ -941,6 +941,8 @@ jobs:
         run: node r96/qa/r1251/r1251-cpu-check.cjs
       - name: R1237 graffiti storefront (wall-placed, no always-on text, C opens canon line), luggage cart and seal reliquary pruning, scattered +1 point orbs CPU check
         run: node r96/qa/r1237/r1237-cpu-check.cjs
+      - name: R1278 burning-hotel man map (ep1b07) fallen marble column removed, other maps untouched CPU check
+        run: node r96/qa/r1278/r1278-cpu-check.cjs
       - name: R537 spider cave mud-back spider and memory-carrier spider, swamp root stalker renamed CPU check
         run: node r96/qa/r537/r537-cpu-check.cjs
       - name: R450 zone weather (63 story zones indoor/outdoor/cave/void, dust instead of rain indoors, canon weather, double-sided streaks) CPU check
