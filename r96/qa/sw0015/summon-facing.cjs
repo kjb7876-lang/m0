@@ -6,6 +6,7 @@ const path=require('node:path');
 const vm=require('node:vm');
 const test=require('node:test');
 
+const facingSource=readFileSync(process.env.STORYWORLD_SUMMON_FACING_SOURCE||path.resolve(__dirname,'../../client-source/enemy-face-r444.js'),'utf8');
 const source=readFileSync(process.env.STORYWORLD_SUMMON_SOURCE||path.resolve(__dirname,'../../client-source/gunner-veil-r953.js'),'utf8');
 const hero=(fields={})=>({hero:'gunner',hp:100,x:15,y:15,attackCD:0,...fields});
 
@@ -16,10 +17,10 @@ function fixture(side=1,placed=false,proc='summon'){
  const id='u201-mid';
  const definition={id,name:'전쟁관리자',path:'assets/robot.webp'};
  const pattern={shape:'line',radius:10,width:1,repeats:2,gap:.3,name:'직선 공격'};
- const casts=[],hits=[];
+ const casts=[],hits=[],visibleDirections=[];
  let deployed=placed?[owner]:[];
  const noOp=()=>{};
- const canvas=new Proxy({},{get:(o,k)=>k in o?o[k]:String(k).startsWith('create')?()=>({addColorStop(){}}):noOp});
+ const canvas=new Proxy({globalAlpha:1},{get:(o,k)=>k in o?o[k]:String(k).startsWith('create')?()=>({addColorStop(){}}):noOp});
  const window={__STORYWORLD_HERO_DEFENSE_R720__:{bodies:()=>deployed,asOwner(actor,run){
   if(!deployed.includes(actor))return undefined;
   const previous=engine.player;engine.player=actor;try{return run();}finally{engine.player=previous;}
@@ -28,6 +29,7 @@ function fixture(side=1,placed=false,proc='summon'){
   document:{createElement:()=>({getContext:()=>canvas})},
   regionById:{u201:{midboss:definition}},portable:{assetMap:{zones:[{id:'u201',actors:[{id,patterns:[pattern]}]}]}},
   actor3:(d,id,x,y)=>({id,nativeId:d.id,name:d.name,path:d.path,profile:d,x,y,maxHp:10,radius:.5,direction:'front'}),
+  drawHero:noOp,drawEnemy(body){visibleDirections.push(body.direction);},
   attackPower:()=>engine.player.hero==='gunner'?30:3,basicAttack:()=>{engine.player.attackCD=.5;},tick:noOp,drawEffect:noOp,
   project:(x,y)=>({x:(x-y)*32,y:(x+y)*16}),liveEnemies:()=>engine.room.enemies,
   moveActor:(body,dx,dy)=>{body.x+=dx;body.y+=dy;},blocked:()=>false,clearLine:()=>true,
@@ -35,7 +37,9 @@ function fixture(side=1,placed=false,proc='summon'){
   footprintContains154:()=>true,lockPatternFootprint154:h=>h,
   drawHazard(h){casts.push({row:{...h.row150},sourceId:h.owner});},
  };
- vm.runInNewContext(source,engine);
+ vm.createContext(engine);
+ vm.runInContext(facingSource,engine);
+ vm.runInContext(source,engine);
  const api=window.__STORYWORLD_GUNNER_VEIL_R953__;
  api.force(proc,owner);
  engine.basicAttack();
@@ -46,26 +50,36 @@ function fixture(side=1,placed=false,proc='summon'){
   engine.tick(.05);
   casts.length=0;
   for(const effect of engine.effects)engine.drawEffect(effect);
+  visibleDirections.length=0;
+  engine.drawHero();
  }
- return {engine,body,owner,casts,foe,hits,api,advance,remove:()=>{deployed=[];}};
+ return {engine,body,owner,casts,foe,hits,api,advance,visibleDirections,facing:window.__STORYWORLD_ENEMY_FACE_R444__,remove:()=>{deployed=[];}};
 }
 
 for(const [side,heading] of [[1,'right'],[-1,'left']]){
  test(`summon faces ${heading} through its committed warning, launch and impact`,()=>{
-  const {engine,body,casts,foe,hits,advance}=fixture(side);
+  const {engine,body,casts,foe,hits,advance,visibleDirections,facing}=fixture(side);
   assert.equal(body.direction,heading);
   advance(.6);
   assert.equal(casts.length,2);
   const [first,second]=casts.map(x=>x.row);
   assert.equal(body.storyAttackStart5,first.releaseAt);
   assert.equal(first.stage,'warning');
+  assert.equal(facing.owns(body),true);
+  assert.deepEqual(visibleDirections,[heading]);
   assert.equal(body.direction,heading);
   assert.equal(Math.sign((first.targetX-first.originX)-(first.targetY-first.originY)),side);
   foe.x=15-4*side;
   foe.y=15+3*side;
+  engine.player.x=body.x-2*side;
+  engine.player.y=body.y+2*side;
+  advance(.75);
+  advance(1);
+  assert.deepEqual(visibleDirections,[heading]);
   advance(first.releaseAt+.01);
   assert.equal(body.direction,heading);
   assert.equal(casts[0].row.stage,'flight');
+  assert.deepEqual(visibleDirections,[heading]);
   assert.equal(hits.length,0);
   assert.equal(body.moving,false);
   advance(first.impactAt+.01);
@@ -146,4 +160,15 @@ test('a placed Gunner barrage is cancelled when its owner is removed or dies',()
   assert.equal(f.api.inspect(f.owner).barrage,null);
   assert.equal(f.hits.length,0);
  }
+});
+
+
+test('summon render ownership stays with its authored direction on rooms excluded for hostile actors',()=>{
+ const {engine,body,facing,visibleDirections,advance}=fixture();
+ engine.room.id='ep1b06';
+ facing.set({on:false});
+ assert.equal(facing.owns(body),true);
+ assert.equal(facing.owns({nativeId:'regular-enemy'}),false);
+ advance(.6);
+ assert.deepEqual(visibleDirections,['right']);
 });

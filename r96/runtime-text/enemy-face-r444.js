@@ -42,7 +42,7 @@ function heroSide(e,p){const du=(p.x-p.y)-(e.x-e.y);return du<0?'left':'right';}
 // 엔진 R75 무리의 10번째 몹(r75Tower: 제자리 원거리, 보통 몹 그림)은 맡는다 — 원거리 준비 동안 몸이 조준 쪽을 봐야 한다. R170 탑·R251 시전 원은 자기 깃발로 뺀다.
 function structure(e){return !!(e.r170Tower||e.r446Pillar||e.r251Circle||e.towerR193||e.r193Tower||e.prop||e.object);}
 function mammon(e){try{const id=String(typeof room==='object'&&room?room.id||'':'');return /mammon/i.test(id)||id==='ep1b06'||!!e.mammon||!!e.mammonR||/mammon/i.test(String(e.nativeId||''));}catch(_){return false;}}
-function managed(e){return !!(prefs.on&&e&&!e.persona&&!structure(e)&&!mammon(e));}
+function managed(e){return !!(e&&(e.r953Ally||prefs.on&&!e.persona&&!structure(e)&&!mammon(e)));}
 function fresh(e,s){return !s||(s.hp<=0&&e.hp>0)||(s.ss!=='active'&&e.spawnState==='active'&&s.ss!==undefined);}
 function init(e){const p=P(),d=e.direction;const side=d==='left'||d==='right'?d:p?heroSide(e,p):'right';return{x:e.x,y:e.y,t:T(),vx:0,vy:0,side,d4:side==='left'?'west':'east',owner:'spawn',pend:null,since:T(),hp:e.hp,ss:e.spawnState,aim:null,mvx:0,mvy:0};}
 // 공격 판정 각도로 좌우를 묶는다(준비~후딜). 화면 세로에 가까운 각(|가로| ≤ .12)은 마지막 좌우를 둔다.
@@ -51,6 +51,14 @@ const live=e=>e.hp>0&&e.spawnState!=='dead';
 // R1053(사용자 2026-11-15 "보스들이 좌우를 번갈아서 보는 이유 … 전투중이니까 공격적으로 달려들어야지"): 보스·중간보스는 전투 중(6칸 안) 걸을 때도 영웅 쪽 — 규칙은 enemy-rules-r1053.js(docs/enemy-combat-rules.md ①)
 const majorFace=(e,td)=>{try{return !!window.__STORYWORLD_ENEMY_RULES_R1053__?.faceHero?.(e,td);}catch(_){return false;}};
 function update(e){let s=S.get(e);const t=T();
+ // R953 allies aim at enemies. Keep their source heading so other renderers
+ // still recognize R444 ownership and do not turn them back toward player.
+ if(e.r953Ally){
+  if(!s){s=init(e);S.set(e,s);}
+  if(e.direction==='left'||e.direction==='right')s.side=e.direction;
+  s.d4=s.side==='left'?'west':'east';s.owner='r953';s.aim=null;
+  return s;
+ }
  if(fresh(e,s)){s=init(e);S.set(e,s);stats.spawns++;const A=live(e)?atkAngle(e):null;return A?lockAttack(s,A):s;}// 공격 중에 처음 보이면 바로 판정 쪽
  // 같은 순간(게임 시간 그대로)에 공격 각이 새로 정해지거나 바뀌면 바로 따른다 — 그림과 판정이 한 프레임도 갈리지 않게(엔진 enemy-facing 검사는 한 순간에 8방향을 찔러 본다)
  if(s.t===t){const A=live(e)?atkAngle(e):null;if(A&&A.g!==s.aim)lockAttack(s,A);return s;}
