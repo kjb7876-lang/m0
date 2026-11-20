@@ -1,0 +1,2 @@
+FAIL DPR 1/1.5/2/3 (+ no viewport): same first alpha for the same effect {"base":[0.083335,0.083335],"rows":[{"d":1.5,"v":true,"a":[0.082355,0.988237]},{"d":2,"v":true,"a":[0.083335,1]},{"d":3,"v":true,"a":[0.083335,0.083335]},{"d":1.5,"v":false,"a":[0.082355,
+FAIL DPR 2: beam height = actor 66 × 4.2 in logical px (not × DPR) 554.4

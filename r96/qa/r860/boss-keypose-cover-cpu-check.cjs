@@ -33,7 +33,7 @@ for(const ph of [0,1,2]){const e={nativeId:'l301-boss',boss:true,phase:ph,__ask:
 // 4) 회귀: 다른 몹·보스 밖에서는 바꾸지 않는다
 {const e={nativeId:'some-mob',phase:0,__ask:[OLD['l301-boss'].idle]};const g=ctx.__draw(e);check('다른 몹이 같은 경로를 물으면 그대로(회귀)',g[0]===OLD['l301-boss'].idle,g.join(','));}
 check('보스 그리기 밖 readyImage 는 그대로(회귀)',ctx.readyImage(OLD['l301-boss'].idle).path===OLD['l301-boss'].idle);
-check('기존 7대죄·루시퍼·교주 단계 표 유지(회귀)',JSON.stringify(B.phases['b02-boss'])==='[0,1]'&&JSON.stringify(B.phases['c104-boss'])==='[0,1,2,3]'&&JSON.stringify(B.phases['a11-boss'])==='[0,1,2]');/* 사용자 지시 동작 변경(2026-11-19 R1239 루시퍼 전수조사): 루시퍼 2·3단계도 열쇠 자세 몸(옛 회색 저화질 그림으로 떨어지던 것) */
+check('기존 7대죄·루시퍼 단계 유지, 교주 인물 자세는 인간 형상에서만',JSON.stringify(B.phases['b02-boss'])==='[0,1]'&&JSON.stringify(B.phases['c104-boss'])==='[0]'&&JSON.stringify(B.phases['a11-boss'])==='[0,1,2]');
 // 4b) 엔진·보스 전용 모듈(예: 발록 balrogAction bodyRect)이 옛 그림 기준 잘라 그리기 칸을 주면 새 그림이 잘린다
 //     (헤드리스 2026-11-12: 발록 p2 가 왼쪽이 칼로 자른 듯 잘려 그려짐, 칸 178.5,63,316.75,292.25).
 //     R104 로 바꾼 그림은 칸 전체를 그리되 옛 칸이 차지하던 화면 상자에 키를 맞추고 발(아래 끝)·가운데를 지킨다.
@@ -58,6 +58,44 @@ check('기존 7대죄·루시퍼·교주 단계 표 유지(회귀)',JSON.stringi
 }
 // 4c) 교주 본보스 몸은 cult-v3123 그림으로 그려진다 → 이 경로도 R104 로
 {const e={nativeId:'c104-boss',boss:true,phase:0,__ask:['assets/cult-v3123/pride_cyborg_cult_leader.webp']};const g=ctx.__draw(e);check('교만의 사이보그 교주 몸(cult-v3123) → R104',g[0]===P('c104-boss',3),g.join(','));}
+// HP 형상별 한 장인 엔진 본체를 실제 공격 시간에 읽고, 발을 고정한다.
+{
+ const forms=[
+  'assets/cult-v3123/pride_cyborg_cult_leader.webp',
+  'assets/generated-v31224/actors-normalized/c6827b44795a_superego_cyborg_cult_leader.webp',
+  'assets/generated-v31224/actors-normalized/a000c91070d3_final_pride_cyborg_lord.webp',
+  'assets/generated-v31224/actors-normalized/57967d1070df_black_ritual_cyborg_boss.webp',
+ ].map(path=>({path}));
+ const calls=[],misses=new Set(),requests=[],qa={portable:{majorNativePresentation150:{},rc142GameplayArt:{cultLeader:{phases:forms,phaseThresholds:[.76,.5,.25]}}},regionById:regs,time:4};
+ const images=new Map();
+ function image(path){if(misses.has(path))return null;if(!images.has(path))images.set(path,{path,image:{src:path}});return images.get(path);}
+ let wall=4000,transform=null;
+ const c={save(){},restore(){transform=null;},transform(...next){transform=next;},drawImage(img){calls.push({path:img.src,transform});}};
+ Object.assign(qa,{ctx:c,Date:{now:()=>wall},localStorage:{getItem:()=>null},readyImage:image,addImage:path=>{requests.push(path);}});
+ qa.window=qa;vm.createContext(qa);
+ vm.runInContext('var drawEnemy=function(e){const row=readyImage(e.path);if(row)ctx.drawImage(row.image,0,0,418,418,-54,-150,108,150);};',qa);
+ for(const asset of ['bosses-r104-data.js','bosses-r104.js'])vm.runInContext(fs.readFileSync(path.join(SRC,asset),'utf8'),qa);
+ function draw(e){calls.length=0;qa.drawEnemy(e);return calls[0];}
+ function cultAttack(index,elapsed){return {nativeId:'c104-boss',boss:true,spawnState:'active',maxHp:100,hp:[90,65,40,20][index],path:forms[index].path,attack:{elapsed,angle:0,castWindup150:.5,shape154:{active:.2}}};}
+ const attackTimes=[.16,.54,.76,.95],human=attackTimes.map(t=>draw(cultAttack(0,t)).path);
+ check('교주 인간형 준비·타격·이어짐·회수 네 그림',human.every((path,index)=>path===P('c104-boss',index)),human.join(','));
+ for(const i of [1,2,3]){
+  const shots=attackTimes.map(t=>draw(cultAttack(i,t)));
+  check(`교주 HP 변신 ${i}: 자기 몸·발 유지와 공격 세 구간 움직임`,shots.every(s=>s.path===forms[i].path)&&new Set(shots.slice(0,3).map(s=>String(s.transform))).size===3&&shots.slice(0,3).every(s=>s.transform?.[4]===0&&s.transform?.[5]===0)&&shots[3].transform===null);
+ }
+ // 발록 열쇠 자세가 처음 없거나 다시 밀려날 때, 먼저 가능한 원본을 그린다.
+ const raised='assets/actors/v31511/balrog-raised-body.png',p1=P('dist06-boss',0);
+ const balrog={nativeId:'dist06-boss',boss:true,phase:0,path:raised};
+ misses.add(p1);
+ const cold=draw(balrog),coldAgain=draw(balrog);
+ check('발록 첫 준비: 옛 들어올린 몸을 그리면서 p1 요청은 한 번',cold.path===raised&&coldAgain.path===raised&&requests.filter(p=>p===p1).length===1);
+ wall+=1600;draw(balrog);
+ check('발록 없는 p1 요청을 1.5초 뒤 재시도',requests.filter(p=>p===p1).length===2);
+ misses.delete(p1);
+ check('발록 p1 준비가 되면 늦게라도 원래 칼 준비 자세 선택',draw(balrog).path===p1);
+ misses.add(p1);
+ check('발록 p1이 로드 후 캐시에서 밀리면 원본으로 그리고 다시 요청',draw(balrog).path===raised&&requests.filter(p=>p===p1).length===3);
+}
 // 5) R248 이름 시트가 R104 열쇠 자세가 있는 본보스를 가로채지 않는다(교만의 사이보그 교주 ← m062 걷는 사람)
 const c2={localStorage:{getItem:()=>null,setItem(){}},console,Math,JSON,Object,String,Number,Array,Set,Map,WeakMap,WeakSet,Promise,Date,Error};c2.window=c2;vm.createContext(c2);
 for(const f of ['mob-unique-r248-data.js','bosses-r104-data.js','mob-art-r410.js'])vm.runInContext(fs.readFileSync(path.join(SRC,f),'utf8'),c2);
@@ -68,4 +106,5 @@ check('교만의 사이보그 교주(본보스 c104-boss): R248/R410 몹 시트 
 check('같은 이름 일반 몹은 여전히 m062 시트(회귀)',/m062/.test(M.sheetFor({name:'교만의 사이보그 교주',nativeId:'x-mob'})?.path||''));
 check('R104 없는 본보스(아르벨리아를 묶은 변조 명령)는 R410 m048 그대로(회귀)',/m048/.test(M.sheetFor({name:'아르벨리아를 묶은 변조 명령',nativeId:'kair-great-03',boss:true})?.path||''));
 const failed=checks.filter(c=>!c.passed);console.log(`${checks.length-failed.length}/${checks.length} passed`);
-fs.writeFileSync(path.join(__dirname,'boss-keypose-cover-cpu-results.json'),JSON.stringify({checks},null,1));process.exit(failed.length?1:0);
+if(process.env.STORYWORLD_R860_RESULTS)fs.writeFileSync(process.env.STORYWORLD_R860_RESULTS,JSON.stringify({checks},null,1));
+process.exit(failed.length?1:0);

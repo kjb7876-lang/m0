@@ -711,6 +711,8 @@ jobs:
         run: node r96/qa/r1259/narr-scroll-cpu-check.cjs
       - name: R1269 chapter titles veiled in ink before unlock (map and region info hide locked part, region and boss names; engine unlock and 777 untouched) CPU check
         run: node r96/qa/r1269/r1269-cpu-check.cjs
+      - name: R1280 PC settings duplicate controls merged into one (narration voice, view range, mood strength, signature colour; old rows hidden not removed, saved values untouched until changed) CPU check
+        run: node r96/qa/r1280/r1280-cpu-check.cjs
       - name: R1126 777 developer test mode passive point input (sets remaining points exactly, 0..999999, empty/non-number rejected) CPU check
         run: node r96/qa/r1126/cheat-points-cpu-check.cjs
       - name: R1138 region transition curtain (heavy first draws finish behind a loading-look cover; engine order, results and state untouched; always lifted) CPU check
@@ -729,6 +731,8 @@ jobs:
         run: node r96/qa/r1033/r1033-cpu-check.cjs
       - name: R1275 스킬·확률 패시브 레벨 해금·개별 강화 CPU 검사
         run: node r96/qa/r1275/r1275-cpu-check.cjs
+      - name: R1281 영웅 전환 그림 기억 정리·칸 누를 때 미리 받기 CPU 검사
+        run: node r96/qa/r1281/r1281-cpu-check.cjs
       - name: R981 insomnia-ghost midboss renamed and set apart from the main boss CPU check
         run: node r96/qa/r981/puppet-cpu-check.cjs
       - name: R990 bulmyeongwi fog skills (fog summon of village mobs, fog-weighted patterns, old boss art in summon ghosts) CPU check
@@ -1061,6 +1065,8 @@ jobs:
         run: node r96/qa/r1174/r1174b-dots-cpu-check.cjs
       - name: R1155 EGO and persona own sound effects (numpy-synthesised; basic, Q/W/E/R, ink passives, celestial branches and ticks remapped only in hidden-hero form) CPU check
         run: node r96/qa/r1155/r1155-cpu-check.cjs
+      - name: R1276 hero hit sounds are rain drops (10 heroes, 4 hit + 2 skill-hit variants each; electronic hit sounds removed; profiles re-applied after setupAudio; off switch)
+        run: node r96/qa/r1276/r1276-cpu-check.cjs
       - name: R1212 code-synthesised sounds (R125 samong ambience beds and events, R356 kairo clock, R568 boss reveal boom, R123 banner tick) replaced by ElevenLabs files with synth fallback CPU check
         run: node r96/qa/r1212/r1212-cpu-check.cjs
       - name: R1229 video motion and effect bugs (enemy story-vfx shape layer removed, R241 meteors as frame sheet, projectile sheets kept across regions, Balrog one size x1.66, summoning pillar fixed, hunter walk stride) CPU check
@@ -1103,6 +1109,8 @@ jobs:
         run: node r96/qa/r1256/r1256-cpu-check.cjs
       - name: R1272 entry video narration voice audible (duck video audio, ellipsis captions) CPU check
         run: node r96/qa/r1272/r1272-cpu-check.cjs
+      - name: R1277 settings narration-voice toggle also clears saved voice-off CPU check
+        run: node r96/qa/r1277/r1277-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
         run: node r96/qa/r430/r430-cpu-check.cjs
       - name: R431 boss-room center fights + theme boss skill 6s + touch status/DoT + black-flame prop throws CPU check
@@ -1258,6 +1266,8 @@ jobs:
         run: node r96/qa/r760/r760-cpu-check.cjs
       - name: R780 StoryWorld cursor (needle cursors per hover target matching the engine click test, click markers from the engine result, touch/off/caps, style writes only on change) CPU check
         run: node r96/qa/r780/r780-cpu-check.cjs
+      - name: R1279 double-click interact (double-clicking an NPC/door/chest/altar/exit walks the hero to reach and calls interact once; instant when already near; move/attack/pickup/blocked ignored; cancel by click/key/joystick/modal/death/zone/timeout) CPU check
+        run: node r96/qa/r1279/dblclick-use-cpu-check.cjs
       - name: R860 boss key-pose coverage (fallen angel knight, EGO-stealing nightmare king, Balrog draw their R104 key poses; old crop rects fit the whole new frame; the pride cyborg cult leader is no longer hijacked by a same-name mob sheet; Mammon/other mobs untouched) CPU check
         run: node r96/qa/r860/boss-keypose-cover-cpu-check.cjs
       - name: R800 floor edge mask reused for identical input (no double build on region entry) CPU check

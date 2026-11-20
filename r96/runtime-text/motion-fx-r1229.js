@@ -51,6 +51,8 @@ function pin(){if(!prefs.pillar||typeof room!=='object'||!room?.enemies)return;f
 // ---------------- ② 발록 몸 통일 ----------------
 const isBalrog=e=>!!e&&!e.r251Circle&&!isPillar(e)&&/발록/.test(String(e.name||''))&&!/소환진/.test(String(e.name||''));
 const CANON=/\/bosses\/dist06-|\/float\/dist06-|\/r1147\/|\/r104\/[^/]*dist06/i,OLD=/actors-normalized\/[0-9a-f]+_balrog-|v31511\/balrog-raised-/i,SWORD=/v31511\/balrog-raised-sword/i;
+const NATIVE_RAISED=/v31511\/balrog-raised-body/i;
+const nativeWindup=(e,path)=>NATIVE_RAISED.test(path)&&(!!e.attack||e.rangedWindup>0||T()<e.storyAttackUntil5||e.r61Action&&!e.r61Action.cancelled&&T()<e.r61Action.endAt);
 const fracMemo=new Map();
 function frac(im,sr){// 칸 안 알파 테두리(위·아래·가운데) 비율 — 그림·칸마다 한 번만 잰다
  const k=(im?.src||'')+'|'+sr.join(',');let f=fracMemo.get(k);if(f!==undefined)return f;f=null;
@@ -81,7 +83,7 @@ function fitOne(e,cs){
  const idx=[];for(let i=0;i<cs.length;i++){const c=cs[i];if(c&&c.owner?.id===own)idx.push(i);}
  if(!idx.length){fillGone(e,s,cs,RATIO*AH()*BIG);return;}
  const mine=idx.map(i=>cs[i]).filter(c=>c.kind==='image'&&c.points&&c.sourceRect);
- const body=mine.filter(c=>CANON.test(srcOf(c))||OLD.test(srcOf(c))).sort((a,b)=>(geom(b).y1-geom(b).y0)-(geom(a).y1-geom(a).y0));
+ const body=mine.filter(c=>{const path=srcOf(c);return !SWORD.test(path)&&(CANON.test(path)||OLD.test(path));}).sort((a,b)=>(geom(b).y1-geom(b).y0)-(geom(a).y1-geom(a).y0));
  const want=RATIO*AH()*BIG;let main=body[0];if(mine.some(c=>c.r1229Fit))return;/* 렌더 감싸기가 두 겹(three·renderer)이어도 한 번만 */
  if(!main){// 몸이 빠진 장면: 마지막 새 시트 칸(없으면 기본 시트)으로 메운다(깜빡임 방지)
   const tp=mine[0]||s.tpl;if(typeof project!=='function'||!tp)return;const cell=s.last||fbCell();if(!cell)return;const q=project(e.x,e.y),lift=Math.max(0,+e.visualLiftPx||0);
@@ -89,7 +91,10 @@ function fitOne(e,cs){
   c.r1229Fit=true;cs.splice(idx[0],0,c);stats.balrogFilled++;return;}
  main.r1229Fit=true;s.tpl=main;s.tplAt=T();const g0=geom(main),src=srcOf(main),f=frac(main.image,main.sourceRect);if(!f)return;
  const visH=(g0.y1-g0.y0)*(f.bot-f.top),footY=g0.y0+(g0.y1-g0.y0)*f.bot,footX=g0.flip?g0.x1-(g0.x1-g0.x0)*f.cx:g0.x0+(g0.x1-g0.x0)*f.cx;
- if(CANON.test(src)){const r=visH/AH();if(Number.isFinite(r)&&r>0){
+ const canon=CANON.test(src);
+ // While the R104 strike sheets load, the native raised body and its separate
+ // sword still show the windup. Scale the pair together at the body foot.
+ if(canon||nativeWindup(e,src)){const r=visH/AH();if(Number.isFinite(r)&&r>0&&canon){
    stats.balrogRatio=+r.toFixed(3);
    s.last={image:main.image,sourcePath:main.sourcePath,sourceRect:main.sourceRect.slice(),imageSize:main.imageSize};s.lastFlip=g0.flip;}
   const k=want/visH;if(Number.isFinite(k)&&Math.abs(k-1)>=.02){const kk=Math.max(.4,Math.min(3.4,k));

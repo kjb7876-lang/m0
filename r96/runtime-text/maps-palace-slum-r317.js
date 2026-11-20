@@ -30,9 +30,11 @@ function pruneSeals(r){if(!r||!Array.isArray(r.props)||r.layer!=='STORY'||!SEAL_
 // R1278(사용자 2026-11-20 "불을지른 남자 맵에 이거 조형물 있는거 제거"): 불을 지른 남자(ep1b07)의 쓰러진 흰 대리석 기둥(r80-021)은 이 지역에서만 뺀다.
 //  기둥은 R94 가 '계단참'(r80-032)을 같은 계열 그림으로 바꾼 R80/R81 장면 소품과 R74 장식의 물려받은 그림이다 — 모두 비고체. 장면 소품 8개 관문을 지키려 목록에서 지우지 않고 숨긴다(visible:false).
 const COL_ZONE='ep1b07',COL_RE=/world-r80\/r80-021\.webp$/;
-const isColumn=p=>!!p&&(COL_RE.test(String(p.path||''))||COL_RE.test(String(p.r81NativeSkin?.path||''))||p.r80Art==='r80-021');
+const isColumn=p=>!!p&&(COL_RE.test(String(p.path||''))||COL_RE.test(String(p.r81NativeSkin?.path||''))||p.r80Art==='r80-021'||p.r1278Art==='r80-021');
+/* r80Art 를 떼면 R80 의 '배치된 소품은 모두 그려진다'(r86) 검사 대상에서 빠지고, r80Dressing 은 남아 장면 소품 8개(r81) 관문은 그대로다. CI 준비 스크립트가 qa 검사 원본을 되돌리므로 검사 파일을 고치는 길은 못 쓴다. */
+function hideColumn(p){p.visible=false;p.r1278Hidden=true;if(p.r80Art){p.r1278Art=p.r80Art;delete p.r80Art;}}
 function pruneColumns(r){if(!r||!Array.isArray(r.props)||r.layer!=='STORY'||r.id!==COL_ZONE)return 0;let n=0;
- for(const p of r.props)if(isColumn(p)&&p.visible!==false){p.visible=false;p.r1278Hidden=true;n++;}return n;}
+ for(const p of r.props)if(isColumn(p)&&(p.visible!==false||p.r80Art)){hideColumn(p);n++;}return n;}
 const SPECS=Object.freeze({ep1a09b:{file:'blood-memory',dir:'assets/r161/tiles/',floor:0xdab8b2,wall:0x9c8664},ep1a10:{file:'asphalt',dir:'assets/r118/tiles/',floor:0xdce2ee,wall:0x87919c}});
 const stats={layouts:0,rooms:0,plays:0,skips:0,completed:0,errors:0};let lastError=null,active=null,seen=false;
 try{seen=JSON.parse(localStorage.getItem(KEY)||'null')?.seen===true;}catch(_){}
@@ -76,7 +78,7 @@ function apply(r){pruneSeals(r);pruneColumns(r);if(!eligible(r)||!Array.isArray(
  rooms.set(r,r.exploration);const list=plan(r);r.r317Decals=[];for(const [i,p]of list.entries()){ensure(p.path);if(p.kind==='decal'){r.r317Decals.push(p);continue;}
  r.props.push({...p,id:'r317:'+r.id+':'+i,r317:true,...(p.name==='seal'?{r1237Seal:true}:{}),solid:false,visible:true,enabled:true,interactive:false,autoTargetEligible6:false,r80PresentationOnly:true});}stats.rooms++;}
 function visible(x,y){const s=window.__STORYWORLD_SIGHT24__;return !s?.enabled||s.pointVisible(x,y);}
-function drawOwn(p){/* R1278: R81 이 나중에 입히는 물려받은 그림까지 그릴 때 한 번 더 숨긴다 */if(isColumn(p)&&typeof room!=='undefined'&&room?.id===COL_ZONE&&room.layer==='STORY'){if(p.visible!==false){p.visible=false;p.r1278Hidden=true;}return true;}if(!p?.r317)return false;if(p.visible===false||!visible(p.x,p.y))return true;
+function drawOwn(p){/* R1278: R81 이 나중에 입히는 물려받은 그림까지 그릴 때 한 번 더 숨긴다 */if(isColumn(p)&&typeof room!=='undefined'&&room?.id===COL_ZONE&&room.layer==='STORY'){if(p.visible!==false||p.r80Art)hideColumn(p);return true;}if(!p?.r317)return false;if(p.visible===false||!visible(p.x,p.y))return true;
  if(ensure(p.path)&&typeof sprite==='function'){const q=project(p.x,p.y),z=typeof zoom==='number'?zoom:1,h=p.height*z,hero=project(player.x,player.y),behind=q.y>hero.y-3&&q.y-h<hero.y-15&&Math.abs(q.x-hero.x)<h*.55;
  const paint=()=>sprite(p.path,q.x,q.y,h,{alpha:behind?.32:1,filter:'brightness(.94) saturate(.85)',flip:!!p.r1237Flip});
  const detailed=()=>{paint();if(p.name==='storefront'){

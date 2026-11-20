@@ -22,15 +22,15 @@
 //  · 각성 중 걷기 = 이미 쓰는 기본형 걷기 시트(앞·뒤·옆, 뒤집기·발 자리·거리 위상 그대로) + 각성 중에만 붉은 구슬·망토 가장자리 국소 발광(lighter 명령 따로, 몸에 전신 필터 없음).
 //  · 피격 = 방향별(정면·옆·뒤) 기본/각성 4칸(Dots 원화 변형, 발 픽셀 고정). 기존 피격 판정(hp 감소)을 읽는 그림만, 0.6초 안 연타는 다시 시작 안 함, 시전·걷기 중엔 안 씀.
 //    정면 1칸째는 아래쪽 사각 띠 결함이 있어 2칸째로 대신(자산 칸 순서 [1,1,2,3], qa/r1119/build-assets.py).
-//  · 시전 = 별도 시전 그림 없이 기존 시전 예고(rangedWindup·tell·attack) 동안 구슬 자리에 언주 발광 하나(얼굴 제외, 걷기 발광과 겹치면 하나만).
+//  · 시전 = 기본·각성 방향별 몸 그림의 하체는 접지하고 허리 위만 준비·타격·회수에 맞춰 움직인다. 언주 발광은 구슬을 따라간다.
 //  · 사망 = 결전이 끝났을 때(hp 0·room.persona.completed) 마지막 몸 자리에 빛 소멸 16칸(150ms, 마지막 칸 완전 투명) 한 번. 승리·해금·저장·판정은 그대로.
 //  · 수묵(R1097)이 켜져 있으면 피격·소멸 칸도 inkify 로 구워 쓴다(굽기 전엔 그 칸을 쓰지 않음).
 (()=>{'use strict';
 if(typeof window==='undefined'||window.__STORYWORLD_PERSONA_STRIDE_R1104__)return;
-const REV='R1104-persona-stride-3-r1119',KEY='storyworld.r1104.personaStride';
+const REV='R1104-persona-stride-4',KEY='storyworld.r1104.personaStride';
 const HIP=.6,OV=.04,STEP=.65,SWING=.1,FOOT_LIFT=.045,BOB=.03,LEAN=.035,WIN=.35,WALK_V=.35,EASE=7;
 const BODY=/rc133\/art\/(?:base|awake)-[0-7]\.(?:png|webp)/i;
-const stats={frames:0,split:0,steps:0,errors:0,sheets:0,baked:0,sheetFrames:0,lastSheet:null,hits:0,hitFrames:0,casts:0,glows:0,deaths:0,deathFrames:0};let lastError=null;
+const stats={frames:0,split:0,steps:0,errors:0,sheets:0,baked:0,sheetFrames:0,lastSheet:null,hits:0,hitFrames:0,casts:0,castPoses:0,glows:0,deaths:0,deathFrames:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e&&e.message||e).slice(0,160);};
 let on=true;try{on=localStorage.getItem(KEY)!=='0';}catch(_){}
 function set(v){on=v!==false;try{localStorage.setItem(KEY,on?'1':'0');}catch(_){}return on;}
@@ -121,15 +121,62 @@ function glowCmd(body,tag,cv,pts,alpha,order){if(!cv||!pts.every(okPt)||!(alpha>
   sourcePath:'r1119:glow:'+tag,immutableTint:cv.__storyworldStaticSource,sourceRect:[0,0,w,h],imageSize:[w,h],points:pts,
   style:{...(body.style&&typeof body.style==='object'?body.style:{}),filter:'none',globalAlpha:Math.min(1,alpha),globalCompositeOperation:'lighter'},r1104:true,r1119:true};}
 const casting=e=>e.rangedWindup>0||e.tell>0||e.state==='attack';
-function addGlows(cmds,body,q,walk,awake,cast,t){let n=0;const at=cmds.indexOf(body);if(at<0)return 0;const pulse=.5+.5*Math.sin(t*(cast?12:5));
- // 원래 그림 좌표 → 화면(원래 사각형 q)
- const P=q.P,cw=q.sr[2],ch=q.sr[3],px=(cw-344)/2,py=(ch-400)/2,Q=(u,v)=>[P[0][0]+(P[1][0]-P[0][0])*(u+px)/cw+(P[3][0]-P[0][0])*(v+py)/ch,P[0][1]+(P[1][1]-P[0][1])*(u+px)/cw+(P[3][1]-P[0][1])*(v+py)/ch];
- const H=Math.hypot(P[3][0]-P[0][0],P[3][1]-P[0][1])*400/ch;
+const reducedPreference=window.matchMedia?.('(prefers-reduced-motion: reduce)');
+function reducedMotion(){return reducedPreference?.matches===true||(typeof settings==='object'&&settings?.reducedMotion===true);}
+function bodyPoint(q,u,v){
+ const [a,b,,d]=q.P,[,,w,h]=q.sr;
+ const x=(u+(w-344)/2)/w,y=(v+(h-400)/2)/h;
+ return [a[0]+(b[0]-a[0])*x+(d[0]-a[0])*y,a[1]+(b[1]-a[1])*x+(d[1]-a[1])*y];
+}
+function easePose(t){const u=Math.max(0,Math.min(1,t));return u*u*(3-2*u);}
+// Sim clock owns the release. Move the upper body toward the committed ray and keep the foot line fixed.
+function castPose(q,clock,reduced){
+ const {elapsed,windup,active,recovery,angle}=clock;
+ if(![elapsed,windup,active,recovery,angle].every(Number.isFinite)||elapsed<0||windup<0||active<=0||recovery<=0||elapsed>=windup+active+recovery)return null;
+ const direction=window.__STORYWORLD_STORY_COMBAT_R54__?.projection?.(angle);
+ if(!direction||![direction.x,direction.y].every(Number.isFinite))return null;
+ let reach,stretch;
+ if(elapsed<windup){
+  const charge=easePose(elapsed/windup);
+  reach=-.085*charge;stretch=.070*charge;
+ } else{
+  const after=elapsed-windup;
+  const pulse=after<active?.55+.45*Math.sin(Math.PI*after/active):.55*(1-easePose((after-active)/recovery));
+  reach=.125*pulse;stretch=-.055*pulse;
+ }
+ const waist=bodyPoint(q,ART.ax,ART.ground*HIP),top=bodyPoint(q,ART.ax,0);
+ const height=waist[1]-top[1];
+ if(!Number.isFinite(height)||height<=1)return null;
+ const scale=reduced ? .35 : 1;
+ const dx=height*scale*reach*direction.x/HIP;
+ const dy=height*scale*(stretch+.25*reach*direction.y)/HIP;
+ const point=([x,y,...rest])=>{
+  const weight=Math.max(0,(waist[1]-y)/height);
+  return [x+weight*dx,y+weight*dy,...rest];
+ };
+ return {point,waist:waist[1]};
+}
+function articulateCast(cmds,i,pose){
+ const upper=cmds[i],P=upper.points,[sx,sy,w,h]=upper.sourceRect;
+ const top=(P[0][1]+P[1][1])/2,bottom=(P[2][1]+P[3][1])/2;
+ const u=(pose.waist-top)/(bottom-top);
+ if(!(u>0&&u<1))return false;
+ const left=lerp(P[0],P[3],u),right=lerp(P[1],P[2],u),cut=h*u;
+ const lower={...upper,key:upper.key==null?upper.key:String(upper.key)+':persona-cast-lower',
+  sourceRect:[sx,sy+cut,w,h-cut],points:[left,right,P[2],P[3]],r1104Cast:true};
+ upper.sourceRect=[sx,sy,w,cut];
+ upper.points=[pose.point(P[0]),pose.point(P[1]),right,left];
+ upper.r1104Cast=true;
+ cmds.splice(i+1,0,lower);
+ return true;
+}
+function addGlows(cmds,body,q,walk,awake,cast,t,pose,reduced){let n=0;const at=cmds.indexOf(body);if(at<0)return 0;const pulse=cast&&reduced ? .4 : .5+.5*Math.sin(t*(cast?12:5));
+ const H=Math.hypot(q.P[3][0]-q.P[0][0],q.P[3][1]-q.P[0][1])*400/q.sr[3];
  let cape=null;if(walk&&awake){const cv=capeGlow(walk.k,walk.f);if(cv){const A=walk.A; // 뒤집으면 A 가 좌우를 바꿔 주므로 칸 네 귀를 그대로 쓴다
    cape=glowCmd(body,'cape',cv,[A(0,0),A(512,0),A(512,512),A(0,512)],.5+.2*pulse);}}
  // 구슬: 걷기면 걷기 칸 구슬 자리, 아니면 원래 그림 방향별 자리. 시전·각성 걷기가 겹치면 하나만(밝은 쪽)
  let a=0;if(walk&&awake)a=.45+.2*pulse;if(cast)a=Math.max(a,.7+.3*pulse);
- let orb=null;if(a>0){let c0=null;if(walk){const O=WORB[walk.k]?.[walk.f];if(O){c0=walk.A(O[0],O[1]);if(walk.k==='rear')a*=.55;}}else{const O=ORB_ART[q.dir]||ORB_ART[0];c0=Q(O[0],O[1]);if(ORB_HIDDEN[q.dir])a*=.45;}
+ let orb=null;if(a>0){let c0=null;if(walk){const O=WORB[walk.k]?.[walk.f];if(O){c0=walk.A(O[0],O[1]);if(walk.k==='rear')a*=.55;}}else{const O=ORB_ART[q.dir]||ORB_ART[0];c0=bodyPoint(q,O[0],O[1]);if(pose)c0=pose.point(c0);if(ORB_HIDDEN[q.dir])a*=.45;}
   const cv=orbGlow();if(c0&&cv){const R=H*.085*(.9+.25*pulse);orb=glowCmd(body,cast?'cast':'orb',cv,[[c0[0]-R,c0[1]-R],[c0[0]+R,c0[1]-R],[c0[0]+R,c0[1]+R],[c0[0]-R,c0[1]+R]],a,.6);}}
  const add=[cape,orb].filter(Boolean);if(add.length){cmds.splice(cmds.indexOf(body)+1,0,...add);n=add.length;stats.glows+=n;if(cast)stats.casts++;}return n;}
 // ---------------- R1119 피격 ----------------
@@ -174,23 +221,29 @@ function split(cmds,i,s){const c=cmds[i],P=c.points,sr=c.sourceRect;
  const all=[upper.points,L.points,R.points].flat();if(!all.every(okPt))return false;
  const order=sn*s.sdx>0?[R,L,upper]:[L,R,upper];cmds.splice(i,1,...order);return true;}
 function process(cmds){if(!on||!Array.isArray(cmds))return 0;const t=T();if(t==null)return 0;const e=persona();try{deathTick(cmds,!!e);}catch(err){fail(err);}if(!e)return 0;prewarm();const s=track(e,t);try{hitTrack(e,s,t);standFoot(cmds,e,s);}catch(err){fail(err);}
- let best=-1,bh=0;for(let i=0;i<cmds.length;i++){const c=cmds[i];if(!c||c.kind!=='image'||c.r1104||c.r620Ghost)continue;const o=c.owner;if(!o||o.kind!=='enemy'||o.groundAligned===true)continue;
+ let best=-1,bh=0;for(let i=0;i<cmds.length;i++){const c=cmds[i];if(!c||c.kind!=='image'||c.r1104||c.r1104Cast||c.r620Ghost)continue;const o=c.owner;if(!o||o.kind!=='enemy'||o.groundAligned===true)continue;
   const sp=String(c.sourcePath||'');if(!(BODY.test(sp)||c.r1097||artOf(sp)))continue;const P=c.points,sr=c.sourceRect;if(!Array.isArray(P)||P.length!==4||!P.every(okPt)||!Array.isArray(sr)||sr.length<4||!sr.every(Number.isFinite)||!(sr[2]>0)||!(sr[3]>0))continue;
   const h=Math.abs(P[3][1]-P[0][1]);if(h>bh){bh=h;best=i;}}
  if(best<0)return 0;
  const c=cmds[best];let q=RAWQ.get(c);if(!q){const m=artOf(c.sourcePath);if(m&&!c.r1097)q={P:c.points.map(p=>[...p]),sr:[...c.sourceRect],kind:m[1].toLowerCase(),dir:+m[2]};}
- const whole=q&&q.sr[0]===0&&q.sr[1]===0,ink=!!c.r1097,cast=casting(e);
+ const whole=q&&q.sr[0]===0&&q.sr[1]===0,ink=!!c.r1097;
+ const clock=e.spawnState==='active'&&(e.nativeId==='inner-evil-rc133'||e.id==='cult04:inner-evil-rc133')
+  ?window.__STORYWORLD_STORY_COMBAT_R54__?.clock?.(e):null;
+ const reduced=reducedMotion();
+ const shape=whole&&clock?castPose(q,clock,reduced):null;
  if(q)last={snap:{...c},q,ink};
  if(whole&&ink){for(const kk in WALK)wantInk(kk);for(const d of ['front','side','rear'])wantInk('hit-'+q.kind+'-'+d);wantInk('death-'+q.kind);}
  let walk=null,done=0;
- if(s.w>.02){let skip=false;
+ const pose=shape&&articulateCast(cmds,best,shape)?shape:null,cast=!!pose||casting(e);
+ if(pose){stats.castPoses++;done=1;}
+ else if(s.w>.02){let skip=false;
   if(whole){const k=pick(q,s)[0],ready=ink?SS[k].inkState==='ready':SS[k].state==='ready';
    if(ready){if(s.w>.5){try{walk=swapSheet(c,q,s,ink,e);if(walk)done=1;}catch(err){fail(err);}}else skip=true;}}
   if(!done&&!skip){try{if(split(cmds,best,s)){stats.split++;done=1;}}catch(err){fail(err);}}}
  else if(whole&&!cast){const [d,m]=HITDIR[q.dir]||HITDIR[0],hk='hit-'+q.kind+'-'+d,D=SH[hk],f=hitFrame(s,t,D.ms);
   if(f>=0){try{if(placeSheet(c,q,s,hk,f,m,ink,e)){done=1;stats.hitFrames++;stats.lastSheet=hk+':'+f;}}catch(err){fail(err);}}
   else if(D.settle){const r=settleK(s,t,D.ms);if(r>0){const P=c.points,ux=[(q.P[1][0]-q.P[0][0])/q.sr[2],(q.P[1][1]-q.P[0][1])/q.sr[2]],dx=m*D.settle*r;c.points=P.map(p=>[p[0]+ux[0]*dx,p[1]+ux[1]*dx]);stats.settle=(stats.settle||0)+1;}}}
- if(q&&(cast||(walk&&q.kind==='awake'))){const body=cmds.includes(c)?c:cmds.find(x=>x&&x.r1104&&x.owner===c.owner&&!x.r1119)||c;try{done+=addGlows(cmds,body,q,walk,q.kind==='awake',cast,t);}catch(err){fail(err);}}
+ if(q&&(cast||(walk&&q.kind==='awake'))){const body=cmds.includes(c)?c:cmds.find(x=>x&&x.r1104&&x.owner===c.owner&&!x.r1119)||c;try{done+=addGlows(cmds,body,q,walk,q.kind==='awake',cast,t,pose,reduced);}catch(err){fail(err);}}
  return done;}
 // 서 있을 때(걸음 세기 .05 아래) 원래 그림 발 자리(172,385)가 몸 위치 project(e) 에서 얼마나 떨어져 있는지 잰다(천천히 따라감)
 function standFoot(cmds,e,s){if(s.w>=.05||typeof project!=='function')return;let best=null,bh=0;for(const c of cmds){const q=c&&RAWQ.get(c);if(!q||q.kind!=='base'||c.owner?.kind!=='enemy')continue;const h=Math.abs(q.P[3][1]-q.P[0][1]);if(h>bh){bh=h;best=q;}}
