@@ -56699,8 +56699,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6585180,
-      "sha256": "7aa18c14e196dd571c4ad0a997470487d4e71721b0f1256bc1cf654d972f3cf7"
+      "bytes": 6585230,
+      "sha256": "dbe752d54a3ab7d75b9a44f6e33b94981eac8601a3a2b10d2d0724d70efd2e85"
     },
     {
       "path": "ink-chars-r1090.js",
@@ -57778,6 +57778,11 @@
       "sha256": "4a56fe6cd001a2c16e3af7605a2ee0e7c938907b39f3a9435d9c0db1b622614b"
     },
     {
+      "path": "settings-merge-r1280.js",
+      "bytes": 12683,
+      "sha256": "34d52cdcd99f680e6096cce725702dd6cf01e9ae7651e6ea6501220dc5685448"
+    },
+    {
       "path": "seven-sins-bossrooms.js",
       "bytes": 14689,
       "sha256": "f6f539296fd11946a0688a5d82be7bf68b32f5c8d560aff5369e92f7dd439fc5"
@@ -58323,9 +58328,9 @@
       "sha256": "3cc490b5cb60048ed203d3ec43e42fda2f792a76975aea905eac035dcd4ed881"
     }
   ],
-  "fileCount": 11664,
-  "totalBytes": 1389854306,
-  "webHTMLSha256": "7aa18c14e196dd571c4ad0a997470487d4e71721b0f1256bc1cf654d972f3cf7",
+  "fileCount": 11665,
+  "totalBytes": 1389867039,
+  "webHTMLSha256": "dbe752d54a3ab7d75b9a44f6e33b94981eac8601a3a2b10d2d0724d70efd2e85",
   "largest": [
     {
       "path": "index.html",

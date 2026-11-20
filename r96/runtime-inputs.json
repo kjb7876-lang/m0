@@ -10874,7 +10874,8 @@
     "michaela-flashguard-r1267.js",
     "move-dir-r1190-data.js",
     "skill-unlock-r1275.js",
-    "assets/r1190/move/u204-mid-down.webp"
+    "assets/r1190/move/u204-mid-down.webp",
+    "settings-merge-r1280.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -11949,5 +11950,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "e97301a4434b9e394ab0010421a9842361f865a34e1ec0fafb6e0131bbf704f6"
+  "runtimeManifestSHA256": "45a86481994ddd87a7243c9a2c71b93b23a89f830391c8777aa2defd0d12b341"
 }
